@@ -3,15 +3,15 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'folders.dart';
+import 'windowsknownfolder.dart';
 
 enum Place { top, bottom }
 
 class CustomPlace {
-  IShellItem item;
-  Place place;
+  final IShellItem item;
+  final Place place;
 
-  CustomPlace(this.item, this.place);
+  const CustomPlace(this.item, this.place);
 }
 
 abstract class FileDialog {
@@ -70,27 +70,35 @@ abstract class FileDialog {
 
   /// Add a known folder to the 'Quick Access' list.
   void addPlace(WindowsKnownFolder folder, Place location) {
-    var hr = CoInitializeEx(
-        nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
-    if (FAILED(hr)) throw WindowsException(hr);
-
-    final folderGUID = folder.guid;
-    final knownFolderManager = KnownFolderManager.createInstance();
-    final publicMusicFolder = calloc<GUID>()..ref.setGUID(folderGUID);
-
+    final publicMusicFolder = calloc<GUID>();
     final ppkf = calloc<Pointer<COMObject>>();
-    hr = knownFolderManager.getFolder(publicMusicFolder, ppkf);
-    if (FAILED(hr)) throw WindowsException(hr);
-    final knownFolder = IKnownFolder(ppkf.cast());
-
     final psi = calloc<Pointer>();
     final riid = convertToIID(IID_IShellItem);
-    hr = knownFolder.getShellItem(0, riid, psi);
+
+    try {
+      final folderGUID = folder.guid;
+      final knownFolderManager = KnownFolderManager.createInstance();
+      publicMusicFolder.ref.setGUID(folderGUID);
+      var hr = knownFolderManager.getFolder(publicMusicFolder, ppkf);
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      final knownFolder = IKnownFolder(ppkf.cast());
+      hr = knownFolder.getShellItem(0, riid, psi);
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      final shellItem = IShellItem(psi.cast());
+      customPlaces.add(CustomPlace(shellItem, location));
+    } finally {
+      free(publicMusicFolder);
+      free(ppkf);
+      free(psi);
+      free(riid);
+    }
+  }
+
+  FileDialog() {
+    final hr = CoInitializeEx(
+        nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
     if (FAILED(hr)) throw WindowsException(hr);
-    final shellItem = IShellItem(psi.cast());
-
-    customPlaces.add(CustomPlace(shellItem, location));
-
-    CoUninitialize();
   }
 }

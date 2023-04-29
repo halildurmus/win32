@@ -12,14 +12,10 @@ class SaveFilePicker extends FileDialog {
     var didUserCancel = false;
     late final String filePath;
 
-    var hr = CoInitializeEx(
-        nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
-    if (!SUCCEEDED(hr)) throw WindowsException(hr);
-
     final fileDialog = FileSaveDialog.createInstance();
 
     final pfos = calloc<Uint32>();
-    hr = fileDialog.getOptions(pfos);
+    var hr = fileDialog.getOptions(pfos);
     if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
     var options = pfos.value;
@@ -99,7 +95,6 @@ class SaveFilePicker extends FileDialog {
     hr = fileDialog.release();
     if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
-    CoUninitialize();
     if (didUserCancel) {
       return null;
     } else {

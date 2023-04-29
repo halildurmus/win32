@@ -13,16 +13,10 @@ class DirectoryPicker extends FileDialog {
     var didUserCancel = false;
     var path = '';
 
-    var hr = CoInitializeEx(
-      nullptr,
-      COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE,
-    );
-    if (FAILED(hr)) throw WindowsException(hr);
-
     final dialog = FileOpenDialog.createInstance();
 
     final pfos = calloc<Uint32>();
-    hr = dialog.getOptions(pfos);
+    var hr = dialog.getOptions(pfos);
     if (FAILED(hr)) throw WindowsException(hr);
 
     var options = pfos.value;
@@ -95,7 +89,6 @@ class DirectoryPicker extends FileDialog {
     hr = dialog.release();
     if (FAILED(hr)) throw WindowsException(hr);
 
-    CoUninitialize();
     if (didUserCancel) {
       return null;
     } else {

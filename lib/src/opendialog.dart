@@ -20,14 +20,10 @@ class OpenFilePicker extends FileDialog {
     var didUserCancel = false;
     late String filePath;
 
-    var hr = CoInitializeEx(
-        nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
-    if (FAILED(hr)) throw WindowsException(hr);
-
     final fileDialog = FileOpenDialog.createInstance();
 
     final pfos = calloc<Uint32>();
-    hr = fileDialog.getOptions(pfos);
+    var hr = fileDialog.getOptions(pfos);
     if (FAILED(hr)) throw WindowsException(hr);
 
     var options = pfos.value;
@@ -129,7 +125,6 @@ class OpenFilePicker extends FileDialog {
     hr = fileDialog.release();
     if (FAILED(hr)) throw WindowsException(hr);
 
-    CoUninitialize();
     if (didUserCancel) {
       return null;
     } else {
