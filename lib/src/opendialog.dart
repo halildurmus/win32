@@ -5,7 +5,6 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'filedialog.dart';
-import 'place.dart';
 
 class OpenFilePicker extends FileDialog {
   /// Indicates to the Open dialog box that the preview pane should always be

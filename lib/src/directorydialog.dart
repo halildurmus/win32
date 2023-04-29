@@ -5,7 +5,6 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'filedialog.dart';
-import 'place.dart';
 
 class DirectoryPicker extends FileDialog {
   /// Returns a directory selected by the user using a common file open dialog.

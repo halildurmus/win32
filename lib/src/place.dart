@@ -1,1 +1,0 @@
-enum Place { top, bottom }
