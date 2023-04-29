@@ -5,12 +5,12 @@ name: dart_examples
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: '>=2.17.0 <4.0.0'
 
 dependencies:
   filepicker_windows:
     path: ../
-  win32: ^3.0.0
+  win32: ^4.0.0
 
 dev_dependencies:
   lints: ^2.1.0

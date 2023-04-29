@@ -8,14 +8,14 @@ import 'wallpaper.dart';
 void main() => runApp(const FilePickerExample());
 
 class FilePickerExample extends StatelessWidget {
-  const FilePickerExample({Key? key}) : super(key: key);
+  const FilePickerExample({super.key});
 
   @override
   Widget build(BuildContext context) => const MaterialApp(home: HomePage());
 }
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
