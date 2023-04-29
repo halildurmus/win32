@@ -1,3 +1,7 @@
+## 2.0.3
+
+- Update win32 dependency
+
 ## 2.0.2
 
 - Upgrade dependencies and resolve lint warnings
