@@ -1,3 +1,7 @@
+## 2.0.4
+
+- Update win32 dependency
+
 ## 2.0.3
 
 - Update win32 dependency
