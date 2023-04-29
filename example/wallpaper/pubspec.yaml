@@ -19,7 +19,8 @@ dependencies:
 
   flutter:
     sdk: flutter
-
+    
+  ffi: ^2.0.0
   win32: ^4.0.0
 
 flutter:

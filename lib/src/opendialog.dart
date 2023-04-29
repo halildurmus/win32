@@ -82,7 +82,7 @@ class OpenFilePicker extends FileDialog {
     if (title.isNotEmpty) {
       final pTitle = title.toNativeUtf16();
       try {
-        final hr = fileDialog.setTitle(TEXT(title));
+        final hr = fileDialog.setTitle(pTitle);
         if (FAILED(hr)) throw WindowsException(hr);
       } finally {
         free(pTitle);

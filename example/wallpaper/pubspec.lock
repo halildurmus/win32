@@ -18,7 +18,7 @@ packages:
     source: hosted
     version: "1.17.1"
   ffi:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: ffi
       sha256: a38574032c5f1dd06c4aee541789906c12ccaab8ba01446e800d9c5b79c4a978
@@ -31,7 +31,7 @@ packages:
       path: "../.."
       relative: true
     source: path
-    version: "2.0.4"
+    version: "3.0.0"
   flutter:
     dependency: "direct main"
     description: flutter
