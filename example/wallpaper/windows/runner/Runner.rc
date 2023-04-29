@@ -93,7 +93,7 @@ BEGIN
             VALUE "FileDescription", "Demo wallpaper changer app." "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "wallpaper" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2021 org.sneath. All rights reserved." "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2023 win32.pub team. All rights reserved." "\0"
             VALUE "OriginalFilename", "wallpaper.exe" "\0"
             VALUE "ProductName", "wallpaper" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
