@@ -18,7 +18,7 @@ class OpenFilePicker extends FileDialog {
   /// Returns a `File` object from the selected file path.
   File? getFile() {
     var didUserCancel = false;
-    late String filePath;
+    var filePath = '';
 
     final fileDialog = FileOpenDialog.createInstance();
 

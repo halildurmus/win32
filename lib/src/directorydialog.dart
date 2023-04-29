@@ -16,25 +16,31 @@ class DirectoryPicker extends FileDialog {
     final dialog = FileOpenDialog.createInstance();
 
     final pfos = calloc<Uint32>();
-    var hr = dialog.getOptions(pfos);
-    if (FAILED(hr)) throw WindowsException(hr);
+    try {
+      var hr = dialog.getOptions(pfos);
+      if (FAILED(hr)) throw WindowsException(hr);
 
-    var options = pfos.value;
-    options |= FILEOPENDIALOGOPTIONS.FOS_PICKFOLDERS;
-    if (hidePinnedPlaces) options |= FILEOPENDIALOGOPTIONS.FOS_HIDEPINNEDPLACES;
-    if (fileMustExist) options |= FILEOPENDIALOGOPTIONS.FOS_PATHMUSTEXIST;
-    if (isDirectoryFixed) options |= FILEOPENDIALOGOPTIONS.FOS_NOCHANGEDIR;
-    if (forceFileSystemItems) {
-      options |= FILEOPENDIALOGOPTIONS.FOS_FORCEFILESYSTEM;
+      var options = pfos.value;
+      options |= FILEOPENDIALOGOPTIONS.FOS_PICKFOLDERS;
+      if (hidePinnedPlaces) {
+        options |= FILEOPENDIALOGOPTIONS.FOS_HIDEPINNEDPLACES;
+      }
+      if (fileMustExist) options |= FILEOPENDIALOGOPTIONS.FOS_PATHMUSTEXIST;
+      if (isDirectoryFixed) options |= FILEOPENDIALOGOPTIONS.FOS_NOCHANGEDIR;
+      if (forceFileSystemItems) {
+        options |= FILEOPENDIALOGOPTIONS.FOS_FORCEFILESYSTEM;
+      }
+
+      hr = dialog.setOptions(options);
+      if (FAILED(hr)) throw WindowsException(hr);
+    } finally {
+      free(pfos);
     }
-
-    hr = dialog.setOptions(options);
-    if (FAILED(hr)) throw WindowsException(hr);
 
     if (title.isNotEmpty) {
       final pTitle = title.toNativeUtf16();
       try {
-        hr = dialog.setTitle(pTitle);
+        final hr = dialog.setTitle(pTitle);
         if (FAILED(hr)) throw WindowsException(hr);
       } finally {
         free(pTitle);
@@ -44,15 +50,12 @@ class DirectoryPicker extends FileDialog {
     for (final place in customPlaces) {
       final shellItem =
           Pointer.fromAddress(place.item.ptr.cast<IntPtr>().value);
-      if (place.place == Place.bottom) {
-        hr = dialog.addPlace(shellItem.cast(), FDAP.FDAP_BOTTOM);
-      } else {
-        hr = dialog.addPlace(shellItem.cast(), FDAP.FDAP_TOP);
-      }
+      final hr = dialog.addPlace(shellItem.cast(),
+          place.place == Place.bottom ? FDAP.FDAP_BOTTOM : FDAP.FDAP_TOP);
       if (FAILED(hr)) throw WindowsException(hr);
     }
 
-    hr = dialog.show(hWndOwner);
+    var hr = dialog.show(hWndOwner);
     if (FAILED(hr)) {
       if (hr == HRESULT_FROM_WIN32(ERROR_CANCELLED)) {
         didUserCancel = true;
