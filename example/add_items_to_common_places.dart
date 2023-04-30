@@ -5,7 +5,7 @@ import 'package:filepicker_windows/filepicker_windows.dart';
 // "Application Links" node.
 void main() {
   final picker = OpenFilePicker()
-    ..addPlace(WindowsKnownFolder.publicMusic, Place.bottom);
+    ..addPlace(WindowsKnownFolder.PublicMusic, Place.bottom);
 
   final result = picker.getFile();
   if (result != null) {

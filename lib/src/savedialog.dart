@@ -101,18 +101,23 @@ class SaveFilePicker extends FileDialog {
       }
     } else {
       final ppsi = calloc<Pointer<COMObject>>();
-      var hr = fileDialog.getResult(ppsi);
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      final item = IShellItem(ppsi.cast());
       final pathPtrPtr = calloc<Pointer<Utf16>>();
-      hr = item.getDisplayName(SIGDN.SIGDN_FILESYSPATH, pathPtrPtr.cast());
-      if (FAILED(hr)) throw WindowsException(hr);
+      try {
+        var hr = fileDialog.getResult(ppsi);
+        if (FAILED(hr)) throw WindowsException(hr);
 
-      filePath = pathPtrPtr.value.toDartString();
+        final item = IShellItem(ppsi.cast());
+        hr = item.getDisplayName(SIGDN.SIGDN_FILESYSPATH, pathPtrPtr.cast());
+        if (FAILED(hr)) throw WindowsException(hr);
 
-      hr = item.release();
-      if (FAILED(hr)) throw WindowsException(hr);
+        filePath = pathPtrPtr.value.toDartString();
+
+        hr = item.release();
+        if (FAILED(hr)) throw WindowsException(hr);
+      } finally {
+        free(ppsi);
+        free(pathPtrPtr);
+      }
     }
 
     hr = fileDialog.release();

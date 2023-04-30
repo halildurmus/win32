@@ -1,3 +1,7 @@
+## 2.0.5
+
+- Tidy up folders and remove some potential memory leaks
+
 ## 2.0.4
 
 - Update win32 dependency
