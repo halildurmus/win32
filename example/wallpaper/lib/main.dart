@@ -51,7 +51,6 @@ class _HomePageState extends State<HomePage> {
                     ElevatedButton(
                       onPressed: () {
                         final file = picker.OpenFilePicker()
-                          ..hidePinnedPlaces = true
                           ..forcePreviewPaneOn = true
                           ..title = 'Select an image'
                           ..filterSpecification = {
