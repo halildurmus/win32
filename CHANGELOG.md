@@ -1,3 +1,7 @@
+## 4.1.4
+
+- Add some minor network APIs
+
 ## 4.1.3
 
 - Add registry constants for win32_registry (#682)
