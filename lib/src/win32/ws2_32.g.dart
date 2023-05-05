@@ -386,6 +386,28 @@ Pointer<Utf8> inet_ntoa(IN_ADDR in_) => _inet_ntoa(in_);
 final _inet_ntoa = _ws2_32.lookupFunction<Pointer<Utf8> Function(IN_ADDR in_),
     Pointer<Utf8> Function(IN_ADDR in_)>('inet_ntoa');
 
+/// The inet_ntop function converts an IPv4 or IPv6 Internet network address
+/// into a string in Internet standard format.
+///
+/// ```c
+/// PCSTR WSAAPI inet_ntop(
+///   [in]  INT        Family,
+///   [in]  const VOID *pAddr,
+///   [out] PSTR       pStringBuf,
+///   [in]  size_t     StringBufSize
+/// );
+/// ```
+/// {@category winsock}
+Pointer<Utf8> inet_ntop(int Family, Pointer pAddr, Pointer<Utf8> pStringBuf,
+        int StringBufSize) =>
+    _inet_ntop(Family, pAddr, pStringBuf, StringBufSize);
+
+final _inet_ntop = _ws2_32.lookupFunction<
+    Pointer<Utf8> Function(Int32 Family, Pointer pAddr,
+        Pointer<Utf8> pStringBuf, IntPtr StringBufSize),
+    Pointer<Utf8> Function(int Family, Pointer pAddr, Pointer<Utf8> pStringBuf,
+        int StringBufSize)>('inet_ntop');
+
 /// The ioctlsocket function controls the I/O mode of a socket.
 ///
 /// ```c

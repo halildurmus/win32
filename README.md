@@ -1,7 +1,9 @@
-![Dart/Win32](https://github.com/timsneath/win32/blob/main/doc/images/win32.png?raw=true)
+<img src="https://user-images.githubusercontent.com/2319867/235838660-a82bfdce-aa55-461d-b418-19bd5185b6af.png" width="50%" height="50%">
 
 A package that wraps some of the most common Win32 API calls using FFI to make
 them accessible to Dart code without requiring a C compiler or the Windows SDK.
+Part of the (Dart | Windows)[https://github.com/dart-windows] suite of Windows
+packages.
 
 [![pub package](https://img.shields.io/pub/v/win32.svg)](https://pub.dev/packages/win32)
 [![Language](https://img.shields.io/badge/language-Dart-blue.svg)](https://dart.dev)
@@ -14,8 +16,8 @@ By design, this package provides minimal modifications to the Win32 API to
 support Dart idioms. The goal is to provide high familiarity to an existing
 Windows developer. Other Dart packages may build on these primitives to provide
 a friendly API for Dart and Flutter developers. A good example of that is
-[filepicker_windows](https://pub.dev/packages/filepicker_windows), which offers
-a common item dialog suitable for incorporation into an existing Flutter app.
+[win32_registry](https://pub.dev/packages/win32_registry), which offers a set of
+APIs for accessing the Windows registry that don't require knowledge of FFI.
 
 ## Usage
 

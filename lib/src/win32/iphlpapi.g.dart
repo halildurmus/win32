@@ -48,6 +48,27 @@ final _AddIPAddress = _iphlpapi.lookupFunction<
         Pointer<Uint32> NTEContext,
         Pointer<Uint32> NTEInstance)>('AddIPAddress');
 
+/// The ConvertInterfaceGuidToLuid function converts a globally unique
+/// identifier (GUID) for a network interface to the locally unique
+/// identifier (LUID) for the interface.
+///
+/// ```c
+/// ConvertInterfaceGuidToLuid(
+///   [in]  const GUID *InterfaceGuid,
+///   [out] PNET_LUID  InterfaceLuid
+/// );
+/// ```
+/// {@category iphlpapi}
+int ConvertInterfaceGuidToLuid(
+        Pointer<GUID> InterfaceGuid, Pointer<NET_LUID_LH> InterfaceLuid) =>
+    _ConvertInterfaceGuidToLuid(InterfaceGuid, InterfaceLuid);
+
+final _ConvertInterfaceGuidToLuid = _iphlpapi.lookupFunction<
+    Int32 Function(
+        Pointer<GUID> InterfaceGuid, Pointer<NET_LUID_LH> InterfaceLuid),
+    int Function(Pointer<GUID> InterfaceGuid,
+        Pointer<NET_LUID_LH> InterfaceLuid)>('ConvertInterfaceGuidToLuid');
+
 /// The DeleteIPAddress function deletes an IP address previously added
 /// using AddIPAddress.
 ///

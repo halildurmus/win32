@@ -1527,6 +1527,17 @@ void main() {
       });
     }
     if (windowsBuildNumber >= 9600) {
+      test('Can instantiate inet_ntop', () {
+        final ws2_32 = DynamicLibrary.open('ws2_32.dll');
+        final inet_ntop = ws2_32.lookupFunction<
+            Pointer<Utf8> Function(Int32 Family, Pointer pAddr,
+                Pointer<Utf8> pStringBuf, IntPtr StringBufSize),
+            Pointer<Utf8> Function(int Family, Pointer pAddr,
+                Pointer<Utf8> pStringBuf, int StringBufSize)>('inet_ntop');
+        expect(inet_ntop, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9600) {
       test('Can instantiate ioctlsocket', () {
         final ws2_32 = DynamicLibrary.open('ws2_32.dll');
         final ioctlsocket = ws2_32.lookupFunction<
@@ -8775,6 +8786,17 @@ void main() {
               Pointer<Uint32> NTEContext,
               Pointer<Uint32> NTEInstance)>('AddIPAddress');
       expect(AddIPAddress, isA<Function>());
+    });
+    test('Can instantiate ConvertInterfaceGuidToLuid', () {
+      final iphlpapi = DynamicLibrary.open('iphlpapi.dll');
+      final ConvertInterfaceGuidToLuid = iphlpapi.lookupFunction<
+          Int32 Function(
+              Pointer<GUID> InterfaceGuid, Pointer<NET_LUID_LH> InterfaceLuid),
+          int Function(
+              Pointer<GUID> InterfaceGuid,
+              Pointer<NET_LUID_LH>
+                  InterfaceLuid)>('ConvertInterfaceGuidToLuid');
+      expect(ConvertInterfaceGuidToLuid, isA<Function>());
     });
     test('Can instantiate DeleteIPAddress', () {
       final iphlpapi = DynamicLibrary.open('iphlpapi.dll');
