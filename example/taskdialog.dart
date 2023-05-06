@@ -45,7 +45,6 @@ void showSimpleTaskDialog() {
       switch (buttonSelected.value) {
         case IDOK:
           print('User clicked on the OK button.');
-          break;
         default:
           print('User canceled the task dialog.');
       }

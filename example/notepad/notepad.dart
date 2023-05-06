@@ -100,7 +100,6 @@ int mainWindowProc(int hwnd, int message, int wParam, int lParam) {
           EnableMenuItem(wParam, IDM_EDIT_CUT, menuStyle);
           EnableMenuItem(wParam, IDM_EDIT_COPY, menuStyle);
           EnableMenuItem(wParam, IDM_EDIT_CLEAR, menuStyle);
-          break;
 
         case 2: // Search menu
           final menuStyle = hDlgModeless == NULL ? MF_ENABLED : MF_GRAYED;
@@ -108,7 +107,6 @@ int mainWindowProc(int hwnd, int message, int wParam, int lParam) {
           EnableMenuItem(wParam, IDM_SEARCH_FIND, menuStyle);
           EnableMenuItem(wParam, IDM_SEARCH_NEXT, menuStyle);
           EnableMenuItem(wParam, IDM_SEARCH_REPLACE, menuStyle);
-          break;
       }
       return 0;
 
@@ -281,7 +279,6 @@ int dialogReturnProc(int hDlg, int msg, int wParam, int lParam) {
           EndDialog(hDlg, 0);
           return TRUE;
       }
-      break;
   }
   return FALSE;
 }

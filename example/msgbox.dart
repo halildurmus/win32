@@ -27,12 +27,9 @@ void main() {
   switch (result) {
     case IDCANCEL:
       print('Cancel pressed');
-      break;
     case IDTRYAGAIN:
       print('Try Again pressed');
-      break;
     case IDCONTINUE:
       print('Continue pressed');
-      break;
   }
 }

@@ -32,6 +32,7 @@ linter:
     sort_unnamed_constructors_first: true
     test_types_in_equals: true
     unawaited_futures: true
+    unnecessary_breaks: true
     unnecessary_lambdas: true
     unnecessary_parenthesis: true
     unnecessary_statements: true

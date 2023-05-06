@@ -140,8 +140,6 @@ int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
       ScrollWindow(hWnd, 0, -cyChar, rectScroll, rectScroll);
       InvalidateRect(hWnd, nullptr, TRUE);
 
-      break;
-
     case WM_PAINT:
       final ps = calloc<PAINTSTRUCT>();
       final hdc = BeginPaint(hWnd, ps);

@@ -84,35 +84,28 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       SetTimer(hwnd, TIMER_ID, GAME_SPEED, nullptr);
 
       ReleaseDC(hwnd, hdc);
-      break;
 
     case WM_KEYDOWN:
       game.keyPress(wParam);
-      break;
 
     case WM_TIMER:
       game.timerUpdate();
-      break;
 
     case WM_KILLFOCUS:
       KillTimer(hwnd, TIMER_ID);
       game.pauseGame();
-      break;
 
     case WM_SETFOCUS:
       SetTimer(hwnd, TIMER_ID, GAME_SPEED, nullptr);
-      break;
 
     case WM_PAINT:
       hdc = BeginPaint(hwnd, ps);
       game.repaint();
       EndPaint(hwnd, ps);
-      break;
 
     case WM_DESTROY:
       KillTimer(hwnd, TIMER_ID);
       PostQuitMessage(0);
-      break;
 
     default:
       result = DefWindowProc(hwnd, uMsg, wParam, lParam);
