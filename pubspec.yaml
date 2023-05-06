@@ -5,6 +5,11 @@ homepage: https://win32.pub
 repository: https://github.com/timsneath/win32
 issue_tracker: https://github.com/timsneath/win32/issues
 
+topics:
+  - win32
+  - windows
+  - ffi
+
 environment:
   sdk: '>=2.17.0 <4.0.0'
 

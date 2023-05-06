@@ -673,6 +673,10 @@
         "prototype": "BOOL ContinueDebugEvent(\n  DWORD dwProcessId,\n  DWORD dwThreadId,\n  DWORD dwContinueStatus\n);",
         "comment": "Enables a debugger to continue a thread that previously reported a debugging event."
     },
+    "ConvertInterfaceGuidToLuid": {
+        "prototype": "ConvertInterfaceGuidToLuid(\n  [in]  const GUID *InterfaceGuid,\n  [out] PNET_LUID  InterfaceLuid\n);",
+        "comment": "The ConvertInterfaceGuidToLuid function converts a globally unique identifier (GUID) for a network interface to the locally unique identifier (LUID) for the interface."
+    },
     "CopyAcceleratorTable": {
         "prototype": "int CopyAcceleratorTableW(\n  HACCEL  hAccelSrc,\n  LPACCEL lpAccelDst,\n  int     cAccelEntries\n);",
         "comment": "Copies the specified accelerator table. This function is used to obtain the accelerator-table data that corresponds to an accelerator-table handle, or to determine the size of the accelerator-table data."
@@ -3004,6 +3008,12 @@
     "inet_ntoa": {
         "prototype": "char* inet_ntoa(\n  in_addr in\n);",
         "comment": "The inet_ntoa function converts an (Ipv4) Internet network address into an ASCII string in Internet standard dotted-decimal format.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
+    "inet_ntop": {
+        "prototype": "PCSTR WSAAPI inet_ntop(\n  [in]  INT        Family,\n  [in]  const VOID *pAddr,\n  [out] PSTR       pStringBuf,\n  [in]  size_t     StringBufSize\n);",
+        "comment": "The inet_ntop function converts an IPv4 or IPv6 Internet network address into a string in Internet standard format.",
         "category": "winsock",
         "minimumWindowsVersion": "WIN81"
     },

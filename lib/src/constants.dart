@@ -479,6 +479,9 @@ const ERROR_TOO_MANY_SEM_REQUESTS = 103;
 /// Cannot request exclusive semaphores at interrupt time.
 const ERROR_INVALID_AT_INTERRUPT_TIME = 104;
 
+/// The service has not been started.
+const ERROR_SERVICE_NOT_ACTIVE = 1026;
+
 /// The device is not connected.
 const ERROR_DEVICE_NOT_CONNECTED = 1167;
 
