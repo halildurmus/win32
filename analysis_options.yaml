@@ -31,6 +31,7 @@ linter:
     sort_child_properties_last: true
     sort_unnamed_constructors_first: true
     test_types_in_equals: true
+    type_literal_in_constant_pattern: true
     unawaited_futures: true
     unnecessary_breaks: true
     unnecessary_lambdas: true
