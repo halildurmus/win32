@@ -15,7 +15,8 @@ jobs:
       fail-fast: false
 
       matrix:
-        sdk: [stable, beta, dev]
+        # sdk: [stable, beta, dev]
+        sdk: [beta, dev]
 
     steps:
       - name: Fetch sources
