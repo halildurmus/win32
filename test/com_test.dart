@@ -111,8 +111,6 @@ void main() {
     free(iidClassFactory);
     free(clsid);
     free(ptrSaveDialog);
-    classFactory.release();
-
     CoUninitialize();
   });
 
@@ -144,8 +142,6 @@ void main() {
     test('Can cast to IUnknown', () {
       final unk = IUnknown.from(dialog);
       expect(unk.ptr.address, isNonZero);
-
-      unk.release();
     });
 
     test('Cast to random interface fails', () {
@@ -157,7 +153,7 @@ void main() {
                   contains('No such interface supported'))));
     });
 
-    test('AddRef / Release', () {
+    test('addRef / release', () {
       var refs = dialog.addRef();
       expect(refs, equals(2));
 
@@ -171,10 +167,7 @@ void main() {
       expect(refs, equals(1));
     });
 
-    tearDown(() {
-      dialog.release();
-      CoUninitialize();
-    });
+    tearDown(CoUninitialize);
   });
 
   group('COM object casting using methods', () {
@@ -207,9 +200,6 @@ void main() {
               .having((e) => e.hr, 'hr', equals(E_NOINTERFACE))));
     });
 
-    tearDown(() {
-      dialog.release();
-      CoUninitialize();
-    });
+    tearDown(CoUninitialize);
   });
 }
