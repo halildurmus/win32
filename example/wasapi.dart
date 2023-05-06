@@ -90,7 +90,6 @@ void main() {
       0, // dataflow: rendering device
       0, // role: system notification sound
       ppDevice));
-  pDeviceEnumerator.release();
 
   // Activate an IAudioClient interface for the output device.
   final pDevice = IMMDevice(ppDevice.cast());
@@ -162,15 +161,7 @@ void main() {
   // Clear up
   free(pData);
 
-  pDevice.release();
-
-  pAudioClient.release();
-
-  pAudioRenderClient.release();
-
   free(ppFormat);
 
-  // Uninitialize COM now that we're done with it.
-  CoUninitialize();
   print('All done!');
 }

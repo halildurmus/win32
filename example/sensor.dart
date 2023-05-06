@@ -34,6 +34,4 @@ void main() {
   free(pCount);
   free(pSensorsColl);
   free(sampleDateTimeSensorCategory);
-
-  CoUninitialize();
 }

@@ -104,16 +104,5 @@ void main() {
 
       Sleep(1000); // Sleep for a second.
     }
-
-    // Tidy up
-    pObj.release();
-    pAccess.release();
-
-    refresher.release();
-    pConfig.release();
-
-    pLoc.release();
-
-    CoUninitialize();
   });
 }
