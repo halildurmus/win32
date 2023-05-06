@@ -8,7 +8,7 @@ import 'package:win32/win32.dart';
 import '../type_aliases.dart';
 
 /// Stores the offset, within a class, of the specified field.
-class COR_FIELD_OFFSET extends Struct {
+final class COR_FIELD_OFFSET extends Struct {
   /// An mdFieldDef metadata token that represents the field.
   @mdFieldDef()
   external int ridOfField;
@@ -20,7 +20,7 @@ class COR_FIELD_OFFSET extends Struct {
 
 /// Contains information about the referenced assembly, including its version
 /// and its level of support for locales, processors, and operating systems.
-class ASSEMBLYDATA extends Struct {
+final class ASSEMBLYDATA extends Struct {
   /// The major version number of the referenced assembly. This value cannot be
   /// zero. If all the bits are set, the major version is not specified.
   @USHORT()
@@ -69,7 +69,7 @@ class ASSEMBLYDATA extends Struct {
 }
 
 /// Contains details about the operating system for an assembly or module.
-class OSINFO extends Struct {
+final class OSINFO extends Struct {
   /// One of the identifier values defined by the Microsoft Windows platform
   /// function GetVersionEx.
   @DWORD()

@@ -11,6 +11,7 @@ import 'assemblyref.dart';
 import 'com/imetadataassemblyimport.dart';
 import 'com/imetadataimport2.dart';
 import 'enums.dart';
+import 'metadatastore.dart';
 import 'moduleref.dart';
 import 'pekind.dart';
 import 'token_object.dart';

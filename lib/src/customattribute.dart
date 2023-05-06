@@ -141,56 +141,59 @@ class CustomAttribute extends TokenObject {
           paramValues.add(const Utf8Decoder()
               .convert(blob.buffer.asUint8List(offset, stringLength)));
           offset += stringLength;
-          break;
         case BaseType.booleanType:
           paramValues.add(blob.getUint8(offset) == 1);
           offset += 1;
-          break;
         case BaseType.charType:
           paramValues.add(String.fromCharCode(blob.getUint16(offset)));
           offset += 2;
-          break;
         case BaseType.floatType:
           paramValues.add(blob.getFloat32(offset, Endian.little));
           offset += 4;
-          break;
         case BaseType.doubleType:
           paramValues.add(blob.getFloat64(offset, Endian.little));
           offset += 8;
-          break;
         case BaseType.int8Type:
           paramValues.add(blob.getInt8(offset));
           offset += 1;
-          break;
         case BaseType.int16Type:
           paramValues.add(blob.getInt16(offset, Endian.little));
           offset += 2;
-          break;
         case BaseType.int32Type:
           paramValues.add(blob.getInt32(offset, Endian.little));
           offset += 4;
-          break;
         case BaseType.int64Type:
           paramValues.add(blob.getInt64(offset, Endian.little));
           offset += 8;
-          break;
         case BaseType.uint8Type:
           paramValues.add(blob.getUint8(offset));
           offset += 1;
-          break;
         case BaseType.uint16Type:
           paramValues.add(blob.getUint16(offset, Endian.little));
           offset += 2;
-          break;
         case BaseType.uint32Type:
           paramValues.add(blob.getUint32(offset, Endian.little));
           offset += 4;
-          break;
         case BaseType.uint64Type:
           paramValues.add(blob.getUint64(offset, Endian.little));
           offset += 8;
-          break;
-        default:
+        case BaseType.intPtrType:
+        case BaseType.uintPtrType:
+        case BaseType.voidType:
+        case BaseType.pointerTypeModifier:
+        case BaseType.referenceTypeModifier:
+        case BaseType.valueTypeModifier:
+        case BaseType.classVariableTypeModifier:
+        case BaseType.arrayTypeModifier:
+        case BaseType.genericTypeModifier:
+        case BaseType.typedReference:
+        case BaseType.functionPointerType:
+        case BaseType.objectType:
+        case BaseType.simpleArrayType:
+        case BaseType.methodVariableTypeModifier:
+        case BaseType.cLanguageRequiredModifier:
+        case BaseType.cLanguageOptionalModifier:
+        case BaseType.sentinelTypeModifier:
           // In the future, we might add more exhaustive checking for esoteric
           // parameter types that are specified in ECMA-335 but don't seem to
           // occur in the Win32 or WinRT metadata (e.g. named arguments).

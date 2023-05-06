@@ -225,7 +225,7 @@ enum MemberAccess {
   public
 }
 
-/// Indicates the preferred architecture for a requested [typeDef].
+/// Indicates the preferred architecture for a requested `typeDef`.
 enum PreferredArchitecture {
   /// Prefer Intel 32-bit architecture.
   x86,

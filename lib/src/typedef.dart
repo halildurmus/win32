@@ -47,7 +47,7 @@ class TypeDef extends TokenObject
 
   /// Create a typedef.
   ///
-  /// Typically, typedefs should be obtained from a [WinmdScope] object rather
+  /// Typically, typedefs should be obtained from a [Scope] object rather
   /// than being created directly.
   TypeDef(super.scope,
       [super.token = 0,

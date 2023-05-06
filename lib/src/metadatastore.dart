@@ -86,11 +86,13 @@ class MetadataStore {
       return cache[assetName]!;
     } else {
       final uri = Uri.parse('package:winmd/assets/$assetName');
-      final future = Isolate.resolvePackageUri(uri);
 
+      // ignore: discarded_futures
+      final future = Isolate.resolvePackageUri(uri);
       // waitFor is strongly discouraged in general, but it is accepted as the
       // only reasonable way to load package assets outside of Flutter.
       final package = waitFor(future, timeout: const Duration(seconds: 5));
+
       if (package != null) {
         final fileScope = File.fromUri(package);
         return getScopeForFile(fileScope);
