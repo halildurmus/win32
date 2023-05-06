@@ -1,3 +1,17 @@
+## 4.1.4
+
+- Add some minor network APIs
+
+## 4.1.3
+
+- Add registry constants for win32_registry (#682)
+
+## 4.1.2
+
+- Fix missing export of crypt32 APIs (#673)
+- Fix a dartdoc comment reference (#666)
+- Fix memory leak in `convertToHString
+
 ## 4.1.1
 
 - Convert acronyms in method/property names to lowercase (#649, @halildurmus)
@@ -37,6 +51,10 @@
 - Add APIs for processor / firmware information (#627, @timsneath)
 - Add APIs for shell file operations (#630, @timsneath)
 - Update upper Dart SDK constraint to explicitly support Dart 3
+
+## 3.1.4
+
+- Fix missing export of crypt32 APIs
 
 ## 3.1.3
 
