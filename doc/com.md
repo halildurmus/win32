@@ -104,8 +104,7 @@ Most of the time, you don't need to do anything as COM objects are
 automatically released by `Finalizer` when they go out of scope.
 
 However, if you're manually managing the lifetime of the object (i.e. by
-calling the `.detach()`), you should release it by calling the `.release()`
-method:
+calling the `.detach()`), you should release it by calling the `.release()`:
 
 ```dart
 fileOpenDialog.release(); // Release the interface
