@@ -19,4 +19,3 @@ build/
 
 # These files vary from machine to machine
 .vscode/c_cpp_properties.json
-.vscode/settings.json

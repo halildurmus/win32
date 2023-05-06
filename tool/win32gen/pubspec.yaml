@@ -1,0 +1,32 @@
+name: win32gen
+description: Auto-generate Dart wrapper classes for the Win32 API using Windows metadata
+publish_to: none
+
+environment:
+  sdk: '>=2.19.0 <4.0.0'
+
+# Declare that this package only works on Windows.
+platforms:
+  windows:
+
+dependencies:
+  # For formatting Dart code (APIs for performing dart format).
+  dart_style: ^2.3.0
+
+  # Foreign Function Interface extension methods
+  ffi: ^2.0.1
+
+  # Help ensure that the code is well-written.
+  lints: ^2.0.1
+
+  # Running the test suite.
+  test: ^1.24.1
+
+  # Windows metadata for automatically generating API signatures. The
+  # relationship between these two packages is tightly coupled, since this
+  # package includes a specific version of the Win32 metadata, so we pin the
+  # dependency by version to avoid surprising conflicts.
+  winmd: 2.4.8
+
+  # Win32 itself
+  win32: ^4.1.1

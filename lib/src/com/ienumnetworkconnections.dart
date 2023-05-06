@@ -29,7 +29,7 @@ const IID_IEnumNetworkConnections = '{dcb00006-570f-4a9b-8d69-199fdba5723b}';
 /// The IEnumNetworkConnections interface provides a standard enumerator for
 /// network connections. It enumerates active, disconnected, or all network
 /// connections within a network. This interface can be obtained from the
-/// [INetwork] interface.
+/// INetwork interface.
 ///
 /// {@category Interface}
 /// {@category com}

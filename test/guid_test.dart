@@ -1,10 +1,23 @@
 @TestOn('windows')
 
 import 'dart:ffi';
+import 'dart:typed_data';
 
 import 'package:test/test.dart';
-import 'package:win32/src/winrt/internal/int_array.dart';
 import 'package:win32/win32.dart';
+
+extension Uint8Helper on Pointer<Uint8> {
+  /// Creates a [List] from `Pointer<Uint8>` by copying the [List] backed by the
+  /// native memory to Dart memory so that it's safe to use even after the
+  /// memory allocated on the native side is released.
+  ///
+  /// [length] must not be greater than the number of elements stored inside the
+  /// `Pointer<Uint8>`.
+  ///
+  /// {@category winrt}
+  List<int> toList({int length = 1}) =>
+      Uint8List.fromList(this.asTypedList(length));
+}
 
 void main() {
   test('Invalid hex string', () {
