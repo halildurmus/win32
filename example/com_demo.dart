@@ -51,20 +51,11 @@ void main() {
       'modalWindow.ptr is ${modalWindow.ptr.address.toHexString(64)}');
   print('refCount is now ${refCount(modalWindow)}\n');
 
-  fileDialog2.release();
-  print('Release fileDialog2.\n'
-      'refCount is now ${refCount(modalWindow)}\n');
-
   // Now get the IFileOpenDialog interface.
   final fileOpenDialog = IFileOpenDialog.from(modalWindow);
-
   print('Get IFileOpenDialog interface.\n'
       'fileOpenDialog.ptr is ${fileOpenDialog.ptr.address.toHexString(64)}');
   print('refCount is now ${refCount(fileOpenDialog)}\n');
-
-  modalWindow.release();
-  print('Release modalWindow.\n'
-      'refCount is now ${refCount(fileOpenDialog)}\n');
 
   // Use IFileOpenDialog.Show, which is inherited from IModalWindow
   hr = fileOpenDialog.show(NULL);
@@ -75,15 +66,6 @@ void main() {
       throw WindowsException(hr);
     }
   }
-
-  fileOpenDialog.release();
-  print('Released fileOpenDialog.');
-
-  fileDialog.release();
-  print('Released fileDialog.');
-
-  // Uninitialize COM now that we're done with it.
-  CoUninitialize();
 
   // Clear up
   free(pTitle);

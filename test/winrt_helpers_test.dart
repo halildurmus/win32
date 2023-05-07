@@ -33,32 +33,24 @@ void main() {
     final className = 'Windows.Storage.Pickers.FileOpenPicker';
     final object = activateClass(className);
     expect(getInterfaces(object), equals(iids));
-
-    object.release();
   });
 
   test('getClassName', () {
     const className = 'Windows.Globalization.Calendar';
     final object = activateClass(className);
     expect(getClassName(object), equals(className));
-
-    object.release();
   });
 
   test('getTrustLevel of a base trust class', () {
     const className = 'Windows.Globalization.Calendar';
     final object = activateClass(className);
     expect(getTrustLevel(object), equals(TrustLevel.baseTrust));
-
-    object.release();
   });
 
   test('getTrustLevel of a partial trust class', () {
     const className = 'Windows.Storage.Pickers.FileOpenPicker';
     final object = activateClass(className);
     expect(getTrustLevel(object), equals(TrustLevel.partialTrust));
-
-    object.release();
   });
 }
 

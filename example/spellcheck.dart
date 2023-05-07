@@ -102,21 +102,11 @@ void main(List<String> args) {
 
           break;
       }
-
-      error.release();
     }
 
-    errors.release();
     free(textPtr);
-    spellChecker2.release();
-    spellChecker.release();
-    free(spellCheckerPtr);
   }
 
   free(supportedPtr);
   free(languageTagPtr);
-
-  spellCheckerFactory.release();
-
-  CoUninitialize();
 }

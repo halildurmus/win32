@@ -15,9 +15,6 @@ void main() {
     expect(hr, equals(S_OK));
     final nlm = NetworkListManager.createInstance();
     expect(nlm.ptr.address, isNonZero);
-
-    nlm.release();
-    CoUninitialize();
   });
 
   group('Network testing', () {
@@ -30,14 +27,12 @@ void main() {
     test('Network is connected', () {
       final nlm = NetworkListManager.createInstance();
       expect(nlm.isConnected, equals(VARIANT_TRUE));
-      nlm.release();
     });
 
     test('Network is connected to the internet', () {
       for (var i = 0; i < testRuns; i++) {
         final nlm = NetworkListManager.createInstance();
         expect(nlm.isConnectedToInternet, equals(VARIANT_TRUE));
-        nlm.release();
       }
     });
 
@@ -59,10 +54,6 @@ void main() {
       // network should be connected, given the filter
       expect(network.isConnected,
           anyOf(equals(VARIANT_TRUE), equals(VARIANT_FALSE)));
-
-      network.release();
-      enumerator.release();
-      nlm.release();
     });
 
     test('First network connection has a description', () {
@@ -85,12 +76,6 @@ void main() {
       // This is a wireless network or Ethernet network name. Assume that it's
       // more than one character long, and test for that.
       expect(descPtr.value.length, greaterThan(1));
-
-      network.release();
-      enumerator.release();
-      nlm.release();
     });
-
-    tearDown(CoUninitialize);
   });
 }

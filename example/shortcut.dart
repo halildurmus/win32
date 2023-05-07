@@ -22,11 +22,7 @@ void createShortcut(String path, String pathLink, String? description) {
     shellLink.setPath(lpPath);
     if (description != null) shellLink.setDescription(lpDescription);
 
-    final persistFile = IPersistFile.from(shellLink);
-    shellLink.release();
-    persistFile
-      ..save(lpPathLink, TRUE)
-      ..release();
+    IPersistFile.from(shellLink).save(lpPathLink, TRUE);
   } finally {
     free(lpPath);
     free(lpPathLink);
@@ -53,7 +49,6 @@ void main(List<String> args) {
     CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
     createShortcut(results['path'] as String, results['shortcut'] as String,
         results['description'] as String?);
-    CoUninitialize();
   } on FormatException {
     print('Creates a Windows shortcut to a given file.\n');
     print('Usage: shortcut [arguments]\n');

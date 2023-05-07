@@ -58,20 +58,13 @@ void main() {
           final replacment = error.replacement;
           expect(replacment.toDartString(), equals('have'));
           WindowsDeleteString(replacment.address);
-          error.release();
         }
 
-        errors.release();
         free(textPtr);
-        spellChecker.release();
       }
 
       free(supportedPtr);
       free(languageTagPtr);
-
-      spellCheckerFactory.release();
-
-      CoUninitialize();
     }
   });
 }
