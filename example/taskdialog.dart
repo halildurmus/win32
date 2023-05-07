@@ -20,14 +20,14 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 void showSimpleTaskDialog() {
-  final windowTitle = TEXT('Dart TaskDialog Sample');
-  final mainInstruction = TEXT('Please read this important message');
-  final content = TEXT(
-      'Task dialogs are great for sharing a longer string of explanatory '
-      'content, where you need a user to read an instruction before making a '
-      'decision. Of course, you cannot guarantee that the user will actually '
-      "read the text, so it's important that you also provide an undo function "
-      'for when the wrong choice is selected.');
+  final windowTitle = 'Dart TaskDialog Sample'.toNativeUtf16();
+  final mainInstruction = 'Please read this important message'.toNativeUtf16();
+  final content = 'Task dialogs are great for sharing a longer string of '
+          'explanatory content, where you need a user to read an instruction '
+          'before making a decision. Of course, you cannot guarantee that the '
+          "user will actually read the text, so it's important that you also "
+          'provide an undo function for when the wrong choice is selected.'
+      .toNativeUtf16();
   final buttonSelected = calloc<Int32>();
 
   try {
@@ -45,7 +45,6 @@ void showSimpleTaskDialog() {
       switch (buttonSelected.value) {
         case IDOK:
           print('User clicked on the OK button.');
-          break;
         default:
           print('User canceled the task dialog.');
       }
@@ -73,13 +72,15 @@ void showCustomTaskDialog() {
   buttons[0]
     ..nButtonID = 100
     ..pszButtonText =
-        TEXT('Take the blue pill\nThe story ends, you wake up in your bed and '
-            'believe whatever you want to believe.');
+        'Take the blue pill\nThe story ends, you wake up in your bed and '
+                'believe whatever you want to believe.'
+            .toNativeUtf16();
   buttons[1]
     ..nButtonID = 101
-    ..pszButtonText = TEXT(
+    ..pszButtonText =
         'Take the red pill\nYou stay in Wonderland, and I show you how deep '
-        'the rabbit hole goes.');
+                'the rabbit hole goes.'
+            .toNativeUtf16();
 
   const matrixDescription =
       'In The Matrix, the main character Neo is offered  the choice between '
@@ -94,12 +95,12 @@ void showCustomTaskDialog() {
 
   final config = calloc<TASKDIALOGCONFIG>()
     ..ref.cbSize = sizeOf<TASKDIALOGCONFIG>()
-    ..ref.pszWindowTitle = TEXT('TaskDialogIndirect Sample')
-    ..ref.pszMainInstruction = TEXT('Which pill will you take?')
+    ..ref.pszWindowTitle = 'TaskDialogIndirect Sample'.toNativeUtf16()
+    ..ref.pszMainInstruction = 'Which pill will you take?'.toNativeUtf16()
     ..ref.pszContent =
-        TEXT('This is your last chance. There is no turning back.')
+        'This is your last chance. There is no turning back.'.toNativeUtf16()
     ..ref.hMainIcon = TD_WARNING_ICON.address
-    ..ref.pszCollapsedControlText = TEXT('See more details.')
+    ..ref.pszCollapsedControlText = 'See more details.'.toNativeUtf16()
     ..ref.pszExpandedControlText = matrixDescription.toNativeUtf16()
     ..ref.dwFlags = TASKDIALOG_FLAGS.TDF_USE_COMMAND_LINKS
     ..ref.cButtons = 2

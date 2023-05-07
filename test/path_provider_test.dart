@@ -266,7 +266,8 @@ class VersionInfoQuerier {
       return null;
     }
     const kEnUsLanguageCode = '040904e4';
-    final keyPath = TEXT('\\StringFileInfo\\$kEnUsLanguageCode\\$key');
+    final keyPath =
+        '\\StringFileInfo\\$kEnUsLanguageCode\\$key'.toNativeUtf16();
     final length = calloc<Uint32>();
     final valueAddress = calloc<Pointer<Utf16>>();
     try {

@@ -86,11 +86,11 @@ class NestedStructProjection extends StructProjection {
 
   @override
   String toString() {
-    final superString = super.toString();
+    final unnestedStructProjection = super.toString();
 
     return '''
-  ${superString.contains('@Packed(') ? '' : rootPackingPreamble}
-  ${super.toString()}
+  ${unnestedStructProjection.contains('@Packed(') ? '' : rootPackingPreamble}
+  ${unnestedStructProjection.replaceFirst('base class', 'sealed class')}
   $propertyAccessors
   ''';
   }

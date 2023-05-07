@@ -381,13 +381,11 @@ int mainWindowProc(int hwnd, int msg, int wParam, int lParam) {
           SWP_FRAMECHANGED | SWP_NOMOVE | SWP_NOSIZE);
 
       free(sizeRect);
-      break;
 
     case WM_ACTIVATE:
       final titleBarRect = getTitlebarRect(hwnd);
       InvalidateRect(hwnd, titleBarRect, FALSE);
       free(titleBarRect);
-      break;
 
     case WM_NCHITTEST:
       // Let the default procedure handle resizing areas
@@ -434,7 +432,6 @@ int mainWindowProc(int hwnd, int msg, int wParam, int lParam) {
 
     case WM_PAINT:
       paintWindow(hwnd);
-      break;
 
     case WM_NCMOUSEMOVE:
       final hoveredButton = GetWindowLongPtr(hwnd, GWLP_USERDATA);
@@ -470,7 +467,6 @@ int mainWindowProc(int hwnd, int msg, int wParam, int lParam) {
         free(titleBarRect);
         free(cursorPoint);
       }
-      break;
 
     case WM_MOUSEMOVE:
       final hoveredButton = GetWindowLongPtr(hwnd, GWLP_USERDATA);
@@ -481,7 +477,6 @@ int mainWindowProc(int hwnd, int msg, int wParam, int lParam) {
         free(titleBarRect);
         SetWindowLongPtr(hwnd, GWLP_USERDATA, HoveredButton.none);
       }
-      break;
 
     case WM_NCLBUTTONDOWN:
       // Clicks on buttons will be handled in WM_NCLBUTTONUP, but we still need
@@ -491,8 +486,6 @@ int mainWindowProc(int hwnd, int msg, int wParam, int lParam) {
       // between DOWN and UP messages.
       final hoveredButton = GetWindowLongPtr(hwnd, GWLP_USERDATA);
       if (hoveredButton != HoveredButton.none) return 0;
-
-      break;
 
     case WM_NCLBUTTONUP:
       final hoveredButton = GetWindowLongPtr(hwnd, GWLP_USERDATA);
@@ -510,7 +503,6 @@ int mainWindowProc(int hwnd, int msg, int wParam, int lParam) {
           ShowWindow(hwnd, mode);
           return 0;
       }
-      break;
 
     case WM_DESTROY:
       PostQuitMessage(0);

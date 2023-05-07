@@ -22,12 +22,10 @@ void printWallpaper() {
         final path = pathPtr.value.toDartString();
         print(
             path.isEmpty ? 'No wallpaper is set.' : 'Wallpaper path is: $path');
-        break;
 
       case S_FALSE:
         print('Different monitors are displaying different wallpapers, or a '
             'slideshow is running.');
-        break;
 
       default:
         throw WindowsException(hr);

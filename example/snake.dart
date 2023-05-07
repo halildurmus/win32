@@ -462,16 +462,13 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       init(width, height);
 
       free(rect);
-      break;
 
     case WM_CLOSE:
       isRunning = false;
-      break;
 
     case WM_DESTROY:
       KillTimer(hwnd, IDT_TIMER1);
       isRunning = false;
-      break;
 
     case WM_PAINT:
       final ps = calloc<PAINTSTRUCT>();
@@ -489,7 +486,6 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
 
       free(rect);
       free(ps);
-      break;
 
     case WM_KEYDOWN:
       {
@@ -499,31 +495,25 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
               direction.x = -1;
               direction.y = 0;
             }
-            break;
           case VK_RIGHT:
             if (direction.x != -1) {
               direction.x = 1;
               direction.y = 0;
             }
-            break;
           case VK_UP:
             if (direction.y != 1) {
               direction.x = 0;
               direction.y = -1;
             }
-            break;
           case VK_DOWN:
             if (direction.y != -1) {
               direction.x = 0;
               direction.y = 1;
             }
-            break;
           case VK_ESCAPE:
             isRunning = false;
-            break;
         }
       }
-      break;
 
     case WM_TIMER:
       {
@@ -538,7 +528,6 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
             return 0;
         }
       }
-      break;
 
     default:
       result = DefWindowProc(hwnd, uMsg, wParam, lParam);

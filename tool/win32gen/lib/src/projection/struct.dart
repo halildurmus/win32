@@ -138,7 +138,7 @@ class StructProjection {
   @override
   String toString() => '''
         $classPreamble
-        class $_projectedName extends $_baseType {
+        base class $_projectedName extends $_baseType {
           $_fieldsProjection
         }
 

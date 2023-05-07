@@ -118,27 +118,22 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
         // User clicked the left arrow.
         case SB_LINELEFT:
           si.ref.nPos -= 1;
-          break;
 
         // User clicked the right arrow.
         case SB_LINERIGHT:
           si.ref.nPos += 1;
-          break;
 
         // User clicked the scroll bar shaft left of the scroll box.
         case SB_PAGELEFT:
           si.ref.nPos -= si.ref.nPage;
-          break;
 
         // User clicked the scroll bar shaft right of the scroll box.
         case SB_PAGERIGHT:
           si.ref.nPos += si.ref.nPage;
-          break;
 
         // User dragged the scroll box.
         case SB_THUMBTRACK:
           si.ref.nPos = si.ref.nTrackPos;
-          break;
 
         default:
           break;
@@ -172,37 +167,30 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
         // User clicked the HOME keyboard key.
         case SB_TOP:
           si.ref.nPos = si.ref.nMin;
-          break;
 
         // User clicked the END keyboard key.
         case SB_BOTTOM:
           si.ref.nPos = si.ref.nMax;
-          break;
 
         // User clicked the top arrow.
         case SB_LINEUP:
           si.ref.nPos -= 1;
-          break;
 
         // User clicked the bottom arrow.
         case SB_LINEDOWN:
           si.ref.nPos += 1;
-          break;
 
         // User clicked the scroll bar shaft above the scroll box.
         case SB_PAGEUP:
           si.ref.nPos -= si.ref.nPage;
-          break;
 
         // User clicked the scroll bar shaft below the scroll box.
         case SB_PAGEDOWN:
           si.ref.nPos += si.ref.nPage;
-          break;
 
         // User dragged the scroll box.
         case SB_THUMBTRACK:
           si.ref.nPos = si.ref.nTrackPos;
-          break;
 
         default:
           break;

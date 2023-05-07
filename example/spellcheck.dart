@@ -71,17 +71,14 @@ void main(List<String> args) {
       switch (error.correctiveAction) {
         case CORRECTIVE_ACTION.DELETE:
           print(' - delete');
-          break;
 
         case CORRECTIVE_ACTION.NONE:
           print('\n');
-          break;
 
         case CORRECTIVE_ACTION.REPLACE:
           final replacment = error.replacement;
           print(' - replace with "${replacment.toDartString()}"');
           WindowsDeleteString(replacment.address);
-          break;
 
         case CORRECTIVE_ACTION.GET_SUGGESTIONS:
           print(' - suggestions:');
@@ -99,8 +96,6 @@ void main(List<String> args) {
             print('\t${suggestionPtr.value.toDartString()}');
             WindowsDeleteString(suggestionPtr.value.address);
           }
-
-          break;
       }
     }
 

@@ -11,8 +11,8 @@ int getWindowsBuildNumber() => int.parse(getRegistryValue(
 Object getRegistryValue(int key, String subKey, String valueName) {
   late Object dataValue;
 
-  final subKeyPtr = TEXT(subKey);
-  final valueNamePtr = TEXT(valueName);
+  final subKeyPtr = subKey.toNativeUtf16();
+  final valueNamePtr = valueName.toNativeUtf16();
   final openKeyPtr = calloc<HANDLE>();
   final dataType = calloc<DWORD>();
 

@@ -23,7 +23,7 @@ import 'variant.dart';
 /// Defines an accelerator key used in an accelerator table.
 ///
 /// {@category Struct}
-class ACCEL extends Struct {
+base class ACCEL extends Struct {
   @Uint8()
   external int fVirt;
 
@@ -39,7 +39,7 @@ class ACCEL extends Struct {
 /// zero or more access control entries (ACEs).
 ///
 /// {@category Struct}
-class ACL extends Struct {
+base class ACL extends Struct {
   @Uint8()
   external int AclRevision;
 
@@ -60,7 +60,7 @@ class ACL extends Struct {
 /// activation context.
 ///
 /// {@category Struct}
-class ACTCTX extends Struct {
+base class ACTCTX extends Struct {
   @Uint32()
   external int cbSize;
 
@@ -89,7 +89,7 @@ class ACTCTX extends Struct {
 /// directory and file in which an application can store that job.
 ///
 /// {@category Struct}
-class ADDJOB_INFO_1 extends Struct {
+base class ADDJOB_INFO_1 extends Struct {
   external Pointer<Utf16> Path;
 
   @Uint32()
@@ -100,7 +100,7 @@ class ADDJOB_INFO_1 extends Struct {
 /// host address information.
 ///
 /// {@category Struct}
-class ADDRINFO extends Struct {
+base class ADDRINFO extends Struct {
   @Int32()
   external int ai_flags;
 
@@ -127,7 +127,7 @@ class ADDRINFO extends Struct {
 /// window.
 ///
 /// {@category Struct}
-class ALTTABINFO extends Struct {
+base class ALTTABINFO extends Struct {
   @Uint32()
   external int cbSize;
 
@@ -158,7 +158,7 @@ class ALTTABINFO extends Struct {
 /// Represents package settings used to create a package.
 ///
 /// {@category Struct}
-class APPX_PACKAGE_SETTINGS extends Struct {
+base class APPX_PACKAGE_SETTINGS extends Struct {
   @Int32()
   external int forceZip32;
 
@@ -168,7 +168,7 @@ class APPX_PACKAGE_SETTINGS extends Struct {
 /// Describes an array, its element type, and its dimension.
 ///
 /// {@category Struct}
-class ARRAYDESC extends Struct {
+base class ARRAYDESC extends Struct {
   external TYPEDESC tdescElem;
 
   @Uint16()
@@ -181,7 +181,7 @@ class ARRAYDESC extends Struct {
 /// Contains parameters used during a moniker-binding operation.
 ///
 /// {@category Struct}
-class BIND_OPTS extends Struct {
+base class BIND_OPTS extends Struct {
   @Uint32()
   external int cbStruct;
 
@@ -199,7 +199,7 @@ class BIND_OPTS extends Struct {
 /// bit values of a bitmap.
 ///
 /// {@category Struct}
-class BITMAP extends Struct {
+base class BITMAP extends Struct {
   @Int32()
   external int bmType;
 
@@ -226,7 +226,7 @@ class BITMAP extends Struct {
 ///
 /// {@category Struct}
 @Packed(2)
-class BITMAPFILEHEADER extends Struct {
+base class BITMAPFILEHEADER extends Struct {
   @Uint16()
   external int bfType;
 
@@ -247,7 +247,7 @@ class BITMAPFILEHEADER extends Struct {
 /// for a device-independent bitmap (DIB).
 ///
 /// {@category Struct}
-class BITMAPINFO extends Struct {
+base class BITMAPINFO extends Struct {
   external BITMAPINFOHEADER bmiHeader;
 
   @Array(1)
@@ -258,7 +258,7 @@ class BITMAPINFO extends Struct {
 /// and color format of a device-independent bitmap (DIB).
 ///
 /// {@category Struct}
-class BITMAPINFOHEADER extends Struct {
+base class BITMAPINFOHEADER extends Struct {
   @Uint32()
   external int biSize;
 
@@ -297,7 +297,7 @@ class BITMAPINFOHEADER extends Struct {
 /// functions for source and destination bitmaps.
 ///
 /// {@category Struct}
-class BLENDFUNCTION extends Struct {
+base class BLENDFUNCTION extends Struct {
   @Uint8()
   external int BlendOp;
 
@@ -315,12 +315,12 @@ class BLENDFUNCTION extends Struct {
 /// device.
 ///
 /// {@category Struct}
-class BLUETOOTH_ADDRESS extends Struct {
+base class BLUETOOTH_ADDRESS extends Struct {
   external _BLUETOOTH_ADDRESS__Anonymous_e__Union Anonymous;
 }
 
 /// {@category Struct}
-class _BLUETOOTH_ADDRESS__Anonymous_e__Union extends Union {
+sealed class _BLUETOOTH_ADDRESS__Anonymous_e__Union extends Union {
   @Uint64()
   external int ullLong;
 
@@ -340,7 +340,7 @@ extension BLUETOOTH_ADDRESS_Extension on BLUETOOTH_ADDRESS {
 /// passed in response to a BTH_REMOTE_AUTHENTICATE_REQUEST event.
 ///
 /// {@category Struct}
-class BLUETOOTH_AUTHENTICATE_RESPONSE extends Struct {
+base class BLUETOOTH_AUTHENTICATE_RESPONSE extends Struct {
   external BLUETOOTH_ADDRESS bthAddressRemote;
 
   @Int32()
@@ -353,7 +353,8 @@ class BLUETOOTH_AUTHENTICATE_RESPONSE extends Struct {
 }
 
 /// {@category Struct}
-class _BLUETOOTH_AUTHENTICATE_RESPONSE__Anonymous_e__Union extends Union {
+sealed class _BLUETOOTH_AUTHENTICATE_RESPONSE__Anonymous_e__Union
+    extends Union {
   external BLUETOOTH_PIN_INFO pinInfo;
 
   external BLUETOOTH_OOB_DATA_INFO oobInfo;
@@ -386,7 +387,7 @@ extension BLUETOOTH_AUTHENTICATE_RESPONSE_Extension
 /// authentication request.
 ///
 /// {@category Struct}
-class BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS extends Struct {
+base class BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS extends Struct {
   external BLUETOOTH_DEVICE_INFO deviceInfo;
 
   @Int32()
@@ -403,7 +404,7 @@ class BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS extends Struct {
 }
 
 /// {@category Struct}
-class _BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS__Anonymous_e__Union
+sealed class _BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS__Anonymous_e__Union
     extends Union {
   @Uint32()
   external int Numeric_Value;
@@ -425,7 +426,7 @@ extension BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS_Extension
 /// retrieval of Bluetooth Class Of Device (COD) information.
 ///
 /// {@category Struct}
-class BLUETOOTH_COD_PAIRS extends Struct {
+base class BLUETOOTH_COD_PAIRS extends Struct {
   @Uint32()
   external int ulCODMask;
 
@@ -436,7 +437,7 @@ class BLUETOOTH_COD_PAIRS extends Struct {
 /// Bluetooth device.
 ///
 /// {@category Struct}
-class BLUETOOTH_DEVICE_INFO extends Struct {
+base class BLUETOOTH_DEVICE_INFO extends Struct {
   @Uint32()
   external int dwSize;
 
@@ -482,7 +483,7 @@ class BLUETOOTH_DEVICE_INFO extends Struct {
 /// for Bluetooth device searches.
 ///
 /// {@category Struct}
-class BLUETOOTH_DEVICE_SEARCH_PARAMS extends Struct {
+base class BLUETOOTH_DEVICE_SEARCH_PARAMS extends Struct {
   @Uint32()
   external int dwSize;
 
@@ -512,7 +513,7 @@ class BLUETOOTH_DEVICE_SEARCH_PARAMS extends Struct {
 /// installed Bluetooth radios.
 ///
 /// {@category Struct}
-class BLUETOOTH_FIND_RADIO_PARAMS extends Struct {
+base class BLUETOOTH_FIND_RADIO_PARAMS extends Struct {
   @Uint32()
   external int dwSize;
 }
@@ -521,7 +522,7 @@ class BLUETOOTH_FIND_RADIO_PARAMS extends Struct {
 /// attribute value.
 ///
 /// {@category Struct}
-class BLUETOOTH_GATT_VALUE_CHANGED_EVENT extends Struct {
+base class BLUETOOTH_GATT_VALUE_CHANGED_EVENT extends Struct {
   @Uint16()
   external int ChangedAttributeHandle;
 
@@ -535,7 +536,7 @@ class BLUETOOTH_GATT_VALUE_CHANGED_EVENT extends Struct {
 /// one or more characteristics that have changed.
 ///
 /// {@category Struct}
-class BLUETOOTH_GATT_VALUE_CHANGED_EVENT_REGISTRATION extends Struct {
+base class BLUETOOTH_GATT_VALUE_CHANGED_EVENT_REGISTRATION extends Struct {
   @Uint16()
   external int NumCharacteristics;
 
@@ -547,7 +548,7 @@ class BLUETOOTH_GATT_VALUE_CHANGED_EVENT_REGISTRATION extends Struct {
 /// value used for authentication via numeric comparison.
 ///
 /// {@category Struct}
-class BLUETOOTH_NUMERIC_COMPARISON_INFO extends Struct {
+base class BLUETOOTH_NUMERIC_COMPARISON_INFO extends Struct {
   @Uint32()
   external int NumericValue;
 }
@@ -556,7 +557,7 @@ class BLUETOOTH_NUMERIC_COMPARISON_INFO extends Struct {
 /// prior to establishing an Out-of-Band device pairing.
 ///
 /// {@category Struct}
-class BLUETOOTH_OOB_DATA_INFO extends Struct {
+base class BLUETOOTH_OOB_DATA_INFO extends Struct {
   @Array(16)
   external Array<Uint8> C;
 
@@ -569,7 +570,7 @@ class BLUETOOTH_OOB_DATA_INFO extends Struct {
 /// passkey value is used for authentication only once.
 ///
 /// {@category Struct}
-class BLUETOOTH_PASSKEY_INFO extends Struct {
+base class BLUETOOTH_PASSKEY_INFO extends Struct {
   @Uint32()
   external int passkey;
 }
@@ -578,7 +579,7 @@ class BLUETOOTH_PASSKEY_INFO extends Struct {
 /// authentication via PIN.
 ///
 /// {@category Struct}
-class BLUETOOTH_PIN_INFO extends Struct {
+base class BLUETOOTH_PIN_INFO extends Struct {
   @Array(16)
   external Array<Uint8> pin;
 
@@ -590,7 +591,7 @@ class BLUETOOTH_PIN_INFO extends Struct {
 /// Bluetooth radio.
 ///
 /// {@category Struct}
-class BLUETOOTH_RADIO_INFO extends Struct {
+base class BLUETOOTH_RADIO_INFO extends Struct {
   @Uint32()
   external int dwSize;
 
@@ -630,7 +631,7 @@ class BLUETOOTH_RADIO_INFO extends Struct {
 /// services.
 ///
 /// {@category Struct}
-class BLUETOOTH_SELECT_DEVICE_PARAMS extends Struct {
+base class BLUETOOTH_SELECT_DEVICE_PARAMS extends Struct {
   @Uint32()
   external int dwSize;
 
@@ -676,7 +677,7 @@ class BLUETOOTH_SELECT_DEVICE_PARAMS extends Struct {
 /// BroadcastSystemMessageEx.
 ///
 /// {@category Struct}
-class BSMINFO extends Struct {
+base class BSMINFO extends Struct {
   @Uint32()
   external int cbSize;
 
@@ -693,7 +694,7 @@ class BSMINFO extends Struct {
 /// device.
 ///
 /// {@category Struct}
-class BTH_DEVICE_INFO extends Struct {
+base class BTH_DEVICE_INFO extends Struct {
   @Uint32()
   external int flags;
 
@@ -711,7 +712,7 @@ class BTH_DEVICE_INFO extends Struct {
 /// WM_DEVICECHANGE messages for Bluetooth.
 ///
 /// {@category Struct}
-class BTH_HCI_EVENT_INFO extends Struct {
+base class BTH_HCI_EVENT_INFO extends Struct {
   @Uint64()
   external int bthAddress;
 
@@ -726,7 +727,7 @@ class BTH_HCI_EVENT_INFO extends Struct {
 /// with an L2CAP channel.
 ///
 /// {@category Struct}
-class BTH_L2CAP_EVENT_INFO extends Struct {
+base class BTH_L2CAP_EVENT_INFO extends Struct {
   @Uint64()
   external int bthAddress;
 
@@ -744,7 +745,7 @@ class BTH_L2CAP_EVENT_INFO extends Struct {
 /// Energy (LE) generic attribute (GATT) profile characteristic.
 ///
 /// {@category Struct}
-class BTH_LE_GATT_CHARACTERISTIC extends Struct {
+base class BTH_LE_GATT_CHARACTERISTIC extends Struct {
   @Uint16()
   external int ServiceHandle;
 
@@ -785,7 +786,7 @@ class BTH_LE_GATT_CHARACTERISTIC extends Struct {
 /// Energy (LE) generic attribute (GATT) profile characteristic value.
 ///
 /// {@category Struct}
-class BTH_LE_GATT_CHARACTERISTIC_VALUE extends Struct {
+base class BTH_LE_GATT_CHARACTERISTIC_VALUE extends Struct {
   @Uint32()
   external int DataSize;
 
@@ -797,7 +798,7 @@ class BTH_LE_GATT_CHARACTERISTIC_VALUE extends Struct {
 /// (LE) generic attribute (GATT) profile descriptor.
 ///
 /// {@category Struct}
-class BTH_LE_GATT_DESCRIPTOR extends Struct {
+base class BTH_LE_GATT_DESCRIPTOR extends Struct {
   @Uint16()
   external int ServiceHandle;
 
@@ -817,7 +818,7 @@ class BTH_LE_GATT_DESCRIPTOR extends Struct {
 /// characteristic.
 ///
 /// {@category Struct}
-class BTH_LE_GATT_DESCRIPTOR_VALUE extends Struct {
+base class BTH_LE_GATT_DESCRIPTOR_VALUE extends Struct {
   @Int32()
   external int DescriptorType;
 
@@ -833,7 +834,7 @@ class BTH_LE_GATT_DESCRIPTOR_VALUE extends Struct {
 }
 
 /// {@category Struct}
-class _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union extends Union {
+sealed class _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union extends Union {
   external _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicExtendedProperties_e__Struct
       CharacteristicExtendedProperties;
 
@@ -848,7 +849,7 @@ class _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union extends Union {
 }
 
 /// {@category Struct}
-class _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicExtendedProperties_e__Struct
+sealed class _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicExtendedProperties_e__Struct
     extends Struct {
   @Uint8()
   external int IsReliableWriteEnabled;
@@ -873,7 +874,7 @@ extension BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union_Extension
 }
 
 /// {@category Struct}
-class _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ClientCharacteristicConfiguration_e__Struct
+sealed class _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ClientCharacteristicConfiguration_e__Struct
     extends Struct {
   @Uint8()
   external int IsSubscribeToNotification;
@@ -901,7 +902,7 @@ extension BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union_Extension_1
 }
 
 /// {@category Struct}
-class _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ServerCharacteristicConfiguration_e__Struct
+sealed class _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ServerCharacteristicConfiguration_e__Struct
     extends Struct {
   @Uint8()
   external int IsBroadcast;
@@ -916,7 +917,7 @@ extension BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union_Extension_2
 }
 
 /// {@category Struct}
-class _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicFormat_e__Struct
+sealed class _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicFormat_e__Struct
     extends Struct {
   @Uint8()
   external int Format;
@@ -993,7 +994,7 @@ extension BTH_LE_GATT_DESCRIPTOR_VALUE_Extension
 /// generic attribute (GATT) profile service.
 ///
 /// {@category Struct}
-class BTH_LE_GATT_SERVICE extends Struct {
+base class BTH_LE_GATT_SERVICE extends Struct {
   external BTH_LE_UUID ServiceUuid;
 
   @Uint16()
@@ -1004,7 +1005,7 @@ class BTH_LE_GATT_SERVICE extends Struct {
 /// Energy (LE) Universally Unique Identifier (UUID).
 ///
 /// {@category Struct}
-class BTH_LE_UUID extends Struct {
+base class BTH_LE_UUID extends Struct {
   @Uint8()
   external int IsShortUuid;
 
@@ -1012,7 +1013,7 @@ class BTH_LE_UUID extends Struct {
 }
 
 /// {@category Struct}
-class _BTH_LE_UUID__Value_e__Union extends Union {
+sealed class _BTH_LE_UUID__Value_e__Union extends Union {
   @Uint16()
   external int ShortUuid;
 
@@ -1032,7 +1033,7 @@ extension BTH_LE_UUID_Extension on BTH_LE_UUID {
 ///
 /// {@category Struct}
 @Packed(1)
-class BTH_QUERY_DEVICE extends Struct {
+base class BTH_QUERY_DEVICE extends Struct {
   @Uint32()
   external int LAP;
 
@@ -1043,7 +1044,7 @@ class BTH_QUERY_DEVICE extends Struct {
 /// The BTH_QUERY_SERVICE structure is used to query a Bluetooth service.
 ///
 /// {@category Struct}
-class BTH_QUERY_SERVICE extends Struct {
+base class BTH_QUERY_SERVICE extends Struct {
   @Uint32()
   external int type;
 
@@ -1064,7 +1065,7 @@ class BTH_QUERY_SERVICE extends Struct {
 /// within communication range.
 ///
 /// {@category Struct}
-class BTH_RADIO_IN_RANGE extends Struct {
+base class BTH_RADIO_IN_RANGE extends Struct {
   external BTH_DEVICE_INFO deviceInfo;
 
   @Uint32()
@@ -1076,7 +1077,7 @@ class BTH_RADIO_IN_RANGE extends Struct {
 ///
 /// {@category Struct}
 @Packed(1)
-class BTH_SET_SERVICE extends Struct {
+base class BTH_SET_SERVICE extends Struct {
   external Pointer<Uint32> pSdpVersion;
 
   external Pointer<IntPtr> pRecordHandle;
@@ -1098,7 +1099,7 @@ class BTH_SET_SERVICE extends Struct {
 /// retrieves.
 ///
 /// {@category Struct}
-class BY_HANDLE_FILE_INFORMATION extends Struct {
+base class BY_HANDLE_FILE_INFORMATION extends Struct {
   @Uint32()
   external int dwFileAttributes;
 
@@ -1130,7 +1131,7 @@ class BY_HANDLE_FILE_INFORMATION extends Struct {
 /// Describes the cache attributes.
 ///
 /// {@category Struct}
-class CACHE_DESCRIPTOR extends Struct {
+base class CACHE_DESCRIPTOR extends Struct {
   @Uint8()
   external int Level;
 
@@ -1151,7 +1152,7 @@ class CACHE_DESCRIPTOR extends Struct {
 /// a window is activated.
 ///
 /// {@category Struct}
-class CBTACTIVATESTRUCT extends Struct {
+base class CBTACTIVATESTRUCT extends Struct {
   @Int32()
   external int fMouse;
 
@@ -1163,7 +1164,7 @@ class CBTACTIVATESTRUCT extends Struct {
 /// a window is created.
 ///
 /// {@category Struct}
-class CBT_CREATEWND extends Struct {
+base class CBT_CREATEWND extends Struct {
   external Pointer<CREATESTRUCT> lpcs;
 
   @IntPtr()
@@ -1174,7 +1175,7 @@ class CBT_CREATEWND extends Struct {
 /// ChangeWindowMessageFilterEx function.
 ///
 /// {@category Struct}
-class CHANGEFILTERSTRUCT extends Struct {
+base class CHANGEFILTERSTRUCT extends Struct {
   @Uint32()
   external int cbSize;
 
@@ -1187,7 +1188,7 @@ class CHANGEFILTERSTRUCT extends Struct {
 /// buffer.
 ///
 /// {@category Struct}
-class CHAR_INFO extends Struct {
+base class CHAR_INFO extends Struct {
   external _CHAR_INFO__Char_e__Union Char;
 
   @Uint16()
@@ -1195,7 +1196,7 @@ class CHAR_INFO extends Struct {
 }
 
 /// {@category Struct}
-class _CHAR_INFO__Char_e__Union extends Union {
+sealed class _CHAR_INFO__Char_e__Union extends Union {
   @Uint16()
   external int UnicodeChar;
 
@@ -1216,7 +1217,7 @@ extension CHAR_INFO_Extension on CHAR_INFO {
 /// returns information about the user's selection in this structure.
 ///
 /// {@category Struct}
-class CHOOSECOLOR extends Struct {
+base class CHOOSECOLOR extends Struct {
   @Uint32()
   external int lStructSize;
 
@@ -1247,7 +1248,7 @@ class CHOOSECOLOR extends Struct {
 /// returns information about the user's selection in this structure.
 ///
 /// {@category Struct}
-class CHOOSEFONT extends Struct {
+base class CHOOSEFONT extends Struct {
   @Uint32()
   external int lStructSize;
 
@@ -1299,7 +1300,7 @@ class CHOOSEFONT extends Struct {
 /// SetColorAdjustment function.
 ///
 /// {@category Struct}
-class COLORADJUSTMENT extends Struct {
+base class COLORADJUSTMENT extends Struct {
   @Uint16()
   external int caSize;
 
@@ -1340,7 +1341,7 @@ class COLORADJUSTMENT extends Struct {
 /// Used generically to filter elements.
 ///
 /// {@category Struct}
-class COMDLG_FILTERSPEC extends Struct {
+base class COMDLG_FILTERSPEC extends Struct {
   external Pointer<Utf16> pszName;
 
   external Pointer<Utf16> pszSpec;
@@ -1350,7 +1351,7 @@ class COMDLG_FILTERSPEC extends Struct {
 /// device.
 ///
 /// {@category Struct}
-class COMMCONFIG extends Struct {
+base class COMMCONFIG extends Struct {
   @Uint32()
   external int dwSize;
 
@@ -1394,7 +1395,7 @@ class COMMCONFIG extends Struct {
 /// Contains information about a communications driver.
 ///
 /// {@category Struct}
-class COMMPROP extends Struct {
+base class COMMPROP extends Struct {
   @Uint16()
   external int wPacketLength;
 
@@ -1471,7 +1472,7 @@ class COMMPROP extends Struct {
 /// and WriteFileEx operations on the device.
 ///
 /// {@category Struct}
-class COMMTIMEOUTS extends Struct {
+base class COMMTIMEOUTS extends Struct {
   @Uint32()
   external int ReadIntervalTimeout;
 
@@ -1492,7 +1493,7 @@ class COMMTIMEOUTS extends Struct {
 /// filled by the ClearCommError function.
 ///
 /// {@category Struct}
-class COMSTAT extends Struct {
+base class COMSTAT extends Struct {
   @Uint32()
   external int bitfield;
 
@@ -1506,7 +1507,7 @@ class COMSTAT extends Struct {
 /// Contains information about the console cursor.
 ///
 /// {@category Struct}
-class CONSOLE_CURSOR_INFO extends Struct {
+base class CONSOLE_CURSOR_INFO extends Struct {
   @Uint32()
   external int dwSize;
 
@@ -1517,7 +1518,7 @@ class CONSOLE_CURSOR_INFO extends Struct {
 /// Contains information for a console read operation.
 ///
 /// {@category Struct}
-class CONSOLE_READCONSOLE_CONTROL extends Struct {
+base class CONSOLE_READCONSOLE_CONTROL extends Struct {
   @Uint32()
   external int nLength;
 
@@ -1534,7 +1535,7 @@ class CONSOLE_READCONSOLE_CONTROL extends Struct {
 /// Contains information about a console screen buffer.
 ///
 /// {@category Struct}
-class CONSOLE_SCREEN_BUFFER_INFO extends Struct {
+base class CONSOLE_SCREEN_BUFFER_INFO extends Struct {
   external COORD dwSize;
 
   external COORD dwCursorPosition;
@@ -1550,7 +1551,7 @@ class CONSOLE_SCREEN_BUFFER_INFO extends Struct {
 /// Contains information for a console selection.
 ///
 /// {@category Struct}
-class CONSOLE_SELECTION_INFO extends Struct {
+base class CONSOLE_SELECTION_INFO extends Struct {
   @Uint32()
   external int dwFlags;
 
@@ -1564,7 +1565,7 @@ class CONSOLE_SELECTION_INFO extends Struct {
 /// the buffer.
 ///
 /// {@category Struct}
-class COORD extends Struct {
+base class COORD extends Struct {
   @Int16()
   external int X;
 
@@ -1575,7 +1576,7 @@ class COORD extends Struct {
 /// Contains optional extended parameters for CreateFile2.
 ///
 /// {@category Struct}
-class CREATEFILE2_EXTENDED_PARAMETERS extends Struct {
+base class CREATEFILE2_EXTENDED_PARAMETERS extends Struct {
   @Uint32()
   external int dwSize;
 
@@ -1599,7 +1600,7 @@ class CREATEFILE2_EXTENDED_PARAMETERS extends Struct {
 /// CreateWindowEx function.
 ///
 /// {@category Struct}
-class CREATESTRUCT extends Struct {
+base class CREATESTRUCT extends Struct {
   external Pointer lpCreateParams;
 
   @IntPtr()
@@ -1637,7 +1638,7 @@ class CREATESTRUCT extends Struct {
 /// The CREDENTIAL structure contains an individual credential.
 ///
 /// {@category Struct}
-class CREDENTIAL extends Struct {
+base class CREDENTIAL extends Struct {
   @Uint32()
   external int Flags;
 
@@ -1673,7 +1674,7 @@ class CREDENTIAL extends Struct {
 /// up to the application to define the meaning of the attribute.
 ///
 /// {@category Struct}
-class CREDENTIAL_ATTRIBUTE extends Struct {
+base class CREDENTIAL_ATTRIBUTE extends Struct {
   external Pointer<Utf16> Keyword;
 
   @Uint32()
@@ -1690,7 +1691,7 @@ class CREDENTIAL_ATTRIBUTE extends Struct {
 /// using the CryptProtectData and CryptUnprotectData functions.
 ///
 /// {@category Struct}
-class CRYPTPROTECT_PROMPTSTRUCT extends Struct {
+base class CRYPTPROTECT_PROMPTSTRUCT extends Struct {
   @Uint32()
   external int cbSize;
 
@@ -1707,7 +1708,7 @@ class CRYPTPROTECT_PROMPTSTRUCT extends Struct {
 /// aliases appropriate to the various functions that use it.
 ///
 /// {@category Struct}
-class CRYPT_INTEGER_BLOB extends Struct {
+base class CRYPT_INTEGER_BLOB extends Struct {
   @Uint32()
   external int cbData;
 
@@ -1717,7 +1718,7 @@ class CRYPT_INTEGER_BLOB extends Struct {
 /// Contains global cursor information.
 ///
 /// {@category Struct}
-class CURSORINFO extends Struct {
+base class CURSORINFO extends Struct {
   @Uint32()
   external int cbSize;
 
@@ -1734,7 +1735,7 @@ class CURSORINFO extends Struct {
 /// procedure, CallWndRetProc.
 ///
 /// {@category Struct}
-class CWPRETSTRUCT extends Struct {
+base class CWPRETSTRUCT extends Struct {
   @IntPtr()
   external int lResult;
 
@@ -1755,7 +1756,7 @@ class CWPRETSTRUCT extends Struct {
 /// procedure, CallWndProc.
 ///
 /// {@category Struct}
-class CWPSTRUCT extends Struct {
+base class CWPSTRUCT extends Struct {
   @IntPtr()
   external int lParam;
 
@@ -1776,7 +1777,7 @@ class CWPSTRUCT extends Struct {
 /// -922337203685477.5808.
 ///
 /// {@category Struct}
-class CY extends Union {
+base class CY extends Union {
   external _CY__Anonymous_e__Struct Anonymous;
 
   @Int64()
@@ -1784,7 +1785,7 @@ class CY extends Union {
 }
 
 /// {@category Struct}
-class _CY__Anonymous_e__Struct extends Struct {
+sealed class _CY__Anonymous_e__Struct extends Struct {
   @Uint32()
   external int Lo;
 
@@ -1803,7 +1804,7 @@ extension CY_Extension on CY {
 /// Defines the control setting for a serial communications device.
 ///
 /// {@category Struct}
-class DCB extends Struct {
+base class DCB extends Struct {
   @Uint32()
   external int DCBlength;
 
@@ -1854,7 +1855,7 @@ class DCB extends Struct {
 /// DebugProc.
 ///
 /// {@category Struct}
-class DEBUGHOOKINFO extends Struct {
+base class DEBUGHOOKINFO extends Struct {
   @Uint32()
   external int idThread;
 
@@ -1878,7 +1879,7 @@ class DEBUGHOOKINFO extends Struct {
 /// decimal point, and ranges from 0 to 28.
 ///
 /// {@category Struct}
-class DECIMAL extends Struct {
+base class DECIMAL extends Struct {
   @Uint16()
   external int wReserved;
 
@@ -1891,7 +1892,7 @@ class DECIMAL extends Struct {
 }
 
 /// {@category Struct}
-class _DECIMAL__Anonymous1_e__Union extends Union {
+sealed class _DECIMAL__Anonymous1_e__Union extends Union {
   external _DECIMAL__Anonymous1_e__Union__Anonymous_e__Struct Anonymous;
 
   @Uint16()
@@ -1899,7 +1900,7 @@ class _DECIMAL__Anonymous1_e__Union extends Union {
 }
 
 /// {@category Struct}
-class _DECIMAL__Anonymous1_e__Union__Anonymous_e__Struct extends Struct {
+sealed class _DECIMAL__Anonymous1_e__Union__Anonymous_e__Struct extends Struct {
   @Uint8()
   external int scale;
 
@@ -1926,7 +1927,7 @@ extension DECIMAL_Extension on DECIMAL {
 }
 
 /// {@category Struct}
-class _DECIMAL__Anonymous2_e__Union extends Union {
+sealed class _DECIMAL__Anonymous2_e__Union extends Union {
   external _DECIMAL__Anonymous2_e__Union__Anonymous_e__Struct Anonymous;
 
   @Uint64()
@@ -1934,7 +1935,7 @@ class _DECIMAL__Anonymous2_e__Union extends Union {
 }
 
 /// {@category Struct}
-class _DECIMAL__Anonymous2_e__Union__Anonymous_e__Struct extends Struct {
+sealed class _DECIMAL__Anonymous2_e__Union__Anonymous_e__Struct extends Struct {
   @Uint32()
   external int Lo32;
 
@@ -1964,7 +1965,7 @@ extension DECIMAL_Extension_1 on DECIMAL {
 /// for the axes of a multiple master font.
 ///
 /// {@category Struct}
-class DESIGNVECTOR extends Struct {
+base class DESIGNVECTOR extends Struct {
   @Uint32()
   external int dvReserved;
 
@@ -1979,7 +1980,7 @@ class DESIGNVECTOR extends Struct {
 /// and environment of a printer or a display device.
 ///
 /// {@category Struct}
-class DEVMODE extends Struct {
+base class DEVMODE extends Struct {
   @Array(32)
   external Array<Uint16> _dmDeviceName;
 
@@ -2093,14 +2094,15 @@ class DEVMODE extends Struct {
 }
 
 /// {@category Struct}
-class _DEVMODEW__Anonymous1_e__Union extends Union {
+sealed class _DEVMODEW__Anonymous1_e__Union extends Union {
   external _DEVMODEW__Anonymous1_e__Union__Anonymous1_e__Struct Anonymous1;
 
   external _DEVMODEW__Anonymous1_e__Union__Anonymous2_e__Struct Anonymous2;
 }
 
 /// {@category Struct}
-class _DEVMODEW__Anonymous1_e__Union__Anonymous1_e__Struct extends Struct {
+sealed class _DEVMODEW__Anonymous1_e__Union__Anonymous1_e__Struct
+    extends Struct {
   @Int16()
   external int dmOrientation;
 
@@ -2158,7 +2160,8 @@ extension DEVMODEW__Anonymous1_e__Union_Extension on DEVMODE {
 }
 
 /// {@category Struct}
-class _DEVMODEW__Anonymous1_e__Union__Anonymous2_e__Struct extends Struct {
+sealed class _DEVMODEW__Anonymous1_e__Union__Anonymous2_e__Struct
+    extends Struct {
   external POINTL dmPosition;
 
   @Uint32()
@@ -2196,7 +2199,7 @@ extension DEVMODEW_Extension on DEVMODE {
 }
 
 /// {@category Struct}
-class _DEVMODEW__Anonymous2_e__Union extends Union {
+sealed class _DEVMODEW__Anonymous2_e__Union extends Union {
   @Uint32()
   external int dmDisplayFlags;
 
@@ -2220,7 +2223,7 @@ extension DEVMODEW_Extension_1 on DEVMODE {
 /// by calling the GetObject function.
 ///
 /// {@category Struct}
-class DIBSECTION extends Struct {
+base class DIBSECTION extends Struct {
   external BITMAP dsBm;
 
   external BITMAPINFOHEADER dsBmih;
@@ -2238,7 +2241,7 @@ class DIBSECTION extends Struct {
 /// Represents a disk extent.
 ///
 /// {@category Struct}
-class DISK_EXTENT extends Struct {
+base class DISK_EXTENT extends Struct {
   @Uint32()
   external int DiskNumber;
 
@@ -2252,7 +2255,7 @@ class DISK_EXTENT extends Struct {
 /// Describes the geometry of disk devices and media.
 ///
 /// {@category Struct}
-class DISK_GEOMETRY extends Struct {
+base class DISK_GEOMETRY extends Struct {
   @Int64()
   external int Cylinders;
 
@@ -2272,7 +2275,7 @@ class DISK_GEOMETRY extends Struct {
 /// Describes the extended geometry of disk devices and media.
 ///
 /// {@category Struct}
-class DISK_GEOMETRY_EX extends Struct {
+base class DISK_GEOMETRY_EX extends Struct {
   external DISK_GEOMETRY Geometry;
 
   @Int64()
@@ -2286,7 +2289,7 @@ class DISK_GEOMETRY_EX extends Struct {
 /// a two-dimensional space.
 ///
 /// {@category Struct}
-class DISPLAYCONFIG_2DREGION extends Struct {
+base class DISPLAYCONFIG_2DREGION extends Struct {
   @Uint32()
   external int cx;
 
@@ -2298,7 +2301,7 @@ class DISPLAYCONFIG_2DREGION extends Struct {
 /// about the image displayed on the desktop.
 ///
 /// {@category Struct}
-class DISPLAYCONFIG_DESKTOP_IMAGE_INFO extends Struct {
+base class DISPLAYCONFIG_DESKTOP_IMAGE_INFO extends Struct {
   external POINTL PathSourceSize;
 
   external RECTL DesktopImageRegion;
@@ -2310,7 +2313,7 @@ class DISPLAYCONFIG_DESKTOP_IMAGE_INFO extends Struct {
 /// information about the device.
 ///
 /// {@category Struct}
-class DISPLAYCONFIG_DEVICE_INFO_HEADER extends Struct {
+base class DISPLAYCONFIG_DEVICE_INFO_HEADER extends Struct {
   @Int32()
   external int type;
 
@@ -2327,7 +2330,7 @@ class DISPLAYCONFIG_DEVICE_INFO_HEADER extends Struct {
 /// target mode information.
 ///
 /// {@category Struct}
-class DISPLAYCONFIG_MODE_INFO extends Struct {
+base class DISPLAYCONFIG_MODE_INFO extends Struct {
   @Int32()
   external int infoType;
 
@@ -2340,7 +2343,7 @@ class DISPLAYCONFIG_MODE_INFO extends Struct {
 }
 
 /// {@category Struct}
-class _DISPLAYCONFIG_MODE_INFO__Anonymous_e__Union extends Union {
+sealed class _DISPLAYCONFIG_MODE_INFO__Anonymous_e__Union extends Union {
   external DISPLAYCONFIG_TARGET_MODE targetMode;
 
   external DISPLAYCONFIG_SOURCE_MODE sourceMode;
@@ -2367,7 +2370,7 @@ extension DISPLAYCONFIG_MODE_INFO_Extension on DISPLAYCONFIG_MODE_INFO {
 /// from a target to a source.
 ///
 /// {@category Struct}
-class DISPLAYCONFIG_PATH_INFO extends Struct {
+base class DISPLAYCONFIG_PATH_INFO extends Struct {
   external DISPLAYCONFIG_PATH_SOURCE_INFO sourceInfo;
 
   external DISPLAYCONFIG_PATH_TARGET_INFO targetInfo;
@@ -2380,7 +2383,7 @@ class DISPLAYCONFIG_PATH_INFO extends Struct {
 /// for a single path.
 ///
 /// {@category Struct}
-class DISPLAYCONFIG_PATH_SOURCE_INFO extends Struct {
+base class DISPLAYCONFIG_PATH_SOURCE_INFO extends Struct {
   external LUID adapterId;
 
   @Uint32()
@@ -2393,7 +2396,7 @@ class DISPLAYCONFIG_PATH_SOURCE_INFO extends Struct {
 }
 
 /// {@category Struct}
-class _DISPLAYCONFIG_PATH_SOURCE_INFO__Anonymous_e__Union extends Union {
+sealed class _DISPLAYCONFIG_PATH_SOURCE_INFO__Anonymous_e__Union extends Union {
   @Uint32()
   external int modeInfoIdx;
 
@@ -2402,7 +2405,7 @@ class _DISPLAYCONFIG_PATH_SOURCE_INFO__Anonymous_e__Union extends Union {
 }
 
 /// {@category Struct}
-class _DISPLAYCONFIG_PATH_SOURCE_INFO__Anonymous_e__Union__Anonymous_e__Struct
+sealed class _DISPLAYCONFIG_PATH_SOURCE_INFO__Anonymous_e__Union__Anonymous_e__Struct
     extends Struct {
   @Uint32()
   external int bitfield;
@@ -2431,7 +2434,7 @@ extension DISPLAYCONFIG_PATH_SOURCE_INFO_Extension
 /// for a single path.
 ///
 /// {@category Struct}
-class DISPLAYCONFIG_PATH_TARGET_INFO extends Struct {
+base class DISPLAYCONFIG_PATH_TARGET_INFO extends Struct {
   external LUID adapterId;
 
   @Uint32()
@@ -2461,7 +2464,7 @@ class DISPLAYCONFIG_PATH_TARGET_INFO extends Struct {
 }
 
 /// {@category Struct}
-class _DISPLAYCONFIG_PATH_TARGET_INFO__Anonymous_e__Union extends Union {
+sealed class _DISPLAYCONFIG_PATH_TARGET_INFO__Anonymous_e__Union extends Union {
   @Uint32()
   external int modeInfoIdx;
 
@@ -2470,7 +2473,7 @@ class _DISPLAYCONFIG_PATH_TARGET_INFO__Anonymous_e__Union extends Union {
 }
 
 /// {@category Struct}
-class _DISPLAYCONFIG_PATH_TARGET_INFO__Anonymous_e__Union__Anonymous_e__Struct
+sealed class _DISPLAYCONFIG_PATH_TARGET_INFO__Anonymous_e__Union__Anonymous_e__Struct
     extends Struct {
   @Uint32()
   external int bitfield;
@@ -2500,7 +2503,7 @@ extension DISPLAYCONFIG_PATH_TARGET_INFO_Extension
 /// vertical sync and horizontal sync).
 ///
 /// {@category Struct}
-class DISPLAYCONFIG_RATIONAL extends Struct {
+base class DISPLAYCONFIG_RATIONAL extends Struct {
   @Uint32()
   external int Numerator;
 
@@ -2512,7 +2515,7 @@ class DISPLAYCONFIG_RATIONAL extends Struct {
 /// in a two-dimensional space.
 ///
 /// {@category Struct}
-class DISPLAYCONFIG_SOURCE_MODE extends Struct {
+base class DISPLAYCONFIG_SOURCE_MODE extends Struct {
   @Uint32()
   external int width;
 
@@ -2529,7 +2532,7 @@ class DISPLAYCONFIG_SOURCE_MODE extends Struct {
 /// mode.
 ///
 /// {@category Struct}
-class DISPLAYCONFIG_TARGET_MODE extends Struct {
+base class DISPLAYCONFIG_TARGET_MODE extends Struct {
   external DISPLAYCONFIG_VIDEO_SIGNAL_INFO targetVideoSignalInfo;
 }
 
@@ -2537,7 +2540,7 @@ class DISPLAYCONFIG_TARGET_MODE extends Struct {
 /// the video signal for a display.
 ///
 /// {@category Struct}
-class DISPLAYCONFIG_VIDEO_SIGNAL_INFO extends Struct {
+base class DISPLAYCONFIG_VIDEO_SIGNAL_INFO extends Struct {
   @Uint64()
   external int pixelRate;
 
@@ -2556,7 +2559,8 @@ class DISPLAYCONFIG_VIDEO_SIGNAL_INFO extends Struct {
 }
 
 /// {@category Struct}
-class _DISPLAYCONFIG_VIDEO_SIGNAL_INFO__Anonymous_e__Union extends Union {
+sealed class _DISPLAYCONFIG_VIDEO_SIGNAL_INFO__Anonymous_e__Union
+    extends Union {
   external _DISPLAYCONFIG_VIDEO_SIGNAL_INFO__Anonymous_e__Union__AdditionalSignalInfo_e__Struct
       AdditionalSignalInfo;
 
@@ -2565,7 +2569,7 @@ class _DISPLAYCONFIG_VIDEO_SIGNAL_INFO__Anonymous_e__Union extends Union {
 }
 
 /// {@category Struct}
-class _DISPLAYCONFIG_VIDEO_SIGNAL_INFO__Anonymous_e__Union__AdditionalSignalInfo_e__Struct
+sealed class _DISPLAYCONFIG_VIDEO_SIGNAL_INFO__Anonymous_e__Union__AdditionalSignalInfo_e__Struct
     extends Struct {
   @Uint32()
   external int bitfield;
@@ -2596,7 +2600,7 @@ extension DISPLAYCONFIG_VIDEO_SIGNAL_INFO_Extension
 /// function.
 ///
 /// {@category Struct}
-class DISPLAY_DEVICE extends Struct {
+base class DISPLAY_DEVICE extends Struct {
   @Uint32()
   external int cb;
 
@@ -2683,7 +2687,7 @@ class DISPLAY_DEVICE extends Struct {
 /// Contains the arguments passed to a method or property.
 ///
 /// {@category Struct}
-class DISPPARAMS extends Struct {
+base class DISPPARAMS extends Struct {
   external Pointer<VARIANT> rgvarg;
 
   external Pointer<Int32> rgdispidNamedArgs;
@@ -2701,7 +2705,7 @@ class DISPPARAMS extends Struct {
 ///
 /// {@category Struct}
 @Packed(2)
-class DLGITEMTEMPLATE extends Struct {
+base class DLGITEMTEMPLATE extends Struct {
   @Uint32()
   external int style;
 
@@ -2731,7 +2735,7 @@ class DLGITEMTEMPLATE extends Struct {
 ///
 /// {@category Struct}
 @Packed(2)
-class DLGTEMPLATE extends Struct {
+base class DLGTEMPLATE extends Struct {
   @Uint32()
   external int style;
 
@@ -2758,7 +2762,7 @@ class DLGTEMPLATE extends Struct {
 /// DllGetVersion function.
 ///
 /// {@category Struct}
-class DLLVERSIONINFO extends Struct {
+base class DLLVERSIONINFO extends Struct {
   @Uint32()
   external int cbSize;
 
@@ -2778,7 +2782,7 @@ class DLLVERSIONINFO extends Struct {
 /// The DOC_INFO_1 structure describes a document that will be printed.
 ///
 /// {@category Struct}
-class DOC_INFO_1 extends Struct {
+base class DOC_INFO_1 extends Struct {
   external Pointer<Utf16> pDocName;
 
   external Pointer<Utf16> pOutputFile;
@@ -2791,7 +2795,7 @@ class DOC_INFO_1 extends Struct {
 /// time on the 802.11 station.
 ///
 /// {@category Struct}
-class DOT11_AUTH_CIPHER_PAIR extends Struct {
+base class DOT11_AUTH_CIPHER_PAIR extends Struct {
   @Int32()
   external int AuthAlgoId;
 
@@ -2803,7 +2807,7 @@ class DOT11_AUTH_CIPHER_PAIR extends Struct {
 /// (BSS) identifiers.
 ///
 /// {@category Struct}
-class DOT11_BSSID_LIST extends Struct {
+base class DOT11_BSSID_LIST extends Struct {
   external NDIS_OBJECT_HEADER Header;
 
   @Uint32()
@@ -2820,7 +2824,7 @@ class DOT11_BSSID_LIST extends Struct {
 /// wireless network.
 ///
 /// {@category Struct}
-class DOT11_NETWORK extends Struct {
+base class DOT11_NETWORK extends Struct {
   external DOT11_SSID dot11Ssid;
 
   @Int32()
@@ -2831,7 +2835,7 @@ class DOT11_NETWORK extends Struct {
 /// networks.
 ///
 /// {@category Struct}
-class DOT11_NETWORK_LIST extends Struct {
+base class DOT11_NETWORK_LIST extends Struct {
   @Uint32()
   external int dwNumberOfItems;
 
@@ -2845,7 +2849,7 @@ class DOT11_NETWORK_LIST extends Struct {
 /// A DOT11_SSID structure contains the SSID of an interface.
 ///
 /// {@category Struct}
-class DOT11_SSID extends Struct {
+base class DOT11_SSID extends Struct {
   @Uint32()
   external int uSSIDLength;
 
@@ -2857,7 +2861,7 @@ class DOT11_SSID extends Struct {
 /// the DrawTextEx function.
 ///
 /// {@category Struct}
-class DRAWTEXTPARAMS extends Struct {
+base class DRAWTEXTPARAMS extends Struct {
   @Uint32()
   external int cbSize;
 
@@ -2877,7 +2881,7 @@ class DRAWTEXTPARAMS extends Struct {
 /// Defines the options for the DrawThemeBackgroundEx function.
 ///
 /// {@category Struct}
-class DTBGOPTS extends Struct {
+base class DTBGOPTS extends Struct {
   @Uint32()
   external int dwSize;
 
@@ -2890,7 +2894,7 @@ class DTBGOPTS extends Struct {
 /// Defines the options for the DrawThemeTextEx function.
 ///
 /// {@category Struct}
-class DTTOPTS extends Struct {
+base class DTTOPTS extends Struct {
   @Uint32()
   external int dwSize;
 
@@ -2940,7 +2944,7 @@ class DTTOPTS extends Struct {
 ///
 /// {@category Struct}
 @Packed(1)
-class DWM_BLURBEHIND extends Struct {
+base class DWM_BLURBEHIND extends Struct {
   @Uint32()
   external int dwFlags;
 
@@ -2958,7 +2962,7 @@ class DWM_BLURBEHIND extends Struct {
 /// information about an EAP method.
 ///
 /// {@category Struct}
-class EAP_METHOD_TYPE extends Struct {
+base class EAP_METHOD_TYPE extends Struct {
   external EAP_TYPE eapType;
 
   @Uint32()
@@ -2969,7 +2973,7 @@ class EAP_METHOD_TYPE extends Struct {
 /// information for an EAP method.
 ///
 /// {@category Struct}
-class EAP_TYPE extends Struct {
+base class EAP_TYPE extends Struct {
   @Uint8()
   external int type;
 
@@ -2984,14 +2988,14 @@ class EAP_TYPE extends Struct {
 /// variable, a function, or a function parameter.
 ///
 /// {@category Struct}
-class ELEMDESC extends Struct {
+base class ELEMDESC extends Struct {
   external TYPEDESC tdesc;
 
   external _ELEMDESC__Anonymous_e__Union Anonymous;
 }
 
 /// {@category Struct}
-class _ELEMDESC__Anonymous_e__Union extends Union {
+sealed class _ELEMDESC__Anonymous_e__Union extends Union {
   external IDLDESC idldesc;
 
   external PARAMDESC paramdesc;
@@ -3009,7 +3013,7 @@ extension ELEMDESC_Extension on ELEMDESC {
 /// font.
 ///
 /// {@category Struct}
-class ENUMLOGFONTEX extends Struct {
+base class ENUMLOGFONTEX extends Struct {
   external LOGFONT elfLogFont;
 
   @Array(64)
@@ -3073,7 +3077,7 @@ class ENUMLOGFONTEX extends Struct {
 /// Contains information about a pagefile.
 ///
 /// {@category Struct}
-class ENUM_PAGE_FILE_INFORMATION extends Struct {
+base class ENUM_PAGE_FILE_INFORMATION extends Struct {
   @Uint32()
   external int cb;
 
@@ -3095,7 +3099,7 @@ class ENUM_PAGE_FILE_INFORMATION extends Struct {
 /// JournalPlaybackProc callback function.
 ///
 /// {@category Struct}
-class EVENTMSG extends Struct {
+base class EVENTMSG extends Struct {
   @Uint32()
   external int message;
 
@@ -3115,7 +3119,7 @@ class EVENTMSG extends Struct {
 /// Describes an exception that occurred during IDispatch::Invoke.
 ///
 /// {@category Struct}
-class EXCEPINFO extends Struct {
+base class EXCEPINFO extends Struct {
   @Uint16()
   external int wCode;
 
@@ -3145,7 +3149,7 @@ class EXCEPINFO extends Struct {
 /// using the readfds parameter of the select function.
 ///
 /// {@category Struct}
-class FD_SET extends Struct {
+base class FD_SET extends Struct {
   @Uint32()
   external int fd_count;
 
@@ -3157,7 +3161,7 @@ class FD_SET extends Struct {
 /// intervals since January 1, 1601 (UTC).
 ///
 /// {@category Struct}
-class FILETIME extends Struct {
+base class FILETIME extends Struct {
   @Uint32()
   external int dwLowDateTime;
 
@@ -3168,7 +3172,7 @@ class FILETIME extends Struct {
 /// Union that contains a 64-bit value that points to a page of data.
 ///
 /// {@category Struct}
-class FILE_SEGMENT_ELEMENT extends Union {
+base class FILE_SEGMENT_ELEMENT extends Union {
   external Pointer Buffer;
 
   @Uint64()
@@ -3181,7 +3185,7 @@ class FILE_SEGMENT_ELEMENT extends Union {
 /// replacement input to the owner window of a Find or Replace dialog box.
 ///
 /// {@category Struct}
-class FINDREPLACE extends Struct {
+base class FINDREPLACE extends Struct {
   @Uint32()
   external int lStructSize;
 
@@ -3216,7 +3220,7 @@ class FINDREPLACE extends Struct {
 /// events are used internally and should be ignored.
 ///
 /// {@category Struct}
-class FOCUS_EVENT_RECORD extends Struct {
+base class FOCUS_EVENT_RECORD extends Struct {
   @Int32()
   external int bSetFocus;
 }
@@ -3224,7 +3228,7 @@ class FOCUS_EVENT_RECORD extends Struct {
 /// Describes a function.
 ///
 /// {@category Struct}
-class FUNCDESC extends Struct {
+base class FUNCDESC extends Struct {
   @Int32()
   external int memid;
 
@@ -3263,7 +3267,7 @@ class FUNCDESC extends Struct {
 /// type of this configuration.
 ///
 /// {@category Struct}
-class GESTURECONFIG extends Struct {
+base class GESTURECONFIG extends Struct {
   @Uint32()
   external int dwID;
 
@@ -3277,7 +3281,7 @@ class GESTURECONFIG extends Struct {
 /// Stores information about a gesture.
 ///
 /// {@category Struct}
-class GESTUREINFO extends Struct {
+base class GESTUREINFO extends Struct {
   @Uint32()
   external int cbSize;
 
@@ -3309,7 +3313,7 @@ class GESTUREINFO extends Struct {
 /// about a gesture.
 ///
 /// {@category Struct}
-class GESTURENOTIFYSTRUCT extends Struct {
+base class GESTURENOTIFYSTRUCT extends Struct {
   @Uint32()
   external int cbSize;
 
@@ -3328,7 +3332,7 @@ class GESTURENOTIFYSTRUCT extends Struct {
 /// Contains information about a GUI thread.
 ///
 /// {@category Struct}
-class GUITHREADINFO extends Struct {
+base class GUITHREADINFO extends Struct {
   @Uint32()
   external int cbSize;
 
@@ -3360,7 +3364,7 @@ class GUITHREADINFO extends Struct {
 /// device other than a keyboard or mouse.
 ///
 /// {@category Struct}
-class HARDWAREINPUT extends Struct {
+base class HARDWAREINPUT extends Struct {
   @Uint32()
   external int uMsg;
 
@@ -3380,7 +3384,7 @@ class HARDWAREINPUT extends Struct {
 /// calls.
 ///
 /// {@category Struct}
-class HOSTENT extends Struct {
+base class HOSTENT extends Struct {
   external Pointer<Utf8> h_name;
 
   external Pointer<Pointer<Int8>> h_aliases;
@@ -3397,7 +3401,7 @@ class HOSTENT extends Struct {
 /// Contains information about an icon or a cursor.
 ///
 /// {@category Struct}
-class ICONINFO extends Struct {
+base class ICONINFO extends Struct {
   @Int32()
   external int fIcon;
 
@@ -3418,7 +3422,7 @@ class ICONINFO extends Struct {
 /// by GetIconInfoEx.
 ///
 /// {@category Struct}
-class ICONINFOEX extends Struct {
+base class ICONINFOEX extends Struct {
   @Uint32()
   external int cbSize;
 
@@ -3482,7 +3486,7 @@ class ICONINFOEX extends Struct {
 /// Contains the IDL attributes of a type.
 ///
 /// {@category Struct}
-class IDLDESC extends Struct {
+base class IDLDESC extends Struct {
   @IntPtr()
   external int dwReserved;
 
@@ -3495,7 +3499,7 @@ class IDLDESC extends Struct {
 /// InitCommonControlsEx function.
 ///
 /// {@category Struct}
-class INITCOMMONCONTROLSEX extends Struct {
+base class INITCOMMONCONTROLSEX extends Struct {
   @Uint32()
   external int dwSize;
 
@@ -3507,7 +3511,7 @@ class INITCOMMONCONTROLSEX extends Struct {
 /// such as keystrokes, mouse movement, and mouse clicks.
 ///
 /// {@category Struct}
-class INPUT extends Struct {
+base class INPUT extends Struct {
   @Uint32()
   external int type;
 
@@ -3515,7 +3519,7 @@ class INPUT extends Struct {
 }
 
 /// {@category Struct}
-class _INPUT__Anonymous_e__Union extends Union {
+sealed class _INPUT__Anonymous_e__Union extends Union {
   external MOUSEINPUT mi;
 
   external KEYBDINPUT ki;
@@ -3540,7 +3544,7 @@ extension INPUT_Extension on INPUT {
 /// WriteConsoleInput function.
 ///
 /// {@category Struct}
-class INPUT_RECORD extends Struct {
+base class INPUT_RECORD extends Struct {
   @Uint16()
   external int EventType;
 
@@ -3548,7 +3552,7 @@ class INPUT_RECORD extends Struct {
 }
 
 /// {@category Struct}
-class _INPUT_RECORD__Event_e__Union extends Union {
+sealed class _INPUT_RECORD__Event_e__Union extends Union {
   external KEY_EVENT_RECORD KeyEvent;
 
   external MOUSE_EVENT_RECORD MouseEvent;
@@ -3586,12 +3590,12 @@ extension INPUT_RECORD_Extension on INPUT_RECORD {
 /// coordinates.
 ///
 /// {@category Struct}
-class INPUT_TRANSFORM extends Struct {
+base class INPUT_TRANSFORM extends Struct {
   external _INPUT_TRANSFORM__Anonymous_e__Union Anonymous;
 }
 
 /// {@category Struct}
-class _INPUT_TRANSFORM__Anonymous_e__Union extends Union {
+sealed class _INPUT_TRANSFORM__Anonymous_e__Union extends Union {
   external _INPUT_TRANSFORM__Anonymous_e__Union__Anonymous_e__Struct Anonymous;
 
   @Array(16)
@@ -3599,7 +3603,8 @@ class _INPUT_TRANSFORM__Anonymous_e__Union extends Union {
 }
 
 /// {@category Struct}
-class _INPUT_TRANSFORM__Anonymous_e__Union__Anonymous_e__Struct extends Struct {
+sealed class _INPUT_TRANSFORM__Anonymous_e__Union__Anonymous_e__Struct
+    extends Struct {
   @Float()
   external double x11;
 
@@ -3713,12 +3718,12 @@ extension INPUT_TRANSFORM_Extension on INPUT_TRANSFORM {
 /// The IN_ADDR structure represents an IPv4 Internet address.
 ///
 /// {@category Struct}
-class IN_ADDR extends Struct {
+base class IN_ADDR extends Struct {
   external _IN_ADDR__S_un_e__Union S_un;
 }
 
 /// {@category Struct}
-class _IN_ADDR__S_un_e__Union extends Union {
+sealed class _IN_ADDR__S_un_e__Union extends Union {
   external _IN_ADDR__S_un_e__Union__S_un_b_e__Struct S_un_b;
 
   external _IN_ADDR__S_un_e__Union__S_un_w_e__Struct S_un_w;
@@ -3728,7 +3733,7 @@ class _IN_ADDR__S_un_e__Union extends Union {
 }
 
 /// {@category Struct}
-class _IN_ADDR__S_un_e__Union__S_un_b_e__Struct extends Struct {
+sealed class _IN_ADDR__S_un_e__Union__S_un_b_e__Struct extends Struct {
   @Uint8()
   external int s_b1;
 
@@ -3757,7 +3762,7 @@ extension IN_ADDR__S_un_e__Union_Extension on IN_ADDR {
 }
 
 /// {@category Struct}
-class _IN_ADDR__S_un_e__Union__S_un_w_e__Struct extends Struct {
+sealed class _IN_ADDR__S_un_e__Union__S_un_w_e__Struct extends Struct {
   @Uint16()
   external int s_w1;
 
@@ -3791,7 +3796,7 @@ extension IN_ADDR_Extension on IN_ADDR {
 /// be used as part of a linked list of IP_ADAPTER_ADDRESSES structures.
 ///
 /// {@category Struct}
-class IP_ADAPTER_ADDRESSES_LH extends Struct {
+base class IP_ADAPTER_ADDRESSES_LH extends Struct {
   external _IP_ADAPTER_ADDRESSES_LH__Anonymous1_e__Union Anonymous1;
 
   external Pointer<IP_ADAPTER_ADDRESSES_LH> Next;
@@ -3883,7 +3888,7 @@ class IP_ADAPTER_ADDRESSES_LH extends Struct {
 }
 
 /// {@category Struct}
-class _IP_ADAPTER_ADDRESSES_LH__Anonymous1_e__Union extends Union {
+sealed class _IP_ADAPTER_ADDRESSES_LH__Anonymous1_e__Union extends Union {
   @Uint64()
   external int Alignment;
 
@@ -3892,7 +3897,7 @@ class _IP_ADAPTER_ADDRESSES_LH__Anonymous1_e__Union extends Union {
 }
 
 /// {@category Struct}
-class _IP_ADAPTER_ADDRESSES_LH__Anonymous1_e__Union__Anonymous_e__Struct
+sealed class _IP_ADAPTER_ADDRESSES_LH__Anonymous1_e__Union__Anonymous_e__Struct
     extends Struct {
   @Uint32()
   external int Length;
@@ -3923,7 +3928,7 @@ extension IP_ADAPTER_ADDRESSES_LH_Extension on IP_ADAPTER_ADDRESSES_LH {
 }
 
 /// {@category Struct}
-class _IP_ADAPTER_ADDRESSES_LH__Anonymous2_e__Union extends Union {
+sealed class _IP_ADAPTER_ADDRESSES_LH__Anonymous2_e__Union extends Union {
   @Uint32()
   external int Flags;
 
@@ -3932,7 +3937,7 @@ class _IP_ADAPTER_ADDRESSES_LH__Anonymous2_e__Union extends Union {
 }
 
 /// {@category Struct}
-class _IP_ADAPTER_ADDRESSES_LH__Anonymous2_e__Union__Anonymous_e__Struct
+sealed class _IP_ADAPTER_ADDRESSES_LH__Anonymous2_e__Union__Anonymous_e__Struct
     extends Struct {
   @Uint32()
   external int bitfield;
@@ -3960,7 +3965,7 @@ extension IP_ADAPTER_ADDRESSES_LH_Extension_1 on IP_ADAPTER_ADDRESSES_LH {
 /// address in a linked list of addresses for a particular adapter.
 ///
 /// {@category Struct}
-class IP_ADAPTER_ANYCAST_ADDRESS_XP extends Struct {
+base class IP_ADAPTER_ANYCAST_ADDRESS_XP extends Struct {
   external _IP_ADAPTER_ANYCAST_ADDRESS_XP__Anonymous_e__Union Anonymous;
 
   external Pointer<IP_ADAPTER_ANYCAST_ADDRESS_XP> Next;
@@ -3969,7 +3974,7 @@ class IP_ADAPTER_ANYCAST_ADDRESS_XP extends Struct {
 }
 
 /// {@category Struct}
-class _IP_ADAPTER_ANYCAST_ADDRESS_XP__Anonymous_e__Union extends Union {
+sealed class _IP_ADAPTER_ANYCAST_ADDRESS_XP__Anonymous_e__Union extends Union {
   @Uint64()
   external int Alignment;
 
@@ -3978,7 +3983,7 @@ class _IP_ADAPTER_ANYCAST_ADDRESS_XP__Anonymous_e__Union extends Union {
 }
 
 /// {@category Struct}
-class _IP_ADAPTER_ANYCAST_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
+sealed class _IP_ADAPTER_ANYCAST_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
     extends Struct {
   @Uint32()
   external int Length;
@@ -4014,7 +4019,7 @@ extension IP_ADAPTER_ANYCAST_ADDRESS_XP_Extension
 /// adapter.
 ///
 /// {@category Struct}
-class IP_ADAPTER_DNS_SERVER_ADDRESS_XP extends Struct {
+base class IP_ADAPTER_DNS_SERVER_ADDRESS_XP extends Struct {
   external _IP_ADAPTER_DNS_SERVER_ADDRESS_XP__Anonymous_e__Union Anonymous;
 
   external Pointer<IP_ADAPTER_DNS_SERVER_ADDRESS_XP> Next;
@@ -4023,7 +4028,8 @@ class IP_ADAPTER_DNS_SERVER_ADDRESS_XP extends Struct {
 }
 
 /// {@category Struct}
-class _IP_ADAPTER_DNS_SERVER_ADDRESS_XP__Anonymous_e__Union extends Union {
+sealed class _IP_ADAPTER_DNS_SERVER_ADDRESS_XP__Anonymous_e__Union
+    extends Union {
   @Uint64()
   external int Alignment;
 
@@ -4032,7 +4038,7 @@ class _IP_ADAPTER_DNS_SERVER_ADDRESS_XP__Anonymous_e__Union extends Union {
 }
 
 /// {@category Struct}
-class _IP_ADAPTER_DNS_SERVER_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
+sealed class _IP_ADAPTER_DNS_SERVER_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
     extends Struct {
   @Uint32()
   external int Length;
@@ -4067,7 +4073,7 @@ extension IP_ADAPTER_DNS_SERVER_ADDRESS_XP_Extension
 /// of DNS suffixes for a particular adapter.
 ///
 /// {@category Struct}
-class IP_ADAPTER_DNS_SUFFIX extends Struct {
+base class IP_ADAPTER_DNS_SUFFIX extends Struct {
   external Pointer<IP_ADAPTER_DNS_SUFFIX> Next;
 
   @Array(256)
@@ -4094,7 +4100,7 @@ class IP_ADAPTER_DNS_SUFFIX extends Struct {
 /// in a linked list of gateway addresses for a particular adapter.
 ///
 /// {@category Struct}
-class IP_ADAPTER_GATEWAY_ADDRESS_LH extends Struct {
+base class IP_ADAPTER_GATEWAY_ADDRESS_LH extends Struct {
   external _IP_ADAPTER_GATEWAY_ADDRESS_LH__Anonymous_e__Union Anonymous;
 
   external Pointer<IP_ADAPTER_GATEWAY_ADDRESS_LH> Next;
@@ -4103,7 +4109,7 @@ class IP_ADAPTER_GATEWAY_ADDRESS_LH extends Struct {
 }
 
 /// {@category Struct}
-class _IP_ADAPTER_GATEWAY_ADDRESS_LH__Anonymous_e__Union extends Union {
+sealed class _IP_ADAPTER_GATEWAY_ADDRESS_LH__Anonymous_e__Union extends Union {
   @Uint64()
   external int Alignment;
 
@@ -4112,7 +4118,7 @@ class _IP_ADAPTER_GATEWAY_ADDRESS_LH__Anonymous_e__Union extends Union {
 }
 
 /// {@category Struct}
-class _IP_ADAPTER_GATEWAY_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
+sealed class _IP_ADAPTER_GATEWAY_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
     extends Struct {
   @Uint32()
   external int Length;
@@ -4148,7 +4154,7 @@ extension IP_ADAPTER_GATEWAY_ADDRESS_LH_Extension
 /// network adapter.
 ///
 /// {@category Struct}
-class IP_ADAPTER_INDEX_MAP extends Struct {
+base class IP_ADAPTER_INDEX_MAP extends Struct {
   @Uint32()
   external int Index;
 
@@ -4176,7 +4182,7 @@ class IP_ADAPTER_INDEX_MAP extends Struct {
 /// address in a linked-list of addresses for a particular adapter.
 ///
 /// {@category Struct}
-class IP_ADAPTER_MULTICAST_ADDRESS_XP extends Struct {
+base class IP_ADAPTER_MULTICAST_ADDRESS_XP extends Struct {
   external _IP_ADAPTER_MULTICAST_ADDRESS_XP__Anonymous_e__Union Anonymous;
 
   external Pointer<IP_ADAPTER_MULTICAST_ADDRESS_XP> Next;
@@ -4185,7 +4191,8 @@ class IP_ADAPTER_MULTICAST_ADDRESS_XP extends Struct {
 }
 
 /// {@category Struct}
-class _IP_ADAPTER_MULTICAST_ADDRESS_XP__Anonymous_e__Union extends Union {
+sealed class _IP_ADAPTER_MULTICAST_ADDRESS_XP__Anonymous_e__Union
+    extends Union {
   @Uint64()
   external int Alignment;
 
@@ -4194,7 +4201,7 @@ class _IP_ADAPTER_MULTICAST_ADDRESS_XP__Anonymous_e__Union extends Union {
 }
 
 /// {@category Struct}
-class _IP_ADAPTER_MULTICAST_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
+sealed class _IP_ADAPTER_MULTICAST_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
     extends Struct {
   @Uint32()
   external int Length;
@@ -4228,7 +4235,7 @@ extension IP_ADAPTER_MULTICAST_ADDRESS_XP_Extension
 /// The IP_ADAPTER_PREFIX structure stores an IP address prefix.
 ///
 /// {@category Struct}
-class IP_ADAPTER_PREFIX_XP extends Struct {
+base class IP_ADAPTER_PREFIX_XP extends Struct {
   external _IP_ADAPTER_PREFIX_XP__Anonymous_e__Union Anonymous;
 
   external Pointer<IP_ADAPTER_PREFIX_XP> Next;
@@ -4240,7 +4247,7 @@ class IP_ADAPTER_PREFIX_XP extends Struct {
 }
 
 /// {@category Struct}
-class _IP_ADAPTER_PREFIX_XP__Anonymous_e__Union extends Union {
+sealed class _IP_ADAPTER_PREFIX_XP__Anonymous_e__Union extends Union {
   @Uint64()
   external int Alignment;
 
@@ -4249,7 +4256,7 @@ class _IP_ADAPTER_PREFIX_XP__Anonymous_e__Union extends Union {
 }
 
 /// {@category Struct}
-class _IP_ADAPTER_PREFIX_XP__Anonymous_e__Union__Anonymous_e__Struct
+sealed class _IP_ADAPTER_PREFIX_XP__Anonymous_e__Union__Anonymous_e__Struct
     extends Struct {
   @Uint32()
   external int Length;
@@ -4283,7 +4290,7 @@ extension IP_ADAPTER_PREFIX_XP_Extension on IP_ADAPTER_PREFIX_XP {
 /// address in a linked list of IP addresses for a particular adapter.
 ///
 /// {@category Struct}
-class IP_ADAPTER_UNICAST_ADDRESS_LH extends Struct {
+base class IP_ADAPTER_UNICAST_ADDRESS_LH extends Struct {
   external _IP_ADAPTER_UNICAST_ADDRESS_LH__Anonymous_e__Union Anonymous;
 
   external Pointer<IP_ADAPTER_UNICAST_ADDRESS_LH> Next;
@@ -4313,7 +4320,7 @@ class IP_ADAPTER_UNICAST_ADDRESS_LH extends Struct {
 }
 
 /// {@category Struct}
-class _IP_ADAPTER_UNICAST_ADDRESS_LH__Anonymous_e__Union extends Union {
+sealed class _IP_ADAPTER_UNICAST_ADDRESS_LH__Anonymous_e__Union extends Union {
   @Uint64()
   external int Alignment;
 
@@ -4322,7 +4329,7 @@ class _IP_ADAPTER_UNICAST_ADDRESS_LH__Anonymous_e__Union extends Union {
 }
 
 /// {@category Struct}
-class _IP_ADAPTER_UNICAST_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
+sealed class _IP_ADAPTER_UNICAST_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
     extends Struct {
   @Uint32()
   external int Length;
@@ -4358,7 +4365,7 @@ extension IP_ADAPTER_UNICAST_ADDRESS_LH_Extension
 /// server addresses for a particular adapter.
 ///
 /// {@category Struct}
-class IP_ADAPTER_WINS_SERVER_ADDRESS_LH extends Struct {
+base class IP_ADAPTER_WINS_SERVER_ADDRESS_LH extends Struct {
   external _IP_ADAPTER_WINS_SERVER_ADDRESS_LH__Anonymous_e__Union Anonymous;
 
   external Pointer<IP_ADAPTER_WINS_SERVER_ADDRESS_LH> Next;
@@ -4367,7 +4374,8 @@ class IP_ADAPTER_WINS_SERVER_ADDRESS_LH extends Struct {
 }
 
 /// {@category Struct}
-class _IP_ADAPTER_WINS_SERVER_ADDRESS_LH__Anonymous_e__Union extends Union {
+sealed class _IP_ADAPTER_WINS_SERVER_ADDRESS_LH__Anonymous_e__Union
+    extends Union {
   @Uint64()
   external int Alignment;
 
@@ -4376,7 +4384,7 @@ class _IP_ADAPTER_WINS_SERVER_ADDRESS_LH__Anonymous_e__Union extends Union {
 }
 
 /// {@category Struct}
-class _IP_ADAPTER_WINS_SERVER_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
+sealed class _IP_ADAPTER_WINS_SERVER_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
     extends Struct {
   @Uint32()
   external int Length;
@@ -4412,7 +4420,7 @@ extension IP_ADAPTER_WINS_SERVER_ADDRESS_LH_Extension
 /// definition for the IP_MASK_STRING structure.
 ///
 /// {@category Struct}
-class IP_ADDRESS_STRING extends Struct {
+base class IP_ADDRESS_STRING extends Struct {
   @Array(16)
   external Array<Uint8> String_;
 }
@@ -4421,7 +4429,7 @@ class IP_ADDRESS_STRING extends Struct {
 /// addresses.
 ///
 /// {@category Struct}
-class IP_ADDR_STRING extends Struct {
+base class IP_ADDR_STRING extends Struct {
   external Pointer<IP_ADDR_STRING> Next;
 
   external IP_ADDRESS_STRING IpAddress;
@@ -4436,7 +4444,7 @@ class IP_ADDR_STRING extends Struct {
 /// adapters with IPv4 enabled on the local system.
 ///
 /// {@category Struct}
-class IP_INTERFACE_INFO extends Struct {
+base class IP_INTERFACE_INFO extends Struct {
   @Int32()
   external int NumAdapters;
 
@@ -4448,7 +4456,7 @@ class IP_INTERFACE_INFO extends Struct {
 /// particular adapter.
 ///
 /// {@category Struct}
-class IP_PER_ADAPTER_INFO_W2KSP1 extends Struct {
+base class IP_PER_ADAPTER_INFO_W2KSP1 extends Struct {
   @Uint32()
   external int AutoconfigEnabled;
 
@@ -4464,14 +4472,14 @@ class IP_PER_ADAPTER_INFO_W2KSP1 extends Struct {
 ///
 /// {@category Struct}
 @Packed(1)
-class ITEMIDLIST extends Struct {
+base class ITEMIDLIST extends Struct {
   external SHITEMID mkid;
 }
 
 /// Contains information used to control the I/O rate for a job.
 ///
 /// {@category Struct}
-class JOBOBJECT_IO_RATE_CONTROL_INFORMATION extends Struct {
+base class JOBOBJECT_IO_RATE_CONTROL_INFORMATION extends Struct {
   @Int64()
   external int MaxIops;
 
@@ -4496,7 +4504,7 @@ class JOBOBJECT_IO_RATE_CONTROL_INFORMATION extends Struct {
 /// the user that owns the print job, and so on.
 ///
 /// {@category Struct}
-class JOB_INFO_1 extends Struct {
+base class JOB_INFO_1 extends Struct {
   @Uint32()
   external int JobId;
 
@@ -4533,7 +4541,7 @@ class JOB_INFO_1 extends Struct {
 /// Contains information about a low-level keyboard input event.
 ///
 /// {@category Struct}
-class KBDLLHOOKSTRUCT extends Struct {
+base class KBDLLHOOKSTRUCT extends Struct {
   @Uint32()
   external int vkCode;
 
@@ -4553,7 +4561,7 @@ class KBDLLHOOKSTRUCT extends Struct {
 /// Contains information about a simulated keyboard event.
 ///
 /// {@category Struct}
-class KEYBDINPUT extends Struct {
+base class KEYBDINPUT extends Struct {
   @Uint16()
   external int wVk;
 
@@ -4573,7 +4581,7 @@ class KEYBDINPUT extends Struct {
 /// Describes a keyboard input event in a console INPUT_RECORD structure.
 ///
 /// {@category Struct}
-class KEY_EVENT_RECORD extends Struct {
+base class KEY_EVENT_RECORD extends Struct {
   @Int32()
   external int bKeyDown;
 
@@ -4593,7 +4601,7 @@ class KEY_EVENT_RECORD extends Struct {
 }
 
 /// {@category Struct}
-class _KEY_EVENT_RECORD__uChar_e__Union extends Union {
+sealed class _KEY_EVENT_RECORD__uChar_e__Union extends Union {
   @Uint16()
   external int UnicodeChar;
 
@@ -4612,7 +4620,7 @@ extension KEY_EVENT_RECORD_Extension on KEY_EVENT_RECORD {
 /// Defines the specifics of a known folder.
 ///
 /// {@category Struct}
-class KNOWNFOLDER_DEFINITION extends Struct {
+base class KNOWNFOLDER_DEFINITION extends Struct {
   @Int32()
   external int category;
 
@@ -4648,7 +4656,7 @@ class KNOWNFOLDER_DEFINITION extends Struct {
 /// for the notification.
 ///
 /// {@category Struct}
-class L2_NOTIFICATION_DATA extends Struct {
+base class L2_NOTIFICATION_DATA extends Struct {
   @Uint32()
   external int NotificationSource;
 
@@ -4666,7 +4674,7 @@ class L2_NOTIFICATION_DATA extends Struct {
 /// Contains the time of the last input.
 ///
 /// {@category Struct}
-class LASTINPUTINFO extends Struct {
+base class LASTINPUTINFO extends Struct {
   @Uint32()
   external int cbSize;
 
@@ -4679,7 +4687,7 @@ class LASTINPUTINFO extends Struct {
 /// functions.
 ///
 /// {@category Struct}
-class LOGBRUSH extends Struct {
+base class LOGBRUSH extends Struct {
   @Uint32()
   external int lbStyle;
 
@@ -4693,7 +4701,7 @@ class LOGBRUSH extends Struct {
 /// The LOGFONT structure defines the attributes of a font.
 ///
 /// {@category Struct}
-class LOGFONT extends Struct {
+base class LOGFONT extends Struct {
   @Int32()
   external int lfHeight;
 
@@ -4756,7 +4764,7 @@ class LOGFONT extends Struct {
 /// The LOGPALETTE structure defines a logical palette.
 ///
 /// {@category Struct}
-class LOGPALETTE extends Struct {
+base class LOGPALETTE extends Struct {
   @Uint16()
   external int palVersion;
 
@@ -4773,7 +4781,7 @@ class LOGPALETTE extends Struct {
 /// restarted.
 ///
 /// {@category Struct}
-class LUID extends Struct {
+base class LUID extends Struct {
   @Uint32()
   external int LowPart;
 
@@ -4785,7 +4793,7 @@ class LUID extends Struct {
 /// apply a color effect to magnified screen content.
 ///
 /// {@category Struct}
-class MAGCOLOREFFECT extends Struct {
+base class MAGCOLOREFFECT extends Struct {
   @Array(25)
   external Array<Float> transform;
 }
@@ -4793,7 +4801,7 @@ class MAGCOLOREFFECT extends Struct {
 /// Describes an image format.
 ///
 /// {@category Struct}
-class MAGIMAGEHEADER extends Struct {
+base class MAGIMAGEHEADER extends Struct {
   @Uint32()
   external int width;
 
@@ -4816,7 +4824,7 @@ class MAGIMAGEHEADER extends Struct {
 /// magnify screen content.
 ///
 /// {@category Struct}
-class MAGTRANSFORM extends Struct {
+base class MAGTRANSFORM extends Struct {
   @Array(9)
   external Array<Float> v;
 }
@@ -4825,7 +4833,7 @@ class MAGTRANSFORM extends Struct {
 /// windows that have visual styles applied.
 ///
 /// {@category Struct}
-class MARGINS extends Struct {
+base class MARGINS extends Struct {
   @Int32()
   external int cxLeftWidth;
 
@@ -4844,7 +4852,7 @@ class MARGINS extends Struct {
 ///
 /// {@category Struct}
 @Packed(1)
-class MCI_OPEN_PARMS extends Struct {
+base class MCI_OPEN_PARMS extends Struct {
   @IntPtr()
   external int dwCallback;
 
@@ -4863,7 +4871,7 @@ class MCI_OPEN_PARMS extends Struct {
 ///
 /// {@category Struct}
 @Packed(1)
-class MCI_PLAY_PARMS extends Struct {
+base class MCI_PLAY_PARMS extends Struct {
   @IntPtr()
   external int dwCallback;
 
@@ -4879,7 +4887,7 @@ class MCI_PLAY_PARMS extends Struct {
 ///
 /// {@category Struct}
 @Packed(1)
-class MCI_SEEK_PARMS extends Struct {
+base class MCI_SEEK_PARMS extends Struct {
   @IntPtr()
   external int dwCallback;
 
@@ -4892,7 +4900,7 @@ class MCI_SEEK_PARMS extends Struct {
 ///
 /// {@category Struct}
 @Packed(1)
-class MCI_STATUS_PARMS extends Struct {
+base class MCI_STATUS_PARMS extends Struct {
   @IntPtr()
   external int dwCallback;
 
@@ -4911,7 +4919,7 @@ class MCI_STATUS_PARMS extends Struct {
 /// function stores information in this structure.
 ///
 /// {@category Struct}
-class MEMORYSTATUSEX extends Struct {
+base class MEMORYSTATUSEX extends Struct {
   @Uint32()
   external int dwLength;
 
@@ -4945,7 +4953,7 @@ class MEMORYSTATUSEX extends Struct {
 /// structure.
 ///
 /// {@category Struct}
-class MEMORY_BASIC_INFORMATION extends Struct {
+base class MEMORY_BASIC_INFORMATION extends Struct {
   external Pointer BaseAddress;
 
   external Pointer AllocationBase;
@@ -4972,7 +4980,7 @@ class MEMORY_BASIC_INFORMATION extends Struct {
 /// Contains information about a menu.
 ///
 /// {@category Struct}
-class MENUINFO extends Struct {
+base class MENUINFO extends Struct {
   @Uint32()
   external int cbSize;
 
@@ -4998,7 +5006,7 @@ class MENUINFO extends Struct {
 /// Contains information about a menu item.
 ///
 /// {@category Struct}
-class MENUITEMINFO extends Struct {
+base class MENUITEMINFO extends Struct {
   @Uint32()
   external int cbSize;
 
@@ -5038,7 +5046,7 @@ class MENUITEMINFO extends Struct {
 /// Defines a menu item in a menu template.
 ///
 /// {@category Struct}
-class MENUITEMTEMPLATE extends Struct {
+base class MENUITEMTEMPLATE extends Struct {
   @Uint16()
   external int mtOption;
 
@@ -5069,7 +5077,7 @@ class MENUITEMTEMPLATE extends Struct {
 /// consists of a header and one or more menu item lists.
 ///
 /// {@category Struct}
-class MENUITEMTEMPLATEHEADER extends Struct {
+base class MENUITEMTEMPLATEHEADER extends Struct {
   @Uint16()
   external int versionNumber;
 
@@ -5081,7 +5089,7 @@ class MENUITEMTEMPLATEHEADER extends Struct {
 /// are used internally and should be ignored.
 ///
 /// {@category Struct}
-class MENU_EVENT_RECORD extends Struct {
+base class MENU_EVENT_RECORD extends Struct {
   @Uint32()
   external int dwCommandId;
 }
@@ -5090,7 +5098,7 @@ class MENU_EVENT_RECORD extends Struct {
 /// through the clipboard.
 ///
 /// {@category Struct}
-class METAFILEPICT extends Struct {
+base class METAFILEPICT extends Struct {
   @Int32()
   external int mm;
 
@@ -5108,7 +5116,7 @@ class METAFILEPICT extends Struct {
 ///
 /// {@category Struct}
 @Packed(1)
-class MIDIEVENT extends Struct {
+base class MIDIEVENT extends Struct {
   @Uint32()
   external int dwDeltaTime;
 
@@ -5127,7 +5135,7 @@ class MIDIEVENT extends Struct {
 ///
 /// {@category Struct}
 @Packed(1)
-class MIDIHDR extends Struct {
+base class MIDIHDR extends Struct {
   external Pointer<Utf8> lpData;
 
   @Uint32()
@@ -5159,7 +5167,7 @@ class MIDIHDR extends Struct {
 ///
 /// {@category Struct}
 @Packed(1)
-class MIDIINCAPS extends Struct {
+base class MIDIINCAPS extends Struct {
   @Uint16()
   external int wMid;
 
@@ -5197,7 +5205,7 @@ class MIDIINCAPS extends Struct {
 ///
 /// {@category Struct}
 @Packed(1)
-class MIDIOUTCAPS extends Struct {
+base class MIDIOUTCAPS extends Struct {
   @Uint16()
   external int wMid;
 
@@ -5246,7 +5254,7 @@ class MIDIOUTCAPS extends Struct {
 ///
 /// {@category Struct}
 @Packed(1)
-class MIDIPROPTEMPO extends Struct {
+base class MIDIPROPTEMPO extends Struct {
   @Uint32()
   external int cbStruct;
 
@@ -5259,7 +5267,7 @@ class MIDIPROPTEMPO extends Struct {
 ///
 /// {@category Struct}
 @Packed(1)
-class MIDIPROPTIMEDIV extends Struct {
+base class MIDIPROPTIMEDIV extends Struct {
   @Uint32()
   external int cbStruct;
 
@@ -5272,7 +5280,7 @@ class MIDIPROPTIMEDIV extends Struct {
 ///
 /// {@category Struct}
 @Packed(1)
-class MIDISTRMBUFFVER extends Struct {
+base class MIDISTRMBUFFVER extends Struct {
   @Uint32()
   external int dwVersion;
 
@@ -5287,7 +5295,7 @@ class MIDISTRMBUFFVER extends Struct {
 /// its minimum and maximum tracking size.
 ///
 /// {@category Struct}
-class MINMAXINFO extends Struct {
+base class MINMAXINFO extends Struct {
   external POINT ptReserved;
 
   external POINT ptMaxSize;
@@ -5303,7 +5311,7 @@ class MINMAXINFO extends Struct {
 /// multimedia data.
 ///
 /// {@category Struct}
-class MMTIME extends Struct {
+base class MMTIME extends Struct {
   @Uint32()
   external int wType;
 
@@ -5311,7 +5319,7 @@ class MMTIME extends Struct {
 }
 
 /// {@category Struct}
-class _MMTIME__u_e__Union extends Union {
+sealed class _MMTIME__u_e__Union extends Union {
   @Uint32()
   external int ms;
 
@@ -5330,7 +5338,7 @@ class _MMTIME__u_e__Union extends Union {
 }
 
 /// {@category Struct}
-class _MMTIME__u_e__Union__smpte_e__Struct extends Struct {
+sealed class _MMTIME__u_e__Union__smpte_e__Struct extends Struct {
   @Uint8()
   external int hour;
 
@@ -5378,7 +5386,7 @@ extension MMTIME__u_e__Union_Extension on MMTIME {
 
 /// {@category Struct}
 @Packed(1)
-class _MMTIME__u_e__Union__midi_e__Struct extends Struct {
+sealed class _MMTIME__u_e__Union__midi_e__Struct extends Struct {
   @Uint32()
   external int songptrpos;
 }
@@ -5411,7 +5419,7 @@ extension MMTIME_Extension on MMTIME {
 /// Contains information about the capabilities of a modem.
 ///
 /// {@category Struct}
-class MODEMDEVCAPS extends Struct {
+base class MODEMDEVCAPS extends Struct {
   @Uint32()
   external int dwActualSize;
 
@@ -5476,7 +5484,7 @@ class MODEMDEVCAPS extends Struct {
 /// Contains information about a modem's configuration.
 ///
 /// {@category Struct}
-class MODEMSETTINGS extends Struct {
+base class MODEMSETTINGS extends Struct {
   @Uint32()
   external int dwActualSize;
 
@@ -5517,7 +5525,7 @@ class MODEMSETTINGS extends Struct {
 /// Contains module data.
 ///
 /// {@category Struct}
-class MODLOAD_DATA extends Struct {
+base class MODLOAD_DATA extends Struct {
   @Uint32()
   external int ssize;
 
@@ -5536,7 +5544,7 @@ class MODLOAD_DATA extends Struct {
 /// Contains the module load address, size, and entry point.
 ///
 /// {@category Struct}
-class MODULEINFO extends Struct {
+base class MODULEINFO extends Struct {
   external Pointer lpBaseOfDll;
 
   @Uint32()
@@ -5548,7 +5556,7 @@ class MODULEINFO extends Struct {
 /// The MONITORINFO structure contains information about a display monitor.
 ///
 /// {@category Struct}
-class MONITORINFO extends Struct {
+base class MONITORINFO extends Struct {
   @Uint32()
   external int cbSize;
 
@@ -5564,7 +5572,7 @@ class MONITORINFO extends Struct {
 /// procedure, MouseProc.
 ///
 /// {@category Struct}
-class MOUSEHOOKSTRUCT extends Struct {
+base class MOUSEHOOKSTRUCT extends Struct {
   external POINT pt;
 
   @IntPtr()
@@ -5583,7 +5591,7 @@ class MOUSEHOOKSTRUCT extends Struct {
 /// the X button.
 ///
 /// {@category Struct}
-class MOUSEHOOKSTRUCTEX extends Struct {
+base class MOUSEHOOKSTRUCTEX extends Struct {
   external MOUSEHOOKSTRUCT Base;
 
   @Uint32()
@@ -5593,7 +5601,7 @@ class MOUSEHOOKSTRUCTEX extends Struct {
 /// Contains information about a simulated mouse event.
 ///
 /// {@category Struct}
-class MOUSEINPUT extends Struct {
+base class MOUSEINPUT extends Struct {
   @Int32()
   external int dx;
 
@@ -5616,7 +5624,7 @@ class MOUSEINPUT extends Struct {
 /// Contains information about the mouse's location in screen coordinates.
 ///
 /// {@category Struct}
-class MOUSEMOVEPOINT extends Struct {
+base class MOUSEMOVEPOINT extends Struct {
   @Int32()
   external int x;
 
@@ -5633,7 +5641,7 @@ class MOUSEMOVEPOINT extends Struct {
 /// Describes a mouse input event in a console INPUT_RECORD structure.
 ///
 /// {@category Struct}
-class MOUSE_EVENT_RECORD extends Struct {
+base class MOUSE_EVENT_RECORD extends Struct {
   external COORD dwMousePosition;
 
   @Uint32()
@@ -5649,7 +5657,7 @@ class MOUSE_EVENT_RECORD extends Struct {
 /// Contains message information from a thread's message queue.
 ///
 /// {@category Struct}
-class MSG extends Struct {
+base class MSG extends Struct {
   @IntPtr()
   external int hwnd;
 
@@ -5671,7 +5679,7 @@ class MSG extends Struct {
 /// Contains information about a low-level mouse input event.
 ///
 /// {@category Struct}
-class MSLLHOOKSTRUCT extends Struct {
+base class MSLLHOOKSTRUCT extends Struct {
   external POINT pt;
 
   @Uint32()
@@ -5692,7 +5700,7 @@ class MSLLHOOKSTRUCT extends Struct {
 /// contents of the client area of a window.
 ///
 /// {@category Struct}
-class NCCALCSIZE_PARAMS extends Struct {
+base class NCCALCSIZE_PARAMS extends Struct {
   @Array(3)
   external Array<RECT> rgrc;
 
@@ -5703,7 +5711,7 @@ class NCCALCSIZE_PARAMS extends Struct {
 /// size information that is required in many NDIS 6.0 structures.
 ///
 /// {@category Struct}
-class NDIS_OBJECT_HEADER extends Struct {
+base class NDIS_OBJECT_HEADER extends Struct {
   @Uint8()
   external int Type;
 
@@ -5718,7 +5726,7 @@ class NDIS_OBJECT_HEADER extends Struct {
 /// interface.
 ///
 /// {@category Struct}
-class NET_LUID_LH extends Union {
+base class NET_LUID_LH extends Union {
   @Uint64()
   external int Value;
 
@@ -5726,7 +5734,7 @@ class NET_LUID_LH extends Union {
 }
 
 /// {@category Struct}
-class _NET_LUID_LH__Info_e__Struct extends Struct {
+sealed class _NET_LUID_LH__Info_e__Struct extends Struct {
   @Uint64()
   external int bitfield;
 }
@@ -5740,7 +5748,7 @@ extension NET_LUID_LH_Extension on NET_LUID_LH {
 /// font.
 ///
 /// {@category Struct}
-class NEWTEXTMETRIC extends Struct {
+base class NEWTEXTMETRIC extends Struct {
   @Int32()
   external int tmHeight;
 
@@ -5820,7 +5828,7 @@ class NEWTEXTMETRIC extends Struct {
 /// connection conditions.
 ///
 /// {@category Struct}
-class NLM_SIMULATED_PROFILE_INFO extends Struct {
+base class NLM_SIMULATED_PROFILE_INFO extends Struct {
   @Array(256)
   external Array<Uint16> _ProfileName;
 
@@ -5856,7 +5864,7 @@ class NLM_SIMULATED_PROFILE_INFO extends Struct {
 /// SystemParametersInfo function.
 ///
 /// {@category Struct}
-class NONCLIENTMETRICS extends Struct {
+base class NONCLIENTMETRICS extends Struct {
   @Uint32()
   external int cbSize;
 
@@ -5905,7 +5913,7 @@ class NONCLIENTMETRICS extends Struct {
 /// the notification area. Used by Shell_NotifyIcon.
 ///
 /// {@category Struct}
-class NOTIFYICONDATA extends Struct {
+base class NOTIFYICONDATA extends Struct {
   @Uint32()
   external int cbSize;
 
@@ -5999,7 +6007,7 @@ class NOTIFYICONDATA extends Struct {
 }
 
 /// {@category Struct}
-class _NOTIFYICONDATAW__Anonymous_e__Union extends Union {
+sealed class _NOTIFYICONDATAW__Anonymous_e__Union extends Union {
   @Uint32()
   external int uTimeout;
 
@@ -6022,7 +6030,7 @@ extension NOTIFYICONDATAW_Extension on NOTIFYICONDATA {
 /// is provided for backward compatibility.
 ///
 /// {@category Struct}
-class OPENCARDNAME extends Struct {
+base class OPENCARDNAME extends Struct {
   @Uint32()
   external int dwStructSize;
 
@@ -6088,7 +6096,7 @@ class OPENCARDNAME extends Struct {
 /// Card dialog box.
 ///
 /// {@category Struct}
-class OPENCARDNAME_EX extends Struct {
+base class OPENCARDNAME_EX extends Struct {
   @Uint32()
   external int dwStructSize;
 
@@ -6143,7 +6151,7 @@ class OPENCARDNAME_EX extends Struct {
 /// SCardUIDlgSelectCard without using this structure.
 ///
 /// {@category Struct}
-class OPENCARD_SEARCH_CRITERIA extends Struct {
+base class OPENCARD_SEARCH_CRITERIA extends Struct {
   @Uint32()
   external int dwStructSize;
 
@@ -6183,7 +6191,7 @@ class OPENCARD_SEARCH_CRITERIA extends Struct {
 /// user's selection in this structure.
 ///
 /// {@category Struct}
-class OPENFILENAME extends Struct {
+base class OPENFILENAME extends Struct {
   @Uint32()
   external int lStructSize;
 
@@ -6251,7 +6259,7 @@ class OPENFILENAME extends Struct {
 /// and VerifyVersionInfo functions.
 ///
 /// {@category Struct}
-class OSVERSIONINFOEX extends Struct {
+base class OSVERSIONINFOEX extends Struct {
   @Uint32()
   external int dwOSVersionInfoSize;
 
@@ -6308,7 +6316,7 @@ class OSVERSIONINFOEX extends Struct {
 /// with the GetVersionEx function.
 ///
 /// {@category Struct}
-class OSVERSIONINFO extends Struct {
+base class OSVERSIONINFO extends Struct {
   @Uint32()
   external int dwOSVersionInfoSize;
 
@@ -6348,7 +6356,7 @@ class OSVERSIONINFO extends Struct {
 /// output (I/O).
 ///
 /// {@category Struct}
-class OVERLAPPED extends Struct {
+base class OVERLAPPED extends Struct {
   @IntPtr()
   external int Internal;
 
@@ -6362,14 +6370,15 @@ class OVERLAPPED extends Struct {
 }
 
 /// {@category Struct}
-class _OVERLAPPED__Anonymous_e__Union extends Union {
+sealed class _OVERLAPPED__Anonymous_e__Union extends Union {
   external _OVERLAPPED__Anonymous_e__Union__Anonymous_e__Struct Anonymous;
 
   external Pointer Pointer_;
 }
 
 /// {@category Struct}
-class _OVERLAPPED__Anonymous_e__Union__Anonymous_e__Struct extends Struct {
+sealed class _OVERLAPPED__Anonymous_e__Union__Anonymous_e__Struct
+    extends Struct {
   @Uint32()
   external int Offset;
 
@@ -6399,7 +6408,7 @@ extension OVERLAPPED_Extension on OVERLAPPED {
 /// GetQueuedCompletionStatusEx function.
 ///
 /// {@category Struct}
-class OVERLAPPED_ENTRY extends Struct {
+base class OVERLAPPED_ENTRY extends Struct {
   @IntPtr()
   external int lpCompletionKey;
 
@@ -6417,7 +6426,7 @@ class OVERLAPPED_ENTRY extends Struct {
 /// that application.
 ///
 /// {@category Struct}
-class PAINTSTRUCT extends Struct {
+base class PAINTSTRUCT extends Struct {
   @IntPtr()
   external int hdc;
 
@@ -6441,7 +6450,7 @@ class PAINTSTRUCT extends Struct {
 /// structure.
 ///
 /// {@category Struct}
-class PALETTEENTRY extends Struct {
+base class PALETTEENTRY extends Struct {
   @Uint8()
   external int peRed;
 
@@ -6459,7 +6468,7 @@ class PALETTEENTRY extends Struct {
 /// parameter, or function return value between processes.
 ///
 /// {@category Struct}
-class PARAMDESC extends Struct {
+base class PARAMDESC extends Struct {
   external Pointer<PARAMDESCEX> pparamdescex;
 
   @Uint16()
@@ -6469,7 +6478,7 @@ class PARAMDESC extends Struct {
 /// Contains information about the default value of a parameter.
 ///
 /// {@category Struct}
-class PARAMDESCEX extends Struct {
+base class PARAMDESCEX extends Struct {
   @Uint32()
   external int cBytes;
 
@@ -6479,7 +6488,7 @@ class PARAMDESCEX extends Struct {
 /// Contains performance information.
 ///
 /// {@category Struct}
-class PERFORMANCE_INFORMATION extends Struct {
+base class PERFORMANCE_INFORMATION extends Struct {
   @Uint32()
   external int cb;
 
@@ -6528,7 +6537,7 @@ class PERFORMANCE_INFORMATION extends Struct {
 ///
 /// {@category Struct}
 @Packed(1)
-class PHYSICAL_MONITOR extends Struct {
+base class PHYSICAL_MONITOR extends Struct {
   @IntPtr()
   external int hPhysicalMonitor;
 
@@ -6555,7 +6564,7 @@ class PHYSICAL_MONITOR extends Struct {
 /// The POINT structure defines the x- and y-coordinates of a point.
 ///
 /// {@category Struct}
-class POINT extends Struct {
+base class POINT extends Struct {
   @Int32()
   external int x;
 
@@ -6569,7 +6578,7 @@ class POINT extends Struct {
 /// GetPointerFrameInfoHistory functions.
 ///
 /// {@category Struct}
-class POINTER_INFO extends Struct {
+base class POINTER_INFO extends Struct {
   @Int32()
   external int pointerType;
 
@@ -6618,7 +6627,7 @@ class POINTER_INFO extends Struct {
 /// Defines basic pen information common to all pointer types.
 ///
 /// {@category Struct}
-class POINTER_PEN_INFO extends Struct {
+base class POINTER_PEN_INFO extends Struct {
   external POINTER_INFO pointerInfo;
 
   @Uint32()
@@ -6643,7 +6652,7 @@ class POINTER_PEN_INFO extends Struct {
 /// Defines basic touch information common to all pointer types.
 ///
 /// {@category Struct}
-class POINTER_TOUCH_INFO extends Struct {
+base class POINTER_TOUCH_INFO extends Struct {
   external POINTER_INFO pointerInfo;
 
   @Uint32()
@@ -6666,7 +6675,7 @@ class POINTER_TOUCH_INFO extends Struct {
 /// The POINTL structure defines the x- and y-coordinates of a point.
 ///
 /// {@category Struct}
-class POINTL extends Struct {
+base class POINTL extends Struct {
   @Int32()
   external int x;
 
@@ -6677,7 +6686,7 @@ class POINTL extends Struct {
 /// The POINTS structure defines the x- and y-coordinates of a point.
 ///
 /// {@category Struct}
-class POINTS extends Struct {
+base class POINTS extends Struct {
   @Int16()
   external int x;
 
@@ -6689,7 +6698,7 @@ class POINTS extends Struct {
 /// draw a string of text.
 ///
 /// {@category Struct}
-class POLYTEXT extends Struct {
+base class POLYTEXT extends Struct {
   @Int32()
   external int x;
 
@@ -6712,14 +6721,14 @@ class POLYTEXT extends Struct {
 /// The PORT_INFO_1 structure identifies a supported printer port.
 ///
 /// {@category Struct}
-class PORT_INFO_1 extends Struct {
+base class PORT_INFO_1 extends Struct {
   external Pointer<Utf16> pName;
 }
 
 /// The PORT_INFO_2 structure identifies a supported printer port.
 ///
 /// {@category Struct}
-class PORT_INFO_2 extends Struct {
+base class PORT_INFO_2 extends Struct {
   external Pointer<Utf16> pPortName;
 
   external Pointer<Utf16> pMonitorName;
@@ -6737,7 +6746,7 @@ class PORT_INFO_2 extends Struct {
 /// change.
 ///
 /// {@category Struct}
-class POWERBROADCAST_SETTING extends Struct {
+base class POWERBROADCAST_SETTING extends Struct {
   external GUID PowerSetting;
 
   @Uint32()
@@ -6751,7 +6760,7 @@ class POWERBROADCAST_SETTING extends Struct {
 /// environment, initialization data, and access rights for a printer.
 ///
 /// {@category Struct}
-class PRINTER_DEFAULTS extends Struct {
+base class PRINTER_DEFAULTS extends Struct {
   external Pointer<Utf16> pDatatype;
 
   external Pointer<DEVMODE> pDevMode;
@@ -6763,7 +6772,7 @@ class PRINTER_DEFAULTS extends Struct {
 /// The PRINTER_INFO_1 structure specifies general printer information.
 ///
 /// {@category Struct}
-class PRINTER_INFO_1 extends Struct {
+base class PRINTER_INFO_1 extends Struct {
   @Uint32()
   external int Flags;
 
@@ -6777,7 +6786,7 @@ class PRINTER_INFO_1 extends Struct {
 /// The PRINTER_INFO_2 structure specifies detailed printer information.
 ///
 /// {@category Struct}
-class PRINTER_INFO_2 extends Struct {
+base class PRINTER_INFO_2 extends Struct {
   external Pointer<Utf16> pServerName;
 
   external Pointer<Utf16> pPrinterName;
@@ -6832,7 +6841,7 @@ class PRINTER_INFO_2 extends Struct {
 /// The PRINTER_INFO_3 structure specifies printer security information.
 ///
 /// {@category Struct}
-class PRINTER_INFO_3 extends Struct {
+base class PRINTER_INFO_3 extends Struct {
   external Pointer pSecurityDescriptor;
 }
 
@@ -6843,7 +6852,7 @@ class PRINTER_INFO_3 extends Struct {
 /// all remote printer connections that a user has established.
 ///
 /// {@category Struct}
-class PRINTER_INFO_4 extends Struct {
+base class PRINTER_INFO_4 extends Struct {
   external Pointer<Utf16> pPrinterName;
 
   external Pointer<Utf16> pServerName;
@@ -6855,7 +6864,7 @@ class PRINTER_INFO_4 extends Struct {
 /// The PRINTER_INFO_5 structure specifies detailed printer information.
 ///
 /// {@category Struct}
-class PRINTER_INFO_5 extends Struct {
+base class PRINTER_INFO_5 extends Struct {
   external Pointer<Utf16> pPrinterName;
 
   external Pointer<Utf16> pPortName;
@@ -6873,7 +6882,7 @@ class PRINTER_INFO_5 extends Struct {
 /// The PRINTER_INFO_6 specifies the status value of a printer.
 ///
 /// {@category Struct}
-class PRINTER_INFO_6 extends Struct {
+base class PRINTER_INFO_6 extends Struct {
   @Uint32()
   external int dwStatus;
 }
@@ -6884,7 +6893,7 @@ class PRINTER_INFO_6 extends Struct {
 /// object has been satisfied.
 ///
 /// {@category Struct}
-class PRINTER_NOTIFY_INFO extends Struct {
+base class PRINTER_NOTIFY_INFO extends Struct {
   @Uint32()
   external int Version;
 
@@ -6902,7 +6911,7 @@ class PRINTER_NOTIFY_INFO extends Struct {
 /// information field and provides the current data for that field.
 ///
 /// {@category Struct}
-class PRINTER_NOTIFY_INFO_DATA extends Struct {
+base class PRINTER_NOTIFY_INFO_DATA extends Struct {
   @Uint16()
   external int Type;
 
@@ -6919,7 +6928,7 @@ class PRINTER_NOTIFY_INFO_DATA extends Struct {
 }
 
 /// {@category Struct}
-class _PRINTER_NOTIFY_INFO_DATA__NotifyData_e__Union extends Union {
+sealed class _PRINTER_NOTIFY_INFO_DATA__NotifyData_e__Union extends Union {
   @Array(2)
   external Array<Uint32> adwData;
 
@@ -6927,7 +6936,7 @@ class _PRINTER_NOTIFY_INFO_DATA__NotifyData_e__Union extends Union {
 }
 
 /// {@category Struct}
-class _PRINTER_NOTIFY_INFO_DATA__NotifyData_e__Union__Data_e__Struct
+sealed class _PRINTER_NOTIFY_INFO_DATA__NotifyData_e__Union__Data_e__Struct
     extends Struct {
   @Uint32()
   external int cbBuf;
@@ -6959,7 +6968,7 @@ extension PRINTER_NOTIFY_INFO_DATA_Extension on PRINTER_NOTIFY_INFO_DATA {
 /// Represents printer options.
 ///
 /// {@category Struct}
-class PRINTER_OPTIONS extends Struct {
+base class PRINTER_OPTIONS extends Struct {
   @Uint32()
   external int cbSize;
 
@@ -6971,7 +6980,7 @@ class PRINTER_OPTIONS extends Struct {
 /// GetPrintExecutionData.
 ///
 /// {@category Struct}
-class PRINT_EXECUTION_DATA extends Struct {
+base class PRINT_EXECUTION_DATA extends Struct {
   @Int32()
   external int context;
 
@@ -6983,7 +6992,7 @@ class PRINT_EXECUTION_DATA extends Struct {
 /// PROCESS_HEAP_ENTRY structure to enumerate the elements of a heap.
 ///
 /// {@category Struct}
-class PROCESS_HEAP_ENTRY extends Struct {
+base class PROCESS_HEAP_ENTRY extends Struct {
   external Pointer lpData;
 
   @Uint32()
@@ -7002,14 +7011,15 @@ class PROCESS_HEAP_ENTRY extends Struct {
 }
 
 /// {@category Struct}
-class _PROCESS_HEAP_ENTRY__Anonymous_e__Union extends Union {
+sealed class _PROCESS_HEAP_ENTRY__Anonymous_e__Union extends Union {
   external _PROCESS_HEAP_ENTRY__Anonymous_e__Union__Block_e__Struct Block;
 
   external _PROCESS_HEAP_ENTRY__Anonymous_e__Union__Region_e__Struct Region;
 }
 
 /// {@category Struct}
-class _PROCESS_HEAP_ENTRY__Anonymous_e__Union__Block_e__Struct extends Struct {
+sealed class _PROCESS_HEAP_ENTRY__Anonymous_e__Union__Block_e__Struct
+    extends Struct {
   @IntPtr()
   external int hMem;
 
@@ -7028,7 +7038,8 @@ extension PROCESS_HEAP_ENTRY__Anonymous_e__Union_Extension
 }
 
 /// {@category Struct}
-class _PROCESS_HEAP_ENTRY__Anonymous_e__Union__Region_e__Struct extends Struct {
+sealed class _PROCESS_HEAP_ENTRY__Anonymous_e__Union__Region_e__Struct
+    extends Struct {
   @Uint32()
   external int dwCommittedSize;
 
@@ -7074,7 +7085,7 @@ extension PROCESS_HEAP_ENTRY_Extension on PROCESS_HEAP_ENTRY {
 /// CreateProcessWithLogonW, or CreateProcessWithTokenW function.
 ///
 /// {@category Struct}
-class PROCESS_INFORMATION extends Struct {
+base class PROCESS_INFORMATION extends Struct {
   @IntPtr()
   external int hProcess;
 
@@ -7092,7 +7103,7 @@ class PROCESS_INFORMATION extends Struct {
 /// property.
 ///
 /// {@category Struct}
-class PROPERTYKEY extends Struct {
+base class PROPERTYKEY extends Struct {
   external GUID fmtid;
 
   @Uint32()
@@ -7104,7 +7115,7 @@ class PROPERTYKEY extends Struct {
 /// (ID) or the associated string name.
 ///
 /// {@category Struct}
-class PROPSPEC extends Struct {
+base class PROPSPEC extends Struct {
   @Uint32()
   external int ulKind;
 
@@ -7112,7 +7123,7 @@ class PROPSPEC extends Struct {
 }
 
 /// {@category Struct}
-class _PROPSPEC__Anonymous_e__Union extends Union {
+sealed class _PROPSPEC__Anonymous_e__Union extends Union {
   @Uint32()
   external int propid;
 
@@ -7135,7 +7146,7 @@ extension PROPSPEC_Extension on PROPSPEC {
 /// other Windows Sockets function calls.
 ///
 /// {@category Struct}
-class PROTOENT extends Struct {
+base class PROTOENT extends Struct {
   external Pointer<Utf8> p_name;
 
   external Pointer<Pointer<Int8>> p_aliases;
@@ -7148,7 +7159,7 @@ class PROTOENT extends Struct {
 /// (HID).
 ///
 /// {@category Struct}
-class RAWHID extends Struct {
+base class RAWHID extends Struct {
   @Uint32()
   external int dwSizeHid;
 
@@ -7162,14 +7173,14 @@ class RAWHID extends Struct {
 /// Contains the raw input from a device.
 ///
 /// {@category Struct}
-class RAWINPUT extends Struct {
+base class RAWINPUT extends Struct {
   external RAWINPUTHEADER header;
 
   external _RAWINPUT__data_e__Union data;
 }
 
 /// {@category Struct}
-class _RAWINPUT__data_e__Union extends Union {
+sealed class _RAWINPUT__data_e__Union extends Union {
   external RAWMOUSE mouse;
 
   external RAWKEYBOARD keyboard;
@@ -7191,7 +7202,7 @@ extension RAWINPUT_Extension on RAWINPUT {
 /// Defines information for the raw input devices.
 ///
 /// {@category Struct}
-class RAWINPUTDEVICE extends Struct {
+base class RAWINPUTDEVICE extends Struct {
   @Uint16()
   external int usUsagePage;
 
@@ -7208,7 +7219,7 @@ class RAWINPUTDEVICE extends Struct {
 /// Contains information about a raw input device.
 ///
 /// {@category Struct}
-class RAWINPUTDEVICELIST extends Struct {
+base class RAWINPUTDEVICELIST extends Struct {
   @IntPtr()
   external int hDevice;
 
@@ -7219,7 +7230,7 @@ class RAWINPUTDEVICELIST extends Struct {
 /// Contains the header information that is part of the raw input data.
 ///
 /// {@category Struct}
-class RAWINPUTHEADER extends Struct {
+base class RAWINPUTHEADER extends Struct {
   @Uint32()
   external int dwType;
 
@@ -7236,7 +7247,7 @@ class RAWINPUTHEADER extends Struct {
 /// Contains information about the state of the keyboard.
 ///
 /// {@category Struct}
-class RAWKEYBOARD extends Struct {
+base class RAWKEYBOARD extends Struct {
   @Uint16()
   external int MakeCode;
 
@@ -7259,7 +7270,7 @@ class RAWKEYBOARD extends Struct {
 /// Contains information about the state of the mouse.
 ///
 /// {@category Struct}
-class RAWMOUSE extends Struct {
+base class RAWMOUSE extends Struct {
   @Uint16()
   external int usFlags;
 
@@ -7279,7 +7290,7 @@ class RAWMOUSE extends Struct {
 }
 
 /// {@category Struct}
-class _RAWMOUSE__Anonymous_e__Union extends Union {
+sealed class _RAWMOUSE__Anonymous_e__Union extends Union {
   @Uint32()
   external int ulButtons;
 
@@ -7287,7 +7298,7 @@ class _RAWMOUSE__Anonymous_e__Union extends Union {
 }
 
 /// {@category Struct}
-class _RAWMOUSE__Anonymous_e__Union__Anonymous_e__Struct extends Struct {
+sealed class _RAWMOUSE__Anonymous_e__Union__Anonymous_e__Struct extends Struct {
   @Uint16()
   external int usButtonFlags;
 
@@ -7318,7 +7329,7 @@ extension RAWMOUSE_Extension on RAWMOUSE {
 /// upper-left and lower-right corners.
 ///
 /// {@category Struct}
-class RECT extends Struct {
+base class RECT extends Struct {
   @Int32()
   external int left;
 
@@ -7336,7 +7347,7 @@ class RECT extends Struct {
 /// upper-left and lower-right corners.
 ///
 /// {@category Struct}
-class RECTL extends Struct {
+base class RECTL extends Struct {
   @Int32()
   external int left;
 
@@ -7354,7 +7365,7 @@ class RECTL extends Struct {
 /// intensities of red, green, and blue.
 ///
 /// {@category Struct}
-class RGBQUAD extends Struct {
+base class RGBQUAD extends Struct {
   @Uint8()
   external int rgbBlue;
 
@@ -7371,7 +7382,7 @@ class RGBQUAD extends Struct {
 /// Represents a safe array.
 ///
 /// {@category Struct}
-class SAFEARRAY extends Struct {
+base class SAFEARRAY extends Struct {
   @Uint16()
   external int cDims;
 
@@ -7393,7 +7404,7 @@ class SAFEARRAY extends Struct {
 /// Represents the bounds of one dimension of the array.
 ///
 /// {@category Struct}
-class SAFEARRAYBOUND extends Struct {
+base class SAFEARRAYBOUND extends Struct {
   @Uint32()
   external int cElements;
 
@@ -7405,7 +7416,7 @@ class SAFEARRAYBOUND extends Struct {
 /// function to locate cards.
 ///
 /// {@category Struct}
-class SCARD_ATRMASK extends Struct {
+base class SCARD_ATRMASK extends Struct {
   @Uint32()
   external int cbAtr;
 
@@ -7424,7 +7435,7 @@ class SCARD_ATRMASK extends Struct {
 /// that it aligns on a 32-bit boundary.
 ///
 /// {@category Struct}
-class SCARD_IO_REQUEST extends Struct {
+base class SCARD_IO_REQUEST extends Struct {
   @Uint32()
   external int dwProtocol;
 
@@ -7436,7 +7447,7 @@ class SCARD_IO_REQUEST extends Struct {
 /// cards within readers.
 ///
 /// {@category Struct}
-class SCARD_READERSTATE extends Struct {
+base class SCARD_READERSTATE extends Struct {
   external Pointer<Utf16> szReader;
 
   external Pointer pvUserData;
@@ -7457,7 +7468,7 @@ class SCARD_READERSTATE extends Struct {
 /// The SCROLLBARINFO structure contains scroll bar information.
 ///
 /// {@category Struct}
-class SCROLLBARINFO extends Struct {
+base class SCROLLBARINFO extends Struct {
   @Uint32()
   external int cbSize;
 
@@ -7484,7 +7495,7 @@ class SCROLLBARINFO extends Struct {
 /// the GetScrollInfo function (or SBM_GETSCROLLINFO message)
 ///
 /// {@category Struct}
-class SCROLLINFO extends Struct {
+base class SCROLLINFO extends Struct {
   @Uint32()
   external int cbSize;
 
@@ -7510,7 +7521,7 @@ class SCROLLINFO extends Struct {
 /// The SDP_ELEMENT_DATA structure stores SDP element data.
 ///
 /// {@category Struct}
-class SDP_ELEMENT_DATA extends Struct {
+base class SDP_ELEMENT_DATA extends Struct {
   @Int32()
   external int type;
 
@@ -7521,7 +7532,7 @@ class SDP_ELEMENT_DATA extends Struct {
 }
 
 /// {@category Struct}
-class _SDP_ELEMENT_DATA__data_e__Union extends Union {
+sealed class _SDP_ELEMENT_DATA__data_e__Union extends Union {
   external SDP_LARGE_INTEGER_16 int128;
 
   @Int64()
@@ -7571,7 +7582,7 @@ class _SDP_ELEMENT_DATA__data_e__Union extends Union {
 }
 
 /// {@category Struct}
-class _SDP_ELEMENT_DATA__data_e__Union__string_e__Struct extends Struct {
+sealed class _SDP_ELEMENT_DATA__data_e__Union__string_e__Struct extends Struct {
   external Pointer<Uint8> value;
 
   @Uint32()
@@ -7587,7 +7598,7 @@ extension SDP_ELEMENT_DATA__data_e__Union_Extension on SDP_ELEMENT_DATA {
 }
 
 /// {@category Struct}
-class _SDP_ELEMENT_DATA__data_e__Union__url_e__Struct extends Struct {
+sealed class _SDP_ELEMENT_DATA__data_e__Union__url_e__Struct extends Struct {
   external Pointer<Uint8> value;
 
   @Uint32()
@@ -7603,7 +7614,8 @@ extension SDP_ELEMENT_DATA__data_e__Union_Extension_1 on SDP_ELEMENT_DATA {
 }
 
 /// {@category Struct}
-class _SDP_ELEMENT_DATA__data_e__Union__sequence_e__Struct extends Struct {
+sealed class _SDP_ELEMENT_DATA__data_e__Union__sequence_e__Struct
+    extends Struct {
   external Pointer<Uint8> value;
 
   @Uint32()
@@ -7619,7 +7631,8 @@ extension SDP_ELEMENT_DATA__data_e__Union_Extension_2 on SDP_ELEMENT_DATA {
 }
 
 /// {@category Struct}
-class _SDP_ELEMENT_DATA__data_e__Union__alternative_e__Struct extends Struct {
+sealed class _SDP_ELEMENT_DATA__data_e__Union__alternative_e__Struct
+    extends Struct {
   external Pointer<Uint8> value;
 
   @Uint32()
@@ -7701,7 +7714,7 @@ extension SDP_ELEMENT_DATA_Extension on SDP_ELEMENT_DATA {
 /// The union member for a 128-bit integer.
 ///
 /// {@category Struct}
-class SDP_LARGE_INTEGER_16 extends Struct {
+base class SDP_LARGE_INTEGER_16 extends Struct {
   @Uint64()
   external int LowPart;
 
@@ -7713,7 +7726,7 @@ class SDP_LARGE_INTEGER_16 extends Struct {
 /// types.
 ///
 /// {@category Struct}
-class SDP_STRING_TYPE_DATA extends Struct {
+base class SDP_STRING_TYPE_DATA extends Struct {
   @Uint16()
   external int encoding;
 
@@ -7727,7 +7740,7 @@ class SDP_STRING_TYPE_DATA extends Struct {
 /// The union member for a 128-bit unsigned integer.
 ///
 /// {@category Struct}
-class SDP_ULARGE_INTEGER_16 extends Struct {
+base class SDP_ULARGE_INTEGER_16 extends Struct {
   @Uint64()
   external int LowPart;
 
@@ -7742,7 +7755,7 @@ class SDP_ULARGE_INTEGER_16 extends Struct {
 /// CreateProcess, RegCreateKeyEx, or RegSaveKeyEx.
 ///
 /// {@category Struct}
-class SECURITY_ATTRIBUTES extends Struct {
+base class SECURITY_ATTRIBUTES extends Struct {
   @Uint32()
   external int nLength;
 
@@ -7757,7 +7770,7 @@ class SECURITY_ATTRIBUTES extends Struct {
 /// query an object's security status.
 ///
 /// {@category Struct}
-class SECURITY_DESCRIPTOR extends Struct {
+base class SECURITY_DESCRIPTOR extends Struct {
   @Uint8()
   external int Revision;
 
@@ -7780,7 +7793,7 @@ class SECURITY_DESCRIPTOR extends Struct {
 /// number for a given service name.
 ///
 /// {@category Struct}
-class SERVENT extends Struct {
+base class SERVENT extends Struct {
   external Pointer<Utf8> s_name;
 
   external Pointer<Pointer<Int8>> s_aliases;
@@ -7794,7 +7807,7 @@ class SERVENT extends Struct {
 /// Contains information used by ShellExecuteEx.
 ///
 /// {@category Struct}
-class SHELLEXECUTEINFO extends Struct {
+base class SHELLEXECUTEINFO extends Struct {
   @Uint32()
   external int cbSize;
 
@@ -7835,7 +7848,7 @@ class SHELLEXECUTEINFO extends Struct {
 }
 
 /// {@category Struct}
-class _SHELLEXECUTEINFOW__Anonymous_e__Union extends Union {
+sealed class _SHELLEXECUTEINFOW__Anonymous_e__Union extends Union {
   @IntPtr()
   external int hIcon;
 
@@ -7854,7 +7867,7 @@ extension SHELLEXECUTEINFOW_Extension on SHELLEXECUTEINFO {
 /// Defines Shell item resource.
 ///
 /// {@category Struct}
-class SHELL_ITEM_RESOURCE extends Struct {
+base class SHELL_ITEM_RESOURCE extends Struct {
   external GUID guidType;
 
   @Array(260)
@@ -7880,7 +7893,7 @@ class SHELL_ITEM_RESOURCE extends Struct {
 /// Contains information about a file object.
 ///
 /// {@category Struct}
-class SHFILEINFO extends Struct {
+base class SHFILEINFO extends Struct {
   @IntPtr()
   external int hIcon;
 
@@ -7933,7 +7946,7 @@ class SHFILEINFO extends Struct {
 /// file operations.
 ///
 /// {@category Struct}
-class SHFILEOPSTRUCT extends Struct {
+base class SHFILEOPSTRUCT extends Struct {
   @IntPtr()
   external int hwnd;
 
@@ -7959,7 +7972,7 @@ class SHFILEOPSTRUCT extends Struct {
 ///
 /// {@category Struct}
 @Packed(1)
-class SHITEMID extends Struct {
+base class SHITEMID extends Struct {
   @Uint16()
   external int cb;
 
@@ -7971,7 +7984,7 @@ class SHITEMID extends Struct {
 /// SHQueryRecycleBin function.
 ///
 /// {@category Struct}
-class SHQUERYRBINFO extends Struct {
+base class SHQUERYRBINFO extends Struct {
   @Uint32()
   external int cbSize;
 
@@ -7985,7 +7998,7 @@ class SHQUERYRBINFO extends Struct {
 /// The SIZE structure defines the width and height of a rectangle.
 ///
 /// {@category Struct}
-class SIZE extends Struct {
+base class SIZE extends Struct {
   @Int32()
   external int cx;
 
@@ -7997,7 +8010,7 @@ class SIZE extends Struct {
 /// rectangle.
 ///
 /// {@category Struct}
-class SMALL_RECT extends Struct {
+base class SMALL_RECT extends Struct {
   @Int16()
   external int Left;
 
@@ -8014,7 +8027,7 @@ class SMALL_RECT extends Struct {
 /// The SOCKADDR structure stores socket address information.
 ///
 /// {@category Struct}
-class SOCKADDR extends Struct {
+base class SOCKADDR extends Struct {
   @Uint16()
   external int sa_family;
 
@@ -8026,7 +8039,7 @@ class SOCKADDR extends Struct {
 /// operations, defined by address family AF_BTH.
 ///
 /// {@category Struct}
-class SOCKADDR_BTH extends Struct {
+base class SOCKADDR_BTH extends Struct {
   @Uint16()
   external int addressFamily;
 
@@ -8043,7 +8056,7 @@ class SOCKADDR_BTH extends Struct {
 /// information.
 ///
 /// {@category Struct}
-class SOCKET_ADDRESS extends Struct {
+base class SOCKET_ADDRESS extends Struct {
   external Pointer<SOCKADDR> lpSockaddr;
 
   @Int32()
@@ -8054,7 +8067,7 @@ class SOCKET_ADDRESS extends Struct {
 /// communicate to a client.
 ///
 /// {@category Struct}
-class SOLE_AUTHENTICATION_SERVICE extends Struct {
+base class SOLE_AUTHENTICATION_SERVICE extends Struct {
   @Uint32()
   external int dwAuthnSvc;
 
@@ -8072,7 +8085,7 @@ class SOLE_AUTHENTICATION_SERVICE extends Struct {
 /// back to applications.
 ///
 /// {@category Struct}
-class SPEVENT extends Struct {
+base class SPEVENT extends Struct {
   @Int32()
   external int bitfield;
 
@@ -8094,7 +8107,7 @@ class SPEVENT extends Struct {
 /// hold events until a caller retrieves the events using ::GetEvents.
 ///
 /// {@category Struct}
-class SPEVENTSOURCEINFO extends Struct {
+base class SPEVENTSOURCEINFO extends Struct {
   @Uint64()
   external int ullEventInterest;
 
@@ -8109,7 +8122,7 @@ class SPEVENTSOURCEINFO extends Struct {
 /// returned by ISpVoice::GetStatus.
 ///
 /// {@category Struct}
-class SPVOICESTATUS extends Struct {
+base class SPVOICESTATUS extends Struct {
   @Uint32()
   external int ulCurrentStream;
 
@@ -8154,7 +8167,7 @@ class SPVOICESTATUS extends Struct {
 /// device information set.
 ///
 /// {@category Struct}
-class SP_DEVICE_INTERFACE_DATA extends Struct {
+base class SP_DEVICE_INTERFACE_DATA extends Struct {
   @Uint32()
   external int cbSize;
 
@@ -8171,7 +8184,7 @@ class SP_DEVICE_INTERFACE_DATA extends Struct {
 /// device information set.
 ///
 /// {@category Struct}
-class SP_DEVICE_INTERFACE_DETAIL_DATA_ extends Struct {
+base class SP_DEVICE_INTERFACE_DETAIL_DATA_ extends Struct {
   @Uint32()
   external int cbSize;
 
@@ -8199,7 +8212,7 @@ class SP_DEVICE_INTERFACE_DETAIL_DATA_ extends Struct {
 /// of a device information set.
 ///
 /// {@category Struct}
-class SP_DEVINFO_DATA extends Struct {
+base class SP_DEVINFO_DATA extends Struct {
   @Uint32()
   external int cbSize;
 
@@ -8217,7 +8230,7 @@ class SP_DEVINFO_DATA extends Struct {
 /// CreateProcessAsUser functions.
 ///
 /// {@category Struct}
-class STARTUPINFOEX extends Struct {
+base class STARTUPINFOEX extends Struct {
   external STARTUPINFO StartupInfo;
 
   external Pointer lpAttributeList;
@@ -8227,7 +8240,7 @@ class STARTUPINFOEX extends Struct {
 /// of the main window for a process at creation time.
 ///
 /// {@category Struct}
-class STARTUPINFO extends Struct {
+base class STARTUPINFO extends Struct {
   @Uint32()
   external int cb;
 
@@ -8282,7 +8295,7 @@ class STARTUPINFO extends Struct {
 /// The STATPROPSETSTG structure contains information about a property set.
 ///
 /// {@category Struct}
-class STATPROPSETSTG extends Struct {
+base class STATPROPSETSTG extends Struct {
   external GUID fmtid;
 
   external GUID clsid;
@@ -8305,7 +8318,7 @@ class STATPROPSETSTG extends Struct {
 /// optional string name that may be associated with the property.
 ///
 /// {@category Struct}
-class STATPROPSTG extends Struct {
+base class STATPROPSTG extends Struct {
   external Pointer<Utf16> lpwstrName;
 
   @Uint32()
@@ -8320,7 +8333,7 @@ class STATPROPSTG extends Struct {
 /// IEnumSTATSTG, ILockBytes, IStorage, and IStream interfaces.
 ///
 /// {@category Struct}
-class STATSTG extends Struct {
+base class STATSTG extends Struct {
   external Pointer<Utf16> pwcsName;
 
   @Uint32()
@@ -8354,7 +8367,7 @@ class STATSTG extends Struct {
 /// IOCTL_STORAGE_GET_DEVICE_NUMBER control code.
 ///
 /// {@category Struct}
-class STORAGE_DEVICE_NUMBER extends Struct {
+base class STORAGE_DEVICE_NUMBER extends Struct {
   @Uint32()
   external int DeviceType;
 
@@ -8368,7 +8381,7 @@ class STORAGE_DEVICE_NUMBER extends Struct {
 /// Contains strings returned from the IShellFolder interface methods.
 ///
 /// {@category Struct}
-class STRRET extends Struct {
+base class STRRET extends Struct {
   @Uint32()
   external int uType;
 
@@ -8376,7 +8389,7 @@ class STRRET extends Struct {
 }
 
 /// {@category Struct}
-class _STRRET__Anonymous_e__Union extends Union {
+sealed class _STRRET__Anonymous_e__Union extends Union {
   external Pointer<Utf16> pOleStr;
 
   @Uint32()
@@ -8400,7 +8413,7 @@ extension STRRET_Extension on STRRET {
 /// Contains the styles for a window.
 ///
 /// {@category Struct}
-class STYLESTRUCT extends Struct {
+base class STYLESTRUCT extends Struct {
   @Uint32()
   external int styleOld;
 
@@ -8411,7 +8424,7 @@ class STYLESTRUCT extends Struct {
 /// Contains symbol information.
 ///
 /// {@category Struct}
-class SYMBOL_INFO extends Struct {
+base class SYMBOL_INFO extends Struct {
   @Uint32()
   external int SizeOfStruct;
 
@@ -8480,7 +8493,7 @@ class SYMBOL_INFO extends Struct {
 /// function that is being called.
 ///
 /// {@category Struct}
-class SYSTEMTIME extends Struct {
+base class SYSTEMTIME extends Struct {
   @Uint16()
   external int wYear;
 
@@ -8509,7 +8522,7 @@ class SYSTEMTIME extends Struct {
 /// Contains information about the current state of the system battery.
 ///
 /// {@category Struct}
-class SYSTEM_BATTERY_STATE extends Struct {
+base class SYSTEM_BATTERY_STATE extends Struct {
   @Uint8()
   external int AcOnLine;
 
@@ -8552,7 +8565,7 @@ class SYSTEM_BATTERY_STATE extends Struct {
 /// the system, the page size, and other such information.
 ///
 /// {@category Struct}
-class SYSTEM_INFO extends Struct {
+base class SYSTEM_INFO extends Struct {
   external _SYSTEM_INFO__Anonymous_e__Union Anonymous;
 
   @Uint32()
@@ -8582,7 +8595,7 @@ class SYSTEM_INFO extends Struct {
 }
 
 /// {@category Struct}
-class _SYSTEM_INFO__Anonymous_e__Union extends Union {
+sealed class _SYSTEM_INFO__Anonymous_e__Union extends Union {
   @Uint32()
   external int dwOemId;
 
@@ -8590,7 +8603,8 @@ class _SYSTEM_INFO__Anonymous_e__Union extends Union {
 }
 
 /// {@category Struct}
-class _SYSTEM_INFO__Anonymous_e__Union__Anonymous_e__Struct extends Struct {
+sealed class _SYSTEM_INFO__Anonymous_e__Union__Anonymous_e__Struct
+    extends Struct {
   @Uint16()
   external int wProcessorArchitecture;
 
@@ -8622,7 +8636,7 @@ extension SYSTEM_INFO_Extension on SYSTEM_INFO {
 /// structure is used with the GetLogicalProcessorInformation function.
 ///
 /// {@category Struct}
-class SYSTEM_LOGICAL_PROCESSOR_INFORMATION extends Struct {
+base class SYSTEM_LOGICAL_PROCESSOR_INFORMATION extends Struct {
   @IntPtr()
   external int ProcessorMask;
 
@@ -8633,7 +8647,8 @@ class SYSTEM_LOGICAL_PROCESSOR_INFORMATION extends Struct {
 }
 
 /// {@category Struct}
-class _SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union extends Union {
+sealed class _SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union
+    extends Union {
   external _SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__ProcessorCore_e__Struct
       ProcessorCore;
 
@@ -8647,7 +8662,7 @@ class _SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union extends Union {
 }
 
 /// {@category Struct}
-class _SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__ProcessorCore_e__Struct
+sealed class _SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__ProcessorCore_e__Struct
     extends Struct {
   @Uint8()
   external int Flags;
@@ -8660,7 +8675,7 @@ extension SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union_Extension
 }
 
 /// {@category Struct}
-class _SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__NumaNode_e__Struct
+sealed class _SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__NumaNode_e__Struct
     extends Struct {
   @Uint32()
   external int NodeNumber;
@@ -8698,7 +8713,7 @@ extension SYSTEM_LOGICAL_PROCESSOR_INFORMATION_Extension
 /// Contains information about the power status of the system.
 ///
 /// {@category Struct}
-class SYSTEM_POWER_STATUS extends Struct {
+base class SYSTEM_POWER_STATUS extends Struct {
   @Uint8()
   external int ACLineStatus;
 
@@ -8722,7 +8737,7 @@ class SYSTEM_POWER_STATUS extends Struct {
 /// constrain the set of attributes to return in the query.
 ///
 /// {@category Struct}
-class SdpAttributeRange extends Struct {
+base class SdpAttributeRange extends Struct {
   @Uint16()
   external int minAttribute;
 
@@ -8733,7 +8748,7 @@ class SdpAttributeRange extends Struct {
 /// The SdpQueryUuid structure facilitates searching for UUIDs.
 ///
 /// {@category Struct}
-class SdpQueryUuid extends Struct {
+base class SdpQueryUuid extends Struct {
   external SdpQueryUuidUnion u;
 
   @Uint16()
@@ -8744,7 +8759,7 @@ class SdpQueryUuid extends Struct {
 /// query. Used in conjunction with the SdpQueryUuid structure.
 ///
 /// {@category Struct}
-class SdpQueryUuidUnion extends Union {
+base class SdpQueryUuidUnion extends Union {
   external GUID uuid128;
 
   @Uint32()
@@ -8759,7 +8774,7 @@ class SdpQueryUuidUnion extends Union {
 ///
 /// {@category Struct}
 @Packed(1)
-class TASKDIALOGCONFIG extends Struct {
+base class TASKDIALOGCONFIG extends Struct {
   @Uint32()
   external int cbSize;
 
@@ -8822,7 +8837,7 @@ class TASKDIALOGCONFIG extends Struct {
 
 /// {@category Struct}
 @Packed(1)
-class _TASKDIALOGCONFIG__Anonymous1_e__Union extends Union {
+sealed class _TASKDIALOGCONFIG__Anonymous1_e__Union extends Union {
   @IntPtr()
   external int hMainIcon;
 
@@ -8839,7 +8854,7 @@ extension TASKDIALOGCONFIG_Extension on TASKDIALOGCONFIG {
 
 /// {@category Struct}
 @Packed(1)
-class _TASKDIALOGCONFIG__Anonymous2_e__Union extends Union {
+sealed class _TASKDIALOGCONFIG__Anonymous2_e__Union extends Union {
   @IntPtr()
   external int hFooterIcon;
 
@@ -8861,7 +8876,7 @@ extension TASKDIALOGCONFIG_Extension_1 on TASKDIALOGCONFIG {
 ///
 /// {@category Struct}
 @Packed(1)
-class TASKDIALOG_BUTTON extends Struct {
+base class TASKDIALOG_BUTTON extends Struct {
   @Int32()
   external int nButtonID;
 
@@ -8873,7 +8888,7 @@ class TASKDIALOG_BUTTON extends Struct {
 /// the current mapping mode of the display context.
 ///
 /// {@category Struct}
-class TEXTMETRIC extends Struct {
+base class TEXTMETRIC extends Struct {
   @Int32()
   external int tmHeight;
 
@@ -8940,7 +8955,7 @@ class TEXTMETRIC extends Struct {
 /// file.
 ///
 /// {@category Struct}
-class TIMEVAL extends Struct {
+base class TIMEVAL extends Struct {
   @Int32()
   external int tv_sec;
 
@@ -8951,7 +8966,7 @@ class TIMEVAL extends Struct {
 /// Contains title bar information.
 ///
 /// {@category Struct}
-class TITLEBARINFO extends Struct {
+base class TITLEBARINFO extends Struct {
   @Uint32()
   external int cbSize;
 
@@ -8966,7 +8981,7 @@ class TITLEBARINFO extends Struct {
 /// structure is sent with the WM_GETTITLEBARINFOEX message.
 ///
 /// {@category Struct}
-class TITLEBARINFOEX extends Struct {
+base class TITLEBARINFOEX extends Struct {
   @Uint32()
   external int cbSize;
 
@@ -8983,14 +8998,14 @@ class TITLEBARINFOEX extends Struct {
 /// information in a token that is necessary for an app container.
 ///
 /// {@category Struct}
-class TOKEN_APPCONTAINER_INFORMATION extends Struct {
+base class TOKEN_APPCONTAINER_INFORMATION extends Struct {
   external Pointer TokenAppContainer;
 }
 
 /// Encapsulates data for touch input.
 ///
 /// {@category Struct}
-class TOUCHINPUT extends Struct {
+base class TOUCHINPUT extends Struct {
   @Int32()
   external int x;
 
@@ -9027,7 +9042,7 @@ class TOUCHINPUT extends Struct {
 /// and gesture input that contains distance and velocity data.
 ///
 /// {@category Struct}
-class TOUCHPREDICTIONPARAMETERS extends Struct {
+base class TOUCHPREDICTIONPARAMETERS extends Struct {
   @Uint32()
   external int cbSize;
 
@@ -9044,7 +9059,7 @@ class TOUCHPREDICTIONPARAMETERS extends Struct {
 /// Contains extended parameters for the TrackPopupMenuEx function.
 ///
 /// {@category Struct}
-class TPMPARAMS extends Struct {
+base class TPMPARAMS extends Struct {
   @Uint32()
   external int cbSize;
 
@@ -9054,7 +9069,7 @@ class TPMPARAMS extends Struct {
 /// Contains attributes of a type.
 ///
 /// {@category Struct}
-class TYPEATTR extends Struct {
+base class TYPEATTR extends Struct {
   external GUID guid;
 
   @Uint32()
@@ -9110,7 +9125,7 @@ class TYPEATTR extends Struct {
 /// type of a function parameter.
 ///
 /// {@category Struct}
-class TYPEDESC extends Struct {
+base class TYPEDESC extends Struct {
   external _TYPEDESC__Anonymous_e__Union Anonymous;
 
   @Uint16()
@@ -9118,7 +9133,7 @@ class TYPEDESC extends Struct {
 }
 
 /// {@category Struct}
-class _TYPEDESC__Anonymous_e__Union extends Union {
+sealed class _TYPEDESC__Anonymous_e__Union extends Union {
   external Pointer<TYPEDESC> lptdesc;
 
   external Pointer<ARRAYDESC> lpadesc;
@@ -9144,7 +9159,7 @@ extension TYPEDESC_Extension on TYPEDESC {
 ///
 /// {@category Struct}
 @Packed(1)
-class UNSIGNED_RATIO extends Struct {
+base class UNSIGNED_RATIO extends Struct {
   @Uint32()
   external int uiNumerator;
 
@@ -9156,7 +9171,7 @@ class UNSIGNED_RATIO extends Struct {
 /// content, and translucency information for a layered window.
 ///
 /// {@category Struct}
-class UPDATELAYEREDWINDOWINFO extends Struct {
+base class UPDATELAYEREDWINDOWINFO extends Struct {
   @Uint32()
   external int cbSize;
 
@@ -9187,7 +9202,7 @@ class UPDATELAYEREDWINDOWINFO extends Struct {
 /// function uses this structure.
 ///
 /// {@category Struct}
-class VALENT extends Struct {
+base class VALENT extends Struct {
   external Pointer<Utf16> ve_valuename;
 
   @Uint32()
@@ -9203,7 +9218,7 @@ class VALENT extends Struct {
 /// Describes a variable, constant, or data member.
 ///
 /// {@category Struct}
-class VARDESC extends Struct {
+base class VARDESC extends Struct {
   @Int32()
   external int memid;
 
@@ -9221,7 +9236,7 @@ class VARDESC extends Struct {
 }
 
 /// {@category Struct}
-class _VARDESC__Anonymous_e__Union extends Union {
+sealed class _VARDESC__Anonymous_e__Union extends Union {
   @Uint32()
   external int oInst;
 
@@ -9240,7 +9255,7 @@ extension VARDESC_Extension on VARDESC {
 /// the IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS control code.
 ///
 /// {@category Struct}
-class VOLUME_DISK_EXTENTS extends Struct {
+base class VOLUME_DISK_EXTENTS extends Struct {
   @Uint32()
   external int NumberOfDiskExtents;
 
@@ -9252,7 +9267,7 @@ class VOLUME_DISK_EXTENTS extends Struct {
 /// and code page independent.
 ///
 /// {@category Struct}
-class VS_FIXEDFILEINFO extends Struct {
+base class VS_FIXEDFILEINFO extends Struct {
   @Uint32()
   external int dwSignature;
 
@@ -9301,7 +9316,7 @@ class VS_FIXEDFILEINFO extends Struct {
 ///
 /// {@category Struct}
 @Packed(1)
-class WAVEFORMATEX extends Struct {
+base class WAVEFORMATEX extends Struct {
   @Uint16()
   external int wFormatTag;
 
@@ -9330,7 +9345,7 @@ class WAVEFORMATEX extends Struct {
 /// any format that can be defined by WAVEFORMATEX.
 ///
 /// {@category Struct}
-class WAVEFORMATEXTENSIBLE extends Struct {
+base class WAVEFORMATEXTENSIBLE extends Struct {
   external WAVEFORMATEX Format;
 
   external _WAVEFORMATEXTENSIBLE__Samples_e__Union Samples;
@@ -9343,7 +9358,7 @@ class WAVEFORMATEXTENSIBLE extends Struct {
 
 /// {@category Struct}
 @Packed(1)
-class _WAVEFORMATEXTENSIBLE__Samples_e__Union extends Union {
+sealed class _WAVEFORMATEXTENSIBLE__Samples_e__Union extends Union {
   @Uint16()
   external int wValidBitsPerSample;
 
@@ -9371,7 +9386,7 @@ extension WAVEFORMATEXTENSIBLE_Extension on WAVEFORMATEXTENSIBLE {
 ///
 /// {@category Struct}
 @Packed(1)
-class WAVEHDR extends Struct {
+base class WAVEHDR extends Struct {
   external Pointer<Utf8> lpData;
 
   @Uint32()
@@ -9400,7 +9415,7 @@ class WAVEHDR extends Struct {
 ///
 /// {@category Struct}
 @Packed(1)
-class WAVEOUTCAPS extends Struct {
+base class WAVEOUTCAPS extends Struct {
   @Uint16()
   external int wMid;
 
@@ -9446,7 +9461,7 @@ class WAVEOUTCAPS extends Struct {
 /// FindFirstFileEx, or FindNextFile function.
 ///
 /// {@category Struct}
-class WIN32_FIND_DATA extends Struct {
+base class WIN32_FIND_DATA extends Struct {
   @Uint32()
   external int dwFileAttributes;
 
@@ -9510,7 +9525,7 @@ class WIN32_FIND_DATA extends Struct {
 /// Contains window information.
 ///
 /// {@category Struct}
-class WINDOWINFO extends Struct {
+base class WINDOWINFO extends Struct {
   @Uint32()
   external int cbSize;
 
@@ -9543,7 +9558,7 @@ class WINDOWINFO extends Struct {
 /// Contains information about the placement of a window on the screen.
 ///
 /// {@category Struct}
-class WINDOWPLACEMENT extends Struct {
+base class WINDOWPLACEMENT extends Struct {
   @Uint32()
   external int length;
 
@@ -9563,7 +9578,7 @@ class WINDOWPLACEMENT extends Struct {
 /// Contains information about the size and position of a window.
 ///
 /// {@category Struct}
-class WINDOWPOS extends Struct {
+base class WINDOWPOS extends Struct {
   @IntPtr()
   external int hwnd;
 
@@ -9589,7 +9604,7 @@ class WINDOWPOS extends Struct {
 /// Describes a change in the size of the console screen buffer.
 ///
 /// {@category Struct}
-class WINDOW_BUFFER_SIZE_RECORD extends Struct {
+base class WINDOW_BUFFER_SIZE_RECORD extends Struct {
   external COORD dwSize;
 }
 
@@ -9597,7 +9612,7 @@ class WINDOW_BUFFER_SIZE_RECORD extends Struct {
 /// attributes for a connection.
 ///
 /// {@category Struct}
-class WLAN_ASSOCIATION_ATTRIBUTES extends Struct {
+base class WLAN_ASSOCIATION_ATTRIBUTES extends Struct {
   external DOT11_SSID dot11Ssid;
 
   @Int32()
@@ -9626,7 +9641,7 @@ class WLAN_ASSOCIATION_ATTRIBUTES extends Struct {
 /// authentication and cipher algorithm pairs.
 ///
 /// {@category Struct}
-class WLAN_AUTH_CIPHER_PAIR_LIST extends Struct {
+base class WLAN_AUTH_CIPHER_PAIR_LIST extends Struct {
   @Uint32()
   external int dwNumberOfItems;
 
@@ -9638,7 +9653,7 @@ class WLAN_AUTH_CIPHER_PAIR_LIST extends Struct {
 /// available wireless network.
 ///
 /// {@category Struct}
-class WLAN_AVAILABLE_NETWORK extends Struct {
+base class WLAN_AVAILABLE_NETWORK extends Struct {
   @Array(256)
   external Array<Uint16> _strProfileName;
 
@@ -9704,7 +9719,7 @@ class WLAN_AVAILABLE_NETWORK extends Struct {
 /// information about available networks.
 ///
 /// {@category Struct}
-class WLAN_AVAILABLE_NETWORK_LIST extends Struct {
+base class WLAN_AVAILABLE_NETWORK_LIST extends Struct {
   @Uint32()
   external int dwNumberOfItems;
 
@@ -9719,7 +9734,7 @@ class WLAN_AVAILABLE_NETWORK_LIST extends Struct {
 /// set (BSS).
 ///
 /// {@category Struct}
-class WLAN_BSS_ENTRY extends Struct {
+base class WLAN_BSS_ENTRY extends Struct {
   external DOT11_SSID dot11Ssid;
 
   @Uint32()
@@ -9771,7 +9786,7 @@ class WLAN_BSS_ENTRY extends Struct {
 /// entries.
 ///
 /// {@category Struct}
-class WLAN_BSS_LIST extends Struct {
+base class WLAN_BSS_LIST extends Struct {
   @Uint32()
   external int dwTotalSize;
 
@@ -9786,7 +9801,7 @@ class WLAN_BSS_LIST extends Struct {
 /// wireless connection.
 ///
 /// {@category Struct}
-class WLAN_CONNECTION_ATTRIBUTES extends Struct {
+base class WLAN_CONNECTION_ATTRIBUTES extends Struct {
   @Int32()
   external int isState;
 
@@ -9821,7 +9836,7 @@ class WLAN_CONNECTION_ATTRIBUTES extends Struct {
 /// about connection related notifications.
 ///
 /// {@category Struct}
-class WLAN_CONNECTION_NOTIFICATION_DATA extends Struct {
+base class WLAN_CONNECTION_NOTIFICATION_DATA extends Struct {
   @Int32()
   external int wlanConnectionMode;
 
@@ -9882,7 +9897,7 @@ class WLAN_CONNECTION_NOTIFICATION_DATA extends Struct {
 /// when using the WlanConnect function.
 ///
 /// {@category Struct}
-class WLAN_CONNECTION_PARAMETERS extends Struct {
+base class WLAN_CONNECTION_PARAMETERS extends Struct {
   @Int32()
   external int wlanConnectionMode;
 
@@ -9903,7 +9918,7 @@ class WLAN_CONNECTION_PARAMETERS extends Struct {
 /// supported country or region strings.
 ///
 /// {@category Struct}
-class WLAN_COUNTRY_OR_REGION_STRING_LIST extends Struct {
+base class WLAN_COUNTRY_OR_REGION_STRING_LIST extends Struct {
   @Uint32()
   external int dwNumberOfItems;
 
@@ -9914,7 +9929,7 @@ class WLAN_COUNTRY_OR_REGION_STRING_LIST extends Struct {
 /// Contains an array of device service GUIDs.
 ///
 /// {@category Struct}
-class WLAN_DEVICE_SERVICE_GUID_LIST extends Struct {
+base class WLAN_DEVICE_SERVICE_GUID_LIST extends Struct {
   @Uint32()
   external int dwNumberOfItems;
 
@@ -9928,7 +9943,7 @@ class WLAN_DEVICE_SERVICE_GUID_LIST extends Struct {
 /// A structure that represents a device service notification.
 ///
 /// {@category Struct}
-class WLAN_DEVICE_SERVICE_NOTIFICATION_DATA extends Struct {
+base class WLAN_DEVICE_SERVICE_NOTIFICATION_DATA extends Struct {
   external GUID DeviceService;
 
   @Uint32()
@@ -9946,7 +9961,7 @@ class WLAN_DEVICE_SERVICE_NOTIFICATION_DATA extends Struct {
 /// Network.
 ///
 /// {@category Struct}
-class WLAN_HOSTED_NETWORK_CONNECTION_SETTINGS extends Struct {
+base class WLAN_HOSTED_NETWORK_CONNECTION_SETTINGS extends Struct {
   external DOT11_SSID hostedNetworkSSID;
 
   @Uint32()
@@ -9958,7 +9973,7 @@ class WLAN_HOSTED_NETWORK_CONNECTION_SETTINGS extends Struct {
 /// Hosted Network.
 ///
 /// {@category Struct}
-class WLAN_HOSTED_NETWORK_DATA_PEER_STATE_CHANGE extends Struct {
+base class WLAN_HOSTED_NETWORK_DATA_PEER_STATE_CHANGE extends Struct {
   external WLAN_HOSTED_NETWORK_PEER_STATE OldState;
 
   external WLAN_HOSTED_NETWORK_PEER_STATE NewState;
@@ -9971,7 +9986,7 @@ class WLAN_HOSTED_NETWORK_DATA_PEER_STATE_CHANGE extends Struct {
 /// the peer state for a peer on the wireless Hosted Network.
 ///
 /// {@category Struct}
-class WLAN_HOSTED_NETWORK_PEER_STATE extends Struct {
+base class WLAN_HOSTED_NETWORK_PEER_STATE extends Struct {
   @Array(6)
   external Array<Uint8> PeerMacAddress;
 
@@ -9983,7 +9998,7 @@ class WLAN_HOSTED_NETWORK_PEER_STATE extends Struct {
 /// the radio state on the wireless Hosted Network.
 ///
 /// {@category Struct}
-class WLAN_HOSTED_NETWORK_RADIO_STATE extends Struct {
+base class WLAN_HOSTED_NETWORK_RADIO_STATE extends Struct {
   @Int32()
   external int dot11SoftwareRadioState;
 
@@ -9995,7 +10010,7 @@ class WLAN_HOSTED_NETWORK_RADIO_STATE extends Struct {
 /// about the security settings on the wireless Hosted Network.
 ///
 /// {@category Struct}
-class WLAN_HOSTED_NETWORK_SECURITY_SETTINGS extends Struct {
+base class WLAN_HOSTED_NETWORK_SECURITY_SETTINGS extends Struct {
   @Int32()
   external int dot11AuthAlgo;
 
@@ -10007,7 +10022,7 @@ class WLAN_HOSTED_NETWORK_SECURITY_SETTINGS extends Struct {
 /// about a network state change on the wireless Hosted Network.
 ///
 /// {@category Struct}
-class WLAN_HOSTED_NETWORK_STATE_CHANGE extends Struct {
+base class WLAN_HOSTED_NETWORK_STATE_CHANGE extends Struct {
   @Int32()
   external int OldState;
 
@@ -10022,7 +10037,7 @@ class WLAN_HOSTED_NETWORK_STATE_CHANGE extends Struct {
 /// status of the wireless Hosted Network.
 ///
 /// {@category Struct}
-class WLAN_HOSTED_NETWORK_STATUS extends Struct {
+base class WLAN_HOSTED_NETWORK_STATUS extends Struct {
   @Int32()
   external int HostedNetworkState;
 
@@ -10048,7 +10063,7 @@ class WLAN_HOSTED_NETWORK_STATUS extends Struct {
 /// capabilities of an interface.
 ///
 /// {@category Struct}
-class WLAN_INTERFACE_CAPABILITY extends Struct {
+base class WLAN_INTERFACE_CAPABILITY extends Struct {
   @Int32()
   external int interfaceType;
 
@@ -10072,7 +10087,7 @@ class WLAN_INTERFACE_CAPABILITY extends Struct {
 /// LAN interface.
 ///
 /// {@category Struct}
-class WLAN_INTERFACE_INFO extends Struct {
+base class WLAN_INTERFACE_INFO extends Struct {
   external GUID InterfaceGuid;
 
   @Array(256)
@@ -10102,7 +10117,7 @@ class WLAN_INTERFACE_INFO extends Struct {
 /// interface information.
 ///
 /// {@category Struct}
-class WLAN_INTERFACE_INFO_LIST extends Struct {
+base class WLAN_INTERFACE_INFO_LIST extends Struct {
   @Uint32()
   external int dwNumberOfItems;
 
@@ -10117,7 +10132,7 @@ class WLAN_INTERFACE_INFO_LIST extends Struct {
 /// and received MAC frames.
 ///
 /// {@category Struct}
-class WLAN_MAC_FRAME_STATISTICS extends Struct {
+base class WLAN_MAC_FRAME_STATISTICS extends Struct {
   @Uint64()
   external int ullTransmittedFrameCount;
 
@@ -10159,7 +10174,7 @@ class WLAN_MAC_FRAME_STATISTICS extends Struct {
 /// media specific module (MSM) connection related notifications.
 ///
 /// {@category Struct}
-class WLAN_MSM_NOTIFICATION_DATA extends Struct {
+base class WLAN_MSM_NOTIFICATION_DATA extends Struct {
   @Int32()
   external int wlanConnectionMode;
 
@@ -10207,7 +10222,7 @@ class WLAN_MSM_NOTIFICATION_DATA extends Struct {
 /// and received PHY frames.
 ///
 /// {@category Struct}
-class WLAN_PHY_FRAME_STATISTICS extends Struct {
+base class WLAN_PHY_FRAME_STATISTICS extends Struct {
   @Uint64()
   external int ullTransmittedFrameCount;
 
@@ -10267,7 +10282,7 @@ class WLAN_PHY_FRAME_STATISTICS extends Struct {
 /// specific physical layer (PHY) type.
 ///
 /// {@category Struct}
-class WLAN_PHY_RADIO_STATE extends Struct {
+base class WLAN_PHY_RADIO_STATE extends Struct {
   @Uint32()
   external int dwPhyIndex;
 
@@ -10282,7 +10297,7 @@ class WLAN_PHY_RADIO_STATE extends Struct {
 /// profile.
 ///
 /// {@category Struct}
-class WLAN_PROFILE_INFO extends Struct {
+base class WLAN_PROFILE_INFO extends Struct {
   @Array(256)
   external Array<Uint16> _strProfileName;
 
@@ -10310,7 +10325,7 @@ class WLAN_PROFILE_INFO extends Struct {
 /// information.
 ///
 /// {@category Struct}
-class WLAN_PROFILE_INFO_LIST extends Struct {
+base class WLAN_PROFILE_INFO_LIST extends Struct {
   @Uint32()
   external int dwNumberOfItems;
 
@@ -10325,7 +10340,7 @@ class WLAN_PROFILE_INFO_LIST extends Struct {
 /// physical layer (PHY) types.
 ///
 /// {@category Struct}
-class WLAN_RADIO_STATE extends Struct {
+base class WLAN_RADIO_STATE extends Struct {
   @Uint32()
   external int dwNumberOfPhys;
 
@@ -10336,7 +10351,7 @@ class WLAN_RADIO_STATE extends Struct {
 /// The set of supported data rates.
 ///
 /// {@category Struct}
-class WLAN_RATE_SET extends Struct {
+base class WLAN_RATE_SET extends Struct {
   @Uint32()
   external int uRateSetLength;
 
@@ -10348,7 +10363,7 @@ class WLAN_RATE_SET extends Struct {
 /// is used by some Native Wifi functions.
 ///
 /// {@category Struct}
-class WLAN_RAW_DATA extends Struct {
+base class WLAN_RAW_DATA extends Struct {
   @Uint32()
   external int dwDataSize;
 
@@ -10360,7 +10375,7 @@ class WLAN_RAW_DATA extends Struct {
 /// array of data blobs that are used by some Native Wifi functions.
 ///
 /// {@category Struct}
-class WLAN_RAW_DATA_LIST extends Struct {
+base class WLAN_RAW_DATA_LIST extends Struct {
   @Uint32()
   external int dwTotalSize;
 
@@ -10372,7 +10387,7 @@ class WLAN_RAW_DATA_LIST extends Struct {
 }
 
 /// {@category Struct}
-class _WLAN_RAW_DATA_LIST__Anonymous_e__Struct extends Struct {
+base class _WLAN_RAW_DATA_LIST__Anonymous_e__Struct extends Struct {
   @Uint32()
   external int dwDataOffset;
 
@@ -10384,7 +10399,7 @@ class _WLAN_RAW_DATA_LIST__Anonymous_e__Struct extends Struct {
 /// for a wireless connection.
 ///
 /// {@category Struct}
-class WLAN_SECURITY_ATTRIBUTES extends Struct {
+base class WLAN_SECURITY_ATTRIBUTES extends Struct {
   @Int32()
   external int bSecurityEnabled;
 
@@ -10402,7 +10417,7 @@ class WLAN_SECURITY_ATTRIBUTES extends Struct {
 /// interface.
 ///
 /// {@category Struct}
-class WLAN_STATISTICS extends Struct {
+base class WLAN_STATISTICS extends Struct {
   @Uint64()
   external int ullFourWayHandshakeFailures;
 
@@ -10431,7 +10446,7 @@ class WLAN_STATISTICS extends Struct {
 /// the window class.
 ///
 /// {@category Struct}
-class WNDCLASSEX extends Struct {
+base class WNDCLASSEX extends Struct {
   @Uint32()
   external int cbSize;
 
@@ -10470,7 +10485,7 @@ class WNDCLASSEX extends Struct {
 /// RegisterClass function.
 ///
 /// {@category Struct}
-class WNDCLASS extends Struct {
+base class WNDCLASS extends Struct {
   @Uint32()
   external int style;
 
@@ -10502,7 +10517,7 @@ class WNDCLASS extends Struct {
 /// Defines options that are used to set window visual style attributes.
 ///
 /// {@category Struct}
-class WTA_OPTIONS extends Struct {
+base class WTA_OPTIONS extends Struct {
   @Uint32()
   external int dwFlags;
 
@@ -10514,7 +10529,7 @@ class WTA_OPTIONS extends Struct {
 /// transformation.
 ///
 /// {@category Struct}
-class XFORM extends Struct {
+base class XFORM extends Struct {
   @Float()
   external double eM11;
 
@@ -10537,7 +10552,7 @@ class XFORM extends Struct {
 /// Contains information on battery type and charge state.
 ///
 /// {@category Struct}
-class XINPUT_BATTERY_INFORMATION extends Struct {
+base class XINPUT_BATTERY_INFORMATION extends Struct {
   @Uint8()
   external int BatteryType;
 
@@ -10549,7 +10564,7 @@ class XINPUT_BATTERY_INFORMATION extends Struct {
 /// XInputGetCapabilities function returns XINPUT_CAPABILITIES.
 ///
 /// {@category Struct}
-class XINPUT_CAPABILITIES extends Struct {
+base class XINPUT_CAPABILITIES extends Struct {
   @Uint8()
   external int Type;
 
@@ -10567,7 +10582,7 @@ class XINPUT_CAPABILITIES extends Struct {
 /// Describes the current state of the controller.
 ///
 /// {@category Struct}
-class XINPUT_GAMEPAD extends Struct {
+base class XINPUT_GAMEPAD extends Struct {
   @Uint16()
   external int wButtons;
 
@@ -10593,7 +10608,7 @@ class XINPUT_GAMEPAD extends Struct {
 /// Specifies keystroke data returned by XInputGetKeystroke.
 ///
 /// {@category Struct}
-class XINPUT_KEYSTROKE extends Struct {
+base class XINPUT_KEYSTROKE extends Struct {
   @Uint16()
   external int VirtualKey;
 
@@ -10613,7 +10628,7 @@ class XINPUT_KEYSTROKE extends Struct {
 /// Represents the state of a controller.
 ///
 /// {@category Struct}
-class XINPUT_STATE extends Struct {
+base class XINPUT_STATE extends Struct {
   @Uint32()
   external int dwPacketNumber;
 
@@ -10623,7 +10638,7 @@ class XINPUT_STATE extends Struct {
 /// Specifies motor speed levels for the vibration function of a controller.
 ///
 /// {@category Struct}
-class XINPUT_VIBRATION extends Struct {
+base class XINPUT_VIBRATION extends Struct {
   @Uint16()
   external int wLeftMotorSpeed;
 

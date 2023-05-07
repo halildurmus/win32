@@ -34,13 +34,10 @@ void main() {
   switch (pMBI.ref.Type) {
     case MEM_IMAGE:
       print("Type: MEM_IMAGE");
-      break;
     case MEM_MAPPED:
       print("Type: MEM_MAPPED");
-      break;
     case MEM_PRIVATE:
       print("Type: MEM_PRIVATE");
-      break;
     default:
       print("Type not found.");
       break;
@@ -50,16 +47,12 @@ void main() {
   switch (pMBI.ref.AllocationProtect) {
     case PAGE_EXECUTE_READWRITE:
       print('AllocationProtect flags: EXECUTE + READ + WRITE');
-      break;
     case PAGE_EXECUTE_READ:
       print('AllocationProtect flags: EXECUTE + READ');
-      break;
     case PAGE_READWRITE:
       print('AllocationProtect flags: READ + WRITE');
-      break;
     case PAGE_READONLY:
       print('AllocationProtect flag: READ');
-      break;
     default:
       print('AllocationProtect not found.');
       break;
@@ -69,13 +62,10 @@ void main() {
   switch (pMBI.ref.State) {
     case MEM_COMMIT:
       print('State of Buffer Region: Committed');
-      break;
     case MEM_FREE:
       print('State of Buffer Region: Free');
-      break;
     case MEM_RESERVE:
       print('State of Buffer Region: Reserve');
-      break;
     default:
       print('State of Buffer Region not found.');
       break;

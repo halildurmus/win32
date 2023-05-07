@@ -66,7 +66,6 @@ int hostWndProc(int hWnd, int message, int wParam, int lParam) {
           goPartialScreen();
         }
       }
-      break;
 
     case WM_SYSCOMMAND:
       if (GET_SC_WPARAM(wParam) == SC_MAXIMIZE) {
@@ -74,11 +73,9 @@ int hostWndProc(int hWnd, int message, int wParam, int lParam) {
       } else {
         return DefWindowProc(hWnd, message, wParam, lParam);
       }
-      break;
 
     case WM_DESTROY:
       PostQuitMessage(0);
-      break;
 
     case WM_SIZE:
       if (hwndMag != NULL) {
@@ -94,7 +91,6 @@ int hostWndProc(int hWnd, int message, int wParam, int lParam) {
             magWindowRect.ref.bottom,
             0);
       }
-      break;
 
     default:
       return DefWindowProc(hWnd, message, wParam, lParam);

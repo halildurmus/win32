@@ -168,7 +168,7 @@ class Guid {
 ///
 /// {@category Struct}
 @Packed(4)
-class GUID extends Struct {
+base class GUID extends Struct {
   @Uint32()
   external int Data1;
   @Uint16()

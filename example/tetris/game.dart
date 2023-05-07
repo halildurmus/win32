@@ -27,32 +27,25 @@ class Game {
     switch (vk) {
       case VK_UP:
         level.rotate();
-        break;
       case VK_DOWN:
         level.move(0, -1);
-        break;
       case VK_LEFT:
         level.move(-1, 0);
-        break;
       case VK_RIGHT:
         level.move(1, 0);
-        break;
       case VK_SPACE:
         level.rotate();
-        break;
       case VK_PAUSE:
         if (isPaused) {
           resumeGame();
         } else {
           pauseGame();
         }
-        break;
       case VK_RETURN:
         // You can only restart on game over
         if (isGameOver) {
           restart();
         }
-        break;
       default:
         return false;
     }

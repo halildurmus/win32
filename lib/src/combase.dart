@@ -23,7 +23,7 @@ typedef VTablePointer = Pointer<Pointer<IntPtr>>;
 ///
 /// {@category Interface}
 /// {@category com}
-class COMObject extends Struct {
+base class COMObject extends Struct {
   external VTablePointer lpVtbl;
 
   /// Whether the [lpVtbl] is a null pointer.
