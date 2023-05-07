@@ -10,18 +10,6 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 extension Utf16Conversion on Pointer<Utf16> {
-  @Deprecated('Use the toDartString method in package:ffi 1.0 instead.')
-  String unpackString(int maxLength) {
-    final pathData = cast<Uint16>().asTypedList(maxLength);
-
-    var stringLength = pathData.indexOf(0);
-    if (stringLength == -1) {
-      stringLength = maxLength;
-    }
-
-    return String.fromCharCodes(pathData, 0, stringLength);
-  }
-
   // Assumes an array of null-terminated strings, with the final
   // element terminated with a second null.
   List<String> unpackStringArray(int maxLength) {
