@@ -10,7 +10,7 @@
 
 - Fix missing export of crypt32 APIs (#673)
 - Fix a dartdoc comment reference (#666)
-- Fix memory leak in `convertToHString
+- Fix memory leak in `convertToHString`
 
 ## 4.1.1
 
