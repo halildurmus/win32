@@ -62,7 +62,6 @@ void main() {
             '$networkName: ${isNetworkConnected ? 'connected' : 'disconnected'}');
       }
 
-      network.release();
       netPtr = calloc<COMObject>();
       hr = enumerator.next(1, netPtr.cast(), elements);
     }
@@ -70,8 +69,5 @@ void main() {
     free(elements);
     free(descPtr);
     free(nlmConnectivity);
-    netManager.release();
-
-    CoUninitialize();
   }
 }

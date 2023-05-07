@@ -20,7 +20,4 @@ void main() {
   speechEngine.speak(pText, SPEAKFLAGS.SPF_IS_NOT_XML, nullptr);
 
   free(pText);
-  speechEngine.release();
-
-  CoUninitialize();
 }

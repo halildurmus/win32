@@ -1,3 +1,18 @@
+## 5.0.0
+
+- Added `detach` method to `IUnknown`, which detaches the object from
+  `Finalizer` if you want to manually manage the lifetime of the object
+  yourself (#677)
+- [BREAKING CHANGE] `Finalizer` is now attached to COM objects. Therefore, you
+  no longer need to call `.release()` to decrement the reference count, because
+  `Finalizer` will do it for you when they go out of scope (#691)
+
+  **Note:** Calling `.release()` with `Finalizer` attached may result in use
+  after free and cause the process to crash
+
+  **Note:** If you're manually managing the lifetime of the object, you need to
+  call `.release()` to decrement the reference count
+
 ## 4.1.4
 
 - Add some minor network APIs
@@ -10,7 +25,7 @@
 
 - Fix missing export of crypt32 APIs (#673)
 - Fix a dartdoc comment reference (#666)
-- Fix memory leak in `convertToHString
+- Fix memory leak in `convertToHString`
 
 ## 4.1.1
 

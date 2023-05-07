@@ -78,17 +78,10 @@ void main() {
       final path = pathPtr.value.toDartString();
 
       print('Result: $path');
-
-      hr = item.release();
-      if (!SUCCEEDED(hr)) throw WindowsException(hr);
     }
-
-    hr = fileDialog.release();
-    if (!SUCCEEDED(hr)) throw WindowsException(hr);
   } else {
     throw WindowsException(hr);
   }
-  CoUninitialize();
 
   print('All done!');
 }

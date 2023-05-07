@@ -26,6 +26,5 @@ void main() {
   }
 
   free(state);
-  print('all done');
-  CoUninitialize();
+  print('All done');
 }

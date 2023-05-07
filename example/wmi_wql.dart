@@ -13,9 +13,7 @@ import 'package:win32/win32.dart';
 void main() {
   // Initialize COM
   var hr = CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
-  if (FAILED(hr)) {
-    throw WindowsException(hr);
-  }
+  if (FAILED(hr)) throw WindowsException(hr);
 
   // Initialize security model
   hr = CoInitializeSecurity(
@@ -77,7 +75,6 @@ void main() {
     final exception = WindowsException(hr);
     print(exception.toString());
 
-    pLoc.release();
     CoUninitialize();
     throw exception; // Program has failed.
   }
@@ -102,8 +99,6 @@ void main() {
   if (FAILED(hr)) {
     final exception = WindowsException(hr);
     print(exception.toString());
-    pSvc.release();
-    pLoc.release();
     CoUninitialize();
     throw exception; // Program has failed.
   }
@@ -126,8 +121,6 @@ void main() {
     final exception = WindowsException(hr);
     print(exception.toString());
 
-    pSvc.release();
-    pLoc.release();
     CoUninitialize();
 
     throw exception;
@@ -158,15 +151,9 @@ void main() {
       // Free BSTRs in the returned variants
       VariantClear(vtProp);
       free(vtProp);
-
-      clsObj.release();
     }
     print('$idx processes found.');
   }
-
-  pSvc.release();
-  pLoc.release();
-  enumerator.release();
 
   CoUninitialize();
 }

@@ -24,21 +24,26 @@ const IID_IUnknown = '{00000000-0000-0000-c000-000000000046}';
 ///
 /// {@category Interface}
 /// {@category com}
-class IUnknown implements Finalizable {
+class IUnknown {
   // vtable begins at 0, is 3 entries long.
   Pointer<COMObject> ptr;
 
   IUnknown(this.ptr) {
     if (!ptr.ref.isNull) {
-      _finalizer.attach(this, ptr.cast(),
-          detach: this, externalSize: sizeOf<IntPtr>());
+      _finalizer.attach(this, ptr, detach: this);
     }
   }
 
-  static final _ole32Lib = DynamicLibrary.open('ole32.dll');
-  static final _winCoTaskMemFree = _ole32Lib
-      .lookup<NativeFunction<Void Function(Pointer pv)>>('CoTaskMemFree');
-  static final _finalizer = NativeFinalizer(_winCoTaskMemFree.cast());
+  static final _finalizer = Finalizer<Pointer<COMObject>>((ptr) {
+    _release(ptr);
+    free(ptr);
+  });
+
+  static int _release(Pointer<COMObject> ptr) => ptr.ref.vtable
+      .elementAt(2)
+      .cast<Pointer<NativeFunction<Uint32 Function(VTablePointer lpVtbl)>>>()
+      .value
+      .asFunction<int Function(VTablePointer lpVtbl)>()(ptr.ref.lpVtbl);
 
   factory IUnknown.from(IUnknown interface) =>
       IUnknown(interface.toInterface(IID_IUnknown));
@@ -72,13 +77,21 @@ class IUnknown implements Finalizable {
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
   /// Decrements the reference count for an interface on a COM object.
+  ///
+  /// This method is automatically called by [Finalizer] when the object goes
+  /// out of scope. Therefore, you should never call this method unless you're
+  /// manually managing the lifetime of the object (i.e. by calling the
+  /// [detach] method).
+  ///
+  /// Calling this method with [Finalizer] attached may result in use after
+  /// free and cause the process to crash.
   int release() => ptr.ref.vtable
       .elementAt(2)
       .cast<Pointer<NativeFunction<Uint32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  /// Detaches the object from the `NativeFinalizer`.
+  /// Detaches the object from the `Finalizer`.
   ///
   /// Call this method only if you want to manually manage the lifetime of the
   /// object.

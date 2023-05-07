@@ -88,15 +88,11 @@ String getDesktopPath3() {
     hr = knownFolder.getPath(0, ppszPath);
     if (FAILED(hr)) throw WindowsException(hr);
 
-    knownFolder.release();
-    knownFolderManager.release();
-
     final path = ppszPath.value.toDartString();
     return path;
   } finally {
     free(appsFolder);
     free(ppszPath);
-    CoUninitialize();
   }
 }
 

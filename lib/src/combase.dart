@@ -47,7 +47,6 @@ class COMObject extends Struct {
       final hr =
           CoCreateInstance(pClsid, nullptr, CLSCTX_ALL, pIid, pObj.cast());
       if (FAILED(hr)) throw WindowsException(hr);
-
       return pObj;
     } finally {
       free(pClsid);
@@ -99,9 +98,7 @@ Pointer<GUID> convertToCLSID(String strCLSID, {Allocator allocator = calloc}) {
 
   try {
     final hr = CLSIDFromString(lpszCLSID, clsid);
-    if (FAILED(hr)) {
-      throw WindowsException(hr);
-    }
+    if (FAILED(hr)) throw WindowsException(hr);
     return clsid;
   } finally {
     free(lpszCLSID);

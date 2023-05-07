@@ -2,8 +2,8 @@
 
 Windows APIs that use the COM invocation model.
 
-Since the Win32 package primarily focuses on providing a lightweight wrapper for
-the underlying Windows API primitives, you can use the same API calls as
+Since the `win32` package primarily focuses on providing a lightweight wrapper
+for the underlying Windows API primitives, you can use the same API calls as
 described in Microsoft documentation to create an manipulate objects (e.g.
 `CoCreateInstance` and `IUnknown->QueryInterface`). However, since this
 introduces a certain amount of boilerplate and non-idiomatic Dart code, the
@@ -37,7 +37,7 @@ object, it is easier to use the `createFromID` static helper function:
 
 ```dart
 final fileDialog2 = IFileDialog2(
-  COMObject.createFromID(CLSID_FileOpenDialog, IID_IFileDialog2));
+    COMObject.createFromID(CLSID_FileOpenDialog, IID_IFileDialog2));
 ```
 
 `createFromID` returns a `Pointer<COMObject>` containing the requested object,
@@ -47,16 +47,16 @@ which can then be cast into the appropriate interface as shown above.
 
 COM allows objects to implement multiple interfaces, but it does not let you
 merely cast an object to a different interface. Instead, returned pointers are
-to a specific interface. However, every COM interface in the Dart Win32 package
-derives from `IUnknown`, so as in other language implementations of COM, you may
-call `queryInterface` on any object to retrieve a pointer to a different
+to a specific interface. However, every COM interface in the `win32` package
+derives from `IUnknown`, so as in other language implementations of COM, you
+may call `queryInterface` on any object to retrieve a pointer to a different
 supported interface.
 
 More information on COM interfaces may be found in the [Microsoft
 documentation](https://docs.microsoft.com/en-us/windows/win32/learnwin32/asking-an-object-for-an-interface).
 
-COM interfaces supply a method that wraps `queryInterface`. If you
-have an existing COM object, you can call it as follows:
+COM interfaces supply a method that wraps `queryInterface`. If you have an
+existing COM object, you can call it as follows:
 
 ```dart
   final modalWindow = IModalWindow(fileDialog2.toInterface(IID_IModalWindow));
@@ -100,7 +100,11 @@ if (FAILED(hr) && hr == HRESULT_FROM_WIN32(ERROR_CANCELLED)) {
 
 ### Releasing COM objects
 
-When you have finished using a COM interface, you should release it with the `release` method:
+Most of the time, you don't need to do anything as COM objects are
+automatically released by `Finalizer` when they go out of scope.
+
+However, if you're manually managing the lifetime of the object (i.e. by
+calling the `.detach()`), you should release it by calling the `.release()`:
 
 ```dart
 fileOpenDialog.release(); // Release the interface
@@ -108,15 +112,6 @@ fileOpenDialog.release(); // Release the interface
 
 Often this will be called as part of a `try` / `finally` block, to guarantee
 that the object is released even if an exception is thrown.
-
-### Unloading COM support
-
-When you have finished using COM, you should uninitialize it with the
-following call:
-
-```dart
-CoUninitialize();
-```
 
 A full example of these calls can be found in the `com_demo.dart` file in the
 `example\` subfolder.
