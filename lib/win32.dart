@@ -74,6 +74,7 @@ library win32;
 export 'src/bstr.dart';
 export 'src/callbacks.dart';
 export 'src/constants.dart';
+export 'src/constants_metadata.dart';
 export 'src/constants_nodoc.dart';
 export 'src/exceptions.dart';
 export 'src/guid.dart';
