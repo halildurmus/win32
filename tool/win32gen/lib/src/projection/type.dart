@@ -143,8 +143,8 @@ class TypeProjection {
     }
 
     // A type like HWND
-    if (wrappedType
-        .existsAttribute('Windows.Win32.Interop.NativeTypedefAttribute')) {
+    if (wrappedType.existsAttribute(
+        'Windows.Win32.Foundation.Metadata.NativeTypedefAttribute')) {
       final typeIdentifier = wrappedType.fields.first.typeIdentifier;
       return TypeProjection(typeIdentifier).projection;
     }

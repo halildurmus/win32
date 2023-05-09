@@ -37,14 +37,14 @@ void main() {
   test('HRESULT type', () {
     final scope = MetadataStore.getWin32Scope();
 
-    final typedef = scope.findTypeDef('Windows.Win32.System.Com');
+    final typedef = scope.findTypeDef('Windows.Win32.System.Com.Apis');
     final api = typedef?.findMethod('CoInitialize');
     expect(api, isNotNull);
 
     final hresult = api!.returnType.typeIdentifier; // HRESULT
 
     final typeProjection = TypeProjection(hresult);
-    expect(typeProjection.nativeType, equals('IntPtr'));
+    expect(typeProjection.nativeType, equals('Int32'));
     expect(typeProjection.dartType, equals('int'));
   });
 
