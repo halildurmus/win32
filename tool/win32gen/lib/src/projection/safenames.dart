@@ -54,6 +54,7 @@ const badIdentifierNames = <String>[
   ...dartTypes,
   ...ffiTypes,
   ...win32TypesUsedAsIdentifiers,
+  'ptr' // used in COM
 ];
 
 /// Take a [TypeDef] and return a name suitable for filenames.
