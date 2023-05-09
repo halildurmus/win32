@@ -656,7 +656,8 @@ class TypeDef extends TokenObject
   String? get guid {
     var guid =
         getCustomGUIDAttribute('Windows.Foundation.Metadata.GuidAttribute');
-    guid ??= getCustomGUIDAttribute('Windows.Win32.Interop.GuidAttribute');
+    guid ??= getCustomGUIDAttribute(
+        'Windows.Win32.Foundation.Metadata.GuidAttribute');
 
     return guid;
   }

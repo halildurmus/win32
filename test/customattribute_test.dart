@@ -120,7 +120,7 @@ void main() {
     final itn = MetadataStore.getMetadataForType(
         'Windows.UI.Notifications.IToastNotification')!;
     final guid =
-        itn.findAttribute('Windows.Foundation.Metadata.GuidAttribute')!;
+        itn.findAttribute('Windows.Win32.Foundation.Metadata.GuidAttribute')!;
     check(guid.parameters.length).equals(11);
     check(guid.parameters[0].value).equals(0x997e2675);
     check(guid.parameters[1].value).equals(0x059e);
