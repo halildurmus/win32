@@ -30,3 +30,7 @@ dependencies:
 
   # Win32 itself
   win32: ^4.1.4
+
+dependency_overrides:
+  winmd:
+    path: ../../../winmd
