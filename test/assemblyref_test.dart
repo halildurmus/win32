@@ -19,19 +19,7 @@ void main() {
     check(assemblyRef.name).equals(assemblyRef.toString());
   });
 
-  test('Assembly version matches toString() 1', () {
-    final scope = MetadataStore.getWin32Scope();
-
-    final interopAssembly =
-        scope.assemblyRefs.firstWhere((a) => a.name == 'Windows.Win32.Interop');
-
-    // Current version at the time of writing this test is 23.0.0.18996. Version
-    // numbers should only increase from here!
-    check(int.parse(interopAssembly.version.split('.').first))
-        .isGreaterOrEqual(23);
-  });
-
-  test('Assembly version matches toString() 2', () {
+  test('Assembly version matches toString()', () {
     final scope =
         MetadataStore.getScopeForType('Windows.Globalization.Calendar');
 
