@@ -38,7 +38,7 @@ class MemberRef extends TokenObject {
       final pcbSigBlob = arena<ULONG>();
 
       final reader = scope.reader;
-      final hr = reader.GetMemberRefProps(token, ptk, szMember,
+      final hr = reader.getMemberRefProps(token, ptk, szMember,
           stringBufferSize, pchMember, ppvSigBlob, pcbSigBlob);
 
       if (SUCCEEDED(hr)) {

@@ -67,7 +67,7 @@ class Property extends TokenObject with CustomAttributesMixin {
       final pcOtherMethod = arena<ULONG>();
 
       final reader = scope.reader;
-      final hr = reader.GetPropertyProps(
+      final hr = reader.getPropertyProps(
           token,
           ptkTypeDef,
           szProperty,
@@ -119,12 +119,12 @@ class Property extends TokenObject with CustomAttributesMixin {
   String toString() => name;
 
   /// Returns the get accessor method for the property.
-  Method? get getterMethod => reader.IsValidToken(_getterToken) == TRUE
+  Method? get getterMethod => reader.isValidToken(_getterToken) == TRUE
       ? Method.fromToken(scope, _getterToken)
       : null;
 
   /// Returns the set accessor method for the property.
-  Method? get setterMethod => reader.IsValidToken(_setterToken) == TRUE
+  Method? get setterMethod => reader.isValidToken(_setterToken) == TRUE
       ? Method.fromToken(scope, _setterToken)
       : null;
 
@@ -143,11 +143,11 @@ class Property extends TokenObject with CustomAttributesMixin {
 
   /// Returns true if the property has a getter. If false, the property is
   /// write-only.
-  bool get hasGetter => reader.IsValidToken(_getterToken) == TRUE;
+  bool get hasGetter => reader.isValidToken(_getterToken) == TRUE;
 
   /// Returns true if the property has a setter. If false, the property is
   /// read-only.
-  bool get hasSetter => reader.IsValidToken(_setterToken) == TRUE;
+  bool get hasSetter => reader.isValidToken(_setterToken) == TRUE;
 
   /// Returns true if the common language runtime metadata internal APIs should
   /// check the encoding of the property name.

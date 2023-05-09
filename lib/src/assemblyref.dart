@@ -7,7 +7,6 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'com/structs.dart';
 import 'enums.dart';
 import 'scope.dart';
 import 'token_object.dart';
@@ -33,12 +32,12 @@ class AssemblyRef extends TokenObject {
       final pcbPublicKeyOrToken = arena<ULONG>();
       final szName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
       final pchName = arena<ULONG>();
-      final pMetaData = arena<ASSEMBLYDATA>();
+      final pMetaData = arena<ASSEMBLYMETADATA>();
       final ppbHashValue = arena<Pointer<BYTE>>();
       final pcbHashValue = arena<ULONG>();
       final pdwAssemblyRefFlags = arena<DWORD>();
 
-      final hr = scope.assemblyImport.GetAssemblyRefProps(
+      final hr = scope.assemblyImport.getAssemblyRefProps(
           token,
           ppbPublicKeyOrToken,
           pcbPublicKeyOrToken,

@@ -78,7 +78,7 @@ class Method extends TokenObject
       final pdwImplFlags = arena<DWORD>();
 
       final reader = scope.reader;
-      final hr = reader.GetMethodProps(
+      final hr = reader.getMethodProps(
           token,
           ptkClass,
           szMethod,
@@ -200,7 +200,7 @@ class Method extends TokenObject
         final pchImportName = arena<ULONG>();
         final ptkImportDLL = arena<mdModuleRef>();
 
-        final hr = reader.GetPinvokeMap(token, pdwMappingFlags, szImportName,
+        final hr = reader.getPinvokeMap(token, pdwMappingFlags, szImportName,
             stringBufferSize, pchImportName, ptkImportDLL);
         if (SUCCEEDED(hr)) {
           return ModuleRef.fromToken(scope, ptkImportDLL.value);
@@ -312,14 +312,14 @@ class Method extends TokenObject
         final rParams = arena<mdParamDef>();
         final pcTokens = arena<ULONG>();
 
-        var hr = reader.EnumParams(phEnum, token, rParams, 1, pcTokens);
+        var hr = reader.enumParams(phEnum, token, rParams, 1, pcTokens);
         while (hr == S_OK) {
           final parameterToken = rParams.value;
 
           parameters.add(Parameter.fromToken(scope, parameterToken));
-          hr = reader.EnumParams(phEnum, token, rParams, 1, pcTokens);
+          hr = reader.enumParams(phEnum, token, rParams, 1, pcTokens);
         }
-        reader.CloseEnum(phEnum.value);
+        reader.closeEnum(phEnum.value);
       });
 
   // Various projections do smart things to mask this into a single array

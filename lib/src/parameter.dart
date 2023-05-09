@@ -45,7 +45,7 @@ class Parameter extends TokenObject with CustomAttributesMixin {
       final pcchValue = arena<ULONG>();
 
       final reader = scope.reader;
-      final hr = reader.GetParamProps(
+      final hr = reader.getParamProps(
           token,
           ptkMethodDef,
           pulSequence,

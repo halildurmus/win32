@@ -52,14 +52,14 @@ mixin CustomAttributesMixin on TokenObject {
       if (!isResolvedToken) return <CustomAttribute>[];
 
       var hr =
-          reader.EnumCustomAttributes(phEnum, token, 0, rAttrs, 1, pcAttrs);
+          reader.enumCustomAttributes(phEnum, token, 0, rAttrs, 1, pcAttrs);
       while (hr == S_OK) {
         final attrToken = rAttrs.value;
 
         customAttributes.add(CustomAttribute.fromToken(scope, attrToken));
-        hr = reader.EnumCustomAttributes(phEnum, token, 0, rAttrs, 1, pcAttrs);
+        hr = reader.enumCustomAttributes(phEnum, token, 0, rAttrs, 1, pcAttrs);
       }
-      reader.CloseEnum(phEnum.value);
+      reader.closeEnum(phEnum.value);
     });
 
     return customAttributes;

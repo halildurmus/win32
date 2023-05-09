@@ -3,7 +3,6 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'com/structs.dart';
 import 'constants.dart';
 import 'scope.dart';
 import 'token_object.dart';
@@ -48,7 +47,7 @@ class ClassLayout extends TokenObject {
 
       // An assumption is made here that there are no more than 256 fields in a
       // struct. If that's not the case, this will fail and throw an exception.
-      final hr = reader.GetClassLayout(classToken, pdwPackSize, rgFieldOffset,
+      final hr = reader.getClassLayout(classToken, pdwPackSize, rgFieldOffset,
           256, pcFieldOffset, pulClassSize);
       if (SUCCEEDED(hr)) {
         packingAlignment = pdwPackSize.value;

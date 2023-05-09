@@ -8,8 +8,6 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'assemblyref.dart';
-import 'com/imetadataassemblyimport.dart';
-import 'com/imetadataimport2.dart';
 import 'enums.dart';
 import 'metadatastore.dart';
 import 'moduleref.dart';
@@ -44,7 +42,7 @@ class Scope {
       final pchName = arena<ULONG>();
       final pmvid = arena<GUID>();
 
-      final hr = reader.GetScopeProps(szName, stringBufferSize, pchName, pmvid);
+      final hr = reader.getScopeProps(szName, stringBufferSize, pchName, pmvid);
       if (SUCCEEDED(hr)) {
         name = szName.toDartString();
         guid = pmvid.ref.toString();
@@ -101,14 +99,14 @@ class Scope {
       final rgTypeDefs = arena<mdTypeDef>();
       final pcTypeDefs = arena<ULONG>();
 
-      var hr = reader.EnumTypeDefs(phEnum, rgTypeDefs, 1, pcTypeDefs);
+      var hr = reader.enumTypeDefs(phEnum, rgTypeDefs, 1, pcTypeDefs);
       while (hr == S_OK) {
         final typeDefToken = rgTypeDefs.value;
 
         _typedefs[typeDefToken] = TypeDef.fromToken(this, typeDefToken);
-        hr = reader.EnumTypeDefs(phEnum, rgTypeDefs, 1, pcTypeDefs);
+        hr = reader.enumTypeDefs(phEnum, rgTypeDefs, 1, pcTypeDefs);
       }
-      reader.CloseEnum(phEnum.value);
+      reader.closeEnum(phEnum.value);
     });
 
     for (final typeDef in typeDefs) {
@@ -119,7 +117,7 @@ class Scope {
   int get moduleToken => using((Arena arena) {
         final pmd = arena<mdModule>();
 
-        final hr = reader.GetModuleFromScope(pmd);
+        final hr = reader.getModuleFromScope(pmd);
         if (SUCCEEDED(hr)) {
           return pmd.value;
         } else {
@@ -135,13 +133,13 @@ class Scope {
       final rgModuleRefs = arena<mdModuleRef>();
       final pcModuleRefs = arena<ULONG>();
 
-      var hr = reader.EnumModuleRefs(phEnum, rgModuleRefs, 1, pcModuleRefs);
+      var hr = reader.enumModuleRefs(phEnum, rgModuleRefs, 1, pcModuleRefs);
       while (hr == S_OK) {
         final moduleToken = rgModuleRefs.value;
         modules.add(ModuleRef.fromToken(this, moduleToken));
-        hr = reader.EnumModuleRefs(phEnum, rgModuleRefs, 1, pcModuleRefs);
+        hr = reader.enumModuleRefs(phEnum, rgModuleRefs, 1, pcModuleRefs);
       }
-      reader.CloseEnum(phEnum.value);
+      reader.closeEnum(phEnum.value);
     });
 
     return modules;
@@ -156,14 +154,14 @@ class Scope {
       final pcTokens = arena<ULONG>();
 
       var hr =
-          assemblyImport.EnumAssemblyRefs(phEnum, rAssemblyRefs, 1, pcTokens);
+          assemblyImport.enumAssemblyRefs(phEnum, rAssemblyRefs, 1, pcTokens);
       while (hr == S_OK) {
         final assemblyToken = rAssemblyRefs.value;
         assemblies.add(AssemblyRef.fromToken(this, assemblyToken));
         hr =
-            assemblyImport.EnumAssemblyRefs(phEnum, rAssemblyRefs, 1, pcTokens);
+            assemblyImport.enumAssemblyRefs(phEnum, rAssemblyRefs, 1, pcTokens);
       }
-      assemblyImport.CloseEnum(phEnum.value);
+      assemblyImport.closeEnum(phEnum.value);
     });
 
     return assemblies;
@@ -179,17 +177,17 @@ class Scope {
       final szString = arena<WCHAR>(stringBufferSize).cast<Utf16>();
       final pchString = arena<ULONG>();
 
-      var hr = reader.EnumUserStrings(phEnum, rgStrings, 1, pcStrings);
+      var hr = reader.enumUserStrings(phEnum, rgStrings, 1, pcStrings);
       while (hr == S_OK) {
         final stringToken = rgStrings.value;
-        hr = reader.GetUserString(
+        hr = reader.getUserString(
             stringToken, szString, stringBufferSize, pchString);
         if (hr == S_OK) {
           userStrings.add(szString.toDartString());
         }
-        hr = reader.EnumUserStrings(phEnum, rgStrings, 1, pcStrings);
+        hr = reader.enumUserStrings(phEnum, rgStrings, 1, pcStrings);
       }
-      reader.CloseEnum(phEnum.value);
+      reader.closeEnum(phEnum.value);
     });
 
     return userStrings;
@@ -209,7 +207,7 @@ class Scope {
         final pccBufSize = arena<DWORD>();
 
         final hr =
-            reader.GetVersionString(pwzBuf, stringBufferSize, pccBufSize);
+            reader.getVersionString(pwzBuf, stringBufferSize, pccBufSize);
 
         if (SUCCEEDED(hr)) {
           return pwzBuf.toDartString();

@@ -33,7 +33,7 @@ class GenericParamConstraint extends TokenObject with CustomAttributesMixin {
       final ptkConstraintType = arena<mdToken>();
 
       final reader = scope.reader;
-      final hr = reader.GetGenericParamConstraintProps(
+      final hr = reader.getGenericParamConstraintProps(
           token, ptGenericParam, ptkConstraintType);
 
       if (SUCCEEDED(hr)) {

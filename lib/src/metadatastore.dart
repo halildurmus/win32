@@ -16,9 +16,6 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'com/enums.dart';
-import 'com/imetadataassemblyimport.dart';
-import 'com/imetadatadispenser.dart';
-import 'com/imetadataimport2.dart';
 import 'scope.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';
@@ -41,7 +38,7 @@ class MetadataStore {
     final dispenserObject = calloc<COMObject>();
     final clsidCorMetaDataDispenser =
         convertToCLSID(CorMetaDataDispenser.CLSID);
-    final iidIMetaDataDispenser = convertToIID(IMetaDataDispenser.IID);
+    final iidIMetaDataDispenser = convertToIID(IID_IMetaDataDispenser);
 
     try {
       final hr = MetaDataGetDispenser(clsidCorMetaDataDispenser,
@@ -111,16 +108,16 @@ class MetadataStore {
     } else {
       final szFile = fileScope.path.toNativeUtf16();
       final pReader = calloc<COMObject>();
-      final iidIMetaDataImport2 = convertToIID(IMetaDataImport2.IID);
+      final iidIMetaDataImport2 = convertToIID(IID_IMetaDataImport2);
       final pAssemblyImport = calloc<COMObject>();
       final iidIMetaDataAssemblyImport =
-          convertToIID(IMetaDataAssemblyImport.IID);
+          convertToIID(IID_IMetaDataAssemblyImport);
 
       try {
-        var hr = dispenser.OpenScope(
+        var hr = dispenser.openScope(
             szFile, CorOpenFlags.ofRead, iidIMetaDataImport2, pReader.cast());
         if (FAILED(hr)) throw WindowsException(hr);
-        hr = dispenser.OpenScope(szFile, CorOpenFlags.ofRead,
+        hr = dispenser.openScope(szFile, CorOpenFlags.ofRead,
             iidIMetaDataAssemblyImport, pAssemblyImport.cast());
         final scope = Scope(IMetaDataImport2(pReader),
             IMetaDataAssemblyImport(pAssemblyImport));

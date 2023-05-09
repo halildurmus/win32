@@ -70,7 +70,7 @@ class GenericParam extends TokenObject with CustomAttributesMixin {
       final pchName = arena<ULONG>();
 
       final reader = scope.reader;
-      final hr = reader.GetGenericParamProps(token, pulParamSeq, pdwParamFlags,
+      final hr = reader.getGenericParamProps(token, pulParamSeq, pdwParamFlags,
           ptOwner, reserved, wzName, stringBufferSize, pchName);
 
       if (SUCCEEDED(hr)) {
@@ -125,16 +125,16 @@ class GenericParam extends TokenObject with CustomAttributesMixin {
         final rGenericParamConstraints = arena<mdGenericParam>();
         final pcGenericParamConstraints = arena<ULONG>();
 
-        var hr = reader.EnumGenericParamConstraints(phEnum, token,
+        var hr = reader.enumGenericParamConstraints(phEnum, token,
             rGenericParamConstraints, 1, pcGenericParamConstraints);
         while (hr == S_OK) {
           final gpcToken = rGenericParamConstraints.value;
 
           _constraints.add(GenericParamConstraint.fromToken(scope, gpcToken));
-          hr = reader.EnumGenericParamConstraints(phEnum, token,
+          hr = reader.enumGenericParamConstraints(phEnum, token,
               rGenericParamConstraints, 1, pcGenericParamConstraints);
         }
-        reader.CloseEnum(phEnum.value);
+        reader.closeEnum(phEnum.value);
       });
     }
     return _constraints;

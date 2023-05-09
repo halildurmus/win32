@@ -8,7 +8,6 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'com/enums.dart';
-import 'com/imetadataimport2.dart';
 import 'enums.dart';
 import 'utils/exception.dart';
 
@@ -22,7 +21,7 @@ class PEKind {
       final pdwPEKind = arena<DWORD>();
       final pdwMachine = arena<DWORD>();
 
-      final hr = reader.GetPEKind(pdwPEKind, pdwMachine);
+      final hr = reader.getPEKind(pdwPEKind, pdwMachine);
       if (SUCCEEDED(hr)) {
         _peKind = pdwPEKind.value;
         _machine = pdwMachine.value;

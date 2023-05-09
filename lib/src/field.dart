@@ -51,7 +51,7 @@ class Field extends TokenObject with CustomAttributesMixin {
       final pcchValue = arena<ULONG>();
 
       final reader = scope.reader;
-      final hr = reader.GetFieldProps(
+      final hr = reader.getFieldProps(
           token,
           ptkTypeDef,
           szField,

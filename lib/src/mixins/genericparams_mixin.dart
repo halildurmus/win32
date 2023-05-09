@@ -17,16 +17,16 @@ mixin GenericParamsMixin on TokenObject {
         final rGenericParams = arena<ULONG>();
         final pcGenericParams = arena<ULONG>();
 
-        var hr = reader.EnumGenericParams(
+        var hr = reader.enumGenericParams(
             phEnum, token, rGenericParams, 1, pcGenericParams);
         while (hr == S_OK) {
           final genericParamToken = rGenericParams.value;
 
           params.add(GenericParam.fromToken(scope, genericParamToken));
-          hr = reader.EnumGenericParams(
+          hr = reader.enumGenericParams(
               phEnum, token, rGenericParams, 1, pcGenericParams);
         }
-        reader.CloseEnum(phEnum.value);
+        reader.closeEnum(phEnum.value);
         return params;
       });
 }

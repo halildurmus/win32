@@ -51,7 +51,7 @@ class CustomAttribute extends TokenObject {
       final pcbBlob = arena<ULONG>();
 
       final reader = scope.reader;
-      final hr = reader.GetCustomAttributeProps(
+      final hr = reader.getCustomAttributeProps(
           token, ptkObj, ptkType, ppBlob, pcbBlob);
       if (SUCCEEDED(hr)) {
         final memberRef = MemberRef.fromToken(scope, ptkType.value);

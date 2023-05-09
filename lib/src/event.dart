@@ -58,7 +58,7 @@ class Event extends TokenObject with CustomAttributesMixin {
       final pcOtherMethod = arena<ULONG>();
 
       final reader = scope.reader;
-      final hr = reader.GetEventProps(
+      final hr = reader.getEventProps(
           token,
           ptkClass,
           szEvent,
@@ -95,17 +95,17 @@ class Event extends TokenObject with CustomAttributesMixin {
   String toString() => name;
 
   /// Returns the add method for the event.
-  Method? get addMethod => reader.IsValidToken(_addOnToken) == TRUE
+  Method? get addMethod => reader.isValidToken(_addOnToken) == TRUE
       ? Method.fromToken(scope, _addOnToken)
       : null;
 
   /// Returns the remove method for the event.
-  Method? get removeMethod => reader.IsValidToken(_removeOnToken) == TRUE
+  Method? get removeMethod => reader.isValidToken(_removeOnToken) == TRUE
       ? Method.fromToken(scope, _removeOnToken)
       : null;
 
   /// Returns the raise method for the event.
-  Method? get raiseMethod => reader.IsValidToken(_fireToken) == TRUE
+  Method? get raiseMethod => reader.isValidToken(_fireToken) == TRUE
       ? Method.fromToken(scope, _fireToken)
       : null;
 
