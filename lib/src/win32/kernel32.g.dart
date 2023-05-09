@@ -1469,16 +1469,16 @@ final _EnumResourceTypes = _kernel32.lookupFunction<
 /// ```
 /// {@category kernel32}
 int EnumSystemFirmwareTables(int FirmwareTableProviderSignature,
-        Pointer<Uint32> pFirmwareTableEnumBuffer, int BufferSize) =>
+        Pointer<Uint8> pFirmwareTableEnumBuffer, int BufferSize) =>
     _EnumSystemFirmwareTables(
         FirmwareTableProviderSignature, pFirmwareTableEnumBuffer, BufferSize);
 
 final _EnumSystemFirmwareTables = _kernel32.lookupFunction<
     Uint32 Function(Uint32 FirmwareTableProviderSignature,
-        Pointer<Uint32> pFirmwareTableEnumBuffer, Uint32 BufferSize),
+        Pointer<Uint8> pFirmwareTableEnumBuffer, Uint32 BufferSize),
     int Function(
         int FirmwareTableProviderSignature,
-        Pointer<Uint32> pFirmwareTableEnumBuffer,
+        Pointer<Uint8> pFirmwareTableEnumBuffer,
         int BufferSize)>('EnumSystemFirmwareTables');
 
 /// Directs the specified communications device to perform an extended
@@ -3098,13 +3098,13 @@ final _GetLongPathName = _kernel32.lookupFunction<
 /// ```
 /// {@category kernel32}
 int GetMachineTypeAttributes(
-        int Machine, Pointer<Uint32> MachineTypeAttributes) =>
+        int Machine, Pointer<Int32> MachineTypeAttributes) =>
     _GetMachineTypeAttributes(Machine, MachineTypeAttributes);
 
 final _GetMachineTypeAttributes = _kernel32.lookupFunction<
-    Int32 Function(Uint16 Machine, Pointer<Uint32> MachineTypeAttributes),
+    Int32 Function(Uint16 Machine, Pointer<Int32> MachineTypeAttributes),
     int Function(int Machine,
-        Pointer<Uint32> MachineTypeAttributes)>('GetMachineTypeAttributes');
+        Pointer<Int32> MachineTypeAttributes)>('GetMachineTypeAttributes');
 
 /// Checks whether the specified address is within a memory-mapped file in
 /// the address space of the specified process. If so, the function returns
@@ -4437,11 +4437,11 @@ final _GetVolumePathNamesForVolumeName = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-int GlobalAlloc(int uFlags, int dwBytes) => _GlobalAlloc(uFlags, dwBytes);
+Pointer GlobalAlloc(int uFlags, int dwBytes) => _GlobalAlloc(uFlags, dwBytes);
 
 final _GlobalAlloc = _kernel32.lookupFunction<
-    IntPtr Function(Uint32 uFlags, IntPtr dwBytes),
-    int Function(int uFlags, int dwBytes)>('GlobalAlloc');
+    Pointer Function(Uint32 uFlags, IntPtr dwBytes),
+    Pointer Function(int uFlags, int dwBytes)>('GlobalAlloc');
 
 /// Frees the specified global memory object and invalidates its handle.
 ///
@@ -4451,10 +4451,10 @@ final _GlobalAlloc = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-int GlobalFree(int hMem) => _GlobalFree(hMem);
+Pointer GlobalFree(Pointer hMem) => _GlobalFree(hMem);
 
-final _GlobalFree = _kernel32.lookupFunction<IntPtr Function(IntPtr hMem),
-    int Function(int hMem)>('GlobalFree');
+final _GlobalFree = _kernel32.lookupFunction<Pointer Function(Pointer hMem),
+    Pointer Function(Pointer hMem)>('GlobalFree');
 
 /// Locks a global memory object and returns a pointer to the first byte of
 /// the object's memory block.
@@ -4465,10 +4465,10 @@ final _GlobalFree = _kernel32.lookupFunction<IntPtr Function(IntPtr hMem),
 /// );
 /// ```
 /// {@category kernel32}
-Pointer GlobalLock(int hMem) => _GlobalLock(hMem);
+Pointer GlobalLock(Pointer hMem) => _GlobalLock(hMem);
 
-final _GlobalLock = _kernel32.lookupFunction<Pointer Function(IntPtr hMem),
-    Pointer Function(int hMem)>('GlobalLock');
+final _GlobalLock = _kernel32.lookupFunction<Pointer Function(Pointer hMem),
+    Pointer Function(Pointer hMem)>('GlobalLock');
 
 /// Retrieves information about the system's current usage of both physical
 /// and virtual memory.
@@ -4495,10 +4495,10 @@ final _GlobalMemoryStatusEx = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-int GlobalSize(int hMem) => _GlobalSize(hMem);
+int GlobalSize(Pointer hMem) => _GlobalSize(hMem);
 
-final _GlobalSize = _kernel32.lookupFunction<IntPtr Function(IntPtr hMem),
-    int Function(int hMem)>('GlobalSize');
+final _GlobalSize = _kernel32.lookupFunction<IntPtr Function(Pointer hMem),
+    int Function(Pointer hMem)>('GlobalSize');
 
 /// Decrements the lock count associated with a memory object that was
 /// allocated with GMEM_MOVEABLE. This function has no effect on memory
@@ -4510,10 +4510,10 @@ final _GlobalSize = _kernel32.lookupFunction<IntPtr Function(IntPtr hMem),
 /// );
 /// ```
 /// {@category kernel32}
-int GlobalUnlock(int hMem) => _GlobalUnlock(hMem);
+int GlobalUnlock(Pointer hMem) => _GlobalUnlock(hMem);
 
-final _GlobalUnlock = _kernel32.lookupFunction<Int32 Function(IntPtr hMem),
-    int Function(int hMem)>('GlobalUnlock');
+final _GlobalUnlock = _kernel32.lookupFunction<Int32 Function(Pointer hMem),
+    int Function(Pointer hMem)>('GlobalUnlock');
 
 /// Allocates a block of memory from a heap. The allocated memory is not
 /// movable.
@@ -4931,11 +4931,12 @@ final _LoadLibraryEx = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-int LoadResource(int hModule, int hResInfo) => _LoadResource(hModule, hResInfo);
+Pointer LoadResource(int hModule, int hResInfo) =>
+    _LoadResource(hModule, hResInfo);
 
 final _LoadResource = _kernel32.lookupFunction<
-    IntPtr Function(IntPtr hModule, IntPtr hResInfo),
-    int Function(int hModule, int hResInfo)>('LoadResource');
+    Pointer Function(IntPtr hModule, IntPtr hResInfo),
+    Pointer Function(int hModule, int hResInfo)>('LoadResource');
 
 /// Frees the specified local memory object and invalidates its handle.
 ///
@@ -4945,10 +4946,10 @@ final _LoadResource = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-int LocalFree(int hMem) => _LocalFree(hMem);
+Pointer LocalFree(Pointer hMem) => _LocalFree(hMem);
 
-final _LocalFree = _kernel32.lookupFunction<IntPtr Function(IntPtr hMem),
-    int Function(int hMem)>('LocalFree');
+final _LocalFree = _kernel32.lookupFunction<Pointer Function(Pointer hMem),
+    Pointer Function(Pointer hMem)>('LocalFree');
 
 /// Locks the specified file for exclusive access by the calling process.
 ///
@@ -5026,11 +5027,11 @@ final _LockFileEx = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-Pointer LockResource(int hResData) => _LockResource(hResData);
+Pointer LockResource(Pointer hResData) => _LockResource(hResData);
 
 final _LockResource = _kernel32.lookupFunction<
-    Pointer Function(IntPtr hResData),
-    Pointer Function(int hResData)>('LockResource');
+    Pointer Function(Pointer hResData),
+    Pointer Function(Pointer hResData)>('LockResource');
 
 /// Moves an existing file or a directory, including its children.
 ///
@@ -5476,7 +5477,7 @@ final _ReadConsoleInput = _kernel32.lookupFunction<
 /// {@category kernel32}
 int ReadFile(
         int hFile,
-        Pointer lpBuffer,
+        Pointer<Uint8> lpBuffer,
         int nNumberOfBytesToRead,
         Pointer<Uint32> lpNumberOfBytesRead,
         Pointer<OVERLAPPED> lpOverlapped) =>
@@ -5484,11 +5485,15 @@ int ReadFile(
         lpOverlapped);
 
 final _ReadFile = _kernel32.lookupFunction<
-    Int32 Function(IntPtr hFile, Pointer lpBuffer, Uint32 nNumberOfBytesToRead,
-        Pointer<Uint32> lpNumberOfBytesRead, Pointer<OVERLAPPED> lpOverlapped),
+    Int32 Function(
+        IntPtr hFile,
+        Pointer<Uint8> lpBuffer,
+        Uint32 nNumberOfBytesToRead,
+        Pointer<Uint32> lpNumberOfBytesRead,
+        Pointer<OVERLAPPED> lpOverlapped),
     int Function(
         int hFile,
-        Pointer lpBuffer,
+        Pointer<Uint8> lpBuffer,
         int nNumberOfBytesToRead,
         Pointer<Uint32> lpNumberOfBytesRead,
         Pointer<OVERLAPPED> lpOverlapped)>('ReadFile');
@@ -5510,7 +5515,7 @@ final _ReadFile = _kernel32.lookupFunction<
 /// {@category kernel32}
 int ReadFileEx(
         int hFile,
-        Pointer lpBuffer,
+        Pointer<Uint8> lpBuffer,
         int nNumberOfBytesToRead,
         Pointer<OVERLAPPED> lpOverlapped,
         Pointer<NativeFunction<LpoverlappedCompletionRoutine>>
@@ -5521,14 +5526,14 @@ int ReadFileEx(
 final _ReadFileEx = _kernel32.lookupFunction<
     Int32 Function(
         IntPtr hFile,
-        Pointer lpBuffer,
+        Pointer<Uint8> lpBuffer,
         Uint32 nNumberOfBytesToRead,
         Pointer<OVERLAPPED> lpOverlapped,
         Pointer<NativeFunction<LpoverlappedCompletionRoutine>>
             lpCompletionRoutine),
     int Function(
         int hFile,
-        Pointer lpBuffer,
+        Pointer<Uint8> lpBuffer,
         int nNumberOfBytesToRead,
         Pointer<OVERLAPPED> lpOverlapped,
         Pointer<NativeFunction<LpoverlappedCompletionRoutine>>
@@ -7229,7 +7234,7 @@ final _WriteConsole = _kernel32.lookupFunction<
 /// {@category kernel32}
 int WriteFile(
         int hFile,
-        Pointer lpBuffer,
+        Pointer<Uint8> lpBuffer,
         int nNumberOfBytesToWrite,
         Pointer<Uint32> lpNumberOfBytesWritten,
         Pointer<OVERLAPPED> lpOverlapped) =>
@@ -7239,13 +7244,13 @@ int WriteFile(
 final _WriteFile = _kernel32.lookupFunction<
     Int32 Function(
         IntPtr hFile,
-        Pointer lpBuffer,
+        Pointer<Uint8> lpBuffer,
         Uint32 nNumberOfBytesToWrite,
         Pointer<Uint32> lpNumberOfBytesWritten,
         Pointer<OVERLAPPED> lpOverlapped),
     int Function(
         int hFile,
-        Pointer lpBuffer,
+        Pointer<Uint8> lpBuffer,
         int nNumberOfBytesToWrite,
         Pointer<Uint32> lpNumberOfBytesWritten,
         Pointer<OVERLAPPED> lpOverlapped)>('WriteFile');
@@ -7267,7 +7272,7 @@ final _WriteFile = _kernel32.lookupFunction<
 /// {@category kernel32}
 int WriteFileEx(
         int hFile,
-        Pointer lpBuffer,
+        Pointer<Uint8> lpBuffer,
         int nNumberOfBytesToWrite,
         Pointer<OVERLAPPED> lpOverlapped,
         Pointer<NativeFunction<LpoverlappedCompletionRoutine>>
@@ -7278,14 +7283,14 @@ int WriteFileEx(
 final _WriteFileEx = _kernel32.lookupFunction<
     Int32 Function(
         IntPtr hFile,
-        Pointer lpBuffer,
+        Pointer<Uint8> lpBuffer,
         Uint32 nNumberOfBytesToWrite,
         Pointer<OVERLAPPED> lpOverlapped,
         Pointer<NativeFunction<LpoverlappedCompletionRoutine>>
             lpCompletionRoutine),
     int Function(
         int hFile,
-        Pointer lpBuffer,
+        Pointer<Uint8> lpBuffer,
         int nNumberOfBytesToWrite,
         Pointer<OVERLAPPED> lpOverlapped,
         Pointer<NativeFunction<LpoverlappedCompletionRoutine>>

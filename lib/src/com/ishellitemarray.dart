@@ -65,7 +65,7 @@ class IShellItemArray extends IUnknown {
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Uint32 flags, Pointer<GUID> riid,
+                      Int32 Function(Pointer, Int32 flags, Pointer<GUID> riid,
                           Pointer<Pointer> ppv)>>>()
           .value
           .asFunction<

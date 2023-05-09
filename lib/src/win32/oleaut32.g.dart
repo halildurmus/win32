@@ -222,14 +222,14 @@ final _SysStringLen = _oleaut32.lookupFunction<
 /// ```
 /// {@category oleaut32}
 int VarBstrCat(Pointer<Utf16> bstrLeft, Pointer<Utf16> bstrRight,
-        Pointer<Pointer<Uint16>> pbstrResult) =>
+        Pointer<Pointer<Utf16>> pbstrResult) =>
     _VarBstrCat(bstrLeft, bstrRight, pbstrResult);
 
 final _VarBstrCat = _oleaut32.lookupFunction<
     Int32 Function(Pointer<Utf16> bstrLeft, Pointer<Utf16> bstrRight,
-        Pointer<Pointer<Uint16>> pbstrResult),
+        Pointer<Pointer<Utf16>> pbstrResult),
     int Function(Pointer<Utf16> bstrLeft, Pointer<Utf16> bstrRight,
-        Pointer<Pointer<Uint16>> pbstrResult)>('VarBstrCat');
+        Pointer<Pointer<Utf16>> pbstrResult)>('VarBstrCat');
 
 /// Compares two variants of type BSTR.
 ///

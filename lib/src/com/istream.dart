@@ -86,7 +86,7 @@ class IStream extends ISequentialStream {
       .elementAt(8)
       .cast<
           Pointer<
-              NativeFunction<Int32 Function(Pointer, Uint32 grfCommitFlags)>>>()
+              NativeFunction<Int32 Function(Pointer, Int32 grfCommitFlags)>>>()
       .value
       .asFunction<
           int Function(

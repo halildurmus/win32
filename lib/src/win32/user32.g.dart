@@ -2547,9 +2547,9 @@ final _GetDialogBaseUnits = _user32
 int GetDialogControlDpiChangeBehavior(int hWnd) =>
     _GetDialogControlDpiChangeBehavior(hWnd);
 
-final _GetDialogControlDpiChangeBehavior = _user32.lookupFunction<
-    Uint32 Function(IntPtr hWnd),
-    int Function(int hWnd)>('GetDialogControlDpiChangeBehavior');
+final _GetDialogControlDpiChangeBehavior =
+    _user32.lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
+        'GetDialogControlDpiChangeBehavior');
 
 /// Returns the flags that might have been set on a given dialog by an
 /// earlier call to SetDialogDpiChangeBehavior. If that function was never
@@ -2563,9 +2563,9 @@ final _GetDialogControlDpiChangeBehavior = _user32.lookupFunction<
 /// {@category user32}
 int GetDialogDpiChangeBehavior(int hDlg) => _GetDialogDpiChangeBehavior(hDlg);
 
-final _GetDialogDpiChangeBehavior = _user32.lookupFunction<
-    Uint32 Function(IntPtr hDlg),
-    int Function(int hDlg)>('GetDialogDpiChangeBehavior');
+final _GetDialogDpiChangeBehavior =
+    _user32.lookupFunction<Int32 Function(IntPtr hDlg), int Function(int hDlg)>(
+        'GetDialogDpiChangeBehavior');
 
 /// Retrieves the screen auto-rotation preferences for the current process.
 ///
@@ -6554,7 +6554,7 @@ int SetDialogControlDpiChangeBehavior(int hWnd, int mask, int values) =>
     _SetDialogControlDpiChangeBehavior(hWnd, mask, values);
 
 final _SetDialogControlDpiChangeBehavior = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Uint32 mask, Uint32 values),
+    Int32 Function(IntPtr hWnd, Int32 mask, Int32 values),
     int Function(
         int hWnd, int mask, int values)>('SetDialogControlDpiChangeBehavior');
 
@@ -6577,7 +6577,7 @@ int SetDialogDpiChangeBehavior(int hDlg, int mask, int values) =>
     _SetDialogDpiChangeBehavior(hDlg, mask, values);
 
 final _SetDialogDpiChangeBehavior = _user32.lookupFunction<
-    Int32 Function(IntPtr hDlg, Uint32 mask, Uint32 values),
+    Int32 Function(IntPtr hDlg, Int32 mask, Int32 values),
     int Function(int hDlg, int mask, int values)>('SetDialogDpiChangeBehavior');
 
 /// Sets the screen auto-rotation preferences for the current process.

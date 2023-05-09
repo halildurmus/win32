@@ -91,9 +91,9 @@ void captureImage(int hwnd) {
     bitmapFileHeader.ref.bfType = 0x4D42; // BM
 
     final dwBytesWritten = calloc<DWORD>();
-    WriteFile(hFile, bitmapFileHeader, sizeOf<BITMAPFILEHEADER>(),
+    WriteFile(hFile, bitmapFileHeader.cast(), sizeOf<BITMAPFILEHEADER>(),
         dwBytesWritten, nullptr);
-    WriteFile(hFile, bitmapInfoHeader, sizeOf<BITMAPINFOHEADER>(),
+    WriteFile(hFile, bitmapInfoHeader.cast(), sizeOf<BITMAPINFOHEADER>(),
         dwBytesWritten, nullptr);
     WriteFile(hFile, lpBitmap, dwBmpSize, dwBytesWritten, nullptr);
 

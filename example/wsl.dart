@@ -38,7 +38,7 @@ DistributionConfiguration getDistributionConfiguration(
   final pDistributionName = distributionName.toNativeUtf16();
   final distributionVersion = calloc<ULONG>();
   final defaultUID = calloc<ULONG>();
-  final wslDistributionFlags = calloc<ULONG>();
+  final wslDistributionFlags = calloc<LONG>();
   final defaultEnvironmentVariables = calloc<Pointer<PSTR>>();
   final defaultEnvironmentVariableCount = calloc<ULONG>();
 

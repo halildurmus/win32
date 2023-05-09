@@ -64,7 +64,7 @@ int ConvertInterfaceGuidToLuid(
     _ConvertInterfaceGuidToLuid(InterfaceGuid, InterfaceLuid);
 
 final _ConvertInterfaceGuidToLuid = _iphlpapi.lookupFunction<
-    Int32 Function(
+    Uint32 Function(
         Pointer<GUID> InterfaceGuid, Pointer<NET_LUID_LH> InterfaceLuid),
     int Function(Pointer<GUID> InterfaceGuid,
         Pointer<NET_LUID_LH> InterfaceLuid)>('ConvertInterfaceGuidToLuid');

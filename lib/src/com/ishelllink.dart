@@ -154,19 +154,19 @@ class IShellLink extends IUnknown {
       .asFunction<
           int Function(Pointer, int wHotkey)>()(ptr.ref.lpVtbl, wHotkey);
 
-  int getShowCmd(Pointer<Int32> piShowCmd) => ptr.ref.vtable
+  int getShowCmd(Pointer<Uint32> piShowCmd) => ptr.ref.vtable
           .elementAt(14)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<Int32> piShowCmd)>>>()
+                      Int32 Function(Pointer, Pointer<Uint32> piShowCmd)>>>()
           .value
-          .asFunction<int Function(Pointer, Pointer<Int32> piShowCmd)>()(
+          .asFunction<int Function(Pointer, Pointer<Uint32> piShowCmd)>()(
       ptr.ref.lpVtbl, piShowCmd);
 
   int setShowCmd(int iShowCmd) => ptr.ref.vtable
       .elementAt(15)
-      .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 iShowCmd)>>>()
+      .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint32 iShowCmd)>>>()
       .value
       .asFunction<
           int Function(Pointer, int iShowCmd)>()(ptr.ref.lpVtbl, iShowCmd);

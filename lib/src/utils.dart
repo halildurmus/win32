@@ -58,7 +58,7 @@ void initApp(Function winMain) {
   for (var i = 0; i < nArgs.value; i++) {
     args.add(szArgList[i].toDartString());
   }
-  LocalFree(szArgList.address);
+  LocalFree(szArgList.value);
 
   final hInstance = GetModuleHandle(nullptr);
   GetStartupInfo(lpStartupInfo);

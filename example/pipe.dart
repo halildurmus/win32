@@ -54,7 +54,8 @@ class ClientCommand extends Command<void> {
       }
 
       stdout.writeln('Reading data from pipe...');
-      final result = ReadFile(pipe, lpBuffer, 128, lpNumBytesRead, nullptr);
+      final result =
+          ReadFile(pipe, lpBuffer.cast(), 128, lpNumBytesRead, nullptr);
       if (result == NULL) {
         stderr.writeln('Failed to read data from the pipe.');
       } else {
@@ -102,7 +103,7 @@ class ServerCommand extends Command<void> {
         exit(1);
       }
 
-      result = WriteFile(pipe, lpPipeMessage, pipeMessage.length * 2,
+      result = WriteFile(pipe, lpPipeMessage.cast(), pipeMessage.length * 2,
           lpNumBytesWritten, nullptr);
       if (result == NULL) {
         stderr.writeln('Failed to send data.');
