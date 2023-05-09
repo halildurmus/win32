@@ -8,7 +8,6 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'com/enums.dart';
 import 'enums.dart';
 import 'method.dart';
 import 'mixins/customattributes_mixin.dart';
@@ -104,7 +103,7 @@ class Property extends TokenObject with CustomAttributesMixin {
             pdwPropFlags.value,
             signature,
             typeTuple.typeIdentifier,
-            parseCorElementType(pdwCPlusTypeFlag.value),
+            BaseType.fromCorElementType(pdwCPlusTypeFlag.value),
             defaultValue,
             ptkSetter.value,
             ptkGetter.value,

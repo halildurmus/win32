@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
-import '../com/enums.dart';
+import 'package:win32/win32.dart';
+
 import '../enums.dart';
 import '../scope.dart';
 import '../typedef.dart';
@@ -27,7 +28,7 @@ class TypeTuple {
   /// ECMA-335.
   factory TypeTuple.fromSignature(Uint8List signatureBlob, Scope scope) {
     final paramType = signatureBlob.first;
-    final baseType = parseCorElementType(paramType);
+    final baseType = BaseType.fromCorElementType(paramType);
     // final runtimeType = TypeIdentifier.fromValue(paramType);
     var dataLength = 0;
 

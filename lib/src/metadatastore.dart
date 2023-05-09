@@ -15,7 +15,6 @@ import 'dart:isolate';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'com/enums.dart';
 import 'scope.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';
@@ -37,7 +36,7 @@ class MetadataStore {
     // This must have the same object lifetime as MetadataStore itself.
     final dispenserObject = calloc<COMObject>();
     final clsidCorMetaDataDispenser =
-        convertToCLSID(CorMetaDataDispenser.CLSID);
+        convertToCLSID(CLSID_CorMetaDataDispenser);
     final iidIMetaDataDispenser = convertToIID(IID_IMetaDataDispenser);
 
     try {

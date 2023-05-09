@@ -3,7 +3,6 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'com/enums.dart';
 import 'enums.dart';
 import 'method.dart';
 import 'mixins/customattributes_mixin.dart';

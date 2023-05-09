@@ -8,7 +8,6 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'com/enums.dart';
 import 'enums.dart';
 import 'mixins/customattributes_mixin.dart';
 import 'pinvokemap.dart';
@@ -79,7 +78,7 @@ class Field extends TokenObject with CustomAttributesMixin {
             fieldName,
             ppValue.value != nullptr ? ppValue.value.value : 0,
             typeTuple.typeIdentifier,
-            parseCorElementType(pdwCPlusTypeFlag.value),
+            BaseType.fromCorElementType(pdwCPlusTypeFlag.value),
             pdwAttr.value,
             signature);
       } else {
