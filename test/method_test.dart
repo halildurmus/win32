@@ -81,4 +81,14 @@ void main() {
     check(method.pinvokeMap.throwOnUnmappableCharConvention)
         .equals(ThrowOnUnmappableChar.useAssem);
   });
+
+  test('Methods with arrays have correct parameters', () {
+    final typeDef = MetadataStore.getMetadataForType(
+        'Windows.Foundation.Diagnostics.ILoggingFields');
+    final method = typeDef!.findMethod('AddInt32Array')!;
+    check(method.parameters.length).equals(5);
+    check(method.parameters.last.name).equals('tags');
+    check(method.parameters.last.typeIdentifier.baseType)
+        .equals(BaseType.int32Type);
+  });
 }
