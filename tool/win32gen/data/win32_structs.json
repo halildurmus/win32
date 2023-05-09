@@ -373,5 +373,8 @@
     "Windows.Win32.UI.WindowsAndMessaging.WINDOWPLACEMENT": "Contains information about the placement of a window on the screen.",
     "Windows.Win32.UI.WindowsAndMessaging.WINDOWPOS": "Contains information about the size and position of a window.",
     "Windows.Win32.UI.WindowsAndMessaging.WNDCLASSEXW": "Contains window class information. It is used with the RegisterClassEx and GetClassInfoEx functions. The WNDCLASSEX structure is similar to the WNDCLASS structure. There are two differences. WNDCLASSEX includes the cbSize member, which specifies the size of the structure, and the hIconSm member, which contains a handle to a small icon associated with the window class.",
-    "Windows.Win32.UI.WindowsAndMessaging.WNDCLASSW": "Contains the window class attributes that are registered by the RegisterClass function."
+    "Windows.Win32.UI.WindowsAndMessaging.WNDCLASSW": "Contains the window class attributes that are registered by the RegisterClass function.",
+    "Windows.Win32.System.WinRT.Metadata.ASSEMBLYMETADATA": "Contains information about the referenced assembly, including its version and its level of support for locales, processors, and operating systems.",
+    "Windows.Win32.System.WinRT.Metadata.COR_FIELD_OFFSET":"Stores the offset, within a class, of the specified field.",
+    "Windows.Win32.System.WinRT.Metadata.OSINFO":"Contains details about the operating system for an assembly or module."
 }
