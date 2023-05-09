@@ -63,6 +63,7 @@ void main()
     printf("  'ALTTABINFO': %zu,\n", sizeof(ALTTABINFO));
     printf("  'APPX_PACKAGE_SETTINGS': %zu,\n", sizeof(APPX_PACKAGE_SETTINGS));
     printf("  'ARRAYDESC': %zu,\n", sizeof(ARRAYDESC));
+    printf("  'ASSEMBLYMETADATA': %zu,\n", sizeof(ASSEMBLYMETADATA));
     printf("  'BIND_OPTS': %zu,\n", sizeof(BIND_OPTS));
     printf("  'BITMAP': %zu,\n", sizeof(BITMAP));
     printf("  'BITMAPFILEHEADER': %zu,\n", sizeof(BITMAPFILEHEADER));
@@ -117,6 +118,7 @@ void main()
     printf("  'CONSOLE_SCREEN_BUFFER_INFO': %zu,\n", sizeof(CONSOLE_SCREEN_BUFFER_INFO));
     printf("  'CONSOLE_SELECTION_INFO': %zu,\n", sizeof(CONSOLE_SELECTION_INFO));
     printf("  'COORD': %zu,\n", sizeof(COORD));
+    printf("  'COR_FIELD_OFFSET': %zu,\n", sizeof(COR_FIELD_OFFSET));
     printf("  'CREATEFILE2_EXTENDED_PARAMETERS': %zu,\n", sizeof(CREATEFILE2_EXTENDED_PARAMETERS));
     printf("  'CREATESTRUCT': %zu,\n", sizeof(CREATESTRUCTW));
     printf("  'CREDENTIAL': %zu,\n", sizeof(CREDENTIALW));
@@ -264,6 +266,7 @@ void main()
     printf("  'OPENCARDNAME_EX': %zu,\n", sizeof(OPENCARDNAME_EXW));
     printf("  'OPENCARD_SEARCH_CRITERIA': %zu,\n", sizeof(OPENCARD_SEARCH_CRITERIAW));
     printf("  'OPENFILENAME': %zu,\n", sizeof(OPENFILENAMEW));
+    printf("  'OSINFO': %zu,\n", sizeof(OSINFO));
     printf("  'OSVERSIONINFOEX': %zu,\n", sizeof(OSVERSIONINFOEXW));
     printf("  'OSVERSIONINFO': %zu,\n", sizeof(OSVERSIONINFOW));
     printf("  'OVERLAPPED': %zu,\n", sizeof(OVERLAPPED));
