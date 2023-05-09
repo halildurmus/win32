@@ -178,9 +178,9 @@ void main() {
   test('Can instantiate IMetaDataImport.getCustomAttributeProps', () {
     expect(metadataimport.getCustomAttributeProps, isA<Function>());
   });
-  // test('Can instantiate IMetaDataImport.findTypeRef', () {
-  //   expect(metadataimport.findTypeRef, isA<Function>());
-  // });
+  test('Can instantiate IMetaDataImport.findTypeRef', () {
+    expect(metadataimport.findTypeRef, isA<Function>());
+  });
   test('Can instantiate IMetaDataImport.getMemberProps', () {
     expect(metadataimport.getMemberProps, isA<Function>());
   });

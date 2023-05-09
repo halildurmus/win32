@@ -1320,19 +1320,19 @@ class IMetaDataImport extends IUnknown {
           ptr.ref.lpVtbl, cv, ptkObj, ptkType, ppBlob, pcbSize);
 
   int findTypeRef(
-          int tkResolutionScope, Pointer<Utf16> szName, Pointer<Uint32> tkTypeRef) =>
+          int tkResolutionScope, Pointer<Utf16> szName, Pointer<Uint32> ptr_) =>
       ptr.ref.vtable
               .elementAt(55)
               .cast<
                   Pointer<
                       NativeFunction<
                           Int32 Function(Pointer, Uint32 tkResolutionScope,
-                              Pointer<Utf16> szName, Pointer<Uint32> tkTypeRef)>>>()
+                              Pointer<Utf16> szName, Pointer<Uint32> ptr_)>>>()
               .value
               .asFunction<
                   int Function(Pointer, int tkResolutionScope,
-                      Pointer<Utf16> szName, Pointer<Uint32> ptr)>()(
-          ptr.ref.lpVtbl, tkResolutionScope, szName, tkTypeRef);
+                      Pointer<Utf16> szName, Pointer<Uint32> ptr_)>()(
+          ptr.ref.lpVtbl, tkResolutionScope, szName, ptr_);
 
   int getMemberProps(
           int mb,
