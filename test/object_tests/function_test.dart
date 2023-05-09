@@ -6,17 +6,26 @@ import 'package:winmd/winmd.dart';
 
 /// Exhaustively test a method representation.
 void main() {
-  // .method /* 06000EB4 */ public hidebysig static pinvokeimpl("USER32" nomangle lasterr winapi)
+  // .method public hidebysig static pinvokeimpl("USER32.dll" nomangle lasterr winapi)
   // 	valuetype [Windows.Win32.winmd]Windows.Win32.Foundation.BOOL AdjustWindowRect (
   // 		[in] [out] valuetype [Windows.Win32.winmd]Windows.Win32.Foundation.RECT* lpRect,
   // 		[in] valuetype [Windows.Win32.winmd]Windows.Win32.UI.WindowsAndMessaging.WINDOW_STYLE dwStyle,
   // 		[in] valuetype [Windows.Win32.winmd]Windows.Win32.Foundation.BOOL bMenu
-  // 	) cil managed preservesig
+  // 	) cil managed
   // {
-  // 	.custom instance void [Windows.Win32.Interop]Windows.Win32.Interop.SupportedOSPlatformAttribute::.ctor(string) = (
+  // 	.custom instance void [Windows.Win32.winmd]Windows.Win32.Foundation.Metadata.SupportedOSPlatformAttribute::.ctor(string) = (
   // 		01 00 0a 77 69 6e 64 6f 77 73 35 2e 30 00 00
   // 	)
+  // 	.custom instance void [Windows.Win32.winmd]Windows.Win32.Foundation.Metadata.DocumentationAttribute::.ctor(string) = (
+  // 		01 00 50 68 74 74 70 73 3a 2f 2f 64 6f 63 73 2e
+  // 		6d 69 63 72 6f 73 6f 66 74 2e 63 6f 6d 2f 77 69
+  // 		6e 64 6f 77 73 2f 77 69 6e 33 32 2f 61 70 69 2f
+  // 		77 69 6e 75 73 65 72 2f 6e 66 2d 77 69 6e 75 73
+  // 		65 72 2d 61 64 6a 75 73 74 77 69 6e 64 6f 77 72
+  // 		65 63 74 00 00
+  // 	)
   // } // end of method Apis::AdjustWindowRect
+
   test('Windows.Win32.UI.WindowsAndMessaging.Apis.AdjustWindowRect', () {
     final scope = MetadataStore.getWin32Scope();
     final typedef =
@@ -67,7 +76,7 @@ void main() {
 
     check(awr
             .findAttribute(
-                'Windows.Win32.Interop.SupportedOSPlatformAttribute')!
+                'Windows.Win32.Foundation.Metadata.SupportedOSPlatformAttribute')!
             .signatureBlob
             .toList())
         .deepEquals([

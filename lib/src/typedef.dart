@@ -239,23 +239,13 @@ class TypeDef extends TokenObject
           final assemblyRef =
               AssemblyRef.fromToken(scope, resolutionScopeToken);
           if (assemblyRef.name != 'netstandard' && // .NET
-              assemblyRef.name != 'mscorlib' && // .NET Framework
-              assemblyRef.name != 'Windows.Win32.Interop') {
+                  assemblyRef.name != 'mscorlib' // .NET Framework
+              ) {
             final newScope = MetadataStore.getScopeForType(typeName);
             final typeDef = newScope.findTypeDef(typeName);
             if (typeDef == null) {
               throw WinmdException(
                   'Can\'t find type $typeName in the ${newScope.name} scope.');
-            }
-
-            return typeDef;
-          } else if (assemblyRef.name == 'Windows.Win32.Interop') {
-            // dedupe with section above?
-            final interopScope = MetadataStore.getWin32InteropScope();
-            final typeDef = interopScope.findTypeDef(typeName);
-            if (typeDef == null) {
-              throw WinmdException(
-                  'Can\'t find type $typeName in the ${interopScope.name} scope.');
             }
 
             return typeDef;

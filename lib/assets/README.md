@@ -1,2 +1,3 @@
-The `.winmd` file is compiled using the latest main build at the time of commit from
-<https://github.com/microsoft/win32metadata>.
+The `.winmd` file is generated from the
+[microsoft/win32metadata](https://github.com/microsoft/win32metadata)
+repository.

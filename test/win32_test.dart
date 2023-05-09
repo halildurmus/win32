@@ -500,12 +500,12 @@ void main() {
     final scope = MetadataStore.getWin32Scope();
     final interface =
         scope.findTypeDef('Windows.Win32.System.WinRT.IActivationFactory')!;
-    check(interface.customAttributes.length).equals(2);
-    check(interface.customAttributes.map((attr) => attr.name))
-        .contains('Windows.Win32.Interop.SupportedOSPlatformAttribute');
+    check(interface.customAttributes.length).isGreaterOrEqual(2);
+    check(interface.customAttributes.map((attr) => attr.name)).contains(
+        'Windows.Win32.Foundation.Metadata.SupportedOSPlatformAttribute');
 
     final supportedOS = interface.attributeAsString(
-        'Windows.Win32.Interop.SupportedOSPlatformAttribute');
+        'Windows.Win32.Foundation.Metadata.SupportedOSPlatformAttribute');
     check(supportedOS).equals('windows8.0');
   });
 }

@@ -73,13 +73,6 @@ class MetadataStore {
   /// tightly bound together.
   static Scope getWin32Scope() => getScopeForAsset('Windows.Win32.winmd');
 
-  /// Return the scope that contains the Win32 interop metadata.
-  ///
-  /// This is a satellite file that supports the Win32 metadata. It primarily
-  /// contains attributes that are used by the main file.
-  static Scope getWin32InteropScope() =>
-      getScopeForAsset('Windows.Win32.Interop.dll');
-
   /// Loads a scope for a file asset that is embedded in the package.
   static Scope getScopeForAsset(String assetName) {
     if (cache.containsKey(assetName)) {

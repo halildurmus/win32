@@ -168,8 +168,8 @@ void main() {
 
   test('COM methods of form get_*** are not interpreted as properties', () {
     final scope = MetadataStore.getWin32Scope();
-    final iksTopologyInfo =
-        scope.findTypeDef('Windows.Win32.Media.DirectShow.IKsTopologyInfo')!;
+    final iksTopologyInfo = scope
+        .findTypeDef('Windows.Win32.Media.KernelStreaming.IKsTopologyInfo')!;
     final getNodeName = iksTopologyInfo.findMethod('get_NodeName')!;
     check(getNodeName.isProperty).isFalse();
     check(getNodeName.isGetProperty).isFalse();

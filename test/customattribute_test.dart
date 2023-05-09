@@ -73,7 +73,7 @@ void main() {
     check(archAttr.parameters[0].type.baseType)
         .equals(BaseType.valueTypeModifier);
     check(archAttr.parameters[0].type.name)
-        .equals('Windows.Win32.Interop.Architecture');
+        .equals('Windows.Win32.Foundation.Metadata.Architecture');
 
     check(archAttr.parameters[0].value).isA<int>();
     // Depending on which one we get first, we'll either get ARM or X86/X64
@@ -105,7 +105,8 @@ void main() {
     final scope = MetadataStore.getWin32Scope();
     final hwnd = scope.findTypeDef('Windows.Win32.Foundation.HWND')!;
 
-    check(hwnd.existsAttribute('Windows.Win32.Interop.NativeTypedefAttribute'))
+    check(hwnd.existsAttribute(
+            'Windows.Win32.Foundation.Metadata.NativeTypedefAttribute'))
         .isTrue();
   });
 
@@ -120,7 +121,7 @@ void main() {
     final itn = MetadataStore.getMetadataForType(
         'Windows.UI.Notifications.IToastNotification')!;
     final guid =
-        itn.findAttribute('Windows.Win32.Foundation.Metadata.GuidAttribute')!;
+        itn.findAttribute('Windows.Foundation.Metadata.GuidAttribute')!;
     check(guid.parameters.length).equals(11);
     check(guid.parameters[0].value).equals(0x997e2675);
     check(guid.parameters[1].value).equals(0x059e);
@@ -135,8 +136,8 @@ void main() {
     final commApis =
         scope.findTypeDef('Windows.Win32.Devices.Communication.Apis')!;
     final getCommPorts = commApis.findMethod('GetCommPorts')!;
-    final minVersion = getCommPorts
-        .findAttribute('Windows.Win32.Interop.SupportedOSPlatformAttribute')!;
+    final minVersion = getCommPorts.findAttribute(
+        'Windows.Win32.Foundation.Metadata.SupportedOSPlatformAttribute')!;
     check(minVersion.parameters.length).equals(1);
     check(minVersion.parameters.first.value).equals('windows10.0.17134');
   });

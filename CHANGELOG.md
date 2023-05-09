@@ -1,3 +1,13 @@
+## 3.0.0
+
+- Fix bug with a simple array type in a function signature (#72, thanks
+  @ds84182)
+- Update to Windows.Win32.winmd v51.0.33.6962.
+- [BREAKING CHANGE] The names of metadata attributes changed in the above winmd
+  file. Replace all instances of `Windows.Win32.Interop.*` with
+  `Windows.Win32.Foundation.Metadata.*`.
+- Upgrade to Dart 3
+
 ## 2.4.9
 
 - Update to Windows.Win32.winmd v47.0.14.4635.
