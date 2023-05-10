@@ -52,13 +52,13 @@ jobs:
       - name: Analyze project source
         run: dart analyze --fatal-warnings
 
-      - name: Check documentation can be generated without errors
-        if: ${{ matrix.os == 'windows-2022' }} 
-        run: dart doc --validate-links
-
       - name: Run tests on generation tool
         working-directory: tool/win32gen
         run: dart test
 
       - name: Run tests
         run: dart test
+
+      - name: Check documentation can be generated without errors
+        if: ${{ matrix.os == 'windows-2022' }} 
+        run: dart doc --validate-links
