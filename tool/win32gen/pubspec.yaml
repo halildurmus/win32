@@ -3,7 +3,7 @@ description: Auto-generate Dart wrapper classes for the Win32 API using Windows 
 publish_to: none
 
 environment:
-  sdk: '>=3.0.0-0 <4.0.0'
+  sdk: '>=3.0.0 <4.0.0'
 
 # Declare that this package only works on Windows.
 platforms:
@@ -32,5 +32,7 @@ dependencies:
   win32: ^4.1.4
 
 dependency_overrides:
+  win32:
+    path: ../..
   winmd:
     path: ../../../winmd
