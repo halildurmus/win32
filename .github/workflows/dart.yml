@@ -53,6 +53,7 @@ jobs:
         run: dart analyze --fatal-warnings
 
       - name: Check documentation can be generated without errors
+        if: ${{ matrix.os == 'windows-2022' }} 
         run: dart doc --validate-links
 
       - name: Run tests on generation tool
