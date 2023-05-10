@@ -7,7 +7,7 @@ packages.
 
 [![pub package](https://img.shields.io/pub/v/win32.svg)](https://pub.dev/packages/win32)
 [![Language](https://img.shields.io/badge/language-Dart-blue.svg)](https://dart.dev)
-![Build](https://github.com/timsneath/win32/workflows/Build/badge.svg)
+![Build](https://github.com/dart-windows/win32/workflows/Build/badge.svg)
 
 In addition to exposing the APIs themselves, this package offers a variety of
 instructive examples for more complex FFI usage scenarios.
@@ -28,37 +28,37 @@ You could use it to call a Win32 API like
 [EnumFontFamiliesEx](https://docs.microsoft.com/en-us/windows/win32/api/wingdi/nf-wingdi-enumfontfamiliesexw)
 to enumerate all locally-installed fonts:
 
-![Fonts screenshot](https://github.com/timsneath/win32/blob/main/doc/images/fonts.png?raw=true)
+![Fonts screenshot](https://github.com/dart-windows/win32/blob/main/doc/images/fonts.png?raw=true)
 
 or access system information that is not exposed directly by the Dart framework
 libraries:
 
-![System information screenshot](https://github.com/timsneath/win32/blob/main/doc/images/power.png?raw=true)
+![System information screenshot](https://github.com/dart-windows/win32/blob/main/doc/images/power.png?raw=true)
 
 You could use it to build a Windows app with Flutter that relies on Win32 APIs:
 
-![Disk explorer screenshot](https://github.com/timsneath/win32/blob/main/doc/images/disk_explorer.png?raw=true)
+![Disk explorer screenshot](https://github.com/dart-windows/win32/blob/main/doc/images/disk_explorer.png?raw=true)
 
 You could even use it to build a traditional Win32 app, written purely in Dart,
 that could have come straight out of a classic Charles Petzold book on
 programming Windows apps:
 
-![Dart notepad screenshot](https://github.com/timsneath/win32/blob/main/doc/images/notepad.png?raw=true)
+![Dart notepad screenshot](https://github.com/dart-windows/win32/blob/main/doc/images/notepad.png?raw=true)
 
 or even, perhaps, a fully-fledged game using GDI:
 
-![Dart Tetris for Win32 screenshot](https://github.com/timsneath/win32/blob/main/doc/images/tetris.png?raw=true)
+![Dart Tetris for Win32 screenshot](https://github.com/dart-windows/win32/blob/main/doc/images/tetris.png?raw=true)
 
 You might even build a package that depends upon it, like
 [dart_console](https://pub.dev/packages/dart_console), which enables advanced
 console manipulation:
 
-![Dart console ANSI color demo screenshot](https://github.com/timsneath/win32/blob/main/doc/images/console.png?raw=true)
+![Dart console ANSI color demo screenshot](https://github.com/dart-windows/win32/blob/main/doc/images/console.png?raw=true)
 
 or [filepicker_windows](https://pub.dev/packages/filepicker_windows), which
 provides a modern Windows file picker for Flutter:
 
-![Windows file picker screenshot](https://github.com/timsneath/win32/blob/main/doc/images/filepicker.png?raw=true)
+![Windows file picker screenshot](https://github.com/dart-windows/win32/blob/main/doc/images/filepicker.png?raw=true)
 
 ## Getting started
 
@@ -176,6 +176,6 @@ Dmitriy Kubyshkin and is licensed by him under the MIT License.
 The summary Win32 API documentation comments are [licensed by Microsoft][] under
 the [Creative Commons Attribution 4.0 International Public License][license].
 
-[tracker]: https://github.com/timsneath/win32
+[tracker]: https://github.com/dart-windows/win32
 [licensed by Microsoft]: https://github.com/MicrosoftDocs/win32/blob/7b49862e8d58cfad5d4e5e22104c9fca7fd6db2f/ThirdPartyNotices
 [license]: https://github.com/MicrosoftDocs/win32/blob/7b49862e8d58cfad5d4e5e22104c9fca7fd6db2f/LICENSE
