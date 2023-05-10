@@ -9,8 +9,12 @@ void main() {
     final functionsToGenerate = loadFunctionsFromJson();
 
     final scope = MetadataStore.getWin32Scope();
-    final apis =
-        scope.typeDefs.where((typeDef) => typeDef.name.endsWith('Apis'));
+    final apis = scope.typeDefs
+      ..where((typeDef) => typeDef.name.endsWith('Apis'))
+      // Temporarily disable because of:
+      // https://github.com/dart-windows/win32/pull/697#issuecomment-1541500049
+      ..where((typeDef) =>
+          !typeDef.name.startsWith('Windows.Win32.System.WinRT.Metadata.Apis'));
 
     final methods = <Method>[];
 
