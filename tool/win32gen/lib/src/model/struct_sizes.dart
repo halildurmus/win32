@@ -2,10 +2,10 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-// Struct sizes are a mapping of name to 32-bit and 64-bit sizes. The easiest
-// way to generate the first two maps is by compiling and running
-// struct_sizes.cpp on both 32-bit and 64-bit architectures, and copying the
-// resultant output directly into this file.
+// Struct sizes are a mapping of name to 64-bit struct sizes. The easiest way to
+// generate the map is by compiling and running struct_sizes.cpp on a 64-bit
+// machine architecture, and copying the resultant output directly into this
+// file.
 
 const structSizeMap = <String, int>{
   'GUID': 16,

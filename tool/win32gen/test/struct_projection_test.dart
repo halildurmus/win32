@@ -40,4 +40,15 @@ void main() {
     expect(structProjection.packingAlignment, equals(1));
     expect(structProjection.classPreamble, contains('@Packed(1)'));
   });
+
+  test('Packed structs projected correctly 4', () {
+    final scope = MetadataStore.getWin32Scope();
+
+    final typeDef =
+        scope.findTypeDef('Windows.Win32.Devices.Bluetooth.SOCKADDR_BTH');
+
+    final structProjection = StructProjection(typeDef!, 'SOCKADDR_BTH');
+    expect(structProjection.packingAlignment, equals(1));
+    expect(structProjection.classPreamble, contains('@Packed(1)'));
+  });
 }

@@ -8098,6 +8098,7 @@ base class SOCKADDR extends Struct {
 /// operations, defined by address family AF_BTH.
 ///
 /// {@category Struct}
+@Packed(1)
 base class SOCKADDR_BTH extends Struct {
   @Uint16()
   external int addressFamily;
@@ -9404,6 +9405,7 @@ base class WAVEFORMATEX extends Struct {
 /// any format that can be defined by WAVEFORMATEX.
 ///
 /// {@category Struct}
+@Packed(1)
 base class WAVEFORMATEXTENSIBLE extends Struct {
   external WAVEFORMATEX Format;
 

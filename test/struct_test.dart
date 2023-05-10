@@ -48,6 +48,9 @@ void main() {
   test('Struct ARRAYDESC is the right size', () {
     expect(sizeOf<ARRAYDESC>(), equals(32));
   });
+  test('Struct ASSEMBLYMETADATA is the right size', () {
+    expect(sizeOf<ASSEMBLYMETADATA>(), equals(56));
+  });
   test('Struct BIND_OPTS is the right size', () {
     expect(sizeOf<BIND_OPTS>(), equals(16));
   });
@@ -69,8 +72,14 @@ void main() {
   test('Struct BLUETOOTH_ADDRESS is the right size', () {
     expect(sizeOf<BLUETOOTH_ADDRESS>(), equals(8));
   });
+  test('Struct BLUETOOTH_AUTHENTICATE_RESPONSE is the right size', () {
+    expect(sizeOf<BLUETOOTH_AUTHENTICATE_RESPONSE>(), equals(48));
+  });
   test('Struct BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS is the right size', () {
     expect(sizeOf<BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS>(), equals(576));
+  });
+  test('Struct BLUETOOTH_COD_PAIRS is the right size', () {
+    expect(sizeOf<BLUETOOTH_COD_PAIRS>(), equals(16));
   });
   test('Struct BLUETOOTH_DEVICE_INFO is the right size', () {
     expect(sizeOf<BLUETOOTH_DEVICE_INFO>(), equals(560));
@@ -90,8 +99,14 @@ void main() {
     expect(
         sizeOf<BLUETOOTH_GATT_VALUE_CHANGED_EVENT_REGISTRATION>(), equals(40));
   });
+  test('Struct BLUETOOTH_NUMERIC_COMPARISON_INFO is the right size', () {
+    expect(sizeOf<BLUETOOTH_NUMERIC_COMPARISON_INFO>(), equals(4));
+  });
   test('Struct BLUETOOTH_OOB_DATA_INFO is the right size', () {
     expect(sizeOf<BLUETOOTH_OOB_DATA_INFO>(), equals(32));
+  });
+  test('Struct BLUETOOTH_PASSKEY_INFO is the right size', () {
+    expect(sizeOf<BLUETOOTH_PASSKEY_INFO>(), equals(4));
   });
   test('Struct BLUETOOTH_PIN_INFO is the right size', () {
     expect(sizeOf<BLUETOOTH_PIN_INFO>(), equals(17));
@@ -99,8 +114,20 @@ void main() {
   test('Struct BLUETOOTH_RADIO_INFO is the right size', () {
     expect(sizeOf<BLUETOOTH_RADIO_INFO>(), equals(520));
   });
+  test('Struct BLUETOOTH_SELECT_DEVICE_PARAMS is the right size', () {
+    expect(sizeOf<BLUETOOTH_SELECT_DEVICE_PARAMS>(), equals(88));
+  });
   test('Struct BSMINFO is the right size', () {
     expect(sizeOf<BSMINFO>(), equals(32));
+  });
+  test('Struct BTH_DEVICE_INFO is the right size', () {
+    expect(sizeOf<BTH_DEVICE_INFO>(), equals(272));
+  });
+  test('Struct BTH_HCI_EVENT_INFO is the right size', () {
+    expect(sizeOf<BTH_HCI_EVENT_INFO>(), equals(16));
+  });
+  test('Struct BTH_L2CAP_EVENT_INFO is the right size', () {
+    expect(sizeOf<BTH_L2CAP_EVENT_INFO>(), equals(16));
   });
   test('Struct BTH_LE_GATT_CHARACTERISTIC is the right size', () {
     expect(sizeOf<BTH_LE_GATT_CHARACTERISTIC>(), equals(36));
@@ -119,6 +146,18 @@ void main() {
   });
   test('Struct BTH_LE_UUID is the right size', () {
     expect(sizeOf<BTH_LE_UUID>(), equals(20));
+  });
+  test('Struct BTH_QUERY_DEVICE is the right size', () {
+    expect(sizeOf<BTH_QUERY_DEVICE>(), equals(5));
+  });
+  test('Struct BTH_QUERY_SERVICE is the right size', () {
+    expect(sizeOf<BTH_QUERY_SERVICE>(), equals(256));
+  });
+  test('Struct BTH_RADIO_IN_RANGE is the right size', () {
+    expect(sizeOf<BTH_RADIO_IN_RANGE>(), equals(280));
+  });
+  test('Struct BTH_SET_SERVICE is the right size', () {
+    expect(sizeOf<BTH_SET_SERVICE>(), equals(45));
   });
   test('Struct BY_HANDLE_FILE_INFORMATION is the right size', () {
     expect(sizeOf<BY_HANDLE_FILE_INFORMATION>(), equals(52));
@@ -176,6 +215,9 @@ void main() {
   });
   test('Struct COORD is the right size', () {
     expect(sizeOf<COORD>(), equals(4));
+  });
+  test('Struct COR_FIELD_OFFSET is the right size', () {
+    expect(sizeOf<COR_FIELD_OFFSET>(), equals(8));
   });
   test('Struct CREATEFILE2_EXTENDED_PARAMETERS is the right size', () {
     expect(sizeOf<CREATEFILE2_EXTENDED_PARAMETERS>(), equals(32));
@@ -266,6 +308,9 @@ void main() {
   });
   test('Struct DISPLAYCONFIG_VIDEO_SIGNAL_INFO is the right size', () {
     expect(sizeOf<DISPLAYCONFIG_VIDEO_SIGNAL_INFO>(), equals(48));
+  });
+  test('Struct DISPLAY_DEVICE is the right size', () {
+    expect(sizeOf<DISPLAY_DEVICE>(), equals(840));
   });
   test('Struct DISPPARAMS is the right size', () {
     expect(sizeOf<DISPPARAMS>(), equals(24));
@@ -434,6 +479,9 @@ void main() {
   });
   test('Struct ITEMIDLIST is the right size', () {
     expect(sizeOf<ITEMIDLIST>(), equals(3));
+  });
+  test('Struct JOBOBJECT_IO_RATE_CONTROL_INFORMATION is the right size', () {
+    expect(sizeOf<JOBOBJECT_IO_RATE_CONTROL_INFORMATION>(), equals(40));
   });
   test('Struct JOB_INFO_1 is the right size', () {
     expect(sizeOf<JOB_INFO_1>(), equals(96));
@@ -612,6 +660,9 @@ void main() {
   test('Struct OPENFILENAME is the right size', () {
     expect(sizeOf<OPENFILENAME>(), equals(152));
   });
+  test('Struct OSINFO is the right size', () {
+    expect(sizeOf<OSINFO>(), equals(12));
+  });
   test('Struct OSVERSIONINFOEX is the right size', () {
     expect(sizeOf<OSVERSIONINFOEX>(), equals(284));
   });
@@ -771,6 +822,18 @@ void main() {
   test('Struct SCROLLINFO is the right size', () {
     expect(sizeOf<SCROLLINFO>(), equals(28));
   });
+  test('Struct SDP_ELEMENT_DATA is the right size', () {
+    expect(sizeOf<SDP_ELEMENT_DATA>(), equals(24));
+  });
+  test('Struct SDP_LARGE_INTEGER_16 is the right size', () {
+    expect(sizeOf<SDP_LARGE_INTEGER_16>(), equals(16));
+  });
+  test('Struct SDP_STRING_TYPE_DATA is the right size', () {
+    expect(sizeOf<SDP_STRING_TYPE_DATA>(), equals(6));
+  });
+  test('Struct SDP_ULARGE_INTEGER_16 is the right size', () {
+    expect(sizeOf<SDP_ULARGE_INTEGER_16>(), equals(16));
+  });
   test('Struct SECURITY_ATTRIBUTES is the right size', () {
     expect(sizeOf<SECURITY_ATTRIBUTES>(), equals(24));
   });
@@ -806,6 +869,9 @@ void main() {
   });
   test('Struct SOCKADDR is the right size', () {
     expect(sizeOf<SOCKADDR>(), equals(16));
+  });
+  test('Struct SOCKADDR_BTH is the right size', () {
+    expect(sizeOf<SOCKADDR_BTH>(), equals(30));
   });
   test('Struct SOCKET_ADDRESS is the right size', () {
     expect(sizeOf<SOCKET_ADDRESS>(), equals(16));
@@ -872,6 +938,15 @@ void main() {
   });
   test('Struct SYSTEM_POWER_STATUS is the right size', () {
     expect(sizeOf<SYSTEM_POWER_STATUS>(), equals(12));
+  });
+  test('Struct SdpAttributeRange is the right size', () {
+    expect(sizeOf<SdpAttributeRange>(), equals(4));
+  });
+  test('Struct SdpQueryUuid is the right size', () {
+    expect(sizeOf<SdpQueryUuid>(), equals(20));
+  });
+  test('Struct SdpQueryUuidUnion is the right size', () {
+    expect(sizeOf<SdpQueryUuidUnion>(), equals(16));
   });
   test('Struct TASKDIALOGCONFIG is the right size', () {
     expect(sizeOf<TASKDIALOGCONFIG>(), equals(160));

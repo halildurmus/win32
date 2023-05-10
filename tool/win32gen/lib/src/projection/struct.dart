@@ -2,7 +2,6 @@ import 'dart:math' show min;
 
 import 'package:winmd/winmd.dart';
 
-import '../model/exclusions.dart';
 import 'field.dart';
 import 'nested_struct.dart';
 import 'safenames.dart';
@@ -39,8 +38,7 @@ class StructProjection {
         ? structCategoryComment
         : '$classComment\n///\n$structCategoryComment';
 
-    if (packingAlignment > 0 &&
-        !ignorePackingDirectives.contains(typeDef.name)) {
+    if (packingAlignment > 0) {
       return '$docComment\n@Packed($packingAlignment)';
     } else {
       return docComment;
@@ -89,7 +87,7 @@ class StructProjection {
 
   int calculatePackingAlignment(TypeDef typeDef) {
     // Tokens like System.Guid have no packing alignment.
-    if (typeDef.token == 0) return 0;
+    if (typeDef.token == 0) return 0xFF;
 
     var alignment =
         typeDef.classLayout.packingAlignment ?? 0xFF; // marker value
