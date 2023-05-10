@@ -150,7 +150,7 @@ class MetadataStore {
       if (SUCCEEDED(hr)) {
         path = File(convertFromHString(hstrMetaDataFilePath.value));
       } else {
-        switch (hr) {
+        switch (hr.toUnsigned(32)) {
           case RO_E_METADATA_INVALID_TYPE_FORMAT:
             throw WindowsException(hr,
                 message: "'$typeName' is not a valid Windows Runtime type.");
@@ -208,7 +208,7 @@ class MetadataStore {
           final filePath = convertFromHString(hstrMetaDataFilePath.value);
           return getScopeForFile(File(filePath));
         } else {
-          switch (hr) {
+          switch (hr.toUnsigned(32)) {
             case RO_E_METADATA_INVALID_TYPE_FORMAT:
               throw WindowsException(hr,
                   message: "'$typeName' is not a valid Windows Runtime type.");
