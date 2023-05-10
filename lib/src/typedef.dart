@@ -9,7 +9,6 @@ import 'package:win32/win32.dart';
 
 import 'assemblyref.dart';
 import 'classlayout.dart';
-import 'com/enums.dart';
 import 'constants.dart';
 import 'enums.dart';
 import 'event.dart';
@@ -63,7 +62,7 @@ class TypeDef extends TokenObject
   late final _enclosingClassToken = isNested
       ? using((Arena arena) {
           final ptdEnclosingClass = arena<mdTypeDef>();
-          final hr = reader.GetNestedClassProps(token, ptdEnclosingClass);
+          final hr = reader.getNestedClassProps(token, ptdEnclosingClass);
           if (SUCCEEDED(hr)) {
             return ptdEnclosingClass.value;
           } else {
@@ -97,7 +96,7 @@ class TypeDef extends TokenObject
       final ptkExtends = arena<mdToken>();
 
       final reader = scope.reader;
-      final hr = reader.GetTypeDefProps(typeDefToken, szTypeDef,
+      final hr = reader.getTypeDefProps(typeDefToken, szTypeDef,
           stringBufferSize, pchTypeDef, pdwTypeDefFlags, ptkExtends);
 
       if (SUCCEEDED(hr)) {
@@ -116,7 +115,7 @@ class TypeDef extends TokenObject
       final ptkResolutionScope = arena<mdToken>();
       final szName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
       final pchName = arena<ULONG>();
-      final hr = scope.reader.GetTypeRefProps(
+      final hr = scope.reader.getTypeRefProps(
           typeRefToken, ptkResolutionScope, szName, stringBufferSize, pchName);
       if (SUCCEEDED(hr)) {
         return szName.toDartString();
@@ -174,7 +173,7 @@ class TypeDef extends TokenObject
       final szTypeDef = typeName.toNativeUtf16(allocator: arena);
       final ptd = arena<mdTypeDef>();
       final hr =
-          scope.reader.FindTypeDefByName(szTypeDef, resolutionScopeToken, ptd);
+          scope.reader.findTypeDefByName(szTypeDef, resolutionScopeToken, ptd);
       if (SUCCEEDED(hr)) {
         return TypeDef.fromToken(scope, ptd.value);
       } else if (hr == CLDB_E_RECORD_NOTFOUND) {
@@ -200,7 +199,7 @@ class TypeDef extends TokenObject
       final pchName = arena<ULONG>();
 
       final reader = scope.reader;
-      final hr = reader.GetTypeRefProps(
+      final hr = reader.getTypeRefProps(
           typeRefToken, ptkResolutionScope, szName, stringBufferSize, pchName);
 
       if (SUCCEEDED(hr)) {
@@ -239,23 +238,13 @@ class TypeDef extends TokenObject
           final assemblyRef =
               AssemblyRef.fromToken(scope, resolutionScopeToken);
           if (assemblyRef.name != 'netstandard' && // .NET
-              assemblyRef.name != 'mscorlib' && // .NET Framework
-              assemblyRef.name != 'Windows.Win32.Interop') {
+                  assemblyRef.name != 'mscorlib' // .NET Framework
+              ) {
             final newScope = MetadataStore.getScopeForType(typeName);
             final typeDef = newScope.findTypeDef(typeName);
             if (typeDef == null) {
               throw WinmdException(
                   'Can\'t find type $typeName in the ${newScope.name} scope.');
-            }
-
-            return typeDef;
-          } else if (assemblyRef.name == 'Windows.Win32.Interop') {
-            // dedupe with section above?
-            final interopScope = MetadataStore.getWin32InteropScope();
-            final typeDef = interopScope.findTypeDef(typeName);
-            if (typeDef == null) {
-              throw WinmdException(
-                  'Can\'t find type $typeName in the ${interopScope.name} scope.');
             }
 
             return typeDef;
@@ -279,7 +268,7 @@ class TypeDef extends TokenObject
       final pcbSig = arena<ULONG>();
 
       final reader = scope.reader;
-      final hr = reader.GetTypeSpecFromToken(typeSpecToken, ppvSig, pcbSig);
+      final hr = reader.getTypeSpecFromToken(typeSpecToken, ppvSig, pcbSig);
       final signature = ppvSig.value.asTypedList(pcbSig.value);
       final typeTuple = TypeTuple.fromSignature(signature, scope);
 
@@ -420,7 +409,7 @@ class TypeDef extends TokenObject
       final ptkClass = arena<mdTypeDef>();
       final ptkIface = arena<mdToken>();
 
-      final hr = reader.GetInterfaceImplProps(token, ptkClass, ptkIface);
+      final hr = reader.getInterfaceImplProps(token, ptkClass, ptkIface);
       if (SUCCEEDED(hr)) {
         final interfaceToken = ptkIface.value;
         return TypeDef.fromToken(scope, interfaceToken);
@@ -441,14 +430,14 @@ class TypeDef extends TokenObject
       final rgEvents = arena<mdEvent>();
       final pcEvents = arena<ULONG>();
 
-      var hr = reader.EnumEvents(phEnum, token, rgEvents, 1, pcEvents);
+      var hr = reader.enumEvents(phEnum, token, rgEvents, 1, pcEvents);
       while (hr == S_OK) {
         final eventToken = rgEvents.value;
 
         events.add(Event.fromToken(scope, eventToken));
-        hr = reader.EnumEvents(phEnum, token, rgEvents, 1, pcEvents);
+        hr = reader.enumEvents(phEnum, token, rgEvents, 1, pcEvents);
       }
-      reader.CloseEnum(phEnum.value);
+      reader.closeEnum(phEnum.value);
     });
 
     return events;
@@ -465,14 +454,14 @@ class TypeDef extends TokenObject
       final rgFields = arena<mdFieldDef>();
       final pcTokens = arena<ULONG>();
 
-      var hr = reader.EnumFields(phEnum, token, rgFields, 1, pcTokens);
+      var hr = reader.enumFields(phEnum, token, rgFields, 1, pcTokens);
       while (hr == S_OK) {
         final fieldToken = rgFields.value;
 
         fields.add(Field.fromToken(scope, fieldToken));
-        hr = reader.EnumFields(phEnum, token, rgFields, 1, pcTokens);
+        hr = reader.enumFields(phEnum, token, rgFields, 1, pcTokens);
       }
-      reader.CloseEnum(phEnum.value);
+      reader.closeEnum(phEnum.value);
     });
 
     return fields;
@@ -491,14 +480,14 @@ class TypeDef extends TokenObject
 
       // The enumeration returns a collection of mdInterfaceImpl tokens for
       // each interface implemented by the specified TypeDef.
-      var hr = reader.EnumInterfaceImpls(phEnum, token, rImpls, 1, pcImpls);
+      var hr = reader.enumInterfaceImpls(phEnum, token, rImpls, 1, pcImpls);
       while (hr == S_OK) {
         final interfaceToken = rImpls.value;
 
         interfaces.add(processInterfaceToken(interfaceToken));
-        hr = reader.EnumInterfaceImpls(phEnum, token, rImpls, 1, pcImpls);
+        hr = reader.enumInterfaceImpls(phEnum, token, rImpls, 1, pcImpls);
       }
-      reader.CloseEnum(phEnum.value);
+      reader.closeEnum(phEnum.value);
     });
 
     return interfaces;
@@ -516,14 +505,14 @@ class TypeDef extends TokenObject
       final rgMethods = arena<mdMethodDef>();
       final pcTokens = arena<ULONG>();
 
-      var hr = reader.EnumMethods(phEnum, token, rgMethods, 1, pcTokens);
+      var hr = reader.enumMethods(phEnum, token, rgMethods, 1, pcTokens);
       while (hr == S_OK) {
         final methodToken = rgMethods.value;
 
         methods.add(Method.fromToken(scope, methodToken));
-        hr = reader.EnumMethods(phEnum, token, rgMethods, 1, pcTokens);
+        hr = reader.enumMethods(phEnum, token, rgMethods, 1, pcTokens);
       }
-      reader.CloseEnum(phEnum.value);
+      reader.closeEnum(phEnum.value);
     });
 
     return methods;
@@ -541,14 +530,14 @@ class TypeDef extends TokenObject
       final pcProperties = arena<ULONG>();
 
       var hr =
-          reader.EnumProperties(phEnum, token, rgProperties, 1, pcProperties);
+          reader.enumProperties(phEnum, token, rgProperties, 1, pcProperties);
       while (hr == S_OK) {
         final propertyToken = rgProperties.value;
 
         properties.add(Property.fromToken(scope, propertyToken));
-        hr = reader.EnumMethods(phEnum, token, rgProperties, 1, pcProperties);
+        hr = reader.enumMethods(phEnum, token, rgProperties, 1, pcProperties);
       }
-      reader.CloseEnum(phEnum.value);
+      reader.closeEnum(phEnum.value);
     });
 
     return properties;
@@ -565,7 +554,7 @@ class TypeDef extends TokenObject
       final szName = fieldName.toNativeUtf16(allocator: arena);
       final ptkFieldDef = arena<mdFieldDef>();
 
-      final hr = reader.FindField(token, szName, nullptr, 0, ptkFieldDef);
+      final hr = reader.findField(token, szName, nullptr, 0, ptkFieldDef);
       if (SUCCEEDED(hr)) {
         return Field.fromToken(scope, ptkFieldDef.value);
       } else if (hr == CLDB_E_RECORD_NOTFOUND) {
@@ -587,7 +576,7 @@ class TypeDef extends TokenObject
       final szName = methodName.toNativeUtf16(allocator: arena);
       final pmb = arena<mdMethodDef>();
 
-      final hr = reader.FindMethod(token, szName, nullptr, 0, pmb);
+      final hr = reader.findMethod(token, szName, nullptr, 0, pmb);
       if (SUCCEEDED(hr)) {
         return Method.fromToken(scope, pmb.value);
       } else if (hr == CLDB_E_RECORD_NOTFOUND) {
@@ -635,7 +624,7 @@ class TypeDef extends TokenObject
       final ppData = arena<Pointer<BYTE>>();
       final pcbData = arena<ULONG>();
 
-      final hr = reader.GetCustomAttributeByName(
+      final hr = reader.getCustomAttributeByName(
           token, ptrAttributeName, ppData, pcbData);
       if (SUCCEEDED(hr)) {
         final blob = ppData.value;
@@ -656,7 +645,8 @@ class TypeDef extends TokenObject
   String? get guid {
     var guid =
         getCustomGUIDAttribute('Windows.Foundation.Metadata.GuidAttribute');
-    guid ??= getCustomGUIDAttribute('Windows.Win32.Interop.GuidAttribute');
+    guid ??= getCustomGUIDAttribute(
+        'Windows.Win32.Foundation.Metadata.GuidAttribute');
 
     return guid;
   }

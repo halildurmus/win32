@@ -1,4 +1,6 @@
-This package provides a Dart language abstraction over Windows metadata files,
+<img src="https://user-images.githubusercontent.com/2319867/235838660-a82bfdce-aa55-461d-b418-19bd5185b6af.png" width="50%" height="50%">
+
+A package that provides a Dart language abstraction over Windows metadata files,
 making it possible to load them and build Dart FFI interop libraries from the
 results. It can be used to interrogate the Windows developer API, whether
 unmanaged APIs like Win32 or COM, or APIs like Windows Runtime that include

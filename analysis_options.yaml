@@ -1,4 +1,4 @@
-# Last reviewed: 2.17.0
+# Last reviewed: 3.0.0
 
 include: package:lints/recommended.yaml
     
@@ -24,15 +24,14 @@ linter:
     prefer_const_literals_to_create_immutables: true
     prefer_final_in_for_each: true
     prefer_final_locals: true
+    prefer_interpolation_to_compose_strings: true
     prefer_relative_imports: true
     sort_child_properties_last: true
     sort_unnamed_constructors_first: true
     test_types_in_equals: true
-    type_literal_in_constant_pattern: true
     unawaited_futures: true
-    unnecessary_breaks: true
     unnecessary_lambdas: true
+    unnecessary_null_aware_assignments: true
     unnecessary_parenthesis: true
     unnecessary_statements: true
     use_super_parameters: true
-

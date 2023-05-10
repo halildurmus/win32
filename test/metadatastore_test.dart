@@ -65,18 +65,17 @@ void main() {
     final scope = MetadataStore.getWin32Scope();
     check(MetadataStore.cache.length).equals(1);
 
-    // Do some stuff that requires the Interop DLL to be loaded.
+    // Do some stuff that requires the Interop metadata to be loaded.
     final shexInfo =
         scope.findTypeDef('Windows.Win32.UI.Shell.SHELLEXECUTEINFOW')!;
-    final attrib = shexInfo
-        .findAttribute('Windows.Win32.Interop.SupportedArchitectureAttribute');
+    final attrib = shexInfo.findAttribute(
+        'Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute');
     check(attrib).isNotNull();
     final interopValue = attrib?.parameters.first.value;
     check(interopValue).isNotNull();
 
-    check(MetadataStore.cache.length).equals(2);
-    check(MetadataStore.cacheInfo)
-        .equals('[Windows.Win32.winmd, Windows.Win32.Interop.dll]');
+    check(MetadataStore.cache.length).equals(1);
+    check(MetadataStore.cacheInfo).equals('[Windows.Win32.winmd]');
 
     MetadataStore.close();
     check(MetadataStore.cache.length).equals(0);

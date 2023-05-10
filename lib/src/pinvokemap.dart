@@ -3,7 +3,6 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'com/enums.dart';
 import 'enums.dart';
 import 'scope.dart';
 import 'token_object.dart';
@@ -35,10 +34,10 @@ class PinvokeMap extends TokenObject {
       final pchModuleName = arena<ULONG>();
 
       final reader = scope.reader;
-      var hr = reader.GetPinvokeMap(token, pdwMappingFlags, szImportName,
+      var hr = reader.getPinvokeMap(token, pdwMappingFlags, szImportName,
           stringBufferSize, pchImportName, ptkImportDLL);
       if (SUCCEEDED(hr)) {
-        hr = reader.GetModuleRefProps(
+        hr = reader.getModuleRefProps(
             ptkImportDLL.value, szModuleName, stringBufferSize, pchModuleName);
 
         final moduleName = SUCCEEDED(hr) ? szModuleName.toDartString() : '';

@@ -8,7 +8,6 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'com/enums.dart';
 import 'enums.dart';
 import 'method.dart';
 import 'mixins/customattributes_mixin.dart';
@@ -45,7 +44,7 @@ class Parameter extends TokenObject with CustomAttributesMixin {
       final pcchValue = arena<ULONG>();
 
       final reader = scope.reader;
-      final hr = reader.GetParamProps(
+      final hr = reader.getParamProps(
           token,
           ptkMethodDef,
           pulSequence,
@@ -57,7 +56,7 @@ class Parameter extends TokenObject with CustomAttributesMixin {
           ppValue,
           pcchValue);
       if (SUCCEEDED(hr)) {
-        final baseType = parseCorElementType(pdwCPlusTypeFlag.value);
+        final baseType = BaseType.fromCorElementType(pdwCPlusTypeFlag.value);
         return Parameter(
             scope,
             token,

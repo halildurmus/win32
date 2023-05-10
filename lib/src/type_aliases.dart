@@ -5,7 +5,7 @@
 import 'dart:ffi';
 
 // Type aliases for metadata objects
-typedef HCORENUM = IntPtr;
+typedef HCORENUM = Pointer;
 typedef PCCOR_SIGNATURE = Pointer<Uint8>;
 typedef PCOR_SIGNATURE = Pointer<Uint8>;
 typedef UVCP_CONSTANT = Pointer<Uint8>;

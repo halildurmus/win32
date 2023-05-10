@@ -28,7 +28,7 @@ class ModuleRef extends TokenObject with CustomAttributesMixin {
 
       final reader = scope.reader;
       final hr =
-          reader.GetModuleRefProps(token, szName, stringBufferSize, pchName);
+          reader.getModuleRefProps(token, szName, stringBufferSize, pchName);
 
       if (SUCCEEDED(hr)) {
         return ModuleRef(scope, token, szName.toDartString());

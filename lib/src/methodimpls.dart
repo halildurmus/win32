@@ -1,4 +1,5 @@
-import 'com/enums.dart';
+import 'package:win32/win32.dart';
+
 import 'enums.dart';
 
 /// Contains values that describe method implementation features.

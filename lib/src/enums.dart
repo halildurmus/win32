@@ -2,7 +2,6 @@
 
 import 'package:win32/win32.dart';
 
-import 'com/enums.dart';
 import 'utils/exception.dart';
 
 /// Specifies a common language runtime Type, a type modifier, or information
@@ -100,7 +99,77 @@ enum BaseType {
 
   /// A type modifier that is a sentinel for a list of a variable number of
   /// parameters.
-  sentinelTypeModifier,
+  sentinelTypeModifier;
+
+  factory BaseType.fromCorElementType(int corElementTypeValue) {
+    switch (corElementTypeValue) {
+      case CorElementType.ELEMENT_TYPE_VOID:
+        return BaseType.voidType;
+      case CorElementType.ELEMENT_TYPE_BOOLEAN:
+        return BaseType.booleanType;
+      case CorElementType.ELEMENT_TYPE_CHAR:
+        return BaseType.charType;
+      case CorElementType.ELEMENT_TYPE_I1:
+        return BaseType.int8Type;
+      case CorElementType.ELEMENT_TYPE_U1:
+        return BaseType.uint8Type;
+      case CorElementType.ELEMENT_TYPE_I2:
+        return BaseType.int16Type;
+      case CorElementType.ELEMENT_TYPE_U2:
+        return BaseType.uint16Type;
+      case CorElementType.ELEMENT_TYPE_I4:
+        return BaseType.int32Type;
+      case CorElementType.ELEMENT_TYPE_U4:
+        return BaseType.uint32Type;
+      case CorElementType.ELEMENT_TYPE_I8:
+        return BaseType.int64Type;
+      case CorElementType.ELEMENT_TYPE_U8:
+        return BaseType.uint64Type;
+      case CorElementType.ELEMENT_TYPE_R4:
+        return BaseType.floatType;
+      case CorElementType.ELEMENT_TYPE_R8:
+        return BaseType.doubleType;
+      case CorElementType.ELEMENT_TYPE_STRING:
+        return BaseType.stringType;
+      case CorElementType.ELEMENT_TYPE_PTR:
+        return BaseType.pointerTypeModifier;
+      case CorElementType.ELEMENT_TYPE_BYREF:
+        return BaseType.referenceTypeModifier;
+      case CorElementType.ELEMENT_TYPE_VALUETYPE:
+        return BaseType.valueTypeModifier;
+      case CorElementType.ELEMENT_TYPE_CLASS:
+        return BaseType.classTypeModifier;
+      case CorElementType.ELEMENT_TYPE_VAR:
+        return BaseType.classVariableTypeModifier;
+      case CorElementType.ELEMENT_TYPE_ARRAY:
+        return BaseType.arrayTypeModifier;
+      case CorElementType.ELEMENT_TYPE_GENERICINST:
+        return BaseType.genericTypeModifier;
+      case CorElementType.ELEMENT_TYPE_TYPEDBYREF:
+        return BaseType.typedReference;
+      case CorElementType.ELEMENT_TYPE_I:
+        return BaseType.intPtrType;
+      case CorElementType.ELEMENT_TYPE_U:
+        return BaseType.uintPtrType;
+      case CorElementType.ELEMENT_TYPE_FNPTR:
+        return BaseType.functionPointerType;
+      case CorElementType.ELEMENT_TYPE_OBJECT:
+        return BaseType.objectType;
+      case CorElementType.ELEMENT_TYPE_SZARRAY:
+        return BaseType.simpleArrayType;
+      case CorElementType.ELEMENT_TYPE_MVAR:
+        return BaseType.methodVariableTypeModifier;
+      case CorElementType.ELEMENT_TYPE_CMOD_REQD:
+        return BaseType.cLanguageRequiredModifier;
+      case CorElementType.ELEMENT_TYPE_CMOD_OPT:
+        return BaseType.cLanguageOptionalModifier;
+      case CorElementType.ELEMENT_TYPE_SENTINEL:
+        return BaseType.sentinelTypeModifier;
+      default:
+        throw WinmdException(
+            'Unrecognized or internal type $corElementTypeValue');
+    }
+  }
 }
 
 /// Convention for mapping Unicode characters in P/Invoke calls.

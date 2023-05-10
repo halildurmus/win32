@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
-import '../com/enums.dart';
+import 'package:win32/win32.dart';
+
 import '../enums.dart';
 import '../scope.dart';
 import '../typedef.dart';
@@ -27,7 +28,7 @@ class TypeTuple {
   /// ECMA-335.
   factory TypeTuple.fromSignature(Uint8List signatureBlob, Scope scope) {
     final paramType = signatureBlob.first;
-    final baseType = parseCorElementType(paramType);
+    final baseType = BaseType.fromCorElementType(paramType);
     // final runtimeType = TypeIdentifier.fromValue(paramType);
     var dataLength = 0;
 
@@ -134,19 +135,13 @@ class TypeTuple {
   static int _unencodeDefRefSpecToken(int encoded) {
     final token = encoded >> 2;
 
-    if (encoded & 0x03 == 0x00) {
-      // typedef
-      return CorTokenType.mdtTypeDef | token;
-    }
-    if (encoded & 0x03 == 0x01) {
-      // typeref
-      return CorTokenType.mdtTypeRef | token;
-    }
-    if (encoded & 0x03 == 0x02) {
-      // typespec
-      return CorTokenType.mdtTypeSpec | token;
-    } else {
-      return 0;
+    switch (encoded & 0x03) {
+      case 0x00:
+        return CorTokenType.mdtTypeDef | token;
+      case 0x01:
+        return CorTokenType.mdtTypeRef | token;
+      default /* 0x02 */ :
+        return CorTokenType.mdtTypeSpec | token;
     }
   }
 }

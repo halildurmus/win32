@@ -133,7 +133,8 @@ void main() {
     check(structs.length).equals(2);
     for (final struct in structs) {
       final supportedArchAttribute = struct.customAttributes.where((attr) =>
-          attr.name == 'Windows.Win32.Interop.SupportedArchitectureAttribute');
+          attr.name ==
+          'Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute');
       check(supportedArchAttribute).isNotNull();
 
       // One structure for 64-bit, one structure for 32-bit

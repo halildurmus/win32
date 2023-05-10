@@ -7,7 +7,6 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'com/imetadataimport2.dart';
 import 'enums.dart';
 import 'scope.dart';
 
@@ -51,7 +50,7 @@ abstract class TokenObject {
   /// some types are markers that should never be resolved. For example, WinRT
   /// uses the CLR `System.Guid` type as a marker, but it should not be resolved
   /// to the .NET type system.
-  bool get isResolvedToken => reader.IsValidToken(token) == TRUE;
+  bool get isResolvedToken => reader.isValidToken(token) == TRUE;
 
   /// Returns true if the token is marked as global.
   bool get isGlobal {
@@ -59,7 +58,7 @@ abstract class TokenObject {
 
     return using((Arena arena) {
       final pIsGlobal = arena<Int32>();
-      final hr = reader.IsGlobal(token, pIsGlobal);
+      final hr = reader.isGlobal(token, pIsGlobal);
       if (FAILED(hr)) throw WindowsException(hr);
 
       return pIsGlobal.value == 1;

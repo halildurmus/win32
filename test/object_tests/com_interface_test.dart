@@ -9,13 +9,13 @@ void main() {
 // .class interface public auto ansi abstract Windows.Win32.UI.Shell.IFileOperation2
 // 	implements [Windows.Win32.winmd]Windows.Win32.UI.Shell.IFileOperation
 // {
-// 	.custom instance void [Windows.Win32.Interop]Windows.Win32.Interop.GuidAttribute::.ctor(uint32, uint16, uint16, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8) = (
+// 	.custom instance void [Windows.Win32.winmd]Windows.Win32.Foundation.Metadata.GuidAttribute::.ctor(uint32, uint16, uint16, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8) = (
 // 		01 00 c1 23 8f cd 61 8f 16 49 90 9d 55 bd d0 91
 // 		87 53 00 00
 // 	)
 // 	// Methods
 // 	.method public hidebysig newslot abstract virtual
-// 		instance valuetype [Windows.Win32.winmd]Windows.Win32.System.Com.HRESULT SetOperationFlags2 (
+// 		instance valuetype [Windows.Win32.winmd]Windows.Win32.Foundation.HRESULT SetOperationFlags2 (
 // 			[in] valuetype [Windows.Win32.winmd]Windows.Win32.UI.Shell.FILE_OPERATION_FLAGS2 operationFlags2
 // 		) cil managed
 // 	{
@@ -39,7 +39,7 @@ void main() {
         .equals('Windows.Win32.UI.Shell.IFileOperation');
 
     check(ifop2
-            .findAttribute('Windows.Win32.Interop.GuidAttribute')!
+            .findAttribute('Windows.Win32.Foundation.Metadata.GuidAttribute')!
             .signatureBlob
             .toList())
         .deepEquals([

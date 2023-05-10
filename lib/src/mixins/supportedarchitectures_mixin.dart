@@ -36,8 +36,8 @@ mixin SupportedArchitecturesMixin on CustomAttributesMixin {
   Architecture? _supportedArchitectures;
 
   Architecture _calculateSupportedArchitectures() {
-    final supportedArchAttr =
-        findAttribute('Windows.Win32.Interop.SupportedArchitectureAttribute');
+    final supportedArchAttr = findAttribute(
+        'Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute');
 
     // By default, this attribute is missing and it is assumed that types
     // support all valid platform architectures.
