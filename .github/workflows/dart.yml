@@ -23,9 +23,9 @@ jobs:
           - os: windows-2022
             sdk: beta
           - os: windows-2019
-            sdk: beta # revert to stable after Dart 3 ships
+            sdk: stable
           - os: ubuntu-latest
-            sdk: beta # revert to stable after Dart 3 ships
+            sdk: stable
             
     steps:
       - name: Fetch sources
