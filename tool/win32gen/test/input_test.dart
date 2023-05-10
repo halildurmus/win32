@@ -10,11 +10,7 @@ void main() {
 
     final scope = MetadataStore.getWin32Scope();
     final apis = scope.typeDefs
-      ..where((typeDef) => typeDef.name.endsWith('Apis'))
-      // Temporarily disable because of:
-      // https://github.com/dart-windows/win32/pull/697#issuecomment-1541500049
-      ..where((typeDef) =>
-          !typeDef.name.startsWith('Windows.Win32.System.WinRT.Metadata.Apis'));
+      ..where((typeDef) => typeDef.name.endsWith('Apis'));
 
     final methods = <Method>[];
 
@@ -32,5 +28,5 @@ void main() {
             'the metadata. There were ${method.length} matching items.');
       }
     }
-  });
+  }, skip: 'Waiting for Windows 11 on GitHub Actions hosted runners');
 }
