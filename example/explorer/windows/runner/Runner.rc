@@ -93,7 +93,7 @@ BEGIN
             VALUE "FileDescription", "Win32 Explorer demo app" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "Win32_Explorer" "\0"
-            VALUE "LegalCopyright", "Copyright 2019, the Dart project authors. All rights reserved." "\0"
+            VALUE "LegalCopyright", "Copyright 2019, Dart | Windows. All rights reserved." "\0"
             VALUE "OriginalFilename", "win32Explorer.exe" "\0"
             VALUE "ProductName", "win32Explorer" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
