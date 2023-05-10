@@ -4,6 +4,7 @@ version: 5.0.0
 homepage: https://win32.pub
 repository: https://github.com/dart-windows/win32
 issue_tracker: https://github.com/dart-windows/win32/issues
+documentation: https://win32.pub/docs/category/win32-programming
 
 topics:
   - win32
