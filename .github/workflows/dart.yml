@@ -23,10 +23,10 @@ jobs:
           - os: windows-2022
             sdk: beta
           - os: windows-2019
-            sdk: stable
+            sdk: beta # revert to stable after Dart 3 ships
           - os: ubuntu-latest
-            sdk: stable
-
+            sdk: beta # revert to stable after Dart 3 ships
+            
     steps:
       - name: Fetch sources
         uses: actions/checkout@v3
