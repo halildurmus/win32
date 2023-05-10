@@ -14,8 +14,8 @@ jobs:
       # versa). This prevents one failure from stopping the entire run.
       fail-fast: false
 
-      matrix:
-        sdk: [stable, beta, dev]
+    matrix:
+      sdk: [stable, beta, dev]
 
     steps:
       - name: Fetch sources
