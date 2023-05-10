@@ -31,4 +31,6 @@ dependencies:
 
   # Win32 itself
   win32: 
-    path: ../..
+    git:
+      url: https://github.com/dart-windows/win32.git
+      ref: winmd3
