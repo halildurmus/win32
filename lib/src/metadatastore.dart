@@ -150,19 +150,19 @@ class MetadataStore {
       if (SUCCEEDED(hr)) {
         path = File(convertFromHString(hstrMetaDataFilePath.value));
       } else {
-        final errorCode = hr.toHexString(32);
-        if (errorCode == RO_E_METADATA_INVALID_TYPE_FORMAT.toHexString(32)) {
-          throw WindowsException(hr,
-              message: "'$typeName' is not a valid Windows Runtime type.");
-        } else if (errorCode ==
-            RO_E_METADATA_NAME_IS_NAMESPACE.toHexString(32)) {
-          throw WindowsException(hr,
-              message: "'$typeName' is a namespace, not a type.");
-        } else if (errorCode == RO_E_METADATA_NAME_NOT_FOUND.toHexString(32)) {
-          throw WindowsException(hr,
-              message: "Could not find type '$typeName'.");
+        switch (hr) {
+          case RO_E_METADATA_INVALID_TYPE_FORMAT:
+            throw WindowsException(hr,
+                message: "'$typeName' is not a valid Windows Runtime type.");
+          case RO_E_METADATA_NAME_IS_NAMESPACE:
+            throw WindowsException(hr,
+                message: "'$typeName' is a namespace, not a type.");
+          case RO_E_METADATA_NAME_NOT_FOUND:
+            throw WindowsException(hr,
+                message: "Could not find type '$typeName'.");
+          default:
+            throw WindowsException(hr);
         }
-        throw WindowsException(hr);
       }
     } finally {
       WindowsDeleteString(hstrTypeName);
@@ -208,20 +208,19 @@ class MetadataStore {
           final filePath = convertFromHString(hstrMetaDataFilePath.value);
           return getScopeForFile(File(filePath));
         } else {
-          final errorCode = hr.toHexString(32);
-          if (errorCode == RO_E_METADATA_INVALID_TYPE_FORMAT.toHexString(32)) {
-            throw WindowsException(hr,
-                message: "'$typeName' is not a valid Windows Runtime type.");
-          } else if (errorCode ==
-              RO_E_METADATA_NAME_IS_NAMESPACE.toHexString(32)) {
-            throw WindowsException(hr,
-                message: "'$typeName' is a namespace, not a type.");
-          } else if (errorCode ==
-              RO_E_METADATA_NAME_NOT_FOUND.toHexString(32)) {
-            throw WindowsException(hr,
-                message: "Could not find type '$typeName'.");
+          switch (hr) {
+            case RO_E_METADATA_INVALID_TYPE_FORMAT:
+              throw WindowsException(hr,
+                  message: "'$typeName' is not a valid Windows Runtime type.");
+            case RO_E_METADATA_NAME_IS_NAMESPACE:
+              throw WindowsException(hr,
+                  message: "'$typeName' is a namespace, not a type.");
+            case RO_E_METADATA_NAME_NOT_FOUND:
+              throw WindowsException(hr,
+                  message: "Could not find type '$typeName'.");
+            default:
+              throw WindowsException(hr);
           }
-          throw WindowsException(hr);
         }
       } finally {
         WindowsDeleteString(hstrTypeName);
