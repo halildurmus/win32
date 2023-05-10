@@ -10,7 +10,9 @@ void main() {
 
     final scope = MetadataStore.getWin32Scope();
     final apis = scope.typeDefs
-      ..where((typeDef) => typeDef.name.endsWith('Apis'));
+        .where((typeDef) => typeDef.name.endsWith('Apis'))
+        .where((typedef) => !typedef.name
+            .startsWith('Windows.Win32.System.WinRT.Metadata.Apis'));
 
     final methods = <Method>[];
 
@@ -28,5 +30,5 @@ void main() {
             'the metadata. There were ${method.length} matching items.');
       }
     }
-  }, skip: 'Waiting for Windows 11 on GitHub Actions hosted runners');
+  });
 }
