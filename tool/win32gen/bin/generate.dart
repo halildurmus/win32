@@ -56,28 +56,14 @@ int generateStructSizeTests() {
 $testStructsHeader
 
 void main() {
-  final is64bitOS = sizeOf<IntPtr>() == 8;
 ''');
 
-  for (final struct in structSize64.keys) {
-    if (structSize64[struct] == structSize32[struct]) {
-      buffer.write('''
+  for (final struct in structSizeMap.keys) {
+    buffer.write('''
   test('Struct $struct is the right size', () {
-    expect(sizeOf<$struct>(), equals(${structSize64[struct]}));
+    expect(sizeOf<$struct>(), equals(${structSizeMap[struct]}));
   });
     ''');
-    } else {
-      buffer.write('''
-  test('Struct $struct is the right size', () {
-    if (is64bitOS) {
-      expect(sizeOf<$struct>(), equals(${structSize64[struct]}));
-    }
-    else {
-      expect(sizeOf<$struct>(), equals(${structSize32[struct]}));
-    }
-  });
-''');
-    }
     testsGenerated++;
   }
 
