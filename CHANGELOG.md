@@ -1,17 +1,22 @@
 ## 5.0.0
 
-- Added `detach` method to `IUnknown`, which detaches the object from
-  `Finalizer` if you want to manually manage the lifetime of the object
-  yourself (#677)
+- [BREAKING CHANGE] Experimental WinRT APIs are now removed, in favor of the new
+  `windows_*` packages (see https://win32.pub for more information) 🎉
 - [BREAKING CHANGE] `Finalizer` is now attached to COM objects. Therefore, you
   no longer need to call `.release()` to decrement the reference count, because
-  `Finalizer` will do it for you when they go out of scope (#691)
+  `Finalizer` will do it for you when they go out of scope (#691).
 
   **Note:** Calling `.release()` with `Finalizer` attached may result in use
   after free and cause the process to crash
 
   **Note:** If you're manually managing the lifetime of the object, you need to
   call `.release()` to decrement the reference count
+- Add Windows metadata interfaces (`IMetaData*`)
+- Fixed memory leak in `convertToHString`
+- Upgrade to Dart 3 and add class modifiers to `Struct` subclasses
+- Added `detach` method to `IUnknown`, which detaches the object from
+  `Finalizer` if you want to manually manage the lifetime of the object
+  yourself (#677)
 
 ## 4.1.4
 
