@@ -101,7 +101,7 @@ enum BaseType {
   /// parameters.
   sentinelTypeModifier;
 
-  static BaseType fromCorElementType(int corElementTypeValue) {
+  factory BaseType.fromCorElementType(int corElementTypeValue) {
     switch (corElementTypeValue) {
       case CorElementType.ELEMENT_TYPE_VOID:
         return BaseType.voidType;
