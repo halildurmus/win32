@@ -44,10 +44,6 @@ const Map<String, TypeTuple> specialTypes = {
   'Windows.Win32.Foundation.PWSTR':
       TypeTuple('Pointer<Utf16>', 'Pointer<Utf16>'),
   'Windows.Win32.Foundation.PSTR': TypeTuple('Pointer<Utf8>', 'Pointer<Utf8>'),
-  'Windows.Win32.Foundation.LARGE_INTEGER':
-      TypeTuple('Int64', 'int', attribute: '@Int64()'),
-  'Windows.Win32.Foundation.ULARGE_INTEGER':
-      TypeTuple('Uint64', 'int', attribute: '@Uint64()'),
   'System.Guid': TypeTuple('GUID', 'GUID'),
 };
 
@@ -143,8 +139,10 @@ class TypeProjection {
     }
 
     // A type like HWND
-    if (wrappedType
-        .existsAttribute('Windows.Win32.Interop.NativeTypedefAttribute')) {
+    if (wrappedType.existsAttribute(
+            'Windows.Win32.Foundation.Metadata.NativeTypedefAttribute') ||
+        wrappedType.existsAttribute(
+            'Windows.Win32.Foundation.Metadata.MetadataTypedefAttribute')) {
       final typeIdentifier = wrappedType.fields.first.typeIdentifier;
       return TypeProjection(typeIdentifier).projection;
     }

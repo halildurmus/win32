@@ -36,17 +36,6 @@ void main() {
     expect(projection.toString(), contains('@Packed(2)'));
   });
 
-  test('Packing aligment correct for struct with looser nested type', () {
-    final scope = MetadataStore.getWin32Scope();
-
-    final struct =
-        scope.findTypeDef('Windows.Win32.Media.Multimedia.JOYCAPS2W');
-    expect(struct, isNotNull);
-
-    final projection = StructProjection(struct!, 'JOYCAPS2');
-    expect(projection.toString(), isNot(contains('@Packed')));
-  });
-
   test('Packing aligment does not overflow for structs with enums', () {
     final scope = MetadataStore.getWin32Scope();
 

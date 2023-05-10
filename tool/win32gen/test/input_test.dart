@@ -28,5 +28,5 @@ void main() {
             'the metadata. There were ${method.length} matching items.');
       }
     }
-  });
+  }, skip: 'Waiting for Windows 11 on GitHub Actions hosted runners');
 }

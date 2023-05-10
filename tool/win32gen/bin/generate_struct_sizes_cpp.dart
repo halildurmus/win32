@@ -3,7 +3,7 @@ import 'package:win32gen/win32gen.dart';
 
 const header = '''
 /**
- * Copyright (c) 2020 the Dart project authors. All rights reserved.
+ * Copyright (c) 2020 Dart | Windows. All rights reserved.
  * Use of this source code is governed by a BSD-style
  * license that can be found in the LICENSE file.
  */
@@ -13,7 +13,7 @@ const header = '''
 // Development utility to confirm the width of various Win32 structs.
 
 // This code is not used by the package itself, but is just a helper to inspect
-// widths across x86 and x64 architectures. The results are pasted into
+// widths match the generated Dart structs. The results are pasted into
 // tool\\win32gen\\lib\\src\\inputs\\struct_sizes.dart as input to the test
 // harness.
 
@@ -50,6 +50,7 @@ const header = '''
 #include <wlanapi.h>
 #include <ws2bth.h>
 #include <Xinput.h>
+#include <Cor.h>
 
 void main()
 {

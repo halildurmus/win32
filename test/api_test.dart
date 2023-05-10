@@ -1,4 +1,4 @@
-// Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
+// Copyright (c) 2020, Dart | Windows.  Please see the AUTHORS file
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
@@ -2323,10 +2323,10 @@ void main() {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final EnumSystemFirmwareTables = kernel32.lookupFunction<
           Uint32 Function(Uint32 FirmwareTableProviderSignature,
-              Pointer<Uint32> pFirmwareTableEnumBuffer, Uint32 BufferSize),
+              Pointer<Uint8> pFirmwareTableEnumBuffer, Uint32 BufferSize),
           int Function(
               int FirmwareTableProviderSignature,
-              Pointer<Uint32> pFirmwareTableEnumBuffer,
+              Pointer<Uint8> pFirmwareTableEnumBuffer,
               int BufferSize)>('EnumSystemFirmwareTables');
       expect(EnumSystemFirmwareTables, isA<Function>());
     });
@@ -3091,9 +3091,9 @@ void main() {
         final kernel32 = DynamicLibrary.open('kernel32.dll');
         final GetMachineTypeAttributes = kernel32.lookupFunction<
                 Int32 Function(
-                    Uint16 Machine, Pointer<Uint32> MachineTypeAttributes),
+                    Uint16 Machine, Pointer<Int32> MachineTypeAttributes),
                 int Function(
-                    int Machine, Pointer<Uint32> MachineTypeAttributes)>(
+                    int Machine, Pointer<Int32> MachineTypeAttributes)>(
             'GetMachineTypeAttributes');
         expect(GetMachineTypeAttributes, isA<Function>());
       });
@@ -3725,20 +3725,20 @@ void main() {
     test('Can instantiate GlobalAlloc', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GlobalAlloc = kernel32.lookupFunction<
-          IntPtr Function(Uint32 uFlags, IntPtr dwBytes),
-          int Function(int uFlags, int dwBytes)>('GlobalAlloc');
+          Pointer Function(Uint32 uFlags, IntPtr dwBytes),
+          Pointer Function(int uFlags, int dwBytes)>('GlobalAlloc');
       expect(GlobalAlloc, isA<Function>());
     });
     test('Can instantiate GlobalFree', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
-      final GlobalFree = kernel32.lookupFunction<IntPtr Function(IntPtr hMem),
-          int Function(int hMem)>('GlobalFree');
+      final GlobalFree = kernel32.lookupFunction<Pointer Function(Pointer hMem),
+          Pointer Function(Pointer hMem)>('GlobalFree');
       expect(GlobalFree, isA<Function>());
     });
     test('Can instantiate GlobalLock', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
-      final GlobalLock = kernel32.lookupFunction<Pointer Function(IntPtr hMem),
-          Pointer Function(int hMem)>('GlobalLock');
+      final GlobalLock = kernel32.lookupFunction<Pointer Function(Pointer hMem),
+          Pointer Function(Pointer hMem)>('GlobalLock');
       expect(GlobalLock, isA<Function>());
     });
     test('Can instantiate GlobalMemoryStatusEx', () {
@@ -3751,14 +3751,14 @@ void main() {
     });
     test('Can instantiate GlobalSize', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
-      final GlobalSize = kernel32.lookupFunction<IntPtr Function(IntPtr hMem),
-          int Function(int hMem)>('GlobalSize');
+      final GlobalSize = kernel32.lookupFunction<IntPtr Function(Pointer hMem),
+          int Function(Pointer hMem)>('GlobalSize');
       expect(GlobalSize, isA<Function>());
     });
     test('Can instantiate GlobalUnlock', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
-      final GlobalUnlock = kernel32.lookupFunction<Int32 Function(IntPtr hMem),
-          int Function(int hMem)>('GlobalUnlock');
+      final GlobalUnlock = kernel32.lookupFunction<Int32 Function(Pointer hMem),
+          int Function(Pointer hMem)>('GlobalUnlock');
       expect(GlobalUnlock, isA<Function>());
     });
     test('Can instantiate HeapAlloc', () {
@@ -3950,14 +3950,14 @@ void main() {
     test('Can instantiate LoadResource', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final LoadResource = kernel32.lookupFunction<
-          IntPtr Function(IntPtr hModule, IntPtr hResInfo),
-          int Function(int hModule, int hResInfo)>('LoadResource');
+          Pointer Function(IntPtr hModule, IntPtr hResInfo),
+          Pointer Function(int hModule, int hResInfo)>('LoadResource');
       expect(LoadResource, isA<Function>());
     });
     test('Can instantiate LocalFree', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
-      final LocalFree = kernel32.lookupFunction<IntPtr Function(IntPtr hMem),
-          int Function(int hMem)>('LocalFree');
+      final LocalFree = kernel32.lookupFunction<Pointer Function(Pointer hMem),
+          Pointer Function(Pointer hMem)>('LocalFree');
       expect(LocalFree, isA<Function>());
     });
     test('Can instantiate LockFile', () {
@@ -3999,8 +3999,8 @@ void main() {
     test('Can instantiate LockResource', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final LockResource = kernel32.lookupFunction<
-          Pointer Function(IntPtr hResData),
-          Pointer Function(int hResData)>('LockResource');
+          Pointer Function(Pointer hResData),
+          Pointer Function(Pointer hResData)>('LockResource');
       expect(LockResource, isA<Function>());
     });
     test('Can instantiate MoveFile', () {
@@ -4219,13 +4219,13 @@ void main() {
       final ReadFile = kernel32.lookupFunction<
           Int32 Function(
               IntPtr hFile,
-              Pointer lpBuffer,
+              Pointer<Uint8> lpBuffer,
               Uint32 nNumberOfBytesToRead,
               Pointer<Uint32> lpNumberOfBytesRead,
               Pointer<OVERLAPPED> lpOverlapped),
           int Function(
               int hFile,
-              Pointer lpBuffer,
+              Pointer<Uint8> lpBuffer,
               int nNumberOfBytesToRead,
               Pointer<Uint32> lpNumberOfBytesRead,
               Pointer<OVERLAPPED> lpOverlapped)>('ReadFile');
@@ -4236,14 +4236,14 @@ void main() {
       final ReadFileEx = kernel32.lookupFunction<
           Int32 Function(
               IntPtr hFile,
-              Pointer lpBuffer,
+              Pointer<Uint8> lpBuffer,
               Uint32 nNumberOfBytesToRead,
               Pointer<OVERLAPPED> lpOverlapped,
               Pointer<NativeFunction<LpoverlappedCompletionRoutine>>
                   lpCompletionRoutine),
           int Function(
               int hFile,
-              Pointer lpBuffer,
+              Pointer<Uint8> lpBuffer,
               int nNumberOfBytesToRead,
               Pointer<OVERLAPPED> lpOverlapped,
               Pointer<NativeFunction<LpoverlappedCompletionRoutine>>
@@ -5047,13 +5047,13 @@ void main() {
       final WriteFile = kernel32.lookupFunction<
           Int32 Function(
               IntPtr hFile,
-              Pointer lpBuffer,
+              Pointer<Uint8> lpBuffer,
               Uint32 nNumberOfBytesToWrite,
               Pointer<Uint32> lpNumberOfBytesWritten,
               Pointer<OVERLAPPED> lpOverlapped),
           int Function(
               int hFile,
-              Pointer lpBuffer,
+              Pointer<Uint8> lpBuffer,
               int nNumberOfBytesToWrite,
               Pointer<Uint32> lpNumberOfBytesWritten,
               Pointer<OVERLAPPED> lpOverlapped)>('WriteFile');
@@ -5064,14 +5064,14 @@ void main() {
       final WriteFileEx = kernel32.lookupFunction<
           Int32 Function(
               IntPtr hFile,
-              Pointer lpBuffer,
+              Pointer<Uint8> lpBuffer,
               Uint32 nNumberOfBytesToWrite,
               Pointer<OVERLAPPED> lpOverlapped,
               Pointer<NativeFunction<LpoverlappedCompletionRoutine>>
                   lpCompletionRoutine),
           int Function(
               int hFile,
-              Pointer lpBuffer,
+              Pointer<Uint8> lpBuffer,
               int nNumberOfBytesToWrite,
               Pointer<OVERLAPPED> lpOverlapped,
               Pointer<NativeFunction<LpoverlappedCompletionRoutine>>
@@ -6261,7 +6261,7 @@ void main() {
       test('Can instantiate GetDialogControlDpiChangeBehavior', () {
         final user32 = DynamicLibrary.open('user32.dll');
         final GetDialogControlDpiChangeBehavior = user32.lookupFunction<
-            Uint32 Function(IntPtr hWnd),
+            Int32 Function(IntPtr hWnd),
             int Function(int hWnd)>('GetDialogControlDpiChangeBehavior');
         expect(GetDialogControlDpiChangeBehavior, isA<Function>());
       });
@@ -6270,7 +6270,7 @@ void main() {
       test('Can instantiate GetDialogDpiChangeBehavior', () {
         final user32 = DynamicLibrary.open('user32.dll');
         final GetDialogDpiChangeBehavior = user32.lookupFunction<
-            Uint32 Function(IntPtr hDlg),
+            Int32 Function(IntPtr hDlg),
             int Function(int hDlg)>('GetDialogDpiChangeBehavior');
         expect(GetDialogDpiChangeBehavior, isA<Function>());
       });
@@ -8107,7 +8107,7 @@ void main() {
       test('Can instantiate SetDialogControlDpiChangeBehavior', () {
         final user32 = DynamicLibrary.open('user32.dll');
         final SetDialogControlDpiChangeBehavior = user32.lookupFunction<
-            Int32 Function(IntPtr hWnd, Uint32 mask, Uint32 values),
+            Int32 Function(IntPtr hWnd, Int32 mask, Int32 values),
             int Function(int hWnd, int mask,
                 int values)>('SetDialogControlDpiChangeBehavior');
         expect(SetDialogControlDpiChangeBehavior, isA<Function>());
@@ -8117,7 +8117,7 @@ void main() {
       test('Can instantiate SetDialogDpiChangeBehavior', () {
         final user32 = DynamicLibrary.open('user32.dll');
         final SetDialogDpiChangeBehavior = user32.lookupFunction<
-            Int32 Function(IntPtr hDlg, Uint32 mask, Uint32 values),
+            Int32 Function(IntPtr hDlg, Int32 mask, Int32 values),
             int Function(
                 int hDlg, int mask, int values)>('SetDialogDpiChangeBehavior');
         expect(SetDialogDpiChangeBehavior, isA<Function>());
@@ -8790,7 +8790,7 @@ void main() {
     test('Can instantiate ConvertInterfaceGuidToLuid', () {
       final iphlpapi = DynamicLibrary.open('iphlpapi.dll');
       final ConvertInterfaceGuidToLuid = iphlpapi.lookupFunction<
-          Int32 Function(
+          Uint32 Function(
               Pointer<GUID> InterfaceGuid, Pointer<NET_LUID_LH> InterfaceLuid),
           int Function(
               Pointer<GUID> InterfaceGuid,
@@ -9866,7 +9866,7 @@ void main() {
     test('Can instantiate CoInitializeEx', () {
       final ole32 = DynamicLibrary.open('ole32.dll');
       final CoInitializeEx = ole32.lookupFunction<
-          Int32 Function(Pointer pvReserved, Uint32 dwCoInit),
+          Int32 Function(Pointer pvReserved, Int32 dwCoInit),
           int Function(Pointer pvReserved, int dwCoInit)>('CoInitializeEx');
       expect(CoInitializeEx, isA<Function>());
     });
@@ -9974,9 +9974,9 @@ void main() {
     test('Can instantiate CreateStreamOnHGlobal', () {
       final ole32 = DynamicLibrary.open('ole32.dll');
       final CreateStreamOnHGlobal = ole32.lookupFunction<
-          Int32 Function(IntPtr hGlobal, Int32 fDeleteOnRelease,
+          Int32 Function(Pointer hGlobal, Int32 fDeleteOnRelease,
               Pointer<Pointer<COMObject>> ppstm),
-          int Function(int hGlobal, int fDeleteOnRelease,
+          int Function(Pointer hGlobal, int fDeleteOnRelease,
               Pointer<Pointer<COMObject>> ppstm)>('CreateStreamOnHGlobal');
       expect(CreateStreamOnHGlobal, isA<Function>());
     });
@@ -9991,9 +9991,9 @@ void main() {
     test('Can instantiate GetHGlobalFromStream', () {
       final ole32 = DynamicLibrary.open('ole32.dll');
       final GetHGlobalFromStream = ole32.lookupFunction<
-          Int32 Function(Pointer<COMObject> pstm, Pointer<IntPtr> phglobal),
+          Int32 Function(Pointer<COMObject> pstm, Pointer<Pointer> phglobal),
           int Function(Pointer<COMObject> pstm,
-              Pointer<IntPtr> phglobal)>('GetHGlobalFromStream');
+              Pointer<Pointer> phglobal)>('GetHGlobalFromStream');
       expect(GetHGlobalFromStream, isA<Function>());
     });
     test('Can instantiate IIDFromString', () {
@@ -11388,9 +11388,9 @@ void main() {
       final oleaut32 = DynamicLibrary.open('oleaut32.dll');
       final VarBstrCat = oleaut32.lookupFunction<
           Int32 Function(Pointer<Utf16> bstrLeft, Pointer<Utf16> bstrRight,
-              Pointer<Pointer<Uint16>> pbstrResult),
+              Pointer<Pointer<Utf16>> pbstrResult),
           int Function(Pointer<Utf16> bstrLeft, Pointer<Utf16> bstrRight,
-              Pointer<Pointer<Uint16>> pbstrResult)>('VarBstrCat');
+              Pointer<Pointer<Utf16>> pbstrResult)>('VarBstrCat');
       expect(VarBstrCat, isA<Function>());
     });
     test('Can instantiate VarBstrCmp', () {
@@ -13503,7 +13503,7 @@ void main() {
         final WslConfigureDistribution =
             api_ms_win_wsl_api_l1_1_0.lookupFunction<
                 Int32 Function(Pointer<Utf16> distributionName,
-                    Uint32 defaultUID, Uint32 wslDistributionFlags),
+                    Uint32 defaultUID, Int32 wslDistributionFlags),
                 int Function(Pointer<Utf16> distributionName, int defaultUID,
                     int wslDistributionFlags)>('WslConfigureDistribution');
         expect(WslConfigureDistribution, isA<Function>());
@@ -13520,7 +13520,7 @@ void main() {
                             Pointer<Utf16> distributionName,
                             Pointer<Uint32> distributionVersion,
                             Pointer<Uint32> defaultUID,
-                            Pointer<Uint32> wslDistributionFlags,
+                            Pointer<Int32> wslDistributionFlags,
                             Pointer<Pointer<Pointer<Utf8>>>
                                 defaultEnvironmentVariables,
                             Pointer<Uint32> defaultEnvironmentVariableCount),
@@ -13528,7 +13528,7 @@ void main() {
                             Pointer<Utf16> distributionName,
                             Pointer<Uint32> distributionVersion,
                             Pointer<Uint32> defaultUID,
-                            Pointer<Uint32> wslDistributionFlags,
+                            Pointer<Int32> wslDistributionFlags,
                             Pointer<Pointer<Pointer<Utf8>>>
                                 defaultEnvironmentVariables,
                             Pointer<Uint32> defaultEnvironmentVariableCount)>(

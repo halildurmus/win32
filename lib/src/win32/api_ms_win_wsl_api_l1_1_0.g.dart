@@ -1,4 +1,4 @@
-// Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
+// Copyright (c) 2020, Dart | Windows.  Please see the AUTHORS file
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
@@ -40,7 +40,7 @@ int WslConfigureDistribution(Pointer<Utf16> distributionName, int defaultUID,
 
 final _WslConfigureDistribution = _api_ms_win_wsl_api_l1_1_0.lookupFunction<
     Int32 Function(Pointer<Utf16> distributionName, Uint32 defaultUID,
-        Uint32 wslDistributionFlags),
+        Int32 wslDistributionFlags),
     int Function(Pointer<Utf16> distributionName, int defaultUID,
         int wslDistributionFlags)>('WslConfigureDistribution');
 
@@ -62,7 +62,7 @@ int WslGetDistributionConfiguration(
         Pointer<Utf16> distributionName,
         Pointer<Uint32> distributionVersion,
         Pointer<Uint32> defaultUID,
-        Pointer<Uint32> wslDistributionFlags,
+        Pointer<Int32> wslDistributionFlags,
         Pointer<Pointer<Pointer<Utf8>>> defaultEnvironmentVariables,
         Pointer<Uint32> defaultEnvironmentVariableCount) =>
     _WslGetDistributionConfiguration(
@@ -79,14 +79,14 @@ final _WslGetDistributionConfiguration =
                 Pointer<Utf16> distributionName,
                 Pointer<Uint32> distributionVersion,
                 Pointer<Uint32> defaultUID,
-                Pointer<Uint32> wslDistributionFlags,
+                Pointer<Int32> wslDistributionFlags,
                 Pointer<Pointer<Pointer<Utf8>>> defaultEnvironmentVariables,
                 Pointer<Uint32> defaultEnvironmentVariableCount),
             int Function(
                 Pointer<Utf16> distributionName,
                 Pointer<Uint32> distributionVersion,
                 Pointer<Uint32> defaultUID,
-                Pointer<Uint32> wslDistributionFlags,
+                Pointer<Int32> wslDistributionFlags,
                 Pointer<Pointer<Pointer<Utf8>>> defaultEnvironmentVariables,
                 Pointer<Uint32> defaultEnvironmentVariableCount)>(
         'WslGetDistributionConfiguration');

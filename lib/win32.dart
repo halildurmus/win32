@@ -1,4 +1,4 @@
-// Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
+// Copyright (c) 2020, Dart | Windows.  Please see the AUTHORS file
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
@@ -74,6 +74,7 @@ library win32;
 export 'src/bstr.dart';
 export 'src/callbacks.dart';
 export 'src/constants.dart';
+export 'src/constants_metadata.dart';
 export 'src/constants_nodoc.dart';
 export 'src/exceptions.dart';
 export 'src/guid.dart';
@@ -207,6 +208,13 @@ export 'src/com/iinitializewithwindow.dart';
 export 'src/com/iinspectable.dart';
 export 'src/com/iknownfolder.dart';
 export 'src/com/iknownfoldermanager.dart';
+export 'src/com/imetadataassemblyimport.dart';
+export 'src/com/imetadatadispenser.dart';
+export 'src/com/imetadatadispenserex.dart';
+export 'src/com/imetadataimport.dart';
+export 'src/com/imetadataimport2.dart';
+export 'src/com/imetadatatables.dart';
+export 'src/com/imetadatatables2.dart';
 export 'src/com/immdevice.dart';
 export 'src/com/immdeviceenumerator.dart';
 export 'src/com/imodalwindow.dart';

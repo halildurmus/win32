@@ -1,4 +1,4 @@
-// Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
+// Copyright (c) 2020, Dart | Windows.  Please see the AUTHORS file
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
@@ -64,7 +64,7 @@ int ConvertInterfaceGuidToLuid(
     _ConvertInterfaceGuidToLuid(InterfaceGuid, InterfaceLuid);
 
 final _ConvertInterfaceGuidToLuid = _iphlpapi.lookupFunction<
-    Int32 Function(
+    Uint32 Function(
         Pointer<GUID> InterfaceGuid, Pointer<NET_LUID_LH> InterfaceLuid),
     int Function(Pointer<GUID> InterfaceGuid,
         Pointer<NET_LUID_LH> InterfaceLuid)>('ConvertInterfaceGuidToLuid');

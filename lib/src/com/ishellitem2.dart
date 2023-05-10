@@ -45,7 +45,7 @@ class IShellItem2 extends IShellItem {
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Uint32 flags, Pointer<GUID> riid,
+                      Int32 Function(Pointer, Int32 flags, Pointer<GUID> riid,
                           Pointer<Pointer> ppv)>>>()
           .value
           .asFunction<
@@ -64,7 +64,7 @@ class IShellItem2 extends IShellItem {
                       NativeFunction<
                           Int32 Function(
                               Pointer,
-                              Uint32 flags,
+                              Int32 flags,
                               Pointer<COMObject> punkCreateObject,
                               Pointer<GUID> riid,
                               Pointer<Pointer> ppv)>>>()
@@ -89,7 +89,7 @@ class IShellItem2 extends IShellItem {
                               Pointer,
                               Pointer<PROPERTYKEY> rgKeys,
                               Uint32 cKeys,
-                              Uint32 flags,
+                              Int32 flags,
                               Pointer<GUID> riid,
                               Pointer<Pointer> ppv)>>>()
               .value

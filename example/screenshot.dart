@@ -1,4 +1,4 @@
-// Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
+// Copyright (c) 2020, Dart | Windows.  Please see the AUTHORS file
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
@@ -91,9 +91,9 @@ void captureImage(int hwnd) {
     bitmapFileHeader.ref.bfType = 0x4D42; // BM
 
     final dwBytesWritten = calloc<DWORD>();
-    WriteFile(hFile, bitmapFileHeader, sizeOf<BITMAPFILEHEADER>(),
+    WriteFile(hFile, bitmapFileHeader.cast(), sizeOf<BITMAPFILEHEADER>(),
         dwBytesWritten, nullptr);
-    WriteFile(hFile, bitmapInfoHeader, sizeOf<BITMAPINFOHEADER>(),
+    WriteFile(hFile, bitmapInfoHeader.cast(), sizeOf<BITMAPINFOHEADER>(),
         dwBytesWritten, nullptr);
     WriteFile(hFile, lpBitmap, dwBmpSize, dwBytesWritten, nullptr);
 

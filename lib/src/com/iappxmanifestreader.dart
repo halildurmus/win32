@@ -77,14 +77,14 @@ class IAppxManifestReader extends IUnknown {
                   Pointer, Pointer<Pointer<COMObject>> dependencies)>()(
       ptr.ref.lpVtbl, dependencies);
 
-  int getCapabilities(Pointer<Uint32> capabilities) => ptr.ref.vtable
+  int getCapabilities(Pointer<Int32> capabilities) => ptr.ref.vtable
           .elementAt(6)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<Uint32> capabilities)>>>()
+                      Int32 Function(Pointer, Pointer<Int32> capabilities)>>>()
           .value
-          .asFunction<int Function(Pointer, Pointer<Uint32> capabilities)>()(
+          .asFunction<int Function(Pointer, Pointer<Int32> capabilities)>()(
       ptr.ref.lpVtbl, capabilities);
 
   int getResources(Pointer<Pointer<COMObject>> resources) => ptr.ref.vtable

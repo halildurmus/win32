@@ -14,7 +14,8 @@ void main() {
     // ISpellCheckerFactory is only available on Windows 8 or higher, per:
     // https://docs.microsoft.com/en-us/windows/win32/api/spellcheck/nn-spellcheck-ispellcheckerfactory
     if (getWindowsBuildNumber() >= 9200) {
-      var hr = CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
+      var hr = CoInitializeEx(
+          nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
       expect(hr, equals(S_OK));
 
       final spellCheckerFactory = SpellCheckerFactory.createInstance();

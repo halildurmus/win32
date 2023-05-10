@@ -3,7 +3,7 @@ description: Auto-generate Dart wrapper classes for the Win32 API using Windows 
 publish_to: none
 
 environment:
-  sdk: '>=3.0.0-0 <4.0.0'
+  sdk: '>=3.0.0 <4.0.0'
 
 # Declare that this package only works on Windows.
 platforms:
@@ -14,7 +14,7 @@ dependencies:
   dart_style: ^2.3.1
 
   # Foreign Function Interface extension methods
-  ffi: ^2.0.1
+  ffi: ^2.0.2
 
   # Help ensure that the code is well-written.
   lints: ^2.1.0
@@ -26,7 +26,11 @@ dependencies:
   # relationship between these two packages is tightly coupled, since this
   # package includes a specific version of the Win32 metadata, so we pin the
   # dependency by version to avoid surprising conflicts.
-  winmd: 2.4.8
+  winmd: 
+    git: https://github.com/dart-windows/winmd.git
 
   # Win32 itself
-  win32: ^4.1.4
+  win32: 
+    git:
+      url: https://github.com/dart-windows/win32.git
+      ref: winmd3

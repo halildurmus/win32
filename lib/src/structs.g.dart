@@ -1,4 +1,4 @@
-// Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
+// Copyright (c) 2020, Dart | Windows.  Please see the AUTHORS file
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
@@ -178,6 +178,40 @@ base class ARRAYDESC extends Struct {
   external Array<SAFEARRAYBOUND> rgbounds;
 }
 
+/// Contains information about the referenced assembly, including its
+/// version and its level of support for locales, processors, and operating
+/// systems.
+///
+/// {@category Struct}
+base class ASSEMBLYMETADATA extends Struct {
+  @Uint16()
+  external int usMajorVersion;
+
+  @Uint16()
+  external int usMinorVersion;
+
+  @Uint16()
+  external int usBuildNumber;
+
+  @Uint16()
+  external int usRevisionNumber;
+
+  external Pointer<Utf16> szLocale;
+
+  @Uint32()
+  external int cbLocale;
+
+  external Pointer<Uint32> rProcessor;
+
+  @Uint32()
+  external int ulProcessor;
+
+  external Pointer<OSINFO> rOS;
+
+  @Uint32()
+  external int ulOS;
+}
+
 /// Contains parameters used during a moniker-binding operation.
 ///
 /// {@category Struct}
@@ -274,7 +308,7 @@ base class BITMAPINFOHEADER extends Struct {
   @Uint16()
   external int biBitCount;
 
-  @Int32()
+  @Uint32()
   external int biCompression;
 
   @Uint32()
@@ -1571,6 +1605,17 @@ base class COORD extends Struct {
 
   @Int16()
   external int Y;
+}
+
+/// Stores the offset, within a class, of the specified field.
+///
+/// {@category Struct}
+base class COR_FIELD_OFFSET extends Struct {
+  @Uint32()
+  external int ridOfField;
+
+  @Uint32()
+  external int ulOffset;
 }
 
 /// Contains optional extended parameters for CreateFile2.
@@ -6252,6 +6297,20 @@ base class OPENFILENAME extends Struct {
   external int FlagsEx;
 }
 
+/// Contains details about the operating system for an assembly or module.
+///
+/// {@category Struct}
+base class OSINFO extends Struct {
+  @Uint32()
+  external int dwOSPlatformId;
+
+  @Uint32()
+  external int dwOSMajorVersion;
+
+  @Uint32()
+  external int dwOSMinorVersion;
+}
+
 /// Contains operating system version information. The information includes
 /// major and minor version numbers, a build number, a platform identifier,
 /// and information about product suites and the latest Service Pack
@@ -8039,6 +8098,7 @@ base class SOCKADDR extends Struct {
 /// operations, defined by address family AF_BTH.
 ///
 /// {@category Struct}
+@Packed(1)
 base class SOCKADDR_BTH extends Struct {
   @Uint16()
   external int addressFamily;
@@ -9345,6 +9405,7 @@ base class WAVEFORMATEX extends Struct {
 /// any format that can be defined by WAVEFORMATEX.
 ///
 /// {@category Struct}
+@Packed(1)
 base class WAVEFORMATEXTENSIBLE extends Struct {
   external WAVEFORMATEX Format;
 

@@ -439,7 +439,7 @@ class IWbemServices extends IUnknown {
                               Pointer,
                               Pointer<Utf16> strQueryLanguage,
                               Pointer<Utf16> strQuery,
-                              Uint32 lFlags,
+                              Int32 lFlags,
                               Pointer<COMObject> pCtx,
                               Pointer<Pointer<COMObject>> ppEnum)>>>()
               .value

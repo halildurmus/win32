@@ -42,31 +42,3 @@ const excludedTypes = <String>[
   ...excludedWin32Structs,
   ...excludedComInterfaces
 ];
-
-const ignorePackingDirectives = <String>[
-  // From metadata.
-
-  // TODO: Use most restrictive packing parent for child. For example,
-  // nesting the non-packed or less tightly packed struct 'JET_LOGTIME' in
-  // a packed struct 'JET_SIGNATURE' is not supported.
-  'Windows.Win32.Devices.Bluetooth.BTH_QUERY_SERVICE',
-  'Windows.Win32.Devices.Bluetooth.SOCKADDR_BTH',
-  'Windows.Win32.Devices.DeviceAndDriverInstallation.CS_DES',
-  'Windows.Win32.Devices.HumanInterfaceDevice.JOYREGHWVALUES',
-  'Windows.Win32.Devices.Tapi.LINEAGENTCAPS',
-  'Windows.Win32.Devices.Tapi.LINEAGENTINFO',
-  'Windows.Win32.Devices.Tapi.LINEAGENTSESSIONENTRY',
-  'Windows.Win32.Devices.Tapi.LINEAGENTSESSIONINFO',
-  'Windows.Win32.Devices.Tapi.LINECALLSTATUS',
-  'Windows.Win32.Devices.Tapi.LINEDEVCAPS',
-  'Windows.Win32.Devices.Tapi.PHONECAPS',
-  'Windows.Win32.NetworkManagement.Rras.RASCONN',
-  'Windows.Win32.NetworkManagement.Rras.RASIKEV2_PROJECTION_INFO',
-  'Windows.Win32.Security.Authentication.Identity.MSV1_0_REMOTE_SUPPLEMENTAL_CREDENTIAL',
-  'Windows.Win32.Security.Authentication.Identity.USER_ALL_INFORMATION',
-  'Windows.Win32.System.Diagnostics.Debug.MINIDUMP_MODULE',
-  'Windows.Win32.UI.Shell.FILEDESCRIPTOR',
-  'Windows.Win32.UI.Shell.AUTO_SCROLL_DATA',
-  'Windows.Win32.UI.Shell.DROPFILES',
-  'Windows.Win32.Storage.Jet.JET_SIGNATURE',
-];

@@ -34,6 +34,34 @@ void main() {
     expect(typeProjection.dartType, equals('int'));
   });
 
+  test('HRESULT type', () {
+    final scope = MetadataStore.getWin32Scope();
+
+    final typedef = scope.findTypeDef('Windows.Win32.System.Com.Apis');
+    final api = typedef?.findMethod('CoInitialize');
+    expect(api, isNotNull);
+
+    final hresult = api!.returnType.typeIdentifier; // HRESULT
+
+    final typeProjection = TypeProjection(hresult);
+    expect(typeProjection.nativeType, equals('Int32'));
+    expect(typeProjection.dartType, equals('int'));
+  });
+
+  test('CreatedHDC type', () {
+    final scope = MetadataStore.getWin32Scope();
+
+    final typedef = scope.findTypeDef('Windows.Win32.Graphics.Gdi.Apis');
+    final api = typedef?.findMethod('CreateCompatibleDC');
+    expect(api, isNotNull);
+
+    final hresult = api!.returnType.typeIdentifier; // CreatedHDC
+
+    final typeProjection = TypeProjection(hresult);
+    expect(typeProjection.nativeType, equals('IntPtr'));
+    expect(typeProjection.dartType, equals('int'));
+  });
+
   test('PWSTR type', () {
     final scope = MetadataStore.getWin32Scope();
     final typedef =
