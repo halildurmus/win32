@@ -1,5 +1,6 @@
 ## 5.0.0
 
+- Note: This package no longer supports 32-bit architectures. It assumes 64-bit.
 - [BREAKING CHANGE] Experimental WinRT APIs are now removed, in favor of the new
   `windows_*` packages (see https://win32.pub for more information) 🎉
 - [BREAKING CHANGE] `Finalizer` is now attached to COM objects. Therefore, you

@@ -11,9 +11,8 @@
 /// thousands of APIs and interfaces in the Win32 API, many of which cover areas
 /// that would be unlikely to be useful to a Dart or Flutter developer, this
 /// library is not intended to be exhaustive. Instead, we focus on the core
-/// Win32 APIs that are typically used for Windows development, along with
-/// Win32 and COM APIs that are likely to be wrapped by a Flutter plugin
-/// author.
+/// Win32 APIs that are typically used for Windows development, along with Win32
+/// and COM APIs that are likely to be wrapped by a Flutter plugin author.
 ///
 /// Win32 is at its heart a C-based API, and accordingly adopts the style and
 /// idioms of that language, including heavy usage of pointers, structs
@@ -21,53 +20,9 @@
 /// choose to wrap the exposed APIs in your application to make their invocation
 /// more idiomatic for a Dart consumer.
 ///
-/// ## Strings (Win32 and COM)
-///
-/// Win32 strings are typically stored as null-terminated arrays of UTF-16 code
-/// units. (Some Windows APIs also offer an ANSI 8-bit representation, or a
-/// UTF-8 representation. but this library emphasizes the wide character
-/// version, which in the original header files are suffixed with a capital 'W'
-/// (e.g. `FormatMessageW`).
-///
-/// You can use the `toNativeUtf16` String extension function (import
-/// `package:ffi`) to convert a Dart string into a `Pointer<Utf16>`, which can
-/// be passed to any Windows API expecting a string, for example:
-/// ```dart
-///   final verb = 'open'.toNativeUtf16();
-///   final process = 'notepad.exe'.toNativeUtf16();
-///   ShellExecute(0, verb, process, nullptr, nullptr, SW_SHOW);
-/// ```
-///
-/// Note that it is your responsibility to release the memory used when you are
-/// finished with it.
-///
-/// To receive a string, allocate memory with a command like the following:
-/// ```dart
-///   final buffer = wsalloc(length);
-///   GetWindowText(hWnd, buffer, length);
-/// ```
-///
-/// This allocates an array of `length` UTF-16 code units. The cast is necessary
-/// because Utf16 has no length of itself. The returned value can be converted
-/// back to a Dart string using an extension method on Pointer<Utf16>, as
-/// follows:
-/// ```dart
-///   print(buffer.toDartString());
-/// ```
-///
-/// A small number of APIs offer no wide version (e.g. `GetProcAddress`), and so
-/// the `toANSI` method may be of use to convert a Dart string to a
-/// `Pointer<Uint8>`, which represents this format:
-/// ```dart
-///   final ansi = convertToANSIString('Beep');
-///   final pGetNativeSystemInfo = GetProcAddress(hModule, ansi);
-///   ...
-///   free(ansi);
-/// ```
-///
-/// Automation interfaces and some COM methods take a different string type
-/// (`BSTR`). The Win32 package supplies a `BSTR` class which wraps the memory
-/// allocation functions needed to work with this string data type.
+/// For more conceptual material about programming Win32 apps with Dart, consult
+/// the [Dart | Windows
+/// documentation](https://win32.pub/docs/category/win32-programming).
 library win32;
 
 // Core Win32 APIs, constants and macros
@@ -145,11 +100,10 @@ export 'src/win32/api_ms_win_core_handle_l1_1_0.g.dart';
 export 'src/win32/api_ms_win_core_sysinfo_l1_2_3.g.dart';
 export 'src/win32/api_ms_win_core_winrt_l1_1_0.g.dart';
 export 'src/win32/api_ms_win_core_winrt_string_l1_1_0.g.dart';
+export 'src/win32/api_ms_win_ro_typeresolution_l1_1_0.g.dart';
+export 'src/win32/api_ms_win_ro_typeresolution_l1_1_1.g.dart';
 export 'src/win32/api_ms_win_shcore_scaling_l1_1_1.g.dart';
 export 'src/win32/api_ms_win_wsl_api_l1_1_0.g.dart';
-
-// Windows Metadata type resolution APIs
-export 'src/api_ms_win_ro_typeresolution_l1_1_0.dart';
 
 // COM foundational exports
 export 'src/combase.dart';

@@ -9,15 +9,10 @@ packages.
 [![Language](https://img.shields.io/badge/language-Dart-blue.svg)](https://dart.dev)
 ![Build](https://github.com/dart-windows/win32/workflows/Build/badge.svg)
 
-In addition to exposing the APIs themselves, this package offers a variety of
-instructive examples for more complex FFI usage scenarios.
+## Documentation
 
-By design, this package provides minimal modifications to the Win32 API to
-support Dart idioms. The goal is to provide high familiarity to an existing
-Windows developer. Other Dart packages may build on these primitives to provide
-a friendly API for Dart and Flutter developers. A good example of that is
-[win32_registry](https://pub.dev/packages/win32_registry), which offers a set of
-APIs for accessing the Windows registry that don't require knowledge of FFI.
+* [Overview and concepts](https://win32.pub/docs/category/win32-programming)
+* [API reference](https://pub.dev/documentation/win32/latest/)
 
 ## Usage
 
@@ -60,6 +55,13 @@ provides a modern Windows file picker for Flutter:
 
 ![Windows file picker screenshot](https://github.com/dart-windows/win32/blob/main/doc/images/filepicker.png?raw=true)
 
+By design, this package provides minimal modifications to the Win32 API to
+support Dart idioms. The goal is to provide high familiarity to an existing
+Windows developer. Other Dart packages may build on these primitives to provide
+a friendly API for Dart and Flutter developers. A good example of that is
+[win32_registry](https://pub.dev/packages/win32_registry), which offers a set of
+APIs for accessing the Windows registry that don't require knowledge of FFI.
+
 ## Getting started
 
 Many more samples can be found in the `example\` subdirectory, along with a test
@@ -83,11 +85,8 @@ This can be compiled into a standalone Win32 executable by running:
 dart compile exe example\hello.dart -o example\bin\hello.exe
 ```
 
-For more information on working with the Win32 library from Dart, consult the
-documentation, in particular the sections on [string
-manipulation](https://pub.dev/documentation/win32/latest/win32/win32-library.html)
-and [COM
-objects](https://pub.dev/documentation/win32/latest/topics/com-topic.html).
+For more information on working with the Win32 library from Dart, [consult the
+documentation](https://win32.pub/docs/category/win32-programming).
 
 ## Examples
 
@@ -98,63 +97,58 @@ https://pub.dev/packages/win32/example).
 
 ## Packages built on win32
 
-There are a growing set of packages that build on the relatively low-level APIs
-exposed by the Dart win32 package to provide more idiomatic class wrappers.
+There are a growing number of packages that build on the relatively low-level
+APIs exposed by the Dart win32 package to provide more idiomatic class wrappers.
 These packages typically don't require any knowledge of Windows programming
 models or FFI, and are ideal for incorporation into Flutter apps for Windows.
 
-Specifically, this includes:
+A [full list of these packages can be found on
+pub](https://pub.dev/packages?q=dependency%3Awin32), and other packages from the
+Dart | Windows authors can be found here: https://github.com/dart-windows
 
-- [dart_console](https://pub.dev/packages/dart_console): provides Dart libraries
-  for building TUIs (terminal UIs) or console apps that use more than the
-  stdin/stdout services provided by Dart itself.
-- [device_info_plus_windows](https://pub.dev/packages/device_info_plus_windows):
-  provides information about the characteristics of the current device.
-- [filepicker_windows](https://pub.dev/packages/filepicker_windows): makes the
+* [filepicker_windows](https://pub.dev/packages/filepicker_windows): makes the
   Windows file open / save common dialog boxes available to Flutter and Dart
   apps.
-- [path_provider_windows](https://pub.dev/packages/path_provider_windows):
+* [path_provider_windows](https://pub.dev/packages/path_provider_windows):
   provides a way for Dart apps to find common Windows file locations (such as
   the documents directory).
-- [win32_registry](https://pub.dev/packages/win32_registry): provides Dart
+* [win32_registry](https://pub.dev/packages/win32_registry): provides Dart
   classes for accessing and manipulating the Windows registry.
-- [win32_runner](https://pub.dev/packages/win32_runner): provides an
+* [win32_runner](https://pub.dev/packages/win32_runner): provides an
   experimental shell (or runner) for hosting Flutter apps without needing a C++
   compiler to create the EXE.
 
 ## Requirements
 
-This package assumes the [Dart 64-bit compiler](https://dart.dev/get-dart),
-running on Windows. Many commands are tested on 32-bit Windows, but due to the
-lack of a Dart compiler for 32-bit executables and the ever diminishing number
-of machines running 32-bit OSes, this is inevitably a low priority. The package
-is also tested on ARM architecture, running in x64 emulation mode.
+This package is designed to run on 64-bit editions of Windows. The primary
+target is Intel processors, but the package is also tested on ARM architecture,
+running in x64 emulation mode.
 
 ## Features and bugs
 
 The current package only projects a subset of the Win32 API, but new APIs will
-be added based on user demand. I'm particularly interested in unblocking the
-creation of new Dart packages for Windows. Please file feature requests and bugs
-at the [issue tracker][tracker].
+be added based on user demand, particularly if it unblocks the creation of new
+Dart packages for Windows. Please file feature requests and bugs at the [issue
+tracker][tracker].
 
 ## Backwards compatibility
 
-The library version tries to model semver, but you should not assume a strict
-guarantee of no breaking changes between minor versions. That guarantee is not
-possible to make, for several reasons:
+The library version models semver, but you cannot assume a strict guarantee of
+no breaking changes between minor versions. That guarantee is not possible to
+make, for several reasons:
 
-- Several times, fixing a bug in the fidelity of the Win32 API has tightened the
-  constraints over a parameter (for example, `Pointer` becomes
-  `Pointer<INPUT>`). These changes should be signalled in the log.
-- Adding new features may itself cause a breaking change. For example, if you
+* The package is based on [metadata published by
+  Microsoft](https://github.com/microsoft/win32metadata), which is generated by
+  scraping Win32 SDK header files. As the quality of the scraper improves, there
+  may be minor changes to some fields (for example, an unsigned integer may
+  become a signed integer).
+* Adding new APIs may itself cause a breaking change. For example, if you
   declare a missing Windows constant in your own code that is then added, Dart
   will complain about the duplicate definition.
 
-One solution is to pin to a specific version of Win32, or declare a more
-tightly-bounded version dependency (e.g. `'>=1.7.0 <1.8.0'` rather than merely
-`^1.7.0`). But the best approach is simply to test regularly with the latest
-version of this package, and continue to move your minimum forward. As the
-package matures, these issues should gradually fade away.
+If this causes you concern, our recommendation is to pin to a specific version
+of Win32. But the best approach is simply to test regularly with the latest
+version of this package, and continue to move your minimum forward.
 
 ## Acknowledgements
 

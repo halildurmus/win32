@@ -15,7 +15,6 @@ linter:
     always_declare_return_types: true
     avoid_type_to_string: true
     cascade_invocations: true
-    comment_references: true
     discarded_futures: true
     directives_ordering: true
     invalid_case_patterns: true
