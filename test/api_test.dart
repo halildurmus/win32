@@ -12439,6 +12439,63 @@ void main() {
     }
   });
 
+  group('Test api-ms-win-ro-typeresolution-l1-1-0 functions', () {
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate RoGetMetaDataFile', () {
+        final api_ms_win_ro_typeresolution_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-ro-typeresolution-l1-1-0.dll');
+        final RoGetMetaDataFile =
+            api_ms_win_ro_typeresolution_l1_1_0.lookupFunction<
+                Int32 Function(
+                    IntPtr name,
+                    Pointer<COMObject> metaDataDispenser,
+                    Pointer<IntPtr> metaDataFilePath,
+                    Pointer<Pointer<COMObject>> metaDataImport,
+                    Pointer<Uint32> typeDefToken),
+                int Function(
+                    int name,
+                    Pointer<COMObject> metaDataDispenser,
+                    Pointer<IntPtr> metaDataFilePath,
+                    Pointer<Pointer<COMObject>> metaDataImport,
+                    Pointer<Uint32> typeDefToken)>('RoGetMetaDataFile');
+        expect(RoGetMetaDataFile, isA<Function>());
+      });
+    }
+  });
+
+  group('Test api-ms-win-ro-typeresolution-l1-1-1 functions', () {
+    if (windowsBuildNumber >= 17763) {
+      test('Can instantiate RoIsApiContractMajorVersionPresent', () {
+        final api_ms_win_ro_typeresolution_l1_1_1 =
+            DynamicLibrary.open('api-ms-win-ro-typeresolution-l1-1-1.dll');
+        final RoIsApiContractMajorVersionPresent =
+            api_ms_win_ro_typeresolution_l1_1_1.lookupFunction<
+                    Int32 Function(Pointer<Utf16> name, Uint16 majorVersion,
+                        Pointer<Int32> present),
+                    int Function(Pointer<Utf16> name, int majorVersion,
+                        Pointer<Int32> present)>(
+                'RoIsApiContractMajorVersionPresent');
+        expect(RoIsApiContractMajorVersionPresent, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 17763) {
+      test('Can instantiate RoIsApiContractPresent', () {
+        final api_ms_win_ro_typeresolution_l1_1_1 =
+            DynamicLibrary.open('api-ms-win-ro-typeresolution-l1-1-1.dll');
+        final RoIsApiContractPresent =
+            api_ms_win_ro_typeresolution_l1_1_1.lookupFunction<
+                Int32 Function(Pointer<Utf16> name, Uint16 majorVersion,
+                    Uint16 minorVersion, Pointer<Int32> present),
+                int Function(
+                    Pointer<Utf16> name,
+                    int majorVersion,
+                    int minorVersion,
+                    Pointer<Int32> present)>('RoIsApiContractPresent');
+        expect(RoIsApiContractPresent, isA<Function>());
+      });
+    }
+  });
+
   group('Test winscard functions', () {
     test('Can instantiate SCardAccessStartedEvent', () {
       final winscard = DynamicLibrary.open('winscard.dll');

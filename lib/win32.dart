@@ -145,11 +145,10 @@ export 'src/win32/api_ms_win_core_handle_l1_1_0.g.dart';
 export 'src/win32/api_ms_win_core_sysinfo_l1_2_3.g.dart';
 export 'src/win32/api_ms_win_core_winrt_l1_1_0.g.dart';
 export 'src/win32/api_ms_win_core_winrt_string_l1_1_0.g.dart';
+export 'src/win32/api_ms_win_ro_typeresolution_l1_1_0.g.dart';
+export 'src/win32/api_ms_win_ro_typeresolution_l1_1_1.g.dart';
 export 'src/win32/api_ms_win_shcore_scaling_l1_1_1.g.dart';
 export 'src/win32/api_ms_win_wsl_api_l1_1_0.g.dart';
-
-// Windows Metadata type resolution APIs
-export 'src/api_ms_win_ro_typeresolution_l1_1_0.dart';
 
 // COM foundational exports
 export 'src/combase.dart';

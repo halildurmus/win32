@@ -4210,11 +4210,29 @@
         "category": "winrt",
         "minimumWindowsVersion": "WIN8"
     },
+    "RoGetMetaDataFile": {
+        "prototype": "HRESULT RoGetMetaDataFile(\n  [in]            const HSTRING        name,\n  [in, optional]  IMetaDataDispenserEx *metaDataDispenser,\n  [out, optional] HSTRING              *metaDataFilePath,\n  [out, optional] IMetaDataImport2     **metaDataImport,\n  [out, optional] mdTypeDef            *typeDefToken\n);",
+        "comment": "Locates and retrieves the metadata file that describes the Application Binary Interface (ABI) for the specified typename.",
+        "category": "winrt",
+        "minimumWindowsVersion": "WIN8"
+    },
     "RoInitialize": {
         "prototype": "HRESULT RoInitialize(\n  RO_INIT_TYPE initType\n);",
         "comment": "Initializes the Windows Runtime on the current thread with the specified concurrency model.",
         "category": "winrt",
         "minimumWindowsVersion": "WIN8"
+    },
+    "RoIsApiContractMajorVersionPresent": {
+        "prototype": "HRESULT RoIsApiContractMajorVersionPresent(\n  PCWSTR name,\n  UINT16 majorVersion,\n  BOOL   *present\n);",
+        "comment": "Returns true or false to indicate whether the API contract with the specified name and major version number is present.",
+        "category": "winrt",
+        "minimumWindowsVersion": "WIN10_RS5"
+    },
+    "RoIsApiContractPresent": {
+        "prototype": "HRESULT RoIsApiContractPresent(\n  PCWSTR name,\n  UINT16 majorVersion,\n  UINT16 minorVersion,\n  BOOL   *present\n);",
+        "comment": "Returns true or false to indicate whether the API contract with the specified name and major and minor version number is present.",
+        "category": "winrt",
+        "minimumWindowsVersion": "WIN10_RS5"
     },
     "RoundRect": {
         "prototype": "BOOL RoundRect(\n  HDC hdc,\n  int left,\n  int top,\n  int right,\n  int bottom,\n  int width,\n  int height\n);",
