@@ -1,3 +1,7 @@
+## 1.1.1
+
+- Update dependency constraints.
+
 ## 1.1.0
 
 - Add `recursive` named option to method `deleteKey()` of `RegistryKey` (thanks @Zekfad)
