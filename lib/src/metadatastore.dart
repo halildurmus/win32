@@ -139,7 +139,7 @@ class MetadataStore {
 
     final hstrTypeName = convertToHString(typeName);
     final hstrMetaDataFilePath = calloc<HSTRING>();
-    final spMetaDataImport = calloc<Pointer>();
+    final spMetaDataImport = calloc<Pointer<COMObject>>();
     final typeDef = calloc<mdTypeDef>();
 
     try {
@@ -195,7 +195,7 @@ class MetadataStore {
       final hstrTypeName = convertToHString(typeName);
 
       final hstrMetaDataFilePath = calloc<HSTRING>();
-      final spMetaDataImport = calloc<Pointer>();
+      final spMetaDataImport = calloc<Pointer<COMObject>>();
       final typeDef = calloc<mdTypeDef>();
 
       try {
