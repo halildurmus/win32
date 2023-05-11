@@ -26,11 +26,8 @@ dependencies:
   # relationship between these two packages is tightly coupled, since this
   # package includes a specific version of the Win32 metadata, so we pin the
   # dependency by version to avoid surprising conflicts.
-  winmd: 
-    git: https://github.com/dart-windows/winmd.git
+  winmd: 3.0.0
 
   # Win32 itself
   win32: 
-    git:
-      url: https://github.com/dart-windows/win32.git
-      ref: v5-release-branch
+    path: ../..
