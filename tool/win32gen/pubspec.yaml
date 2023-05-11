@@ -33,4 +33,4 @@ dependencies:
   win32: 
     git:
       url: https://github.com/dart-windows/win32.git
-      ref: winmd3
+      ref: v5-release-branch
