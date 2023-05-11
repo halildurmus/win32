@@ -1,4 +1,5 @@
 [![pub package](https://img.shields.io/pub/v/win32_runner.svg)](https://pub.dev/packages/win32_runner)
+[![package publisher](https://img.shields.io/pub/publisher/win32_runner.svg)](https://pub.dev/packages/win32_runner/publisher)
 [![Language](https://img.shields.io/badge/language-Dart-blue.svg)](https://dart.dev)
 
 Experimental package for running Flutter apps from a Dart runner, instead of the
