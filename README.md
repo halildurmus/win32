@@ -6,6 +6,7 @@ Part of the [Dart | Windows](https://github.com/dart-windows) suite of Windows
 packages.
 
 [![pub package](https://img.shields.io/pub/v/win32.svg)](https://pub.dev/packages/win32)
+[![package publisher](https://img.shields.io/pub/publisher/win32.svg)](https://pub.dev/packages/win32/publisher)
 [![Language](https://img.shields.io/badge/language-Dart-blue.svg)](https://dart.dev)
 ![Build](https://github.com/dart-windows/win32/workflows/Build/badge.svg)
 
