@@ -2,60 +2,72 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-// Capture a screenshot.
-// Example comes from:
-//   https://docs.microsoft.com/en-us/windows/win32/gdi/capturing-an-image
+// Capture a multiple display screenshots.
 
 import 'dart:ffi';
-import 'dart:io';
-import 'package:ffi/ffi.dart';
 
+import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-final hInstance = GetModuleHandle(nullptr);
-
-void captureImage(int hwnd) {
-  final hdcScreen = GetDC(NULL);
-  final hdcWindow = GetDC(hwnd);
-
-  final hdcMemDC = CreateCompatibleDC(hdcWindow);
-  final bmpScreen = calloc<BITMAP>();
-
-  try {
-    if (hdcMemDC == 0) {
-      MessageBox(
-          hwnd, TEXT('CreateCompatibleDC failed.'), TEXT('Failed'), MB_OK);
-      return;
+void main() {
+  for (final display in Displays.all()) {
+    if (display.isTurnOn) {
+      display.saveScreenshot("${display.name}.bmp");
     }
+  }
+}
 
-    final rcClient = calloc<RECT>();
-    GetClientRect(hwnd, rcClient);
+class Displays {
+  static Iterable<Display> all() sync* {
+    final device = calloc<DISPLAY_DEVICE>()..ref.cb = sizeOf<DISPLAY_DEVICE>();
+    var deviceIndex = 0;
 
-    SetStretchBltMode(hdcWindow, HALFTONE);
+    while (EnumDisplayDevices(nullptr, deviceIndex, device.cast(), 0) != 0) {
+      final isTurnOn = device.ref.StateFlags != 0;
+      yield Display(device.ref.DeviceName, isTurnOn);
+      deviceIndex++;
+    }
+  }
+}
 
-    StretchBlt(
-        hdcWindow,
-        0,
-        0,
-        rcClient.ref.right,
-        rcClient.ref.bottom,
-        hdcScreen,
-        0,
-        0,
-        GetSystemMetrics(SM_CXSCREEN),
-        GetSystemMetrics(SM_CYSCREEN),
-        SRCCOPY);
+class Display {
+  final String rawName;
+  final bool isTurnOn;
 
-    final hbmScreen = CreateCompatibleBitmap(
-        hdcWindow,
-        rcClient.ref.right - rcClient.ref.left,
-        rcClient.ref.bottom - rcClient.ref.top);
+  Display(this.rawName, this.isTurnOn);
 
-    SelectObject(hdcMemDC, hbmScreen);
+  void saveScreenshot(String fileName) {
+    final hdcScreen = _createDC();
+    try {
+      final hbmScreen = _createScreenshot(hdcScreen);
+      _saveToFile(fileName, hdcScreen, hbmScreen);
+    } finally {
+      ReleaseDC(NULL, hdcScreen);
+    }
+  }
 
-    BitBlt(hdcMemDC, 0, 0, rcClient.ref.right - rcClient.ref.left,
-        rcClient.ref.bottom - rcClient.ref.top, hdcWindow, 0, 0, SRCCOPY);
+  int _createDC() {
+    return CreateDC(nullptr, rawName.toNativeUtf16(), nullptr, nullptr);
+  }
 
+  int _createScreenshot(int hdcScreen) {
+    final hdcMemDC = CreateCompatibleDC(hdcScreen);
+
+    final width = GetDeviceCaps(hdcScreen, HORZRES);
+    final height = GetDeviceCaps(hdcScreen, VERTRES);
+
+    try {
+      final hbmScreen = CreateCompatibleBitmap(hdcScreen, width, height);
+      SelectObject(hdcMemDC, hbmScreen);
+      BitBlt(hdcMemDC, 0, 0, width, height, hdcScreen, 0, 0, SRCCOPY);
+      return hbmScreen;
+    } finally {
+      DeleteObject(hdcMemDC);
+    }
+  }
+
+  void _saveToFile(String fileName, int hdcScreen, int hbmScreen) {
+    final bmpScreen = calloc<BITMAP>();
     GetObject(hbmScreen, sizeOf<BITMAP>(), bmpScreen);
 
     final bitmapFileHeader = calloc<BITMAPFILEHEADER>();
@@ -76,10 +88,10 @@ void captureImage(int hwnd) {
 
     final lpBitmap = calloc<Uint8>(dwBmpSize);
 
-    GetDIBits(hdcWindow, hbmScreen, 0, bmpScreen.ref.bmHeight, lpBitmap,
+    GetDIBits(hdcScreen, hbmScreen, 0, bmpScreen.ref.bmHeight, lpBitmap,
         bitmapInfoHeader.cast(), DIB_RGB_COLORS);
 
-    final hFile = CreateFile(TEXT('captureqwsz.bmp'), GENERIC_WRITE, 0, nullptr,
+    final hFile = CreateFile(TEXT(fileName), GENERIC_WRITE, 0, nullptr,
         CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 
     final dwSizeOfDIB =
@@ -98,80 +110,7 @@ void captureImage(int hwnd) {
     WriteFile(hFile, lpBitmap, dwBmpSize, dwBytesWritten, nullptr);
 
     CloseHandle(hFile);
-  } finally {
-    DeleteObject(hdcMemDC);
-    ReleaseDC(NULL, hdcScreen);
-    ReleaseDC(hwnd, hdcWindow);
-  }
-}
-
-int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
-  switch (uMsg) {
-    case WM_COMMAND:
-      final wmid = LOWORD(wParam);
-      switch (wmid) {
-        default:
-          return DefWindowProc(hWnd, uMsg, wParam, lParam);
-      }
-    case WM_DESTROY:
-      PostQuitMessage(0);
-      return 0;
-
-    case WM_PAINT:
-      final ps = calloc<PAINTSTRUCT>();
-      BeginPaint(hWnd, ps);
-      captureImage(hWnd);
-      EndPaint(hWnd, ps);
-
-      free(ps);
-      return 0;
-  }
-  return DefWindowProc(hWnd, uMsg, wParam, lParam);
-}
-
-void main() {
-  // Register the window class.
-  final className = TEXT('GDI Image Capture');
-
-  final wc = calloc<WNDCLASS>()
-    ..ref.style = CS_HREDRAW | CS_VREDRAW
-    ..ref.lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0)
-    ..ref.hInstance = hInstance
-    ..ref.lpszClassName = className
-    ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
-    ..ref.hbrBackground = GetStockObject(WHITE_BRUSH);
-  RegisterClass(wc);
-
-  // Create the window.
-
-  final hWnd = CreateWindowEx(
-      0, // Optional window styles.
-      className, // Window class
-      className, // Window caption
-      WS_OVERLAPPEDWINDOW, // Window style
-
-      // Size and position
-      CW_USEDEFAULT,
-      0,
-      CW_USEDEFAULT,
-      0,
-      NULL, // Parent window
-      NULL, // Menu
-      hInstance, // Instance handle
-      nullptr // Additional application data
-      );
-
-  if (hWnd == FALSE) {
-    exit(-1);
   }
 
-  ShowWindow(hWnd, SW_SHOWNORMAL);
-  UpdateWindow(hWnd);
-
-  // Run the message loop
-  final msg = calloc<MSG>();
-  while (GetMessage(msg, NULL, 0, 0) != FALSE) {
-    TranslateMessage(msg);
-    DispatchMessage(msg);
-  }
+  String get name => rawName.replaceAll(RegExp(r'[^a-zA-Z\d]'), "");
 }
