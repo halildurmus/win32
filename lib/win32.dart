@@ -224,3 +224,4 @@ export 'src/com/iwbemlocator.dart';
 export 'src/com/iwbemobjectaccess.dart';
 export 'src/com/iwbemrefresher.dart';
 export 'src/com/iwbemservices.dart';
+export 'src/com/iwebauthenticationcoremanagerinterop.dart';
