@@ -1,3 +1,7 @@
+## 5.0.1
+
+- Add `IWebAuthenticationCoreManagerInterop` (#702, thanks to @solbirn)
+
 ## 5.0.0
 
 - Note: This package no longer supports 32-bit architectures. It assumes 64-bit.
