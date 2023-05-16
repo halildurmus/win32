@@ -1,7 +1,7 @@
 ## 5.0.2
 
-- Add some additional user32 exports (#706, thanks to @ilopX)
-- Add service management APIs (#708)
+- Add some additional user32 exports (#707, thanks to @ilopX)
+- Add service management APIs (#709)
 
 ## 5.0.1
 
