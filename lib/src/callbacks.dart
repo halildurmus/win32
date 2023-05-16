@@ -110,6 +110,10 @@ typedef LpoverlappedCompletionRoutine = Void Function(DWORD dwErrorCode,
 typedef LpserviceMainFunctionw = Void Function(
     DWORD dwNumServicesArgs, Pointer<LPWSTR> lpServiceArgVectors);
 
+/// Application-defined callback function that receives a pointer to the
+/// SERVICE_NOTIFY structure provided by the caller.
+typedef PfnScNotifyCallbackFunction = PVOID Function(PVOID pParameter);
+
 /// Application-defined callback function implements a custom transform for
 /// image scaling.
 typedef MagImageScalingCallback = BOOL Function(
