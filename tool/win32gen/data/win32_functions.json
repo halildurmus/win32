@@ -734,6 +734,14 @@
         "prototype": "HANDLE CreateActCtxW(\n  PCACTCTXW pActCtx\n);",
         "comment": "The CreateActCtx function creates an activation context."
     },
+    "CreateBitmap": {
+        "prototype": "HBITMAP CreateBitmap(\n  [in] int        nWidth,\n  [in] int        nHeight,\n  [in] UINT       nPlanes,\n  [in] UINT       nBitCount,\n  [in] const VOID *lpBits\n);",
+        "comment": "The CreateBitmap function creates a bitmap with the specified width, height, and color format (color planes and bits-per-pixel)."
+    },
+    "CreateBitmapIndirect": {
+        "prototype": "HBITMAP CreateBitmapIndirect(\n  [in] const BITMAP *pbm\n);",
+        "comment": "The CreateBitmapIndirect function creates a bitmap with the specified width, height, and color format (color planes and bits-per-pixel)."
+    },
     "CreateCompatibleBitmap": {
         "prototype": "HBITMAP CreateCompatibleBitmap(\n  HDC hdc,\n  int cx,\n  int cy\n);",
         "comment": "The CreateCompatibleBitmap function creates a bitmap compatible with the device that is associated with the specified device context."
@@ -814,6 +822,10 @@
     "CreateIcon": {
         "prototype": "HICON CreateIcon(\n  HINSTANCE  hInstance,\n  int        nWidth,\n  int        nHeight,\n  BYTE       cPlanes,\n  BYTE       cBitsPixel,\n  const BYTE *lpbANDbits,\n  const BYTE *lpbXORbits\n);",
         "comment": "Creates an icon that has the specified size, colors, and bit patterns."
+    },
+    "CreateIconIndirect": {
+        "prototype": "HICON CreateIconIndirect(\n  [in] PICONINFO piconinfo\n);",
+        "comment": "Creates an icon or cursor from an ICONINFO structure."
     },
     "CreateIoCompletionPort": {
         "prototype": "HANDLE CreateIoCompletionPort(\n  HANDLE    FileHandle,\n  HANDLE    ExistingCompletionPort,\n  ULONG_PTR CompletionKey,\n  DWORD     NumberOfConcurrentThreads\n);",

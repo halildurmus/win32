@@ -116,6 +116,22 @@ void main() {
           int Function(int hdc)>('CloseFigure');
       expect(CloseFigure, isA<Function>());
     });
+    test('Can instantiate CreateBitmap', () {
+      final gdi32 = DynamicLibrary.open('gdi32.dll');
+      final CreateBitmap = gdi32.lookupFunction<
+          IntPtr Function(Int32 nWidth, Int32 nHeight, Uint32 nPlanes,
+              Uint32 nBitCount, Pointer lpBits),
+          int Function(int nWidth, int nHeight, int nPlanes, int nBitCount,
+              Pointer lpBits)>('CreateBitmap');
+      expect(CreateBitmap, isA<Function>());
+    });
+    test('Can instantiate CreateBitmapIndirect', () {
+      final gdi32 = DynamicLibrary.open('gdi32.dll');
+      final CreateBitmapIndirect = gdi32.lookupFunction<
+          IntPtr Function(Pointer<BITMAP> pbm),
+          int Function(Pointer<BITMAP> pbm)>('CreateBitmapIndirect');
+      expect(CreateBitmapIndirect, isA<Function>());
+    });
     test('Can instantiate CreateCompatibleBitmap', () {
       final gdi32 = DynamicLibrary.open('gdi32.dll');
       final CreateCompatibleBitmap = gdi32.lookupFunction<
@@ -5560,6 +5576,13 @@ void main() {
               Pointer<Uint8> lpbANDbits,
               Pointer<Uint8> lpbXORbits)>('CreateIcon');
       expect(CreateIcon, isA<Function>());
+    });
+    test('Can instantiate CreateIconIndirect', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final CreateIconIndirect = user32.lookupFunction<
+          IntPtr Function(Pointer<ICONINFO> piconinfo),
+          int Function(Pointer<ICONINFO> piconinfo)>('CreateIconIndirect');
+      expect(CreateIconIndirect, isA<Function>());
     });
     test('Can instantiate CreateMDIWindow', () {
       final user32 = DynamicLibrary.open('user32.dll');

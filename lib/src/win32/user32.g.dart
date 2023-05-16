@@ -1017,6 +1017,21 @@ final _CreateIcon = _user32.lookupFunction<
         Pointer<Uint8> lpbANDbits,
         Pointer<Uint8> lpbXORbits)>('CreateIcon');
 
+/// Creates an icon or cursor from an ICONINFO structure.
+///
+/// ```c
+/// HICON CreateIconIndirect(
+///   [in] PICONINFO piconinfo
+/// );
+/// ```
+/// {@category user32}
+int CreateIconIndirect(Pointer<ICONINFO> piconinfo) =>
+    _CreateIconIndirect(piconinfo);
+
+final _CreateIconIndirect = _user32.lookupFunction<
+    IntPtr Function(Pointer<ICONINFO> piconinfo),
+    int Function(Pointer<ICONINFO> piconinfo)>('CreateIconIndirect');
+
 /// Creates a multiple-document interface (MDI) child window.
 ///
 /// ```c
