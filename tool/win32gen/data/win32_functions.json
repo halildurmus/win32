@@ -5522,6 +5522,7 @@
         "prototype": "BOOL UpdateWindow(\n  HWND hWnd\n);",
         "comment": "The UpdateWindow function updates the client area of the specified window by sending a WM_PAINT message to the window if the window's update region is not empty. The function sends a WM_PAINT message directly to the window procedure of the specified window, bypassing the application queue. If the update region is empty, no message is sent."
     },
+
     "UserHandleGrantAccess": {
         "prototype": "BOOL UserHandleGrantAccess(\n  [in] HANDLE hUserHandle,\n  [in] HANDLE hJob,\n  [in] BOOL   bGrant\n);",
         "comment": "Grants or denies access to a handle to a User object to a job that has a user-interface restriction. When access is granted, all processes associated with the job can subsequently recognize and use the handle. When access is denied, the processes can no longer use the handle."
@@ -6164,5 +6165,125 @@
         "comment": "Sends data to a connected controller. This function is used to activate the vibration function of a controller.",
         "category": "xinput",
         "minimumWindowsVersion": "WIN8"
+    },
+    "OpenSCManager": {
+        "prototype": "SC_HANDLE OpenSCManagerW(\n  [in, optional] LPCWSTR lpMachineName,\n  [in, optional] LPCWSTR lpDatabaseName,\n  [in]           DWORD   dwDesiredAccess\n);",
+        "comment": "Establishes a connection to the service control manager on the specified computer and opens the specified service control manager database."
+    },
+    "ChangeServiceConfig2": {
+        "prototype": "BOOL ChangeServiceConfig2W(\n  [in]           SC_HANDLE hService,\n  [in]           DWORD     dwInfoLevel,\n  [in, optional] LPVOID    lpInfo\n);",
+        "comment": ""
+    },
+    "CloseServiceHandle": {
+        "prototype": "BOOL CloseServiceHandle(\n  [in] SC_HANDLE hSCObject\n);",
+        "comment": "Closes a handle to a service control manager or service object."
+    },
+    "ControlService": {
+        "prototype": "BOOL ControlService(\n  [in]  SC_HANDLE        hService,\n  [in]  DWORD            dwControl,\n  [out] LPSERVICE_STATUS lpServiceStatus\n);",
+        "comment": "Sends a control code to a service."
+    },
+    "ControlServiceEx": {
+        "prototype": "BOOL ControlServiceExW(\n  [in]      SC_HANDLE hService,\n  [in]      DWORD     dwControl,\n  [in]      DWORD     dwInfoLevel,\n  [in, out] PVOID     pControlParams\n);",
+        "comment": "Sends a control code to a service."
+    },
+    "DeleteService": {
+        "prototype": "BOOL DeleteService(\n  [in] SC_HANDLE hService\n);",
+        "comment": "Marks the specified service for deletion from the service control manager database."
+    },
+    "EnumDependentServices": {
+        "prototype": "BOOL EnumDependentServicesW(\n  [in]            SC_HANDLE              hService,\n  [in]            DWORD                  dwServiceState,\n  [out, optional] LPENUM_SERVICE_STATUSW lpServices,\n  [in]            DWORD                  cbBufSize,\n  [out]           LPDWORD                pcbBytesNeeded,\n  [out]           LPDWORD                lpServicesReturned\n);",
+        "comment": "Retrieves the name and status of each service that depends on the specified service; that is, the specified service must be running before the dependent services can run."
+    },
+    "EnumServicesStatusEx": {
+        "prototype": "BOOL EnumServicesStatusExW(\n  [in]                SC_HANDLE    hSCManager,\n  [in]                SC_ENUM_TYPE InfoLevel,\n  [in]                DWORD        dwServiceType,\n  [in]                DWORD        dwServiceState,\n  [out, optional]     LPBYTE       lpServices,\n  [in]                DWORD        cbBufSize,\n  [out]               LPDWORD      pcbBytesNeeded,\n  [out]               LPDWORD      lpServicesReturned,\n  [in, out, optional] LPDWORD      lpResumeHandle,\n  [in, optional]      LPCWSTR      pszGroupName\n);",
+        "comment": "Enumerates services in the specified service control manager database. The name and status of each service are provided, along with additional data based on the specified information level."
+    },
+    "EnumServicesStatus": {
+        "prototype": "BOOL EnumServicesStatusW(\n  [in]                SC_HANDLE              hSCManager,\n  [in]                DWORD                  dwServiceType,\n  [in]                DWORD                  dwServiceState,\n  [out, optional]     LPENUM_SERVICE_STATUSW lpServices,\n  [in]                DWORD                  cbBufSize,\n  [out]               LPDWORD                pcbBytesNeeded,\n  [out]               LPDWORD                lpServicesReturned,\n  [in, out, optional] LPDWORD                lpResumeHandle\n);",
+        "comment": "Enumerates services in the specified service control manager database. The name and status of each service are provided."
+    },
+    "GetServiceDirectory": {
+        "prototype": "DWORD GetServiceDirectory(\n  SERVICE_STATUS_HANDLE  hServiceStatus,\n  SERVICE_DIRECTORY_TYPE eDirectoryType,\n  PWCHAR                 lpPathBuffer,\n  DWORD                  cchPathBufferLength,\n  DWORD                  *lpcchRequiredBufferLength\n);",
+        "comment": "Returns a path for a per-service filesystem location for a service to read and/or write state to."
+    },
+    "GetServiceDisplayName": {
+        "prototype": "BOOL GetServiceDisplayNameW(\n  [in]            SC_HANDLE hSCManager,\n  [in]            LPCWSTR   lpServiceName,\n  [out, optional] LPWSTR    lpDisplayName,\n  [in, out]       LPDWORD   lpcchBuffer\n);",
+        "comment": "Retrieves the display name of the specified service."
+    },
+    "GetServiceKeyName": {
+        "prototype": "BOOL GetServiceKeyNameW(\n   [in]            SC_HANDLE hSCManager,\n   [in]            LPCWSTR   lpDisplayName,\n   [out, optional] LPWSTR    lpServiceName,\n   [in, out]       LPDWORD   lpcchBuffer\n );",
+        "comment": "Retrieves the service name of the specified service."
+    },
+    "GetServiceRegistryStateKey": {
+        "prototype": "DWORD GetServiceRegistryStateKey(\n  SERVICE_STATUS_HANDLE       ServiceStatusHandle,\n  SERVICE_REGISTRY_STATE_TYPE StateType,\n  DWORD                       AccessMask,\n  HKEY                        *ServiceStateKey\n);",
+        "comment": "Returns a handle for a registry key for a service to read and/or write state to."
+    },
+    "GetSharedServiceDirectory": {
+        "prototype": "DWORD GetSharedServiceDirectory(\n  SC_HANDLE                     ServiceHandle,\n  SERVICE_SHARED_DIRECTORY_TYPE DirectoryType,\n  PWCHAR                        PathBuffer,\n  DWORD                         PathBufferLength,\n  DWORD                         *RequiredBufferLength\n);",
+        "comment": "Returns a path for a per-service filesystem location for a service and associated programs to read and/or write state to."
+    },
+    "GetSharedServiceRegistryStateKey": {
+        "prototype": "DWORD GetSharedServiceRegistryStateKey(\n  SC_HANDLE                          ServiceHandle,\n  SERVICE_SHARED_REGISTRY_STATE_TYPE StateType,\n  DWORD                              AccessMask,\n  HKEY                               *ServiceStateKey\n);",
+        "comment": "Returns a handle for a registry key for a service and associated programs to read and/or write state to."
+    },
+    "NotifyBootConfigStatus": {
+        "prototype": "BOOL NotifyBootConfigStatus(\n  [in] BOOL BootAcceptable\n);",
+        "comment": "Reports the boot status to the service control manager. It is used by boot verification programs. This function can be called only by a process running in the LocalSystem or Administrator's account."
+    },
+    "NotifyServiceStatusChange": {
+        "prototype": "DWORD NotifyServiceStatusChangeW(\n  [in] SC_HANDLE        hService,\n  [in] DWORD            dwNotifyMask,\n  [in] PSERVICE_NOTIFYW pNotifyBuffer\n);",
+        "comment": "Enables an application to receive notification when the specified service is created or deleted or when its status changes."
+    },
+    "OpenService": {
+        "prototype": "SC_HANDLE OpenServiceW(\n  [in] SC_HANDLE hSCManager,\n  [in] LPCWSTR   lpServiceName,\n  [in] DWORD     dwDesiredAccess\n);",
+        "comment": "Opens an existing service."
+    },
+    "QueryServiceConfig2": {
+        "prototype": "BOOL QueryServiceConfig2W(\n  [in]            SC_HANDLE hService,\n  [in]            DWORD     dwInfoLevel,\n  [out, optional] LPBYTE    lpBuffer,\n  [in]            DWORD     cbBufSize,\n  [out]           LPDWORD   pcbBytesNeeded\n);",
+        "comment": "Retrieves the optional configuration parameters of the specified service."
+    },
+    "QueryServiceConfig": {
+        "prototype": "BOOL QueryServiceConfigW(\n  [in]            SC_HANDLE               hService,\n  [out, optional] LPQUERY_SERVICE_CONFIGW lpServiceConfig,\n  [in]            DWORD                   cbBufSize,\n  [out]           LPDWORD                 pcbBytesNeeded\n);",
+        "comment": "Retrieves the configuration parameters of the specified service. Optional configuration parameters are available using the QueryServiceConfig2 function."
+    },
+    "QueryServiceDynamicInformation": {
+        "prototype": "BOOL QueryServiceDynamicInformation(\n  [in] SERVICE_STATUS_HANDLE hServiceStatus,\n  [in] DWORD                 dwInfoLevel,\n       PVOID                 *ppDynamicInfo\n);",
+        "comment": "Retrieves dynamic information related to the current service start."
+    },
+    "QueryServiceObjectSecurity": {
+        "prototype": "BOOL QueryServiceObjectSecurity(\n  [in]            SC_HANDLE            hService,\n  [in]            SECURITY_INFORMATION dwSecurityInformation,\n  [out, optional] PSECURITY_DESCRIPTOR lpSecurityDescriptor,\n  [in]            DWORD                cbBufSize,\n  [out]           LPDWORD              pcbBytesNeeded\n);",
+        "comment": "The QueryServiceObjectSecurity function retrieves a copy of the security descriptor associated with a service object. You can also use the GetNamedSecurityInfo function to retrieve a security descriptor."
+    },
+    "QueryServiceStatus": {
+        "prototype": "BOOL QueryServiceStatus(\n  [in]  SC_HANDLE        hService,\n  [out] LPSERVICE_STATUS lpServiceStatus\n);",
+        "comment": "Retrieves the current status of the specified service."
+    },
+    "QueryServiceStatusEx": {
+        "prototype": "BOOL QueryServiceStatusEx(\n  [in]            SC_HANDLE      hService,\n  [in]            SC_STATUS_TYPE InfoLevel,\n  [out, optional] LPBYTE         lpBuffer,\n  [in]            DWORD          cbBufSize,\n  [out]           LPDWORD        pcbBytesNeeded\n);",
+        "comment": "Retrieves the current status of the specified service based on the specified information level."
+    },
+    "RegisterServiceCtrlHandlerEx": {
+        "prototype": "SERVICE_STATUS_HANDLE RegisterServiceCtrlHandlerExW(\n  [in]           LPCWSTR               lpServiceName,\n  [in]           LPHANDLER_FUNCTION_EX lpHandlerProc,\n  [in, optional] LPVOID                lpContext\n);",
+        "comment": "Registers a function to handle extended service control requests."
+    },
+    "RegisterServiceCtrlHandler": {
+        "prototype": "SERVICE_STATUS_HANDLE RegisterServiceCtrlHandlerW(\n  [in] LPCWSTR            lpServiceName,\n  [in] LPHANDLER_FUNCTION lpHandlerProc\n);",
+        "comment": "Registers a function to handle service control requests."
+    },
+    "SetServiceObjectSecurity": {
+        "prototype": "BOOL SetServiceObjectSecurity(\n  [in] SC_HANDLE            hService,\n  [in] SECURITY_INFORMATION dwSecurityInformation,\n  [in] PSECURITY_DESCRIPTOR lpSecurityDescriptor\n);",
+        "comment": "The SetServiceObjectSecurity function sets the security descriptor of a service object."
+    },
+    "SetServiceStatus": {
+        "prototype": "BOOL SetServiceStatus(\n  [in] SERVICE_STATUS_HANDLE hServiceStatus,\n  [in] LPSERVICE_STATUS      lpServiceStatus\n);",
+        "comment": "Updates the service control manager's status information for the calling service."
+    },
+    "StartServiceCtrlDispatcher": {
+        "prototype": "BOOL StartServiceCtrlDispatcherW(\n  [in] const SERVICE_TABLE_ENTRYW *lpServiceStartTable\n);",
+        "comment": "Connects the main thread of a service process to the service control manager, which causes the thread to be the service control dispatcher thread for the calling process."
+    },
+    "StartService": {
+        "prototype": "BOOL StartServiceW(\n  [in]           SC_HANDLE hService,\n  [in]           DWORD     dwNumServiceArgs,\n  [in, optional] LPCWSTR   *lpServiceArgVectors\n);",
+        "comment": "Starts a service."
     }
 }

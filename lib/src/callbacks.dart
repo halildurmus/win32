@@ -83,6 +83,17 @@ typedef FRHookProc = UINT_PTR Function(HWND, UINT, WPARAM, LPARAM);
 /// new thread in the process to execute the function.
 typedef HandlerRoutine = BOOL Function(DWORD dwCtrlType);
 
+/// Application-defined callback function used with the
+/// RegisterServiceCtrlHandler function. A service program can use it as the
+/// control handler function of a particular service.
+typedef LphandlerFunction = Void Function(DWORD dwControl);
+
+/// Application-defined callback function used with the
+/// RegisterServiceCtrlHandlerEx function. A service program can use it as the
+/// control handler function of a particular service.
+typedef LphandlerFunctionEx = DWORD Function(
+    DWORD dwControl, DWORD dwEventType, LPVOID lpEventData, LPVOID lpContext);
+
 /// Application-defined callback function used with the ReadFileEx and
 /// WriteFileEx functions. It is called when the asynchronous input and output
 /// (I/O) operation is completed or canceled and the calling thread is in an
@@ -91,6 +102,13 @@ typedef HandlerRoutine = BOOL Function(DWORD dwCtrlType);
 /// fAlertable parameter set to TRUE).
 typedef LpoverlappedCompletionRoutine = Void Function(DWORD dwErrorCode,
     DWORD dwNumberOfBytesTransfered, OVERLAPPED lpOverlapped);
+
+/// Application-defined callback function used as the entry point for a service.
+/// The LPSERVICE_MAIN_FUNCTION type defines a pointer to this callback
+/// function. ServiceMain is a placeholder for an application-defined function
+/// name.
+typedef LpserviceMainFunctionw = Void Function(
+    DWORD dwNumServicesArgs, Pointer<LPWSTR> lpServiceArgVectors);
 
 /// Application-defined callback function implements a custom transform for
 /// image scaling.
