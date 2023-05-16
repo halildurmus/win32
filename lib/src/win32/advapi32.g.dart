@@ -21,6 +21,77 @@ import '../variant.dart';
 
 final _advapi32 = DynamicLibrary.open('advapi32.dll');
 
+/// ```c
+/// BOOL ChangeServiceConfig2W(
+///   [in]           SC_HANDLE hService,
+///   [in]           DWORD     dwInfoLevel,
+///   [in, optional] LPVOID    lpInfo
+/// );
+/// ```
+/// {@category advapi32}
+int ChangeServiceConfig2(int hService, int dwInfoLevel, Pointer lpInfo) =>
+    _ChangeServiceConfig2(hService, dwInfoLevel, lpInfo);
+
+final _ChangeServiceConfig2 = _advapi32.lookupFunction<
+    Int32 Function(IntPtr hService, Uint32 dwInfoLevel, Pointer lpInfo),
+    int Function(int hService, int dwInfoLevel,
+        Pointer lpInfo)>('ChangeServiceConfig2W');
+
+/// Closes a handle to a service control manager or service object.
+///
+/// ```c
+/// BOOL CloseServiceHandle(
+///   [in] SC_HANDLE hSCObject
+/// );
+/// ```
+/// {@category advapi32}
+int CloseServiceHandle(int hSCObject) => _CloseServiceHandle(hSCObject);
+
+final _CloseServiceHandle = _advapi32.lookupFunction<
+    Int32 Function(IntPtr hSCObject),
+    int Function(int hSCObject)>('CloseServiceHandle');
+
+/// Sends a control code to a service.
+///
+/// ```c
+/// BOOL ControlService(
+///   [in]  SC_HANDLE        hService,
+///   [in]  DWORD            dwControl,
+///   [out] LPSERVICE_STATUS lpServiceStatus
+/// );
+/// ```
+/// {@category advapi32}
+int ControlService(
+        int hService, int dwControl, Pointer<SERVICE_STATUS> lpServiceStatus) =>
+    _ControlService(hService, dwControl, lpServiceStatus);
+
+final _ControlService = _advapi32.lookupFunction<
+    Int32 Function(IntPtr hService, Uint32 dwControl,
+        Pointer<SERVICE_STATUS> lpServiceStatus),
+    int Function(int hService, int dwControl,
+        Pointer<SERVICE_STATUS> lpServiceStatus)>('ControlService');
+
+/// Sends a control code to a service.
+///
+/// ```c
+/// BOOL ControlServiceExW(
+///   [in]      SC_HANDLE hService,
+///   [in]      DWORD     dwControl,
+///   [in]      DWORD     dwInfoLevel,
+///   [in, out] PVOID     pControlParams
+/// );
+/// ```
+/// {@category advapi32}
+int ControlServiceEx(
+        int hService, int dwControl, int dwInfoLevel, Pointer pControlParams) =>
+    _ControlServiceEx(hService, dwControl, dwInfoLevel, pControlParams);
+
+final _ControlServiceEx = _advapi32.lookupFunction<
+    Int32 Function(IntPtr hService, Uint32 dwControl, Uint32 dwInfoLevel,
+        Pointer pControlParams),
+    int Function(int hService, int dwControl, int dwInfoLevel,
+        Pointer pControlParams)>('ControlServiceExW');
+
 /// The CredDelete function deletes a credential from the user's credential
 /// set. The credential set used is the one associated with the logon
 /// session of the current token. The token must not have the user's SID
@@ -114,6 +185,20 @@ final _DecryptFile = _advapi32.lookupFunction<
     Int32 Function(Pointer<Utf16> lpFileName, Uint32 dwReserved),
     int Function(Pointer<Utf16> lpFileName, int dwReserved)>('DecryptFileW');
 
+/// Marks the specified service for deletion from the service control
+/// manager database.
+///
+/// ```c
+/// BOOL DeleteService(
+///   [in] SC_HANDLE hService
+/// );
+/// ```
+/// {@category advapi32}
+int DeleteService(int hService) => _DeleteService(hService);
+
+final _DeleteService = _advapi32.lookupFunction<Int32 Function(IntPtr hService),
+    int Function(int hService)>('DeleteService');
+
 /// Encrypts a file or directory. All data streams in a file are encrypted.
 /// All new files created in an encrypted directory are encrypted.
 ///
@@ -128,6 +213,161 @@ int EncryptFile(Pointer<Utf16> lpFileName) => _EncryptFile(lpFileName);
 final _EncryptFile = _advapi32.lookupFunction<
     Int32 Function(Pointer<Utf16> lpFileName),
     int Function(Pointer<Utf16> lpFileName)>('EncryptFileW');
+
+/// Retrieves the name and status of each service that depends on the
+/// specified service; that is, the specified service must be running before
+/// the dependent services can run.
+///
+/// ```c
+/// BOOL EnumDependentServicesW(
+///   [in]            SC_HANDLE              hService,
+///   [in]            DWORD                  dwServiceState,
+///   [out, optional] LPENUM_SERVICE_STATUSW lpServices,
+///   [in]            DWORD                  cbBufSize,
+///   [out]           LPDWORD                pcbBytesNeeded,
+///   [out]           LPDWORD                lpServicesReturned
+/// );
+/// ```
+/// {@category advapi32}
+int EnumDependentServices(
+        int hService,
+        int dwServiceState,
+        Pointer<ENUM_SERVICE_STATUS> lpServices,
+        int cbBufSize,
+        Pointer<Uint32> pcbBytesNeeded,
+        Pointer<Uint32> lpServicesReturned) =>
+    _EnumDependentServices(hService, dwServiceState, lpServices, cbBufSize,
+        pcbBytesNeeded, lpServicesReturned);
+
+final _EnumDependentServices = _advapi32.lookupFunction<
+    Int32 Function(
+        IntPtr hService,
+        Uint32 dwServiceState,
+        Pointer<ENUM_SERVICE_STATUS> lpServices,
+        Uint32 cbBufSize,
+        Pointer<Uint32> pcbBytesNeeded,
+        Pointer<Uint32> lpServicesReturned),
+    int Function(
+        int hService,
+        int dwServiceState,
+        Pointer<ENUM_SERVICE_STATUS> lpServices,
+        int cbBufSize,
+        Pointer<Uint32> pcbBytesNeeded,
+        Pointer<Uint32> lpServicesReturned)>('EnumDependentServicesW');
+
+/// Enumerates services in the specified service control manager database.
+/// The name and status of each service are provided.
+///
+/// ```c
+/// BOOL EnumServicesStatusW(
+///   [in]                SC_HANDLE              hSCManager,
+///   [in]                DWORD                  dwServiceType,
+///   [in]                DWORD                  dwServiceState,
+///   [out, optional]     LPENUM_SERVICE_STATUSW lpServices,
+///   [in]                DWORD                  cbBufSize,
+///   [out]               LPDWORD                pcbBytesNeeded,
+///   [out]               LPDWORD                lpServicesReturned,
+///   [in, out, optional] LPDWORD                lpResumeHandle
+/// );
+/// ```
+/// {@category advapi32}
+int EnumServicesStatus(
+        int hSCManager,
+        int dwServiceType,
+        int dwServiceState,
+        Pointer<ENUM_SERVICE_STATUS> lpServices,
+        int cbBufSize,
+        Pointer<Uint32> pcbBytesNeeded,
+        Pointer<Uint32> lpServicesReturned,
+        Pointer<Uint32> lpResumeHandle) =>
+    _EnumServicesStatus(hSCManager, dwServiceType, dwServiceState, lpServices,
+        cbBufSize, pcbBytesNeeded, lpServicesReturned, lpResumeHandle);
+
+final _EnumServicesStatus = _advapi32.lookupFunction<
+    Int32 Function(
+        IntPtr hSCManager,
+        Uint32 dwServiceType,
+        Uint32 dwServiceState,
+        Pointer<ENUM_SERVICE_STATUS> lpServices,
+        Uint32 cbBufSize,
+        Pointer<Uint32> pcbBytesNeeded,
+        Pointer<Uint32> lpServicesReturned,
+        Pointer<Uint32> lpResumeHandle),
+    int Function(
+        int hSCManager,
+        int dwServiceType,
+        int dwServiceState,
+        Pointer<ENUM_SERVICE_STATUS> lpServices,
+        int cbBufSize,
+        Pointer<Uint32> pcbBytesNeeded,
+        Pointer<Uint32> lpServicesReturned,
+        Pointer<Uint32> lpResumeHandle)>('EnumServicesStatusW');
+
+/// Enumerates services in the specified service control manager database.
+/// The name and status of each service are provided, along with additional
+/// data based on the specified information level.
+///
+/// ```c
+/// BOOL EnumServicesStatusExW(
+///   [in]                SC_HANDLE    hSCManager,
+///   [in]                SC_ENUM_TYPE InfoLevel,
+///   [in]                DWORD        dwServiceType,
+///   [in]                DWORD        dwServiceState,
+///   [out, optional]     LPBYTE       lpServices,
+///   [in]                DWORD        cbBufSize,
+///   [out]               LPDWORD      pcbBytesNeeded,
+///   [out]               LPDWORD      lpServicesReturned,
+///   [in, out, optional] LPDWORD      lpResumeHandle,
+///   [in, optional]      LPCWSTR      pszGroupName
+/// );
+/// ```
+/// {@category advapi32}
+int EnumServicesStatusEx(
+        int hSCManager,
+        int InfoLevel,
+        int dwServiceType,
+        int dwServiceState,
+        Pointer<Uint8> lpServices,
+        int cbBufSize,
+        Pointer<Uint32> pcbBytesNeeded,
+        Pointer<Uint32> lpServicesReturned,
+        Pointer<Uint32> lpResumeHandle,
+        Pointer<Utf16> pszGroupName) =>
+    _EnumServicesStatusEx(
+        hSCManager,
+        InfoLevel,
+        dwServiceType,
+        dwServiceState,
+        lpServices,
+        cbBufSize,
+        pcbBytesNeeded,
+        lpServicesReturned,
+        lpResumeHandle,
+        pszGroupName);
+
+final _EnumServicesStatusEx = _advapi32.lookupFunction<
+    Int32 Function(
+        IntPtr hSCManager,
+        Int32 InfoLevel,
+        Uint32 dwServiceType,
+        Uint32 dwServiceState,
+        Pointer<Uint8> lpServices,
+        Uint32 cbBufSize,
+        Pointer<Uint32> pcbBytesNeeded,
+        Pointer<Uint32> lpServicesReturned,
+        Pointer<Uint32> lpResumeHandle,
+        Pointer<Utf16> pszGroupName),
+    int Function(
+        int hSCManager,
+        int InfoLevel,
+        int dwServiceType,
+        int dwServiceState,
+        Pointer<Uint8> lpServices,
+        int cbBufSize,
+        Pointer<Uint32> pcbBytesNeeded,
+        Pointer<Uint32> lpServicesReturned,
+        Pointer<Uint32> lpResumeHandle,
+        Pointer<Utf16> pszGroupName)>('EnumServicesStatusExW');
 
 /// Retrieves the encryption status of the specified file.
 ///
@@ -145,6 +385,55 @@ final _FileEncryptionStatus = _advapi32.lookupFunction<
     Int32 Function(Pointer<Utf16> lpFileName, Pointer<Uint32> lpStatus),
     int Function(Pointer<Utf16> lpFileName,
         Pointer<Uint32> lpStatus)>('FileEncryptionStatusW');
+
+/// Retrieves the display name of the specified service.
+///
+/// ```c
+/// BOOL GetServiceDisplayNameW(
+///   [in]            SC_HANDLE hSCManager,
+///   [in]            LPCWSTR   lpServiceName,
+///   [out, optional] LPWSTR    lpDisplayName,
+///   [in, out]       LPDWORD   lpcchBuffer
+/// );
+/// ```
+/// {@category advapi32}
+int GetServiceDisplayName(int hSCManager, Pointer<Utf16> lpServiceName,
+        Pointer<Utf16> lpDisplayName, Pointer<Uint32> lpcchBuffer) =>
+    _GetServiceDisplayName(
+        hSCManager, lpServiceName, lpDisplayName, lpcchBuffer);
+
+final _GetServiceDisplayName = _advapi32.lookupFunction<
+    Int32 Function(IntPtr hSCManager, Pointer<Utf16> lpServiceName,
+        Pointer<Utf16> lpDisplayName, Pointer<Uint32> lpcchBuffer),
+    int Function(
+        int hSCManager,
+        Pointer<Utf16> lpServiceName,
+        Pointer<Utf16> lpDisplayName,
+        Pointer<Uint32> lpcchBuffer)>('GetServiceDisplayNameW');
+
+/// Retrieves the service name of the specified service.
+///
+/// ```c
+/// BOOL GetServiceKeyNameW(
+///    [in]            SC_HANDLE hSCManager,
+///    [in]            LPCWSTR   lpDisplayName,
+///    [out, optional] LPWSTR    lpServiceName,
+///    [in, out]       LPDWORD   lpcchBuffer
+///  );
+/// ```
+/// {@category advapi32}
+int GetServiceKeyName(int hSCManager, Pointer<Utf16> lpDisplayName,
+        Pointer<Utf16> lpServiceName, Pointer<Uint32> lpcchBuffer) =>
+    _GetServiceKeyName(hSCManager, lpDisplayName, lpServiceName, lpcchBuffer);
+
+final _GetServiceKeyName = _advapi32.lookupFunction<
+    Int32 Function(IntPtr hSCManager, Pointer<Utf16> lpDisplayName,
+        Pointer<Utf16> lpServiceName, Pointer<Uint32> lpcchBuffer),
+    int Function(
+        int hSCManager,
+        Pointer<Utf16> lpDisplayName,
+        Pointer<Utf16> lpServiceName,
+        Pointer<Uint32> lpcchBuffer)>('GetServiceKeyNameW');
 
 /// The GetTokenInformation function retrieves a specified type of
 /// information about an access token. The calling process must have
@@ -227,6 +516,44 @@ final _InitiateShutdown = _advapi32.lookupFunction<
         int dwShutdownFlags,
         int dwReason)>('InitiateShutdownW');
 
+/// Reports the boot status to the service control manager. It is used by
+/// boot verification programs. This function can be called only by a
+/// process running in the LocalSystem or Administrator's account.
+///
+/// ```c
+/// BOOL NotifyBootConfigStatus(
+///   [in] BOOL BootAcceptable
+/// );
+/// ```
+/// {@category advapi32}
+int NotifyBootConfigStatus(int BootAcceptable) =>
+    _NotifyBootConfigStatus(BootAcceptable);
+
+final _NotifyBootConfigStatus = _advapi32.lookupFunction<
+    Int32 Function(Int32 BootAcceptable),
+    int Function(int BootAcceptable)>('NotifyBootConfigStatus');
+
+/// Enables an application to receive notification when the specified
+/// service is created or deleted or when its status changes.
+///
+/// ```c
+/// DWORD NotifyServiceStatusChangeW(
+///   [in] SC_HANDLE        hService,
+///   [in] DWORD            dwNotifyMask,
+///   [in] PSERVICE_NOTIFYW pNotifyBuffer
+/// );
+/// ```
+/// {@category advapi32}
+int NotifyServiceStatusChange(int hService, int dwNotifyMask,
+        Pointer<SERVICE_NOTIFY_2> pNotifyBuffer) =>
+    _NotifyServiceStatusChange(hService, dwNotifyMask, pNotifyBuffer);
+
+final _NotifyServiceStatusChange = _advapi32.lookupFunction<
+    Uint32 Function(IntPtr hService, Uint32 dwNotifyMask,
+        Pointer<SERVICE_NOTIFY_2> pNotifyBuffer),
+    int Function(int hService, int dwNotifyMask,
+        Pointer<SERVICE_NOTIFY_2> pNotifyBuffer)>('NotifyServiceStatusChangeW');
+
 /// The OpenProcessToken function opens the access token associated with a
 /// process.
 ///
@@ -247,6 +574,47 @@ final _OpenProcessToken = _advapi32.lookupFunction<
         Pointer<IntPtr> TokenHandle),
     int Function(int ProcessHandle, int DesiredAccess,
         Pointer<IntPtr> TokenHandle)>('OpenProcessToken');
+
+/// Establishes a connection to the service control manager on the specified
+/// computer and opens the specified service control manager database.
+///
+/// ```c
+/// SC_HANDLE OpenSCManagerW(
+///   [in, optional] LPCWSTR lpMachineName,
+///   [in, optional] LPCWSTR lpDatabaseName,
+///   [in]           DWORD   dwDesiredAccess
+/// );
+/// ```
+/// {@category advapi32}
+int OpenSCManager(Pointer<Utf16> lpMachineName, Pointer<Utf16> lpDatabaseName,
+        int dwDesiredAccess) =>
+    _OpenSCManager(lpMachineName, lpDatabaseName, dwDesiredAccess);
+
+final _OpenSCManager = _advapi32.lookupFunction<
+    IntPtr Function(Pointer<Utf16> lpMachineName, Pointer<Utf16> lpDatabaseName,
+        Uint32 dwDesiredAccess),
+    int Function(Pointer<Utf16> lpMachineName, Pointer<Utf16> lpDatabaseName,
+        int dwDesiredAccess)>('OpenSCManagerW');
+
+/// Opens an existing service.
+///
+/// ```c
+/// SC_HANDLE OpenServiceW(
+///   [in] SC_HANDLE hSCManager,
+///   [in] LPCWSTR   lpServiceName,
+///   [in] DWORD     dwDesiredAccess
+/// );
+/// ```
+/// {@category advapi32}
+int OpenService(
+        int hSCManager, Pointer<Utf16> lpServiceName, int dwDesiredAccess) =>
+    _OpenService(hSCManager, lpServiceName, dwDesiredAccess);
+
+final _OpenService = _advapi32.lookupFunction<
+    IntPtr Function(IntPtr hSCManager, Pointer<Utf16> lpServiceName,
+        Uint32 dwDesiredAccess),
+    int Function(int hSCManager, Pointer<Utf16> lpServiceName,
+        int dwDesiredAccess)>('OpenServiceW');
 
 /// The OpenThreadToken function opens the access token associated with a
 /// thread.
@@ -269,6 +637,157 @@ final _OpenThreadToken = _advapi32.lookupFunction<
         Pointer<IntPtr> TokenHandle),
     int Function(int ThreadHandle, int DesiredAccess, int OpenAsSelf,
         Pointer<IntPtr> TokenHandle)>('OpenThreadToken');
+
+/// Retrieves the configuration parameters of the specified service.
+/// Optional configuration parameters are available using the
+/// QueryServiceConfig2 function.
+///
+/// ```c
+/// BOOL QueryServiceConfigW(
+///   [in]            SC_HANDLE               hService,
+///   [out, optional] LPQUERY_SERVICE_CONFIGW lpServiceConfig,
+///   [in]            DWORD                   cbBufSize,
+///   [out]           LPDWORD                 pcbBytesNeeded
+/// );
+/// ```
+/// {@category advapi32}
+int QueryServiceConfig(
+        int hService,
+        Pointer<QUERY_SERVICE_CONFIG> lpServiceConfig,
+        int cbBufSize,
+        Pointer<Uint32> pcbBytesNeeded) =>
+    _QueryServiceConfig(hService, lpServiceConfig, cbBufSize, pcbBytesNeeded);
+
+final _QueryServiceConfig = _advapi32.lookupFunction<
+    Int32 Function(
+        IntPtr hService,
+        Pointer<QUERY_SERVICE_CONFIG> lpServiceConfig,
+        Uint32 cbBufSize,
+        Pointer<Uint32> pcbBytesNeeded),
+    int Function(int hService, Pointer<QUERY_SERVICE_CONFIG> lpServiceConfig,
+        int cbBufSize, Pointer<Uint32> pcbBytesNeeded)>('QueryServiceConfigW');
+
+/// Retrieves the optional configuration parameters of the specified
+/// service.
+///
+/// ```c
+/// BOOL QueryServiceConfig2W(
+///   [in]            SC_HANDLE hService,
+///   [in]            DWORD     dwInfoLevel,
+///   [out, optional] LPBYTE    lpBuffer,
+///   [in]            DWORD     cbBufSize,
+///   [out]           LPDWORD   pcbBytesNeeded
+/// );
+/// ```
+/// {@category advapi32}
+int QueryServiceConfig2(int hService, int dwInfoLevel, Pointer<Uint8> lpBuffer,
+        int cbBufSize, Pointer<Uint32> pcbBytesNeeded) =>
+    _QueryServiceConfig2(
+        hService, dwInfoLevel, lpBuffer, cbBufSize, pcbBytesNeeded);
+
+final _QueryServiceConfig2 = _advapi32.lookupFunction<
+    Int32 Function(IntPtr hService, Uint32 dwInfoLevel, Pointer<Uint8> lpBuffer,
+        Uint32 cbBufSize, Pointer<Uint32> pcbBytesNeeded),
+    int Function(int hService, int dwInfoLevel, Pointer<Uint8> lpBuffer,
+        int cbBufSize, Pointer<Uint32> pcbBytesNeeded)>('QueryServiceConfig2W');
+
+/// Retrieves dynamic information related to the current service start.
+///
+/// ```c
+/// BOOL QueryServiceDynamicInformation(
+///   [in] SERVICE_STATUS_HANDLE hServiceStatus,
+///   [in] DWORD                 dwInfoLevel,
+///        PVOID                 *ppDynamicInfo
+/// );
+/// ```
+/// {@category advapi32}
+int QueryServiceDynamicInformation(
+        int hServiceStatus, int dwInfoLevel, Pointer<Pointer> ppDynamicInfo) =>
+    _QueryServiceDynamicInformation(hServiceStatus, dwInfoLevel, ppDynamicInfo);
+
+final _QueryServiceDynamicInformation = _advapi32.lookupFunction<
+    Int32 Function(IntPtr hServiceStatus, Uint32 dwInfoLevel,
+        Pointer<Pointer> ppDynamicInfo),
+    int Function(int hServiceStatus, int dwInfoLevel,
+        Pointer<Pointer> ppDynamicInfo)>('QueryServiceDynamicInformation');
+
+/// The QueryServiceObjectSecurity function retrieves a copy of the security
+/// descriptor associated with a service object. You can also use the
+/// GetNamedSecurityInfo function to retrieve a security descriptor.
+///
+/// ```c
+/// BOOL QueryServiceObjectSecurity(
+///   [in]            SC_HANDLE            hService,
+///   [in]            SECURITY_INFORMATION dwSecurityInformation,
+///   [out, optional] PSECURITY_DESCRIPTOR lpSecurityDescriptor,
+///   [in]            DWORD                cbBufSize,
+///   [out]           LPDWORD              pcbBytesNeeded
+/// );
+/// ```
+/// {@category advapi32}
+int QueryServiceObjectSecurity(
+        int hService,
+        int dwSecurityInformation,
+        Pointer lpSecurityDescriptor,
+        int cbBufSize,
+        Pointer<Uint32> pcbBytesNeeded) =>
+    _QueryServiceObjectSecurity(hService, dwSecurityInformation,
+        lpSecurityDescriptor, cbBufSize, pcbBytesNeeded);
+
+final _QueryServiceObjectSecurity = _advapi32.lookupFunction<
+    Int32 Function(
+        IntPtr hService,
+        Uint32 dwSecurityInformation,
+        Pointer lpSecurityDescriptor,
+        Uint32 cbBufSize,
+        Pointer<Uint32> pcbBytesNeeded),
+    int Function(
+        int hService,
+        int dwSecurityInformation,
+        Pointer lpSecurityDescriptor,
+        int cbBufSize,
+        Pointer<Uint32> pcbBytesNeeded)>('QueryServiceObjectSecurity');
+
+/// Retrieves the current status of the specified service.
+///
+/// ```c
+/// BOOL QueryServiceStatus(
+///   [in]  SC_HANDLE        hService,
+///   [out] LPSERVICE_STATUS lpServiceStatus
+/// );
+/// ```
+/// {@category advapi32}
+int QueryServiceStatus(int hService, Pointer<SERVICE_STATUS> lpServiceStatus) =>
+    _QueryServiceStatus(hService, lpServiceStatus);
+
+final _QueryServiceStatus = _advapi32.lookupFunction<
+    Int32 Function(IntPtr hService, Pointer<SERVICE_STATUS> lpServiceStatus),
+    int Function(int hService,
+        Pointer<SERVICE_STATUS> lpServiceStatus)>('QueryServiceStatus');
+
+/// Retrieves the current status of the specified service based on the
+/// specified information level.
+///
+/// ```c
+/// BOOL QueryServiceStatusEx(
+///   [in]            SC_HANDLE      hService,
+///   [in]            SC_STATUS_TYPE InfoLevel,
+///   [out, optional] LPBYTE         lpBuffer,
+///   [in]            DWORD          cbBufSize,
+///   [out]           LPDWORD        pcbBytesNeeded
+/// );
+/// ```
+/// {@category advapi32}
+int QueryServiceStatusEx(int hService, int InfoLevel, Pointer<Uint8> lpBuffer,
+        int cbBufSize, Pointer<Uint32> pcbBytesNeeded) =>
+    _QueryServiceStatusEx(
+        hService, InfoLevel, lpBuffer, cbBufSize, pcbBytesNeeded);
+
+final _QueryServiceStatusEx = _advapi32.lookupFunction<
+    Int32 Function(IntPtr hService, Int32 InfoLevel, Pointer<Uint8> lpBuffer,
+        Uint32 cbBufSize, Pointer<Uint32> pcbBytesNeeded),
+    int Function(int hService, int InfoLevel, Pointer<Uint8> lpBuffer,
+        int cbBufSize, Pointer<Uint32> pcbBytesNeeded)>('QueryServiceStatusEx');
 
 /// Closes a handle to the specified registry key.
 ///
@@ -804,6 +1323,52 @@ final _RegGetValue = _advapi32.lookupFunction<
         Pointer<Uint32> pdwType,
         Pointer pvData,
         Pointer<Uint32> pcbData)>('RegGetValueW');
+
+/// Registers a function to handle service control requests.
+///
+/// ```c
+/// SERVICE_STATUS_HANDLE RegisterServiceCtrlHandlerW(
+///   [in] LPCWSTR            lpServiceName,
+///   [in] LPHANDLER_FUNCTION lpHandlerProc
+/// );
+/// ```
+/// {@category advapi32}
+int RegisterServiceCtrlHandler(Pointer<Utf16> lpServiceName,
+        Pointer<NativeFunction<LphandlerFunction>> lpHandlerProc) =>
+    _RegisterServiceCtrlHandler(lpServiceName, lpHandlerProc);
+
+final _RegisterServiceCtrlHandler = _advapi32.lookupFunction<
+        IntPtr Function(Pointer<Utf16> lpServiceName,
+            Pointer<NativeFunction<LphandlerFunction>> lpHandlerProc),
+        int Function(Pointer<Utf16> lpServiceName,
+            Pointer<NativeFunction<LphandlerFunction>> lpHandlerProc)>(
+    'RegisterServiceCtrlHandlerW');
+
+/// Registers a function to handle extended service control requests.
+///
+/// ```c
+/// SERVICE_STATUS_HANDLE RegisterServiceCtrlHandlerExW(
+///   [in]           LPCWSTR               lpServiceName,
+///   [in]           LPHANDLER_FUNCTION_EX lpHandlerProc,
+///   [in, optional] LPVOID                lpContext
+/// );
+/// ```
+/// {@category advapi32}
+int RegisterServiceCtrlHandlerEx(
+        Pointer<Utf16> lpServiceName,
+        Pointer<NativeFunction<LphandlerFunctionEx>> lpHandlerProc,
+        Pointer lpContext) =>
+    _RegisterServiceCtrlHandlerEx(lpServiceName, lpHandlerProc, lpContext);
+
+final _RegisterServiceCtrlHandlerEx = _advapi32.lookupFunction<
+    IntPtr Function(
+        Pointer<Utf16> lpServiceName,
+        Pointer<NativeFunction<LphandlerFunctionEx>> lpHandlerProc,
+        Pointer lpContext),
+    int Function(
+        Pointer<Utf16> lpServiceName,
+        Pointer<NativeFunction<LphandlerFunctionEx>> lpHandlerProc,
+        Pointer lpContext)>('RegisterServiceCtrlHandlerExW');
 
 /// Loads the specified registry hive as an application hive.
 ///
@@ -1418,6 +1983,48 @@ final _RegUnLoadKey = _advapi32.lookupFunction<
     Uint32 Function(IntPtr hKey, Pointer<Utf16> lpSubKey),
     int Function(int hKey, Pointer<Utf16> lpSubKey)>('RegUnLoadKeyW');
 
+/// The SetServiceObjectSecurity function sets the security descriptor of a
+/// service object.
+///
+/// ```c
+/// BOOL SetServiceObjectSecurity(
+///   [in] SC_HANDLE            hService,
+///   [in] SECURITY_INFORMATION dwSecurityInformation,
+///   [in] PSECURITY_DESCRIPTOR lpSecurityDescriptor
+/// );
+/// ```
+/// {@category advapi32}
+int SetServiceObjectSecurity(int hService, int dwSecurityInformation,
+        Pointer lpSecurityDescriptor) =>
+    _SetServiceObjectSecurity(
+        hService, dwSecurityInformation, lpSecurityDescriptor);
+
+final _SetServiceObjectSecurity = _advapi32.lookupFunction<
+    Int32 Function(IntPtr hService, Uint32 dwSecurityInformation,
+        Pointer lpSecurityDescriptor),
+    int Function(int hService, int dwSecurityInformation,
+        Pointer lpSecurityDescriptor)>('SetServiceObjectSecurity');
+
+/// Updates the service control manager's status information for the calling
+/// service.
+///
+/// ```c
+/// BOOL SetServiceStatus(
+///   [in] SERVICE_STATUS_HANDLE hServiceStatus,
+///   [in] LPSERVICE_STATUS      lpServiceStatus
+/// );
+/// ```
+/// {@category advapi32}
+int SetServiceStatus(
+        int hServiceStatus, Pointer<SERVICE_STATUS> lpServiceStatus) =>
+    _SetServiceStatus(hServiceStatus, lpServiceStatus);
+
+final _SetServiceStatus = _advapi32.lookupFunction<
+    Int32 Function(
+        IntPtr hServiceStatus, Pointer<SERVICE_STATUS> lpServiceStatus),
+    int Function(int hServiceStatus,
+        Pointer<SERVICE_STATUS> lpServiceStatus)>('SetServiceStatus');
+
 /// The SetThreadToken function assigns an impersonation token to a thread.
 /// The function can also cause a thread to stop using an impersonation
 /// token.
@@ -1435,3 +2042,42 @@ int SetThreadToken(Pointer<IntPtr> Thread, int Token) =>
 final _SetThreadToken = _advapi32.lookupFunction<
     Int32 Function(Pointer<IntPtr> Thread, IntPtr Token),
     int Function(Pointer<IntPtr> Thread, int Token)>('SetThreadToken');
+
+/// Starts a service.
+///
+/// ```c
+/// BOOL StartServiceW(
+///   [in]           SC_HANDLE hService,
+///   [in]           DWORD     dwNumServiceArgs,
+///   [in, optional] LPCWSTR   *lpServiceArgVectors
+/// );
+/// ```
+/// {@category advapi32}
+int StartService(int hService, int dwNumServiceArgs,
+        Pointer<Pointer<Utf16>> lpServiceArgVectors) =>
+    _StartService(hService, dwNumServiceArgs, lpServiceArgVectors);
+
+final _StartService = _advapi32.lookupFunction<
+    Int32 Function(IntPtr hService, Uint32 dwNumServiceArgs,
+        Pointer<Pointer<Utf16>> lpServiceArgVectors),
+    int Function(int hService, int dwNumServiceArgs,
+        Pointer<Pointer<Utf16>> lpServiceArgVectors)>('StartServiceW');
+
+/// Connects the main thread of a service process to the service control
+/// manager, which causes the thread to be the service control dispatcher
+/// thread for the calling process.
+///
+/// ```c
+/// BOOL StartServiceCtrlDispatcherW(
+///   [in] const SERVICE_TABLE_ENTRYW *lpServiceStartTable
+/// );
+/// ```
+/// {@category advapi32}
+int StartServiceCtrlDispatcher(
+        Pointer<SERVICE_TABLE_ENTRY> lpServiceStartTable) =>
+    _StartServiceCtrlDispatcher(lpServiceStartTable);
+
+final _StartServiceCtrlDispatcher = _advapi32.lookupFunction<
+        Int32 Function(Pointer<SERVICE_TABLE_ENTRY> lpServiceStartTable),
+        int Function(Pointer<SERVICE_TABLE_ENTRY> lpServiceStartTable)>(
+    'StartServiceCtrlDispatcherW');
