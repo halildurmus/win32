@@ -29,4 +29,4 @@ dependencies:
   winmd: 3.0.0
 
   # Win32 itself
-  win32: ^5.0.0
+  win32: ^5.0.1

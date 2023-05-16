@@ -353,6 +353,7 @@
     "Windows.Win32.UI.WindowsAndMessaging.ICONINFO": "Contains information about an icon or a cursor.",
     "Windows.Win32.UI.WindowsAndMessaging.ICONINFOEXW": "Contains information about an icon or a cursor. Extends ICONINFO. Used by GetIconInfoEx.",
     "Windows.Win32.UI.WindowsAndMessaging.KBDLLHOOKSTRUCT": "Contains information about a low-level keyboard input event.",
+    "Windows.Win32.UI.WindowsAndMessaging.MENUBARINFO": "Contains menu bar information.",
     "Windows.Win32.UI.WindowsAndMessaging.MENUINFO": "Contains information about a menu.",
     "Windows.Win32.UI.WindowsAndMessaging.MENUITEMINFOW": "Contains information about a menu item.",
     "Windows.Win32.UI.WindowsAndMessaging.MENUITEMTEMPLATE": "Defines a menu item in a menu template.",

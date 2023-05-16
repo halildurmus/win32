@@ -1,3 +1,7 @@
+## 5.0.2
+
+- Add some additional user32 exports (#706, thanks to @ilopX)
+
 ## 5.0.1
 
 - Add `IWebAuthenticationCoreManagerInterop` (#702, thanks to @solbirn)

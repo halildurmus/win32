@@ -272,6 +272,44 @@ final _CloseFigure =
     _gdi32.lookupFunction<Int32 Function(IntPtr hdc), int Function(int hdc)>(
         'CloseFigure');
 
+/// The CreateBitmap function creates a bitmap with the specified width,
+/// height, and color format (color planes and bits-per-pixel).
+///
+/// ```c
+/// HBITMAP CreateBitmap(
+///   [in] int        nWidth,
+///   [in] int        nHeight,
+///   [in] UINT       nPlanes,
+///   [in] UINT       nBitCount,
+///   [in] const VOID *lpBits
+/// );
+/// ```
+/// {@category gdi32}
+int CreateBitmap(
+        int nWidth, int nHeight, int nPlanes, int nBitCount, Pointer lpBits) =>
+    _CreateBitmap(nWidth, nHeight, nPlanes, nBitCount, lpBits);
+
+final _CreateBitmap = _gdi32.lookupFunction<
+    IntPtr Function(Int32 nWidth, Int32 nHeight, Uint32 nPlanes,
+        Uint32 nBitCount, Pointer lpBits),
+    int Function(int nWidth, int nHeight, int nPlanes, int nBitCount,
+        Pointer lpBits)>('CreateBitmap');
+
+/// The CreateBitmapIndirect function creates a bitmap with the specified
+/// width, height, and color format (color planes and bits-per-pixel).
+///
+/// ```c
+/// HBITMAP CreateBitmapIndirect(
+///   [in] const BITMAP *pbm
+/// );
+/// ```
+/// {@category gdi32}
+int CreateBitmapIndirect(Pointer<BITMAP> pbm) => _CreateBitmapIndirect(pbm);
+
+final _CreateBitmapIndirect = _gdi32.lookupFunction<
+    IntPtr Function(Pointer<BITMAP> pbm),
+    int Function(Pointer<BITMAP> pbm)>('CreateBitmapIndirect');
+
 /// The CreateCompatibleBitmap function creates a bitmap compatible with the
 /// device that is associated with the specified device context.
 ///
