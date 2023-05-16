@@ -742,6 +742,10 @@
         "prototype": "HBITMAP CreateBitmapIndirect(\n  [in] const BITMAP *pbm\n);",
         "comment": "The CreateBitmapIndirect function creates a bitmap with the specified width, height, and color format (color planes and bits-per-pixel)."
     },
+    "CreateCaret": {
+        "prototype": "BOOL CreateCaret(\n  [in]           HWND    hWnd,\n  [in, optional] HBITMAP hBitmap,\n  [in]           int     nWidth,\n  [in]           int     nHeight\n);",
+        "comment": "Creates a new shape for the system caret and assigns ownership of the caret to the specified window. The caret shape can be a line, a block, or a bitmap."
+    },
     "CreateCompatibleBitmap": {
         "prototype": "HBITMAP CreateCompatibleBitmap(\n  HDC hdc,\n  int cx,\n  int cy\n);",
         "comment": "The CreateCompatibleBitmap function creates a bitmap compatible with the device that is associated with the specified device context."
@@ -753,6 +757,10 @@
     "CreateConsoleScreenBuffer": {
         "prototype": "HANDLE CreateConsoleScreenBuffer(\n  _In_             DWORD               dwDesiredAccess,\n  _In_             DWORD               dwShareMode,\n  _In_opt_   const SECURITY_ATTRIBUTES *lpSecurityAttributes,\n  _In_             DWORD               dwFlags,\n  _Reserved_       LPVOID              lpScreenBufferData\n);",
         "comment": "Creates a console screen buffer."
+    },
+    "CreateCursor": {
+        "prototype": "HCURSOR CreateCursor(\n  [in, optional] HINSTANCE  hInst,\n  [in]           int        xHotSpot,\n  [in]           int        yHotSpot,\n  [in]           int        nWidth,\n  [in]           int        nHeight,\n  [in]           const VOID *pvANDPlane,\n  [in]           const VOID *pvXORPlane\n);",
+        "comment": "Creates a monochrome cursor having the specified size, bit patterns, and hot spot."
     },
     "CreateDC": {
         "prototype": "HDC CreateDCW(\n  LPCWSTR        pwszDriver,\n  LPCWSTR        pwszDevice,\n  LPCWSTR        pszPort,\n  const DEVMODEW *pdm\n);",
@@ -823,6 +831,14 @@
         "prototype": "HICON CreateIcon(\n  HINSTANCE  hInstance,\n  int        nWidth,\n  int        nHeight,\n  BYTE       cPlanes,\n  BYTE       cBitsPixel,\n  const BYTE *lpbANDbits,\n  const BYTE *lpbXORbits\n);",
         "comment": "Creates an icon that has the specified size, colors, and bit patterns."
     },
+    "CreateIconFromResource": {
+        "prototype": "HICON CreateIconFromResource(\n  [in] PBYTE presbits,\n  [in] DWORD dwResSize,\n  [in] BOOL  fIcon,\n  [in] DWORD dwVer\n);",
+        "comment": "Creates an icon or cursor from resource bits describing the icon."
+    },
+    "CreateIconFromResourceEx": {
+        "prototype": "HICON CreateIconFromResourceEx(\n  [in] PBYTE presbits,\n  [in] DWORD dwResSize,\n  [in] BOOL  fIcon,\n  [in] DWORD dwVer,\n  [in] int   cxDesired,\n  [in] int   cyDesired,\n  [in] UINT  Flags\n);",
+        "comment": "Creates an icon or cursor from resource bits describing the icon."
+    },
     "CreateIconIndirect": {
         "prototype": "HICON CreateIconIndirect(\n  [in] PICONINFO piconinfo\n);",
         "comment": "Creates an icon or cursor from an ICONINFO structure."
@@ -854,6 +870,10 @@
     "CreatePipe": {
         "prototype": "BOOL CreatePipe(\n  PHANDLE               hReadPipe,\n  PHANDLE               hWritePipe,\n  LPSECURITY_ATTRIBUTES lpPipeAttributes,\n  DWORD                 nSize\n);",
         "comment": "Creates an anonymous pipe, and returns handles to the read and write ends of the pipe."
+    },
+    "CreatePopupMenu": {
+        "prototype": "HMENU CreatePopupMenu();",
+        "comment": "Creates a drop-down menu, submenu, or shortcut menu. The menu is initially empty. You can insert or append menu items by using the InsertMenuItem function. You can also use the InsertMenu function to insert menu items and the AppendMenu function to append menu items."
     },
     "CreateProcess": {
         "prototype": "BOOL CreateProcessW(\n  LPCWSTR               lpApplicationName,\n  LPWSTR                lpCommandLine,\n  LPSECURITY_ATTRIBUTES lpProcessAttributes,\n  LPSECURITY_ATTRIBUTES lpThreadAttributes,\n  BOOL                  bInheritHandles,\n  DWORD                 dwCreationFlags,\n  LPVOID                lpEnvironment,\n  LPCWSTR               lpCurrentDirectory,\n  LPSTARTUPINFOW        lpStartupInfo,\n  LPPROCESS_INFORMATION lpProcessInformation\n);",
@@ -1020,6 +1040,14 @@
     "DeleteVolumeMountPoint": {
         "prototype": "BOOL DeleteVolumeMountPointW(\n  [in] LPCWSTR lpszVolumeMountPoint\n);",
         "comment": "Deletes a drive letter or mounted folder."
+    },
+    "DestroyAcceleratorTable": {
+        "prototype": "BOOL DestroyAcceleratorTable(\n  [in] HACCEL hAccel\n);",
+        "comment": "Destroys an accelerator table."
+    },
+    "DestroyCaret": {
+        "prototype": "BOOL DestroyCaret();",
+        "comment": "Destroys the caret's current shape, frees the caret from the window, and removes the caret from the screen."
     },
     "DestroyCursor": {
         "prototype": "BOOL DestroyCursor(\n  HCURSOR hCursor\n);",
@@ -2143,6 +2171,14 @@
         "prototype": "HMENU GetMenu(\n  HWND hWnd\n);",
         "comment": "Retrieves a handle to the menu assigned to the specified window."
     },
+    "GetMenuBarInfo": {
+        "prototype": "BOOL GetMenuBarInfo(\n  [in]      HWND         hwnd,\n  [in]      LONG         idObject,\n  [in]      LONG         idItem,\n  [in, out] PMENUBARINFO pmbi\n);",
+        "comment": "Retrieves information about the specified menu bar."
+    },
+    "GetMenuDefaultItem": {
+        "prototype": "UINT GetMenuDefaultItem(\n  [in] HMENU hMenu,\n  [in] UINT  fByPos,\n  [in] UINT  gmdiFlags\n);",
+        "comment": "Determines the default menu item on the specified menu."
+    },
     "GetMenuInfo": {
         "prototype": "HMENU GetMenuInfo(\n  HMENU hMenu,\n  LPMENUINFO lpMenuInfo\n);",
         "comment": "Retrieves information about a specified menu."
@@ -2150,6 +2186,10 @@
     "GetMenuItemCount": {
         "prototype": "int GetMenuItemCount(\n  HMENU hMenu\n);",
         "comment": "Determines the number of items in the specified menu."
+    },
+    "GetMenuItemID": {
+        "prototype": "UINT GetMenuItemID(\n  [in] HMENU hMenu,\n  [in] int   nPos\n);",
+        "comment": "Retrieves the menu item identifier of a menu item located at the specified position in a menu."
     },
     "GetMenuItemInfo": {
         "prototype": "BOOL GetMenuItemInfoW(\n  HMENU           hmenu,\n  UINT            item,\n  BOOL            fByPosition,\n  LPMENUITEMINFOW lpmii\n);",
@@ -2995,6 +3035,10 @@
         "prototype": "BOOL HideCaret(\n  HWND hWnd\n);",
         "comment": "Removes the caret from the screen. Hiding a caret does not destroy its current shape or invalidate the insertion point."
     },
+    "HiliteMenuItem": {
+        "prototype": "BOOL HiliteMenuItem(\n  [in] HWND  hWnd,\n  [in] HMENU hMenu,\n  [in] UINT  uIDHiliteItem,\n  [in] UINT  uHilite\n);",
+        "comment": "Adds or removes highlighting from an item in a menu bar."
+    },
     "htonl": {
         "prototype": "u_long htonl(\n  u_long hostlong\n);",
         "comment": "The htonl function converts a u_long from host to TCP/IP network byte order (which is big-endian).",
@@ -3279,6 +3323,10 @@
     "LoadLibraryEx": {
         "prototype": "HMODULE LoadLibraryExW(\n  [in] LPCWSTR lpLibFileName,\n       HANDLE  hFile,\n  [in] DWORD   dwFlags\n);",
         "comment": "Loads the specified module into the address space of the calling process. The specified module may cause other modules to be loaded."
+    },
+    "LoadMenu": {
+        "prototype": "HMENU LoadMenuW(\n  [in, optional] HINSTANCE hInstance,\n  [in]           LPCWSTR   lpMenuName\n);",
+        "comment": "Loads the specified menu resource from the executable (.exe) file associated with an application instance."
     },
     "LoadMenuIndirect": {
         "prototype": "HMENU LoadMenuIndirectW(\n  const MENUTEMPLATEW *lpMenuTemplate\n);",
@@ -3827,6 +3875,10 @@
     "PrintWindow": {
         "prototype": "BOOL PrintWindow(\n  HWND hwnd,\n  HDC  hdcBlt,\n  UINT nFlags\n);",
         "comment": "The PrintWindow function copies a visual window into the specified device context (DC), typically a printer DC."
+    },
+    "PrivateExtractIcons": {
+        "prototype": "UINT PrivateExtractIconsW(\n  [in]            LPCWSTR szFileName,\n  [in]            int     nIconIndex,\n  [in]            int     cxIcon,\n  [in]            int     cyIcon,\n  [out, optional] HICON   *phicon,\n  [out, optional] UINT    *piconid,\n  [in]            UINT    nIcons,\n  [in]            UINT    flags\n);",
+        "comment": "Creates an array of handles to icons that are extracted from a specified file."
     },
     "ProgIDFromCLSID": {
         "prototype": "HRESULT ProgIDFromCLSID(\n  REFCLSID clsid,\n  LPOLESTR *lplpszProgID\n);",
@@ -4767,6 +4819,14 @@
         "prototype": "int SetMapMode(\n  HDC hdc,\n  int iMode\n);",
         "comment": "The SetMapMode function sets the mapping mode of the specified device context. The mapping mode defines the unit of measure used to transform page-space units into device-space units, and also defines the orientation of the device's x and y axes."
     },
+    "SetMenu": {
+        "prototype": "BOOL SetMenu(\n  [in]           HWND  hWnd,\n  [in, optional] HMENU hMenu\n);",
+        "comment": "Assigns a new menu to the specified window."
+    },
+    "SetMenuDefaultItem": {
+        "prototype": "BOOL SetMenuDefaultItem(\n  [in] HMENU hMenu,\n  [in] UINT  uItem,\n  [in] UINT  fByPos\n);",
+        "comment": "Sets the default menu item for the specified menu."
+    },
     "SetMenuInfo": {
         "prototype": "BOOL SetMenuInfo(\n  HMENU       hmenu,\n  LPCMENUINFO lpmi\n);",
         "comment": "Sets information for a specified menu."
@@ -4818,6 +4878,10 @@
     "SetParent": {
         "prototype": "HWND SetParent(\n  HWND hWndChild,\n  HWND hWndNewParent\n);",
         "comment": "Changes the parent window of the specified child window."
+    },
+    "SetPhysicalCursorPos": {
+        "prototype": "BOOL SetPhysicalCursorPos(\n  [in] int X,\n  [in] int Y\n);",
+        "comment": "Sets the position of the cursor in physical coordinates."
     },
     "SetPixel": {
         "prototype": "COLORREF SetPixel(\n  HDC      hdc,\n  int      x,\n  int      y,\n  COLORREF color\n);",
@@ -5373,6 +5437,10 @@
     "ToUnicodeEx": {
         "prototype": "int ToUnicodeEx(\n  UINT       wVirtKey,\n  UINT       wScanCode,\n  const BYTE *lpKeyState,\n  LPWSTR     pwszBuff,\n  int        cchBuff,\n  UINT       wFlags,\n  HKL        dwhkl\n);",
         "comment": "Translates the specified virtual-key code and keyboard state to the corresponding Unicode character or characters."
+    },
+    "TrackPopupMenu": {
+        "prototype": "BOOL TrackPopupMenu(\n  [in]           HMENU      hMenu,\n  [in]           UINT       uFlags,\n  [in]           int        x,\n  [in]           int        y,\n  [in]           int        nReserved,\n  [in]           HWND       hWnd,\n  [in, optional] const RECT *prcRect\n);",
+        "comment": "Displays a shortcut menu at the specified location and tracks the selection of items on the menu. The shortcut menu can appear anywhere on the screen."
     },
     "TrackPopupMenuEx": {
         "prototype": "BOOL TrackPopupMenuEx(\n  HMENU hMenu,\n  UINT uFlags,\n  int x,\n  int y,\n  HWND hwnd,\n  TPMPARAMS *lptpm\n);",

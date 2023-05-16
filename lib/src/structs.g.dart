@@ -5022,6 +5022,25 @@ base class MEMORY_BASIC_INFORMATION extends Struct {
   external int Type;
 }
 
+/// Contains menu bar information.
+///
+/// {@category Struct}
+base class MENUBARINFO extends Struct {
+  @Uint32()
+  external int cbSize;
+
+  external RECT rcBar;
+
+  @IntPtr()
+  external int hMenu;
+
+  @IntPtr()
+  external int hwndMenu;
+
+  @Int32()
+  external int bitfield;
+}
+
 /// Contains information about a menu.
 ///
 /// {@category Struct}

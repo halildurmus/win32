@@ -5497,6 +5497,36 @@ void main() {
               Pointer<ACCEL> paccel, int cAccel)>('CreateAcceleratorTableW');
       expect(CreateAcceleratorTable, isA<Function>());
     });
+    test('Can instantiate CreateCaret', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final CreateCaret = user32.lookupFunction<
+          Int32 Function(
+              IntPtr hWnd, IntPtr hBitmap, Int32 nWidth, Int32 nHeight),
+          int Function(
+              int hWnd, int hBitmap, int nWidth, int nHeight)>('CreateCaret');
+      expect(CreateCaret, isA<Function>());
+    });
+    test('Can instantiate CreateCursor', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final CreateCursor = user32.lookupFunction<
+          IntPtr Function(
+              IntPtr hInst,
+              Int32 xHotSpot,
+              Int32 yHotSpot,
+              Int32 nWidth,
+              Int32 nHeight,
+              Pointer pvANDPlane,
+              Pointer pvXORPlane),
+          int Function(
+              int hInst,
+              int xHotSpot,
+              int yHotSpot,
+              int nWidth,
+              int nHeight,
+              Pointer pvANDPlane,
+              Pointer pvXORPlane)>('CreateCursor');
+      expect(CreateCursor, isA<Function>());
+    });
     test('Can instantiate CreateDesktop', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final CreateDesktop = user32.lookupFunction<
@@ -5577,6 +5607,36 @@ void main() {
               Pointer<Uint8> lpbXORbits)>('CreateIcon');
       expect(CreateIcon, isA<Function>());
     });
+    test('Can instantiate CreateIconFromResource', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final CreateIconFromResource = user32.lookupFunction<
+          IntPtr Function(Pointer<Uint8> presbits, Uint32 dwResSize,
+              Int32 fIcon, Uint32 dwVer),
+          int Function(Pointer<Uint8> presbits, int dwResSize, int fIcon,
+              int dwVer)>('CreateIconFromResource');
+      expect(CreateIconFromResource, isA<Function>());
+    });
+    test('Can instantiate CreateIconFromResourceEx', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final CreateIconFromResourceEx = user32.lookupFunction<
+          IntPtr Function(
+              Pointer<Uint8> presbits,
+              Uint32 dwResSize,
+              Int32 fIcon,
+              Uint32 dwVer,
+              Int32 cxDesired,
+              Int32 cyDesired,
+              Uint32 Flags),
+          int Function(
+              Pointer<Uint8> presbits,
+              int dwResSize,
+              int fIcon,
+              int dwVer,
+              int cxDesired,
+              int cyDesired,
+              int Flags)>('CreateIconFromResourceEx');
+      expect(CreateIconFromResourceEx, isA<Function>());
+    });
     test('Can instantiate CreateIconIndirect', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final CreateIconIndirect = user32.lookupFunction<
@@ -5616,6 +5676,12 @@ void main() {
       final CreateMenu = user32
           .lookupFunction<IntPtr Function(), int Function()>('CreateMenu');
       expect(CreateMenu, isA<Function>());
+    });
+    test('Can instantiate CreatePopupMenu', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final CreatePopupMenu = user32
+          .lookupFunction<IntPtr Function(), int Function()>('CreatePopupMenu');
+      expect(CreatePopupMenu, isA<Function>());
     });
     test('Can instantiate CreateWindowEx', () {
       final user32 = DynamicLibrary.open('user32.dll');
@@ -5709,6 +5775,19 @@ void main() {
           Int32 Function(IntPtr hMenu, Uint32 uPosition, Uint32 uFlags),
           int Function(int hMenu, int uPosition, int uFlags)>('DeleteMenu');
       expect(DeleteMenu, isA<Function>());
+    });
+    test('Can instantiate DestroyAcceleratorTable', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final DestroyAcceleratorTable = user32.lookupFunction<
+          Int32 Function(IntPtr hAccel),
+          int Function(int hAccel)>('DestroyAcceleratorTable');
+      expect(DestroyAcceleratorTable, isA<Function>());
+    });
+    test('Can instantiate DestroyCaret', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final DestroyCaret = user32
+          .lookupFunction<Int32 Function(), int Function()>('DestroyCaret');
+      expect(DestroyCaret, isA<Function>());
     });
     test('Can instantiate DestroyCursor', () {
       final user32 = DynamicLibrary.open('user32.dll');
@@ -6518,6 +6597,23 @@ void main() {
           int Function(int hWnd)>('GetMenu');
       expect(GetMenu, isA<Function>());
     });
+    test('Can instantiate GetMenuBarInfo', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetMenuBarInfo = user32.lookupFunction<
+          Int32 Function(IntPtr hwnd, Int32 idObject, Int32 idItem,
+              Pointer<MENUBARINFO> pmbi),
+          int Function(int hwnd, int idObject, int idItem,
+              Pointer<MENUBARINFO> pmbi)>('GetMenuBarInfo');
+      expect(GetMenuBarInfo, isA<Function>());
+    });
+    test('Can instantiate GetMenuDefaultItem', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetMenuDefaultItem = user32.lookupFunction<
+          Uint32 Function(IntPtr hMenu, Uint32 fByPos, Uint32 gmdiFlags),
+          int Function(
+              int hMenu, int fByPos, int gmdiFlags)>('GetMenuDefaultItem');
+      expect(GetMenuDefaultItem, isA<Function>());
+    });
     test('Can instantiate GetMenuInfo', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final GetMenuInfo = user32.lookupFunction<
@@ -6531,6 +6627,13 @@ void main() {
           Int32 Function(IntPtr hMenu),
           int Function(int hMenu)>('GetMenuItemCount');
       expect(GetMenuItemCount, isA<Function>());
+    });
+    test('Can instantiate GetMenuItemID', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetMenuItemID = user32.lookupFunction<
+          Uint32 Function(IntPtr hMenu, Int32 nPos),
+          int Function(int hMenu, int nPos)>('GetMenuItemID');
+      expect(GetMenuItemID, isA<Function>());
     });
     test('Can instantiate GetMenuItemInfo', () {
       final user32 = DynamicLibrary.open('user32.dll');
@@ -7232,6 +7335,15 @@ void main() {
           int Function(int hWnd)>('HideCaret');
       expect(HideCaret, isA<Function>());
     });
+    test('Can instantiate HiliteMenuItem', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final HiliteMenuItem = user32.lookupFunction<
+          Int32 Function(
+              IntPtr hWnd, IntPtr hMenu, Uint32 uIDHiliteItem, Uint32 uHilite),
+          int Function(int hWnd, int hMenu, int uIDHiliteItem,
+              int uHilite)>('HiliteMenuItem');
+      expect(HiliteMenuItem, isA<Function>());
+    });
     test('Can instantiate InflateRect', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final InflateRect = user32.lookupFunction<
@@ -7490,6 +7602,13 @@ void main() {
           int Function(
               Pointer<Utf16> pwszKLID, int Flags)>('LoadKeyboardLayoutW');
       expect(LoadKeyboardLayout, isA<Function>());
+    });
+    test('Can instantiate LoadMenu', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final LoadMenu = user32.lookupFunction<
+          IntPtr Function(IntPtr hInstance, Pointer<Utf16> lpMenuName),
+          int Function(int hInstance, Pointer<Utf16> lpMenuName)>('LoadMenuW');
+      expect(LoadMenu, isA<Function>());
     });
     test('Can instantiate LoadMenuIndirect', () {
       final user32 = DynamicLibrary.open('user32.dll');
@@ -7804,6 +7923,29 @@ void main() {
           Int32 Function(IntPtr hwnd, IntPtr hdcBlt, Uint32 nFlags),
           int Function(int hwnd, int hdcBlt, int nFlags)>('PrintWindow');
       expect(PrintWindow, isA<Function>());
+    });
+    test('Can instantiate PrivateExtractIcons', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final PrivateExtractIcons = user32.lookupFunction<
+          Uint32 Function(
+              Pointer<Utf16> szFileName,
+              Int32 nIconIndex,
+              Int32 cxIcon,
+              Int32 cyIcon,
+              Pointer<IntPtr> phicon,
+              Pointer<Uint32> piconid,
+              Uint32 nIcons,
+              Uint32 flags),
+          int Function(
+              Pointer<Utf16> szFileName,
+              int nIconIndex,
+              int cxIcon,
+              int cyIcon,
+              Pointer<IntPtr> phicon,
+              Pointer<Uint32> piconid,
+              int nIcons,
+              int flags)>('PrivateExtractIconsW');
+      expect(PrivateExtractIcons, isA<Function>());
     });
     test('Can instantiate PtInRect', () {
       final user32 = DynamicLibrary.open('user32.dll');
@@ -8239,6 +8381,20 @@ void main() {
               int dwFlags)>('SetLayeredWindowAttributes');
       expect(SetLayeredWindowAttributes, isA<Function>());
     });
+    test('Can instantiate SetMenu', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final SetMenu = user32.lookupFunction<
+          Int32 Function(IntPtr hWnd, IntPtr hMenu),
+          int Function(int hWnd, int hMenu)>('SetMenu');
+      expect(SetMenu, isA<Function>());
+    });
+    test('Can instantiate SetMenuDefaultItem', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final SetMenuDefaultItem = user32.lookupFunction<
+          Int32 Function(IntPtr hMenu, Uint32 uItem, Uint32 fByPos),
+          int Function(int hMenu, int uItem, int fByPos)>('SetMenuDefaultItem');
+      expect(SetMenuDefaultItem, isA<Function>());
+    });
     test('Can instantiate SetMenuInfo', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final SetMenuInfo = user32.lookupFunction<
@@ -8277,6 +8433,13 @@ void main() {
           IntPtr Function(IntPtr hWndChild, IntPtr hWndNewParent),
           int Function(int hWndChild, int hWndNewParent)>('SetParent');
       expect(SetParent, isA<Function>());
+    });
+    test('Can instantiate SetPhysicalCursorPos', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final SetPhysicalCursorPos = user32.lookupFunction<
+          Int32 Function(Int32 X, Int32 Y),
+          int Function(int X, int Y)>('SetPhysicalCursorPos');
+      expect(SetPhysicalCursorPos, isA<Function>());
     });
     test('Can instantiate SetProcessDPIAware', () {
       final user32 = DynamicLibrary.open('user32.dll');
@@ -8625,6 +8788,15 @@ void main() {
               int wFlags,
               int dwhkl)>('ToUnicodeEx');
       expect(ToUnicodeEx, isA<Function>());
+    });
+    test('Can instantiate TrackPopupMenu', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final TrackPopupMenu = user32.lookupFunction<
+          Int32 Function(IntPtr hMenu, Uint32 uFlags, Int32 x, Int32 y,
+              Int32 nReserved, IntPtr hWnd, Pointer<RECT> prcRect),
+          int Function(int hMenu, int uFlags, int x, int y, int nReserved,
+              int hWnd, Pointer<RECT> prcRect)>('TrackPopupMenu');
+      expect(TrackPopupMenu, isA<Function>());
     });
     test('Can instantiate TrackPopupMenuEx', () {
       final user32 = DynamicLibrary.open('user32.dll');

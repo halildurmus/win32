@@ -847,6 +847,53 @@ final _CreateAcceleratorTable = _user32.lookupFunction<
     IntPtr Function(Pointer<ACCEL> paccel, Int32 cAccel),
     int Function(Pointer<ACCEL> paccel, int cAccel)>('CreateAcceleratorTableW');
 
+/// Creates a new shape for the system caret and assigns ownership of the
+/// caret to the specified window. The caret shape can be a line, a block,
+/// or a bitmap.
+///
+/// ```c
+/// BOOL CreateCaret(
+///   [in]           HWND    hWnd,
+///   [in, optional] HBITMAP hBitmap,
+///   [in]           int     nWidth,
+///   [in]           int     nHeight
+/// );
+/// ```
+/// {@category user32}
+int CreateCaret(int hWnd, int hBitmap, int nWidth, int nHeight) =>
+    _CreateCaret(hWnd, hBitmap, nWidth, nHeight);
+
+final _CreateCaret = _user32.lookupFunction<
+    Int32 Function(IntPtr hWnd, IntPtr hBitmap, Int32 nWidth, Int32 nHeight),
+    int Function(
+        int hWnd, int hBitmap, int nWidth, int nHeight)>('CreateCaret');
+
+/// Creates a monochrome cursor having the specified size, bit patterns, and
+/// hot spot.
+///
+/// ```c
+/// HCURSOR CreateCursor(
+///   [in, optional] HINSTANCE  hInst,
+///   [in]           int        xHotSpot,
+///   [in]           int        yHotSpot,
+///   [in]           int        nWidth,
+///   [in]           int        nHeight,
+///   [in]           const VOID *pvANDPlane,
+///   [in]           const VOID *pvXORPlane
+/// );
+/// ```
+/// {@category user32}
+int CreateCursor(int hInst, int xHotSpot, int yHotSpot, int nWidth, int nHeight,
+        Pointer pvANDPlane, Pointer pvXORPlane) =>
+    _CreateCursor(
+        hInst, xHotSpot, yHotSpot, nWidth, nHeight, pvANDPlane, pvXORPlane);
+
+final _CreateCursor = _user32.lookupFunction<
+    IntPtr Function(IntPtr hInst, Int32 xHotSpot, Int32 yHotSpot, Int32 nWidth,
+        Int32 nHeight, Pointer pvANDPlane, Pointer pvXORPlane),
+    int Function(int hInst, int xHotSpot, int yHotSpot, int nWidth, int nHeight,
+        Pointer pvANDPlane, Pointer pvXORPlane)>('CreateCursor');
+
 /// Creates a new desktop, associates it with the current window station of
 /// the calling process, and assigns it to the calling thread. The calling
 /// process must have an associated window station, either assigned by the
@@ -1017,6 +1064,52 @@ final _CreateIcon = _user32.lookupFunction<
         Pointer<Uint8> lpbANDbits,
         Pointer<Uint8> lpbXORbits)>('CreateIcon');
 
+/// Creates an icon or cursor from resource bits describing the icon.
+///
+/// ```c
+/// HICON CreateIconFromResource(
+///   [in] PBYTE presbits,
+///   [in] DWORD dwResSize,
+///   [in] BOOL  fIcon,
+///   [in] DWORD dwVer
+/// );
+/// ```
+/// {@category user32}
+int CreateIconFromResource(
+        Pointer<Uint8> presbits, int dwResSize, int fIcon, int dwVer) =>
+    _CreateIconFromResource(presbits, dwResSize, fIcon, dwVer);
+
+final _CreateIconFromResource = _user32.lookupFunction<
+    IntPtr Function(
+        Pointer<Uint8> presbits, Uint32 dwResSize, Int32 fIcon, Uint32 dwVer),
+    int Function(Pointer<Uint8> presbits, int dwResSize, int fIcon,
+        int dwVer)>('CreateIconFromResource');
+
+/// Creates an icon or cursor from resource bits describing the icon.
+///
+/// ```c
+/// HICON CreateIconFromResourceEx(
+///   [in] PBYTE presbits,
+///   [in] DWORD dwResSize,
+///   [in] BOOL  fIcon,
+///   [in] DWORD dwVer,
+///   [in] int   cxDesired,
+///   [in] int   cyDesired,
+///   [in] UINT  Flags
+/// );
+/// ```
+/// {@category user32}
+int CreateIconFromResourceEx(Pointer<Uint8> presbits, int dwResSize, int fIcon,
+        int dwVer, int cxDesired, int cyDesired, int Flags) =>
+    _CreateIconFromResourceEx(
+        presbits, dwResSize, fIcon, dwVer, cxDesired, cyDesired, Flags);
+
+final _CreateIconFromResourceEx = _user32.lookupFunction<
+    IntPtr Function(Pointer<Uint8> presbits, Uint32 dwResSize, Int32 fIcon,
+        Uint32 dwVer, Int32 cxDesired, Int32 cyDesired, Uint32 Flags),
+    int Function(Pointer<Uint8> presbits, int dwResSize, int fIcon, int dwVer,
+        int cxDesired, int cyDesired, int Flags)>('CreateIconFromResourceEx');
+
 /// Creates an icon or cursor from an ICONINFO structure.
 ///
 /// ```c
@@ -1099,6 +1192,20 @@ int CreateMenu() => _CreateMenu();
 
 final _CreateMenu =
     _user32.lookupFunction<IntPtr Function(), int Function()>('CreateMenu');
+
+/// Creates a drop-down menu, submenu, or shortcut menu. The menu is
+/// initially empty. You can insert or append menu items by using the
+/// InsertMenuItem function. You can also use the InsertMenu function to
+/// insert menu items and the AppendMenu function to append menu items.
+///
+/// ```c
+/// HMENU CreatePopupMenu();
+/// ```
+/// {@category user32}
+int CreatePopupMenu() => _CreatePopupMenu();
+
+final _CreatePopupMenu = _user32
+    .lookupFunction<IntPtr Function(), int Function()>('CreatePopupMenu');
 
 /// Creates an overlapped, pop-up, or child window. It specifies the window
 /// class, window title, window style, and (optionally) the initial position
@@ -1301,6 +1408,32 @@ int DeleteMenu(int hMenu, int uPosition, int uFlags) =>
 final _DeleteMenu = _user32.lookupFunction<
     Int32 Function(IntPtr hMenu, Uint32 uPosition, Uint32 uFlags),
     int Function(int hMenu, int uPosition, int uFlags)>('DeleteMenu');
+
+/// Destroys an accelerator table.
+///
+/// ```c
+/// BOOL DestroyAcceleratorTable(
+///   [in] HACCEL hAccel
+/// );
+/// ```
+/// {@category user32}
+int DestroyAcceleratorTable(int hAccel) => _DestroyAcceleratorTable(hAccel);
+
+final _DestroyAcceleratorTable = _user32.lookupFunction<
+    Int32 Function(IntPtr hAccel),
+    int Function(int hAccel)>('DestroyAcceleratorTable');
+
+/// Destroys the caret's current shape, frees the caret from the window, and
+/// removes the caret from the screen.
+///
+/// ```c
+/// BOOL DestroyCaret();
+/// ```
+/// {@category user32}
+int DestroyCaret() => _DestroyCaret();
+
+final _DestroyCaret =
+    _user32.lookupFunction<Int32 Function(), int Function()>('DestroyCaret');
 
 /// Destroys a cursor and frees any memory the cursor occupied. Do not use
 /// this function to destroy a shared cursor.
@@ -3029,6 +3162,44 @@ int GetMenu(int hWnd) => _GetMenu(hWnd);
 final _GetMenu = _user32.lookupFunction<IntPtr Function(IntPtr hWnd),
     int Function(int hWnd)>('GetMenu');
 
+/// Retrieves information about the specified menu bar.
+///
+/// ```c
+/// BOOL GetMenuBarInfo(
+///   [in]      HWND         hwnd,
+///   [in]      LONG         idObject,
+///   [in]      LONG         idItem,
+///   [in, out] PMENUBARINFO pmbi
+/// );
+/// ```
+/// {@category user32}
+int GetMenuBarInfo(
+        int hwnd, int idObject, int idItem, Pointer<MENUBARINFO> pmbi) =>
+    _GetMenuBarInfo(hwnd, idObject, idItem, pmbi);
+
+final _GetMenuBarInfo = _user32.lookupFunction<
+    Int32 Function(
+        IntPtr hwnd, Int32 idObject, Int32 idItem, Pointer<MENUBARINFO> pmbi),
+    int Function(int hwnd, int idObject, int idItem,
+        Pointer<MENUBARINFO> pmbi)>('GetMenuBarInfo');
+
+/// Determines the default menu item on the specified menu.
+///
+/// ```c
+/// UINT GetMenuDefaultItem(
+///   [in] HMENU hMenu,
+///   [in] UINT  fByPos,
+///   [in] UINT  gmdiFlags
+/// );
+/// ```
+/// {@category user32}
+int GetMenuDefaultItem(int hMenu, int fByPos, int gmdiFlags) =>
+    _GetMenuDefaultItem(hMenu, fByPos, gmdiFlags);
+
+final _GetMenuDefaultItem = _user32.lookupFunction<
+    Uint32 Function(IntPtr hMenu, Uint32 fByPos, Uint32 gmdiFlags),
+    int Function(int hMenu, int fByPos, int gmdiFlags)>('GetMenuDefaultItem');
+
 /// Retrieves information about a specified menu.
 ///
 /// ```c
@@ -3057,6 +3228,22 @@ int GetMenuItemCount(int hMenu) => _GetMenuItemCount(hMenu);
 
 final _GetMenuItemCount = _user32.lookupFunction<Int32 Function(IntPtr hMenu),
     int Function(int hMenu)>('GetMenuItemCount');
+
+/// Retrieves the menu item identifier of a menu item located at the
+/// specified position in a menu.
+///
+/// ```c
+/// UINT GetMenuItemID(
+///   [in] HMENU hMenu,
+///   [in] int   nPos
+/// );
+/// ```
+/// {@category user32}
+int GetMenuItemID(int hMenu, int nPos) => _GetMenuItemID(hMenu, nPos);
+
+final _GetMenuItemID = _user32.lookupFunction<
+    Uint32 Function(IntPtr hMenu, Int32 nPos),
+    int Function(int hMenu, int nPos)>('GetMenuItemID');
 
 /// Retrieves information about a menu item.
 ///
@@ -4511,6 +4698,26 @@ final _HideCaret =
     _user32.lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
         'HideCaret');
 
+/// Adds or removes highlighting from an item in a menu bar.
+///
+/// ```c
+/// BOOL HiliteMenuItem(
+///   [in] HWND  hWnd,
+///   [in] HMENU hMenu,
+///   [in] UINT  uIDHiliteItem,
+///   [in] UINT  uHilite
+/// );
+/// ```
+/// {@category user32}
+int HiliteMenuItem(int hWnd, int hMenu, int uIDHiliteItem, int uHilite) =>
+    _HiliteMenuItem(hWnd, hMenu, uIDHiliteItem, uHilite);
+
+final _HiliteMenuItem = _user32.lookupFunction<
+    Int32 Function(
+        IntPtr hWnd, IntPtr hMenu, Uint32 uIDHiliteItem, Uint32 uHilite),
+    int Function(
+        int hWnd, int hMenu, int uIDHiliteItem, int uHilite)>('HiliteMenuItem');
+
 /// The InflateRect function increases or decreases the width and height of
 /// the specified rectangle. The InflateRect function adds -dx units to the
 /// left end and dx to the right end of the rectangle and -dy units to the
@@ -5103,6 +5310,23 @@ int LoadKeyboardLayout(Pointer<Utf16> pwszKLID, int Flags) =>
 final _LoadKeyboardLayout = _user32.lookupFunction<
     IntPtr Function(Pointer<Utf16> pwszKLID, Uint32 Flags),
     int Function(Pointer<Utf16> pwszKLID, int Flags)>('LoadKeyboardLayoutW');
+
+/// Loads the specified menu resource from the executable (.exe) file
+/// associated with an application instance.
+///
+/// ```c
+/// HMENU LoadMenuW(
+///   [in, optional] HINSTANCE hInstance,
+///   [in]           LPCWSTR   lpMenuName
+/// );
+/// ```
+/// {@category user32}
+int LoadMenu(int hInstance, Pointer<Utf16> lpMenuName) =>
+    _LoadMenu(hInstance, lpMenuName);
+
+final _LoadMenu = _user32.lookupFunction<
+    IntPtr Function(IntPtr hInstance, Pointer<Utf16> lpMenuName),
+    int Function(int hInstance, Pointer<Utf16> lpMenuName)>('LoadMenuW');
 
 /// Creates a cursor based on data contained in a file.
 ///
@@ -5846,6 +6070,54 @@ int PrintWindow(int hwnd, int hdcBlt, int nFlags) =>
 final _PrintWindow = _user32.lookupFunction<
     Int32 Function(IntPtr hwnd, IntPtr hdcBlt, Uint32 nFlags),
     int Function(int hwnd, int hdcBlt, int nFlags)>('PrintWindow');
+
+/// Creates an array of handles to icons that are extracted from a specified
+/// file.
+///
+/// ```c
+/// UINT PrivateExtractIconsW(
+///   [in]            LPCWSTR szFileName,
+///   [in]            int     nIconIndex,
+///   [in]            int     cxIcon,
+///   [in]            int     cyIcon,
+///   [out, optional] HICON   *phicon,
+///   [out, optional] UINT    *piconid,
+///   [in]            UINT    nIcons,
+///   [in]            UINT    flags
+/// );
+/// ```
+/// {@category user32}
+int PrivateExtractIcons(
+        Pointer<Utf16> szFileName,
+        int nIconIndex,
+        int cxIcon,
+        int cyIcon,
+        Pointer<IntPtr> phicon,
+        Pointer<Uint32> piconid,
+        int nIcons,
+        int flags) =>
+    _PrivateExtractIcons(
+        szFileName, nIconIndex, cxIcon, cyIcon, phicon, piconid, nIcons, flags);
+
+final _PrivateExtractIcons = _user32.lookupFunction<
+    Uint32 Function(
+        Pointer<Utf16> szFileName,
+        Int32 nIconIndex,
+        Int32 cxIcon,
+        Int32 cyIcon,
+        Pointer<IntPtr> phicon,
+        Pointer<Uint32> piconid,
+        Uint32 nIcons,
+        Uint32 flags),
+    int Function(
+        Pointer<Utf16> szFileName,
+        int nIconIndex,
+        int cxIcon,
+        int cyIcon,
+        Pointer<IntPtr> phicon,
+        Pointer<Uint32> piconid,
+        int nIcons,
+        int flags)>('PrivateExtractIconsW');
 
 /// The PtInRect function determines whether the specified point lies within
 /// the specified rectangle. A point is within a rectangle if it lies on the
@@ -6795,6 +7067,38 @@ final _SetLayeredWindowAttributes = _user32.lookupFunction<
     int Function(int hwnd, int crKey, int bAlpha,
         int dwFlags)>('SetLayeredWindowAttributes');
 
+/// Assigns a new menu to the specified window.
+///
+/// ```c
+/// BOOL SetMenu(
+///   [in]           HWND  hWnd,
+///   [in, optional] HMENU hMenu
+/// );
+/// ```
+/// {@category user32}
+int SetMenu(int hWnd, int hMenu) => _SetMenu(hWnd, hMenu);
+
+final _SetMenu = _user32.lookupFunction<
+    Int32 Function(IntPtr hWnd, IntPtr hMenu),
+    int Function(int hWnd, int hMenu)>('SetMenu');
+
+/// Sets the default menu item for the specified menu.
+///
+/// ```c
+/// BOOL SetMenuDefaultItem(
+///   [in] HMENU hMenu,
+///   [in] UINT  uItem,
+///   [in] UINT  fByPos
+/// );
+/// ```
+/// {@category user32}
+int SetMenuDefaultItem(int hMenu, int uItem, int fByPos) =>
+    _SetMenuDefaultItem(hMenu, uItem, fByPos);
+
+final _SetMenuDefaultItem = _user32.lookupFunction<
+    Int32 Function(IntPtr hMenu, Uint32 uItem, Uint32 fByPos),
+    int Function(int hMenu, int uItem, int fByPos)>('SetMenuDefaultItem');
+
 /// Sets information for a specified menu.
 ///
 /// ```c
@@ -6890,6 +7194,21 @@ int SetParent(int hWndChild, int hWndNewParent) =>
 final _SetParent = _user32.lookupFunction<
     IntPtr Function(IntPtr hWndChild, IntPtr hWndNewParent),
     int Function(int hWndChild, int hWndNewParent)>('SetParent');
+
+/// Sets the position of the cursor in physical coordinates.
+///
+/// ```c
+/// BOOL SetPhysicalCursorPos(
+///   [in] int X,
+///   [in] int Y
+/// );
+/// ```
+/// {@category user32}
+int SetPhysicalCursorPos(int X, int Y) => _SetPhysicalCursorPos(X, Y);
+
+final _SetPhysicalCursorPos = _user32.lookupFunction<
+    Int32 Function(Int32 X, Int32 Y),
+    int Function(int X, int Y)>('SetPhysicalCursorPos');
 
 /// Sets the process-default DPI awareness to system-DPI awareness.
 ///
@@ -7654,6 +7973,32 @@ final _ToUnicodeEx = _user32.lookupFunction<
         int cchBuff,
         int wFlags,
         int dwhkl)>('ToUnicodeEx');
+
+/// Displays a shortcut menu at the specified location and tracks the
+/// selection of items on the menu. The shortcut menu can appear anywhere on
+/// the screen.
+///
+/// ```c
+/// BOOL TrackPopupMenu(
+///   [in]           HMENU      hMenu,
+///   [in]           UINT       uFlags,
+///   [in]           int        x,
+///   [in]           int        y,
+///   [in]           int        nReserved,
+///   [in]           HWND       hWnd,
+///   [in, optional] const RECT *prcRect
+/// );
+/// ```
+/// {@category user32}
+int TrackPopupMenu(int hMenu, int uFlags, int x, int y, int nReserved, int hWnd,
+        Pointer<RECT> prcRect) =>
+    _TrackPopupMenu(hMenu, uFlags, x, y, nReserved, hWnd, prcRect);
+
+final _TrackPopupMenu = _user32.lookupFunction<
+    Int32 Function(IntPtr hMenu, Uint32 uFlags, Int32 x, Int32 y,
+        Int32 nReserved, IntPtr hWnd, Pointer<RECT> prcRect),
+    int Function(int hMenu, int uFlags, int x, int y, int nReserved, int hWnd,
+        Pointer<RECT> prcRect)>('TrackPopupMenu');
 
 /// Displays a shortcut menu at the specified location and tracks the
 /// selection of items on the shortcut menu. The shortcut menu can appear

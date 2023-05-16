@@ -229,6 +229,7 @@ void main()
     printf("  'MCI_STATUS_PARMS': %zu,\n", sizeof(MCI_STATUS_PARMS));
     printf("  'MEMORYSTATUSEX': %zu,\n", sizeof(MEMORYSTATUSEX));
     printf("  'MEMORY_BASIC_INFORMATION': %zu,\n", sizeof(MEMORY_BASIC_INFORMATION));
+    printf("  'MENUBARINFO': %zu,\n", sizeof(MENUBARINFO));
     printf("  'MENUINFO': %zu,\n", sizeof(MENUINFO));
     printf("  'MENUITEMINFO': %zu,\n", sizeof(MENUITEMINFOW));
     printf("  'MENUITEMTEMPLATE': %zu,\n", sizeof(MENUITEMTEMPLATE));
