@@ -2653,7 +2653,8 @@
     },
     "GetServiceDirectory": {
         "prototype": "DWORD GetServiceDirectory(\n  SERVICE_STATUS_HANDLE  hServiceStatus,\n  SERVICE_DIRECTORY_TYPE eDirectoryType,\n  PWCHAR                 lpPathBuffer,\n  DWORD                  cchPathBufferLength,\n  DWORD                  *lpcchRequiredBufferLength\n);",
-        "comment": "Returns a path for a per-service filesystem location for a service to read and/or write state to."
+        "comment": "Returns a path for a per-service filesystem location for a service to read and/or write state to.",
+        "minimumWindowsVersion": "WIN10_20H1"
     },
     "GetServiceDisplayName": {
         "prototype": "BOOL GetServiceDisplayNameW(\n  [in]            SC_HANDLE hSCManager,\n  [in]            LPCWSTR   lpServiceName,\n  [out, optional] LPWSTR    lpDisplayName,\n  [in, out]       LPDWORD   lpcchBuffer\n);",
@@ -2665,15 +2666,18 @@
     },
     "GetServiceRegistryStateKey": {
         "prototype": "DWORD GetServiceRegistryStateKey(\n  SERVICE_STATUS_HANDLE       ServiceStatusHandle,\n  SERVICE_REGISTRY_STATE_TYPE StateType,\n  DWORD                       AccessMask,\n  HKEY                        *ServiceStateKey\n);",
-        "comment": "Returns a handle for a registry key for a service to read and/or write state to."
+        "comment": "Returns a handle for a registry key for a service to read and/or write state to.",
+        "minimumWindowsVersion": "WIN10_20H1"
     },
     "GetSharedServiceDirectory": {
         "prototype": "DWORD GetSharedServiceDirectory(\n  SC_HANDLE                     ServiceHandle,\n  SERVICE_SHARED_DIRECTORY_TYPE DirectoryType,\n  PWCHAR                        PathBuffer,\n  DWORD                         PathBufferLength,\n  DWORD                         *RequiredBufferLength\n);",
-        "comment": "Returns a path for a per-service filesystem location for a service and associated programs to read and/or write state to."
+        "comment": "Returns a path for a per-service filesystem location for a service and associated programs to read and/or write state to.",
+        "minimumWindowsVersion": "WIN11_21H2"
     },
     "GetSharedServiceRegistryStateKey": {
         "prototype": "DWORD GetSharedServiceRegistryStateKey(\n  SC_HANDLE                          ServiceHandle,\n  SERVICE_SHARED_REGISTRY_STATE_TYPE StateType,\n  DWORD                              AccessMask,\n  HKEY                               *ServiceStateKey\n);",
-        "comment": "Returns a handle for a registry key for a service and associated programs to read and/or write state to."
+        "comment": "Returns a handle for a registry key for a service and associated programs to read and/or write state to.",
+        "minimumWindowsVersion": "WIN11_21H2"
     },
     "GetShellWindow": {
         "prototype": "HWND GetShellWindow();",
