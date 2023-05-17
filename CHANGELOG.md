@@ -1,3 +1,8 @@
+## 5.0.2
+
+- Add some additional user32 exports (#707, thanks to @ilopX)
+- Add service management APIs (#709)
+
 ## 5.0.1
 
 - Add `IWebAuthenticationCoreManagerInterop` (#702, thanks to @solbirn)

@@ -369,6 +369,12 @@ void main() {
   test('Struct ENUM_PAGE_FILE_INFORMATION is the right size', () {
     expect(sizeOf<ENUM_PAGE_FILE_INFORMATION>(), equals(32));
   });
+  test('Struct ENUM_SERVICE_STATUS is the right size', () {
+    expect(sizeOf<ENUM_SERVICE_STATUS>(), equals(48));
+  });
+  test('Struct ENUM_SERVICE_STATUS_PROCESS is the right size', () {
+    expect(sizeOf<ENUM_SERVICE_STATUS_PROCESS>(), equals(56));
+  });
   test('Struct EVENTMSG is the right size', () {
     expect(sizeOf<EVENTMSG>(), equals(24));
   });
@@ -545,6 +551,9 @@ void main() {
   });
   test('Struct MEMORY_BASIC_INFORMATION is the right size', () {
     expect(sizeOf<MEMORY_BASIC_INFORMATION>(), equals(48));
+  });
+  test('Struct MENUBARINFO is the right size', () {
+    expect(sizeOf<MENUBARINFO>(), equals(48));
   });
   test('Struct MENUINFO is the right size', () {
     expect(sizeOf<MENUINFO>(), equals(40));
@@ -771,6 +780,12 @@ void main() {
   test('Struct PROTOENT is the right size', () {
     expect(sizeOf<PROTOENT>(), equals(24));
   });
+  test('Struct QUERY_SERVICE_CONFIG is the right size', () {
+    expect(sizeOf<QUERY_SERVICE_CONFIG>(), equals(64));
+  });
+  test('Struct QUERY_SERVICE_LOCK_STATUS is the right size', () {
+    expect(sizeOf<QUERY_SERVICE_LOCK_STATUS>(), equals(24));
+  });
   test('Struct RAWHID is the right size', () {
     expect(sizeOf<RAWHID>(), equals(12));
   });
@@ -822,6 +837,9 @@ void main() {
   test('Struct SCROLLINFO is the right size', () {
     expect(sizeOf<SCROLLINFO>(), equals(28));
   });
+  test('Struct SC_ACTION is the right size', () {
+    expect(sizeOf<SC_ACTION>(), equals(8));
+  });
   test('Struct SDP_ELEMENT_DATA is the right size', () {
     expect(sizeOf<SDP_ELEMENT_DATA>(), equals(24));
   });
@@ -842,6 +860,60 @@ void main() {
   });
   test('Struct SERVENT is the right size', () {
     expect(sizeOf<SERVENT>(), equals(32));
+  });
+  test('Struct SERVICE_CONTROL_STATUS_REASON_PARAMS is the right size', () {
+    expect(sizeOf<SERVICE_CONTROL_STATUS_REASON_PARAMS>(), equals(56));
+  });
+  test('Struct SERVICE_DELAYED_AUTO_START_INFO is the right size', () {
+    expect(sizeOf<SERVICE_DELAYED_AUTO_START_INFO>(), equals(4));
+  });
+  test('Struct SERVICE_DESCRIPTION is the right size', () {
+    expect(sizeOf<SERVICE_DESCRIPTION>(), equals(8));
+  });
+  test('Struct SERVICE_FAILURE_ACTIONS is the right size', () {
+    expect(sizeOf<SERVICE_FAILURE_ACTIONS>(), equals(40));
+  });
+  test('Struct SERVICE_FAILURE_ACTIONS_FLAG is the right size', () {
+    expect(sizeOf<SERVICE_FAILURE_ACTIONS_FLAG>(), equals(4));
+  });
+  test('Struct SERVICE_LAUNCH_PROTECTED_INFO is the right size', () {
+    expect(sizeOf<SERVICE_LAUNCH_PROTECTED_INFO>(), equals(4));
+  });
+  test('Struct SERVICE_NOTIFY_2 is the right size', () {
+    expect(sizeOf<SERVICE_NOTIFY_2>(), equals(80));
+  });
+  test('Struct SERVICE_PREFERRED_NODE_INFO is the right size', () {
+    expect(sizeOf<SERVICE_PREFERRED_NODE_INFO>(), equals(4));
+  });
+  test('Struct SERVICE_PRESHUTDOWN_INFO is the right size', () {
+    expect(sizeOf<SERVICE_PRESHUTDOWN_INFO>(), equals(4));
+  });
+  test('Struct SERVICE_REQUIRED_PRIVILEGES_INFO is the right size', () {
+    expect(sizeOf<SERVICE_REQUIRED_PRIVILEGES_INFO>(), equals(8));
+  });
+  test('Struct SERVICE_SID_INFO is the right size', () {
+    expect(sizeOf<SERVICE_SID_INFO>(), equals(4));
+  });
+  test('Struct SERVICE_STATUS is the right size', () {
+    expect(sizeOf<SERVICE_STATUS>(), equals(28));
+  });
+  test('Struct SERVICE_STATUS_PROCESS is the right size', () {
+    expect(sizeOf<SERVICE_STATUS_PROCESS>(), equals(36));
+  });
+  test('Struct SERVICE_TABLE_ENTRY is the right size', () {
+    expect(sizeOf<SERVICE_TABLE_ENTRY>(), equals(16));
+  });
+  test('Struct SERVICE_TIMECHANGE_INFO is the right size', () {
+    expect(sizeOf<SERVICE_TIMECHANGE_INFO>(), equals(16));
+  });
+  test('Struct SERVICE_TRIGGER is the right size', () {
+    expect(sizeOf<SERVICE_TRIGGER>(), equals(32));
+  });
+  test('Struct SERVICE_TRIGGER_INFO is the right size', () {
+    expect(sizeOf<SERVICE_TRIGGER_INFO>(), equals(24));
+  });
+  test('Struct SERVICE_TRIGGER_SPECIFIC_DATA_ITEM is the right size', () {
+    expect(sizeOf<SERVICE_TRIGGER_SPECIFIC_DATA_ITEM>(), equals(16));
   });
   test('Struct SHELLEXECUTEINFO is the right size', () {
     expect(sizeOf<SHELLEXECUTEINFO>(), equals(112));

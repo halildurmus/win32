@@ -477,6 +477,10 @@
         "prototype": "LONG ChangeDisplaySettingsExW(\n  LPCWSTR  lpszDeviceName,\n  DEVMODEW *lpDevMode,\n  HWND     hwnd,\n  DWORD    dwflags,\n  LPVOID   lParam\n);",
         "comment": "The ChangeDisplaySettingsEx function changes the settings of the specified display device to the specified graphics mode."
     },
+    "ChangeServiceConfig2": {
+        "prototype": "BOOL ChangeServiceConfig2W(\n  [in]           SC_HANDLE hService,\n  [in]           DWORD     dwInfoLevel,\n  [in, optional] LPVOID    lpInfo\n);",
+        "comment": ""
+    },
     "ChangeWindowMessageFilter": {
         "prototype": "BOOL ChangeWindowMessageFilter(\n  UINT  message,\n  DWORD dwFlag\n);",
         "comment": "Adds or removes a message from the User Interface Privilege Isolation (UIPI) message filter."
@@ -558,6 +562,10 @@
         "prototype": "void ClosePseudoConsole(\n  _In_ HPCON hPC\n);",
         "comment": "Closes a pseudoconsole from the given handle.",
         "minimumWindowsVersion": "WIN10_RS5"
+    },
+    "CloseServiceHandle": {
+        "prototype": "BOOL CloseServiceHandle(\n  [in] SC_HANDLE hSCObject\n);",
+        "comment": "Closes a handle to a service control manager or service object."
     },
     "closesocket": {
         "prototype": "int closesocket(\n  SOCKET s\n);",
@@ -673,6 +681,14 @@
         "prototype": "BOOL ContinueDebugEvent(\n  DWORD dwProcessId,\n  DWORD dwThreadId,\n  DWORD dwContinueStatus\n);",
         "comment": "Enables a debugger to continue a thread that previously reported a debugging event."
     },
+    "ControlService": {
+        "prototype": "BOOL ControlService(\n  [in]  SC_HANDLE        hService,\n  [in]  DWORD            dwControl,\n  [out] LPSERVICE_STATUS lpServiceStatus\n);",
+        "comment": "Sends a control code to a service."
+    },
+    "ControlServiceEx": {
+        "prototype": "BOOL ControlServiceExW(\n  [in]      SC_HANDLE hService,\n  [in]      DWORD     dwControl,\n  [in]      DWORD     dwInfoLevel,\n  [in, out] PVOID     pControlParams\n);",
+        "comment": "Sends a control code to a service."
+    },
     "ConvertInterfaceGuidToLuid": {
         "prototype": "ConvertInterfaceGuidToLuid(\n  [in]  const GUID *InterfaceGuid,\n  [out] PNET_LUID  InterfaceLuid\n);",
         "comment": "The ConvertInterfaceGuidToLuid function converts a globally unique identifier (GUID) for a network interface to the locally unique identifier (LUID) for the interface."
@@ -734,6 +750,18 @@
         "prototype": "HANDLE CreateActCtxW(\n  PCACTCTXW pActCtx\n);",
         "comment": "The CreateActCtx function creates an activation context."
     },
+    "CreateBitmap": {
+        "prototype": "HBITMAP CreateBitmap(\n  [in] int        nWidth,\n  [in] int        nHeight,\n  [in] UINT       nPlanes,\n  [in] UINT       nBitCount,\n  [in] const VOID *lpBits\n);",
+        "comment": "The CreateBitmap function creates a bitmap with the specified width, height, and color format (color planes and bits-per-pixel)."
+    },
+    "CreateBitmapIndirect": {
+        "prototype": "HBITMAP CreateBitmapIndirect(\n  [in] const BITMAP *pbm\n);",
+        "comment": "The CreateBitmapIndirect function creates a bitmap with the specified width, height, and color format (color planes and bits-per-pixel)."
+    },
+    "CreateCaret": {
+        "prototype": "BOOL CreateCaret(\n  [in]           HWND    hWnd,\n  [in, optional] HBITMAP hBitmap,\n  [in]           int     nWidth,\n  [in]           int     nHeight\n);",
+        "comment": "Creates a new shape for the system caret and assigns ownership of the caret to the specified window. The caret shape can be a line, a block, or a bitmap."
+    },
     "CreateCompatibleBitmap": {
         "prototype": "HBITMAP CreateCompatibleBitmap(\n  HDC hdc,\n  int cx,\n  int cy\n);",
         "comment": "The CreateCompatibleBitmap function creates a bitmap compatible with the device that is associated with the specified device context."
@@ -745,6 +773,10 @@
     "CreateConsoleScreenBuffer": {
         "prototype": "HANDLE CreateConsoleScreenBuffer(\n  _In_             DWORD               dwDesiredAccess,\n  _In_             DWORD               dwShareMode,\n  _In_opt_   const SECURITY_ATTRIBUTES *lpSecurityAttributes,\n  _In_             DWORD               dwFlags,\n  _Reserved_       LPVOID              lpScreenBufferData\n);",
         "comment": "Creates a console screen buffer."
+    },
+    "CreateCursor": {
+        "prototype": "HCURSOR CreateCursor(\n  [in, optional] HINSTANCE  hInst,\n  [in]           int        xHotSpot,\n  [in]           int        yHotSpot,\n  [in]           int        nWidth,\n  [in]           int        nHeight,\n  [in]           const VOID *pvANDPlane,\n  [in]           const VOID *pvXORPlane\n);",
+        "comment": "Creates a monochrome cursor having the specified size, bit patterns, and hot spot."
     },
     "CreateDC": {
         "prototype": "HDC CreateDCW(\n  LPCWSTR        pwszDriver,\n  LPCWSTR        pwszDevice,\n  LPCWSTR        pszPort,\n  const DEVMODEW *pdm\n);",
@@ -815,6 +847,18 @@
         "prototype": "HICON CreateIcon(\n  HINSTANCE  hInstance,\n  int        nWidth,\n  int        nHeight,\n  BYTE       cPlanes,\n  BYTE       cBitsPixel,\n  const BYTE *lpbANDbits,\n  const BYTE *lpbXORbits\n);",
         "comment": "Creates an icon that has the specified size, colors, and bit patterns."
     },
+    "CreateIconFromResource": {
+        "prototype": "HICON CreateIconFromResource(\n  [in] PBYTE presbits,\n  [in] DWORD dwResSize,\n  [in] BOOL  fIcon,\n  [in] DWORD dwVer\n);",
+        "comment": "Creates an icon or cursor from resource bits describing the icon."
+    },
+    "CreateIconFromResourceEx": {
+        "prototype": "HICON CreateIconFromResourceEx(\n  [in] PBYTE presbits,\n  [in] DWORD dwResSize,\n  [in] BOOL  fIcon,\n  [in] DWORD dwVer,\n  [in] int   cxDesired,\n  [in] int   cyDesired,\n  [in] UINT  Flags\n);",
+        "comment": "Creates an icon or cursor from resource bits describing the icon."
+    },
+    "CreateIconIndirect": {
+        "prototype": "HICON CreateIconIndirect(\n  [in] PICONINFO piconinfo\n);",
+        "comment": "Creates an icon or cursor from an ICONINFO structure."
+    },
     "CreateIoCompletionPort": {
         "prototype": "HANDLE CreateIoCompletionPort(\n  HANDLE    FileHandle,\n  HANDLE    ExistingCompletionPort,\n  ULONG_PTR CompletionKey,\n  DWORD     NumberOfConcurrentThreads\n);",
         "comment": "Creates an input/output (I/O) completion port and associates it with a specified file handle, or creates an I/O completion port that is not yet associated with a file handle, allowing association at a later time."
@@ -842,6 +886,10 @@
     "CreatePipe": {
         "prototype": "BOOL CreatePipe(\n  PHANDLE               hReadPipe,\n  PHANDLE               hWritePipe,\n  LPSECURITY_ATTRIBUTES lpPipeAttributes,\n  DWORD                 nSize\n);",
         "comment": "Creates an anonymous pipe, and returns handles to the read and write ends of the pipe."
+    },
+    "CreatePopupMenu": {
+        "prototype": "HMENU CreatePopupMenu();",
+        "comment": "Creates a drop-down menu, submenu, or shortcut menu. The menu is initially empty. You can insert or append menu items by using the InsertMenuItem function. You can also use the InsertMenu function to insert menu items and the AppendMenu function to append menu items."
     },
     "CreateProcess": {
         "prototype": "BOOL CreateProcessW(\n  LPCWSTR               lpApplicationName,\n  LPWSTR                lpCommandLine,\n  LPSECURITY_ATTRIBUTES lpProcessAttributes,\n  LPSECURITY_ATTRIBUTES lpThreadAttributes,\n  BOOL                  bInheritHandles,\n  DWORD                 dwCreationFlags,\n  LPVOID                lpEnvironment,\n  LPCWSTR               lpCurrentDirectory,\n  LPSTARTUPINFOW        lpStartupInfo,\n  LPPROCESS_INFORMATION lpProcessInformation\n);",
@@ -1005,9 +1053,21 @@
         "prototype": "DWORD DeletePrinterKeyW(\n  _In_ HANDLE  hPrinter,\n  _In_ LPCTSTR pKeyName\n);",
         "comment": "The DeletePrinterKey function deletes a specified key and all its subkeys for a specified printer."
     },
+    "DeleteService": {
+        "prototype": "BOOL DeleteService(\n  [in] SC_HANDLE hService\n);",
+        "comment": "Marks the specified service for deletion from the service control manager database."
+    },
     "DeleteVolumeMountPoint": {
         "prototype": "BOOL DeleteVolumeMountPointW(\n  [in] LPCWSTR lpszVolumeMountPoint\n);",
         "comment": "Deletes a drive letter or mounted folder."
+    },
+    "DestroyAcceleratorTable": {
+        "prototype": "BOOL DestroyAcceleratorTable(\n  [in] HACCEL hAccel\n);",
+        "comment": "Destroys an accelerator table."
+    },
+    "DestroyCaret": {
+        "prototype": "BOOL DestroyCaret();",
+        "comment": "Destroys the caret's current shape, frees the caret from the window, and removes the caret from the screen."
     },
     "DestroyCursor": {
         "prototype": "BOOL DestroyCursor(\n  HCURSOR hCursor\n);",
@@ -1279,6 +1339,10 @@
         "prototype": "UINT EnumClipboardFormats(\n  UINT format\n);",
         "comment": "Enumerates the data formats currently available on the clipboard."
     },
+    "EnumDependentServices": {
+        "prototype": "BOOL EnumDependentServicesW(\n  [in]            SC_HANDLE              hService,\n  [in]            DWORD                  dwServiceState,\n  [out, optional] LPENUM_SERVICE_STATUSW lpServices,\n  [in]            DWORD                  cbBufSize,\n  [out]           LPDWORD                pcbBytesNeeded,\n  [out]           LPDWORD                lpServicesReturned\n);",
+        "comment": "Retrieves the name and status of each service that depends on the specified service; that is, the specified service must be running before the dependent services can run."
+    },
     "EnumDesktopWindows": {
         "prototype": "BOOL EnumDesktopWindows(\n  HDESK       hDesktop,\n  WNDENUMPROC lpfn,\n  LPARAM      lParam\n);",
         "comment": "Enumerates all top-level windows associated with the specified desktop. It passes the handle to each window, in turn, to an application-defined callback function."
@@ -1354,6 +1418,14 @@
     "EnumResourceTypes": {
         "prototype": "BOOL EnumResourceTypesW(\n  HMODULE          hModule,\n  ENUMRESTYPEPROCW lpEnumFunc,\n  LONG_PTR         lParam\n);",
         "comment": "Enumerates resource types within a binary module. Starting with Windows Vista, this is typically a language-neutral Portable Executable (LN file), and the enumeration also includes resources from one of the corresponding language-specific resource files (.mui files)—if one exists—that contain localizable language resources. It is also possible to use hModule to specify a .mui file, in which case only that file is searched for resource types."
+    },
+    "EnumServicesStatus": {
+        "prototype": "BOOL EnumServicesStatusW(\n  [in]                SC_HANDLE              hSCManager,\n  [in]                DWORD                  dwServiceType,\n  [in]                DWORD                  dwServiceState,\n  [out, optional]     LPENUM_SERVICE_STATUSW lpServices,\n  [in]                DWORD                  cbBufSize,\n  [out]               LPDWORD                pcbBytesNeeded,\n  [out]               LPDWORD                lpServicesReturned,\n  [in, out, optional] LPDWORD                lpResumeHandle\n);",
+        "comment": "Enumerates services in the specified service control manager database. The name and status of each service are provided."
+    },
+    "EnumServicesStatusEx": {
+        "prototype": "BOOL EnumServicesStatusExW(\n  [in]                SC_HANDLE    hSCManager,\n  [in]                SC_ENUM_TYPE InfoLevel,\n  [in]                DWORD        dwServiceType,\n  [in]                DWORD        dwServiceState,\n  [out, optional]     LPBYTE       lpServices,\n  [in]                DWORD        cbBufSize,\n  [out]               LPDWORD      pcbBytesNeeded,\n  [out]               LPDWORD      lpServicesReturned,\n  [in, out, optional] LPDWORD      lpResumeHandle,\n  [in, optional]      LPCWSTR      pszGroupName\n);",
+        "comment": "Enumerates services in the specified service control manager database. The name and status of each service are provided, along with additional data based on the specified information level."
     },
     "EnumSystemFirmwareTables": {
         "prototype": "UINT EnumSystemFirmwareTables(\n  DWORD FirmwareTableProviderSignature,\n  PVOID pFirmwareTableEnumBuffer,\n  DWORD BufferSize\n);",
@@ -2131,6 +2203,14 @@
         "prototype": "HMENU GetMenu(\n  HWND hWnd\n);",
         "comment": "Retrieves a handle to the menu assigned to the specified window."
     },
+    "GetMenuBarInfo": {
+        "prototype": "BOOL GetMenuBarInfo(\n  [in]      HWND         hwnd,\n  [in]      LONG         idObject,\n  [in]      LONG         idItem,\n  [in, out] PMENUBARINFO pmbi\n);",
+        "comment": "Retrieves information about the specified menu bar."
+    },
+    "GetMenuDefaultItem": {
+        "prototype": "UINT GetMenuDefaultItem(\n  [in] HMENU hMenu,\n  [in] UINT  fByPos,\n  [in] UINT  gmdiFlags\n);",
+        "comment": "Determines the default menu item on the specified menu."
+    },
     "GetMenuInfo": {
         "prototype": "HMENU GetMenuInfo(\n  HMENU hMenu,\n  LPMENUINFO lpMenuInfo\n);",
         "comment": "Retrieves information about a specified menu."
@@ -2138,6 +2218,10 @@
     "GetMenuItemCount": {
         "prototype": "int GetMenuItemCount(\n  HMENU hMenu\n);",
         "comment": "Determines the number of items in the specified menu."
+    },
+    "GetMenuItemID": {
+        "prototype": "UINT GetMenuItemID(\n  [in] HMENU hMenu,\n  [in] int   nPos\n);",
+        "comment": "Retrieves the menu item identifier of a menu item located at the specified position in a menu."
     },
     "GetMenuItemInfo": {
         "prototype": "BOOL GetMenuItemInfoW(\n  HMENU           hmenu,\n  UINT            item,\n  BOOL            fByPosition,\n  LPMENUITEMINFOW lpmii\n);",
@@ -2567,6 +2651,34 @@
         "category": "winsock",
         "minimumWindowsVersion": "WIN81"
     },
+    "GetServiceDirectory": {
+        "prototype": "DWORD GetServiceDirectory(\n  SERVICE_STATUS_HANDLE  hServiceStatus,\n  SERVICE_DIRECTORY_TYPE eDirectoryType,\n  PWCHAR                 lpPathBuffer,\n  DWORD                  cchPathBufferLength,\n  DWORD                  *lpcchRequiredBufferLength\n);",
+        "comment": "Returns a path for a per-service filesystem location for a service to read and/or write state to.",
+        "minimumWindowsVersion": "WIN10_20H1"
+    },
+    "GetServiceDisplayName": {
+        "prototype": "BOOL GetServiceDisplayNameW(\n  [in]            SC_HANDLE hSCManager,\n  [in]            LPCWSTR   lpServiceName,\n  [out, optional] LPWSTR    lpDisplayName,\n  [in, out]       LPDWORD   lpcchBuffer\n);",
+        "comment": "Retrieves the display name of the specified service."
+    },
+    "GetServiceKeyName": {
+        "prototype": "BOOL GetServiceKeyNameW(\n   [in]            SC_HANDLE hSCManager,\n   [in]            LPCWSTR   lpDisplayName,\n   [out, optional] LPWSTR    lpServiceName,\n   [in, out]       LPDWORD   lpcchBuffer\n );",
+        "comment": "Retrieves the service name of the specified service."
+    },
+    "GetServiceRegistryStateKey": {
+        "prototype": "DWORD GetServiceRegistryStateKey(\n  SERVICE_STATUS_HANDLE       ServiceStatusHandle,\n  SERVICE_REGISTRY_STATE_TYPE StateType,\n  DWORD                       AccessMask,\n  HKEY                        *ServiceStateKey\n);",
+        "comment": "Returns a handle for a registry key for a service to read and/or write state to.",
+        "minimumWindowsVersion": "WIN10_20H1"
+    },
+    "GetSharedServiceDirectory": {
+        "prototype": "DWORD GetSharedServiceDirectory(\n  SC_HANDLE                     ServiceHandle,\n  SERVICE_SHARED_DIRECTORY_TYPE DirectoryType,\n  PWCHAR                        PathBuffer,\n  DWORD                         PathBufferLength,\n  DWORD                         *RequiredBufferLength\n);",
+        "comment": "Returns a path for a per-service filesystem location for a service and associated programs to read and/or write state to.",
+        "minimumWindowsVersion": "WIN11_21H2"
+    },
+    "GetSharedServiceRegistryStateKey": {
+        "prototype": "DWORD GetSharedServiceRegistryStateKey(\n  SC_HANDLE                          ServiceHandle,\n  SERVICE_SHARED_REGISTRY_STATE_TYPE StateType,\n  DWORD                              AccessMask,\n  HKEY                               *ServiceStateKey\n);",
+        "comment": "Returns a handle for a registry key for a service and associated programs to read and/or write state to.",
+        "minimumWindowsVersion": "WIN11_21H2"
+    },
     "GetShellWindow": {
         "prototype": "HWND GetShellWindow();",
         "comment": "Retrieves a handle to the Shell's desktop window."
@@ -2983,6 +3095,10 @@
         "prototype": "BOOL HideCaret(\n  HWND hWnd\n);",
         "comment": "Removes the caret from the screen. Hiding a caret does not destroy its current shape or invalidate the insertion point."
     },
+    "HiliteMenuItem": {
+        "prototype": "BOOL HiliteMenuItem(\n  [in] HWND  hWnd,\n  [in] HMENU hMenu,\n  [in] UINT  uIDHiliteItem,\n  [in] UINT  uHilite\n);",
+        "comment": "Adds or removes highlighting from an item in a menu bar."
+    },
     "htonl": {
         "prototype": "u_long htonl(\n  u_long hostlong\n);",
         "comment": "The htonl function converts a u_long from host to TCP/IP network byte order (which is big-endian).",
@@ -3267,6 +3383,10 @@
     "LoadLibraryEx": {
         "prototype": "HMODULE LoadLibraryExW(\n  [in] LPCWSTR lpLibFileName,\n       HANDLE  hFile,\n  [in] DWORD   dwFlags\n);",
         "comment": "Loads the specified module into the address space of the calling process. The specified module may cause other modules to be loaded."
+    },
+    "LoadMenu": {
+        "prototype": "HMENU LoadMenuW(\n  [in, optional] HINSTANCE hInstance,\n  [in]           LPCWSTR   lpMenuName\n);",
+        "comment": "Loads the specified menu resource from the executable (.exe) file associated with an application instance."
     },
     "LoadMenuIndirect": {
         "prototype": "HMENU LoadMenuIndirectW(\n  const MENUTEMPLATEW *lpMenuTemplate\n);",
@@ -3618,6 +3738,14 @@
         "prototype": "DWORD MsgWaitForMultipleObjectsEx(\n  DWORD        nCount,\n  const HANDLE *pHandles,\n  DWORD        dwMilliseconds,\n  DWORD        dwWakeMask,\n  DWORD        dwFlags\n);",
         "comment": "Waits until one or all of the specified objects are in the signaled state, an I/O completion routine or asynchronous procedure call (APC) is queued to the thread, or the time-out interval elapses. The array of objects can include input event objects, which you specify using the dwWakeMask parameter."
     },
+    "NotifyBootConfigStatus": {
+        "prototype": "BOOL NotifyBootConfigStatus(\n  [in] BOOL BootAcceptable\n);",
+        "comment": "Reports the boot status to the service control manager. It is used by boot verification programs. This function can be called only by a process running in the LocalSystem or Administrator's account."
+    },
+    "NotifyServiceStatusChange": {
+        "prototype": "DWORD NotifyServiceStatusChangeW(\n  [in] SC_HANDLE        hService,\n  [in] DWORD            dwNotifyMask,\n  [in] PSERVICE_NOTIFYW pNotifyBuffer\n);",
+        "comment": "Enables an application to receive notification when the specified service is created or deleted or when its status changes."
+    },
     "NotifyWinEvent": {
         "prototype": "void NotifyWinEvent(\n  DWORD event,\n  HWND  hwnd,\n  LONG  idObject,\n  LONG  idChild\n);",
         "comment": "Signals the system that a predefined event occurred. If any client applications have registered a hook function for the event, the system calls the client's hook function."
@@ -3696,6 +3824,14 @@
     "OpenProcessToken": {
         "prototype": "BOOL OpenProcessToken(\n  HANDLE  ProcessHandle,\n  DWORD   DesiredAccess,\n  PHANDLE TokenHandle\n);",
         "comment": "The OpenProcessToken function opens the access token associated with a process."
+    },
+    "OpenSCManager": {
+        "prototype": "SC_HANDLE OpenSCManagerW(\n  [in, optional] LPCWSTR lpMachineName,\n  [in, optional] LPCWSTR lpDatabaseName,\n  [in]           DWORD   dwDesiredAccess\n);",
+        "comment": "Establishes a connection to the service control manager on the specified computer and opens the specified service control manager database."
+    },
+    "OpenService": {
+        "prototype": "SC_HANDLE OpenServiceW(\n  [in] SC_HANDLE hSCManager,\n  [in] LPCWSTR   lpServiceName,\n  [in] DWORD     dwDesiredAccess\n);",
+        "comment": "Opens an existing service."
     },
     "OpenThemeData": {
         "prototype": "HTHEME OpenThemeData(\n  HWND    hwnd,\n  LPCWSTR pszClassList\n);",
@@ -3816,6 +3952,10 @@
         "prototype": "BOOL PrintWindow(\n  HWND hwnd,\n  HDC  hdcBlt,\n  UINT nFlags\n);",
         "comment": "The PrintWindow function copies a visual window into the specified device context (DC), typically a printer DC."
     },
+    "PrivateExtractIcons": {
+        "prototype": "UINT PrivateExtractIconsW(\n  [in]            LPCWSTR szFileName,\n  [in]            int     nIconIndex,\n  [in]            int     cxIcon,\n  [in]            int     cyIcon,\n  [out, optional] HICON   *phicon,\n  [out, optional] UINT    *piconid,\n  [in]            UINT    nIcons,\n  [in]            UINT    flags\n);",
+        "comment": "Creates an array of handles to icons that are extracted from a specified file."
+    },
     "ProgIDFromCLSID": {
         "prototype": "HRESULT ProgIDFromCLSID(\n  REFCLSID clsid,\n  LPOLESTR *lplpszProgID\n);",
         "comment": "Retrieves the ProgID for a given CLSID."
@@ -3855,6 +3995,30 @@
     "QueryPerformanceFrequency": {
         "prototype": "BOOL QueryPerformanceFrequency(\n  LARGE_INTEGER *lpFrequency\n);",
         "comment": "Retrieves the frequency of the performance counter. The frequency of the performance counter is fixed at system boot and is consistent across all processors. Therefore, the frequency need only be queried upon application initialization, and the result can be cached."
+    },
+    "QueryServiceConfig": {
+        "prototype": "BOOL QueryServiceConfigW(\n  [in]            SC_HANDLE               hService,\n  [out, optional] LPQUERY_SERVICE_CONFIGW lpServiceConfig,\n  [in]            DWORD                   cbBufSize,\n  [out]           LPDWORD                 pcbBytesNeeded\n);",
+        "comment": "Retrieves the configuration parameters of the specified service. Optional configuration parameters are available using the QueryServiceConfig2 function."
+    },
+    "QueryServiceConfig2": {
+        "prototype": "BOOL QueryServiceConfig2W(\n  [in]            SC_HANDLE hService,\n  [in]            DWORD     dwInfoLevel,\n  [out, optional] LPBYTE    lpBuffer,\n  [in]            DWORD     cbBufSize,\n  [out]           LPDWORD   pcbBytesNeeded\n);",
+        "comment": "Retrieves the optional configuration parameters of the specified service."
+    },
+    "QueryServiceDynamicInformation": {
+        "prototype": "BOOL QueryServiceDynamicInformation(\n  [in] SERVICE_STATUS_HANDLE hServiceStatus,\n  [in] DWORD                 dwInfoLevel,\n       PVOID                 *ppDynamicInfo\n);",
+        "comment": "Retrieves dynamic information related to the current service start."
+    },
+    "QueryServiceObjectSecurity": {
+        "prototype": "BOOL QueryServiceObjectSecurity(\n  [in]            SC_HANDLE            hService,\n  [in]            SECURITY_INFORMATION dwSecurityInformation,\n  [out, optional] PSECURITY_DESCRIPTOR lpSecurityDescriptor,\n  [in]            DWORD                cbBufSize,\n  [out]           LPDWORD              pcbBytesNeeded\n);",
+        "comment": "The QueryServiceObjectSecurity function retrieves a copy of the security descriptor associated with a service object. You can also use the GetNamedSecurityInfo function to retrieve a security descriptor."
+    },
+    "QueryServiceStatus": {
+        "prototype": "BOOL QueryServiceStatus(\n  [in]  SC_HANDLE        hService,\n  [out] LPSERVICE_STATUS lpServiceStatus\n);",
+        "comment": "Retrieves the current status of the specified service."
+    },
+    "QueryServiceStatusEx": {
+        "prototype": "BOOL QueryServiceStatusEx(\n  [in]            SC_HANDLE      hService,\n  [in]            SC_STATUS_TYPE InfoLevel,\n  [out, optional] LPBYTE         lpBuffer,\n  [in]            DWORD          cbBufSize,\n  [out]           LPDWORD        pcbBytesNeeded\n);",
+        "comment": "Retrieves the current status of the specified service based on the specified information level."
     },
     "ReadConsole": {
         "prototype": "BOOL ReadConsoleW(\n  _In_     HANDLE  hConsoleInput,\n  _Out_    LPVOID  lpBuffer,\n  _In_     DWORD   nNumberOfCharsToRead,\n  _Out_    LPDWORD lpNumberOfCharsRead,\n  _In_opt_ LPVOID  pInputControl\n);",
@@ -4016,6 +4180,14 @@
     "RegisterRawInputDevices": {
         "prototype": "BOOL RegisterRawInputDevices(\n  PCRAWINPUTDEVICE pRawInputDevices,\n  UINT             uiNumDevices,\n  UINT             cbSize\n);",
         "comment": "Registers the devices that supply the raw input data."
+    },
+    "RegisterServiceCtrlHandler": {
+        "prototype": "SERVICE_STATUS_HANDLE RegisterServiceCtrlHandlerW(\n  [in] LPCWSTR            lpServiceName,\n  [in] LPHANDLER_FUNCTION lpHandlerProc\n);",
+        "comment": "Registers a function to handle service control requests."
+    },
+    "RegisterServiceCtrlHandlerEx": {
+        "prototype": "SERVICE_STATUS_HANDLE RegisterServiceCtrlHandlerExW(\n  [in]           LPCWSTR               lpServiceName,\n  [in]           LPHANDLER_FUNCTION_EX lpHandlerProc,\n  [in, optional] LPVOID                lpContext\n);",
+        "comment": "Registers a function to handle extended service control requests."
     },
     "RegisterTouchHitTestingWindow": {
         "prototype": "BOOL RegisterTouchHitTestingWindow(\n  HWND  hwnd,\n  ULONG value\n);",
@@ -4755,6 +4927,14 @@
         "prototype": "int SetMapMode(\n  HDC hdc,\n  int iMode\n);",
         "comment": "The SetMapMode function sets the mapping mode of the specified device context. The mapping mode defines the unit of measure used to transform page-space units into device-space units, and also defines the orientation of the device's x and y axes."
     },
+    "SetMenu": {
+        "prototype": "BOOL SetMenu(\n  [in]           HWND  hWnd,\n  [in, optional] HMENU hMenu\n);",
+        "comment": "Assigns a new menu to the specified window."
+    },
+    "SetMenuDefaultItem": {
+        "prototype": "BOOL SetMenuDefaultItem(\n  [in] HMENU hMenu,\n  [in] UINT  uItem,\n  [in] UINT  fByPos\n);",
+        "comment": "Sets the default menu item for the specified menu."
+    },
     "SetMenuInfo": {
         "prototype": "BOOL SetMenuInfo(\n  HMENU       hmenu,\n  LPCMENUINFO lpmi\n);",
         "comment": "Sets information for a specified menu."
@@ -4806,6 +4986,10 @@
     "SetParent": {
         "prototype": "HWND SetParent(\n  HWND hWndChild,\n  HWND hWndNewParent\n);",
         "comment": "Changes the parent window of the specified child window."
+    },
+    "SetPhysicalCursorPos": {
+        "prototype": "BOOL SetPhysicalCursorPos(\n  [in] int X,\n  [in] int Y\n);",
+        "comment": "Sets the position of the cursor in physical coordinates."
     },
     "SetPixel": {
         "prototype": "COLORREF SetPixel(\n  HDC      hdc,\n  int      x,\n  int      y,\n  COLORREF color\n);",
@@ -4870,6 +5054,14 @@
     "SetScrollInfo": {
         "prototype": "int SetScrollInfo(\n  HWND          hwnd,\n  int           nBar,\n  LPCSCROLLINFO lpsi,\n  BOOL          redraw\n);",
         "comment": "The SetScrollInfo function sets the parameters of a scroll bar, including the minimum and maximum scrolling positions, the page size, and the position of the scroll box (thumb). The function also redraws the scroll bar, if requested."
+    },
+    "SetServiceObjectSecurity": {
+        "prototype": "BOOL SetServiceObjectSecurity(\n  [in] SC_HANDLE            hService,\n  [in] SECURITY_INFORMATION dwSecurityInformation,\n  [in] PSECURITY_DESCRIPTOR lpSecurityDescriptor\n);",
+        "comment": "The SetServiceObjectSecurity function sets the security descriptor of a service object."
+    },
+    "SetServiceStatus": {
+        "prototype": "BOOL SetServiceStatus(\n  [in] SERVICE_STATUS_HANDLE hServiceStatus,\n  [in] LPSERVICE_STATUS      lpServiceStatus\n);",
+        "comment": "Updates the service control manager's status information for the calling service."
     },
     "SetStdHandle": {
         "prototype": "BOOL SetStdHandle(\n  _In_ DWORD  nStdHandle,\n  _In_ HANDLE hHandle\n);",
@@ -5152,6 +5344,14 @@
         "comment": "The StartPagePrinter function notifies the spooler that a page is about to be printed on the specified printer.",
         "category": "winspool"
     },
+    "StartService": {
+        "prototype": "BOOL StartServiceW(\n  [in]           SC_HANDLE hService,\n  [in]           DWORD     dwNumServiceArgs,\n  [in, optional] LPCWSTR   *lpServiceArgVectors\n);",
+        "comment": "Starts a service."
+    },
+    "StartServiceCtrlDispatcher": {
+        "prototype": "BOOL StartServiceCtrlDispatcherW(\n  [in] const SERVICE_TABLE_ENTRYW *lpServiceStartTable\n);",
+        "comment": "Connects the main thread of a service process to the service control manager, which causes the thread to be the service control dispatcher thread for the calling process."
+    },
     "StretchBlt": {
         "prototype": "BOOL StretchBlt(\n  HDC   hdcDest,\n  int   xDest,\n  int   yDest,\n  int   wDest,\n  int   hDest,\n  HDC   hdcSrc,\n  int   xSrc,\n  int   ySrc,\n  int   wSrc,\n  int   hSrc,\n  DWORD rop\n);",
         "comment": "The StretchBlt function copies a bitmap from a source rectangle into a destination rectangle, stretching or compressing the bitmap to fit the dimensions of the destination rectangle, if necessary. The system stretches or compresses the bitmap according to the stretching mode currently set in the destination device context."
@@ -5361,6 +5561,10 @@
     "ToUnicodeEx": {
         "prototype": "int ToUnicodeEx(\n  UINT       wVirtKey,\n  UINT       wScanCode,\n  const BYTE *lpKeyState,\n  LPWSTR     pwszBuff,\n  int        cchBuff,\n  UINT       wFlags,\n  HKL        dwhkl\n);",
         "comment": "Translates the specified virtual-key code and keyboard state to the corresponding Unicode character or characters."
+    },
+    "TrackPopupMenu": {
+        "prototype": "BOOL TrackPopupMenu(\n  [in]           HMENU      hMenu,\n  [in]           UINT       uFlags,\n  [in]           int        x,\n  [in]           int        y,\n  [in]           int        nReserved,\n  [in]           HWND       hWnd,\n  [in, optional] const RECT *prcRect\n);",
+        "comment": "Displays a shortcut menu at the specified location and tracks the selection of items on the menu. The shortcut menu can appear anywhere on the screen."
     },
     "TrackPopupMenuEx": {
         "prototype": "BOOL TrackPopupMenuEx(\n  HMENU hMenu,\n  UINT uFlags,\n  int x,\n  int y,\n  HWND hwnd,\n  TPMPARAMS *lptpm\n);",
