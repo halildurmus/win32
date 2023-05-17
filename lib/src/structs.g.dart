@@ -3139,6 +3139,32 @@ base class ENUM_PAGE_FILE_INFORMATION extends Struct {
   external int PeakUsage;
 }
 
+/// Contains the name of a service in a service control manager database and
+/// information about that service. It is used by the EnumDependentServices
+/// and EnumServicesStatus functions.
+///
+/// {@category Struct}
+base class ENUM_SERVICE_STATUS extends Struct {
+  external Pointer<Utf16> lpServiceName;
+
+  external Pointer<Utf16> lpDisplayName;
+
+  external SERVICE_STATUS ServiceStatus;
+}
+
+/// Contains the name of a service in a service control manager database and
+/// information about the service. It is used by the EnumServicesStatusEx
+/// function.
+///
+/// {@category Struct}
+base class ENUM_SERVICE_STATUS_PROCESS extends Struct {
+  external Pointer<Utf16> lpServiceName;
+
+  external Pointer<Utf16> lpDisplayName;
+
+  external SERVICE_STATUS_PROCESS ServiceStatusProcess;
+}
+
 /// Contains information about a hardware message sent to the system message
 /// queue. This structure is used to store message information for the
 /// JournalPlaybackProc callback function.
@@ -5020,6 +5046,25 @@ base class MEMORY_BASIC_INFORMATION extends Struct {
 
   @Uint32()
   external int Type;
+}
+
+/// Contains menu bar information.
+///
+/// {@category Struct}
+base class MENUBARINFO extends Struct {
+  @Uint32()
+  external int cbSize;
+
+  external RECT rcBar;
+
+  @IntPtr()
+  external int hMenu;
+
+  @IntPtr()
+  external int hwndMenu;
+
+  @Int32()
+  external int bitfield;
 }
 
 /// Contains information about a menu.
@@ -7214,6 +7259,48 @@ base class PROTOENT extends Struct {
   external int p_proto;
 }
 
+/// Contains configuration information for an installed service. It is used
+/// by the QueryServiceConfig function.
+///
+/// {@category Struct}
+base class QUERY_SERVICE_CONFIG extends Struct {
+  @Uint32()
+  external int dwServiceType;
+
+  @Uint32()
+  external int dwStartType;
+
+  @Uint32()
+  external int dwErrorControl;
+
+  external Pointer<Utf16> lpBinaryPathName;
+
+  external Pointer<Utf16> lpLoadOrderGroup;
+
+  @Uint32()
+  external int dwTagId;
+
+  external Pointer<Utf16> lpDependencies;
+
+  external Pointer<Utf16> lpServiceStartName;
+
+  external Pointer<Utf16> lpDisplayName;
+}
+
+/// Contains information about the lock status of a service control manager
+/// database. It is used by the QueryServiceLockStatus function.
+///
+/// {@category Struct}
+base class QUERY_SERVICE_LOCK_STATUS extends Struct {
+  @Uint32()
+  external int fIsLocked;
+
+  external Pointer<Utf16> lpLockOwner;
+
+  @Uint32()
+  external int dwLockDuration;
+}
+
 /// Describes the format of the raw input from a Human Interface Device
 /// (HID).
 ///
@@ -7577,6 +7664,17 @@ base class SCROLLINFO extends Struct {
   external int nTrackPos;
 }
 
+/// Represents an action that the service control manager can perform.
+///
+/// {@category Struct}
+base class SC_ACTION extends Struct {
+  @Int32()
+  external int Type;
+
+  @Uint32()
+  external int Delay;
+}
+
 /// The SDP_ELEMENT_DATA structure stores SDP element data.
 ///
 /// {@category Struct}
@@ -7861,6 +7959,261 @@ base class SERVENT extends Struct {
 
   @Int16()
   external int s_port;
+}
+
+/// Contains service control parameters.
+///
+/// {@category Struct}
+base class SERVICE_CONTROL_STATUS_REASON_PARAMS extends Struct {
+  @Uint32()
+  external int dwReason;
+
+  external Pointer<Utf16> pszComment;
+
+  external SERVICE_STATUS_PROCESS ServiceStatus;
+}
+
+/// Contains the delayed auto-start setting of an auto-start service.
+///
+/// {@category Struct}
+base class SERVICE_DELAYED_AUTO_START_INFO extends Struct {
+  @Int32()
+  external int fDelayedAutostart;
+}
+
+/// Contains a service description.
+///
+/// {@category Struct}
+base class SERVICE_DESCRIPTION extends Struct {
+  external Pointer<Utf16> lpDescription;
+}
+
+/// Represents the action the service controller should take on each failure
+/// of a service. A service is considered failed when it terminates without
+/// reporting a status of SERVICE_STOPPED to the service controller.
+///
+/// {@category Struct}
+base class SERVICE_FAILURE_ACTIONS extends Struct {
+  @Uint32()
+  external int dwResetPeriod;
+
+  external Pointer<Utf16> lpRebootMsg;
+
+  external Pointer<Utf16> lpCommand;
+
+  @Uint32()
+  external int cActions;
+
+  external Pointer<SC_ACTION> lpsaActions;
+}
+
+/// Contains the failure actions flag setting of a service. This setting
+/// determines when failure actions are to be executed.
+///
+/// {@category Struct}
+base class SERVICE_FAILURE_ACTIONS_FLAG extends Struct {
+  @Int32()
+  external int fFailureActionsOnNonCrashFailures;
+}
+
+/// Indicates a service protection type.
+///
+/// {@category Struct}
+base class SERVICE_LAUNCH_PROTECTED_INFO extends Struct {
+  @Uint32()
+  external int dwLaunchProtected;
+}
+
+/// Represents service status notification information. It is used by the
+/// NotifyServiceStatusChange function.
+///
+/// {@category Struct}
+base class SERVICE_NOTIFY_2 extends Struct {
+  @Uint32()
+  external int dwVersion;
+
+  external Pointer<NativeFunction<PfnScNotifyCallbackFunction>>
+      pfnNotifyCallback;
+
+  external Pointer pContext;
+
+  @Uint32()
+  external int dwNotificationStatus;
+
+  external SERVICE_STATUS_PROCESS ServiceStatus;
+
+  @Uint32()
+  external int dwNotificationTriggered;
+
+  external Pointer<Utf16> pszServiceNames;
+}
+
+/// Represents the preferred node on which to run a service.
+///
+/// {@category Struct}
+base class SERVICE_PREFERRED_NODE_INFO extends Struct {
+  @Uint16()
+  external int usPreferredNode;
+
+  @Uint8()
+  external int fDelete;
+}
+
+/// Contains preshutdown settings.
+///
+/// {@category Struct}
+base class SERVICE_PRESHUTDOWN_INFO extends Struct {
+  @Uint32()
+  external int dwPreshutdownTimeout;
+}
+
+/// Represents the required privileges for a service.
+///
+/// {@category Struct}
+base class SERVICE_REQUIRED_PRIVILEGES_INFO extends Struct {
+  external Pointer<Utf16> pmszRequiredPrivileges;
+}
+
+/// Represents a service security identifier (SID).
+///
+/// {@category Struct}
+base class SERVICE_SID_INFO extends Struct {
+  @Uint32()
+  external int dwServiceSidType;
+}
+
+/// Contains status information for a service. The ControlService,
+/// EnumDependentServices, EnumServicesStatus, and QueryServiceStatus
+/// functions use this structure. A service uses this structure in the
+/// SetServiceStatus function to report its current status to the service
+/// control manager.
+///
+/// {@category Struct}
+base class SERVICE_STATUS extends Struct {
+  @Uint32()
+  external int dwServiceType;
+
+  @Uint32()
+  external int dwCurrentState;
+
+  @Uint32()
+  external int dwControlsAccepted;
+
+  @Uint32()
+  external int dwWin32ExitCode;
+
+  @Uint32()
+  external int dwServiceSpecificExitCode;
+
+  @Uint32()
+  external int dwCheckPoint;
+
+  @Uint32()
+  external int dwWaitHint;
+}
+
+/// Contains process status information for a service. The ControlServiceEx,
+/// EnumServicesStatusEx, NotifyServiceStatusChange, and
+/// QueryServiceStatusEx functions use this structure.
+///
+/// {@category Struct}
+base class SERVICE_STATUS_PROCESS extends Struct {
+  @Uint32()
+  external int dwServiceType;
+
+  @Uint32()
+  external int dwCurrentState;
+
+  @Uint32()
+  external int dwControlsAccepted;
+
+  @Uint32()
+  external int dwWin32ExitCode;
+
+  @Uint32()
+  external int dwServiceSpecificExitCode;
+
+  @Uint32()
+  external int dwCheckPoint;
+
+  @Uint32()
+  external int dwWaitHint;
+
+  @Uint32()
+  external int dwProcessId;
+
+  @Uint32()
+  external int dwServiceFlags;
+}
+
+/// Specifies the ServiceMain function for a service that can run in the
+/// calling process. It is used by the StartServiceCtrlDispatcher function.
+///
+/// {@category Struct}
+base class SERVICE_TABLE_ENTRY extends Struct {
+  external Pointer<Utf16> lpServiceName;
+
+  external Pointer<NativeFunction<LpserviceMainFunctionw>> lpServiceProc;
+}
+
+/// Contains system time change settings.
+///
+/// {@category Struct}
+base class SERVICE_TIMECHANGE_INFO extends Struct {
+  @Int64()
+  external int liNewTime;
+
+  @Int64()
+  external int liOldTime;
+}
+
+/// Represents a service trigger event. This structure is used by the
+/// SERVICE_TRIGGER_INFO structure.
+///
+/// {@category Struct}
+base class SERVICE_TRIGGER extends Struct {
+  @Uint32()
+  external int dwTriggerType;
+
+  @Uint32()
+  external int dwAction;
+
+  external Pointer<GUID> pTriggerSubtype;
+
+  @Uint32()
+  external int cDataItems;
+
+  external Pointer<SERVICE_TRIGGER_SPECIFIC_DATA_ITEM> pDataItems;
+}
+
+/// Contains trigger event information for a service. This structure is used
+/// by the ChangeServiceConfig2 and QueryServiceConfig2 functions.
+///
+/// {@category Struct}
+base class SERVICE_TRIGGER_INFO extends Struct {
+  @Uint32()
+  external int cTriggers;
+
+  external Pointer<SERVICE_TRIGGER> pTriggers;
+
+  external Pointer<Uint8> pReserved;
+}
+
+/// Contains trigger-specific data for a service trigger event. This
+/// structure is used by the SERVICE_TRIGGER structure for
+/// SERVICE_TRIGGER_TYPE_CUSTOM, SERVICE_TRIGGER_TYPE_DEVICE_ARRIVAL,
+/// SERVICE_TRIGGER_TYPE_FIREWALL_PORT_EVENT, or
+/// SERVICE_TRIGGER_TYPE_NETWORK_ENDPOINT trigger events.
+///
+/// {@category Struct}
+base class SERVICE_TRIGGER_SPECIFIC_DATA_ITEM extends Struct {
+  @Uint32()
+  external int dwDataType;
+
+  @Uint32()
+  external int cbData;
+
+  external Pointer<Uint8> pData;
 }
 
 /// Contains information used by ShellExecuteEx.

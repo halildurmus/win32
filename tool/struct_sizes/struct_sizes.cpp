@@ -170,6 +170,8 @@ void main()
     printf("  'ELEMDESC': %zu,\n", sizeof(ELEMDESC));
     printf("  'ENUMLOGFONTEX': %zu,\n", sizeof(ENUMLOGFONTEXW));
     printf("  'ENUM_PAGE_FILE_INFORMATION': %zu,\n", sizeof(ENUM_PAGE_FILE_INFORMATION));
+    printf("  'ENUM_SERVICE_STATUS': %zu,\n", sizeof(ENUM_SERVICE_STATUSW));
+    printf("  'ENUM_SERVICE_STATUS_PROCESS': %zu,\n", sizeof(ENUM_SERVICE_STATUS_PROCESSW));
     printf("  'EVENTMSG': %zu,\n", sizeof(EVENTMSG));
     printf("  'EXCEPINFO': %zu,\n", sizeof(EXCEPINFO));
     printf("  'FD_SET': %zu,\n", sizeof(FD_SET));
@@ -229,6 +231,7 @@ void main()
     printf("  'MCI_STATUS_PARMS': %zu,\n", sizeof(MCI_STATUS_PARMS));
     printf("  'MEMORYSTATUSEX': %zu,\n", sizeof(MEMORYSTATUSEX));
     printf("  'MEMORY_BASIC_INFORMATION': %zu,\n", sizeof(MEMORY_BASIC_INFORMATION));
+    printf("  'MENUBARINFO': %zu,\n", sizeof(MENUBARINFO));
     printf("  'MENUINFO': %zu,\n", sizeof(MENUINFO));
     printf("  'MENUITEMINFO': %zu,\n", sizeof(MENUITEMINFOW));
     printf("  'MENUITEMTEMPLATE': %zu,\n", sizeof(MENUITEMTEMPLATE));
@@ -304,6 +307,8 @@ void main()
     printf("  'PROPERTYKEY': %zu,\n", sizeof(PROPERTYKEY));
     printf("  'PROPSPEC': %zu,\n", sizeof(PROPSPEC));
     printf("  'PROTOENT': %zu,\n", sizeof(PROTOENT));
+    printf("  'QUERY_SERVICE_CONFIG': %zu,\n", sizeof(QUERY_SERVICE_CONFIGW));
+    printf("  'QUERY_SERVICE_LOCK_STATUS': %zu,\n", sizeof(QUERY_SERVICE_LOCK_STATUSW));
     printf("  'RAWHID': %zu,\n", sizeof(RAWHID));
     printf("  'RAWINPUT': %zu,\n", sizeof(RAWINPUT));
     printf("  'RAWINPUTDEVICE': %zu,\n", sizeof(RAWINPUTDEVICE));
@@ -321,6 +326,7 @@ void main()
     printf("  'SCARD_READERSTATE': %zu,\n", sizeof(SCARD_READERSTATEW));
     printf("  'SCROLLBARINFO': %zu,\n", sizeof(SCROLLBARINFO));
     printf("  'SCROLLINFO': %zu,\n", sizeof(SCROLLINFO));
+    printf("  'SC_ACTION': %zu,\n", sizeof(SC_ACTION));
     printf("  'SDP_ELEMENT_DATA': %zu,\n", sizeof(SDP_ELEMENT_DATA));
     printf("  'SDP_LARGE_INTEGER_16': %zu,\n", sizeof(SDP_LARGE_INTEGER_16));
     printf("  'SDP_STRING_TYPE_DATA': %zu,\n", sizeof(SDP_STRING_TYPE_DATA));
@@ -328,6 +334,24 @@ void main()
     printf("  'SECURITY_ATTRIBUTES': %zu,\n", sizeof(SECURITY_ATTRIBUTES));
     printf("  'SECURITY_DESCRIPTOR': %zu,\n", sizeof(SECURITY_DESCRIPTOR));
     printf("  'SERVENT': %zu,\n", sizeof(SERVENT));
+    printf("  'SERVICE_CONTROL_STATUS_REASON_PARAMS': %zu,\n", sizeof(SERVICE_CONTROL_STATUS_REASON_PARAMSW));
+    printf("  'SERVICE_DELAYED_AUTO_START_INFO': %zu,\n", sizeof(SERVICE_DELAYED_AUTO_START_INFO));
+    printf("  'SERVICE_DESCRIPTION': %zu,\n", sizeof(SERVICE_DESCRIPTIONW));
+    printf("  'SERVICE_FAILURE_ACTIONS': %zu,\n", sizeof(SERVICE_FAILURE_ACTIONSW));
+    printf("  'SERVICE_FAILURE_ACTIONS_FLAG': %zu,\n", sizeof(SERVICE_FAILURE_ACTIONS_FLAG));
+    printf("  'SERVICE_LAUNCH_PROTECTED_INFO': %zu,\n", sizeof(SERVICE_LAUNCH_PROTECTED_INFO));
+    printf("  'SERVICE_NOTIFY_2': %zu,\n", sizeof(SERVICE_NOTIFY_2W));
+    printf("  'SERVICE_PREFERRED_NODE_INFO': %zu,\n", sizeof(SERVICE_PREFERRED_NODE_INFO));
+    printf("  'SERVICE_PRESHUTDOWN_INFO': %zu,\n", sizeof(SERVICE_PRESHUTDOWN_INFO));
+    printf("  'SERVICE_REQUIRED_PRIVILEGES_INFO': %zu,\n", sizeof(SERVICE_REQUIRED_PRIVILEGES_INFOW));
+    printf("  'SERVICE_SID_INFO': %zu,\n", sizeof(SERVICE_SID_INFO));
+    printf("  'SERVICE_STATUS': %zu,\n", sizeof(SERVICE_STATUS));
+    printf("  'SERVICE_STATUS_PROCESS': %zu,\n", sizeof(SERVICE_STATUS_PROCESS));
+    printf("  'SERVICE_TABLE_ENTRY': %zu,\n", sizeof(SERVICE_TABLE_ENTRYW));
+    printf("  'SERVICE_TIMECHANGE_INFO': %zu,\n", sizeof(SERVICE_TIMECHANGE_INFO));
+    printf("  'SERVICE_TRIGGER': %zu,\n", sizeof(SERVICE_TRIGGER));
+    printf("  'SERVICE_TRIGGER_INFO': %zu,\n", sizeof(SERVICE_TRIGGER_INFO));
+    printf("  'SERVICE_TRIGGER_SPECIFIC_DATA_ITEM': %zu,\n", sizeof(SERVICE_TRIGGER_SPECIFIC_DATA_ITEM));
     printf("  'SHELLEXECUTEINFO': %zu,\n", sizeof(SHELLEXECUTEINFOW));
     printf("  'SHELL_ITEM_RESOURCE': %zu,\n", sizeof(SHELL_ITEM_RESOURCE));
     printf("  'SHFILEINFO': %zu,\n", sizeof(SHFILEINFOW));
