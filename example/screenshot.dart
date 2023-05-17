@@ -74,10 +74,14 @@ class Display {
   }
 
   void _saveToFile(Arena arena, String fileName, int hdcScreen, int hbmScreen) {
+    final bmp = _prepareBytes(arena, hdcScreen, hbmScreen);
+    _writeFile(arena, fileName, bmp);
+  }
+
+  BmpBinary _prepareBytes(Arena arena, int hdcScreen, int hbmScreen) {
     final bmpScreen = arena<BITMAP>();
     GetObject(hbmScreen, sizeOf<BITMAP>(), bmpScreen);
 
-    final bitmapFileHeader = arena<BITMAPFILEHEADER>();
     final bitmapInfoHeader = arena<BITMAPINFOHEADER>()
       ..ref.biSize = sizeOf<BITMAPINFOHEADER>()
       ..ref.biWidth = bmpScreen.ref.bmWidth
@@ -95,9 +99,33 @@ class Display {
 
     final lpBitmap = arena<Uint8>(dwBmpSize);
 
-    GetDIBits(hdcScreen, hbmScreen, 0, bmpScreen.ref.bmHeight, lpBitmap,
-        bitmapInfoHeader.cast(), DIB_RGB_COLORS);
+    GetDIBits(
+      hdcScreen,
+      hbmScreen,
+      0,
+      bmpScreen.ref.bmHeight,
+      lpBitmap,
+      bitmapInfoHeader.cast(),
+      DIB_RGB_COLORS,
+    );
 
+    final bitmapFileHeader = arena<BITMAPFILEHEADER>();
+    final dwSizeOfDIB =
+        dwBmpSize + sizeOf<BITMAPFILEHEADER>() + sizeOf<BITMAPINFOHEADER>();
+    bitmapFileHeader.ref.bfOffBits =
+        sizeOf<BITMAPFILEHEADER>() + sizeOf<BITMAPINFOHEADER>();
+
+    bitmapFileHeader.ref.bfSize = dwSizeOfDIB;
+    bitmapFileHeader.ref.bfType = 0x4D42; // BM
+
+    return (bitmapFileHeader, bitmapInfoHeader, lpBitmap, dwBmpSize);
+  }
+
+  void _writeFile(
+    Arena arena,
+    String fileName,
+    BmpBinary data,
+  ) {
     final hFile = CreateFile(
       fileName.toNativeUtf16(allocator: arena),
       GENERIC_WRITE,
@@ -108,23 +136,40 @@ class Display {
       NULL,
     );
 
-    final dwSizeOfDIB =
-        dwBmpSize + sizeOf<BITMAPFILEHEADER>() + sizeOf<BITMAPINFOHEADER>();
-    bitmapFileHeader.ref.bfOffBits =
-        sizeOf<BITMAPFILEHEADER>() + sizeOf<BITMAPINFOHEADER>();
-
-    bitmapFileHeader.ref.bfSize = dwSizeOfDIB;
-    bitmapFileHeader.ref.bfType = 0x4D42; // BM
-
+    final (bitmapFileHeader, bitmapInfoHeader, lpBitmap, dwBmpSize) = data;
     final dwBytesWritten = arena<DWORD>();
-    WriteFile(hFile, bitmapFileHeader.cast(), sizeOf<BITMAPFILEHEADER>(),
-        dwBytesWritten, nullptr);
-    WriteFile(hFile, bitmapInfoHeader.cast(), sizeOf<BITMAPINFOHEADER>(),
-        dwBytesWritten, nullptr);
-    WriteFile(hFile, lpBitmap, dwBmpSize, dwBytesWritten, nullptr);
+
+    WriteFile(
+      hFile,
+      bitmapFileHeader.cast(),
+      sizeOf<BITMAPFILEHEADER>(),
+      dwBytesWritten,
+      nullptr,
+    );
+    WriteFile(
+      hFile,
+      bitmapInfoHeader.cast(),
+      sizeOf<BITMAPINFOHEADER>(),
+      dwBytesWritten,
+      nullptr,
+    );
+    WriteFile(
+      hFile,
+      lpBitmap,
+      dwBmpSize,
+      dwBytesWritten,
+      nullptr,
+    );
 
     CloseHandle(hFile);
   }
 
   String get name => rawName.replaceAll(RegExp(r'[^a-zA-Z\d]'), "");
 }
+
+typedef BmpBinary = (
+  Pointer<BITMAPFILEHEADER>,
+  Pointer<BITMAPINFOHEADER>,
+  Pointer<Uint8>,
+  int lpBitmap,
+);
