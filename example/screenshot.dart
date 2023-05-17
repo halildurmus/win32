@@ -22,9 +22,8 @@ class Displays {
     final device = calloc<DISPLAY_DEVICE>()..ref.cb = sizeOf<DISPLAY_DEVICE>();
     var deviceIndex = 0;
 
-    while (EnumDisplayDevices(nullptr, deviceIndex, device.cast(), 0) != 0) {
-      final isTurnOn = device.ref.StateFlags != 0;
-      yield Display(device.ref.DeviceName, isTurnOn);
+    while (EnumDisplayDevices(nullptr, deviceIndex, device, 0) != 0) {
+      yield Display(device.ref.DeviceName, device.ref.StateFlags);
       deviceIndex++;
     }
   }
@@ -32,9 +31,8 @@ class Displays {
 
 class Display {
   final String rawName;
-  final bool isTurnOn;
 
-  Display(this.rawName, this.isTurnOn);
+  Display(this.rawName, this._stateFlags);
 
   void saveScreenshot(String fileName) {
     using((arena) {
@@ -74,6 +72,12 @@ class Display {
   }
 
   String get name => rawName.replaceAll(RegExp(r'[^a-zA-Z\d]'), "");
+
+  final int _stateFlags;
+
+  bool get isTurnOn {
+    return (_stateFlags & DISPLAY_DEVICE_ACTIVE) == DISPLAY_DEVICE_ACTIVE;
+  }
 }
 
 class BmpFile {
@@ -182,8 +186,8 @@ class BmpFile {
 }
 
 typedef BmpBinary = (
-    int dwBmpSize,
-    Pointer<BITMAPFILEHEADER> bitmapFileHeader,
-    Pointer<BITMAPINFOHEADER> bitmapInfoHeader,
-    Pointer<Uint8> lpBitmap,
+  int dwBmpSize,
+  Pointer<BITMAPFILEHEADER> bitmapFileHeader,
+  Pointer<BITMAPINFOHEADER> bitmapInfoHeader,
+  Pointer<Uint8> lpBitmap,
 );
