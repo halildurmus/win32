@@ -41,7 +41,7 @@ class Display {
       final hdcScreen = _createDC(arena);
       final hbmScreen = _createScreenshot(hdcScreen);
 
-      _saveToFile(arena, fileName, hdcScreen, hbmScreen);
+      BmpFile(hdcScreen, hbmScreen).save(fileName);
 
       ReleaseDC(NULL, hdcScreen);
       DeleteObject(hbmScreen);
@@ -73,12 +73,23 @@ class Display {
     }
   }
 
-  void _saveToFile(Arena arena, String fileName, int hdcScreen, int hbmScreen) {
-    final bmp = _prepareBytes(arena, hdcScreen, hbmScreen);
-    _writeFile(arena, fileName, bmp);
+  String get name => rawName.replaceAll(RegExp(r'[^a-zA-Z\d]'), "");
+}
+
+class BmpFile {
+  final int hdcScreen;
+  final int hbmScreen;
+
+  BmpFile(this.hdcScreen, this.hbmScreen);
+
+  void save(String fileName) {
+    using((arena) {
+      final bmpStructure = _prepareBmpBinary(arena);
+      _writeFile(arena, fileName, bmpStructure);
+    });
   }
 
-  BmpBinary _prepareBytes(Arena arena, int hdcScreen, int hbmScreen) {
+  BmpBinary _prepareBmpBinary(Arena arena) {
     final bmpScreen = arena<BITMAP>();
     GetObject(hbmScreen, sizeOf<BITMAP>(), bmpScreen);
 
@@ -118,13 +129,13 @@ class Display {
     bitmapFileHeader.ref.bfSize = dwSizeOfDIB;
     bitmapFileHeader.ref.bfType = 0x4D42; // BM
 
-    return (bitmapFileHeader, bitmapInfoHeader, lpBitmap, dwBmpSize);
+    return (dwBmpSize, bitmapFileHeader, bitmapInfoHeader, lpBitmap);
   }
 
   void _writeFile(
     Arena arena,
     String fileName,
-    BmpBinary data,
+    BmpBinary bmpFileStructure,
   ) {
     final hFile = CreateFile(
       fileName.toNativeUtf16(allocator: arena),
@@ -136,8 +147,13 @@ class Display {
       NULL,
     );
 
-    final (bitmapFileHeader, bitmapInfoHeader, lpBitmap, dwBmpSize) = data;
     final dwBytesWritten = arena<DWORD>();
+    final (
+      dwBmpSize,
+      bitmapFileHeader,
+      bitmapInfoHeader,
+      lpBitmap,
+    ) = bmpFileStructure;
 
     WriteFile(
       hFile,
@@ -163,13 +179,11 @@ class Display {
 
     CloseHandle(hFile);
   }
-
-  String get name => rawName.replaceAll(RegExp(r'[^a-zA-Z\d]'), "");
 }
 
 typedef BmpBinary = (
-  Pointer<BITMAPFILEHEADER>,
-  Pointer<BITMAPINFOHEADER>,
-  Pointer<Uint8>,
-  int lpBitmap,
+    int dwBmpSize,
+    Pointer<BITMAPFILEHEADER> bitmapFileHeader,
+    Pointer<BITMAPINFOHEADER> bitmapInfoHeader,
+    Pointer<Uint8> lpBitmap,
 );
