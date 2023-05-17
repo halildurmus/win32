@@ -39,23 +39,23 @@ class Display {
   Display(this.rawName, this._stateFlags);
 
   void saveScreenshot(String fileName) {
-    using((arena) {
-      final hdcScreen = _createDC(arena);
-      final hbmScreen = _createScreenshot(hdcScreen);
+    final hdcScreen = _createDC();
+    final hbmScreen = _createScreenshot(hdcScreen);
 
-      BmpFile(hdcScreen, hbmScreen).save(fileName);
+    BmpFile(hdcScreen, hbmScreen).save(fileName);
 
-      ReleaseDC(NULL, hdcScreen);
-      DeleteObject(hbmScreen);
-    });
+    ReleaseDC(NULL, hdcScreen);
+    DeleteObject(hbmScreen);
   }
 
-  int _createDC(Arena arena) {
-    return CreateDC(
-      nullptr,
-      rawName.toNativeUtf16(allocator: arena),
-      nullptr,
-      nullptr,
+  int _createDC() {
+    return using(
+      (arena) => CreateDC(
+        nullptr,
+        rawName.toNativeUtf16(allocator: arena),
+        nullptr,
+        nullptr,
+      ),
     );
   }
 
