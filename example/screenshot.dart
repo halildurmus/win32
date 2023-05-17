@@ -22,9 +22,13 @@ class Displays {
     final device = calloc<DISPLAY_DEVICE>()..ref.cb = sizeOf<DISPLAY_DEVICE>();
     var deviceIndex = 0;
 
-    while (EnumDisplayDevices(nullptr, deviceIndex, device, 0) != 0) {
-      yield Display(device.ref.DeviceName, device.ref.StateFlags);
-      deviceIndex++;
+    try {
+      while (EnumDisplayDevices(nullptr, deviceIndex, device, 0) != 0) {
+        yield Display(device.ref.DeviceName, device.ref.StateFlags);
+        deviceIndex++;
+      }
+    } finally {
+      free(device);
     }
   }
 }
