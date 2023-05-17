@@ -37,17 +37,24 @@ class Display {
   Display(this.rawName, this.isTurnOn);
 
   void saveScreenshot(String fileName) {
-    final hdcScreen = _createDC();
-    try {
+    using((arena) {
+      final hdcScreen = _createDC(arena);
       final hbmScreen = _createScreenshot(hdcScreen);
-      _saveToFile(fileName, hdcScreen, hbmScreen);
-    } finally {
+
+      _saveToFile(arena, fileName, hdcScreen, hbmScreen);
+
       ReleaseDC(NULL, hdcScreen);
-    }
+      DeleteObject(hbmScreen);
+    });
   }
 
-  int _createDC() {
-    return CreateDC(nullptr, rawName.toNativeUtf16(), nullptr, nullptr);
+  int _createDC(Arena arena) {
+    return CreateDC(
+      nullptr,
+      rawName.toNativeUtf16(allocator: arena),
+      nullptr,
+      nullptr,
+    );
   }
 
   int _createScreenshot(int hdcScreen) {
@@ -66,12 +73,12 @@ class Display {
     }
   }
 
-  void _saveToFile(String fileName, int hdcScreen, int hbmScreen) {
-    final bmpScreen = calloc<BITMAP>();
+  void _saveToFile(Arena arena, String fileName, int hdcScreen, int hbmScreen) {
+    final bmpScreen = arena<BITMAP>();
     GetObject(hbmScreen, sizeOf<BITMAP>(), bmpScreen);
 
-    final bitmapFileHeader = calloc<BITMAPFILEHEADER>();
-    final bitmapInfoHeader = calloc<BITMAPINFOHEADER>()
+    final bitmapFileHeader = arena<BITMAPFILEHEADER>();
+    final bitmapInfoHeader = arena<BITMAPINFOHEADER>()
       ..ref.biSize = sizeOf<BITMAPINFOHEADER>()
       ..ref.biWidth = bmpScreen.ref.bmWidth
       ..ref.biHeight = bmpScreen.ref.bmHeight
@@ -86,13 +93,20 @@ class Display {
                 bmpScreen.ref.bmHeight)
             .toInt();
 
-    final lpBitmap = calloc<Uint8>(dwBmpSize);
+    final lpBitmap = arena<Uint8>(dwBmpSize);
 
     GetDIBits(hdcScreen, hbmScreen, 0, bmpScreen.ref.bmHeight, lpBitmap,
         bitmapInfoHeader.cast(), DIB_RGB_COLORS);
 
-    final hFile = CreateFile(TEXT(fileName), GENERIC_WRITE, 0, nullptr,
-        CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+    final hFile = CreateFile(
+      fileName.toNativeUtf16(allocator: arena),
+      GENERIC_WRITE,
+      0,
+      nullptr,
+      CREATE_ALWAYS,
+      FILE_ATTRIBUTE_NORMAL,
+      NULL,
+    );
 
     final dwSizeOfDIB =
         dwBmpSize + sizeOf<BITMAPFILEHEADER>() + sizeOf<BITMAPINFOHEADER>();
@@ -102,7 +116,7 @@ class Display {
     bitmapFileHeader.ref.bfSize = dwSizeOfDIB;
     bitmapFileHeader.ref.bfType = 0x4D42; // BM
 
-    final dwBytesWritten = calloc<DWORD>();
+    final dwBytesWritten = arena<DWORD>();
     WriteFile(hFile, bitmapFileHeader.cast(), sizeOf<BITMAPFILEHEADER>(),
         dwBytesWritten, nullptr);
     WriteFile(hFile, bitmapInfoHeader.cast(), sizeOf<BITMAPINFOHEADER>(),
