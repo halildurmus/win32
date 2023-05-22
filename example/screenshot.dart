@@ -11,7 +11,7 @@ import 'package:win32/win32.dart';
 
 void main() {
   for (final display in Displays.all()) {
-    if (display.isTurnOn) {
+    if (display.isConnected) {
       display.saveScreenshot("${display.name}.bmp");
     }
   }
@@ -79,7 +79,7 @@ class Display {
 
   final int _stateFlags;
 
-  bool get isTurnOn {
+  bool get isConnected {
     return (_stateFlags & DISPLAY_DEVICE_ACTIVE) == DISPLAY_DEVICE_ACTIVE;
   }
 }
