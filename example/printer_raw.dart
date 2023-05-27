@@ -1,7 +1,7 @@
 // Sends RAW data (string or hex sequences) directly to the printer
 
 // Example taken from:
-// https://docs.microsoft.com/en-us/windows/win32/printdocs/sending-data-directly-to-a-printer
+// https://learn.microsoft.com/windows/win32/printdocs/sending-data-directly-to-a-printer
 
 import 'dart:ffi';
 
@@ -21,21 +21,21 @@ class RawPrinter {
     final pPrinterName = printerName.toNativeUtf16(allocator: alloc);
     final phPrinter = alloc<HANDLE>();
 
-    // https://docs.microsoft.com/en-us/windows/win32/printdocs/openprinter
+    // https://learn.microsoft.com/windows/win32/printdocs/openprinter
     var fSuccess = OpenPrinter(pPrinterName, phPrinter, nullptr);
     if (fSuccess == 0) {
       final error = GetLastError();
       throw Exception('OpenPrint error, status: $fSuccess, error: $error');
     }
 
-    // https://docs.microsoft.com/en-us/windows/win32/printdocs/doc-info-1
+    // https://learn.microsoft.com/windows/win32/printdocs/doc-info-1
     final pDocInfo = alloc<DOC_INFO_1>()
       ..ref.pDocName = printerName.toNativeUtf16(allocator: alloc)
       ..ref.pDatatype =
           dataType.toNativeUtf16(allocator: alloc) // RAW, TEXT or XPS_PASS
       ..ref.pOutputFile = nullptr;
 
-    //https://docs.microsoft.com/en-us/windows/win32/printdocs/startdocprinter
+    //https://learn.microsoft.com/windows/win32/printdocs/startdocprinter
     fSuccess = StartDocPrinter(
         phPrinter.value,
         1, // Version of the structure to which pDocInfo points.
@@ -50,7 +50,7 @@ class RawPrinter {
   }
 
   bool _startRawPrintPage(Pointer<HANDLE> phPrinter) {
-    //https://docs.microsoft.com/en-us/windows/win32/printdocs/startpageprinter
+    //https://learn.microsoft.com/windows/win32/printdocs/startpageprinter
     return StartPagePrinter(phPrinter.value) != 0;
   }
 
@@ -67,7 +67,7 @@ class RawPrinter {
     final cWritten = alloc<DWORD>();
     final data = dataToPrint.toNativeUtf8(allocator: alloc);
 
-    // https://docs.microsoft.com/en-us/windows/win32/printdocs/writeprinter
+    // https://learn.microsoft.com/windows/win32/printdocs/writeprinter
     final result =
         WritePrinter(phPrinter.value, data, dataToPrint.length, cWritten);
 

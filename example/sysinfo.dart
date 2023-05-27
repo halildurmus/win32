@@ -14,7 +14,7 @@ bool testFlag(int value, int attribute) => value & attribute == attribute;
 /// Test for a minimum version of Windows.
 ///
 /// Per:
-/// https://docs.microsoft.com/en-us/windows/win32/api/sysinfoapi/nf-sysinfoapi-getversionexw,
+/// https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-getversionexw,
 /// applications not manifested for Windows 8.1 or Windows 10 will return the
 /// Windows 8 OS version value (6.2).
 bool isWindowsVersionAtLeast(int majorVersion, int minorVersion) {
@@ -148,7 +148,7 @@ Object getRegistryValue(int key, String subKey, String valueName) {
 /// Uses the GetSystemPowerStatus API call to get information about the battery.
 /// More information on the reported values can be found in the Windows API
 /// documentation, here:
-/// https://docs.microsoft.com/en-us/windows/win32/api/winbase/ns-winbase-system_power_status
+/// https://learn.microsoft.com/windows/win32/api/winbase/ns-winbase-system_power_status
 void printPowerInfo() {
   final powerStatus = calloc<SYSTEM_POWER_STATUS>();
 

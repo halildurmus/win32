@@ -10,7 +10,7 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 void main() {
-  // https://docs.microsoft.com/en-us/windows-hardware/drivers/install/overview-of-device-setup-classes
+  // https://learn.microsoft.com/windows-hardware/drivers/install/overview-of-device-setup-classes
   using((Arena arena) {
     final deviceGuid = arena<GUID>()..ref.setGUID(GUID_DEVCLASS_NET);
 
@@ -26,7 +26,7 @@ void main() {
     }
   });
 
-  // https://docs.microsoft.com/en-us/windows-hardware/drivers/install/overview-of-device-interface-classes
+  // https://learn.microsoft.com/windows-hardware/drivers/install/overview-of-device-interface-classes
   using((Arena arena) {
     final interfaceGuid = arena<GUID>()..ref.setGUID(GUID_DEVINTERFACE_HID);
 

@@ -5,7 +5,7 @@
 // Dart implementation of the Win32 sample of configuring a comms resource.
 
 // C++ implementation can be found here:
-// https://docs.microsoft.com/en-us/windows/win32/devio/configuring-a-communications-resource
+// https://learn.microsoft.com/windows/win32/devio/configuring-a-communications-resource
 
 // This sample assumes that you have a working COM serial port.
 

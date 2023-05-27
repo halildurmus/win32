@@ -5,7 +5,7 @@
 // Example of retrieving a sensor using the Sensor API.
 
 // C++ implementation can be found here:
-// https://docs.microsoft.com/en-us/windows/win32/sensorsapi/retrieving-a-sensor
+// https://learn.microsoft.com/windows/win32/sensorsapi/retrieving-a-sensor
 
 import 'dart:ffi';
 

@@ -101,7 +101,7 @@ void main() {
 }
 
 // Documentation on this function here:
-// https://docs.microsoft.com/en-us/windows/win32/dlgbox/using-dialog-boxes
+// https://learn.microsoft.com/windows/win32/dlgbox/using-dialog-boxes
 int dialogReturnProc(int hwndDlg, int message, int wParam, int lParam) {
   switch (message) {
     case WM_INITDIALOG:

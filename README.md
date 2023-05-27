@@ -21,7 +21,7 @@ This package lets you write apps that use the Windows API directly from Dart, by
 wrapping common Win32 and COM APIs using Dart FFI.
 
 You could use it to call a Win32 API like
-[EnumFontFamiliesEx](https://docs.microsoft.com/en-us/windows/win32/api/wingdi/nf-wingdi-enumfontfamiliesexw)
+[EnumFontFamiliesEx](https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-enumfontfamiliesexw)
 to enumerate all locally-installed fonts:
 
 ![Fonts screenshot](https://github.com/dart-windows/win32/blob/main/doc/images/fonts.png?raw=true)

@@ -10,7 +10,7 @@
 // https://github.com/dotnet/runtime/blob/main/src/libraries/System.Private.CoreLib/src/System/Guid.cs
 
 // The GUID structure as used in Win32 is documented here:
-// https://docs.microsoft.com/en-us/windows/win32/api/guiddef/ns-guiddef-guid
+// https://learn.microsoft.com/windows/win32/api/guiddef/ns-guiddef-guid
 
 // ignore_for_file: camel_case_types
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names

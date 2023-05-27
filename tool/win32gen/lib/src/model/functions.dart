@@ -5,7 +5,7 @@ import 'dart:io';
 /// Maps between Windows versions and the corresponding build numbers
 ///
 /// Details from:
-/// https://docs.microsoft.com/en-us/windows/release-health/release-information
+/// https://learn.microsoft.com/windows/release-health/release-information
 const windowsBuilds = <String, int>{
   'WIN8': 9200,
   'WIN81': 9600,

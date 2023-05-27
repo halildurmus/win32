@@ -9,9 +9,9 @@ Some tips:
 
 - When wrapping a Win32 API, use the Unicode ('W') wide variants of these APIs,
   rather than the ANSI ('A') variants. For example:
-  [CredWriteW](https://docs.microsoft.com/en-us/windows/win32/api/wincred/nf-wincred-credwritew),
+  [CredWriteW](https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credwritew),
   rather than
-  [CredWriteA](https://docs.microsoft.com/en-us/windows/win32/api/wincred/nf-wincred-credwritea).
+  [CredWriteA](https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credwritea).
 
 - To create a new API, *don't* edit the main library files themselves; these get
   overwritten. Instead, edit `win32_functions.json` in the `data\` folder and run
