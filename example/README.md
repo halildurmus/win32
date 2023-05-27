@@ -13,49 +13,49 @@ following location:
 
 ## Windows system APIs (kernel32)
 
-| Example               | Description                                               |
-| --------------------- | --------------------------------------------------------- |
-| `credentials.dart`    | Adds a credential to the store and retrieves it           |
-| `dump.dart`           | Use debugger libraries to print DLL exported functions    |
-| `dynamic_load.dart`   | Demonstrate loading a DLL and calling it at runtime       |
-| `filever.dart`        | Getting file version information from the file resource   |
-| `manifest\`           | Demonstrates the use of app manifests for compiled apps   |
-| `modules.dart`        | Enumerates all loaded modules on the current system       |
-| `pipe.dart`           | Shows use of named pipes for interprocess communication   |
-| `registry.dart`       | Demonstrates querying the registry for values             |
-| `vt.dart`             | Shows virtual terminal sequences                          |
-| `wsl.dart`            | Retrieve information from a WSL instance through APIs     |
+| Example             | Description                                             |
+| ------------------- | ------------------------------------------------------- |
+| `credentials.dart`  | Adds a credential to the store and retrieves it         |
+| `dump.dart`         | Use debugger libraries to print DLL exported functions  |
+| `dynamic_load.dart` | Demonstrate loading a DLL and calling it at runtime     |
+| `filever.dart`      | Getting file version information from the file resource |
+| `manifest\`         | Demonstrates the use of app manifests for compiled apps |
+| `modules.dart`      | Enumerates all loaded modules on the current system     |
+| `pipe.dart`         | Shows use of named pipes for interprocess communication |
+| `registry.dart`     | Demonstrates querying the registry for values           |
+| `vt.dart`           | Shows virtual terminal sequences                        |
+| `wsl.dart`          | Retrieve information from a WSL instance through APIs   |
 
 ## Accessing local hardware and devices
 
-| Example               | Description                                               |
-| --------------------- | --------------------------------------------------------- |
-| `bluetooth.dart`      | Demonstrate enumerating Bluetooth devices                 |
-| `bluetoothle.dart`    | Enumerate Bluetooth LE (Low Energy) devices               |
-| `devices.dart`        | Uses volume management APIs to list all disk devices      |
-| `diskinfo.dart`       | Use `DeviceIoControl()` for direct device operations      |
-| `gamepad.dart`        | Show which gamepads are connected                         |
-| `midi.dart`           | Demonstrates MIDI playback using MCI commands             |
-| `monitor.dart`        | Uses DDC and monitor-config API to get monitor caps       |
-| `play_sound.dart`     | Plays a WAV file through the Windows `PlaySound` API      |
-| `printer_list.dart`   | Enumerate available printers on the Windows system        |
-| `printer_raw.dart`    | Sends RAW data directly to a Windows Printer              |
-| `serial.dart`         | Demonstrates serial port management                       |
-| `setupapi.dart`       | Show using setup APIs to retrieve device interfaces       |
-| `speech.dart`         | Use Windows speech engine for text-to-speech              |
-| `sysinfo.dart`        | Examples of getting device information from native C APIs |
-| `wasapi.dart`         | Demonstrates sound generation with WASAPI library         |
+| Example             | Description                                               |
+| ------------------- | --------------------------------------------------------- |
+| `bluetooth.dart`    | Demonstrate enumerating Bluetooth devices                 |
+| `bluetoothle.dart`  | Enumerate Bluetooth LE (Low Energy) devices               |
+| `devices.dart`      | Uses volume management APIs to list all disk devices      |
+| `diskinfo.dart`     | Use `DeviceIoControl()` for direct device operations      |
+| `gamepad.dart`      | Show which gamepads are connected                         |
+| `midi.dart`         | Demonstrates MIDI playback using MCI commands             |
+| `monitor.dart`      | Uses DDC and monitor-config API to get monitor caps       |
+| `play_sound.dart`   | Plays a WAV file through the Windows `PlaySound` API      |
+| `printer_list.dart` | Enumerate available printers on the Windows system        |
+| `printer_raw.dart`  | Sends RAW data directly to a Windows Printer              |
+| `serial.dart`       | Demonstrates serial port management                       |
+| `setupapi.dart`     | Show using setup APIs to retrieve device interfaces       |
+| `speech.dart`       | Use Windows speech engine for text-to-speech              |
+| `sysinfo.dart`      | Examples of getting device information from native C APIs |
+| `wasapi.dart`       | Demonstrates sound generation with WASAPI library         |
 
 ## Windows shell manipulation (shell32)
 
-| Example               | Description                                             |
-| --------------------- |---------------------------------------------------------|
-| `knownfolder.dart`    | Retrieves known folders from the current user profile   |
-| `magnifier.dart`      | Provides a magnifier window using the Magnification API |
-| `recycle_bin.dart`    | Queries the recycle bin and adds an item to it          |
-| `screenshot.dart`     | Takes snapshots of all connected displays               |
-| `shortcut.dart`       | Demonstrates creating a Windows shell link              |
-| `wallpaper.dart`      | Shows what wallpaper and background color are set       |
+| Example            | Description                                             |
+| ------------------ | ------------------------------------------------------- |
+| `knownfolder.dart` | Retrieves known folders from the current user profile   |
+| `magnifier.dart`   | Provides a magnifier window using the Magnification API |
+| `recycle_bin.dart` | Queries the recycle bin and adds an item to it          |
+| `screenshot.dart`  | Takes snapshots of all connected displays               |
+| `shortcut.dart`    | Demonstrates creating a Windows shell link              |
+| `wallpaper.dart`   | Shows what wallpaper and background color are set       |
 
 ## Win32-style UI development (user32, gdi32, commdlg32)
 
@@ -79,18 +79,19 @@ following location:
 
 ## COM APIs
 
-| Example               | Description                                               |
-| --------------------- | --------------------------------------------------------- |
-| `com_context.dart`    | Shows interaction of Dart isolates and COM apartments     |
-| `com_demo.dart`       | Demonstrates COM object reference counting                |
-| `guid.dart`           | Creates a globally unique identifier (GUID)               |
-| `idispatch.dart`      | Demonstrates calling a method using `IDispatch`           |
-| `winmd.dart`          | Interrogate Windows Runtime types                         |
-| `wmi_perf.dart`       | Uses WMI to retrieve performance counters                 |
-| `wmi_wql.dart`        | Uses WMI to retrieve information using WQL                |
+| Example             | Description                                           |
+| ------------------- | ----------------------------------------------------- |
+| `com_context.dart`  | Shows interaction of Dart isolates and COM apartments |
+| `com_demo.dart`     | Demonstrates COM object reference counting            |
+| `guid.dart`         | Creates a globally unique identifier (GUID)           |
+| `idispatch.dart`    | Demonstrates calling a method using `IDispatch`       |
+| `uiautomation.dart` | Demonstrates calling Windows UI Automation APIs       |
+| `winmd.dart`        | Interrogate Windows Runtime types                     |
+| `wmi_perf.dart`     | Uses WMI to retrieve performance counters             |
+| `wmi_wql.dart`      | Uses WMI to retrieve information using WQL            |
 
 ## Flutter
 
-| Example               | Description                                               |
-| --------------------- | --------------------------------------------------------- |
-| `explorer\`           | Example Flutter app that uses Win32 file picker APIs      |
+| Example     | Description                                          |
+| ----------- | ---------------------------------------------------- |
+| `explorer\` | Example Flutter app that uses Win32 file picker APIs |

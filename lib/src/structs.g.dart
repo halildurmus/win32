@@ -3214,6 +3214,15 @@ base class EXCEPINFO extends Struct {
   external int scode;
 }
 
+/// Contains information about an extended property.
+///
+/// {@category Struct}
+base class ExtendedProperty extends Struct {
+  external Pointer<Utf16> PropertyName;
+
+  external Pointer<Utf16> PropertyValue;
+}
+
 /// The fd_set structure is used by various Windows Sockets functions and
 /// service providers, such as the select function, to place sockets into a
 /// set for various purposes, such as testing a given socket for readability
