@@ -12,7 +12,7 @@ import 'helpers.dart';
 void main() {
   test('Spellcheck', () {
     // ISpellCheckerFactory is only available on Windows 8 or higher, per:
-    // https://docs.microsoft.com/en-us/windows/win32/api/spellcheck/nn-spellcheck-ispellcheckerfactory
+    // https://learn.microsoft.com/windows/win32/api/spellcheck/nn-spellcheck-ispellcheckerfactory
     if (getWindowsBuildNumber() >= 9200) {
       var hr = CoInitializeEx(
           nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);

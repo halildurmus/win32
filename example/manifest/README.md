@@ -9,7 +9,7 @@ same version information, regardless of whether you are running Windows 8,
 Windows 8.1, or Windows 10.
 
 You can tell Windows that your app is aware of later versions with an [app
-manifest](https://docs.microsoft.com/en-us/windows/win32/sysinfo/targeting-your-application-at-windows-8-1),
+manifest](https://learn.microsoft.com/windows/win32/sysinfo/targeting-your-application-at-windows-8-1),
 which opts your app into new behavior.
 
 You can see this behavior in action by running `version.dart` (which calls

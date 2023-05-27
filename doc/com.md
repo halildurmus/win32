@@ -25,7 +25,7 @@ if (FAILED(hr)) throw WindowsException(hr);
 ### Creating a COM object
 
 You can create COM objects using the [C
-library](https://docs.microsoft.com/en-us/windows/win32/learnwin32/creating-an-object-in-com):
+library](https://learn.microsoft.com/windows/win32/learnwin32/creating-an-object-in-com):
 
 ```dart
 hr = CoCreateInstance(clsid, nullptr, CLSCTX_INPROC_SERVER, iid, ppv);
@@ -53,7 +53,7 @@ may call `queryInterface` on any object to retrieve a pointer to a different
 supported interface.
 
 More information on COM interfaces may be found in the [Microsoft
-documentation](https://docs.microsoft.com/en-us/windows/win32/learnwin32/asking-an-object-for-an-interface).
+documentation](https://learn.microsoft.com/windows/win32/learnwin32/asking-an-object-for-an-interface).
 
 COM interfaces supply a method that wraps `queryInterface`. If you have an
 existing COM object, you can call it as follows:

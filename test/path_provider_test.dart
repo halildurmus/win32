@@ -439,7 +439,7 @@ class PathProviderWindows {
   }
 
   /// Makes [rawString] safe as a directory component. See
-  /// https://docs.microsoft.com/en-us/windows/win32/fileio/naming-a-file#naming-conventions
+  /// https://learn.microsoft.com/windows/win32/fileio/naming-a-file#naming-conventions
   ///
   /// If after sanitizing the string is empty, returns null.
   String? _sanitizedDirectoryName(String? rawString) {

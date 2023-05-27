@@ -17,7 +17,7 @@ The format for the JSON file (`win32_functions.json`) is as follows:
         // The API prototype, as presented in Windows docs
         // Note that this should include a 'W' postfix if the declared function
         // has both Unicode and ANSI variants. See:
-        // https://docs.microsoft.com/en-us/windows/win32/intl/unicode-in-the-windows-api
+        // https://learn.microsoft.com/windows/win32/intl/unicode-in-the-windows-api
         //
         // The version presented in the docs is inconsistent -- some docs
         // include it, others don't -- so pay attention here. If you get a

@@ -339,7 +339,7 @@ int mainWindowProc(int hwnd, int msg, int wParam, int lParam) {
       // Handling this event allows us to extend the client (paintable) area
       // into the title bar region.
       //
-      // Per https://docs.microsoft.com/en-us/windows/win32/dwm/customframe :
+      // Per https://learn.microsoft.com/windows/win32/dwm/customframe :
       //
       // "To remove the standard window frame, you must handle the WM_NCCALCSIZE
       // message, specifically when its wParam value is TRUE and the return
