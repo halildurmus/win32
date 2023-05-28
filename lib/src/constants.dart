@@ -9616,3 +9616,1102 @@ class APTTYPE {
   /// The main single-threaded apartment.
   static const APTTYPE_MAINSTA = 3;
 }
+
+/// Contains values that specify the type of reference to use when returning UI
+/// Automation elements.
+///
+/// {@category Enum}
+class AutomationElementMode {
+  /// Specifies that returned elements have no reference to the underlying UI
+  /// and contain only cached information.
+  static const AutomationElementMode_None = 0;
+
+  /// Specifies that returned elements have a full reference to the underlying
+  /// UI.
+  static const AutomationElementMode_Full = 0x1;
+}
+
+/// Contains possible values for the CoalesceEvents property, which indicates
+/// whether an accessible technology client receives all events, or a subset
+/// where duplicate events are detected and filtered.
+///
+/// {@category Enum}
+class CoalesceEventsOptions {
+  /// Event coalescing is disabled.
+  static const CoalesceEventsOptions_Disabled = 0;
+
+  /// Event coalescing is enabled.
+  static const CoalesceEventsOptions_Enabled = 0x1;
+}
+
+/// Contains possible values for the ConnectionRecoveryBehavior property, which
+/// indicates whether an accessible technology client adjusts provider request
+/// timeouts when the provider is non-responsive.
+///
+/// {@category Enum}
+class ConnectionRecoveryBehaviorOptions {
+  /// Connection recovery is disabled.
+  static const ConnectionRecoveryBehaviorOptions_Disabled = 0;
+
+  /// Connection recovery is enabled.
+  static const ConnectionRecoveryBehaviorOptions_Enabled = 0x1;
+}
+
+/// The PropertyConditionFlags (uiautomationclient.h) enumeration contains
+/// values used in creating property conditions.
+///
+/// {@category Enum}
+class PropertyConditionFlags {
+  /// No flags.
+  static const PropertyConditionFlags_None = 0;
+
+  /// Comparison of string properties is not case-sensitive.
+  static const PropertyConditionFlags_IgnoreCase = 0x1;
+
+  /// Comparison of substring properties is enabled.
+  static const PropertyConditionFlags_MatchSubstring = 0x2;
+}
+
+/// Contains values that specify the direction and distance to scroll.
+///
+/// {@category Enum}
+class ScrollAmount {
+  /// Scrolling is done in large decrements, equivalent to pressing the PAGE UP
+  /// key or clicking on a blank part of a scroll bar.
+  static const ScrollAmount_LargeDecrement = 0;
+
+  /// Scrolling is done in small decrements, equivalent to pressing an arrow
+  /// key or clicking the arrow button on a scroll bar.
+  static const ScrollAmount_SmallDecrement = 1;
+
+  /// No scrolling is done.
+  static const ScrollAmount_NoAmount = 2;
+
+  /// Scrolling is done in large increments, equivalent to pressing the PAGE
+  /// DOWN or PAGE UP key or clicking on a blank part of a scroll bar.
+  static const ScrollAmount_LargeIncrement = 3;
+
+  /// Scrolling is done in small increments, equivalent to pressing an arrow
+  /// key or clicking the arrow button on a scroll bar.
+  static const ScrollAmount_SmallIncrement = 4;
+}
+
+/// Contains values that specify the toggle state of a Microsoft UI Automation
+/// element that implements the Toggle control pattern.
+///
+/// {@category Enum}
+class ToggleState {
+  /// The UI Automation element is not selected, checked, marked or otherwise
+  /// activated.
+  static const ToggleState_Off = 0;
+
+  /// The UI Automation element is selected, checked, marked or otherwise
+  /// activated.
+  static const ToggleState_On = 1;
+
+  /// The UI Automation element is in an indeterminate state.
+  static const ToggleState_Indeterminate = 2;
+}
+
+/// The TreeScope enumeration contains values that specify the scope of various
+/// operations in the Microsoft UI Automation tree.
+class TreeScope {
+  /// The scope excludes the subtree from the search.
+  static const TreeScope_None = 0;
+
+  /// The scope includes the element itself.
+  static const TreeScope_Element = 0x1;
+
+  /// The scope includes children of the element.
+  static const TreeScope_Children = 0x2;
+
+  /// The scope includes children and more distant descendants of the element.
+  static const TreeScope_Descendants = 0x4;
+
+  /// The scope includes the parent of the element.
+  static const TreeScope_Parent = 0x8;
+
+  /// The scope includes the parent and more distant ancestors of the element.
+  static const TreeScope_Ancestors = 0x10;
+
+  /// The scope includes the element and all its descendants. This flag is a
+  /// combination of the TreeScope_Element and TreeScope_Descendants values.
+  static const TreeScope_Subtree = 0x7;
+}
+
+/// The TreeTraversalOptions enumeration defines values that can be used to
+/// customize tree navigation order.
+///
+/// {@category Enum}
+class TreeTraversalOptions {
+  /// Pre-order, visit children from first to last.
+  static const TreeTraversalOptions_Default = 0;
+
+  /// Post-order.
+  static const TreeTraversalOptions_PostOrder = 0x1;
+
+  /// Visit children from last to first.
+  static const TreeTraversalOptions_LastToFirstOrder = 0x2;
+}
+
+/// Contains values that specify the current state of the window for purposes
+/// of user interaction.
+///
+/// {@category Enum}
+class WindowInteractionState {
+  /// The window is running. This does not guarantee that the window is ready
+  /// for user interaction or is responding.
+  static const WindowInteractionState_Running = 0;
+
+  /// The window is closing.
+  static const WindowInteractionState_Closing = 1;
+
+  /// The window is ready for user interaction.
+  static const WindowInteractionState_ReadyForUserInteraction = 2;
+
+  /// The window is blocked by a modal window.
+  static const WindowInteractionState_BlockedByModalWindow = 3;
+
+  /// The window is not responding.
+  static const WindowInteractionState_NotResponding = 4;
+}
+
+/// Contains values that specify the visual state of a window.
+///
+/// {@category Enum}
+class WindowVisualState {
+  /// The window is normal (restored).
+  static const WindowVisualState_Normal = 0;
+
+  /// The window is maximized.
+  static const WindowVisualState_Maximized = 1;
+
+  /// The window is minimized.
+  static const WindowVisualState_Minimized = 2;
+}
+
+// -----------------------------------------------------------------------------
+// UI Automation Control Pattern constants
+// -----------------------------------------------------------------------------
+
+/// Identifies the Annotation control pattern.
+const UIA_AnnotationPatternId = 10023;
+
+/// Identifies the CustomNavigation control pattern.
+const UIA_CustomNavigationPatternId = 10033;
+
+/// Identifies the Dock control pattern.
+const UIA_DockPatternId = 10011;
+
+/// Identifies the Drag control pattern.
+const UIA_DragPatternId = 10030;
+
+/// Identifies the DropTarget control pattern.
+const UIA_DropTargetPatternId = 10031;
+
+/// Identifies the ExpandCollapse control pattern.
+const UIA_ExpandCollapsePatternId = 10005;
+
+/// Identifies the GridItem control pattern.
+const UIA_GridItemPatternId = 10007;
+
+/// Identifies the Grid control pattern.
+const UIA_GridPatternId = 10006;
+
+/// Identifies the Invoke control pattern.
+const UIA_InvokePatternId = 10000;
+
+/// Identifies the ItemContainer control pattern.
+const UIA_ItemContainerPatternId = 10019;
+
+/// Identifies the LegacyIAccessible control pattern.
+const UIA_LegacyIAccessiblePatternId = 10018;
+
+/// Identifies the MultipleView control pattern.
+const UIA_MultipleViewPatternId = 10008;
+
+/// Identifies the ObjectModel control pattern.
+const UIA_ObjectModelPatternId = 10022;
+
+/// Identifies the RangeValue control pattern.
+const UIA_RangeValuePatternId = 10003;
+
+/// Identifies the ScrollItem control pattern.
+const UIA_ScrollItemPatternId = 10017;
+
+/// Identifies the Scroll control pattern.
+const UIA_ScrollPatternId = 10004;
+
+/// Identifies the SelectionItem control pattern.
+const UIA_SelectionItemPatternId = 10010;
+
+/// Identifies the Selection control pattern.
+const UIA_SelectionPatternId = 10001;
+
+/// Identifies the Spreadsheet control pattern.
+const UIA_SpreadsheetPatternId = 10026;
+
+/// Identifies the SpreadsheetItem control pattern.
+const UIA_SpreadsheetItemPatternId = 10027;
+
+/// Identifies the Styles control pattern.
+const UIA_StylesPatternId = 10025;
+
+/// Identifies the SynchronizedInput control pattern.
+const UIA_SynchronizedInputPatternId = 10021;
+
+/// Identifies the TableItem control pattern.
+const UIA_TableItemPatternId = 10013;
+
+/// Identifies the Table control pattern.
+const UIA_TablePatternId = 10012;
+
+/// Identifies the TextChild control pattern.
+const UIA_TextChildPatternId = 10029;
+
+/// Identifies the TextEdit control pattern.
+const UIA_TextEditPatternId = 10032;
+
+/// Identifies the Text control pattern.
+const UIA_TextPatternId = 10014;
+
+/// Identifies the second version of the Text control pattern.
+const UIA_TextPattern2Id = 10024;
+
+/// Identifies the Toggle control pattern.
+const UIA_TogglePatternId = 10015;
+
+/// Identifies the Transform control pattern.
+const UIA_TransformPatternId = 10016;
+
+/// Identifies the second version of the Transform control pattern.
+const UIA_TransformPattern2Id = 10028;
+
+/// Identifies the Value control pattern.
+const UIA_ValuePatternId = 10002;
+
+/// Identifies the VirtualizedItem control pattern.
+const UIA_VirtualizedItemPatternId = 10020;
+
+/// Identifies the Window control pattern.
+const UIA_WindowPatternId = 10009;
+
+// -----------------------------------------------------------------------------
+// UI Automation Control Type constants
+// -----------------------------------------------------------------------------
+
+/// Identifies the AppBar control type.
+const UIA_AppBarControlTypeId = 50040;
+
+/// Identifies the Button control type.
+const UIA_ButtonControlTypeId = 50000;
+
+/// Identifies the Calendar control type.
+const UIA_CalendarControlTypeId = 50001;
+
+/// Identifies the CheckBox control type.
+const UIA_CheckBoxControlTypeId = 50002;
+
+/// Identifies the ComboBox control type.
+const UIA_ComboBoxControlTypeId = 50003;
+
+/// Identifies the Custom control type.
+const UIA_CustomControlTypeId = 50025;
+
+/// Identifies the DataGrid control type.
+const UIA_DataGridControlTypeId = 50028;
+
+/// Identifies the DataItem control type.
+const UIA_DataItemControlTypeId = 50029;
+
+/// Identifies the Document control type.
+const UIA_DocumentControlTypeId = 50030;
+
+/// Identifies the Edit control type.
+const UIA_EditControlTypeId = 50004;
+
+/// Identifies the Group control type.
+const UIA_GroupControlTypeId = 50026;
+
+/// Identifies the Header control type.
+const UIA_HeaderControlTypeId = 50034;
+
+/// Identifies the HeaderItem control type.
+const UIA_HeaderItemControlTypeId = 50035;
+
+/// Identifies the Hyperlink control type.
+const UIA_HyperlinkControlTypeId = 50005;
+
+/// Identifies the Image control type.
+const UIA_ImageControlTypeId = 50006;
+
+/// Identifies the List control type.
+const UIA_ListControlTypeId = 50008;
+
+/// Identifies the ListItem control type.
+const UIA_ListItemControlTypeId = 50007;
+
+/// Identifies the MenuBar control type.
+const UIA_MenuBarControlTypeId = 50010;
+
+/// Identifies the Menu control type.
+const UIA_MenuControlTypeId = 50009;
+
+/// Identifies the MenuItem control type.
+const UIA_MenuItemControlTypeId = 50011;
+
+/// Identifies the Pane control type.
+const UIA_PaneControlTypeId = 50033;
+
+/// Identifies the ProgressBar control type.
+const UIA_ProgressBarControlTypeId = 50012;
+
+/// Identifies the RadioButton control type.
+const UIA_RadioButtonControlTypeId = 50013;
+
+/// Identifies the ScrollBar control type.
+const UIA_ScrollBarControlTypeId = 50014;
+
+/// Identifies the SemanticZoom control type.
+const UIA_SemanticZoomControlTypeId = 50039;
+
+/// Identifies the Separator control type.
+const UIA_SeparatorControlTypeId = 50038;
+
+/// Identifies the Slider control type.
+const UIA_SliderControlTypeId = 50015;
+
+/// Identifies the Spinner control type.
+const UIA_SpinnerControlTypeId = 50016;
+
+/// Identifies the SplitButton control type.
+const UIA_SplitButtonControlTypeId = 50031;
+
+/// Identifies the StatusBar control type.
+const UIA_StatusBarControlTypeId = 50017;
+
+/// Identifies the Tab control type.
+const UIA_TabControlTypeId = 50018;
+
+/// Identifies the TabItem control type.
+const UIA_TabItemControlTypeId = 50019;
+
+/// Identifies the Table control type.
+const UIA_TableControlTypeId = 50036;
+
+/// Identifies the Text control type.
+const UIA_TextControlTypeId = 50020;
+
+/// Identifies the Thumb control type.
+const UIA_ThumbControlTypeId = 50027;
+
+/// Identifies the TitleBar control type.
+const UIA_TitleBarControlTypeId = 50037;
+
+/// Identifies the ToolBar control type.
+const UIA_ToolBarControlTypeId = 50021;
+
+/// Identifies the ToolTip control type.
+const UIA_ToolTipControlTypeId = 50022;
+
+/// Identifies the Tree control type.
+const UIA_TreeControlTypeId = 50023;
+
+/// Identifies the TreeItem control type.
+const UIA_TreeItemControlTypeId = 50024;
+
+/// Identifies the Window control type.
+const UIA_WindowControlTypeId = 50032;
+
+// -----------------------------------------------------------------------------
+// UI Automation Error Code constants
+// -----------------------------------------------------------------------------
+
+/// Indicates that a method was called on a virtualized element, or on an
+/// element that no longer exists, usually because it has been destroyed.
+const UIA_E_ELEMENTNOTAVAILABLE = 0x80040201;
+
+/// Indicates that a method that requires an enabled element, such as Select or
+/// Expand, was called on an element that was disabled.
+const UIA_E_ELEMENTNOTENABLED = 0x80040200;
+
+/// Indicates that the method attempted an operation that was not valid.
+const UIA_E_INVALIDOPERATION = 0x80131509;
+
+/// Indicates that the GetClickablePoint method was called on an element that
+/// has no clickable point.
+const UIA_E_NOCLICKABLEPOINT = 0x80040202;
+
+/// Indicates that the provider explicitly does not support the specified
+/// property or control pattern. UI Automation will return this error code to
+/// the caller without attempting to provide a default value or falling back to
+/// another provider.
+const UIA_E_NOTSUPPORTED = 0x80040204;
+
+/// Indicates that a problem occurred when loading an assembly that contains a
+/// client-side (proxy) provider.
+const UIA_E_PROXYASSEMBLYNOTLOADED = 0x80040203;
+
+/// Indicates that the time allotted for a process or operation has expired.
+const UIA_E_TIMEOUT = 0x80131505;
+
+// -----------------------------------------------------------------------------
+// UI Automation Property constants
+// -----------------------------------------------------------------------------
+
+/// Identifies the AcceleratorKey property, which is a string containing the
+/// accelerator key (also called shortcut key) combinations for the automation
+/// element.
+const UIA_AcceleratorKeyPropertyId = 30006;
+
+/// Identifies the AccessKey property, which is a string containing the access
+/// key character for the automation element.
+const UIA_AccessKeyPropertyId = 30007;
+
+/// Identifies the AnnotationObjects property, which is a list of annotation
+/// objects in a document, such as comment, header, footer, and so on.
+const UIA_AnnotationObjectsPropertyId = 30156;
+
+/// Identifies the AnnotationTypes property, which is a list of the types of
+/// annotations in a document, such as comment, header, footer, and so on.
+const UIA_AnnotationTypesPropertyId = 30155;
+
+/// Identifies the AriaProperties property, which is a formatted string
+/// containing the Accessible Rich Internet Application (ARIA) property
+/// information for the automation element.
+const UIA_AriaPropertiesPropertyId = 30102;
+
+/// Identifies the AriaRole property, which is a string containing the
+/// Accessible Rich Internet Application (ARIA) role information for the
+/// automation element.
+const UIA_AriaRolePropertyId = 30101;
+
+/// Identifies the AutomationId property, which is a string containing the UI
+/// Automation identifier (ID) for the automation element.
+const UIA_AutomationIdPropertyId = 30011;
+
+/// Identifies the BoundingRectangle property, which specifies the coordinates
+/// of the rectangle that completely encloses the automation element.
+const UIA_BoundingRectanglePropertyId = 30001;
+
+/// Identifies the CenterPoint property, which specifies the center X and Y
+/// point coordinates of the automation element.
+const UIA_CenterPointPropertyId = 30165;
+
+/// Identifies the ClassName property, which is a string containing the class
+/// name for the automation element as assigned by the control developer.
+const UIA_ClassNamePropertyId = 30012;
+
+/// Identifies the ClickablePoint property, which is a point on the automation
+/// element that can be clicked.
+const UIA_ClickablePointPropertyId = 30014;
+
+/// Identifies the ControllerFor property, which is an array of automation
+/// elements that are manipulated by the automation element that supports this
+/// property.
+const UIA_ControllerForPropertyId = 30104;
+
+/// Identifies the ControlType property, which is a class that identifies the
+/// type of the automation element.
+const UIA_ControlTypePropertyId = 30003;
+
+/// Identifies the Culture property, which contains a locale identifier for the
+/// automation element (for example, 0x0409 for "en-US" or English (United
+/// States)).
+const UIA_CulturePropertyId = 30015;
+
+/// Identifies the DescribedBy property, which is an array of elements that
+/// provide more information about the automation element.
+const UIA_DescribedByPropertyId = 30105;
+
+/// Identifies the FillColor property, which specifies the color used to fill
+/// the automation element. This attribute is specified as a COLORREF, a 32-bit
+/// value used to specify an RGB or RGBA color.
+const UIA_FillColorPropertyId = 30160;
+
+/// Identifies the FillType property, which specifies the pattern used to fill
+/// the automation element, such as none, color, gradient, picture, pattern, and
+/// so on.
+const UIA_FillTypePropertyId = 30162;
+
+/// Identifies the FlowsFrom property, which is an array of automation elements
+/// that suggests the reading order before the current automation element.
+const UIA_FlowsFromPropertyId = 30148;
+
+/// Identifies the FlowsTo property, which is an array of automation elements
+/// that suggests the reading order after the current automation element.
+const UIA_FlowsToPropertyId = 30106;
+
+/// Identifies the FrameworkId property, which is a string containing the name
+/// of the underlying UI framework that the automation element belongs to.
+const UIA_FrameworkIdPropertyId = 30024;
+
+/// Identifies the FullDescription property, which exposes a localized string
+/// that can contain extended description text for an element.
+const UIA_FullDescriptionPropertyId = 30159;
+
+/// Identifies the HasKeyboardFocus property, which is a Boolean value that
+/// indicates whether the automation element has keyboard focus.
+const UIA_HasKeyboardFocusPropertyId = 30008;
+
+/// Identifies the HeadingLevel property, which indicates the heading level of
+/// a UI Automation element.
+const UIA_HeadingLevelPropertyId = 30173;
+
+/// Identifies the HelpText property, which is a help text string associated
+/// with the automation element.
+const UIA_HelpTextPropertyId = 30013;
+
+/// Identifies the IsContentElement property, which is a Boolean value that
+/// specifies whether the element appears in the content view of the automation
+/// element tree.
+const UIA_IsContentElementPropertyId = 30017;
+
+/// Identifies the IsControlElement property, which is a Boolean value that
+/// specifies whether the element appears in the control view of the automation
+/// element tree.
+const UIA_IsControlElementPropertyId = 30016;
+
+/// Identifies the IsDataValidForForm property, which is a Boolean value that
+/// indicates whether the entered or selected value is valid for the form rule
+/// associated with the automation element.
+const UIA_IsDataValidForFormPropertyId = 30103;
+
+/// Identifies the IsDialog property, which is a Boolean value that indicates
+/// whether the automation element is a dialog window.
+const UIA_IsDialogPropertyId = 30174;
+
+/// Identifies the IsEnabled property, which is a Boolean value that indicates
+/// whether the UI item referenced by the automation element is enabled and can
+/// be interacted with.
+const UIA_IsEnabledPropertyId = 30010;
+
+/// Identifies the IsKeyboardFocusable property, which is a Boolean value that
+/// indicates whether the automation element can accept keyboard focus.
+const UIA_IsKeyboardFocusablePropertyId = 30009;
+
+/// Identifies the IsOffscreen property, which is a Boolean value that
+/// indicates whether the automation element is entirely scrolled out of view
+/// or collapsed out of view.
+const UIA_IsOffscreenPropertyId = 30022;
+
+/// Identifies the IsPassword property, which is a Boolean value that indicates
+/// whether the automation element contains protected content or a password.
+const UIA_IsPasswordPropertyId = 30019;
+
+/// Identifies the IsPeripheral property, which is a Boolean value that
+/// indicates whether the automation element represents peripheral UI.
+const UIA_IsPeripheralPropertyId = 30150;
+
+/// Identifies the IsRequiredForForm property, which is a Boolean value that
+/// indicates whether the automation element is required to be filled out on a
+/// form.
+const UIA_IsRequiredForFormPropertyId = 30025;
+
+/// Identifies the ItemStatus property, which is a text string describing the
+/// status of an item of the automation element.
+const UIA_ItemStatusPropertyId = 30026;
+
+/// Identifies the ItemType property, which is a text string describing the
+/// type of the automation element.
+const UIA_ItemTypePropertyId = 300021;
+
+/// Identifies the LabeledBy property, which is an automation element that
+/// contains the text label for this element.
+const UIA_LabeledByPropertyId = 30018;
+
+/// Identifies the LandmarkType property, which is a Landmark Type Identifier
+/// associated with an element.
+const UIA_LandmarkTypePropertyId = 30157;
+
+/// Identifies the Level property, which is a 1-based integer associated with
+/// an automation element.
+const UIA_LevelPropertyId = 30154;
+
+/// Identifies the LiveSetting property, which is supported by an automation
+/// element that represents a live region.
+const UIA_LiveSettingPropertyId = 30135;
+
+/// Identifies the LocalizedControlType property, which is a text string
+/// describing the type of control that the automation element represents.
+const UIA_LocalizedControlTypePropertyId = 30004;
+
+/// Identifies the LocalizedLandmarkType, which is a text string describing the
+/// type of landmark that the automation element represents.
+const UIA_LocalizedLandmarkTypePropertyId = 30158;
+
+/// Identifies the Name property, which is a string that holds the name of the
+/// automation element.
+const UIA_NamePropertyId = 30005;
+
+/// Identifies the NativeWindowHandle property, which is an integer that
+/// represents the handle (HWND) of the automation element window, if it
+/// exists; otherwise, this property is 0.
+const UIA_NativeWindowHandlePropertyId = 30020;
+
+/// Identifies the OptimizeForVisualContent property, which is a Boolean value
+/// that indicates whether the provider exposes only elements that are visible.
+const UIA_OptimizeForVisualContentPropertyId = 30111;
+
+/// Identifies the Orientation property, which indicates the orientation of the
+/// control represented by the automation element.
+const UIA_OrientationPropertyId = 300023;
+
+/// Identifies the OutlineColor property, which specifies the color used for
+/// the outline of the automation element.
+const UIA_OutlineColorPropertyId = 30161;
+
+/// Identifies the OutlineThickness property, which specifies the width for the
+/// outline of the automation element.
+const UIA_OutlineThicknessPropertyId = 30164;
+
+/// Identifies the PositionInSet property, which is a 1-based integer
+/// associated with an automation element.
+const UIA_PositionInSetPropertyId = 30152;
+
+/// Identifies the ProcessId property, which is an integer representing the
+/// process identifier (ID) of the automation element.
+const UIA_ProcessIdPropertyId = 30002;
+
+/// Identifies the ProviderDescription property, which is a formatted string
+/// containing the source information of the UI Automation provider for the
+/// automation element, including proxy information.
+const UIA_ProviderDescriptionPropertyId = 30107;
+
+/// Identifies the Rotation property, which specifies the angle of rotation in
+/// unspecified units.
+const UIA_RotationPropertyId = 30166;
+
+/// Identifies the RuntimeId property, which is an array of integers
+/// representing the identifier for an automation element.
+const UIA_RuntimeIdPropertyId = 30000;
+
+/// Identifies the Size property, which specifies the width and height of the
+/// automation element.
+const UIA_SizePropertyId = 30167;
+
+/// Identifies the SizeOfSet property, which is a 1-based integer associated
+/// with an automation element.
+const UIA_SizeOfSetPropertyId = 30153;
+
+/// Identifies the VisualEffects property, which is a bit field that specifies
+/// effects on the automation element, such as shadow, reflection, glow, soft
+/// edges, or bevel.
+const UIA_VisualEffectsPropertyId = 30163;
+
+// -----------------------------------------------------------------------------
+// UI Automation Control Pattern Property constants
+// -----------------------------------------------------------------------------
+
+/// Identifies the AnnotationTypeId property of the Annotation control pattern.
+const UIA_AnnotationAnnotationTypeIdPropertyId = 30113;
+
+/// Identifies the AnnotationTypeName property of the Annotation control
+/// pattern.
+const UIA_AnnotationAnnotationTypeNamePropertyId = 30114;
+
+/// Identifies the Author property of the Annotation control pattern.
+const UIA_AnnotationAuthorPropertyId = 30115;
+
+/// Identifies the DateTime property of the Annotation control pattern.
+const UIA_AnnotationDateTimePropertyId = 30116;
+
+/// Identifies the Target property of the Annotation control pattern.
+const UIA_AnnotationTargetPropertyId = 30117;
+
+/// Identifies the DockPosition property of the Dock control pattern.
+const UIA_DockDockPositionPropertyId = 30069;
+
+/// Identifies the DropEffect property of the Drag control pattern.
+const UIA_DragDropEffectPropertyId = 30139;
+
+/// Identifies the DropEffects property of the Drag control pattern.
+const UIA_DragDropEffectsPropertyId = 30140;
+
+/// Identifies the IsGrabbed property of the Drag control pattern.
+const UIA_DragIsGrabbedPropertyId = 30138;
+
+/// Identifies the GrabbedItems property of the Drag control pattern.
+const UIA_DragGrabbedItemsPropertyId = 30144;
+
+/// Identifies the DropTargetEffect property of the DropTarget control pattern.
+const UIA_DropTargetDropTargetEffectPropertyId = 30142;
+
+/// Identifies the DropTargetEffects property of the DropTarget control pattern.
+const UIA_DropTargetDropTargetEffectsPropertyId = 30143;
+
+/// Identifies the ExpandCollapseState property of the ExpandCollapse control
+/// pattern.
+const UIA_ExpandCollapseExpandCollapseStatePropertyId = 30070;
+
+/// Identifies the ColumnCount property of the Grid control pattern.
+const UIA_GridColumnCountPropertyId = 30063;
+
+/// Identifies the Column property of the GridItem control pattern.
+const UIA_GridItemColumnPropertyId = 30065;
+
+/// Identifies the ColumnSpan property of the GridItem control pattern.
+const UIA_GridItemColumnSpanPropertyId = 30067;
+
+/// Identifies the ContainingGrid property of the GridItem control pattern.
+const UIA_GridItemContainingGridPropertyId = 30068;
+
+/// Identifies the Row property of the GridItem control pattern.
+const UIA_GridItemRowPropertyId = 30064;
+
+/// Identifies the RowSpan property of the GridItem control pattern.
+const UIA_GridItemRowSpanPropertyId = 30066;
+
+/// Identifies the RowCount property of the Grid control pattern.
+const UIA_GridRowCountPropertyId = 30062;
+
+/// Identifies the ChildId property of the LegacyIAccessible control pattern.
+const UIA_LegacyIAccessibleChildIdPropertyId = 30091;
+
+/// Identifies the DefaultAction property of the LegacyIAccessible control
+/// pattern.
+const UIA_LegacyIAccessibleDefaultActionPropertyId = 30100;
+
+/// Identifies the Description property of the LegacyIAccessible control
+/// pattern.
+const UIA_LegacyIAccessibleDescriptionPropertyId = 30094;
+
+/// Identifies the Help property of the LegacyIAccessible control pattern.
+const UIA_LegacyIAccessibleHelpPropertyId = 30097;
+
+/// Identifies the KeyboardShortcut property of the LegacyIAccessible control
+/// pattern.
+const UIA_LegacyIAccessibleKeyboardShortcutPropertyId = 30098;
+
+/// Identifies the Name property of the LegacyIAccessible control pattern.
+const UIA_LegacyIAccessibleNamePropertyId = 30092;
+
+/// Identifies the Role property of the LegacyIAccessible control pattern.
+const UIA_LegacyIAccessibleRolePropertyId = 30095;
+
+/// Identifies the Selection property of the LegacyIAccessible control pattern.
+const UIA_LegacyIAccessibleSelectionPropertyId = 30099;
+
+/// Identifies the State property of the LegacyIAccessible control pattern.
+const UIA_LegacyIAccessibleStatePropertyId = 30096;
+
+/// Identifies the Value property of the LegacyIAccessible control pattern.
+const UIA_LegacyIAccessibleValuePropertyId = 30093;
+
+/// Identifies the CurrentView property of the MultipleView control pattern.
+const UIA_MultipleViewCurrentViewPropertyId = 30071;
+
+/// Identifies the SupportedViews property of the MultipleView control pattern.
+const UIA_MultipleViewSupportedViewsPropertyId = 30072;
+
+/// Identifies the IsReadOnly property of the RangeValue control pattern.
+const UIA_RangeValueIsReadOnlyPropertyId = 30048;
+
+/// Identifies the LargeChange property of the RangeValue control pattern.
+const UIA_RangeValueLargeChangePropertyId = 30051;
+
+/// Identifies the Maximum property of the RangeValue control pattern.
+const UIA_RangeValueMaximumPropertyId = 30050;
+
+/// Identifies the Minimum property of the RangeValue control pattern.
+const UIA_RangeValueMinimumPropertyId = 30049;
+
+/// Identifies the SmallChange property of the RangeValue control pattern.
+const UIA_RangeValueSmallChangePropertyId = 30052;
+
+/// Identifies the Value property of the RangeValue control pattern.
+const UIA_RangeValueValuePropertyId = 30047;
+
+/// Identifies the HorizontallyScrollable property of the Scroll control
+/// pattern.
+const UIA_ScrollHorizontallyScrollablePropertyId = 30057;
+
+/// Identifies the HorizontalScrollPercent property of the Scroll control
+/// pattern.
+const UIA_ScrollHorizontalScrollPercentPropertyId = 30053;
+
+/// Identifies the HorizontalViewSize property of the Scroll control pattern.
+const UIA_ScrollHorizontalViewSizePropertyId = 30054;
+
+/// Identifies the VerticallyScrollable property of the Scroll control pattern.
+const UIA_ScrollVerticallyScrollablePropertyId = 30058;
+
+/// Identifies the VerticalScrollPercent property of the Scroll control pattern.
+const UIA_ScrollVerticalScrollPercentPropertyId = 30055;
+
+/// Identifies the VerticalViewSize property of the Scroll control pattern.
+const UIA_ScrollVerticalViewSizePropertyId = 30056;
+
+/// Identifies the CanSelectMultiple property of the Selection control pattern.
+const UIA_SelectionCanSelectMultiplePropertyId = 30060;
+
+/// Identifies the IsSelectionRequired property of the Selection control
+/// pattern.
+const UIA_SelectionIsSelectionRequiredPropertyId = 30061;
+
+/// Identifies the Selection property of the Selection control pattern.
+const UIA_SelectionSelectionPropertyId = 30059;
+
+/// Identifies the IsSelected property of the SelectionItem control pattern.
+const UIA_SelectionItemIsSelectedPropertyId = 30079;
+
+/// Identifies the SelectionContainer property of the SelectionItem control
+/// pattern.
+const UIA_SelectionItemSelectionContainerPropertyId = 30080;
+
+/// Identifies the Formula property of the SpreadsheetItem control pattern.
+const UIA_SpreadsheetItemFormulaPropertyId = 30129;
+
+/// Identifies the AnnotationObjects property of the SpreadsheetItem control
+/// pattern.
+const UIA_SpreadsheetItemAnnotationObjectsPropertyId = 30130;
+
+/// Identifies the AnnotationTypes property of the SpreadsheetItem control
+/// pattern.
+const UIA_SpreadsheetItemAnnotationTypesPropertyId = 30131;
+
+/// Identifies the ExtendedProperties property of the Styles control pattern.
+const UIA_StylesExtendedPropertiesPropertyId = 30126;
+
+/// Identifies the FillColor property of the Styles control pattern.
+const UIA_StylesFillColorPropertyId = 30122;
+
+/// Identifies the FillPatternColor property of the Styles control pattern.
+const UIA_StylesFillPatternColorPropertyId = 30125;
+
+/// Identifies the FillPatternStyle property of the Styles control pattern.
+const UIA_StylesFillPatternStylePropertyId = 30123;
+
+/// Identifies the Shape property of the Styles control pattern.
+const UIA_StylesShapePropertyId = 30124;
+
+/// Identifies the StyleId property of the Styles control pattern.
+const UIA_StylesStyleIdPropertyId = 30120;
+
+/// Identifies the StyleName property of the Styles control pattern.
+const UIA_StylesStyleNamePropertyId = 30121;
+
+/// Identifies the ColumnHeaders property of the Table control pattern.
+const UIA_TableColumnHeadersPropertyId = 30082;
+
+/// Identifies the ColumnHeaderItems property of the TableItem control pattern.
+const UIA_TableItemColumnHeaderItemsPropertyId = 30085;
+
+/// Identifies the RowHeaders property of the Table control pattern.
+const UIA_TableRowHeadersPropertyId = 30081;
+
+/// Identifies the RowOrColumnMajor property of the Table control pattern.
+const UIA_TableRowOrColumnMajorPropertyId = 30083;
+
+/// Identifies the RowHeaderItems property of the TableItem control pattern.
+const UIA_TableItemRowHeaderItemsPropertyId = 30084;
+
+/// Identifies the ToggleState property of the Toggle control pattern.
+const UIA_ToggleToggleStatePropertyId = 30086;
+
+/// Identifies the CanMove property of the Transform control pattern.
+const UIA_TransformCanMovePropertyId = 30087;
+
+/// Identifies the CanResize property of the Transform control pattern.
+const UIA_TransformCanResizePropertyId = 30088;
+
+/// Identifies the CanRotate property of the Transform control pattern.
+const UIA_TransformCanRotatePropertyId = 30089;
+
+/// Identifies the CanZoom property of the Transform control pattern.
+const UIA_Transform2CanZoomPropertyId = 30133;
+
+/// Identifies the ZoomLevel property of the Transform control pattern.
+const UIA_Transform2ZoomLevelPropertyId = 30145;
+
+/// Identifies the ZoomMaximum property of the Transform control pattern.
+const UIA_Transform2ZoomMaximumPropertyId = 30147;
+
+/// Identifies the ZoomMinimum property of the Transform control pattern.
+const UIA_Transform2ZoomMinimumPropertyId = 30146;
+
+/// Identifies the IsReadOnly property of the Value control pattern.
+const UIA_ValueIsReadOnlyPropertyId = 30046;
+
+/// Identifies the Value property of the Value control pattern.
+const UIA_ValueValuePropertyId = 30045;
+
+/// Identifies the CanMaximize property of the Window control pattern.
+const UIA_WindowCanMaximizePropertyId = 30073;
+
+/// Identifies the CanMinimize property of the Window control pattern.
+const UIA_WindowCanMinimizePropertyId = 30074;
+
+/// Identifies the IsModal property of the Window control pattern.
+const UIA_WindowIsModalPropertyId = 30077;
+
+/// Identifies the IsTopmost property of the Window control pattern.
+const UIA_WindowIsTopmostPropertyId = 30078;
+
+/// Identifies the WindowInteractionState property of the Window control
+///  pattern.
+const UIA_WindowWindowInteractionStatePropertyId = 30076;
+
+/// Identifies the WindowVisualState property of the Window control pattern.
+const UIA_WindowWindowVisualStatePropertyId = 30075;
+
+// -----------------------------------------------------------------------------
+// UI Automation Control Pattern Availability Property constants
+// -----------------------------------------------------------------------------
+
+/// Identifies the IsAnnotationPatternAvailable property, which indicates
+/// whether the Annotation control pattern is available for the automation
+/// element.
+const UIA_IsAnnotationPatternAvailablePropertyId = 30118;
+
+/// Identifies the IsCustomNavigationPatternAvailable property, which indicates
+/// whether the CustomNavigation control pattern is available for the automation
+/// element.
+const UIA_IsCustomNavigationPatternAvailablePropertyId = 30151;
+
+/// Identifies the IsDockPatternAvailable property, which indicates whether the
+/// Dock control pattern is available for the automation element.
+const UIA_IsDockPatternAvailablePropertyId = 30027;
+
+/// Identifies the IsDragPatternAvailable property, which indicates whether the
+/// Drag control pattern is available for the automation element.
+const UIA_IsDragPatternAvailablePropertyId = 30137;
+
+/// Identifies the IsDropTargetPatternAvailable property, which indicates
+/// whether the DropTarget control pattern is available for the automation
+/// element.
+const UIA_IsDropTargetPatternAvailablePropertyId = 30141;
+
+/// Identifies the IsExpandCollapsePatternAvailable property, which indicates
+/// whether the ExpandCollapse control pattern is available for the automation
+/// element.
+const UIA_IsExpandCollapsePatternAvailablePropertyId = 30028;
+
+/// Identifies the IsGridItemPatternAvailable property, which indicates whether
+/// the GridItem control pattern is available for the automation element.
+const UIA_IsGridItemPatternAvailablePropertyId = 30029;
+
+/// Identifies the IsGridPatternAvailable property, which indicates whether the
+/// Grid control pattern is available for the automation element.
+const UIA_IsGridPatternAvailablePropertyId = 30030;
+
+/// Identifies the IsInvokePatternAvailable property, which indicates whether
+/// the Invoke control pattern is available for the automation element.
+const UIA_IsInvokePatternAvailablePropertyId = 30031;
+
+/// Identifies the IsItemContainerPatternAvailable property, which indicates
+/// whether the ItemContainer control pattern is available for the automation
+/// element.
+const UIA_IsItemContainerPatternAvailablePropertyId = 30108;
+
+/// Identifies the IsLegacyIAccessiblePatternAvailable property, which
+/// indicates whether the LegacyIAccessible control pattern is available for
+/// the automation element.
+const UIA_IsLegacyIAccessiblePatternAvailablePropertyId = 30090;
+
+/// Identifies the IsMultipleViewPatternAvailable property, which indicates
+/// whether the MultipleView control pattern is available for the automation
+/// element.
+const UIA_IsMultipleViewPatternAvailablePropertyId = 30032;
+
+/// Identifies the IsObjectModelPatternAvailable property, which indicates
+/// whether the ObjectModel control pattern is available for the automation
+/// element.
+const UIA_IsObjectModelPatternAvailablePropertyId = 30112;
+
+/// Identifies the IsRangeValuePatternAvailable property, which indicates
+/// whether the RangeValue control pattern is available for the automation
+/// element.
+const UIA_IsRangeValuePatternAvailablePropertyId = 30033;
+
+/// Identifies the IsScrollItemPatternAvailable property, which indicates
+/// whether the ScrollItem control pattern is available for the automation
+/// element.
+const UIA_IsScrollItemPatternAvailablePropertyId = 30035;
+
+/// Identifies the IsScrollPatternAvailable property, which indicates whether
+/// the Scroll control pattern is available for the automation element.
+const UIA_IsScrollPatternAvailablePropertyId = 30034;
+
+/// Identifies the IsSelectionItemPatternAvailable property, which indicates
+/// whether the SelectionItem control pattern is available for the automation
+/// element.
+const UIA_IsSelectionItemPatternAvailablePropertyId = 30036;
+
+/// Identifies the IsSelectionPatternAvailable property, which indicates
+/// whether the Selection control pattern is available for the automation
+/// element.
+const UIA_IsSelectionPatternAvailablePropertyId = 30037;
+
+/// Identifies the IsSpreadsheetPatternAvailable property, which indicates
+/// whether the Spreadsheet control pattern is available for the automation
+/// element.
+const UIA_IsSpreadsheetPatternAvailablePropertyId = 30128;
+
+/// Identifies the IsSpreadsheetItemPatternAvailable property, which indicates
+/// whether the SpreadsheetItem control pattern is available for the automation
+/// element.
+const UIA_IsSpreadsheetItemPatternAvailablePropertyId = 30132;
+
+/// Identifies the IsStylesPatternAvailable property, which indicates whether
+/// the Styles control pattern is available for the automation element.
+const UIA_IsStylesPatternAvailablePropertyId = 30127;
+
+/// Identifies the IsSynchronizedInputPatternAvailable property, which
+/// indicates whether the SynchronizedInput control pattern is available for
+/// the automation element.
+const UIA_IsSynchronizedInputPatternAvailablePropertyId = 30110;
+
+/// Identifies the IsTableItemPatternAvailable property, which indicates
+/// whether the TableItem control pattern is available for the automation
+/// element.
+const UIA_IsTableItemPatternAvailablePropertyId = 30039;
+
+/// Identifies the IsTablePatternAvailable property, which indicates whether
+/// the Table control pattern is available for the automation element.
+const UIA_IsTablePatternAvailablePropertyId = 30038;
+
+/// Identifies the IsTextChildPatternAvailable property, which indicates
+/// whether the TextChild control pattern is available for the automation
+/// element.
+const UIA_IsTextChildPatternAvailablePropertyId = 30136;
+
+/// Identifies the IsTextEditPatternAvailable property, which indicates whether
+/// the TextEdit control pattern is available for the automation element.
+const UIA_IsTextEditPatternAvailablePropertyId = 30149;
+
+/// Identifies the IsTextPatternAvailable property, which indicates whether the
+/// Text control pattern is available for the automation element.
+const UIA_IsTextPatternAvailablePropertyId = 30040;
+
+/// Identifies the IsTextPattern2Available property, which indicates whether
+/// version two of the Text control pattern is available for the automation
+/// element.
+const UIA_IsTextPattern2AvailablePropertyId = 30119;
+
+/// Identifies the IsTogglePatternAvailable property, which indicates whether
+/// the Toggle control pattern is available for the automation element.
+const UIA_IsTogglePatternAvailablePropertyId = 30041;
+
+/// Identifies the IsTransformPatternAvailable property, which indicates
+/// whether the Transform control pattern is available for the automation
+/// element.
+const UIA_IsTransformPatternAvailablePropertyId = 30042;
+
+/// Identifies the IsTransformPattern2Available property, which indicates
+/// whether version two of the Transform control pattern is available for the
+/// automation element.
+const UIA_IsTransformPattern2AvailablePropertyId = 30134;
+
+/// Identifies the IsValuePatternAvailable property, which indicates whether
+/// the Value control pattern is available for the automation element.
+const UIA_IsValuePatternAvailablePropertyId = 30043;
+
+/// Identifies the IsVirtualizedItemPatternAvailable property, which indicates
+/// whether the VirtualizedItem control pattern is available for the automation
+/// element.
+const UIA_IsVirtualizedItemPatternAvailablePropertyId = 30109;
+
+/// Identifies the IsWindowPatternAvailable property, which indicates whether
+/// the Window control pattern is available for the automation element.
+const UIA_IsWindowPatternAvailablePropertyId = 30044;

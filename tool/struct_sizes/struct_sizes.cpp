@@ -174,6 +174,7 @@ void main()
     printf("  'ENUM_SERVICE_STATUS_PROCESS': %zu,\n", sizeof(ENUM_SERVICE_STATUS_PROCESSW));
     printf("  'EVENTMSG': %zu,\n", sizeof(EVENTMSG));
     printf("  'EXCEPINFO': %zu,\n", sizeof(EXCEPINFO));
+    printf("  'ExtendedProperty': %zu,\n", sizeof(ExtendedProperty));
     printf("  'FD_SET': %zu,\n", sizeof(FD_SET));
     printf("  'FILETIME': %zu,\n", sizeof(FILETIME));
     printf("  'FILE_SEGMENT_ELEMENT': %zu,\n", sizeof(FILE_SEGMENT_ELEMENT));
