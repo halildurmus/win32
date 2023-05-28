@@ -1,3 +1,9 @@
+## 5.0.3
+
+- Update the screenshot example to support multiple displays (#704, thanks to
+  @ilopx)
+- Add Windows UI Automation APIs (#711)
+
 ## 5.0.2
 
 - Add some additional user32 exports (#707, thanks to @ilopX)
