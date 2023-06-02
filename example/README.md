@@ -86,6 +86,7 @@ following location:
 | `guid.dart`         | Creates a globally unique identifier (GUID)           |
 | `idispatch.dart`    | Demonstrates calling a method using `IDispatch`       |
 | `uiautomation.dart` | Demonstrates calling Windows UI Automation APIs       |
+| `winhttp.dart`      | Demonstrates using WinHTTP APIs to make HTTP requests |
 | `winmd.dart`        | Interrogate Windows Runtime types                     |
 | `wmi_perf.dart`     | Uses WMI to retrieve performance counters             |
 | `wmi_wql.dart`      | Uses WMI to retrieve information using WQL            |
