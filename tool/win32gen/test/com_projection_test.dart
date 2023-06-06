@@ -82,6 +82,19 @@ void main() {
     expect(projection.nativeType, equals('Pointer<Int16>'));
   });
 
+  test('Properties that return Pointer<COMObject> are projected accurately',
+      () {
+    final textPattern = scope.findTypeDef(
+        'Windows.Win32.UI.Accessibility.IUIAutomationTextPattern')!;
+    final interfaceProjection = ComInterfaceProjection(textPattern);
+    final documentRangeProjection = interfaceProjection.methodProjections
+        .firstWhere((method) => method.name == 'get_DocumentRange');
+    expect(documentRangeProjection.nativePrototype,
+        equals('Int32 Function(Pointer, Pointer<COMObject> range)'));
+    expect(documentRangeProjection.dartPrototype,
+        equals('int Function(Pointer, Pointer<COMObject> range)'));
+  });
+
   group('Projection of INetwork', () {
     test('Correct number of projected methods', () {
       final iNetwork = scope

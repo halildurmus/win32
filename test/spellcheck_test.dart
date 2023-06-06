@@ -10,31 +10,61 @@ import 'package:win32/win32.dart';
 import 'helpers.dart';
 
 void main() {
-  test('Spellcheck', () {
-    // ISpellCheckerFactory is only available on Windows 8 or higher, per:
-    // https://learn.microsoft.com/windows/win32/api/spellcheck/nn-spellcheck-ispellcheckerfactory
-    if (getWindowsBuildNumber() >= 9200) {
-      var hr = CoInitializeEx(
+  // ISpellCheckerFactory is only available on Windows 8 or higher, per:
+  // https://learn.microsoft.com/windows/win32/api/spellcheck/nn-spellcheck-ispellcheckerfactory
+  if (getWindowsBuildNumber() >= 9200) return;
+
+  group('SpellChecker', () {
+    late SpellCheckerFactory spellCheckerFactory;
+
+    setUp(() {
+      final hr = CoInitializeEx(
           nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      spellCheckerFactory = SpellCheckerFactory.createInstance();
+    });
+
+    test('supportedLanguages', () {
+      final pEnumString = spellCheckerFactory.supportedLanguages;
+      expect(pEnumString.ref.isNull, isFalse);
+      final enumString = IEnumString(pEnumString);
+
+      final pElementsFetched = calloc<Uint32>();
+      final pElements = calloc<Pointer<Utf16>>();
+
+      final hr = enumString.next(1, pElements, pElementsFetched);
       expect(hr, equals(S_OK));
+      expect(pElementsFetched.value, equals(1));
+      final language = pElements.value.toDartString();
 
-      final spellCheckerFactory = SpellCheckerFactory.createInstance();
-      expect(spellCheckerFactory.ptr.address, isNonZero);
+      expect(language, isNotEmpty);
+      // e.g. en-US
+      expect(language[2], equals('-'));
 
+      free(pElements);
+      free(pElementsFetched);
+    });
+
+    test('isSupported', () {
       final supportedPtr = calloc<Int32>();
 
       // Dart reports locale as (for example) en_US; Windows expects en-US
-      var languageTagPtr =
+      final languageTagPtr =
           Platform.localeName.replaceAll('_', '-').toNativeUtf16();
 
-      hr = spellCheckerFactory.isSupported(languageTagPtr, supportedPtr);
+      final hr = spellCheckerFactory.isSupported(languageTagPtr, supportedPtr);
       expect(hr, equals(S_OK));
       expect(supportedPtr.value, equals(1));
 
       free(languageTagPtr);
+    });
 
-      languageTagPtr = 'en-US'.toNativeUtf16();
-      hr = spellCheckerFactory.isSupported(languageTagPtr, supportedPtr);
+    test('check', () {
+      final supportedPtr = calloc<Int32>();
+
+      final languageTagPtr = 'en-US'.toNativeUtf16();
+      var hr = spellCheckerFactory.isSupported(languageTagPtr, supportedPtr);
       expect(hr, equals(S_OK));
 
       if (supportedPtr.value == 1) {
@@ -49,16 +79,18 @@ void main() {
         final textPtr = 'haev'.toNativeUtf16();
         hr = spellChecker.check(textPtr, errorsPtr.cast());
         expect(hr, equals(S_OK));
+        expect(errorsPtr.ref.isNull, isFalse);
 
         final errors = IEnumSpellingError(errorsPtr);
         final errorPtr = calloc<COMObject>();
 
         while (errors.next(errorPtr.cast()) == S_OK) {
+          expect(errorPtr.ref.isNull, isFalse);
           final error = ISpellingError(errorPtr);
           expect(error.correctiveAction, equals(CORRECTIVE_ACTION.REPLACE));
-          final replacment = error.replacement;
-          expect(replacment.toDartString(), equals('have'));
-          WindowsDeleteString(replacment.address);
+          final replacement = error.replacement;
+          expect(replacement.toDartString(), equals('have'));
+          WindowsDeleteString(replacement.address);
         }
 
         free(textPtr);
@@ -66,6 +98,6 @@ void main() {
 
       free(supportedPtr);
       free(languageTagPtr);
-    }
+    });
   });
 }
