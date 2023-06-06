@@ -135,28 +135,24 @@ class ISpellChecker extends IUnknown {
                   Pointer<Uint8> value)>()(ptr.ref.lpVtbl, optionId, value);
 
   Pointer<COMObject> get optionIds {
-    final retValuePtr = calloc<Pointer<COMObject>>();
+    final retValuePtr = calloc<COMObject>();
 
-    try {
-      final hr = ptr.ref.vtable
-              .elementAt(10)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<COMObject>> value)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<COMObject>> value)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+    final hr = ptr.ref.vtable
+            .elementAt(10)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        Int32 Function(Pointer, Pointer<COMObject> value)>>>()
+            .value
+            .asFunction<int Function(Pointer, Pointer<COMObject> value)>()(
+        ptr.ref.lpVtbl, retValuePtr);
 
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      final retValue = retValuePtr.value;
-      return retValue;
-    } finally {
+    if (FAILED(hr)) {
       free(retValuePtr);
+      throw WindowsException(hr);
     }
+
+    return retValuePtr;
   }
 
   Pointer<Utf16> get id {

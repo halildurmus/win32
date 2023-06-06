@@ -12,6 +12,24 @@ abstract class ComPropertyProjection extends ComMethodProjection {
       method.name.startsWith('get__') | method.name.startsWith('put__')
           ? safeIdentifierForString(method.name.substring(5)).toCamelCase()
           : safeIdentifierForString(method.name.substring(4)).toCamelCase();
+
+  String ffiCall({
+    required String identifier,
+    bool freeRetValOnFailure = false,
+  }) =>
+      [
+        '''
+    final hr = ptr.ref.vtable
+        .elementAt($vtableOffset)
+        .cast<Pointer<NativeFunction<$nativePrototype>>>()
+        .value
+        .asFunction<$dartPrototype>()(ptr.ref.lpVtbl, $identifier);
+''',
+        if (freeRetValOnFailure)
+          'if (FAILED(hr)) { free(retValuePtr); throw WindowsException(hr); }'
+        else
+          'if (FAILED(hr)) throw WindowsException(hr);'
+      ].join('\n');
 }
 
 class ComGetPropertyProjection extends ComPropertyProjection {
@@ -22,6 +40,18 @@ class ComGetPropertyProjection extends ComPropertyProjection {
   @override
   String toString() {
     final returnValue = dereference(parameters.first.type);
+    if (returnValue.dartType == 'Pointer<COMObject>') {
+      return '''
+        ${returnValue.dartType} get $exposedMethodName {
+          final retValuePtr = calloc<COMObject>();
+
+          ${ffiCall(identifier: 'retValuePtr', freeRetValOnFailure: true)}
+
+          return retValuePtr;
+        }
+''';
+    }
+
     final valRef = returnValue.dartType == 'double' ||
             returnValue.dartType == 'int' ||
             returnValue.dartType.startsWith('Pointer')
@@ -30,15 +60,9 @@ class ComGetPropertyProjection extends ComPropertyProjection {
     return '''
       ${returnValue.dartType} get $exposedMethodName {
         final retValuePtr = calloc<${returnValue.nativeType}>();
-        
-        try {
-          final hr = ptr.ref.vtable
-            .elementAt($vtableOffset)
-            .cast<Pointer<NativeFunction<$nativePrototype>>>()
-            .value
-            .asFunction<$dartPrototype>()(ptr.ref.lpVtbl, retValuePtr);
 
-          if (FAILED(hr)) throw WindowsException(hr);
+        try {
+          ${ffiCall(identifier: 'retValuePtr')}
 
           final retValue = retValuePtr.$valRef;
           return ${convertBool ? 'retValue == 0' : 'retValue'};
@@ -56,13 +80,7 @@ class ComSetPropertyProjection extends ComPropertyProjection {
   @override
   String toString() => '''
     set $exposedMethodName(${parameters.first.type.dartType} value) {
-      final hr = ptr.ref.vtable
-        .elementAt($vtableOffset)
-        .cast<Pointer<NativeFunction<$nativePrototype>>>()
-        .value
-        .asFunction<$dartPrototype>()(ptr.ref.lpVtbl, value);
-
-    if (FAILED(hr)) throw WindowsException(hr);
-  }
+      ${ffiCall(identifier: 'value')}
+    }
 ''';
 }

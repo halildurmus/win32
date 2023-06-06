@@ -212,156 +212,132 @@ class IUIAutomation extends IUnknown {
           ptr.ref.lpVtbl, pCondition, walker);
 
   Pointer<COMObject> get controlViewWalker {
-    final retValuePtr = calloc<Pointer<COMObject>>();
+    final retValuePtr = calloc<COMObject>();
 
-    try {
-      final hr = ptr.ref.vtable
-              .elementAt(14)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<COMObject>> walker)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<COMObject>> walker)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+    final hr = ptr.ref.vtable
+            .elementAt(14)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        Int32 Function(Pointer, Pointer<COMObject> walker)>>>()
+            .value
+            .asFunction<int Function(Pointer, Pointer<COMObject> walker)>()(
+        ptr.ref.lpVtbl, retValuePtr);
 
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      final retValue = retValuePtr.value;
-      return retValue;
-    } finally {
+    if (FAILED(hr)) {
       free(retValuePtr);
+      throw WindowsException(hr);
     }
+
+    return retValuePtr;
   }
 
   Pointer<COMObject> get contentViewWalker {
-    final retValuePtr = calloc<Pointer<COMObject>>();
+    final retValuePtr = calloc<COMObject>();
 
-    try {
-      final hr = ptr.ref.vtable
-              .elementAt(15)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<COMObject>> walker)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<COMObject>> walker)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+    final hr = ptr.ref.vtable
+            .elementAt(15)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        Int32 Function(Pointer, Pointer<COMObject> walker)>>>()
+            .value
+            .asFunction<int Function(Pointer, Pointer<COMObject> walker)>()(
+        ptr.ref.lpVtbl, retValuePtr);
 
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      final retValue = retValuePtr.value;
-      return retValue;
-    } finally {
+    if (FAILED(hr)) {
       free(retValuePtr);
+      throw WindowsException(hr);
     }
+
+    return retValuePtr;
   }
 
   Pointer<COMObject> get rawViewWalker {
-    final retValuePtr = calloc<Pointer<COMObject>>();
+    final retValuePtr = calloc<COMObject>();
 
-    try {
-      final hr = ptr.ref.vtable
-              .elementAt(16)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<COMObject>> walker)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<COMObject>> walker)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+    final hr = ptr.ref.vtable
+            .elementAt(16)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        Int32 Function(Pointer, Pointer<COMObject> walker)>>>()
+            .value
+            .asFunction<int Function(Pointer, Pointer<COMObject> walker)>()(
+        ptr.ref.lpVtbl, retValuePtr);
 
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      final retValue = retValuePtr.value;
-      return retValue;
-    } finally {
+    if (FAILED(hr)) {
       free(retValuePtr);
+      throw WindowsException(hr);
     }
+
+    return retValuePtr;
   }
 
   Pointer<COMObject> get rawViewCondition {
-    final retValuePtr = calloc<Pointer<COMObject>>();
+    final retValuePtr = calloc<COMObject>();
 
-    try {
-      final hr = ptr.ref.vtable
-              .elementAt(17)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer,
-                              Pointer<Pointer<COMObject>> condition)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, Pointer<Pointer<COMObject>> condition)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+    final hr = ptr.ref.vtable
+        .elementAt(17)
+        .cast<
+            Pointer<
+                NativeFunction<
+                    Int32 Function(Pointer, Pointer<COMObject> condition)>>>()
+        .value
+        .asFunction<
+            int Function(Pointer,
+                Pointer<COMObject> condition)>()(ptr.ref.lpVtbl, retValuePtr);
 
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      final retValue = retValuePtr.value;
-      return retValue;
-    } finally {
+    if (FAILED(hr)) {
       free(retValuePtr);
+      throw WindowsException(hr);
     }
+
+    return retValuePtr;
   }
 
   Pointer<COMObject> get controlViewCondition {
-    final retValuePtr = calloc<Pointer<COMObject>>();
+    final retValuePtr = calloc<COMObject>();
 
-    try {
-      final hr = ptr.ref.vtable
-              .elementAt(18)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer,
-                              Pointer<Pointer<COMObject>> condition)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, Pointer<Pointer<COMObject>> condition)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+    final hr = ptr.ref.vtable
+        .elementAt(18)
+        .cast<
+            Pointer<
+                NativeFunction<
+                    Int32 Function(Pointer, Pointer<COMObject> condition)>>>()
+        .value
+        .asFunction<
+            int Function(Pointer,
+                Pointer<COMObject> condition)>()(ptr.ref.lpVtbl, retValuePtr);
 
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      final retValue = retValuePtr.value;
-      return retValue;
-    } finally {
+    if (FAILED(hr)) {
       free(retValuePtr);
+      throw WindowsException(hr);
     }
+
+    return retValuePtr;
   }
 
   Pointer<COMObject> get contentViewCondition {
-    final retValuePtr = calloc<Pointer<COMObject>>();
+    final retValuePtr = calloc<COMObject>();
 
-    try {
-      final hr = ptr.ref.vtable
-              .elementAt(19)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer,
-                              Pointer<Pointer<COMObject>> condition)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, Pointer<Pointer<COMObject>> condition)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+    final hr = ptr.ref.vtable
+        .elementAt(19)
+        .cast<
+            Pointer<
+                NativeFunction<
+                    Int32 Function(Pointer, Pointer<COMObject> condition)>>>()
+        .value
+        .asFunction<
+            int Function(Pointer,
+                Pointer<COMObject> condition)>()(ptr.ref.lpVtbl, retValuePtr);
 
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      final retValue = retValuePtr.value;
-      return retValue;
-    } finally {
+    if (FAILED(hr)) {
       free(retValuePtr);
+      throw WindowsException(hr);
     }
+
+    return retValuePtr;
   }
 
   int createCacheRequest(Pointer<Pointer<COMObject>> cacheRequest) => ptr
@@ -870,29 +846,26 @@ class IUIAutomation extends IUnknown {
           ptr.ref.lpVtbl, factory, factoryEntry);
 
   Pointer<COMObject> get proxyFactoryMapping {
-    final retValuePtr = calloc<Pointer<COMObject>>();
+    final retValuePtr = calloc<COMObject>();
 
-    try {
-      final hr = ptr.ref.vtable
-              .elementAt(48)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer,
-                              Pointer<Pointer<COMObject>> factoryMapping)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, Pointer<Pointer<COMObject>> factoryMapping)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+    final hr = ptr.ref.vtable
+            .elementAt(48)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        Int32 Function(
+                            Pointer, Pointer<COMObject> factoryMapping)>>>()
+            .value
+            .asFunction<
+                int Function(Pointer, Pointer<COMObject> factoryMapping)>()(
+        ptr.ref.lpVtbl, retValuePtr);
 
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      final retValue = retValuePtr.value;
-      return retValue;
-    } finally {
+    if (FAILED(hr)) {
       free(retValuePtr);
+      throw WindowsException(hr);
     }
+
+    return retValuePtr;
   }
 
   int getPropertyProgrammaticName(int property, Pointer<Pointer<Utf16>> name) =>
@@ -984,57 +957,50 @@ class IUIAutomation extends IUnknown {
           ptr.ref.lpVtbl, value, isNotSupported);
 
   Pointer<COMObject> get reservedNotSupportedValue {
-    final retValuePtr = calloc<Pointer<COMObject>>();
+    final retValuePtr = calloc<COMObject>();
 
-    try {
-      final hr = ptr.ref.vtable
-          .elementAt(54)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer,
-                          Pointer<Pointer<COMObject>> notSupportedValue)>>>()
-          .value
-          .asFunction<
-              int Function(
-                  Pointer,
-                  Pointer<Pointer<COMObject>>
-                      notSupportedValue)>()(ptr.ref.lpVtbl, retValuePtr);
+    final hr = ptr.ref.vtable
+            .elementAt(54)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        Int32 Function(
+                            Pointer, Pointer<COMObject> notSupportedValue)>>>()
+            .value
+            .asFunction<
+                int Function(Pointer, Pointer<COMObject> notSupportedValue)>()(
+        ptr.ref.lpVtbl, retValuePtr);
 
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      final retValue = retValuePtr.value;
-      return retValue;
-    } finally {
+    if (FAILED(hr)) {
       free(retValuePtr);
+      throw WindowsException(hr);
     }
+
+    return retValuePtr;
   }
 
   Pointer<COMObject> get reservedMixedAttributeValue {
-    final retValuePtr = calloc<Pointer<COMObject>>();
+    final retValuePtr = calloc<COMObject>();
 
-    try {
-      final hr = ptr.ref.vtable
-          .elementAt(55)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer,
-                          Pointer<Pointer<COMObject>> mixedAttributeValue)>>>()
-          .value
-          .asFunction<
-              int Function(
-                  Pointer,
-                  Pointer<Pointer<COMObject>>
-                      mixedAttributeValue)>()(ptr.ref.lpVtbl, retValuePtr);
+    final hr = ptr.ref.vtable
+            .elementAt(55)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        Int32 Function(Pointer,
+                            Pointer<COMObject> mixedAttributeValue)>>>()
+            .value
+            .asFunction<
+                int Function(
+                    Pointer, Pointer<COMObject> mixedAttributeValue)>()(
+        ptr.ref.lpVtbl, retValuePtr);
 
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      final retValue = retValuePtr.value;
-      return retValue;
-    } finally {
+    if (FAILED(hr)) {
       free(retValuePtr);
+      throw WindowsException(hr);
     }
+
+    return retValuePtr;
   }
 
   int elementFromIAccessible(Pointer<COMObject> accessible, int childId,

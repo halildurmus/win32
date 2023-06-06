@@ -41,78 +41,66 @@ class IUIAutomationSelectionPattern2 extends IUIAutomationSelectionPattern {
           interface.toInterface(IID_IUIAutomationSelectionPattern2));
 
   Pointer<COMObject> get currentFirstSelectedItem {
-    final retValuePtr = calloc<Pointer<COMObject>>();
+    final retValuePtr = calloc<COMObject>();
 
-    try {
-      final hr = ptr.ref.vtable
-              .elementAt(9)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<COMObject>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<COMObject>> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+    final hr = ptr.ref.vtable
+            .elementAt(9)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        Int32 Function(Pointer, Pointer<COMObject> retVal)>>>()
+            .value
+            .asFunction<int Function(Pointer, Pointer<COMObject> retVal)>()(
+        ptr.ref.lpVtbl, retValuePtr);
 
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      final retValue = retValuePtr.value;
-      return retValue;
-    } finally {
+    if (FAILED(hr)) {
       free(retValuePtr);
+      throw WindowsException(hr);
     }
+
+    return retValuePtr;
   }
 
   Pointer<COMObject> get currentLastSelectedItem {
-    final retValuePtr = calloc<Pointer<COMObject>>();
+    final retValuePtr = calloc<COMObject>();
 
-    try {
-      final hr = ptr.ref.vtable
-              .elementAt(10)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<COMObject>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<COMObject>> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+    final hr = ptr.ref.vtable
+            .elementAt(10)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        Int32 Function(Pointer, Pointer<COMObject> retVal)>>>()
+            .value
+            .asFunction<int Function(Pointer, Pointer<COMObject> retVal)>()(
+        ptr.ref.lpVtbl, retValuePtr);
 
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      final retValue = retValuePtr.value;
-      return retValue;
-    } finally {
+    if (FAILED(hr)) {
       free(retValuePtr);
+      throw WindowsException(hr);
     }
+
+    return retValuePtr;
   }
 
   Pointer<COMObject> get currentCurrentSelectedItem {
-    final retValuePtr = calloc<Pointer<COMObject>>();
+    final retValuePtr = calloc<COMObject>();
 
-    try {
-      final hr = ptr.ref.vtable
-              .elementAt(11)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<COMObject>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<COMObject>> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+    final hr = ptr.ref.vtable
+            .elementAt(11)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        Int32 Function(Pointer, Pointer<COMObject> retVal)>>>()
+            .value
+            .asFunction<int Function(Pointer, Pointer<COMObject> retVal)>()(
+        ptr.ref.lpVtbl, retValuePtr);
 
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      final retValue = retValuePtr.value;
-      return retValue;
-    } finally {
+    if (FAILED(hr)) {
       free(retValuePtr);
+      throw WindowsException(hr);
     }
+
+    return retValuePtr;
   }
 
   int get currentItemCount {
@@ -139,78 +127,66 @@ class IUIAutomationSelectionPattern2 extends IUIAutomationSelectionPattern {
   }
 
   Pointer<COMObject> get cachedFirstSelectedItem {
-    final retValuePtr = calloc<Pointer<COMObject>>();
+    final retValuePtr = calloc<COMObject>();
 
-    try {
-      final hr = ptr.ref.vtable
-              .elementAt(13)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<COMObject>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<COMObject>> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+    final hr = ptr.ref.vtable
+            .elementAt(13)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        Int32 Function(Pointer, Pointer<COMObject> retVal)>>>()
+            .value
+            .asFunction<int Function(Pointer, Pointer<COMObject> retVal)>()(
+        ptr.ref.lpVtbl, retValuePtr);
 
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      final retValue = retValuePtr.value;
-      return retValue;
-    } finally {
+    if (FAILED(hr)) {
       free(retValuePtr);
+      throw WindowsException(hr);
     }
+
+    return retValuePtr;
   }
 
   Pointer<COMObject> get cachedLastSelectedItem {
-    final retValuePtr = calloc<Pointer<COMObject>>();
+    final retValuePtr = calloc<COMObject>();
 
-    try {
-      final hr = ptr.ref.vtable
-              .elementAt(14)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<COMObject>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<COMObject>> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+    final hr = ptr.ref.vtable
+            .elementAt(14)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        Int32 Function(Pointer, Pointer<COMObject> retVal)>>>()
+            .value
+            .asFunction<int Function(Pointer, Pointer<COMObject> retVal)>()(
+        ptr.ref.lpVtbl, retValuePtr);
 
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      final retValue = retValuePtr.value;
-      return retValue;
-    } finally {
+    if (FAILED(hr)) {
       free(retValuePtr);
+      throw WindowsException(hr);
     }
+
+    return retValuePtr;
   }
 
   Pointer<COMObject> get cachedCurrentSelectedItem {
-    final retValuePtr = calloc<Pointer<COMObject>>();
+    final retValuePtr = calloc<COMObject>();
 
-    try {
-      final hr = ptr.ref.vtable
-              .elementAt(15)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<COMObject>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<COMObject>> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+    final hr = ptr.ref.vtable
+            .elementAt(15)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        Int32 Function(Pointer, Pointer<COMObject> retVal)>>>()
+            .value
+            .asFunction<int Function(Pointer, Pointer<COMObject> retVal)>()(
+        ptr.ref.lpVtbl, retValuePtr);
 
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      final retValue = retValuePtr.value;
-      return retValue;
-    } finally {
+    if (FAILED(hr)) {
       free(retValuePtr);
+      throw WindowsException(hr);
     }
+
+    return retValuePtr;
   }
 
   int get cachedItemCount {
