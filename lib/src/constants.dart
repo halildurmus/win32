@@ -10715,3 +10715,126 @@ const UIA_IsVirtualizedItemPatternAvailablePropertyId = 30109;
 /// Identifies the IsWindowPatternAvailable property, which indicates whether
 /// the Window control pattern is available for the automation element.
 const UIA_IsWindowPatternAvailablePropertyId = 30044;
+
+/// Possible settings for the Automatic Logon Policy.
+///
+/// {@category Enum}
+class WinHttpRequestAutoLogonPolicy {
+  /// An authenticated log on, using the default credentials, is performed for
+  /// all requests.
+  static const AutoLogonPolicy_Always = 0;
+
+  /// An authenticated log on, using the default credentials, is performed only
+  /// for requests on the local intranet. The local intranet is considered to
+  /// be any server on the proxy bypass list in the current proxy configuration.
+  static const AutoLogonPolicy_OnlyIfBypassProxy = 1;
+
+  /// Authentication is not used automatically.
+  static const AutoLogonPolicy_Never = 2;
+}
+
+/// Options that can be set or retrieved for the current WinHTTP session.
+///
+/// {@category Enum}
+class WinHttpRequestOption {
+  /// Sets or retrieves a VARIANT that contains the user agent string.
+  static const WinHttpRequestOption_UserAgentString = 0;
+
+  /// Retrieves a VARIANT that contains the URL of the resource.
+  static const WinHttpRequestOption_URL = 1;
+
+  /// Sets or retrieves a VARIANT that identifies the code page for the URL
+  /// string.
+  static const WinHttpRequestOption_URLCodePage = 2;
+
+  /// Sets or retrieves a VARIANT that indicates whether percent characters in
+  /// the URL string are converted to an escape sequence.
+  static const WinHttpRequestOption_EscapePercentInURL = 3;
+
+  /// Sets or retrieves a VARIANT that indicates which server certificate
+  /// errors should be ignored.
+  static const WinHttpRequestOption_SslErrorIgnoreFlags = 4;
+
+  /// Sets a VARIANT that specifies the client certificate that is sent to a
+  /// server for authentication.
+  static const WinHttpRequestOption_SelectCertificate = 5;
+
+  /// Sets or retrieves a VARIANT that indicates whether requests are
+  /// automatically redirected when the server specifies a new location for the
+  /// resource.
+  static const WinHttpRequestOption_EnableRedirects = 6;
+
+  /// Sets or retrieves a VARIANT that indicates whether unsafe characters in
+  /// the path and query components of a URL are converted to escape sequences.
+  static const WinHttpRequestOption_UrlEscapeDisable = 7;
+
+  /// Sets or retrieves a VARIANT that indicates whether unsafe characters in
+  /// the query component of the URL are converted to escape sequences.
+  static const WinHttpRequestOption_UrlEscapeDisableQuery = 8;
+
+  /// Sets or retrieves a VARIANT that indicates which secure protocols can be
+  /// used.
+  static const WinHttpRequestOption_SecureProtocols = 9;
+
+  /// Sets or retrieves a VARIANT that indicates whether tracing is currently
+  /// enabled.
+  static const WinHttpRequestOption_EnableTracing = 10;
+
+  /// Controls whether the WinHttpRequest object temporarily reverts client
+  /// impersonation for the duration of the SSL certificate authentication
+  /// operations.
+  static const WinHttpRequestOption_RevertImpersonationOverSsl = 11;
+
+  /// Controls whether or not WinHTTP allows redirects.
+  static const WinHttpRequestOption_EnableHttpsToHttpRedirects = 12;
+
+  /// Enables or disables support for Passport authentication.
+  static const WinHttpRequestOption_EnablePassportAuthentication = 13;
+
+  /// Sets or retrieves the maximum number of redirects that WinHTTP follows;
+  /// the default is 10.
+  static const WinHttpRequestOption_MaxAutomaticRedirects = 14;
+
+  /// Sets or retrieves a bound set on the maximum size of the header portion
+  /// of the server's response.
+  static const WinHttpRequestOption_MaxResponseHeaderSize = 15;
+
+  /// Sets or retrieves a bound on the amount of data that will be drained from
+  /// responses in order to reuse a connection.
+  static const WinHttpRequestOption_MaxResponseDrainSize = 16;
+
+  /// Sets or retrieves a boolean value that indicates whether HTTP/1.1 or
+  /// HTTP/1.0 should be used.
+  static const WinHttpRequestOption_EnableHttp1_1 = 17;
+
+  /// Enables server certificate revocation checking during SSL negotiation.
+  static const WinHttpRequestOption_EnableCertificateRevocationCheck = 18;
+}
+
+// -----------------------------------------------------------------------------
+// WinHttpRequest PROXYSETTING flags
+// -----------------------------------------------------------------------------
+
+/// Default proxy setting. Equivalent to HTTPREQUEST_PROXYSETTING_PRECONFIG.
+const HTTPREQUEST_PROXYSETTING_DEFAULT = 0;
+
+/// Indicates that the proxy settings should be obtained from the registry.
+const HTTPREQUEST_PROXYSETTING_PRECONFIG = 0;
+
+/// Indicates that all HTTP and HTTPS servers should be accessed directly.
+const HTTPREQUEST_PROXYSETTING_DIRECT = 1;
+
+/// When HTTPREQUEST_PROXYSETTING_PROXY is specified, varProxyServer should be
+/// set to a proxy server string and varBypassList should be set to a domain
+/// bypass list string.
+const HTTPREQUEST_PROXYSETTING_PROXY = 2;
+
+// -----------------------------------------------------------------------------
+// WinHttpRequest SETCREDENTIALS flags
+// -----------------------------------------------------------------------------
+
+/// Credentials are passed to a server.
+const HTTPREQUEST_SETCREDENTIALS_FOR_SERVER = 0;
+
+/// Credentials are passed to a proxy.
+const HTTPREQUEST_SETCREDENTIALS_FOR_PROXY = 1;
