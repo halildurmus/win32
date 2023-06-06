@@ -109,10 +109,7 @@ class Dispatcher {
     }
   }
 
-  void dispose() {
-    free(disp.ptr);
-    free(IID_NULL);
-  }
+  void dispose() => free(IID_NULL);
 }
 
 void main() {
