@@ -63,13 +63,42 @@ IUIAutomationElement getTopLevelWindowByProcessId(int processId) {
   }
 }
 
+/// Takes a Control Pattern Availability [propertyId] (e.g.
+/// `UIA_IsTextPatternAvailablePropertyId`) and checks if the given [element]
+/// supports that particular control pattern.
+bool isControlPatternAvailable(int propertyId, IUIAutomationElement element) {
+  final retValParam = calloc<VARIANT>();
+  VariantInit(retValParam);
+  retValParam.ref.vt = VARENUM.VT_BOOL;
+
+  try {
+    final hr = element.getCurrentPropertyValue(propertyId, retValParam);
+    if (FAILED(hr)) throw WindowsException(hr);
+    return retValParam.ref.boolVal;
+  } finally {
+    VariantClear(retValParam);
+    free(retValParam);
+  }
+}
+
 /// Get the window pattern of the given [element].
 IUIAutomationWindowPattern getWindowPattern(IUIAutomationElement element) {
+  // Check if the window pattern is available for the element
+  if (!isControlPatternAvailable(
+      UIA_IsWindowPatternAvailablePropertyId, element)) {
+    throw Exception('Window pattern is not available for this element');
+  }
+
   final pPattern = calloc<COMObject>();
   final hr = element.getCurrentPattern(UIA_WindowPatternId, pPattern.cast());
   if (FAILED(hr)) {
     free(pPattern);
     throw WindowsException(hr);
+  }
+
+  if (pPattern.ref.isNull) {
+    free(pPattern);
+    throw Exception('Could not get the window pattern');
   }
 
   return IUIAutomationWindowPattern(pPattern);
