@@ -21,9 +21,17 @@ void main() {
     check(scope.userStrings.length).equals(0);
   });
 
-  test('Can successfully load a typedef from the Win32 metadata', () {
+  test('Can successfully load a typedef from the Win32 metadata 1', () {
     final scope = MetadataStore.getWin32Scope();
     final typedef = scope.findTypeDef('Windows.Win32.Graphics.Gdi.Apis');
+    check(typedef).isNotNull();
+    check(typedef!.methods).isNotEmpty();
+  });
+
+  test('Can successfully load a typedef from the Win32 metadata 2', () {
+    final scope = MetadataStore.getWin32Scope();
+    final typedef =
+        scope.findTypeDef('Windows.Win32.System.WinRT.Metadata.Apis');
     check(typedef).isNotNull();
     check(typedef!.methods).isNotEmpty();
   });
