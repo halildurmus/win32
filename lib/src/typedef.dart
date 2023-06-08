@@ -509,7 +509,19 @@ class TypeDef extends TokenObject
       while (hr == S_OK) {
         final methodToken = rgMethods.value;
 
-        methods.add(Method.fromToken(scope, methodToken));
+        try {
+          methods.add(Method.fromToken(scope, methodToken));
+        } on WindowsException catch (e) {
+          if (e.hr.toUnsigned(32) == RO_E_METADATA_NAME_NOT_FOUND) {
+            // If the method cannot be parsed due to missing references, rather
+            // than abruptly exiting, proceed to the next one
+            print('Could not parse the method with token $methodToken from '
+                '$name:\n $e');
+          } else {
+            rethrow;
+          }
+        }
+
         hr = reader.enumMethods(phEnum, token, rgMethods, 1, pcTokens);
       }
       reader.closeEnum(phEnum.value);
