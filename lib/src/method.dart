@@ -326,7 +326,8 @@ class Method extends TokenObject
   // means a little work here to ensure that it comes out right.
   void _parseSimpleArray(TypeTuple typeTuple, int paramsIndex,
       {bool isReferenceType = false}) {
-    parameters[paramsIndex].name = '__valueSize';
+    final paramName = parameters[paramsIndex].name;
+    parameters[paramsIndex].name = '__${paramName}Size';
 
     if (isReferenceType) {
       parameters[paramsIndex].typeIdentifier = parameters[paramsIndex]
@@ -340,7 +341,7 @@ class Method extends TokenObject
     }
 
     parameters.insert(paramsIndex + 1, Parameter.fromVoid(scope, token));
-    parameters[paramsIndex + 1].name = 'value';
+    parameters[paramsIndex + 1].name = paramName;
     parameters[paramsIndex + 1].typeIdentifier = typeTuple.typeIdentifier;
   }
 }
