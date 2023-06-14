@@ -1,3 +1,9 @@
+## 3.0.1
+
+- Fix an error when enumerating a TypeDef's methods (#74)
+- Fix naming conflicts with multiple simple array type parameters in a function
+  (#76)
+
 ## 3.0.0
 
 - Fix bug with a simple array type in a function signature (#72, thanks
@@ -163,12 +169,12 @@
 ## 1.0.22
 
 - Performance improvements (thanks to @dantup).
-  
+
 ## 1.0.21
 
 - Extra backstop of looking locally for Win32 metadata file. This is for
   compiled EXEs.
-  
+
 ## 1.0.20
 
 - Export architecture mixin.
