@@ -468,6 +468,30 @@ void main() {
     check(method.parameters[4].name).equals('options');
   });
 
+  test('Method with simple array parameters is correct', () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.AI.MachineLearning.ITensorBooleanStatics2')!;
+
+    final method = winTypeDef.findMethod('CreateFromShapeArrayAndDataArray')!;
+
+    check(method.isProperty).isFalse();
+    check(method.returnType.typeIdentifier.baseType)
+        .equals(BaseType.classTypeModifier);
+    check(method.parameters.length).equals(4);
+    check(method.parameters[0].typeIdentifier.baseType)
+        .equals(BaseType.uint32Type);
+    check(method.parameters[0].name).equals('__shapeSize');
+    check(method.parameters[1].typeIdentifier.baseType)
+        .equals(BaseType.simpleArrayType);
+    check(method.parameters[1].name).equals('shape');
+    check(method.parameters[2].typeIdentifier.baseType)
+        .equals(BaseType.uint32Type);
+    check(method.parameters[2].name).equals('__dataSize');
+    check(method.parameters[3].typeIdentifier.baseType)
+        .equals(BaseType.simpleArrayType);
+    check(method.parameters[3].name).equals('data');
+  });
+
   test('Reference parameter is correct', () {
     final winTypeDef = MetadataStore.getMetadataForType(
         'Windows.Globalization.PhoneNumberFormatting.PhoneNumberFormatter')!;
