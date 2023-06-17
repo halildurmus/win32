@@ -417,6 +417,9 @@ void main() {
   test('Struct HOSTENT is the right size', () {
     expect(sizeOf<HOSTENT>(), equals(32));
   });
+  test('Struct HWAVEIN is the right size', () {
+    expect(sizeOf<HWAVEIN>(), equals(8));
+  });
   test('Struct ICONINFO is the right size', () {
     expect(sizeOf<ICONINFO>(), equals(32));
   });
@@ -1082,6 +1085,9 @@ void main() {
   });
   test('Struct WAVEHDR is the right size', () {
     expect(sizeOf<WAVEHDR>(), equals(48));
+  });
+  test('Struct WAVEINCAPS is the right size', () {
+    expect(sizeOf<WAVEINCAPS>(), equals(80));
   });
   test('Struct WAVEOUTCAPS is the right size', () {
     expect(sizeOf<WAVEOUTCAPS>(), equals(84));

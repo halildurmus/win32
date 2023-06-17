@@ -12781,6 +12781,120 @@ void main() {
               Pointer<Utf16> pszSound, int hmod, int fdwSound)>('PlaySoundW');
       expect(PlaySound, isA<Function>());
     });
+    test('Can instantiate waveInAddBuffer', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final waveInAddBuffer = winmm.lookupFunction<
+          Uint32 Function(IntPtr hwi, Pointer<WAVEHDR> pwh, Uint32 cbwh),
+          int Function(
+              int hwi, Pointer<WAVEHDR> pwh, int cbwh)>('waveInAddBuffer');
+      expect(waveInAddBuffer, isA<Function>());
+    });
+    test('Can instantiate waveInClose', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final waveInClose = winmm.lookupFunction<Uint32 Function(IntPtr hwi),
+          int Function(int hwi)>('waveInClose');
+      expect(waveInClose, isA<Function>());
+    });
+    test('Can instantiate waveInGetDevCaps', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final waveInGetDevCaps = winmm.lookupFunction<
+          Uint32 Function(
+              IntPtr uDeviceID, Pointer<WAVEINCAPS> pwic, Uint32 cbwic),
+          int Function(int uDeviceID, Pointer<WAVEINCAPS> pwic,
+              int cbwic)>('waveInGetDevCapsW');
+      expect(waveInGetDevCaps, isA<Function>());
+    });
+    test('Can instantiate waveInGetErrorText', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final waveInGetErrorText = winmm.lookupFunction<
+          Uint32 Function(
+              Uint32 mmrError, Pointer<Utf16> pszText, Uint32 cchText),
+          int Function(int mmrError, Pointer<Utf16> pszText,
+              int cchText)>('waveInGetErrorTextW');
+      expect(waveInGetErrorText, isA<Function>());
+    });
+    test('Can instantiate waveInGetID', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final waveInGetID = winmm.lookupFunction<
+          Uint32 Function(IntPtr hwi, Pointer<Uint32> puDeviceID),
+          int Function(int hwi, Pointer<Uint32> puDeviceID)>('waveInGetID');
+      expect(waveInGetID, isA<Function>());
+    });
+    test('Can instantiate waveInGetNumDevs', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final waveInGetNumDevs =
+          winmm.lookupFunction<Uint32 Function(), int Function()>(
+              'waveInGetNumDevs');
+      expect(waveInGetNumDevs, isA<Function>());
+    });
+    test('Can instantiate waveInGetPosition', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final waveInGetPosition = winmm.lookupFunction<
+          Uint32 Function(IntPtr hwi, Pointer<MMTIME> pmmt, Uint32 cbmmt),
+          int Function(
+              int hwi, Pointer<MMTIME> pmmt, int cbmmt)>('waveInGetPosition');
+      expect(waveInGetPosition, isA<Function>());
+    });
+    test('Can instantiate waveInMessage', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final waveInMessage = winmm.lookupFunction<
+          Uint32 Function(IntPtr hwi, Uint32 uMsg, IntPtr dw1, IntPtr dw2),
+          int Function(int hwi, int uMsg, int dw1, int dw2)>('waveInMessage');
+      expect(waveInMessage, isA<Function>());
+    });
+    test('Can instantiate waveInOpen', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final waveInOpen = winmm.lookupFunction<
+          Uint32 Function(
+              Pointer<IntPtr> phwi,
+              Uint32 uDeviceID,
+              Pointer<WAVEFORMATEX> pwfx,
+              IntPtr dwCallback,
+              IntPtr dwInstance,
+              Uint32 fdwOpen),
+          int Function(
+              Pointer<IntPtr> phwi,
+              int uDeviceID,
+              Pointer<WAVEFORMATEX> pwfx,
+              int dwCallback,
+              int dwInstance,
+              int fdwOpen)>('waveInOpen');
+      expect(waveInOpen, isA<Function>());
+    });
+    test('Can instantiate waveInPrepareHeader', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final waveInPrepareHeader = winmm.lookupFunction<
+          Uint32 Function(IntPtr hwi, Pointer<WAVEHDR> pwh, Uint32 cbwh),
+          int Function(
+              int hwi, Pointer<WAVEHDR> pwh, int cbwh)>('waveInPrepareHeader');
+      expect(waveInPrepareHeader, isA<Function>());
+    });
+    test('Can instantiate waveInReset', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final waveInReset = winmm.lookupFunction<Uint32 Function(IntPtr hwi),
+          int Function(int hwi)>('waveInReset');
+      expect(waveInReset, isA<Function>());
+    });
+    test('Can instantiate waveInStart', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final waveInStart = winmm.lookupFunction<Uint32 Function(IntPtr hwi),
+          int Function(int hwi)>('waveInStart');
+      expect(waveInStart, isA<Function>());
+    });
+    test('Can instantiate waveInStop', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final waveInStop = winmm.lookupFunction<Uint32 Function(IntPtr hwi),
+          int Function(int hwi)>('waveInStop');
+      expect(waveInStop, isA<Function>());
+    });
+    test('Can instantiate waveInUnprepareHeader', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final waveInUnprepareHeader = winmm.lookupFunction<
+          Uint32 Function(IntPtr hwi, Pointer<WAVEHDR> pwh, Uint32 cbwh),
+          int Function(int hwi, Pointer<WAVEHDR> pwh,
+              int cbwh)>('waveInUnprepareHeader');
+      expect(waveInUnprepareHeader, isA<Function>());
+    });
     test('Can instantiate waveOutClose', () {
       final winmm = DynamicLibrary.open('winmm.dll');
       final waveOutClose = winmm.lookupFunction<Uint32 Function(IntPtr hwo),
