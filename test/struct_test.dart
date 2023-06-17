@@ -381,6 +381,9 @@ void main() {
   test('Struct EXCEPINFO is the right size', () {
     expect(sizeOf<EXCEPINFO>(), equals(64));
   });
+  test('Struct ExtendedProperty is the right size', () {
+    expect(sizeOf<ExtendedProperty>(), equals(16));
+  });
   test('Struct FD_SET is the right size', () {
     expect(sizeOf<FD_SET>(), equals(520));
   });

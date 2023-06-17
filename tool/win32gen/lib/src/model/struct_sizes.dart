@@ -129,6 +129,7 @@ const structSizeMap = <String, int>{
   'ENUM_SERVICE_STATUS_PROCESS': 56,
   'EVENTMSG': 24,
   'EXCEPINFO': 64,
+  'ExtendedProperty': 16,
   'FD_SET': 520,
   'FILETIME': 8,
   'FILE_SEGMENT_ELEMENT': 8,
