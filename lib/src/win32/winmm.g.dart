@@ -664,6 +664,262 @@ final _PlaySound = _winmm.lookupFunction<
     int Function(
         Pointer<Utf16> pszSound, int hmod, int fdwSound)>('PlaySoundW');
 
+/// The waveInAddBuffer function sends an input buffer to the given
+/// waveform-audio input device. When the buffer is filled, the application
+/// is notified.
+///
+/// ```c
+/// MMRESULT waveInAddBuffer(
+///   HWAVEIN   hwi,
+///   LPWAVEHDR pwh,
+///   UINT      cbwh
+/// );
+/// ```
+/// {@category winmm}
+int waveInAddBuffer(int hwi, Pointer<WAVEHDR> pwh, int cbwh) =>
+    _waveInAddBuffer(hwi, pwh, cbwh);
+
+final _waveInAddBuffer = _winmm.lookupFunction<
+    Uint32 Function(IntPtr hwi, Pointer<WAVEHDR> pwh, Uint32 cbwh),
+    int Function(int hwi, Pointer<WAVEHDR> pwh, int cbwh)>('waveInAddBuffer');
+
+/// The waveInClose function closes the given waveform-audio input device.
+///
+/// ```c
+/// MMRESULT waveInClose(
+///   HWAVEIN hwi
+/// );
+/// ```
+/// {@category winmm}
+int waveInClose(int hwi) => _waveInClose(hwi);
+
+final _waveInClose =
+    _winmm.lookupFunction<Uint32 Function(IntPtr hwi), int Function(int hwi)>(
+        'waveInClose');
+
+/// The waveInGetDevCaps function retrieves the capabilities of a given
+/// waveform-audio input device.
+///
+/// ```c
+/// MMRESULT waveInGetDevCapsW(
+///   UINT         uDeviceID,
+///   LPWAVEINCAPS pwic,
+///   UINT         cbwic
+/// );
+/// ```
+/// {@category winmm}
+int waveInGetDevCaps(int uDeviceID, Pointer<WAVEINCAPS> pwic, int cbwic) =>
+    _waveInGetDevCaps(uDeviceID, pwic, cbwic);
+
+final _waveInGetDevCaps = _winmm.lookupFunction<
+    Uint32 Function(IntPtr uDeviceID, Pointer<WAVEINCAPS> pwic, Uint32 cbwic),
+    int Function(int uDeviceID, Pointer<WAVEINCAPS> pwic,
+        int cbwic)>('waveInGetDevCapsW');
+
+/// The waveInGetErrorText function retrieves a textual description of the
+/// error identified by the given error number.
+///
+/// ```c
+/// MMRESULT waveInGetErrorTextW(
+///   MMRESULT mmrError,
+///   LPSTR    pszText,
+///   UINT     cchText
+/// );
+/// ```
+/// {@category winmm}
+int waveInGetErrorText(int mmrError, Pointer<Utf16> pszText, int cchText) =>
+    _waveInGetErrorText(mmrError, pszText, cchText);
+
+final _waveInGetErrorText = _winmm.lookupFunction<
+    Uint32 Function(Uint32 mmrError, Pointer<Utf16> pszText, Uint32 cchText),
+    int Function(int mmrError, Pointer<Utf16> pszText,
+        int cchText)>('waveInGetErrorTextW');
+
+/// The waveInGetID function gets the device identifier for the given
+/// waveform-audio input device.
+///
+/// ```c
+/// MMRESULT waveInGetID(
+///   HWAVEIN hwi,
+///   LPUINT  puDeviceID
+/// );
+/// ```
+/// {@category winmm}
+int waveInGetID(int hwi, Pointer<Uint32> puDeviceID) =>
+    _waveInGetID(hwi, puDeviceID);
+
+final _waveInGetID = _winmm.lookupFunction<
+    Uint32 Function(IntPtr hwi, Pointer<Uint32> puDeviceID),
+    int Function(int hwi, Pointer<Uint32> puDeviceID)>('waveInGetID');
+
+/// The waveInGetNumDevs function returns the number of waveform-audio input
+/// devices present in the system.
+///
+/// ```c
+/// UINT waveInGetNumDevs();
+/// ```
+/// {@category winmm}
+int waveInGetNumDevs() => _waveInGetNumDevs();
+
+final _waveInGetNumDevs = _winmm
+    .lookupFunction<Uint32 Function(), int Function()>('waveInGetNumDevs');
+
+/// The waveInGetPosition function retrieves the current input position of
+/// the given waveform-audio input device.
+///
+/// ```c
+/// MMRESULT waveInGetPosition(
+///   HWAVEIN  hwi,
+///   LPMMTIME pmmt,
+///   UINT     cbmmt
+/// );
+/// ```
+/// {@category winmm}
+int waveInGetPosition(int hwi, Pointer<MMTIME> pmmt, int cbmmt) =>
+    _waveInGetPosition(hwi, pmmt, cbmmt);
+
+final _waveInGetPosition = _winmm.lookupFunction<
+    Uint32 Function(IntPtr hwi, Pointer<MMTIME> pmmt, Uint32 cbmmt),
+    int Function(
+        int hwi, Pointer<MMTIME> pmmt, int cbmmt)>('waveInGetPosition');
+
+/// The waveInMessage function sends messages to the waveform-audio input
+/// device drivers.
+///
+/// ```c
+/// MMRESULT waveInMessage(
+///   HWAVEIN   hwi,
+///   UINT      uMsg,
+///   DWORD_PTR dw1,
+///   DWORD_PTR dw2
+/// );
+/// ```
+/// {@category winmm}
+int waveInMessage(int hwi, int uMsg, int dw1, int dw2) =>
+    _waveInMessage(hwi, uMsg, dw1, dw2);
+
+final _waveInMessage = _winmm.lookupFunction<
+    Uint32 Function(IntPtr hwi, Uint32 uMsg, IntPtr dw1, IntPtr dw2),
+    int Function(int hwi, int uMsg, int dw1, int dw2)>('waveInMessage');
+
+/// The waveInOpen function opens the given waveform-audio input device for
+/// recording.
+///
+/// ```c
+/// MMRESULT waveInOpen(
+///   LPHWAVEIN       phwi,
+///   UINT            uDeviceID,
+///   LPCWAVEFORMATEX pwfx,
+///   DWORD_PTR       dwCallback,
+///   DWORD_PTR       dwInstance,
+///   DWORD           fdwOpen
+/// );
+/// ```
+/// {@category winmm}
+int waveInOpen(Pointer<IntPtr> phwi, int uDeviceID, Pointer<WAVEFORMATEX> pwfx,
+        int dwCallback, int dwInstance, int fdwOpen) =>
+    _waveInOpen(phwi, uDeviceID, pwfx, dwCallback, dwInstance, fdwOpen);
+
+final _waveInOpen = _winmm.lookupFunction<
+    Uint32 Function(
+        Pointer<IntPtr> phwi,
+        Uint32 uDeviceID,
+        Pointer<WAVEFORMATEX> pwfx,
+        IntPtr dwCallback,
+        IntPtr dwInstance,
+        Uint32 fdwOpen),
+    int Function(
+        Pointer<IntPtr> phwi,
+        int uDeviceID,
+        Pointer<WAVEFORMATEX> pwfx,
+        int dwCallback,
+        int dwInstance,
+        int fdwOpen)>('waveInOpen');
+
+/// The waveInPrepareHeader function prepares a buffer for waveform-audio
+/// input.
+///
+/// ```c
+/// MMRESULT waveInPrepareHeader(
+///   HWAVEIN   hwi,
+///   LPWAVEHDR pwh,
+///   UINT      cbwh
+/// );
+/// ```
+/// {@category winmm}
+int waveInPrepareHeader(int hwi, Pointer<WAVEHDR> pwh, int cbwh) =>
+    _waveInPrepareHeader(hwi, pwh, cbwh);
+
+final _waveInPrepareHeader = _winmm.lookupFunction<
+    Uint32 Function(IntPtr hwi, Pointer<WAVEHDR> pwh, Uint32 cbwh),
+    int Function(
+        int hwi, Pointer<WAVEHDR> pwh, int cbwh)>('waveInPrepareHeader');
+
+/// The waveInReset function stops input on the given waveform-audio input
+/// device and resets the current position to zero.
+///
+/// ```c
+/// MMRESULT waveInReset(
+///   HWAVEIN hwi
+/// );
+/// ```
+/// {@category winmm}
+int waveInReset(int hwi) => _waveInReset(hwi);
+
+final _waveInReset =
+    _winmm.lookupFunction<Uint32 Function(IntPtr hwi), int Function(int hwi)>(
+        'waveInReset');
+
+/// The waveInStart function starts input on the given waveform-audio input
+/// device.
+///
+/// ```c
+/// MMRESULT waveInStart(
+///   HWAVEIN hwi
+/// );
+/// ```
+/// {@category winmm}
+int waveInStart(int hwi) => _waveInStart(hwi);
+
+final _waveInStart =
+    _winmm.lookupFunction<Uint32 Function(IntPtr hwi), int Function(int hwi)>(
+        'waveInStart');
+
+/// The waveInStop function stops waveform-audio input.
+///
+/// ```c
+/// MMRESULT waveInStop(
+///   HWAVEIN hwi
+/// );
+/// ```
+/// {@category winmm}
+int waveInStop(int hwi) => _waveInStop(hwi);
+
+final _waveInStop =
+    _winmm.lookupFunction<Uint32 Function(IntPtr hwi), int Function(int hwi)>(
+        'waveInStop');
+
+/// The waveInUnprepareHeader function cleans up the preparation performed
+/// by the waveInPrepareHeader function. This function must be called after
+/// the device driver fills a buffer and returns it to the application. You
+/// must call this function before freeing the buffer.
+///
+/// ```c
+/// MMRESULT waveInUnprepareHeader(
+///   HWAVEIN   hwi,
+///   LPWAVEHDR pwh,
+///   UINT      cbwh
+/// );
+/// ```
+/// {@category winmm}
+int waveInUnprepareHeader(int hwi, Pointer<WAVEHDR> pwh, int cbwh) =>
+    _waveInUnprepareHeader(hwi, pwh, cbwh);
+
+final _waveInUnprepareHeader = _winmm.lookupFunction<
+    Uint32 Function(IntPtr hwi, Pointer<WAVEHDR> pwh, Uint32 cbwh),
+    int Function(
+        int hwi, Pointer<WAVEHDR> pwh, int cbwh)>('waveInUnprepareHeader');
+
 /// The waveOutClose function closes the given waveform-audio output device.
 ///
 /// ```c

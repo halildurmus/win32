@@ -5770,6 +5770,62 @@
         "prototype": "BOOL WaitMessage();",
         "comment": "Yields control to other threads when a thread has no other messages in its message queue. The WaitMessage function suspends the thread and does not return until a new message is placed in the thread's message queue."
     },
+    "waveInAddBuffer": {
+        "prototype": "MMRESULT waveInAddBuffer(\n  HWAVEIN   hwi,\n  LPWAVEHDR pwh,\n  UINT      cbwh\n);",
+        "comment": "The waveInAddBuffer function sends an input buffer to the given waveform-audio input device. When the buffer is filled, the application is notified."
+    },
+    "waveInClose": {
+        "prototype": "MMRESULT waveInClose(\n  HWAVEIN hwi\n);",
+        "comment": "The waveInClose function closes the given waveform-audio input device."
+    },
+    "waveInGetDevCaps": {
+        "prototype": "MMRESULT waveInGetDevCapsW(\n  UINT         uDeviceID,\n  LPWAVEINCAPS pwic,\n  UINT         cbwic\n);",
+        "comment": "The waveInGetDevCaps function retrieves the capabilities of a given waveform-audio input device."
+    },
+    "waveInGetErrorText": {
+        "prototype": "MMRESULT waveInGetErrorTextW(\n  MMRESULT mmrError,\n  LPSTR    pszText,\n  UINT     cchText\n);",
+        "comment": "The waveInGetErrorText function retrieves a textual description of the error identified by the given error number."
+    },
+    "waveInGetID": {
+        "prototype": "MMRESULT waveInGetID(\n  HWAVEIN hwi,\n  LPUINT  puDeviceID\n);",
+        "comment": "The waveInGetID function gets the device identifier for the given waveform-audio input device."
+    },
+    "waveInGetNumDevs": {
+        "prototype": "UINT waveInGetNumDevs();",
+        "comment": "The waveInGetNumDevs function returns the number of waveform-audio input devices present in the system."
+    },
+    "waveInGetPosition": {
+        "prototype": "MMRESULT waveInGetPosition(\n  HWAVEIN  hwi,\n  LPMMTIME pmmt,\n  UINT     cbmmt\n);",
+        "comment": "The waveInGetPosition function retrieves the current input position of the given waveform-audio input device."
+    },
+    "waveInMessage": {
+        "prototype": "MMRESULT waveInMessage(\n  HWAVEIN   hwi,\n  UINT      uMsg,\n  DWORD_PTR dw1,\n  DWORD_PTR dw2\n);",
+        "comment": "The waveInMessage function sends messages to the waveform-audio input device drivers."
+    },
+    "waveInOpen": {
+        "prototype": "MMRESULT waveInOpen(\n  LPHWAVEIN       phwi,\n  UINT            uDeviceID,\n  LPCWAVEFORMATEX pwfx,\n  DWORD_PTR       dwCallback,\n  DWORD_PTR       dwInstance,\n  DWORD           fdwOpen\n);",
+        "comment": "The waveInOpen function opens the given waveform-audio input device for recording."
+    },
+    "waveInPrepareHeader": {
+        "prototype": "MMRESULT waveInPrepareHeader(\n  HWAVEIN   hwi,\n  LPWAVEHDR pwh,\n  UINT      cbwh\n);",
+        "comment": "The waveInPrepareHeader function prepares a buffer for waveform-audio input."
+    },
+    "waveInReset": {
+        "prototype": "MMRESULT waveInReset(\n  HWAVEIN hwi\n);",
+        "comment": "The waveInReset function stops input on the given waveform-audio input device and resets the current position to zero."
+    },
+    "waveInStart": {
+        "prototype": "MMRESULT waveInStart(\n  HWAVEIN hwi\n);",
+        "comment": "The waveInStart function starts input on the given waveform-audio input device."
+    },
+    "waveInStop": {
+        "prototype": "MMRESULT waveInStop(\n  HWAVEIN hwi\n);",
+        "comment": "The waveInStop function stops waveform-audio input."
+    },
+    "waveInUnprepareHeader": {
+        "prototype": "MMRESULT waveInUnprepareHeader(\n  HWAVEIN   hwi,\n  LPWAVEHDR pwh,\n  UINT      cbwh\n);",
+        "comment": "The waveInUnprepareHeader function cleans up the preparation performed by the waveInPrepareHeader function. This function must be called after the device driver fills a buffer and returns it to the application. You must call this function before freeing the buffer."
+    },
     "waveOutClose": {
         "prototype": "MMRESULT waveOutClose(\n  HWAVEOUT hwo\n  );",
         "comment": "The waveOutClose function closes the given waveform-audio output device."

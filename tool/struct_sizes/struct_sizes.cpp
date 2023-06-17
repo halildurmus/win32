@@ -187,6 +187,7 @@ void main()
     printf("  'GUITHREADINFO': %zu,\n", sizeof(GUITHREADINFO));
     printf("  'HARDWAREINPUT': %zu,\n", sizeof(HARDWAREINPUT));
     printf("  'HOSTENT': %zu,\n", sizeof(HOSTENT));
+    printf("  'HWAVEIN': %zu,\n", sizeof(HWAVEIN));
     printf("  'ICONINFO': %zu,\n", sizeof(ICONINFO));
     printf("  'ICONINFOEX': %zu,\n", sizeof(ICONINFOEXW));
     printf("  'IDLDESC': %zu,\n", sizeof(IDLDESC));
@@ -409,6 +410,7 @@ void main()
     printf("  'WAVEFORMATEX': %zu,\n", sizeof(WAVEFORMATEX));
     printf("  'WAVEFORMATEXTENSIBLE': %zu,\n", sizeof(WAVEFORMATEXTENSIBLE));
     printf("  'WAVEHDR': %zu,\n", sizeof(WAVEHDR));
+    printf("  'WAVEINCAPS': %zu,\n", sizeof(WAVEINCAPSW));
     printf("  'WAVEOUTCAPS': %zu,\n", sizeof(WAVEOUTCAPSW));
     printf("  'WIN32_FIND_DATA': %zu,\n", sizeof(WIN32_FIND_DATAW));
     printf("  'WINDOWINFO': %zu,\n", sizeof(WINDOWINFO));

@@ -3478,6 +3478,14 @@ base class HOSTENT extends Struct {
   external Pointer<Pointer<Int8>> h_addr_list;
 }
 
+/// Handle of an open waveform-audio input device.
+///
+/// {@category Struct}
+base class HWAVEIN extends Struct {
+  @IntPtr()
+  external int Value;
+}
+
 /// Contains information about an icon or a cursor.
 ///
 /// {@category Struct}
@@ -9831,6 +9839,50 @@ base class WAVEHDR extends Struct {
 
   @IntPtr()
   external int reserved;
+}
+
+/// The WAVEINCAPS structure describes the capabilities of a waveform-audio
+/// input device.
+///
+/// {@category Struct}
+@Packed(1)
+base class WAVEINCAPS extends Struct {
+  @Uint16()
+  external int wMid;
+
+  @Uint16()
+  external int wPid;
+
+  @Uint32()
+  external int vDriverVersion;
+
+  @Array(32)
+  external Array<Uint16> _szPname;
+
+  String get szPname {
+    final charCodes = <int>[];
+    for (var i = 0; i < 32; i++) {
+      if (_szPname[i] == 0x00) break;
+      charCodes.add(_szPname[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set szPname(String value) {
+    final stringToStore = value.padRight(32, '\x00');
+    for (var i = 0; i < 32; i++) {
+      _szPname[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  @Uint32()
+  external int dwFormats;
+
+  @Uint16()
+  external int wChannels;
+
+  @Uint16()
+  external int wReserved1;
 }
 
 /// The WAVEOUTCAPS structure describes the capabilities of a waveform-audio
