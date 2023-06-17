@@ -42,6 +42,7 @@
 #include <ShellScalingApi.h>
 #include <ShlObj_core.h>
 #include <Shlwapi.h>
+#include <uiautomationclient.h>
 #include <wincred.h>
 #include <wlanapi.h>
 #include <ws2bth.h>
