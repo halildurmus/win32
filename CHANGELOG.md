@@ -1,3 +1,7 @@
+## 5.0.4
+
+- Add `waveIn*` APIs (#727)
+
 ## 5.0.3
 
 - Update the screenshot example to support multiple displays (#704, thanks to
