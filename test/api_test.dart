@@ -12235,6 +12235,23 @@ void main() {
     }
   });
 
+  group('Test api-ms-win-core-winrt-error-l1-1-0 functions', () {
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate GetRestrictedErrorInfo', () {
+        final api_ms_win_core_winrt_error_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-core-winrt-error-l1-1-0.dll');
+        final GetRestrictedErrorInfo =
+            api_ms_win_core_winrt_error_l1_1_0.lookupFunction<
+                    Int32 Function(
+                        Pointer<Pointer<COMObject>> ppRestrictedErrorInfo),
+                    int Function(
+                        Pointer<Pointer<COMObject>> ppRestrictedErrorInfo)>(
+                'GetRestrictedErrorInfo');
+        expect(GetRestrictedErrorInfo, isA<Function>());
+      });
+    }
+  });
+
   group('Test api-ms-win-service-core-l1-1-4 functions', () {
     if (windowsBuildNumber >= 19041) {
       test('Can instantiate GetServiceDirectory', () {

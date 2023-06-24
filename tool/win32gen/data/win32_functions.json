@@ -2621,6 +2621,12 @@
         "prototype": "UINT GetRegisteredRawInputDevices(\n  PRAWINPUTDEVICE pRawInputDevices,\n  PUINT           puiNumDevices,\n  UINT            cbSize\n);",
         "comment": "Retrieves the information about the raw input devices for the current application."
     },
+    "GetRestrictedErrorInfo": {
+        "prototype": "HRESULT GetRestrictedErrorInfo(\n  [out] IRestrictedErrorInfo **ppRestrictedErrorInfo\n);",
+        "comment": "Gets the restricted error information object set by a previous call to SetRestrictedErrorInfo in the current logical thread.",
+        "category": "winrt",
+        "minimumWindowsVersion": "WIN8"
+    },
     "GetSaveFileName": {
         "prototype": "BOOL GetSaveFileNameW(\n  LPOPENFILENAMEW Arg1\n);",
         "comment": "Creates a Save dialog box that lets the user specify the drive, directory, and name of a file to save."
