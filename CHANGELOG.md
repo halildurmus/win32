@@ -1,5 +1,12 @@
+## 5.0.5
+
+- Add `GetRestrictedErrorInfo` and `IRestrictedErrorInfo` (#732)
+
 ## 5.0.4
 
+- Add `WinHttpRequest` APIs (#718)
+- Update the UI Automation example (#719)
+- Fix projection of COM get properties (#720)
 - Add `waveIn*` APIs (#727)
 
 ## 5.0.3
