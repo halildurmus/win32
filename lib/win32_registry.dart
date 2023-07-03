@@ -20,6 +20,7 @@
 ///   if (buildNumber != null) {
 ///     print('Windows build number: $buildNumber');
 ///   }
+///   key.close();
 /// }
 /// ```
 library win32_registry;

@@ -23,28 +23,23 @@ import 'registry_key.dart';
 ///
 /// Once you have a key, you can view subkeys, create new keys, and create,
 /// update, rename or delete values stored under that key.
-class Registry {
-  /// This class shouldn't be instantiated directly.
-  Registry._();
-
+interface class Registry {
   /// Opens a new key based on the given path.
   ///
   /// When you are finished with the key, you should close it and release the
   /// handle with the [RegistryKey.close] method.
-  static RegistryKey openPath(RegistryHive hive,
-      {String path = '',
-      AccessRights desiredAccessRights = AccessRights.readOnly}) {
+  static RegistryKey openPath(
+    RegistryHive hive, {
+    String path = '',
+    AccessRights desiredAccessRights = AccessRights.readOnly,
+  }) {
     final phKey = calloc<HKEY>();
     final lpSubKey = path.toNativeUtf16();
     try {
       final lStatus = RegOpenKeyEx(
           hive.win32Value, lpSubKey, 0, desiredAccessRights.win32Value, phKey);
-
-      if (lStatus == ERROR_SUCCESS) {
-        return RegistryKey(phKey.value);
-      } else {
-        throw WindowsException(HRESULT_FROM_WIN32(lStatus));
-      }
+      if (lStatus == ERROR_SUCCESS) return RegistryKey(phKey.value);
+      throw WindowsException(HRESULT_FROM_WIN32(lStatus));
     } finally {
       free(phKey);
       free(lpSubKey);
@@ -56,14 +51,10 @@ class Registry {
     // API, since the thread may be impersonating a different user (e.g. Run
     // As...)
     final phKey = calloc<HKEY>();
-
     try {
       final lStatus = RegOpenCurrentUser(KEY_ALL_ACCESS, phKey);
-      if (lStatus == ERROR_SUCCESS) {
-        return RegistryKey(phKey.value);
-      } else {
-        throw WindowsException(HRESULT_FROM_WIN32(lStatus));
-      }
+      if (lStatus == ERROR_SUCCESS) return RegistryKey(phKey.value);
+      throw WindowsException(HRESULT_FROM_WIN32(lStatus));
     } finally {
       free(phKey);
     }

@@ -16,35 +16,26 @@ class RegistryValue {
   const RegistryValue(this.name, this.type, this.data);
 
   factory RegistryValue.fromWin32(
-      String name, int type, Pointer<Uint8> byteData, int dataLength) {
-    switch (type) {
-      case REG_SZ:
-        return RegistryValue(name, RegistryValueType.string,
-            byteData.cast<Utf16>().toDartString());
-      case REG_EXPAND_SZ:
-        return RegistryValue(name, RegistryValueType.unexpandedString,
-            byteData.cast<Utf16>().toDartString());
-      case REG_LINK:
-        return RegistryValue(name, RegistryValueType.link,
-            byteData.cast<Utf16>().toDartString());
-      case REG_MULTI_SZ:
-        return RegistryValue(name, RegistryValueType.stringArray,
-            byteData.cast<Utf16>().unpackStringArray(dataLength));
-      case REG_DWORD:
-        return RegistryValue(
-            name, RegistryValueType.int32, byteData.cast<DWORD>().value);
-      case REG_QWORD:
-        return RegistryValue(
-            name, RegistryValueType.int64, byteData.cast<QWORD>().value);
-      case REG_BINARY:
-        return RegistryValue(
-            name, RegistryValueType.binary, byteData.asTypedList(dataLength));
-      case REG_NONE:
-        return RegistryValue(name, RegistryValueType.none, 0);
-      default:
-        return RegistryValue(name, RegistryValueType.unknown, 0);
-    }
-  }
+          String name, int type, Pointer<Uint8> byteData, int dataLength) =>
+      switch (type) {
+        REG_SZ => RegistryValue(name, RegistryValueType.string,
+            byteData.cast<Utf16>().toDartString()),
+        REG_EXPAND_SZ => RegistryValue(name, RegistryValueType.unexpandedString,
+            byteData.cast<Utf16>().toDartString()),
+        REG_LINK => RegistryValue(name, RegistryValueType.link,
+            byteData.cast<Utf16>().toDartString()),
+        REG_MULTI_SZ => RegistryValue(name, RegistryValueType.stringArray,
+            byteData.cast<Utf16>().unpackStringArray(dataLength)),
+        REG_DWORD => RegistryValue(
+            name, RegistryValueType.int32, byteData.cast<DWORD>().value),
+        REG_QWORD => RegistryValue(
+            name, RegistryValueType.int64, byteData.cast<QWORD>().value),
+        REG_BINARY => RegistryValue(
+            name, RegistryValueType.binary, byteData.asTypedList(dataLength)),
+        REG_NONE => RegistryValue(name, RegistryValueType.none, 0),
+        _ => RegistryValue(name, RegistryValueType.unknown, 0)
+      };
+
   PointerData get toWin32 {
     switch (type) {
       case RegistryValueType.int32:
@@ -67,7 +58,6 @@ class RegistryValue {
         final dataList = Uint8List.fromList(data as List<int>);
         final ptr = dataList.allocatePointer();
         return PointerData(ptr, dataList.length);
-
       default:
         return PointerData(nullptr, 0);
     }

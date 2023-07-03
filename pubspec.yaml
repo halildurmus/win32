@@ -5,7 +5,7 @@ repository: https://github.com/timsneath/win32_registry
 issue_tracker: https://github.com/timsneath/win32_registry/issues
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: '^3.0.0'
 
 topics:
   - win32
@@ -15,9 +15,9 @@ topics:
 platforms:
   windows:
 
-dependencies: 
-  ffi: ^2.0.0
-  win32: ^5.0.0
+dependencies:
+  ffi: ^2.0.2
+  win32: ^5.0.5
 
 dev_dependencies:
   lints: ^2.1.0

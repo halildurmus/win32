@@ -51,26 +51,15 @@ enum RegistryValueType {
   const RegistryValueType(this.win32Value);
 
   /// Return a string representing the Win32 type stored.
-  String get win32Type {
-    switch (this) {
-      case RegistryValueType.binary:
-        return 'REG_BINARY';
-      case RegistryValueType.int32:
-        return 'REG_DWORD';
-      case RegistryValueType.unexpandedString:
-        return 'REG_EXPAND_SZ';
-      case RegistryValueType.link:
-        return 'REG_LINK';
-      case RegistryValueType.stringArray:
-        return 'REG_MULTI_SZ';
-      case RegistryValueType.int64:
-        return 'REG_QWORD';
-      case RegistryValueType.string:
-        return 'REG_SZ';
-      case RegistryValueType.none:
-        return 'REG_NONE';
-      default:
-        return '';
-    }
-  }
+  String get win32Type => switch (this) {
+        RegistryValueType.binary => 'REG_BINARY',
+        RegistryValueType.int32 => 'REG_DWORD',
+        RegistryValueType.unexpandedString => 'REG_EXPAND_SZ',
+        RegistryValueType.link => 'REG_LINK',
+        RegistryValueType.stringArray => 'REG_MULTI_SZ',
+        RegistryValueType.int64 => 'REG_QWORD',
+        RegistryValueType.string => 'REG_SZ',
+        RegistryValueType.none => 'REG_NONE',
+        _ => ''
+      };
 }

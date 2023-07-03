@@ -15,5 +15,8 @@ void main() {
 
   final string = const RegistryValue('TestString', RegistryValueType.string,
       'The human race has one really effective weapon, and that is laughter.');
-  subkey.createValue(string);
+  subkey
+    ..createValue(string)
+    ..close();
+  hkcu.close();
 }

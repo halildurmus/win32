@@ -7,4 +7,5 @@ void main() {
   if (buildNumber != null) {
     print('Windows build number: $buildNumber');
   }
+  key.close();
 }
