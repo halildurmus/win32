@@ -1,6 +1,6 @@
 import 'package:filepicker_windows/filepicker_windows.dart';
 
-// Normal file open dialog box example
+// Multi-select file open dialog box example
 
 void main() {
   final file = OpenFilePicker()
@@ -12,10 +12,9 @@ void main() {
     }
     ..defaultFilterIndex = 0
     ..defaultExtension = 'doc'
-    ..title = 'Select a document';
+    ..title = 'Select document(s)';
 
-  final result = file.getFile();
-  if (result != null) {
-    print(result.path);
+  for (final file in file.getFiles()) {
+    print(file.path);
   }
 }

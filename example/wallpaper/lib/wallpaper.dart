@@ -8,10 +8,10 @@ class Wallpaper {
   static void set(File wallpaperFile) {
     final wallpaper = DesktopWallpaper.createInstance();
 
-    final pathPtr = wallpaperFile.path.toNativeUtf16();
-    final hr = wallpaper.setWallpaper(nullptr, pathPtr);
-    if (FAILED(hr)) throw WindowsException(hr);
-
-    free(pathPtr);
+    using((arena) {
+      final pathPtr = wallpaperFile.path.toNativeUtf16(allocator: arena);
+      final hr = wallpaper.setWallpaper(nullptr, pathPtr);
+      if (FAILED(hr)) throw WindowsException(hr);
+    });
   }
 }
