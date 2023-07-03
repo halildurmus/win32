@@ -1,3 +1,7 @@
+## 2.0.8
+
+- Add support for setting the initial directory (#23, thanks to @amarland)
+
 ## 2.0.7
 
 - Fix crashes in v2.0.6 (#24)

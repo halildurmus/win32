@@ -7,6 +7,10 @@ import 'package:win32/win32.dart';
 import 'filedialog.dart';
 
 class SaveFilePicker extends FileDialog {
+  /// The folder used as a default if there is not a recently used folder
+  /// value available.
+  String? initialDirectory;
+
   /// Returns a `File` object from the selected file path.
   File? getFile() {
     var didUserCancel = false;

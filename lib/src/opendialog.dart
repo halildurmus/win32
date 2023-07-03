@@ -11,6 +11,10 @@ class OpenFilePicker extends FileDialog {
   /// displayed.
   bool? forcePreviewPaneOn;
 
+  /// The folder used as a default if there is not a recently used folder
+  /// value available.
+  String? initialDirectory;
+
   OpenFilePicker() : super() {
     fileMustExist = true;
   }

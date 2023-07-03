@@ -2,7 +2,7 @@ name: filepicker_windows
 description: |
   A plugin that uses FFI to offer file selection in Windows using the modern
   common item dialog box.
-version: 2.0.7
+version: 2.0.8
 repository: https://github.com/timsneath/filepicker_windows
 issue_tracker: https://github.com/timsneath/filepicker_windows/issues
 
