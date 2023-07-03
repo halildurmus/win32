@@ -115,10 +115,33 @@ class OpenFilePicker extends FileDialog {
       }
     }
 
+    if (initialDirectory != null && initialDirectory!.isNotEmpty) {
+      final pszPath = initialDirectory!.toNativeUtf16();
+      final riid = convertToIID(IID_IShellItem);
+      final ppv = calloc<Pointer>();
+      try {
+        var hr = SHCreateItemFromParsingName(
+          pszPath,
+          nullptr,
+          riid,
+          ppv,
+        );
+        if (FAILED(hr)) throw WindowsException(hr);
+
+        final shellItem = IShellItem(ppv.cast());
+
+        hr = fileDialog
+            .setDefaultFolder(shellItem.ptr.cast<Pointer<COMObject>>().value);
+        if (FAILED(hr)) throw WindowsException(hr);
+      } finally {
+        free(riid);
+        free(pszPath);
+      }
+    }
+
     for (final place in customPlaces) {
-      final shellItem =
-          Pointer.fromAddress(place.item.ptr.cast<IntPtr>().value);
-      final hr = fileDialog.addPlace(shellItem.cast(),
+      final hr = fileDialog.addPlace(
+          place.item.ptr.cast<Pointer<COMObject>>().value,
           place.place == Place.bottom ? FDAP.FDAP_BOTTOM : FDAP.FDAP_TOP);
       if (FAILED(hr)) throw WindowsException(hr);
     }

@@ -48,9 +48,8 @@ class DirectoryPicker extends FileDialog {
     }
 
     for (final place in customPlaces) {
-      final shellItem =
-          Pointer.fromAddress(place.item.ptr.cast<IntPtr>().value);
-      final hr = dialog.addPlace(shellItem.cast(),
+      final hr = dialog.addPlace(
+          place.item.ptr.cast<Pointer<COMObject>>().value,
           place.place == Place.bottom ? FDAP.FDAP_BOTTOM : FDAP.FDAP_TOP);
       if (FAILED(hr)) throw WindowsException(hr);
     }

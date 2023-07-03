@@ -92,8 +92,32 @@ class SaveFilePicker extends FileDialog {
       }
     }
 
+    if (initialDirectory != null && initialDirectory!.isNotEmpty) {
+      final pszPath = initialDirectory!.toNativeUtf16();
+      final riid = convertToIID(IID_IShellItem);
+      final ppv = calloc<Pointer>();
+      try {
+        var hr = SHCreateItemFromParsingName(
+          pszPath,
+          nullptr,
+          riid,
+          ppv,
+        );
+        if (FAILED(hr)) throw WindowsException(hr);
+
+        final shellItem = IShellItem(ppv.cast());
+
+        hr = fileDialog
+            .setDefaultFolder(shellItem.ptr.cast<Pointer<COMObject>>().value);
+        if (FAILED(hr)) throw WindowsException(hr);
+      } finally {
+        free(riid);
+        free(pszPath);
+      }
+    }
+
     final hr = fileDialog.show(hWndOwner);
-    if (FAILED(hr)) {
+    if (!SUCCEEDED(hr)) {
       if (hr == HRESULT_FROM_WIN32(ERROR_CANCELLED)) {
         didUserCancel = true;
       } else {

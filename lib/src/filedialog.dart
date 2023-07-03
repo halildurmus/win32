@@ -65,6 +65,10 @@ abstract class FileDialog {
   /// Don't change the current working directory.
   bool isDirectoryFixed = false;
 
+  /// The folder used as a default if there is not a recently used folder
+  /// value available.
+  String? initialDirectory;
+
   /// Set hWnd of dialog
   int hWndOwner = NULL;
 

@@ -2,6 +2,9 @@ import 'dart:io';
 
 import 'package:filepicker_windows/filepicker_windows.dart' as picker;
 import 'package:flutter/material.dart';
+import 'package:path_provider_windows/path_provider_windows.dart'
+    as path_provider;
+import 'package:win32/win32.dart' as win32;
 
 import 'wallpaper.dart';
 
@@ -49,8 +52,13 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
+                        final picturesDirectory =
+                            await path_provider.PathProviderWindows()
+                                .getPath(win32.FOLDERID_Pictures);
                         final file = picker.OpenFilePicker()
+                          ..initialDirectory = picturesDirectory
+                          ..hidePinnedPlaces = true
                           ..forcePreviewPaneOn = true
                           ..title = 'Select an image'
                           ..filterSpecification = {
