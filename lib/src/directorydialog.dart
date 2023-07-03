@@ -80,22 +80,11 @@ class DirectoryPicker extends FileDialog {
         // characters, it could be longer. In this case, the file name will be
         // truncated.
         path = pathPtr.toDartString();
-
-        hr = item.release();
-        if (FAILED(hr)) throw WindowsException(hr);
       } finally {
-        free(ppsi);
         free(pathPtrPtr);
       }
     }
 
-    hr = dialog.release();
-    if (FAILED(hr)) throw WindowsException(hr);
-
-    if (didUserCancel) {
-      return null;
-    } else {
-      return Directory(path);
-    }
+    return didUserCancel ? null : Directory(path);
   }
 }

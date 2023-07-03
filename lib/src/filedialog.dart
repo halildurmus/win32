@@ -91,7 +91,6 @@ abstract class FileDialog {
     } finally {
       free(publicMusicFolder);
       free(ppkf);
-      free(psi);
       free(riid);
     }
   }

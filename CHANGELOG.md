@@ -1,3 +1,7 @@
+## 2.0.7
+
+- Fix crashes in v2.0.6 (#24)
+
 ## 2.0.6
 
 - Update win32 dependency

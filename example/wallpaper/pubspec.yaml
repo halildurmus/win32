@@ -6,7 +6,7 @@ description: Demonstrates how to use the filepicker_windows plugin.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: '^3.0.0'
 
 dependencies:
   filepicker_windows:
@@ -14,17 +14,17 @@ dependencies:
     #   filepicker_windows: ^x.y.z
     # See https://dart.dev/tools/pub/dependencies#version-constraints
     # The example app is bundled with the plugin so we use a path dependency on
-    # the parent directory to use the current plugin's version. 
+    # the parent directory to use the current plugin's version.
     path: ../../
 
   flutter:
     sdk: flutter
-    
-  ffi: ^2.0.0
-  win32: ^5.0.0
+
+  ffi: ^2.0.2
+  win32: ^5.0.5
 
 flutter:
   uses-material-design: true
 
 dev_dependencies:
-  flutter_lints: ^2.0.1
+  flutter_lints: ^2.0.2

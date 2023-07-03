@@ -92,7 +92,7 @@ class SaveFilePicker extends FileDialog {
       }
     }
 
-    var hr = fileDialog.show(hWndOwner);
+    final hr = fileDialog.show(hWndOwner);
     if (FAILED(hr)) {
       if (hr == HRESULT_FROM_WIN32(ERROR_CANCELLED)) {
         didUserCancel = true;
@@ -111,22 +111,11 @@ class SaveFilePicker extends FileDialog {
         if (FAILED(hr)) throw WindowsException(hr);
 
         filePath = pathPtrPtr.value.toDartString();
-
-        hr = item.release();
-        if (FAILED(hr)) throw WindowsException(hr);
       } finally {
-        free(ppsi);
         free(pathPtrPtr);
       }
     }
 
-    hr = fileDialog.release();
-    if (FAILED(hr)) throw WindowsException(hr);
-
-    if (didUserCancel) {
-      return null;
-    } else {
-      return File(filePath);
-    }
+    return didUserCancel ? null : File(filePath);
   }
 }
