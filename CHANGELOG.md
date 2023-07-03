@@ -1,3 +1,8 @@
+## 2.0.9
+
+- Add `getFiles()` method into the `OpenFilePicker` to enable selecting
+  multiple files (#12, thanks to @ritheshSalyan)
+
 ## 2.0.8
 
 - Add support for setting the initial directory (#23, thanks to @amarland)
