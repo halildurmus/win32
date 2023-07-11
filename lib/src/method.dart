@@ -291,13 +291,19 @@ class Method extends TokenObject
       blobPtr += runtimeType.offsetLength;
 
       if (runtimeType.typeIdentifier.baseType == BaseType.simpleArrayType) {
-        _parseSimpleArray(runtimeType, paramsIndex);
+        _parseSimpleArray(
+          runtimeType,
+          paramsIndex,
+          parameters[paramsIndex].isOutParam
+              ? _ArrayPassingStyle.fill
+              : _ArrayPassingStyle.pass,
+        );
         paramsIndex++; // we've added two parameters here
       } else if (runtimeType.typeIdentifier.baseType ==
               BaseType.referenceTypeModifier &&
           runtimeType.typeIdentifier.typeArg?.baseType ==
               BaseType.simpleArrayType) {
-        _parseSimpleArray(runtimeType, paramsIndex, isReferenceType: true);
+        _parseSimpleArray(runtimeType, paramsIndex, _ArrayPassingStyle.receive);
         paramsIndex++; // we've added two parameters here
       } else {
         parameters[paramsIndex].typeIdentifier = runtimeType.typeIdentifier;
@@ -325,11 +331,11 @@ class Method extends TokenObject
   // value. We're not that clever yet, so we project it in its raw state, which
   // means a little work here to ensure that it comes out right.
   void _parseSimpleArray(TypeTuple typeTuple, int paramsIndex,
-      {bool isReferenceType = false}) {
-    final paramName = parameters[paramsIndex].name;
-    parameters[paramsIndex].name = '__${paramName}Size';
+      _ArrayPassingStyle arrayPassingStyle) {
+    final Parameter(:name, :attributes) = parameters[paramsIndex];
+    parameters[paramsIndex].name = '__${name}Size';
 
-    if (isReferenceType) {
+    if (arrayPassingStyle == _ArrayPassingStyle.receive) {
       parameters[paramsIndex].typeIdentifier = parameters[paramsIndex]
           .typeIdentifier
           .copyWith(
@@ -338,10 +344,39 @@ class Method extends TokenObject
     } else {
       parameters[paramsIndex].typeIdentifier =
           const TypeIdentifier(BaseType.uint32Type);
+      if (arrayPassingStyle == _ArrayPassingStyle.fill) {
+        // In FillArray style, the arraySize parameter must be an [in] parameter
+        parameters[paramsIndex].attributes = CorParamAttr.pdIn;
+      }
     }
 
-    parameters.insert(paramsIndex + 1, Parameter.fromVoid(scope, token));
-    parameters[paramsIndex + 1].name = paramName;
+    parameters.insert(paramsIndex + 1,
+        Parameter.fromVoid(scope, token)..attributes = attributes);
+    parameters[paramsIndex + 1].name = name;
     parameters[paramsIndex + 1].typeIdentifier = typeTuple.typeIdentifier;
   }
+}
+
+/// Represents the various array-passing styles in WinRT.
+/// See https://learn.microsoft.com/uwp/winrt-cref/winrt-type-system#array-parameters
+enum _ArrayPassingStyle {
+  /// Used when the caller provides an array for the method to fill, up to a
+  /// maximum array size.
+  ///
+  /// In this style, the array size parameter is an `in` parameter, while the
+  /// array parameter is an `out` parameter.
+  fill,
+
+  /// Used when the caller provides an array to the method.
+  ///
+  /// In this style, the array size parameter and the array parameter are both
+  /// `in` parameters.
+  pass,
+
+  /// Used when the caller receives an array that was allocated by the method.
+  ///
+  /// In this style, the array size parameter and the array parameter are both
+  /// `out` parameters. Additionally, the array parameter is passed by
+  /// reference (that is, `ArrayType**`, rather than `ArrayType*`).
+  receive
 }

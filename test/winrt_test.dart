@@ -468,7 +468,7 @@ void main() {
     check(method.parameters[4].name).equals('options');
   });
 
-  test('Method with simple array parameters is correct', () {
+  test('Method with simple array parameters is correct 1', () {
     final winTypeDef = MetadataStore.getMetadataForType(
         'Windows.AI.MachineLearning.ITensorBooleanStatics2')!;
 
@@ -478,18 +478,58 @@ void main() {
     check(method.returnType.typeIdentifier.baseType)
         .equals(BaseType.classTypeModifier);
     check(method.parameters.length).equals(4);
-    check(method.parameters[0].typeIdentifier.baseType)
+
+    final shapeSizeParam = method.parameters.first;
+    check(shapeSizeParam.isInParam).isTrue();
+    check(shapeSizeParam.isOutParam).isFalse();
+    check(shapeSizeParam.name).equals('__shapeSize');
+    check(shapeSizeParam.typeIdentifier.baseType).equals(BaseType.uint32Type);
+
+    final shapeParam = method.parameters[1];
+    check(shapeParam.isInParam).isTrue();
+    check(shapeParam.isOutParam).isFalse();
+    check(shapeParam.name).equals('shape');
+    check(shapeParam.typeIdentifier.baseType).equals(BaseType.simpleArrayType);
+
+    final dataSizeParam = method.parameters[2];
+    check(dataSizeParam.isInParam).isTrue();
+    check(dataSizeParam.isOutParam).isFalse();
+    check(dataSizeParam.name).equals('__dataSize');
+    check(dataSizeParam.typeIdentifier.baseType).equals(BaseType.uint32Type);
+
+    final dataParam = method.parameters.last;
+    check(dataParam.isInParam).isTrue();
+    check(dataParam.isOutParam).isFalse();
+    check(dataParam.name).equals('data');
+    check(dataParam.typeIdentifier.baseType).equals(BaseType.simpleArrayType);
+  });
+
+  test('Method with simple array parameters is correct 2', () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.Storage.Pickers.FileExtensionVector')!;
+
+    final method = winTypeDef.findMethod('GetMany')!;
+
+    check(method.isProperty).isFalse();
+    check(method.returnType.typeIdentifier.baseType)
         .equals(BaseType.uint32Type);
-    check(method.parameters[0].name).equals('__shapeSize');
-    check(method.parameters[1].typeIdentifier.baseType)
-        .equals(BaseType.simpleArrayType);
-    check(method.parameters[1].name).equals('shape');
-    check(method.parameters[2].typeIdentifier.baseType)
-        .equals(BaseType.uint32Type);
-    check(method.parameters[2].name).equals('__dataSize');
-    check(method.parameters[3].typeIdentifier.baseType)
-        .equals(BaseType.simpleArrayType);
-    check(method.parameters[3].name).equals('data');
+    check(method.parameters.length).equals(3);
+
+    final startIndexParam = method.parameters.first;
+    check(startIndexParam.name).equals('startIndex');
+    check(startIndexParam.typeIdentifier.baseType).equals(BaseType.uint32Type);
+
+    final itemsSizeParam = method.parameters[1];
+    check(itemsSizeParam.isInParam).isTrue();
+    check(itemsSizeParam.isOutParam).isFalse();
+    check(itemsSizeParam.name).equals('__itemsSize');
+    check(itemsSizeParam.typeIdentifier.baseType).equals(BaseType.uint32Type);
+
+    final itemsParam = method.parameters.last;
+    check(itemsParam.isInParam).isFalse();
+    check(itemsParam.isOutParam).isTrue();
+    check(itemsParam.name).equals('items');
+    check(itemsParam.typeIdentifier.baseType).equals(BaseType.simpleArrayType);
   });
 
   test('Reference parameter is correct', () {
@@ -602,6 +642,8 @@ void main() {
     check(method.parameters.length).equals(2);
 
     final valueSizeParam = method.parameters.first;
+    check(valueSizeParam.isInParam).isFalse();
+    check(valueSizeParam.isOutParam).isTrue();
     check(valueSizeParam.name).equals('__valueSize');
     check(valueSizeParam.typeIdentifier.baseType)
         .equals(BaseType.pointerTypeModifier);
@@ -610,6 +652,8 @@ void main() {
         .equals(BaseType.uint32Type);
 
     final valueParam = method.parameters.last;
+    check(valueSizeParam.isInParam).isFalse();
+    check(valueSizeParam.isOutParam).isTrue();
     check(valueParam.name).equals('value');
     check(valueParam.typeIdentifier.baseType)
         .equals(BaseType.referenceTypeModifier);
@@ -630,10 +674,14 @@ void main() {
     check(method.parameters.length).equals(2);
 
     final valueSizeParam = method.parameters.first;
+    check(valueSizeParam.isInParam).isTrue();
+    check(valueSizeParam.isOutParam).isFalse();
     check(valueSizeParam.name).equals('__valueSize');
     check(valueSizeParam.typeIdentifier.baseType).equals(BaseType.uint32Type);
 
     final valueParam = method.parameters.last;
+    check(valueParam.isInParam).isTrue();
+    check(valueParam.isOutParam).isFalse();
     check(valueParam.name).equals('value');
     check(valueParam.typeIdentifier.baseType).equals(BaseType.simpleArrayType);
     check(valueParam.typeIdentifier.typeArg).isNotNull();
