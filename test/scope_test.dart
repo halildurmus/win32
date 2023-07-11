@@ -66,7 +66,7 @@ void main() {
                   typeDef.name == 'Windows.Foundation.PropertyValue')
               .firstOrNull)
           .isNotNull();
-      check(scope.classes.any((typeDef) => typeDef.isClass)).isTrue();
+      check(scope.classes.every((typeDef) => typeDef.isClass)).isTrue();
     });
 
     test('delegates ', () {
@@ -80,7 +80,7 @@ void main() {
                   'Windows.Foundation.AsyncActionCompletedHandler')
               .firstOrNull)
           .isNotNull();
-      check(scope.delegates.any((typeDef) => typeDef.isDelegate)).isTrue();
+      check(scope.delegates.every((typeDef) => typeDef.isDelegate)).isTrue();
     });
 
     test('enums ', () {
@@ -93,7 +93,7 @@ void main() {
                   (typeDef) => typeDef.name == 'Windows.Foundation.AsyncStatus')
               .firstOrNull)
           .isNotNull();
-      check(scope.enums.any((typeDef) => typeDef.isEnum)).isTrue();
+      check(scope.enums.every((typeDef) => typeDef.isEnum)).isTrue();
     });
 
     test('interfaces ', () {
@@ -106,7 +106,7 @@ void main() {
                   typeDef.name == 'Windows.Foundation.IPropertyValue')
               .firstOrNull)
           .isNotNull();
-      check(scope.interfaces.any((typeDef) => typeDef.isInterface)).isTrue();
+      check(scope.interfaces.every((typeDef) => typeDef.isInterface)).isTrue();
     });
 
     test('structs ', () {
@@ -118,7 +118,7 @@ void main() {
               .where((typeDef) => typeDef.name == 'Windows.Foundation.Point')
               .firstOrNull)
           .isNotNull();
-      check(scope.structs.any((typeDef) => typeDef.isStruct)).isTrue();
+      check(scope.structs.every((typeDef) => typeDef.isStruct)).isTrue();
     });
   });
 }
