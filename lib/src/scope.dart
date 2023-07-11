@@ -10,6 +10,7 @@ import 'package:win32/win32.dart';
 import 'assemblyref.dart';
 import 'enums.dart';
 import 'metadatastore.dart';
+import 'mixins/supportedarchitectures_mixin.dart';
 import 'moduleref.dart';
 import 'pekind.dart';
 import 'token_object.dart';
@@ -27,10 +28,13 @@ class Scope {
   final IMetaDataImport2 reader;
   final IMetaDataAssemblyImport assemblyImport;
 
+  late final classes = _getClasses();
+  late final delegates = _getDelegates();
   late final enums = _getEnums();
+  late final interfaces = _getInterfaces();
+  late final structs = _getStructs();
   late final moduleRefs = _getModuleRefs();
   late final assemblyRefs = _getAssemblyRefs();
-  late final delegates = _getDelegates();
   late final userStrings = _getUserStrings();
 
   final _typedefsByName = <String, List<TypeDef>>{};
@@ -43,12 +47,10 @@ class Scope {
       final pmvid = arena<GUID>();
 
       final hr = reader.getScopeProps(szName, stringBufferSize, pchName, pmvid);
-      if (SUCCEEDED(hr)) {
-        name = szName.toDartString();
-        guid = pmvid.ref.toString();
-      } else {
-        throw COMException(hr);
-      }
+      if (FAILED(hr)) throw COMException(hr);
+
+      name = szName.toDartString();
+      guid = pmvid.ref.toString();
     });
 
     _populateTypeDefs();
@@ -63,9 +65,10 @@ class Scope {
   /// Return the first typedef object matching the given name.
   ///
   /// Returns null if no typedefs match the name.
-  TypeDef? findTypeDef(String name,
-      {PreferredArchitecture preferredArchitecture =
-          PreferredArchitecture.x64}) {
+  TypeDef? findTypeDef(
+    String name, {
+    PreferredArchitecture preferredArchitecture = PreferredArchitecture.x64,
+  }) {
     final matchingTypeDefs = _typedefsByName[name];
 
     if (matchingTypeDefs == null) return null;
@@ -74,14 +77,19 @@ class Scope {
     // More than one typedef, so we find the one that matches the preferred
     // architecture.
     for (final typeDef in matchingTypeDefs) {
-      final supportedArch = typeDef.supportedArchitectures;
+      final Architecture(:arm64, :x64, :x86) = typeDef.supportedArchitectures;
 
-      if (preferredArchitecture == PreferredArchitecture.x64 &&
-          supportedArch.x64) return typeDef;
-      if (preferredArchitecture == PreferredArchitecture.arm64 &&
-          supportedArch.arm64) return typeDef;
-      if (preferredArchitecture == PreferredArchitecture.x86 &&
-          supportedArch.x86) return typeDef;
+      if (preferredArchitecture == PreferredArchitecture.x64 && x64) {
+        return typeDef;
+      }
+
+      if (preferredArchitecture == PreferredArchitecture.arm64 && arm64) {
+        return typeDef;
+      }
+
+      if (preferredArchitecture == PreferredArchitecture.x86 && x86) {
+        return typeDef;
+      }
     }
 
     return null;
@@ -116,13 +124,9 @@ class Scope {
 
   int get moduleToken => using((Arena arena) {
         final pmd = arena<mdModule>();
-
         final hr = reader.getModuleFromScope(pmd);
-        if (SUCCEEDED(hr)) {
-          return pmd.value;
-        } else {
-          throw WinmdException('Unable to find module token.');
-        }
+        if (FAILED(hr)) throw WinmdException('Unable to find module token.');
+        return pmd.value;
       });
 
   /// Get an enumerated list of modules in this scope.
@@ -193,26 +197,32 @@ class Scope {
     return userStrings;
   }
 
-  /// Get an enumerated list of all enumerations in this scope.
-  Iterable<TypeDef> _getEnums() => typeDefs.where((typeDef) => typeDef.isEnum);
+  /// Get an enumerated list of all classes in this scope.
+  Iterable<TypeDef> _getClasses() =>
+      typeDefs.where((typeDef) => typeDef.isClass);
 
   /// Get an enumerated list of all delegates in this scope.
   Iterable<TypeDef> _getDelegates() =>
       typeDefs.where((typeDef) => typeDef.isDelegate);
+
+  /// Get an enumerated list of all enumerations in this scope.
+  Iterable<TypeDef> _getEnums() => typeDefs.where((typeDef) => typeDef.isEnum);
+
+  /// Get an enumerated list of all interfaces in this scope.
+  Iterable<TypeDef> _getInterfaces() =>
+      typeDefs.where((typeDef) => typeDef.isInterface);
+
+  /// Get an enumerated list of all structures in this scope.
+  Iterable<TypeDef> _getStructs() =>
+      typeDefs.where((typeDef) => typeDef.isStruct);
 
   PEKind get executableKind => PEKind(reader);
 
   String get version => using((Arena arena) {
         final pwzBuf = arena<WCHAR>(stringBufferSize).cast<Utf16>();
         final pccBufSize = arena<DWORD>();
-
         final hr =
             reader.getVersionString(pwzBuf, stringBufferSize, pccBufSize);
-
-        if (SUCCEEDED(hr)) {
-          return pwzBuf.toDartString();
-        } else {
-          return '';
-        }
+        return SUCCEEDED(hr) ? pwzBuf.toDartString() : '';
       });
 }
