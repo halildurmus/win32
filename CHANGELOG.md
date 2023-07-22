@@ -1,3 +1,7 @@
+## 5.0.6
+
+- Fix the Dart representation of the `VARIANT` structure (#736)
+
 ## 5.0.5
 
 - Add `GetRestrictedErrorInfo` and `IRestrictedErrorInfo` (#732)
