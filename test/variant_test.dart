@@ -22,7 +22,7 @@ void main() {
       free(variant);
     });
 
-    test('IUnknown', () {
+    test('pointer to an object that implements the IUnknown interface', () {
       final spVoice = SpVoice.createInstance();
       final spellChecker = SpellCheckerFactory.createInstance()..addRef();
 
@@ -46,7 +46,7 @@ void main() {
       free(variant);
     });
 
-    test('Pointer to IUnknown', () {
+    test('reference to an IUnknown interface pointer', () {
       final spVoice = SpVoice.createInstance();
       final spellChecker = SpellCheckerFactory.createInstance()..addRef();
 
