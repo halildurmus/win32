@@ -35,7 +35,7 @@ import 'win32/oleaut32.g.dart';
 
 sealed class _VARIANT_Anonymous_3 extends Struct {
   external Pointer pvRecord;
-  external Pointer<COMObject> pRecInfo;
+  external VTablePointer pRecInfo;
 }
 
 sealed class _VARIANT_Anonymous_2 extends Union {
@@ -63,8 +63,8 @@ sealed class _VARIANT_Anonymous_2 extends Union {
   @Double()
   external double date;
   external Pointer<Utf16> bstrVal;
-  external Pointer<COMObject> punkVal;
-  external Pointer<COMObject> pdispVal;
+  external VTablePointer punkVal;
+  external VTablePointer pdispVal;
   external Pointer/*<SAFEARRAY>*/ parray;
   external Pointer<Uint8> pbVal;
   external Pointer<Int16> piVal;
@@ -210,16 +210,18 @@ base class VARIANT extends Struct {
       __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.bstrVal = value;
 
   // IUnknown
-  IUnknown get punkVal =>
-      IUnknown(__VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.punkVal);
+  IUnknown get punkVal => IUnknown(calloc<COMObject>()
+    ..ref.lpVtbl = __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.punkVal);
   set punkVal(IUnknown value) =>
-      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.punkVal = value.ptr;
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.punkVal =
+          value.ptr.ref.lpVtbl;
 
   // IDispatch
-  IDispatch get pdispVal =>
-      IDispatch(__VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pdispVal);
+  IDispatch get pdispVal => IDispatch(calloc<COMObject>()
+    ..ref.lpVtbl = __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pdispVal);
   set pdispVal(IDispatch value) =>
-      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pdispVal = value.ptr;
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pdispVal =
+          value.ptr.ref.lpVtbl;
 
   Pointer get parray =>
       __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.parray;
@@ -393,10 +395,11 @@ base class VARIANT extends Struct {
   set pvRecord(Pointer value) => __VARIANT_NAME_1
       .__VARIANT_NAME_2.__VARIANT_NAME_3.__VARIANT_NAME_4.pvRecord = value;
 
-  Pointer<COMObject> get pRecInfo => __VARIANT_NAME_1
-      .__VARIANT_NAME_2.__VARIANT_NAME_3.__VARIANT_NAME_4.pRecInfo;
-  set pRecInfo(Pointer<COMObject> value) => __VARIANT_NAME_1
-      .__VARIANT_NAME_2.__VARIANT_NAME_3.__VARIANT_NAME_4.pRecInfo = value;
+  Pointer<COMObject> get pRecInfo => calloc<COMObject>()
+    ..ref.lpVtbl = __VARIANT_NAME_1
+        .__VARIANT_NAME_2.__VARIANT_NAME_3.__VARIANT_NAME_4.pRecInfo;
+  set pRecInfo(Pointer<COMObject> value) => __VARIANT_NAME_1.__VARIANT_NAME_2
+      .__VARIANT_NAME_3.__VARIANT_NAME_4.pRecInfo = value.ref.lpVtbl;
 }
 
 /// The PROPVARIANT structure is used in the ReadMultiple and WriteMultiple
