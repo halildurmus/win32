@@ -1,3 +1,7 @@
+## 5.0.7
+
+- Add `MONITORINFOEX` struct (#743)
+
 ## 5.0.6
 
 - Fix the Dart representation of the `VARIANT` structure (#736)

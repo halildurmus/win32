@@ -621,6 +621,9 @@ void main() {
   test('Struct MONITORINFO is the right size', () {
     expect(sizeOf<MONITORINFO>(), equals(40));
   });
+  test('Struct MONITORINFOEX is the right size', () {
+    expect(sizeOf<MONITORINFOEX>(), equals(104));
+  });
   test('Struct MOUSEHOOKSTRUCT is the right size', () {
     expect(sizeOf<MOUSEHOOKSTRUCT>(), equals(32));
   });
