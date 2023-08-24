@@ -5675,6 +5675,33 @@ base class MONITORINFO extends Struct {
   external int dwFlags;
 }
 
+/// The MONITORINFOEX structure contains information about a display
+/// monitor.
+///
+/// {@category Struct}
+base class MONITORINFOEX extends Struct {
+  external MONITORINFO monitorInfo;
+
+  @Array(32)
+  external Array<Uint16> _szDevice;
+
+  String get szDevice {
+    final charCodes = <int>[];
+    for (var i = 0; i < 32; i++) {
+      if (_szDevice[i] == 0x00) break;
+      charCodes.add(_szDevice[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set szDevice(String value) {
+    final stringToStore = value.padRight(32, '\x00');
+    for (var i = 0; i < 32; i++) {
+      _szDevice[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+}
+
 /// Contains information about a mouse event passed to a WH_MOUSE hook
 /// procedure, MouseProc.
 ///

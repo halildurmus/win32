@@ -85,6 +85,7 @@
     "Windows.Win32.Graphics.Gdi.LOGFONTW": "The LOGFONT structure defines the attributes of a font.",
     "Windows.Win32.Graphics.Gdi.LOGPALETTE": "The LOGPALETTE structure defines a logical palette.",
     "Windows.Win32.Graphics.Gdi.MONITORINFO": "The MONITORINFO structure contains information about a display monitor.",
+    "Windows.Win32.Graphics.Gdi.MONITORINFOEXW": "The MONITORINFOEX structure contains information about a display monitor.",
     "Windows.Win32.Graphics.Gdi.NEWTEXTMETRICW": "The NEWTEXTMETRIC structure contains data that describes a physical font.",
     "Windows.Win32.Graphics.Gdi.PAINTSTRUCT": "The PAINTSTRUCT structure contains information for an application. This information can be used to paint the client area of a window owned by that application.",
     "Windows.Win32.Graphics.Gdi.PALETTEENTRY": "The PALETTEENTRY structure specifies the color and usage of an entry in a logical palette. A logical palette is defined by a LOGPALETTE structure.",

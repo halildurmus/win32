@@ -255,6 +255,7 @@ void main()
     printf("  'MODLOAD_DATA': %zu,\n", sizeof(MODLOAD_DATA));
     printf("  'MODULEINFO': %zu,\n", sizeof(MODULEINFO));
     printf("  'MONITORINFO': %zu,\n", sizeof(MONITORINFO));
+    printf("  'MONITORINFOEX': %zu,\n", sizeof(MONITORINFOEXW));
     printf("  'MOUSEHOOKSTRUCT': %zu,\n", sizeof(MOUSEHOOKSTRUCT));
     printf("  'MOUSEHOOKSTRUCTEX': %zu,\n", sizeof(MOUSEHOOKSTRUCTEX));
     printf("  'MOUSEINPUT': %zu,\n", sizeof(MOUSEINPUT));

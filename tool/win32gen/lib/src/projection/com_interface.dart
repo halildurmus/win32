@@ -94,7 +94,7 @@ class ComInterfaceProjection {
     final methods = {
       ...typeDef.methods,
       // Also add the methods in typeDef's interfaces
-      ...[for (var typeDef in typeDef.interfaces) ...typeDef.methods]
+      ...[for (final typeDef in typeDef.interfaces) ...typeDef.methods]
     };
 
     for (final method in methods) {
