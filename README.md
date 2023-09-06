@@ -113,6 +113,8 @@ Dart | Windows authors can be found here: https://github.com/dart-windows
 * [path_provider_windows](https://pub.dev/packages/path_provider_windows):
   provides a way for Dart apps to find common Windows file locations (such as
   the documents directory).
+* [win32_gui](https://pub.dev/packages/win32_gui): allows you to create Win32
+  GUI applications in an object-oriented style with some helpers.
 * [win32_registry](https://pub.dev/packages/win32_registry): provides Dart
   classes for accessing and manipulating the Windows registry.
 * [win32_runner](https://pub.dev/packages/win32_runner): provides an
