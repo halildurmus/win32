@@ -11,75 +11,127 @@ import 'package:test/scaffolding.dart';
 import 'package:winmd/winmd.dart';
 
 void main() {
-  test('MetadataStore explicit initialization', () async {
-    MetadataStore.initialize();
-    final scope = await MetadataStore.loadWin32Metadata();
-    check(scope.typeDefs.length).isGreaterThan(0);
-    MetadataStore.close();
-  });
+  group('MetadataStore', () {
+    test('explicit initialization', () async {
+      MetadataStore.initialize();
+      final scope = await MetadataStore.loadWin32Metadata();
+      check(scope.typeDefs.length).isGreaterThan(0);
+      MetadataStore.close();
+    });
 
-  test('MetadataStore implicit initialization', () async {
-    final scope = await MetadataStore.loadWin32Metadata();
-    check(scope.typeDefs.length).isGreaterThan(0);
-    MetadataStore.close();
-  });
+    test('implicit initialization', () async {
+      final scope = await MetadataStore.loadWin32Metadata();
+      check(scope.typeDefs.length).isGreaterThan(0);
+      MetadataStore.close();
+    });
 
-  test('MetadataStore reinitialization', () async {
-    final scope = await MetadataStore.loadWin32Metadata();
-    check(scope.typeDefs.length).isGreaterThan(0);
-    MetadataStore.close();
+    test('reinitialization', () async {
+      final scope = await MetadataStore.loadWin32Metadata();
+      check(scope.typeDefs.length).isGreaterThan(0);
+      MetadataStore.close();
 
-    MetadataStore.initialize();
-    final scope2 = await MetadataStore.loadWin32Metadata();
-    check(scope2.typeDefs.length).isGreaterThan(0);
-    MetadataStore.close();
-  });
+      MetadataStore.initialize();
+      final scope2 = await MetadataStore.loadWin32Metadata();
+      check(scope2.typeDefs.length).isGreaterThan(0);
+      MetadataStore.close();
+    });
 
-  test('MetadataStore scopes are successfully cached', () async {
-    MetadataStore.initialize();
-    final scope = await MetadataStore.loadWin32Metadata();
-    final scope2 = MetadataStore.getScopeForType('Windows.Win32.Shell.Apis');
-    check(scope).equals(scope2);
-    MetadataStore.close();
-  });
+    test('scopes are successfully cached', () async {
+      MetadataStore.initialize();
+      final scope = await MetadataStore.loadWin32Metadata();
+      final scope2 = MetadataStore.getScopeForType('Windows.Win32.Shell.Apis');
+      check(scope).equals(scope2);
+      MetadataStore.close();
+    });
 
-  test('MetadataStore can cache both WinRT and Win32 metadata', () async {
-    check(MetadataStore.scopeCache.length).equals(0);
-    check(MetadataStore.cacheInfo).equals('[]');
+    test('can cache both WinRT and Win32 metadata', () async {
+      check(MetadataStore.scopeCache.length).equals(0);
+      check(MetadataStore.cacheInfo).equals('[]');
 
-    MetadataStore.initialize();
+      MetadataStore.initialize();
 
-    await MetadataStore.loadWin32Metadata();
-    check(MetadataStore.scopeCache.length).equals(1);
-    check(MetadataStore.cacheInfo).equals('[Windows.Win32.winmd]');
+      await MetadataStore.loadWin32Metadata();
+      check(MetadataStore.scopeCache.length).equals(1);
+      check(MetadataStore.cacheInfo).equals('[Windows.Win32.winmd]');
 
-    await MetadataStore.loadWinRTMetadata();
-    check(MetadataStore.scopeCache.length).equals(2);
-    check(MetadataStore.cacheInfo)
-        .equals('[Windows.Win32.winmd, Windows.winmd]');
+      await MetadataStore.loadWinRTMetadata();
+      check(MetadataStore.scopeCache.length).equals(2);
+      check(MetadataStore.cacheInfo)
+          .equals('[Windows.Win32.winmd, Windows.winmd]');
 
-    MetadataStore.close();
-    check(MetadataStore.scopeCache.length).equals(0);
-    check(MetadataStore.cacheInfo).equals('[]');
-  });
+      MetadataStore.close();
+      check(MetadataStore.scopeCache.length).equals(0);
+      check(MetadataStore.cacheInfo).equals('[]');
+    });
 
-  test('Appropriate response to search for empty type', () {
-    check(() => MetadataStore.getScopeForType(''))
-        .throws<ArgumentError>()
-        .has((e) => e.message, 'message')
-        .equals('Must not be empty.');
-  });
+    test('can find the metadata for a type', () async {
+      await MetadataStore.loadWin32Metadata();
+      await MetadataStore.loadWinRTMetadata();
+      final typeDef1 = MetadataStore.getMetadataForType(
+          'Windows.Win32.Networking.NetworkListManager.INetwork');
+      check(typeDef1).isNotNull();
+      final typeDef2 =
+          MetadataStore.getMetadataForType('Windows.Globalization.Calendar');
+      check(typeDef2).isNotNull();
+      MetadataStore.close();
+    });
 
-  test('Appropriate response to search for an invalid type', () {
-    check(() => MetadataStore.getScopeForType('Foo.Bar'))
-        .throws<ArgumentError>()
-        .has((e) => e.message, 'message')
-        .equals('Must start with `Windows`.');
-  });
+    test('appropriate response to searching for empty type', () {
+      check(() => MetadataStore.getMetadataForType(''))
+          .throws<ArgumentError>()
+          .has((e) => e.message, 'message')
+          .equals('Must not be empty.');
+      check(() => MetadataStore.getScopeForType(''))
+          .throws<ArgumentError>()
+          .has((e) => e.message, 'message')
+          .equals('Must not be empty.');
+    });
 
-  test('Appropriate response to failure to find scope from non-winmd file', () {
-    final cmdPath = File(r'c:\windows\cmd.exe');
-    check(() => MetadataStore.loadMetadataFromFile(cmdPath))
-        .throws<ArgumentError>();
+    test('appropriate response to searching for an invalid type', () {
+      check(() => MetadataStore.getMetadataForType('Foo.Bar'))
+          .throws<ArgumentError>()
+          .has((e) => e.message, 'message')
+          .equals('Must start with `Windows`.');
+      check(() => MetadataStore.getScopeForType('Foo.Bar'))
+          .throws<ArgumentError>()
+          .has((e) => e.message, 'message')
+          .equals('Must start with `Windows`.');
+    });
+
+    test(
+        'appropriate response to searching for a Win32 type without loading the '
+        'Win32 metadata first', () {
+      check(() => MetadataStore.getScopeForType(
+              'Windows.Win32.Networking.NetworkListManager.INetwork'))
+          .throws<WinmdException>()
+          .has((e) => e.message, 'message')
+          .equals(
+            'Metadata scope for '
+            '`Windows.Win32.Networking.NetworkListManager.INetwork` could not '
+            'be found. Please ensure that you load the Win32 metadata first by '
+            'calling `loadWin32Metadata()`.',
+          );
+    });
+
+    test(
+        'appropriate response to searching for a WinRT type without loading the '
+        'WinRT metadata first', () {
+      check(() =>
+              MetadataStore.getScopeForType('Windows.Globalization.Calendar'))
+          .throws<WinmdException>()
+          .has((e) => e.message, 'message')
+          .equals(
+            'Metadata scope for `Windows.Globalization.Calendar` could not be '
+            'found. Please ensure that you load the WinRT metadata first by '
+            'calling `loadWinRTMetadata()`.',
+          );
+    });
+
+    test('appropriate response to failure to find scope from non-winmd file',
+        () {
+      final cmdPath = File(r'c:\windows\cmd.exe');
+      check(() => MetadataStore.loadMetadataFromFile(cmdPath))
+          .throws<ArgumentError>();
+    });
   });
 }

@@ -78,8 +78,10 @@ final class MetadataStore {
       if (scopeCache.containsKey(assetName)) return scopeCache[assetName]!;
 
       throw WinmdException(
-          'Could not find metadata scope for $typeName. Please first load the '
-          'Win32 metadata by calling `loadWin32Metadata()`.');
+        'Metadata scope for `$typeName` could not be found. Please ensure '
+        'that you load the Win32 metadata first by calling '
+        '`loadWin32Metadata()`.',
+      );
     }
 
     if (typeName.startsWith('Windows')) {
@@ -87,8 +89,10 @@ final class MetadataStore {
       if (scopeCache.containsKey(assetName)) return scopeCache[assetName]!;
 
       throw WinmdException(
-          'Could not find metadata scope for $typeName. Please first load the '
-          'WinRT metadata by calling `loadWinRTMetadata()`.');
+        'Metadata scope for `$typeName` could not be found. Please ensure '
+        'that you load the WinRT metadata first by calling '
+        '`loadWinRTMetadata()`.',
+      );
     }
 
     throw WinmdException('Could not find metadata scope for $typeName.');
