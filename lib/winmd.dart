@@ -13,7 +13,7 @@
 /// format, originally part of the Common Language Infrastructure (CLI) - a
 /// standardized interface offered by .NET libraries. Since its creation,
 /// Windows Metadata has served as a
-/// [language-neutral specification of the Windows Runtime APIs](https://docs.microsoft.com/en-us/uwp/winrt-cref/winmd-files).
+/// [language-neutral specification of the Windows Runtime APIs](https://learn.microsoft.com/uwp/winrt-cref/winmd-files).
 /// More recently, the same format has been utilized to provide machine-readable
 /// metadata for the
 /// [traditional Win32 and COM APIs](https://github.com/microsoft/win32metadata)
@@ -81,7 +81,7 @@
 ///
 /// In general, the model presented by this package aligns with the APIs exposed
 /// by the
-/// [IMetaDataImport](https://docs.microsoft.com/en-us/windows/win32/api/rometadataapi/nn-rometadataapi-imetadataimport)
+/// [IMetaDataImport](https://learn.microsoft.com/windows/win32/api/rometadataapi/nn-rometadataapi-imetadataimport)
 /// COM interface exposed by `rometadata.dll`.
 library;
 
