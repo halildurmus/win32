@@ -1,4 +1,6 @@
-## 4.0.0
+## Unreleased 4.0.0
+
+> Note: This release has breaking changes.
 
 - **BREAKING**: TODO
 - Fix an error related to the parsing of constant reference parameters
