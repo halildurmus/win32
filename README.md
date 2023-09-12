@@ -89,9 +89,9 @@ void main() async {
 
 ## Packages built on winmd
 
-* [win32][win32_package_link]: provides Dart FFI bindings to the Win32 API,
+- [win32][win32_package_link]: provides Dart FFI bindings to the Win32 API,
   allowing you to call unmanaged Windows APIs using Dart types.
-* [windows_*][windows_packages_link]: provides idiomatic Dart projection of the
+- [windows_*][windows_packages_link]: provides idiomatic Dart projection of the
   modern Windows Runtime (WinRT) APIs.
 
 ## Feature requests and bugs
