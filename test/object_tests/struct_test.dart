@@ -1,11 +1,22 @@
+// Copyright (c) 2023, Dart | Windows. Please see the AUTHORS file for details.
+// All rights reserved. Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
 @TestOn('windows')
 
 import 'package:checks/checks.dart';
 import 'package:test/scaffolding.dart';
 import 'package:winmd/winmd.dart';
 
-/// Exhaustively test a Win32 class (struct) representation.
+// Exhaustively test a Win32 class (struct) representation
+
 void main() {
+  late Scope scope;
+
+  setUpAll(() async {
+    scope = await MetadataStore.loadWin32Metadata();
+  });
+
   // .class public sequential ansi sealed beforefieldinit Windows.Win32.UI.WindowsAndMessaging.ACCEL
   // 	extends [netstandard]System.ValueType
   // {
@@ -15,36 +26,38 @@ void main() {
   // 	.field public uint16 cmd
   //
   // } // end of class Windows.Win32.UI.WindowsAndMessaging.ACCEL
+
   test('Windows.Win32.UI.WindowsAndMessaging.ACCEL', () {
-    final scope = MetadataStore.getWin32Scope();
-    final accel =
+    final typeDef =
         scope.findTypeDef('Windows.Win32.UI.WindowsAndMessaging.ACCEL')!;
+    check(typeDef.isBeforeFieldInit).isTrue();
+    check(typeDef.isSealed).isTrue();
+    check(typeDef.isStruct).isTrue();
+    check(typeDef.name).equals('Windows.Win32.UI.WindowsAndMessaging.ACCEL');
+    check(typeDef.parent?.name).equals('System.ValueType');
+    check(typeDef.representsAsClass).isTrue();
+    check(typeDef.stringFormat).equals(StringFormat.ansi);
+    check(typeDef.typeLayout).equals(TypeLayout.sequential);
+    check(typeDef.typeVisibility).equals(TypeVisibility.public);
 
-    check(accel.representsAsClass).isTrue();
-    check(accel.isStruct).isTrue();
-    check(accel.typeVisibility).equals(TypeVisibility.public);
-    check(accel.typeLayout).equals(TypeLayout.sequential);
-    check(accel.stringFormat).equals(StringFormat.ansi);
-    check(accel.isSealed).isTrue();
-    check(accel.isBeforeFieldInit).isTrue();
+    check(typeDef.fields.length).equals(3);
+    final [firstField, secondField, thirdField] = typeDef.fields;
 
-    check(accel.name).equals('Windows.Win32.UI.WindowsAndMessaging.ACCEL');
-    check(accel.parent?.name).equals('System.ValueType');
-
-    check(accel.fields.length).equals(3);
-    check(accel.fields[0].name).equals('fVirt');
-    check(accel.fields[0].typeIdentifier.baseType)
+    check(firstField.fieldAccess).equals(FieldAccess.public);
+    check(firstField.name).equals('fVirt');
+    check(firstField.typeIdentifier.baseType)
         .equals(BaseType.valueTypeModifier);
-    check(accel.fields[0].typeIdentifier.type?.name)
+    check(firstField.typeIdentifier.type?.name)
         .equals('Windows.Win32.UI.WindowsAndMessaging.ACCEL_VIRT_FLAGS');
-    check(accel.fields[0].fieldAccess).equals(FieldAccess.public);
 
-    check(accel.fields[1].name).equals('key');
-    check(accel.fields[1].typeIdentifier.baseType).equals(BaseType.uint16Type);
-    check(accel.fields[1].fieldAccess).equals(FieldAccess.public);
+    check(secondField.fieldAccess).equals(FieldAccess.public);
+    check(secondField.name).equals('key');
+    check(secondField.typeIdentifier.baseType).equals(BaseType.uint16Type);
 
-    check(accel.fields[2].name).equals('cmd');
-    check(accel.fields[2].typeIdentifier.baseType).equals(BaseType.uint16Type);
-    check(accel.fields[2].fieldAccess).equals(FieldAccess.public);
+    check(thirdField.fieldAccess).equals(FieldAccess.public);
+    check(thirdField.name).equals('cmd');
+    check(thirdField.typeIdentifier.baseType).equals(BaseType.uint16Type);
   });
+
+  tearDownAll(MetadataStore.close);
 }

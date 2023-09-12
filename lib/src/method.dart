@@ -1,6 +1,6 @@
-// Copyright (c) 2020, Dart | Windows.  Please see the AUTHORS file
-// for details. All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
+// Copyright (c) 2023, Dart | Windows. Please see the AUTHORS file for details.
+// All rights reserved. Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
 
 import 'dart:ffi';
 import 'dart:typed_data';
@@ -8,20 +8,17 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'enums.dart';
-import 'methodimpls.dart';
-import 'mixins/customattributes_mixin.dart';
-import 'mixins/genericparams_mixin.dart';
-import 'mixins/supportedarchitectures_mixin.dart';
-import 'moduleref.dart';
+import 'method_impls.dart';
+import 'mixins/mixins.dart';
+import 'models/models.dart';
+import 'module_ref.dart';
 import 'parameter.dart';
 import 'pinvokemap.dart';
 import 'scope.dart';
 import 'token_object.dart';
 import 'type_aliases.dart';
-import 'typedef.dart';
-import 'typeidentifier.dart';
-import 'utils/typetuple.dart';
+import 'type_def.dart';
+import 'type_identifier.dart';
 
 /// A method.
 class Method extends TokenObject
@@ -88,14 +85,11 @@ class Method extends TokenObject
           pcbSigBlob,
           pulCodeRVA,
           pdwImplFlags);
+      if (FAILED(hr)) throw WindowsException(hr);
 
-      if (SUCCEEDED(hr)) {
-        final signature = ppvSigBlob.value.asTypedList(pcbSigBlob.value);
-        return Method(scope, token, ptkClass.value, szMethod.toDartString(),
-            pdwAttr.value, signature, pulCodeRVA.value, pdwImplFlags.value);
-      } else {
-        throw WindowsException(hr);
-      }
+      final signature = ppvSigBlob.value.asTypedList(pcbSigBlob.value);
+      return Method(scope, token, ptkClass.value, szMethod.toDartString(),
+          pdwAttr.value, signature, pulCodeRVA.value, pdwImplFlags.value);
     });
   }
 
@@ -138,15 +132,11 @@ class Method extends TokenObject
   /// If `ReuseSlot`, the slot used for this method in the virtual table be
   /// reused. This is the default. If `NewSlot`, the method always gets a new
   /// slot in the virtual table.
-  VtableLayout get vTableLayout {
-    switch (_attributes & CorMethodAttr.mdVtableLayoutMask) {
-      case CorMethodAttr.mdNewSlot:
-        return VtableLayout.newSlot;
-      case CorMethodAttr.mdReuseSlot:
-      default:
-        return VtableLayout.reuseSlot;
-    }
-  }
+  VtableLayout get vTableLayout =>
+      switch (_attributes & CorMethodAttr.mdVtableLayoutMask) {
+        CorMethodAttr.mdNewSlot => VtableLayout.newSlot,
+        _ => VtableLayout.reuseSlot
+      };
 
   /// Returns true if the method can be overridden by the same types to which it
   /// is visible.
@@ -201,11 +191,8 @@ class Method extends TokenObject
 
         final hr = reader.getPinvokeMap(token, pdwMappingFlags, szImportName,
             stringBufferSize, pchImportName, ptkImportDLL);
-        if (SUCCEEDED(hr)) {
-          return ModuleRef.fromToken(scope, ptkImportDLL.value);
-        } else {
-          throw COMException(hr);
-        }
+        if (FAILED(hr)) throw COMException(hr);
+        return ModuleRef.fromToken(scope, ptkImportDLL.value);
       });
 
   /// Returns true if the method contains generic parameters.
@@ -261,7 +248,7 @@ class Method extends TokenObject
 
     // Strip off the header and the paramCount. We know the number and names of
     // the parameters already; we're simply mapping them to types here.
-    var blobPtr = hasGenericParameters == false ? 2 : 3;
+    var blobPtr = hasGenericParameters ? 3 : 2;
 
     // Windows Runtime emits a zero-th parameter for the return type. So move
     // that to the returnType and parse a type from the signature.
@@ -286,8 +273,8 @@ class Method extends TokenObject
     // Parse through the params section of MethodDefSig, and map each recovered
     // type to the corresponding parameter.
     while (paramsIndex < parameters.length) {
-      final runtimeType =
-          TypeTuple.fromSignature(signatureBlob.sublist(blobPtr), scope);
+      final signature = signatureBlob.sublist(blobPtr);
+      final runtimeType = TypeTuple.fromSignature(signature, scope);
       blobPtr += runtimeType.offsetLength;
 
       if (runtimeType.typeIdentifier.baseType == BaseType.simpleArrayType) {
@@ -320,8 +307,8 @@ class Method extends TokenObject
         var hr = reader.enumParams(phEnum, token, rParams, 1, pcTokens);
         while (hr == S_OK) {
           final parameterToken = rParams.value;
-
-          parameters.add(Parameter.fromToken(scope, parameterToken));
+          final parameter = Parameter.fromToken(scope, parameterToken);
+          parameters.add(parameter);
           hr = reader.enumParams(phEnum, token, rParams, 1, pcTokens);
         }
         reader.closeEnum(phEnum.value);
@@ -336,11 +323,11 @@ class Method extends TokenObject
     parameters[paramsIndex].name = '__${name}Size';
 
     if (arrayPassingStyle == _ArrayPassingStyle.receive) {
-      parameters[paramsIndex].typeIdentifier = parameters[paramsIndex]
-          .typeIdentifier
-          .copyWith(
-              baseType: BaseType.pointerTypeModifier,
-              typeArg: const TypeIdentifier(BaseType.uint32Type));
+      parameters[paramsIndex].typeIdentifier =
+          parameters[paramsIndex].typeIdentifier.copyWith(
+                baseType: BaseType.pointerTypeModifier,
+                typeArg: const TypeIdentifier(BaseType.uint32Type),
+              );
     } else {
       parameters[paramsIndex].typeIdentifier =
           const TypeIdentifier(BaseType.uint32Type);

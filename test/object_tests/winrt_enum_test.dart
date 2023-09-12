@@ -1,11 +1,22 @@
+// Copyright (c) 2023, Dart | Windows. Please see the AUTHORS file for details.
+// All rights reserved. Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
 @TestOn('windows')
 
 import 'package:checks/checks.dart';
 import 'package:test/scaffolding.dart';
 import 'package:winmd/winmd.dart';
 
-/// Exhaustively test a WinRT enum representation.
+// Exhaustively test a WinRT enum representation
+
 void main() {
+  late Scope scope;
+
+  setUpAll(() async {
+    scope = await MetadataStore.loadWinRTMetadata();
+  });
+
   // .class public auto ansi sealed import windowsruntime Windows.Storage.Pickers.PickerViewMode
   // 	extends [mscorlib]System.Enum
   // {
@@ -22,46 +33,48 @@ void main() {
   // } // end of class Windows.Storage.Pickers.PickerViewMode
 
   test('Windows.Storage.Pickers.PickerViewMode enum', () {
-    final pvm = MetadataStore.getMetadataForType(
-        'Windows.Storage.Pickers.PickerViewMode')!;
+    final typeDef =
+        scope.findTypeDef('Windows.Storage.Pickers.PickerViewMode')!;
+    check(typeDef.isEnum).isTrue();
+    check(typeDef.isSealed).isTrue();
+    check(typeDef.isWindowsRuntime).isTrue();
+    check(typeDef.name).equals('Windows.Storage.Pickers.PickerViewMode');
+    check(typeDef.parent?.name).equals('System.Enum');
+    check(typeDef.stringFormat).equals(StringFormat.ansi);
+    check(typeDef.typeLayout).equals(TypeLayout.auto);
+    check(typeDef.typeVisibility).equals(TypeVisibility.public);
 
-    check(pvm.typeVisibility).equals(TypeVisibility.public);
-    check(pvm.typeLayout).equals(TypeLayout.auto);
-    check(pvm.stringFormat).equals(StringFormat.ansi);
-    check(pvm.isSealed).isTrue();
-    // check(pvm.isImported).isTrue();
-    check(pvm.isWindowsRuntime).isTrue();
-    check(pvm.name).equals('Windows.Storage.Pickers.PickerViewMode');
-    check(pvm.parent?.name).equals('System.Enum');
-    check(pvm.isEnum).isTrue();
+    check(typeDef.fields.length).equals(3);
+    final [firstField, secondField, thirdField] = typeDef.fields;
 
-    check(pvm.fields.length).equals(3);
-    check(pvm.fields[0].fieldAccess).equals(FieldAccess.private);
-    check(pvm.fields[0].isSpecialName).isTrue();
-    check(pvm.fields[0].isRTSpecialName).isTrue();
-    check(pvm.fields[0].typeIdentifier.baseType).equals(BaseType.int32Type);
-    check(pvm.fields[0].name).equals('value__');
+    check(firstField.fieldAccess).equals(FieldAccess.private);
+    check(firstField.isRTSpecialName).isTrue();
+    check(firstField.isSpecialName).isTrue();
+    check(firstField.name).equals('value__');
+    check(firstField.typeIdentifier.baseType).equals(BaseType.int32Type);
 
-    check(pvm.fields[1].fieldAccess).equals(FieldAccess.public);
-    check(pvm.fields[1].isStatic).isTrue();
-    check(pvm.fields[1].isLiteral).isTrue();
-    check(pvm.fields[1].typeIdentifier.baseType)
+    check(secondField.fieldAccess).equals(FieldAccess.public);
+    check(secondField.fieldType).equals(BaseType.int32Type);
+    check(secondField.isLiteral).isTrue();
+    check(secondField.isStatic).isTrue();
+    check(secondField.name).equals('List');
+    check(secondField.typeIdentifier.baseType)
         .equals(BaseType.valueTypeModifier);
-    check(pvm.fields[1].typeIdentifier.name)
+    check(secondField.typeIdentifier.name)
         .equals('Windows.Storage.Pickers.PickerViewMode');
-    check(pvm.fields[1].name).equals('List');
-    check(pvm.fields[1].fieldType).equals(BaseType.int32Type);
-    check(pvm.fields[1].value).equals(0);
+    check(secondField.value).equals(0);
 
-    check(pvm.fields[2].fieldAccess).equals(FieldAccess.public);
-    check(pvm.fields[2].isStatic).isTrue();
-    check(pvm.fields[2].isLiteral).isTrue();
-    check(pvm.fields[2].typeIdentifier.baseType)
+    check(thirdField.fieldAccess).equals(FieldAccess.public);
+    check(thirdField.fieldType).equals(BaseType.int32Type);
+    check(thirdField.isLiteral).isTrue();
+    check(thirdField.isStatic).isTrue();
+    check(thirdField.name).equals('Thumbnail');
+    check(thirdField.typeIdentifier.baseType)
         .equals(BaseType.valueTypeModifier);
-    check(pvm.fields[2].typeIdentifier.name)
+    check(thirdField.typeIdentifier.name)
         .equals('Windows.Storage.Pickers.PickerViewMode');
-    check(pvm.fields[2].name).equals('Thumbnail');
-    check(pvm.fields[2].fieldType).equals(BaseType.int32Type);
-    check(pvm.fields[2].value).equals(1);
+    check(thirdField.value).equals(1);
   });
+
+  tearDownAll(MetadataStore.close);
 }

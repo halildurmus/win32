@@ -1,18 +1,17 @@
-// Copyright (c) 2020, Dart | Windows.  Please see the AUTHORS file
-// for details. All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
+// Copyright (c) 2023, Dart | Windows. Please see the AUTHORS file for details.
+// All rights reserved. Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
 
 // Parse the Windows Metadata for a Win32 type and grab some interesting
 // information about it.
 
 import 'package:winmd/winmd.dart';
 
-void main() {
-  // Load WinMD metadata for Win32, as produced by the following utility:
-  // https://github.com/microsoft/win32metadata
-  final scope = MetadataStore.getWin32Scope();
+void main() async {
+  // Load the Win32 metadata
+  final scope = await MetadataStore.loadWin32Metadata();
 
-  // Find a namesapce
+  // Find a namespace
   final namespace =
       scope.findTypeDef('Windows.Win32.UI.WindowsAndMessaging.Apis')!;
 

@@ -1,59 +1,23 @@
 name: Build
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
+    branches: [ main ]
+  push:
     branches: [ main ]
 
 jobs:
   build:
-    runs-on: windows-latest
     strategy:
-      # We want to see the results even if one Dart version fails (and vice
+      # We want to see the results on stable even if main fails (and vice
       # versa). This prevents one failure from stopping the entire run.
       fail-fast: false
       matrix:
         sdk: [stable, beta, dev]
-
-    steps:
-      - name: Fetch sources
-        uses: actions/checkout@v4
-
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@v1
-        with:
-          sdk: ${{matrix.sdk}}
-
-      - name: Print Dart SDK version
-        run: dart --version
-
-      - name: Install dependencies
-        run: dart pub get
-
-      - name: Verify formatting
-        run: dart format --output=none --set-exit-if-changed .
-
-      - name: Analyze project source
-        run: dart analyze --fatal-warnings
-
-      # For non-dev builds, we just do tests
-      - name: Run tests
-        if: ${{ matrix.sdk != 'dev' }}
-        run: dart test
-
-      # For dev, we generate and upload code coverage along with tests 
-      - name: Add code coverage package
-        if: ${{ matrix.sdk == 'dev' }} 
-        run: dart pub global activate coverage
-
-      - name: Generate code coverage
-        if: ${{ matrix.sdk == 'dev' }} 
-        run: dart pub global run coverage:test_with_coverage
-
-      - name: Upload code coverage
-        if: ${{ matrix.sdk == 'dev' }} 
-        uses: codecov/codecov-action@v3
-        with:
-          files: coverage/lcov.info
-
+    uses: dart-windows/.github/.github/workflows/dart_package.yml@main
+    with:
+      analyze_directories: example lib test
+      dart_sdk: ${{ matrix.sdk }}
+      run_tests: ${{ matrix.sdk != 'dev' }}
+      runs_on: windows-latest
+      upload_coverage: ${{ matrix.sdk == 'dev' }}

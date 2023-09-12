@@ -1,11 +1,22 @@
+// Copyright (c) 2023, Dart | Windows. Please see the AUTHORS file for details.
+// All rights reserved. Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
 @TestOn('windows')
 
 import 'package:checks/checks.dart';
 import 'package:test/scaffolding.dart';
 import 'package:winmd/winmd.dart';
 
-/// Exhaustively test a COM interface representation.
+// Exhaustively test a COM interface representation
+
 void main() {
+  late Scope scope;
+
+  setUpAll(() async {
+    scope = await MetadataStore.loadWin32Metadata();
+  });
+
 // .class interface public auto ansi abstract Windows.Win32.UI.Shell.IFileOperation2
 // 	implements [Windows.Win32.winmd]Windows.Win32.UI.Shell.IFileOperation
 // {
@@ -24,53 +35,57 @@ void main() {
 // } // end of class Windows.Win32.UI.Shell.IFileOperation2
 
   test('Windows.Win32.UI.Shell.IFileOperation2', () {
-    final scope = MetadataStore.getWin32Scope();
-    final ifop2 = scope.findTypeDef('Windows.Win32.UI.Shell.IFileOperation2')!;
+    final typeDef =
+        scope.findTypeDef('Windows.Win32.UI.Shell.IFileOperation2')!;
+    check(typeDef.customAttributes.length).equals(1);
+    check(typeDef.isAbstract).isTrue();
+    check(typeDef.isInterface).isTrue();
+    check(typeDef.name).equals('Windows.Win32.UI.Shell.IFileOperation2');
+    check(typeDef.stringFormat).equals(StringFormat.ansi);
+    check(typeDef.typeLayout).equals(TypeLayout.auto);
+    check(typeDef.typeVisibility).equals(TypeVisibility.public);
 
-    check(ifop2.isInterface).isTrue();
-    check(ifop2.typeVisibility).equals(TypeVisibility.public);
-    check(ifop2.typeLayout).equals(TypeLayout.auto);
-    check(ifop2.stringFormat).equals(StringFormat.ansi);
-    check(ifop2.isAbstract).isTrue();
-    check(ifop2.name).equals('Windows.Win32.UI.Shell.IFileOperation2');
+    check(typeDef.interfaces.length).equals(1);
+    final [interface] = typeDef.interfaces;
+    check(interface.name).equals('Windows.Win32.UI.Shell.IFileOperation');
 
-    check(ifop2.interfaces.length).equals(1);
-    check(ifop2.interfaces[0].name)
-        .equals('Windows.Win32.UI.Shell.IFileOperation');
-
-    check(ifop2
-            .findAttribute('Windows.Win32.Foundation.Metadata.GuidAttribute')!
-            .signatureBlob
-            .toList())
-        .deepEquals([
+    final guidAttribute = typeDef
+        .findAttribute('Windows.Win32.Foundation.Metadata.GuidAttribute');
+    check(guidAttribute).isNotNull();
+    check(guidAttribute!.signatureBlob.toList()).deepEquals([
       0x01, 0x00, 0xc1, 0x23, 0x8f, 0xcd, 0x61, 0x8f, //
       0x16, 0x49, 0x90, 0x9d, 0x55, 0xbd, 0xd0, 0x91, //
       0x87, 0x53, 0x00, 0x00
     ]);
 
-    check(ifop2.methods.length).equals(1);
-    check(ifop2.methods[0].memberAccess).equals(MemberAccess.public);
-    check(ifop2.methods[0].isHideBySig).isTrue();
-    check(ifop2.methods[0].vTableLayout).equals(VtableLayout.newSlot);
-    check(ifop2.methods[0].isAbstract).isTrue();
-    check(ifop2.methods[0].isVirtual).isTrue();
+    check(typeDef.methods.length).equals(1);
+    final [method] = typeDef.methods;
+    check(method.isAbstract).isTrue();
+    check(method.isHideBySig).isTrue();
+    check(method.isVirtual).isTrue();
+    check(method.memberAccess).equals(MemberAccess.public);
+    check(method.name).equals('SetOperationFlags2');
+    check(method.vTableLayout).equals(VtableLayout.newSlot);
 
-    check(ifop2.methods[0].returnType.typeIdentifier.baseType)
-        .equals(BaseType.valueTypeModifier);
-    check(ifop2.methods[0].returnType.typeIdentifier.name)
-        .equals('Windows.Win32.Foundation.HRESULT');
-    check(ifop2.methods[0].name).equals('SetOperationFlags2');
+    final returnTypeIdentifier = method.returnType.typeIdentifier;
+    check(returnTypeIdentifier.baseType).equals(BaseType.valueTypeModifier);
+    check(returnTypeIdentifier.name).equals('Windows.Win32.Foundation.HRESULT');
 
-    check(ifop2.methods[0].parameters.length).equals(1);
-    check(ifop2.methods[0].parameters[0].isInParam).isTrue();
+    check(method.parameters.length).equals(1);
+    final [parameter] = method.parameters;
+    check(parameter.isInParam).isTrue();
+    check(parameter.name).equals('operationFlags2');
 
-    check(ifop2.methods[0].parameters[0].typeIdentifier.baseType)
-        .equals(BaseType.valueTypeModifier);
-    check(ifop2.methods[0].parameters[0].typeIdentifier.name)
+    final paramTypeIdentifier = parameter.typeIdentifier;
+    check(paramTypeIdentifier.baseType).equals(BaseType.valueTypeModifier);
+    check(paramTypeIdentifier.name)
         .equals('Windows.Win32.UI.Shell.FILE_OPERATION_FLAGS2');
-    check(ifop2.methods[0].parameters[0].name).equals('operationFlags2');
 
-    check(ifop2.methods[0].implFeatures.codeType).equals(CodeType.msil);
-    check(ifop2.methods[0].implFeatures.isManaged).isTrue();
+    final MethodImplementationFeatures(:codeType, :isManaged) =
+        method.implFeatures;
+    check(codeType).equals(CodeType.msil);
+    check(isManaged).isTrue();
   });
+
+  tearDownAll(MetadataStore.close);
 }

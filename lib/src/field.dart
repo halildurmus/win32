@@ -1,6 +1,6 @@
-// Copyright (c) 2020, Dart | Windows.  Please see the AUTHORS file
-// for details. All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
+// Copyright (c) 2023, Dart | Windows. Please see the AUTHORS file for details.
+// All rights reserved. Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
 
 import 'dart:ffi';
 import 'dart:typed_data';
@@ -8,15 +8,14 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'enums.dart';
-import 'mixins/customattributes_mixin.dart';
+import 'mixins/custom_attributes_mixin.dart';
+import 'models/models.dart';
 import 'pinvokemap.dart';
 import 'scope.dart';
 import 'token_object.dart';
 import 'type_aliases.dart';
-import 'typedef.dart';
-import 'typeidentifier.dart';
-import 'utils/typetuple.dart';
+import 'type_def.dart';
+import 'type_identifier.dart';
 
 /// A field.
 ///
@@ -51,39 +50,38 @@ class Field extends TokenObject with CustomAttributesMixin {
 
       final reader = scope.reader;
       final hr = reader.getFieldProps(
-          token,
-          ptkTypeDef,
-          szField,
-          stringBufferSize,
-          pchField,
-          pdwAttr,
-          ppvSigBlob,
-          pcbSigBlob,
-          pdwCPlusTypeFlag,
-          ppValue,
-          pcchValue);
+        token,
+        ptkTypeDef,
+        szField,
+        stringBufferSize,
+        pchField,
+        pdwAttr,
+        ppvSigBlob,
+        pcbSigBlob,
+        pdwCPlusTypeFlag,
+        ppValue,
+        pcchValue,
+      );
+      if (FAILED(hr)) throw WindowsException(hr);
 
-      if (SUCCEEDED(hr)) {
-        final fieldName = szField.toDartString();
+      final fieldName = szField.toDartString();
 
-        // The first entry of the signature is a FIELD attribute (0x06), per
-        // §II.23.2.4 of ECMA-335. Then follows a type identifier.
-        final signature = ppvSigBlob.value.asTypedList(pcbSigBlob.value);
-        final typeTuple = TypeTuple.fromSignature(signature.sublist(1), scope);
+      // The first entry of the signature is a FIELD attribute (0x06), per
+      // §II.23.2.4 of ECMA-335. Then follows a type identifier.
+      final signature = ppvSigBlob.value.asTypedList(pcbSigBlob.value);
+      final typeTuple = TypeTuple.fromSignature(signature.sublist(1), scope);
 
-        return Field(
-            scope,
-            token,
-            ptkTypeDef.value,
-            fieldName,
-            ppValue.value != nullptr ? ppValue.value.value : 0,
-            typeTuple.typeIdentifier,
-            BaseType.fromCorElementType(pdwCPlusTypeFlag.value),
-            pdwAttr.value,
-            signature);
-      } else {
-        throw WindowsException(hr);
-      }
+      return Field(
+        scope,
+        token,
+        ptkTypeDef.value,
+        fieldName,
+        ppValue.value != nullptr ? ppValue.value.value : 0,
+        typeTuple.typeIdentifier,
+        BaseType.fromCorElementType(pdwCPlusTypeFlag.value),
+        pdwAttr.value,
+        signature,
+      );
     });
   }
 

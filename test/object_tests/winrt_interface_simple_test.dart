@@ -1,11 +1,22 @@
+// Copyright (c) 2023, Dart | Windows. Please see the AUTHORS file for details.
+// All rights reserved. Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
 @TestOn('windows')
 
 import 'package:checks/checks.dart';
 import 'package:test/scaffolding.dart';
 import 'package:winmd/winmd.dart';
 
-/// Exhaustively test a WinRT interface representation without generics
+// Exhaustively test a WinRT interface representation without generics
+
 void main() {
+  late Scope scope;
+
+  setUpAll(() async {
+    scope = await MetadataStore.loadWinRTMetadata();
+  });
+
   // .class interface public auto ansi abstract import windowsruntime Windows.Foundation.IAsyncInfo
   // {
   // 	.custom instance void [Windows.Foundation.winmd]Windows.Foundation.Metadata.GuidAttribute::.ctor(uint32, uint16, uint16, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8) = (
@@ -58,56 +69,58 @@ void main() {
   // 	}
 
   // } // end of class Windows.Foundation.IAsyncInfo
-  test('Windows.Foundation.IAsyncInfo', () {
-    final iai =
-        MetadataStore.getMetadataForType('Windows.Foundation.IAsyncInfo')!;
-    check(iai.isInterface).isTrue();
-    check(iai.typeVisibility).equals(TypeVisibility.public);
-    check(iai.typeLayout).equals(TypeLayout.auto);
-    check(iai.stringFormat).equals(StringFormat.ansi);
-    check(iai.isAbstract).isTrue();
-    // check(iai.isImported).isTrue();
-    check(iai.isWindowsRuntime).isTrue();
-    check(iai.name).equals('Windows.Foundation.IAsyncInfo');
 
-    check(iai.customAttributes.length).equals(2);
-    check(iai
-            .findAttribute('Windows.Foundation.Metadata.GuidAttribute')!
-            .signatureBlob
-            .toList())
-        .deepEquals([
+  test('Windows.Foundation.IAsyncInfo', () {
+    final typeDef = scope.findTypeDef('Windows.Foundation.IAsyncInfo')!;
+    check(typeDef.customAttributes.length).equals(2);
+    check(typeDef.isAbstract).isTrue();
+    check(typeDef.isInterface).isTrue();
+    check(typeDef.isWindowsRuntime).isTrue();
+    check(typeDef.name).equals('Windows.Foundation.IAsyncInfo');
+    check(typeDef.stringFormat).equals(StringFormat.ansi);
+    check(typeDef.typeLayout).equals(TypeLayout.auto);
+    check(typeDef.typeVisibility).equals(TypeVisibility.public);
+
+    final contractVersionAttribute = typeDef
+        .findAttribute('Windows.Foundation.Metadata.ContractVersionAttribute');
+    check(contractVersionAttribute).isNotNull();
+    check(contractVersionAttribute!.signatureBlob.toList())
+        .containsInOrder([0x01, 0x00, 0x25, 0x57, 0x69, 0x6e, 0x64, 0x6f]);
+
+    final guidAttribute =
+        typeDef.findAttribute('Windows.Foundation.Metadata.GuidAttribute');
+    check(guidAttribute).isNotNull();
+    check(guidAttribute!.signatureBlob.toList()).deepEquals([
       0x01, 0x00, 0x36, 0x00, 0x00, 0x00, 0x00, 0x00, //
       0x00, 0x00, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, //
       0x00, 0x46, 0x00, 0x00
     ]);
-    check(iai
-            .findAttribute(
-                'Windows.Foundation.Metadata.ContractVersionAttribute')!
-            .signatureBlob
-            .toList())
-        .containsInOrder(<int>[0x01, 0x00, 0x25, 0x57, 0x69, 0x6e, 0x64, 0x6f]);
 
-    check(iai.methods.length).equals(5);
-    check(iai.methods[0].memberAccess).equals(MemberAccess.public);
-    check(iai.methods[0].isHideBySig).isTrue();
-    check(iai.methods[0].isSpecialName).isTrue();
-    check(iai.methods[0].vTableLayout).equals(VtableLayout.newSlot);
-    check(iai.methods[0].isAbstract).isTrue();
-    check(iai.methods[0].isVirtual).isTrue();
-    check(iai.methods[0].returnType.typeIdentifier.baseType)
+    check(typeDef.methods.length).equals(5);
+    final firstMethod = typeDef.methods.first;
+    check(firstMethod.implFeatures.codeType).equals(CodeType.runtime);
+    check(firstMethod.implFeatures.isManaged).isTrue();
+    check(firstMethod.isAbstract).isTrue();
+    check(firstMethod.isHideBySig).isTrue();
+    check(firstMethod.isSpecialName).isTrue();
+    check(firstMethod.isVirtual).isTrue();
+    check(firstMethod.memberAccess).equals(MemberAccess.public);
+    check(firstMethod.name).equals('get_Id');
+    check(firstMethod.returnType.typeIdentifier.baseType)
         .equals(BaseType.uint32Type);
-    check(iai.methods[0].name).equals('get_Id');
-    check(iai.methods[0].implFeatures.codeType).equals(CodeType.runtime);
-    check(iai.methods[0].implFeatures.isManaged).isTrue();
+    check(firstMethod.vTableLayout).equals(VtableLayout.newSlot);
 
-    check(iai.properties.length).equals(3);
-    check(iai.properties[0].typeIdentifier.name)
+    check(typeDef.properties.length).equals(3);
+    final firstProperty = typeDef.properties.first;
+    check(firstProperty.getterMethod?.name).equals('get_ErrorCode');
+    check(firstProperty.hasGetter).isTrue();
+    check(firstProperty.hasSetter).isFalse();
+    check(firstProperty.name).equals('ErrorCode');
+    check(firstProperty.typeIdentifier.name)
         .equals('Windows.Foundation.HResult');
-    check(iai.properties[0].typeIdentifier.baseType)
+    check(firstProperty.typeIdentifier.baseType)
         .equals(BaseType.valueTypeModifier);
-    check(iai.properties[0].name).equals('ErrorCode');
-    check(iai.properties[0].hasGetter).isTrue();
-    check(iai.properties[0].getterMethod?.name).equals('get_ErrorCode');
-    check(iai.properties[0].hasSetter).isFalse();
   });
+
+  tearDownAll(MetadataStore.close);
 }

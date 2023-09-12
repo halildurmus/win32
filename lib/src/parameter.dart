@@ -1,6 +1,6 @@
-// Copyright (c) 2020, Dart | Windows.  Please see the AUTHORS file
-// for details. All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
+// Copyright (c) 2023, Dart | Windows. Please see the AUTHORS file for details.
+// All rights reserved. Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
 
 import 'dart:ffi';
 import 'dart:typed_data';
@@ -8,13 +8,13 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'enums.dart';
 import 'method.dart';
-import 'mixins/customattributes_mixin.dart';
+import 'mixins/custom_attributes_mixin.dart';
+import 'models/models.dart';
 import 'scope.dart';
 import 'token_object.dart';
 import 'type_aliases.dart';
-import 'typeidentifier.dart';
+import 'type_identifier.dart';
 
 /// A parameter or return type.
 class Parameter extends TokenObject with CustomAttributesMixin {
@@ -55,20 +55,19 @@ class Parameter extends TokenObject with CustomAttributesMixin {
           pdwCPlusTypeFlag,
           ppValue,
           pcchValue);
-      if (SUCCEEDED(hr)) {
-        final baseType = BaseType.fromCorElementType(pdwCPlusTypeFlag.value);
-        return Parameter(
-            scope,
-            token,
-            ptkMethodDef.value,
-            pulSequence.value,
-            pdwAttr.value,
-            TypeIdentifier(baseType),
-            szName.toDartString(),
-            ppValue.value.asTypedList(pcchValue.value));
-      } else {
-        throw WindowsException(hr);
-      }
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      final baseType = BaseType.fromCorElementType(pdwCPlusTypeFlag.value);
+      return Parameter(
+        scope,
+        token,
+        ptkMethodDef.value,
+        pulSequence.value,
+        pdwAttr.value,
+        TypeIdentifier(baseType),
+        szName.toDartString(),
+        ppValue.value.asTypedList(pcchValue.value),
+      );
     });
   }
 
@@ -84,14 +83,15 @@ class Parameter extends TokenObject with CustomAttributesMixin {
 
   /// Creates a void parameter object.
   factory Parameter.fromVoid(Scope scope, int methodToken) => Parameter(
-      scope,
-      0,
-      methodToken,
-      0,
-      0,
-      const TypeIdentifier(BaseType.voidType),
-      '',
-      Uint8List(0));
+        scope,
+        0,
+        methodToken,
+        0,
+        0,
+        const TypeIdentifier(BaseType.voidType),
+        '',
+        Uint8List(0),
+      );
 
   @override
   String toString() => name;

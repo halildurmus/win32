@@ -1,6 +1,6 @@
-// Copyright (c) 2020, Dart | Windows.  Please see the AUTHORS file
-// for details. All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
+// Copyright (c) 2023, Dart | Windows. Please see the AUTHORS file for details.
+// All rights reserved. Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
 
 import 'dart:ffi';
 import 'dart:typed_data';
@@ -8,15 +8,14 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'enums.dart';
 import 'method.dart';
-import 'mixins/customattributes_mixin.dart';
+import 'mixins/custom_attributes_mixin.dart';
+import 'models/models.dart';
 import 'scope.dart';
 import 'token_object.dart';
 import 'type_aliases.dart';
-import 'typedef.dart';
-import 'typeidentifier.dart';
-import 'utils/typetuple.dart';
+import 'type_def.dart';
+import 'type_identifier.dart';
 
 /// A property object.
 class Property extends TokenObject with CustomAttributesMixin {
@@ -83,34 +82,31 @@ class Property extends TokenObject with CustomAttributesMixin {
           rgOtherMethod,
           256,
           pcOtherMethod);
+      if (FAILED(hr)) throw WindowsException(hr);
 
-      if (SUCCEEDED(hr)) {
-        final propName = szProperty.toDartString();
+      final propName = szProperty.toDartString();
 
-        // PropertySig is defined in §II.23.2.5 of ECMA-335.
-        final signature = ppvSigBlob.value.asTypedList(pcbSigBlob.value);
-        final typeTuple = TypeTuple.fromSignature(signature.sublist(2), scope);
-        final defaultValue =
-            ppDefaultValue.value.asTypedList(pcchDefaultValue.value);
-        final otherMethodTokens =
-            rgOtherMethod.asTypedList(pcOtherMethod.value);
+      // PropertySig is defined in §II.23.2.5 of ECMA-335.
+      final signature = ppvSigBlob.value.asTypedList(pcbSigBlob.value);
+      final typeTuple = TypeTuple.fromSignature(signature.sublist(2), scope);
+      final defaultValue =
+          ppDefaultValue.value.asTypedList(pcchDefaultValue.value);
+      final otherMethodTokens = rgOtherMethod.asTypedList(pcOtherMethod.value);
 
-        return Property(
-            scope,
-            token,
-            ptkTypeDef.value,
-            propName,
-            pdwPropFlags.value,
-            signature,
-            typeTuple.typeIdentifier,
-            BaseType.fromCorElementType(pdwCPlusTypeFlag.value),
-            defaultValue,
-            ptkSetter.value,
-            ptkGetter.value,
-            otherMethodTokens);
-      } else {
-        throw WindowsException(hr);
-      }
+      return Property(
+        scope,
+        token,
+        ptkTypeDef.value,
+        propName,
+        pdwPropFlags.value,
+        signature,
+        typeTuple.typeIdentifier,
+        BaseType.fromCorElementType(pdwCPlusTypeFlag.value),
+        defaultValue,
+        ptkSetter.value,
+        ptkGetter.value,
+        otherMethodTokens,
+      );
     });
   }
 

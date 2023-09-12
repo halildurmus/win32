@@ -1,14 +1,13 @@
-// Copyright (c) 2020, Dart | Windows.  Please see the AUTHORS file
-// for details. All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
+// Copyright (c) 2023, Dart | Windows. Please see the AUTHORS file for details.
+// All rights reserved. Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'enums.dart';
-import 'utils/exception.dart';
+import 'models/models.dart';
 
 /// A representation of the assembly file's portable executable format.
 class PEKind {
@@ -57,16 +56,10 @@ class PEKind {
 
   /// Returns a value that identifies the platform architecture targeted by the
   /// module.
-  ImageType get imageType {
-    switch (_machine) {
-      case IMAGE_FILE_MACHINE_I386:
-        return ImageType.i386;
-      case IMAGE_FILE_MACHINE_IA64:
-        return ImageType.ia64;
-      case IMAGE_FILE_MACHINE_AMD64:
-        return ImageType.amd64;
-      default:
-        throw WinmdException('Unrecognized image type.');
-    }
-  }
+  ImageType get imageType => switch (_machine) {
+        IMAGE_FILE_MACHINE_I386 => ImageType.i386,
+        IMAGE_FILE_MACHINE_IA64 => ImageType.ia64,
+        IMAGE_FILE_MACHINE_AMD64 => ImageType.amd64,
+        _ => throw const WinmdException('Unrecognized image type.')
+      };
 }

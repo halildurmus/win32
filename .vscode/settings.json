@@ -1,9 +1,0 @@
-{
-    "markdownlint.config": {
-        "MD041": false
-    },
-    "editor.codeActionsOnSave": {
-        "source.fixAll.markdownlint": true
-    },
-    "dart.sdkPath": "c:\\src\\dart-sdk"
-}

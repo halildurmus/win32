@@ -1,22 +1,21 @@
-// Copyright (c) 2020, Dart | Windows.  Please see the AUTHORS file
-// for details. All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
+// Copyright (c) 2023, Dart | Windows. Please see the AUTHORS file for details.
+// All rights reserved. Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'assemblyref.dart';
-import 'enums.dart';
-import 'metadatastore.dart';
-import 'mixins/supportedarchitectures_mixin.dart';
-import 'moduleref.dart';
+import 'assembly_ref.dart';
+import 'metadata_store.dart';
+import 'mixins/supported_architectures_mixin.dart';
+import 'models/models.dart';
+import 'module_ref.dart';
 import 'pekind.dart';
 import 'token_object.dart';
 import 'type_aliases.dart';
-import 'typedef.dart';
-import 'utils/exception.dart';
+import 'type_def.dart';
 
 /// A metadata scope, which typically matches an on-disk file.
 ///
@@ -125,13 +124,16 @@ class Scope {
   int get moduleToken => using((Arena arena) {
         final pmd = arena<mdModule>();
         final hr = reader.getModuleFromScope(pmd);
-        if (FAILED(hr)) throw WinmdException('Unable to find module token.');
+        if (FAILED(hr)) {
+          throw const WinmdException('Unable to find module token.');
+        }
         return pmd.value;
       });
 
   /// Get an enumerated list of modules in this scope.
   Iterable<ModuleRef> _getModuleRefs() {
     final modules = <ModuleRef>[];
+
     using((Arena arena) {
       final phEnum = arena<HCORENUM>();
       final rgModuleRefs = arena<mdModuleRef>();
@@ -152,6 +154,7 @@ class Scope {
   /// Get an enumerated list of assembly references in this scope.
   Iterable<AssemblyRef> _getAssemblyRefs() {
     final assemblies = <AssemblyRef>[];
+
     using((Arena arena) {
       final phEnum = arena<HCORENUM>();
       final rAssemblyRefs = arena<mdModuleRef>();
@@ -174,6 +177,7 @@ class Scope {
   /// Get an enumerated list of all hard-coded strings in this scope.
   Iterable<String> _getUserStrings() {
     final userStrings = <String>[];
+
     using((Arena arena) {
       final phEnum = arena<HCORENUM>();
       final rgStrings = arena<mdString>();

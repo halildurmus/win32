@@ -1,11 +1,22 @@
+// Copyright (c) 2023, Dart | Windows. Please see the AUTHORS file for details.
+// All rights reserved. Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
 @TestOn('windows')
 
 import 'package:checks/checks.dart';
 import 'package:test/scaffolding.dart';
 import 'package:winmd/winmd.dart';
 
-/// Exhaustively test a method representation.
+// Exhaustively test a method representation
+
 void main() {
+  late Scope scope;
+
+  setUpAll(() async {
+    scope = await MetadataStore.loadWin32Metadata();
+  });
+
   // .method public hidebysig static pinvokeimpl("USER32.dll" nomangle lasterr winapi)
   // 	valuetype [Windows.Win32.winmd]Windows.Win32.Foundation.BOOL AdjustWindowRect (
   // 		[in] [out] valuetype [Windows.Win32.winmd]Windows.Win32.Foundation.RECT* lpRect,
@@ -27,61 +38,60 @@ void main() {
   // } // end of method Apis::AdjustWindowRect
 
   test('Windows.Win32.UI.WindowsAndMessaging.Apis.AdjustWindowRect', () {
-    final scope = MetadataStore.getWin32Scope();
-    final typedef =
+    final typeDef =
         scope.findTypeDef('Windows.Win32.UI.WindowsAndMessaging.Apis')!;
-    final awr = typedef.findMethod('AdjustWindowRect')!;
-
-    check(awr.memberAccess).equals(MemberAccess.public);
-    check(awr.isHideBySig).isTrue();
-    check(awr.isStatic).isTrue();
-
-    check(awr.isPinvokeImpl).isTrue();
-    check(awr.pinvokeMap.moduleName).equals('USER32.dll');
-    check(awr.pinvokeMap.isNoMangle).isTrue();
-    check(awr.pinvokeMap.supportsLastError).isTrue();
-    check(awr.pinvokeMap.callingConvention).equals(CallingConvention.winApi);
-
-    check(awr.returnType.typeIdentifier.name)
-        .equals('Windows.Win32.Foundation.BOOL');
-    check(awr.name).equals('AdjustWindowRect');
-
-    check(awr.parameters.length).equals(3);
-
-    check(awr.parameters[0].isInParam).isTrue();
-    check(awr.parameters[0].isOutParam).isTrue();
-    check(awr.parameters[0].name).equals('lpRect');
-    check(awr.parameters[0].typeIdentifier.baseType)
-        .equals(BaseType.pointerTypeModifier);
-    check(awr.parameters[0].typeIdentifier.typeArg).isNotNull();
-    check(awr.parameters[0].typeIdentifier.typeArg?.name)
-        .equals('Windows.Win32.Foundation.RECT');
-
-    check(awr.parameters[1].isInParam).isTrue();
-    check(awr.parameters[1].name).equals('dwStyle');
-    check(awr.parameters[1].typeIdentifier.baseType)
-        .equals(BaseType.valueTypeModifier);
-    check(awr.parameters[1].typeIdentifier.name)
-        .equals('Windows.Win32.UI.WindowsAndMessaging.WINDOW_STYLE');
-
-    check(awr.parameters[2].isInParam).isTrue();
-    check(awr.parameters[2].name).equals('bMenu');
-    check(awr.parameters[2].typeIdentifier.baseType)
-        .equals(BaseType.valueTypeModifier);
-    check(awr.parameters[2].typeIdentifier.name)
+    final method = typeDef.findMethod('AdjustWindowRect')!;
+    check(method.customAttributes.length).equals(2);
+    check(method.implFeatures.codeType).equals(CodeType.msil);
+    check(method.implFeatures.isManaged).isTrue();
+    check(method.isHideBySig).isTrue();
+    check(method.isPinvokeImpl).isTrue();
+    check(method.isStatic).isTrue();
+    check(method.memberAccess).equals(MemberAccess.public);
+    check(method.name).equals('AdjustWindowRect');
+    check(method.returnType.typeIdentifier.name)
         .equals('Windows.Win32.Foundation.BOOL');
 
-    check(awr.implFeatures.codeType).equals(CodeType.msil);
-    check(awr.implFeatures.isManaged).isTrue();
-
-    check(awr
-            .findAttribute(
-                'Windows.Win32.Foundation.Metadata.SupportedOSPlatformAttribute')!
-            .signatureBlob
-            .toList())
-        .deepEquals([
+    final supportedOSPlatformAttr = method.findAttribute(
+        'Windows.Win32.Foundation.Metadata.SupportedOSPlatformAttribute');
+    check(supportedOSPlatformAttr).isNotNull();
+    check(supportedOSPlatformAttr!.signatureBlob.toList()).deepEquals([
       0x01, 0x00, 0x0a, 0x77, 0x69, 0x6e, 0x64, 0x6f, //
       0x77, 0x73, 0x35, 0x2e, 0x30, 0x00, 0x00
     ]);
+
+    final pinvokeMap = method.pinvokeMap;
+    check(pinvokeMap.callingConvention).equals(CallingConvention.winApi);
+    check(pinvokeMap.isNoMangle).isTrue();
+    check(pinvokeMap.moduleName).equals('USER32.dll');
+    check(pinvokeMap.supportsLastError).isTrue();
+
+    check(method.parameters.length).equals(3);
+    final [firstParam, secondParam, thirdParam] = method.parameters;
+
+    check(firstParam.isInParam).isTrue();
+    check(firstParam.isOutParam).isTrue();
+    check(firstParam.name).equals('lpRect');
+    check(firstParam.typeIdentifier.baseType)
+        .equals(BaseType.pointerTypeModifier);
+    check(firstParam.typeIdentifier.typeArg).isNotNull();
+    check(firstParam.typeIdentifier.typeArg?.name)
+        .equals('Windows.Win32.Foundation.RECT');
+
+    check(secondParam.isInParam).isTrue();
+    check(secondParam.name).equals('dwStyle');
+    check(secondParam.typeIdentifier.baseType)
+        .equals(BaseType.valueTypeModifier);
+    check(secondParam.typeIdentifier.name)
+        .equals('Windows.Win32.UI.WindowsAndMessaging.WINDOW_STYLE');
+
+    check(thirdParam.isInParam).isTrue();
+    check(thirdParam.name).equals('bMenu');
+    check(thirdParam.typeIdentifier.baseType)
+        .equals(BaseType.valueTypeModifier);
+    check(thirdParam.typeIdentifier.name)
+        .equals('Windows.Win32.Foundation.BOOL');
   });
+
+  tearDownAll(MetadataStore.close);
 }

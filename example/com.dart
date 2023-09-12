@@ -1,20 +1,25 @@
-// Copyright (c) 2020, Dart | Windows.  Please see the AUTHORS file
-// for details. All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
+// Copyright (c) 2023, Dart | Windows. Please see the AUTHORS file for details.
+// All rights reserved. Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
 
 // Parse the Windows Metadata for a COM type and generate a Dart wrapper
 
 import 'package:winmd/winmd.dart';
 
-const typeToGenerate = 'Windows.Win32.Networking.NetworkListManager.INetwork';
+void main() async {
+  // Load the Win32 metadata
+  final scope = await MetadataStore.loadWin32Metadata();
 
-void main(List<String> args) {
-  final scope = MetadataStore.getWin32Scope();
-  final typedef = scope.findTypeDef(typeToGenerate)!;
+  // A COM interface
+  const typeToGenerate = 'Windows.Win32.Networking.NetworkListManager.INetwork';
 
+  // Find the TypeDef for this interface
+  final typeDef = scope.findTypeDef(typeToGenerate)!;
+
+  // Create a Dart projection
   print('$typeToGenerate contains the following methods:');
 
-  for (final method in typedef.methods) {
+  for (final method in typeDef.methods) {
     print('  ${method.name}');
   }
 }

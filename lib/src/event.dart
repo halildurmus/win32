@@ -1,15 +1,19 @@
+// Copyright (c) 2023, Dart | Windows. Please see the AUTHORS file for details.
+// All rights reserved. Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'enums.dart';
 import 'method.dart';
-import 'mixins/customattributes_mixin.dart';
+import 'mixins/custom_attributes_mixin.dart';
+import 'models/models.dart';
 import 'scope.dart';
 import 'token_object.dart';
 import 'type_aliases.dart';
-import 'typedef.dart';
+import 'type_def.dart';
 
 /// An event.
 ///
@@ -58,35 +62,34 @@ class Event extends TokenObject with CustomAttributesMixin {
 
       final reader = scope.reader;
       final hr = reader.getEventProps(
-          token,
-          ptkClass,
-          szEvent,
-          stringBufferSize,
-          pchEvent,
-          pdwEventFlags,
-          ptkEventType,
-          ptkAddOn,
-          ptkRemoveOn,
-          tkkFire,
-          rgOtherMethod,
-          16,
-          pcOtherMethod);
+        token,
+        ptkClass,
+        szEvent,
+        stringBufferSize,
+        pchEvent,
+        pdwEventFlags,
+        ptkEventType,
+        ptkAddOn,
+        ptkRemoveOn,
+        tkkFire,
+        rgOtherMethod,
+        16,
+        pcOtherMethod,
+      );
+      if (FAILED(hr)) throw WindowsException(hr);
 
-      if (SUCCEEDED(hr)) {
-        return Event(
-            scope,
-            token,
-            ptkClass.value,
-            szEvent.toDartString(),
-            pdwEventFlags.value,
-            ptkEventType.value,
-            ptkAddOn.value,
-            ptkRemoveOn.value,
-            tkkFire.value,
-            rgOtherMethod.asTypedList(pcOtherMethod.value));
-      } else {
-        throw WindowsException(hr);
-      }
+      return Event(
+        scope,
+        token,
+        ptkClass.value,
+        szEvent.toDartString(),
+        pdwEventFlags.value,
+        ptkEventType.value,
+        ptkAddOn.value,
+        ptkRemoveOn.value,
+        tkkFire.value,
+        rgOtherMethod.asTypedList(pcOtherMethod.value),
+      );
     });
   }
 

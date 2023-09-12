@@ -1,18 +1,13 @@
-# Files and directories created by pub
+# https://dart.dev/guides/libraries/private-files
+# Created by `dart pub`
 .dart_tool/
-.packages
+
 .idea/
-
-# Omit commiting pubspec.lock for library packages:
-# https://dart.dev/guides/libraries/private-files#pubspeclock
-pubspec.lock
-
-# Conventional directory for build outputs
-build/
+*.iml
 
 # Directory created by dartdoc
 doc/api/
 
-# Temporary coverage files
-coverage/
-lcov.info
+# Avoid committing pubspec.lock for library packages; see
+# https://dart.dev/guides/libraries/private-files#pubspeclock.
+pubspec.lock

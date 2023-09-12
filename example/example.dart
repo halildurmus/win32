@@ -1,10 +1,6 @@
-// Copyright (c) 2020, Dart | Windows.  Please see the AUTHORS file
-// for details. All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
-
-// Parse the Windows Metadata for a type and interpret its metadata
-
-import 'dart:io';
+// Copyright (c) 2023, Dart | Windows. Please see the AUTHORS file for details.
+// All rights reserved. Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
 
 import 'package:win32/win32.dart';
 import 'package:winmd/winmd.dart';
@@ -19,24 +15,36 @@ void printHeading(String heading) {
 void listTokens([String type = 'Windows.Devices.Bluetooth.BluetoothAdapter']) {
   printHeading('Typedefs in the metadata file containing $type');
 
-  final mdScope = MetadataStore.getScopeForType(type);
+  final scope = MetadataStore.getScopeForType(type);
+  final typeDefs = scope.typeDefs.take(10);
 
-  for (final type in mdScope.typeDefs.take(10)) {
+  for (final type in typeDefs) {
     print('[${type.token.toHexString(32)}] ${type.name} '
         '(baseType: ${type.baseTypeToken.toHexString(32)})');
   }
 }
 
-void listEnums([String type = 'Windows.Globalization']) {
-  printHeading('Enums implemented by $type');
+void listEnums([String namespace = 'Windows.Globalization']) {
+  printHeading('Enums implemented by $namespace');
 
-  final file =
-      MetadataStore.winmdFileContainingType('Windows.Globalization.DayOfWeek');
-  final mdScope = MetadataStore.getScopeForFile(File(file.path));
-  final enums = mdScope.enums;
+  final scope = MetadataStore.getScopeForType(namespace);
+  final enums =
+      scope.enums.where((typeDef) => typeDef.name.startsWith(namespace));
 
   for (final enumEntry in enums) {
-    print('${enumEntry.name} has ${enumEntry.fields.length} entries.');
+    print('${enumEntry.name} has ${enumEntry.fields.length} fields.');
+  }
+}
+
+void listStructs([String namespace = 'Windows.Foundation']) {
+  printHeading('Structs implemented by $namespace');
+
+  final scope = MetadataStore.getScopeForType(namespace);
+  final structs =
+      scope.structs.where((typeDef) => typeDef.name.startsWith(namespace));
+
+  for (final structEntry in structs) {
+    print('${structEntry.name} has ${structEntry.fields.length} fields.');
   }
 }
 
@@ -44,9 +52,8 @@ void listMethods(
     [String type = 'Windows.Networking.Connectivity.NetworkInformation']) {
   printHeading('First ten methods of $type');
 
-  final mdScope = MetadataStore.getScopeForType(type);
-  final winTypeDef = mdScope.findTypeDef(type);
-  final methods = winTypeDef!.methods.take(10);
+  final typeDef = MetadataStore.getMetadataForType(type)!;
+  final methods = typeDef.methods.take(10);
 
   print(methods.map(methodSignature).join('\n'));
 }
@@ -56,10 +63,8 @@ void listParameters(
     String methodName = 'CompareDateTime']) {
   printHeading('Parameters of $methodName in $type');
 
-  final mdScope = MetadataStore.getScopeForType(type);
-
-  final winTypeDef = mdScope.findTypeDef(type);
-  final method = winTypeDef!.findMethod(methodName)!;
+  final typeDef = MetadataStore.getMetadataForType(type)!;
+  final method = typeDef.findMethod(methodName)!;
 
   print('${method.name} has '
       '${method.parameters.length} parameter(s).');
@@ -78,11 +83,8 @@ void listParameters(
 void listInterfaces([String type = 'Windows.Storage.Pickers.FolderPicker']) {
   printHeading('First 5 interfaces implemented by $type');
 
-  final mdScope = MetadataStore.getScopeForType(type);
-
-  final winTypeDef = mdScope.findTypeDef(type);
-
-  final interfaces = winTypeDef!.interfaces.take(5);
+  final typeDef = MetadataStore.getMetadataForType(type)!;
+  final interfaces = typeDef.interfaces.take(5);
 
   print('$type implements:');
   for (final interface in interfaces) {
@@ -94,57 +96,92 @@ void listInterfaces([String type = 'Windows.Storage.Pickers.FolderPicker']) {
 void listGUID([String type = 'Windows.UI.Shell.IAdaptiveCard']) {
   printHeading('GUID for $type');
 
-  final mdScope = MetadataStore.getScopeForType(type);
-  final winTypeDef = mdScope.findTypeDef(type);
-
-  print(winTypeDef!.guid);
+  final typeDef = MetadataStore.getMetadataForType(type)!;
+  print(typeDef.guid);
 }
+
+String type(Method method, TypeIdentifier typeIdentifier) =>
+    switch (typeIdentifier.baseType) {
+      BaseType.booleanType => 'bool',
+      BaseType.classVariableTypeModifier => method.parent
+          .genericParams[typeIdentifier.genericParameterSequence ?? 0].name,
+      BaseType.int8Type ||
+      BaseType.int16Type ||
+      BaseType.int32Type ||
+      BaseType.int64Type ||
+      BaseType.uint8Type ||
+      BaseType.uint16Type ||
+      BaseType.uint32Type ||
+      BaseType.uint64Type =>
+        typeIdentifier.baseType.name.replaceFirst('Type', ''),
+      BaseType.referenceTypeModifier =>
+        'ref ${type(method, typeIdentifier.typeArg!)}',
+      BaseType.simpleArrayType => '${type(method, typeIdentifier.typeArg!)}[]',
+      BaseType.charType || BaseType.stringType => 'String',
+      BaseType.voidType => 'void',
+      _ => typeIdentifier.name
+    };
 
 String methodSignature(Method method) =>
     '   ${method.isStatic ? 'static ' : ''}'
     '${method.isFinal ? 'final ' : ''}'
     '${method.isGetProperty ? '[propget] ' : ''}'
-    '${method.isSetProperty ? '[propset] ' : ''}'
-    '${method.returnType.typeIdentifier.name} '
+    '${method.isSetProperty ? '[propput] ' : ''}'
+    '${type(method, method.returnType.typeIdentifier)} '
     '${method.isProperty ? method.name.substring(4) : method.name}'
-    '${method.isGetProperty ? ';' : 'typeParams(method);'}';
+    '${method.isGetProperty ? ';' : '${typeParams(method)};'}';
 
-String typeParams(Method method) => method.parameters
-    .map((param) => '${param.typeIdentifier.name} ${param.name}')
-    .join(', ');
+String typeParams(Method method) {
+  if (method.isGetProperty) return '';
+
+  final parameters = method.parameters;
+  if (parameters.isEmpty) return '()';
+
+  final params = parameters.map((param) {
+    final Parameter(:isInParam, :isOutParam) = param;
+    return '${isInParam ? '[in] ' : ''}'
+        '${isOutParam ? '[out] ' : ''}'
+        '${type(method, param.typeIdentifier)} ${param.name}';
+  }).join(', ');
+
+  return '($params)';
+}
 
 String convertTypeToProjection(
     [String type = 'Windows.Foundation.IAsyncInfo']) {
   printHeading('A pseudo-code representation of the $type type');
 
   final idlProjection = StringBuffer();
+  final typeDef = MetadataStore.getMetadataForType(type)!;
 
-  final mdScope = MetadataStore.getScopeForType(type);
-  final winTypeDef = mdScope.findTypeDef(type);
-
-  if (winTypeDef?.parent?.name == 'IInspectable') {
-    idlProjection.writeln('// vtable_start 6');
-  } else {
-    idlProjection.writeln('// vtable_start UNKNOWN');
-  }
+  final vTableStart = switch (typeDef.parent?.name) {
+    'IUnknown' || 'System.MulticastDelegate' => 3,
+    'IInspectable' => 6,
+    _ => 'UNKNOWN'
+  };
 
   idlProjection
-    ..writeln('[uuid(${winTypeDef!.guid}]')
-    ..writeln('interface ${winTypeDef.name} : ${winTypeDef.parent!.name}')
+    ..writeln('// vtable_start $vTableStart')
+    ..writeln('[uuid(${typeDef.guid}]')
+    ..writeln('interface ${typeDef.name} : ${typeDef.parent?.name}')
     ..writeln('{')
-    ..writeln(winTypeDef.methods.map(methodSignature).join('\n'))
+    ..writeln(typeDef.methods.map(methodSignature).join('\n'))
     ..writeln('}');
 
   return idlProjection.toString();
 }
 
-void main(List<String> args) {
+void main(List<String> args) async {
+  await MetadataStore.loadWin32Metadata();
+  await MetadataStore.loadWinRTMetadata();
+
   listTokens();
   listInterfaces();
   listGUID();
   listMethods();
   listParameters();
   listEnums();
+  listStructs();
 
   print(convertTypeToProjection());
 }

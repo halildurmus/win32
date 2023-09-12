@@ -1,11 +1,22 @@
+// Copyright (c) 2023, Dart | Windows. Please see the AUTHORS file for details.
+// All rights reserved. Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
 @TestOn('windows')
 
 import 'package:checks/checks.dart';
 import 'package:test/scaffolding.dart';
 import 'package:winmd/winmd.dart';
 
-/// Exhaustively test a Win32 enum representation.
+// Exhaustively test a Win32 enum representation
+
 void main() {
+  late Scope scope;
+
+  setUpAll(() async {
+    scope = await MetadataStore.loadWin32Metadata();
+  });
+
   // .class public auto ansi sealed Windows.Win32.UI.WindowsAndMessaging.HANDEDNESS
   //   extends [netstandard]System.Enum
   // {
@@ -15,47 +26,50 @@ void main() {
   //   .field public static literal valuetype [Windows.Win32.winmd]Windows.Win32.UI.WindowsAndMessaging.HANDEDNESS HANDEDNESS_RIGHT = int32(1)
 
   // } // end of class Windows.Win32.UI.WindowsAndMessaging.HANDEDNESS
+
   test('Windows.Win32.UI.WindowsAndMessaging.HANDEDNESS enum', () {
-    final scope = MetadataStore.getWin32Scope();
-    final hand =
+    final typeDef =
         scope.findTypeDef('Windows.Win32.UI.WindowsAndMessaging.HANDEDNESS')!;
-
-    check(hand.typeVisibility).equals(TypeVisibility.public);
-    check(hand.typeLayout).equals(TypeLayout.auto);
-    check(hand.stringFormat).equals(StringFormat.ansi);
-    check(hand.isSealed).isTrue();
-    check(hand.name).equals('Windows.Win32.UI.WindowsAndMessaging.HANDEDNESS');
-    check(hand.parent?.name).equals('System.Enum');
-    check(hand.isEnum).isTrue();
-
-    check(hand.fields.length).equals(3);
-
-    check(hand.fields[0].fieldAccess).equals(FieldAccess.public);
-    check(hand.fields[0].isSpecialName).isTrue();
-    check(hand.fields[0].isRTSpecialName).isTrue();
-    check(hand.fields[0].typeIdentifier.baseType).equals(BaseType.int32Type);
-    check(hand.fields[0].name).equals('value__');
-
-    check(hand.fields[1].fieldAccess).equals(FieldAccess.public);
-    check(hand.fields[1].isStatic).isTrue();
-    check(hand.fields[1].isLiteral).isTrue();
-    check(hand.fields[1].typeIdentifier.baseType)
-        .equals(BaseType.valueTypeModifier);
-    check(hand.fields[1].typeIdentifier.name)
+    check(typeDef.isEnum).isTrue();
+    check(typeDef.isSealed).isTrue();
+    check(typeDef.name)
         .equals('Windows.Win32.UI.WindowsAndMessaging.HANDEDNESS');
-    check(hand.fields[1].name).equals('HANDEDNESS_LEFT');
-    check(hand.fields[1].fieldType).equals(BaseType.int32Type);
-    check(hand.fields[1].value).equals(0);
+    check(typeDef.parent?.name).equals('System.Enum');
+    check(typeDef.stringFormat).equals(StringFormat.ansi);
+    check(typeDef.typeLayout).equals(TypeLayout.auto);
+    check(typeDef.typeVisibility).equals(TypeVisibility.public);
 
-    check(hand.fields[2].fieldAccess).equals(FieldAccess.public);
-    check(hand.fields[2].isStatic).isTrue();
-    check(hand.fields[2].isLiteral).isTrue();
-    check(hand.fields[2].typeIdentifier.baseType)
+    check(typeDef.fields.length).equals(3);
+    final [firstField, secondField, thirdField] = typeDef.fields;
+
+    check(firstField.fieldAccess).equals(FieldAccess.public);
+    check(firstField.isRTSpecialName).isTrue();
+    check(firstField.isSpecialName).isTrue();
+    check(firstField.name).equals('value__');
+    check(firstField.typeIdentifier.baseType).equals(BaseType.int32Type);
+
+    check(secondField.fieldAccess).equals(FieldAccess.public);
+    check(secondField.fieldType).equals(BaseType.int32Type);
+    check(secondField.isStatic).isTrue();
+    check(secondField.isLiteral).isTrue();
+    check(secondField.name).equals('HANDEDNESS_LEFT');
+    check(secondField.typeIdentifier.baseType)
         .equals(BaseType.valueTypeModifier);
-    check(hand.fields[2].typeIdentifier.name)
+    check(secondField.typeIdentifier.name)
         .equals('Windows.Win32.UI.WindowsAndMessaging.HANDEDNESS');
-    check(hand.fields[2].name).equals('HANDEDNESS_RIGHT');
-    check(hand.fields[2].fieldType).equals(BaseType.int32Type);
-    check(hand.fields[2].value).equals(1);
+    check(secondField.value).equals(0);
+
+    check(thirdField.fieldAccess).equals(FieldAccess.public);
+    check(thirdField.fieldType).equals(BaseType.int32Type);
+    check(thirdField.isLiteral).isTrue();
+    check(thirdField.isStatic).isTrue();
+    check(thirdField.name).equals('HANDEDNESS_RIGHT');
+    check(thirdField.typeIdentifier.baseType)
+        .equals(BaseType.valueTypeModifier);
+    check(thirdField.typeIdentifier.name)
+        .equals('Windows.Win32.UI.WindowsAndMessaging.HANDEDNESS');
+    check(thirdField.value).equals(1);
   });
+
+  tearDownAll(MetadataStore.close);
 }

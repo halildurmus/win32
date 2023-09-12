@@ -1,17 +1,24 @@
+## 4.0.0
+
+- **BREAKING**: TODO
+- Fix an error related to the parsing of constant reference parameters
+- Support enumerating all classes, interfaces, and structs in the `Scope` (#79)
+- Fix attributes of simple array size parameters (#78)
+
 ## 3.0.1
 
-- Fix an error when enumerating a TypeDef's methods (#74)
+- Fix an error when enumerating methods of a `TypeDef` (#74)
 - Fix naming conflicts with multiple simple array type parameters in a function
   (#76)
 
 ## 3.0.0
 
+- **BREAKING**: The names of metadata attributes changed in the above winmd
+  file. Replace all instances of `Windows.Win32.Interop.*` with
+  `Windows.Win32.Foundation.Metadata.*`.
 - Fix bug with a simple array type in a function signature (#72, thanks
   @ds84182)
 - Update to Windows.Win32.winmd v51.0.33.6962.
-- [BREAKING CHANGE] The names of metadata attributes changed in the above winmd
-  file. Replace all instances of `Windows.Win32.Interop.*` with
-  `Windows.Win32.Foundation.Metadata.*`.
 - Upgrade to Dart 3
 
 ## 2.4.9

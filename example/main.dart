@@ -1,17 +1,20 @@
-// Copyright (c) 2020, Dart | Windows.  Please see the AUTHORS file
-// for details. All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
+// Copyright (c) 2023, Dart | Windows. Please see the AUTHORS file for details.
+// All rights reserved. Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
 
 // Parse the Windows Metadata for a WinRT type and generate a Dart wrapper
 
 import 'package:winmd/winmd.dart';
 
-void main() {
-  // A Windows Runtime interface
+void main() async {
+  // Load the WinRT metadata
+  final scope = await MetadataStore.loadWinRTMetadata();
+
+  // A Windows Runtime class
   const typeToGenerate = 'Windows.Media.Playback.MediaPlayer';
 
-  // Load the metadata for this interface
-  final typeDef = MetadataStore.getMetadataForType(typeToGenerate)!;
+  // Find the TypeDef for this class
+  final typeDef = scope.findTypeDef(typeToGenerate)!;
 
   // Create a Dart projection
   print('$typeToGenerate contains the following methods:');
