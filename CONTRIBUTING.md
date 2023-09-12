@@ -21,8 +21,7 @@ high-fidelity object model. It should be essentially agnostic to the underlying
 types, e.g. it should not assume a Dart type system is the target.
 
 That is, `winmd` would be considered feature-complete if a developer could build
-a Dart equivalent of
-[ilspy](https://github.com/icsharpcode/ILSpy) or
+a Dart equivalent of [ilspy](https://github.com/icsharpcode/ILSpy) or
 [ildasm](https://docs.microsoft.com/dotnet/framework/tools/ildasm-exe-il-disassembler)
 with it.
 
