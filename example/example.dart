@@ -100,9 +100,12 @@ void listGUID([String type = 'Windows.UI.Shell.IAdaptiveCard']) {
   print(typeDef.guid);
 }
 
-String type(Method method, TypeIdentifier typeIdentifier) =>
+String parseType(Method method, TypeIdentifier typeIdentifier) =>
     switch (typeIdentifier.baseType) {
       BaseType.booleanType => 'bool',
+      BaseType.cLanguageOptionalModifier ||
+      BaseType.cLanguageRequiredModifier =>
+        parseType(method, typeIdentifier.typeArg!),
       BaseType.classVariableTypeModifier => method.parent
           .genericParams[typeIdentifier.genericParameterSequence ?? 0].name,
       BaseType.int8Type ||
@@ -115,8 +118,9 @@ String type(Method method, TypeIdentifier typeIdentifier) =>
       BaseType.uint64Type =>
         typeIdentifier.baseType.name.replaceFirst('Type', ''),
       BaseType.referenceTypeModifier =>
-        'ref ${type(method, typeIdentifier.typeArg!)}',
-      BaseType.simpleArrayType => '${type(method, typeIdentifier.typeArg!)}[]',
+        'ref ${parseType(method, typeIdentifier.typeArg!)}',
+      BaseType.simpleArrayType =>
+        '${parseType(method, typeIdentifier.typeArg!)}[]',
       BaseType.charType || BaseType.stringType => 'String',
       BaseType.voidType => 'void',
       _ => typeIdentifier.name
@@ -127,7 +131,7 @@ String methodSignature(Method method) =>
     '${method.isFinal ? 'final ' : ''}'
     '${method.isGetProperty ? '[propget] ' : ''}'
     '${method.isSetProperty ? '[propput] ' : ''}'
-    '${type(method, method.returnType.typeIdentifier)} '
+    '${parseType(method, method.returnType.typeIdentifier)} '
     '${method.isProperty ? method.name.substring(4) : method.name}'
     '${method.isGetProperty ? ';' : '${typeParams(method)};'}';
 
@@ -141,7 +145,7 @@ String typeParams(Method method) {
     final Parameter(:isInParam, :isOutParam) = param;
     return '${isInParam ? '[in] ' : ''}'
         '${isOutParam ? '[out] ' : ''}'
-        '${type(method, param.typeIdentifier)} ${param.name}';
+        '${parseType(method, param.typeIdentifier)} ${param.name}';
   }).join(', ');
 
   return '($params)';
