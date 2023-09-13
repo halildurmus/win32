@@ -15,11 +15,13 @@ import 'models/models.dart';
 import 'scope.dart';
 import 'type_def.dart';
 
-/// Caches a reader for each file scope.
+/// A class that manages the caching and retrieval of Windows Metadata (.winmd)
+/// files and provides methods to obtain metadata scopes for Win32 and WinRT
+/// APIs.
 ///
-/// Use this to obtain a reference of a scope without creating unnecessary
+/// Use this class to obtain a reference of a scope without creating unnecessary
 /// copies or cycles.
-final class MetadataStore {
+abstract final class MetadataStore {
   static final scopeCache = <String, Scope>{};
   static IMetaDataDispenser? _dispenser;
   static NuGetClient? _nugetClient;
@@ -52,15 +54,30 @@ final class MetadataStore {
     }
   }
 
-  /// Returns the metadata for a [typeName] (e.g.,
-  /// `Windows.Globalization.Calendar`).
+  /// Returns the metadata for a specific Windows [typeName].
+  ///
+  /// Given a [typeName] (e.g., `Windows.Globalization.Calendar`), this
+  /// method retrieves the associated metadata information.
+  ///
+  /// Returns `null` if metadata is not found.
+  ///
+  /// Throws an [ArgumentError] if [typeName] is empty or does not start with
+  /// `Windows`.
   static TypeDef? getMetadataForType(String typeName) {
     final scope = getScopeForType(typeName);
     return scope.findTypeDef(typeName);
   }
 
-  /// Returns the scope for a [typeName] (e.g.,
-  /// `Windows.Globalization.Calendar`).
+  /// Returns the scope for a specific Windows [typeName].
+  ///
+  /// Given a [typeName] (e.g., `Windows.Globalization.Calendar`), this method
+  /// retrieves the scope containing the associated metadata.
+  ///
+  /// Throws an [ArgumentError] if [typeName] is empty or does not start with
+  /// `Windows`.
+  ///
+  /// Throws a [WinmdException] if the metadata scope is not found or if it
+  /// requires loading the Win32 or WinRT metadata first.
   static Scope getScopeForType(String typeName) {
     if (typeName.isEmpty) {
       throw ArgumentError.value(typeName, 'typeName', 'Must not be empty.');
@@ -98,7 +115,15 @@ final class MetadataStore {
     throw WinmdException('Could not find metadata scope for $typeName.');
   }
 
-  /// Returns the scope for a Windows Metadata [file].
+  /// Loads Windows Metadata from a specified [file].
+  ///
+  /// Given a [file], this method loads the metadata from the file and returns
+  /// it as a [Scope] object.
+  ///
+  /// Throws an [ArgumentError] if the [file] does not exist.
+  ///
+  /// Throws a [WindowsException] if there is an issue opening the metadata
+  /// file.
   static Scope loadMetadataFromFile(File file) {
     if (!file.existsSync()) {
       throw ArgumentError.value(file, 'file', 'File does not exist.');
@@ -144,6 +169,12 @@ final class MetadataStore {
     }
   }
 
+  /// Downloads a NuGet package and returns its content as bytes.
+  ///
+  /// Given a [packageName] and a [version], this method downloads the NuGet
+  /// package content and returns it as a [Uint8List].
+  ///
+  /// Throws an exception if the download fails.
   static Future<Uint8List> _downloadPackage(
       String packageName, String version) async {
     final packageId = packageName.toLowerCase();
@@ -152,6 +183,15 @@ final class MetadataStore {
         .downloadPackageContent(packageId, version: version);
   }
 
+  /// Unpacks a NuGet package and returns its local path.
+  ///
+  /// Given a [packageName] and a [version], this method downloads the NuGet
+  /// package, unpacks its content to a local directory, and returns the path
+  /// to that directory.
+  ///
+  /// If the package is already unpacked, it returns the path immediately.
+  ///
+  /// Throws an exception if the download or unpacking fails.
   static Future<String> _unpackPackage(
       String packageName, String version) async {
     final path = '${LocalStorage.path}\\$packageName@$version';
@@ -168,6 +208,11 @@ final class MetadataStore {
     return path;
   }
 
+  /// Loads Win32 metadata.
+  ///
+  /// If the metadata is already downloaded, it loads it from the local cache.
+  ///
+  /// Throws an exception if the download or loading fails.
   static Future<Scope> _loadWin32Metadata({required String version}) async {
     final MetadataType(:assetName, :packageName) = MetadataType.win32;
     final packagePath = await _unpackPackage(packageName, version);
@@ -175,7 +220,13 @@ final class MetadataStore {
     return loadMetadataFromFile(metadataFile);
   }
 
-  /// Returns the scope that contains the Win32 metadata.
+  /// Loads Win32 metadata.
+  ///
+  /// If [version] is not specified, it loads the latest available version.
+  ///
+  /// If the metadata is already downloaded, it loads it from the local cache.
+  ///
+  /// Throws an exception if the download or loading fails.
   static Future<Scope> loadWin32Metadata({String? version}) async {
     if (!_isInitialized) initialize();
 
@@ -207,6 +258,14 @@ final class MetadataStore {
     }
   }
 
+  /// Loads WinRT metadata.
+  ///
+  /// If the metadata is already downloaded, it loads it from the local cache.
+  ///
+  /// If the metadata file is not found, it merges individual WinMD files into a
+  /// single file before loading.
+  ///
+  /// Throws an exception if the download or loading fails.
   static Future<Scope> _loadWinRTMetadata({required String version}) async {
     final MetadataType(:assetName, :packageName) = MetadataType.winrt;
     final packagePath = await _unpackPackage(packageName, version);
@@ -220,7 +279,13 @@ final class MetadataStore {
     return loadMetadataFromFile(metadataFile);
   }
 
-  /// Returns the scope that contains the WinRT metadata.
+  /// Loads WinRT metadata
+  ///
+  /// If [version] is not specified, it loads the latest available version.
+  ///
+  /// If the metadata is already downloaded, it loads it from the local cache.
+  ///
+  /// Throws an exception if the download or loading fails.
   static Future<Scope> loadWinRTMetadata({String? version}) async {
     if (!_isInitialized) initialize();
 
@@ -252,11 +317,13 @@ final class MetadataStore {
     }
   }
 
-  /// Disposes of all objects.
+  /// Disposes of all objects and clears the [scopeCache].
   ///
-  /// The readers and dispensers should be automatically torn down with the end
-  /// of the process, but it's polite to do this in an orderly manner,
-  /// particularly if the calling app outlives the cache lifetime.
+  /// This method releases resources associated with the `MetadataStore` and
+  /// clears the cache of loaded scopes.
+  ///
+  /// It's a good practice to call this method when you're done using the
+  /// `MetadataStore`.
   static void close() {
     if (!_isInitialized) return;
     assert(_dispenser != null);
@@ -270,6 +337,6 @@ final class MetadataStore {
     _isInitialized = false;
   }
 
-  /// Prints information about the cache for debugging purposes.
+  /// Prints information about the [scopeCache] for debugging purposes.
   static String get cacheInfo => '[${scopeCache.keys.join(', ')}]';
 }
