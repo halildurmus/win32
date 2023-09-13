@@ -14,9 +14,9 @@ import 'nuget_package.dart';
 ///
 /// This class is used to store downloaded NuGet packages locally. The packages
 /// are stored in the user's local app data directory, under a subdirectory
-/// named `dart-windows_winmd`.
+/// named `winmd`.
 abstract final class LocalStorage {
-  static const _directoryName = 'dart-windows_winmd';
+  static const _directoryName = 'winmd';
   static final _directory = Directory(path);
 
   /// Path to the local storage directory.

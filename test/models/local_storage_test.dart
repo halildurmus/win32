@@ -14,8 +14,7 @@ void main() {
       final path = LocalStorage.path;
       check(path)
         ..isNotEmpty()
-        ..contains('dart-windows_winmd')
-        ..not(it()..endsWith('\\'));
+        ..endsWith('winmd');
     });
 
     test('path should stay constant within same invocation', () {
@@ -66,8 +65,7 @@ void main() {
       check(win32Package!.name).equals('Microsoft.Windows.SDK.Win32Metadata');
       check(win32Package.version).isNotEmpty();
       check(win32Package.path)
-        ..contains('dart-windows_winmd')
-        ..contains('Microsoft.Windows.SDK.Win32Metadata');
+          .contains('winmd\\Microsoft.Windows.SDK.Win32Metadata');
       check(win32Package.toString()).equals(
         'Microsoft.Windows.SDK.Win32Metadata@${win32Package.version} (${win32Package.path})',
       );
@@ -79,8 +77,7 @@ void main() {
       check(winrtPackage!.name).equals('Microsoft.Windows.SDK.Contracts');
       check(winrtPackage.version).isNotEmpty();
       check(winrtPackage.path)
-        ..contains('dart-windows_winmd')
-        ..contains('Microsoft.Windows.SDK.Contracts');
+          .contains('winmd\\Microsoft.Windows.SDK.Contracts');
       check(winrtPackage.toString()).equals(
         'Microsoft.Windows.SDK.Contracts@${winrtPackage.version} (${winrtPackage.path})',
       );
