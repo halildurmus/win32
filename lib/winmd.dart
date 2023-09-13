@@ -2,11 +2,11 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-/// Dart language support for working with Windows Metadata.
+/// A Dart library for working with Windows Metadata (.winmd) files.
 ///
-/// This library enables interrogation of the Windows developer API, including
-/// unmanaged APIs like Win32 or COM, as well as APIs like Windows Runtime
-/// (WinRT) that include their own metadata.
+/// This library can be used to query Windows developer APIs, encompassing both
+/// unmanaged APIs like Win32 or COM, as well as modern APIs like
+/// Windows Runtime (WinRT) that include their own metadata.
 ///
 /// The library consumes metadata in the
 /// [ECMA-335](https://www.ecma-international.org/publications/files/ECMA-ST/ECMA-335.pdf)
@@ -26,16 +26,20 @@
 /// Utilizing Windows Metadata allows the generation of a Win32 API projection
 /// programmatically, offering resilience against errors or changes over time.
 ///
-/// In addition to the aforementioned package and other specialized
-/// alternatives, this package may prove useful for creating Windows utilities
-/// using Dart or Flutter.
+/// Additionally, this library is utilized by the
+/// [windows_*](https://pub.dev/packages?q=publisher%3Awin32.pub+topic%3Awinrt)
+/// packages, which provide idiomatic Dart language projections of the
+/// Windows Runtime (WinRT) APIs.
+///
+/// Beyond these specific use cases, this package can be valuable for creating
+/// Windows utilities using Dart or Flutter.
 ///
 /// To start using this library, obtaining a `Scope` is necessary. A `Scope`
 /// contains a named set of metadata. For most scenarios, you should retrieve a
 /// scope through one of the static methods of the `MetadataStore` class, which
 /// caches retrieved scopes.
 ///
-/// The following code retrieves the Win32 scope:
+/// To retrieve the latest Win32 metadata scope, you can use the following code:
 ///
 /// ```dart
 /// final scope = await MetadataStore.loadWin32Metadata();
@@ -43,32 +47,44 @@
 ///
 /// By default, the `loadWin32Metadata` method downloads the latest version of
 /// the NuGet package `Microsoft.Windows.SDK.Win32Metadata` and loads the
-/// metadata from it. If a different version is desired, the `version` string
-/// can be specified as a parameter:
+/// metadata from it. If you prefer a different version, you can specify the
+/// `version` string as a parameter:
 ///
 /// ```dart
 /// final scope =
 ///   await MetadataStore.loadWin32Metadata(version: '52.0.65-preview');
 /// ```
 ///
-/// Similarly, the following code retrieves the WinRT scope:
+/// To retrieve the latest WinRT metadata scope, you can use the following code:
 ///
 /// ```dart
 /// final scope = await MetadataStore.loadWinRTMetadata();
 /// ```
 ///
-/// By default, the `loadWinRTMetadata` method downloads the latest version of
-/// the NuGet package `Microsoft.Windows.SDK.Contracts` and loads the metadata
-/// from it. If a different version is preferred, the `version` string can be
-/// specified as a parameter:
+/// Similar to the Win32 counterpart, the `loadWinRTMetadata` method downloads
+/// the latest version of the NuGet package `Microsoft.Windows.SDK.Contracts`
+/// and loads the metadata from it. If you prefer a different version, you can
+/// specify the `version` string as a parameter:
 ///
 /// ```dart
 /// final scope =
 ///   await MetadataStore.loadWinRTMetadata(version: '10.0.22621.755');
 /// ```
 ///
-/// Alternatively, a scope can be obtained directly from a Windows Metadata file
-/// (.winmd):
+/// **Note:** If the metadata you want to load has already been downloaded and
+/// stored locally, `loadWin32Metadata` or `loadWinRTMetadata` will load the
+/// metadata from the local storage instead of downloading it again.
+///
+/// You can get the list of downloaded NuGet packages as follows:
+///
+/// ```dart
+/// for (final package in LocalStorage.packages) {
+///   print(package);
+/// }
+/// ```
+///
+/// Alternatively, a scope can be obtained directly from a
+/// Windows Metadata (.winmd) file, as follows:
 ///
 /// ```dart
 /// final scope =
@@ -81,7 +97,7 @@
 ///
 /// In general, the model presented by this package aligns with the APIs exposed
 /// by the
-/// [IMetaDataImport](https://learn.microsoft.com/windows/win32/api/rometadataapi/nn-rometadataapi-imetadataimport)
+/// [IMetaDataImport2](https://learn.microsoft.com/windows/win32/api/rometadataapi/nn-rometadataapi-imetadataimport2)
 /// COM interface exposed by `rometadata.dll`.
 library;
 
