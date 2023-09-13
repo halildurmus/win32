@@ -31,37 +31,60 @@ void main() {
 
     test('can find a NuGet package from package name', () async {
       await MetadataStore.loadWin32Metadata();
+
       final package = LocalStorage.getPackage(MetadataType.win32.packageName);
       check(package).isNotNull();
       check(package!.name).equals('Microsoft.Windows.SDK.Win32Metadata');
+
       MetadataStore.close();
     });
 
     test('can find a NuGet package from package name and version', () async {
-      await MetadataStore.loadWin32Metadata(version: '54.0.44-preview');
-      final package = LocalStorage.getPackage(MetadataType.win32.packageName);
+      const version = '54.0.44-preview';
+      await MetadataStore.loadWin32Metadata(version: version);
+
+      final package = LocalStorage.getPackage(MetadataType.win32.packageName,
+          version: version);
       check(package).isNotNull();
       check(package!.name).equals('Microsoft.Windows.SDK.Win32Metadata');
-      check(package.version).equals('54.0.44-preview');
+      check(package.version).equals(version);
+
       MetadataStore.close();
     });
 
     test('lists NuGet packages', () async {
       await MetadataStore.loadWin32Metadata();
+      await MetadataStore.loadWinRTMetadata();
+
       final packages = LocalStorage.packages;
       check(packages).isNotEmpty();
+
       final win32Package = packages
           .where((p) => p.name == MetadataType.win32.packageName)
           .lastOrNull;
       check(win32Package).isNotNull();
-      final NuGetPackage(:name, :path, :version) = win32Package!;
-      check(name).equals('Microsoft.Windows.SDK.Win32Metadata');
-      check(version).isNotEmpty();
-      check(path)
+      check(win32Package!.name).equals('Microsoft.Windows.SDK.Win32Metadata');
+      check(win32Package.version).isNotEmpty();
+      check(win32Package.path)
         ..contains('dart-windows_winmd')
         ..contains('Microsoft.Windows.SDK.Win32Metadata');
-      check(win32Package.toString())
-          .equals('Microsoft.Windows.SDK.Win32Metadata@$version ($path)');
+      check(win32Package.toString()).equals(
+        'Microsoft.Windows.SDK.Win32Metadata@${win32Package.version} (${win32Package.path})',
+      );
+
+      final winrtPackage = packages
+          .where((p) => p.name == MetadataType.winrt.packageName)
+          .lastOrNull;
+      check(winrtPackage).isNotNull();
+      check(winrtPackage!.name).equals('Microsoft.Windows.SDK.Contracts');
+      check(winrtPackage.version).isNotEmpty();
+      check(winrtPackage.path)
+        ..contains('dart-windows_winmd')
+        ..contains('Microsoft.Windows.SDK.Contracts');
+      check(winrtPackage.toString()).equals(
+        'Microsoft.Windows.SDK.Contracts@${winrtPackage.version} (${winrtPackage.path})',
+      );
+
       MetadataStore.close();
     });
   });
