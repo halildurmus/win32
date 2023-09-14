@@ -281,7 +281,7 @@ abstract final class MetadataStore {
 
   /// Loads WinRT metadata
   ///
-  /// If [version] is not specified, it loads the latest available version.
+  /// If [version] is not specified, it loads the latest stable version.
   ///
   /// If the metadata is already downloaded, it loads it from the local cache.
   ///
@@ -290,9 +290,8 @@ abstract final class MetadataStore {
     if (!_isInitialized) initialize();
 
     final MetadataType(:assetName, :packageName) = MetadataType.winrt;
-    final downloadVersion = version ??
-        await _nugetClient!
-            .getLatestPackageVersion(packageName, includePrerelease: true);
+    final downloadVersion =
+        version ?? await _nugetClient!.getLatestPackageVersion(packageName);
 
     // If the metadata is already downloaded, load it.
     final package =

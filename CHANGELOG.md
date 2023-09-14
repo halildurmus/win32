@@ -1,3 +1,10 @@
+## 4.0.1
+
+- The `MetadataStore.loadWinRTMetadata()` method now loads the latest *stable*
+  version of the metadata if the `version` parameter is not specified.
+  Previously, it would load the latest available version of the package, which
+  could be a *pre-release* version.
+
 ## 4.0.0
 
 ### Major Changes
