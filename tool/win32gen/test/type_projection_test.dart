@@ -5,9 +5,14 @@ import 'package:win32gen/win32gen.dart';
 import 'package:winmd/winmd.dart';
 
 void main() {
-  test('Simple int type', () {
-    final scope = MetadataStore.getWin32Scope();
+  late Scope scope;
 
+  setUpAll(() async {
+    scope =
+        await MetadataStore.loadWin32Metadata(version: win32MetadataVersion);
+  });
+
+  test('Simple int type', () {
     final typedef = scope.findTypeDef('Windows.Win32.System.Console.Apis');
     final api = typedef?.findMethod('GenerateConsoleCtrlEvent');
     expect(api, isNotNull);
@@ -20,8 +25,6 @@ void main() {
   });
 
   test('HANDLE type', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final typedef =
         scope.findTypeDef('Windows.Win32.UI.WindowsAndMessaging.Apis');
     final api = typedef?.findMethod('CloseWindow');
@@ -35,8 +38,6 @@ void main() {
   });
 
   test('HRESULT type', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final typedef = scope.findTypeDef('Windows.Win32.System.Com.Apis');
     final api = typedef?.findMethod('CoInitialize');
     expect(api, isNotNull);
@@ -49,8 +50,6 @@ void main() {
   });
 
   test('CreatedHDC type', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final typedef = scope.findTypeDef('Windows.Win32.Graphics.Gdi.Apis');
     final api = typedef?.findMethod('CreateCompatibleDC');
     expect(api, isNotNull);
@@ -63,7 +62,6 @@ void main() {
   });
 
   test('PWSTR type', () {
-    final scope = MetadataStore.getWin32Scope();
     final typedef =
         scope.findTypeDef('Windows.Win32.UI.WindowsAndMessaging.Apis');
     final api = typedef?.findMethod('GetWindowTextW');
@@ -77,8 +75,6 @@ void main() {
   });
 
   test('LPSTR type', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final typedef =
         scope.findTypeDef('Windows.Win32.UI.Input.KeyboardAndMouse.Apis');
     final api = typedef?.findMethod('GetKeyNameTextA');
@@ -93,8 +89,6 @@ void main() {
   });
 
   test('Pointer<T>', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final typedef =
         scope.findTypeDef('Windows.Win32.UI.Input.KeyboardAndMouse.Apis');
     final api = typedef?.findMethod('GetKeyboardState');
@@ -109,8 +103,6 @@ void main() {
   });
 
   test('LPHANDLE-style parameters have the correct projection', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final typedef =
         scope.findTypeDef('Windows.Win32.UI.WindowsAndMessaging.Apis');
     final api = typedef?.findMethod('CascadeWindows');
@@ -124,8 +116,6 @@ void main() {
   });
 
   test('Unicode string w/ double pointer', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final typedef = scope.findTypeDef('Windows.Win32.UI.Shell.Apis');
     final api = typedef?.findMethod('SHGetKnownFolderPath');
 
@@ -139,8 +129,6 @@ void main() {
   });
 
   test('Pointer<Pointer<T>>', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final typedef =
         scope.findTypeDef('Windows.Win32.Security.Credentials.Apis');
     final api = typedef?.findMethod('CredReadW');
@@ -155,8 +143,6 @@ void main() {
   });
 
   test('COM interface parameter', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final typedef = scope.findTypeDef('Windows.Win32.System.Com.Apis');
     final api = typedef?.findMethod('CoSetProxyBlanket')!;
 
@@ -170,8 +156,6 @@ void main() {
   });
 
   test('Inherited COM interface parameter', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final typedef = scope.findTypeDef('Windows.Win32.System.Com.Apis');
     final api = typedef?.findMethod('CreateAntiMoniker')!;
 
@@ -185,8 +169,6 @@ void main() {
   });
 
   test('Pass pointers to COM interfaces', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final typedef = scope.findTypeDef('Windows.Win32.System.Com.Apis');
     final api = typedef?.findMethod('CoCreateInstance');
 
@@ -200,8 +182,6 @@ void main() {
   });
 
   test('Pass double pointers to COM interfaces', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final typedef = scope.findTypeDef('Windows.Win32.System.Ole.Apis');
     final api = typedef?.findMethod('GetActiveObject');
 
@@ -215,8 +195,6 @@ void main() {
   });
 
   test('OLECHAR is represented correctly', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final typedef = scope.findTypeDef('Windows.Win32.Foundation.Apis');
     final api = typedef?.findMethod('SysAllocString')!;
 
@@ -229,8 +207,6 @@ void main() {
   });
 
   test('Callbacks are represented correctly', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final typedef = scope.findTypeDef('Windows.Win32.Graphics.Gdi.Apis');
     final api = typedef?.findMethod('EnumFontFamiliesExW');
 
@@ -246,8 +222,6 @@ void main() {
   });
 
   test('Callbacks are represented correctly 2', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final typedef =
         scope.findTypeDef('Windows.Win32.System.Diagnostics.Debug.Apis');
     final api = typedef?.findMethod('SymEnumSymbolsW');
@@ -265,8 +239,6 @@ void main() {
   });
 
   test('Pointers to structs are represented correctly', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final typedef = scope.findTypeDef('Windows.Win32.UI.Controls.Dialogs.Apis');
     final api = typedef?.findMethod('ChooseFontW');
 
@@ -279,8 +251,6 @@ void main() {
   });
 
   test('Naked structs are represented correctly', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final typedef = scope.findTypeDef('Windows.Win32.System.Threading.Apis');
     final api = typedef?.findMethod('InitializeProcThreadAttributeList');
 
@@ -295,8 +265,6 @@ void main() {
   });
 
   test('Enumeration params are represented correctly', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final typedef = scope.findTypeDef('Windows.Win32.Graphics.Gdi.Apis');
     final api = typedef?.findMethod('CreateDIBitmap');
 
@@ -309,8 +277,6 @@ void main() {
   });
 
   test('Enumerations that are not 32-bit are represented correctly', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final typedef = scope.findTypeDef('Windows.Win32.System.EventLog.Apis');
     final api = typedef?.findMethod('ReportEventW');
 
@@ -325,8 +291,6 @@ void main() {
   });
 
   test('Pointer<Enum> params are represented correctly', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final typedef = scope.findTypeDef('Windows.Win32.System.Pipes.Apis');
     final api = typedef?.findMethod('GetNamedPipeInfo')!;
 
@@ -339,8 +303,6 @@ void main() {
   });
 
   test('Void returns are represented correctly', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final typedef =
         scope.findTypeDef('Windows.Win32.Security.Credentials.Apis');
     final api = typedef?.findMethod('CredFree');
@@ -355,8 +317,6 @@ void main() {
   });
 
   test('HANDLE should be projected as an IntPtr', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final typedef = scope.findTypeDef('Windows.Win32.System.Threading.Apis');
     final api = typedef?.findMethod('GetCurrentProcess');
 
@@ -373,8 +333,6 @@ void main() {
   });
 
   test('LARGE_INTEGER should be projected as an Int64', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final typedef = scope.findTypeDef('Windows.Win32.Storage.FileSystem.Apis');
     final api = typedef?.findMethod('SetFilePointerEx');
 
@@ -388,8 +346,6 @@ void main() {
   });
 
   test('Struct array field projects correctly', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final procInfo = scope.findTypeDef('Windows.Win32.Graphics.Gdi.BITMAPINFO');
     final bmiColors = procInfo?.fields.last.typeIdentifier;
 
@@ -402,8 +358,6 @@ void main() {
   });
 
   test('ULARGE_INTEGER projects correctly', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final procInfo = scope.findTypeDef('Windows.Win32.System.Com.STATSTG');
     final cbSize = procInfo?.fields[2].typeIdentifier; // cbSize
 
@@ -415,8 +369,6 @@ void main() {
   });
 
   test('native int parameters have the correct projection', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final typedef = scope.findTypeDef('Windows.Win32.Devices.Bluetooth.Apis');
     final api = typedef?.findMethod('BluetoothFindNextDevice');
 
@@ -430,8 +382,6 @@ void main() {
   });
 
   test('LPVOID parameters are projected to Pointer, not Pointer<Void>', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final typedef =
         scope.findTypeDef('Windows.Win32.Security.Credentials.Apis');
     final api = typedef?.findMethod('CredFree')!;
@@ -447,8 +397,6 @@ void main() {
   });
 
   test('BluetoothRemoveDevice struct', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final typedef = scope.findTypeDef('Windows.Win32.Devices.Bluetooth.Apis');
     final api = typedef?.findMethod('BluetoothRemoveDevice');
 
@@ -463,8 +411,6 @@ void main() {
   });
 
   test('Array is projected correctly 1', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final struct = scope
         .findTypeDef('Windows.Win32.Devices.Bluetooth.BLUETOOTH_RADIO_INFO');
     expect(struct, isNotNull);
@@ -479,8 +425,6 @@ void main() {
   });
 
   test('Array is projected correctly 2', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final struct = scope
         .findTypeDef('Windows.Win32.NetworkManagement.WiFi.DOT11_NETWORK_LIST');
     expect(struct, isNotNull);
@@ -495,8 +439,6 @@ void main() {
   });
 
   test('Array is projected correctly 3', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final struct =
         scope.findTypeDef('Windows.Win32.UI.Magnification.MAGCOLOREFFECT');
     expect(struct, isNotNull);
@@ -510,8 +452,6 @@ void main() {
   });
 
   test('GUIDs are projected correctly', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final typedef =
         scope.findTypeDef('Windows.Win32.UI.Shell.PropertiesSystem.Apis');
     final api = typedef?.findMethod('PSPropertyBag_WriteGUID')!;
@@ -527,8 +467,6 @@ void main() {
   });
 
   test('FARPROC is projected correctly', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final typedef =
         scope.findTypeDef('Windows.Win32.System.LibraryLoader.Apis');
     final api = typedef?.findMethod('GetProcAddress');
@@ -544,8 +482,6 @@ void main() {
   });
 
   test('BOOL types are projected to int', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final typeDef =
         scope.findTypeDef('Windows.Win32.Graphics.Dwm.DWM_BLURBEHIND')!;
 
@@ -558,8 +494,6 @@ void main() {
   });
 
   test('Structs are projected to classes', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final typeDef = scope
         .findTypeDef('Windows.Win32.Media.Multimedia.YAMAHA_ADPCMWAVEFORMAT')!;
 
@@ -570,4 +504,6 @@ void main() {
     expect(typeProjection.dartType, equals('WAVEFORMATEX'));
     expect(typeProjection.isDartPrimitive, isFalse);
   });
+
+  tearDownAll(MetadataStore.close);
 }

@@ -29,9 +29,7 @@ String generateDocComment(Win32Function func, String libraryDartName) {
   return comment.toString();
 }
 
-int generateStructs(Map<String, String> structs) {
-  final scope = MetadataStore.getWin32Scope();
-
+int generateStructs(Scope scope, Map<String, String> structs) {
   final file = File('../../lib/src/structs.g.dart');
 
   final typeDefs = scope.typeDefs
@@ -106,8 +104,7 @@ void generateDllFile(String library, List<Method> filteredMethods,
       .writeAsStringSync(DartFormatter().format(buffer.toString()));
 }
 
-void generateFunctions(Map<String, Win32Function> functions) {
-  final scope = MetadataStore.getWin32Scope();
+void generateFunctions(Scope scope, Map<String, Win32Function> functions) {
   final apis = scope.typeDefs.where((typeDef) => typeDef.name.endsWith('Apis'));
 
   final methods = <Method>[];
@@ -218,9 +215,7 @@ String generateFunctionTests(String library, Iterable<Method> methods,
   return buffer.toString();
 }
 
-void generateComApis(Map<String, String> comTypesToGenerate) {
-  final scope = MetadataStore.getWin32Scope();
-
+void generateComApis(Scope scope, Map<String, String> comTypesToGenerate) {
   for (final interface in comTypesToGenerate.keys) {
     final typeDef = scope.findTypeDef(interface);
     if (typeDef == null) throw Exception("Can't find $interface");
@@ -252,7 +247,14 @@ void generateComApis(Map<String, String> comTypesToGenerate) {
   }
 }
 
-void main() {
+void main() async {
+  print('Loading Windows metadata...');
+  final scope =
+      await MetadataStore.loadWin32Metadata(version: win32MetadataVersion);
+  // Additionally, load WinRT metadata to ensure the correct resolution of
+  // references from Win32 metadata.
+  await MetadataStore.loadWinRTMetadata();
+
   print('Loading and sorting functions...');
   final functionsToGenerate = loadFunctionsFromJson();
   saveFunctionsToJson(functionsToGenerate);
@@ -263,7 +265,7 @@ void main() {
   generateStructSizeAnalyzer();
 
   print('Generating structs...');
-  generateStructs(structsToGenerate);
+  generateStructs(scope, structsToGenerate);
 
   print('Generating struct tests...');
   generateStructSizeTests();
@@ -274,10 +276,12 @@ void main() {
   // Win32 callbacks are manually created
 
   print('Generating FFI function bindings...');
-  generateFunctions(functionsToGenerate);
+  generateFunctions(scope, functionsToGenerate);
 
   print('Generating COM interfaces and tests...');
   final comTypesToGenerate = loadMap('com_types.json');
   saveMap(comTypesToGenerate, 'com_types.json');
-  generateComApis(comTypesToGenerate);
+  generateComApis(scope, comTypesToGenerate);
+
+  MetadataStore.close();
 }

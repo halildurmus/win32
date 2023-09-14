@@ -8,10 +8,11 @@ import 'package:win32gen/win32gen.dart';
 import 'package:winmd/winmd.dart';
 
 void main() {
-  test('COM golden', () {
+  test('COM golden', () async {
     const typeToGenerate =
         'Windows.Win32.Networking.NetworkListManager.INetwork';
-    final scope = MetadataStore.getWin32Scope();
+    final scope =
+        await MetadataStore.loadWin32Metadata(version: win32MetadataVersion);
     final typeDef = scope.findTypeDef(typeToGenerate)!;
 
     final comTypesToGenerate = loadMap('com_types.json');
@@ -26,5 +27,7 @@ void main() {
 
     // Ignore whitespace to avoid \r\n vs. \n conflicts.
     expect(formattedDartClass, equalsIgnoringWhitespace(golden));
+
+    MetadataStore.close();
   });
 }

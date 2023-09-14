@@ -5,6 +5,13 @@ import 'package:win32gen/win32gen.dart';
 import 'package:winmd/winmd.dart';
 
 void main() {
+  late Scope scope;
+
+  setUpAll(() async {
+    scope =
+        await MetadataStore.loadWin32Metadata(version: win32MetadataVersion);
+  });
+
   test('typePretendsToBeAnsi', () {
     expect(typePretendsToBeAnsi('RGNDATA'), isTrue);
     expect(typePretendsToBeAnsi('ENUMLOGFONTEXA'), isFalse);
@@ -53,7 +60,6 @@ void main() {
   });
 
   test('typedefIsAnsi', () {
-    final scope = MetadataStore.getWin32Scope();
     final rgnData = scope.findTypeDef('Windows.Win32.Graphics.Gdi.RGNDATA')!;
     expect(typedefIsAnsi(rgnData), isFalse);
 
@@ -67,7 +73,6 @@ void main() {
   });
 
   test('mangleName', () {
-    final scope = MetadataStore.getWin32Scope();
     final propVariant = scope
         .findTypeDef('Windows.Win32.System.Com.StructuredStorage.PROPVARIANT')!;
 
@@ -145,4 +150,6 @@ void main() {
     expect(folderFromNamespace('Windows.Win32.UI.Shell.Common'),
         equals('ui/shell'));
   });
+
+  tearDownAll(MetadataStore.close);
 }
