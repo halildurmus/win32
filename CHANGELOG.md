@@ -1,8 +1,31 @@
-## Unreleased 4.0.0
+## 4.0.0
 
-> Note: This release has breaking changes.
+### Major Changes
 
-- **BREAKING**: TODO
+- Win32 metadata is no longer bundled with this package. Instead, it will be
+  downloaded from the NuGet package `Microsoft.Windows.SDK.Win32Metadata` when
+  you call the `MetadataStore.loadWin32Metadata()` method. By default, the
+  latest available version of the package will be downloaded. You also have the
+  option to specify a different version by setting the `version` parameter.
+- In previous versions, Windows Runtime (WinRT) metadata was loaded from
+  Windows Metadata (.winmd) files on users' machines. In version `4.0.0`, this
+  behavior has changed. The WinRT metadata is now obtained from the NuGet
+  package `Microsoft.Windows.SDK.Contracts` when you call the
+  `MetadataStore.loadWinRTMetadata()` method. By default, the latest available
+  version of the package will be downloaded. Like the Win32 metadata, you can
+  specify a different version by setting the `version` parameter.
+- **BREAKING**: The method `MetadataStore.getScopeForAsset()` has been removed.
+- **BREAKING**: The method `MetadataStore.getScopeForFile()` has been renamed to
+  `MetadataStore.loadMetadataFromFile()`.
+- **BREAKING**: The method `MetadataStore.getWin32Scope()` has been renamed to
+  `MetadataStore.loadWin32Metadata()` and now returns `Future<Scope>`.
+- **BREAKING**: The method `MetadataStore.winmdFileContainingType()` has been
+  removed.
+
+### Other Changes
+
+- Added `MetadataStore.loadWinRTMetadata()` method to load the
+  Windows Runtime (WinRT) metadata.
 - Fix an error related to the parsing of constant reference parameters
 - Support enumerating all classes, interfaces, and structs in the `Scope` (#79)
 - Fix attributes of simple array size parameters (#78)

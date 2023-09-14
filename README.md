@@ -1,7 +1,7 @@
 <img src="https://raw.githubusercontent.com/dart-windows/.github/main/assets/dart-windows-card.png" width="50%" height="50%">
 
 A package that provides a Dart language abstraction over
-[Windows Metadata (WinMD) files](windows_metadata_files_link), making it
+[Windows Metadata (WinMD) files][windows_metadata_files_link], making it
 possible to load them and build Dart FFI interop libraries from the results.
 
 It can be used to query Windows developer APIs, encompassing both unmanaged
