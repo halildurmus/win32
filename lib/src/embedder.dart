@@ -14,25 +14,11 @@ import 'ffi.dart';
 
 /// A Dart wrapper for the Flutter engine API.
 class FlutterEmbedder {
-  /// Object that holds the native API functions.
-  late final FlutterEngineLibrary flutter;
-
-  /// Handle for interacting with the C API's engine reference.
-  late final Pointer<FlutterDesktopEngine> engine;
-
-  /// Messenger for communicating with the engine.
-  late final Pointer<FlutterDesktopMessenger> messenger;
-
-  late final Pointer<FlutterDesktopView> view;
-  late final Pointer<FlutterDesktopViewControllerState> controller;
-
-  /// Whether the engine has been run. This will be true if Run has been called,
-  /// or if RelinquishEngine has been called (since the view controller will run
-  /// the engine if it hasn't already been run).
-  bool hasBeenRun = false;
-
   FlutterEmbedder(
-      Rectangle<int> size, DartProject project, String flutterLibrary) {
+    Rectangle<int> size,
+    DartProject project,
+    String flutterLibrary,
+  ) {
     // Load the Windows engine
     final library = DynamicLibrary.open(flutterLibrary);
     flutter = FlutterEngineLibrary(library);
@@ -55,9 +41,7 @@ class FlutterEmbedder {
     });
 
     messenger = flutter.FlutterDesktopEngineGetMessenger(engine);
-    if (messenger == nullptr) {
-      throw Exception('Failed to create messenger.');
-    }
+    if (messenger == nullptr) throw Exception('Failed to create messenger.');
 
     controller = flutter.FlutterDesktopViewControllerCreate(
         size.width, size.height, engine);
@@ -71,12 +55,28 @@ class FlutterEmbedder {
     }
   }
 
+  /// Object that holds the native API functions.
+  late final FlutterEngineLibrary flutter;
+
+  /// Handle for interacting with the C API's engine reference.
+  late final Pointer<FlutterDesktopEngine> engine;
+
+  /// Messenger for communicating with the engine.
+  late final Pointer<FlutterDesktopMessenger> messenger;
+
+  late final Pointer<FlutterDesktopView> view;
+  late final Pointer<FlutterDesktopViewControllerState> controller;
+
+  /// Whether the engine has been run. This will be true if Run has been called,
+  /// or if RelinquishEngine has been called (since the view controller will run
+  /// the engine if it hasn't already been run).
+  bool hasBeenRun = false;
+
   /// Tells the engine that the system font list has changed. Should be called
   /// by clients when OS-level font changes happen (e.g. the `WM_FONTCHANGE`
   /// message is received.)
-  void reloadSystemFonts() {
-    flutter.FlutterDesktopEngineReloadSystemFonts(engine);
-  }
+  void reloadSystemFonts() =>
+      flutter.FlutterDesktopEngineReloadSystemFonts(engine);
 
   int get hwnd => flutter.FlutterDesktopViewGetHWND(view);
 
@@ -86,11 +86,7 @@ class FlutterEmbedder {
         flutter.FlutterDesktopViewControllerHandleTopLevelWindowProc(
                 controller, hwnd, message, wParam, lParam, result) !=
             0;
-    if (handled) {
-      return result.value;
-    } else {
-      return 0;
-    }
+    return handled ? result.value : 0;
   }
 
   /// Starts running the engine, with an optional entry point.
@@ -103,13 +99,13 @@ class FlutterEmbedder {
       stderr.writeln('Cannot run an engine that failed creation.');
       return false;
     }
+
     if (hasBeenRun) {
       stderr.writeln('Cannot run an engine more than once.');
       return false;
     }
 
     final runSucceeded = flutter.FlutterDesktopEngineRun(engine, nullptr) != 0;
-
     if (!runSucceeded) {
       stderr.writeln('Failed to start engine.');
     }

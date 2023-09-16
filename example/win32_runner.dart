@@ -20,16 +20,13 @@ class Application {
     // Give Flutter an opportunity to handle window messages.
     if (engineInitialized) {
       final result = engine.handleTopLevelWindowProc(hwnd, msg, wParam, lParam);
-      if (result != FALSE) {
-        return result;
-      }
+      if (result != FALSE) return result;
     }
 
     // Otherwise, we address host window messages.
     switch (msg) {
       case WM_NCCREATE:
         EnableNonClientDpiScaling(hwnd);
-        break;
       case WM_DESTROY:
         PostQuitMessage(0);
         return 0;
@@ -44,6 +41,7 @@ class Application {
         Window(engine.hwnd).setFocus();
         return 0;
     }
+
     return DefWindowProc(hwnd, msg, wParam, lParam);
   }
 
@@ -72,11 +70,12 @@ class Application {
     SetThreadDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
 
     final hostWindow = Window.create(
-        hInstance: hInstance,
-        windowCaption: 'Dart Native Win32 window',
-        className: 'FLUTTER_RUNNER_WIN32_WINDOW',
-        windowProc: Pointer.fromFunction<WindowProc>(mainWindowProc, 0),
-        dimensions: const Rectangle<int>(10, 10, 1280, 720));
+      hInstance: hInstance,
+      windowCaption: 'Dart Native Win32 window',
+      className: 'FLUTTER_RUNNER_WIN32_WINDOW',
+      windowProc: Pointer.fromFunction<WindowProc>(mainWindowProc, 0),
+      dimensions: const Rectangle<int>(10, 10, 1280, 720),
+    );
 
     final project = DartProject.fromRoot(appPath);
     final flutterLibrary =
