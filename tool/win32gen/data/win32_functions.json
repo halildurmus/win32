@@ -3747,12 +3747,12 @@
     "NetFreeAadJoinInformation": {
         "prototype": "VOID NET_API_FUNCTION NetFreeAadJoinInformation(\n  [in, optional] PDSREG_JOIN_INFO pJoinInfo\n);",
         "comment": "Frees the memory allocated for the specified DSREG_JOIN_INFO structure, which contains join information for a tenant and which you retrieved by calling the NetGetAadJoinInformation function.",
-        "minimumWindowsVersion": "WIN10_RS1"
+        "minimumWindowsVersion": "WIN10_TH1"
     },
     "NetGetAadJoinInformation": {
         "prototype": "HRESULT NET_API_FUNCTION NetGetAadJoinInformation(\n  [in, optional] LPCWSTR          pcszTenantId,\n  [out]          PDSREG_JOIN_INFO *ppJoinInfo\n);",
         "comment": "Retrieves the join information for the specified tenant. This function examines the join information for Microsoft Azure Active Directory and the work account that the current user added.",
-        "minimumWindowsVersion": "WIN10_RS1"
+        "minimumWindowsVersion": "WIN10_TH1"
     },
     "NotifyBootConfigStatus": {
         "prototype": "BOOL NotifyBootConfigStatus(\n  [in] BOOL BootAcceptable\n);",
