@@ -1,22 +1,13 @@
-# Files and directories created by pub
+# https://dart.dev/guides/libraries/private-files
+# Created by `dart pub`
 .dart_tool/
-.packages
 
-# Library packages shouldn't check in their pubspec.lock
-pubspec.lock
+.idea/
+*.iml
 
 # Directory created by dartdoc
-doc/api/*
+doc/api/
 
-# Conventional directory for build outputs
-build/
-
-# Get rid of any unwanted executables...
-*.exe
-*.obj
-*.pdb
-*.exe.config
-
-# This file varies from machine to machine
-.vscode/c_cpp_properties.json
-.vscode/settings.json
+# Avoid committing pubspec.lock for library packages; see
+# https://dart.dev/guides/libraries/private-files#pubspeclock.
+pubspec.lock
