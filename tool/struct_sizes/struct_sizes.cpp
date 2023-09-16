@@ -32,6 +32,7 @@
 #include <DbgHelp.h>
 #include <dwmapi.h>
 #include <iphlpapi.h>
+#include <LMJoin.h>
 #include <magnification.h>
 #include <mmreg.h>
 #include <netlistmgr.h>
