@@ -3744,6 +3744,16 @@
         "prototype": "DWORD MsgWaitForMultipleObjectsEx(\n  DWORD        nCount,\n  const HANDLE *pHandles,\n  DWORD        dwMilliseconds,\n  DWORD        dwWakeMask,\n  DWORD        dwFlags\n);",
         "comment": "Waits until one or all of the specified objects are in the signaled state, an I/O completion routine or asynchronous procedure call (APC) is queued to the thread, or the time-out interval elapses. The array of objects can include input event objects, which you specify using the dwWakeMask parameter."
     },
+    "NetFreeAadJoinInformation": {
+        "prototype": "VOID NET_API_FUNCTION NetFreeAadJoinInformation(\n  [in, optional] PDSREG_JOIN_INFO pJoinInfo\n);",
+        "comment": "Frees the memory allocated for the specified DSREG_JOIN_INFO structure, which contains join information for a tenant and which you retrieved by calling the NetGetAadJoinInformation function.",
+        "minimumWindowsVersion": "WIN10_RS1"
+    },
+    "NetGetAadJoinInformation": {
+        "prototype": "HRESULT NET_API_FUNCTION NetGetAadJoinInformation(\n  [in, optional] LPCWSTR          pcszTenantId,\n  [out]          PDSREG_JOIN_INFO *ppJoinInfo\n);",
+        "comment": "Retrieves the join information for the specified tenant. This function examines the join information for Microsoft Azure Active Directory and the work account that the current user added.",
+        "minimumWindowsVersion": "WIN10_RS1"
+    },
     "NotifyBootConfigStatus": {
         "prototype": "BOOL NotifyBootConfigStatus(\n  [in] BOOL BootAcceptable\n);",
         "comment": "Reports the boot status to the service control manager. It is used by boot verification programs. This function can be called only by a process running in the LocalSystem or Administrator's account."

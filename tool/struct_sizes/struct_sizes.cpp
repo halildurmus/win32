@@ -105,6 +105,10 @@ void main()
     printf("  'CACHE_DESCRIPTOR': %zu,\n", sizeof(CACHE_DESCRIPTOR));
     printf("  'CBTACTIVATESTRUCT': %zu,\n", sizeof(CBTACTIVATESTRUCT));
     printf("  'CBT_CREATEWND': %zu,\n", sizeof(CBT_CREATEWNDW));
+    printf("  'CERT_CONTEXT': %zu,\n", sizeof(CERT_CONTEXT));
+    printf("  'CERT_EXTENSION': %zu,\n", sizeof(CERT_EXTENSION));
+    printf("  'CERT_INFO': %zu,\n", sizeof(CERT_INFO));
+    printf("  'CERT_PUBLIC_KEY_INFO': %zu,\n", sizeof(CERT_PUBLIC_KEY_INFO));
     printf("  'CHANGEFILTERSTRUCT': %zu,\n", sizeof(CHANGEFILTERSTRUCT));
     printf("  'CHAR_INFO': %zu,\n", sizeof(CHAR_INFO));
     printf("  'CHOOSECOLOR': %zu,\n", sizeof(CHOOSECOLORW));
@@ -126,6 +130,8 @@ void main()
     printf("  'CREDENTIAL': %zu,\n", sizeof(CREDENTIALW));
     printf("  'CREDENTIAL_ATTRIBUTE': %zu,\n", sizeof(CREDENTIAL_ATTRIBUTEW));
     printf("  'CRYPTPROTECT_PROMPTSTRUCT': %zu,\n", sizeof(CRYPTPROTECT_PROMPTSTRUCT));
+    printf("  'CRYPT_ALGORITHM_IDENTIFIER': %zu,\n", sizeof(CRYPT_ALGORITHM_IDENTIFIER));
+    printf("  'CRYPT_BIT_BLOB': %zu,\n", sizeof(CRYPT_BIT_BLOB));
     printf("  'CRYPT_INTEGER_BLOB': %zu,\n", sizeof(CRYPT_INTEGER_BLOB));
     printf("  'CURSORINFO': %zu,\n", sizeof(CURSORINFO));
     printf("  'CWPRETSTRUCT': %zu,\n", sizeof(CWPRETSTRUCT));
@@ -163,6 +169,8 @@ void main()
     printf("  'DOT11_NETWORK_LIST': %zu,\n", sizeof(DOT11_NETWORK_LIST));
     printf("  'DOT11_SSID': %zu,\n", sizeof(DOT11_SSID));
     printf("  'DRAWTEXTPARAMS': %zu,\n", sizeof(DRAWTEXTPARAMS));
+    printf("  'DSREG_JOIN_INFO': %zu,\n", sizeof(DSREG_JOIN_INFO));
+    printf("  'DSREG_USER_INFO': %zu,\n", sizeof(DSREG_USER_INFO));
     printf("  'DTBGOPTS': %zu,\n", sizeof(DTBGOPTS));
     printf("  'DTTOPTS': %zu,\n", sizeof(DTTOPTS));
     printf("  'DWM_BLURBEHIND': %zu,\n", sizeof(DWM_BLURBEHIND));

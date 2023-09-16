@@ -13085,6 +13085,31 @@ void main() {
     }
   });
 
+  group('Test netapi32 functions', () {
+    if (windowsBuildNumber >= 14393) {
+      test('Can instantiate NetFreeAadJoinInformation', () {
+        final netapi32 = DynamicLibrary.open('netapi32.dll');
+        final NetFreeAadJoinInformation = netapi32.lookupFunction<
+                Void Function(Pointer<DSREG_JOIN_INFO> pJoinInfo),
+                void Function(Pointer<DSREG_JOIN_INFO> pJoinInfo)>(
+            'NetFreeAadJoinInformation');
+        expect(NetFreeAadJoinInformation, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 14393) {
+      test('Can instantiate NetGetAadJoinInformation', () {
+        final netapi32 = DynamicLibrary.open('netapi32.dll');
+        final NetGetAadJoinInformation = netapi32.lookupFunction<
+                Int32 Function(Pointer<Utf16> pcszTenantId,
+                    Pointer<Pointer<DSREG_JOIN_INFO>> ppJoinInfo),
+                int Function(Pointer<Utf16> pcszTenantId,
+                    Pointer<Pointer<DSREG_JOIN_INFO>> ppJoinInfo)>(
+            'NetGetAadJoinInformation');
+        expect(NetGetAadJoinInformation, isA<Function>());
+      });
+    }
+  });
+
   group('Test api-ms-win-core-comm-l1-1-1 functions', () {
     if (windowsBuildNumber >= 17134) {
       test('Can instantiate OpenCommPort', () {

@@ -1205,6 +1205,83 @@ base class CBT_CREATEWND extends Struct {
   external int hwndInsertAfter;
 }
 
+/// The CERT_CONTEXT structure contains both the encoded and decoded
+/// representations of a certificate. A certificate context returned by one
+/// of the functions defined in Wincrypt.h must be freed by calling the
+/// CertFreeCertificateContext function. The CertDuplicateCertificateContext
+/// function can be called to make a duplicate copy (which also must be
+/// freed by calling CertFreeCertificateContext).
+///
+/// {@category Struct}
+base class CERT_CONTEXT extends Struct {
+  @Uint32()
+  external int dwCertEncodingType;
+
+  external Pointer<Uint8> pbCertEncoded;
+
+  @Uint32()
+  external int cbCertEncoded;
+
+  external Pointer<CERT_INFO> pCertInfo;
+
+  external Pointer hCertStore;
+}
+
+/// The CERT_EXTENSION structure contains the extension information for a
+/// certificate, Certificate Revocation List (CRL) or Certificate Trust List
+/// (CTL).
+///
+/// {@category Struct}
+base class CERT_EXTENSION extends Struct {
+  external Pointer<Utf8> pszObjId;
+
+  @Int32()
+  external int fCritical;
+
+  external CRYPT_INTEGER_BLOB Value;
+}
+
+/// The CERT_INFO structure contains the information of a certificate.
+///
+/// {@category Struct}
+base class CERT_INFO extends Struct {
+  @Uint32()
+  external int dwVersion;
+
+  external CRYPT_INTEGER_BLOB SerialNumber;
+
+  external CRYPT_ALGORITHM_IDENTIFIER SignatureAlgorithm;
+
+  external CRYPT_INTEGER_BLOB Issuer;
+
+  external FILETIME NotBefore;
+
+  external FILETIME NotAfter;
+
+  external CRYPT_INTEGER_BLOB Subject;
+
+  external CERT_PUBLIC_KEY_INFO SubjectPublicKeyInfo;
+
+  external CRYPT_BIT_BLOB IssuerUniqueId;
+
+  external CRYPT_BIT_BLOB SubjectUniqueId;
+
+  @Uint32()
+  external int cExtension;
+
+  external Pointer<CERT_EXTENSION> rgExtension;
+}
+
+/// The CERT_PUBLIC_KEY_INFO structure contains a public key and its
+/// algorithm.
+///
+/// {@category Struct}
+base class CERT_PUBLIC_KEY_INFO extends Struct {
+  external CRYPT_ALGORITHM_IDENTIFIER Algorithm;
+
+  external CRYPT_BIT_BLOB PublicKey;
+}
+
 /// Contains extended result information obtained by calling the
 /// ChangeWindowMessageFilterEx function.
 ///
@@ -1747,6 +1824,32 @@ base class CRYPTPROTECT_PROMPTSTRUCT extends Struct {
   external int hwndApp;
 
   external Pointer<Utf16> szPrompt;
+}
+
+/// The CRYPT_ALGORITHM_IDENTIFIER structure specifies an algorithm used to
+/// encrypt a private key. The structure includes the object identifier
+/// (OID) of the algorithm and any needed parameters for that algorithm. The
+/// parameters contained in its CRYPT_OBJID_BLOB are encoded.
+///
+/// {@category Struct}
+base class CRYPT_ALGORITHM_IDENTIFIER extends Struct {
+  external Pointer<Utf8> pszObjId;
+
+  external CRYPT_INTEGER_BLOB Parameters;
+}
+
+/// The CRYPT_BIT_BLOB structure contains a set of bits represented by an
+/// array of bytes.
+///
+/// {@category Struct}
+base class CRYPT_BIT_BLOB extends Struct {
+  @Uint32()
+  external int cbData;
+
+  external Pointer<Uint8> pbData;
+
+  @Uint32()
+  external int cUnusedBits;
 }
 
 /// Contains an arbitrary array of bytes. The structure definition includes
@@ -2921,6 +3024,49 @@ base class DRAWTEXTPARAMS extends Struct {
 
   @Uint32()
   external int uiLengthDrawn;
+}
+
+/// Contains information about how a device is joined to Microsoft Azure
+/// Active Directory.
+///
+/// {@category Struct}
+base class DSREG_JOIN_INFO extends Struct {
+  @Int32()
+  external int joinType;
+
+  external Pointer<CERT_CONTEXT> pJoinCertificate;
+
+  external Pointer<Utf16> pszDeviceId;
+
+  external Pointer<Utf16> pszIdpDomain;
+
+  external Pointer<Utf16> pszTenantId;
+
+  external Pointer<Utf16> pszJoinUserEmail;
+
+  external Pointer<Utf16> pszTenantDisplayName;
+
+  external Pointer<Utf16> pszMdmEnrollmentUrl;
+
+  external Pointer<Utf16> pszMdmTermsOfUseUrl;
+
+  external Pointer<Utf16> pszMdmComplianceUrl;
+
+  external Pointer<Utf16> pszUserSettingSyncUrl;
+
+  external Pointer<DSREG_USER_INFO> pUserInfo;
+}
+
+/// Contains information about a user account that is used to join a device
+/// to Microsoft Azure Active Directory.
+///
+/// {@category Struct}
+base class DSREG_USER_INFO extends Struct {
+  external Pointer<Utf16> pszUserEmail;
+
+  external Pointer<Utf16> pszUserKeyId;
+
+  external Pointer<Utf16> pszUserKeyName;
 }
 
 /// Defines the options for the DrawThemeBackgroundEx function.
