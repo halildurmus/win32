@@ -1,23 +1,28 @@
-<img src="https://user-images.githubusercontent.com/2319867/235838660-a82bfdce-aa55-461d-b418-19bd5185b6af.png" width="50%" height="50%">
+<img src="https://raw.githubusercontent.com/dart-windows/.github/main/assets/dart-windows-card.png" width="50%" height="50%">
 
-[![pub package](https://img.shields.io/pub/v/win32_runner.svg)](https://pub.dev/packages/win32_runner)
-[![package publisher](https://img.shields.io/pub/publisher/win32_runner.svg)](https://pub.dev/packages/win32_runner/publisher)
-[![Language](https://img.shields.io/badge/language-Dart-blue.svg)](https://dart.dev)
+An *experimental* package allows you to run Flutter apps from a Dart runner
+instead of the default C++ runner that is provided when you create a new Flutter
+project using `flutter create`.
 
-Experimental package for running Flutter apps from a Dart runner, instead of the
-C++ runner that is provided by default when you do `flutter create`.
+This package is particularly useful if you want to create a Windows Flutter app
+without the need for a C++ compiler on your system.
 
-You might use this to create a Windows Flutter app without requiring a C++
-compiler on your system.
+**Important Note:** This package is currently in an *experimental* stage and
+should not be used for production applications. It is primarily a
+proof-of-concept, and as such, it has some limitations. For example, it does not
+yet support plugins or theme changes.
 
-At present, this is not much more than a lightweight experiment. It doesn't
-currently support plugins or theme changes. It is therefore not recommended for
-use with production apps: it's more a proof-of-concept.
+Part of the [Dart | Windows][dart_windows_link] suite of Windows packages.
 
-A sample app that uses it can be found in the `example\` subdirectory. This can
-be used to run an existing Flutter app.
+[![Package: win32_runner][package_badge]][package_link]
+[![Publisher: win32.pub][publisher_badge]][publisher_link]
+[![Language: Dart][language_badge]][language_link]
+[![License: BSD-3-Clause][license_badge]][license_link]
 
-For example:
+## Usage
+
+You can use the sample app in the `example\` subdirectory to run an existing
+Flutter app on Windows using the Dart runner:
 
 ```console
 # Create a sample app
@@ -35,5 +40,24 @@ C:\src\simpleapp> dart compile exe ..\win32_runner\example\win32_runner.dart -o 
 C:\src\simpleapp> .\win32_runner
 ```
 
-Sample results:
-![image](https://user-images.githubusercontent.com/2319867/151905570-d2ec6dc0-a188-49b9-a186-a1b035ae59c7.png)
+Once you've followed these steps, you should see your Flutter app running on
+Windows using the Dart runner:
+
+![demo][demo_image_link]
+
+## Feature requests and bugs
+
+Please file feature requests and bugs at the
+[issue tracker][issue_tracker_link].
+
+[dart_windows_link]: https://github.com/dart-windows
+[demo_image_link]: https://raw.githubusercontent.com/dart-windows/win32_runner/main/screenshots/demo.png
+[issue_tracker_link]: https://github.com/dart-windows/win32_runner/issues
+[language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
+[language_link]: https://dart.dev
+[license_badge]: https://img.shields.io/github/license/dart-windows/win32_runner?color=blue
+[license_link]: https://opensource.org/licenses/BSD-3-Clause
+[package_badge]: https://img.shields.io/pub/v/win32_runner.svg
+[package_link]: https://pub.dev/packages/win32_runner
+[publisher_badge]: https://img.shields.io/pub/publisher/win32_runner.svg
+[publisher_link]: https://pub.dev/publishers/win32.pub
