@@ -14,6 +14,12 @@ import 'ffi.dart';
 
 /// A Dart wrapper for the Flutter engine API.
 class FlutterEmbedder {
+  /// Creates an instance of the [FlutterEmbedder] for embedding Flutter in a
+  /// Windows application.
+  ///
+  /// - `size`: The dimensions of the embedded Flutter view.
+  /// - `project`: Information about the Dart project.
+  /// - `flutterLibrary`: The path to the Flutter engine library.
   FlutterEmbedder(
     Rectangle<int> size,
     DartProject project,
@@ -64,22 +70,35 @@ class FlutterEmbedder {
   /// Messenger for communicating with the engine.
   late final Pointer<FlutterDesktopMessenger> messenger;
 
+  /// Handle for the Flutter view.
   late final Pointer<FlutterDesktopView> view;
+
+  /// Handle for the Flutter view controller.
   late final Pointer<FlutterDesktopViewControllerState> controller;
 
-  /// Whether the engine has been run. This will be true if Run has been called,
-  /// or if RelinquishEngine has been called (since the view controller will run
-  /// the engine if it hasn't already been run).
+  /// Whether the engine has been run.
+  ///
+  /// This will be `true` if `Run` has been called, or if `RelinquishEngine` has
+  /// been called (since the view controller will run the engine if it hasn't
+  /// already been run).
   bool hasBeenRun = false;
 
-  /// Tells the engine that the system font list has changed. Should be called
-  /// by clients when OS-level font changes happen (e.g. the `WM_FONTCHANGE`
-  /// message is received.)
+  /// Notifies the Flutter engine that the system font list has changed.
+  ///
+  /// This should be called by clients when OS-level font changes happen
+  /// (e.g., upon receiving the `WM_FONTCHANGE` message).
   void reloadSystemFonts() =>
       flutter.FlutterDesktopEngineReloadSystemFonts(engine);
 
+  /// Gets the HWND (window handle) associated with the Flutter view.
   int get hwnd => flutter.FlutterDesktopViewGetHWND(view);
 
+  /// Handles top-level window messages for Flutter view.
+  ///
+  /// - `hwnd`: The window handle.
+  /// - `message`: The window message.
+  /// - `wParam`: Additional message information.
+  /// - `lParam`: Additional message information.
   int handleTopLevelWindowProc(int hwnd, int message, int wParam, int lParam) {
     final result = calloc<IntPtr>();
     final handled =
@@ -89,11 +108,15 @@ class FlutterEmbedder {
     return handled ? result.value : 0;
   }
 
-  /// Starts running the engine, with an optional entry point.
+  /// Starts running the Flutter engine, optionally specifying an entry point.
   ///
-  /// If provided, entry_point must be the name of a top-level function from the
-  /// same Dart library that contains the app's `main()` function. If not
-  /// provided, defaults to `main()`.
+  /// [entryPoint] represents the name of a top-level function in the Dart
+  /// library containing the app's `main()`.
+  ///
+  /// If `entryPoint` is not provided, it defaults to `main()`.
+  ///
+  /// Returns `true` if the engine starts successfully; otherwise, returns
+  /// `false`.
   bool run(String entryPoint) {
     if (engine == nullptr) {
       stderr.writeln('Cannot run an engine that failed creation.');

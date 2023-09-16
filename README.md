@@ -1,6 +1,6 @@
 <img src="https://raw.githubusercontent.com/dart-windows/.github/main/assets/dart-windows-card.png" width="50%" height="50%">
 
-An *experimental* package allows you to run Flutter apps from a Dart runner
+An *experimental* package that allows you to run Flutter apps from a Dart runner
 instead of the default C++ runner that is provided when you create a new Flutter
 project using `flutter create`.
 

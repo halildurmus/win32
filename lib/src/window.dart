@@ -8,9 +8,21 @@ import 'dart:math';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart' hide Rectangle;
 
+/// Represents a Win32 window and provides methods for creating and managing it.
 class Window {
+  /// Creates an instance of the [Window] with the given window handle [hwnd].
   const Window(this.hwnd);
 
+  /// Creates a new [Window] with the specified parameters.
+  ///
+  /// - `windowCaption`: The caption/title of the window.
+  /// - `className`: The window class name.
+  /// - `windowProc`: The window procedure callback function.
+  /// - `hInstance`: The instance handle (defaults to
+  ///   `GetModuleHandle(nullptr)`).
+  /// - `dimensions`: The initial dimensions of the window (optional).
+  ///
+  /// Throws an [Exception] if window creation fails.
   factory Window.create({
     required String windowCaption,
     required String className,
@@ -59,8 +71,10 @@ class Window {
     return Window(hwnd);
   }
 
+  /// The handle to the window.
   final int hwnd;
 
+  /// Calculates the DPI scale factor for the specified window [dimensions].
   static double scaleFactorForOrigin(Rectangle<int> dimensions) {
     final point = calloc<POINT>()
       ..ref.x = dimensions.left
@@ -79,11 +93,12 @@ class Window {
     return dpi / 96.0;
   }
 
-  // Scale helper to convert logical scaler values to physical using passed in
-  // scale factor
+  /// Converts logical scalar values to physical using the provided
+  /// [scaleFactor].
   static int scale(int source, double scaleFactor) =>
       (source * scaleFactor).floor();
 
+  /// The dimensions of the current window.
   Rectangle<int> get dimensions {
     final rect = calloc<RECT>();
     GetClientRect(hwnd, rect);
@@ -93,10 +108,16 @@ class Window {
     return windowRect;
   }
 
+  /// Changes the parent window of the current window to the specified [parent].
   void setParent(Window parent) => SetParent(hwnd, parent.hwnd);
 
+  /// Sets the keyboard focus to the current window.
   void setFocus() => SetFocus(hwnd);
 
+  /// Moves and resizes the current window to the specified [newDimensions].
+  ///
+  /// [repaintWindow] indicates whether the window should be repainted after the
+  /// move (defaults to `true`).
   void move(Rectangle<int> newDimensions, {bool repaintWindow = true}) =>
       MoveWindow(
         hwnd,
@@ -107,6 +128,10 @@ class Window {
         repaintWindow ? TRUE : FALSE,
       );
 
+  /// Runs the Windows message loop for this window.
+  ///
+  /// This method continuously processes and dispatches Windows messages until
+  /// the window is closed.
   void runMessageLoop() {
     // Run the message loop.
     final msg = calloc<MSG>();

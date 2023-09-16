@@ -19,7 +19,7 @@ class DartProject {
     required this.aotLibraryPath,
   });
 
-  /// Creates a `DartProject` from a directory path.
+  /// Creates a [DartProject] from a directory path.
   ///
   /// The directory should contain the following top-level items:
   /// - `icudtl.dat` (provided as a resource by the Flutter tool)
