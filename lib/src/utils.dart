@@ -55,10 +55,14 @@ void initApp(Function winMain) {
   // Parse command line args using Win32 functions, to reduce ceremony in the
   // app that uses this.
   final szArgList = CommandLineToArgv(GetCommandLine(), nArgs);
-  for (var i = 0; i < nArgs.value; i++) {
-    args.add(szArgList[i].toDartString());
+  if (szArgList.address != 0) {
+    final numberOfArgs = nArgs.value;
+    for (var i = 0; i < numberOfArgs; i++) {
+      final arg = szArgList[i].toDartString();
+      args.add(arg);
+    }
+    LocalFree(szArgList);
   }
-  LocalFree(szArgList.value);
 
   final hInstance = GetModuleHandle(nullptr);
   GetStartupInfo(lpStartupInfo);
