@@ -13086,7 +13086,7 @@ void main() {
   });
 
   group('Test netapi32 functions', () {
-    if (windowsBuildNumber >= 14393) {
+    if (windowsBuildNumber >= 10240) {
       test('Can instantiate NetFreeAadJoinInformation', () {
         final netapi32 = DynamicLibrary.open('netapi32.dll');
         final NetFreeAadJoinInformation = netapi32.lookupFunction<
@@ -13096,7 +13096,7 @@ void main() {
         expect(NetFreeAadJoinInformation, isA<Function>());
       });
     }
-    if (windowsBuildNumber >= 14393) {
+    if (windowsBuildNumber >= 10240) {
       test('Can instantiate NetGetAadJoinInformation', () {
         final netapi32 = DynamicLibrary.open('netapi32.dll');
         final NetGetAadJoinInformation = netapi32.lookupFunction<

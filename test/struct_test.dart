@@ -171,6 +171,18 @@ void main() {
   test('Struct CBT_CREATEWND is the right size', () {
     expect(sizeOf<CBT_CREATEWND>(), equals(16));
   });
+  test('Struct CERT_CONTEXT is the right size', () {
+    expect(sizeOf<CERT_CONTEXT>(), equals(40));
+  });
+  test('Struct CERT_EXTENSION is the right size', () {
+    expect(sizeOf<CERT_EXTENSION>(), equals(32));
+  });
+  test('Struct CERT_INFO is the right size', () {
+    expect(sizeOf<CERT_INFO>(), equals(208));
+  });
+  test('Struct CERT_PUBLIC_KEY_INFO is the right size', () {
+    expect(sizeOf<CERT_PUBLIC_KEY_INFO>(), equals(48));
+  });
   test('Struct CHANGEFILTERSTRUCT is the right size', () {
     expect(sizeOf<CHANGEFILTERSTRUCT>(), equals(8));
   });
@@ -233,6 +245,12 @@ void main() {
   });
   test('Struct CRYPTPROTECT_PROMPTSTRUCT is the right size', () {
     expect(sizeOf<CRYPTPROTECT_PROMPTSTRUCT>(), equals(24));
+  });
+  test('Struct CRYPT_ALGORITHM_IDENTIFIER is the right size', () {
+    expect(sizeOf<CRYPT_ALGORITHM_IDENTIFIER>(), equals(24));
+  });
+  test('Struct CRYPT_BIT_BLOB is the right size', () {
+    expect(sizeOf<CRYPT_BIT_BLOB>(), equals(24));
   });
   test('Struct CRYPT_INTEGER_BLOB is the right size', () {
     expect(sizeOf<CRYPT_INTEGER_BLOB>(), equals(16));
@@ -344,6 +362,12 @@ void main() {
   });
   test('Struct DRAWTEXTPARAMS is the right size', () {
     expect(sizeOf<DRAWTEXTPARAMS>(), equals(20));
+  });
+  test('Struct DSREG_JOIN_INFO is the right size', () {
+    expect(sizeOf<DSREG_JOIN_INFO>(), equals(96));
+  });
+  test('Struct DSREG_USER_INFO is the right size', () {
+    expect(sizeOf<DSREG_USER_INFO>(), equals(24));
   });
   test('Struct DTBGOPTS is the right size', () {
     expect(sizeOf<DTBGOPTS>(), equals(24));
