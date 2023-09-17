@@ -76,6 +76,7 @@ export 'src/win32/gdi32.g.dart';
 export 'src/win32/iphlpapi.g.dart';
 export 'src/win32/kernel32.g.dart';
 export 'src/win32/magnification.g.dart';
+export 'src/win32/netapi32.g.dart';
 export 'src/win32/ole32.g.dart';
 export 'src/win32/oleaut32.g.dart';
 export 'src/win32/powrprof.g.dart';
