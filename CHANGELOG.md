@@ -1,3 +1,8 @@
+## 1.1.2
+
+- Improved code quality.
+- Improved documentation.
+
 ## 1.1.1
 
 - Update dependency constraints.

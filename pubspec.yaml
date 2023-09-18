@@ -1,6 +1,7 @@
 name: win32_registry
-description: A set of helper classes for working with the Windows registry.
-version: 1.1.1
+description: A package that provides a friendly Dart API for accessing the
+  Windows Registry.
+version: 1.1.2
 homepage: https://win32.pub
 repository: https://github.com/dart-windows/win32_registry
 issue_tracker: https://github.com/dart-windows/win32_registry/issues
