@@ -8,105 +8,62 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'exceptions.dart';
-
-/// Whether the specified device is the controller or an attached headset.
-enum GamepadDeviceType { controller, headset }
-
-/// The type of battery.
-enum GamepadBatteryType {
-  /// The device is not connected.
-  disconnected,
-
-  /// The device is a wired device and does not have a battery.
-  wired,
-
-  /// The device has an alkaline battery.
-  alkaline,
-
-  /// The device has a nickel metal hydride battery.
-  nickelMetalHydride,
-
-  /// The device has an unknown battery type.
-  unknown
-}
-
-/// The charge state of the battery.
-///
-/// This value is only valid for wireless devices with a known battery type.
-enum GamepadBatteryLevel {
-  /// The charge state is empty.
-  empty,
-
-  /// The charge state is low.
-  low,
-
-  /// The charge state is medium.
-  medium,
-
-  /// The charge state is full.
-  full,
-
-  /// The charge state is unknown.
-  unknown
-}
+import 'models/models.dart';
 
 /// Information about the battery state for a gamepad or headset.
 class GamepadBatteryInfo {
-  late int _batteryType;
-  late int _batteryLevel;
-
-  /// The type of battery.
-  GamepadBatteryType get batteryType {
-    switch (_batteryType) {
-      case BATTERY_TYPE_DISCONNECTED:
-        return GamepadBatteryType.disconnected;
-      case BATTERY_TYPE_WIRED:
-        return GamepadBatteryType.wired;
-      case BATTERY_TYPE_ALKALINE:
-        return GamepadBatteryType.alkaline;
-      case BATTERY_TYPE_NIMH:
-        return GamepadBatteryType.nickelMetalHydride;
-      default:
-        return GamepadBatteryType.unknown;
-    }
-  }
-
-  /// The charge state of the battery.
+  /// Creates an instance of [GamepadBatteryInfo] for the specified controller
+  /// and device type.
   ///
-  /// This value is only valid for wireless devices with a known battery type.
-  GamepadBatteryLevel get batteryLevel {
-    switch (_batteryLevel) {
-      case BATTERY_LEVEL_FULL:
-        return GamepadBatteryLevel.full;
-      case BATTERY_LEVEL_MEDIUM:
-        return GamepadBatteryLevel.medium;
-      case BATTERY_LEVEL_LOW:
-        return GamepadBatteryLevel.low;
-      case BATTERY_LEVEL_EMPTY:
-        return GamepadBatteryLevel.empty;
-      default:
-        return GamepadBatteryLevel.unknown;
-    }
-  }
-
+  /// The [controller] parameter represents the index of the gamepad controller,
+  /// and the [deviceType] parameter specifies whether it's a gamepad controller
+  /// or an attached headset.
+  ///
+  /// Throws a [DeviceNotConnectedError] if the specified controller is not
+  /// connected.
   GamepadBatteryInfo(int controller, GamepadDeviceType deviceType) {
     final pBatteryInformation = calloc<XINPUT_BATTERY_INFORMATION>();
-
     try {
       final dwResult = XInputGetBatteryInformation(
-          controller,
-          deviceType == GamepadDeviceType.controller
-              ? BATTERY_DEVTYPE_GAMEPAD
-              : BATTERY_DEVTYPE_HEADSET,
-          pBatteryInformation);
+        controller,
+        deviceType == GamepadDeviceType.controller
+            ? BATTERY_DEVTYPE_GAMEPAD
+            : BATTERY_DEVTYPE_HEADSET,
+        pBatteryInformation,
+      );
       if (dwResult == ERROR_DEVICE_NOT_CONNECTED) {
         throw DeviceNotConnectedError();
       } else {
-        _batteryType = pBatteryInformation.ref.BatteryType;
-        _batteryLevel = pBatteryInformation.ref.BatteryLevel;
+        final XINPUT_BATTERY_INFORMATION(:BatteryLevel, :BatteryType) =
+            pBatteryInformation.ref;
+        _batteryLevel = BatteryLevel;
+        _batteryType = BatteryType;
       }
     } finally {
       free(pBatteryInformation);
     }
   }
+
+  late final int _batteryLevel;
+  late final int _batteryType;
+
+  /// The charge state of the battery.
+  ///
+  /// This value is only valid for wireless devices with a known battery type.
+  GamepadBatteryLevel get batteryLevel => switch (_batteryLevel) {
+        BATTERY_LEVEL_FULL => GamepadBatteryLevel.full,
+        BATTERY_LEVEL_MEDIUM => GamepadBatteryLevel.medium,
+        BATTERY_LEVEL_LOW => GamepadBatteryLevel.low,
+        BATTERY_LEVEL_EMPTY => GamepadBatteryLevel.empty,
+        _ => GamepadBatteryLevel.unknown
+      };
+
+  /// The type of battery.
+  GamepadBatteryType get batteryType => switch (_batteryType) {
+        BATTERY_TYPE_DISCONNECTED => GamepadBatteryType.disconnected,
+        BATTERY_TYPE_WIRED => GamepadBatteryType.wired,
+        BATTERY_TYPE_ALKALINE => GamepadBatteryType.alkaline,
+        BATTERY_TYPE_NIMH => GamepadBatteryType.nickelMetalHydride,
+        _ => GamepadBatteryType.unknown
+      };
 }

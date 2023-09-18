@@ -12,7 +12,28 @@ import 'exceptions.dart';
 /// Information about what a gamepad supports: vibration, voice, navigation,
 /// etc.
 class GamepadCapabilities {
-  late int _flags;
+  /// Creates an instance of [GamepadCapabilities] for the specified controller.
+  ///
+  /// The [controller] parameter represents the index of the gamepad controller.
+  ///
+  /// Throws a [DeviceNotConnectedError] if the specified controller is not
+  /// connected.
+  GamepadCapabilities(int controller) {
+    final pCapabilities = calloc<XINPUT_CAPABILITIES>();
+    try {
+      final dwResult =
+          XInputGetCapabilities(controller, XINPUT_FLAG_GAMEPAD, pCapabilities);
+      if (dwResult == ERROR_DEVICE_NOT_CONNECTED) {
+        throw DeviceNotConnectedError();
+      } else {
+        _flags = pCapabilities.ref.Flags;
+      }
+    } finally {
+      free(pCapabilities);
+    }
+  }
+
+  late final int _flags;
 
   /// The value which the left and right triggers must be greater than to
   /// register as pressed.
@@ -44,20 +65,4 @@ class GamepadCapabilities {
   /// Device is wireless.
   bool get isWireless =>
       !(_flags & XINPUT_CAPS_WIRELESS == XINPUT_CAPS_WIRELESS);
-
-  GamepadCapabilities(int controller) {
-    final pCapabilities = calloc<XINPUT_CAPABILITIES>();
-
-    try {
-      final dwResult =
-          XInputGetCapabilities(controller, XINPUT_FLAG_GAMEPAD, pCapabilities);
-      if (dwResult == ERROR_DEVICE_NOT_CONNECTED) {
-        throw DeviceNotConnectedError();
-      } else {
-        _flags = pCapabilities.ref.Flags;
-      }
-    } finally {
-      free(pCapabilities);
-    }
-  }
 }

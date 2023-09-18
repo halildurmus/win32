@@ -2,8 +2,11 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-/// Error occurring when an operation is attempted on a device that is not
-/// connected.
-class DeviceNotConnectedError extends StateError {
-  DeviceNotConnectedError() : super('Device is not connected.');
+/// Whether the specified device is the controller or an attached headset.
+enum GamepadDeviceType {
+  /// Controller.
+  controller,
+
+  /// An attached headset.
+  headset
 }

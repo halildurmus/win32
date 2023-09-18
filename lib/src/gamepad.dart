@@ -10,13 +10,24 @@ import 'package:win32/win32.dart';
 import 'exceptions.dart';
 import 'gamepad_batteryinfo.dart';
 import 'gamepad_state.dart';
+import 'models/models.dart';
 
 /// Represents a gamepad controller.
 class Gamepad {
+  /// Creates an instance of [Gamepad] for the specified controller.
+  ///
+  /// The [controller] parameter represents the index of the gamepad controller.
+  Gamepad(this.controller)
+      : assert(controller >= 0 && controller < XUSER_MAX_COUNT) {
+    _initializeCom();
+    updateState();
+  }
+
   /// The identifier for the current controller.
   ///
   /// Up to four controllers may be connected to a system, numbered from 0 to 3.
   final int controller;
+
   int _packetNumber = -1;
 
   /// The status of the buttons, triggers and thumbsticks on the gamepad.
@@ -29,12 +40,6 @@ class Gamepad {
       CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
       _isComInitialized = true;
     }
-  }
-
-  Gamepad(this.controller)
-      : assert(controller >= 0 && controller < XUSER_MAX_COUNT) {
-    _initializeCom();
-    updateState();
   }
 
   /// Controls whether the gamepad is active.
@@ -53,25 +58,25 @@ class Gamepad {
     final pState = calloc<XINPUT_STATE>();
     try {
       final dwResult = XInputGetState(controller, pState);
-
       if (dwResult == ERROR_SUCCESS) {
-        // The packet number indicates whether there have been any changes in the
-        // state of the controller. If the dwPacketNumber member is the same in
-        // sequentially returned XINPUT_STATE structures, the controller state has
-        // not changed.
-        if (pState.ref.dwPacketNumber == _packetNumber) return;
+        final XINPUT_STATE(:dwPacketNumber, Gamepad: gamepad) = pState.ref;
+        // The packet number indicates whether there have been any changes in
+        // the state of the controller. If the dwPacketNumber member is the same
+        // in sequentially returned XINPUT_STATE structures, the controller
+        // state has not changed.
+        if (dwPacketNumber == _packetNumber) return;
 
-        _packetNumber = pState.ref.dwPacketNumber;
-        final gamepad = pState.ref.Gamepad;
+        _packetNumber = dwPacketNumber;
         state = GamepadState(
-            true,
-            gamepad.wButtons,
-            gamepad.bLeftTrigger,
-            gamepad.bRightTrigger,
-            gamepad.sThumbLX,
-            gamepad.sThumbLY,
-            gamepad.sThumbRX,
-            gamepad.sThumbRY);
+          true,
+          gamepad.wButtons,
+          gamepad.bLeftTrigger,
+          gamepad.bRightTrigger,
+          gamepad.sThumbLX,
+          gamepad.sThumbLY,
+          gamepad.sThumbRX,
+          gamepad.sThumbRY,
+        );
       } else if (dwResult == ERROR_DEVICE_NOT_CONNECTED) {
         state = GamepadState.disconnected();
       } else {
@@ -114,7 +119,6 @@ class Gamepad {
     final pVibration = calloc<XINPUT_VIBRATION>()
       ..ref.wLeftMotorSpeed = leftMotorSpeed
       ..ref.wRightMotorSpeed = rightMotorSpeed;
-
     try {
       final dwResult = XInputSetState(controller, pVibration);
       if (dwResult == ERROR_DEVICE_NOT_CONNECTED) {

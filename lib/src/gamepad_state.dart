@@ -5,39 +5,25 @@
 import 'package:win32/win32.dart';
 
 import 'gamepad_capabilities.dart';
-
-/// The compass point represented by the directional pad.
-enum Direction {
-  /// Left.
-  west,
-
-  /// Left and up.
-  northwest,
-
-  /// Up.
-  north,
-
-  /// Up and right.
-  northeast,
-
-  /// Right.
-  east,
-
-  /// Down and right.
-  southeast,
-
-  /// Down.
-  south,
-
-  /// Down and left.
-  southwest,
-
-  /// Neutral (not pressed).
-  center
-}
+import 'models/models.dart';
 
 /// The current status of a gamepad.
 class GamepadState {
+  const GamepadState(
+    this.isConnected,
+    this._buttonBitmask,
+    this.leftTrigger,
+    this.rightTrigger,
+    this.leftThumbstickX,
+    this.leftThumbstickY,
+    this.rightThumbstickX,
+    this.rightThumbstickY,
+  );
+
+  /// Represents a disconnected gamepad.
+  factory GamepadState.disconnected() =>
+      const GamepadState(false, 0, 0, 0, 0, 0, 0, 0);
+
   final int _buttonBitmask;
 
   /// Returns true if the gamepad is currently connected.
@@ -154,18 +140,4 @@ class GamepadState {
 
   /// Returns true if the Y button is pressed down.
   bool get buttonY => _buttonBitmask & XINPUT_GAMEPAD_Y == XINPUT_GAMEPAD_Y;
-
-  const GamepadState(
-      this.isConnected,
-      this._buttonBitmask,
-      this.leftTrigger,
-      this.rightTrigger,
-      this.leftThumbstickX,
-      this.leftThumbstickY,
-      this.rightThumbstickX,
-      this.rightThumbstickY);
-
-  /// Represents a disconnected gamepad.
-  factory GamepadState.disconnected() =>
-      const GamepadState(false, 0, 0, 0, 0, 0, 0, 0);
 }
