@@ -1,4 +1,7 @@
-import 'package:test/test.dart';
+@TestOn('windows')
+
+import 'package:checks/checks.dart';
+import 'package:test/scaffolding.dart';
 import 'package:win32/win32.dart';
 import 'package:win32_registry/win32_registry.dart';
 
@@ -6,10 +9,9 @@ void main() {
   test('Basic test', () {
     // In any working Windows configuration, this key should have a sizable
     // number of values.
-    final key = Registry.openPath(RegistryHive.localMachine,
-        path: r'Software\Microsoft\Windows NT\CurrentVersion');
-
-    expect(key.values.length, greaterThan(0));
+    const keyPath = r'Software\Microsoft\Windows NT\CurrentVersion';
+    final key = Registry.openPath(RegistryHive.localMachine, path: keyPath);
+    check(key.values.length).isGreaterThan(0);
     key.close();
   });
 
@@ -17,10 +19,12 @@ void main() {
     // Uses key types that should exist in any standard Windows configuration.
     final env =
         Registry.openPath(RegistryHive.currentUser, path: 'Environment');
-    expect(
-        env.getValue('Path')?.type, equals(RegistryValueType.unexpandedString));
-    expect(env.getValue('Path')?.type.win32Value, equals(REG_EXPAND_SZ));
-    expect(env.getValue('Path')?.type.win32Type, equals('REG_EXPAND_SZ'));
+    final value = env.getValue('Path');
+    check(value).isNotNull();
+    final type = value!.type;
+    check(type).equals(RegistryValueType.unexpandedString);
+    check(type.win32Value).equals(REG_EXPAND_SZ);
+    check(type.win32Type).equals('REG_EXPAND_SZ');
     env.close();
   });
 
@@ -28,76 +32,84 @@ void main() {
     // Uses key types that should exist in any standard Windows configuration.
     final console =
         Registry.openPath(RegistryHive.currentUser, path: 'Console');
-    expect(
-        console.getValue('FullScreen')?.type, equals(RegistryValueType.int32));
-    expect(console.getValue('FullScreen')?.type.win32Value, equals(REG_DWORD));
-    expect(console.getValue('FullScreen')?.type.win32Type, equals('REG_DWORD'));
+    final value = console.getValue('FullScreen');
+    check(value).isNotNull();
+    final type = value!.type;
+    check(type).equals(RegistryValueType.int32);
+    check(type.win32Value).equals(REG_DWORD);
+    check(type.win32Type).equals('REG_DWORD');
     console.close();
   });
 
   test('Test key types 3', () {
     // Uses key types that should exist in any standard Windows configuration.
-    final windowMetrics = Registry.openPath(RegistryHive.currentUser,
-        path: r'Control Panel\Desktop\WindowMetrics');
-    expect(windowMetrics.getValue('IconFont')?.type,
-        equals(RegistryValueType.binary));
-    expect(windowMetrics.getValue('IconFont')?.type.win32Value,
-        equals(REG_BINARY));
-    expect(windowMetrics.getValue('IconFont')?.type.win32Type,
-        equals('REG_BINARY'));
+    const keyPath = r'Control Panel\Desktop\WindowMetrics';
+    final windowMetrics =
+        Registry.openPath(RegistryHive.currentUser, path: keyPath);
+    final value = windowMetrics.getValue('IconFont');
+    check(value).isNotNull();
+    final type = value!.type;
+    check(type).equals(RegistryValueType.binary);
+    check(type.win32Value).equals(REG_BINARY);
+    check(type.win32Type).equals('REG_BINARY');
     windowMetrics.close();
   });
 
   test('Test key types 4', () {
     // Uses key types that should exist in any standard Windows configuration.
-    final ntCurrentVersion = Registry.openPath(RegistryHive.localMachine,
-        path: r'SOFTWARE\Microsoft\Windows NT\CurrentVersion');
-    expect(ntCurrentVersion.getValue('InstallTime')?.type,
-        equals(RegistryValueType.int64));
-    expect(ntCurrentVersion.getValue('InstallTime')?.type.win32Value,
-        equals(REG_QWORD));
-    expect(ntCurrentVersion.getValue('InstallTime')?.type.win32Type,
-        equals('REG_QWORD'));
+    const keyPath = r'SOFTWARE\Microsoft\Windows NT\CurrentVersion';
+    final ntCurrentVersion =
+        Registry.openPath(RegistryHive.localMachine, path: keyPath);
+    final value = ntCurrentVersion.getValue('InstallTime');
+    check(value).isNotNull();
+    final type = value!.type;
+    check(type).equals(RegistryValueType.int64);
+    check(type.win32Value).equals(REG_QWORD);
+    check(type.win32Type).equals('REG_QWORD');
     ntCurrentVersion.close();
   });
 
   test('Test key types 5', () {
     // Uses key types that should exist in any standard Windows configuration.
-    final currentVersion = Registry.openPath(RegistryHive.localMachine,
-        path: r'SOFTWARE\Microsoft\Windows\CurrentVersion');
-    expect(currentVersion.getValue('ProgramFilesDir')?.type,
-        equals(RegistryValueType.string));
-    expect(currentVersion.getValue('ProgramFilesDir')?.type.win32Value,
-        equals(REG_SZ));
-    expect(currentVersion.getValue('ProgramFilesDir')?.type.win32Type,
-        equals('REG_SZ'));
+    const keyPath = r'SOFTWARE\Microsoft\Windows\CurrentVersion';
+    final currentVersion =
+        Registry.openPath(RegistryHive.localMachine, path: keyPath);
+    final value = currentVersion.getValue('ProgramFilesDir');
+    check(value).isNotNull();
+    final type = value!.type;
+    check(type).equals(RegistryValueType.string);
+    check(type.win32Value).equals(REG_SZ);
+    check(type.win32Type).equals('REG_SZ');
     currentVersion.close();
   });
 
   test('Test missing key', () {
     // Uses key that should be missing.
-    expect(
-        () => Registry.openPath(RegistryHive.localMachine,
-            path: r'SOFTWARE\Dart\Missing\Key'),
-        throwsA(isA<WindowsException>().having((ex) => ex.hr, 'hr',
-            equals(HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND)))));
+    check(() => Registry.openPath(
+              RegistryHive.localMachine,
+              path: r'SOFTWARE\Dart\Missing\Key',
+            ))
+        .throws<WindowsException>()
+        .has((e) => e.hr, 'hr')
+        .equals(HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND));
   });
 
   test('Test missing value', () {
     // Uses key that should be present and value that should be missing.
-    final currentVersion = Registry.openPath(RegistryHive.localMachine,
-        path: r'SOFTWARE\Microsoft\Windows NT\CurrentVersion');
-    expect(currentVersion.getValue('NotepadPlusPlus'), isNull);
+    const keyPath = r'SOFTWARE\Microsoft\Windows NT\CurrentVersion';
+    final currentVersion =
+        Registry.openPath(RegistryHive.localMachine, path: keyPath);
+    check(currentVersion.getValue('NotepadPlusPlus')).isNull();
   });
 
   test('Create a subkey', () {
     final hkcu = Registry.currentUser;
     const subkeyName = 'Win32RegistryTestKey';
-    expect(hkcu.subkeyNames.contains(subkeyName), false);
+    check(hkcu.subkeyNames.contains(subkeyName)).isFalse();
     hkcu.createKey(subkeyName);
-    expect(hkcu.subkeyNames.contains(subkeyName), true);
+    check(hkcu.subkeyNames.contains(subkeyName)).isTrue();
     hkcu.deleteKey(subkeyName);
-    expect(hkcu.subkeyNames.contains(subkeyName), false);
+    check(hkcu.subkeyNames.contains(subkeyName)).isFalse();
   });
 
   test('Create a DWORD value (REG_DWORD)', () {
@@ -107,12 +119,11 @@ void main() {
     final value =
         const RegistryValue('TestValue', RegistryValueType.int32, 1234);
     subkey.createValue(value);
-    expect(subkey.values.where((v) => v.name == 'TestValue').first, value);
-
-    expect(subkey.getValueAsInt('TestValue'), 1234);
-
+    check(subkey.values.where((v) => v.name == 'TestValue').first)
+        .equals(value);
+    check(subkey.getValueAsInt('TestValue')).equals(1234);
     subkey.deleteValue('TestValue');
-    expect(subkey.values.where((elem) => elem.name == 'TestValue'), isEmpty);
+    check(subkey.values.where((elem) => elem.name == 'TestValue')).isEmpty();
     hkcu.deleteKey(subkeyName);
   });
 
@@ -124,15 +135,13 @@ void main() {
         'TestValue', RegistryValueType.int64, 0xFEEDFACECAFEBEEF);
     key.createValue(value);
     final retrievedValue = key.getValue('TestValue');
-    expect(retrievedValue, isNotNull);
-    expect(retrievedValue?.name, 'TestValue');
-    expect(retrievedValue?.type, RegistryValueType.int64);
-    expect(retrievedValue?.data as int, 0xFEEDFACECAFEBEEF);
-
-    expect(key.getValueAsInt('TestValue'), 0xFEEDFACECAFEBEEF);
-
+    check(retrievedValue).isNotNull();
+    check(retrievedValue!.name).equals('TestValue');
+    check(retrievedValue.type).equals(RegistryValueType.int64);
+    check(retrievedValue.data as int).equals(0xFEEDFACECAFEBEEF);
+    check(key.getValueAsInt('TestValue')).equals(0xFEEDFACECAFEBEEF);
     key.deleteValue('TestValue');
-    expect(key.values.where((elem) => elem.name == 'TestValue'), isEmpty);
+    check(key.values.where((elem) => elem.name == 'TestValue')).isEmpty();
     hkcu.deleteKey(keyName);
   });
 
@@ -144,14 +153,13 @@ void main() {
         'TestValue', RegistryValueType.string, 'Some text here.');
     key.createValue(value);
     final retrievedValue = key.getValue('TestValue');
-    expect(retrievedValue, isNotNull);
-    expect(retrievedValue?.type, RegistryValueType.string);
-    final data = retrievedValue?.data as String;
-    expect(data, 'Some text here.');
-
-    expect(key.getValueAsString('TestValue'), 'Some text here.');
+    check(retrievedValue).isNotNull();
+    check(retrievedValue!.type).equals(RegistryValueType.string);
+    final data = retrievedValue.data as String;
+    check(data).equals('Some text here.');
+    check(key.getValueAsString('TestValue')).equals('Some text here.');
     key.deleteValue('TestValue');
-    expect(key.values.where((elem) => elem.name == 'TestValue'), isEmpty);
+    check(key.values.where((elem) => elem.name == 'TestValue')).isEmpty();
     hkcu.deleteKey(keyName);
   });
 
@@ -163,13 +171,13 @@ void main() {
         'TestValue', RegistryValueType.stringArray, ['One', 'Two', 'Three']);
     key.createValue(value);
     final retrievedValue = key.getValue('TestValue');
-    expect(retrievedValue, isNotNull);
-    expect(retrievedValue?.type, RegistryValueType.stringArray);
-    final array = retrievedValue?.data as List<String>;
-    expect(array.length, 3);
-    expect(array.first, 'One');
+    check(retrievedValue).isNotNull();
+    check(retrievedValue!.type).equals(RegistryValueType.stringArray);
+    final array = retrievedValue.data as List<String>;
+    check(array.length).equals(3);
+    check(array.first).equals('One');
     key.deleteValue('TestValue');
-    expect(key.values.where((elem) => elem.name == 'TestValue'), isEmpty);
+    check(key.values.where((elem) => elem.name == 'TestValue')).isEmpty();
     hkcu.deleteKey(keyName);
   });
 
@@ -181,14 +189,14 @@ void main() {
         'TestValue', RegistryValueType.binary, [0xFF, 0x33, 0x77, 0xAA]);
     key.createValue(value);
     final retrievedValue = key.getValue('TestValue');
-    expect(retrievedValue, isNotNull);
-    expect(retrievedValue?.type, RegistryValueType.binary);
-    final array = retrievedValue?.data as List<int>;
-    expect(array.length, 4);
-    expect(array.first, 0xFF);
-    expect(array.last, 0xAA);
+    check(retrievedValue).isNotNull();
+    check(retrievedValue!.type).equals(RegistryValueType.binary);
+    final array = retrievedValue.data as List<int>;
+    check(array.length).equals(4);
+    check(array.first).equals(0xFF);
+    check(array.last).equals(0xAA);
     key.deleteValue('TestValue');
-    expect(key.values.where((elem) => elem.name == 'TestValue'), isEmpty);
+    check(key.values.where((elem) => elem.name == 'TestValue')).isEmpty();
     hkcu.deleteKey(keyName);
   });
 
@@ -203,43 +211,42 @@ void main() {
     key.createValue(value);
 
     final retrievedValue = key.getValue('TestValue', expandPaths: false);
-    expect(retrievedValue, isNotNull);
-    expect(retrievedValue?.type, RegistryValueType.unexpandedString);
+    check(retrievedValue).isNotNull();
+    check(retrievedValue!.type).equals(RegistryValueType.unexpandedString);
 
     // Unexpanded should be as stored
-    expect(key.getValueAsString('TestValue', expandPaths: false),
-        r'%SystemRoot%\System32\MirrorDrvCompat.dll');
+    check(key.getValueAsString('TestValue', expandPaths: false))
+        .equals(r'%SystemRoot%\System32\MirrorDrvCompat.dll');
 
     // Expanded should replace %SystemRoot% with an actual system path
-    expect(key.getValueAsString('TestValue', expandPaths: true),
-        isNot(contains('%SystemRoot%')));
-    expect(key.getValueAsString('TestValue', expandPaths: true),
-        endsWith(r'\System32\MirrorDrvCompat.dll'));
+    check(key.getValueAsString('TestValue', expandPaths: true)!)
+        .not(it()..contains('%SystemRoot%'));
+
+    check(key.getValueAsString('TestValue', expandPaths: true)!)
+        .endsWith(r'\System32\MirrorDrvCompat.dll');
 
     key.deleteValue('TestValue');
-    expect(key.values.where((elem) => elem.name == 'TestValue'), isEmpty);
+    check(key.values.where((elem) => elem.name == 'TestValue')).isEmpty();
     hkcu.deleteKey(keyName);
   });
 
   test('Rename a subkey', () {
     final hkcu = Registry.openPath(RegistryHive.currentUser)
       ..createKey('Win32RegistryTestKey');
-    expect(hkcu.subkeyNames.contains('Win32RegistryTestKey'), isTrue);
-
+    check(hkcu.subkeyNames.contains('Win32RegistryTestKey')).isTrue();
     hkcu.renameSubkey('Win32RegistryTestKey', 'MyNewTestKey');
-    expect(hkcu.subkeyNames.contains('Win32RegistryTestKey'), isFalse);
-    expect(hkcu.subkeyNames.contains('MyNewTestKey'), isTrue);
-
+    check(hkcu.subkeyNames.contains('Win32RegistryTestKey')).isFalse();
+    check(hkcu.subkeyNames.contains('MyNewTestKey')).isTrue();
     hkcu.deleteKey('MyNewTestKey');
-    expect(hkcu.subkeyNames.contains('Win32RegistryTestKey'), isFalse);
-    expect(hkcu.subkeyNames.contains('MyNewTestKey'), isFalse);
+    check(hkcu.subkeyNames.contains('Win32RegistryTestKey')).isFalse();
+    check(hkcu.subkeyNames.contains('MyNewTestKey')).isFalse();
   });
 
   test('Create a subkey without write access should fail', () {
     final hkcu = Registry.openPath(RegistryHive.localMachine);
     const subkeyName = 'Win32RegistryTestKey';
-    expect(hkcu.subkeyNames.contains(subkeyName), false);
-    expect(() => hkcu.createKey(subkeyName), throwsA(isA<WindowsException>()));
-    expect(hkcu.subkeyNames.contains(subkeyName), false);
+    check(hkcu.subkeyNames.contains(subkeyName)).isFalse();
+    check(() => hkcu.createKey(subkeyName)).throws<WindowsException>();
+    check(hkcu.subkeyNames.contains(subkeyName)).isFalse();
   });
 }
