@@ -28,11 +28,6 @@ class _HomePageState extends State<HomePage> {
   File? path;
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           title: Text(path != null ? path.toString() : 'Select a file'),

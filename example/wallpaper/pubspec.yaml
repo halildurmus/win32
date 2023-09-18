@@ -1,31 +1,21 @@
 name: filepicker_windows_example
-description: Demonstrates how to use the filepicker_windows plugin.
-
-# The following line prevents the package from being accidentally published to
-# pub.dev using `pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+description: Demonstrates how to use the filepicker_windows package.
+publish_to: 'none'
 
 environment:
-  sdk: '^3.0.0'
+  sdk: '^3.1.0'
 
 dependencies:
   filepicker_windows:
-    # When depending on this package from a real application you should use:
-    #   filepicker_windows: ^x.y.z
-    # See https://dart.dev/tools/pub/dependencies#version-constraints
-    # The example app is bundled with the plugin so we use a path dependency on
-    # the parent directory to use the current plugin's version.
     path: ../../
-
+  ffi: ^2.1.0
   flutter:
     sdk: flutter
-
-  ffi: ^2.0.2
-  win32: ^5.0.5
-  path_provider_windows: ^2.1.7
+  win32: ^5.0.7
+  path_provider_windows: ^2.2.1
 
 flutter:
   uses-material-design: true
 
 dev_dependencies:
-  flutter_lints: ^2.0.2
+  dartwindows_lints: ^1.0.0
