@@ -51,33 +51,38 @@ class InspectorPageState extends State<InspectorPage> {
   @override
   Widget build(BuildContext context) {
     return NavigationView(
-        appBar: const NavigationAppBar(
-          title: CustomWindowTitleSection(appTitle: appTitle),
-          actions: CustomWindowButtonsSection(),
-        ),
-        pane: NavigationPane(
-            size: const NavigationPaneSize(openMaxWidth: 200),
-            displayMode: PaneDisplayMode.open,
-            selected: index,
-            onChanged: (i) => setState(() => index = i),
-            items: [
-              PaneItem(
-                  icon: const Icon(FluentIcons.game),
-                  title: const Text('Controller 1'),
-                  body: GamepadPage(controller: 0)),
-              PaneItem(
-                  icon: const Icon(FluentIcons.game),
-                  title: const Text('Controller 2'),
-                  body: GamepadPage(controller: 1)),
-              PaneItem(
-                icon: const Icon(FluentIcons.game),
-                title: const Text('Controller 3'),
-                body: GamepadPage(controller: 2),
-              ),
-              PaneItem(
-                  icon: const Icon(FluentIcons.game),
-                  title: const Text('Controller 4'),
-                  body: GamepadPage(controller: 3)),
-            ]));
+      appBar: const NavigationAppBar(
+        title: CustomWindowTitleSection(appTitle: appTitle),
+        actions: CustomWindowButtonsSection(),
+      ),
+      pane: NavigationPane(
+        size: const NavigationPaneSize(openMaxWidth: 200),
+        displayMode: PaneDisplayMode.open,
+        selected: index,
+        onChanged: (i) => setState(() => index = i),
+        items: [
+          PaneItem(
+            icon: const Icon(FluentIcons.game),
+            title: const Text('Controller 1'),
+            body: GamepadPage(controller: 0),
+          ),
+          PaneItem(
+            icon: const Icon(FluentIcons.game),
+            title: const Text('Controller 2'),
+            body: GamepadPage(controller: 1),
+          ),
+          PaneItem(
+            icon: const Icon(FluentIcons.game),
+            title: const Text('Controller 3'),
+            body: GamepadPage(controller: 2),
+          ),
+          PaneItem(
+            icon: const Icon(FluentIcons.game),
+            title: const Text('Controller 4'),
+            body: GamepadPage(controller: 3),
+          ),
+        ],
+      ),
+    );
   }
 }

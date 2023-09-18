@@ -6,9 +6,9 @@ import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 
 class CustomWindowTitleSection extends StatelessWidget {
-  final String appTitle;
-
   const CustomWindowTitleSection({super.key, required this.appTitle});
+
+  final String appTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +22,7 @@ class CustomWindowTitleSection extends StatelessWidget {
 }
 
 class CustomWindowButtonsSection extends StatelessWidget {
-  const CustomWindowButtonsSection({
-    super.key,
-  });
+  const CustomWindowButtonsSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -59,28 +57,27 @@ class WindowButtons extends StatelessWidget {
       iconMouseOver: Colors.red.basedOnLuminance(),
       iconMouseDown: Colors.red.dark.basedOnLuminance(),
     );
-    return Row(children: [
-      Tooltip(
-        message: FluentLocalizations.of(context).minimizeWindowTooltip,
-        child: MinimizeWindowButton(colors: buttonColors),
-      ),
-      Tooltip(
-        message: FluentLocalizations.of(context).restoreWindowTooltip,
-        child: WindowButton(
-          colors: buttonColors,
-          iconBuilder: (context) {
-            if (appWindow.isMaximized) {
-              return RestoreIcon(color: context.iconColor);
-            }
-            return MaximizeIcon(color: context.iconColor);
-          },
-          onPressed: appWindow.maximizeOrRestore,
+    return Row(
+      children: [
+        Tooltip(
+          message: FluentLocalizations.of(context).minimizeWindowTooltip,
+          child: MinimizeWindowButton(colors: buttonColors),
         ),
-      ),
-      Tooltip(
-        message: FluentLocalizations.of(context).closeWindowTooltip,
-        child: CloseWindowButton(colors: closeButtonColors),
-      ),
-    ]);
+        Tooltip(
+          message: FluentLocalizations.of(context).restoreWindowTooltip,
+          child: WindowButton(
+            colors: buttonColors,
+            iconBuilder: (context) => appWindow.isMaximized
+                ? RestoreIcon(color: context.iconColor)
+                : MaximizeIcon(color: context.iconColor),
+            onPressed: appWindow.maximizeOrRestore,
+          ),
+        ),
+        Tooltip(
+          message: FluentLocalizations.of(context).closeWindowTooltip,
+          child: CloseWindowButton(colors: closeButtonColors),
+        ),
+      ],
+    );
   }
 }
