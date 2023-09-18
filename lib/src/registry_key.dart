@@ -12,7 +12,7 @@ import 'models/registry_value_type.dart';
 import 'registry_value.dart';
 import 'utils.dart';
 
-/// An individual node in the Windows registry.
+/// An individual node in the Windows Registry.
 ///
 /// Registry data is structured in a tree format. Each node in the tree is
 /// called a key. Keys can contain data entries called values. Keys are somewhat
@@ -26,10 +26,10 @@ class RegistryKey {
   /// Creates an instance of the [RegistryKey] with the specified handle.
   const RegistryKey(this.hkey);
 
-  /// A handle to the current registry key
+  /// A handle to the current Registry key
   final int hkey;
 
-  /// Creates the specified registry key.
+  /// Creates the specified Registry key.
   ///
   /// If the key already exists, the function opens it.
   ///
@@ -48,7 +48,7 @@ class RegistryKey {
   }
 
   /// Deletes a subkey and its values from the specified platform-specific view
-  /// of the registry.
+  /// of the Registry.
   ///
   /// Set [recursive] to `true` if you want to delete subkey with all its
   /// subkeys.
@@ -78,7 +78,7 @@ class RegistryKey {
     }
   }
 
-  /// Sets the data and type of a specified value under a registry key.
+  /// Sets the data and type of a specified value under a Registry key.
   void createValue(RegistryValue value) {
     final lpValueName = value.name.toNativeUtf16();
     final lpWin32Data = value.toWin32;
@@ -94,7 +94,7 @@ class RegistryKey {
     }
   }
 
-  /// Retrieves the type and data for the specified registry value.
+  /// Retrieves the type and data for the specified Registry value.
   RegistryValue? getValue(
     String valueName, {
     String path = '',
@@ -122,7 +122,7 @@ class RegistryKey {
     });
   }
 
-  /// Retrieves the string data for the specified registry value.
+  /// Retrieves the string data for the specified Registry value.
   String? getValueAsString(String valueName, {bool expandPaths = false}) {
     final registryValue = getValue(valueName, expandPaths: expandPaths);
     if (registryValue == null) return null;
@@ -135,7 +135,7 @@ class RegistryKey {
     };
   }
 
-  /// Retrieves the integer data for the specified registry value.
+  /// Retrieves the integer data for the specified Registry value.
   int? getValueAsInt(String valueName) {
     final registryValue = getValue(valueName);
     if (registryValue == null) return null;
@@ -147,7 +147,7 @@ class RegistryKey {
     };
   }
 
-  /// Removes a named value from the specified registry key. Note that value
+  /// Removes a named value from the specified Registry key. Note that value
   /// names are not case sensitive.
   void deleteValue(String valueName) {
     final lpValueName = valueName.toNativeUtf16();
@@ -161,7 +161,7 @@ class RegistryKey {
     }
   }
 
-  /// Changes the name of the specified registry key.
+  /// Changes the name of the specified Registry key.
   void renameSubkey(String oldName, String newName) {
     final lpSubKeyName = oldName.toNativeUtf16();
     final lpNewKeyName = newName.toNativeUtf16();
@@ -176,7 +176,7 @@ class RegistryKey {
     }
   }
 
-  /// Retrieves information about the specified registry key.
+  /// Retrieves information about the specified Registry key.
   RegistryKeyInfo queryInfo() {
     return using((Arena arena) {
       final lpClass = arena<Uint16>(256).cast<Utf16>();
@@ -222,7 +222,7 @@ class RegistryKey {
     });
   }
 
-  /// Enumerates the values for the specified open registry key.
+  /// Enumerates the values for the specified open Registry key.
   Iterable<RegistryValue> get values sync* {
     final keyInfo = queryInfo();
 
@@ -258,7 +258,7 @@ class RegistryKey {
     }
   }
 
-  /// Enumerates the values for the specified open registry key.
+  /// Enumerates the values for the specified open Registry key.
   Iterable<String> get subkeyNames sync* {
     final keyInfo = queryInfo();
 
@@ -284,6 +284,6 @@ class RegistryKey {
     }
   }
 
-  /// Closes a handle to the specified registry key.
+  /// Closes a handle to the specified Registry key.
   void close() => RegCloseKey(hkey);
 }

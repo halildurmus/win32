@@ -8,7 +8,7 @@ import 'package:win32/win32.dart';
 /// stores.
 ///
 /// An application can use handles to these keys as entry points to the
-/// registry. Predefined keys help an application navigate in the registry and
+/// Registry. Predefined keys help an application navigate in the registry and
 /// make it possible to develop tools that allow a system administrator to
 /// manipulate categories of data. Applications that add data to the registry
 /// should always work within the framework of predefined keys, so

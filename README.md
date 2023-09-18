@@ -1,6 +1,6 @@
 <img src="https://raw.githubusercontent.com/dart-windows/.github/main/assets/dart-windows-card.png" width="50%" height="50%">
 
-A package that provides a friendly Dart API for accessing the Windows registry.
+A package that provides a friendly Dart API for accessing the Windows Registry.
 
 This package builds on top of the Dart [win32][win32_pub_link] package, offering
 a high-level Dart wrapper that avoids the need for users to understand FFI or
@@ -17,7 +17,7 @@ Part of the [Dart | Windows][dart_windows_link] suite of Windows packages.
 
 ## Usage
 
-A simple example that reads the Windows build number from the registry:
+A simple example that reads the Windows build number from the Windows Registry:
 
 ```dart
 import 'package:win32_registry/win32_registry.dart';

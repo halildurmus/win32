@@ -4,7 +4,7 @@
 
 import 'package:win32/win32.dart';
 
-/// A data type stored in the Windows registry.
+/// A data type stored in the Windows Registry.
 ///
 /// These do not directly map onto either Win32 or Dart types, but represent the
 /// kinds of entities that the registry understands.
