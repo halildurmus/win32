@@ -1,3 +1,7 @@
+// Copyright (c) 2023, Dart | Windows. Please see the AUTHORS file for details.
+// All rights reserved. Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
 /// A Dart library that provides support for querying and accessing the Windows
 /// Registry from Dart, with idiomatic classes and collections of objects that
 /// facilitate reading and writing values.
