@@ -39,7 +39,7 @@ More examples can be found in the `examples\` subdirectory.
 
 [ci_badge]: https://github.com/dart-windows/win32_registry/actions/workflows/dart.yml/badge.svg
 [ci_link]: https://github.com/dart-windows/win32_registry/actions/workflows/dart.yml
-[codecov_badge_link]: https://codecov.io/gh/dart-windows/win32_registry/branch/main/graph/badge.svg?token=Uvwq8pFjL5
+[codecov_badge_link]: https://codecov.io/gh/dart-windows/win32_registry/branch/main/graph/badge.svg?token=6ThVC4ejhx
 [codecov_link]: https://codecov.io/gh/dart-windows/win32_registry
 [dart_windows_link]: https://github.com/dart-windows
 [language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
