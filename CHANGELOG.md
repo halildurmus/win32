@@ -1,3 +1,8 @@
+## 1.0.6
+
+- Improved code quality.
+- Improved documentation.
+
 ## 1.0.5
 
 - Update dependencies
