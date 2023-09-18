@@ -1,5 +1,5 @@
-name: win32_runner
-repository: https://github.com/dart-windows/win32_runner
+name: filepicker_windows
+repository: https://github.com/dart-windows/filepicker_windows
 
 packages: [.]
 
