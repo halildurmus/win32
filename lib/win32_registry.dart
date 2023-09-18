@@ -1,12 +1,12 @@
-/// The registry is a system-defined Windows database in which applications and
+/// A Dart library that provides support for querying and accessing the Windows
+/// Registry from Dart, with idiomatic classes and collections of objects that
+/// facilitate reading and writing values.
+///
+/// The Windows Registry is a system-defined database in which applications and
 /// system components store and retrieve configuration data. The data stored in
 /// the registry varies according to the version of Microsoft Windows.
 /// Applications use the registry API to retrieve, modify, or delete registry
 /// data.
-///
-/// This library provides support for querying and accessing the registry from
-/// Dart, with idiomatic classes and collections of objects that facilitate
-/// reading and writing values.
 ///
 /// For example:
 ///
@@ -14,16 +14,21 @@
 /// import 'package:win32_registry/win32_registry.dart';
 ///
 /// void main() {
-///   final key = Registry.openPath(RegistryHive.localMachine,
-///       path: r'SOFTWARE\Microsoft\Windows NT\CurrentVersion');
+///   const keyPath = r'Software\Microsoft\Windows NT\CurrentVersion';
+///   final key = Registry.openPath(RegistryHive.localMachine, path: keyPath);
+///
 ///   final buildNumber = key.getValueAsString('CurrentBuild');
 ///   if (buildNumber != null) {
 ///     print('Windows build number: $buildNumber');
 ///   }
+///
 ///   key.close();
 /// }
 /// ```
-library win32_registry;
+///
+/// The example demonstrates how to use this library to open a registry key,
+/// retrieve a value, and print it to the console.
+library;
 
 export 'src/models/models.dart';
 export 'src/registry.dart';
