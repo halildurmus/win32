@@ -6,15 +6,13 @@ environment:
   sdk: '^3.1.0'
 
 dependencies:
+  bitsdojo_window: ^0.1.5
+  fluent_ui: ^4.7.4
   flutter:
     sdk: flutter
-
-  fluent_ui: ^4.6.0
-  win32_registry: ^1.1.0
-  
-  win32_gamepad: 
+  win32_gamepad:
     path: ../..
-  bitsdojo_window: ^0.1.5
+  win32_registry: ^1.1.1
 
 flutter:
   uses-material-design: true
@@ -23,5 +21,5 @@ dev_dependencies:
   dartwindows_lints: ^1.0.0
 
 dependency_overrides:
-  win32: ^5.0.0
   intl: ^0.18.0
+  win32: ^5.0.7

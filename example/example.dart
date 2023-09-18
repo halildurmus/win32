@@ -5,15 +5,18 @@ import 'package:win32_gamepad/win32_gamepad.dart';
 void main() {
   for (var idx = 0; idx < 4; idx++) {
     final gamepad = Gamepad(idx);
-    print(
-        'Gamepad $idx is ${gamepad.state.isConnected ? 'connected' : 'disconnected'}.');
+    final connectionStatus =
+        gamepad.state.isConnected ? 'connected' : 'disconnected';
+    print('Gamepad $idx is $connectionStatus.');
   }
 
   print('Testing first gamepad.');
   final gamepad = Gamepad(0);
   if (gamepad.isConnected) {
-    print('Battery type is ${gamepad.gamepadBatteryInfo.batteryType.name}.');
-    print('Battery level is ${gamepad.gamepadBatteryInfo.batteryLevel.name}.');
+    final GamepadBatteryInfo(:batteryLevel, :batteryType) =
+        gamepad.gamepadBatteryInfo;
+    print('Battery type is ${batteryType.name}.');
+    print('Battery level is ${batteryLevel.name}.');
 
     print('Vibrating left motor (half intensity).');
     gamepad.vibrate(leftMotorSpeed: 32767);
