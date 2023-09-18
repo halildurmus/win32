@@ -1,3 +1,9 @@
+## 2.0.10
+
+- Improved code quality.
+- Improved documentation.
+- Added example for selecting a directory.
+
 ## 2.0.9
 
 - Add `getFiles()` method into the `OpenFilePicker` to enable selecting
