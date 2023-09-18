@@ -71,6 +71,8 @@ abstract class FileDialog {
   int hWndOwner = NULL;
 
   /// Add a known folder to the `Quick Access` list.
+  ///
+  /// On Windows 11, this may appear under the `Application Links` node.
   void addPlace(WindowsKnownFolder folder, Place location) {
     final publicMusicFolder = calloc<GUID>();
     final ppkf = calloc<Pointer<COMObject>>();
