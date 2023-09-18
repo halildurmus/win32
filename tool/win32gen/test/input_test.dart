@@ -5,10 +5,11 @@ import 'package:win32gen/win32gen.dart';
 import 'package:winmd/winmd.dart';
 
 void main() {
-  test('All functions in JSON file map to methods in Win32 metadata', () {
+  test('All functions in JSON file map to methods in Win32 metadata', () async {
     final functionsToGenerate = loadFunctionsFromJson();
 
-    final scope = MetadataStore.getWin32Scope();
+    final scope =
+        await MetadataStore.loadWin32Metadata(version: win32MetadataVersion);
     final apis =
         scope.typeDefs.where((typeDef) => typeDef.name.endsWith('Apis'));
 
@@ -28,5 +29,7 @@ void main() {
             'the metadata. There were ${method.length} matching items.');
       }
     }
+
+    MetadataStore.close();
   }, skip: 'Waiting for Windows 11 on GitHub Actions hosted runners');
 }

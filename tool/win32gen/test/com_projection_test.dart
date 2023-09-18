@@ -5,7 +5,12 @@ import 'package:win32gen/win32gen.dart';
 import 'package:winmd/winmd.dart';
 
 void main() {
-  final scope = MetadataStore.getWin32Scope();
+  late Scope scope;
+
+  setUpAll(() async {
+    scope =
+        await MetadataStore.loadWin32Metadata(version: win32MetadataVersion);
+  });
 
   test('COM method strings are projected to Dart accurately', () {
     final iNetwork = scope
@@ -224,4 +229,6 @@ void main() {
     expect(next, isNot(isA<ComGetPropertyProjection>()));
     expect(next, isA<ComMethodProjection>());
   });
+
+  tearDownAll(MetadataStore.close);
 }

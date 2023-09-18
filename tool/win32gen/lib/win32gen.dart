@@ -2,6 +2,8 @@
 /// metadata.
 library win32gen;
 
+export 'src/constants.dart';
+
 export 'src/model/exclusions.dart';
 export 'src/model/false_properties.dart';
 export 'src/model/functions.dart';

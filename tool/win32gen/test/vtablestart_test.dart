@@ -9,7 +9,7 @@ import 'package:win32gen/win32gen.dart';
 import 'package:winmd/winmd.dart';
 
 void main() {
-  test('vTableStart for COM types', () {
+  test('vTableStart for COM types', () async {
     const testedTypes = <String, int>{
       'Windows.Win32.Globalization.IEnumSpellingError': 3,
       'Windows.Win32.Globalization.ISpellChecker': 3,
@@ -61,7 +61,8 @@ void main() {
       'Windows.Win32.UI.Shell.IShellItemFilter': 3,
     };
 
-    final scope = MetadataStore.getWin32Scope();
+    final scope =
+        await MetadataStore.loadWin32Metadata(version: win32MetadataVersion);
 
     for (final type in testedTypes.keys) {
       final typeDef = scope.findTypeDef(type);
@@ -74,5 +75,7 @@ void main() {
             reason: typeDef.name);
       }
     }
+
+    MetadataStore.close();
   });
 }

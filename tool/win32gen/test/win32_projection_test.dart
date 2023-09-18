@@ -5,8 +5,14 @@ import 'package:win32gen/win32gen.dart';
 import 'package:winmd/winmd.dart';
 
 void main() {
+  late Scope scope;
+
+  setUpAll(() async {
+    scope =
+        await MetadataStore.loadWin32Metadata(version: win32MetadataVersion);
+  });
+
   test('Special types exist in metadata', () {
-    final scope = MetadataStore.getWin32Scope();
     for (final specialType in specialTypes.keys
         .where((type) => type.startsWith('Windows.Win32'))) {
       expect(scope.findTypeDef(specialType), isNotNull,
@@ -15,8 +21,6 @@ void main() {
   });
 
   test('Packing aligment correct for non-packed struct', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final struct =
         scope.findTypeDef('Windows.Win32.Graphics.Printing.JOB_INFO_1W');
     expect(struct, isNotNull);
@@ -26,8 +30,6 @@ void main() {
   });
 
   test('Packing aligment correct for packed but non-nested struct', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final struct =
         scope.findTypeDef('Windows.Win32.UI.WindowsAndMessaging.DLGTEMPLATE');
     expect(struct, isNotNull);
@@ -37,8 +39,6 @@ void main() {
   });
 
   test('Packing aligment does not overflow for structs with enums', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final struct = scope.findTypeDef(
         'Windows.Win32.Devices.Bluetooth.BLUETOOTH_AUTHENTICATION_METHOD');
     expect(struct, isNotNull);
@@ -47,4 +47,6 @@ void main() {
         StructProjection(struct!, 'BLUETOOTH_AUTHENTICATION_METHOD');
     expect(projection.toString(), isNot(contains('@Packed')));
   });
+
+  tearDownAll(MetadataStore.close);
 }

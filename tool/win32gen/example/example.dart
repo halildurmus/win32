@@ -1,9 +1,7 @@
 import 'package:win32gen/win32gen.dart';
 import 'package:winmd/winmd.dart';
 
-final scope = MetadataStore.getWin32Scope();
-
-void printStruct() {
+void printStruct(Scope scope) {
   final struct = scope
       .findTypeDef('Windows.Win32.NetworkManagement.Dhcp.DHCP_ALL_OPTIONS');
   if (struct != null) {
@@ -12,7 +10,7 @@ void printStruct() {
   }
 }
 
-void printFunction() {
+void printFunction(Scope scope) {
   final typeDef =
       scope.findTypeDef('Windows.Win32.System.StationsAndDesktops.Apis');
   final method = typeDef?.findMethod('BroadcastSystemMessageW');
@@ -23,7 +21,7 @@ void printFunction() {
   }
 }
 
-void printCallback() {
+void printCallback(Scope scope) {
   final callback = scope
       .findTypeDef('Windows.Win32.System.StationsAndDesktops.DESKTOPENUMPROCW');
 
@@ -33,7 +31,7 @@ void printCallback() {
   }
 }
 
-void printComMethod() {
+void printComMethod(Scope scope) {
   final interface =
       scope.findTypeDef('Windows.Win32.UI.Shell.IDesktopWallpaper');
   final method = interface?.findMethod('SetWallpaper');
@@ -44,7 +42,7 @@ void printComMethod() {
   }
 }
 
-void printComGetProperty() {
+void printComGetProperty(Scope scope) {
   final interface = scope.findTypeDef(
       'Windows.Win32.Security.Cryptography.Certificates.ICEnroll4');
   final method = interface?.findMethod('get_IncludeSubjectKeyID');
@@ -55,7 +53,7 @@ void printComGetProperty() {
   }
 }
 
-void printComSetProperty() {
+void printComSetProperty(Scope scope) {
   final interface = scope.findTypeDef(
       'Windows.Win32.Networking.ActiveDirectory.IADsPropertyEntry');
   final method = interface?.findMethod('put_Name');
@@ -66,7 +64,7 @@ void printComSetProperty() {
   }
 }
 
-void printComInterface() {
+void printComInterface(Scope scope) {
   final interface =
       scope.findTypeDef('Windows.Win32.Media.DirectShow.ITuningSpace');
 
@@ -76,7 +74,7 @@ void printComInterface() {
   }
 }
 
-void printComClass() {
+void printComClass(Scope scope) {
   final comClass = scope.findTypeDef('Windows.Win32.UI.Shell.IFileOpenDialog');
 
   if (comClass != null) {
@@ -85,6 +83,9 @@ void printComClass() {
   }
 }
 
-void main() {
-  printStruct();
+void main() async {
+  final scope =
+      await MetadataStore.loadWin32Metadata(version: win32MetadataVersion);
+  printStruct(scope);
+  MetadataStore.close();
 }

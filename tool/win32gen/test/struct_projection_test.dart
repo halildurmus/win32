@@ -5,11 +5,16 @@ import 'package:win32gen/win32gen.dart';
 import 'package:winmd/winmd.dart';
 
 void main() {
+  late Scope scope;
+
+  setUpAll(() async {
+    scope =
+        await MetadataStore.loadWin32Metadata(version: win32MetadataVersion);
+  });
+
   test('Packed structs projected correctly 1', () {
     // DWM_BLURBEHIND contains a BOOL, which appears in Win32 metadata as a
     // struct, but that shouldn't stop it being packed.
-    final scope = MetadataStore.getWin32Scope();
-
     final typeDef =
         scope.findTypeDef('Windows.Win32.Graphics.Dwm.DWM_BLURBEHIND');
 
@@ -19,8 +24,6 @@ void main() {
   });
 
   test('Packed structs projected correctly 2', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final typeDef =
         scope.findTypeDef('Windows.Win32.Media.Multimedia.MCI_OPEN_PARMSW');
 
@@ -30,8 +33,6 @@ void main() {
   });
 
   test('Packed structs projected correctly 3', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final typeDef = scope
         .findTypeDef('Windows.Win32.Media.Multimedia.YAMAHA_ADPCMWAVEFORMAT');
 
@@ -42,8 +43,6 @@ void main() {
   });
 
   test('Packed structs projected correctly 4', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final typeDef =
         scope.findTypeDef('Windows.Win32.Devices.Bluetooth.SOCKADDR_BTH');
 
@@ -51,4 +50,6 @@ void main() {
     expect(structProjection.packingAlignment, equals(1));
     expect(structProjection.classPreamble, contains('@Packed(1)'));
   });
+
+  tearDownAll(MetadataStore.close);
 }

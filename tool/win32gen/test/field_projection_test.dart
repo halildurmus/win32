@@ -5,9 +5,14 @@ import 'package:win32gen/win32gen.dart';
 import 'package:winmd/winmd.dart';
 
 void main() {
-  test('BOOL types are projected to int', () {
-    final scope = MetadataStore.getWin32Scope();
+  late Scope scope;
 
+  setUpAll(() async {
+    scope =
+        await MetadataStore.loadWin32Metadata(version: win32MetadataVersion);
+  });
+
+  test('BOOL types are projected to int', () {
     final typeDef =
         scope.findTypeDef('Windows.Win32.Graphics.Dwm.DWM_BLURBEHIND')!;
 
@@ -20,8 +25,6 @@ void main() {
   });
 
   test('Structs are projected appropriately', () {
-    final scope = MetadataStore.getWin32Scope();
-
     final typeDef = scope
         .findTypeDef('Windows.Win32.Media.Multimedia.YAMAHA_ADPCMWAVEFORMAT')!;
 
@@ -31,4 +34,6 @@ void main() {
     final fieldProjection = FieldProjection(fEnable);
     expect(fieldProjection.toString(), contains('external WAVEFORMATEX'));
   });
+
+  tearDownAll(MetadataStore.close);
 }
