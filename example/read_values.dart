@@ -4,14 +4,14 @@ void main() {
   const keyPath = r'Software\Microsoft\Windows NT\CurrentVersion';
   final key = Registry.openPath(RegistryHive.localMachine, path: keyPath);
 
-  print('Values:\n');
+  print('Values:');
   for (final value in key.values) {
     print(' - ${value.toString()}');
   }
 
   print('\n${'-' * 80}\n');
 
-  print('Subkeys:\n');
+  print('Subkeys:');
   for (final subkey in key.subkeyNames) {
     print(' - $subkey');
   }
