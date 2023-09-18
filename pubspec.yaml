@@ -6,8 +6,9 @@ repository: https://github.com/dart-windows/win32_registry
 issue_tracker: https://github.com/dart-windows/win32_registry/issues
 
 topics:
-  - win32
   - registry
+  - win32
+  - ffi
   - windows
 
 environment:
