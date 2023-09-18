@@ -9,8 +9,14 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'filedialog.dart';
+import 'models/models.dart';
 
+/// A picker that allows the user to select a file from the file system.
 class OpenFilePicker extends FileDialog {
+  OpenFilePicker() : super() {
+    fileMustExist = true;
+  }
+
   /// Indicates to the Open dialog box that the preview pane should always be
   /// displayed.
   bool? forcePreviewPaneOn;
@@ -18,10 +24,6 @@ class OpenFilePicker extends FileDialog {
   /// The folder used as a default if there is not a recently used folder
   /// value available.
   String? initialDirectory;
-
-  OpenFilePicker() : super() {
-    fileMustExist = true;
-  }
 
   /// Returns a [File] object from the selected file.
   ///
@@ -203,8 +205,9 @@ class OpenFilePicker extends FileDialog {
 
       for (final place in customPlaces) {
         final hr = fileDialog.addPlace(
-            place.item.ptr.cast<Pointer<COMObject>>().value,
-            place.place == Place.bottom ? FDAP.FDAP_BOTTOM : FDAP.FDAP_TOP);
+          place.item.ptr.cast<Pointer<COMObject>>().value,
+          place.place == Place.bottom ? FDAP.FDAP_BOTTOM : FDAP.FDAP_TOP,
+        );
         if (FAILED(hr)) throw WindowsException(hr);
       }
     });

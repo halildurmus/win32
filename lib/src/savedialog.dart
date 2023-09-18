@@ -10,6 +10,7 @@ import 'package:win32/win32.dart';
 
 import 'filedialog.dart';
 
+/// A picker that allows the user to save a file into the file system.
 class SaveFilePicker extends FileDialog {
   /// The folder used as a default if there is not a recently used folder
   /// value available.

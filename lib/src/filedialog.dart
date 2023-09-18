@@ -7,39 +7,39 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'windowsknownfolder.dart';
+import 'models/models.dart';
 
-enum Place { top, bottom }
-
-class CustomPlace {
-  final IShellItem item;
-  final Place place;
-
-  const CustomPlace(this.item, this.place);
-}
-
+/// An abstract class that represents a file dialog on Windows.
 abstract class FileDialog {
-  /// A list of custom places. Use [addPlace] to add an item to this list.
+  FileDialog() {
+    final hr = CoInitializeEx(
+        nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
+    if (FAILED(hr)) throw WindowsException(hr);
+  }
+
+  /// A list of custom places.
+  ///
+  /// Use [addPlace] to add an item to this list.
   final customPlaces = <CustomPlace>[];
 
-  /// Sets the title of the dialog.
+  /// The title of the dialog.
   String title = '';
 
-  /// Sets the text of the label next to the file name edit box.
+  /// The text of the label next to the file name edit box.
   String fileNameLabel = '';
 
-  /// Sets the file name that appears in the File name edit box when that dialog
-  /// box is opened.
+  /// The file name that appears in the File name edit box when that dialog box
+  /// is opened.
   String fileName = '';
 
-  /// Sets the default extension to be added to file names.
+  /// The default extension to be added to file names.
   ///
-  /// This string should not include a leading period. For example, "jpg" is
-  /// correct, while ".jpg" is not. if this field is set, the dialog will update
+  /// This string should not include a leading period. For example, `jpg` is
+  /// correct, while `.jpg` is not. If this field is set, the dialog will update
   /// the default extension automatically when the user chooses a new file type.
   String? defaultExtension;
 
-  /// Sets a filter for the file types shown.
+  /// The filter for the file types shown.
   ///
   /// When using the Open dialog, the file types declared here are used to
   /// filter the view. When using the Save dialog, these values determine which
@@ -58,21 +58,19 @@ abstract class FileDialog {
   /// Libraries, Computer, and Network) shown in the navigation pane.
   bool hidePinnedPlaces = false;
 
-  /// Ensures that returned items are file system items.
-  ///
-  /// True by default.
+  /// Ensure that returned items are file system items.
   bool forceFileSystemItems = true;
 
-  /// The item returned must exist. This is a default value for the Open dialog.
+  /// The item returned must exist.
   bool fileMustExist = false;
 
   /// Don't change the current working directory.
   bool isDirectoryFixed = false;
 
-  /// Set hWnd of dialog
+  /// HWND of dialog.
   int hWndOwner = NULL;
 
-  /// Add a known folder to the 'Quick Access' list.
+  /// Add a known folder to the `Quick Access` list.
   void addPlace(WindowsKnownFolder folder, Place location) {
     final publicMusicFolder = calloc<GUID>();
     final ppkf = calloc<Pointer<COMObject>>();
@@ -91,17 +89,12 @@ abstract class FileDialog {
       if (FAILED(hr)) throw WindowsException(hr);
 
       final shellItem = IShellItem(psi.cast());
-      customPlaces.add(CustomPlace(shellItem, location));
+      final place = CustomPlace(shellItem, location);
+      customPlaces.add(place);
     } finally {
       free(publicMusicFolder);
       free(ppkf);
       free(riid);
     }
-  }
-
-  FileDialog() {
-    final hr = CoInitializeEx(
-        nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
-    if (FAILED(hr)) throw WindowsException(hr);
   }
 }

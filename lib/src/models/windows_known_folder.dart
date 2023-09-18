@@ -6,7 +6,7 @@
 
 import 'package:win32/win32.dart';
 
-/// An enum for each of the documented Windows known folders.
+/// Represents the documented Windows known folders.
 enum WindowsKnownFolder {
   /// The file system directory that is used to store administrative tools for
   /// an individual user. The MMC will save customized consoles to this
@@ -237,6 +237,7 @@ enum WindowsKnownFolder {
   /// %SYSTEMROOT% environment variables. A typical path is C:\Windows.
   Windows(FOLDERID_Windows);
 
+  /// The GUID of the folder.
   final String guid;
 
   const WindowsKnownFolder(this.guid);

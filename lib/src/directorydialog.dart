@@ -9,7 +9,9 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'filedialog.dart';
+import 'models/models.dart';
 
+/// A picker that allows the user to select a directory from the file system.
 class DirectoryPicker extends FileDialog {
   /// Returns a [Directory] selected by the user using a common file open
   /// dialog.
@@ -48,8 +50,9 @@ class DirectoryPicker extends FileDialog {
 
       for (final place in customPlaces) {
         final hr = dialog.addPlace(
-            place.item.ptr.cast<Pointer<COMObject>>().value,
-            place.place == Place.bottom ? FDAP.FDAP_BOTTOM : FDAP.FDAP_TOP);
+          place.item.ptr.cast<Pointer<COMObject>>().value,
+          place.place == Place.bottom ? FDAP.FDAP_BOTTOM : FDAP.FDAP_TOP,
+        );
         if (FAILED(hr)) throw WindowsException(hr);
       }
 
