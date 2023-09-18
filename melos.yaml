@@ -1,0 +1,112 @@
+name: win32_gamepad
+repository: https://github.com/dart-windows/win32_gamepad
+
+packages: [.]
+
+command:
+  bootstrap:
+    # It seems so that running "pub get" in parallel has some issues (like
+    # https://github.com/dart-lang/pub/issues/3404). Disabling this feature
+    # makes the CI much more stable.
+    runPubGetInParallel: false
+  version:
+    linkToCommits: true
+
+scripts:
+  test:
+    description: Run `dart test`.
+    run: dart test
+
+  analyze:
+    description: Run `dart analyze --fatal-infos --fatal-warnings .`.
+    run: dart analyze --fatal-infos --fatal-warnings .
+
+  clean:
+    description: >
+      Clean things very deeply, can be used to establish "pristine checkout"
+      status.
+    run: git clean -x -d -f -q
+
+  format:
+    description: Run `dart format .`.
+    run: dart format .
+
+  qualitycheck:
+    description: >
+      Run all targets generally expected in CI for a full local quality check.
+    run: >
+      melos run clean &&
+      melos clean &&
+      melos bootstrap &&
+      melos run analyze &&
+      melos run format &&
+      melos run test
+
+  add-license-header:
+    description: Add a license header to all necessary files.
+    # If you add here another --ignore flag, add it also to
+    # "check-license-header".
+    run: |
+      addlicense -f header_template.txt \
+        --ignore "**/*.yml" \
+        --ignore "**/*.yaml" \
+        --ignore "**/*.xml" \
+        --ignore "**/*.g.dart" \
+        --ignore "**/*.sh" \
+        --ignore "**/*.html" \
+        --ignore "**/*.js" \
+        --ignore "**/*.ts" \
+        --ignore "**/*.g.h" \
+        --ignore "**/*.g.m" \
+        --ignore "**/*.rb" \
+        --ignore "**/*.txt" \
+        --ignore "**/*.cmake" \
+        --ignore "**/Runner/AppDelegate.swift" \
+        --ignore "**/Runner/MainFlutterWindow.swift" \
+        --ignore "**/Runner/Runner-Bridging-Header.h" \
+        --ignore "**/Runner/AppDelegate.h" \
+        --ignore "**/Runner/AppDelegate.m" \
+        --ignore "**/Runner/main.m" \
+        --ignore "**/MainActivity.kt" \
+        --ignore "**/MainActivity.java" \
+        --ignore "**/FlutterMultiDexApplication.java" \
+        --ignore "**/GeneratedPluginRegistrant.swift" \
+        --ignore "**/Pods/**" \
+        --ignore "**/flutter/generated_plugin_registrant.h" \
+        --ignore "**/flutter/generated_plugin_registrant.cc" \
+        .
+
+  check-license-header:
+    description: Verify that all necessary files have a license header.
+    # If you add here another --ignore flag, add it also to
+    # "add-license-header".
+    run: |
+      addlicense -f header_template.txt \
+        --check \
+        --ignore "**/*.yml" \
+        --ignore "**/*.yaml" \
+        --ignore "**/*.xml" \
+        --ignore "**/*.g.dart" \
+        --ignore "**/*.sh" \
+        --ignore "**/*.html" \
+        --ignore "**/*.js" \
+        --ignore "**/*.ts" \
+        --ignore "**/*.g.h" \
+        --ignore "**/*.g.m" \
+        --ignore "**/*.rb" \
+        --ignore "**/*.txt" \
+        --ignore "**/*.cmake" \
+        --ignore "**/Runner/AppDelegate.swift" \
+        --ignore "**/Runner/MainFlutterWindow.swift" \
+        --ignore "**/Runner/Runner-Bridging-Header.h" \
+        --ignore "**/Runner/AppDelegate.h" \
+        --ignore "**/Runner/AppDelegate.m" \
+        --ignore "**/Runner/main.m" \
+        --ignore "**/MainActivity.kt" \
+        --ignore "**/MainActivity.java" \
+        --ignore "**/FlutterMultiDexApplication.java" \
+        --ignore "**/GeneratedPluginRegistrant.swift" \
+        --ignore "**/Pods/**" \
+        --ignore "**/flutter/generated_plugin_registrant.h" \
+        --ignore "**/flutter/generated_plugin_registrant.cc" \
+        .
