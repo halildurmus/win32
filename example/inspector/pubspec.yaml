@@ -3,7 +3,7 @@ description: A demo project that shows status of gamepads attached to Windows.
 publish_to: 'none'
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: '^3.1.0'
 
 dependencies:
   flutter:
@@ -20,7 +20,7 @@ flutter:
   uses-material-design: true
 
 dev_dependencies:
-  flutter_lints: ^2.0.1
+  dartwindows_lints: ^1.0.0
 
 dependency_overrides:
   win32: ^5.0.0

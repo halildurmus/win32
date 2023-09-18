@@ -5,7 +5,7 @@ repository: https://github.com/timsneath/win32_gamepad
 issue_tracker: https://github.com/timsneath/win32_gamepad/issues
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: '^3.1.0'
 
 platforms:
   windows:
@@ -15,5 +15,5 @@ dependencies:
   win32: ^5.0.0
 
 dev_dependencies:
-  lints: ^2.1.0
+  dartwindows_lints: ^1.0.0
   test: ^1.24.2
