@@ -1,12 +1,13 @@
 import 'package:win32/win32.dart';
 
-/// A data type stored in the Windows registry. These do not directly map onto
-/// either Win32 or Dart types, but represent the kinds of entities that the
-/// registry understands.
+/// A data type stored in the Windows registry.
+///
+/// These do not directly map onto either Win32 or Dart types, but represent the
+/// kinds of entities that the registry understands.
 ///
 /// More information about the kinds of data that can be found in the registry
 /// can be found here:
-/// https://docs.microsoft.com/en-us/windows/win32/sysinfo/registry-value-types
+/// https://learn.microsoft.com/windows/win32/sysinfo/registry-value-types
 enum RegistryValueType {
   /// Binary data in any form. This value is equivalent to the Windows API
   /// registry data type `REG_BINARY`.

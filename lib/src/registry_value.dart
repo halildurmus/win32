@@ -4,19 +4,30 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'registry_value_type.dart';
-import 'utils.dart';
+import 'models/models.dart';
 
-/// An individual data value in the Windows Registry.
+/// Represents an individual data value in the Windows Registry.
 class RegistryValue {
-  final String name;
-  final RegistryValueType type;
-  final Object data;
-
+  /// Creates an instance of [RegistryValue] with the specified [name], [type],
+  /// and [data].
   const RegistryValue(this.name, this.type, this.data);
 
+  /// The name of the Registry value.
+  final String name;
+
+  /// The type of the Registry value.
+  final RegistryValueType type;
+
+  /// The data associated with the Registry value.
+  final Object data;
+
+  /// Constructs a [RegistryValue] from Win32 Registry data.
   factory RegistryValue.fromWin32(
-          String name, int type, Pointer<Uint8> byteData, int dataLength) =>
+    String name,
+    int type,
+    Pointer<Uint8> byteData,
+    int dataLength,
+  ) =>
       switch (type) {
         REG_SZ => RegistryValue(name, RegistryValueType.string,
             byteData.cast<Utf16>().toDartString()),
@@ -36,6 +47,7 @@ class RegistryValue {
         _ => RegistryValue(name, RegistryValueType.unknown, 0)
       };
 
+  /// Converts the [RegistryValue] to Win32-compatible data.
   PointerData get toWin32 {
     switch (type) {
       case RegistryValueType.int32:
@@ -58,7 +70,8 @@ class RegistryValue {
         final dataList = Uint8List.fromList(data as List<int>);
         final ptr = dataList.allocatePointer();
         return PointerData(ptr, dataList.length);
-      default:
+      case RegistryValueType.none:
+      case RegistryValueType.unknown:
         return PointerData(nullptr, 0);
     }
   }

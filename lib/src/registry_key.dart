@@ -3,9 +3,9 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'registry_key_info.dart';
+import 'models/registry_key_info.dart';
+import 'models/registry_value_type.dart';
 import 'registry_value.dart';
-import 'registry_value_type.dart';
 import 'utils.dart';
 
 /// An individual node in the Windows registry.
@@ -19,13 +19,17 @@ import 'utils.dart';
 /// requires; other times, an application opens a key and uses the values
 /// associated with the key.
 class RegistryKey {
+  /// Creates an instance of the [RegistryKey] with the specified handle.
+  const RegistryKey(this.hkey);
+
   /// A handle to the current registry key
   final int hkey;
 
-  const RegistryKey(this.hkey);
-
-  /// Creates the specified registry key. If the key already exists, the
-  /// function opens it. Note that key names are not case sensitive.
+  /// Creates the specified registry key.
+  ///
+  /// If the key already exists, the function opens it.
+  ///
+  /// Note that key names are not case sensitive.
   RegistryKey createKey(String keyName) {
     final lpSubKey = keyName.toNativeUtf16();
     final phkResult = calloc<HKEY>();
@@ -40,8 +44,12 @@ class RegistryKey {
   }
 
   /// Deletes a subkey and its values from the specified platform-specific view
-  /// of the registry. Set [recursive] to `true` if you want to delete subkey
-  /// with all its subkeys. Note that key names are not case sensitive.
+  /// of the registry.
+  ///
+  /// Set [recursive] to `true` if you want to delete subkey with all its
+  /// subkeys.
+  ///
+  /// Note that key names are not case sensitive.
   void deleteKey(String keyName, {bool recursive = false}) {
     final lpSubKey = keyName.toNativeUtf16();
     try {
@@ -105,10 +113,8 @@ class RegistryKey {
       final pvData = arena<BYTE>(pcbData.value);
       retcode =
           RegGetValue(hkey, lpSubKey, lpValue, flags, pdwType, pvData, pcbData);
-      final registryValue = RegistryValue.fromWin32(
+      return RegistryValue.fromWin32(
           lpValue.toDartString(), pdwType.value, pvData, pcbData.value);
-
-      return registryValue;
     });
   }
 
@@ -199,7 +205,6 @@ class RegistryKey {
       }
 
       final lastWriteTime = convertToDartDateTime(lpftLastWriteTime);
-
       return RegistryKeyInfo(
           lpClass.toDartString(),
           lpcSubKeys.value,
@@ -216,8 +221,6 @@ class RegistryKey {
   /// Enumerates the values for the specified open registry key.
   Iterable<RegistryValue> get values sync* {
     final keyInfo = queryInfo();
-
-    using((arena) {});
 
     // Allocate enough length for the maximum value name (including extra for
     // the null terminator).
@@ -269,9 +272,7 @@ class RegistryKey {
 
         final retcode = RegEnumKeyEx(
             hkey, idx, lpName, lpcchName, nullptr, nullptr, nullptr, nullptr);
-        if (retcode == ERROR_SUCCESS) {
-          yield lpName.toDartString();
-        }
+        if (retcode == ERROR_SUCCESS) yield lpName.toDartString();
       }
     } finally {
       free(lpName);
