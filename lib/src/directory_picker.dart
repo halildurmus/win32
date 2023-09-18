@@ -8,7 +8,7 @@ import 'dart:io';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'filedialog.dart';
+import 'file_dialog.dart';
 import 'models/models.dart';
 
 /// A picker that allows the user to select a directory from the file system.

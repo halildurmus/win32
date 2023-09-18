@@ -6,8 +6,8 @@
 /// common dialog controls.
 library;
 
-export 'src/directorydialog.dart';
-export 'src/filedialog.dart';
+export 'src/directory_picker.dart';
+export 'src/file_dialog.dart';
 export 'src/models/models.dart';
-export 'src/opendialog.dart';
-export 'src/savedialog.dart';
+export 'src/open_file_picker.dart';
+export 'src/save_file_picker.dart';
