@@ -1,3 +1,12 @@
+## 5.0.8
+
+- Add `NetGetAadJoinInformation` and `NetFreeAadJoinInformation` APIs (#748,
+  thanks to @solbirn)
+- Fix a bug in the `initApp` function, which caused programs to crash when
+  running AOT-compiled executables (#750)
+- Fix a bug in the `shell_notify_icon` example to ensure compatibility with
+  Windows 11 (#752)
+
 ## 5.0.7
 
 - Add `MONITORINFOEX` struct (#743)
