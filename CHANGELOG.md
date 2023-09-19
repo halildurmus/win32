@@ -1,3 +1,7 @@
+## 2.0.11
+
+- Improved code quality.
+
 ## 2.0.10
 
 - Improved code quality.

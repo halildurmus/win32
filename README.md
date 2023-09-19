@@ -65,7 +65,13 @@ For a more advanced demonstration, you can explore a Flutter application in the
 `example\wallpaper\` directory. This application illustrates how to select an
 image file and set it as your desktop wallpaper.
 
+## Feature requests and bugs
+
+Please file feature requests and bugs at the
+[issue tracker][issue_tracker_link].
+
 [dart_windows_link]: https://github.com/dart-windows
+[issue_tracker_link]: https://github.com/dart-windows/filepicker_windows/issues
 [language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
 [language_link]: https://dart.dev
 [license_badge]: https://img.shields.io/github/license/dart-windows/filepicker_windows?color=blue

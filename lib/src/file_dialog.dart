@@ -12,9 +12,7 @@ import 'models/models.dart';
 /// An abstract class that represents a file dialog on Windows.
 abstract class FileDialog {
   FileDialog() {
-    final hr = CoInitializeEx(
-        nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
-    if (FAILED(hr)) throw WindowsException(hr);
+    _initializeCom();
   }
 
   /// A list of custom places.
@@ -69,6 +67,18 @@ abstract class FileDialog {
 
   /// HWND of dialog.
   int hWndOwner = NULL;
+
+  /// Whether COM has been initialized.
+  static bool _isComInitialized = false;
+
+  void _initializeCom() {
+    if (!_isComInitialized) {
+      final hr = CoInitializeEx(
+          nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
+      if (FAILED(hr)) throw WindowsException(hr);
+      _isComInitialized = true;
+    }
+  }
 
   /// Add a known folder to the `Quick Access` list.
   ///
