@@ -33,11 +33,14 @@ class Gamepad {
   /// The status of the buttons, triggers and thumbsticks on the gamepad.
   late GamepadState state;
 
+  /// Whether COM has been initialized.
   static bool _isComInitialized = false;
 
   void _initializeCom() {
     if (!_isComInitialized) {
-      CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
+      final hr = CoInitializeEx(
+          nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
+      if (FAILED(hr)) throw WindowsException(hr);
       _isComInitialized = true;
     }
   }
