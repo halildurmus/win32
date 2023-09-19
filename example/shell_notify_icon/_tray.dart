@@ -1,10 +1,12 @@
 import 'dart:ffi';
+
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import '_app.dart' as app;
 import '_menu.dart' as menu;
 
+final _guid = Guid.generate().toNativeGUID();
 final _nid = calloc<NOTIFYICONDATA>()..ref.cbSize = sizeOf<NOTIFYICONDATA>();
 
 bool _trayWndProc(int hWnd, int msg, int wParam, int lParam) {
@@ -31,6 +33,7 @@ void addIcon({required int hWndParent}) {
     ..uFlags = NIF_ICON | NIF_TIP | NIF_MESSAGE | NIF_SHOWTIP | NIF_GUID
     ..szTip = 'Dart tray'
     ..uCallbackMessage = app.EVENT_TRAY_NOTIFY
+    ..guidItem = _guid.ref
     ..hIcon = app.loadDartIcon();
 
   Shell_NotifyIcon(NIM_ADD, _nid);
@@ -43,6 +46,7 @@ void addIcon({required int hWndParent}) {
 
 void removeIcon() {
   Shell_NotifyIcon(NIM_DELETE, _nid);
+  free(_guid);
   free(_nid);
   app.deregisterWndProc(_trayWndProc);
 }
