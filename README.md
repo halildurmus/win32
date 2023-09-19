@@ -42,6 +42,11 @@ a simple game loop:
 
 This can be found in the `example\inspector` directory.
 
+## Feature requests and bugs
+
+Please file feature requests and bugs at the
+[issue tracker][issue_tracker_link].
+
 [dart_windows_link]: https://github.com/dart-windows
 [demo_image_link]: https://raw.githubusercontent.com/dart-windows/win32_gamepad/main/screenshots/demo.png
 [example_link]: https://pub.dev/packages/win32_gamepad/example
