@@ -1,0 +1,27 @@
+name: win32_clipboard
+description: A starting point for Dart libraries or applications.
+version: 0.1.0
+homepage: https://win32.pub
+repository: https://github.com/dart-windows/win32_clipboard
+issue_tracker: https://github.com/dart-windows/win32_clipboard/issues
+
+topics:
+  - clipboard
+  - win32
+  - ffi
+  - windows
+
+environment:
+  sdk: ^3.1.0
+
+platforms:
+  windows:
+
+dependencies:
+  win32: ^5.0.8
+
+dev_dependencies:
+  checks: ^0.2.2
+  dartwindows_lints: ^1.0.0
+  melos: ^3.1.1
+  test: ^1.24.6
