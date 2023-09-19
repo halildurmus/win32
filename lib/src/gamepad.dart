@@ -17,6 +17,9 @@ class Gamepad {
   /// Creates an instance of [Gamepad] for the specified controller.
   ///
   /// The [controller] parameter represents the index of the gamepad controller.
+  ///
+  /// Up to four controllers may be connected to a system, numbered from `0` to
+  /// `3`.
   Gamepad(this.controller)
       : assert(controller >= 0 && controller < XUSER_MAX_COUNT) {
     _initializeCom();
@@ -25,7 +28,8 @@ class Gamepad {
 
   /// The identifier for the current controller.
   ///
-  /// Up to four controllers may be connected to a system, numbered from 0 to 3.
+  /// Up to four controllers may be connected to a system, numbered from `0` to
+  /// `3`.
   final int controller;
 
   int _packetNumber = -1;

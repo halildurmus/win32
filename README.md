@@ -32,15 +32,52 @@ method, which activates one of the two rumble motors on a typical gamepad.
 
 ## Example
 
-A simple example of using the gamepad is available [here][example_link].
+A simple example of using the gamepad:
 
-Alternatively, a more sophisticated example is available in the form of a
-Flutter app, which shows how you can use this to track the status of buttons in
-a simple game loop:
+```dart
+import 'dart:io';
+
+import 'package:win32_gamepad/win32_gamepad.dart';
+
+void main() {
+  for (var idx = 0; idx < 4; idx++) {
+    final gamepad = Gamepad(idx);
+    final connectionStatus =
+        gamepad.state.isConnected ? 'connected' : 'disconnected';
+    print('Gamepad $idx is $connectionStatus.');
+  }
+
+  print('Testing first gamepad.');
+  final gamepad = Gamepad(0);
+  if (gamepad.isConnected) {
+    final GamepadBatteryInfo(:batteryLevel, :batteryType) =
+        gamepad.gamepadBatteryInfo;
+    print('Battery type is ${batteryType.name}.');
+    print('Battery level is ${batteryLevel.name}.');
+
+    print('Vibrating left motor (half intensity).');
+    gamepad.vibrate(leftMotorSpeed: 32767);
+    sleep(const Duration(milliseconds: 1000));
+
+    print('Vibrating right motor (half intensity).');
+    gamepad.vibrate(rightMotorSpeed: 32767);
+    sleep(const Duration(milliseconds: 1000));
+
+    print('Vibrating both motors (full intensity).');
+    gamepad.vibrate(leftMotorSpeed: 65535, rightMotorSpeed: 65535);
+    sleep(const Duration(milliseconds: 1000));
+
+    print('Turning off vibration.');
+    gamepad.vibrate(leftMotorSpeed: 0, rightMotorSpeed: 0);
+  }
+}
+```
+
+Alternatively, a more sophisticated example is available in the
+`example\inspector\` directory in the form of a Flutter app that shows how you
+can use this to monitor the status of buttons in a simple game loop:
 
 ![image][demo_image_link]
-
-This can be found in the `example\inspector` directory.
 
 ## Feature requests and bugs
 
@@ -49,7 +86,6 @@ Please file feature requests and bugs at the
 
 [dart_windows_link]: https://github.com/dart-windows
 [demo_image_link]: https://raw.githubusercontent.com/dart-windows/win32_gamepad/main/screenshots/demo.png
-[example_link]: https://pub.dev/packages/win32_gamepad/example
 [issue_tracker_link]: https://github.com/dart-windows/win32_gamepad/issues
 [language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
 [language_link]: https://dart.dev

@@ -1,3 +1,7 @@
+## 1.0.7
+
+- Improved code quality.
+
 ## 1.0.6
 
 - Improved code quality.
