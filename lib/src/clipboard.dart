@@ -102,6 +102,23 @@ final class Clipboard {
   /// The number of different data formats currently on the clipboard.
   static int get numberOfFormats => CountClipboardFormats();
 
+  /// Registers a clipboard format with the given [name] and returns its id.
+  ///
+  /// If a format has already been registered with the given name, its id is
+  /// returned.
+  static int registerFormat(String name) {
+    final lpszFormat = name.toNativeUtf16();
+    try {
+      final formatId = RegisterClipboardFormat(lpszFormat);
+      if (formatId == 0) {
+        throw ClipboardException('Failed to register clipboard format: $name');
+      }
+      return formatId;
+    } finally {
+      free(lpszFormat);
+    }
+  }
+
   /// Stores the given [text] on the clipboard.
   static bool setText(String text) {
     try {
