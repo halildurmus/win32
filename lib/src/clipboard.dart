@@ -26,6 +26,43 @@ final class Clipboard {
     }
   }
 
+  /// Returns a list of the [ClipboardFormat]s currently available in the
+  /// clipboard.
+  ///
+  /// Returns an empty list if the clipboard is empty or the operation fails.
+  static List<ClipboardFormat> get formats {
+    if (isEmpty) return [];
+
+    try {
+      return _execute(() {
+        final formats = <ClipboardFormat>[];
+
+        using((arena) {
+          const maxChars = 256;
+          var currFormat = EnumClipboardFormats(NULL);
+
+          while (currFormat != 0) {
+            final nameBuffer = wsalloc(maxChars);
+            GetClipboardFormatName(currFormat, nameBuffer, maxChars);
+            String? nameString = nameBuffer.toDartString();
+            if (nameString.isEmpty) {
+              nameString = _clipboardFormats[currFormat];
+            }
+
+            final format = ClipboardFormat(currFormat, name: nameString);
+            formats.add(format);
+            currFormat = EnumClipboardFormats(currFormat);
+            free(nameBuffer);
+          }
+        });
+
+        return formats;
+      });
+    } on ClipboardException {
+      return [];
+    }
+  }
+
   /// Retrieves the text from the clipboard.
   ///
   /// Returns `null` if the clipboard doesn't contain text or the operation
@@ -107,4 +144,34 @@ final class Clipboard {
       }
     }
   }
+
+  /// A map of default clipboard format IDs to names.
+  static const _clipboardFormats = <int, String>{
+    CF_TEXT: 'CF_TEXT',
+    CF_BITMAP: 'CF_BITMAP',
+    CF_METAFILEPICT: 'CF_METAFILEPICT',
+    CF_SYLK: 'CF_SYLK',
+    CF_DIF: 'CF_DIF',
+    CF_TIFF: 'CF_TIFF',
+    CF_OEMTEXT: 'CF_OEMTEXT',
+    CF_DIB: 'CF_DIB',
+    CF_PALETTE: 'CF_PALETTE',
+    CF_PENDATA: 'CF_PENDATA',
+    CF_RIFF: 'CF_RIFF',
+    CF_WAVE: 'CF_WAVE',
+    CF_UNICODETEXT: 'CF_UNICODETEXT',
+    CF_ENHMETAFILE: 'CF_ENHMETAFILE',
+    CF_HDROP: 'CF_HDROP',
+    CF_LOCALE: 'CF_LOCALE',
+    CF_DIBV5: 'CF_DIBV5',
+    CF_OWNERDISPLAY: 'CF_OWNERDISPLAY',
+    CF_DSPTEXT: 'CF_DSPTEXT',
+    CF_DSPBITMAP: 'CF_DSPBITMAP',
+    CF_DSPMETAFILEPICT: 'CF_DSPMETAFILEPICT',
+    CF_DSPENHMETAFILE: 'CF_DSPENHMETAFILE',
+    CF_PRIVATEFIRST: 'CF_PRIVATEFIRST',
+    CF_PRIVATELAST: 'CF_PRIVATELAST',
+    CF_GDIOBJFIRST: 'CF_GDIOBJFIRST',
+    CF_GDIOBJLAST: 'CF_GDIOBJLAST',
+  };
 }
