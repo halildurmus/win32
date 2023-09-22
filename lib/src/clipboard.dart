@@ -15,6 +15,17 @@ import 'models/models.dart';
 const GMEM_MOVABLE = 0x0002;
 
 final class Clipboard {
+  /// Clears the clipboard.
+  ///
+  /// Returns `true` if the operation succeeds; `false` otherwise.
+  static bool clear() {
+    try {
+      return _execute(() => EmptyClipboard() == TRUE);
+    } on ClipboardException {
+      return false;
+    }
+  }
+
   /// Retrieves the text from the clipboard.
   ///
   /// Returns `null` if the clipboard doesn't contain text or the operation
