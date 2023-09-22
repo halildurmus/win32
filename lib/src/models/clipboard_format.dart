@@ -21,11 +21,6 @@ final class ClipboardFormat {
   final String? name;
 
   /// Represents the Unicode text format in the clipboard.
-  ///
-  /// This format is commonly used for copying and pasting text data. It
-  /// represents Unicode text with each line ending in a carriage
-  /// return/linefeed (CR-LF) combination. A null character signals the end of
-  /// the data.
   static const text = ClipboardFormat(CF_UNICODETEXT, name: 'CF_UNICODETEXT');
 
   @override
