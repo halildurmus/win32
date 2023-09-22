@@ -59,6 +59,12 @@ final class Clipboard {
   /// Checks if the clipboard contains text data.
   static bool get hasText => hasFormat(ClipboardFormat.text);
 
+  /// Whether the clipboard is empty.
+  static bool get isEmpty => numberOfFormats == 0;
+
+  /// The number of different data formats currently on the clipboard.
+  static int get numberOfFormats => CountClipboardFormats();
+
   /// Stores the given [text] on the clipboard.
   static bool setText(String text) {
     try {
