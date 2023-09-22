@@ -28,5 +28,15 @@ final class ClipboardFormat {
   static const text = ClipboardFormat(CF_UNICODETEXT, name: 'CF_UNICODETEXT');
 
   @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ClipboardFormat &&
+          formatId == other.formatId &&
+          name == other.name;
+
+  @override
+  int get hashCode => formatId.hashCode ^ name.hashCode;
+
+  @override
   String toString() => 'ClipboardFormat($formatId, name: $name)';
 }
