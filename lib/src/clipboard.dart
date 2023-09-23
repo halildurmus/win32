@@ -67,6 +67,22 @@ final class Clipboard {
     }
   }
 
+  /// Retrieves the first available clipboard format in the specified list.
+  ///
+  /// Returns `null` if the clipboard is empty or the clipboard doesn't contain
+  /// any of the given [formats].
+  static ClipboardFormat? getPriorityFormat(List<ClipboardFormat> formats) {
+    final paFormatPriorityList = calloc<UINT>(formats.length);
+    for (var i = 0; i < formats.length; i++) {
+      paFormatPriorityList[i] = formats[i].formatId;
+    }
+
+    final result =
+        GetPriorityClipboardFormat(paFormatPriorityList, formats.length);
+    if (result <= 0) return null;
+    return formats.firstWhere((format) => format.formatId == result);
+  }
+
   /// Retrieves the text from the clipboard.
   ///
   /// Returns `null` if the clipboard doesn't contain text or the operation
@@ -93,9 +109,9 @@ final class Clipboard {
     }
   }
 
-  /// Whether the given [clipboardFormat] is available in the clipboard.
-  static bool hasFormat(ClipboardFormat clipboardFormat) =>
-      IsClipboardFormatAvailable(clipboardFormat.formatId) == TRUE;
+  /// Whether the given clipboard [format] is available in the clipboard.
+  static bool hasFormat(ClipboardFormat format) =>
+      IsClipboardFormatAvailable(format.formatId) == TRUE;
 
   /// Checks if the clipboard contains text data.
   static bool get hasText => hasFormat(ClipboardFormat.text);
@@ -154,14 +170,14 @@ final class Clipboard {
   /// [CloseClipboard].
   static R _execute<R>(R Function() function) {
     if (OpenClipboard(NULL) == FALSE) {
-      throw const ClipboardException('Failed to open the Clipboard.');
+      throw const ClipboardException('Failed to open the clipboard.');
     }
 
     try {
       return function();
     } finally {
       if (CloseClipboard() == FALSE) {
-        throw const ClipboardException('Failed to close the Clipboard.');
+        throw const ClipboardException('Failed to close the clipboard.');
       }
     }
   }
