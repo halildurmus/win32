@@ -18,7 +18,7 @@ import 'models/models.dart';
 // ignore: constant_identifier_names
 const GMEM_MOVABLE = 0x0002;
 
-final class Clipboard {
+abstract final class Clipboard {
   /// Clears the clipboard.
   ///
   /// Returns `true` if the operation succeeds; `false` otherwise.
