@@ -18,7 +18,23 @@ import 'models/models.dart';
 // ignore: constant_identifier_names
 const GMEM_MOVABLE = 0x0002;
 
-/// Provides access to the Windows Clipboard.
+/// Provides a set of methods and properties for interacting with the Windows
+/// Clipboard.
+///
+/// It allows you to perform common clipboard operations such as copying data to
+/// the clipboard, pasting data from the clipboard, checking the available data
+/// formats on the clipboard, clearing the clipboard, and more.
+///
+/// Here's an example of how to retrieve text from the clipboard:
+///
+/// ```dart
+/// final clipboardText = Clipboard.getText();
+/// if (clipboardText != null) {
+///   print('Clipboard text: $clipboardText');
+/// } else {
+///   print('Clipboard is empty or does not contain text.');
+/// }
+/// ```
 abstract final class Clipboard {
   /// Clears the contents of the clipboard.
   ///
@@ -193,11 +209,14 @@ abstract final class Clipboard {
   /// Executes the provided [function] within the clipboard context.
   ///
   /// This method ensures that the clipboard is properly opened before the
-  /// function is executed and closed after its execution, maintaining the
+  /// [function] is executed and closed after its execution, maintaining the
   /// clipboard's integrity.
   ///
   /// Use this method to encapsulate clipboard-related operations within a
   /// consistent context, guaranteeing correct clipboard handling.
+  ///
+  /// Throws a [ClipboardException] if the clipboard could not be opened or
+  /// closed.
   static R _withClipboardContext<R>(R Function() function) {
     if (OpenClipboard(NULL) == FALSE) {
       throw const ClipboardException('Failed to open the clipboard.');

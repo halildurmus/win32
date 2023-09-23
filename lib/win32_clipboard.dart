@@ -5,11 +5,12 @@
 /// A Dart library that provides a comprehensive Dart API for interacting with
 /// the Windows Clipboard.
 ///
-/// This library allows you to perform various clipboard operations, such as
-/// clearing the clipboard, retrieving data in different formats, storing data,
-/// and checking the availability of specific data formats.
+/// It allows you to perform common clipboard operations such as copying data to
+/// the clipboard, pasting data from the clipboard, checking the available data
+/// formats on the clipboard, clearing the clipboard, and more.
 ///
-/// Example:
+/// For example:
+///
 /// ```dart
 /// import 'package:win32_clipboard/win32_clipboard.dart';
 ///

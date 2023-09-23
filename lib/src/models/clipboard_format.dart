@@ -6,9 +6,9 @@ import 'package:win32/win32.dart';
 
 /// Represents a data format in the clipboard.
 ///
-/// This class is used to define and work with various data formats that can be
-/// stored and retrieved from the clipboard. It provides a convenient way to
-/// manage clipboard data formats and their associated identifiers and names.
+/// It is used to define and work with various data formats that can be stored
+/// and retrieved from the clipboard. It provides a convenient way to manage
+/// clipboard data formats and their associated identifiers and names.
 final class ClipboardFormat {
   /// Creates an instance of [ClipboardFormat] with the specified [formatId] and
   /// an optional [name].
