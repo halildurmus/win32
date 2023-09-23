@@ -18,27 +18,27 @@ import 'models/models.dart';
 // ignore: constant_identifier_names
 const GMEM_MOVABLE = 0x0002;
 
+/// Provides access to the Windows Clipboard.
 abstract final class Clipboard {
-  /// Clears the clipboard.
+  /// Clears the contents of the clipboard.
   ///
-  /// Returns `true` if the operation succeeds; `false` otherwise.
+  /// Returns `true` if the operation succeeds; otherwise, returns `false`.
   static bool clear() {
     try {
-      return _execute(() => EmptyClipboard() == TRUE);
+      return _withClipboardContext(() => EmptyClipboard() == TRUE);
     } on ClipboardException {
       return false;
     }
   }
 
-  /// Returns a list of the [ClipboardFormat]s currently available in the
-  /// clipboard.
+  /// Retrieves a list of available [ClipboardFormat]s in the clipboard.
   ///
   /// Returns an empty list if the clipboard is empty or the operation fails.
   static List<ClipboardFormat> get formats {
     if (isEmpty) return [];
 
     try {
-      return _execute(() {
+      return _withClipboardContext(() {
         final formats = <ClipboardFormat>[];
 
         using((arena) {
@@ -50,7 +50,7 @@ abstract final class Clipboard {
             GetClipboardFormatName(currFormat, nameBuffer, maxChars);
             String? nameString = nameBuffer.toDartString();
             if (nameString.isEmpty) {
-              nameString = _clipboardFormats[currFormat];
+              nameString = _standardClipboardFormats[currFormat];
             }
 
             final format = ClipboardFormat(currFormat, name: nameString);
@@ -67,19 +67,19 @@ abstract final class Clipboard {
     }
   }
 
-  /// Retrieves the data from the clipboard.
+  /// Retrieves data from the clipboard in the specified [format].
   ///
-  /// Returns `null` if the clipboard doesn't contain data or the operation
+  /// Returns `null` if the clipboard does not contain data or the operation
   /// fails.
   static String? getData(ClipboardFormat format) {
     if (!hasFormat(format)) return null;
     return _getData(format);
   }
 
-  /// Retrieves the first available clipboard format in the specified list.
+  /// Retrieves the first available clipboard format from a list of [formats].
   ///
-  /// Returns `null` if the clipboard is empty or the clipboard doesn't contain
-  /// any of the given [formats].
+  /// Returns `null` if the clipboard is empty or none of the specified formats
+  /// are present.
   static ClipboardFormat? getPriorityFormat(List<ClipboardFormat> formats) {
     final paFormatPriorityList = calloc<UINT>(formats.length);
     for (var i = 0; i < formats.length; i++) {
@@ -92,32 +92,31 @@ abstract final class Clipboard {
     return formats.firstWhere((format) => format.formatId == result);
   }
 
-  /// Retrieves the text from the clipboard.
+  /// Retrieves text data from the clipboard.
   ///
-  /// Returns `null` if the clipboard doesn't contain text or the operation
+  /// Returns `null` if the clipboard does not contain text or the operation
   /// fails.
   static String? getText() {
     if (!hasText) return null;
     return _getData(ClipboardFormat.text);
   }
 
-  /// Whether the given clipboard [format] is available in the clipboard.
+  /// Checks if the clipboard contains data in the specified [format].
   static bool hasFormat(ClipboardFormat format) =>
       IsClipboardFormatAvailable(format.formatId) == TRUE;
 
   /// Checks if the clipboard contains text data.
   static bool get hasText => hasFormat(ClipboardFormat.text);
 
-  /// Whether the clipboard is empty.
+  /// Checks if the clipboard is empty.
   static bool get isEmpty => numberOfFormats == 0;
 
-  /// The number of different data formats currently on the clipboard.
+  /// Gets the number of different data formats currently on the clipboard.
   static int get numberOfFormats => CountClipboardFormats();
 
-  /// Registers a clipboard format with the given [name] and returns its id.
+  /// Registers a clipboard format with the given [name] and returns its ID.
   ///
-  /// If a format has already been registered with the given name, its id is
-  /// returned.
+  /// If a format with the given name is already registered, its ID is returned.
   static int registerFormat(String name) {
     final lpszFormat = name.toNativeUtf16();
     try {
@@ -131,22 +130,22 @@ abstract final class Clipboard {
     }
   }
 
-  /// Stores the given [data] on the clipboard.
+  /// Stores the provided [data] on the clipboard in the specified [format].
   ///
-  /// Returns `true` if the operation succeeds; `false` otherwise.
+  /// Returns `true` if the operation succeeds; otherwise, returns `false`.
   static bool setData(String data, {required ClipboardFormat format}) =>
       _setData(data, format: format);
 
-  /// Stores the given [text] on the clipboard.
+  /// Stores the provided [text] on the clipboard as plain text.
   ///
-  /// Returns `true` if the operation succeeds; `false` otherwise.
+  /// Returns `true` if the operation succeeds; otherwise, returns `false`.
   static bool setText(String text) =>
       _setData(text, format: ClipboardFormat.text);
 
-  /// Retrieves the data from the clipboard in the given [format].
+  /// Retrieves data from the clipboard in the specified [format].
   static String? _getData(ClipboardFormat format) {
     try {
-      return _execute(() {
+      return _withClipboardContext(() {
         final handle = GetClipboardData(format.formatId);
         if (handle == NULL) return null;
 
@@ -164,10 +163,10 @@ abstract final class Clipboard {
     }
   }
 
-  /// Stores the given [data] on the clipboard in the given [format].
+  /// Stores the provided [data] on the clipboard in the specified [format].
   static bool _setData(String data, {required ClipboardFormat format}) {
     try {
-      return _execute(() {
+      return _withClipboardContext(() {
         if (EmptyClipboard() == FALSE) return false;
         final units = data.codeUnits;
         final dwBytes = (units.length + 1) * sizeOf<Uint16>();
@@ -191,9 +190,15 @@ abstract final class Clipboard {
     }
   }
 
-  /// Wraps the given [function] in calls to [OpenClipboard] and
-  /// [CloseClipboard].
-  static R _execute<R>(R Function() function) {
+  /// Executes the provided [function] within the clipboard context.
+  ///
+  /// This method ensures that the clipboard is properly opened before the
+  /// function is executed and closed after its execution, maintaining the
+  /// clipboard's integrity.
+  ///
+  /// Use this method to encapsulate clipboard-related operations within a
+  /// consistent context, guaranteeing correct clipboard handling.
+  static R _withClipboardContext<R>(R Function() function) {
     if (OpenClipboard(NULL) == FALSE) {
       throw const ClipboardException('Failed to open the clipboard.');
     }
@@ -207,8 +212,8 @@ abstract final class Clipboard {
     }
   }
 
-  /// A map of default clipboard format IDs to names.
-  static const _clipboardFormats = <int, String>{
+  /// A map of standard clipboard format IDs to their names.
+  static const _standardClipboardFormats = <int, String>{
     CF_TEXT: 'CF_TEXT',
     CF_BITMAP: 'CF_BITMAP',
     CF_METAFILEPICT: 'CF_METAFILEPICT',

@@ -24,7 +24,7 @@ final class ClipboardFormat {
   /// An optional human-readable name for the clipboard format.
   final String? name;
 
-  /// Represents the Unicode text format in the clipboard.
+  /// The Unicode text format.
   static const text = ClipboardFormat(CF_UNICODETEXT, name: 'CF_UNICODETEXT');
 
   @override
