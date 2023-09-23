@@ -42,20 +42,21 @@ void main() {
     });
 
     test('getPriorityFormat', () {
-      check(Clipboard.getPriorityFormat([
+      const formats = [
         ClipboardFormat.text,
-        const ClipboardFormat(CF_LOCALE),
-        const ClipboardFormat(CF_TEXT),
-        const ClipboardFormat(CF_OEMTEXT),
-      ])).isNull();
+        ClipboardFormat(CF_LOCALE),
+        ClipboardFormat(CF_TEXT),
+        ClipboardFormat(CF_OEMTEXT),
+      ];
 
+      check(Clipboard.getPriorityFormat(formats)).isNull();
       check(Clipboard.setText('win32_clipboard')).isTrue();
-      check(Clipboard.getPriorityFormat([
-        ClipboardFormat.text,
-        const ClipboardFormat(CF_LOCALE),
-        const ClipboardFormat(CF_TEXT),
-        const ClipboardFormat(CF_OEMTEXT),
-      ])).isNotNull().equals(ClipboardFormat.text);
+      check(Clipboard.getPriorityFormat(formats))
+          .isNotNull()
+          .equals(ClipboardFormat.text);
+      check(Clipboard.getPriorityFormat(formats.reversed.toList()))
+          .isNotNull()
+          .equals(const ClipboardFormat(CF_OEMTEXT));
     });
 
     test('getText', () {
