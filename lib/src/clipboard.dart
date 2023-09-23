@@ -67,6 +67,15 @@ abstract final class Clipboard {
     }
   }
 
+  /// Retrieves the data from the clipboard.
+  ///
+  /// Returns `null` if the clipboard doesn't contain data or the operation
+  /// fails.
+  static String? getData(ClipboardFormat format) {
+    if (!hasFormat(format)) return null;
+    return _getData(format);
+  }
+
   /// Retrieves the first available clipboard format in the specified list.
   ///
   /// Returns `null` if the clipboard is empty or the clipboard doesn't contain
@@ -89,24 +98,7 @@ abstract final class Clipboard {
   /// fails.
   static String? getText() {
     if (!hasText) return null;
-
-    try {
-      return _execute(() {
-        final handle = GetClipboardData(CF_UNICODETEXT);
-        if (handle == NULL) return null;
-
-        final ptr = Pointer.fromAddress(handle);
-        final rawPtr = GlobalLock(ptr);
-        if (rawPtr.address == 0) return null;
-
-        final text = rawPtr.cast<Utf16>().toDartString();
-        GlobalUnlock(ptr);
-
-        return text;
-      });
-    } on ClipboardException {
-      return null;
-    }
+    return _getData(ClipboardFormat.text);
   }
 
   /// Whether the given clipboard [format] is available in the clipboard.
@@ -139,12 +131,45 @@ abstract final class Clipboard {
     }
   }
 
+  /// Stores the given [data] on the clipboard.
+  ///
+  /// Returns `true` if the operation succeeds; `false` otherwise.
+  static bool setData(String data, {required ClipboardFormat format}) =>
+      _setData(data, format: format);
+
   /// Stores the given [text] on the clipboard.
-  static bool setText(String text) {
+  ///
+  /// Returns `true` if the operation succeeds; `false` otherwise.
+  static bool setText(String text) =>
+      _setData(text, format: ClipboardFormat.text);
+
+  /// Retrieves the data from the clipboard in the given [format].
+  static String? _getData(ClipboardFormat format) {
+    try {
+      return _execute(() {
+        final handle = GetClipboardData(format.formatId);
+        if (handle == NULL) return null;
+
+        final ptr = Pointer.fromAddress(handle);
+        final rawPtr = GlobalLock(ptr);
+        if (rawPtr.address == 0) return null;
+
+        final string = rawPtr.cast<Utf16>().toDartString();
+        GlobalUnlock(ptr);
+
+        return string;
+      });
+    } on ClipboardException {
+      return null;
+    }
+  }
+
+  /// Stores the given [data] on the clipboard in the given [format].
+  static bool _setData(String data, {required ClipboardFormat format}) {
     try {
       return _execute(() {
         if (EmptyClipboard() == FALSE) return false;
-        final units = text.codeUnits;
+        final units = data.codeUnits;
         final dwBytes = (units.length + 1) * sizeOf<Uint16>();
         final hMem = GlobalAlloc(GMEM_MOVABLE, dwBytes);
         if (hMem.address == 0) return false;
@@ -159,7 +184,7 @@ abstract final class Clipboard {
         stringPtr[units.length] = NULL;
         GlobalUnlock(hMem);
 
-        return SetClipboardData(CF_UNICODETEXT, hMem.address) != NULL;
+        return SetClipboardData(format.formatId, hMem.address) != NULL;
       });
     } on ClipboardException {
       return false;
