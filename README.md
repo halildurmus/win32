@@ -35,7 +35,7 @@ void main() {
 }
 ```
 
-More examples can be found in the `examples\` subdirectory.
+More examples can be found in the `example\` subdirectory.
 
 [ci_badge]: https://github.com/dart-windows/win32_registry/actions/workflows/dart.yml/badge.svg
 [ci_link]: https://github.com/dart-windows/win32_registry/actions/workflows/dart.yml
