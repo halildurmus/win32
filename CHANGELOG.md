@@ -1,3 +1,9 @@
+## 5.0.9
+
+- Add `GlobalAlloc` flags (#754)
+- Add more Windows Message constants (#755)
+- Add Device Management events (#756)
+
 ## 5.0.8
 
 - Add `NetGetAadJoinInformation` and `NetFreeAadJoinInformation` APIs (#748,
