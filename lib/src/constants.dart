@@ -10895,3 +10895,27 @@ const DBT_CUSTOMEVENT = 0x8006;
 
 /// The meaning of this message is user-defined.
 const DBT_USERDEFINED = 0xFFFF;
+
+// -----------------------------------------------------------------------------
+// GlobalAlloc flags
+// -----------------------------------------------------------------------------
+
+/// Allocates fixed memory. The return value is a pointer.
+const GMEM_FIXED = 0x0000;
+
+/// Allocates movable memory. Memory blocks are never moved in physical memory,
+/// but they can be moved within the default heap. The return value is a handle
+/// to the memory object. To translate the handle into a pointer, use the
+/// GlobalLock function.
+///
+/// This value cannot be combined with GMEM_FIXED.
+const GMEM_MOVABLE = 0x0002;
+
+/// Initializes memory contents to zero.
+const GMEM_ZEROINIT = 0x0040;
+
+/// Combines GMEM_FIXED and GMEM_ZEROINIT.
+const GPTR = 0x0040;
+
+/// Combines GMEM_MOVABLE and GMEM_ZEROINIT.
+const GHND = 0x0042;
