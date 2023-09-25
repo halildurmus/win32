@@ -10852,3 +10852,46 @@ const HTTPREQUEST_SETCREDENTIALS_FOR_SERVER = 0;
 
 /// Credentials are passed to a proxy.
 const HTTPREQUEST_SETCREDENTIALS_FOR_PROXY = 1;
+
+// -----------------------------------------------------------------------------
+// Device Management events
+// -----------------------------------------------------------------------------
+
+/// A device has been added to or removed from the system.
+const DBT_DEVNODES_CHANGED = 0x0007;
+
+/// Permission is requested to change the current configuration
+/// (dock or undock).
+const DBT_QUERYCHANGECONFIG = 0x0017;
+
+/// The current configuration has changed, due to a dock or undock.
+const DBT_CONFIGCHANGED = 0x0018;
+
+/// A request to change the current configuration (dock or undock) has been
+/// canceled.
+const DBT_CONFIGCHANGECANCELED = 0x0019;
+
+/// A device or piece of media has been inserted and is now available.
+const DBT_DEVICEARRIVAL = 0x8000;
+
+/// Permission is requested to remove a device or piece of media. Any
+/// application can deny this request and cancel the removal.
+const DBT_DEVICEQUERYREMOVE = 0x8001;
+
+/// A request to remove a device or piece of media has been canceled.
+const DBT_DEVICEQUERYREMOVEFAILED = 0x8002;
+
+/// A device or piece of media is about to be removed. Cannot be denied.
+const DBT_DEVICEREMOVEPENDING = 0x8003;
+
+/// A device or piece of media has been removed.
+const DBT_DEVICEREMOVECOMPLETE = 0x8004;
+
+/// A device-specific event has occurred.
+const DBT_DEVICETYPESPECIFIC = 0x8005;
+
+/// A custom event has occurred.
+const DBT_CUSTOMEVENT = 0x8006;
+
+/// The meaning of this message is user-defined.
+const DBT_USERDEFINED = 0xFFFF;
