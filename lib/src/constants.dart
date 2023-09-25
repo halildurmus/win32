@@ -2084,6 +2084,10 @@ const WM_MOUSEHWHEEL = 0x020E;
 /// Notifies applications that a power-management event has occurred.
 const WM_POWERBROADCAST = 0x0218;
 
+/// Notifies an application of a change to the hardware configuration of a
+/// device or the computer.
+const WM_DEVICECHANGE = 0x0219;
+
 /// Sent when the effective dots per inch (dpi) for a window has changed.
 /// Requires Windows 8.1 or above.
 const WM_DPICHANGED = 0x02E0;
@@ -2203,6 +2207,16 @@ const WM_PALETTECHANGED = 0x0311;
 /// function. The message is placed at the top of the message queue associated
 /// with the thread that registered the hot key.
 const WM_HOTKEY = 0x0312;
+
+/// The WM_CLIPBOARDUPDATE message signifies that clipboard contents have
+/// changed. To listen for this message, create a Clipboard Format Listener
+/// using the AddClipboardFormatListener() API. This has replaced the old
+/// SetClipboardViewer() API, and is a simpler, more efficient method of
+/// monitoring for clipboard changes.
+const WM_CLIPBOARDUPDATE = 0x031D;
+
+/// Informs all top-level windows that the colorization color has changed.
+const WM_DWMCOLORIZATIONCOLORCHANGED = 0x0320;
 
 /// Used to define private messages for use by private window classes, usually
 /// in the form WM_USER+x, where x is an integer value.
