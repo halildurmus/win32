@@ -9,15 +9,6 @@ import 'package:win32/win32.dart';
 
 import 'models/models.dart';
 
-/// Allocates movable memory. Memory blocks are never moved in physical memory,
-/// but they can be moved within the default heap. The return value is a handle
-/// to the memory object. To translate the handle into a pointer, use the
-/// GlobalLock function.
-///
-/// This value cannot be combined with GMEM_FIXED.
-// ignore: constant_identifier_names
-const GMEM_MOVABLE = 0x0002;
-
 /// Provides a set of methods and properties for interacting with the Windows
 /// Clipboard.
 ///

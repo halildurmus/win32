@@ -20,7 +20,7 @@ platforms:
 
 dependencies:
   ffi: ^2.1.0
-  win32: ^5.0.8
+  win32: ^5.0.9
 
 dev_dependencies:
   checks: ^0.2.2
