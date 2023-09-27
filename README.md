@@ -41,11 +41,20 @@ void main() {
 }
 ```
 
+To learn more, see the [API Documentation][api_documentation_link].
+
+## Feature requests and bugs
+
+Please file feature requests and bugs at the
+[issue tracker][issue_tracker_link].
+
+[api_documentation_link]: https://pub.dev/documentation/win32_clipboard/latest/
 [ci_badge]: https://github.com/dart-windows/win32_clipboard/actions/workflows/dart.yml/badge.svg
 [ci_link]: https://github.com/dart-windows/win32_clipboard/actions/workflows/dart.yml
 [codecov_badge_link]: https://codecov.io/gh/dart-windows/win32_clipboard/branch/main/graph/badge.svg?token=AM792MK0UT
 [codecov_link]: https://codecov.io/gh/dart-windows/win32_clipboard
 [dart_windows_link]: https://github.com/dart-windows
+[issue_tracker_link]: https://github.com/dart-windows/win32_clipboard/issues
 [language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
 [language_link]: https://dart.dev
 [license_badge]: https://img.shields.io/github/license/dart-windows/win32_clipboard?color=blue
