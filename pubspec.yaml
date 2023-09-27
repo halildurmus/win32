@@ -1,7 +1,7 @@
 name: win32_clipboard
 description: A package that provides a friendly Dart API for accessing the
   Windows Clipboard.
-version: 0.1.0
+version: 0.1.1
 homepage: https://win32.pub
 repository: https://github.com/dart-windows/win32_clipboard
 issue_tracker: https://github.com/dart-windows/win32_clipboard/issues
