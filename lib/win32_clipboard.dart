@@ -15,11 +15,8 @@
 /// import 'package:win32_clipboard/win32_clipboard.dart';
 ///
 /// void main() {
-///   final text = Clipboard.getText();
-///   if (text != null) {
-///     print('Clipboard text: $text');
-///   } else {
-///     print('Clipboard does not contain text.');
+///   if (Clipboard.hasText) {
+///     print('Clipboard text: ${Clipboard.getText()}');
 ///   }
 /// }
 /// ```

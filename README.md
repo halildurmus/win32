@@ -41,6 +41,31 @@ void main() {
 }
 ```
 
+### Retrieve a list of available clipboard formats
+
+```dart
+import 'package:win32_clipboard/win32_clipboard.dart';
+
+void main() {
+  print('Clipboard has ${Clipboard.numberOfFormats} format(s)');
+  for (final format in Clipboard.formats) {
+    print('- $format');
+  }
+}
+```
+
+### Clear the clipboard
+
+```dart
+import 'package:win32_clipboard/win32_clipboard.dart';
+
+void main() {
+  if (Clipboard.clear()) {
+    print('Clipboard contents cleared successfully.');
+  }
+}
+```
+
 To learn more, see the [API Documentation][api_documentation_link].
 
 ## Feature requests and bugs
