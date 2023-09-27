@@ -11,21 +11,6 @@ import 'models/models.dart';
 
 /// Provides a set of methods and properties for interacting with the Windows
 /// Clipboard.
-///
-/// It allows you to perform common clipboard operations such as copying data to
-/// the clipboard, pasting data from the clipboard, checking the available data
-/// formats on the clipboard, clearing the clipboard, and more.
-///
-/// Here's an example of how to retrieve text from the clipboard:
-///
-/// ```dart
-/// final clipboardText = Clipboard.getText();
-/// if (clipboardText != null) {
-///   print('Clipboard text: $clipboardText');
-/// } else {
-///   print('Clipboard is empty or does not contain text.');
-/// }
-/// ```
 abstract final class Clipboard {
   /// Clears the contents of the clipboard.
   ///
@@ -124,6 +109,8 @@ abstract final class Clipboard {
   /// Registers a clipboard format with the given [name] and returns its ID.
   ///
   /// If a format with the given name is already registered, its ID is returned.
+  ///
+  /// Throws a [ClipboardException] if the format could not be registered.
   static int registerFormat(String name) {
     final lpszFormat = name.toNativeUtf16();
     try {
