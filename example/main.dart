@@ -10,16 +10,13 @@ void main() {
     print('- $format');
   }
 
-  final isEmpty = Clipboard.isEmpty;
-  print('Clipboard is ${isEmpty ? 'empty' : 'not empty'}.');
+  print('Clipboard is ${Clipboard.isEmpty ? 'empty' : 'not empty'}.');
 
-  final hasText = Clipboard.hasText;
-  if (hasText) {
+  if (Clipboard.hasText) {
     print('Clipboard text: ${Clipboard.getText()}');
   }
 
-  final result = Clipboard.setText('Hello, world!');
-  if (result) {
+  if (Clipboard.setText('Hello, world!')) {
     print('Clipboard now contains: ${Clipboard.getText()}');
   }
 

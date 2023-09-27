@@ -1,39 +1,57 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+<img src="https://raw.githubusercontent.com/dart-windows/.github/main/assets/dart-windows-card.png" width="50%" height="50%">
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
+A package that provides a friendly Dart API for accessing the Windows Clipboard.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
+This package builds on top of the Dart [win32][win32_pub_link] package, offering
+a high-level Dart wrapper that avoids the need for users to understand FFI or
+write directly to the Win32 API.
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+Part of the [Dart | Windows][dart_windows_link] suite of Windows packages.
 
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+[![ci][ci_badge]][ci_link]
+[![Package: win32_clipboard][package_badge]][package_link]
+[![Publisher: win32.pub][publisher_badge]][publisher_link]
+[![Language: Dart][language_badge]][language_link]
+[![License: BSD-3-Clause][license_badge]][license_link]
+[![codecov][codecov_badge_link]][codecov_link]
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+### Retrieve text from the clipboard
 
 ```dart
-const like = 'sample';
+import 'package:win32_clipboard/win32_clipboard.dart';
+
+void main() {
+  if (Clipboard.hasText) {
+    print('Clipboard text: ${Clipboard.getText()}');
+  }
+}
 ```
 
-## Additional information
+### Write text to the clipboard
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+```dart
+import 'package:win32_clipboard/win32_clipboard.dart';
+
+void main() {
+  if (Clipboard.setText('Hello, world!')) {
+    print('Clipboard now contains: ${Clipboard.getText()}');
+  }
+}
+```
+
+[ci_badge]: https://github.com/dart-windows/win32_clipboard/actions/workflows/dart.yml/badge.svg
+[ci_link]: https://github.com/dart-windows/win32_clipboard/actions/workflows/dart.yml
+[codecov_badge_link]: https://codecov.io/gh/dart-windows/win32_clipboard/branch/main/graph/badge.svg?token=AM792MK0UT
+[codecov_link]: https://codecov.io/gh/dart-windows/win32_clipboard
+[dart_windows_link]: https://github.com/dart-windows
+[language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
+[language_link]: https://dart.dev
+[license_badge]: https://img.shields.io/github/license/dart-windows/win32_clipboard?color=blue
+[license_link]: https://opensource.org/licenses/BSD-3-Clause
+[package_badge]: https://img.shields.io/pub/v/win32_clipboard.svg
+[package_link]: https://pub.dev/packages/win32_clipboard
+[publisher_badge]: https://img.shields.io/pub/publisher/win32_clipboard.svg
+[publisher_link]: https://pub.dev/publishers/win32.pub
+[win32_pub_link]: https://pub.dev/packages/win32
