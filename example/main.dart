@@ -9,11 +9,21 @@ void main() {
   for (final format in Clipboard.formats) {
     print('- $format');
   }
-  print('Clipboard has text: ${Clipboard.hasText}');
-  print('Clipboard is empty: ${Clipboard.isEmpty}');
-  print('Clipboard text: ${Clipboard.getText()}');
+
+  final isEmpty = Clipboard.isEmpty;
+  print('Clipboard is ${isEmpty ? 'empty' : 'not empty'}.');
+
+  final hasText = Clipboard.hasText;
+  if (hasText) {
+    print('Clipboard text: ${Clipboard.getText()}');
+  }
+
   final result = Clipboard.setText('Hello, world!');
   if (result) {
-    print('Clipboard text set to "${Clipboard.getText()}"');
+    print('Clipboard now contains: ${Clipboard.getText()}');
+  }
+
+  if (Clipboard.clear()) {
+    print('Clipboard contents cleared successfully.');
   }
 }
