@@ -3596,6 +3596,10 @@
         "prototype": "MMRESULT midiDisconnect(\n  HMIDI    hmi,\n  HMIDIOUT hmo,\n  LPVOID   pReserved\n);",
         "comment": "The midiDisconnect function disconnects a MIDI input device from a MIDI thru or output device, or disconnects a MIDI thru device from a MIDI output device."
     },
+    "midiInAddBuffer": {
+        "prototype": "MMRESULT midiInAddBuffer(\n  HMIDIIN   hmi,\n  LPMIDIHDR pmh,\n  UINT      cbmh\n);",
+        "comment": "The midiInAddBuffer function sends an input buffer to a specified opened MIDI input device. This function is used for system-exclusive messages."
+    },
     "midiInClose": {
         "prototype": "MMRESULT midiInClose(\n  HMIDIIN hmi\n);",
         "comment": "The midiInClose function closes the specified MIDI input device."

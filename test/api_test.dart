@@ -12579,6 +12579,14 @@ void main() {
           int Function(int hmi, int hmo, Pointer pReserved)>('midiDisconnect');
       expect(midiDisconnect, isA<Function>());
     });
+    test('Can instantiate midiInAddBuffer', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final midiInAddBuffer = winmm.lookupFunction<
+          Uint32 Function(IntPtr hmi, Pointer<MIDIHDR> pmh, Uint32 cbmh),
+          int Function(
+              int hmi, Pointer<MIDIHDR> pmh, int cbmh)>('midiInAddBuffer');
+      expect(midiInAddBuffer, isA<Function>());
+    });
     test('Can instantiate midiInClose', () {
       final winmm = DynamicLibrary.open('winmm.dll');
       final midiInClose = winmm.lookupFunction<Uint32 Function(IntPtr hmi),
