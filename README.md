@@ -10,7 +10,7 @@ without the need for a C++ compiler on your system.
 **Important Note:** This package is currently in an *experimental* stage and
 should not be used for production applications. It is primarily a
 proof-of-concept, and as such, it has some limitations. For example, it does not
-yet support plugins or theme changes.
+yet support plugins.
 
 Part of the [Dart | Windows][dart_windows_link] suite of Windows packages.
 
