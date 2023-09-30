@@ -22,6 +22,7 @@ class Window {
   /// - `hInstance`: The instance handle (defaults to
   ///   `GetModuleHandle(nullptr)`).
   /// - `dimensions`: The initial dimensions of the window (optional).
+  /// - `iconPath`: The path to the icon file (.ico) (optional).
   ///
   /// Throws an [Exception] if window creation fails.
   factory Window.create({
@@ -30,9 +31,16 @@ class Window {
     required Pointer<NativeFunction<WindowProc>> windowProc,
     int? hInstance,
     Rectangle<int>? dimensions,
+    String? iconPath,
   }) {
+    if (iconPath != null && !iconPath.endsWith('.ico')) {
+      throw ArgumentError.value(
+          iconPath, 'iconPath', 'Must be an icon file (.ico)');
+    }
+
     final classNamePtr = className.toNativeUtf16();
     final windowCaptionPtr = windowCaption.toNativeUtf16();
+    final iconPathPtr = iconPath?.toNativeUtf16();
 
     final wc = calloc<WNDCLASS>();
     wc.ref
@@ -42,7 +50,15 @@ class Window {
       ..lpfnWndProc = windowProc
       ..lpszClassName = classNamePtr
       ..style = CS_HREDRAW | CS_VREDRAW;
+    if (iconPathPtr != null) {
+      wc.ref.hIcon = LoadImage(NULL, iconPathPtr, IMAGE_ICON, NULL, NULL,
+          LR_DEFAULTSIZE | LR_LOADFROMFILE);
+    }
+
     RegisterClass(wc);
+    if (iconPathPtr != null) {
+      free(iconPathPtr);
+    }
     free(wc);
 
     final scaleFactor =

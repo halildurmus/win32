@@ -78,21 +78,31 @@ class Application {
 
   static void winMain(int hInstance, List<String> args, int nShowCmd) {
     final appPath = parseArgs(args);
+    final iconPath = '$appPath\\windows\\runner\\resources\\app_icon.ico';
+    if (!File(iconPath).existsSync()) {
+      print('Icon file not found at "$iconPath".');
+      exit(ERROR_FILE_NOT_FOUND);
+    }
 
     CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
     SetThreadDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
 
     final hostWindow = Window.create(
       hInstance: hInstance,
-      windowCaption: 'Dart Native Win32 window',
+      windowCaption: 'Dart Native Win32 Window',
       className: 'FLUTTER_RUNNER_WIN32_WINDOW',
       windowProc: Pointer.fromFunction<WindowProc>(mainWindowProc, 0),
       dimensions: const Rectangle<int>(10, 10, 1280, 720),
+      iconPath: iconPath,
     )..updateTheme();
 
     final project = DartProject.fromRoot(appPath);
     final flutterLibrary =
         '$appPath\\windows\\flutter\\ephemeral\\flutter_windows.dll';
+    if (!File(flutterLibrary).existsSync()) {
+      print('`flutter_windows.dll` file not found at "$flutterLibrary".');
+      exit(ERROR_FILE_NOT_FOUND);
+    }
 
     // Set up Flutter view controller. The size must match the window dimensions
     // to avoid unnecessary surface creation / destruction in the startup path.
