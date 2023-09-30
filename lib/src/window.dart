@@ -7,6 +7,7 @@ import 'dart:math';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart' hide Rectangle;
+import 'package:win32_registry/win32_registry.dart';
 
 /// Represents a Win32 window and provides methods for creating and managing it.
 class Window {
@@ -33,13 +34,14 @@ class Window {
     final classNamePtr = className.toNativeUtf16();
     final windowCaptionPtr = windowCaption.toNativeUtf16();
 
-    final wc = calloc<WNDCLASS>()
-      ..ref.style = CS_HREDRAW | CS_VREDRAW
-      ..ref.lpfnWndProc = windowProc
-      ..ref.hInstance = hInstance ?? GetModuleHandle(nullptr)
-      ..ref.lpszClassName = classNamePtr
-      ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
-      ..ref.hbrBackground = GetStockObject(WHITE_BRUSH);
+    final wc = calloc<WNDCLASS>();
+    wc.ref
+      ..hbrBackground = GetStockObject(WHITE_BRUSH)
+      ..hCursor = LoadCursor(NULL, IDC_ARROW)
+      ..hInstance = hInstance ?? GetModuleHandle(nullptr)
+      ..lpfnWndProc = windowProc
+      ..lpszClassName = classNamePtr
+      ..style = CS_HREDRAW | CS_VREDRAW;
     RegisterClass(wc);
     free(wc);
 
@@ -74,30 +76,6 @@ class Window {
   /// The handle to the window.
   final int hwnd;
 
-  /// Calculates the DPI scale factor for the specified window [dimensions].
-  static double scaleFactorForOrigin(Rectangle<int> dimensions) {
-    final point = calloc<POINT>()
-      ..ref.x = dimensions.left
-      ..ref.y = dimensions.top;
-    final dpiX = calloc<UINT>();
-    final dpiY = calloc<UINT>();
-
-    final hmonitor = MonitorFromPoint(point.ref, MONITOR_DEFAULTTONEAREST);
-    GetDpiForMonitor(hmonitor, MONITOR_DPI_TYPE.MDT_EFFECTIVE_DPI, dpiX, dpiY);
-    final dpi = dpiX.value;
-
-    free(point);
-    free(dpiX);
-    free(dpiY);
-
-    return dpi / 96.0;
-  }
-
-  /// Converts logical scalar values to physical using the provided
-  /// [scaleFactor].
-  static int scale(int source, double scaleFactor) =>
-      (source * scaleFactor).floor();
-
   /// The dimensions of the current window.
   Rectangle<int> get dimensions {
     final rect = calloc<RECT>();
@@ -107,12 +85,6 @@ class Window {
     free(rect);
     return windowRect;
   }
-
-  /// Changes the parent window of the current window to the specified [parent].
-  void setParent(Window parent) => SetParent(hwnd, parent.hwnd);
-
-  /// Sets the keyboard focus to the current window.
-  void setFocus() => SetFocus(hwnd);
 
   /// Moves and resizes the current window to the specified [newDimensions].
   ///
@@ -140,5 +112,59 @@ class Window {
       DispatchMessage(msg);
     }
     free(msg);
+  }
+
+  /// Converts logical scalar values to physical using the provided
+  /// [scaleFactor].
+  static int scale(int source, double scaleFactor) =>
+      (source * scaleFactor).floor();
+
+  /// Calculates the DPI scale factor for the specified window [dimensions].
+  static double scaleFactorForOrigin(Rectangle<int> dimensions) {
+    final point = calloc<POINT>()
+      ..ref.x = dimensions.left
+      ..ref.y = dimensions.top;
+    final dpiX = calloc<UINT>();
+    final dpiY = calloc<UINT>();
+
+    final hmonitor = MonitorFromPoint(point.ref, MONITOR_DEFAULTTONEAREST);
+    GetDpiForMonitor(hmonitor, MONITOR_DPI_TYPE.MDT_EFFECTIVE_DPI, dpiX, dpiY);
+    final dpi = dpiX.value;
+
+    free(point);
+    free(dpiX);
+    free(dpiY);
+
+    return dpi / 96.0;
+  }
+
+  /// Sets the keyboard focus to the current window.
+  void setFocus() => SetFocus(hwnd);
+
+  /// Changes the parent window of the current window to the specified [parent].
+  void setParent(Window parent) => SetParent(hwnd, parent.hwnd);
+
+  /// Updates the theme of the current window.
+  void updateTheme() {
+    const keyPath =
+        r'Software\Microsoft\Windows\CurrentVersion\Themes\Personalize';
+    final key = Registry.openPath(RegistryHive.currentUser, path: keyPath);
+
+    // A value of 0 indicates apps should use dark mode. A non-zero or missing
+    // value indicates apps should use light mode.
+    final appsUseLightMode = key.getValueAsInt('AppsUseLightTheme');
+    if (appsUseLightMode != null) {
+      final enableDarkMode = appsUseLightMode == FALSE;
+      final pvAttribute = calloc<BOOL>()..value = enableDarkMode ? TRUE : FALSE;
+      DwmSetWindowAttribute(
+        hwnd,
+        DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE,
+        pvAttribute,
+        sizeOf<BOOL>(),
+      );
+      free(pvAttribute);
+    }
+
+    key.close();
   }
 }

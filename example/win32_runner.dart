@@ -7,6 +7,7 @@ import 'dart:io';
 import 'dart:math' show Rectangle;
 
 import 'package:args/args.dart';
+import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart' hide Rectangle;
 import 'package:win32_runner/win32_runner.dart';
 
@@ -39,6 +40,18 @@ class Application {
         return 0;
       case WM_ACTIVATE:
         Window(engine.hwnd).setFocus();
+        return 0;
+      case WM_SETTINGCHANGE:
+        if (wParam == 0 && lParam != 0) {
+          final lParamString =
+              Pointer.fromAddress(lParam).cast<Utf16>().toDartString();
+          if (lParamString == 'ImmersiveColorSet') {
+            Window(hwnd).updateTheme();
+          }
+        }
+        return 0;
+      case WM_DWMCOLORIZATIONCOLORCHANGED:
+        Window(hwnd).updateTheme();
         return 0;
     }
 
@@ -75,7 +88,7 @@ class Application {
       className: 'FLUTTER_RUNNER_WIN32_WINDOW',
       windowProc: Pointer.fromFunction<WindowProc>(mainWindowProc, 0),
       dimensions: const Rectangle<int>(10, 10, 1280, 720),
-    );
+    )..updateTheme();
 
     final project = DartProject.fromRoot(appPath);
     final flutterLibrary =

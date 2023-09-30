@@ -29,9 +29,10 @@ class DartProject {
   /// The path can either be absolute, or relative to the directory containing
   /// the running executable.
   factory DartProject.fromPath(String path) => DartProject(
-      assetsPath: '$path\\flutter_assets',
-      icuDataPath: '$path\\icudtl.dat',
-      aotLibraryPath: '$path\\app.so');
+        assetsPath: '$path\\flutter_assets',
+        icuDataPath: '$path\\icudtl.dat',
+        aotLibraryPath: '$path\\app.so',
+      );
 
   /// Creates a [DartProject] from the root Flutter folder, after running
   /// `flutter assemble`, with a command such as: `flutter assemble
