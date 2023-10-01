@@ -157,6 +157,24 @@ final _midiDisconnect = _winmm.lookupFunction<
     Uint32 Function(IntPtr hmi, IntPtr hmo, Pointer pReserved),
     int Function(int hmi, int hmo, Pointer pReserved)>('midiDisconnect');
 
+/// The midiInAddBuffer function sends an input buffer to a specified opened
+/// MIDI input device. This function is used for system-exclusive messages.
+///
+/// ```c
+/// MMRESULT midiInAddBuffer(
+///   HMIDIIN   hmi,
+///   LPMIDIHDR pmh,
+///   UINT      cbmh
+/// );
+/// ```
+/// {@category winmm}
+int midiInAddBuffer(int hmi, Pointer<MIDIHDR> pmh, int cbmh) =>
+    _midiInAddBuffer(hmi, pmh, cbmh);
+
+final _midiInAddBuffer = _winmm.lookupFunction<
+    Uint32 Function(IntPtr hmi, Pointer<MIDIHDR> pmh, Uint32 cbmh),
+    int Function(int hmi, Pointer<MIDIHDR> pmh, int cbmh)>('midiInAddBuffer');
+
 /// The midiInClose function closes the specified MIDI input device.
 ///
 /// ```c
