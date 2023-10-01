@@ -61,7 +61,7 @@ support Dart idioms. The goal is to provide high familiarity to an existing
 Windows developer. Other Dart packages may build on these primitives to provide
 a friendly API for Dart and Flutter developers. A good example of that is
 [win32_registry](https://pub.dev/packages/win32_registry), which offers a set of
-APIs for accessing the Windows registry that don't require knowledge of FFI.
+APIs for accessing the Windows Registry that don't require knowledge of FFI.
 
 ## Getting started
 
@@ -113,12 +113,14 @@ Dart | Windows authors can be found here: https://github.com/dart-windows
 * [path_provider_windows](https://pub.dev/packages/path_provider_windows):
   provides a way for Dart apps to find common Windows file locations (such as
   the documents directory).
+* [win32_clipboard](https://pub.dev/packages/win32_clipboard): provides a
+  friendly Dart API for accessing the Windows Clipboard.
 * [win32_gamepad](https://pub.dev/packages/win32_gamepad): provides a friendly
   Dart API for accessing gamepads connected to a Windows machine.
 * [win32_gui](https://pub.dev/packages/win32_gui): allows you to create Win32
   GUI applications in an object-oriented style with some helpers.
 * [win32_registry](https://pub.dev/packages/win32_registry): provides Dart
-  classes for accessing and manipulating the Windows registry.
+  classes for accessing and manipulating the Windows Registry.
 * [win32_runner](https://pub.dev/packages/win32_runner): provides an
   experimental shell (or runner) for hosting Flutter apps without needing a C++
   compiler to create the EXE.
