@@ -111,6 +111,7 @@ export 'src/win32/api_ms_win_wsl_api_l1_1_0.g.dart';
 export 'src/combase.dart';
 
 // COM interfaces
+export 'src/com/iagileobject.dart';
 export 'src/com/iapplicationactivationmanager.dart';
 export 'src/com/iappxfactory.dart';
 export 'src/com/iappxfile.dart';

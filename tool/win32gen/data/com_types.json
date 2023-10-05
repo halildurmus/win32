@@ -49,6 +49,7 @@
     "Windows.Win32.Storage.Packaging.Appx.IAppxManifestReader6": "Represents an object model of the package manifest that provides methods to access manifest elements and attributes.",
     "Windows.Win32.Storage.Packaging.Appx.IAppxManifestReader7": "Represents an object model of the package manifest that provides methods to access manifest elements and attributes.",
     "Windows.Win32.Storage.Packaging.Appx.IAppxPackageReader": "Provides a read-only object model for app packages.",
+    "Windows.Win32.System.Com.IAgileObject": "Marks an interface as agile across apartments.",
     "Windows.Win32.System.Com.IBindCtx": "Provides access to a bind context, which is an object that stores information about a particular moniker binding operation.",
     "Windows.Win32.System.Com.IClassFactory": "Creates a call object for processing calls to the methods of an asynchronous interface.",
     "Windows.Win32.System.Com.IConnectionPoint": "Supports connection points for connectable objects.",
