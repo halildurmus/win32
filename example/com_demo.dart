@@ -9,18 +9,6 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-/// Return the current reference count.
-int refCount(IUnknown unk) {
-  // Call addRef() and release(), which are inherited from IUnknown. Both return
-  // the refcount after the operation, so by adding a reference and immediately
-  // removing it, we can get the original refcount.
-
-  unk.addRef();
-  final refCount = unk.release();
-
-  return refCount;
-}
-
 void main() {
   final pTitle = 'Dart Open File Dialog'.toNativeUtf16();
 
