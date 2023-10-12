@@ -10,6 +10,7 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
+import 'com/iunknown.dart';
 import 'constants.dart';
 import 'exceptions.dart';
 import 'extensions/int_to_hexstring.dart';
@@ -152,3 +153,13 @@ LPWSTR wsalloc(int wChars) => calloc<WCHAR>(wChars).cast();
 /// `calloc.free` and `malloc.free` do the same thing, so this works regardless
 /// of whether memory was zero-allocated on creation or not.
 void free(Pointer pointer) => calloc.free(pointer);
+
+/// Returns the current reference count of the COM object.
+int refCount(IUnknown unk) {
+  // Call addRef() and release(), which are inherited from IUnknown. Both return
+  // the refcount after the operation, so by adding a reference and immediately
+  // removing it, we can get the original refcount.
+  unk.addRef();
+  final refCount = unk.release();
+  return refCount;
+}

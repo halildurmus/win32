@@ -34,13 +34,13 @@ void main() {
       final unk = variant.ref.punkVal;
       expect(unk.ptr.address, isNonZero);
       expect(unk.ptr.ref.isNull, isFalse);
-      expect(unk.addRef(), equals(2));
+      expect(refCount(unk), equals(1));
 
       variant.ref.punkVal = spellChecker;
       final unk2 = variant.ref.punkVal;
       expect(unk2.ptr.address, isNonZero);
       expect(unk2.ptr.ref.isNull, isFalse);
-      expect(unk2.addRef(), equals(3));
+      expect(refCount(unk2), equals(2));
 
       VariantClear(variant);
       free(variant);
