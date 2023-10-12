@@ -238,12 +238,14 @@ void generateComApis(Scope scope, Map<String, String> comTypesToGenerate) {
 
     File(classOutputPath).writeAsStringSync(DartFormatter().format(dartClass));
 
-    // Generate test
-    final dartTest = TestInterfaceProjection(typeDef, interfaceProjection);
-    final testOutputPath = '../../test/com/${classOutputFilename}_test.dart';
+    // Generate test only if the object has methods
+    if (comObject.methodProjections.isNotEmpty) {
+      final dartTest = TestInterfaceProjection(typeDef, interfaceProjection);
+      final testOutputPath = '../../test/com/${classOutputFilename}_test.dart';
 
-    File(testOutputPath)
-        .writeAsStringSync(DartFormatter().format(dartTest.toString()));
+      File(testOutputPath)
+          .writeAsStringSync(DartFormatter().format(dartTest.toString()));
+    }
   }
 }
 
