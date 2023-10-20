@@ -1,14 +1,14 @@
-/// Simple data types that are commonly used as aliases for C/C++ primitive data
-/// types in Win32 development.
-///
-/// These can be used for FFI pointer allocation, for example:
-///
-/// ```dart
-/// final returnValue = calloc<DWORD>();
-/// ```
-///
-/// For more on Windows data types, see
-/// https://learn.microsoft.com/windows/win32/winprog/windows-data-types.
+// Simple data types that are commonly used as aliases for C/C++ primitive data
+// types in Win32 development.
+//
+// These can be used for FFI pointer allocation, for example:
+//
+// ```dart
+// final returnValue = calloc<DWORD>();
+// ```
+//
+// For more on Windows data types, see
+// https://learn.microsoft.com/windows/win32/winprog/windows-data-types.
 
 // ignore_for_file: camel_case_types
 
