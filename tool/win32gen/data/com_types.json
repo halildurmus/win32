@@ -25,6 +25,7 @@
     "Windows.Win32.Media.Speech.ISpVoice": "The ISpVoice interface enables an application to perform speech synthesis operations. Applications can speak text strings and text files, or play audio files through this interface. All of these can be done synchronously or asynchronously.",
     "Windows.Win32.Media.Speech.ISpeechObjectToken": "",
     "Windows.Win32.Media.Speech.ISpeechObjectTokens": "The ISpeechObjectTokens automation interface represents a collection of SpObjectToken objects.",
+    "Windows.Win32.Media.Speech.ISpeechVoice": "",
     "Windows.Win32.Networking.NetworkListManager.IEnumNetworkConnections": "The IEnumNetworkConnections interface provides a standard enumerator for network connections. It enumerates active, disconnected, or all network connections within a network. This interface can be obtained from the INetwork interface.",
     "Windows.Win32.Networking.NetworkListManager.IEnumNetworks": "The IEnumNetworks interface is a standard enumerator for networks. It enumerates all networks available on the local machine. This interface can be obtained from the `INetworkListManager` interface.",
     "Windows.Win32.Networking.NetworkListManager.INetwork": "The INetwork interface represents a network on the local machine. It can also represent a collection of network connections with a similar network signature.",
