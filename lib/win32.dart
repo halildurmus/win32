@@ -206,6 +206,7 @@ export 'src/com/ishellservice.dart';
 export 'src/com/isimpleaudiovolume.dart';
 export 'src/com/ispeechobjecttoken.dart';
 export 'src/com/ispeechobjecttokens.dart';
+export 'src/com/ispeechvoice.dart';
 export 'src/com/ispellchecker.dart';
 export 'src/com/ispellchecker2.dart';
 export 'src/com/ispellcheckerchangedeventhandler.dart';
