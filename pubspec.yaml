@@ -12,7 +12,7 @@ topics:
   - ffi
 
 environment:
-  sdk: '^3.0.0'
+  sdk: '^3.1.0'
 
 # Declare that this package only works on Windows.
 platforms:
@@ -26,10 +26,10 @@ dev_dependencies:
   args: ^2.4.2
 
   # Help ensure that the code is well-written.
-  lints: '^3.0.0'
+  dartwindows_lints: '^1.1.0'
 
   # Used for joining paths, as part of our path_provider integration test.
   path: ^1.8.3
 
   # Running the test suite.
-  test: ^1.24.6
+  test: ^1.24.9
