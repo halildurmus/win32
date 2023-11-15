@@ -1,3 +1,12 @@
+## 5.1.0
+
+- Add `midiInAddBuffer` function (#763)
+- Add `MIDIERR_*` constants (#764)
+- Add `IAgileObject` interface (#767)
+- Add `refCount` function (#768)
+- Add `ISpeechVoice` interface (#776)
+- Bump minimum Dart version to `3.1.0`
+
 ## 5.0.9
 
 - Add `GlobalAlloc` flags (#754)
