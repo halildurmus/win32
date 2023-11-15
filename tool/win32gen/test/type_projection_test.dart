@@ -144,7 +144,7 @@ void main() {
 
   test('COM interface parameter', () {
     final typedef = scope.findTypeDef('Windows.Win32.System.Com.Apis');
-    final api = typedef?.findMethod('CoSetProxyBlanket')!;
+    final api = typedef?.findMethod('CoSetProxyBlanket');
 
     expect(api, isNotNull);
 
@@ -157,7 +157,7 @@ void main() {
 
   test('Inherited COM interface parameter', () {
     final typedef = scope.findTypeDef('Windows.Win32.System.Com.Apis');
-    final api = typedef?.findMethod('CreateAntiMoniker')!;
+    final api = typedef?.findMethod('CreateAntiMoniker');
 
     expect(api, isNotNull);
 
@@ -196,7 +196,7 @@ void main() {
 
   test('OLECHAR is represented correctly', () {
     final typedef = scope.findTypeDef('Windows.Win32.Foundation.Apis');
-    final api = typedef?.findMethod('SysAllocString')!;
+    final api = typedef?.findMethod('SysAllocString');
 
     expect(api, isNotNull);
     final type = api!.parameters.first.typeIdentifier; // OLECHAR *
@@ -292,7 +292,7 @@ void main() {
 
   test('Pointer<Enum> params are represented correctly', () {
     final typedef = scope.findTypeDef('Windows.Win32.System.Pipes.Apis');
-    final api = typedef?.findMethod('GetNamedPipeInfo')!;
+    final api = typedef?.findMethod('GetNamedPipeInfo');
 
     expect(api, isNotNull);
     final type = api!.parameters[1].typeIdentifier;
@@ -384,7 +384,7 @@ void main() {
   test('LPVOID parameters are projected to Pointer, not Pointer<Void>', () {
     final typedef =
         scope.findTypeDef('Windows.Win32.Security.Credentials.Apis');
-    final api = typedef?.findMethod('CredFree')!;
+    final api = typedef?.findMethod('CredFree');
 
     expect(api, isNotNull);
 
@@ -454,7 +454,7 @@ void main() {
   test('GUIDs are projected correctly', () {
     final typedef =
         scope.findTypeDef('Windows.Win32.UI.Shell.PropertiesSystem.Apis');
-    final api = typedef?.findMethod('PSPropertyBag_WriteGUID')!;
+    final api = typedef?.findMethod('PSPropertyBag_WriteGUID');
 
     expect(api, isNotNull);
 
