@@ -22,4 +22,6 @@ void main() async {
   for (final method in typeDef.methods) {
     print('  ${method.name}');
   }
+
+  MetadataStore.close();
 }

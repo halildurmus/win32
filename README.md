@@ -46,12 +46,14 @@ void main() async {
   for (final method in typeDef.methods) {
     print('  ${method.name}');
   }
+
+  MetadataStore.close();
 }
 ```
 
 ### Win32
 
-Load all the methods from the GDI namespace and print out some metadata.
+Load the `MessageBoxW` function and print out its parameters and return type.
 
 ```dart
 import 'package:winmd/winmd.dart';
@@ -84,6 +86,52 @@ void main() async {
 
   final returnType = method.returnType.typeIdentifier.name.split('.').last;
   print('It returns type: $returnType.');
+
+  MetadataStore.close();
+}
+```
+
+### Wdk
+
+Load the `NtQuerySystemInformation` function and print out its parameters and
+return type.
+
+```dart
+import 'package:winmd/winmd.dart';
+
+void main() async {
+  // Win32 metadata also needs to be loaded to resolve references from Wdk
+  // metadata
+  await MetadataStore.loadWin32Metadata();
+  // Load the Wdk metadata
+  final scope = await MetadataStore.loadWdkMetadata();
+
+  // Find a namespace
+  final namespace =
+      scope.findTypeDef('Windows.Wdk.System.SystemInformation.Apis')!;
+
+  // Sort the functions alphabetically
+  final sortedMethods = namespace.methods
+    ..sort((a, b) => a.name.compareTo(b.name));
+
+  // Find a specific function
+  const funcName = 'NtQuerySystemInformation';
+  final method = sortedMethods.firstWhere((m) => m.name == funcName);
+
+  // Print out some information about it
+  print('Win32 function $funcName [token #${method.token}]');
+
+  // Retrieve its parameters and project them into Dart FFI types
+  final params = method.parameters
+      .map((param) =>
+          '${param.typeIdentifier.name.split('.').last} ${param.name}')
+      .join(', ');
+  print('The parameters are:\n  $params');
+
+  final returnType = method.returnType.typeIdentifier.name.split('.').last;
+  print('It returns type: $returnType.');
+
+  MetadataStore.close();
 }
 ```
 

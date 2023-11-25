@@ -10,24 +10,43 @@ import 'package:winmd/winmd.dart';
 
 void main() {
   group('Scope', () {
+    late Scope wdkScope;
     late Scope win32Scope;
     late Scope winrtScope;
 
     setUpAll(() async {
+      wdkScope = await MetadataStore.loadWdkMetadata();
       win32Scope = await MetadataStore.loadWin32Metadata();
       winrtScope = await MetadataStore.loadWinRTMetadata();
     });
 
     test('name is as expected', () {
+      check(wdkScope.name).equals('Windows.Wdk.winmd');
       check(win32Scope.name).equals('Windows.Win32.winmd');
+      check(winrtScope.name).equals('Windows.winmd');
     });
 
     test('version string returns expected result', () {
+      check(wdkScope.version).equals('v4.0.30319');
       check(win32Scope.version).equals('v4.0.30319');
+      check(winrtScope.version).equals('WindowsRuntime 1.4');
     });
 
     test('toString() is as expected', () {
+      check(wdkScope.toString()).equals('Windows.Wdk.winmd');
       check(win32Scope.toString()).equals('Windows.Win32.winmd');
+      check(winrtScope.toString()).equals('Windows.winmd');
+    });
+
+    test('executable kind is as expected for Wdk metadata', () {
+      final peKind = wdkScope.executableKind;
+      check(peKind.imageType).equals(ImageType.i386);
+      check(peKind.isILOnly).isTrue();
+      check(peKind.isNativeCode).isFalse();
+      check(peKind.isPEFile).isTrue();
+      check(peKind.isPlatformNeutral).isFalse();
+      check(peKind.makes32BitCalls).isFalse();
+      check(peKind.runsOn64BitPlatform).isFalse();
     });
 
     test('executable kind is as expected for Win32 metadata', () {

@@ -44,20 +44,25 @@ void main() {
       MetadataStore.close();
     });
 
-    test('can cache both WinRT and Win32 metadata', () async {
+    test('can cache Wdk, Win32, and WinRT metadata', () async {
       check(MetadataStore.scopeCache.length).equals(0);
       check(MetadataStore.cacheInfo).equals('[]');
 
       MetadataStore.initialize();
 
-      await MetadataStore.loadWin32Metadata();
+      await MetadataStore.loadWdkMetadata();
       check(MetadataStore.scopeCache.length).equals(1);
-      check(MetadataStore.cacheInfo).equals('[Windows.Win32.winmd]');
+      check(MetadataStore.cacheInfo).equals('[Windows.Wdk.winmd]');
 
-      await MetadataStore.loadWinRTMetadata();
+      await MetadataStore.loadWin32Metadata();
       check(MetadataStore.scopeCache.length).equals(2);
       check(MetadataStore.cacheInfo)
-          .equals('[Windows.Win32.winmd, Windows.winmd]');
+          .equals('[Windows.Wdk.winmd, Windows.Win32.winmd]');
+
+      await MetadataStore.loadWinRTMetadata();
+      check(MetadataStore.scopeCache.length).equals(3);
+      check(MetadataStore.cacheInfo)
+          .equals('[Windows.Wdk.winmd, Windows.Win32.winmd, Windows.winmd]');
 
       MetadataStore.close();
       check(MetadataStore.scopeCache.length).equals(0);
@@ -65,14 +70,18 @@ void main() {
     });
 
     test('can find the metadata for a type', () async {
+      await MetadataStore.loadWdkMetadata();
       await MetadataStore.loadWin32Metadata();
       await MetadataStore.loadWinRTMetadata();
       final typeDef1 = MetadataStore.getMetadataForType(
-          'Windows.Win32.Networking.NetworkListManager.INetwork');
+          'Windows.Wdk.System.SystemInformation.SYSTEM_INFORMATION_CLASS');
       check(typeDef1).isNotNull();
-      final typeDef2 =
-          MetadataStore.getMetadataForType('Windows.Globalization.Calendar');
+      final typeDef2 = MetadataStore.getMetadataForType(
+          'Windows.Win32.Networking.NetworkListManager.INetwork');
       check(typeDef2).isNotNull();
+      final typeDef3 =
+          MetadataStore.getMetadataForType('Windows.Globalization.Calendar');
+      check(typeDef3).isNotNull();
       MetadataStore.close();
     });
 
@@ -96,6 +105,21 @@ void main() {
           .throws<ArgumentError>()
           .has((e) => e.message, 'message')
           .equals('Must start with `Windows`.');
+    });
+
+    test(
+        'appropriate response to searching for a Wdk type without loading the '
+        'Wdk metadata first', () {
+      check(() => MetadataStore.getScopeForType(
+              'Windows.Wdk.System.SystemInformation.SYSTEM_INFORMATION_CLASS'))
+          .throws<WinmdException>()
+          .has((e) => e.message, 'message')
+          .equals(
+            'Metadata scope for '
+            '`Windows.Wdk.System.SystemInformation.SYSTEM_INFORMATION_CLASS` '
+            'could not be found. Please ensure that you load the Wdk metadata '
+            'first by calling `loadWdkMetadata()`.',
+          );
     });
 
     test(

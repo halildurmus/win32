@@ -52,11 +52,24 @@ void main() {
     });
 
     test('lists NuGet packages', () async {
+      await MetadataStore.loadWdkMetadata();
       await MetadataStore.loadWin32Metadata();
       await MetadataStore.loadWinRTMetadata();
 
       final packages = LocalStorage.packages;
       check(packages).isNotEmpty();
+
+      final wdkPackage = packages
+          .where((p) => p.name == MetadataType.wdk.packageName)
+          .lastOrNull;
+      check(wdkPackage).isNotNull();
+      check(wdkPackage!.name).equals('Microsoft.Windows.WDK.Win32Metadata');
+      check(wdkPackage.version).isNotEmpty();
+      check(wdkPackage.path)
+          .contains('winmd\\Microsoft.Windows.WDK.Win32Metadata');
+      check(wdkPackage.toString()).equals(
+        'Microsoft.Windows.WDK.Win32Metadata@${wdkPackage.version} (${wdkPackage.path})',
+      );
 
       final win32Package = packages
           .where((p) => p.name == MetadataType.win32.packageName)

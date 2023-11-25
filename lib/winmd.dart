@@ -17,7 +17,9 @@
 /// More recently, the same format has been utilized to provide machine-readable
 /// metadata for the
 /// [traditional Win32 and COM APIs](https://github.com/microsoft/win32metadata)
-/// that have been available in Windows for many years.
+/// and [Win32 APIs in the Windows Driver Kit (WDK)](
+/// https://github.com/microsoft/wdkmetadata) that have been available in
+/// Windows for many years.
 ///
 /// While the ability to interpret this format from Dart is valuable for various
 /// reasons, the original motivation behind creating this package was to
@@ -71,9 +73,30 @@
 ///   await MetadataStore.loadWinRTMetadata(version: '10.0.22621.755');
 /// ```
 ///
+/// To retrieve the latest Wdk metadata scope, you can use the following code:
+///
+/// ```dart
+/// // Win32 metadata also needs to be loaded to resolve references from Wdk
+/// // metadata
+/// await MetadataStore.loadWin32Metadata();
+///
+/// final scope = await MetadataStore.loadWdkMetadata();
+/// ```
+///
+/// By default, the `loadWdkMetadata` method downloads the latest version of
+/// the NuGet package `Microsoft.Windows.WDK.Win32Metadata` and loads the
+/// metadata from it. If you prefer a different version, you can specify the
+/// `version` string as a parameter:
+///
+/// ```dart
+/// final scope =
+///   await MetadataStore.loadWdkMetadata(version: '0.9.9-experimental');
+/// ```
+///
 /// **Note:** If the metadata you want to load has already been downloaded and
-/// stored locally, `loadWin32Metadata` or `loadWinRTMetadata` will load the
-/// metadata from the local storage instead of downloading it again.
+/// stored locally, `loadWdkMetadata`, `loadWin32Metadata`, or
+/// `loadWinRTMetadata` will load the metadata from the local storage instead of
+/// downloading it again.
 ///
 /// You can get the list of downloaded NuGet packages as follows:
 ///

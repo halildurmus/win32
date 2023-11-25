@@ -176,6 +176,7 @@ String convertTypeToProjection(
 }
 
 void main(List<String> args) async {
+  await MetadataStore.loadWdkMetadata();
   await MetadataStore.loadWin32Metadata();
   await MetadataStore.loadWinRTMetadata();
 
@@ -188,4 +189,6 @@ void main(List<String> args) async {
   listStructs();
 
   print(convertTypeToProjection());
+
+  MetadataStore.close();
 }

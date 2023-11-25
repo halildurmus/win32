@@ -16,8 +16,8 @@ import 'scope.dart';
 import 'type_def.dart';
 
 /// A class that manages the caching and retrieval of Windows Metadata (.winmd)
-/// files and provides methods to obtain metadata scopes for Win32 and WinRT
-/// APIs.
+/// files and provides methods to obtain metadata scopes for Wdk, Win32, and
+/// WinRT.
 ///
 /// Use this class to obtain a reference of a scope without creating unnecessary
 /// copies or cycles.
@@ -77,7 +77,7 @@ abstract final class MetadataStore {
   /// `Windows`.
   ///
   /// Throws a [WinmdException] if the metadata scope is not found or if it
-  /// requires loading the Win32 or WinRT metadata first.
+  /// requires loading the Wdk, Win32, or WinRT metadata first.
   static Scope getScopeForType(String typeName) {
     if (typeName.isEmpty) {
       throw ArgumentError.value(typeName, 'typeName', 'Must not be empty.');
@@ -89,6 +89,17 @@ abstract final class MetadataStore {
     }
 
     if (!_isInitialized) initialize();
+
+    if (typeName.startsWith('Windows.Wdk')) {
+      final assetName = MetadataType.wdk.assetName;
+      if (scopeCache.containsKey(assetName)) return scopeCache[assetName]!;
+
+      throw WinmdException(
+        'Metadata scope for `$typeName` could not be found. Please ensure '
+        'that you load the Wdk metadata first by calling '
+        '`loadWdkMetadata()`.',
+      );
+    }
 
     if (typeName.startsWith('Windows.Win32')) {
       final assetName = MetadataType.win32.assetName;
@@ -206,6 +217,56 @@ abstract final class MetadataStore {
     extractArchiveToDisk(archive, path);
 
     return path;
+  }
+
+  /// Loads Wdk metadata.
+  ///
+  /// If the metadata is already downloaded, it loads it from the local cache.
+  ///
+  /// Throws an exception if the download or loading fails.
+  static Future<Scope> _loadWdkMetadata({required String version}) async {
+    final MetadataType(:assetName, :packageName) = MetadataType.wdk;
+    final packagePath = await _unpackPackage(packageName, version);
+    final metadataFile = File('$packagePath\\$assetName');
+    return loadMetadataFromFile(metadataFile);
+  }
+
+  /// Loads Wdk metadata.
+  ///
+  /// If [version] is not specified, it loads the latest available version.
+  ///
+  /// If the metadata is already downloaded, it loads it from the local cache.
+  ///
+  /// Throws an exception if the download or loading fails.
+  static Future<Scope> loadWdkMetadata({String? version}) async {
+    if (!_isInitialized) initialize();
+
+    final MetadataType(:assetName, :packageName) = MetadataType.wdk;
+    final downloadVersion = version ??
+        await _nugetClient!
+            .getLatestPackageVersion(packageName, includePrerelease: true);
+
+    // If the metadata is already downloaded, load it.
+    final package =
+        LocalStorage.getPackage(packageName, version: downloadVersion);
+    if (package != null) {
+      final metadataFile = File('${package.path}\\$assetName');
+      if (metadataFile.existsSync()) return loadMetadataFromFile(metadataFile);
+    }
+
+    // The lock file is used to prevent multiple processes from downloading the
+    // same package at the same time during the test run.
+    final lockFile = File('${LocalStorage.path}\\$packageName.lock');
+    final randomAccessFile = lockFile.openSync(mode: FileMode.write)
+      ..lockSync(FileLock.blockingExclusive);
+    try {
+      return await _loadWdkMetadata(version: downloadVersion);
+    } finally {
+      randomAccessFile.closeSync();
+      try {
+        lockFile.deleteSync();
+      } catch (_) {}
+    }
   }
 
   /// Loads Win32 metadata.

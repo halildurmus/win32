@@ -2,25 +2,28 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// Parse the Windows Metadata for a Win32 type and grab some interesting
+// Parse the Windows Metadata for a Wdk type and grab some interesting
 // information about it.
 
 import 'package:winmd/winmd.dart';
 
 void main() async {
-  // Load the Win32 metadata
-  final scope = await MetadataStore.loadWin32Metadata();
+  // Win32 metadata also needs to be loaded to resolve references from Wdk
+  // metadata
+  await MetadataStore.loadWin32Metadata();
+  // Load the Wdk metadata
+  final scope = await MetadataStore.loadWdkMetadata();
 
   // Find a namespace
   final namespace =
-      scope.findTypeDef('Windows.Win32.UI.WindowsAndMessaging.Apis')!;
+      scope.findTypeDef('Windows.Wdk.System.SystemInformation.Apis')!;
 
   // Sort the functions alphabetically
   final sortedMethods = namespace.methods
     ..sort((a, b) => a.name.compareTo(b.name));
 
   // Find a specific function
-  const funcName = 'MessageBoxW';
+  const funcName = 'NtQuerySystemInformation';
   final method = sortedMethods.firstWhere((m) => m.name == funcName);
 
   // Print out some information about it

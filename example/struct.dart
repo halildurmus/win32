@@ -16,4 +16,6 @@ void main() async {
   final unionFieldType = unionField.typeIdentifier.typeArg?.type;
   print('unionField: $unionFieldType | isNested: ${unionFieldType?.isNested}');
   print('Field: ${unionField.token.toHexString(32)}');
+
+  MetadataStore.close();
 }
