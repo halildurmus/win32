@@ -1,3 +1,8 @@
+## 4.1.0
+
+- Added `MetadataStore.loadWdkMetadata()` method to load the
+  Windows Driver Kit (WDK) metadata (#87)
+
 ## 4.0.1
 
 - The `MetadataStore.loadWinRTMetadata()` method now loads the latest *stable*
