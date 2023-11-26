@@ -49,6 +49,7 @@ const header = '''
 #include <Shlwapi.h>
 #include <uiautomationclient.h>
 #include <wincred.h>
+#include <WINTERNL.H>
 #include <wlanapi.h>
 #include <ws2bth.h>
 #include <Xinput.h>
