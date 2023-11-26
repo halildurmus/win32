@@ -29,7 +29,6 @@ const IID_IUIAutomationObjectModelPattern =
 /// Provides access to the underlying object model implemented by a control
 /// or application.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationObjectModelPattern extends IUnknown {
   // vtable begins at 3, is 1 entries long.

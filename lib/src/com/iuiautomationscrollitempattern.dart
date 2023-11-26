@@ -29,7 +29,6 @@ const IID_IUIAutomationScrollItemPattern =
 /// Exposes a method that enables an item in a scrollable view to be placed
 /// in a visible portion of the view.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationScrollItemPattern extends IUnknown {
   // vtable begins at 3, is 1 entries long.

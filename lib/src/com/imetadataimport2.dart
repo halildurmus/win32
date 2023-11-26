@@ -29,7 +29,6 @@ const IID_IMetaDataImport2 = '{fce5efa0-8bba-4f8e-a036-8f2022b08466}';
 /// Extends the IMetaDataImport interface to provide the capability of
 /// working with generic types.
 ///
-/// {@category Interface}
 /// {@category com}
 class IMetaDataImport2 extends IMetaDataImport {
   // vtable begins at 65, is 8 entries long.

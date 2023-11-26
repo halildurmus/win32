@@ -30,7 +30,6 @@ const IID_IUIAutomationDropTargetPattern =
 /// Automation provider for an element that can be the drop target of a
 /// drag-and-drop operation.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationDropTargetPattern extends IUnknown {
   // vtable begins at 3, is 4 entries long.

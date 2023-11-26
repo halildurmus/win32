@@ -30,7 +30,6 @@ const IID_IUIAutomationProxyFactoryEntry =
 /// Automation, and exposes properties and methods that can be used by
 /// client applications to interact with IUIAutomationProxyFactory objects.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationProxyFactoryEntry extends IUnknown {
   // vtable begins at 3, is 13 entries long.

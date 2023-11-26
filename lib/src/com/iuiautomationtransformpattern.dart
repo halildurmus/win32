@@ -28,7 +28,6 @@ const IID_IUIAutomationTransformPattern =
 
 /// Provides access to a control that can be moved, resized, or rotated.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationTransformPattern extends IUnknown {
   // vtable begins at 3, is 9 entries long.

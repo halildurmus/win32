@@ -31,7 +31,6 @@ const IID_IErrorInfo = '{1cf2b120-547d-101b-8e65-08002b2bd119}';
 /// of the component and GUID of the interface in which the error occurred,
 /// and the name and topic of the Help file that applies to the error.
 ///
-/// {@category Interface}
 /// {@category com}
 class IErrorInfo extends IUnknown {
   // vtable begins at 3, is 5 entries long.

@@ -28,7 +28,6 @@ const IID_IUIAutomationTablePattern = '{620e691c-ea96-4710-a850-754b24ce2417}';
 /// Provides access to a control that acts as a container for a collection
 /// of child elements.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationTablePattern extends IUnknown {
   // vtable begins at 3, is 6 entries long.

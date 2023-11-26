@@ -33,7 +33,6 @@ const IID_IAudioSessionControl = '{f4b1a599-7266-4319-a8ca-e70acb11e8cd}';
 /// calling the `IAudioClient::GetService` method with parameter riid set to
 /// REFIID [IID_IAudioSessionControl].
 ///
-/// {@category Interface}
 /// {@category com}
 class IAudioSessionControl extends IUnknown {
   // vtable begins at 3, is 9 entries long.

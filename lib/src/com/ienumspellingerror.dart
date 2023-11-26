@@ -27,7 +27,6 @@ const IID_IEnumSpellingError = '{803e3bd4-2828-4410-8290-418d1d73c762}';
 
 /// An enumeration of the spelling errors.
 ///
-/// {@category Interface}
 /// {@category com}
 class IEnumSpellingError extends IUnknown {
   // vtable begins at 3, is 1 entries long.

@@ -28,7 +28,6 @@ const IID_IUIAutomationAnnotationPattern =
 
 /// Provides access to the properties of an annotation in a document.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationAnnotationPattern extends IUnknown {
   // vtable begins at 3, is 10 entries long.

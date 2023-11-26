@@ -28,7 +28,6 @@ const IID_IRestrictedErrorInfo = '{82ba7092-4c88-427d-a7bc-16dd93feb67e}';
 /// Represents the details of an error, including restricted error
 /// information.
 ///
-/// {@category Interface}
 /// {@category com}
 class IRestrictedErrorInfo extends IUnknown {
   // vtable begins at 3, is 2 entries long.

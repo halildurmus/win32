@@ -28,7 +28,6 @@ const IID_IAppxManifestPackageDependency =
 
 /// Describes the dependency of one package on another package.
 ///
-/// {@category Interface}
 /// {@category com}
 class IAppxManifestPackageDependency extends IUnknown {
   // vtable begins at 3, is 3 entries long.

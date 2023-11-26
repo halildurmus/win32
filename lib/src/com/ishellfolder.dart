@@ -28,7 +28,6 @@ const IID_IShellFolder = '{000214e6-0000-0000-c000-000000000046}';
 /// Exposed by all Shell namespace folder objects, its methods are used to
 /// manage folders.
 ///
-/// {@category Interface}
 /// {@category com}
 class IShellFolder extends IUnknown {
   // vtable begins at 3, is 10 entries long.

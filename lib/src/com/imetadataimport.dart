@@ -29,7 +29,6 @@ const IID_IMetaDataImport = '{7dac8207-d3ae-4c75-9b67-92801a497d44}';
 /// portable executable (PE) file or other source, such as a type library or
 /// a stand-alone, run-time metadata binary.
 ///
-/// {@category Interface}
 /// {@category com}
 class IMetaDataImport extends IUnknown {
   // vtable begins at 3, is 62 entries long.

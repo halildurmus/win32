@@ -29,7 +29,6 @@ const IID_IEnumWbemClassObject = '{027947e1-d731-11ce-a357-000000000001}';
 /// Information Model (CIM) objects and is similar to a standard COM
 /// enumerator.
 ///
-/// {@category Interface}
 /// {@category com}
 class IEnumWbemClassObject extends IUnknown {
   // vtable begins at 3, is 5 entries long.

@@ -28,7 +28,6 @@ const IID_IAppxManifestReader = '{4e1bd148-55a0-4480-a3d1-15544710637c}';
 /// Represents an object model of the package manifest that provides methods
 /// to access manifest elements and attributes.
 ///
-/// {@category Interface}
 /// {@category com}
 class IAppxManifestReader extends IUnknown {
   // vtable begins at 3, is 9 entries long.

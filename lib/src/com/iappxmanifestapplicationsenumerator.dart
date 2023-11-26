@@ -28,7 +28,6 @@ const IID_IAppxManifestApplicationsEnumerator =
 
 /// Enumerates the applications defined in the package manifest.
 ///
-/// {@category Interface}
 /// {@category com}
 class IAppxManifestApplicationsEnumerator extends IUnknown {
   // vtable begins at 3, is 3 entries long.

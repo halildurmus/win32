@@ -30,7 +30,6 @@ const IID_INetworkListManagerEvents = '{dcb00001-570f-4a9b-8d69-199fdba5723b}';
 /// that are interested on higher-level events, for example internet
 /// connectivity, implement this interface.
 ///
-/// {@category Interface}
 /// {@category com}
 class INetworkListManagerEvents extends IUnknown {
   // vtable begins at 3, is 1 entries long.

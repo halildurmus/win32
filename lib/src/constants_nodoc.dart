@@ -817,7 +817,7 @@ const PROC_THREAD_ATTRIBUTE_PSEUDOCONSOLE =
             PROC_THREAD_ATTRIBUTE_NUMBER) |
         PROC_THREAD_ATTRIBUTE_INPUT;
 
-/// {@category Enum}
+/// {@category enum}
 class PROC_THREAD_ATTRIBUTE_NUM {
   static const ProcThreadAttributeParentProcess = 0;
   static const ProcThreadAttributeHandleList = 2;
@@ -1356,7 +1356,7 @@ final TD_ERROR_ICON = Pointer<Utf16>.fromAddress(0xFFFE);
 final TD_INFORMATION_ICON = Pointer<Utf16>.fromAddress(0xFFFD);
 final TD_SHIELD_ICON = Pointer<Utf16>.fromAddress(0xFFFC);
 
-/// {@category Enum}
+/// {@category enum}
 class TASKDIALOG_FLAGS {
   static const int TDF_ENABLE_HYPERLINKS = 0x0001;
   static const int TDF_USE_HICON_MAIN = 0x0002;
@@ -1378,7 +1378,7 @@ class TASKDIALOG_FLAGS {
   static const int TDF_SIZE_TO_CONTENT = 0x01000000;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class TASKDIALOG_COMMON_BUTTON_FLAGS {
   static const int TDCBF_OK_BUTTON = 0x0001;
   static const int TDCBF_YES_BUTTON = 0x0002;
@@ -1388,14 +1388,14 @@ class TASKDIALOG_COMMON_BUTTON_FLAGS {
   static const int TDCBF_CLOSE_BUTTON = 0x0020;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class THEMESIZE {
   static const int TS_MIN = 0;
   static const int TS_TRUE = 1;
   static const int TS_DRAW = 2;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class WINDOWPARTS {
   static const int WP_CAPTION = 1;
   static const int WP_SMALLCAPTION = 2;
@@ -1438,34 +1438,34 @@ class WINDOWPARTS {
   static const int WP_BORDER = 39;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class FRAMESTATES {
   static const int FS_ACTIVE = 1;
   static const int FS_INACTIVE = 2;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class CAPTIONSTATES {
   static const int CS_ACTIVE = 1;
   static const int CS_INACTIVE = 2;
   static const int CS_DISABLED = 3;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class MAXCAPTIONSTATES {
   static const int MXCS_ACTIVE = 1;
   static const int MXCS_INACTIVE = 2;
   static const int MXCS_DISABLED = 3;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class MINCAPTIONSTATES {
   static const int MNCS_ACTIVE = 1;
   static const int MNCS_INACTIVE = 2;
   static const int MNCS_DISABLED = 3;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class HORZSCROLLSTATES {
   static const int HSS_NORMAL = 1;
   static const int HSS_HOT = 2;
@@ -1473,7 +1473,7 @@ class HORZSCROLLSTATES {
   static const int HSS_DISABLED = 4;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class HORZTHUMBSTATES {
   static const int HTS_NORMAL = 1;
   static const int HTS_HOT = 2;
@@ -1481,7 +1481,7 @@ class HORZTHUMBSTATES {
   static const int HTS_DISABLED = 4;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class VERTSCROLLSTATES {
   static const int VSS_NORMAL = 1;
   static const int VSS_HOT = 2;
@@ -1489,7 +1489,7 @@ class VERTSCROLLSTATES {
   static const int VSS_DISABLED = 4;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class VERTTHUMBSTATES {
   static const int VTS_NORMAL = 1;
   static const int VTS_HOT = 2;
@@ -1497,7 +1497,7 @@ class VERTTHUMBSTATES {
   static const int VTS_DISABLED = 4;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class SYSBUTTONSTATES {
   static const int SBS_NORMAL = 1;
   static const int SBS_HOT = 2;
@@ -1505,7 +1505,7 @@ class SYSBUTTONSTATES {
   static const int SBS_DISABLED = 4;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class MINBUTTONSTATES {
   static const int MINBS_NORMAL = 1;
   static const int MINBS_HOT = 2;
@@ -1513,7 +1513,7 @@ class MINBUTTONSTATES {
   static const int MINBS_DISABLED = 4;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class MAXBUTTONSTATES {
   static const int MAXBS_NORMAL = 1;
   static const int MAXBS_HOT = 2;
@@ -1521,7 +1521,7 @@ class MAXBUTTONSTATES {
   static const int MAXBS_DISABLED = 4;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class RESTOREBUTTONSTATES {
   static const int RBS_NORMAL = 1;
   static const int RBS_HOT = 2;
@@ -1529,7 +1529,7 @@ class RESTOREBUTTONSTATES {
   static const int RBS_DISABLED = 4;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class HELPBUTTONSTATES {
   static const int HBS_NORMAL = 1;
   static const int HBS_HOT = 2;
@@ -1537,7 +1537,7 @@ class HELPBUTTONSTATES {
   static const int HBS_DISABLED = 4;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class CLOSEBUTTONSTATES {
   static const int CBS_NORMAL = 1;
   static const int CBS_HOT = 2;
@@ -1545,7 +1545,7 @@ class CLOSEBUTTONSTATES {
   static const int CBS_DISABLED = 4;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class SMALLCLOSEBUTTONSTATES {
   static const int SCBS_NORMAL = 1;
   static const int SCBS_HOT = 2;
@@ -1553,50 +1553,50 @@ class SMALLCLOSEBUTTONSTATES {
   static const int SCBS_DISABLED = 4;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class FRAMEBOTTOMSTATES {
   static const int FRB_ACTIVE = 1;
   static const int FRB_INACTIVE = 2;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class FRAMELEFTSTATES {
   static const int FRL_ACTIVE = 1;
   static const int FRL_INACTIVE = 2;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class FRAMERIGHTSTATES {
   static const int FRR_ACTIVE = 1;
   static const int FRR_INACTIVE = 2;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class SMALLCAPTIONSTATES {
   static const int SCS_ACTIVE = 1;
   static const int SCS_INACTIVE = 2;
   static const int SCS_DISABLED = 3;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class SMALLFRAMEBOTTOMSTATES {
   static const int SFRB_ACTIVE = 1;
   static const int SFRB_INACTIVE = 2;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class SMALLFRAMELEFTSTATES {
   static const int SFRL_ACTIVE = 1;
   static const int SFRL_INACTIVE = 2;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class SMALLFRAMERIGHTSTATES {
   static const int SFRR_ACTIVE = 1;
   static const int SFRR_INACTIVE = 2;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class MDICLOSEBUTTONSTATES {
   static const int MDCL_NORMAL = 1;
   static const int MDCL_HOT = 2;
@@ -1604,7 +1604,7 @@ class MDICLOSEBUTTONSTATES {
   static const int MDCL_DISABLED = 4;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class MDIMINBUTTONSTATES {
   static const int MDMI_NORMAL = 1;
   static const int MDMI_HOT = 2;
@@ -1612,7 +1612,7 @@ class MDIMINBUTTONSTATES {
   static const int MDMI_DISABLED = 4;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class MDIRESTOREBUTTONSTATES {
   static const int MDRE_NORMAL = 1;
   static const int MDRE_HOT = 2;
@@ -2022,7 +2022,7 @@ const BLUETOOTH_DEVICE_NAME_SIZE = 256;
 const BTH_MAX_PIN_SIZE = 16;
 const BTH_LINK_KEY_LENGTH = 16;
 
-/// {@category Enum}
+/// {@category enum}
 class POWER_INFORMATION_LEVEL {
   static const SystemPowerPolicyAc = 0;
   static const SystemPowerPolicyDc = 1;
@@ -2123,19 +2123,19 @@ class POWER_INFORMATION_LEVEL {
   static const PowerInformationLevelMaximum = 96;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class FFFP_MODE {
   static const FFFP_EXACTMATCH = 0;
   static const FFFP_NEARESTPARENTMATCH = FFFP_EXACTMATCH + 1;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class FDAP {
   static const FDAP_BOTTOM = 0;
   static const FDAP_TOP = 1;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class KF_CATEGORY {
   static const KF_CATEGORY_VIRTUAL = 1;
   static const KF_CATEGORY_FIXED = 2;
@@ -2143,7 +2143,7 @@ class KF_CATEGORY {
   static const KF_CATEGORY_PERUSER = 4;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class KF_DEFINITION_FLAGS {
   static const KFDF_LOCAL_REDIRECT_ONLY = 0x2;
   static const KFDF_ROAMABLE = 0x4;
@@ -2153,7 +2153,7 @@ class KF_DEFINITION_FLAGS {
   static const KFDF_NO_REDIRECT_UI = 0x4;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class KF_REDIRECT_FLAGS {
   static const KF_REDIRECT_USER_EXCLUSIVE = 0x1;
   static const KF_REDIRECT_COPY_SOURCE_DACL = 0x2;
@@ -2170,7 +2170,7 @@ class KF_REDIRECT_FLAGS {
 
 /// Specifies a type of computer name.
 ///
-/// {@category Enum}
+/// {@category enum}
 class COMPUTER_NAME_FORMAT {
   static const ComputerNameNetBIOS = 0;
   static const ComputerNameDnsHostname = 1;
@@ -2183,7 +2183,7 @@ class COMPUTER_NAME_FORMAT {
   static const ComputerNameMax = 8;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class KF_REDIRECTION_CAPABILITIES {
   static const KF_REDIRECTION_CAPABILITIES_ALLOW_ALL = 0xff;
   static const KF_REDIRECTION_CAPABILITIES_REDIRECTABLE = 0x1;
@@ -2193,7 +2193,7 @@ class KF_REDIRECTION_CAPABILITIES {
   static const KF_REDIRECTION_CAPABILITIES_DENY_PERMISSIONS = 0x400;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class SIGDN {
   static const SIGDN_NORMALDISPLAY = 0;
   static const SIGDN_PARENTRELATIVEPARSING = 0x80018001;
@@ -2207,7 +2207,7 @@ class SIGDN {
   static const SIGDN_PARENTRELATIVEFORUI = 0x8009400;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class EOLE_AUTHENTICATION_CAPABILITIES {
   static const EOAC_NONE = 0;
   static const EOAC_MUTUAL_AUTH = 0x1;
@@ -2227,7 +2227,7 @@ class EOLE_AUTHENTICATION_CAPABILITIES {
   static const EOAC_RESERVED1 = 0x4000;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class WBEM_GENERIC_FLAG_TYPE {
   static const WBEM_FLAG_RETURN_IMMEDIATELY = 0x10;
   static const WBEM_FLAG_RETURN_WBEM_COMPLETE = 0;
@@ -2247,19 +2247,19 @@ class WBEM_GENERIC_FLAG_TYPE {
   static const WBEM_FLAG_STRONG_VALIDATION = 0x100000;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class WBEM_REFRESHER_FLAGS {
   static const WBEM_FLAG_REFRESH_AUTO_RECONNECT = 0;
   static const WBEM_FLAG_REFRESH_NO_AUTO_RECONNECT = 1;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class WBEM_TIMEOUT_TYPE {
   static const WBEM_NO_WAIT = 0;
   static const WBEM_INFINITE = 0xffffffff;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class NLM_CONNECTIVITY {
   static const NLM_CONNECTIVITY_DISCONNECTED = 0;
   static const NLM_CONNECTIVITY_IPV4_NOTRAFFIC = 0x1;
@@ -2272,7 +2272,7 @@ class NLM_CONNECTIVITY {
   static const NLM_CONNECTIVITY_IPV6_INTERNET = 0x400;
 }
 
-/// {@category Enum}
+/// {@category enum}
 class NLM_ENUM_NETWORK {
   static const NLM_ENUM_NETWORK_CONNECTED = 0x1;
   static const NLM_ENUM_NETWORK_DISCONNECTED = 0x2;

@@ -31,7 +31,6 @@ const IID_IAudioSessionManager = '{bfa971f1-4d5e-40bb-935e-967039bfbee4}';
 /// [IAudioSessionManager] interface by calling the `IMMDevice::Activate`
 /// method with parameter `iid` set to REFIID [IID_IAudioSessionManager].
 ///
-/// {@category Interface}
 /// {@category com}
 class IAudioSessionManager extends IUnknown {
   // vtable begins at 3, is 2 entries long.

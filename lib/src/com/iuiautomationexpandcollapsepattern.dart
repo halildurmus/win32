@@ -29,7 +29,6 @@ const IID_IUIAutomationExpandCollapsePattern =
 /// Provides access to a control that can visually expand to display
 /// content, and collapse to hide content.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationExpandCollapsePattern extends IUnknown {
   // vtable begins at 3, is 4 entries long.

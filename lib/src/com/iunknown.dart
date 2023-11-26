@@ -22,7 +22,6 @@ const IID_IUnknown = '{00000000-0000-0000-c000-000000000046}';
 /// three methods in IUnknown are the first entries in the vtable for every
 /// interface.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUnknown {
   // vtable begins at 0, is 3 entries long.

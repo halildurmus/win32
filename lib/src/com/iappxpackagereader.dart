@@ -27,7 +27,6 @@ const IID_IAppxPackageReader = '{b5c49650-99bc-481c-9a34-3d53a4106708}';
 
 /// Provides a read-only object model for app packages.
 ///
-/// {@category Interface}
 /// {@category com}
 class IAppxPackageReader extends IUnknown {
   // vtable begins at 3, is 5 entries long.

@@ -29,7 +29,6 @@ const IID_IShellItemImageFactory = '{bcc18b79-ba16-442f-80c4-8a59c30c463b}';
 /// If no thumbnail or icon is available for the requested item, a per-class
 /// icon may be provided from the Shell.
 ///
-/// {@category Interface}
 /// {@category com}
 class IShellItemImageFactory extends IUnknown {
   // vtable begins at 3, is 1 entries long.

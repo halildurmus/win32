@@ -36,7 +36,6 @@ const IID_IMoniker = '{0000000f-0000-0000-c000-000000000046}';
 /// the linked object to edit it, the moniker is bound; this loads the link
 /// source into memory.
 ///
-/// {@category Interface}
 /// {@category com}
 class IMoniker extends IPersistStream {
   // vtable begins at 8, is 15 entries long.

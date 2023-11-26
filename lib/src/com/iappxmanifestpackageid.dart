@@ -27,7 +27,6 @@ const IID_IAppxManifestPackageId = '{283ce2d7-7153-4a91-9649-7a0f7240945f}';
 
 /// Provides access to the package identity.
 ///
-/// {@category Interface}
 /// {@category com}
 class IAppxManifestPackageId extends IUnknown {
   // vtable begins at 3, is 8 entries long.

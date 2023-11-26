@@ -31,7 +31,6 @@ const IID_IUIAutomationTextEditPattern =
 /// that performs auto-correction or enables input composition through an
 /// Input Method Editor (IME).
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationTextEditPattern extends IUIAutomationTextPattern {
   // vtable begins at 9, is 2 entries long.

@@ -1,75 +1,108 @@
 dartdoc:
   categories:
-    "advapi32":
+    'advapi32':
       markdown: doc/advapi32.md
-    "bluetooth":
+    'bluetooth':
       markdown: doc/bluetooth.md
-    "comctl32":
+    'comctl32':
       markdown: doc/comctl32.md
-    "comdlg32":
+    'comdlg32':
       markdown: doc/comdlg32.md
-    "crypt32":
+    'crypt32':
       markdown: doc/crypt32.md
-    "dxva2":
+    'dxva2':
       markdown: doc/dxva2.md
-    "gdi32":
+    'gdi32':
       markdown: doc/gdi32.md
-    "kernel32":
+    'kernel32':
       markdown: doc/kernel32.md
-    "netapi32":
+    'netapi32':
       markdown: doc/netapi32.md
-    "ole32":
+    'ole32':
       markdown: doc/ole32.md
-    "oleaut32":
+    'oleaut32':
       markdown: doc/oleaut32.md
-    "winsock":
+    'winsock':
       markdown: doc/winsock.md
-    "powrprof":
+    'powrprof':
       markdown: doc/powrprof.md
-    "psapi":
+    'psapi':
       markdown: doc/psapi.md
-    "winscard":
+    'winscard':
       markdown: doc/winscard.md
-    "winspool":
+    'winspool':
       markdown: doc/winspool.md
-    "wlanapi":
+    'wlanapi':
       markdown: doc/wlanapi.md
-    "shell32":
+    'shell32':
       markdown: doc/shell32.md
-    "user32":
+    'user32':
       markdown: doc/user32.md
-    "uxtheme":
+    'uxtheme':
       markdown: doc/uxtheme.md
-    "dwmapi":
+    'dwmapi':
       markdown: doc/dwmapi.md
-    "magnification":
+    'magnification':
       markdown: doc/magnification.md
-    "onecore":
+    'onecore':
       markdown: doc/onecore.md
-    "setupapi":
+    'setupapi':
       markdown: doc/setupapi.md
-    "version":
+    'version':
       markdown: doc/version.md
-    "xinput":
+    'xinput':
       markdown: doc/xinput.md
-    "winmm":
+    'winmm':
       markdown: doc/winmm.md
-    "com":
-      name: "COM-based APIs"
+    'com':
+      name: 'COM-based APIs'
       markdown: doc/com.md
-    "winrt":
-      name: "WinRT APIs"
+    'winrt':
+      name: 'WinRT APIs'
       markdown: doc/winrt.md
-    "struct":
-      name: "Structures"
+    'struct':
+      name: 'Structures'
       markdown: doc/struct.md
-    "enum":
-      name: "Enumerations"
+    'enum':
+      name: 'Enumerations'
       markdown: doc/enum.md
-    "examples":
-      name: "Sample apps"
+    'examples':
+      name: 'Sample apps'
       markdown: doc/examples.md
-  categoryOrder: ["kernel32", "user32", "gdi32", "shell32", "ole32", "oleaut32", "comctl32", "comdlg32", "netapi32", "uxtheme", "dwmapi", "magnification", "onecore", "psapi", "setupapi", "version", "xinput", "advapi32", "winsock", "bluetooth", "powrprof", "winscard", "winspool", "wlanapi", "dxva2", "winmm", "com", "winrt", "struct", "enum", "examples"]
+  categoryOrder:
+    [
+      'kernel32',
+      'user32',
+      'gdi32',
+      'shell32',
+      'ole32',
+      'oleaut32',
+      'comctl32',
+      'comdlg32',
+      'netapi32',
+      'uxtheme',
+      'dwmapi',
+      'magnification',
+      'onecore',
+      'psapi',
+      'setupapi',
+      'version',
+      'xinput',
+      'advapi32',
+      'winsock',
+      'bluetooth',
+      'powrprof',
+      'winscard',
+      'winspool',
+      'wlanapi',
+      'dxva2',
+      'winmm',
+      'com',
+      'winrt',
+      'struct',
+      'enum',
+      'examples',
+    ]
   showUndocumentedCategories: true
   nodoc: ['lib/src/constants_nodoc.dart']
   ignore:

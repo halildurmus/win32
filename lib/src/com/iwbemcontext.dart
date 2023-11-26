@@ -25,7 +25,6 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_IWbemContext = '{44aca674-e8fc-11d0-a07c-00c04fb68820}';
 
-/// {@category Interface}
 /// {@category com}
 class IWbemContext extends IUnknown {
   // vtable begins at 3, is 9 entries long.

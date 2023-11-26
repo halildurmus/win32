@@ -28,7 +28,6 @@ const IID_IUIAutomationTextRangeArray =
 
 /// Represents a collection of IUIAutomationTextRange objects.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationTextRangeArray extends IUnknown {
   // vtable begins at 3, is 2 entries long.

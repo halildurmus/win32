@@ -28,7 +28,6 @@ const IID_IProvideClassInfo = '{b196b283-bab4-101a-b69c-00aa00341d07}';
 /// Provides access to the type information for an object's coclass entry in
 /// its type library.
 ///
-/// {@category Interface}
 /// {@category com}
 class IProvideClassInfo extends IUnknown {
   // vtable begins at 3, is 1 entries long.

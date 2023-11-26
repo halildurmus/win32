@@ -129,7 +129,7 @@ sealed class _VARIANT_Anonymous_0 extends Union {
 ///
 /// VARIANTs must be initialized with [VariantInit] before their use.
 ///
-/// {@category Struct}
+/// {@category struct}
 base class VARIANT extends Struct {
   external _VARIANT_Anonymous_0 __VARIANT_NAME_1;
 
@@ -406,7 +406,7 @@ base class VARIANT extends Struct {
 /// methods of IPropertyStorage to define the type tag and the value of a
 /// property in a property set.
 ///
-/// {@category Struct}
+/// {@category struct}
 base class PROPVARIANT extends Struct {
   @Uint16()
   external int vt;

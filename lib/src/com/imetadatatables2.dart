@@ -29,7 +29,6 @@ const IID_IMetaDataTables2 = '{badb5f70-58da-43a9-a1c6-d74819f19b15}';
 /// Extends IMetaDataTables to include methods for working with metadata
 /// streams.
 ///
-/// {@category Interface}
 /// {@category com}
 class IMetaDataTables2 extends IMetaDataTables {
   // vtable begins at 22, is 2 entries long.

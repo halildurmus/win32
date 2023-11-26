@@ -28,7 +28,6 @@ const IID_IClassFactory = '{00000001-0000-0000-c000-000000000046}';
 /// Creates a call object for processing calls to the methods of an
 /// asynchronous interface.
 ///
-/// {@category Interface}
 /// {@category com}
 class IClassFactory extends IUnknown {
   // vtable begins at 3, is 2 entries long.

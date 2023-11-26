@@ -30,7 +30,6 @@ const IID_ISpNotifySource = '{5eff4aef-8487-11d2-961c-00c04f8ee628}';
 /// recognized. SAPI components that generate notifications implement an
 /// ISpNotifySource.
 ///
-/// {@category Interface}
 /// {@category com}
 class ISpNotifySource extends IUnknown {
   // vtable begins at 3, is 7 entries long.

@@ -31,7 +31,6 @@ const IID_IFileDialog2 = '{61744fc7-85b5-4791-a9b0-272276309b13}';
 /// the common file dialog as well as to specify alternate text to display
 /// as a label on the Cancel button.
 ///
-/// {@category Interface}
 /// {@category com}
 class IFileDialog2 extends IFileDialog {
   // vtable begins at 27, is 2 entries long.

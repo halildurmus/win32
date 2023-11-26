@@ -30,7 +30,6 @@ const IID_INetwork = '{dcb00002-570f-4a9b-8d69-199fdba5723b}';
 /// also represent a collection of network connections with a similar
 /// network signature.
 ///
-/// {@category Interface}
 /// {@category com}
 class INetwork extends IDispatch {
   // vtable begins at 7, is 13 entries long.

@@ -28,7 +28,6 @@ const IID_IMetaDataTables = '{d8f579ab-402d-4b8e-82d9-5d63b1065c68}';
 /// Provides methods for the storage and retrieval of metadata information
 /// in tables.
 ///
-/// {@category Interface}
 /// {@category com}
 class IMetaDataTables extends IUnknown {
   // vtable begins at 3, is 19 entries long.

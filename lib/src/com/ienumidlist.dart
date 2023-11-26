@@ -31,7 +31,6 @@ const IID_IEnumIDList = '{000214f2-0000-0000-c000-000000000046}';
 /// object and passes a pointer to the object's [IEnumIDList] interface back
 /// to the calling application.
 ///
-/// {@category Interface}
 /// {@category com}
 class IEnumIDList extends IUnknown {
   // vtable begins at 3, is 4 entries long.

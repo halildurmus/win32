@@ -31,7 +31,6 @@ const IID_IFileIsInUse = '{64a1cbf0-3a1a-4461-9158-376969693950}';
 /// of this interface to gather information to present to the user in a
 /// dialog box.
 ///
-/// {@category Interface}
 /// {@category com}
 class IFileIsInUse extends IUnknown {
   // vtable begins at 3, is 5 entries long.

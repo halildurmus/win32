@@ -26,7 +26,6 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_ISpVoice = '{6c44df74-72b9-4992-a1ec-ef996e0422d4}';
 
-/// {@category Interface}
 /// {@category com}
 class ISpVoice extends ISpEventSource {
   // vtable begins at 13, is 25 entries long.

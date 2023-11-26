@@ -26,7 +26,6 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_ISpeechVoice = '{269316d8-57bd-11d2-9eee-00c04f797396}';
 
-/// {@category Interface}
 /// {@category com}
 class ISpeechVoice extends IDispatch {
   // vtable begins at 7, is 32 entries long.

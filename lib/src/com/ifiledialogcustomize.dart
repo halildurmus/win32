@@ -28,7 +28,6 @@ const IID_IFileDialogCustomize = '{e6fdd21a-163f-4975-9c8c-a69f1ba37034}';
 /// Exposes methods that allow an application to add controls to a common
 /// file dialog.
 ///
-/// {@category Interface}
 /// {@category com}
 class IFileDialogCustomize extends IUnknown {
   // vtable begins at 3, is 27 entries long.

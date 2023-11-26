@@ -29,7 +29,6 @@ const IID_IUIAutomationTextRange3 = '{6a315d69-5512-4c2e-85f0-53fce6dd4bc2}';
 /// Extends the IUIAutomationTextRange2 interface to support faster access
 /// to the underlying rich text data on a text range.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationTextRange3 extends IUIAutomationTextRange2 {
   // vtable begins at 22, is 3 entries long.

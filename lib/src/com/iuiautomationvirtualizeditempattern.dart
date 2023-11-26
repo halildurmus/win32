@@ -29,7 +29,6 @@ const IID_IUIAutomationVirtualizedItemPattern =
 /// Represents a virtualized item, which is an item that is represented by a
 /// placeholder automation element in the Microsoft UI Automation tree.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationVirtualizedItemPattern extends IUnknown {
   // vtable begins at 3, is 1 entries long.

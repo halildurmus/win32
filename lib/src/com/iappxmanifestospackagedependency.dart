@@ -26,7 +26,6 @@ import 'iunknown.dart';
 const IID_IAppxManifestOSPackageDependency =
     '{154995ee-54a6-4f14-ac97-d8cf0519644b}';
 
-/// {@category Interface}
 /// {@category com}
 class IAppxManifestOSPackageDependency extends IUnknown {
   // vtable begins at 3, is 2 entries long.

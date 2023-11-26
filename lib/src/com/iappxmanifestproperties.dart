@@ -28,7 +28,6 @@ const IID_IAppxManifestProperties = '{03faf64d-f26f-4b2c-aaf7-8fe7789b8bca}';
 /// Provides read-only access to the properties section of a package
 /// manifest.
 ///
-/// {@category Interface}
 /// {@category com}
 class IAppxManifestProperties extends IUnknown {
   // vtable begins at 3, is 2 entries long.

@@ -28,7 +28,6 @@ const IID_IUIAutomationStylesPattern = '{85b5f0a2-bd79-484a-ad2b-388c9838d5fb}';
 /// Enables Microsoft UI Automation clients to retrieve the visual styles
 /// associated with an element in a document.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationStylesPattern extends IUnknown {
   // vtable begins at 3, is 16 entries long.

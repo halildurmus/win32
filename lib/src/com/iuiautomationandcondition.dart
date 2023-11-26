@@ -30,7 +30,6 @@ const IID_IUIAutomationAndCondition = '{a7d0af36-b912-45fe-9855-091ddc174aec}';
 /// applications can use to retrieve information about an AND-based property
 /// condition.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationAndCondition extends IUIAutomationCondition {
   // vtable begins at 3, is 3 entries long.

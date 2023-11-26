@@ -28,7 +28,6 @@ const IID_IUIAutomationNotCondition = '{f528b657-847b-498c-8896-d52b565407a1}';
 
 /// Represents a condition that is the negative of another condition.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationNotCondition extends IUIAutomationCondition {
   // vtable begins at 3, is 1 entries long.

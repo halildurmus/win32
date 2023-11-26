@@ -29,7 +29,6 @@ const IID_ISpellCheckerChangedEventHandler =
 /// Allows the caller to create a handler for notifications that the state
 /// of the speller has changed.
 ///
-/// {@category Interface}
 /// {@category com}
 class ISpellCheckerChangedEventHandler extends IUnknown {
   // vtable begins at 3, is 1 entries long.

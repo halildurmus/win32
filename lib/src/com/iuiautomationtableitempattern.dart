@@ -29,7 +29,6 @@ const IID_IUIAutomationTableItemPattern =
 /// Provides access to a child element in a container that supports
 /// IUIAutomationTablePattern.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationTableItemPattern extends IUnknown {
   // vtable begins at 3, is 4 entries long.

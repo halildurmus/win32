@@ -30,7 +30,6 @@ const IID_IEnumNetworks = '{dcb00003-570f-4a9b-8d69-199fdba5723b}';
 /// enumerates all networks available on the local machine. This interface
 /// can be obtained from the `INetworkListManager` interface.
 ///
-/// {@category Interface}
 /// {@category com}
 class IEnumNetworks extends IDispatch {
   // vtable begins at 7, is 5 entries long.

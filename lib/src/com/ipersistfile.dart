@@ -31,7 +31,6 @@ const IID_IPersistFile = '{0000010b-0000-0000-c000-000000000046}';
 /// file varies greatly from one application to another, the implementation
 /// of `IPersistFile::Load`on the object must also open its disk file.
 ///
-/// {@category Interface}
 /// {@category com}
 class IPersistFile extends IPersist {
   // vtable begins at 4, is 5 entries long.

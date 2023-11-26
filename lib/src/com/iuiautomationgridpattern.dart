@@ -29,7 +29,6 @@ const IID_IUIAutomationGridPattern = '{414c3cdc-856b-4f5b-8538-3131c6302550}';
 /// of child controls that are organized in a two-dimensional logical
 /// coordinate system that can be traversed by row and column.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationGridPattern extends IUnknown {
   // vtable begins at 3, is 5 entries long.

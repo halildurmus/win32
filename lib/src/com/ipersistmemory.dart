@@ -28,7 +28,6 @@ const IID_IPersistMemory = '{bd1ae5e0-a6ae-11ce-bd37-504200c10000}';
 
 /// Saves and loads objects from a stream.
 ///
-/// {@category Interface}
 /// {@category com}
 class IPersistMemory extends IPersist {
   // vtable begins at 4, is 5 entries long.

@@ -30,7 +30,6 @@ const IID_IUIAutomationSelectionPattern2 =
 /// Extends the IUIAutomationSelectionPattern interface to provide
 /// information about selected items.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationSelectionPattern2 extends IUIAutomationSelectionPattern {
   // vtable begins at 9, is 8 entries long.

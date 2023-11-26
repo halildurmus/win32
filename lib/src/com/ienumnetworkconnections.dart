@@ -31,7 +31,6 @@ const IID_IEnumNetworkConnections = '{dcb00006-570f-4a9b-8d69-199fdba5723b}';
 /// connections within a network. This interface can be obtained from the
 /// INetwork interface.
 ///
-/// {@category Interface}
 /// {@category com}
 class IEnumNetworkConnections extends IDispatch {
   // vtable begins at 7, is 5 entries long.

@@ -31,7 +31,6 @@ const IID_IAudioStreamVolume = '{93014887-242d-4068-8a15-cf5e93b90fe3}';
 /// object by calling the `IAudioClient::GetService` method with parameter
 /// riid set to REFIID [IID_IAudioStreamVolume].
 ///
-/// {@category Interface}
 /// {@category com}
 class IAudioStreamVolume extends IUnknown {
   // vtable begins at 3, is 5 entries long.

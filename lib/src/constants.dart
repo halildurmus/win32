@@ -5802,7 +5802,7 @@ final VARIANT_FALSE = 0;
 
 /// Specifies the variant types.
 ///
-/// {@category Enum}
+/// {@category enum}
 class VARENUM {
   static const VT_EMPTY = 0;
   static const VT_NULL = 1;
@@ -6628,7 +6628,7 @@ const MONITORINFOF_PRIMARY = 0x00000001;
 
 /// Describes a monitor's color temperature.
 ///
-/// {@category Enum}
+/// {@category enum}
 class MC_COLOR_TEMPERATURE {
   static const MC_COLOR_TEMPERATURE_UNKNOWN = 0;
   static const MC_COLOR_TEMPERATURE_4000K = 1;
@@ -6643,7 +6643,7 @@ class MC_COLOR_TEMPERATURE {
 
 /// Identifies monitor display technologies.
 ///
-/// {@category Enum}
+/// {@category enum}
 class MC_DISPLAY_TECHNOLOGY_TYPE {
   static const MC_SHADOW_MASK_CATHODE_RAY_TUBE = 0;
   static const MC_APERTURE_GRILL_CATHODE_RAY_TUBE = 1;
@@ -6658,7 +6658,7 @@ class MC_DISPLAY_TECHNOLOGY_TYPE {
 
 /// Specifies whether to set or get a monitor's red, green, or blue drive.
 ///
-/// {@category Enum}
+/// {@category enum}
 class MC_DRIVE_TYPE {
   static const MC_RED_DRIVE = 0;
   static const MC_GREEN_DRIVE = 1;
@@ -6667,7 +6667,7 @@ class MC_DRIVE_TYPE {
 
 /// Specifies whether to get or set a monitor's red, green, or blue gain.
 ///
-/// {@category Enum}
+/// {@category enum}
 class MC_GAIN_TYPE {
   static const MC_RED_GAIN = 0;
   static const MC_GREEN_GAIN = 1;
@@ -6677,7 +6677,7 @@ class MC_GAIN_TYPE {
 /// Specifies whether to get or set the vertical or horizontal position of a
 /// monitor's display area.
 ///
-/// {@category Enum}
+/// {@category enum}
 class MC_POSITION_TYPE {
   static const MC_HORIZONTAL_POSITION = 0;
   static const MC_VERTICAL_POSITION = 1;
@@ -6686,7 +6686,7 @@ class MC_POSITION_TYPE {
 /// Specifies whether to get or set the width or height of a monitor's display
 /// area.
 ///
-/// {@category Enum}
+/// {@category enum}
 class MC_SIZE_TYPE {
   static const MC_WIDTH = 0;
   static const MC_HEIGHT = 1;
@@ -6694,7 +6694,7 @@ class MC_SIZE_TYPE {
 
 /// Identifies the dots per inch (dpi) setting for a thread, process, or window.
 ///
-/// {@category Enum}
+/// {@category enum}
 class DPI_AWARENESS {
   /// Invalid DPI awareness. This is an invalid DPI awareness value.
   static const DPI_AWARENESS_INVALID = -1;
@@ -6755,7 +6755,7 @@ const DPI_AWARENESS_CONTEXT_UNAWARE_GDISCALED = -5;
 /// windows created in the thread to host child windows with a different
 /// DPI_AWARENESS_CONTEXT.
 ///
-/// {@category Enum}
+/// {@category enum}
 class DPI_HOSTING_BEHAVIOR {
   /// Invalid DPI hosting behavior. This usually occurs if the previous
   /// SetThreadDpiHostingBehavior call used an invalid parameter.
@@ -6776,7 +6776,7 @@ class DPI_HOSTING_BEHAVIOR {
 /// much scaling work an application performs for DPI versus how much is done by
 /// the system.
 ///
-/// {@category Enum}
+/// {@category enum}
 class PROCESS_DPI_AWARENESS {
   /// DPI unaware. This app does not scale for DPI changes and is always assumed
   /// to have a scale factor of 100% (96 DPI). It will be automatically scaled
@@ -6798,7 +6798,7 @@ class PROCESS_DPI_AWARENESS {
 
 /// Identifies the dots per inch (dpi) setting for a monitor.
 ///
-/// {@category Enum}
+/// {@category enum}
 class MONITOR_DPI_TYPE {
   /// The effective DPI. This value should be used when determining the correct
   /// scale factor for scaling UI elements. This incorporates the scale factor
@@ -7412,7 +7412,7 @@ const DTT_VALIDBITS = DTT_TEXTCOLOR |
 /// within dialogs. The values in this enumeration are bitfields and can be
 /// combined.
 ///
-/// {@category Enum}
+/// {@category enum}
 class DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS {
   /// The default behavior of the dialog manager. The dialog managed will update
   /// the font, size, and position of the child window on DPI changes.
@@ -7433,7 +7433,7 @@ class DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS {
 /// with SetDialogDpiChangeBehavior in order to override the default DPI scaling
 /// behavior for dialogs.
 ///
-/// {@category Enum}
+/// {@category enum}
 class DIALOG_DPI_CHANGE_BEHAVIORS {
   /// The default behavior of the dialog manager. In response to a DPI change,
   /// the dialog manager will re-layout each control, update the font on each
@@ -7488,7 +7488,7 @@ const DISPLAY_DEVICE_MODESPRUNED = 0x08000000;
 /// The BLUETOOTH_AUTHENTICATION_METHOD enumeration defines the supported
 /// authentication types during device pairing.
 ///
-/// {@category Enum}
+/// {@category enum}
 class BLUETOOTH_AUTHENTICATION_METHOD {
   static const BLUETOOTH_AUTHENTICATION_METHOD_LEGACY = 0;
   static const BLUETOOTH_AUTHENTICATION_METHOD_OOB = 1;
@@ -7500,7 +7500,7 @@ class BLUETOOTH_AUTHENTICATION_METHOD {
 /// The BLUETOOTH_AUTHENTICATION_REQUIREMENTS enumeration specifies the 'Man in
 /// the Middle' protection required for authentication.
 ///
-/// {@category Enum}
+/// {@category enum}
 class BLUETOOTH_AUTHENTICATION_REQUIREMENTS {
   static const BLUETOOTH_MITM_ProtectionNotRequired = 0;
   static const BLUETOOTH_MITM_ProtectionRequired = 1;
@@ -7514,7 +7514,7 @@ class BLUETOOTH_AUTHENTICATION_REQUIREMENTS {
 /// The BLUETOOTH_IO_CAPABILITY enumeration defines the input/output
 /// capabilities of a Bluetooth Device.
 ///
-/// {@category Enum}
+/// {@category enum}
 class BLUETOOTH_IO_CAPABILITY {
   static const BLUETOOTH_IO_CAPABILITY_DISPLAYONLY = 0;
   static const BLUETOOTH_IO_CAPABILITY_DISPLAYYESNO = 1;
@@ -7529,7 +7529,7 @@ class BLUETOOTH_IO_CAPABILITY {
 
 /// Defines the set of options available to an Open or Save dialog.
 ///
-/// {@category Enum}
+/// {@category enum}
 class FILEOPENDIALOGOPTIONS {
   static const FOS_OVERWRITEPROMPT = 0x2;
   static const FOS_STRICTFILETYPES = 0x4;
@@ -7562,7 +7562,7 @@ class FILEOPENDIALOGOPTIONS {
 
 /// Desktop wallpaper slideshow settings for shuffling images.
 ///
-/// {@category Enum}
+/// {@category enum}
 class DESKTOP_SLIDESHOW_OPTIONS {
   /// Shuffle is enabled; the images are shown in a random order.
   static const DSO_SHUFFLEIMAGES = 0x1;
@@ -7570,7 +7570,7 @@ class DESKTOP_SLIDESHOW_OPTIONS {
 
 /// Gets the current status of the slideshow.
 ///
-/// {@category Enum}
+/// {@category enum}
 class DESKTOP_SLIDESHOW_STATE {
   /// Slideshows are enabled.
   static const DSS_ENABLED = 0x1;
@@ -7584,7 +7584,7 @@ class DESKTOP_SLIDESHOW_STATE {
 
 /// The direction that the slideshow should advance.
 ///
-/// {@category Enum}
+/// {@category enum}
 class DESKTOP_SLIDESHOW_DIRECTION {
   /// Advance the slideshow forward.
   static const DSD_FORWARD = 0;
@@ -7595,7 +7595,7 @@ class DESKTOP_SLIDESHOW_DIRECTION {
 
 /// Specifies how the desktop wallpaper should be displayed.
 ///
-/// {@category Enum}
+/// {@category enum}
 class DESKTOP_WALLPAPER_POSITION {
   /// Center the image; do not stretch.
   static const DWPOS_CENTER = 0;
@@ -8241,7 +8241,7 @@ const LR_SHARED = 0x00008000;
 /// Determines the concurrency model used for incoming calls to the objects
 /// created by this thread.
 ///
-/// {@category Enum}
+/// {@category enum}
 class RO_INIT_TYPE {
   static const RO_INIT_SINGLETHREADED = 0;
 
@@ -8256,7 +8256,7 @@ class RO_INIT_TYPE {
 
 /// Identifies the type of corrective action to be taken for a spelling error.
 ///
-/// {@category Enum}
+/// {@category enum}
 class CORRECTIVE_ACTION {
   /// There are no errors.
   static const NONE = 0;
@@ -8638,7 +8638,7 @@ class DWM_WINDOW_CORNER_PREFERENCE {
 /// The TOKEN_INFORMATION_CLASS enumeration contains values that specify the
 /// type of information being assigned to or retrieved from an access token.
 ///
-/// {@category Struct}
+/// {@category struct}
 class TOKEN_INFORMATION_CLASS {
   static const TokenUser = 1;
   static const TokenGroups = 2;
@@ -8954,7 +8954,7 @@ const GW_OWNER = 4;
 /// The WSL_DISTRIBUTION_FLAGS enumeration specifies the behavior of a
 /// distribution in the Windows Subsystem for Linux (WSL).
 ///
-/// {@category Enum}
+/// {@category enum}
 class WSL_DISTRIBUTION_FLAGS {
   /// No flags are being supplied.
   static const WSL_DISTRIBUTION_FLAGS_NONE = 0x0;
@@ -9364,7 +9364,7 @@ const SDC_VIRTUAL_REFRESH_RATE_AWARE = 0x00020000;
 /// The AUDCLNT_SHAREMODE enumeration defines constants that indicate whether an
 /// audio stream will run in shared mode or in exclusive mode.
 ///
-/// {@category Enum}
+/// {@category enum}
 class AUDCLNT_SHAREMODE {
   /// The audio stream will run in shared mode.
   static const AUDCLNT_SHAREMODE_SHARED = 0;
@@ -9376,7 +9376,7 @@ class AUDCLNT_SHAREMODE {
 /// The AUDCLNT_BUFFERFLAGS enumeration defines flags that indicate the status
 /// of an audio endpoint buffer.
 ///
-/// {@category Enum}
+/// {@category enum}
 class AUDCLNT_BUFFERFLAGS {
   /// The data in the packet is not correlated with the previous packet's device
   /// position; this is possibly due to a stream state transition or timing
@@ -9395,7 +9395,7 @@ class AUDCLNT_BUFFERFLAGS {
 
 /// Defines values that describe the characteristics of an audio stream.
 ///
-/// {@category Enum}
+/// {@category enum}
 class AUDCLNT_STREAMOPTIONS {
   /// No stream options.
   static const AUDCLNT_STREAMOPTIONS_NONE = 0;
@@ -9413,7 +9413,7 @@ class AUDCLNT_STREAMOPTIONS {
 
 /// Device registry property codes.
 ///
-/// {@category Enum}
+/// {@category enum}
 class SPDRP {
   /// The function retrieves a REG_SZ string that contains the description of a
   /// device.
@@ -9560,7 +9560,7 @@ class SPDRP {
 
 /// Specifies the set of possible COM apartment type qualifiers.
 ///
-/// {@category Enum}
+/// {@category enum}
 class APTTYPEQUALIFIER {
   /// No qualifier information for the current COM apartment type is available.
   static const APTTYPEQUALIFIER_NONE = 0;
@@ -9613,7 +9613,7 @@ class APTTYPEQUALIFIER {
 
 /// Specifies different types of apartments.
 ///
-/// {@category Enum}
+/// {@category enum}
 class APTTYPE {
   /// The current thread.
   static const APTTYPE_CURRENT = -1;
@@ -9634,7 +9634,7 @@ class APTTYPE {
 /// Contains values that specify the type of reference to use when returning UI
 /// Automation elements.
 ///
-/// {@category Enum}
+/// {@category enum}
 class AutomationElementMode {
   /// Specifies that returned elements have no reference to the underlying UI
   /// and contain only cached information.
@@ -9649,7 +9649,7 @@ class AutomationElementMode {
 /// whether an accessible technology client receives all events, or a subset
 /// where duplicate events are detected and filtered.
 ///
-/// {@category Enum}
+/// {@category enum}
 class CoalesceEventsOptions {
   /// Event coalescing is disabled.
   static const CoalesceEventsOptions_Disabled = 0;
@@ -9662,7 +9662,7 @@ class CoalesceEventsOptions {
 /// indicates whether an accessible technology client adjusts provider request
 /// timeouts when the provider is non-responsive.
 ///
-/// {@category Enum}
+/// {@category enum}
 class ConnectionRecoveryBehaviorOptions {
   /// Connection recovery is disabled.
   static const ConnectionRecoveryBehaviorOptions_Disabled = 0;
@@ -9674,7 +9674,7 @@ class ConnectionRecoveryBehaviorOptions {
 /// The PropertyConditionFlags (uiautomationclient.h) enumeration contains
 /// values used in creating property conditions.
 ///
-/// {@category Enum}
+/// {@category enum}
 class PropertyConditionFlags {
   /// No flags.
   static const PropertyConditionFlags_None = 0;
@@ -9688,7 +9688,7 @@ class PropertyConditionFlags {
 
 /// Contains values that specify the direction and distance to scroll.
 ///
-/// {@category Enum}
+/// {@category enum}
 class ScrollAmount {
   /// Scrolling is done in large decrements, equivalent to pressing the PAGE UP
   /// key or clicking on a blank part of a scroll bar.
@@ -9713,7 +9713,7 @@ class ScrollAmount {
 /// Contains values that specify the toggle state of a Microsoft UI Automation
 /// element that implements the Toggle control pattern.
 ///
-/// {@category Enum}
+/// {@category enum}
 class ToggleState {
   /// The UI Automation element is not selected, checked, marked or otherwise
   /// activated.
@@ -9756,7 +9756,7 @@ class TreeScope {
 /// The TreeTraversalOptions enumeration defines values that can be used to
 /// customize tree navigation order.
 ///
-/// {@category Enum}
+/// {@category enum}
 class TreeTraversalOptions {
   /// Pre-order, visit children from first to last.
   static const TreeTraversalOptions_Default = 0;
@@ -9771,7 +9771,7 @@ class TreeTraversalOptions {
 /// Contains values that specify the current state of the window for purposes
 /// of user interaction.
 ///
-/// {@category Enum}
+/// {@category enum}
 class WindowInteractionState {
   /// The window is running. This does not guarantee that the window is ready
   /// for user interaction or is responding.
@@ -9792,7 +9792,7 @@ class WindowInteractionState {
 
 /// Contains values that specify the visual state of a window.
 ///
-/// {@category Enum}
+/// {@category enum}
 class WindowVisualState {
   /// The window is normal (restored).
   static const WindowVisualState_Normal = 0;
@@ -10732,7 +10732,7 @@ const UIA_IsWindowPatternAvailablePropertyId = 30044;
 
 /// Possible settings for the Automatic Logon Policy.
 ///
-/// {@category Enum}
+/// {@category enum}
 class WinHttpRequestAutoLogonPolicy {
   /// An authenticated log on, using the default credentials, is performed for
   /// all requests.
@@ -10749,7 +10749,7 @@ class WinHttpRequestAutoLogonPolicy {
 
 /// Options that can be set or retrieved for the current WinHTTP session.
 ///
-/// {@category Enum}
+/// {@category enum}
 class WinHttpRequestOption {
   /// Sets or retrieves a VARIANT that contains the user agent string.
   static const WinHttpRequestOption_UserAgentString = 0;

@@ -28,7 +28,6 @@ const IID_IUIAutomationCondition = '{352ffba8-0973-437c-a61f-f64cafd81df9}';
 /// This is the primary interface for conditions used in filtering when
 /// searching for elements in the UI Automation tree.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationCondition extends IUnknown {
   // vtable begins at 3, is 0 entries long.

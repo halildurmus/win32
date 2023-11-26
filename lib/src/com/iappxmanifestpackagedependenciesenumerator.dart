@@ -28,7 +28,6 @@ const IID_IAppxManifestPackageDependenciesEnumerator =
 
 /// Enumerates the package dependencies defined in the package manifest.
 ///
-/// {@category Interface}
 /// {@category com}
 class IAppxManifestPackageDependenciesEnumerator extends IUnknown {
   // vtable begins at 3, is 3 entries long.

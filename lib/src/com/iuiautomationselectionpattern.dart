@@ -29,7 +29,6 @@ const IID_IUIAutomationSelectionPattern =
 /// Provides access to a control that contains selectable child items. The
 /// children of this element support IUIAutomationSelectionItemPattern.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationSelectionPattern extends IUnknown {
   // vtable begins at 3, is 6 entries long.
