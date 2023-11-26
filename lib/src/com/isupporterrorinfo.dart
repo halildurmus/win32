@@ -29,7 +29,6 @@ const IID_ISupportErrorInfo = '{df0b3d60-548f-101b-8e65-08002b2bd119}';
 /// correctly. Automation objects that use the error handling interfaces
 /// must implement ISupportErrorInfo.
 ///
-/// {@category Interface}
 /// {@category com}
 class ISupportErrorInfo extends IUnknown {
   // vtable begins at 3, is 1 entries long.

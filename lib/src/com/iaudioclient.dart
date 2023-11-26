@@ -30,7 +30,6 @@ const IID_IAudioClient = '{1cb9ad4c-dbfa-4c32-b178-c2f568a703b2}';
 /// shared-mode stream) or the hardware buffer of an audio endpoint device
 /// (for an exclusive-mode stream).
 ///
-/// {@category Interface}
 /// {@category com}
 class IAudioClient extends IUnknown {
   // vtable begins at 3, is 12 entries long.

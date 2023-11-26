@@ -28,7 +28,6 @@ const IID_IUIAutomationScrollPattern = '{88f4d42a-e881-459d-a77c-73bbbb7e02dc}';
 /// Provides access to a control that acts as a scrollable container for a
 /// collection of child elements.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationScrollPattern extends IUnknown {
   // vtable begins at 3, is 14 entries long.

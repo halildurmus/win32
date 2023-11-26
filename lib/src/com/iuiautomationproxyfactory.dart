@@ -29,7 +29,6 @@ const IID_IUIAutomationProxyFactory = '{85b94ecd-849d-42b6-b94d-d6db23fdf5a4}';
 /// Automation provider for UI elements that do not have native support for
 /// UI Automation. This interface is implemented by proxies.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationProxyFactory extends IUnknown {
   // vtable begins at 3, is 2 entries long.

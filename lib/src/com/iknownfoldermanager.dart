@@ -25,7 +25,6 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_IKnownFolderManager = '{8be2d872-86aa-4d47-b776-32cca40c7018}';
 
-/// {@category Interface}
 /// {@category com}
 class IKnownFolderManager extends IUnknown {
   // vtable begins at 3, is 10 entries long.

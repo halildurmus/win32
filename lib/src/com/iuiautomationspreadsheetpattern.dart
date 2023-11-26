@@ -29,7 +29,6 @@ const IID_IUIAutomationSpreadsheetPattern =
 /// Enables a client application to access the items (cells) in a
 /// spreadsheet.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationSpreadsheetPattern extends IUnknown {
   // vtable begins at 3, is 1 entries long.

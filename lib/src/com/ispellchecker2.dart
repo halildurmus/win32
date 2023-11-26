@@ -32,7 +32,6 @@ const IID_ISpellChecker2 = '{e7ed1c71-87f7-4378-a840-c9200dacee47}';
 /// text, get suggestions, update user dictionaries, and maintain options,
 /// as can ISpellChecker from which it is derived.
 ///
-/// {@category Interface}
 /// {@category com}
 class ISpellChecker2 extends ISpellChecker {
   // vtable begins at 17, is 1 entries long.

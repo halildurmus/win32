@@ -29,7 +29,6 @@ const IID_IUIAutomationCustomNavigationPattern =
 /// Exposes a method to support access by a Microsoft UI Automation client
 /// to controls that support a custom navigation order.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationCustomNavigationPattern extends IUnknown {
   // vtable begins at 3, is 1 entries long.

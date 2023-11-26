@@ -29,7 +29,6 @@ const IID_IUIAutomationGridItemPattern =
 /// Provides access to a child control in a grid-style container that
 /// supports the IUIAutomationGridPattern interface.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationGridItemPattern extends IUnknown {
   // vtable begins at 3, is 10 entries long.

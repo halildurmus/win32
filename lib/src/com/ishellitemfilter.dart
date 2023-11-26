@@ -28,7 +28,6 @@ const IID_IShellItemFilter = '{2659b475-eeb8-48b7-8f07-b378810f48cf}';
 /// Exposed by a client to specify how to filter the enumeration of a Shell
 /// item by a server application.
 ///
-/// {@category Interface}
 /// {@category com}
 class IShellItemFilter extends IUnknown {
   // vtable begins at 3, is 2 entries long.

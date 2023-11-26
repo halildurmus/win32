@@ -27,7 +27,6 @@ const IID_IInspectable = '{af86e2e0-b12d-4c6a-9c5a-d7aa65101e90}';
 
 /// Provides functionality required for all Windows Runtime classes.
 ///
-/// {@category Interface}
 /// {@category com}
 class IInspectable extends IUnknown {
   // vtable begins at 3, is 3 entries long.

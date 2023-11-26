@@ -29,7 +29,6 @@ const IID_IUIAutomationItemContainerPattern =
 /// Exposes a method that retrieves an item from a container, such as a
 /// virtual list.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationItemContainerPattern extends IUnknown {
   // vtable begins at 3, is 1 entries long.

@@ -30,7 +30,6 @@ const IID_IPersist = '{0000010c-0000-0000-c000-000000000046}';
 /// client process, as it is used in the default implementation of
 /// marshaling.
 ///
-/// {@category Interface}
 /// {@category com}
 class IPersist extends IUnknown {
   // vtable begins at 3, is 1 entries long.

@@ -166,7 +166,7 @@ class Guid {
 
 /// Represents a native globally unique identifier (GUID).
 ///
-/// {@category Struct}
+/// {@category struct}
 @Packed(4)
 base class GUID extends Struct {
   @Uint32()

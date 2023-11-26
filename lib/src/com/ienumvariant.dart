@@ -30,7 +30,6 @@ const IID_IEnumVARIANT = '{00020404-0000-0000-c000-000000000046}';
 /// this interface do not need to know the specific type (or types) of the
 /// elements in the collection.
 ///
-/// {@category Interface}
 /// {@category com}
 class IEnumVARIANT extends IUnknown {
   // vtable begins at 3, is 4 entries long.

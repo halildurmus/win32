@@ -26,7 +26,6 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_INetworkListManager = '{dcb00000-570f-4a9b-8d69-199fdba5723b}';
 
-/// {@category Interface}
 /// {@category com}
 class INetworkListManager extends IDispatch {
   // vtable begins at 7, is 9 entries long.

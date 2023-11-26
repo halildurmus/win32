@@ -27,7 +27,6 @@ const IID_IShellItemArray = '{b63ea76d-1f85-456f-a19c-48159efa858b}';
 
 /// Exposes methods that create and manipulate Shell item arrays.
 ///
-/// {@category Interface}
 /// {@category com}
 class IShellItemArray extends IUnknown {
   // vtable begins at 3, is 7 entries long.

@@ -31,7 +31,6 @@ const IID_IAudioClock = '{cd63314f-3fba-4a1b-812c-ef96358728e7}';
 /// the `IAudioClient::GetService` method with parameter `riid` set to
 /// REFIID [IID_IAudioClock].
 ///
-/// {@category Interface}
 /// {@category com}
 class IAudioClock extends IUnknown {
   // vtable begins at 3, is 3 entries long.

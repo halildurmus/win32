@@ -29,7 +29,6 @@ const IID_IUIAutomationTextRange2 = '{bb9b40e0-5e04-46bd-9be0-4b601b9afad4}';
 /// Extends the IUIAutomationTextRange interface to enable Microsoft UI
 /// Automation clients to programmatically invoke context menus.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationTextRange2 extends IUIAutomationTextRange {
   // vtable begins at 21, is 1 entries long.

@@ -31,7 +31,6 @@ const IID_IUIAutomationProxyFactoryMapping =
 /// interface. The entries are in the order in which the system will attempt
 /// to use the proxies.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationProxyFactoryMapping extends IUnknown {
   // vtable begins at 3, is 9 entries long.

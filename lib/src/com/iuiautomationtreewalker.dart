@@ -28,7 +28,6 @@ const IID_IUIAutomationTreeWalker = '{4042c624-389c-4afc-a630-9df854a541fc}';
 /// Exposes properties and methods that UI Automation client applications
 /// use to view and navigate the UI Automation elements on the desktop.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationTreeWalker extends IUnknown {
   // vtable begins at 3, is 13 entries long.

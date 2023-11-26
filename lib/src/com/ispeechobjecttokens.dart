@@ -29,7 +29,6 @@ const IID_ISpeechObjectTokens = '{9285b776-2e7b-4bc0-b53e-580eb6fa967f}';
 /// The ISpeechObjectTokens automation interface represents a collection of
 /// SpObjectToken objects.
 ///
-/// {@category Interface}
 /// {@category com}
 class ISpeechObjectTokens extends IDispatch {
   // vtable begins at 7, is 3 entries long.

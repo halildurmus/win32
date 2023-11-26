@@ -25,7 +25,6 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_IUIAutomation = '{30cbe57d-d9d0-452a-ab13-7ac5ac4825ee}';
 
-/// {@category Interface}
 /// {@category com}
 class IUIAutomation extends IUnknown {
   // vtable begins at 3, is 55 entries long.

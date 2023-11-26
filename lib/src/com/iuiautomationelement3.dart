@@ -28,7 +28,6 @@ const IID_IUIAutomationElement3 = '{8471df34-aee0-4a01-a7de-7db9af12c296}';
 
 /// Extends the IUIAutomationElement2 interface.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationElement3 extends IUIAutomationElement2 {
   // vtable begins at 91, is 3 entries long.

@@ -29,7 +29,6 @@ const IID_IUIAutomation4 = '{1189c02a-05f8-4319-8e21-e817e3db2860}';
 /// Extends the IUIAutomation3 interface to expose additional methods for
 /// controlling Microsoft UI Automation functionality.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomation4 extends IUIAutomation3 {
   // vtable begins at 66, is 2 entries long.

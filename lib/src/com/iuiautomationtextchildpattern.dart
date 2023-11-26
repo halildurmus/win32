@@ -29,7 +29,6 @@ const IID_IUIAutomationTextChildPattern =
 /// Provides access a text-based control (or an object embedded in text)
 /// that is a child or descendant of another text-based control.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationTextChildPattern extends IUnknown {
   // vtable begins at 3, is 2 entries long.

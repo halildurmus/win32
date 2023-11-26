@@ -12,7 +12,7 @@ const CLSID_CorMetaDataDispenser = '{E5CB7A31-7512-11D2-89CE-0080C792E5D8}';
 /// Contains flag values that control metadata behavior upon opening manifest
 /// files.
 ///
-/// {@category Enum}
+/// {@category enum}
 class CorOpenFlags {
   /// Indicates that the file should be opened for reading only.
   static const ofRead = 0x00000000;

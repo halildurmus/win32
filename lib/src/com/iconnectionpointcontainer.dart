@@ -27,7 +27,6 @@ const IID_IConnectionPointContainer = '{b196b284-bab4-101a-b69c-00aa00341d07}';
 
 /// Supports connection points for connectable objects.
 ///
-/// {@category Interface}
 /// {@category com}
 class IConnectionPointContainer extends IUnknown {
   // vtable begins at 3, is 2 entries long.

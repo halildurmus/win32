@@ -27,7 +27,6 @@ const IID_IAppxFilesEnumerator = '{f007eeaf-9831-411c-9847-917cdc62d1fe}';
 
 /// Enumerates the payload files in a package.
 ///
-/// {@category Interface}
 /// {@category com}
 class IAppxFilesEnumerator extends IUnknown {
   // vtable begins at 3, is 3 entries long.

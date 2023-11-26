@@ -30,7 +30,6 @@ const IID_IUIAutomationTextRange = '{a543cc6a-f4ae-494b-8239-c814481187a8}';
 /// use the IUIAutomationTextRange interface to select, compare, and
 /// retrieve embedded objects from the text span.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationTextRange extends IUnknown {
   // vtable begins at 3, is 18 entries long.

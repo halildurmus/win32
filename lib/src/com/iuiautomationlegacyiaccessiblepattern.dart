@@ -30,7 +30,6 @@ const IID_IUIAutomationLegacyIAccessiblePattern =
 /// clients to retrieve UI information from Microsoft Active Accessibility
 /// (MSAA) servers.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationLegacyIAccessiblePattern extends IUnknown {
   // vtable begins at 3, is 24 entries long.

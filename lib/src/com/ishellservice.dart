@@ -29,7 +29,6 @@ const IID_IShellService = '{5836fb00-8187-11cf-a12b-00aa004ae837}';
 /// component implementing a certain interface is shared among multiple
 /// clients, such as Windows Internet Explorer and Windows Explorer.
 ///
-/// {@category Interface}
 /// {@category com}
 class IShellService extends IUnknown {
   // vtable begins at 3, is 1 entries long.

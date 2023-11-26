@@ -32,7 +32,6 @@ const IID_IStream = '{0000000c-0000-0000-c000-000000000046}';
 /// stream but, most frequently, streams are elements nested within a
 /// storage object. They are similar to standard files.
 ///
-/// {@category Interface}
 /// {@category com}
 class IStream extends ISequentialStream {
   // vtable begins at 5, is 9 entries long.

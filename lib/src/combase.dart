@@ -21,7 +21,6 @@ typedef VTablePointer = Pointer<Pointer<IntPtr>>;
 /// A representation of a generic COM object. All Dart COM objects inherit from
 /// this class.
 ///
-/// {@category Interface}
 /// {@category com}
 base class COMObject extends Struct {
   external VTablePointer lpVtbl;

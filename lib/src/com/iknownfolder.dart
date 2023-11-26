@@ -31,7 +31,6 @@ const IID_IKnownFolder = '{3aa7af7e-9b36-420c-a8e3-f77d4674a488}';
 /// a method for the retrieval of a known folder's `IShellItem` object. It
 /// also provides methods to get or set the path of the known folder.
 ///
-/// {@category Interface}
 /// {@category com}
 class IKnownFolder extends IUnknown {
   // vtable begins at 3, is 9 entries long.

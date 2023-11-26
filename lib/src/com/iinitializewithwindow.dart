@@ -28,7 +28,6 @@ const IID_IInitializeWithWindow = '{3e68d4bd-7135-4d10-8018-9fb6d9f33fa1}';
 /// Exposes a method through which a client can provide an owner window to a
 /// Windows Runtime (WinRT) object used in a desktop application.
 ///
-/// {@category Interface}
 /// {@category com}
 class IInitializeWithWindow extends IUnknown {
   // vtable begins at 3, is 1 entries long.

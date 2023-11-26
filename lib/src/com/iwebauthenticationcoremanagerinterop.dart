@@ -31,7 +31,6 @@ const IID_IWebAuthenticationCoreManagerInterop =
 /// WebAuthenticationCoreManager that are otherwise available only to UWP
 /// apps.
 ///
-/// {@category Interface}
 /// {@category com}
 class IWebAuthenticationCoreManagerInterop extends IInspectable {
   // vtable begins at 6, is 2 entries long.

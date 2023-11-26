@@ -27,7 +27,6 @@ const IID_IUIAutomationWindowPattern = '{0faef453-9208-43ef-bbb2-3b485177864f}';
 
 /// Provides access to the fundamental functionality of a window.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationWindowPattern extends IUnknown {
   // vtable begins at 3, is 15 entries long.

@@ -31,7 +31,6 @@ const IID_IAudioRenderClient = '{f294acfc-3146-4483-a7bf-addca7c260e2}';
 /// `IAudioClient::GetService` method with parameter `riid` set to REFIID
 /// [IID_IAudioRenderClient].
 ///
-/// {@category Interface}
 /// {@category com}
 class IAudioRenderClient extends IUnknown {
   // vtable begins at 3, is 2 entries long.

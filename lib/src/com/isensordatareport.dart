@@ -25,7 +25,6 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_ISensorDataReport = '{0ab9df9b-c4b5-4796-8898-0470706a2e1d}';
 
-/// {@category Interface}
 /// {@category com}
 class ISensorDataReport extends IUnknown {
   // vtable begins at 3, is 3 entries long.

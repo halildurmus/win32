@@ -27,7 +27,6 @@ const IID_IUIAutomationElementArray = '{14314595-b4bc-4055-95f2-58f2e42c9855}';
 
 /// Represents a collection of UI Automation elements.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationElementArray extends IUnknown {
   // vtable begins at 3, is 2 entries long.

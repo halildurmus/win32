@@ -33,7 +33,6 @@ const IID_IRunningObjectTable = '{00000010-0000-0000-c000-000000000046}';
 /// running; this allows the moniker to bind to the current instance instead
 /// of loading a new one.
 ///
-/// {@category Interface}
 /// {@category com}
 class IRunningObjectTable extends IUnknown {
   // vtable begins at 3, is 7 entries long.

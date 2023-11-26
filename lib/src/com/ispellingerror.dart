@@ -27,7 +27,6 @@ const IID_ISpellingError = '{b7c82d61-fbe8-4b47-9b27-6c0d2e0de0a3}';
 
 /// Provides information about a spelling error.
 ///
-/// {@category Interface}
 /// {@category com}
 class ISpellingError extends IUnknown {
   // vtable begins at 3, is 4 entries long.

@@ -25,7 +25,6 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_IShellItem = '{43826d1e-e718-42ee-bc55-a1e261c37bfe}';
 
-/// {@category Interface}
 /// {@category com}
 class IShellItem extends IUnknown {
   // vtable begins at 3, is 5 entries long.

@@ -26,7 +26,6 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_IShellLinkDual = '{88a05c00-f000-11ce-8350-444553540000}';
 
-/// {@category Interface}
 /// {@category com}
 class IShellLinkDual extends IDispatch {
   // vtable begins at 7, is 16 entries long.

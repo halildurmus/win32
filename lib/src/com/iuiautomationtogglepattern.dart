@@ -28,7 +28,6 @@ const IID_IUIAutomationTogglePattern = '{94cf8058-9b8d-4ab9-8bfd-4cd0a33c8c70}';
 /// Provides access to a control that can cycle through a set of states, and
 /// maintain a state after it is set.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationTogglePattern extends IUnknown {
   // vtable begins at 3, is 3 entries long.

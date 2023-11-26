@@ -28,7 +28,6 @@ const IID_IUIAutomationInvokePattern = '{fb377fbe-8ea6-46d5-9c73-6499642d3059}';
 /// Exposes a method that enables a client application to invoke the action
 /// of a control (typically a button).
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationInvokePattern extends IUnknown {
   // vtable begins at 3, is 1 entries long.

@@ -28,7 +28,6 @@ const IID_IUIAutomationSynchronizedInputPattern =
 
 /// Provides access to the keyboard or mouse input of a control.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationSynchronizedInputPattern extends IUnknown {
   // vtable begins at 3, is 2 entries long.

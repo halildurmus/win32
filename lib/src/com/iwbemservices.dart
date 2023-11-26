@@ -29,7 +29,6 @@ const IID_IWbemServices = '{9556dc99-828c-11cf-a37e-00aa003240c7}';
 /// WMI services. The interface is implemented by WMI and WMI providers, and
 /// is the primary WMI interface.
 ///
-/// {@category Interface}
 /// {@category com}
 class IWbemServices extends IUnknown {
   // vtable begins at 3, is 23 entries long.

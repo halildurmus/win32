@@ -30,7 +30,6 @@ const IID_IMetaDataDispenserEx = '{31bcfce2-dafb-11d2-9f81-00c04f79a0a3}';
 /// capability to control how the metadata APIs operate on the current
 /// metadata scope.
 ///
-/// {@category Interface}
 /// {@category com}
 class IMetaDataDispenserEx extends IMetaDataDispenser {
   // vtable begins at 6, is 6 entries long.

@@ -32,7 +32,7 @@ class StructProjection {
   }
 
   String get classPreamble {
-    const structCategoryComment = '/// {@category Struct}';
+    const structCategoryComment = '/// {@category struct}';
     final classComment = wrapCommentText(comment);
     final docComment = classComment.isEmpty
         ? structCategoryComment

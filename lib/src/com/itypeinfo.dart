@@ -30,7 +30,6 @@ const IID_ITypeInfo = '{00020401-0000-0000-c000-000000000046}';
 /// can use ITypeInfo to extract information about the characteristics and
 /// capabilities of objects from type libraries.
 ///
-/// {@category Interface}
 /// {@category com}
 class ITypeInfo extends IUnknown {
   // vtable begins at 3, is 19 entries long.

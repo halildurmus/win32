@@ -29,7 +29,6 @@ const IID_IUIAutomationOrCondition = '{8753f032-3db1-47b5-a1fc-6e34a266c712}';
 /// Represents a condition made up of multiple conditions, at least one of
 /// which must be true.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationOrCondition extends IUIAutomationCondition {
   // vtable begins at 3, is 3 entries long.

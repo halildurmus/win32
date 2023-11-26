@@ -28,7 +28,6 @@ const IID_INetworkConnection = '{dcb00005-570f-4a9b-8d69-199fdba5723b}';
 
 /// The INetworkConnection interface represents a single network connection.
 ///
-/// {@category Interface}
 /// {@category com}
 class INetworkConnection extends IDispatch {
   // vtable begins at 7, is 7 entries long.

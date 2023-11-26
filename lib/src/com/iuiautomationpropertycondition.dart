@@ -30,7 +30,6 @@ const IID_IUIAutomationPropertyCondition =
 /// Represents a condition based on a property value that is used to find UI
 /// Automation elements.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationPropertyCondition extends IUIAutomationCondition {
   // vtable begins at 3, is 3 entries long.

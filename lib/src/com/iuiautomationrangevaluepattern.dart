@@ -28,7 +28,6 @@ const IID_IUIAutomationRangeValuePattern =
 
 /// Provides access to a control that presents a range of values.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationRangeValuePattern extends IUnknown {
   // vtable begins at 3, is 13 entries long.

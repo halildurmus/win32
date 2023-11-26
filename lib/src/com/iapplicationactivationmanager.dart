@@ -26,7 +26,6 @@ import 'iunknown.dart';
 const IID_IApplicationActivationManager =
     '{2e941141-7f97-4756-ba1d-9decde894a3d}';
 
-/// {@category Interface}
 /// {@category com}
 class IApplicationActivationManager extends IUnknown {
   // vtable begins at 3, is 3 entries long.

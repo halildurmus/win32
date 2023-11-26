@@ -27,7 +27,6 @@ const IID_IUIAutomationTextPattern = '{32eba289-3583-42c9-9c59-3b6d9a1e9b6a}';
 
 /// Provides access to a control that contains text.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationTextPattern extends IUnknown {
   // vtable begins at 3, is 6 entries long.

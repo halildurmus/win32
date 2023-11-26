@@ -29,7 +29,6 @@ const IID_IUIAutomationMultipleViewPattern =
 /// Provides access to a control that can switch between multiple
 /// representations of the same information or set of child controls.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationMultipleViewPattern extends IUnknown {
   // vtable begins at 3, is 6 entries long.

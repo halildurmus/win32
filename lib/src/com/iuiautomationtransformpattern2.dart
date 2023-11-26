@@ -31,7 +31,6 @@ const IID_IUIAutomationTransformPattern2 =
 /// UI Automation clients to programmatically access the viewport zooming
 /// functionality of a control.
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationTransformPattern2 extends IUIAutomationTransformPattern {
   // vtable begins at 12, is 10 entries long.

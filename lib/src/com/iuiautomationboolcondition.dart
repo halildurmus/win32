@@ -29,7 +29,6 @@ const IID_IUIAutomationBoolCondition = '{1b4e1f2e-75eb-4d0b-8952-5a69988e2307}';
 /// Represents a condition that can be either TRUE (selects all elements) or
 /// FALSE (selects no elements).
 ///
-/// {@category Interface}
 /// {@category com}
 class IUIAutomationBoolCondition extends IUIAutomationCondition {
   // vtable begins at 3, is 1 entries long.
