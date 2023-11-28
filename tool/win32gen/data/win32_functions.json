@@ -3782,6 +3782,10 @@
         "category": "winsock",
         "minimumWindowsVersion": "WIN81"
     },
+    "NtQuerySystemInformation": {
+        "prototype": "NTSTATUS NtQuerySystemInformation(\n   [in]            SYSTEM_INFORMATION_CLASS SystemInformationClass,\n   [in, out]       PVOID                    SystemInformation,\n   [in]            ULONG                    SystemInformationLength,\n   [out, optional] PULONG                   ReturnLength\n);",
+        "comment": "Retrieves the specified system information."
+    },
     "OemKeyScan": {
         "prototype": "DWORD OemKeyScan(\n  WORD wOemChar\n);",
         "comment": "Maps OEMASCII codes 0 through 0x0FF into the OEM scan codes and shift states. The function provides information that allows a program to send OEM text to another program by simulating keyboard input."

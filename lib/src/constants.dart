@@ -26,9 +26,6 @@ const FALSE = 0;
 /// Boolean true value returned from the Win32 API
 const TRUE = 1;
 
-/// Success status
-const STATUS_SUCCESS = 0;
-
 // Path length
 const MAX_PATH = 260;
 
@@ -40,6 +37,30 @@ const LOCALE_USER_DEFAULT = 0x0400;
 
 /// All processor groups.
 const ALL_PROCESSOR_GROUPS = 0xFFFF;
+
+// -----------------------------------------------------------------------------
+// NTSTATUS constants
+// -----------------------------------------------------------------------------
+
+/// The operation completed successfully.
+const STATUS_SUCCESS = 0;
+
+/// The requested operation was unsuccessful.
+const STATUS_UNSUCCESSFUL = 0xC0000001;
+
+/// The requested operation is not implemented.
+const STATUS_NOT_IMPLEMENTED = 0xC0000002;
+
+/// The specified information class is not a valid information class for the
+/// specified object.
+const STATUS_INVALID_INFO_CLASS = 0xC0000003;
+
+/// The specified information record length does not match the length that is
+/// required for the specified information class.
+const STATUS_INFO_LENGTH_MISMATCH = 0xC0000004;
+
+/// An invalid HANDLE was specified.
+const STATUS_INVALID_HANDLE = 0xC0000008;
 
 // -----------------------------------------------------------------------------
 // COM Error Codes
@@ -10919,3 +10940,275 @@ const GPTR = 0x0040;
 
 /// Combines GMEM_MOVABLE and GMEM_ZEROINIT.
 const GHND = 0x0042;
+
+/// Indicates the kind of system information to be retrieved.
+/// {@category enum}
+class SYSTEM_INFORMATION_CLASS {
+  static const SystemBasicInformation = 0;
+  static const SystemPerformanceInformation = 2;
+  static const SystemTimeOfDayInformation = 3;
+  static const SystemProcessInformation = 5;
+  static const SystemProcessorPerformanceInformation = 8;
+  static const SystemInterruptInformation = 23;
+  static const SystemExceptionInformation = 33;
+  static const SystemRegistryQuotaInformation = 37;
+  static const SystemLookasideInformation = 45;
+  static const SystemCodeIntegrityInformation = 103;
+  static const SystemPolicyInformation = 134;
+}
+
+/// The SpeechAudioFormatType enumeration lists the supported stream formats.
+/// {@category enum}
+class SpeechAudioFormatType {
+  static const SAFTDefault = -1;
+  static const SAFTNoAssignedFormat = 0;
+  static const SAFTText = 1;
+  static const SAFTNonStandardFormat = 2;
+  static const SAFTExtendedAudioFormat = 3;
+
+  // Standard PCM wave formats
+  static const SAFT8kHz8BitMono = 4;
+  static const SAFT8kHz8BitStereo = 5;
+  static const SAFT8kHz16BitMono = 6;
+  static const SAFT8kHz16BitStereo = 7;
+  static const SAFT11kHz8BitMono = 8;
+  static const SAFT11kHz8BitStereo = 9;
+  static const SAFT11kHz16BitMono = 10;
+  static const SAFT11kHz16BitStereo = 11;
+  static const SAFT12kHz8BitMono = 12;
+  static const SAFT12kHz8BitStereo = 13;
+  static const SAFT12kHz16BitMono = 14;
+  static const SAFT12kHz16BitStereo = 15;
+  static const SAFT16kHz8BitMono = 16;
+  static const SAFT16kHz8BitStereo = 17;
+  static const SAFT16kHz16BitMono = 18;
+  static const SAFT16kHz16BitStereo = 19;
+  static const SAFT22kHz8BitMono = 20;
+  static const SAFT22kHz8BitStereo = 21;
+  static const SAFT22kHz16BitMono = 22;
+  static const SAFT22kHz16BitStereo = 23;
+  static const SAFT24kHz8BitMono = 24;
+  static const SAFT24kHz8BitStereo = 25;
+  static const SAFT24kHz16BitMono = 26;
+  static const SAFT24kHz16BitStereo = 27;
+  static const SAFT32kHz8BitMono = 28;
+  static const SAFT32kHz8BitStereo = 29;
+  static const SAFT32kHz16BitMono = 30;
+  static const SAFT32kHz16BitStereo = 31;
+  static const SAFT44kHz8BitMono = 32;
+  static const SAFT44kHz8BitStereo = 33;
+  static const SAFT44kHz16BitMono = 34;
+  static const SAFT44kHz16BitStereo = 35;
+  static const SAFT48kHz8BitMono = 36;
+  static const SAFT48kHz8BitStereo = 37;
+  static const SAFT48kHz16BitMono = 38;
+  static const SAFT48kHz16BitStereo = 39;
+
+  // TrueSpeech format
+  static const SAFTTrueSpeech_8kHz1BitMono = 40;
+
+  // A-Law formats
+  static const SAFTCCITT_ALaw_8kHzMono = 41;
+  static const SAFTCCITT_ALaw_8kHzStereo = 42;
+  static const SAFTCCITT_ALaw_11kHzMono = 43;
+  static const SAFTCCITT_ALaw_11kHzStereo = 4;
+  static const SAFTCCITT_ALaw_22kHzMono = 44;
+  static const SAFTCCITT_ALaw_22kHzStereo = 45;
+  static const SAFTCCITT_ALaw_44kHzMono = 46;
+  static const SAFTCCITT_ALaw_44kHzStereo = 47;
+
+  // u-Law formats
+  static const SAFTCCITT_uLaw_8kHzMono = 48;
+  static const SAFTCCITT_uLaw_8kHzStereo = 49;
+  static const SAFTCCITT_uLaw_11kHzMono = 50;
+  static const SAFTCCITT_uLaw_11kHzStereo = 51;
+  static const SAFTCCITT_uLaw_22kHzMono = 52;
+  static const SAFTCCITT_uLaw_22kHzStereo = 53;
+  static const SAFTCCITT_uLaw_44kHzMono = 54;
+  static const SAFTCCITT_uLaw_44kHzStereo = 55;
+  static const SAFTADPCM_8kHzMono = 56;
+  static const SAFTADPCM_8kHzStereo = 57;
+  static const SAFTADPCM_11kHzMono = 58;
+  static const SAFTADPCM_11kHzStereo = 59;
+  static const SAFTADPCM_22kHzMono = 60;
+  static const SAFTADPCM_22kHzStereo = 61;
+  static const SAFTADPCM_44kHzMono = 62;
+  static const SAFTADPCM_44kHzStereo = 63;
+
+  // GSM 6.10 formats
+  static const SAFTGSM610_8kHzMono = 64;
+  static const SAFTGSM610_11kHzMono = 65;
+  static const SAFTGSM610_22kHzMono = 66;
+  static const SAFTGSM610_44kHzMono = 67;
+
+  // Other formats
+  static const SAFTNUM_FORMATS = 68;
+}
+
+/// The SpeechRunState enumeration lists the running states of a TTS voice.
+/// {@category enum}
+class SpeechRunState {
+  /// The voice has finished rendering all queued phrases.
+  static const SRSEDone = 1;
+
+  /// The SpVoice currently claims the audio queue.
+  static const SRSEIsSpeaking = 2;
+}
+
+/// The SpeechStreamSeekPositionType enumeration lists the types of positioning
+/// from which a Seek method can be performed.
+/// {@category enum}
+class SpeechStreamSeekPositionType {
+  /// Calculates the stream offset relative from the start of the stream.
+  static const SSSPTRelativeToStart = 0;
+
+  /// Calculates the stream offset relative from the current position.
+  static const SSSPTRelativeToCurrentPosition = 1;
+
+  /// Calculates the stream offset relative from the end of the stream.
+  static const SSSPTRelativeToEnd = 2;
+}
+
+/// The SpeechVoiceEvents enumeration lists the types of events which a
+/// text-to-speech (TTS) engine can send to an SpVoice object.
+/// {@category enum}
+class SpeechVoiceEvents {
+  /// Represents the StartStream event, which occurs when the engine begins
+  /// speaking a stream.
+  static const SVEStartInputStream = 2;
+
+  /// Represents the EndStream event, which occurs when the engine encounters
+  /// the end of a stream while speaking.
+  static const SVEEndInputStream = 4;
+
+  /// Represents the VoiceChange event, which occurs when the engine encounters
+  /// a change of Voice while speaking.
+  static const SVEVoiceChange = 8;
+
+  /// Represents the Bookmark event, which occurs when the engine encounters a
+  /// bookmark while speaking.
+  static const SVEBookmark = 16;
+
+  /// Represents the WordBoundary event, which occurs when the engine completes
+  /// a word while speaking.
+  static const SVEWordBoundary = 32;
+
+  /// Represents the Phoneme event, which occurs when the engine completes a
+  /// phoneme while speaking.
+  static const SVEPhoneme = 64;
+
+  /// Represents the SentenceBoundary event, which occurs when the engine
+  /// completes a sentence while speaking.
+  static const SVESentenceBoundary = 128;
+
+  /// Represents the Viseme event, which occurs when the engine completes a
+  /// viseme while speaking.
+  static const SVEViseme = 256;
+
+  /// Represents the AudioLevel event, which occurs when the engine has
+  /// completed an audio level change while speaking.
+  static const SVEAudioLevel = 512;
+
+  /// Represents a private engine event.
+  static const SVEPrivate = 32768;
+
+  /// Represents all speech voice events.
+  static const SVEAllEvents = 33790;
+}
+
+/// The SpeechVoicePriority enumeration lists the possible Priority settings of
+/// an SpVoice object.
+/// {@category enum}
+class SpeechVoicePriority {
+  /// The priority of a normal voice. Text streams spoken by a normal voice are
+  /// added to the end of the voice queue. A voice with SVPNormal priority
+  /// cannot interrupt another voice.
+  static const SVPNormal = 0;
+
+  /// The priority of an alert voice. Text streams spoken by an alert voice are
+  /// inserted into the voice queue ahead of normal voice streams. An alert
+  /// voice will interrupt a normal voice, which will resume speaking when the
+  /// alert voice has finished speaking.
+  static const SVPAlert = 1;
+
+  /// The priority of an over voice. Text streams spoken by an over voice go
+  /// into the voice queue ahead of normal and alert streams. An over voice will
+  /// not interrupt, but speaks over (mixes with) the voices of lower
+  /// priorities.
+  static const SVPOver = 2;
+}
+
+/// The SpeechVoiceSpeakFlags enumeration lists flags that control the
+/// SpVoice.Speak method.
+/// {@category enum}
+class SpeechVoiceSpeakFlags {
+  // SpVoice Flags
+
+  /// Specifies that the default settings should be used. The defaults are:
+  /// * To speak the given text string synchronously (override with
+  ///   SVSFlagsAsync),
+  /// * Not to purge pending speak requests (override with
+  ///   SVSFPurgeBeforeSpeak),
+  /// * To parse the text as XML only if the first character is a
+  ///   left-angle-bracket (override with SVSFIsXML or SVSFIsNotXML),
+  /// * Not to persist global XML state changes across speak calls (override
+  ///   with SVSFPersistXML), and
+  /// * Not to expand punctuation characters into words (override with
+  ///   SVSFNLPSpeakPunc).
+  static const SVSFDefault = 0;
+
+  /// Specifies that the Speak call should be asynchronous. That is, it will
+  /// return immediately after the speak request is queued.
+  static const SVSFlagsAsync = 1;
+
+  /// Purges all pending speak requests prior to this speak call.
+  static const SVSFPurgeBeforeSpeak = 2;
+
+  /// The string passed to the Speak method is a file name rather than text. As
+  /// a result, the string itself is not spoken but rather the file the path
+  /// that points to is spoken.
+  static const SVSFIsFilename = 4;
+
+  /// The input text will be parsed for XML markup.
+  static const SVSFIsXML = 8;
+
+  /// The input text will not be parsed for XML markup.
+  static const SVSFIsNotXML = 16;
+
+  /// Global state changes in the XML markup will persist across speak calls.
+  static const SVSFPersistXML = 32;
+
+  // Normalizer Flags
+
+  /// Punctuation characters should be expanded into words (e.g. "This is it."
+  /// would become "This is it period").
+  static const SVSFNLPSpeakPunc = 64;
+
+  // TTS Format
+
+  /// Force XML parsing as MS SAPI.
+  static const SVSFParseSapi = 128;
+
+  /// Force XML parsing as W3C SSML.
+  static const SVSFParseSsml = 256;
+
+  /// The TTS XML format is auto-detected. This is the default if none of these
+  /// TTS XML format values are present in the bit-field.
+  static const SVSFParseAutoDetect = 0;
+
+  // Masks
+
+  /// Flags handled by SAPI (as opposed to the text-to-speech engine) are set in
+  /// this mask.
+  static const SVSFNLPMask = 64;
+
+  /// SVSFParseSapi|SVSFParseSsml
+  static const SVSFParseMask = 384;
+
+  /// This is an existing SAPI 5.1 mask that has every flag bit set. In 5.3, it
+  /// has been extended to contain SVSFParseMask.
+  static const SVSFVoiceMask = 511;
+
+  /// This mask has every unused bit set.
+  static const SVSFUnusedFlags = -512;
+}

@@ -45,6 +45,7 @@
 #include <Shlwapi.h>
 #include <uiautomationclient.h>
 #include <wincred.h>
+#include <WINTERNL.H>
 #include <wlanapi.h>
 #include <ws2bth.h>
 #include <Xinput.h>
@@ -114,6 +115,7 @@ void main()
     printf("  'CHAR_INFO': %zu,\n", sizeof(CHAR_INFO));
     printf("  'CHOOSECOLOR': %zu,\n", sizeof(CHOOSECOLORW));
     printf("  'CHOOSEFONT': %zu,\n", sizeof(CHOOSEFONTW));
+    printf("  'CLIENT_ID': %zu,\n", sizeof(CLIENT_ID));
     printf("  'COLORADJUSTMENT': %zu,\n", sizeof(COLORADJUSTMENT));
     printf("  'COMDLG_FILTERSPEC': %zu,\n", sizeof(COMDLG_FILTERSPEC));
     printf("  'COMMCONFIG': %zu,\n", sizeof(COMMCONFIG));
@@ -393,10 +395,22 @@ void main()
     printf("  'STYLESTRUCT': %zu,\n", sizeof(STYLESTRUCT));
     printf("  'SYMBOL_INFO': %zu,\n", sizeof(SYMBOL_INFOW));
     printf("  'SYSTEMTIME': %zu,\n", sizeof(SYSTEMTIME));
+    printf("  'SYSTEM_BASIC_INFORMATION': %zu,\n", sizeof(SYSTEM_BASIC_INFORMATION));
     printf("  'SYSTEM_BATTERY_STATE': %zu,\n", sizeof(SYSTEM_BATTERY_STATE));
+    printf("  'SYSTEM_CODEINTEGRITY_INFORMATION': %zu,\n", sizeof(SYSTEM_CODEINTEGRITY_INFORMATION));
+    printf("  'SYSTEM_EXCEPTION_INFORMATION': %zu,\n", sizeof(SYSTEM_EXCEPTION_INFORMATION));
     printf("  'SYSTEM_INFO': %zu,\n", sizeof(SYSTEM_INFO));
+    printf("  'SYSTEM_INTERRUPT_INFORMATION': %zu,\n", sizeof(SYSTEM_INTERRUPT_INFORMATION));
     printf("  'SYSTEM_LOGICAL_PROCESSOR_INFORMATION': %zu,\n", sizeof(SYSTEM_LOGICAL_PROCESSOR_INFORMATION));
+    printf("  'SYSTEM_LOOKASIDE_INFORMATION': %zu,\n", sizeof(SYSTEM_LOOKASIDE_INFORMATION));
+    printf("  'SYSTEM_PERFORMANCE_INFORMATION': %zu,\n", sizeof(SYSTEM_PERFORMANCE_INFORMATION));
+    printf("  'SYSTEM_POLICY_INFORMATION': %zu,\n", sizeof(SYSTEM_POLICY_INFORMATION));
     printf("  'SYSTEM_POWER_STATUS': %zu,\n", sizeof(SYSTEM_POWER_STATUS));
+    printf("  'SYSTEM_PROCESSOR_PERFORMANCE_INFORMATION': %zu,\n", sizeof(SYSTEM_PROCESSOR_PERFORMANCE_INFORMATION));
+    printf("  'SYSTEM_PROCESS_INFORMATION': %zu,\n", sizeof(SYSTEM_PROCESS_INFORMATION));
+    printf("  'SYSTEM_REGISTRY_QUOTA_INFORMATION': %zu,\n", sizeof(SYSTEM_REGISTRY_QUOTA_INFORMATION));
+    printf("  'SYSTEM_THREAD_INFORMATION': %zu,\n", sizeof(SYSTEM_THREAD_INFORMATION));
+    printf("  'SYSTEM_TIMEOFDAY_INFORMATION': %zu,\n", sizeof(SYSTEM_TIMEOFDAY_INFORMATION));
     printf("  'SdpAttributeRange': %zu,\n", sizeof(SdpAttributeRange));
     printf("  'SdpQueryUuid': %zu,\n", sizeof(SdpQueryUuid));
     printf("  'SdpQueryUuidUnion': %zu,\n", sizeof(SdpQueryUuidUnion));
@@ -412,6 +426,7 @@ void main()
     printf("  'TPMPARAMS': %zu,\n", sizeof(TPMPARAMS));
     printf("  'TYPEATTR': %zu,\n", sizeof(TYPEATTR));
     printf("  'TYPEDESC': %zu,\n", sizeof(TYPEDESC));
+    printf("  'UNICODE_STRING': %zu,\n", sizeof(UNICODE_STRING));
     printf("  'UNSIGNED_RATIO': %zu,\n", sizeof(UNSIGNED_RATIO));
     printf("  'UPDATELAYEREDWINDOWINFO': %zu,\n", sizeof(UPDATELAYEREDWINDOWINFO));
     printf("  'VALENT': %zu,\n", sizeof(VALENTW));
