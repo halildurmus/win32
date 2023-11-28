@@ -13118,6 +13118,24 @@ void main() {
     }
   });
 
+  group('Test ntdll functions', () {
+    test('Can instantiate NtQuerySystemInformation', () {
+      final ntdll = DynamicLibrary.open('ntdll.dll');
+      final NtQuerySystemInformation = ntdll.lookupFunction<
+          Int32 Function(
+              Int32 SystemInformationClass,
+              Pointer SystemInformation,
+              Uint32 SystemInformationLength,
+              Pointer<Uint32> ReturnLength),
+          int Function(
+              int SystemInformationClass,
+              Pointer SystemInformation,
+              int SystemInformationLength,
+              Pointer<Uint32> ReturnLength)>('NtQuerySystemInformation');
+      expect(NtQuerySystemInformation, isA<Function>());
+    });
+  });
+
   group('Test api-ms-win-core-comm-l1-1-1 functions', () {
     if (windowsBuildNumber >= 17134) {
       test('Can instantiate OpenCommPort', () {

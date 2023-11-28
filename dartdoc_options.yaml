@@ -18,6 +18,8 @@ dartdoc:
       markdown: doc/kernel32.md
     'netapi32':
       markdown: doc/netapi32.md
+    'ntdll':
+      markdown: doc/ntdll.md
     'ole32':
       markdown: doc/ole32.md
     'oleaut32':
@@ -83,6 +85,7 @@ dartdoc:
       'uxtheme',
       'dwmapi',
       'magnification',
+      'ntdll',
       'onecore',
       'psapi',
       'setupapi',

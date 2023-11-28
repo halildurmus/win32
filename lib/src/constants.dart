@@ -26,9 +26,6 @@ const FALSE = 0;
 /// Boolean true value returned from the Win32 API
 const TRUE = 1;
 
-/// Success status
-const STATUS_SUCCESS = 0;
-
 // Path length
 const MAX_PATH = 260;
 
@@ -40,6 +37,30 @@ const LOCALE_USER_DEFAULT = 0x0400;
 
 /// All processor groups.
 const ALL_PROCESSOR_GROUPS = 0xFFFF;
+
+// -----------------------------------------------------------------------------
+// NTSTATUS constants
+// -----------------------------------------------------------------------------
+
+/// The operation completed successfully.
+const STATUS_SUCCESS = 0;
+
+/// The requested operation was unsuccessful.
+const STATUS_UNSUCCESSFUL = 0xC0000001;
+
+/// The requested operation is not implemented.
+const STATUS_NOT_IMPLEMENTED = 0xC0000002;
+
+/// The specified information class is not a valid information class for the
+/// specified object.
+const STATUS_INVALID_INFO_CLASS = 0xC0000003;
+
+/// The specified information record length does not match the length that is
+/// required for the specified information class.
+const STATUS_INFO_LENGTH_MISMATCH = 0xC0000004;
+
+/// An invalid HANDLE was specified.
+const STATUS_INVALID_HANDLE = 0xC0000008;
 
 // -----------------------------------------------------------------------------
 // COM Error Codes
@@ -10919,6 +10940,22 @@ const GPTR = 0x0040;
 
 /// Combines GMEM_MOVABLE and GMEM_ZEROINIT.
 const GHND = 0x0042;
+
+/// Indicates the kind of system information to be retrieved.
+/// {@category enum}
+class SYSTEM_INFORMATION_CLASS {
+  static const SystemBasicInformation = 0;
+  static const SystemPerformanceInformation = 2;
+  static const SystemTimeOfDayInformation = 3;
+  static const SystemProcessInformation = 5;
+  static const SystemProcessorPerformanceInformation = 8;
+  static const SystemInterruptInformation = 23;
+  static const SystemExceptionInformation = 33;
+  static const SystemRegistryQuotaInformation = 37;
+  static const SystemLookasideInformation = 45;
+  static const SystemCodeIntegrityInformation = 103;
+  static const SystemPolicyInformation = 134;
+}
 
 /// The SpeechAudioFormatType enumeration lists the supported stream formats.
 /// {@category enum}

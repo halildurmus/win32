@@ -195,6 +195,9 @@ void main() {
   test('Struct CHOOSEFONT is the right size', () {
     expect(sizeOf<CHOOSEFONT>(), equals(104));
   });
+  test('Struct CLIENT_ID is the right size', () {
+    expect(sizeOf<CLIENT_ID>(), equals(16));
+  });
   test('Struct COLORADJUSTMENT is the right size', () {
     expect(sizeOf<COLORADJUSTMENT>(), equals(24));
   });
@@ -1032,17 +1035,53 @@ void main() {
   test('Struct SYSTEMTIME is the right size', () {
     expect(sizeOf<SYSTEMTIME>(), equals(16));
   });
+  test('Struct SYSTEM_BASIC_INFORMATION is the right size', () {
+    expect(sizeOf<SYSTEM_BASIC_INFORMATION>(), equals(64));
+  });
   test('Struct SYSTEM_BATTERY_STATE is the right size', () {
     expect(sizeOf<SYSTEM_BATTERY_STATE>(), equals(32));
+  });
+  test('Struct SYSTEM_CODEINTEGRITY_INFORMATION is the right size', () {
+    expect(sizeOf<SYSTEM_CODEINTEGRITY_INFORMATION>(), equals(8));
+  });
+  test('Struct SYSTEM_EXCEPTION_INFORMATION is the right size', () {
+    expect(sizeOf<SYSTEM_EXCEPTION_INFORMATION>(), equals(16));
   });
   test('Struct SYSTEM_INFO is the right size', () {
     expect(sizeOf<SYSTEM_INFO>(), equals(48));
   });
+  test('Struct SYSTEM_INTERRUPT_INFORMATION is the right size', () {
+    expect(sizeOf<SYSTEM_INTERRUPT_INFORMATION>(), equals(24));
+  });
   test('Struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION is the right size', () {
     expect(sizeOf<SYSTEM_LOGICAL_PROCESSOR_INFORMATION>(), equals(32));
   });
+  test('Struct SYSTEM_LOOKASIDE_INFORMATION is the right size', () {
+    expect(sizeOf<SYSTEM_LOOKASIDE_INFORMATION>(), equals(32));
+  });
+  test('Struct SYSTEM_PERFORMANCE_INFORMATION is the right size', () {
+    expect(sizeOf<SYSTEM_PERFORMANCE_INFORMATION>(), equals(312));
+  });
+  test('Struct SYSTEM_POLICY_INFORMATION is the right size', () {
+    expect(sizeOf<SYSTEM_POLICY_INFORMATION>(), equals(32));
+  });
   test('Struct SYSTEM_POWER_STATUS is the right size', () {
     expect(sizeOf<SYSTEM_POWER_STATUS>(), equals(12));
+  });
+  test('Struct SYSTEM_PROCESSOR_PERFORMANCE_INFORMATION is the right size', () {
+    expect(sizeOf<SYSTEM_PROCESSOR_PERFORMANCE_INFORMATION>(), equals(48));
+  });
+  test('Struct SYSTEM_PROCESS_INFORMATION is the right size', () {
+    expect(sizeOf<SYSTEM_PROCESS_INFORMATION>(), equals(256));
+  });
+  test('Struct SYSTEM_REGISTRY_QUOTA_INFORMATION is the right size', () {
+    expect(sizeOf<SYSTEM_REGISTRY_QUOTA_INFORMATION>(), equals(16));
+  });
+  test('Struct SYSTEM_THREAD_INFORMATION is the right size', () {
+    expect(sizeOf<SYSTEM_THREAD_INFORMATION>(), equals(80));
+  });
+  test('Struct SYSTEM_TIMEOFDAY_INFORMATION is the right size', () {
+    expect(sizeOf<SYSTEM_TIMEOFDAY_INFORMATION>(), equals(48));
   });
   test('Struct SdpAttributeRange is the right size', () {
     expect(sizeOf<SdpAttributeRange>(), equals(4));
@@ -1088,6 +1127,9 @@ void main() {
   });
   test('Struct TYPEDESC is the right size', () {
     expect(sizeOf<TYPEDESC>(), equals(16));
+  });
+  test('Struct UNICODE_STRING is the right size', () {
+    expect(sizeOf<UNICODE_STRING>(), equals(16));
   });
   test('Struct UNSIGNED_RATIO is the right size', () {
     expect(sizeOf<UNSIGNED_RATIO>(), equals(8));

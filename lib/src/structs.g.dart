@@ -1405,6 +1405,17 @@ base class CHOOSEFONT extends Struct {
   external int nSizeMax;
 }
 
+/// The CLIENT_ID structure contains identifiers of a process and a thread.
+///
+/// {@category Struct}
+base class CLIENT_ID extends Struct {
+  @IntPtr()
+  external int UniqueProcess;
+
+  @IntPtr()
+  external int UniqueThread;
+}
+
 /// The COLORADJUSTMENT structure defines the color adjustment values used
 /// by the StretchBlt and StretchDIBits functions when the stretch mode is
 /// HALFTONE. You can set the color adjustment values by calling the
@@ -9122,6 +9133,21 @@ base class SYSTEMTIME extends Struct {
   external int wMilliseconds;
 }
 
+/// The SYSTEM_BASIC_INFORMATION structure contains information about the
+/// number of processors present in the system.
+///
+/// {@category Struct}
+base class SYSTEM_BASIC_INFORMATION extends Struct {
+  @Array(24)
+  external Array<Uint8> Reserved1;
+
+  @Array(4)
+  external Array<Pointer> Reserved2;
+
+  @Int8()
+  external int NumberOfProcessors;
+}
+
 /// Contains information about the current state of the system battery.
 ///
 /// {@category struct}
@@ -9161,6 +9187,24 @@ base class SYSTEM_BATTERY_STATE extends Struct {
 
   @Uint32()
   external int DefaultAlert2;
+}
+
+/// The SYSTEM_CODEINTEGRITY_INFORMATION structure contains information
+/// about the code integrity policy.
+///
+/// {@category Struct}
+base class SYSTEM_CODEINTEGRITY_INFORMATION extends Struct {
+  @Uint32()
+  external int Length;
+
+  @Uint32()
+  external int CodeIntegrityOptions;
+}
+
+/// {@category Struct}
+base class SYSTEM_EXCEPTION_INFORMATION extends Struct {
+  @Array(16)
+  external Array<Uint8> Reserved1;
 }
 
 /// Contains information about the current computer system. This includes
@@ -9233,6 +9277,12 @@ extension SYSTEM_INFO_Extension on SYSTEM_INFO {
       this.Anonymous.Anonymous;
   set Anonymous(_SYSTEM_INFO__Anonymous_e__Union__Anonymous_e__Struct value) =>
       this.Anonymous.Anonymous = value;
+}
+
+/// {@category Struct}
+base class SYSTEM_INTERRUPT_INFORMATION extends Struct {
+  @Array(24)
+  external Array<Uint8> Reserved1;
 }
 
 /// Describes the relationship between the specified processor set. This
@@ -9313,6 +9363,27 @@ extension SYSTEM_LOGICAL_PROCESSOR_INFORMATION_Extension
   set Reserved(Array<Uint64> value) => this.Anonymous.Reserved = value;
 }
 
+/// {@category Struct}
+base class SYSTEM_LOOKASIDE_INFORMATION extends Struct {
+  @Array(32)
+  external Array<Uint8> Reserved1;
+}
+
+/// {@category Struct}
+base class SYSTEM_PERFORMANCE_INFORMATION extends Struct {
+  @Array(312)
+  external Array<Uint8> Reserved1;
+}
+
+/// {@category Struct}
+base class SYSTEM_POLICY_INFORMATION extends Struct {
+  @Array(2)
+  external Array<Pointer> Reserved1;
+
+  @Array(3)
+  external Array<Uint32> Reserved2;
+}
+
 /// Contains information about the power status of the system.
 ///
 /// {@category struct}
@@ -9334,6 +9405,145 @@ base class SYSTEM_POWER_STATUS extends Struct {
 
   @Uint32()
   external int BatteryFullLifeTime;
+}
+
+/// The SYSTEM_PROCESSOR_PERFORMANCE_INFORMATION structure contains
+/// performance information for a processor.
+///
+/// {@category Struct}
+base class SYSTEM_PROCESSOR_PERFORMANCE_INFORMATION extends Struct {
+  @Int64()
+  external int IdleTime;
+
+  @Int64()
+  external int KernelTime;
+
+  @Int64()
+  external int UserTime;
+
+  @Array(2)
+  external Array<Int64> Reserved1;
+
+  @Uint32()
+  external int Reserved2;
+}
+
+/// The SYSTEM_PROCESS_INFORMATION structure contains information about a
+/// system process.
+///
+/// {@category Struct}
+base class SYSTEM_PROCESS_INFORMATION extends Struct {
+  @Uint32()
+  external int NextEntryOffset;
+
+  @Uint32()
+  external int NumberOfThreads;
+
+  @Array(48)
+  external Array<Uint8> Reserved1;
+
+  external UNICODE_STRING ImageName;
+
+  @Int32()
+  external int BasePriority;
+
+  @IntPtr()
+  external int UniqueProcessId;
+
+  external Pointer Reserved2;
+
+  @Uint32()
+  external int HandleCount;
+
+  @Uint32()
+  external int SessionId;
+
+  external Pointer Reserved3;
+
+  @IntPtr()
+  external int PeakVirtualSize;
+
+  @IntPtr()
+  external int VirtualSize;
+
+  @Uint32()
+  external int Reserved4;
+
+  @IntPtr()
+  external int PeakWorkingSetSize;
+
+  @IntPtr()
+  external int WorkingSetSize;
+
+  external Pointer Reserved5;
+
+  @IntPtr()
+  external int QuotaPagedPoolUsage;
+
+  external Pointer Reserved6;
+
+  @IntPtr()
+  external int QuotaNonPagedPoolUsage;
+
+  @IntPtr()
+  external int PagefileUsage;
+
+  @IntPtr()
+  external int PeakPagefileUsage;
+
+  @IntPtr()
+  external int PrivatePageCount;
+
+  @Array(6)
+  external Array<Int64> Reserved7;
+}
+
+/// {@category Struct}
+base class SYSTEM_REGISTRY_QUOTA_INFORMATION extends Struct {
+  @Uint32()
+  external int RegistryQuotaAllowed;
+
+  @Uint32()
+  external int RegistryQuotaUsed;
+
+  external Pointer Reserved1;
+}
+
+/// The SYSTEM_THREAD_INFORMATION structure contains information about a
+/// thread running on a system.
+///
+/// {@category Struct}
+base class SYSTEM_THREAD_INFORMATION extends Struct {
+  @Array(3)
+  external Array<Int64> Reserved1;
+
+  @Uint32()
+  external int Reserved2;
+
+  external Pointer StartAddress;
+
+  external CLIENT_ID ClientId;
+
+  @Int32()
+  external int Priority;
+
+  @Int32()
+  external int BasePriority;
+
+  @Uint32()
+  external int Reserved3;
+
+  @Uint32()
+  external int ThreadState;
+
+  @Uint32()
+  external int WaitReason;
+}
+
+/// {@category Struct}
+base class SYSTEM_TIMEOFDAY_INFORMATION extends Struct {
+  @Array(48)
+  external Array<Uint8> Reserved1;
 }
 
 /// The SdpAttributeRange structure is used in a Bluetooth query to
@@ -9754,6 +9964,20 @@ extension TYPEDESC_Extension on TYPEDESC {
 
   int get hreftype => this.Anonymous.hreftype;
   set hreftype(int value) => this.Anonymous.hreftype = value;
+}
+
+/// The UNICODE_STRING structure is used by various Local Security Authority
+/// (LSA) functions to specify a Unicode string.
+///
+/// {@category Struct}
+base class UNICODE_STRING extends Struct {
+  @Uint16()
+  external int Length;
+
+  @Uint16()
+  external int MaximumLength;
+
+  external Pointer<Utf16> Buffer;
 }
 
 /// Defines a data type used by the Desktop Window Manager (DWM) APIs. It
