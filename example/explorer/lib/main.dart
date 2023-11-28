@@ -15,14 +15,16 @@ void main() {
 class ExplorerApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: MainPage(),
+    return MaterialApp(
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
+      home: const MainPage(),
     );
   }
 }
 
 class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
+  const MainPage({super.key});
 
   @override
   MainPageState createState() => MainPageState();
@@ -57,27 +59,37 @@ class MainPageState extends State<MainPage> {
       // releases.
       body: PlatformMenuBar(
         menus: [
-          PlatformMenu(label: 'Explore', menus: [
-            PlatformMenuItemGroup(members: [
-              PlatformMenuItem(
-                label: 'Show Docs Path...',
-                shortcut: const SingleActivator(LogicalKeyboardKey.keyP,
-                    control: true, shift: true),
-                onSelected: () async => showDocumentsPath(),
+          PlatformMenu(
+            label: 'Explore',
+            menus: [
+              PlatformMenuItemGroup(
+                members: [
+                  PlatformMenuItem(
+                    label: 'Show Docs Path...',
+                    shortcut: const SingleActivator(
+                      LogicalKeyboardKey.keyP,
+                      control: true,
+                      shift: true,
+                    ),
+                    onSelected: () async => showDocumentsPath(),
+                  )
+                ],
               )
-            ])
-          ])
+            ],
+          )
         ],
         child: Column(
           children: [
             if (showRoundedCornerSwitch) const WindowRoundingSelector(),
             Expanded(child: VolumePanel()),
 
-            // Can be removed when PlatformMenuBar is supported on Windows.
+            // TODO(halildurmus): Can be removed when PlatformMenuBar is
+            // supported on Windows.
             FloatingActionButton(
-                mini: true,
-                child: const Icon(Icons.folder),
-                onPressed: () async => showDocumentsPath()),
+              mini: true,
+              child: const Icon(Icons.folder),
+              onPressed: () async => showDocumentsPath(),
+            ),
           ],
         ),
       ),

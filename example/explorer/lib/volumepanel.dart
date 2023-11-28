@@ -64,8 +64,11 @@ class VolumeCardState extends State<VolumeCard> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const FaIcon(FontAwesomeIcons.hardDrive,
-                        size: 32, color: Colors.blueGrey),
+                    const FaIcon(
+                      FontAwesomeIcons.hardDrive,
+                      size: 32,
+                      color: Colors.blueGrey,
+                    ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(20, 5, 5, 5),
                       child: Column(
@@ -73,26 +76,27 @@ class VolumeCardState extends State<VolumeCard> {
                         children: [
                           Text(
                             widget.volume.deviceName,
-                            style: Theme.of(context).textTheme.subtitle1,
+                            style: Theme.of(context).textTheme.titleMedium,
                           ),
                           Text(
                             widget.volume.volumeName,
                             style: Theme.of(context)
                                 .textTheme
-                                .bodyText2!
+                                .bodyMedium!
                                 .copyWith(
-                                    color: Theme.of(context)
-                                        .textTheme
-                                        .caption
-                                        ?.color),
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall
+                                      ?.color,
+                                ),
                           ),
                           const Divider(height: 5),
                           Column(
                             children: [
-                              for (var path in widget.volume.paths)
+                              for (final path in widget.volume.paths)
                                 Text(
                                   path,
-                                  style: Theme.of(context).textTheme.bodyText2,
+                                  style: Theme.of(context).textTheme.bodyMedium,
                                 ),
                             ],
                           ),

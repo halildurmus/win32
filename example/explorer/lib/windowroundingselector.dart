@@ -6,7 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:win32/win32.dart';
 
 class WindowRoundingSelector extends StatefulWidget {
-  const WindowRoundingSelector({Key? key}) : super(key: key);
+  const WindowRoundingSelector({super.key});
 
   @override
   WindowRoundingSelectorState createState() => WindowRoundingSelectorState();
