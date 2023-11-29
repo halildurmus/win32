@@ -1407,7 +1407,7 @@ base class CHOOSEFONT extends Struct {
 
 /// The CLIENT_ID structure contains identifiers of a process and a thread.
 ///
-/// {@category Struct}
+/// {@category struct}
 base class CLIENT_ID extends Struct {
   @IntPtr()
   external int UniqueProcess;
@@ -9136,7 +9136,7 @@ base class SYSTEMTIME extends Struct {
 /// The SYSTEM_BASIC_INFORMATION structure contains information about the
 /// number of processors present in the system.
 ///
-/// {@category Struct}
+/// {@category struct}
 base class SYSTEM_BASIC_INFORMATION extends Struct {
   @Array(24)
   external Array<Uint8> Reserved1;
@@ -9192,7 +9192,7 @@ base class SYSTEM_BATTERY_STATE extends Struct {
 /// The SYSTEM_CODEINTEGRITY_INFORMATION structure contains information
 /// about the code integrity policy.
 ///
-/// {@category Struct}
+/// {@category struct}
 base class SYSTEM_CODEINTEGRITY_INFORMATION extends Struct {
   @Uint32()
   external int Length;
@@ -9201,7 +9201,7 @@ base class SYSTEM_CODEINTEGRITY_INFORMATION extends Struct {
   external int CodeIntegrityOptions;
 }
 
-/// {@category Struct}
+/// {@category struct}
 base class SYSTEM_EXCEPTION_INFORMATION extends Struct {
   @Array(16)
   external Array<Uint8> Reserved1;
@@ -9279,7 +9279,7 @@ extension SYSTEM_INFO_Extension on SYSTEM_INFO {
       this.Anonymous.Anonymous = value;
 }
 
-/// {@category Struct}
+/// {@category struct}
 base class SYSTEM_INTERRUPT_INFORMATION extends Struct {
   @Array(24)
   external Array<Uint8> Reserved1;
@@ -9363,19 +9363,19 @@ extension SYSTEM_LOGICAL_PROCESSOR_INFORMATION_Extension
   set Reserved(Array<Uint64> value) => this.Anonymous.Reserved = value;
 }
 
-/// {@category Struct}
+/// {@category struct}
 base class SYSTEM_LOOKASIDE_INFORMATION extends Struct {
   @Array(32)
   external Array<Uint8> Reserved1;
 }
 
-/// {@category Struct}
+/// {@category struct}
 base class SYSTEM_PERFORMANCE_INFORMATION extends Struct {
   @Array(312)
   external Array<Uint8> Reserved1;
 }
 
-/// {@category Struct}
+/// {@category struct}
 base class SYSTEM_POLICY_INFORMATION extends Struct {
   @Array(2)
   external Array<Pointer> Reserved1;
@@ -9410,7 +9410,7 @@ base class SYSTEM_POWER_STATUS extends Struct {
 /// The SYSTEM_PROCESSOR_PERFORMANCE_INFORMATION structure contains
 /// performance information for a processor.
 ///
-/// {@category Struct}
+/// {@category struct}
 base class SYSTEM_PROCESSOR_PERFORMANCE_INFORMATION extends Struct {
   @Int64()
   external int IdleTime;
@@ -9431,7 +9431,7 @@ base class SYSTEM_PROCESSOR_PERFORMANCE_INFORMATION extends Struct {
 /// The SYSTEM_PROCESS_INFORMATION structure contains information about a
 /// system process.
 ///
-/// {@category Struct}
+/// {@category struct}
 base class SYSTEM_PROCESS_INFORMATION extends Struct {
   @Uint32()
   external int NextEntryOffset;
@@ -9498,7 +9498,7 @@ base class SYSTEM_PROCESS_INFORMATION extends Struct {
   external Array<Int64> Reserved7;
 }
 
-/// {@category Struct}
+/// {@category struct}
 base class SYSTEM_REGISTRY_QUOTA_INFORMATION extends Struct {
   @Uint32()
   external int RegistryQuotaAllowed;
@@ -9512,7 +9512,7 @@ base class SYSTEM_REGISTRY_QUOTA_INFORMATION extends Struct {
 /// The SYSTEM_THREAD_INFORMATION structure contains information about a
 /// thread running on a system.
 ///
-/// {@category Struct}
+/// {@category struct}
 base class SYSTEM_THREAD_INFORMATION extends Struct {
   @Array(3)
   external Array<Int64> Reserved1;
@@ -9540,7 +9540,7 @@ base class SYSTEM_THREAD_INFORMATION extends Struct {
   external int WaitReason;
 }
 
-/// {@category Struct}
+/// {@category struct}
 base class SYSTEM_TIMEOFDAY_INFORMATION extends Struct {
   @Array(48)
   external Array<Uint8> Reserved1;
@@ -9969,7 +9969,7 @@ extension TYPEDESC_Extension on TYPEDESC {
 /// The UNICODE_STRING structure is used by various Local Security Authority
 /// (LSA) functions to specify a Unicode string.
 ///
-/// {@category Struct}
+/// {@category struct}
 base class UNICODE_STRING extends Struct {
   @Uint16()
   external int Length;
