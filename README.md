@@ -1,4 +1,11 @@
-<img src="https://raw.githubusercontent.com/dart-windows/.github/main/assets/dart-windows-card.png" width="50%" height="50%">
+[![Dart | Windows][dart_windows_card]][win32_pub_link]
+
+[![ci][ci_badge]][ci_link]
+[![Package: winmd][package_badge]][package_link]
+[![Publisher: win32.pub][publisher_badge]][publisher_link]
+[![Language: Dart][language_badge]][language_link]
+[![License: BSD-3-Clause][license_badge]][license_link]
+[![codecov][codecov_badge_link]][codecov_link]
 
 A package that provides a Dart language abstraction over
 [Windows Metadata (WinMD) files][windows_metadata_files_link], making it
@@ -9,13 +16,6 @@ APIs like Win32 or COM, as well as modern APIs like Windows Runtime (WinRT) that
 include their own metadata.
 
 Part of the [Dart | Windows][dart_windows_link] suite of Windows packages.
-
-[![ci][ci_badge]][ci_link]
-[![Package: winmd][package_badge]][package_link]
-[![Publisher: win32.pub][publisher_badge]][publisher_link]
-[![Language: Dart][language_badge]][language_link]
-[![License: BSD-3-Clause][license_badge]][license_link]
-[![codecov][codecov_badge_link]][codecov_link]
 
 ## Architecture
 
@@ -152,6 +152,7 @@ Please file feature requests and bugs at the
 [ci_link]: https://github.com/dart-windows/winmd/actions/workflows/dart.yml
 [codecov_badge_link]: https://codecov.io/gh/dart-windows/winmd/branch/main/graph/badge.svg?token=1ouz1Jr9nW
 [codecov_link]: https://codecov.io/gh/dart-windows/winmd
+[dart_windows_card]: https://raw.githubusercontent.com/dart-windows/.github/main/assets/dart-windows-card-480x240.png
 [dart_windows_link]: https://github.com/dart-windows
 [issue_tracker_link]: https://github.com/dart-windows/winmd/issues
 [language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
@@ -164,5 +165,6 @@ Please file feature requests and bugs at the
 [publisher_badge]: https://img.shields.io/pub/publisher/winmd.svg
 [publisher_link]: https://pub.dev/publishers/win32.pub
 [win32_package_link]: https://pub.dev/packages/win32
+[win32_pub_link]: https://win32.pub
 [windows_packages_link]: https://pub.dev/packages?q=publisher%3Awin32.pub+topic%3Awinrt
 [windows_metadata_files_link]: https://learn.microsoft.com/uwp/winrt-cref/winmd-files
