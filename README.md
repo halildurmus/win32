@@ -1,4 +1,9 @@
-<img src="https://raw.githubusercontent.com/dart-windows/.github/main/assets/dart-windows-card.png" width="50%" height="50%">
+[![Dart | Windows][dart_windows_card]][win32_pub_link]
+
+[![Package: win32_runner][package_badge]][package_link]
+[![Publisher: win32.pub][publisher_badge]][publisher_link]
+[![Language: Dart][language_badge]][language_link]
+[![License: BSD-3-Clause][license_badge]][license_link]
 
 An *experimental* package that allows you to run Flutter apps from a Dart runner
 instead of the default C++ runner that is provided when you create a new Flutter
@@ -13,11 +18,6 @@ proof-of-concept, and as such, it has some limitations. For example, it does not
 yet support plugins.
 
 Part of the [Dart | Windows][dart_windows_link] suite of Windows packages.
-
-[![Package: win32_runner][package_badge]][package_link]
-[![Publisher: win32.pub][publisher_badge]][publisher_link]
-[![Language: Dart][language_badge]][language_link]
-[![License: BSD-3-Clause][license_badge]][license_link]
 
 ## Usage
 
@@ -50,6 +50,7 @@ Windows using the Dart runner:
 Please file feature requests and bugs at the
 [issue tracker][issue_tracker_link].
 
+[dart_windows_card]: https://raw.githubusercontent.com/dart-windows/.github/main/assets/dart-windows-card-480x240.png
 [dart_windows_link]: https://github.com/dart-windows
 [demo_image_link]: https://raw.githubusercontent.com/dart-windows/win32_runner/main/screenshots/demo.png
 [issue_tracker_link]: https://github.com/dart-windows/win32_runner/issues
@@ -61,3 +62,4 @@ Please file feature requests and bugs at the
 [package_link]: https://pub.dev/packages/win32_runner
 [publisher_badge]: https://img.shields.io/pub/publisher/win32_runner.svg
 [publisher_link]: https://pub.dev/publishers/win32.pub
+[win32_pub_link]: https://win32.pub
