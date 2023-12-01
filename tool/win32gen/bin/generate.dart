@@ -253,7 +253,8 @@ void generateComApis(Scope scope, Map<String, String> comTypesToGenerate) {
 
 void main() async {
   print('Loading Windows metadata...');
-  final wdkScope = await MetadataStore.loadWdkMetadata();
+  final wdkScope =
+      await MetadataStore.loadWdkMetadata(version: wdkMetadataVersion);
   final win32Scope =
       await MetadataStore.loadWin32Metadata(version: win32MetadataVersion);
   // Additionally, load WinRT metadata to ensure the correct resolution of
