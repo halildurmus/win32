@@ -1,19 +1,17 @@
-<p>
-  <img src="https://raw.githubusercontent.com/dart-windows/.github/main/assets/dart-windows-card.png" width="50%" height="50%">
-  <a href="https://flutter.dev/docs/development/packages-and-plugins/favorites" title="Flutter Favorite program">
-    <img src="https://raw.githubusercontent.com/dart-windows/.github/main/assets/FlutterFavoriteLogo.png" align="right" />
-  </a>
-</p>
+[![Dart | Windows][dart_windows_card]][win32_pub_link]
+
+[![ci][ci_badge]][ci_link]
+[![Package: win32][package_badge]][package_link]
+[![Publisher: win32.pub][publisher_badge]][publisher_link]
+[![Language: Dart][language_badge]][language_link]
+[![License: BSD-3-Clause][license_badge]][license_link]
+
+[![Flutter Favorite program][flutter_favorite_logo]][flutter_favorite_program_link]
 
 A package that wraps some of the most common Win32 API calls using FFI to make
 them accessible to Dart code without requiring a C compiler or the Windows SDK.
-Part of the [Dart | Windows](https://github.com/dart-windows) suite of Windows
-packages.
 
-[![pub package](https://img.shields.io/pub/v/win32.svg)](https://pub.dev/packages/win32)
-[![package publisher](https://img.shields.io/pub/publisher/win32.svg)](https://pub.dev/packages/win32/publisher)
-[![Language](https://img.shields.io/badge/language-Dart-blue.svg)](https://dart.dev)
-![Build](https://github.com/dart-windows/win32/workflows/Build/badge.svg)
+Part of the [Dart | Windows][dart_windows_link] suite of Windows packages.
 
 ## Documentation
 
@@ -182,6 +180,21 @@ Dmitriy Kubyshkin and is licensed by him under the MIT License.
 The summary Win32 API documentation comments are [licensed by Microsoft][] under
 the [Creative Commons Attribution 4.0 International Public License][license].
 
+[ci_badge]: https://github.com/dart-windows/win32/actions/workflows/dart.yml/badge.svg
+[ci_link]: https://github.com/dart-windows/win32/actions/workflows/dart.yml
+[dart_windows_card]: https://raw.githubusercontent.com/dart-windows/.github/main/assets/dart-windows-card-480x240.png
+[dart_windows_link]: https://github.com/dart-windows
+[flutter_favorite_logo]: https://raw.githubusercontent.com/dart-windows/.github/main/assets/FlutterFavoriteLogo.png
+[flutter_favorite_program_link]: https://flutter.dev/docs/development/packages-and-plugins/favorites
+[language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
+[language_link]: https://dart.dev
+[license_badge]: https://img.shields.io/github/license/dart-windows/win32?color=blue
+[license_link]: https://opensource.org/licenses/BSD-3-Clause
 [tracker]: https://github.com/dart-windows/win32
 [licensed by Microsoft]: https://github.com/MicrosoftDocs/win32/blob/7b49862e8d58cfad5d4e5e22104c9fca7fd6db2f/ThirdPartyNotices
 [license]: https://github.com/MicrosoftDocs/win32/blob/7b49862e8d58cfad5d4e5e22104c9fca7fd6db2f/LICENSE
+[package_badge]: https://img.shields.io/pub/v/win32.svg
+[package_link]: https://pub.dev/packages/win32
+[publisher_badge]: https://img.shields.io/pub/publisher/win32.svg
+[publisher_link]: https://pub.dev/publishers/win32.pub
+[win32_pub_link]: https://win32.pub

@@ -1,3 +1,10 @@
+## 5.1.1
+
+- Fix dartdoc comment references (#787)
+- Modernize `explorer` example (#789)
+- Add `NtQuerySystemInformation` function (#790)
+- Add more SAPI interfaces and constants (#794)
+
 ## 5.1.0
 
 - Add `midiInAddBuffer` function (#763)

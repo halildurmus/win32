@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2020 Dart | Windows. All rights reserved.
  * Use of this source code is governed by a BSD-style
  * license that can be found in the LICENSE file.
@@ -10,7 +10,7 @@
 
 // This code is not used by the package itself, but is just a helper to inspect
 // widths match the generated Dart structs. The results are pasted into
-// tool\win32gen\lib\src\inputs\struct_sizes.dart as input to the test
+// tool\win32gen\lib\src\model\struct_sizes.dart as input to the test
 // harness.
 
 // Compile with something like the following (replace xxxxx with Windows SDK
