@@ -261,9 +261,14 @@ void winMain(int hInstance, List<String> args, int nShowCmd) {
   // Register the window class.
   final className = TEXT('Scrollbar Sample');
 
+  final lpfnWndProc = NativeCallable<WindowProc>.isolateLocal(
+    mainWindowProc,
+    exceptionalReturn: 0,
+  );
+
   final wc = calloc<WNDCLASS>()
     ..ref.style = CS_HREDRAW | CS_VREDRAW
-    ..ref.lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0)
+    ..ref.lpfnWndProc = lpfnWndProc.nativeFunction
     ..ref.hInstance = hInstance
     ..ref.lpszClassName = className
     ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
@@ -304,4 +309,6 @@ void winMain(int hInstance, List<String> args, int nShowCmd) {
     TranslateMessage(msg);
     DispatchMessage(msg);
   }
+
+  lpfnWndProc.close();
 }

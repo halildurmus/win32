@@ -14,7 +14,10 @@ const EVENT_TRAY_NOTIFY = WM_APP + 1;
 typedef LocalWndProc = bool Function(
     int hWnd, int uMsg, int wParam, int lParam);
 
-final wndProc = Pointer.fromFunction<WindowProc>(_appWndProc, 0);
+final lpfnWndProc = NativeCallable<WindowProc>.isolateLocal(
+  _appWndProc,
+  exceptionalReturn: 0,
+);
 
 void exec() {
   final msg = calloc<MSG>();

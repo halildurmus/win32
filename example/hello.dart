@@ -5,8 +5,8 @@
 // Basic Petzoldian "hello world" Win32 app
 
 import 'dart:ffi';
-import 'package:ffi/ffi.dart';
 
+import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
@@ -42,9 +42,15 @@ void main() => initApp(winMain);
 void winMain(int hInstance, List<String> args, int nShowCmd) {
   // Register the window class.
   final className = TEXT('Sample Window Class');
+
+  final lpfnWndProc = NativeCallable<WindowProc>.isolateLocal(
+    mainWindowProc,
+    exceptionalReturn: 0,
+  );
+
   final wc = calloc<WNDCLASS>()
     ..ref.style = CS_HREDRAW | CS_VREDRAW
-    ..ref.lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0)
+    ..ref.lpfnWndProc = lpfnWndProc.nativeFunction
     ..ref.hInstance = hInstance
     ..ref.lpszClassName = className
     ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
@@ -87,5 +93,6 @@ void winMain(int hInstance, List<String> args, int nShowCmd) {
     DispatchMessage(msg);
   }
 
+  lpfnWndProc.close();
   free(msg);
 }

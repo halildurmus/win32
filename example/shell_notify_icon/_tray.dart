@@ -4,6 +4,7 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import '_app.dart' as app;
+import '_app.dart';
 import '_menu.dart' as menu;
 
 final _guid = Guid.generate().toNativeGUID();
@@ -49,4 +50,5 @@ void removeIcon() {
   free(_guid);
   free(_nid);
   app.deregisterWndProc(_trayWndProc);
+  lpfnWndProc.close();
 }

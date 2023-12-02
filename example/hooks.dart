@@ -12,8 +12,8 @@
 import 'dart:ffi';
 import 'dart:io';
 import 'dart:math';
-import 'package:ffi/ffi.dart';
 
+import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 const LLKHF_INJECTED = 0x00000010;
@@ -193,12 +193,21 @@ int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
 void main() => initApp(winMain);
 
 void winMain(int hInstance, List<String> args, int nShowCmd) {
-  keyHook = SetWindowsHookEx(WH_KEYBOARD_LL,
-      Pointer.fromFunction<CallWndProc>(lowlevelKeyboardHookProc, 0), NULL, 0);
+  final lpfn = NativeCallable<CallWndProc>.isolateLocal(
+    lowlevelKeyboardHookProc,
+    exceptionalReturn: 0,
+  );
+
+  keyHook = SetWindowsHookEx(WH_KEYBOARD_LL, lpfn.nativeFunction, NULL, 0);
+
+  final lpfnWndProc = NativeCallable<WindowProc>.isolateLocal(
+    mainWindowProc,
+    exceptionalReturn: 0,
+  );
 
   final wc = calloc<WNDCLASS>()
     ..ref.style = CS_HREDRAW | CS_VREDRAW
-    ..ref.lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0)
+    ..ref.lpfnWndProc = lpfnWndProc.nativeFunction
     ..ref.hInstance = hInstance
     ..ref.lpszClassName = className
     ..ref.hIcon = LoadIcon(NULL, IDI_APPLICATION)
@@ -230,4 +239,7 @@ void winMain(int hInstance, List<String> args, int nShowCmd) {
     TranslateMessage(msg);
     DispatchMessage(msg);
   }
+
+  lpfnWndProc.close();
+  lpfn.close();
 }

@@ -517,12 +517,17 @@ void main() {
   // Register the window class.
   final windowClassName = 'WIN32_CUSTOM_TITLEBAR_EXAMPLE'.toNativeUtf16();
 
+  final lpfnWndProc = NativeCallable<WindowProc>.isolateLocal(
+    mainWindowProc,
+    exceptionalReturn: 0,
+  );
+
   final windowClass = calloc<WNDCLASSEX>()
     ..ref.cbSize = sizeOf<WNDCLASSEX>()
     ..ref.lpszClassName = windowClassName
     ..ref.style = CS_HREDRAW | CS_VREDRAW
     ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
-    ..ref.lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0);
+    ..ref.lpfnWndProc = lpfnWndProc.nativeFunction;
 
   RegisterClassEx(windowClass);
 
@@ -544,6 +549,7 @@ void main() {
     DispatchMessage(msg);
   }
 
+  lpfnWndProc.close();
   free(msg);
   free(windowCaption);
   free(windowClass);

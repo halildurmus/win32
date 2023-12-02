@@ -212,9 +212,13 @@ int mainWindowProc(int hwnd, int message, int wParam, int lParam) {
         case IDM_APP_ABOUT:
           final pDialog = NotepadResources.loadAboutBox();
 
-          final lpDialogFunc =
-              Pointer.fromFunction<DlgProc>(dialogReturnProc, 0);
-          DialogBoxIndirect(hInstance, pDialog, hwnd, lpDialogFunc);
+          final lpDialogFunc = NativeCallable<DlgProc>.isolateLocal(
+            dialogReturnProc,
+            exceptionalReturn: 0,
+          );
+          DialogBoxIndirect(
+              hInstance, pDialog, hwnd, lpDialogFunc.nativeFunction);
+          lpDialogFunc.close();
           return 0;
       }
       return 0;
@@ -289,9 +293,14 @@ void main() {
   // Register the window class.
   final className = TEXT(APP_NAME);
 
+  final lpfnWndProc = NativeCallable<WindowProc>.isolateLocal(
+    mainWindowProc,
+    exceptionalReturn: 0,
+  );
+
   final wc = calloc<WNDCLASS>()
     ..ref.style = CS_HREDRAW | CS_VREDRAW
-    ..ref.lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0)
+    ..ref.lpfnWndProc = lpfnWndProc.nativeFunction
     ..ref.hInstance = hInstance
     ..ref.lpszClassName = className
     ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
@@ -342,5 +351,7 @@ void main() {
       }
     }
   }
+
+  lpfnWndProc.close();
   free(msg);
 }

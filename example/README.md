@@ -49,14 +49,15 @@ following location:
 
 ## Windows shell manipulation (shell32)
 
-| Example            | Description                                             |
-| ------------------ | ------------------------------------------------------- |
-| `knownfolder.dart` | Retrieves known folders from the current user profile   |
-| `magnifier.dart`   | Provides a magnifier window using the Magnification API |
-| `recycle_bin.dart` | Queries the recycle bin and adds an item to it          |
-| `screenshot.dart`  | Takes snapshots of all connected displays               |
-| `shortcut.dart`    | Demonstrates creating a Windows shell link              |
-| `wallpaper.dart`   | Shows what wallpaper and background color are set       |
+| Example              | Description                                             |
+| -------------------- | ------------------------------------------------------- |
+| `knownfolder.dart`   | Retrieves known folders from the current user profile   |
+| `magnifier.dart`     | Provides a magnifier window using the Magnification API |
+| `recycle_bin.dart`   | Queries the recycle bin and adds an item to it          |
+| `screenshot.dart`    | Takes snapshots of all connected displays               |
+| `shell_notify_icon\` | Demonstrates adding an icon to the system tray          |
+| `shortcut.dart`      | Demonstrates creating a Windows shell link              |
+| `wallpaper.dart`     | Shows what wallpaper and background color are set       |
 
 ## Win32-style UI development (user32, gdi32, commdlg32)
 

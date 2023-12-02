@@ -8,8 +8,8 @@
 // ignore_for_file: constant_identifier_names
 
 import 'dart:ffi';
-import 'package:ffi/ffi.dart';
 
+import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 // For simplicity, the sample uses a constant magnification factor
@@ -32,16 +32,22 @@ void main() => initApp(winMain);
 
 /// Entry point for the application
 void winMain(int hInstance, List<String> args, int nCmdShow) {
-  if (MagInitialize() == FALSE || !setupMagnifier(hInstance)) {
+  final lpfnWndProc = NativeCallable<WindowProc>.isolateLocal(hostWndProc,
+      exceptionalReturn: 0);
+
+  if (MagInitialize() == FALSE ||
+      !setupMagnifier(hInstance, lpfnWndProc.nativeFunction)) {
     return;
   }
 
   ShowWindow(hwndHost, nCmdShow);
   UpdateWindow(hwndHost);
 
+  final lpTimerFunc = NativeCallable<TimerProc>.isolateLocal(updateMagWindow);
+
   // Create a timer to update the control
-  final timerId = SetTimer(hwndHost, 0, timerInterval,
-      Pointer.fromFunction<TimerProc>(updateMagWindow));
+  final timerId =
+      SetTimer(hwndHost, 0, timerInterval, lpTimerFunc.nativeFunction);
 
   // Main message loop
   final msg = calloc<MSG>();
@@ -54,6 +60,8 @@ void winMain(int hInstance, List<String> args, int nCmdShow) {
   KillTimer(NULL, timerId);
   MagUninitialize();
 
+  lpTimerFunc.close();
+  lpfnWndProc.close();
   free(msg);
 }
 
@@ -100,11 +108,12 @@ int hostWndProc(int hWnd, int message, int wParam, int lParam) {
 
 /// Registers the window class for the window that contains the magnification
 /// control.
-int registerHostWindowClass(int hInstance) {
+int registerHostWindowClass(
+    int hInstance, Pointer<NativeFunction<WindowProc>> lpfnWndProc) {
   final wcex = calloc<WNDCLASSEX>()
     ..ref.cbSize = sizeOf<WNDCLASSEX>()
     ..ref.style = CS_HREDRAW | CS_VREDRAW
-    ..ref.lpfnWndProc = Pointer.fromFunction<WindowProc>(hostWndProc, 0)
+    ..ref.lpfnWndProc = lpfnWndProc
     ..ref.hInstance = hInstance
     ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
     ..ref.hbrBackground = COLOR_BTNFACE + 1
@@ -113,7 +122,8 @@ int registerHostWindowClass(int hInstance) {
   return RegisterClassEx(wcex);
 }
 
-bool setupMagnifier(int hInst) {
+bool setupMagnifier(
+    int hInst, Pointer<NativeFunction<WindowProc>> lpfnWndProc) {
   // Set bounds of host window according to screen size
   hostWindowRect
     ..ref.top = 0
@@ -122,7 +132,7 @@ bool setupMagnifier(int hInst) {
     ..ref.right = GetSystemMetrics(SM_CXSCREEN);
 
   // Create the host window
-  registerHostWindowClass(hInst);
+  registerHostWindowClass(hInst, lpfnWndProc);
   hwndHost = CreateWindowEx(
       WS_EX_TOPMOST | WS_EX_LAYERED,
       windowClassName,

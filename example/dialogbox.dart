@@ -87,16 +87,21 @@ void main() {
       windowSystemClass: 0x0081, // edit
       text: 'Enter text');
 
-  final lpDialogFunc = Pointer.fromFunction<DlgProc>(dialogReturnProc, 0);
+  final lpDialogFunc = NativeCallable<DlgProc>.isolateLocal(
+    dialogReturnProc,
+    exceptionalReturn: 0,
+  );
 
   final nResult = DialogBoxIndirectParam(
-      hInstance, ptr.cast<DLGTEMPLATE>(), NULL, lpDialogFunc, 0);
+      hInstance, ptr.cast<DLGTEMPLATE>(), NULL, lpDialogFunc.nativeFunction, 0);
 
   if (nResult <= 0) {
     print('Error: $nResult');
   } else {
     print('Entered: $textEntered');
   }
+
+  lpDialogFunc.close();
   free(ptr);
 }
 
