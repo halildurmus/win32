@@ -19,12 +19,15 @@ void main() {
 
   test('RegisterClass()', () {
     final hInstance = GetModuleHandle(nullptr);
-
     final pClassName = 'CLASS_NAME'.toNativeUtf16();
+    final lpfnWndProc = NativeCallable<WindowProc>.isolateLocal(
+      MainWindowProc,
+      exceptionalReturn: 0,
+    );
 
     final wc = calloc<WNDCLASS>()
       ..ref.style = CS_HREDRAW | CS_VREDRAW
-      ..ref.lpfnWndProc = Pointer.fromFunction<WindowProc>(MainWindowProc, 0)
+      ..ref.lpfnWndProc = lpfnWndProc.nativeFunction
       ..ref.hInstance = hInstance
       ..ref.lpszClassName = pClassName
       ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
@@ -34,8 +37,9 @@ void main() {
       final result = RegisterClass(wc);
       expect(result, isNot(0));
     } finally {
-      free(pClassName);
+      lpfnWndProc.close();
       free(wc);
+      free(pClassName);
     }
   });
 }

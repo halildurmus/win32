@@ -539,16 +539,19 @@ void main() => initApp(winMain);
 
 void winMain(int hInstance, List<String> args, int nShowCmd) {
   // Register the window class.
-
   final className = TEXT('WinSnakeWindowClass');
 
+  final lpfnWndProc = NativeCallable<WindowProc>.isolateLocal(
+    mainWindowProc,
+    exceptionalReturn: 0,
+  );
+
   final wc = calloc<WNDCLASS>()
-    ..ref.lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0)
+    ..ref.lpfnWndProc = lpfnWndProc.nativeFunction
     ..ref.hInstance = hInstance
     ..ref.lpszClassName = className;
   if (RegisterClass(wc) != 0) {
     // Create the window.
-
     hWnd = CreateWindowEx(
         0, // Optional window styles.
         className, // Window class
@@ -596,6 +599,8 @@ void winMain(int hInstance, List<String> args, int nShowCmd) {
         ReleaseDC(hWnd, dc);
         free(rect);
       }
+
+      lpfnWndProc.close();
     } else {
       MessageBox(0, TEXT('Failed to create window'), TEXT('Error'),
           MB_ICONEXCLAMATION | MB_OK);

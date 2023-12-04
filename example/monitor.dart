@@ -93,16 +93,21 @@ void printMonitorCapabilities(int capabilitiesBitmask) {
 void main() {
   var result = FALSE;
 
+  final lpfnEnum = NativeCallable<MonitorEnumProc>.isolateLocal(
+    enumMonitorCallback,
+    exceptionalReturn: 0,
+  );
+
   result = EnumDisplayMonitors(
       NULL, // all displays
       nullptr, // no clipping region
-      Pointer.fromFunction<MonitorEnumProc>(
-          enumMonitorCallback, // dwData
-          0),
+      lpfnEnum.nativeFunction,
       NULL);
   if (result == FALSE) {
     throw WindowsException(result);
   }
+
+  lpfnEnum.close();
 
   print('Number of monitors: ${monitors.length}');
 

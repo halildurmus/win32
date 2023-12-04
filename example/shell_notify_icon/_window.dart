@@ -39,7 +39,7 @@ String _regWinClass() {
   const windowClass = 'Tray_Callback_Window';
   final pWndClass = calloc<WNDCLASS>()
     ..ref.style = CS_HREDRAW | CS_VREDRAW
-    ..ref.lpfnWndProc = app.wndProc
+    ..ref.lpfnWndProc = app.lpfnWndProc.nativeFunction
     ..ref.hInstance = app.hInst
     ..ref.hIcon = app.loadDartIcon()
     ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)

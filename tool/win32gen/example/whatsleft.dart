@@ -46,16 +46,18 @@ Map<String, int> getExports(String module) {
     exit(1);
   }
 
+  final callback = NativeCallable<SymEnumSymbolsProc>.isolateLocal(
+    _enumSymbolProc,
+    exceptionalReturn: 0,
+  );
+
   if (SymEnumSymbols(
-          hProcess,
-          baseOfDll,
-          mask,
-          Pointer.fromFunction<SymEnumSymbolsProc>(_enumSymbolProc, 0),
-          nullptr) ==
+          hProcess, baseOfDll, mask, callback.nativeFunction, nullptr) ==
       FALSE) {
     print('SymEnumSymbols failed.');
   }
 
+  callback.close();
   SymCleanup(hProcess);
   free(modulePtr);
   free(mask);

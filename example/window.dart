@@ -5,8 +5,8 @@
 // Enumerates open windows and demonstrates basic window manipulation
 
 import 'dart:ffi';
-import 'package:ffi/ffi.dart';
 
+import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 // Callback for each window found
@@ -30,9 +30,12 @@ int enumWindowsProc(int hWnd, int lParam) {
 /// List the window handle and text for all top-level desktop windows
 /// in the current session.
 void enumerateWindows() {
-  final wndProc = Pointer.fromFunction<EnumWindowsProc>(enumWindowsProc, 0);
-
-  EnumWindows(wndProc, 0);
+  final lpEnumFunc = NativeCallable<EnumWindowsProc>.isolateLocal(
+    enumWindowsProc,
+    exceptionalReturn: 0,
+  );
+  EnumWindows(lpEnumFunc.nativeFunction, 0);
+  lpEnumFunc.close();
 }
 
 /// Find the first open Notepad window and maximize it
