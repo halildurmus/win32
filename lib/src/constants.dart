@@ -131,9 +131,9 @@ const CLSCTX_REMOTE_SERVER = 0x10;
 /// The combination of `CLSCTX_INPROC_SERVER`, `CLSCTX_INPROC_HANDLER`,
 /// `CLSCTX_LOCAL_SERVER`, and `CLSCTX_REMOTE_SERVER`.
 const CLSCTX_ALL = CLSCTX_INPROC_SERVER |
-    CLSCTX_INPROC_HANDLER |
-    CLSCTX_LOCAL_SERVER |
-    CLSCTX_REMOTE_SERVER;
+CLSCTX_INPROC_HANDLER |
+CLSCTX_LOCAL_SERVER |
+CLSCTX_REMOTE_SERVER;
 
 /// Initializes the thread for multithreaded object concurrency
 const COINITBASE_MULTITHREADED = 0x0;
@@ -644,15 +644,15 @@ const TOKEN_ADJUST_SESSIONID = 0x0100;
 
 /// Combines all possible access rights for a token.
 const TOKEN_ALL_ACCESS = STANDARD_RIGHTS_REQUIRED |
-    TOKEN_ASSIGN_PRIMARY |
-    TOKEN_DUPLICATE |
-    TOKEN_IMPERSONATE |
-    TOKEN_QUERY |
-    TOKEN_QUERY_SOURCE |
-    TOKEN_ADJUST_PRIVILEGES |
-    TOKEN_ADJUST_GROUPS |
-    TOKEN_ADJUST_DEFAULT |
-    TOKEN_ADJUST_SESSIONID;
+TOKEN_ASSIGN_PRIMARY |
+TOKEN_DUPLICATE |
+TOKEN_IMPERSONATE |
+TOKEN_QUERY |
+TOKEN_QUERY_SOURCE |
+TOKEN_ADJUST_PRIVILEGES |
+TOKEN_ADJUST_GROUPS |
+TOKEN_ADJUST_DEFAULT |
+TOKEN_ADJUST_SESSIONID;
 
 /// Combines STANDARD_RIGHTS_READ and TOKEN_QUERY.
 const TOKEN_READ = STANDARD_RIGHTS_READ | TOKEN_QUERY;
@@ -660,9 +660,9 @@ const TOKEN_READ = STANDARD_RIGHTS_READ | TOKEN_QUERY;
 /// Combines STANDARD_RIGHTS_WRITE, TOKEN_ADJUST_PRIVILEGES,
 /// TOKEN_ADJUST_GROUPS, and TOKEN_ADJUST_DEFAULT.
 const TOKEN_WRITE = STANDARD_RIGHTS_WRITE |
-    TOKEN_ADJUST_PRIVILEGES |
-    TOKEN_ADJUST_GROUPS |
-    TOKEN_ADJUST_DEFAULT;
+TOKEN_ADJUST_PRIVILEGES |
+TOKEN_ADJUST_GROUPS |
+TOKEN_ADJUST_DEFAULT;
 
 /// Same as STANDARD_RIGHTS_EXECUTE.
 const TOKEN_EXECUTE = STANDARD_RIGHTS_EXECUTE;
@@ -1201,11 +1201,11 @@ const WS_OVERLAPPED = 0x00000000;
 
 /// The window is an overlapped window. Same as the WS_TILEDWINDOW style.
 const WS_OVERLAPPEDWINDOW = WS_OVERLAPPED |
-    WS_CAPTION |
-    WS_SYSMENU |
-    WS_THICKFRAME |
-    WS_MINIMIZEBOX |
-    WS_MAXIMIZEBOX;
+WS_CAPTION |
+WS_SYSMENU |
+WS_THICKFRAME |
+WS_MINIMIZEBOX |
+WS_MAXIMIZEBOX;
 
 /// The window is a pop-up window. This style cannot be used with the WS_CHILD
 /// style.
@@ -2468,15 +2468,15 @@ const QS_INPUT = QS_MOUSE | QS_KEY | QS_RAWINPUT | QS_TOUCH | QS_POINTER;
 
 /// An input, WM_TIMER, WM_PAINT, WM_HOTKEY, or posted message is in the queue.
 const QS_ALLEVENTS =
-    QS_INPUT | QS_POSTMESSAGE | QS_TIMER | QS_PAINT | QS_HOTKEY;
+QS_INPUT | QS_POSTMESSAGE | QS_TIMER | QS_PAINT | QS_HOTKEY;
 
 /// Any message is in the queue.
 const QS_ALLINPUT = QS_INPUT |
-    QS_POSTMESSAGE |
-    QS_TIMER |
-    QS_PAINT |
-    QS_HOTKEY |
-    QS_SENDMESSAGE;
+QS_POSTMESSAGE |
+QS_TIMER |
+QS_PAINT |
+QS_HOTKEY |
+QS_SENDMESSAGE;
 
 // -----------------------------------------------------------------------------
 // Hook constants
@@ -7412,18 +7412,18 @@ const DTT_COMPOSITED = 1 << 13;
 
 /// All valid bits
 const DTT_VALIDBITS = DTT_TEXTCOLOR |
-    DTT_BORDERCOLOR |
-    DTT_SHADOWCOLOR |
-    DTT_SHADOWTYPE |
-    DTT_SHADOWOFFSET |
-    DTT_BORDERSIZE |
-    DTT_FONTPROP |
-    DTT_COLORPROP |
-    DTT_STATEID |
-    DTT_CALCRECT |
-    DTT_APPLYOVERLAY |
-    DTT_GLOWSIZE |
-    DTT_COMPOSITED;
+DTT_BORDERCOLOR |
+DTT_SHADOWCOLOR |
+DTT_SHADOWTYPE |
+DTT_SHADOWOFFSET |
+DTT_BORDERSIZE |
+DTT_FONTPROP |
+DTT_COLORPROP |
+DTT_STATEID |
+DTT_CALCRECT |
+DTT_APPLYOVERLAY |
+DTT_GLOWSIZE |
+DTT_COMPOSITED;
 
 // -----------------------------------------------------------------------------
 // High DPI constants & enumerations
@@ -7824,7 +7824,7 @@ const FOF_WANTNUKEWARNING = 0x4000;
 
 /// Perform the operation silently, presenting no UI to the user.
 const FOF_NO_UI =
-    FOF_SILENT | FOF_NOCONFIRMATION | FOF_NOERRORUI | FOF_NOCONFIRMMKDIR;
+FOF_SILENT | FOF_NOCONFIRMATION | FOF_NOERRORUI | FOF_NOCONFIRMMKDIR;
 
 // -----------------------------------------------------------------------------
 // Shell_NotifyIcon uFlags constants
@@ -9252,15 +9252,15 @@ const KEY_WOW64_64KEY = 0x0100;
 /// Combines the STANDARD_RIGHTS_READ, KEY_QUERY_VALUE, KEY_ENUMERATE_SUB_KEYS,
 /// and KEY_NOTIFY values.
 const KEY_READ = (STANDARD_RIGHTS_READ |
-        KEY_QUERY_VALUE |
-        KEY_ENUMERATE_SUB_KEYS |
-        KEY_NOTIFY) &
-    (~SYNCHRONIZE);
+KEY_QUERY_VALUE |
+KEY_ENUMERATE_SUB_KEYS |
+KEY_NOTIFY) &
+(~SYNCHRONIZE);
 
 /// Combines the STANDARD_RIGHTS_WRITE, KEY_SET_VALUE, and KEY_CREATE_SUB_KEY
 /// access rights.
 const KEY_WRITE = (STANDARD_RIGHTS_WRITE | KEY_SET_VALUE | KEY_CREATE_SUB_KEY) &
-    (~SYNCHRONIZE);
+(~SYNCHRONIZE);
 
 /// Equivalent to KEY_READ.
 const KEY_EXECUTE = KEY_READ & (~SYNCHRONIZE);
@@ -9269,13 +9269,13 @@ const KEY_EXECUTE = KEY_READ & (~SYNCHRONIZE);
 /// KEY_CREATE_SUB_KEY, KEY_ENUMERATE_SUB_KEYS, KEY_NOTIFY, and KEY_CREATE_LINK
 /// access rights.
 const KEY_ALL_ACCESS = (STANDARD_RIGHTS_ALL |
-        KEY_QUERY_VALUE |
-        KEY_SET_VALUE |
-        KEY_CREATE_SUB_KEY |
-        KEY_ENUMERATE_SUB_KEYS |
-        KEY_NOTIFY |
-        KEY_CREATE_LINK) &
-    (~SYNCHRONIZE);
+KEY_QUERY_VALUE |
+KEY_SET_VALUE |
+KEY_CREATE_SUB_KEY |
+KEY_ENUMERATE_SUB_KEYS |
+KEY_NOTIFY |
+KEY_CREATE_LINK) &
+(~SYNCHRONIZE);
 
 /// Notify the caller if a subkey is added or deleted.
 const REG_NOTIFY_CHANGE_NAME = 0x00000001;
@@ -9323,9 +9323,9 @@ const SDC_TOPOLOGY_SUPPLIED = 0x00000010;
 /// configurations. This value informs the API to set the last known display
 /// configuration for the current connected monitors.
 const SDC_USE_DATABASE_CURRENT = SDC_TOPOLOGY_INTERNAL |
-    SDC_TOPOLOGY_CLONE |
-    SDC_TOPOLOGY_EXTEND |
-    SDC_TOPOLOGY_EXTERNAL;
+SDC_TOPOLOGY_CLONE |
+SDC_TOPOLOGY_EXTEND |
+SDC_TOPOLOGY_EXTERNAL;
 
 /// The topology, source, and target mode information that are supplied in the
 /// pathArray and the modeInfoArray parameters are used, rather than looking up
@@ -9729,6 +9729,82 @@ class ScrollAmount {
   /// Scrolling is done in small increments, equivalent to pressing an arrow
   /// key or clicking the arrow button on a scroll bar.
   static const ScrollAmount_SmallIncrement = 4;
+}
+
+/// The STGM constants are flags that indicate conditions for creating and
+/// deleting the object and access modes for the object.
+///
+/// {@category enum}
+class STGM {
+  /// Indicates that the object is read-only, meaning that modifications
+  /// cannot be made.
+  static const STGM_READ = 0x00000000;
+
+  /// Enables you to save changes to the object, but does not permit access
+  /// to its data.
+  static const STGM_WRITE = 0x00000001;
+
+  /// Enables access and modification of object data.
+  static const STGM_READWRITE = 0x00000002;
+
+  /// Specifies that subsequent openings of the object are not denied read or
+  /// write access.
+  static const STGM_SHARE_DENY_NONE = 0x00000040;
+
+  /// Prevents others from subsequently opening the object in STGM_READ mode.
+  /// It is typically used on a root storage object.
+  static const STGM_SHARE_DENY_READ = 0x00000030;
+
+  /// Prevents others from subsequently opening the object for `STGM_WRITE`
+  /// or `STGM_READWRITE` access.
+  static const STGM_SHARE_DENY_WRITE = 0x00000020;
+
+  /// Prevents others from subsequently opening the object in any mode.
+  static const STGM_SHARE_EXCLUSIVE = 0x00000010;
+
+  /// Opens the storage object with exclusive access to the most recently
+  /// committed version.
+  static const STGM_PRIORITY = 0x00040000;
+
+  /// Indicates that an existing storage object or stream should be removed
+  /// before the new object replaces it.
+  static const STGM_CREATE = 0x00001000;
+
+  /// Creates the new object while preserving existing data in a stream named
+  /// "Contents".
+  static const STGM_CONVERT = 0x00020000;
+
+  /// Causes the create operation to fail if an existing object with the
+  /// specified name exists.
+  static const STGM_FAILIFTHERE = 0x00000000;
+
+  /// Indicates that, in direct mode, each change to a storage or stream
+  /// element is written as it occurs.
+  static const STGM_DIRECT = 0x00000000;
+
+  /// Indicates that, in transacted mode, changes are buffered and written
+  /// only if an explicit commit operation is called.
+  static const STGM_TRANSACTED = 0x00010000;
+
+  /// Indicates that, in transacted mode, a temporary scratch file is usually
+  /// used to save modifications until the Commit method is called.
+  static const STGM_NOSCRATCH = 0x00100000;
+
+  /// This flag is used when opening a storage object with STGM_TRANSACTED
+  /// and without STGM_SHARE_EXCLUSIVE or STGM_SHARE_DENY_WRITE.
+  static const STGM_NOSNAPSHOT = 0x00200000;
+
+  /// Provides a faster implementation of a compound file in a limited, but
+  /// frequently used, case. For more information, see the Remarks section.
+  static const STGM_SIMPLE = 0x08000000;
+
+  /// Supports direct mode for single-writer, multireader file operations.
+  static const STGM_DIRECT_SWMR = 0x00400000;
+
+  /// Indicates that the underlying file is to be automatically destroyed
+  /// when the root storage object is released.
+  static const STGM_DELETEONRELEASE = 0x04000000;
+
 }
 
 /// Contains values that specify the toggle state of a Microsoft UI Automation
@@ -10916,6 +10992,31 @@ const DBT_CUSTOMEVENT = 0x8006;
 
 /// The meaning of this message is user-defined.
 const DBT_USERDEFINED = 0xFFFF;
+
+// -----------------------------------------------------------------------------
+// Common PropertyKey constants
+// -----------------------------------------------------------------------------
+
+/// The friendly name of the audio adapter to which the endpoint device is
+/// attached (for example, "XYZ Audio Adapter").
+const PKEY_DeviceInterface_FriendlyName =
+    '{026e516e-b814-414b-83cd-856d6fef4822}';
+
+/// The device description of the endpoint device (for example, "Speakers").
+const PKEY_Device_DeviceDesc = '{a45c254e-df1c-4efd-8020-67d146a850e0}';
+
+/// The friendly name of the endpoint device (for example, "Speakers (XYZ Audio
+/// Adapter)").
+const PKEY_Devices_FriendlyName = '{a45c254e-df1c-4efd-8020-67d146a850e0}';
+
+/// Stores the audio endpoint device instance identifier. The value can also be
+/// acquired via `IMMDevice::GetId` method.
+const PKEY_Device_InstanceId = '{78c34fc8-104a-4aca-9ea4-524d52996e57}';
+
+/// Stores the container identifier of the PnP device that implements the audio
+/// endpoint.
+const PKEY_Device_ContainerId = '{8c7ed206-3f8a-4827-b3ab-ae9e1faefc6c}';
+
 
 // -----------------------------------------------------------------------------
 // GlobalAlloc flags

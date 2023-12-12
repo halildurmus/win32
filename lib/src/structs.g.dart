@@ -212,6 +212,24 @@ base class ASSEMBLYMETADATA extends Struct {
   external int ulOS;
 }
 
+/// The AudioClientProperties structure is used to set the parameters that
+/// describe the properties of the client's audio stream.
+///
+/// {@category struct}
+base class AudioClientProperties extends Struct {
+  @Uint32()
+  external int cbSize;
+
+  @Int32()
+  external int bIsOffload;
+
+  @Int32()
+  external int eCategory;
+
+  @Int32()
+  external int Options;
+}
+
 /// Contains parameters used during a moniker-binding operation.
 ///
 /// {@category struct}

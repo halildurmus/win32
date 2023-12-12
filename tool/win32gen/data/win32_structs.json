@@ -110,6 +110,7 @@
     "Windows.Win32.Graphics.Printing.PRINTER_NOTIFY_INFO_DATA": "The PRINTER_NOTIFY_INFO_DATA structure identifies a job or printer information field and provides the current data for that field.",
     "Windows.Win32.Graphics.Printing.PRINTER_OPTIONSW": "Represents printer options.",
     "Windows.Win32.Graphics.Printing.PRINT_EXECUTION_DATA": "Contains the execution context of the printer driver that calls GetPrintExecutionData.",
+    "Windows.Win32.Media.Audio.AudioClientProperties": "The AudioClientProperties structure is used to set the parameters that describe the properties of the client's audio stream.",
     "Windows.Win32.Media.Audio.HWAVEIN": "Handle of an open waveform-audio input device.",
     "Windows.Win32.Media.Audio.MIDIEVENT": "The MIDIEVENT structure describes a MIDI event in a stream buffer.",
     "Windows.Win32.Media.Audio.MIDIHDR": "The MIDIHDR structure defines the header used to identify a MIDI system-exclusive or stream buffer.",

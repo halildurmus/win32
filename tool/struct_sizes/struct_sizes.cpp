@@ -68,6 +68,7 @@ void main()
     printf("  'APPX_PACKAGE_SETTINGS': %zu,\n", sizeof(APPX_PACKAGE_SETTINGS));
     printf("  'ARRAYDESC': %zu,\n", sizeof(ARRAYDESC));
     printf("  'ASSEMBLYMETADATA': %zu,\n", sizeof(ASSEMBLYMETADATA));
+    printf("  'AudioClientProperties': %zu,\n", sizeof(AudioClientProperties));
     printf("  'BIND_OPTS': %zu,\n", sizeof(BIND_OPTS));
     printf("  'BITMAP': %zu,\n", sizeof(BITMAP));
     printf("  'BITMAPFILEHEADER': %zu,\n", sizeof(BITMAPFILEHEADER));
