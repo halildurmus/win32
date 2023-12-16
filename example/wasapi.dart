@@ -119,16 +119,14 @@ void main() {
 
     // Build property key to get device friendly name.
     final pProps = IPropertyStore(ppProps.cast());
-    final guid = calloc<GUID>();
-    CLSIDFromString(PKEY_DeviceInterface_FriendlyName.toNativeUtf16(), guid);
-    final pKey = calloc<PROPERTYKEY>()
-      ..ref.fmtid = guid.ref
+    final pPropKey = calloc<PROPERTYKEY>()
+      ..ref.fmtid.setGUID(PKEY_DeviceInterface_FriendlyName)
       ..ref.pid = 2;
 
     // Retrieve the current device friendly name.
     final pVal = calloc<PROPVARIANT>();
-    check(pProps.getValue(pKey.cast(), pVal));
-    free(guid);
+    check(pProps.getValue(pPropKey.cast(), pVal));
+    free(pPropKey);
 
     // Check the retrieved device friendly name.
     final varName = pVal.ref;
