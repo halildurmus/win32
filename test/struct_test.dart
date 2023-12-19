@@ -18,6 +18,9 @@ void main() {
   test('Struct GUID is the right size', () {
     expect(sizeOf<GUID>(), equals(16));
   });
+  test('Struct PROPERTYKEY is the right size', () {
+    expect(sizeOf<PROPERTYKEY>(), equals(20));
+  });
   test('Struct PROPVARIANT is the right size', () {
     expect(sizeOf<PROPVARIANT>(), equals(24));
   });
@@ -50,6 +53,9 @@ void main() {
   });
   test('Struct ASSEMBLYMETADATA is the right size', () {
     expect(sizeOf<ASSEMBLYMETADATA>(), equals(56));
+  });
+  test('Struct AudioClientProperties is the right size', () {
+    expect(sizeOf<AudioClientProperties>(), equals(16));
   });
   test('Struct BIND_OPTS is the right size', () {
     expect(sizeOf<BIND_OPTS>(), equals(16));
@@ -806,9 +812,6 @@ void main() {
   });
   test('Struct PROCESS_INFORMATION is the right size', () {
     expect(sizeOf<PROCESS_INFORMATION>(), equals(24));
-  });
-  test('Struct PROPERTYKEY is the right size', () {
-    expect(sizeOf<PROPERTYKEY>(), equals(20));
   });
   test('Struct PROPSPEC is the right size', () {
     expect(sizeOf<PROPSPEC>(), equals(16));

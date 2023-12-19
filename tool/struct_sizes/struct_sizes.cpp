@@ -27,6 +27,7 @@
 #include <windows.h>
 
 #include <AppxPackaging.h>
+#include <Audioclient.h>
 #include <bluetoothapis.h>
 #include <bluetoothleapis.h>
 #include <DbgHelp.h>

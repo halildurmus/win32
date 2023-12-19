@@ -9,6 +9,7 @@
 
 const structSizeMap = <String, int>{
   'GUID': 16,
+  'PROPERTYKEY': 20,
   'PROPVARIANT': 24,
   'VARIANT': 24,
   'ACCEL': 6,
@@ -20,6 +21,7 @@ const structSizeMap = <String, int>{
   'APPX_PACKAGE_SETTINGS': 16,
   'ARRAYDESC': 32,
   'ASSEMBLYMETADATA': 56,
+  'AudioClientProperties': 16,
   'BIND_OPTS': 16,
   'BITMAP': 32,
   'BITMAPFILEHEADER': 14,
@@ -271,7 +273,6 @@ const structSizeMap = <String, int>{
   'PRINT_EXECUTION_DATA': 8,
   'PROCESS_HEAP_ENTRY': 40,
   'PROCESS_INFORMATION': 24,
-  'PROPERTYKEY': 20,
   'PROPSPEC': 16,
   'PROTOENT': 24,
   'QUERY_SERVICE_CONFIG': 64,
