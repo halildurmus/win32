@@ -380,6 +380,7 @@
     "Windows.Win32.UI.Shell.DLLVERSIONINFO": "Receives DLL-specific version information. It is used with the DllGetVersion function.",
     "Windows.Win32.UI.Shell.KNOWNFOLDER_DEFINITION": "Defines the specifics of a known folder.",
     "Windows.Win32.UI.Shell.NOTIFYICONDATAW": "Contains information that the system needs to display notifications in the notification area. Used by Shell_NotifyIcon.",
+    "Windows.Win32.UI.Shell.PropertiesSystem.PROPERTYKEY": "Specifies the FMTID/PID identifier that programmatically identifies a property.",
     "Windows.Win32.UI.Shell.SHELLEXECUTEINFOW": "Contains information used by ShellExecuteEx.",
     "Windows.Win32.UI.Shell.SHELL_ITEM_RESOURCE": "Defines Shell item resource.",
     "Windows.Win32.UI.Shell.SHFILEINFOW": "Contains information about a file object.",

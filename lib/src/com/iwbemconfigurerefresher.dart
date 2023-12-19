@@ -16,7 +16,6 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../propertykey.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';

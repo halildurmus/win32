@@ -152,7 +152,6 @@ class ComInterfaceProjection {
         '../exceptions.dart',
         '../guid.dart',
         '../macros.dart',
-        '../propertykey.dart',
         '../structs.g.dart',
         '../utils.dart',
         '../variant.dart',
