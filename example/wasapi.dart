@@ -87,9 +87,9 @@ void main() {
   final pDeviceEnumerator = MMDeviceEnumerator.createInstance();
   final ppDevices = calloc<Pointer<COMObject>>();
   check(pDeviceEnumerator.enumAudioEndpoints(
-    0, // dataflow: rendering device
-    1, // device state: only enumerate active device
-    ppDevices));
+      0, // dataflow: rendering device
+      1, // device state: only enumerate active device
+      ppDevices));
 
   // Get the number of available audio output devices.
   final pDevices = IMMDeviceCollection(ppDevices.cast());
