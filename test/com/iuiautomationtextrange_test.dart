@@ -76,4 +76,6 @@ void main() {
   test('Can instantiate IUIAutomationTextRange.getChildren', () {
     expect(uiautomationtextrange.getChildren, isA<Function>());
   });
+
+  free(ptr);
 }

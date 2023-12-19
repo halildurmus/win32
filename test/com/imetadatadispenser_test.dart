@@ -31,4 +31,6 @@ void main() {
   test('Can instantiate IMetaDataDispenser.openScopeOnMemory', () {
     expect(metadatadispenser.openScopeOnMemory, isA<Function>());
   });
+
+  free(ptr);
 }

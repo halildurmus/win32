@@ -49,4 +49,6 @@ void main() {
   test('Can instantiate IKnownFolder.getFolderDefinition', () {
     expect(knownfolder.getFolderDefinition, isA<Function>());
   });
+
+  free(ptr);
 }

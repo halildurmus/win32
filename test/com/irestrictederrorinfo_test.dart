@@ -28,4 +28,6 @@ void main() {
   test('Can instantiate IRestrictedErrorInfo.getReference', () {
     expect(restrictederrorinfo.getReference, isA<Function>());
   });
+
+  free(ptr);
 }

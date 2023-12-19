@@ -34,4 +34,6 @@ void main() {
   test('Can instantiate IUIAutomationTablePattern.getCachedColumnHeaders', () {
     expect(uiautomationtablepattern.getCachedColumnHeaders, isA<Function>());
   });
+
+  free(ptr);
 }

@@ -76,6 +76,9 @@ void main() {
       // This is a wireless network or Ethernet network name. Assume that it's
       // more than one character long, and test for that.
       expect(descPtr.value.length, greaterThan(1));
+
+      SysFreeString(descPtr.value);
+      free(descPtr);
     });
   });
 }

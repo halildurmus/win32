@@ -52,4 +52,6 @@ void main() {
   test('Can instantiate IBindCtx.revokeObjectParam', () {
     expect(bindctx.revokeObjectParam, isA<Function>());
   });
+
+  free(ptr);
 }

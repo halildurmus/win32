@@ -37,4 +37,6 @@ void main() {
             .requestTokenWithWebAccountForWindowAsync,
         isA<Function>());
   });
+
+  free(ptr);
 }

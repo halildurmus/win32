@@ -25,4 +25,6 @@ void main() {
   test('Can instantiate IWbemLocator.connectServer', () {
     expect(wbemlocator.connectServer, isA<Function>());
   });
+
+  free(ptr);
 }

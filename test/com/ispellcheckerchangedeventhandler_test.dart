@@ -25,4 +25,6 @@ void main() {
   test('Can instantiate ISpellCheckerChangedEventHandler.invoke', () {
     expect(spellcheckerchangedeventhandler.invoke, isA<Function>());
   });
+
+  free(ptr);
 }

@@ -22,4 +22,6 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final uiautomationelement5 = IUIAutomationElement5(ptr);
+
+  free(ptr);
 }

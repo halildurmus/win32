@@ -43,4 +43,6 @@ void main() {
   test('Can instantiate IShellItemArray.enumItems', () {
     expect(shellitemarray.enumItems, isA<Function>());
   });
+
+  free(ptr);
 }

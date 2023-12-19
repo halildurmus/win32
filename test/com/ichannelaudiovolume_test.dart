@@ -37,4 +37,6 @@ void main() {
   test('Can instantiate IChannelAudioVolume.getAllVolumes', () {
     expect(channelaudiovolume.getAllVolumes, isA<Function>());
   });
+
+  free(ptr);
 }

@@ -28,4 +28,6 @@ void main() {
   test('Can instantiate IUIAutomationTextPattern2.getCaretRange', () {
     expect(uiautomationtextpattern2.getCaretRange, isA<Function>());
   });
+
+  free(ptr);
 }

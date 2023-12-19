@@ -65,4 +65,6 @@ void main() {
   test('Can instantiate IMetaDataAssemblyImport.findAssembliesByName', () {
     expect(metadataassemblyimport.findAssembliesByName, isA<Function>());
   });
+
+  free(ptr);
 }

@@ -40,4 +40,6 @@ void main() {
     expect(uiautomationmultipleviewpattern.getCachedSupportedViews,
         isA<Function>());
   });
+
+  free(ptr);
 }

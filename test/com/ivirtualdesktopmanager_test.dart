@@ -33,4 +33,6 @@ void main() {
   test('Can instantiate IVirtualDesktopManager.moveWindowToDesktop', () {
     expect(virtualdesktopmanager.moveWindowToDesktop, isA<Function>());
   });
+
+  free(ptr);
 }

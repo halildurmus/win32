@@ -31,4 +31,6 @@ void main() {
   test('Can instantiate IUIAutomationSynchronizedInputPattern.cancel', () {
     expect(uiautomationsynchronizedinputpattern.cancel, isA<Function>());
   });
+
+  free(ptr);
 }

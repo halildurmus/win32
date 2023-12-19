@@ -34,4 +34,6 @@ void main() {
   test('Can instantiate IEnumMoniker.clone', () {
     expect(enummoniker.clone, isA<Function>());
   });
+
+  free(ptr);
 }

@@ -31,4 +31,6 @@ void main() {
   test('Can instantiate IAppxManifestReader7.getHostRuntimeDependencies', () {
     expect(appxmanifestreader7.getHostRuntimeDependencies, isA<Function>());
   });
+
+  free(ptr);
 }

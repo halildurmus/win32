@@ -34,4 +34,6 @@ void main() {
   test('Can instantiate IDispatch.invoke', () {
     expect(dispatch.invoke, isA<Function>());
   });
+
+  free(ptr);
 }

@@ -34,4 +34,6 @@ void main() {
   test('Can instantiate IEnumVARIANT.clone', () {
     expect(enumvariant.clone, isA<Function>());
   });
+
+  free(ptr);
 }

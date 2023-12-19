@@ -25,4 +25,6 @@ void main() {
   test('Can instantiate IInitializeWithWindow.initialize', () {
     expect(initializewithwindow.initialize, isA<Function>());
   });
+
+  free(ptr);
 }

@@ -25,4 +25,6 @@ void main() {
   test('Can instantiate IAppxManifestReader4.getOptionalPackageInfo', () {
     expect(appxmanifestreader4.getOptionalPackageInfo, isA<Function>());
   });
+
+  free(ptr);
 }

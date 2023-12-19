@@ -43,4 +43,6 @@ void main() {
     expect(mmdeviceenumerator.unregisterEndpointNotificationCallback,
         isA<Function>());
   });
+
+  free(ptr);
 }

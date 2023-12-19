@@ -28,4 +28,6 @@ void main() {
   test('Can instantiate IUIAutomationSelectionPattern.getCachedSelection', () {
     expect(uiautomationselectionpattern.getCachedSelection, isA<Function>());
   });
+
+  free(ptr);
 }

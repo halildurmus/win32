@@ -40,4 +40,6 @@ void main() {
   test('Can instantiate IUIAutomationElement7.getCurrentMetadataValue', () {
     expect(uiautomationelement7.getCurrentMetadataValue, isA<Function>());
   });
+
+  free(ptr);
 }

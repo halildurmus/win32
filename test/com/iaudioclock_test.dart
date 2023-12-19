@@ -31,4 +31,6 @@ void main() {
   test('Can instantiate IAudioClock.getCharacteristics', () {
     expect(audioclock.getCharacteristics, isA<Function>());
   });
+
+  free(ptr);
 }

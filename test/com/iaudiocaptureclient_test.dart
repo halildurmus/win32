@@ -31,4 +31,6 @@ void main() {
   test('Can instantiate IAudioCaptureClient.getNextPacketSize', () {
     expect(audiocaptureclient.getNextPacketSize, isA<Function>());
   });
+
+  free(ptr);
 }

@@ -25,4 +25,6 @@ void main() {
   test('Can instantiate IUIAutomationGridPattern.getItem', () {
     expect(uiautomationgridpattern.getItem, isA<Function>());
   });
+
+  free(ptr);
 }
