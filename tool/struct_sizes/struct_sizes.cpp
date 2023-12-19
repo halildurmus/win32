@@ -55,6 +55,7 @@ void main()
 {
     // Manually generated structs
     printf("  'GUID': %zu,\n", sizeof(GUID));
+    printf("  'PROPERTYKEY': %zu,\n", sizeof(PROPERTYKEY));
     printf("  'PROPVARIANT': %zu,\n", sizeof(PROPVARIANT));
     printf("  'VARIANT': %zu,\n", sizeof(VARIANT));
 
@@ -320,7 +321,6 @@ void main()
     printf("  'PRINT_EXECUTION_DATA': %zu,\n", sizeof(PRINT_EXECUTION_DATA));
     printf("  'PROCESS_HEAP_ENTRY': %zu,\n", sizeof(PROCESS_HEAP_ENTRY));
     printf("  'PROCESS_INFORMATION': %zu,\n", sizeof(PROCESS_INFORMATION));
-    printf("  'PROPERTYKEY': %zu,\n", sizeof(PROPERTYKEY));
     printf("  'PROPSPEC': %zu,\n", sizeof(PROPSPEC));
     printf("  'PROTOENT': %zu,\n", sizeof(PROTOENT));
     printf("  'QUERY_SERVICE_CONFIG': %zu,\n", sizeof(QUERY_SERVICE_CONFIGW));

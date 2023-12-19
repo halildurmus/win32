@@ -119,9 +119,7 @@ void main() {
 
     // Build property key to get device friendly name.
     final pProps = IPropertyStore(ppProps.cast());
-    final pPropKey = calloc<PROPERTYKEY>()
-      ..ref.fmtid.setGUID(PKEY_DeviceInterface_FriendlyName)
-      ..ref.pid = 2;
+    final pPropKey = PROPERTYKEY.DeviceInterface_FriendlyName();
 
     // Retrieve the current device friendly name.
     final pVal = calloc<PROPVARIANT>();

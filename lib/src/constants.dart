@@ -9804,7 +9804,6 @@ class STGM {
   /// Indicates that the underlying file is to be automatically destroyed
   /// when the root storage object is released.
   static const STGM_DELETEONRELEASE = 0x04000000;
-
 }
 
 /// Contains values that specify the toggle state of a Microsoft UI Automation
@@ -10992,31 +10991,6 @@ const DBT_CUSTOMEVENT = 0x8006;
 
 /// The meaning of this message is user-defined.
 const DBT_USERDEFINED = 0xFFFF;
-
-// -----------------------------------------------------------------------------
-// Common PropertyKey constants
-// -----------------------------------------------------------------------------
-
-/// The friendly name of the audio adapter to which the endpoint device is
-/// attached (for example, "XYZ Audio Adapter").
-const PKEY_DeviceInterface_FriendlyName =
-    '{026e516e-b814-414b-83cd-856d6fef4822}';
-
-/// The device description of the endpoint device (for example, "Speakers").
-const PKEY_Device_DeviceDesc = '{a45c254e-df1c-4efd-8020-67d146a850e0}';
-
-/// The friendly name of the endpoint device (for example, "Speakers (XYZ Audio
-/// Adapter)").
-const PKEY_Devices_FriendlyName = '{a45c254e-df1c-4efd-8020-67d146a850e0}';
-
-/// Stores the audio endpoint device instance identifier. The value can also be
-/// acquired via `IMMDevice::GetId` method.
-const PKEY_Device_InstanceId = '{78c34fc8-104a-4aca-9ea4-524d52996e57}';
-
-/// Stores the container identifier of the PnP device that implements the audio
-/// endpoint.
-const PKEY_Device_ContainerId = '{8c7ed206-3f8a-4827-b3ab-ae9e1faefc6c}';
-
 
 // -----------------------------------------------------------------------------
 // GlobalAlloc flags
