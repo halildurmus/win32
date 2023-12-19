@@ -31,4 +31,6 @@ void main() {
   test('Can instantiate IUIAutomationWindowPattern.setWindowVisualState', () {
     expect(uiautomationwindowpattern.setWindowVisualState, isA<Function>());
   });
+
+  free(ptr);
 }

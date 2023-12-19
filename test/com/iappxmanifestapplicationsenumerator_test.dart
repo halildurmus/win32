@@ -32,4 +32,6 @@ void main() {
   test('Can instantiate IAppxManifestApplicationsEnumerator.moveNext', () {
     expect(appxmanifestapplicationsenumerator.moveNext, isA<Function>());
   });
+
+  free(ptr);
 }

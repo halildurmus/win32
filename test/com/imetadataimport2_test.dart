@@ -46,4 +46,6 @@ void main() {
   test('Can instantiate IMetaDataImport2.enumMethodSpecs', () {
     expect(metadataimport2.enumMethodSpecs, isA<Function>());
   });
+
+  free(ptr);
 }

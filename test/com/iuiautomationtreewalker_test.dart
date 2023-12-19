@@ -70,4 +70,6 @@ void main() {
       () {
     expect(uiautomationtreewalker.normalizeElementBuildCache, isA<Function>());
   });
+
+  free(ptr);
 }

@@ -55,4 +55,6 @@ void main() {
   test('Can instantiate INetwork.setCategory', () {
     expect(network.setCategory, isA<Function>());
   });
+
+  free(ptr);
 }

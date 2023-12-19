@@ -26,4 +26,6 @@ void main() {
   test('Can instantiate IUIAutomationVirtualizedItemPattern.realize', () {
     expect(uiautomationvirtualizeditempattern.realize, isA<Function>());
   });
+
+  free(ptr);
 }

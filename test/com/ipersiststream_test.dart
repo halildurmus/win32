@@ -34,4 +34,6 @@ void main() {
   test('Can instantiate IPersistStream.getSizeMax', () {
     expect(persiststream.getSizeMax, isA<Function>());
   });
+
+  free(ptr);
 }

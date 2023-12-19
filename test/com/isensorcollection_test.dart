@@ -40,4 +40,6 @@ void main() {
   test('Can instantiate ISensorCollection.clear', () {
     expect(sensorcollection.clear, isA<Function>());
   });
+
+  free(ptr);
 }

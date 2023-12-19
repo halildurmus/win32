@@ -25,4 +25,6 @@ void main() {
   test('Can instantiate IUIAutomationTogglePattern.toggle', () {
     expect(uiautomationtogglepattern.toggle, isA<Function>());
   });
+
+  free(ptr);
 }

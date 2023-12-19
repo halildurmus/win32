@@ -67,4 +67,6 @@ void main() {
   test('Can instantiate ISensor.setEventSink', () {
     expect(sensor.setEventSink, isA<Function>());
   });
+
+  free(ptr);
 }

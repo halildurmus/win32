@@ -40,4 +40,6 @@ void main() {
   test('Can instantiate IMetaDataDispenserEx.findAssemblyModule', () {
     expect(metadatadispenserex.findAssemblyModule, isA<Function>());
   });
+
+  free(ptr);
 }

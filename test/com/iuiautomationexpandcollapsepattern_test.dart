@@ -29,4 +29,6 @@ void main() {
   test('Can instantiate IUIAutomationExpandCollapsePattern.collapse', () {
     expect(uiautomationexpandcollapsepattern.collapse, isA<Function>());
   });
+
+  free(ptr);
 }

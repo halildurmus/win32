@@ -97,4 +97,6 @@ void main() {
   test('Can instantiate IUri.isEqual', () {
     expect(uri.isEqual, isA<Function>());
   });
+
+  free(ptr);
 }

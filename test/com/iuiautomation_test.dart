@@ -163,4 +163,6 @@ void main() {
   test('Can instantiate IUIAutomation.elementFromIAccessibleBuildCache', () {
     expect(uiautomation.elementFromIAccessibleBuildCache, isA<Function>());
   });
+
+  free(ptr);
 }

@@ -28,4 +28,6 @@ void main() {
     expect(
         uiautomationitemcontainerpattern.findItemByProperty, isA<Function>());
   });
+
+  free(ptr);
 }

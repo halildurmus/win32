@@ -44,4 +44,6 @@ void main() {
     expect(uiautomationtableitempattern.getCachedColumnHeaderItems,
         isA<Function>());
   });
+
+  free(ptr);
 }

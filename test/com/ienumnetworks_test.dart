@@ -34,4 +34,6 @@ void main() {
   test('Can instantiate IEnumNetworks.clone', () {
     expect(enumnetworks.clone, isA<Function>());
   });
+
+  free(ptr);
 }

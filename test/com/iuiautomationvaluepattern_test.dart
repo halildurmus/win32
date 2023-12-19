@@ -25,4 +25,6 @@ void main() {
   test('Can instantiate IUIAutomationValuePattern.setValue', () {
     expect(uiautomationvaluepattern.setValue, isA<Function>());
   });
+
+  free(ptr);
 }

@@ -34,4 +34,6 @@ void main() {
   test('Can instantiate IMMDevice.getState', () {
     expect(mmdevice.getState, isA<Function>());
   });
+
+  free(ptr);
 }

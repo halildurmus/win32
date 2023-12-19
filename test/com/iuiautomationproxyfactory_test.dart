@@ -25,4 +25,6 @@ void main() {
   test('Can instantiate IUIAutomationProxyFactory.createProvider', () {
     expect(uiautomationproxyfactory.createProvider, isA<Function>());
   });
+
+  free(ptr);
 }

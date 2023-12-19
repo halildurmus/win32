@@ -25,4 +25,6 @@ void main() {
   test('Can instantiate IUIAutomationTextRangeArray.getElement', () {
     expect(uiautomationtextrangearray.getElement, isA<Function>());
   });
+
+  free(ptr);
 }

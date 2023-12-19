@@ -25,4 +25,6 @@ void main() {
   test('Can instantiate IUIAutomationInvokePattern.invoke', () {
     expect(uiautomationinvokepattern.invoke, isA<Function>());
   });
+
+  free(ptr);
 }

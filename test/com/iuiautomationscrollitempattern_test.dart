@@ -25,4 +25,6 @@ void main() {
   test('Can instantiate IUIAutomationScrollItemPattern.scrollIntoView', () {
     expect(uiautomationscrollitempattern.scrollIntoView, isA<Function>());
   });
+
+  free(ptr);
 }

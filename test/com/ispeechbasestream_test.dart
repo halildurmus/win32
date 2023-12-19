@@ -34,4 +34,6 @@ void main() {
   test('Can instantiate ISpeechBaseStream.seek', () {
     expect(speechbasestream.seek, isA<Function>());
   });
+
+  free(ptr);
 }

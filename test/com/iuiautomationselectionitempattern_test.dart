@@ -34,4 +34,6 @@ void main() {
     expect(
         uiautomationselectionitempattern.removeFromSelection, isA<Function>());
   });
+
+  free(ptr);
 }

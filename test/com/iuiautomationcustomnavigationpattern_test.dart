@@ -26,4 +26,6 @@ void main() {
   test('Can instantiate IUIAutomationCustomNavigationPattern.navigate', () {
     expect(uiautomationcustomnavigationpattern.navigate, isA<Function>());
   });
+
+  free(ptr);
 }

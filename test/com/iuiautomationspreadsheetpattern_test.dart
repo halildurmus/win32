@@ -25,4 +25,6 @@ void main() {
   test('Can instantiate IUIAutomationSpreadsheetPattern.getItemByName', () {
     expect(uiautomationspreadsheetpattern.getItemByName, isA<Function>());
   });
+
+  free(ptr);
 }

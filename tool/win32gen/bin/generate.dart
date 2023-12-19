@@ -241,7 +241,7 @@ void generateComApis(Scope scope, Map<String, String> comTypesToGenerate) {
     File(classOutputPath).writeAsStringSync(DartFormatter().format(dartClass));
 
     // Generate test only if the object has methods
-    if (comObject.methodProjections.isNotEmpty) {
+    if (interfaceProjection.methodProjections.isNotEmpty) {
       final dartTest = TestInterfaceProjection(typeDef, interfaceProjection);
       final testOutputPath = '../../test/com/${classOutputFilename}_test.dart';
 

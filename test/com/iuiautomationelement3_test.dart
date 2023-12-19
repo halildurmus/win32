@@ -25,4 +25,6 @@ void main() {
   test('Can instantiate IUIAutomationElement3.showContextMenu', () {
     expect(uiautomationelement3.showContextMenu, isA<Function>());
   });
+
+  free(ptr);
 }

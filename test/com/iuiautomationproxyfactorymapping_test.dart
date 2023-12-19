@@ -48,4 +48,6 @@ void main() {
     expect(
         uiautomationproxyfactorymapping.restoreDefaultTable, isA<Function>());
   });
+
+  free(ptr);
 }

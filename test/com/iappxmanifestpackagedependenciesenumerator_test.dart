@@ -38,4 +38,6 @@ void main() {
       () {
     expect(appxmanifestpackagedependenciesenumerator.moveNext, isA<Function>());
   });
+
+  free(ptr);
 }

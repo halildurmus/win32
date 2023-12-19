@@ -25,4 +25,6 @@ void main() {
   test('Can instantiate IPersist.getClassID', () {
     expect(persist.getClassID, isA<Function>());
   });
+
+  free(ptr);
 }

@@ -47,4 +47,6 @@ void main() {
     expect(uiautomationspreadsheetitempattern.getCachedAnnotationTypes,
         isA<Function>());
   });
+
+  free(ptr);
 }

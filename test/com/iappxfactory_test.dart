@@ -37,4 +37,6 @@ void main() {
   test('Can instantiate IAppxFactory.createValidatedBlockMapReader', () {
     expect(appxfactory.createValidatedBlockMapReader, isA<Function>());
   });
+
+  free(ptr);
 }

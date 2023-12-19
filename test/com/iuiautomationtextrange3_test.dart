@@ -33,4 +33,6 @@ void main() {
   test('Can instantiate IUIAutomationTextRange3.getAttributeValues', () {
     expect(uiautomationtextrange3.getAttributeValues, isA<Function>());
   });
+
+  free(ptr);
 }

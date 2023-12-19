@@ -25,4 +25,6 @@ void main() {
   test('Can instantiate IShellService.setOwner', () {
     expect(shellservice.setOwner, isA<Function>());
   });
+
+  free(ptr);
 }
