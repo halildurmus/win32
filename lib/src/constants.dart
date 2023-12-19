@@ -9804,7 +9804,6 @@ class STGM {
   /// Indicates that the underlying file is to be automatically destroyed
   /// when the root storage object is released.
   static const STGM_DELETEONRELEASE = 0x04000000;
-
 }
 
 /// Contains values that specify the toggle state of a Microsoft UI Automation
@@ -11016,7 +11015,6 @@ const PKEY_Device_InstanceId = '{78c34fc8-104a-4aca-9ea4-524d52996e57}';
 /// Stores the container identifier of the PnP device that implements the audio
 /// endpoint.
 const PKEY_Device_ContainerId = '{8c7ed206-3f8a-4827-b3ab-ae9e1faefc6c}';
-
 
 // -----------------------------------------------------------------------------
 // GlobalAlloc flags
