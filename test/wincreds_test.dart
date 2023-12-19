@@ -2,7 +2,6 @@
 
 import 'dart:convert';
 import 'dart:ffi';
-import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 import 'package:test/test.dart';
@@ -14,7 +13,7 @@ void writeCredential(
     required String password}) {
   final pUserName = userName.toNativeUtf16();
   final pCredName = credentialName.toNativeUtf16();
-  final examplePassword = utf8.encode(password) as Uint8List;
+  final examplePassword = utf8.encode(password);
   final blob = examplePassword.allocatePointer();
 
   final credential = calloc<CREDENTIAL>()
