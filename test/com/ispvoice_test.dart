@@ -97,4 +97,6 @@ void main() {
   test('Can instantiate ISpVoice.displayUI', () {
     expect(spvoice.displayUI, isA<Function>());
   });
+
+  free(ptr);
 }

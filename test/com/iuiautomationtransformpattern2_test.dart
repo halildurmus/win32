@@ -28,4 +28,6 @@ void main() {
   test('Can instantiate IUIAutomationTransformPattern2.zoomByUnit', () {
     expect(uiautomationtransformpattern2.zoomByUnit, isA<Function>());
   });
+
+  free(ptr);
 }

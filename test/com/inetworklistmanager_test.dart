@@ -43,4 +43,6 @@ void main() {
   test('Can instantiate INetworkListManager.clearSimulatedProfileInfo', () {
     expect(networklistmanager.clearSimulatedProfileInfo, isA<Function>());
   });
+
+  free(ptr);
 }

@@ -34,4 +34,6 @@ void main() {
   test('Can instantiate IEnumResources.clone', () {
     expect(enumresources.clone, isA<Function>());
   });
+
+  free(ptr);
 }

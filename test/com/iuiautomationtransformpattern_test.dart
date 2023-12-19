@@ -31,4 +31,6 @@ void main() {
   test('Can instantiate IUIAutomationTransformPattern.rotate', () {
     expect(uiautomationtransformpattern.rotate, isA<Function>());
   });
+
+  free(ptr);
 }

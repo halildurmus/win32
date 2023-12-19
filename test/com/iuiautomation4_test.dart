@@ -28,4 +28,6 @@ void main() {
   test('Can instantiate IUIAutomation4.removeChangesEventHandler', () {
     expect(uiautomation4.removeChangesEventHandler, isA<Function>());
   });
+
+  free(ptr);
 }

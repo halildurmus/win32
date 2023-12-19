@@ -43,4 +43,6 @@ void main() {
     expect(uiautomation6.removeActiveTextPositionChangedEventHandler,
         isA<Function>());
   });
+
+  free(ptr);
 }

@@ -91,4 +91,6 @@ void main() {
   test('Can instantiate IWbemServices.execMethodAsync', () {
     expect(wbemservices.execMethodAsync, isA<Function>());
   });
+
+  free(ptr);
 }

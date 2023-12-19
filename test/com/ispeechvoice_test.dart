@@ -64,4 +64,6 @@ void main() {
   test('Can instantiate ISpeechVoice.displayUI', () {
     expect(speechvoice.displayUI, isA<Function>());
   });
+
+  free(ptr);
 }

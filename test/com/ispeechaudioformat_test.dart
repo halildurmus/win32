@@ -28,4 +28,6 @@ void main() {
   test('Can instantiate ISpeechAudioFormat.setWaveFormatEx', () {
     expect(speechaudioformat.setWaveFormatEx, isA<Function>());
   });
+
+  free(ptr);
 }

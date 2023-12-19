@@ -28,4 +28,6 @@ void main() {
   test('Can instantiate IClassFactory.lockServer', () {
     expect(classfactory.lockServer, isA<Function>());
   });
+
+  free(ptr);
 }

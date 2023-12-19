@@ -76,4 +76,6 @@ void main() {
   test('Can instantiate IUIAutomationElement.getClickablePoint', () {
     expect(uiautomationelement.getClickablePoint, isA<Function>());
   });
+
+  free(ptr);
 }

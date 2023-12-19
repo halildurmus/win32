@@ -34,4 +34,6 @@ void main() {
     expect(uiautomationstylespattern.getCachedExtendedPropertiesAsArray,
         isA<Function>());
   });
+
+  free(ptr);
 }

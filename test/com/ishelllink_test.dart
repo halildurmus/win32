@@ -76,4 +76,6 @@ void main() {
   test('Can instantiate IShellLink.setPath', () {
     expect(shelllink.setPath, isA<Function>());
   });
+
+  free(ptr);
 }

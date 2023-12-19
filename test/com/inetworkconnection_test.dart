@@ -37,4 +37,6 @@ void main() {
   test('Can instantiate INetworkConnection.getDomainType', () {
     expect(networkconnection.getDomainType, isA<Function>());
   });
+
+  free(ptr);
 }

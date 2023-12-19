@@ -22,4 +22,6 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final uiautomationtextchildpattern = IUIAutomationTextChildPattern(ptr);
+
+  free(ptr);
 }

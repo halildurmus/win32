@@ -25,4 +25,6 @@ void main() {
   test('Can instantiate IUIAutomationDockPattern.setDockPosition', () {
     expect(uiautomationdockpattern.setDockPosition, isA<Function>());
   });
+
+  free(ptr);
 }

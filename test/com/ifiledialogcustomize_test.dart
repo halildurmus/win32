@@ -103,4 +103,6 @@ void main() {
   test('Can instantiate IFileDialogCustomize.setControlItemText', () {
     expect(filedialogcustomize.setControlItemText, isA<Function>());
   });
+
+  free(ptr);
 }

@@ -28,4 +28,6 @@ void main() {
   test('Can instantiate IUIAutomationScrollPattern.setScrollPercent', () {
     expect(uiautomationscrollpattern.setScrollPercent, isA<Function>());
   });
+
+  free(ptr);
 }

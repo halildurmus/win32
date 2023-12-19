@@ -30,4 +30,6 @@ void main() {
     expect(
         uiautomation3.removeTextEditTextChangedEventHandler, isA<Function>());
   });
+
+  free(ptr);
 }

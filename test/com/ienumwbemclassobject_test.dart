@@ -37,4 +37,6 @@ void main() {
   test('Can instantiate IEnumWbemClassObject.skip', () {
     expect(enumwbemclassobject.skip, isA<Function>());
   });
+
+  free(ptr);
 }

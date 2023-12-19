@@ -52,4 +52,6 @@ void main() {
   test('Can instantiate IShellItemResources.markForDelete', () {
     expect(shellitemresources.markForDelete, isA<Function>());
   });
+
+  free(ptr);
 }

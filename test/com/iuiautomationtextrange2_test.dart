@@ -25,4 +25,6 @@ void main() {
   test('Can instantiate IUIAutomationTextRange2.showContextMenu', () {
     expect(uiautomationtextrange2.showContextMenu, isA<Function>());
   });
+
+  free(ptr);
 }

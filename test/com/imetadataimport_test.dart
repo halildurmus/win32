@@ -208,4 +208,6 @@ void main() {
   test('Can instantiate IMetaDataImport.isGlobal', () {
     expect(metadataimport.isGlobal, isA<Function>());
   });
+
+  free(ptr);
 }

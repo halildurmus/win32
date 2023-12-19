@@ -25,4 +25,6 @@ void main() {
   test('Can instantiate IAppxManifestReader5.getMainPackageDependencies', () {
     expect(appxmanifestreader5.getMainPackageDependencies, isA<Function>());
   });
+
+  free(ptr);
 }

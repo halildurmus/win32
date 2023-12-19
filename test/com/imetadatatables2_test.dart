@@ -28,4 +28,6 @@ void main() {
   test('Can instantiate IMetaDataTables2.getMetaDataStreamInfo', () {
     expect(metadatatables2.getMetaDataStreamInfo, isA<Function>());
   });
+
+  free(ptr);
 }

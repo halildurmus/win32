@@ -37,4 +37,6 @@ void main() {
   test('Can instantiate IPersistMemory.initNew', () {
     expect(persistmemory.initNew, isA<Function>());
   });
+
+  free(ptr);
 }

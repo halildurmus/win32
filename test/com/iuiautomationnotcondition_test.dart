@@ -25,4 +25,6 @@ void main() {
   test('Can instantiate IUIAutomationNotCondition.getChild', () {
     expect(uiautomationnotcondition.getChild, isA<Function>());
   });
+
+  free(ptr);
 }

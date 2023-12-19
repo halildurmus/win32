@@ -34,4 +34,6 @@ void main() {
   test('Can instantiate IUIAutomationTextPattern.getVisibleRanges', () {
     expect(uiautomationtextpattern.getVisibleRanges, isA<Function>());
   });
+
+  free(ptr);
 }

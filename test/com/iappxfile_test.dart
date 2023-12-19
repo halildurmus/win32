@@ -37,4 +37,6 @@ void main() {
   test('Can instantiate IAppxFile.getStream', () {
     expect(appxfile.getStream, isA<Function>());
   });
+
+  free(ptr);
 }

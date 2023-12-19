@@ -37,4 +37,6 @@ void main() {
   test('Can instantiate IAppxPackageReader.getManifest', () {
     expect(appxpackagereader.getManifest, isA<Function>());
   });
+
+  free(ptr);
 }

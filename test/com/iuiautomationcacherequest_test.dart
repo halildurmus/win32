@@ -31,4 +31,6 @@ void main() {
   test('Can instantiate IUIAutomationCacheRequest.clone', () {
     expect(uiautomationcacherequest.clone, isA<Function>());
   });
+
+  free(ptr);
 }

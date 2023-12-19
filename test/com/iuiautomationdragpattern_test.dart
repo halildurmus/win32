@@ -28,4 +28,6 @@ void main() {
   test('Can instantiate IUIAutomationDragPattern.getCachedGrabbedItems', () {
     expect(uiautomationdragpattern.getCachedGrabbedItems, isA<Function>());
   });
+
+  free(ptr);
 }

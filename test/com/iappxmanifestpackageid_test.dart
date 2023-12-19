@@ -46,4 +46,6 @@ void main() {
   test('Can instantiate IAppxManifestPackageId.getPackageFamilyName', () {
     expect(appxmanifestpackageid.getPackageFamilyName, isA<Function>());
   });
+
+  free(ptr);
 }

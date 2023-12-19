@@ -51,4 +51,6 @@ void main() {
     expect(
         uiautomationlegacyiaccessiblepattern.getIAccessible, isA<Function>());
   });
+
+  free(ptr);
 }

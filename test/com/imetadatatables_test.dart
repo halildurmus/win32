@@ -79,4 +79,6 @@ void main() {
   test('Can instantiate IMetaDataTables.getNextUserString', () {
     expect(metadatatables.getNextUserString, isA<Function>());
   });
+
+  free(ptr);
 }

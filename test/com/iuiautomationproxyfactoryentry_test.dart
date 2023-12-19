@@ -34,4 +34,6 @@ void main() {
     expect(uiautomationproxyfactoryentry.getWinEventsForAutomationEvent,
         isA<Function>());
   });
+
+  free(ptr);
 }

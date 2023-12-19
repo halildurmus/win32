@@ -28,4 +28,6 @@ void main() {
   test('Can instantiate IUIAutomation5.removeNotificationEventHandler', () {
     expect(uiautomation5.removeNotificationEventHandler, isA<Function>());
   });
+
+  free(ptr);
 }

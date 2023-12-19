@@ -22,4 +22,6 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final uiautomationannotationpattern = IUIAutomationAnnotationPattern(ptr);
+
+  free(ptr);
 }

@@ -94,4 +94,6 @@ void main() {
   test('Can instantiate IWbemClassObject.getMethodOrigin', () {
     expect(wbemclassobject.getMethodOrigin, isA<Function>());
   });
+
+  free(ptr);
 }

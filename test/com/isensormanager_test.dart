@@ -37,4 +37,6 @@ void main() {
   test('Can instantiate ISensorManager.requestPermissions', () {
     expect(sensormanager.requestPermissions, isA<Function>());
   });
+
+  free(ptr);
 }

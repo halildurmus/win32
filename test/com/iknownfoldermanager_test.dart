@@ -52,4 +52,6 @@ void main() {
   test('Can instantiate IKnownFolderManager.redirect', () {
     expect(knownfoldermanager.redirect, isA<Function>());
   });
+
+  free(ptr);
 }

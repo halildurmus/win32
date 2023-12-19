@@ -34,4 +34,6 @@ void main() {
   test('Can instantiate IWbemHiPerfEnum.removeAll', () {
     expect(wbemhiperfenum.removeAll, isA<Function>());
   });
+
+  free(ptr);
 }

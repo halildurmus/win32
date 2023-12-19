@@ -91,4 +91,6 @@ void main() {
   test('Can instantiate IFileDialog.setFilter', () {
     expect(filedialog.setFilter, isA<Function>());
   });
+
+  free(ptr);
 }

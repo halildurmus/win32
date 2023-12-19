@@ -34,4 +34,6 @@ void main() {
   test('Can instantiate IShellLinkDual.save', () {
     expect(shelllinkdual.save, isA<Function>());
   });
+
+  free(ptr);
 }

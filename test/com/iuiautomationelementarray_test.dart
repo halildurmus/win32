@@ -25,4 +25,6 @@ void main() {
   test('Can instantiate IUIAutomationElementArray.getElement', () {
     expect(uiautomationelementarray.getElement, isA<Function>());
   });
+
+  free(ptr);
 }

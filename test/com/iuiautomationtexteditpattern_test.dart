@@ -28,4 +28,6 @@ void main() {
   test('Can instantiate IUIAutomationTextEditPattern.getConversionTarget', () {
     expect(uiautomationtexteditpattern.getConversionTarget, isA<Function>());
   });
+
+  free(ptr);
 }

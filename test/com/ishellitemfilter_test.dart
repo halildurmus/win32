@@ -28,4 +28,6 @@ void main() {
   test('Can instantiate IShellItemFilter.getEnumFlagsForItem', () {
     expect(shellitemfilter.getEnumFlagsForItem, isA<Function>());
   });
+
+  free(ptr);
 }

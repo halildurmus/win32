@@ -22,4 +22,6 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final spellingerror = ISpellingError(ptr);
+
+  free(ptr);
 }

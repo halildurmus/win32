@@ -25,4 +25,6 @@ void main() {
   test('Can instantiate ISpeechObjectTokens.item', () {
     expect(speechobjecttokens.item, isA<Function>());
   });
+
+  free(ptr);
 }

@@ -28,4 +28,6 @@ void main() {
     expect(uiautomationobjectmodelpattern.getUnderlyingObjectModel,
         isA<Function>());
   });
+
+  free(ptr);
 }

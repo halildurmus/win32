@@ -37,4 +37,6 @@ void main() {
   test('Can instantiate IShellLinkDataList.setFlags', () {
     expect(shelllinkdatalist.setFlags, isA<Function>());
   });
+
+  free(ptr);
 }
