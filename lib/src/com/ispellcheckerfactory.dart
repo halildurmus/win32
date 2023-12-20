@@ -25,6 +25,9 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_ISpellCheckerFactory = '{8e018a9d-2415-4677-bf08-794ea61f94bb}';
 
+/// A factory for instantiating a spell checker `ISpellChecker` as well as
+/// providing functionality for determining which languages are supported.
+///
 /// {@category com}
 class ISpellCheckerFactory extends IUnknown {
   // vtable begins at 3, is 3 entries long.

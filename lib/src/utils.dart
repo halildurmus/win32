@@ -19,6 +19,7 @@ import 'structs.g.dart';
 import 'types.dart';
 import 'win32/api_ms_win_core_winrt_string_l1_1_0.g.dart';
 import 'win32/kernel32.g.dart';
+import 'win32/ole32.g.dart';
 import 'win32/shell32.g.dart';
 import 'win32/user32.g.dart';
 
@@ -81,8 +82,21 @@ void initApp(Function winMain) {
   }
 }
 
-/// Detects whether the Windows Runtime is available by attempting to open its
-/// core library.
+/// Determines whether the Component Object Model (COM) is initialized on the
+/// current thread.
+bool get isCOMInitialized {
+  final pAptType = calloc<Int32>();
+  final pAptQualifier = calloc<Int32>();
+  try {
+    return CoGetApartmentType(pAptType, pAptQualifier) == S_OK;
+  } finally {
+    free(pAptType);
+    free(pAptQualifier);
+  }
+}
+
+/// Detects whether the Windows Runtime (WinRT) is available by attempting to
+/// open its core library.
 bool isWindowsRuntimeAvailable() {
   try {
     DynamicLibrary.open('api-ms-win-core-winrt-l1-1-0.dll');

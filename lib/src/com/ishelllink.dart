@@ -25,6 +25,8 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_IShellLink = '{000214f9-0000-0000-c000-000000000046}';
 
+/// Exposes methods that create, modify, and resolve Shell links.
+///
 /// {@category com}
 class IShellLink extends IUnknown {
   // vtable begins at 3, is 18 entries long.

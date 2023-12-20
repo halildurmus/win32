@@ -34,10 +34,13 @@ class IUnknown {
   }
 
   static final _finalizer = Finalizer<Pointer<COMObject>>((ptr) {
-    _release(ptr);
+    // Decrement the reference count of the object only when COM is initialized,
+    // otherwise this will cause the program to crash.
+    if (isCOMInitialized) _release(ptr);
     free(ptr);
   });
 
+  /// Decrements the reference count of the object referenced by [ptr].
   static int _release(Pointer<COMObject> ptr) => ptr.ref.vtable
       .elementAt(2)
       .cast<Pointer<NativeFunction<Uint32 Function(VTablePointer lpVtbl)>>>()

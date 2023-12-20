@@ -25,6 +25,11 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_IWbemContext = '{44aca674-e8fc-11d0-a07c-00c04fb68820}';
 
+/// The IWbemContext interface is optionally used to communicate additional
+/// context information to providers when submitting `IWbemServices` calls
+/// to WMI. All primary calls in `IWbemServices` take an optional parameter
+/// pointing to an object of this type.
+///
 /// {@category com}
 class IWbemContext extends IUnknown {
   // vtable begins at 3, is 9 entries long.

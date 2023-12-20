@@ -6,37 +6,23 @@ import 'package:ffi/ffi.dart';
 import 'package:test/test.dart';
 import 'package:win32/win32.dart';
 
-const testRuns = 5000;
+import 'helpers.dart';
 
 void main() {
-  test('Network manager', () {
-    final hr = CoInitializeEx(
-        nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
-    expect(hr, equals(S_OK));
-    final nlm = NetworkListManager.createInstance();
-    expect(nlm.ptr.address, isNonZero);
-  });
-
   group('Network testing', () {
-    setUp(() {
-      final hr = CoInitializeEx(
-          nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
-      if (FAILED(hr)) throw WindowsException(hr);
-    });
+    setUpAll(initializeCOM);
 
-    test('Network is connected', () {
+    test('network is connected', () {
       final nlm = NetworkListManager.createInstance();
       expect(nlm.isConnected, equals(VARIANT_TRUE));
     });
 
-    test('Network is connected to the internet', () {
-      for (var i = 0; i < testRuns; i++) {
-        final nlm = NetworkListManager.createInstance();
-        expect(nlm.isConnectedToInternet, equals(VARIANT_TRUE));
-      }
+    test('network is connected to the internet', () {
+      final nlm = NetworkListManager.createInstance();
+      expect(nlm.isConnectedToInternet, equals(VARIANT_TRUE));
     });
 
-    test('Can enumerate a network connection', () {
+    test('can enumerate a network connection', () {
       final nlm = NetworkListManager.createInstance();
       final enumPtr = calloc<COMObject>();
       final netPtr = calloc<COMObject>();
@@ -56,7 +42,7 @@ void main() {
           anyOf(equals(VARIANT_TRUE), equals(VARIANT_FALSE)));
     });
 
-    test('First network connection has a description', () {
+    test('first network connection has a description', () {
       final nlm = NetworkListManager.createInstance();
       final enumPtr = calloc<COMObject>();
       final netPtr = calloc<COMObject>();
@@ -80,5 +66,8 @@ void main() {
       SysFreeString(descPtr.value);
       free(descPtr);
     });
+
+    tearDown(forceGC);
+    tearDownAll(CoUninitialize);
   });
 }

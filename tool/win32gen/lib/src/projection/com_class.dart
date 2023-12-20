@@ -8,7 +8,11 @@ class ComClassProjection extends ComInterfaceProjection {
 
   ComClassProjection(super.typeDef, this.interface, [super.comment]);
 
-  factory ComClassProjection.fromInterface(TypeDef interface) {
+  factory ComClassProjection.fromInterface(
+    TypeDef interface, {
+    String comment = '',
+    String interfaceComment = '',
+  }) {
     final className = generateClassName(interface);
     final classTypeDef = interface.scope.findTypeDef(className);
 
@@ -16,7 +20,11 @@ class ComClassProjection extends ComInterfaceProjection {
       throw Exception('Missing a matching class for ${interface.name}.');
     }
 
-    return ComClassProjection(classTypeDef, ComInterfaceProjection(interface));
+    return ComClassProjection(
+      classTypeDef,
+      ComInterfaceProjection(interface, interfaceComment),
+      comment,
+    );
   }
 
   /// Represents a mapping from the interface name to the corresponding class

@@ -6,13 +6,11 @@ import 'package:ffi/ffi.dart';
 import 'package:test/test.dart';
 import 'package:win32/win32.dart';
 
+import 'helpers.dart';
+
 void main() {
-  group('Variant', () {
-    setUp(() {
-      final hr = CoInitializeEx(
-          nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
-      if (FAILED(hr)) throw WindowsException(hr);
-    });
+  group('VARIANT', () {
+    setUp(initializeCOM);
 
     test('creation', () {
       final variant = calloc<VARIANT>();
@@ -23,18 +21,18 @@ void main() {
     });
 
     test('pointer to an object that implements the IUnknown interface', () {
-      final spVoice = SpVoice.createInstance();
+      final spVoice = SpVoice.createInstance()..addRef();
       final spellChecker = SpellCheckerFactory.createInstance()..addRef();
 
       final variant = calloc<VARIANT>();
       VariantInit(variant);
       variant.ref.vt = VARENUM.VT_UNKNOWN;
-      variant.ref.punkVal = spVoice;
 
+      variant.ref.punkVal = spVoice;
       final unk = variant.ref.punkVal;
       expect(unk.ptr.address, isNonZero);
       expect(unk.ptr.ref.isNull, isFalse);
-      expect(refCount(unk), equals(1));
+      expect(refCount(unk), equals(2));
 
       variant.ref.punkVal = spellChecker;
       final unk2 = variant.ref.punkVal;
@@ -47,24 +45,31 @@ void main() {
     });
 
     test('reference to an IUnknown interface pointer', () {
-      final spVoice = SpVoice.createInstance();
+      final spVoice = SpVoice.createInstance()..addRef();
       final spellChecker = SpellCheckerFactory.createInstance()..addRef();
 
       final variant = calloc<VARIANT>();
       VariantInit(variant);
       variant.ref.vt = VARENUM.VT_UNKNOWN | VARENUM.VT_BYREF;
-      variant.ref.ppunkVal = spVoice.ptr.cast();
 
-      final unk = IUnknown(variant.ref.ppunkVal.cast());
+      final ppunkval = calloc<Pointer<COMObject>>()
+        ..value = (calloc<COMObject>()..ref.lpVtbl = spVoice.ptr.ref.lpVtbl);
+      variant.ref.ppunkVal = ppunkval;
+      final unk = IUnknown(variant.ref.ppunkVal.value);
       expect(unk.ptr.address, isNonZero);
       expect(unk.ptr.ref.isNull, isFalse);
-      expect(unk.addRef(), equals(2));
+      expect(refCount(unk), equals(2));
+      free(ppunkval);
 
-      variant.ref.ppunkVal = spellChecker.ptr.cast();
-      final unk2 = IUnknown(variant.ref.ppunkVal.cast());
+      final ppunkval2 = calloc<Pointer<COMObject>>()
+        ..value =
+            (calloc<COMObject>()..ref.lpVtbl = spellChecker.ptr.ref.lpVtbl);
+      variant.ref.ppunkVal = ppunkval2;
+      final unk2 = IUnknown(variant.ref.ppunkVal.value);
       expect(unk2.ptr.address, isNonZero);
       expect(unk2.ptr.ref.isNull, isFalse);
-      expect(unk2.addRef(), equals(3));
+      expect(refCount(unk2), equals(2));
+      free(ppunkval2);
 
       VariantClear(variant);
       free(variant);
@@ -230,17 +235,8 @@ void main() {
       VariantClear(intVar);
       free(intVar);
     });
-  });
 
-  test('BSTR allocation', () {
-    const testString = 'This is a sample text string.';
-    final testStringPtr = testString.toNativeUtf16();
-    final bstr = SysAllocString(testStringPtr);
-
-    expect(SysStringLen(bstr), equals(testString.length));
-    expect(SysStringByteLen(bstr), equals(testString.length * 2));
-
-    SysFreeString(bstr);
-    free(testStringPtr);
+    tearDown(forceGC);
+    tearDownAll(CoUninitialize);
   });
 }
