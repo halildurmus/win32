@@ -107,8 +107,9 @@ void main() {
 
     // Retrieve the current device id
     final idPtr = calloc<Pointer<Utf16>>();
-    pEndpoint.getId(idPtr);
+    check(pEndpoint.getId(idPtr));
     final id = idPtr.value.toDartString();
+    free(idPtr.value);
     free(idPtr);
 
     // Retrieve the current device properties.
