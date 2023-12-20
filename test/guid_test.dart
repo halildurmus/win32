@@ -3,6 +3,7 @@
 import 'dart:ffi';
 import 'dart:typed_data';
 
+import 'package:ffi/ffi.dart';
 import 'package:test/test.dart';
 import 'package:win32/win32.dart';
 
@@ -20,6 +21,29 @@ extension Uint8Helper on Pointer<Uint8> {
 }
 
 void main() {
+  test('GUID creation', () {
+    final guid = calloc<GUID>();
+    final hr = CoCreateGuid(guid);
+    expect(hr, equals(S_OK));
+
+    final guid2 = calloc<GUID>()..ref.setGUID(guid.ref.toString());
+    expect(guid.ref.toString(), equals(guid2.ref.toString()));
+
+    free(guid2);
+    free(guid);
+  });
+
+  test('GUID creation failure', () {
+    final guid = calloc<GUID>();
+    try {
+      // Note the rogue 'X' here
+      expect(() => guid.ref.setGUID('{X161CA9B-9409-4A77-7327-8B8D3363C6B9}'),
+          throwsA(anyOf(isA<FormatException>(), isA<AssertionError>())));
+    } finally {
+      free(guid);
+    }
+  });
+
   test('Invalid hex string', () {
     expect(() => GUIDFromString('{123G4567-G89B-12D3-A456-426655440000}'),
         throwsA(isA<AssertionError>()));

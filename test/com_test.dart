@@ -6,30 +6,9 @@ import 'package:ffi/ffi.dart';
 import 'package:test/test.dart';
 import 'package:win32/win32.dart';
 
+import 'helpers.dart';
+
 void main() {
-  test('GUID creation', () {
-    final guid = calloc<GUID>();
-    final hr = CoCreateGuid(guid);
-    expect(hr, equals(S_OK));
-
-    final guid2 = calloc<GUID>()..ref.setGUID(guid.ref.toString());
-    expect(guid.ref.toString(), equals(guid2.ref.toString()));
-
-    free(guid2);
-    free(guid);
-  });
-
-  test('GUID creation failure', () {
-    final guid = calloc<GUID>();
-    try {
-      // Note the rogue 'X' here
-      expect(() => guid.ref.setGUID('{X161CA9B-9409-4A77-7327-8B8D3363C6B9}'),
-          throwsA(anyOf(isA<FormatException>(), isA<AssertionError>())));
-    } finally {
-      free(guid);
-    }
-  });
-
   test('CLSIDFromString', () {
     final guid = calloc<GUID>();
     final pCLSID = CLSID_FileSaveDialog.toNativeUtf16();
@@ -65,86 +44,66 @@ void main() {
                 contains('CoInitialize has not been called.'))));
   });
 
-  test('Create COM object with CoCreateInstance', () {
-    var hr = CoInitializeEx(
-        nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
-    expect(hr, equals(S_OK));
+  group('COM testing', () {
+    setUpAll(initializeCOM);
 
-    final ptr = calloc<Pointer>();
-    final clsid = GUIDFromString(CLSID_FileSaveDialog);
-    final iid = GUIDFromString(IID_IFileSaveDialog);
+    test('create COM object with CoCreateInstance', () {
+      final ptr = calloc<Pointer>();
+      final clsid = GUIDFromString(CLSID_FileSaveDialog);
+      final iid = GUIDFromString(IID_IFileSaveDialog);
 
-    hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr);
-    expect(hr, equals(S_OK));
-    expect(ptr.address, isNonZero);
+      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr);
+      expect(hr, equals(S_OK));
+      expect(ptr.address, isNonZero);
 
-    free(iid);
-    free(clsid);
-    free(ptr);
-
-    CoUninitialize();
-  });
-
-  test('Create COM object with CoGetClassObject', () {
-    var hr = CoInitializeEx(
-        nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
-    expect(hr, equals(S_OK));
-
-    final ptrFactory = calloc<COMObject>();
-    final ptrSaveDialog = calloc<COMObject>();
-    final clsid = GUIDFromString(CLSID_FileSaveDialog);
-    final iidClassFactory = GUIDFromString(IID_IClassFactory);
-    final iidFileSaveDialog = GUIDFromString(IID_IFileSaveDialog);
-
-    hr = CoGetClassObject(
-        clsid, CLSCTX_ALL, nullptr, iidClassFactory, ptrFactory.cast());
-    expect(hr, equals(S_OK));
-    expect(ptrFactory.address, isNonZero);
-
-    final classFactory = IClassFactory(ptrFactory);
-    hr = classFactory.createInstance(
-        nullptr, iidFileSaveDialog, ptrSaveDialog.cast());
-    expect(hr, equals(S_OK));
-    expect(ptrSaveDialog.address, isNonZero);
-
-    free(iidFileSaveDialog);
-    free(iidClassFactory);
-    free(clsid);
-    free(ptrSaveDialog);
-    CoUninitialize();
-  });
-
-  test('Create COM object through class method', () {
-    final hr = CoInitializeEx(
-        nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
-    expect(hr, equals(S_OK));
-
-    expect(FileOpenDialog.createInstance, returnsNormally);
-
-    CoUninitialize();
-  });
-
-  group('COM object tests', () {
-    late FileOpenDialog dialog;
-
-    setUp(() {
-      final hr = CoInitializeEx(
-          nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      dialog = FileOpenDialog.createInstance();
+      free(iid);
+      free(clsid);
+      free(ptr);
     });
 
-    test('Dialog object exists', () {
+    test('create COM object with CoGetClassObject', () {
+      final ptrFactory = calloc<COMObject>();
+      final ptrSaveDialog = calloc<COMObject>();
+      final clsid = GUIDFromString(CLSID_FileSaveDialog);
+      final iidClassFactory = GUIDFromString(IID_IClassFactory);
+      final iidFileSaveDialog = GUIDFromString(IID_IFileSaveDialog);
+
+      var hr = CoGetClassObject(
+          clsid, CLSCTX_ALL, nullptr, iidClassFactory, ptrFactory.cast());
+      expect(hr, equals(S_OK));
+      expect(ptrFactory.address, isNonZero);
+
+      final classFactory = IClassFactory(ptrFactory);
+      hr = classFactory.createInstance(
+          nullptr, iidFileSaveDialog, ptrSaveDialog.cast());
+      expect(hr, equals(S_OK));
+      expect(ptrSaveDialog.address, isNonZero);
+
+      free(iidFileSaveDialog);
+      free(iidClassFactory);
+      free(clsid);
+      free(ptrSaveDialog);
+    });
+
+    test('create COM object through class method', () {
+      expect(FileOpenDialog.createInstance, returnsNormally);
+    });
+
+    test('dialog object exists', () {
+      final dialog = FileOpenDialog.createInstance();
       expect(dialog.ptr.address, isNonZero);
+      expect(dialog.ptr.ref.lpVtbl.address, isNonZero);
     });
 
-    test('Can cast to IUnknown', () {
+    test('can cast to IUnknown', () {
+      final dialog = FileOpenDialog.createInstance();
       final unk = IUnknown.from(dialog);
       expect(unk.ptr.address, isNonZero);
+      expect(unk.ptr.ref.lpVtbl.address, isNonZero);
     });
 
-    test('Cast to random interface fails', () {
+    test('cast to random interface fails', () {
+      final dialog = FileOpenDialog.createInstance();
       expect(
           () => dialog.toInterface(IID_IDesktopWallpaper),
           throwsA(isA<WindowsException>()
@@ -154,6 +113,8 @@ void main() {
     });
 
     test('addRef / release', () {
+      final dialog = FileOpenDialog.createInstance();
+
       var refs = dialog.addRef();
       expect(refs, equals(2));
 
@@ -167,21 +128,9 @@ void main() {
       expect(refs, equals(1));
     });
 
-    tearDown(CoUninitialize);
-  });
+    test('can cast to various supported interfaces', () {
+      final dialog = FileOpenDialog.createInstance();
 
-  group('COM object casting using methods', () {
-    late FileOpenDialog dialog;
-
-    setUp(() {
-      final hr = CoInitializeEx(
-          nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      dialog = FileOpenDialog.createInstance();
-    });
-
-    test('Can cast to various supported interfaces', () {
       expect(() => IUnknown.from(dialog), returnsNormally);
       expect(() => IModalWindow.from(dialog), returnsNormally);
       expect(() => IFileOpenDialog.from(dialog), returnsNormally);
@@ -189,7 +138,9 @@ void main() {
       expect(() => IFileDialog2.from(dialog), returnsNormally);
     });
 
-    test('Cannot cast to various unsupported interfaces', () {
+    test('cannot cast to various unsupported interfaces', () {
+      final dialog = FileOpenDialog.createInstance();
+
       expect(
           () => IShellItem.from(dialog),
           throwsA(isA<WindowsException>()
@@ -200,6 +151,7 @@ void main() {
               .having((e) => e.hr, 'hr', equals(E_NOINTERFACE))));
     });
 
-    tearDown(CoUninitialize);
+    tearDown(forceGC);
+    tearDownAll(CoUninitialize);
   });
 }
