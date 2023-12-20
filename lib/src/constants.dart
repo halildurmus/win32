@@ -9731,6 +9731,81 @@ class ScrollAmount {
   static const ScrollAmount_SmallIncrement = 4;
 }
 
+/// The STGM constants are flags that indicate conditions for creating and
+/// deleting the object and access modes for the object.
+///
+/// {@category enum}
+class STGM {
+  /// Indicates that the object is read-only, meaning that modifications
+  /// cannot be made.
+  static const STGM_READ = 0x00000000;
+
+  /// Enables you to save changes to the object, but does not permit access
+  /// to its data.
+  static const STGM_WRITE = 0x00000001;
+
+  /// Enables access and modification of object data.
+  static const STGM_READWRITE = 0x00000002;
+
+  /// Specifies that subsequent openings of the object are not denied read or
+  /// write access.
+  static const STGM_SHARE_DENY_NONE = 0x00000040;
+
+  /// Prevents others from subsequently opening the object in STGM_READ mode.
+  /// It is typically used on a root storage object.
+  static const STGM_SHARE_DENY_READ = 0x00000030;
+
+  /// Prevents others from subsequently opening the object for `STGM_WRITE`
+  /// or `STGM_READWRITE` access.
+  static const STGM_SHARE_DENY_WRITE = 0x00000020;
+
+  /// Prevents others from subsequently opening the object in any mode.
+  static const STGM_SHARE_EXCLUSIVE = 0x00000010;
+
+  /// Opens the storage object with exclusive access to the most recently
+  /// committed version.
+  static const STGM_PRIORITY = 0x00040000;
+
+  /// Indicates that an existing storage object or stream should be removed
+  /// before the new object replaces it.
+  static const STGM_CREATE = 0x00001000;
+
+  /// Creates the new object while preserving existing data in a stream named
+  /// "Contents".
+  static const STGM_CONVERT = 0x00020000;
+
+  /// Causes the create operation to fail if an existing object with the
+  /// specified name exists.
+  static const STGM_FAILIFTHERE = 0x00000000;
+
+  /// Indicates that, in direct mode, each change to a storage or stream
+  /// element is written as it occurs.
+  static const STGM_DIRECT = 0x00000000;
+
+  /// Indicates that, in transacted mode, changes are buffered and written
+  /// only if an explicit commit operation is called.
+  static const STGM_TRANSACTED = 0x00010000;
+
+  /// Indicates that, in transacted mode, a temporary scratch file is usually
+  /// used to save modifications until the Commit method is called.
+  static const STGM_NOSCRATCH = 0x00100000;
+
+  /// This flag is used when opening a storage object with STGM_TRANSACTED
+  /// and without STGM_SHARE_EXCLUSIVE or STGM_SHARE_DENY_WRITE.
+  static const STGM_NOSNAPSHOT = 0x00200000;
+
+  /// Provides a faster implementation of a compound file in a limited, but
+  /// frequently used, case. For more information, see the Remarks section.
+  static const STGM_SIMPLE = 0x08000000;
+
+  /// Supports direct mode for single-writer, multireader file operations.
+  static const STGM_DIRECT_SWMR = 0x00400000;
+
+  /// Indicates that the underlying file is to be automatically destroyed
+  /// when the root storage object is released.
+  static const STGM_DELETEONRELEASE = 0x04000000;
+}
+
 /// Contains values that specify the toggle state of a Microsoft UI Automation
 /// element that implements the Toggle control pattern.
 ///

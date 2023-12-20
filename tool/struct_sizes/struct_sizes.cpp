@@ -27,6 +27,7 @@
 #include <windows.h>
 
 #include <AppxPackaging.h>
+#include <Audioclient.h>
 #include <bluetoothapis.h>
 #include <bluetoothleapis.h>
 #include <DbgHelp.h>
@@ -55,6 +56,7 @@ void main()
 {
     // Manually generated structs
     printf("  'GUID': %zu,\n", sizeof(GUID));
+    printf("  'PROPERTYKEY': %zu,\n", sizeof(PROPERTYKEY));
     printf("  'PROPVARIANT': %zu,\n", sizeof(PROPVARIANT));
     printf("  'VARIANT': %zu,\n", sizeof(VARIANT));
 
@@ -68,6 +70,7 @@ void main()
     printf("  'APPX_PACKAGE_SETTINGS': %zu,\n", sizeof(APPX_PACKAGE_SETTINGS));
     printf("  'ARRAYDESC': %zu,\n", sizeof(ARRAYDESC));
     printf("  'ASSEMBLYMETADATA': %zu,\n", sizeof(ASSEMBLYMETADATA));
+    printf("  'AudioClientProperties': %zu,\n", sizeof(AudioClientProperties));
     printf("  'BIND_OPTS': %zu,\n", sizeof(BIND_OPTS));
     printf("  'BITMAP': %zu,\n", sizeof(BITMAP));
     printf("  'BITMAPFILEHEADER': %zu,\n", sizeof(BITMAPFILEHEADER));
@@ -319,7 +322,6 @@ void main()
     printf("  'PRINT_EXECUTION_DATA': %zu,\n", sizeof(PRINT_EXECUTION_DATA));
     printf("  'PROCESS_HEAP_ENTRY': %zu,\n", sizeof(PROCESS_HEAP_ENTRY));
     printf("  'PROCESS_INFORMATION': %zu,\n", sizeof(PROCESS_INFORMATION));
-    printf("  'PROPERTYKEY': %zu,\n", sizeof(PROPERTYKEY));
     printf("  'PROPSPEC': %zu,\n", sizeof(PROPSPEC));
     printf("  'PROTOENT': %zu,\n", sizeof(PROTOENT));
     printf("  'QUERY_SERVICE_CONFIG': %zu,\n", sizeof(QUERY_SERVICE_CONFIGW));

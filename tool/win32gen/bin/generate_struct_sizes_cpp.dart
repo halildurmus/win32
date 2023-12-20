@@ -31,6 +31,7 @@ const header = '''
 #include <windows.h>
 
 #include <AppxPackaging.h>
+#include <Audioclient.h>
 #include <bluetoothapis.h>
 #include <bluetoothleapis.h>
 #include <DbgHelp.h>
@@ -59,6 +60,7 @@ void main()
 {
     // Manually generated structs
     printf("  'GUID': %zu,\\n", sizeof(GUID));
+    printf("  'PROPERTYKEY': %zu,\\n", sizeof(PROPERTYKEY));
     printf("  'PROPVARIANT': %zu,\\n", sizeof(PROPVARIANT));
     printf("  'VARIANT': %zu,\\n", sizeof(VARIANT));
 
