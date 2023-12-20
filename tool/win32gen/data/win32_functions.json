@@ -18,10 +18,6 @@
         "prototype": "BOOL ActivateActCtx(\n  HANDLE    hActCtx,\n  ULONG_PTR *lpCookie\n);",
         "comment": "The ActivateActCtx function activates the specified activation context. It does this by pushing the specified activation context to the top of the activation stack. The specified activation context is thus associated with the current thread and any appropriate side-by-side API functions."
     },
-    "ActivateAudioInterfaceAsync": {
-        "prototype": "HRESULT ActivateAudioInterfaceAsync(\n  [in] LPCWSTR                                  deviceInterfacePath,\n  [in] REFIID                                   riid,\n  [in] PROPVARIANT                              *activationParams,\n  [in] IActivateAudioInterfaceCompletionHandler *completionHandler,\n       IActivateAudioInterfaceAsyncOperation    **activationOperation\n);",
-        "comment": "Enables Windows Store apps to access preexisting Component Object Model (COM) interfaces in the WASAPI family."
-    },
     "ActivateKeyboardLayout": {
         "prototype": "HKL ActivateKeyboardLayout(\n  HKL  hkl,\n  UINT Flags\n);",
         "comment": "Sets the input locale identifier (formerly called the keyboard layout handle) for the calling thread or the current process. The input locale identifier specifies a locale as well as the physical layout of the keyboard."

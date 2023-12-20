@@ -5130,27 +5130,6 @@ void main() {
     });
   });
 
-  group('Test mmdevapi functions', () {
-    test('Can instantiate ActivateAudioInterfaceAsync', () {
-      final mmdevapi = DynamicLibrary.open('mmdevapi.dll');
-      final ActivateAudioInterfaceAsync = mmdevapi.lookupFunction<
-              Int32 Function(
-                  Pointer<Utf16> deviceInterfacePath,
-                  Pointer<GUID> riid,
-                  Pointer<PROPVARIANT> activationParams,
-                  Pointer<COMObject> completionHandler,
-                  Pointer<Pointer<COMObject>> activationOperation),
-              int Function(
-                  Pointer<Utf16> deviceInterfacePath,
-                  Pointer<GUID> riid,
-                  Pointer<PROPVARIANT> activationParams,
-                  Pointer<COMObject> completionHandler,
-                  Pointer<Pointer<COMObject>> activationOperation)>(
-          'ActivateAudioInterfaceAsync');
-      expect(ActivateAudioInterfaceAsync, isA<Function>());
-    });
-  });
-
   group('Test user32 functions', () {
     test('Can instantiate ActivateKeyboardLayout', () {
       final user32 = DynamicLibrary.open('user32.dll');
