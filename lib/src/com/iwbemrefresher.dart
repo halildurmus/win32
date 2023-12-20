@@ -27,7 +27,7 @@ const IID_IWbemRefresher = '{49353c99-516b-11d1-aea6-00c04fb68820}';
 
 /// The IWbemRefresher interface provides an entry point through which
 /// refreshable objects such as enumerators or refresher objects, can be
-/// refreshed. Implementers of [IWbemHiPerfProvider] must provide an
+/// refreshed. Implementers of `IWbemHiPerfProvider` must provide an
 /// implementation of this interface.
 ///
 /// {@category com}

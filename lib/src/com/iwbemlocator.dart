@@ -26,8 +26,8 @@ import 'iunknown.dart';
 const IID_IWbemLocator = '{dc12a687-737f-11cf-884d-00aa004b2e24}';
 
 /// Use the IWbemLocator interface to obtain the initial namespace pointer
-/// to the [IWbemServices] interface for WMI on a specific host computer.
-/// You can access Windows Management itself using the [IWbemServices]
+/// to the `IWbemServices` interface for WMI on a specific host computer.
+/// You can access Windows Management itself using the `IWbemServices`
 /// pointer, which is returned by the `IWbemLocator::ConnectServer` method.
 ///
 /// {@category com}

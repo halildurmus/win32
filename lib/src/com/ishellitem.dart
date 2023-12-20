@@ -26,7 +26,7 @@ import 'iunknown.dart';
 const IID_IShellItem = '{43826d1e-e718-42ee-bc55-a1e261c37bfe}';
 
 /// Exposes methods that retrieve information about a Shell item.
-/// [IShellItem] and [IShellItem2] are the preferred representations of
+/// [IShellItem] and `IShellItem2` are the preferred representations of
 /// items in any new code.
 ///
 /// {@category com}
