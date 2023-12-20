@@ -25,6 +25,9 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_IMMDeviceEnumerator = '{a95664d2-9614-4f35-a746-de8db63617e6}';
 
+/// The IMMDeviceEnumerator interface provides methods for enumerating
+/// multimedia device resources.
+///
 /// {@category com}
 class IMMDeviceEnumerator extends IUnknown {
   // vtable begins at 3, is 5 entries long.

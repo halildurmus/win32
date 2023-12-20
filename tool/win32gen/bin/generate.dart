@@ -221,15 +221,15 @@ void generateComApis(Scope scope, Map<String, String> comTypesToGenerate) {
   for (final interface in comTypesToGenerate.keys) {
     final typeDef = scope.findTypeDef(interface);
     if (typeDef == null) throw Exception("Can't find $interface");
-    final interfaceProjection =
-        ComInterfaceProjection(typeDef, comTypesToGenerate[interface] ?? '');
+    final comment = comTypesToGenerate[interface] ?? '';
+    final interfaceProjection = ComInterfaceProjection(typeDef, comment);
 
     // In v2, we put classes and interfaces in the same file.
     final className = ComClassProjection.generateClassName(typeDef);
     final classNameExists = scope.findTypeDef(className) != null;
 
     final comObject = classNameExists
-        ? ComClassProjection.fromInterface(typeDef)
+        ? ComClassProjection.fromInterface(typeDef, interfaceComment: comment)
         : interfaceProjection;
 
     // Generate class

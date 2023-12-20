@@ -26,6 +26,9 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_INetworkListManager = '{dcb00000-570f-4a9b-8d69-199fdba5723b}';
 
+/// The INetworkListManager interface provides a set of methods to perform
+/// network list management functions.
+///
 /// {@category com}
 class INetworkListManager extends IDispatch {
   // vtable begins at 7, is 9 entries long.
