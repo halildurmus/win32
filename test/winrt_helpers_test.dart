@@ -9,87 +9,70 @@ import 'package:win32/win32.dart';
 import 'helpers.dart';
 
 void main() {
-  test('toDartString', () {
-    final str = 'Hello, world!';
-    final hString = convertToHString(str);
-    final pHString = calloc<HSTRING>()..value = hString;
+  group('WinRT helpers', () {
+    setUp(initializeCOM);
 
-    final dartStr = pHString.toDartString();
-    expect(dartStr, equals(str));
+    test('toDartString', () {
+      final str = 'Hello, world!';
+      final hString = convertToHString(str);
+      final pHString = calloc<HSTRING>()..value = hString;
 
-    WindowsDeleteString(hString);
-    free(pHString);
-  });
+      final dartStr = pHString.toDartString();
+      expect(dartStr, equals(str));
 
-  test('getInterfaces', () {
-    final iids = [
-      '{00000038-0000-0000-c000-000000000046}', // IWeakReferenceSource
-      '{2ca8278a-12c5-4c5f-8977-94547793c241}', // IFileOpenPicker
-      '{8ceb6cd2-b446-46f7-b265-90f8e55ad650}', // IFileOpenPicker2
-      '{3f57b569-2522-4ca5-aa73-a15509f1fcbf}', // IFileOpenPickerWithOperationId
-      if (getWindowsBuildNumber() >= 18362)
-        '{d9a5c5b3-c5dc-5b98-bd80-a8d0ca0584d8}' // IFileOpenPicker3
-    ];
-    final className = 'Windows.Storage.Pickers.FileOpenPicker';
-    final object = activateClass(className);
-    expect(getInterfaces(object), equals(iids));
-  });
+      WindowsDeleteString(hString);
+      free(pHString);
+    });
 
-  test('getClassName', () {
-    const className = 'Windows.Globalization.Calendar';
-    final object = activateClass(className);
-    expect(getClassName(object), equals(className));
-  });
+    test('getInterfaces', () {
+      final iids = [
+        '{00000038-0000-0000-c000-000000000046}', // IWeakReferenceSource
+        '{2ca8278a-12c5-4c5f-8977-94547793c241}', // IFileOpenPicker
+        '{8ceb6cd2-b446-46f7-b265-90f8e55ad650}', // IFileOpenPicker2
+        '{3f57b569-2522-4ca5-aa73-a15509f1fcbf}', // IFileOpenPickerWithOperationId
+        if (getWindowsBuildNumber() >= 18362)
+          '{d9a5c5b3-c5dc-5b98-bd80-a8d0ca0584d8}' // IFileOpenPicker3
+      ];
+      final className = 'Windows.Storage.Pickers.FileOpenPicker';
+      final object = activateClass(className);
+      expect(getInterfaces(object), equals(iids));
+    });
 
-  test('getTrustLevel of a base trust class', () {
-    const className = 'Windows.Globalization.Calendar';
-    final object = activateClass(className);
-    expect(getTrustLevel(object), equals(TrustLevel.baseTrust));
-  });
+    test('getClassName', () {
+      const className = 'Windows.Globalization.Calendar';
+      final object = activateClass(className);
+      expect(getClassName(object), equals(className));
+    });
 
-  test('getTrustLevel of a partial trust class', () {
-    const className = 'Windows.Storage.Pickers.FileOpenPicker';
-    final object = activateClass(className);
-    expect(getTrustLevel(object), equals(TrustLevel.partialTrust));
+    test('getTrustLevel of a base trust class', () {
+      const className = 'Windows.Globalization.Calendar';
+      final object = activateClass(className);
+      expect(getTrustLevel(object), equals(TrustLevel.baseTrust));
+    });
+
+    test('getTrustLevel of a partial trust class', () {
+      const className = 'Windows.Storage.Pickers.FileOpenPicker';
+      final object = activateClass(className);
+      expect(getTrustLevel(object), equals(TrustLevel.partialTrust));
+    });
+
+    tearDown(forceGC);
+    tearDownAll(CoUninitialize);
   });
 }
 
 /// Activates the specified Windows Runtime class in the [className].
-IInspectable activateClass(String className, {Allocator allocator = calloc}) {
+IInspectable activateClass(String className) {
   // Create a HSTRING representing the object
   final hClassName = convertToHString(className);
-  final inspectablePtr = allocator<COMObject>();
+  final inspectablePtr = calloc<COMObject>();
 
   try {
     final hr = RoActivateInstance(hClassName, inspectablePtr.cast());
     if (FAILED(hr)) throw WindowsException(hr);
     // Return a pointer to the relevant class
     return IInspectable(inspectablePtr);
-  } on WindowsException catch (e) {
-    // If RoActivateInstance fails because combase hasn't been loaded yet then
-    // load combase so that it "just works" for apartment-agnostic code.
-    if (e.hr == CO_E_NOTINITIALIZED) {
-      initializeMTA();
-      final hr = RoActivateInstance(hClassName, inspectablePtr.cast());
-      if (FAILED(hr)) throw WindowsException(hr);
-      // Return a pointer to the relevant class
-      return IInspectable(inspectablePtr);
-    }
-    rethrow;
   } finally {
     WindowsDeleteString(hClassName);
-  }
-}
-
-/// Ensures the current thread is enabled for COM, using the multithreaded
-/// apartment model (MTA).
-void initializeMTA() {
-  final pCookie = calloc<IntPtr>();
-
-  try {
-    final hr = CoIncrementMTAUsage(pCookie);
-    if (FAILED(hr)) throw WindowsException(hr);
-  } finally {
-    free(pCookie);
   }
 }

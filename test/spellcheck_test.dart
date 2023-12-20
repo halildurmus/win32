@@ -12,20 +12,13 @@ import 'helpers.dart';
 void main() {
   // ISpellCheckerFactory is only available on Windows 8 or higher, per:
   // https://learn.microsoft.com/windows/win32/api/spellcheck/nn-spellcheck-ispellcheckerfactory
-  if (getWindowsBuildNumber() >= 9200) return;
+  if (getWindowsBuildNumber() <= 9200) return;
 
   group('SpellChecker', () {
-    late SpellCheckerFactory spellCheckerFactory;
-
-    setUp(() {
-      final hr = CoInitializeEx(
-          nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      spellCheckerFactory = SpellCheckerFactory.createInstance();
-    });
+    setUpAll(initializeCOM);
 
     test('supportedLanguages', () {
+      final spellCheckerFactory = SpellCheckerFactory.createInstance();
       final pEnumString = spellCheckerFactory.supportedLanguages;
       expect(pEnumString.ref.isNull, isFalse);
       final enumString = IEnumString(pEnumString);
@@ -47,6 +40,8 @@ void main() {
     });
 
     test('isSupported', () {
+      final spellCheckerFactory = SpellCheckerFactory.createInstance();
+
       final supportedPtr = calloc<Int32>();
 
       // Dart reports locale as (for example) en_US; Windows expects en-US
@@ -61,6 +56,7 @@ void main() {
     });
 
     test('check', () {
+      final spellCheckerFactory = SpellCheckerFactory.createInstance();
       final supportedPtr = calloc<Int32>();
 
       final languageTagPtr = 'en-US'.toNativeUtf16();
@@ -72,6 +68,7 @@ void main() {
         hr = spellCheckerFactory.createSpellChecker(
             languageTagPtr, spellCheckerPtr.cast());
         expect(hr, equals(S_OK));
+        expect(spellCheckerPtr.ref.isNull, isFalse);
 
         final spellChecker = ISpellChecker(spellCheckerPtr);
 
@@ -82,7 +79,7 @@ void main() {
         expect(errorsPtr.ref.isNull, isFalse);
 
         final errors = IEnumSpellingError(errorsPtr);
-        final errorPtr = calloc<COMObject>();
+        var errorPtr = calloc<COMObject>();
 
         while (errors.next(errorPtr.cast()) == S_OK) {
           expect(errorPtr.ref.isNull, isFalse);
@@ -91,13 +88,18 @@ void main() {
           final replacement = error.replacement;
           expect(replacement.toDartString(), equals('have'));
           WindowsDeleteString(replacement.address);
+          errorPtr = calloc<COMObject>();
         }
 
+        free(errorPtr);
         free(textPtr);
       }
 
       free(supportedPtr);
       free(languageTagPtr);
     });
+
+    tearDown(forceGC);
+    tearDownAll(CoUninitialize);
   });
 }

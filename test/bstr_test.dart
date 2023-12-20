@@ -12,6 +12,18 @@ void main() {
   const testRuns = 500;
 
   test('BSTR allocation', () {
+    const testString = 'This is a sample text string.';
+    final testStringPtr = testString.toNativeUtf16();
+    final bstr = SysAllocString(testStringPtr);
+
+    expect(SysStringLen(bstr), equals(testString.length));
+    expect(SysStringByteLen(bstr), equals(testString.length * 2));
+
+    SysFreeString(bstr);
+    free(testStringPtr);
+  });
+
+  test('BSTR.fromString', () {
     const testString = 'Hello world';
 
     for (var i = 0; i < testRuns; i++) {
@@ -28,6 +40,7 @@ void main() {
       final pNull =
           Pointer<WORD>.fromAddress(bstr.ptr.address + testString.length * 2);
       expect(pNull.value, isZero, reason: 'test run $i');
+
       bstr.free();
     }
   });
@@ -51,6 +64,7 @@ void main() {
       final pNull =
           Pointer<WORD>.fromAddress(bstr.ptr.address + longString.length * 2);
       expect(pNull.value, isZero);
+
       bstr.free();
     }
   });
@@ -65,7 +79,6 @@ void main() {
       expect(testString.length, equals(84));
       expect(bstr.byteLength, equals(84 * 2));
       expect(bstr.length, equals(84));
-
       expect(bstr.toString(), equals(testString));
 
       bstr.free();
