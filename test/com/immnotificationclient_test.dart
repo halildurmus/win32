@@ -37,4 +37,6 @@ void main() {
   test('Can instantiate IMMNotificationClient.onPropertyValueChanged', () {
     expect(mmnotificationclient.onPropertyValueChanged, isA<Function>());
   });
+
+  free(ptr);
 }

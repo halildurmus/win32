@@ -31,4 +31,6 @@ void main() {
   test('Can instantiate IAudioClient3.initializeSharedAudioStream', () {
     expect(audioclient3.initializeSharedAudioStream, isA<Function>());
   });
+
+  free(ptr);
 }

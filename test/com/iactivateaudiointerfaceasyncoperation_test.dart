@@ -29,4 +29,6 @@ void main() {
     expect(activateaudiointerfaceasyncoperation.getActivateResult,
         isA<Function>());
   });
+
+  free(ptr);
 }

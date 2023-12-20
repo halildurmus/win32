@@ -25,4 +25,6 @@ void main() {
   test('Can instantiate IAudioClock2.getDevicePosition', () {
     expect(audioclock2.getDevicePosition, isA<Function>());
   });
+
+  free(ptr);
 }

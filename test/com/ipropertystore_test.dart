@@ -37,4 +37,6 @@ void main() {
   test('Can instantiate IPropertyStore.commit', () {
     expect(propertystore.commit, isA<Function>());
   });
+
+  free(ptr);
 }

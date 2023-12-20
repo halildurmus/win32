@@ -191,6 +191,18 @@ base class GUID extends Struct {
     Data3 = byteBuffer.asUint16List(6).first;
     Data4 = byteBuffer.asUint64List(8).first;
   }
+
+  /// Creates GUID from four integer components.
+  ///
+  /// The first component should be a 32-bit value, the second and third
+  /// components should be 16-bit values, and the fourth component should be a
+  /// 64-bit value.
+  void setGUIDFromComponents(int data1, int data2, int data3, int data4) {
+    Data1 = data1;
+    Data2 = data2;
+    Data3 = data3;
+    Data4 = data4;
+  }
 }
 
 extension PointerGUIDExtension on Pointer<GUID> {

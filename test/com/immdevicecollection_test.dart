@@ -28,4 +28,6 @@ void main() {
   test('Can instantiate IMMDeviceCollection.item', () {
     expect(mmdevicecollection.item, isA<Function>());
   });
+
+  free(ptr);
 }

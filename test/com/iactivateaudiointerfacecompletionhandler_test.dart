@@ -29,4 +29,6 @@ void main() {
     expect(activateaudiointerfacecompletionhandler.activateCompleted,
         isA<Function>());
   });
+
+  free(ptr);
 }

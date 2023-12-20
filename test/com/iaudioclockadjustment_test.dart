@@ -25,4 +25,6 @@ void main() {
   test('Can instantiate IAudioClockAdjustment.setSampleRate', () {
     expect(audioclockadjustment.setSampleRate, isA<Function>());
   });
+
+  free(ptr);
 }

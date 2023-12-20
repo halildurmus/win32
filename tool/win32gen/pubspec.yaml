@@ -3,7 +3,7 @@ description: Auto-generate Dart wrapper classes for the Win32 API using Windows 
 publish_to: none
 
 environment:
-  sdk: '^3.1.0'
+  sdk: ^3.2.0
 
 # Declare that this package only works on Windows.
 platforms:
@@ -11,7 +11,7 @@ platforms:
 
 dependencies:
   # For formatting Dart code (APIs for performing dart format).
-  dart_style: ^2.3.3
+  dart_style: ^2.3.4
 
   # Help ensure that the code is well-written.
   dartwindows_lints: ^1.1.0
@@ -20,10 +20,10 @@ dependencies:
   ffi: ^2.1.0
 
   # Running the test suite.
-  test: ^1.24.9
+  test: ^1.25.0
 
   # Windows metadata for automatically generating API signatures.
-  winmd: ^4.0.1
+  winmd: ^4.1.0
 
   # Win32 itself
-  win32: ^5.0.9
+  win32: ^5.1.1

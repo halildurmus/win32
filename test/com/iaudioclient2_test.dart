@@ -31,4 +31,6 @@ void main() {
   test('Can instantiate IAudioClient2.getBufferSizeLimits', () {
     expect(audioclient2.getBufferSizeLimits, isA<Function>());
   });
+
+  free(ptr);
 }

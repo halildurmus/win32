@@ -28,4 +28,6 @@ void main() {
     expect(audioclientduckingcontrol.setDuckingOptionsForCurrentStream,
         isA<Function>());
   });
+
+  free(ptr);
 }

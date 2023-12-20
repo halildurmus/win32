@@ -25,4 +25,6 @@ void main() {
   test('Can instantiate IMMEndpoint.getDataFlow', () {
     expect(mmendpoint.getDataFlow, isA<Function>());
   });
+
+  free(ptr);
 }
