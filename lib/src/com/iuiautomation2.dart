@@ -26,6 +26,9 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_IUIAutomation2 = '{34723aff-0c9d-49d0-9896-7ab52df8cd8a}';
 
+/// Extends the IUIAutomation interface to expose additional methods for
+/// controlling Microsoft UI Automation functionality.
+///
 /// {@category com}
 class IUIAutomation2 extends IUIAutomation {
   // vtable begins at 58, is 6 entries long.

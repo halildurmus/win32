@@ -25,6 +25,8 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_IAppxFactory = '{beb94909-e451-438b-b5a7-d79e767b75d8}';
 
+/// Creates objects for reading and writing app packages.
+///
 /// {@category com}
 class IAppxFactory extends IUnknown {
   // vtable begins at 3, is 5 entries long.

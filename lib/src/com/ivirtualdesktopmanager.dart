@@ -25,6 +25,9 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_IVirtualDesktopManager = '{a5cd92ff-29be-454c-8d04-d82879fb3f1b}';
 
+/// Exposes methods that enable an application to interact with groups of
+/// windows that form virtual workspaces.
+///
 /// {@category com}
 class IVirtualDesktopManager extends IUnknown {
   // vtable begins at 3, is 3 entries long.

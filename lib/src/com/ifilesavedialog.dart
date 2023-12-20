@@ -26,6 +26,10 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_IFileSaveDialog = '{84bccd23-5fde-4cdb-aea4-af64b83d78ab}';
 
+/// Extends the IFileDialog interface by adding methods specific to the save
+/// dialog, which include those that provide support for the collection of
+/// metadata to be persisted with the file.
+///
 /// {@category com}
 class IFileSaveDialog extends IFileDialog {
   // vtable begins at 27, is 5 entries long.
