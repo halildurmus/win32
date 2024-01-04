@@ -1,3 +1,12 @@
+## 5.2.0
+
+- Migrate examples utilizing `Pointer.fromFunction` to use
+  `NativeCallable.isolateLocal` (#798)
+- Add more WASAPI APIs, COM interfaces, and constants (#800)
+- Generate missing documentation for certain COM interfaces (#806)
+- Expose `SHCreateMemStream` API
+- Bump minimum Dart version requirement to `3.2.0`
+
 ## 5.1.1
 
 - Fix dartdoc comment references (#787)

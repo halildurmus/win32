@@ -23,7 +23,7 @@
 /// For more conceptual material about programming Win32 apps with Dart, consult
 /// the [Dart | Windows documentation](
 /// https://win32.pub/docs/category/win32-programming).
-library win32;
+library;
 
 // Core Win32 APIs, constants and macros
 export 'src/bstr.dart';
@@ -86,6 +86,7 @@ export 'src/win32/rometadata.g.dart';
 export 'src/win32/scarddlg.g.dart';
 export 'src/win32/setupapi.g.dart';
 export 'src/win32/shell32.g.dart';
+export 'src/win32/shlwapi.g.dart';
 export 'src/win32/user32.g.dart';
 export 'src/win32/uxtheme.g.dart';
 export 'src/win32/version.g.dart';

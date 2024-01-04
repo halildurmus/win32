@@ -1,6 +1,7 @@
 name: win32
-description: A Dart library for accessing common Win32 APIs using FFI. No C required!
-version: 5.2.0-wip
+description: >
+  A Dart library for accessing common Win32 APIs using FFI. No C required!
+version: 5.2.0
 homepage: https://win32.pub
 repository: https://github.com/dart-windows/win32
 issue_tracker: https://github.com/dart-windows/win32/issues
