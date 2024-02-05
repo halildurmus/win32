@@ -1,8 +1,0 @@
-{
-    "markdownlint.config": {
-        "MD041": false,
-    },
-    "editor.codeActionsOnSave": {
-        "source.fixAll.markdownlint": true
-    },
-}
