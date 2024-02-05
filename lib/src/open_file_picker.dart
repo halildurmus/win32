@@ -114,14 +114,20 @@ class OpenFilePicker extends FileDialog {
       if (FAILED(hr)) throw WindowsException(hr);
 
       var options = pfos.value;
+      if (!addToRecentDocuments) {
+        options |= FILEOPENDIALOGOPTIONS.FOS_DONTADDTORECENT;
+      }
+      if (!dereferenceLinks) {
+        options |= FILEOPENDIALOGOPTIONS.FOS_NODEREFERENCELINKS;
+      }
+      if (fileMustExist) {
+        options |= FILEOPENDIALOGOPTIONS.FOS_FILEMUSTEXIST;
+      }
       if (forcePreviewPaneOn ?? false) {
         options |= FILEOPENDIALOGOPTIONS.FOS_FORCEPREVIEWPANEON;
       }
       if (forceFileSystemItems) {
         options |= FILEOPENDIALOGOPTIONS.FOS_FORCEFILESYSTEM;
-      }
-      if (fileMustExist) {
-        options |= FILEOPENDIALOGOPTIONS.FOS_FILEMUSTEXIST;
       }
       if (hidePinnedPlaces) {
         options |= FILEOPENDIALOGOPTIONS.FOS_HIDEPINNEDPLACES;
@@ -132,6 +138,10 @@ class OpenFilePicker extends FileDialog {
       if (multiSelect) {
         options |= FILEOPENDIALOGOPTIONS.FOS_ALLOWMULTISELECT;
       }
+      if (showHiddenAndSystemItems) {
+        options |= FILEOPENDIALOGOPTIONS.FOS_FORCESHOWHIDDEN;
+      }
+
       hr = fileDialog.setOptions(options);
       if (FAILED(hr)) throw WindowsException(hr);
 

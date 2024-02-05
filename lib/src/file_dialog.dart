@@ -15,20 +15,14 @@ abstract class FileDialog {
     _initializeCom();
   }
 
+  /// Whether to add the item being opened or saved to the recent documents
+  /// list.
+  bool addToRecentDocuments = true;
+
   /// A list of custom places.
   ///
   /// Use [addPlace] to add an item to this list.
   final customPlaces = <CustomPlace>[];
-
-  /// The title of the dialog.
-  String title = '';
-
-  /// The text of the label next to the file name edit box.
-  String fileNameLabel = '';
-
-  /// The file name that appears in the File name edit box when that dialog box
-  /// is opened.
-  String fileName = '';
 
   /// The default extension to be added to file names.
   ///
@@ -36,6 +30,30 @@ abstract class FileDialog {
   /// correct, while `.jpg` is not. If this field is set, the dialog will update
   /// the default extension automatically when the user chooses a new file type.
   String? defaultExtension;
+
+  /// Which entry in the [filterSpecification] is shown by default. Typically
+  /// this is the first entry shown.
+  int? defaultFilterIndex;
+
+  /// Whether shortcuts should be treated as their target items.
+  ///
+  /// When this value is set to `true`, the application will follow the target
+  /// of a shortcut when encountering a `.lnk` file, rather than treating it as
+  /// the shortcut itself.
+  ///
+  /// Setting this value to `false` allows an application to open a `.lnk` file
+  /// directly, without resolving the target it points to.
+  bool dereferenceLinks = true;
+
+  /// The item returned must exist.
+  bool fileMustExist = false;
+
+  /// The file name that appears in the File name edit box when that dialog box
+  /// is opened.
+  String fileName = '';
+
+  /// The text of the label next to the file name edit box.
+  String fileNameLabel = '';
 
   /// The filter for the file types shown.
   ///
@@ -48,25 +66,24 @@ abstract class FileDialog {
   /// separated list (for example `*.jpg;*.jpeg`).
   Map<String, String> filterSpecification = {};
 
-  /// Which entry in the [filterSpecification] is shown by default. Typically
-  /// this is the first entry shown.
-  int? defaultFilterIndex;
+  /// Ensure that returned items are file system items.
+  bool forceFileSystemItems = true;
 
   /// Hide all of the standard namespace locations (such as Favorites,
   /// Libraries, Computer, and Network) shown in the navigation pane.
   bool hidePinnedPlaces = false;
 
-  /// Ensure that returned items are file system items.
-  bool forceFileSystemItems = true;
-
-  /// The item returned must exist.
-  bool fileMustExist = false;
+  /// HWND of dialog.
+  int hWndOwner = NULL;
 
   /// Don't change the current working directory.
   bool isDirectoryFixed = false;
 
-  /// HWND of dialog.
-  int hWndOwner = NULL;
+  /// Include hidden and system items.
+  bool showHiddenAndSystemItems = false;
+
+  /// The title of the dialog.
+  String title = '';
 
   /// Whether COM has been initialized.
   static bool _isComInitialized = false;

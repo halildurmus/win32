@@ -31,6 +31,12 @@ class SaveFilePicker extends FileDialog {
       if (FAILED(hr)) throw WindowsException(hr);
 
       var options = pfos.value;
+      if (!addToRecentDocuments) {
+        options |= FILEOPENDIALOGOPTIONS.FOS_DONTADDTORECENT;
+      }
+      if (!dereferenceLinks) {
+        options |= FILEOPENDIALOGOPTIONS.FOS_NODEREFERENCELINKS;
+      }
       if (fileMustExist) {
         options |= FILEOPENDIALOGOPTIONS.FOS_FILEMUSTEXIST;
       }
@@ -43,6 +49,10 @@ class SaveFilePicker extends FileDialog {
       if (isDirectoryFixed) {
         options |= FILEOPENDIALOGOPTIONS.FOS_NOCHANGEDIR;
       }
+      if (showHiddenAndSystemItems) {
+        options |= FILEOPENDIALOGOPTIONS.FOS_FORCESHOWHIDDEN;
+      }
+
       hr = fileDialog.setOptions(options);
       if (FAILED(hr)) throw WindowsException(hr);
 
