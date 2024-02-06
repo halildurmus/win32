@@ -19,7 +19,7 @@ platforms:
   windows:
 
 dependencies:
-  ffi: ^2.1.2
+  ffi: ^2.1.0
   win32: ^5.2.0
 
 dev_dependencies:
