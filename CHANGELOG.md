@@ -1,4 +1,4 @@
-## 2.0.12
+## 2.1.0
 
 - Add `addToRecentDocuments` field to control whether an item being opened or
   saved will be added to the recent documents list.
