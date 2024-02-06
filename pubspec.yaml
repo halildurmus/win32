@@ -1,7 +1,7 @@
 name: filepicker_windows
 description: A package that allows file and directory selection for Windows
   using common dialog controls.
-version: 2.0.11
+version: 2.0.12
 homepage: https://win32.pub
 repository: https://github.com/dart-windows/filepicker_windows
 issue_tracker: https://github.com/dart-windows/filepicker_windows/issues
@@ -13,16 +13,16 @@ topics:
   - windows
 
 environment:
-  sdk: '^3.1.0'
+  sdk: ^3.2.0
 
 platforms:
   windows:
 
 dependencies:
-  ffi: ^2.1.0
-  win32: ^5.0.8
+  ffi: ^2.1.2
+  win32: ^5.2.0
 
 dev_dependencies:
-  dartwindows_lints: ^1.0.0
-  melos: ">=3.1.1 <5.0.0"
-  test: ^1.24.6
+  dartwindows_lints: ^1.1.0
+  melos: ^4.1.0
+  test: ^1.25.2

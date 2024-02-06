@@ -1,3 +1,13 @@
+## 2.0.12
+
+- Add `addToRecentDocuments` field to control whether an item being opened or
+  saved will be added to the recent documents list.
+- Add `dereferenceLinks` field to specify whether shortcuts should be treated as
+  their target items.
+- Add `showHiddenAndSystemItems` field to control whether hidden and system
+  items are displayed in the file dialog.
+- Bump minimum required Dart version to `3.2.0`.
+
 ## 2.0.11
 
 - Improved code quality.
