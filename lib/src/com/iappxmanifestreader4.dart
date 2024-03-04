@@ -40,8 +40,7 @@ class IAppxManifestReader4 extends IAppxManifestReader3 {
 
   int
       getOptionalPackageInfo(Pointer<Pointer<COMObject>> optionalPackageInfo) =>
-          ptr.ref.vtable
-                  .elementAt(15)
+          (ptr.ref.vtable + 15)
                   .cast<
                       Pointer<
                           NativeFunction<

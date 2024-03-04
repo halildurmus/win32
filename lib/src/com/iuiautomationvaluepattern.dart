@@ -38,8 +38,7 @@ class IUIAutomationValuePattern extends IUnknown {
       IUIAutomationValuePattern(
           interface.toInterface(IID_IUIAutomationValuePattern));
 
-  int setValue(Pointer<Utf16> val) => ptr.ref.vtable
-      .elementAt(3)
+  int setValue(Pointer<Utf16> val) => (ptr.ref.vtable + 3)
       .cast<
           Pointer<
               NativeFunction<Int32 Function(Pointer, Pointer<Utf16> val)>>>()
@@ -51,8 +50,7 @@ class IUIAutomationValuePattern extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(4)
+      final hr = (ptr.ref.vtable + 4)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -76,8 +74,7 @@ class IUIAutomationValuePattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(5)
+      final hr = (ptr.ref.vtable + 5)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -99,8 +96,7 @@ class IUIAutomationValuePattern extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(6)
+      final hr = (ptr.ref.vtable + 6)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -124,8 +120,7 @@ class IUIAutomationValuePattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(7)
+      final hr = (ptr.ref.vtable + 7)
               .cast<
                   Pointer<
                       NativeFunction<

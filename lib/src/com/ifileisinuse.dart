@@ -40,8 +40,7 @@ class IFileIsInUse extends IUnknown {
   factory IFileIsInUse.from(IUnknown interface) =>
       IFileIsInUse(interface.toInterface(IID_IFileIsInUse));
 
-  int getAppName(Pointer<Pointer<Utf16>> ppszName) => ptr.ref.vtable
-      .elementAt(3)
+  int getAppName(Pointer<Pointer<Utf16>> ppszName) => (ptr.ref.vtable + 3)
       .cast<
           Pointer<
               NativeFunction<
@@ -51,8 +50,7 @@ class IFileIsInUse extends IUnknown {
           int Function(Pointer,
               Pointer<Pointer<Utf16>> ppszName)>()(ptr.ref.lpVtbl, ppszName);
 
-  int getUsage(Pointer<Int32> pfut) => ptr.ref.vtable
-      .elementAt(4)
+  int getUsage(Pointer<Int32> pfut) => (ptr.ref.vtable + 4)
       .cast<
           Pointer<
               NativeFunction<Int32 Function(Pointer, Pointer<Int32> pfut)>>>()
@@ -60,8 +58,7 @@ class IFileIsInUse extends IUnknown {
       .asFunction<
           int Function(Pointer, Pointer<Int32> pfut)>()(ptr.ref.lpVtbl, pfut);
 
-  int getCapabilities(Pointer<Uint32> pdwCapFlags) => ptr.ref.vtable
-          .elementAt(5)
+  int getCapabilities(Pointer<Uint32> pdwCapFlags) => (ptr.ref.vtable + 5)
           .cast<
               Pointer<
                   NativeFunction<
@@ -70,8 +67,7 @@ class IFileIsInUse extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Uint32> pdwCapFlags)>()(
       ptr.ref.lpVtbl, pdwCapFlags);
 
-  int getSwitchToHWND(Pointer<IntPtr> phwnd) => ptr.ref.vtable
-      .elementAt(6)
+  int getSwitchToHWND(Pointer<IntPtr> phwnd) => (ptr.ref.vtable + 6)
       .cast<
           Pointer<
               NativeFunction<Int32 Function(Pointer, Pointer<IntPtr> phwnd)>>>()
@@ -80,8 +76,7 @@ class IFileIsInUse extends IUnknown {
           int Function(
               Pointer, Pointer<IntPtr> phwnd)>()(ptr.ref.lpVtbl, phwnd);
 
-  int closeFile() => ptr.ref.vtable
-      .elementAt(7)
+  int closeFile() => (ptr.ref.vtable + 7)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);

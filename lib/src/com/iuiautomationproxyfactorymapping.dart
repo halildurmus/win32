@@ -45,8 +45,7 @@ class IUIAutomationProxyFactoryMapping extends IUnknown {
     final retValuePtr = calloc<Uint32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(3)
+      final hr = (ptr.ref.vtable + 3)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -64,8 +63,7 @@ class IUIAutomationProxyFactoryMapping extends IUnknown {
     }
   }
 
-  int getTable(Pointer<Pointer<SAFEARRAY>> table) => ptr.ref.vtable
-          .elementAt(4)
+  int getTable(Pointer<Pointer<SAFEARRAY>> table) => (ptr.ref.vtable + 4)
           .cast<
               Pointer<
                   NativeFunction<
@@ -76,21 +74,21 @@ class IUIAutomationProxyFactoryMapping extends IUnknown {
               int Function(Pointer, Pointer<Pointer<SAFEARRAY>> table)>()(
       ptr.ref.lpVtbl, table);
 
-  int getEntry(int index, Pointer<Pointer<COMObject>> entry) => ptr.ref.vtable
-          .elementAt(5)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Uint32 index,
-                          Pointer<Pointer<COMObject>> entry)>>>()
-          .value
-          .asFunction<
-              int Function(
-                  Pointer, int index, Pointer<Pointer<COMObject>> entry)>()(
-      ptr.ref.lpVtbl, index, entry);
+  int getEntry(
+          int index, Pointer<Pointer<COMObject>> entry) =>
+      (ptr.ref.vtable + 5)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Uint32 index,
+                              Pointer<Pointer<COMObject>> entry)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer, int index, Pointer<Pointer<COMObject>> entry)>()(
+          ptr.ref.lpVtbl, index, entry);
 
-  int setTable(Pointer<SAFEARRAY> factoryList) => ptr.ref.vtable
-      .elementAt(6)
+  int setTable(Pointer<SAFEARRAY> factoryList) => (ptr.ref.vtable + 6)
       .cast<
           Pointer<
               NativeFunction<
@@ -101,8 +99,7 @@ class IUIAutomationProxyFactoryMapping extends IUnknown {
               Pointer<SAFEARRAY> factoryList)>()(ptr.ref.lpVtbl, factoryList);
 
   int insertEntries(int before, Pointer<SAFEARRAY> factoryList) =>
-      ptr.ref.vtable
-              .elementAt(7)
+      (ptr.ref.vtable + 7)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -114,8 +111,8 @@ class IUIAutomationProxyFactoryMapping extends IUnknown {
                       Pointer, int before, Pointer<SAFEARRAY> factoryList)>()(
           ptr.ref.lpVtbl, before, factoryList);
 
-  int insertEntry(int before, Pointer<COMObject> factory) => ptr.ref.vtable
-      .elementAt(8)
+  int insertEntry(int before, Pointer<COMObject> factory) => (ptr.ref.vtable +
+          8)
       .cast<
           Pointer<
               NativeFunction<
@@ -126,20 +123,17 @@ class IUIAutomationProxyFactoryMapping extends IUnknown {
           int Function(Pointer, int before,
               Pointer<COMObject> factory)>()(ptr.ref.lpVtbl, before, factory);
 
-  int removeEntry(int index) => ptr.ref.vtable
-      .elementAt(9)
+  int removeEntry(int index) => (ptr.ref.vtable + 9)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint32 index)>>>()
       .value
       .asFunction<int Function(Pointer, int index)>()(ptr.ref.lpVtbl, index);
 
-  int clearTable() => ptr.ref.vtable
-      .elementAt(10)
+  int clearTable() => (ptr.ref.vtable + 10)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  int restoreDefaultTable() => ptr.ref.vtable
-      .elementAt(11)
+  int restoreDefaultTable() => (ptr.ref.vtable + 11)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);

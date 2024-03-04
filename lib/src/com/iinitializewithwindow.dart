@@ -37,8 +37,7 @@ class IInitializeWithWindow extends IUnknown {
   factory IInitializeWithWindow.from(IUnknown interface) =>
       IInitializeWithWindow(interface.toInterface(IID_IInitializeWithWindow));
 
-  int initialize(int hwnd) => ptr.ref.vtable
-      .elementAt(3)
+  int initialize(int hwnd) => (ptr.ref.vtable + 3)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, IntPtr hwnd)>>>()
       .value
       .asFunction<int Function(Pointer, int hwnd)>()(ptr.ref.lpVtbl, hwnd);

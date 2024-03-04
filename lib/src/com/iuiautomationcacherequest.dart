@@ -39,24 +39,21 @@ class IUIAutomationCacheRequest extends IUnknown {
       IUIAutomationCacheRequest(
           interface.toInterface(IID_IUIAutomationCacheRequest));
 
-  int addProperty(int propertyId) => ptr.ref.vtable
-      .elementAt(3)
+  int addProperty(int propertyId) => (ptr.ref.vtable + 3)
       .cast<
           Pointer<NativeFunction<Int32 Function(Pointer, Uint32 propertyId)>>>()
       .value
       .asFunction<
           int Function(Pointer, int propertyId)>()(ptr.ref.lpVtbl, propertyId);
 
-  int addPattern(int patternId) => ptr.ref.vtable
-      .elementAt(4)
+  int addPattern(int patternId) => (ptr.ref.vtable + 4)
       .cast<
           Pointer<NativeFunction<Int32 Function(Pointer, Uint32 patternId)>>>()
       .value
       .asFunction<
           int Function(Pointer, int patternId)>()(ptr.ref.lpVtbl, patternId);
 
-  int clone(Pointer<Pointer<COMObject>> clonedRequest) => ptr.ref.vtable
-          .elementAt(5)
+  int clone(Pointer<Pointer<COMObject>> clonedRequest) => (ptr.ref.vtable + 5)
           .cast<
               Pointer<
                   NativeFunction<
@@ -72,8 +69,7 @@ class IUIAutomationCacheRequest extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(6)
+      final hr = (ptr.ref.vtable + 6)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -92,8 +88,7 @@ class IUIAutomationCacheRequest extends IUnknown {
   }
 
   set treeScope(int value) {
-    final hr = ptr.ref.vtable
-        .elementAt(7)
+    final hr = (ptr.ref.vtable + 7)
         .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 scope)>>>()
         .value
         .asFunction<int Function(Pointer, int scope)>()(ptr.ref.lpVtbl, value);
@@ -104,8 +99,7 @@ class IUIAutomationCacheRequest extends IUnknown {
   Pointer<COMObject> get treeFilter {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
-            .elementAt(8)
+    final hr = (ptr.ref.vtable + 8)
             .cast<
                 Pointer<
                     NativeFunction<
@@ -123,8 +117,7 @@ class IUIAutomationCacheRequest extends IUnknown {
   }
 
   set treeFilter(Pointer<COMObject> value) {
-    final hr = ptr.ref.vtable
-            .elementAt(9)
+    final hr = (ptr.ref.vtable + 9)
             .cast<
                 Pointer<
                     NativeFunction<
@@ -140,8 +133,7 @@ class IUIAutomationCacheRequest extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(10)
+      final hr = (ptr.ref.vtable + 10)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -160,8 +152,7 @@ class IUIAutomationCacheRequest extends IUnknown {
   }
 
   set automationElementMode(int value) {
-    final hr = ptr.ref.vtable
-        .elementAt(11)
+    final hr = (ptr.ref.vtable + 11)
         .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 mode)>>>()
         .value
         .asFunction<int Function(Pointer, int mode)>()(ptr.ref.lpVtbl, value);

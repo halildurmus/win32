@@ -38,15 +38,13 @@ class IMetaDataImport extends IUnknown {
   factory IMetaDataImport.from(IUnknown interface) =>
       IMetaDataImport(interface.toInterface(IID_IMetaDataImport));
 
-  void closeEnum(Pointer hEnum) => ptr.ref.vtable
-      .elementAt(3)
+  void closeEnum(Pointer hEnum) => (ptr.ref.vtable + 3)
       .cast<Pointer<NativeFunction<Void Function(Pointer, Pointer hEnum)>>>()
       .value
       .asFunction<
           void Function(Pointer, Pointer hEnum)>()(ptr.ref.lpVtbl, hEnum);
 
-  int countEnum(Pointer hEnum, Pointer<Uint32> pulCount) => ptr.ref.vtable
-          .elementAt(4)
+  int countEnum(Pointer hEnum, Pointer<Uint32> pulCount) => (ptr.ref.vtable + 4)
           .cast<
               Pointer<
                   NativeFunction<
@@ -57,8 +55,7 @@ class IMetaDataImport extends IUnknown {
               int Function(Pointer, Pointer hEnum, Pointer<Uint32> pulCount)>()(
       ptr.ref.lpVtbl, hEnum, pulCount);
 
-  int resetEnum(Pointer hEnum, int ulPos) => ptr.ref.vtable
-          .elementAt(5)
+  int resetEnum(Pointer hEnum, int ulPos) => (ptr.ref.vtable + 5)
           .cast<
               Pointer<
                   NativeFunction<
@@ -69,8 +66,7 @@ class IMetaDataImport extends IUnknown {
 
   int enumTypeDefs(Pointer<Pointer> phEnum, Pointer<Uint32> rTypeDefs, int cMax,
           Pointer<Uint32> pcTypeDefs) =>
-      ptr.ref.vtable
-              .elementAt(6)
+      (ptr.ref.vtable + 6)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -92,8 +88,7 @@ class IMetaDataImport extends IUnknown {
 
   int enumInterfaceImpls(Pointer<Pointer> phEnum, int td,
           Pointer<Uint32> rImpls, int cMax, Pointer<Uint32> pcImpls) =>
-      ptr.ref.vtable
-              .elementAt(7)
+      (ptr.ref.vtable + 7)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -117,8 +112,7 @@ class IMetaDataImport extends IUnknown {
 
   int enumTypeRefs(Pointer<Pointer> phEnum, Pointer<Uint32> rTypeRefs, int cMax,
           Pointer<Uint32> pcTypeRefs) =>
-      ptr.ref.vtable
-              .elementAt(8)
+      (ptr.ref.vtable + 8)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -140,8 +134,7 @@ class IMetaDataImport extends IUnknown {
 
   int findTypeDefByName(Pointer<Utf16> szTypeDef, int tkEnclosingClass,
           Pointer<Uint32> ptd) =>
-      ptr.ref.vtable
-              .elementAt(9)
+      (ptr.ref.vtable + 9)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -155,8 +148,7 @@ class IMetaDataImport extends IUnknown {
 
   int getScopeProps(Pointer<Utf16> szName, int cchName, Pointer<Uint32> pchName,
           Pointer<GUID> pmvid) =>
-      ptr.ref.vtable
-              .elementAt(10)
+      (ptr.ref.vtable + 10)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -172,8 +164,7 @@ class IMetaDataImport extends IUnknown {
                       Pointer<Uint32> pchName, Pointer<GUID> pmvid)>()(
           ptr.ref.lpVtbl, szName, cchName, pchName, pmvid);
 
-  int getModuleFromScope(Pointer<Uint32> pmd) => ptr.ref.vtable
-      .elementAt(11)
+  int getModuleFromScope(Pointer<Uint32> pmd) => (ptr.ref.vtable + 11)
       .cast<
           Pointer<
               NativeFunction<Int32 Function(Pointer, Pointer<Uint32> pmd)>>>()
@@ -188,8 +179,7 @@ class IMetaDataImport extends IUnknown {
           Pointer<Uint32> pchTypeDef,
           Pointer<Uint32> pdwTypeDefFlags,
           Pointer<Uint32> ptkExtends) =>
-      ptr.ref.vtable
-              .elementAt(12)
+      (ptr.ref.vtable + 12)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -215,8 +205,7 @@ class IMetaDataImport extends IUnknown {
 
   int getInterfaceImplProps(
           int iiImpl, Pointer<Uint32> pClass, Pointer<Uint32> ptkIface) =>
-      ptr.ref.vtable
-          .elementAt(13)
+      (ptr.ref.vtable + 13)
           .cast<
               Pointer<
                   NativeFunction<
@@ -233,8 +222,7 @@ class IMetaDataImport extends IUnknown {
 
   int getTypeRefProps(int tr, Pointer<Uint32> ptkResolutionScope,
           Pointer<Utf16> szName, int cchName, Pointer<Uint32> pchName) =>
-      ptr.ref.vtable
-              .elementAt(14)
+      (ptr.ref.vtable + 14)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -258,8 +246,7 @@ class IMetaDataImport extends IUnknown {
 
   int resolveTypeRef(int tr, Pointer<GUID> riid,
           Pointer<Pointer<COMObject>> ppIScope, Pointer<Uint32> ptd) =>
-      ptr.ref.vtable
-              .elementAt(15)
+      (ptr.ref.vtable + 15)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -281,8 +268,7 @@ class IMetaDataImport extends IUnknown {
 
   int enumMembers(Pointer<Pointer> phEnum, int cl, Pointer<Uint32> rMembers,
           int cMax, Pointer<Uint32> pcTokens) =>
-      ptr.ref.vtable
-              .elementAt(16)
+      (ptr.ref.vtable + 16)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -311,8 +297,7 @@ class IMetaDataImport extends IUnknown {
           Pointer<Uint32> rMembers,
           int cMax,
           Pointer<Uint32> pcTokens) =>
-      ptr.ref.vtable
-              .elementAt(17)
+      (ptr.ref.vtable + 17)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -338,8 +323,7 @@ class IMetaDataImport extends IUnknown {
 
   int enumMethods(Pointer<Pointer> phEnum, int cl, Pointer<Uint32> rMethods,
           int cMax, Pointer<Uint32> pcTokens) =>
-      ptr.ref.vtable
-              .elementAt(18)
+      (ptr.ref.vtable + 18)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -368,8 +352,7 @@ class IMetaDataImport extends IUnknown {
           Pointer<Uint32> rMethods,
           int cMax,
           Pointer<Uint32> pcTokens) =>
-      ptr.ref.vtable
-              .elementAt(19)
+      (ptr.ref.vtable + 19)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -395,8 +378,7 @@ class IMetaDataImport extends IUnknown {
 
   int enumFields(Pointer<Pointer> phEnum, int cl, Pointer<Uint32> rFields,
           int cMax, Pointer<Uint32> pcTokens) =>
-      ptr.ref.vtable
-              .elementAt(20)
+      (ptr.ref.vtable + 20)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -420,8 +402,7 @@ class IMetaDataImport extends IUnknown {
 
   int enumFieldsWithName(Pointer<Pointer> phEnum, int cl, Pointer<Utf16> szName,
           Pointer<Uint32> rFields, int cMax, Pointer<Uint32> pcTokens) =>
-      ptr.ref.vtable
-              .elementAt(21)
+      (ptr.ref.vtable + 21)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -447,8 +428,7 @@ class IMetaDataImport extends IUnknown {
 
   int enumParams(Pointer<Pointer> phEnum, int mb, Pointer<Uint32> rParams,
           int cMax, Pointer<Uint32> pcTokens) =>
-      ptr.ref.vtable
-              .elementAt(22)
+      (ptr.ref.vtable + 22)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -472,8 +452,7 @@ class IMetaDataImport extends IUnknown {
 
   int enumMemberRefs(Pointer<Pointer> phEnum, int tkParent,
           Pointer<Uint32> rMemberRefs, int cMax, Pointer<Uint32> pcTokens) =>
-      ptr.ref.vtable
-              .elementAt(23)
+      (ptr.ref.vtable + 23)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -502,8 +481,7 @@ class IMetaDataImport extends IUnknown {
           Pointer<Uint32> rMethodDecl,
           int cMax,
           Pointer<Uint32> pcTokens) =>
-      ptr.ref.vtable
-              .elementAt(24)
+      (ptr.ref.vtable + 24)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -529,8 +507,7 @@ class IMetaDataImport extends IUnknown {
 
   int enumPermissionSets(Pointer<Pointer> phEnum, int tk, int dwActions,
           Pointer<Uint32> rPermission, int cMax, Pointer<Uint32> pcTokens) =>
-      ptr.ref.vtable
-              .elementAt(25)
+      (ptr.ref.vtable + 25)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -556,8 +533,7 @@ class IMetaDataImport extends IUnknown {
 
   int findMember(int td, Pointer<Utf16> szName, Pointer<Uint8> pvSigBlob,
           int cbSigBlob, Pointer<Uint32> pmb) =>
-      ptr.ref.vtable
-              .elementAt(26)
+      (ptr.ref.vtable + 26)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -581,8 +557,7 @@ class IMetaDataImport extends IUnknown {
 
   int findMethod(int td, Pointer<Utf16> szName, Pointer<Uint8> pvSigBlob,
           int cbSigBlob, Pointer<Uint32> pmb) =>
-      ptr.ref.vtable
-              .elementAt(27)
+      (ptr.ref.vtable + 27)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -606,8 +581,7 @@ class IMetaDataImport extends IUnknown {
 
   int findField(int td, Pointer<Utf16> szName, Pointer<Uint8> pvSigBlob,
           int cbSigBlob, Pointer<Uint32> pmb) =>
-      ptr.ref.vtable
-              .elementAt(28)
+      (ptr.ref.vtable + 28)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -631,8 +605,7 @@ class IMetaDataImport extends IUnknown {
 
   int findMemberRef(int td, Pointer<Utf16> szName, Pointer<Uint8> pvSigBlob,
           int cbSigBlob, Pointer<Uint32> pmr) =>
-      ptr.ref.vtable
-              .elementAt(29)
+      (ptr.ref.vtable + 29)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -665,8 +638,7 @@ class IMetaDataImport extends IUnknown {
           Pointer<Uint32> pcbSigBlob,
           Pointer<Uint32> pulCodeRVA,
           Pointer<Uint32> pdwImplFlags) =>
-      ptr.ref.vtable
-              .elementAt(30)
+      (ptr.ref.vtable + 30)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -716,8 +688,7 @@ class IMetaDataImport extends IUnknown {
           Pointer<Uint32> pchMember,
           Pointer<Pointer<Uint8>> ppvSigBlob,
           Pointer<Uint32> pbSig) =>
-      ptr.ref.vtable
-              .elementAt(31)
+      (ptr.ref.vtable + 31)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -749,8 +720,7 @@ class IMetaDataImport extends IUnknown {
           Pointer<Uint32> rProperties,
           int cMax,
           Pointer<Uint32> pcProperties) =>
-      ptr.ref.vtable
-              .elementAt(32)
+      (ptr.ref.vtable + 32)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -774,8 +744,7 @@ class IMetaDataImport extends IUnknown {
 
   int enumEvents(Pointer<Pointer> phEnum, int td, Pointer<Uint32> rEvents,
           int cMax, Pointer<Uint32> pcEvents) =>
-      ptr.ref.vtable
-              .elementAt(33)
+      (ptr.ref.vtable + 33)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -811,8 +780,7 @@ class IMetaDataImport extends IUnknown {
           Pointer<Uint32> rmdOtherMethod,
           int cMax,
           Pointer<Uint32> pcOtherMethod) =>
-      ptr.ref.vtable
-              .elementAt(34)
+      (ptr.ref.vtable + 34)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -865,8 +833,7 @@ class IMetaDataImport extends IUnknown {
 
   int enumMethodSemantics(Pointer<Pointer> phEnum, int mb,
           Pointer<Uint32> rEventProp, int cMax, Pointer<Uint32> pcEventProp) =>
-      ptr.ref.vtable
-              .elementAt(35)
+      (ptr.ref.vtable + 35)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -890,8 +857,7 @@ class IMetaDataImport extends IUnknown {
 
   int getMethodSemantics(
           int mb, int tkEventProp, Pointer<Uint32> pdwSemanticsFlags) =>
-      ptr.ref.vtable
-              .elementAt(36)
+      (ptr.ref.vtable + 36)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -910,8 +876,7 @@ class IMetaDataImport extends IUnknown {
           int cMax,
           Pointer<Uint32> pcFieldOffset,
           Pointer<Uint32> pulClassSize) =>
-      ptr.ref.vtable
-              .elementAt(37)
+      (ptr.ref.vtable + 37)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -937,8 +902,7 @@ class IMetaDataImport extends IUnknown {
 
   int getFieldMarshal(int tk, Pointer<Pointer<Uint8>> ppvNativeType,
           Pointer<Uint32> pcbNativeType) =>
-      ptr.ref.vtable
-              .elementAt(38)
+      (ptr.ref.vtable + 38)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -958,8 +922,7 @@ class IMetaDataImport extends IUnknown {
 
   int getRVA(
           int tk, Pointer<Uint32> pulCodeRVA, Pointer<Uint32> pdwImplFlags) =>
-      ptr.ref.vtable
-              .elementAt(39)
+      (ptr.ref.vtable + 39)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -976,8 +939,7 @@ class IMetaDataImport extends IUnknown {
 
   int getPermissionSetProps(int pm, Pointer<Uint32> pdwAction,
           Pointer<Pointer> ppvPermission, Pointer<Uint32> pcbPermission) =>
-      ptr.ref.vtable
-              .elementAt(40)
+      (ptr.ref.vtable + 40)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -999,8 +961,7 @@ class IMetaDataImport extends IUnknown {
 
   int getSigFromToken(
           int mdSig, Pointer<Pointer<Uint8>> ppvSig, Pointer<Uint32> pcbSig) =>
-      ptr.ref.vtable
-              .elementAt(41)
+      (ptr.ref.vtable + 41)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1021,8 +982,7 @@ class IMetaDataImport extends IUnknown {
   int
       getModuleRefProps(int mur, Pointer<Utf16> szName, int cchName,
               Pointer<Uint32> pchName) =>
-          ptr.ref.vtable
-                  .elementAt(42)
+          (ptr.ref.vtable + 42)
                   .cast<
                       Pointer<
                           NativeFunction<
@@ -1040,8 +1000,7 @@ class IMetaDataImport extends IUnknown {
 
   int enumModuleRefs(Pointer<Pointer> phEnum, Pointer<Uint32> rModuleRefs,
           int cmax, Pointer<Uint32> pcModuleRefs) =>
-      ptr.ref.vtable
-              .elementAt(43)
+      (ptr.ref.vtable + 43)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1063,8 +1022,7 @@ class IMetaDataImport extends IUnknown {
 
   int getTypeSpecFromToken(int typespec, Pointer<Pointer<Uint8>> ppvSig,
           Pointer<Uint32> pcbSig) =>
-      ptr.ref.vtable
-              .elementAt(44)
+      (ptr.ref.vtable + 44)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1082,24 +1040,22 @@ class IMetaDataImport extends IUnknown {
                       Pointer<Uint32> pcbSig)>()(
           ptr.ref.lpVtbl, typespec, ppvSig, pcbSig);
 
-  int getNameFromToken(int tk, Pointer<Pointer<Int8>> pszUtf8NamePtr) => ptr
-          .ref.vtable
-          .elementAt(45)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Uint32 tk,
-                          Pointer<Pointer<Int8>> pszUtf8NamePtr)>>>()
-          .value
-          .asFunction<
-              int Function(
-                  Pointer, int tk, Pointer<Pointer<Int8>> pszUtf8NamePtr)>()(
-      ptr.ref.lpVtbl, tk, pszUtf8NamePtr);
+  int getNameFromToken(int tk, Pointer<Pointer<Int8>> pszUtf8NamePtr) =>
+      (ptr.ref.vtable + 45)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Uint32 tk,
+                              Pointer<Pointer<Int8>> pszUtf8NamePtr)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, int tk,
+                      Pointer<Pointer<Int8>> pszUtf8NamePtr)>()(
+          ptr.ref.lpVtbl, tk, pszUtf8NamePtr);
 
   int enumUnresolvedMethods(Pointer<Pointer> phEnum, Pointer<Uint32> rMethods,
           int cMax, Pointer<Uint32> pcTokens) =>
-      ptr.ref.vtable
-              .elementAt(46)
+      (ptr.ref.vtable + 46)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1121,8 +1077,7 @@ class IMetaDataImport extends IUnknown {
 
   int getUserString(int stk, Pointer<Utf16> szString, int cchString,
           Pointer<Uint32> pchString) =>
-      ptr.ref.vtable
-              .elementAt(47)
+      (ptr.ref.vtable + 47)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1145,8 +1100,7 @@ class IMetaDataImport extends IUnknown {
           int cchImportName,
           Pointer<Uint32> pchImportName,
           Pointer<Uint32> pmrImportDLL) =>
-      ptr.ref.vtable
-              .elementAt(48)
+      (ptr.ref.vtable + 48)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1178,8 +1132,7 @@ class IMetaDataImport extends IUnknown {
 
   int enumSignatures(Pointer<Pointer> phEnum, Pointer<Uint32> rSignatures,
           int cmax, Pointer<Uint32> pcSignatures) =>
-      ptr.ref.vtable
-              .elementAt(49)
+      (ptr.ref.vtable + 49)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1201,8 +1154,7 @@ class IMetaDataImport extends IUnknown {
 
   int enumTypeSpecs(Pointer<Pointer> phEnum, Pointer<Uint32> rTypeSpecs,
           int cmax, Pointer<Uint32> pcTypeSpecs) =>
-      ptr.ref.vtable
-              .elementAt(50)
+      (ptr.ref.vtable + 50)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1224,8 +1176,7 @@ class IMetaDataImport extends IUnknown {
 
   int enumUserStrings(Pointer<Pointer> phEnum, Pointer<Uint32> rStrings,
           int cmax, Pointer<Uint32> pcStrings) =>
-      ptr.ref.vtable
-              .elementAt(51)
+      (ptr.ref.vtable + 51)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1246,8 +1197,7 @@ class IMetaDataImport extends IUnknown {
           ptr.ref.lpVtbl, phEnum, rStrings, cmax, pcStrings);
 
   int getParamForMethodIndex(int md, int ulParamSeq, Pointer<Uint32> ppd) =>
-      ptr.ref.vtable
-          .elementAt(52)
+      (ptr.ref.vtable + 52)
           .cast<
               Pointer<
                   NativeFunction<
@@ -1265,8 +1215,7 @@ class IMetaDataImport extends IUnknown {
           Pointer<Uint32> rCustomAttributes,
           int cMax,
           Pointer<Uint32> pcCustomAttributes) =>
-      ptr.ref.vtable
-              .elementAt(53)
+      (ptr.ref.vtable + 53)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1296,8 +1245,7 @@ class IMetaDataImport extends IUnknown {
           Pointer<Uint32> ptkType,
           Pointer<Pointer> ppBlob,
           Pointer<Uint32> pcbSize) =>
-      ptr.ref.vtable
-              .elementAt(54)
+      (ptr.ref.vtable + 54)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1321,8 +1269,7 @@ class IMetaDataImport extends IUnknown {
 
   int findTypeRef(
           int tkResolutionScope, Pointer<Utf16> szName, Pointer<Uint32> ptr_) =>
-      ptr.ref.vtable
-              .elementAt(55)
+      (ptr.ref.vtable + 55)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1348,8 +1295,7 @@ class IMetaDataImport extends IUnknown {
           Pointer<Uint32> pdwCPlusTypeFlag,
           Pointer<Pointer> ppValue,
           Pointer<Uint32> pcchValue) =>
-      ptr.ref.vtable
-              .elementAt(56)
+      (ptr.ref.vtable + 56)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1412,8 +1358,7 @@ class IMetaDataImport extends IUnknown {
           Pointer<Uint32> pdwCPlusTypeFlag,
           Pointer<Pointer> ppValue,
           Pointer<Uint32> pcchValue) =>
-      ptr.ref.vtable
-              .elementAt(57)
+      (ptr.ref.vtable + 57)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1475,8 +1420,7 @@ class IMetaDataImport extends IUnknown {
           Pointer<Uint32> rmdOtherMethod,
           int cMax,
           Pointer<Uint32> pcOtherMethod) =>
-      ptr.ref.vtable
-              .elementAt(58)
+      (ptr.ref.vtable + 58)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1531,8 +1475,7 @@ class IMetaDataImport extends IUnknown {
           Pointer<Uint32> pdwCPlusTypeFlag,
           Pointer<Pointer> ppValue,
           Pointer<Uint32> pcchValue) =>
-      ptr.ref.vtable
-              .elementAt(59)
+      (ptr.ref.vtable + 59)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1576,8 +1519,7 @@ class IMetaDataImport extends IUnknown {
 
   int getCustomAttributeByName(int tkObj, Pointer<Utf16> szName,
           Pointer<Pointer> ppData, Pointer<Uint32> pcbData) =>
-      ptr.ref.vtable
-              .elementAt(60)
+      (ptr.ref.vtable + 60)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1593,16 +1535,14 @@ class IMetaDataImport extends IUnknown {
                       Pointer<Pointer> ppData, Pointer<Uint32> pcbData)>()(
           ptr.ref.lpVtbl, tkObj, szName, ppData, pcbData);
 
-  int isValidToken(int tk) => ptr.ref.vtable
-      .elementAt(61)
+  int isValidToken(int tk) => (ptr.ref.vtable + 61)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint32 tk)>>>()
       .value
       .asFunction<int Function(Pointer, int tk)>()(ptr.ref.lpVtbl, tk);
 
   int getNestedClassProps(
           int tdNestedClass, Pointer<Uint32> ptdEnclosingClass) =>
-      ptr.ref.vtable
-              .elementAt(62)
+      (ptr.ref.vtable + 62)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1616,8 +1556,7 @@ class IMetaDataImport extends IUnknown {
 
   int getNativeCallConvFromSig(
           Pointer pvSig, int cbSig, Pointer<Uint32> pCallConv) =>
-      ptr.ref.vtable
-              .elementAt(63)
+      (ptr.ref.vtable + 63)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1629,8 +1568,7 @@ class IMetaDataImport extends IUnknown {
                       Pointer<Uint32> pCallConv)>()(
           ptr.ref.lpVtbl, pvSig, cbSig, pCallConv);
 
-  int isGlobal(int pd, Pointer<Int32> pbGlobal) => ptr.ref.vtable
-          .elementAt(64)
+  int isGlobal(int pd, Pointer<Int32> pbGlobal) => (ptr.ref.vtable + 64)
           .cast<
               Pointer<
                   NativeFunction<

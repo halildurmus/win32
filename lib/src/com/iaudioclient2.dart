@@ -41,23 +41,21 @@ class IAudioClient2 extends IAudioClient {
   factory IAudioClient2.from(IUnknown interface) =>
       IAudioClient2(interface.toInterface(IID_IAudioClient2));
 
-  int isOffloadCapable(int Category, Pointer<Int32> pbOffloadCapable) => ptr
-          .ref.vtable
-          .elementAt(15)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Int32 Category,
-                          Pointer<Int32> pbOffloadCapable)>>>()
-          .value
-          .asFunction<
-              int Function(
-                  Pointer, int Category, Pointer<Int32> pbOffloadCapable)>()(
-      ptr.ref.lpVtbl, Category, pbOffloadCapable);
+  int isOffloadCapable(int Category, Pointer<Int32> pbOffloadCapable) =>
+      (ptr.ref.vtable + 15)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Int32 Category,
+                              Pointer<Int32> pbOffloadCapable)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, int Category,
+                      Pointer<Int32> pbOffloadCapable)>()(
+          ptr.ref.lpVtbl, Category, pbOffloadCapable);
 
   int setClientProperties(Pointer<AudioClientProperties> pProperties) =>
-      ptr.ref.vtable
-              .elementAt(16)
+      (ptr.ref.vtable + 16)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -74,8 +72,7 @@ class IAudioClient2 extends IAudioClient {
           int bEventDriven,
           Pointer<Int64> phnsMinBufferDuration,
           Pointer<Int64> phnsMaxBufferDuration) =>
-      ptr.ref.vtable
-              .elementAt(17)
+      (ptr.ref.vtable + 17)
               .cast<
                   Pointer<
                       NativeFunction<

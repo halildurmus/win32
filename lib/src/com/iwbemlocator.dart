@@ -48,8 +48,7 @@ class IWbemLocator extends IUnknown {
           Pointer<Utf16> strAuthority,
           Pointer<COMObject> pCtx,
           Pointer<Pointer<COMObject>> ppNamespace) =>
-      ptr.ref.vtable
-              .elementAt(3)
+      (ptr.ref.vtable + 3)
               .cast<
                   Pointer<
                       NativeFunction<

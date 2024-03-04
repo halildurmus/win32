@@ -38,8 +38,7 @@ class ISensorDataReport extends IUnknown {
   factory ISensorDataReport.from(IUnknown interface) =>
       ISensorDataReport(interface.toInterface(IID_ISensorDataReport));
 
-  int getTimestamp(Pointer<SYSTEMTIME> pTimeStamp) => ptr.ref.vtable
-      .elementAt(3)
+  int getTimestamp(Pointer<SYSTEMTIME> pTimeStamp) => (ptr.ref.vtable + 3)
       .cast<
           Pointer<
               NativeFunction<
@@ -50,8 +49,7 @@ class ISensorDataReport extends IUnknown {
               Pointer<SYSTEMTIME> pTimeStamp)>()(ptr.ref.lpVtbl, pTimeStamp);
 
   int getSensorValue(Pointer<PROPERTYKEY> pKey, Pointer<PROPVARIANT> pValue) =>
-      ptr.ref.vtable
-          .elementAt(4)
+      (ptr.ref.vtable + 4)
           .cast<
               Pointer<
                   NativeFunction<
@@ -64,8 +62,7 @@ class ISensorDataReport extends IUnknown {
 
   int getSensorValues(
           Pointer<COMObject> pKeys, Pointer<Pointer<COMObject>> ppValues) =>
-      ptr.ref.vtable
-              .elementAt(5)
+      (ptr.ref.vtable + 5)
               .cast<
                   Pointer<
                       NativeFunction<

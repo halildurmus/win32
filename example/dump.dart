@@ -12,7 +12,7 @@ import 'package:win32/win32.dart';
 
 extension SymbolInfoHelper on Pointer<SYMBOL_INFO> {
   int get virtAddress => ref.Address;
-  String get name => cast<Uint8>().elementAt(84).cast<Utf16>().toDartString();
+  String get name => (cast<Uint8>() + 84).cast<Utf16>().toDartString();
 }
 
 final _exportedSymbols = <String, int>{};

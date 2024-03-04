@@ -74,16 +74,16 @@ void drawRect(int rectX, int rectY, int width, int height, int color) {
     for (var x = 0; x < bitmapWidth; x++) {
       if ((x >= rectX && y >= rectY) &&
           (x <= (rectX + width) && y <= (rectY + height))) {
-        ptr.elementAt(pixelOffset).value = blue;
+        (ptr + pixelOffset).value = blue;
         pixelOffset++;
 
-        ptr.elementAt(pixelOffset).value = green;
+        (ptr + pixelOffset).value = green;
         pixelOffset++;
 
-        ptr.elementAt(pixelOffset).value = red;
+        (ptr + pixelOffset).value = red;
         pixelOffset++;
 
-        ptr.elementAt(pixelOffset).value = 0;
+        (ptr + pixelOffset).value = 0;
         pixelOffset++;
       } else {
         // move along
@@ -210,81 +210,81 @@ void setVectorToMemory() {
       if (data[vecY][vecX] == 1) {
         // Apple
         //blue
-        ptr.elementAt(pixelOffset).value = 0;
+        (ptr + pixelOffset).value = 0;
         pixelOffset++;
 
         //green
-        ptr.elementAt(pixelOffset).value = 255;
+        (ptr + pixelOffset).value = 255;
         pixelOffset++;
 
         //red
-        ptr.elementAt(pixelOffset).value = 0;
+        (ptr + pixelOffset).value = 0;
         pixelOffset++;
 
-        ptr.elementAt(pixelOffset).value = 0;
+        (ptr + pixelOffset).value = 0;
         pixelOffset++;
       } else if (data[vecY][vecX] == 2) {
         // snake
         //blue
-        ptr.elementAt(pixelOffset).value = 0;
+        (ptr + pixelOffset).value = 0;
         pixelOffset++;
 
         //green
-        ptr.elementAt(pixelOffset).value = 0;
+        (ptr + pixelOffset).value = 0;
         pixelOffset++;
 
         //red
-        ptr.elementAt(pixelOffset).value = 255;
+        (ptr + pixelOffset).value = 255;
         pixelOffset++;
 
-        ptr.elementAt(pixelOffset).value = 0;
+        (ptr + pixelOffset).value = 0;
         pixelOffset++;
       } else if (data[vecY][vecX] == 3) {
         // ???
         //blue
-        ptr.elementAt(pixelOffset).value = 255;
+        (ptr + pixelOffset).value = 255;
         pixelOffset++;
 
         //green
-        ptr.elementAt(pixelOffset).value = 0;
+        (ptr + pixelOffset).value = 0;
         pixelOffset++;
 
         //red
-        ptr.elementAt(pixelOffset).value = 0;
+        (ptr + pixelOffset).value = 0;
         pixelOffset++;
 
-        ptr.elementAt(pixelOffset).value = 0;
+        (ptr + pixelOffset).value = 0;
         pixelOffset++;
       } else if (data[vecY][vecX] == 4) {
         //set to purple
         //blue
-        ptr.elementAt(pixelOffset).value = 226;
+        (ptr + pixelOffset).value = 226;
         pixelOffset++;
 
         //green
-        ptr.elementAt(pixelOffset).value = 43;
+        (ptr + pixelOffset).value = 43;
         pixelOffset++;
 
         //red
-        ptr.elementAt(pixelOffset).value = 138;
+        (ptr + pixelOffset).value = 138;
         pixelOffset++;
 
-        ptr.elementAt(pixelOffset).value = 0;
+        (ptr + pixelOffset).value = 0;
         pixelOffset++;
       } else {
         //blue
-        ptr.elementAt(pixelOffset).value = 0;
+        (ptr + pixelOffset).value = 0;
         pixelOffset++;
 
         //green
-        ptr.elementAt(pixelOffset).value = 0;
+        (ptr + pixelOffset).value = 0;
         pixelOffset++;
 
         //red
-        ptr.elementAt(pixelOffset).value = 0;
+        (ptr + pixelOffset).value = 0;
         pixelOffset++;
 
-        ptr.elementAt(pixelOffset).value = 0;
+        (ptr + pixelOffset).value = 0;
         pixelOffset++;
       }
       vecX = x ~/ 10;

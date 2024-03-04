@@ -37,21 +37,20 @@ class ISensorCollection extends IUnknown {
   factory ISensorCollection.from(IUnknown interface) =>
       ISensorCollection(interface.toInterface(IID_ISensorCollection));
 
-  int getAt(int ulIndex, Pointer<Pointer<COMObject>> ppSensor) => ptr.ref.vtable
-          .elementAt(3)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Uint32 ulIndex,
-                          Pointer<Pointer<COMObject>> ppSensor)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, int ulIndex,
-                  Pointer<Pointer<COMObject>> ppSensor)>()(
-      ptr.ref.lpVtbl, ulIndex, ppSensor);
+  int getAt(int ulIndex, Pointer<Pointer<COMObject>> ppSensor) =>
+      (ptr.ref.vtable + 3)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Uint32 ulIndex,
+                              Pointer<Pointer<COMObject>> ppSensor)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, int ulIndex,
+                      Pointer<Pointer<COMObject>> ppSensor)>()(
+          ptr.ref.lpVtbl, ulIndex, ppSensor);
 
-  int getCount(Pointer<Uint32> pCount) => ptr.ref.vtable
-          .elementAt(4)
+  int getCount(Pointer<Uint32> pCount) => (ptr.ref.vtable + 4)
           .cast<
               Pointer<
                   NativeFunction<
@@ -60,8 +59,7 @@ class ISensorCollection extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Uint32> pCount)>()(
       ptr.ref.lpVtbl, pCount);
 
-  int add(Pointer<COMObject> pSensor) => ptr.ref.vtable
-          .elementAt(5)
+  int add(Pointer<COMObject> pSensor) => (ptr.ref.vtable + 5)
           .cast<
               Pointer<
                   NativeFunction<
@@ -70,8 +68,7 @@ class ISensorCollection extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<COMObject> pSensor)>()(
       ptr.ref.lpVtbl, pSensor);
 
-  int remove(Pointer<COMObject> pSensor) => ptr.ref.vtable
-          .elementAt(6)
+  int remove(Pointer<COMObject> pSensor) => (ptr.ref.vtable + 6)
           .cast<
               Pointer<
                   NativeFunction<
@@ -80,8 +77,7 @@ class ISensorCollection extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<COMObject> pSensor)>()(
       ptr.ref.lpVtbl, pSensor);
 
-  int removeByID(Pointer<GUID> sensorID) => ptr.ref.vtable
-          .elementAt(7)
+  int removeByID(Pointer<GUID> sensorID) => (ptr.ref.vtable + 7)
           .cast<
               Pointer<
                   NativeFunction<
@@ -90,8 +86,7 @@ class ISensorCollection extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<GUID> sensorID)>()(
       ptr.ref.lpVtbl, sensorID);
 
-  int clear() => ptr.ref.vtable
-      .elementAt(8)
+  int clear() => (ptr.ref.vtable + 8)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);

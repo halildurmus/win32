@@ -37,8 +37,7 @@ class IAppxFile extends IUnknown {
       IAppxFile(interface.toInterface(IID_IAppxFile));
 
   int getCompressionOption(Pointer<Int32> compressionOption) =>
-      ptr.ref.vtable
-              .elementAt(3)
+      (ptr.ref.vtable + 3)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -49,20 +48,19 @@ class IAppxFile extends IUnknown {
                   int Function(Pointer, Pointer<Int32> compressionOption)>()(
           ptr.ref.lpVtbl, compressionOption);
 
-  int getContentType(Pointer<Pointer<Utf16>> contentType) => ptr.ref.vtable
-          .elementAt(4)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<Pointer<Utf16>> contentType)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, Pointer<Pointer<Utf16>> contentType)>()(
-      ptr.ref.lpVtbl, contentType);
+  int getContentType(Pointer<Pointer<Utf16>> contentType) =>
+      (ptr.ref.vtable + 4)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer, Pointer<Pointer<Utf16>> contentType)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<Pointer<Utf16>> contentType)>()(
+          ptr.ref.lpVtbl, contentType);
 
-  int getName(Pointer<Pointer<Utf16>> fileName) => ptr.ref.vtable
-      .elementAt(5)
+  int getName(Pointer<Pointer<Utf16>> fileName) => (ptr.ref.vtable + 5)
       .cast<
           Pointer<
               NativeFunction<
@@ -72,8 +70,7 @@ class IAppxFile extends IUnknown {
           int Function(Pointer,
               Pointer<Pointer<Utf16>> fileName)>()(ptr.ref.lpVtbl, fileName);
 
-  int getSize(Pointer<Uint64> size) => ptr.ref.vtable
-      .elementAt(6)
+  int getSize(Pointer<Uint64> size) => (ptr.ref.vtable + 6)
       .cast<
           Pointer<
               NativeFunction<Int32 Function(Pointer, Pointer<Uint64> size)>>>()
@@ -81,8 +78,7 @@ class IAppxFile extends IUnknown {
       .asFunction<
           int Function(Pointer, Pointer<Uint64> size)>()(ptr.ref.lpVtbl, size);
 
-  int getStream(Pointer<Pointer<COMObject>> stream) => ptr.ref.vtable
-          .elementAt(7)
+  int getStream(Pointer<Pointer<COMObject>> stream) => (ptr.ref.vtable + 7)
           .cast<
               Pointer<
                   NativeFunction<

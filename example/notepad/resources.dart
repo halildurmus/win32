@@ -99,7 +99,7 @@ class NotepadResources {
         fontName: 'MS Sans Serif',
         fontSize: 8);
 
-    idx += pDialog.elementAt(idx).cast<DLGITEMTEMPLATE>().setDialogItem(
+    idx += (pDialog + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
         style: WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON | WS_TABSTOP,
         x: 66,
         y: 80,
@@ -109,7 +109,7 @@ class NotepadResources {
         windowSystemClass: 0x0080,
         text: 'OK');
 
-    idx += pDialog.elementAt(idx).cast<DLGITEMTEMPLATE>().setDialogItem(
+    idx += (pDialog + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
         style: WS_CHILD | WS_VISIBLE | SS_ICON,
         x: 7,
         y: 7,
@@ -119,7 +119,7 @@ class NotepadResources {
         text: 'POPPAD',
         id: IDC_STATIC);
 
-    idx += pDialog.elementAt(idx).cast<DLGITEMTEMPLATE>().setDialogItem(
+    idx += (pDialog + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
         style: WS_CHILD | WS_VISIBLE | SS_CENTER | WS_GROUP,
         x: 40,
         y: 12,
@@ -129,7 +129,7 @@ class NotepadResources {
         text: 'DartNote',
         id: IDC_STATIC);
 
-    idx += pDialog.elementAt(idx).cast<DLGITEMTEMPLATE>().setDialogItem(
+    idx += (pDialog + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
         style: WS_CHILD | WS_VISIBLE | SS_CENTER | WS_GROUP,
         x: 7,
         y: 40,
@@ -139,7 +139,7 @@ class NotepadResources {
         text: 'Dart-based Notepad for Windows',
         id: IDC_STATIC);
 
-    idx += pDialog.elementAt(idx).cast<DLGITEMTEMPLATE>().setDialogItem(
+    idx += (pDialog + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
         style: WS_CHILD | WS_VISIBLE | SS_CENTER | WS_GROUP,
         x: 27,
         y: 52,

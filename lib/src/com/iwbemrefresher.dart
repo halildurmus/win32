@@ -39,8 +39,7 @@ class IWbemRefresher extends IUnknown {
   factory IWbemRefresher.from(IUnknown interface) =>
       IWbemRefresher(interface.toInterface(IID_IWbemRefresher));
 
-  int refresh(int lFlags) => ptr.ref.vtable
-      .elementAt(3)
+  int refresh(int lFlags) => (ptr.ref.vtable + 3)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 lFlags)>>>()
       .value
       .asFunction<int Function(Pointer, int lFlags)>()(ptr.ref.lpVtbl, lFlags);

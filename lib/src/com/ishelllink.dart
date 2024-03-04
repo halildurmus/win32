@@ -38,8 +38,7 @@ class IShellLink extends IUnknown {
 
   int getPath(Pointer<Utf16> pszFile, int cch, Pointer<WIN32_FIND_DATA> pfd,
           int fFlags) =>
-      ptr.ref.vtable
-          .elementAt(3)
+      (ptr.ref.vtable + 3)
           .cast<
               Pointer<
                   NativeFunction<
@@ -54,8 +53,7 @@ class IShellLink extends IUnknown {
                   Pointer<WIN32_FIND_DATA> pfd,
                   int fFlags)>()(ptr.ref.lpVtbl, pszFile, cch, pfd, fFlags);
 
-  int getIDList(Pointer<Pointer<ITEMIDLIST>> ppidl) => ptr.ref.vtable
-          .elementAt(4)
+  int getIDList(Pointer<Pointer<ITEMIDLIST>> ppidl) => (ptr.ref.vtable + 4)
           .cast<
               Pointer<
                   NativeFunction<
@@ -66,8 +64,7 @@ class IShellLink extends IUnknown {
               int Function(Pointer, Pointer<Pointer<ITEMIDLIST>> ppidl)>()(
       ptr.ref.lpVtbl, ppidl);
 
-  int setIDList(Pointer<ITEMIDLIST> pidl) => ptr.ref.vtable
-          .elementAt(5)
+  int setIDList(Pointer<ITEMIDLIST> pidl) => (ptr.ref.vtable + 5)
           .cast<
               Pointer<
                   NativeFunction<
@@ -76,8 +73,7 @@ class IShellLink extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<ITEMIDLIST> pidl)>()(
       ptr.ref.lpVtbl, pidl);
 
-  int getDescription(Pointer<Utf16> pszName, int cch) => ptr.ref.vtable
-          .elementAt(6)
+  int getDescription(Pointer<Utf16> pszName, int cch) => (ptr.ref.vtable + 6)
           .cast<
               Pointer<
                   NativeFunction<
@@ -87,8 +83,7 @@ class IShellLink extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Utf16> pszName, int cch)>()(
       ptr.ref.lpVtbl, pszName, cch);
 
-  int setDescription(Pointer<Utf16> pszName) => ptr.ref.vtable
-          .elementAt(7)
+  int setDescription(Pointer<Utf16> pszName) => (ptr.ref.vtable + 7)
           .cast<
               Pointer<
                   NativeFunction<
@@ -97,19 +92,19 @@ class IShellLink extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Utf16> pszName)>()(
       ptr.ref.lpVtbl, pszName);
 
-  int getWorkingDirectory(Pointer<Utf16> pszDir, int cch) => ptr.ref.vtable
-      .elementAt(8)
-      .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(Pointer, Pointer<Utf16> pszDir, Int32 cch)>>>()
-      .value
-      .asFunction<
-          int Function(Pointer, Pointer<Utf16> pszDir,
-              int cch)>()(ptr.ref.lpVtbl, pszDir, cch);
+  int getWorkingDirectory(Pointer<Utf16> pszDir, int cch) =>
+      (ptr.ref.vtable + 8)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer, Pointer<Utf16> pszDir, Int32 cch)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<Utf16> pszDir, int cch)>()(
+          ptr.ref.lpVtbl, pszDir, cch);
 
-  int setWorkingDirectory(Pointer<Utf16> pszDir) => ptr.ref.vtable
-      .elementAt(9)
+  int setWorkingDirectory(Pointer<Utf16> pszDir) => (ptr.ref.vtable + 9)
       .cast<
           Pointer<
               NativeFunction<Int32 Function(Pointer, Pointer<Utf16> pszDir)>>>()
@@ -118,8 +113,7 @@ class IShellLink extends IUnknown {
           int Function(
               Pointer, Pointer<Utf16> pszDir)>()(ptr.ref.lpVtbl, pszDir);
 
-  int getArguments(Pointer<Utf16> pszArgs, int cch) => ptr.ref.vtable
-          .elementAt(10)
+  int getArguments(Pointer<Utf16> pszArgs, int cch) => (ptr.ref.vtable + 10)
           .cast<
               Pointer<
                   NativeFunction<
@@ -129,8 +123,7 @@ class IShellLink extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Utf16> pszArgs, int cch)>()(
       ptr.ref.lpVtbl, pszArgs, cch);
 
-  int setArguments(Pointer<Utf16> pszArgs) => ptr.ref.vtable
-          .elementAt(11)
+  int setArguments(Pointer<Utf16> pszArgs) => (ptr.ref.vtable + 11)
           .cast<
               Pointer<
                   NativeFunction<
@@ -139,8 +132,7 @@ class IShellLink extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Utf16> pszArgs)>()(
       ptr.ref.lpVtbl, pszArgs);
 
-  int getHotkey(Pointer<Uint16> pwHotkey) => ptr.ref.vtable
-          .elementAt(12)
+  int getHotkey(Pointer<Uint16> pwHotkey) => (ptr.ref.vtable + 12)
           .cast<
               Pointer<
                   NativeFunction<
@@ -149,15 +141,13 @@ class IShellLink extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Uint16> pwHotkey)>()(
       ptr.ref.lpVtbl, pwHotkey);
 
-  int setHotkey(int wHotkey) => ptr.ref.vtable
-      .elementAt(13)
+  int setHotkey(int wHotkey) => (ptr.ref.vtable + 13)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint16 wHotkey)>>>()
       .value
       .asFunction<
           int Function(Pointer, int wHotkey)>()(ptr.ref.lpVtbl, wHotkey);
 
-  int getShowCmd(Pointer<Uint32> piShowCmd) => ptr.ref.vtable
-          .elementAt(14)
+  int getShowCmd(Pointer<Uint32> piShowCmd) => (ptr.ref.vtable + 14)
           .cast<
               Pointer<
                   NativeFunction<
@@ -166,8 +156,7 @@ class IShellLink extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Uint32> piShowCmd)>()(
       ptr.ref.lpVtbl, piShowCmd);
 
-  int setShowCmd(int iShowCmd) => ptr.ref.vtable
-      .elementAt(15)
+  int setShowCmd(int iShowCmd) => (ptr.ref.vtable + 15)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint32 iShowCmd)>>>()
       .value
       .asFunction<
@@ -175,9 +164,7 @@ class IShellLink extends IUnknown {
 
   int getIconLocation(
           Pointer<Utf16> pszIconPath, int cch, Pointer<Int32> piIcon) =>
-      ptr
-              .ref.vtable
-              .elementAt(16)
+      (ptr.ref.vtable + 16)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -189,8 +176,8 @@ class IShellLink extends IUnknown {
                       Pointer<Int32> piIcon)>()(
           ptr.ref.lpVtbl, pszIconPath, cch, piIcon);
 
-  int setIconLocation(Pointer<Utf16> pszIconPath, int iIcon) => ptr.ref.vtable
-          .elementAt(17)
+  int setIconLocation(Pointer<Utf16> pszIconPath, int iIcon) =>
+      (ptr.ref.vtable + 17)
           .cast<
               Pointer<
                   NativeFunction<
@@ -198,12 +185,11 @@ class IShellLink extends IUnknown {
                           Pointer, Pointer<Utf16> pszIconPath, Int32 iIcon)>>>()
           .value
           .asFunction<
-              int Function(Pointer, Pointer<Utf16> pszIconPath, int iIcon)>()(
-      ptr.ref.lpVtbl, pszIconPath, iIcon);
+              int Function(Pointer, Pointer<Utf16> pszIconPath,
+                  int iIcon)>()(ptr.ref.lpVtbl, pszIconPath, iIcon);
 
   int setRelativePath(Pointer<Utf16> pszPathRel, int dwReserved) =>
-      ptr.ref.vtable
-          .elementAt(18)
+      (ptr.ref.vtable + 18)
           .cast<
               Pointer<
                   NativeFunction<
@@ -214,8 +200,7 @@ class IShellLink extends IUnknown {
               int Function(Pointer, Pointer<Utf16> pszPathRel,
                   int dwReserved)>()(ptr.ref.lpVtbl, pszPathRel, dwReserved);
 
-  int resolve(int hwnd, int fFlags) => ptr.ref.vtable
-          .elementAt(19)
+  int resolve(int hwnd, int fFlags) => (ptr.ref.vtable + 19)
           .cast<
               Pointer<
                   NativeFunction<
@@ -224,8 +209,7 @@ class IShellLink extends IUnknown {
           .asFunction<int Function(Pointer, int hwnd, int fFlags)>()(
       ptr.ref.lpVtbl, hwnd, fFlags);
 
-  int setPath(Pointer<Utf16> pszFile) => ptr.ref.vtable
-          .elementAt(20)
+  int setPath(Pointer<Utf16> pszFile) => (ptr.ref.vtable + 20)
           .cast<
               Pointer<
                   NativeFunction<

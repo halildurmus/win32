@@ -39,8 +39,7 @@ class INetworkListManager extends IDispatch {
       INetworkListManager(interface.toInterface(IID_INetworkListManager));
 
   int getNetworks(int Flags, Pointer<Pointer<COMObject>> ppEnumNetwork) =>
-      ptr.ref.vtable
-              .elementAt(7)
+      (ptr.ref.vtable + 7)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -53,8 +52,7 @@ class INetworkListManager extends IDispatch {
           ptr.ref.lpVtbl, Flags, ppEnumNetwork);
 
   int getNetwork(GUID gdNetworkId, Pointer<Pointer<COMObject>> ppNetwork) =>
-      ptr.ref.vtable
-              .elementAt(8)
+      (ptr.ref.vtable + 8)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -67,8 +65,7 @@ class INetworkListManager extends IDispatch {
           ptr.ref.lpVtbl, gdNetworkId, ppNetwork);
 
   int getNetworkConnections(Pointer<Pointer<COMObject>> ppEnum) =>
-      ptr.ref.vtable
-              .elementAt(9)
+      (ptr.ref.vtable + 9)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -82,8 +79,7 @@ class INetworkListManager extends IDispatch {
   int
       getNetworkConnection(GUID gdNetworkConnectionId,
               Pointer<Pointer<COMObject>> ppNetworkConnection) =>
-          ptr.ref.vtable
-                  .elementAt(10)
+          (ptr.ref.vtable + 10)
                   .cast<
                       Pointer<
                           NativeFunction<
@@ -102,8 +98,7 @@ class INetworkListManager extends IDispatch {
     final retValuePtr = calloc<Int16>();
 
     try {
-      final hr = ptr.ref.vtable
-          .elementAt(11)
+      final hr = (ptr.ref.vtable + 11)
           .cast<
               Pointer<
                   NativeFunction<
@@ -126,8 +121,7 @@ class INetworkListManager extends IDispatch {
     final retValuePtr = calloc<Int16>();
 
     try {
-      final hr = ptr.ref.vtable
-          .elementAt(12)
+      final hr = (ptr.ref.vtable + 12)
           .cast<
               Pointer<
                   NativeFunction<
@@ -146,8 +140,7 @@ class INetworkListManager extends IDispatch {
     }
   }
 
-  int getConnectivity(Pointer<Int32> pConnectivity) => ptr.ref.vtable
-          .elementAt(13)
+  int getConnectivity(Pointer<Int32> pConnectivity) => (ptr.ref.vtable + 13)
           .cast<
               Pointer<
                   NativeFunction<
@@ -158,9 +151,7 @@ class INetworkListManager extends IDispatch {
 
   int setSimulatedProfileInfo(
           Pointer<NLM_SIMULATED_PROFILE_INFO> pSimulatedInfo) =>
-      ptr
-              .ref.vtable
-              .elementAt(14)
+      (ptr.ref.vtable + 14)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -174,8 +165,7 @@ class INetworkListManager extends IDispatch {
                       Pointer<NLM_SIMULATED_PROFILE_INFO> pSimulatedInfo)>()(
           ptr.ref.lpVtbl, pSimulatedInfo);
 
-  int clearSimulatedProfileInfo() => ptr.ref.vtable
-      .elementAt(15)
+  int clearSimulatedProfileInfo() => (ptr.ref.vtable + 15)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);

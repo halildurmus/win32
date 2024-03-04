@@ -37,14 +37,12 @@ class IPersistMemory extends IPersist {
   factory IPersistMemory.from(IUnknown interface) =>
       IPersistMemory(interface.toInterface(IID_IPersistMemory));
 
-  int isDirty() => ptr.ref.vtable
-      .elementAt(4)
+  int isDirty() => (ptr.ref.vtable + 4)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  int load(Pointer pMem, int cbSize) => ptr.ref.vtable
-          .elementAt(5)
+  int load(Pointer pMem, int cbSize) => (ptr.ref.vtable + 5)
           .cast<
               Pointer<
                   NativeFunction<
@@ -53,8 +51,7 @@ class IPersistMemory extends IPersist {
           .asFunction<int Function(Pointer, Pointer pMem, int cbSize)>()(
       ptr.ref.lpVtbl, pMem, cbSize);
 
-  int save(Pointer pMem, int fClearDirty, int cbSize) => ptr.ref.vtable
-      .elementAt(6)
+  int save(Pointer pMem, int fClearDirty, int cbSize) => (ptr.ref.vtable + 6)
       .cast<
           Pointer<
               NativeFunction<
@@ -65,8 +62,7 @@ class IPersistMemory extends IPersist {
           int Function(Pointer, Pointer pMem, int fClearDirty,
               int cbSize)>()(ptr.ref.lpVtbl, pMem, fClearDirty, cbSize);
 
-  int getSizeMax(Pointer<Uint32> pCbSize) => ptr.ref.vtable
-          .elementAt(7)
+  int getSizeMax(Pointer<Uint32> pCbSize) => (ptr.ref.vtable + 7)
           .cast<
               Pointer<
                   NativeFunction<
@@ -75,8 +71,7 @@ class IPersistMemory extends IPersist {
           .asFunction<int Function(Pointer, Pointer<Uint32> pCbSize)>()(
       ptr.ref.lpVtbl, pCbSize);
 
-  int initNew() => ptr.ref.vtable
-      .elementAt(8)
+  int initNew() => (ptr.ref.vtable + 8)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);

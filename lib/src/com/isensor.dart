@@ -36,8 +36,7 @@ class ISensor extends IUnknown {
   factory ISensor.from(IUnknown interface) =>
       ISensor(interface.toInterface(IID_ISensor));
 
-  int getID(Pointer<GUID> pID) => ptr.ref.vtable
-      .elementAt(3)
+  int getID(Pointer<GUID> pID) => (ptr.ref.vtable + 3)
       .cast<
           Pointer<NativeFunction<Int32 Function(Pointer, Pointer<GUID> pID)>>>()
       .value
@@ -45,8 +44,7 @@ class ISensor extends IUnknown {
           int Function(Pointer, Pointer<GUID> pID)>()(ptr.ref.lpVtbl, pID);
 
   int getCategory(Pointer<GUID> pSensorCategory) =>
-      ptr.ref.vtable
-              .elementAt(4)
+      (ptr.ref.vtable + 4)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -57,8 +55,7 @@ class ISensor extends IUnknown {
                   int Function(Pointer, Pointer<GUID> pSensorCategory)>()(
           ptr.ref.lpVtbl, pSensorCategory);
 
-  int getType(Pointer<GUID> pSensorType) => ptr.ref.vtable
-          .elementAt(5)
+  int getType(Pointer<GUID> pSensorType) => (ptr.ref.vtable + 5)
           .cast<
               Pointer<
                   NativeFunction<
@@ -67,8 +64,9 @@ class ISensor extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<GUID> pSensorType)>()(
       ptr.ref.lpVtbl, pSensorType);
 
-  int getFriendlyName(Pointer<Pointer<Utf16>> pFriendlyName) => ptr.ref.vtable
-          .elementAt(6)
+  int getFriendlyName(Pointer<Pointer<Utf16>> pFriendlyName) => (ptr
+                  .ref.vtable +
+              6)
           .cast<
               Pointer<
                   NativeFunction<
@@ -80,8 +78,7 @@ class ISensor extends IUnknown {
       ptr.ref.lpVtbl, pFriendlyName);
 
   int getProperty(Pointer<PROPERTYKEY> key, Pointer<PROPVARIANT> pProperty) =>
-      ptr.ref.vtable
-              .elementAt(7)
+      (ptr.ref.vtable + 7)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -95,8 +92,7 @@ class ISensor extends IUnknown {
 
   int getProperties(
           Pointer<COMObject> pKeys, Pointer<Pointer<COMObject>> ppProperties) =>
-      ptr.ref.vtable
-              .elementAt(8)
+      (ptr.ref.vtable + 8)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -108,24 +104,22 @@ class ISensor extends IUnknown {
                       Pointer<Pointer<COMObject>> ppProperties)>()(
           ptr.ref.lpVtbl, pKeys, ppProperties);
 
-  int getSupportedDataFields(Pointer<Pointer<COMObject>> ppDataFields) => ptr
-          .ref.vtable
-          .elementAt(9)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer,
-                          Pointer<Pointer<COMObject>> ppDataFields)>>>()
-          .value
-          .asFunction<
-              int Function(
-                  Pointer, Pointer<Pointer<COMObject>> ppDataFields)>()(
-      ptr.ref.lpVtbl, ppDataFields);
+  int getSupportedDataFields(Pointer<Pointer<COMObject>> ppDataFields) =>
+      (ptr.ref.vtable + 9)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer,
+                              Pointer<Pointer<COMObject>> ppDataFields)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer, Pointer<Pointer<COMObject>> ppDataFields)>()(
+          ptr.ref.lpVtbl, ppDataFields);
 
   int setProperties(Pointer<COMObject> pProperties,
           Pointer<Pointer<COMObject>> ppResults) =>
-      ptr.ref.vtable
-          .elementAt(10)
+      (ptr.ref.vtable + 10)
           .cast<
               Pointer<
                   NativeFunction<
@@ -141,8 +135,7 @@ class ISensor extends IUnknown {
 
   int supportsDataField(
           Pointer<PROPERTYKEY> key, Pointer<Int16> pIsSupported) =>
-      ptr.ref.vtable
-              .elementAt(11)
+      (ptr.ref.vtable + 11)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -154,8 +147,7 @@ class ISensor extends IUnknown {
                       Pointer<Int16> pIsSupported)>()(
           ptr.ref.lpVtbl, key, pIsSupported);
 
-  int getState(Pointer<Int32> pState) => ptr.ref.vtable
-      .elementAt(12)
+  int getState(Pointer<Int32> pState) => (ptr.ref.vtable + 12)
       .cast<
           Pointer<
               NativeFunction<Int32 Function(Pointer, Pointer<Int32> pState)>>>()
@@ -164,8 +156,7 @@ class ISensor extends IUnknown {
           int Function(
               Pointer, Pointer<Int32> pState)>()(ptr.ref.lpVtbl, pState);
 
-  int getData(Pointer<Pointer<COMObject>> ppDataReport) => ptr.ref.vtable
-          .elementAt(13)
+  int getData(Pointer<Pointer<COMObject>> ppDataReport) => (ptr.ref.vtable + 13)
           .cast<
               Pointer<
                   NativeFunction<
@@ -178,8 +169,7 @@ class ISensor extends IUnknown {
       ptr.ref.lpVtbl, ppDataReport);
 
   int supportsEvent(Pointer<GUID> eventGuid, Pointer<Int16> pIsSupported) =>
-      ptr.ref.vtable
-              .elementAt(14)
+      (ptr.ref.vtable + 14)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -193,8 +183,7 @@ class ISensor extends IUnknown {
 
   int getEventInterest(
           Pointer<Pointer<GUID>> ppValues, Pointer<Uint32> pCount) =>
-      ptr.ref.vtable
-          .elementAt(15)
+      (ptr.ref.vtable + 15)
           .cast<
               Pointer<
                   NativeFunction<
@@ -205,20 +194,19 @@ class ISensor extends IUnknown {
               int Function(Pointer, Pointer<Pointer<GUID>> ppValues,
                   Pointer<Uint32> pCount)>()(ptr.ref.lpVtbl, ppValues, pCount);
 
-  int setEventInterest(Pointer<GUID> pValues, int count) => ptr.ref.vtable
-          .elementAt(16)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<GUID> pValues, Uint32 count)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, Pointer<GUID> pValues, int count)>()(
-      ptr.ref.lpVtbl, pValues, count);
+  int setEventInterest(Pointer<GUID> pValues, int count) =>
+      (ptr.ref.vtable + 16)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer, Pointer<GUID> pValues, Uint32 count)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<GUID> pValues, int count)>()(
+          ptr.ref.lpVtbl, pValues, count);
 
-  int setEventSink(Pointer<COMObject> pEvents) => ptr.ref.vtable
-          .elementAt(17)
+  int setEventSink(Pointer<COMObject> pEvents) => (ptr.ref.vtable + 17)
           .cast<
               Pointer<
                   NativeFunction<

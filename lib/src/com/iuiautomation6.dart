@@ -39,8 +39,7 @@ class IUIAutomation6 extends IUIAutomation5 {
       IUIAutomation6(interface.toInterface(IID_IUIAutomation6));
 
   int createEventHandlerGroup(Pointer<Pointer<COMObject>> handlerGroup) =>
-      ptr.ref.vtable
-              .elementAt(70)
+      (ptr.ref.vtable + 70)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -54,8 +53,7 @@ class IUIAutomation6 extends IUIAutomation5 {
 
   int addEventHandlerGroup(
           Pointer<COMObject> element, Pointer<COMObject> handlerGroup) =>
-      ptr.ref.vtable
-              .elementAt(71)
+      (ptr.ref.vtable + 71)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -69,8 +67,7 @@ class IUIAutomation6 extends IUIAutomation5 {
 
   int removeEventHandlerGroup(
           Pointer<COMObject> element, Pointer<COMObject> handlerGroup) =>
-      ptr.ref.vtable
-              .elementAt(72)
+      (ptr.ref.vtable + 72)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -87,8 +84,7 @@ class IUIAutomation6 extends IUIAutomation5 {
 
     try {
       final hr =
-          ptr.ref.vtable
-                  .elementAt(73)
+          (ptr.ref.vtable + 73)
                   .cast<
                       Pointer<
                           NativeFunction<
@@ -112,8 +108,7 @@ class IUIAutomation6 extends IUIAutomation5 {
   }
 
   set connectionRecoveryBehavior(int value) {
-    final hr = ptr.ref.vtable
-            .elementAt(74)
+    final hr = (ptr.ref.vtable + 74)
             .cast<
                 Pointer<
                     NativeFunction<
@@ -131,8 +126,7 @@ class IUIAutomation6 extends IUIAutomation5 {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(75)
+      final hr = (ptr.ref.vtable + 75)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -155,8 +149,7 @@ class IUIAutomation6 extends IUIAutomation5 {
 
   set coalesceEvents(int value) {
     final hr =
-        ptr.ref.vtable
-                .elementAt(76)
+        (ptr.ref.vtable + 76)
                 .cast<
                     Pointer<
                         NativeFunction<
@@ -174,8 +167,7 @@ class IUIAutomation6 extends IUIAutomation5 {
           int scope,
           Pointer<COMObject> cacheRequest,
           Pointer<COMObject> handler) =>
-      ptr.ref.vtable
-              .elementAt(77)
+      (ptr.ref.vtable + 77)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -197,8 +189,7 @@ class IUIAutomation6 extends IUIAutomation5 {
 
   int removeActiveTextPositionChangedEventHandler(
           Pointer<COMObject> element, Pointer<COMObject> handler) =>
-      ptr.ref.vtable
-              .elementAt(78)
+      (ptr.ref.vtable + 78)
               .cast<
                   Pointer<
                       NativeFunction<

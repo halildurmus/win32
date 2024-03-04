@@ -42,8 +42,7 @@ class IUIAutomationTextChildPattern extends IUnknown {
   Pointer<COMObject> get textContainer {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
-        .elementAt(3)
+    final hr = (ptr.ref.vtable + 3)
         .cast<
             Pointer<
                 NativeFunction<
@@ -64,8 +63,7 @@ class IUIAutomationTextChildPattern extends IUnknown {
   Pointer<COMObject> get textRange {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
-            .elementAt(4)
+    final hr = (ptr.ref.vtable + 4)
             .cast<
                 Pointer<
                     NativeFunction<

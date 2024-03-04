@@ -41,8 +41,7 @@ class ISpellChecker2 extends ISpellChecker {
   factory ISpellChecker2.from(IUnknown interface) =>
       ISpellChecker2(interface.toInterface(IID_ISpellChecker2));
 
-  int remove(Pointer<Utf16> word) => ptr.ref.vtable
-      .elementAt(17)
+  int remove(Pointer<Utf16> word) => (ptr.ref.vtable + 17)
       .cast<
           Pointer<
               NativeFunction<Int32 Function(Pointer, Pointer<Utf16> word)>>>()

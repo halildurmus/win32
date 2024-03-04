@@ -40,8 +40,7 @@ class IMetaDataDispenserEx extends IMetaDataDispenser {
       IMetaDataDispenserEx(interface.toInterface(IID_IMetaDataDispenserEx));
 
   int setOption(Pointer<GUID> optionid, Pointer<VARIANT> value) =>
-      ptr.ref.vtable
-          .elementAt(6)
+      (ptr.ref.vtable + 6)
           .cast<
               Pointer<
                   NativeFunction<
@@ -52,9 +51,9 @@ class IMetaDataDispenserEx extends IMetaDataDispenser {
               int Function(Pointer, Pointer<GUID> optionid,
                   Pointer<VARIANT> value)>()(ptr.ref.lpVtbl, optionid, value);
 
-  int getOption(Pointer<GUID> optionid, Pointer<VARIANT> pvalue) =>
-      ptr.ref.vtable
-          .elementAt(7)
+  int getOption(
+          Pointer<GUID> optionid, Pointer<VARIANT> pvalue) =>
+      (ptr.ref.vtable + 7)
           .cast<
               Pointer<
                   NativeFunction<
@@ -67,8 +66,7 @@ class IMetaDataDispenserEx extends IMetaDataDispenser {
 
   int openScopeOnITypeInfo(Pointer<COMObject> pITI, int dwOpenFlags,
           Pointer<GUID> riid, Pointer<Pointer<COMObject>> ppIUnk) =>
-      ptr.ref.vtable
-              .elementAt(8)
+      (ptr.ref.vtable + 8)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -90,8 +88,7 @@ class IMetaDataDispenserEx extends IMetaDataDispenser {
 
   int getCORSystemDirectory(
           Pointer<Utf16> szBuffer, int cchBuffer, Pointer<Uint32> pchBuffer) =>
-      ptr.ref.vtable
-              .elementAt(9)
+      (ptr.ref.vtable + 9)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -111,8 +108,7 @@ class IMetaDataDispenserEx extends IMetaDataDispenser {
           Pointer<Utf16> szName,
           int cchName,
           Pointer<Uint32> pcName) =>
-      ptr.ref.vtable
-              .elementAt(10)
+      (ptr.ref.vtable + 10)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -147,8 +143,7 @@ class IMetaDataDispenserEx extends IMetaDataDispenser {
           Pointer<Utf16> szName,
           int cchName,
           Pointer<Uint32> pcName) =>
-      ptr.ref.vtable
-              .elementAt(11)
+      (ptr.ref.vtable + 11)
               .cast<
                   Pointer<
                       NativeFunction<

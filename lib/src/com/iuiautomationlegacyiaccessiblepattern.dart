@@ -40,8 +40,7 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown {
       IUIAutomationLegacyIAccessiblePattern(
           interface.toInterface(IID_IUIAutomationLegacyIAccessiblePattern));
 
-  int select(int flagsSelect) => ptr.ref.vtable
-      .elementAt(3)
+  int select(int flagsSelect) => (ptr.ref.vtable + 3)
       .cast<
           Pointer<NativeFunction<Int32 Function(Pointer, Int32 flagsSelect)>>>()
       .value
@@ -49,14 +48,12 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown {
           int Function(
               Pointer, int flagsSelect)>()(ptr.ref.lpVtbl, flagsSelect);
 
-  int doDefaultAction() => ptr.ref.vtable
-      .elementAt(4)
+  int doDefaultAction() => (ptr.ref.vtable + 4)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  int setValue(Pointer<Utf16> szValue) => ptr.ref.vtable
-          .elementAt(5)
+  int setValue(Pointer<Utf16> szValue) => (ptr.ref.vtable + 5)
           .cast<
               Pointer<
                   NativeFunction<
@@ -69,8 +66,7 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(6)
+      final hr = (ptr.ref.vtable + 6)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -92,8 +88,7 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(7)
+      final hr = (ptr.ref.vtable + 7)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -117,8 +112,7 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(8)
+      final hr = (ptr.ref.vtable + 8)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -142,8 +136,7 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(9)
+      final hr = (ptr.ref.vtable + 9)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -168,8 +161,7 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown {
     final retValuePtr = calloc<Uint32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(10)
+      final hr = (ptr.ref.vtable + 10)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -191,8 +183,7 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown {
     final retValuePtr = calloc<Uint32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(11)
+      final hr = (ptr.ref.vtable + 11)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -214,8 +205,7 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(12)
+      final hr = (ptr.ref.vtable + 12)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -239,8 +229,7 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(13)
+      final hr = (ptr.ref.vtable + 13)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -262,9 +251,9 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown {
   }
 
   int
-      getCurrentSelection(Pointer<Pointer<COMObject>> pvarSelectedChildren) =>
-          ptr.ref.vtable
-                  .elementAt(14)
+      getCurrentSelection(
+              Pointer<Pointer<COMObject>> pvarSelectedChildren) =>
+          (ptr.ref.vtable + 14)
                   .cast<
                       Pointer<
                           NativeFunction<
@@ -282,8 +271,7 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(15)
+      final hr = (ptr.ref.vtable + 15)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -308,8 +296,7 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(16)
+      final hr = (ptr.ref.vtable + 16)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -331,8 +318,7 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(17)
+      final hr = (ptr.ref.vtable + 17)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -356,8 +342,7 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(18)
+      final hr = (ptr.ref.vtable + 18)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -381,8 +366,7 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(19)
+      final hr = (ptr.ref.vtable + 19)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -407,8 +391,7 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown {
     final retValuePtr = calloc<Uint32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(20)
+      final hr = (ptr.ref.vtable + 20)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -430,8 +413,7 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown {
     final retValuePtr = calloc<Uint32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(21)
+      final hr = (ptr.ref.vtable + 21)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -453,8 +435,7 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(22)
+      final hr = (ptr.ref.vtable + 22)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -478,8 +459,7 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(23)
+      final hr = (ptr.ref.vtable + 23)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -502,8 +482,7 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown {
 
   int
       getCachedSelection(Pointer<Pointer<COMObject>> pvarSelectedChildren) =>
-          ptr.ref.vtable
-                  .elementAt(24)
+          (ptr.ref.vtable + 24)
                   .cast<
                       Pointer<
                           NativeFunction<
@@ -521,8 +500,7 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(25)
+      final hr = (ptr.ref.vtable + 25)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -543,16 +521,16 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown {
     }
   }
 
-  int getIAccessible(Pointer<Pointer<COMObject>> ppAccessible) => ptr.ref.vtable
-          .elementAt(26)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer,
-                          Pointer<Pointer<COMObject>> ppAccessible)>>>()
-          .value
-          .asFunction<
-              int Function(
-                  Pointer, Pointer<Pointer<COMObject>> ppAccessible)>()(
-      ptr.ref.lpVtbl, ppAccessible);
+  int getIAccessible(Pointer<Pointer<COMObject>> ppAccessible) =>
+      (ptr.ref.vtable + 26)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer,
+                              Pointer<Pointer<COMObject>> ppAccessible)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer, Pointer<Pointer<COMObject>> ppAccessible)>()(
+          ptr.ref.lpVtbl, ppAccessible);
 }

@@ -39,17 +39,16 @@ class IUIAutomationCustomNavigationPattern extends IUnknown {
       IUIAutomationCustomNavigationPattern(
           interface.toInterface(IID_IUIAutomationCustomNavigationPattern));
 
-  int navigate(int direction, Pointer<Pointer<COMObject>> pRetVal) => ptr
-          .ref.vtable
-          .elementAt(3)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Int32 direction,
-                          Pointer<Pointer<COMObject>> pRetVal)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, int direction,
-                  Pointer<Pointer<COMObject>> pRetVal)>()(
-      ptr.ref.lpVtbl, direction, pRetVal);
+  int navigate(int direction, Pointer<Pointer<COMObject>> pRetVal) =>
+      (ptr.ref.vtable + 3)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Int32 direction,
+                              Pointer<Pointer<COMObject>> pRetVal)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, int direction,
+                      Pointer<Pointer<COMObject>> pRetVal)>()(
+          ptr.ref.lpVtbl, direction, pRetVal);
 }

@@ -42,8 +42,7 @@ class IUIAutomation2 extends IUIAutomation {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-          .elementAt(58)
+      final hr = (ptr.ref.vtable + 58)
           .cast<
               Pointer<
                   NativeFunction<
@@ -63,8 +62,7 @@ class IUIAutomation2 extends IUIAutomation {
   }
 
   set autoSetFocus(int value) {
-    final hr = ptr.ref.vtable
-        .elementAt(59)
+    final hr = (ptr.ref.vtable + 59)
         .cast<
             Pointer<
                 NativeFunction<Int32 Function(Pointer, Int32 autoSetFocus)>>>()
@@ -79,8 +77,7 @@ class IUIAutomation2 extends IUIAutomation {
     final retValuePtr = calloc<Uint32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(60)
+      final hr = (ptr.ref.vtable + 60)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -99,8 +96,7 @@ class IUIAutomation2 extends IUIAutomation {
   }
 
   set connectionTimeout(int value) {
-    final hr = ptr.ref.vtable
-        .elementAt(61)
+    final hr = (ptr.ref.vtable + 61)
         .cast<
             Pointer<NativeFunction<Int32 Function(Pointer, Uint32 timeout)>>>()
         .value
@@ -114,8 +110,7 @@ class IUIAutomation2 extends IUIAutomation {
     final retValuePtr = calloc<Uint32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(62)
+      final hr = (ptr.ref.vtable + 62)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -134,8 +129,7 @@ class IUIAutomation2 extends IUIAutomation {
   }
 
   set transactionTimeout(int value) {
-    final hr = ptr.ref.vtable
-        .elementAt(63)
+    final hr = (ptr.ref.vtable + 63)
         .cast<
             Pointer<NativeFunction<Int32 Function(Pointer, Uint32 timeout)>>>()
         .value

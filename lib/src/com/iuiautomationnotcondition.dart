@@ -38,8 +38,7 @@ class IUIAutomationNotCondition extends IUIAutomationCondition {
       IUIAutomationNotCondition(
           interface.toInterface(IID_IUIAutomationNotCondition));
 
-  int getChild(Pointer<Pointer<COMObject>> condition) => ptr.ref.vtable
-          .elementAt(3)
+  int getChild(Pointer<Pointer<COMObject>> condition) => (ptr.ref.vtable + 3)
           .cast<
               Pointer<
                   NativeFunction<

@@ -40,8 +40,7 @@ class IShellItem2 extends IShellItem {
       IShellItem2(interface.toInterface(IID_IShellItem2));
 
   int getPropertyStore(int flags, Pointer<GUID> riid, Pointer<Pointer> ppv) =>
-      ptr.ref.vtable
-          .elementAt(8)
+      (ptr.ref.vtable + 8)
           .cast<
               Pointer<
                   NativeFunction<
@@ -57,8 +56,7 @@ class IShellItem2 extends IShellItem {
           Pointer<COMObject> punkCreateObject,
           Pointer<GUID> riid,
           Pointer<Pointer> ppv) =>
-      ptr.ref.vtable
-              .elementAt(9)
+      (ptr.ref.vtable + 9)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -80,8 +78,7 @@ class IShellItem2 extends IShellItem {
 
   int getPropertyStoreForKeys(Pointer<PROPERTYKEY> rgKeys, int cKeys, int flags,
           Pointer<GUID> riid, Pointer<Pointer> ppv) =>
-      ptr.ref.vtable
-              .elementAt(10)
+      (ptr.ref.vtable + 10)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -100,8 +97,7 @@ class IShellItem2 extends IShellItem {
 
   int getPropertyDescriptionList(Pointer<PROPERTYKEY> keyType,
           Pointer<GUID> riid, Pointer<Pointer> ppv) =>
-      ptr.ref.vtable
-          .elementAt(11)
+      (ptr.ref.vtable + 11)
           .cast<
               Pointer<
                   NativeFunction<
@@ -115,8 +111,7 @@ class IShellItem2 extends IShellItem {
                   Pointer<GUID> riid,
                   Pointer<Pointer> ppv)>()(ptr.ref.lpVtbl, keyType, riid, ppv);
 
-  int update(Pointer<COMObject> pbc) => ptr.ref.vtable
-          .elementAt(12)
+  int update(Pointer<COMObject> pbc) => (ptr.ref.vtable + 12)
           .cast<
               Pointer<
                   NativeFunction<
@@ -126,8 +121,7 @@ class IShellItem2 extends IShellItem {
       ptr.ref.lpVtbl, pbc);
 
   int getProperty(Pointer<PROPERTYKEY> key, Pointer<PROPVARIANT> ppropvar) =>
-      ptr.ref.vtable
-              .elementAt(13)
+      (ptr.ref.vtable + 13)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -139,33 +133,32 @@ class IShellItem2 extends IShellItem {
                       Pointer<PROPVARIANT> ppropvar)>()(
           ptr.ref.lpVtbl, key, ppropvar);
 
-  int getCLSID(Pointer<PROPERTYKEY> key, Pointer<GUID> pclsid) => ptr.ref.vtable
-      .elementAt(14)
-      .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(Pointer, Pointer<PROPERTYKEY> key,
-                      Pointer<GUID> pclsid)>>>()
-      .value
-      .asFunction<
-          int Function(Pointer, Pointer<PROPERTYKEY> key,
-              Pointer<GUID> pclsid)>()(ptr.ref.lpVtbl, key, pclsid);
+  int getCLSID(Pointer<PROPERTYKEY> key, Pointer<GUID> pclsid) =>
+      (ptr.ref.vtable + 14)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(Pointer, Pointer<PROPERTYKEY> key,
+                          Pointer<GUID> pclsid)>>>()
+          .value
+          .asFunction<
+              int Function(Pointer, Pointer<PROPERTYKEY> key,
+                  Pointer<GUID> pclsid)>()(ptr.ref.lpVtbl, key, pclsid);
 
-  int getFileTime(Pointer<PROPERTYKEY> key, Pointer<FILETIME> pft) => ptr
-      .ref.vtable
-      .elementAt(15)
-      .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(Pointer, Pointer<PROPERTYKEY> key,
-                      Pointer<FILETIME> pft)>>>()
-      .value
-      .asFunction<
-          int Function(Pointer, Pointer<PROPERTYKEY> key,
-              Pointer<FILETIME> pft)>()(ptr.ref.lpVtbl, key, pft);
+  int getFileTime(Pointer<PROPERTYKEY> key, Pointer<FILETIME> pft) =>
+      (ptr.ref.vtable + 15)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(Pointer, Pointer<PROPERTYKEY> key,
+                          Pointer<FILETIME> pft)>>>()
+          .value
+          .asFunction<
+              int Function(Pointer, Pointer<PROPERTYKEY> key,
+                  Pointer<FILETIME> pft)>()(ptr.ref.lpVtbl, key, pft);
 
-  int getInt32(Pointer<PROPERTYKEY> key, Pointer<Int32> pi) => ptr.ref.vtable
-      .elementAt(16)
+  int getInt32(Pointer<PROPERTYKEY> key, Pointer<Int32> pi) => (ptr.ref.vtable +
+          16)
       .cast<
           Pointer<
               NativeFunction<
@@ -177,8 +170,7 @@ class IShellItem2 extends IShellItem {
               Pointer<Int32> pi)>()(ptr.ref.lpVtbl, key, pi);
 
   int getString(Pointer<PROPERTYKEY> key, Pointer<Pointer<Utf16>> ppsz) =>
-      ptr.ref.vtable
-          .elementAt(17)
+      (ptr.ref.vtable + 17)
           .cast<
               Pointer<
                   NativeFunction<
@@ -189,21 +181,21 @@ class IShellItem2 extends IShellItem {
               int Function(Pointer, Pointer<PROPERTYKEY> key,
                   Pointer<Pointer<Utf16>> ppsz)>()(ptr.ref.lpVtbl, key, ppsz);
 
-  int getUInt32(Pointer<PROPERTYKEY> key, Pointer<Uint32> pui) => ptr.ref.vtable
-      .elementAt(18)
-      .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(Pointer, Pointer<PROPERTYKEY> key,
-                      Pointer<Uint32> pui)>>>()
-      .value
-      .asFunction<
-          int Function(Pointer, Pointer<PROPERTYKEY> key,
-              Pointer<Uint32> pui)>()(ptr.ref.lpVtbl, key, pui);
+  int getUInt32(Pointer<PROPERTYKEY> key, Pointer<Uint32> pui) =>
+      (ptr.ref.vtable + 18)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(Pointer, Pointer<PROPERTYKEY> key,
+                          Pointer<Uint32> pui)>>>()
+          .value
+          .asFunction<
+              int Function(Pointer, Pointer<PROPERTYKEY> key,
+                  Pointer<Uint32> pui)>()(ptr.ref.lpVtbl, key, pui);
 
-  int getUInt64(Pointer<PROPERTYKEY> key, Pointer<Uint64> pull) =>
-      ptr.ref.vtable
-          .elementAt(19)
+  int getUInt64(
+          Pointer<PROPERTYKEY> key, Pointer<Uint64> pull) =>
+      (ptr.ref.vtable + 19)
           .cast<
               Pointer<
                   NativeFunction<
@@ -214,15 +206,15 @@ class IShellItem2 extends IShellItem {
               int Function(Pointer, Pointer<PROPERTYKEY> key,
                   Pointer<Uint64> pull)>()(ptr.ref.lpVtbl, key, pull);
 
-  int getBool(Pointer<PROPERTYKEY> key, Pointer<Int32> pf) => ptr.ref.vtable
-      .elementAt(20)
-      .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(
-                      Pointer, Pointer<PROPERTYKEY> key, Pointer<Int32> pf)>>>()
-      .value
-      .asFunction<
-          int Function(Pointer, Pointer<PROPERTYKEY> key,
-              Pointer<Int32> pf)>()(ptr.ref.lpVtbl, key, pf);
+  int getBool(Pointer<PROPERTYKEY> key, Pointer<Int32> pf) =>
+      (ptr.ref.vtable + 20)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(Pointer, Pointer<PROPERTYKEY> key,
+                          Pointer<Int32> pf)>>>()
+          .value
+          .asFunction<
+              int Function(Pointer, Pointer<PROPERTYKEY> key,
+                  Pointer<Int32> pf)>()(ptr.ref.lpVtbl, key, pf);
 }

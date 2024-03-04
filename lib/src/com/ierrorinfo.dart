@@ -40,8 +40,7 @@ class IErrorInfo extends IUnknown {
   factory IErrorInfo.from(IUnknown interface) =>
       IErrorInfo(interface.toInterface(IID_IErrorInfo));
 
-  int getGUID(Pointer<GUID> pGUID) => ptr.ref.vtable
-      .elementAt(3)
+  int getGUID(Pointer<GUID> pGUID) => (ptr.ref.vtable + 3)
       .cast<
           Pointer<
               NativeFunction<Int32 Function(Pointer, Pointer<GUID> pGUID)>>>()
@@ -49,8 +48,7 @@ class IErrorInfo extends IUnknown {
       .asFunction<
           int Function(Pointer, Pointer<GUID> pGUID)>()(ptr.ref.lpVtbl, pGUID);
 
-  int getSource(Pointer<Pointer<Utf16>> pBstrSource) => ptr.ref.vtable
-          .elementAt(4)
+  int getSource(Pointer<Pointer<Utf16>> pBstrSource) => (ptr.ref.vtable + 4)
           .cast<
               Pointer<
                   NativeFunction<
@@ -61,21 +59,20 @@ class IErrorInfo extends IUnknown {
               int Function(Pointer, Pointer<Pointer<Utf16>> pBstrSource)>()(
       ptr.ref.lpVtbl, pBstrSource);
 
-  int getDescription(Pointer<Pointer<Utf16>> pBstrDescription) => ptr.ref.vtable
-          .elementAt(5)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer,
-                          Pointer<Pointer<Utf16>> pBstrDescription)>>>()
-          .value
-          .asFunction<
-              int Function(
-                  Pointer, Pointer<Pointer<Utf16>> pBstrDescription)>()(
-      ptr.ref.lpVtbl, pBstrDescription);
+  int getDescription(Pointer<Pointer<Utf16>> pBstrDescription) =>
+      (ptr.ref.vtable + 5)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer,
+                              Pointer<Pointer<Utf16>> pBstrDescription)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer, Pointer<Pointer<Utf16>> pBstrDescription)>()(
+          ptr.ref.lpVtbl, pBstrDescription);
 
-  int getHelpFile(Pointer<Pointer<Utf16>> pBstrHelpFile) => ptr.ref.vtable
-          .elementAt(6)
+  int getHelpFile(Pointer<Pointer<Utf16>> pBstrHelpFile) => (ptr.ref.vtable + 6)
           .cast<
               Pointer<
                   NativeFunction<
@@ -87,8 +84,7 @@ class IErrorInfo extends IUnknown {
       ptr.ref.lpVtbl, pBstrHelpFile);
 
   int getHelpContext(Pointer<Uint32> pdwHelpContext) =>
-      ptr.ref.vtable
-              .elementAt(7)
+      (ptr.ref.vtable + 7)
               .cast<
                   Pointer<
                       NativeFunction<

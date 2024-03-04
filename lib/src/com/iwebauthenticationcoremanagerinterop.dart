@@ -43,8 +43,7 @@ class IWebAuthenticationCoreManagerInterop extends IInspectable {
 
   int requestTokenForWindowAsync(int appWindow, Pointer<COMObject> request,
           Pointer<GUID> riid, Pointer<Pointer> asyncInfo) =>
-      ptr.ref.vtable
-              .elementAt(6)
+      (ptr.ref.vtable + 6)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -70,8 +69,7 @@ class IWebAuthenticationCoreManagerInterop extends IInspectable {
           Pointer<COMObject> webAccount,
           Pointer<GUID> riid,
           Pointer<Pointer> asyncInfo) =>
-      ptr.ref.vtable
-              .elementAt(7)
+      (ptr.ref.vtable + 7)
               .cast<
                   Pointer<
                       NativeFunction<

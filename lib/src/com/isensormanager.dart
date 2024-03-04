@@ -39,8 +39,7 @@ class ISensorManager extends IUnknown {
 
   int getSensorsByCategory(Pointer<GUID> sensorCategory,
           Pointer<Pointer<COMObject>> ppSensorsFound) =>
-      ptr.ref.vtable
-              .elementAt(3)
+      (ptr.ref.vtable + 3)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -54,8 +53,7 @@ class ISensorManager extends IUnknown {
 
   int getSensorsByType(Pointer<GUID> sensorType,
           Pointer<Pointer<COMObject>> ppSensorsFound) =>
-      ptr.ref.vtable
-              .elementAt(4)
+      (ptr.ref.vtable + 4)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -69,9 +67,7 @@ class ISensorManager extends IUnknown {
 
   int getSensorByID(
           Pointer<GUID> sensorID, Pointer<Pointer<COMObject>> ppSensor) =>
-      ptr
-              .ref.vtable
-              .elementAt(5)
+      (ptr.ref.vtable + 5)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -83,8 +79,7 @@ class ISensorManager extends IUnknown {
                       Pointer<Pointer<COMObject>> ppSensor)>()(
           ptr.ref.lpVtbl, sensorID, ppSensor);
 
-  int setEventSink(Pointer<COMObject> pEvents) => ptr.ref.vtable
-          .elementAt(6)
+  int setEventSink(Pointer<COMObject> pEvents) => (ptr.ref.vtable + 6)
           .cast<
               Pointer<
                   NativeFunction<
@@ -95,8 +90,7 @@ class ISensorManager extends IUnknown {
 
   int requestPermissions(
           int hParent, Pointer<COMObject> pSensors, int fModal) =>
-      ptr.ref.vtable
-          .elementAt(7)
+      (ptr.ref.vtable + 7)
           .cast<
               Pointer<
                   NativeFunction<

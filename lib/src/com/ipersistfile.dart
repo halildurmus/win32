@@ -40,14 +40,12 @@ class IPersistFile extends IPersist {
   factory IPersistFile.from(IUnknown interface) =>
       IPersistFile(interface.toInterface(IID_IPersistFile));
 
-  int isDirty() => ptr.ref.vtable
-      .elementAt(4)
+  int isDirty() => (ptr.ref.vtable + 4)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  int load(Pointer<Utf16> pszFileName, int dwMode) => ptr.ref.vtable
-      .elementAt(5)
+  int load(Pointer<Utf16> pszFileName, int dwMode) => (ptr.ref.vtable + 5)
       .cast<
           Pointer<
               NativeFunction<
@@ -58,8 +56,7 @@ class IPersistFile extends IPersist {
           int Function(Pointer, Pointer<Utf16> pszFileName,
               int dwMode)>()(ptr.ref.lpVtbl, pszFileName, dwMode);
 
-  int save(Pointer<Utf16> pszFileName, int fRemember) => ptr.ref.vtable
-      .elementAt(6)
+  int save(Pointer<Utf16> pszFileName, int fRemember) => (ptr.ref.vtable + 6)
       .cast<
           Pointer<
               NativeFunction<
@@ -70,8 +67,7 @@ class IPersistFile extends IPersist {
           int Function(Pointer, Pointer<Utf16> pszFileName,
               int fRemember)>()(ptr.ref.lpVtbl, pszFileName, fRemember);
 
-  int saveCompleted(Pointer<Utf16> pszFileName) => ptr.ref.vtable
-          .elementAt(7)
+  int saveCompleted(Pointer<Utf16> pszFileName) => (ptr.ref.vtable + 7)
           .cast<
               Pointer<
                   NativeFunction<
@@ -80,8 +76,7 @@ class IPersistFile extends IPersist {
           .asFunction<int Function(Pointer, Pointer<Utf16> pszFileName)>()(
       ptr.ref.lpVtbl, pszFileName);
 
-  int getCurFile(Pointer<Pointer<Utf16>> ppszFileName) => ptr.ref.vtable
-          .elementAt(8)
+  int getCurFile(Pointer<Pointer<Utf16>> ppszFileName) => (ptr.ref.vtable + 8)
           .cast<
               Pointer<
                   NativeFunction<

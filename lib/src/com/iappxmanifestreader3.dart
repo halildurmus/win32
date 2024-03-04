@@ -40,8 +40,7 @@ class IAppxManifestReader3 extends IAppxManifestReader2 {
 
   int getCapabilitiesByCapabilityClass(
           int capabilityClass, Pointer<Pointer<COMObject>> capabilities) =>
-      ptr.ref.vtable
-              .elementAt(13)
+      (ptr.ref.vtable + 13)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -56,8 +55,7 @@ class IAppxManifestReader3 extends IAppxManifestReader2 {
   int
       getTargetDeviceFamilies(
               Pointer<Pointer<COMObject>> targetDeviceFamilies) =>
-          ptr.ref.vtable
-                  .elementAt(14)
+          (ptr.ref.vtable + 14)
                   .cast<
                       Pointer<
                           NativeFunction<

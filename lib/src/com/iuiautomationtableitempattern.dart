@@ -39,22 +39,20 @@ class IUIAutomationTableItemPattern extends IUnknown {
       IUIAutomationTableItemPattern(
           interface.toInterface(IID_IUIAutomationTableItemPattern));
 
-  int getCurrentRowHeaderItems(Pointer<Pointer<COMObject>> retVal) => ptr
-          .ref.vtable
-          .elementAt(3)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<Pointer<COMObject>> retVal)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, Pointer<Pointer<COMObject>> retVal)>()(
-      ptr.ref.lpVtbl, retVal);
+  int getCurrentRowHeaderItems(Pointer<Pointer<COMObject>> retVal) =>
+      (ptr.ref.vtable + 3)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer, Pointer<Pointer<COMObject>> retVal)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<Pointer<COMObject>> retVal)>()(
+          ptr.ref.lpVtbl, retVal);
 
   int getCurrentColumnHeaderItems(Pointer<Pointer<COMObject>> retVal) =>
-      ptr.ref.vtable
-              .elementAt(4)
+      (ptr.ref.vtable + 4)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -66,8 +64,7 @@ class IUIAutomationTableItemPattern extends IUnknown {
           ptr.ref.lpVtbl, retVal);
 
   int getCachedRowHeaderItems(Pointer<Pointer<COMObject>> retVal) =>
-      ptr.ref.vtable
-              .elementAt(5)
+      (ptr.ref.vtable + 5)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -79,8 +76,7 @@ class IUIAutomationTableItemPattern extends IUnknown {
           ptr.ref.lpVtbl, retVal);
 
   int getCachedColumnHeaderItems(Pointer<Pointer<COMObject>> retVal) =>
-      ptr.ref.vtable
-              .elementAt(6)
+      (ptr.ref.vtable + 6)
               .cast<
                   Pointer<
                       NativeFunction<

@@ -39,8 +39,7 @@ class IUIAutomationTextRange2 extends IUIAutomationTextRange {
       IUIAutomationTextRange2(
           interface.toInterface(IID_IUIAutomationTextRange2));
 
-  int showContextMenu() => ptr.ref.vtable
-      .elementAt(21)
+  int showContextMenu() => (ptr.ref.vtable + 21)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);

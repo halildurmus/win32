@@ -38,16 +38,14 @@ class IEnumWbemClassObject extends IUnknown {
   factory IEnumWbemClassObject.from(IUnknown interface) =>
       IEnumWbemClassObject(interface.toInterface(IID_IEnumWbemClassObject));
 
-  int reset() => ptr.ref.vtable
-      .elementAt(3)
+  int reset() => (ptr.ref.vtable + 3)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
   int next(int lTimeout, int uCount, Pointer<Pointer<COMObject>> apObjects,
           Pointer<Uint32> puReturned) =>
-      ptr.ref.vtable
-              .elementAt(4)
+      (ptr.ref.vtable + 4)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -67,8 +65,7 @@ class IEnumWbemClassObject extends IUnknown {
                       Pointer<Uint32> puReturned)>()(
           ptr.ref.lpVtbl, lTimeout, uCount, apObjects, puReturned);
 
-  int nextAsync(int uCount, Pointer<COMObject> pSink) => ptr.ref.vtable
-          .elementAt(5)
+  int nextAsync(int uCount, Pointer<COMObject> pSink) => (ptr.ref.vtable + 5)
           .cast<
               Pointer<
                   NativeFunction<
@@ -79,8 +76,7 @@ class IEnumWbemClassObject extends IUnknown {
               int Function(Pointer, int uCount, Pointer<COMObject> pSink)>()(
       ptr.ref.lpVtbl, uCount, pSink);
 
-  int clone(Pointer<Pointer<COMObject>> ppEnum) => ptr.ref.vtable
-          .elementAt(6)
+  int clone(Pointer<Pointer<COMObject>> ppEnum) => (ptr.ref.vtable + 6)
           .cast<
               Pointer<
                   NativeFunction<
@@ -92,8 +88,7 @@ class IEnumWbemClassObject extends IUnknown {
       ptr.ref.lpVtbl, ppEnum);
 
   int skip(int lTimeout, int nCount) =>
-      ptr.ref.vtable
-              .elementAt(7)
+      (ptr.ref.vtable + 7)
               .cast<
                   Pointer<
                       NativeFunction<

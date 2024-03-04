@@ -36,24 +36,22 @@ class IDesktopWallpaper extends IUnknown {
   factory IDesktopWallpaper.from(IUnknown interface) =>
       IDesktopWallpaper(interface.toInterface(IID_IDesktopWallpaper));
 
-  int setWallpaper(Pointer<Utf16> monitorID, Pointer<Utf16> wallpaper) => ptr
-          .ref.vtable
-          .elementAt(3)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<Utf16> monitorID,
-                          Pointer<Utf16> wallpaper)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, Pointer<Utf16> monitorID,
-                  Pointer<Utf16> wallpaper)>()(
-      ptr.ref.lpVtbl, monitorID, wallpaper);
+  int setWallpaper(Pointer<Utf16> monitorID, Pointer<Utf16> wallpaper) =>
+      (ptr.ref.vtable + 3)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Pointer<Utf16> monitorID,
+                              Pointer<Utf16> wallpaper)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<Utf16> monitorID,
+                      Pointer<Utf16> wallpaper)>()(
+          ptr.ref.lpVtbl, monitorID, wallpaper);
 
   int getWallpaper(
           Pointer<Utf16> monitorID, Pointer<Pointer<Utf16>> wallpaper) =>
-      ptr.ref.vtable
-              .elementAt(4)
+      (ptr.ref.vtable + 4)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -67,9 +65,7 @@ class IDesktopWallpaper extends IUnknown {
 
   int getMonitorDevicePathAt(
           int monitorIndex, Pointer<Pointer<Utf16>> monitorID) =>
-      ptr
-              .ref.vtable
-              .elementAt(5)
+      (ptr.ref.vtable + 5)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -81,8 +77,7 @@ class IDesktopWallpaper extends IUnknown {
                       Pointer<Pointer<Utf16>> monitorID)>()(
           ptr.ref.lpVtbl, monitorIndex, monitorID);
 
-  int getMonitorDevicePathCount(Pointer<Uint32> count) => ptr.ref.vtable
-      .elementAt(6)
+  int getMonitorDevicePathCount(Pointer<Uint32> count) => (ptr.ref.vtable + 6)
       .cast<
           Pointer<
               NativeFunction<Int32 Function(Pointer, Pointer<Uint32> count)>>>()
@@ -92,8 +87,7 @@ class IDesktopWallpaper extends IUnknown {
               Pointer, Pointer<Uint32> count)>()(ptr.ref.lpVtbl, count);
 
   int getMonitorRECT(Pointer<Utf16> monitorID, Pointer<RECT> displayRect) =>
-      ptr.ref.vtable
-              .elementAt(7)
+      (ptr.ref.vtable + 7)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -105,14 +99,12 @@ class IDesktopWallpaper extends IUnknown {
                       Pointer<RECT> displayRect)>()(
           ptr.ref.lpVtbl, monitorID, displayRect);
 
-  int setBackgroundColor(int color) => ptr.ref.vtable
-      .elementAt(8)
+  int setBackgroundColor(int color) => (ptr.ref.vtable + 8)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint32 color)>>>()
       .value
       .asFunction<int Function(Pointer, int color)>()(ptr.ref.lpVtbl, color);
 
-  int getBackgroundColor(Pointer<Uint32> color) => ptr.ref.vtable
-      .elementAt(9)
+  int getBackgroundColor(Pointer<Uint32> color) => (ptr.ref.vtable + 9)
       .cast<
           Pointer<
               NativeFunction<Int32 Function(Pointer, Pointer<Uint32> color)>>>()
@@ -121,15 +113,13 @@ class IDesktopWallpaper extends IUnknown {
           int Function(
               Pointer, Pointer<Uint32> color)>()(ptr.ref.lpVtbl, color);
 
-  int setPosition(int position) => ptr.ref.vtable
-      .elementAt(10)
+  int setPosition(int position) => (ptr.ref.vtable + 10)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 position)>>>()
       .value
       .asFunction<
           int Function(Pointer, int position)>()(ptr.ref.lpVtbl, position);
 
-  int getPosition(Pointer<Int32> position) => ptr.ref.vtable
-          .elementAt(11)
+  int getPosition(Pointer<Int32> position) => (ptr.ref.vtable + 11)
           .cast<
               Pointer<
                   NativeFunction<
@@ -138,8 +128,7 @@ class IDesktopWallpaper extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Int32> position)>()(
       ptr.ref.lpVtbl, position);
 
-  int setSlideshow(Pointer<COMObject> items) => ptr.ref.vtable
-          .elementAt(12)
+  int setSlideshow(Pointer<COMObject> items) => (ptr.ref.vtable + 12)
           .cast<
               Pointer<
                   NativeFunction<
@@ -148,8 +137,7 @@ class IDesktopWallpaper extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<COMObject> items)>()(
       ptr.ref.lpVtbl, items);
 
-  int getSlideshow(Pointer<Pointer<COMObject>> items) => ptr.ref.vtable
-          .elementAt(13)
+  int getSlideshow(Pointer<Pointer<COMObject>> items) => (ptr.ref.vtable + 13)
           .cast<
               Pointer<
                   NativeFunction<
@@ -160,8 +148,8 @@ class IDesktopWallpaper extends IUnknown {
               int Function(Pointer, Pointer<Pointer<COMObject>> items)>()(
       ptr.ref.lpVtbl, items);
 
-  int setSlideshowOptions(int options, int slideshowTick) => ptr.ref.vtable
-          .elementAt(14)
+  int setSlideshowOptions(int options, int slideshowTick) => (ptr.ref.vtable +
+              14)
           .cast<
               Pointer<
                   NativeFunction<
@@ -173,8 +161,7 @@ class IDesktopWallpaper extends IUnknown {
 
   int getSlideshowOptions(
           Pointer<Int32> options, Pointer<Uint32> slideshowTick) =>
-      ptr.ref.vtable
-              .elementAt(15)
+      (ptr.ref.vtable + 15)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -186,9 +173,9 @@ class IDesktopWallpaper extends IUnknown {
                       Pointer<Uint32> slideshowTick)>()(
           ptr.ref.lpVtbl, options, slideshowTick);
 
-  int advanceSlideshow(Pointer<Utf16> monitorID, int direction) => ptr
-      .ref.vtable
-      .elementAt(16)
+  int advanceSlideshow(Pointer<Utf16> monitorID, int direction) => (ptr
+              .ref.vtable +
+          16)
       .cast<
           Pointer<
               NativeFunction<
@@ -199,8 +186,7 @@ class IDesktopWallpaper extends IUnknown {
           int Function(Pointer, Pointer<Utf16> monitorID,
               int direction)>()(ptr.ref.lpVtbl, monitorID, direction);
 
-  int getStatus(Pointer<Int32> state) => ptr.ref.vtable
-      .elementAt(17)
+  int getStatus(Pointer<Int32> state) => (ptr.ref.vtable + 17)
       .cast<
           Pointer<
               NativeFunction<Int32 Function(Pointer, Pointer<Int32> state)>>>()
@@ -208,8 +194,7 @@ class IDesktopWallpaper extends IUnknown {
       .asFunction<
           int Function(Pointer, Pointer<Int32> state)>()(ptr.ref.lpVtbl, state);
 
-  int enable(int enable) => ptr.ref.vtable
-      .elementAt(18)
+  int enable(int enable) => (ptr.ref.vtable + 18)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 enable)>>>()
       .value
       .asFunction<int Function(Pointer, int enable)>()(ptr.ref.lpVtbl, enable);

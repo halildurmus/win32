@@ -41,8 +41,7 @@ class IUnknown {
   });
 
   /// Decrements the reference count of the object referenced by [ptr].
-  static int _release(Pointer<COMObject> ptr) => ptr.ref.vtable
-      .elementAt(2)
+  static int _release(Pointer<COMObject> ptr) => (ptr.ref.vtable + 2)
       .cast<Pointer<NativeFunction<Uint32 Function(VTablePointer lpVtbl)>>>()
       .value
       .asFunction<int Function(VTablePointer lpVtbl)>()(ptr.ref.lpVtbl);
@@ -55,25 +54,24 @@ class IUnknown {
   ///
   /// If the COM object implements the interface, then it returns a pointer to
   /// that interface after calling `addRef` on it.
-  int queryInterface(Pointer<GUID> riid, Pointer<Pointer> ppvObject) => ptr
-      .ref.vtable
-      .elementAt(0)
-      .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(Pointer, Pointer<GUID> riid,
-                      Pointer<Pointer> ppvObject)>>>()
-      .value
-      .asFunction<
-          int Function(Pointer, Pointer<GUID> riid,
-              Pointer<Pointer> ppvObject)>()(ptr.ref.lpVtbl, riid, ppvObject);
+  int queryInterface(Pointer<GUID> riid, Pointer<Pointer> ppvObject) =>
+      (ptr.ref.vtable + 0)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Pointer<GUID> riid,
+                              Pointer<Pointer> ppvObject)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<GUID> riid,
+                      Pointer<Pointer> ppvObject)>()(
+          ptr.ref.lpVtbl, riid, ppvObject);
 
   /// Increments the reference count for an interface pointer to a COM object.
   ///
   /// You should call this method whenever you make a copy of an interface
   /// pointer.
-  int addRef() => ptr.ref.vtable
-      .elementAt(1)
+  int addRef() => (ptr.ref.vtable + 1)
       .cast<Pointer<NativeFunction<Uint32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
@@ -87,8 +85,7 @@ class IUnknown {
   ///
   /// Calling this method with [Finalizer] attached may result in use after
   /// free and cause the process to crash.
-  int release() => ptr.ref.vtable
-      .elementAt(2)
+  int release() => (ptr.ref.vtable + 2)
       .cast<Pointer<NativeFunction<Uint32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);

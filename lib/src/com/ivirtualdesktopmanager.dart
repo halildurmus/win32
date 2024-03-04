@@ -39,8 +39,7 @@ class IVirtualDesktopManager extends IUnknown {
 
   int isWindowOnCurrentVirtualDesktop(
           int topLevelWindow, Pointer<Int32> onCurrentDesktop) =>
-      ptr.ref.vtable
-              .elementAt(3)
+      (ptr.ref.vtable + 3)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -53,8 +52,7 @@ class IVirtualDesktopManager extends IUnknown {
           ptr.ref.lpVtbl, topLevelWindow, onCurrentDesktop);
 
   int getWindowDesktopId(int topLevelWindow, Pointer<GUID> desktopId) =>
-      ptr.ref.vtable
-              .elementAt(4)
+      (ptr.ref.vtable + 4)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -66,19 +64,18 @@ class IVirtualDesktopManager extends IUnknown {
                       Pointer, int topLevelWindow, Pointer<GUID> desktopId)>()(
           ptr.ref.lpVtbl, topLevelWindow, desktopId);
 
-  int moveWindowToDesktop(int topLevelWindow, Pointer<GUID> desktopId) => ptr
-          .ref.vtable
-          .elementAt(5)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, IntPtr topLevelWindow,
-                          Pointer<GUID> desktopId)>>>()
-          .value
-          .asFunction<
-              int Function(
-                  Pointer, int topLevelWindow, Pointer<GUID> desktopId)>()(
-      ptr.ref.lpVtbl, topLevelWindow, desktopId);
+  int moveWindowToDesktop(int topLevelWindow, Pointer<GUID> desktopId) =>
+      (ptr.ref.vtable + 5)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, IntPtr topLevelWindow,
+                              Pointer<GUID> desktopId)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer, int topLevelWindow, Pointer<GUID> desktopId)>()(
+          ptr.ref.lpVtbl, topLevelWindow, desktopId);
 }
 
 /// @nodoc

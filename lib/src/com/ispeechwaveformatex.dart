@@ -39,8 +39,7 @@ class ISpeechWaveFormatEx extends IDispatch {
     final retValuePtr = calloc<Int16>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(7)
+      final hr = (ptr.ref.vtable + 7)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -59,8 +58,7 @@ class ISpeechWaveFormatEx extends IDispatch {
   }
 
   set formatTag(int value) {
-    final hr = ptr.ref.vtable
-        .elementAt(8)
+    final hr = (ptr.ref.vtable + 8)
         .cast<
             Pointer<NativeFunction<Int32 Function(Pointer, Int16 FormatTag)>>>()
         .value
@@ -74,8 +72,7 @@ class ISpeechWaveFormatEx extends IDispatch {
     final retValuePtr = calloc<Int16>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(9)
+      final hr = (ptr.ref.vtable + 9)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -94,8 +91,7 @@ class ISpeechWaveFormatEx extends IDispatch {
   }
 
   set channels(int value) {
-    final hr = ptr.ref.vtable
-        .elementAt(10)
+    final hr = (ptr.ref.vtable + 10)
         .cast<
             Pointer<NativeFunction<Int32 Function(Pointer, Int16 Channels)>>>()
         .value
@@ -109,8 +105,7 @@ class ISpeechWaveFormatEx extends IDispatch {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-          .elementAt(11)
+      final hr = (ptr.ref.vtable + 11)
           .cast<
               Pointer<
                   NativeFunction<
@@ -130,8 +125,7 @@ class ISpeechWaveFormatEx extends IDispatch {
   }
 
   set samplesPerSec(int value) {
-    final hr = ptr.ref.vtable
-        .elementAt(12)
+    final hr = (ptr.ref.vtable + 12)
         .cast<
             Pointer<
                 NativeFunction<Int32 Function(Pointer, Int32 SamplesPerSec)>>>()
@@ -146,8 +140,7 @@ class ISpeechWaveFormatEx extends IDispatch {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(13)
+      final hr = (ptr.ref.vtable + 13)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -168,8 +161,7 @@ class ISpeechWaveFormatEx extends IDispatch {
   }
 
   set avgBytesPerSec(int value) {
-    final hr = ptr.ref.vtable
-            .elementAt(14)
+    final hr = (ptr.ref.vtable + 14)
             .cast<
                 Pointer<
                     NativeFunction<
@@ -185,8 +177,7 @@ class ISpeechWaveFormatEx extends IDispatch {
     final retValuePtr = calloc<Int16>();
 
     try {
-      final hr = ptr.ref.vtable
-          .elementAt(15)
+      final hr = (ptr.ref.vtable + 15)
           .cast<
               Pointer<
                   NativeFunction<
@@ -206,8 +197,7 @@ class ISpeechWaveFormatEx extends IDispatch {
   }
 
   set blockAlign(int value) {
-    final hr = ptr.ref.vtable
-        .elementAt(16)
+    final hr = (ptr.ref.vtable + 16)
         .cast<
             Pointer<
                 NativeFunction<Int32 Function(Pointer, Int16 BlockAlign)>>>()
@@ -222,8 +212,7 @@ class ISpeechWaveFormatEx extends IDispatch {
     final retValuePtr = calloc<Int16>();
 
     try {
-      final hr = ptr.ref.vtable
-          .elementAt(17)
+      final hr = (ptr.ref.vtable + 17)
           .cast<
               Pointer<
                   NativeFunction<
@@ -243,8 +232,7 @@ class ISpeechWaveFormatEx extends IDispatch {
   }
 
   set bitsPerSample(int value) {
-    final hr = ptr.ref.vtable
-        .elementAt(18)
+    final hr = (ptr.ref.vtable + 18)
         .cast<
             Pointer<
                 NativeFunction<Int32 Function(Pointer, Int16 BitsPerSample)>>>()
@@ -259,8 +247,7 @@ class ISpeechWaveFormatEx extends IDispatch {
     final retValuePtr = calloc<VARIANT>();
 
     try {
-      final hr = ptr.ref.vtable
-          .elementAt(19)
+      final hr = (ptr.ref.vtable + 19)
           .cast<
               Pointer<
                   NativeFunction<
@@ -280,8 +267,7 @@ class ISpeechWaveFormatEx extends IDispatch {
   }
 
   set extraData(VARIANT value) {
-    final hr = ptr.ref.vtable
-        .elementAt(20)
+    final hr = (ptr.ref.vtable + 20)
         .cast<
             Pointer<
                 NativeFunction<Int32 Function(Pointer, VARIANT ExtraData)>>>()

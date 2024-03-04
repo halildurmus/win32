@@ -41,8 +41,7 @@ class IUIAutomationElement2 extends IUIAutomationElement {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(85)
+      final hr = (ptr.ref.vtable + 85)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -64,8 +63,7 @@ class IUIAutomationElement2 extends IUIAutomationElement {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(86)
+      final hr = (ptr.ref.vtable + 86)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -87,8 +85,7 @@ class IUIAutomationElement2 extends IUIAutomationElement {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(87)
+      final hr = (ptr.ref.vtable + 87)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -110,8 +107,7 @@ class IUIAutomationElement2 extends IUIAutomationElement {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(88)
+      final hr = (ptr.ref.vtable + 88)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -132,8 +128,7 @@ class IUIAutomationElement2 extends IUIAutomationElement {
   Pointer<COMObject> get currentFlowsFrom {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
-            .elementAt(89)
+    final hr = (ptr.ref.vtable + 89)
             .cast<
                 Pointer<
                     NativeFunction<
@@ -153,8 +148,7 @@ class IUIAutomationElement2 extends IUIAutomationElement {
   Pointer<COMObject> get cachedFlowsFrom {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
-            .elementAt(90)
+    final hr = (ptr.ref.vtable + 90)
             .cast<
                 Pointer<
                     NativeFunction<

@@ -44,8 +44,7 @@ class IWbemServices extends IUnknown {
           Pointer<COMObject> pCtx,
           Pointer<Pointer<COMObject>> ppWorkingNamespace,
           Pointer<Pointer<COMObject>> ppResult) =>
-      ptr.ref.vtable
-              .elementAt(3)
+      (ptr.ref.vtable + 3)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -67,8 +66,7 @@ class IWbemServices extends IUnknown {
                       Pointer<Pointer<COMObject>> ppResult)>()(ptr.ref.lpVtbl,
           strNamespace, lFlags, pCtx, ppWorkingNamespace, ppResult);
 
-  int cancelAsyncCall(Pointer<COMObject> pSink) => ptr.ref.vtable
-          .elementAt(4)
+  int cancelAsyncCall(Pointer<COMObject> pSink) => (ptr.ref.vtable + 4)
           .cast<
               Pointer<
                   NativeFunction<
@@ -80,8 +78,7 @@ class IWbemServices extends IUnknown {
   int
       queryObjectSink(
               int lFlags, Pointer<Pointer<COMObject>> ppResponseHandler) =>
-          ptr.ref.vtable
-                  .elementAt(5)
+          (ptr.ref.vtable + 5)
                   .cast<
                       Pointer<
                           NativeFunction<
@@ -102,8 +99,7 @@ class IWbemServices extends IUnknown {
           Pointer<COMObject> pCtx,
           Pointer<Pointer<COMObject>> ppObject,
           Pointer<Pointer<COMObject>> ppCallResult) =>
-      ptr.ref.vtable
-              .elementAt(6)
+      (ptr.ref.vtable + 6)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -127,8 +123,7 @@ class IWbemServices extends IUnknown {
 
   int getObjectAsync(Pointer<Utf16> strObjectPath, int lFlags,
           Pointer<COMObject> pCtx, Pointer<COMObject> pResponseHandler) =>
-      ptr.ref.vtable
-              .elementAt(7)
+      (ptr.ref.vtable + 7)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -150,8 +145,7 @@ class IWbemServices extends IUnknown {
 
   int putClass(Pointer<COMObject> pObject, int lFlags, Pointer<COMObject> pCtx,
           Pointer<Pointer<COMObject>> ppCallResult) =>
-      ptr.ref.vtable
-              .elementAt(8)
+      (ptr.ref.vtable + 8)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -173,8 +167,7 @@ class IWbemServices extends IUnknown {
 
   int putClassAsync(Pointer<COMObject> pObject, int lFlags,
           Pointer<COMObject> pCtx, Pointer<COMObject> pResponseHandler) =>
-      ptr.ref.vtable
-              .elementAt(9)
+      (ptr.ref.vtable + 9)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -196,8 +189,7 @@ class IWbemServices extends IUnknown {
 
   int deleteClass(Pointer<Utf16> strClass, int lFlags, Pointer<COMObject> pCtx,
           Pointer<Pointer<COMObject>> ppCallResult) =>
-      ptr.ref.vtable
-              .elementAt(10)
+      (ptr.ref.vtable + 10)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -219,8 +211,7 @@ class IWbemServices extends IUnknown {
 
   int deleteClassAsync(Pointer<Utf16> strClass, int lFlags,
           Pointer<COMObject> pCtx, Pointer<COMObject> pResponseHandler) =>
-      ptr.ref.vtable
-              .elementAt(11)
+      (ptr.ref.vtable + 11)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -242,8 +233,7 @@ class IWbemServices extends IUnknown {
 
   int createClassEnum(Pointer<Utf16> strSuperclass, int lFlags,
           Pointer<COMObject> pCtx, Pointer<Pointer<COMObject>> ppEnum) =>
-      ptr.ref.vtable
-              .elementAt(12)
+      (ptr.ref.vtable + 12)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -265,8 +255,7 @@ class IWbemServices extends IUnknown {
 
   int createClassEnumAsync(Pointer<Utf16> strSuperclass, int lFlags,
           Pointer<COMObject> pCtx, Pointer<COMObject> pResponseHandler) =>
-      ptr.ref.vtable
-              .elementAt(13)
+      (ptr.ref.vtable + 13)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -288,8 +277,7 @@ class IWbemServices extends IUnknown {
 
   int putInstance(Pointer<COMObject> pInst, int lFlags, Pointer<COMObject> pCtx,
           Pointer<Pointer<COMObject>> ppCallResult) =>
-      ptr.ref.vtable
-              .elementAt(14)
+      (ptr.ref.vtable + 14)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -311,8 +299,7 @@ class IWbemServices extends IUnknown {
 
   int putInstanceAsync(Pointer<COMObject> pInst, int lFlags,
           Pointer<COMObject> pCtx, Pointer<COMObject> pResponseHandler) =>
-      ptr.ref.vtable
-              .elementAt(15)
+      (ptr.ref.vtable + 15)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -334,8 +321,7 @@ class IWbemServices extends IUnknown {
 
   int deleteInstance(Pointer<Utf16> strObjectPath, int lFlags,
           Pointer<COMObject> pCtx, Pointer<Pointer<COMObject>> ppCallResult) =>
-      ptr.ref.vtable
-              .elementAt(16)
+      (ptr.ref.vtable + 16)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -357,8 +343,7 @@ class IWbemServices extends IUnknown {
 
   int deleteInstanceAsync(Pointer<Utf16> strObjectPath, int lFlags,
           Pointer<COMObject> pCtx, Pointer<COMObject> pResponseHandler) =>
-      ptr.ref.vtable
-              .elementAt(17)
+      (ptr.ref.vtable + 17)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -380,8 +365,7 @@ class IWbemServices extends IUnknown {
 
   int createInstanceEnum(Pointer<Utf16> strFilter, int lFlags,
           Pointer<COMObject> pCtx, Pointer<Pointer<COMObject>> ppEnum) =>
-      ptr.ref.vtable
-              .elementAt(18)
+      (ptr.ref.vtable + 18)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -403,8 +387,7 @@ class IWbemServices extends IUnknown {
 
   int createInstanceEnumAsync(Pointer<Utf16> strFilter, int lFlags,
           Pointer<COMObject> pCtx, Pointer<COMObject> pResponseHandler) =>
-      ptr.ref.vtable
-              .elementAt(19)
+      (ptr.ref.vtable + 19)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -430,8 +413,7 @@ class IWbemServices extends IUnknown {
           int lFlags,
           Pointer<COMObject> pCtx,
           Pointer<Pointer<COMObject>> ppEnum) =>
-      ptr.ref.vtable
-              .elementAt(20)
+      (ptr.ref.vtable + 20)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -459,8 +441,7 @@ class IWbemServices extends IUnknown {
           int lFlags,
           Pointer<COMObject> pCtx,
           Pointer<COMObject> pResponseHandler) =>
-      ptr.ref.vtable
-              .elementAt(21)
+      (ptr.ref.vtable + 21)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -488,8 +469,7 @@ class IWbemServices extends IUnknown {
           int lFlags,
           Pointer<COMObject> pCtx,
           Pointer<Pointer<COMObject>> ppEnum) =>
-      ptr.ref.vtable
-              .elementAt(22)
+      (ptr.ref.vtable + 22)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -517,8 +497,7 @@ class IWbemServices extends IUnknown {
           int lFlags,
           Pointer<COMObject> pCtx,
           Pointer<COMObject> pResponseHandler) =>
-      ptr.ref.vtable
-              .elementAt(23)
+      (ptr.ref.vtable + 23)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -548,8 +527,7 @@ class IWbemServices extends IUnknown {
           Pointer<COMObject> pInParams,
           Pointer<Pointer<COMObject>> ppOutParams,
           Pointer<Pointer<COMObject>> ppCallResult) =>
-      ptr.ref.vtable
-              .elementAt(24)
+      (ptr.ref.vtable + 24)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -589,8 +567,7 @@ class IWbemServices extends IUnknown {
           Pointer<COMObject> pCtx,
           Pointer<COMObject> pInParams,
           Pointer<COMObject> pResponseHandler) =>
-      ptr.ref.vtable
-              .elementAt(25)
+      (ptr.ref.vtable + 25)
               .cast<
                   Pointer<
                       NativeFunction<

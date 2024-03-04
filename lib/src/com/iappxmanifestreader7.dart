@@ -38,9 +38,9 @@ class IAppxManifestReader7 extends IUnknown {
       IAppxManifestReader7(interface.toInterface(IID_IAppxManifestReader7));
 
   int
-      getDriverDependencies(Pointer<Pointer<COMObject>> driverDependencies) =>
-          ptr.ref.vtable
-                  .elementAt(3)
+      getDriverDependencies(
+              Pointer<Pointer<COMObject>> driverDependencies) =>
+          (ptr.ref.vtable + 3)
                   .cast<
                       Pointer<
                           NativeFunction<
@@ -56,9 +56,7 @@ class IAppxManifestReader7 extends IUnknown {
 
   int getOSPackageDependencies(
           Pointer<Pointer<COMObject>> osPackageDependencies) =>
-      ptr
-              .ref.vtable
-              .elementAt(4)
+      (ptr.ref.vtable + 4)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -74,8 +72,7 @@ class IAppxManifestReader7 extends IUnknown {
 
   int getHostRuntimeDependencies(
           Pointer<Pointer<COMObject>> hostRuntimeDependencies) =>
-      ptr.ref.vtable
-              .elementAt(5)
+      (ptr.ref.vtable + 5)
               .cast<
                   Pointer<
                       NativeFunction<

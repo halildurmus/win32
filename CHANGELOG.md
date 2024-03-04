@@ -1,3 +1,8 @@
+## 5.3.0-wip
+
+- Migrate away from `.elementAt` (#XXX)
+- Bump minimum required Dart version to `3.3.0`
+
 ## 5.2.0
 
 - Migrate examples utilizing `Pointer.fromFunction` to use

@@ -46,8 +46,7 @@ class IAudioCaptureClient extends IUnknown {
           Pointer<Uint32> pdwFlags,
           Pointer<Uint64> pu64DevicePosition,
           Pointer<Uint64> pu64QPCPosition) =>
-      ptr.ref.vtable
-              .elementAt(3)
+      (ptr.ref.vtable + 3)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -74,8 +73,7 @@ class IAudioCaptureClient extends IUnknown {
           pu64DevicePosition,
           pu64QPCPosition);
 
-  int releaseBuffer(int NumFramesRead) => ptr.ref.vtable
-      .elementAt(4)
+  int releaseBuffer(int NumFramesRead) => (ptr.ref.vtable + 4)
       .cast<
           Pointer<
               NativeFunction<Int32 Function(Pointer, Uint32 NumFramesRead)>>>()
@@ -84,16 +82,16 @@ class IAudioCaptureClient extends IUnknown {
           int Function(
               Pointer, int NumFramesRead)>()(ptr.ref.lpVtbl, NumFramesRead);
 
-  int getNextPacketSize(Pointer<Uint32> pNumFramesInNextPacket) => ptr
-          .ref.vtable
-          .elementAt(5)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<Uint32> pNumFramesInNextPacket)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, Pointer<Uint32> pNumFramesInNextPacket)>()(
-      ptr.ref.lpVtbl, pNumFramesInNextPacket);
+  int getNextPacketSize(Pointer<Uint32> pNumFramesInNextPacket) =>
+      (ptr.ref.vtable + 5)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer,
+                              Pointer<Uint32> pNumFramesInNextPacket)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer, Pointer<Uint32> pNumFramesInNextPacket)>()(
+          ptr.ref.lpVtbl, pNumFramesInNextPacket);
 }

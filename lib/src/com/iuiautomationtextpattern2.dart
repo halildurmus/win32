@@ -40,8 +40,7 @@ class IUIAutomationTextPattern2 extends IUIAutomationTextPattern {
 
   int rangeFromAnnotation(
           Pointer<COMObject> annotation, Pointer<Pointer<COMObject>> range) =>
-      ptr.ref.vtable
-              .elementAt(9)
+      (ptr.ref.vtable + 9)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -55,8 +54,7 @@ class IUIAutomationTextPattern2 extends IUIAutomationTextPattern {
 
   int getCaretRange(
           Pointer<Int32> isActive, Pointer<Pointer<COMObject>> range) =>
-      ptr.ref.vtable
-              .elementAt(10)
+      (ptr.ref.vtable + 10)
               .cast<
                   Pointer<
                       NativeFunction<

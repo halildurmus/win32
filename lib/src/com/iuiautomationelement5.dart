@@ -42,8 +42,7 @@ class IUIAutomationElement5 extends IUIAutomationElement4 {
     final retValuePtr = calloc<Uint32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(104)
+      final hr = (ptr.ref.vtable + 104)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -65,8 +64,7 @@ class IUIAutomationElement5 extends IUIAutomationElement4 {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(105)
+      final hr = (ptr.ref.vtable + 105)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -90,8 +88,7 @@ class IUIAutomationElement5 extends IUIAutomationElement4 {
     final retValuePtr = calloc<Uint32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(106)
+      final hr = (ptr.ref.vtable + 106)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -113,8 +110,7 @@ class IUIAutomationElement5 extends IUIAutomationElement4 {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(107)
+      final hr = (ptr.ref.vtable + 107)
               .cast<
                   Pointer<
                       NativeFunction<

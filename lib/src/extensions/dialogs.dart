@@ -10,7 +10,6 @@ import 'package:ffi/ffi.dart';
 
 import '../constants.dart';
 import '../structs.g.dart';
-
 import 'set_string.dart';
 
 extension DialogTemplateHelper on Pointer<DLGTEMPLATE> {
@@ -65,8 +64,7 @@ extension DialogTemplateHelper on Pointer<DLGTEMPLATE> {
     // the system treats the array as a null-terminated Unicode string that
     // specifies the name of a registered window class.
     if (windowClass.isNotEmpty) {
-      idx +=
-          (ptr.elementAt(idx).cast<Utf16>().setString(windowClass) / 2).ceil();
+      idx += ((ptr + idx).cast<Utf16>().setString(windowClass) / 2).ceil();
     } else {
       if (windowSystemClass != 0) {
         ptr[idx++] = 0xFFFF;
@@ -83,7 +81,7 @@ extension DialogTemplateHelper on Pointer<DLGTEMPLATE> {
     if (title.isEmpty) {
       ptr[idx++] = 0x0000;
     } else {
-      idx += (ptr.elementAt(idx).cast<Utf16>().setString(title) / 2).ceil();
+      idx += ((ptr + idx).cast<Utf16>().setString(title) / 2).ceil();
     }
 
     /// Following the title array is a 16-bit point size value and the typeface
@@ -92,7 +90,7 @@ extension DialogTemplateHelper on Pointer<DLGTEMPLATE> {
     /// null-terminated Unicode string.
     if ((style & DS_SETFONT == DS_SETFONT) && (fontName.isNotEmpty)) {
       ptr[idx++] = fontSize;
-      idx += (ptr.elementAt(idx).cast<Utf16>().setString(fontName) / 2).ceil();
+      idx += ((ptr + idx).cast<Utf16>().setString(fontName) / 2).ceil();
     }
 
     // Each DLGITEMTEMPLATE structure in the template must be aligned on a DWORD
@@ -150,8 +148,7 @@ extension DialogItemTemplateHelper on Pointer<DLGITEMTEMPLATE> {
     ///   0x0081: Edit 0x0082: Static 0x0083: List box 0x0084: Scroll bar
     ///   0x0085: Combo box
     if (windowClass.isNotEmpty) {
-      idx +=
-          (ptr.elementAt(idx).cast<Utf16>().setString(windowClass) / 2).ceil();
+      idx += ((ptr + idx).cast<Utf16>().setString(windowClass) / 2).ceil();
     } else {
       ptr[idx++] = 0xFFFF;
       ptr[idx++] = windowSystemClass;
@@ -159,7 +156,7 @@ extension DialogItemTemplateHelper on Pointer<DLGITEMTEMPLATE> {
 
     // Following the class array is a title array that contains the initial text
     // or resource identifier of the control.
-    idx += (ptr.elementAt(idx).cast<Utf16>().setString(text) / 2).ceil();
+    idx += ((ptr + idx).cast<Utf16>().setString(text) / 2).ceil();
 
     // The creation data array begins at the next WORD boundary after the title
     // array. This creation data can be of any size and format. If the first
@@ -167,10 +164,10 @@ extension DialogItemTemplateHelper on Pointer<DLGITEMTEMPLATE> {
     // bytes, of the creation data (including the size word).
     if (creationDataBytes.isNotEmpty) {
       ptr[idx++] = creationDataBytes.length + 1;
-      ptr
-        ..elementAt(idx)
-        ..cast<Uint8>()
-        ..asTypedList(creationDataBytes.length).setAll(0, creationDataBytes);
+      (ptr + idx)
+          .cast<Uint8>()
+          .asTypedList(creationDataBytes.length)
+          .setAll(0, creationDataBytes);
       idx += (creationDataBytes.length / 2).ceil();
     } else {
       ptr[idx++] = 0x0000;

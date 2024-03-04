@@ -42,8 +42,7 @@ class IChannelAudioVolume extends IUnknown {
   factory IChannelAudioVolume.from(IUnknown interface) =>
       IChannelAudioVolume(interface.toInterface(IID_IChannelAudioVolume));
 
-  int getChannelCount(Pointer<Uint32> pdwCount) => ptr.ref.vtable
-          .elementAt(3)
+  int getChannelCount(Pointer<Uint32> pdwCount) => (ptr.ref.vtable + 3)
           .cast<
               Pointer<
                   NativeFunction<
@@ -54,8 +53,7 @@ class IChannelAudioVolume extends IUnknown {
 
   int setChannelVolume(
           int dwIndex, double fLevel, Pointer<GUID> EventContext) =>
-      ptr.ref.vtable
-              .elementAt(4)
+      (ptr.ref.vtable + 4)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -67,8 +65,8 @@ class IChannelAudioVolume extends IUnknown {
                       Pointer<GUID> EventContext)>()(
           ptr.ref.lpVtbl, dwIndex, fLevel, EventContext);
 
-  int getChannelVolume(int dwIndex, Pointer<Float> pfLevel) => ptr.ref.vtable
-          .elementAt(5)
+  int getChannelVolume(int dwIndex, Pointer<Float> pfLevel) =>
+      (ptr.ref.vtable + 5)
           .cast<
               Pointer<
                   NativeFunction<
@@ -76,13 +74,12 @@ class IChannelAudioVolume extends IUnknown {
                           Pointer, Uint32 dwIndex, Pointer<Float> pfLevel)>>>()
           .value
           .asFunction<
-              int Function(Pointer, int dwIndex, Pointer<Float> pfLevel)>()(
-      ptr.ref.lpVtbl, dwIndex, pfLevel);
+              int Function(Pointer, int dwIndex,
+                  Pointer<Float> pfLevel)>()(ptr.ref.lpVtbl, dwIndex, pfLevel);
 
   int setAllVolumes(
           int dwCount, Pointer<Float> pfVolumes, Pointer<GUID> EventContext) =>
-      ptr.ref.vtable
-              .elementAt(6)
+      (ptr.ref.vtable + 6)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -97,8 +94,8 @@ class IChannelAudioVolume extends IUnknown {
                       Pointer<GUID> EventContext)>()(
           ptr.ref.lpVtbl, dwCount, pfVolumes, EventContext);
 
-  int getAllVolumes(int dwCount, Pointer<Float> pfVolumes) => ptr.ref.vtable
-      .elementAt(7)
+  int getAllVolumes(int dwCount, Pointer<Float> pfVolumes) => (ptr.ref.vtable +
+          7)
       .cast<
           Pointer<
               NativeFunction<

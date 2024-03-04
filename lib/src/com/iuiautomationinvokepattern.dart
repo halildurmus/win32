@@ -38,8 +38,7 @@ class IUIAutomationInvokePattern extends IUnknown {
       IUIAutomationInvokePattern(
           interface.toInterface(IID_IUIAutomationInvokePattern));
 
-  int invoke() => ptr.ref.vtable
-      .elementAt(3)
+  int invoke() => (ptr.ref.vtable + 3)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);

@@ -42,8 +42,7 @@ class IUIAutomationDragPattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(3)
+      final hr = (ptr.ref.vtable + 3)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -65,8 +64,7 @@ class IUIAutomationDragPattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(4)
+      final hr = (ptr.ref.vtable + 4)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -88,8 +86,7 @@ class IUIAutomationDragPattern extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(5)
+      final hr = (ptr.ref.vtable + 5)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -113,8 +110,7 @@ class IUIAutomationDragPattern extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(6)
+      final hr = (ptr.ref.vtable + 6)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -138,8 +134,7 @@ class IUIAutomationDragPattern extends IUnknown {
     final retValuePtr = calloc<Pointer<SAFEARRAY>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(7)
+      final hr = (ptr.ref.vtable + 7)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -163,8 +158,7 @@ class IUIAutomationDragPattern extends IUnknown {
     final retValuePtr = calloc<Pointer<SAFEARRAY>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(8)
+      final hr = (ptr.ref.vtable + 8)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -184,9 +178,9 @@ class IUIAutomationDragPattern extends IUnknown {
     }
   }
 
-  int getCurrentGrabbedItems(Pointer<Pointer<COMObject>> retVal) =>
-      ptr.ref.vtable
-              .elementAt(9)
+  int getCurrentGrabbedItems(
+          Pointer<Pointer<COMObject>> retVal) =>
+      (ptr.ref.vtable + 9)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -197,9 +191,9 @@ class IUIAutomationDragPattern extends IUnknown {
                   int Function(Pointer, Pointer<Pointer<COMObject>> retVal)>()(
           ptr.ref.lpVtbl, retVal);
 
-  int getCachedGrabbedItems(Pointer<Pointer<COMObject>> retVal) =>
-      ptr.ref.vtable
-              .elementAt(10)
+  int getCachedGrabbedItems(
+          Pointer<Pointer<COMObject>> retVal) =>
+      (ptr.ref.vtable + 10)
               .cast<
                   Pointer<
                       NativeFunction<

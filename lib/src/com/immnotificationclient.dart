@@ -40,8 +40,7 @@ class IMMNotificationClient extends IUnknown {
       IMMNotificationClient(interface.toInterface(IID_IMMNotificationClient));
 
   int onDeviceStateChanged(Pointer<Utf16> pwstrDeviceId, int dwNewState) =>
-      ptr.ref.vtable
-          .elementAt(3)
+      (ptr.ref.vtable + 3)
           .cast<
               Pointer<
                   NativeFunction<
@@ -52,8 +51,7 @@ class IMMNotificationClient extends IUnknown {
               int Function(Pointer, Pointer<Utf16> pwstrDeviceId,
                   int dwNewState)>()(ptr.ref.lpVtbl, pwstrDeviceId, dwNewState);
 
-  int onDeviceAdded(Pointer<Utf16> pwstrDeviceId) => ptr.ref.vtable
-          .elementAt(4)
+  int onDeviceAdded(Pointer<Utf16> pwstrDeviceId) => (ptr.ref.vtable + 4)
           .cast<
               Pointer<
                   NativeFunction<
@@ -62,8 +60,7 @@ class IMMNotificationClient extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Utf16> pwstrDeviceId)>()(
       ptr.ref.lpVtbl, pwstrDeviceId);
 
-  int onDeviceRemoved(Pointer<Utf16> pwstrDeviceId) => ptr.ref.vtable
-          .elementAt(5)
+  int onDeviceRemoved(Pointer<Utf16> pwstrDeviceId) => (ptr.ref.vtable + 5)
           .cast<
               Pointer<
                   NativeFunction<
@@ -74,8 +71,7 @@ class IMMNotificationClient extends IUnknown {
 
   int onDefaultDeviceChanged(
           int flow, int role, Pointer<Utf16> pwstrDefaultDeviceId) =>
-      ptr.ref.vtable
-              .elementAt(6)
+      (ptr.ref.vtable + 6)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -88,8 +84,7 @@ class IMMNotificationClient extends IUnknown {
           ptr.ref.lpVtbl, flow, role, pwstrDefaultDeviceId);
 
   int onPropertyValueChanged(Pointer<Utf16> pwstrDeviceId, PROPERTYKEY key) =>
-      ptr.ref.vtable
-          .elementAt(7)
+      (ptr.ref.vtable + 7)
           .cast<
               Pointer<
                   NativeFunction<

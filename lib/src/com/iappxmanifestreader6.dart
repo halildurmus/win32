@@ -39,8 +39,7 @@ class IAppxManifestReader6 extends IUnknown {
 
   int getIsNonQualifiedResourcePackage(
           Pointer<Int32> isNonQualifiedResourcePackage) =>
-      ptr.ref.vtable
-              .elementAt(3)
+      (ptr.ref.vtable + 3)
               .cast<
                   Pointer<
                       NativeFunction<

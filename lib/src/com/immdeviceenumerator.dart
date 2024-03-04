@@ -39,8 +39,7 @@ class IMMDeviceEnumerator extends IUnknown {
 
   int enumAudioEndpoints(int dataFlow, int dwStateMask,
           Pointer<Pointer<COMObject>> ppDevices) =>
-      ptr.ref.vtable
-              .elementAt(3)
+      (ptr.ref.vtable + 3)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -57,8 +56,7 @@ class IMMDeviceEnumerator extends IUnknown {
 
   int getDefaultAudioEndpoint(
           int dataFlow, int role, Pointer<Pointer<COMObject>> ppEndpoint) =>
-      ptr.ref.vtable
-              .elementAt(4)
+      (ptr.ref.vtable + 4)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -71,8 +69,7 @@ class IMMDeviceEnumerator extends IUnknown {
           ptr.ref.lpVtbl, dataFlow, role, ppEndpoint);
 
   int getDevice(Pointer<Utf16> pwstrId, Pointer<Pointer<COMObject>> ppDevice) =>
-      ptr.ref.vtable
-              .elementAt(5)
+      (ptr.ref.vtable + 5)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -84,9 +81,9 @@ class IMMDeviceEnumerator extends IUnknown {
                       Pointer<Pointer<COMObject>> ppDevice)>()(
           ptr.ref.lpVtbl, pwstrId, ppDevice);
 
-  int registerEndpointNotificationCallback(Pointer<COMObject> pClient) => ptr
-          .ref.vtable
-          .elementAt(6)
+  int registerEndpointNotificationCallback(Pointer<COMObject> pClient) => (ptr
+                  .ref.vtable +
+              6)
           .cast<
               Pointer<
                   NativeFunction<
@@ -95,9 +92,9 @@ class IMMDeviceEnumerator extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<COMObject> pClient)>()(
       ptr.ref.lpVtbl, pClient);
 
-  int unregisterEndpointNotificationCallback(Pointer<COMObject> pClient) => ptr
-          .ref.vtable
-          .elementAt(7)
+  int unregisterEndpointNotificationCallback(Pointer<COMObject> pClient) => (ptr
+                  .ref.vtable +
+              7)
           .cast<
               Pointer<
                   NativeFunction<

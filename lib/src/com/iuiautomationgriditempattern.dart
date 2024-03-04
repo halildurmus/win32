@@ -42,8 +42,7 @@ class IUIAutomationGridItemPattern extends IUnknown {
   Pointer<COMObject> get currentContainingGrid {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
-            .elementAt(3)
+    final hr = (ptr.ref.vtable + 3)
             .cast<
                 Pointer<
                     NativeFunction<
@@ -64,8 +63,7 @@ class IUIAutomationGridItemPattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(4)
+      final hr = (ptr.ref.vtable + 4)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -87,8 +85,7 @@ class IUIAutomationGridItemPattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(5)
+      final hr = (ptr.ref.vtable + 5)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -110,8 +107,7 @@ class IUIAutomationGridItemPattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(6)
+      final hr = (ptr.ref.vtable + 6)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -133,8 +129,7 @@ class IUIAutomationGridItemPattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(7)
+      final hr = (ptr.ref.vtable + 7)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -155,8 +150,7 @@ class IUIAutomationGridItemPattern extends IUnknown {
   Pointer<COMObject> get cachedContainingGrid {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
-            .elementAt(8)
+    final hr = (ptr.ref.vtable + 8)
             .cast<
                 Pointer<
                     NativeFunction<
@@ -177,8 +171,7 @@ class IUIAutomationGridItemPattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(9)
+      final hr = (ptr.ref.vtable + 9)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -200,8 +193,7 @@ class IUIAutomationGridItemPattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(10)
+      final hr = (ptr.ref.vtable + 10)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -223,8 +215,7 @@ class IUIAutomationGridItemPattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(11)
+      final hr = (ptr.ref.vtable + 11)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -246,8 +237,7 @@ class IUIAutomationGridItemPattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(12)
+      final hr = (ptr.ref.vtable + 12)
               .cast<
                   Pointer<
                       NativeFunction<

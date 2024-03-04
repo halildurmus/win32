@@ -38,8 +38,7 @@ class ISequentialStream extends IUnknown {
   factory ISequentialStream.from(IUnknown interface) =>
       ISequentialStream(interface.toInterface(IID_ISequentialStream));
 
-  int read(Pointer pv, int cb, Pointer<Uint32> pcbRead) => ptr.ref.vtable
-      .elementAt(3)
+  int read(Pointer pv, int cb, Pointer<Uint32> pcbRead) => (ptr.ref.vtable + 3)
       .cast<
           Pointer<
               NativeFunction<
@@ -50,16 +49,16 @@ class ISequentialStream extends IUnknown {
           int Function(Pointer, Pointer pv, int cb,
               Pointer<Uint32> pcbRead)>()(ptr.ref.lpVtbl, pv, cb, pcbRead);
 
-  int write(Pointer pv, int cb, Pointer<Uint32> pcbWritten) => ptr.ref.vtable
-          .elementAt(4)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer pv, Uint32 cb,
-                          Pointer<Uint32> pcbWritten)>>>()
-          .value
-          .asFunction<
-              int Function(
-                  Pointer, Pointer pv, int cb, Pointer<Uint32> pcbWritten)>()(
-      ptr.ref.lpVtbl, pv, cb, pcbWritten);
+  int write(Pointer pv, int cb, Pointer<Uint32> pcbWritten) =>
+      (ptr.ref.vtable + 4)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Pointer pv, Uint32 cb,
+                              Pointer<Uint32> pcbWritten)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer pv, int cb,
+                      Pointer<Uint32> pcbWritten)>()(
+          ptr.ref.lpVtbl, pv, cb, pcbWritten);
 }

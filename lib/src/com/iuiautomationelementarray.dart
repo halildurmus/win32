@@ -41,8 +41,7 @@ class IUIAutomationElementArray extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(3)
+      final hr = (ptr.ref.vtable + 3)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -60,17 +59,17 @@ class IUIAutomationElementArray extends IUnknown {
     }
   }
 
-  int getElement(int index, Pointer<Pointer<COMObject>> element) => ptr
-          .ref.vtable
-          .elementAt(4)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Int32 index,
-                          Pointer<Pointer<COMObject>> element)>>>()
-          .value
-          .asFunction<
-              int Function(
-                  Pointer, int index, Pointer<Pointer<COMObject>> element)>()(
-      ptr.ref.lpVtbl, index, element);
+  int getElement(
+          int index, Pointer<Pointer<COMObject>> element) =>
+      (ptr.ref.vtable + 4)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Int32 index,
+                              Pointer<Pointer<COMObject>> element)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, int index,
+                      Pointer<Pointer<COMObject>> element)>()(
+          ptr.ref.lpVtbl, index, element);
 }

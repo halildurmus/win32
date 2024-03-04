@@ -44,8 +44,7 @@ class IShellFolder extends IUnknown {
           Pointer<Uint32> pchEaten,
           Pointer<Pointer<ITEMIDLIST>> ppidl,
           Pointer<Uint32> pdwAttributes) =>
-      ptr.ref.vtable
-              .elementAt(3)
+      (ptr.ref.vtable + 3)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -71,8 +70,7 @@ class IShellFolder extends IUnknown {
 
   int enumObjects(
           int hwnd, int grfFlags, Pointer<Pointer<COMObject>> ppenumIDList) =>
-      ptr.ref.vtable
-              .elementAt(4)
+      (ptr.ref.vtable + 4)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -86,8 +84,7 @@ class IShellFolder extends IUnknown {
 
   int bindToObject(Pointer<ITEMIDLIST> pidl, Pointer<COMObject> pbc,
           Pointer<GUID> riid, Pointer<Pointer> ppv) =>
-      ptr.ref.vtable
-              .elementAt(5)
+      (ptr.ref.vtable + 5)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -109,8 +106,7 @@ class IShellFolder extends IUnknown {
 
   int bindToStorage(Pointer<ITEMIDLIST> pidl, Pointer<COMObject> pbc,
           Pointer<GUID> riid, Pointer<Pointer> ppv) =>
-      ptr.ref.vtable
-              .elementAt(6)
+      (ptr.ref.vtable + 6)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -132,8 +128,7 @@ class IShellFolder extends IUnknown {
 
   int compareIDs(
           int lParam, Pointer<ITEMIDLIST> pidl1, Pointer<ITEMIDLIST> pidl2) =>
-      ptr.ref.vtable
-              .elementAt(7)
+      (ptr.ref.vtable + 7)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -150,8 +145,7 @@ class IShellFolder extends IUnknown {
 
   int createViewObject(
           int hwndOwner, Pointer<GUID> riid, Pointer<Pointer> ppv) =>
-      ptr.ref.vtable
-              .elementAt(8)
+      (ptr.ref.vtable + 8)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -165,8 +159,7 @@ class IShellFolder extends IUnknown {
 
   int getAttributesOf(int cidl, Pointer<Pointer<ITEMIDLIST>> apidl,
           Pointer<Uint32> rgfInOut) =>
-      ptr.ref.vtable
-              .elementAt(9)
+      (ptr.ref.vtable + 9)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -191,8 +184,7 @@ class IShellFolder extends IUnknown {
           Pointer<GUID> riid,
           Pointer<Uint32> rgfReserved,
           Pointer<Pointer> ppv) =>
-      ptr.ref.vtable
-              .elementAt(10)
+      (ptr.ref.vtable + 10)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -218,8 +210,7 @@ class IShellFolder extends IUnknown {
 
   int getDisplayNameOf(
           Pointer<ITEMIDLIST> pidl, int uFlags, Pointer<STRRET> pName) =>
-      ptr.ref.vtable
-              .elementAt(11)
+      (ptr.ref.vtable + 11)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -233,8 +224,7 @@ class IShellFolder extends IUnknown {
 
   int setNameOf(int hwnd, Pointer<ITEMIDLIST> pidl, Pointer<Utf16> pszName,
           int uFlags, Pointer<Pointer<ITEMIDLIST>> ppidlOut) =>
-      ptr.ref.vtable
-              .elementAt(12)
+      (ptr.ref.vtable + 12)
               .cast<
                   Pointer<
                       NativeFunction<

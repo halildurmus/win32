@@ -37,14 +37,13 @@ class IUIAutomationElement extends IUnknown {
   factory IUIAutomationElement.from(IUnknown interface) =>
       IUIAutomationElement(interface.toInterface(IID_IUIAutomationElement));
 
-  int setFocus() => ptr.ref.vtable
-      .elementAt(3)
+  int setFocus() => (ptr.ref.vtable + 3)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  int getRuntimeId(Pointer<Pointer<SAFEARRAY>> runtimeId) => ptr.ref.vtable
-          .elementAt(4)
+  int getRuntimeId(Pointer<Pointer<SAFEARRAY>> runtimeId) => (ptr.ref.vtable +
+              4)
           .cast<
               Pointer<
                   NativeFunction<
@@ -57,8 +56,7 @@ class IUIAutomationElement extends IUnknown {
 
   int findFirst(int scope, Pointer<COMObject> condition,
           Pointer<Pointer<COMObject>> found) =>
-      ptr.ref.vtable
-              .elementAt(5)
+      (ptr.ref.vtable + 5)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -75,8 +73,7 @@ class IUIAutomationElement extends IUnknown {
 
   int findAll(int scope, Pointer<COMObject> condition,
           Pointer<Pointer<COMObject>> found) =>
-      ptr.ref.vtable
-              .elementAt(6)
+      (ptr.ref.vtable + 6)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -93,8 +90,7 @@ class IUIAutomationElement extends IUnknown {
 
   int findFirstBuildCache(int scope, Pointer<COMObject> condition,
           Pointer<COMObject> cacheRequest, Pointer<Pointer<COMObject>> found) =>
-      ptr.ref.vtable
-              .elementAt(7)
+      (ptr.ref.vtable + 7)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -116,8 +112,7 @@ class IUIAutomationElement extends IUnknown {
 
   int findAllBuildCache(int scope, Pointer<COMObject> condition,
           Pointer<COMObject> cacheRequest, Pointer<Pointer<COMObject>> found) =>
-      ptr.ref.vtable
-              .elementAt(8)
+      (ptr.ref.vtable + 8)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -139,8 +134,7 @@ class IUIAutomationElement extends IUnknown {
 
   int buildUpdatedCache(Pointer<COMObject> cacheRequest,
           Pointer<Pointer<COMObject>> updatedElement) =>
-      ptr.ref.vtable
-              .elementAt(9)
+      (ptr.ref.vtable + 9)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -152,23 +146,22 @@ class IUIAutomationElement extends IUnknown {
                       Pointer<Pointer<COMObject>> updatedElement)>()(
           ptr.ref.lpVtbl, cacheRequest, updatedElement);
 
-  int getCurrentPropertyValue(int propertyId, Pointer<VARIANT> retVal) => ptr
-      .ref.vtable
-      .elementAt(10)
-      .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(
-                      Pointer, Uint32 propertyId, Pointer<VARIANT> retVal)>>>()
-      .value
-      .asFunction<
-          int Function(Pointer, int propertyId,
-              Pointer<VARIANT> retVal)>()(ptr.ref.lpVtbl, propertyId, retVal);
+  int getCurrentPropertyValue(int propertyId, Pointer<VARIANT> retVal) =>
+      (ptr.ref.vtable + 10)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Uint32 propertyId,
+                              Pointer<VARIANT> retVal)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer, int propertyId, Pointer<VARIANT> retVal)>()(
+          ptr.ref.lpVtbl, propertyId, retVal);
 
   int getCurrentPropertyValueEx(
           int propertyId, int ignoreDefaultValue, Pointer<VARIANT> retVal) =>
-      ptr.ref.vtable
-              .elementAt(11)
+      (ptr.ref.vtable + 11)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -183,23 +176,22 @@ class IUIAutomationElement extends IUnknown {
                       Pointer<VARIANT> retVal)>()(
           ptr.ref.lpVtbl, propertyId, ignoreDefaultValue, retVal);
 
-  int getCachedPropertyValue(int propertyId, Pointer<VARIANT> retVal) => ptr
-      .ref.vtable
-      .elementAt(12)
-      .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(
-                      Pointer, Uint32 propertyId, Pointer<VARIANT> retVal)>>>()
-      .value
-      .asFunction<
-          int Function(Pointer, int propertyId,
-              Pointer<VARIANT> retVal)>()(ptr.ref.lpVtbl, propertyId, retVal);
+  int getCachedPropertyValue(int propertyId, Pointer<VARIANT> retVal) =>
+      (ptr.ref.vtable + 12)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Uint32 propertyId,
+                              Pointer<VARIANT> retVal)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer, int propertyId, Pointer<VARIANT> retVal)>()(
+          ptr.ref.lpVtbl, propertyId, retVal);
 
   int getCachedPropertyValueEx(
           int propertyId, int ignoreDefaultValue, Pointer<VARIANT> retVal) =>
-      ptr.ref.vtable
-              .elementAt(13)
+      (ptr.ref.vtable + 13)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -216,8 +208,7 @@ class IUIAutomationElement extends IUnknown {
 
   int getCurrentPatternAs(
           int patternId, Pointer<GUID> riid, Pointer<Pointer> patternObject) =>
-      ptr.ref.vtable
-              .elementAt(14)
+      (ptr.ref.vtable + 14)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -234,8 +225,7 @@ class IUIAutomationElement extends IUnknown {
 
   int getCachedPatternAs(
           int patternId, Pointer<GUID> riid, Pointer<Pointer> patternObject) =>
-      ptr.ref.vtable
-              .elementAt(15)
+      (ptr.ref.vtable + 15)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -252,9 +242,7 @@ class IUIAutomationElement extends IUnknown {
 
   int getCurrentPattern(
           int patternId, Pointer<Pointer<COMObject>> patternObject) =>
-      ptr
-              .ref.vtable
-              .elementAt(16)
+      (ptr.ref.vtable + 16)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -268,8 +256,7 @@ class IUIAutomationElement extends IUnknown {
 
   int getCachedPattern(
           int patternId, Pointer<Pointer<COMObject>> patternObject) =>
-      ptr.ref.vtable
-              .elementAt(17)
+      (ptr.ref.vtable + 17)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -281,36 +268,36 @@ class IUIAutomationElement extends IUnknown {
                       Pointer<Pointer<COMObject>> patternObject)>()(
           ptr.ref.lpVtbl, patternId, patternObject);
 
-  int getCachedParent(Pointer<Pointer<COMObject>> parent) => ptr.ref.vtable
-          .elementAt(18)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<Pointer<COMObject>> parent)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, Pointer<Pointer<COMObject>> parent)>()(
-      ptr.ref.lpVtbl, parent);
+  int getCachedParent(Pointer<Pointer<COMObject>> parent) =>
+      (ptr.ref.vtable + 18)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer, Pointer<Pointer<COMObject>> parent)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<Pointer<COMObject>> parent)>()(
+          ptr.ref.lpVtbl, parent);
 
-  int getCachedChildren(Pointer<Pointer<COMObject>> children) => ptr.ref.vtable
-          .elementAt(19)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<Pointer<COMObject>> children)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, Pointer<Pointer<COMObject>> children)>()(
-      ptr.ref.lpVtbl, children);
+  int getCachedChildren(Pointer<Pointer<COMObject>> children) =>
+      (ptr.ref.vtable + 19)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer,
+                              Pointer<Pointer<COMObject>> children)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer, Pointer<Pointer<COMObject>> children)>()(
+          ptr.ref.lpVtbl, children);
 
   int get currentProcessId {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(20)
+      final hr = (ptr.ref.vtable + 20)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -332,8 +319,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Uint32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(21)
+      final hr = (ptr.ref.vtable + 21)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -355,8 +341,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(22)
+      final hr = (ptr.ref.vtable + 22)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -380,8 +365,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(23)
+      final hr = (ptr.ref.vtable + 23)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -405,8 +389,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(24)
+      final hr = (ptr.ref.vtable + 24)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -430,8 +413,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(25)
+      final hr = (ptr.ref.vtable + 25)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -455,8 +437,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(26)
+      final hr = (ptr.ref.vtable + 26)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -478,8 +459,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(27)
+      final hr = (ptr.ref.vtable + 27)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -501,8 +481,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(28)
+      final hr = (ptr.ref.vtable + 28)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -524,8 +503,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(29)
+      final hr = (ptr.ref.vtable + 29)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -549,8 +527,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(30)
+      final hr = (ptr.ref.vtable + 30)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -574,8 +551,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(31)
+      final hr = (ptr.ref.vtable + 31)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -599,8 +575,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(32)
+      final hr = (ptr.ref.vtable + 32)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -622,8 +597,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(33)
+      final hr = (ptr.ref.vtable + 33)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -645,8 +619,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(34)
+      final hr = (ptr.ref.vtable + 34)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -668,8 +641,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(35)
+      final hr = (ptr.ref.vtable + 35)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -691,8 +663,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<IntPtr>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(36)
+      final hr = (ptr.ref.vtable + 36)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -714,8 +685,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(37)
+      final hr = (ptr.ref.vtable + 37)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -739,8 +709,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(38)
+      final hr = (ptr.ref.vtable + 38)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -762,8 +731,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(39)
+      final hr = (ptr.ref.vtable + 39)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -785,8 +753,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(40)
+      final hr = (ptr.ref.vtable + 40)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -810,8 +777,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(41)
+      final hr = (ptr.ref.vtable + 41)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -833,8 +799,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(42)
+      final hr = (ptr.ref.vtable + 42)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -858,8 +823,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<RECT>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(43)
+      final hr = (ptr.ref.vtable + 43)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -880,8 +844,7 @@ class IUIAutomationElement extends IUnknown {
   Pointer<COMObject> get currentLabeledBy {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
-            .elementAt(44)
+    final hr = (ptr.ref.vtable + 44)
             .cast<
                 Pointer<
                     NativeFunction<
@@ -902,8 +865,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(45)
+      final hr = (ptr.ref.vtable + 45)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -927,8 +889,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(46)
+      final hr = (ptr.ref.vtable + 46)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -952,8 +913,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(47)
+      final hr = (ptr.ref.vtable + 47)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -974,8 +934,7 @@ class IUIAutomationElement extends IUnknown {
   Pointer<COMObject> get currentControllerFor {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
-            .elementAt(48)
+    final hr = (ptr.ref.vtable + 48)
             .cast<
                 Pointer<
                     NativeFunction<
@@ -995,8 +954,7 @@ class IUIAutomationElement extends IUnknown {
   Pointer<COMObject> get currentDescribedBy {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
-            .elementAt(49)
+    final hr = (ptr.ref.vtable + 49)
             .cast<
                 Pointer<
                     NativeFunction<
@@ -1016,8 +974,7 @@ class IUIAutomationElement extends IUnknown {
   Pointer<COMObject> get currentFlowsTo {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
-            .elementAt(50)
+    final hr = (ptr.ref.vtable + 50)
             .cast<
                 Pointer<
                     NativeFunction<
@@ -1038,8 +995,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(51)
+      final hr = (ptr.ref.vtable + 51)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1063,8 +1019,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(52)
+      final hr = (ptr.ref.vtable + 52)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1086,8 +1041,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Uint32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(53)
+      final hr = (ptr.ref.vtable + 53)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1109,8 +1063,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(54)
+      final hr = (ptr.ref.vtable + 54)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1134,8 +1087,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(55)
+      final hr = (ptr.ref.vtable + 55)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1159,8 +1111,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(56)
+      final hr = (ptr.ref.vtable + 56)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1184,8 +1135,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(57)
+      final hr = (ptr.ref.vtable + 57)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1209,8 +1159,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(58)
+      final hr = (ptr.ref.vtable + 58)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1232,8 +1181,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(59)
+      final hr = (ptr.ref.vtable + 59)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1255,8 +1203,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(60)
+      final hr = (ptr.ref.vtable + 60)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1278,8 +1225,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(61)
+      final hr = (ptr.ref.vtable + 61)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1303,8 +1249,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(62)
+      final hr = (ptr.ref.vtable + 62)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1328,8 +1273,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(63)
+      final hr = (ptr.ref.vtable + 63)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1353,8 +1297,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(64)
+      final hr = (ptr.ref.vtable + 64)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1376,8 +1319,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(65)
+      final hr = (ptr.ref.vtable + 65)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1399,8 +1341,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(66)
+      final hr = (ptr.ref.vtable + 66)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1422,8 +1363,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(67)
+      final hr = (ptr.ref.vtable + 67)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1445,8 +1385,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<IntPtr>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(68)
+      final hr = (ptr.ref.vtable + 68)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1468,8 +1407,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(69)
+      final hr = (ptr.ref.vtable + 69)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1493,8 +1431,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(70)
+      final hr = (ptr.ref.vtable + 70)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1516,8 +1453,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(71)
+      final hr = (ptr.ref.vtable + 71)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1539,8 +1475,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(72)
+      final hr = (ptr.ref.vtable + 72)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1564,8 +1499,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(73)
+      final hr = (ptr.ref.vtable + 73)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1587,8 +1521,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(74)
+      final hr = (ptr.ref.vtable + 74)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1612,8 +1545,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<RECT>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(75)
+      final hr = (ptr.ref.vtable + 75)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1634,8 +1566,7 @@ class IUIAutomationElement extends IUnknown {
   Pointer<COMObject> get cachedLabeledBy {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
-            .elementAt(76)
+    final hr = (ptr.ref.vtable + 76)
             .cast<
                 Pointer<
                     NativeFunction<
@@ -1656,8 +1587,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(77)
+      final hr = (ptr.ref.vtable + 77)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1681,8 +1611,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(78)
+      final hr = (ptr.ref.vtable + 78)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1706,8 +1635,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(79)
+      final hr = (ptr.ref.vtable + 79)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1728,8 +1656,7 @@ class IUIAutomationElement extends IUnknown {
   Pointer<COMObject> get cachedControllerFor {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
-            .elementAt(80)
+    final hr = (ptr.ref.vtable + 80)
             .cast<
                 Pointer<
                     NativeFunction<
@@ -1749,8 +1676,7 @@ class IUIAutomationElement extends IUnknown {
   Pointer<COMObject> get cachedDescribedBy {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
-            .elementAt(81)
+    final hr = (ptr.ref.vtable + 81)
             .cast<
                 Pointer<
                     NativeFunction<
@@ -1770,8 +1696,7 @@ class IUIAutomationElement extends IUnknown {
   Pointer<COMObject> get cachedFlowsTo {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
-            .elementAt(82)
+    final hr = (ptr.ref.vtable + 82)
             .cast<
                 Pointer<
                     NativeFunction<
@@ -1792,8 +1717,7 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(83)
+      final hr = (ptr.ref.vtable + 83)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -1815,8 +1739,7 @@ class IUIAutomationElement extends IUnknown {
 
   int getClickablePoint(
           Pointer<POINT> clickable, Pointer<Int32> gotClickable) =>
-      ptr.ref.vtable
-              .elementAt(84)
+      (ptr.ref.vtable + 84)
               .cast<
                   Pointer<
                       NativeFunction<

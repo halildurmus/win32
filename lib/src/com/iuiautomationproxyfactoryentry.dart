@@ -43,8 +43,7 @@ class IUIAutomationProxyFactoryEntry extends IUnknown {
   Pointer<COMObject> get proxyFactory {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
-            .elementAt(3)
+    final hr = (ptr.ref.vtable + 3)
             .cast<
                 Pointer<
                     NativeFunction<
@@ -65,8 +64,7 @@ class IUIAutomationProxyFactoryEntry extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(4)
+      final hr = (ptr.ref.vtable + 4)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -90,8 +88,7 @@ class IUIAutomationProxyFactoryEntry extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(5)
+      final hr = (ptr.ref.vtable + 5)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -115,8 +112,7 @@ class IUIAutomationProxyFactoryEntry extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(6)
+      final hr = (ptr.ref.vtable + 6)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -140,8 +136,7 @@ class IUIAutomationProxyFactoryEntry extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(7)
+      final hr = (ptr.ref.vtable + 7)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -165,8 +160,7 @@ class IUIAutomationProxyFactoryEntry extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-          .elementAt(8)
+      final hr = (ptr.ref.vtable + 8)
           .cast<
               Pointer<
                   NativeFunction<
@@ -186,8 +180,7 @@ class IUIAutomationProxyFactoryEntry extends IUnknown {
   }
 
   set className(Pointer<Utf16> value) {
-    final hr = ptr.ref.vtable
-            .elementAt(9)
+    final hr = (ptr.ref.vtable + 9)
             .cast<
                 Pointer<
                     NativeFunction<
@@ -200,8 +193,7 @@ class IUIAutomationProxyFactoryEntry extends IUnknown {
   }
 
   set imageName(Pointer<Utf16> value) {
-    final hr = ptr.ref.vtable
-            .elementAt(10)
+    final hr = (ptr.ref.vtable + 10)
             .cast<
                 Pointer<
                     NativeFunction<
@@ -214,8 +206,7 @@ class IUIAutomationProxyFactoryEntry extends IUnknown {
   }
 
   set allowSubstringMatch(int value) {
-    final hr = ptr.ref.vtable
-            .elementAt(11)
+    final hr = (ptr.ref.vtable + 11)
             .cast<
                 Pointer<
                     NativeFunction<
@@ -228,8 +219,7 @@ class IUIAutomationProxyFactoryEntry extends IUnknown {
   }
 
   set canCheckBaseClass(int value) {
-    final hr = ptr.ref.vtable
-            .elementAt(12)
+    final hr = (ptr.ref.vtable + 12)
             .cast<
                 Pointer<
                     NativeFunction<
@@ -242,8 +232,7 @@ class IUIAutomationProxyFactoryEntry extends IUnknown {
   }
 
   set needsAdviseEvents(int value) {
-    final hr = ptr.ref.vtable
-        .elementAt(13)
+    final hr = (ptr.ref.vtable + 13)
         .cast<
             Pointer<
                 NativeFunction<Int32 Function(Pointer, Int32 adviseEvents)>>>()
@@ -257,8 +246,7 @@ class IUIAutomationProxyFactoryEntry extends IUnknown {
   int
       setWinEventsForAutomationEvent(
               int eventId, int propertyId, Pointer<SAFEARRAY> winEvents) =>
-          ptr.ref.vtable
-                  .elementAt(14)
+          (ptr.ref.vtable + 14)
                   .cast<
                       Pointer<
                           NativeFunction<
@@ -276,8 +264,7 @@ class IUIAutomationProxyFactoryEntry extends IUnknown {
   int
       getWinEventsForAutomationEvent(int eventId, int propertyId,
               Pointer<Pointer<SAFEARRAY>> winEvents) =>
-          ptr.ref.vtable
-                  .elementAt(15)
+          (ptr.ref.vtable + 15)
                   .cast<
                       Pointer<
                           NativeFunction<

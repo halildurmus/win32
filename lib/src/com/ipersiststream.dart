@@ -38,14 +38,12 @@ class IPersistStream extends IPersist {
   factory IPersistStream.from(IUnknown interface) =>
       IPersistStream(interface.toInterface(IID_IPersistStream));
 
-  int isDirty() => ptr.ref.vtable
-      .elementAt(4)
+  int isDirty() => (ptr.ref.vtable + 4)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  int load(Pointer<COMObject> pStm) => ptr.ref.vtable
-          .elementAt(5)
+  int load(Pointer<COMObject> pStm) => (ptr.ref.vtable + 5)
           .cast<
               Pointer<
                   NativeFunction<
@@ -54,8 +52,7 @@ class IPersistStream extends IPersist {
           .asFunction<int Function(Pointer, Pointer<COMObject> pStm)>()(
       ptr.ref.lpVtbl, pStm);
 
-  int save(Pointer<COMObject> pStm, int fClearDirty) => ptr.ref.vtable
-      .elementAt(6)
+  int save(Pointer<COMObject> pStm, int fClearDirty) => (ptr.ref.vtable + 6)
       .cast<
           Pointer<
               NativeFunction<
@@ -66,8 +63,7 @@ class IPersistStream extends IPersist {
           int Function(Pointer, Pointer<COMObject> pStm,
               int fClearDirty)>()(ptr.ref.lpVtbl, pStm, fClearDirty);
 
-  int getSizeMax(Pointer<Uint64> pcbSize) => ptr.ref.vtable
-          .elementAt(7)
+  int getSizeMax(Pointer<Uint64> pcbSize) => (ptr.ref.vtable + 7)
           .cast<
               Pointer<
                   NativeFunction<

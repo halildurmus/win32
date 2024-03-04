@@ -38,8 +38,7 @@ class ISpeechVoice extends IDispatch {
   Pointer<COMObject> get status {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
-            .elementAt(7)
+    final hr = (ptr.ref.vtable + 7)
             .cast<
                 Pointer<
                     NativeFunction<
@@ -59,8 +58,7 @@ class ISpeechVoice extends IDispatch {
   Pointer<COMObject> get voice {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
-            .elementAt(8)
+    final hr = (ptr.ref.vtable + 8)
             .cast<
                 Pointer<
                     NativeFunction<
@@ -77,8 +75,7 @@ class ISpeechVoice extends IDispatch {
     return retValuePtr;
   }
 
-  int putref_Voice(Pointer<COMObject> Voice) => ptr.ref.vtable
-          .elementAt(9)
+  int putref_Voice(Pointer<COMObject> Voice) => (ptr.ref.vtable + 9)
           .cast<
               Pointer<
                   NativeFunction<
@@ -90,8 +87,7 @@ class ISpeechVoice extends IDispatch {
   Pointer<COMObject> get audioOutput {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
-        .elementAt(10)
+    final hr = (ptr.ref.vtable + 10)
         .cast<
             Pointer<
                 NativeFunction<
@@ -109,22 +105,22 @@ class ISpeechVoice extends IDispatch {
     return retValuePtr;
   }
 
-  int putref_AudioOutput(Pointer<COMObject> AudioOutput) => ptr.ref.vtable
-      .elementAt(11)
-      .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(Pointer, Pointer<COMObject> AudioOutput)>>>()
-      .value
-      .asFunction<
-          int Function(Pointer,
-              Pointer<COMObject> AudioOutput)>()(ptr.ref.lpVtbl, AudioOutput);
+  int putref_AudioOutput(Pointer<COMObject> AudioOutput) =>
+      (ptr.ref.vtable + 11)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer, Pointer<COMObject> AudioOutput)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<COMObject> AudioOutput)>()(
+          ptr.ref.lpVtbl, AudioOutput);
 
   Pointer<COMObject> get audioOutputStream {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
-            .elementAt(12)
+    final hr = (ptr.ref.vtable + 12)
             .cast<
                 Pointer<
                     NativeFunction<
@@ -143,25 +139,24 @@ class ISpeechVoice extends IDispatch {
     return retValuePtr;
   }
 
-  int putref_AudioOutputStream(Pointer<COMObject> AudioOutputStream) => ptr
-          .ref.vtable
-          .elementAt(13)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<COMObject> AudioOutputStream)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, Pointer<COMObject> AudioOutputStream)>()(
-      ptr.ref.lpVtbl, AudioOutputStream);
+  int putref_AudioOutputStream(Pointer<COMObject> AudioOutputStream) =>
+      (ptr.ref.vtable + 13)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer,
+                              Pointer<COMObject> AudioOutputStream)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer, Pointer<COMObject> AudioOutputStream)>()(
+          ptr.ref.lpVtbl, AudioOutputStream);
 
   int get rate {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(14)
+      final hr = (ptr.ref.vtable + 14)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -180,8 +175,7 @@ class ISpeechVoice extends IDispatch {
   }
 
   set rate(int value) {
-    final hr = ptr.ref.vtable
-        .elementAt(15)
+    final hr = (ptr.ref.vtable + 15)
         .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 Rate)>>>()
         .value
         .asFunction<int Function(Pointer, int Rate)>()(ptr.ref.lpVtbl, value);
@@ -193,8 +187,7 @@ class ISpeechVoice extends IDispatch {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(16)
+      final hr = (ptr.ref.vtable + 16)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -213,8 +206,7 @@ class ISpeechVoice extends IDispatch {
   }
 
   set volume(int value) {
-    final hr = ptr.ref.vtable
-        .elementAt(17)
+    final hr = (ptr.ref.vtable + 17)
         .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 Volume)>>>()
         .value
         .asFunction<int Function(Pointer, int Volume)>()(ptr.ref.lpVtbl, value);
@@ -223,8 +215,7 @@ class ISpeechVoice extends IDispatch {
   }
 
   set allowAudioOutputFormatChangesOnNextSet(int value) {
-    final hr = ptr.ref.vtable
-        .elementAt(18)
+    final hr = (ptr.ref.vtable + 18)
         .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int16 Allow)>>>()
         .value
         .asFunction<int Function(Pointer, int Allow)>()(ptr.ref.lpVtbl, value);
@@ -236,8 +227,7 @@ class ISpeechVoice extends IDispatch {
     final retValuePtr = calloc<Int16>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(19)
+      final hr = (ptr.ref.vtable + 19)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -259,8 +249,7 @@ class ISpeechVoice extends IDispatch {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(20)
+      final hr = (ptr.ref.vtable + 20)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -281,8 +270,7 @@ class ISpeechVoice extends IDispatch {
   }
 
   set eventInterests(int value) {
-    final hr = ptr.ref.vtable
-            .elementAt(21)
+    final hr = (ptr.ref.vtable + 21)
             .cast<
                 Pointer<
                     NativeFunction<
@@ -295,8 +283,7 @@ class ISpeechVoice extends IDispatch {
   }
 
   set priority(int value) {
-    final hr = ptr.ref.vtable
-        .elementAt(22)
+    final hr = (ptr.ref.vtable + 22)
         .cast<
             Pointer<NativeFunction<Int32 Function(Pointer, Int32 Priority)>>>()
         .value
@@ -310,8 +297,7 @@ class ISpeechVoice extends IDispatch {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(23)
+      final hr = (ptr.ref.vtable + 23)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -330,8 +316,7 @@ class ISpeechVoice extends IDispatch {
   }
 
   set alertBoundary(int value) {
-    final hr = ptr.ref.vtable
-        .elementAt(24)
+    final hr = (ptr.ref.vtable + 24)
         .cast<
             Pointer<NativeFunction<Int32 Function(Pointer, Int32 Boundary)>>>()
         .value
@@ -345,8 +330,7 @@ class ISpeechVoice extends IDispatch {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(25)
+      final hr = (ptr.ref.vtable + 25)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -365,8 +349,7 @@ class ISpeechVoice extends IDispatch {
   }
 
   set synchronousSpeakTimeout(int value) {
-    final hr = ptr.ref.vtable
-        .elementAt(26)
+    final hr = (ptr.ref.vtable + 26)
         .cast<
             Pointer<NativeFunction<Int32 Function(Pointer, Int32 msTimeout)>>>()
         .value
@@ -380,8 +363,7 @@ class ISpeechVoice extends IDispatch {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(27)
+      final hr = (ptr.ref.vtable + 27)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -399,24 +381,23 @@ class ISpeechVoice extends IDispatch {
     }
   }
 
-  int speak(Pointer<Utf16> Text, int Flags, Pointer<Int32> StreamNumber) => ptr
-          .ref.vtable
-          .elementAt(28)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<Utf16> Text, Int32 Flags,
-                          Pointer<Int32> StreamNumber)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, Pointer<Utf16> Text, int Flags,
-                  Pointer<Int32> StreamNumber)>()(
-      ptr.ref.lpVtbl, Text, Flags, StreamNumber);
+  int
+      speak(Pointer<Utf16> Text, int Flags, Pointer<Int32> StreamNumber) =>
+          (ptr.ref.vtable + 28)
+                  .cast<
+                      Pointer<
+                          NativeFunction<
+                              Int32 Function(Pointer, Pointer<Utf16> Text,
+                                  Int32 Flags, Pointer<Int32> StreamNumber)>>>()
+                  .value
+                  .asFunction<
+                      int Function(Pointer, Pointer<Utf16> Text, int Flags,
+                          Pointer<Int32> StreamNumber)>()(
+              ptr.ref.lpVtbl, Text, Flags, StreamNumber);
 
   int speakStream(
           Pointer<COMObject> Stream, int Flags, Pointer<Int32> StreamNumber) =>
-      ptr.ref.vtable
-              .elementAt(29)
+      (ptr.ref.vtable + 29)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -428,21 +409,18 @@ class ISpeechVoice extends IDispatch {
                       Pointer<Int32> StreamNumber)>()(
           ptr.ref.lpVtbl, Stream, Flags, StreamNumber);
 
-  int pause() => ptr.ref.vtable
-      .elementAt(30)
+  int pause() => (ptr.ref.vtable + 30)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  int resume() => ptr.ref.vtable
-      .elementAt(31)
+  int resume() => (ptr.ref.vtable + 31)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
   int skip(Pointer<Utf16> Type, int NumItems, Pointer<Int32> NumSkipped) =>
-      ptr.ref.vtable
-              .elementAt(32)
+      (ptr.ref.vtable + 32)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -458,8 +436,7 @@ class ISpeechVoice extends IDispatch {
           Pointer<Utf16> RequiredAttributes,
           Pointer<Utf16> OptionalAttributes,
           Pointer<Pointer<COMObject>> ObjectTokens) =>
-      ptr.ref.vtable
-              .elementAt(33)
+      (ptr.ref.vtable + 33)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -481,8 +458,7 @@ class ISpeechVoice extends IDispatch {
           Pointer<Utf16> RequiredAttributes,
           Pointer<Utf16> OptionalAttributes,
           Pointer<Pointer<COMObject>> ObjectTokens) =>
-      ptr.ref.vtable
-              .elementAt(34)
+      (ptr.ref.vtable + 34)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -500,8 +476,7 @@ class ISpeechVoice extends IDispatch {
                       Pointer<Pointer<COMObject>> ObjectTokens)>()(
           ptr.ref.lpVtbl, RequiredAttributes, OptionalAttributes, ObjectTokens);
 
-  int waitUntilDone(int msTimeout, Pointer<Int16> Done) => ptr.ref.vtable
-          .elementAt(35)
+  int waitUntilDone(int msTimeout, Pointer<Int16> Done) => (ptr.ref.vtable + 35)
           .cast<
               Pointer<
                   NativeFunction<
@@ -512,8 +487,7 @@ class ISpeechVoice extends IDispatch {
               int Function(Pointer, int msTimeout, Pointer<Int16> Done)>()(
       ptr.ref.lpVtbl, msTimeout, Done);
 
-  int speakCompleteEvent(Pointer<Int32> Handle) => ptr.ref.vtable
-      .elementAt(36)
+  int speakCompleteEvent(Pointer<Int32> Handle) => (ptr.ref.vtable + 36)
       .cast<
           Pointer<
               NativeFunction<Int32 Function(Pointer, Pointer<Int32> Handle)>>>()
@@ -524,8 +498,7 @@ class ISpeechVoice extends IDispatch {
 
   int isUISupported(Pointer<Utf16> TypeOfUI, Pointer<VARIANT> ExtraData,
           Pointer<Int16> Supported) =>
-      ptr.ref.vtable
-              .elementAt(37)
+      (ptr.ref.vtable + 37)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -542,8 +515,7 @@ class ISpeechVoice extends IDispatch {
 
   int displayUI(int hWndParent, Pointer<Utf16> Title, Pointer<Utf16> TypeOfUI,
           Pointer<VARIANT> ExtraData) =>
-      ptr.ref.vtable
-              .elementAt(38)
+      (ptr.ref.vtable + 38)
               .cast<
                   Pointer<
                       NativeFunction<

@@ -44,8 +44,7 @@ class IUIAutomation3 extends IUIAutomation2 {
           int textEditChangeType,
           Pointer<COMObject> cacheRequest,
           Pointer<COMObject> handler) =>
-      ptr.ref.vtable
-              .elementAt(64)
+      (ptr.ref.vtable + 64)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -69,8 +68,7 @@ class IUIAutomation3 extends IUIAutomation2 {
 
   int removeTextEditTextChangedEventHandler(
           Pointer<COMObject> element, Pointer<COMObject> handler) =>
-      ptr.ref.vtable
-              .elementAt(65)
+      (ptr.ref.vtable + 65)
               .cast<
                   Pointer<
                       NativeFunction<

@@ -44,8 +44,7 @@ class IMetaDataImport2 extends IMetaDataImport {
           Pointer<Uint32> rGenericParams,
           int cMax,
           Pointer<Uint32> pcGenericParams) =>
-      ptr.ref.vtable
-              .elementAt(65)
+      (ptr.ref.vtable + 65)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -76,8 +75,7 @@ class IMetaDataImport2 extends IMetaDataImport {
           Pointer<Utf16> wzname,
           int cchName,
           Pointer<Uint32> pchName) =>
-      ptr.ref.vtable
-              .elementAt(66)
+      (ptr.ref.vtable + 66)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -115,8 +113,7 @@ class IMetaDataImport2 extends IMetaDataImport {
 
   int getMethodSpecProps(int mi, Pointer<Uint32> tkParent,
           Pointer<Pointer<Uint8>> ppvSigBlob, Pointer<Uint32> pcbSigBlob) =>
-      ptr.ref.vtable
-              .elementAt(67)
+      (ptr.ref.vtable + 67)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -142,8 +139,7 @@ class IMetaDataImport2 extends IMetaDataImport {
           Pointer<Uint32> rGenericParamConstraints,
           int cMax,
           Pointer<Uint32> pcGenericParamConstraints) =>
-      ptr.ref.vtable
-              .elementAt(68)
+      (ptr.ref.vtable + 68)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -172,8 +168,7 @@ class IMetaDataImport2 extends IMetaDataImport {
 
   int getGenericParamConstraintProps(int gpc, Pointer<Uint32> ptGenericParam,
           Pointer<Uint32> ptkConstraintType) =>
-      ptr.ref.vtable
-              .elementAt(69)
+      (ptr.ref.vtable + 69)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -188,24 +183,22 @@ class IMetaDataImport2 extends IMetaDataImport {
                       Pointer<Uint32> ptkConstraintType)>()(
           ptr.ref.lpVtbl, gpc, ptGenericParam, ptkConstraintType);
 
-  int getPEKind(Pointer<Uint32> pdwPEKind, Pointer<Uint32> pdwMAchine) => ptr
-          .ref.vtable
-          .elementAt(70)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<Uint32> pdwPEKind,
-                          Pointer<Uint32> pdwMAchine)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, Pointer<Uint32> pdwPEKind,
-                  Pointer<Uint32> pdwMAchine)>()(
-      ptr.ref.lpVtbl, pdwPEKind, pdwMAchine);
+  int getPEKind(Pointer<Uint32> pdwPEKind, Pointer<Uint32> pdwMAchine) =>
+      (ptr.ref.vtable + 70)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Pointer<Uint32> pdwPEKind,
+                              Pointer<Uint32> pdwMAchine)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<Uint32> pdwPEKind,
+                      Pointer<Uint32> pdwMAchine)>()(
+          ptr.ref.lpVtbl, pdwPEKind, pdwMAchine);
 
   int getVersionString(
           Pointer<Utf16> pwzBuf, int ccBufSize, Pointer<Uint32> pccBufSize) =>
-      ptr.ref.vtable
-              .elementAt(71)
+      (ptr.ref.vtable + 71)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -223,8 +216,7 @@ class IMetaDataImport2 extends IMetaDataImport {
           Pointer<Uint32> rMethodSpecs,
           int cMax,
           Pointer<Uint32> pcMethodSpecs) =>
-      ptr.ref.vtable
-              .elementAt(72)
+      (ptr.ref.vtable + 72)
               .cast<
                   Pointer<
                       NativeFunction<

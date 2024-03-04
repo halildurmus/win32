@@ -113,7 +113,7 @@ void printStruct(Pointer struct, int sizeInBytes) {
   final words = <int>[];
   final ptr = struct.cast<Uint16>();
   for (var i = 0; i < sizeInBytes ~/ 2; i++) {
-    words.add(ptr.elementAt(i).value);
+    words.add((ptr + i).value);
   }
   print(words.map((word) => word.toHexString(16)).join(', '));
 }
