@@ -1,7 +1,61 @@
 ## 5.3.0-wip
 
-- Migrate away from `.elementAt` (#XXX)
-- Bump minimum required Dart version to `3.3.0`
+- Migrate away from `.elementAt` (#825)
+- Bump minimum required Dart version to `3.3.0` (#825)
+- Deprecate `CallWndProc` typedef in favor of `HOOKPROC` (#826)
+- Deprecate `CCHookProc` typedef in favor of `LPCCHOOKPROC` (#826)
+- Deprecate `CFHookProc` typedef in favor of `LPCFHOOKPROC` (#826)
+- Deprecate `DlgProc` typedef in favor of `DLGPROC` (#826)
+- Deprecate `DrawStateProc` typedef in favor of `DRAWSTATEPROC` (#826)
+- Deprecate `DrawTextCallback` typedef in favor of `DTT_CALLBACK_PROC` (#826)
+- Deprecate `EnumPageFilesProc` typedef in favor of
+  `PENUM_PAGE_FILE_CALLBACK` (#826)
+- Deprecate `EnumFontFamExProc` typedef in favor of `FONTENUMPROC` (#826)
+- Deprecate `EnumResNameProc` typedef in favor of `ENUMRESNAMEPROC` (#826)
+- Deprecate `EnumResTypeProc` typedef in favor of `ENUMRESTYPEPROC` (#826)
+- Deprecate `EnumWindowsProc` typedef in favor of `WNDENUMPROC` (#826)
+- Deprecate `ExcepInfoProc` typedef in favor of
+  `LPEXCEPFINO_DEFERRED_FILLIN` (#826)
+- Deprecate `FRHookProc` typedef in favor of `LPFRHOOKPROC` (#826)
+- Deprecate `HandlerRoutine` typedef in favor of `PHANDLER_ROUTINE` (#826)
+- Deprecate `LphandlerFunction` typedef in favor of `LPHANDLER_FUNCTION` (#826)
+- Deprecate `LphandlerFunctionEx` typedef in favor of
+  `LPHANDLER_FUNCTION_EX` (#826)
+- Deprecate `LpoverlappedCompletionRoutine` in favor of
+  `LPOVERLAPPED_COMPLETION_ROUTINE` (#826)
+- Deprecate `LpserviceMainFunctionw` in favor of
+  `LPSERVICE_MAIN_FUNCTION` (#826)
+- Deprecate `MidiInProc` typedef in favor of `MIDIINPROC` (#826)
+- Deprecate `MidiOutProc` typedef in favor of `MIDIOUTPROC` (#826)
+- Deprecate `MonitorEnumProc` typedef in favor of `MONITORENUMPROC` (#826)
+- Deprecate `OFNHookProc` typedef in favor of `LPOFNHOOKPROC` (#826)
+- Deprecate `OpenCardCheckProc` typedef in favor of `LPOCNCHKPROC` (#826)
+- Deprecate `OpenCardConnProc` typedef in favor of `LPOCNCONNPROC` (#826)
+- Deprecate `OpenCardDisconnProc` typedef in favor of `LPOCNDSCPROC` (#826)
+- Deprecate `OutputProc` typedef in favor of `GRAYSTRINGPROC` (#826)
+- Deprecate `PfnAuthenticationCallbackEx` in favor of
+  `PFN_AUTHENTICATION_CALLBACK_EX` (#826)
+- Deprecate `PfnbluetoothGattEventCallback` in favor of
+  `PFN_BLUETOOTH_GATT_EVENT_CALLBACK` (#826)
+- Deprecate `PfnBluetoothEnumAttributesCallback` in favor of
+  `PFN_BLUETOOTH_ENUM_ATTRIBUTES_CALLBACK` (#826)
+- Deprecate `PfnDeviceCallback` typedef in favor of `PFN_DEVICE_CALLBACK` (#826)
+- Deprecate `PfnScNotifyCallbackFunction` in favor of
+  `PFN_SC_NOTIFY_CALLBACK` (#826)
+- Deprecate `SendAsyncProc` typedef in favor of `SENDASYNCPROC` (#826)
+- Deprecate `SpNotifyCallback` typedef in favor of `SPNOTIFYCALLBACK` (#826)
+- Deprecate `SubclassProc` typedef in favor of `SUBCLASSPROC` (#826)
+- Deprecate `SymEnumSymbolsProc` in favor of
+  `PSYM_ENUMERATESYMBOLS_CALLBACK` (#826)
+- Deprecate `TaskDialogCallbackProc` typedef in favor of
+  `PFTASKDIALOGCALLBACK` (#826)
+- Deprecate `ThreadProc` typedef in favor of `LPTHREAD_START_ROUTINE` (#826)
+- Deprecate `TimerProc` typedef in favor of `TIMERPROC` (#826)
+- Deprecate `WindowProc` typedef in favor of `WNDPROC` (#826)
+- Deprecate `WlanNotificationCallback` in favor of
+  `WLAN_NOTIFICATION_CALLBACK` (#826)
+- **Note**: You can automatically migrate your code to use the new typedefs by
+  running `dart fix --apply` in your terminal.
 
 ## 5.2.0
 

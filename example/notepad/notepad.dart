@@ -212,7 +212,7 @@ int mainWindowProc(int hwnd, int message, int wParam, int lParam) {
         case IDM_APP_ABOUT:
           final pDialog = NotepadResources.loadAboutBox();
 
-          final lpDialogFunc = NativeCallable<DlgProc>.isolateLocal(
+          final lpDialogFunc = NativeCallable<DLGPROC>.isolateLocal(
             dialogReturnProc,
             exceptionalReturn: 0,
           );
@@ -293,7 +293,7 @@ void main() {
   // Register the window class.
   final className = TEXT(APP_NAME);
 
-  final lpfnWndProc = NativeCallable<WindowProc>.isolateLocal(
+  final lpfnWndProc = NativeCallable<WNDPROC>.isolateLocal(
     mainWindowProc,
     exceptionalReturn: 0,
   );

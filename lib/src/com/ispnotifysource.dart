@@ -62,7 +62,7 @@ class ISpNotifySource extends IUnknown {
                   int lParam)>()(ptr.ref.lpVtbl, hWnd, Msg, wParam, lParam);
 
   int setNotifyCallbackFunction(
-          Pointer<Pointer<NativeFunction<SpNotifyCallback>>> pfnCallback,
+          Pointer<Pointer<NativeFunction<SPNOTIFYCALLBACK>>> pfnCallback,
           int wParam,
           int lParam) =>
       (ptr.ref.vtable + 5)
@@ -71,7 +71,7 @@ class ISpNotifySource extends IUnknown {
                   NativeFunction<
                       Int32 Function(
                           Pointer,
-                          Pointer<Pointer<NativeFunction<SpNotifyCallback>>>
+                          Pointer<Pointer<NativeFunction<SPNOTIFYCALLBACK>>>
                               pfnCallback,
                           IntPtr wParam,
                           IntPtr lParam)>>>()
@@ -79,7 +79,7 @@ class ISpNotifySource extends IUnknown {
           .asFunction<
               int Function(
                   Pointer,
-                  Pointer<Pointer<NativeFunction<SpNotifyCallback>>>
+                  Pointer<Pointer<NativeFunction<SPNOTIFYCALLBACK>>>
                       pfnCallback,
                   int wParam,
                   int lParam)>()(ptr.ref.lpVtbl, pfnCallback, wParam, lParam);

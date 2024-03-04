@@ -868,7 +868,7 @@ int CreateRemoteThread(
         int hProcess,
         Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
         int dwStackSize,
-        Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+        Pointer<NativeFunction<LPTHREAD_START_ROUTINE>> lpStartAddress,
         Pointer lpParameter,
         int dwCreationFlags,
         Pointer<Uint32> lpThreadId) =>
@@ -880,7 +880,7 @@ final _CreateRemoteThread = _kernel32.lookupFunction<
         IntPtr hProcess,
         Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
         IntPtr dwStackSize,
-        Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+        Pointer<NativeFunction<LPTHREAD_START_ROUTINE>> lpStartAddress,
         Pointer lpParameter,
         Uint32 dwCreationFlags,
         Pointer<Uint32> lpThreadId),
@@ -888,7 +888,7 @@ final _CreateRemoteThread = _kernel32.lookupFunction<
         int hProcess,
         Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
         int dwStackSize,
-        Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+        Pointer<NativeFunction<LPTHREAD_START_ROUTINE>> lpStartAddress,
         Pointer lpParameter,
         int dwCreationFlags,
         Pointer<Uint32> lpThreadId)>('CreateRemoteThread');
@@ -914,7 +914,7 @@ int CreateRemoteThreadEx(
         int hProcess,
         Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
         int dwStackSize,
-        Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+        Pointer<NativeFunction<LPTHREAD_START_ROUTINE>> lpStartAddress,
         Pointer lpParameter,
         int dwCreationFlags,
         Pointer lpAttributeList,
@@ -934,7 +934,7 @@ final _CreateRemoteThreadEx = _kernel32.lookupFunction<
         IntPtr hProcess,
         Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
         IntPtr dwStackSize,
-        Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+        Pointer<NativeFunction<LPTHREAD_START_ROUTINE>> lpStartAddress,
         Pointer lpParameter,
         Uint32 dwCreationFlags,
         Pointer lpAttributeList,
@@ -943,7 +943,7 @@ final _CreateRemoteThreadEx = _kernel32.lookupFunction<
         int hProcess,
         Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
         int dwStackSize,
-        Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+        Pointer<NativeFunction<LPTHREAD_START_ROUTINE>> lpStartAddress,
         Pointer lpParameter,
         int dwCreationFlags,
         Pointer lpAttributeList,
@@ -966,7 +966,7 @@ final _CreateRemoteThreadEx = _kernel32.lookupFunction<
 int CreateThread(
         Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
         int dwStackSize,
-        Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+        Pointer<NativeFunction<LPTHREAD_START_ROUTINE>> lpStartAddress,
         Pointer lpParameter,
         int dwCreationFlags,
         Pointer<Uint32> lpThreadId) =>
@@ -977,14 +977,14 @@ final _CreateThread = _kernel32.lookupFunction<
     IntPtr Function(
         Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
         IntPtr dwStackSize,
-        Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+        Pointer<NativeFunction<LPTHREAD_START_ROUTINE>> lpStartAddress,
         Pointer lpParameter,
         Uint32 dwCreationFlags,
         Pointer<Uint32> lpThreadId),
     int Function(
         Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
         int dwStackSize,
-        Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+        Pointer<NativeFunction<LPTHREAD_START_ROUTINE>> lpStartAddress,
         Pointer lpParameter,
         int dwCreationFlags,
         Pointer<Uint32> lpThreadId)>('CreateThread');
@@ -1322,14 +1322,17 @@ final _K32EnumDeviceDrivers = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-int EnumPageFiles(Pointer<NativeFunction<EnumPageFilesProc>> pCallBackRoutine,
+int EnumPageFiles(
+        Pointer<NativeFunction<PENUM_PAGE_FILE_CALLBACK>> pCallBackRoutine,
         Pointer pContext) =>
     _K32EnumPageFiles(pCallBackRoutine, pContext);
 
 final _K32EnumPageFiles = _kernel32.lookupFunction<
-    Int32 Function(Pointer<NativeFunction<EnumPageFilesProc>> pCallBackRoutine,
+    Int32 Function(
+        Pointer<NativeFunction<PENUM_PAGE_FILE_CALLBACK>> pCallBackRoutine,
         Pointer pContext),
-    int Function(Pointer<NativeFunction<EnumPageFilesProc>> pCallBackRoutine,
+    int Function(
+        Pointer<NativeFunction<PENUM_PAGE_FILE_CALLBACK>> pCallBackRoutine,
         Pointer pContext)>('K32EnumPageFilesW');
 
 /// Retrieves the process identifier for each process object in the system.
@@ -1418,16 +1421,16 @@ final _K32EnumProcessModulesEx = _kernel32.lookupFunction<
 /// ```
 /// {@category kernel32}
 int EnumResourceNames(int hModule, Pointer<Utf16> lpType,
-        Pointer<NativeFunction<EnumResNameProc>> lpEnumFunc, int lParam) =>
+        Pointer<NativeFunction<ENUMRESNAMEPROC>> lpEnumFunc, int lParam) =>
     _EnumResourceNames(hModule, lpType, lpEnumFunc, lParam);
 
 final _EnumResourceNames = _kernel32.lookupFunction<
     Int32 Function(IntPtr hModule, Pointer<Utf16> lpType,
-        Pointer<NativeFunction<EnumResNameProc>> lpEnumFunc, IntPtr lParam),
+        Pointer<NativeFunction<ENUMRESNAMEPROC>> lpEnumFunc, IntPtr lParam),
     int Function(
         int hModule,
         Pointer<Utf16> lpType,
-        Pointer<NativeFunction<EnumResNameProc>> lpEnumFunc,
+        Pointer<NativeFunction<ENUMRESNAMEPROC>> lpEnumFunc,
         int lParam)>('EnumResourceNamesW');
 
 /// Enumerates resource types within a binary module. Starting with Windows
@@ -1447,15 +1450,15 @@ final _EnumResourceNames = _kernel32.lookupFunction<
 /// ```
 /// {@category kernel32}
 int EnumResourceTypes(int hModule,
-        Pointer<NativeFunction<EnumResTypeProc>> lpEnumFunc, int lParam) =>
+        Pointer<NativeFunction<ENUMRESTYPEPROC>> lpEnumFunc, int lParam) =>
     _EnumResourceTypes(hModule, lpEnumFunc, lParam);
 
 final _EnumResourceTypes = _kernel32.lookupFunction<
     Int32 Function(IntPtr hModule,
-        Pointer<NativeFunction<EnumResTypeProc>> lpEnumFunc, IntPtr lParam),
+        Pointer<NativeFunction<ENUMRESTYPEPROC>> lpEnumFunc, IntPtr lParam),
     int Function(
         int hModule,
-        Pointer<NativeFunction<EnumResTypeProc>> lpEnumFunc,
+        Pointer<NativeFunction<ENUMRESTYPEPROC>> lpEnumFunc,
         int lParam)>('EnumResourceTypesW');
 
 /// Enumerates all system firmware tables of the specified type.
@@ -5518,7 +5521,7 @@ int ReadFileEx(
         Pointer<Uint8> lpBuffer,
         int nNumberOfBytesToRead,
         Pointer<OVERLAPPED> lpOverlapped,
-        Pointer<NativeFunction<LpoverlappedCompletionRoutine>>
+        Pointer<NativeFunction<LPOVERLAPPED_COMPLETION_ROUTINE>>
             lpCompletionRoutine) =>
     _ReadFileEx(hFile, lpBuffer, nNumberOfBytesToRead, lpOverlapped,
         lpCompletionRoutine);
@@ -5529,14 +5532,14 @@ final _ReadFileEx = _kernel32.lookupFunction<
         Pointer<Uint8> lpBuffer,
         Uint32 nNumberOfBytesToRead,
         Pointer<OVERLAPPED> lpOverlapped,
-        Pointer<NativeFunction<LpoverlappedCompletionRoutine>>
+        Pointer<NativeFunction<LPOVERLAPPED_COMPLETION_ROUTINE>>
             lpCompletionRoutine),
     int Function(
         int hFile,
         Pointer<Uint8> lpBuffer,
         int nNumberOfBytesToRead,
         Pointer<OVERLAPPED> lpOverlapped,
-        Pointer<NativeFunction<LpoverlappedCompletionRoutine>>
+        Pointer<NativeFunction<LPOVERLAPPED_COMPLETION_ROUTINE>>
             lpCompletionRoutine)>('ReadFileEx');
 
 /// Reads data from a file and stores it in an array of buffers. The
@@ -5828,13 +5831,13 @@ final _SetCommTimeouts = _kernel32.lookupFunction<
 /// ```
 /// {@category kernel32}
 int SetConsoleCtrlHandler(
-        Pointer<NativeFunction<HandlerRoutine>> HandlerRoutine, int Add) =>
+        Pointer<NativeFunction<PHANDLER_ROUTINE>> HandlerRoutine, int Add) =>
     _SetConsoleCtrlHandler(HandlerRoutine, Add);
 
 final _SetConsoleCtrlHandler = _kernel32.lookupFunction<
     Int32 Function(
-        Pointer<NativeFunction<HandlerRoutine>> HandlerRoutine, Int32 Add),
-    int Function(Pointer<NativeFunction<HandlerRoutine>> HandlerRoutine,
+        Pointer<NativeFunction<PHANDLER_ROUTINE>> HandlerRoutine, Int32 Add),
+    int Function(Pointer<NativeFunction<PHANDLER_ROUTINE>> HandlerRoutine,
         int Add)>('SetConsoleCtrlHandler');
 
 /// Sets the size and visibility of the cursor for the specified console
@@ -7275,7 +7278,7 @@ int WriteFileEx(
         Pointer<Uint8> lpBuffer,
         int nNumberOfBytesToWrite,
         Pointer<OVERLAPPED> lpOverlapped,
-        Pointer<NativeFunction<LpoverlappedCompletionRoutine>>
+        Pointer<NativeFunction<LPOVERLAPPED_COMPLETION_ROUTINE>>
             lpCompletionRoutine) =>
     _WriteFileEx(hFile, lpBuffer, nNumberOfBytesToWrite, lpOverlapped,
         lpCompletionRoutine);
@@ -7286,14 +7289,14 @@ final _WriteFileEx = _kernel32.lookupFunction<
         Pointer<Uint8> lpBuffer,
         Uint32 nNumberOfBytesToWrite,
         Pointer<OVERLAPPED> lpOverlapped,
-        Pointer<NativeFunction<LpoverlappedCompletionRoutine>>
+        Pointer<NativeFunction<LPOVERLAPPED_COMPLETION_ROUTINE>>
             lpCompletionRoutine),
     int Function(
         int hFile,
         Pointer<Uint8> lpBuffer,
         int nNumberOfBytesToWrite,
         Pointer<OVERLAPPED> lpOverlapped,
-        Pointer<NativeFunction<LpoverlappedCompletionRoutine>>
+        Pointer<NativeFunction<LPOVERLAPPED_COMPLETION_ROUTINE>>
             lpCompletionRoutine)>('WriteFileEx');
 
 /// Retrieves data from an array of buffers and writes the data to a file.

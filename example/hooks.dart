@@ -193,14 +193,14 @@ int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
 void main() => initApp(winMain);
 
 void winMain(int hInstance, List<String> args, int nShowCmd) {
-  final lpfn = NativeCallable<CallWndProc>.isolateLocal(
+  final lpfn = NativeCallable<HOOKPROC>.isolateLocal(
     lowlevelKeyboardHookProc,
     exceptionalReturn: 0,
   );
 
   keyHook = SetWindowsHookEx(WH_KEYBOARD_LL, lpfn.nativeFunction, NULL, 0);
 
-  final lpfnWndProc = NativeCallable<WindowProc>.isolateLocal(
+  final lpfnWndProc = NativeCallable<WNDPROC>.isolateLocal(
     mainWindowProc,
     exceptionalReturn: 0,
   );

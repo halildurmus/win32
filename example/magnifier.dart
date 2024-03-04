@@ -32,8 +32,8 @@ void main() => initApp(winMain);
 
 /// Entry point for the application
 void winMain(int hInstance, List<String> args, int nCmdShow) {
-  final lpfnWndProc = NativeCallable<WindowProc>.isolateLocal(hostWndProc,
-      exceptionalReturn: 0);
+  final lpfnWndProc =
+      NativeCallable<WNDPROC>.isolateLocal(hostWndProc, exceptionalReturn: 0);
 
   if (MagInitialize() == FALSE ||
       !setupMagnifier(hInstance, lpfnWndProc.nativeFunction)) {
@@ -43,7 +43,7 @@ void winMain(int hInstance, List<String> args, int nCmdShow) {
   ShowWindow(hwndHost, nCmdShow);
   UpdateWindow(hwndHost);
 
-  final lpTimerFunc = NativeCallable<TimerProc>.isolateLocal(updateMagWindow);
+  final lpTimerFunc = NativeCallable<TIMERPROC>.isolateLocal(updateMagWindow);
 
   // Create a timer to update the control
   final timerId =
@@ -109,7 +109,7 @@ int hostWndProc(int hWnd, int message, int wParam, int lParam) {
 /// Registers the window class for the window that contains the magnification
 /// control.
 int registerHostWindowClass(
-    int hInstance, Pointer<NativeFunction<WindowProc>> lpfnWndProc) {
+    int hInstance, Pointer<NativeFunction<WNDPROC>> lpfnWndProc) {
   final wcex = calloc<WNDCLASSEX>()
     ..ref.cbSize = sizeOf<WNDCLASSEX>()
     ..ref.style = CS_HREDRAW | CS_VREDRAW
@@ -122,8 +122,7 @@ int registerHostWindowClass(
   return RegisterClassEx(wcex);
 }
 
-bool setupMagnifier(
-    int hInst, Pointer<NativeFunction<WindowProc>> lpfnWndProc) {
+bool setupMagnifier(int hInst, Pointer<NativeFunction<WNDPROC>> lpfnWndProc) {
   // Set bounds of host window according to screen size
   hostWindowRect
     ..ref.top = 0
