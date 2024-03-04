@@ -36,8 +36,7 @@ class IKnownFolderManager extends IUnknown {
   factory IKnownFolderManager.from(IUnknown interface) =>
       IKnownFolderManager(interface.toInterface(IID_IKnownFolderManager));
 
-  int folderIdFromCsidl(int nCsidl, Pointer<GUID> pfid) => ptr.ref.vtable
-      .elementAt(3)
+  int folderIdFromCsidl(int nCsidl, Pointer<GUID> pfid) => (ptr.ref.vtable + 3)
       .cast<
           Pointer<
               NativeFunction<
@@ -47,22 +46,20 @@ class IKnownFolderManager extends IUnknown {
           int Function(Pointer, int nCsidl,
               Pointer<GUID> pfid)>()(ptr.ref.lpVtbl, nCsidl, pfid);
 
-  int folderIdToCsidl(Pointer<GUID> rfid, Pointer<Int32> pnCsidl) => ptr
-      .ref.vtable
-      .elementAt(4)
-      .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(
-                      Pointer, Pointer<GUID> rfid, Pointer<Int32> pnCsidl)>>>()
-      .value
-      .asFunction<
-          int Function(Pointer, Pointer<GUID> rfid,
-              Pointer<Int32> pnCsidl)>()(ptr.ref.lpVtbl, rfid, pnCsidl);
+  int folderIdToCsidl(Pointer<GUID> rfid, Pointer<Int32> pnCsidl) =>
+      (ptr.ref.vtable + 4)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(Pointer, Pointer<GUID> rfid,
+                          Pointer<Int32> pnCsidl)>>>()
+          .value
+          .asFunction<
+              int Function(Pointer, Pointer<GUID> rfid,
+                  Pointer<Int32> pnCsidl)>()(ptr.ref.lpVtbl, rfid, pnCsidl);
 
   int getFolderIds(Pointer<Pointer<GUID>> ppKFId, Pointer<Uint32> pCount) =>
-      ptr.ref.vtable
-          .elementAt(5)
+      (ptr.ref.vtable + 5)
           .cast<
               Pointer<
                   NativeFunction<
@@ -73,23 +70,22 @@ class IKnownFolderManager extends IUnknown {
               int Function(Pointer, Pointer<Pointer<GUID>> ppKFId,
                   Pointer<Uint32> pCount)>()(ptr.ref.lpVtbl, ppKFId, pCount);
 
-  int getFolder(Pointer<GUID> rfid, Pointer<Pointer<COMObject>> ppkf) => ptr
-      .ref.vtable
-      .elementAt(6)
-      .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(Pointer, Pointer<GUID> rfid,
-                      Pointer<Pointer<COMObject>> ppkf)>>>()
-      .value
-      .asFunction<
-          int Function(Pointer, Pointer<GUID> rfid,
-              Pointer<Pointer<COMObject>> ppkf)>()(ptr.ref.lpVtbl, rfid, ppkf);
+  int getFolder(Pointer<GUID> rfid, Pointer<Pointer<COMObject>> ppkf) =>
+      (ptr.ref.vtable + 6)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Pointer<GUID> rfid,
+                              Pointer<Pointer<COMObject>> ppkf)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<GUID> rfid,
+                      Pointer<Pointer<COMObject>> ppkf)>()(
+          ptr.ref.lpVtbl, rfid, ppkf);
 
   int getFolderByName(
           Pointer<Utf16> pszCanonicalName, Pointer<Pointer<COMObject>> ppkf) =>
-      ptr.ref.vtable
-          .elementAt(7)
+      (ptr.ref.vtable + 7)
           .cast<
               Pointer<
                   NativeFunction<
@@ -105,8 +101,7 @@ class IKnownFolderManager extends IUnknown {
 
   int registerFolder(
           Pointer<GUID> rfid, Pointer<KNOWNFOLDER_DEFINITION> pKFD) =>
-      ptr.ref.vtable
-              .elementAt(8)
+      (ptr.ref.vtable + 8)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -118,8 +113,7 @@ class IKnownFolderManager extends IUnknown {
                       Pointer<KNOWNFOLDER_DEFINITION> pKFD)>()(
           ptr.ref.lpVtbl, rfid, pKFD);
 
-  int unregisterFolder(Pointer<GUID> rfid) => ptr.ref.vtable
-      .elementAt(9)
+  int unregisterFolder(Pointer<GUID> rfid) => (ptr.ref.vtable + 9)
       .cast<
           Pointer<
               NativeFunction<Int32 Function(Pointer, Pointer<GUID> rfid)>>>()
@@ -129,8 +123,7 @@ class IKnownFolderManager extends IUnknown {
 
   int findFolderFromPath(
           Pointer<Utf16> pszPath, int mode, Pointer<Pointer<COMObject>> ppkf) =>
-      ptr.ref.vtable
-              .elementAt(10)
+      (ptr.ref.vtable + 10)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -144,8 +137,7 @@ class IKnownFolderManager extends IUnknown {
 
   int findFolderFromIDList(
           Pointer<ITEMIDLIST> pidl, Pointer<Pointer<COMObject>> ppkf) =>
-      ptr.ref.vtable
-              .elementAt(11)
+      (ptr.ref.vtable + 11)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -165,8 +157,7 @@ class IKnownFolderManager extends IUnknown {
           int cFolders,
           Pointer<GUID> pExclusion,
           Pointer<Pointer<Utf16>> ppszError) =>
-      ptr.ref.vtable
-              .elementAt(12)
+      (ptr.ref.vtable + 12)
               .cast<
                   Pointer<
                       NativeFunction<

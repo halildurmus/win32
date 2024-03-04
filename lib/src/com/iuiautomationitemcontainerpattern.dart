@@ -41,8 +41,7 @@ class IUIAutomationItemContainerPattern extends IUnknown {
 
   int findItemByProperty(Pointer<COMObject> pStartAfter, int propertyId,
           VARIANT value, Pointer<Pointer<COMObject>> pFound) =>
-      ptr.ref.vtable
-              .elementAt(3)
+      (ptr.ref.vtable + 3)
               .cast<
                   Pointer<
                       NativeFunction<

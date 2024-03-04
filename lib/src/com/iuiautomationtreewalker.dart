@@ -40,8 +40,7 @@ class IUIAutomationTreeWalker extends IUnknown {
 
   int getParentElement(
           Pointer<COMObject> element, Pointer<Pointer<COMObject>> parent) =>
-      ptr.ref.vtable
-              .elementAt(3)
+      (ptr.ref.vtable + 3)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -55,8 +54,7 @@ class IUIAutomationTreeWalker extends IUnknown {
 
   int getFirstChildElement(
           Pointer<COMObject> element, Pointer<Pointer<COMObject>> first) =>
-      ptr.ref.vtable
-              .elementAt(4)
+      (ptr.ref.vtable + 4)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -70,8 +68,7 @@ class IUIAutomationTreeWalker extends IUnknown {
 
   int getLastChildElement(
           Pointer<COMObject> element, Pointer<Pointer<COMObject>> last) =>
-      ptr.ref.vtable
-              .elementAt(5)
+      (ptr.ref.vtable + 5)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -85,8 +82,7 @@ class IUIAutomationTreeWalker extends IUnknown {
 
   int getNextSiblingElement(
           Pointer<COMObject> element, Pointer<Pointer<COMObject>> next) =>
-      ptr.ref.vtable
-              .elementAt(6)
+      (ptr.ref.vtable + 6)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -100,8 +96,7 @@ class IUIAutomationTreeWalker extends IUnknown {
 
   int getPreviousSiblingElement(
           Pointer<COMObject> element, Pointer<Pointer<COMObject>> previous) =>
-      ptr.ref.vtable
-              .elementAt(7)
+      (ptr.ref.vtable + 7)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -115,8 +110,7 @@ class IUIAutomationTreeWalker extends IUnknown {
 
   int normalizeElement(
           Pointer<COMObject> element, Pointer<Pointer<COMObject>> normalized) =>
-      ptr.ref.vtable
-              .elementAt(8)
+      (ptr.ref.vtable + 8)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -132,8 +126,7 @@ class IUIAutomationTreeWalker extends IUnknown {
           Pointer<COMObject> element,
           Pointer<COMObject> cacheRequest,
           Pointer<Pointer<COMObject>> parent) =>
-      ptr.ref.vtable
-              .elementAt(9)
+      (ptr.ref.vtable + 9)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -153,8 +146,7 @@ class IUIAutomationTreeWalker extends IUnknown {
 
   int getFirstChildElementBuildCache(Pointer<COMObject> element,
           Pointer<COMObject> cacheRequest, Pointer<Pointer<COMObject>> first) =>
-      ptr.ref.vtable
-              .elementAt(10)
+      (ptr.ref.vtable + 10)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -174,8 +166,7 @@ class IUIAutomationTreeWalker extends IUnknown {
 
   int getLastChildElementBuildCache(Pointer<COMObject> element,
           Pointer<COMObject> cacheRequest, Pointer<Pointer<COMObject>> last) =>
-      ptr.ref.vtable
-              .elementAt(11)
+      (ptr.ref.vtable + 11)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -195,8 +186,7 @@ class IUIAutomationTreeWalker extends IUnknown {
 
   int getNextSiblingElementBuildCache(Pointer<COMObject> element,
           Pointer<COMObject> cacheRequest, Pointer<Pointer<COMObject>> next) =>
-      ptr.ref.vtable
-              .elementAt(12)
+      (ptr.ref.vtable + 12)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -218,8 +208,7 @@ class IUIAutomationTreeWalker extends IUnknown {
           Pointer<COMObject> element,
           Pointer<COMObject> cacheRequest,
           Pointer<Pointer<COMObject>> previous) =>
-      ptr.ref.vtable
-              .elementAt(13)
+      (ptr.ref.vtable + 13)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -241,8 +230,7 @@ class IUIAutomationTreeWalker extends IUnknown {
           Pointer<COMObject> element,
           Pointer<COMObject> cacheRequest,
           Pointer<Pointer<COMObject>> normalized) =>
-      ptr.ref.vtable
-              .elementAt(14)
+      (ptr.ref.vtable + 14)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -263,8 +251,7 @@ class IUIAutomationTreeWalker extends IUnknown {
   Pointer<COMObject> get condition {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
-        .elementAt(15)
+    final hr = (ptr.ref.vtable + 15)
         .cast<
             Pointer<
                 NativeFunction<

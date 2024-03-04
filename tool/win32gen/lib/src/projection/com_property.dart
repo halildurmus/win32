@@ -19,8 +19,7 @@ abstract class ComPropertyProjection extends ComMethodProjection {
   }) =>
       [
         '''
-    final hr = ptr.ref.vtable
-        .elementAt($vtableOffset)
+    final hr = (ptr.ref.vtable + $vtableOffset)
         .cast<Pointer<NativeFunction<$nativePrototype>>>()
         .value
         .asFunction<$dartPrototype>()(ptr.ref.lpVtbl, $identifier);

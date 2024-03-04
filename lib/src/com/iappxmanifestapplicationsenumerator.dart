@@ -38,8 +38,8 @@ class IAppxManifestApplicationsEnumerator extends IUnknown {
       IAppxManifestApplicationsEnumerator(
           interface.toInterface(IID_IAppxManifestApplicationsEnumerator));
 
-  int getCurrent(Pointer<Pointer<COMObject>> application) => ptr.ref.vtable
-          .elementAt(3)
+  int getCurrent(Pointer<Pointer<COMObject>> application) => (ptr.ref.vtable +
+              3)
           .cast<
               Pointer<
                   NativeFunction<
@@ -50,8 +50,7 @@ class IAppxManifestApplicationsEnumerator extends IUnknown {
               int Function(Pointer, Pointer<Pointer<COMObject>> application)>()(
       ptr.ref.lpVtbl, application);
 
-  int getHasCurrent(Pointer<Int32> hasCurrent) => ptr.ref.vtable
-          .elementAt(4)
+  int getHasCurrent(Pointer<Int32> hasCurrent) => (ptr.ref.vtable + 4)
           .cast<
               Pointer<
                   NativeFunction<
@@ -60,8 +59,7 @@ class IAppxManifestApplicationsEnumerator extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Int32> hasCurrent)>()(
       ptr.ref.lpVtbl, hasCurrent);
 
-  int moveNext(Pointer<Int32> hasNext) => ptr.ref.vtable
-          .elementAt(5)
+  int moveNext(Pointer<Int32> hasNext) => (ptr.ref.vtable + 5)
           .cast<
               Pointer<
                   NativeFunction<

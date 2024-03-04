@@ -39,8 +39,7 @@ class IMetaDataTables2 extends IMetaDataTables {
       IMetaDataTables2(interface.toInterface(IID_IMetaDataTables2));
 
   int getMetaDataStorage(Pointer<Pointer> ppvMd, Pointer<Uint32> pcbMd) =>
-      ptr.ref.vtable
-          .elementAt(22)
+      (ptr.ref.vtable + 22)
           .cast<
               Pointer<
                   NativeFunction<
@@ -53,8 +52,7 @@ class IMetaDataTables2 extends IMetaDataTables {
 
   int getMetaDataStreamInfo(int ix, Pointer<Pointer<Int8>> ppchName,
           Pointer<Pointer> ppv, Pointer<Uint32> pcb) =>
-      ptr.ref.vtable
-              .elementAt(23)
+      (ptr.ref.vtable + 23)
               .cast<
                   Pointer<
                       NativeFunction<

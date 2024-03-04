@@ -38,16 +38,16 @@ class IAppxManifestReader2 extends IAppxManifestReader {
   factory IAppxManifestReader2.from(IUnknown interface) =>
       IAppxManifestReader2(interface.toInterface(IID_IAppxManifestReader2));
 
-  int getQualifiedResources(Pointer<Pointer<COMObject>> resources) => ptr
-          .ref.vtable
-          .elementAt(12)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<Pointer<COMObject>> resources)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, Pointer<Pointer<COMObject>> resources)>()(
-      ptr.ref.lpVtbl, resources);
+  int getQualifiedResources(Pointer<Pointer<COMObject>> resources) =>
+      (ptr.ref.vtable + 12)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer,
+                              Pointer<Pointer<COMObject>> resources)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer, Pointer<Pointer<COMObject>> resources)>()(
+          ptr.ref.lpVtbl, resources);
 }

@@ -39,8 +39,7 @@ class IUIAutomationTextRange extends IUnknown {
   factory IUIAutomationTextRange.from(IUnknown interface) =>
       IUIAutomationTextRange(interface.toInterface(IID_IUIAutomationTextRange));
 
-  int clone(Pointer<Pointer<COMObject>> clonedRange) => ptr.ref.vtable
-          .elementAt(3)
+  int clone(Pointer<Pointer<COMObject>> clonedRange) => (ptr.ref.vtable + 3)
           .cast<
               Pointer<
                   NativeFunction<
@@ -52,8 +51,7 @@ class IUIAutomationTextRange extends IUnknown {
       ptr.ref.lpVtbl, clonedRange);
 
   int compare(Pointer<COMObject> range, Pointer<Int32> areSame) =>
-      ptr.ref.vtable
-          .elementAt(4)
+      (ptr.ref.vtable + 4)
           .cast<
               Pointer<
                   NativeFunction<
@@ -66,8 +64,7 @@ class IUIAutomationTextRange extends IUnknown {
 
   int compareEndpoints(int srcEndPoint, Pointer<COMObject> range,
           int targetEndPoint, Pointer<Int32> compValue) =>
-      ptr.ref.vtable
-              .elementAt(5)
+      (ptr.ref.vtable + 5)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -87,8 +84,7 @@ class IUIAutomationTextRange extends IUnknown {
                       Pointer<Int32> compValue)>()(
           ptr.ref.lpVtbl, srcEndPoint, range, targetEndPoint, compValue);
 
-  int expandToEnclosingUnit(int textUnit) => ptr.ref.vtable
-      .elementAt(6)
+  int expandToEnclosingUnit(int textUnit) => (ptr.ref.vtable + 6)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 textUnit)>>>()
       .value
       .asFunction<
@@ -96,8 +92,7 @@ class IUIAutomationTextRange extends IUnknown {
 
   int findAttribute(int attr, VARIANT val, int backward,
           Pointer<Pointer<COMObject>> found) =>
-      ptr.ref.vtable
-              .elementAt(7)
+      (ptr.ref.vtable + 7)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -115,8 +110,7 @@ class IUIAutomationTextRange extends IUnknown {
 
   int findText(Pointer<Utf16> text, int backward, int ignoreCase,
           Pointer<Pointer<COMObject>> found) =>
-      ptr.ref.vtable
-              .elementAt(8)
+      (ptr.ref.vtable + 8)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -132,35 +126,33 @@ class IUIAutomationTextRange extends IUnknown {
                       int ignoreCase, Pointer<Pointer<COMObject>> found)>()(
           ptr.ref.lpVtbl, text, backward, ignoreCase, found);
 
-  int getAttributeValue(int attr, Pointer<VARIANT> value) => ptr.ref.vtable
-          .elementAt(9)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Uint32 attr, Pointer<VARIANT> value)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, int attr, Pointer<VARIANT> value)>()(
-      ptr.ref.lpVtbl, attr, value);
+  int getAttributeValue(int attr, Pointer<VARIANT> value) =>
+      (ptr.ref.vtable + 9)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer, Uint32 attr, Pointer<VARIANT> value)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, int attr, Pointer<VARIANT> value)>()(
+          ptr.ref.lpVtbl, attr, value);
 
-  int getBoundingRectangles(Pointer<Pointer<SAFEARRAY>> boundingRects) => ptr
-          .ref.vtable
-          .elementAt(10)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer,
-                          Pointer<Pointer<SAFEARRAY>> boundingRects)>>>()
-          .value
-          .asFunction<
-              int Function(
-                  Pointer, Pointer<Pointer<SAFEARRAY>> boundingRects)>()(
-      ptr.ref.lpVtbl, boundingRects);
+  int getBoundingRectangles(Pointer<Pointer<SAFEARRAY>> boundingRects) =>
+      (ptr.ref.vtable + 10)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer,
+                              Pointer<Pointer<SAFEARRAY>> boundingRects)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer, Pointer<Pointer<SAFEARRAY>> boundingRects)>()(
+          ptr.ref.lpVtbl, boundingRects);
 
   int getEnclosingElement(Pointer<Pointer<COMObject>> enclosingElement) =>
-      ptr.ref.vtable
-              .elementAt(11)
+      (ptr.ref.vtable + 11)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -172,20 +164,20 @@ class IUIAutomationTextRange extends IUnknown {
                       Pointer, Pointer<Pointer<COMObject>> enclosingElement)>()(
           ptr.ref.lpVtbl, enclosingElement);
 
-  int getText(int maxLength, Pointer<Pointer<Utf16>> text) => ptr.ref.vtable
-      .elementAt(12)
-      .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(Pointer, Int32 maxLength,
-                      Pointer<Pointer<Utf16>> text)>>>()
-      .value
-      .asFunction<
-          int Function(Pointer, int maxLength,
-              Pointer<Pointer<Utf16>> text)>()(ptr.ref.lpVtbl, maxLength, text);
+  int getText(int maxLength, Pointer<Pointer<Utf16>> text) =>
+      (ptr.ref.vtable + 12)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Int32 maxLength,
+                              Pointer<Pointer<Utf16>> text)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer, int maxLength, Pointer<Pointer<Utf16>> text)>()(
+          ptr.ref.lpVtbl, maxLength, text);
 
-  int move(int unit, int count, Pointer<Int32> moved) => ptr.ref.vtable
-      .elementAt(13)
+  int move(int unit, int count, Pointer<Int32> moved) => (ptr.ref.vtable + 13)
       .cast<
           Pointer<
               NativeFunction<
@@ -198,9 +190,7 @@ class IUIAutomationTextRange extends IUnknown {
 
   int moveEndpointByUnit(
           int endpoint, int unit, int count, Pointer<Int32> moved) =>
-      ptr
-              .ref.vtable
-              .elementAt(14)
+      (ptr.ref.vtable + 14)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -215,8 +205,7 @@ class IUIAutomationTextRange extends IUnknown {
   int
       moveEndpointByRange(
               int srcEndPoint, Pointer<COMObject> range, int targetEndPoint) =>
-          ptr.ref.vtable
-                  .elementAt(15)
+          (ptr.ref.vtable + 15)
                   .cast<
                       Pointer<
                           NativeFunction<
@@ -231,34 +220,29 @@ class IUIAutomationTextRange extends IUnknown {
                           Pointer<COMObject> range, int targetEndPoint)>()(
               ptr.ref.lpVtbl, srcEndPoint, range, targetEndPoint);
 
-  int select() => ptr.ref.vtable
-      .elementAt(16)
+  int select() => (ptr.ref.vtable + 16)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  int addToSelection() => ptr.ref.vtable
-      .elementAt(17)
+  int addToSelection() => (ptr.ref.vtable + 17)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  int removeFromSelection() => ptr.ref.vtable
-      .elementAt(18)
+  int removeFromSelection() => (ptr.ref.vtable + 18)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  int scrollIntoView(int alignToTop) => ptr.ref.vtable
-      .elementAt(19)
+  int scrollIntoView(int alignToTop) => (ptr.ref.vtable + 19)
       .cast<
           Pointer<NativeFunction<Int32 Function(Pointer, Int32 alignToTop)>>>()
       .value
       .asFunction<
           int Function(Pointer, int alignToTop)>()(ptr.ref.lpVtbl, alignToTop);
 
-  int getChildren(Pointer<Pointer<COMObject>> children) => ptr.ref.vtable
-          .elementAt(20)
+  int getChildren(Pointer<Pointer<COMObject>> children) => (ptr.ref.vtable + 20)
           .cast<
               Pointer<
                   NativeFunction<

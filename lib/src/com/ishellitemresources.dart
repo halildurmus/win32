@@ -36,8 +36,7 @@ class IShellItemResources extends IUnknown {
   factory IShellItemResources.from(IUnknown interface) =>
       IShellItemResources(interface.toInterface(IID_IShellItemResources));
 
-  int getAttributes(Pointer<Uint32> pdwAttributes) => ptr.ref.vtable
-      .elementAt(3)
+  int getAttributes(Pointer<Uint32> pdwAttributes) => (ptr.ref.vtable + 3)
       .cast<
           Pointer<
               NativeFunction<
@@ -47,8 +46,7 @@ class IShellItemResources extends IUnknown {
           int Function(Pointer,
               Pointer<Uint32> pdwAttributes)>()(ptr.ref.lpVtbl, pdwAttributes);
 
-  int getSize(Pointer<Uint64> pullSize) => ptr.ref.vtable
-          .elementAt(4)
+  int getSize(Pointer<Uint64> pullSize) => (ptr.ref.vtable + 4)
           .cast<
               Pointer<
                   NativeFunction<
@@ -59,8 +57,7 @@ class IShellItemResources extends IUnknown {
 
   int getTimes(Pointer<FILETIME> pftCreation, Pointer<FILETIME> pftWrite,
           Pointer<FILETIME> pftAccess) =>
-      ptr.ref.vtable
-              .elementAt(5)
+      (ptr.ref.vtable + 5)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -80,8 +77,7 @@ class IShellItemResources extends IUnknown {
 
   int setTimes(Pointer<FILETIME> pftCreation, Pointer<FILETIME> pftWrite,
           Pointer<FILETIME> pftAccess) =>
-      ptr.ref.vtable
-              .elementAt(6)
+      (ptr.ref.vtable + 6)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -101,8 +97,7 @@ class IShellItemResources extends IUnknown {
 
   int getResourceDescription(Pointer<SHELL_ITEM_RESOURCE> pcsir,
           Pointer<Pointer<Utf16>> ppszDescription) =>
-      ptr.ref.vtable
-              .elementAt(7)
+      (ptr.ref.vtable + 7)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -116,8 +111,7 @@ class IShellItemResources extends IUnknown {
                       Pointer<Pointer<Utf16>> ppszDescription)>()(
           ptr.ref.lpVtbl, pcsir, ppszDescription);
 
-  int enumResources(Pointer<Pointer<COMObject>> ppenumr) => ptr.ref.vtable
-          .elementAt(8)
+  int enumResources(Pointer<Pointer<COMObject>> ppenumr) => (ptr.ref.vtable + 8)
           .cast<
               Pointer<
                   NativeFunction<
@@ -128,22 +122,21 @@ class IShellItemResources extends IUnknown {
               int Function(Pointer, Pointer<Pointer<COMObject>> ppenumr)>()(
       ptr.ref.lpVtbl, ppenumr);
 
-  int supportsResource(Pointer<SHELL_ITEM_RESOURCE> pcsir) => ptr.ref.vtable
-          .elementAt(9)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<SHELL_ITEM_RESOURCE> pcsir)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, Pointer<SHELL_ITEM_RESOURCE> pcsir)>()(
-      ptr.ref.lpVtbl, pcsir);
+  int supportsResource(Pointer<SHELL_ITEM_RESOURCE> pcsir) =>
+      (ptr.ref.vtable + 9)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer, Pointer<SHELL_ITEM_RESOURCE> pcsir)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<SHELL_ITEM_RESOURCE> pcsir)>()(
+          ptr.ref.lpVtbl, pcsir);
 
   int openResource(Pointer<SHELL_ITEM_RESOURCE> pcsir, Pointer<GUID> riid,
           Pointer<Pointer> ppv) =>
-      ptr.ref.vtable
-          .elementAt(10)
+      (ptr.ref.vtable + 10)
           .cast<
               Pointer<
                   NativeFunction<
@@ -162,8 +155,7 @@ class IShellItemResources extends IUnknown {
 
   int createResource(Pointer<SHELL_ITEM_RESOURCE> pcsir, Pointer<GUID> riid,
           Pointer<Pointer> ppv) =>
-      ptr.ref.vtable
-          .elementAt(11)
+      (ptr.ref.vtable + 11)
           .cast<
               Pointer<
                   NativeFunction<
@@ -180,8 +172,7 @@ class IShellItemResources extends IUnknown {
                   Pointer<GUID> riid,
                   Pointer<Pointer> ppv)>()(ptr.ref.lpVtbl, pcsir, riid, ppv);
 
-  int markForDelete() => ptr.ref.vtable
-      .elementAt(12)
+  int markForDelete() => (ptr.ref.vtable + 12)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);

@@ -39,14 +39,12 @@ class IUIAutomationExpandCollapsePattern extends IUnknown {
       IUIAutomationExpandCollapsePattern(
           interface.toInterface(IID_IUIAutomationExpandCollapsePattern));
 
-  int expand() => ptr.ref.vtable
-      .elementAt(3)
+  int expand() => (ptr.ref.vtable + 3)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  int collapse() => ptr.ref.vtable
-      .elementAt(4)
+  int collapse() => (ptr.ref.vtable + 4)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
@@ -55,8 +53,7 @@ class IUIAutomationExpandCollapsePattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(5)
+      final hr = (ptr.ref.vtable + 5)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -78,8 +75,7 @@ class IUIAutomationExpandCollapsePattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(6)
+      final hr = (ptr.ref.vtable + 6)
               .cast<
                   Pointer<
                       NativeFunction<

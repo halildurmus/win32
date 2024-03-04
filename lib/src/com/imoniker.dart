@@ -47,8 +47,7 @@ class IMoniker extends IPersistStream {
 
   int bindToObject(Pointer<COMObject> pbc, Pointer<COMObject> pmkToLeft,
           Pointer<GUID> riidResult, Pointer<Pointer> ppvResult) =>
-      ptr.ref.vtable
-              .elementAt(8)
+      (ptr.ref.vtable + 8)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -70,8 +69,7 @@ class IMoniker extends IPersistStream {
 
   int bindToStorage(Pointer<COMObject> pbc, Pointer<COMObject> pmkToLeft,
           Pointer<GUID> riid, Pointer<Pointer> ppvObj) =>
-      ptr.ref.vtable
-              .elementAt(9)
+      (ptr.ref.vtable + 9)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -96,8 +94,7 @@ class IMoniker extends IPersistStream {
           int dwReduceHowFar,
           Pointer<Pointer<COMObject>> ppmkToLeft,
           Pointer<Pointer<COMObject>> ppmkReduced) =>
-      ptr.ref.vtable
-              .elementAt(10)
+      (ptr.ref.vtable + 10)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -119,8 +116,7 @@ class IMoniker extends IPersistStream {
 
   int composeWith(Pointer<COMObject> pmkRight, int fOnlyIfNotGeneric,
           Pointer<Pointer<COMObject>> ppmkComposite) =>
-      ptr.ref.vtable
-              .elementAt(11)
+      (ptr.ref.vtable + 11)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -139,8 +135,7 @@ class IMoniker extends IPersistStream {
           ptr.ref.lpVtbl, pmkRight, fOnlyIfNotGeneric, ppmkComposite);
 
   int enum_(int fForward, Pointer<Pointer<COMObject>> ppenumMoniker) =>
-      ptr.ref.vtable
-              .elementAt(12)
+      (ptr.ref.vtable + 12)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -152,8 +147,7 @@ class IMoniker extends IPersistStream {
                       Pointer<Pointer<COMObject>> ppenumMoniker)>()(
           ptr.ref.lpVtbl, fForward, ppenumMoniker);
 
-  int isEqual(Pointer<COMObject> pmkOtherMoniker) => ptr.ref.vtable
-          .elementAt(13)
+  int isEqual(Pointer<COMObject> pmkOtherMoniker) => (ptr.ref.vtable + 13)
           .cast<
               Pointer<
                   NativeFunction<
@@ -164,8 +158,7 @@ class IMoniker extends IPersistStream {
               int Function(Pointer, Pointer<COMObject> pmkOtherMoniker)>()(
       ptr.ref.lpVtbl, pmkOtherMoniker);
 
-  int hash(Pointer<Uint32> pdwHash) => ptr.ref.vtable
-          .elementAt(14)
+  int hash(Pointer<Uint32> pdwHash) => (ptr.ref.vtable + 14)
           .cast<
               Pointer<
                   NativeFunction<
@@ -176,8 +169,7 @@ class IMoniker extends IPersistStream {
 
   int isRunning(Pointer<COMObject> pbc, Pointer<COMObject> pmkToLeft,
           Pointer<COMObject> pmkNewlyRunning) =>
-      ptr.ref.vtable
-              .elementAt(15)
+      (ptr.ref.vtable + 15)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -197,8 +189,7 @@ class IMoniker extends IPersistStream {
 
   int getTimeOfLastChange(Pointer<COMObject> pbc, Pointer<COMObject> pmkToLeft,
           Pointer<FILETIME> pFileTime) =>
-      ptr.ref.vtable
-              .elementAt(16)
+      (ptr.ref.vtable + 16)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -216,8 +207,7 @@ class IMoniker extends IPersistStream {
                       Pointer<FILETIME> pFileTime)>()(
           ptr.ref.lpVtbl, pbc, pmkToLeft, pFileTime);
 
-  int inverse(Pointer<Pointer<COMObject>> ppmk) => ptr.ref.vtable
-      .elementAt(17)
+  int inverse(Pointer<Pointer<COMObject>> ppmk) => (ptr.ref.vtable + 17)
       .cast<
           Pointer<
               NativeFunction<
@@ -229,8 +219,7 @@ class IMoniker extends IPersistStream {
 
   int commonPrefixWith(Pointer<COMObject> pmkOther,
           Pointer<Pointer<COMObject>> ppmkPrefix) =>
-      ptr.ref.vtable
-              .elementAt(18)
+      (ptr.ref.vtable + 18)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -244,8 +233,7 @@ class IMoniker extends IPersistStream {
 
   int relativePathTo(Pointer<COMObject> pmkOther,
           Pointer<Pointer<COMObject>> ppmkRelPath) =>
-      ptr.ref.vtable
-              .elementAt(19)
+      (ptr.ref.vtable + 19)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -259,8 +247,7 @@ class IMoniker extends IPersistStream {
 
   int getDisplayName(Pointer<COMObject> pbc, Pointer<COMObject> pmkToLeft,
           Pointer<Pointer<Utf16>> ppszDisplayName) =>
-      ptr.ref.vtable
-              .elementAt(20)
+      (ptr.ref.vtable + 20)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -284,8 +271,7 @@ class IMoniker extends IPersistStream {
           Pointer<Utf16> pszDisplayName,
           Pointer<Uint32> pchEaten,
           Pointer<Pointer<COMObject>> ppmkOut) =>
-      ptr.ref.vtable
-              .elementAt(21)
+      (ptr.ref.vtable + 21)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -307,8 +293,7 @@ class IMoniker extends IPersistStream {
                       Pointer<Pointer<COMObject>> ppmkOut)>()(
           ptr.ref.lpVtbl, pbc, pmkToLeft, pszDisplayName, pchEaten, ppmkOut);
 
-  int isSystemMoniker(Pointer<Uint32> pdwMksys) => ptr.ref.vtable
-          .elementAt(22)
+  int isSystemMoniker(Pointer<Uint32> pdwMksys) => (ptr.ref.vtable + 22)
           .cast<
               Pointer<
                   NativeFunction<

@@ -47,8 +47,7 @@ class IAudioClient3 extends IAudioClient2 {
           Pointer<Uint32> pFundamentalPeriodInFrames,
           Pointer<Uint32> pMinPeriodInFrames,
           Pointer<Uint32> pMaxPeriodInFrames) =>
-      ptr.ref.vtable
-              .elementAt(18)
+      (ptr.ref.vtable + 18)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -77,8 +76,7 @@ class IAudioClient3 extends IAudioClient2 {
 
   int getCurrentSharedModeEnginePeriod(Pointer<Pointer<WAVEFORMATEX>> ppFormat,
           Pointer<Uint32> pCurrentPeriodInFrames) =>
-      ptr.ref.vtable
-              .elementAt(19)
+      (ptr.ref.vtable + 19)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -94,8 +92,7 @@ class IAudioClient3 extends IAudioClient2 {
 
   int initializeSharedAudioStream(int StreamFlags, int PeriodInFrames,
           Pointer<WAVEFORMATEX> pFormat, Pointer<GUID> AudioSessionGuid) =>
-      ptr.ref.vtable
-              .elementAt(20)
+      (ptr.ref.vtable + 20)
               .cast<
                   Pointer<
                       NativeFunction<

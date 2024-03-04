@@ -42,8 +42,7 @@ class IAudioSessionControl extends IUnknown {
   factory IAudioSessionControl.from(IUnknown interface) =>
       IAudioSessionControl(interface.toInterface(IID_IAudioSessionControl));
 
-  int getState(Pointer<Int32> pRetVal) => ptr.ref.vtable
-          .elementAt(3)
+  int getState(Pointer<Int32> pRetVal) => (ptr.ref.vtable + 3)
           .cast<
               Pointer<
                   NativeFunction<
@@ -52,8 +51,7 @@ class IAudioSessionControl extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Int32> pRetVal)>()(
       ptr.ref.lpVtbl, pRetVal);
 
-  int getDisplayName(Pointer<Pointer<Utf16>> pRetVal) => ptr.ref.vtable
-      .elementAt(4)
+  int getDisplayName(Pointer<Pointer<Utf16>> pRetVal) => (ptr.ref.vtable + 4)
       .cast<
           Pointer<
               NativeFunction<
@@ -63,22 +61,20 @@ class IAudioSessionControl extends IUnknown {
           int Function(Pointer,
               Pointer<Pointer<Utf16>> pRetVal)>()(ptr.ref.lpVtbl, pRetVal);
 
-  int setDisplayName(Pointer<Utf16> Value, Pointer<GUID> EventContext) => ptr
-          .ref.vtable
-          .elementAt(5)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<Utf16> Value,
-                          Pointer<GUID> EventContext)>>>()
-          .value
-          .asFunction<
-              int Function(
-                  Pointer, Pointer<Utf16> Value, Pointer<GUID> EventContext)>()(
-      ptr.ref.lpVtbl, Value, EventContext);
+  int setDisplayName(Pointer<Utf16> Value, Pointer<GUID> EventContext) =>
+      (ptr.ref.vtable + 5)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Pointer<Utf16> Value,
+                              Pointer<GUID> EventContext)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<Utf16> Value,
+                      Pointer<GUID> EventContext)>()(
+          ptr.ref.lpVtbl, Value, EventContext);
 
-  int getIconPath(Pointer<Pointer<Utf16>> pRetVal) => ptr.ref.vtable
-      .elementAt(6)
+  int getIconPath(Pointer<Pointer<Utf16>> pRetVal) => (ptr.ref.vtable + 6)
       .cast<
           Pointer<
               NativeFunction<
@@ -88,22 +84,20 @@ class IAudioSessionControl extends IUnknown {
           int Function(Pointer,
               Pointer<Pointer<Utf16>> pRetVal)>()(ptr.ref.lpVtbl, pRetVal);
 
-  int setIconPath(Pointer<Utf16> Value, Pointer<GUID> EventContext) => ptr
-          .ref.vtable
-          .elementAt(7)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<Utf16> Value,
-                          Pointer<GUID> EventContext)>>>()
-          .value
-          .asFunction<
-              int Function(
-                  Pointer, Pointer<Utf16> Value, Pointer<GUID> EventContext)>()(
-      ptr.ref.lpVtbl, Value, EventContext);
+  int setIconPath(Pointer<Utf16> Value, Pointer<GUID> EventContext) =>
+      (ptr.ref.vtable + 7)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Pointer<Utf16> Value,
+                              Pointer<GUID> EventContext)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<Utf16> Value,
+                      Pointer<GUID> EventContext)>()(
+          ptr.ref.lpVtbl, Value, EventContext);
 
-  int getGroupingParam(Pointer<GUID> pRetVal) => ptr.ref.vtable
-      .elementAt(8)
+  int getGroupingParam(Pointer<GUID> pRetVal) => (ptr.ref.vtable + 8)
       .cast<
           Pointer<
               NativeFunction<Int32 Function(Pointer, Pointer<GUID> pRetVal)>>>()
@@ -113,8 +107,7 @@ class IAudioSessionControl extends IUnknown {
               Pointer, Pointer<GUID> pRetVal)>()(ptr.ref.lpVtbl, pRetVal);
 
   int setGroupingParam(Pointer<GUID> Override, Pointer<GUID> EventContext) =>
-      ptr.ref.vtable
-              .elementAt(9)
+      (ptr.ref.vtable + 9)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -127,8 +120,7 @@ class IAudioSessionControl extends IUnknown {
           ptr.ref.lpVtbl, Override, EventContext);
 
   int registerAudioSessionNotification(Pointer<COMObject> NewNotifications) =>
-      ptr.ref.vtable
-              .elementAt(10)
+      (ptr.ref.vtable + 10)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -140,8 +132,7 @@ class IAudioSessionControl extends IUnknown {
           ptr.ref.lpVtbl, NewNotifications);
 
   int unregisterAudioSessionNotification(Pointer<COMObject> NewNotifications) =>
-      ptr.ref.vtable
-              .elementAt(11)
+      (ptr.ref.vtable + 11)
               .cast<
                   Pointer<
                       NativeFunction<

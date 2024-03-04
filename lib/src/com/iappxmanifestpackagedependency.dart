@@ -38,8 +38,7 @@ class IAppxManifestPackageDependency extends IUnknown {
       IAppxManifestPackageDependency(
           interface.toInterface(IID_IAppxManifestPackageDependency));
 
-  int getName(Pointer<Pointer<Utf16>> name) => ptr.ref.vtable
-          .elementAt(3)
+  int getName(Pointer<Pointer<Utf16>> name) => (ptr.ref.vtable + 3)
           .cast<
               Pointer<
                   NativeFunction<
@@ -48,8 +47,7 @@ class IAppxManifestPackageDependency extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> name)>()(
       ptr.ref.lpVtbl, name);
 
-  int getPublisher(Pointer<Pointer<Utf16>> publisher) => ptr.ref.vtable
-          .elementAt(4)
+  int getPublisher(Pointer<Pointer<Utf16>> publisher) => (ptr.ref.vtable + 4)
           .cast<
               Pointer<
                   NativeFunction<
@@ -60,8 +58,7 @@ class IAppxManifestPackageDependency extends IUnknown {
               int Function(Pointer, Pointer<Pointer<Utf16>> publisher)>()(
       ptr.ref.lpVtbl, publisher);
 
-  int getMinVersion(Pointer<Uint64> minVersion) => ptr.ref.vtable
-          .elementAt(5)
+  int getMinVersion(Pointer<Uint64> minVersion) => (ptr.ref.vtable + 5)
           .cast<
               Pointer<
                   NativeFunction<

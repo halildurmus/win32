@@ -37,8 +37,7 @@ class IUIAutomationElement3 extends IUIAutomationElement2 {
   factory IUIAutomationElement3.from(IUnknown interface) =>
       IUIAutomationElement3(interface.toInterface(IID_IUIAutomationElement3));
 
-  int showContextMenu() => ptr.ref.vtable
-      .elementAt(91)
+  int showContextMenu() => (ptr.ref.vtable + 91)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
@@ -47,8 +46,7 @@ class IUIAutomationElement3 extends IUIAutomationElement2 {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(92)
+      final hr = (ptr.ref.vtable + 92)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -70,8 +68,7 @@ class IUIAutomationElement3 extends IUIAutomationElement2 {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(93)
+      final hr = (ptr.ref.vtable + 93)
               .cast<
                   Pointer<
                       NativeFunction<

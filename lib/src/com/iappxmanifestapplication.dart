@@ -37,29 +37,29 @@ class IAppxManifestApplication extends IUnknown {
       IAppxManifestApplication(
           interface.toInterface(IID_IAppxManifestApplication));
 
-  int getStringValue(Pointer<Utf16> name, Pointer<Pointer<Utf16>> value) => ptr
-      .ref.vtable
-      .elementAt(3)
-      .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(Pointer, Pointer<Utf16> name,
-                      Pointer<Pointer<Utf16>> value)>>>()
-      .value
-      .asFunction<
-          int Function(Pointer, Pointer<Utf16> name,
-              Pointer<Pointer<Utf16>> value)>()(ptr.ref.lpVtbl, name, value);
+  int getStringValue(Pointer<Utf16> name, Pointer<Pointer<Utf16>> value) =>
+      (ptr.ref.vtable + 3)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Pointer<Utf16> name,
+                              Pointer<Pointer<Utf16>> value)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<Utf16> name,
+                      Pointer<Pointer<Utf16>> value)>()(
+          ptr.ref.lpVtbl, name, value);
 
-  int getAppUserModelId(Pointer<Pointer<Utf16>> appUserModelId) => ptr
-          .ref.vtable
-          .elementAt(4)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<Pointer<Utf16>> appUserModelId)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, Pointer<Pointer<Utf16>> appUserModelId)>()(
-      ptr.ref.lpVtbl, appUserModelId);
+  int getAppUserModelId(Pointer<Pointer<Utf16>> appUserModelId) =>
+      (ptr.ref.vtable + 4)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer,
+                              Pointer<Pointer<Utf16>> appUserModelId)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer, Pointer<Pointer<Utf16>> appUserModelId)>()(
+          ptr.ref.lpVtbl, appUserModelId);
 }

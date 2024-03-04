@@ -41,8 +41,7 @@ class IUIAutomationTextRange3 extends IUIAutomationTextRange2 {
 
   int getEnclosingElementBuildCache(Pointer<COMObject> cacheRequest,
           Pointer<Pointer<COMObject>> enclosingElement) =>
-      ptr.ref.vtable
-              .elementAt(22)
+      (ptr.ref.vtable + 22)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -56,8 +55,7 @@ class IUIAutomationTextRange3 extends IUIAutomationTextRange2 {
 
   int getChildrenBuildCache(Pointer<COMObject> cacheRequest,
           Pointer<Pointer<COMObject>> children) =>
-      ptr.ref.vtable
-          .elementAt(23)
+      (ptr.ref.vtable + 23)
           .cast<
               Pointer<
                   NativeFunction<
@@ -73,8 +71,7 @@ class IUIAutomationTextRange3 extends IUIAutomationTextRange2 {
 
   int getAttributeValues(Pointer<Uint32> attributeIds, int attributeIdCount,
           Pointer<Pointer<SAFEARRAY>> attributeValues) =>
-      ptr.ref.vtable
-              .elementAt(24)
+      (ptr.ref.vtable + 24)
               .cast<
                   Pointer<
                       NativeFunction<

@@ -55,8 +55,7 @@ List<String> getInterfaces(IInspectable object) {
   final pIIDs = calloc<Pointer<GUID>>();
 
   try {
-    final hr = object.ptr.ref.vtable
-            .elementAt(3)
+    final hr = (object.ptr.ref.vtable + 3)
             .cast<
                 Pointer<
                     NativeFunction<
@@ -86,8 +85,7 @@ String getClassName(IInspectable object) {
   final hClassName = calloc<HSTRING>();
 
   try {
-    final hr = object.ptr.ref.vtable
-            .elementAt(4)
+    final hr = (object.ptr.ref.vtable + 4)
             .cast<
                 Pointer<
                     NativeFunction<
@@ -113,8 +111,7 @@ TrustLevel getTrustLevel(IInspectable object) {
   final pTrustLevel = calloc<Int32>();
 
   try {
-    final hr = object.ptr.ref.vtable
-            .elementAt(5)
+    final hr = (object.ptr.ref.vtable + 5)
             .cast<
                 Pointer<
                     NativeFunction<

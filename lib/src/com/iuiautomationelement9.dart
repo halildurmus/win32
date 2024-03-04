@@ -41,8 +41,7 @@ class IUIAutomationElement9 extends IUIAutomationElement8 {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(117)
+      final hr = (ptr.ref.vtable + 117)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -64,8 +63,7 @@ class IUIAutomationElement9 extends IUIAutomationElement8 {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(118)
+      final hr = (ptr.ref.vtable + 118)
               .cast<
                   Pointer<
                       NativeFunction<

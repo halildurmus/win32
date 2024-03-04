@@ -38,8 +38,7 @@ class IFileOpenDialog extends IFileDialog {
   factory IFileOpenDialog.from(IUnknown interface) =>
       IFileOpenDialog(interface.toInterface(IID_IFileOpenDialog));
 
-  int getResults(Pointer<Pointer<COMObject>> ppenum) => ptr.ref.vtable
-          .elementAt(27)
+  int getResults(Pointer<Pointer<COMObject>> ppenum) => (ptr.ref.vtable + 27)
           .cast<
               Pointer<
                   NativeFunction<
@@ -50,17 +49,17 @@ class IFileOpenDialog extends IFileDialog {
               int Function(Pointer, Pointer<Pointer<COMObject>> ppenum)>()(
       ptr.ref.lpVtbl, ppenum);
 
-  int getSelectedItems(Pointer<Pointer<COMObject>> ppsai) => ptr.ref.vtable
-          .elementAt(28)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<Pointer<COMObject>> ppsai)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, Pointer<Pointer<COMObject>> ppsai)>()(
-      ptr.ref.lpVtbl, ppsai);
+  int getSelectedItems(Pointer<Pointer<COMObject>> ppsai) =>
+      (ptr.ref.vtable + 28)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer, Pointer<Pointer<COMObject>> ppsai)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<Pointer<COMObject>> ppsai)>()(
+          ptr.ref.lpVtbl, ppsai);
 }
 
 /// @nodoc

@@ -37,22 +37,21 @@ class IConnectionPointContainer extends IUnknown {
       IConnectionPointContainer(
           interface.toInterface(IID_IConnectionPointContainer));
 
-  int enumConnectionPoints(Pointer<Pointer<COMObject>> ppEnum) => ptr.ref.vtable
-          .elementAt(3)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<Pointer<COMObject>> ppEnum)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, Pointer<Pointer<COMObject>> ppEnum)>()(
-      ptr.ref.lpVtbl, ppEnum);
+  int enumConnectionPoints(Pointer<Pointer<COMObject>> ppEnum) =>
+      (ptr.ref.vtable + 3)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer, Pointer<Pointer<COMObject>> ppEnum)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<Pointer<COMObject>> ppEnum)>()(
+          ptr.ref.lpVtbl, ppEnum);
 
   int findConnectionPoint(
           Pointer<GUID> riid, Pointer<Pointer<COMObject>> ppCP) =>
-      ptr.ref.vtable
-              .elementAt(4)
+      (ptr.ref.vtable + 4)
               .cast<
                   Pointer<
                       NativeFunction<

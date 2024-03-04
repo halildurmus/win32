@@ -41,8 +41,7 @@ class IAudioRenderClient extends IUnknown {
       IAudioRenderClient(interface.toInterface(IID_IAudioRenderClient));
 
   int getBuffer(int NumFramesRequested, Pointer<Pointer<Uint8>> ppData) =>
-      ptr.ref.vtable
-              .elementAt(3)
+      (ptr.ref.vtable + 3)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -54,8 +53,7 @@ class IAudioRenderClient extends IUnknown {
                       Pointer<Pointer<Uint8>> ppData)>()(
           ptr.ref.lpVtbl, NumFramesRequested, ppData);
 
-  int releaseBuffer(int NumFramesWritten, int dwFlags) => ptr.ref.vtable
-          .elementAt(4)
+  int releaseBuffer(int NumFramesWritten, int dwFlags) => (ptr.ref.vtable + 4)
           .cast<
               Pointer<
                   NativeFunction<

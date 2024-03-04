@@ -43,8 +43,7 @@ class IUIAutomationElement7 extends IUIAutomationElement6 {
           int traversalOptions,
           Pointer<COMObject> root,
           Pointer<Pointer<COMObject>> found) =>
-      ptr.ref.vtable
-              .elementAt(110)
+      (ptr.ref.vtable + 110)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -72,8 +71,7 @@ class IUIAutomationElement7 extends IUIAutomationElement6 {
           int traversalOptions,
           Pointer<COMObject> root,
           Pointer<Pointer<COMObject>> found) =>
-      ptr.ref.vtable
-              .elementAt(111)
+      (ptr.ref.vtable + 111)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -102,8 +100,7 @@ class IUIAutomationElement7 extends IUIAutomationElement6 {
           int traversalOptions,
           Pointer<COMObject> root,
           Pointer<Pointer<COMObject>> found) =>
-      ptr.ref.vtable
-              .elementAt(112)
+      (ptr.ref.vtable + 112)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -134,8 +131,7 @@ class IUIAutomationElement7 extends IUIAutomationElement6 {
           int traversalOptions,
           Pointer<COMObject> root,
           Pointer<Pointer<COMObject>> found) =>
-      ptr.ref.vtable
-              .elementAt(113)
+      (ptr.ref.vtable + 113)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -162,8 +158,7 @@ class IUIAutomationElement7 extends IUIAutomationElement6 {
   int
       getCurrentMetadataValue(
               int targetId, int metadataId, Pointer<VARIANT> returnVal) =>
-          ptr.ref.vtable
-                  .elementAt(114)
+          (ptr.ref.vtable + 114)
                   .cast<
                       Pointer<
                           NativeFunction<

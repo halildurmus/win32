@@ -40,8 +40,7 @@ class IUIAutomationSpreadsheetPattern extends IUnknown {
           interface.toInterface(IID_IUIAutomationSpreadsheetPattern));
 
   int getItemByName(Pointer<Utf16> name, Pointer<Pointer<COMObject>> element) =>
-      ptr.ref.vtable
-              .elementAt(3)
+      (ptr.ref.vtable + 3)
               .cast<
                   Pointer<
                       NativeFunction<

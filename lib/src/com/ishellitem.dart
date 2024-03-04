@@ -40,8 +40,7 @@ class IShellItem extends IUnknown {
 
   int bindToHandler(Pointer<COMObject> pbc, Pointer<GUID> bhid,
           Pointer<GUID> riid, Pointer<Pointer> ppv) =>
-      ptr.ref.vtable
-              .elementAt(3)
+      (ptr.ref.vtable + 3)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -61,8 +60,7 @@ class IShellItem extends IUnknown {
                       Pointer<Pointer> ppv)>()(
           ptr.ref.lpVtbl, pbc, bhid, riid, ppv);
 
-  int getParent(Pointer<Pointer<COMObject>> ppsi) => ptr.ref.vtable
-      .elementAt(4)
+  int getParent(Pointer<Pointer<COMObject>> ppsi) => (ptr.ref.vtable + 4)
       .cast<
           Pointer<
               NativeFunction<
@@ -72,23 +70,21 @@ class IShellItem extends IUnknown {
           int Function(Pointer,
               Pointer<Pointer<COMObject>> ppsi)>()(ptr.ref.lpVtbl, ppsi);
 
-  int getDisplayName(int sigdnName, Pointer<Pointer<Utf16>> ppszName) => ptr
-          .ref.vtable
-          .elementAt(5)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Int32 sigdnName,
-                          Pointer<Pointer<Utf16>> ppszName)>>>()
-          .value
-          .asFunction<
-              int Function(
-                  Pointer, int sigdnName, Pointer<Pointer<Utf16>> ppszName)>()(
-      ptr.ref.lpVtbl, sigdnName, ppszName);
+  int getDisplayName(int sigdnName, Pointer<Pointer<Utf16>> ppszName) =>
+      (ptr.ref.vtable + 5)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Int32 sigdnName,
+                              Pointer<Pointer<Utf16>> ppszName)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, int sigdnName,
+                      Pointer<Pointer<Utf16>> ppszName)>()(
+          ptr.ref.lpVtbl, sigdnName, ppszName);
 
   int getAttributes(int sfgaoMask, Pointer<Uint32> psfgaoAttribs) =>
-      ptr.ref.vtable
-              .elementAt(6)
+      (ptr.ref.vtable + 6)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -100,18 +96,18 @@ class IShellItem extends IUnknown {
                       Pointer, int sfgaoMask, Pointer<Uint32> psfgaoAttribs)>()(
           ptr.ref.lpVtbl, sfgaoMask, psfgaoAttribs);
 
-  int compare(Pointer<COMObject> psi, int hint, Pointer<Int32> piOrder) => ptr
-      .ref.vtable
-      .elementAt(7)
-      .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(Pointer, Pointer<COMObject> psi, Uint32 hint,
-                      Pointer<Int32> piOrder)>>>()
-      .value
-      .asFunction<
-          int Function(Pointer, Pointer<COMObject> psi, int hint,
-              Pointer<Int32> piOrder)>()(ptr.ref.lpVtbl, psi, hint, piOrder);
+  int compare(Pointer<COMObject> psi, int hint, Pointer<Int32> piOrder) =>
+      (ptr.ref.vtable + 7)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Pointer<COMObject> psi,
+                              Uint32 hint, Pointer<Int32> piOrder)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<COMObject> psi, int hint,
+                      Pointer<Int32> piOrder)>()(
+          ptr.ref.lpVtbl, psi, hint, piOrder);
 }
 
 /// @nodoc

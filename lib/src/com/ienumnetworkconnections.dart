@@ -44,8 +44,7 @@ class IEnumNetworkConnections extends IDispatch {
   Pointer<COMObject> get newEnum {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
-        .elementAt(7)
+    final hr = (ptr.ref.vtable + 7)
         .cast<
             Pointer<
                 NativeFunction<
@@ -65,8 +64,7 @@ class IEnumNetworkConnections extends IDispatch {
 
   int next(int celt, Pointer<Pointer<COMObject>> rgelt,
           Pointer<Uint32> pceltFetched) =>
-      ptr.ref.vtable
-              .elementAt(8)
+      (ptr.ref.vtable + 8)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -84,20 +82,17 @@ class IEnumNetworkConnections extends IDispatch {
                       Pointer<Uint32> pceltFetched)>()(
           ptr.ref.lpVtbl, celt, rgelt, pceltFetched);
 
-  int skip(int celt) => ptr.ref.vtable
-      .elementAt(9)
+  int skip(int celt) => (ptr.ref.vtable + 9)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint32 celt)>>>()
       .value
       .asFunction<int Function(Pointer, int celt)>()(ptr.ref.lpVtbl, celt);
 
-  int reset() => ptr.ref.vtable
-      .elementAt(10)
+  int reset() => (ptr.ref.vtable + 10)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  int clone(Pointer<Pointer<COMObject>> ppEnumNetwork) => ptr.ref.vtable
-          .elementAt(11)
+  int clone(Pointer<Pointer<COMObject>> ppEnumNetwork) => (ptr.ref.vtable + 11)
           .cast<
               Pointer<
                   NativeFunction<

@@ -42,8 +42,7 @@ class ISpellChecker extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(3)
+      final hr = (ptr.ref.vtable + 3)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -64,8 +63,7 @@ class ISpellChecker extends IUnknown {
   }
 
   int check(Pointer<Utf16> text, Pointer<Pointer<COMObject>> value) =>
-      ptr.ref.vtable
-              .elementAt(4)
+      (ptr.ref.vtable + 4)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -78,8 +76,7 @@ class ISpellChecker extends IUnknown {
           ptr.ref.lpVtbl, text, value);
 
   int suggest(Pointer<Utf16> word, Pointer<Pointer<COMObject>> value) =>
-      ptr.ref.vtable
-              .elementAt(5)
+      (ptr.ref.vtable + 5)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -91,8 +88,7 @@ class ISpellChecker extends IUnknown {
                       Pointer<Pointer<COMObject>> value)>()(
           ptr.ref.lpVtbl, word, value);
 
-  int add(Pointer<Utf16> word) => ptr.ref.vtable
-      .elementAt(6)
+  int add(Pointer<Utf16> word) => (ptr.ref.vtable + 6)
       .cast<
           Pointer<
               NativeFunction<Int32 Function(Pointer, Pointer<Utf16> word)>>>()
@@ -100,8 +96,7 @@ class ISpellChecker extends IUnknown {
       .asFunction<
           int Function(Pointer, Pointer<Utf16> word)>()(ptr.ref.lpVtbl, word);
 
-  int ignore(Pointer<Utf16> word) => ptr.ref.vtable
-      .elementAt(7)
+  int ignore(Pointer<Utf16> word) => (ptr.ref.vtable + 7)
       .cast<
           Pointer<
               NativeFunction<Int32 Function(Pointer, Pointer<Utf16> word)>>>()
@@ -109,8 +104,8 @@ class ISpellChecker extends IUnknown {
       .asFunction<
           int Function(Pointer, Pointer<Utf16> word)>()(ptr.ref.lpVtbl, word);
 
-  int autoCorrect(Pointer<Utf16> from, Pointer<Utf16> to) => ptr.ref.vtable
-          .elementAt(8)
+  int autoCorrect(Pointer<Utf16> from, Pointer<Utf16> to) =>
+      (ptr.ref.vtable + 8)
           .cast<
               Pointer<
                   NativeFunction<
@@ -118,12 +113,11 @@ class ISpellChecker extends IUnknown {
                           Pointer, Pointer<Utf16> from, Pointer<Utf16> to)>>>()
           .value
           .asFunction<
-              int Function(Pointer, Pointer<Utf16> from, Pointer<Utf16> to)>()(
-      ptr.ref.lpVtbl, from, to);
+              int Function(Pointer, Pointer<Utf16> from,
+                  Pointer<Utf16> to)>()(ptr.ref.lpVtbl, from, to);
 
   int getOptionValue(Pointer<Utf16> optionId, Pointer<Uint8> value) =>
-      ptr.ref.vtable
-          .elementAt(9)
+      (ptr.ref.vtable + 9)
           .cast<
               Pointer<
                   NativeFunction<
@@ -137,8 +131,7 @@ class ISpellChecker extends IUnknown {
   Pointer<COMObject> get optionIds {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
-            .elementAt(10)
+    final hr = (ptr.ref.vtable + 10)
             .cast<
                 Pointer<
                     NativeFunction<
@@ -159,8 +152,7 @@ class ISpellChecker extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(11)
+      final hr = (ptr.ref.vtable + 11)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -184,8 +176,7 @@ class ISpellChecker extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(12)
+      final hr = (ptr.ref.vtable + 12)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -207,8 +198,7 @@ class ISpellChecker extends IUnknown {
 
   int add_SpellCheckerChanged(
           Pointer<COMObject> handler, Pointer<Uint32> eventCookie) =>
-      ptr.ref.vtable
-              .elementAt(13)
+      (ptr.ref.vtable + 13)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -220,8 +210,7 @@ class ISpellChecker extends IUnknown {
                       Pointer<Uint32> eventCookie)>()(
           ptr.ref.lpVtbl, handler, eventCookie);
 
-  int remove_SpellCheckerChanged(int eventCookie) => ptr.ref.vtable
-      .elementAt(14)
+  int remove_SpellCheckerChanged(int eventCookie) => (ptr.ref.vtable + 14)
       .cast<
           Pointer<
               NativeFunction<Int32 Function(Pointer, Uint32 eventCookie)>>>()
@@ -232,8 +221,7 @@ class ISpellChecker extends IUnknown {
 
   int getOptionDescription(
           Pointer<Utf16> optionId, Pointer<Pointer<COMObject>> value) =>
-      ptr.ref.vtable
-              .elementAt(15)
+      (ptr.ref.vtable + 15)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -247,8 +235,7 @@ class ISpellChecker extends IUnknown {
 
   int comprehensiveCheck(
           Pointer<Utf16> text, Pointer<Pointer<COMObject>> value) =>
-      ptr.ref.vtable
-              .elementAt(16)
+      (ptr.ref.vtable + 16)
               .cast<
                   Pointer<
                       NativeFunction<

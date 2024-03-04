@@ -42,8 +42,7 @@ class IRestrictedErrorInfo extends IUnknown {
           Pointer<Int32> error,
           Pointer<Pointer<Utf16>> restrictedDescription,
           Pointer<Pointer<Utf16>> capabilitySid) =>
-      ptr.ref.vtable
-              .elementAt(3)
+      (ptr.ref.vtable + 3)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -63,8 +62,7 @@ class IRestrictedErrorInfo extends IUnknown {
                       Pointer<Pointer<Utf16>> capabilitySid)>()(ptr.ref.lpVtbl,
           description, error, restrictedDescription, capabilitySid);
 
-  int getReference(Pointer<Pointer<Utf16>> reference) => ptr.ref.vtable
-          .elementAt(4)
+  int getReference(Pointer<Pointer<Utf16>> reference) => (ptr.ref.vtable + 4)
           .cast<
               Pointer<
                   NativeFunction<

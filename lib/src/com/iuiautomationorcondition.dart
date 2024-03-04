@@ -43,8 +43,7 @@ class IUIAutomationOrCondition extends IUIAutomationCondition {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-          .elementAt(3)
+      final hr = (ptr.ref.vtable + 3)
           .cast<
               Pointer<
                   NativeFunction<
@@ -65,8 +64,7 @@ class IUIAutomationOrCondition extends IUIAutomationCondition {
 
   int getChildrenAsNativeArray(Pointer<Pointer<Pointer<COMObject>>> childArray,
           Pointer<Int32> childArrayCount) =>
-      ptr.ref.vtable
-              .elementAt(4)
+      (ptr.ref.vtable + 4)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -82,8 +80,8 @@ class IUIAutomationOrCondition extends IUIAutomationCondition {
                       Pointer<Int32> childArrayCount)>()(
           ptr.ref.lpVtbl, childArray, childArrayCount);
 
-  int getChildren(Pointer<Pointer<SAFEARRAY>> childArray) => ptr.ref.vtable
-          .elementAt(5)
+  int getChildren(Pointer<Pointer<SAFEARRAY>> childArray) => (ptr.ref.vtable +
+              5)
           .cast<
               Pointer<
                   NativeFunction<

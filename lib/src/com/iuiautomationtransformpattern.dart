@@ -38,8 +38,7 @@ class IUIAutomationTransformPattern extends IUnknown {
       IUIAutomationTransformPattern(
           interface.toInterface(IID_IUIAutomationTransformPattern));
 
-  int move(double x, double y) => ptr.ref.vtable
-      .elementAt(3)
+  int move(double x, double y) => (ptr.ref.vtable + 3)
       .cast<
           Pointer<
               NativeFunction<Int32 Function(Pointer, Double x, Double y)>>>()
@@ -47,8 +46,7 @@ class IUIAutomationTransformPattern extends IUnknown {
       .asFunction<
           int Function(Pointer, double x, double y)>()(ptr.ref.lpVtbl, x, y);
 
-  int resize(double width, double height) => ptr.ref.vtable
-          .elementAt(4)
+  int resize(double width, double height) => (ptr.ref.vtable + 4)
           .cast<
               Pointer<
                   NativeFunction<
@@ -57,8 +55,7 @@ class IUIAutomationTransformPattern extends IUnknown {
           .asFunction<int Function(Pointer, double width, double height)>()(
       ptr.ref.lpVtbl, width, height);
 
-  int rotate(double degrees) => ptr.ref.vtable
-      .elementAt(5)
+  int rotate(double degrees) => (ptr.ref.vtable + 5)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Double degrees)>>>()
       .value
       .asFunction<
@@ -68,8 +65,7 @@ class IUIAutomationTransformPattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(6)
+      final hr = (ptr.ref.vtable + 6)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -91,8 +87,7 @@ class IUIAutomationTransformPattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(7)
+      final hr = (ptr.ref.vtable + 7)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -114,8 +109,7 @@ class IUIAutomationTransformPattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(8)
+      final hr = (ptr.ref.vtable + 8)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -137,8 +131,7 @@ class IUIAutomationTransformPattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(9)
+      final hr = (ptr.ref.vtable + 9)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -160,8 +153,7 @@ class IUIAutomationTransformPattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(10)
+      final hr = (ptr.ref.vtable + 10)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -183,8 +175,7 @@ class IUIAutomationTransformPattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(11)
+      final hr = (ptr.ref.vtable + 11)
               .cast<
                   Pointer<
                       NativeFunction<

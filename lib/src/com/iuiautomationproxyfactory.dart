@@ -41,8 +41,7 @@ class IUIAutomationProxyFactory extends IUnknown {
 
   int createProvider(int hwnd, int idObject, int idChild,
           Pointer<Pointer<COMObject>> provider) =>
-      ptr.ref.vtable
-              .elementAt(3)
+      (ptr.ref.vtable + 3)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -62,8 +61,7 @@ class IUIAutomationProxyFactory extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(4)
+      final hr = (ptr.ref.vtable + 4)
               .cast<
                   Pointer<
                       NativeFunction<

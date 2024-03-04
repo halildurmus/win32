@@ -39,16 +39,15 @@ class IUIAutomationObjectModelPattern extends IUnknown {
       IUIAutomationObjectModelPattern(
           interface.toInterface(IID_IUIAutomationObjectModelPattern));
 
-  int getUnderlyingObjectModel(Pointer<Pointer<COMObject>> retVal) => ptr
-          .ref.vtable
-          .elementAt(3)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<Pointer<COMObject>> retVal)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, Pointer<Pointer<COMObject>> retVal)>()(
-      ptr.ref.lpVtbl, retVal);
+  int getUnderlyingObjectModel(Pointer<Pointer<COMObject>> retVal) =>
+      (ptr.ref.vtable + 3)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer, Pointer<Pointer<COMObject>> retVal)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<Pointer<COMObject>> retVal)>()(
+          ptr.ref.lpVtbl, retVal);
 }

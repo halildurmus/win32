@@ -61,7 +61,7 @@ class PrinterNames {
 
   Iterable<String> parse() sync* {
     for (var i = 0; i < _bPrinterLen.value; i++) {
-      final printer = _rawBuffer.cast<PRINTER_INFO_2>().elementAt(i);
+      final printer = _rawBuffer.cast<PRINTER_INFO_2>() + i;
       yield printer.ref.pPrinterName.toDartString();
     }
   }

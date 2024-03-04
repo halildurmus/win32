@@ -37,8 +37,7 @@ class IShellItemFilter extends IUnknown {
   factory IShellItemFilter.from(IUnknown interface) =>
       IShellItemFilter(interface.toInterface(IID_IShellItemFilter));
 
-  int includeItem(Pointer<COMObject> psi) => ptr.ref.vtable
-          .elementAt(3)
+  int includeItem(Pointer<COMObject> psi) => (ptr.ref.vtable + 3)
           .cast<
               Pointer<
                   NativeFunction<
@@ -48,8 +47,7 @@ class IShellItemFilter extends IUnknown {
       ptr.ref.lpVtbl, psi);
 
   int getEnumFlagsForItem(Pointer<COMObject> psi, Pointer<Uint32> pgrfFlags) =>
-      ptr.ref.vtable
-          .elementAt(4)
+      (ptr.ref.vtable + 4)
           .cast<
               Pointer<
                   NativeFunction<

@@ -39,8 +39,7 @@ class ISpellCheckerChangedEventHandler extends IUnknown {
       ISpellCheckerChangedEventHandler(
           interface.toInterface(IID_ISpellCheckerChangedEventHandler));
 
-  int invoke(Pointer<COMObject> sender) => ptr.ref.vtable
-          .elementAt(3)
+  int invoke(Pointer<COMObject> sender) => (ptr.ref.vtable + 3)
           .cast<
               Pointer<
                   NativeFunction<

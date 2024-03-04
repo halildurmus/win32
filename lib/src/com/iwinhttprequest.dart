@@ -36,8 +36,7 @@ class IWinHttpRequest extends IDispatch {
       IWinHttpRequest(interface.toInterface(IID_IWinHttpRequest));
 
   int setProxy(int proxySetting, VARIANT proxyServer, VARIANT bypassList) =>
-      ptr.ref.vtable
-              .elementAt(7)
+      (ptr.ref.vtable + 7)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -51,9 +50,7 @@ class IWinHttpRequest extends IDispatch {
 
   int setCredentials(
           Pointer<Utf16> userName, Pointer<Utf16> password, int flags) =>
-      ptr
-          .ref.vtable
-          .elementAt(8)
+      (ptr.ref.vtable + 8)
           .cast<
               Pointer<
                   NativeFunction<
@@ -68,8 +65,7 @@ class IWinHttpRequest extends IDispatch {
                   int flags)>()(ptr.ref.lpVtbl, userName, password, flags);
 
   int open(Pointer<Utf16> method, Pointer<Utf16> url, VARIANT async) =>
-      ptr.ref.vtable
-          .elementAt(9)
+      (ptr.ref.vtable + 9)
           .cast<
               Pointer<
                   NativeFunction<
@@ -80,22 +76,20 @@ class IWinHttpRequest extends IDispatch {
               int Function(Pointer, Pointer<Utf16> method, Pointer<Utf16> url,
                   VARIANT async)>()(ptr.ref.lpVtbl, method, url, async);
 
-  int setRequestHeader(Pointer<Utf16> header, Pointer<Utf16> value) => ptr
-      .ref.vtable
-      .elementAt(10)
-      .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(
-                      Pointer, Pointer<Utf16> header, Pointer<Utf16> value)>>>()
-      .value
-      .asFunction<
-          int Function(Pointer, Pointer<Utf16> header,
-              Pointer<Utf16> value)>()(ptr.ref.lpVtbl, header, value);
+  int setRequestHeader(Pointer<Utf16> header, Pointer<Utf16> value) =>
+      (ptr.ref.vtable + 10)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(Pointer, Pointer<Utf16> header,
+                          Pointer<Utf16> value)>>>()
+          .value
+          .asFunction<
+              int Function(Pointer, Pointer<Utf16> header,
+                  Pointer<Utf16> value)>()(ptr.ref.lpVtbl, header, value);
 
   int getResponseHeader(Pointer<Utf16> header, Pointer<Pointer<Utf16>> value) =>
-      ptr.ref.vtable
-              .elementAt(11)
+      (ptr.ref.vtable + 11)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -107,19 +101,19 @@ class IWinHttpRequest extends IDispatch {
                       Pointer<Pointer<Utf16>> value)>()(
           ptr.ref.lpVtbl, header, value);
 
-  int getAllResponseHeaders(Pointer<Pointer<Utf16>> headers) => ptr.ref.vtable
-      .elementAt(12)
-      .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(Pointer, Pointer<Pointer<Utf16>> headers)>>>()
-      .value
-      .asFunction<
-          int Function(Pointer,
-              Pointer<Pointer<Utf16>> headers)>()(ptr.ref.lpVtbl, headers);
+  int getAllResponseHeaders(Pointer<Pointer<Utf16>> headers) =>
+      (ptr.ref.vtable + 12)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer, Pointer<Pointer<Utf16>> headers)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<Pointer<Utf16>> headers)>()(
+          ptr.ref.lpVtbl, headers);
 
-  int send(VARIANT body) => ptr.ref.vtable
-      .elementAt(13)
+  int send(VARIANT body) => (ptr.ref.vtable + 13)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, VARIANT body)>>>()
       .value
       .asFunction<int Function(Pointer, VARIANT body)>()(ptr.ref.lpVtbl, body);
@@ -128,8 +122,7 @@ class IWinHttpRequest extends IDispatch {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-          .elementAt(14)
+      final hr = (ptr.ref.vtable + 14)
           .cast<
               Pointer<
                   NativeFunction<Int32 Function(Pointer, Pointer<Int32>)>>>()
@@ -151,8 +144,7 @@ class IWinHttpRequest extends IDispatch {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(15)
+      final hr = (ptr.ref.vtable + 15)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -176,8 +168,7 @@ class IWinHttpRequest extends IDispatch {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-          .elementAt(16)
+      final hr = (ptr.ref.vtable + 16)
           .cast<
               Pointer<
                   NativeFunction<
@@ -200,8 +191,7 @@ class IWinHttpRequest extends IDispatch {
     final retValuePtr = calloc<VARIANT>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(17)
+      final hr = (ptr.ref.vtable + 17)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -223,8 +213,7 @@ class IWinHttpRequest extends IDispatch {
     final retValuePtr = calloc<VARIANT>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(18)
+      final hr = (ptr.ref.vtable + 18)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -242,8 +231,7 @@ class IWinHttpRequest extends IDispatch {
     }
   }
 
-  int get_Option(int option, VARIANT value) => ptr.ref.vtable
-          .elementAt(19)
+  int get_Option(int option, VARIANT value) => (ptr.ref.vtable + 19)
           .cast<
               Pointer<
                   NativeFunction<
@@ -252,8 +240,7 @@ class IWinHttpRequest extends IDispatch {
           .asFunction<int Function(Pointer, int option, VARIANT value)>()(
       ptr.ref.lpVtbl, option, value);
 
-  int put_Option(int option, VARIANT value) => ptr.ref.vtable
-          .elementAt(20)
+  int put_Option(int option, VARIANT value) => (ptr.ref.vtable + 20)
           .cast<
               Pointer<
                   NativeFunction<
@@ -262,29 +249,27 @@ class IWinHttpRequest extends IDispatch {
           .asFunction<int Function(Pointer, int option, VARIANT value)>()(
       ptr.ref.lpVtbl, option, value);
 
-  int waitForResponse(VARIANT timeout, Pointer<Int16> succeeded) => ptr
-      .ref.vtable
-      .elementAt(21)
-      .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(
-                      Pointer, VARIANT timeout, Pointer<Int16> succeeded)>>>()
-      .value
-      .asFunction<
-          int Function(Pointer, VARIANT timeout,
-              Pointer<Int16> succeeded)>()(ptr.ref.lpVtbl, timeout, succeeded);
+  int waitForResponse(VARIANT timeout, Pointer<Int16> succeeded) =>
+      (ptr.ref.vtable + 21)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, VARIANT timeout,
+                              Pointer<Int16> succeeded)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer, VARIANT timeout, Pointer<Int16> succeeded)>()(
+          ptr.ref.lpVtbl, timeout, succeeded);
 
-  int abort() => ptr.ref.vtable
-      .elementAt(22)
+  int abort() => (ptr.ref.vtable + 22)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
   int setTimeouts(int resolveTimeout, int connectTimeout, int sendTimeout,
           int receiveTimeout) =>
-      ptr.ref.vtable
-              .elementAt(23)
+      (ptr.ref.vtable + 23)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -301,8 +286,7 @@ class IWinHttpRequest extends IDispatch {
           resolveTimeout, connectTimeout, sendTimeout, receiveTimeout);
 
   int setClientCertificate(Pointer<Utf16> clientCertificate) =>
-      ptr.ref.vtable
-              .elementAt(24)
+      (ptr.ref.vtable + 24)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -313,8 +297,7 @@ class IWinHttpRequest extends IDispatch {
                   int Function(Pointer, Pointer<Utf16> clientCertificate)>()(
           ptr.ref.lpVtbl, clientCertificate);
 
-  int setAutoLogonPolicy(int autoLogonPolicy) => ptr.ref.vtable
-          .elementAt(25)
+  int setAutoLogonPolicy(int autoLogonPolicy) => (ptr.ref.vtable + 25)
           .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32)>>>()
           .value
           .asFunction<int Function(Pointer, int autoLogonPolicy)>()(

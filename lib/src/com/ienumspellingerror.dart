@@ -36,8 +36,7 @@ class IEnumSpellingError extends IUnknown {
   factory IEnumSpellingError.from(IUnknown interface) =>
       IEnumSpellingError(interface.toInterface(IID_IEnumSpellingError));
 
-  int next(Pointer<Pointer<COMObject>> value) => ptr.ref.vtable
-          .elementAt(3)
+  int next(Pointer<Pointer<COMObject>> value) => (ptr.ref.vtable + 3)
           .cast<
               Pointer<
                   NativeFunction<

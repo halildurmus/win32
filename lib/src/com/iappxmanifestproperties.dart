@@ -38,28 +38,28 @@ class IAppxManifestProperties extends IUnknown {
       IAppxManifestProperties(
           interface.toInterface(IID_IAppxManifestProperties));
 
-  int getBoolValue(Pointer<Utf16> name, Pointer<Int32> value) => ptr.ref.vtable
-      .elementAt(3)
-      .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(
-                      Pointer, Pointer<Utf16> name, Pointer<Int32> value)>>>()
-      .value
-      .asFunction<
-          int Function(Pointer, Pointer<Utf16> name,
-              Pointer<Int32> value)>()(ptr.ref.lpVtbl, name, value);
+  int getBoolValue(Pointer<Utf16> name, Pointer<Int32> value) =>
+      (ptr.ref.vtable + 3)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(Pointer, Pointer<Utf16> name,
+                          Pointer<Int32> value)>>>()
+          .value
+          .asFunction<
+              int Function(Pointer, Pointer<Utf16> name,
+                  Pointer<Int32> value)>()(ptr.ref.lpVtbl, name, value);
 
-  int getStringValue(Pointer<Utf16> name, Pointer<Pointer<Utf16>> value) => ptr
-      .ref.vtable
-      .elementAt(4)
-      .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(Pointer, Pointer<Utf16> name,
-                      Pointer<Pointer<Utf16>> value)>>>()
-      .value
-      .asFunction<
-          int Function(Pointer, Pointer<Utf16> name,
-              Pointer<Pointer<Utf16>> value)>()(ptr.ref.lpVtbl, name, value);
+  int getStringValue(Pointer<Utf16> name, Pointer<Pointer<Utf16>> value) =>
+      (ptr.ref.vtable + 4)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Pointer<Utf16> name,
+                              Pointer<Pointer<Utf16>> value)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<Utf16> name,
+                      Pointer<Pointer<Utf16>> value)>()(
+          ptr.ref.lpVtbl, name, value);
 }

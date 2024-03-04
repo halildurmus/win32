@@ -39,8 +39,7 @@ class IFileDialog extends IModalWindow {
       IFileDialog(interface.toInterface(IID_IFileDialog));
 
   int setFileTypes(int cFileTypes, Pointer<COMDLG_FILTERSPEC> rgFilterSpec) =>
-      ptr.ref.vtable
-              .elementAt(4)
+      (ptr.ref.vtable + 4)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -52,16 +51,14 @@ class IFileDialog extends IModalWindow {
                       Pointer<COMDLG_FILTERSPEC> rgFilterSpec)>()(
           ptr.ref.lpVtbl, cFileTypes, rgFilterSpec);
 
-  int setFileTypeIndex(int iFileType) => ptr.ref.vtable
-      .elementAt(5)
+  int setFileTypeIndex(int iFileType) => (ptr.ref.vtable + 5)
       .cast<
           Pointer<NativeFunction<Int32 Function(Pointer, Uint32 iFileType)>>>()
       .value
       .asFunction<
           int Function(Pointer, int iFileType)>()(ptr.ref.lpVtbl, iFileType);
 
-  int getFileTypeIndex(Pointer<Uint32> piFileType) => ptr.ref.vtable
-          .elementAt(6)
+  int getFileTypeIndex(Pointer<Uint32> piFileType) => (ptr.ref.vtable + 6)
           .cast<
               Pointer<
                   NativeFunction<
@@ -70,34 +67,32 @@ class IFileDialog extends IModalWindow {
           .asFunction<int Function(Pointer, Pointer<Uint32> piFileType)>()(
       ptr.ref.lpVtbl, piFileType);
 
-  int advise(Pointer<COMObject> pfde, Pointer<Uint32> pdwCookie) => ptr
-      .ref.vtable
-      .elementAt(7)
-      .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(Pointer, Pointer<COMObject> pfde,
-                      Pointer<Uint32> pdwCookie)>>>()
-      .value
-      .asFunction<
-          int Function(Pointer, Pointer<COMObject> pfde,
-              Pointer<Uint32> pdwCookie)>()(ptr.ref.lpVtbl, pfde, pdwCookie);
+  int advise(
+          Pointer<COMObject> pfde, Pointer<Uint32> pdwCookie) =>
+      (ptr.ref.vtable + 7)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Pointer<COMObject> pfde,
+                              Pointer<Uint32> pdwCookie)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<COMObject> pfde,
+                      Pointer<Uint32> pdwCookie)>()(
+          ptr.ref.lpVtbl, pfde, pdwCookie);
 
-  int unadvise(int dwCookie) => ptr.ref.vtable
-      .elementAt(8)
+  int unadvise(int dwCookie) => (ptr.ref.vtable + 8)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint32 dwCookie)>>>()
       .value
       .asFunction<
           int Function(Pointer, int dwCookie)>()(ptr.ref.lpVtbl, dwCookie);
 
-  int setOptions(int fos) => ptr.ref.vtable
-      .elementAt(9)
+  int setOptions(int fos) => (ptr.ref.vtable + 9)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint32 fos)>>>()
       .value
       .asFunction<int Function(Pointer, int fos)>()(ptr.ref.lpVtbl, fos);
 
-  int getOptions(Pointer<Uint32> pfos) => ptr.ref.vtable
-      .elementAt(10)
+  int getOptions(Pointer<Uint32> pfos) => (ptr.ref.vtable + 10)
       .cast<
           Pointer<
               NativeFunction<Int32 Function(Pointer, Pointer<Uint32> pfos)>>>()
@@ -105,8 +100,7 @@ class IFileDialog extends IModalWindow {
       .asFunction<
           int Function(Pointer, Pointer<Uint32> pfos)>()(ptr.ref.lpVtbl, pfos);
 
-  int setDefaultFolder(Pointer<COMObject> psi) => ptr.ref.vtable
-          .elementAt(11)
+  int setDefaultFolder(Pointer<COMObject> psi) => (ptr.ref.vtable + 11)
           .cast<
               Pointer<
                   NativeFunction<
@@ -115,8 +109,7 @@ class IFileDialog extends IModalWindow {
           .asFunction<int Function(Pointer, Pointer<COMObject> psi)>()(
       ptr.ref.lpVtbl, psi);
 
-  int setFolder(Pointer<COMObject> psi) => ptr.ref.vtable
-          .elementAt(12)
+  int setFolder(Pointer<COMObject> psi) => (ptr.ref.vtable + 12)
           .cast<
               Pointer<
                   NativeFunction<
@@ -125,8 +118,7 @@ class IFileDialog extends IModalWindow {
           .asFunction<int Function(Pointer, Pointer<COMObject> psi)>()(
       ptr.ref.lpVtbl, psi);
 
-  int getFolder(Pointer<Pointer<COMObject>> ppsi) => ptr.ref.vtable
-      .elementAt(13)
+  int getFolder(Pointer<Pointer<COMObject>> ppsi) => (ptr.ref.vtable + 13)
       .cast<
           Pointer<
               NativeFunction<
@@ -136,19 +128,19 @@ class IFileDialog extends IModalWindow {
           int Function(Pointer,
               Pointer<Pointer<COMObject>> ppsi)>()(ptr.ref.lpVtbl, ppsi);
 
-  int getCurrentSelection(Pointer<Pointer<COMObject>> ppsi) => ptr.ref.vtable
-      .elementAt(14)
-      .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(Pointer, Pointer<Pointer<COMObject>> ppsi)>>>()
-      .value
-      .asFunction<
-          int Function(Pointer,
-              Pointer<Pointer<COMObject>> ppsi)>()(ptr.ref.lpVtbl, ppsi);
+  int getCurrentSelection(Pointer<Pointer<COMObject>> ppsi) =>
+      (ptr.ref.vtable + 14)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer, Pointer<Pointer<COMObject>> ppsi)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<Pointer<COMObject>> ppsi)>()(
+          ptr.ref.lpVtbl, ppsi);
 
-  int setFileName(Pointer<Utf16> pszName) => ptr.ref.vtable
-          .elementAt(15)
+  int setFileName(Pointer<Utf16> pszName) => (ptr.ref.vtable + 15)
           .cast<
               Pointer<
                   NativeFunction<
@@ -157,8 +149,7 @@ class IFileDialog extends IModalWindow {
           .asFunction<int Function(Pointer, Pointer<Utf16> pszName)>()(
       ptr.ref.lpVtbl, pszName);
 
-  int getFileName(Pointer<Pointer<Utf16>> pszName) => ptr.ref.vtable
-      .elementAt(16)
+  int getFileName(Pointer<Pointer<Utf16>> pszName) => (ptr.ref.vtable + 16)
       .cast<
           Pointer<
               NativeFunction<
@@ -168,8 +159,7 @@ class IFileDialog extends IModalWindow {
           int Function(Pointer,
               Pointer<Pointer<Utf16>> pszName)>()(ptr.ref.lpVtbl, pszName);
 
-  int setTitle(Pointer<Utf16> pszTitle) => ptr.ref.vtable
-          .elementAt(17)
+  int setTitle(Pointer<Utf16> pszTitle) => (ptr.ref.vtable + 17)
           .cast<
               Pointer<
                   NativeFunction<
@@ -178,8 +168,7 @@ class IFileDialog extends IModalWindow {
           .asFunction<int Function(Pointer, Pointer<Utf16> pszTitle)>()(
       ptr.ref.lpVtbl, pszTitle);
 
-  int setOkButtonLabel(Pointer<Utf16> pszText) => ptr.ref.vtable
-          .elementAt(18)
+  int setOkButtonLabel(Pointer<Utf16> pszText) => (ptr.ref.vtable + 18)
           .cast<
               Pointer<
                   NativeFunction<
@@ -188,8 +177,7 @@ class IFileDialog extends IModalWindow {
           .asFunction<int Function(Pointer, Pointer<Utf16> pszText)>()(
       ptr.ref.lpVtbl, pszText);
 
-  int setFileNameLabel(Pointer<Utf16> pszLabel) => ptr.ref.vtable
-          .elementAt(19)
+  int setFileNameLabel(Pointer<Utf16> pszLabel) => (ptr.ref.vtable + 19)
           .cast<
               Pointer<
                   NativeFunction<
@@ -198,8 +186,7 @@ class IFileDialog extends IModalWindow {
           .asFunction<int Function(Pointer, Pointer<Utf16> pszLabel)>()(
       ptr.ref.lpVtbl, pszLabel);
 
-  int getResult(Pointer<Pointer<COMObject>> ppsi) => ptr.ref.vtable
-      .elementAt(20)
+  int getResult(Pointer<Pointer<COMObject>> ppsi) => (ptr.ref.vtable + 20)
       .cast<
           Pointer<
               NativeFunction<
@@ -209,8 +196,7 @@ class IFileDialog extends IModalWindow {
           int Function(Pointer,
               Pointer<Pointer<COMObject>> ppsi)>()(ptr.ref.lpVtbl, ppsi);
 
-  int addPlace(Pointer<COMObject> psi, int fdap) => ptr.ref.vtable
-          .elementAt(21)
+  int addPlace(Pointer<COMObject> psi, int fdap) => (ptr.ref.vtable + 21)
           .cast<
               Pointer<
                   NativeFunction<
@@ -221,26 +207,24 @@ class IFileDialog extends IModalWindow {
               int Function(Pointer, Pointer<COMObject> psi, int fdap)>()(
       ptr.ref.lpVtbl, psi, fdap);
 
-  int setDefaultExtension(Pointer<Utf16> pszDefaultExtension) => ptr.ref.vtable
-          .elementAt(22)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<Utf16> pszDefaultExtension)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, Pointer<Utf16> pszDefaultExtension)>()(
-      ptr.ref.lpVtbl, pszDefaultExtension);
+  int setDefaultExtension(Pointer<Utf16> pszDefaultExtension) =>
+      (ptr.ref.vtable + 22)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer, Pointer<Utf16> pszDefaultExtension)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<Utf16> pszDefaultExtension)>()(
+          ptr.ref.lpVtbl, pszDefaultExtension);
 
-  int close(int hr) => ptr.ref.vtable
-      .elementAt(23)
+  int close(int hr) => (ptr.ref.vtable + 23)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 hr)>>>()
       .value
       .asFunction<int Function(Pointer, int hr)>()(ptr.ref.lpVtbl, hr);
 
-  int setClientGuid(Pointer<GUID> guid) => ptr.ref.vtable
-      .elementAt(24)
+  int setClientGuid(Pointer<GUID> guid) => (ptr.ref.vtable + 24)
       .cast<
           Pointer<
               NativeFunction<Int32 Function(Pointer, Pointer<GUID> guid)>>>()
@@ -248,14 +232,12 @@ class IFileDialog extends IModalWindow {
       .asFunction<
           int Function(Pointer, Pointer<GUID> guid)>()(ptr.ref.lpVtbl, guid);
 
-  int clearClientData() => ptr.ref.vtable
-      .elementAt(25)
+  int clearClientData() => (ptr.ref.vtable + 25)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  int setFilter(Pointer<COMObject> pFilter) => ptr.ref.vtable
-          .elementAt(26)
+  int setFilter(Pointer<COMObject> pFilter) => (ptr.ref.vtable + 26)
           .cast<
               Pointer<
                   NativeFunction<

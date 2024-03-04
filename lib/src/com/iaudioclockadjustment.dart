@@ -40,8 +40,7 @@ class IAudioClockAdjustment extends IUnknown {
   factory IAudioClockAdjustment.from(IUnknown interface) =>
       IAudioClockAdjustment(interface.toInterface(IID_IAudioClockAdjustment));
 
-  int setSampleRate(double flSampleRate) => ptr.ref.vtable
-      .elementAt(3)
+  int setSampleRate(double flSampleRate) => (ptr.ref.vtable + 3)
       .cast<
           Pointer<
               NativeFunction<Int32 Function(Pointer, Float flSampleRate)>>>()

@@ -37,27 +37,26 @@ class IUIAutomationWindowPattern extends IUnknown {
       IUIAutomationWindowPattern(
           interface.toInterface(IID_IUIAutomationWindowPattern));
 
-  int close() => ptr.ref.vtable
-      .elementAt(3)
+  int close() => (ptr.ref.vtable + 3)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  int waitForInputIdle(int milliseconds, Pointer<Int32> success) => ptr
-      .ref.vtable
-      .elementAt(4)
-      .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(
-                      Pointer, Int32 milliseconds, Pointer<Int32> success)>>>()
-      .value
-      .asFunction<
-          int Function(Pointer, int milliseconds,
-              Pointer<Int32> success)>()(ptr.ref.lpVtbl, milliseconds, success);
+  int waitForInputIdle(
+          int milliseconds, Pointer<Int32> success) =>
+      (ptr.ref.vtable + 4)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Int32 milliseconds,
+                              Pointer<Int32> success)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer, int milliseconds, Pointer<Int32> success)>()(
+          ptr.ref.lpVtbl, milliseconds, success);
 
-  int setWindowVisualState(int state) => ptr.ref.vtable
-      .elementAt(5)
+  int setWindowVisualState(int state) => (ptr.ref.vtable + 5)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 state)>>>()
       .value
       .asFunction<int Function(Pointer, int state)>()(ptr.ref.lpVtbl, state);
@@ -66,8 +65,7 @@ class IUIAutomationWindowPattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(6)
+      final hr = (ptr.ref.vtable + 6)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -89,8 +87,7 @@ class IUIAutomationWindowPattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(7)
+      final hr = (ptr.ref.vtable + 7)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -112,8 +109,7 @@ class IUIAutomationWindowPattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(8)
+      final hr = (ptr.ref.vtable + 8)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -135,8 +131,7 @@ class IUIAutomationWindowPattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(9)
+      final hr = (ptr.ref.vtable + 9)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -158,8 +153,7 @@ class IUIAutomationWindowPattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(10)
+      final hr = (ptr.ref.vtable + 10)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -181,8 +175,7 @@ class IUIAutomationWindowPattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(11)
+      final hr = (ptr.ref.vtable + 11)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -204,8 +197,7 @@ class IUIAutomationWindowPattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(12)
+      final hr = (ptr.ref.vtable + 12)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -227,8 +219,7 @@ class IUIAutomationWindowPattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(13)
+      final hr = (ptr.ref.vtable + 13)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -250,8 +241,7 @@ class IUIAutomationWindowPattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(14)
+      final hr = (ptr.ref.vtable + 14)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -273,8 +263,7 @@ class IUIAutomationWindowPattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(15)
+      final hr = (ptr.ref.vtable + 15)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -296,8 +285,7 @@ class IUIAutomationWindowPattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(16)
+      final hr = (ptr.ref.vtable + 16)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -319,8 +307,7 @@ class IUIAutomationWindowPattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(17)
+      final hr = (ptr.ref.vtable + 17)
               .cast<
                   Pointer<
                       NativeFunction<

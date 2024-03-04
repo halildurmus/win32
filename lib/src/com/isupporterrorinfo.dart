@@ -38,8 +38,7 @@ class ISupportErrorInfo extends IUnknown {
   factory ISupportErrorInfo.from(IUnknown interface) =>
       ISupportErrorInfo(interface.toInterface(IID_ISupportErrorInfo));
 
-  int interfaceSupportsErrorInfo(Pointer<GUID> riid) => ptr.ref.vtable
-      .elementAt(3)
+  int interfaceSupportsErrorInfo(Pointer<GUID> riid) => (ptr.ref.vtable + 3)
       .cast<
           Pointer<
               NativeFunction<Int32 Function(Pointer, Pointer<GUID> riid)>>>()

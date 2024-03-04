@@ -40,8 +40,7 @@ class ISpellCheckerFactory extends IUnknown {
   Pointer<COMObject> get supportedLanguages {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
-            .elementAt(3)
+    final hr = (ptr.ref.vtable + 3)
             .cast<
                 Pointer<
                     NativeFunction<
@@ -59,8 +58,7 @@ class ISpellCheckerFactory extends IUnknown {
   }
 
   int isSupported(Pointer<Utf16> languageTag, Pointer<Int32> value) =>
-      ptr.ref.vtable
-          .elementAt(4)
+      (ptr.ref.vtable + 4)
           .cast<
               Pointer<
                   NativeFunction<
@@ -73,8 +71,7 @@ class ISpellCheckerFactory extends IUnknown {
 
   int createSpellChecker(
           Pointer<Utf16> languageTag, Pointer<Pointer<COMObject>> value) =>
-      ptr.ref.vtable
-              .elementAt(5)
+      (ptr.ref.vtable + 5)
               .cast<
                   Pointer<
                       NativeFunction<

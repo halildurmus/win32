@@ -38,15 +38,15 @@ class IShellItemImageFactory extends IUnknown {
   factory IShellItemImageFactory.from(IUnknown interface) =>
       IShellItemImageFactory(interface.toInterface(IID_IShellItemImageFactory));
 
-  int getImage(SIZE size, int flags, Pointer<IntPtr> phbm) => ptr.ref.vtable
-      .elementAt(3)
-      .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(Pointer, SIZE size, Int32 flags,
-                      Pointer<IntPtr> phbm)>>>()
-      .value
-      .asFunction<
-          int Function(Pointer, SIZE size, int flags,
-              Pointer<IntPtr> phbm)>()(ptr.ref.lpVtbl, size, flags, phbm);
+  int getImage(SIZE size, int flags, Pointer<IntPtr> phbm) =>
+      (ptr.ref.vtable + 3)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(Pointer, SIZE size, Int32 flags,
+                          Pointer<IntPtr> phbm)>>>()
+          .value
+          .asFunction<
+              int Function(Pointer, SIZE size, int flags,
+                  Pointer<IntPtr> phbm)>()(ptr.ref.lpVtbl, size, flags, phbm);
 }

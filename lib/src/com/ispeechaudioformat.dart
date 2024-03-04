@@ -39,8 +39,7 @@ class ISpeechAudioFormat extends IDispatch {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-          .elementAt(7)
+      final hr = (ptr.ref.vtable + 7)
           .cast<
               Pointer<
                   NativeFunction<
@@ -60,8 +59,7 @@ class ISpeechAudioFormat extends IDispatch {
   }
 
   set type(int value) {
-    final hr = ptr.ref.vtable
-        .elementAt(8)
+    final hr = (ptr.ref.vtable + 8)
         .cast<
             Pointer<
                 NativeFunction<Int32 Function(Pointer, Int32 AudioFormat)>>>()
@@ -76,8 +74,7 @@ class ISpeechAudioFormat extends IDispatch {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-          .elementAt(9)
+      final hr = (ptr.ref.vtable + 9)
           .cast<
               Pointer<
                   NativeFunction<
@@ -97,8 +94,7 @@ class ISpeechAudioFormat extends IDispatch {
   }
 
   set guid(Pointer<Utf16> value) {
-    final hr = ptr.ref.vtable
-        .elementAt(10)
+    final hr = (ptr.ref.vtable + 10)
         .cast<
             Pointer<
                 NativeFunction<Int32 Function(Pointer, Pointer<Utf16> Guid)>>>()
@@ -110,9 +106,9 @@ class ISpeechAudioFormat extends IDispatch {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  int getWaveFormatEx(Pointer<Pointer<COMObject>> SpeechWaveFormatEx) => ptr
-          .ref.vtable
-          .elementAt(11)
+  int getWaveFormatEx(Pointer<Pointer<COMObject>> SpeechWaveFormatEx) => (ptr
+                  .ref.vtable +
+              11)
           .cast<
               Pointer<
                   NativeFunction<
@@ -124,15 +120,16 @@ class ISpeechAudioFormat extends IDispatch {
                   Pointer, Pointer<Pointer<COMObject>> SpeechWaveFormatEx)>()(
       ptr.ref.lpVtbl, SpeechWaveFormatEx);
 
-  int setWaveFormatEx(Pointer<COMObject> SpeechWaveFormatEx) => ptr.ref.vtable
-          .elementAt(12)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<COMObject> SpeechWaveFormatEx)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, Pointer<COMObject> SpeechWaveFormatEx)>()(
-      ptr.ref.lpVtbl, SpeechWaveFormatEx);
+  int setWaveFormatEx(Pointer<COMObject> SpeechWaveFormatEx) =>
+      (ptr.ref.vtable + 12)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer,
+                              Pointer<COMObject> SpeechWaveFormatEx)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer, Pointer<COMObject> SpeechWaveFormatEx)>()(
+          ptr.ref.lpVtbl, SpeechWaveFormatEx);
 }

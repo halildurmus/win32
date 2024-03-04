@@ -38,15 +38,13 @@ class IUIAutomationSynchronizedInputPattern extends IUnknown {
       IUIAutomationSynchronizedInputPattern(
           interface.toInterface(IID_IUIAutomationSynchronizedInputPattern));
 
-  int startListening(int inputType) => ptr.ref.vtable
-      .elementAt(3)
+  int startListening(int inputType) => (ptr.ref.vtable + 3)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 inputType)>>>()
       .value
       .asFunction<
           int Function(Pointer, int inputType)>()(ptr.ref.lpVtbl, inputType);
 
-  int cancel() => ptr.ref.vtable
-      .elementAt(4)
+  int cancel() => (ptr.ref.vtable + 4)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);

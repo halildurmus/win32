@@ -42,8 +42,7 @@ class IApplicationActivationManager extends IUnknown {
 
   int activateApplication(Pointer<Utf16> appUserModelId,
           Pointer<Utf16> arguments, int options, Pointer<Uint32> processId) =>
-      ptr.ref.vtable
-              .elementAt(3)
+      (ptr.ref.vtable + 3)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -68,8 +67,7 @@ class IApplicationActivationManager extends IUnknown {
           Pointer<COMObject> itemArray,
           Pointer<Utf16> verb,
           Pointer<Uint32> processId) =>
-      ptr.ref.vtable
-              .elementAt(4)
+      (ptr.ref.vtable + 4)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -91,8 +89,7 @@ class IApplicationActivationManager extends IUnknown {
 
   int activateForProtocol(Pointer<Utf16> appUserModelId,
           Pointer<COMObject> itemArray, Pointer<Uint32> processId) =>
-      ptr.ref.vtable
-              .elementAt(5)
+      (ptr.ref.vtable + 5)
               .cast<
                   Pointer<
                       NativeFunction<

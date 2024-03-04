@@ -39,8 +39,7 @@ class IEnumMoniker extends IUnknown {
 
   int next(int celt, Pointer<Pointer<COMObject>> rgelt,
           Pointer<Uint32> pceltFetched) =>
-      ptr.ref.vtable
-              .elementAt(3)
+      (ptr.ref.vtable + 3)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -58,20 +57,17 @@ class IEnumMoniker extends IUnknown {
                       Pointer<Uint32> pceltFetched)>()(
           ptr.ref.lpVtbl, celt, rgelt, pceltFetched);
 
-  int skip(int celt) => ptr.ref.vtable
-      .elementAt(4)
+  int skip(int celt) => (ptr.ref.vtable + 4)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint32 celt)>>>()
       .value
       .asFunction<int Function(Pointer, int celt)>()(ptr.ref.lpVtbl, celt);
 
-  int reset() => ptr.ref.vtable
-      .elementAt(5)
+  int reset() => (ptr.ref.vtable + 5)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  int clone(Pointer<Pointer<COMObject>> ppenum) => ptr.ref.vtable
-          .elementAt(6)
+  int clone(Pointer<Pointer<COMObject>> ppenum) => (ptr.ref.vtable + 6)
           .cast<
               Pointer<
                   NativeFunction<

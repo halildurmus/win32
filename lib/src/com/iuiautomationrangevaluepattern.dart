@@ -38,8 +38,7 @@ class IUIAutomationRangeValuePattern extends IUnknown {
       IUIAutomationRangeValuePattern(
           interface.toInterface(IID_IUIAutomationRangeValuePattern));
 
-  int setValue(double val) => ptr.ref.vtable
-      .elementAt(3)
+  int setValue(double val) => (ptr.ref.vtable + 3)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Double val)>>>()
       .value
       .asFunction<int Function(Pointer, double val)>()(ptr.ref.lpVtbl, val);
@@ -48,8 +47,7 @@ class IUIAutomationRangeValuePattern extends IUnknown {
     final retValuePtr = calloc<Double>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(4)
+      final hr = (ptr.ref.vtable + 4)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -71,8 +69,7 @@ class IUIAutomationRangeValuePattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(5)
+      final hr = (ptr.ref.vtable + 5)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -94,8 +91,7 @@ class IUIAutomationRangeValuePattern extends IUnknown {
     final retValuePtr = calloc<Double>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(6)
+      final hr = (ptr.ref.vtable + 6)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -117,8 +113,7 @@ class IUIAutomationRangeValuePattern extends IUnknown {
     final retValuePtr = calloc<Double>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(7)
+      final hr = (ptr.ref.vtable + 7)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -140,8 +135,7 @@ class IUIAutomationRangeValuePattern extends IUnknown {
     final retValuePtr = calloc<Double>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(8)
+      final hr = (ptr.ref.vtable + 8)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -163,8 +157,7 @@ class IUIAutomationRangeValuePattern extends IUnknown {
     final retValuePtr = calloc<Double>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(9)
+      final hr = (ptr.ref.vtable + 9)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -186,8 +179,7 @@ class IUIAutomationRangeValuePattern extends IUnknown {
     final retValuePtr = calloc<Double>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(10)
+      final hr = (ptr.ref.vtable + 10)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -209,8 +201,7 @@ class IUIAutomationRangeValuePattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(11)
+      final hr = (ptr.ref.vtable + 11)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -232,8 +223,7 @@ class IUIAutomationRangeValuePattern extends IUnknown {
     final retValuePtr = calloc<Double>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(12)
+      final hr = (ptr.ref.vtable + 12)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -255,8 +245,7 @@ class IUIAutomationRangeValuePattern extends IUnknown {
     final retValuePtr = calloc<Double>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(13)
+      final hr = (ptr.ref.vtable + 13)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -278,8 +267,7 @@ class IUIAutomationRangeValuePattern extends IUnknown {
     final retValuePtr = calloc<Double>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(14)
+      final hr = (ptr.ref.vtable + 14)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -301,8 +289,7 @@ class IUIAutomationRangeValuePattern extends IUnknown {
     final retValuePtr = calloc<Double>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(15)
+      final hr = (ptr.ref.vtable + 15)
               .cast<
                   Pointer<
                       NativeFunction<

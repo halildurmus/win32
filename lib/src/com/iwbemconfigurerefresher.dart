@@ -45,8 +45,7 @@ class IWbemConfigureRefresher extends IUnknown {
           Pointer<COMObject> pContext,
           Pointer<Pointer<COMObject>> ppRefreshable,
           Pointer<Int32> plId) =>
-      ptr.ref.vtable
-              .elementAt(3)
+      (ptr.ref.vtable + 3)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -77,8 +76,7 @@ class IWbemConfigureRefresher extends IUnknown {
           Pointer<COMObject> pContext,
           Pointer<Pointer<COMObject>> ppRefreshable,
           Pointer<Int32> plId) =>
-      ptr.ref.vtable
-              .elementAt(4)
+      (ptr.ref.vtable + 4)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -104,8 +102,7 @@ class IWbemConfigureRefresher extends IUnknown {
 
   int addRefresher(
           Pointer<COMObject> pRefresher, int lFlags, Pointer<Int32> plId) =>
-      ptr.ref.vtable
-              .elementAt(5)
+      (ptr.ref.vtable + 5)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -117,8 +114,7 @@ class IWbemConfigureRefresher extends IUnknown {
                       int lFlags, Pointer<Int32> plId)>()(
           ptr.ref.lpVtbl, pRefresher, lFlags, plId);
 
-  int remove(int lId, int lFlags) => ptr.ref.vtable
-          .elementAt(6)
+  int remove(int lId, int lFlags) => (ptr.ref.vtable + 6)
           .cast<
               Pointer<
                   NativeFunction<
@@ -134,8 +130,7 @@ class IWbemConfigureRefresher extends IUnknown {
           Pointer<COMObject> pContext,
           Pointer<Pointer<COMObject>> ppEnum,
           Pointer<Int32> plId) =>
-      ptr.ref.vtable
-              .elementAt(7)
+      (ptr.ref.vtable + 7)
               .cast<
                   Pointer<
                       NativeFunction<

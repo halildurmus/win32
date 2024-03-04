@@ -39,8 +39,7 @@ class IMetaDataDispenser extends IUnknown {
 
   int defineScope(Pointer<GUID> rclsid, int dwCreateFlags, Pointer<GUID> riid,
           Pointer<Pointer<COMObject>> ppIUnk) =>
-      ptr.ref.vtable
-              .elementAt(3)
+      (ptr.ref.vtable + 3)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -62,8 +61,7 @@ class IMetaDataDispenser extends IUnknown {
 
   int openScope(Pointer<Utf16> szScope, int dwOpenFlags, Pointer<GUID> riid,
           Pointer<Pointer<COMObject>> ppIUnk) =>
-      ptr.ref.vtable
-              .elementAt(4)
+      (ptr.ref.vtable + 4)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -85,8 +83,7 @@ class IMetaDataDispenser extends IUnknown {
 
   int openScopeOnMemory(Pointer pData, int cbData, int dwOpenFlags,
           Pointer<GUID> riid, Pointer<Pointer<COMObject>> ppIUnk) =>
-      ptr.ref.vtable
-              .elementAt(5)
+      (ptr.ref.vtable + 5)
               .cast<
                   Pointer<
                       NativeFunction<

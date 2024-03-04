@@ -42,8 +42,7 @@ class IWbemHiPerfEnum extends IUnknown {
 
   int addObjects(int lFlags, int uNumObjects, Pointer<Int32> apIds,
           Pointer<Pointer<COMObject>> apObj) =>
-      ptr.ref.vtable
-              .elementAt(3)
+      (ptr.ref.vtable + 3)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -63,9 +62,8 @@ class IWbemHiPerfEnum extends IUnknown {
                       Pointer<Pointer<COMObject>> apObj)>()(
           ptr.ref.lpVtbl, lFlags, uNumObjects, apIds, apObj);
 
-  int removeObjects(int lFlags, int uNumObjects, Pointer<Int32> apIds) => ptr
-          .ref.vtable
-          .elementAt(4)
+  int removeObjects(int lFlags, int uNumObjects, Pointer<Int32> apIds) =>
+      (ptr.ref.vtable + 4)
           .cast<
               Pointer<
                   NativeFunction<
@@ -73,14 +71,16 @@ class IWbemHiPerfEnum extends IUnknown {
                           Pointer<Int32> apIds)>>>()
           .value
           .asFunction<
-              int Function(Pointer, int lFlags, int uNumObjects,
-                  Pointer<Int32> apIds)>()(
-      ptr.ref.lpVtbl, lFlags, uNumObjects, apIds);
+              int Function(
+                  Pointer,
+                  int lFlags,
+                  int uNumObjects,
+                  Pointer<Int32>
+                      apIds)>()(ptr.ref.lpVtbl, lFlags, uNumObjects, apIds);
 
   int getObjects(int lFlags, int uNumObjects, Pointer<Pointer<COMObject>> apObj,
           Pointer<Uint32> puReturned) =>
-      ptr.ref.vtable
-              .elementAt(5)
+      (ptr.ref.vtable + 5)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -100,8 +100,7 @@ class IWbemHiPerfEnum extends IUnknown {
                       Pointer<Uint32> puReturned)>()(
           ptr.ref.lpVtbl, lFlags, uNumObjects, apObj, puReturned);
 
-  int removeAll(int lFlags) => ptr.ref.vtable
-      .elementAt(6)
+  int removeAll(int lFlags) => (ptr.ref.vtable + 6)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 lFlags)>>>()
       .value
       .asFunction<int Function(Pointer, int lFlags)>()(ptr.ref.lpVtbl, lFlags);

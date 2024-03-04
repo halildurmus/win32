@@ -23,7 +23,7 @@ void main() {
   final ptr = calloc<Uint16>(4096);
   var idx = 0;
 
-  idx += ptr.elementAt(idx).cast<DLGTEMPLATE>().setDialog(
+  idx += (ptr + idx).cast<DLGTEMPLATE>().setDialog(
       style: WS_POPUP |
           WS_BORDER |
           WS_SYSMENU |
@@ -37,7 +37,7 @@ void main() {
       fontName: 'MS Shell Dlg',
       fontSize: 8);
 
-  idx += ptr.elementAt(idx).cast<DLGITEMTEMPLATE>().setDialogItem(
+  idx += (ptr + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
       style: WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_DEFPUSHBUTTON,
       x: 100,
       y: 160,
@@ -47,7 +47,7 @@ void main() {
       windowSystemClass: 0x0080, // button
       text: 'OK');
 
-  idx += ptr.elementAt(idx).cast<DLGITEMTEMPLATE>().setDialogItem(
+  idx += (ptr + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
       style: WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON,
       x: 190,
       y: 160,
@@ -57,7 +57,7 @@ void main() {
       windowSystemClass: 0x0080, // button
       text: 'Cancel');
 
-  idx += ptr.elementAt(idx).cast<DLGITEMTEMPLATE>().setDialogItem(
+  idx += (ptr + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
       style: WS_CHILD | WS_VISIBLE,
       x: 10,
       y: 10,
@@ -67,7 +67,7 @@ void main() {
       windowSystemClass: 0x0082, // static
       text: 'Some static wrapped text here.');
 
-  idx += ptr.elementAt(idx).cast<DLGITEMTEMPLATE>().setDialogItem(
+  idx += (ptr + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
       style: PBS_SMOOTH | WS_BORDER | WS_VISIBLE,
       x: 6,
       y: 49,
@@ -77,7 +77,7 @@ void main() {
       windowClass: 'msctls_progress32' // progress bar
       );
 
-  idx += ptr.elementAt(idx).cast<DLGITEMTEMPLATE>().setDialogItem(
+  idx += (ptr + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
       style: WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
       x: 20,
       y: 50,

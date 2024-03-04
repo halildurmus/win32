@@ -18,12 +18,12 @@ extension Utf16Conversion on Pointer<Utf16> {
     final ptr = Pointer<Uint16>.fromAddress(address);
 
     for (var v = 0; v < maxLength; v++) {
-      final charCode = ptr.elementAt(v).value;
+      final charCode = (ptr + v).value;
       if (charCode != 0) {
         buf.writeCharCode(charCode);
       } else {
         results.add(buf.toString());
-        if (ptr.elementAt(v + 1).value == 0) {
+        if ((ptr + (v + 1)).value == 0) {
           break;
         } else {
           buf.clear();

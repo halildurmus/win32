@@ -44,8 +44,7 @@ class IUIAutomationPropertyCondition extends IUIAutomationCondition {
     final retValuePtr = calloc<Uint32>();
 
     try {
-      final hr = ptr.ref.vtable
-          .elementAt(3)
+      final hr = (ptr.ref.vtable + 3)
           .cast<
               Pointer<
                   NativeFunction<
@@ -68,8 +67,7 @@ class IUIAutomationPropertyCondition extends IUIAutomationCondition {
     final retValuePtr = calloc<VARIANT>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(4)
+      final hr = (ptr.ref.vtable + 4)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -93,8 +91,7 @@ class IUIAutomationPropertyCondition extends IUIAutomationCondition {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(5)
+      final hr = (ptr.ref.vtable + 5)
               .cast<
                   Pointer<
                       NativeFunction<

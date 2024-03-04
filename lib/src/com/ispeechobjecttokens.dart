@@ -42,8 +42,7 @@ class ISpeechObjectTokens extends IDispatch {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(7)
+      final hr = (ptr.ref.vtable + 7)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -61,8 +60,7 @@ class ISpeechObjectTokens extends IDispatch {
     }
   }
 
-  int item(int Index, Pointer<Pointer<COMObject>> Token) => ptr.ref.vtable
-          .elementAt(8)
+  int item(int Index, Pointer<Pointer<COMObject>> Token) => (ptr.ref.vtable + 8)
           .cast<
               Pointer<
                   NativeFunction<
@@ -77,8 +75,7 @@ class ISpeechObjectTokens extends IDispatch {
   Pointer<COMObject> get newEnum {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
-            .elementAt(9)
+    final hr = (ptr.ref.vtable + 9)
             .cast<
                 Pointer<
                     NativeFunction<

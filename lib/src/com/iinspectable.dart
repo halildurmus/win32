@@ -36,21 +36,20 @@ class IInspectable extends IUnknown {
   factory IInspectable.from(IUnknown interface) =>
       IInspectable(interface.toInterface(IID_IInspectable));
 
-  int getIids(Pointer<Uint32> iidCount, Pointer<Pointer<GUID>> iids) => ptr
-      .ref.vtable
-      .elementAt(3)
-      .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(Pointer, Pointer<Uint32> iidCount,
-                      Pointer<Pointer<GUID>> iids)>>>()
-      .value
-      .asFunction<
-          int Function(Pointer, Pointer<Uint32> iidCount,
-              Pointer<Pointer<GUID>> iids)>()(ptr.ref.lpVtbl, iidCount, iids);
+  int getIids(Pointer<Uint32> iidCount, Pointer<Pointer<GUID>> iids) =>
+      (ptr.ref.vtable + 3)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Pointer<Uint32> iidCount,
+                              Pointer<Pointer<GUID>> iids)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<Uint32> iidCount,
+                      Pointer<Pointer<GUID>> iids)>()(
+          ptr.ref.lpVtbl, iidCount, iids);
 
-  int getRuntimeClassName(Pointer<IntPtr> className) => ptr.ref.vtable
-          .elementAt(4)
+  int getRuntimeClassName(Pointer<IntPtr> className) => (ptr.ref.vtable + 4)
           .cast<
               Pointer<
                   NativeFunction<
@@ -59,8 +58,7 @@ class IInspectable extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<IntPtr> className)>()(
       ptr.ref.lpVtbl, className);
 
-  int getTrustLevel(Pointer<Int32> trustLevel) => ptr.ref.vtable
-          .elementAt(5)
+  int getTrustLevel(Pointer<Int32> trustLevel) => (ptr.ref.vtable + 5)
           .cast<
               Pointer<
                   NativeFunction<

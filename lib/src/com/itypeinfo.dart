@@ -39,8 +39,7 @@ class ITypeInfo extends IUnknown {
   factory ITypeInfo.from(IUnknown interface) =>
       ITypeInfo(interface.toInterface(IID_ITypeInfo));
 
-  int getTypeAttr(Pointer<Pointer<TYPEATTR>> ppTypeAttr) => ptr.ref.vtable
-          .elementAt(3)
+  int getTypeAttr(Pointer<Pointer<TYPEATTR>> ppTypeAttr) => (ptr.ref.vtable + 3)
           .cast<
               Pointer<
                   NativeFunction<
@@ -51,8 +50,7 @@ class ITypeInfo extends IUnknown {
               int Function(Pointer, Pointer<Pointer<TYPEATTR>> ppTypeAttr)>()(
       ptr.ref.lpVtbl, ppTypeAttr);
 
-  int getTypeComp(Pointer<Pointer<COMObject>> ppTComp) => ptr.ref.vtable
-          .elementAt(4)
+  int getTypeComp(Pointer<Pointer<COMObject>> ppTComp) => (ptr.ref.vtable + 4)
           .cast<
               Pointer<
                   NativeFunction<
@@ -63,38 +61,36 @@ class ITypeInfo extends IUnknown {
               int Function(Pointer, Pointer<Pointer<COMObject>> ppTComp)>()(
       ptr.ref.lpVtbl, ppTComp);
 
-  int getFuncDesc(int index, Pointer<Pointer<FUNCDESC>> ppFuncDesc) => ptr
-          .ref.vtable
-          .elementAt(5)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Uint32 index,
-                          Pointer<Pointer<FUNCDESC>> ppFuncDesc)>>>()
-          .value
-          .asFunction<
-              int Function(
-                  Pointer, int index, Pointer<Pointer<FUNCDESC>> ppFuncDesc)>()(
-      ptr.ref.lpVtbl, index, ppFuncDesc);
+  int getFuncDesc(int index, Pointer<Pointer<FUNCDESC>> ppFuncDesc) =>
+      (ptr.ref.vtable + 5)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Uint32 index,
+                              Pointer<Pointer<FUNCDESC>> ppFuncDesc)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, int index,
+                      Pointer<Pointer<FUNCDESC>> ppFuncDesc)>()(
+          ptr.ref.lpVtbl, index, ppFuncDesc);
 
-  int getVarDesc(int index, Pointer<Pointer<VARDESC>> ppVarDesc) => ptr
-          .ref.vtable
-          .elementAt(6)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Uint32 index,
-                          Pointer<Pointer<VARDESC>> ppVarDesc)>>>()
-          .value
-          .asFunction<
-              int Function(
-                  Pointer, int index, Pointer<Pointer<VARDESC>> ppVarDesc)>()(
-      ptr.ref.lpVtbl, index, ppVarDesc);
+  int getVarDesc(
+          int index, Pointer<Pointer<VARDESC>> ppVarDesc) =>
+      (ptr.ref.vtable + 6)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Uint32 index,
+                              Pointer<Pointer<VARDESC>> ppVarDesc)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, int index,
+                      Pointer<Pointer<VARDESC>> ppVarDesc)>()(
+          ptr.ref.lpVtbl, index, ppVarDesc);
 
   int getNames(int memid, Pointer<Pointer<Utf16>> rgBstrNames, int cMaxNames,
           Pointer<Uint32> pcNames) =>
-      ptr.ref.vtable
-              .elementAt(7)
+      (ptr.ref.vtable + 7)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -115,8 +111,7 @@ class ITypeInfo extends IUnknown {
           ptr.ref.lpVtbl, memid, rgBstrNames, cMaxNames, pcNames);
 
   int getRefTypeOfImplType(int index, Pointer<Uint32> pRefType) =>
-      ptr.ref.vtable
-          .elementAt(8)
+      (ptr.ref.vtable + 8)
           .cast<
               Pointer<
                   NativeFunction<
@@ -127,9 +122,9 @@ class ITypeInfo extends IUnknown {
               int Function(Pointer, int index,
                   Pointer<Uint32> pRefType)>()(ptr.ref.lpVtbl, index, pRefType);
 
-  int getImplTypeFlags(int index, Pointer<Int32> pImplTypeFlags) =>
-      ptr.ref.vtable
-              .elementAt(9)
+  int getImplTypeFlags(
+          int index, Pointer<Int32> pImplTypeFlags) =>
+      (ptr.ref.vtable + 9)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -143,8 +138,7 @@ class ITypeInfo extends IUnknown {
 
   int getIDsOfNames(Pointer<Pointer<Utf16>> rgszNames, int cNames,
           Pointer<Int32> pMemId) =>
-      ptr.ref.vtable
-          .elementAt(10)
+      (ptr.ref.vtable + 10)
           .cast<
               Pointer<
                   NativeFunction<
@@ -167,8 +161,7 @@ class ITypeInfo extends IUnknown {
           Pointer<VARIANT> pVarResult,
           Pointer<EXCEPINFO> pExcepInfo,
           Pointer<Uint32> puArgErr) =>
-      ptr.ref.vtable
-              .elementAt(11)
+      (ptr.ref.vtable + 11)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -200,8 +193,7 @@ class ITypeInfo extends IUnknown {
           Pointer<Pointer<Utf16>> pBstrDocString,
           Pointer<Uint32> pdwHelpContext,
           Pointer<Pointer<Utf16>> pBstrHelpFile) =>
-      ptr.ref.vtable
-              .elementAt(12)
+      (ptr.ref.vtable + 12)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -225,8 +217,7 @@ class ITypeInfo extends IUnknown {
 
   int getDllEntry(int memid, int invKind, Pointer<Pointer<Utf16>> pBstrDllName,
           Pointer<Pointer<Utf16>> pBstrName, Pointer<Uint16> pwOrdinal) =>
-      ptr.ref.vtable
-              .elementAt(13)
+      (ptr.ref.vtable + 13)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -249,8 +240,7 @@ class ITypeInfo extends IUnknown {
           ptr.ref.lpVtbl, memid, invKind, pBstrDllName, pBstrName, pwOrdinal);
 
   int getRefTypeInfo(int hRefType, Pointer<Pointer<COMObject>> ppTInfo) =>
-      ptr.ref.vtable
-              .elementAt(14)
+      (ptr.ref.vtable + 14)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -263,8 +253,7 @@ class ITypeInfo extends IUnknown {
           ptr.ref.lpVtbl, hRefType, ppTInfo);
 
   int addressOfMember(int memid, int invKind, Pointer<Pointer> ppv) =>
-      ptr.ref.vtable
-          .elementAt(15)
+      (ptr.ref.vtable + 15)
           .cast<
               Pointer<
                   NativeFunction<
@@ -277,8 +266,7 @@ class ITypeInfo extends IUnknown {
 
   int createInstance(Pointer<COMObject> pUnkOuter, Pointer<GUID> riid,
           Pointer<Pointer> ppvObj) =>
-      ptr.ref.vtable
-              .elementAt(16)
+      (ptr.ref.vtable + 16)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -290,23 +278,23 @@ class ITypeInfo extends IUnknown {
                       Pointer<GUID> riid, Pointer<Pointer> ppvObj)>()(
           ptr.ref.lpVtbl, pUnkOuter, riid, ppvObj);
 
-  int getMops(int memid, Pointer<Pointer<Utf16>> pBstrMops) => ptr.ref.vtable
-          .elementAt(17)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Int32 memid,
-                          Pointer<Pointer<Utf16>> pBstrMops)>>>()
-          .value
-          .asFunction<
-              int Function(
-                  Pointer, int memid, Pointer<Pointer<Utf16>> pBstrMops)>()(
-      ptr.ref.lpVtbl, memid, pBstrMops);
+  int getMops(
+          int memid, Pointer<Pointer<Utf16>> pBstrMops) =>
+      (ptr.ref.vtable + 17)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Int32 memid,
+                              Pointer<Pointer<Utf16>> pBstrMops)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer, int memid, Pointer<Pointer<Utf16>> pBstrMops)>()(
+          ptr.ref.lpVtbl, memid, pBstrMops);
 
   int getContainingTypeLib(
           Pointer<Pointer<COMObject>> ppTLib, Pointer<Uint32> pIndex) =>
-      ptr.ref.vtable
-          .elementAt(18)
+      (ptr.ref.vtable + 18)
           .cast<
               Pointer<
                   NativeFunction<
@@ -319,8 +307,7 @@ class ITypeInfo extends IUnknown {
               int Function(Pointer, Pointer<Pointer<COMObject>> ppTLib,
                   Pointer<Uint32> pIndex)>()(ptr.ref.lpVtbl, ppTLib, pIndex);
 
-  void releaseTypeAttr(Pointer<TYPEATTR> pTypeAttr) => ptr.ref.vtable
-          .elementAt(19)
+  void releaseTypeAttr(Pointer<TYPEATTR> pTypeAttr) => (ptr.ref.vtable + 19)
           .cast<
               Pointer<
                   NativeFunction<
@@ -329,8 +316,7 @@ class ITypeInfo extends IUnknown {
           .asFunction<void Function(Pointer, Pointer<TYPEATTR> pTypeAttr)>()(
       ptr.ref.lpVtbl, pTypeAttr);
 
-  void releaseFuncDesc(Pointer<FUNCDESC> pFuncDesc) => ptr.ref.vtable
-          .elementAt(20)
+  void releaseFuncDesc(Pointer<FUNCDESC> pFuncDesc) => (ptr.ref.vtable + 20)
           .cast<
               Pointer<
                   NativeFunction<
@@ -339,8 +325,7 @@ class ITypeInfo extends IUnknown {
           .asFunction<void Function(Pointer, Pointer<FUNCDESC> pFuncDesc)>()(
       ptr.ref.lpVtbl, pFuncDesc);
 
-  void releaseVarDesc(Pointer<VARDESC> pVarDesc) => ptr.ref.vtable
-          .elementAt(21)
+  void releaseVarDesc(Pointer<VARDESC> pVarDesc) => (ptr.ref.vtable + 21)
           .cast<
               Pointer<
                   NativeFunction<

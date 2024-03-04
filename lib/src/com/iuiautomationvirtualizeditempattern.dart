@@ -39,8 +39,7 @@ class IUIAutomationVirtualizedItemPattern extends IUnknown {
       IUIAutomationVirtualizedItemPattern(
           interface.toInterface(IID_IUIAutomationVirtualizedItemPattern));
 
-  int realize() => ptr.ref.vtable
-      .elementAt(3)
+  int realize() => (ptr.ref.vtable + 3)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);

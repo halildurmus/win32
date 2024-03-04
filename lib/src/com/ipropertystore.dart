@@ -37,8 +37,7 @@ class IPropertyStore extends IUnknown {
   factory IPropertyStore.from(IUnknown interface) =>
       IPropertyStore(interface.toInterface(IID_IPropertyStore));
 
-  int getCount(Pointer<Uint32> cProps) => ptr.ref.vtable
-          .elementAt(3)
+  int getCount(Pointer<Uint32> cProps) => (ptr.ref.vtable + 3)
           .cast<
               Pointer<
                   NativeFunction<
@@ -47,8 +46,7 @@ class IPropertyStore extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Uint32> cProps)>()(
       ptr.ref.lpVtbl, cProps);
 
-  int getAt(int iProp, Pointer<PROPERTYKEY> pkey) => ptr.ref.vtable
-          .elementAt(4)
+  int getAt(int iProp, Pointer<PROPERTYKEY> pkey) => (ptr.ref.vtable + 4)
           .cast<
               Pointer<
                   NativeFunction<
@@ -60,8 +58,7 @@ class IPropertyStore extends IUnknown {
       ptr.ref.lpVtbl, iProp, pkey);
 
   int getValue(Pointer<PROPERTYKEY> key, Pointer<PROPVARIANT> pv) =>
-      ptr.ref.vtable
-          .elementAt(5)
+      (ptr.ref.vtable + 5)
           .cast<
               Pointer<
                   NativeFunction<
@@ -72,21 +69,20 @@ class IPropertyStore extends IUnknown {
               int Function(Pointer, Pointer<PROPERTYKEY> key,
                   Pointer<PROPVARIANT> pv)>()(ptr.ref.lpVtbl, key, pv);
 
-  int setValue(Pointer<PROPERTYKEY> key, Pointer<PROPVARIANT> propvar) => ptr
-      .ref.vtable
-      .elementAt(6)
-      .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(Pointer, Pointer<PROPERTYKEY> key,
-                      Pointer<PROPVARIANT> propvar)>>>()
-      .value
-      .asFunction<
-          int Function(Pointer, Pointer<PROPERTYKEY> key,
-              Pointer<PROPVARIANT> propvar)>()(ptr.ref.lpVtbl, key, propvar);
+  int setValue(Pointer<PROPERTYKEY> key, Pointer<PROPVARIANT> propvar) =>
+      (ptr.ref.vtable + 6)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Pointer<PROPERTYKEY> key,
+                              Pointer<PROPVARIANT> propvar)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<PROPERTYKEY> key,
+                      Pointer<PROPVARIANT> propvar)>()(
+          ptr.ref.lpVtbl, key, propvar);
 
-  int commit() => ptr.ref.vtable
-      .elementAt(7)
+  int commit() => (ptr.ref.vtable + 7)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);

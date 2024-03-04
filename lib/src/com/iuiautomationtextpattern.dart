@@ -37,24 +37,22 @@ class IUIAutomationTextPattern extends IUnknown {
       IUIAutomationTextPattern(
           interface.toInterface(IID_IUIAutomationTextPattern));
 
-  int rangeFromPoint(POINT pt, Pointer<Pointer<COMObject>> range) => ptr
-      .ref.vtable
-      .elementAt(3)
-      .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(
-                      Pointer, POINT pt, Pointer<Pointer<COMObject>> range)>>>()
-      .value
-      .asFunction<
-          int Function(Pointer, POINT pt,
-              Pointer<Pointer<COMObject>> range)>()(ptr.ref.lpVtbl, pt, range);
+  int rangeFromPoint(POINT pt, Pointer<Pointer<COMObject>> range) =>
+      (ptr.ref.vtable + 3)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, POINT pt,
+                              Pointer<Pointer<COMObject>> range)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer, POINT pt, Pointer<Pointer<COMObject>> range)>()(
+          ptr.ref.lpVtbl, pt, range);
 
   int rangeFromChild(
           Pointer<COMObject> child, Pointer<Pointer<COMObject>> range) =>
-      ptr
-              .ref.vtable
-              .elementAt(4)
+      (ptr.ref.vtable + 4)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -66,8 +64,7 @@ class IUIAutomationTextPattern extends IUnknown {
                       Pointer<Pointer<COMObject>> range)>()(
           ptr.ref.lpVtbl, child, range);
 
-  int getSelection(Pointer<Pointer<COMObject>> ranges) => ptr.ref.vtable
-          .elementAt(5)
+  int getSelection(Pointer<Pointer<COMObject>> ranges) => (ptr.ref.vtable + 5)
           .cast<
               Pointer<
                   NativeFunction<
@@ -78,23 +75,22 @@ class IUIAutomationTextPattern extends IUnknown {
               int Function(Pointer, Pointer<Pointer<COMObject>> ranges)>()(
       ptr.ref.lpVtbl, ranges);
 
-  int getVisibleRanges(Pointer<Pointer<COMObject>> ranges) => ptr.ref.vtable
-          .elementAt(6)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<Pointer<COMObject>> ranges)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, Pointer<Pointer<COMObject>> ranges)>()(
-      ptr.ref.lpVtbl, ranges);
+  int getVisibleRanges(Pointer<Pointer<COMObject>> ranges) =>
+      (ptr.ref.vtable + 6)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer, Pointer<Pointer<COMObject>> ranges)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<Pointer<COMObject>> ranges)>()(
+          ptr.ref.lpVtbl, ranges);
 
   Pointer<COMObject> get documentRange {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
-            .elementAt(7)
+    final hr = (ptr.ref.vtable + 7)
             .cast<
                 Pointer<
                     NativeFunction<
@@ -115,8 +111,7 @@ class IUIAutomationTextPattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(8)
+      final hr = (ptr.ref.vtable + 8)
               .cast<
                   Pointer<
                       NativeFunction<

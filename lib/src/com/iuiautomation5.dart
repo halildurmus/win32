@@ -40,8 +40,7 @@ class IUIAutomation5 extends IUIAutomation4 {
 
   int addNotificationEventHandler(Pointer<COMObject> element, int scope,
           Pointer<COMObject> cacheRequest, Pointer<COMObject> handler) =>
-      ptr.ref.vtable
-              .elementAt(68)
+      (ptr.ref.vtable + 68)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -63,8 +62,7 @@ class IUIAutomation5 extends IUIAutomation4 {
 
   int removeNotificationEventHandler(
           Pointer<COMObject> element, Pointer<COMObject> handler) =>
-      ptr.ref.vtable
-              .elementAt(69)
+      (ptr.ref.vtable + 69)
               .cast<
                   Pointer<
                       NativeFunction<

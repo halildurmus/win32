@@ -8,7 +8,6 @@ import 'dart:ffi';
 import 'dart:io';
 
 import 'package:ffi/ffi.dart';
-
 import 'package:win32/win32.dart';
 
 int printModules(int processID) {
@@ -33,7 +32,7 @@ int printModules(int processID) {
       final szModName = wsalloc(MAX_PATH);
 
       // Get the full path to the module's file.
-      final hModule = hMods.elementAt(i).value;
+      final hModule = (hMods + i).value;
 
       if (GetModuleFileNameEx(hProcess, hModule, szModName, MAX_PATH) != 0) {
         final hexModuleValue = hModule

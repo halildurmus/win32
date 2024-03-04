@@ -41,8 +41,7 @@ class IUIAutomationElement4 extends IUIAutomationElement3 {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(94)
+      final hr = (ptr.ref.vtable + 94)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -64,8 +63,7 @@ class IUIAutomationElement4 extends IUIAutomationElement3 {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(95)
+      final hr = (ptr.ref.vtable + 95)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -87,8 +85,7 @@ class IUIAutomationElement4 extends IUIAutomationElement3 {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(96)
+      final hr = (ptr.ref.vtable + 96)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -110,8 +107,7 @@ class IUIAutomationElement4 extends IUIAutomationElement3 {
     final retValuePtr = calloc<Pointer<SAFEARRAY>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(97)
+      final hr = (ptr.ref.vtable + 97)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -134,8 +130,7 @@ class IUIAutomationElement4 extends IUIAutomationElement3 {
   Pointer<COMObject> get currentAnnotationObjects {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
-            .elementAt(98)
+    final hr = (ptr.ref.vtable + 98)
             .cast<
                 Pointer<
                     NativeFunction<
@@ -156,8 +151,7 @@ class IUIAutomationElement4 extends IUIAutomationElement3 {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(99)
+      final hr = (ptr.ref.vtable + 99)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -179,8 +173,7 @@ class IUIAutomationElement4 extends IUIAutomationElement3 {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(100)
+      final hr = (ptr.ref.vtable + 100)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -202,8 +195,7 @@ class IUIAutomationElement4 extends IUIAutomationElement3 {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(101)
+      final hr = (ptr.ref.vtable + 101)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -225,8 +217,7 @@ class IUIAutomationElement4 extends IUIAutomationElement3 {
     final retValuePtr = calloc<Pointer<SAFEARRAY>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(102)
+      final hr = (ptr.ref.vtable + 102)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -249,8 +240,7 @@ class IUIAutomationElement4 extends IUIAutomationElement3 {
   Pointer<COMObject> get cachedAnnotationObjects {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
-            .elementAt(103)
+    final hr = (ptr.ref.vtable + 103)
             .cast<
                 Pointer<
                     NativeFunction<

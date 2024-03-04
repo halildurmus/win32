@@ -42,8 +42,7 @@ class ISpeechVoiceStatus extends IDispatch {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-          .elementAt(7)
+      final hr = (ptr.ref.vtable + 7)
           .cast<
               Pointer<
                   NativeFunction<
@@ -66,8 +65,7 @@ class ISpeechVoiceStatus extends IDispatch {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-          .elementAt(8)
+      final hr = (ptr.ref.vtable + 8)
           .cast<
               Pointer<
                   NativeFunction<
@@ -90,8 +88,7 @@ class ISpeechVoiceStatus extends IDispatch {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(9)
+      final hr = (ptr.ref.vtable + 9)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -113,8 +110,7 @@ class ISpeechVoiceStatus extends IDispatch {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(10)
+      final hr = (ptr.ref.vtable + 10)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -136,8 +132,7 @@ class ISpeechVoiceStatus extends IDispatch {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(11)
+      final hr = (ptr.ref.vtable + 11)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -159,8 +154,7 @@ class ISpeechVoiceStatus extends IDispatch {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(12)
+      final hr = (ptr.ref.vtable + 12)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -182,8 +176,7 @@ class ISpeechVoiceStatus extends IDispatch {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(13)
+      final hr = (ptr.ref.vtable + 13)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -205,8 +198,7 @@ class ISpeechVoiceStatus extends IDispatch {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(14)
+      final hr = (ptr.ref.vtable + 14)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -228,8 +220,7 @@ class ISpeechVoiceStatus extends IDispatch {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(15)
+      final hr = (ptr.ref.vtable + 15)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -253,8 +244,7 @@ class ISpeechVoiceStatus extends IDispatch {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-          .elementAt(16)
+      final hr = (ptr.ref.vtable + 16)
           .cast<
               Pointer<
                   NativeFunction<
@@ -277,8 +267,7 @@ class ISpeechVoiceStatus extends IDispatch {
     final retValuePtr = calloc<Int16>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(17)
+      final hr = (ptr.ref.vtable + 17)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -300,8 +289,7 @@ class ISpeechVoiceStatus extends IDispatch {
     final retValuePtr = calloc<Int16>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(18)
+      final hr = (ptr.ref.vtable + 18)
               .cast<
                   Pointer<
                       NativeFunction<

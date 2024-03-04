@@ -38,8 +38,7 @@ class IUIAutomationTogglePattern extends IUnknown {
       IUIAutomationTogglePattern(
           interface.toInterface(IID_IUIAutomationTogglePattern));
 
-  int toggle() => ptr.ref.vtable
-      .elementAt(3)
+  int toggle() => (ptr.ref.vtable + 3)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
@@ -48,8 +47,7 @@ class IUIAutomationTogglePattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(4)
+      final hr = (ptr.ref.vtable + 4)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -71,8 +69,7 @@ class IUIAutomationTogglePattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(5)
+      final hr = (ptr.ref.vtable + 5)
               .cast<
                   Pointer<
                       NativeFunction<

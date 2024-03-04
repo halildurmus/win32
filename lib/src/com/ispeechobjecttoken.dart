@@ -39,8 +39,7 @@ class ISpeechObjectToken extends IDispatch {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.vtable
-              .elementAt(7)
+      final hr = (ptr.ref.vtable + 7)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -63,8 +62,7 @@ class ISpeechObjectToken extends IDispatch {
   Pointer<COMObject> get dataKey {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
-            .elementAt(8)
+    final hr = (ptr.ref.vtable + 8)
             .cast<
                 Pointer<
                     NativeFunction<
@@ -84,8 +82,7 @@ class ISpeechObjectToken extends IDispatch {
   Pointer<COMObject> get category {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
-        .elementAt(9)
+    final hr = (ptr.ref.vtable + 9)
         .cast<
             Pointer<
                 NativeFunction<
@@ -103,24 +100,22 @@ class ISpeechObjectToken extends IDispatch {
     return retValuePtr;
   }
 
-  int getDescription(int Locale, Pointer<Pointer<Utf16>> Description) => ptr
-          .ref.vtable
-          .elementAt(10)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Int32 Locale,
-                          Pointer<Pointer<Utf16>> Description)>>>()
-          .value
-          .asFunction<
-              int Function(
-                  Pointer, int Locale, Pointer<Pointer<Utf16>> Description)>()(
-      ptr.ref.lpVtbl, Locale, Description);
+  int getDescription(int Locale, Pointer<Pointer<Utf16>> Description) =>
+      (ptr.ref.vtable + 10)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Int32 Locale,
+                              Pointer<Pointer<Utf16>> Description)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, int Locale,
+                      Pointer<Pointer<Utf16>> Description)>()(
+          ptr.ref.lpVtbl, Locale, Description);
 
   int setId(
           Pointer<Utf16> Id, Pointer<Utf16> CategoryID, int CreateIfNotExist) =>
-      ptr.ref.vtable
-              .elementAt(11)
+      (ptr.ref.vtable + 11)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -137,8 +132,7 @@ class ISpeechObjectToken extends IDispatch {
 
   int getAttribute(Pointer<Utf16> AttributeName,
           Pointer<Pointer<Utf16>> AttributeValue) =>
-      ptr.ref.vtable
-              .elementAt(12)
+      (ptr.ref.vtable + 12)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -152,8 +146,7 @@ class ISpeechObjectToken extends IDispatch {
 
   int createInstance(Pointer<COMObject> pUnkOuter, int ClsContext,
           Pointer<Pointer<COMObject>> Object) =>
-      ptr.ref.vtable
-              .elementAt(13)
+      (ptr.ref.vtable + 13)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -168,8 +161,7 @@ class ISpeechObjectToken extends IDispatch {
                       int ClsContext, Pointer<Pointer<COMObject>> Object)>()(
           ptr.ref.lpVtbl, pUnkOuter, ClsContext, Object);
 
-  int remove(Pointer<Utf16> ObjectStorageCLSID) => ptr.ref.vtable
-          .elementAt(14)
+  int remove(Pointer<Utf16> ObjectStorageCLSID) => (ptr.ref.vtable + 14)
           .cast<
               Pointer<
                   NativeFunction<
@@ -186,8 +178,7 @@ class ISpeechObjectToken extends IDispatch {
           Pointer<Utf16> FileName,
           int Folder,
           Pointer<Pointer<Utf16>> FilePath) =>
-      ptr.ref.vtable
-              .elementAt(15)
+      (ptr.ref.vtable + 15)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -212,8 +203,7 @@ class ISpeechObjectToken extends IDispatch {
   int
       removeStorageFileName(Pointer<Utf16> ObjectStorageCLSID,
               Pointer<Utf16> KeyName, int DeleteFile) =>
-          ptr.ref.vtable
-                  .elementAt(16)
+          (ptr.ref.vtable + 16)
                   .cast<
                       Pointer<
                           NativeFunction<
@@ -230,8 +220,7 @@ class ISpeechObjectToken extends IDispatch {
 
   int isUISupported(Pointer<Utf16> TypeOfUI, Pointer<VARIANT> ExtraData,
           Pointer<COMObject> Object, Pointer<Int16> Supported) =>
-      ptr.ref.vtable
-              .elementAt(17)
+      (ptr.ref.vtable + 17)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -253,8 +242,7 @@ class ISpeechObjectToken extends IDispatch {
 
   int displayUI(int hWnd, Pointer<Utf16> Title, Pointer<Utf16> TypeOfUI,
           Pointer<VARIANT> ExtraData, Pointer<COMObject> Object) =>
-      ptr.ref.vtable
-              .elementAt(18)
+      (ptr.ref.vtable + 18)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -277,8 +265,7 @@ class ISpeechObjectToken extends IDispatch {
           ptr.ref.lpVtbl, hWnd, Title, TypeOfUI, ExtraData, Object);
 
   int matchesAttributes(Pointer<Utf16> Attributes, Pointer<Int16> Matches) =>
-      ptr.ref.vtable
-              .elementAt(19)
+      (ptr.ref.vtable + 19)
               .cast<
                   Pointer<
                       NativeFunction<

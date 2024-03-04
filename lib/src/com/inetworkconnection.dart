@@ -37,8 +37,7 @@ class INetworkConnection extends IDispatch {
   factory INetworkConnection.from(IUnknown interface) =>
       INetworkConnection(interface.toInterface(IID_INetworkConnection));
 
-  int getNetwork(Pointer<Pointer<COMObject>> ppNetwork) => ptr.ref.vtable
-          .elementAt(7)
+  int getNetwork(Pointer<Pointer<COMObject>> ppNetwork) => (ptr.ref.vtable + 7)
           .cast<
               Pointer<
                   NativeFunction<
@@ -53,8 +52,7 @@ class INetworkConnection extends IDispatch {
     final retValuePtr = calloc<Int16>();
 
     try {
-      final hr = ptr.ref.vtable
-          .elementAt(8)
+      final hr = (ptr.ref.vtable + 8)
           .cast<
               Pointer<
                   NativeFunction<
@@ -77,8 +75,7 @@ class INetworkConnection extends IDispatch {
     final retValuePtr = calloc<Int16>();
 
     try {
-      final hr = ptr.ref.vtable
-          .elementAt(9)
+      final hr = (ptr.ref.vtable + 9)
           .cast<
               Pointer<
                   NativeFunction<
@@ -97,8 +94,7 @@ class INetworkConnection extends IDispatch {
     }
   }
 
-  int getConnectivity(Pointer<Int32> pConnectivity) => ptr.ref.vtable
-          .elementAt(10)
+  int getConnectivity(Pointer<Int32> pConnectivity) => (ptr.ref.vtable + 10)
           .cast<
               Pointer<
                   NativeFunction<
@@ -108,8 +104,7 @@ class INetworkConnection extends IDispatch {
       ptr.ref.lpVtbl, pConnectivity);
 
   int getConnectionId(Pointer<GUID> pgdConnectionId) =>
-      ptr.ref.vtable
-              .elementAt(11)
+      (ptr.ref.vtable + 11)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -120,8 +115,7 @@ class INetworkConnection extends IDispatch {
                   int Function(Pointer, Pointer<GUID> pgdConnectionId)>()(
           ptr.ref.lpVtbl, pgdConnectionId);
 
-  int getAdapterId(Pointer<GUID> pgdAdapterId) => ptr.ref.vtable
-          .elementAt(12)
+  int getAdapterId(Pointer<GUID> pgdAdapterId) => (ptr.ref.vtable + 12)
           .cast<
               Pointer<
                   NativeFunction<
@@ -130,8 +124,7 @@ class INetworkConnection extends IDispatch {
           .asFunction<int Function(Pointer, Pointer<GUID> pgdAdapterId)>()(
       ptr.ref.lpVtbl, pgdAdapterId);
 
-  int getDomainType(Pointer<Int32> pDomainType) => ptr.ref.vtable
-          .elementAt(13)
+  int getDomainType(Pointer<Int32> pDomainType) => (ptr.ref.vtable + 13)
           .cast<
               Pointer<
                   NativeFunction<

@@ -36,8 +36,7 @@ class IModalWindow extends IUnknown {
   factory IModalWindow.from(IUnknown interface) =>
       IModalWindow(interface.toInterface(IID_IModalWindow));
 
-  int show(int hwndOwner) => ptr.ref.vtable
-      .elementAt(3)
+  int show(int hwndOwner) => (ptr.ref.vtable + 3)
       .cast<
           Pointer<NativeFunction<Int32 Function(Pointer, IntPtr hwndOwner)>>>()
       .value

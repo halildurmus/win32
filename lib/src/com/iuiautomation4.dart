@@ -45,8 +45,7 @@ class IUIAutomation4 extends IUIAutomation3 {
           int changesCount,
           Pointer<COMObject> pCacheRequest,
           Pointer<COMObject> handler) =>
-      ptr.ref.vtable
-              .elementAt(66)
+      (ptr.ref.vtable + 66)
               .cast<
                   Pointer<
                       NativeFunction<
@@ -72,8 +71,7 @@ class IUIAutomation4 extends IUIAutomation3 {
 
   int removeChangesEventHandler(
           Pointer<COMObject> element, Pointer<COMObject> handler) =>
-      ptr.ref.vtable
-              .elementAt(67)
+      (ptr.ref.vtable + 67)
               .cast<
                   Pointer<
                       NativeFunction<

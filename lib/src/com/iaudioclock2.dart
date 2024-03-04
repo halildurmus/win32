@@ -42,8 +42,7 @@ class IAudioClock2 extends IUnknown {
   int
       getDevicePosition(
               Pointer<Uint64> DevicePosition, Pointer<Uint64> QPCPosition) =>
-          ptr.ref.vtable
-                  .elementAt(3)
+          (ptr.ref.vtable + 3)
                   .cast<
                       Pointer<
                           NativeFunction<
