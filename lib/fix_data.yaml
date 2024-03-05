@@ -223,14 +223,14 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'PFN_AUTHENTICATION_CALLBACK_EX'
-  - title: "Migrate to 'PFN_BLUETOOTH_GATT_EVENT_CALLBACK'"
+  - title: "Migrate to 'PFNBLUETOOTH_GATT_EVENT_CALLBACK'"
     date: 2024-03-05
     element:
       uris: ['package:win32/win32.dart']
       typedef: 'PfnbluetoothGattEventCallback'
     changes:
       - kind: 'rename'
-        newName: 'PFN_BLUETOOTH_GATT_EVENT_CALLBACK'
+        newName: 'PFNBLUETOOTH_GATT_EVENT_CALLBACK'
   - title: "Migrate to 'PFN_BLUETOOTH_ENUM_ATTRIBUTES_CALLBACK'"
     date: 2024-03-05
     element:
