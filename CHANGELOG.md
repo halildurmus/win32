@@ -1,6 +1,6 @@
 ## 5.3.0-wip
 
-- Migrate away from `.elementAt` (#825)
+- Migrate away from `.elementAt` in favor of `operator +` (#825)
 - Bump minimum required Dart version to `3.3.0` (#825)
 - Deprecate `CallWndProc` typedef in favor of `HOOKPROC` (#826)
 - Deprecate `CCHookProc` typedef in favor of `LPCCHOOKPROC` (#826)
@@ -56,6 +56,12 @@
   `WLAN_NOTIFICATION_CALLBACK` (#826)
 - **Note**: You can automatically migrate your code to use the new typedefs by
   running `dart fix --apply` in your terminal.
+- Deprecate `convertFromHString` function (#829)
+- Deprecate `convertToHString` function (#829)
+- Deprecate `getClassName` function (#829)
+- Deprecate `getInterfaces` function (#829)
+- Deprecate `getTrustLevel` function (#829)
+- Deprecate `Pointer<HSTRING>.toDartString` extension method (#829)
 
 ## 5.2.0
 

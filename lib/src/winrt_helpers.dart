@@ -10,6 +10,7 @@ import 'package:ffi/ffi.dart';
 
 import 'com/iinspectable.dart';
 import 'combase.dart';
+import 'enums.dart';
 import 'exceptions.dart';
 import 'guid.dart';
 import 'macros.dart';
@@ -17,39 +18,18 @@ import 'types.dart';
 import 'utils.dart';
 import 'win32/api_ms_win_core_winrt_string_l1_1_0.g.dart';
 
+@Deprecated('No replacement')
 extension WinRTStringConversion on Pointer<HSTRING> {
   /// Gets the Dart string at the handle pointed to by this object.
+  @Deprecated('No replacement')
   String toDartString() => convertFromHString(value);
-}
-
-/// Represents the trust level of an activatable class.
-///
-/// {@category enum}
-enum TrustLevel {
-  /// The component has access to resources that are not protected.
-  baseTrust(0),
-
-  /// The component has access to resources requested in the app manifest and
-  /// approved by the user.
-  partialTrust(1),
-
-  /// The component requires the full privileges of the user.
-  fullTrust(2);
-
-  final int value;
-
-  const TrustLevel(this.value);
-
-  factory TrustLevel.from(int value) =>
-      TrustLevel.values.firstWhere((e) => e.value == value,
-          orElse: () => throw ArgumentError.value(
-              value, 'value', 'No enum value with that value'));
 }
 
 /// Returns the interface IDs that are implemented by the Windows Runtime
 /// [object].
 ///
 /// The `IUnknown` and `IInspectable` interfaces are excluded.
+@Deprecated('No replacement')
 List<String> getInterfaces(IInspectable object) {
   final pIIDCount = calloc<Uint32>();
   final pIIDs = calloc<Pointer<GUID>>();
@@ -81,6 +61,7 @@ List<String> getInterfaces(IInspectable object) {
 }
 
 /// Gets the fully qualified name of the Windows Runtime [object].
+@Deprecated('No replacement')
 String getClassName(IInspectable object) {
   final hClassName = calloc<HSTRING>();
 
@@ -107,6 +88,7 @@ String getClassName(IInspectable object) {
 }
 
 /// Gets the trust level of the Windows Runtime [object].
+@Deprecated('No replacement')
 TrustLevel getTrustLevel(IInspectable object) {
   final pTrustLevel = calloc<Int32>();
 
