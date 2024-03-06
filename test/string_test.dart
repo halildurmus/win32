@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use_from_same_package
+
 @TestOn('windows')
 
 import 'package:ffi/ffi.dart';

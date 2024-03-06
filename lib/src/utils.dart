@@ -128,6 +128,7 @@ LPWSTR TEXT(String string) => string.toNativeUtf16();
 /// `String`.
 ///
 /// {@category winrt}
+@Deprecated('No replacement')
 String convertFromHString(int hstring) =>
     WindowsGetStringRawBuffer(hstring, nullptr).toDartString();
 
@@ -140,6 +141,7 @@ String convertFromHString(int hstring) =>
 /// reaches 0, the Windows Runtime deallocates the buffer.
 ///
 /// {@category winrt}
+@Deprecated('No replacement')
 int convertToHString(String string) {
   final hString = calloc<HSTRING>();
   final stringPtr = string.toNativeUtf16();
