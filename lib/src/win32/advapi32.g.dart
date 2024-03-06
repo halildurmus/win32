@@ -1334,14 +1334,14 @@ final _RegGetValue = _advapi32.lookupFunction<
 /// ```
 /// {@category advapi32}
 int RegisterServiceCtrlHandler(Pointer<Utf16> lpServiceName,
-        Pointer<NativeFunction<LphandlerFunction>> lpHandlerProc) =>
+        Pointer<NativeFunction<LPHANDLER_FUNCTION>> lpHandlerProc) =>
     _RegisterServiceCtrlHandler(lpServiceName, lpHandlerProc);
 
 final _RegisterServiceCtrlHandler = _advapi32.lookupFunction<
         IntPtr Function(Pointer<Utf16> lpServiceName,
-            Pointer<NativeFunction<LphandlerFunction>> lpHandlerProc),
+            Pointer<NativeFunction<LPHANDLER_FUNCTION>> lpHandlerProc),
         int Function(Pointer<Utf16> lpServiceName,
-            Pointer<NativeFunction<LphandlerFunction>> lpHandlerProc)>(
+            Pointer<NativeFunction<LPHANDLER_FUNCTION>> lpHandlerProc)>(
     'RegisterServiceCtrlHandlerW');
 
 /// Registers a function to handle extended service control requests.
@@ -1356,18 +1356,18 @@ final _RegisterServiceCtrlHandler = _advapi32.lookupFunction<
 /// {@category advapi32}
 int RegisterServiceCtrlHandlerEx(
         Pointer<Utf16> lpServiceName,
-        Pointer<NativeFunction<LphandlerFunctionEx>> lpHandlerProc,
+        Pointer<NativeFunction<LPHANDLER_FUNCTION_EX>> lpHandlerProc,
         Pointer lpContext) =>
     _RegisterServiceCtrlHandlerEx(lpServiceName, lpHandlerProc, lpContext);
 
 final _RegisterServiceCtrlHandlerEx = _advapi32.lookupFunction<
     IntPtr Function(
         Pointer<Utf16> lpServiceName,
-        Pointer<NativeFunction<LphandlerFunctionEx>> lpHandlerProc,
+        Pointer<NativeFunction<LPHANDLER_FUNCTION_EX>> lpHandlerProc,
         Pointer lpContext),
     int Function(
         Pointer<Utf16> lpServiceName,
-        Pointer<NativeFunction<LphandlerFunctionEx>> lpHandlerProc,
+        Pointer<NativeFunction<LPHANDLER_FUNCTION_EX>> lpHandlerProc,
         Pointer lpContext)>('RegisterServiceCtrlHandlerExW');
 
 /// Loads the specified registry hive as an application hive.

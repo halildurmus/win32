@@ -74,7 +74,7 @@ int CreateWindow(
 /// ```
 /// {@category user32}
 void DialogBoxIndirect(int hInstance, Pointer<DLGTEMPLATE> lpTemplate,
-        int hWndParent, Pointer<NativeFunction<DlgProc>> lpDialogFunc) =>
+        int hWndParent, Pointer<NativeFunction<DLGPROC>> lpDialogFunc) =>
     DialogBoxIndirectParam(hInstance, lpTemplate, hWndParent, lpDialogFunc, 0);
 
 /// Retrieves a pseudo-handle that you can use as a shorthand way to refer to

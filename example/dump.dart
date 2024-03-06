@@ -48,7 +48,7 @@ Map<String, int> getExports(int hProcess, String module) {
 
   final mask = '*'.toNativeUtf16();
 
-  final callback = NativeCallable<SymEnumSymbolsProc>.isolateLocal(
+  final callback = NativeCallable<PSYM_ENUMERATESYMBOLS_CALLBACK>.isolateLocal(
     _enumSymbolProc,
     exceptionalReturn: 0,
   );

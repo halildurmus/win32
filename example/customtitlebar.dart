@@ -517,7 +517,7 @@ void main() {
   // Register the window class.
   final windowClassName = 'WIN32_CUSTOM_TITLEBAR_EXAMPLE'.toNativeUtf16();
 
-  final lpfnWndProc = NativeCallable<WindowProc>.isolateLocal(
+  final lpfnWndProc = NativeCallable<WNDPROC>.isolateLocal(
     mainWindowProc,
     exceptionalReturn: 0,
   );

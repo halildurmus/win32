@@ -93,7 +93,7 @@ void printMonitorCapabilities(int capabilitiesBitmask) {
 void main() {
   var result = FALSE;
 
-  final lpfnEnum = NativeCallable<MonitorEnumProc>.isolateLocal(
+  final lpfnEnum = NativeCallable<MONITORENUMPROC>.isolateLocal(
     enumMonitorCallback,
     exceptionalReturn: 0,
   );

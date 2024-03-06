@@ -30,7 +30,7 @@ int enumWindowsProc(int hWnd, int lParam) {
 /// List the window handle and text for all top-level desktop windows
 /// in the current session.
 void enumerateWindows() {
-  final lpEnumFunc = NativeCallable<EnumWindowsProc>.isolateLocal(
+  final lpEnumFunc = NativeCallable<WNDENUMPROC>.isolateLocal(
     enumWindowsProc,
     exceptionalReturn: 0,
   );

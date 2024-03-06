@@ -20,7 +20,7 @@ void main() {
   test('RegisterClass()', () {
     final hInstance = GetModuleHandle(nullptr);
     final pClassName = 'CLASS_NAME'.toNativeUtf16();
-    final lpfnWndProc = NativeCallable<WindowProc>.isolateLocal(
+    final lpfnWndProc = NativeCallable<WNDPROC>.isolateLocal(
       MainWindowProc,
       exceptionalReturn: 0,
     );

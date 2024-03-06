@@ -87,7 +87,7 @@ void main() {
       windowSystemClass: 0x0081, // edit
       text: 'Enter text');
 
-  final lpDialogFunc = NativeCallable<DlgProc>.isolateLocal(
+  final lpDialogFunc = NativeCallable<DLGPROC>.isolateLocal(
     dialogReturnProc,
     exceptionalReturn: 0,
   );

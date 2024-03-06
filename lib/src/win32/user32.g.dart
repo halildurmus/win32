@@ -450,14 +450,14 @@ final _CallNextHookEx = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int CallWindowProc(Pointer<NativeFunction<WindowProc>> lpPrevWndFunc, int hWnd,
+int CallWindowProc(Pointer<NativeFunction<WNDPROC>> lpPrevWndFunc, int hWnd,
         int Msg, int wParam, int lParam) =>
     _CallWindowProc(lpPrevWndFunc, hWnd, Msg, wParam, lParam);
 
 final _CallWindowProc = _user32.lookupFunction<
-    IntPtr Function(Pointer<NativeFunction<WindowProc>> lpPrevWndFunc,
-        IntPtr hWnd, Uint32 Msg, IntPtr wParam, IntPtr lParam),
-    int Function(Pointer<NativeFunction<WindowProc>> lpPrevWndFunc, int hWnd,
+    IntPtr Function(Pointer<NativeFunction<WNDPROC>> lpPrevWndFunc, IntPtr hWnd,
+        Uint32 Msg, IntPtr wParam, IntPtr lParam),
+    int Function(Pointer<NativeFunction<WNDPROC>> lpPrevWndFunc, int hWnd,
         int Msg, int wParam, int lParam)>('CallWindowProcW');
 
 /// Cascades the specified child windows of the specified parent window.
@@ -1008,7 +1008,7 @@ int CreateDialogIndirectParam(
         int hInstance,
         Pointer<DLGTEMPLATE> lpTemplate,
         int hWndParent,
-        Pointer<NativeFunction<DlgProc>> lpDialogFunc,
+        Pointer<NativeFunction<DLGPROC>> lpDialogFunc,
         int dwInitParam) =>
     _CreateDialogIndirectParam(
         hInstance, lpTemplate, hWndParent, lpDialogFunc, dwInitParam);
@@ -1018,13 +1018,13 @@ final _CreateDialogIndirectParam = _user32.lookupFunction<
         IntPtr hInstance,
         Pointer<DLGTEMPLATE> lpTemplate,
         IntPtr hWndParent,
-        Pointer<NativeFunction<DlgProc>> lpDialogFunc,
+        Pointer<NativeFunction<DLGPROC>> lpDialogFunc,
         IntPtr dwInitParam),
     int Function(
         int hInstance,
         Pointer<DLGTEMPLATE> lpTemplate,
         int hWndParent,
-        Pointer<NativeFunction<DlgProc>> lpDialogFunc,
+        Pointer<NativeFunction<DLGPROC>> lpDialogFunc,
         int dwInitParam)>('CreateDialogIndirectParamW');
 
 /// Creates an icon that has the specified size, colors, and bit patterns.
@@ -1514,7 +1514,7 @@ int DialogBoxIndirectParam(
         int hInstance,
         Pointer<DLGTEMPLATE> hDialogTemplate,
         int hWndParent,
-        Pointer<NativeFunction<DlgProc>> lpDialogFunc,
+        Pointer<NativeFunction<DLGPROC>> lpDialogFunc,
         int dwInitParam) =>
     _DialogBoxIndirectParam(
         hInstance, hDialogTemplate, hWndParent, lpDialogFunc, dwInitParam);
@@ -1524,13 +1524,13 @@ final _DialogBoxIndirectParam = _user32.lookupFunction<
         IntPtr hInstance,
         Pointer<DLGTEMPLATE> hDialogTemplate,
         IntPtr hWndParent,
-        Pointer<NativeFunction<DlgProc>> lpDialogFunc,
+        Pointer<NativeFunction<DLGPROC>> lpDialogFunc,
         IntPtr dwInitParam),
     int Function(
         int hInstance,
         Pointer<DLGTEMPLATE> hDialogTemplate,
         int hWndParent,
-        Pointer<NativeFunction<DlgProc>> lpDialogFunc,
+        Pointer<NativeFunction<DLGPROC>> lpDialogFunc,
         int dwInitParam)>('DialogBoxIndirectParamW');
 
 /// Disables the window ghosting feature for the calling GUI process. Window
@@ -1709,7 +1709,7 @@ final _DrawIcon = _user32.lookupFunction<
 int DrawState(
         int hdc,
         int hbrFore,
-        Pointer<NativeFunction<DrawStateProc>> qfnCallBack,
+        Pointer<NativeFunction<DRAWSTATEPROC>> qfnCallBack,
         int lData,
         int wData,
         int x,
@@ -1723,7 +1723,7 @@ final _DrawState = _user32.lookupFunction<
     Int32 Function(
         IntPtr hdc,
         IntPtr hbrFore,
-        Pointer<NativeFunction<DrawStateProc>> qfnCallBack,
+        Pointer<NativeFunction<DRAWSTATEPROC>> qfnCallBack,
         IntPtr lData,
         IntPtr wData,
         Int32 x,
@@ -1734,7 +1734,7 @@ final _DrawState = _user32.lookupFunction<
     int Function(
         int hdc,
         int hbrFore,
-        Pointer<NativeFunction<DrawStateProc>> qfnCallBack,
+        Pointer<NativeFunction<DRAWSTATEPROC>> qfnCallBack,
         int lData,
         int wData,
         int x,
@@ -1967,15 +1967,15 @@ final _EndPaint = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int EnumChildWindows(int hWndParent,
-        Pointer<NativeFunction<EnumWindowsProc>> lpEnumFunc, int lParam) =>
+        Pointer<NativeFunction<WNDENUMPROC>> lpEnumFunc, int lParam) =>
     _EnumChildWindows(hWndParent, lpEnumFunc, lParam);
 
 final _EnumChildWindows = _user32.lookupFunction<
     Int32 Function(IntPtr hWndParent,
-        Pointer<NativeFunction<EnumWindowsProc>> lpEnumFunc, IntPtr lParam),
+        Pointer<NativeFunction<WNDENUMPROC>> lpEnumFunc, IntPtr lParam),
     int Function(
         int hWndParent,
-        Pointer<NativeFunction<EnumWindowsProc>> lpEnumFunc,
+        Pointer<NativeFunction<WNDENUMPROC>> lpEnumFunc,
         int lParam)>('EnumChildWindows');
 
 /// Enumerates the data formats currently available on the clipboard.
@@ -2004,14 +2004,14 @@ final _EnumClipboardFormats = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int EnumDesktopWindows(int hDesktop,
-        Pointer<NativeFunction<EnumWindowsProc>> lpfn, int lParam) =>
+int EnumDesktopWindows(
+        int hDesktop, Pointer<NativeFunction<WNDENUMPROC>> lpfn, int lParam) =>
     _EnumDesktopWindows(hDesktop, lpfn, lParam);
 
 final _EnumDesktopWindows = _user32.lookupFunction<
-    Int32 Function(IntPtr hDesktop,
-        Pointer<NativeFunction<EnumWindowsProc>> lpfn, IntPtr lParam),
-    int Function(int hDesktop, Pointer<NativeFunction<EnumWindowsProc>> lpfn,
+    Int32 Function(IntPtr hDesktop, Pointer<NativeFunction<WNDENUMPROC>> lpfn,
+        IntPtr lParam),
+    int Function(int hDesktop, Pointer<NativeFunction<WNDENUMPROC>> lpfn,
         int lParam)>('EnumDesktopWindows');
 
 /// The EnumDisplayDevices function lets you obtain information about the
@@ -2057,16 +2057,16 @@ final _EnumDisplayDevices = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int EnumDisplayMonitors(int hdc, Pointer<RECT> lprcClip,
-        Pointer<NativeFunction<MonitorEnumProc>> lpfnEnum, int dwData) =>
+        Pointer<NativeFunction<MONITORENUMPROC>> lpfnEnum, int dwData) =>
     _EnumDisplayMonitors(hdc, lprcClip, lpfnEnum, dwData);
 
 final _EnumDisplayMonitors = _user32.lookupFunction<
     Int32 Function(IntPtr hdc, Pointer<RECT> lprcClip,
-        Pointer<NativeFunction<MonitorEnumProc>> lpfnEnum, IntPtr dwData),
+        Pointer<NativeFunction<MONITORENUMPROC>> lpfnEnum, IntPtr dwData),
     int Function(
         int hdc,
         Pointer<RECT> lprcClip,
-        Pointer<NativeFunction<MonitorEnumProc>> lpfnEnum,
+        Pointer<NativeFunction<MONITORENUMPROC>> lpfnEnum,
         int dwData)>('EnumDisplayMonitors');
 
 /// The EnumDisplaySettings function retrieves information about one of the
@@ -2129,14 +2129,14 @@ final _EnumDisplaySettingsEx = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int EnumThreadWindows(int dwThreadId,
-        Pointer<NativeFunction<EnumWindowsProc>> lpfn, int lParam) =>
+int EnumThreadWindows(int dwThreadId, Pointer<NativeFunction<WNDENUMPROC>> lpfn,
+        int lParam) =>
     _EnumThreadWindows(dwThreadId, lpfn, lParam);
 
 final _EnumThreadWindows = _user32.lookupFunction<
-    Int32 Function(Uint32 dwThreadId,
-        Pointer<NativeFunction<EnumWindowsProc>> lpfn, IntPtr lParam),
-    int Function(int dwThreadId, Pointer<NativeFunction<EnumWindowsProc>> lpfn,
+    Int32 Function(Uint32 dwThreadId, Pointer<NativeFunction<WNDENUMPROC>> lpfn,
+        IntPtr lParam),
+    int Function(int dwThreadId, Pointer<NativeFunction<WNDENUMPROC>> lpfn,
         int lParam)>('EnumThreadWindows');
 
 /// Enumerates all top-level windows on the screen by passing the handle to
@@ -2151,14 +2151,13 @@ final _EnumThreadWindows = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int EnumWindows(
-        Pointer<NativeFunction<EnumWindowsProc>> lpEnumFunc, int lParam) =>
+int EnumWindows(Pointer<NativeFunction<WNDENUMPROC>> lpEnumFunc, int lParam) =>
     _EnumWindows(lpEnumFunc, lParam);
 
 final _EnumWindows = _user32.lookupFunction<
     Int32 Function(
-        Pointer<NativeFunction<EnumWindowsProc>> lpEnumFunc, IntPtr lParam),
-    int Function(Pointer<NativeFunction<EnumWindowsProc>> lpEnumFunc,
+        Pointer<NativeFunction<WNDENUMPROC>> lpEnumFunc, IntPtr lParam),
+    int Function(Pointer<NativeFunction<WNDENUMPROC>> lpEnumFunc,
         int lParam)>('EnumWindows');
 
 /// The EqualRect function determines whether the two specified rectangles
@@ -4651,7 +4650,7 @@ final _GetWindowThreadProcessId = _user32.lookupFunction<
 int GrayString(
         int hDC,
         int hBrush,
-        Pointer<NativeFunction<OutputProc>> lpOutputFunc,
+        Pointer<NativeFunction<GRAYSTRINGPROC>> lpOutputFunc,
         int lpData,
         int nCount,
         int X,
@@ -4665,7 +4664,7 @@ final _GrayString = _user32.lookupFunction<
     Int32 Function(
         IntPtr hDC,
         IntPtr hBrush,
-        Pointer<NativeFunction<OutputProc>> lpOutputFunc,
+        Pointer<NativeFunction<GRAYSTRINGPROC>> lpOutputFunc,
         IntPtr lpData,
         Int32 nCount,
         Int32 X,
@@ -4675,7 +4674,7 @@ final _GrayString = _user32.lookupFunction<
     int Function(
         int hDC,
         int hBrush,
-        Pointer<NativeFunction<OutputProc>> lpOutputFunc,
+        Pointer<NativeFunction<GRAYSTRINGPROC>> lpOutputFunc,
         int lpData,
         int nCount,
         int X,
@@ -6610,18 +6609,18 @@ final _SendMessage = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int SendMessageCallback(int hWnd, int Msg, int wParam, int lParam,
-        Pointer<NativeFunction<SendAsyncProc>> lpResultCallBack, int dwData) =>
+        Pointer<NativeFunction<SENDASYNCPROC>> lpResultCallBack, int dwData) =>
     _SendMessageCallback(hWnd, Msg, wParam, lParam, lpResultCallBack, dwData);
 
 final _SendMessageCallback = _user32.lookupFunction<
     Int32 Function(IntPtr hWnd, Uint32 Msg, IntPtr wParam, IntPtr lParam,
-        Pointer<NativeFunction<SendAsyncProc>> lpResultCallBack, IntPtr dwData),
+        Pointer<NativeFunction<SENDASYNCPROC>> lpResultCallBack, IntPtr dwData),
     int Function(
         int hWnd,
         int Msg,
         int wParam,
         int lParam,
-        Pointer<NativeFunction<SendAsyncProc>> lpResultCallBack,
+        Pointer<NativeFunction<SENDASYNCPROC>> lpResultCallBack,
         int dwData)>('SendMessageCallbackW');
 
 /// Sends the specified message to one or more windows.
@@ -6783,17 +6782,17 @@ final _SetClipboardViewer = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int SetCoalescableTimer(int hWnd, int nIDEvent, int uElapse,
-        Pointer<NativeFunction<TimerProc>> lpTimerFunc, int uToleranceDelay) =>
+        Pointer<NativeFunction<TIMERPROC>> lpTimerFunc, int uToleranceDelay) =>
     _SetCoalescableTimer(hWnd, nIDEvent, uElapse, lpTimerFunc, uToleranceDelay);
 
 final _SetCoalescableTimer = _user32.lookupFunction<
     IntPtr Function(IntPtr hWnd, IntPtr nIDEvent, Uint32 uElapse,
-        Pointer<NativeFunction<TimerProc>> lpTimerFunc, Uint32 uToleranceDelay),
+        Pointer<NativeFunction<TIMERPROC>> lpTimerFunc, Uint32 uToleranceDelay),
     int Function(
         int hWnd,
         int nIDEvent,
         int uElapse,
-        Pointer<NativeFunction<TimerProc>> lpTimerFunc,
+        Pointer<NativeFunction<TIMERPROC>> lpTimerFunc,
         int uToleranceDelay)>('SetCoalescableTimer');
 
 /// Sets the cursor shape.
@@ -7406,14 +7405,14 @@ final _SetThreadDpiHostingBehavior = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int SetTimer(int hWnd, int nIDEvent, int uElapse,
-        Pointer<NativeFunction<TimerProc>> lpTimerFunc) =>
+        Pointer<NativeFunction<TIMERPROC>> lpTimerFunc) =>
     _SetTimer(hWnd, nIDEvent, uElapse, lpTimerFunc);
 
 final _SetTimer = _user32.lookupFunction<
     IntPtr Function(IntPtr hWnd, IntPtr nIDEvent, Uint32 uElapse,
-        Pointer<NativeFunction<TimerProc>> lpTimerFunc),
+        Pointer<NativeFunction<TIMERPROC>> lpTimerFunc),
     int Function(int hWnd, int nIDEvent, int uElapse,
-        Pointer<NativeFunction<TimerProc>> lpTimerFunc)>('SetTimer');
+        Pointer<NativeFunction<TIMERPROC>> lpTimerFunc)>('SetTimer');
 
 /// Sets information about the specified window station or desktop object.
 ///
@@ -7548,15 +7547,15 @@ final _SetWindowRgn = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int SetWindowsHookEx(int idHook, Pointer<NativeFunction<CallWndProc>> lpfn,
+int SetWindowsHookEx(int idHook, Pointer<NativeFunction<HOOKPROC>> lpfn,
         int hmod, int dwThreadId) =>
     _SetWindowsHookEx(idHook, lpfn, hmod, dwThreadId);
 
 final _SetWindowsHookEx = _user32.lookupFunction<
-    IntPtr Function(Int32 idHook, Pointer<NativeFunction<CallWndProc>> lpfn,
+    IntPtr Function(Int32 idHook, Pointer<NativeFunction<HOOKPROC>> lpfn,
         IntPtr hmod, Uint32 dwThreadId),
-    int Function(int idHook, Pointer<NativeFunction<CallWndProc>> lpfn,
-        int hmod, int dwThreadId)>('SetWindowsHookExW');
+    int Function(int idHook, Pointer<NativeFunction<HOOKPROC>> lpfn, int hmod,
+        int dwThreadId)>('SetWindowsHookExW');
 
 /// Changes the text of the specified window's title bar (if it has one). If
 /// the specified window is a control, the text of the control is changed.

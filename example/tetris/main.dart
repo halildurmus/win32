@@ -23,7 +23,7 @@ late Canvas canvas;
 void main() {
   final szAppName = 'Tetris'.toNativeUtf16();
 
-  final lpfnWndProc = NativeCallable<WindowProc>.isolateLocal(
+  final lpfnWndProc = NativeCallable<WNDPROC>.isolateLocal(
     mainWindowProc,
     exceptionalReturn: 0,
   );

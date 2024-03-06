@@ -23,7 +23,7 @@ int enumerateFonts(
 void main() {
   final hDC = GetDC(NULL);
   final searchFont = calloc<LOGFONT>()..ref.lfCharSet = ANSI_CHARSET;
-  final lpProc = NativeCallable<EnumFontFamExProc>.isolateLocal(
+  final lpProc = NativeCallable<FONTENUMPROC>.isolateLocal(
     enumerateFonts,
     exceptionalReturn: 0,
   );

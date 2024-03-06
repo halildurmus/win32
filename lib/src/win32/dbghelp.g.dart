@@ -49,7 +49,8 @@ int SymEnumSymbols(
         int hProcess,
         int BaseOfDll,
         Pointer<Utf16> Mask,
-        Pointer<NativeFunction<SymEnumSymbolsProc>> EnumSymbolsCallback,
+        Pointer<NativeFunction<PSYM_ENUMERATESYMBOLS_CALLBACK>>
+            EnumSymbolsCallback,
         Pointer UserContext) =>
     _SymEnumSymbols(
         hProcess, BaseOfDll, Mask, EnumSymbolsCallback, UserContext);
@@ -59,13 +60,15 @@ final _SymEnumSymbols = _dbghelp.lookupFunction<
         IntPtr hProcess,
         Uint64 BaseOfDll,
         Pointer<Utf16> Mask,
-        Pointer<NativeFunction<SymEnumSymbolsProc>> EnumSymbolsCallback,
+        Pointer<NativeFunction<PSYM_ENUMERATESYMBOLS_CALLBACK>>
+            EnumSymbolsCallback,
         Pointer UserContext),
     int Function(
         int hProcess,
         int BaseOfDll,
         Pointer<Utf16> Mask,
-        Pointer<NativeFunction<SymEnumSymbolsProc>> EnumSymbolsCallback,
+        Pointer<NativeFunction<PSYM_ENUMERATESYMBOLS_CALLBACK>>
+            EnumSymbolsCallback,
         Pointer UserContext)>('SymEnumSymbolsW');
 
 /// Retrieves symbol information for the specified address.
