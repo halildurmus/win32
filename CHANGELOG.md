@@ -1,4 +1,4 @@
-## 5.3.0-wip
+## 5.3.0
 
 - Migrate away from `.elementAt` in favor of `operator +` (#825)
 - Bump minimum required Dart version to `3.3.0` (#825)

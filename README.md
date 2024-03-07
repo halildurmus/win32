@@ -73,7 +73,7 @@ suite in the `test\` subdirectory that shows other API calls.
 
 A good starting point is `hello.dart`. This example demonstrates creating a
 Win32 window and responding to common messages such as `WM_PAINT` through a
-`WindowProc` callback function.
+`WNDPROC` callback function.
 
 To run it, type:
 
