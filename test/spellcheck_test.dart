@@ -84,7 +84,8 @@ void main() {
         while (errors.next(errorPtr.cast()) == S_OK) {
           expect(errorPtr.ref.isNull, isFalse);
           final error = ISpellingError(errorPtr);
-          expect(error.correctiveAction, equals(CORRECTIVE_ACTION.REPLACE));
+          expect(error.correctiveAction,
+              equals(CORRECTIVE_ACTION.CORRECTIVE_ACTION_REPLACE));
           final replacement = error.replacement;
           expect(replacement.toDartString(), equals('have'));
           WindowsDeleteString(replacement.address);

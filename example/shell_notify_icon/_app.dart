@@ -30,8 +30,15 @@ void exec() {
 
 int loadDartIcon() {
   final dartIconPath = _thisPath('dart.ico');
-  return LoadImage(0, TEXT(dartIconPath), IMAGE_ICON, 0, 0,
-      LR_LOADFROMFILE | LR_DEFAULTSIZE | LR_SHARED);
+  return LoadImage(
+      0,
+      TEXT(dartIconPath),
+      GDI_IMAGE_TYPE.IMAGE_ICON,
+      0,
+      0,
+      IMAGE_FLAGS.LR_LOADFROMFILE |
+          IMAGE_FLAGS.LR_DEFAULTSIZE |
+          IMAGE_FLAGS.LR_SHARED);
 }
 
 final _localWndProcs = <LocalWndProc>[];
@@ -50,7 +57,7 @@ int _appWndProc(int hWnd, int uMsg, int wParam, int lParam) {
 
   switch (uMsg) {
     case WM_CLOSE:
-      ShowWindow(hWnd, SW_HIDE);
+      ShowWindow(hWnd, SHOW_WINDOW_CMD.SW_HIDE);
       return TRUE;
   }
   return DefWindowProc(hWnd, uMsg, wParam, lParam);

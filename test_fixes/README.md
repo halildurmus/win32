@@ -6,7 +6,7 @@ https://github.com/flutter/flutter/wiki/Data-driven-Fixes#testing.
 ## Organization
 
 The contents of this directory are used to test the `dart fix` refactorings
-offered by this package. See `lib/fix_data.yaml` for the fix definitions.
+offered by this package. See `lib/fix_data` directory for the fix definitions.
 
 Note that files in this directory are excluded from analysis.
 

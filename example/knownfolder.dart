@@ -57,8 +57,8 @@ String getDesktopPath2() {
   final ppszPath = calloc<PWSTR>();
 
   try {
-    final hr =
-        SHGetKnownFolderPath(appsFolder, KF_FLAG_DEFAULT, NULL, ppszPath);
+    final hr = SHGetKnownFolderPath(
+        appsFolder, KNOWN_FOLDER_FLAG.KF_FLAG_DEFAULT, NULL, ppszPath);
 
     if (FAILED(hr)) {
       throw WindowsException(hr);
@@ -78,7 +78,7 @@ String getDesktopPath3() {
   final ppkf = calloc<COMObject>();
   final ppszPath = calloc<LPWSTR>();
 
-  CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
+  CoInitializeEx(nullptr, COINIT.COINIT_APARTMENTTHREADED);
   try {
     final knownFolderManager = KnownFolderManager.createInstance();
     var hr = knownFolderManager.getFolder(appsFolder, ppkf.cast());

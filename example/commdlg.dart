@@ -37,7 +37,7 @@ void main() {
     // Set dialog flags:
     //   CC_RGBINIT: use rgbResult for the dialog default value
     //   CC_FULLOPEN: automatically open custom colors section of dialog
-    ..ref.Flags = CC_RGBINIT | CC_FULLOPEN;
+    ..ref.Flags = CHOOSECOLOR_FLAGS.CC_RGBINIT | CHOOSECOLOR_FLAGS.CC_FULLOPEN;
 
   // Call the Win32 API to show dialog, passing pointer to the config struct
   ChooseColor(cc);

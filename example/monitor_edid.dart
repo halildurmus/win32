@@ -19,7 +19,8 @@ class Size {
 Size getMonitorSizeInMM() {
   final guidptr = GUIDFromString(GUID_CLASS_MONITOR);
   // Get the handle for the first monitor.
-  final ptr = SetupDiGetClassDevs(guidptr, nullptr, 0, DIGCF_PRESENT);
+  final ptr = SetupDiGetClassDevs(
+      guidptr, nullptr, 0, SETUP_DI_GET_CLASS_DEVS_FLAGS.DIGCF_PRESENT);
   var width = 0;
   var height = 0;
 
@@ -30,7 +31,12 @@ Size getMonitorSizeInMM() {
   if (ret == TRUE) {
     // Get the registry key for the first member of the first monitor
     final hDevRegKey = SetupDiOpenDevRegKey(
-        ptr, data, DICS_FLAG_GLOBAL, 0, DIREG_DEV, KEY_READ);
+        ptr,
+        data,
+        SETUP_DI_PROPERTY_CHANGE_SCOPE.DICS_FLAG_GLOBAL,
+        0,
+        DIREG_DEV,
+        REG_SAM_FLAGS.KEY_READ);
 
     const nameSize = 128;
     final lpValueName = wsalloc(nameSize);
@@ -56,7 +62,8 @@ Size getMonitorSizeInMM() {
     const bound = 68;
     // lpData contains the width and height of the monitor in millimeters which are
     // extracted by accessing the correct bytes.
-    if (retValue == ERROR_SUCCESS && lpValueName.toDartString() == 'EDID') {
+    if (retValue == WIN32_ERROR.ERROR_SUCCESS &&
+        lpValueName.toDartString() == 'EDID') {
       width = ((lpData[bound] & 0xF0) << 4) + lpData[hSize];
       height = ((lpData[bound] & 0x0F) << 8) + lpData[vSize];
     }

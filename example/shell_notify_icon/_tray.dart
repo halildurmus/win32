@@ -16,7 +16,11 @@ bool _trayWndProc(int hWnd, int msg, int wParam, int lParam) {
     case app.EVENT_TRAY_NOTIFY:
       switch (LOWORD(lParam)) {
         case NIN_SELECT:
-          ShowWindow(hWnd, IsWindowVisible(hWnd) == 1 ? SW_HIDE : SW_SHOW);
+          ShowWindow(
+              hWnd,
+              IsWindowVisible(hWnd) == 1
+                  ? SHOW_WINDOW_CMD.SW_HIDE
+                  : SHOW_WINDOW_CMD.SW_SHOW);
           SetForegroundWindow(hWnd);
           return true;
 
@@ -31,22 +35,26 @@ bool _trayWndProc(int hWnd, int msg, int wParam, int lParam) {
 void addIcon({required int hWndParent}) {
   final nid = _nid.ref
     ..hWnd = hWndParent
-    ..uFlags = NIF_ICON | NIF_TIP | NIF_MESSAGE | NIF_SHOWTIP | NIF_GUID
+    ..uFlags = NOTIFY_ICON_DATA_FLAGS.NIF_ICON |
+        NOTIFY_ICON_DATA_FLAGS.NIF_TIP |
+        NOTIFY_ICON_DATA_FLAGS.NIF_MESSAGE |
+        NOTIFY_ICON_DATA_FLAGS.NIF_SHOWTIP |
+        NOTIFY_ICON_DATA_FLAGS.NIF_GUID
     ..szTip = 'Dart tray'
     ..uCallbackMessage = app.EVENT_TRAY_NOTIFY
     ..guidItem = _guid.ref
     ..hIcon = app.loadDartIcon();
 
-  Shell_NotifyIcon(NIM_ADD, _nid);
+  Shell_NotifyIcon(NOTIFY_ICON_MESSAGE.NIM_ADD, _nid);
 
   nid.uVersion = 4;
-  Shell_NotifyIcon(NIM_SETVERSION, _nid);
+  Shell_NotifyIcon(NOTIFY_ICON_MESSAGE.NIM_SETVERSION, _nid);
 
   app.registerWndProc(_trayWndProc);
 }
 
 void removeIcon() {
-  Shell_NotifyIcon(NIM_DELETE, _nid);
+  Shell_NotifyIcon(NOTIFY_ICON_MESSAGE.NIM_DELETE, _nid);
   free(_guid);
   free(_nid);
   app.deregisterWndProc(_trayWndProc);

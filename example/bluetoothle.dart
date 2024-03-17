@@ -15,7 +15,11 @@ void main() {
       ..ref.setGUID(GUID_BLUETOOTHLE_DEVICE_INTERFACE);
 
     final hDevInfo = SetupDiGetClassDevs(
-        interfaceGuid, nullptr, NULL, DIGCF_PRESENT | DIGCF_DEVICEINTERFACE);
+        interfaceGuid,
+        nullptr,
+        NULL,
+        SETUP_DI_GET_CLASS_DEVS_FLAGS.DIGCF_PRESENT |
+            SETUP_DI_GET_CLASS_DEVS_FLAGS.DIGCF_DEVICEINTERFACE);
     try {
       return devicesByInterface(hDevInfo, interfaceGuid).toList();
     } finally {
@@ -25,8 +29,14 @@ void main() {
 
   for (final path in devicePaths) {
     final pathPtr = path.toNativeUtf16();
-    final hDevice = CreateFile(pathPtr, 0, FILE_SHARE_READ | FILE_SHARE_WRITE,
-        nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+    final hDevice = CreateFile(
+        pathPtr,
+        0,
+        FILE_SHARE_MODE.FILE_SHARE_READ | FILE_SHARE_MODE.FILE_SHARE_WRITE,
+        nullptr,
+        FILE_CREATION_DISPOSITION.OPEN_EXISTING,
+        FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_NORMAL,
+        NULL);
     if (hDevice == INVALID_HANDLE_VALUE) {
       final error = GetLastError();
       print('CreateFile - Get Device Handle error: $error');
@@ -103,7 +113,7 @@ Iterable<String> devicesByInterface(
     }
 
     final error = GetLastError();
-    if (error != S_OK && error != ERROR_NO_MORE_ITEMS) {
+    if (error != S_OK && error != WIN32_ERROR.ERROR_NO_MORE_ITEMS) {
       throw WindowsException(error);
     }
   } finally {
@@ -129,7 +139,7 @@ void printServicesByDevice(int hDevice) {
     final bufferCountPtr = arena<USHORT>();
     hr = BluetoothGATTGetServices(
         hDevice, 0, nullptr, bufferCountPtr, BLUETOOTH_GATT_FLAG_NONE);
-    if (hr != HRESULT_FROM_WIN32(ERROR_MORE_DATA)) {
+    if (hr != HRESULT_FROM_WIN32(WIN32_ERROR.ERROR_MORE_DATA)) {
       print('BluetoothGATTGetServices - Get Buffer Count error: $hr');
       throw WindowsException(hr);
     }
@@ -161,8 +171,8 @@ void printCharacteristicsByService(
     final bufferCountPtr = arena<USHORT>();
     hr = BluetoothGATTGetCharacteristics(hDevice, servicePtr, 0, nullptr,
         bufferCountPtr, BLUETOOTH_GATT_FLAG_NONE);
-    if (hr != HRESULT_FROM_WIN32(ERROR_MORE_DATA)) {
-      if (hr == HRESULT_FROM_WIN32(ERROR_NOT_FOUND)) {
+    if (hr != HRESULT_FROM_WIN32(WIN32_ERROR.ERROR_MORE_DATA)) {
+      if (hr == HRESULT_FROM_WIN32(WIN32_ERROR.ERROR_NOT_FOUND)) {
         return;
       }
       print('BluetoothGATTGetCharacteristics - Get Buffer Count error: $hr');
@@ -196,8 +206,8 @@ void printDescriptorsByCharacteristic(
     final bufferCountPtr = arena<USHORT>();
     hr = BluetoothGATTGetDescriptors(hDevice, characteristicPtr, 0, nullptr,
         bufferCountPtr, BLUETOOTH_GATT_FLAG_NONE);
-    if (hr != HRESULT_FROM_WIN32(ERROR_MORE_DATA)) {
-      if (hr == HRESULT_FROM_WIN32(ERROR_NOT_FOUND)) {
+    if (hr != HRESULT_FROM_WIN32(WIN32_ERROR.ERROR_MORE_DATA)) {
+      if (hr == HRESULT_FROM_WIN32(WIN32_ERROR.ERROR_NOT_FOUND)) {
         return;
       }
       print('BluetoothGATTGetDescriptors - Get Buffer Count error: $hr');

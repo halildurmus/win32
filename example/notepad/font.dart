@@ -13,7 +13,7 @@ class NotepadFont {
   int hFont = NULL;
 
   NotepadFont(this.hwndEdit) {
-    GetThemeSysFont(NULL, TMT_MENUFONT, logfont);
+    GetThemeSysFont(NULL, THEME_PROPERTY_SYMBOL_ID.TMT_MENUFONT, logfont);
 
     hFont = CreateFontIndirect(logfont);
     SendMessage(hwndEdit, WM_SETFONT, hFont, 0);
@@ -24,7 +24,9 @@ class NotepadFont {
       ..ref.lStructSize = sizeOf<CHOOSEFONT>()
       ..ref.hwndOwner = hwnd
       ..ref.lpLogFont = logfont
-      ..ref.Flags = CF_INITTOLOGFONTSTRUCT | CF_SCREENFONTS | CF_EFFECTS;
+      ..ref.Flags = CHOOSEFONT_FLAGS.CF_INITTOLOGFONTSTRUCT |
+          CHOOSEFONT_FLAGS.CF_SCREENFONTS |
+          CHOOSEFONT_FLAGS.CF_EFFECTS;
 
     final result = ChooseFont(cf);
     free(cf);

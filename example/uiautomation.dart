@@ -34,7 +34,9 @@ IUIAutomationElement getTopLevelWindowByProcessId(int processId) {
   try {
     final pCondition = calloc<COMObject>();
     var hr = uiAutomation.createPropertyCondition(
-        UIA_ProcessIdPropertyId, valueParam.ref, pCondition.cast());
+        UIA_PROPERTY_ID.UIA_ProcessIdPropertyId,
+        valueParam.ref,
+        pCondition.cast());
     if (FAILED(hr)) {
       free(pCondition);
       throw WindowsException(hr);
@@ -85,12 +87,13 @@ bool isControlPatternAvailable(int propertyId, IUIAutomationElement element) {
 IUIAutomationWindowPattern getWindowPattern(IUIAutomationElement element) {
   // Check if the window pattern is available for the element
   if (!isControlPatternAvailable(
-      UIA_IsWindowPatternAvailablePropertyId, element)) {
+      UIA_PROPERTY_ID.UIA_IsWindowPatternAvailablePropertyId, element)) {
     throw Exception('Window pattern is not available for this element');
   }
 
   final pPattern = calloc<COMObject>();
-  final hr = element.getCurrentPattern(UIA_WindowPatternId, pPattern.cast());
+  final hr = element.getCurrentPattern(
+      UIA_PATTERN_ID.UIA_WindowPatternId, pPattern.cast());
   if (FAILED(hr)) {
     free(pPattern);
     throw WindowsException(hr);
@@ -125,7 +128,7 @@ void main() async {
   final process = await Process.start('notepad.exe', []); // Start notepad.exe
   Sleep(500); // Wait for the Notepad to start
 
-  CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED); // Initialize COM
+  CoInitializeEx(nullptr, COINIT.COINIT_APARTMENTTHREADED); // Initialize COM
 
   final notepad = getTopLevelWindowByProcessId(process.pid);
   final window = getWindowPattern(notepad);

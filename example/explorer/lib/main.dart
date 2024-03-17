@@ -46,7 +46,7 @@ class MainPageState extends State<MainPage> {
     final pMessage = 'Path: ${appDocDir.path}'.toNativeUtf16();
     final pTitle = 'Application Documents'.toNativeUtf16();
 
-    MessageBox(hwnd, pMessage, pTitle, MB_OK);
+    MessageBox(hwnd, pMessage, pTitle, MESSAGEBOX_STYLE.MB_OK);
 
     free(pMessage);
     free(pTitle);

@@ -46,7 +46,7 @@ Map<String, int> getExports(String module) {
     exit(1);
   }
 
-  final callback = NativeCallable<SymEnumSymbolsProc>.isolateLocal(
+  final callback = NativeCallable<PSYM_ENUMERATESYMBOLS_CALLBACK>.isolateLocal(
     _enumSymbolProc,
     exceptionalReturn: 0,
   );

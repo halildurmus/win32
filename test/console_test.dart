@@ -10,7 +10,7 @@ import '../example/knownfolder.dart';
 
 void main() {
   test('GetStdHandle()', () {
-    final outputHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+    final outputHandle = GetStdHandle(STD_HANDLE.STD_OUTPUT_HANDLE);
     expect(outputHandle, isNot(INVALID_HANDLE_VALUE));
   });
 
@@ -20,7 +20,7 @@ void main() {
   });
 
   test('GetConsoleScreenBufferInfo', () {
-    final outputHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+    final outputHandle = GetStdHandle(STD_HANDLE.STD_OUTPUT_HANDLE);
 
     final bufferInfo = calloc<CONSOLE_SCREEN_BUFFER_INFO>();
     final result = GetConsoleScreenBufferInfo(outputHandle, bufferInfo);

@@ -17,114 +17,305 @@
 // https://github.com/MicrosoftDocs/win32. Please move documented constants to
 // `constants.dart` as appropriate to ensure they are picked up by `dartdoc`.
 
-// ignore_for_file: camel_case_types
-// ignore_for_file: constant_identifier_names, non_constant_identifier_names
+// ignore_for_file: camel_case_types, constant_identifier_names
+// ignore_for_file: non_constant_identifier_names
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
 import 'constants.dart';
+import 'enums.g.dart';
 import 'macros.dart';
 
 // -----------------------------------------------------------------------------
 // Error constants
 // -----------------------------------------------------------------------------
+
+@Deprecated('Use WIN32_ERROR.ERROR_SEM_OWNER_DIED instead')
 const ERROR_SEM_OWNER_DIED = 105;
+
+@Deprecated('Use WIN32_ERROR.ERROR_SEM_USER_LIMIT instead')
 const ERROR_SEM_USER_LIMIT = 106;
+
+@Deprecated('Use WIN32_ERROR.ERROR_DISK_CHANGE instead')
 const ERROR_DISK_CHANGE = 107;
+
+@Deprecated('Use WIN32_ERROR.ERROR_DRIVE_LOCKED instead')
 const ERROR_DRIVE_LOCKED = 108;
+
+@Deprecated('Use WIN32_ERROR.ERROR_BROKEN_PIPE instead')
 const ERROR_BROKEN_PIPE = 109;
+
+@Deprecated('Use WIN32_ERROR.ERROR_OPEN_FAILED instead')
 const ERROR_OPEN_FAILED = 110;
+
+@Deprecated('Use WIN32_ERROR.ERROR_BUFFER_OVERFLOW instead')
 const ERROR_BUFFER_OVERFLOW = 111;
+
+@Deprecated('Use WIN32_ERROR.ERROR_DISK_FULL instead')
 const ERROR_DISK_FULL = 112;
+
+@Deprecated('Use WIN32_ERROR.ERROR_NO_MORE_SEARCH_HANDLES instead')
 const ERROR_NO_MORE_SEARCH_HANDLES = 113;
+
+@Deprecated('Use WIN32_ERROR.ERROR_INVALID_TARGET_HANDLE instead')
 const ERROR_INVALID_TARGET_HANDLE = 114;
+
+@Deprecated('Use WIN32_ERROR.ERROR_INVALID_CATEGORY instead')
 const ERROR_INVALID_CATEGORY = 117;
+
+@Deprecated('Use WIN32_ERROR.ERROR_INVALID_VERIFY_SWITCH instead')
 const ERROR_INVALID_VERIFY_SWITCH = 118;
+
+@Deprecated('Use WIN32_ERROR.ERROR_BAD_DRIVER_LEVEL instead')
 const ERROR_BAD_DRIVER_LEVEL = 119;
+
+@Deprecated('Use WIN32_ERROR.ERROR_CALL_NOT_IMPLEMENTED instead')
 const ERROR_CALL_NOT_IMPLEMENTED = 120;
+
+@Deprecated('Use WIN32_ERROR.ERROR_SEM_TIMEOUT instead')
 const ERROR_SEM_TIMEOUT = 121;
+
+@Deprecated('Use WIN32_ERROR.ERROR_INSUFFICIENT_BUFFER instead')
 const ERROR_INSUFFICIENT_BUFFER = 122;
+
+@Deprecated('Use WIN32_ERROR.ERROR_INVALID_NAME instead')
 const ERROR_INVALID_NAME = 123;
+
+@Deprecated('Use WIN32_ERROR.ERROR_INVALID_LEVEL instead')
 const ERROR_INVALID_LEVEL = 124;
+
+@Deprecated('Use WIN32_ERROR.ERROR_NO_VOLUME_LABEL instead')
 const ERROR_NO_VOLUME_LABEL = 125;
+
+@Deprecated('Use WIN32_ERROR.ERROR_MOD_NOT_FOUND instead')
 const ERROR_MOD_NOT_FOUND = 126;
+
+@Deprecated('Use WIN32_ERROR.ERROR_PROC_NOT_FOUND instead')
 const ERROR_PROC_NOT_FOUND = 127;
+
+@Deprecated('Use WIN32_ERROR.ERROR_WAIT_NO_CHILDREN instead')
 const ERROR_WAIT_NO_CHILDREN = 128;
+
+@Deprecated('Use WIN32_ERROR.ERROR_CHILD_NOT_COMPLETE instead')
 const ERROR_CHILD_NOT_COMPLETE = 129;
+
+@Deprecated('Use WIN32_ERROR.ERROR_DIRECT_ACCESS_HANDLE instead')
 const ERROR_DIRECT_ACCESS_HANDLE = 130;
+
+@Deprecated('Use WIN32_ERROR.ERROR_NEGATIVE_SEEK instead')
 const ERROR_NEGATIVE_SEEK = 131;
+
+@Deprecated('Use WIN32_ERROR.ERROR_SEEK_ON_DEVICE instead')
 const ERROR_SEEK_ON_DEVICE = 132;
+
+@Deprecated('Use WIN32_ERROR.ERROR_IS_JOIN_TARGET instead')
 const ERROR_IS_JOIN_TARGET = 133;
+
+@Deprecated('Use WIN32_ERROR.ERROR_IS_JOINED instead')
 const ERROR_IS_JOINED = 134;
+
+@Deprecated('Use WIN32_ERROR.ERROR_IS_SUBSTED instead')
 const ERROR_IS_SUBSTED = 135;
+
+@Deprecated('Use WIN32_ERROR.ERROR_NOT_JOINED instead')
 const ERROR_NOT_JOINED = 136;
+
+@Deprecated('Use WIN32_ERROR.ERROR_NOT_SUBSTED instead')
 const ERROR_NOT_SUBSTED = 137;
+
+@Deprecated('Use WIN32_ERROR.ERROR_JOIN_TO_JOIN instead')
 const ERROR_JOIN_TO_JOIN = 138;
+
+@Deprecated('Use WIN32_ERROR.ERROR_SUBST_TO_SUBST instead')
 const ERROR_SUBST_TO_SUBST = 139;
+
+@Deprecated('Use WIN32_ERROR.ERROR_JOIN_TO_SUBST instead')
 const ERROR_JOIN_TO_SUBST = 140;
+
+@Deprecated('Use WIN32_ERROR.ERROR_SUBST_TO_JOIN instead')
 const ERROR_SUBST_TO_JOIN = 141;
+
+@Deprecated('Use WIN32_ERROR.ERROR_BUSY_DRIVE instead')
 const ERROR_BUSY_DRIVE = 142;
+
+@Deprecated('Use WIN32_ERROR.ERROR_SAME_DRIVE instead')
 const ERROR_SAME_DRIVE = 143;
+
+@Deprecated('Use WIN32_ERROR.ERROR_DIR_NOT_ROOT instead')
 const ERROR_DIR_NOT_ROOT = 144;
+
+@Deprecated('Use WIN32_ERROR.ERROR_DIR_NOT_EMPTY instead')
 const ERROR_DIR_NOT_EMPTY = 145;
+
+@Deprecated('Use WIN32_ERROR.ERROR_IS_SUBST_PATH instead')
 const ERROR_IS_SUBST_PATH = 146;
+
+@Deprecated('Use WIN32_ERROR.ERROR_IS_JOIN_PATH instead')
 const ERROR_IS_JOIN_PATH = 147;
+
+@Deprecated('Use WIN32_ERROR.ERROR_PATH_BUSY instead')
 const ERROR_PATH_BUSY = 148;
+
+@Deprecated('Use WIN32_ERROR.ERROR_IS_SUBST_TARGET instead')
 const ERROR_IS_SUBST_TARGET = 149;
+
+@Deprecated('Use WIN32_ERROR.ERROR_SYSTEM_TRACE instead')
 const ERROR_SYSTEM_TRACE = 150;
+
+@Deprecated('Use WIN32_ERROR.ERROR_INVALID_EVENT_COUNT instead')
 const ERROR_INVALID_EVENT_COUNT = 151;
+
+@Deprecated('Use WIN32_ERROR.ERROR_TOO_MANY_MUXWAITERS instead')
 const ERROR_TOO_MANY_MUXWAITERS = 152;
+
+@Deprecated('Use WIN32_ERROR.ERROR_INVALID_LIST_FORMAT instead')
 const ERROR_INVALID_LIST_FORMAT = 153;
+
+@Deprecated('Use WIN32_ERROR.ERROR_LABEL_TOO_LONG instead')
 const ERROR_LABEL_TOO_LONG = 154;
+
+@Deprecated('Use WIN32_ERROR.ERROR_TOO_MANY_TCBS instead')
 const ERROR_TOO_MANY_TCBS = 155;
+
+@Deprecated('Use WIN32_ERROR.ERROR_SIGNAL_REFUSED instead')
 const ERROR_SIGNAL_REFUSED = 156;
+
+@Deprecated('Use WIN32_ERROR.ERROR_DISCARDED instead')
 const ERROR_DISCARDED = 157;
+
+@Deprecated('Use WIN32_ERROR.ERROR_NOT_LOCKED instead')
 const ERROR_NOT_LOCKED = 158;
+
+@Deprecated('Use WIN32_ERROR.ERROR_BAD_THREADID_ADDR instead')
 const ERROR_BAD_THREADID_ADDR = 159;
+
+@Deprecated('Use WIN32_ERROR.ERROR_BAD_ARGUMENTS instead')
 const ERROR_BAD_ARGUMENTS = 160;
+
+@Deprecated('Use WIN32_ERROR.ERROR_BAD_PATHNAME instead')
 const ERROR_BAD_PATHNAME = 161;
+
+@Deprecated('Use WIN32_ERROR.ERROR_SIGNAL_PENDING instead')
 const ERROR_SIGNAL_PENDING = 162;
+
+@Deprecated('Use WIN32_ERROR.ERROR_MAX_THRDS_REACHED instead')
 const ERROR_MAX_THRDS_REACHED = 164;
+
+@Deprecated('Use WIN32_ERROR.ERROR_LOCK_FAILED instead')
 const ERROR_LOCK_FAILED = 167;
+
+@Deprecated('Use WIN32_ERROR.ERROR_BUSY instead')
 const ERROR_BUSY = 170;
+
+@Deprecated('Use WIN32_ERROR.ERROR_DEVICE_SUPPORT_IN_PROGRESS instead')
 const ERROR_DEVICE_SUPPORT_IN_PROGRESS = 171;
+
+@Deprecated('Use WIN32_ERROR.ERROR_CANCEL_VIOLATION instead')
 const ERROR_CANCEL_VIOLATION = 173;
+
+@Deprecated('Use WIN32_ERROR.ERROR_ATOMIC_LOCKS_NOT_SUPPORTED instead')
 const ERROR_ATOMIC_LOCKS_NOT_SUPPORTED = 174;
+
+@Deprecated('Use WIN32_ERROR.ERROR_INVALID_SEGMENT_NUMBER instead')
 const ERROR_INVALID_SEGMENT_NUMBER = 180;
+
+@Deprecated('Use WIN32_ERROR.ERROR_INVALID_ORDINAL instead')
 const ERROR_INVALID_ORDINAL = 182;
+
+@Deprecated('Use WIN32_ERROR.ERROR_ALREADY_EXISTS instead')
 const ERROR_ALREADY_EXISTS = 183;
+
+@Deprecated('Use WIN32_ERROR.ERROR_INVALID_FLAG_NUMBER instead')
 const ERROR_INVALID_FLAG_NUMBER = 186;
+
+@Deprecated('Use WIN32_ERROR.ERROR_SEM_NOT_FOUND instead')
 const ERROR_SEM_NOT_FOUND = 187;
+
+@Deprecated('Use WIN32_ERROR.ERROR_INVALID_STARTING_CODESEG instead')
 const ERROR_INVALID_STARTING_CODESEG = 188;
+
+@Deprecated('Use WIN32_ERROR.ERROR_INVALID_STACKSEG instead')
 const ERROR_INVALID_STACKSEG = 189;
+
+@Deprecated('Use WIN32_ERROR.ERROR_INVALID_MODULETYPE instead')
 const ERROR_INVALID_MODULETYPE = 190;
+
+@Deprecated('Use WIN32_ERROR.ERROR_INVALID_EXE_SIGNATURE instead')
 const ERROR_INVALID_EXE_SIGNATURE = 191;
+
+@Deprecated('Use WIN32_ERROR.ERROR_EXE_MARKED_INVALID instead')
 const ERROR_EXE_MARKED_INVALID = 192;
+
+@Deprecated('Use WIN32_ERROR.ERROR_BAD_EXE_FORMAT instead')
 const ERROR_BAD_EXE_FORMAT = 193;
+
+@Deprecated('Use WIN32_ERROR.ERROR_ITERATED_DATA_EXCEEDS_64k instead')
 const ERROR_ITERATED_DATA_EXCEEDS_64k = 194;
+
+@Deprecated('Use WIN32_ERROR.ERROR_INVALID_MINALLOCSIZE instead')
 const ERROR_INVALID_MINALLOCSIZE = 195;
+
+@Deprecated('Use WIN32_ERROR.ERROR_DYNLINK_FROM_INVALID_RING instead')
 const ERROR_DYNLINK_FROM_INVALID_RING = 196;
+
+@Deprecated('Use WIN32_ERROR.ERROR_IOPL_NOT_ENABLED instead')
 const ERROR_IOPL_NOT_ENABLED = 197;
+
+@Deprecated('Use WIN32_ERROR.ERROR_INVALID_SEGDPL instead')
 const ERROR_INVALID_SEGDPL = 198;
+
+@Deprecated('Use WIN32_ERROR.ERROR_AUTODATASEG_EXCEEDS_64k instead')
 const ERROR_AUTODATASEG_EXCEEDS_64k = 199;
+
+@Deprecated('Use WIN32_ERROR.ERROR_MORE_DATA instead')
 const ERROR_MORE_DATA = 234;
+
+@Deprecated('Use WIN32_ERROR.ERROR_NO_MORE_ITEMS instead')
 const ERROR_NO_MORE_ITEMS = 259;
+
+@Deprecated('Use WIN32_ERROR.ERROR_INVALID_FLAGS instead')
 const ERROR_INVALID_FLAGS = 1004;
+
+@Deprecated('Use WIN32_ERROR.ERROR_CANCELLED instead')
 const ERROR_CANCELLED = 1223;
+
+@Deprecated('Use WIN32_ERROR.ERROR_NOT_FOUND instead')
 const ERROR_NOT_FOUND = 1168;
+
+@Deprecated('Use WIN32_ERROR.ERROR_REVISION_MISMATCH instead')
 const ERROR_REVISION_MISMATCH = 1306;
+
+@Deprecated('Use WIN32_ERROR.ERROR_NO_SUCH_LOGON_SESSION instead')
 const ERROR_NO_SUCH_LOGON_SESSION = 1312;
+
+@Deprecated('Use WIN32_ERROR.ERROR_BAD_USERNAME instead')
 const ERROR_BAD_USERNAME = 2202;
 
+@Deprecated('Use WIN32_ERROR.APPMODEL_ERROR_NO_PACKAGE instead')
 const APPMODEL_ERROR_NO_PACKAGE = 15700;
+
+@Deprecated('Use WIN32_ERROR.APPMODEL_ERROR_PACKAGE_RUNTIME_CORRUPT instead')
 const APPMODEL_ERROR_PACKAGE_RUNTIME_CORRUPT = 15701;
+
+@Deprecated('Use WIN32_ERROR.APPMODEL_ERROR_PACKAGE_IDENTITY_CORRUPT instead')
 const APPMODEL_ERROR_PACKAGE_IDENTITY_CORRUPT = 15702;
+
+@Deprecated('Use WIN32_ERROR.APPMODEL_ERROR_NO_APPLICATION instead')
 const APPMODEL_ERROR_NO_APPLICATION = 15703;
+
+@Deprecated(
+    'Use WIN32_ERROR.APPMODEL_ERROR_DYNAMIC_PROPERTY_READ_FAILED instead')
 const APPMODEL_ERROR_DYNAMIC_PROPERTY_READ_FAILED = 15704;
+
+@Deprecated('Use WIN32_ERROR.APPMODEL_ERROR_DYNAMIC_PROPERTY_INVALID instead')
 const APPMODEL_ERROR_DYNAMIC_PROPERTY_INVALID = 15705;
+
+@Deprecated('Use WIN32_ERROR.APPMODEL_ERROR_PACKAGE_NOT_AVAILABLE instead')
 const APPMODEL_ERROR_PACKAGE_NOT_AVAILABLE = 15706;
+
+@Deprecated('Use WIN32_ERROR.APPMODEL_ERROR_NO_MUTABLE_DIRECTORY instead')
 const APPMODEL_ERROR_NO_MUTABLE_DIRECTORY = 15707;
 
 // -----------------------------------------------------------------------------
@@ -295,11 +486,22 @@ const WM_CTLCOLORDLG = 0x0136;
 const WM_CTLCOLORSCROLLBAR = 0x0137;
 const WM_CTLCOLORSTATIC = 0x0138;
 const MN_GETHMENU = 0x01E1;
+
+@Deprecated('Use ACCEL_VIRT_FLAGS.FVIRTKEY instead')
 const FVIRTKEY = TRUE;
+
+@Deprecated('Use ACCEL_VIRT_FLAGS.FNOINVERT instead')
 const FNOINVERT = 0x02;
+
+@Deprecated('Use ACCEL_VIRT_FLAGS.FSHIFT instead')
 const FSHIFT = 0x04;
+
+@Deprecated('Use ACCEL_VIRT_FLAGS.FCONTROL instead')
 const FCONTROL = 0x08;
+
+@Deprecated('Use ACCEL_VIRT_FLAGS.FALT instead')
 const FALT = 0x10;
+
 const LF_FACESIZE = 32;
 const LF_FULLFACESIZE = 64;
 const HWND_DESKTOP = 0;
@@ -307,98 +509,288 @@ const HWND_DESKTOP = 0;
 // -----------------------------------------------------------------------------
 // System-wide parameters
 // -----------------------------------------------------------------------------
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETSHOWSOUNDS instead')
 const SPI_GETSHOWSOUNDS = 0x0038;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETSHOWSOUNDS instead')
 const SPI_SETSHOWSOUNDS = 0x0039;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETSTICKYKEYS instead')
 const SPI_GETSTICKYKEYS = 0x003A;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETSTICKYKEYS instead')
 const SPI_SETSTICKYKEYS = 0x003B;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETACCESSTIMEOUT instead')
 const SPI_GETACCESSTIMEOUT = 0x003C;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETACCESSTIMEOUT instead')
 const SPI_SETACCESSTIMEOUT = 0x003D;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETSERIALKEYS instead')
 const SPI_GETSERIALKEYS = 0x003E;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETSERIALKEYS instead')
 const SPI_SETSERIALKEYS = 0x003F;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETSOUNDSENTRY instead')
 const SPI_GETSOUNDSENTRY = 0x0040;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETSOUNDSENTRY instead')
 const SPI_SETSOUNDSENTRY = 0x0041;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETSNAPTODEFBUTTON instead')
 const SPI_GETSNAPTODEFBUTTON = 0x005F;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETSNAPTODEFBUTTON instead')
 const SPI_SETSNAPTODEFBUTTON = 0x0060;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETMOUSEHOVERWIDTH instead')
 const SPI_GETMOUSEHOVERWIDTH = 0x0062;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETMOUSEHOVERWIDTH instead')
 const SPI_SETMOUSEHOVERWIDTH = 0x0063;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETMOUSEHOVERHEIGHT instead')
 const SPI_GETMOUSEHOVERHEIGHT = 0x0064;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETMOUSEHOVERHEIGHT instead')
 const SPI_SETMOUSEHOVERHEIGHT = 0x0065;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETMOUSEHOVERTIME instead')
 const SPI_GETMOUSEHOVERTIME = 0x0066;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETMOUSEHOVERTIME instead')
 const SPI_SETMOUSEHOVERTIME = 0x0067;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETWHEELSCROLLLINES instead')
 const SPI_GETWHEELSCROLLLINES = 0x0068;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETWHEELSCROLLLINES instead')
 const SPI_SETWHEELSCROLLLINES = 0x0069;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETMENUSHOWDELAY instead')
 const SPI_GETMENUSHOWDELAY = 0x006A;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETMENUSHOWDELAY instead')
 const SPI_SETMENUSHOWDELAY = 0x006B;
 const SPI_GETWHEELSCROLLCHARS = 0x006C;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETWHEELSCROLLCHARS instead')
 const SPI_SETWHEELSCROLLCHARS = 0x006D;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETSHOWIMEUI instead')
 const SPI_GETSHOWIMEUI = 0x006E;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETSHOWIMEUI instead')
 const SPI_SETSHOWIMEUI = 0x006F;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETMOUSESPEED instead')
 const SPI_GETMOUSESPEED = 0x0070;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETMOUSESPEED instead')
 const SPI_SETMOUSESPEED = 0x0071;
+
+@Deprecated(
+    'Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETSCREENSAVERRUNNING instead')
 const SPI_GETSCREENSAVERRUNNING = 0x0072;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETDESKWALLPAPER instead')
 const SPI_GETDESKWALLPAPER = 0x0073;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETAUDIODESCRIPTION instead')
 const SPI_GETAUDIODESCRIPTION = 0x0074;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETAUDIODESCRIPTION instead')
 const SPI_SETAUDIODESCRIPTION = 0x0075;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETSCREENSAVESECURE instead')
 const SPI_GETSCREENSAVESECURE = 0x0076;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETSCREENSAVESECURE instead')
 const SPI_SETSCREENSAVESECURE = 0x0077;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETHUNGAPPTIMEOUT instead')
 const SPI_GETHUNGAPPTIMEOUT = 0x0078;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETHUNGAPPTIMEOUT instead')
 const SPI_SETHUNGAPPTIMEOUT = 0x0079;
+
+@Deprecated(
+    'Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETWAITTOKILLTIMEOUT instead')
 const SPI_GETWAITTOKILLTIMEOUT = 0x007A;
+
+@Deprecated(
+    'Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETWAITTOKILLTIMEOUT instead')
 const SPI_SETWAITTOKILLTIMEOUT = 0x007B;
+
+@Deprecated(
+    'Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETWAITTOKILLSERVICETIMEOUT instead')
 const SPI_GETWAITTOKILLSERVICETIMEOUT = 0x007C;
+
+@Deprecated(
+    'Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETWAITTOKILLSERVICETIMEOUT instead')
 const SPI_SETWAITTOKILLSERVICETIMEOUT = 0x007D;
+
+@Deprecated(
+    'Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETMOUSEDOCKTHRESHOLD instead')
 const SPI_GETMOUSEDOCKTHRESHOLD = 0x007E;
+
+@Deprecated(
+    'Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETMOUSEDOCKTHRESHOLD instead')
 const SPI_SETMOUSEDOCKTHRESHOLD = 0x007F;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETPENDOCKTHRESHOLD instead')
 const SPI_GETPENDOCKTHRESHOLD = 0x0080;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETPENDOCKTHRESHOLD instead')
 const SPI_SETPENDOCKTHRESHOLD = 0x0081;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETWINARRANGING instead')
 const SPI_GETWINARRANGING = 0x0082;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETWINARRANGING instead')
 const SPI_SETWINARRANGING = 0x0083;
+
+@Deprecated(
+    'Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETMOUSEDRAGOUTTHRESHOLD instead')
 const SPI_GETMOUSEDRAGOUTTHRESHOLD = 0x0084;
+
+@Deprecated(
+    'Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETMOUSEDRAGOUTTHRESHOLD instead')
 const SPI_SETMOUSEDRAGOUTTHRESHOLD = 0x0085;
+
+@Deprecated(
+    'Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETPENDRAGOUTTHRESHOLD instead')
 const SPI_GETPENDRAGOUTTHRESHOLD = 0x0086;
+
+@Deprecated(
+    'Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETPENDRAGOUTTHRESHOLD instead')
 const SPI_SETPENDRAGOUTTHRESHOLD = 0x0087;
+
+@Deprecated(
+    'Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETMOUSESIDEMOVETHRESHOLD instead')
 const SPI_GETMOUSESIDEMOVETHRESHOLD = 0x0088;
+
+@Deprecated(
+    'Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETMOUSESIDEMOVETHRESHOLD instead')
 const SPI_SETMOUSESIDEMOVETHRESHOLD = 0x0089;
+
+@Deprecated(
+    'Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETPENSIDEMOVETHRESHOLD instead')
 const SPI_GETPENSIDEMOVETHRESHOLD = 0x008A;
+
+@Deprecated(
+    'Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETPENSIDEMOVETHRESHOLD instead')
 const SPI_SETPENSIDEMOVETHRESHOLD = 0x008B;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETDRAGFROMMAXIMIZE instead')
 const SPI_GETDRAGFROMMAXIMIZE = 0x008C;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETDRAGFROMMAXIMIZE instead')
 const SPI_SETDRAGFROMMAXIMIZE = 0x008D;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETSNAPSIZING instead')
 const SPI_GETSNAPSIZING = 0x008E;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETSNAPSIZING instead')
 const SPI_SETSNAPSIZING = 0x008F;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETDOCKMOVING instead')
 const SPI_GETDOCKMOVING = 0x0090;
+
+@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETDOCKMOVING instead')
 const SPI_SETDOCKMOVING = 0x0091;
 
 // Menu flags
+@Deprecated('Use MENU_ITEM_FLAGS.MF_INSERT instead')
 const MF_INSERT = 0x00000000;
+
+@Deprecated('Use MENU_ITEM_FLAGS.MF_CHANGE instead')
 const MF_CHANGE = 0x00000080;
+
+@Deprecated('Use MENU_ITEM_FLAGS.MF_APPEND instead')
 const MF_APPEND = 0x00000100;
+
+@Deprecated('Use MENU_ITEM_FLAGS.MF_DELETE instead')
 const MF_DELETE = 0x00000200;
+
+@Deprecated('Use MENU_ITEM_FLAGS.MF_REMOVE instead')
 const MF_REMOVE = 0x00001000;
+
+@Deprecated('Use MENU_ITEM_FLAGS.MF_BYCOMMAND instead')
 const MF_USECHECKBITMAPS = 0x00000200;
+
+@Deprecated('Use MENU_ITEM_FLAGS.MF_DEFAULT instead')
 const MF_DEFAULT = 0x00001000;
+
+@Deprecated('Use MENU_ITEM_FLAGS.MF_SYSMENU instead')
 const MF_SYSMENU = 0x00002000;
+
+@Deprecated('Use MENU_ITEM_FLAGS.MF_HELP instead')
 const MF_HELP = 0x00004000;
+
+@Deprecated('Use MENU_ITEM_FLAGS.MF_RIGHTJUSTIFY instead')
 const MF_RIGHTJUSTIFY = 0x00004000;
+
+@Deprecated('Use MENU_ITEM_FLAGS.MF_MOUSESELECT instead')
 const MF_MOUSESELECT = 0x00008000;
+
+@Deprecated('Use MENU_ITEM_FLAGS.MF_END instead')
 const MF_END = 0x00000080;
 
+@Deprecated('Use FONT_CHARSET.ANSI_CHARSET instead')
 const ANSI_CHARSET = 0;
+
+@Deprecated('Use FONT_CHARSET.DEFAULT_CHARSET instead')
 const DEFAULT_CHARSET = 1;
+
+@Deprecated('Use FONT_CHARSET.SYMBOL_CHARSET instead')
 const SYMBOL_CHARSET = 2;
+
+@Deprecated('Use FONT_CHARSET.SHIFTJIS_CHARSET instead')
 const SHIFTJIS_CHARSET = 128;
+
+@Deprecated('Use FONT_CHARSET.HANGEUL_CHARSET instead')
 const HANGEUL_CHARSET = 129;
+
+@Deprecated('Use FONT_CHARSET.HANGUL_CHARSET instead')
 const HANGUL_CHARSET = 129;
+
+@Deprecated('Use FONT_CHARSET.GB2312_CHARSET instead')
 const GB2312_CHARSET = 134;
+
+@Deprecated('Use FONT_CHARSET.CHINESEBIG5_CHARSET instead')
 const CHINESEBIG5_CHARSET = 136;
+
+@Deprecated('Use FONT_CHARSET.OEM_CHARSET instead')
 const OEM_CHARSET = 255;
+
+@Deprecated('Use FONT_CHARSET.JOHAB_CHARSET instead')
 const JOHAB_CHARSET = 130;
+
+@Deprecated('Use FONT_CHARSET.HEBREW_CHARSET instead')
 const HEBREW_CHARSET = 177;
+
+@Deprecated('Use FONT_CHARSET.ARABIC_CHARSET instead')
 const ARABIC_CHARSET = 178;
+
+@Deprecated('Use FONT_CHARSET.GREEK_CHARSET instead')
 const GREEK_CHARSET = 161;
+
+@Deprecated('Use FONT_CHARSET.TURKISH_CHARSET instead')
 const TURKISH_CHARSET = 162;
+
+@Deprecated('Use FONT_CHARSET.VIETNAMESE_CHARSET instead')
 const VIETNAMESE_CHARSET = 163;
+
+@Deprecated('Use FONT_CHARSET.THAI_CHARSET instead')
 const THAI_CHARSET = 222;
+
+@Deprecated('Use FONT_CHARSET.EASTEUROPE_CHARSET instead')
 const EASTEUROPE_CHARSET = 238;
+
+@Deprecated('Use FONT_CHARSET.RUSSIAN_CHARSET instead')
 const RUSSIAN_CHARSET = 204;
 
 // Common Dialog window strings
@@ -411,31 +803,72 @@ const HELPMSGSTRING = 'commdlg_help';
 const FINDMSGSTRING = 'commdlg_FindReplace';
 
 // Stock logical objects
+@Deprecated('Use GET_STOCK_OBJECT_FLAGS.WHITE_BRUSH instead')
 const WHITE_BRUSH = 0;
+
+@Deprecated('Use GET_STOCK_OBJECT_FLAGS.LTGRAY_BRUSH instead')
 const LTGRAY_BRUSH = 1;
+
+@Deprecated('Use GET_STOCK_OBJECT_FLAGS.GRAY_BRUSH instead')
 const GRAY_BRUSH = 2;
+
+@Deprecated('Use GET_STOCK_OBJECT_FLAGS.DKGRAY_BRUSH instead')
 const DKGRAY_BRUSH = 3;
+
+@Deprecated('Use GET_STOCK_OBJECT_FLAGS.BLACK_BRUSH instead')
 const BLACK_BRUSH = 4;
+
+@Deprecated('Use GET_STOCK_OBJECT_FLAGS.NULL_BRUSH instead')
 const NULL_BRUSH = 5;
+
+@Deprecated('Use GET_STOCK_OBJECT_FLAGS.HOLLOW_BRUSH instead')
 const HOLLOW_BRUSH = NULL_BRUSH;
+
+@Deprecated('Use GET_STOCK_OBJECT_FLAGS.WHITE_PEN instead')
 const WHITE_PEN = 6;
+
+@Deprecated('Use GET_STOCK_OBJECT_FLAGS.BLACK_PEN instead')
 const BLACK_PEN = 7;
+
+@Deprecated('Use GET_STOCK_OBJECT_FLAGS.NULL_PEN instead')
 const NULL_PEN = 8;
+
+@Deprecated('Use GET_STOCK_OBJECT_FLAGS.OEM_FIXED_FONT instead')
 const OEM_FIXED_FONT = 10;
+
+@Deprecated('Use GET_STOCK_OBJECT_FLAGS.ANSI_FIXED_FONT instead')
 const ANSI_FIXED_FONT = 11;
+
+@Deprecated('Use GET_STOCK_OBJECT_FLAGS.ANSI_VAR_FONT instead')
 const ANSI_VAR_FONT = 12;
+
+@Deprecated('Use GET_STOCK_OBJECT_FLAGS.SYSTEM_FONT instead')
 const SYSTEM_FONT = 13;
+
+@Deprecated('Use GET_STOCK_OBJECT_FLAGS.DEVICE_DEFAULT_FONT instead')
 const DEVICE_DEFAULT_FONT = 14;
+
+@Deprecated('Use GET_STOCK_OBJECT_FLAGS.DEFAULT_PALETTE instead')
 const DEFAULT_PALETTE = 15;
+
+@Deprecated('Use GET_STOCK_OBJECT_FLAGS.SYSTEM_FIXED_FONT instead')
 const SYSTEM_FIXED_FONT = 16;
 
 // Background modes
+
+@Deprecated('Use BACKGROUND_MODE.TRANSPARENT instead')
 const TRANSPARENT = 1;
+
+@Deprecated('Use BACKGROUND_MODE.OPAQUE instead')
 const OPAQUE = 2;
+
 const BKMODE_LAST = 2;
 
 // DIB color table identifiers
+@Deprecated('Use DIB_USAGE.DIB_RGB_COLORS instead')
 const DIB_RGB_COLORS = 0;
+
+@Deprecated('Use DIB_USAGE.DIB_PAL_COLORS instead')
 const DIB_PAL_COLORS = 1;
 
 // GetDeviceCaps capabilities
@@ -525,198 +958,558 @@ const CM_GAMMA_RAMP = 0x00000002;
 const CM_CMYK_COLOR = 0x00000004;
 
 /* Ternary raster operations */
+@Deprecated('Use ROP_CODE.SRCCOPY instead')
 const SRCCOPY = 0x00CC0020;
+
+@Deprecated('Use ROP_CODE.SRCPAINT instead')
 const SRCPAINT = 0x00EE0086;
+
+@Deprecated('Use ROP_CODE.SRCAND instead')
 const SRCAND = 0x008800C6;
+
+@Deprecated('Use ROP_CODE.SRCINVERT instead')
 const SRCINVERT = 0x00660046;
+
+@Deprecated('Use ROP_CODE.SRCERASE instead')
 const SRCERASE = 0x00440328;
+
+@Deprecated('Use ROP_CODE.NOTSRCCOPY instead')
 const NOTSRCCOPY = 0x00330008;
+
+@Deprecated('Use ROP_CODE.NOTSRCERASE instead')
 const NOTSRCERASE = 0x001100A6;
+
+@Deprecated('Use ROP_CODE.MERGECOPY instead')
 const MERGECOPY = 0x00C000CA;
+
+@Deprecated('Use ROP_CODE.MERGEPAINT instead')
 const MERGEPAINT = 0x00BB0226;
+
+@Deprecated('Use ROP_CODE.PATCOPY instead')
 const PATCOPY = 0x00F00021;
+
+@Deprecated('Use ROP_CODE.PATPAINT instead')
 const PATPAINT = 0x00FB0A09;
+
+@Deprecated('Use ROP_CODE.PATINVERT instead')
 const PATINVERT = 0x005A0049;
+
+@Deprecated('Use ROP_CODE.DSTINVERT instead')
 const DSTINVERT = 0x00550009;
+
+@Deprecated('Use ROP_CODE.BLACKNESS instead')
 const BLACKNESS = 0x00000042;
+
+@Deprecated('Use ROP_CODE.WHITENESS instead')
 const WHITENESS = 0x00FF0062;
+
+@Deprecated('Use ROP_CODE.NOMIRRORBITMAP instead')
 const NOMIRRORBITMAP = 0x80000000;
+
+@Deprecated('Use ROP_CODE.CAPTUREBLT instead')
 const CAPTUREBLT = 0x40000000;
 
 // Dialog box command IDs
+@Deprecated('Use MESSAGEBOX_RESULT.IDOK instead')
 const IDOK = 1;
+
+@Deprecated('Use MESSAGEBOX_RESULT.IDCANCEL instead')
 const IDCANCEL = 2;
+
+@Deprecated('Use MESSAGEBOX_RESULT.IDABORT instead')
 const IDABORT = 3;
+
+@Deprecated('Use MESSAGEBOX_RESULT.IDRETRY instead')
 const IDRETRY = 4;
+
+@Deprecated('Use MESSAGEBOX_RESULT.IDIGNORE instead')
 const IDIGNORE = 5;
+
+@Deprecated('Use MESSAGEBOX_RESULT.IDYES instead')
 const IDYES = 6;
+
+@Deprecated('Use MESSAGEBOX_RESULT.IDNO instead')
 const IDNO = 7;
+
+@Deprecated('Use MESSAGEBOX_RESULT.IDCLOSE instead')
 const IDCLOSE = 8;
+
+@Deprecated('Use MESSAGEBOX_RESULT.IDHELP instead')
 const IDHELP = 9;
+
+@Deprecated('Use MESSAGEBOX_RESULT.IDTRYAGAIN instead')
 const IDTRYAGAIN = 10;
+
+@Deprecated('Use MESSAGEBOX_RESULT.IDCONTINUE instead')
 const IDCONTINUE = 11;
+
+// MessageBox flags
 const IDTIMEOUT = 32000;
 
 // Virtual keys
+@Deprecated('Use VIRTUAL_KEY.VK_LBUTTON instead')
 const VK_LBUTTON = 0x01;
+
+@Deprecated('Use VIRTUAL_KEY.VK_RBUTTON instead')
 const VK_RBUTTON = 0x02;
+
+@Deprecated('Use VIRTUAL_KEY.VK_CANCEL instead')
 const VK_CANCEL = 0x03;
+
+@Deprecated('Use VIRTUAL_KEY.VK_MBUTTON instead')
 const VK_MBUTTON = 0x04;
+
+@Deprecated('Use VIRTUAL_KEY.VK_XBUTTON1 instead')
 const VK_XBUTTON1 = 0x05;
+
+@Deprecated('Use VIRTUAL_KEY.VK_XBUTTON2 instead')
 const VK_XBUTTON2 = 0x06;
+
+@Deprecated('Use VIRTUAL_KEY.VK_BACK instead')
 const VK_BACK = 0x08;
+
+@Deprecated('Use VIRTUAL_KEY.VK_TAB instead')
 const VK_TAB = 0x09;
+
+@Deprecated('Use VIRTUAL_KEY.VK_CLEAR instead')
 const VK_CLEAR = 0x0C;
+
+@Deprecated('Use VIRTUAL_KEY.VK_RETURN instead')
 const VK_RETURN = 0x0D;
+
+@Deprecated('Use VIRTUAL_KEY.VK_SHIFT instead')
 const VK_SHIFT = 0x10;
+
+@Deprecated('Use VIRTUAL_KEY.VK_CONTROL instead')
 const VK_CONTROL = 0x11;
+
+@Deprecated('Use VIRTUAL_KEY.VK_MENU instead')
 const VK_MENU = 0x12;
+
+@Deprecated('Use VIRTUAL_KEY.VK_PAUSE instead')
 const VK_PAUSE = 0x13;
+
+@Deprecated('Use VIRTUAL_KEY.VK_CAPITAL instead')
 const VK_CAPITAL = 0x14;
+
+@Deprecated('Use VIRTUAL_KEY.VK_KANA instead')
 const VK_KANA = 0x15;
+
+@Deprecated('Use VIRTUAL_KEY.VK_HANGEUL instead')
 const VK_HANGEUL = 0x15;
+
+@Deprecated('Use VIRTUAL_KEY.VK_HANGUL instead')
 const VK_HANGUL = 0x15;
+
+@Deprecated('Use VIRTUAL_KEY.VK_JUNJA instead')
 const VK_JUNJA = 0x17;
+
+@Deprecated('Use VIRTUAL_KEY.VK_FINAL instead')
 const VK_FINAL = 0x18;
+
+@Deprecated('Use VIRTUAL_KEY.VK_HANJA instead')
 const VK_HANJA = 0x19;
+
+@Deprecated('Use VIRTUAL_KEY.VK_KANJI instead')
 const VK_KANJI = 0x19;
+
+@Deprecated('Use VIRTUAL_KEY.VK_ESCAPE instead')
 const VK_ESCAPE = 0x1B;
+
+@Deprecated('Use VIRTUAL_KEY.VK_CONVERT instead')
 const VK_CONVERT = 0x1C;
+
+@Deprecated('Use VIRTUAL_KEY.VK_NONCONVERT instead')
 const VK_NONCONVERT = 0x1D;
+
+@Deprecated('Use VIRTUAL_KEY.VK_ACCEPT instead')
 const VK_ACCEPT = 0x1E;
+
+@Deprecated('Use VIRTUAL_KEY.VK_MODECHANGE instead')
 const VK_MODECHANGE = 0x1F;
+
+@Deprecated('Use VIRTUAL_KEY.VK_SPACE instead')
 const VK_SPACE = 0x20;
+
+@Deprecated('Use VIRTUAL_KEY.VK_PRIOR instead')
 const VK_PRIOR = 0x21;
+
+@Deprecated('Use VIRTUAL_KEY.VK_NEXT instead')
 const VK_NEXT = 0x22;
+
+@Deprecated('Use VIRTUAL_KEY.VK_END instead')
 const VK_END = 0x23;
+
+@Deprecated('Use VIRTUAL_KEY.VK_HOME instead')
 const VK_HOME = 0x24;
+
+@Deprecated('Use VIRTUAL_KEY.VK_LEFT instead')
 const VK_LEFT = 0x25;
+
+@Deprecated('Use VIRTUAL_KEY.VK_UP instead')
 const VK_UP = 0x26;
+
+@Deprecated('Use VIRTUAL_KEY.VK_RIGHT instead')
 const VK_RIGHT = 0x27;
+
+@Deprecated('Use VIRTUAL_KEY.VK_DOWN instead')
 const VK_DOWN = 0x28;
+
+@Deprecated('Use VIRTUAL_KEY.VK_SELECT instead')
 const VK_SELECT = 0x29;
+
+@Deprecated('Use VIRTUAL_KEY.VK_PRINT instead')
 const VK_PRINT = 0x2A;
+
+@Deprecated('Use VIRTUAL_KEY.VK_EXECUTE instead')
 const VK_EXECUTE = 0x2B;
+
+@Deprecated('Use VIRTUAL_KEY.VK_SNAPSHOT instead')
 const VK_SNAPSHOT = 0x2C;
+
+@Deprecated('Use VIRTUAL_KEY.VK_INSERT instead')
 const VK_INSERT = 0x2D;
+
+@Deprecated('Use VIRTUAL_KEY.VK_DELETE instead')
 const VK_DELETE = 0x2E;
+
+@Deprecated('Use VIRTUAL_KEY.VK_HELP instead')
 const VK_HELP = 0x2F;
+
+@Deprecated('Use VIRTUAL_KEY.VK_LWIN instead')
 const VK_LWIN = 0x5B;
+
+@Deprecated('Use VIRTUAL_KEY.VK_RWIN instead')
 const VK_RWIN = 0x5C;
+
+@Deprecated('Use VIRTUAL_KEY.VK_APPS instead')
 const VK_APPS = 0x5D;
+
+@Deprecated('Use VIRTUAL_KEY.VK_SLEEP instead')
 const VK_SLEEP = 0x5F;
+
+@Deprecated('Use VIRTUAL_KEY.VK_NUMPAD0 instead')
 const VK_NUMPAD0 = 0x60;
+
+@Deprecated('Use VIRTUAL_KEY.VK_NUMPAD1 instead')
 const VK_NUMPAD1 = 0x61;
+
+@Deprecated('Use VIRTUAL_KEY.VK_NUMPAD2 instead')
 const VK_NUMPAD2 = 0x62;
+
+@Deprecated('Use VIRTUAL_KEY.VK_NUMPAD3 instead')
 const VK_NUMPAD3 = 0x63;
+
+@Deprecated('Use VIRTUAL_KEY.VK_NUMPAD4 instead')
 const VK_NUMPAD4 = 0x64;
+
+@Deprecated('Use VIRTUAL_KEY.VK_NUMPAD5 instead')
 const VK_NUMPAD5 = 0x65;
+
+@Deprecated('Use VIRTUAL_KEY.VK_NUMPAD6 instead')
 const VK_NUMPAD6 = 0x66;
+
+@Deprecated('Use VIRTUAL_KEY.VK_NUMPAD7 instead')
 const VK_NUMPAD7 = 0x67;
+
+@Deprecated('Use VIRTUAL_KEY.VK_NUMPAD8 instead')
 const VK_NUMPAD8 = 0x68;
+
+@Deprecated('Use VIRTUAL_KEY.VK_NUMPAD9 instead')
 const VK_NUMPAD9 = 0x69;
+
+@Deprecated('Use VIRTUAL_KEY.VK_MULTIPLY instead')
 const VK_MULTIPLY = 0x6A;
+
+@Deprecated('Use VIRTUAL_KEY.VK_ADD instead')
 const VK_ADD = 0x6B;
+
+@Deprecated('Use VIRTUAL_KEY.VK_SEPARATOR instead')
 const VK_SEPARATOR = 0x6C;
+
+@Deprecated('Use VIRTUAL_KEY.VK_SUBTRACT instead')
 const VK_SUBTRACT = 0x6D;
+
+@Deprecated('Use VIRTUAL_KEY.VK_DECIMAL instead')
 const VK_DECIMAL = 0x6E;
+
+@Deprecated('Use VIRTUAL_KEY.VK_DIVIDE instead')
 const VK_DIVIDE = 0x6F;
+
+@Deprecated('Use VIRTUAL_KEY.VK_F1 instead')
 const VK_F1 = 0x70;
+
+@Deprecated('Use VIRTUAL_KEY.VK_F2 instead')
 const VK_F2 = 0x71;
+
+@Deprecated('Use VIRTUAL_KEY.VK_F3 instead')
 const VK_F3 = 0x72;
+
+@Deprecated('Use VIRTUAL_KEY.VK_F4 instead')
 const VK_F4 = 0x73;
+
+@Deprecated('Use VIRTUAL_KEY.VK_F5 instead')
 const VK_F5 = 0x74;
+
+@Deprecated('Use VIRTUAL_KEY.VK_F6 instead')
 const VK_F6 = 0x75;
+
+@Deprecated('Use VIRTUAL_KEY.VK_F7 instead')
 const VK_F7 = 0x76;
+
+@Deprecated('Use VIRTUAL_KEY.VK_F8 instead')
 const VK_F8 = 0x77;
+
+@Deprecated('Use VIRTUAL_KEY.VK_F9 instead')
 const VK_F9 = 0x78;
+
+@Deprecated('Use VIRTUAL_KEY.VK_F10 instead')
 const VK_F10 = 0x79;
+
+@Deprecated('Use VIRTUAL_KEY.VK_F11 instead')
 const VK_F11 = 0x7A;
+
+@Deprecated('Use VIRTUAL_KEY.VK_F12 instead')
 const VK_F12 = 0x7B;
+
+@Deprecated('Use VIRTUAL_KEY.VK_F13 instead')
 const VK_F13 = 0x7C;
+
+@Deprecated('Use VIRTUAL_KEY.VK_F14 instead')
 const VK_F14 = 0x7D;
+
+@Deprecated('Use VIRTUAL_KEY.VK_F15 instead')
 const VK_F15 = 0x7E;
+
+@Deprecated('Use VIRTUAL_KEY.VK_F16 instead')
 const VK_F16 = 0x7F;
+
+@Deprecated('Use VIRTUAL_KEY.VK_F17 instead')
 const VK_F17 = 0x80;
+
+@Deprecated('Use VIRTUAL_KEY.VK_F18 instead')
 const VK_F18 = 0x81;
+
+@Deprecated('Use VIRTUAL_KEY.VK_F19 instead')
 const VK_F19 = 0x82;
+
+@Deprecated('Use VIRTUAL_KEY.VK_F20 instead')
 const VK_F20 = 0x83;
+
+@Deprecated('Use VIRTUAL_KEY.VK_F21 instead')
 const VK_F21 = 0x84;
+
+@Deprecated('Use VIRTUAL_KEY.VK_F22 instead')
 const VK_F22 = 0x85;
+
+@Deprecated('Use VIRTUAL_KEY.VK_F23 instead')
 const VK_F23 = 0x86;
+
+@Deprecated('Use VIRTUAL_KEY.VK_F24 instead')
 const VK_F24 = 0x87;
+
+@Deprecated('Use VIRTUAL_KEY.VK_NUMLOCK instead')
 const VK_NUMLOCK = 0x90;
+
+@Deprecated('Use VIRTUAL_KEY.VK_SCROLL instead')
 const VK_SCROLL = 0x91;
+
+@Deprecated('Use VIRTUAL_KEY.VK_LSHIFT instead')
 const VK_LSHIFT = 0xA0;
+
+@Deprecated('Use VIRTUAL_KEY.VK_RSHIFT instead')
 const VK_RSHIFT = 0xA1;
+
+@Deprecated('Use VIRTUAL_KEY.VK_LCONTROL instead')
 const VK_LCONTROL = 0xA2;
+
+@Deprecated('Use VIRTUAL_KEY.VK_RCONTROL instead')
 const VK_RCONTROL = 0xA3;
+
+@Deprecated('Use VIRTUAL_KEY.VK_LMENU instead')
 const VK_LMENU = 0xA4;
+
+@Deprecated('Use VIRTUAL_KEY.VK_RMENU instead')
 const VK_RMENU = 0xA5;
+
+@Deprecated('Use VIRTUAL_KEY.VK_BROWSER_BACK instead')
 const VK_BROWSER_BACK = 0xA6;
+
+@Deprecated('Use VIRTUAL_KEY.VK_BROWSER_FORWARD instead')
 const VK_BROWSER_FORWARD = 0xA7;
+
+@Deprecated('Use VIRTUAL_KEY.VK_BROWSER_REFRESH instead')
 const VK_BROWSER_REFRESH = 0xA8;
+
+@Deprecated('Use VIRTUAL_KEY.VK_BROWSER_STOP instead')
 const VK_BROWSER_STOP = 0xA9;
+
+@Deprecated('Use VIRTUAL_KEY.VK_BROWSER_SEARCH instead')
 const VK_BROWSER_SEARCH = 0xAA;
+
+@Deprecated('Use VIRTUAL_KEY.VK_BROWSER_FAVORITES instead')
 const VK_BROWSER_FAVORITES = 0xAB;
+
+@Deprecated('Use VIRTUAL_KEY.VK_BROWSER_HOME instead')
 const VK_BROWSER_HOME = 0xAC;
+
+@Deprecated('Use VIRTUAL_KEY.VK_VOLUME_MUTE instead')
 const VK_VOLUME_MUTE = 0xAD;
+
+@Deprecated('Use VIRTUAL_KEY.VK_VOLUME_DOWN instead')
 const VK_VOLUME_DOWN = 0xAE;
+
+@Deprecated('Use VIRTUAL_KEY.VK_VOLUME_UP instead')
 const VK_VOLUME_UP = 0xAF;
+
+@Deprecated('Use VIRTUAL_KEY.VK_MEDIA_NEXT_TRACK instead')
 const VK_MEDIA_NEXT_TRACK = 0xB0;
+
+@Deprecated('Use VIRTUAL_KEY.VK_MEDIA_PREV_TRACK instead')
 const VK_MEDIA_PREV_TRACK = 0xB1;
+
+@Deprecated('Use VIRTUAL_KEY.VK_MEDIA_STOP instead')
 const VK_MEDIA_STOP = 0xB2;
+
+@Deprecated('Use VIRTUAL_KEY.VK_MEDIA_PLAY_PAUSE instead')
 const VK_MEDIA_PLAY_PAUSE = 0xB3;
+
+@Deprecated('Use VIRTUAL_KEY.VK_LAUNCH_MAIL instead')
 const VK_LAUNCH_MAIL = 0xB4;
+
+@Deprecated('Use VIRTUAL_KEY.VK_LAUNCH_MEDIA_SELECT instead')
 const VK_LAUNCH_MEDIA_SELECT = 0xB5;
+
+@Deprecated('Use VIRTUAL_KEY.VK_LAUNCH_APP1 instead')
 const VK_LAUNCH_APP1 = 0xB6;
+
+@Deprecated('Use VIRTUAL_KEY.VK_LAUNCH_APP2 instead')
 const VK_LAUNCH_APP2 = 0xB7;
+
+@Deprecated('Use VIRTUAL_KEY.VK_OEM_1 instead')
 const VK_OEM_1 = 0xBA;
+
+@Deprecated('Use VIRTUAL_KEY.VK_OEM_PLUS instead')
 const VK_OEM_PLUS = 0xBB;
+
+@Deprecated('Use VIRTUAL_KEY.VK_OEM_COMMA instead')
 const VK_OEM_COMMA = 0xBC;
+
+@Deprecated('Use VIRTUAL_KEY.VK_OEM_MINUS instead')
 const VK_OEM_MINUS = 0xBD;
+
+@Deprecated('Use VIRTUAL_KEY.VK_OEM_PERIOD instead')
 const VK_OEM_PERIOD = 0xBE;
+
+@Deprecated('Use VIRTUAL_KEY.VK_OEM_2 instead')
 const VK_OEM_2 = 0xBF;
+
+@Deprecated('Use VIRTUAL_KEY.VK_OEM_3 instead')
 const VK_OEM_3 = 0xC0;
+
+@Deprecated('Use VIRTUAL_KEY.VK_OEM_4 instead')
 const VK_OEM_4 = 0xDB;
+
+@Deprecated('Use VIRTUAL_KEY.VK_OEM_5 instead')
 const VK_OEM_5 = 0xDC;
+
+@Deprecated('Use VIRTUAL_KEY.VK_OEM_6 instead')
 const VK_OEM_6 = 0xDD;
+
+@Deprecated('Use VIRTUAL_KEY.VK_OEM_7 instead')
 const VK_OEM_7 = 0xDE;
+
+@Deprecated('Use VIRTUAL_KEY.VK_OEM_8 instead')
 const VK_OEM_8 = 0xDF;
+
+@Deprecated('Use VIRTUAL_KEY.VK_OEM_102 instead')
 const VK_OEM_AX = 0xE1;
+
+@Deprecated('Use VIRTUAL_KEY.VK_ICO_HELP instead')
 const VK_OEM_102 = 0xE2;
+
+@Deprecated('Use VIRTUAL_KEY.VK_ICO_HELP instead')
 const VK_ICO_HELP = 0xE3;
+
+@Deprecated('Use VIRTUAL_KEY.VK_ICO_00 instead')
 const VK_ICO_00 = 0xE4;
+
+@Deprecated('Use VIRTUAL_KEY.VK_PROCESSKEY instead')
 const VK_PROCESSKEY = 0xE5;
+
+@Deprecated('Use VIRTUAL_KEY.VK_ICO_CLEAR instead')
 const VK_ICO_CLEAR = 0xE6;
+
+@Deprecated('Use VIRTUAL_KEY.VK_PACKET instead')
 const VK_PACKET = 0xE7;
 
 // Hook codes
 const HC_ACTION = 0;
 
 // Input types
+@Deprecated('Use INPUT_TYPE.INPUT_MOUSE instead')
 const INPUT_MOUSE = 0;
+
+@Deprecated('Use INPUT_TYPE.INPUT_KEYBOARD instead')
 const INPUT_KEYBOARD = 1;
+
+@Deprecated('Use INPUT_TYPE.INPUT_HARDWARE instead')
 const INPUT_HARDWARE = 2;
 
 // Keyboard and mouse events
+
+@Deprecated('Use KEYBD_EVENT_FLAGS.KEYEVENTF_EXTENDEDKEY instead')
 const KEYEVENTF_EXTENDEDKEY = 0x0001;
+
+@Deprecated('Use KEYBD_EVENT_FLAGS.KEYEVENTF_KEYUP instead')
 const KEYEVENTF_KEYUP = 0x0002;
+
+@Deprecated('Use KEYBD_EVENT_FLAGS.KEYEVENTF_UNICODE instead')
 const KEYEVENTF_UNICODE = 0x0004;
+
+@Deprecated('Use KEYBD_EVENT_FLAGS.KEYEVENTF_SCANCODE instead')
 const KEYEVENTF_SCANCODE = 0x0008;
+
+@Deprecated('Use MOUSE_EVENT_FLAGS.MOUSEEVENTF_MOVE instead')
 const MOUSEEVENTF_MOVE = 0x0001;
+
+@Deprecated('Use MOUSE_EVENT_FLAGS.MOUSEEVENTF_LEFTDOWN instead')
 const MOUSEEVENTF_LEFTDOWN = 0x0002;
+
+@Deprecated('Use MOUSE_EVENT_FLAGS.MOUSEEVENTF_LEFTUP instead')
 const MOUSEEVENTF_LEFTUP = 0x0004;
+
+@Deprecated('Use MOUSE_EVENT_FLAGS.MOUSEEVENTF_RIGHTDOWN instead')
 const MOUSEEVENTF_RIGHTDOWN = 0x0008;
+
+@Deprecated('Use MOUSE_EVENT_FLAGS.MOUSEEVENTF_RIGHTUP instead')
 const MOUSEEVENTF_RIGHTUP = 0x0010;
+
+@Deprecated('Use MOUSE_EVENT_FLAGS.MOUSEEVENTF_MIDDLEDOWN instead')
 const MOUSEEVENTF_MIDDLEDOWN = 0x0020;
+
+@Deprecated('Use MOUSE_EVENT_FLAGS.MOUSEEVENTF_MIDDLEUP instead')
 const MOUSEEVENTF_MIDDLEUP = 0x0040;
+
+@Deprecated('Use MOUSE_EVENT_FLAGS.MOUSEEVENTF_XDOWN instead')
 const MOUSEEVENTF_XDOWN = 0x0080;
+
+@Deprecated('Use MOUSE_EVENT_FLAGS.MOUSEEVENTF_XUP instead')
 const MOUSEEVENTF_XUP = 0x0100;
+
+@Deprecated('Use MOUSE_EVENT_FLAGS.MOUSEEVENTF_WHEEL instead')
 const MOUSEEVENTF_WHEEL = 0x0800;
+
+@Deprecated('Use MOUSE_EVENT_FLAGS.MOUSEEVENTF_HWHEEL instead')
 const MOUSEEVENTF_HWHEEL = 0x01000;
+
+@Deprecated('Use MOUSE_EVENT_FLAGS.MOUSEEVENTF_MOVE_NOCOALESCE instead')
 const MOUSEEVENTF_MOVE_NOCOALESCE = 0x2000;
+
+@Deprecated('Use MOUSE_EVENT_FLAGS.MOUSEEVENTF_VIRTUALDESK instead')
 const MOUSEEVENTF_VIRTUALDESK = 0x4000;
+
+@Deprecated('Use MOUSE_EVENT_FLAGS.MOUSEEVENTF_ABSOLUTE instead')
 const MOUSEEVENTF_ABSOLUTE = 0x8000;
 
 // Classic Folder IDs
@@ -785,29 +1578,72 @@ const CSIDL_FLAG_PER_USER_INIT = 0x0800;
 const CSIDL_FLAG_MASK = 0xFF00;
 
 // Version info constants
+
+@Deprecated('Use GET_FILE_VERSION_INFO_FLAGS.FILE_VER_GET_LOCALISED instead')
 const FILE_VER_GET_LOCALISED = 0x01;
+
+@Deprecated('Use GET_FILE_VERSION_INFO_FLAGS.FILE_VER_GET_NEUTRAL instead')
 const FILE_VER_GET_NEUTRAL = 0x02;
+
+@Deprecated('Use GET_FILE_VERSION_INFO_FLAGS.FILE_VER_GET_PREFETCHED instead')
 const FILE_VER_GET_PREFETCHED = 0x04;
+
+@Deprecated('Use VER_FIND_FILE_FLAGS.VFFF_ISSHAREDFILE instead')
 const VFFF_ISSHAREDFILE = 0x0001;
+
+@Deprecated('Use VER_INSTALL_FILE_FLAGS.VIFF_FORCEINSTALL instead')
 const VIFF_FORCEINSTALL = 0x0001;
+
+@Deprecated('Use VER_INSTALL_FILE_FLAGS.VIFF_DONTDELETEOLD instead')
 const VIFF_DONTDELETEOLD = 0x0002;
 
 // Process constants
+@Deprecated('Use PROCESS_ACCESS_RIGHTS.PROCESS_TERMINATE instead')
 const PROCESS_TERMINATE = 0x0001;
+
+@Deprecated('Use PROCESS_ACCESS_RIGHTS.PROCESS_CREATE_THREAD instead')
 const PROCESS_CREATE_THREAD = 0x0002;
+
+@Deprecated('Use PROCESS_ACCESS_RIGHTS.PROCESS_SET_SESSIONID instead')
 const PROCESS_SET_SESSIONID = 0x0004;
+
+@Deprecated('Use PROCESS_ACCESS_RIGHTS.PROCESS_VM_OPERATION instead')
 const PROCESS_VM_OPERATION = 0x0008;
+
+@Deprecated('Use PROCESS_ACCESS_RIGHTS.PROCESS_VM_READ instead')
 const PROCESS_VM_READ = 0x0010;
+
+@Deprecated('Use PROCESS_ACCESS_RIGHTS.PROCESS_VM_WRITE instead')
 const PROCESS_VM_WRITE = 0x0020;
+
+@Deprecated('Use PROCESS_ACCESS_RIGHTS.PROCESS_DUP_HANDLE instead')
 const PROCESS_DUP_HANDLE = 0x0040;
+
+@Deprecated('Use PROCESS_ACCESS_RIGHTS.PROCESS_CREATE_PROCESS instead')
 const PROCESS_CREATE_PROCESS = 0x0080;
+
+@Deprecated('Use PROCESS_ACCESS_RIGHTS.PROCESS_SET_QUOTA instead')
 const PROCESS_SET_QUOTA = 0x0100;
+
+@Deprecated('Use PROCESS_ACCESS_RIGHTS.PROCESS_SET_INFORMATION instead')
 const PROCESS_SET_INFORMATION = 0x0200;
+
+@Deprecated('Use PROCESS_ACCESS_RIGHTS.PROCESS_QUERY_INFORMATION instead')
 const PROCESS_QUERY_INFORMATION = 0x0400;
+
+@Deprecated('Use PROCESS_ACCESS_RIGHTS.PROCESS_SUSPEND_RESUME instead')
 const PROCESS_SUSPEND_RESUME = 0x0800;
+
+@Deprecated(
+    'Use PROCESS_ACCESS_RIGHTS.PROCESS_QUERY_LIMITED_INFORMATION instead')
 const PROCESS_QUERY_LIMITED_INFORMATION = 0x1000;
+
+@Deprecated('Use PROCESS_ACCESS_RIGHTS.PROCESS_SET_LIMITED_INFORMATION instead')
 const PROCESS_SET_LIMITED_INFORMATION = 0x2000;
+
+@Deprecated('Use PROCESS_ACCESS_RIGHTS.PROCESS_ALL_ACCESS instead')
 const PROCESS_ALL_ACCESS = STANDARD_RIGHTS_REQUIRED | SYNCHRONIZE | 0xFFFF;
+
 const PROC_THREAD_ATTRIBUTE_NUMBER = 0x0000FFFF;
 const PROC_THREAD_ATTRIBUTE_THREAD = 0x00010000;
 const PROC_THREAD_ATTRIBUTE_INPUT = 0x00020000;
@@ -858,13 +1694,28 @@ const CCM_SETUNICODEFORMAT = CCM_FIRST + 5;
 const CCM_GETUNICODEFORMAT = CCM_FIRST + 6;
 
 // Version constants
+@Deprecated('Use VER_FLAGS.VER_MINORVERSION instead')
 const VER_MINORVERSION = 0x0000001;
+
+@Deprecated('Use VER_FLAGS.VER_MAJORVERSION instead')
 const VER_MAJORVERSION = 0x0000002;
+
+@Deprecated('Use VER_FLAGS.VER_BUILDNUMBER instead')
 const VER_BUILDNUMBER = 0x0000004;
+
+@Deprecated('Use VER_FLAGS.VER_PLATFORMID instead')
 const VER_PLATFORMID = 0x0000008;
+
+@Deprecated('Use VER_FLAGS.VER_SERVICEPACKMINOR instead')
 const VER_SERVICEPACKMINOR = 0x0000010;
+
+@Deprecated('Use VER_FLAGS.VER_SERVICEPACKMAJOR instead')
 const VER_SERVICEPACKMAJOR = 0x0000020;
+
+@Deprecated('Use VER_FLAGS.VER_SUITENAME instead')
 const VER_SUITENAME = 0x0000040;
+
+@Deprecated('Use VER_FLAGS.VER_PRODUCT_TYPE instead')
 const VER_PRODUCT_TYPE = 0x0000080;
 
 const VER_NT_WORKSTATION = 0x0000001;
@@ -872,36 +1723,98 @@ const VER_NT_DOMAIN_CONTROLLER = 0x0000002;
 const VER_NT_SERVER = 0x0000003;
 
 // Process dwCreationFlags info
+@Deprecated('Use PROCESS_CREATION_FLAGS.DEBUG_PROCESS instead')
 const DEBUG_PROCESS = 0x00000001;
+
+@Deprecated('Use PROCESS_CREATION_FLAGS.DEBUG_ONLY_THIS_PROCESS instead')
 const DEBUG_ONLY_THIS_PROCESS = 0x00000002;
+
+@Deprecated('Use PROCESS_CREATION_FLAGS.CREATE_SUSPENDED instead')
 const CREATE_SUSPENDED = 0x00000004;
+
+@Deprecated('Use PROCESS_CREATION_FLAGS.DETACHED_PROCESS instead')
 const DETACHED_PROCESS = 0x00000008;
+
+@Deprecated('Use PROCESS_CREATION_FLAGS.CREATE_NEW_CONSOLE instead')
 const CREATE_NEW_CONSOLE = 0x00000010;
+
+@Deprecated('Use PROCESS_CREATION_FLAGS.NORMAL_PRIORITY_CLASS instead')
 const NORMAL_PRIORITY_CLASS = 0x00000020;
+
+@Deprecated('Use PROCESS_CREATION_FLAGS.IDLE_PRIORITY_CLASS instead')
 const IDLE_PRIORITY_CLASS = 0x00000040;
+
+@Deprecated('Use PROCESS_CREATION_FLAGS.HIGH_PRIORITY_CLASS instead')
 const HIGH_PRIORITY_CLASS = 0x00000080;
+
+@Deprecated('Use PROCESS_CREATION_FLAGS.REALTIME_PRIORITY_CLASS instead')
 const REALTIME_PRIORITY_CLASS = 0x00000100;
+
+@Deprecated('Use PROCESS_CREATION_FLAGS.CREATE_NEW_PROCESS_GROUP instead')
 const CREATE_NEW_PROCESS_GROUP = 0x00000200;
+
+@Deprecated('Use PROCESS_CREATION_FLAGS.CREATE_UNICODE_ENVIRONMENT instead')
 const CREATE_UNICODE_ENVIRONMENT = 0x00000400;
+
+@Deprecated('Use PROCESS_CREATION_FLAGS.CREATE_SEPARATE_WOW_VDM instead')
 const CREATE_SEPARATE_WOW_VDM = 0x00000800;
+
+@Deprecated('Use PROCESS_CREATION_FLAGS.CREATE_SHARED_WOW_VDM instead')
 const CREATE_SHARED_WOW_VDM = 0x00001000;
+
+@Deprecated('Use PROCESS_CREATION_FLAGS.CREATE_FORCEDOS instead')
 const CREATE_FORCEDOS = 0x00002000;
+
+@Deprecated('Use PROCESS_CREATION_FLAGS.BELOW_NORMAL_PRIORITY_CLASS instead')
 const BELOW_NORMAL_PRIORITY_CLASS = 0x00004000;
+
+@Deprecated('Use PROCESS_CREATION_FLAGS.ABOVE_NORMAL_PRIORITY_CLASS instead')
 const ABOVE_NORMAL_PRIORITY_CLASS = 0x00008000;
+
+@Deprecated('Use PROCESS_CREATION_FLAGS.INHERIT_PARENT_AFFINITY instead')
 const INHERIT_PARENT_AFFINITY = 0x00010000;
+
+@Deprecated('Use PROCESS_CREATION_FLAGS.INHERIT_CALLER_PRIORITY instead')
 const INHERIT_CALLER_PRIORITY = 0x00020000;
+
+@Deprecated('Use PROCESS_CREATION_FLAGS.CREATE_PROTECTED_PROCESS instead')
 const CREATE_PROTECTED_PROCESS = 0x00040000;
+
+@Deprecated('Use PROCESS_CREATION_FLAGS.EXTENDED_STARTUPINFO_PRESENT instead')
 const EXTENDED_STARTUPINFO_PRESENT = 0x00080000;
+
+@Deprecated('Use PROCESS_CREATION_FLAGS.PROCESS_MODE_BACKGROUND_BEGIN instead')
 const PROCESS_MODE_BACKGROUND_BEGIN = 0x00100000;
+
+@Deprecated('Use PROCESS_CREATION_FLAGS.PROCESS_MODE_BACKGROUND_END instead')
 const PROCESS_MODE_BACKGROUND_END = 0x00200000;
+
+@Deprecated('Use PROCESS_CREATION_FLAGS.CREATE_SECURE_PROCESS instead')
 const CREATE_SECURE_PROCESS = 0x00400000;
+
+@Deprecated('Use PROCESS_CREATION_FLAGS.CREATE_BREAKAWAY_FROM_JOB instead')
 const CREATE_BREAKAWAY_FROM_JOB = 0x01000000;
+
+@Deprecated(
+    'Use PROCESS_CREATION_FLAGS.CREATE_PRESERVE_CODE_AUTHZ_LEVEL instead')
 const CREATE_PRESERVE_CODE_AUTHZ_LEVEL = 0x02000000;
+
+@Deprecated('Use PROCESS_CREATION_FLAGS.CREATE_DEFAULT_ERROR_MODE instead')
 const CREATE_DEFAULT_ERROR_MODE = 0x04000000;
+
+@Deprecated('Use PROCESS_CREATION_FLAGS.CREATE_NO_WINDOW instead')
 const CREATE_NO_WINDOW = 0x08000000;
+
+@Deprecated('Use PROCESS_CREATION_FLAGS.PROFILE_USER instead')
 const PROFILE_USER = 0x10000000;
+
+@Deprecated('Use PROCESS_CREATION_FLAGS.PROFILE_KERNEL instead')
 const PROFILE_KERNEL = 0x20000000;
+
+@Deprecated('Use PROCESS_CREATION_FLAGS.PROFILE_SERVER instead')
 const PROFILE_SERVER = 0x40000000;
+
+@Deprecated('Use PROCESS_CREATION_FLAGS.CREATE_IGNORE_SYSTEM_DEFAULT instead')
 const CREATE_IGNORE_SYSTEM_DEFAULT = 0x80000000;
 
 // Registry keys
@@ -915,20 +1828,50 @@ const HKEY_PERFORMANCE_NLSTEXT = 0x80000060;
 const HKEY_CURRENT_CONFIG = 0x80000005;
 const HKEY_DYN_DATA = 0x80000006;
 const HKEY_CURRENT_USER_LOCAL_SETTINGS = 0x80000007;
+
+@Deprecated('Use REG_ROUTINE_FLAGS.RRF_RT_REG_NONE instead')
 const RRF_RT_REG_NONE = 0x00000001;
+
+@Deprecated('Use REG_ROUTINE_FLAGS.RRF_RT_REG_SZ instead')
 const RRF_RT_REG_SZ = 0x00000002;
+
+@Deprecated('Use REG_ROUTINE_FLAGS.RRF_RT_REG_EXPAND_SZ instead')
 const RRF_RT_REG_EXPAND_SZ = 0x00000004;
+
+@Deprecated('Use REG_ROUTINE_FLAGS.RRF_RT_REG_BINARY instead')
 const RRF_RT_REG_BINARY = 0x00000008;
+
+@Deprecated('Use REG_ROUTINE_FLAGS.RRF_RT_REG_DWORD instead')
 const RRF_RT_REG_DWORD = 0x00000010;
+
+@Deprecated('Use REG_ROUTINE_FLAGS.RRF_RT_REG_MULTI_SZ instead')
 const RRF_RT_REG_MULTI_SZ = 0x00000020;
+
+@Deprecated('Use REG_ROUTINE_FLAGS.RRF_RT_REG_QWORD instead')
 const RRF_RT_REG_QWORD = 0x00000040;
+
+@Deprecated('Use REG_ROUTINE_FLAGS.RRF_RT_DWORD instead')
 const RRF_RT_DWORD = RRF_RT_REG_BINARY | RRF_RT_REG_DWORD;
+
+@Deprecated('Use REG_ROUTINE_FLAGS.RRF_RT_QWORD instead')
 const RRF_RT_QWORD = RRF_RT_REG_BINARY | RRF_RT_REG_QWORD;
+
+@Deprecated('Use REG_ROUTINE_FLAGS.RRF_RT_ANY instead')
 const RRF_RT_ANY = 0x0000ffff;
+
+@Deprecated('Use REG_ROUTINE_FLAGS.RRF_SUBKEY_WOW6464KEY instead')
 const RRF_SUBKEY_WOW6464KEY = 0x00010000;
+
+@Deprecated('Use REG_ROUTINE_FLAGS.RRF_SUBKEY_WOW6432KEY instead')
 const RRF_SUBKEY_WOW6432KEY = 0x00020000;
+
+@Deprecated('Use REG_ROUTINE_FLAGS.RRF_WOW64_MASK instead')
 const RRF_WOW64_MASK = 0x00030000;
+
+@Deprecated('Use REG_ROUTINE_FLAGS.RRF_NOEXPAND instead')
 const RRF_NOEXPAND = 0x10000000;
+
+@Deprecated('Use REG_ROUTINE_FLAGS.RRF_ZEROONFAILURE instead')
 const RRF_ZEROONFAILURE = 0x20000000;
 
 // -----------------------------------------------------------------------------
@@ -949,99 +1892,255 @@ const DISPLAY_DEVICE_DISCONNECT = 0x02000000;
 // Gamepad constants
 // -----------------------------------------------------------------------------
 
+@Deprecated('Use XINPUT_DEVTYPE.XINPUT_DEVTYPE_GAMEPAD instead')
 const XINPUT_DEVTYPE_GAMEPAD = 0x01;
+
+@Deprecated('Use XINPUT_DEVSUBTYPE.XINPUT_DEVSUBTYPE_UNKNOWN instead')
 const XINPUT_DEVSUBTYPE_UNKNOWN = 0x00;
+
+@Deprecated('Use XINPUT_DEVSUBTYPE.XINPUT_DEVSUBTYPE_GAMEPAD instead')
 const XINPUT_DEVSUBTYPE_GAMEPAD = 0x01;
+
+@Deprecated('Use XINPUT_DEVSUBTYPE.XINPUT_DEVSUBTYPE_WHEEL instead')
 const XINPUT_DEVSUBTYPE_WHEEL = 0x02;
+
+@Deprecated('Use XINPUT_DEVSUBTYPE.XINPUT_DEVSUBTYPE_ARCADE_STICK instead')
 const XINPUT_DEVSUBTYPE_ARCADE_STICK = 0x03;
+
+@Deprecated('Use XINPUT_DEVSUBTYPE.XINPUT_DEVSUBTYPE_FLIGHT_STICK instead')
 const XINPUT_DEVSUBTYPE_FLIGHT_STICK = 0x04;
+
+@Deprecated('Use XINPUT_DEVSUBTYPE.XINPUT_DEVSUBTYPE_DANCE_PAD instead')
 const XINPUT_DEVSUBTYPE_DANCE_PAD = 0x05;
+
+@Deprecated('Use XINPUT_DEVSUBTYPE.XINPUT_DEVSUBTYPE_GUITAR instead')
 const XINPUT_DEVSUBTYPE_GUITAR = 0x06;
+
+@Deprecated('Use XINPUT_DEVSUBTYPE.XINPUT_DEVSUBTYPE_GUITAR_ALTERNATE instead')
 const XINPUT_DEVSUBTYPE_GUITAR_ALTERNATE = 0x07;
+
+@Deprecated('Use XINPUT_DEVSUBTYPE.XINPUT_DEVSUBTYPE_DRUM_KIT instead')
 const XINPUT_DEVSUBTYPE_DRUM_KIT = 0x08;
+
+@Deprecated('Use XINPUT_DEVSUBTYPE.XINPUT_DEVSUBTYPE_GUITAR_BASS instead')
 const XINPUT_DEVSUBTYPE_GUITAR_BASS = 0x0B;
+
+@Deprecated('Use XINPUT_DEVSUBTYPE.XINPUT_DEVSUBTYPE_ARCADE_PAD instead')
 const XINPUT_DEVSUBTYPE_ARCADE_PAD = 0x13;
+
+@Deprecated('Use XINPUT_CAPABILITIES_FLAGS.XINPUT_CAPS_VOICE_SUPPORTED instead')
 const XINPUT_CAPS_VOICE_SUPPORTED = 0x0004;
+
+@Deprecated('Use XINPUT_CAPABILITIES_FLAGS.XINPUT_CAPS_FFB_SUPPORTED instead')
 const XINPUT_CAPS_FFB_SUPPORTED = 0x0001;
+
+@Deprecated('Use XINPUT_CAPABILITIES_FLAGS.XINPUT_CAPS_WIRELESS instead')
 const XINPUT_CAPS_WIRELESS = 0x0002;
+
+@Deprecated('Use XINPUT_CAPABILITIES_FLAGS.XINPUT_CAPS_PMD_SUPPORTED instead')
 const XINPUT_CAPS_PMD_SUPPORTED = 0x0008;
+
+@Deprecated('Use XINPUT_CAPABILITIES_FLAGS.XINPUT_CAPS_NO_NAVIGATION instead')
 const XINPUT_CAPS_NO_NAVIGATION = 0x0010;
 
+@Deprecated('Use XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_DPAD_UP instead')
 const XINPUT_GAMEPAD_DPAD_UP = 0x0001;
+
+@Deprecated('Use XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_DPAD_DOWN instead')
 const XINPUT_GAMEPAD_DPAD_DOWN = 0x0002;
+
+@Deprecated('Use XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_DPAD_LEFT instead')
 const XINPUT_GAMEPAD_DPAD_LEFT = 0x0004;
+
+@Deprecated('Use XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_DPAD_RIGHT instead')
 const XINPUT_GAMEPAD_DPAD_RIGHT = 0x0008;
+
+@Deprecated('Use XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_START instead')
 const XINPUT_GAMEPAD_START = 0x0010;
+
+@Deprecated('Use XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_BACK instead')
 const XINPUT_GAMEPAD_BACK = 0x0020;
+
+@Deprecated('Use XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_LEFT_THUMB instead')
 const XINPUT_GAMEPAD_LEFT_THUMB = 0x0040;
+
+@Deprecated(
+    'Use XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_RIGHT_THUMB instead')
 const XINPUT_GAMEPAD_RIGHT_THUMB = 0x0080;
+
+@Deprecated(
+    'Use XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_LEFT_SHOULDER instead')
 const XINPUT_GAMEPAD_LEFT_SHOULDER = 0x0100;
+
+@Deprecated(
+    'Use XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_RIGHT_SHOULDER instead')
 const XINPUT_GAMEPAD_RIGHT_SHOULDER = 0x0200;
+
+@Deprecated('Use XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_A instead')
 const XINPUT_GAMEPAD_A = 0x1000;
+
+@Deprecated('Use XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_B instead')
 const XINPUT_GAMEPAD_B = 0x2000;
+
+@Deprecated('Use XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_X instead')
 const XINPUT_GAMEPAD_X = 0x4000;
+
+@Deprecated('Use XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_Y instead')
 const XINPUT_GAMEPAD_Y = 0x8000;
 
+@Deprecated(
+    'Use XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE instead')
 const XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE = 7849;
+
+@Deprecated(
+    'Use XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE instead')
 const XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE = 8689;
+
+@Deprecated(
+    'Use XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_TRIGGER_THRESHOLD instead')
 const XINPUT_GAMEPAD_TRIGGER_THRESHOLD = 30;
 
+@Deprecated('Use XINPUT_FLAG.XINPUT_FLAG_GAMEPAD instead')
 const XINPUT_FLAG_GAMEPAD = 0x00000001;
 
+@Deprecated('Use BATTERY_DEVTYPE.BATTERY_DEVTYPE_GAMEPAD instead')
 const BATTERY_DEVTYPE_GAMEPAD = 0x00;
+
+@Deprecated('Use BATTERY_DEVTYPE.BATTERY_DEVTYPE_HEADSET instead')
 const BATTERY_DEVTYPE_HEADSET = 0x01;
 
+@Deprecated('Use BATTERY_TYPE.BATTERY_TYPE_DISCONNECTED instead')
 const BATTERY_TYPE_DISCONNECTED = 0x00;
+
+@Deprecated('Use BATTERY_TYPE.BATTERY_TYPE_WIRED instead')
 const BATTERY_TYPE_WIRED = 0x01;
+
+@Deprecated('Use BATTERY_TYPE.BATTERY_TYPE_ALKALINE instead')
 const BATTERY_TYPE_ALKALINE = 0x02;
+
+@Deprecated('Use BATTERY_TYPE.BATTERY_TYPE_NIMH instead')
 const BATTERY_TYPE_NIMH = 0x03;
+
+@Deprecated('Use BATTERY_TYPE.BATTERY_TYPE_UNKNOWN instead')
 const BATTERY_TYPE_UNKNOWN = 0xFF;
 
+@Deprecated('Use BATTERY_LEVEL.BATTERY_LEVEL_EMPTY instead')
 const BATTERY_LEVEL_EMPTY = 0x00;
+
+@Deprecated('Use BATTERY_LEVEL.BATTERY_LEVEL_LOW instead')
 const BATTERY_LEVEL_LOW = 0x01;
+
+@Deprecated('Use BATTERY_LEVEL.BATTERY_LEVEL_MEDIUM instead')
 const BATTERY_LEVEL_MEDIUM = 0x02;
+
+@Deprecated('Use BATTERY_LEVEL.BATTERY_LEVEL_FULL instead')
 const BATTERY_LEVEL_FULL = 0x03;
 
 const XUSER_MAX_COUNT = 4;
 
+@Deprecated('Use XINPUT_VIRTUAL_KEY.VK_PAD_A instead')
 const VK_PAD_A = 0x5800;
+
+@Deprecated('Use XINPUT_VIRTUAL_KEY.VK_PAD_B instead')
 const VK_PAD_B = 0x5801;
+
+@Deprecated('Use XINPUT_VIRTUAL_KEY.VK_PAD_X instead')
 const VK_PAD_X = 0x5802;
+
+@Deprecated('Use XINPUT_VIRTUAL_KEY.VK_PAD_Y instead')
 const VK_PAD_Y = 0x5803;
+
+@Deprecated('Use XINPUT_VIRTUAL_KEY.VK_PAD_RSHOULDER instead')
 const VK_PAD_RSHOULDER = 0x5804;
+
+@Deprecated('Use XINPUT_VIRTUAL_KEY.VK_PAD_LSHOULDER instead')
 const VK_PAD_LSHOULDER = 0x5805;
+
+@Deprecated('Use XINPUT_VIRTUAL_KEY.VK_PAD_LTRIGGER instead')
 const VK_PAD_LTRIGGER = 0x5806;
+
+@Deprecated('Use XINPUT_VIRTUAL_KEY.VK_PAD_RTRIGGER instead')
 const VK_PAD_RTRIGGER = 0x5807;
 
+@Deprecated('Use XINPUT_VIRTUAL_KEY.VK_PAD_DPAD_UP instead')
 const VK_PAD_DPAD_UP = 0x5810;
+
+@Deprecated('Use XINPUT_VIRTUAL_KEY.VK_PAD_DPAD_DOWN instead')
 const VK_PAD_DPAD_DOWN = 0x5811;
+
+@Deprecated('Use XINPUT_VIRTUAL_KEY.VK_PAD_DPAD_LEFT instead')
 const VK_PAD_DPAD_LEFT = 0x5812;
+
+@Deprecated('Use XINPUT_VIRTUAL_KEY.VK_PAD_DPAD_RIGHT instead')
 const VK_PAD_DPAD_RIGHT = 0x5813;
+
+@Deprecated('Use XINPUT_VIRTUAL_KEY.VK_PAD_START instead')
 const VK_PAD_START = 0x5814;
+
+@Deprecated('Use XINPUT_VIRTUAL_KEY.VK_PAD_BACK instead')
 const VK_PAD_BACK = 0x5815;
+
+@Deprecated('Use XINPUT_VIRTUAL_KEY.VK_PAD_LTHUMB_PRESS instead')
 const VK_PAD_LTHUMB_PRESS = 0x5816;
+
+@Deprecated('Use XINPUT_VIRTUAL_KEY.VK_PAD_RTHUMB_PRESS instead')
 const VK_PAD_RTHUMB_PRESS = 0x5817;
 
+@Deprecated('Use XINPUT_VIRTUAL_KEY.VK_PAD_LTHUMB_UP instead')
 const VK_PAD_LTHUMB_UP = 0x5820;
+
+@Deprecated('Use XINPUT_VIRTUAL_KEY.VK_PAD_LTHUMB_DOWN instead')
 const VK_PAD_LTHUMB_DOWN = 0x5821;
+
+@Deprecated('Use XINPUT_VIRTUAL_KEY.VK_PAD_LTHUMB_RIGHT instead')
 const VK_PAD_LTHUMB_RIGHT = 0x5822;
+
+@Deprecated('Use XINPUT_VIRTUAL_KEY.VK_PAD_LTHUMB_LEFT instead')
 const VK_PAD_LTHUMB_LEFT = 0x5823;
+
+@Deprecated('Use XINPUT_VIRTUAL_KEY.VK_PAD_LTHUMB_UPLEFT instead')
 const VK_PAD_LTHUMB_UPLEFT = 0x5824;
+
+@Deprecated('Use XINPUT_VIRTUAL_KEY.VK_PAD_LTHUMB_UPRIGHT instead')
 const VK_PAD_LTHUMB_UPRIGHT = 0x5825;
+
+@Deprecated('Use XINPUT_VIRTUAL_KEY.VK_PAD_LTHUMB_DOWNRIGHT instead')
 const VK_PAD_LTHUMB_DOWNRIGHT = 0x5826;
+
+@Deprecated('Use XINPUT_VIRTUAL_KEY.VK_PAD_LTHUMB_DOWNLEFT instead')
 const VK_PAD_LTHUMB_DOWNLEFT = 0x5827;
 
+@Deprecated('Use XINPUT_VIRTUAL_KEY.VK_PAD_RTHUMB_UP instead')
 const VK_PAD_RTHUMB_UP = 0x5830;
+
+@Deprecated('Use XINPUT_VIRTUAL_KEY.VK_PAD_RTHUMB_DOWN instead')
 const VK_PAD_RTHUMB_DOWN = 0x5831;
+
+@Deprecated('Use XINPUT_VIRTUAL_KEY.VK_PAD_RTHUMB_RIGHT instead')
 const VK_PAD_RTHUMB_RIGHT = 0x5832;
+
+@Deprecated('Use XINPUT_VIRTUAL_KEY.VK_PAD_RTHUMB_LEFT instead')
 const VK_PAD_RTHUMB_LEFT = 0x5833;
+
+@Deprecated('Use XINPUT_VIRTUAL_KEY.VK_PAD_RTHUMB_UPLEFT instead')
 const VK_PAD_RTHUMB_UPLEFT = 0x5834;
+
+@Deprecated('Use XINPUT_VIRTUAL_KEY.VK_PAD_RTHUMB_UPRIGHT instead')
 const VK_PAD_RTHUMB_UPRIGHT = 0x5835;
+
+@Deprecated('Use XINPUT_VIRTUAL_KEY.VK_PAD_RTHUMB_DOWNRIGHT instead')
 const VK_PAD_RTHUMB_DOWNRIGHT = 0x5836;
+
+@Deprecated('Use XINPUT_VIRTUAL_KEY.VK_PAD_RTHUMB_DOWNLEFT instead')
 const VK_PAD_RTHUMB_DOWNLEFT = 0x5837;
 
+@Deprecated('Use XINPUT_KEYSTROKE_FLAGS.XINPUT_KEYSTROKE_KEYDOWN instead')
 const XINPUT_KEYSTROKE_KEYDOWN = 0x0001;
+
+@Deprecated('Use XINPUT_KEYSTROKE_FLAGS.XINPUT_KEYSTROKE_KEYUP instead')
 const XINPUT_KEYSTROKE_KEYUP = 0x0002;
+
+@Deprecated('Use XINPUT_KEYSTROKE_FLAGS.XINPUT_KEYSTROKE_REPEAT instead')
 const XINPUT_KEYSTROKE_REPEAT = 0x0004;
 
 // -----------------------------------------------------------------------------
@@ -1051,13 +2150,29 @@ const XINPUT_KEYSTROKE_REPEAT = 0x0004;
 // Handles
 const INVALID_HANDLE_VALUE = -1;
 const ATTACH_PARENT_PROCESS = -1;
+
+@Deprecated('Use CONSOLE_CHARACTER_ATTRIBUTES.FOREGROUND_BLUE instead')
 const FOREGROUND_BLUE = 0x0001;
+
+@Deprecated('Use CONSOLE_CHARACTER_ATTRIBUTES.FOREGROUND_GREEN instead')
 const FOREGROUND_GREEN = 0x0002;
+
+@Deprecated('Use CONSOLE_CHARACTER_ATTRIBUTES.FOREGROUND_RED instead')
 const FOREGROUND_RED = 0x0004;
+
+@Deprecated('Use CONSOLE_CHARACTER_ATTRIBUTES.FOREGROUND_INTENSITY instead')
 const FOREGROUND_INTENSITY = 0x0008;
+
+@Deprecated('Use CONSOLE_CHARACTER_ATTRIBUTES.BACKGROUND_BLUE instead')
 const BACKGROUND_BLUE = 0x0010;
+
+@Deprecated('Use CONSOLE_CHARACTER_ATTRIBUTES.BACKGROUND_GREEN instead')
 const BACKGROUND_GREEN = 0x0020;
+
+@Deprecated('Use CONSOLE_CHARACTER_ATTRIBUTES.BACKGROUND_RED instead')
 const BACKGROUND_RED = 0x0040;
+
+@Deprecated('Use CONSOLE_CHARACTER_ATTRIBUTES.BACKGROUND_INTENSITY instead')
 const BACKGROUND_INTENSITY = 0x0080;
 
 // -----------------------------------------------------------------------------
@@ -1179,43 +2294,112 @@ final SCARD_W_CACHE_ITEM_NOT_FOUND = 0x80100070.toSigned(32);
 final SCARD_W_CACHE_ITEM_STALE = 0x80100071.toSigned(32);
 final SCARD_W_CACHE_ITEM_TOO_BIG = 0x80100072.toSigned(32);
 
+@Deprecated('Use CLSCTX.CLSCTX_INPROC_SERVER16 instead')
 const CLSCTX_INPROC_SERVER16 = 0x8;
+
+@Deprecated('Use CLSCTX.CLSCTX_INPROC_HANDLER16 instead')
 const CLSCTX_INPROC_HANDLER16 = 0x20;
+
+@Deprecated('Use CLSCTX.CLSCTX_RESERVED1 instead')
 const CLSCTX_RESERVED1 = 0x40;
+
+@Deprecated('Use CLSCTX.CLSCTX_RESERVED2 instead')
 const CLSCTX_RESERVED2 = 0x80;
+
+@Deprecated('Use CLSCTX.CLSCTX_RESERVED3 instead')
 const CLSCTX_RESERVED3 = 0x100;
+
+@Deprecated('Use CLSCTX.CLSCTX_RESERVED4 instead')
 const CLSCTX_RESERVED4 = 0x200;
+
+@Deprecated('Use CLSCTX.CLSCTX_NO_CODE_DOWNLOAD instead')
 const CLSCTX_NO_CODE_DOWNLOAD = 0x400;
+
+@Deprecated('Use CLSCTX.CLSCTX_RESERVED5 instead')
 const CLSCTX_RESERVED5 = 0x800;
+
+@Deprecated('Use CLSCTX.CLSCTX_NO_CUSTOM_MARSHAL instead')
 const CLSCTX_NO_CUSTOM_MARSHAL = 0x1000;
+
+@Deprecated('Use CLSCTX.CLSCTX_ENABLE_CODE_DOWNLOAD instead')
 const CLSCTX_ENABLE_CODE_DOWNLOAD = 0x2000;
+
+@Deprecated('Use CLSCTX.CLSCTX_NO_FAILURE_LOG instead')
 const CLSCTX_NO_FAILURE_LOG = 0x4000;
+
+@Deprecated('Use CLSCTX.CLSCTX_DISABLE_AAA instead')
 const CLSCTX_DISABLE_AAA = 0x8000;
+
+@Deprecated('Use CLSCTX.CLSCTX_ENABLE_AAA instead')
 const CLSCTX_ENABLE_AAA = 0x10000;
+
+@Deprecated('Use CLSCTX.CLSCTX_FROM_DEFAULT_CONTEXT instead')
 const CLSCTX_FROM_DEFAULT_CONTEXT = 0x20000;
+
+@Deprecated('Use CLSCTX.CLSCTX_ACTIVATE_X86_SERVER instead')
 const CLSCTX_ACTIVATE_X86_SERVER = 0x40000;
+
+@Deprecated('Use CLSCTX.CLSCTX_ACTIVATE_32_BIT_SERVER instead')
 const CLSCTX_ACTIVATE_32_BIT_SERVER = CLSCTX_ACTIVATE_X86_SERVER;
+
+@Deprecated('Use CLSCTX.CLSCTX_ACTIVATE_64_BIT_SERVER instead')
 const CLSCTX_ACTIVATE_64_BIT_SERVER = 0x80000;
+
+@Deprecated('Use CLSCTX.CLSCTX_ENABLE_CLOAKING instead')
 const CLSCTX_ENABLE_CLOAKING = 0x100000;
+
+@Deprecated('Use CLSCTX.CLSCTX_APPCONTAINER instead')
 const CLSCTX_APPCONTAINER = 0x400000;
+
+@Deprecated('Use CLSCTX.CLSCTX_ACTIVATE_AAA_AS_IU instead')
 const CLSCTX_ACTIVATE_AAA_AS_IU = 0x800000;
+
+@Deprecated('Use CLSCTX.CLSCTX_RESERVED6 instead')
 const CLSCTX_RESERVED6 = 0x1000000;
+
+@Deprecated('Use CLSCTX.CLSCTX_ACTIVATE_ARM32_SERVER instead')
 const CLSCTX_ACTIVATE_ARM32_SERVER = 0x2000000;
+
+@Deprecated('Use CLSCTX.CLSCTX_PS_DLL instead')
 const CLSCTX_PS_DLL = 0x80000000;
 
 // RPC authentication
+@Deprecated('Use RPC_C_AUTHN_LEVEL.RPC_C_AUTHN_LEVEL_DEFAULT instead')
 const RPC_C_AUTHN_LEVEL_DEFAULT = 0;
+
+@Deprecated('Use RPC_C_AUTHN_LEVEL.RPC_C_AUTHN_LEVEL_NONE instead')
 const RPC_C_AUTHN_LEVEL_NONE = 1;
+
+@Deprecated('Use RPC_C_AUTHN_LEVEL.RPC_C_AUTHN_LEVEL_CONNECT instead')
 const RPC_C_AUTHN_LEVEL_CONNECT = 2;
+
+@Deprecated('Use RPC_C_AUTHN_LEVEL.RPC_C_AUTHN_LEVEL_CALL instead')
 const RPC_C_AUTHN_LEVEL_CALL = 3;
+
+@Deprecated('Use RPC_C_AUTHN_LEVEL.RPC_C_AUTHN_LEVEL_PKT instead')
 const RPC_C_AUTHN_LEVEL_PKT = 4;
+
+@Deprecated('Use RPC_C_AUTHN_LEVEL.RPC_C_AUTHN_LEVEL_PKT_INTEGRITY instead')
 const RPC_C_AUTHN_LEVEL_PKT_INTEGRITY = 5;
+
+@Deprecated('Use RPC_C_AUTHN_LEVEL.RPC_C_AUTHN_LEVEL_PKT_PRIVACY instead')
 const RPC_C_AUTHN_LEVEL_PKT_PRIVACY = 6;
+
+@Deprecated('Use RPC_C_IMP_LEVEL.RPC_C_IMP_LEVEL_DEFAULT instead')
 const RPC_C_IMP_LEVEL_DEFAULT = 0;
+
+@Deprecated('Use RPC_C_IMP_LEVEL.RPC_C_IMP_LEVEL_ANONYMOUS instead')
 const RPC_C_IMP_LEVEL_ANONYMOUS = 1;
+
+@Deprecated('Use RPC_C_IMP_LEVEL.RPC_C_IMP_LEVEL_IDENTIFY instead')
 const RPC_C_IMP_LEVEL_IDENTIFY = 2;
+
+@Deprecated('Use RPC_C_IMP_LEVEL.RPC_C_IMP_LEVEL_IMPERSONATE instead')
 const RPC_C_IMP_LEVEL_IMPERSONATE = 3;
+
+@Deprecated('Use RPC_C_IMP_LEVEL.RPC_C_IMP_LEVEL_DELEGATE instead')
 const RPC_C_IMP_LEVEL_DELEGATE = 4;
+
 const RPC_C_AUTHN_NONE = 0;
 const RPC_C_AUTHN_DCE_PRIVATE = 1;
 const RPC_C_AUTHN_DCE_PUBLIC = 2;
@@ -1232,65 +2416,162 @@ const RPC_C_AUTHZ_DCE = 2;
 const RPC_C_AUTHZ_DEFAULT = 0xffffffff;
 
 // Known folder flags
+@Deprecated('Use KNOWN_FOLDER_FLAG.KF_FLAG_DEFAULT instead')
 const KF_FLAG_DEFAULT = 0x00000000;
+
+@Deprecated('Use KNOWN_FOLDER_FLAG.KF_FLAG_FORCE_APP_DATA_REDIRECTION instead')
 const KF_FLAG_FORCE_APP_DATA_REDIRECTION = 0x00080000;
+
+@Deprecated(
+    'Use KNOWN_FOLDER_FLAG.KF_FLAG_RETURN_FILTER_REDIRECTION_TARGET instead')
 const KF_FLAG_RETURN_FILTER_REDIRECTION_TARGET = 0x00040000;
+
+@Deprecated('Use KNOWN_FOLDER_FLAG.KF_FLAG_FORCE_PACKAGE_REDIRECTION instead')
 const KF_FLAG_FORCE_PACKAGE_REDIRECTION = 0x00020000;
+
+@Deprecated('Use KNOWN_FOLDER_FLAG.KF_FLAG_NO_PACKAGE_REDIRECTION instead')
 const KF_FLAG_NO_PACKAGE_REDIRECTION = 0x00010000;
+
+@Deprecated(
+    'Use KNOWN_FOLDER_FLAG.KF_FLAG_FORCE_APPCONTAINER_REDIRECTION instead')
 const KF_FLAG_FORCE_APPCONTAINER_REDIRECTION = 0x00020000;
+
+@Deprecated('Use KNOWN_FOLDER_FLAG.KF_FLAG_NO_APPCONTAINER_REDIRECTION instead')
 const KF_FLAG_NO_APPCONTAINER_REDIRECTION = 0x00010000;
+
+@Deprecated('Use KNOWN_FOLDER_FLAG.KF_FLAG_CREATE instead')
 const KF_FLAG_CREATE = 0x00008000;
+
+@Deprecated('Use KNOWN_FOLDER_FLAG.KF_FLAG_DONT_VERIFY instead')
 const KF_FLAG_DONT_VERIFY = 0x00004000;
+
+@Deprecated('Use KNOWN_FOLDER_FLAG.KF_FLAG_DONT_UNEXPAND instead')
 const KF_FLAG_DONT_UNEXPAND = 0x00002000;
+
+@Deprecated('Use KNOWN_FOLDER_FLAG.KF_FLAG_NO_ALIAS instead')
 const KF_FLAG_NO_ALIAS = 0x00001000;
+
+@Deprecated('Use KNOWN_FOLDER_FLAG.KF_FLAG_INIT instead')
 const KF_FLAG_INIT = 0x00000800;
+
+@Deprecated('Use KNOWN_FOLDER_FLAG.KF_FLAG_DEFAULT_PATH instead')
 const KF_FLAG_DEFAULT_PATH = 0x00000400;
+
+@Deprecated('Use KNOWN_FOLDER_FLAG.KF_FLAG_NOT_PARENT_RELATIVE instead')
 const KF_FLAG_NOT_PARENT_RELATIVE = 0x00000200;
+
+@Deprecated('Use KNOWN_FOLDER_FLAG.KF_FLAG_SIMPLE_IDLIST instead')
 const KF_FLAG_SIMPLE_IDLIST = 0x00000100;
-const KF_FLAG_ALIAS_ONLY = 0x80000000;
+
+@Deprecated('Use KNOWN_FOLDER_FLAG.KF_FLAG_ALIAS_ONLY instead')
+const KF_FLAG_ALIAS_ONLY = -2147483648;
 
 // Init common controls bitflag
+@Deprecated('Use INITCOMMONCONTROLSEX_ICC.ICC_LISTVIEW_CLASSES instead')
 const ICC_LISTVIEW_CLASSES = 0x00000001;
+
+@Deprecated('Use INITCOMMONCONTROLSEX_ICC.ICC_TREEVIEW_CLASSES instead')
 const ICC_TREEVIEW_CLASSES = 0x00000002;
+
+@Deprecated('Use INITCOMMONCONTROLSEX_ICC.ICC_BAR_CLASSES instead')
 const ICC_BAR_CLASSES = 0x00000004;
+
+@Deprecated('Use INITCOMMONCONTROLSEX_ICC.ICC_TAB_CLASSES instead')
 const ICC_TAB_CLASSES = 0x00000008;
+
+@Deprecated('Use INITCOMMONCONTROLSEX_ICC.ICC_UPDOWN_CLASS instead')
 const ICC_UPDOWN_CLASS = 0x00000010;
+
+@Deprecated('Use INITCOMMONCONTROLSEX_ICC.ICC_PROGRESS_CLASS instead')
 const ICC_PROGRESS_CLASS = 0x00000020;
+
+@Deprecated('Use INITCOMMONCONTROLSEX_ICC.ICC_HOTKEY_CLASS instead')
 const ICC_HOTKEY_CLASS = 0x00000040;
+
+@Deprecated('Use INITCOMMONCONTROLSEX_ICC.ICC_ANIMATE_CLASS instead')
 const ICC_ANIMATE_CLASS = 0x00000080;
+
+@Deprecated('Use INITCOMMONCONTROLSEX_ICC.ICC_WIN95_CLASSES instead')
 const ICC_WIN95_CLASSES = 0x000000FF;
+
+@Deprecated('Use INITCOMMONCONTROLSEX_ICC.ICC_DATE_CLASSES instead')
 const ICC_DATE_CLASSES = 0x00000100;
+
+@Deprecated('Use INITCOMMONCONTROLSEX_ICC.ICC_USEREX_CLASSES instead')
 const ICC_USEREX_CLASSES = 0x00000200;
+
+@Deprecated('Use INITCOMMONCONTROLSEX_ICC.ICC_COOL_CLASSES instead')
 const ICC_COOL_CLASSES = 0x00000400;
+
+@Deprecated('Use INITCOMMONCONTROLSEX_ICC.ICC_INTERNET_CLASSES instead')
 const ICC_INTERNET_CLASSES = 0x00000800;
+
+@Deprecated('Use INITCOMMONCONTROLSEX_ICC.ICC_PAGESCROLLER_CLASS instead')
 const ICC_PAGESCROLLER_CLASS = 0x00001000;
+
+@Deprecated('Use INITCOMMONCONTROLSEX_ICC.ICC_NATIVEFNTCTL_CLASS instead')
 const ICC_NATIVEFNTCTL_CLASS = 0x00002000;
+
+@Deprecated('Use INITCOMMONCONTROLSEX_ICC.ICC_STANDARD_CLASSES instead')
 const ICC_STANDARD_CLASSES = 0x00004000;
+
+@Deprecated('Use INITCOMMONCONTROLSEX_ICC.ICC_LINK_CLASS instead')
 const ICC_LINK_CLASS = 0x00008000;
 
 // File access types
+@Deprecated('Use FILE_ACCESS_RIGHTS.FILE_READ_DATA instead')
 const FILE_READ_DATA = 0x0001;
+
+@Deprecated('Use FILE_ACCESS_RIGHTS.FILE_LIST_DIRECTORY instead')
 const FILE_LIST_DIRECTORY = 0x0001;
+
+@Deprecated('Use FILE_ACCESS_RIGHTS.FILE_WRITE_DATA instead')
 const FILE_WRITE_DATA = 0x0002;
+
+@Deprecated('Use FILE_ACCESS_RIGHTS.FILE_ADD_FILE instead')
 const FILE_ADD_FILE = 0x0002;
+
+@Deprecated('Use FILE_ACCESS_RIGHTS.FILE_APPEND_DATA instead')
 const FILE_APPEND_DATA = 0x0004;
+
+@Deprecated('Use FILE_ACCESS_RIGHTS.FILE_ADD_SUBDIRECTORY instead')
 const FILE_ADD_SUBDIRECTORY = 0x0004;
+
+@Deprecated('Use FILE_ACCESS_RIGHTS.FILE_CREATE_PIPE_INSTANCE instead')
 const FILE_CREATE_PIPE_INSTANCE = 0x0004;
+
+@Deprecated('Use FILE_ACCESS_RIGHTS.FILE_READ_EA instead')
 const FILE_READ_EA = 0x0008;
+
+@Deprecated('Use FILE_ACCESS_RIGHTS.FILE_WRITE_EA instead')
 const FILE_WRITE_EA = 0x0010;
+
+@Deprecated('Use FILE_ACCESS_RIGHTS.FILE_EXECUTE instead')
 const FILE_EXECUTE = 0x0020;
+
+@Deprecated('Use FILE_ACCESS_RIGHTS.FILE_TRAVERSE instead')
 const FILE_TRAVERSE = 0x0020;
+
+@Deprecated('Use FILE_ACCESS_RIGHTS.FILE_DELETE_CHILD instead')
 const FILE_DELETE_CHILD = 0x0040;
+
+@Deprecated('Use FILE_ACCESS_RIGHTS.FILE_READ_ATTRIBUTES instead')
 const FILE_READ_ATTRIBUTES = 0x0080;
+
+@Deprecated('Use FILE_ACCESS_RIGHTS.FILE_WRITE_ATTRIBUTES instead')
 const FILE_WRITE_ATTRIBUTES = 0x0100;
+
+@Deprecated('Use FILE_ACCESS_RIGHTS.FILE_ALL_ACCESS instead')
 const FILE_ALL_ACCESS = STANDARD_RIGHTS_REQUIRED | SYNCHRONIZE | 0x1FF;
 
+@Deprecated('Use FILE_ACCESS_RIGHTS.FILE_GENERIC_READ instead')
 const FILE_GENERIC_READ = STANDARD_RIGHTS_READ |
     FILE_READ_DATA |
     FILE_READ_ATTRIBUTES |
     FILE_READ_EA |
     SYNCHRONIZE;
 
+@Deprecated('Use FILE_ACCESS_RIGHTS.FILE_GENERIC_WRITE instead')
 const FILE_GENERIC_WRITE = STANDARD_RIGHTS_WRITE |
     FILE_WRITE_DATA |
     FILE_WRITE_ATTRIBUTES |
@@ -1298,52 +2579,137 @@ const FILE_GENERIC_WRITE = STANDARD_RIGHTS_WRITE |
     FILE_APPEND_DATA |
     SYNCHRONIZE;
 
+@Deprecated('Use FILE_ACCESS_RIGHTS.FILE_GENERIC_EXECUTE instead')
 const FILE_GENERIC_EXECUTE =
     STANDARD_RIGHTS_EXECUTE | FILE_READ_ATTRIBUTES | FILE_EXECUTE | SYNCHRONIZE;
 
+@Deprecated('Use FILE_SHARE_MODE.FILE_SHARE_READ instead')
 const FILE_SHARE_READ = 0x00000001;
+
+@Deprecated('Use FILE_SHARE_MODE.FILE_SHARE_WRITE instead')
 const FILE_SHARE_WRITE = 0x00000002;
+
+@Deprecated('Use FILE_SHARE_MODE.FILE_SHARE_DELETE instead')
 const FILE_SHARE_DELETE = 0x00000004;
+
+@Deprecated('Use FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_READONLY instead')
 const FILE_ATTRIBUTE_READONLY = 0x00000001;
+
+@Deprecated('Use FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_HIDDEN instead')
 const FILE_ATTRIBUTE_HIDDEN = 0x00000002;
+
+@Deprecated('Use FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_SYSTEM instead')
 const FILE_ATTRIBUTE_SYSTEM = 0x00000004;
+
+@Deprecated('Use FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_DIRECTORY instead')
 const FILE_ATTRIBUTE_DIRECTORY = 0x00000010;
+
+@Deprecated('Use FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_ARCHIVE instead')
 const FILE_ATTRIBUTE_ARCHIVE = 0x00000020;
+
+@Deprecated('Use FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_DEVICE instead')
 const FILE_ATTRIBUTE_DEVICE = 0x00000040;
+
+@Deprecated('Use FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_NORMAL instead')
 const FILE_ATTRIBUTE_NORMAL = 0x00000080;
+
+@Deprecated('Use FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_TEMPORARY instead')
 const FILE_ATTRIBUTE_TEMPORARY = 0x00000100;
+
+@Deprecated('Use FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_SPARSE_FILE instead')
 const FILE_ATTRIBUTE_SPARSE_FILE = 0x00000200;
+
+@Deprecated(
+    'Use FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_REPARSE_POINT instead')
 const FILE_ATTRIBUTE_REPARSE_POINT = 0x00000400;
+
+@Deprecated('Use FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_COMPRESSED instead')
 const FILE_ATTRIBUTE_COMPRESSED = 0x00000800;
+
+@Deprecated('Use FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_OFFLINE instead')
 const FILE_ATTRIBUTE_OFFLINE = 0x00001000;
+
+@Deprecated(
+    'Use FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_NOT_CONTENT_INDEXED instead')
 const FILE_ATTRIBUTE_NOT_CONTENT_INDEXED = 0x00002000;
+
+@Deprecated('Use FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_ENCRYPTED instead')
 const FILE_ATTRIBUTE_ENCRYPTED = 0x00004000;
+
+@Deprecated(
+    'Use FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_INTEGRITY_STREAM instead')
 const FILE_ATTRIBUTE_INTEGRITY_STREAM = 0x00008000;
+
+@Deprecated('Use FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_VIRTUAL instead')
 const FILE_ATTRIBUTE_VIRTUAL = 0x00010000;
+
+@Deprecated(
+    'Use FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_NO_SCRUB_DATA instead')
 const FILE_ATTRIBUTE_NO_SCRUB_DATA = 0x00020000;
+
+@Deprecated('Use FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_EA instead')
 const FILE_ATTRIBUTE_EA = 0x00040000;
+
+@Deprecated('Use FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_PINNED instead')
 const FILE_ATTRIBUTE_PINNED = 0x00080000;
+
+@Deprecated('Use FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_UNPINNED instead')
 const FILE_ATTRIBUTE_UNPINNED = 0x00100000;
+
+@Deprecated(
+    'Use FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_RECALL_ON_OPEN instead')
 const FILE_ATTRIBUTE_RECALL_ON_OPEN = 0x00040000;
+
+@Deprecated(
+    'Use FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_RECALL_ON_DATA_ACCESS instead')
 const FILE_ATTRIBUTE_RECALL_ON_DATA_ACCESS = 0x00400000;
+
 const TREE_CONNECT_ATTRIBUTE_PRIVACY = 0x00004000;
 const TREE_CONNECT_ATTRIBUTE_INTEGRITY = 0x00008000;
 const TREE_CONNECT_ATTRIBUTE_GLOBAL = 0x00000004;
 const TREE_CONNECT_ATTRIBUTE_PINNED = 0x00000002;
+
 const FILE_ATTRIBUTE_STRICTLY_SEQUENTIAL = 0x20000000;
+
+@Deprecated('Use FILE_NOTIFY_CHANGE.FILE_NOTIFY_CHANGE_FILE_NAME instead')
 const FILE_NOTIFY_CHANGE_FILE_NAME = 0x00000001;
+
+@Deprecated('Use FILE_NOTIFY_CHANGE.FILE_NOTIFY_CHANGE_DIR_NAME instead')
 const FILE_NOTIFY_CHANGE_DIR_NAME = 0x00000002;
+
+@Deprecated('Use FILE_NOTIFY_CHANGE.FILE_NOTIFY_CHANGE_ATTRIBUTES instead')
 const FILE_NOTIFY_CHANGE_ATTRIBUTES = 0x00000004;
+
+@Deprecated('Use FILE_NOTIFY_CHANGE.FILE_NOTIFY_CHANGE_SIZE instead')
 const FILE_NOTIFY_CHANGE_SIZE = 0x00000008;
+
+@Deprecated('Use FILE_NOTIFY_CHANGE.FILE_NOTIFY_CHANGE_LAST_WRITE instead')
 const FILE_NOTIFY_CHANGE_LAST_WRITE = 0x00000010;
+
+@Deprecated('Use FILE_NOTIFY_CHANGE.FILE_NOTIFY_CHANGE_LAST_ACCESS instead')
 const FILE_NOTIFY_CHANGE_LAST_ACCESS = 0x00000020;
+
+@Deprecated('Use FILE_NOTIFY_CHANGE.FILE_NOTIFY_CHANGE_CREATION instead')
 const FILE_NOTIFY_CHANGE_CREATION = 0x00000040;
+
+@Deprecated('Use FILE_NOTIFY_CHANGE.FILE_NOTIFY_CHANGE_SECURITY instead')
 const FILE_NOTIFY_CHANGE_SECURITY = 0x00000100;
+
+@Deprecated('Use FILE_ACTION.FILE_ACTION_ADDED instead')
 const FILE_ACTION_ADDED = 0x00000001;
+
+@Deprecated('Use FILE_ACTION.FILE_ACTION_REMOVED instead')
 const FILE_ACTION_REMOVED = 0x00000002;
+
+@Deprecated('Use FILE_ACTION.FILE_ACTION_MODIFIED instead')
 const FILE_ACTION_MODIFIED = 0x00000003;
+
+@Deprecated('Use FILE_ACTION.FILE_ACTION_RENAMED_OLD_NAME instead')
 const FILE_ACTION_RENAMED_OLD_NAME = 0x00000004;
+
+@Deprecated('Use FILE_ACTION.FILE_ACTION_RENAMED_NEW_NAME instead')
 const FILE_ACTION_RENAMED_NEW_NAME = 0x00000005;
+
 const MAILSLOT_NO_MESSAGE = -1;
 const MAILSLOT_WAIT_FOREVER = -1;
 
@@ -1935,72 +3301,183 @@ const GUID_DEVINTERFACE_WRITEONCEDISK =
 // *** Kernel constants ***
 
 // memory management
-
+@Deprecated('Use PAGE_PROTECTION_FLAGS.PAGE_GRAPHICS_NOACCESS instead')
 const PAGE_GRAPHICS_NOACCESS = 0x0800;
+
+@Deprecated('Use PAGE_PROTECTION_FLAGS.PAGE_GRAPHICS_READONLY instead')
 const PAGE_GRAPHICS_READONLY = 0x1000;
+
+@Deprecated('Use PAGE_PROTECTION_FLAGS.PAGE_GRAPHICS_READWRITE instead')
 const PAGE_GRAPHICS_READWRITE = 0x2000;
+
+@Deprecated('Use PAGE_PROTECTION_FLAGS.PAGE_GRAPHICS_EXECUTE instead')
 const PAGE_GRAPHICS_EXECUTE = 0x4000;
+
+@Deprecated('Use PAGE_PROTECTION_FLAGS.PAGE_GRAPHICS_EXECUTE_READ instead')
 const PAGE_GRAPHICS_EXECUTE_READ = 0x8000;
+
+@Deprecated('Use PAGE_PROTECTION_FLAGS.PAGE_GRAPHICS_EXECUTE_READWRITE instead')
 const PAGE_GRAPHICS_EXECUTE_READWRITE = 0x10000;
+
+@Deprecated('Use PAGE_PROTECTION_FLAGS.PAGE_GRAPHICS_COHERENT instead')
 const PAGE_GRAPHICS_COHERENT = 0x20000;
+
+@Deprecated('Use PAGE_PROTECTION_FLAGS.PAGE_REVERT_TO_FILE_MAP instead')
 const PAGE_REVERT_TO_FILE_MAP = 0x80000000;
 
 // Memory constants
 const MEM_ROTATE = 0x00800000;
 const MEM_DIFFERENT_IMAGE_BASE_OK = 0x00800000;
 const MEM_4MB_PAGES = 0x80000000;
-const MEM_64K_PAGES = MEM_LARGE_PAGES | MEM_PHYSICAL;
+const MEM_64K_PAGES = VIRTUAL_ALLOCATION_TYPE.MEM_LARGE_PAGES | MEM_PHYSICAL;
 
 // Processor architectures
+@Deprecated('Use PROCESSOR_ARCHITECTURE.PROCESSOR_ARCHITECTURE_INTEL instead')
 const PROCESSOR_ARCHITECTURE_INTEL = 0;
+
+@Deprecated('Use PROCESSOR_ARCHITECTURE.PROCESSOR_ARCHITECTURE_MIPS instead')
 const PROCESSOR_ARCHITECTURE_MIPS = 1;
+
+@Deprecated('Use PROCESSOR_ARCHITECTURE.PROCESSOR_ARCHITECTURE_ALPHA instead')
 const PROCESSOR_ARCHITECTURE_ALPHA = 2;
+
+@Deprecated('Use PROCESSOR_ARCHITECTURE.PROCESSOR_ARCHITECTURE_PPC instead')
 const PROCESSOR_ARCHITECTURE_PPC = 3;
+
+@Deprecated('Use PROCESSOR_ARCHITECTURE.PROCESSOR_ARCHITECTURE_SHX instead')
 const PROCESSOR_ARCHITECTURE_SHX = 4;
+
+@Deprecated('Use PROCESSOR_ARCHITECTURE.PROCESSOR_ARCHITECTURE_ARM instead')
 const PROCESSOR_ARCHITECTURE_ARM = 5;
+
+@Deprecated('Use PROCESSOR_ARCHITECTURE.PROCESSOR_ARCHITECTURE_IA64 instead')
 const PROCESSOR_ARCHITECTURE_IA64 = 6;
+
+@Deprecated('Use PROCESSOR_ARCHITECTURE.PROCESSOR_ARCHITECTURE_ALPHA64 instead')
 const PROCESSOR_ARCHITECTURE_ALPHA64 = 7;
+
+@Deprecated('Use PROCESSOR_ARCHITECTURE.PROCESSOR_ARCHITECTURE_MSIL instead')
 const PROCESSOR_ARCHITECTURE_MSIL = 8;
+
+@Deprecated('Use PROCESSOR_ARCHITECTURE.PROCESSOR_ARCHITECTURE_AMD64 instead')
 const PROCESSOR_ARCHITECTURE_AMD64 = 9;
+
+@Deprecated(
+    'Use PROCESSOR_ARCHITECTURE.PROCESSOR_ARCHITECTURE_IA32_ON_WIN64 instead')
 const PROCESSOR_ARCHITECTURE_IA32_ON_WIN64 = 10;
+
+@Deprecated('Use PROCESSOR_ARCHITECTURE.PROCESSOR_ARCHITECTURE_NEUTRAL instead')
 const PROCESSOR_ARCHITECTURE_NEUTRAL = 11;
+
+@Deprecated('Use PROCESSOR_ARCHITECTURE.PROCESSOR_ARCHITECTURE_ARM64 instead')
 const PROCESSOR_ARCHITECTURE_ARM64 = 12;
+
+@Deprecated(
+    'Use PROCESSOR_ARCHITECTURE.PROCESSOR_ARCHITECTURE_ARM32_ON_WIN64 instead')
 const PROCESSOR_ARCHITECTURE_ARM32_ON_WIN64 = 13;
+
+@Deprecated(
+    'Use PROCESSOR_ARCHITECTURE.PROCESSOR_ARCHITECTURE_IA32_ON_ARM64 instead')
 const PROCESSOR_ARCHITECTURE_IA32_ON_ARM64 = 14;
+
+@Deprecated('Use PROCESSOR_ARCHITECTURE.PROCESSOR_ARCHITECTURE_UNKNOWN instead')
 const PROCESSOR_ARCHITECTURE_UNKNOWN = 0xFFFF;
 
 // Machine architectures
+@Deprecated('Use IMAGE_FILE_MACHINE.IMAGE_FILE_MACHINE_UNKNOWN instead')
 const IMAGE_FILE_MACHINE_UNKNOWN = 0;
+
+@Deprecated('Use IMAGE_FILE_MACHINE.IMAGE_FILE_MACHINE_TARGET_HOST instead')
 const IMAGE_FILE_MACHINE_TARGET_HOST = 0x0001;
+
+@Deprecated('Use IMAGE_FILE_MACHINE.IMAGE_FILE_MACHINE_I386 instead')
 const IMAGE_FILE_MACHINE_I386 = 0x014c;
+
+@Deprecated('Use IMAGE_FILE_MACHINE.IMAGE_FILE_MACHINE_R3000 instead')
 const IMAGE_FILE_MACHINE_R3000 = 0x0162;
+
+@Deprecated('Use IMAGE_FILE_MACHINE.IMAGE_FILE_MACHINE_R4000 instead')
 const IMAGE_FILE_MACHINE_R4000 = 0x0166;
+
+@Deprecated('Use IMAGE_FILE_MACHINE.IMAGE_FILE_MACHINE_R10000 instead')
 const IMAGE_FILE_MACHINE_R10000 = 0x0168;
+
+@Deprecated('Use IMAGE_FILE_MACHINE.IMAGE_FILE_MACHINE_WCEMIPSV2 instead')
 const IMAGE_FILE_MACHINE_WCEMIPSV2 = 0x0169;
+
+@Deprecated('Use IMAGE_FILE_MACHINE.IMAGE_FILE_MACHINE_ALPHA instead')
 const IMAGE_FILE_MACHINE_ALPHA = 0x0184;
+
+@Deprecated('Use IMAGE_FILE_MACHINE.IMAGE_FILE_MACHINE_SH3 instead')
 const IMAGE_FILE_MACHINE_SH3 = 0x01a2;
+
+@Deprecated('Use IMAGE_FILE_MACHINE.IMAGE_FILE_MACHINE_SH3DSP instead')
 const IMAGE_FILE_MACHINE_SH3DSP = 0x01a3;
+
+@Deprecated('Use IMAGE_FILE_MACHINE.IMAGE_FILE_MACHINE_SH3E instead')
 const IMAGE_FILE_MACHINE_SH3E = 0x01a4;
+
+@Deprecated('Use IMAGE_FILE_MACHINE.IMAGE_FILE_MACHINE_SH4 instead')
 const IMAGE_FILE_MACHINE_SH4 = 0x01a6;
+
+@Deprecated('Use IMAGE_FILE_MACHINE.IMAGE_FILE_MACHINE_SH5 instead')
 const IMAGE_FILE_MACHINE_SH5 = 0x01a8;
+
+@Deprecated('Use IMAGE_FILE_MACHINE.IMAGE_FILE_MACHINE_ARM instead')
 const IMAGE_FILE_MACHINE_ARM = 0x01c0;
+
+@Deprecated('Use IMAGE_FILE_MACHINE.IMAGE_FILE_MACHINE_THUMB instead')
 const IMAGE_FILE_MACHINE_THUMB = 0x01c2;
+
+@Deprecated('Use IMAGE_FILE_MACHINE.IMAGE_FILE_MACHINE_ARMNT instead')
 const IMAGE_FILE_MACHINE_ARMNT = 0x01c4;
+
+@Deprecated('Use IMAGE_FILE_MACHINE.IMAGE_FILE_MACHINE_AM33 instead')
 const IMAGE_FILE_MACHINE_AM33 = 0x01d3;
+
+@Deprecated('Use IMAGE_FILE_MACHINE.IMAGE_FILE_MACHINE_POWERPC instead')
 const IMAGE_FILE_MACHINE_POWERPC = 0x01F0;
+
+@Deprecated('Use IMAGE_FILE_MACHINE.IMAGE_FILE_MACHINE_POWERPCFP instead')
 const IMAGE_FILE_MACHINE_POWERPCFP = 0x01f1;
+
+@Deprecated('Use IMAGE_FILE_MACHINE.IMAGE_FILE_MACHINE_IA64 instead')
 const IMAGE_FILE_MACHINE_IA64 = 0x0200;
+
+@Deprecated('Use IMAGE_FILE_MACHINE.IMAGE_FILE_MACHINE_MIPS16 instead')
 const IMAGE_FILE_MACHINE_MIPS16 = 0x0266;
+
+@Deprecated('Use IMAGE_FILE_MACHINE.IMAGE_FILE_MACHINE_ALPHA64 instead')
 const IMAGE_FILE_MACHINE_ALPHA64 = 0x0284;
+
+@Deprecated('Use IMAGE_FILE_MACHINE.IMAGE_FILE_MACHINE_MIPSFPU instead')
 const IMAGE_FILE_MACHINE_MIPSFPU = 0x0366;
+
+@Deprecated('Use IMAGE_FILE_MACHINE.IMAGE_FILE_MACHINE_MIPSFPU16 instead')
 const IMAGE_FILE_MACHINE_MIPSFPU16 = 0x0466;
+
+@Deprecated('Use IMAGE_FILE_MACHINE.IMAGE_FILE_MACHINE_AXP64 instead')
 const IMAGE_FILE_MACHINE_AXP64 = IMAGE_FILE_MACHINE_ALPHA64;
+
+@Deprecated('Use IMAGE_FILE_MACHINE.IMAGE_FILE_MACHINE_TRICORE instead')
 const IMAGE_FILE_MACHINE_TRICORE = 0x0520;
+
+@Deprecated('Use IMAGE_FILE_MACHINE.IMAGE_FILE_MACHINE_CEF instead')
 const IMAGE_FILE_MACHINE_CEF = 0x0CEF;
+
+@Deprecated('Use IMAGE_FILE_MACHINE.IMAGE_FILE_MACHINE_EBC instead')
 const IMAGE_FILE_MACHINE_EBC = 0x0EBC;
+
+@Deprecated('Use IMAGE_FILE_MACHINE.IMAGE_FILE_MACHINE_AMD64 instead')
 const IMAGE_FILE_MACHINE_AMD64 = 0x8664;
+
+@Deprecated('Use IMAGE_FILE_MACHINE.IMAGE_FILE_MACHINE_M32R instead')
 const IMAGE_FILE_MACHINE_M32R = 0x9041;
+
+@Deprecated('Use IMAGE_FILE_MACHINE.IMAGE_FILE_MACHINE_ARM64 instead')
 const IMAGE_FILE_MACHINE_ARM64 = 0xAA64;
+
+@Deprecated('Use IMAGE_FILE_MACHINE.IMAGE_FILE_MACHINE_CEE instead')
 const IMAGE_FILE_MACHINE_CEE = 0xC0EE;
 
 // DISPID constants
@@ -2280,62 +3757,180 @@ class NLM_ENUM_NETWORK {
 }
 
 const PRODUCT_UNDEFINED = 0x00000000;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_ULTIMATE instead')
 const PRODUCT_ULTIMATE = 0x00000001;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_HOME_BASIC instead')
 const PRODUCT_HOME_BASIC = 0x00000002;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_HOME_PREMIUM instead')
 const PRODUCT_HOME_PREMIUM = 0x00000003;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_ENTERPRISE instead')
 const PRODUCT_ENTERPRISE = 0x00000004;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_HOME_BASIC_N instead')
 const PRODUCT_HOME_BASIC_N = 0x00000005;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_BUSINESS instead')
 const PRODUCT_BUSINESS = 0x00000006;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_STANDARD_SERVER instead')
 const PRODUCT_STANDARD_SERVER = 0x00000007;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_DATACENTER_SERVER instead')
 const PRODUCT_DATACENTER_SERVER = 0x00000008;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_SMALLBUSINESS_SERVER instead')
 const PRODUCT_SMALLBUSINESS_SERVER = 0x00000009;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_ENTERPRISE_SERVER instead')
 const PRODUCT_ENTERPRISE_SERVER = 0x0000000A;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_STARTER instead')
 const PRODUCT_STARTER = 0x0000000B;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_DATACENTER_SERVER_CORE instead')
 const PRODUCT_DATACENTER_SERVER_CORE = 0x0000000C;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_STANDARD_SERVER_CORE_ instead')
 const PRODUCT_STANDARD_SERVER_CORE = 0x0000000D;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_ENTERPRISE_SERVER_CORE instead')
 const PRODUCT_ENTERPRISE_SERVER_CORE = 0x0000000E;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_ENTERPRISE_SERVER_IA64 instead')
 const PRODUCT_ENTERPRISE_SERVER_IA64 = 0x0000000F;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_BUSINESS_N instead')
 const PRODUCT_BUSINESS_N = 0x00000010;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_WEB_SERVER instead')
 const PRODUCT_WEB_SERVER = 0x00000011;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_CLUSTER_SERVER instead')
 const PRODUCT_CLUSTER_SERVER = 0x00000012;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_HOME_SERVER instead')
 const PRODUCT_HOME_SERVER = 0x00000013;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_STORAGE_EXPRESS_SERVER instead')
 const PRODUCT_STORAGE_EXPRESS_SERVER = 0x00000014;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_STORAGE_STANDARD_SERVER instead')
 const PRODUCT_STORAGE_STANDARD_SERVER = 0x00000015;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_STORAGE_WORKGROUP_SERVER instead')
 const PRODUCT_STORAGE_WORKGROUP_SERVER = 0x00000016;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_STORAGE_ENTERPRISE_SERVER instead')
 const PRODUCT_STORAGE_ENTERPRISE_SERVER = 0x00000017;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_SERVER_FOR_SMALLBUSINESS instead')
 const PRODUCT_SERVER_FOR_SMALLBUSINESS = 0x00000018;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_SMALLBUSINESS_SERVER_PREMIUM instead')
 const PRODUCT_SMALLBUSINESS_SERVER_PREMIUM = 0x00000019;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_HOME_PREMIUM_N instead')
 const PRODUCT_HOME_PREMIUM_N = 0x0000001A;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_ENTERPRISE_N instead')
 const PRODUCT_ENTERPRISE_N = 0x0000001B;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_ULTIMATE_N instead')
 const PRODUCT_ULTIMATE_N = 0x0000001C;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_WEB_SERVER_CORE instead')
 const PRODUCT_WEB_SERVER_CORE = 0x0000001D;
+
+@Deprecated(
+    'Use OS_PRODUCT_TYPE.PRODUCT_MEDIUMBUSINESS_SERVER_MANAGEMENT instead')
 const PRODUCT_MEDIUMBUSINESS_SERVER_MANAGEMENT = 0x0000001E;
+
+@Deprecated(
+    'Use OS_PRODUCT_TYPE.PRODUCT_MEDIUMBUSINESS_SERVER_SECURITY instead')
 const PRODUCT_MEDIUMBUSINESS_SERVER_SECURITY = 0x0000001F;
+
+@Deprecated(
+    'Use OS_PRODUCT_TYPE.PRODUCT_MEDIUMBUSINESS_SERVER_MESSAGING instead')
 const PRODUCT_MEDIUMBUSINESS_SERVER_MESSAGING = 0x00000020;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_SERVER_FOUNDATION instead')
 const PRODUCT_SERVER_FOUNDATION = 0x00000021;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_HOME_PREMIUM_SERVER instead')
 const PRODUCT_HOME_PREMIUM_SERVER = 0x00000022;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_SERVER_FOR_SMALLBUSINESS_V instead')
 const PRODUCT_SERVER_FOR_SMALLBUSINESS_V = 0x00000023;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_STANDARD_SERVER_V instead')
 const PRODUCT_STANDARD_SERVER_V = 0x00000024;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_DATACENTER_SERVER_V instead')
 const PRODUCT_DATACENTER_SERVER_V = 0x00000025;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_ENTERPRISE_SERVER_V instead')
 const PRODUCT_ENTERPRISE_SERVER_V = 0x00000026;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_DATACENTER_SERVER_CORE_V instead')
 const PRODUCT_DATACENTER_SERVER_CORE_V = 0x00000027;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_STANDARD_SERVER_CORE_V instead')
 const PRODUCT_STANDARD_SERVER_CORE_V = 0x00000028;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_ENTERPRISE_SERVER_CORE_V instead')
 const PRODUCT_ENTERPRISE_SERVER_CORE_V = 0x00000029;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_HYPERV instead')
 const PRODUCT_HYPERV = 0x0000002A;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_STORAGE_EXPRESS_SERVER_CORE instead')
 const PRODUCT_STORAGE_EXPRESS_SERVER_CORE = 0x0000002B;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_STORAGE_STANDARD_SERVER_CORE instead')
 const PRODUCT_STORAGE_STANDARD_SERVER_CORE = 0x0000002C;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_STORAGE_WORKGROUP_SERVER_CORE instead')
 const PRODUCT_STORAGE_WORKGROUP_SERVER_CORE = 0x0000002D;
+
+@Deprecated(
+    'Use OS_PRODUCT_TYPE.PRODUCT_STORAGE_ENTERPRISE_SERVER_CORE instead')
 const PRODUCT_STORAGE_ENTERPRISE_SERVER_CORE = 0x0000002E;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_STARTER_N instead')
 const PRODUCT_STARTER_N = 0x0000002F;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_PROFESSIONAL instead')
 const PRODUCT_PROFESSIONAL = 0x00000030;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_PROFESSIONAL_N instead')
 const PRODUCT_PROFESSIONAL_N = 0x00000031;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_SB_SOLUTION_SERVER instead')
 const PRODUCT_SB_SOLUTION_SERVER = 0x00000032;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_SERVER_FOR_SB_SOLUTIONS instead')
 const PRODUCT_SERVER_FOR_SB_SOLUTIONS = 0x00000033;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_STANDARD_SERVER_SOLUTIONS instead')
 const PRODUCT_STANDARD_SERVER_SOLUTIONS = 0x00000034;
+
+@Deprecated(
+    'Use OS_PRODUCT_TYPE.PRODUCT_STANDARD_SERVER_SOLUTIONS_CORE instead')
 const PRODUCT_STANDARD_SERVER_SOLUTIONS_CORE = 0x00000035;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_SB_SOLUTION_SERVER_EM instead')
 const PRODUCT_SB_SOLUTION_SERVER_EM = 0x00000036;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_SERVER_FOR_SB_SOLUTIONS_EM instead')
 const PRODUCT_SERVER_FOR_SB_SOLUTIONS_EM = 0x00000037;
+
+@Deprecated('Use OS_PRODUCT_TYPE.PRODUCT_SOLUTION_EMBEDDEDSERVER instead')
 const PRODUCT_SOLUTION_EMBEDDEDSERVER = 0x00000038;
+
 const PRODUCT_SOLUTION_EMBEDDEDSERVER_CORE = 0x00000039;
 const PRODUCT_PROFESSIONAL_EMBEDDED = 0x0000003A;
 const PRODUCT_ESSENTIALBUSINESS_SERVER_MGMT = 0x0000003B;
@@ -2442,23 +4037,58 @@ const PRODUCT_XBOX_ERAOS = 0x000000C3;
 const PRODUCT_XBOX_DURANGOHOSTOS = 0x000000C4;
 const PRODUCT_XBOX_SCARLETTHOSTOS = 0x000000C5;
 const PRODUCT_UNLICENSED = 0xABCDABCD;
+
 const CRED_PRESERVE_CREDENTIAL_BLOB = 0x1;
+
+@Deprecated('Use CRED_FLAGS.CRED_FLAGS_PROMPT_NOW instead')
 const CRED_FLAGS_PROMPT_NOW = 0x2;
+
+@Deprecated('Use CRED_FLAGS.CRED_FLAGS_USERNAME_TARGET instead')
 const CRED_FLAGS_USERNAME_TARGET = 0x4;
+
+@Deprecated('Use CRED_TYPE.CRED_TYPE_GENERIC instead')
 const CRED_TYPE_GENERIC = 0x1;
+
+@Deprecated('Use CRED_TYPE.CRED_TYPE_DOMAIN_PASSWORD instead')
 const CRED_TYPE_DOMAIN_PASSWORD = 0x2;
+
+@Deprecated('Use CRED_TYPE.CRED_TYPE_DOMAIN_CERTIFICATE instead')
 const CRED_TYPE_DOMAIN_CERTIFICATE = 0x3;
+
+@Deprecated('Use CRED_TYPE.CRED_TYPE_DOMAIN_VISIBLE_PASSWORD instead')
 const CRED_TYPE_DOMAIN_VISIBLE_PASSWORD = 0x4;
+
+@Deprecated('Use CRED_TYPE.CRED_TYPE_GENERIC_CERTIFICATE instead')
 const CRED_TYPE_GENERIC_CERTIFICATE = 0x5;
+
+@Deprecated('Use CRED_TYPE.CRED_TYPE_DOMAIN_EXTENDED instead')
 const CRED_TYPE_DOMAIN_EXTENDED = 0x6;
+
+@Deprecated('Use CRED_TYPE.CRED_TYPE_MAXIMUM instead')
 const CRED_TYPE_MAXIMUM = 0x7;
+
+@Deprecated('Use CRED_TYPE.CRED_TYPE_MAXIMUM_EX instead')
 const CRED_TYPE_MAXIMUM_EX = CRED_TYPE_MAXIMUM + 1000;
+
+@Deprecated('Use CRED_PERSIST.CRED_PERSIST_SESSION instead')
 const CRED_PERSIST_SESSION = 0x1;
+
+@Deprecated('Use CRED_PERSIST.CRED_PERSIST_LOCAL_MACHINE instead')
 const CRED_PERSIST_LOCAL_MACHINE = 0x2;
+
+@Deprecated('Use CRED_PERSIST.CRED_PERSIST_ENTERPRISE instead')
 const CRED_PERSIST_ENTERPRISE = 0x3;
+
+@Deprecated('Use ENUM_PROCESS_MODULES_EX_FLAGS.LIST_MODULES_32BIT instead')
 const LIST_MODULES_32BIT = 0x01;
+
+@Deprecated('Use ENUM_PROCESS_MODULES_EX_FLAGS.LIST_MODULES_64BIT instead')
 const LIST_MODULES_64BIT = 0x02;
+
+@Deprecated('Use ENUM_PROCESS_MODULES_EX_FLAGS.LIST_MODULES_ALL instead')
 const LIST_MODULES_ALL = 0x03;
+
+@Deprecated('Use ENUM_PROCESS_MODULES_EX_FLAGS.LIST_MODULES_DEFAULT instead')
 const LIST_MODULES_DEFAULT = 0x0;
 
 // -----------------------------------------------------------------------------
@@ -2838,8 +4468,11 @@ final FSCTL_QUERY_RETRIEVAL_POINTERS =
     CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 14, METHOD_NEITHER, FILE_ANY_ACCESS);
 final FSCTL_GET_COMPRESSION =
     CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 15, METHOD_BUFFERED, FILE_ANY_ACCESS);
-final FSCTL_SET_COMPRESSION = CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 16,
-    METHOD_BUFFERED, FILE_READ_DATA | FILE_WRITE_DATA);
+final FSCTL_SET_COMPRESSION = CTL_CODE(
+    FILE_DEVICE_FILE_SYSTEM,
+    16,
+    METHOD_BUFFERED,
+    FILE_ACCESS_RIGHTS.FILE_READ_DATA | FILE_ACCESS_RIGHTS.FILE_WRITE_DATA);
 final FSCTL_SET_BOOTLOADER_ACCESSED =
     CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 19, METHOD_NEITHER, FILE_ANY_ACCESS);
 final FSCTL_MARK_AS_SYSTEM_HIVE = FSCTL_SET_BOOTLOADER_ACCESSED;
@@ -2883,8 +4516,8 @@ final FSCTL_DELETE_REPARSE_POINT =
     CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 43, METHOD_BUFFERED, FILE_SPECIAL_ACCESS);
 final FSCTL_ENUM_USN_DATA =
     CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 44, METHOD_NEITHER, FILE_ANY_ACCESS);
-final FSCTL_SECURITY_ID_CHECK =
-    CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 45, METHOD_NEITHER, FILE_READ_DATA);
+final FSCTL_SECURITY_ID_CHECK = CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 45,
+    METHOD_NEITHER, FILE_ACCESS_RIGHTS.FILE_READ_DATA);
 final FSCTL_READ_USN_JOURNAL =
     CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 46, METHOD_NEITHER, FILE_ANY_ACCESS);
 final FSCTL_SET_OBJECT_ID_EXTENDED =
@@ -2893,12 +4526,12 @@ final FSCTL_CREATE_OR_GET_OBJECT_ID =
     CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 48, METHOD_BUFFERED, FILE_ANY_ACCESS);
 final FSCTL_SET_SPARSE =
     CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 49, METHOD_BUFFERED, FILE_SPECIAL_ACCESS);
-final FSCTL_SET_ZERO_DATA =
-    CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 50, METHOD_BUFFERED, FILE_WRITE_DATA);
-final FSCTL_QUERY_ALLOCATED_RANGES =
-    CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 51, METHOD_NEITHER, FILE_READ_DATA);
-final FSCTL_ENABLE_UPGRADE =
-    CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 52, METHOD_BUFFERED, FILE_WRITE_DATA);
+final FSCTL_SET_ZERO_DATA = CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 50,
+    METHOD_BUFFERED, FILE_ACCESS_RIGHTS.FILE_WRITE_DATA);
+final FSCTL_QUERY_ALLOCATED_RANGES = CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 51,
+    METHOD_NEITHER, FILE_ACCESS_RIGHTS.FILE_READ_DATA);
+final FSCTL_ENABLE_UPGRADE = CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 52,
+    METHOD_BUFFERED, FILE_ACCESS_RIGHTS.FILE_WRITE_DATA);
 final FSCTL_SET_ENCRYPTION =
     CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 53, METHOD_NEITHER, FILE_ANY_ACCESS);
 final FSCTL_ENCRYPTION_FSCTL_IO =
@@ -2923,52 +4556,55 @@ final FSCTL_MARK_HANDLE =
     CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 63, METHOD_BUFFERED, FILE_ANY_ACCESS);
 final FSCTL_SIS_COPYFILE =
     CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 64, METHOD_BUFFERED, FILE_ANY_ACCESS);
-final FSCTL_SIS_LINK_FILES = CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 65,
-    METHOD_BUFFERED, FILE_READ_DATA | FILE_WRITE_DATA);
+final FSCTL_SIS_LINK_FILES = CTL_CODE(
+    FILE_DEVICE_FILE_SYSTEM,
+    65,
+    METHOD_BUFFERED,
+    FILE_ACCESS_RIGHTS.FILE_READ_DATA | FILE_ACCESS_RIGHTS.FILE_WRITE_DATA);
 final FSCTL_RECALL_FILE =
     CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 69, METHOD_NEITHER, FILE_ANY_ACCESS);
-final FSCTL_READ_FROM_PLEX =
-    CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 71, METHOD_OUT_DIRECT, FILE_READ_DATA);
+final FSCTL_READ_FROM_PLEX = CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 71,
+    METHOD_OUT_DIRECT, FILE_ACCESS_RIGHTS.FILE_READ_DATA);
 final FSCTL_FILE_PREFETCH =
     CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 72, METHOD_BUFFERED, FILE_SPECIAL_ACCESS);
-final FSCTL_MAKE_MEDIA_COMPATIBLE =
-    CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 76, METHOD_BUFFERED, FILE_WRITE_DATA);
-final FSCTL_SET_DEFECT_MANAGEMENT =
-    CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 77, METHOD_BUFFERED, FILE_WRITE_DATA);
+final FSCTL_MAKE_MEDIA_COMPATIBLE = CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 76,
+    METHOD_BUFFERED, FILE_ACCESS_RIGHTS.FILE_WRITE_DATA);
+final FSCTL_SET_DEFECT_MANAGEMENT = CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 77,
+    METHOD_BUFFERED, FILE_ACCESS_RIGHTS.FILE_WRITE_DATA);
 final FSCTL_QUERY_SPARING_INFO =
     CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 78, METHOD_BUFFERED, FILE_ANY_ACCESS);
 final FSCTL_QUERY_ON_DISK_VOLUME_INFO =
     CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 79, METHOD_BUFFERED, FILE_ANY_ACCESS);
 final FSCTL_SET_VOLUME_COMPRESSION_STATE =
     CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 80, METHOD_BUFFERED, FILE_SPECIAL_ACCESS);
-final FSCTL_TXFS_MODIFY_RM =
-    CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 81, METHOD_BUFFERED, FILE_WRITE_DATA);
-final FSCTL_TXFS_QUERY_RM_INFORMATION =
-    CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 82, METHOD_BUFFERED, FILE_READ_DATA);
-final FSCTL_TXFS_ROLLFORWARD_REDO =
-    CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 84, METHOD_BUFFERED, FILE_WRITE_DATA);
-final FSCTL_TXFS_ROLLFORWARD_UNDO =
-    CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 85, METHOD_BUFFERED, FILE_WRITE_DATA);
-final FSCTL_TXFS_START_RM =
-    CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 86, METHOD_BUFFERED, FILE_WRITE_DATA);
-final FSCTL_TXFS_SHUTDOWN_RM =
-    CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 87, METHOD_BUFFERED, FILE_WRITE_DATA);
-final FSCTL_TXFS_READ_BACKUP_INFORMATION =
-    CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 88, METHOD_BUFFERED, FILE_READ_DATA);
-final FSCTL_TXFS_WRITE_BACKUP_INFORMATION =
-    CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 89, METHOD_BUFFERED, FILE_WRITE_DATA);
-final FSCTL_TXFS_CREATE_SECONDARY_RM =
-    CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 90, METHOD_BUFFERED, FILE_WRITE_DATA);
-final FSCTL_TXFS_GET_METADATA_INFO =
-    CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 91, METHOD_BUFFERED, FILE_READ_DATA);
-final FSCTL_TXFS_GET_TRANSACTED_VERSION =
-    CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 92, METHOD_BUFFERED, FILE_READ_DATA);
-final FSCTL_TXFS_SAVEPOINT_INFORMATION =
-    CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 94, METHOD_BUFFERED, FILE_WRITE_DATA);
-final FSCTL_TXFS_CREATE_MINIVERSION =
-    CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 95, METHOD_BUFFERED, FILE_WRITE_DATA);
-final FSCTL_TXFS_TRANSACTION_ACTIVE =
-    CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 99, METHOD_BUFFERED, FILE_READ_DATA);
+final FSCTL_TXFS_MODIFY_RM = CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 81,
+    METHOD_BUFFERED, FILE_ACCESS_RIGHTS.FILE_WRITE_DATA);
+final FSCTL_TXFS_QUERY_RM_INFORMATION = CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 82,
+    METHOD_BUFFERED, FILE_ACCESS_RIGHTS.FILE_READ_DATA);
+final FSCTL_TXFS_ROLLFORWARD_REDO = CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 84,
+    METHOD_BUFFERED, FILE_ACCESS_RIGHTS.FILE_WRITE_DATA);
+final FSCTL_TXFS_ROLLFORWARD_UNDO = CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 85,
+    METHOD_BUFFERED, FILE_ACCESS_RIGHTS.FILE_WRITE_DATA);
+final FSCTL_TXFS_START_RM = CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 86,
+    METHOD_BUFFERED, FILE_ACCESS_RIGHTS.FILE_WRITE_DATA);
+final FSCTL_TXFS_SHUTDOWN_RM = CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 87,
+    METHOD_BUFFERED, FILE_ACCESS_RIGHTS.FILE_WRITE_DATA);
+final FSCTL_TXFS_READ_BACKUP_INFORMATION = CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 88,
+    METHOD_BUFFERED, FILE_ACCESS_RIGHTS.FILE_READ_DATA);
+final FSCTL_TXFS_WRITE_BACKUP_INFORMATION = CTL_CODE(FILE_DEVICE_FILE_SYSTEM,
+    89, METHOD_BUFFERED, FILE_ACCESS_RIGHTS.FILE_WRITE_DATA);
+final FSCTL_TXFS_CREATE_SECONDARY_RM = CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 90,
+    METHOD_BUFFERED, FILE_ACCESS_RIGHTS.FILE_WRITE_DATA);
+final FSCTL_TXFS_GET_METADATA_INFO = CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 91,
+    METHOD_BUFFERED, FILE_ACCESS_RIGHTS.FILE_READ_DATA);
+final FSCTL_TXFS_GET_TRANSACTED_VERSION = CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 92,
+    METHOD_BUFFERED, FILE_ACCESS_RIGHTS.FILE_READ_DATA);
+final FSCTL_TXFS_SAVEPOINT_INFORMATION = CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 94,
+    METHOD_BUFFERED, FILE_ACCESS_RIGHTS.FILE_WRITE_DATA);
+final FSCTL_TXFS_CREATE_MINIVERSION = CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 95,
+    METHOD_BUFFERED, FILE_ACCESS_RIGHTS.FILE_WRITE_DATA);
+final FSCTL_TXFS_TRANSACTION_ACTIVE = CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 99,
+    METHOD_BUFFERED, FILE_ACCESS_RIGHTS.FILE_READ_DATA);
 final FSCTL_SET_ZERO_ON_DEALLOCATION = CTL_CODE(
     FILE_DEVICE_FILE_SYSTEM, 101, METHOD_BUFFERED, FILE_SPECIAL_ACCESS);
 final FSCTL_SET_REPAIR =
@@ -2987,10 +4623,13 @@ final FSCTL_SET_SHORT_NAME_BEHAVIOR =
     CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 109, METHOD_BUFFERED, FILE_ANY_ACCESS);
 final FSCTL_DFSR_SET_GHOST_HANDLE_STATE =
     CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 110, METHOD_BUFFERED, FILE_ANY_ACCESS);
-final FSCTL_TXFS_LIST_TRANSACTION_LOCKED_FILES =
-    CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 120, METHOD_BUFFERED, FILE_READ_DATA);
-final FSCTL_TXFS_LIST_TRANSACTIONS =
-    CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 121, METHOD_BUFFERED, FILE_READ_DATA);
+final FSCTL_TXFS_LIST_TRANSACTION_LOCKED_FILES = CTL_CODE(
+    FILE_DEVICE_FILE_SYSTEM,
+    120,
+    METHOD_BUFFERED,
+    FILE_ACCESS_RIGHTS.FILE_READ_DATA);
+final FSCTL_TXFS_LIST_TRANSACTIONS = CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 121,
+    METHOD_BUFFERED, FILE_ACCESS_RIGHTS.FILE_READ_DATA);
 final FSCTL_QUERY_PAGEFILE_ENCRYPTION =
     CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 122, METHOD_BUFFERED, FILE_ANY_ACCESS);
 final FSCTL_RESET_VOLUME_ALLOCATION_HINTS =
@@ -3007,8 +4646,8 @@ final FSCTL_TXFS_WRITE_BACKUP_INFORMATION2 =
     CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 128, METHOD_BUFFERED, FILE_ANY_ACCESS);
 final FSCTL_FILE_TYPE_NOTIFICATION =
     CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 129, METHOD_BUFFERED, FILE_ANY_ACCESS);
-final FSCTL_FILE_LEVEL_TRIM =
-    CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 130, METHOD_BUFFERED, FILE_WRITE_DATA);
+final FSCTL_FILE_LEVEL_TRIM = CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 130,
+    METHOD_BUFFERED, FILE_ACCESS_RIGHTS.FILE_WRITE_DATA);
 final FSCTL_GET_BOOT_AREA_INFO =
     CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 140, METHOD_BUFFERED, FILE_ANY_ACCESS);
 final FSCTL_GET_RETRIEVAL_POINTER_BASE =
@@ -3049,16 +4688,22 @@ final FSCTL_IS_VOLUME_OWNED_BYCSVFS =
     CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 158, METHOD_BUFFERED, FILE_ANY_ACCESS);
 final FSCTL_GET_INTEGRITY_INFORMATION =
     CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 159, METHOD_BUFFERED, FILE_ANY_ACCESS);
-final FSCTL_SET_INTEGRITY_INFORMATION = CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 160,
-    METHOD_BUFFERED, FILE_READ_DATA | FILE_WRITE_DATA);
+final FSCTL_SET_INTEGRITY_INFORMATION = CTL_CODE(
+    FILE_DEVICE_FILE_SYSTEM,
+    160,
+    METHOD_BUFFERED,
+    FILE_ACCESS_RIGHTS.FILE_READ_DATA | FILE_ACCESS_RIGHTS.FILE_WRITE_DATA);
 final FSCTL_QUERY_FILE_REGIONS =
     CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 161, METHOD_BUFFERED, FILE_ANY_ACCESS);
 final FSCTL_RKF_INTERNAL =
     CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 171, METHOD_NEITHER, FILE_ANY_ACCESS);
 final FSCTL_SCRUB_DATA =
     CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 172, METHOD_BUFFERED, FILE_ANY_ACCESS);
-final FSCTL_REPAIR_COPIES = CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 173,
-    METHOD_BUFFERED, FILE_READ_DATA | FILE_WRITE_DATA);
+final FSCTL_REPAIR_COPIES = CTL_CODE(
+    FILE_DEVICE_FILE_SYSTEM,
+    173,
+    METHOD_BUFFERED,
+    FILE_ACCESS_RIGHTS.FILE_READ_DATA | FILE_ACCESS_RIGHTS.FILE_WRITE_DATA);
 final FSCTL_DISABLE_LOCAL_BUFFERING =
     CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 174, METHOD_BUFFERED, FILE_ANY_ACCESS);
 final FSCTL_CSV_MGMT_LOCK =
@@ -3101,16 +4746,16 @@ final FSCTL_ENUM_EXTERNAL_BACKING =
     CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 198, METHOD_BUFFERED, FILE_ANY_ACCESS);
 final FSCTL_ENUM_OVERLAY =
     CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 199, METHOD_NEITHER, FILE_ANY_ACCESS);
-final FSCTL_ADD_OVERLAY =
-    CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 204, METHOD_BUFFERED, FILE_WRITE_DATA);
-final FSCTL_REMOVE_OVERLAY =
-    CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 205, METHOD_BUFFERED, FILE_WRITE_DATA);
-final FSCTL_UPDATE_OVERLAY =
-    CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 206, METHOD_BUFFERED, FILE_WRITE_DATA);
+final FSCTL_ADD_OVERLAY = CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 204,
+    METHOD_BUFFERED, FILE_ACCESS_RIGHTS.FILE_WRITE_DATA);
+final FSCTL_REMOVE_OVERLAY = CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 205,
+    METHOD_BUFFERED, FILE_ACCESS_RIGHTS.FILE_WRITE_DATA);
+final FSCTL_UPDATE_OVERLAY = CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 206,
+    METHOD_BUFFERED, FILE_ACCESS_RIGHTS.FILE_WRITE_DATA);
 final FSCTL_SHUFFLE_FILE = CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 208,
     METHOD_BUFFERED, FILE_READ_ACCESS | FILE_WRITE_ACCESS);
-final FSCTL_DUPLICATE_EXTENTS_TO_FILE =
-    CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 209, METHOD_BUFFERED, FILE_WRITE_DATA);
+final FSCTL_DUPLICATE_EXTENTS_TO_FILE = CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 209,
+    METHOD_BUFFERED, FILE_ACCESS_RIGHTS.FILE_WRITE_DATA);
 final FSCTL_SPARSE_OVERALLOCATE = CTL_CODE(
     FILE_DEVICE_FILE_SYSTEM, 211, METHOD_BUFFERED, FILE_SPECIAL_ACCESS);
 final FSCTL_STORAGE_QOS_CONTROL =
@@ -3181,8 +4826,8 @@ final FSCTL_SET_REFS_SMR_VOLUME_GC_PARAMETERS =
     CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 248, METHOD_BUFFERED, FILE_ANY_ACCESS);
 final FSCTL_SET_REFS_FILE_STRICTLY_SEQUENTIAL =
     CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 249, METHOD_BUFFERED, FILE_ANY_ACCESS);
-final FSCTL_DUPLICATE_EXTENTS_TO_FILE_EX =
-    CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 250, METHOD_BUFFERED, FILE_WRITE_DATA);
+final FSCTL_DUPLICATE_EXTENTS_TO_FILE_EX = CTL_CODE(FILE_DEVICE_FILE_SYSTEM,
+    250, METHOD_BUFFERED, FILE_ACCESS_RIGHTS.FILE_WRITE_DATA);
 final FSCTL_QUERY_BAD_RANGES =
     CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 251, METHOD_BUFFERED, FILE_ANY_ACCESS);
 final FSCTL_SET_DAX_ALLOC_ALIGNMENT_HINT =

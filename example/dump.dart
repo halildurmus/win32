@@ -74,7 +74,7 @@ bool isWindowsOnArm(int hProcess) {
 
   try {
     IsWow64Process2(hProcess, pProcessMachine, pNativeMachine);
-    return pNativeMachine.value == IMAGE_FILE_MACHINE_ARM64;
+    return pNativeMachine.value == IMAGE_FILE_MACHINE.IMAGE_FILE_MACHINE_ARM64;
   } finally {
     free(pProcessMachine);
     free(pNativeMachine);

@@ -16,20 +16,20 @@ void main() {
       NULL,
       message,
       title,
-      MB_ICONWARNING | // Warning
-          MB_CANCELTRYCONTINUE | // Action button
-          MB_DEFBUTTON2 // Second button is the default
+      MESSAGEBOX_STYLE.MB_ICONWARNING | // Warning
+          MESSAGEBOX_STYLE.MB_CANCELTRYCONTINUE | // Action button
+          MESSAGEBOX_STYLE.MB_DEFBUTTON2 // Second button is the default
       );
 
   free(message);
   free(title);
 
   switch (result) {
-    case IDCANCEL:
+    case MESSAGEBOX_RESULT.IDCANCEL:
       print('Cancel pressed');
-    case IDTRYAGAIN:
+    case MESSAGEBOX_RESULT.IDTRYAGAIN:
       print('Try Again pressed');
-    case IDCONTINUE:
+    case MESSAGEBOX_RESULT.IDCONTINUE:
       print('Continue pressed');
   }
 }

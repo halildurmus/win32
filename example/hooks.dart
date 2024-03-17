@@ -68,8 +68,9 @@ int lowlevelKeyboardHookProc(int code, int wParam, int lParam) {
 
     if ((kbs.ref.flags & LLKHF_INJECTED) == 0) {
       final input = calloc<INPUT>();
-      input.ref.type = INPUT_KEYBOARD;
-      input.ref.ki.dwFlags = (wParam == WM_KEYDOWN) ? 0 : KEYEVENTF_KEYUP;
+      input.ref.type = INPUT_TYPE.INPUT_KEYBOARD;
+      input.ref.ki.dwFlags =
+          wParam == WM_KEYDOWN ? 0 : KEYBD_EVENT_FLAGS.KEYEVENTF_KEYUP;
 
       // Demonstrate that we're successfully intercepting codes
       if (wParam == WM_KEYUP && kbs.ref.vkCode > 0 && kbs.ref.vkCode < 128) {
@@ -93,12 +94,13 @@ int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
       final textMetrics = calloc<TEXTMETRIC>();
 
       // Get maximum size of client area
-      cxClientMax = GetSystemMetrics(SM_CXMAXIMIZED);
-      cyClientMax = GetSystemMetrics(SM_CYMAXIMIZED);
+      cxClientMax = GetSystemMetrics(SYSTEM_METRICS_INDEX.SM_CXMAXIMIZED);
+      cyClientMax = GetSystemMetrics(SYSTEM_METRICS_INDEX.SM_CYMAXIMIZED);
 
       hdc = GetDC(hWnd);
 
-      SelectObject(hdc, GetStockObject(SYSTEM_FIXED_FONT));
+      SelectObject(
+          hdc, GetStockObject(GET_STOCK_OBJECT_FLAGS.SYSTEM_FIXED_FONT));
       GetTextMetrics(hdc, textMetrics);
       cxChar = textMetrics.ref.tmAveCharWidth;
       cyChar = textMetrics.ref.tmHeight;
@@ -144,8 +146,9 @@ int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
       final ps = calloc<PAINTSTRUCT>();
       final hdc = BeginPaint(hWnd, ps);
 
-      SelectObject(hdc, GetStockObject(SYSTEM_FIXED_FONT));
-      SetBkMode(hdc, TRANSPARENT);
+      SelectObject(
+          hdc, GetStockObject(GET_STOCK_OBJECT_FLAGS.SYSTEM_FIXED_FONT));
+      SetBkMode(hdc, BACKGROUND_MODE.TRANSPARENT);
       TextOut(hdc, 0, 0, pszTop, szTop.length);
       TextOut(hdc, 0, 0, pszUnd, szUnd.length);
 
@@ -198,7 +201,8 @@ void winMain(int hInstance, List<String> args, int nShowCmd) {
     exceptionalReturn: 0,
   );
 
-  keyHook = SetWindowsHookEx(WH_KEYBOARD_LL, lpfn.nativeFunction, NULL, 0);
+  keyHook = SetWindowsHookEx(
+      WINDOWS_HOOK_ID.WH_KEYBOARD_LL, lpfn.nativeFunction, NULL, 0);
 
   final lpfnWndProc = NativeCallable<WNDPROC>.isolateLocal(
     mainWindowProc,
@@ -206,19 +210,19 @@ void winMain(int hInstance, List<String> args, int nShowCmd) {
   );
 
   final wc = calloc<WNDCLASS>()
-    ..ref.style = CS_HREDRAW | CS_VREDRAW
+    ..ref.style = WNDCLASS_STYLES.CS_HREDRAW | WNDCLASS_STYLES.CS_VREDRAW
     ..ref.lpfnWndProc = lpfnWndProc.nativeFunction
     ..ref.hInstance = hInstance
     ..ref.lpszClassName = className
     ..ref.hIcon = LoadIcon(NULL, IDI_APPLICATION)
     ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
-    ..ref.hbrBackground = GetStockObject(WHITE_BRUSH);
+    ..ref.hbrBackground = GetStockObject(GET_STOCK_OBJECT_FLAGS.WHITE_BRUSH);
   RegisterClass(wc);
 
   final hWnd = CreateWindow(
       className, // Window class
       windowCaption, // Window caption
-      WS_OVERLAPPEDWINDOW, // Window style
+      WINDOW_STYLE.WS_OVERLAPPEDWINDOW, // Window style
 
       // Size and position
       CW_USEDEFAULT,

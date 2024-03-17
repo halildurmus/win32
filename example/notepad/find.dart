@@ -26,7 +26,9 @@ class NotepadFind {
   int showFindDialog(int hwnd) {
     find.ref.lStructSize = sizeOf<FINDREPLACE>();
     find.ref.hwndOwner = hwnd;
-    find.ref.Flags = FR_HIDEUPDOWN | FR_HIDEMATCHCASE | FR_HIDEWHOLEWORD;
+    find.ref.Flags = FINDREPLACE_FLAGS.FR_HIDEUPDOWN |
+        FINDREPLACE_FLAGS.FR_HIDEMATCHCASE |
+        FINDREPLACE_FLAGS.FR_HIDEWHOLEWORD;
     find.ref.lpstrFindWhat = szFindText;
     find.ref.wFindWhatLen = MAX_STRING_LEN;
 
@@ -36,7 +38,9 @@ class NotepadFind {
   int showReplaceDialog(int hwnd) {
     find.ref.lStructSize = sizeOf<FINDREPLACE>();
     find.ref.hwndOwner = hwnd;
-    find.ref.Flags = FR_HIDEUPDOWN | FR_HIDEMATCHCASE | FR_HIDEWHOLEWORD;
+    find.ref.Flags = FINDREPLACE_FLAGS.FR_HIDEUPDOWN |
+        FINDREPLACE_FLAGS.FR_HIDEMATCHCASE |
+        FINDREPLACE_FLAGS.FR_HIDEWHOLEWORD;
     find.ref.lpstrFindWhat = szFindText;
     find.ref.lpstrReplaceWith = szReplText;
     find.ref.wFindWhatLen = MAX_STRING_LEN;

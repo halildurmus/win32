@@ -30,7 +30,7 @@ int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
     case WM_PAINT:
       final ps = calloc<PAINTSTRUCT>();
       final hdc = BeginPaint(hWnd, ps);
-      final hPen = CreatePen(PS_SOLID, 4, RGB(64, 64, 64));
+      final hPen = CreatePen(PEN_STYLE.PS_SOLID, 4, RGB(64, 64, 64));
       final hPrevPen = SelectObject(hdc, hPen);
 
       Ellipse(hdc, 0, 0, 499, 499);
@@ -41,7 +41,14 @@ int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
       final msg = TEXT('What a strange window!');
 
       GetClientRect(hWnd, rect);
-      DrawText(hdc, msg, -1, rect, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+      DrawText(
+          hdc,
+          msg,
+          -1,
+          rect,
+          DRAW_TEXT_FORMAT.DT_CENTER |
+              DRAW_TEXT_FORMAT.DT_VCENTER |
+              DRAW_TEXT_FORMAT.DT_SINGLELINE);
 
       EndPaint(hWnd, ps);
 
@@ -66,12 +73,12 @@ void winMain(int hInstance, List<String> args, int nShowCmd) {
   );
 
   final wc = calloc<WNDCLASS>()
-    ..ref.style = CS_HREDRAW | CS_VREDRAW
+    ..ref.style = WNDCLASS_STYLES.CS_HREDRAW | WNDCLASS_STYLES.CS_VREDRAW
     ..ref.lpfnWndProc = lpfnWndProc.nativeFunction
     ..ref.hInstance = hInstance
     ..ref.lpszClassName = className
     ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
-    ..ref.hbrBackground = GetStockObject(WHITE_BRUSH);
+    ..ref.hbrBackground = GetStockObject(GET_STOCK_OBJECT_FLAGS.WHITE_BRUSH);
   RegisterClass(wc);
 
   // Create the window.
@@ -79,7 +86,7 @@ void winMain(int hInstance, List<String> args, int nShowCmd) {
       0, // Optional window styles.
       className, // Window class
       nullptr, // Window caption
-      WS_BORDER, // Window style
+      WINDOW_STYLE.WS_BORDER, // Window style
 
       // Size and position
       CW_USEDEFAULT,
@@ -93,7 +100,7 @@ void winMain(int hInstance, List<String> args, int nShowCmd) {
       );
 
   // Remove the title bar
-  SetWindowLongPtr(hWnd, GWL_STYLE, 0);
+  SetWindowLongPtr(hWnd, WINDOW_LONG_PTR_INDEX.GWL_STYLE, 0);
 
   if (hWnd == 0) {
     final error = GetLastError();

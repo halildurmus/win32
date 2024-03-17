@@ -35,8 +35,8 @@ class Dispatcher {
         throw WindowsException(hr);
       }
 
-      hr = CoCreateInstance(
-          clsid, nullptr, CLSCTX_INPROC_SERVER, pIID_IDispatch, ppv.cast());
+      hr = CoCreateInstance(clsid, nullptr, CLSCTX.CLSCTX_INPROC_SERVER,
+          pIID_IDispatch, ppv.cast());
       if (FAILED(hr)) {
         throw WindowsException(hr);
       }
@@ -96,7 +96,7 @@ class Dispatcher {
 
     try {
       final hr = disp.invoke(dispid, IID_NULL, LOCALE_SYSTEM_DEFAULT,
-          DISPATCH_METHOD, args, nullptr, nullptr, nullptr);
+          DISPATCH_FLAGS.DISPATCH_METHOD, args, nullptr, nullptr, nullptr);
       if (FAILED(hr)) {
         throw WindowsException(hr);
       } else {

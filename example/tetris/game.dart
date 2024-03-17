@@ -22,26 +22,28 @@ class Game {
   /// Handles player's key press
   bool keyPress(int vk) {
     // When pausing, ignore keys other than PAUSE and ENTER
-    if (vk != VK_PAUSE && vk != VK_RETURN && isPaused) return false;
+    if (vk != VIRTUAL_KEY.VK_PAUSE && vk != VIRTUAL_KEY.VK_RETURN && isPaused) {
+      return false;
+    }
 
     switch (vk) {
-      case VK_UP:
+      case VIRTUAL_KEY.VK_UP:
         level.rotate();
-      case VK_DOWN:
+      case VIRTUAL_KEY.VK_DOWN:
         level.move(0, -1);
-      case VK_LEFT:
+      case VIRTUAL_KEY.VK_LEFT:
         level.move(-1, 0);
-      case VK_RIGHT:
+      case VIRTUAL_KEY.VK_RIGHT:
         level.move(1, 0);
-      case VK_SPACE:
+      case VIRTUAL_KEY.VK_SPACE:
         level.rotate();
-      case VK_PAUSE:
+      case VIRTUAL_KEY.VK_PAUSE:
         if (isPaused) {
           resumeGame();
         } else {
           pauseGame();
         }
-      case VK_RETURN:
+      case VIRTUAL_KEY.VK_RETURN:
         // You can only restart on game over
         if (isGameOver) {
           restart();

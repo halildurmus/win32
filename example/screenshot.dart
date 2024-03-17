@@ -62,13 +62,13 @@ class Display {
   int _createScreenshot(int hdcScreen) {
     final hdcMemDC = CreateCompatibleDC(hdcScreen);
 
-    final width = GetDeviceCaps(hdcScreen, HORZRES);
-    final height = GetDeviceCaps(hdcScreen, VERTRES);
+    final width = GetDeviceCaps(hdcScreen, GET_DEVICE_CAPS_INDEX.HORZRES);
+    final height = GetDeviceCaps(hdcScreen, GET_DEVICE_CAPS_INDEX.VERTRES);
 
     try {
       final hbmScreen = CreateCompatibleBitmap(hdcScreen, width, height);
       SelectObject(hdcMemDC, hbmScreen);
-      BitBlt(hdcMemDC, 0, 0, width, height, hdcScreen, 0, 0, SRCCOPY);
+      BitBlt(hdcMemDC, 0, 0, width, height, hdcScreen, 0, 0, ROP_CODE.SRCCOPY);
       return hbmScreen;
     } finally {
       DeleteObject(hdcMemDC);
@@ -107,7 +107,7 @@ class BmpFile {
       ..ref.biHeight = bmpScreen.ref.bmHeight
       ..ref.biPlanes = 1
       ..ref.biBitCount = 32
-      ..ref.biCompression = BI_RGB;
+      ..ref.biCompression = BI_COMPRESSION.BI_RGB;
 
     final dwBmpSize =
         ((bmpScreen.ref.bmWidth * bitmapInfoHeader.ref.biBitCount + 31) /
@@ -125,7 +125,7 @@ class BmpFile {
       bmpScreen.ref.bmHeight,
       lpBitmap,
       bitmapInfoHeader.cast(),
-      DIB_RGB_COLORS,
+      DIB_USAGE.DIB_RGB_COLORS,
     );
 
     final bitmapFileHeader = arena<BITMAPFILEHEADER>();
@@ -147,11 +147,11 @@ class BmpFile {
   ) {
     final hFile = CreateFile(
       fileName.toNativeUtf16(allocator: arena),
-      GENERIC_WRITE,
+      GENERIC_ACCESS_RIGHTS.GENERIC_WRITE,
       0,
       nullptr,
-      CREATE_ALWAYS,
-      FILE_ATTRIBUTE_NORMAL,
+      FILE_CREATION_DISPOSITION.CREATE_ALWAYS,
+      FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_NORMAL,
       NULL,
     );
 

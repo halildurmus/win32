@@ -23,7 +23,7 @@ dependencies:
   test: ^1.25.2
 
   # Windows metadata for automatically generating API signatures.
-  winmd: ^4.1.0
+  winmd: ^5.0.0
 
   # Win32 itself
-  win32: ^5.2.0
+  win32: ^5.3.0
