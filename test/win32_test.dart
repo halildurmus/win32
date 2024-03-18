@@ -67,7 +67,7 @@ void main() {
     check(typeDef3).isNotNull();
 
     check(typeDef1).equals(typeDef2);
-    check(typeDef1).not(it()..equals(typeDef3));
+    check(typeDef1).not((it) => it.equals(typeDef3));
   });
 
   test('Searching for a non-existent typeDef returns null', () {

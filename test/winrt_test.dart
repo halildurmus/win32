@@ -77,7 +77,7 @@ void main() {
     final typeDef = winrtScope.findTypeDef('Windows.UI.Xaml.Controls.Button');
     check(typeDef).isNotNull();
     final interfaces = typeDef!.interfaces;
-    check(interfaces.map((e) => e.name)).which(it()
+    check(interfaces.map((e) => e.name)).which((it) => it
       ..length.equals(2)
       ..contains('Windows.UI.Xaml.Controls.IButton')
       ..contains('Windows.UI.Xaml.Controls.IButtonWithFlyout'));
@@ -376,8 +376,10 @@ void main() {
     for (final method in methods) {
       final overloadName = method
           .attributeAsString('Windows.Foundation.Metadata.OverloadAttribute');
-      check(overloadName).anyOf(
-          [it()..equals('PeriodAsFullString'), it()..equals('PeriodAsString')]);
+      check(overloadName).anyOf([
+        (it) => it.equals('PeriodAsFullString'),
+        (it) => it.equals('PeriodAsString')
+      ]);
     }
   });
 

@@ -89,7 +89,8 @@ void main() {
         .equals('Windows.Win32.Foundation.Metadata.Architecture');
     check(archAttrParam.value).isA<int>();
     // Depending on which one we get first, we'll either get ARM or X86/X64
-    check(archAttrParam.value).anyOf([it()..equals(0x01), it()..equals(0x06)]);
+    check(archAttrParam.value)
+        .anyOf([(it) => it.equals(0x01), (it) => it.equals(0x06)]);
   });
 
   test('Multiple custom attributes with same name', () {
@@ -105,11 +106,11 @@ void main() {
     final [firstAttr, secondAttr] = invalidHandleValues.toList();
     check(firstAttr.parameters.first.type.baseType).equals(BaseType.int64Type);
     check(firstAttr.parameters.first.value)
-        .anyOf([it()..equals(-1), it()..equals(0)]);
+        .anyOf([(it) => it.equals(-1), (it) => it.equals(0)]);
 
     check(secondAttr.parameters.first.type.baseType).equals(BaseType.int64Type);
     check(secondAttr.parameters.first.value)
-        .anyOf([it()..equals(-1), it()..equals(0)]);
+        .anyOf([(it) => it.equals(-1), (it) => it.equals(0)]);
   });
 
   test('Find a matching attribute', () {
