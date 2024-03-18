@@ -4,7 +4,7 @@
 
 /// Represents different types of metadata used by this package.
 enum MetadataType {
-  /// Windows Wdk metadata.
+  /// Windows WDK metadata.
   ///
   /// This metadata type is can be found in the package
   /// `Microsoft.Windows.WDK.Win32Metadata` on `NuGet.org`.

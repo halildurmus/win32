@@ -91,7 +91,7 @@ void main() async {
 }
 ```
 
-### Wdk
+### Windows Driver Kit (WDK)
 
 Load the `NtQuerySystemInformation` function and print out its parameters and
 return type.
@@ -100,10 +100,10 @@ return type.
 import 'package:winmd/winmd.dart';
 
 void main() async {
-  // Win32 metadata also needs to be loaded to resolve references from Wdk
+  // Win32 metadata also needs to be loaded to resolve references from WDK
   // metadata
   await MetadataStore.loadWin32Metadata();
-  // Load the Wdk metadata
+  // Load the WDK metadata
   final scope = await MetadataStore.loadWdkMetadata();
 
   // Find a namespace

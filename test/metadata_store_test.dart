@@ -44,7 +44,7 @@ void main() {
       MetadataStore.close();
     });
 
-    test('can cache Wdk, Win32, and WinRT metadata', () async {
+    test('can cache WDK, Win32, and WinRT metadata', () async {
       check(MetadataStore.scopeCache.length).equals(0);
       check(MetadataStore.cacheInfo).equals('[]');
 
@@ -108,8 +108,8 @@ void main() {
     });
 
     test(
-        'appropriate response to searching for a Wdk type without loading the '
-        'Wdk metadata first', () {
+        'appropriate response to searching for a WDK type without loading the '
+        'WDK metadata first', () {
       check(() => MetadataStore.getScopeForType(
               'Windows.Wdk.System.SystemInformation.SYSTEM_INFORMATION_CLASS'))
           .throws<WinmdException>()
@@ -117,7 +117,7 @@ void main() {
           .equals(
             'Metadata scope for '
             '`Windows.Wdk.System.SystemInformation.SYSTEM_INFORMATION_CLASS` '
-            'could not be found. Please ensure that you load the Wdk metadata '
+            'could not be found. Please ensure that you load the WDK metadata '
             'first by calling `loadWdkMetadata()`.',
           );
     });

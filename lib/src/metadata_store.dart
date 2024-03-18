@@ -16,7 +16,7 @@ import 'scope.dart';
 import 'type_def.dart';
 
 /// A class that manages the caching and retrieval of Windows Metadata (.winmd)
-/// files and provides methods to obtain metadata scopes for Wdk, Win32, and
+/// files and provides methods to obtain metadata scopes for WDK, Win32, and
 /// WinRT.
 ///
 /// Use this class to obtain a reference of a scope without creating unnecessary
@@ -77,7 +77,7 @@ abstract final class MetadataStore {
   /// `Windows`.
   ///
   /// Throws a [WinmdException] if the metadata scope is not found or if it
-  /// requires loading the Wdk, Win32, or WinRT metadata first.
+  /// requires loading the WDK, Win32, or WinRT metadata first.
   static Scope getScopeForType(String typeName) {
     if (typeName.isEmpty) {
       throw ArgumentError.value(typeName, 'typeName', 'Must not be empty.');
@@ -96,7 +96,7 @@ abstract final class MetadataStore {
 
       throw WinmdException(
         'Metadata scope for `$typeName` could not be found. Please ensure '
-        'that you load the Wdk metadata first by calling '
+        'that you load the WDK metadata first by calling '
         '`loadWdkMetadata()`.',
       );
     }
@@ -219,7 +219,7 @@ abstract final class MetadataStore {
     return path;
   }
 
-  /// Loads Wdk metadata.
+  /// Loads WDK metadata.
   ///
   /// If the metadata is already downloaded, it loads it from the local cache.
   ///
@@ -231,7 +231,7 @@ abstract final class MetadataStore {
     return loadMetadataFromFile(metadataFile);
   }
 
-  /// Loads Wdk metadata.
+  /// Loads WDK metadata.
   ///
   /// If [version] is not specified, it loads the latest available version.
   ///

@@ -73,10 +73,10 @@
 ///   await MetadataStore.loadWinRTMetadata(version: '10.0.22621.755');
 /// ```
 ///
-/// To retrieve the latest Wdk metadata scope, you can use the following code:
+/// To retrieve the latest WDK metadata scope, you can use the following code:
 ///
 /// ```dart
-/// // Win32 metadata also needs to be loaded to resolve references from Wdk
+/// // Win32 metadata also needs to be loaded to resolve references from WDK
 /// // metadata
 /// await MetadataStore.loadWin32Metadata();
 ///

@@ -2,16 +2,16 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// Parse the Windows Metadata for a Wdk type and grab some interesting
-// information about it.
+// Parse the Windows Metadata for a Windows Driver Kit (WDK) type and grab some
+// interesting information about it.
 
 import 'package:winmd/winmd.dart';
 
 void main() async {
-  // Win32 metadata also needs to be loaded to resolve references from Wdk
+  // Win32 metadata also needs to be loaded to resolve references from WDK
   // metadata
   await MetadataStore.loadWin32Metadata();
-  // Load the Wdk metadata
+  // Load the WDK metadata
   final scope = await MetadataStore.loadWdkMetadata();
 
   // Find a namespace

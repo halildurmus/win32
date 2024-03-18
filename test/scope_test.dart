@@ -38,7 +38,7 @@ void main() {
       check(winrtScope.toString()).equals('Windows.winmd');
     });
 
-    test('executable kind is as expected for Wdk metadata', () {
+    test('executable kind is as expected for WDK metadata', () {
       final peKind = wdkScope.executableKind;
       check(peKind.imageType).equals(ImageType.i386);
       check(peKind.isILOnly).isTrue();
