@@ -219,6 +219,20 @@ abstract final class MetadataStore {
     return path;
   }
 
+  static Scope? _tryToLoadMetadataFromFile(
+      MetadataType metadataType, String version) {
+    final MetadataType(:assetName, :packageName) = metadataType;
+    final package = LocalStorage.getPackage(packageName, version: version);
+    if (package != null) {
+      final metadataFile = File('${package.path}\\$assetName');
+      if (metadataFile.existsSync()) {
+        return loadMetadataFromFile(metadataFile);
+      }
+    }
+
+    return null;
+  }
+
   /// Loads WDK metadata.
   ///
   /// If the metadata is already downloaded, it loads it from the local cache.
@@ -241,18 +255,21 @@ abstract final class MetadataStore {
   static Future<Scope> loadWdkMetadata({String? version}) async {
     if (!_isInitialized) initialize();
 
-    final MetadataType(:assetName, :packageName) = MetadataType.wdk;
+    final MetadataType(:packageName) = MetadataType.wdk;
+
+    // If the metadata is already downloaded, load it.
+    if (version != null) {
+      final scope = _tryToLoadMetadataFromFile(MetadataType.wdk, version);
+      if (scope != null) return scope;
+    }
+
     final downloadVersion = version ??
         await _nugetClient!
             .getLatestPackageVersion(packageName, includePrerelease: true);
 
     // If the metadata is already downloaded, load it.
-    final package =
-        LocalStorage.getPackage(packageName, version: downloadVersion);
-    if (package != null) {
-      final metadataFile = File('${package.path}\\$assetName');
-      if (metadataFile.existsSync()) return loadMetadataFromFile(metadataFile);
-    }
+    final scope = _tryToLoadMetadataFromFile(MetadataType.wdk, downloadVersion);
+    if (scope != null) return scope;
 
     // The lock file is used to prevent multiple processes from downloading the
     // same package at the same time during the test run.
@@ -291,18 +308,22 @@ abstract final class MetadataStore {
   static Future<Scope> loadWin32Metadata({String? version}) async {
     if (!_isInitialized) initialize();
 
-    final MetadataType(:assetName, :packageName) = MetadataType.win32;
+    final MetadataType(:packageName) = MetadataType.win32;
+
+    // If the metadata is already downloaded, load it.
+    if (version != null) {
+      final scope = _tryToLoadMetadataFromFile(MetadataType.win32, version);
+      if (scope != null) return scope;
+    }
+
     final downloadVersion = version ??
         await _nugetClient!
             .getLatestPackageVersion(packageName, includePrerelease: true);
 
     // If the metadata is already downloaded, load it.
-    final package =
-        LocalStorage.getPackage(packageName, version: downloadVersion);
-    if (package != null) {
-      final metadataFile = File('${package.path}\\$assetName');
-      if (metadataFile.existsSync()) return loadMetadataFromFile(metadataFile);
-    }
+    final scope =
+        _tryToLoadMetadataFromFile(MetadataType.win32, downloadVersion);
+    if (scope != null) return scope;
 
     // The lock file is used to prevent multiple processes from downloading the
     // same package at the same time during the test run.
@@ -350,17 +371,21 @@ abstract final class MetadataStore {
   static Future<Scope> loadWinRTMetadata({String? version}) async {
     if (!_isInitialized) initialize();
 
-    final MetadataType(:assetName, :packageName) = MetadataType.winrt;
+    final MetadataType(:packageName) = MetadataType.winrt;
+
+    // If the metadata is already downloaded, load it.
+    if (version != null) {
+      final scope = _tryToLoadMetadataFromFile(MetadataType.winrt, version);
+      if (scope != null) return scope;
+    }
+
     final downloadVersion =
         version ?? await _nugetClient!.getLatestPackageVersion(packageName);
 
     // If the metadata is already downloaded, load it.
-    final package =
-        LocalStorage.getPackage(packageName, version: downloadVersion);
-    if (package != null) {
-      final metadataFile = File('${package.path}\\$assetName');
-      if (metadataFile.existsSync()) return loadMetadataFromFile(metadataFile);
-    }
+    final scope =
+        _tryToLoadMetadataFromFile(MetadataType.winrt, downloadVersion);
+    if (scope != null) return scope;
 
     // The lock file is used to prevent multiple processes from downloading the
     // same package at the same time during the test run.
