@@ -5,6 +5,7 @@
 import 'dart:io';
 
 import 'package:ffi/ffi.dart';
+import 'package:path/path.dart' as p;
 import 'package:win32/win32.dart';
 
 import 'exception.dart';
@@ -14,9 +15,11 @@ import 'nuget_package.dart';
 ///
 /// This class is used to store downloaded NuGet packages locally. The packages
 /// are stored in the user's local app data directory, under a subdirectory
-/// named `winmd`.
+/// named [directoryName].
 abstract final class LocalStorage {
-  static const _directoryName = 'winmd';
+  /// The name of the local storage directory.
+  static const directoryName = 'winmd';
+
   static final _directory = Directory(path);
 
   /// Path to the local storage directory.
@@ -25,15 +28,21 @@ abstract final class LocalStorage {
   /// Retrieves or creates the local storage directory.
   static String _getDirectory() {
     final szPath = wsalloc(MAX_PATH);
-    final result = SHGetFolderPath(NULL, CSIDL_LOCAL_APPDATA, NULL, 0, szPath);
-    if (result != S_OK) {
-      throw const WinmdException('Failed to retrieve a valid directory.');
-    }
 
-    final appDataPath = szPath.toDartString();
-    final winmdDir = Directory('$appDataPath\\$_directoryName')
-      ..createSync(recursive: true);
-    return winmdDir.path;
+    try {
+      final result =
+          SHGetFolderPath(NULL, CSIDL_LOCAL_APPDATA, NULL, 0, szPath);
+      if (result != S_OK) {
+        throw const WinmdException('Failed to retrieve a valid directory.');
+      }
+
+      final appDataPath = szPath.toDartString();
+      final winmdDir = Directory(p.join(appDataPath, directoryName))
+        ..createSync(recursive: true);
+      return winmdDir.path;
+    } finally {
+      free(szPath);
+    }
   }
 
   /// Determines whether the local storage directory at [path] exists.
