@@ -19,23 +19,30 @@ import 'type_identifier.dart';
 
 /// A single parameter within a custom attribute.
 class CustomAttributeParameter {
+  const CustomAttributeParameter(this.type, this.value);
+
   final TypeIdentifier type;
   final Object value;
-
-  const CustomAttributeParameter(this.type, this.value);
 }
 
 /// A custom (named) attribute.
 class CustomAttribute extends TokenObject {
+  CustomAttribute(
+    super.scope,
+    super.token,
+    this.modifiedObjectToken,
+    this.memberRef,
+    this.constructor,
+    this.attributeType,
+    this.signatureBlob,
+  );
+
   final int attributeType;
   final int modifiedObjectToken;
   final Uint8List signatureBlob;
   final MemberRef memberRef;
   final TypeDef constructor;
   late final List<CustomAttributeParameter> parameters = _getParameters();
-
-  CustomAttribute(super.scope, super.token, this.modifiedObjectToken,
-      this.memberRef, this.constructor, this.attributeType, this.signatureBlob);
 
   /// Creates a custom attribute object from a provided token.
   factory CustomAttribute.fromToken(Scope scope, int token) {

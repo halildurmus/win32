@@ -26,13 +26,13 @@ const stringBufferSize = 256;
 /// underlying Windows metadata database. The high byte of the token describes
 /// its type.
 abstract class TokenObject {
+  const TokenObject(this.scope, this.token);
+
   /// The [Scope] that contains this token.
   final Scope scope;
 
   /// A unique identifier for this token in the metadata file.
   final int token;
-
-  const TokenObject(this.scope, this.token);
 
   IMetaDataImport2 get reader => scope.reader;
 

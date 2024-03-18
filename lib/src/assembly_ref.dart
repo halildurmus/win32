@@ -18,10 +18,10 @@ import 'token_object.dart';
 /// in the Windows.Foundation assembly. The linkage is established through an
 /// AssemblyRef entry.
 class AssemblyRef extends TokenObject {
+  const AssemblyRef(super.scope, super.token, this.name, this.version);
+
   final String name;
   final String version;
-
-  const AssemblyRef(super.scope, super.token, this.name, this.version);
 
   /// Creates a assembly ref object from a provided token.
   factory AssemblyRef.fromToken(Scope scope, int token) {

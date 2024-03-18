@@ -8,9 +8,9 @@ import 'models/models.dart';
 
 /// Contains values that describe method implementation features.
 class MethodImplementationFeatures {
-  final int _implFlags;
-
   const MethodImplementationFeatures(this._implFlags);
+
+  final int _implFlags;
 
   /// Returns information about the code type used in implementing the method.
   CodeType get codeType =>

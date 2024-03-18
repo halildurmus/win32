@@ -26,6 +26,19 @@ class Method extends TokenObject
         CustomAttributesMixin,
         GenericParamsMixin,
         SupportedArchitecturesMixin {
+  Method(
+      super.scope,
+      super.token,
+      this._parentToken,
+      this.name,
+      this._attributes,
+      this.signatureBlob,
+      this.relativeVirtualAddress,
+      this.implFlags) {
+    _parseParameterNames();
+    _parseSignatureBlob();
+  }
+
   /// Any implementation flags defined by the method metadata.
   int implFlags;
 
@@ -45,19 +58,6 @@ class Method extends TokenObject
 
   int _attributes;
   int _parentToken;
-
-  Method(
-      super.scope,
-      super.token,
-      this._parentToken,
-      this.name,
-      this._attributes,
-      this.signatureBlob,
-      this.relativeVirtualAddress,
-      this.implFlags) {
-    _parseParameterNames();
-    _parseSignatureBlob();
-  }
 
   /// Creates a method object from a provided token.
   factory Method.fromToken(Scope scope, int token) {
@@ -345,7 +345,9 @@ class Method extends TokenObject
 }
 
 /// Represents the various array-passing styles in WinRT.
-/// See https://learn.microsoft.com/uwp/winrt-cref/winrt-type-system#array-parameters
+///
+/// See
+/// <https://learn.microsoft.com/uwp/winrt-cref/winrt-type-system#array-parameters>.
 enum _ArrayPassingStyle {
   /// Used when the caller provides an array for the method to fill, up to a
   /// maximum array size.

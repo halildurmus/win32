@@ -22,11 +22,15 @@ import 'type_def.dart';
 /// single constraint. Generic constraints are described in §II.22.21 of the
 /// ECMA-335 spec.
 class GenericParamConstraint extends TokenObject with CustomAttributesMixin {
+  GenericParamConstraint(
+    super.scope,
+    super.token,
+    this._parentToken,
+    this._constraintType,
+  );
+
   final int _constraintType;
   final int _parentToken;
-
-  GenericParamConstraint(
-      super.scope, super.token, this._parentToken, this._constraintType);
 
   /// Creates a generic parameter constraint object from a provided token.
   factory GenericParamConstraint.fromToken(Scope scope, int token) {

@@ -19,6 +19,21 @@ import 'type_identifier.dart';
 
 /// A property object.
 class Property extends TokenObject with CustomAttributesMixin {
+  Property(
+    super.scope,
+    super.token,
+    this._parentToken,
+    this.name,
+    this._attributes,
+    this.signatureBlob,
+    this.typeIdentifier,
+    this.baseType,
+    this.defaultValue,
+    this._setterToken,
+    this._getterToken,
+    this.otherMethodTokens,
+  );
+
   final BaseType baseType;
   final Uint8List defaultValue;
   final String name;
@@ -30,20 +45,6 @@ class Property extends TokenObject with CustomAttributesMixin {
   final int _getterToken;
   final int _parentToken;
   final int _setterToken;
-
-  Property(
-      super.scope,
-      super.token,
-      this._parentToken,
-      this.name,
-      this._attributes,
-      this.signatureBlob,
-      this.typeIdentifier,
-      this.baseType,
-      this.defaultValue,
-      this._setterToken,
-      this._getterToken,
-      this.otherMethodTokens);
 
   /// Creates a property object from a provided token.
   factory Property.fromToken(Scope scope, int token) {

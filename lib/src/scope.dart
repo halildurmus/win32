@@ -22,6 +22,22 @@ import 'type_def.dart';
 /// Rather than being created directly, you should obtain a scope from a
 /// [MetadataStore], which caches scopes to avoid duplication.
 class Scope {
+  Scope(this.reader, this.assemblyImport) {
+    using((Arena arena) {
+      final szName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
+      final pchName = arena<ULONG>();
+      final pmvid = arena<GUID>();
+
+      final hr = reader.getScopeProps(szName, stringBufferSize, pchName, pmvid);
+      if (FAILED(hr)) throw COMException(hr);
+
+      name = szName.toDartString();
+      guid = pmvid.ref.toString();
+    });
+
+    _populateTypeDefs();
+  }
+
   late final String guid;
   late final String name;
   final IMetaDataImport2 reader;
@@ -38,22 +54,6 @@ class Scope {
 
   final _typedefsByName = <String, List<TypeDef>>{};
   final _typedefs = <int, TypeDef>{};
-
-  Scope(this.reader, this.assemblyImport) {
-    using((Arena arena) {
-      final szName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
-      final pchName = arena<ULONG>();
-      final pmvid = arena<GUID>();
-
-      final hr = reader.getScopeProps(szName, stringBufferSize, pchName, pmvid);
-      if (FAILED(hr)) throw COMException(hr);
-
-      name = szName.toDartString();
-      guid = pmvid.ref.toString();
-    });
-
-    _populateTypeDefs();
-  }
 
   @override
   String toString() => name;

@@ -11,9 +11,6 @@ import 'models/models.dart';
 
 /// A representation of the assembly file's portable executable format.
 class PEKind {
-  late final int _machine;
-  late final int _peKind;
-
   PEKind(IMetaDataImport2 reader) {
     using((Arena arena) {
       final pdwPEKind = arena<DWORD>();
@@ -29,6 +26,9 @@ class PEKind {
       }
     });
   }
+
+  late final int _machine;
+  late final int _peKind;
 
   /// Returns false if the file is not in portable executable (PE) file format.
   bool get isPEFile => _peKind != 0;

@@ -29,6 +29,17 @@ class TypeDef extends TokenObject
         CustomAttributesMixin,
         GenericParamsMixin,
         SupportedArchitecturesMixin {
+  /// Create a typedef.
+  ///
+  /// Typically, typedefs should be obtained from a [Scope] object rather
+  /// than being created directly.
+  TypeDef(super.scope,
+      [super.token = 0,
+      this.name = '',
+      this._attributes = 0,
+      this.baseTypeToken = 0,
+      this.typeSpec]);
+
   final int baseTypeToken;
   final String name;
   final TypeIdentifier? typeSpec;
@@ -40,17 +51,6 @@ class TypeDef extends TokenObject
   late final List<TypeDef> interfaces = _getInterfaces();
   late final List<Method> methods = _getMethods();
   late final List<Property> properties = _getProperties();
-
-  /// Create a typedef.
-  ///
-  /// Typically, typedefs should be obtained from a [Scope] object rather
-  /// than being created directly.
-  TypeDef(super.scope,
-      [super.token = 0,
-      this.name = '',
-      this._attributes = 0,
-      this.baseTypeToken = 0,
-      this.typeSpec]);
 
   /// The token for the class within which this typedef is nested, if there is
   /// one.
@@ -592,7 +592,7 @@ class TypeDef extends TokenObject
   /// [typeVisibility] property to determine the visibility of the type,
   /// including whether it is nested.
   late final enclosingClass = _enclosingClassToken != null
-      ? TypeDef.fromToken(scope, _enclosingClassToken!)
+      ? TypeDef.fromToken(scope, _enclosingClassToken)
       : null;
 
   /// Gets a named custom attribute that is stored as a GUID.
@@ -608,7 +608,7 @@ class TypeDef extends TokenObject
       if (SUCCEEDED(hr)) {
         final blob = ppData.value;
         if (pcbData.value > 0) {
-          final returnValue = blob.elementAt(2).cast<GUID>();
+          final returnValue = (blob + 2).cast<GUID>();
           return returnValue.ref.toString();
         }
       }

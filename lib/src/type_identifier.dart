@@ -9,6 +9,15 @@ import 'type_def.dart';
 ///
 /// Return types use the same class, although they have no name.
 class TypeIdentifier {
+  const TypeIdentifier(
+    this.baseType, {
+    this.name = '',
+    this.type,
+    this.arrayDimensions,
+    this.genericParameterSequence,
+    this.typeArg,
+  });
+
   /// The dimensions of the contained array, if there is one.
   final List<int>? arrayDimensions;
 
@@ -38,15 +47,6 @@ class TypeIdentifier {
   /// `Pointer` with a [typeArg] of `Pointer`, which in turn has a [typeArg] of
   /// `MYSTRUCT`).
   final TypeIdentifier? typeArg;
-
-  const TypeIdentifier(
-    this.baseType, {
-    this.name = '',
-    this.type,
-    this.arrayDimensions,
-    this.genericParameterSequence,
-    this.typeArg,
-  });
 
   TypeIdentifier copyWith({
     List<int>? arrayDimensions,

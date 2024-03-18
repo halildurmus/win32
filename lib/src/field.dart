@@ -21,6 +21,18 @@ import 'type_identifier.dart';
 ///
 /// Fields are typed memory locations that store the data of a program.
 class Field extends TokenObject with CustomAttributesMixin {
+  Field(
+    super.scope,
+    super.token,
+    this._parentToken,
+    this.name,
+    this.value,
+    this.typeIdentifier,
+    this.fieldType,
+    this._attribs,
+    this.signatureBlob,
+  );
+
   final BaseType fieldType;
   final String name;
   final Uint8List signatureBlob;
@@ -29,9 +41,6 @@ class Field extends TokenObject with CustomAttributesMixin {
 
   final int _attribs;
   final int _parentToken;
-
-  Field(super.scope, super.token, this._parentToken, this.name, this.value,
-      this.typeIdentifier, this.fieldType, this._attribs, this.signatureBlob);
 
   /// Creates a field object from a provided token.
   factory Field.fromToken(Scope scope, int token) {

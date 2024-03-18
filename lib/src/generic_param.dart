@@ -18,9 +18,9 @@ import 'type_def.dart';
 
 /// Identifies special constraints on a generic parameter.
 class SpecialConstraints {
-  final int _attributes;
-
   const SpecialConstraints(this._attributes);
+
+  final int _attributes;
 
   /// Indicates that no constraint applies to the Type parameter.
   bool get noConstraints =>

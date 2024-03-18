@@ -14,9 +14,9 @@ import 'token_object.dart';
 
 /// A module reference.
 class ModuleRef extends TokenObject with CustomAttributesMixin {
-  final String name;
-
   ModuleRef(super.scope, super.token, this.name);
+
+  final String name;
 
   /// Creates a module object from a provided token.
   factory ModuleRef.fromToken(Scope scope, int token) {

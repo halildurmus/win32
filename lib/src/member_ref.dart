@@ -19,12 +19,17 @@ import 'type_aliases.dart';
 /// defined in another module or assembly. It represents either a `MethodRef` or
 /// a `FieldRef`.
 class MemberRef extends TokenObject {
+  const MemberRef(
+    super.scope,
+    super.token,
+    this.referencedToken,
+    this.name,
+    this.signatureBlob,
+  );
+
   final int referencedToken;
   final String name;
   final Uint8List signatureBlob;
-
-  const MemberRef(super.scope, super.token, this.referencedToken, this.name,
-      this.signatureBlob);
 
   /// Creates a module object from a provided token.
   factory MemberRef.fromToken(Scope scope, int token) {

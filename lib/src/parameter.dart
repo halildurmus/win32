@@ -18,6 +18,17 @@ import 'type_identifier.dart';
 
 /// A parameter or return type.
 class Parameter extends TokenObject with CustomAttributesMixin {
+  Parameter(
+    super.scope,
+    super.token,
+    this._methodToken,
+    this.sequence,
+    this.attributes,
+    this.typeIdentifier,
+    this.name,
+    this.signatureBlob,
+  );
+
   String name;
   final int sequence;
   final Uint8List signatureBlob;
@@ -25,9 +36,6 @@ class Parameter extends TokenObject with CustomAttributesMixin {
 
   int attributes;
   final int _methodToken;
-
-  Parameter(super.scope, super.token, this._methodToken, this.sequence,
-      this.attributes, this.typeIdentifier, this.name, this.signatureBlob);
 
   /// Creates a parameter object from a provided token.
   factory Parameter.fromToken(Scope scope, int token) {

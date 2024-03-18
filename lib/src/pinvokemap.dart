@@ -14,14 +14,20 @@ import 'type_aliases.dart';
 
 /// A P/Invoke method representation.
 class PinvokeMap extends TokenObject {
+  const PinvokeMap(
+    super.scope,
+    super.token,
+    this._attributes,
+    this.importName,
+    this.importDllToken,
+    this.moduleName,
+  );
+
   final int importDllToken;
   final String importName;
   final String moduleName;
 
   final int _attributes;
-
-  const PinvokeMap(super.scope, super.token, this._attributes, this.importName,
-      this.importDllToken, this.moduleName);
 
   /// Creates a P/Invoke method representation object from a provided token.
   factory PinvokeMap.fromToken(Scope scope, int token) {

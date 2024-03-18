@@ -22,6 +22,19 @@ import 'type_def.dart';
 /// optional one (`raise_`). Events are described in §II.22.13 of the ECMA-335
 /// spec.
 class Event extends TokenObject with CustomAttributesMixin {
+  Event(
+    super.scope,
+    super.token,
+    this._parentToken,
+    this.name,
+    this._attributes,
+    this.eventType,
+    this._addOnToken,
+    this._removeOnToken,
+    this._fireToken,
+    this.otherMethodTokens,
+  );
+
   final int eventType;
   final String name;
   final List<int> otherMethodTokens;
@@ -31,18 +44,6 @@ class Event extends TokenObject with CustomAttributesMixin {
   final int _fireToken;
   final int _parentToken;
   final int _removeOnToken;
-
-  Event(
-      super.scope,
-      super.token,
-      this._parentToken,
-      this.name,
-      this._attributes,
-      this.eventType,
-      this._addOnToken,
-      this._removeOnToken,
-      this._fireToken,
-      this.otherMethodTokens);
 
   /// Creates an event object from a provided token.
   factory Event.fromToken(Scope scope, int token) {
