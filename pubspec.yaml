@@ -18,7 +18,7 @@ platforms:
 
 dependencies:
   archive: ^3.4.10
-  ffi: ^2.1.2
+  ffi: ^2.1.0
   nuget: ^0.1.1
   path: ^1.9.0
   win32: ^5.3.0

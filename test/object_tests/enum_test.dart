@@ -40,35 +40,36 @@ void main() {
     check(typeDef.typeVisibility).equals(TypeVisibility.public);
 
     check(typeDef.fields.length).equals(3);
-    final [firstField, secondField, thirdField] = typeDef.fields;
+    final [value, left, right] = typeDef.fields;
 
-    check(firstField.fieldAccess).equals(FieldAccess.public);
-    check(firstField.isRTSpecialName).isTrue();
-    check(firstField.isSpecialName).isTrue();
-    check(firstField.name).equals('value__');
-    check(firstField.typeIdentifier.baseType).equals(BaseType.int32Type);
+    check(value.fieldAccess).equals(FieldAccess.public);
+    check(value.isRTSpecialName).isTrue();
+    check(value.isSpecialName).isTrue();
+    check(value.name).equals('value__');
+    check(value.typeIdentifier.baseType).equals(BaseType.int32Type);
+    check(value.value).isNull();
 
-    check(secondField.fieldAccess).equals(FieldAccess.public);
-    check(secondField.fieldType).equals(BaseType.int32Type);
-    check(secondField.isStatic).isTrue();
-    check(secondField.isLiteral).isTrue();
-    check(secondField.name).equals('HANDEDNESS_LEFT');
-    check(secondField.typeIdentifier.baseType)
-        .equals(BaseType.valueTypeModifier);
-    check(secondField.typeIdentifier.name)
+    check(left.fieldAccess).equals(FieldAccess.public);
+    check(left.fieldType).equals(BaseType.int32Type);
+    check(left.isStatic).isTrue();
+    check(left.isLiteral).isTrue();
+    check(left.name).equals('HANDEDNESS_LEFT');
+    check(left.typeIdentifier.baseType).equals(BaseType.valueTypeModifier);
+    check(left.typeIdentifier.name)
         .equals('Windows.Win32.UI.WindowsAndMessaging.HANDEDNESS');
-    check(secondField.value).equals(0);
+    check(left.value).isA<int>();
+    check(left.value).equals(0);
 
-    check(thirdField.fieldAccess).equals(FieldAccess.public);
-    check(thirdField.fieldType).equals(BaseType.int32Type);
-    check(thirdField.isLiteral).isTrue();
-    check(thirdField.isStatic).isTrue();
-    check(thirdField.name).equals('HANDEDNESS_RIGHT');
-    check(thirdField.typeIdentifier.baseType)
-        .equals(BaseType.valueTypeModifier);
-    check(thirdField.typeIdentifier.name)
+    check(right.fieldAccess).equals(FieldAccess.public);
+    check(right.fieldType).equals(BaseType.int32Type);
+    check(right.isLiteral).isTrue();
+    check(right.isStatic).isTrue();
+    check(right.name).equals('HANDEDNESS_RIGHT');
+    check(right.typeIdentifier.baseType).equals(BaseType.valueTypeModifier);
+    check(right.typeIdentifier.name)
         .equals('Windows.Win32.UI.WindowsAndMessaging.HANDEDNESS');
-    check(thirdField.value).equals(1);
+    check(right.value).isA<int>();
+    check(right.value).equals(1);
   });
 
   tearDownAll(MetadataStore.close);

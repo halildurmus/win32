@@ -1,6 +1,8 @@
 ## 5.0.0-wip
 
-- TODO: Add release notes
+- **BREAKING:** The type of the `Field.value` field has been changed from `int`
+  to `Object?` to accommodate a wider range of field values (including `double`
+  and `String`).
 
 ## 4.1.0
 

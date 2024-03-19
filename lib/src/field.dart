@@ -2,6 +2,7 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+import 'dart:convert';
 import 'dart:ffi';
 import 'dart:typed_data';
 
@@ -37,7 +38,7 @@ class Field extends TokenObject with CustomAttributesMixin {
   final String name;
   final Uint8List signatureBlob;
   final TypeIdentifier typeIdentifier;
-  final int value;
+  final Object? value;
 
   final int _attribs;
   final int _parentToken;
@@ -54,7 +55,7 @@ class Field extends TokenObject with CustomAttributesMixin {
       final ppvSigBlob = arena<PCCOR_SIGNATURE>();
       final pcbSigBlob = arena<ULONG>();
       final pdwCPlusTypeFlag = arena<DWORD>();
-      final ppValue = arena<Pointer<Uint32>>();
+      final ppValue = arena<UVCP_CONSTANT>();
       final pcchValue = arena<ULONG>();
 
       final reader = scope.reader;
@@ -74,6 +75,29 @@ class Field extends TokenObject with CustomAttributesMixin {
       if (FAILED(hr)) throw WindowsException(hr);
 
       final fieldName = szField.toDartString();
+      final fieldType = BaseType.fromCorElementType(pdwCPlusTypeFlag.value);
+
+      Object? fieldValue;
+      if (ppValue.value case final pValue when pValue != nullptr) {
+        fieldValue = switch (fieldType) {
+          BaseType.doubleType => pValue.cast<Double>().value,
+          BaseType.floatType => pValue.cast<Float>().value,
+          BaseType.int8Type => pValue.cast<Int8>().value,
+          BaseType.int16Type => pValue.cast<Int16>().value,
+          BaseType.int32Type => pValue.cast<Int32>().value,
+          BaseType.int64Type => pValue.cast<Int64>().value,
+          BaseType.uint8Type => pValue.cast<Uint8>().value,
+          BaseType.uint16Type => pValue.cast<Uint16>().value,
+          BaseType.uint32Type => pValue.cast<Uint32>().value,
+          BaseType.uint64Type => pValue.cast<Uint64>().value,
+          BaseType.stringType => _decodeString(
+              pValue,
+              isAnsi: _fieldIsAnsiString(scope, token),
+              length: pcchValue.value,
+            ),
+          _ => null,
+        };
+      }
 
       // The first entry of the signature is a FIELD attribute (0x06), per
       // §II.23.2.4 of ECMA-335. Then follows a type identifier.
@@ -85,9 +109,9 @@ class Field extends TokenObject with CustomAttributesMixin {
         token,
         ptkTypeDef.value,
         fieldName,
-        ppValue.value != nullptr ? ppValue.value.value : 0,
+        fieldValue,
         typeTuple.typeIdentifier,
-        BaseType.fromCorElementType(pdwCPlusTypeFlag.value),
+        fieldType,
         pdwAttr.value,
         signature,
       );
@@ -148,4 +172,35 @@ class Field extends TokenObject with CustomAttributesMixin {
 
   /// Returns the P/Invoke mapping representation for the field.
   PinvokeMap get pinvokeMap => PinvokeMap.fromToken(scope, token);
+
+  static String _decodeString(
+    Pointer<Uint8> ptr, {
+    required bool isAnsi,
+    required int length,
+  }) {
+    // For some reason, ANSI strings are encoded as UTF-16, so we need to decode
+    // them as such.
+    final codeUnits = [
+      for (var idx = 0; idx < length; idx++) ptr.cast<Uint16>()[idx]
+    ];
+
+    return isAnsi ? utf8.decode(codeUnits) : String.fromCharCodes(codeUnits);
+  }
+
+  static bool _fieldIsAnsiString(Scope scope, int token) {
+    final field = Field(
+      scope,
+      token,
+      0,
+      '',
+      '',
+      const TypeIdentifier(BaseType.stringType),
+      BaseType.stringType,
+      0,
+      Uint8List(0),
+    );
+    const nativeEncodingAttribute =
+        'Windows.Win32.Foundation.Metadata.NativeEncodingAttribute';
+    return field.attributeAsString(nativeEncodingAttribute) == 'ansi';
+  }
 }

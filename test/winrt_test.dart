@@ -642,7 +642,10 @@ void main() {
   test('Evaluate an enum has the right values', () {
     final dayOfWeek = winrtScope.findTypeDef('Windows.Globalization.DayOfWeek');
     check(dayOfWeek).isNotNull();
-    check(dayOfWeek!.findField('Tuesday')?.value).equals(2);
+    final tuesday = dayOfWeek!.findField('Tuesday');
+    check(tuesday).isNotNull();
+    check(tuesday!.value).isA<int>();
+    check(tuesday.value).equals(2);
   });
 
   test('IPropertyValue array type', () {

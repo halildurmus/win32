@@ -45,35 +45,36 @@ void main() {
     check(typeDef.typeVisibility).equals(TypeVisibility.public);
 
     check(typeDef.fields.length).equals(3);
-    final [firstField, secondField, thirdField] = typeDef.fields;
+    final [value, list, thumbnail] = typeDef.fields;
 
-    check(firstField.fieldAccess).equals(FieldAccess.private);
-    check(firstField.isRTSpecialName).isTrue();
-    check(firstField.isSpecialName).isTrue();
-    check(firstField.name).equals('value__');
-    check(firstField.typeIdentifier.baseType).equals(BaseType.int32Type);
+    check(value.fieldAccess).equals(FieldAccess.private);
+    check(value.isRTSpecialName).isTrue();
+    check(value.isSpecialName).isTrue();
+    check(value.name).equals('value__');
+    check(value.typeIdentifier.baseType).equals(BaseType.int32Type);
+    check(value.value).isNull();
 
-    check(secondField.fieldAccess).equals(FieldAccess.public);
-    check(secondField.fieldType).equals(BaseType.int32Type);
-    check(secondField.isLiteral).isTrue();
-    check(secondField.isStatic).isTrue();
-    check(secondField.name).equals('List');
-    check(secondField.typeIdentifier.baseType)
-        .equals(BaseType.valueTypeModifier);
-    check(secondField.typeIdentifier.name)
+    check(list.fieldAccess).equals(FieldAccess.public);
+    check(list.fieldType).equals(BaseType.int32Type);
+    check(list.isLiteral).isTrue();
+    check(list.isStatic).isTrue();
+    check(list.name).equals('List');
+    check(list.typeIdentifier.baseType).equals(BaseType.valueTypeModifier);
+    check(list.typeIdentifier.name)
         .equals('Windows.Storage.Pickers.PickerViewMode');
-    check(secondField.value).equals(0);
+    check(list.value).isA<int>();
+    check(list.value).equals(0);
 
-    check(thirdField.fieldAccess).equals(FieldAccess.public);
-    check(thirdField.fieldType).equals(BaseType.int32Type);
-    check(thirdField.isLiteral).isTrue();
-    check(thirdField.isStatic).isTrue();
-    check(thirdField.name).equals('Thumbnail');
-    check(thirdField.typeIdentifier.baseType)
-        .equals(BaseType.valueTypeModifier);
-    check(thirdField.typeIdentifier.name)
+    check(thumbnail.fieldAccess).equals(FieldAccess.public);
+    check(thumbnail.fieldType).equals(BaseType.int32Type);
+    check(thumbnail.isLiteral).isTrue();
+    check(thumbnail.isStatic).isTrue();
+    check(thumbnail.name).equals('Thumbnail');
+    check(thumbnail.typeIdentifier.baseType).equals(BaseType.valueTypeModifier);
+    check(thumbnail.typeIdentifier.name)
         .equals('Windows.Storage.Pickers.PickerViewMode');
-    check(thirdField.value).equals(1);
+    check(list.value).isA<int>();
+    check(thumbnail.value).equals(1);
   });
 
   tearDownAll(MetadataStore.close);

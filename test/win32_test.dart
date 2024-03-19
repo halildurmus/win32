@@ -378,9 +378,10 @@ void main() {
     final typeDef =
         win32Scope.findTypeDef('Windows.Win32.UI.WindowsAndMessaging.Apis');
     check(typeDef).isNotNull();
-    final wmPaint =
-        typeDef!.fields.firstWhere((c) => c.name.endsWith('WM_PAINT'));
-    check(wmPaint.value).equals(15); // winuser.h: #define WM_PAINT 0x000F
+    final wmPaint = typeDef!.findField('WM_PAINT');
+    check(wmPaint).isNotNull();
+    check(wmPaint!.value).isA<int>();
+    check(wmPaint.value).equals(15);
   });
 
   test('Naked structs are generated correctly', () {
@@ -409,7 +410,10 @@ void main() {
   test('A specific enumeration contains expected constants', () {
     final ropCode =
         win32Scope.enums.firstWhere((en) => en.name.endsWith('ROP_CODE'));
-    check(ropCode.findField('SRCCOPY')?.value).equals(0x00CC0020);
+    final srccopy = ropCode.findField('SRCCOPY');
+    check(srccopy).isNotNull();
+    check(srccopy!.value).isA<int>();
+    check(srccopy.value).equals(0xCC0020);
   });
 
   test('Enumerations are typed appropriately in functions', () {
