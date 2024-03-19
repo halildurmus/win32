@@ -1,8 +1,9 @@
-## 5.0.0-wip
+## 5.0.0
 
 - **BREAKING:** The type of the `Field.value` field has been changed from `int`
   to `Object?` to accommodate a wider range of field values (including `double`
   and `String`).
+- Bump minimum required Dart SDK version to `3.3.0`.
 
 ## 4.1.0
 
