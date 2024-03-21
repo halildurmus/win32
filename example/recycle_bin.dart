@@ -62,7 +62,7 @@ bool recycleFile(String file) {
     ..ref.wFunc = FO_DELETE
     ..ref.pFrom = pFrom
     ..ref.pTo = nullptr
-    ..ref.fFlags = FOF_ALLOWUNDO;
+    ..ref.fFlags = FILEOPERATION_FLAGS.FOF_ALLOWUNDO;
 
   try {
     final result = SHFileOperation(lpFileOp);

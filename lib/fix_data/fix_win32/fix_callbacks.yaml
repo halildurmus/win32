@@ -2,8 +2,18 @@
 # All rights reserved. Use of this source code is governed by a BSD-style
 # license that can be found in the LICENSE file.
 
-# Please add new fixes to the top of the file. For documentation about this file
-# format, see <https://dart.dev/go/data-driven-fixes>.
+# Please add new fixes to the top of the file, separated by one blank line
+# from other fixes. For documentation about this file format, see
+# <https://dart.dev/go/data-driven-fixes>.
+
+# Every fix must be tested. See the test_fixes/README.md file for instructions
+# on testing these data driven fixes.
+
+# Uncomment version & transforms, and follow with fixes.
+# version: 1
+# transforms:
+
+# Before adding a new fix: read instructions at the top of this file.
 
 version: 1
 transforms:
@@ -15,6 +25,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'DLGPROC'
+
   - title: "Migrate to 'DRAWSTATEPROC'"
     date: 2024-03-05
     element:
@@ -23,6 +34,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'DRAWSTATEPROC'
+
   - title: "Migrate to 'DTT_CALLBACK_PROC'"
     date: 2024-03-05
     element:
@@ -31,6 +43,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'DTT_CALLBACK_PROC'
+
   - title: "Migrate to 'ENUMRESNAMEPROC'"
     date: 2024-03-05
     element:
@@ -39,6 +52,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'ENUMRESNAMEPROC'
+
   - title: "Migrate to 'ENUMRESTYPEPROC'"
     date: 2024-03-05
     element:
@@ -47,6 +61,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'ENUMRESTYPEPROC'
+
   - title: "Migrate to 'FONTENUMPROC'"
     date: 2024-03-05
     element:
@@ -55,6 +70,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'FONTENUMPROC'
+
   - title: "Migrate to 'GRAYSTRINGPROC'"
     date: 2024-03-05
     element:
@@ -63,6 +79,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'GRAYSTRINGPROC'
+
   - title: "Migrate to 'HOOKPROC'"
     date: 2024-03-05
     element:
@@ -71,6 +88,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'HOOKPROC'
+
   - title: "Migrate to 'LPCCHOOKPROC'"
     date: 2024-03-05
     element:
@@ -79,6 +97,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'LPCCHOOKPROC'
+
   - title: "Migrate to 'LPCFHOOKPROC'"
     date: 2024-03-05
     element:
@@ -87,6 +106,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'LPCFHOOKPROC'
+
   - title: "Migrate to 'LPEXCEPFINO_DEFERRED_FILLIN'"
     date: 2024-03-05
     element:
@@ -95,6 +115,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'LPEXCEPFINO_DEFERRED_FILLIN'
+
   - title: "Migrate to 'LPFRHOOKPROC'"
     date: 2024-03-05
     element:
@@ -103,6 +124,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'LPFRHOOKPROC'
+
   - title: "Migrate to 'LPHANDLER_FUNCTION'"
     date: 2024-03-05
     element:
@@ -111,6 +133,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'LPHANDLER_FUNCTION'
+
   - title: "Migrate to 'LPHANDLER_FUNCTION_EX'"
     date: 2024-03-05
     element:
@@ -119,6 +142,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'LPHANDLER_FUNCTION_EX'
+
   - title: "Migrate to 'LPOCNCHKPROC'"
     date: 2024-03-05
     element:
@@ -127,6 +151,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'LPOCNCHKPROC'
+
   - title: "Migrate to 'LPOCNCONNPROC'"
     date: 2024-03-05
     element:
@@ -135,6 +160,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'LPOCNCONNPROC'
+
   - title: "Migrate to 'LPOCNDSCPROC'"
     date: 2024-03-05
     element:
@@ -143,6 +169,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'LPOCNDSCPROC'
+
   - title: "Migrate to 'LPOFNHOOKPROC'"
     date: 2024-03-05
     element:
@@ -151,6 +178,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'LPOFNHOOKPROC'
+
   - title: "Migrate to 'LPOVERLAPPED_COMPLETION_ROUTINE'"
     date: 2024-03-05
     element:
@@ -159,6 +187,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'LPOVERLAPPED_COMPLETION_ROUTINE'
+
   - title: "Migrate to 'LPSERVICE_MAIN_FUNCTION'"
     date: 2024-03-05
     element:
@@ -167,6 +196,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'LPSERVICE_MAIN_FUNCTION'
+
   - title: "Migrate to 'LPTHREAD_START_ROUTINE'"
     date: 2024-03-05
     element:
@@ -175,6 +205,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'LPTHREAD_START_ROUTINE'
+
   - title: "Migrate to 'MIDIINPROC'"
     date: 2024-03-05
     element:
@@ -183,6 +214,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'MIDIINPROC'
+
   - title: "Migrate to 'MIDIOUTPROC'"
     date: 2024-03-05
     element:
@@ -191,6 +223,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'MIDIOUTPROC'
+
   - title: "Migrate to 'MONITORENUMPROC'"
     date: 2024-03-05
     element:
@@ -199,6 +232,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'MONITORENUMPROC'
+
   - title: "Migrate to 'PENUM_PAGE_FILE_CALLBACK'"
     date: 2024-03-05
     element:
@@ -207,6 +241,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'PENUM_PAGE_FILE_CALLBACK'
+
   - title: "Migrate to 'PFN_SC_NOTIFY_CALLBACK'"
     date: 2024-03-05
     element:
@@ -215,6 +250,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'PFN_SC_NOTIFY_CALLBACK'
+
   - title: "Migrate to 'PFN_AUTHENTICATION_CALLBACK_EX'"
     date: 2024-03-05
     element:
@@ -223,6 +259,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'PFN_AUTHENTICATION_CALLBACK_EX'
+
   - title: "Migrate to 'PFNBLUETOOTH_GATT_EVENT_CALLBACK'"
     date: 2024-03-05
     element:
@@ -231,6 +268,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'PFNBLUETOOTH_GATT_EVENT_CALLBACK'
+
   - title: "Migrate to 'PFN_BLUETOOTH_ENUM_ATTRIBUTES_CALLBACK'"
     date: 2024-03-05
     element:
@@ -239,6 +277,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'PFN_BLUETOOTH_ENUM_ATTRIBUTES_CALLBACK'
+
   - title: "Migrate to 'PFN_DEVICE_CALLBACK'"
     date: 2024-03-05
     element:
@@ -247,6 +286,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'PFN_DEVICE_CALLBACK'
+
   - title: "Migrate to 'PFTASKDIALOGCALLBACK'"
     date: 2024-03-05
     element:
@@ -255,6 +295,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'PFTASKDIALOGCALLBACK'
+
   - title: "Migrate to 'PHANDLER_ROUTINE'"
     date: 2024-03-05
     element:
@@ -263,6 +304,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'PHANDLER_ROUTINE'
+
   - title: "Migrate to 'PSYM_ENUMERATESYMBOLS_CALLBACK'"
     date: 2024-03-05
     element:
@@ -271,6 +313,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'PSYM_ENUMERATESYMBOLS_CALLBACK'
+
   - title: "Migrate to 'SENDASYNCPROC'"
     date: 2024-03-05
     element:
@@ -279,6 +322,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'SENDASYNCPROC'
+
   - title: "Migrate to 'SPNOTIFYCALLBACK'"
     date: 2024-03-05
     element:
@@ -287,6 +331,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'SPNOTIFYCALLBACK'
+
   - title: "Migrate to 'SUBCLASSPROC'"
     date: 2024-03-05
     element:
@@ -295,6 +340,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'SUBCLASSPROC'
+
   - title: "Migrate to 'TIMERPROC'"
     date: 2024-03-05
     element:
@@ -303,6 +349,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'TIMERPROC'
+
   - title: "Migrate to 'WLAN_NOTIFICATION_CALLBACK'"
     date: 2024-03-05
     element:
@@ -311,6 +358,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'WLAN_NOTIFICATION_CALLBACK'
+
   - title: "Migrate to 'WNDENUMPROC'"
     date: 2024-03-05
     element:
@@ -319,6 +367,7 @@ transforms:
     changes:
       - kind: 'rename'
         newName: 'WNDENUMPROC'
+
   - title: "Migrate to 'WNDPROC'"
     date: 2024-03-05
     element:

@@ -12,6 +12,7 @@ import 'package:ffi/ffi.dart';
 
 import 'com/iunknown.dart';
 import 'constants.dart';
+import 'enums.g.dart';
 import 'exceptions.dart';
 import 'extensions/int_to_hexstring.dart';
 import 'macros.dart';
@@ -71,11 +72,13 @@ void initApp(Function winMain) {
 
   try {
     winMain(
-        hInstance,
-        args,
-        lpStartupInfo.ref.dwFlags & STARTF_USESHOWWINDOW == STARTF_USESHOWWINDOW
-            ? lpStartupInfo.ref.wShowWindow
-            : SW_SHOWDEFAULT);
+      hInstance,
+      args,
+      lpStartupInfo.ref.dwFlags & STARTUPINFOW_FLAGS.STARTF_USESHOWWINDOW ==
+              STARTUPINFOW_FLAGS.STARTF_USESHOWWINDOW
+          ? lpStartupInfo.ref.wShowWindow
+          : SHOW_WINDOW_CMD.SW_SHOWDEFAULT,
+    );
   } finally {
     free(nArgs);
     free(lpStartupInfo);

@@ -13,7 +13,7 @@ const textToSpeak =
     'Dart is a portable, high-performance language from Google.';
 
 void main() {
-  CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
+  CoInitializeEx(nullptr, COINIT.COINIT_APARTMENTTHREADED);
 
   final speechEngine = SpVoice.createInstance();
   final pText = textToSpeak.toNativeUtf16();

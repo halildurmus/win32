@@ -37,11 +37,11 @@ int mainWindowProc(int hwnd, int message, int wParam, int lParam) {
           0,
           TEXT('edit'),
           nullptr,
-          WS_CHILD |
-              WS_VISIBLE |
-              WS_HSCROLL |
-              WS_VSCROLL |
-              WS_BORDER |
+          WINDOW_STYLE.WS_CHILD |
+              WINDOW_STYLE.WS_VISIBLE |
+              WINDOW_STYLE.WS_HSCROLL |
+              WINDOW_STYLE.WS_VSCROLL |
+              WINDOW_STYLE.WS_BORDER |
               ES_LEFT |
               ES_MULTILINE |
               ES_NOHIDESEL |
@@ -83,26 +83,30 @@ int mainWindowProc(int hwnd, int message, int wParam, int lParam) {
               wParam,
               IDM_EDIT_UNDO,
               SendMessage(hwndEdit, EM_CANUNDO, 0, 0) != FALSE
-                  ? MF_ENABLED
-                  : MF_GRAYED);
+                  ? MENU_ITEM_FLAGS.MF_ENABLED
+                  : MENU_ITEM_FLAGS.MF_GRAYED);
 
           // Enable Paste if clipboard contains text
           EnableMenuItem(
               wParam,
               IDM_EDIT_PASTE,
-              IsClipboardFormatAvailable(CF_TEXT) != FALSE
-                  ? MF_ENABLED
-                  : MF_GRAYED);
+              IsClipboardFormatAvailable(CLIPBOARD_FORMAT.CF_TEXT) != FALSE
+                  ? MENU_ITEM_FLAGS.MF_ENABLED
+                  : MENU_ITEM_FLAGS.MF_GRAYED);
 
           // Enable Cut / Copy / Clear if there is a selection
-          final menuStyle = editor.isTextSelected ? MF_ENABLED : MF_GRAYED;
+          final menuStyle = editor.isTextSelected
+              ? MENU_ITEM_FLAGS.MF_ENABLED
+              : MENU_ITEM_FLAGS.MF_GRAYED;
 
           EnableMenuItem(wParam, IDM_EDIT_CUT, menuStyle);
           EnableMenuItem(wParam, IDM_EDIT_COPY, menuStyle);
           EnableMenuItem(wParam, IDM_EDIT_CLEAR, menuStyle);
 
         case 2: // Search menu
-          final menuStyle = hDlgModeless == NULL ? MF_ENABLED : MF_GRAYED;
+          final menuStyle = hDlgModeless == NULL
+              ? MENU_ITEM_FLAGS.MF_ENABLED
+              : MENU_ITEM_FLAGS.MF_GRAYED;
 
           EnableMenuItem(wParam, IDM_SEARCH_FIND, menuStyle);
           EnableMenuItem(wParam, IDM_SEARCH_NEXT, menuStyle);
@@ -120,7 +124,7 @@ int mainWindowProc(int hwnd, int message, int wParam, int lParam) {
           case EN_ERRSPACE:
           case EN_MAXTEXT:
             MessageBox(hwnd, TEXT('Edit control out of space.'), TEXT(APP_NAME),
-                MB_OK | MB_ICONSTOP);
+                MESSAGEBOX_STYLE.MB_OK | MESSAGEBOX_STYLE.MB_ICONSTOP);
             return 0;
         }
         break;
@@ -129,7 +133,8 @@ int mainWindowProc(int hwnd, int message, int wParam, int lParam) {
       // Messages from menu system
       switch (LOWORD(wParam)) {
         case IDM_FILE_NEW:
-          if (editor.isFileDirty && editor.offerSave() == IDCANCEL) {
+          if (editor.isFileDirty &&
+              editor.offerSave() == MESSAGEBOX_RESULT.IDCANCEL) {
             return 0;
           }
 
@@ -224,13 +229,15 @@ int mainWindowProc(int hwnd, int message, int wParam, int lParam) {
       return 0;
 
     case WM_CLOSE:
-      if (!editor.isFileDirty || editor.offerSave() != IDCANCEL) {
+      if (!editor.isFileDirty ||
+          editor.offerSave() != MESSAGEBOX_RESULT.IDCANCEL) {
         DestroyWindow(hwnd);
       }
       return 0;
 
     case WM_QUERYENDSESSION:
-      if (!editor.isFileDirty || editor.offerSave() != IDCANCEL) {
+      if (!editor.isFileDirty ||
+          editor.offerSave() != MESSAGEBOX_RESULT.IDCANCEL) {
         return 1;
       }
       return 0;
@@ -245,24 +252,29 @@ int mainWindowProc(int hwnd, int message, int wParam, int lParam) {
       if (message == messageFindReplace) {
         findReplace = Pointer<FINDREPLACE>.fromAddress(lParam);
 
-        if (findReplace.ref.Flags & FR_DIALOGTERM == FR_DIALOGTERM) {
+        if (findReplace.ref.Flags & FINDREPLACE_FLAGS.FR_DIALOGTERM ==
+            FINDREPLACE_FLAGS.FR_DIALOGTERM) {
           hDlgModeless = NULL;
         }
 
-        if (findReplace.ref.Flags & FR_FINDNEXT == FR_FINDNEXT) {
+        if (findReplace.ref.Flags & FINDREPLACE_FLAGS.FR_FINDNEXT ==
+            FINDREPLACE_FLAGS.FR_FINDNEXT) {
           if (!find.findTextInEditWindow(hwndEdit, iOffset, findReplace)) {
             editor.showMessage('Text not found!');
           }
         }
 
-        if ((findReplace.ref.Flags & FR_REPLACE == FR_REPLACE) ||
-            (findReplace.ref.Flags & FR_REPLACEALL == FR_REPLACEALL)) {
+        if ((findReplace.ref.Flags & FINDREPLACE_FLAGS.FR_REPLACE ==
+                FINDREPLACE_FLAGS.FR_REPLACE) ||
+            (findReplace.ref.Flags & FINDREPLACE_FLAGS.FR_REPLACEALL ==
+                FINDREPLACE_FLAGS.FR_REPLACEALL)) {
           if (!find.replaceTextInEditWindow(hwndEdit, iOffset, findReplace)) {
             editor.showMessage('Text not found!');
           }
         }
 
-        if (findReplace.ref.Flags & FR_REPLACEALL == FR_REPLACEALL) {
+        if (findReplace.ref.Flags & FINDREPLACE_FLAGS.FR_REPLACEALL ==
+            FINDREPLACE_FLAGS.FR_REPLACEALL) {
           while (
               find.replaceTextInEditWindow(hwndEdit, iOffset, findReplace)) {}
         }
@@ -279,7 +291,7 @@ int dialogReturnProc(int hDlg, int msg, int wParam, int lParam) {
       return TRUE;
     case WM_COMMAND:
       switch (LOWORD(wParam)) {
-        case IDOK:
+        case MESSAGEBOX_RESULT.IDOK:
           EndDialog(hDlg, 0);
           return TRUE;
       }
@@ -299,12 +311,12 @@ void main() {
   );
 
   final wc = calloc<WNDCLASS>()
-    ..ref.style = CS_HREDRAW | CS_VREDRAW
+    ..ref.style = WNDCLASS_STYLES.CS_HREDRAW | WNDCLASS_STYLES.CS_VREDRAW
     ..ref.lpfnWndProc = lpfnWndProc.nativeFunction
     ..ref.hInstance = hInstance
     ..ref.lpszClassName = className
     ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
-    ..ref.hbrBackground = GetStockObject(WHITE_BRUSH);
+    ..ref.hbrBackground = GetStockObject(GET_STOCK_OBJECT_FLAGS.WHITE_BRUSH);
   RegisterClass(wc);
 
   final hMenu = NotepadResources.loadMenus();
@@ -314,7 +326,7 @@ void main() {
       0, // Optional window styles.
       className, // Window class
       TEXT(APP_NAME),
-      WS_OVERLAPPEDWINDOW, // Window style
+      WINDOW_STYLE.WS_OVERLAPPEDWINDOW, // Window style
 
       // Size and position
       CW_USEDEFAULT,
@@ -332,7 +344,7 @@ void main() {
     throw WindowsException(HRESULT_FROM_WIN32(error));
   }
 
-  ShowWindow(hWnd, SW_SHOWNORMAL);
+  ShowWindow(hWnd, SHOW_WINDOW_CMD.SW_SHOWNORMAL);
   UpdateWindow(hWnd);
 
   final hAccel = NotepadResources.loadAccelerators();

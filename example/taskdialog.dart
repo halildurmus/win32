@@ -43,7 +43,7 @@ void showSimpleTaskDialog() {
         buttonSelected);
     if (SUCCEEDED(hr)) {
       switch (buttonSelected.value) {
-        case IDOK:
+        case MESSAGEBOX_RESULT.IDOK:
           print('User clicked on the OK button.');
         default:
           print('User canceled the task dialog.');

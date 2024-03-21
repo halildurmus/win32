@@ -1,3 +1,16 @@
+## 5.4.0-wip
+
+- Fix constant values `ERROR_SERVICE_NOT_ACTIVE`, `KF_FLAG_ALIAS_ONLY`,
+  `QS_INPUT`, `STD_INPUT_HANDLE`, `STD_OUTPUT_HANDLE`, `STD_ERROR_HANDLE`,
+  `UIA_ItemTypePropertyId`, and `UIA_OrientationPropertyId` (#XXX)
+- Introduce Win32 enumerations as extension types based on `int` (#XXX)
+- Deprecate constants for the Win32 enumerations in favor of the newly
+  introduced extension types. For example, replace the usage of `ERROR_SUCCESS`
+  with `WIN32_ERROR.ERROR_SUCCESS` (#XXX)
+
+  You can automatically migrate your code to use the new constants by running
+  `dart fix --apply` in your terminal.
+
 ## 5.3.0
 
 - Migrate away from `.elementAt` in favor of `operator +` (#825)

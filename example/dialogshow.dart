@@ -11,7 +11,7 @@ import 'package:win32/win32.dart';
 
 void main() {
   var hr = CoInitializeEx(
-      nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
+      nullptr, COINIT.COINIT_APARTMENTTHREADED | COINIT.COINIT_DISABLE_OLE1DDE);
 
   if (SUCCEEDED(hr)) {
     final fileDialog = FileOpenDialog.createInstance();
@@ -59,7 +59,7 @@ void main() {
 
     hr = fileDialog.show(NULL);
     if (!SUCCEEDED(hr)) {
-      if (hr == HRESULT_FROM_WIN32(ERROR_CANCELLED)) {
+      if (hr == HRESULT_FROM_WIN32(WIN32_ERROR.ERROR_CANCELLED)) {
         print('Dialog cancelled.');
       } else {
         throw WindowsException(hr);

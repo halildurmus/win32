@@ -52,7 +52,7 @@ void main() {
       final clsid = GUIDFromString(CLSID_FileSaveDialog);
       final iid = GUIDFromString(IID_IFileSaveDialog);
 
-      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr);
+      final hr = CoCreateInstance(clsid, nullptr, CLSCTX.CLSCTX_ALL, iid, ptr);
       expect(hr, equals(S_OK));
       expect(ptr.address, isNonZero);
 
@@ -68,8 +68,8 @@ void main() {
       final iidClassFactory = GUIDFromString(IID_IClassFactory);
       final iidFileSaveDialog = GUIDFromString(IID_IFileSaveDialog);
 
-      var hr = CoGetClassObject(
-          clsid, CLSCTX_ALL, nullptr, iidClassFactory, ptrFactory.cast());
+      var hr = CoGetClassObject(clsid, CLSCTX.CLSCTX_ALL, nullptr,
+          iidClassFactory, ptrFactory.cast());
       expect(hr, equals(S_OK));
       expect(ptrFactory.address, isNonZero);
 

@@ -30,7 +30,7 @@ class Canvas {
     SaveDC(hdc);
 
     // Set up coordinate system
-    SetMapMode(hdc, MM_ISOTROPIC);
+    SetMapMode(hdc, HDC_MAP_MODE.MM_ISOTROPIC);
     SetViewportExtEx(hdc, pxPerBlock, pxPerBlock, nullptr);
     SetWindowExtEx(hdc, 1, -1, nullptr);
     SetViewportOrgEx(hdc, 0, rect.ref.bottom, nullptr);
@@ -38,7 +38,7 @@ class Canvas {
     // Set default colors
     SetTextColor(hdc, RGB(255, 255, 255));
     SetBkColor(hdc, RGB(70, 70, 70));
-    SetBkMode(hdc, TRANSPARENT);
+    SetBkMode(hdc, BACKGROUND_MODE.TRANSPARENT);
   }
 
   void drawBlock(int x, int y, int color) {
@@ -76,9 +76,9 @@ class Canvas {
   }
 
   void drawTextOpaque(String text, int x, int y) {
-    SetBkMode(hdc, OPAQUE);
+    SetBkMode(hdc, BACKGROUND_MODE.OPAQUE);
     drawText(text, x, y);
-    SetBkMode(hdc, TRANSPARENT);
+    SetBkMode(hdc, BACKGROUND_MODE.TRANSPARENT);
   }
 
   void drawScore(int score, int x, int y) =>

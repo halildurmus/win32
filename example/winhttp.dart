@@ -9,7 +9,7 @@ import 'package:win32/win32.dart';
 
 void main() {
   // Initialize COM
-  CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
+  CoInitializeEx(nullptr, COINIT.COINIT_APARTMENTTHREADED);
 
   final method = BSTR.fromString('GET');
   final url = BSTR.fromString('https://dart.dev');

@@ -8,7 +8,7 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import 'constants.dart';
+import 'enums.g.dart';
 import 'exceptions.dart';
 import 'guid.dart';
 import 'macros.dart';
@@ -43,8 +43,8 @@ base class COMObject extends Struct {
     final pObj = allocator<COMObject>();
 
     try {
-      final hr =
-          CoCreateInstance(pClsid, nullptr, CLSCTX_ALL, pIid, pObj.cast());
+      final hr = CoCreateInstance(
+          pClsid, nullptr, CLSCTX.CLSCTX_ALL, pIid, pObj.cast());
       if (FAILED(hr)) throw WindowsException(hr);
       return pObj;
     } finally {

@@ -15,27 +15,29 @@ const VK_A = 0x41;
 
 void main() {
   print('Switching to Notepad and going to sleep for a second.');
-  ShellExecute(0, TEXT('open'), TEXT('notepad.exe'), nullptr, nullptr, SW_SHOW);
+  ShellExecute(0, TEXT('open'), TEXT('notepad.exe'), nullptr, nullptr,
+      SHOW_WINDOW_CMD.SW_SHOW);
   Sleep(1000);
 
   print('Sending the "A" key and the Unicode character "€".');
   final kbd = calloc<INPUT>();
-  kbd.ref.type = INPUT_KEYBOARD;
+  kbd.ref.type = INPUT_TYPE.INPUT_KEYBOARD;
   kbd.ref.ki.wVk = VK_A;
   var result = SendInput(1, kbd, sizeOf<INPUT>());
   if (result != TRUE) print('Error: ${GetLastError()}');
 
-  kbd.ref.ki.dwFlags = KEYEVENTF_KEYUP;
+  kbd.ref.ki.dwFlags = KEYBD_EVENT_FLAGS.KEYEVENTF_KEYUP;
   result = SendInput(1, kbd, sizeOf<INPUT>());
   if (result != TRUE) print('Error: ${GetLastError()}');
 
   kbd.ref.ki.wVk = 0;
   kbd.ref.ki.wScan = 0x20AC; // euro sign
-  kbd.ref.ki.dwFlags = KEYEVENTF_UNICODE;
+  kbd.ref.ki.dwFlags = KEYBD_EVENT_FLAGS.KEYEVENTF_UNICODE;
   result = SendInput(1, kbd, sizeOf<INPUT>());
   if (result != TRUE) print('Error: ${GetLastError()}');
 
-  kbd.ref.ki.dwFlags = KEYEVENTF_UNICODE | KEYEVENTF_KEYUP;
+  kbd.ref.ki.dwFlags =
+      KEYBD_EVENT_FLAGS.KEYEVENTF_UNICODE | KEYBD_EVENT_FLAGS.KEYEVENTF_KEYUP;
   result = SendInput(1, kbd, sizeOf<INPUT>());
   if (result != TRUE) print('Error: ${GetLastError()}');
 
@@ -43,13 +45,13 @@ void main() {
 
   print('Sending a right-click mouse event.');
   final mouse = calloc<INPUT>();
-  mouse.ref.type = INPUT_MOUSE;
-  mouse.ref.mi.dwFlags = MOUSEEVENTF_RIGHTDOWN;
+  mouse.ref.type = INPUT_TYPE.INPUT_MOUSE;
+  mouse.ref.mi.dwFlags = MOUSE_EVENT_FLAGS.MOUSEEVENTF_RIGHTDOWN;
   result = SendInput(1, mouse, sizeOf<INPUT>());
   if (result != TRUE) print('Error: ${GetLastError()}');
 
   Sleep(1000);
-  mouse.ref.mi.dwFlags = MOUSEEVENTF_RIGHTUP;
+  mouse.ref.mi.dwFlags = MOUSE_EVENT_FLAGS.MOUSEEVENTF_RIGHTUP;
   result = SendInput(1, mouse, sizeOf<INPUT>());
   if (result != TRUE) print('Error: ${GetLastError()}');
 

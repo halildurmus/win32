@@ -81,7 +81,7 @@ void check(int hr) {
 
 void main() {
   // Initialize COM
-  check(CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED));
+  check(CoInitializeEx(nullptr, COINIT.COINIT_APARTMENTTHREADED));
 
   // Retrieve the list of available audio output devices.
   final pDeviceEnumerator = MMDeviceEnumerator.createInstance();
@@ -153,7 +153,7 @@ void main() {
   final iidAudioClient = convertToIID(IID_IAudioClient3);
   final ppAudioClient = calloc<COMObject>();
   check(pDevice.activate(
-      iidAudioClient, CLSCTX_ALL, nullptr, ppAudioClient.cast()));
+      iidAudioClient, CLSCTX.CLSCTX_ALL, nullptr, ppAudioClient.cast()));
   free(iidAudioClient);
   final pAudioClient = IAudioClient3(ppAudioClient);
 

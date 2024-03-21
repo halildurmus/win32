@@ -19,9 +19,9 @@ void write(
   final blob = examplePassword.allocatePointer();
 
   final credential = calloc<CREDENTIAL>()
-    ..ref.Type = CRED_TYPE_GENERIC
+    ..ref.Type = CRED_TYPE.CRED_TYPE_GENERIC
     ..ref.TargetName = credentialName.toNativeUtf16()
-    ..ref.Persist = CRED_PERSIST_LOCAL_MACHINE
+    ..ref.Persist = CRED_PERSIST.CRED_PERSIST_LOCAL_MACHINE
     ..ref.UserName = userName.toNativeUtf16()
     ..ref.CredentialBlob = blob
     ..ref.CredentialBlobSize = examplePassword.length;
@@ -42,12 +42,12 @@ void write(
 void read(String credentialName) {
   print('Reading $credentialName ...');
   final credPointer = calloc<Pointer<CREDENTIAL>>();
-  final result = CredRead(
-      credentialName.toNativeUtf16(), CRED_TYPE_GENERIC, 0, credPointer);
+  final result = CredRead(credentialName.toNativeUtf16(),
+      CRED_TYPE.CRED_TYPE_GENERIC, 0, credPointer);
   if (result != TRUE) {
     final errorCode = GetLastError();
     var errorText = '$errorCode';
-    if (errorCode == ERROR_NOT_FOUND) {
+    if (errorCode == WIN32_ERROR.ERROR_NOT_FOUND) {
       errorText += ' Not found.';
     }
     print('Error ($result): $errorText');
@@ -65,8 +65,8 @@ void read(String credentialName) {
 
 void delete(String credentialName) {
   print('Deleting $credentialName');
-  final result =
-      CredDelete(credentialName.toNativeUtf16(), CRED_TYPE_GENERIC, 0);
+  final result = CredDelete(
+      credentialName.toNativeUtf16(), CRED_TYPE.CRED_TYPE_GENERIC, 0);
   if (result != TRUE) {
     final errorCode = GetLastError();
     print('Error ($result): $errorCode');

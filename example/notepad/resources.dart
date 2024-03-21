@@ -42,45 +42,58 @@ class NotepadResources {
     final hMenu = CreateMenu();
 
     var hMenuPopup = CreateMenu();
-    AppendMenu(hMenuPopup, MF_STRING, IDM_FILE_NEW, TEXT('&New\tCtrl+N'));
-    AppendMenu(hMenuPopup, MF_STRING, IDM_FILE_OPEN, TEXT('&Open...\tCtrl+O'));
-    AppendMenu(hMenuPopup, MF_STRING, IDM_FILE_SAVE, TEXT('&Save\tCtrl+S'));
-    AppendMenu(hMenuPopup, MF_STRING, IDM_FILE_SAVE_AS, TEXT('Save &As...'));
-    AppendMenu(hMenuPopup, MF_SEPARATOR, 0, nullptr);
-    AppendMenu(hMenuPopup, MF_STRING, IDM_FILE_PRINT, TEXT('&Print\tCtrl+P'));
-    AppendMenu(hMenuPopup, MF_SEPARATOR, 0, nullptr);
-    AppendMenu(hMenuPopup, MF_STRING, IDM_APP_EXIT, TEXT('E&xit'));
-    AppendMenu(hMenu, MF_POPUP, hMenuPopup, TEXT('&File'));
+    AppendMenu(hMenuPopup, MENU_ITEM_FLAGS.MF_STRING, IDM_FILE_NEW,
+        TEXT('&New\tCtrl+N'));
+    AppendMenu(hMenuPopup, MENU_ITEM_FLAGS.MF_STRING, IDM_FILE_OPEN,
+        TEXT('&Open...\tCtrl+O'));
+    AppendMenu(hMenuPopup, MENU_ITEM_FLAGS.MF_STRING, IDM_FILE_SAVE,
+        TEXT('&Save\tCtrl+S'));
+    AppendMenu(hMenuPopup, MENU_ITEM_FLAGS.MF_STRING, IDM_FILE_SAVE_AS,
+        TEXT('Save &As...'));
+    AppendMenu(hMenuPopup, MENU_ITEM_FLAGS.MF_SEPARATOR, 0, nullptr);
+    AppendMenu(hMenuPopup, MENU_ITEM_FLAGS.MF_STRING, IDM_FILE_PRINT,
+        TEXT('&Print\tCtrl+P'));
+    AppendMenu(hMenuPopup, MENU_ITEM_FLAGS.MF_SEPARATOR, 0, nullptr);
+    AppendMenu(
+        hMenuPopup, MENU_ITEM_FLAGS.MF_STRING, IDM_APP_EXIT, TEXT('E&xit'));
+    AppendMenu(hMenu, MENU_ITEM_FLAGS.MF_POPUP, hMenuPopup, TEXT('&File'));
 
     hMenuPopup = CreateMenu();
-    AppendMenu(hMenuPopup, MF_STRING, IDM_EDIT_UNDO, TEXT('&Undo\tCtrl+Z'));
-    AppendMenu(hMenuPopup, MF_SEPARATOR, 0, nullptr);
-    AppendMenu(hMenuPopup, MF_STRING, IDM_EDIT_CUT, TEXT('Cu&t\tCtrl+X'));
-    AppendMenu(hMenuPopup, MF_STRING, IDM_EDIT_COPY, TEXT('&Copy\tCtrl+C'));
-    AppendMenu(hMenuPopup, MF_STRING, IDM_EDIT_PASTE, TEXT('&Paste\tCtrl+V'));
-    AppendMenu(hMenuPopup, MF_STRING, IDM_EDIT_CLEAR, TEXT('De&lete\tDel'));
-    AppendMenu(hMenuPopup, MF_SEPARATOR, 0, nullptr);
-    AppendMenu(hMenuPopup, MF_STRING, IDM_EDIT_SELECT_ALL,
+    AppendMenu(hMenuPopup, MENU_ITEM_FLAGS.MF_STRING, IDM_EDIT_UNDO,
+        TEXT('&Undo\tCtrl+Z'));
+    AppendMenu(hMenuPopup, MENU_ITEM_FLAGS.MF_SEPARATOR, 0, nullptr);
+    AppendMenu(hMenuPopup, MENU_ITEM_FLAGS.MF_STRING, IDM_EDIT_CUT,
+        TEXT('Cu&t\tCtrl+X'));
+    AppendMenu(hMenuPopup, MENU_ITEM_FLAGS.MF_STRING, IDM_EDIT_COPY,
+        TEXT('&Copy\tCtrl+C'));
+    AppendMenu(hMenuPopup, MENU_ITEM_FLAGS.MF_STRING, IDM_EDIT_PASTE,
+        TEXT('&Paste\tCtrl+V'));
+    AppendMenu(hMenuPopup, MENU_ITEM_FLAGS.MF_STRING, IDM_EDIT_CLEAR,
+        TEXT('De&lete\tDel'));
+    AppendMenu(hMenuPopup, MENU_ITEM_FLAGS.MF_SEPARATOR, 0, nullptr);
+    AppendMenu(hMenuPopup, MENU_ITEM_FLAGS.MF_STRING, IDM_EDIT_SELECT_ALL,
         TEXT('&Select All\tCtrl+A'));
-    AppendMenu(hMenu, MF_POPUP, hMenuPopup, TEXT('&Edit'));
+    AppendMenu(hMenu, MENU_ITEM_FLAGS.MF_POPUP, hMenuPopup, TEXT('&Edit'));
 
     hMenuPopup = CreateMenu();
-    AppendMenu(
-        hMenuPopup, MF_STRING, IDM_SEARCH_FIND, TEXT('&Find...\tCtrl+F'));
-    AppendMenu(hMenuPopup, MF_STRING, IDM_SEARCH_NEXT, TEXT('Find &Next\tF3'));
-    AppendMenu(
-        hMenuPopup, MF_STRING, IDM_SEARCH_REPLACE, TEXT('&Replace...\tCtrl+R'));
-    AppendMenu(hMenu, MF_POPUP, hMenuPopup, TEXT('&Search'));
+    AppendMenu(hMenuPopup, MENU_ITEM_FLAGS.MF_STRING, IDM_SEARCH_FIND,
+        TEXT('&Find...\tCtrl+F'));
+    AppendMenu(hMenuPopup, MENU_ITEM_FLAGS.MF_STRING, IDM_SEARCH_NEXT,
+        TEXT('Find &Next\tF3'));
+    AppendMenu(hMenuPopup, MENU_ITEM_FLAGS.MF_STRING, IDM_SEARCH_REPLACE,
+        TEXT('&Replace...\tCtrl+R'));
+    AppendMenu(hMenu, MENU_ITEM_FLAGS.MF_POPUP, hMenuPopup, TEXT('&Search'));
 
     hMenuPopup = CreateMenu();
-    AppendMenu(hMenuPopup, MF_STRING, IDM_FORMAT_FONT, TEXT('&Font...'));
-    AppendMenu(hMenu, MF_POPUP, hMenuPopup, TEXT('F&ormat'));
+    AppendMenu(hMenuPopup, MENU_ITEM_FLAGS.MF_STRING, IDM_FORMAT_FONT,
+        TEXT('&Font...'));
+    AppendMenu(hMenu, MENU_ITEM_FLAGS.MF_POPUP, hMenuPopup, TEXT('F&ormat'));
 
     hMenuPopup = CreateMenu();
-    AppendMenu(hMenuPopup, MF_STRING, IDM_HELP, TEXT('&Help'));
-    AppendMenu(
-        hMenuPopup, MF_STRING, IDM_APP_ABOUT, TEXT('&About $APP_NAME...'));
-    AppendMenu(hMenu, MF_POPUP, hMenuPopup, TEXT('&Help'));
+    AppendMenu(hMenuPopup, MENU_ITEM_FLAGS.MF_STRING, IDM_HELP, TEXT('&Help'));
+    AppendMenu(hMenuPopup, MENU_ITEM_FLAGS.MF_STRING, IDM_APP_ABOUT,
+        TEXT('&About $APP_NAME...'));
+    AppendMenu(hMenu, MENU_ITEM_FLAGS.MF_POPUP, hMenuPopup, TEXT('&Help'));
 
     return hMenu;
   }
@@ -90,7 +103,7 @@ class NotepadResources {
     var idx = 0;
 
     idx += pDialog.cast<DLGTEMPLATE>().setDialog(
-        style: DS_MODALFRAME | WS_POPUP | DS_SETFONT,
+        style: DS_MODALFRAME | WINDOW_STYLE.WS_POPUP | DS_SETFONT,
         x: 32,
         y: 32,
         cx: 180,
@@ -100,17 +113,22 @@ class NotepadResources {
         fontSize: 8);
 
     idx += (pDialog + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
-        style: WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON | WS_TABSTOP,
+        style: WINDOW_STYLE.WS_CHILD |
+            WINDOW_STYLE.WS_VISIBLE |
+            BS_DEFPUSHBUTTON |
+            WINDOW_STYLE.WS_TABSTOP,
         x: 66,
         y: 80,
         cx: 50,
         cy: 14,
-        id: IDOK,
+        id: MESSAGEBOX_RESULT.IDOK,
         windowSystemClass: 0x0080,
         text: 'OK');
 
     idx += (pDialog + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
-        style: WS_CHILD | WS_VISIBLE | SS_ICON,
+        style: WINDOW_STYLE.WS_CHILD |
+            WINDOW_STYLE.WS_VISIBLE |
+            STATIC_STYLES.SS_ICON,
         x: 7,
         y: 7,
         cx: 20,
@@ -120,7 +138,10 @@ class NotepadResources {
         id: IDC_STATIC);
 
     idx += (pDialog + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
-        style: WS_CHILD | WS_VISIBLE | SS_CENTER | WS_GROUP,
+        style: WINDOW_STYLE.WS_CHILD |
+            WINDOW_STYLE.WS_VISIBLE |
+            STATIC_STYLES.SS_CENTER |
+            WINDOW_STYLE.WS_GROUP,
         x: 40,
         y: 12,
         cx: 100,
@@ -130,7 +151,10 @@ class NotepadResources {
         id: IDC_STATIC);
 
     idx += (pDialog + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
-        style: WS_CHILD | WS_VISIBLE | SS_CENTER | WS_GROUP,
+        style: WINDOW_STYLE.WS_CHILD |
+            WINDOW_STYLE.WS_VISIBLE |
+            STATIC_STYLES.SS_CENTER |
+            WINDOW_STYLE.WS_GROUP,
         x: 7,
         y: 40,
         cx: 166,
@@ -140,7 +164,10 @@ class NotepadResources {
         id: IDC_STATIC);
 
     idx += (pDialog + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
-        style: WS_CHILD | WS_VISIBLE | SS_CENTER | WS_GROUP,
+        style: WINDOW_STYLE.WS_CHILD |
+            WINDOW_STYLE.WS_VISIBLE |
+            STATIC_STYLES.SS_CENTER |
+            WINDOW_STYLE.WS_GROUP,
         x: 27,
         y: 52,
         cx: 126,
@@ -156,92 +183,100 @@ class NotepadResources {
     final pTable = calloc<ACCEL>(18);
 
     pTable[0]
-      ..fVirt = FVIRTKEY | FALT | FNOINVERT
-      ..key = VK_BACK
+      ..fVirt = ACCEL_VIRT_FLAGS.FVIRTKEY |
+          ACCEL_VIRT_FLAGS.FALT |
+          ACCEL_VIRT_FLAGS.FNOINVERT
+      ..key = VIRTUAL_KEY.VK_BACK
       ..cmd = IDM_EDIT_UNDO;
 
     pTable[1]
-      ..fVirt = FVIRTKEY | FNOINVERT
-      ..key = VK_DELETE
+      ..fVirt = ACCEL_VIRT_FLAGS.FVIRTKEY | ACCEL_VIRT_FLAGS.FNOINVERT
+      ..key = VIRTUAL_KEY.VK_DELETE
       ..cmd = IDM_EDIT_CLEAR;
 
     pTable[2]
-      ..fVirt = FVIRTKEY | FSHIFT | FNOINVERT
-      ..key = VK_DELETE
+      ..fVirt = ACCEL_VIRT_FLAGS.FVIRTKEY |
+          ACCEL_VIRT_FLAGS.FSHIFT |
+          ACCEL_VIRT_FLAGS.FNOINVERT
+      ..key = VIRTUAL_KEY.VK_DELETE
       ..cmd = IDM_EDIT_CUT;
 
     pTable[3]
-      ..fVirt = FVIRTKEY | FNOINVERT
-      ..key = VK_F1
+      ..fVirt = ACCEL_VIRT_FLAGS.FVIRTKEY | ACCEL_VIRT_FLAGS.FNOINVERT
+      ..key = VIRTUAL_KEY.VK_F1
       ..cmd = IDM_HELP;
 
     pTable[4]
-      ..fVirt = FVIRTKEY | FNOINVERT
-      ..key = VK_F3
+      ..fVirt = ACCEL_VIRT_FLAGS.FVIRTKEY | ACCEL_VIRT_FLAGS.FNOINVERT
+      ..key = VIRTUAL_KEY.VK_F3
       ..cmd = IDM_SEARCH_NEXT;
 
     pTable[5]
-      ..fVirt = FVIRTKEY | FCONTROL | FNOINVERT
-      ..key = VK_INSERT
+      ..fVirt = ACCEL_VIRT_FLAGS.FVIRTKEY |
+          ACCEL_VIRT_FLAGS.FCONTROL |
+          ACCEL_VIRT_FLAGS.FNOINVERT
+      ..key = VIRTUAL_KEY.VK_INSERT
       ..cmd = IDM_EDIT_COPY;
 
     pTable[6]
-      ..fVirt = FVIRTKEY | FSHIFT | FNOINVERT
-      ..key = VK_INSERT
+      ..fVirt = ACCEL_VIRT_FLAGS.FVIRTKEY |
+          ACCEL_VIRT_FLAGS.FSHIFT |
+          ACCEL_VIRT_FLAGS.FNOINVERT
+      ..key = VIRTUAL_KEY.VK_INSERT
       ..cmd = IDM_EDIT_PASTE;
 
     pTable[7]
-      ..fVirt = FNOINVERT
+      ..fVirt = ACCEL_VIRT_FLAGS.FNOINVERT
       ..key = 3 // Ctrl+C
       ..cmd = IDM_EDIT_COPY;
 
     pTable[8]
-      ..fVirt = FNOINVERT
+      ..fVirt = ACCEL_VIRT_FLAGS.FNOINVERT
       ..key = 6 // Ctrl+F
       ..cmd = IDM_SEARCH_FIND;
 
     pTable[9]
-      ..fVirt = FNOINVERT
+      ..fVirt = ACCEL_VIRT_FLAGS.FNOINVERT
       ..key = 14 // Ctrl+N
       ..cmd = IDM_FILE_NEW;
 
     pTable[10]
-      ..fVirt = FNOINVERT
+      ..fVirt = ACCEL_VIRT_FLAGS.FNOINVERT
       ..key = 15 // Ctrl+O
       ..cmd = IDM_FILE_OPEN;
 
     pTable[11]
-      ..fVirt = FNOINVERT
+      ..fVirt = ACCEL_VIRT_FLAGS.FNOINVERT
       ..key = 16 // Ctrl+P
       ..cmd = IDM_FILE_PRINT;
 
     pTable[12]
-      ..fVirt = FNOINVERT
+      ..fVirt = ACCEL_VIRT_FLAGS.FNOINVERT
       ..key = 18 // Ctrl+R
       ..cmd = IDM_SEARCH_REPLACE;
 
     pTable[13]
-      ..fVirt = FNOINVERT
+      ..fVirt = ACCEL_VIRT_FLAGS.FNOINVERT
       ..key = 19 // Ctrl+S
       ..cmd = IDM_FILE_SAVE;
 
     pTable[14]
-      ..fVirt = FNOINVERT
+      ..fVirt = ACCEL_VIRT_FLAGS.FNOINVERT
       ..key = 22 // Ctrl+V
       ..cmd = IDM_EDIT_PASTE;
 
     pTable[15]
-      ..fVirt = FNOINVERT
+      ..fVirt = ACCEL_VIRT_FLAGS.FNOINVERT
       ..key = 24 // Ctrl+X
       ..cmd = IDM_EDIT_CUT;
 
     pTable[16]
-      ..fVirt = FNOINVERT
+      ..fVirt = ACCEL_VIRT_FLAGS.FNOINVERT
       ..key = 26 // Ctrl+Z
       ..cmd = IDM_EDIT_UNDO;
 
     pTable[17]
-      ..fVirt = FNOINVERT
+      ..fVirt = ACCEL_VIRT_FLAGS.FNOINVERT
       ..key = 1 // Ctrl+A
       ..cmd = IDM_EDIT_SELECT_ALL;
 

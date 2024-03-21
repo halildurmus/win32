@@ -1,0 +1,114 @@
+# Copyright (c) 2024, Dart | Windows. Please see the AUTHORS file for details.
+# All rights reserved. Use of this source code is governed by a BSD-style
+# license that can be found in the LICENSE file.
+
+# Please add new fixes to the top of the file, separated by one blank line
+# from other fixes. For documentation about this file format, see
+# <https://dart.dev/go/data-driven-fixes>.
+
+# Every fix must be tested. See the test_fixes/README.md file for instructions
+# on testing these data driven fixes.
+
+# Uncomment version & transforms, and follow with fixes.
+# version: 1
+# transforms:
+
+# Before adding a new fix: read instructions at the top of this file.
+
+version: 1
+transforms:
+  - title: "Migrate to 'ADDRESS_FAMILY.AF_INET'"
+    date: 2024-03-17
+    element:
+      uris: ['package:win32/winsock2.dart']
+      variable: 'AF_INET'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/winsock2.dart']
+          field: 'AF_INET'
+          inClass: 'ADDRESS_FAMILY'
+
+  - title: "Migrate to 'ADDRESS_FAMILY.AF_INET6'"
+    date: 2024-03-17
+    element:
+      uris: ['package:win32/winsock2.dart']
+      variable: 'AF_INET6'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/winsock2.dart']
+          field: 'AF_INET6'
+          inClass: 'ADDRESS_FAMILY'
+
+  - title: "Migrate to 'ADDRESS_FAMILY.AF_UNSPEC'"
+    date: 2024-03-17
+    element:
+      uris: ['package:win32/winsock2.dart']
+      variable: 'AF_UNSPEC'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/winsock2.dart']
+          field: 'AF_UNSPEC'
+          inClass: 'ADDRESS_FAMILY'
+
+  - title: "Migrate to 'WINSOCK_SOCKET_TYPE.SOCK_STREAM'"
+    date: 2024-03-17
+    element:
+      uris: ['package:win32/winsock2.dart']
+      variable: 'SOCK_STREAM'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/winsock2.dart']
+          field: 'SOCK_STREAM'
+          inClass: 'WINSOCK_SOCKET_TYPE'
+
+  - title: "Migrate to 'WINSOCK_SOCKET_TYPE.SOCK_DGRAM'"
+    date: 2024-03-17
+    element:
+      uris: ['package:win32/winsock2.dart']
+      variable: 'SOCK_DGRAM'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/winsock2.dart']
+          field: 'SOCK_DGRAM'
+          inClass: 'WINSOCK_SOCKET_TYPE'
+
+  - title: "Migrate to 'WINSOCK_SOCKET_TYPE.SOCK_RAW'"
+    date: 2024-03-17
+    element:
+      uris: ['package:win32/winsock2.dart']
+      variable: 'SOCK_RAW'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/winsock2.dart']
+          field: 'SOCK_RAW'
+          inClass: 'WINSOCK_SOCKET_TYPE'
+
+  - title: "Migrate to 'WINSOCK_SOCKET_TYPE.SOCK_RDM'"
+    date: 2024-03-17
+    element:
+      uris: ['package:win32/winsock2.dart']
+      variable: 'SOCK_RDM'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/winsock2.dart']
+          field: 'SOCK_RDM'
+          inClass: 'WINSOCK_SOCKET_TYPE'
+
+  - title: "Migrate to 'WINSOCK_SOCKET_TYPE.SOCK_SEQPACKET'"
+    date: 2024-03-17
+    element:
+      uris: ['package:win32/winsock2.dart']
+      variable: 'SOCK_SEQPACKET'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/winsock2.dart']
+          field: 'SOCK_SEQPACKET'
+          inClass: 'WINSOCK_SOCKET_TYPE'

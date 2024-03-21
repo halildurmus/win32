@@ -78,11 +78,12 @@ void main() {
     final success = FindNextVolume(hFindVolume, volumeNamePtr, MAX_PATH);
     if (success == 0) {
       error = GetLastError();
-      if (error != ERROR_NO_MORE_FILES && error != ERROR_SUCCESS) {
+      if (error != WIN32_ERROR.ERROR_NO_MORE_FILES &&
+          error != WIN32_ERROR.ERROR_SUCCESS) {
         print('FindNextVolume failed with error code $error');
         break;
       } else {
-        error = ERROR_SUCCESS;
+        error = WIN32_ERROR.ERROR_SUCCESS;
         break;
       }
     }

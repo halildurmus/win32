@@ -28,12 +28,18 @@ dependencies:
   win32:
     path: ${Directory.current.path.replaceAll(r'\', '/')}
 ''');
-      final sourceFile = File(p.join('test_fixes', 'renames.dart'));
-      writeFile(
-        tempDir,
-        p.join('lib', sourceFile.name),
-        sourceFile.readAsStringSync(),
-      );
+
+      // copy test files
+      for (final file in Directory('test_fixes')
+          .listSync(recursive: true)
+          .whereType<File>()) {
+        if (file.name.endsWith('.expect')) continue;
+        writeFile(
+          tempDir,
+          p.join('lib', file.name),
+          file.readAsStringSync(),
+        );
+      }
 
       // run pub get
       pubGet(tempDir);
