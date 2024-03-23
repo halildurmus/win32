@@ -3731,10 +3731,17 @@ class WBEM_REFRESHER_FLAGS {
 }
 
 /// {@category enum}
+@Deprecated('No replacement')
 class WBEM_TIMEOUT_TYPE {
+  @Deprecated('Use WBEM_NO_WAIT instead')
   static const WBEM_NO_WAIT = 0;
+
+  @Deprecated('Use WBEM_INFINITE instead')
   static const WBEM_INFINITE = 0xffffffff;
 }
+
+const WBEM_NO_WAIT = 0;
+const WBEM_INFINITE = 0xffffffff;
 
 /// {@category enum}
 class NLM_CONNECTIVITY {
