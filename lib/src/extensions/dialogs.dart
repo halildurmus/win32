@@ -136,17 +136,21 @@ extension DialogItemTemplateHelper on Pointer<DLGITEMTEMPLATE> {
       ..id = id;
     idx += dlgItemTemplateSize;
 
-    /// Immediately following each DLGITEMTEMPLATE structure is a class array
-    /// that specifies the window class of the control. If the first element of
-    /// this array is any value other than 0xFFFF, the system treats the array
-    /// as a null-terminated Unicode string that specifies the name of a
-    /// registered window class. If the first element is 0xFFFF, the array has
-    /// one additional element that specifies the ordinal value of a predefined
-    /// system class.
-    ///
-    /// The ordinal can be one of the following atom values: 0x0080: Button
-    ///   0x0081: Edit 0x0082: Static 0x0083: List box 0x0084: Scroll bar
-    ///   0x0085: Combo box
+    // Immediately following each DLGITEMTEMPLATE structure is a class array
+    // that specifies the window class of the control. If the first element of
+    // this array is any value other than 0xFFFF, the system treats the array as
+    // a null-terminated Unicode string that specifies the name of a registered
+    // window class. If the first element is 0xFFFF, the array has one
+    // additional element that specifies the ordinal value of a predefined
+    // system class.
+    //
+    // The ordinal can be one of the following atom values:
+    // - 0x0080: Button
+    // - 0x0081: Edit
+    // - 0x0082: Static
+    // - 0x0083: List box
+    // - 0x0084: Scroll bar
+    // - 0x0085: Combo box
     if (windowClass.isNotEmpty) {
       idx += ((ptr + idx).cast<Utf16>().setString(windowClass) / 2).ceil();
     } else {

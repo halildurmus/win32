@@ -14,9 +14,10 @@ import 'package:win32/win32.dart';
 const ID_TEXT = 200;
 const ID_EDITTEXT = 201;
 const ID_PROGRESS = 202;
+const PROGRESS_CLASS = 'msctls_progress32';
 
 final hInstance = GetModuleHandle(nullptr);
-String textEntered = '';
+String? textEntered;
 
 void main() {
   // Allocate 8KB, which is more than enough space for the dialog in memory.
@@ -31,7 +32,7 @@ void main() {
           DS_SETFONT |
           WINDOW_STYLE.WS_CAPTION,
       title: 'Sample dialog',
-      cdit: 4,
+      cdit: 5, // number of controls in the dialog
       cx: 300,
       cy: 200,
       fontName: 'MS Shell Dlg',
@@ -75,22 +76,23 @@ void main() {
 
   idx += (ptr + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
       style: PBS_SMOOTH | WINDOW_STYLE.WS_BORDER | WINDOW_STYLE.WS_VISIBLE,
-      x: 6,
-      y: 49,
-      cx: 158,
+      x: 10,
+      y: 30,
+      cx: 150,
       cy: 12,
       id: ID_PROGRESS,
-      windowClass: 'msctls_progress32' // progress bar
+      windowClass: PROGRESS_CLASS // progress bar
       );
 
   idx += (ptr + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
       style: WINDOW_STYLE.WS_CHILD |
           WINDOW_STYLE.WS_VISIBLE |
           WINDOW_STYLE.WS_TABSTOP |
-          WINDOW_STYLE.WS_BORDER,
-      x: 20,
+          WINDOW_STYLE.WS_BORDER |
+          ES_AUTOHSCROLL,
+      x: 10,
       y: 50,
-      cx: 100,
+      cx: 150,
       cy: 20,
       id: ID_EDITTEXT,
       windowSystemClass: 0x0081, // edit
@@ -107,7 +109,9 @@ void main() {
   if (nResult <= 0) {
     print('Error: $nResult');
   } else {
-    print('Entered: $textEntered');
+    if (textEntered != null) {
+      print('Entered: $textEntered');
+    }
   }
 
   lpDialogFunc.close();
@@ -119,26 +123,23 @@ void main() {
 int dialogReturnProc(int hwndDlg, int message, int wParam, int lParam) {
   switch (message) {
     case WM_INITDIALOG:
-      {
-        SendDlgItemMessage(hwndDlg, ID_PROGRESS, PBM_SETPOS, 35, 0);
-        break;
-      }
+      SendDlgItemMessage(hwndDlg, ID_PROGRESS, PBM_SETPOS, 35, 0);
     case WM_COMMAND:
-      {
-        switch (LOWORD(wParam)) {
-          case MESSAGEBOX_RESULT.IDOK:
-            print('OK');
-            final textPtr = wsalloc(256);
-            GetDlgItemText(hwndDlg, ID_EDITTEXT, textPtr, 256);
+      switch (LOWORD(wParam)) {
+        case MESSAGEBOX_RESULT.IDOK:
+          print('OK');
+          final textPtr = wsalloc(256);
+          final result = GetDlgItemText(hwndDlg, ID_EDITTEXT, textPtr, 256);
+          if (result != NULL) {
             textEntered = textPtr.toDartString();
-            free(textPtr);
-            EndDialog(hwndDlg, wParam);
-            return TRUE;
-          case MESSAGEBOX_RESULT.IDCANCEL:
-            print('Cancel');
-            EndDialog(hwndDlg, wParam);
-            return TRUE;
-        }
+          }
+          free(textPtr);
+          EndDialog(hwndDlg, wParam);
+          return TRUE;
+        case MESSAGEBOX_RESULT.IDCANCEL:
+          print('Cancel');
+          EndDialog(hwndDlg, wParam);
+          return TRUE;
       }
   }
 
