@@ -26732,3 +26732,27 @@ transforms:
           uris: ['package:win32/win32.dart']
           field: 'LIST_MODULES_DEFAULT'
           inClass: 'ENUM_PROCESS_MODULES_EX_FLAGS'
+
+  - title: "Migrate to 'WBEM_NO_WAIT'"
+    date: 2024-03-23
+    element:
+      uris: ['package:win32/win32.dart']
+      field: 'WBEM_NO_WAIT'
+      inClass: 'WBEM_TIMEOUT_TYPE'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          variable: 'WBEM_NO_WAIT'
+
+  - title: "Migrate to 'WBEM_INFINITE'"
+    date: 2024-03-23
+    element:
+      uris: ['package:win32/win32.dart']
+      field: 'WBEM_INFINITE'
+      inClass: 'WBEM_TIMEOUT_TYPE'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          variable: 'WBEM_INFINITE'

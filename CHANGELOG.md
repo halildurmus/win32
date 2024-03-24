@@ -2,11 +2,14 @@
 
 - Fix constant values `ERROR_SERVICE_NOT_ACTIVE`, `KF_FLAG_ALIAS_ONLY`,
   `QS_INPUT`, `STD_INPUT_HANDLE`, `STD_OUTPUT_HANDLE`, `STD_ERROR_HANDLE`,
-  `UIA_ItemTypePropertyId`, and `UIA_OrientationPropertyId` (#XXX)
-- Introduce Win32 enumerations as extension types based on `int` (#XXX)
+  `UIA_ItemTypePropertyId`, and `UIA_OrientationPropertyId` (#832)
+- Introduce Win32 enumerations as extension types based on `int` (#832)
 - Deprecate constants for the Win32 enumerations in favor of the newly
   introduced extension types. For example, replace the usage of `ERROR_SUCCESS`
-  with `WIN32_ERROR.ERROR_SUCCESS` (#XXX)
+  with `WIN32_ERROR.ERROR_SUCCESS` (#832)
+- Deprecate constant values `WBEM_TIMEOUT_TYPE.WBEM_NO_WAIT` and
+  `WBEM_TIMEOUT_TYPE.WBEM_INFINITE` in favor of the newly introduced constants
+  `WBEM_NO_WAIT` and `WBEM_INFINITE` (#833)
 
   You can automatically migrate your code to use the new constants by running
   `dart fix --apply` in your terminal.
