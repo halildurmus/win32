@@ -27,7 +27,7 @@ void main() {
     check(value).isNotNull();
     final type = value!.type;
     check(type).equals(RegistryValueType.unexpandedString);
-    check(type.win32Value).equals(REG_EXPAND_SZ);
+    check(type.win32Value).equals(REG_VALUE_TYPE.REG_EXPAND_SZ);
     check(type.win32Type).equals('REG_EXPAND_SZ');
     env.close();
   });
@@ -40,7 +40,7 @@ void main() {
     check(value).isNotNull();
     final type = value!.type;
     check(type).equals(RegistryValueType.int32);
-    check(type.win32Value).equals(REG_DWORD);
+    check(type.win32Value).equals(REG_VALUE_TYPE.REG_DWORD);
     check(type.win32Type).equals('REG_DWORD');
     console.close();
   });
@@ -54,7 +54,7 @@ void main() {
     check(value).isNotNull();
     final type = value!.type;
     check(type).equals(RegistryValueType.binary);
-    check(type.win32Value).equals(REG_BINARY);
+    check(type.win32Value).equals(REG_VALUE_TYPE.REG_BINARY);
     check(type.win32Type).equals('REG_BINARY');
     windowMetrics.close();
   });
@@ -68,7 +68,7 @@ void main() {
     check(value).isNotNull();
     final type = value!.type;
     check(type).equals(RegistryValueType.int64);
-    check(type.win32Value).equals(REG_QWORD);
+    check(type.win32Value).equals(REG_VALUE_TYPE.REG_QWORD);
     check(type.win32Type).equals('REG_QWORD');
     ntCurrentVersion.close();
   });
@@ -82,7 +82,7 @@ void main() {
     check(value).isNotNull();
     final type = value!.type;
     check(type).equals(RegistryValueType.string);
-    check(type.win32Value).equals(REG_SZ);
+    check(type.win32Value).equals(REG_VALUE_TYPE.REG_SZ);
     check(type.win32Type).equals('REG_SZ');
     currentVersion.close();
   });
@@ -95,7 +95,7 @@ void main() {
             ))
         .throws<WindowsException>()
         .has((e) => e.hr, 'hr')
-        .equals(HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND));
+        .equals(HRESULT_FROM_WIN32(WIN32_ERROR.ERROR_FILE_NOT_FOUND));
   });
 
   test('Test missing value', () {
@@ -224,7 +224,7 @@ void main() {
 
     // Expanded should replace %SystemRoot% with an actual system path
     check(key.getValueAsString('TestValue', expandPaths: true)!)
-        .not(it()..contains('%SystemRoot%'));
+        .not((it) => it.contains('%SystemRoot%'));
 
     check(key.getValueAsString('TestValue', expandPaths: true)!)
         .endsWith(r'\System32\MirrorDrvCompat.dll');

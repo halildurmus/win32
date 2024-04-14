@@ -1,3 +1,9 @@
+## 1.1.3-wip
+
+- Fix deprecation warnings
+- Update links
+- Bump minimum required Dart SDK version to `3.3.0`
+
 ## 1.1.2
 
 - Improved code quality.

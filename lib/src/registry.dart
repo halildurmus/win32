@@ -52,7 +52,7 @@ interface class Registry {
     try {
       final lStatus = RegOpenKeyEx(
           hive.win32Value, lpSubKey, 0, desiredAccessRights.win32Value, phKey);
-      if (lStatus == ERROR_SUCCESS) return RegistryKey(phKey.value);
+      if (lStatus == WIN32_ERROR.ERROR_SUCCESS) return RegistryKey(phKey.value);
       throw WindowsException(HRESULT_FROM_WIN32(lStatus));
     } finally {
       free(phKey);
@@ -79,8 +79,8 @@ interface class Registry {
     // As...)
     final phKey = calloc<HKEY>();
     try {
-      final lStatus = RegOpenCurrentUser(KEY_ALL_ACCESS, phKey);
-      if (lStatus == ERROR_SUCCESS) return RegistryKey(phKey.value);
+      final lStatus = RegOpenCurrentUser(REG_SAM_FLAGS.KEY_ALL_ACCESS, phKey);
+      if (lStatus == WIN32_ERROR.ERROR_SUCCESS) return RegistryKey(phKey.value);
       throw WindowsException(HRESULT_FROM_WIN32(lStatus));
     } finally {
       free(phKey);

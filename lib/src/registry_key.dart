@@ -39,7 +39,9 @@ class RegistryKey {
     final phkResult = calloc<HKEY>();
     try {
       final retcode = RegCreateKey(hkey, lpSubKey, phkResult);
-      if (retcode == ERROR_SUCCESS) return RegistryKey(phkResult.value);
+      if (retcode == WIN32_ERROR.ERROR_SUCCESS) {
+        return RegistryKey(phkResult.value);
+      }
       throw WindowsException(HRESULT_FROM_WIN32(retcode));
     } finally {
       free(lpSubKey);
@@ -58,7 +60,7 @@ class RegistryKey {
     final lpSubKey = keyName.toNativeUtf16();
     try {
       final retcode = RegDeleteKey(hkey, lpSubKey);
-      if (retcode != ERROR_SUCCESS) {
+      if (retcode != WIN32_ERROR.ERROR_SUCCESS) {
         if (!recursive) throw WindowsException(HRESULT_FROM_WIN32(retcode));
 
         final key = createKey(keyName);
@@ -85,7 +87,7 @@ class RegistryKey {
     try {
       final retcode = RegSetValueEx(hkey, lpValueName, NULL,
           value.type.win32Value, lpWin32Data.data, lpWin32Data.lengthInBytes);
-      if (retcode != ERROR_SUCCESS) {
+      if (retcode != WIN32_ERROR.ERROR_SUCCESS) {
         throw WindowsException(HRESULT_FROM_WIN32(retcode));
       }
     } finally {
@@ -106,12 +108,14 @@ class RegistryKey {
       final pdwType = arena<DWORD>();
       final pcbData = arena<DWORD>();
 
-      final flags = expandPaths ? RRF_RT_ANY : RRF_RT_ANY | RRF_NOEXPAND;
+      final flags = expandPaths
+          ? REG_ROUTINE_FLAGS.RRF_RT_ANY
+          : REG_ROUTINE_FLAGS.RRF_RT_ANY | REG_ROUTINE_FLAGS.RRF_NOEXPAND;
 
       // Call first time to find out how much memory we need to allocate
       var retcode = RegGetValue(
           hkey, lpSubKey, lpValue, flags, pdwType, nullptr, pcbData);
-      if (retcode == ERROR_FILE_NOT_FOUND) return null;
+      if (retcode == WIN32_ERROR.ERROR_FILE_NOT_FOUND) return null;
 
       // Now call for real to get the data we need.
       final pvData = arena<BYTE>(pcbData.value);
@@ -153,7 +157,7 @@ class RegistryKey {
     final lpValueName = valueName.toNativeUtf16();
     try {
       final retcode = RegDeleteValue(hkey, lpValueName);
-      if (retcode != ERROR_SUCCESS) {
+      if (retcode != WIN32_ERROR.ERROR_SUCCESS) {
         throw WindowsException(HRESULT_FROM_WIN32(retcode));
       }
     } finally {
@@ -167,7 +171,7 @@ class RegistryKey {
     final lpNewKeyName = newName.toNativeUtf16();
     try {
       final retcode = RegRenameKey(hkey, lpSubKeyName, lpNewKeyName);
-      if (retcode != ERROR_SUCCESS) {
+      if (retcode != WIN32_ERROR.ERROR_SUCCESS) {
         throw WindowsException(HRESULT_FROM_WIN32(retcode));
       }
     } finally {
@@ -204,7 +208,7 @@ class RegistryKey {
           lpcbSecurityDescriptor,
           lpftLastWriteTime);
 
-      if (retcode != ERROR_SUCCESS) {
+      if (retcode != WIN32_ERROR.ERROR_SUCCESS) {
         throw WindowsException(HRESULT_FROM_WIN32(retcode));
       }
 
@@ -244,7 +248,7 @@ class RegistryKey {
 
         final retcode = RegEnumValue(
             hkey, idx, lpName, lpcchName, nullptr, lpType, lpData, lpcchData);
-        if (retcode == ERROR_SUCCESS) {
+        if (retcode == WIN32_ERROR.ERROR_SUCCESS) {
           yield RegistryValue.fromWin32(
               lpName.toDartString(), lpType.value, lpData, lpcchData.value);
         }
@@ -276,7 +280,7 @@ class RegistryKey {
 
         final retcode = RegEnumKeyEx(
             hkey, idx, lpName, lpcchName, nullptr, nullptr, nullptr, nullptr);
-        if (retcode == ERROR_SUCCESS) yield lpName.toDartString();
+        if (retcode == WIN32_ERROR.ERROR_SUCCESS) yield lpName.toDartString();
       }
     } finally {
       free(lpName);

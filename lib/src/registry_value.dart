@@ -33,21 +33,26 @@ class RegistryValue {
     int dataLength,
   ) =>
       switch (type) {
-        REG_SZ => RegistryValue(name, RegistryValueType.string,
+        REG_VALUE_TYPE.REG_SZ => RegistryValue(name, RegistryValueType.string,
             byteData.cast<Utf16>().toDartString()),
-        REG_EXPAND_SZ => RegistryValue(name, RegistryValueType.unexpandedString,
+        REG_VALUE_TYPE.REG_EXPAND_SZ => RegistryValue(
+            name,
+            RegistryValueType.unexpandedString,
             byteData.cast<Utf16>().toDartString()),
-        REG_LINK => RegistryValue(name, RegistryValueType.link,
+        REG_VALUE_TYPE.REG_LINK => RegistryValue(name, RegistryValueType.link,
             byteData.cast<Utf16>().toDartString()),
-        REG_MULTI_SZ => RegistryValue(name, RegistryValueType.stringArray,
+        REG_VALUE_TYPE.REG_MULTI_SZ => RegistryValue(
+            name,
+            RegistryValueType.stringArray,
             byteData.cast<Utf16>().unpackStringArray(dataLength)),
-        REG_DWORD => RegistryValue(
+        REG_VALUE_TYPE.REG_DWORD => RegistryValue(
             name, RegistryValueType.int32, byteData.cast<DWORD>().value),
-        REG_QWORD => RegistryValue(
+        REG_VALUE_TYPE.REG_QWORD => RegistryValue(
             name, RegistryValueType.int64, byteData.cast<QWORD>().value),
-        REG_BINARY => RegistryValue(
+        REG_VALUE_TYPE.REG_BINARY => RegistryValue(
             name, RegistryValueType.binary, byteData.asTypedList(dataLength)),
-        REG_NONE => RegistryValue(name, RegistryValueType.none, 0),
+        REG_VALUE_TYPE.REG_NONE =>
+          RegistryValue(name, RegistryValueType.none, 0),
         _ => RegistryValue(name, RegistryValueType.unknown, 0)
       };
 
