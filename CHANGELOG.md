@@ -1,4 +1,4 @@
-## 2.1.1-wip
+## 2.1.1
 
 - Fix deprecation warnings
 - Update links
