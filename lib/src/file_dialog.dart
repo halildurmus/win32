@@ -90,8 +90,8 @@ abstract class FileDialog {
 
   void _initializeCom() {
     if (!_isComInitialized) {
-      final hr = CoInitializeEx(
-          nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
+      final hr = CoInitializeEx(nullptr,
+          COINIT.COINIT_APARTMENTTHREADED | COINIT.COINIT_DISABLE_OLE1DDE);
       if (FAILED(hr)) throw WindowsException(hr);
       _isComInitialized = true;
     }

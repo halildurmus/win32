@@ -1,3 +1,8 @@
+## 2.1.1-wip
+
+- Fix deprecation warnings
+- Update links
+
 ## 2.1.0
 
 - Add `addToRecentDocuments` field to control whether an item being opened or

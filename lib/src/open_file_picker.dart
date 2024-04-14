@@ -36,7 +36,7 @@ class OpenFilePicker extends FileDialog {
 
     final hr = fileDialog.show(hWndOwner);
     if (FAILED(hr)) {
-      if (hr == HRESULT_FROM_WIN32(ERROR_CANCELLED)) {
+      if (hr == HRESULT_FROM_WIN32(WIN32_ERROR.ERROR_CANCELLED)) {
         didUserCancel = true;
       } else {
         throw WindowsException(hr);
@@ -69,7 +69,7 @@ class OpenFilePicker extends FileDialog {
 
     final hr = fileDialog.show(NULL);
     if (FAILED(hr)) {
-      if (hr == HRESULT_FROM_WIN32(ERROR_CANCELLED)) {
+      if (hr == HRESULT_FROM_WIN32(WIN32_ERROR.ERROR_CANCELLED)) {
         didUserCancel = true;
       } else {
         throw WindowsException(hr);
