@@ -54,12 +54,12 @@ needed to create a projection, such issues should be resolved through a pull
 request to the [win32][win32_repo_link] or [dartwinrt][dartwinrt_repo_link]
 repositories.
 
-[dartwinrt_repo_link]: https://github.com/dart-windows/dartwinrt
+[dartwinrt_repo_link]: https://github.com/halildurmus/dartwinrt
 [ildasm_link]: https://learn.microsoft.com/dotnet/framework/tools/ildasm-exe-il-disassembler
 [ilspy_link]: https://github.com/icsharpcode/ILSpy
 [imetadataimport2_link]: https://learn.microsoft.com/windows/win32/api/rometadataapi/nn-rometadataapi-imetadataimport2
-[win32_repo_link]: https://github.com/dart-windows/win32
+[win32_repo_link]: https://github.com/halildurmus/win32
 [win32_package_link]: https://pub.dev/packages/win32
-[win32gen_link]: https://github.com/dart-windows/win32/tree/main/tool/win32gen
+[win32gen_link]: https://github.com/halildurmus/win32/tree/main/tool/win32gen
 [windows_packages_link]: https://pub.dev/packages?q=publisher%3Awin32.pub+topic%3Awinrt
-[winrtgen_link]: https://github.com/dart-windows/dartwinrt/tree/main/packages/winrtgen
+[winrtgen_link]: https://github.com/halildurmus/dartwinrt/tree/main/packages/winrtgen

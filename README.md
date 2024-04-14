@@ -147,17 +147,15 @@ void main() async {
 Please file feature requests and bugs at the
 [issue tracker][issue_tracker_link].
 
-[architecture_diagram_link]: https://github.com/dart-windows/winmd/blob/main/metadata.drawio.svg?raw=true
-[ci_badge]: https://github.com/dart-windows/winmd/actions/workflows/dart.yml/badge.svg
-[ci_link]: https://github.com/dart-windows/winmd/actions/workflows/dart.yml
-[codecov_badge_link]: https://codecov.io/gh/dart-windows/winmd/branch/main/graph/badge.svg?token=1ouz1Jr9nW
-[codecov_link]: https://codecov.io/gh/dart-windows/winmd
-[dart_windows_card]: https://raw.githubusercontent.com/dart-windows/.github/main/assets/dart-windows-card-480x240.png
-[dart_windows_link]: https://github.com/dart-windows
-[issue_tracker_link]: https://github.com/dart-windows/winmd/issues
+[architecture_diagram_link]: https://github.com/halildurmus/winmd/blob/main/metadata.drawio.svg?raw=true
+[ci_badge]: https://github.com/halildurmus/winmd/actions/workflows/dart.yml/badge.svg
+[ci_link]: https://github.com/halildurmus/winmd/actions/workflows/dart.yml
+[codecov_badge_link]: https://codecov.io/gh/halildurmus/winmd/branch/main/graph/badge.svg?token=1ouz1Jr9nW
+[codecov_link]: https://codecov.io/gh/halildurmus/winmd
+[issue_tracker_link]: https://github.com/halildurmus/winmd/issues
 [language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
 [language_link]: https://dart.dev
-[license_badge]: https://img.shields.io/github/license/dart-windows/winmd?color=blue
+[license_badge]: https://img.shields.io/github/license/halildurmus/winmd?color=blue
 [license_link]: https://opensource.org/licenses/BSD-3-Clause
 [media_player_link]: https://learn.microsoft.com/uwp/api/windows.media.playback.mediaplayer
 [package_badge]: https://img.shields.io/pub/v/winmd.svg
