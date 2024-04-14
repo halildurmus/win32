@@ -1,3 +1,9 @@
+## 0.2.1-wip
+
+- Fix deprecation warnings
+- Update links
+- Bump minimum required Dart SDK version to `3.3.0`
+
 ## 0.2.0
 
 - Added support for theme changes (#5)

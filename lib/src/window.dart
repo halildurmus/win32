@@ -28,7 +28,7 @@ class Window {
   factory Window.create({
     required String windowCaption,
     required String className,
-    required Pointer<NativeFunction<WindowProc>> windowProc,
+    required Pointer<NativeFunction<WNDPROC>> windowProc,
     int? hInstance,
     Rectangle<int>? dimensions,
     String? iconPath,
@@ -44,15 +44,15 @@ class Window {
 
     final wc = calloc<WNDCLASS>();
     wc.ref
-      ..hbrBackground = GetStockObject(WHITE_BRUSH)
+      ..hbrBackground = GetStockObject(GET_STOCK_OBJECT_FLAGS.WHITE_BRUSH)
       ..hCursor = LoadCursor(NULL, IDC_ARROW)
       ..hInstance = hInstance ?? GetModuleHandle(nullptr)
       ..lpfnWndProc = windowProc
       ..lpszClassName = classNamePtr
-      ..style = CS_HREDRAW | CS_VREDRAW;
+      ..style = WNDCLASS_STYLES.CS_HREDRAW | WNDCLASS_STYLES.CS_VREDRAW;
     if (iconPathPtr != null) {
-      wc.ref.hIcon = LoadImage(NULL, iconPathPtr, IMAGE_ICON, NULL, NULL,
-          LR_DEFAULTSIZE | LR_LOADFROMFILE);
+      wc.ref.hIcon = LoadImage(NULL, iconPathPtr, GDI_IMAGE_TYPE.IMAGE_ICON,
+          NULL, NULL, IMAGE_FLAGS.LR_DEFAULTSIZE | IMAGE_FLAGS.LR_LOADFROMFILE);
     }
 
     RegisterClass(wc);
@@ -68,7 +68,8 @@ class Window {
       0, // Optional window styles.
       classNamePtr, // Window class
       windowCaptionPtr, // Window caption
-      WS_OVERLAPPEDWINDOW | WS_VISIBLE, // Window style
+      WINDOW_STYLE.WS_OVERLAPPEDWINDOW |
+          WINDOW_STYLE.WS_VISIBLE, // Window style
       dimensions != null ? scale(dimensions.left, scaleFactor) : CW_USEDEFAULT,
       dimensions != null ? scale(dimensions.top, scaleFactor) : CW_USEDEFAULT,
       dimensions != null ? scale(dimensions.width, scaleFactor) : CW_USEDEFAULT,
@@ -143,7 +144,8 @@ class Window {
     final dpiX = calloc<UINT>();
     final dpiY = calloc<UINT>();
 
-    final hmonitor = MonitorFromPoint(point.ref, MONITOR_DEFAULTTONEAREST);
+    final hmonitor = MonitorFromPoint(
+        point.ref, MONITOR_FROM_FLAGS.MONITOR_DEFAULTTONEAREST);
     GetDpiForMonitor(hmonitor, MONITOR_DPI_TYPE.MDT_EFFECTIVE_DPI, dpiX, dpiY);
     final dpi = dpiX.value;
 
