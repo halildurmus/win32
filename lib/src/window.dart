@@ -3,15 +3,15 @@
 // license that can be found in the LICENSE file.
 
 import 'dart:ffi';
-import 'dart:math';
+import 'dart:math' as math;
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart' hide Rectangle;
+import 'package:win32/win32.dart';
 import 'package:win32_registry/win32_registry.dart';
 
 /// Represents a Win32 window and provides methods for creating and managing it.
 class Window {
-  /// Creates an instance of the [Window] with the given window handle [hwnd].
+  /// Creates an instance of the `Window` with the given window handle [hwnd].
   const Window(this.hwnd);
 
   /// Creates a new [Window] with the specified parameters.
@@ -30,75 +30,82 @@ class Window {
     required String className,
     required Pointer<NativeFunction<WNDPROC>> windowProc,
     int? hInstance,
-    Rectangle<int>? dimensions,
+    math.Rectangle<int>? dimensions,
     String? iconPath,
   }) {
     if (iconPath != null && !iconPath.endsWith('.ico')) {
       throw ArgumentError.value(
-          iconPath, 'iconPath', 'Must be an icon file (.ico)');
+        iconPath,
+        'iconPath',
+        'Must be an icon file (.ico)',
+      );
     }
 
-    final classNamePtr = className.toNativeUtf16();
-    final windowCaptionPtr = windowCaption.toNativeUtf16();
-    final iconPathPtr = iconPath?.toNativeUtf16();
+    return using((arena) {
+      final classNamePtr = className.toNativeUtf16(allocator: arena);
+      final windowCaptionPtr = windowCaption.toNativeUtf16(allocator: arena);
+      final iconPathPtr = iconPath?.toNativeUtf16(allocator: arena);
+      final wc = arena<WNDCLASS>();
+      wc.ref
+        ..hbrBackground = GetStockObject(GET_STOCK_OBJECT_FLAGS.WHITE_BRUSH)
+        ..hCursor = LoadCursor(NULL, IDC_ARROW)
+        ..hInstance = hInstance ?? GetModuleHandle(nullptr)
+        ..lpfnWndProc = windowProc
+        ..lpszClassName = classNamePtr
+        ..style = WNDCLASS_STYLES.CS_HREDRAW | WNDCLASS_STYLES.CS_VREDRAW;
+      if (iconPathPtr != null) {
+        wc.ref.hIcon = LoadImage(
+          NULL,
+          iconPathPtr,
+          GDI_IMAGE_TYPE.IMAGE_ICON,
+          NULL,
+          NULL,
+          IMAGE_FLAGS.LR_DEFAULTSIZE | IMAGE_FLAGS.LR_LOADFROMFILE,
+        );
+      }
+      RegisterClass(wc);
 
-    final wc = calloc<WNDCLASS>();
-    wc.ref
-      ..hbrBackground = GetStockObject(GET_STOCK_OBJECT_FLAGS.WHITE_BRUSH)
-      ..hCursor = LoadCursor(NULL, IDC_ARROW)
-      ..hInstance = hInstance ?? GetModuleHandle(nullptr)
-      ..lpfnWndProc = windowProc
-      ..lpszClassName = classNamePtr
-      ..style = WNDCLASS_STYLES.CS_HREDRAW | WNDCLASS_STYLES.CS_VREDRAW;
-    if (iconPathPtr != null) {
-      wc.ref.hIcon = LoadImage(NULL, iconPathPtr, GDI_IMAGE_TYPE.IMAGE_ICON,
-          NULL, NULL, IMAGE_FLAGS.LR_DEFAULTSIZE | IMAGE_FLAGS.LR_LOADFROMFILE);
-    }
+      final scaleFactor =
+          dimensions != null ? scaleFactorForOrigin(dimensions) : 1.0;
+      final hwnd = CreateWindowEx(
+        0, // Optional window styles.
+        classNamePtr, // Window class
+        windowCaptionPtr, // Window caption
+        WINDOW_STYLE.WS_OVERLAPPEDWINDOW | WINDOW_STYLE.WS_VISIBLE, // Window style
+        dimensions != null
+            ? scale(dimensions.left, scaleFactor)
+            : CW_USEDEFAULT,
+        dimensions != null ? scale(dimensions.top, scaleFactor) : CW_USEDEFAULT,
+        dimensions != null
+            ? scale(dimensions.width, scaleFactor)
+            : CW_USEDEFAULT,
+        dimensions != null
+            ? scale(dimensions.height, scaleFactor)
+            : CW_USEDEFAULT,
+        NULL, // Parent window
+        NULL, // Menu
+        hInstance ?? GetModuleHandle(nullptr), // Instance handle
+        nullptr, // Additional application data
+      );
+      if (hwnd == FALSE) throw Exception('Unable to create top-level window.');
 
-    RegisterClass(wc);
-    if (iconPathPtr != null) {
-      free(iconPathPtr);
-    }
-    free(wc);
-
-    final scaleFactor =
-        dimensions != null ? scaleFactorForOrigin(dimensions) : 1.0;
-
-    final hwnd = CreateWindowEx(
-      0, // Optional window styles.
-      classNamePtr, // Window class
-      windowCaptionPtr, // Window caption
-      WINDOW_STYLE.WS_OVERLAPPEDWINDOW |
-          WINDOW_STYLE.WS_VISIBLE, // Window style
-      dimensions != null ? scale(dimensions.left, scaleFactor) : CW_USEDEFAULT,
-      dimensions != null ? scale(dimensions.top, scaleFactor) : CW_USEDEFAULT,
-      dimensions != null ? scale(dimensions.width, scaleFactor) : CW_USEDEFAULT,
-      dimensions != null
-          ? scale(dimensions.height, scaleFactor)
-          : CW_USEDEFAULT,
-      NULL, // Parent window
-      NULL, // Menu
-      hInstance ?? GetModuleHandle(nullptr), // Instance handle
-      nullptr, // Additional application data
-    );
-
-    if (hwnd == FALSE) throw Exception('Unable to create top-level window.');
-
-    free(windowCaptionPtr);
-    free(classNamePtr);
-
-    return Window(hwnd);
+      return Window(hwnd);
+    });
   }
 
   /// The handle to the window.
   final int hwnd;
 
   /// The dimensions of the current window.
-  Rectangle<int> get dimensions {
+  math.Rectangle<int> get dimensions {
     final rect = calloc<RECT>();
     GetClientRect(hwnd, rect);
-    final windowRect = Rectangle<int>(rect.ref.left, rect.ref.top,
-        rect.ref.right - rect.ref.left, rect.ref.bottom - rect.ref.top);
+    final windowRect = math.Rectangle<int>(
+      rect.ref.left,
+      rect.ref.top,
+      rect.ref.right - rect.ref.left,
+      rect.ref.bottom - rect.ref.top,
+    );
     free(rect);
     return windowRect;
   }
@@ -107,7 +114,7 @@ class Window {
   ///
   /// [repaintWindow] indicates whether the window should be repainted after the
   /// move (defaults to `true`).
-  void move(Rectangle<int> newDimensions, {bool repaintWindow = true}) =>
+  void move(math.Rectangle<int> newDimensions, {bool repaintWindow = true}) =>
       MoveWindow(
         hwnd,
         newDimensions.left,
@@ -122,7 +129,6 @@ class Window {
   /// This method continuously processes and dispatches Windows messages until
   /// the window is closed.
   void runMessageLoop() {
-    // Run the message loop.
     final msg = calloc<MSG>();
     while (GetMessage(msg, NULL, 0, 0) != FALSE) {
       TranslateMessage(msg);
@@ -137,10 +143,11 @@ class Window {
       (source * scaleFactor).floor();
 
   /// Calculates the DPI scale factor for the specified window [dimensions].
-  static double scaleFactorForOrigin(Rectangle<int> dimensions) {
-    final point = calloc<POINT>()
-      ..ref.x = dimensions.left
-      ..ref.y = dimensions.top;
+  static double scaleFactorForOrigin(math.Rectangle<int> dimensions) {
+    final point = calloc<POINT>();
+    point.ref
+      ..x = dimensions.left
+      ..y = dimensions.top;
     final dpiX = calloc<UINT>();
     final dpiY = calloc<UINT>();
 
