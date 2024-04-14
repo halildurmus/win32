@@ -1,6 +1,6 @@
 [![ci][ci_badge]][ci_link]
 [![Package: winmd][package_badge]][package_link]
-[![Publisher: win32.pub][publisher_badge]][publisher_link]
+[![Publisher: halildurmus.dev][publisher_badge]][publisher_link]
 [![Language: Dart][language_badge]][language_link]
 [![License: BSD-3-Clause][license_badge]][license_link]
 [![codecov][codecov_badge_link]][codecov_link]
@@ -157,7 +157,7 @@ Please file feature requests and bugs at the
 [package_badge]: https://img.shields.io/pub/v/winmd.svg
 [package_link]: https://pub.dev/packages/winmd
 [publisher_badge]: https://img.shields.io/pub/publisher/winmd.svg
-[publisher_link]: https://pub.dev/publishers/win32.pub
+[publisher_link]: https://pub.dev/publishers/halildurmus.dev
 [win32_package_link]: https://pub.dev/packages/win32
 [win32_pub_link]: https://win32.pub
 [windows_packages_link]: https://pub.dev/packages?q=publisher%3Awin32.pub+topic%3Awinrt
