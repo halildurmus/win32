@@ -1,7 +1,5 @@
-[![Dart | Windows][dart_windows_card]][win32_pub_link]
-
 [![Package: filepicker_windows][package_badge]][package_link]
-[![Publisher: win32.pub][publisher_badge]][publisher_link]
+[![Publisher: halildurmus.dev][publisher_badge]][publisher_link]
 [![Language: Dart][language_badge]][language_link]
 [![License: BSD-3-Clause][license_badge]][license_link]
 
@@ -11,8 +9,6 @@ Windows using common dialog controls.
 This package builds on top of the Dart [win32][win32_pub_dev_link] package,
 offering a high-level Dart wrapper that avoids the need for users to understand
 FFI or write directly to the Win32 API.
-
-Part of the [Dart | Windows][dart_windows_link] suite of Windows packages.
 
 ## Usage
 
@@ -70,16 +66,13 @@ image file and set it as your desktop wallpaper.
 Please file feature requests and bugs at the
 [issue tracker][issue_tracker_link].
 
-[dart_windows_card]: https://raw.githubusercontent.com/dart-windows/.github/main/assets/dart-windows-card-480x240.png
-[dart_windows_link]: https://github.com/dart-windows
-[issue_tracker_link]: https://github.com/dart-windows/filepicker_windows/issues
+[issue_tracker_link]: https://github.com/halildurmus/filepicker_windows/issues
 [language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
 [language_link]: https://dart.dev
-[license_badge]: https://img.shields.io/github/license/dart-windows/filepicker_windows?color=blue
+[license_badge]: https://img.shields.io/github/license/halildurmus/filepicker_windows?color=blue
 [license_link]: https://opensource.org/licenses/BSD-3-Clause
 [package_badge]: https://img.shields.io/pub/v/filepicker_windows.svg
 [package_link]: https://pub.dev/packages/filepicker_windows
 [publisher_badge]: https://img.shields.io/pub/publisher/filepicker_windows.svg
-[publisher_link]: https://pub.dev/publishers/win32.pub
-[win32_pub_link]: https://win32.pub
+[publisher_link]: https://pub.dev/publishers/halildurmus.dev
 [win32_pub_dev_link]: https://pub.dev/packages/win32
