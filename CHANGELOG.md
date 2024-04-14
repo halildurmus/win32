@@ -1,4 +1,4 @@
-## 0.1.2-wip
+## 0.1.2
 
 - Fix deprecation warnings
 - Update links
