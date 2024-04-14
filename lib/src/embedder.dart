@@ -4,10 +4,10 @@
 
 import 'dart:ffi';
 import 'dart:io';
-import 'dart:math' show Rectangle;
+import 'dart:math' as math;
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart' as win32;
+import 'package:win32/win32.dart';
 
 import 'dart_project.dart';
 import 'ffi.dart';
@@ -21,7 +21,7 @@ class FlutterEmbedder {
   /// - `project`: Information about the Dart project.
   /// - `flutterLibrary`: The path to the Flutter engine library.
   FlutterEmbedder(
-    Rectangle<int> size,
+    math.Rectangle<int> size,
     DartProject project,
     String flutterLibrary,
   ) {
@@ -33,16 +33,16 @@ class FlutterEmbedder {
     // the engine, it's called again, which leads to a "Failed to init
     // NativeSymbolResolver (SymInitialize 87)" error. So we clean up before we
     // call the engine.
-    final hProcess = win32.GetCurrentProcess();
-    win32.SymCleanup(hProcess);
+    final hProcess = GetCurrentProcess();
+    SymCleanup(hProcess);
 
-    using((Arena arena) {
-      final engineProperties = arena<FlutterDesktopEngineProperties>()
-        ..ref.aot_library_path =
+    using((arena) {
+      final engineProperties = arena<FlutterDesktopEngineProperties>();
+      engineProperties.ref
+        ..aot_library_path =
             project.aotLibraryPath.toNativeUtf16(allocator: arena)
-        ..ref.icu_data_path =
-            project.icuDataPath.toNativeUtf16(allocator: arena)
-        ..ref.assets_path = project.assetsPath.toNativeUtf16(allocator: arena);
+        ..icu_data_path = project.icuDataPath.toNativeUtf16(allocator: arena)
+        ..assets_path = project.assetsPath.toNativeUtf16(allocator: arena);
       engine = flutter.FlutterDesktopEngineCreate(engineProperties);
     });
 
@@ -50,7 +50,10 @@ class FlutterEmbedder {
     if (messenger == nullptr) throw Exception('Failed to create messenger.');
 
     controller = flutter.FlutterDesktopViewControllerCreate(
-        size.width, size.height, engine);
+      size.width,
+      size.height,
+      engine,
+    );
     if (controller == nullptr) {
       throw Exception('Failed to create view controller.');
     }
@@ -103,9 +106,17 @@ class FlutterEmbedder {
     final result = calloc<IntPtr>();
     final handled =
         flutter.FlutterDesktopViewControllerHandleTopLevelWindowProc(
-                controller, hwnd, message, wParam, lParam, result) !=
+              controller,
+              hwnd,
+              message,
+              wParam,
+              lParam,
+              result,
+            ) !=
             0;
-    return handled ? result.value : 0;
+    final returnValue = handled ? result.value : 0;
+    free(result);
+    return returnValue;
   }
 
   /// Starts running the Flutter engine, optionally specifying an entry point.
