@@ -1,4 +1,4 @@
-// Copyright (c) 2023, Dart | Windows. Please see the AUTHORS file for details.
+// Copyright (c) 2023, Halil Durmus. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -23,14 +23,17 @@ void main() {
     test('formats', () {
       check(Clipboard.formats).isEmpty();
       check(Clipboard.setText('win32_clipboard')).isTrue();
-      check(Clipboard.formats).which(it()
+      check(Clipboard.formats).which((it) => it
         ..length.isGreaterOrEqual(4)
         ..contains(ClipboardFormat.text)
+        ..contains(const ClipboardFormat(CLIPBOARD_FORMAT.CF_UNICODETEXT,
+            name: 'CF_UNICODETEXT'))
         ..contains(
-            const ClipboardFormat(CF_UNICODETEXT, name: 'CF_UNICODETEXT'))
-        ..contains(const ClipboardFormat(CF_TEXT, name: 'CF_TEXT'))
-        ..contains(const ClipboardFormat(CF_LOCALE, name: 'CF_LOCALE'))
-        ..contains(const ClipboardFormat(CF_OEMTEXT, name: 'CF_OEMTEXT')));
+            const ClipboardFormat(CLIPBOARD_FORMAT.CF_TEXT, name: 'CF_TEXT'))
+        ..contains(const ClipboardFormat(CLIPBOARD_FORMAT.CF_LOCALE,
+            name: 'CF_LOCALE'))
+        ..contains(const ClipboardFormat(CLIPBOARD_FORMAT.CF_OEMTEXT,
+            name: 'CF_OEMTEXT')));
     });
 
     test('getData', () {
@@ -44,9 +47,9 @@ void main() {
     test('getPriorityFormat', () {
       const formats = [
         ClipboardFormat.text,
-        ClipboardFormat(CF_LOCALE),
-        ClipboardFormat(CF_TEXT),
-        ClipboardFormat(CF_OEMTEXT),
+        ClipboardFormat(CLIPBOARD_FORMAT.CF_LOCALE),
+        ClipboardFormat(CLIPBOARD_FORMAT.CF_TEXT),
+        ClipboardFormat(CLIPBOARD_FORMAT.CF_OEMTEXT),
       ];
 
       check(Clipboard.getPriorityFormat(formats)).isNull();
@@ -56,7 +59,7 @@ void main() {
           .equals(ClipboardFormat.text);
       check(Clipboard.getPriorityFormat(formats.reversed.toList()))
           .isNotNull()
-          .equals(const ClipboardFormat(CF_OEMTEXT));
+          .equals(const ClipboardFormat(CLIPBOARD_FORMAT.CF_OEMTEXT));
     });
 
     test('getText', () {
@@ -69,10 +72,18 @@ void main() {
       check(Clipboard.hasFormat(ClipboardFormat.text)).isFalse();
       check(Clipboard.setText('win32_clipboard')).isTrue();
       check(Clipboard.hasFormat(ClipboardFormat.text)).isTrue();
-      check(Clipboard.hasFormat(const ClipboardFormat(CF_TEXT))).isTrue();
-      check(Clipboard.hasFormat(const ClipboardFormat(CF_LOCALE))).isTrue();
-      check(Clipboard.hasFormat(const ClipboardFormat(CF_OEMTEXT))).isTrue();
-      check(Clipboard.hasFormat(const ClipboardFormat(CF_BITMAP))).isFalse();
+      check(Clipboard.hasFormat(
+              const ClipboardFormat(CLIPBOARD_FORMAT.CF_TEXT)))
+          .isTrue();
+      check(Clipboard.hasFormat(
+              const ClipboardFormat(CLIPBOARD_FORMAT.CF_LOCALE)))
+          .isTrue();
+      check(Clipboard.hasFormat(
+              const ClipboardFormat(CLIPBOARD_FORMAT.CF_OEMTEXT)))
+          .isTrue();
+      check(Clipboard.hasFormat(
+              const ClipboardFormat(CLIPBOARD_FORMAT.CF_BITMAP)))
+          .isFalse();
     });
 
     test('hasText', () {
@@ -96,7 +107,7 @@ void main() {
 
     test('registerFormat', () {
       final formatId = Clipboard.registerFormat('CF_DARTWIN32');
-      check(formatId).not(it()..equals(0));
+      check(formatId).not((it) => it.equals(0));
       check(Clipboard.setData('win32_clipboard',
               format: ClipboardFormat(formatId)))
           .isTrue();
@@ -105,7 +116,7 @@ void main() {
 
     test('setData', () {
       final formatId = Clipboard.registerFormat('CF_DARTWIN32');
-      check(formatId).not(it()..equals(0));
+      check(formatId).not((it) => it.equals(0));
       check(Clipboard.setData('win32_clipboard',
               format: ClipboardFormat(formatId)))
           .isTrue();

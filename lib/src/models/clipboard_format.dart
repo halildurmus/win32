@@ -25,7 +25,8 @@ final class ClipboardFormat {
   final String? name;
 
   /// The Unicode text format.
-  static const text = ClipboardFormat(CF_UNICODETEXT, name: 'CF_UNICODETEXT');
+  static const text =
+      ClipboardFormat(CLIPBOARD_FORMAT.CF_UNICODETEXT, name: 'CF_UNICODETEXT');
 
   @override
   bool operator ==(Object other) =>
