@@ -42,8 +42,8 @@ class Gamepad {
 
   void _initializeCom() {
     if (!_isComInitialized) {
-      final hr = CoInitializeEx(
-          nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
+      final hr = CoInitializeEx(nullptr,
+          COINIT.COINIT_APARTMENTTHREADED | COINIT.COINIT_DISABLE_OLE1DDE);
       if (FAILED(hr)) throw WindowsException(hr);
       _isComInitialized = true;
     }
@@ -65,7 +65,7 @@ class Gamepad {
     final pState = calloc<XINPUT_STATE>();
     try {
       final dwResult = XInputGetState(controller, pState);
-      if (dwResult == ERROR_SUCCESS) {
+      if (dwResult == WIN32_ERROR.ERROR_SUCCESS) {
         final XINPUT_STATE(:dwPacketNumber, Gamepad: gamepad) = pState.ref;
         // The packet number indicates whether there have been any changes in
         // the state of the controller. If the dwPacketNumber member is the same
@@ -84,7 +84,7 @@ class Gamepad {
           gamepad.sThumbRX,
           gamepad.sThumbRY,
         );
-      } else if (dwResult == ERROR_DEVICE_NOT_CONNECTED) {
+      } else if (dwResult == WIN32_ERROR.ERROR_DEVICE_NOT_CONNECTED) {
         state = GamepadState.disconnected();
       } else {
         throw WindowsException(dwResult);
@@ -128,9 +128,9 @@ class Gamepad {
       ..ref.wRightMotorSpeed = rightMotorSpeed;
     try {
       final dwResult = XInputSetState(controller, pVibration);
-      if (dwResult == ERROR_DEVICE_NOT_CONNECTED) {
+      if (dwResult == WIN32_ERROR.ERROR_DEVICE_NOT_CONNECTED) {
         throw DeviceNotConnectedError();
-      } else if (dwResult != ERROR_SUCCESS) {
+      } else if (dwResult != WIN32_ERROR.ERROR_SUCCESS) {
         throw WindowsException(dwResult);
       }
     } finally {

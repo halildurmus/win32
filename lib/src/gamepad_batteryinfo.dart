@@ -27,11 +27,11 @@ class GamepadBatteryInfo {
       final dwResult = XInputGetBatteryInformation(
         controller,
         deviceType == GamepadDeviceType.controller
-            ? BATTERY_DEVTYPE_GAMEPAD
-            : BATTERY_DEVTYPE_HEADSET,
+            ? BATTERY_DEVTYPE.BATTERY_DEVTYPE_GAMEPAD
+            : BATTERY_DEVTYPE.BATTERY_DEVTYPE_HEADSET,
         pBatteryInformation,
       );
-      if (dwResult == ERROR_DEVICE_NOT_CONNECTED) {
+      if (dwResult == WIN32_ERROR.ERROR_DEVICE_NOT_CONNECTED) {
         throw DeviceNotConnectedError();
       } else {
         final XINPUT_BATTERY_INFORMATION(:BatteryLevel, :BatteryType) =
@@ -51,19 +51,20 @@ class GamepadBatteryInfo {
   ///
   /// This value is only valid for wireless devices with a known battery type.
   GamepadBatteryLevel get batteryLevel => switch (_batteryLevel) {
-        BATTERY_LEVEL_FULL => GamepadBatteryLevel.full,
-        BATTERY_LEVEL_MEDIUM => GamepadBatteryLevel.medium,
-        BATTERY_LEVEL_LOW => GamepadBatteryLevel.low,
-        BATTERY_LEVEL_EMPTY => GamepadBatteryLevel.empty,
+        BATTERY_LEVEL.BATTERY_LEVEL_FULL => GamepadBatteryLevel.full,
+        BATTERY_LEVEL.BATTERY_LEVEL_MEDIUM => GamepadBatteryLevel.medium,
+        BATTERY_LEVEL.BATTERY_LEVEL_LOW => GamepadBatteryLevel.low,
+        BATTERY_LEVEL.BATTERY_LEVEL_EMPTY => GamepadBatteryLevel.empty,
         _ => GamepadBatteryLevel.unknown
       };
 
   /// The type of battery.
   GamepadBatteryType get batteryType => switch (_batteryType) {
-        BATTERY_TYPE_DISCONNECTED => GamepadBatteryType.disconnected,
-        BATTERY_TYPE_WIRED => GamepadBatteryType.wired,
-        BATTERY_TYPE_ALKALINE => GamepadBatteryType.alkaline,
-        BATTERY_TYPE_NIMH => GamepadBatteryType.nickelMetalHydride,
+        BATTERY_TYPE.BATTERY_TYPE_DISCONNECTED =>
+          GamepadBatteryType.disconnected,
+        BATTERY_TYPE.BATTERY_TYPE_WIRED => GamepadBatteryType.wired,
+        BATTERY_TYPE.BATTERY_TYPE_ALKALINE => GamepadBatteryType.alkaline,
+        BATTERY_TYPE.BATTERY_TYPE_NIMH => GamepadBatteryType.nickelMetalHydride,
         _ => GamepadBatteryType.unknown
       };
 }
