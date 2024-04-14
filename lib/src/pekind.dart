@@ -57,9 +57,9 @@ class PEKind {
   /// Returns a value that identifies the platform architecture targeted by the
   /// module.
   ImageType get imageType => switch (_machine) {
-        IMAGE_FILE_MACHINE_I386 => ImageType.i386,
-        IMAGE_FILE_MACHINE_IA64 => ImageType.ia64,
-        IMAGE_FILE_MACHINE_AMD64 => ImageType.amd64,
+        IMAGE_FILE_MACHINE.IMAGE_FILE_MACHINE_I386 => ImageType.i386,
+        IMAGE_FILE_MACHINE.IMAGE_FILE_MACHINE_IA64 => ImageType.ia64,
+        IMAGE_FILE_MACHINE.IMAGE_FILE_MACHINE_AMD64 => ImageType.amd64,
         _ => throw const WinmdException('Unrecognized image type.')
       };
 }
