@@ -13,7 +13,7 @@ without the need for a C++ compiler on your system.
 **Important Note:** This package is currently in an *experimental* stage and
 should not be used for production applications. It is primarily a
 proof-of-concept, and as such, it has some limitations. For example, it does not
-yet support plugins.
+support plugins.
 
 ## Usage
 
