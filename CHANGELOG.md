@@ -2,6 +2,8 @@
 
 - Fix deprecation warnings
 - Update links
+- Improve code quality
+- Fix memory leaks
 - Bump minimum required Dart SDK version to `3.3.0`
 
 ## 0.2.0
