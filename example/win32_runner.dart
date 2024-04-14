@@ -4,11 +4,11 @@
 
 import 'dart:ffi';
 import 'dart:io';
-import 'dart:math' show Rectangle;
+import 'dart:math' as math;
 
 import 'package:args/args.dart';
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart' hide Rectangle;
+import 'package:win32/win32.dart';
 import 'package:win32_runner/win32_runner.dart';
 
 void main() => initApp(Application.winMain);
@@ -87,12 +87,16 @@ class Application {
     CoInitializeEx(nullptr, COINIT.COINIT_APARTMENTTHREADED);
     SetThreadDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
 
+    final windowProc = NativeCallable<WNDPROC>.isolateLocal(
+      mainWindowProc,
+      exceptionalReturn: 0,
+    );
     final hostWindow = Window.create(
       hInstance: hInstance,
       windowCaption: 'Dart Native Win32 Window',
       className: 'FLUTTER_RUNNER_WIN32_WINDOW',
-      windowProc: Pointer.fromFunction<WNDPROC>(mainWindowProc, 0),
-      dimensions: const Rectangle<int>(10, 10, 1280, 720),
+      windowProc: windowProc.nativeFunction,
+      dimensions: const math.Rectangle<int>(10, 10, 1280, 720),
       iconPath: iconPath,
     )..updateTheme();
 
@@ -115,6 +119,7 @@ class Application {
       ..setFocus()
       ..runMessageLoop();
 
+    windowProc.close();
     CoUninitialize();
   }
 }
