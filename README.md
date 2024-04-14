@@ -27,7 +27,7 @@ C:\src> flutter create simpleapp
 C:\src> cd simpleapp
 
 # Compile Flutter code and assets to the build\ subdirectory
-C:\src\simpleapp> flutter assemble -dTargetPlatform=windows-x64 --output=build -dBuildMode=release release_bundle_windows_assets
+C:\src\simpleapp> flutter assemble -dTargetPlatform=windows-x64 --output=build -dBuildMode=release release_bundle_windows-x64_assets
 
 # Compile Dart runner
 C:\src\simpleapp> dart compile exe ..\win32_runner\example\win32_runner.dart -o win32_runner.exe
