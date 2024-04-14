@@ -1,5 +1,3 @@
-[![Dart | Windows][dart_windows_card]][win32_pub_link]
-
 [![ci][ci_badge]][ci_link]
 [![Package: winmd][package_badge]][package_link]
 [![Publisher: win32.pub][publisher_badge]][publisher_link]
@@ -14,8 +12,6 @@ possible to load them and build Dart FFI interop libraries from the results.
 It can be used to query Windows developer APIs, encompassing both unmanaged
 APIs like Win32 or COM, as well as modern APIs like Windows Runtime (WinRT) that
 include their own metadata.
-
-Part of the [Dart | Windows][dart_windows_link] suite of Windows packages.
 
 ## Architecture
 
