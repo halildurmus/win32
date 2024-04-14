@@ -71,7 +71,8 @@ class Window {
         0, // Optional window styles.
         classNamePtr, // Window class
         windowCaptionPtr, // Window caption
-        WINDOW_STYLE.WS_OVERLAPPEDWINDOW | WINDOW_STYLE.WS_VISIBLE, // Window style
+        WINDOW_STYLE.WS_OVERLAPPEDWINDOW |
+            WINDOW_STYLE.WS_VISIBLE, // Window style
         dimensions != null
             ? scale(dimensions.left, scaleFactor)
             : CW_USEDEFAULT,
