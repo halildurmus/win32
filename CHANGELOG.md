@@ -1,4 +1,4 @@
-## 2.1.2-wip
+## 2.1.2
 
 - Add `alwaysShowInitialDirectory` field to control whether the dialog box
   should always show the directory defined in `initialDirectory` to the user,
