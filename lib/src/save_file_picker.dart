@@ -12,8 +12,16 @@ import 'file_dialog.dart';
 
 /// A picker that allows the user to save a file into the file system.
 class SaveFilePicker extends FileDialog {
-  /// The folder used as a default if there is not a recently used folder
-  /// value available.
+  /// Whether the dialog box should always display the directory defined in
+  /// in [initialDirectory] to the user, regardless of previous user
+  /// interaction.
+  bool alwaysShowInitialDirectory = false;
+
+  /// The directory that the dialog box initially displays when opened.
+  ///
+  /// If [alwaysShowInitialDirectory] is `true`, the dialog box always opens in
+  /// the directory specified by this field. Otherwise, it opens in the most
+  /// recently accessed folder (if any).
   String? initialDirectory;
 
   /// Returns a `File` object from the selected file.
@@ -110,8 +118,11 @@ class SaveFilePicker extends FileDialog {
         if (FAILED(hr)) throw WindowsException(hr);
 
         final shellItem = IShellItem(ppv.cast());
-        hr = fileDialog
-            .setDefaultFolder(shellItem.ptr.cast<Pointer<COMObject>>().value);
+        hr = alwaysShowInitialDirectory
+            ? fileDialog
+                .setFolder(shellItem.ptr.cast<Pointer<COMObject>>().value)
+            : fileDialog.setDefaultFolder(
+                shellItem.ptr.cast<Pointer<COMObject>>().value);
         if (FAILED(hr)) throw WindowsException(hr);
       }
 

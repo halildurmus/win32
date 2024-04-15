@@ -1,3 +1,9 @@
+## 2.1.2-wip
+
+- Add `alwaysShowInitialDirectory` field to control whether the dialog box
+  should always show the directory defined in `initialDirectory` to the user,
+  regardless of previous user interaction.
+
 ## 2.1.1
 
 - Fix deprecation warnings
