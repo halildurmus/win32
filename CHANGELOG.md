@@ -1,4 +1,4 @@
-## 2.1.3-wip
+## 2.1.3
 
 - Add `initialDirectory` and `alwaysShowInitialDirectory` fields to
   `DirectoryPicker` (#36).
