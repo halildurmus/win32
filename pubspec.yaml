@@ -1,7 +1,7 @@
 name: filepicker_windows
 description: A package that allows file and directory selection for Windows
   using common dialog controls.
-version: 2.1.2
+version: 2.1.3-wip
 repository: https://github.com/halildurmus/filepicker_windows
 issue_tracker: https://github.com/halildurmus/filepicker_windows/issues
 

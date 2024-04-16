@@ -1,3 +1,8 @@
+## 2.1.3-wip
+
+- Add `initialDirectory` and `alwaysShowInitialDirectory` fields to
+  `DirectoryPicker` (#36).
+
 ## 2.1.2
 
 - Add `alwaysShowInitialDirectory` field to control whether the dialog box

@@ -13,6 +13,18 @@ import 'models/models.dart';
 
 /// A picker that allows the user to select a directory from the file system.
 class DirectoryPicker extends FileDialog {
+  /// Whether the dialog box should always display the directory defined in
+  /// in [initialDirectory] to the user, regardless of previous user
+  /// interaction.
+  bool alwaysShowInitialDirectory = false;
+
+  /// The directory that the dialog box initially displays when opened.
+  ///
+  /// If [alwaysShowInitialDirectory] is `true`, the dialog box always opens in
+  /// the directory specified by this field. Otherwise, it opens in the most
+  /// recently accessed folder (if any).
+  String? initialDirectory;
+
   /// Returns a [Directory] selected by the user using a common file open
   /// dialog.
   ///
@@ -45,6 +57,27 @@ class DirectoryPicker extends FileDialog {
       if (title.isNotEmpty) {
         final pTitle = title.toNativeUtf16(allocator: arena);
         final hr = dialog.setTitle(pTitle);
+        if (FAILED(hr)) throw WindowsException(hr);
+      }
+
+      if (initialDirectory case final initialDirectory?
+          when initialDirectory.isNotEmpty) {
+        final pszPath = initialDirectory.toNativeUtf16(allocator: arena);
+        final riid = convertToIID(IID_IShellItem, allocator: arena);
+        final ppv = calloc<Pointer>();
+        var hr = SHCreateItemFromParsingName(
+          pszPath,
+          nullptr,
+          riid,
+          ppv,
+        );
+        if (FAILED(hr)) throw WindowsException(hr);
+
+        final shellItem = IShellItem(ppv.cast());
+        hr = alwaysShowInitialDirectory
+            ? dialog.setFolder(shellItem.ptr.cast<Pointer<COMObject>>().value)
+            : dialog.setDefaultFolder(
+                shellItem.ptr.cast<Pointer<COMObject>>().value);
         if (FAILED(hr)) throw WindowsException(hr);
       }
 

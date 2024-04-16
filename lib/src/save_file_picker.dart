@@ -64,9 +64,10 @@ class SaveFilePicker extends FileDialog {
       hr = fileDialog.setOptions(options);
       if (FAILED(hr)) throw WindowsException(hr);
 
-      if (defaultExtension != null && defaultExtension!.isNotEmpty) {
+      if (defaultExtension case final defaultExtension?
+          when defaultExtension.isNotEmpty) {
         final pDefaultExtension =
-            defaultExtension!.toNativeUtf16(allocator: arena);
+            defaultExtension.toNativeUtf16(allocator: arena);
         final hr = fileDialog.setDefaultExtension(pDefaultExtension);
         if (FAILED(hr)) throw WindowsException(hr);
       }
@@ -105,8 +106,9 @@ class SaveFilePicker extends FileDialog {
         if (FAILED(hr)) throw WindowsException(hr);
       }
 
-      if (initialDirectory != null && initialDirectory!.isNotEmpty) {
-        final pszPath = initialDirectory!.toNativeUtf16(allocator: arena);
+      if (initialDirectory case final initialDirectory?
+          when initialDirectory.isNotEmpty) {
+        final pszPath = initialDirectory.toNativeUtf16(allocator: arena);
         final riid = convertToIID(IID_IShellItem, allocator: arena);
         final ppv = calloc<Pointer>();
         var hr = SHCreateItemFromParsingName(
