@@ -20,19 +20,36 @@ support plugins.
 You can use the sample app in the `example\` subdirectory to run an existing
 Flutter app on Windows using the Dart runner:
 
+1. Clone the repository:
 ```console
-# Create a sample app
+C:\src> git clone https://github.com/halildurmus/win32_runner.git
+C:\src> cd win32_runner
+```
+
+2. Install dependencies:
+```console
+C:\src\win32_runner> dart pub get
+```
+
+3. Create a sample app:
+```console
 C:\src\win32_runner> cd ..
 C:\src> flutter create simpleapp
 C:\src> cd simpleapp
+```
 
-# Compile Flutter code and assets to the build\ subdirectory
+4. Compile Flutter code and assets to the `build\` subdirectory:
+```console
 C:\src\simpleapp> flutter assemble -dTargetPlatform=windows-x64 --output=build -dBuildMode=release release_bundle_windows-x64_assets
+```
 
-# Compile Dart runner
+5. Compile Dart runner:
+```console
 C:\src\simpleapp> dart compile exe ..\win32_runner\example\win32_runner.dart -o win32_runner.exe
+```
 
-# Run Flutter app
+6. Run Flutter app:
+```console
 C:\src\simpleapp> .\win32_runner
 ```
 
