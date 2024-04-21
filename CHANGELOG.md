@@ -1,4 +1,4 @@
-## 0.2.2-wip
+## 0.2.2
 
 - Update usage instructions
 
