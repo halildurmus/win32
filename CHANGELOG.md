@@ -1,3 +1,13 @@
+## 5.5.0-wip
+
+- Add `BLOB`, `BSTRBLOB`, `CABOOL`, `CABSTR`, `CABSTRBLOB`, `CAC`, `CACLIPDATA`,
+  `CACLSID`, `CACY`, `CADATE`, `CADBL`, `CAFILETIME`, `CAFLT`, `CAH`, `CAI`,
+  `CAL`, `CALPSTR`, `CALPWSTR`, `CAPROPVARIANT`, `CASCODE`, `CAUB`, `CAUH`,
+  `CAUI`, `CAUL`, `CLIPDATA`, and `VERSIONEDSTREAM` structures (#845)
+- Add `VARIANT_BOOL` typedef (#845)
+- Fix the Dart representation of the `PROPVARIANT` structure (#845)
+- Add `PropVariantInit` and `PropVariantClear` APIs (#845)
+
 ## 5.4.0
 
 - Fix constant values `ERROR_SERVICE_NOT_ACTIVE`, `KF_FLAG_ALIAS_ONLY`,

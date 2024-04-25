@@ -363,6 +363,17 @@ base class BLENDFUNCTION extends Struct {
   external int AlphaFormat;
 }
 
+/// The BLOB structure, derived from Binary Large Object, contains
+/// information about a block of data.
+///
+/// {@category struct}
+base class BLOB extends Struct {
+  @Uint32()
+  external int cbSize;
+
+  external Pointer<Uint8> pBlobData;
+}
+
 /// The BLUETOOTH_ADDRESS structure provides the address of a Bluetooth
 /// device.
 ///
@@ -740,6 +751,14 @@ base class BSMINFO extends Struct {
   external int hwnd;
 
   external LUID luid;
+}
+
+/// {@category struct}
+base class BSTRBLOB extends Struct {
+  @Uint32()
+  external int cbSize;
+
+  external Pointer<Uint8> pData;
 }
 
 /// The BTH_DEVICE_INFO structure stores information about a Bluetooth
@@ -1180,6 +1199,38 @@ base class BY_HANDLE_FILE_INFORMATION extends Struct {
   external int nFileIndexLow;
 }
 
+/// {@category struct}
+base class CABOOL extends Struct {
+  @Uint32()
+  external int cElems;
+
+  external Pointer<Int16> pElems;
+}
+
+/// {@category struct}
+base class CABSTR extends Struct {
+  @Uint32()
+  external int cElems;
+
+  external Pointer<Pointer<Utf16>> pElems;
+}
+
+/// {@category struct}
+base class CABSTRBLOB extends Struct {
+  @Uint32()
+  external int cElems;
+
+  external Pointer<BSTRBLOB> pElems;
+}
+
+/// {@category struct}
+base class CAC extends Struct {
+  @Uint32()
+  external int cElems;
+
+  external Pointer<Utf8> pElems;
+}
+
 /// Describes the cache attributes.
 ///
 /// {@category struct}
@@ -1198,6 +1249,150 @@ base class CACHE_DESCRIPTOR extends Struct {
 
   @Int32()
   external int Type;
+}
+
+/// {@category struct}
+base class CACLIPDATA extends Struct {
+  @Uint32()
+  external int cElems;
+
+  external Pointer<CLIPDATA> pElems;
+}
+
+/// {@category struct}
+base class CACLSID extends Struct {
+  @Uint32()
+  external int cElems;
+
+  external Pointer<GUID> pElems;
+}
+
+/// {@category struct}
+base class CACY extends Struct {
+  @Uint32()
+  external int cElems;
+
+  external Pointer<CY> pElems;
+}
+
+/// {@category struct}
+base class CADATE extends Struct {
+  @Uint32()
+  external int cElems;
+
+  external Pointer<Double> pElems;
+}
+
+/// {@category struct}
+base class CADBL extends Struct {
+  @Uint32()
+  external int cElems;
+
+  external Pointer<Double> pElems;
+}
+
+/// {@category struct}
+base class CAFILETIME extends Struct {
+  @Uint32()
+  external int cElems;
+
+  external Pointer<FILETIME> pElems;
+}
+
+/// {@category struct}
+base class CAFLT extends Struct {
+  @Uint32()
+  external int cElems;
+
+  external Pointer<Float> pElems;
+}
+
+/// {@category struct}
+base class CAH extends Struct {
+  @Uint32()
+  external int cElems;
+
+  external Pointer<Int64> pElems;
+}
+
+/// {@category struct}
+base class CAI extends Struct {
+  @Uint32()
+  external int cElems;
+
+  external Pointer<Int16> pElems;
+}
+
+/// {@category struct}
+base class CAL extends Struct {
+  @Uint32()
+  external int cElems;
+
+  external Pointer<Int32> pElems;
+}
+
+/// {@category struct}
+base class CALPSTR extends Struct {
+  @Uint32()
+  external int cElems;
+
+  external Pointer<Pointer<Utf8>> pElems;
+}
+
+/// {@category struct}
+base class CALPWSTR extends Struct {
+  @Uint32()
+  external int cElems;
+
+  external Pointer<Pointer<Utf16>> pElems;
+}
+
+/// {@category struct}
+base class CAPROPVARIANT extends Struct {
+  @Uint32()
+  external int cElems;
+
+  external Pointer<PROPVARIANT> pElems;
+}
+
+/// {@category struct}
+base class CASCODE extends Struct {
+  @Uint32()
+  external int cElems;
+
+  external Pointer<Int32> pElems;
+}
+
+/// {@category struct}
+base class CAUB extends Struct {
+  @Uint32()
+  external int cElems;
+
+  external Pointer<Uint8> pElems;
+}
+
+/// {@category struct}
+base class CAUH extends Struct {
+  @Uint32()
+  external int cElems;
+
+  external Pointer<Uint64> pElems;
+}
+
+/// {@category struct}
+base class CAUI extends Struct {
+  @Uint32()
+  external int cElems;
+
+  external Pointer<Uint16> pElems;
+}
+
+/// {@category struct}
+base class CAUL extends Struct {
+  @Uint32()
+  external int cElems;
+
+  external Pointer<Uint32> pElems;
 }
 
 /// Contains information passed to a WH_CBT hook procedure, CBTProc, before
@@ -1432,6 +1627,17 @@ base class CLIENT_ID extends Struct {
 
   @IntPtr()
   external int UniqueThread;
+}
+
+/// {@category struct}
+base class CLIPDATA extends Struct {
+  @Uint32()
+  external int cbSize;
+
+  @Int32()
+  external int ulClipFmt;
+
+  external Pointer<Uint8> pClipData;
 }
 
 /// The COLORADJUSTMENT structure defines the color adjustment values used

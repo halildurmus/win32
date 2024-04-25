@@ -563,6 +563,20 @@ final _ProgIDFromCLSID = _ole32.lookupFunction<
     int Function(Pointer<GUID> clsid,
         Pointer<Pointer<Utf16>> lplpszProgID)>('ProgIDFromCLSID');
 
+/// Clears a PROPVARIANT structure.
+///
+/// ```c
+/// HRESULT PropVariantClear(
+///    [in, out] PROPVARIANT *pvar
+/// );
+/// ```
+/// {@category ole32}
+int PropVariantClear(Pointer<PROPVARIANT> pvar) => _PropVariantClear(pvar);
+
+final _PropVariantClear = _ole32.lookupFunction<
+    Int32 Function(Pointer<PROPVARIANT> pvar),
+    int Function(Pointer<PROPVARIANT> pvar)>('PropVariantClear');
+
 /// Converts a CLSID into a string of printable characters. Different CLSIDs
 /// always convert to different strings.
 ///

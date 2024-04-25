@@ -87,6 +87,7 @@ typedef ULONG64 = Uint64;
 typedef ULONGLONG = Uint64;
 typedef ULONG_PTR = IntPtr;
 typedef USHORT = Uint16;
+typedef VARIANT_BOOL = Int16;
 typedef WCHAR = Uint16;
 typedef WORD = Uint16;
 typedef WPARAM = UINT_PTR;

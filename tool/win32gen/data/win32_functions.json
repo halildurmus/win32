@@ -3984,6 +3984,10 @@
         "prototype": "HRESULT ProgIDFromCLSID(\n  REFCLSID clsid,\n  LPOLESTR *lplpszProgID\n);",
         "comment": "Retrieves the ProgID for a given CLSID."
     },
+    "PropVariantClear": {
+        "prototype": "HRESULT PropVariantClear(\n   [in, out] PROPVARIANT *pvar\n);",
+        "comment": "Clears a PROPVARIANT structure."
+    },
     "PtInRect": {
         "prototype": "BOOL PtInRect(\n  const RECT *lprc,\n  POINT      pt\n);",
         "comment": "The PtInRect function determines whether the specified point lies within the specified rectangle. A point is within a rectangle if it lies on the left or top side or is within all four sides. A point on the right or bottom side is considered outside the rectangle."

@@ -10,7 +10,10 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
+import 'constants.dart';
 import 'enums.g.dart';
+import 'inline.dart';
+import 'variant.dart';
 
 /// Creates a WORD value by concatenating the specified values.
 //
@@ -111,3 +114,11 @@ int CTL_CODE(int DeviceType, int Function, int Method, int Access) =>
 //
 // #define GET_SC_WPARAM(wParam) ((int)wParam & 0xFFF0)
 int GET_SC_WPARAM(int wParam) => wParam & 0xFFF0;
+
+/// The PropVariantInit function initializes a PROPVARIANT structure.
+//
+// #define PropVariantInit(pvar) memset ( (pvar), 0, sizeof(PROPVARIANT) )
+void PropVariantInit(Pointer<PROPVARIANT> pvar) {
+  ZeroMemory(pvar, sizeOf<PROPVARIANT>());
+  pvar.ref.vt = VARENUM.VT_EMPTY;
+}
