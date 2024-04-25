@@ -1,4 +1,4 @@
-## 5.5.0-wip
+## 5.5.0
 
 - Add `BLOB`, `BSTRBLOB`, `CABOOL`, `CABSTR`, `CABSTRBLOB`, `CAC`, `CACLIPDATA`,
   `CACLSID`, `CACY`, `CADATE`, `CADBL`, `CAFILETIME`, `CAFLT`, `CAH`, `CAI`,
