@@ -27,7 +27,7 @@ dev_dependencies:
   args: ^2.4.2
 
   # Help ensure that the code is well-written.
-  lints: ^3.0.0
+  lints: ">=3.0.0 <5.0.0"
 
   # Used for joining paths, as part of our path_provider integration test.
   path: ^1.9.0
