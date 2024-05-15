@@ -29,7 +29,7 @@ import 'win32/ole32.g.dart';
 /// copy in unmanaged memory.
 class Guid {
   // A GUID is a 128-bit unique value.
-  final UnmodifiableUint8ListView bytes;
+  final Uint8List bytes;
 
   const Guid(this.bytes) : assert(bytes.length == 16);
 
@@ -49,11 +49,11 @@ class Guid {
     guid.buffer.asUint16List(6)[0] = data3;
     guid.buffer.asUint64List(8)[0] = data4;
 
-    return Guid(UnmodifiableUint8ListView(guid));
+    return Guid(guid.asUnmodifiableView());
   }
 
   /// Creates a 'nil' GUID (i.e. {00000000-0000-0000-0000-000000000000})
-  factory Guid.zero() => Guid(UnmodifiableUint8ListView(Uint8List(16)));
+  factory Guid.zero() => Guid(Uint8List(16).asUnmodifiableView());
 
   /// Creates a new GUID.
   factory Guid.generate() {
@@ -97,7 +97,7 @@ class Guid {
         .map((idx) => int.parse(guid.substring(idx, idx + 2), radix: 16))
         .toList(growable: false);
 
-    return Guid(UnmodifiableUint8ListView(Uint8List.fromList(guidAsBytes)));
+    return Guid(Uint8List.fromList(guidAsBytes).asUnmodifiableView());
   }
 
   /// Copy the GUID to unmanaged memory and return a pointer to the memory
