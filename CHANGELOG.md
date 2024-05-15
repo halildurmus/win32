@@ -1,3 +1,8 @@
+## 5.5.1-wip
+
+- Migrate away from `UnmodifiableUint8ListView` (#XXX)
+- Bump minimum required Dart version to `3.4.0` (#XXX)
+
 ## 5.5.0
 
 - Add `BLOB`, `BSTRBLOB`, `CABOOL`, `CABSTR`, `CABSTRBLOB`, `CAC`, `CACLIPDATA`,
