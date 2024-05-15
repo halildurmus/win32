@@ -214,7 +214,7 @@ abstract final class MetadataStore {
     packageDir.createSync(recursive: true);
     final bytes = await _downloadPackage(packageName, version);
     final archive = ZipDecoder().decodeBytes(bytes);
-    extractArchiveToDisk(archive, path);
+    extractArchiveToDiskSync(archive, path);
 
     return path;
   }

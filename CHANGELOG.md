@@ -1,3 +1,8 @@
+## 5.0.2-wip
+
+- Bump `archive` dependency.
+- Bump minimum required Dart SDK version to `3.4.0`.
+
 ## 5.0.1
 
 - Fix deprecation warnings
