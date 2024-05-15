@@ -1,8 +1,8 @@
-## 5.5.1-wip
+## 5.5.1
 
-- Migrate away from `UnmodifiableUint8ListView` (#XXX)
-- Bump minimum required Dart version to `3.4.0` (#XXX)
-- Bump `lints` dependency to `4.0.0` (#XXX)
+- Migrate away from `UnmodifiableUint8ListView` (#850)
+- Bump minimum required Dart version to `3.4.0` (#850)
+- Bump `lints` dependency to `4.0.0` (#851)
 
 ## 5.5.0
 
