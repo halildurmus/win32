@@ -3,6 +3,7 @@
 // make sure the algorithm matches a manual count.
 
 @TestOn('windows')
+library;
 
 import 'package:test/test.dart';
 import 'package:win32gen/win32gen.dart';

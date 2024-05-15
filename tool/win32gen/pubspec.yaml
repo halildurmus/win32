@@ -4,7 +4,7 @@ description: >
 publish_to: none
 
 environment:
-  sdk: ^3.3.0
+  sdk: ^3.4.0
 
 # Declare that this package only works on Windows.
 platforms:
@@ -21,11 +21,11 @@ dependencies:
   winmd: ^5.0.2
 
   # Win32 itself
-  win32: ^5.4.0
+  win32: ^5.5.0
 
 dev_dependencies:
   # Help ensure that the code is well-written.
-  lints: ^3.0.0
+  lints: ^4.0.0
 
   # Running the test suite.
-  test: ^1.25.3
+  test: ^1.25.5

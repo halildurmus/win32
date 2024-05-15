@@ -1,6 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
 @TestOn('windows')
+library;
 
 import 'dart:ffi';
 

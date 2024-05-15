@@ -10,6 +10,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 @TestOn('windows')
+library;
 
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
