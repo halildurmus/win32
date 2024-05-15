@@ -2,6 +2,7 @@
 
 - Migrate away from `UnmodifiableUint8ListView` (#XXX)
 - Bump minimum required Dart version to `3.4.0` (#XXX)
+- Bump `lints` dependency to `4.0.0` (#XXX)
 
 ## 5.5.0
 

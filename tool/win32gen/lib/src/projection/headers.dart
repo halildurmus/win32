@@ -58,7 +58,7 @@ $copyrightHeader
 // ignore_for_file: non_constant_identifier_names
 
 @TestOn('windows')
-
+library;
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:test/test.dart';
@@ -75,7 +75,7 @@ $copyrightHeader
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
 @TestOn('windows')
-
+library;
 import 'dart:ffi';
 
 import 'package:test/test.dart';
