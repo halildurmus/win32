@@ -113,9 +113,6 @@ Dart | Windows authors can be found here: https://github.com/dart-windows
 * [filepicker_windows](https://pub.dev/packages/filepicker_windows): makes the
   Windows file open / save common dialog boxes available to Flutter and Dart
   apps.
-* [path_provider_windows](https://pub.dev/packages/path_provider_windows):
-  provides a way for Dart apps to find common Windows file locations (such as
-  the documents directory).
 * [win32_clipboard](https://pub.dev/packages/win32_clipboard): provides a
   friendly Dart API for accessing the Windows Clipboard.
 * [win32_gamepad](https://pub.dev/packages/win32_gamepad): provides a friendly
