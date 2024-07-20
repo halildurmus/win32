@@ -69,7 +69,7 @@ Iterable<String> devicesByInterface(
       SetupDiGetDeviceInterfaceDetail(hDevInfo, deviceInterfaceDataPtr, nullptr,
           0, requiredSizePtr, nullptr);
 
-      // TODO: Uncomment when https://github.com/dart-windows/win32/issues/384
+      // TODO: Uncomment when https://github.com/halildurmus/win32/issues/384
       // is successfully resolved.
 
       // if (hr != TRUE) {

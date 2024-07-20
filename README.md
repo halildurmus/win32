@@ -27,37 +27,37 @@ You could use it to call a Win32 API like
 [EnumFontFamiliesEx](https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-enumfontfamiliesexw)
 to enumerate all locally-installed fonts:
 
-![Fonts screenshot](https://github.com/dart-windows/win32/blob/main/doc/images/fonts.png?raw=true)
+![Fonts screenshot](https://github.com/halildurmus/win32/blob/main/doc/images/fonts.png?raw=true)
 
 or access system information that is not exposed directly by the Dart framework
 libraries:
 
-![System information screenshot](https://github.com/dart-windows/win32/blob/main/doc/images/power.png?raw=true)
+![System information screenshot](https://github.com/halildurmus/win32/blob/main/doc/images/power.png?raw=true)
 
 You could use it to build a Windows app with Flutter that relies on Win32 APIs:
 
-![Disk explorer screenshot](https://github.com/dart-windows/win32/blob/main/doc/images/disk_explorer.png?raw=true)
+![Disk explorer screenshot](https://github.com/halildurmus/win32/blob/main/doc/images/disk_explorer.png?raw=true)
 
 You could even use it to build a traditional Win32 app, written purely in Dart,
 that could have come straight out of a classic Charles Petzold book on
 programming Windows apps:
 
-![Dart notepad screenshot](https://github.com/dart-windows/win32/blob/main/doc/images/notepad.png?raw=true)
+![Dart notepad screenshot](https://github.com/halildurmus/win32/blob/main/doc/images/notepad.png?raw=true)
 
 or even, perhaps, a fully-fledged game using GDI:
 
-![Dart Tetris for Win32 screenshot](https://github.com/dart-windows/win32/blob/main/doc/images/tetris.png?raw=true)
+![Dart Tetris for Win32 screenshot](https://github.com/halildurmus/win32/blob/main/doc/images/tetris.png?raw=true)
 
 You might even build a package that depends upon it, like
 [dart_console](https://pub.dev/packages/dart_console), which enables advanced
 console manipulation:
 
-![Dart console ANSI color demo screenshot](https://github.com/dart-windows/win32/blob/main/doc/images/console.png?raw=true)
+![Dart console ANSI color demo screenshot](https://github.com/halildurmus/win32/blob/main/doc/images/console.png?raw=true)
 
 or [filepicker_windows](https://pub.dev/packages/filepicker_windows), which
 provides a modern Windows file picker for Flutter:
 
-![Windows file picker screenshot](https://github.com/dart-windows/win32/blob/main/doc/images/filepicker.png?raw=true)
+![Windows file picker screenshot](https://github.com/halildurmus/win32/blob/main/doc/images/filepicker.png?raw=true)
 
 By design, this package provides minimal modifications to the Win32 API to
 support Dart idioms. The goal is to provide high familiarity to an existing
@@ -108,7 +108,7 @@ models or FFI, and are ideal for incorporation into Flutter apps for Windows.
 
 A [full list of these packages can be found on
 pub](https://pub.dev/packages?q=dependency%3Awin32), and other packages from the
-Dart | Windows authors can be found here: https://github.com/dart-windows
+Dart | Windows authors can be found here: <https://github.com/dart-windows>
 
 * [filepicker_windows](https://pub.dev/packages/filepicker_windows): makes the
   Windows file open / save common dialog boxes available to Flutter and Dart
@@ -177,17 +177,17 @@ Dmitriy Kubyshkin and is licensed by him under the MIT License.
 The summary Win32 API documentation comments are [licensed by Microsoft][] under
 the [Creative Commons Attribution 4.0 International Public License][license].
 
-[ci_badge]: https://github.com/dart-windows/win32/actions/workflows/dart.yml/badge.svg
-[ci_link]: https://github.com/dart-windows/win32/actions/workflows/dart.yml
+[ci_badge]: https://github.com/halildurmus/win32/actions/workflows/dart.yml/badge.svg
+[ci_link]: https://github.com/halildurmus/win32/actions/workflows/dart.yml
 [dart_windows_card]: https://raw.githubusercontent.com/dart-windows/.github/main/assets/dart-windows-card-480x240.png
 [dart_windows_link]: https://github.com/dart-windows
 [flutter_favorite_logo]: https://raw.githubusercontent.com/dart-windows/.github/main/assets/FlutterFavoriteLogo.png
 [flutter_favorite_program_link]: https://flutter.dev/docs/development/packages-and-plugins/favorites
 [language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
 [language_link]: https://dart.dev
-[license_badge]: https://img.shields.io/github/license/dart-windows/win32?color=blue
+[license_badge]: https://img.shields.io/github/license/halildurmus/win32?color=blue
 [license_link]: https://opensource.org/licenses/BSD-3-Clause
-[tracker]: https://github.com/dart-windows/win32
+[tracker]: https://github.com/halildurmus/win32
 [licensed by Microsoft]: https://github.com/MicrosoftDocs/win32/blob/7b49862e8d58cfad5d4e5e22104c9fca7fd6db2f/ThirdPartyNotices
 [license]: https://github.com/MicrosoftDocs/win32/blob/7b49862e8d58cfad5d4e5e22104c9fca7fd6db2f/LICENSE
 [package_badge]: https://img.shields.io/pub/v/win32.svg

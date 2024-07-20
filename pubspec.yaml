@@ -3,8 +3,8 @@ description: >
   A Dart library for accessing common Win32 APIs using FFI. No C required!
 version: 5.5.1
 homepage: https://win32.pub
-repository: https://github.com/dart-windows/win32
-issue_tracker: https://github.com/dart-windows/win32/issues
+repository: https://github.com/halildurmus/win32
+issue_tracker: https://github.com/halildurmus/win32/issues
 documentation: https://win32.pub/docs/category/win32-programming
 
 topics:
