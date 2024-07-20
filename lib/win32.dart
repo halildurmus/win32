@@ -17,8 +17,7 @@
 /// more idiomatic for a Dart consumer.
 ///
 /// For more conceptual material about programming Win32 apps with Dart, consult
-/// the [Dart | Windows documentation](
-/// https://win32.pub/docs/category/win32-programming).
+/// the [documentation](https://win32.pub/docs).
 library;
 
 // Core Win32 APIs, constants and macros
