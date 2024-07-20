@@ -89,11 +89,11 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "Dart | Windows" "\0"
+            VALUE "CompanyName", "Halil Durmus" "\0"
             VALUE "FileDescription", "Win32 Explorer demo app" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "Win32_Explorer" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2023 Dart | Windows. All rights reserved." "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2024 Halil Durmus. All rights reserved." "\0"
             VALUE "OriginalFilename", "win32Explorer.exe" "\0"
             VALUE "ProductName", "win32Explorer" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
