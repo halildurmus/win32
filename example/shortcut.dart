@@ -1,7 +1,3 @@
-// Copyright (c) 2020, Dart | Windows.  Please see the AUTHORS file
-// for details. All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
-
 // Demonstrates using the COM IShellLink interface to create a shell shortcut.
 
 // ignore_for_file: non_constant_identifier_names

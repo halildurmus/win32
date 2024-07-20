@@ -1,7 +1,3 @@
-// Copyright (c) 2020, Dart | Windows.  Please see the AUTHORS file
-// for details. All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
-
 // Shows retrieval of various information from the high-level monitor
 // configuration API.
 

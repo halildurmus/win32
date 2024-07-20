@@ -1,7 +1,3 @@
-// Copyright (c) 2020, Dart | Windows.  Please see the AUTHORS file
-// for details. All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
-
 // ignore_for_file: directives_ordering
 
 /// Support for programming against the Win32 Windows Socket 2 library on

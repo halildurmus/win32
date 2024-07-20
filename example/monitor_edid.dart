@@ -1,12 +1,9 @@
-// Copyright (c) 2020, Dart | Windows.  Please see the AUTHORS file
-// for details. All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
-
 // Reads out the EDID information of the monitor.
 
 // ignore_for_file: camel_case_extensions
 
 import 'dart:ffi';
+
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 

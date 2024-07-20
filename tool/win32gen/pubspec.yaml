@@ -21,7 +21,7 @@ dependencies:
   winmd: ^5.0.2
 
   # Win32 itself
-  win32: ^5.5.0
+  win32: ^5.5.1
 
 dev_dependencies:
   # Help ensure that the code is well-written.

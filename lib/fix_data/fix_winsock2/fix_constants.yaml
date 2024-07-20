@@ -1,7 +1,3 @@
-# Copyright (c) 2024, Dart | Windows. Please see the AUTHORS file for details.
-# All rights reserved. Use of this source code is governed by a BSD-style
-# license that can be found in the LICENSE file.
-
 # Please add new fixes to the top of the file, separated by one blank line
 # from other fixes. For documentation about this file format, see
 # <https://dart.dev/go/data-driven-fixes>.

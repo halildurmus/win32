@@ -2,14 +2,6 @@ import 'dart:io';
 import 'package:win32gen/win32gen.dart';
 
 const header = '''
-/*
- * Copyright (c) 2020 Dart | Windows. All rights reserved.
- * Use of this source code is governed by a BSD-style
- * license that can be found in the LICENSE file.
- */
-
-// struct_sizes.cpp
-
 // Development utility to confirm the width of various Win32 structs.
 
 // This code is not used by the package itself, but is just a helper to inspect
