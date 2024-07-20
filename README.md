@@ -1,5 +1,3 @@
-[![Dart | Windows][dart_windows_card]][win32_pub_link]
-
 [![ci][ci_badge]][ci_link]
 [![Package: win32][package_badge]][package_link]
 [![Publisher: win32.pub][publisher_badge]][publisher_link]
@@ -10,8 +8,6 @@
 
 A package that wraps some of the most common Win32 API calls using FFI to make
 them accessible to Dart code without requiring a C compiler or the Windows SDK.
-
-Part of the [Dart | Windows][dart_windows_link] suite of Windows packages.
 
 ## Documentation
 
@@ -106,9 +102,7 @@ APIs exposed by the Dart win32 package to provide more idiomatic class wrappers.
 These packages typically don't require any knowledge of Windows programming
 models or FFI, and are ideal for incorporation into Flutter apps for Windows.
 
-A [full list of these packages can be found on
-pub](https://pub.dev/packages?q=dependency%3Awin32), and other packages from the
-Dart | Windows authors can be found here: <https://github.com/dart-windows>
+A [full list of these packages can be found on pub](https://pub.dev/packages?q=dependency%3Awin32).
 
 * [filepicker_windows](https://pub.dev/packages/filepicker_windows): makes the
   Windows file open / save common dialog boxes available to Flutter and Dart
@@ -179,8 +173,6 @@ the [Creative Commons Attribution 4.0 International Public License][license].
 
 [ci_badge]: https://github.com/halildurmus/win32/actions/workflows/dart.yml/badge.svg
 [ci_link]: https://github.com/halildurmus/win32/actions/workflows/dart.yml
-[dart_windows_card]: https://raw.githubusercontent.com/dart-windows/.github/main/assets/dart-windows-card-480x240.png
-[dart_windows_link]: https://github.com/dart-windows
 [flutter_favorite_logo]: https://raw.githubusercontent.com/dart-windows/.github/main/assets/FlutterFavoriteLogo.png
 [flutter_favorite_program_link]: https://flutter.dev/docs/development/packages-and-plugins/favorites
 [language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
@@ -194,4 +186,3 @@ the [Creative Commons Attribution 4.0 International Public License][license].
 [package_link]: https://pub.dev/packages/win32
 [publisher_badge]: https://img.shields.io/pub/publisher/win32.svg
 [publisher_link]: https://pub.dev/publishers/win32.pub
-[win32_pub_link]: https://win32.pub
