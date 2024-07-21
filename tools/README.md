@@ -20,7 +20,7 @@ During the build process, you should call `generate.cmd` from the project root
 to instantiate these types and generate the classes from them, for example:
 
 ```terminal
-C:\src\win32> tool\generate.cmd
+C:\src\win32> tools\generate.cmd
 ```
 
 This tool will also test both the generation library and the generated output

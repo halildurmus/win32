@@ -3,7 +3,7 @@ assets/images/
 
 # We don't need to publish the tools folder - it's only used for code
 # generation.
-tool/
+tools/
 
 # Get rid of any unwanted executables.
 *.exe

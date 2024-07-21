@@ -8,7 +8,7 @@
 // Compile with something like the following (replace xxxxx with Windows SDK
 // build installed):
 //   cl /I "C:\Program Files (x86)\Windows Kits\10\Include\10.0.xxxxx.0\winrt" \
-//     tool\struct_sizes\struct_sizes.cpp
+//     tools\struct_sizes\struct_sizes.cpp
 
 #include <stdlib.h>
 #include <stdio.h>

@@ -1,6 +1,6 @@
 Rough notes on steps I take to publish a new version of win32:
 
-1. Run `tool\generate.cmd` to make sure that the machine-generated classes are
+1. Run `tools\generate.cmd` to make sure that the machine-generated classes are
    the latest.
 
 2. Run `dart test` to make sure all the automated tests are still working.
