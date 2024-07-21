@@ -51,12 +51,12 @@ Some tips:
 
 Begin by editing the [com_types.json][com_types_json_link] file, specifying the
 desired COM interface, and then execute the `tools\generate.cmd` script to
-generate the relevant class in the `lib\src\com` directory.
+generate the relevant class in the `packages\win32\lib\src\com` directory.
 
 [command_prompt_link]: https://learn.microsoft.com/visualstudio/ide/reference/command-prompt-powershell
 [com_types_json_link]: https://github.com/halildurmus/win32/tree/main/packages/generator/data/com_types.json
-[constants_dart_link]: https://github.com/halildurmus/win32/tree/main/lib/src/constants.dart
-[constants_nodoc_dart_link]: https://github.com/halildurmus/win32/tree/main/lib/src/constants_nodoc.dart
+[constants_dart_link]: https://github.com/halildurmus/win32/tree/main/packages/win32/lib/src/constants.dart
+[constants_nodoc_dart_link]: https://github.com/halildurmus/win32/tree/main/packages/win32/lib/src/constants_nodoc.dart
 [credwritea_link]: https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credwritea
 [credwritew_link]: https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credwritew
 [struct_sizes_cpp_link]: https://github.com/halildurmus/win32/tree/main/tools/struct_sizes/struct_sizes.cpp
