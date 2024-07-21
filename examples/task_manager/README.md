@@ -1,6 +1,6 @@
 # Task Manager App
 
-![Task Manager App](./assets/images/task_manager.png)
+![Task Manager App](../../assets/images/task_manager.png)
 
 A simple task manager app that allows users to manage running Windows processes.
 

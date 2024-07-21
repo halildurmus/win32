@@ -10,6 +10,18 @@ updates:
     schedule:
       interval: "daily"
   - package-ecosystem: "pub"
+    directory: "/examples/explorer"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "pub"
+    directory: "/examples/service_manager_cli"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "pub"
+    directory: "/examples/task_manager"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "pub"
     directory: "/packages/generator"
     schedule:
       interval: "daily"

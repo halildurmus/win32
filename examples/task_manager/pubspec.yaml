@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   win32:
-    path: ../../
+    path: ../../packages/win32
 
 dev_dependencies:
   flutter_lints: ^4.0.0

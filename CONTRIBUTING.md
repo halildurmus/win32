@@ -44,7 +44,7 @@ Some tips:
 - There are plenty of good existing patterns to build off in these locations;
   try to mirror an existing function if you can for consistency!
 
-- Ideally pull requests for new API submissions include a sample (`example\`
+- Ideally pull requests for new API submissions include a sample (`examples\`
   directory) and some tests (`tests\` directory).
 
 ## COM APIs

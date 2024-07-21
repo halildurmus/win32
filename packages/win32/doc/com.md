@@ -114,4 +114,4 @@ Often this will be called as part of a `try` / `finally` block, to guarantee
 that the object is released even if an exception is thrown.
 
 A full example of these calls can be found in the `com_demo.dart` file in the
-`example\` subfolder.
+`examples\` subfolder.

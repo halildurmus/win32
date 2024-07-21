@@ -1,7 +1,7 @@
 // Example of using Windows built-in spellchecker.
 //
 // Try it with something like this:
-//   dart example\spellcheck.dart "The rain inx Spain is very rar"
+//   dart examples\spellcheck.dart "The rain inx Spain is very rar"
 //
 // You should see that the words 'inx' and 'rar' generate errors (and suggested
 // corrections).

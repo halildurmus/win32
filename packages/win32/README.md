@@ -64,8 +64,8 @@ APIs for accessing the Windows Registry that don't require knowledge of FFI.
 
 ## Getting started
 
-Many more samples can be found in the `example\` subdirectory, along with a test
-suite in the `test\` subdirectory that shows other API calls.
+Many more samples can be found in the `examples\` subdirectory, along with a
+test suite in the `test\` subdirectory that shows other API calls.
 
 A good starting point is `hello.dart`. This example demonstrates creating a
 Win32 window and responding to common messages such as `WM_PAINT` through a
@@ -74,7 +74,7 @@ Win32 window and responding to common messages such as `WM_PAINT` through a
 To run it, type:
 
 ```cmd
-dart example\hello.dart
+dart examples\hello.dart
 ```
 
 This should display a window with a text message.
@@ -82,7 +82,7 @@ This should display a window with a text message.
 This can be compiled into a standalone Win32 executable by running:
 
 ```cmd
-dart compile exe example\hello.dart -o example\bin\hello.exe
+dart compile exe examples\hello.dart -o examples\bin\hello.exe
 ```
 
 For more information on working with the Win32 library from Dart, [consult the
@@ -91,7 +91,7 @@ documentation](https://win32.pub/docs/category/win32-programming).
 ## Examples
 
 There are many examples included with this package that demonstrate calling
-various Win32 and COM APIs. These can be found in the `example\` folder;
+various Win32 and COM APIs. These can be found in the `examples\` directory;
 a short description of each example can be found [here](
 https://pub.dev/packages/win32/example).
 
@@ -155,7 +155,8 @@ version of this package, and continue to move your minimum forward.
 
 The Tetris example listed above is a fuller worked example of a reasonably
 complete program that uses the Dart Win32 package. It is a port of a C version
-of the game by Chang-Hung Liang. [More information...](example/tetris/README.md)
+of the game by Chang-Hung Liang.
+[More information...](examples/tetris/README.md)
 
 The [C implementation of Snake](https://github.com/davidejones/winsnake) is by
 David Jones, and is ported with his permission.
@@ -173,7 +174,7 @@ the [Creative Commons Attribution 4.0 International Public License][license].
 
 [ci_badge]: https://github.com/halildurmus/win32/actions/workflows/dart.yml/badge.svg
 [ci_link]: https://github.com/halildurmus/win32/actions/workflows/dart.yml
-[flutter_favorite_logo]: https://raw.githubusercontent.com/halildurmus/halildurmus/main/assets/FlutterFavoriteLogo.png
+[flutter_favorite_logo]: https://raw.githubusercontent.com/halildurmus/win32/main/assets/images/FlutterFavoriteLogo.png
 [flutter_favorite_program_link]: https://flutter.dev/docs/development/packages-and-plugins/favorites
 [language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
 [language_link]: https://dart.dev

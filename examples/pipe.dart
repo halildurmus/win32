@@ -1,9 +1,9 @@
 // Demonstrates using named pipes from Dart. To run this example, open two
 // separate command windows. In the first, run:
-//   dart example\pipe.dart server
+//   dart examples\pipe.dart server
 //
 // In the second, run:
-//   dart example\pipe.dart client
+//   dart examples\pipe.dart client
 //
 // The first window will connect to a pipe and then block until a client pipe is
 // activated. When the client is opened, it will receive the message from the

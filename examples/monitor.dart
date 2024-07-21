@@ -5,7 +5,7 @@
 //
 // 1) two physical monitors connected in extended mode
 // ```
-// C:\src\win32> dart example\monitor.dart
+// C:\src\win32> dart examples\monitor.dart
 // Number of monitors: 2
 // Primary monitor handle: 132205
 // Number of physical monitors: 1
@@ -20,7 +20,7 @@
 //
 // 2) a single LCD monitor that does not support DDC
 // ```
-// C:\src\win32> dart example\monitor.dart
+// C:\src\win32> dart examples\monitor.dart
 // Number of monitors: 1
 // Primary monitor handle: 1312117
 // Number of physical monitors: 1
@@ -31,7 +31,7 @@
 //
 // 3) connected via SSH to a remote machine
 // ```
-// C:\src\win32> dart example\monitor.dart
+// C:\src\win32> dart examples\monitor.dart
 // Number of monitors: 1
 // Primary monitor handle: 65537
 // No physical monitors attached.
