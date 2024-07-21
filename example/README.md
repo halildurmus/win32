@@ -96,6 +96,7 @@ the following location:
 
 ## Flutter
 
-| Example     | Description                                          |
-| ----------- | ---------------------------------------------------- |
-| `explorer\` | Example Flutter app that uses Win32 file picker APIs |
+| Example         | Description                                 |
+| --------------- | ------------------------------------------- |
+| `explorer\`     | Demonstrates calling Win32 file picker APIs |
+| `task_manager\` | Demonstrates managing running processes     |

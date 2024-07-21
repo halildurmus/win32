@@ -1,0 +1,19 @@
+name: task_manager
+description: Task Manager
+publish_to: none
+
+environment:
+  sdk: ^3.4.0
+
+dependencies:
+  ffi: ^2.1.2
+  flutter:
+    sdk: flutter
+  win32:
+    path: ../../
+
+dev_dependencies:
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true

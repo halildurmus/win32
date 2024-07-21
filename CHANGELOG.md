@@ -2,6 +2,7 @@
 
 - Add some service constants (#858)
 - Add Service Manager CLI example (#859)
+- Add Task Manager App example (#860)
 
 ## 5.5.1
 
