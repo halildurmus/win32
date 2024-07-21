@@ -1,4 +1,4 @@
-import 'package:win32gen/win32gen.dart';
+import 'package:generator/generator.dart';
 import 'package:winmd/winmd.dart';
 
 void printStruct(Scope scope) {

@@ -10,6 +10,6 @@ updates:
     schedule:
       interval: "daily"
   - package-ecosystem: "pub"
-    directory: "/tool/win32gen"
+    directory: "/tool/generator"
     schedule:
       interval: "daily"

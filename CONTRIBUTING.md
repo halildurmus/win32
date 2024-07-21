@@ -54,12 +54,12 @@ desired COM interface, and then execute the `tool\generate.cmd` script to
 generate the relevant class in the `lib\src\com` directory.
 
 [command_prompt_link]: https://learn.microsoft.com/visualstudio/ide/reference/command-prompt-powershell
-[com_types_json_link]: https://github.com/halildurmus/win32/tree/main/tool/win32gen/data/com_types.json
+[com_types_json_link]: https://github.com/halildurmus/win32/tree/main/tool/generator/data/com_types.json
 [constants_dart_link]: https://github.com/halildurmus/win32/tree/main/lib/src/constants.dart
 [constants_nodoc_dart_link]: https://github.com/halildurmus/win32/tree/main/lib/src/constants_nodoc.dart
 [credwritea_link]: https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credwritea
 [credwritew_link]: https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credwritew
 [struct_sizes_cpp_link]: https://github.com/halildurmus/win32/tree/main/tool/struct_sizes/struct_sizes.cpp
-[struct_sizes_dart_link]: https://github.com/halildurmus/win32/tree/main/tool/win32gen/lib/src/model/struct_sizes.dart
-[win32_functions_json_link]: https://github.com/halildurmus/win32/tree/main/tool/win32gen/data/win32_functions.json
-[win32_structs_json_link]: https://github.com/halildurmus/win32/tree/main/tool/win32gen/data/win32_structs.json
+[struct_sizes_dart_link]: https://github.com/halildurmus/win32/tree/main/tool/generator/lib/src/model/struct_sizes.dart
+[win32_functions_json_link]: https://github.com/halildurmus/win32/tree/main/tool/generator/data/win32_functions.json
+[win32_structs_json_link]: https://github.com/halildurmus/win32/tree/main/tool/generator/data/win32_structs.json
