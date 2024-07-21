@@ -7,24 +7,25 @@ demonstrate various aspects of invoking Windows APIs, including:
 - Invoking COM classes (both `IUnknown` and `IDispatch` interface types)
 - Integrating Windows code with Flutter
 
-Other examples of packages that use Win32 can be found on pub.dev, at the
-following location:
+Other examples of packages that use `package:win32` can be found on pub.dev, at
+the following location:
 [https://pub.dev/packages?q=dependency%3Awin32](https://pub.dev/packages?q=dependency%3Awin32).
 
 ## Windows system APIs (kernel32)
 
-| Example             | Description                                             |
-| ------------------- | ------------------------------------------------------- |
-| `credentials.dart`  | Adds a credential to the store and retrieves it         |
-| `dump.dart`         | Use debugger libraries to print DLL exported functions  |
-| `dynamic_load.dart` | Demonstrate loading a DLL and calling it at runtime     |
-| `filever.dart`      | Getting file version information from the file resource |
-| `manifest\`         | Demonstrates the use of app manifests for compiled apps |
-| `modules.dart`      | Enumerates all loaded modules on the current system     |
-| `pipe.dart`         | Shows use of named pipes for interprocess communication |
-| `registry.dart`     | Demonstrates querying the registry for values           |
-| `vt.dart`           | Shows virtual terminal sequences                        |
-| `wsl.dart`          | Retrieve information from a WSL instance through APIs   |
+| Example                | Description                                             |
+| ---------------------- | ------------------------------------------------------- |
+| `manifest\`            | Demonstrates the use of app manifests for compiled apps |
+| `service_manager_cli\` | Demonstrates managing Windows services                  |
+| `credentials.dart`     | Adds a credential to the store and retrieves it         |
+| `dump.dart`            | Use debugger libraries to print DLL exported functions  |
+| `dynamic_load.dart`    | Demonstrate loading a DLL and calling it at runtime     |
+| `filever.dart`         | Getting file version information from the file resource |
+| `modules.dart`         | Enumerates all loaded modules on the current system     |
+| `pipe.dart`            | Shows use of named pipes for interprocess communication |
+| `registry.dart`        | Demonstrates querying the registry for values           |
+| `vt.dart`              | Shows virtual terminal sequences                        |
+| `wsl.dart`             | Retrieve information from a WSL instance through APIs   |
 
 ## Accessing local hardware and devices
 
@@ -63,6 +64,8 @@ following location:
 
 | Example               | Description                                               |
 | --------------------- | --------------------------------------------------------- |
+| `notepad\`            | Lightweight replica of the Windows notepad applet         |
+| `tetris\`             | Port of an open-source Tetris game to Dart                |
 | `hello.dart`          | Basic Petzoldian "hello world" Win32 app                  |
 | `msgbox.dart`         | Demonstrates a MessageBox from the console                |
 | `commdlg.dart`        | Demonstrates using the color chooser common dialog box    |
@@ -70,13 +73,11 @@ following location:
 | `dialog.dart`         | Create a custom dialog box in code                        |
 | `customtitlebar.dart` | Demonstrates creation of owner-draw title bar region      |
 | `dialogshow.dart`     | Creates a common item dialog (file picker) using COM      |
-| `notepad\`            | Lightweight replica of the Windows notepad applet         |
 | `paint.dart`          | Demonstrates simple GDI drawing and min/max window sizing |
 | `scroll.dart`         | Example of horizontal and vertical scrolling text window  |
 | `sendinput.dart`      | Sends keyboard and mouse input to another window          |
 | `snake.dart`          | Snake game using various GDI features                     |
 | `taskdialog.dart`     | Demonstrates using modern task dialog boxes               |
-| `tetris\main.dart`    | Port of an open-source Tetris game to Dart                |
 | `window.dart`         | Enumerates open windows and basic window manipulation     |
 
 ## COM APIs
