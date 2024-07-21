@@ -1,6 +1,7 @@
 ## 5.5.2-wip
 
-- Add some service constants (#xxx)
+- Add some service constants (#858)
+- Add Service Manager CLI example (#859)
 
 ## 5.5.1
 
