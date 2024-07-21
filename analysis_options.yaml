@@ -1,7 +1,10 @@
 include: package:lints/recommended.yaml
 
 analyzer:
-  exclude: ['example/explorer/**', 'test_fixes/**']
+  exclude:
+    - example/explorer/**
+    - example/service_manager_cli/**
+    - test_fixes/**
   errors:
     todo: ignore
 
