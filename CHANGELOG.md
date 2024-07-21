@@ -1,3 +1,7 @@
+## 5.5.2-wip
+
+- Add some service constants (#xxx)
+
 ## 5.5.1
 
 - Migrate away from `UnmodifiableUint8ListView` (#850)
@@ -173,7 +177,7 @@
 
 - Note: This package no longer supports 32-bit architectures. It assumes 64-bit.
 - [BREAKING CHANGE] Experimental WinRT APIs are now removed, in favor of the new
-  `windows_*` packages (see https://win32.pub for more information) 🎉
+  `windows_*` packages (see <https://win32.pub> for more information) 🎉
 - [BREAKING CHANGE] `Finalizer` is now attached to COM objects. Therefore, you
   no longer need to call `.release()` to decrement the reference count, because
   `Finalizer` will do it for you when they go out of scope (#691).
