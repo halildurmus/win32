@@ -5,6 +5,9 @@
 # Library packages shouldn't check in their pubspec.lock
 pubspec.lock
 
+# Directory that contains images used in README
+assets/images/
+
 # Directory created by dartdoc
 doc/api/*
 

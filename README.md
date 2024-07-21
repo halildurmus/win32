@@ -23,37 +23,37 @@ You could use it to call a Win32 API like
 [EnumFontFamiliesEx](https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-enumfontfamiliesexw)
 to enumerate all locally-installed fonts:
 
-![Fonts screenshot](https://github.com/halildurmus/win32/blob/main/doc/images/fonts.png?raw=true)
+![Fonts screenshot](https://github.com/halildurmus/win32/blob/main/assets/images/fonts.png?raw=true)
 
 or access system information that is not exposed directly by the Dart framework
 libraries:
 
-![System information screenshot](https://github.com/halildurmus/win32/blob/main/doc/images/power.png?raw=true)
+![System information screenshot](https://github.com/halildurmus/win32/blob/main/assets/images/power.png?raw=true)
 
 You could use it to build a Windows app with Flutter that relies on Win32 APIs:
 
-![Disk explorer screenshot](https://github.com/halildurmus/win32/blob/main/doc/images/disk_explorer.png?raw=true)
+![Disk explorer screenshot](https://github.com/halildurmus/win32/blob/main/assets/images/disk_explorer.png?raw=true)
 
 You could even use it to build a traditional Win32 app, written purely in Dart,
 that could have come straight out of a classic Charles Petzold book on
 programming Windows apps:
 
-![Dart notepad screenshot](https://github.com/halildurmus/win32/blob/main/doc/images/notepad.png?raw=true)
+![Dart notepad screenshot](https://github.com/halildurmus/win32/blob/main/assets/images/notepad.png?raw=true)
 
 or even, perhaps, a fully-fledged game using GDI:
 
-![Dart Tetris for Win32 screenshot](https://github.com/halildurmus/win32/blob/main/doc/images/tetris.png?raw=true)
+![Dart Tetris for Win32 screenshot](https://github.com/halildurmus/win32/blob/main/assets/images/tetris.png?raw=true)
 
 You might even build a package that depends upon it, like
 [dart_console](https://pub.dev/packages/dart_console), which enables advanced
 console manipulation:
 
-![Dart console ANSI color demo screenshot](https://github.com/halildurmus/win32/blob/main/doc/images/console.png?raw=true)
+![Dart console ANSI color demo screenshot](https://github.com/halildurmus/win32/blob/main/assets/images/console.png?raw=true)
 
 or [filepicker_windows](https://pub.dev/packages/filepicker_windows), which
 provides a modern Windows file picker for Flutter:
 
-![Windows file picker screenshot](https://github.com/halildurmus/win32/blob/main/doc/images/filepicker.png?raw=true)
+![Windows file picker screenshot](https://github.com/halildurmus/win32/blob/main/assets/images/filepicker.png?raw=true)
 
 By design, this package provides minimal modifications to the Win32 API to
 support Dart idioms. The goal is to provide high familiarity to an existing
