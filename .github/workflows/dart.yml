@@ -2,9 +2,9 @@ name: Build
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build:
@@ -26,7 +26,7 @@ jobs:
             sdk: stable
           - os: ubuntu-latest
             sdk: stable
-            
+
     steps:
       - name: Fetch sources
         uses: actions/checkout@v4
@@ -43,7 +43,7 @@ jobs:
         run: dart pub get
 
       - name: Install dependencies for generation tool
-        working-directory: tool/win32gen
+        working-directory: tool/generator
         run: dart pub get
 
       - name: Verify formatting
@@ -53,12 +53,12 @@ jobs:
         run: dart analyze --fatal-warnings
 
       - name: Run tests on generation tool
-        working-directory: tool/win32gen
+        working-directory: tool/generator
         run: dart test
 
       - name: Run tests
         run: dart test
 
       - name: Check documentation can be generated without errors
-        if: ${{ matrix.os == 'windows-2022' }} 
+        if: ${{ matrix.os == 'windows-2022' }}
         run: dart doc --validate-links

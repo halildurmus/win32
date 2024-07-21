@@ -1,4 +1,4 @@
-name: win32gen
+name: generator
 description: >
   Auto-generate Dart wrapper classes for the Win32 API using Windows metadata
 publish_to: none

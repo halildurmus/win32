@@ -4,14 +4,14 @@ if "%1"=="--help" goto help
 
 echo Loading...
 
-rem Save current directory and start from the win32\tool\win32gen folder
-pushd %~dp0win32gen
+rem Save current directory and start from the win32\tool\generator folder
+pushd %~dp0generator
 call dart bin\generate.dart
 
 if "%1"=="--no-test" goto end
 
 :dart_test
-echo Running win32gen tests...
+echo Running generator tests...
 call dart test
 
 echo Running generated file tests...
