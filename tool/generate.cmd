@@ -4,8 +4,8 @@ if "%1"=="--help" goto help
 
 echo Loading...
 
-rem Save current directory and start from the win32\tool\generator folder
-pushd %~dp0generator
+rem Save current directory and start from the win32\packages\generator folder
+pushd %~dp0..\packages\generator
 call dart bin\generate.dart
 
 if "%1"=="--no-test" goto end

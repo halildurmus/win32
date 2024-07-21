@@ -10,6 +10,6 @@ updates:
     schedule:
       interval: "daily"
   - package-ecosystem: "pub"
-    directory: "/tool/generator"
+    directory: "/packages/generator"
     schedule:
       interval: "daily"

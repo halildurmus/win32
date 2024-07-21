@@ -352,7 +352,7 @@ write:
   Halil İbrahim Durmuş (@halildurmus). Breaking changes are limited to WinRT
   APIs, which are now more idiomatic for Dart. Includes full implementation of
   Windows.Globalization.Calendar that is the new reference design for WinRT APIs.
-- Restructure generation code into a separate package in tool\generator.
+- Restructure generation code into a separate package in `packages\generator`.
 - Use super parameters introduced in Dart 2.17, with matching dependency
   upgrade.
 - Tidy up examples to include consistent headers.

@@ -7,7 +7,7 @@ const header = '''
 
 // This code is not used by the package itself, but is just a helper to inspect
 // widths match the generated Dart structs. The results are pasted into
-// tool\\generator\\lib\\src\\model\\struct_sizes.dart as input to the test
+// packages\\generator\\lib\\src\\model\\struct_sizes.dart as input to the test
 // harness.
 
 // Compile with something like the following (replace xxxxx with Windows SDK
@@ -81,5 +81,6 @@ void generateStructSizeAnalyzer() {
 
   buffer.write(footer);
 
-  File('../struct_sizes/struct_sizes.cpp').writeAsStringSync(buffer.toString());
+  File('../../tool/struct_sizes/struct_sizes.cpp')
+      .writeAsStringSync(buffer.toString());
 }
