@@ -4,6 +4,7 @@ analyzer:
   exclude:
     - example/explorer/**
     - example/service_manager_cli/**
+    - example/task_manager/**
     - test_fixes/**
   errors:
     todo: ignore
