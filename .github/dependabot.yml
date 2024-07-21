@@ -13,3 +13,7 @@ updates:
     directory: "/packages/generator"
     schedule:
       interval: "daily"
+  - package-ecosystem: "pub"
+    directory: "/packages/win32"
+    schedule:
+      interval: "daily"

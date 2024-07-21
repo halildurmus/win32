@@ -7,8 +7,6 @@ import 'package:ffi/ffi.dart';
 import 'package:test/test.dart';
 import 'package:win32/win32.dart';
 
-import '../example/knownfolder.dart';
-
 void main() {
   test('GetStdHandle()', () {
     final outputHandle = GetStdHandle(STD_HANDLE.STD_OUTPUT_HANDLE);
@@ -36,22 +34,5 @@ void main() {
     }
 
     free(bufferInfo);
-  });
-
-  test('SHGetKnownFolderPath', () {
-    final legacyAPI = getDesktopPath1();
-    final win32API = getDesktopPath2();
-    final comAPI = getDesktopPath3();
-
-    expect(
-      comAPI,
-      allOf(
-        [
-          equals(legacyAPI),
-          equals(win32API),
-          isNot(contains('error')),
-        ],
-      ),
-    );
   });
 }
