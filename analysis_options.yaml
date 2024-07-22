@@ -1,9 +1,5 @@
 include: package:lints/recommended.yaml
 
 analyzer:
-  exclude:
-    - examples/explorer/**
-    - examples/service_manager_cli/**
-    - examples/task_manager/**
   errors:
     todo: ignore
