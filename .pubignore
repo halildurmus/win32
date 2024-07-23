@@ -1,5 +1,5 @@
 # Directory that contains images used in README.
-assets/images/
+assets/
 
 # We don't need to publish the tools folder - it's only used for code
 # generation.
