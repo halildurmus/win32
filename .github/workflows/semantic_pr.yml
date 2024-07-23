@@ -1,12 +1,14 @@
 name: Semantic PR
 
 on:
-  pull_request_target:
-    types:
-      - opened
-      - edited
-      - synchronize
-      - reopened
+  workflow_dispatch:
+  # TODO(halildurmus): Uncomment the following lines
+  # pull_request_target:
+  #   types:
+  #     - opened
+  #     - edited
+  #     - synchronize
+  #     - reopened
 
 permissions:
   pull-requests: read
