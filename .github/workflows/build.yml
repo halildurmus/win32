@@ -13,25 +13,38 @@ jobs:
       # versa). This prevents one failure from stopping the entire run.
       fail-fast: false
 
-      # Free config supports up to five concurrent jobs, so pick a sparse matrix
+      # Free config supports up to 20 concurrent jobs, so pick a sparse matrix
       # that tiles the space well.
       matrix:
-        package:
-          - generator
-          - win32
         include:
           - os: windows-latest
             sdk: main
+            package: generator
+          - os: windows-latest
+            sdk: main
+            package: win32
           - os: windows-2022
             sdk: beta
+            package: generator
+          - os: windows-2022
+            sdk: beta
+            package: win32
           - os: windows-2019
             sdk: stable
+            package: generator
+          - os: windows-2019
+            sdk: stable
+            package: win32
           - os: ubuntu-latest
             sdk: stable
+            package: generator
+          - os: ubuntu-latest
+            sdk: stable
+            package: win32
 
     uses: halildurmus/halildurmus/.github/workflows/dart_package.yml@main
     with:
-      analyze_directories: example lib test ${{ matrix.package == 'generator' && 'bin'}}
+      analyze_directories: example lib test${{ (matrix.package == 'generator' && ' bin') || ''}}
       dart_sdk: ${{ matrix.sdk }}
       run_tests: ${{ matrix.sdk != 'main' }}
       runs_on: ${{ matrix.os }}
