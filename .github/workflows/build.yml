@@ -1,0 +1,40 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    strategy:
+      # We want to see the results on stable even if main fails (and vice
+      # versa). This prevents one failure from stopping the entire run.
+      fail-fast: false
+
+      # Free config supports up to five concurrent jobs, so pick a sparse matrix
+      # that tiles the space well.
+      matrix:
+        package:
+          - generator
+          - win32
+        include:
+          - os: windows-latest
+            sdk: main
+          - os: windows-2022
+            sdk: beta
+          - os: windows-2019
+            sdk: stable
+          - os: ubuntu-latest
+            sdk: stable
+
+    uses: halildurmus/halildurmus/.github/workflows/dart_package.yml@main
+    with:
+      analyze_directories: example lib test ${{ matrix.package == 'generator' && 'bin'}}
+      dart_sdk: ${{ matrix.sdk }}
+      run_tests: ${{ matrix.sdk != 'main' }}
+      runs_on: ${{ matrix.os }}
+      upload_coverage: ${{ matrix.sdk == 'main' }}
+      validate_dartdoc_links: ${{ matrix.package == 'win32' && matrix.sdk == 'main' }}
+      working_directory: packages/${{ matrix.package }}
