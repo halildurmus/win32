@@ -1,0 +1,30 @@
+name: Examples
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    strategy:
+      # We want to see the results on stable even if main fails (and vice
+      # versa). This prevents one failure from stopping the entire run.
+      fail-fast: false
+
+      # Free config supports up to 20 concurrent jobs, so pick a sparse matrix
+      # that tiles the space well.
+      matrix:
+        include:
+          - os: windows-2019
+            sdk: stable
+            example: task_manager
+
+    uses: halildurmus/halildurmus/.github/workflows/flutter_package.yml@main
+    with:
+      analyze_directories: lib
+      flutter_sdk: ${{ matrix.sdk }}
+      run_tests: false
+      runs_on: ${{ matrix.os }}
+      working_directory: examples/${{ matrix.example }}
