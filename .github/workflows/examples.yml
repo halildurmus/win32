@@ -7,24 +7,36 @@ on:
     branches: [main]
 
 jobs:
-  build:
-    strategy:
-      # We want to see the results on stable even if main fails (and vice
-      # versa). This prevents one failure from stopping the entire run.
-      fail-fast: false
+  dart_examples:
+    uses: halildurmus/halildurmus/.github/workflows/dart_package.yml@main
+    with:
+      analyze_directories: $(find . -type f -not \( -path .*explorer/* -prune \) -not \( -path .*service_manager_cli/* -prune \) -not \( -path .*task_manager/* -prune \) -name '*.dart' -print)
+      format_directories: $(find . -type f -not \( -path .*explorer/* -prune \) -not \( -path .*service_manager_cli/* -prune \) -not \( -path .*task_manager/* -prune \) -name '*.dart' -print)
+      dart_sdk: stable
+      run_tests: false
+      working_directory: examples
 
-      # Free config supports up to 20 concurrent jobs, so pick a sparse matrix
-      # that tiles the space well.
+  dart_package_examples:
+    strategy:
       matrix:
-        include:
-          - os: windows-2019
-            sdk: stable
-            example: task_manager
+        example:
+          - service_manager_cli
+
+    uses: halildurmus/halildurmus/.github/workflows/dart_package.yml@main
+    with:
+      dart_sdk: stable
+      run_tests: false
+      working_directory: examples/${{ matrix.example }}
+
+  flutter_examples:
+    strategy:
+      matrix:
+        example:
+          - explorer
+          - task_manager
 
     uses: halildurmus/halildurmus/.github/workflows/flutter_package.yml@main
     with:
-      analyze_directories: lib
-      flutter_sdk: ${{ matrix.sdk }}
+      flutter_sdk: stable
       run_tests: false
-      runs_on: ${{ matrix.os }}
       working_directory: examples/${{ matrix.example }}
