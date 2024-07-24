@@ -1,6 +1,6 @@
 [![ci][ci_badge]][ci_link]
 [![Package: win32][package_badge]][package_link]
-[![Publisher: win32.pub][publisher_badge]][publisher_link]
+[![Publisher: halildurmus.dev][publisher_badge]][publisher_link]
 [![Language: Dart][language_badge]][language_link]
 [![License: BSD-3-Clause][license_badge]][license_link]
 
@@ -186,4 +186,4 @@ the [Creative Commons Attribution 4.0 International Public License][license].
 [package_badge]: https://img.shields.io/pub/v/win32.svg
 [package_link]: https://pub.dev/packages/win32
 [publisher_badge]: https://img.shields.io/pub/publisher/win32.svg
-[publisher_link]: https://pub.dev/publishers/win32.pub
+[publisher_link]: https://pub.dev/publishers/halildurmus.dev
