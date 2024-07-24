@@ -7,8 +7,7 @@ environment:
 
 dependencies:
   ffi: ^2.1.2
-  win32:
-    path: ../../packages/win32
+  win32: ^5.5.1
 
 dev_dependencies:
   lints: ^4.0.0

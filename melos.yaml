@@ -1,0 +1,15 @@
+name: win32
+repository: https://github.com/halildurmus/win32
+
+packages:
+  - packages/*
+  - examples/*
+
+command:
+  version:
+    releaseUrl: true
+
+scripts:
+  generate:
+    run: tools\generate --no-test
+    description: Build all generated files for package:win32.

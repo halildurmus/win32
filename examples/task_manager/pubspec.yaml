@@ -9,8 +9,7 @@ dependencies:
   ffi: ^2.1.2
   flutter:
     sdk: flutter
-  win32:
-    path: ../../packages/win32
+  win32: ^5.5.1
 
 dev_dependencies:
   flutter_lints: ^4.0.0

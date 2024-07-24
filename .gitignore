@@ -9,6 +9,7 @@
 **/.packages
 
 # IntelliJ related files.
+*.iml
 **/.idea/
 
 # Visual Studio Code related files.
