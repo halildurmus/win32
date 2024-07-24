@@ -4,3 +4,6 @@ ignore:
   - '**/example/'
   - '**/*.g.dart'
   - packages/win32/lib/src/com
+  - packages/win32/lib/src/constants_nodoc.dart
+  - packages/win32/lib/src/propertykey.dart
+  - packages/win32/lib/src/variant.dart
