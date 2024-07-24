@@ -2,9 +2,8 @@ name: Lock Threads
 
 on:
   schedule:
-    - cron: '*/10 * * * *'
     # Run every day at midnight.
-    # - cron: '0 0 * * *'
+    - cron: '0 0 * * *'
 
 permissions:
   issues: write
@@ -18,13 +17,11 @@ jobs:
     steps:
       - uses: dessant/lock-threads@v5
         with:
-          log-output: true
           process-only: 'issues'
           # Number of days of inactivity before a closed issue is locked.
           issue-inactive-days: 14
-          # TODO(halildurmus): Uncomment the following
-          # issue-comment: >
-          #   This thread has been automatically locked since there has not been
-          #   any recent activity after it was closed. If you are still
-          #   experiencing a similar issue, please open a new bug, including a
-          #   minimal reproduction of the issue.
+          issue-comment: >
+            This thread has been automatically locked since there has not been
+            any recent activity after it was closed. If you are still
+            experiencing a similar issue, please open a new bug, including a
+            minimal reproduction of the issue.
