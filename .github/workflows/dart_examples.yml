@@ -13,8 +13,6 @@ on:
       - 'examples/tetris/**'
       - 'examples/*.dart'
       - 'packages/win32/lib/**'
-      - 'packages/win32/test/**'
-      - 'packages/win32/test_fixes/**'
       - 'packages/win32/analysis_options.yaml'
       - 'packages/win32/pubspec.yaml'
   push:
@@ -29,8 +27,6 @@ on:
       - 'examples/tetris/**'
       - 'examples/*.dart'
       - 'packages/win32/lib/**'
-      - 'packages/win32/test/**'
-      - 'packages/win32/test_fixes/**'
       - 'packages/win32/analysis_options.yaml'
       - 'packages/win32/pubspec.yaml'
 

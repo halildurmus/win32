@@ -14,8 +14,6 @@ on:
       - 'examples/task_manager/analysis_options.yaml'
       - 'examples/task_manager/pubspec.yaml'
       - 'packages/win32/lib/**'
-      - 'packages/win32/test/**'
-      - 'packages/win32/test_fixes/**'
       - 'packages/win32/analysis_options.yaml'
       - 'packages/win32/pubspec.yaml'
   push:
@@ -31,8 +29,6 @@ on:
       - 'examples/task_manager/analysis_options.yaml'
       - 'examples/task_manager/pubspec.yaml'
       - 'packages/win32/lib/**'
-      - 'packages/win32/test/**'
-      - 'packages/win32/test_fixes/**'
       - 'packages/win32/analysis_options.yaml'
       - 'packages/win32/pubspec.yaml'
 
