@@ -1,4 +1,4 @@
 # melos_managed_dependency_overrides: win32
 dependency_overrides:
   win32:
-    path: ..\\win32
+    path: ../win32

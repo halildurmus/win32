@@ -275,7 +275,7 @@ void main() async {
   print('Generating FFI function bindings...');
   generateFunctions([wdkScope, win32Scope], functionsToGenerate);
 
-  print('Generating COM interfaces and tests...');
+  print('Generating COM interfaces...');
   final comTypesToGenerate = loadMap('com_types.json');
   saveMap(comTypesToGenerate, 'com_types.json');
   generateComApis(win32Scope, comTypesToGenerate);
