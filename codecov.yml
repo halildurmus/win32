@@ -1,0 +1,6 @@
+# Exclude generated files and examples from the coverage report.
+ignore:
+  - 'examples'
+  - '**/example/'
+  - '**/*.g.dart'
+  - packages/win32/lib/src/com
