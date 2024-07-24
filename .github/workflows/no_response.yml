@@ -2,8 +2,8 @@ name: No Response
 
 on:
   schedule:
-    # Every day at 8am
-    - cron: '0 8 * * *'
+    # Run every day at midnight.
+    - cron: '0 0 * * *'
 
 permissions:
   issues: write
