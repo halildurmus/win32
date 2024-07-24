@@ -53,6 +53,7 @@ jobs:
       runs_on: ${{ matrix.os }}
       upload_coverage: ${{ matrix.sdk == 'main' }}
       validate_dartdoc_links: ${{ matrix.sdk == 'main' }}
+      verify_pana_score: ${{ matrix.os == 'ubuntu-latest' }}
       working_directory: packages/win32
     secrets:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
