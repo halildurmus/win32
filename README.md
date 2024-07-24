@@ -23,37 +23,37 @@ You could use it to call a Win32 API like
 [EnumFontFamiliesEx](https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-enumfontfamiliesexw)
 to enumerate all locally-installed fonts:
 
-![Fonts screenshot](https://github.com/halildurmus/win32/blob/main/assets/images/fonts.png?raw=true)
+![Fonts screenshot](https://github.com/halildurmus/win32/blob/main/assets/fonts.png?raw=true)
 
 or access system information that is not exposed directly by the Dart framework
 libraries:
 
-![System information screenshot](https://github.com/halildurmus/win32/blob/main/assets/images/power.png?raw=true)
+![System information screenshot](https://github.com/halildurmus/win32/blob/main/assets/power.png?raw=true)
 
 You could use it to build a Windows app with Flutter that relies on Win32 APIs:
 
-![Disk explorer screenshot](https://github.com/halildurmus/win32/blob/main/assets/images/disk_explorer.png?raw=true)
+![Disk explorer screenshot](https://github.com/halildurmus/win32/blob/main/assets/disk_explorer.png?raw=true)
 
 You could even use it to build a traditional Win32 app, written purely in Dart,
 that could have come straight out of a classic Charles Petzold book on
 programming Windows apps:
 
-![Dart notepad screenshot](https://github.com/halildurmus/win32/blob/main/assets/images/notepad.png?raw=true)
+![Dart notepad screenshot](https://github.com/halildurmus/win32/blob/main/assets/notepad.png?raw=true)
 
 or even, perhaps, a fully-fledged game using GDI:
 
-![Dart Tetris for Win32 screenshot](https://github.com/halildurmus/win32/blob/main/assets/images/tetris.png?raw=true)
+![Dart Tetris for Win32 screenshot](https://github.com/halildurmus/win32/blob/main/assets/tetris.png?raw=true)
 
 You might even build a package that depends upon it, like
 [dart_console](https://pub.dev/packages/dart_console), which enables advanced
 console manipulation:
 
-![Dart console ANSI color demo screenshot](https://github.com/halildurmus/win32/blob/main/assets/images/console.png?raw=true)
+![Dart console ANSI color demo screenshot](https://github.com/halildurmus/win32/blob/main/assets/console.png?raw=true)
 
 or [filepicker_windows](https://pub.dev/packages/filepicker_windows), which
 provides a modern Windows file picker for Flutter:
 
-![Windows file picker screenshot](https://github.com/halildurmus/win32/blob/main/assets/images/filepicker.png?raw=true)
+![Windows file picker screenshot](https://github.com/halildurmus/win32/blob/main/assets/filepicker.png?raw=true)
 
 By design, this package provides minimal modifications to the Win32 API to
 support Dart idioms. The goal is to provide high familiarity to an existing
@@ -64,8 +64,8 @@ APIs for accessing the Windows Registry that don't require knowledge of FFI.
 
 ## Getting started
 
-Many more samples can be found in the `example\` subdirectory, along with a test
-suite in the `test\` subdirectory that shows other API calls.
+Many more samples can be found in the `examples\` subdirectory, along with a
+test suite in the `test\` subdirectory that shows other API calls.
 
 A good starting point is `hello.dart`. This example demonstrates creating a
 Win32 window and responding to common messages such as `WM_PAINT` through a
@@ -74,7 +74,7 @@ Win32 window and responding to common messages such as `WM_PAINT` through a
 To run it, type:
 
 ```cmd
-dart example\hello.dart
+dart examples\hello.dart
 ```
 
 This should display a window with a text message.
@@ -82,7 +82,7 @@ This should display a window with a text message.
 This can be compiled into a standalone Win32 executable by running:
 
 ```cmd
-dart compile exe example\hello.dart -o example\bin\hello.exe
+dart compile exe examples\hello.dart -o examples\bin\hello.exe
 ```
 
 For more information on working with the Win32 library from Dart, [consult the
@@ -91,7 +91,7 @@ documentation](https://win32.pub/docs/category/win32-programming).
 ## Examples
 
 There are many examples included with this package that demonstrate calling
-various Win32 and COM APIs. These can be found in the `example\` folder;
+various Win32 and COM APIs. These can be found in the `examples\` directory;
 a short description of each example can be found [here](
 https://pub.dev/packages/win32/example).
 
@@ -155,7 +155,8 @@ version of this package, and continue to move your minimum forward.
 
 The Tetris example listed above is a fuller worked example of a reasonably
 complete program that uses the Dart Win32 package. It is a port of a C version
-of the game by Chang-Hung Liang. [More information...](example/tetris/README.md)
+of the game by Chang-Hung Liang.
+[More information...](examples/tetris/README.md)
 
 The [C implementation of Snake](https://github.com/davidejones/winsnake) is by
 David Jones, and is ported with his permission.
@@ -173,7 +174,7 @@ the [Creative Commons Attribution 4.0 International Public License][license].
 
 [ci_badge]: https://github.com/halildurmus/win32/actions/workflows/dart.yml/badge.svg
 [ci_link]: https://github.com/halildurmus/win32/actions/workflows/dart.yml
-[flutter_favorite_logo]: https://raw.githubusercontent.com/halildurmus/halildurmus/main/assets/FlutterFavoriteLogo.png
+[flutter_favorite_logo]: https://raw.githubusercontent.com/halildurmus/win32/main/assets/FlutterFavoriteLogo.png
 [flutter_favorite_program_link]: https://flutter.dev/docs/development/packages-and-plugins/favorites
 [language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
 [language_link]: https://dart.dev

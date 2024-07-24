@@ -1,31 +1,38 @@
-# Files and directories created by pub
-.dart_tool/
-.packages
+# Directory that contains images used in README.
+assets/
 
-# Library packages shouldn't check in their pubspec.lock
-pubspec.lock
+# We don't need to publish the tools folder - it's only used for code
+# generation.
+tools/
 
-# Directory that contains images used in README
-assets/images/
-
-# Directory created by dartdoc
-doc/api/*
-
-# Conventional directory for build outputs
-build/
-
-# Get rid of any unwanted executables...
+# Get rid of any unwanted executables.
 *.exe
 *.obj
 *.pdb
 *.exe.config
 
-# This file varies from machine to machine
-.vscode/c_cpp_properties.json
+# Files and directories created by pub.
+**/.dart_tool/
+**/.packages
+
+# IntelliJ related files.
+**/.idea/
+
+# Visual Studio Code related files.
+**/.vscode/
+
+# Library packages shouldn't check in their pubspec.lock files.
+**/pubspec.lock
+
+# Conventional directory for build outputs.
+**/build/
+
+# Don't need to check in coverage files.
+**/coverage/
+
+# Documentation doesn't need checking in here.
+**/doc/api/
 
 # We create these files for inspection if the goldens tests fail, but we don't
 # need to check them in.
-test/tool/goldens/*.comparison
-
-# We don't need to publish the tools folder - it's only used for code generation
-tool/
+**/goldens/*.comparison

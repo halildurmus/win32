@@ -1,15 +1,38 @@
 version: 2
 enable-beta-ecosystems: true
 updates:
+  # Workflows
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "daily"
+
+  # Workspace pubspec.yaml
   - package-ecosystem: "pub"
     directory: "/"
     schedule:
       interval: "daily"
+
+  # Examples
   - package-ecosystem: "pub"
-    directory: "/tool/generator"
+    directory: "/examples/explorer"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "pub"
+    directory: "/examples/service_manager_cli"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "pub"
+    directory: "/examples/task_manager"
+    schedule:
+      interval: "daily"
+
+  # Packages
+  - package-ecosystem: "pub"
+    directory: "/packages/generator"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "pub"
+    directory: "/packages/win32"
     schedule:
       interval: "daily"

@@ -1,0 +1,23 @@
+name: Semantic PR
+
+on:
+  workflow_dispatch:
+  # TODO(halildurmus): Uncomment the following lines
+  # pull_request_target:
+  #   types:
+  #     - opened
+  #     - edited
+  #     - synchronize
+  #     - reopened
+
+permissions:
+  pull-requests: read
+
+jobs:
+  main:
+    name: 🤖 Ensure Commit is Semantic
+    runs-on: ubuntu-latest
+    steps:
+      - uses: amannn/action-semantic-pull-request@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

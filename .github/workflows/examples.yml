@@ -1,0 +1,42 @@
+name: Examples
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  dart_examples:
+    uses: halildurmus/halildurmus/.github/workflows/dart_package.yml@main
+    with:
+      analyze_directories: $(find . -type f -not \( -path .*explorer/* -prune \) -not \( -path .*service_manager_cli/* -prune \) -not \( -path .*task_manager/* -prune \) -name '*.dart' -print)
+      format_directories: $(find . -type f -not \( -path .*explorer/* -prune \) -not \( -path .*service_manager_cli/* -prune \) -not \( -path .*task_manager/* -prune \) -name '*.dart' -print)
+      dart_sdk: stable
+      run_tests: false
+      working_directory: examples
+
+  dart_package_examples:
+    strategy:
+      matrix:
+        example:
+          - service_manager_cli
+
+    uses: halildurmus/halildurmus/.github/workflows/dart_package.yml@main
+    with:
+      dart_sdk: stable
+      run_tests: false
+      working_directory: examples/${{ matrix.example }}
+
+  flutter_examples:
+    strategy:
+      matrix:
+        example:
+          - explorer
+          - task_manager
+
+    uses: halildurmus/halildurmus/.github/workflows/flutter_package.yml@main
+    with:
+      flutter_sdk: stable
+      run_tests: false
+      working_directory: examples/${{ matrix.example }}
