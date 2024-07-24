@@ -172,8 +172,8 @@ Dmitriy Kubyshkin and is licensed by him under the MIT License.
 The summary Win32 API documentation comments are [licensed by Microsoft][] under
 the [Creative Commons Attribution 4.0 International Public License][license].
 
-[ci_badge]: https://github.com/halildurmus/win32/actions/workflows/build.yml/badge.svg
-[ci_link]: https://github.com/halildurmus/win32/actions/workflows/build.yml
+[ci_badge]: https://github.com/halildurmus/win32/actions/workflows/win32.yml/badge.svg
+[ci_link]: https://github.com/halildurmus/win32/actions/workflows/win32.yml
 [flutter_favorite_logo]: https://raw.githubusercontent.com/halildurmus/win32/main/assets/FlutterFavoriteLogo.png
 [flutter_favorite_program_link]: https://flutter.dev/docs/development/packages-and-plugins/favorites
 [language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
