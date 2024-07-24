@@ -7,22 +7,34 @@ on:
       - '.github/workflows/flutter_examples.yml'
       - 'analysis_options.yaml'
       - 'pubspec.yaml'
-      - 'examples/explorer/**'
-      - 'examples/task_manager/**'
-      - 'packages/win32/**'
-    paths-ignore:
-      - '**.md'
+      - 'examples/explorer/lib/**'
+      - 'examples/explorer/analysis_options.yaml'
+      - 'examples/explorer/pubspec.yaml'
+      - 'examples/task_manager/lib/**'
+      - 'examples/task_manager/analysis_options.yaml'
+      - 'examples/task_manager/pubspec.yaml'
+      - 'packages/win32/lib/**'
+      - 'packages/win32/test/**'
+      - 'packages/win32/test_fixes/**'
+      - 'packages/win32/analysis_options.yaml'
+      - 'packages/win32/pubspec.yaml'
   push:
     branches: [main]
     paths:
       - '.github/workflows/flutter_examples.yml'
       - 'analysis_options.yaml'
       - 'pubspec.yaml'
-      - 'examples/explorer/**'
-      - 'examples/task_manager/**'
-      - 'packages/win32/**'
-    paths-ignore:
-      - '**.md'
+      - 'examples/explorer/lib/**'
+      - 'examples/explorer/analysis_options.yaml'
+      - 'examples/explorer/pubspec.yaml'
+      - 'examples/task_manager/lib/**'
+      - 'examples/task_manager/analysis_options.yaml'
+      - 'examples/task_manager/pubspec.yaml'
+      - 'packages/win32/lib/**'
+      - 'packages/win32/test/**'
+      - 'packages/win32/test_fixes/**'
+      - 'packages/win32/analysis_options.yaml'
+      - 'packages/win32/pubspec.yaml'
 
 jobs:
   build:

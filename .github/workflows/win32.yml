@@ -7,18 +7,22 @@ on:
       - '.github/workflows/win32.yml'
       - 'analysis_options.yaml'
       - 'pubspec.yaml'
-      - 'packages/win32/**'
-    paths-ignore:
-      - '**.md'
+      - 'packages/win32/lib/**'
+      - 'packages/win32/test/**'
+      - 'packages/win32/test_fixes/**'
+      - 'packages/win32/analysis_options.yaml'
+      - 'packages/win32/pubspec.yaml'
   push:
     branches: [main]
     paths:
       - '.github/workflows/win32.yml'
       - 'analysis_options.yaml'
       - 'pubspec.yaml'
-      - 'packages/win32/**'
-    paths-ignore:
-      - '**.md'
+      - 'packages/win32/lib/**'
+      - 'packages/win32/test/**'
+      - 'packages/win32/test_fixes/**'
+      - 'packages/win32/analysis_options.yaml'
+      - 'packages/win32/pubspec.yaml'
 
 jobs:
   build:

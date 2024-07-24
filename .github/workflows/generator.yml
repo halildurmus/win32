@@ -7,18 +7,24 @@ on:
       - '.github/workflows/generator.yml'
       - 'analysis_options.yaml'
       - 'pubspec.yaml'
-      - 'packages/generator/**'
-    paths-ignore:
-      - '**.md'
+      - 'packages/generator/bin/**'
+      - 'packages/generator/example/**'
+      - 'packages/generator/lib/**'
+      - 'packages/generator/test/**'
+      - 'packages/generator/analysis_options.yaml'
+      - 'packages/generator/pubspec.yaml'
   push:
     branches: [main]
     paths:
       - '.github/workflows/generator.yml'
       - 'analysis_options.yaml'
       - 'pubspec.yaml'
-      - 'packages/generator/**'
-    paths-ignore:
-      - '**.md'
+      - 'packages/generator/bin/**'
+      - 'packages/generator/example/**'
+      - 'packages/generator/lib/**'
+      - 'packages/generator/test/**'
+      - 'packages/generator/analysis_options.yaml'
+      - 'packages/generator/pubspec.yaml'
 
 jobs:
   build:

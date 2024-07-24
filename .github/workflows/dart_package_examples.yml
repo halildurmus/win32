@@ -7,20 +7,30 @@ on:
       - '.github/workflows/dart_package_examples.yml'
       - 'analysis_options.yaml'
       - 'pubspec.yaml'
-      - 'examples/service_manager_cli/**'
-      - 'packages/win32/**'
-    paths-ignore:
-      - '**.md'
+      - 'examples/service_manager_cli/bin/**'
+      - 'examples/service_manager_cli/lib/**'
+      - 'examples/service_manager_cli/analysis_options.yaml'
+      - 'examples/service_manager_cli/pubspec.yaml'
+      - 'packages/win32/lib/**'
+      - 'packages/win32/test/**'
+      - 'packages/win32/test_fixes/**'
+      - 'packages/win32/analysis_options.yaml'
+      - 'packages/win32/pubspec.yaml'
   push:
     branches: [main]
     paths:
       - '.github/workflows/dart_package_examples.yml'
       - 'analysis_options.yaml'
       - 'pubspec.yaml'
-      - 'examples/service_manager_cli/**'
-      - 'packages/win32/**'
-    paths-ignore:
-      - '**.md'
+      - 'examples/service_manager_cli/bin/**'
+      - 'examples/service_manager_cli/lib/**'
+      - 'examples/service_manager_cli/analysis_options.yaml'
+      - 'examples/service_manager_cli/pubspec.yaml'
+      - 'packages/win32/lib/**'
+      - 'packages/win32/test/**'
+      - 'packages/win32/test_fixes/**'
+      - 'packages/win32/analysis_options.yaml'
+      - 'packages/win32/pubspec.yaml'
 
 jobs:
   build:

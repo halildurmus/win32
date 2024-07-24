@@ -7,26 +7,32 @@ on:
       - '.github/workflows/dart_examples.yml'
       - 'analysis_options.yaml'
       - 'pubspec.yaml'
-      - 'examples/**'
-      - 'packages/win32/**'
-    paths-ignore:
-      - 'examples/explorer/**'
-      - 'examples/service_manager_cli/**'
-      - 'examples/task_manager/**'
-      - '**.md'
+      - 'examples/manifest/**'
+      - 'examples/notepad/**'
+      - 'examples/shell_notify_icon/**'
+      - 'examples/tetris/**'
+      - 'examples/*.dart'
+      - 'packages/win32/lib/**'
+      - 'packages/win32/test/**'
+      - 'packages/win32/test_fixes/**'
+      - 'packages/win32/analysis_options.yaml'
+      - 'packages/win32/pubspec.yaml'
   push:
     branches: [main]
     paths:
       - '.github/workflows/dart_examples.yml'
       - 'analysis_options.yaml'
       - 'pubspec.yaml'
-      - 'examples/**'
-      - 'packages/win32/**'
-    paths-ignore:
-      - 'examples/explorer/**'
-      - 'examples/service_manager_cli/**'
-      - 'examples/task_manager/**'
-      - '**.md'
+      - 'examples/manifest/**'
+      - 'examples/notepad/**'
+      - 'examples/shell_notify_icon/**'
+      - 'examples/tetris/**'
+      - 'examples/*.dart'
+      - 'packages/win32/lib/**'
+      - 'packages/win32/test/**'
+      - 'packages/win32/test_fixes/**'
+      - 'packages/win32/analysis_options.yaml'
+      - 'packages/win32/pubspec.yaml'
 
 jobs:
   build:
