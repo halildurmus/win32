@@ -45,8 +45,6 @@ jobs:
             sdk: beta
           - os: windows-2019
             sdk: stable
-          - os: ubuntu-latest
-            sdk: stable
 
     uses: halildurmus/halildurmus/.github/workflows/dart_package.yml@main
     with:

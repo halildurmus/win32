@@ -1,0 +1,49 @@
+name: Check Code Generation
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/code_generation.yml'
+      - 'packages/generator/bin/**'
+      - 'packages/generator/lib/**'
+      - 'packages/generator/analysis_options.yaml'
+      - 'packages/generator/pubspec.yaml'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/code_generation.yml'
+      - 'packages/generator/bin/**'
+      - 'packages/generator/lib/**'
+      - 'packages/generator/analysis_options.yaml'
+      - 'packages/generator/pubspec.yaml'
+
+jobs:
+  check_generation:
+    runs-on: windows-2019
+    steps:
+      - name: 📚 Git Checkout
+        uses: actions/checkout@v4
+
+      - name: 🎯 Setup Dart
+        uses: dart-lang/setup-dart@v1
+
+      - name: 📦 Install Workspace Dependencies
+        run: dart pub get
+
+      - name: 📦 Install package:win32 Dependencies
+        run: dart pub get
+        working-directory: packages/win32
+
+      - name: 📦 Install package:generator Dependencies
+        run: dart pub get
+        working-directory: packages/generator
+
+      - name: 🛠️ Install Melos
+        run: dart pub global activate melos
+
+      - name: 🚀 Run Code Generation
+        run: dart pub run melos run generate
+
+      - name: 🔍 Verify Code Generation
+        run: git diff --exit-code
