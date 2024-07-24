@@ -4,7 +4,7 @@ if "%1"=="--help" goto help
 
 echo Loading...
 
-rem Save current directory and start from the win32\packages\generator folder
+rem Save current directory and start from the packages\generator folder
 pushd %~dp0..\packages\generator
 call dart bin\generate.dart
 
@@ -15,7 +15,7 @@ echo Running generator tests...
 call dart test
 
 echo Running generated file tests...
-cd ..\..
+cd ..\win32
 rem Now should be in win32
 
 rem Single threaded increases chances of detecting a segfault test failure

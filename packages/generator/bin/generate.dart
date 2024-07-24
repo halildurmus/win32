@@ -30,7 +30,7 @@ String generateDocComment(Win32Function func, String libraryDartName) {
 }
 
 int generateStructs(List<Scope> scopes, Map<String, String> structs) {
-  final file = File('../../lib/src/structs.g.dart');
+  final file = File('../win32/lib/src/structs.g.dart');
 
   final typeDefs = scopes.expand((scope) => scope.typeDefs
       .where((typeDef) => structs.keys.contains(typeDef.name))
@@ -67,7 +67,7 @@ void main() {
 
   buffer.write('}');
 
-  File('../../test/struct_test.dart')
+  File('../win32/test/struct_test.dart')
       .writeAsStringSync(DartFormatter().format(buffer.toString()));
 
   return testsGenerated;
@@ -100,7 +100,7 @@ void generateDllFile(String library, List<Method> filteredMethods,
   ''');
   }
 
-  File('../../lib/src/win32/$libraryDartName.g.dart')
+  File('../win32/lib/src/win32/$libraryDartName.g.dart')
       .writeAsStringSync(DartFormatter().format(buffer.toString()));
 }
 
@@ -154,7 +154,7 @@ void main() {
 }
 ''';
 
-  File('../../test/api_test.dart')
+  File('../win32/test/api_test.dart')
       .writeAsStringSync(DartFormatter().format(testFile));
 }
 
@@ -236,18 +236,9 @@ void generateComApis(Scope scope, Map<String, String> comTypesToGenerate) {
     final dartClass = comObject.toString();
     final classOutputFilename =
         stripAnsiUnicodeSuffix(lastComponent(interface)).toLowerCase();
-    final classOutputPath = '../../lib/src/com/$classOutputFilename.dart';
+    final classOutputPath = '../win32/lib/src/com/$classOutputFilename.dart';
 
     File(classOutputPath).writeAsStringSync(DartFormatter().format(dartClass));
-
-    // Generate test only if the object has methods
-    if (interfaceProjection.methodProjections.isNotEmpty) {
-      final dartTest = TestInterfaceProjection(typeDef, interfaceProjection);
-      final testOutputPath = '../../test/com/${classOutputFilename}_test.dart';
-
-      File(testOutputPath)
-          .writeAsStringSync(DartFormatter().format(dartTest.toString()));
-    }
   }
 }
 
