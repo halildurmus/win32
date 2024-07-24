@@ -1,11 +1,10 @@
 name: Lock Threads
 
 on:
-  workflow_dispatch:
-  # TODO(halildurmus): Uncomment the following lines
-  # schedule:
-  #   # Every day at 8am
-  #   - cron: '0 8 * * *'
+  schedule:
+    - cron: '10 * * * *'
+    # Every day at 8am
+    # - cron: '0 8 * * *'
 
 permissions:
   issues: write
@@ -22,8 +21,9 @@ jobs:
           process-only: 'issues'
           # Number of days of inactivity before a closed issue is locked.
           issue-inactive-days: 14
-          issue-comment: >
-            This thread has been automatically locked since there has not been
-            any recent activity after it was closed. If you are still
-            experiencing a similar issue, please open a new bug, including a
-            minimal reproduction of the issue.
+          # TODO(halildurmus): Uncomment the following
+          # issue-comment: >
+          #   This thread has been automatically locked since there has not been
+          #   any recent activity after it was closed. If you are still
+          #   experiencing a similar issue, please open a new bug, including a
+          #   minimal reproduction of the issue.
