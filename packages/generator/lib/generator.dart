@@ -23,6 +23,5 @@ export 'src/projection/nested_struct.dart';
 export 'src/projection/parameter.dart';
 export 'src/projection/safenames.dart';
 export 'src/projection/struct.dart';
-export 'src/projection/test_interface.dart';
 export 'src/projection/type.dart';
 export 'src/projection/utils.dart';
