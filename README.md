@@ -3,6 +3,7 @@
 [![Publisher: halildurmus.dev][publisher_badge]][publisher_link]
 [![Language: Dart][language_badge]][language_link]
 [![License: BSD-3-Clause][license_badge]][license_link]
+[![codecov][codecov_badge_link]][codecov_link]
 
 [![Flutter Favorite program][flutter_favorite_logo]][flutter_favorite_program_link]
 
@@ -174,6 +175,8 @@ the [Creative Commons Attribution 4.0 International Public License][license].
 
 [ci_badge]: https://github.com/halildurmus/win32/actions/workflows/win32.yml/badge.svg
 [ci_link]: https://github.com/halildurmus/win32/actions/workflows/win32.yml
+[codecov_badge_link]: https://codecov.io/gh/halildurmus/win32/graph/badge.svg?token=RVL4TNLEJA
+[codecov_link]: https://codecov.io/gh/halildurmus/win32
 [flutter_favorite_logo]: https://raw.githubusercontent.com/halildurmus/win32/main/assets/FlutterFavoriteLogo.png
 [flutter_favorite_program_link]: https://flutter.dev/docs/development/packages-and-plugins/favorites
 [language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
