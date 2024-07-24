@@ -6,6 +6,7 @@ on:
     paths:
       - '.github/workflows/generator.yml'
       - 'analysis_options.yaml'
+      - 'codecov.yml'
       - 'pubspec.yaml'
       - 'packages/generator/bin/**'
       - 'packages/generator/example/**'
@@ -18,6 +19,7 @@ on:
     paths:
       - '.github/workflows/generator.yml'
       - 'analysis_options.yaml'
+      - 'codecov.yml'
       - 'pubspec.yaml'
       - 'packages/generator/bin/**'
       - 'packages/generator/example/**'
