@@ -1,10 +1,24 @@
-name: Build
+name: generator
 
 on:
-  push:
-    branches: [main]
   pull_request:
     branches: [main]
+    paths:
+      - '.github/workflows/generator.yml'
+      - 'analysis_options.yaml'
+      - 'pubspec.yaml'
+      - 'packages/generator/**'
+    paths-ignore:
+      - '**.md'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/generator.yml'
+      - 'analysis_options.yaml'
+      - 'pubspec.yaml'
+      - 'packages/generator/**'
+    paths-ignore:
+      - '**.md'
 
 jobs:
   build:
@@ -19,28 +33,12 @@ jobs:
         include:
           - os: windows-latest
             sdk: main
-            package: generator
-          - os: windows-latest
-            sdk: main
-            package: win32
           - os: windows-2022
             sdk: beta
-            package: generator
-          - os: windows-2022
-            sdk: beta
-            package: win32
           - os: windows-2019
             sdk: stable
-            package: generator
-          - os: windows-2019
-            sdk: stable
-            package: win32
           - os: ubuntu-latest
             sdk: stable
-            package: generator
-          - os: ubuntu-latest
-            sdk: stable
-            package: win32
 
     uses: halildurmus/halildurmus/.github/workflows/dart_package.yml@main
     with:
@@ -48,7 +46,6 @@ jobs:
       run_tests: ${{ matrix.sdk != 'main' }}
       runs_on: ${{ matrix.os }}
       upload_coverage: ${{ matrix.sdk == 'main' }}
-      validate_dartdoc_links: ${{ matrix.package == 'win32' && matrix.sdk == 'main' }}
-      working_directory: packages/${{ matrix.package }}
+      working_directory: packages/generator
     secrets:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

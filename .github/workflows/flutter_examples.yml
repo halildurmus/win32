@@ -1,0 +1,38 @@
+name: Flutter Examples
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/flutter_examples.yml'
+      - 'analysis_options.yaml'
+      - 'pubspec.yaml'
+      - 'examples/explorer/**'
+      - 'examples/task_manager/**'
+      - 'packages/win32/**'
+    paths-ignore:
+      - '**.md'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/flutter_examples.yml'
+      - 'analysis_options.yaml'
+      - 'pubspec.yaml'
+      - 'examples/explorer/**'
+      - 'examples/task_manager/**'
+      - 'packages/win32/**'
+    paths-ignore:
+      - '**.md'
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        example:
+          - explorer
+          - task_manager
+
+    uses: halildurmus/halildurmus/.github/workflows/flutter_package.yml@main
+    with:
+      run_tests: false
+      working_directory: examples/${{ matrix.example }}
