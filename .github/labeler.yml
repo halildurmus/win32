@@ -1,0 +1,23 @@
+'ci':
+  - changed-files:
+      - any-glob-to-any-file: '.github/**'
+
+'docs':
+  - changed-files:
+      - any-glob-to-any-file: 'packages/win32/doc/*'
+
+'examples':
+  - changed-files:
+      - any-glob-to-any-file: 'examples/**'
+
+'p: generator':
+  - changed-files:
+      - any-glob-to-any-file: 'packages/generator/**'
+
+'p: win32':
+  - changed-files:
+      - any-glob-to-any-file: 'packages/win32/**'
+
+'website':
+  - changed-files:
+      - any-glob-to-any-file: 'website/**'
