@@ -5,34 +5,34 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
 
   # Workspace pubspec.yaml
   - package-ecosystem: "pub"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
 
   # Examples
   - package-ecosystem: "pub"
     directory: "/examples/explorer"
     schedule:
-      interval: "daily"
+      interval: "weekly"
   - package-ecosystem: "pub"
     directory: "/examples/service_manager_cli"
     schedule:
-      interval: "daily"
+      interval: "weekly"
   - package-ecosystem: "pub"
     directory: "/examples/task_manager"
     schedule:
-      interval: "daily"
+      interval: "weekly"
 
   # Packages
   - package-ecosystem: "pub"
     directory: "/packages/generator"
     schedule:
-      interval: "daily"
+      interval: "weekly"
   - package-ecosystem: "pub"
     directory: "/packages/win32"
     schedule:
-      interval: "daily"
+      interval: "weekly"
