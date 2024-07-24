@@ -80,19 +80,19 @@ Other examples of packages that use `package:win32` can be found on
 
 | Example             | Description                                             |
 | ------------------- | ------------------------------------------------------- |
+| [shell_notify_icon] | Demonstrates adding an icon to the system tray          |
 | [knownfolder.dart]  | Retrieves known folders from the current user profile   |
 | [magnifier.dart]    | Provides a magnifier window using the Magnification API |
 | [recycle_bin.dart]  | Queries the recycle bin and adds an item to it          |
 | [screenshot.dart]   | Takes snapshots of all connected displays               |
-| [shell_notify_icon] | Demonstrates adding an icon to the system tray          |
 | [shortcut.dart]     | Demonstrates creating a Windows shell link              |
 | [wallpaper.dart]    | Shows what wallpaper and background color are set       |
 
+[shell_notify_icon]: https://github.com/halildurmus/win32/blob/main/examples/shell_notify_icon
 [knownfolder.dart]: https://github.com/halildurmus/win32/blob/main/examples/knownfolder.dart
 [magnifier.dart]: https://github.com/halildurmus/win32/blob/main/examples/magnifier.dart
 [recycle_bin.dart]: https://github.com/halildurmus/win32/blob/main/examples/recycle_bin.dart
 [screenshot.dart]: https://github.com/halildurmus/win32/blob/main/examples/screenshot.dart
-[shell_notify_icon]: https://github.com/halildurmus/win32/blob/main/examples/shell_notify_icon
 [shortcut.dart]: https://github.com/halildurmus/win32/blob/main/examples/shortcut.dart
 [wallpaper.dart]: https://github.com/halildurmus/win32/blob/main/examples/wallpaper.dart
 
@@ -138,8 +138,8 @@ Other examples of packages that use `package:win32` can be found on
 | ------------------- | -------------------------------------------------------------- |
 | [com_context.dart]  | Shows interaction of Dart isolates and COM apartments          |
 | [com_demo.dart]     | Demonstrates COM object creation, casting, and calling methods |
-| [dispatcher.dart]   | Demonstrates calling a method using `Dispatcher`               |
 | [guid.dart]         | Creates a globally unique identifier (GUID)                    |
+| [idispatch.dart]    | Demonstrates the use of `IDispatch`                            |
 | [uiautomation.dart] | Demonstrates calling Windows UI Automation APIs                |
 | [winhttp.dart]      | Demonstrates using WinHTTP APIs to make HTTP requests          |
 | [wmi_perf.dart]     | Uses WMI to retrieve performance counters                      |
@@ -147,8 +147,8 @@ Other examples of packages that use `package:win32` can be found on
 
 [com_context.dart]: https://github.com/halildurmus/win32/blob/main/examples/com_context.dart
 [com_demo.dart]: https://github.com/halildurmus/win32/blob/main/examples/com_demo.dart
-[dispatcher.dart]: https://github.com/halildurmus/win32/blob/main/examples/dispatcher.dart
 [guid.dart]: https://github.com/halildurmus/win32/blob/main/examples/guid.dart
+[idispatch.dart]: https://github.com/halildurmus/win32/blob/main/examples/idispatch.dart
 [uiautomation.dart]: https://github.com/halildurmus/win32/blob/main/examples/uiautomation.dart
 [winhttp.dart]: https://github.com/halildurmus/win32/blob/main/examples/winhttp.dart
 [wmi_perf.dart]: https://github.com/halildurmus/win32/blob/main/examples/wmi_perf.dart
