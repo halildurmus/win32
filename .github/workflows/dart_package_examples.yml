@@ -1,0 +1,35 @@
+name: Dart Package Examples
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/dart_package_examples.yml'
+      - 'analysis_options.yaml'
+      - 'pubspec.yaml'
+      - 'examples/service_manager_cli/**'
+      - 'packages/win32/**'
+    paths-ignore:
+      - '**.md'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/dart_package_examples.yml'
+      - 'analysis_options.yaml'
+      - 'pubspec.yaml'
+      - 'examples/service_manager_cli/**'
+      - 'packages/win32/**'
+    paths-ignore:
+      - '**.md'
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        example:
+          - service_manager_cli
+
+    uses: halildurmus/halildurmus/.github/workflows/dart_package.yml@main
+    with:
+      run_tests: false
+      working_directory: examples/${{ matrix.example }}

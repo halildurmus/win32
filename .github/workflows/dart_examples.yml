@@ -1,0 +1,41 @@
+name: Dart Examples
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/dart_examples.yml'
+      - 'analysis_options.yaml'
+      - 'pubspec.yaml'
+      - 'examples/**'
+      - 'packages/win32/**'
+    paths-ignore:
+      - 'examples/explorer/**'
+      - 'examples/service_manager_cli/**'
+      - 'examples/task_manager/**'
+      - '**.md'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/dart_examples.yml'
+      - 'analysis_options.yaml'
+      - 'pubspec.yaml'
+      - 'examples/**'
+      - 'packages/win32/**'
+    paths-ignore:
+      - 'examples/explorer/**'
+      - 'examples/service_manager_cli/**'
+      - 'examples/task_manager/**'
+      - '**.md'
+
+jobs:
+  build:
+    uses: halildurmus/halildurmus/.github/workflows/dart_package.yml@main
+    with:
+      # Exclude the 'explorer', 'service_manager_cli', and 'task_manager'
+      # directories when analyzing and formatting the Dart files. They are
+      # analyzed and formatted in their own workflows below.
+      analyze_directories: $(find . -type f -not \( -path .*explorer/* -prune \) -not \( -path .*service_manager_cli/* -prune \) -not \( -path .*task_manager/* -prune \) -name '*.dart' -print)
+      format_directories: $(find . -type f -not \( -path .*explorer/* -prune \) -not \( -path .*service_manager_cli/* -prune \) -not \( -path .*task_manager/* -prune \) -name '*.dart' -print)
+      run_tests: false
+      working_directory: examples
