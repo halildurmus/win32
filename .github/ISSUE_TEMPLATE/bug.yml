@@ -1,0 +1,68 @@
+name: 🐛 Bug report
+description: Report a bug or unexpected behavior.
+title: "fix: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for using win32!
+
+        Please provide the following details to help us address the issue.
+
+  - type: markdown
+    attributes:
+      value: >
+        Please be sure to search
+        [current issues](https://github.com/halildurmus/win32/issues) before
+        filling out the form fields.
+
+  - type: textarea
+    attributes:
+      label: Description
+      description: A clear and concise description of what the bug is.
+      placeholder: >
+        Please provide the context in which the problem occur.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Steps to reproduce
+      description: Steps to reproduce the behavior
+      placeholder: |
+        1. Go to '...'
+        2. Click on '....'
+        3. Scroll down to '....'
+        4. See error
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Expected behavior
+      description: >
+        A clear and concise description of what you expected to happen.
+      placeholder: Describe the expected behavior.
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: Environment
+      description: >
+        Provide details about your environment (e.g., OS, software version).
+      placeholder: e.g., Windows 10, version 1903
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Screenshots (optional)
+      description: Provide any screenshots that may help explain the issue.
+      placeholder: Upload or paste screenshots here.
+
+  - type: textarea
+    attributes:
+      label: Additional context (optional)
+      description: Add any other context about the problem here.

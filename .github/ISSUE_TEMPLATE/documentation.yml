@@ -1,0 +1,40 @@
+name: 📃 Documentation
+description: Report an issue related to documentation.
+title: "docs: "
+labels: ["docs"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for contributing to the documentation!
+
+        Please provide the following details to help us address your request.
+
+  - type: markdown
+    attributes:
+      value: >
+        Please be sure to search
+        [current issues](https://github.com/halildurmus/win32/issues) before
+        filling out the form fields.
+
+  - type: input
+    attributes:
+      label: Which section of the documentation is this issue related to?
+      description: Provide the section name or link to the documentation page.
+      placeholder: e.g., API Reference, Getting Started, etc.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Description
+      description: Provide a detailed description of the issue or request.
+      placeholder: Describe the issue or request in detail.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Suggested changes (optional)
+      description: Provide any suggestions for changes or improvements.
+      placeholder: Suggest specific changes, additions, or improvements.
