@@ -46,7 +46,7 @@ jobs:
           - os: windows-2019
             sdk: stable
 
-    uses: halildurmus/halildurmus/.github/workflows/dart_package.yml@main
+    uses: halildurmus/workflows/.github/workflows/dart_package.yml@main
     with:
       dart_sdk: ${{ matrix.sdk }}
       run_tests: ${{ matrix.sdk != 'main' }}
