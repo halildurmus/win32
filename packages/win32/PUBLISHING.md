@@ -1,23 +1,19 @@
-Rough notes on steps I take to publish a new version of win32:
+# Publishing a new release
 
-1. Run `tools\generate.cmd` to make sure that the machine-generated classes are
-   the latest.
+When it's time to publish a new release, follow these steps:
 
-2. Run `dart test` to make sure all the automated tests are still working.
+1. Update the version numbers in the `CHANGELOG.md` and `pubspec.yaml` files
+   (e.g., `5.3.0-wip` -> `5.3.0`).
 
-   - Optionally, also run it from Windows 7 to make sure nothing downlevel has
-     failed.
-   - These tests are also run through CI/CD on GitHub.
+2. Create a commit with the message "Prepare for release v**x.y.z**", replacing
+   `x.y.z` with the new version number (e.g., `5.3.0`).
 
-3. Bump the version in `pubspec.yaml` and update `CHANGELOG.md`.
+3. Create a pull request (PR) with the commit and get it reviewed and merged.
 
-4. Update `README.md` as appropriate with any changed examples.
+4. Create a new release on GitHub by following the link provided in the
+   **Publish tag** from the **Package publishing** comment on the PR. This link
+   will pre-fill the release information with the correct tag and changelog
+   entry.
 
-5. If ready, run `git tag v1.2.3` (with the appropriate version number) to tag
-   the release.
-
-6. Run `git push` and `git push --tags` to push both the release and the tag to
-   GitHub.
-
-7. Run `dart pub publish` to push the build live. Watch pub.dev to make sure
-   that there's nothing broken.
+Once the release is created on GitHub, the publish action will be triggered and
+the new version of the package will be published to [pub.dev](https://pub.dev).
