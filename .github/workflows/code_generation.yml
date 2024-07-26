@@ -39,11 +39,8 @@ jobs:
         run: dart pub get
         working-directory: packages/generator
 
-      - name: 🛠️ Install Melos
-        run: dart pub global activate melos
-
       - name: 🚀 Run Code Generation
-        run: dart pub run melos run generate
+        run: tools\generate --no-test
 
       - name: 🔍 Verify Code Generation
         run: git diff --exit-code
