@@ -8,6 +8,5 @@ dev_dependencies:
   args: ^2.5.0
   ffi: ^2.1.2
   lints: ^4.0.0
-  melos: ^6.1.0
   win32:
     path: packages/win32
