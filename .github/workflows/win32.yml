@@ -25,6 +25,9 @@ on:
       - 'packages/win32/test_fixes/**'
       - 'packages/win32/analysis_options.yaml'
       - 'packages/win32/pubspec.yaml'
+  schedule:
+    # Run every day at 2:00 AM UTC.
+    - cron: '0 2 * * *'
 
 jobs:
   build:

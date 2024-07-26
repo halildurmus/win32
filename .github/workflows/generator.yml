@@ -27,6 +27,9 @@ on:
       - 'packages/generator/test/**'
       - 'packages/generator/analysis_options.yaml'
       - 'packages/generator/pubspec.yaml'
+  schedule:
+    # Run every day at 4:00 AM UTC.
+    - cron: '0 4 * * *'
 
 jobs:
   build:
