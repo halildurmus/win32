@@ -50,7 +50,9 @@ class RegistryValue {
         REG_VALUE_TYPE.REG_QWORD => RegistryValue(
             name, RegistryValueType.int64, byteData.cast<QWORD>().value),
         REG_VALUE_TYPE.REG_BINARY => RegistryValue(
-            name, RegistryValueType.binary, byteData.asTypedList(dataLength)),
+            name,
+            RegistryValueType.binary,
+            Uint8List.fromList(byteData.asTypedList(dataLength))),
         REG_VALUE_TYPE.REG_NONE =>
           RegistryValue(name, RegistryValueType.none, 0),
         _ => RegistryValue(name, RegistryValueType.unknown, 0)
