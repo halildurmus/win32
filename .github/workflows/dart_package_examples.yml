@@ -35,7 +35,7 @@ jobs:
         example:
           - service_manager_cli
 
-    uses: halildurmus/halildurmus/.github/workflows/dart_package.yml@main
+    uses: halildurmus/workflows/.github/workflows/dart_package.yml@main
     with:
       run_tests: false
       working_directory: examples/${{ matrix.example }}

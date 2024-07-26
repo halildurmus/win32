@@ -40,7 +40,7 @@ jobs:
           - explorer
           - task_manager
 
-    uses: halildurmus/halildurmus/.github/workflows/flutter_package.yml@main
+    uses: halildurmus/workflows/.github/workflows/flutter_package.yml@main
     with:
       run_tests: false
       working_directory: examples/${{ matrix.example }}
