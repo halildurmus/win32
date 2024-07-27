@@ -156,8 +156,7 @@ If you want to contribute to the **win32** itself, follow the steps below:
 - There are plenty of good existing patterns to build off in these locations;
   try to mirror an existing function if you can for consistency!
 - Ideally pull requests for new API submissions include a **sample**
-  (`examples\` directory) and **some tests** (`packages\win32\tests\`
-  directory).
+  (`examples\` directory) and **some tests** (`packages\win32\test\` directory).
 
 ### COM APIs
 
