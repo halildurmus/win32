@@ -1,0 +1,10 @@
+[
+  {
+    "from": "/docs/",
+    "to": "/docs"
+  },
+  {
+    "from": "/examples",
+    "to": "https://github.com/halildurmus/win32/tree/main/examples"
+  }
+]

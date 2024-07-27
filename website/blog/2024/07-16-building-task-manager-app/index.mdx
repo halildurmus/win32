@@ -1,0 +1,1124 @@
+---
+title: Building a Task Manager App in Flutter with win32
+description: We'll build a Task Manager app to manage running Windows tasks in
+  Flutter using the win32 package.
+slug: building-task-manager-app
+authors: halildurmus
+tags: [win32, flutter, tutorial]
+image: https://ik.imagekit.io/npajaqrcn/blog/2024-07-16-building-task-manager-app/social.png
+hide_table_of_contents: false
+---
+
+![Task Manager App](/assets/landing-hero-showcase/task_manager.png)
+
+## Introduction
+
+In this blog post, we will build a Task Manager app in Flutter using the
+**win32** package. By utilizing the Windows APIs provided by **win32**, we'll
+create an intuitive app to **view** and **manage** running tasks on a Windows
+system.
+
+Whether you're a developer looking to enhance your Flutter skills or an
+enthusiast eager to dive into Windows programming, this guide will walk you
+through the process of creating your own Task Manager app from scratch.
+
+<!--truncate-->
+
+Here's what we'll cover:
+
+- [Feature Overview](#feature-overview)
+- [Setting Up the Project](#setting-up-the-project)
+  - [Creating a New Flutter Project](#creating-a-new-flutter-project)
+  - [Installing Dependencies](#installing-dependencies)
+- [Defining the Models](#defining-the-models)
+- [Implementing Task Manager Logic](#implementing-task-manager-logic)
+  - [Running a New Task](#running-a-new-task)
+  - [Enumerating Running Tasks](#enumerating-running-tasks)
+    - [Retrieving File Description](#retrieving-file-description)
+    - [Extracting Task Icon](#extracting-task-icon)
+  - [Terminating a Task](#terminating-a-task)
+- [Building the UI](#building-the-ui)
+  - [Setting Up the Main Entry Point](#setting-up-the-main-entry-point)
+  - [Creating the Home Screen Skeleton](#creating-the-home-screen-skeleton)
+  - [Loading and Displaying Tasks](#loading-and-displaying-tasks)
+  - [Task Sorting, Searching, and Refreshing](#task-sorting-searching-and-refreshing)
+  - [Task Termination](#task-termination)
+  - [Task Creation](#task-creation)
+- [Conclusion](#conclusion)
+- [Source Code](#source-code)
+
+## Feature Overview
+
+Our Task Manager app will include the following key features:
+
+- **Enumerating running tasks:** View a list of running tasks, including their
+  names, PIDs, and descriptions.
+- **Searching and sorting tasks:** Search and sort tasks based on their name,
+  PID, or description.
+- **Starting a new task:** Start a new task by specifying its executable path
+  directly within the app.
+- **Terminating a task:** Terminate a running task by clicking the button next
+  to the task.
+
+## Setting Up the Project
+
+Before we dive into coding, let’s set up our project.
+
+### Creating a New Flutter Project
+
+Open your terminal and run:
+
+```sh
+flutter create task_manager --platforms=windows
+cd task_manager
+```
+
+### Installing Dependencies
+
+Add the **ffi** and **win32** packages to your project with:
+
+```sh title="Terminal"
+flutter pub add ffi win32
+```
+
+## Defining the Models
+
+We'll start by defining the models responsible for storing **task information**
+and **sorting options**.
+
+Create a new file named `models.dart` in the `lib\src` directory and add the
+following code:
+
+```dart title="models.dart"
+import 'dart:typed_data';
+
+/// Specifies the field by which to sort the tasks.
+enum SortBy {
+  /// Sort by task name.
+  name,
+
+  /// Sort by task PID (Process ID).
+  pid,
+
+  /// Sort by task description.
+  description,
+}
+
+/// Specifies the order in which to sort the tasks.
+enum SortOrder {
+  /// Sort in ascending order.
+  ascending,
+
+  /// Sort in descending order.
+  descending,
+}
+
+/// A Windows task with its icon, name, PID, and description.
+class Task {
+  const Task({
+    required this.iconAsBytes,
+    required this.name,
+    required this.pid,
+    required this.description,
+  });
+
+  /// The icon of the task.
+  final Uint8List iconAsBytes;
+
+  /// The name of the task.
+  final String name;
+
+  /// The PID (Process ID) of the task.
+  final int pid;
+
+  /// The description of the task.
+  final String description;
+}
+```
+
+## Implementing Task Manager Logic
+
+Next, we'll implement the functionality for managing Windows tasks, including
+enumerating running tasks, starting new tasks, and terminating tasks.
+
+Create a new file named `task_manager.dart` in the `lib\src` directory and
+add the following code to set up the skeleton for managing Windows tasks:
+
+```dart title="task_manager.dart"
+import 'dart:ffi';
+import 'dart:typed_data';
+
+import 'package:ffi/ffi.dart';
+import 'package:win32/win32.dart';
+
+import 'models.dart';
+
+/// Provides functionality for managing Windows tasks, including:
+/// - Enumerating running tasks
+/// - Running a new task
+/// - Terminating a running task
+abstract class TaskManager {
+  /// Runs a new task from the specified [path].
+  ///
+  /// Returns `true` if the task was successfully started; otherwise, `false`.
+  static bool run(String path) {
+    // TODO: Implement this method
+    throw UnimplementedError();
+  }
+
+  /// Retrieves a list of currently running tasks.
+  ///
+  /// Returns `null` if retrieval failed.
+  static List<Task>? get tasks {
+    // TODO: Implement this method
+    throw UnimplementedError();
+  }
+
+  /// Terminates a running task with the given [pid].
+  ///
+  /// Returns `true` if the task was successfully terminated; otherwise,
+  /// `false`.
+  static bool terminate(int pid) {
+    // TODO: Implement this method
+    throw UnimplementedError();
+  }
+}
+```
+
+With the skeleton in place, we can start implementing the task manager logic.
+
+### Running a New Task
+
+Now, let's implement the `run` function to **run a new task**.
+
+```dart title="task_manager.dart"
+/// Runs a new task from the specified [path].
+///
+/// Returns `true` if the task was successfully started; otherwise, `false`.
+static bool run(String path) {
+  final lpFile = path.toNativeUtf16();
+  final result = ShellExecute(
+    0,
+    'open'.toNativeUtf16(),
+    lpFile,
+    nullptr,
+    nullptr,
+    SHOW_WINDOW_CMD.SW_SHOWNORMAL,
+  );
+  free(lpFile);
+  return result > 32;
+}
+```
+
+We first convert the provided file path into a native UTF-16 format using the
+`toNativeUtf16` extension method from `package:ffi`. This formatted path is then
+passed along with other necessary parameters to [ShellExecute], specifying an
+action to open the file and dictate how the new process window should appear.
+
+After executing the function, we free the allocated memory for the path to
+ensure efficient resource management. If the value returned by [ShellExecute] is
+greater than **32**, it indicates a *successful* task launch, and the function
+returns `true`. Otherwise, it returns `false`.
+
+### Enumerating Running Tasks
+
+Next, we'll implement the `tasks` getter to **enumerate all running tasks** on
+the system.
+
+```dart title="task_manager.dart"
+/// Retrieves a list of currently running tasks.
+///
+/// Returns `null` if retrieval failed.
+static List<Task>? get tasks {
+  return using((arena) {
+    final tasks = <Task>[];
+
+    final buffer = arena<Uint32>(1024);
+    final cbNeeded = arena<Uint32>();
+
+    if (EnumProcesses(buffer, sizeOf<Uint32>() * 1024, cbNeeded) == FALSE) {
+      return null;
+    }
+
+    final processCount = cbNeeded.value ~/ sizeOf<Uint32>();
+    final processIds = buffer.asTypedList(processCount);
+
+    for (final pid in processIds) {
+      final hProcess = OpenProcess(
+        PROCESS_ACCESS_RIGHTS.PROCESS_QUERY_INFORMATION |
+            PROCESS_ACCESS_RIGHTS.PROCESS_VM_READ,
+        FALSE,
+        pid,
+      );
+
+      if (hProcess != NULL) {
+        final hModule = arena<HMODULE>();
+        final cbNeededMod = arena<Uint32>();
+
+        if (EnumProcessModules(
+                hProcess, hModule, sizeOf<HMODULE>(), cbNeededMod) !=
+            0) {
+          final moduleName = arena<WCHAR>(MAX_PATH).cast<Utf16>();
+
+          if (GetModuleBaseName(
+                hProcess,
+                hModule.value,
+                moduleName,
+                MAX_PATH,
+              ) >
+              0) {
+            final name = moduleName.toDartString();
+
+            final filePath = arena<WCHAR>(MAX_PATH).cast<Utf16>();
+            final result = GetModuleFileNameEx(
+                hProcess, hModule.value, filePath, MAX_PATH);
+            final path = result != 0 ? filePath.toDartString() : null;
+
+            final description =
+                path != null ? (_getFileDescription(path) ?? name) : name;
+
+            final task = Task(
+              iconAsBytes: path != null
+                  ? (_extractIcon(path) ?? Uint8List(0))
+                  : Uint8List(0),
+              name: name,
+              pid: pid,
+              description: description,
+            );
+            tasks.add(task);
+          }
+        }
+
+        CloseHandle(hProcess);
+      }
+    }
+
+    return tasks;
+  });
+}
+```
+
+We begin by allocating memory for an array of `Uint32` values to store the PIDs
+of running processes. We then call [EnumProcesses] to retrieve the list of PIDs
+and the number of processes.
+
+Next, we iterate over the list of PIDs and open a handle to each process using
+[OpenProcess]. We then call [EnumProcessModules] to retrieve the module handle
+for the process and [GetModuleBaseName] to retrieve the name of the module.
+
+Next, we retrieve the file path of the module using [GetModuleFileNameEx] and
+extract the file description using the `_getFileDescription` function. We also
+extract the icon of the task using the `_extractIcon` function. Finally, we
+create a `Task` object with the retrieved information and add it to the list of
+tasks.
+
+#### Retrieving File Description
+
+Next, we'll implement the `_getFileDescription` function to retrieve the file
+description.
+
+```dart title="task_manager.dart"
+static String? _getFileDescription(String path) {
+  return using((arena) {
+    final lptstrFileName = path.toNativeUtf16(allocator: arena);
+    final handle = arena<Uint32>();
+    final size = GetFileVersionInfoSize(lptstrFileName, handle);
+    if (size == 0) return null;
+
+    final versionInfo = arena<Uint8>(size);
+    if (GetFileVersionInfo(lptstrFileName, 0, size, versionInfo) == FALSE) {
+      return null;
+    }
+
+    final lplpBuffer = arena<Pointer<Utf16>>();
+    final puLen = arena<Uint32>();
+
+    if (VerQueryValue(
+          versionInfo,
+          r'\StringFileInfo\040904b0\FileDescription'
+              .toNativeUtf16(allocator: arena),
+          lplpBuffer.cast(),
+          puLen,
+        ) ==
+        FALSE) {
+      return null;
+    }
+
+    if (puLen.value == 0) return null;
+
+    return lplpBuffer.value.toDartString();
+  });
+}
+```
+
+We first convert the provided file path into a native UTF-16 format using the
+`toNativeUtf16` extension method from `package:ffi`. This formatted path is then
+passed to [GetFileVersionInfoSize] to retrieve the size of the version
+information block for the specified file.
+
+Next, we allocate memory for the version information block and call
+[GetFileVersionInfo] to retrieve the version information for the file.
+
+We then use [VerQueryValue] to retrieve the file description from the version
+information block. If the value is `0`, the function returns `null`. Otherwise,
+it converts the retrieved value to a Dart string and returns it.
+
+#### Extracting Task Icon
+
+Finally, we'll implement the `_extractIcon` function to extract the icon of the
+task.
+
+```dart title="task_manager.dart"
+static Uint8List? _extractIcon(String path) {
+  return using((arena) {
+    final filePath = path.toNativeUtf16(allocator: arena);
+    final instance = GetModuleHandle(nullptr);
+    final iconID = arena<WORD>();
+
+    final hIcon = ExtractAssociatedIcon(instance, filePath, iconID);
+    if (hIcon == NULL) return null;
+
+    return _getIconData(hIcon);
+  });
+}
+
+static Uint8List? _getIconData(int hIcon, {int nColorBits = 32}) {
+  return using((arena) {
+    final buffer = <int>[];
+    final hdc = CreateCompatibleDC(NULL);
+
+    final icoHeader = [0, 0, 1, 0, 1, 0];
+    buffer.addAll(icoHeader);
+
+    final iconInfo = arena<ICONINFO>();
+    if (GetIconInfo(hIcon, iconInfo) == 0) {
+      DeleteDC(hdc);
+      return null;
+    }
+
+    final bmInfo = arena<BITMAPINFO>();
+    bmInfo.ref.bmiHeader
+      ..biSize = sizeOf<BITMAPINFOHEADER>()
+      ..biBitCount = 0;
+
+    if (GetDIBits(
+          hdc,
+          iconInfo.ref.hbmColor,
+          0,
+          0,
+          nullptr,
+          bmInfo,
+          DIB_USAGE.DIB_RGB_COLORS,
+        ) ==
+        0) {
+      DeleteDC(hdc);
+      return null;
+    }
+
+    int nBmInfoSize = sizeOf<BITMAPINFOHEADER>();
+    if (nColorBits < 24) {
+      nBmInfoSize += sizeOf<RGBQUAD>() * (1 << nColorBits);
+    }
+
+    if (bmInfo.ref.bmiHeader.biSizeImage == 0) {
+      DeleteDC(hdc);
+      return null;
+    }
+
+    final bits = arena<Uint8>(bmInfo.ref.bmiHeader.biSizeImage);
+
+    bmInfo.ref.bmiHeader
+      ..biBitCount = nColorBits
+      ..biCompression = BI_COMPRESSION.BI_RGB;
+
+    if (GetDIBits(
+          hdc,
+          iconInfo.ref.hbmColor,
+          0,
+          bmInfo.ref.bmiHeader.biHeight,
+          bits,
+          bmInfo,
+          DIB_USAGE.DIB_RGB_COLORS,
+        ) ==
+        0) {
+      DeleteDC(hdc);
+      return null;
+    }
+
+    final maskInfo = arena<BITMAPINFO>();
+    maskInfo.ref.bmiHeader
+      ..biSize = sizeOf<BITMAPINFOHEADER>()
+      ..biBitCount = 0;
+
+    if (GetDIBits(
+              hdc,
+              iconInfo.ref.hbmMask,
+              0,
+              0,
+              nullptr,
+              maskInfo,
+              DIB_USAGE.DIB_RGB_COLORS,
+            ) ==
+            0 ||
+        maskInfo.ref.bmiHeader.biBitCount != 1) {
+      DeleteDC(hdc);
+      return null;
+    }
+
+    final maskBits = arena<Uint8>(maskInfo.ref.bmiHeader.biSizeImage);
+    if (GetDIBits(
+          hdc,
+          iconInfo.ref.hbmMask,
+          0,
+          maskInfo.ref.bmiHeader.biHeight,
+          maskBits,
+          maskInfo,
+          DIB_USAGE.DIB_RGB_COLORS,
+        ) ==
+        0) {
+      DeleteDC(hdc);
+      return null;
+    }
+
+    final dir = arena<_IconDirectoryEntry>();
+    dir.ref
+      ..nWidth = bmInfo.ref.bmiHeader.biWidth
+      ..nHeight = bmInfo.ref.bmiHeader.biHeight
+      ..nNumColorsInPalette = (nColorBits == 4 ? 16 : 0)
+      ..nNumColorPlanes = 0
+      ..nBitsPerPixel = bmInfo.ref.bmiHeader.biBitCount
+      ..nDataLength = bmInfo.ref.bmiHeader.biSizeImage +
+          maskInfo.ref.bmiHeader.biSizeImage +
+          nBmInfoSize
+      ..nOffset = sizeOf<_IconDirectoryEntry>() + 6;
+
+    buffer
+        .addAll(dir.cast<Uint8>().asTypedList(sizeOf<_IconDirectoryEntry>()));
+
+    bmInfo.ref.bmiHeader
+      ..biHeight *= 2
+      ..biCompression = 0
+      ..biSizeImage += maskInfo.ref.bmiHeader.biSizeImage;
+    buffer.addAll(bmInfo.cast<Uint8>().asTypedList(nBmInfoSize));
+
+    buffer.addAll(bits.asTypedList(bmInfo.ref.bmiHeader.biSizeImage));
+    buffer.addAll(maskBits.asTypedList(maskInfo.ref.bmiHeader.biSizeImage));
+
+    DeleteObject(iconInfo.ref.hbmColor);
+    DeleteObject(iconInfo.ref.hbmMask);
+    DeleteDC(hdc);
+
+    return Uint8List.fromList(buffer);
+  });
+}
+
+base class _IconDirectoryEntry extends Struct {
+  @Uint8()
+  external int nWidth;
+
+  @Uint8()
+  external int nHeight;
+
+  @Uint8()
+  external int nNumColorsInPalette;
+
+  @Uint8()
+  external int nReserved;
+
+  @Uint16()
+  external int nNumColorPlanes;
+
+  @Uint16()
+  external int nBitsPerPixel;
+
+  @Uint32()
+  external int nDataLength;
+
+  @Uint32()
+  external int nOffset;
+}
+```
+
+We first convert the provided file path into a native UTF-16 format using the
+`toNativeUtf16` extension method from `package:ffi`. This formatted path is then
+passed to [ExtractAssociatedIcon] to retrieve the handle to the associated icon
+for the specified file.
+
+Next, we call the `_getIconData` function to extract the icon data from the icon
+handle. This function retrieves the icon information, including the icon size,
+color depth, and pixel data, and returns it as a `Uint8List`.
+
+### Terminating a Task
+
+Finally, let's implement the `terminate` function to
+**terminate a running task**.
+
+```dart title="task_manager.dart"
+/// Terminates a running task with the given [pid].
+///
+/// Returns `true` if the task was successfully terminated; otherwise,
+/// `false`.
+static bool terminate(int pid) {
+  final handle =
+      OpenProcess(PROCESS_ACCESS_RIGHTS.PROCESS_TERMINATE, FALSE, pid);
+  if (handle == NULL) return false;
+
+  try {
+    return TerminateProcess(handle, 0) == TRUE;
+  } finally {
+    CloseHandle(handle);
+  }
+}
+```
+
+We first attempt to open a handle to the process with the specified PID using
+[OpenProcess]. If the handle is successfully opened, we proceed to terminate the
+process by calling [TerminateProcess]. If the termination is successful, the
+function returns `true`; otherwise, it returns `false`. Finally, we close the
+handle to the process using `CloseHandle` to ensure proper cleanup.
+
+## Building the UI
+
+With the task manager logic in place, we can now focus on building the UI for
+our Task Manager app.
+
+### Setting Up the Main Entry Point
+
+First, open `lib\main.dart` file and replace the contents with the following
+code to set up the main entry point for the app:
+
+```dart title="main.dart"
+import 'package:flutter/material.dart';
+
+import 'models.dart';
+import 'task_manager.dart';
+
+void main() {
+  runApp(const TaskManagerApp());
+}
+
+class TaskManagerApp extends StatelessWidget {
+  const TaskManagerApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Task Manager',
+      theme: ThemeData(
+        brightness: Brightness.dark,
+      ),
+      home: const TaskManagerHomeScreen(),
+    );
+  }
+}
+```
+
+### Creating the Home Screen Skeleton
+
+Next, let's create the basic structure of the home screen including the
+StatefulWidget and State class.
+
+```dart title="main.dart"
+class TaskManagerHomeScreen extends StatefulWidget {
+  const TaskManagerHomeScreen({super.key});
+
+  @override
+  TaskManagerHomeScreenState createState() => TaskManagerHomeScreenState();
+}
+
+class TaskManagerHomeScreenState extends State<TaskManagerHomeScreen> {
+  var _tasks = <Task>[];
+  var _filteredTasks = <Task>[];
+  int? _selectedTask;
+  var _sortBy = SortBy.name;
+  var _sortOrder = SortOrder.ascending;
+  TextEditingController? _searchController;
+  FocusNode? _searchFocusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    _searchController = TextEditingController();
+    _searchFocusNode = FocusNode();
+    loadTasks();
+  }
+
+  @override
+  void dispose() {
+    _searchController?.dispose();
+    _searchFocusNode?.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Task Manager'),
+        actions: [],
+      ),
+      body: const Center(
+        child: Padding(
+          padding: EdgeInsets.all(16),
+          child: Text('No tasks found'),
+        ),
+      ),
+    );
+  }
+}
+```
+
+### Loading and Displaying Tasks
+
+Now, let's implement the method to load tasks, update the state, and use the
+`DataTable` widget to display tasks.
+
+```dart title="main.dart"
+void loadTasks() {
+  setState(() {
+    _tasks = TaskManager.tasks ?? [];
+    _filteredTasks = List.from(_tasks);
+    sortTasks();
+  });
+}
+
+@override
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: // ...
+    body: CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(
+          child: _filteredTasks.isEmpty
+              ? const Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Text('No tasks found'),
+                  ),
+                )
+                // highlight-start
+              : DataTable(
+                  columns: [
+                    const DataColumn(label: Text('Name')),
+                    const DataColumn(label: Text('PID'), numeric: true),
+                    const DataColumn(label: Text('Description')),
+                    const DataColumn(label: Text('Actions')),
+                  ],
+                  rows: _filteredTasks.map((task) {
+                    return DataRow(
+                      cells: [
+                        DataCell(Text(task.name)),
+                        DataCell(Text(task.pid.toString())),
+                        DataCell(Text(task.description)),
+                        DataCell(
+                          IconButton(
+                            icon: const Icon(
+                              Icons.cancel_outlined,
+                              color: Colors.red,
+                            ),
+                            onPressed: () {},
+                          ),
+                        ),
+                      ],
+                    );
+                  }).toList(),
+                ),
+                // highlight-end
+        ),
+      ],
+    ),
+  );
+}
+```
+
+### Task Sorting, Searching, and Refreshing
+
+Next, let's implement the functionality to sort and search tasks based on the
+user's input and add a button to the app bar to refresh the task list.
+
+```dart title="main.dart"
+void searchTasks(String query) {
+  final filtered = _tasks.where((task) {
+    return task.name.toLowerCase().contains(query.toLowerCase()) ||
+        task.description.toLowerCase().contains(query.toLowerCase()) ||
+        task.pid.toString().contains(query);
+  }).toList();
+
+  setState(() {
+    _filteredTasks = filtered;
+    sortTasks();
+  });
+}
+
+void sortTasks() {
+  setState(() {
+    _filteredTasks.sort((a, b) {
+      final cmp = switch (_sortBy) {
+        SortBy.name => a.name.compareTo(b.name),
+        SortBy.pid => a.pid.compareTo(b.pid),
+        SortBy.description => a.description.compareTo(b.description),
+      };
+      return _sortOrder == SortOrder.ascending ? cmp : -cmp;
+    });
+  });
+}
+
+@override
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(
+      title: const Text('Task Manager'),
+      actions: [
+        // highlight-start
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 4),
+          child: Tooltip(
+            message: 'Type a name or PID to search',
+            child: SizedBox(
+              height: 40,
+              width: 300,
+              child: TextField(
+                controller: _searchController,
+                focusNode: _searchFocusNode,
+                decoration: InputDecoration(
+                  labelText: 'Type a name or PID to search',
+                  border: const OutlineInputBorder(),
+                  prefixIcon: const Icon(Icons.search),
+                  suffix: _searchController!.text.isNotEmpty
+                      ? IconButton(
+                          icon: const Icon(Icons.clear),
+                          onPressed: () {
+                            setState(() {
+                              _searchController!.clear();
+                              _searchFocusNode!.unfocus();
+                              _tasks = TaskManager.tasks ?? [];
+                              _filteredTasks = List.from(_tasks);
+                              sortTasks();
+                            });
+                          },
+                        )
+                      : null,
+                ),
+                onChanged: searchTasks,
+              ),
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 4),
+          child: IconButton(
+            icon: const Icon(Icons.refresh),
+            onPressed: () {
+              setState(() {
+                _tasks = TaskManager.tasks ?? [];
+                if (_searchController!.text.isNotEmpty) {
+                  searchTasks(_searchController!.text);
+                } else {
+                  _filteredTasks = List.from(_tasks);
+                  sortTasks();
+                }
+              });
+            },
+            tooltip: 'Refresh the list of tasks',
+          ),
+        ),
+        // highlight-end
+      ],
+    ),
+    body: CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(
+          child: _filteredTasks.isEmpty
+              ? const Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Text('No tasks found'),
+                  ),
+                )
+              : DataTable(
+                  columns: [
+                    DataColumn(
+                      label: const Text('Name'),
+                      // highlight-start
+                      onSort: (columnIndex, ascending) {
+                        setState(() {
+                          _sortBy = SortBy.name;
+                          _sortOrder = ascending
+                              ? SortOrder.ascending
+                              : SortOrder.descending;
+                          sortTasks();
+                        });
+                      },
+                      // highlight-end
+                    ),
+                    DataColumn(
+                      label: const Text('PID'),
+                      numeric: true,
+                      // highlight-start
+                      onSort: (columnIndex, ascending) {
+                        setState(() {
+                          _sortBy = SortBy.pid;
+                          _sortOrder = ascending
+                              ? SortOrder.ascending
+                              : SortOrder.descending;
+                          sortTasks();
+                        });
+                      },
+                      // highlight-end
+                      tooltip: 'Process ID',
+                    ),
+                    DataColumn(
+                      label: const Text('Description'),
+                      // highlight-start
+                      onSort: (columnIndex, ascending) {
+                        setState(() {
+                          _sortBy = SortBy.description;
+                          _sortOrder = ascending
+                              ? SortOrder.ascending
+                              : SortOrder.descending;
+                          sortTasks();
+                        });
+                      },
+                      // highlight-end
+                    ),
+                    const DataColumn(label: Text('Actions')),
+                  ],
+                  rows: // ...
+                  // highlight-start
+                  sortAscending: _sortOrder == SortOrder.ascending,
+                  sortColumnIndex: switch (_sortBy) {
+                    SortBy.name => 0,
+                    SortBy.pid => 1,
+                    SortBy.description => 2,
+                  },
+                  // highlight-end
+                ),
+        ),
+      ],
+    ),
+  );
+}
+```
+
+### Task Termination
+
+Next, let's implement the functionality to terminate a task. We'll display a
+confirmation dialog to user before terminating the task.
+
+```dart title="main.dart"
+void confirmEndTask(int pid, String taskName) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: Text('Do you want to end $taskName?'),
+        content: const Text(
+          'If an open program is associated with this process, it will close '
+          'and you will lose any unsaved data. If you end a system process, '
+          'it might result in system instability. Are you sure you want to '
+          'continue?',
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('End task'),
+            onPressed: () {
+              Navigator.of(context).pop();
+              if (TaskManager.terminate(pid)) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('Task "$taskName" ended successfully'),
+                  ),
+                );
+                loadTasks();
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('Failed to end task "$taskName"'),
+                  ),
+                );
+              }
+            },
+          ),
+          TextButton(
+            child: const Text('Cancel'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+
+@override
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: // ...
+    body: CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(
+          child: _filteredTasks.isEmpty
+            ? const Center(
+                child: Padding(
+                  padding: EdgeInsets.all(16),
+                  child: Text('No tasks found'),
+                ),
+              )
+            : DataTable(
+                columns: // ...
+                rows: _filteredTasks.map((task) {
+                  return DataRow(
+                    cells: [
+                      // ...
+                      DataCell(
+                        IconButton(
+                          icon: const Icon(
+                            Icons.cancel_outlined,
+                            color: Colors.red,
+                          ),
+                          // highlight-next-line
+                          onPressed: () => confirmEndTask(task.pid, task.name),
+                        ),
+                      ),
+                    ],
+                  );
+                }).toList(),
+                // ...
+              ),
+        ),
+      ],
+    ),
+  );
+}
+```
+
+### Task Creation
+
+Finally, let's implement the functionality to run a new task by displaying a
+dialog with a text field to the user for entering the task name.
+
+```dart title="main.dart"
+void runTask(String path) {
+  final result = TaskManager.run(path);
+  if (result) {
+    Navigator.of(context).pop();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Task "$path" started successfully'),
+      ),
+    );
+  } else {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Error'),
+          content: Text('Failed to run task "$path"'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Ok'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+void showRunTaskDialog() {
+  final taskNameController = TextEditingController();
+  showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: const Text('Run new task'),
+        content: TextField(
+          autofocus: true,
+          onSubmitted: (_) {
+            final path = taskNameController.text;
+            if (path.isNotEmpty) {
+              runTask(path);
+            }
+          },
+          controller: taskNameController,
+          decoration: const InputDecoration(hintText: 'Enter task name'),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              final path = taskNameController.text;
+              if (path.isNotEmpty) {
+                runTask(path);
+              }
+            },
+            child: const Text('Run'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text('Cancel'),
+          ),
+        ],
+      );
+    },
+  );
+}
+
+@override
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(
+      title: const Text('Task Manager'),
+      actions: [
+        // ...
+        // highlight-start
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 4),
+          child: IconButton(
+            onPressed: showRunTaskDialog,
+            icon: const Icon(Icons.add),
+            tooltip: 'Run a new task',
+          ),
+        ),
+        // highlight-end
+      ],
+    ),
+    // ...
+  );
+}
+```
+
+## Conclusion
+
+In this blog post, we've built an app in Flutter using the **win32** package to
+manage running tasks on a Windows system. We've covered the process of
+enumerating running tasks, starting new tasks, and terminating tasks, as well as
+building a beautiful UI to interact with the task manager.
+
+I hope this tutorial has inspired you to explore further and build even more
+advanced applications with Dart, Flutter, and **win32**. Your feedback and
+contributions are always welcome, so feel free to share your thoughts and ideas.
+
+Happy coding! 🚀
+
+## Source Code
+
+<CommonViewSourceCode href="https://github.com/halildurmus/win32/tree/main/examples/task_manager" />
+
+[EnumProcesses]: https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-enumprocesses
+[EnumProcessModules]: https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-enumprocessmodules
+[ExtractAssociatedIcon]: https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-extractassociatediconw
+[GetFileVersionInfo]: https://learn.microsoft.com/windows/win32/api/winver/nf-winver-getfileversioninfow
+[GetFileVersionInfoSize]: https://learn.microsoft.com/windows/win32/api/winver/nf-winver-getfileversioninfosizew
+[GetModuleBaseName]: https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-getmodulebasenamew
+[GetModuleFileNameEx]: https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-getmodulefilenameexw
+[OpenProcess]: https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-openprocess
+[ShellExecute]: https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-shellexecutew
+[TerminateProcess]: https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-terminateprocess
+[VerQueryValue]: https://learn.microsoft.com/windows/win32/api/winver/nf-winver-verqueryvaluew
