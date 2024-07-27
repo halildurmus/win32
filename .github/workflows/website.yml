@@ -44,9 +44,6 @@ jobs:
   deploy:
     if: ${{ github.event_name == 'push' }}
     name: Deploy to GitHub Pages
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     permissions:
       pages: write
       id-token: write
@@ -81,5 +78,9 @@ jobs:
           path: website/build
 
       - name: ☁️ Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: website/build
+          user_name: github-actions[bot]
+          user_email: github-actions[bot]@users.noreply.github.com
