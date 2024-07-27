@@ -12,9 +12,6 @@
 *.iml
 **/.idea/
 
-# Visual Studio Code related files.
-**/.vscode/
-
 # Library packages shouldn't check in their pubspec.lock files.
 **/pubspec.lock
 
