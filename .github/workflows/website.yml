@@ -1,0 +1,62 @@
+name: Deploy to GitHub Pages
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - website/**
+  push:
+    branches: [main]
+    paths:
+      - website/**
+
+defaults:
+  run:
+    working-directory: website
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📚 Git Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: ⚙️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+
+      - name: 📦 Install Dependencies
+        run: npm ci
+
+      - name: 🏗️ Build Website
+        run: npm run build
+
+  deploy:
+    if: ${{ github.event_name == 'push' }}
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write
+      id-token: write
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: 📚 Git Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 📡 Upload Build Artifacts
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build
+
+      - name: 🚀 Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
