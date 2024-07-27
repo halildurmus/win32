@@ -1,0 +1,15 @@
+.details {
+  --docusaurus-details-summary-arrow-size: 0.38rem;
+  --docusaurus-details-transition: transform 200ms ease;
+  --docusaurus-details-decoration-color: grey;
+}
+
+.details > summary {
+  position: relative;
+  cursor: pointer;
+  list-style: none;
+}
+
+.collapsibleContent {
+  border-top: 1px solid var(--docusaurus-details-decoration-color);
+}

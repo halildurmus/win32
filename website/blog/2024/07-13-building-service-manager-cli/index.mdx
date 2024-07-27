@@ -1,0 +1,1095 @@
+---
+title: Building a Service Manager CLI in Dart with win32
+description: We'll build a command-line interface (CLI) to manage Windows
+  services in Dart using the win32 package.
+slug: building-service-manager-cli
+authors: halildurmus
+tags: [win32, dart, tutorial, cli]
+image: https://ik.imagekit.io/npajaqrcn/blog/2024-07-13-building-service-manager-cli/social.png
+hide_table_of_contents: false
+---
+
+## Introduction
+
+In this blog post, we will explore how to build a Service Manager CLI in Dart
+using the **win32** package. By leveraging the Windows APIs provided by
+**win32**, we'll create a robust command-line tool that can
+**enumerate services**, **start and stop services**, and
+**query service status**.
+
+Whether you're looking to enhance your development toolkit or simply learn more
+about integrating Dart with Windows system functionalities, this guide will
+provide you with the insights and steps necessary to build your own service
+manager from scratch.
+
+<!--truncate-->
+
+Here's what we'll cover:
+
+- [Feature Overview](#feature-overview)
+- [Setting Up the Project](#setting-up-the-project)
+  - [Creating a New Dart Project](#creating-a-new-dart-project)
+  - [Installing Dependencies](#installing-dependencies)
+- [Defining the Models](#defining-the-models)
+- [Implementing Service Manager Logic](#implementing-service-manager-logic)
+  - [Enumerating Services](#enumerating-services)
+  - [Starting a Service](#starting-a-service)
+  - [Stopping a Service](#stopping-a-service)
+  - [Querying Service Status](#querying-service-status)
+- [Building the CLI](#building-the-cli)
+- [Conclusion](#conclusion)
+- [Source Code](#source-code)
+
+## Feature Overview
+
+Our Service Manager CLI will include the following key features:
+
+- **Enumerating services:** View a set of all available services on the system.
+- **Starting and stopping a service:** Start or stop a service by its name.
+- **Querying service status:** Retrieve the current operational status of a
+  service by its name.
+
+## Setting Up the Project
+
+Before we dive into coding, let’s set up our project.
+
+### Creating a New Dart Project
+
+Open your terminal and run:
+
+```sh title="Terminal"
+dart create service_manager_cli
+cd service_manager_cli
+```
+
+### Installing Dependencies
+
+Add the **ffi** and **win32** packages to your project with:
+
+```sh title="Terminal"
+dart pub add ffi win32
+```
+
+## Defining the Models
+
+We'll start by defining the models responsible for storing
+**service information** and result details for **start** and **stop**
+operations.
+
+Create a new file named `models.dart` in the `lib\src` directory and add the
+following code:
+
+```dart title="lib\src\models.dart"
+import 'package:win32/win32.dart';
+
+/// The result of an attempt to start a service.
+enum ServiceStartResult {
+  /// The attempt to start the service was denied due to insufficient
+  /// permissions.
+  accessDenied,
+
+  /// The service is already running.
+  alreadyRunning,
+
+  /// The attempt to start the service failed for an unspecified reason.
+  failed,
+
+  /// The service was started successfully.
+  success,
+
+  /// The attempt to start the service timed out.
+  timedOut,
+}
+
+/// The various states a service can be in.
+enum ServiceStatus {
+  /// The service is not running.
+  stopped,
+
+  /// The service is in the process of starting.
+  startPending,
+
+  /// The service is in the process of stopping.
+  stopPending,
+
+  /// The service is running.
+  running,
+
+  /// The service is in the process of resuming from a paused state.
+  continuePending,
+
+  /// The service is in the process of being paused.
+  pausePending,
+
+  /// The service is paused.
+  paused;
+
+  /// Converts an integer value to a corresponding [ServiceStatus] enum.
+  ///
+  /// Throws an [ArgumentError] if the value does not correspond to a valid
+  /// value.
+  static ServiceStatus fromValue(int value) => switch (value) {
+        SERVICE_STOPPED => ServiceStatus.stopped,
+        SERVICE_START_PENDING => ServiceStatus.startPending,
+        SERVICE_STOP_PENDING => ServiceStatus.stopPending,
+        SERVICE_RUNNING => ServiceStatus.running,
+        SERVICE_CONTINUE_PENDING => ServiceStatus.continuePending,
+        SERVICE_PAUSE_PENDING => ServiceStatus.pausePending,
+        SERVICE_PAUSED => ServiceStatus.paused,
+        _ => throw ArgumentError('Invalid value: $value')
+      };
+}
+
+/// The result of an attempt to stop a service.
+enum ServiceStopResult {
+  /// The attempt to stop the service was denied due to insufficient
+  /// permissions.
+  accessDenied,
+
+  /// The service is already stopped.
+  alreadyStopped,
+
+  /// The attempt to stop the service failed for an unspecified reason.
+  failed,
+
+  /// The service was stopped successfully.
+  success,
+
+  /// The attempt to stop the service timed out.
+  timedOut,
+}
+
+/// A Windows service with its name, display name, and current status.
+class Service {
+  const Service({
+    required this.displayName,
+    required this.name,
+    required this.status,
+  });
+
+  /// The display name of the service.
+  final String displayName;
+
+  /// The name of the service.
+  final String name;
+
+  /// The current status of the service.
+  final ServiceStatus status;
+
+  @override
+  String toString() =>
+      'Service(displayName: $displayName, name: $name, status: $status)';
+}
+```
+
+## Implementing Service Manager Logic
+
+Next, we'll implement the core functionality for managing Windows services,
+including enumerating services, starting and stopping services, and querying
+service status.
+
+Create a new file named `service_manager.dart` in the `lib\src` directory and
+add the following code to set up the skeleton for managing Windows services:
+
+```dart title="lib\src\service_manager.dart"
+import 'dart:collection';
+import 'dart:ffi';
+
+import 'package:ffi/ffi.dart';
+import 'package:win32/win32.dart';
+
+import 'models.dart';
+
+/// Provides functionality for managing Windows services, including:
+/// - Enumerating available services
+/// - Starting and stopping services
+/// - Retrieving the current status of services
+abstract class ServiceManager {
+  /// Whether to log informative messages to the console.
+  static bool log = false;
+
+  /// Retrieves a set of all services (sorted by display name).
+  static Set<Service> get services {
+    // TODO: Implement this method
+    throw UnimplementedError();
+  }
+
+  /// Starts a service defined by [serviceName].
+  static ServiceStartResult start(String serviceName) {
+    // TODO: Implement this method
+    throw UnimplementedError();
+  }
+
+  /// Stops a service defined by [serviceName].
+  static ServiceStopResult stop(String serviceName) {
+    // TODO: Implement this method
+    throw UnimplementedError();
+  }
+
+  /// Retrieves the status of a service defined by [serviceName].
+  static ServiceStatus? status(String serviceName) {
+    // TODO: Implement this method
+    throw UnimplementedError();
+  }
+
+  /// Logs a message to the console if [log] is `true`.
+  static void _log(String message) {
+    if (log) print(message);
+  }
+}
+```
+
+With the skeleton in place, we can start implementing the service manager logic.
+
+### Enumerating Services
+
+Now, let's implement the `services` getter to **enumerate all services** on the
+system.
+
+```dart title="lib\src\service_manager.dart"
+/// Retrieves a set of all services (sorted by display name).
+static Set<Service> get services {
+  final services =
+      SplayTreeSet<Service>((a, b) => a.displayName.compareTo(b.displayName));
+
+  // Get a handle to the SCM database.
+  final scmHandle =
+      OpenSCManager(nullptr, nullptr, SC_MANAGER_ENUMERATE_SERVICE);
+  if (scmHandle == NULL) return services;
+
+  return using((arena) {
+    try {
+      final bytesNeeded = arena<DWORD>();
+      final servicesReturned = arena<DWORD>();
+      final resumeHandle = arena<DWORD>();
+
+      _log('Getting service list...');
+
+      // First call to EnumServicesStatusEx to get the required buffer size.
+      EnumServicesStatusEx(
+        scmHandle,
+        SC_ENUM_PROCESS_INFO,
+        SERVICE_WIN32,
+        SERVICE_STATE_ALL,
+        nullptr,
+        0,
+        bytesNeeded,
+        servicesReturned,
+        resumeHandle,
+        nullptr,
+      );
+
+      final buffer = arena<BYTE>(bytesNeeded.value);
+
+      // Second call to EnumServicesStatusEx to get the actual data.
+      if (EnumServicesStatusEx(
+            scmHandle,
+            SC_ENUM_PROCESS_INFO,
+            SERVICE_WIN32,
+            SERVICE_STATE_ALL,
+            buffer,
+            bytesNeeded.value,
+            bytesNeeded,
+            servicesReturned,
+            resumeHandle,
+            nullptr,
+          ) !=
+          FALSE) {
+        final enumBuffer = buffer.cast<ENUM_SERVICE_STATUS_PROCESS>();
+        for (var i = 0; i < servicesReturned.value; i++) {
+          final serviceStatus = (enumBuffer + i).ref;
+          final ENUM_SERVICE_STATUS_PROCESS(:lpServiceName, :lpDisplayName) =
+              serviceStatus;
+          final serviceName = lpServiceName.toDartString();
+          final displayName = lpDisplayName.toDartString();
+          final status = ServiceStatus.fromValue(
+            serviceStatus.ServiceStatusProcess.dwCurrentState,
+          );
+          final service = Service(
+            displayName: displayName,
+            name: serviceName,
+            status: status,
+          );
+          services.add(service);
+        }
+      }
+    } finally {
+      CloseServiceHandle(scmHandle);
+    }
+
+    return services;
+  });
+}
+```
+
+We first obtain a handle to the Service Control Manager (SCM) database using
+[OpenSCManager], which allows us to interact with the SCM to query, start, stop,
+and configure services. We then make an initial call to [EnumServicesStatusEx]
+to determine the required buffer size for storing the service information. With
+the necessary buffer allocated, we make a second call to `EnumServicesStatusEx`
+to retrieve the actual service data. Iterating through the services, we convert
+them into `Service` objects and add them to a sorted set.
+
+Throughout this process, we log informative messages to track progress and
+errors. If we fail to open the SCM or enumerate services, we ensure appropriate
+error handling and logging.
+
+### Starting a Service
+
+Next, we’ll implement the `start` function to **start a service** with
+`serviceName`.
+
+```dart title="lib\src\service_manager.dart"
+/// Starts a service defined by [serviceName].
+static ServiceStartResult start(String serviceName) {
+  // Get a handle to the SCM database.
+  final scmHandle = OpenSCManager(
+    nullptr, // local computer
+    nullptr, // ServicesActive database
+    SC_MANAGER_ALL_ACCESS, // full access rights
+  );
+  if (scmHandle == NULL) return ServiceStartResult.accessDenied;
+
+  return using((arena) {
+    // Get a handle to the service.
+    final hService = OpenService(
+      scmHandle,
+      serviceName.toNativeUtf16(allocator: arena),
+      SERVICE_ALL_ACCESS,
+    );
+    if (hService == NULL) {
+      CloseServiceHandle(scmHandle);
+      return ServiceStartResult.failed;
+    }
+
+    final lpBuffer = arena<SERVICE_STATUS_PROCESS>();
+    final bytesNeeded = arena<DWORD>();
+
+    // Check the status in case the service is not stopped.
+    if (QueryServiceStatusEx(
+          hService,
+          SC_STATUS_PROCESS_INFO,
+          lpBuffer.cast(),
+          sizeOf<SERVICE_STATUS_PROCESS>(),
+          bytesNeeded,
+        ) ==
+        FALSE) {
+      CloseServiceHandle(hService);
+      CloseServiceHandle(scmHandle);
+      return ServiceStartResult.failed;
+    }
+
+    final ssp = lpBuffer.ref;
+
+    // Check if the service is already running. It would be possible to stop
+    // the service here, but for simplicity this example just returns.
+    if (ssp.dwCurrentState != SERVICE_STOPPED &&
+        ssp.dwCurrentState != SERVICE_STOP_PENDING) {
+      CloseServiceHandle(hService);
+      CloseServiceHandle(scmHandle);
+      return ServiceStartResult.alreadyRunning;
+    }
+
+    // Save the tick count and initial checkpoint.
+    var startTickCount = GetTickCount();
+    var oldCheckPoint = ssp.dwCheckPoint;
+
+    // If a stop is pending, wait for it.
+    while (ssp.dwCurrentState == SERVICE_STOP_PENDING) {
+      _log('Service stop pending...');
+
+      // Do not wait longer than the wait hint. A good interval is one-tenth
+      // of the wait hint but not less than 1 second and not more than 10
+      // seconds.
+
+      var waitTime = ssp.dwWaitHint ~/ 10;
+      waitTime = waitTime < 1000
+          ? 1000
+          : waitTime > 10000
+              ? 10000
+              : waitTime;
+      _log('Sleeping for ${ssp.dwWaitHint} ms...');
+      Sleep(waitTime);
+
+      // Check the status until the service is no longer stop pending.
+      if (QueryServiceStatusEx(
+            hService,
+            SC_STATUS_PROCESS_INFO,
+            lpBuffer.cast(),
+            sizeOf<SERVICE_STATUS_PROCESS>(),
+            bytesNeeded,
+          ) ==
+          FALSE) {
+        CloseServiceHandle(hService);
+        CloseServiceHandle(scmHandle);
+        return ServiceStartResult.failed;
+      }
+
+      if (ssp.dwCheckPoint > oldCheckPoint) {
+        // Continue to wait and check.
+        startTickCount = GetTickCount();
+        oldCheckPoint = ssp.dwCheckPoint;
+      } else if (GetTickCount() - startTickCount > ssp.dwWaitHint) {
+        CloseServiceHandle(hService);
+        CloseServiceHandle(scmHandle);
+        return ServiceStartResult.timedOut;
+      }
+    }
+
+    // Attempt to start the service.
+    if (StartService(hService, 0, nullptr) == FALSE) {
+      CloseServiceHandle(hService);
+      CloseServiceHandle(scmHandle);
+      return ServiceStartResult.failed;
+    } else {
+      _log('Service start pending...');
+    }
+
+    // Check the status until the service is no longer start pending.
+    if (QueryServiceStatusEx(
+          hService,
+          SC_STATUS_PROCESS_INFO,
+          lpBuffer.cast(),
+          sizeOf<SERVICE_STATUS_PROCESS>(),
+          bytesNeeded,
+        ) ==
+        FALSE) {
+      CloseServiceHandle(hService);
+      CloseServiceHandle(scmHandle);
+      return ServiceStartResult.failed;
+    }
+
+    // Save the tick count and initial checkpoint.
+    startTickCount = GetTickCount();
+    oldCheckPoint = ssp.dwCheckPoint;
+
+    while (ssp.dwCurrentState == SERVICE_START_PENDING) {
+      // Do not wait longer than the wait hint. A good interval is one-tenth
+      // of the wait hint but not less than 1 second and not more than 10
+      // seconds.
+
+      var waitTime = ssp.dwWaitHint ~/ 10;
+      waitTime = waitTime < 1000
+          ? 1000
+          : waitTime > 10000
+              ? 10000
+              : waitTime;
+      _log('Sleeping for ${ssp.dwWaitHint} ms...');
+      Sleep(waitTime);
+
+      // Check the status again.
+      if (QueryServiceStatusEx(
+            hService,
+            SC_STATUS_PROCESS_INFO,
+            lpBuffer.cast(),
+            sizeOf<SERVICE_STATUS_PROCESS>(),
+            bytesNeeded,
+          ) ==
+          FALSE) {
+        break;
+      }
+
+      if (ssp.dwCheckPoint > oldCheckPoint) {
+        // Continue to wait and check.
+        startTickCount = GetTickCount();
+        oldCheckPoint = ssp.dwCheckPoint;
+      } else if (GetTickCount() - startTickCount > ssp.dwWaitHint) {
+        // No progress made within the wait hint.
+        break;
+      }
+    }
+
+    // Determine whether the service is running.
+    final serviceRunning = ssp.dwCurrentState == SERVICE_RUNNING;
+    CloseServiceHandle(hService);
+    CloseServiceHandle(scmHandle);
+
+    return serviceRunning
+        ? ServiceStartResult.success
+        : ServiceStartResult.failed;
+  });
+}
+```
+
+We begin by obtaining a handle to the Service Control Manager (SCM) database
+using `OpenSCManager` with full access rights. If this fails, we return an
+*access denied* result. Next, we get a handle to the specific service using
+[OpenService]. If this fails, we close the SCM handle and return a *failure*
+result.
+
+We then check the service's status using [QueryServiceStatusEx]. If the service
+is not stopped, we return an *already running* result. If the service is
+stopping, we wait for it to finish stopping, periodically checking its status
+and updating our wait time based on the service's wait hint.
+
+Once the service is stopped, we attempt to start it using [StartService]. We
+then check the service's status again, waiting for it to finish starting. If the
+service starts successfully and transitions to the running state, we return a
+*success* result; otherwise, we return a *failure* result.
+
+Throughout this process, we log informative messages and ensure proper resource
+management by closing all handles when done.
+
+### Stopping a Service
+
+Next, we’ll implement the `stop` function to **stop a service** with
+`serviceName`.
+
+```dart title="lib\src\service_manager.dart"
+/// Stops a service defined by [serviceName].
+static ServiceStopResult stop(String serviceName) {
+  // Get a handle to the SCM database.
+  final scmHandle = OpenSCManager(
+    nullptr, // local computer
+    nullptr, // ServicesActive database
+    SC_MANAGER_ALL_ACCESS, // full access rights
+  );
+  if (scmHandle == NULL) return ServiceStopResult.accessDenied;
+
+  return using((arena) {
+    // Get a handle to the service.
+    final hService = OpenService(
+      scmHandle,
+      serviceName.toNativeUtf16(allocator: arena),
+      SERVICE_STOP | SERVICE_QUERY_STATUS | SERVICE_ENUMERATE_DEPENDENTS,
+    );
+    if (hService == NULL) {
+      CloseServiceHandle(scmHandle);
+      return ServiceStopResult.failed;
+    }
+
+    try {
+      final lpBuffer = arena<SERVICE_STATUS_PROCESS>();
+      final bytesNeeded = arena<DWORD>();
+
+      // Make sure the service is not already stopped.
+      if (QueryServiceStatusEx(
+            hService,
+            SC_STATUS_PROCESS_INFO,
+            lpBuffer.cast(),
+            sizeOf<SERVICE_STATUS_PROCESS>(),
+            bytesNeeded,
+          ) ==
+          FALSE) {
+        return ServiceStopResult.failed;
+      }
+
+      final ssp = lpBuffer.ref;
+      if (ssp.dwCurrentState == SERVICE_STOPPED) {
+        return ServiceStopResult.alreadyStopped;
+      }
+
+      final startTime = GetTickCount();
+      const timeout = 30000; // 30-second timeout
+
+      // If a stop is pending, wait for it.
+      while (ssp.dwCurrentState == SERVICE_STOP_PENDING) {
+        _log('Service stop pending...');
+
+        // Do not wait longer than the wait hint. A good interval is one-tenth
+        // of the wait hint but not less than 1 second and not more than 10
+        // seconds.
+
+        var waitTime = ssp.dwWaitHint ~/ 10;
+        waitTime = waitTime < 1000
+            ? 1000
+            : waitTime > 10000
+                ? 10000
+                : waitTime;
+        _log('Sleeping for ${ssp.dwWaitHint} ms...');
+        Sleep(waitTime);
+
+        if (QueryServiceStatusEx(
+              hService,
+              SC_STATUS_PROCESS_INFO,
+              lpBuffer.cast(),
+              sizeOf<SERVICE_STATUS_PROCESS>(),
+              bytesNeeded,
+            ) ==
+            FALSE) {
+          return ServiceStopResult.failed;
+        }
+
+        if (ssp.dwCurrentState == SERVICE_STOPPED) {
+          return ServiceStopResult.success;
+        }
+
+        if (GetTickCount() - startTime > timeout) {
+          return ServiceStopResult.timedOut;
+        }
+      }
+
+      // If the service is running, dependencies must be stopped first.
+      final result = _stopDependentServices(hService, scmHandle);
+      if (result
+          case ServiceStopResult.accessDenied ||
+              ServiceStopResult.failed ||
+              ServiceStopResult.timedOut) {
+        return result;
+      }
+
+      // Send a stop code to the service.
+      if (ControlService(
+            hService,
+            SERVICE_CONTROL_STOP,
+            lpBuffer.cast<SERVICE_STATUS>(),
+          ) ==
+          FALSE) {
+        return ServiceStopResult.failed;
+      }
+
+      // Wait for the service to stop.
+
+      _log('Service stop pending...');
+
+      while (ssp.dwCurrentState != SERVICE_STOPPED) {
+        _log('Sleeping for ${ssp.dwWaitHint} ms...');
+        Sleep(ssp.dwWaitHint);
+
+        if (QueryServiceStatusEx(
+              hService,
+              SC_STATUS_PROCESS_INFO,
+              lpBuffer.cast(),
+              sizeOf<SERVICE_STATUS_PROCESS>(),
+              bytesNeeded,
+            ) ==
+            FALSE) {
+          return ServiceStopResult.failed;
+        }
+
+        if (ssp.dwCurrentState == SERVICE_STOPPED) break;
+
+        if (GetTickCount() - startTime > timeout) {
+          return ServiceStopResult.timedOut;
+        }
+      }
+
+      return ServiceStopResult.success;
+    } finally {
+      CloseServiceHandle(hService);
+      CloseServiceHandle(scmHandle);
+    }
+  });
+}
+
+/// Stops dependent services of a service defined by [hService].
+static ServiceStopResult _stopDependentServices(
+  int hService,
+  int scmHandle,
+) {
+  return using((arena) {
+    final bytesNeeded = arena<DWORD>();
+    final servicesReturned = arena<DWORD>();
+
+    _log('Checking for dependent services...');
+
+    // Pass a zero-length buffer to get the required buffer size.
+    if (EnumDependentServices(
+          hService,
+          SERVICE_ACTIVE,
+          nullptr,
+          0,
+          bytesNeeded,
+          servicesReturned,
+        ) ==
+        TRUE) {
+      _log('No dependent services found.');
+    } else {
+      // Allocate a buffer for the dependencies.
+      final lpServices =
+          arena<BYTE>(bytesNeeded.value).cast<ENUM_SERVICE_STATUS>();
+
+      // Enumerate the dependencies.
+      if (EnumDependentServices(
+            hService,
+            SERVICE_ACTIVE,
+            lpServices,
+            bytesNeeded.value,
+            bytesNeeded,
+            servicesReturned,
+          ) ==
+          FALSE) {
+        return ServiceStopResult.failed;
+      }
+
+      _log('Found ${servicesReturned.value} dependent services:');
+      for (var i = 0; i < servicesReturned.value; i++) {
+        final ess = lpServices[i];
+        _log(' (${i + 1}/${servicesReturned.value}) Stopping '
+            '${ess.lpServiceName.toDartString()}...');
+
+        // Open the service.
+        final hDepService = OpenService(
+          scmHandle,
+          ess.lpServiceName,
+          SERVICE_STOP | SERVICE_QUERY_STATUS,
+        );
+        if (hDepService == NULL) return ServiceStopResult.failed;
+
+        try {
+          final lpServiceStatus = arena<SERVICE_STATUS_PROCESS>();
+
+          // Send a stop code.
+          if (ControlService(
+                hDepService,
+                SERVICE_CONTROL_STOP,
+                lpServiceStatus.cast<SERVICE_STATUS>(),
+              ) ==
+              FALSE) {
+            return ServiceStopResult.failed;
+          }
+
+          final startTime = GetTickCount();
+          const timeout = 30000; // 30-second timeout
+          final ssp = lpServiceStatus.ref;
+
+          // Wait for the service to stop.
+          while (ssp.dwCurrentState != SERVICE_STOPPED) {
+            _log('Sleeping for ${ssp.dwWaitHint} ms...');
+            Sleep(ssp.dwWaitHint);
+
+            if (QueryServiceStatusEx(
+                  hDepService,
+                  SC_STATUS_PROCESS_INFO,
+                  lpServiceStatus.cast(),
+                  sizeOf<SERVICE_STATUS_PROCESS>(),
+                  bytesNeeded,
+                ) ==
+                FALSE) {
+              return ServiceStopResult.failed;
+            }
+
+            if (ssp.dwCurrentState == SERVICE_STOPPED) break;
+
+            if (GetTickCount() - startTime > timeout) {
+              return ServiceStopResult.timedOut;
+            }
+          }
+        } finally {
+          // Always release the service handle.
+          CloseServiceHandle(hDepService);
+        }
+      }
+    }
+
+    _log('Dependent services stopped.');
+    return ServiceStopResult.success;
+  });
+}
+```
+
+In the `stop` function, we first obtain a handle to the Service Control Manager
+(SCM) database using `OpenSCManager` with full access rights. If this fails, we
+return an *access denied* result. Next, we get a handle to the specific service
+using `OpenService`, granting it stop, query status, and enumerate dependents
+permissions. If this fails, we close the SCM handle and return a *failure*
+result.
+
+We then check the service's status using `QueryServiceStatusEx`. If the service
+is already stopped, we return an *already stopped* result. If the service is
+stopping, we wait for it to finish stopping, periodically checking its status
+and updating our wait time based on the service's wait hint. Once the service is
+no longer in the stop pending state, we attempt to stop any dependent services
+first using the `_stopDependentServices` helper function.
+
+After ensuring dependent services are stopped, we send a stop code to the
+service using [ControlService]. We then wait for the service to transition to
+the stopped state, periodically checking its status. If the service stops
+successfully, we return a *success* result; otherwise, we return a *failure* or
+*timed out* result.
+
+Throughout this process, we log informative messages and ensure proper resource
+management by closing all handles when done. The `_stopDependentServices`
+function enumerates and stops any active dependent services in a similar manner,
+ensuring they are fully stopped before returning control to the main `stop`
+function.
+
+:::note
+
+The implementations for `start` and `stop` functions are based on the C++
+examples provided in the [Microsoft documentation].
+
+:::
+
+### Querying Service Status
+
+Finally, let's implement the `status` function to **query service status**.
+
+```dart title="lib\src\service_manager.dart"
+/// Retrieves the status of a service defined by [serviceName].
+static ServiceStatus? status(String serviceName) {
+  // Get a handle to the SCM database.
+  final scmHandle = OpenSCManager(nullptr, nullptr, SC_MANAGER_CONNECT);
+  if (scmHandle == NULL) return null;
+
+  return using((arena) {
+    // Get a handle to the service.
+    final hService = OpenService(
+      scmHandle,
+      serviceName.toNativeUtf16(allocator: arena),
+      SERVICE_QUERY_STATUS,
+    );
+    if (hService == NULL) {
+      CloseServiceHandle(scmHandle);
+      return null;
+    }
+
+    try {
+      final lpBuffer = arena<SERVICE_STATUS_PROCESS>();
+      final bytesNeeded = arena<DWORD>();
+
+      // Query the service status.
+      if (QueryServiceStatusEx(
+            hService,
+            SC_STATUS_PROCESS_INFO,
+            lpBuffer.cast(),
+            sizeOf<SERVICE_STATUS_PROCESS>(),
+            bytesNeeded,
+          ) ==
+          FALSE) {
+        return null;
+      }
+
+      return ServiceStatus.fromValue(lpBuffer.ref.dwCurrentState);
+    } finally {
+      CloseServiceHandle(hService);
+      CloseServiceHandle(scmHandle);
+    }
+  });
+}
+```
+
+We first obtain a handle to the Service Control Manager (SCM) database using
+`OpenSCManager` with connect permissions. If this fails, we return `null`. Next,
+we get a handle to the specific service using `OpenService`, granting it query
+status permissions. If this fails, we close the SCM handle and return `null`.
+
+Using the `QueryServiceStatusEx` function, we query the service's status. We
+allocate the necessary buffer to store the status information. If the query is
+*unsuccessful*, we return `null`. If the query *succeeds*, we retrieve the
+service's current state and convert it into a `ServiceStatus` object using
+`ServiceStatus.fromValue`.
+
+Throughout this process, we log informative messages and ensure proper resource
+management by closing all handles when done. This ensures that the function
+correctly retrieves the status of a specified service, returning the appropriate
+status or `null` if any step fails.
+
+## Building the CLI
+
+Now that we have implemented the functions to interact with Windows services,
+let's create a CLI tool to manage services directly from the command line.
+
+First, update the **lib\service_manager_cli.dart** file to export the models and
+service manager implementation:
+
+```dart title="lib\service_manager_cli.dart"
+library;
+
+export 'src/models.dart';
+export 'src/service_manager.dart';
+```
+
+Next, replace the existing code in **bin\service_manager_cli.dart** with the
+following implementation for the CLI:
+
+```dart title="bin\service_manager_cli.dart"
+import 'dart:io';
+
+import 'package:service_manager_cli/service_manager_cli.dart';
+
+void main(List<String> arguments) {
+  if (arguments.isEmpty ||
+      arguments.contains('-h') ||
+      arguments.contains('--help')) {
+    printUsage();
+    return;
+  }
+
+  bool verbose = false;
+  if (arguments.contains('-v') || arguments.contains('--verbose')) {
+    verbose = true;
+    arguments = arguments.where((arg) => arg != '-v').toList();
+  }
+
+  ServiceManager.log = verbose;
+
+  final command = arguments[0];
+  final serviceName = arguments.length > 1 ? arguments[1] : null;
+
+  switch (command) {
+    case 'list':
+      listServices();
+      break;
+
+    case 'start':
+      if (serviceName == null) {
+        print('Please provide the service name to start.');
+        exit(1);
+      }
+      startService(serviceName);
+      break;
+
+    case 'status':
+      if (serviceName == null) {
+        print('Please provide a service name to get status.');
+        exit(1);
+      }
+      status(serviceName);
+      break;
+
+    case 'stop':
+      if (serviceName == null) {
+        print('Please provide the service name to stop.');
+        exit(1);
+      }
+      stopService(serviceName);
+      break;
+
+    default:
+      print('Unknown command: $command');
+      print('');
+      printUsage();
+      exit(1);
+  }
+}
+
+void printUsage() {
+  print('A command-line interface for managing Windows services.');
+  print('');
+  print('Usage: service_manager_cli <command> [arguments]');
+  print('');
+  print('Global options:');
+  print('  -v, --verbose         Show additional command output.');
+  print('  -h, --help            Print this usage information.');
+  print('');
+  print('Available commands:');
+  print('  list                  List all services.');
+  print('  start <service_name>  Start a service.');
+  print('  status <service_name> Get the status of a service.');
+  print('  stop <service_name>   Stop a service.');
+}
+
+void listServices() {
+  final services = ServiceManager.services;
+  if (services.isEmpty) {
+    print('Failed to get services.');
+    return;
+  }
+
+  print('Found ${services.length} services:');
+  for (final service in services) {
+    print(' $service');
+  }
+}
+
+void startService(String serviceName) {
+  print(switch (ServiceManager.start(serviceName)) {
+    ServiceStartResult.success =>
+      'Service "$serviceName" started successfully.',
+    ServiceStartResult.accessDenied =>
+      'The attempt to start the service "$serviceName" was denied due to '
+          'insufficient permissions.',
+    ServiceStartResult.alreadyRunning =>
+      'Service "$serviceName" is already running.',
+    ServiceStartResult.failed => 'Failed to start service "$serviceName".',
+    ServiceStartResult.timedOut =>
+      'The attempt to start service "$serviceName" timed out.'
+  });
+}
+
+void status(String serviceName) {
+  final status = ServiceManager.status(serviceName);
+  if (status == null) {
+    print('Failed to get status of service "$serviceName".');
+  } else {
+    print('Status of service "$serviceName": ${status.name}');
+  }
+}
+
+void stopService(String serviceName) {
+  print(switch (ServiceManager.stop(serviceName)) {
+    ServiceStopResult.success => 'Service "$serviceName" stopped successfully.',
+    ServiceStopResult.accessDenied =>
+      'The attempt to stop the service "$serviceName" was denied due to '
+          'insufficient permissions.',
+    ServiceStopResult.alreadyStopped =>
+      'Service "$serviceName" is already stopped.',
+    ServiceStopResult.failed => 'Failed to stop service "$serviceName".',
+    ServiceStopResult.timedOut =>
+      'The attempt to stop service "$serviceName" timed out.'
+  });
+}
+```
+
+Finally, update the **pubspec.yaml** file to include the `executables` section
+and specify the entry point for the CLI:
+
+```yaml title="pubspec.yaml"
+name: service_manager_cli
+description: Service Manager CLI
+publish_to: none
+
+environment:
+  sdk: ^3.4.0
+
+dependencies:
+  ffi: ^2.1.2
+  win32: ^5.5.1
+
+dev_dependencies:
+  lints: ^4.0.0
+
+// highlight-start
+executables:
+  service_manager_cli:
+// highlight-end
+```
+
+You now have a powerful CLI tool for efficiently managing Windows services.
+To use it, run the following command in your terminal:
+
+```sh title="Terminal"
+dart run service_manager_cli
+```
+
+This command provides information about available commands, global options, and
+usage:
+
+```text
+A command-line interface for managing Windows services.
+
+Usage: service_manager_cli <command> [arguments]
+
+Global options:
+  -v, --verbose         Show additional command output.
+  -h, --help            Print this usage information.
+q
+Available commands:
+  list                  List all services.
+  start <service_name>  Start a service.
+  status <service_name> Get the status of a service.
+  stop <service_name>   Stop a service.
+```
+
+## Conclusion
+
+In this blog post, we've explored how to build a command-line interface (CLI) in
+Dart using the **win32** package to manage Windows services. From listing and
+controlling services to checking their status, we've covered essential tasks
+that streamline Windows service administration directly from your command line.
+
+I hope you found this tutorial helpful! If you have any questions or feedback,
+please feel free to reach out. Happy coding! 🚀
+
+## Source Code
+
+<CommonViewSourceCode href="https://github.com/halildurmus/win32/tree/main/examples/service_manager_cli" />
+
+[ControlService]: https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-controlservice
+[EnumServicesStatusEx]: https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-enumservicesstatusexw
+[Microsoft documentation]: https://learn.microsoft.com/windows/win32/services/starting-a-service
+[OpenSCManager]: https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-openscmanagerw
+[OpenService]: https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-openservicew
+[QueryServiceStatusEx]: https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-queryservicestatusex
+[StartService]: https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-startservicew

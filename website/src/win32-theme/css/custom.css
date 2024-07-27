@@ -1,0 +1,463 @@
+.docs-wrapper:root,
+.blog-wrapper:root {
+  --primary-font-sans: 'Inter';
+}
+
+/* Firefox */
+.scrollbar-slim {
+  scrollbar-width: thin;
+  scrollbar-color: red blue;
+}
+
+/* Chrome, Edge, and Safari */
+.scrollbar-slim::-webkit-scrollbar {
+  width: 12px;
+}
+
+.scrollbar-slim::-webkit-scrollbar-track {
+  background: #14141f;
+  border-radius: 5px;
+}
+
+.scrollbar-slim::-webkit-scrollbar-thumb {
+  background-color: #303450;
+  border-radius: 12px;
+  border: 3px solid #14141f;
+}
+
+.win32-prose {
+  max-width: 100% !important;
+  @apply prose prose-invert font-normal;
+  @apply 2xl:prose-base;
+  @apply prose-strong:dark:text-gray-100 prose-strong:text-gray-800;
+  @apply prose-a:text-win32-react-light-link prose-a:dark:text-win32-react-dark-link  prose-a:font-normal prose-a:no-underline;
+
+  @apply prose-h1:font-semibold;
+  @apply prose-h1:text-gray-800 prose-h1:dark:text-gray-100;
+  @apply prose-h1:text-[1.25rem] prose-h1:leading-[1.75rem];
+  @apply sm:prose-h1:text-[2.25rem] sm:prose-h1:leading-[2.5rem];
+  @apply prose-h1:mb-4 sm:prose-h1:mb-8;
+
+  @apply prose-h2:font-semibold;
+  @apply prose-h2:text-gray-800 prose-h2:dark:text-gray-100;
+  @apply prose-h2:text-[1rem] prose-h2:leading-[1.5rem];
+  @apply sm:prose-h2:text-[1.5rem] sm:prose-h2:leading-[2rem];
+  @apply prose-h2:mb-4 sm:prose-h2:mb-6;
+
+  @apply prose-h3:font-semibold;
+  @apply prose-h3:text-gray-800 prose-h3:dark:text-gray-100;
+  @apply prose-h3:text-[0.875rem] prose-h3:leading-[2.5rem];
+  @apply sm:prose-h3:text-[1.25rem] sm:prose-h3:leading-[1.75rem];
+  @apply prose-h3:mb-4 sm:prose-h3:mb-6;
+
+  @apply prose-h4:font-semibold;
+  @apply prose-h4:text-gray-800 prose-h4:dark:text-gray-100;
+  @apply prose-h4:text-base;
+  @apply prose-h4:mb-4 sm:prose-h4:mb-6;
+
+  @apply prose-p:dark:text-gray-100 prose-p:text-gray-800;
+  @apply prose-p:text-base sm:prose-p:leading-7;
+
+  @apply prose-li:text-sm sm:prose-li:text-base;
+  @apply 2xl:prose-li:text-base;
+  @apply prose-ul:dark:text-gray-100 prose-ul:text-gray-800;
+  @apply prose-ol:dark:text-gray-100 prose-ol:text-gray-800;
+
+  @apply prose-pre:font-jetBrains-mono;
+
+  @apply prose-blockquote:border-l-4 prose-blockquote:rounded-lg prose-blockquote:py-4 prose-blockquote:pr-4 prose-blockquote:pl-4 prose-blockquote:font-normal prose-blockquote:not-italic;
+  @apply prose-blockquote:bg-gray-100 prose-blockquote:text-gray-800 prose-blockquote:border-l-gray-400;
+  @apply prose-blockquote:dark:bg-gray-700 prose-blockquote:dark:text-gray-100 prose-blockquote:dark:border-l-gray-500;
+
+  @apply prose-code:text-base 2xl:prose-code:text-base;
+  /* @apply prose-code:translate-y-0.5; */
+  @apply prose-code:inline-block;
+  @apply prose-code:text-gray-700 prose-code:bg-gray-400 prose-code:bg-opacity-10;
+  @apply prose-code:dark:text-gray-0 prose-code:dark:bg-gray-400 prose-code:dark:bg-opacity-10;
+  @apply prose-code:px-1 prose-code:py-0 prose-code:rounded prose-code:font-jetBrains-mono prose-code:before:content-none prose-code:after:content-none;
+  @apply prose-code:font-normal;
+  @apply prose-code:decoration-clone;
+  @apply prose-code:border-none;
+
+  @apply max-w-none;
+}
+
+.win32-prose li code {
+  @apply align-baseline;
+}
+
+.win32-prose table code {
+  @apply !align-baseline;
+}
+
+.win32-prose li::marker {
+  @apply text-gray-500;
+}
+
+.win32-prose ul li::marker {
+  @apply text-xl leading-7;
+}
+
+/* .win32-prose *:last-child:not(header h1) {
+    margin-bottom: 0;
+} */
+
+.win32-prose h1 code,
+.win32-prose h2 code,
+.win32-prose h3 code,
+.win32-prose h4 code {
+  font-size: inherit;
+  line-height: inherit;
+  vertical-align: bottom;
+  transform: translateY(0);
+}
+
+.win32-prose h4 code {
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.win32-prose a.hash-link {
+  position: relative;
+  width: 0;
+  padding: 0;
+  display: inline-flex;
+  margin-left: 6px;
+}
+
+.win32-prose a.hash-link::before {
+  content: '';
+  background-size: 12px 12px;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"><path fill="%23667084" fill-rule="evenodd" d="M9.172 1.172a4 4 0 1 1 5.656 5.656l-2 2a.5.5 0 1 1-.707-.707l2-2A3 3 0 1 0 9.88 1.88l-2 2a.5.5 0 0 1-.707-.707l2-2Zm2.182 3.474a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708l6-6a.5.5 0 0 1 .708 0ZM3.879 7.172a.5.5 0 0 1 0 .707l-2 2A3 3 0 1 0 6.12 14.12l2-2a.5.5 0 0 1 .707.707l-2 2a4 4 0 0 1-5.656-5.656l2-2a.5.5 0 0 1 .707 0Z" clip-rule="evenodd"/></svg>');
+  @apply bg-gray-400 bg-opacity-10;
+  @apply leading-7;
+  @apply absolute;
+  @apply w-7 h-7 inline-flex rounded-[10px];
+  @apply bg-center bg-no-repeat bg-[size:0.875rem];
+  @apply top-1/2 -translate-y-1/2;
+  @apply transition-all duration-200 ease-in-out;
+  @apply -left-px;
+}
+
+.win32-prose a.hash-link:hover::before {
+  @apply bg-[size:1rem];
+}
+
+html[data-theme='dark'] .win32-prose a.hash-link::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"><path fill="%2399A1B3" fill-rule="evenodd" d="M9.172 1.172a4 4 0 1 1 5.656 5.656l-2 2a.5.5 0 1 1-.707-.707l2-2A3 3 0 1 0 9.88 1.88l-2 2a.5.5 0 0 1-.707-.707l2-2Zm2.182 3.474a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708l6-6a.5.5 0 0 1 .708 0ZM3.879 7.172a.5.5 0 0 1 0 .707l-2 2A3 3 0 1 0 6.12 14.12l2-2a.5.5 0 0 1 .707.707l-2 2a4 4 0 0 1-5.656-5.656l2-2a.5.5 0 0 1 .707 0Z" clip-rule="evenodd"/></svg>');
+}
+
+.win32-prose blockquote,
+.win32-prose blockquote p {
+  @apply before:content-none after:content-none;
+}
+
+.win32-prose table {
+  @apply prose-table:border-none;
+}
+
+.win32-prose table tr {
+  border-top: unset;
+}
+
+.win32-prose table th,
+.win32-prose table td {
+  @apply border border-gray-300 px-2 py-2 text-gray-800 dark:border-gray-600 dark:text-gray-100;
+  @apply text-base leading-6;
+  @apply align-top;
+}
+
+.win32-prose table th {
+  @apply font-semibold;
+  @apply text-gray-800 dark:text-gray-100;
+  @apply text-base leading-7;
+}
+
+.win32-prose table th code {
+  @apply text-base;
+}
+
+.win32-prose table tbody tr:nth-child(odd) {
+  @apply bg-gray-400 bg-opacity-10;
+}
+
+.win32-prose table tbody tr:nth-child(even) {
+  @apply bg-gray-0 dark:bg-gray-800;
+}
+
+.win32-prose table thead {
+  @apply bg-gray-0 dark:bg-gray-800;
+}
+
+.win32-prose table thead tr {
+  @apply border-none;
+}
+
+.win32-prose .table-container {
+  @apply overflow-auto max-w-full mt-8 mb-4 pb-4;
+}
+
+.win32-prose .table-container table {
+  @apply my-0 table table-auto;
+}
+
+.win32-toc-item {
+  @apply cursor-pointer;
+}
+
+.win32-toc-item code::before,
+.win32-toc-item code::after {
+  content: '';
+}
+
+.win32-toc-item code {
+  @apply rounded !border-none py-0.5 px-1 !align-bottom font-jetBrains-mono !text-inherit dark:bg-gray-600 dark:bg-opacity-30 dark:!text-inherit;
+  font-size: 12px;
+}
+
+a:has(> code) {
+  text-decoration: none !important;
+}
+
+a:has(> code) code {
+  @apply !text-win32-react-light-link dark:!text-win32-react-dark-link !align-baseline;
+}
+
+p:has(> code) code {
+  @apply mx-0.5 !align-baseline;
+}
+
+li a:has(> code) code {
+  @apply !mx-0 !align-baseline;
+}
+
+/* admonition overrides */
+
+.admonition.admonition-warning code:not(pre > code) {
+  @apply dark:bg-win32-react-dark-orange dark:bg-opacity-[0.15] bg-win32-react-dark-orange bg-opacity-[15%];
+}
+
+.admonition.admonition-warning li::marker {
+  @apply dark:text-win32-react-dark-orange text-win32-react-light-orange text-xl leading-7;
+}
+
+.admonition.admonition-danger code:not(pre > code) {
+  @apply dark:bg-win32-red dark:bg-opacity-[0.15] bg-win32-red bg-opacity-[15%];
+}
+
+.admonition.admonition-danger li::marker {
+  @apply dark:text-win32-red text-win32-red text-xl leading-7;
+}
+
+.admonition.admonition-info code:not(pre > code) {
+  @apply dark:bg-win32-react-dark-purple dark:bg-opacity-[0.15] bg-win32-react-light-purple bg-opacity-[15%];
+}
+
+.admonition.admonition-info li::marker {
+  @apply dark:text-win32-react-dark-purple text-win32-react-light-purple text-xl leading-7;
+}
+
+.admonition.admonition-tip code:not(pre > code) {
+  @apply dark:bg-win32-react-dark-green-alt dark:bg-opacity-[0.15] bg-win32-react-light-green-alt bg-opacity-[15%];
+}
+
+.admonition.admonition-tip li::marker {
+  @apply dark:text-win32-react-dark-green-alt text-win32-react-light-green-alt text-xl leading-7;
+}
+
+.admonition.admonition-note code:not(pre > code) {
+  @apply dark:bg-win32-react-dark-green dark:bg-opacity-[0.15] bg-win32-react-light-green bg-opacity-[15%];
+}
+
+.admonition.admonition-note li::marker {
+  @apply dark:text-win32-react-dark-green text-win32-react-light-green text-xl leading-7;
+}
+
+.admonition pre.prism-code code {
+  @apply bg-transparent;
+}
+
+.win32-prose blockquote li::marker {
+  @apply dark:text-gray-500 text-gray-400 text-xl leading-7;
+}
+
+.win32-prose blockquote code:not(pre > code) {
+  @apply dark:bg-gray-500 dark:bg-opacity-[0.10] bg-gray-400 bg-opacity-[15%];
+}
+
+.win32-prose blockquote .win32-common-code-block {
+  @apply mx-0;
+}
+
+/*  */
+
+.win32-details > summary + div > div {
+  @apply mt-0 border-t-0 pt-0;
+}
+
+.win32-details-content {
+  @apply p-4;
+}
+
+.win32-details .win32-details-content > div > *:last-child {
+  @apply !mb-0;
+}
+
+.win32-details > summary .win32-details-triangle {
+  @apply transition-transform duration-200 ease-in-out;
+  @apply -rotate-90;
+}
+
+.win32-details[open] > summary .win32-details-triangle {
+  @apply rotate-0;
+}
+
+.max-w-screen-content {
+  @apply max-w-screen-content-sm md:max-w-screen-content-md content-xl-safe:max-w-screen-content-xl 2xl:max-w-screen-content-2xl;
+}
+
+html .no-underline {
+  text-decoration: none;
+}
+
+html[data-active-page='index'],
+html[data-active-page='index'] body {
+  @apply bg-gray-800;
+}
+
+@keyframes element-animation {
+  0% {
+    opacity: 0;
+  }
+
+  5% {
+    opacity: 1;
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  35% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.animation-parent {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000;
+}
+
+.win32-tab-content > *:last-child {
+  @apply mb-0;
+}
+
+.admonition-simple ul {
+  margin: 0;
+  list-style-position: outside;
+  padding-left: 24px;
+  list-style-type: '-   ';
+}
+
+.admonition .win32-common-code-block {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.admonition-simple * {
+  @apply text-sm leading-4 sm:leading-5;
+}
+
+.admonition-simple .admonition-content *:last-child {
+  @apply mb-0;
+}
+
+.admonition-simple .admonition-content ul li::marker {
+  @apply text-gray-700 dark:text-gray-100;
+}
+
+h4 > del:has(code:only-child) {
+  @apply no-underline;
+}
+
+h4 > del:has(code:only-child) code {
+  @apply line-through;
+}
+
+.theme-code-block-highlighted-line {
+  @apply !bg-win32-react-light-link !bg-opacity-[0.07] dark:!bg-win32-react-dark-link dark:!bg-opacity-[0.05];
+  @apply relative;
+}
+
+.theme-code-block-highlighted-line::after,
+.theme-code-block-highlighted-line::before {
+  content: '';
+  @apply block absolute top-0;
+  @apply w-0.5 h-full;
+  @apply bg-win32-react-light-link bg-opacity-75 dark:!bg-win32-react-dark-link dark:bg-opacity-50;
+}
+
+.theme-code-block-highlighted-line::after {
+  @apply left-0;
+}
+
+.theme-code-block-highlighted-line::before {
+  @apply right-0;
+}
+
+.win32-prose .win32-wider-container {
+  @apply widening-start:-mx-4;
+}
+
+.win32-prose .win32-wider-container .win32-wider-container {
+  @apply mx-0;
+}
+
+.win32-prose .table-full-width .table-container,
+.win32-prose .table-full-width .props-table {
+  /* --preferred-full-table-width */
+  --full-width-limit: 1280px;
+  --applied-full-table-width: min(
+    var(--preferred-full-table-width, 100%),
+    var(--full-width-limit)
+  );
+  max-width: var(--applied-full-table-width);
+  margin-left: calc(
+    (-1 * ((var(--applied-full-table-width, 100%) - 100%) / 2)) + 16px
+  );
+  margin-right: calc(
+    (-1 * ((var(--applied-full-table-width, 100%) - 100%) / 2)) + 16px
+  );
+}
+
+.win32-prose code,
+.font-mono,
+.font-jetBrains-mono {
+  font-variant-ligatures: none !important;
+  font-feature-settings: 'liga' 0;
+}
+
+h1 del,
+h2 del,
+h3 del,
+h4 del,
+h1 del code,
+h2 del code,
+h3 del code,
+h4 del code {
+  @apply !line-through;
+  @apply !text-gray-400 dark:!text-gray-500;
+}
+
+.docs-wrapper *::selection {
+  @apply bg-win32-selection text-gray-800;
+}
+
+.cm-gutter.cm-lineNumbers {
+  @apply !text-xs !leading-5;
+}
