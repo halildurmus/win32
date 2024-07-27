@@ -1,14 +1,21 @@
-The package includes a number of examples in the `examples\` subdirectory, which
-demonstrate various aspects of invoking Windows APIs, including:
+# Examples
 
-- Invoking C-style APIs, including creating structs and memory management
-- Building classic (Win32) desktop UI
+The package includes a variety of examples in the [examples] subdirectory,
+showcasing different aspects of invoking Windows APIs.
+
+These examples cover:
+
+- Invoking C-style APIs, including creating structs and managing memory
+- Building classic (Win32) desktop UIs
 - Using callback functions with Win32 APIs
 - Invoking COM classes (both `IUnknown` and `IDispatch` interface types)
 - Integrating Windows code with Flutter
 
-Other examples of packages that use `package:win32` can be found on
-[pub.dev](https://pub.dev/packages?q=dependency%3Awin32).
+For practical examples of using `package:win32` in real-world applications,
+visit [pub.dev] to explore packages that depend on it.
+
+[examples]: https://github.com/halildurmus/win32/tree/main/examples
+[pub.dev]: https://pub.dev/packages?q=dependency%3Awin32
 
 ## Windows system APIs (kernel32)
 
