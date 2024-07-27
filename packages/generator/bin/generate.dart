@@ -243,7 +243,9 @@ void generateComApis(Scope scope, Map<String, String> comTypesToGenerate) {
 }
 
 void main() async {
-  print('Loading Windows metadata...');
+  final stopwatch = Stopwatch()..start();
+
+  print('[${stopwatch.elapsed}] Loading Windows metadata...');
   final wdkScope =
       await MetadataStore.loadWdkMetadata(version: wdkMetadataVersion);
   final win32Scope =
@@ -252,33 +254,35 @@ void main() async {
   // references from Win32 metadata.
   await MetadataStore.loadWinRTMetadata();
 
-  print('Loading and sorting functions...');
+  print('[${stopwatch.elapsed}] Loading and sorting functions...');
   final functionsToGenerate = loadFunctionsFromJson();
   saveFunctionsToJson(functionsToGenerate);
 
-  print('Generating struct_sizes.cpp...');
+  print('[${stopwatch.elapsed}] Generating struct_sizes.cpp...');
   final structsToGenerate = loadMap('win32_structs.json');
   saveMap(structsToGenerate, 'win32_structs.json');
   generateStructSizeAnalyzer();
 
-  print('Generating structs...');
+  print('[${stopwatch.elapsed}] Generating structs...');
   generateStructs([wdkScope, win32Scope], structsToGenerate);
 
-  print('Generating struct tests...');
+  print('[${stopwatch.elapsed}] Generating struct tests...');
   generateStructSizeTests();
 
-  print('Validating callbacks...');
+  print('[${stopwatch.elapsed}] Validating callbacks...');
   final callbacks = loadMap('win32_callbacks.json');
   saveMap(callbacks, 'win32_callbacks.json');
   // Win32 callbacks are manually created
 
-  print('Generating FFI function bindings...');
+  print('[${stopwatch.elapsed}] Generating FFI function bindings...');
   generateFunctions([wdkScope, win32Scope], functionsToGenerate);
 
-  print('Generating COM interfaces...');
+  print('[${stopwatch.elapsed}] Generating COM interfaces...');
   final comTypesToGenerate = loadMap('com_types.json');
   saveMap(comTypesToGenerate, 'com_types.json');
   generateComApis(win32Scope, comTypesToGenerate);
 
   MetadataStore.close();
+  stopwatch.stop();
+  print('[${stopwatch.elapsed}] Completed.');
 }
