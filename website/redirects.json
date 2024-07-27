@@ -4,6 +4,50 @@
     "to": "/docs"
   },
   {
+    "from": "/docs/intro",
+    "to": "/docs"
+  },
+  {
+    "from": "/docs/category/com-programming",
+    "to": "/docs/com"
+  },
+  {
+    "from": "/docs/category/win32-programming",
+    "to": "/docs"
+  },
+  {
+    "from": "/docs/com-programming/strings",
+    "to": "/docs/guides-concepts/com/strings"
+  },
+  {
+    "from": "/docs/win32-programming/basics",
+    "to": "/docs/getting-started/quick-start"
+  },
+  {
+    "from": "/docs/win32-programming/callbacks",
+    "to": "/docs/guides-concepts/callbacks"
+  },
+  {
+    "from": "/docs/win32-programming/functions",
+    "to": "/docs/guides-concepts/functions"
+  },
+  {
+    "from": "/docs/win32-programming/memory",
+    "to": "/docs/guides-concepts/memory-allocation"
+  },
+  {
+    "from": "/docs/win32-programming/memory-patterns",
+    "to": "/docs/guides-concepts/memory-patterns"
+  },
+  {
+    "from": "/docs/win32-programming/structs",
+    "to": "/docs/guides-concepts/structs"
+  },
+  {
+    "from": "/docs/win32-programming/types",
+    "to": "/docs/guides-concepts/integer-types"
+  },
+  {
     "from": "/examples",
     "to": "https://github.com/halildurmus/win32/tree/main/examples"
   }
