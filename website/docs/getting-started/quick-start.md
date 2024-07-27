@@ -45,8 +45,8 @@ void main() {
 
 ## 📚 Next Steps
 
-🔍 Explore [real-life examples](/examples) built using **win32** to see what you
-can achieve.
+🔍 Explore [real-life examples] built using **win32** to see what you can
+achieve.
 
 📦 Discover [packages](/packages) built on top of **win32** to find the ones
 that best suit your needs.
@@ -56,5 +56,6 @@ functions.
 
 [Beep]: https://learn.microsoft.com/windows/win32/api/utilapiset/nf-utilapiset-beep
 [dart:ffi]: https://api.dart.dev/stable/dart-ffi/dart-ffi-library.html
+[real-life examples]: https://win32.pub/examples
 [Functions]: /docs/guides-concepts/functions
 [package:ffi]: https://pub.dev/packages/ffi
