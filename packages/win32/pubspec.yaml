@@ -5,7 +5,7 @@ version: 5.5.2-wip
 homepage: https://win32.pub
 repository: https://github.com/halildurmus/win32
 issue_tracker: https://github.com/halildurmus/win32/issues
-documentation: https://win32.pub/docs/category/win32-programming
+documentation: https://win32.pub/docs
 funding:
   - https://github.com/sponsors/halildurmus
 
