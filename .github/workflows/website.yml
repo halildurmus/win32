@@ -45,8 +45,9 @@ jobs:
     if: ${{ github.event_name == 'push' }}
     name: Deploy to GitHub Pages
     permissions:
-      pages: write
+      contents: write
       id-token: write
+      pages: write
     runs-on: ubuntu-latest
 
     defaults:
