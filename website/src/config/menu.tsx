@@ -75,12 +75,13 @@ export const menuItems: MenuItemType[] = [
         description: 'Articles about Windows development.',
         href: '/blog',
       },
-      {
-        label: 'Changelog',
-        icon: ChangelogIcon,
-        description: 'Learn what has changed recently.',
-        href: '/changelog',
-      },
+      // TODO(halildurmus): Uncomment when the page is ready.
+      // {
+      //   label: 'Changelog',
+      //   icon: ChangelogIcon,
+      //   description: 'Learn what has changed recently.',
+      //   href: '/changelog',
+      // },
       // {
       //   label: 'Roadmap',
       //   icon: RoadmapIcon,

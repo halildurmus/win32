@@ -66,10 +66,11 @@ export const footerItems: FooterItemType[] = [
         label: 'Blog',
         href: '/blog',
       },
-      {
-        label: 'Changelog',
-        href: '/changelog',
-      },
+      // TODO(halildurmus): Uncomment when the page is ready.
+      // {
+      //   label: 'Changelog',
+      //   href: '/changelog',
+      // },
       // {
       //   label: 'Roadmap',
       //   badge: NewBadgeIcon,

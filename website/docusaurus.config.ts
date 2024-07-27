@@ -65,27 +65,28 @@ const config: Config = {
         },
       } satisfies BlogPluginOptions,
     ],
-    [
-      './plugins/changelog.js',
-      {
-        routeBasePath: '/changelog',
-        authorsMapPath: 'authors.json',
-        blogTitle: 'win32 Changelog',
-        blogDescription:
-          'Keep yourself up-to-date about new features in every release',
-        blogSidebarCount: 'ALL',
-        blogSidebarTitle: 'Changelog',
-        feedOptions: {
-          type: 'all',
-          title: 'win32 Changelog',
-          description:
-            'Keep yourself up-to-date about new features in every release',
-          copyright: `Copyright © ${new Date().getFullYear()} • Halil Durmus`,
-        },
-        postsPerPage: 20,
-        showReadingTime: false,
-      },
-    ],
+    // TODO(halildurmus): Enable changelog plugin.
+    // [
+    //   './plugins/changelog.js',
+    //   {
+    //     routeBasePath: '/changelog',
+    //     authorsMapPath: 'authors.json',
+    //     blogTitle: 'win32 Changelog',
+    //     blogDescription:
+    //       'Keep yourself up-to-date about new features in every release',
+    //     blogSidebarCount: 'ALL',
+    //     blogSidebarTitle: 'Changelog',
+    //     feedOptions: {
+    //       type: 'all',
+    //       title: 'win32 Changelog',
+    //       description:
+    //         'Keep yourself up-to-date about new features in every release',
+    //       copyright: `Copyright © ${new Date().getFullYear()} • Halil Durmus`,
+    //     },
+    //     postsPerPage: 20,
+    //     showReadingTime: false,
+    //   },
+    // ],
     './plugins/clarity.ts',
   ],
 
