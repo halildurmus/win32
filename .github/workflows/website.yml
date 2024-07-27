@@ -14,6 +14,8 @@ on:
 
 jobs:
   build:
+    if: ${{ github.event_name == 'pull_request' }}
+    name: Build
     runs-on: ubuntu-latest
 
     defaults:
@@ -49,7 +51,6 @@ jobs:
       pages: write
       id-token: write
     runs-on: ubuntu-latest
-    needs: build
 
     defaults:
       run:
@@ -77,7 +78,7 @@ jobs:
       - name: 📡 Upload Build Artifacts
         uses: actions/upload-pages-artifact@v3
         with:
-          path: build
+          path: website/build
 
       - name: ☁️ Deploy to GitHub Pages
         id: deployment
