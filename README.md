@@ -1,3 +1,4 @@
+[![ci][ci_badge]][ci_link]
 [![Package: filepicker_windows][package_badge]][package_link]
 [![Publisher: halildurmus.dev][publisher_badge]][publisher_link]
 [![Language: Dart][language_badge]][language_link]
@@ -6,9 +7,9 @@
 A package that provides a friendly Dart API for file and directory selection for
 Windows using common dialog controls.
 
-This package builds on top of the Dart [win32][win32_pub_dev_link] package,
-offering a high-level Dart wrapper that avoids the need for users to understand
-FFI or write directly to the Win32 API.
+This package builds on top of the Dart [win32] package, offering a high-level
+Dart wrapper that avoids the need for users to understand FFI or write directly
+to the Win32 API.
 
 ## Usage
 
@@ -55,7 +56,7 @@ void main() {
 }
 ```
 
-Additional examples can be located within the `example\` directory.
+Additional examples can be located within the [example] directory.
 
 For a more advanced demonstration, you can explore a Flutter application in the
 `example\wallpaper\` directory. This application illustrates how to select an
@@ -66,6 +67,9 @@ image file and set it as your desktop wallpaper.
 Please file feature requests and bugs at the
 [issue tracker][issue_tracker_link].
 
+[ci_badge]: https://github.com/halildurmus/filepicker_windows/actions/workflows/build.yml/badge.svg
+[ci_link]: https://github.com/halildurmus/filepicker_windows/actions/workflows/build.yml
+[example]: https://github.com/halildurmus/filepicker_windows/tree/main/example
 [issue_tracker_link]: https://github.com/halildurmus/filepicker_windows/issues
 [language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
 [language_link]: https://dart.dev
@@ -75,4 +79,4 @@ Please file feature requests and bugs at the
 [package_link]: https://pub.dev/packages/filepicker_windows
 [publisher_badge]: https://img.shields.io/pub/publisher/filepicker_windows.svg
 [publisher_link]: https://pub.dev/publishers/halildurmus.dev
-[win32_pub_dev_link]: https://pub.dev/packages/win32
+[win32]: https://pub.dev/packages/win32
