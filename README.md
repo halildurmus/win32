@@ -1,3 +1,4 @@
+[![ci][ci_badge]][ci_link]
 [![Package: win32_gamepad][package_badge]][package_link]
 [![Publisher: halildurmus.dev][publisher_badge]][publisher_link]
 [![Language: Dart][language_badge]][language_link]
@@ -80,6 +81,8 @@ can use this to monitor the status of buttons in a simple game loop:
 Please file feature requests and bugs at the
 [issue tracker][issue_tracker_link].
 
+[ci_badge]: https://github.com/halildurmus/win32_gamepad/actions/workflows/build.yml/badge.svg
+[ci_link]: https://github.com/halildurmus/win32_gamepad/actions/workflows/build.yml
 [demo_image_link]: https://raw.githubusercontent.com/halildurmus/win32_gamepad/main/screenshots/demo.png
 [issue_tracker_link]: https://github.com/halildurmus/win32_gamepad/issues
 [language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
