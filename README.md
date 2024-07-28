@@ -144,8 +144,8 @@ Please file feature requests and bugs at the
 [issue tracker][issue_tracker_link].
 
 [architecture_diagram_link]: https://github.com/halildurmus/winmd/blob/main/metadata.drawio.svg?raw=true
-[ci_badge]: https://github.com/halildurmus/winmd/actions/workflows/dart.yml/badge.svg
-[ci_link]: https://github.com/halildurmus/winmd/actions/workflows/dart.yml
+[ci_badge]: https://github.com/halildurmus/winmd/actions/workflows/build.yml/badge.svg
+[ci_link]: https://github.com/halildurmus/winmd/actions/workflows/build.yml
 [codecov_badge_link]: https://codecov.io/gh/halildurmus/winmd/branch/main/graph/badge.svg?token=1ouz1Jr9nW
 [codecov_link]: https://codecov.io/gh/halildurmus/winmd
 [issue_tracker_link]: https://github.com/halildurmus/winmd/issues
@@ -159,6 +159,5 @@ Please file feature requests and bugs at the
 [publisher_badge]: https://img.shields.io/pub/publisher/winmd.svg
 [publisher_link]: https://pub.dev/publishers/halildurmus.dev
 [win32_package_link]: https://pub.dev/packages/win32
-[win32_pub_link]: https://win32.pub
 [windows_packages_link]: https://pub.dev/packages?q=publisher%3Awin32.pub+topic%3Awinrt
 [windows_metadata_files_link]: https://learn.microsoft.com/uwp/winrt-cref/winmd-files
