@@ -26,6 +26,8 @@ jobs:
             sdk: beta
           - os: windows-2019
             sdk: stable
+          - os: ubuntu-latest
+            sdk: stable
 
     uses: halildurmus/workflows/.github/workflows/dart_package.yml@main
     with:
@@ -34,6 +36,6 @@ jobs:
       runs_on: ${{ matrix.os }}
       upload_coverage: ${{ matrix.sdk == 'main' }}
       validate_dartdoc_links: ${{ matrix.sdk == 'main' }}
-      verify_pana_score: ${{ matrix.sdk == 'stable' }}
+      verify_pana_score: ${{ matrix.os == 'ubuntu-latest' }}
     secrets:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
