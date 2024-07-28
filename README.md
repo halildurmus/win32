@@ -17,21 +17,24 @@ support plugins.
 
 ## Usage
 
-You can use the sample app in the `example\` subdirectory to run an existing
+You can use the sample app in the [example] subdirectory to run an existing
 Flutter app on Windows using the Dart runner:
 
 1. Clone the repository:
+
 ```console
 C:\src> git clone https://github.com/halildurmus/win32_runner.git
 C:\src> cd win32_runner
 ```
 
 2. Install dependencies:
+
 ```console
 C:\src\win32_runner> dart pub get
 ```
 
 3. Create a sample app:
+
 ```console
 C:\src\win32_runner> cd ..
 C:\src> flutter create simpleapp
@@ -39,16 +42,19 @@ C:\src> cd simpleapp
 ```
 
 4. Compile Flutter code and assets to the `build\` subdirectory:
+
 ```console
 C:\src\simpleapp> flutter assemble -dTargetPlatform=windows-x64 --output=build -dBuildMode=release release_bundle_windows-x64_assets
 ```
 
 5. Compile Dart runner:
+
 ```console
 C:\src\simpleapp> dart compile exe ..\win32_runner\example\win32_runner.dart -o win32_runner.exe
 ```
 
 6. Run Flutter app:
+
 ```console
 C:\src\simpleapp> .\win32_runner
 ```
@@ -64,6 +70,7 @@ Please file feature requests and bugs at the
 [issue tracker][issue_tracker_link].
 
 [demo_image_link]: https://raw.githubusercontent.com/halildurmus/win32_runner/main/screenshots/demo.png
+[example]: https://github.com/halildurmus/win32_runner/tree/main/example
 [issue_tracker_link]: https://github.com/halildurmus/win32_runner/issues
 [language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
 [language_link]: https://dart.dev
