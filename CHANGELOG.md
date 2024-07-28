@@ -1,3 +1,8 @@
+## 1.1.4-wip
+
+- Fix issue where `RegistryValue.data` for binary-type registry values might be
+  freed before being read (#19, thanks @tylerlacey).
+
 ## 1.1.3
 
 - Fix deprecation warnings
@@ -15,7 +20,8 @@
 
 ## 1.1.0
 
-- Add `recursive` named option to method `deleteKey()` of `RegistryKey` (thanks @Zekfad)
+- Add `recursive` named option to method `deleteKey()` of `RegistryKey` (thanks
+  @Zekfad)
 - Use enhanced enums from Dart 2.17.
 - Update dependency constraints.
 
