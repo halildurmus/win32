@@ -1,3 +1,8 @@
+## 5.0.3
+
+- Fix deprecation warnings.
+- Bump dependencies.
+
 ## 5.0.2
 
 - Bump `archive` dependency.
