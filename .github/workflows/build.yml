@@ -1,0 +1,39 @@
+name: Build
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  schedule:
+    # Run every day at 10:00 AM UTC.
+    - cron: '0 10 * * *'
+
+jobs:
+  build:
+    strategy:
+      # We want to see the results on stable even if main fails (and vice
+      # versa). This prevents one failure from stopping the entire run.
+      fail-fast: false
+
+      # Free config supports up to 20 concurrent jobs, so pick a sparse matrix
+      # that tiles the space well.
+      matrix:
+        include:
+          - os: windows-latest
+            sdk: main
+          - os: windows-2022
+            sdk: beta
+          - os: windows-2019
+            sdk: stable
+
+    uses: halildurmus/workflows/.github/workflows/dart_package.yml@main
+    with:
+      dart_sdk: ${{ matrix.sdk }}
+      run_tests: ${{ matrix.sdk != 'main' }}
+      runs_on: ${{ matrix.os }}
+      upload_coverage: ${{ matrix.sdk == 'main' }}
+      validate_dartdoc_links: ${{ matrix.sdk == 'main' }}
+      verify_pana_score: ${{ matrix.sdk == 'stable' }}
+    secrets:
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
