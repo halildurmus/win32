@@ -31,12 +31,13 @@ void main() {
 }
 ```
 
-More examples can be found in the `example\` subdirectory.
+More examples can be found in the [example] subdirectory.
 
 [ci_badge]: https://github.com/halildurmus/win32_registry/actions/workflows/build.yml/badge.svg
 [ci_link]: https://github.com/halildurmus/win32_registry/actions/workflows/build.yml
 [codecov_badge_link]: https://codecov.io/gh/halildurmus/win32_registry/branch/main/graph/badge.svg?token=6ThVC4ejhx
 [codecov_link]: https://codecov.io/gh/halildurmus/win32_registry
+[example]: https://github.com/halildurmus/win32_registry/tree/main/example
 [language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
 [language_link]: https://dart.dev
 [license_badge]: https://img.shields.io/github/license/halildurmus/win32_registry?color=blue
