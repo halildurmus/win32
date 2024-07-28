@@ -1,4 +1,4 @@
-## 2.1.4-wip
+## 2.1.4
 
 - Bump minimum required Dart version to `3.4.0`
 
