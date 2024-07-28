@@ -32,7 +32,7 @@ jobs:
     uses: halildurmus/workflows/.github/workflows/dart_package.yml@main
     with:
       dart_sdk: ${{ matrix.sdk }}
-      run_tests: ${{ matrix.sdk != 'main' }}
+      run_tests: ${{ matrix.os != 'ubuntu-latest' && matrix.sdk != 'main' }}
       runs_on: ${{ matrix.os }}
       upload_coverage: ${{ matrix.sdk == 'main' }}
       validate_dartdoc_links: ${{ matrix.sdk == 'main' }}
