@@ -7,9 +7,9 @@
 
 A package that provides a friendly Dart API for accessing the Windows Clipboard.
 
-This package builds on top of the Dart [win32][win32_pub_dev_link] package,
-offering a high-level Dart wrapper that avoids the need for users to understand
-FFI or write directly to the Win32 API.
+This package builds on top of the Dart [win32] package, offering a high-level
+Dart wrapper that avoids the need for users to understand FFI or write directly
+to the Win32 API.
 
 ## Usage
 
@@ -70,8 +70,8 @@ Please file feature requests and bugs at the
 [issue tracker][issue_tracker_link].
 
 [api_documentation_link]: https://pub.dev/documentation/win32_clipboard/latest/
-[ci_badge]: https://github.com/halildurmus/win32_clipboard/actions/workflows/dart.yml/badge.svg
-[ci_link]: https://github.com/halildurmus/win32_clipboard/actions/workflows/dart.yml
+[ci_badge]: https://github.com/halildurmus/win32_clipboard/actions/workflows/build.yml/badge.svg
+[ci_link]: https://github.com/halildurmus/win32_clipboard/actions/workflows/build.yml
 [codecov_badge_link]: https://codecov.io/gh/halildurmus/win32_clipboard/branch/main/graph/badge.svg?token=AM792MK0UT
 [codecov_link]: https://codecov.io/gh/halildurmus/win32_clipboard
 [issue_tracker_link]: https://github.com/halildurmus/win32_clipboard/issues
@@ -83,4 +83,4 @@ Please file feature requests and bugs at the
 [package_link]: https://pub.dev/packages/win32_clipboard
 [publisher_badge]: https://img.shields.io/pub/publisher/win32_clipboard.svg
 [publisher_link]: https://pub.dev/publishers/halildurmus.dev
-[win32_pub_dev_link]: https://pub.dev/packages/win32
+[win32]: https://pub.dev/packages/win32
