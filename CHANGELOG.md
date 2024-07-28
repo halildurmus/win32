@@ -1,3 +1,8 @@
+## 1.0.9-wip
+
+- Fix deprecation warnings
+- Bump minimum required Dart SDK version to `3.4.0`
+
 ## 1.0.8
 
 - Fix deprecation warnings
