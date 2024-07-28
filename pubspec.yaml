@@ -1,7 +1,7 @@
 name: win32_gamepad
 description: A package that provides a friendly Dart API for accessing gamepads
   connected to a Windows machine.
-version: 1.0.9-wip
+version: 1.0.9
 repository: https://github.com/halildurmus/win32_gamepad
 issue_tracker: https://github.com/halildurmus/win32_gamepad/issues
 
