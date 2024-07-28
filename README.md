@@ -33,8 +33,8 @@ void main() {
 
 More examples can be found in the `example\` subdirectory.
 
-[ci_badge]: https://github.com/halildurmus/win32_registry/actions/workflows/dart.yml/badge.svg
-[ci_link]: https://github.com/halildurmus/win32_registry/actions/workflows/dart.yml
+[ci_badge]: https://github.com/halildurmus/win32_registry/actions/workflows/build.yml/badge.svg
+[ci_link]: https://github.com/halildurmus/win32_registry/actions/workflows/build.yml
 [codecov_badge_link]: https://codecov.io/gh/halildurmus/win32_registry/branch/main/graph/badge.svg?token=6ThVC4ejhx
 [codecov_link]: https://codecov.io/gh/halildurmus/win32_registry
 [language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
