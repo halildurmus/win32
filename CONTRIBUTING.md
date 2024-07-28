@@ -1,3 +1,5 @@
+# Contributing to winmd
+
 Contributions to this project that improve the fidelity of the object model as
 retrieved from metadata are warmly received. For pull requests, please include
 tests that show the proposed change is working as expected.
@@ -31,7 +33,7 @@ use it to build a Dart equivalent of [ILSpy][ilspy_link] or
 - The [win32][win32_package_link] package provides a Dart projection of the
   Win32 APIs using the `winmd` package.
 
-  In particular, the [win32gen][win32gen_link] package excels at streamlining
+  In particular, the [generator][generator_link] package excels at streamlining
   the process of converting the generated object model into a Dart projection.
   This transformation is achieved by meticulously parsing Windows metadata and
   subsequently crafting Dart classes and types that mirror the original APIs.
@@ -46,7 +48,7 @@ use it to build a Dart equivalent of [ILSpy][ilspy_link] or
   accurately replicate the WinRT APIs.
 
 As a general principle, if there is missing data within the `winmd` that
-prevents `win32gen` or `winrtgen` from creating projections, such issues should
+prevents `generator` or `winrtgen` from creating projections, such issues should
 be resolved through a pull request to the `winmd` repository.
 
 Conversely, if the data is available in `winmd` but not in the required format
@@ -55,11 +57,11 @@ request to the [win32][win32_repo_link] or [dartwinrt][dartwinrt_repo_link]
 repositories.
 
 [dartwinrt_repo_link]: https://github.com/halildurmus/dartwinrt
+[generator_link]: https://github.com/halildurmus/win32/tree/main/packages/generator
 [ildasm_link]: https://learn.microsoft.com/dotnet/framework/tools/ildasm-exe-il-disassembler
 [ilspy_link]: https://github.com/icsharpcode/ILSpy
 [imetadataimport2_link]: https://learn.microsoft.com/windows/win32/api/rometadataapi/nn-rometadataapi-imetadataimport2
 [win32_repo_link]: https://github.com/halildurmus/win32
 [win32_package_link]: https://pub.dev/packages/win32
-[win32gen_link]: https://github.com/halildurmus/win32/tree/main/tool/win32gen
 [windows_packages_link]: https://pub.dev/packages?q=publisher%3Awin32.pub+topic%3Awinrt
 [winrtgen_link]: https://github.com/halildurmus/dartwinrt/tree/main/packages/winrtgen
