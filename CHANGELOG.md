@@ -1,4 +1,4 @@
-## 0.1.3-wip
+## 0.1.3
 
 - Bump minimum required Dart SDK version to `3.4.0`
 
