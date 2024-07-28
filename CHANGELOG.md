@@ -1,3 +1,7 @@
+## 2.1.4-wip
+
+- Bump minimum required Dart version to `3.4.0`
+
 ## 2.1.3
 
 - Add `initialDirectory` and `alwaysShowInitialDirectory` fields to

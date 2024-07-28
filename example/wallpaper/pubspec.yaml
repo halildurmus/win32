@@ -1,21 +1,21 @@
 name: filepicker_windows_example
 description: Demonstrates how to use the filepicker_windows package.
-publish_to: 'none'
+publish_to: none
 
 environment:
-  sdk: '^3.1.0'
+  sdk: ^3.4.0
 
 dependencies:
+  ffi: ^2.1.2
   filepicker_windows:
     path: ../../
-  ffi: ^2.1.0
   flutter:
     sdk: flutter
-  win32: ^5.0.7
   path_provider_windows: ^2.2.1
+  win32: ^5.5.1
+
+dev_dependencies:
+  flutter_lints: ^4.0.0
 
 flutter:
   uses-material-design: true
-
-dev_dependencies:
-  dartwindows_lints: ^1.0.0
