@@ -1,0 +1,16 @@
+name: Build
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    uses: halildurmus/workflows/.github/workflows/dart_package.yml@main
+    with:
+      run_tests: false
+      runs_on: ubuntu-latest
+      validate_dartdoc_links: true
+      verify_pana_score: true
