@@ -1,3 +1,4 @@
+[![ci][ci_badge]][ci_link]
 [![Package: win32_runner][package_badge]][package_link]
 [![Publisher: halildurmus.dev][publisher_badge]][publisher_link]
 [![Language: Dart][language_badge]][language_link]
@@ -69,6 +70,8 @@ Windows using the Dart runner:
 Please file feature requests and bugs at the
 [issue tracker][issue_tracker_link].
 
+[ci_badge]: https://github.com/halildurmus/win32_runner/actions/workflows/build.yml/badge.svg
+[ci_link]: https://github.com/halildurmus/win32_runner/actions/workflows/build.yml
 [demo_image_link]: https://raw.githubusercontent.com/halildurmus/win32_runner/main/screenshots/demo.png
 [example]: https://github.com/halildurmus/win32_runner/tree/main/example
 [issue_tracker_link]: https://github.com/halildurmus/win32_runner/issues
