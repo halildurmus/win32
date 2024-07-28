@@ -1,7 +1,3 @@
-// Copyright (c) 2023, Halil Durmus. Please see the AUTHORS file for details.
-// All rights reserved. Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 
@@ -47,8 +43,8 @@ class WindowButtons extends StatelessWidget {
       iconNormal: theme.inactiveColor,
       iconMouseDown: theme.inactiveColor,
       iconMouseOver: theme.inactiveColor,
-      mouseOver: ButtonThemeData.buttonColor(context, {ButtonStates.hovering}),
-      mouseDown: ButtonThemeData.buttonColor(context, {ButtonStates.pressing}),
+      mouseOver: ButtonThemeData.buttonColor(context, {WidgetState.hovered}),
+      mouseDown: ButtonThemeData.buttonColor(context, {WidgetState.pressed}),
     );
     final closeButtonColors = WindowButtonColors(
       mouseOver: Colors.red,
