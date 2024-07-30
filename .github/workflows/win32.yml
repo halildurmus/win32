@@ -12,6 +12,7 @@ on:
       - 'packages/win32/test/**'
       - 'packages/win32/test_fixes/**'
       - 'packages/win32/analysis_options.yaml'
+      - 'packages/win32/CHANGELOG.md'
       - 'packages/win32/pubspec.yaml'
   push:
     branches: [main]
@@ -24,6 +25,7 @@ on:
       - 'packages/win32/test/**'
       - 'packages/win32/test_fixes/**'
       - 'packages/win32/analysis_options.yaml'
+      - 'packages/win32/CHANGELOG.md'
       - 'packages/win32/pubspec.yaml'
   schedule:
     # Run every day at 2:00 AM UTC.
