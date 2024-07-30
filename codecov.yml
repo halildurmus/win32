@@ -1,3 +1,39 @@
+codecov:
+  require_ci_to_pass: true
+
+comment:
+  layout: "header, diff, flags, files"
+  require_base: false
+
+flag_management:
+  default_rules:
+    carryforward: true
+    statuses:
+      - type: project
+        target: auto
+        threshold: 1%
+      - type: patch
+        target: 90%
+  individual_flags:
+    - name: generator
+      paths:
+      - packages/generator
+      carryforward: true
+      statuses:
+        - type: project
+          target: 20%
+        - type: patch
+          target: 100%
+    - name: win32
+      paths:
+      - packages/win32
+      carryforward: true
+      statuses:
+      - type: project
+        target: 20%
+      - type: patch
+        target: 100%
+
 # Exclude generated files and examples from the coverage report.
 ignore:
   - 'examples'
