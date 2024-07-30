@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## 5.5.2-wip
 
 - Add some service constants (#858)
 - Add Service Manager CLI example (#859)
@@ -985,4 +985,3 @@ write:
 [5.4.0]: https://github.com/halildurmus/win32/compare/v5.3.0...v5.4.0
 [5.5.0]: https://github.com/halildurmus/win32/compare/v5.4.0...v5.5.0
 [5.5.1]: https://github.com/halildurmus/win32/compare/v5.5.0...v5.5.1
-[unreleased]: https://github.com/halildurmus/win32/compare/v5.5.1...HEAD
