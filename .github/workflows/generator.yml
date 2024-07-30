@@ -51,6 +51,7 @@ jobs:
 
     uses: halildurmus/workflows/.github/workflows/dart_package.yml@main
     with:
+      codecov_flags: generator
       dart_sdk: ${{ matrix.sdk }}
       run_tests: ${{ matrix.sdk != 'main' }}
       runs_on: ${{ matrix.os }}
