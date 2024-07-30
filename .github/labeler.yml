@@ -1,23 +1,29 @@
 'ci':
   - changed-files:
-      - any-glob-to-any-file: '.github/**'
+    - any-glob-to-any-file:
+      - .github/**
+      - codecov.yml
 
 'docs':
   - changed-files:
-      - any-glob-to-any-file: 'packages/win32/doc/*'
+    - any-glob-to-any-file:
+      - packages/win32/doc/*
+      - website/docs/**
+      - CONTRIBUTING.md
+      - README.md
 
 'examples':
   - changed-files:
-      - any-glob-to-any-file: 'examples/**'
+    - any-glob-to-any-file: examples/**
 
 'p: generator':
   - changed-files:
-      - any-glob-to-any-file: 'packages/generator/**'
+    - any-glob-to-any-file: packages/generator/**
 
 'p: win32':
   - changed-files:
-      - any-glob-to-any-file: 'packages/win32/**'
+    - any-glob-to-any-file: packages/win32/**
 
 'website':
   - changed-files:
-      - any-glob-to-any-file: 'website/**'
+    - any-glob-to-any-file: website/**
