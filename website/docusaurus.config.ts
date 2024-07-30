@@ -47,14 +47,14 @@ const config: Config = {
       './plugins/blog.js',
       {
         routeBasePath: '/blog',
-        blogTitle: 'Blog',
+        blogTitle: 'win32 Blog',
         blogDescription:
           'A resource for win32, Flutter and Dart ecosystem, and Windows development.',
         blogSidebarCount: 0,
         blogSidebarTitle: 'All posts',
         feedOptions: {
           type: 'all',
-          title: 'Blog',
+          title: 'win32 Blog',
           description:
             'A resource for win32, Flutter and Dart ecosystem, and Windows development.',
           copyright: `Copyright © ${new Date().getFullYear()} • Halil Durmus`,
