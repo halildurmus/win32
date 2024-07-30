@@ -9,7 +9,7 @@ const githubRepoUrl = 'https://github.com/halildurmus/win32';
 
 const config: Config = {
   title: 'win32',
-  tagline: 'Tap into Windows Power with Dart',
+  tagline: 'Access Win32 APIs Directly from Dart',
   url: 'https://win32.pub',
   baseUrl: '/',
   favicon: 'img/favicon.svg',
@@ -193,7 +193,7 @@ const config: Config = {
 
   customFields: {
     description:
-      'Unlock the full potential of Windows APIs in your Flutter and Dart apps with unparalleled ease and performance.',
+      'Bring the full capability of the Windows API to your Flutter and Dart applications.',
   },
 };
 
