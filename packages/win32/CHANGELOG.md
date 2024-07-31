@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.5.3] - 2024-07-31
+
+- Fix issue preventing the `README.md` from being displayed on pub.dev
+
 ## [5.5.2] - 2024-07-31
 
 - Add some service constants (#858)
@@ -986,3 +990,4 @@ write:
 [5.5.0]: https://github.com/halildurmus/win32/compare/v5.4.0...v5.5.0
 [5.5.1]: https://github.com/halildurmus/win32/compare/v5.5.0...v5.5.1
 [5.5.2]: https://github.com/halildurmus/win32/compare/v5.5.1...v5.5.2
+[5.5.3]: https://github.com/halildurmus/win32/compare/v5.5.2...v5.5.3
