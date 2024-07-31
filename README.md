@@ -180,7 +180,7 @@ Here are a few use cases showcasing the power of **win32**:
 <a href="https://github.com/halildurmus/win32/tree/main/examples/task_manager">
   <img
     alt="Task Manager App screenshot"
-    src="https://raw.githubusercontent.com/halildurmus/win32/main/assets/task_manager.png"
+    src="https://raw.githubusercontent.com/halildurmus/win32/main/packages/win32/screenshots/task_manager.png"
     width="600" />
 </a>
 
@@ -208,7 +208,7 @@ Here are a few use cases showcasing the power of **win32**:
 <a href="https://github.com/halildurmus/win32/tree/main/examples/notepad">
   <img
     alt="DartNote App screenshot"
-    src="https://raw.githubusercontent.com/halildurmus/win32/main/assets/dartnote.png"
+    src="https://raw.githubusercontent.com/halildurmus/win32/main/packages/win32/screenshots/dartnote.png"
     width="600" />
 </a>
 
@@ -218,7 +218,7 @@ Here are a few use cases showcasing the power of **win32**:
 <a href="https://github.com/halildurmus/win32/tree/main/examples/tetris">
   <img
     alt="Tetris Game screenshot"
-    src="https://raw.githubusercontent.com/halildurmus/win32/main/assets/tetris.png"
+    src="https://raw.githubusercontent.com/halildurmus/win32/main/packages/win32/screenshots/tetris.png"
     height="400" />
 </a>
 

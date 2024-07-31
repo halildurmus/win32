@@ -10,14 +10,14 @@ funding:
   - https://github.com/sponsors/halildurmus
 
 screenshots:
-  - description: Task Manager App
-    path: ../../assets/task_manager.png
-  - description: DartNote App
-    path: ../../assets/dartnote.png
-  - description: Tetris Game
-    path: ../../assets/tetris.png
-  - description: Snake Game
-    path: ../../assets/snake.png
+  - description: Task Manager App screenshot
+    path: screenshots/task_manager.png
+  - description: DartNote App screenshot
+    path: screenshots/dartnote.png
+  - description: Tetris Game screenshot
+    path: screenshots/tetris.png
+  - description: Snake Game screenshot
+    path: screenshots/snake.png
 
 topics:
   - win32
