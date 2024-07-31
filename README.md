@@ -176,7 +176,7 @@ Here are a few use cases showcasing the power of **win32**:
   <img
     alt="Task Manager App screenshot"
     src="https://raw.githubusercontent.com/halildurmus/win32/main/assets/task_manager.png"
-    height="500" />
+    width="600" />
 </a>
 
 - **Accessing System Information**: Retrieve system information not directly
@@ -204,7 +204,7 @@ Here are a few use cases showcasing the power of **win32**:
   <img
     alt="DartNote App screenshot"
     src="https://raw.githubusercontent.com/halildurmus/win32/main/assets/dartnote.png"
-    height="500" />
+    width="600" />
 </a>
 
 - **Game Development**: Create a fully-fledged game using GDI, like the example
@@ -231,8 +231,7 @@ Here are a few use cases showcasing the power of **win32**:
 <a href="https://github.com/halildurmus/filepicker_windows/tree/main/example/wallpaper">
   <img
     alt="Windows file picker screenshot"
-    src="https://raw.githubusercontent.com/halildurmus/win32/main/assets/filepicker.png"
-    height="500" />
+    src="https://raw.githubusercontent.com/halildurmus/win32/main/assets/filepicker.png" />
 </a>
 
 <br />
