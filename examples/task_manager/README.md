@@ -1,6 +1,9 @@
 # Task Manager App
 
-![Task Manager App](../../packages/win32/screenshots/task_manager.png)
+<img
+  alt="Task Manager App screenshot"
+  src="https://raw.githubusercontent.com/halildurmus/win32/main/packages/win32/screenshots/task_manager.png"
+  width="600" />
 
 A simple task manager app that allows users to manage running Windows processes.
 

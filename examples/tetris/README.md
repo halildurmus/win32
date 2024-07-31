@@ -1,8 +1,14 @@
-This example is a Dart port of an open source Win32 Tetris game by
-Chang-Hung Liang.
+# Tetris Game
 
-The original C version can be found here:
-<https://github.com/eliangcs/tetris-win32>
+<img
+  alt="Tetris Game screenshot"
+  src="https://raw.githubusercontent.com/halildurmus/win32/main/packages/win32/screenshots/tetris.png"
+  height="400" />
+
+A Dart port of an open source Win32 Tetris game by Chang-Hung Liang.
+
+The original C version can be found
+[here](https://github.com/eliangcs/tetris-win32).
 
 Original is licensed under the following terms:
 
