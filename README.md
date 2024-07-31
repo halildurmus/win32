@@ -163,7 +163,12 @@ Do you want to try again?
 }
 ```
 
-![MessageBox screenshot](https://raw.githubusercontent.com/halildurmus/win32/main/assets/messagebox.png)
+<a href="https://github.com/halildurmus/win32/blob/main/examples/msgbox.dart">
+  <img
+    alt="MessageBox screenshot"
+    src="https://raw.githubusercontent.com/halildurmus/win32/main/assets/messagebox.png"
+    width="300" />
+</a>
 
 ## 🌟 Use Cases
 
@@ -214,13 +219,13 @@ Here are a few use cases showcasing the power of **win32**:
   <img
     alt="Tetris Game screenshot"
     src="https://raw.githubusercontent.com/halildurmus/win32/main/assets/tetris.png"
-    height="500" />
+    height="400" />
 </a>
 
 - **Advanced Console Applications**: Build packages like [dart_console] that
   enable advanced console manipulation.
 
-![Dart console ANSI color demo screenshot]
+![Dart console ANSI color demo screenshot][Dart console ANSI color demo screenshot]
 
 - **Modern File Pickers**: Use [filepicker_windows] for a modern Windows file
   picker experience in your Dart/Flutter apps.
@@ -235,6 +240,7 @@ Here are a few use cases showcasing the power of **win32**:
 </a>
 
 <br />
+
 This package provides minimal modifications to the Win32 API to support Dart
 idioms, aiming for high familiarity with existing Windows developers. Other Dart
 packages can build on these primitives to provide a more idiomatic API for Dart
