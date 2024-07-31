@@ -18,6 +18,8 @@
 
 [win32.pub]: https://win32.pub
 
+<br />
+
 <div align="center">
   <strong>Access Win32 APIs "directly" from Dart.</strong>
 
@@ -34,6 +36,8 @@
       width="75"
       align="right" />
   </a>
+
+  <br />
 
   [![ci][ci_badge]][ci_link]
   [![codecov][codecov_badge_link]][codecov_link]
@@ -295,6 +299,8 @@ or regularly testing with the latest version.
 A heartfelt thank you to all our contributors who help improve **win32** by
 creating packages, assisting with issues and pull requests, and participating in
 discussions.
+
+<br />
 
 [![win32 contributors graph][contributors_graph]][contributors_link]
 
