@@ -8,9 +8,10 @@ on:
 
 jobs:
   publish:
-    uses: dart-lang/ecosystem/.github/workflows/publish.yaml@main
+    name: Publish to pub.dev
     permissions:
       id-token: write # Required for authentication using OIDC.
       pull-requests: write # Required for writing the pull request note.
+    uses: dart-lang/setup-dart/.github/workflows/publish.yml@main
     with:
-      sdk: stable
+      working-directory: packages/win32
