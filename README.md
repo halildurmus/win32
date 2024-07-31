@@ -18,8 +18,6 @@
 
 [win32.pub]: https://win32.pub
 
-<br />
-
 <div align="center">
   <strong>Access Win32 APIs "directly" from Dart.</strong>
 
@@ -36,7 +34,6 @@
       width="75"
       align="right" />
   </a>
-  <br />
 
   [![ci][ci_badge]][ci_link]
   [![codecov][codecov_badge_link]][codecov_link]
@@ -47,17 +44,17 @@
 
 </div>
 
-[ci_badge]: https://github.com/halildurmus/win32/actions/workflows/win32.yml/badge.svg
+[ci_badge]: https://img.shields.io/github/actions/workflow/status/halildurmus/win32/win32.yml
 [ci_link]: https://github.com/halildurmus/win32/actions/workflows/win32.yml
 [codecov_badge_link]: https://codecov.io/gh/halildurmus/win32/graph/badge.svg?token=RVL4TNLEJA
 [codecov_link]: https://codecov.io/gh/halildurmus/win32
-[package_badge]: https://img.shields.io/pub/v/win32.svg
+[package_badge]: https://img.shields.io/pub/v/win32
 [package_link]: https://pub.dev/packages/win32
-[publisher_badge]: https://img.shields.io/pub/publisher/win32.svg
+[publisher_badge]: https://img.shields.io/pub/publisher/win32
 [publisher_link]: https://pub.dev/publishers/halildurmus.dev
-[language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
+[language_badge]: https://img.shields.io/badge/language-Dart-blue
 [language_link]: https://dart.dev
-[license_badge]: https://img.shields.io/github/license/halildurmus/win32?color=blue
+[license_badge]: https://img.shields.io/github/license/halildurmus/win32
 [license_link]: https://opensource.org/licenses/BSD-3-Clause
 
 ## 🎯 What is win32?
@@ -175,8 +172,6 @@ Here are a few use cases showcasing the power of **win32**:
     height="500" />
 </a>
 
-<br />
-
 - **Accessing System Information**: Retrieve system information not directly
   accessible through Dart's core libraries.
 
@@ -186,8 +181,6 @@ Here are a few use cases showcasing the power of **win32**:
     src="https://raw.githubusercontent.com/halildurmus/win32/main/assets/power.png" />
 </a>
 
-<br />
-
 - **Enumerating Installed Fonts**: Use [EnumFontFamiliesEx] to list all
   locally-installed fonts.
 
@@ -196,8 +189,6 @@ Here are a few use cases showcasing the power of **win32**:
     alt="Fonts screenshot"
     src="https://raw.githubusercontent.com/halildurmus/win32/main/assets/fonts.png" />
 </a>
-
-<br />
 
 - **Developing Traditional Win32 Apps in Dart**: Build classic Windows
   applications purely in Dart.
@@ -209,8 +200,6 @@ Here are a few use cases showcasing the power of **win32**:
     height="500" />
 </a>
 
-<br />
-
 - **Game Development**: Create a fully-fledged game using GDI, like the example
   below.
 
@@ -221,14 +210,10 @@ Here are a few use cases showcasing the power of **win32**:
     height="500" />
 </a>
 
-<br />
-
 - **Advanced Console Applications**: Build packages like [dart_console] that
   enable advanced console manipulation.
 
 ![Dart console ANSI color demo screenshot]
-
-<br />
 
 - **Modern File Pickers**: Use [filepicker_windows] for a modern Windows file
   picker experience in your Dart/Flutter apps.
@@ -242,8 +227,6 @@ Here are a few use cases showcasing the power of **win32**:
     src="https://raw.githubusercontent.com/halildurmus/win32/main/assets/filepicker.png"
     height="500" />
 </a>
-
-<br />
 
 This package provides minimal modifications to the Win32 API to support Dart
 idioms, aiming for high familiarity with existing Windows developers. Other Dart
@@ -312,8 +295,6 @@ or regularly testing with the latest version.
 A heartfelt thank you to all our contributors who help improve **win32** by
 creating packages, assisting with issues and pull requests, and participating in
 discussions.
-
-<br />
 
 [![win32 contributors graph][contributors_graph]][contributors_link]
 
