@@ -41,6 +41,7 @@
 
   [![ci][ci_badge]][ci_link]
   [![codecov][codecov_badge_link]][codecov_link]
+  [![GitHub stars][github_stars_badge]][github_stars_link]
   [![Package: win32][package_badge]][package_link]
   [![Publisher: halildurmus.dev][publisher_badge]][publisher_link]
   [![Language: Dart][language_badge]][language_link]
@@ -52,6 +53,8 @@
 [ci_link]: https://github.com/halildurmus/win32/actions/workflows/win32.yml
 [codecov_badge_link]: https://codecov.io/gh/halildurmus/win32/graph/badge.svg?token=RVL4TNLEJA
 [codecov_link]: https://codecov.io/gh/halildurmus/win32
+[github_stars_badge]: https://img.shields.io/github/stars/halildurmus/win32?style=flat&color=yellow
+[github_stars_link]: https://github.com/halildurmus/win32/stargazers
 [package_badge]: https://img.shields.io/pub/v/win32
 [package_link]: https://pub.dev/packages/win32
 [publisher_badge]: https://img.shields.io/pub/publisher/win32
@@ -232,6 +235,7 @@ Here are a few use cases showcasing the power of **win32**:
     height="500" />
 </a>
 
+<br />
 This package provides minimal modifications to the Win32 API to support Dart
 idioms, aiming for high familiarity with existing Windows developers. Other Dart
 packages can build on these primitives to provide a more idiomatic API for Dart
