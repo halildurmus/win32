@@ -16,6 +16,28 @@ const config: Config = {
   organizationName: 'halildurmus',
   projectName: 'win32',
 
+  headTags: [
+    {
+      tagName: 'script',
+      attributes: {
+        type: 'application/ld+json',
+      },
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: 'win32.pub',
+        url: 'https://win32.pub',
+      }),
+    },
+    {
+      tagName: 'meta',
+      attributes: {
+        property: 'og:site_name',
+        content: 'win32.pub',
+      },
+    },
+  ],
+
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
@@ -182,9 +204,13 @@ const config: Config = {
     },
     metadata: [
       {
-        name: 'keywords',
+        name: 'twitter:title',
+        content: 'win32 | Access Win32 APIs Directly from Dart',
+      },
+      {
+        name: 'twitter:description',
         content:
-          'windows, api, dart, ffi, flutter, win32, com, development, desktop',
+          'Bring the full capability of the Windows API to your Flutter and Dart applications.',
       },
     ],
   } satisfies Preset.ThemeConfig,
