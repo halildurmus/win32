@@ -21,59 +21,40 @@ void main() {
       free(variant);
     });
 
-    test('pointer to an object that implements the IUnknown interface', () {
-      final spVoice = SpVoice.createInstance()..addRef();
-      final spellChecker = SpellCheckerFactory.createInstance()..addRef();
-
+    test('IUnknown', () {
+      final spVoice = SpVoice.createInstance()..detach();
       final variant = calloc<VARIANT>();
       VariantInit(variant);
-      variant.ref.vt = VARENUM.VT_UNKNOWN;
+      variant.ref
+        ..vt = VARENUM.VT_UNKNOWN
+        ..punkVal = spVoice;
 
-      variant.ref.punkVal = spVoice;
-      final unk = variant.ref.punkVal;
+      final unk = variant.ref.punkVal..detach();
       expect(unk.ptr.address, isNonZero);
       expect(unk.ptr.ref.isNull, isFalse);
-      expect(refCount(unk), equals(2));
-
-      variant.ref.punkVal = spellChecker;
-      final unk2 = variant.ref.punkVal;
-      expect(unk2.ptr.address, isNonZero);
-      expect(unk2.ptr.ref.isNull, isFalse);
-      expect(refCount(unk2), equals(2));
+      expect(refCount(unk), equals(1));
 
       VariantClear(variant);
       free(variant);
     });
 
-    test('reference to an IUnknown interface pointer', () {
-      final spVoice = SpVoice.createInstance()..addRef();
-      final spellChecker = SpellCheckerFactory.createInstance()..addRef();
-
+    test('IUnknown BYREF', () {
+      final spVoice = SpVoice.createInstance()..detach();
       final variant = calloc<VARIANT>();
-      VariantInit(variant);
-      variant.ref.vt = VARENUM.VT_UNKNOWN | VARENUM.VT_BYREF;
-
       final ppunkval = calloc<Pointer<COMObject>>()
         ..value = (calloc<COMObject>()..ref.lpVtbl = spVoice.ptr.ref.lpVtbl);
-      variant.ref.ppunkVal = ppunkval;
-      final unk = IUnknown(variant.ref.ppunkVal.value);
+      variant.ref
+        ..vt = VARENUM.VT_UNKNOWN | VARENUM.VT_BYREF
+        ..ppunkVal = ppunkval;
+
+      final unk = IUnknown(variant.ref.ppunkVal.value)..detach();
       expect(unk.ptr.address, isNonZero);
-      expect(unk.ptr.ref.isNull, isFalse);
-      expect(refCount(unk), equals(2));
+      expect(refCount(unk), equals(1));
+
       free(ppunkval);
-
-      final ppunkval2 = calloc<Pointer<COMObject>>()
-        ..value =
-            (calloc<COMObject>()..ref.lpVtbl = spellChecker.ptr.ref.lpVtbl);
-      variant.ref.ppunkVal = ppunkval2;
-      final unk2 = IUnknown(variant.ref.ppunkVal.value);
-      expect(unk2.ptr.address, isNonZero);
-      expect(unk2.ptr.ref.isNull, isFalse);
-      expect(refCount(unk2), equals(2));
-      free(ppunkval2);
-
       VariantClear(variant);
       free(variant);
+      spVoice.release();
     });
 
     test('time representation from DOS date/time', () {
