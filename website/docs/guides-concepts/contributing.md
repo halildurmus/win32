@@ -127,7 +127,7 @@ If you want to contribute to the **win32** itself, follow the steps below:
   `tools\generate.cmd` script to update the library files:
 
   ```cmd title="Terminal"
-  tool\generate.cmd
+  tools\generate.cmd
   ```
 
 - Structs can be **auto-generated** by including them in the
@@ -141,7 +141,7 @@ If you want to contribute to the **win32** itself, follow the steps below:
 
   ```cmd title="Terminal"
   cl /I "C:\Program Files (x86)\Windows Kits\10\Include\10.0.xxxxx.0\winrt" \
-    tool\struct_sizes\struct_sizes.cpp
+    tools\struct_sizes\struct_sizes.cpp
   ```
 
   Once compiled, run the resulting `struct_sizes.exe` file located in the
