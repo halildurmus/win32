@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 5.5.4-wip
+
+- Optimize `BSTR.fromString` constructor (#879)
+
 ## [5.5.3] - 2024-07-31
 
 - Fix issue preventing the `README.md` from being displayed on pub.dev
