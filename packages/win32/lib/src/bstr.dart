@@ -4,6 +4,7 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
+import 'types.dart';
 import 'win32/oleaut32.g.dart';
 
 /// A string data type that is commonly used by OLE Automation, as well as some
@@ -47,11 +48,21 @@ class BSTR {
   /// Create a BSTR from a given Dart string.
   ///
   /// This allocates native memory for the BSTR; it can be released with [free].
-  factory BSTR.fromString(String str) {
-    final pStr = str.toNativeUtf16();
-    final pbstr = SysAllocString(pStr);
-    calloc.free(pStr);
-    return BSTR._(pbstr);
+  factory BSTR.fromString(String string) {
+    // Allocate memory for a BSTR of sufficient length to hold the string,
+    // without initializing it.
+    final bstr = SysAllocStringByteLen(nullptr, sizeOf<WCHAR>() * string.length)
+        .cast<WCHAR>();
+
+    // Copy each character of the string into the BSTR.
+    for (var i = 0; i < string.length; i++) {
+      bstr[i] = string.codeUnitAt(i);
+    }
+
+    // No need to add a NUL terminator, as SysAllocStringByteLen already does
+    // that for us.
+
+    return BSTR._(bstr.cast());
   }
 
   /// Returns the length in characters.
