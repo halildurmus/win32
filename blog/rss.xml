@@ -406,7 +406,7 @@ calls using <a href="https://dart.dev/guides/libraries/c-interop" target="_blank
 compiler or the Windows SDK.</p>
 <p>The package simplifies the process of writing Dart code that can access
 <strong>Windows hardware</strong> and <strong>system services</strong> by providing easy-to-use bindings
-for traditional <strong>Win32</strong> and <a href="https://learn.microsoft.com/en-us/windows/win32/com/component-object-model--com--portal" target="_blank" rel="noopener noreferrer">COM (Component Object Model)</a> API calls.</p>
+for traditional <strong>Win32</strong> and <a href="https://learn.microsoft.com/windows/win32/com/component-object-model--com--portal" target="_blank" rel="noopener noreferrer">COM (Component Object Model)</a> API calls.</p>
 <p>Whether you're looking to interact with hardware, access system services, or
 build sophisticated desktop applications, <strong>win32</strong> has you covered.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="key-features">Key Features<a class="hash-link" aria-label="Direct link to Key Features" title="Direct link to Key Features" href="https://win32.pub/blog/calling-windows-apis#key-features">​</a></h3>
