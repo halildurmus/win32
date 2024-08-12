@@ -6,7 +6,6 @@
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://win32.pub/blog"/>
     <subtitle>A resource for win32, Flutter and Dart ecosystem, and Windows development.</subtitle>
-    <icon>https://win32.pub/img/favicon.svg</icon>
     <rights>Copyright © 2024 • Halil Durmus</rights>
     <entry>
         <title type="html"><![CDATA[Building a Task Manager App in Flutter with win32]]></title>

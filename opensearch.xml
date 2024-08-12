@@ -4,7 +4,6 @@
   <ShortName>win32</ShortName>
   <Description>Search win32</Description>
   <InputEncoding>UTF-8</InputEncoding>
-  <Image width="16" height="16" type="image/x-icon">https://win32.pub/img/favicon.svg</Image>
   <Url type="text/html" method="get" template="https://win32.pub/search?q={searchTerms}"/>
   <Url type="application/opensearchdescription+xml" rel="self" template="https://win32.pub/opensearch.xml" />
   <moz:SearchForm>https://win32.pub/</moz:SearchForm>
