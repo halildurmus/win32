@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [5.5.4] - 2024-08-12
 
 - Optimize `BSTR.fromString` constructor (#879)
-- Fix `GUID_DEVCLASS_*` constants (#880)
+- Fix `GUID_DEVCLASS_*` constants (#881)
 
 ## [5.5.3] - 2024-07-31
 
