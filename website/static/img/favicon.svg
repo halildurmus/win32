@@ -7,7 +7,7 @@
 >
   <style>
     path { fill: #14141F }
-    @media (prefers-color-scheme:dark) { path { fill: white } }
+    @media (prefers-color-scheme:dark) { path { fill: #fff } }
   </style>
   <path
       fill-rule="evenodd"

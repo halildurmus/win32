@@ -12,7 +12,6 @@ const config: Config = {
   tagline: 'Access Win32 APIs Directly from Dart',
   url: 'https://win32.pub',
   baseUrl: '/',
-  favicon: 'img/favicon.svg',
   organizationName: 'halildurmus',
   projectName: 'win32',
 
@@ -36,6 +35,22 @@ const config: Config = {
         content: 'win32.pub',
       },
     },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'icon',
+        type: 'image/png',
+        href: '/img/favicon.png',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'icon',
+        type: 'image/svg+xml',
+        href: '/img/favicon.svg',
+      },
+    }
   ],
 
   // Even if you don't use internationalization, you can use this field to set
