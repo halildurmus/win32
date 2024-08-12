@@ -1,0 +1,17 @@
+{
+  "name": "win32.pub",
+  "short_name": "win32.pub",
+  "start_url": "/",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "/img/favicon.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "/img/favicon.svg",
+      "sizes": "any"
+    }
+  ]
+}

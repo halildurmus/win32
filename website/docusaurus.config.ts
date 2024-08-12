@@ -50,7 +50,14 @@ const config: Config = {
         type: 'image/svg+xml',
         href: '/img/favicon.svg',
       },
-    }
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'manifest',
+        href: '/manifest.json',
+      },
+    },
   ],
 
   // Even if you don't use internationalization, you can use this field to set
