@@ -72,7 +72,7 @@ offering easy-to-use bindings for both traditional Win32 and
 [COM (Component Object Model)][COM] APIs, it enables you to fully leverage
 Windows-specific functionalities directly in your Dart code.
 
-[COM]: https://learn.microsoft.com/en-us/windows/win32/com/component-object-model--com--portal
+[COM]: https://learn.microsoft.com/windows/win32/com/component-object-model--com--portal
 [Win32 API]: https://learn.microsoft.com/windows/win32/api/
 
 ## 💡 Why Use win32?
@@ -195,6 +195,8 @@ Here are a few use cases showcasing the power of **win32**:
 
 - **Enumerating Installed Fonts**: Use [EnumFontFamiliesEx] to list all
   locally-installed fonts.
+
+[EnumFontFamiliesEx]: https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-enumfontfamiliesexw
 
 <a href="https://github.com/halildurmus/win32/blob/main/examples/fonts.dart">
   <img

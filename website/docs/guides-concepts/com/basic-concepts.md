@@ -141,4 +141,4 @@ thrown during the execution of your code.
 [createFromID]: https://pub.dev/documentation/win32/latest/win32/COMObject/createFromID.html
 [Finalizer]: https://api.dart.dev/stable/dart-core/Finalizer-class.html
 [Microsoft documentation]: https://learn.microsoft.com/windows/win32/learnwin32/asking-an-object-for-an-interface
-[QueryInterface]: https://learn.microsoft.com/en-us/windows/win32/api/unknwn/nf-unknwn-iunknown-queryinterface(refiid_void)
+[QueryInterface]: https://learn.microsoft.com/windows/win32/api/unknwn/nf-unknwn-iunknown-queryinterface(refiid_void)

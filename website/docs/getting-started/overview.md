@@ -60,7 +60,7 @@ Dart. This simplifies the development process and enhances productivity.
 📘 Dive into the [Quick Start](/docs/getting-started/quick-start) guide to learn
 how to make your first **Win32 API** call.
 
-[COM]: https://learn.microsoft.com/en-us/windows/win32/com/component-object-model--com--portal
+[COM]: https://learn.microsoft.com/windows/win32/com/component-object-model--com--portal
 [Dart package]: https://pub.dev/packages/win32
 [FFI]: https://dart.dev/guides/libraries/c-interop
 [Win32 API]: https://learn.microsoft.com/windows/win32/api/
