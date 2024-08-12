@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## 5.5.4-wip
+## [5.5.4] - 2024-08-12
 
 - Optimize `BSTR.fromString` constructor (#879)
 - Fix `GUID_DEVCLASS_*` constants (#880)
@@ -996,3 +996,4 @@ write:
 [5.5.1]: https://github.com/halildurmus/win32/compare/v5.5.0...v5.5.1
 [5.5.2]: https://github.com/halildurmus/win32/compare/v5.5.1...v5.5.2
 [5.5.3]: https://github.com/halildurmus/win32/compare/v5.5.2...v5.5.3
+[5.5.4]: https://github.com/halildurmus/win32/compare/v5.5.3...v5.5.4
