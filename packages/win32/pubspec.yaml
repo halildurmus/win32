@@ -8,6 +8,7 @@ issue_tracker: https://github.com/halildurmus/win32/issues
 documentation: https://win32.pub/docs
 funding:
   - https://github.com/sponsors/halildurmus
+publish_to: none
 
 screenshots:
   - description: Task Manager App screenshot
@@ -32,7 +33,11 @@ platforms:
   windows:
 
 dependencies:
-  ffi: ^2.1.2
+  ffi:
+    git:
+      url: https://github.com/halildurmus/native.git
+      ref: use-natives-2
+      path: pkgs/ffi
 
 dev_dependencies:
   # Handle command-line arguments for example apps.

@@ -6,7 +6,11 @@ environment:
 
 dev_dependencies:
   args: ^2.5.0
-  ffi: ^2.1.2
+  ffi:
+    git:
+      url: https://github.com/halildurmus/native.git
+      ref: use-natives-2
+      path: pkgs/ffi
   lints: ^4.0.0
   win32:
     path: packages/win32
