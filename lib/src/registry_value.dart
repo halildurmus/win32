@@ -83,7 +83,10 @@ class RegistryValue {
       case RegistryValueType.link:
         final strData = data as String;
         final ptr = strData.toNativeUtf16();
-        return PointerData(ptr.cast<Uint8>(), strData.length * 2 + 1);
+        // To match the expected encoding for string values, reserve two
+        // bytes for all characters, plus an additional two bytes for
+        // the null-termination.
+        return PointerData(ptr.cast<Uint8>(), strData.length * 2 + 2);
       case RegistryValueType.stringArray:
         final strArray = (data as List<String>).map((s) => '$s\x00').join();
         final ptr = strArray.toNativeUtf16();
