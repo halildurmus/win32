@@ -1,3 +1,10 @@
+## 1.1.5-wip
+
+- Fix issue where creating `REG_SZ` or `REG_EXPANDED_SZ` string registry values
+  resulted in malformed data. The null terminator for string values was
+  incorrectly encoded as a single byte instead of the required two bytes for
+  UTF-16 encoding (#22, thanks to @dancarrollg).
+
 ## 1.1.4
 
 - Fix issue where `RegistryValue.data` for binary-type registry values might be

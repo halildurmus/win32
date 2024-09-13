@@ -1,6 +1,8 @@
 @TestOn('windows')
 library;
 
+import 'dart:ffi';
+
 import 'package:checks/checks.dart';
 import 'package:test/scaffolding.dart';
 import 'package:win32/win32.dart';
@@ -152,6 +154,8 @@ void main() {
     final key = hkcu.createKey(keyName);
     final value = const RegistryValue(
         'TestValue', RegistryValueType.string, 'Some text here.');
+    final pointerData = value.toWin32;
+    check(pointerData.lengthInBytes).equals(sizeOf<Uint16>() * 16);
     key.createValue(value);
     final retrievedValue = key.getValue('TestValue');
     check(retrievedValue).isNotNull();
@@ -209,8 +213,9 @@ void main() {
         'TestValue',
         RegistryValueType.unexpandedString,
         r'%SystemRoot%\System32\MirrorDrvCompat.dll');
+    final pointerData = value.toWin32;
+    check(pointerData.lengthInBytes).equals(sizeOf<Uint16>() * 42);
     key.createValue(value);
-
     final retrievedValue = key.getValue('TestValue', expandPaths: false);
     check(retrievedValue).isNotNull();
     check(retrievedValue!.type).equals(RegistryValueType.unexpandedString);
