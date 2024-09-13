@@ -156,6 +156,7 @@ void main() {
         'TestValue', RegistryValueType.string, 'Some text here.');
     final pointerData = value.toWin32;
     check(pointerData.lengthInBytes).equals(sizeOf<Uint16>() * 16);
+    free(pointerData.data);
     key.createValue(value);
     final retrievedValue = key.getValue('TestValue');
     check(retrievedValue).isNotNull();
@@ -215,6 +216,7 @@ void main() {
         r'%SystemRoot%\System32\MirrorDrvCompat.dll');
     final pointerData = value.toWin32;
     check(pointerData.lengthInBytes).equals(sizeOf<Uint16>() * 42);
+    free(pointerData.data);
     key.createValue(value);
     final retrievedValue = key.getValue('TestValue', expandPaths: false);
     check(retrievedValue).isNotNull();
