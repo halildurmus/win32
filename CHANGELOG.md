@@ -1,4 +1,4 @@
-## 1.1.5-wip
+## 1.1.5
 
 - Fix issue where creating `REG_SZ` or `REG_EXPANDED_SZ` string registry values
   resulted in malformed data. The null terminator for string values was
