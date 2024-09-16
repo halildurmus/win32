@@ -46,7 +46,7 @@ class Property extends TokenObject with CustomAttributesMixin {
   factory Property.fromToken(Scope scope, int token) {
     assert(TokenType.fromToken(token) == TokenType.property);
 
-    return using((Arena arena) {
+    return using((arena) {
       final ptkTypeDef = arena<mdTypeDef>();
       final szProperty = arena<WCHAR>(stringBufferSize).cast<Utf16>();
       final pchProperty = arena<ULONG>();
@@ -107,9 +107,6 @@ class Property extends TokenObject with CustomAttributesMixin {
     });
   }
 
-  @override
-  String toString() => name;
-
   /// Returns the get accessor method for the property.
   Method? get getterMethod => reader.isValidToken(_getterToken) == TRUE
       ? Method.fromToken(scope, _getterToken)
@@ -146,4 +143,7 @@ class Property extends TokenObject with CustomAttributesMixin {
   bool get isRTSpecialName =>
       _attributes & CorPropertyAttr.prRTSpecialName ==
       CorPropertyAttr.prRTSpecialName;
+
+  @override
+  String toString() => name;
 }

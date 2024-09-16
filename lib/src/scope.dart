@@ -19,7 +19,7 @@ import 'type_def.dart';
 /// [MetadataStore], which caches scopes to avoid duplication.
 class Scope {
   Scope(this.reader, this.assemblyImport) {
-    using((Arena arena) {
+    using((arena) {
       final szName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
       final pchName = arena<ULONG>();
       final pmvid = arena<GUID>();
@@ -97,7 +97,7 @@ class Scope {
   TypeDef? findTypeDefByToken(int token) => _typedefs[token];
 
   void _populateTypeDefs() {
-    using((Arena arena) {
+    using((arena) {
       final phEnum = arena<HCORENUM>();
       final rgTypeDefs = arena<mdTypeDef>();
       final pcTypeDefs = arena<ULONG>();
@@ -117,7 +117,7 @@ class Scope {
     }
   }
 
-  int get moduleToken => using((Arena arena) {
+  int get moduleToken => using((arena) {
         final pmd = arena<mdModule>();
         final hr = reader.getModuleFromScope(pmd);
         if (FAILED(hr)) {
@@ -130,7 +130,7 @@ class Scope {
   Iterable<ModuleRef> _getModuleRefs() {
     final modules = <ModuleRef>[];
 
-    using((Arena arena) {
+    using((arena) {
       final phEnum = arena<HCORENUM>();
       final rgModuleRefs = arena<mdModuleRef>();
       final pcModuleRefs = arena<ULONG>();
@@ -151,7 +151,7 @@ class Scope {
   Iterable<AssemblyRef> _getAssemblyRefs() {
     final assemblies = <AssemblyRef>[];
 
-    using((Arena arena) {
+    using((arena) {
       final phEnum = arena<HCORENUM>();
       final rAssemblyRefs = arena<mdModuleRef>();
       final pcTokens = arena<ULONG>();
@@ -174,7 +174,7 @@ class Scope {
   Iterable<String> _getUserStrings() {
     final userStrings = <String>[];
 
-    using((Arena arena) {
+    using((arena) {
       final phEnum = arena<HCORENUM>();
       final rgStrings = arena<mdString>();
       final pcStrings = arena<ULONG>();
@@ -218,7 +218,7 @@ class Scope {
 
   PEKind get executableKind => PEKind(reader);
 
-  String get version => using((Arena arena) {
+  String get version => using((arena) {
         final pwzBuf = arena<WCHAR>(stringBufferSize).cast<Utf16>();
         final pccBufSize = arena<DWORD>();
         final hr =

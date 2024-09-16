@@ -1,6 +1,6 @@
 name: winmd
 description: A Dart package for working with Windows Metadata (.winmd) files.
-version: 5.0.3
+version: 5.0.4-wip
 repository: https://github.com/halildurmus/winmd
 issue_tracker: https://github.com/halildurmus/winmd/issues
 
@@ -17,10 +17,10 @@ platforms:
 
 dependencies:
   archive: ^3.5.1
-  ffi: ^2.1.2
+  ffi: ^2.1.3
   nuget: ^0.1.1
   path: ^1.9.0
-  win32: ^5.5.1
+  win32: ^5.5.4
   win32_registry: ^1.1.4
 
 dev_dependencies:

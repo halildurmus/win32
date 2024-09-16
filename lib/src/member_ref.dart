@@ -31,7 +31,7 @@ class MemberRef extends TokenObject {
   factory MemberRef.fromToken(Scope scope, int token) {
     assert(TokenType.fromToken(token) == TokenType.memberRef);
 
-    return using((Arena arena) {
+    return using((arena) {
       final ptk = arena<mdToken>();
       final szMember = arena<WCHAR>(stringBufferSize).cast<Utf16>();
       final pchMember = arena<ULONG>();

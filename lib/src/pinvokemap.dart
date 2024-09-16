@@ -30,7 +30,7 @@ class PinvokeMap extends TokenObject {
     assert([TokenType.fieldDef, TokenType.methodDef]
         .contains(TokenType.fromToken(token)));
 
-    return using((Arena arena) {
+    return using((arena) {
       final pdwMappingFlags = arena<DWORD>();
       final szImportName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
       final pchImportName = arena<ULONG>();

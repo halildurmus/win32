@@ -37,7 +37,7 @@ mixin CustomAttributesMixin on TokenObject {
   Iterable<CustomAttribute> _getCustomAttributes() {
     final customAttributes = <CustomAttribute>[];
 
-    using((Arena arena) {
+    using((arena) {
       final phEnum = arena<HCORENUM>();
       final rAttrs = arena<mdCustomAttribute>();
       final pcAttrs = arena<ULONG>();

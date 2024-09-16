@@ -135,8 +135,6 @@ void main() async {
 
 - [win32][win32_package_link]: provides Dart FFI bindings to the Win32 API,
   allowing you to call unmanaged Windows APIs using Dart types.
-- [windows_*][windows_packages_link]: provides idiomatic Dart projection of the
-  modern Windows Runtime (WinRT) APIs.
 
 ## Feature requests and bugs
 
@@ -159,5 +157,4 @@ Please file feature requests and bugs at the
 [publisher_badge]: https://img.shields.io/pub/publisher/winmd.svg
 [publisher_link]: https://pub.dev/publishers/halildurmus.dev
 [win32_package_link]: https://pub.dev/packages/win32
-[windows_packages_link]: https://pub.dev/packages?q=publisher%3Awin32.pub+topic%3Awinrt
 [windows_metadata_files_link]: https://learn.microsoft.com/uwp/winrt-cref/winmd-files

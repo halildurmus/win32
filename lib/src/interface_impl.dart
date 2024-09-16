@@ -35,7 +35,7 @@ class InterfaceImpl extends TokenObject with CustomAttributesMixin {
   ) {
     assert(TokenType.fromToken(token) == TokenType.interfaceImpl);
 
-    return using((Arena arena) {
+    return using((arena) {
       final ptkClass = arena<mdTypeDef>();
       final ptkIface = arena<mdToken>();
 

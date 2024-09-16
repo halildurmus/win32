@@ -43,7 +43,7 @@ class Field extends TokenObject with CustomAttributesMixin {
   factory Field.fromToken(Scope scope, int token) {
     assert(TokenType.fromToken(token) == TokenType.fieldDef);
 
-    return using((Arena arena) {
+    return using((arena) {
       final ptkTypeDef = arena<mdTypeDef>();
       final szField = arena<WCHAR>(stringBufferSize).cast<Utf16>();
       final pchField = arena<ULONG>();
@@ -114,9 +114,6 @@ class Field extends TokenObject with CustomAttributesMixin {
     });
   }
 
-  @override
-  String toString() => name;
-
   /// Returns the [TypeDef] representing the class that the field belongs to.
   TypeDef get parent => scope.findTypeDefByToken(_parentToken)!;
 
@@ -168,6 +165,9 @@ class Field extends TokenObject with CustomAttributesMixin {
 
   /// Returns the P/Invoke mapping representation for the field.
   PinvokeMap get pinvokeMap => PinvokeMap.fromToken(scope, token);
+
+  @override
+  String toString() => name;
 
   static String _decodeString(
     Pointer<Uint8> ptr, {

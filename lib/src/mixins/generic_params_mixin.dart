@@ -13,7 +13,7 @@ mixin GenericParamsMixin on TokenObject {
   List<GenericParam> get genericParams {
     final params = <GenericParam>[];
 
-    using((Arena arena) {
+    using((arena) {
       final phEnum = arena<HCORENUM>();
       final rGenericParams = arena<ULONG>();
       final pcGenericParams = arena<ULONG>();

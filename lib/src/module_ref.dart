@@ -18,7 +18,7 @@ class ModuleRef extends TokenObject with CustomAttributesMixin {
   factory ModuleRef.fromToken(Scope scope, int token) {
     assert(TokenType.fromToken(token) == TokenType.moduleRef);
 
-    return using((Arena arena) {
+    return using((arena) {
       final szName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
       final pchName = arena<ULONG>();
 

@@ -37,7 +37,7 @@ class Parameter extends TokenObject with CustomAttributesMixin {
   factory Parameter.fromToken(Scope scope, int token) {
     assert(TokenType.fromToken(token) == TokenType.paramDef);
 
-    return using((Arena arena) {
+    return using((arena) {
       final ptkMethodDef = arena<mdMethodDef>();
       final pulSequence = arena<ULONG>();
       final szName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
@@ -97,9 +97,6 @@ class Parameter extends TokenObject with CustomAttributesMixin {
         Uint8List(0),
       );
 
-  @override
-  String toString() => name;
-
   /// Returns the [Method] that takes the parameter.
   Method get parent => Method.fromToken(scope, _methodToken);
 
@@ -121,4 +118,7 @@ class Parameter extends TokenObject with CustomAttributesMixin {
   bool get hasFieldMarshal =>
       attributes & CorParamAttr.pdHasFieldMarshal ==
       CorParamAttr.pdHasFieldMarshal;
+
+  @override
+  String toString() => name;
 }

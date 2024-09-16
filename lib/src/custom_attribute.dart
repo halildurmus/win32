@@ -13,14 +13,6 @@ import 'type_aliases.dart';
 import 'type_def.dart';
 import 'type_identifier.dart';
 
-/// A single parameter within a custom attribute.
-class CustomAttributeParameter {
-  const CustomAttributeParameter(this.type, this.value);
-
-  final TypeIdentifier type;
-  final Object value;
-}
-
 /// A custom (named) attribute.
 class CustomAttribute extends TokenObject {
   CustomAttribute(
@@ -38,13 +30,14 @@ class CustomAttribute extends TokenObject {
   final Uint8List signatureBlob;
   final MemberRef memberRef;
   final TypeDef constructor;
+
   late final List<CustomAttributeParameter> parameters = _getParameters();
 
   /// Creates a custom attribute object from a provided token.
   factory CustomAttribute.fromToken(Scope scope, int token) {
     assert(TokenType.fromToken(token) == TokenType.customAttribute);
 
-    return using((Arena arena) {
+    return using((arena) {
       final ptkObj = arena<mdToken>();
       final ptkType = arena<mdToken>();
       final ppBlob = arena<UVCP_CONSTANT>();
@@ -72,9 +65,6 @@ class CustomAttribute extends TokenObject {
 
   /// The name of the attribute
   String get name => constructor.name;
-
-  @override
-  String toString() => name;
 
   /// Parameters for the custom attribute.
   List<CustomAttributeParameter> _getParameters() {
@@ -206,4 +196,15 @@ class CustomAttribute extends TokenObject {
 
     return paramValues;
   }
+
+  @override
+  String toString() => name;
+}
+
+/// A single parameter within a custom attribute.
+class CustomAttributeParameter {
+  const CustomAttributeParameter(this.type, this.value);
+
+  final TypeIdentifier type;
+  final Object value;
 }

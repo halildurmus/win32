@@ -45,7 +45,7 @@ class Event extends TokenObject with CustomAttributesMixin {
   factory Event.fromToken(Scope scope, int token) {
     assert(TokenType.fromToken(token) == TokenType.event);
 
-    return using((Arena arena) {
+    return using((arena) {
       final ptkClass = arena<mdTypeDef>();
       final szEvent = arena<WCHAR>(stringBufferSize).cast<Utf16>();
       final pchEvent = arena<ULONG>();
@@ -90,9 +90,6 @@ class Event extends TokenObject with CustomAttributesMixin {
     });
   }
 
-  @override
-  String toString() => name;
-
   /// Returns the add method for the event.
   Method? get addMethod => reader.isValidToken(_addOnToken) == TRUE
       ? Method.fromToken(scope, _addOnToken)
@@ -120,4 +117,7 @@ class Event extends TokenObject with CustomAttributesMixin {
   bool get isRTSpecialName =>
       _attributes & CorEventAttr.evRTSpecialName ==
       CorEventAttr.evRTSpecialName;
+
+  @override
+  String toString() => name;
 }

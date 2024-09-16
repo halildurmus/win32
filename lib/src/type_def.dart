@@ -51,9 +51,9 @@ class TypeDef extends TokenObject
   /// The token for the class within which this typedef is nested, if there is
   /// one.
   ///
-  /// Returns null if there is no nested parent.
+  /// Returns `null` if there is no nested parent.
   late final _enclosingClassToken = isNested
-      ? using((Arena arena) {
+      ? using((arena) {
           final ptdEnclosingClass = arena<mdTypeDef>();
           final hr = reader.getNestedClassProps(token, ptdEnclosingClass);
           if (FAILED(hr)) throw WindowsException(hr);
@@ -74,7 +74,7 @@ class TypeDef extends TokenObject
   factory TypeDef.fromTypeDefToken(Scope scope, int typeDefToken) {
     assert(TokenType.fromToken(typeDefToken) == TokenType.typeDef);
 
-    return using((Arena arena) {
+    return using((arena) {
       final szTypeDef = arena<WCHAR>(stringBufferSize).cast<Utf16>();
       final pchTypeDef = arena<ULONG>();
       final pdwTypeDefFlags = arena<DWORD>();
@@ -92,7 +92,7 @@ class TypeDef extends TokenObject
   static String _resolveTypeNameForTypeRef(Scope scope, int typeRefToken) {
     assert(TokenType.fromToken(typeRefToken) == TokenType.typeRef);
 
-    return using((Arena arena) {
+    return using((arena) {
       final ptkResolutionScope = arena<mdToken>();
       final szName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
       final pchName = arena<ULONG>();
@@ -113,7 +113,7 @@ class TypeDef extends TokenObject
       int resolutionScopeToken, int typeRefToken, String typeName) {
     assert(TokenType.fromToken(typeRefToken) == TokenType.typeRef);
 
-    return using((Arena arena) {
+    return using((arena) {
       // Find the name of the parent type
       final parentTypeName =
           _resolveTypeNameForTypeRef(scope, resolutionScopeToken);
@@ -145,7 +145,7 @@ class TypeDef extends TokenObject
       int typeRefToken, String typeName) {
     assert(TokenType.fromToken(typeRefToken) == TokenType.typeRef);
 
-    return using((Arena arena) {
+    return using((arena) {
       final szTypeDef = typeName.toNativeUtf16(allocator: arena);
       final ptd = arena<mdTypeDef>();
       final hr =
@@ -171,7 +171,7 @@ class TypeDef extends TokenObject
   factory TypeDef.fromTypeRefToken(Scope scope, int typeRefToken) {
     assert(TokenType.fromToken(typeRefToken) == TokenType.typeRef);
 
-    return using((Arena arena) {
+    return using((arena) {
       final ptkResolutionScope = arena<mdToken>();
       final szName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
       final pchName = arena<ULONG>();
@@ -231,7 +231,7 @@ class TypeDef extends TokenObject
   factory TypeDef.fromTypeSpecToken(Scope scope, int typeSpecToken) {
     assert(TokenType.fromToken(typeSpecToken) == TokenType.typeSpec);
 
-    return using((Arena arena) {
+    return using((arena) {
       final ppvSig = arena<PCCOR_SIGNATURE>();
       final pcbSig = arena<ULONG>();
 
@@ -244,9 +244,6 @@ class TypeDef extends TokenObject
       return TypeDef(scope, typeSpecToken, '', 0, 0, typeTuple.typeIdentifier);
     });
   }
-
-  @override
-  String toString() => name;
 
   TypeVisibility get typeVisibility =>
       TypeVisibility.values[_attributes & CorTypeAttr.tdVisibilityMask];
@@ -361,7 +358,7 @@ class TypeDef extends TokenObject
     assert(TokenType.fromToken(token) == TokenType.typeDef);
 
     final events = <Event>[];
-    using((Arena arena) {
+    using((arena) {
       final phEnum = arena<HCORENUM>();
       final rgEvents = arena<mdEvent>();
       final pcEvents = arena<ULONG>();
@@ -385,7 +382,7 @@ class TypeDef extends TokenObject
     assert(TokenType.fromToken(token) == TokenType.typeDef);
 
     final fields = <Field>[];
-    using((Arena arena) {
+    using((arena) {
       final phEnum = arena<HCORENUM>();
       final rgFields = arena<mdFieldDef>();
       final pcTokens = arena<ULONG>();
@@ -409,7 +406,7 @@ class TypeDef extends TokenObject
     assert(TokenType.fromToken(token) == TokenType.typeDef);
 
     final interfaces = <TypeDef>[];
-    using((Arena arena) {
+    using((arena) {
       final phEnum = arena<HCORENUM>();
       final rImpls = arena<mdInterfaceImpl>();
       final pcImpls = arena<ULONG>();
@@ -434,7 +431,7 @@ class TypeDef extends TokenObject
     assert(TokenType.fromToken(token) == TokenType.typeDef);
     assert(isWindowsRuntime && isClass);
 
-    return using((Arena arena) {
+    return using((arena) {
       final phEnum = arena<HCORENUM>();
       final rImpls = arena<mdInterfaceImpl>();
       final pcImpls = arena<ULONG>();
@@ -460,7 +457,7 @@ class TypeDef extends TokenObject
 
     final methods = <Method>[];
 
-    using((Arena arena) {
+    using((arena) {
       final phEnum = arena<HCORENUM>();
       final rgMethods = arena<mdMethodDef>();
       final pcTokens = arena<ULONG>();
@@ -499,7 +496,7 @@ class TypeDef extends TokenObject
     assert(TokenType.fromToken(token) == TokenType.typeDef);
 
     final properties = <Property>[];
-    using((Arena arena) {
+    using((arena) {
       final phEnum = arena<HCORENUM>();
       final rgProperties = arena<mdProperty>();
       final pcProperties = arena<ULONG>();
@@ -525,7 +522,7 @@ class TypeDef extends TokenObject
     if (TokenType.fromToken(token) == TokenType.typeSpec) return null;
     assert(TokenType.fromToken(token) == TokenType.typeDef);
 
-    return using((Arena arena) {
+    return using((arena) {
       final szName = fieldName.toNativeUtf16(allocator: arena);
       final ptkFieldDef = arena<mdFieldDef>();
 
@@ -547,7 +544,7 @@ class TypeDef extends TokenObject
     if (TokenType.fromToken(token) == TokenType.typeSpec) return null;
     assert(TokenType.fromToken(token) == TokenType.typeDef);
 
-    return using((Arena arena) {
+    return using((arena) {
       final szName = methodName.toNativeUtf16(allocator: arena);
       final pmb = arena<mdMethodDef>();
 
@@ -593,7 +590,7 @@ class TypeDef extends TokenObject
 
   /// Gets a named custom attribute that is stored as a GUID.
   String? getCustomGUIDAttribute(String guidAttributeName) {
-    return using((Arena arena) {
+    return using((arena) {
       final ptrAttributeName =
           guidAttributeName.toNativeUtf16(allocator: arena);
       final ppData = arena<Pointer<BYTE>>();
@@ -624,4 +621,7 @@ class TypeDef extends TokenObject
         'Windows.Win32.Foundation.Metadata.GuidAttribute');
     return guid;
   }
+
+  @override
+  String toString() => name;
 }

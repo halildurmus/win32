@@ -4,7 +4,6 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'method_impls.dart';
 import 'mixins/mixins.dart';
 import 'models/models.dart';
 import 'module_ref.dart';
@@ -43,6 +42,7 @@ class Method extends TokenObject
 
   /// The parameters defined by the method.
   List<Parameter> parameters = <Parameter>[];
+
   int relativeVirtualAddress;
 
   /// The value returned by the method.
@@ -59,7 +59,7 @@ class Method extends TokenObject
   factory Method.fromToken(Scope scope, int token) {
     assert(TokenType.fromToken(token) == TokenType.methodDef);
 
-    return using((Arena arena) {
+    return using((arena) {
       final ptkClass = arena<mdTypeDef>();
       final szMethod = arena<WCHAR>(stringBufferSize).cast<Utf16>();
       final pchMethod = arena<ULONG>();
@@ -87,14 +87,6 @@ class Method extends TokenObject
       return Method(scope, token, ptkClass.value, szMethod.toDartString(),
           pdwAttr.value, signature, pulCodeRVA.value, pdwImplFlags.value);
     });
-  }
-
-  @override
-  String toString() {
-    final params = parameters
-        .map((param) => '${param.typeIdentifier} ${param.name}')
-        .join(', ');
-    return '${returnType.typeIdentifier} $name($params)';
   }
 
   /// The method's parent type.
@@ -179,7 +171,7 @@ class Method extends TokenObject
   bool get isProperty => isGetProperty | isSetProperty;
 
   /// Returns the module that contains the method.
-  ModuleRef get module => using((Arena arena) {
+  ModuleRef get module => using((arena) {
         final pdwMappingFlags = arena<DWORD>();
         final szImportName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
         final pchImportName = arena<ULONG>();
@@ -295,7 +287,7 @@ class Method extends TokenObject
     }
   }
 
-  void _parseParameterNames() => using((Arena arena) {
+  void _parseParameterNames() => using((arena) {
         final phEnum = arena<HCORENUM>();
         final rParams = arena<mdParamDef>();
         final pcTokens = arena<ULONG>();
@@ -338,6 +330,57 @@ class Method extends TokenObject
     parameters[paramsIndex + 1].name = name;
     parameters[paramsIndex + 1].typeIdentifier = typeTuple.typeIdentifier;
   }
+
+  @override
+  String toString() {
+    final params = parameters
+        .map((param) => '${param.typeIdentifier} ${param.name}')
+        .join(', ');
+    return '${returnType.typeIdentifier} $name($params)';
+  }
+}
+
+/// Contains values that describe method implementation features.
+class MethodImplementationFeatures {
+  const MethodImplementationFeatures(this._implFlags);
+
+  final int _implFlags;
+
+  /// Returns information about the code type used in implementing the method.
+  CodeType get codeType =>
+      CodeType.values[_implFlags & CorMethodImpl.miCodeTypeMask];
+
+  /// Returns true if the method implementation is managed.
+  bool get isManaged =>
+      _implFlags & CorMethodImpl.miManagedMask == CorMethodImpl.miManaged;
+
+  /// Returns true if the method is defined. This flag is used primarily in
+  /// merge scenarios.
+  bool get isForwardRef =>
+      _implFlags & CorMethodImpl.miForwardRef == CorMethodImpl.miForwardRef;
+
+  /// Returns true if the method signature cannot be mangled for an HRESULT
+  /// conversion.
+  bool get isPreserveSig =>
+      _implFlags & CorMethodImpl.miPreserveSig == CorMethodImpl.miPreserveSig;
+
+  /// Returns true if the method is single-threaded through its body.
+  bool get isSynchronized =>
+      _implFlags & CorMethodImpl.miSynchronized == CorMethodImpl.miSynchronized;
+
+  /// Returns true if the method cannot be inlined.
+  bool get isNoInlining =>
+      _implFlags & CorMethodImpl.miNoInlining == CorMethodImpl.miNoInlining;
+
+  /// Returns true if the method should be inlined if possible.
+  bool get isAggressiveInlining =>
+      _implFlags & CorMethodImpl.miAggressiveInlining ==
+      CorMethodImpl.miAggressiveInlining;
+
+  /// Returns true if the method should not be optimized.
+  bool get isNoOptimization =>
+      _implFlags & CorMethodImpl.miNoOptimization ==
+      CorMethodImpl.miNoOptimization;
 }
 
 /// Represents the various array-passing styles in WinRT.

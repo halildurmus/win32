@@ -24,11 +24,6 @@
 /// Utilizing Windows Metadata allows the generation of a Win32 API projection
 /// programmatically, offering resilience against errors or changes over time.
 ///
-/// Additionally, this library is utilized by the
-/// [windows_*](https://pub.dev/packages?q=publisher%3Awin32.pub+topic%3Awinrt)
-/// packages, which provide idiomatic Dart language projections of the
-/// Windows Runtime (WinRT) APIs.
-///
 /// Beyond these specific use cases, this package can be valuable for creating
 /// Windows utilities using Dart or Flutter.
 ///
@@ -126,12 +121,10 @@ export 'src/custom_attribute.dart';
 export 'src/event.dart';
 export 'src/field.dart';
 export 'src/generic_param.dart';
-export 'src/generic_param_constraint.dart';
 export 'src/interface_impl.dart';
 export 'src/member_ref.dart';
 export 'src/metadata_store.dart';
 export 'src/method.dart';
-export 'src/method_impls.dart';
 export 'src/mixins/mixins.dart';
 export 'src/models/models.dart';
 export 'src/module_ref.dart';

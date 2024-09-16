@@ -8,7 +8,7 @@ import 'models/models.dart';
 /// A representation of the assembly file's portable executable format.
 class PEKind {
   PEKind(IMetaDataImport2 reader) {
-    using((Arena arena) {
+    using((arena) {
       final pdwPEKind = arena<DWORD>();
       final pdwMachine = arena<DWORD>();
 

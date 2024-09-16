@@ -30,14 +30,17 @@ abstract class TokenObject {
   /// A unique identifier for this token in the metadata file.
   final int token;
 
-  IMetaDataImport2 get reader => scope.reader;
+  /// Returns true if the token is marked as global.
+  bool get isGlobal {
+    if (!isResolvedToken) return false;
 
-  @override
-  int get hashCode => token;
-
-  @override
-  bool operator ==(Object other) =>
-      other is TokenObject && other.token == token;
+    return using((arena) {
+      final pIsGlobal = arena<Int32>();
+      final hr = reader.isGlobal(token, pIsGlobal);
+      if (FAILED(hr)) throw WindowsException(hr);
+      return pIsGlobal.value == 1;
+    });
+  }
 
   /// Returns true if the token maps to an entry in the WinMD database.
   ///
@@ -48,17 +51,14 @@ abstract class TokenObject {
   /// to the .NET type system.
   bool get isResolvedToken => reader.isValidToken(token) == TRUE;
 
-  /// Returns true if the token is marked as global.
-  bool get isGlobal {
-    if (!isResolvedToken) return false;
-
-    return using((Arena arena) {
-      final pIsGlobal = arena<Int32>();
-      final hr = reader.isGlobal(token, pIsGlobal);
-      if (FAILED(hr)) throw WindowsException(hr);
-      return pIsGlobal.value == 1;
-    });
-  }
+  IMetaDataImport2 get reader => scope.reader;
 
   TokenType get tokenType => TokenType.fromToken(token);
+
+  @override
+  int get hashCode => token;
+
+  @override
+  bool operator ==(Object other) =>
+      other is TokenObject && other.token == token;
 }

@@ -23,7 +23,7 @@ class AssemblyRef extends TokenObject {
   factory AssemblyRef.fromToken(Scope scope, int token) {
     assert(TokenType.fromToken(token) == TokenType.assemblyRef);
 
-    return using((Arena arena) {
+    return using((arena) {
       final ppbPublicKeyOrToken = arena<Pointer<BYTE>>();
       final pcbPublicKeyOrToken = arena<ULONG>();
       final szName = arena<WCHAR>(stringBufferSize).cast<Utf16>();

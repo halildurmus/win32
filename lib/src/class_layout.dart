@@ -7,24 +7,13 @@ import 'constants.dart';
 import 'scope.dart';
 import 'token_object.dart';
 
-/// A tuple of a field and its byte offset within a parent struct.
-class FieldOffset extends TokenObject {
-  const FieldOffset(super.scope, super.fieldToken, this.offset);
-
-  /// The byte offset of a specific field relative to its parent struct.
-  ///
-  /// Normally fields are located consecutively within a struct, but in a union
-  /// the fields are aligned with the 0th index of the struct.
-  final int offset;
-}
-
 /// Layout information for the class referenced by a specified token.
 class ClassLayout extends TokenObject {
   ClassLayout(Scope scope, int classToken) : super(scope, classToken) {
     // Check for synthetic type like GUID
     if (classToken == 0) return;
 
-    using((Arena arena) {
+    using((arena) {
       final pdwPackSize = arena<DWORD>();
       final rgFieldOffset = arena<COR_FIELD_OFFSET>(256);
       final pcFieldOffset = arena<ULONG>();
@@ -66,4 +55,15 @@ class ClassLayout extends TokenObject {
   /// representing the packing alignment of the class. If null, no packing
   /// alignment is specified.
   int? packingAlignment;
+}
+
+/// A tuple of a field and its byte offset within a parent struct.
+class FieldOffset extends TokenObject {
+  const FieldOffset(super.scope, super.fieldToken, this.offset);
+
+  /// The byte offset of a specific field relative to its parent struct.
+  ///
+  /// Normally fields are located consecutively within a struct, but in a union
+  /// the fields are aligned with the 0th index of the struct.
+  final int offset;
 }
