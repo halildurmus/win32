@@ -5,7 +5,7 @@
 /// Windows Runtime (WinRT) that include their own metadata.
 ///
 /// The library consumes metadata in the
-/// [ECMA-335](https://www.ecma-international.org/publications/files/ECMA-ST/ECMA-335.pdf)
+/// [ECMA-335](https://ecma-international.org/wp-content/uploads/ECMA-335_6th_edition_june_2012.pdf)
 /// format, originally part of the Common Language Infrastructure (CLI) - a
 /// standardized interface offered by .NET libraries. Since its creation,
 /// Windows Metadata has served as a
