@@ -10,7 +10,7 @@ topics:
   - metadata
 
 environment:
-  sdk: ^3.4.0
+  sdk: ^3.5.0
 
 platforms:
   windows:

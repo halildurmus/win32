@@ -81,11 +81,22 @@ class TypeDef extends TokenObject
       final ptkExtends = arena<mdToken>();
 
       final reader = scope.reader;
-      final hr = reader.getTypeDefProps(typeDefToken, szTypeDef,
-          stringBufferSize, pchTypeDef, pdwTypeDefFlags, ptkExtends);
+      final hr = reader.getTypeDefProps(
+        typeDefToken,
+        szTypeDef,
+        stringBufferSize,
+        pchTypeDef,
+        pdwTypeDefFlags,
+        ptkExtends,
+      );
       if (FAILED(hr)) throw WindowsException(hr);
-      return TypeDef(scope, typeDefToken, szTypeDef.toDartString(),
-          pdwTypeDefFlags.value, ptkExtends.value);
+      return TypeDef(
+        scope,
+        typeDefToken,
+        szTypeDef.toDartString(),
+        pdwTypeDefFlags.value,
+        ptkExtends.value,
+      );
     });
   }
 
@@ -103,38 +114,37 @@ class TypeDef extends TokenObject
     });
   }
 
-  /// Resolve nested type by iterating through all typedefs looking for a match.
+  /// Resolves a nested type by iterating through all type definitions to find
+  /// a match.
   ///
-  /// This is our brute force method for nested types whose resolution scope
-  /// does not contain the type. This occurs in Win32 when a nested type belongs
-  /// to a parent type that has multiple versions with different platform
-  /// architectures.
+  /// This is used when a nested type belongs to a parent type with multiple
+  /// versions across different platform architectures, and its resolution scope
+  /// does not directly contain the type. It is common in Win32 for nested types
+  /// to be part of such parent types.
+  ///
+  /// Throws a [WinmdException] if the matching nested type cannot be found.
   static TypeDef _resolveNestedTypeThroughIteration(Scope scope,
       int resolutionScopeToken, int typeRefToken, String typeName) {
     assert(TokenType.fromToken(typeRefToken) == TokenType.typeRef);
-
     return using((arena) {
-      // Find the name of the parent type
+      // Resolve the parent type's name.
       final parentTypeName =
           _resolveTypeNameForTypeRef(scope, resolutionScopeToken);
 
-      // Get the matching typedef that matches the preferred architecture
-      final parentTypeDef = scope.findTypeDef(parentTypeName,
-          preferredArchitecture: PreferredArchitecture.x64);
-      if (parentTypeDef == null) {
-        throw const WinmdException('Cannot find matching typeDef');
-      }
-
-      // Now find the nested type that matches the name _and_ is enclosed in
+      // Find the nested type that matches the given name and is enclosed in
       // the parent's token.
-      final matchingTypes = scope.typeDefs
-          .where((t) => t.name == typeName)
-          .where((t) => t._enclosingClassToken == parentTypeDef.token);
+      final matchingType = scope.typeDefs
+          .where((t) =>
+              t.name == parentTypeName &&
+              scope.typeDefs.any((e) =>
+                  e.name == typeName && e._enclosingClassToken == t.token))
+          .firstOrNull;
 
-      if (matchingTypes.length == 1) return matchingTypes.first;
+      // Return the matching type if found.
+      if (matchingType != null) return matchingType;
 
-      print('${matchingTypes.length} types found for $typeName');
-      return TypeDef(scope, 0, typeName);
+      // Throw an exception if no matching type is found.
+      throw WinmdException('Cannot find matching typeDef for "$typeName"');
     });
   }
 
@@ -153,7 +163,11 @@ class TypeDef extends TokenObject
       if (FAILED(hr)) {
         if (hr == CLDB_E_RECORD_NOTFOUND) {
           return _resolveNestedTypeThroughIteration(
-              scope, resolutionScopeToken, typeRefToken, typeName);
+            scope,
+            resolutionScopeToken,
+            typeRefToken,
+            typeName,
+          );
         }
 
         throw WindowsException(hr);
@@ -178,7 +192,12 @@ class TypeDef extends TokenObject
 
       final reader = scope.reader;
       final hr = reader.getTypeRefProps(
-          typeRefToken, ptkResolutionScope, szName, stringBufferSize, pchName);
+        typeRefToken,
+        ptkResolutionScope,
+        szName,
+        stringBufferSize,
+        pchName,
+      );
       if (FAILED(hr)) throw WindowsException(hr);
 
       final typeName = szName.toDartString();
@@ -198,7 +217,11 @@ class TypeDef extends TokenObject
       // matches its name, if one exists (which it presumably should).
       if (TokenType.fromToken(resolutionScopeToken) == TokenType.typeRef) {
         return _resolveNestedType(
-            scope, resolutionScopeToken, typeRefToken, typeName);
+          scope,
+          resolutionScopeToken,
+          typeRefToken,
+          typeName,
+        );
       }
 
       // Is it an AssemblyRef that is not part of .NET? If so, we need to load

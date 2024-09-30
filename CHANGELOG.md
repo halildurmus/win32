@@ -1,3 +1,8 @@
+## 5.0.4-wip
+
+- Fix an issue where resolving a nested type would fail.
+- Bump minimum required Dart SDK version to `3.5.0`.
+
 ## 5.0.3
 
 - Fix deprecation warnings.
