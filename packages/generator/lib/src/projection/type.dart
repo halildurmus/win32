@@ -157,7 +157,7 @@ class TypeProjection {
   }
 
   /// Takes a type such as `pointerTypeModifier` -> `BaseType.Uint32` and
-  /// converts it to `Pointer<Uint32>.
+  /// converts it to `Pointer<Uint32>`.
   TypeTuple unwrapPointerType() {
     if (typeIdentifier.typeArg == null) {
       throw Exception('Pointer type missing for $typeIdentifier.');
