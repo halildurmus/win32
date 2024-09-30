@@ -11,10 +11,10 @@ void main() {
   late Scope win32Scope;
 
   setUpAll(() async {
-    win32Scope = await MetadataStore.loadWin32Metadata();
-    // Load the WinRT metadata in order to resolve references from the Win32
-    // metadata
-    await MetadataStore.loadWinRTMetadata();
+    (win32Scope, _) = await (
+      MetadataStore.loadWin32Metadata(),
+      MetadataStore.loadWinRTMetadata()
+    ).wait;
   });
 
   test('Scope assemblies contain expected assemblies', () {

@@ -12,9 +12,11 @@ void main() {
     late Scope winrtScope;
 
     setUpAll(() async {
-      wdkScope = await MetadataStore.loadWdkMetadata();
-      win32Scope = await MetadataStore.loadWin32Metadata();
-      winrtScope = await MetadataStore.loadWinRTMetadata();
+      (wdkScope, win32Scope, winrtScope) = await (
+        MetadataStore.loadWdkMetadata(),
+        MetadataStore.loadWin32Metadata(),
+        MetadataStore.loadWinRTMetadata()
+      ).wait;
     });
 
     test('name is as expected', () {
@@ -58,7 +60,6 @@ void main() {
     });
 
     test('executable kind is as expected for WinRT metadata', () {
-      check(winrtScope.name).equals('Windows.winmd');
       final peKind = winrtScope.executableKind;
       check(peKind.imageType).equals(ImageType.i386);
       check(peKind.isILOnly).isTrue();
@@ -67,67 +68,99 @@ void main() {
     });
 
     test('typeDefs ', () {
-      check(winrtScope.name).equals('Windows.winmd');
-      check(winrtScope.typeDefs.length).isGreaterOrEqual(50);
-      final typeDef = winrtScope.typeDefs
-          .where((typeDef) => typeDef.name == 'Windows.Foundation.IAsyncInfo')
+      check(win32Scope.typeDefs.length).isGreaterOrEqual(30000);
+      final iunknown = win32Scope.typeDefs
+          .where((t) => t.name == 'Windows.Win32.System.Com.IUnknown')
           .firstOrNull;
-      check(typeDef).isNotNull();
+      check(iunknown).isNotNull();
+
+      check(winrtScope.typeDefs.length).isGreaterOrEqual(10000);
+      final asyncInfo = winrtScope.typeDefs
+          .where((t) => t.name == 'Windows.Foundation.IAsyncInfo')
+          .firstOrNull;
+      check(asyncInfo).isNotNull();
     });
 
     test('classes ', () {
-      check(winrtScope.name).equals('Windows.winmd');
-      check(winrtScope.classes.length).isGreaterOrEqual(50);
-      final typeDef = winrtScope.classes
-          .where(
-              (typeDef) => typeDef.name == 'Windows.Foundation.PropertyValue')
+      check(win32Scope.classes.length).isGreaterOrEqual(2000);
+      final spVoice = win32Scope.classes
+          .where((t) => t.name == 'Windows.Win32.Media.Speech.SpVoice')
           .firstOrNull;
-      check(typeDef).isNotNull();
-      check(winrtScope.classes.every((typeDef) => typeDef.isClass)).isTrue();
+      check(spVoice).isNotNull();
+      check(win32Scope.classes.every((t) => t.isClass)).isTrue();
+
+      check(winrtScope.classes.length).isGreaterOrEqual(3000);
+      final propertyValue = winrtScope.classes
+          .where((t) => t.name == 'Windows.Foundation.PropertyValue')
+          .firstOrNull;
+      check(propertyValue).isNotNull();
+      check(winrtScope.classes.every((t) => t.isClass)).isTrue();
     });
 
     test('delegates ', () {
-      check(winrtScope.name).equals('Windows.winmd');
-      check(winrtScope.delegates.length).isGreaterOrEqual(11);
-      final typeDef = winrtScope.delegates
-          .where((typeDef) =>
-              typeDef.name == 'Windows.Foundation.AsyncActionCompletedHandler')
+      check(win32Scope.delegates.length).isGreaterOrEqual(2000);
+      final asyncCallback = win32Scope.delegates
+          .where((t) => t.name == 'Windows.Win32.Foundation.PROC')
           .firstOrNull;
-      check(typeDef).isNotNull();
-      check(winrtScope.delegates.every((typeDef) => typeDef.isDelegate))
-          .isTrue();
+      check(asyncCallback).isNotNull();
+      check(win32Scope.delegates.every((t) => t.isDelegate)).isTrue();
+
+      check(winrtScope.delegates.length).isGreaterOrEqual(100);
+      final asyncActionCompletedHandler = winrtScope.delegates
+          .where(
+              (t) => t.name == 'Windows.Foundation.AsyncActionCompletedHandler')
+          .firstOrNull;
+      check(asyncActionCompletedHandler).isNotNull();
+      check(winrtScope.delegates.every((t) => t.isDelegate)).isTrue();
     });
 
     test('enums ', () {
-      check(winrtScope.name).equals('Windows.winmd');
-      check(winrtScope.enums.length).isGreaterOrEqual(19);
-      final typeDef = winrtScope.enums
-          .where((typeDef) => typeDef.name == 'Windows.Foundation.AsyncStatus')
+      check(win32Scope.enums.length).isGreaterOrEqual(6000);
+      final apttype = win32Scope.enums
+          .where((t) => t.name == 'Windows.Win32.System.Com.APTTYPE')
           .firstOrNull;
-      check(typeDef).isNotNull();
-      check(winrtScope.enums.every((typeDef) => typeDef.isEnum)).isTrue();
+      check(apttype).isNotNull();
+      check(win32Scope.enums.every((t) => t.isEnum)).isTrue();
+
+      check(winrtScope.enums.length).isGreaterOrEqual(1000);
+      final asyncStatus = winrtScope.enums
+          .where((t) => t.name == 'Windows.Foundation.AsyncStatus')
+          .firstOrNull;
+      check(asyncStatus).isNotNull();
+      check(winrtScope.enums.every((t) => t.isEnum)).isTrue();
     });
 
     test('interfaces ', () {
-      check(winrtScope.name).equals('Windows.winmd');
-      check(winrtScope.interfaces.length).isGreaterOrEqual(50);
-      final typeDef = winrtScope.interfaces
-          .where((typeDef) =>
-              typeDef.name == 'Windows.Foundation.IAsyncActionWithProgress`1')
+      check(win32Scope.interfaces.length).isGreaterOrEqual(6000);
+      final iunknown = win32Scope.interfaces
+          .where((t) => t.name == 'Windows.Win32.System.Com.IUnknown')
           .firstOrNull;
-      check(typeDef).isNotNull();
-      check(winrtScope.interfaces.every((typeDef) => typeDef.isInterface))
-          .isTrue();
+      check(iunknown).isNotNull();
+      check(win32Scope.interfaces.every((t) => t.isInterface)).isTrue();
+
+      check(winrtScope.interfaces.length).isGreaterOrEqual(6000);
+      final asyncActionWithProgress = winrtScope.interfaces
+          .where(
+              (t) => t.name == 'Windows.Foundation.IAsyncActionWithProgress`1')
+          .firstOrNull;
+      check(asyncActionWithProgress).isNotNull();
+      check(winrtScope.interfaces.every((t) => t.isInterface)).isTrue();
     });
 
     test('structs ', () {
-      check(winrtScope.name).equals('Windows.winmd');
-      check(winrtScope.structs.length).isGreaterOrEqual(15);
-      final typeDef = winrtScope.structs
-          .where((typeDef) => typeDef.name == 'Windows.Foundation.Point')
+      check(win32Scope.structs.length).isGreaterOrEqual(10000);
+      final hwnd = win32Scope.structs
+          .where((t) => t.name == 'Windows.Win32.Foundation.HWND')
           .firstOrNull;
-      check(typeDef).isNotNull();
-      check(winrtScope.structs.every((typeDef) => typeDef.isStruct)).isTrue();
+      check(hwnd).isNotNull();
+      check(win32Scope.structs.every((t) => t.isStruct)).isTrue();
+
+      check(winrtScope.structs.length).isGreaterOrEqual(90);
+      final point = winrtScope.structs
+          .where((t) => t.name == 'Windows.Foundation.Point')
+          .firstOrNull;
+      check(point).isNotNull();
+      check(winrtScope.structs.every((t) => t.isStruct)).isTrue();
     });
 
     tearDownAll(MetadataStore.close);

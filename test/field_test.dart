@@ -10,8 +10,10 @@ void main() {
   late Scope winrtScope;
 
   setUpAll(() async {
-    win32Scope = await MetadataStore.loadWin32Metadata();
-    winrtScope = await MetadataStore.loadWinRTMetadata();
+    (win32Scope, winrtScope) = await (
+      MetadataStore.loadWin32Metadata(),
+      MetadataStore.loadWinRTMetadata()
+    ).wait;
   });
 
   group('Test Win32 field properties', () {
