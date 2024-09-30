@@ -20,7 +20,7 @@
 /// The `winsock2` library will normally be used in conjunction with the main
 /// `win32` library, and the latter will be required for constants and structs
 /// used here.
-library winsock2;
+library;
 
 // Core Win32 APIs, constants and macros
 export 'src/structs.g.dart'
