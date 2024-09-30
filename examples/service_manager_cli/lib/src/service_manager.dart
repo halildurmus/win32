@@ -430,7 +430,9 @@ abstract class ServiceManager {
           }
 
           if (ssp.dwCurrentState ==
-              SERVICE_STATUS_CURRENT_STATE.SERVICE_STOPPED) break;
+              SERVICE_STATUS_CURRENT_STATE.SERVICE_STOPPED) {
+            break;
+          }
 
           if (GetTickCount() - startTime > timeout) {
             return ServiceStopResult.timedOut;
@@ -534,7 +536,9 @@ abstract class ServiceManager {
               }
 
               if (ssp.dwCurrentState ==
-                  SERVICE_STATUS_CURRENT_STATE.SERVICE_STOPPED) break;
+                  SERVICE_STATUS_CURRENT_STATE.SERVICE_STOPPED) {
+                break;
+              }
 
               if (GetTickCount() - startTime > timeout) {
                 return ServiceStopResult.timedOut;

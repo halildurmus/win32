@@ -68,6 +68,7 @@ void main()
     printf("  'BITMAPFILEHEADER': %zu,\n", sizeof(BITMAPFILEHEADER));
     printf("  'BITMAPINFO': %zu,\n", sizeof(BITMAPINFO));
     printf("  'BITMAPINFOHEADER': %zu,\n", sizeof(BITMAPINFOHEADER));
+    printf("  'BITMAPV5HEADER': %zu,\n", sizeof(BITMAPV5HEADER));
     printf("  'BLENDFUNCTION': %zu,\n", sizeof(BLENDFUNCTION));
     printf("  'BLOB': %zu,\n", sizeof(BLOB));
     printf("  'BLUETOOTH_ADDRESS': %zu,\n", sizeof(BLUETOOTH_ADDRESS));
@@ -134,6 +135,8 @@ void main()
     printf("  'CHAR_INFO': %zu,\n", sizeof(CHAR_INFO));
     printf("  'CHOOSECOLOR': %zu,\n", sizeof(CHOOSECOLORW));
     printf("  'CHOOSEFONT': %zu,\n", sizeof(CHOOSEFONTW));
+    printf("  'CIEXYZ': %zu,\n", sizeof(CIEXYZ));
+    printf("  'CIEXYZTRIPLE': %zu,\n", sizeof(CIEXYZTRIPLE));
     printf("  'CLIENT_ID': %zu,\n", sizeof(CLIENT_ID));
     printf("  'CLIPDATA': %zu,\n", sizeof(CLIPDATA));
     printf("  'COLORADJUSTMENT': %zu,\n", sizeof(COLORADJUSTMENT));

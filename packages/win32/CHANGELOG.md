@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.5.5-wip]
+
+- Add `BITMAPV5HEADER` struct (#892)
+
 ## [5.5.4] - 2024-08-12
 
 - Optimize `BSTR.fromString` constructor (#879)

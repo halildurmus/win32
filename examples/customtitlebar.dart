@@ -405,7 +405,9 @@ int mainWindowProc(int hwnd, int msg, int wParam, int lParam) {
         HTBOTTOMRIGHT,
         HTBOTTOM,
         HTBOTTOMLEFT
-      ].contains(hit)) return hit;
+      ].contains(hit)) {
+        return hit;
+      }
 
       // Looks like adjustment happening in NCCALCSIZE is messing with the detection
       // of the top hit area so manually fixing that.

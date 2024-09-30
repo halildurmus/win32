@@ -341,6 +341,83 @@ base class BITMAPINFOHEADER extends Struct {
   external int biClrImportant;
 }
 
+/// The BITMAPV5HEADER structure is the bitmap information header file. It
+/// is an extended version of the BITMAPINFOHEADER structure.
+///
+/// {@category struct}
+base class BITMAPV5HEADER extends Struct {
+  @Uint32()
+  external int bV5Size;
+
+  @Int32()
+  external int bV5Width;
+
+  @Int32()
+  external int bV5Height;
+
+  @Uint16()
+  external int bV5Planes;
+
+  @Uint16()
+  external int bV5BitCount;
+
+  @Int32()
+  external int bV5Compression;
+
+  @Uint32()
+  external int bV5SizeImage;
+
+  @Int32()
+  external int bV5XPelsPerMeter;
+
+  @Int32()
+  external int bV5YPelsPerMeter;
+
+  @Uint32()
+  external int bV5ClrUsed;
+
+  @Uint32()
+  external int bV5ClrImportant;
+
+  @Uint32()
+  external int bV5RedMask;
+
+  @Uint32()
+  external int bV5GreenMask;
+
+  @Uint32()
+  external int bV5BlueMask;
+
+  @Uint32()
+  external int bV5AlphaMask;
+
+  @Uint32()
+  external int bV5CSType;
+
+  external CIEXYZTRIPLE bV5Endpoints;
+
+  @Uint32()
+  external int bV5GammaRed;
+
+  @Uint32()
+  external int bV5GammaGreen;
+
+  @Uint32()
+  external int bV5GammaBlue;
+
+  @Uint32()
+  external int bV5Intent;
+
+  @Uint32()
+  external int bV5ProfileData;
+
+  @Uint32()
+  external int bV5ProfileSize;
+
+  @Uint32()
+  external int bV5Reserved;
+}
+
 /// The BLENDFUNCTION structure controls blending by specifying the blending
 /// functions for source and destination bitmaps.
 ///
@@ -1612,6 +1689,34 @@ base class CHOOSEFONT extends Struct {
 
   @Int32()
   external int nSizeMax;
+}
+
+/// The CIEXYZ structure contains the x,y, and z coordinates of a specific
+/// color in a specified color space.
+///
+/// {@category struct}
+base class CIEXYZ extends Struct {
+  @Int32()
+  external int ciexyzX;
+
+  @Int32()
+  external int ciexyzY;
+
+  @Int32()
+  external int ciexyzZ;
+}
+
+/// The CIEXYZTRIPLE structure contains the x,y, and z coordinates of the
+/// three colors that correspond to the red, green, and blue endpoints for a
+/// specified logical color space.
+///
+/// {@category struct}
+base class CIEXYZTRIPLE extends Struct {
+  external CIEXYZ ciexyzRed;
+
+  external CIEXYZ ciexyzGreen;
+
+  external CIEXYZ ciexyzBlue;
 }
 
 /// The CLIENT_ID structure contains identifiers of a process and a thread.
