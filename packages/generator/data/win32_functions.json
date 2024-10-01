@@ -4733,6 +4733,10 @@
         "prototype": "BOOL SetCaretPos(\n  int X,\n  int Y\n);",
         "comment": "Moves the caret to the specified coordinates. If the window that owns the caret was created with the CS_OWNDC class style, then the specified coordinates are subject to the mapping mode of the device context associated with that window."
     },
+    "SetClassLongPtr": {
+        "prototype": "ULONG_PTR SetClassLongPtrW(\n  HWND hWnd,\n  int  nIndex,\n  LONG_PTR dwNewLong\n);",
+        "comment": "Changes an attribute of the specified window class."
+    },
     "SetClipboardData": {
         "prototype": "HANDLE SetClipboardData(\n  UINT   uFormat,\n  HANDLE hMem\n);",
         "comment": "Places data on the clipboard in a specified clipboard format. The window must be the current clipboard owner, and the application must have called the OpenClipboard function."

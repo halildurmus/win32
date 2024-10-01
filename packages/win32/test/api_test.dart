@@ -8218,6 +8218,14 @@ void main() {
           int Function(int X, int Y)>('SetCaretPos');
       expect(SetCaretPos, isA<Function>());
     });
+    test('Can instantiate SetClassLongPtr', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final SetClassLongPtr = user32.lookupFunction<
+          IntPtr Function(IntPtr hWnd, Int32 nIndex, IntPtr dwNewLong),
+          int Function(
+              int hWnd, int nIndex, int dwNewLong)>('SetClassLongPtrW');
+      expect(SetClassLongPtr, isA<Function>());
+    });
     test('Can instantiate SetClipboardData', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final SetClipboardData = user32.lookupFunction<

@@ -6733,6 +6733,23 @@ int SetCaretPos(int X, int Y) => _SetCaretPos(X, Y);
 final _SetCaretPos = _user32.lookupFunction<Int32 Function(Int32 X, Int32 Y),
     int Function(int X, int Y)>('SetCaretPos');
 
+/// Changes an attribute of the specified window class.
+///
+/// ```c
+/// ULONG_PTR SetClassLongPtrW(
+///   HWND hWnd,
+///   int  nIndex,
+///   LONG_PTR dwNewLong
+/// );
+/// ```
+/// {@category user32}
+int SetClassLongPtr(int hWnd, int nIndex, int dwNewLong) =>
+    _SetClassLongPtr(hWnd, nIndex, dwNewLong);
+
+final _SetClassLongPtr = _user32.lookupFunction<
+    IntPtr Function(IntPtr hWnd, Int32 nIndex, IntPtr dwNewLong),
+    int Function(int hWnd, int nIndex, int dwNewLong)>('SetClassLongPtrW');
+
 /// Places data on the clipboard in a specified clipboard format. The window
 /// must be the current clipboard owner, and the application must have
 /// called the OpenClipboard function.
