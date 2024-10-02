@@ -203,7 +203,17 @@ All notable changes to this project will be documented in this file.
   `FILE_DEVICE_TYPE.FILE_DEVICE_DVD` (#901)
 - Deprecate `FILE_DEVICE_TAPE` constant in favor of
   `FILE_DEVICE_TYPE.FILE_DEVICE_TAPE` (#901)
-
+- Deprecate `MIM_OPEN` constant in favor of `MM_MIM_OPEN` (#902)
+- Deprecate `MIM_CLOSE` constant in favor of `MM_MIM_CLOSE` (#902)
+- Deprecate `MIM_DATA` constant in favor of `MM_MIM_DATA` (#902)
+- Deprecate `MIM_LONGDATA` constant in favor of `MM_MIM_LONGDATA` (#902)
+- Deprecate `MIM_ERROR` constant in favor of `MM_MIM_ERROR` (#902)
+- Deprecate `MIM_LONGERROR` constant in favor of `MM_MIM_LONGERROR` (#902)
+- Deprecate `MOM_OPEN` constant in favor of `MM_MOM_OPEN` (#902)
+- Deprecate `MOM_CLOSE` constant in favor of `MM_MOM_CLOSE` (#902)
+- Deprecate `MOM_DONE` constant in favor of `MM_MOM_DONE` (#902)
+- Deprecate `MIM_MOREDATA` constant in favor of `MM_MIM_MOREDATA` (#902)
+- Deprecate `MOM_POSITIONCB` constant in favor of `MM_MOM_POSITIONCB` (#902)
 - You can automatically migrate your code to use the new constants by running
   `dart fix --apply` in your terminal.
 

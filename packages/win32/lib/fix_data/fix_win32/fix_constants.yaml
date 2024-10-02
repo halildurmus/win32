@@ -28024,3 +28024,102 @@ transforms:
           uris: ['package:win32/win32.dart']
           field: 'FILE_DEVICE_TAPE'
           inClass: 'FILE_DEVICE_TYPE'
+
+  - title: "Migrate to 'MM_MIM_OPEN'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'MIM_OPEN'
+    changes:
+      - kind: 'rename'
+        newName: 'MM_MIM_OPEN'
+
+  - title: "Migrate to 'MM_MIM_CLOSE'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'MIM_CLOSE'
+    changes:
+      - kind: 'rename'
+        newName: 'MM_MIM_CLOSE'
+
+  - title: "Migrate to 'MM_MIM_DATA'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'MIM_DATA'
+    changes:
+      - kind: 'rename'
+        newName: 'MM_MIM_DATA'
+
+  - title: "Migrate to 'MM_MIM_LONGDATA'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'MIM_LONGDATA'
+    changes:
+      - kind: 'rename'
+        newName: 'MM_MIM_LONGDATA'
+
+  - title: "Migrate to 'MM_MIM_ERROR'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'MIM_ERROR'
+    changes:
+      - kind: 'rename'
+        newName: 'MM_MIM_ERROR'
+
+  - title: "Migrate to 'MM_MIM_LONGERROR'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'MIM_LONGERROR'
+    changes:
+      - kind: 'rename'
+        newName: 'MM_MIM_LONGERROR'
+
+  - title: "Migrate to 'MM_MOM_OPEN'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'MOM_OPEN'
+    changes:
+      - kind: 'rename'
+        newName: 'MM_MOM_OPEN'
+
+  - title: "Migrate to 'MM_MOM_CLOSE'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'MOM_CLOSE'
+    changes:
+      - kind: 'rename'
+        newName: 'MM_MOM_CLOSE'
+
+  - title: "Migrate to 'MM_MOM_DONE'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'MOM_DONE'
+    changes:
+      - kind: 'rename'
+        newName: 'MM_MOM_DONE'
+
+  - title: "Migrate to 'MM_MIM_MOREDATA'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'MIM_MOREDATA'
+    changes:
+      - kind: 'rename'
+        newName: 'MM_MIM_MOREDATA'
+
+  - title: "Migrate to 'MM_MOM_POSITIONCB'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'MOM_POSITIONCB'
+    changes:
+      - kind: 'rename'
+        newName: 'MM_MOM_POSITIONCB'
