@@ -7391,40 +7391,49 @@ const MM_MIXM_CONTROL_CHANGE = 0x3D1;
 
 /// The MIM_OPEN message is sent to a MIDI input callback function when a MIDI
 /// input device is opened.
+@Deprecated('Use MM_MIM_OPEN instead')
 const MIM_OPEN = MM_MIM_OPEN;
 
 /// The MIM_CLOSE message is sent to a MIDI input callback function when a MIDI
 /// input device is closed.
+@Deprecated('Use MM_MIM_CLOSE instead')
 const MIM_CLOSE = MM_MIM_CLOSE;
 
 /// The MIM_DATA message is sent to a MIDI input callback function when a MIDI
 /// message is received by a MIDI input device.
+@Deprecated('Use MM_MIM_DATA instead')
 const MIM_DATA = MM_MIM_DATA;
 
 /// The MIM_LONGDATA message is sent to a MIDI input callback function when a
 /// system-exclusive buffer has been filled with data and is being returned to
 /// the application.
+@Deprecated('Use MM_MIM_LONGDATA instead')
 const MIM_LONGDATA = MM_MIM_LONGDATA;
 
 /// The MIM_ERROR message is sent to a MIDI input callback function when an
 /// invalid MIDI message is received.
+@Deprecated('Use MM_MIM_ERROR instead')
 const MIM_ERROR = MM_MIM_ERROR;
 
 /// The MIM_LONGERROR message is sent to a MIDI input callback function when an
 /// invalid or incomplete MIDI system-exclusive message is received.
+@Deprecated('Use MM_MIM_LONGERROR instead')
 const MIM_LONGERROR = MM_MIM_LONGERROR;
 
 /// The MOM_OPEN message is sent to a MIDI output callback function when a MIDI
 /// output device is opened.
+@Deprecated('Use MM_MOM_OPEN instead')
 const MOM_OPEN = MM_MOM_OPEN;
 
 /// The MOM_CLOSE message is sent to a MIDI output callback function when a MIDI
 /// output device is closed.
+@Deprecated('Use MM_MOM_CLOSE instead')
 const MOM_CLOSE = MM_MOM_CLOSE;
 
 /// The MOM_DONE message is sent to a MIDI output callback function when the
 /// specified system-exclusive or stream buffer has been played and is being
 /// returned to the application.
+@Deprecated('Use MM_MOM_DONE instead')
 const MOM_DONE = MM_MOM_DONE;
 
 /// The MIM_MOREDATA message is sent to a MIDI input callback function when a
@@ -7432,10 +7441,12 @@ const MOM_DONE = MM_MOM_DONE;
 /// processing MIM_DATA messages fast enough to keep up with the input device
 /// driver. The callback function receives this message only when the
 /// application specifies MIDI_IO_STATUS in the call to the midiInOpen function.
+@Deprecated('Use MM_MIM_MOREDATA instead')
 const MIM_MOREDATA = MM_MIM_MOREDATA;
 
 /// The MOM_POSITION message is sent when an MEVT_F_CALLBACK event is reached in
 /// the MIDI output stream.
+@Deprecated('Use MM_MOM_POSITIONCB instead')
 const MOM_POSITIONCB = MM_MOM_POSITIONCB;
 
 // -----------------------------------------------------------------------------
