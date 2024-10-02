@@ -1,7 +1,7 @@
 ## What's here?
 
 For information about the files in this directory, see
-https://github.com/flutter/flutter/wiki/Data-driven-Fixes#testing.
+<https://github.com/flutter/flutter/wiki/Data-driven-Fixes#testing>.
 
 ## Organization
 
