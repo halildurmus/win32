@@ -306,6 +306,7 @@ const DISPATCH_PROPERTYPUTREF = 0x8;
 const ERROR_SUCCESS = 0;
 
 /// The operation completed successfully.
+@Deprecated('Use WIN32_ERROR.NO_ERROR instead')
 const NO_ERROR = 0;
 
 /// The operation completed successfully.
@@ -6694,17 +6695,21 @@ class VARENUM {
 /// type by getting the Value property. Applications should set this flag only
 /// if necessary, because it makes their behavior inconsistent with other
 /// applications.
+@Deprecated('Use VAR_CHANGE_FLAGS.VARIANT_NOVALUEPROP instead')
 const VARIANT_NOVALUEPROP = 0x01;
 
 /// Converts a VT_BOOL value to a string containing either "True" or "False".
+@Deprecated('Use VAR_CHANGE_FLAGS.VARIANT_ALPHABOOL instead')
 const VARIANT_ALPHABOOL = 0x02;
 
 /// For conversions to or from VT_BSTR, passes LOCALE_NOUSEROVERRIDE to the core
 /// coercion routines.
+@Deprecated('Use VAR_CHANGE_FLAGS.VARIANT_NOUSEROVERRIDE instead')
 const VARIANT_NOUSEROVERRIDE = 0x04;
 
 /// For conversions from VT_BOOL to VT_BSTR and back, uses the language
 /// specified by the locale in use on the local computer.
+@Deprecated('Use VAR_CHANGE_FLAGS.VARIANT_LOCALBOOL instead')
 const VARIANT_LOCALBOOL = 0x10;
 
 // -----------------------------------------------------------------------------
@@ -6991,23 +6996,29 @@ const CALLBACK_EVENT = 0x00050000;
 
 /// The function queries the device to determine whether it supports the given
 /// format, but it does not open the device.
+@Deprecated('Use MIDI_WAVE_OPEN_TYPE.WAVE_FORMAT_QUERY instead')
 const WAVE_FORMAT_QUERY = 0x0001;
 
 /// If this flag is specified, a synchronous waveform-audio device can be
 /// opened. If this flag is not specified while opening a synchronous driver,
 /// the device will fail to open.
+@Deprecated('Use MIDI_WAVE_OPEN_TYPE.WAVE_ALLOWSYNC instead')
 const WAVE_ALLOWSYNC = 0x0002;
 
 /// If this flag is specified, the uDeviceID parameter specifies a
 /// waveform-audio device to be mapped to by the wave mapper.
+@Deprecated('Use MIDI_WAVE_OPEN_TYPE.WAVE_MAPPED instead')
 const WAVE_MAPPED = 0x0004;
 
 /// If this flag is specified, the ACM driver does not perform conversions on
 /// the audio data.
+@Deprecated('Use MIDI_WAVE_OPEN_TYPE.WAVE_FORMAT_DIRECT instead')
 const WAVE_FORMAT_DIRECT = 0x0008;
 
 /// If this flag is specified and the uDeviceID parameter is WAVE_MAPPER, the
 /// function opens the default communication device.
+@Deprecated(
+    'Use MIDI_WAVE_OPEN_TYPE.WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE instead')
 const WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE = 0x0010;
 
 // -----------------------------------------------------------------------------
@@ -7746,15 +7757,18 @@ class MONITOR_DPI_TYPE {
 // -----------------------------------------------------------------------------
 
 /// Imposes no restrictions on where the window can be displayed.
+@Deprecated('Use WINDOW_DISPLAY_AFFINITY.WDA_NONE instead')
 const WDA_NONE = 0x00000000;
 
 /// The window content is displayed only on a monitor. Everywhere else, the
 /// window appears with no content.
+@Deprecated('Use WINDOW_DISPLAY_AFFINITY.WDA_MONITOR instead')
 const WDA_MONITOR = 0x00000001;
 
 /// The window is displayed only on a monitor. Everywhere else, the window does
 /// not appear at all. One use for this affinity is for windows that show video
 /// recording controls, so that the controls are not included in the capture.
+@Deprecated('Use WINDOW_DISPLAY_AFFINITY.WDA_EXCLUDEFROMCAPTURE instead')
 const WDA_EXCLUDEFROMCAPTURE = 0x00000011;
 
 // -----------------------------------------------------------------------------
@@ -8491,26 +8505,35 @@ class DIALOG_DPI_CHANGE_BEHAVIORS {
 
 /// DISPLAY_DEVICE_ACTIVE specifies whether a monitor is presented as being "on"
 /// by the respective GDI view.
+@Deprecated('Use DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_ACTIVE instead')
 const DISPLAY_DEVICE_ACTIVE = 0x00000001;
 
 /// The primary desktop is on the device. For a system with a single display
 /// card, this is always set. For a system with multiple display cards, only one
 /// device can have this set.
+@Deprecated(
+    'Use DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_PRIMARY_DEVICE instead')
 const DISPLAY_DEVICE_PRIMARY_DEVICE = 0x00000004;
 
 /// Represents a pseudo device used to mirror application drawing for remoting
 /// or other purposes. An invisible pseudo monitor is associated with this
 /// device. For example, NetMeeting uses it. Note that GetSystemMetrics
 /// (SM_MONITORS) only accounts for visible display monitors.
+@Deprecated(
+    'Use DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_MIRRORING_DRIVER instead')
 const DISPLAY_DEVICE_MIRRORING_DRIVER = 0x00000008;
 
 /// The device is VGA compatible.
+@Deprecated(
+    'Use DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_VGA_COMPATIBLE instead')
 const DISPLAY_DEVICE_VGA_COMPATIBLE = 0x00000010;
 
 /// The device is removable; it cannot be the primary display.
+@Deprecated('Use DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_REMOVABLE instead')
 const DISPLAY_DEVICE_REMOVABLE = 0x00000020;
 
 /// The device has more display modes than its output devices support.
+@Deprecated('Use DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_MODESPRUNED instead')
 const DISPLAY_DEVICE_MODESPRUNED = 0x08000000;
 
 // -----------------------------------------------------------------------------
@@ -8655,51 +8678,67 @@ class DESKTOP_WALLPAPER_POSITION {
 // -----------------------------------------------------------------------------
 
 /// play synchronously (default)
+@Deprecated('Use SND_FLAGS.SND_SYNC instead')
 const SND_SYNC = 0x0000;
 
 /// play asynchronously
+@Deprecated('Use SND_FLAGS.SND_ASYNC instead')
 const SND_ASYNC = 0x0001;
 
 /// silence (!default) if sound not found
+@Deprecated('Use SND_FLAGS.SND_NODEFAULT instead')
 const SND_NODEFAULT = 0x0002;
 
 /// pszSound points to a memory file
+@Deprecated('Use SND_FLAGS.SND_MEMORY instead')
 const SND_MEMORY = 0x0004;
 
 /// loop the sound until next sndPlaySound
+@Deprecated('Use SND_FLAGS.SND_LOOP instead')
 const SND_LOOP = 0x0008;
 
 /// don't stop any currently playing sound
+@Deprecated('Use SND_FLAGS.SND_NOSTOP instead')
 const SND_NOSTOP = 0x0010;
 
 /// don't wait if the driver is busy
+@Deprecated('Use SND_FLAGS.SND_NOWAIT instead')
 const SND_NOWAIT = 0x00002000;
 
 /// name is a registry alias
+@Deprecated('Use SND_FLAGS.SND_ALIAS instead')
 const SND_ALIAS = 0x00010000;
 
 /// alias is a predefined ID
+@Deprecated('Use SND_FLAGS.SND_ALIAS_ID instead')
 const SND_ALIAS_ID = 0x00110000;
 
 /// name is file name
+@Deprecated('Use SND_FLAGS.SND_FILENAME instead')
 const SND_FILENAME = 0x00020000;
 
 /// name is resource name or atom
+@Deprecated('Use SND_FLAGS.SND_RESOURCE instead')
 const SND_RESOURCE = 0x00040004;
 
 /// purge non-static events for task
+@Deprecated('Use SND_FLAGS.SND_PURGE instead')
 const SND_PURGE = 0x0040;
 
 /// look for application specific association
+@Deprecated('Use SND_FLAGS.SND_APPLICATION instead')
 const SND_APPLICATION = 0x0080;
 
 /// Generate a SoundSentry event with this sound
+@Deprecated('Use SND_FLAGS.SND_SENTRY instead')
 const SND_SENTRY = 0x00080000;
 
 /// Treat this as a "ring" from a communications app - don't duck me
+@Deprecated('Use SND_FLAGS.SND_RING instead')
 const SND_RING = 0x00100000;
 
 /// Treat this as a system sound
+@Deprecated('Use SND_FLAGS.SND_SYSTEM instead')
 const SND_SYSTEM = 0x00200000;
 
 // -----------------------------------------------------------------------------
@@ -9443,55 +9482,72 @@ class ACTIVATEOPTIONS {
 // -----------------------------------------------------------------------------
 
 /// The Value member is used.
+@Deprecated('Use SYMBOL_INFO_FLAGS.SYMFLAG_VALUEPRESENT instead')
 const SYMFLAG_VALUEPRESENT = 0x00000001;
 
 /// The symbol is a register. The Register member is used.
+@Deprecated('Use SYMBOL_INFO_FLAGS.SYMFLAG_REGISTER instead')
 const SYMFLAG_REGISTER = 0x00000008;
 
 /// Offsets are register relative.
+@Deprecated('Use SYMBOL_INFO_FLAGS.SYMFLAG_REGREL instead')
 const SYMFLAG_REGREL = 0x00000010;
 
 /// Offsets are frame relative.
+@Deprecated('Use SYMBOL_INFO_FLAGS.SYMFLAG_FRAMEREL instead')
 const SYMFLAG_FRAMEREL = 0x00000020;
 
 /// The symbol is a parameter.
+@Deprecated('Use SYMBOL_INFO_FLAGS.SYMFLAG_PARAMETER instead')
 const SYMFLAG_PARAMETER = 0x00000040;
 
 /// The symbol is a local variable.
+@Deprecated('Use SYMBOL_INFO_FLAGS.SYMFLAG_LOCAL instead')
 const SYMFLAG_LOCAL = 0x00000080;
 
 /// The symbol is a constant.
+@Deprecated('Use SYMBOL_INFO_FLAGS.SYMFLAG_CONSTANT instead')
 const SYMFLAG_CONSTANT = 0x00000100;
 
 /// The symbol is from the export table.
+@Deprecated('Use SYMBOL_INFO_FLAGS.SYMFLAG_EXPORT instead')
 const SYMFLAG_EXPORT = 0x00000200;
 
 /// The symbol is a forwarder.
+@Deprecated('Use SYMBOL_INFO_FLAGS.SYMFLAG_FORWARDER instead')
 const SYMFLAG_FORWARDER = 0x00000400;
 
 /// The symbol is a known function.
+@Deprecated('Use SYMBOL_INFO_FLAGS.SYMFLAG_FUNCTION instead')
 const SYMFLAG_FUNCTION = 0x00000800;
 
 /// The symbol is a virtual symbol created by the SymAddSymbol function.
+@Deprecated('Use SYMBOL_INFO_FLAGS.SYMFLAG_VIRTUAL instead')
 const SYMFLAG_VIRTUAL = 0x00001000;
 
 /// The symbol is a thunk.
+@Deprecated('Use SYMBOL_INFO_FLAGS.SYMFLAG_THUNK instead')
 const SYMFLAG_THUNK = 0x00002000;
 
 /// The symbol is an offset into the TLS data area.
+@Deprecated('Use SYMBOL_INFO_FLAGS.SYMFLAG_TLSREL instead')
 const SYMFLAG_TLSREL = 0x00004000;
 
 /// The symbol is a managed code slot.
+@Deprecated('Use SYMBOL_INFO_FLAGS.SYMFLAG_SLOT instead')
 const SYMFLAG_SLOT = 0x00008000;
 
 /// The symbol address is an offset relative to the beginning of the
 /// intermediate language block. This applies to managed code only.
+@Deprecated('Use SYMBOL_INFO_FLAGS.SYMFLAG_ILREL instead')
 const SYMFLAG_ILREL = 0x00010000;
 
 /// The symbol is managed metadata.
+@Deprecated('Use SYMBOL_INFO_FLAGS.SYMFLAG_METADATA instead')
 const SYMFLAG_METADATA = 0x00020000;
 
 /// The symbol is a CLR token.
+@Deprecated('Use SYMBOL_INFO_FLAGS.SYMFLAG_CLR_TOKEN instead')
 const SYMFLAG_CLR_TOKEN = 0x00040000;
 
 // -----------------------------------------------------------------------------
@@ -9915,9 +9971,11 @@ const SCARD_UNPOWER_CARD = 2;
 const SCARD_EJECT_CARD = 3;
 
 /// Database operations are performed within the domain of the user.
+@Deprecated('Use SCARD_SCOPE.SCARD_SCOPE_USER instead')
 const SCARD_SCOPE_USER = 0;
 
 /// Database operations are performed within the domain of the current terminal.
+@Deprecated('Use SCARD_SCOPE.SCARD_SCOPE_TERMINAL instead')
 const SCARD_SCOPE_TERMINAL = 1;
 
 /// Database operations are performed within the domain of the system. The

@@ -26752,3 +26752,1275 @@ transforms:
         newElement:
           uris: ['package:win32/win32.dart']
           variable: 'WBEM_INFINITE'
+
+  - title: "Migrate to 'SCARD_SCOPE.SCARD_SCOPE_USER'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'SCARD_SCOPE_USER'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'SCARD_SCOPE_USER'
+          inClass: 'SCARD_SCOPE'
+
+  - title: "Migrate to 'SCARD_SCOPE.SCARD_SCOPE_TERMINAL'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'SCARD_SCOPE_TERMINAL'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'SCARD_SCOPE_TERMINAL'
+          inClass: 'SCARD_SCOPE'
+
+  - title: "Migrate to 'SYMBOL_INFO_FLAGS.SYMFLAG_VALUEPRESENT'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'SYMFLAG_VALUEPRESENT'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'SYMFLAG_VALUEPRESENT'
+          inClass: 'SYMBOL_INFO_FLAGS'
+
+  - title: "Migrate to 'SYMBOL_INFO_FLAGS.SYMFLAG_REGISTER'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'SYMFLAG_REGISTER'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'SYMFLAG_REGISTER'
+          inClass: 'SYMBOL_INFO_FLAGS'
+
+  - title: "Migrate to 'SYMBOL_INFO_FLAGS.SYMFLAG_REGREL'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'SYMFLAG_REGREL'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'SYMFLAG_REGREL'
+          inClass: 'SYMBOL_INFO_FLAGS'
+
+  - title: "Migrate to 'SYMBOL_INFO_FLAGS.SYMFLAG_FRAMEREL'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'SYMFLAG_FRAMEREL'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'SYMFLAG_FRAMEREL'
+          inClass: 'SYMBOL_INFO_FLAGS'
+
+  - title: "Migrate to 'SYMBOL_INFO_FLAGS.SYMFLAG_PARAMETER'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'SYMFLAG_PARAMETER'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'SYMFLAG_PARAMETER'
+          inClass: 'SYMBOL_INFO_FLAGS'
+
+  - title: "Migrate to 'SYMBOL_INFO_FLAGS.SYMFLAG_LOCAL'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'SYMFLAG_LOCAL'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'SYMFLAG_LOCAL'
+          inClass: 'SYMBOL_INFO_FLAGS'
+
+  - title: "Migrate to 'SYMBOL_INFO_FLAGS.SYMFLAG_CONSTANT'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'SYMFLAG_CONSTANT'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'SYMFLAG_CONSTANT'
+          inClass: 'SYMBOL_INFO_FLAGS'
+
+  - title: "Migrate to 'SYMBOL_INFO_FLAGS.SYMFLAG_EXPORT'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'SYMFLAG_EXPORT'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'SYMFLAG_EXPORT'
+          inClass: 'SYMBOL_INFO_FLAGS'
+
+  - title: "Migrate to 'SYMBOL_INFO_FLAGS.SYMFLAG_FORWARDER'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'SYMFLAG_FORWARDER'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'SYMFLAG_FORWARDER'
+          inClass: 'SYMBOL_INFO_FLAGS'
+
+  - title: "Migrate to 'SYMBOL_INFO_FLAGS.SYMFLAG_FUNCTION'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'SYMFLAG_FUNCTION'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'SYMFLAG_FUNCTION'
+          inClass: 'SYMBOL_INFO_FLAGS'
+
+  - title: "Migrate to 'SYMBOL_INFO_FLAGS.SYMFLAG_VIRTUAL'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'SYMFLAG_VIRTUAL'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'SYMFLAG_VIRTUAL'
+          inClass: 'SYMBOL_INFO_FLAGS'
+
+  - title: "Migrate to 'SYMBOL_INFO_FLAGS.SYMFLAG_THUNK'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'SYMFLAG_THUNK'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'SYMFLAG_THUNK'
+          inClass: 'SYMBOL_INFO_FLAGS'
+
+  - title: "Migrate to 'SYMBOL_INFO_FLAGS.SYMFLAG_TLSREL'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'SYMFLAG_TLSREL'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'SYMFLAG_TLSREL'
+          inClass: 'SYMBOL_INFO_FLAGS'
+
+  - title: "Migrate to 'SYMBOL_INFO_FLAGS.SYMFLAG_SLOT'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'SYMFLAG_SLOT'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'SYMFLAG_SLOT'
+          inClass: 'SYMBOL_INFO_FLAGS'
+
+  - title: "Migrate to 'SYMBOL_INFO_FLAGS.SYMFLAG_ILREL'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'SYMFLAG_ILREL'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'SYMFLAG_ILREL'
+          inClass: 'SYMBOL_INFO_FLAGS'
+
+  - title: "Migrate to 'SYMBOL_INFO_FLAGS.SYMFLAG_METADATA'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'SYMFLAG_METADATA'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'SYMFLAG_METADATA'
+          inClass: 'SYMBOL_INFO_FLAGS'
+
+  - title: "Migrate to 'SYMBOL_INFO_FLAGS.SYMFLAG_CLR_TOKEN'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'SYMFLAG_CLR_TOKEN'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'SYMFLAG_CLR_TOKEN'
+          inClass: 'SYMBOL_INFO_FLAGS'
+
+  - title: "Migrate to 'SND_FLAGS.SND_SYNC'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'SND_SYNC'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'SND_SYNC'
+          inClass: 'SND_FLAGS'
+
+  - title: "Migrate to 'SND_FLAGS.SND_ASYNC'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'SND_ASYNC'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'SND_ASYNC'
+          inClass: 'SND_FLAGS'
+
+  - title: "Migrate to 'SND_FLAGS.SND_NODEFAULT'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'SND_NODEFAULT'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'SND_NODEFAULT'
+          inClass: 'SND_FLAGS'
+
+  - title: "Migrate to 'SND_FLAGS.SND_MEMORY'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'SND_MEMORY'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'SND_MEMORY'
+          inClass: 'SND_FLAGS'
+
+  - title: "Migrate to 'SND_FLAGS.SND_LOOP'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'SND_LOOP'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'SND_LOOP'
+          inClass: 'SND_FLAGS'
+
+  - title: "Migrate to 'SND_FLAGS.SND_NOSTOP'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'SND_NOSTOP'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'SND_NOSTOP'
+          inClass: 'SND_FLAGS'
+
+  - title: "Migrate to 'SND_FLAGS.SND_NOWAIT'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'SND_NOWAIT'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'SND_NOWAIT'
+          inClass: 'SND_FLAGS'
+
+  - title: "Migrate to 'SND_FLAGS.SND_ALIAS'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'SND_ALIAS'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'SND_ALIAS'
+          inClass: 'SND_FLAGS'
+
+  - title: "Migrate to 'SND_FLAGS.SND_ALIAS_ID'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'SND_ALIAS_ID'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'SND_ALIAS_ID'
+          inClass: 'SND_FLAGS'
+
+  - title: "Migrate to 'SND_FLAGS.SND_FILENAME'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'SND_FILENAME'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'SND_FILENAME'
+          inClass: 'SND_FLAGS'
+
+  - title: "Migrate to 'SND_FLAGS.SND_RESOURCE'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'SND_RESOURCE'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'SND_RESOURCE'
+          inClass: 'SND_FLAGS'
+
+  - title: "Migrate to 'SND_FLAGS.SND_PURGE'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'SND_PURGE'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'SND_PURGE'
+          inClass: 'SND_FLAGS'
+
+  - title: "Migrate to 'SND_FLAGS.SND_APPLICATION'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'SND_APPLICATION'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'SND_APPLICATION'
+          inClass: 'SND_FLAGS'
+
+  - title: "Migrate to 'SND_FLAGS.SND_SENTRY'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'SND_SENTRY'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'SND_SENTRY'
+          inClass: 'SND_FLAGS'
+
+  - title: "Migrate to 'SND_FLAGS.SND_RING'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'SND_RING'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'SND_RING'
+          inClass: 'SND_FLAGS'
+
+  - title: "Migrate to 'SND_FLAGS.SND_SYSTEM'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'SND_SYSTEM'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'SND_SYSTEM'
+          inClass: 'SND_FLAGS'
+
+  - title: "Migrate to 'DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_MIRRORING_DRIVER'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'DISPLAY_DEVICE_MIRRORING_DRIVER'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'DISPLAY_DEVICE_MIRRORING_DRIVER'
+          inClass: 'DISPLAY_DEVICE_STATE_FLAGS'
+
+  - title: "Migrate to 'DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_VGA_COMPATIBLE'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'DISPLAY_DEVICE_VGA_COMPATIBLE'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'DISPLAY_DEVICE_VGA_COMPATIBLE'
+          inClass: 'DISPLAY_DEVICE_STATE_FLAGS'
+
+  - title: "Migrate to 'DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_REMOVABLE'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'DISPLAY_DEVICE_REMOVABLE'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'DISPLAY_DEVICE_REMOVABLE'
+          inClass: 'DISPLAY_DEVICE_STATE_FLAGS'
+
+  - title: "Migrate to 'DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_MODESPRUNED'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'DISPLAY_DEVICE_MODESPRUNED'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'DISPLAY_DEVICE_MODESPRUNED'
+          inClass: 'DISPLAY_DEVICE_STATE_FLAGS'
+
+  - title: "Migrate to 'DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_ACTIVE'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'DISPLAY_DEVICE_ACTIVE'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'DISPLAY_DEVICE_ACTIVE'
+          inClass: 'DISPLAY_DEVICE_STATE_FLAGS'
+
+  - title: "Migrate to 'DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_PRIMARY_DEVICE'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'DISPLAY_DEVICE_PRIMARY_DEVICE'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'DISPLAY_DEVICE_PRIMARY_DEVICE'
+          inClass: 'DISPLAY_DEVICE_STATE_FLAGS'
+
+  - title: "Migrate to 'WINDOW_DISPLAY_AFFINITY.WDA_NONE'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'WDA_NONE'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'WDA_NONE'
+          inClass: 'WINDOW_DISPLAY_AFFINITY'
+
+  - title: "Migrate to 'WINDOW_DISPLAY_AFFINITY.WDA_MONITOR'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'WDA_MONITOR'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'WDA_MONITOR'
+          inClass: 'WINDOW_DISPLAY_AFFINITY'
+
+  - title: "Migrate to 'WINDOW_DISPLAY_AFFINITY.WDA_EXCLUDEFROMCAPTURE'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'WDA_EXCLUDEFROMCAPTURE'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'WDA_EXCLUDEFROMCAPTURE'
+          inClass: 'WINDOW_DISPLAY_AFFINITY'
+
+  - title: "Migrate to 'MIDI_WAVE_OPEN_TYPE.WAVE_FORMAT_QUERY'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'WAVE_FORMAT_QUERY'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'WAVE_FORMAT_QUERY'
+          inClass: 'MIDI_WAVE_OPEN_TYPE'
+
+  - title: "Migrate to 'MIDI_WAVE_OPEN_TYPE.WAVE_ALLOWSYNC'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'WAVE_ALLOWSYNC'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'WAVE_ALLOWSYNC'
+          inClass: 'MIDI_WAVE_OPEN_TYPE'
+
+  - title: "Migrate to 'MIDI_WAVE_OPEN_TYPE.WAVE_MAPPED'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'WAVE_MAPPED'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'WAVE_MAPPED'
+          inClass: 'MIDI_WAVE_OPEN_TYPE'
+
+  - title: "Migrate to 'MIDI_WAVE_OPEN_TYPE.WAVE_FORMAT_DIRECT'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'WAVE_FORMAT_DIRECT'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'WAVE_FORMAT_DIRECT'
+          inClass: 'MIDI_WAVE_OPEN_TYPE'
+
+  - title: "Migrate to 'MIDI_WAVE_OPEN_TYPE.WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE'
+          inClass: 'MIDI_WAVE_OPEN_TYPE'
+
+  - title: "Migrate to 'VAR_CHANGE_FLAGS.VARIANT_NOVALUEPROP'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'VARIANT_NOVALUEPROP'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'VARIANT_NOVALUEPROP'
+          inClass: 'VAR_CHANGE_FLAGS'
+
+  - title: "Migrate to 'VAR_CHANGE_FLAGS.VARIANT_ALPHABOOL'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'VARIANT_ALPHABOOL'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'VARIANT_ALPHABOOL'
+          inClass: 'VAR_CHANGE_FLAGS'
+
+  - title: "Migrate to 'VAR_CHANGE_FLAGS.VARIANT_NOUSEROVERRIDE'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'VARIANT_NOUSEROVERRIDE'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'VARIANT_NOUSEROVERRIDE'
+          inClass: 'VAR_CHANGE_FLAGS'
+
+  - title: "Migrate to 'VAR_CHANGE_FLAGS.VARIANT_LOCALBOOL'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'VARIANT_LOCALBOOL'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'VARIANT_LOCALBOOL'
+          inClass: 'VAR_CHANGE_FLAGS'
+
+  - title: "Migrate to 'WIN32_ERROR.NO_ERROR'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'NO_ERROR'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'NO_ERROR'
+          inClass: 'WIN32_ERROR'
+
+  - title: "Migrate to 'DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_ATTACHED_TO_DESKTOP'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'DISPLAY_DEVICE_ATTACHED_TO_DESKTOP'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'DISPLAY_DEVICE_ATTACHED_TO_DESKTOP'
+          inClass: 'DISPLAY_DEVICE_STATE_FLAGS'
+
+  - title: "Migrate to 'DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_ATTACHED'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'DISPLAY_DEVICE_ATTACHED'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'DISPLAY_DEVICE_ATTACHED'
+          inClass: 'DISPLAY_DEVICE_STATE_FLAGS'
+
+  - title: "Migrate to 'DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_MULTI_DRIVER'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'DISPLAY_DEVICE_MULTI_DRIVER'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'DISPLAY_DEVICE_MULTI_DRIVER'
+          inClass: 'DISPLAY_DEVICE_STATE_FLAGS'
+
+  - title: "Migrate to 'DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_ACC_DRIVER'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'DISPLAY_DEVICE_ACC_DRIVER'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'DISPLAY_DEVICE_ACC_DRIVER'
+          inClass: 'DISPLAY_DEVICE_STATE_FLAGS'
+
+  - title: "Migrate to 'DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_UNSAFE_MODES_ON'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'DISPLAY_DEVICE_UNSAFE_MODES_ON'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'DISPLAY_DEVICE_UNSAFE_MODES_ON'
+          inClass: 'DISPLAY_DEVICE_STATE_FLAGS'
+
+  - title: "Migrate to 'DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_TS_COMPATIBLE'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'DISPLAY_DEVICE_TS_COMPATIBLE'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'DISPLAY_DEVICE_TS_COMPATIBLE'
+          inClass: 'DISPLAY_DEVICE_STATE_FLAGS'
+
+  - title: "Migrate to 'DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_RDPUDD'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'DISPLAY_DEVICE_RDPUDD'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'DISPLAY_DEVICE_RDPUDD'
+          inClass: 'DISPLAY_DEVICE_STATE_FLAGS'
+
+  - title: "Migrate to 'DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_REMOTE'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'DISPLAY_DEVICE_REMOTE'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'DISPLAY_DEVICE_REMOTE'
+          inClass: 'DISPLAY_DEVICE_STATE_FLAGS'
+
+  - title: "Migrate to 'DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_DISCONNECT'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'DISPLAY_DEVICE_DISCONNECT'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'DISPLAY_DEVICE_DISCONNECT'
+          inClass: 'DISPLAY_DEVICE_STATE_FLAGS'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_UNDEFINED'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_UNDEFINED'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_UNDEFINED'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_ESSENTIALBUSINESS_SERVER_MGMT'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_ESSENTIALBUSINESS_SERVER_MGMT'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_ESSENTIALBUSINESS_SERVER_MGMT'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_ESSENTIALBUSINESS_SERVER_ADDL'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_ESSENTIALBUSINESS_SERVER_ADDL'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_ESSENTIALBUSINESS_SERVER_ADDL'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_ESSENTIALBUSINESS_SERVER_MGMTSVC'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_ESSENTIALBUSINESS_SERVER_MGMTSVC'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_ESSENTIALBUSINESS_SERVER_MGMTSVC'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_ESSENTIALBUSINESS_SERVER_ADDLSVC'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_ESSENTIALBUSINESS_SERVER_ADDLSVC'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_ESSENTIALBUSINESS_SERVER_ADDLSVC'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_SMALLBUSINESS_SERVER_PREMIUM_CORE'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_SMALLBUSINESS_SERVER_PREMIUM_CORE'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_SMALLBUSINESS_SERVER_PREMIUM_CORE'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_CLUSTER_SERVER_V'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_CLUSTER_SERVER_V'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_CLUSTER_SERVER_V'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_STARTER_E'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_STARTER_E'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_STARTER_E'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_HOME_BASIC_E'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_HOME_BASIC_E'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_HOME_BASIC_E'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_HOME_PREMIUM_E'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_HOME_PREMIUM_E'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_HOME_PREMIUM_E'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_PROFESSIONAL_E'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_PROFESSIONAL_E'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_PROFESSIONAL_E'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_ENTERPRISE_E'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_ENTERPRISE_E'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_ENTERPRISE_E'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_ULTIMATE_E'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_ULTIMATE_E'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_ULTIMATE_E'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_ENTERPRISE_EVALUATION'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_ENTERPRISE_EVALUATION'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_ENTERPRISE_EVALUATION'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_MULTIPOINT_STANDARD_SERVER'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_MULTIPOINT_STANDARD_SERVER'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_MULTIPOINT_STANDARD_SERVER'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_MULTIPOINT_PREMIUM_SERVER'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_MULTIPOINT_PREMIUM_SERVER'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_MULTIPOINT_PREMIUM_SERVER'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_STANDARD_EVALUATION_SERVER'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_STANDARD_EVALUATION_SERVER'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_STANDARD_EVALUATION_SERVER'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_DATACENTER_EVALUATION_SERVER'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_DATACENTER_EVALUATION_SERVER'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_DATACENTER_EVALUATION_SERVER'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_ENTERPRISE_N_EVALUATION'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_ENTERPRISE_N_EVALUATION'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_ENTERPRISE_N_EVALUATION'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_STORAGE_WORKGROUP_EVALUATION_SERVER'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_STORAGE_WORKGROUP_EVALUATION_SERVER'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_STORAGE_WORKGROUP_EVALUATION_SERVER'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_STORAGE_STANDARD_EVALUATION_SERVER'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_STORAGE_STANDARD_EVALUATION_SERVER'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_STORAGE_STANDARD_EVALUATION_SERVER'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_CORE_N'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_CORE_N'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_CORE_N'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_CORE_COUNTRYSPECIFIC'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_CORE_COUNTRYSPECIFIC'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_CORE_COUNTRYSPECIFIC'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_CORE_SINGLELANGUAGE'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_CORE_SINGLELANGUAGE'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_CORE_SINGLELANGUAGE'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_CORE'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_CORE'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_CORE'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_PROFESSIONAL_WMC'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_PROFESSIONAL_WMC'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_PROFESSIONAL_WMC'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_EDUCATION'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_EDUCATION'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_EDUCATION'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_EDUCATION_N'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_EDUCATION_N'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_EDUCATION_N'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_IOTUAP'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_IOTUAP'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_IOTUAP'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_ENTERPRISE_S'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_ENTERPRISE_S'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_ENTERPRISE_S'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_ENTERPRISE_S_N'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_ENTERPRISE_S_N'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_ENTERPRISE_S_N'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_ENTERPRISE_S_EVALUATION'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_ENTERPRISE_S_EVALUATION'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_ENTERPRISE_S_EVALUATION'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_ENTERPRISE_S_N_EVALUATION'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_ENTERPRISE_S_N_EVALUATION'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_ENTERPRISE_S_N_EVALUATION'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_DATACENTER_A_SERVER_CORE'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_DATACENTER_A_SERVER_CORE'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_DATACENTER_A_SERVER_CORE'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_STANDARD_A_SERVER_CORE'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_STANDARD_A_SERVER_CORE'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_STANDARD_A_SERVER_CORE'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_PRO_WORKSTATION'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_PRO_WORKSTATION'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_PRO_WORKSTATION'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_PRO_WORKSTATION_N'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_PRO_WORKSTATION_N'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_PRO_WORKSTATION_N'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_ANDROMEDA'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_ANDROMEDA'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_ANDROMEDA'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_XBOX_NATIVEOS'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'PRODUCT_XBOX_NATIVEOS'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'PRODUCT_XBOX_NATIVEOS'
+          inClass: 'OS_PRODUCT_TYPE'
+
+  - title: "Migrate to 'FILE_DEVICE_TYPE.FILE_DEVICE_CD_ROM'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'FILE_DEVICE_CD_ROM'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'FILE_DEVICE_CD_ROM'
+          inClass: 'FILE_DEVICE_TYPE'
+
+  - title: "Migrate to 'FILE_DEVICE_TYPE.FILE_DEVICE_DISK'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'FILE_DEVICE_DISK'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'FILE_DEVICE_DISK'
+          inClass: 'FILE_DEVICE_TYPE'
+
+  - title: "Migrate to 'FILE_DEVICE_TYPE.FILE_DEVICE_DVD'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'FILE_DEVICE_DVD'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'FILE_DEVICE_DVD'
+          inClass: 'FILE_DEVICE_TYPE'
+
+  - title: "Migrate to 'FILE_DEVICE_TYPE.FILE_DEVICE_TAPE'"
+    date: 2024-10-02
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'FILE_DEVICE_TAPE'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'FILE_DEVICE_TAPE'
+          inClass: 'FILE_DEVICE_TYPE'

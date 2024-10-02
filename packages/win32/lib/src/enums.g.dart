@@ -1373,6 +1373,25 @@ extension type const DISPLAYCONFIG_VIDEO_OUTPUT_TECHNOLOGY(int _)
 }
 
 /// {@category enum}
+extension type const DISPLAY_DEVICE_STATE_FLAGS(int _) implements int {
+  static const DISPLAY_DEVICE_ATTACHED_TO_DESKTOP = 1;
+  static const DISPLAY_DEVICE_MULTI_DRIVER = 2;
+  static const DISPLAY_DEVICE_PRIMARY_DEVICE = 4;
+  static const DISPLAY_DEVICE_MIRRORING_DRIVER = 8;
+  static const DISPLAY_DEVICE_VGA_COMPATIBLE = 16;
+  static const DISPLAY_DEVICE_REMOVABLE = 32;
+  static const DISPLAY_DEVICE_ACC_DRIVER = 64;
+  static const DISPLAY_DEVICE_MODESPRUNED = 134217728;
+  static const DISPLAY_DEVICE_RDPUDD = 16777216;
+  static const DISPLAY_DEVICE_REMOTE = 67108864;
+  static const DISPLAY_DEVICE_DISCONNECT = 33554432;
+  static const DISPLAY_DEVICE_TS_COMPATIBLE = 2097152;
+  static const DISPLAY_DEVICE_UNSAFE_MODES_ON = 524288;
+  static const DISPLAY_DEVICE_ACTIVE = 1;
+  static const DISPLAY_DEVICE_ATTACHED = 2;
+}
+
+/// {@category enum}
 extension type const DISP_CHANGE(int _) implements int {
   static const DISP_CHANGE_SUCCESSFUL = 0;
   static const DISP_CHANGE_RESTART = 1;
@@ -2124,6 +2143,14 @@ extension type const FILE_CREATION_DISPOSITION(int _) implements int {
   static const OPEN_EXISTING = 3;
   static const OPEN_ALWAYS = 4;
   static const TRUNCATE_EXISTING = 5;
+}
+
+/// {@category enum}
+extension type const FILE_DEVICE_TYPE(int _) implements int {
+  static const FILE_DEVICE_CD_ROM = 2;
+  static const FILE_DEVICE_DISK = 7;
+  static const FILE_DEVICE_TAPE = 31;
+  static const FILE_DEVICE_DVD = 51;
 }
 
 /// {@category enum}
