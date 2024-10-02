@@ -214,8 +214,10 @@ All notable changes to this project will be documented in this file.
 - Deprecate `MOM_DONE` constant in favor of `MM_MOM_DONE` (#902)
 - Deprecate `MIM_MOREDATA` constant in favor of `MM_MIM_MOREDATA` (#902)
 - Deprecate `MOM_POSITIONCB` constant in favor of `MM_MOM_POSITIONCB` (#902)
-- You can automatically migrate your code to use the new constants by running
-  `dart fix --apply` in your terminal.
+- Add `isComInitialized` getter (#903)
+- Deprecate `isCOMInitialized` getter in favor of `isComInitialized` (#903)
+- You can automatically migrate your code to use the new constants and
+  properties by running `dart fix --apply` in your terminal.
 
 ## [5.5.5] - 2024-10-02
 
