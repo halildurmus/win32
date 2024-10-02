@@ -75,9 +75,9 @@ class Display {
 
   final int _stateFlags;
 
-  bool get isConnected {
-    return (_stateFlags & DISPLAY_DEVICE_ACTIVE) == DISPLAY_DEVICE_ACTIVE;
-  }
+  bool get isConnected =>
+      (_stateFlags & DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_ACTIVE) ==
+      DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_ACTIVE;
 }
 
 class BmpFile {
