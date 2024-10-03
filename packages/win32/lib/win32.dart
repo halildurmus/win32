@@ -79,6 +79,7 @@ export 'src/win32/ntdll.g.dart';
 export 'src/win32/ole32.g.dart';
 export 'src/win32/oleaut32.g.dart';
 export 'src/win32/powrprof.g.dart';
+export 'src/win32/propsys.g.dart';
 export 'src/win32/rometadata.g.dart';
 export 'src/win32/scarddlg.g.dart';
 export 'src/win32/setupapi.g.dart';
