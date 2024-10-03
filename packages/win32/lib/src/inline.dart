@@ -13,7 +13,9 @@ import 'enums.g.dart';
 import 'macros.dart';
 import 'structs.g.dart';
 import 'utils.dart';
+import 'variant.dart';
 import 'win32/kernel32.g.dart';
+import 'win32/propsys.g.dart';
 import 'win32/user32.g.dart';
 import 'win32/uxtheme.g.dart';
 
@@ -157,6 +159,13 @@ int IsWindowsServer() {
     free(osvi);
   }
 }
+
+/// Specifies whether a specified PROPVARIANT structure is a string type.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-ispropvariantstring>.
+int IsPropVariantString(Pointer<PROPVARIANT> propvar) =>
+    PropVariantToStringWithDefault(propvar, nullptr) != nullptr ? TRUE : FALSE;
 
 /// Sets attributes to control how visual styles are applied to a specified
 /// window.
