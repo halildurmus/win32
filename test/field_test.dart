@@ -109,6 +109,27 @@ void main() {
       check(field.value).equals(-99.0);
     });
 
+    test('FOLDERID_AccountPictures', () {
+      final typeDef = win32Scope.findTypeDef('Windows.Win32.UI.Shell.Apis');
+      check(typeDef).isNotNull();
+      final field = typeDef!.findField('FOLDERID_AccountPictures');
+      check(field).isNotNull();
+      check(field!.fieldType).equals(BaseType.voidType);
+      check(field.fieldAccess).equals(FieldAccess.public);
+      check(field.hasDefault).isFalse();
+      check(field.hasFieldMarshal).isFalse();
+      check(field.hasFieldRVA).isFalse();
+      check(field.isInitOnly).isFalse();
+      check(field.isLiteral).isFalse();
+      check(field.isNotSerialized).isFalse();
+      check(field.isPinvokeImpl).isFalse();
+      check(field.isRTSpecialName).isFalse();
+      check(field.isSpecialName).isFalse();
+      check(field.isStatic).isTrue();
+      check(field.parent).equals(typeDef);
+      check(field.value).isNull();
+    });
+
     test('FXEQ_MAX_GAIN', () {
       final typeDef =
           win32Scope.findTypeDef('Windows.Win32.Media.Audio.XAudio2.Apis');
@@ -289,7 +310,8 @@ void main() {
       check(field.parent).equals(typeDef);
       check(field.value).isA<String>();
       check(field.value).equals(
-          '\x00\x00\x00\x00\x00\x00\x00\x00\x1e\x0f\x0f\x0f\x00\x00\x00\x00');
+        '\x00\x00\x00\x00\x00\x00\x00\x00\x1e\x0f\x0f\x0f\x00\x00\x00\x00',
+      );
     });
 
     test('wszGRAVE', () {
