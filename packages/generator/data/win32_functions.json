@@ -4453,20 +4453,132 @@
         "minimumWindowsVersion": "WIN8"
     },
     "SafeArrayAccessData": {
-        "prototype": "HRESULT SafeArrayAccessData(\n  SAFEARRAY *psa,\n  void **ppvData\n);",
-        "comment": "Provides access to the elements of a safe array."
+        "prototype": "HRESULT SafeArrayAccessData(\n  [in]  SAFEARRAY *psa,\n  [out] void **ppvData\n);",
+        "comment": "Increments the lock count of an array, and retrieves a pointer to the array data."
+    },
+    "SafeArrayAddRef": {
+        "prototype": "HRESULT SafeArrayAddRef(\n  [in]  SAFEARRAY *psa,\n  [out] PVOID     *ppDataToRelease\n);",
+        "comment": "Increases the pinning reference count of the descriptor for the specified safe array by one, and may increase the pinning reference count of the data for the specified safe array by one if that data was dynamically allocated, as determined by the descriptor of the safe array."
+    },
+    "SafeArrayAllocData": {
+        "prototype": "HRESULT SafeArrayAllocData(\n  [in] SAFEARRAY *psa\n);",
+        "comment": "Allocates memory for a safe array, based on a descriptor created with SafeArrayAllocDescriptor."
+    },
+    "SafeArrayAllocDescriptor": {
+        "prototype": "HRESULT SafeArrayAllocDescriptor(\n  [in]  UINT      cDims,\n  [out] SAFEARRAY **ppsaOut\n);",
+        "comment": "Allocates memory for a safe array descriptor."
+    },
+    "SafeArrayAllocDescriptorEx": {
+        "prototype": "HRESULT SafeArrayAllocDescriptorEx(\n  [in]  VARTYPE   vt,\n  [in]  UINT      cDims,\n  [out] SAFEARRAY **ppsaOut\n);",
+        "comment": "Creates a safe array descriptor for an array of any valid variant type, including VT_RECORD, without allocating the array data."
+    },
+    "SafeArrayCopy": {
+        "prototype": "HRESULT SafeArrayCopy(\n  [in]  SAFEARRAY *psa,\n  [out] SAFEARRAY **ppsaOut\n);",
+        "comment": "Creates a copy of an existing safe array."
+    },
+    "SafeArrayCopyData": {
+        "prototype": "HRESULT SafeArrayCopyData(\n  [in] SAFEARRAY *psaSource,\n  [in] SAFEARRAY *psaTarget\n);",
+        "comment": "Copies the source array to the specified target array after releasing any resources in the target array. This is similar to SafeArrayCopy, except that the target array has to be set up by the caller. The target is not allocated or reallocated."
+    },
+    "SafeArrayCreate": {
+        "prototype": "SAFEARRAY * SafeArrayCreate(\n  [in] VARTYPE        vt,\n  [in] UINT           cDims,\n  [in] SAFEARRAYBOUND *rgsabound\n);",
+        "comment": "Creates a new array descriptor, allocates and initializes the data for the array, and returns a pointer to the new array descriptor."
+    },
+    "SafeArrayCreateEx": {
+        "prototype": "SAFEARRAY * SafeArrayCreateEx(\n  [in] VARTYPE        vt,\n  [in] UINT           cDims,\n  [in] SAFEARRAYBOUND *rgsabound,\n  [in] PVOID          pvExtra\n);",
+        "comment": "Creates and returns a safe array descriptor from the specified VARTYPE, number of dimensions and bounds."
     },
     "SafeArrayCreateVector": {
-        "prototype": "SAFEARRAY * SafeArrayCreateVector(\n  VARTYPE vt,\n  int lLbound,\n  int cElements\n);",
-        "comment": "Creates a new safe array object."
+        "prototype": "SAFEARRAY * SafeArrayCreateVector(\n  [in] VARTYPE vt,\n  [in] int lLbound,\n  [in] int cElements\n);",
+        "comment": "Creates a one-dimensional array. A safe array created with SafeArrayCreateVector is a fixed size, so the constant FADF_FIXEDSIZE is always set."
+    },
+    "SafeArrayCreateVectorEx": {
+        "prototype": "SAFEARRAY * SafeArrayCreateVectorEx(\n  [in] VARTYPE vt,\n  [in] LONG    lLbound,\n  [in] ULONG   cElements,\n  [in] PVOID   pvExtra\n);",
+        "comment": "Creates and returns a one-dimensional safe array of the specified VARTYPE and bounds."
     },
     "SafeArrayDestroy": {
-        "prototype": "HRESULT SafeArrayDestroy(\n  SAFEARRAY *psa\n);",
-        "comment": "Destroys a safe array object."
+        "prototype": "HRESULT SafeArrayDestroy(\n  [in] SAFEARRAY *psa\n);",
+        "comment": "Destroys an existing array descriptor and all of the data in the array. If objects are stored in the array, Release is called on each object in the array."
+    },
+    "SafeArrayDestroyData": {
+        "prototype": "HRESULT SafeArrayDestroyData(\n  [in] SAFEARRAY *psa\n);",
+        "comment": "Destroys all the data in the specified safe array."
+    },
+    "SafeArrayDestroyDescriptor": {
+        "prototype": "HRESULT SafeArrayDestroyDescriptor(\n  [in] SAFEARRAY *psa\n);",
+        "comment": "Destroys the descriptor of the specified safe array."
+    },
+    "SafeArrayGetDim": {
+        "prototype": "UINT SafeArrayGetDim(\n  [in] SAFEARRAY *psa\n);",
+        "comment": "Gets the number of dimensions in the array."
+    },
+    "SafeArrayGetElement": {
+        "prototype": "HRESULT SafeArrayGetElement(\n  [in]  SAFEARRAY *psa,\n  [in]  LONG      *rgIndices,\n  [out] void      *pv\n);",
+        "comment": "Retrieves a single element of the array."
+    },
+    "SafeArrayGetElemsize": {
+        "prototype": "UINT SafeArrayGetElemsize(\n  [in] SAFEARRAY *psa\n);",
+        "comment": "Gets the size of an element."
+    },
+    "SafeArrayGetIID": {
+        "prototype": "HRESULT SafeArrayGetIID(\n  [in]  SAFEARRAY *psa,\n  [out] GUID      *pguid\n);",
+        "comment": "Gets the GUID of the interface contained within the specified safe array."
+    },
+    "SafeArrayGetLBound": {
+        "prototype": "HRESULT SafeArrayGetLBound(\n  [in]  SAFEARRAY *psa,\n  [in]  UINT      nDim,\n  [out] LONG      *plLbound\n);",
+        "comment": "Gets the lower bound for any dimension of the specified safe array."
+    },
+    "SafeArrayGetRecordInfo": {
+        "prototype": "HRESULT SafeArrayGetRecordInfo(\n  [in]  SAFEARRAY   *psa,\n  [out] IRecordInfo **prinfo\n);",
+        "comment": "Retrieves the IRecordInfo interface of the UDT contained in the specified safe array."
+    },
+    "SafeArrayGetUBound": {
+        "prototype": "HRESULT SafeArrayGetUBound(\n  [in]  SAFEARRAY *psa,\n  [in]  UINT      nDim,\n  [out] LONG      *plUbound\n);",
+        "comment": "Gets the upper bound for any dimension of the specified safe array."
+    },
+    "SafeArrayGetVartype": {
+        "prototype": "HRESULT SafeArrayGetVartype(\n  [in]  SAFEARRAY *psa,\n  [out] VARTYPE   *pvt\n);",
+        "comment": "Gets the VARTYPE stored in the specified safe array."
+    },
+    "SafeArrayLock": {
+        "prototype": "HRESULT SafeArrayLock(\n  [in] SAFEARRAY *psa\n);",
+        "comment": "Increments the lock count of an array, and places a pointer to the array data in pvData of the array descriptor."
+    },
+    "SafeArrayPtrOfIndex": {
+        "prototype": "HRESULT SafeArrayPtrOfIndex(\n  [in]  SAFEARRAY *psa,\n  [in]  LONG      *rgIndices,\n  [out] void      **ppvData\n);",
+        "comment": "Gets a pointer to an array element."
+    },
+    "SafeArrayPutElement": {
+        "prototype": "HRESULT SafeArrayPutElement(\n  [in] SAFEARRAY *psa,\n  [in] LONG      *rgIndices,\n  [in] void      *pv\n);",
+        "comment": "Stores the data element at the specified location in the array."
+    },
+    "SafeArrayRedim": {
+        "prototype": "HRESULT SafeArrayRedim(\n  [in, out] SAFEARRAY      *psa,\n  [in]      SAFEARRAYBOUND *psaboundNew\n);",
+        "comment": "Changes the right-most (least significant) bound of the specified safe array."
+    },
+    "SafeArrayReleaseData": {
+        "prototype": "void SafeArrayReleaseData(\n  [in] PVOID pData\n);",
+        "comment": "Decreases the pinning reference count for the specified safe array data by one. When that count reaches 0, the memory for that data is no longer prevented from being freed. "
+    },
+    "SafeArrayReleaseDescriptor": {
+        "prototype": "void SafeArrayReleaseDescriptor(\n  [in] SAFEARRAY *psa\n);",
+        "comment": "Decreases the pinning reference count for the descriptor of the specified safe array by one. When that count reaches 0, the memory for that descriptor is no longer prevented from being freed. "
+    },
+    "SafeArraySetIID": {
+        "prototype": "HRESULT SafeArraySetIID(\n  [in] SAFEARRAY *psa,\n  [in] REFGUID   guid\n);",
+        "comment": "Sets the GUID of the interface for the specified safe array."
+    },
+    "SafeArraySetRecordInfo": {
+        "prototype": "HRESULT SafeArraySetRecordInfo(\n  [in] SAFEARRAY   *psa,\n  [in] IRecordInfo *prinfo\n);",
+        "comment": "Sets the record info in the specified safe array."
     },
     "SafeArrayUnaccessData": {
         "prototype": "HRESULT SafeArrayUnaccessData(\n  SAFEARRAY *psa\n);",
-        "comment": "Releases access to the elements of a safe array."
+        "comment": "Decrements the lock count of an array, and invalidates the pointer retrieved by SafeArrayAccessData."
+    },
+    "SafeArrayUnlock": {
+        "prototype": "HRESULT SafeArrayUnlock(\n  SAFEARRAY *psa\n);",
+        "comment": "Decrements the lock count of an array so it can be freed or resized."
     },
     "SaveCurrentMonitorSettings": {
         "prototype": "_BOOL SaveCurrentMonitorSettings(\n  HANDLE hMonitor\n);",

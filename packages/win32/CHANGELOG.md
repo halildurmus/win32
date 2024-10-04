@@ -220,6 +220,9 @@ All notable changes to this project will be documented in this file.
   properties by running `dart fix --apply` in your terminal.
 - Add `IsPropVariantString`, `PropVariantToStrRet`, and
   `PropVariantToStringWithDefault` APIs (#904)
+- Add `SafeArrayAccessData`, `SafeArrayCreateVector`, `SafeArrayDestroy`, and
+  `SafeArrayUnaccessData` APIs (#905, thanks to @aweinber)
+- Add remaining `SafeArray*` APIs (#906)
 
 ## [5.5.5] - 2024-10-02
 
