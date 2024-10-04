@@ -16,11 +16,12 @@ final _exportedSymbols = <String, int>{};
 /// Callback called once for each enumerated symbol by SymEnumSymbols.
 int _enumSymbolProc(Pointer<SYMBOL_INFO> pSymInfo, int size, Pointer ctx) {
   // Only include symbols from the export table
-  if (pSymInfo.ref.Flags & SYMFLAG_EXPORT == SYMFLAG_EXPORT) {
+  if (pSymInfo.ref.Flags & SYMBOL_INFO_FLAGS.SYMFLAG_EXPORT ==
+      SYMBOL_INFO_FLAGS.SYMFLAG_EXPORT) {
     _exportedSymbols[pSymInfo.name] = pSymInfo.virtAddress;
   }
 
-  return TRUE; // Keep enumerating
+  return TRUE; // Keep enumerating.
 }
 
 Map<String, int> getExports(int hProcess, String module) {

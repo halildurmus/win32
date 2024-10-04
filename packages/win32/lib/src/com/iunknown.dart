@@ -36,7 +36,7 @@ class IUnknown {
   static final _finalizer = Finalizer<Pointer<COMObject>>((ptr) {
     // Decrement the reference count of the object only when COM is initialized,
     // otherwise this will cause the program to crash.
-    if (isCOMInitialized) _release(ptr);
+    if (isComInitialized) _release(ptr);
     free(ptr);
   });
 

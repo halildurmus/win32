@@ -15,7 +15,11 @@ void main() {
     exit(1);
   } else {
     final pszLogonSound = logonSound.toNativeUtf16();
-    final result = PlaySound(pszLogonSound, NULL, SND_FILENAME | SND_SYNC);
+    final result = PlaySound(
+      pszLogonSound,
+      NULL,
+      SND_FLAGS.SND_FILENAME | SND_FLAGS.SND_SYNC,
+    );
 
     if (result != TRUE) {
       print('Sound playback failed.');

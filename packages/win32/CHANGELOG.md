@@ -2,9 +2,230 @@
 
 All notable changes to this project will be documented in this file.
 
-## [5.5.5-wip]
+## [5.5.6-wip]
+
+- Add `DISPLAY_DEVICE_STATE_FLAGS` enum (#901)
+- Add `FILE_DEVICE_TYPE` enum (#901)
+- Deprecate `SCARD_SCOPE_USER` constant in favor of
+  `SCARD_SCOPE.SCARD_SCOPE_USER` (#901)
+- Deprecate `SCARD_SCOPE_TERMINAL` constant in favor of
+  `SCARD_SCOPE.SCARD_SCOPE_TERMINAL` (#901)
+- Deprecate `SYMFLAG_VALUEPRESENT` constant in favor of
+  `SYMBOL_INFO_FLAGS.SYMFLAG_VALUEPRESENT` (#901)
+- Deprecate `SYMFLAG_REGISTER` constant in favor of
+  `SYMBOL_INFO_FLAGS.SYMFLAG_REGISTER` (#901)
+- Deprecate `SYMFLAG_REGREL` constant in favor of
+  `SYMBOL_INFO_FLAGS.SYMFLAG_REGREL` (#901)
+- Deprecate `SYMFLAG_FRAMEREL` constant in favor of
+  `SYMBOL_INFO_FLAGS.SYMFLAG_FRAMEREL` (#901)
+- Deprecate `SYMFLAG_PARAMETER` constant in favor of
+  `SYMBOL_INFO_FLAGS.SYMFLAG_PARAMETER` (#901)
+- Deprecate `SYMFLAG_LOCAL` constant in favor of
+  `SYMBOL_INFO_FLAGS.SYMFLAG_LOCAL` (#901)
+- Deprecate `SYMFLAG_CONSTANT` constant in favor of
+  `SYMBOL_INFO_FLAGS.SYMFLAG_CONSTANT` (#901)
+- Deprecate `SYMFLAG_EXPORT` constant in favor of
+  `SYMBOL_INFO_FLAGS.SYMFLAG_EXPORT` (#901)
+- Deprecate `SYMFLAG_FORWARDER` constant in favor of
+  `SYMBOL_INFO_FLAGS.SYMFLAG_FORWARDER` (#901)
+- Deprecate `SYMFLAG_FUNCTION` constant in favor of
+  `SYMBOL_INFO_FLAGS.SYMFLAG_FUNCTION` (#901)
+- Deprecate `SYMFLAG_VIRTUAL` constant in favor of
+  `SYMBOL_INFO_FLAGS.SYMFLAG_VIRTUAL` (#901)
+- Deprecate `SYMFLAG_THUNK` constant in favor of
+  `SYMBOL_INFO_FLAGS.SYMFLAG_THUNK` (#901)
+- Deprecate `SYMFLAG_TLSREL` constant in favor of
+  `SYMBOL_INFO_FLAGS.SYMFLAG_TLSREL` (#901)
+- Deprecate `SYMFLAG_SLOT` constant in favor of
+  `SYMBOL_INFO_FLAGS.SYMFLAG_SLOT` (#901)
+- Deprecate `SYMFLAG_ILREL` constant in favor of
+  `SYMBOL_INFO_FLAGS.SYMFLAG_ILREL` (#901)
+- Deprecate `SYMFLAG_METADATA` constant in favor of
+  `SYMBOL_INFO_FLAGS.SYMFLAG_METADATA` (#901)
+- Deprecate `SYMFLAG_CLR_TOKEN` constant in favor of
+  `SYMBOL_INFO_FLAGS.SYMFLAG_CLR_TOKEN` (#901)
+- Deprecate `SND_SYNC` constant in favor of `SND_FLAGS.SND_SYNC` (#901)
+- Deprecate `SND_ASYNC` constant in favor of `SND_FLAGS.SND_ASYNC` (#901)
+- Deprecate `SND_NODEFAULT` constant in favor of
+  `SND_FLAGS.SND_NODEFAULT` (#901)
+- Deprecate `SND_MEMORY` constant in favor of `SND_FLAGS.SND_MEMORY` (#901)
+- Deprecate `SND_LOOP` constant in favor of `SND_FLAGS.SND_LOOP` (#901)
+- Deprecate `SND_NOSTOP` constant in favor of `SND_FLAGS.SND_NOSTOP` (#901)
+- Deprecate `SND_NOWAIT` constant in favor of `SND_FLAGS.SND_NOWAIT` (#901)
+- Deprecate `SND_ALIAS` constant in favor of `SND_FLAGS.SND_ALIAS` (#901)
+- Deprecate `SND_ALIAS_ID` constant in favor of `SND_FLAGS.SND_ALIAS_ID` (#901)
+- Deprecate `SND_FILENAME` constant in favor of `SND_FLAGS.SND_FILENAME` (#901)
+- Deprecate `SND_RESOURCE` constant in favor of `SND_FLAGS.SND_RESOURCE` (#901)
+- Deprecate `SND_PURGE` constant in favor of `SND_FLAGS.SND_PURGE` (#901)
+- Deprecate `SND_APPLICATION` constant in favor of
+  `SND_FLAGS.SND_APPLICATION` (#901)
+- Deprecate `SND_SENTRY` constant in favor of `SND_FLAGS.SND_SENTRY` (#901)
+- Deprecate `SND_RING` constant in favor of `SND_FLAGS.SND_RING` (#901)
+- Deprecate `SND_SYSTEM` constant in favor of `SND_FLAGS.SND_SYSTEM` (#901)
+- Deprecate `DISPLAY_DEVICE_MIRRORING_DRIVER` constant in favor of
+  `DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_MIRRORING_DRIVER` (#901)
+- Deprecate `DISPLAY_DEVICE_VGA_COMPATIBLE` constant in favor of
+  `DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_VGA_COMPATIBLE` (#901)
+- Deprecate `DISPLAY_DEVICE_REMOVABLE` constant in favor of
+  `DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_REMOVABLE` (#901)
+- Deprecate `DISPLAY_DEVICE_MODESPRUNED` constant in favor of
+  `DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_MODESPRUNED` (#901)
+- Deprecate `DISPLAY_DEVICE_ACTIVE` constant in favor of
+  `DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_ACTIVE` (#901)
+- Deprecate `DISPLAY_DEVICE_PRIMARY_DEVICE` constant in favor of
+  `DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_PRIMARY_DEVICE` (#901)
+- Deprecate `WDA_NONE` constant in favor of
+  `WINDOW_DISPLAY_AFFINITY.WDA_NONE` (#901)
+- Deprecate `WDA_MONITOR` constant in favor of
+  `WINDOW_DISPLAY_AFFINITY.WDA_MONITOR` (#901)
+- Deprecate `WDA_EXCLUDEFROMCAPTURE` constant in favor of
+  `WINDOW_DISPLAY_AFFINITY.WDA_EXCLUDEFROMCAPTURE` (#901)
+- Deprecate `WAVE_FORMAT_QUERY` constant in favor of
+  `MIDI_WAVE_OPEN_TYPE.WAVE_FORMAT_QUERY` (#901)
+- Deprecate `WAVE_ALLOWSYNC` constant in favor of
+  `MIDI_WAVE_OPEN_TYPE.WAVE_ALLOWSYNC` (#901)
+- Deprecate `WAVE_MAPPED` constant in favor of
+  `MIDI_WAVE_OPEN_TYPE.WAVE_MAPPED` (#901)
+- Deprecate `WAVE_FORMAT_DIRECT` constant in favor of
+  `MIDI_WAVE_OPEN_TYPE.WAVE_FORMAT_DIRECT` (#901)
+- Deprecate `WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE` constant in favor of
+  `MIDI_WAVE_OPEN_TYPE.WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE` (#901)
+- Deprecate `VARIANT_NOVALUEPROP` constant in favor of
+  `VAR_CHANGE_FLAGS.VARIANT_NOVALUEPROP` (#901)
+- Deprecate `VARIANT_ALPHABOOL` constant in favor of
+  `VAR_CHANGE_FLAGS.VARIANT_ALPHABOOL` (#901)
+- Deprecate `VARIANT_NOUSEROVERRIDE` constant in favor of
+  `VAR_CHANGE_FLAGS.VARIANT_NOUSEROVERRIDE` (#901)
+- Deprecate `VARIANT_LOCALBOOL` constant in favor of
+  `VAR_CHANGE_FLAGS.VARIANT_LOCALBOOL` (#901)
+- Deprecate `NO_ERROR` constant in favor of `WIN32_ERROR.NO_ERROR` (#901)
+- Deprecate `DISPLAY_DEVICE_ATTACHED_TO_DESKTOP` constant in favor of
+  `DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_ATTACHED_TO_DESKTOP` (#901)
+- Deprecate `DISPLAY_DEVICE_ATTACHED` constant in favor of
+  `DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_ATTACHED` (#901)
+- Deprecate `DISPLAY_DEVICE_MULTI_DRIVER` constant in favor of
+  `DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_MULTI_DRIVER` (#901)
+- Deprecate `DISPLAY_DEVICE_ACC_DRIVER` constant in favor of
+  `DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_ACC_DRIVER` (#901)
+- Deprecate `DISPLAY_DEVICE_UNSAFE_MODES_ON` constant in favor of
+  `DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_UNSAFE_MODES_ON` (#901)
+- Deprecate `DISPLAY_DEVICE_TS_COMPATIBLE` constant in favor of
+  `DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_TS_COMPATIBLE` (#901)
+- Deprecate `DISPLAY_DEVICE_RDPUDD` constant in favor of
+  `DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_RDPUDD` (#901)
+- Deprecate `DISPLAY_DEVICE_REMOTE` constant in favor of
+  `DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_REMOTE` (#901)
+- Deprecate `DISPLAY_DEVICE_DISCONNECT` constant in favor of
+  `DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_DISCONNECT` (#901)
+- Deprecate `PRODUCT_UNDEFINED` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_UNDEFINED` (#901)
+- Deprecate `PRODUCT_ESSENTIALBUSINESS_SERVER_MGMT` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_ESSENTIALBUSINESS_SERVER_MGMT` (#901)
+- Deprecate `PRODUCT_ESSENTIALBUSINESS_SERVER_ADDL` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_ESSENTIALBUSINESS_SERVER_ADDL` (#901)
+- Deprecate `PRODUCT_ESSENTIALBUSINESS_SERVER_MGMTSVC` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_ESSENTIALBUSINESS_SERVER_MGMTSVC` (#901)
+- Deprecate `PRODUCT_ESSENTIALBUSINESS_SERVER_ADDLSVC` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_ESSENTIALBUSINESS_SERVER_ADDLSVC` (#901)
+- Deprecate `PRODUCT_SMALLBUSINESS_SERVER_PREMIUM_CORE` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_SMALLBUSINESS_SERVER_PREMIUM_CORE` (#901)
+- Deprecate `PRODUCT_CLUSTER_SERVER_V` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_CLUSTER_SERVER_V` (#901)
+- Deprecate `PRODUCT_STARTER_E` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_STARTER_E` (#901)
+- Deprecate `PRODUCT_HOME_BASIC_E` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_HOME_BASIC_E` (#901)
+- Deprecate `PRODUCT_HOME_PREMIUM_E` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_HOME_PREMIUM_E` (#901)
+- Deprecate `PRODUCT_PROFESSIONAL_E` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_PROFESSIONAL_E` (#901)
+- Deprecate `PRODUCT_ENTERPRISE_E` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_ENTERPRISE_E` (#901)
+- Deprecate `PRODUCT_ULTIMATE_E` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_ULTIMATE_E` (#901)
+- Deprecate `PRODUCT_ENTERPRISE_EVALUATION` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_ENTERPRISE_EVALUATION` (#901)
+- Deprecate `PRODUCT_MULTIPOINT_STANDARD_SERVER` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_MULTIPOINT_STANDARD_SERVER` (#901)
+- Deprecate `PRODUCT_MULTIPOINT_PREMIUM_SERVER` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_MULTIPOINT_PREMIUM_SERVER` (#901)
+- Deprecate `PRODUCT_STANDARD_EVALUATION_SERVER` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_STANDARD_EVALUATION_SERVER` (#901)
+- Deprecate `PRODUCT_DATACENTER_EVALUATION_SERVER` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_DATACENTER_EVALUATION_SERVER` (#901)
+- Deprecate `PRODUCT_ENTERPRISE_N_EVALUATION` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_ENTERPRISE_N_EVALUATION` (#901)
+- Deprecate `PRODUCT_STORAGE_WORKGROUP_EVALUATION_SERVER` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_STORAGE_WORKGROUP_EVALUATION_SERVER` (#901)
+- Deprecate `PRODUCT_STORAGE_STANDARD_EVALUATION_SERVER` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_STORAGE_STANDARD_EVALUATION_SERVER` (#901)
+- Deprecate `PRODUCT_CORE_N` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_CORE_N` (#901)
+- Deprecate `PRODUCT_CORE_COUNTRYSPECIFIC` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_CORE_COUNTRYSPECIFIC` (#901)
+- Deprecate `PRODUCT_CORE_SINGLELANGUAGE` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_CORE_SINGLELANGUAGE` (#901)
+- Deprecate `PRODUCT_CORE` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_CORE` (#901)
+- Deprecate `PRODUCT_PROFESSIONAL_WMC` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_PROFESSIONAL_WMC` (#901)
+- Deprecate `PRODUCT_EDUCATION` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_EDUCATION` (#901)
+- Deprecate `PRODUCT_EDUCATION_N` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_EDUCATION_N` (#901)
+- Deprecate `PRODUCT_IOTUAP` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_IOTUAP` (#901)
+- Deprecate `PRODUCT_ENTERPRISE_S` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_ENTERPRISE_S` (#901)
+- Deprecate `PRODUCT_ENTERPRISE_S_N` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_ENTERPRISE_S_N` (#901)
+- Deprecate `PRODUCT_ENTERPRISE_S_EVALUATION` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_ENTERPRISE_S_EVALUATION` (#901)
+- Deprecate `PRODUCT_ENTERPRISE_S_N_EVALUATION` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_ENTERPRISE_S_N_EVALUATION` (#901)
+- Deprecate `PRODUCT_DATACENTER_A_SERVER_CORE` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_DATACENTER_A_SERVER_CORE` (#901)
+- Deprecate `PRODUCT_STANDARD_A_SERVER_CORE` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_STANDARD_A_SERVER_CORE` (#901)
+- Deprecate `PRODUCT_PRO_WORKSTATION` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_PRO_WORKSTATION` (#901)
+- Deprecate `PRODUCT_PRO_WORKSTATION_N` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_PRO_WORKSTATION_N` (#901)
+- Deprecate `PRODUCT_ANDROMEDA` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_ANDROMEDA` (#901)
+- Deprecate `PRODUCT_XBOX_NATIVEOS` constant in favor of
+  `OS_PRODUCT_TYPE.PRODUCT_XBOX_NATIVEOS` (#901)
+- Deprecate `FILE_DEVICE_CD_ROM` constant in favor of
+  `FILE_DEVICE_TYPE.FILE_DEVICE_CD_ROM` (#901)
+- Deprecate `FILE_DEVICE_DISK` constant in favor of
+  `FILE_DEVICE_TYPE.FILE_DEVICE_DISK` (#901)
+- Deprecate `FILE_DEVICE_DVD` constant in favor of
+  `FILE_DEVICE_TYPE.FILE_DEVICE_DVD` (#901)
+- Deprecate `FILE_DEVICE_TAPE` constant in favor of
+  `FILE_DEVICE_TYPE.FILE_DEVICE_TAPE` (#901)
+- Deprecate `MIM_OPEN` constant in favor of `MM_MIM_OPEN` (#902)
+- Deprecate `MIM_CLOSE` constant in favor of `MM_MIM_CLOSE` (#902)
+- Deprecate `MIM_DATA` constant in favor of `MM_MIM_DATA` (#902)
+- Deprecate `MIM_LONGDATA` constant in favor of `MM_MIM_LONGDATA` (#902)
+- Deprecate `MIM_ERROR` constant in favor of `MM_MIM_ERROR` (#902)
+- Deprecate `MIM_LONGERROR` constant in favor of `MM_MIM_LONGERROR` (#902)
+- Deprecate `MOM_OPEN` constant in favor of `MM_MOM_OPEN` (#902)
+- Deprecate `MOM_CLOSE` constant in favor of `MM_MOM_CLOSE` (#902)
+- Deprecate `MOM_DONE` constant in favor of `MM_MOM_DONE` (#902)
+- Deprecate `MIM_MOREDATA` constant in favor of `MM_MIM_MOREDATA` (#902)
+- Deprecate `MOM_POSITIONCB` constant in favor of `MM_MOM_POSITIONCB` (#902)
+- Add `isComInitialized` getter (#903)
+- Deprecate `isCOMInitialized` getter in favor of `isComInitialized` (#903)
+- You can automatically migrate your code to use the new constants and
+  properties by running `dart fix --apply` in your terminal.
+- Add `IsPropVariantString`, `PropVariantToStrRet`, and
+  `PropVariantToStringWithDefault` APIs (#904)
+
+## [5.5.5] - 2024-10-02
 
 - Add `BITMAPV5HEADER` struct (#892)
+- Add `SetClassLongPtr` API (#899, thanks to @aweinber)
+- Bump minimum required Dart version to `3.5.0`
 
 ## [5.5.4] - 2024-08-12
 
@@ -1001,3 +1222,4 @@ write:
 [5.5.2]: https://github.com/halildurmus/win32/compare/v5.5.1...v5.5.2
 [5.5.3]: https://github.com/halildurmus/win32/compare/v5.5.2...v5.5.3
 [5.5.4]: https://github.com/halildurmus/win32/compare/v5.5.3...v5.5.4
+[5.5.5]: https://github.com/halildurmus/win32/compare/v5.5.4...v5.5.5

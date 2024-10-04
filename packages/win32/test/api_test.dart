@@ -13192,6 +13192,26 @@ void main() {
     }
   });
 
+  group('Test propsys functions', () {
+    test('Can instantiate PropVariantToStringWithDefault', () {
+      final propsys = DynamicLibrary.open('propsys.dll');
+      final PropVariantToStringWithDefault = propsys.lookupFunction<
+          Pointer<Utf16> Function(
+              Pointer<PROPVARIANT> propvarIn, Pointer<Utf16> pszDefault),
+          Pointer<Utf16> Function(Pointer<PROPVARIANT> propvarIn,
+              Pointer<Utf16> pszDefault)>('PropVariantToStringWithDefault');
+      expect(PropVariantToStringWithDefault, isA<Function>());
+    });
+    test('Can instantiate PropVariantToStrRet', () {
+      final propsys = DynamicLibrary.open('propsys.dll');
+      final PropVariantToStrRet = propsys.lookupFunction<
+          Int32 Function(Pointer<PROPVARIANT> propvar, Pointer<STRRET> pstrret),
+          int Function(Pointer<PROPVARIANT> propvar,
+              Pointer<STRRET> pstrret)>('PropVariantToStrRet');
+      expect(PropVariantToStrRet, isA<Function>());
+    });
+  });
+
   group('Test api-ms-win-core-winrt-l1-1-0 functions', () {
     if (windowsBuildNumber >= 9200) {
       test('Can instantiate RoActivateInstance', () {
