@@ -4452,6 +4452,22 @@
         "category": "winrt",
         "minimumWindowsVersion": "WIN8"
     },
+    "SafeArrayAccessData": {
+        "prototype": "HRESULT SafeArrayAccessData(\n  SAFEARRAY *psa,\n  void **ppvData\n);",
+        "comment": "Provides access to the elements of a safe array."
+    },
+    "SafeArrayCreateVector": {
+        "prototype": "SAFEARRAY * SafeArrayCreateVector(\n  VARTYPE vt,\n  int lLbound,\n  int cElements\n);",
+        "comment": "Creates a new safe array object."
+    },
+    "SafeArrayDestroy": {
+        "prototype": "HRESULT SafeArrayDestroy(\n  SAFEARRAY *psa\n);",
+        "comment": "Destroys a safe array object."
+    },
+    "SafeArrayUnaccessData": {
+        "prototype": "HRESULT SafeArrayUnaccessData(\n  SAFEARRAY *psa\n);",
+        "comment": "Releases access to the elements of a safe array."
+    },
     "SaveCurrentMonitorSettings": {
         "prototype": "_BOOL SaveCurrentMonitorSettings(\n  HANDLE hMonitor\n);",
         "comment": "Saves the current monitor settings to the display's nonvolatile storage."

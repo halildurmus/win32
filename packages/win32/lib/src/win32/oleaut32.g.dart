@@ -58,6 +58,70 @@ final _GetActiveObject = _oleaut32.lookupFunction<
     int Function(Pointer<GUID> rclsid, Pointer pvReserved,
         Pointer<Pointer<COMObject>> ppunk)>('GetActiveObject');
 
+/// Provides access to the elements of a safe array.
+///
+/// ```c
+/// HRESULT SafeArrayAccessData(
+///   SAFEARRAY *psa,
+///   void **ppvData
+/// );
+/// ```
+/// {@category oleaut32}
+int SafeArrayAccessData(Pointer<SAFEARRAY> psa, Pointer<Pointer> ppvData) =>
+    _SafeArrayAccessData(psa, ppvData);
+
+final _SafeArrayAccessData = _oleaut32.lookupFunction<
+    Int32 Function(Pointer<SAFEARRAY> psa, Pointer<Pointer> ppvData),
+    int Function(Pointer<SAFEARRAY> psa,
+        Pointer<Pointer> ppvData)>('SafeArrayAccessData');
+
+/// Creates a new safe array object.
+///
+/// ```c
+/// SAFEARRAY * SafeArrayCreateVector(
+///   VARTYPE vt,
+///   int lLbound,
+///   int cElements
+/// );
+/// ```
+/// {@category oleaut32}
+Pointer<SAFEARRAY> SafeArrayCreateVector(int vt, int lLbound, int cElements) =>
+    _SafeArrayCreateVector(vt, lLbound, cElements);
+
+final _SafeArrayCreateVector = _oleaut32.lookupFunction<
+    Pointer<SAFEARRAY> Function(Uint16 vt, Int32 lLbound, Uint32 cElements),
+    Pointer<SAFEARRAY> Function(
+        int vt, int lLbound, int cElements)>('SafeArrayCreateVector');
+
+/// Destroys a safe array object.
+///
+/// ```c
+/// HRESULT SafeArrayDestroy(
+///   SAFEARRAY *psa
+/// );
+/// ```
+/// {@category oleaut32}
+int SafeArrayDestroy(Pointer<SAFEARRAY> psa) => _SafeArrayDestroy(psa);
+
+final _SafeArrayDestroy = _oleaut32.lookupFunction<
+    Int32 Function(Pointer<SAFEARRAY> psa),
+    int Function(Pointer<SAFEARRAY> psa)>('SafeArrayDestroy');
+
+/// Releases access to the elements of a safe array.
+///
+/// ```c
+/// HRESULT SafeArrayUnaccessData(
+///   SAFEARRAY *psa
+/// );
+/// ```
+/// {@category oleaut32}
+int SafeArrayUnaccessData(Pointer<SAFEARRAY> psa) =>
+    _SafeArrayUnaccessData(psa);
+
+final _SafeArrayUnaccessData = _oleaut32.lookupFunction<
+    Int32 Function(Pointer<SAFEARRAY> psa),
+    int Function(Pointer<SAFEARRAY> psa)>('SafeArrayUnaccessData');
+
 /// Allocates a new string and copies the passed string into it.
 ///
 /// ```c
