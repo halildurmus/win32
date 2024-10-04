@@ -11842,6 +11842,79 @@ void main() {
               Pointer<Pointer> ppvData)>('SafeArrayAccessData');
       expect(SafeArrayAccessData, isA<Function>());
     });
+    test('Can instantiate SafeArrayAddRef', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final SafeArrayAddRef = oleaut32.lookupFunction<
+          Int32 Function(
+              Pointer<SAFEARRAY> psa, Pointer<Pointer> ppDataToRelease),
+          int Function(Pointer<SAFEARRAY> psa,
+              Pointer<Pointer> ppDataToRelease)>('SafeArrayAddRef');
+      expect(SafeArrayAddRef, isA<Function>());
+    });
+    test('Can instantiate SafeArrayAllocData', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final SafeArrayAllocData = oleaut32.lookupFunction<
+          Int32 Function(Pointer<SAFEARRAY> psa),
+          int Function(Pointer<SAFEARRAY> psa)>('SafeArrayAllocData');
+      expect(SafeArrayAllocData, isA<Function>());
+    });
+    test('Can instantiate SafeArrayAllocDescriptor', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final SafeArrayAllocDescriptor = oleaut32.lookupFunction<
+          Int32 Function(Uint32 cDims, Pointer<Pointer<SAFEARRAY>> ppsaOut),
+          int Function(int cDims,
+              Pointer<Pointer<SAFEARRAY>> ppsaOut)>('SafeArrayAllocDescriptor');
+      expect(SafeArrayAllocDescriptor, isA<Function>());
+    });
+    test('Can instantiate SafeArrayAllocDescriptorEx', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final SafeArrayAllocDescriptorEx = oleaut32.lookupFunction<
+              Int32 Function(
+                  Uint16 vt, Uint32 cDims, Pointer<Pointer<SAFEARRAY>> ppsaOut),
+              int Function(
+                  int vt, int cDims, Pointer<Pointer<SAFEARRAY>> ppsaOut)>(
+          'SafeArrayAllocDescriptorEx');
+      expect(SafeArrayAllocDescriptorEx, isA<Function>());
+    });
+    test('Can instantiate SafeArrayCopy', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final SafeArrayCopy = oleaut32.lookupFunction<
+          Int32 Function(
+              Pointer<SAFEARRAY> psa, Pointer<Pointer<SAFEARRAY>> ppsaOut),
+          int Function(Pointer<SAFEARRAY> psa,
+              Pointer<Pointer<SAFEARRAY>> ppsaOut)>('SafeArrayCopy');
+      expect(SafeArrayCopy, isA<Function>());
+    });
+    test('Can instantiate SafeArrayCopyData', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final SafeArrayCopyData = oleaut32.lookupFunction<
+          Int32 Function(
+              Pointer<SAFEARRAY> psaSource, Pointer<SAFEARRAY> psaTarget),
+          int Function(Pointer<SAFEARRAY> psaSource,
+              Pointer<SAFEARRAY> psaTarget)>('SafeArrayCopyData');
+      expect(SafeArrayCopyData, isA<Function>());
+    });
+    test('Can instantiate SafeArrayCreate', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final SafeArrayCreate = oleaut32.lookupFunction<
+          Pointer<SAFEARRAY> Function(
+              Uint16 vt, Uint32 cDims, Pointer<SAFEARRAYBOUND> rgsabound),
+          Pointer<SAFEARRAY> Function(int vt, int cDims,
+              Pointer<SAFEARRAYBOUND> rgsabound)>('SafeArrayCreate');
+      expect(SafeArrayCreate, isA<Function>());
+    });
+    test('Can instantiate SafeArrayCreateEx', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final SafeArrayCreateEx = oleaut32.lookupFunction<
+          Pointer<SAFEARRAY> Function(Uint16 vt, Uint32 cDims,
+              Pointer<SAFEARRAYBOUND> rgsabound, Pointer pvExtra),
+          Pointer<SAFEARRAY> Function(
+              int vt,
+              int cDims,
+              Pointer<SAFEARRAYBOUND> rgsabound,
+              Pointer pvExtra)>('SafeArrayCreateEx');
+      expect(SafeArrayCreateEx, isA<Function>());
+    });
     test('Can instantiate SafeArrayCreateVector', () {
       final oleaut32 = DynamicLibrary.open('oleaut32.dll');
       final SafeArrayCreateVector = oleaut32.lookupFunction<
@@ -11851,6 +11924,15 @@ void main() {
               int vt, int lLbound, int cElements)>('SafeArrayCreateVector');
       expect(SafeArrayCreateVector, isA<Function>());
     });
+    test('Can instantiate SafeArrayCreateVectorEx', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final SafeArrayCreateVectorEx = oleaut32.lookupFunction<
+          Pointer<SAFEARRAY> Function(
+              Uint16 vt, Int32 lLbound, Uint32 cElements, Pointer pvExtra),
+          Pointer<SAFEARRAY> Function(int vt, int lLbound, int cElements,
+              Pointer pvExtra)>('SafeArrayCreateVectorEx');
+      expect(SafeArrayCreateVectorEx, isA<Function>());
+    });
     test('Can instantiate SafeArrayDestroy', () {
       final oleaut32 = DynamicLibrary.open('oleaut32.dll');
       final SafeArrayDestroy = oleaut32.lookupFunction<
@@ -11858,12 +11940,163 @@ void main() {
           int Function(Pointer<SAFEARRAY> psa)>('SafeArrayDestroy');
       expect(SafeArrayDestroy, isA<Function>());
     });
+    test('Can instantiate SafeArrayDestroyData', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final SafeArrayDestroyData = oleaut32.lookupFunction<
+          Int32 Function(Pointer<SAFEARRAY> psa),
+          int Function(Pointer<SAFEARRAY> psa)>('SafeArrayDestroyData');
+      expect(SafeArrayDestroyData, isA<Function>());
+    });
+    test('Can instantiate SafeArrayDestroyDescriptor', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final SafeArrayDestroyDescriptor = oleaut32.lookupFunction<
+          Int32 Function(Pointer<SAFEARRAY> psa),
+          int Function(Pointer<SAFEARRAY> psa)>('SafeArrayDestroyDescriptor');
+      expect(SafeArrayDestroyDescriptor, isA<Function>());
+    });
+    test('Can instantiate SafeArrayGetDim', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final SafeArrayGetDim = oleaut32.lookupFunction<
+          Uint32 Function(Pointer<SAFEARRAY> psa),
+          int Function(Pointer<SAFEARRAY> psa)>('SafeArrayGetDim');
+      expect(SafeArrayGetDim, isA<Function>());
+    });
+    test('Can instantiate SafeArrayGetElement', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final SafeArrayGetElement = oleaut32.lookupFunction<
+          Int32 Function(
+              Pointer<SAFEARRAY> psa, Pointer<Int32> rgIndices, Pointer pv),
+          int Function(Pointer<SAFEARRAY> psa, Pointer<Int32> rgIndices,
+              Pointer pv)>('SafeArrayGetElement');
+      expect(SafeArrayGetElement, isA<Function>());
+    });
+    test('Can instantiate SafeArrayGetElemsize', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final SafeArrayGetElemsize = oleaut32.lookupFunction<
+          Uint32 Function(Pointer<SAFEARRAY> psa),
+          int Function(Pointer<SAFEARRAY> psa)>('SafeArrayGetElemsize');
+      expect(SafeArrayGetElemsize, isA<Function>());
+    });
+    test('Can instantiate SafeArrayGetIID', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final SafeArrayGetIID = oleaut32.lookupFunction<
+          Int32 Function(Pointer<SAFEARRAY> psa, Pointer<GUID> pguid),
+          int Function(
+              Pointer<SAFEARRAY> psa, Pointer<GUID> pguid)>('SafeArrayGetIID');
+      expect(SafeArrayGetIID, isA<Function>());
+    });
+    test('Can instantiate SafeArrayGetLBound', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final SafeArrayGetLBound = oleaut32.lookupFunction<
+          Int32 Function(
+              Pointer<SAFEARRAY> psa, Uint32 nDim, Pointer<Int32> plLbound),
+          int Function(Pointer<SAFEARRAY> psa, int nDim,
+              Pointer<Int32> plLbound)>('SafeArrayGetLBound');
+      expect(SafeArrayGetLBound, isA<Function>());
+    });
+    test('Can instantiate SafeArrayGetRecordInfo', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final SafeArrayGetRecordInfo = oleaut32.lookupFunction<
+          Int32 Function(
+              Pointer<SAFEARRAY> psa, Pointer<Pointer<COMObject>> prinfo),
+          int Function(Pointer<SAFEARRAY> psa,
+              Pointer<Pointer<COMObject>> prinfo)>('SafeArrayGetRecordInfo');
+      expect(SafeArrayGetRecordInfo, isA<Function>());
+    });
+    test('Can instantiate SafeArrayGetUBound', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final SafeArrayGetUBound = oleaut32.lookupFunction<
+          Int32 Function(
+              Pointer<SAFEARRAY> psa, Uint32 nDim, Pointer<Int32> plUbound),
+          int Function(Pointer<SAFEARRAY> psa, int nDim,
+              Pointer<Int32> plUbound)>('SafeArrayGetUBound');
+      expect(SafeArrayGetUBound, isA<Function>());
+    });
+    test('Can instantiate SafeArrayGetVartype', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final SafeArrayGetVartype = oleaut32.lookupFunction<
+          Int32 Function(Pointer<SAFEARRAY> psa, Pointer<Uint16> pvt),
+          int Function(Pointer<SAFEARRAY> psa,
+              Pointer<Uint16> pvt)>('SafeArrayGetVartype');
+      expect(SafeArrayGetVartype, isA<Function>());
+    });
+    test('Can instantiate SafeArrayLock', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final SafeArrayLock = oleaut32.lookupFunction<
+          Int32 Function(Pointer<SAFEARRAY> psa),
+          int Function(Pointer<SAFEARRAY> psa)>('SafeArrayLock');
+      expect(SafeArrayLock, isA<Function>());
+    });
+    test('Can instantiate SafeArrayPtrOfIndex', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final SafeArrayPtrOfIndex = oleaut32.lookupFunction<
+          Int32 Function(Pointer<SAFEARRAY> psa, Pointer<Int32> rgIndices,
+              Pointer<Pointer> ppvData),
+          int Function(Pointer<SAFEARRAY> psa, Pointer<Int32> rgIndices,
+              Pointer<Pointer> ppvData)>('SafeArrayPtrOfIndex');
+      expect(SafeArrayPtrOfIndex, isA<Function>());
+    });
+    test('Can instantiate SafeArrayPutElement', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final SafeArrayPutElement = oleaut32.lookupFunction<
+          Int32 Function(
+              Pointer<SAFEARRAY> psa, Pointer<Int32> rgIndices, Pointer pv),
+          int Function(Pointer<SAFEARRAY> psa, Pointer<Int32> rgIndices,
+              Pointer pv)>('SafeArrayPutElement');
+      expect(SafeArrayPutElement, isA<Function>());
+    });
+    test('Can instantiate SafeArrayRedim', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final SafeArrayRedim = oleaut32.lookupFunction<
+          Int32 Function(
+              Pointer<SAFEARRAY> psa, Pointer<SAFEARRAYBOUND> psaboundNew),
+          int Function(Pointer<SAFEARRAY> psa,
+              Pointer<SAFEARRAYBOUND> psaboundNew)>('SafeArrayRedim');
+      expect(SafeArrayRedim, isA<Function>());
+    });
+    test('Can instantiate SafeArrayReleaseData', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final SafeArrayReleaseData = oleaut32.lookupFunction<
+          Void Function(Pointer pData),
+          void Function(Pointer pData)>('SafeArrayReleaseData');
+      expect(SafeArrayReleaseData, isA<Function>());
+    });
+    test('Can instantiate SafeArrayReleaseDescriptor', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final SafeArrayReleaseDescriptor = oleaut32.lookupFunction<
+          Void Function(Pointer<SAFEARRAY> psa),
+          void Function(Pointer<SAFEARRAY> psa)>('SafeArrayReleaseDescriptor');
+      expect(SafeArrayReleaseDescriptor, isA<Function>());
+    });
+    test('Can instantiate SafeArraySetIID', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final SafeArraySetIID = oleaut32.lookupFunction<
+          Int32 Function(Pointer<SAFEARRAY> psa, Pointer<GUID> guid),
+          int Function(
+              Pointer<SAFEARRAY> psa, Pointer<GUID> guid)>('SafeArraySetIID');
+      expect(SafeArraySetIID, isA<Function>());
+    });
+    test('Can instantiate SafeArraySetRecordInfo', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final SafeArraySetRecordInfo = oleaut32.lookupFunction<
+          Int32 Function(Pointer<SAFEARRAY> psa, Pointer<COMObject> prinfo),
+          int Function(Pointer<SAFEARRAY> psa,
+              Pointer<COMObject> prinfo)>('SafeArraySetRecordInfo');
+      expect(SafeArraySetRecordInfo, isA<Function>());
+    });
     test('Can instantiate SafeArrayUnaccessData', () {
       final oleaut32 = DynamicLibrary.open('oleaut32.dll');
       final SafeArrayUnaccessData = oleaut32.lookupFunction<
           Int32 Function(Pointer<SAFEARRAY> psa),
           int Function(Pointer<SAFEARRAY> psa)>('SafeArrayUnaccessData');
       expect(SafeArrayUnaccessData, isA<Function>());
+    });
+    test('Can instantiate SafeArrayUnlock', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final SafeArrayUnlock = oleaut32.lookupFunction<
+          Int32 Function(Pointer<SAFEARRAY> psa),
+          int Function(Pointer<SAFEARRAY> psa)>('SafeArrayUnlock');
+      expect(SafeArrayUnlock, isA<Function>());
     });
     test('Can instantiate SysAllocString', () {
       final oleaut32 = DynamicLibrary.open('oleaut32.dll');
