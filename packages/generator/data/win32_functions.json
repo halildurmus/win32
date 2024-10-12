@@ -5446,6 +5446,10 @@
         "prototype": "HRESULT SHGetKnownFolderPath(\n  REFKNOWNFOLDERID rfid,\n  DWORD            dwFlags,\n  HANDLE           hToken,\n  PWSTR            *ppszPath\n);",
         "comment": "Retrieves the full path of a known folder identified by the folder's KNOWNFOLDERID."
     },
+    "SHGetLocalizedName": {
+        "prototype": "SHSTDAPI SHGetLocalizedName(\n  [in]  PCWSTR pszPath,\n  [out] PWSTR  pszResModule,\n        UINT   cch,\n  [out] int    *pidsRes\n);",
+        "comment": "Retrieves the localized name of a file in a Shell folder."
+    },
     "ShowCaret": {
         "prototype": "BOOL ShowCaret(\n  HWND hWnd\n);",
         "comment": "Makes the caret visible on the screen at the caret's current position. When the caret becomes visible, it begins flashing automatically."

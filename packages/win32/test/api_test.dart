@@ -11416,6 +11416,15 @@ void main() {
               Pointer<Pointer<Utf16>> ppszPath)>('SHGetKnownFolderPath');
       expect(SHGetKnownFolderPath, isA<Function>());
     });
+    test('Can instantiate SHGetLocalizedName', () {
+      final shell32 = DynamicLibrary.open('shell32.dll');
+      final SHGetLocalizedName = shell32.lookupFunction<
+          Int32 Function(Pointer<Utf16> pszPath, Pointer<Utf16> pszResModule,
+              Uint32 cch, Pointer<Int32> pidsRes),
+          int Function(Pointer<Utf16> pszPath, Pointer<Utf16> pszResModule,
+              int cch, Pointer<Int32> pidsRes)>('SHGetLocalizedName');
+      expect(SHGetLocalizedName, isA<Function>());
+    });
     test('Can instantiate SHQueryRecycleBin', () {
       final shell32 = DynamicLibrary.open('shell32.dll');
       final SHQueryRecycleBin = shell32.lookupFunction<

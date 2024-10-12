@@ -378,6 +378,27 @@ final _SHGetKnownFolderPath = _shell32.lookupFunction<
     int Function(Pointer<GUID> rfid, int dwFlags, int hToken,
         Pointer<Pointer<Utf16>> ppszPath)>('SHGetKnownFolderPath');
 
+/// Retrieves the localized name of a file in a Shell folder.
+///
+/// ```c
+/// SHSTDAPI SHGetLocalizedName(
+///   [in]  PCWSTR pszPath,
+///   [out] PWSTR  pszResModule,
+///         UINT   cch,
+///   [out] int    *pidsRes
+/// );
+/// ```
+/// {@category shell32}
+int SHGetLocalizedName(Pointer<Utf16> pszPath, Pointer<Utf16> pszResModule,
+        int cch, Pointer<Int32> pidsRes) =>
+    _SHGetLocalizedName(pszPath, pszResModule, cch, pidsRes);
+
+final _SHGetLocalizedName = _shell32.lookupFunction<
+    Int32 Function(Pointer<Utf16> pszPath, Pointer<Utf16> pszResModule,
+        Uint32 cch, Pointer<Int32> pidsRes),
+    int Function(Pointer<Utf16> pszPath, Pointer<Utf16> pszResModule, int cch,
+        Pointer<Int32> pidsRes)>('SHGetLocalizedName');
+
 /// Retrieves the size of the Recycle Bin and the number of items in it, for
 /// a specified drive.
 ///
