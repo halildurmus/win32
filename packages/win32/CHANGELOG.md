@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [5.6.0-wip]
+## [5.6.0] - 2024-10-12
 
 - Add `DISPLAY_DEVICE_STATE_FLAGS` enum (#901)
 - Add `FILE_DEVICE_TYPE` enum (#901)
@@ -1227,3 +1227,4 @@ write:
 [5.5.3]: https://github.com/halildurmus/win32/compare/v5.5.2...v5.5.3
 [5.5.4]: https://github.com/halildurmus/win32/compare/v5.5.3...v5.5.4
 [5.5.5]: https://github.com/halildurmus/win32/compare/v5.5.4...v5.5.5
+[5.6.0]: https://github.com/halildurmus/win32/compare/v5.5.5...v5.6.0
