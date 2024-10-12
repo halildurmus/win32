@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [5.5.6-wip]
+## [5.6.0-wip]
 
 - Add `DISPLAY_DEVICE_STATE_FLAGS` enum (#901)
 - Add `FILE_DEVICE_TYPE` enum (#901)
@@ -223,6 +223,7 @@ All notable changes to this project will be documented in this file.
 - Add `SafeArrayAccessData`, `SafeArrayCreateVector`, `SafeArrayDestroy`, and
   `SafeArrayUnaccessData` APIs (#905, thanks to @aweinber)
 - Add remaining `SafeArray*` APIs (#906)
+- Add `SHGetLocalizedName` API (#908)
 
 ## [5.5.5] - 2024-10-02
 
