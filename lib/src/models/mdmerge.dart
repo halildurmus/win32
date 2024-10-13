@@ -41,9 +41,6 @@ abstract final class MdMerge {
     return '${installationFolder}bin\\$productVersion.0\\$arch\\mdmerge.exe';
   }
 
-  /// Merges multiple metadata (`.winmd`) files in [metadataPath] into a single
-  /// file at [outputPath].
-
   /// Merges multiple WinRT metadata (`.winmd`) files located in [metadataPath]
   /// into a single file at [outputPath].
   static void mergeMetadata(String metadataPath, String outputPath) {
