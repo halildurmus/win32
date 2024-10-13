@@ -174,7 +174,7 @@ String convertTypeToProjection(
 void main(List<String> args) async {
   await MetadataStore.loadWdkMetadata();
   await MetadataStore.loadWin32Metadata();
-  await MetadataStore.loadWinRTMetadata();
+  await MetadataStore.loadWinrtMetadata();
 
   listTokens();
   listInterfaces();

@@ -1,3 +1,10 @@
+## 5.1.0-wip
+
+- Add `MetadataStore.loadWinrtMetadata()` to load the Windows Runtime (WinRT)
+  metadata.
+- Deprecate `MetadataStore.loadWinRTMetadata()` method in favor of
+  `MetadataStore.loadWinrtMetadata()`.
+
 ## 5.0.4
 
 - Fix an issue where resolving a nested type would fail.

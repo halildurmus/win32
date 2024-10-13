@@ -28,7 +28,7 @@ import 'package:winmd/winmd.dart';
 
 void main() async {
   // Load the WinRT metadata
-  final scope = await MetadataStore.loadWinRTMetadata();
+  final scope = await MetadataStore.loadWinrtMetadata();
 
   // A Windows Runtime class
   const typeToGenerate = 'Windows.Media.Playback.MediaPlayer';

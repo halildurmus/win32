@@ -51,7 +51,7 @@ void main() {
     test('lists NuGet packages', () async {
       await MetadataStore.loadWdkMetadata();
       await MetadataStore.loadWin32Metadata();
-      await MetadataStore.loadWinRTMetadata();
+      await MetadataStore.loadWinrtMetadata();
 
       final packages = LocalStorage.packages;
       check(packages).isNotEmpty();

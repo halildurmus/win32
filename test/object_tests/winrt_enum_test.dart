@@ -11,7 +11,7 @@ void main() {
   late Scope scope;
 
   setUpAll(() async {
-    scope = await MetadataStore.loadWinRTMetadata();
+    scope = await MetadataStore.loadWinrtMetadata();
   });
 
   // .class public auto ansi sealed import windowsruntime Windows.Storage.Pickers.PickerViewMode

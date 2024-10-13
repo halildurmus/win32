@@ -115,7 +115,7 @@ abstract final class MetadataStore {
       throw WinmdException(
         'Metadata scope for `$typeName` could not be found. Please ensure '
         'that you load the WinRT metadata first by calling '
-        '`loadWinRTMetadata()`.',
+        '`loadWinrtMetadata()`.',
       );
     }
 
@@ -344,7 +344,7 @@ abstract final class MetadataStore {
   /// single file before loading.
   ///
   /// Throws an exception if the download or loading fails.
-  static Future<Scope> _loadWinRTMetadata({required String version}) async {
+  static Future<Scope> _loadWinrtMetadata({required String version}) async {
     final MetadataType(:assetName, :packageName) = MetadataType.winrt;
     final packagePath = await _unpackPackage(packageName, version);
 
@@ -364,7 +364,18 @@ abstract final class MetadataStore {
   /// If the metadata is already downloaded, it loads it from the local cache.
   ///
   /// Throws an exception if the download or loading fails.
-  static Future<Scope> loadWinRTMetadata({String? version}) async {
+  @Deprecated('Use loadWinrtMetadata instead.')
+  static Future<Scope> loadWinRTMetadata({String? version}) async =>
+      loadWinrtMetadata(version: version);
+
+  /// Loads WinRT metadata
+  ///
+  /// If [version] is not specified, it loads the latest stable version.
+  ///
+  /// If the metadata is already downloaded, it loads it from the local cache.
+  ///
+  /// Throws an exception if the download or loading fails.
+  static Future<Scope> loadWinrtMetadata({String? version}) async {
     if (!_isInitialized) initialize();
 
     final MetadataType(:packageName) = MetadataType.winrt;
@@ -389,7 +400,7 @@ abstract final class MetadataStore {
     final randomAccessFile = lockFile.openSync(mode: FileMode.write)
       ..lockSync(FileLock.blockingExclusive);
     try {
-      return await _loadWinRTMetadata(version: downloadVersion);
+      return await _loadWinrtMetadata(version: downloadVersion);
     } finally {
       randomAccessFile.closeSync();
       try {

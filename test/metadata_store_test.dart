@@ -56,7 +56,7 @@ void main() {
       check(MetadataStore.cacheInfo)
           .equals('[Windows.Wdk.winmd, Windows.Win32.winmd]');
 
-      await MetadataStore.loadWinRTMetadata();
+      await MetadataStore.loadWinrtMetadata();
       check(MetadataStore.scopeCache.length).equals(3);
       check(MetadataStore.cacheInfo)
           .equals('[Windows.Wdk.winmd, Windows.Win32.winmd, Windows.winmd]');
@@ -69,7 +69,7 @@ void main() {
     test('can find the metadata for a type', () async {
       await MetadataStore.loadWdkMetadata();
       await MetadataStore.loadWin32Metadata();
-      await MetadataStore.loadWinRTMetadata();
+      await MetadataStore.loadWinrtMetadata();
       final typeDef1 = MetadataStore.getMetadataForType(
           'Windows.Wdk.System.SystemInformation.SYSTEM_INFORMATION_CLASS');
       check(typeDef1).isNotNull();
@@ -144,7 +144,7 @@ void main() {
           .equals(
             'Metadata scope for `Windows.Globalization.Calendar` could not be '
             'found. Please ensure that you load the WinRT metadata first by '
-            'calling `loadWinRTMetadata()`.',
+            'calling `loadWinrtMetadata()`.',
           );
     });
 

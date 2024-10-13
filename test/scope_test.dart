@@ -15,7 +15,7 @@ void main() {
       (wdkScope, win32Scope, winrtScope) = await (
         MetadataStore.loadWdkMetadata(),
         MetadataStore.loadWin32Metadata(),
-        MetadataStore.loadWinRTMetadata()
+        MetadataStore.loadWinrtMetadata()
       ).wait;
     });
 

@@ -51,17 +51,17 @@
 /// To retrieve the latest WinRT metadata scope, you can use the following code:
 ///
 /// ```dart
-/// final scope = await MetadataStore.loadWinRTMetadata();
+/// final scope = await MetadataStore.loadWinrtMetadata();
 /// ```
 ///
-/// Similar to the Win32 counterpart, the `loadWinRTMetadata` method downloads
+/// Similar to the Win32 counterpart, the `loadWinrtMetadata` method downloads
 /// the latest version of the NuGet package `Microsoft.Windows.SDK.Contracts`
 /// and loads the metadata from it. If you prefer a different version, you can
 /// specify the `version` string as a parameter:
 ///
 /// ```dart
 /// final scope =
-///   await MetadataStore.loadWinRTMetadata(version: '10.0.22621.755');
+///   await MetadataStore.loadWinrtMetadata(version: '10.0.22621.755');
 /// ```
 ///
 /// To retrieve the latest WDK metadata scope, you can use the following code:
@@ -86,7 +86,7 @@
 ///
 /// **Note:** If the metadata you want to load has already been downloaded and
 /// stored locally, `loadWdkMetadata`, `loadWin32Metadata`, or
-/// `loadWinRTMetadata` will load the metadata from the local storage instead of
+/// `loadWinrtMetadata` will load the metadata from the local storage instead of
 /// downloading it again.
 ///
 /// You can get the list of downloaded NuGet packages as follows:

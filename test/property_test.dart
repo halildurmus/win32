@@ -9,7 +9,7 @@ void main() {
   late Scope winrtScope;
 
   setUpAll(() async {
-    winrtScope = await MetadataStore.loadWinRTMetadata();
+    winrtScope = await MetadataStore.loadWinrtMetadata();
   });
 
   test('Base property test', () {
