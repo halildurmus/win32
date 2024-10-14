@@ -1,4 +1,4 @@
-## 5.1.0-wip
+## 5.1.0
 
 - Add `MetadataStore.loadWinrtMetadata()` to load the Windows Runtime (WinRT)
   metadata.
