@@ -77,7 +77,7 @@ extension on Object {
 void main() async {
   await MetadataStore.loadWdkMetadata(version: wdkMetadataVersion);
   await MetadataStore.loadWin32Metadata(version: win32MetadataVersion);
-  await MetadataStore.loadWinRTMetadata(version: winrtMetadataVersion);
+  await MetadataStore.loadWinrtMetadata(version: winrtMetadataVersion);
   printStruct();
   MetadataStore.close();
 }

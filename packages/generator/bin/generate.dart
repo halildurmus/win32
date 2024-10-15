@@ -252,7 +252,7 @@ void main() async {
       await MetadataStore.loadWin32Metadata(version: win32MetadataVersion);
   // Additionally, load WinRT metadata to ensure the correct resolution of
   // references from Win32 metadata.
-  await MetadataStore.loadWinRTMetadata();
+  await MetadataStore.loadWinrtMetadata();
 
   print('[${stopwatch.elapsed}] Loading and sorting functions...');
   final functionsToGenerate = loadFunctionsFromJson();
