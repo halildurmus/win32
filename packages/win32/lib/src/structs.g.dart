@@ -2699,6 +2699,56 @@ extension DEVMODEW_Extension_1 on DEVMODE {
   set dmNup(int value) => this.Anonymous2.dmNup = value;
 }
 
+/// Contains information about a class of devices.
+///
+/// {@category struct}
+base class DEV_BROADCAST_DEVICEINTERFACE_ extends Struct {
+  @Uint32()
+  external int dbcc_size;
+
+  @Uint32()
+  external int dbcc_devicetype;
+
+  @Uint32()
+  external int dbcc_reserved;
+
+  external GUID dbcc_classguid;
+
+  @Array(1)
+  external Array<Uint16> _dbcc_name;
+
+  String get dbcc_name {
+    final charCodes = <int>[];
+    for (var i = 0; i < 1; i++) {
+      if (_dbcc_name[i] == 0x00) break;
+      charCodes.add(_dbcc_name[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set dbcc_name(String value) {
+    final stringToStore = value.padRight(1, '\x00');
+    for (var i = 0; i < 1; i++) {
+      _dbcc_name[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+}
+
+/// Serves as a standard header for information related to a device event
+/// reported through the WM_DEVICECHANGE message.
+///
+/// {@category struct}
+base class DEV_BROADCAST_HDR extends Struct {
+  @Uint32()
+  external int dbch_size;
+
+  @Uint32()
+  external int dbch_devicetype;
+
+  @Uint32()
+  external int dbch_reserved;
+}
+
 /// The DIBSECTION structure contains information about a DIB created by
 /// calling the CreateDIBSection function. A DIBSECTION structure includes
 /// information about the bitmap's dimensions, color format, color masks,

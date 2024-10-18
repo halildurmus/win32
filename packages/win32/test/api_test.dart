@@ -7980,6 +7980,15 @@ void main() {
           int Function(Pointer<Utf16> lpszFormat)>('RegisterClipboardFormatW');
       expect(RegisterClipboardFormat, isA<Function>());
     });
+    test('Can instantiate RegisterDeviceNotification', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final RegisterDeviceNotification = user32.lookupFunction<
+          Pointer Function(
+              IntPtr hRecipient, Pointer NotificationFilter, Uint32 Flags),
+          Pointer Function(int hRecipient, Pointer NotificationFilter,
+              int Flags)>('RegisterDeviceNotificationW');
+      expect(RegisterDeviceNotification, isA<Function>());
+    });
     test('Can instantiate RegisterHotKey', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final RegisterHotKey = user32.lookupFunction<
@@ -14748,6 +14757,24 @@ void main() {
         expect(WslUnregisterDistribution, isA<Function>());
       });
     }
+  });
+
+  group('Test wtsapi32 functions', () {
+    test('Can instantiate WTSRegisterSessionNotification', () {
+      final wtsapi32 = DynamicLibrary.open('wtsapi32.dll');
+      final WTSRegisterSessionNotification = wtsapi32.lookupFunction<
+          Int32 Function(IntPtr hWnd, Uint32 dwFlags),
+          int Function(
+              int hWnd, int dwFlags)>('WTSRegisterSessionNotification');
+      expect(WTSRegisterSessionNotification, isA<Function>());
+    });
+    test('Can instantiate WTSUnRegisterSessionNotification', () {
+      final wtsapi32 = DynamicLibrary.open('wtsapi32.dll');
+      final WTSUnRegisterSessionNotification = wtsapi32.lookupFunction<
+          Int32 Function(IntPtr hWnd),
+          int Function(int hWnd)>('WTSUnRegisterSessionNotification');
+      expect(WTSUnRegisterSessionNotification, isA<Function>());
+    });
   });
 
   group('Test xinput1_4 functions', () {

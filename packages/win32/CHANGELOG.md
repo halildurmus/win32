@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## 5.6.1-wip
+
+- Add `RegisterDeviceNotification`, `WTSRegisterSessionNotification`, and
+  `WTSUnRegisterSessionNotification` APIs (#913)
+- Add `NOTIFY_FOR_THIS_SESSION` and `NOTIFY_FOR_ALL_SESSIONS` constants (#913)
+- Add `DEV_BROADCAST_DEVICEINTERFACE_` and `DEV_BROADCAST_HDR` structures (#913)
+- Add `DEV_BROADCAST_HDR_DEVICE_TYPE` enum (#913)
+
 ## [5.6.0] - 2024-10-12
 
 - Add `DISPLAY_DEVICE_STATE_FLAGS` enum (#901)

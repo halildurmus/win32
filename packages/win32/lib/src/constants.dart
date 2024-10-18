@@ -12846,3 +12846,10 @@ class SpeechVoiceSpeakFlags {
   /// This mask has every unused bit set.
   static const SVSFUnusedFlags = -512;
 }
+
+/// Only session notifications involving the session attached to by the window
+/// identified by the _hWnd_ parameter value are to be received.
+const NOTIFY_FOR_THIS_SESSION = 0;
+
+/// All session notifications are to be received.
+const NOTIFY_FOR_ALL_SESSIONS = 1;

@@ -168,6 +168,8 @@ void main()
     printf("  'DECIMAL': %zu,\n", sizeof(DECIMAL));
     printf("  'DESIGNVECTOR': %zu,\n", sizeof(DESIGNVECTOR));
     printf("  'DEVMODE': %zu,\n", sizeof(DEVMODEW));
+    printf("  'DEV_BROADCAST_DEVICEINTERFACE_': %zu,\n", sizeof(DEV_BROADCAST_DEVICEINTERFACE_W));
+    printf("  'DEV_BROADCAST_HDR': %zu,\n", sizeof(DEV_BROADCAST_HDR));
     printf("  'DIBSECTION': %zu,\n", sizeof(DIBSECTION));
     printf("  'DISK_EXTENT': %zu,\n", sizeof(DISK_EXTENT));
     printf("  'DISK_GEOMETRY': %zu,\n", sizeof(DISK_GEOMETRY));
