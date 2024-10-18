@@ -9,6 +9,8 @@ All notable changes to this project will be documented in this file.
 - Add `NOTIFY_FOR_THIS_SESSION` and `NOTIFY_FOR_ALL_SESSIONS` constants (#913)
 - Add `DEV_BROADCAST_DEVICEINTERFACE_` and `DEV_BROADCAST_HDR` structures (#913)
 - Add `DEV_BROADCAST_HDR_DEVICE_TYPE` enum (#913)
+- Add `GUID_CONSOLE_DISPLAY_STATE`, `WM_WTSESSION_CHANGE`, and `WTS_SESSION_*`
+  constants (#914)
 
 ## [5.6.0] - 2024-10-12
 

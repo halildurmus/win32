@@ -2380,6 +2380,9 @@ const WM_POWERBROADCAST = 0x0218;
 /// device or the computer.
 const WM_DEVICECHANGE = 0x0219;
 
+/// Notifies applications of changes in session state.
+const WM_WTSSESSION_CHANGE = 0x02B1;
+
 /// Sent when the effective dots per inch (dpi) for a window has changed.
 /// Requires Windows 8.1 or above.
 const WM_DPICHANGED = 0x02E0;
@@ -12853,3 +12856,44 @@ const NOTIFY_FOR_THIS_SESSION = 0;
 
 /// All session notifications are to be received.
 const NOTIFY_FOR_ALL_SESSIONS = 1;
+
+/// The current monitor's display state has changed.
+const GUID_CONSOLE_DISPLAY_STATE = '{6fe69556-704a-47a0-8f24-c28d936fda47}';
+
+/// The session identified by lParam was connected to the console terminal or
+/// RemoteFX session.
+const WTS_CONSOLE_CONNECT = 0x1;
+
+/// The session identified by lParam was disconnected from the console terminal
+/// or RemoteFX session.
+const WTS_CONSOLE_DISCONNECT = 0x2;
+
+/// The session identified by lParam was connected to the remote terminal.
+const WTS_REMOTE_CONNECT = 0x3;
+
+/// The session identified by lParam was disconnected from the remote terminal.
+const WTS_REMOTE_DISCONNECT = 0x4;
+
+/// A user has logged on to the session identified by lParam.
+const WTS_SESSION_LOGON = 0x5;
+
+/// A user has logged off the session identified by lParam.
+const WTS_SESSION_LOGOFF = 0x6;
+
+/// The session identified by lParam has been locked.
+const WTS_SESSION_LOCK = 0x7;
+
+/// The session identified by lParam has been unlocked.
+const WTS_SESSION_UNLOCK = 0x8;
+
+/// The session identified by lParam has changed its remote controlled status.
+///
+/// To determine the status, call GetSystemMetrics and check the
+/// SM_REMOTECONTROL metric.
+const WTS_SESSION_REMOTE_CONTROL = 0x9;
+
+/// Reserved for future use.
+const WTS_SESSION_CREATE = 0xA;
+
+/// Reserved for future use.
+const WTS_SESSION_TERMINATE = 0xB;
