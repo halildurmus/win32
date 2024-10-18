@@ -8871,6 +8871,13 @@ void main() {
               Pointer<Utf16> lpClassName, int hInstance)>('UnregisterClassW');
       expect(UnregisterClass, isA<Function>());
     });
+    test('Can instantiate UnregisterDeviceNotification', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final UnregisterDeviceNotification = user32.lookupFunction<
+          Int32 Function(Pointer Handle),
+          int Function(Pointer Handle)>('UnregisterDeviceNotification');
+      expect(UnregisterDeviceNotification, isA<Function>());
+    });
     test('Can instantiate UnregisterHotKey', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final UnregisterHotKey = user32.lookupFunction<

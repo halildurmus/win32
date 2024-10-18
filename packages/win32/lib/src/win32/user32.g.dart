@@ -8184,6 +8184,21 @@ final _UnregisterClass = _user32.lookupFunction<
     int Function(
         Pointer<Utf16> lpClassName, int hInstance)>('UnregisterClassW');
 
+/// Closes the specified device notification handle.
+///
+/// ```c
+/// BOOL UnregisterDeviceNotification(
+///   [in] HDEVNOTIFY Handle
+/// );
+/// ```
+/// {@category user32}
+int UnregisterDeviceNotification(Pointer Handle) =>
+    _UnregisterDeviceNotification(Handle);
+
+final _UnregisterDeviceNotification = _user32.lookupFunction<
+    Int32 Function(Pointer Handle),
+    int Function(Pointer Handle)>('UnregisterDeviceNotification');
+
 /// Frees a hot key previously registered by the calling thread.
 ///
 /// ```c

@@ -5795,6 +5795,10 @@
         "prototype": "BOOL UnregisterClassW(\n  LPCWSTR   lpClassName,\n  HINSTANCE hInstance\n);",
         "comment": "Unregisters a window class, freeing the memory required for the class."
     },
+    "UnregisterDeviceNotification": {
+        "prototype": "BOOL UnregisterDeviceNotification(\n  [in] HDEVNOTIFY Handle\n);",
+        "comment": "Closes the specified device notification handle."
+    },
     "UnregisterHotKey": {
         "prototype": "BOOL UnregisterHotKey(\n  HWND hWnd,\n  int  id\n);",
         "comment": "Frees a hot key previously registered by the calling thread."
