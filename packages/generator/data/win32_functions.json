@@ -4205,6 +4205,11 @@
         "prototype": "UINT RegisterClipboardFormatW(\n  LPCWSTR lpszFormat\n);",
         "comment": "Registers a new clipboard format. This format can then be used as a valid clipboard format."
     },
+    "RegisterDeviceNotification": {
+        "prototype": "HDEVNOTIFY RegisterDeviceNotificationW(\n  [in] HANDLE hRecipient,\n  [in] LPVOID NotificationFilter,\n  [in] DWORD  Flags\n);",
+        "comment": "Registers the device or type of device for which a window will receive notifications.",
+        "category": "user32"
+    },
     "RegisterHotKey": {
         "prototype": "BOOL RegisterHotKey(\n  HWND hWnd,\n  int  id,\n  UINT fsModifiers,\n  UINT vk\n);",
         "comment": "Defines a system-wide hot key."
@@ -6474,6 +6479,14 @@
         "comment": "Unregisters a distribution from the Windows Subsystem for Linux (WSL).",
         "category": "wslapi",
         "minimumWindowsVersion": "WIN10_20H1"
+    },
+    "WTSRegisterSessionNotification": {
+        "prototype": "BOOL WTSRegisterSessionNotification(\n  [in] HWND  hWnd,\n  [in] DWORD dwFlags\n);",
+        "comment": "Registers the specified window to receive session change notifications."
+    },
+    "WTSUnRegisterSeessionNotification": {
+        "prototype": "BOOL WTSUnRegisterSessionNotification(\n  [in] HWND hWnd\n);",
+        "comment": "Unregisters the specified window so that it receives no further session change notifications."
     },
     "XInputEnable": {
         "prototype": "void XInputEnable(\n  [in] BOOL enable\n);",

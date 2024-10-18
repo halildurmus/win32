@@ -887,6 +887,15 @@ extension type const DESKTOP_CONTROL_FLAGS(int _) implements int {
   static const DF_ALLOWOTHERACCOUNTHOOK = 1;
 }
 
+/// {@category enum}
+extension type const DEV_BROADCAST_HDR_DEVICE_TYPE(int _) implements int {
+  static const DBT_DEVTYP_DEVICEINTERFACE = 5;
+  static const DBT_DEVTYP_HANDLE = 6;
+  static const DBT_DEVTYP_OEM = 0;
+  static const DBT_DEVTYP_PORT = 3;
+  static const DBT_DEVTYP_VOLUME = 2;
+}
+
 /// Indicates a spoofed device scale factor, as a percent.
 ///
 /// Used by IApplicationDesignModeSettings::SetApplicationViewState and

@@ -6199,6 +6199,27 @@ final _RegisterClipboardFormat = _user32.lookupFunction<
     Uint32 Function(Pointer<Utf16> lpszFormat),
     int Function(Pointer<Utf16> lpszFormat)>('RegisterClipboardFormatW');
 
+/// Registers the device or type of device for which a window will receive
+/// notifications.
+///
+/// ```c
+/// HDEVNOTIFY RegisterDeviceNotificationW(
+///   [in] HANDLE hRecipient,
+///   [in] LPVOID NotificationFilter,
+///   [in] DWORD  Flags
+/// );
+/// ```
+/// {@category user32}
+Pointer RegisterDeviceNotification(
+        int hRecipient, Pointer NotificationFilter, int Flags) =>
+    _RegisterDeviceNotification(hRecipient, NotificationFilter, Flags);
+
+final _RegisterDeviceNotification = _user32.lookupFunction<
+    Pointer Function(
+        IntPtr hRecipient, Pointer NotificationFilter, Uint32 Flags),
+    Pointer Function(int hRecipient, Pointer NotificationFilter,
+        int Flags)>('RegisterDeviceNotificationW');
+
 /// Defines a system-wide hot key.
 ///
 /// ```c
