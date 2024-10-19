@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file.
 
 - Add `UnregisterDeviceNotification` API (#916)
 - Add `DEV_BROADCAST_VOLUME` struct
+- Add `DRIVE_UNKNOWN`, `DRIVE_NO_ROOT_DIR`, `DRIVE_REMOVABLE`, `DRIVE_FIXED`,
+  `DRIVE_REMOTE`, `DRIVE_CDROM`, and `DRIVE_RAMDISK` constants
 
 ## [5.6.1] - 2024-10-18
 
