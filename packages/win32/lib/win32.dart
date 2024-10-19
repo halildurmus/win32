@@ -26,6 +26,7 @@ export 'src/callbacks.dart';
 export 'src/constants.dart';
 export 'src/constants_metadata.dart';
 export 'src/constants_nodoc.dart';
+export 'src/dispatcher.dart';
 export 'src/enums.dart';
 export 'src/enums.g.dart' hide ADDRESS_FAMILY, WINSOCK_SOCKET_TYPE;
 export 'src/exceptions.dart';

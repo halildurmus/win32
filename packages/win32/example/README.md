@@ -141,21 +141,21 @@ visit [pub.dev] to explore packages that depend on it.
 
 ## COM APIs
 
-| Example             | Description                                                    |
-| ------------------- | -------------------------------------------------------------- |
-| [com_context.dart]  | Shows interaction of Dart isolates and COM apartments          |
-| [com_demo.dart]     | Demonstrates COM object creation, casting, and calling methods |
-| [guid.dart]         | Creates a globally unique identifier (GUID)                    |
-| [idispatch.dart]    | Demonstrates the use of `IDispatch`                            |
-| [uiautomation.dart] | Demonstrates calling Windows UI Automation APIs                |
-| [winhttp.dart]      | Demonstrates using WinHTTP APIs to make HTTP requests          |
-| [wmi_perf.dart]     | Uses WMI to retrieve performance counters                      |
-| [wmi_wql.dart]      | Uses WMI to retrieve information using WQL                     |
+| Example             | Description                                                              |
+| ------------------- | ------------------------------------------------------------------------ |
+| [com_context.dart]  | Shows interaction of Dart isolates and COM apartments                    |
+| [com_demo.dart]     | Demonstrates COM object creation, casting, and calling methods           |
+| [dispatcher.dart]   | Demonstrates calling methods on COM automation objects with `Dispatcher` |
+| [guid.dart]         | Creates a globally unique identifier (GUID)                              |
+| [uiautomation.dart] | Demonstrates calling Windows UI Automation APIs                          |
+| [winhttp.dart]      | Demonstrates using WinHTTP APIs to make HTTP requests                    |
+| [wmi_perf.dart]     | Uses WMI to retrieve performance counters                                |
+| [wmi_wql.dart]      | Uses WMI to retrieve information using WQL                               |
 
 [com_context.dart]: https://github.com/halildurmus/win32/blob/main/examples/com_context.dart
 [com_demo.dart]: https://github.com/halildurmus/win32/blob/main/examples/com_demo.dart
+[dispatcher.dart]: https://github.com/halildurmus/win32/blob/main/examples/dispatcher.dart
 [guid.dart]: https://github.com/halildurmus/win32/blob/main/examples/guid.dart
-[idispatch.dart]: https://github.com/halildurmus/win32/blob/main/examples/idispatch.dart
 [uiautomation.dart]: https://github.com/halildurmus/win32/blob/main/examples/uiautomation.dart
 [winhttp.dart]: https://github.com/halildurmus/win32/blob/main/examples/winhttp.dart
 [wmi_perf.dart]: https://github.com/halildurmus/win32/blob/main/examples/wmi_perf.dart
