@@ -2,13 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
-## 5.7.0-wip
+## [5.7.0] - 2024-10-19
 
 - Add `UnregisterDeviceNotification` API (#916)
 - Add `DEV_BROADCAST_VOLUME` struct
 - Add `DRIVE_UNKNOWN`, `DRIVE_NO_ROOT_DIR`, `DRIVE_REMOVABLE`, `DRIVE_FIXED`,
   `DRIVE_REMOTE`, `DRIVE_CDROM`, and `DRIVE_RAMDISK` constants
-- Add `Dispatcher` class (#917)
+- Add `Dispatcher` class, a thin wrapper around the `IDispatch` interface, used
+  for invoking methods and properties on COM automation objects
 
 ## [5.6.1] - 2024-10-18
 
@@ -1247,3 +1248,4 @@ write:
 [5.5.5]: https://github.com/halildurmus/win32/compare/v5.5.4...v5.5.5
 [5.6.0]: https://github.com/halildurmus/win32/compare/v5.5.5...v5.6.0
 [5.6.1]: https://github.com/halildurmus/win32/compare/v5.6.0...v5.6.1
+[5.7.0]: https://github.com/halildurmus/win32/compare/v5.6.1...v5.7.0
