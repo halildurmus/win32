@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## 5.6.2-wip
 
 - Add `UnregisterDeviceNotification` API (#916)
+- Add `DEV_BROADCAST_VOLUME` struct
 
 ## [5.6.1] - 2024-10-18
 

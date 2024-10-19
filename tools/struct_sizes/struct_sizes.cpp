@@ -170,6 +170,7 @@ void main()
     printf("  'DEVMODE': %zu,\n", sizeof(DEVMODEW));
     printf("  'DEV_BROADCAST_DEVICEINTERFACE_': %zu,\n", sizeof(DEV_BROADCAST_DEVICEINTERFACE_W));
     printf("  'DEV_BROADCAST_HDR': %zu,\n", sizeof(DEV_BROADCAST_HDR));
+    printf("  'DEV_BROADCAST_VOLUME': %zu,\n", sizeof(DEV_BROADCAST_VOLUME));
     printf("  'DIBSECTION': %zu,\n", sizeof(DIBSECTION));
     printf("  'DISK_EXTENT': %zu,\n", sizeof(DISK_EXTENT));
     printf("  'DISK_GEOMETRY': %zu,\n", sizeof(DISK_GEOMETRY));

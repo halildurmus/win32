@@ -2749,6 +2749,26 @@ base class DEV_BROADCAST_HDR extends Struct {
   external int dbch_reserved;
 }
 
+/// Contains information about a logical volume.
+///
+/// {@category struct}
+base class DEV_BROADCAST_VOLUME extends Struct {
+  @Uint32()
+  external int dbcv_size;
+
+  @Uint32()
+  external int dbcv_devicetype;
+
+  @Uint32()
+  external int dbcv_reserved;
+
+  @Uint32()
+  external int dbcv_unitmask;
+
+  @Uint16()
+  external int dbcv_flags;
+}
+
 /// The DIBSECTION structure contains information about a DIB created by
 /// calling the CreateDIBSection function. A DIBSECTION structure includes
 /// information about the bitmap's dimensions, color format, color masks,

@@ -425,6 +425,7 @@
     "Windows.Win32.UI.WindowsAndMessaging.DEBUGHOOKINFO": "Contains debugging information passed to a WH_DEBUG hook procedure, DebugProc.",
     "Windows.Win32.UI.WindowsAndMessaging.DEV_BROADCAST_DEVICEINTERFACE_W": "Contains information about a class of devices.",
     "Windows.Win32.UI.WindowsAndMessaging.DEV_BROADCAST_HDR": "Serves as a standard header for information related to a device event reported through the WM_DEVICECHANGE message.",
+    "Windows.Win32.UI.WindowsAndMessaging.DEV_BROADCAST_VOLUME": "Contains information about a logical volume.",
     "Windows.Win32.UI.WindowsAndMessaging.DLGITEMTEMPLATE": "Defines the dimensions and style of a control in a dialog box. One or more of these structures are combined with a DLGTEMPLATE structure to form a standard template for a dialog box.",
     "Windows.Win32.UI.WindowsAndMessaging.DLGTEMPLATE": "Defines the dimensions and style of a dialog box. This structure, always the first in a standard template for a dialog box, also specifies the number of controls in the dialog box and therefore specifies the number of subsequent DLGITEMTEMPLATE structures in the template.",
     "Windows.Win32.UI.WindowsAndMessaging.EVENTMSG": "Contains information about a hardware message sent to the system message queue. This structure is used to store message information for the JournalPlaybackProc callback function.",
