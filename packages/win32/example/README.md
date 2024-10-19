@@ -121,6 +121,7 @@ visit [pub.dev] to explore packages that depend on it.
 | [sendinput.dart]      | Sends keyboard and mouse input to another window          |
 | [snake.dart]          | Snake game using various GDI features                     |
 | [taskdialog.dart]     | Demonstrates using modern task dialog boxes               |
+| [usb_drive.dart]      | Monitors USB drive insertion and removal events           |
 | [window.dart]         | Enumerates open windows and basic window manipulation     |
 
 [notepad]: https://github.com/halildurmus/win32/blob/main/examples/notepad
@@ -137,6 +138,7 @@ visit [pub.dev] to explore packages that depend on it.
 [sendinput.dart]: https://github.com/halildurmus/win32/blob/main/examples/sendinput.dart
 [snake.dart]: https://github.com/halildurmus/win32/blob/main/examples/snake.dart
 [taskdialog.dart]: https://github.com/halildurmus/win32/blob/main/examples/taskdialog.dart
+[usb_drive.dart]: https://github.com/halildurmus/win32/blob/main/examples/usb_drive.dart
 [window.dart]: https://github.com/halildurmus/win32/blob/main/examples/window.dart
 
 ## COM APIs
