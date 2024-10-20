@@ -14,14 +14,14 @@ import 'utils.dart';
 import 'variant.dart';
 import 'win32/ole32.g.dart';
 
-/// A thin wrapper around the [IDispatch] interface, used for invoking methods
-/// and properties on COM automation objects.
+/// A lightweight wrapper for the [IDispatch] interface, enabling method and
+/// property invocation on COM objects that support late binding.
 ///
-/// COM must be initialized before using any instance of this class by calling
+/// Before using this class, make sure that COM has been initialized by calling
 /// [CoInitializeEx].
 ///
-/// Ensure that you properly release resources by calling [dispose] when the
-/// instance is no longer needed.
+/// When finished with an instance of this class, call [dispose] to release the
+/// associated resources.
 final class Dispatcher {
   Dispatcher(this.dispatch) : _nilGuid = calloc<GUID>();
 
@@ -33,7 +33,6 @@ final class Dispatcher {
         final lpclsid = GUIDFromString(clsid, allocator: arena);
         final riid = GUIDFromString(IID_IDispatch, allocator: arena);
         final ppv = calloc<COMObject>();
-
         final hr = CoCreateInstance(
           lpclsid,
           nullptr,
@@ -42,7 +41,6 @@ final class Dispatcher {
           ppv.cast(),
         );
         if (FAILED(hr)) throw WindowsException(hr);
-
         return Dispatcher(IDispatch(ppv));
       });
 
@@ -54,10 +52,8 @@ final class Dispatcher {
   factory Dispatcher.fromProgID(String progID) => using((arena) {
         final lpszProgID = progID.toNativeUtf16(allocator: arena);
         final lpclsid = arena<GUID>();
-
         var hr = CLSIDFromProgID(lpszProgID, lpclsid);
         if (FAILED(hr)) throw WindowsException(hr);
-
         return Dispatcher.fromCLSID(lpclsid.ref.toString());
       });
 

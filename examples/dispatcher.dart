@@ -1,5 +1,8 @@
-// Demonstrates the use of Dispatcher for calling methods on COM automation
-// objects.
+// Demonstrates the use of Dispatcher for calling methods on COM objects that
+// support late binding. This example uses the "Shell.Application" object to
+// minimize all open windows and to open the Windows Explorer starting at the
+// "C:\" directory. The example also demonstrates the use of VARIANT and
+// DISPPARAMS structures to pass parameters to the invoked method.
 
 import 'dart:ffi';
 
