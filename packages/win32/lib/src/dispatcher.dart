@@ -25,21 +25,16 @@ import 'win32/ole32.g.dart';
 final class Dispatcher {
   Dispatcher(this.dispatch) : _nilGuid = calloc<GUID>();
 
-  /// Creates a [Dispatcher] instance from a given programmatic identifier
-  /// (ProgID).
+  /// Creates a [Dispatcher] instance from a given class identifier (CLSID).
   ///
   /// Throws a [WindowsException] if the COM object cannot be created or if an
   /// error occurs during initialization.
-  factory Dispatcher.fromProgID(String progId) => using((arena) {
-        final lpszProgID = progId.toNativeUtf16(allocator: arena);
-        final lpclsid = arena<GUID>();
+  factory Dispatcher.fromCLSID(String clsid) => using((arena) {
+        final lpclsid = GUIDFromString(clsid, allocator: arena);
         final riid = GUIDFromString(IID_IDispatch, allocator: arena);
         final ppv = calloc<COMObject>();
 
-        var hr = CLSIDFromProgID(lpszProgID, lpclsid);
-        if (FAILED(hr)) throw WindowsException(hr);
-
-        hr = CoCreateInstance(
+        final hr = CoCreateInstance(
           lpclsid,
           nullptr,
           CLSCTX.CLSCTX_INPROC_SERVER,
@@ -49,6 +44,21 @@ final class Dispatcher {
         if (FAILED(hr)) throw WindowsException(hr);
 
         return Dispatcher(IDispatch(ppv));
+      });
+
+  /// Creates a [Dispatcher] instance from a given programmatic identifier
+  /// (ProgID).
+  ///
+  /// Throws a [WindowsException] if the COM object cannot be created or if an
+  /// error occurs during initialization.
+  factory Dispatcher.fromProgID(String progID) => using((arena) {
+        final lpszProgID = progID.toNativeUtf16(allocator: arena);
+        final lpclsid = arena<GUID>();
+
+        var hr = CLSIDFromProgID(lpszProgID, lpclsid);
+        if (FAILED(hr)) throw WindowsException(hr);
+
+        return Dispatcher.fromCLSID(lpclsid.ref.toString());
       });
 
   /// Instance of [IDispatch] interface associated with the object.
@@ -135,10 +145,15 @@ final class Dispatcher {
   ///
   /// The [method] parameter specifies the name of the method to be invoked.
   /// The optional [args] parameter provides the arguments to pass to the
-  /// method, if any.
+  /// method, if any. The optional [result] parameter is used to store the
+  /// result of the method invocation, if any.
   ///
   /// Throws a [WindowsException] if the invocation fails.
-  void invoke(String method, [Pointer<DISPPARAMS>? args]) {
+  void invoke(
+    String method, [
+    Pointer<DISPPARAMS>? args,
+    Pointer<VARIANT>? result,
+  ]) {
     if (_isDisposed) throw StateError('Dispatcher has been disposed.');
 
     final pDispParams = args ?? calloc<DISPPARAMS>();
@@ -150,7 +165,7 @@ final class Dispatcher {
       LOCALE_SYSTEM_DEFAULT,
       DISPATCH_FLAGS.DISPATCH_METHOD,
       pDispParams,
-      nullptr,
+      result ?? nullptr,
       nullptr,
       nullptr,
     );

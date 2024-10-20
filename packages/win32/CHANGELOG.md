@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 5.7.1-wip
+
+- Add `Pointer<VARIANT>` optional parameter to `Dispatcher.invoke` method
+- Add `Dispatcher.fromCLSID` constructor for creating a `Dispatcher` from a
+  CLSID
+
 ## [5.7.0] - 2024-10-19
 
 - Add `UnregisterDeviceNotification` API (#916)
