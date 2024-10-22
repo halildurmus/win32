@@ -241,6 +241,16 @@ Here are a few use cases showcasing the power of **win32**:
     src="https://raw.githubusercontent.com/halildurmus/win32/main/assets/filepicker.png" />
 </a>
 
+- **Access .NET Components**:
+  [Access .NET components through COM interop.][com_interop]
+
+[com_interop]: https://github.com/halildurmus/win32/blob/main/examples/com_interop
+
+- **Monitor System Events**:
+  [Detect and respond to USB drive insertion and removal events.][usb_drive.dart]
+
+[usb_drive.dart]: https://github.com/halildurmus/win32/blob/main/examples/usb_drive.dart
+
 <br />
 
 This package provides minimal modifications to the Win32 API to support Dart
