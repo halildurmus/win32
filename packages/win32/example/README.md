@@ -148,6 +148,7 @@ visit [pub.dev] to explore packages that depend on it.
 | [com_context.dart]  | Shows interaction of Dart isolates and COM apartments                    |
 | [com_demo.dart]     | Demonstrates COM object creation, casting, and calling methods           |
 | [dispatcher.dart]   | Demonstrates calling methods on COM automation objects with `Dispatcher` |
+| [com_interop]       | Demonstrates accessing .NET components through COM interop               |
 | [guid.dart]         | Creates a globally unique identifier (GUID)                              |
 | [uiautomation.dart] | Demonstrates calling Windows UI Automation APIs                          |
 | [winhttp.dart]      | Demonstrates using WinHTTP APIs to make HTTP requests                    |
@@ -157,6 +158,7 @@ visit [pub.dev] to explore packages that depend on it.
 [com_context.dart]: https://github.com/halildurmus/win32/blob/main/examples/com_context.dart
 [com_demo.dart]: https://github.com/halildurmus/win32/blob/main/examples/com_demo.dart
 [dispatcher.dart]: https://github.com/halildurmus/win32/blob/main/examples/dispatcher.dart
+[com_interop]: https://github.com/halildurmus/win32/blob/main/examples/dotnet_interop
 [guid.dart]: https://github.com/halildurmus/win32/blob/main/examples/guid.dart
 [uiautomation.dart]: https://github.com/halildurmus/win32/blob/main/examples/uiautomation.dart
 [winhttp.dart]: https://github.com/halildurmus/win32/blob/main/examples/winhttp.dart
