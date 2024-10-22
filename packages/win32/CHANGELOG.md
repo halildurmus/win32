@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## 5.7.1-wip
+## [5.7.1] - 2024-10-22
 
 - Add `Pointer<VARIANT>` optional parameter to `Dispatcher.invoke` method
 - Add `Dispatcher.fromCLSID` constructor for creating a `Dispatcher` from a
@@ -1255,3 +1255,4 @@ write:
 [5.6.0]: https://github.com/halildurmus/win32/compare/v5.5.5...v5.6.0
 [5.6.1]: https://github.com/halildurmus/win32/compare/v5.6.0...v5.6.1
 [5.7.0]: https://github.com/halildurmus/win32/compare/v5.6.1...v5.7.0
+[5.7.1]: https://github.com/halildurmus/win32/compare/v5.7.0...v5.7.1
