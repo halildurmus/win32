@@ -1,22 +1,21 @@
 /// A Dart library that provides a friendly Dart API for accessing the Windows
 /// Clipboard.
 ///
-/// It allows you to perform common clipboard operations such as copying data to
-/// the clipboard, pasting data from the clipboard, checking the available data
-/// formats on the clipboard, clearing the clipboard, and more.
+/// It allows you to perform common clipboard operations, including:
 ///
-/// Here's a simple example of reading text from the clipboard:
+/// - Copying data to the clipboard
+/// - Pasting data from the clipboard
+/// - Checking the available data formats on the clipboard
+/// - Clearing the clipboard
+/// - Listening for changes in clipboard data
 ///
-/// ```dart
-/// import 'package:win32_clipboard/win32_clipboard.dart';
-///
-/// void main() {
-///   if (Clipboard.hasText) {
-///     print('Clipboard text: ${Clipboard.getText()}');
-///   }
-/// }
-/// ```
+/// The `Clipboard` class provides static methods for interacting with the
+/// clipboard, allowing you to easily manage text, file lists, and custom
+/// clipboard formats. It also offers streams to listen for changes in specific
+/// types of data.
 library;
 
 export 'src/clipboard.dart';
-export 'src/models/models.dart';
+export 'src/data.dart';
+export 'src/exception.dart';
+export 'src/format.dart';

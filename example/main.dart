@@ -1,22 +1,36 @@
 import 'package:win32_clipboard/win32_clipboard.dart';
 
 void main() {
-  print('Clipboard has ${Clipboard.numberOfFormats} format(s)');
-  for (final format in Clipboard.formats) {
-    print('- $format');
-  }
+  // Clear the clipboard initially.
+  if (Clipboard.clear()) print('Clipboard cleared.');
 
-  print('Clipboard is ${Clipboard.isEmpty ? 'empty' : 'not empty'}.');
+  // Check if the clipboard is empty.
+  if (Clipboard.isEmpty) print('Clipboard is empty.');
 
+  // Set text data to the clipboard.
+  const text = 'Hello, Clipboard!';
+  if (Clipboard.setText(text)) print('Text set to clipboard: "$text"');
+
+  // Check if the clipboard has text data (optional).
   if (Clipboard.hasText) {
-    print('Clipboard text: ${Clipboard.getText()}');
+    print('Clipboard has text data.');
+    // Retrieve and print the text data from the clipboard.
+    final text = Clipboard.getText();
+    print('Retrieved text from clipboard: "$text"');
   }
 
-  if (Clipboard.setText('Hello, world!')) {
-    print('Clipboard now contains: ${Clipboard.getText()}');
+  // Set file list data to the clipboard.
+  final files = [r'c:\src\file1.dart', r'd:\file2.txt'];
+  if (Clipboard.setFileList(files)) print('File list set to clipboard: $files');
+
+  // Check if the clipboard has a file list (optional).
+  if (Clipboard.hasFileList) {
+    print('Clipboard has file list data.');
+    // Retrieve and print the file list from the clipboard.
+    final fileList = Clipboard.getFileList();
+    print('Retrieved file list from clipboard: $fileList');
   }
 
-  if (Clipboard.clear()) {
-    print('Clipboard contents cleared successfully.');
-  }
+  // Clear the clipboard.
+  if (Clipboard.clear()) print('Clipboard contents cleared.');
 }
