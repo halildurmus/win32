@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 5.8.0-wip
+
+- Add `DROPFILES` struct
+
 ## [5.7.1] - 2024-10-22
 
 - Add `Pointer<VARIANT>` optional parameter to `Dispatcher.invoke` method

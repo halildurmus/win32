@@ -198,6 +198,7 @@ void main()
     printf("  'DOT11_NETWORK_LIST': %zu,\n", sizeof(DOT11_NETWORK_LIST));
     printf("  'DOT11_SSID': %zu,\n", sizeof(DOT11_SSID));
     printf("  'DRAWTEXTPARAMS': %zu,\n", sizeof(DRAWTEXTPARAMS));
+    printf("  'DROPFILES': %zu,\n", sizeof(DROPFILES));
     printf("  'DSREG_JOIN_INFO': %zu,\n", sizeof(DSREG_JOIN_INFO));
     printf("  'DSREG_USER_INFO': %zu,\n", sizeof(DSREG_USER_INFO));
     printf("  'DTBGOPTS': %zu,\n", sizeof(DTBGOPTS));

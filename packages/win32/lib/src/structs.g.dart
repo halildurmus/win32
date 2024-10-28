@@ -3432,6 +3432,23 @@ base class DRAWTEXTPARAMS extends Struct {
   external int uiLengthDrawn;
 }
 
+/// Defines the CF_HDROP clipboard format. The data that follows is a double
+/// null-terminated list of file names.
+///
+/// {@category struct}
+base class DROPFILES extends Struct {
+  @Uint32()
+  external int pFiles;
+
+  external POINT pt;
+
+  @Int32()
+  external int fNC;
+
+  @Int32()
+  external int fWide;
+}
+
 /// Contains information about how a device is joined to Microsoft Azure
 /// Active Directory.
 ///

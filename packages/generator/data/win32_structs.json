@@ -406,6 +406,7 @@
     "Windows.Win32.UI.Shell.Common.SHITEMID": "Defines an item identifier.",
     "Windows.Win32.UI.Shell.Common.STRRET": "Contains strings returned from the IShellFolder interface methods.",
     "Windows.Win32.UI.Shell.DLLVERSIONINFO": "Receives DLL-specific version information. It is used with the DllGetVersion function.",
+    "Windows.Win32.UI.Shell.DROPFILES": "Defines the CF_HDROP clipboard format. The data that follows is a double null-terminated list of file names.",
     "Windows.Win32.UI.Shell.KNOWNFOLDER_DEFINITION": "Defines the specifics of a known folder.",
     "Windows.Win32.UI.Shell.NOTIFYICONDATAW": "Contains information that the system needs to display notifications in the notification area. Used by Shell_NotifyIcon.",
     "Windows.Win32.UI.Shell.SHELLEXECUTEINFOW": "Contains information used by ShellExecuteEx.",
