@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## 5.7.2-wip
+## [5.7.2] - 2024-10-28
 
 - Add `DROPFILES` struct
 - Add `DragQueryFile` API
@@ -1261,3 +1261,4 @@ write:
 [5.6.1]: https://github.com/halildurmus/win32/compare/v5.6.0...v5.6.1
 [5.7.0]: https://github.com/halildurmus/win32/compare/v5.6.1...v5.7.0
 [5.7.1]: https://github.com/halildurmus/win32/compare/v5.7.0...v5.7.1
+[5.7.2]: https://github.com/halildurmus/win32/compare/v5.7.1...v5.7.2
