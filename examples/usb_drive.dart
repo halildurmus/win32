@@ -14,7 +14,7 @@ import 'package:win32/win32.dart';
 ///
 /// Since this function contains a message loop that _blocks_ until termination,
 /// it _must_ run in a separate isolate to avoid blocking the main isolate.
-void listenForUsbDriveChanges(SendPort mainSendPort) async {
+Future<void> listenForUsbDriveChanges(SendPort mainSendPort) async {
   // Create a ReceivePort for stopping the isolate.
   final stopPort = ReceivePort();
 
@@ -112,17 +112,18 @@ void listenForUsbDriveChanges(SendPort mainSendPort) async {
       DispatchMessage(msg);
     }
 
-    // Yield to the Dart event loop to allow the stop signal to be processed.
+    // Yield control to the Dart event loop to allow the stop signal to be
+    // processed.
     await Future.delayed(Duration.zero);
   }
 
   // Clean up resources.
-  nativeCallable.close();
+  DestroyWindow(hWnd);
   UnregisterClass(className, hInstance);
-  free(msg);
-  free(wndClass);
   free(className);
-  PostQuitMessage(0);
+  free(wndClass);
+  free(msg);
+  nativeCallable.close();
 }
 
 /// Converts the [bitmask] to a corresponding drive letter.
@@ -175,19 +176,15 @@ String? getDriveInformation(String driveLetter) {
   }
 }
 
-/// Returns a stream that listens for USB drive change notifications.
-///
-/// This stream emits a map containing the event type, drive letter, and
-/// additional drive information whenever a USB drive is connected or
-/// disconnected.
+/// Emits a map containing the event type, drive letter, and additional drive
+/// information whenever a USB drive is connected or disconnected.
 Stream<Map<String, Object?>> get onUsbDriveChanged {
   ReceivePort? receivePort;
   SendPort? isolateStopPort;
   StreamSubscription<dynamic>? receivePortSubscription;
   StreamController<Map<String, Object?>>? controller;
 
-  // Create a StreamController that allows only a single listener.
-  controller = StreamController<Map<String, Object?>>(
+  controller = StreamController<Map<String, Object?>>.broadcast(
     onListen: () async {
       // Create a ReceivePort to listen for messages from the isolate.
       receivePort = ReceivePort();
@@ -215,7 +212,7 @@ Stream<Map<String, Object?>> get onUsbDriveChanged {
       await Future.delayed(const Duration(milliseconds: 5));
       await receivePortSubscription?.cancel();
       receivePort?.close();
-      controller?.close();
+      await controller?.close();
     },
   );
 
