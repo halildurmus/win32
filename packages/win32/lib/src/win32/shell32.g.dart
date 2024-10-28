@@ -36,6 +36,27 @@ final _CommandLineToArgv = _shell32.lookupFunction<
     Pointer<Pointer<Utf16>> Function(Pointer<Utf16> lpCmdLine,
         Pointer<Int32> pNumArgs)>('CommandLineToArgvW');
 
+/// Retrieves the names of dropped files that result from a successful
+/// drag-and-drop operation.
+///
+/// ```c
+/// UINT DragQueryFileW(
+///   [in]  HDROP  hDrop,
+///   [in]  UINT   iFile,
+///   [out] LPWSTR lpszFile,
+///         UINT   cch
+/// );
+/// ```
+/// {@category shell32}
+int DragQueryFile(int hDrop, int iFile, Pointer<Utf16> lpszFile, int cch) =>
+    _DragQueryFile(hDrop, iFile, lpszFile, cch);
+
+final _DragQueryFile = _shell32.lookupFunction<
+    Uint32 Function(
+        IntPtr hDrop, Uint32 iFile, Pointer<Utf16> lpszFile, Uint32 cch),
+    int Function(int hDrop, int iFile, Pointer<Utf16> lpszFile,
+        int cch)>('DragQueryFileW');
+
 /// Gets a handle to an icon stored as a resource in a file or an icon
 /// stored in a file's associated executable file.
 ///

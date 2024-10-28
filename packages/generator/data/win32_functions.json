@@ -1137,6 +1137,11 @@
         "prototype": "BOOL DragDetect(\n  HWND  hwnd,\n  POINT pt);",
         "comment": "Captures the mouse and tracks its movement until the user releases the left button, presses the ESC key, or moves the mouse outside the drag rectangle around the specified point."
     },
+    "DragQueryFile": {
+        "prototype": "UINT DragQueryFileW(\n  [in]  HDROP  hDrop,\n  [in]  UINT   iFile,\n  [out] LPWSTR lpszFile,\n        UINT   cch\n);",
+        "comment": "Retrieves the names of dropped files that result from a successful drag-and-drop operation.",
+        "category": "shell32"
+    },
     "DrawAnimatedRects": {
         "prototype": "BOOL DrawAnimatedRects(\n  HWND       hwnd,\n  int        idAni,\n  const RECT *lprcFrom,\n  const RECT *lprcTo);",
         "comment": "Animates the caption of a window to indicate the opening of an icon or the minimizing or maximizing of a window."

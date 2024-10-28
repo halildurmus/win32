@@ -2,9 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
-## 5.8.0-wip
+## 5.7.2-wip
 
 - Add `DROPFILES` struct
+- Add `DragQueryFile` API
 
 ## [5.7.1] - 2024-10-22
 

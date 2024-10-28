@@ -11272,6 +11272,15 @@ void main() {
               Pointer<Int32> pNumArgs)>('CommandLineToArgvW');
       expect(CommandLineToArgv, isA<Function>());
     });
+    test('Can instantiate DragQueryFile', () {
+      final shell32 = DynamicLibrary.open('shell32.dll');
+      final DragQueryFile = shell32.lookupFunction<
+          Uint32 Function(
+              IntPtr hDrop, Uint32 iFile, Pointer<Utf16> lpszFile, Uint32 cch),
+          int Function(int hDrop, int iFile, Pointer<Utf16> lpszFile,
+              int cch)>('DragQueryFileW');
+      expect(DragQueryFile, isA<Function>());
+    });
     test('Can instantiate ExtractAssociatedIcon', () {
       final shell32 = DynamicLibrary.open('shell32.dll');
       final ExtractAssociatedIcon = shell32.lookupFunction<
