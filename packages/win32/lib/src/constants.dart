@@ -12897,3 +12897,57 @@ const WTS_SESSION_CREATE = 0xA;
 
 /// Reserved for future use.
 const WTS_SESSION_TERMINATE = 0xB;
+
+/// Unknown interface.
+final DISP_E_UNKNOWNINTERFACE = 0x80020001.toSigned(32);
+
+/// Member not found.
+final DISP_E_MEMBERNOTFOUND = 0x80020003.toSigned(32);
+
+/// Parameter not found.
+final DISP_E_PARAMNOTFOUND = 0x80020004.toSigned(32);
+
+/// Type mismatch.
+final DISP_E_TYPEMISMATCH = 0x80020005.toSigned(32);
+
+/// Unknown name.
+final DISP_E_UNKNOWNNAME = 0x80020006.toSigned(32);
+
+/// No named arguments.
+final DISP_E_NONAMEDARGS = 0x80020007.toSigned(32);
+
+/// Bad variable type.
+final DISP_E_BADVARTYPE = 0x80020008.toSigned(32);
+
+/// Exception occurred.
+final DISP_E_EXCEPTION = 0x80020009.toSigned(32);
+
+/// Out of present range.
+final DISP_E_OVERFLOW = 0x8002000A.toSigned(32);
+
+/// Invalid index.
+final DISP_E_BADINDEX = 0x8002000B.toSigned(32);
+
+/// Unknown language.
+final DISP_E_UNKNOWNLCID = 0x8002000C.toSigned(32);
+
+/// Memory is locked.
+final DISP_E_ARRAYISLOCKED = 0x8002000D.toSigned(32);
+
+/// Invalid number of parameters.
+final DISP_E_BADPARAMCOUNT = 0x8002000E.toSigned(32);
+
+/// Parameter not optional.
+final DISP_E_PARAMNOTOPTIONAL = 0x8002000F.toSigned(32);
+
+/// Invalid callee.
+final DISP_E_BADCALLEE = 0x80020010.toSigned(32);
+
+/// Does not support a collection.
+final DISP_E_NOTACOLLECTION = 0x80020011.toSigned(32);
+
+/// Division by zero.
+final DISP_E_DIVBYZERO = 0x80020012.toSigned(32);
+
+/// Buffer too small.
+final DISP_E_BUFFERTOOSMALL = 0x80020013.toSigned(32);
