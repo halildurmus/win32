@@ -5,6 +5,7 @@ import 'package:ffi/ffi.dart';
 import 'com/idispatch.dart';
 import 'combase.dart';
 import 'constants.dart';
+import 'constants_nodoc.dart';
 import 'enums.g.dart';
 import 'exceptions.dart';
 import 'guid.dart';
@@ -13,6 +14,7 @@ import 'structs.g.dart';
 import 'utils.dart';
 import 'variant.dart';
 import 'win32/ole32.g.dart';
+import 'win32/oleaut32.g.dart';
 
 /// A lightweight wrapper for the [IDispatch] interface, enabling method and
 /// property invocation on COM objects that support late binding.
@@ -68,126 +70,140 @@ final class Dispatcher {
 
   /// Retrieves the value of the property with the given [name].
   ///
+  /// It's the caller's responsibility to free the memory allocated for the
+  /// returned [Pointer<VARIANT>] when it is no longer needed by calling
+  /// [free] on it.
+  ///
   /// Throws a [WindowsException] if the invocation fails.
-  Pointer<VARIANT> get(String name) {
-    final dispid = calloc<Int32>();
-    final pName = name.toNativeUtf16();
-    final names = calloc<Pointer<Utf16>>()..value = pName;
-    dispatch.getIDsOfNames(nullptr, names, 1, 0, dispid);
-
-    final result = calloc<VARIANT>();
-    final dispParams = calloc<DISPPARAMS>();
-    final excepInfo = calloc<EXCEPINFO>();
-    final argErr = calloc<Uint32>();
-
-    dispatch.invoke(
-      dispid.value,
-      nullptr,
-      0,
-      DISPATCH_FLAGS.DISPATCH_PROPERTYGET,
-      dispParams,
-      result,
-      excepInfo,
-      argErr,
-    );
-
-    free(dispid);
-    free(pName);
-    free(names);
-    free(dispParams);
-    free(excepInfo);
-    free(argErr);
-
-    return result;
-  }
+  Pointer<VARIANT> get(String name) => _invokeProperty(
+        name,
+        DISPATCH_FLAGS.DISPATCH_PROPERTYGET,
+        returnResult: true,
+      );
 
   /// Sets the value of the property with the given [name] to [value].
   ///
+  /// If [byReference] is set to `true`, the property is set by reference.
+  ///
   /// Throws a [WindowsException] if the invocation fails.
-  void set(String name, VARIANT value) {
-    final dispid = calloc<Int32>();
-    final pName = name.toNativeUtf16();
-    final names = calloc<Pointer<Utf16>>()..value = pName;
-    dispatch.getIDsOfNames(nullptr, names, 1, 0, dispid);
-
-    final dispParams = calloc<DISPPARAMS>();
-    dispParams.ref.rgvarg = calloc<VARIANT>()..ref = value;
-    dispParams.ref.cArgs = 1;
-
-    final excepInfo = calloc<EXCEPINFO>();
-    final argErr = calloc<Uint32>();
-
-    dispatch.invoke(
-      dispid.value,
-      nullptr,
-      0,
-      DISPATCH_FLAGS.DISPATCH_PROPERTYPUT,
-      dispParams,
-      nullptr,
-      excepInfo,
-      argErr,
-    );
-
-    free(dispid);
-    free(pName);
-    free(names);
-    free(dispParams.ref.rgvarg);
-    free(dispParams);
-    free(excepInfo);
-    free(argErr);
-  }
+  void set(String name, Pointer<VARIANT> value, {bool byReference = false}) =>
+      _invokeProperty(
+        name,
+        argument: value,
+        byReference
+            ? DISPATCH_FLAGS.DISPATCH_PROPERTYPUTREF
+            : DISPATCH_FLAGS.DISPATCH_PROPERTYPUT,
+      );
 
   /// Invokes a method on the COM object.
   ///
-  /// The [method] parameter specifies the name of the method to be invoked.
-  /// The optional [args] parameter provides the arguments to pass to the
-  /// method, if any. The optional [result] parameter is used to store the
-  /// result of the method invocation, if any.
+  /// - The [method] parameter specifies the name of the method to be invoked.
+  /// - The [args] parameter specifies the arguments to pass to the method, if
+  ///   any.
+  /// - The [result] parameter is used to store the result of the method
+  ///   invocation, if any.
+  /// - The [argError] parameter is used to store the index of the first
+  ///   parameter within `rgvarg` that has an error, if any.
   ///
   /// Throws a [WindowsException] if the invocation fails.
   void invoke(
     String method, [
     Pointer<DISPPARAMS>? args,
     Pointer<VARIANT>? result,
-  ]) {
-    if (_isDisposed) throw StateError('Dispatcher has been disposed.');
-
-    final pDispParams = args ?? calloc<DISPPARAMS>();
-    final dispIdMember = _getDispId(method);
-
-    final hr = dispatch.invoke(
-      dispIdMember,
-      _nilGuid,
-      LOCALE_SYSTEM_DEFAULT,
-      DISPATCH_FLAGS.DISPATCH_METHOD,
-      pDispParams,
-      result ?? nullptr,
-      nullptr,
-      nullptr,
-    );
-
-    if (args == null) free(pDispParams);
-    if (FAILED(hr)) throw WindowsException(hr);
-  }
+    Pointer<Uint32>? argError,
+  ]) =>
+      using((arena) {
+        final dispIdMember = _getDispId(method);
+        final pExcepInfo = arena<EXCEPINFO>();
+        final hr = dispatch.invoke(
+          dispIdMember,
+          _nilGuid,
+          LOCALE_SYSTEM_DEFAULT,
+          DISPATCH_FLAGS.DISPATCH_METHOD,
+          args ?? arena<DISPPARAMS>(),
+          result ?? nullptr,
+          pExcepInfo,
+          argError ?? nullptr,
+        );
+        _throwIfFailed(hr, pExcepInfo.ref);
+      });
 
   /// Retrieves the dispatch identifier (DISPID) for the given [member] of the
   /// object.
-  int _getDispId(String member) => using((arena) {
-        final lpMember = member.toNativeUtf16(allocator: arena);
-        final rgszNames = arena<Pointer<Utf16>>()..value = lpMember;
-        final rgDispId = arena<Int32>();
+  int _getDispId(String member) {
+    _validateNotDisposed();
+    return using((arena) {
+      final lpMember = member.toNativeUtf16(allocator: arena);
+      final rgszNames = arena<Pointer<Utf16>>()..value = lpMember;
+      final rgDispId = arena<Int32>();
+      final hr = dispatch.getIDsOfNames(
+        _nilGuid,
+        rgszNames,
+        1,
+        LOCALE_USER_DEFAULT,
+        rgDispId,
+      );
+      if (FAILED(hr)) throw WindowsException(hr);
+      return rgDispId.value;
+    });
+  }
 
-        final hr = dispatch.getIDsOfNames(
+  /// Common logic for property invocations.
+  Pointer<VARIANT> _invokeProperty(
+    String name,
+    int dispatchFlag, {
+    Pointer<VARIANT>? argument,
+    bool returnResult = false,
+  }) =>
+      using((arena) {
+        final dispIdMember = _getDispId(name);
+        final pDispParams = arena<DISPPARAMS>();
+        if (argument != null) {
+          pDispParams.ref
+            ..cArgs = 1
+            ..rgvarg = argument
+            ..cNamedArgs = 1
+            ..rgdispidNamedArgs = (arena<Int32>()..value = DISPID_PROPERTYPUT);
+        }
+        final pExcepInfo = arena<EXCEPINFO>();
+        final result = returnResult ? calloc<VARIANT>() : nullptr;
+        if (returnResult) VariantInit(result);
+        final hr = dispatch.invoke(
+          dispIdMember,
           _nilGuid,
-          rgszNames,
-          1,
-          LOCALE_USER_DEFAULT,
-          rgDispId,
+          LOCALE_SYSTEM_DEFAULT,
+          dispatchFlag,
+          pDispParams,
+          result,
+          pExcepInfo,
+          nullptr,
         );
-        if (FAILED(hr)) throw WindowsException(hr);
-
-        return rgDispId.value;
+        _throwIfFailed(hr, pExcepInfo.ref);
+        return result;
       });
+
+  void _throwIfFailed(int hr, EXCEPINFO excepInfo) {
+    if (FAILED(hr)) {
+      if (hr == DISP_E_EXCEPTION) {
+        final EXCEPINFO(:bstrDescription, :scode, :wCode) = excepInfo;
+        final errorCode = scode != 0 ? scode : wCode;
+
+        if (bstrDescription != nullptr) {
+          final description = bstrDescription.toDartString();
+          SysFreeString(bstrDescription);
+          throw WindowsException(errorCode, message: description);
+        }
+
+        throw WindowsException(errorCode);
+      }
+
+      throw WindowsException(hr);
+    }
+  }
+
+  void _validateNotDisposed() {
+    if (_isDisposed) throw StateError('Dispatcher has been disposed.');
+  }
 
   /// Releases the resources associated with the object.
   ///
@@ -196,6 +212,9 @@ final class Dispatcher {
   ///
   /// Once [dispose] is called, the [Dispatcher] instance is considered disposed
   /// and should not be used further.
+  ///
+  /// If the object has already been disposed, further calls to this method will
+  /// have no effect.
   void dispose() {
     assert(!_isDisposed, 'Dispatcher is already disposed.');
     if (_isDisposed) return;

@@ -2,9 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
-## 5.7.3-wip
+## 5.8.0-wip
 
 - Add `DISP_E_*` constants
+- Add `argError` optional parameter to the `Dispatcher.invoke` method, allowing
+  retrieval of the index of the first parameter in `rgvarg` that encounters an
+  error, if applicable
+- Update `Dispatcher.set` to accept a `Pointer<VARIANT>` for the value
+  parameter
+- Add `byReference` optional named parameter to the `Dispatcher.set` method,
+  enabling property assignment by reference instead of by value
 
 ## [5.7.2] - 2024-10-28
 

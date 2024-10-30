@@ -1,8 +1,14 @@
 // Demonstrates the use of Dispatcher for calling methods on COM objects that
-// support late binding. This example uses the "Shell.Application" object to
-// minimize all open windows and to open the Windows Explorer starting at the
-// "C:\" directory. The example also demonstrates the use of VARIANT and
-// DISPPARAMS structures to pass parameters to the invoked method.
+// support late binding.
+//
+// This example interacts with the "Scripting.FileSystemObject" object to:
+// 1. Create a new folder.
+// 2. Rename the folder.
+// 3. Retrieve the folder's path.
+// 4. Delete the folder.
+//
+// The example also shows how to use VARIANT and DISPPARAMS structures to pass
+// parameters to the methods being invoked.
 
 import 'dart:ffi';
 
@@ -16,41 +22,59 @@ void main() {
     COINIT.COINIT_APARTMENTTHREADED | COINIT.COINIT_DISABLE_OLE1DDE,
   );
 
-  // Create a Dispatcher instance for the "Shell.Application" COM object.
-  final dispatcher = Dispatcher.fromProgID('Shell.Application');
+  // Create a Dispatcher instance for the "Scripting.FileSystemObject" object.
+  // https://learn.microsoft.com/office/vba/language/reference/user-interface-help/filesystemobject-object
+  final fileSystemObject = Dispatcher.fromProgID('Scripting.FileSystemObject');
 
-  // Example: Call the "MinimizeAll" method on the "Shell.Application" object
-  // to minimize all open windows.
-  print('Minimizing all windows via "Shell.Application" Automation object');
-  dispatcher.invoke('MinimizeAll');
+  try {
+    using((arena) {
+      // Create a new folder.
+      final folderPath = BSTR.fromString(r'C:\ExampleFolder');
+      final folderPathParam = arena<VARIANT>();
+      VariantInit(folderPathParam);
+      folderPathParam.ref
+        ..vt = VARENUM.VT_BSTR
+        ..bstrVal = folderPath.ptr;
+      final folderParams = arena<DISPPARAMS>();
+      folderParams.ref
+        ..rgvarg = folderPathParam
+        ..cArgs = 1;
+      final resultParam = arena<VARIANT>();
+      VariantInit(resultParam);
+      fileSystemObject.invoke('CreateFolder', folderParams, resultParam);
+      VariantClear(folderPathParam);
+      print(r'Folder created at: "C:\ExampleFolder"');
 
-  // Example: Call the "Explore" method on the "Shell.Application" object with
-  // a parameter to open the Windows Explorer starting at the "C:\" directory.
-  print(r'Launching the Windows Explorer, starting at the "C:\" directory');
-  final folderLocation = BSTR.fromString(r'C:\');
+      // Create a Dispatcher instance for the "Folder" object.
+      // https://learn.microsoft.com/office/vba/language/reference/user-interface-help/folder-object
+      final folder = Dispatcher(resultParam.ref.pdispVal);
 
-  // Allocate and initialize a VARIANT structure to hold the parameter.
-  final exploreParam = calloc<VARIANT>();
-  VariantInit(exploreParam);
-  exploreParam.ref
-    ..vt = VARENUM.VT_BSTR
-    ..bstrVal = folderLocation.ptr;
-  final exploreParams = calloc<DISPPARAMS>();
-  exploreParams.ref
-    ..cArgs = 1 // Number of arguments.
-    ..rgvarg = exploreParam; // Pointer to the argument list.
+      try {
+        // Rename folder.
+        final newFolderName = BSTR.fromString(r'ExampleFolderRenamed');
+        final newFolderNameParam = arena<VARIANT>();
+        VariantInit(newFolderNameParam);
+        newFolderNameParam.ref
+          ..vt = VARENUM.VT_BSTR
+          ..bstrVal = newFolderName.ptr;
+        folder.set('Name', newFolderNameParam);
+        VariantClear(newFolderNameParam);
+        print('Folder renamed to: "ExampleFolderRenamed"');
 
-  // Invoke the "Explore" method with the specified parameters.
-  dispatcher.invoke('Explore', exploreParams);
+        // Get folder path.
+        final folderPathResult = folder.get('Path');
+        print('Folder path: ${folderPathResult.ref.bstrVal.toDartString()}');
+        VariantClear(folderPathResult);
 
-  // Free the allocated memory for DISPPARAMS.
-  free(exploreParams);
-
-  // Clear the VARIANT structure to free the associated BSTR memory.
-  VariantClear(exploreParam);
-  free(exploreParam);
-
-  // Clean up the Dispatcher instance.
-  dispatcher.dispose();
-  print('Done.');
+        // Delete folder.
+        folder.invoke('Delete');
+        print('Folder deleted.');
+      } finally {
+        folder.dispose();
+        VariantClear(resultParam);
+      }
+    });
+  } finally {
+    fileSystemObject.dispose();
+  }
 }
