@@ -4,10 +4,8 @@ void main() {
   const keyPath = r'Software\Microsoft\Windows NT\CurrentVersion';
   final key = Registry.openPath(RegistryHive.localMachine, path: keyPath);
 
-  final buildNumber = key.getValueAsString('CurrentBuild');
-  if (buildNumber != null) {
-    print('Windows build number: $buildNumber');
-  }
+  final buildNumber = key.getStringValue('CurrentBuild');
+  if (buildNumber != null) print('Windows build number: $buildNumber');
 
   key.close();
 }

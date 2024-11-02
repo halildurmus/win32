@@ -1,3 +1,70 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+## [2.0.0] - 2024-11-02
+
+This release introduces significant changes to the API with a streamlined
+structure, new methods for specific registry data handling, and enhanced support
+for monitoring registry key changes.
+
+### 🔄 Breaking Changes
+
+- **`AccessRights`**:
+  - `win32Value` field renamed to `value`.
+
+- **`Registry`**:
+  - Now an `abstract final` class.
+  - Removed `performanceData` static getter.
+
+- **`RegistryHive`**:
+  - Constructor is now private.
+  - `win32Value` field renamed to `value`.
+
+- **`RegistryKey`**:
+  - Now a `final` class.
+
+- **`RegistryValue`**:
+  - Now a `sealed` class.
+  - Removed `fromWin32` factory constructor.
+  - Removed `toWin32` getter.
+  - Removed `data` field.
+
+- **`RegistryValueType`**:
+  - Constructor is now private.
+  - `win32Value` field renamed to `value`.
+  - Removed `unknown` value.
+  - Removed `win32Type` getter.
+
+### ✨ New Features
+
+- **Registry Hive Construction**:
+  - Added `RegistryHive.fromWin32` factory constructor for creating hives based
+    on Win32 constants.
+
+- **Enhanced Data Retrieval**:
+  - Added type-specific methods to `RegistryKey`: `getBinaryValue`,
+    `getIntValue`, `getStringValue`, and `getStringArrayValue` for retrieving
+    data in specific formats.
+  - Deprecated `getValueAsInt` and `getValueAsString` methods in favor of the
+    new type-specific methods.
+
+- **Registry Change Notifications**:
+  - Introduced `RegistryKey.onChanged` stream for monitoring registry key
+    changes, with optional subkey tracking.
+
+- **Typed Registry Values**:
+  - Introduced specialized subclasses in `RegistryValue` for each registry value
+    type, enhancing clarity and simplifying data handling.
+
+- **Registry Value Type Construction**:
+  - Added `RegistryValueType.fromWin32` factory constructor to handle value type
+    creation based on Win32 constants.
+
+### 🚨 Dart SDK Requirement
+
+- Bumped the minimum required Dart SDK version to `3.5.0`.
+
 ## 1.1.5
 
 - Fix issue where creating `REG_SZ` or `REG_EXPANDED_SZ` string registry values
@@ -44,3 +111,5 @@
 ## 1.0.0
 
 - First stable release.
+
+[2.0.0]: https://github.com/halildurmus/win32_registry/compare/v1.1.5...v2.0.0

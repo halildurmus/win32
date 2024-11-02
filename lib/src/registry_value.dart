@@ -1,115 +1,239 @@
-import 'dart:ffi';
 import 'dart:typed_data';
 
-import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart';
+import 'registry_value_type.dart';
 
-import 'models/models.dart';
+/// Represents a data value stored in the Windows Registry.
+///
+/// This class serves as a base for various types of registry values, including
+/// binary data, integers, links, strings, and arrays of strings.
+///
+/// Each instance of [RegistryValue] contains a [name] that identifies the
+/// registry value and a [type] that indicates its data type.
+sealed class RegistryValue {
+  /// Constructs a [RegistryValue] with the specified [name] and [type].
+  const RegistryValue._(this.name, this.type);
 
-/// Represents an individual data value in the Windows Registry.
-class RegistryValue {
-  /// Creates an instance of [RegistryValue] with the specified [name], [type],
-  /// and [data].
-  const RegistryValue(this.name, this.type, this.data);
+  /// Constructs a [RegistryValue] in binary data format with the specified
+  /// [name] and [value].
+  const factory RegistryValue.binary(String name, Uint8List value) =
+      BinaryValue;
 
-  /// The name of the Registry value.
+  /// Constructs a [RegistryValue] in 32-bit integer format with the specified
+  /// [name] and [value].
+  const factory RegistryValue.int32(String name, int value) = Int32Value;
+
+  /// Constructs a [RegistryValue] in 64-bit integer format with the specified
+  /// [name] and [value].
+  const factory RegistryValue.int64(String name, int value) = Int64Value;
+
+  /// Constructs a [RegistryValue] in symbolic link format with the specified
+  /// [name] and [value].
+  const factory RegistryValue.link(String name, String value) = LinkValue;
+
+  /// Constructs a [RegistryValue] in null format with the specified [name].
+  const factory RegistryValue.none(String name) = NoneValue;
+
+  /// Constructs a [RegistryValue] in string format with the specified [name]
+  /// and [value].
+  const factory RegistryValue.string(String name, String value) = StringValue;
+
+  /// Constructs a [RegistryValue] in array of string format with the specified
+  /// [name] and [value].
+  const factory RegistryValue.stringArray(String name, List<String> value) =
+      StringArrayValue;
+
+  /// Constructs a [RegistryValue] in unexpanded string format with the
+  /// specified [name] and [value].
+  const factory RegistryValue.unexpandedString(String name, String value) =
+      UnexpandedStringValue;
+
+  /// The name of the registry value.
   final String name;
 
-  /// The type of the Registry value.
+  /// The type of the registry value.
   final RegistryValueType type;
+}
 
-  /// The data associated with the Registry value.
-  final Object data;
+/// Represents a binary data value in the Windows Registry, corresponding to the
+/// `REG_BINARY` type.
+final class BinaryValue extends RegistryValue {
+  /// Constructs a [BinaryValue] with the specified [name] and [value].
+  const BinaryValue(String name, this.value)
+      : super._(name, RegistryValueType.binary);
 
-  /// Constructs a [RegistryValue] from Win32 Registry data.
-  factory RegistryValue.fromWin32(
-    String name,
-    int type,
-    Pointer<Uint8> byteData,
-    int dataLength,
-  ) =>
-      switch (type) {
-        REG_VALUE_TYPE.REG_SZ => RegistryValue(
-            name,
-            RegistryValueType.string,
-            byteData.cast<Utf16>().toDartString(),
-          ),
-        REG_VALUE_TYPE.REG_EXPAND_SZ => RegistryValue(
-            name,
-            RegistryValueType.unexpandedString,
-            byteData.cast<Utf16>().toDartString(),
-          ),
-        REG_VALUE_TYPE.REG_LINK => RegistryValue(
-            name,
-            RegistryValueType.link,
-            byteData.cast<Utf16>().toDartString(),
-          ),
-        REG_VALUE_TYPE.REG_MULTI_SZ => RegistryValue(
-            name,
-            RegistryValueType.stringArray,
-            byteData.cast<Utf16>().unpackStringArray(dataLength),
-          ),
-        REG_VALUE_TYPE.REG_DWORD => RegistryValue(
-            name,
-            RegistryValueType.int32,
-            byteData.cast<DWORD>().value,
-          ),
-        REG_VALUE_TYPE.REG_QWORD => RegistryValue(
-            name,
-            RegistryValueType.int64,
-            byteData.cast<QWORD>().value,
-          ),
-        REG_VALUE_TYPE.REG_BINARY => RegistryValue(
-            name,
-            RegistryValueType.binary,
-            Uint8List.fromList(byteData.asTypedList(dataLength)),
-          ),
-        REG_VALUE_TYPE.REG_NONE =>
-          RegistryValue(name, RegistryValueType.none, 0),
-        _ => RegistryValue(name, RegistryValueType.unknown, 0)
-      };
+  /// The binary data value represented as a [Uint8List].
+  final Uint8List value;
 
-  /// Converts the [RegistryValue] to Win32-compatible data.
-  PointerData get toWin32 {
-    switch (type) {
-      case RegistryValueType.int32:
-        final ptr = calloc<DWORD>()..value = data as int;
-        return PointerData(ptr.cast<Uint8>(), sizeOf<DWORD>());
-      case RegistryValueType.int64:
-        final ptr = calloc<QWORD>()..value = data as int;
-        return PointerData(ptr.cast<Uint8>(), sizeOf<QWORD>());
-      case RegistryValueType.string:
-      case RegistryValueType.unexpandedString:
-      case RegistryValueType.link:
-        final strData = data as String;
-        final ptr = strData.toNativeUtf16();
-        // Reserve 2 bytes per character (UTF-16 encoding) and 2 extra bytes for
-        // the null terminator.
-        return PointerData(ptr.cast<Uint8>(), strData.length * 2 + 2);
-      case RegistryValueType.stringArray:
-        final strArray = (data as List<String>).map((s) => '$s\x00').join();
-        final ptr = strArray.toNativeUtf16();
-        return PointerData(ptr.cast<Uint8>(), strArray.length * 2);
-      case RegistryValueType.binary:
-        final dataList = Uint8List.fromList(data as List<int>);
-        final ptr = dataList.allocatePointer();
-        return PointerData(ptr, dataList.length);
-      case RegistryValueType.none:
-      case RegistryValueType.unknown:
-        return PointerData(nullptr, 0);
-    }
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! BinaryValue) return false;
+
+    // Compare the list contents for equality.
+    return value.length == other.value.length &&
+        value.every((file) => other.value.contains(file));
   }
 
   @override
+  int get hashCode => Object.hash(name, Object.hashAll(value));
+
+  @override
+  String toString() => 'BinaryValue($name, $value)';
+}
+
+/// Represents a 32-bit integer value in the Windows Registry, corresponding to
+/// the `REG_DWORD` type.
+final class Int32Value extends RegistryValue {
+  /// Constructs a [Int32Value] with the specified [name] and [value].
+  const Int32Value(String name, this.value)
+      : super._(name, RegistryValueType.int32);
+
+  /// The 32-bit integer value.
+  final int value;
+
+  @override
   bool operator ==(Object other) =>
-      other is RegistryValue &&
-      other.name == name &&
-      other.type == type &&
-      other.data == data;
+      identical(this, other) ||
+      other is Int32Value && name == other.name && value == other.value;
 
   @override
-  int get hashCode => name.hashCode * data.hashCode;
+  int get hashCode => Object.hash(name, value);
 
   @override
-  String toString() => '$name\t$type\t$data';
+  String toString() => 'Int32Value($name, $value)';
+}
+
+/// Represents a 64-bit integer value in the Windows Registry, corresponding to
+/// the `REG_QWORD` type.
+final class Int64Value extends RegistryValue {
+  /// Constructs a [Int64Value] with the specified [name] and [value].
+  const Int64Value(String name, this.value)
+      : super._(name, RegistryValueType.int64);
+
+  /// The 64-bit integer value.
+  final int value;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Int64Value && name == other.name && value == other.value;
+
+  @override
+  int get hashCode => Object.hash(name, value);
+
+  @override
+  String toString() => 'Int64Value($name, $value)';
+}
+
+/// Represents a symbolic link value in the Windows Registry, corresponding to
+/// the `REG_LINK` type.
+final class LinkValue extends RegistryValue {
+  /// Constructs a [LinkValue] with the specified [name] and [value].
+  const LinkValue(String name, this.value)
+      : super._(name, RegistryValueType.link);
+
+  /// The symbolic link value as a string.
+  final String value;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is LinkValue && name == other.name && value == other.value;
+
+  @override
+  int get hashCode => Object.hash(name, value);
+
+  @override
+  String toString() => 'LinkValue($name, $value)';
+}
+
+/// Represents a null value in the Windows Registry, corresponding to the
+/// `REG_NONE` type.
+final class NoneValue extends RegistryValue {
+  /// Constructs a [NoneValue] with the specified [name].
+  const NoneValue(String name) : super._(name, RegistryValueType.none);
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || other is NoneValue && name == other.name;
+
+  @override
+  int get hashCode => name.hashCode;
+
+  @override
+  String toString() => 'NoneValue($name)';
+}
+
+/// Represents a string value in the Windows Registry, corresponding to the
+/// `REG_SZ` type.
+final class StringValue extends RegistryValue {
+  /// Constructs a [StringValue] with the specified [name] and [value].
+  const StringValue(String name, this.value)
+      : super._(name, RegistryValueType.string);
+
+  /// The string value.
+  final String value;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is StringValue && name == other.name && value == other.value;
+
+  @override
+  int get hashCode => Object.hash(name, value);
+
+  @override
+  String toString() => 'StringValue($name, $value)';
+}
+
+/// Represents an array of string values in the Windows Registry, corresponding
+/// to the `REG_MULTI_SZ` type.
+final class StringArrayValue extends RegistryValue {
+  /// Constructs a [StringArrayValue] with the specified [name] and [value].
+  const StringArrayValue(String name, this.value)
+      : super._(name, RegistryValueType.stringArray);
+
+  /// The list of string values.
+  final List<String> value;
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! StringArrayValue) return false;
+
+    // Compare the list contents for equality.
+    return value.length == other.value.length &&
+        value.every((file) => other.value.contains(file));
+  }
+
+  @override
+  int get hashCode => Object.hash(name, Object.hashAll(value));
+
+  @override
+  String toString() => 'StringArrayValue($name, $value)';
+}
+
+/// Represents an unexpanded string value in the Windows Registry, corresponding
+/// to the `REG_EXPAND_SZ` type.
+final class UnexpandedStringValue extends RegistryValue {
+  /// Constructs a [UnexpandedStringValue] with the specified [name] and
+  /// [value].
+  const UnexpandedStringValue(String name, this.value)
+      : super._(name, RegistryValueType.unexpandedString);
+
+  /// The unexpanded string value.
+  final String value;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is UnexpandedStringValue &&
+          name == other.name &&
+          value == other.value;
+
+  @override
+  int get hashCode => Object.hash(name, value);
+
+  @override
+  String toString() => 'UnexpandedStringValue($name, $value)';
 }

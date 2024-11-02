@@ -3,17 +3,16 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'models/access_rights.dart';
-import 'models/registry_hive.dart';
+import 'access_rights.dart';
+import 'registry_hive.dart';
 import 'registry_key.dart';
 
-/// Provides access to the Windows Registry as a database.
+/// Provides access to the Windows Registry, allowing interaction with registry
+/// keys and their values.
 ///
-/// Use this object to work with Registry keys and values, such as opening keys,
-/// viewing subkeys, creating new keys, and managing key values.
-///
-/// You can either open a specific key within the Registry or use one of the
-/// predefined root keys (e.g., [localMachine], [currentUser], or [classesRoot]).
+/// Use this class to open, create, and manage registry keys and values. You can
+/// open specific registry keys or use predefined root keys, such as
+/// [localMachine], [currentUser], or [classesRoot].
 ///
 /// Example of opening a key:
 ///
@@ -22,20 +21,21 @@ import 'registry_key.dart';
 /// final key = Registry.openPath(RegistryHive.localMachine, path: keyPath);
 /// ```
 ///
-/// Once you have a key, you can manipulate it by performing various operations,
-/// including creating, updating, renaming, or deleting values stored under that
-/// key.
+/// After obtaining a key, you can perform various operations such as creating,
+/// updating, renaming, or deleting values stored within the key. Additionally,
+/// you can monitor the key for any changes, allowing for responsive updates to
+/// registry modifications.
 ///
-/// **Note:** Always ensure that you properly close keys when you are finished
-/// with them to release system resources using the [RegistryKey.close] method.
+/// **Note:** To conserve system resources, ensure that opened keys are closed
+/// with the [RegistryKey.close] method once you're finished.
 ///
-/// For additional information on working with keys and values, see the
-/// documentation for the [RegistryKey] class.
-interface class Registry {
-  /// Opens a Registry key based on the given path and Registry hive.
+/// For further details on key and value management, refer to [RegistryKey].
+abstract final class Registry {
+  /// Opens a registry key at the specified [path] within the given [hive].
   ///
-  /// When you are finished with the key, make sure to close it using the
-  /// [RegistryKey.close] method to release system resources.
+  /// The [desiredAccessRights] parameter specifies the level of access required.
+  /// Once a key is opened, remember to close it with [RegistryKey.close] when
+  /// done to free system resources.
   ///
   /// Throws a [WindowsException] if the key cannot be opened.
   static RegistryKey openPath(
@@ -47,7 +47,12 @@ interface class Registry {
     final lpSubKey = path.toNativeUtf16();
     try {
       final lStatus = RegOpenKeyEx(
-          hive.win32Value, lpSubKey, 0, desiredAccessRights.win32Value, phKey);
+        hive.value,
+        lpSubKey,
+        0,
+        desiredAccessRights.value,
+        phKey,
+      );
       if (lStatus == WIN32_ERROR.ERROR_SUCCESS) return RegistryKey(phKey.value);
       throw WindowsException(HRESULT_FROM_WIN32(lStatus));
     } finally {
@@ -56,23 +61,21 @@ interface class Registry {
     }
   }
 
-  /// Gets the `HKEY_USERS` Registry key with read-only access.
-  static RegistryKey get allUsers => openPath(RegistryHive.allUsers,
-      desiredAccessRights: AccessRights.readOnly);
+  /// Opens the `HKEY_USERS` root registry key with read-only access.
+  static RegistryKey get allUsers => openPath(RegistryHive.allUsers);
 
-  /// Gets the `HKEY_CLASSES_ROOT` Registry key with read-only access.
-  static RegistryKey get classesRoot => openPath(RegistryHive.classesRoot,
-      desiredAccessRights: AccessRights.readOnly);
+  /// Opens the `HKEY_CLASSES_ROOT` root registry key with read-only access.
+  static RegistryKey get classesRoot => openPath(RegistryHive.classesRoot);
 
-  /// Gets the `HKEY_CURRENT_CONFIG` Registry key with read-only access.
-  static RegistryKey get currentConfig => openPath(RegistryHive.currentConfig,
-      desiredAccessRights: AccessRights.readOnly);
+  /// Opens the `HKEY_CURRENT_CONFIG` root registry key with read-only access.
+  static RegistryKey get currentConfig => openPath(RegistryHive.currentConfig);
 
-  /// Gets the `HKEY_CURRENT_USER` Registry key with read-only access.
+  /// Opens the `HKEY_CURRENT_USER` root registry key with read-only access.
+  ///
+  /// This method directly invokes the Windows API to retrieve the appropriate
+  /// user context, useful when the thread might be impersonating another user
+  /// (e.g., through "Run As" operations).
   static RegistryKey get currentUser {
-    // Instead of opening HKEY_CURRENT_USER, this calls the appropriate Windows
-    // API, since the thread may be impersonating a different user (e.g. Run
-    // As...)
     final phKey = calloc<HKEY>();
     try {
       final lStatus = RegOpenCurrentUser(REG_SAM_FLAGS.KEY_ALL_ACCESS, phKey);
@@ -83,12 +86,6 @@ interface class Registry {
     }
   }
 
-  /// Gets the `HKEY_LOCAL_MACHINE` Registry key with read-only access.
-  static RegistryKey get localMachine => openPath(RegistryHive.localMachine,
-      desiredAccessRights: AccessRights.readOnly);
-
-  /// Gets the `HKEY_PERFORMANCE_DATA` Registry key with read-only access.
-  static RegistryKey get performanceData =>
-      openPath(RegistryHive.performanceData,
-          desiredAccessRights: AccessRights.readOnly);
+  /// Opens the `HKEY_LOCAL_MACHINE` root registry key with read-only access.
+  static RegistryKey get localMachine => openPath(RegistryHive.localMachine);
 }
