@@ -101,8 +101,8 @@ Please file feature requests and bugs at the
 [issue tracker][issue_tracker_link].
 
 [api_documentation_link]: https://pub.dev/documentation/win32_clipboard/latest/
-[ci_badge]: https://github.com/halildurmus/win32_clipboard/actions/workflows/build.yml/badge.svg
-[ci_link]: https://github.com/halildurmus/win32_clipboard/actions/workflows/build.yml
+[ci_badge]: https://github.com/halildurmus/win32_clipboard/actions/workflows/win32_clipboard.yml/badge.svg
+[ci_link]: https://github.com/halildurmus/win32_clipboard/actions/workflows/win32_clipboard.yml
 [codecov_badge_link]: https://codecov.io/gh/halildurmus/win32_clipboard/branch/main/graph/badge.svg?token=AM792MK0UT
 [codecov_link]: https://codecov.io/gh/halildurmus/win32_clipboard
 [issue_tracker_link]: https://github.com/halildurmus/win32_clipboard/issues

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+  "version": "0.2",
+  "dictionaries": ["allowed", "forbidden"],
+  "dictionaryDefinitions": [
+    {
+      "name": "allowed",
+      "path": "https://raw.githubusercontent.com/halildurmus/workflows/main/allowed.txt",
+      "description": "Allowed Spellings"
+    },
+    {
+      "name": "forbidden",
+      "path": "https://raw.githubusercontent.com/halildurmus/workflows/main/forbidden.txt",
+      "description": "Forbidden Spellings"
+    }
+  ],
+  "ignorePaths": [".github/CODEOWNERS"],
+  "useGitignore": true,
+  "words": []
+}
