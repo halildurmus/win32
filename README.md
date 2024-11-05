@@ -142,8 +142,8 @@ Please file feature requests and bugs at the
 [issue tracker][issue_tracker_link].
 
 [architecture_diagram_link]: https://github.com/halildurmus/winmd/blob/main/metadata.drawio.svg?raw=true
-[ci_badge]: https://github.com/halildurmus/winmd/actions/workflows/build.yml/badge.svg
-[ci_link]: https://github.com/halildurmus/winmd/actions/workflows/build.yml
+[ci_badge]: https://github.com/halildurmus/winmd/actions/workflows/winmd.yml/badge.svg
+[ci_link]: https://github.com/halildurmus/winmd/actions/workflows/winmd.yml
 [codecov_badge_link]: https://codecov.io/gh/halildurmus/winmd/branch/main/graph/badge.svg?token=1ouz1Jr9nW
 [codecov_link]: https://codecov.io/gh/halildurmus/winmd
 [issue_tracker_link]: https://github.com/halildurmus/winmd/issues

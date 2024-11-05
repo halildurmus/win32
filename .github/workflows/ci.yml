@@ -1,0 +1,10 @@
+name: ci
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  semantic-pr:
+    uses: halildurmus/workflows/.github/workflows/semantic_pr.yml@main

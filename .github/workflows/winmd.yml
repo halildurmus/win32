@@ -1,13 +1,9 @@
-name: Build
+name: winmd
 
 on:
   pull_request:
-    branches: [main]
   push:
     branches: [main]
-  schedule:
-    # Run every day at 6:00 AM UTC.
-    - cron: '0 6 * * *'
 
 jobs:
   build:
@@ -29,13 +25,17 @@ jobs:
           - os: ubuntu-latest
             sdk: stable
 
-    uses: halildurmus/workflows/.github/workflows/dart_package.yml@main
+    uses: halildurmus/workflows/.github/workflows/dart.yml@main
     with:
+      analyze_directories: 'example lib test'
+      check_coverage: ${{ matrix.sdk == 'main' }}
       dart_sdk: ${{ matrix.sdk }}
-      run_tests: ${{ matrix.sdk != 'main' }}
       runs_on: ${{ matrix.os }}
-      upload_coverage: ${{ matrix.sdk == 'main' }}
-      validate_dartdoc_links: ${{ matrix.sdk == 'main' }}
-      verify_pana_score: ${{ matrix.os == 'ubuntu-latest' }}
     secrets:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+  dartdoc:
+    uses: halildurmus/workflows/.github/workflows/dartdoc.yml@main
+
+  pana:
+    uses: halildurmus/workflows/.github/workflows/pana.yml@main
