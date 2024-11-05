@@ -63,7 +63,7 @@ void main() {
       check(wdkPackage!.name).equals('Microsoft.Windows.WDK.Win32Metadata');
       check(wdkPackage.version).isNotEmpty();
       check(wdkPackage.path)
-          .contains('winmd\\Microsoft.Windows.WDK.Win32Metadata');
+          .contains(r'winmd\Microsoft.Windows.WDK.Win32Metadata');
       check(wdkPackage.toString()).equals(
         'Microsoft.Windows.WDK.Win32Metadata@${wdkPackage.version} (${wdkPackage.path})',
       );
@@ -75,7 +75,7 @@ void main() {
       check(win32Package!.name).equals('Microsoft.Windows.SDK.Win32Metadata');
       check(win32Package.version).isNotEmpty();
       check(win32Package.path)
-          .contains('winmd\\Microsoft.Windows.SDK.Win32Metadata');
+          .contains(r'winmd\Microsoft.Windows.SDK.Win32Metadata');
       check(win32Package.toString()).equals(
         'Microsoft.Windows.SDK.Win32Metadata@${win32Package.version} (${win32Package.path})',
       );
@@ -87,7 +87,7 @@ void main() {
       check(winrtPackage!.name).equals('Microsoft.Windows.SDK.Contracts');
       check(winrtPackage.version).isNotEmpty();
       check(winrtPackage.path)
-          .contains('winmd\\Microsoft.Windows.SDK.Contracts');
+          .contains(r'winmd\Microsoft.Windows.SDK.Contracts');
       check(winrtPackage.toString()).equals(
         'Microsoft.Windows.SDK.Contracts@${winrtPackage.version} (${winrtPackage.path})',
       );

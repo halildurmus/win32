@@ -34,30 +34,12 @@ class Method extends TokenObject
     _parseSignatureBlob();
   }
 
-  /// Any implementation flags defined by the method metadata.
-  int implFlags;
-
-  /// The name of the method.
-  String name;
-
-  /// The parameters defined by the method.
-  List<Parameter> parameters = <Parameter>[];
-
-  int relativeVirtualAddress;
-
-  /// The value returned by the method.
-  late Parameter returnType;
-
-  /// The raw signature blob as defined in §II.23.2.1 (MethodDefSig) of
-  /// ECMA-335.
-  Uint8List signatureBlob;
-
-  int _attributes;
-  int _parentToken;
-
   /// Creates a method object from a provided token.
   factory Method.fromToken(Scope scope, int token) {
-    assert(TokenType.fromToken(token) == TokenType.methodDef);
+    assert(
+      TokenType.fromToken(token) == TokenType.methodDef,
+      'Token $token is not a MethodDef token',
+    );
 
     return using((arena) {
       final ptkClass = arena<mdTypeDef>();
@@ -88,6 +70,27 @@ class Method extends TokenObject
           pdwAttr.value, signature, pulCodeRVA.value, pdwImplFlags.value);
     });
   }
+
+  /// Any implementation flags defined by the method metadata.
+  int implFlags;
+
+  /// The name of the method.
+  String name;
+
+  /// The parameters defined by the method.
+  List<Parameter> parameters = <Parameter>[];
+
+  int relativeVirtualAddress;
+
+  /// The value returned by the method.
+  late Parameter returnType;
+
+  /// The raw signature blob as defined in §II.23.2.1 (MethodDefSig) of
+  /// ECMA-335.
+  Uint8List signatureBlob;
+
+  int _attributes;
+  int _parentToken;
 
   /// The method's parent type.
   TypeDef get parent => scope.findTypeDefByToken(_parentToken)!;

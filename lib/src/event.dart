@@ -31,19 +31,12 @@ class Event extends TokenObject with CustomAttributesMixin {
     this.otherMethodTokens,
   );
 
-  final int eventType;
-  final String name;
-  final List<int> otherMethodTokens;
-
-  final int _addOnToken;
-  final int _attributes;
-  final int _fireToken;
-  final int _parentToken;
-  final int _removeOnToken;
-
   /// Creates an event object from a provided token.
   factory Event.fromToken(Scope scope, int token) {
-    assert(TokenType.fromToken(token) == TokenType.event);
+    assert(
+      TokenType.fromToken(token) == TokenType.event,
+      'Token $token is not an Event token',
+    );
 
     return using((arena) {
       final ptkClass = arena<mdTypeDef>();
@@ -89,6 +82,16 @@ class Event extends TokenObject with CustomAttributesMixin {
       );
     });
   }
+
+  final int eventType;
+  final String name;
+  final List<int> otherMethodTokens;
+
+  final int _addOnToken;
+  final int _attributes;
+  final int _fireToken;
+  final int _parentToken;
+  final int _removeOnToken;
 
   /// Returns the add method for the event.
   Method? get addMethod => reader.isValidToken(_addOnToken) == TRUE

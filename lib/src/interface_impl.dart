@@ -33,7 +33,10 @@ class InterfaceImpl extends TokenObject with CustomAttributesMixin {
     Scope scope,
     int token,
   ) {
-    assert(TokenType.fromToken(token) == TokenType.interfaceImpl);
+    assert(
+      TokenType.fromToken(token) == TokenType.interfaceImpl,
+      'Token $token is not an interface implementation token',
+    );
 
     return using((arena) {
       final ptkClass = arena<mdTypeDef>();

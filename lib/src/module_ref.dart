@@ -12,11 +12,12 @@ import 'token_object.dart';
 class ModuleRef extends TokenObject with CustomAttributesMixin {
   ModuleRef(super.scope, super.token, this.name);
 
-  final String name;
-
   /// Creates a module object from a provided token.
   factory ModuleRef.fromToken(Scope scope, int token) {
-    assert(TokenType.fromToken(token) == TokenType.moduleRef);
+    assert(
+      TokenType.fromToken(token) == TokenType.moduleRef,
+      'Token $token is not a ModuleRef token',
+    );
 
     return using((arena) {
       final szName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
@@ -29,6 +30,8 @@ class ModuleRef extends TokenObject with CustomAttributesMixin {
       return ModuleRef(scope, token, szName.toDartString());
     });
   }
+
+  final String name;
 
   @override
   String toString() => name;

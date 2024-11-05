@@ -154,19 +154,15 @@ void main() {
 
   test('Can access nested type even if resolution scope token does not match',
       () {
-    final struct = win32Scope.findTypeDef(
-      'Windows.Win32.System.Kernel.SLIST_HEADER',
-      preferredArchitecture: PreferredArchitecture.x64,
-    );
+    final struct =
+        win32Scope.findTypeDef('Windows.Win32.System.Kernel.SLIST_HEADER');
     check(struct).isNotNull();
     check(struct!.fields.last.name).equals('HeaderX64');
   });
 
   test('Can distinguish global tokens', () {
-    final struct = win32Scope.findTypeDef(
-      'Windows.Win32.System.Kernel.SLIST_HEADER',
-      preferredArchitecture: PreferredArchitecture.x64,
-    );
+    final struct =
+        win32Scope.findTypeDef('Windows.Win32.System.Kernel.SLIST_HEADER');
     check(struct).isNotNull();
     check(struct!.isGlobal).isFalse();
 

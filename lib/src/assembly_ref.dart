@@ -16,12 +16,12 @@ import 'token_object.dart';
 class AssemblyRef extends TokenObject {
   const AssemblyRef(super.scope, super.token, this.name, this.version);
 
-  final String name;
-  final String version;
-
   /// Creates a assembly ref object from a provided token.
   factory AssemblyRef.fromToken(Scope scope, int token) {
-    assert(TokenType.fromToken(token) == TokenType.assemblyRef);
+    assert(
+      TokenType.fromToken(token) == TokenType.assemblyRef,
+      'Token $token is not an assembly ref token',
+    );
 
     return using((arena) {
       final ppbPublicKeyOrToken = arena<Pointer<BYTE>>();
@@ -52,14 +52,17 @@ class AssemblyRef extends TokenObject {
         :usBuildNumber,
         :usRevisionNumber
       ) = pMetaData.ref;
-      final versionString = '${usMajorVersion.toString()}.'
-          '${usMinorVersion.toString()}.'
-          '${usBuildNumber.toString()}.'
-          '${usRevisionNumber.toString()}';
+      final versionString = '$usMajorVersion.'
+          '$usMinorVersion.'
+          '$usBuildNumber.'
+          '$usRevisionNumber';
 
       return AssemblyRef(scope, token, szName.toDartString(), versionString);
     });
   }
+
+  final String name;
+  final String version;
 
   @override
   String toString() => name;

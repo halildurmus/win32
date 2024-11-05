@@ -25,17 +25,12 @@ class CustomAttribute extends TokenObject {
     this.signatureBlob,
   );
 
-  final int attributeType;
-  final int modifiedObjectToken;
-  final Uint8List signatureBlob;
-  final MemberRef memberRef;
-  final TypeDef constructor;
-
-  late final List<CustomAttributeParameter> parameters = _getParameters();
-
   /// Creates a custom attribute object from a provided token.
   factory CustomAttribute.fromToken(Scope scope, int token) {
-    assert(TokenType.fromToken(token) == TokenType.customAttribute);
+    assert(
+      TokenType.fromToken(token) == TokenType.customAttribute,
+      'Token $token is not a CustomAttribute token',
+    );
 
     return using((arena) {
       final ptkObj = arena<mdToken>();
@@ -62,6 +57,14 @@ class CustomAttribute extends TokenObject {
       );
     });
   }
+
+  final int attributeType;
+  final int modifiedObjectToken;
+  final Uint8List signatureBlob;
+  final MemberRef memberRef;
+  final TypeDef constructor;
+
+  late final List<CustomAttributeParameter> parameters = _getParameters();
 
   /// The name of the attribute
   String get name => constructor.name;

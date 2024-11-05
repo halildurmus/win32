@@ -18,13 +18,6 @@ enum MetadataType {
   /// `Microsoft.Windows.SDK.Contracts` on `NuGet.org`.
   winrt('Windows.winmd', 'Microsoft.Windows.SDK.Contracts');
 
-  /// The name of the metadata asset (e.g., `Windows.Win32.winmd`).
-  final String assetName;
-
-  /// The package name of the metadata at `NuGet.org` (e.g.,
-  /// `Microsoft.Windows.SDK.Win32Metadata`).
-  final String packageName;
-
   /// Creates a [MetadataType] with the specified [assetName] and [packageName].
   const MetadataType(this.assetName, this.packageName);
 
@@ -40,4 +33,11 @@ enum MetadataType {
           'Invalid package name.',
         ),
       );
+
+  /// The name of the metadata asset (e.g., `Windows.Win32.winmd`).
+  final String assetName;
+
+  /// The package name of the metadata at `NuGet.org` (e.g.,
+  /// `Microsoft.Windows.SDK.Win32Metadata`).
+  final String packageName;
 }

@@ -27,10 +27,9 @@ void main() {
     check(method.isStatic).isTrue();
     check(method.isVirtual).isFalse();
     check(method.parent).equals(typeDef);
-    check(method.toString()).equals('[voidType] TraceSynchronousWorkCompletion'
-        '(CausalityTraceLevel traceLevel, '
-        'CausalitySource source, '
-        'CausalitySynchronousWork work)');
+    check(method.toString()).equals('[voidType] '
+        'TraceSynchronousWorkCompletion(CausalityTraceLevel traceLevel, '
+        'CausalitySource source, CausalitySynchronousWork work)');
     check(method.vTableLayout).equals(VtableLayout.reuseSlot);
   });
 

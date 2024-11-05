@@ -9,12 +9,6 @@ import 'models.dart';
 
 /// An intermediate representation of a segment of a signature.
 class TypeTuple {
-  /// Returns the second item of the tuple
-  final int offsetLength;
-
-  /// Returns the first item of the tuple
-  final TypeIdentifier typeIdentifier;
-
   /// Creates a new tuple value with the specified items.
   const TypeTuple(this.typeIdentifier, this.offsetLength);
 
@@ -174,6 +168,12 @@ class TypeTuple {
         return TypeTuple(TypeIdentifier(baseType), 1);
     }
   }
+
+  /// Returns the second item of the tuple
+  final int offsetLength;
+
+  /// Returns the first item of the tuple
+  final TypeIdentifier typeIdentifier;
 
   /// Decodes a single `TypeDef` / `TypeRef` / `TypeSpec` token.
   static int _unencodeDefRefSpecToken(int encoded) {

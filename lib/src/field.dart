@@ -30,18 +30,12 @@ class Field extends TokenObject with CustomAttributesMixin {
     this.signatureBlob,
   );
 
-  final BaseType fieldType;
-  final String name;
-  final Uint8List signatureBlob;
-  final TypeIdentifier typeIdentifier;
-  final Object? value;
-
-  final int _attribs;
-  final int _parentToken;
-
   /// Creates a field object from a provided token.
   factory Field.fromToken(Scope scope, int token) {
-    assert(TokenType.fromToken(token) == TokenType.fieldDef);
+    assert(
+      TokenType.fromToken(token) == TokenType.fieldDef,
+      'Token $token is not a field definition token',
+    );
 
     return using((arena) {
       final ptkTypeDef = arena<mdTypeDef>();
@@ -113,6 +107,15 @@ class Field extends TokenObject with CustomAttributesMixin {
       );
     });
   }
+
+  final BaseType fieldType;
+  final String name;
+  final Uint8List signatureBlob;
+  final TypeIdentifier typeIdentifier;
+  final Object? value;
+
+  final int _attribs;
+  final int _parentToken;
 
   /// Returns the [TypeDef] representing the class that the field belongs to.
   TypeDef get parent => scope.findTypeDefByToken(_parentToken)!;

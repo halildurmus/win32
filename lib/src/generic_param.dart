@@ -16,19 +16,21 @@ import 'type_def.dart';
 /// Generic parameters belong to [Method]s or [TypeDef]s and contain
 /// [GenericParamConstraint]s.
 class GenericParam extends TokenObject with CustomAttributesMixin {
-  final String name;
-  final int sequence;
-
-  final int _attributes;
-  final _constraints = <GenericParamConstraint>[];
-  final int _parentToken;
-
-  GenericParam(super.scope, super.token, this.sequence, this._attributes,
-      this._parentToken, this.name);
+  GenericParam(
+    super.scope,
+    super.token,
+    this.sequence,
+    this._attributes,
+    this._parentToken,
+    this.name,
+  );
 
   /// Creates a generic parameter object from a provided token.
   factory GenericParam.fromToken(Scope scope, int token) {
-    assert(TokenType.fromToken(token) == TokenType.genericParam);
+    assert(
+      TokenType.fromToken(token) == TokenType.genericParam,
+      'Token $token is not a generic parameter token',
+    );
 
     return using((arena) {
       final pulParamSeq = arena<ULONG>();
@@ -47,6 +49,13 @@ class GenericParam extends TokenObject with CustomAttributesMixin {
           ptOwner.value, wzName.toDartString());
     });
   }
+
+  final String name;
+  final int sequence;
+
+  final int _attributes;
+  final _constraints = <GenericParamConstraint>[];
+  final int _parentToken;
 
   /// The object representing the owner of the parameter.
   ///
@@ -114,12 +123,12 @@ class GenericParamConstraint extends TokenObject with CustomAttributesMixin {
     this._constraintType,
   );
 
-  final int _constraintType;
-  final int _parentToken;
-
   /// Creates a generic parameter constraint object from a provided token.
   factory GenericParamConstraint.fromToken(Scope scope, int token) {
-    assert(TokenType.fromToken(token) == TokenType.genericParamConstraint);
+    assert(
+      TokenType.fromToken(token) == TokenType.genericParamConstraint,
+      'Token $token is not a generic parameter constraint token',
+    );
 
     return using((arena) {
       final ptGenericParam = arena<mdGenericParam>();
@@ -134,6 +143,9 @@ class GenericParamConstraint extends TokenObject with CustomAttributesMixin {
           scope, token, ptGenericParam.value, ptkConstraintType.value);
     });
   }
+
+  final int _constraintType;
+  final int _parentToken;
 
   /// The generic parameter that is constrained by this object.
   GenericParam get parent => GenericParam.fromToken(scope, _parentToken);

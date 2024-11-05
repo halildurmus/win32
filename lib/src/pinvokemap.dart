@@ -19,16 +19,13 @@ class PinvokeMap extends TokenObject {
     this.moduleName,
   );
 
-  final int importDllToken;
-  final String importName;
-  final String moduleName;
-
-  final int _attributes;
-
   /// Creates a P/Invoke method representation object from a provided token.
   factory PinvokeMap.fromToken(Scope scope, int token) {
-    assert([TokenType.fieldDef, TokenType.methodDef]
-        .contains(TokenType.fromToken(token)));
+    assert(
+      [TokenType.fieldDef, TokenType.methodDef]
+          .contains(TokenType.fromToken(token)),
+      'Token $token is not a field or method definition token',
+    );
 
     return using((arena) {
       final pdwMappingFlags = arena<DWORD>();
@@ -52,6 +49,12 @@ class PinvokeMap extends TokenObject {
           szImportName.toDartString(), ptkImportDLL.value, moduleName);
     });
   }
+
+  final int importDllToken;
+  final String importName;
+  final String moduleName;
+
+  final int _attributes;
 
   /// Returns true if each member name is used as specified.
   bool get isNoMangle =>

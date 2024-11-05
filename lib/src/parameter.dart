@@ -25,17 +25,12 @@ class Parameter extends TokenObject with CustomAttributesMixin {
     this.signatureBlob,
   );
 
-  String name;
-  final int sequence;
-  final Uint8List signatureBlob;
-  TypeIdentifier typeIdentifier;
-
-  int attributes;
-  final int _methodToken;
-
   /// Creates a parameter object from a provided token.
   factory Parameter.fromToken(Scope scope, int token) {
-    assert(TokenType.fromToken(token) == TokenType.paramDef);
+    assert(
+      TokenType.fromToken(token) == TokenType.paramDef,
+      'Token $token is not a ParamDef token',
+    );
 
     return using((arena) {
       final ptkMethodDef = arena<mdMethodDef>();
@@ -83,7 +78,15 @@ class Parameter extends TokenObject with CustomAttributesMixin {
     int attributes = 0,
   }) =>
       Parameter(
-          scope, 0, methodToken, 0, attributes, runtimeType, '', Uint8List(0));
+        scope,
+        0,
+        methodToken,
+        0,
+        attributes,
+        runtimeType,
+        '',
+        Uint8List(0),
+      );
 
   /// Creates a void parameter object.
   factory Parameter.fromVoid(Scope scope, int methodToken) => Parameter(
@@ -96,6 +99,14 @@ class Parameter extends TokenObject with CustomAttributesMixin {
         '',
         Uint8List(0),
       );
+
+  String name;
+  final int sequence;
+  final Uint8List signatureBlob;
+  TypeIdentifier typeIdentifier;
+
+  int attributes;
+  final int _methodToken;
 
   /// Returns the [Method] that takes the parameter.
   Method get parent => Method.fromToken(scope, _methodToken);

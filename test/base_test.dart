@@ -29,7 +29,7 @@ void main() {
   });
 
   test('Architecture 2', () {
-    final arch = const Architecture(0);
+    const arch = Architecture(0);
     check(arch.arm64).isFalse();
     check(arch.x86).isFalse();
     check(arch.x64).isFalse();

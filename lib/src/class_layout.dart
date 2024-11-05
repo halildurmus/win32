@@ -59,7 +59,7 @@ class ClassLayout extends TokenObject {
 
 /// A tuple of a field and its byte offset within a parent struct.
 class FieldOffset extends TokenObject {
-  const FieldOffset(super.scope, super.fieldToken, this.offset);
+  const FieldOffset(super.scope, super.token, this.offset);
 
   /// The byte offset of a specific field relative to its parent struct.
   ///

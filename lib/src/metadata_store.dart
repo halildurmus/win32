@@ -137,7 +137,7 @@ abstract final class MetadataStore {
     }
 
     if (!_isInitialized) initialize();
-    assert(_dispenser != null);
+    assert(_dispenser != null, 'Metadata dispenser is not initialized.');
 
     final szFile = file.path.toNativeUtf16();
     final pReader = calloc<COMObject>();
@@ -183,11 +183,12 @@ abstract final class MetadataStore {
   ///
   /// Throws an exception if the download fails.
   static Future<Uint8List> _downloadPackage(
-      String packageName, String version) async {
+    String packageName,
+    String version,
+  ) async {
     final packageId = packageName.toLowerCase();
     print('Downloading $packageId.$version.nupkg...');
-    return await _nugetClient!
-        .downloadPackageContent(packageId, version: version);
+    return _nugetClient!.downloadPackageContent(packageId, version: version);
   }
 
   /// Unpacks a NuGet package and returns its local path.
@@ -418,8 +419,8 @@ abstract final class MetadataStore {
   /// `MetadataStore`.
   static void close() {
     if (!_isInitialized) return;
-    assert(_dispenser != null);
-    assert(_nugetClient != null);
+    assert(_dispenser != null, 'Metadata dispenser is not initialized.');
+    assert(_nugetClient != null, 'NuGet client is not initialized.');
     scopeCache.clear();
     _dispenser!.release();
     free(_dispenser!.ptr);

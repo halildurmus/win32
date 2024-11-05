@@ -51,17 +51,16 @@ class TypeIdentifier {
     String? name,
     TypeDef? type,
     TypeIdentifier? typeArg,
-  }) {
-    return TypeIdentifier(
-      baseType ?? this.baseType,
-      name: name ?? this.name,
-      type: type ?? this.type,
-      arrayDimensions: arrayDimensions ?? this.arrayDimensions,
-      genericParameterSequence:
-          genericParameterSequence ?? this.genericParameterSequence,
-      typeArg: typeArg ?? this.typeArg,
-    );
-  }
+  }) =>
+      TypeIdentifier(
+        baseType ?? this.baseType,
+        name: name ?? this.name,
+        type: type ?? this.type,
+        arrayDimensions: arrayDimensions ?? this.arrayDimensions,
+        genericParameterSequence:
+            genericParameterSequence ?? this.genericParameterSequence,
+        typeArg: typeArg ?? this.typeArg,
+      );
 
   @override
   String toString() => name.isNotEmpty

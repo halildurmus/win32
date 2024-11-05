@@ -6,9 +6,6 @@ import 'exception.dart';
 /// ECMA spec. The maximum encodable unsigned integer is 29 bits long,
 /// 0x1FFFFFFF.
 class UncompressedData {
-  final int data;
-  final int dataLength;
-
   UncompressedData(this.data, this.dataLength);
 
   // The code here is the Dart equivalent of CorSigUncompressedData() in cor.h.
@@ -19,7 +16,7 @@ class UncompressedData {
     if ((rawBytes[0] & 0x80) == 0x00) // 0??? ????
     {
       final value = rawBytes[0];
-      final length = 1;
+      const length = 1;
       return UncompressedData(value, length);
     }
 
@@ -29,7 +26,7 @@ class UncompressedData {
       if (rawBytes.length < 2) throw WinmdException('Bad signature: $rawBytes');
 
       final value = (rawBytes[0] & 0x3f) << 8 | rawBytes[1];
-      final length = 2;
+      const length = 2;
       return UncompressedData(value, length);
     }
 
@@ -42,11 +39,14 @@ class UncompressedData {
           (rawBytes[1]) << 16 |
           (rawBytes[2]) << 8 |
           (rawBytes[3]);
-      final length = 4;
+      const length = 4;
       return UncompressedData(value, length);
     }
 
     // We don't recognize this encoding
     throw WinmdException('Bad signature: $rawBytes');
   }
+
+  final int data;
+  final int dataLength;
 }

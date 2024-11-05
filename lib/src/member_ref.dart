@@ -23,13 +23,12 @@ class MemberRef extends TokenObject {
     this.signatureBlob,
   );
 
-  final int referencedToken;
-  final String name;
-  final Uint8List signatureBlob;
-
   /// Creates a module object from a provided token.
   factory MemberRef.fromToken(Scope scope, int token) {
-    assert(TokenType.fromToken(token) == TokenType.memberRef);
+    assert(
+      TokenType.fromToken(token) == TokenType.memberRef,
+      'Token $token is not a MemberRef token',
+    );
 
     return using((arena) {
       final ptk = arena<mdToken>();
@@ -47,6 +46,10 @@ class MemberRef extends TokenObject {
           ppvSigBlob.value.asTypedList(pcbSigBlob.value));
     });
   }
+
+  final int referencedToken;
+  final String name;
+  final Uint8List signatureBlob;
 
   @override
   String toString() => name;

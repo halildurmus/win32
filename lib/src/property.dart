@@ -30,21 +30,12 @@ class Property extends TokenObject with CustomAttributesMixin {
     this.otherMethodTokens,
   );
 
-  final BaseType baseType;
-  final Uint8List defaultValue;
-  final String name;
-  final Uint32List otherMethodTokens;
-  final Uint8List signatureBlob;
-  final TypeIdentifier typeIdentifier;
-
-  final int _attributes;
-  final int _getterToken;
-  final int _parentToken;
-  final int _setterToken;
-
   /// Creates a property object from a provided token.
   factory Property.fromToken(Scope scope, int token) {
-    assert(TokenType.fromToken(token) == TokenType.property);
+    assert(
+      TokenType.fromToken(token) == TokenType.property,
+      'Token $token is not a property token',
+    );
 
     return using((arena) {
       final ptkTypeDef = arena<mdTypeDef>();
@@ -106,6 +97,18 @@ class Property extends TokenObject with CustomAttributesMixin {
       );
     });
   }
+
+  final BaseType baseType;
+  final Uint8List defaultValue;
+  final String name;
+  final Uint32List otherMethodTokens;
+  final Uint8List signatureBlob;
+  final TypeIdentifier typeIdentifier;
+
+  final int _attributes;
+  final int _getterToken;
+  final int _parentToken;
+  final int _setterToken;
 
   /// Returns the get accessor method for the property.
   Method? get getterMethod => reader.isValidToken(_getterToken) == TRUE
