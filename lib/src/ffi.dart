@@ -1,6 +1,7 @@
 // Dart FFI wrapper functions for the Flutter Engine API.
 
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: missing_whitespace_between_adjacent_strings
+// ignore_for_file: non_constant_identifier_names, sort_constructors_first
 
 import 'dart:ffi';
 

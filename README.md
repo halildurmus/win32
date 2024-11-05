@@ -70,8 +70,8 @@ Windows using the Dart runner:
 Please file feature requests and bugs at the
 [issue tracker][issue_tracker_link].
 
-[ci_badge]: https://github.com/halildurmus/win32_runner/actions/workflows/build.yml/badge.svg
-[ci_link]: https://github.com/halildurmus/win32_runner/actions/workflows/build.yml
+[ci_badge]: https://github.com/halildurmus/win32_runner/actions/workflows/win32_runner.yml/badge.svg
+[ci_link]: https://github.com/halildurmus/win32_runner/actions/workflows/win32_runner.yml
 [demo_image_link]: https://raw.githubusercontent.com/halildurmus/win32_runner/main/screenshots/demo.png
 [example]: https://github.com/halildurmus/win32_runner/tree/main/example
 [issue_tracker_link]: https://github.com/halildurmus/win32_runner/issues

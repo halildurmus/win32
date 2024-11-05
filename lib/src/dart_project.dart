@@ -17,18 +17,6 @@ class DartProject {
     required this.icuDataPath,
   });
 
-  /// The path to the AOT library.
-  ///
-  /// This will always return a path, but non-AOT builds will not be expected to
-  /// actually have a library at that path.
-  final String aotLibraryPath;
-
-  /// The path to the assets directory.
-  final String assetsPath;
-
-  /// The path to the ICU data.
-  final String icuDataPath;
-
   /// Creates a [DartProject] from a directory path.
   ///
   /// The directory should contain the following top-level items:
@@ -62,4 +50,16 @@ class DartProject {
         icuDataPath:
             p.join(path, 'windows', 'flutter', 'ephemeral', 'icudtl.dat'),
       );
+
+  /// The path to the AOT library.
+  ///
+  /// This will always return a path, but non-AOT builds will not be expected to
+  /// actually have a library at that path.
+  final String aotLibraryPath;
+
+  /// The path to the assets directory.
+  final String assetsPath;
+
+  /// The path to the ICU data.
+  final String icuDataPath;
 }
