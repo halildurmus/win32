@@ -268,19 +268,7 @@ abstract final class MetadataStore {
     final scope = _tryToLoadMetadataFromFile(MetadataType.wdk, downloadVersion);
     if (scope != null) return scope;
 
-    // The lock file is used to prevent multiple processes from downloading the
-    // same package at the same time during the test run.
-    final lockFile = File('${LocalStorage.path}\\$packageName.lock');
-    final randomAccessFile = lockFile.openSync(mode: FileMode.write)
-      ..lockSync(FileLock.blockingExclusive);
-    try {
-      return await _loadWdkMetadata(version: downloadVersion);
-    } finally {
-      randomAccessFile.closeSync();
-      try {
-        lockFile.deleteSync();
-      } catch (_) {}
-    }
+    return _loadWdkMetadata(version: downloadVersion);
   }
 
   /// Loads Win32 metadata.
@@ -322,19 +310,7 @@ abstract final class MetadataStore {
         _tryToLoadMetadataFromFile(MetadataType.win32, downloadVersion);
     if (scope != null) return scope;
 
-    // The lock file is used to prevent multiple processes from downloading the
-    // same package at the same time during the test run.
-    final lockFile = File('${LocalStorage.path}\\$packageName.lock');
-    final randomAccessFile = lockFile.openSync(mode: FileMode.write)
-      ..lockSync(FileLock.blockingExclusive);
-    try {
-      return await _loadWin32Metadata(version: downloadVersion);
-    } finally {
-      randomAccessFile.closeSync();
-      try {
-        lockFile.deleteSync();
-      } catch (_) {}
-    }
+    return _loadWin32Metadata(version: downloadVersion);
   }
 
   /// Loads WinRT metadata.
@@ -395,19 +371,7 @@ abstract final class MetadataStore {
         _tryToLoadMetadataFromFile(MetadataType.winrt, downloadVersion);
     if (scope != null) return scope;
 
-    // The lock file is used to prevent multiple processes from downloading the
-    // same package at the same time during the test run.
-    final lockFile = File('${LocalStorage.path}\\$packageName.lock');
-    final randomAccessFile = lockFile.openSync(mode: FileMode.write)
-      ..lockSync(FileLock.blockingExclusive);
-    try {
-      return await _loadWinrtMetadata(version: downloadVersion);
-    } finally {
-      randomAccessFile.closeSync();
-      try {
-        lockFile.deleteSync();
-      } catch (_) {}
-    }
+    return _loadWinrtMetadata(version: downloadVersion);
   }
 
   /// Disposes of all objects and clears the [scopeCache].
