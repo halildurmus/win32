@@ -174,7 +174,7 @@ class Window {
 
     // A value of 0 indicates apps should use dark mode. A non-zero or missing
     // value indicates apps should use light mode.
-    final appsUseLightMode = key.getValueAsInt('AppsUseLightTheme');
+    final appsUseLightMode = key.getIntValue('AppsUseLightTheme');
     if (appsUseLightMode != null) {
       final enableDarkMode = appsUseLightMode == FALSE;
       final pvAttribute = calloc<BOOL>()..value = enableDarkMode ? TRUE : FALSE;
