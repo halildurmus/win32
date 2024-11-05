@@ -23,10 +23,10 @@ abstract final class MdMerge {
   /// information about the installed Windows SDK.
   static String _getExecutablePath() {
     const path = r'SOFTWARE\WOW6432Node\Microsoft\Microsoft SDKs\Windows\v10.0';
-    final regKey = Registry.openPath(RegistryHive.localMachine, path: path);
-    final installationFolder = regKey.getValueAsString('InstallationFolder');
-    final productVersion = regKey.getValueAsString('ProductVersion');
-    regKey.close();
+    final key = Registry.openPath(RegistryHive.localMachine, path: path);
+    final installationFolder = key.getStringValue('InstallationFolder');
+    final productVersion = key.getStringValue('ProductVersion');
+    key.close();
 
     if (installationFolder == null || productVersion == null) {
       throw const WinmdException(
