@@ -29,7 +29,7 @@ jobs:
     with:
       analyze_directories: 'example lib test'
       check_coverage: ${{ matrix.sdk == 'main' }}
-      concurrency: 1
+      concurrency: '1'
       dart_sdk: ${{ matrix.sdk }}
       runs_on: ${{ matrix.os }}
     secrets:
