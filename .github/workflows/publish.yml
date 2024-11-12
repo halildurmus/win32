@@ -34,4 +34,4 @@ jobs:
     if: needs.check-release.outputs.should_publish == 'true'
     uses: halildurmus/workflows/.github/workflows/dart_pub_publish.yml@main
     secrets:
-      GITHUB_PAT: ${{ secrets.GITHUB_PAT }}
+      token: ${{ secrets.PAT }}
