@@ -20,11 +20,15 @@
 
 <!--- Put an `x` in all the boxes that apply: -->
 
-- [ ] 🚀 `feat` — New feature (non-breaking change which adds functionality)
-- [ ] 🛠️ `fix` — Bug fix (non-breaking change which fixes an issue)
-- [ ] ❌ `!` — Breaking change (fix or feature that would cause existing functionality to change)
-- [ ] 🧹 `refactor` — Code refactor
-- [ ] ✅ `ci` — Build configuration change
-- [ ] 📝 `docs` — Documentation
-- [ ] 🧪 `test` — Test
-- [ ] 🗑️ `chore` — Chore
+- [ ] 🚀 `feat` – New feature (non-breaking change that adds functionality)
+- [ ] 🛠️ `fix` – Bug fix (non-breaking change that fixes an issue)
+- [ ] ❌ `!` – Breaking change (fix or feature that causes existing functionality to change)
+- [ ] ⚡ `perf` – Performance improvement
+- [ ] 🧹 `refactor` – Code refactor (no functionality change)
+- [ ] 📝 `docs` – Documentation update
+- [ ] 🎨 `style` – Code style changes (formatting, renaming, etc.)
+- [ ] 🧪 `test` – Test update or addition
+- [ ] 🔧 `build` – Build related changes
+- [ ] ✅ `ci` – CI related changes
+- [ ] 🗑️ `chore` – Chore (maintenance, non-production code change)
+- [ ] ◀️  `revert` – Revert a previous commit
