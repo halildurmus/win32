@@ -2,9 +2,51 @@ name: ci
 
 on:
   pull_request:
-    branches:
-      - main
+  push:
+    branches: [main]
 
 jobs:
   semantic-pr:
+    if: github.event_name == 'pull_request'
     uses: halildurmus/workflows/.github/workflows/semantic_pr.yml@main
+
+  health:
+    if: github.event_name == 'pull_request'
+    uses: halildurmus/workflows/.github/workflows/health.yml@main
+
+  build:
+    needs: [health]
+    if: (github.event_name == 'pull_request' && success()) || github.event_name == 'push'
+    strategy:
+      # We want to see the results on stable even if main fails (and vice
+      # versa). This prevents one failure from stopping the entire run.
+      fail-fast: false
+
+      # Free config supports up to 20 concurrent jobs, so pick a sparse matrix
+      # that tiles the space well.
+      matrix:
+        include:
+          - os: windows-latest
+            sdk: main
+          - os: windows-2022
+            sdk: beta
+          - os: windows-2019
+            sdk: stable
+          - os: ubuntu-latest
+            sdk: stable
+    uses: halildurmus/workflows/.github/workflows/dart.yml@main
+    with:
+      analyze_directories: 'example lib test'
+      check_coverage: ${{ matrix.sdk == 'main' }}
+      dart_sdk: ${{ matrix.sdk }}
+      runs_on: ${{ matrix.os }}
+    secrets:
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+  dartdoc:
+    needs: [build]
+    uses: halildurmus/workflows/.github/workflows/dartdoc.yml@main
+
+  pana:
+    needs: [build]
+    uses: halildurmus/workflows/.github/workflows/pana.yml@main
