@@ -23,4 +23,4 @@ jobs:
         uses: srealmoreno/label-sync-action@v2
         with:
           clean-labels: true
-          config-file: .github/labels.yml
+          config-file: https://raw.githubusercontent.com/halildurmus/workflows/main/.github/labels.yml
