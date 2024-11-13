@@ -1,4 +1,4 @@
-name: ♻️ Sync Labels
+name: Sync Labels
 
 on:
   push:
@@ -16,11 +16,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: ⤵️ Check out code from GitHub
+      - name: 📚 Git Checkout
         uses: actions/checkout@v4
 
       - name: 🚀 Run Label Sync
         uses: srealmoreno/label-sync-action@v2
         with:
           clean-labels: true
-          config-file: https://raw.githubusercontent.com/halildurmus/workflows/main/.github/labels.yml
+          config-file: .github/labels.yml
