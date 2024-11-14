@@ -20,7 +20,7 @@ void main() {
   }
 
   // Set file list data to the clipboard.
-  final files = [r'c:\src\file1.dart', r'd:\file2.txt'];
+  const files = [r'c:\src\file1.dart', r'd:\file2.txt'];
   if (Clipboard.setFileList(files)) print('File list set to clipboard: $files');
 
   // Check if the clipboard has a file list (optional).
