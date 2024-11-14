@@ -1,0 +1,32 @@
+name: Prepare Release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  check-version:
+    runs-on: ubuntu-latest
+
+    outputs:
+      needs_release: ${{ steps.check_version.outputs.needs_release }}
+
+    steps:
+      - name: 📚 Git Checkout
+        uses: actions/checkout@v4
+
+      - name: 🔍 Check if New Release is Needed
+        id: check_version
+        run: |
+          current_version=$(grep '^version:' pubspec.yaml | awk '{print $2}')
+          if [[ "$current_version" == *"-wip" ]]; then
+            echo "needs_release=true" >> $GITHUB_ENV
+          else
+            echo "needs_release=false" >> $GITHUB_ENV
+          fi
+
+  prepare-release:
+    needs: check-version
+    if: needs.check-version.outputs.needs_release == 'true'
+    uses: halildurmus/workflows/.github/workflows/prepare_release.yml@main
+    secrets:
+      token: ${{ secrets.PAT }}

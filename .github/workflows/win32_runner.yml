@@ -2,17 +2,29 @@ name: win32_runner
 
 on:
   pull_request:
+    paths:
+      - .github/workflows/win32_runner.yml
+      - lib/**
+      - test/**
+      - pubspec.yaml
   push:
     branches: [main]
+    paths:
+      - .github/workflows/win32_runner.yml
+      - lib/**
+      - test/**
+      - pubspec.yaml
 
 jobs:
   build:
     uses: halildurmus/workflows/.github/workflows/dart.yml@main
     with:
-      analyze_directories: 'example lib test'
+      format_directories: lib test
 
   dartdoc:
+    needs: [build]
     uses: halildurmus/workflows/.github/workflows/dartdoc.yml@main
 
   pana:
+    needs: [build]
     uses: halildurmus/workflows/.github/workflows/pana.yml@main
