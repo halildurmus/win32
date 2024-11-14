@@ -1,0 +1,8 @@
+name: Semantic PR
+
+on:
+  pull_request:
+
+jobs:
+  build:
+    uses: halildurmus/workflows/.github/workflows/semantic_pr.yml@main

@@ -1,0 +1,13 @@
+name: Health
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/health.yml
+      - lib/**
+      - CHANGELOG.md
+      - pubspec.yaml
+
+jobs:
+  build:
+    uses: halildurmus/workflows/.github/workflows/health.yml@main

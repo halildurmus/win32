@@ -17,10 +17,10 @@ example:
       - any-glob-to-any-file: example/**
 
 'external dependency':
-  - head-branch: ['^dependabot']
+  - head-branch: [^dependabot]
 
 release:
-  - head-branch: ['^release', 'release']
+  - head-branch: [^release, release]
 
 test:
   - changed-files:

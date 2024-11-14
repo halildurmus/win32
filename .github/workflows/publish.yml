@@ -2,8 +2,10 @@ name: Publish
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+    paths:
+      - CHANGELOG.md
+      - pubspec.yaml
 
 jobs:
   check-release:
