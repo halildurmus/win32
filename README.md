@@ -48,8 +48,8 @@ Please file feature requests and bugs at the
 [issue tracker][issue_tracker_link].
 
 [api_documentation_link]: https://pub.dev/documentation/win32_registry/latest/
-[ci_badge]: https://github.com/halildurmus/win32_registry/actions/workflows/build.yml/badge.svg
-[ci_link]: https://github.com/halildurmus/win32_registry/actions/workflows/build.yml
+[ci_badge]: https://github.com/halildurmus/win32_registry/actions/workflows/win32_registry.yml/badge.svg
+[ci_link]: https://github.com/halildurmus/win32_registry/actions/workflows/win32_registry.yml
 [codecov_badge_link]: https://codecov.io/gh/halildurmus/win32_registry/branch/main/graph/badge.svg?token=6ThVC4ejhx
 [codecov_link]: https://codecov.io/gh/halildurmus/win32_registry
 [example]: https://github.com/halildurmus/win32_registry/tree/main/example

@@ -24,5 +24,12 @@ dependencies:
 
 dev_dependencies:
   checks: ^0.3.0
-  lints: ^5.0.0
+  hooks:
+    git:
+      url: https://github.com/halildurmus/workflows.git
+      path: packages/hooks
+  lints:
+    git:
+      url: https://github.com/halildurmus/workflows.git
+      path: packages/lints
   test: ^1.25.8

@@ -1,13 +1,19 @@
-name: Build
+name: win32_registry
 
 on:
   pull_request:
-    branches: [main]
+    paths:
+      - .github/workflows/win32_registry.yml
+      - lib/**
+      - test/**
+      - pubspec.yaml
   push:
     branches: [main]
-  schedule:
-    # Run every day at 10:00 AM UTC.
-    - cron: '0 10 * * *'
+    paths:
+      - .github/workflows/win32_registry.yml
+      - lib/**
+      - test/**
+      - pubspec.yaml
 
 jobs:
   build:
@@ -28,14 +34,21 @@ jobs:
             sdk: stable
           - os: ubuntu-latest
             sdk: stable
-
-    uses: halildurmus/workflows/.github/workflows/dart_package.yml@main
+    uses: halildurmus/workflows/.github/workflows/dart.yml@main
     with:
+      check_coverage: ${{ matrix.sdk == 'main' }}
+      concurrency: '1'
       dart_sdk: ${{ matrix.sdk }}
-      run_tests: ${{ matrix.os != 'ubuntu-latest' && matrix.sdk != 'main' }}
+      format_directories: lib test
+      randomize_execution_order_of_tests: true
       runs_on: ${{ matrix.os }}
-      upload_coverage: ${{ matrix.sdk == 'main' }}
-      validate_dartdoc_links: ${{ matrix.sdk == 'main' }}
-      verify_pana_score: ${{ matrix.os == 'ubuntu-latest' }}
     secrets:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+  dartdoc:
+    needs: [build]
+    uses: halildurmus/workflows/.github/workflows/dartdoc.yml@main
+
+  pana:
+    needs: [build]
+    uses: halildurmus/workflows/.github/workflows/pana.yml@main
