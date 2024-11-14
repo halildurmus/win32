@@ -2,10 +2,9 @@ name: Sync Labels
 
 on:
   push:
+    branches: [main]
     paths:
       - .github/labels.yml
-    branches:
-      - main
   workflow_dispatch:
 
 permissions:
@@ -13,10 +12,10 @@ permissions:
 
 jobs:
   labels:
-    name: ♻️ Sync Labels
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
+
     steps:
-      - name: ⤵️ Check out code from GitHub
+      - name: 📚 Git Checkout
         uses: actions/checkout@v4
 
       - name: 🚀 Run Label Sync

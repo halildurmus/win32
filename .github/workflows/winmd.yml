@@ -2,8 +2,18 @@ name: winmd
 
 on:
   pull_request:
+    paths:
+      - .github/workflows/winmd.yml
+      - lib/**
+      - test/**
+      - pubspec.yaml
   push:
     branches: [main]
+    paths:
+      - .github/workflows/winmd.yml
+      - lib/**
+      - test/**
+      - pubspec.yaml
 
 jobs:
   build:
@@ -27,16 +37,19 @@ jobs:
 
     uses: halildurmus/workflows/.github/workflows/dart.yml@main
     with:
-      analyze_directories: 'example lib test'
       check_coverage: ${{ matrix.sdk == 'main' }}
       concurrency: '1'
       dart_sdk: ${{ matrix.sdk }}
+      format_directories: lib test
+      randomize_execution_order_of_tests: true
       runs_on: ${{ matrix.os }}
     secrets:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   dartdoc:
+    needs: [build]
     uses: halildurmus/workflows/.github/workflows/dartdoc.yml@main
 
   pana:
+    needs: [build]
     uses: halildurmus/workflows/.github/workflows/pana.yml@main
