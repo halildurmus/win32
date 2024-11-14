@@ -28,5 +28,8 @@ dev_dependencies:
     git:
       url: https://github.com/halildurmus/workflows.git
       path: packages/hooks
-  lints: ^5.0.0
+  lints:
+    git:
+      url: https://github.com/halildurmus/workflows.git
+      path: packages/lints
   test: ^1.25.8
