@@ -4,7 +4,6 @@ on:
   pull_request:
     paths:
       - .github/workflows/win32_clipboard.yml
-      - example/**
       - lib/**
       - test/**
       - pubspec.yaml
@@ -12,7 +11,6 @@ on:
     branches: [main]
     paths:
       - .github/workflows/win32_clipboard.yml
-      - example/**
       - lib/**
       - test/**
       - pubspec.yaml
@@ -38,10 +36,10 @@ jobs:
             sdk: stable
     uses: halildurmus/workflows/.github/workflows/dart.yml@main
     with:
-      analyze_directories: 'example lib test'
       check_coverage: ${{ matrix.sdk == 'main' }}
       concurrency: '1'
       dart_sdk: ${{ matrix.sdk }}
+      format_directories: lib test
       runs_on: ${{ matrix.os }}
     secrets:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
