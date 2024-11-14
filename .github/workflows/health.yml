@@ -17,4 +17,5 @@ on:
 
 jobs:
   build:
+    if: ${{ !contains(github.event.pull_request.labels.*.name, 'skip-health-check') }}
     uses: halildurmus/workflows/.github/workflows/health.yml@main
