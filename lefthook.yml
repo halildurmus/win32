@@ -11,7 +11,7 @@ pre-commit:
       description: Formats the code according to the project's style guide
     test:
       glob: '{lib,test}/**/*.dart'
-      run: dart run hooks:test
+      run: dart run hooks:test -- -j 1 --test-randomize-ordering-seed=random
       description: Runs the test suite to ensure all tests pass
     bump_version:
       glob: 'lib/**/*.{dart}'
