@@ -1,6 +1,6 @@
-# Contributing to win32
+# Contributing
 
-Thank you for your interest in contributing to win32!
+Thank you for your interest in contributing to **win32**!
 
 For detailed information on how to contribute, please refer to our
 [Contributing Guide].
