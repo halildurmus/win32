@@ -2,31 +2,29 @@ name: Website
 
 on:
   pull_request:
-    branches: [main]
     paths:
-      - '.github/workflows/website.yml'
+      - .github/workflows/website.yml
       - website/**
   push:
     branches: [main]
     paths:
-      - '.github/workflows/website.yml'
+      - .github/workflows/website.yml
       - website/**
 
 jobs:
   build:
     if: ${{ github.event_name == 'pull_request' }}
     name: Build
-    runs-on: ubuntu-latest
 
     defaults:
       run:
         working-directory: website
 
+    runs-on: ubuntu-latest
+
     steps:
       - name: 📚 Git Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: ⚙️ Setup Node.js
         uses: actions/setup-node@v4
@@ -44,21 +42,21 @@ jobs:
   deploy:
     if: ${{ github.event_name == 'push' }}
     name: Deploy to GitHub Pages
-    permissions:
-      contents: write
-      id-token: write
-      pages: write
-    runs-on: ubuntu-latest
 
     defaults:
       run:
         working-directory: website
 
+    permissions:
+      contents: write
+      id-token: write
+      pages: write
+
+    runs-on: ubuntu-latest
+
     steps:
       - name: 📚 Git Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: ⚙️ Setup Node.js
         uses: actions/setup-node@v4
@@ -81,6 +79,8 @@ jobs:
       - name: ☁️ Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
+          commit_message: ${{ github.event.head_commit.message }}
+          force_orphan: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: website/build
           user_name: github-actions[bot]
