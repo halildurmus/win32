@@ -2,39 +2,33 @@
 title: Contributing
 ---
 
-Thank you for your interest in contributing to our project. We value your input
-and appreciate your effort to improve our work. This guide will help you get
-started with contributing to the **win32**.
+Thank you for your interest in contributing to **win32**!
 
-We adhere to a [Code of Conduct] to ensure a welcoming and inclusive community.
-Please read it before contributing.
+This guide provides everything you need to get started and make your
+contributions effective and rewarding.
 
-:::simple
+We strive to maintain a welcoming and inclusive community, so please read our
+[Code of Conduct] before contributing.
 
-- **Working on Issues:** If you plan to work on an existing issue, please
-  comment on the issue page to let others know before you start.
-- **Proposing New Features:** If you have an idea for a new feature, create an
-  issue and discuss it with the community and maintainers.
+## 📝 Good to Know
 
-:::
+- **Working on Issues:** If you’d like to work on an existing issue, please
+  comment on the issue page to let others know before you begin.
+- **Proposing New Features:** Have an idea for a new feature? Create an issue to
+  discuss it with the community and maintainers before diving in.
 
-## 🙌 Ways You Can Contribute
+## 🙌 How You Can Contribute
 
-- **🌟 Star Us on GitHub**: If you enjoy using our package, don't forget to star
-  us on [GitHub]! Your support means a lot.
-- **🐛 Report Bugs**: If you find a bug, please report it on our [GitHub Issues]
-  page. We'll do our best to fix it as soon as possible.
-- **📚 Improve Documentation**: Good documentation is imperative to the success
-  of any project. You can help us by improving the quality of our documentation
-  or adding new content.
-- **📝 Give Feedback**: We're always looking for ways to make **win32** better.
-  Please share how you use **win32**, what features are missing, and what works
-  well via [GitHub Discussions].
-- **📢 Share win32**: Help us reach more people. Share the [win32 repo][GitHub]
-  with anyone who might be interested.
-- **💻 Contribute to the Codebase**: Your help is needed to make this project
-  the best it can be! You can develop new features or fix
-  [existing issues][GitHub Issues]. Every contribution is greatly appreciated!
+- **🌟 Star Us on GitHub**: If you enjoy using this package, a star on [GitHub]
+  helps support our work.
+- **🐛 Report Bugs**: Found a bug? Let us know on our [GitHub Issues] page.
+- **📝 Improve Documentation**: High-quality documentation is crucial. Help us
+  improve it by refining the existing docs or adding new content.
+- **💬 Give Feedback**: Share your experience using **win32**, what features
+  you’d like, and what works well on [GitHub Discussions].
+- **📢 Share win32**: Spread the word about this project to reach more users.
+- **💻 Contribute to the Codebase**: Work on new features or tackle
+  [open issues][GitHub Issues] — all contributions are highly appreciated!
 - **📦 Share Your Own Packages**: If you've created a package that builds on top
   of **win32** and provides a more Dart-friendly API for a specific Windows API,
   please share it with us! Our community is growing rapidly, and your package
@@ -43,51 +37,71 @@ Please read it before contributing.
 
 ## 🛠️ Setting Up the Environment
 
-:::simple Requirements
+### ⚙️ Requirements
 
-- [Dart](https://dart.dev) version `3.4` or higher
+- [Dart](https://dart.dev) version `3.5` or higher
+- [git-cliff](https://git-cliff.org) for generating changelogs
+- [Lefthook](https://github.com/evilmartians/lefthook) for managing Git hooks
+
+If you're planning to contribute to the documentation, you'll also need:
+
 - [Node.js](https://nodejs.org) version `20` or higher
 - [npm](https://www.npmjs.com) version `10` or higher
 
-:::
-
-If your environment is ready, you can [fork the win32 repository] and clone it
-to your local machine.
+Once your environment is ready, [fork the repository], clone it locally, and
+set up the project.
 
 ### 📥 Cloning the Repository
 
-After you fork the **win32** repository, you need to **clone** it to your local
-machine. Instead of using the `halildurmus/win32` repository, it's recommended
-to use your **fork**. This way, you can push your changes to your fork and
-create a pull request from there.
+Clone your fork of **win32** to your local machine:
 
-```sh title="Terminal"
-git clone https://github.com/halildurmus/win32.git
+```cmd title="Terminal"
+git clone https://github.com/<your-username>/win32.git
 ```
 
 ### 📦 Installing Dependencies
 
-After you clone the repository, you need to install the dependencies:
+Navigate to the project directory and install dependencies:
 
-```sh title="Terminal"
+```cmd title="Terminal"
 dart pub get
 ```
 
-### ✅ Running Tests
+## 🧩 Setting Up Git Hooks
 
-You can use the `dart test` command to run tests for the **`package:win32`**:
+This project uses **Lefthook** to manage Git hooks. Install the hooks by running
+the following in the project root:
 
-```sh title="Terminal"
-dart test
+```cmd title="Terminal"
+lefthook install
 ```
 
-:::simple
+This will set up checks that automatically ensure code quality and consistency
+before commits.
 
-We're expecting proper **tests** for each **feature/bugfix** you make. If you're
-not sure how to write tests for your feature/bugfix, please ask for help in the
-relevant GitHub issue page.
+### ✅ Running Tests
 
-:::
+To run tests for the **win32** package, follow these steps:
+
+1. Navigate to the package directory:
+
+   ```cmd title="Terminal"
+   cd packages\win32
+   ```
+
+2. Run the tests with the following command:
+
+   ```cmd title="Terminal"
+   dart test -j 1 --test-randomize-ordering-seed=random
+   ```
+
+   - `-j 1`: Runs tests sequentially, increasing the likelihood of detecting
+     segmentation faults or similar test failures.
+   - `--test-randomize-ordering-seed=random`: Randomizes the test execution
+     order to identify unintended dependencies between tests.
+
+_We require tests for each feature or bug fix. If you’re unsure how to write_
+_tests for your changes, feel free to ask on the relevant GitHub issue page._
 
 ## 📝 Contributing to the Documentation
 
@@ -95,7 +109,7 @@ Our documentation is built with [Docusaurus]. To contribute to the
 documentation, you need to install the dependencies and start the development
 server:
 
-```sh title="Terminal"
+```cmd title="Terminal"
 cd website
 npm install
 npm start
@@ -121,7 +135,7 @@ If you want to contribute to the **win32** itself, follow the steps below:
   APIs, rather than the **ANSI** (`'A'`) variants. For example:
   [CredWriteW][credwritew_link], rather than [CredWriteA][credwritea_link].
 
-- To create a new API, *don't* edit the main library files themselves; these get
+- To create a new API, _don't_ edit the main library files themselves; these get
   **overwritten**. Instead, edit the
   [win32_functions.json][win32_functions_json_link] file and execute the
   `tools\generate.cmd` script to update the library files:
@@ -177,22 +191,19 @@ generate the relevant class in the `packages\win32\lib\src\com` directory.
 
 ## 🚀 Committing Your Work and Preparing a Pull Request
 
-**win32** is a **monorepo** with multiple packages and examples. To ensure we
-keep things clean and in order, we use several tools to enforce a good
-development experience.
+To maintain a consistent and clean codebase, we enforce coding standards and use
+tools to ensure high-quality contributions.
 
 ### 🎨 Coding Style
 
-We follow the [Dart style guide] to maintain a clean and consistent codebase.
-Make sure you adhere to the style guide when working on the codebase.
+Please follow the [Dart style guide] to keep the codebase clean and consistent.
 
 ### 📜 Commit Convention
 
-Commit messages are essential for clarity in our development process. We use
-[Conventional Commits] to keep our commit messages **consistent** and **easy to
-understand**.
+We use [Conventional Commits] to structure our commit messages for clarity and
+uniformity.
 
-We expect commit messages to follow this format:
+Please use the following format for commit messages:
 
 ```text
 <type>(optional scope): <description>
@@ -200,44 +211,46 @@ We expect commit messages to follow this format:
 
 Here's an example of a good commit message:
 
-```text
-feat: add `refCount` function
-```
+Examples:
 
-:::simple
+- `feat: add DragQueryFile API`
+- `fix: resolve an issue with the PROPVARIANT struct`
 
-<!-- We use the [dart_pre_commit] and [git_hooks] packages to enforce **conventional
-commits**. If you don't follow the conventional commit format, you will see an
-error message when you try to commit your changes, or a GitHub action will fail
-when you create a pull request. -->
+_Commit messages are validated with a GitHub action, so be sure to use the_
+_correct format when making a pull request._
 
-We enforce **conventional commits** using a GitHub action. If you don't follow
-the conventional commit format, the GitHub action will fail when you create a
-pull request.
+### 🧩 Git Hooks
 
-:::
+The following hooks run automatically with Lefthook:
+
+- **Pre-Commit Hooks**:
+  - `analyze`: Checks code for style issues.
+  - `format`: Formats code according to Dart guidelines.
+  - `test_generator`: Runs tests for `package:generator` to ensure stability.
+  - `test_win32`: Runs tests for `package:win32` to ensure stability.
+  - `bump_version`: Increments the version number based on commit messages.
+  - `update_changelog`: Generates a changelog based on commit messages.
+
+- **Commit-msg Hook**:
+  - `check_commit`: Ensures the commit message follows [Conventional Commits].
 
 ### 🔄 Creating a Pull Request
 
-After you **commit** your changes, you can push your changes to your **fork**
-and [create a pull request]. When you create a **pull request**, a GitHub action
-will run **tests**. Our maintainers will **review** your changes shortly and
-**merge** your pull request if everything is in order.
+After committing your changes, push them to your fork and
+[create a pull request]. When you open a pull request, tests will run
+automatically, and our maintainers will review it.
 
-Our Pull Request template is designed to ensure you provide all the necessary
-information about your changes. Please make sure you fill out the template with
-the required information.
+Please use the pull request template to provide details about your changes,
+ensuring a smoother review process.
 
-We look forward to seeing your contributions! 🎉
+Thank you for contributing to **win32**! 🎉
 
 [Code of Conduct]: https://github.com/halildurmus/win32/blob/main/CODE_OF_CONDUCT.md
 [Conventional Commits]: https://www.conventionalcommits.org/en/v1.0.0/
 [create a pull request]: https://github.com/halildurmus/win32/compare
-[dart_pre_commit]: https://pub.dev/packages/dart_pre_commit
 [Dart style guide]: https://dart.dev/effective-dart/style
 [Docusaurus]: https://docusaurus.io
-[fork the win32 repository]: https://github.com/halildurmus/win32/fork
-[git_hooks]: https://pub.dev/packages/git_hooks
+[fork the repository]: https://github.com/halildurmus/win32/fork
 [GitHub]: https://github.com/halildurmus/win32
 [GitHub Discussions]: https://github.com/halildurmus/win32/discussions
 [GitHub Issues]: https://github.com/halildurmus/win32/issues
