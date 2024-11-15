@@ -1,0 +1,15 @@
+- name: com
+  color: '8C9FDB'
+  description: Issue with COM support
+
+- name: 'package: generator'
+  color: '2FE436'
+  description: Issue with package:generator
+
+- name: 'package: win32'
+  color: '2FE436'
+  description: Issue with package:win32
+
+- name: website
+  color: '006b75'
+  description: Issue with https://win32.pub

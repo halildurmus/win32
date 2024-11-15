@@ -2,34 +2,30 @@ name: generator
 
 on:
   pull_request:
-    branches: [main]
     paths:
-      - '.github/workflows/generator.yml'
-      - 'analysis_options.yaml'
-      - 'codecov.yml'
-      - 'pubspec.yaml'
-      - 'packages/generator/bin/**'
-      - 'packages/generator/example/**'
-      - 'packages/generator/lib/**'
-      - 'packages/generator/test/**'
-      - 'packages/generator/analysis_options.yaml'
-      - 'packages/generator/pubspec.yaml'
+      - .github/workflows/generator.yml
+      - analysis_options.yaml
+      - codecov.yml
+      - pubspec.yaml
+      - packages/generator/bin/**
+      - packages/generator/example/**
+      - packages/generator/lib/**
+      - packages/generator/test/**
+      - packages/generator/analysis_options.yaml
+      - packages/generator/pubspec.yaml
   push:
     branches: [main]
     paths:
-      - '.github/workflows/generator.yml'
-      - 'analysis_options.yaml'
-      - 'codecov.yml'
-      - 'pubspec.yaml'
-      - 'packages/generator/bin/**'
-      - 'packages/generator/example/**'
-      - 'packages/generator/lib/**'
-      - 'packages/generator/test/**'
-      - 'packages/generator/analysis_options.yaml'
-      - 'packages/generator/pubspec.yaml'
-  schedule:
-    # Run every day at 4:00 AM UTC.
-    - cron: '0 4 * * *'
+      - .github/workflows/generator.yml
+      - analysis_options.yaml
+      - codecov.yml
+      - pubspec.yaml
+      - packages/generator/bin/**
+      - packages/generator/example/**
+      - packages/generator/lib/**
+      - packages/generator/test/**
+      - packages/generator/analysis_options.yaml
+      - packages/generator/pubspec.yaml
 
 jobs:
   build:
@@ -49,13 +45,14 @@ jobs:
           - os: windows-2019
             sdk: stable
 
-    uses: halildurmus/workflows/.github/workflows/dart_package.yml@main
+    uses: halildurmus/workflows/.github/workflows/dart.yml@main
     with:
+      analyze_directories: bin example lib test
+      check_coverage: ${{ matrix.sdk == 'main' }}
       codecov_flags: generator
       dart_sdk: ${{ matrix.sdk }}
-      run_tests: ${{ matrix.sdk != 'main' }}
+      format_directories: bin example lib test
       runs_on: ${{ matrix.os }}
-      upload_coverage: ${{ matrix.sdk == 'main' }}
       working_directory: packages/generator
     secrets:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

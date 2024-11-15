@@ -1,10 +1,8 @@
 name: Lock Threads
 
 on:
-  workflow_dispatch:
-  # schedule:
-  # Run every day at 6:00 AM UTC.
-  # - cron: '0 6 * * *'
+  schedule:
+    - cron: 0 3 * * * # Run every day at 03:00 UTC
 
 permissions:
   issues: write
@@ -15,14 +13,15 @@ concurrency:
 jobs:
   lock:
     runs-on: ubuntu-latest
+
     steps:
       - uses: dessant/lock-threads@v5
         with:
-          process-only: 'issues'
-          # Number of days of inactivity before a closed issue is locked.
-          issue-inactive-days: 14
           issue-comment: >
             This thread has been automatically locked since there has not been
             any recent activity after it was closed. If you are still
             experiencing a similar issue, please open a new bug, including a
             minimal reproduction of the issue.
+          # Number of days of inactivity before a closed issue is locked
+          issue-inactive-days: 14
+          process-only: issues

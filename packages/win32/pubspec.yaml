@@ -38,6 +38,12 @@ dev_dependencies:
   # Handle command-line arguments for example apps.
   args: ^2.5.0
 
+  # Used for running Git hooks.
+  hooks:
+    git:
+      url: https://github.com/halildurmus/workflows.git
+      path: packages/hooks
+
   # Help ensure that the code is well-written.
   lints: ^5.0.0
 

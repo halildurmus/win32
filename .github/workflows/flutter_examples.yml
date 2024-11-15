@@ -2,35 +2,34 @@ name: Flutter Examples
 
 on:
   pull_request:
-    branches: [main]
     paths:
-      - '.github/workflows/flutter_examples.yml'
-      - 'analysis_options.yaml'
-      - 'pubspec.yaml'
-      - 'examples/explorer/lib/**'
-      - 'examples/explorer/analysis_options.yaml'
-      - 'examples/explorer/pubspec.yaml'
-      - 'examples/task_manager/lib/**'
-      - 'examples/task_manager/analysis_options.yaml'
-      - 'examples/task_manager/pubspec.yaml'
-      - 'packages/win32/lib/**'
-      - 'packages/win32/analysis_options.yaml'
-      - 'packages/win32/pubspec.yaml'
+      - .github/workflows/flutter_examples.yml
+      - analysis_options.yaml
+      - pubspec.yaml
+      - examples/explorer/lib/**
+      - examples/explorer/analysis_options.yaml
+      - examples/explorer/pubspec.yaml
+      - examples/task_manager/lib/**
+      - examples/task_manager/analysis_options.yaml
+      - examples/task_manager/pubspec.yaml
+      - packages/win32/lib/**
+      - packages/win32/analysis_options.yaml
+      - packages/win32/pubspec.yaml
   push:
     branches: [main]
     paths:
-      - '.github/workflows/flutter_examples.yml'
-      - 'analysis_options.yaml'
-      - 'pubspec.yaml'
-      - 'examples/explorer/lib/**'
-      - 'examples/explorer/analysis_options.yaml'
-      - 'examples/explorer/pubspec.yaml'
-      - 'examples/task_manager/lib/**'
-      - 'examples/task_manager/analysis_options.yaml'
-      - 'examples/task_manager/pubspec.yaml'
-      - 'packages/win32/lib/**'
-      - 'packages/win32/analysis_options.yaml'
-      - 'packages/win32/pubspec.yaml'
+      - .github/workflows/flutter_examples.yml
+      - analysis_options.yaml
+      - pubspec.yaml
+      - examples/explorer/lib/**
+      - examples/explorer/analysis_options.yaml
+      - examples/explorer/pubspec.yaml
+      - examples/task_manager/lib/**
+      - examples/task_manager/analysis_options.yaml
+      - examples/task_manager/pubspec.yaml
+      - packages/win32/lib/**
+      - packages/win32/analysis_options.yaml
+      - packages/win32/pubspec.yaml
 
 jobs:
   build:
@@ -40,7 +39,9 @@ jobs:
           - explorer
           - task_manager
 
-    uses: halildurmus/workflows/.github/workflows/flutter_package.yml@main
+    uses: halildurmus/workflows/.github/workflows/flutter.yml@main
     with:
+      analyze_directories: lib
+      format_directories: lib
       run_tests: false
       working_directory: examples/${{ matrix.example }}

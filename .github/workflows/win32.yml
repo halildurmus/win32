@@ -2,34 +2,32 @@ name: win32
 
 on:
   pull_request:
-    branches: [main]
     paths:
-      - '.github/workflows/win32.yml'
-      - 'analysis_options.yaml'
-      - 'codecov.yml'
-      - 'pubspec.yaml'
-      - 'packages/win32/lib/**'
-      - 'packages/win32/test/**'
-      - 'packages/win32/test_fixes/**'
-      - 'packages/win32/analysis_options.yaml'
-      - 'packages/win32/CHANGELOG.md'
-      - 'packages/win32/pubspec.yaml'
+      - .github/workflows/win32.yml
+      - analysis_options.yaml
+      - codecov.yml
+      - pubspec.yaml
+      - packages/win32/lib/**
+      - packages/win32/test/**
+      - packages/win32/test_fixes/**
+      - packages/win32/analysis_options.yaml
+      - packages/win32/CHANGELOG.md
+      - packages/win32/pubspec.yaml
   push:
     branches: [main]
     paths:
-      - '.github/workflows/win32.yml'
-      - 'analysis_options.yaml'
-      - 'codecov.yml'
-      - 'pubspec.yaml'
-      - 'packages/win32/lib/**'
-      - 'packages/win32/test/**'
-      - 'packages/win32/test_fixes/**'
-      - 'packages/win32/analysis_options.yaml'
-      - 'packages/win32/CHANGELOG.md'
-      - 'packages/win32/pubspec.yaml'
+      - .github/workflows/win32.yml
+      - analysis_options.yaml
+      - codecov.yml
+      - pubspec.yaml
+      - packages/win32/lib/**
+      - packages/win32/test/**
+      - packages/win32/test_fixes/**
+      - packages/win32/analysis_options.yaml
+      - packages/win32/CHANGELOG.md
+      - packages/win32/pubspec.yaml
   schedule:
-    # Run every day at 2:00 AM UTC.
-    - cron: '0 2 * * *'
+    - cron: 0 6 * * * # Run every day at 06:00 UTC
 
 jobs:
   build:
@@ -51,15 +49,27 @@ jobs:
           - os: ubuntu-latest
             sdk: stable
 
-    uses: halildurmus/workflows/.github/workflows/dart_package.yml@main
+    uses: halildurmus/workflows/.github/workflows/dart.yml@main
     with:
+      check_coverage: ${{ matrix.sdk == 'main' }}
       codecov_flags: win32
+      concurrency: '1'
       dart_sdk: ${{ matrix.sdk }}
-      run_tests: ${{ matrix.sdk != 'main' }}
+      format_directories: lib test
+      randomize_execution_order_of_tests: true
       runs_on: ${{ matrix.os }}
-      upload_coverage: ${{ matrix.sdk == 'main' }}
-      validate_dartdoc_links: ${{ matrix.sdk == 'main' }}
-      verify_pana_score: ${{ matrix.os == 'ubuntu-latest' }}
       working_directory: packages/win32
     secrets:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+  dartdoc:
+    needs: [build]
+    uses: halildurmus/workflows/.github/workflows/dartdoc.yml@main
+    with:
+      working_directory: packages/win32
+
+  pana:
+    needs: [build]
+    uses: halildurmus/workflows/.github/workflows/pana.yml@main
+    with:
+      working_directory: packages/win32

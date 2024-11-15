@@ -1,0 +1,38 @@
+pre-commit:
+  parallel: true
+  commands:
+    analyze:
+      glob: '*.{dart}'
+      run: dart run hooks:analyze {staged_files}
+      description: Analyzes the code for potential issues
+    format:
+      glob: '*.{dart}'
+      run: dart run hooks:format {staged_files}
+      description: Formats the code according to the project's style guide
+    test_generator:
+      root: packages/generator
+      glob: 'packages/generator/{lib,test}/**/*.dart'
+      run: dart run hooks:test
+      description: Runs the test suite of the generator to ensure all tests pass
+    test_win32:
+      root: packages/win32
+      glob: 'packages/win32/{lib,test}/**/*.dart'
+      run: dart run hooks:test
+      description: Runs the test suite of the win32 to ensure all tests pass
+    bump_version:
+      root: packages/win32
+      glob: 'packages/win32/lib/**/*.{dart}'
+      run: dart run hooks:bump_version
+      description: Bumps the package version based on changes
+    update_changelog:
+      root: packages/win32
+      glob: 'packages/win32/lib/**/*.{dart}'
+      run: dart run hooks:update_changelog --include-path "packages/win32/**/*" --repository "../../"
+      description: Updates the `CHANGELOG.md` with recent changes
+
+commit-msg:
+  commands:
+    check_commit:
+      run: dart run hooks:check_commit {1}
+      description: >
+        Checks that the commit message follows the Conventional Commit format
