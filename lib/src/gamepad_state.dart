@@ -6,6 +6,7 @@ import 'models/models.dart';
 /// The current status of a gamepad.
 class GamepadState {
   const GamepadState(
+    // ignore: avoid_positional_boolean_parameters
     this.isConnected,
     this._buttonBitmask,
     this.leftTrigger,

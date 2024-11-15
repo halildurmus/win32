@@ -31,6 +31,6 @@ void main() {
     sleep(const Duration(milliseconds: 1000));
 
     print('Turning off vibration.');
-    gamepad.vibrate(leftMotorSpeed: 0, rightMotorSpeed: 0);
+    gamepad.vibrate();
   }
 }

@@ -17,7 +17,10 @@ class Gamepad {
   /// Up to four controllers may be connected to a system, numbered from `0` to
   /// `3`.
   Gamepad(this.controller)
-      : assert(controller >= 0 && controller < XUSER_MAX_COUNT) {
+      : assert(
+          controller >= 0 && controller < XUSER_MAX_COUNT,
+          'Controller index must be between 0 and ${XUSER_MAX_COUNT - 1}',
+        ) {
     _initializeCom();
     updateState();
   }
@@ -50,6 +53,7 @@ class Gamepad {
   /// This function is meant to be called when an app gains or loses focus. When
   /// set to false, vibration effects will be stopped and calls to [updateState]
   /// will be returned neutral values.
+  // ignore: avoid_setters_without_getters
   set appHasFocus(bool value) => XInputEnable(value ? TRUE : FALSE);
 
   /// Get the current state of the current controller.

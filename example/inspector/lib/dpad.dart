@@ -4,7 +4,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:win32_gamepad/win32_gamepad.dart';
 
 class DpadIcon extends StatelessWidget {
-  const DpadIcon({super.key, required this.direction});
+  const DpadIcon({required this.direction, super.key});
 
   final Direction direction;
 

@@ -6,7 +6,7 @@ import 'dpad.dart';
 import 'thumbstick.dart';
 
 class GamepadPage extends StatefulWidget {
-  GamepadPage({super.key, required this.controller}) {
+  GamepadPage({required this.controller, super.key}) {
     gamepad = Gamepad(controller);
   }
 
@@ -25,18 +25,16 @@ class GamepadPageState extends State<GamepadPage>
         ..repeat();
 
   @override
-  Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _controller,
-      builder: (BuildContext context, Widget? child) {
-        widget.gamepad.updateState();
-        return GamepadStatusView(
-          gamepad: widget.gamepad,
-          controller: widget.controller,
-        );
-      },
-    );
-  }
+  Widget build(BuildContext context) => AnimatedBuilder(
+        animation: _controller,
+        builder: (context, child) {
+          widget.gamepad.updateState();
+          return GamepadStatusView(
+            gamepad: widget.gamepad,
+            controller: widget.controller,
+          );
+        },
+      );
 
   @override
   void dispose() {
@@ -47,9 +45,9 @@ class GamepadPageState extends State<GamepadPage>
 
 class GamepadStatusView extends StatelessWidget {
   const GamepadStatusView({
-    super.key,
     required this.gamepad,
     required this.controller,
+    super.key,
   });
 
   final Gamepad gamepad;
@@ -134,7 +132,6 @@ class GamepadStatusView extends StatelessWidget {
           const SizedBox(height: 20),
           Wrap(
             spacing: 20,
-            alignment: WrapAlignment.start,
             children: [
               FittedBox(
                 child: Row(
@@ -181,39 +178,37 @@ class GamepadStatusView extends StatelessWidget {
 
 class GamepadConnectedView extends StatelessWidget {
   const GamepadConnectedView({
-    super.key,
     required this.gamepad,
     required this.controller,
+    super.key,
   });
 
   final Gamepad gamepad;
   final int controller;
 
   @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Icon(
-          FluentIcons.game,
-          size: 60,
-          color: gamepad.state.isConnected
-              ? Colors.successPrimaryColor
-              : Colors.warningPrimaryColor,
-        ),
-        const SizedBox(width: 20),
-        Text(
-          gamepad.state.isConnected
-              ? 'Controller ${controller + 1} connected'
-              : 'Controller ${controller + 1} disconnected',
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.w600,
+  Widget build(BuildContext context) => Row(
+        children: [
+          Icon(
+            FluentIcons.game,
+            size: 60,
             color: gamepad.state.isConnected
                 ? Colors.successPrimaryColor
                 : Colors.warningPrimaryColor,
           ),
-        ),
-      ],
-    );
-  }
+          const SizedBox(width: 20),
+          Text(
+            gamepad.state.isConnected
+                ? 'Controller ${controller + 1} connected'
+                : 'Controller ${controller + 1} disconnected',
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.w600,
+              color: gamepad.state.isConnected
+                  ? Colors.successPrimaryColor
+                  : Colors.warningPrimaryColor,
+            ),
+          ),
+        ],
+      );
 }

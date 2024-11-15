@@ -1,4 +1,1 @@
-include: package:lints/recommended.yaml
-
-analyzer:
-  exclude: [example/inspector/**]
+include: package:lints/dart.yaml

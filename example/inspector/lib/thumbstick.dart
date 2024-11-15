@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:fluent_ui/fluent_ui.dart';
 
 class ThumbstickView extends StatelessWidget {
-  const ThumbstickView({super.key, required this.x, required this.y});
+  const ThumbstickView({required this.x, required this.y, super.key});
 
   final int x;
   final int y;

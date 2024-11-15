@@ -1,0 +1,22 @@
+name: Health
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/health.yml
+      - lib/**
+      - CHANGELOG.md
+      - pubspec.yaml
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/health.yml
+      - lib/**
+      - CHANGELOG.md
+      - pubspec.yaml
+
+jobs:
+  build:
+    # Skip this job if the PR is labeled with 'skip health check'
+    if: ${{ !contains(github.event.pull_request.labels.*.name, 'skip health check') }}
+    uses: halildurmus/workflows/.github/workflows/health.yml@main

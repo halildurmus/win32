@@ -2,33 +2,29 @@ import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 
 class CustomWindowTitleSection extends StatelessWidget {
-  const CustomWindowTitleSection({super.key, required this.appTitle});
+  const CustomWindowTitleSection({required this.appTitle, super.key});
 
   final String appTitle;
 
   @override
-  Widget build(BuildContext context) {
-    return MoveWindow(
-      child: Align(
-        alignment: AlignmentDirectional.centerStart,
-        child: Text(appTitle),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => MoveWindow(
+        child: Align(
+          alignment: AlignmentDirectional.centerStart,
+          child: Text(appTitle),
+        ),
+      );
 }
 
 class CustomWindowButtonsSection extends StatelessWidget {
   const CustomWindowButtonsSection({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MoveWindow(
-      child: const Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [Spacer(), WindowButtons()],
-      ),
-    );
-  }
+  Widget build(BuildContext context) => MoveWindow(
+        child: const Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [Spacer(), WindowButtons()],
+        ),
+      );
 }
 
 class WindowButtons extends StatelessWidget {
@@ -36,8 +32,14 @@ class WindowButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    assert(debugCheckHasFluentTheme(context));
-    assert(debugCheckHasFluentLocalizations(context));
+    assert(
+      debugCheckHasFluentTheme(context),
+      'WindowButtons widget must be wrapped in a FluentApp widget.',
+    );
+    assert(
+      debugCheckHasFluentLocalizations(context),
+      'WindowButtons widget must be wrapped in a FluentApp widget.',
+    );
     final theme = FluentTheme.of(context);
     final buttonColors = WindowButtonColors(
       iconNormal: theme.inactiveColor,

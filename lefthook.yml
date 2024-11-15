@@ -1,0 +1,30 @@
+pre-commit:
+  parallel: true
+  commands:
+    analyze:
+      glob: '*.{dart}'
+      run: dart run hooks:analyze example lib test
+      description: Analyzes the code for potential issues
+    format:
+      glob: '*.{dart}'
+      run: dart run hooks:format {staged_files}
+      description: Formats the code according to the project's style guide
+    test:
+      glob: '{lib,test}/**/*.dart'
+      run: dart run hooks:test
+      description: Runs the test suite to ensure all tests pass
+    bump_version:
+      glob: 'lib/**/*.{dart}'
+      run: dart run hooks:bump_version
+      description: Bumps the package version based on changes
+    update_changelog:
+      glob: 'lib/**/*.{dart}'
+      run: dart run hooks:update_changelog
+      description: Updates the `CHANGELOG.md` with recent changes
+
+commit-msg:
+  commands:
+    check_commit:
+      run: dart run hooks:check_commit {1}
+      description: >
+        Checks that the commit message follows the Conventional Commit format
