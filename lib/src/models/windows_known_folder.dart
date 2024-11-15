@@ -233,8 +233,8 @@ enum WindowsKnownFolder {
   /// %SYSTEMROOT% environment variables. A typical path is C:\Windows.
   Windows(FOLDERID_Windows);
 
+  const WindowsKnownFolder(this.guid);
+
   /// The GUID of the folder.
   final String guid;
-
-  const WindowsKnownFolder(this.guid);
 }

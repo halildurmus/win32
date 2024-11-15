@@ -67,8 +67,8 @@ image file and set it as your desktop wallpaper.
 Please file feature requests and bugs at the
 [issue tracker][issue_tracker_link].
 
-[ci_badge]: https://github.com/halildurmus/filepicker_windows/actions/workflows/build.yml/badge.svg
-[ci_link]: https://github.com/halildurmus/filepicker_windows/actions/workflows/build.yml
+[ci_badge]: https://github.com/halildurmus/filepicker_windows/actions/workflows/filepicker_windows.yml/badge.svg
+[ci_link]: https://github.com/halildurmus/filepicker_windows/actions/workflows/filepicker_windows.yml
 [example]: https://github.com/halildurmus/filepicker_windows/tree/main/example
 [issue_tracker_link]: https://github.com/halildurmus/filepicker_windows/issues
 [language_badge]: https://img.shields.io/badge/language-Dart-blue.svg

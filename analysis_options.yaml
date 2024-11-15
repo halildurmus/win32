@@ -1,4 +1,1 @@
-include: package:lints/recommended.yaml
-
-analyzer:
-  exclude: [example/wallpaper/**]
+include: package:lints/dart.yaml

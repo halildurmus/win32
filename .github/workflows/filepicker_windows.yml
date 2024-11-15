@@ -1,0 +1,30 @@
+name: filepicker_windows
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/filepicker_windows.yml
+      - lib/**
+      - test/**
+      - pubspec.yaml
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/filepicker_windows.yml
+      - lib/**
+      - test/**
+      - pubspec.yaml
+
+jobs:
+  build:
+    uses: halildurmus/workflows/.github/workflows/dart.yml@main
+    with:
+      format_directories: lib test
+
+  dartdoc:
+    needs: [build]
+    uses: halildurmus/workflows/.github/workflows/dartdoc.yml@main
+
+  pana:
+    needs: [build]
+    uses: halildurmus/workflows/.github/workflows/pana.yml@main
