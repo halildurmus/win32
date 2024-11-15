@@ -24,6 +24,12 @@ dependencies:
   win32: ^5.6.0
 
 dev_dependencies:
+  # Used for running Git hooks.
+  hooks:
+    git:
+      url: https://github.com/halildurmus/workflows.git
+      path: packages/hooks
+
   # Help ensure that the code is well-written.
   lints: ^5.0.0
 

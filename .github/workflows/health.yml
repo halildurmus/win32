@@ -21,4 +21,5 @@ jobs:
     if: ${{ !contains(github.event.pull_request.labels.*.name, 'skip health check') }}
     uses: halildurmus/workflows/.github/workflows/health.yml@main
     with:
+      update_changelog_args: '--include-path "packages/win32/**/*" --repository "../../"'
       working_directory: packages/win32

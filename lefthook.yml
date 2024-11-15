@@ -11,23 +11,23 @@ pre-commit:
       description: Formats the code according to the project's style guide
     test_generator:
       root: packages/generator
-      glob: '{lib,test}/**/*.dart'
+      glob: 'packages/generator/{lib,test}/**/*.dart'
       run: dart run hooks:test
       description: Runs the test suite of the generator to ensure all tests pass
     test_win32:
       root: packages/win32
-      glob: '{lib,test}/**/*.dart'
-      run: dart run hooks:test -- -j 1 --test-randomize-ordering-seed=random
+      glob: 'packages/win32/{lib,test}/**/*.dart'
+      run: dart run hooks:test
       description: Runs the test suite of the win32 to ensure all tests pass
     bump_version:
       root: packages/win32
-      glob: 'lib/**/*.{dart}'
+      glob: 'packages/win32/lib/**/*.{dart}'
       run: dart run hooks:bump_version
       description: Bumps the package version based on changes
     update_changelog:
       root: packages/win32
-      glob: 'lib/**/*.{dart}'
-      run: dart run hooks:update_changelog
+      glob: 'packages/win32/lib/**/*.{dart}'
+      run: dart run hooks:update_changelog --include-path "packages/win32/**/*" --repository "../../"
       description: Updates the `CHANGELOG.md` with recent changes
 
 commit-msg:
