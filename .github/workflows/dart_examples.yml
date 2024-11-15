@@ -2,41 +2,42 @@ name: Dart Examples
 
 on:
   pull_request:
-    branches: [main]
     paths:
-      - '.github/workflows/dart_examples.yml'
-      - 'analysis_options.yaml'
-      - 'pubspec.yaml'
-      - 'examples/manifest/**'
-      - 'examples/notepad/**'
-      - 'examples/shell_notify_icon/**'
-      - 'examples/tetris/**'
-      - 'examples/*.dart'
-      - 'packages/win32/lib/**'
-      - 'packages/win32/analysis_options.yaml'
-      - 'packages/win32/pubspec.yaml'
+      - .github/workflows/dart_examples.yml
+      - analysis_options.yaml
+      - pubspec.yaml
+      - examples/com_interop/*
+      - examples/manifest/**
+      - examples/notepad/**
+      - examples/shell_notify_icon/**
+      - examples/tetris/**
+      - examples/*.dart
+      - packages/win32/lib/**
+      - packages/win32/analysis_options.yaml
+      - packages/win32/pubspec.yaml
   push:
     branches: [main]
     paths:
-      - '.github/workflows/dart_examples.yml'
-      - 'analysis_options.yaml'
-      - 'pubspec.yaml'
-      - 'examples/manifest/**'
-      - 'examples/notepad/**'
-      - 'examples/shell_notify_icon/**'
-      - 'examples/tetris/**'
-      - 'examples/*.dart'
-      - 'packages/win32/lib/**'
-      - 'packages/win32/analysis_options.yaml'
-      - 'packages/win32/pubspec.yaml'
+      - .github/workflows/dart_examples.yml
+      - analysis_options.yaml
+      - pubspec.yaml
+      - examples/com_interop/*
+      - examples/manifest/**
+      - examples/notepad/**
+      - examples/shell_notify_icon/**
+      - examples/tetris/**
+      - examples/*.dart
+      - packages/win32/lib/**
+      - packages/win32/analysis_options.yaml
+      - packages/win32/pubspec.yaml
 
 jobs:
   build:
-    uses: halildurmus/workflows/.github/workflows/dart_package.yml@main
+    uses: halildurmus/workflows/.github/workflows/dart.yml@main
     with:
       # Exclude the 'explorer', 'service_manager_cli', and 'task_manager'
       # directories when analyzing and formatting the Dart files. They are
-      # analyzed and formatted in their own workflows below.
+      # analyzed and formatted in their own workflows.
       analyze_directories: $(find . -type f -not \( -path .*explorer/* -prune \) -not \( -path .*service_manager_cli/* -prune \) -not \( -path .*task_manager/* -prune \) -name '*.dart' -print)
       format_directories: $(find . -type f -not \( -path .*explorer/* -prune \) -not \( -path .*service_manager_cli/* -prune \) -not \( -path .*task_manager/* -prune \) -name '*.dart' -print)
       run_tests: false

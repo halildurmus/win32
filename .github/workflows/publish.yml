@@ -2,14 +2,40 @@ name: Publish
 
 on:
   push:
-    tags: ['v[0-9]+.[0-9]+.[0-9]+*']
+    branches: [main]
+    paths:
+      - packages/win32/CHANGELOG.md
+      - packages/win32/pubspec.yaml
 
 jobs:
+  check-release:
+    runs-on: ubuntu-latest
+
+    outputs:
+      should_publish: ${{ steps.check_release.outputs.should_publish }}
+
+    steps:
+      - name: 📚 Git Checkout
+        uses: actions/checkout@v4
+
+      - name: 🔍 Check if There is a Release Commit
+        id: check_release
+        run: |
+          # Get the latest commit message
+          latest_commit_msg=$(git log -1 --pretty=%B)
+
+          # Check if the commit message matches the release pattern
+          if [[ "$latest_commit_msg" =~ ^chore\(release\):\ v.* ]]; then
+            echo "should_publish=true" >> $GITHUB_OUTPUT
+          else
+            echo "should_publish=false" >> $GITHUB_OUTPUT
+          fi
+
   publish:
-    name: Publish to pub.dev
-    permissions:
-      id-token: write # Required for authentication using OIDC.
-      pull-requests: write # Required for writing the pull request note.
-    uses: dart-lang/setup-dart/.github/workflows/publish.yml@main
+    needs: check-release
+    if: needs.check-release.outputs.should_publish == 'true'
+    uses: halildurmus/workflows/.github/workflows/dart_pub_publish.yml@main
     with:
-      working-directory: packages/win32
+      working_directory: packages/win32
+    secrets:
+      token: ${{ secrets.PAT }}

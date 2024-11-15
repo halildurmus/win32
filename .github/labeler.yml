@@ -1,29 +1,43 @@
-'ci':
+ci:
   - changed-files:
-    - any-glob-to-any-file:
-      - .github/**
-      - codecov.yml
+      - any-glob-to-any-file:
+          - .github/**
+          - cliff.toml
+          - codecov.yml
+          - lefthook.yml
 
-'docs':
+documentation:
   - changed-files:
-    - any-glob-to-any-file:
-      - packages/win32/doc/*
-      - website/docs/**
-      - CONTRIBUTING.md
-      - README.md
+      - any-glob-to-any-file:
+          - packages/win32/doc/*
+          - website/docs/**
+          - CONTRIBUTING.md
+          - PUBLISHING.md
+          - README.md
 
-'examples':
+example:
   - changed-files:
-    - any-glob-to-any-file: examples/**
+      - any-glob-to-any-file: examples/**
 
-'p: generator':
-  - changed-files:
-    - any-glob-to-any-file: packages/generator/**
+'external dependency':
+  - head-branch: [^dependabot]
 
-'p: win32':
+'package: generator':
   - changed-files:
-    - any-glob-to-any-file: packages/win32/**
+      - any-glob-to-any-file: packages/generator/**
 
-'website':
+'package: win32':
   - changed-files:
-    - any-glob-to-any-file: website/**
+      - any-glob-to-any-file: packages/win32/**
+
+release:
+  - head-branch: [^release, release]
+
+test:
+  - changed-files:
+      - any-glob-to-all-files:
+          - test/**
+
+website:
+  - changed-files:
+      - any-glob-to-any-file: website/**
