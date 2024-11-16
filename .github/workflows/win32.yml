@@ -27,7 +27,7 @@ on:
       - packages/win32/CHANGELOG.md
       - packages/win32/pubspec.yaml
   schedule:
-    - cron: 0 6 * * * # Run every day at 06:00 UTC
+    - cron: 0 12 * * * # Run every day at 12:00 UTC
 
 jobs:
   build:
@@ -63,13 +63,11 @@ jobs:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   dartdoc:
-    needs: [build]
     uses: halildurmus/workflows/.github/workflows/dartdoc.yml@main
     with:
       working_directory: packages/win32
 
   pana:
-    needs: [build]
     uses: halildurmus/workflows/.github/workflows/pana.yml@main
     with:
       working_directory: packages/win32
