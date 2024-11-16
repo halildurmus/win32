@@ -2,7 +2,7 @@ ci:
   - changed-files:
       - any-glob-to-any-file:
           - .github/**
-          - cliff.toml
+          - packages/win32/cliff.toml
           - codecov.yml
           - lefthook.yml
 
@@ -10,9 +10,9 @@ documentation:
   - changed-files:
       - any-glob-to-any-file:
           - packages/win32/doc/*
+          - packages/win32/PUBLISHING.md
           - website/docs/**
           - CONTRIBUTING.md
-          - PUBLISHING.md
           - README.md
 
 example:

@@ -41,8 +41,6 @@ jobs:
           - os: windows-latest
             sdk: main
           - os: windows-2022
-            sdk: beta
-          - os: windows-2019
             sdk: stable
 
     uses: halildurmus/workflows/.github/workflows/dart.yml@main
