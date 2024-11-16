@@ -21,11 +21,19 @@ jobs:
       - name: 🔍 Check if New Release is Needed
         id: check_version
         run: |
-          current_version=$(grep '^version:' pubspec.yaml | awk '{print $2}')
+          # Extract the version from the pubspec.yaml and trim any extra spaces
+          current_version=$(grep '^version:' pubspec.yaml | awk '{print $2}' | xargs)
+
+          # Output the current version
+          echo "Current Version: $current_version"
+
+          # Check if the current version has "-wip" suffix
           if [[ "$current_version" == *"-wip" ]]; then
-            echo "needs_release=true" >> $GITHUB_ENV
+            echo "A new release is needed based on version suffix."
+            echo "needs_release=true" >> $GITHUB_OUTPUT
           else
-            echo "needs_release=false" >> $GITHUB_ENV
+            echo "No new release is needed."
+            echo "needs_release=false" >> $GITHUB_OUTPUT
           fi
 
   prepare-release:

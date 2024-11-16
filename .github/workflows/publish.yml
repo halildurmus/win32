@@ -24,10 +24,15 @@ jobs:
           # Get the latest commit message
           latest_commit_msg=$(git log -1 --pretty=%B)
 
+          # Output the latest commit message
+          echo "Latest commit message: $latest_commit_msg"
+
           # Check if the commit message matches the release pattern
           if [[ "$latest_commit_msg" =~ ^chore\(release\):\ v.* ]]; then
+            echo "Release commit found."
             echo "should_publish=true" >> $GITHUB_OUTPUT
           else
+            echo "No release commit found."
             echo "should_publish=false" >> $GITHUB_OUTPUT
           fi
 
