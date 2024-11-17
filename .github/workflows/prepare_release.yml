@@ -4,43 +4,10 @@ on:
   workflow_dispatch:
 
 jobs:
-  check-version:
-    defaults:
-      run:
-        working-directory: packages/win32
-
-    runs-on: ubuntu-latest
-
-    outputs:
-      needs_release: ${{ steps.check_version.outputs.needs_release }}
-
-    steps:
-      - name: 📚 Git Checkout
-        uses: actions/checkout@v4
-
-      - name: 🔍 Check if New Release is Needed
-        id: check_version
-        run: |
-          # Extract the version from the pubspec.yaml and trim any extra spaces
-          current_version=$(grep '^version:' pubspec.yaml | awk '{print $2}' | xargs)
-
-          # Output the current version
-          echo "Current Version: $current_version"
-
-          # Check if the current version has "-wip" suffix
-          if [[ "$current_version" == *"-wip" ]]; then
-            echo "A new release is needed based on version suffix."
-            echo "needs_release=true" >> $GITHUB_OUTPUT
-          else
-            echo "No new release is needed."
-            echo "needs_release=false" >> $GITHUB_OUTPUT
-          fi
-
   prepare-release:
-    needs: check-version
-    if: needs.check-version.outputs.needs_release == 'true'
     uses: halildurmus/workflows/.github/workflows/prepare_release.yml@main
     with:
+      update_changelog_args: '--include-path "packages/win32/**/*" --repository "../../"'
       working_directory: packages/win32
     secrets:
       token: ${{ secrets.PAT }}

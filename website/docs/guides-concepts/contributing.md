@@ -228,8 +228,6 @@ The following hooks run automatically with Lefthook:
   - `format`: Formats code according to Dart guidelines.
   - `test_generator`: Runs tests for `package:generator` to ensure stability.
   - `test_win32`: Runs tests for `package:win32` to ensure stability.
-  - `bump_version`: Increments the version number based on commit messages.
-  - `update_changelog`: Generates a changelog based on commit messages.
 
 - **Commit-msg Hook**:
   - `check_commit`: Ensures the commit message follows [Conventional Commits].
