@@ -47,9 +47,7 @@ jobs:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   dartdoc:
-    needs: [build]
     uses: halildurmus/workflows/.github/workflows/dartdoc.yml@main
 
   pana:
-    needs: [build]
     uses: halildurmus/workflows/.github/workflows/pana.yml@main
