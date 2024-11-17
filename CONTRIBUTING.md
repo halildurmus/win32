@@ -115,8 +115,6 @@ The following hooks run automatically with Lefthook:
   - `analyze`: Checks code for style issues.
   - `format`: Formats code according to Dart guidelines.
   - `test`: Runs tests to ensure stability.
-  - `bump_version`: Increments the version number based on commit messages.
-  - `update_changelog`: Generates a changelog based on commit messages.
 
 - **Commit-msg Hook**:
   - `check_commit`: Ensures the commit message follows [Conventional Commits].

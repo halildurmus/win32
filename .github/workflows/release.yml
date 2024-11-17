@@ -1,0 +1,43 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - CHANGELOG.md
+      - pubspec.yaml
+  workflow_dispatch:
+
+jobs:
+  check-release:
+    if: ${{ github.event_name != 'workflow_dispatch' }}
+
+    runs-on: ubuntu-latest
+
+    outputs:
+      should_publish: ${{ steps.check_release.outputs.should_publish }}
+
+    steps:
+      - name: 📚 Git Checkout
+        uses: actions/checkout@v4
+
+      - name: 🔍 Check if There is a Release Commit
+        id: check_release
+        run: |
+          latest_commit_msg=$(git log -1 --pretty=format:%s)
+          echo "📜 Latest commit: $latest_commit_msg"
+
+          if [[ "$latest_commit_msg" =~ ^chore\(release\):\ v.* ]]; then
+            echo "🎉 Release commit detected. Proceeding with the publish step."
+            echo "should_publish=true" >> $GITHUB_OUTPUT
+          else
+            echo "❌ No release commit detected. Skipping the publish step."
+            echo "should_publish=false" >> $GITHUB_OUTPUT
+          fi
+
+  release:
+    needs: [check-release]
+    if: ${{ github.event_name == 'workflow_dispatch' || needs.check-release.outputs.should_publish == 'true' }}
+    uses: halildurmus/workflows/.github/workflows/dart_release.yml@main
+    secrets:
+      token: ${{ secrets.PAT }}
