@@ -22,9 +22,7 @@ jobs:
       format_directories: lib test
 
   dartdoc:
-    needs: [build]
     uses: halildurmus/workflows/.github/workflows/dartdoc.yml@main
 
   pana:
-    needs: [build]
     uses: halildurmus/workflows/.github/workflows/pana.yml@main

@@ -13,14 +13,6 @@ pre-commit:
       glob: '{lib,test}/**/*.dart'
       run: dart run hooks:test
       description: Runs the test suite to ensure all tests pass
-    bump_version:
-      glob: 'lib/**/*.{dart}'
-      run: dart run hooks:bump_version
-      description: Bumps the package version based on changes
-    update_changelog:
-      glob: 'lib/**/*.{dart}'
-      run: dart run hooks:update_changelog
-      description: Updates the `CHANGELOG.md` with recent changes
 
 commit-msg:
   commands:
