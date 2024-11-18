@@ -3,6 +3,8 @@ pre-commit:
   commands:
     analyze:
       glob: '*.{dart}'
+      exclude:
+        - 'packages/win32/test_fixes/**/*.dart'
       run: dart run hooks:analyze {staged_files}
       description: Analyzes the code for potential issues
     format:
@@ -19,16 +21,6 @@ pre-commit:
       glob: 'packages/win32/{lib,test}/**/*.dart'
       run: dart run hooks:test
       description: Runs the test suite of the win32 to ensure all tests pass
-    bump_version:
-      root: packages/win32
-      glob: 'packages/win32/lib/**/*.{dart}'
-      run: dart run hooks:bump_version
-      description: Bumps the package version based on changes
-    update_changelog:
-      root: packages/win32
-      glob: 'packages/win32/lib/**/*.{dart}'
-      run: dart run hooks:update_changelog --include-path "packages/win32/**/*" --repository "../../"
-      description: Updates the `CHANGELOG.md` with recent changes
 
 commit-msg:
   commands:

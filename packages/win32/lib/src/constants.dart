@@ -8748,7 +8748,6 @@ const SND_APPLICATION = 0x0080;
 const SND_SENTRY = 0x00080000;
 
 /// Treat this as a "ring" from a communications app - don't duck me
-@Deprecated('Use SND_FLAGS.SND_RING instead')
 const SND_RING = 0x00100000;
 
 /// Treat this as a system sound
@@ -9989,7 +9988,6 @@ const SCARD_EJECT_CARD = 3;
 const SCARD_SCOPE_USER = 0;
 
 /// Database operations are performed within the domain of the current terminal.
-@Deprecated('Use SCARD_SCOPE.SCARD_SCOPE_TERMINAL instead')
 const SCARD_SCOPE_TERMINAL = 1;
 
 /// Database operations are performed within the domain of the system. The
