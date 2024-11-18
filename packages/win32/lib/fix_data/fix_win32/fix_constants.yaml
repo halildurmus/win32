@@ -25,18 +25,6 @@ transforms:
           field: 'SCARD_SCOPE_USER'
           inClass: 'SCARD_SCOPE'
 
-  - title: "Migrate to 'SCARD_SCOPE.SCARD_SCOPE_TERMINAL'"
-    date: 2024-10-02
-    element:
-      uris: ['package:win32/win32.dart']
-      variable: 'SCARD_SCOPE_TERMINAL'
-    changes:
-      - kind: 'replacedBy'
-        newElement:
-          uris: ['package:win32/win32.dart']
-          field: 'SCARD_SCOPE_TERMINAL'
-          inClass: 'SCARD_SCOPE'
-
   - title: "Migrate to 'SYMBOL_INFO_FLAGS.SYMFLAG_VALUEPRESENT'"
     date: 2024-10-02
     element:
@@ -407,18 +395,6 @@ transforms:
         newElement:
           uris: ['package:win32/win32.dart']
           field: 'SND_SENTRY'
-          inClass: 'SND_FLAGS'
-
-  - title: "Migrate to 'SND_FLAGS.SND_RING'"
-    date: 2024-10-02
-    element:
-      uris: ['package:win32/win32.dart']
-      variable: 'SND_RING'
-    changes:
-      - kind: 'replacedBy'
-        newElement:
-          uris: ['package:win32/win32.dart']
-          field: 'SND_RING'
           inClass: 'SND_FLAGS'
 
   - title: "Migrate to 'SND_FLAGS.SND_SYSTEM'"
@@ -1211,30 +1187,6 @@ transforms:
         newElement:
           uris: ['package:win32/win32.dart']
           field: 'PRODUCT_PRO_WORKSTATION_N'
-          inClass: 'OS_PRODUCT_TYPE'
-
-  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_ANDROMEDA'"
-    date: 2024-10-02
-    element:
-      uris: ['package:win32/win32.dart']
-      variable: 'PRODUCT_ANDROMEDA'
-    changes:
-      - kind: 'replacedBy'
-        newElement:
-          uris: ['package:win32/win32.dart']
-          field: 'PRODUCT_ANDROMEDA'
-          inClass: 'OS_PRODUCT_TYPE'
-
-  - title: "Migrate to 'OS_PRODUCT_TYPE.PRODUCT_XBOX_NATIVEOS'"
-    date: 2024-10-02
-    element:
-      uris: ['package:win32/win32.dart']
-      variable: 'PRODUCT_XBOX_NATIVEOS'
-    changes:
-      - kind: 'replacedBy'
-        newElement:
-          uris: ['package:win32/win32.dart']
-          field: 'PRODUCT_XBOX_NATIVEOS'
           inClass: 'OS_PRODUCT_TYPE'
 
   - title: "Migrate to 'FILE_DEVICE_TYPE.FILE_DEVICE_CD_ROM'"

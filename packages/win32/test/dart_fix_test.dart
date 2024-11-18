@@ -6,12 +6,11 @@ import 'dart:io';
 import 'package:path/path.dart' as p;
 import 'package:test/test.dart';
 
-// Used for debugging the test.
+/// Used for debugging the test.
 const keepTempDir = false;
 
 void main() {
   test("'dart fix' integration", () {
-    // create temp dir
     final tempDir = Directory.systemTemp.createTempSync('test');
 
     var sdkVersion = Platform.version;
@@ -20,38 +19,26 @@ void main() {
     }
 
     try {
-      // set up project
-      writeFile(tempDir, 'pubspec.yaml', '''
+      // Set up project.
+      writeFile(
+        tempDir,
+        'pubspec.yaml',
+        '''
 name: test_project
 environment:
-  sdk: '^$sdkVersion'
+  sdk: ^$sdkVersion
+
 dependencies:
   win32:
     path: ${Directory.current.path.replaceAll(r'\', '/')}
-''');
+''',
+      );
 
-      // copy test files
-      for (final file in Directory('test_fixes')
-          .listSync(recursive: true)
-          .whereType<File>()) {
-        if (file.name.endsWith('.expect')) continue;
-        writeFile(
-          tempDir,
-          p.join('lib', file.name),
-          file.readAsStringSync(),
-        );
-      }
-
-      // run pub get
+      copyTestFiles('test_fixes', p.join(tempDir.path, 'lib'));
       pubGet(tempDir);
-
-      // dart fix
       dartFix(tempDir);
-
-      // verify no analysis issues
       dartAnalyze(tempDir);
     } finally {
-      // ignore: dead_code
       if (keepTempDir) {
         print('dart fix test temp dir: ${tempDir.path}');
       } else {
@@ -61,23 +48,39 @@ dependencies:
   });
 }
 
-void writeFile(Directory dir, String filePath, String contents) {
-  final file = File(p.join(dir.path, filePath));
-  file.parent.createSync();
-  file.writeAsStringSync(contents);
+void copyTestFiles(String sourceDir, String destinationDir) {
+  final sourceDirectory = Directory(sourceDir);
+  final destinationDirectory = Directory(destinationDir);
+
+  for (final file
+      in sourceDirectory.listSync(recursive: true).whereType<File>()) {
+    if (file.path.endsWith('.expect')) continue;
+
+    // Calculate the relative path from the source directory.
+    final relativePath = p.relative(file.path, from: sourceDirectory.path);
+
+    // Determine the destination path, preserving the folder structure.
+    final destinationPath = p.join(destinationDirectory.path, relativePath);
+
+    // Copy the file content.
+    writeFile(
+      Directory(p.dirname(destinationPath)),
+      file.name,
+      file.readAsStringSync(),
+    );
+  }
 }
 
-void pubGet(Directory dir) {
-  exec('pub', ['get'], cwd: dir);
-}
+void writeFile(Directory dir, String name, String content) =>
+    File(p.join(dir.path, name))
+      ..createSync(recursive: true)
+      ..writeAsStringSync(content);
 
-void dartFix(Directory dir) {
-  exec('fix', ['--apply'], cwd: dir);
-}
+void pubGet(Directory dir) => exec('pub', ['get'], cwd: dir);
 
-void dartAnalyze(Directory dir) {
-  exec('analyze', [], cwd: dir);
-}
+void dartFix(Directory dir) => exec('fix', ['--apply'], cwd: dir);
+
+void dartAnalyze(Directory dir) => exec('analyze', [], cwd: dir);
 
 void exec(String command, List<String> args, {required Directory cwd}) {
   printOnFailure('dart $command ${args.join(', ')}');
