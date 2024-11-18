@@ -9993,6 +9993,7 @@ const SCARD_SCOPE_TERMINAL = 1;
 /// Database operations are performed within the domain of the system. The
 /// calling application must have appropriate access permissions for any
 /// database actions.
+@Deprecated('Use SCARD_SCOPE.SCARD_SCOPE_SYSTEM instead')
 const SCARD_SCOPE_SYSTEM = 2;
 
 /// The function retrieves the name of the smart card's primary service provider
