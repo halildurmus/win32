@@ -13,6 +13,18 @@
 
 version: 1
 transforms:
+  - title: "Migrate to 'SCARD_SCOPE.SCARD_SCOPE_SYSTEM'"
+    date: 2024-11-18
+    element:
+      uris: ['package:win32/win32.dart']
+      variable: 'SCARD_SCOPE_SYSTEM'
+    changes:
+      - kind: 'replacedBy'
+        newElement:
+          uris: ['package:win32/win32.dart']
+          field: 'SCARD_SCOPE_SYSTEM'
+          inClass: 'SCARD_SCOPE'
+
   - title: "Migrate to 'SCARD_SCOPE.SCARD_SCOPE_USER'"
     date: 2024-10-02
     element:
