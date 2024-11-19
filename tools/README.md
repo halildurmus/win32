@@ -30,10 +30,11 @@ If you pass the `--test` (`-t`) flag, this tool will also test `generator` and
 
 This folder also includes a few other small utilities of limited usefulness.
 
-- `struct_sizes\struct_sizes.cpp`. Measures the size of structs in
+- `struct_sizes\struct_sizes.cpp`: Measures the size of structs in
   [packages\win32\lib\src\structs.g.dart] on 64-bit architectures so the
   appropriate unit tests can be generated.
-- `build.dart`. Generates EXE files for some of the Dart examples.
+- `build.dart`: Generates EXE files for some of the Dart examples.
+- `update_changelog.dart`: Updates the CHANGELOG.md with the latest changes.
 
 [com_types.json]: ../packages/generator/data/com_types.json
 [packages\generator\data]: ../packages/generator/data
