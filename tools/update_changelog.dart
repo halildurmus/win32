@@ -1,28 +1,38 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:args/args.dart';
+
 void main(List<String> args) {
-  if (args.isEmpty) {
-    print('🚨 Usage: dart update_changelog.dart <tag>');
+  final argParser = ArgParser()
+    ..addOption(
+      'version',
+      abbr: 'v',
+      help: 'The version number to update the changelog with.',
+      mandatory: true,
+    );
+  final argResults = argParser.parse(args);
+  var version = argResults.option('version');
+  if (version == null) {
+    print('❌ Version number must be provided.');
     exit(1);
   }
+  version = version.replaceFirst(RegExp(r'^v'), '');
 
-  final tag = args[0];
-  if (!tag.startsWith('v')) {
-    print('❌ Tag must be in the format "vX.Y.Z".');
-    exit(1);
-  }
-
-  print('🚧 Starting changelog update for tag $tag...');
+  print('🚧 Updating changelog for v$version...');
   final result = Process.runSync(
     'dart',
     [
       'run',
       'hooks:update_changelog',
       '--tag',
-      tag,
+      'v$version',
+      '--include-path',
+      'examples/**/*',
       '--include-path',
       'packages/win32/**/*',
+      '--include-path',
+      'website/docs/**/*',
       '--repository',
       '../../'
     ],
