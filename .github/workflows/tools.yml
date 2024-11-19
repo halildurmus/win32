@@ -1,0 +1,25 @@
+name: Tools
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/tools.yml
+      - analysis_options.yaml
+      - pubspec.yaml
+      - tools/*.dart
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/tools.yml
+      - analysis_options.yaml
+      - pubspec.yaml
+      - tools/*.dart
+
+jobs:
+  build:
+    uses: halildurmus/workflows/.github/workflows/dart.yml@main
+    with:
+      analyze_directories: $(find . -type f -name '*.dart' -print)
+      format_directories: $(find . -type f -name '*.dart' -print)
+      run_tests: false
+      working_directory: tools

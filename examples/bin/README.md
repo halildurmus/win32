@@ -5,8 +5,8 @@ This directory contains the executables built from the examples in the
 
 To build the executables from the examples, run the following command:
 
-```sh
-tools\build.cmd
+```cmd
+dart tools\build.dart
 ```
 
 This will build the following executables:

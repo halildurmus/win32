@@ -7,7 +7,7 @@ on:
       - packages/generator/bin/**
       - packages/generator/lib/**
       - packages/generator/pubspec.yaml
-      - tools/generate.cmd
+      - tools/generate.dart
   push:
     branches: [main]
     paths:
@@ -15,11 +15,11 @@ on:
       - packages/generator/bin/**
       - packages/generator/lib/**
       - packages/generator/pubspec.yaml
-      - tools/generate.cmd
+      - tools/generate.dart
 
 jobs:
   build:
-    runs-on: windows-2019
+    runs-on: windows-latest
 
     steps:
       - name: 📚 Git Checkout
@@ -40,7 +40,7 @@ jobs:
         working-directory: packages/generator
 
       - name: 🚀 Run Code Generation
-        run: tools\generate --no-test
+        run: dart tools\generate.dart
 
       - name: 🔍 Verify Code Generation
         run: git diff --exit-code
