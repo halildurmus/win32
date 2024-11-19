@@ -137,16 +137,16 @@ If you want to contribute to the **win32** itself, follow the steps below:
 
 - To create a new API, _don't_ edit the main library files themselves; these get
   **overwritten**. Instead, edit the
-  [win32_functions.json][win32_functions_json_link] file and execute the
-  `tools\generate.cmd` script to update the library files:
+  [win32_functions.json][win32_functions_json_link] file and run the
+  `tools\generate.dart` script to update the library files:
 
   ```cmd title="Terminal"
-  tools\generate.cmd
+  dart tools\generate.dart
   ```
 
 - Structs can be **auto-generated** by including them in the
-  [win32_structs.json][win32_structs_json_link] file and executing the
-  `tools\generate.cmd` script, which will generate the corresponding Dart files.
+  [win32_structs.json][win32_structs_json_link] file and running the
+  `tools\generate.dart` script, which will generate the corresponding Dart files.
 
   Once generated, compile the [struct_sizes.cpp][struct_sizes_cpp_link] on a
   `64-bit` machine architecture, typically using the
@@ -161,7 +161,7 @@ If you want to contribute to the **win32** itself, follow the steps below:
   Once compiled, run the resulting `struct_sizes.exe` file located in the
   project root to obtain struct sizes; copy the output directly into the
   `structSizeMap` within the [struct_sizes.dart][struct_sizes_dart_link] file,
-  and finally, execute the `tools\generate.cmd` script to generate struct size
+  and finally, run the `tools\generate.dart` script to generate struct size
   tests for each struct.
 - Constants belong in the [constants.dart][constants_dart_link]; please add
   documentation. In rare cases (where the constant is truly self-documenting),
@@ -175,8 +175,8 @@ If you want to contribute to the **win32** itself, follow the steps below:
 ### COM APIs
 
 Begin by editing the [com_types.json][com_types_json_link] file, specifying the
-desired COM interface, and then execute the `tools\generate.cmd` script to
-generate the relevant class in the `packages\win32\lib\src\com` directory.
+desired COM interface, and then run the `tools\generate.dart` script to generate
+the relevant class in the `packages\win32\lib\src\com` directory.
 
 [command_prompt_link]: https://learn.microsoft.com/visualstudio/ide/reference/command-prompt-powershell
 [com_types_json_link]: https://github.com/halildurmus/win32/tree/main/packages/generator/data/com_types.json

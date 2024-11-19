@@ -16,15 +16,15 @@ Not every API is projected.
 - For COM APIs, the [com_types.json] file in the [packages\generator\data]
   directory explicitly names the types that should be projected.
 
-During the build process, you should call `generate.cmd` from the project root
+During the build process, you should run `generate.dart` from the project root
 to instantiate these types and generate the classes from them, for example:
 
-```terminal
-tools\generate.cmd
+```cmd
+dart tools\generate.dart
 ```
 
-This tool will also test both the generation library and the generated output
-with unit tests.
+If you pass the `--test` (`-t`) flag, this tool will also test `generator` and
+`win32` packages with unit tests after generating the code.
 
 ## Other utilities
 
@@ -33,7 +33,7 @@ This folder also includes a few other small utilities of limited usefulness.
 - `struct_sizes\struct_sizes.cpp`. Measures the size of structs in
   [packages\win32\lib\src\structs.g.dart] on 64-bit architectures so the
   appropriate unit tests can be generated.
-- `build.cmd`. Generates EXE files for some of the Dart examples.
+- `build.dart`. Generates EXE files for some of the Dart examples.
 
 [com_types.json]: ../packages/generator/data/com_types.json
 [packages\generator\data]: ../packages/generator/data

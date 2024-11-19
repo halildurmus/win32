@@ -12,5 +12,6 @@ dev_dependencies:
       url: https://github.com/halildurmus/workflows.git
       path: packages/hooks
   lints: ^5.0.0
+  path: ^1.9.1
   win32:
     path: packages/win32
