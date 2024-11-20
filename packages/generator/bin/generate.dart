@@ -4,8 +4,6 @@ import 'package:dart_style/dart_style.dart';
 import 'package:generator/generator.dart';
 import 'package:winmd/winmd.dart';
 
-import 'generate_struct_sizes_cpp.dart';
-
 bool methodMatches(String methodName, String rawPrototype) =>
     rawPrototype.contains(' $methodName(');
 
@@ -46,31 +44,6 @@ int generateStructs(List<Scope> scopes, Map<String, String> structs) {
 
   file.writeAsStringSync(DartFormatter().format(structsFile));
   return structProjections.length;
-}
-
-int generateStructSizeTests() {
-  var testsGenerated = 0;
-  final buffer = StringBuffer()..write('''
-$testStructsHeader
-
-void main() {
-''');
-
-  for (final struct in structSizeMap.keys) {
-    buffer.write('''
-  test('Struct $struct is the right size', () {
-    expect(sizeOf<$struct>(), equals(${structSizeMap[struct]}));
-  });
-    ''');
-    testsGenerated++;
-  }
-
-  buffer.write('}');
-
-  File('../win32/test/struct_test.dart')
-      .writeAsStringSync(DartFormatter().format(buffer.toString()));
-
-  return testsGenerated;
 }
 
 void generateDllFile(String library, List<Method> filteredMethods,
@@ -258,16 +231,10 @@ void main() async {
   final functionsToGenerate = loadFunctionsFromJson();
   saveFunctionsToJson(functionsToGenerate);
 
-  print('[${stopwatch.elapsed}] Generating struct_sizes.cpp...');
+  print('[${stopwatch.elapsed}] Generating structs...');
   final structsToGenerate = loadMap('win32_structs.json');
   saveMap(structsToGenerate, 'win32_structs.json');
-  generateStructSizeAnalyzer();
-
-  print('[${stopwatch.elapsed}] Generating structs...');
   generateStructs([wdkScope, win32Scope], structsToGenerate);
-
-  print('[${stopwatch.elapsed}] Generating struct tests...');
-  generateStructSizeTests();
 
   print('[${stopwatch.elapsed}] Validating callbacks...');
   final callbacks = loadMap('win32_callbacks.json');

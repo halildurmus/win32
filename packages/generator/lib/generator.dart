@@ -8,7 +8,6 @@ export 'src/model/exclusions.dart';
 export 'src/model/false_properties.dart';
 export 'src/model/functions.dart';
 export 'src/model/load_json.dart';
-export 'src/model/struct_sizes.dart';
 
 export 'src/projection/callback.dart';
 export 'src/projection/com_class.dart';
