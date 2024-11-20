@@ -1,112 +1,105 @@
-// Demonstrates getting perf information from the Windows Management
-// Instrumentation (WMI) API using the IWbemObjectAccess interface.
+// Demonstrates sampling process memory usage using WMI via
+// IWbemRefresher + IWbemObjectAccess.
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-void initializeCOM() {
-  // Initialize COM
-  var hr = CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
-  if (FAILED(hr)) throw WindowsException(hr);
+const _wmiNamespace = r'ROOT\CIMV2';
+const _propertyWorkingSet = 'WorkingSet';
 
-  // Initialize security model
-  hr = CoInitializeSecurity(
-    nullptr,
-    -1, // COM negotiates service
-    nullptr, // Authentication services
-    nullptr, // Reserved
-    RPC_C_AUTHN_LEVEL_DEFAULT, // authentication
-    RPC_C_IMP_LEVEL_IMPERSONATE, // Impersonation
-    nullptr, // Authentication info
-    EOAC_NONE, // Additional capabilities
-    nullptr, // Reserved
+void initializeComAndSecurity() {
+  CoInitializeEx(COINIT_MULTITHREADED);
+  CoInitializeSecurity(
+    null,
+    -1,
+    null,
+    RPC_C_AUTHN_LEVEL_DEFAULT,
+    RPC_C_IMP_LEVEL_IMPERSONATE,
+    null,
+    EOAC_NONE,
   );
-  if (FAILED(hr)) throw WindowsException(hr);
 }
 
-int connectWMI(WbemLocator pLoc, Pointer<Pointer<COMObject>> ppNamespace) {
-  // Connect to the root\cimv2 namespace with the current user and obtain
-  // pointer pSvc to make IWbemServices calls.
-  var hr = pLoc.connectServer(
-    TEXT(r'ROOT\CIMV2'), // WMI namespace
-    nullptr, // User name
-    nullptr, // User password
-    nullptr, // Locale
-    NULL, // Security flags
-    nullptr, // Authority
-    nullptr, // Context object
-    ppNamespace, // IWbemServices proxy
+IWbemServices connectToWmi(Arena arena) {
+  final locator = arena.com<IWbemLocator>(WbemLocator);
+  final services = locator.connectServer(
+    arena.bstr(_wmiNamespace),
+    BSTR(nullptr),
+    BSTR(nullptr),
+    BSTR(nullptr),
+    0,
+    BSTR(nullptr),
+    null,
   );
-  if (FAILED(hr)) throw WindowsException(hr);
+  if (services == null) {
+    throw StateError('Failed to connect to WMI namespace $_wmiNamespace');
+  }
 
-  hr = CoSetProxyBlanket(
-    ppNamespace.value, // the proxy to set
-    RPC_C_AUTHN_WINNT, // authentication service
-    RPC_C_AUTHZ_NONE, // authorization service
-    nullptr, // Server principal name
-    RPC_C_AUTHN_LEVEL_CALL, // authentication level
-    RPC_C_IMP_LEVEL_IMPERSONATE, // impersonation level
-    nullptr, // client identity
-    EOAC_NONE, // proxy capabilities
+  CoSetProxyBlanket(
+    services,
+    RPC_C_AUTHN_WINNT,
+    RPC_C_AUTHZ_NONE,
+    null,
+    RPC_C_AUTHN_LEVEL_CALL,
+    RPC_C_IMP_LEVEL_IMPERSONATE,
+    null,
+    EOAC_NONE,
   );
-  if (FAILED(hr)) throw WindowsException(hr);
-  return hr;
+
+  return services;
 }
 
 void main() {
-  const processToMonitor = 'winlogon';
+  initializeComAndSecurity();
 
-  // Initialize COM
-  initializeCOM();
+  const processName = 'winlogon';
+  const sampleCount = 10;
+  const sampleIntervalMs = 500;
 
   using((arena) {
-    final pLoc = WbemLocator.createInstance();
-    final ppNamespace = calloc<Pointer<COMObject>>();
+    final services = arena.adopt(connectToWmi(arena));
+    final refresher = arena.com<IWbemRefresher>(WbemRefresher);
+    final config = arena.adopt(IWbemConfigureRefresher.from(refresher));
 
-    connectWMI(pLoc, ppNamespace);
-
-    final refresher = WbemRefresher.createInstance();
-    final pConfig = IWbemConfigureRefresher.from(refresher);
-    final ppRefreshable = calloc<Pointer<COMObject>>();
-
-    final pszQuery =
-        'Win32_PerfRawData_PerfProc_Process.Name="$processToMonitor"'
-            .toNativeUtf16(allocator: arena);
-
-    // Add the instance to be refreshed.
-    var hr = pConfig.addObjectByPath(
-      ppNamespace.value,
-      pszQuery,
+    final ppRefreshable = arena<VTablePointer>();
+    final objectPath = arena.pcwstr(
+      'Win32_PerfRawData_PerfProc_Process.Name="$processName"',
+    );
+    config.addObjectByPath(
+      services,
+      objectPath,
       0,
-      nullptr,
+      null,
       ppRefreshable,
       nullptr,
     );
-    if (FAILED(hr)) throw WindowsException(hr);
 
-    final pObj = IWbemClassObject(ppRefreshable.cast());
-    final pAccess = IWbemObjectAccess.from(pObj);
+    if (ppRefreshable.value == nullptr) {
+      throw StateError('Process "$processName" not found in WMI');
+    }
 
-    final pszVirtualBytes = 'WorkingSet'.toNativeUtf16(allocator: arena);
+    final classObject = arena.adopt(IWbemClassObject(ppRefreshable.value));
+    final objectAccess = arena.adopt(IWbemObjectAccess.from(classObject));
+
     final cimType = arena<Int32>();
-    final plHandle = arena<Int32>();
+    final propertyHandle = arena<Int32>();
+    objectAccess.getPropertyHandle(
+      arena.pcwstr(_propertyWorkingSet),
+      cimType,
+      propertyHandle,
+    );
 
-    hr = pAccess.getPropertyHandle(pszVirtualBytes, cimType, plHandle);
-    if (FAILED(hr)) throw WindowsException(hr);
-
-    final dwWorkingSetBytes = arena<DWORD>();
-    for (var x = 0; x < 10; x++) {
+    for (var i = 0; i < sampleCount; i++) {
       refresher.refresh(WBEM_FLAG_REFRESH_AUTO_RECONNECT);
-      hr = pAccess.readDWORD(plHandle.value, dwWorkingSetBytes);
-      if (FAILED(hr)) throw WindowsException(hr);
+      final workingSetBytes = objectAccess.readDWORD(propertyHandle.value);
       print(
-        'Winlogon process is using ${dwWorkingSetBytes.value / 1000}'
-        ' kilobytes of working set.',
+        '$processName working set: '
+        '${(workingSetBytes / 1024).toStringAsFixed(1)} KB',
       );
 
-      Sleep(1000); // Sleep for a second.
+      Sleep(sampleIntervalMs);
     }
   });
 }

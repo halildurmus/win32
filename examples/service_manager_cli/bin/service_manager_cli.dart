@@ -1,75 +1,94 @@
-// ignore_for_file: parameter_assignments
-
 import 'dart:io';
 
+import 'package:args/args.dart';
 import 'package:service_manager_cli/service_manager_cli.dart';
 
 void main(List<String> arguments) {
-  if (arguments.isEmpty ||
-      arguments.contains('-h') ||
-      arguments.contains('--help')) {
-    printUsage();
+  final parser = ArgParser()
+    ..addFlag(
+      'verbose',
+      abbr: 'v',
+      help: 'Show additional command output.',
+      negatable: false,
+    )
+    ..addCommand('list')
+    ..addCommand('start')
+    ..addCommand('stop')
+    ..addCommand('status')
+    ..addFlag(
+      'help',
+      abbr: 'h',
+      help: 'Print usage information.',
+      negatable: false,
+    );
+
+  final ArgResults results;
+  try {
+    results = parser.parse(arguments);
+  } on ArgParserException catch (e) {
+    stderr
+      ..writeln(e.message)
+      ..writeln();
+    printUsage(parser);
+    exit(64);
+  }
+
+  if (results.flag('help')) {
+    printUsage(parser);
     return;
   }
 
-  var verbose = false;
-  if (arguments.contains('-v') || arguments.contains('--verbose')) {
-    verbose = true;
-    arguments = arguments.where((arg) => arg != '-v').toList();
+  ServiceManager.log = results.flag('verbose');
+
+  final command = results.command;
+  if (command == null) {
+    printUsage(parser);
+    exit(64);
   }
 
-  ServiceManager.log = verbose;
-
-  final command = arguments[0];
-  final serviceName = arguments.length > 1 ? arguments[1] : null;
-
-  switch (command) {
+  switch (command.name) {
     case 'list':
       listServices();
 
     case 'start':
-      if (serviceName == null) {
-        print('Please provide the service name to start.');
-        exit(1);
-      }
-      startService(serviceName);
-
-    case 'status':
-      if (serviceName == null) {
-        print('Please provide a service name to get status.');
-        exit(1);
-      }
-      status(serviceName);
+      _requireServiceName(command);
+      startService(command.arguments.first);
 
     case 'stop':
-      if (serviceName == null) {
-        print('Please provide the service name to stop.');
-        exit(1);
-      }
-      stopService(serviceName);
+      _requireServiceName(command);
+      stopService(command.arguments.first);
+
+    case 'status':
+      _requireServiceName(command);
+      status(command.arguments.first);
 
     default:
-      print('Unknown command: $command');
-      print('');
-      printUsage();
-      exit(1);
+      stderr.writeln('Unknown command: ${command.name}');
+      printUsage(parser);
+      exit(64);
   }
 }
 
-void printUsage() {
+void _requireServiceName(ArgResults command) {
+  if (command.arguments.isEmpty) {
+    stderr.writeln('Please provide a service name.');
+    exit(64);
+  }
+}
+
+void printUsage(ArgParser parser) {
   print('A command-line interface for managing Windows services.');
   print('');
-  print('Usage: service_manager_cli <command> [arguments]');
+  print('Usage: service_manager_cli <command> [options]');
   print('');
-  print('Global options:');
-  print('  -v, --verbose         Show additional command output.');
-  print('  -h, --help            Print this usage information.');
+  print('Commands:');
+  print('  list');
+  print('  start <service_name>');
+  print('  stop <service_name>');
+  print('  status <service_name>');
   print('');
-  print('Available commands:');
-  print('  list                  List all services.');
-  print('  start <service_name>  Start a service.');
-  print('  status <service_name> Get the status of a service.');
-  print('  stop <service_name>   Stop a service.');
+  print('Options:');
+  print(parser.usage);
 }
 
 void listServices() {
@@ -81,7 +100,7 @@ void listServices() {
 
   print('Found ${services.length} services:');
   for (final service in services) {
-    print(' $service');
+    print('• $service');
   }
 }
 
@@ -100,15 +119,6 @@ void startService(String serviceName) {
   });
 }
 
-void status(String serviceName) {
-  final status = ServiceManager.status(serviceName);
-  if (status == null) {
-    print('Failed to get status of service "$serviceName".');
-  } else {
-    print('Status of service "$serviceName": ${status.name}');
-  }
-}
-
 void stopService(String serviceName) {
   print(switch (ServiceManager.stop(serviceName)) {
     ServiceStopResult.success => 'Service "$serviceName" stopped successfully.',
@@ -121,4 +131,13 @@ void stopService(String serviceName) {
     ServiceStopResult.timedOut =>
       'The attempt to stop service "$serviceName" timed out.',
   });
+}
+
+void status(String serviceName) {
+  final status = ServiceManager.status(serviceName);
+  if (status == null) {
+    print('Failed to get status of service "$serviceName".');
+  } else {
+    print('Status of service "$serviceName": ${status.name}');
+  }
 }

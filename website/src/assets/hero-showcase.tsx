@@ -49,22 +49,20 @@ export const showcaseItems: ShowcaseItem[] = [
   },
   {
     title: 'DartNote App',
-    link: 'https://github.com/halildurmus/win32/tree/main/examples/notepad',
+    link: 'https://github.com/halildurmus/win32/tree/main/examples/dartnote',
     showcase: ShowcaseDartNote,
     ctaText: 'Source code',
   },
   {
     title: 'Snake Game',
-    link: 'https://github.com/halildurmus/win32/blob/main/examples/snake.dart',
+    link: 'https://github.com/halildurmus/win32/tree/main/examples/snake',
     showcase: ShowcaseSnake,
-    isDark: true,
     ctaText: 'Source code',
   },
   {
     title: 'Tetris Game',
     link: 'https://github.com/halildurmus/win32/tree/main/examples/tetris',
     showcase: ShowcaseTetris,
-    isDark: true,
     ctaText: 'Source code',
   },
 ];

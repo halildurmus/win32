@@ -1,5 +1,4 @@
-// Produces a two second sine wave using the Windows Audio Session API
-// interface.
+// Plays a two-second sine wave using WASAPI (shared mode).
 
 import 'dart:ffi';
 import 'dart:math' as math;
@@ -8,245 +7,162 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-const refTimesPerSecond = 5000000;
+const refTimesPerSecond = 10_000_000;
 const double refTimesPerMillisecond = refTimesPerSecond / 1000;
-const frequency = 440; // 440Hz (concert pitch)
-const int sampleCount = 96000 * 2;
 
-late Float32List pcmAudio;
+/// Simple sine-wave PCM generator.
+final class SineWaveSource {
+  SineWaveSource({
+    required int frequency,
+    required int sampleRate,
+    required this.channels,
+    required int durationSeconds,
+  }) : _samples = _generate(frequency, sampleRate, durationSeconds);
 
-var bufferSize = 0;
-var pcmPos = 0;
-var bufferPos = 0;
+  final int channels;
 
-/// Initialize data values.
-void initData(WAVEFORMATEX waveFormat, int totalFrames) {
-  final sampleRate = waveFormat.nSamplesPerSec.toDouble();
-  pcmAudio = Float32List(sampleCount);
-  final radsPerSec = 2 * math.pi * frequency / sampleRate;
-  for (var i = 0; i < sampleCount; i++) {
-    final sampleValue = math.sin(radsPerSec * i);
-    pcmAudio[i] = sampleValue;
-  }
-  bufferSize = totalFrames * waveFormat.nChannels;
-  print('bufferSize = $bufferSize');
-  print('sampsPerChan = ${totalFrames / waveFormat.nChannels}');
-}
+  final Float32List _samples;
+  var _position = 0;
 
-/// Loads data into the memory buffer.
-///
-/// Returns true if there is data, else returns false (indicating silence).
-bool fillMemoryBuffer(
-  int totalFrames,
-  Pointer<BYTE> dataOut,
-  WAVEFORMATEX waveFormat,
-) {
-  final fData = dataOut.cast<FLOAT>();
-  final totalSamples = totalFrames * waveFormat.nChannels;
-  print('Frames to Fill = $totalFrames');
-  print('Samples to Fill = $totalSamples');
-  print('bufferPos = $bufferPos');
-
-  if (pcmPos < sampleCount) {
-    for (var i = 0; i < totalSamples; i += waveFormat.nChannels) {
-      for (var chan = 0; chan < waveFormat.nChannels; chan++) {
-        fData[i + chan] = (pcmPos < sampleCount) ? pcmAudio[pcmPos] : 0.0;
-      }
-      pcmPos++;
+  static Float32List _generate(
+    int frequency,
+    int sampleRate,
+    int durationSeconds,
+  ) {
+    final totalSamples = sampleRate * durationSeconds;
+    final samples = Float32List(totalSamples);
+    final radiansPerSample = 2 * math.pi * frequency / sampleRate;
+    for (var i = 0; i < totalSamples; i++) {
+      samples[i] = math.sin(i * radiansPerSample);
     }
-    bufferPos += totalSamples;
-    bufferPos %= bufferSize;
-  } else {
-    // no more data
-    return false;
+    return samples;
   }
-  return true;
+
+  /// Writes interleaved samples into the output buffer.
+  ///
+  /// Returns `false` when no data remains.
+  bool write(int frameCount, Pointer<BYTE> buffer) {
+    if (_position >= _samples.length) return false;
+
+    final out = buffer.cast<FLOAT>();
+    final totalSamples = frameCount * channels;
+
+    for (var i = 0; i < totalSamples; i += channels) {
+      final value = (_position < _samples.length) ? _samples[_position] : 0.0;
+
+      for (var ch = 0; ch < channels; ch++) {
+        out[i + ch] = value;
+      }
+      _position++;
+    }
+
+    return true;
+  }
 }
 
-/// Retrieve the number of frames that the audio buffer can hold.
-int getBufferFrameCount(IAudioClient pAudioClient) {
-  final pBufferFrameCount = calloc<UINT32>();
-  check(pAudioClient.getBufferSize(pBufferFrameCount));
-  final bufferFrameCount = pBufferFrameCount.value;
-  free(pBufferFrameCount);
+/// High-level WASAPI renderer.
+final class WasapiRenderer {
+  const WasapiRenderer(this._audioClient, this._renderClient);
 
-  return bufferFrameCount;
-}
+  final IAudioClient3 _audioClient;
+  final IAudioRenderClient _renderClient;
 
-/// Fail COM calls that don't complete successfully.
-void check(int hr) {
-  if (FAILED(hr)) throw WindowsException(hr);
+  int get bufferFrames => _audioClient.getBufferSize();
+
+  void play(SineWaveSource source, WAVEFORMATEX format) {
+    final sampleRate = format.nSamplesPerSec;
+    final bufferDurationHns = refTimesPerSecond * bufferFrames ~/ sampleRate;
+
+    // Initial fill
+    var framesAvailable = bufferFrames;
+    var data = _renderClient.getBuffer(framesAvailable);
+    var hasData = source.write(framesAvailable, data);
+
+    _renderClient.releaseBuffer(
+      framesAvailable,
+      hasData ? 0 : AUDCLNT_BUFFERFLAGS_SILENT,
+    );
+
+    _audioClient.start();
+
+    while (hasData) {
+      Sleep(bufferDurationHns ~/ refTimesPerMillisecond ~/ 2);
+      final padding = _audioClient.getCurrentPadding();
+      framesAvailable = bufferFrames - padding;
+      if (framesAvailable == 0) continue;
+
+      data = _renderClient.getBuffer(framesAvailable);
+      hasData = source.write(framesAvailable, data);
+
+      _renderClient.releaseBuffer(
+        framesAvailable,
+        hasData ? 0 : AUDCLNT_BUFFERFLAGS_SILENT,
+      );
+    }
+
+    // Allow tail to drain
+    Sleep(bufferDurationHns ~/ refTimesPerMillisecond ~/ 2);
+    _audioClient.stop();
+  }
 }
 
 void main() {
-  // Initialize COM
-  check(CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED));
+  CoInitializeEx(COINIT_MULTITHREADED);
 
-  // Retrieve the list of available audio output devices.
-  final pDeviceEnumerator = MMDeviceEnumerator.createInstance();
-  final ppDevices = calloc<COMObject>();
-  check(
-    pDeviceEnumerator.enumAudioEndpoints(
-      0, // dataflow: rendering device
-      1, // device state: only enumerate active device
-      ppDevices.cast(),
-    ),
-  );
+  using((arena) {
+    // Enumerate output devices
+    final enumerator = arena.com<IMMDeviceEnumerator>(MMDeviceEnumerator);
 
-  // Get the number of available audio output devices.
-  final pDevices = IMMDeviceCollection(ppDevices);
-  final pcDevices = calloc<Uint32>();
-  check(pDevices.getCount(pcDevices));
-  final deviceCount = pcDevices.value;
-  print('$deviceCount audio device(s) detected:');
-
-  // Print available audio output devices
-  for (var i = 0; i < deviceCount; i++) {
-    // Get audio device from the device collection.
-    final ppEndpoint = calloc<COMObject>();
-    check(pDevices.item(i, ppEndpoint.cast()));
-    final pEndpoint = IMMDevice(ppEndpoint);
-
-    // Retrieve the current device id
-    final idPtr = calloc<Pointer<Utf16>>();
-    check(pEndpoint.getId(idPtr));
-    final id = idPtr.value.toDartString();
-    free(idPtr.value);
-    free(idPtr);
-
-    // Retrieve the current device properties.
-    final ppProps = calloc<COMObject>();
-    check(
-      pEndpoint.openPropertyStore(
-        STGM_READ, // Storage-access mode: read
-        ppProps.cast(),
-      ),
+    final devices = arena.adopt(
+      enumerator.enumAudioEndpoints(eRender, DEVICE_STATE_ACTIVE)!,
     );
 
-    // Build property key to get device friendly name.
-    final pProps = IPropertyStore(ppProps.cast());
-    final pPropKey = PROPERTYKEY.DeviceInterface_FriendlyName();
+    final count = devices.getCount();
+    print('$count audio output device(s) detected:\n');
 
-    // Retrieve the current device friendly name.
-    final pVal = calloc<PROPVARIANT>();
-    check(pProps.getValue(pPropKey.cast(), pVal));
-    free(pPropKey);
+    final friendlyNameKey = arena<PROPERTYKEY>()
+      ..ref = PKEY_DeviceInterface_FriendlyName;
 
-    // Check the retrieved device friendly name.
-    final varName = pVal.ref;
-    if (varName.vt != VT_EMPTY) {
-      final bstrVal = varName.bstrVal;
-      final name = bstrVal.toDartString();
-      print(' ID: $id Name: $name');
-      SysFreeString(bstrVal);
-    } else {
-      print(' Unknown device');
+    for (var i = 0; i < count; i++) {
+      final device = arena.adopt(devices.item(i)!);
+      final pId = device.getId();
+      final id = pId.toDartString();
+      free(pId);
+
+      final props = arena.adopt(device.openPropertyStore(STGM_READ)!);
+      final value = PropVariant.fromPointer(props.getValue(friendlyNameKey));
+      final friendlyName = value.pwszVal.toDartString();
+      value.free();
+      print('ID: $id');
+      print('Name: $friendlyName\n');
     }
 
-    free(ppEndpoint);
-  }
-
-  // Retrieve the default audio output device.
-  final ppDevice = calloc<COMObject>();
-  check(
-    pDeviceEnumerator.getDefaultAudioEndpoint(
-      0, // dataflow: rendering device
-      0, // role: system notification sound
-      ppDevice.cast(),
-    ),
-  );
-
-  // Activate an IAudioClient interface for the output device.
-  final pDevice = IMMDevice(ppDevice);
-  final iidAudioClient = convertToIID(IID_IAudioClient3);
-  final ppAudioClient = calloc<COMObject>();
-  check(
-    pDevice.activate(iidAudioClient, CLSCTX_ALL, nullptr, ppAudioClient.cast()),
-  );
-  free(iidAudioClient);
-  final pAudioClient = IAudioClient3(ppAudioClient);
-
-  // Initialize the audio stream.
-  final ppFormat = calloc<Pointer<WAVEFORMATEX>>();
-  check(pAudioClient.getMixFormat(ppFormat));
-  final pWaveFormat = ppFormat.value;
-  final sampleRate = pWaveFormat.ref.nSamplesPerSec;
-  check(
-    pAudioClient.initialize(
+    // Default render device
+    final device = arena.adopt(
+      enumerator.getDefaultAudioEndpoint(eRender, eConsole)!,
+    );
+    final audioClient = arena.adopt(
+      device.activate<IAudioClient3>(CLSCTX_ALL, null),
+    );
+    final format = arena.using(audioClient.getMixFormat(), free);
+    audioClient.initialize(
       AUDCLNT_SHAREMODE_SHARED,
       0,
-      30000, // buffer capacity of 3s (30,000 * 100ns)
+      30_000, // 3 seconds in 100ns units
       0,
-      ppFormat.value,
-      nullptr,
-    ),
-  );
-
-  // Activate an IAudioRenderClient interface.
-  final iidAudioRenderClient = convertToIID(IID_IAudioRenderClient);
-  final ppAudioRenderClient = calloc<COMObject>();
-  check(
-    pAudioClient.getService(iidAudioRenderClient, ppAudioRenderClient.cast()),
-  );
-  free(iidAudioRenderClient);
-  final pAudioRenderClient = IAudioRenderClient(ppAudioRenderClient);
-
-  // Grab the entire buffer for the initial fill operation.
-  final bufferFrameCount = getBufferFrameCount(pAudioClient);
-  print('Buffer Size = $bufferFrameCount frames');
-  final pData = calloc<Pointer<BYTE>>();
-  check(pAudioRenderClient.getBuffer(bufferFrameCount, pData));
-
-  // Load the initial data into the shared buffer.
-  initData(pWaveFormat.ref, bufferFrameCount);
-  var dataLoaded = fillMemoryBuffer(
-    bufferFrameCount,
-    pData.value,
-    pWaveFormat.ref,
-  );
-  check(
-    pAudioRenderClient.releaseBuffer(
-      bufferFrameCount,
-      dataLoaded ? 0 : AUDCLNT_BUFFERFLAGS_SILENT,
-    ),
-  );
-
-  // Calculate the actual duration of the allocated buffer.
-  final hnsActualDuration = refTimesPerSecond * bufferFrameCount / sampleRate;
-
-  check(pAudioClient.start()); // Start playing.
-
-  final pNumFramesPadding = calloc<UINT32>();
-  while (dataLoaded) {
-    // Sleep for half the buffer duration.
-    Sleep(hnsActualDuration / refTimesPerMillisecond ~/ 2);
-    // See how much buffer space is available.
-    check(pAudioClient.getCurrentPadding(pNumFramesPadding));
-    final numFramesAvailable = bufferFrameCount - pNumFramesPadding.value;
-    // Grab all the available space in the shared buffer.
-    check(pAudioRenderClient.getBuffer(numFramesAvailable, pData));
-    // Get next half second of data from the audio source.
-    dataLoaded = fillMemoryBuffer(
-      numFramesAvailable,
-      pData.value,
-      pWaveFormat.ref,
+      format,
+      null,
     );
-    check(
-      pAudioRenderClient.releaseBuffer(
-        numFramesAvailable,
-        dataLoaded ? 0 : AUDCLNT_BUFFERFLAGS_SILENT,
-      ),
+    final renderClient = arena.adopt(
+      audioClient.getService<IAudioRenderClient>(),
     );
-  }
-  free(pNumFramesPadding);
-
-  // Wait for last data in buffer to play before stopping.
-  Sleep(hnsActualDuration / refTimesPerMillisecond ~/ 2);
-  check(pAudioClient.stop()); // Stop playing.
-
-  // Clear up
-  free(pData);
-  free(ppFormat);
-
-  print('All done!');
+    final WAVEFORMATEX(:nSamplesPerSec, :nChannels) = format.ref;
+    final source = SineWaveSource(
+      frequency: 440,
+      sampleRate: nSamplesPerSec,
+      channels: nChannels,
+      durationSeconds: 2,
+    );
+    WasapiRenderer(audioClient, renderClient).play(source, format.ref);
+  });
 }

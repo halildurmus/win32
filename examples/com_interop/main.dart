@@ -1,28 +1,27 @@
-// ignore_for_file: constant_identifier_names, non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: specify_nonobvious_property_types
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
+import 'package:ffi_leak_tracker/ffi_leak_tracker.dart';
 import 'package:win32/win32.dart';
 
-const CLSID_ExampleCom = '{36B142F2-97DC-4594-96A4-8160EEB7184C}';
-const IID_IExampleCom = '{4C2DDA7F-9DC9-46FD-A107-832254B2EEBE}';
+final CLSID_ExampleCom = GUID('{36B142F2-97DC-4594-96A4-8160EEB7184C}');
+final IID_IExampleCom = GUID('{4C2DDA7F-9DC9-46FD-A107-832254B2EEBE}');
 
-/// Represents the `IExampleCom` interface in the .NET component.
+/// Represents the `IExampleCom` interface from the .NET component.
 ///
-/// This interface inherits from `IDispatch` and defines two methods:
+/// This interface extends [IDispatch] and provides the following methods:
+/// - **`GetMessage`**: Retrieves a string value from the COM object.
+/// - **`GetSum`**: Takes two integers as input and returns their sum.
 ///
-/// - **GetMessage**: Returns a string from the COM object.
-/// - **GetSum**: Accepts two integers and returns the sum of them.
+/// To interact with this .NET component from Dart, you must define the method
+/// signatures using FFI (Foreign Function Interface). These signatures can be
+/// derived from the IDL (Interface Definition Language) description of the COM
+/// interface.
 ///
-/// ### Creating Dart Bindings:
-///
-/// To interact with your .NET component from Dart, you need to define the
-/// method signatures using FFI. The method signatures can be found in the IDL
-/// definition of the COM interface.
-///
-/// Here's the IDL definition for the `IExampleCom` interface:
-///
+/// The IDL definition of the `IExampleCom` interface:
 /// ```idl
 /// interface IExampleCom : IDispatch {
 ///     HRESULT GetMessage([out, retval] BSTR* pRetVal);
@@ -30,15 +29,14 @@ const IID_IExampleCom = '{4C2DDA7F-9DC9-46FD-A107-832254B2EEBE}';
 /// };
 /// ```
 ///
-/// You can use tools like [OLE/COM Object Viewer](https://learn.microsoft.com/windows/win32/com/ole-com-object-viewer)
-/// to view your .NET component’s type library and IDL definition.
+/// To examine the type library and IDL definitions of your .NET component,
+/// you can use tools such as the
+/// [OLE/COM Object Viewer](https://learn.microsoft.com/windows/win32/com/ole-com-object-viewer).
 ///
-/// ### VTable Method Offsets:
-///
-/// Since this interface inherits from `IDispatch`, the methods (`GetMessage`
-/// and `GetSum`) follow the standard `IUnknown` and `IDispatch` methods in the
-/// VTable. The methods (`GetMessage` and `GetSum`) are located at indices 7 and
-/// 8 respectively, after the `IDispatch` methods.
+/// This interface inherits from [IDispatch], which itself extends [IUnknown].
+/// As a result, the methods defined in this interface (`GetMessage` and
+/// `GetSum`) appear in the VTable following the standard [IUnknown] and
+/// [IDispatch] methods.
 ///
 /// ```plaintext
 /// +----------------------+
@@ -63,67 +61,98 @@ const IID_IExampleCom = '{4C2DDA7F-9DC9-46FD-A107-832254B2EEBE}';
 /// | 8 | GetSum           | }
 /// +---+------------------+
 /// ```
-class IExampleCom extends IDispatch {
-  IExampleCom(super.ptr);
+class IExampleCom extends IDispatch implements ComInterface {
+  IExampleCom(super.ptr) : _vtable = ptr.value.cast<IExampleComVtbl>().ref;
 
-  int GetMessage(Pointer<Pointer<Utf16>> pRetVal) =>
-      (ptr.ref.vtable + 7)
-          .cast<
-            Pointer<
-              NativeFunction<
-                HRESULT Function(Pointer, Pointer<Pointer<Utf16>> pRetVal)
-              >
-            >
-          >()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> pRetVal)>()(
-        ptr.ref.lpVtbl,
-        pRetVal,
-      );
+  final IExampleComVtbl _vtable;
+  late final _GetMessageFn =
+      _vtable.GetMessage.asFunction<
+        int Function(VTablePointer, Pointer<Pointer<Utf16>>)
+      >();
+  late final _GetSumFn =
+      _vtable.GetSum.asFunction<
+        int Function(VTablePointer, int, int, Pointer<Int32>)
+      >();
 
-  int GetSum(int a, int b, Pointer<Int32> pRetVal) => (ptr.ref.vtable + 8)
-      .cast<
-        Pointer<
-          NativeFunction<
-            HRESULT Function(Pointer, Int32 a, Int32 b, Pointer<Int32> pRetVal)
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(Pointer, int a, int b, Pointer<Int32> pRetVal)
-      >()(ptr.ref.lpVtbl, a, b, pRetVal);
+  BSTR getMessage() {
+    final pRetVal = adaptiveCalloc<Pointer<Utf16>>();
+    final hr = HRESULT(_GetMessageFn(ptr, pRetVal));
+    if (hr.isError) {
+      free(pRetVal);
+      throw WindowsException(hr);
+    }
+    final result = pRetVal.value;
+    free(pRetVal);
+    return BSTR(result);
+  }
+
+  int getSum(int a, int b) {
+    final pRetVal = adaptiveCalloc<Int32>();
+    final hr = HRESULT(_GetSumFn(ptr, a, b, pRetVal));
+    if (hr.isError) {
+      free(pRetVal);
+      throw WindowsException(hr);
+    }
+    final result = pRetVal.value;
+    free(pRetVal);
+    return result;
+  }
+}
+
+base class IExampleComVtbl extends Struct {
+  // ignore: unreachable_from_main
+  external IDispatchVtbl base$;
+  external Pointer<
+    NativeFunction<
+      Int32 Function(VTablePointer this$, Pointer<Pointer<Utf16>> pRetVal)
+    >
+  >
+  GetMessage;
+  external Pointer<
+    NativeFunction<
+      Int32 Function(
+        VTablePointer this$,
+        Int32 a,
+        Int32 b,
+        Pointer<Int32> pRetVal,
+      )
+    >
+  >
+  GetSum;
+}
+
+final class IExampleComCompanion extends ComCompanion<IExampleCom> {
+  const IExampleComCompanion();
+
+  @override
+  IExampleCom Function(VTablePointer) get fromPointer => IExampleCom.new;
+
+  @override
+  GUID get iid => IID_IExampleCom;
 }
 
 /// Demonstrates early binding with VTable access to the `IExampleCom` methods.
-void invokeMethodsViaEarlyBinding() => using((arena) {
-  final lpclsid = GUIDFromString(CLSID_ExampleCom, allocator: arena);
-  final riid = GUIDFromString(IID_IExampleCom, allocator: arena);
-  final ppv = calloc<COMObject>();
+void invokeMethodsViaEarlyBinding() {
+  // Register the IExampleCom interface so that it can be used with the
+  // CoCreateInstance function.
+  ComInterface.register(const IExampleComCompanion());
 
   // Create an instance of the IExampleCom interface.
-  var hr = CoCreateInstance(lpclsid, nullptr, CLSCTX_ALL, riid, ppv.cast());
-  if (FAILED(hr)) throw WindowsException(hr);
+  final exampleCom = createInstance<IExampleCom>(CLSID_ExampleCom);
 
-  // Pass the interface pointer to the IExampleCom class.
-  final exampleCom = IExampleCom(ppv);
+  try {
+    // Call the GetMessage method.
+    final message = exampleCom.getMessage();
+    print('Message from .NET component: ${message.toDartString()}');
+    SysFreeString(message);
 
-  // Call the GetMessage method.
-  final pRetValMessage = arena<Pointer<Utf16>>();
-  hr = exampleCom.GetMessage(pRetValMessage);
-  if (FAILED(hr)) throw WindowsException(hr);
-  final bstr = pRetValMessage.value;
-  final message = bstr.toDartString();
-  print('Message from .NET component: $message');
-  SysFreeString(bstr);
-
-  // Call the GetSum method.
-  final pRetValSum = arena<Int32>();
-  hr = exampleCom.GetSum(5, 7, pRetValSum);
-  if (FAILED(hr)) throw WindowsException(hr);
-  final sum = pRetValSum.value;
-  print('Sum from .NET component: $sum');
-});
+    // Call the GetSum method.
+    final sum = exampleCom.getSum(5, 7);
+    print('Sum from .NET component: $sum');
+  } finally {
+    exampleCom.release();
+  }
+}
 
 /// Demonstrates late binding using the [IDispatch] interface via the
 /// [Dispatcher] to make it easier to call methods on the COM object.
@@ -135,52 +164,25 @@ void invokeMethodsViaLateBinding() {
   // create the Dispatcher instance. For example:
   // final dispatcher = Dispatcher.fromCLSID(CLSID_ExampleCom);
 
-  // Call the GetMessage method.
-  final pRetValMessage = calloc<VARIANT>();
-  VariantInit(pRetValMessage);
-  dispatcher.invoke('GetMessage', null, pRetValMessage);
-  final bstr = pRetValMessage.ref.bstrVal; // Get the BSTR value.
-  final message = bstr.toDartString(); // Convert the BSTR to a Dart string.
-  print('Message from .NET component: $message');
+  try {
+    // Call the GetMessage method.
+    final messageResult = dispatcher.invoke<String>('GetMessage');
+    final message = messageResult.value;
+    print('Message from .NET component: $message');
+    messageResult.free();
 
-  // Clean up.
-  VariantClear(pRetValMessage);
-  free(pRetValMessage);
-
-  // Call the GetSum method.
-  final dispParams = calloc<DISPPARAMS>();
-  final args = calloc<VARIANT>(2); // Allocate memory for two arguments.
-  // Note: these arguments appear in reverse order.
-  args[0]
-    ..vt = VT_I4
-    ..intVal = 7; // This is the second argument to the method.
-  args[1]
-    ..vt = VT_I4
-    ..intVal = 5; // This is the first argument to the method.
-  dispParams.ref
-    ..cArgs =
-        2 // Number of arguments.
-    ..rgvarg = args; // Pointer to the arguments.
-  final pRetValSum = calloc<VARIANT>();
-  VariantInit(pRetValSum);
-  dispatcher.invoke('GetSum', dispParams, pRetValSum);
-  final sum = pRetValSum.ref.intVal; // Get the integer value.
-  print('Sum from .NET component: $sum');
-
-  // Clean up.
-  VariantClear(pRetValSum);
-  free(pRetValSum);
-  free(args);
-  free(dispParams);
-
-  // Clean up the Dispatcher instance.
-  dispatcher.dispose();
+    // Call the GetSum method.
+    final sumResult = dispatcher.invoke<int>('GetSum', [5, 7]);
+    final sum = sumResult.value;
+    print('Sum from .NET component: $sum');
+    sumResult.free();
+  } finally {
+    dispatcher.dispose();
+  }
 }
 
 void main() {
-  // Initialize COM.
-  CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
-
+  CoInitializeEx(COINIT_MULTITHREADED);
   invokeMethodsViaEarlyBinding();
   invokeMethodsViaLateBinding();
 }

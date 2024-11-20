@@ -4,8 +4,8 @@ title: Quick Start
 
 ## 🧩 Calling Native Libraries with FFI
 
-The **Windows API** was originally written with **C** developers in mind. As a
-result, many of the conventions are designed around the characteristics and
+**Windows API** was originally written with **C** developers in mind.
+As a result, many of the conventions are designed around the characteristics and
 capabilities of the C runtime. Fortunately, the wide popularity of C means that
 many languages, including Dart, have good support for calling C code and
 handling C coding conventions.
@@ -21,7 +21,7 @@ command below based on your project type (**Flutter** or **Dart-only**):
 <InstallPackagesCommand args="ffi win32" />
 
 To utilize **FFI** features, you typically import both the library and the
-package, along with the **win32** package, as follows:
+package, along with the `package:win32`, as follows:
 
 ```dart
 import 'dart:ffi';
@@ -45,11 +45,11 @@ void main() {
 
 ## 📚 Next Steps
 
-🔍 Explore [real-life examples] built using **win32** to see what you can
+🔍 Explore [real-life examples] built using `package:win32` to see what you can
 achieve.
 
-📦 Discover [packages](/packages) built on top of **win32** to find the ones
-that best suit your needs.
+📦 Discover [packages](/packages) built on top of `package:win32` to find the
+ones that best suit your needs.
 
 📘 Dive into the [Functions] guide to deepen your understanding of Win32
 functions.
@@ -57,5 +57,5 @@ functions.
 [Beep]: https://learn.microsoft.com/windows/win32/api/utilapiset/nf-utilapiset-beep
 [dart:ffi]: https://api.dart.dev/stable/dart-ffi/dart-ffi-library.html
 [real-life examples]: https://win32.pub/examples
-[Functions]: /docs/guides-concepts/functions
+[Functions]: /docs/core/functions
 [package:ffi]: https://pub.dev/packages/ffi

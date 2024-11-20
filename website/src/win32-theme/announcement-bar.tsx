@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import { SVGProps } from 'react';
-import { githubRepoUrl } from '../config';
 
 export const AnnouncementBar = () => {
   return (
@@ -10,7 +9,7 @@ export const AnnouncementBar = () => {
         'w-full h-12 relative',
         'bg-announcement-bar',
         'font-inter',
-        'z-announcement-bar'
+        'z-announcement-bar',
       )}
     >
       <div
@@ -18,7 +17,7 @@ export const AnnouncementBar = () => {
           'hidden lg:flex w-full h-full',
           'max-w-screen overflow-hidden',
           'border-b border-solid border-[#47ebeb26]',
-          'announcement-bar-mask'
+          'announcement-bar-mask',
         )}
       >
         <div
@@ -26,7 +25,7 @@ export const AnnouncementBar = () => {
             'w-[1280px] h-full',
             'mx-auto',
             'flex',
-            'justify-between'
+            'justify-between',
           )}
         >
           <div className={clsx('w-[calc(50%-300px)] h-full', 'relative')}>
@@ -44,7 +43,7 @@ export const AnnouncementBar = () => {
               className={clsx(
                 'absolute',
                 'rotate-180',
-                'top-[8px] right-[100px]'
+                'top-[8px] right-[100px]',
               )}
               id={'2'}
             />
@@ -59,7 +58,7 @@ export const AnnouncementBar = () => {
               className={clsx(
                 'absolute',
                 'rotate-180',
-                'top-[6px] right-[180px]'
+                'top-[6px] right-[180px]',
               )}
               id={'4'}
             />
@@ -71,7 +70,7 @@ export const AnnouncementBar = () => {
                 'delay-[1300]',
                 'absolute',
                 'top-[2px]',
-                'right-[40px]'
+                'right-[40px]',
               )}
               id={'5'}
             />
@@ -88,7 +87,7 @@ export const AnnouncementBar = () => {
 const Text = () => {
   return (
     <a
-      href={githubRepoUrl}
+      href={'/changelog/6.0.0'}
       target="_blank"
       rel="noreferrer"
       className={clsx(
@@ -102,20 +101,24 @@ const Text = () => {
         'h-full w-full lg:w-[780px]',
         'flex items-center justify-center',
         'text-white',
-        'text-xs sm:text-sm',
+        'text-sm md:text-base',
         'text-center',
         'no-underline',
         'hover:no-underline',
-        'hover:text-white'
+        'hover:text-white',
       )}
     >
       <div className={clsx('flex items-center gap-2')}>
-        <span>⭐️</span>
+        <span>🎉</span>
         <span>
-          If you find <span className={clsx('font-semibold')}>win32</span>{' '}
-          useful, you can contribute to its growth by giving it a star on GitHub
+          <span className={clsx('font-semibold')}>win32 v6</span> is out!
         </span>
-        <span>⭐️</span>
+        {/* <span>⭐️</span>
+        <span>
+          If you find <span className={clsx('font-semibold')}>win32</span>{' '},
+          consider starring the project on GitHub to support its continued
+          development
+        </span>*/}
       </div>
     </a>
   );
@@ -131,7 +134,7 @@ const GlowSmall = (props: SVGProps<SVGSVGElement>) => (
     className={clsx(
       'animate-announcement-bar-glow',
       'opacity-1',
-      props.className
+      props.className,
     )}
   >
     <circle cx={40} r={40} fill={`url(#${props.id}-a)`} fillOpacity={0.5} />
@@ -161,7 +164,7 @@ const GlowBig = (props: SVGProps<SVGSVGElement>) => (
     className={clsx(
       'animate-announcement-bar-glow',
       'opacity-1',
-      props.className
+      props.className,
     )}
   >
     <circle

@@ -1,62 +1,84 @@
-// Demonstrates using the COM IShellLink interface to create a shell shortcut.
+// Creates a Windows shell shortcut (.lnk) using COM.
 
-// ignore_for_file: non_constant_identifier_names
-
-import 'dart:ffi';
+import 'dart:io';
 
 import 'package:args/args.dart';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-void createShortcut(String path, String pathLink, String? description) {
-  final shellLink = ShellLink.createInstance();
-  final lpPath = path.toNativeUtf16();
-  final lpPathLink = pathLink.toNativeUtf16();
-  final lpDescription = description?.toNativeUtf16() ?? nullptr;
+void createShortcut({
+  required String targetPath,
+  required String shortcutPath,
+  String? description,
+}) {
+  using((arena) {
+    // Create IShellLink instance.
+    final shellLink = arena.com<IShellLink>(ShellLink)
+      // Set the shortcut target.
+      ..setPath(arena.pcwstr(targetPath));
 
-  try {
-    shellLink.setPath(lpPath);
-    if (description != null) shellLink.setDescription(lpDescription);
+    // Optional metadata.
+    if (description != null) {
+      shellLink.setDescription(arena.pcwstr(description));
+    }
 
-    IPersistFile.from(shellLink).save(lpPathLink, TRUE);
-  } finally {
-    free(lpPath);
-    free(lpPathLink);
-    if (lpDescription != nullptr) free(lpDescription);
-  }
+    // Persist the shortcut to disk.
+    arena
+        .adopt(shellLink.queryInterface<IPersistFile>())
+        .save(arena.pcwstr(shortcutPath), true);
+  });
 }
 
 void main(List<String> args) {
-  final parser = ArgParser(usageLineLength: 80)
+  final parser = ArgParser()
     ..addOption(
-      'path',
-      abbr: 'p',
+      'target',
+      abbr: 't',
       mandatory: true,
-      help: r'Absolute path for which to create a shortcut (e.g. c:\test.txt).',
+      help: r'Absolute path to the target file (e.g., C:\Windows\notepad.exe).',
     )
     ..addOption(
-      'shortcut',
-      abbr: 's',
+      'output',
+      abbr: 'o',
       mandatory: true,
-      help: 'The name of the shortcut (e.g. shortcut.lnk).',
+      help:
+          r'Absolute path to the .lnk file to create (e.g., C:\Shortcuts\Notepad.lnk).',
     )
     ..addOption(
       'description',
       abbr: 'd',
-      help: 'Optional description for the shortcut.',
+      help: 'Optional shortcut description.',
     );
 
+  final ArgResults results;
+
   try {
-    final results = parser.parse(args);
-    CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
-    createShortcut(
-      results['path'] as String,
-      results['shortcut'] as String,
-      results['description'] as String?,
-    );
+    results = parser.parse(args);
   } on FormatException {
-    print('Creates a Windows shortcut to a given file.\n');
-    print('Usage: shortcut [arguments]\n');
+    print('Creates a Windows shortcut (.lnk) using COM.\n');
+    print('Usage:\n');
+    print(
+      '  shortcut --target <path> --output <path> [--description <text>]\n',
+    );
     print(parser.usage);
+    return;
   }
+
+  final targetPath = results.option('target')!;
+  final shortcutPath = results.option('output')!;
+  final description = results.option('description');
+
+  if (!File(targetPath).existsSync()) {
+    stderr.writeln('Target file does not exist: $targetPath');
+    exit(1);
+  }
+
+  final hr = CoInitializeEx(COINIT_MULTITHREADED);
+  if (hr.isError) throw WindowsException(hr);
+  createShortcut(
+    targetPath: targetPath,
+    shortcutPath: shortcutPath,
+    description: description,
+  );
+  print('Shortcut created: $shortcutPath');
 }

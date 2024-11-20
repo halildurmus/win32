@@ -37,7 +37,7 @@ export const Menu: React.FC<Props> = ({ variant = 'landing' }) => {
                       'w-[672px]',
                       'bg-white',
                       variant === 'landing' && 'dark:bg-gray-900',
-                      variant === 'blog' && 'dark:bg-win32-react-dark-code'
+                      variant === 'blog' && 'dark:bg-win32-react-dark-code',
                     )}
                   >
                     {item.items.map((subItem) => (
@@ -60,19 +60,20 @@ export const Menu: React.FC<Props> = ({ variant = 'landing' }) => {
                         variant === 'blog' &&
                           'bg-win32-react-1 dark:bg-win32-react-7',
                         'flex items-center',
-                        'py-4 px-7'
+                        'py-4 px-7',
                       )}
                     >
                       <GitHubStarIcon />
                       <div
                         className={clsx(
                           'ml-4',
-                          'dark:text-gray-400 text-gray-600'
+                          'dark:text-gray-400 text-gray-600',
                         )}
                       >
                         If you like{' '}
                         <span className={clsx('font-semibold')}>win32</span>,
-                        don’t forget to star us on GitHub!
+                        consider starring the project on GitHub to support its
+                        continued development.
                       </div>
                     </div>
                   </Link>
@@ -87,8 +88,8 @@ export const Menu: React.FC<Props> = ({ variant = 'landing' }) => {
                       'p-4',
                       'w-[336px]',
                       'bg-white',
-                      variant === 'landing' && ' dark:bg-gray-900',
-                      variant === 'blog' && 'dark:bg-win32-react-dark-code'
+                      variant === 'landing' && 'dark:bg-gray-900',
+                      variant === 'blog' && 'dark:bg-win32-react-dark-code',
                     )}
                   >
                     {item.items.map((subItem) => (
@@ -110,7 +111,7 @@ export const Menu: React.FC<Props> = ({ variant = 'landing' }) => {
                       variant === 'blog' &&
                         'bg-win32-react-1 dark:bg-win32-react-7',
                       'flex justify-between items-center',
-                      'py-4 px-7'
+                      'py-4 px-7',
                     )}
                   >
                     <div
@@ -118,7 +119,7 @@ export const Menu: React.FC<Props> = ({ variant = 'landing' }) => {
                         variant === 'landing' &&
                           'text-gray-600 dark:text-gray-400 ',
                         variant === 'blog' &&
-                          'text-win32-react-5 dark:text-win32-react-4'
+                          'text-win32-react-5 dark:text-win32-react-4',
                       )}
                     >
                       Join the community!
@@ -130,7 +131,7 @@ export const Menu: React.FC<Props> = ({ variant = 'landing' }) => {
                             className={clsx(
                               'size-6',
                               'text-gray-500 dark:text-gray-400',
-                              'hover:text-gray-800 dark:hover:text-gray-300'
+                              'hover:text-gray-800 dark:hover:text-gray-300',
                             )}
                           />
                         </Link>
@@ -148,8 +149,8 @@ export const Menu: React.FC<Props> = ({ variant = 'landing' }) => {
                       'p-4',
                       'w-[336px]',
                       'bg-white',
-                      variant === 'landing' && ' dark:bg-gray-900',
-                      variant === 'blog' && 'dark:bg-win32-react-dark-code'
+                      variant === 'landing' && 'dark:bg-gray-900',
+                      variant === 'blog' && 'dark:bg-win32-react-dark-code',
                     )}
                   >
                     {item.items.map((subItem) => (
@@ -172,14 +173,14 @@ export const Menu: React.FC<Props> = ({ variant = 'landing' }) => {
                         variant === 'blog' &&
                           'bg-win32-react-1 dark:bg-win32-react-7',
                         'flex items-center',
-                        'py-4 px-7'
+                        'py-4 px-7',
                       )}
                     >
                       <GitHubSponsorIcon className={clsx('size-6')} />
                       <div
                         className={clsx(
                           'ml-2',
-                          'text-gray-600 dark:text-gray-400'
+                          'text-gray-600 dark:text-gray-400',
                         )}
                       >
                         Become a sponsor!

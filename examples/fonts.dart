@@ -3,22 +3,21 @@
 import 'dart:collection';
 import 'dart:ffi';
 
-import 'package:ffi/ffi.dart';
+import 'package:ffi_leak_tracker/ffi_leak_tracker.dart';
 import 'package:win32/win32.dart';
 
 void main() {
-  final hDC = GetDC(NULL);
-  final searchFont = calloc<LOGFONT>()..ref.lfCharSet = ANSI_CHARSET;
+  final hDC = GetDC(null);
+  final searchFont = adaptiveCalloc<LOGFONT>()..ref.lfCharSet = ANSI_CHARSET;
 
   final fontNames = SplayTreeSet<String>();
 
   int enumerateFonts(
     Pointer<LOGFONT> logFont,
     Pointer<TEXTMETRIC> _,
-    int __,
-    int ___,
+    int _,
+    int _,
   ) {
-    // Get extended information from the font
     final logFontEx = logFont.cast<ENUMLOGFONTEX>();
     fontNames.add(logFontEx.ref.elfFullName);
     return TRUE; // continue enumeration
@@ -29,7 +28,13 @@ void main() {
     exceptionalReturn: 0,
   );
 
-  EnumFontFamiliesEx(hDC, searchFont, lpProc.nativeFunction, 0, 0);
+  EnumFontFamiliesEx(
+    hDC,
+    searchFont,
+    lpProc.nativeFunction,
+    const LPARAM(0),
+    0,
+  );
   lpProc.close();
 
   print('${fontNames.length} font families discovered.');
@@ -38,5 +43,4 @@ void main() {
   }
 
   free(searchFont);
-  print('Done.');
 }

@@ -40,7 +40,7 @@ jobs:
         working-directory: packages/generator
 
       - name: 🚀 Run Code Generation
-        run: dart tools\generate.dart
+        run: dart run tools\generate.dart
 
       - name: 🔍 Verify Code Generation
         run: git diff --exit-code

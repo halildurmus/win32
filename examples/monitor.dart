@@ -42,154 +42,141 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-final monitors = <int>[];
+final monitors = <HMONITOR>[];
 
-int enumMonitorCallback(int hMonitor, int hDC, Pointer lpRect, int lParam) {
-  monitors.add(hMonitor);
+int enumMonitorCallback(
+  Pointer hMonitor,
+  Pointer hDC,
+  Pointer<RECT> lpRect,
+  int lParam,
+) {
+  monitors.add(HMONITOR(hMonitor));
   return TRUE;
 }
 
 bool testBitmask(int bitmask, int value) => bitmask & value == value;
 
-int findPrimaryMonitor(List<int> monitors) {
-  final monitorInfo = calloc<MONITORINFO>()..ref.cbSize = sizeOf<MONITORINFO>();
+HMONITOR findPrimaryMonitor(List<HMONITOR> monitors) => using((arena) {
+  final monitorInfo = arena<MONITORINFO>()..ref.cbSize = sizeOf<MONITORINFO>();
 
   for (final monitor in monitors) {
-    final result = GetMonitorInfo(monitor, monitorInfo);
-    if (result == TRUE) {
+    if (GetMonitorInfo(monitor, monitorInfo)) {
       if (testBitmask(monitorInfo.ref.dwFlags, MONITORINFOF_PRIMARY)) {
-        free(monitorInfo);
         return monitor;
       }
     }
   }
 
-  free(monitorInfo);
-  return 0;
-}
+  return HMONITOR(nullptr);
+});
 
 void printMonitorCapabilities(int capabilitiesBitmask) {
   if (capabilitiesBitmask == MC_CAPS_NONE) {
-    print(' - No capabilities supported');
+    print('• No capabilities supported');
   }
   if (testBitmask(capabilitiesBitmask, MC_CAPS_MONITOR_TECHNOLOGY_TYPE)) {
-    print(' - Supports technology type functions');
+    print('• Supports technology type functions');
   }
   if (testBitmask(capabilitiesBitmask, MC_CAPS_BRIGHTNESS)) {
-    print(' - Supports brightness functions');
+    print('• Supports brightness functions');
   }
   if (testBitmask(capabilitiesBitmask, MC_CAPS_CONTRAST)) {
-    print(' - Supports contrast functions');
+    print('• Supports contrast functions');
   }
   if (testBitmask(capabilitiesBitmask, MC_CAPS_COLOR_TEMPERATURE)) {
-    print(' - Supports color temperature functions');
+    print('• Supports color temperature functions');
   }
 }
 
 void main() {
-  var result = FALSE;
-
-  final lpfnEnum = NativeCallable<MONITORENUMPROC>.isolateLocal(
-    enumMonitorCallback,
-    exceptionalReturn: 0,
-  );
-
-  result = EnumDisplayMonitors(
-    NULL, // all displays
-    nullptr, // no clipping region
-    lpfnEnum.nativeFunction,
-    NULL,
-  );
-  if (result == FALSE) {
-    throw WindowsException(result);
-  }
-
-  lpfnEnum.close();
-
-  print('Number of monitors: ${monitors.length}');
-
-  final primaryMonitorHandle = findPrimaryMonitor(monitors);
-  print('Primary monitor handle: $primaryMonitorHandle');
-
-  final physicalMonitorCountPtr = calloc<DWORD>();
-  result = GetNumberOfPhysicalMonitorsFromHMONITOR(
-    primaryMonitorHandle,
-    physicalMonitorCountPtr,
-  );
-  if (result == FALSE) {
-    print('No physical monitors attached.');
-    free(physicalMonitorCountPtr);
-    return;
-  }
-
-  print('Number of physical monitors: ${physicalMonitorCountPtr.value}');
-
-  // We need to allocate space for a PHYSICAL_MONITOR struct for each physical
-  // monitor. Each struct comprises a HANDLE and a 128-character UTF-16 array.
-  // Since fixed-size arrays are difficult to allocate with Dart FFI at present,
-  // and since we only need the first entry, we can manually allocate space of
-  // the right size.
-  final physicalMonitorArray = calloc<PHYSICAL_MONITOR>(
-    physicalMonitorCountPtr.value,
-  );
-
-  result = GetPhysicalMonitorsFromHMONITOR(
-    primaryMonitorHandle,
-    physicalMonitorCountPtr.value,
-    physicalMonitorArray,
-  );
-  if (result == FALSE) {
-    throw WindowsException(result);
-  }
-  // Retrieve the monitor handle for the first physical monitor in the returned
-  // array.
-  final physicalMonitorHandle = physicalMonitorArray.cast<IntPtr>().value;
-  print('Physical monitor handle: $physicalMonitorHandle');
-  final physicalMonitorDescription = (physicalMonitorArray + sizeOf<IntPtr>())
-      .cast<Utf16>()
-      .toDartString();
-  print('Physical monitor description: $physicalMonitorDescription');
-
-  final monitorCapabilitiesPtr = calloc<DWORD>();
-  final monitorColorTemperaturesPtr = calloc<DWORD>();
-
-  result = GetMonitorCapabilities(
-    physicalMonitorHandle,
-    monitorCapabilitiesPtr,
-    monitorColorTemperaturesPtr,
-  );
-  if (result == TRUE) {
-    print('Capabilities: ');
-    printMonitorCapabilities(monitorCapabilitiesPtr.value);
-  } else {
-    print('Monitor does not support DDC/CI.');
-  }
-
-  final minimumBrightnessPtr = calloc<DWORD>();
-  final currentBrightnessPtr = calloc<DWORD>();
-  final maximumBrightnessPtr = calloc<DWORD>();
-  result = GetMonitorBrightness(
-    physicalMonitorHandle,
-    minimumBrightnessPtr,
-    currentBrightnessPtr,
-    maximumBrightnessPtr,
-  );
-  if (result == TRUE) {
-    print(
-      'Brightness: minimum(${minimumBrightnessPtr.value}), '
-      'current(${currentBrightnessPtr.value}), '
-      'maximum(${maximumBrightnessPtr.value})',
+  using((arena) {
+    final lpfnEnum = NativeCallable<MONITORENUMPROC>.isolateLocal(
+      enumMonitorCallback,
+      exceptionalReturn: 0,
     );
-  }
 
-  DestroyPhysicalMonitors(physicalMonitorCountPtr.value, physicalMonitorArray);
+    EnumDisplayMonitors(
+      null, // all displays
+      null, // no clipping region
+      lpfnEnum.nativeFunction,
+      const LPARAM(0),
+    );
+    lpfnEnum.close();
 
-  // free all the heap-allocated variables
-  free(physicalMonitorArray);
-  free(physicalMonitorCountPtr);
-  free(monitorCapabilitiesPtr);
-  free(monitorColorTemperaturesPtr);
-  free(minimumBrightnessPtr);
-  free(currentBrightnessPtr);
-  free(maximumBrightnessPtr);
+    print('Number of monitors: ${monitors.length}');
+
+    final primaryMonitorHandle = findPrimaryMonitor(monitors);
+    print('Primary monitor handle: $primaryMonitorHandle');
+
+    final physicalMonitorCountPtr = arena<DWORD>();
+    if (!GetNumberOfPhysicalMonitorsFromHMONITOR(
+      primaryMonitorHandle,
+      physicalMonitorCountPtr,
+    ).value) {
+      print('No physical monitors attached.');
+      return;
+    }
+
+    print('Number of physical monitors: ${physicalMonitorCountPtr.value}');
+
+    // We need to allocate space for a PHYSICAL_MONITOR struct for each physical
+    // monitor. Each struct comprises a HANDLE and a 128-character UTF-16 array.
+    // Since fixed-size arrays are difficult to allocate with Dart FFI at present,
+    // and since we only need the first entry, we can manually allocate space of
+    // the right size.
+    final physicalMonitorArray = arena<PHYSICAL_MONITOR>(
+      physicalMonitorCountPtr.value,
+    );
+
+    GetPhysicalMonitorsFromHMONITOR(
+      primaryMonitorHandle,
+      physicalMonitorCountPtr.value,
+      physicalMonitorArray,
+    );
+
+    // Retrieve the monitor handle for the first physical monitor in the returned
+    // array.
+    final physicalMonitorHandle = physicalMonitorArray.cast<HANDLE>().value;
+    print('Physical monitor handle: $physicalMonitorHandle');
+    final physicalMonitorDescription =
+        physicalMonitorArray.ref.szPhysicalMonitorDescription;
+    print('Physical monitor description: $physicalMonitorDescription');
+
+    final monitorCapabilitiesPtr = arena<DWORD>();
+    final monitorColorTemperaturesPtr = arena<DWORD>();
+
+    var result = GetMonitorCapabilities(
+      HANDLE(physicalMonitorHandle),
+      monitorCapabilitiesPtr,
+      monitorColorTemperaturesPtr,
+    );
+    if (result == TRUE) {
+      print('Capabilities: ');
+      printMonitorCapabilities(monitorCapabilitiesPtr.value);
+    } else {
+      print('Monitor does not support DDC/CI.');
+    }
+
+    final minimumBrightnessPtr = arena<DWORD>();
+    final currentBrightnessPtr = arena<DWORD>();
+    final maximumBrightnessPtr = arena<DWORD>();
+    result = GetMonitorBrightness(
+      HANDLE(physicalMonitorHandle),
+      minimumBrightnessPtr,
+      currentBrightnessPtr,
+      maximumBrightnessPtr,
+    ).value;
+    if (result == TRUE) {
+      print(
+        'Brightness: minimum(${minimumBrightnessPtr.value}), '
+        'current(${currentBrightnessPtr.value}), '
+        'maximum(${maximumBrightnessPtr.value})',
+      );
+    }
+
+    DestroyPhysicalMonitors(
+      physicalMonitorCountPtr.value,
+      physicalMonitorArray,
+    );
+  });
 }

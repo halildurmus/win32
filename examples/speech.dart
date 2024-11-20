@@ -9,11 +9,24 @@ const textToSpeak =
     'Dart is a portable, high-performance language from Google.';
 
 void main() {
-  CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
+  CoInitializeEx(COINIT_MULTITHREADED);
+  using((arena) {
+    final speechVoice = arena.com<ISpeechVoice>(SpVoice);
+    final tokens = arena.adopt(
+      speechVoice.getVoices(BSTR(nullptr), BSTR(nullptr))!,
+    );
+    print('There are ${tokens.count} voices available for text-to-speech:');
 
-  final speechEngine = SpVoice.createInstance();
-  final pText = textToSpeak.toNativeUtf16();
-  speechEngine.speak(pText, SPF_IS_NOT_XML, nullptr);
-
-  free(pText);
+    for (var i = 0; i < tokens.count; i++) {
+      final token = arena.adopt(tokens.item(i)!);
+      final pDescription = arena.using(token.getDescription(0), SysFreeString);
+      final descriptionString = pDescription.toDartString();
+      print('• Voice ${i + 1}: $descriptionString');
+      final text = arena.bstr(textToSpeak);
+      // Set the current voice for text-to-speech.
+      speechVoice
+        ..setVoice(token)
+        ..speak(text, SVSFIsNotXML);
+    }
+  });
 }

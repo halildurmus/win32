@@ -36,7 +36,7 @@ export const LandingFeatures: FC<Props> = ({ className }) => (
             'dark:text-win32-cyan-alt dark:drop-shadow-[0_0_30px_rgba(71,235,235,0.25)]'
           )}
         >
-          win32
+          package:win32
         </span>
         .
       </h2>
@@ -49,7 +49,7 @@ export const LandingFeatures: FC<Props> = ({ className }) => (
         )}
       >
         Explore the features that make{' '}
-        <span className="font-semibold">win32</span> a powerful tool for
+        <span className="font-semibold">package:win32</span> a powerful tool for
         building Windows applications with Dart.
       </p>
     </div>

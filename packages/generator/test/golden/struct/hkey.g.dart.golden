@@ -1,0 +1,12 @@
+HKEY|
+/// The handle must be closed using the [RegCloseKey] function.
+///
+/// Invalid handle values are: `-1`, `0`.
+extension type const HKEY(Pointer _) implements Pointer {
+  /// Whether this handle is valid (i.e., not one of the invalid handle values).
+  bool get isValid =>
+      this != Pointer.fromAddress(-1) && this != Pointer.fromAddress(0);
+
+  /// Closes the handle.
+  WIN32_ERROR close() => RegCloseKey(this);
+}

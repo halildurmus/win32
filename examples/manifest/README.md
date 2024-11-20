@@ -1,56 +1,96 @@
 # Application Manifests
 
-This example demonstrates the use of app manifests in Windows.
+This example demonstrates how [Windows application manifests] control
+execution-level behavior, specifically whether an application runs with standard
+user privileges or requests elevation via User Account Control (UAC).
 
-By default, Windows emphasizes maximum backwards compatibility, even to the
-point of modeling older behavior on newer systems. For example, if you call the
-`GetVersionEx()` function to ask Windows what version it is, it will return the
-same version information, regardless of whether you are running Windows 8,
-Windows 8.1, or Windows 10.
+By supplying an app manifest alongside an executable, you explicitly declare the
+required execution level, allowing Windows to enforce privilege boundaries
+consistently and predictably.
 
-You can tell Windows that your app is aware of later versions with an [app
-manifest](https://learn.microsoft.com/windows/win32/sysinfo/targeting-your-application-at-windows-8-1),
-which opts your app into new behavior.
+## Overview
 
-You can see this behavior in action by running `version.dart` (which calls
-`GetVersionEx()`) in a few different configurations. The documented behavior
-below assumes that you are running Windows 10.
+- **Without a manifest:** the application runs with standard user privileges.
+- **With a manifest requesting elevation:** Windows displays a UAC prompt before
+  launch.
+- **Manifest resolution is name-based:** the manifest must match the executable
+  name exactly.
 
-Note that Windows 11 reports itself as 10.0.22000.0, so these APIs cannot be
-used to differentiate between Windows 10 and Windows 11. For that, you should
-check the build number. An example of that can be found in `sysinfo.dart`.
+This behavior applies equally to native binaries and Dart-compiled executables.
 
 ## 1. Running a Dart file directly
 
 ```cmd
-dart version.dart
+dart run manifest.dart
 ```
 
-In this scenario, the Dart command-line utility is called to run the Dart file.
-Since no app manifest exists, this command returns `Windows 6.2` (which
-is the version number reported by Windows 8).
+Here, the Dart CLI launches the script directly. Since no executable or app
+manifest is involved, the process always runs with **standard user privileges**
+and **never triggers UAC**, regardless of the script’s behavior.
 
-## 2. Compiling with an app manifest
+## 2. Building and running with an app manifest
 
-Run this command to compile `version.dart`:
+Build the application from the `examples/manifest` directory:
 
 ```cmd
-dart compile exe -o version.exe version.dart
+dart build cli -o build
 ```
 
-Supplied in this folder is `version.exe.manifest`, which is an app compat
-manifest that expressly identifies that this app is designed for Windows 10.
+The generated output has the following structure:
 
-Now, you should see the same app code respond with `Windows 10.0`.
+```text
+build/
+  bundle/
+    bin/
+      manifest.exe
+    lib/
+      win32.dll
+```
 
-## 3. Executing without an app manifest
+A corresponding manifest file, `manifest.exe.manifest`, is provided. This file
+explicitly requests administrator privileges.
 
-If you copy or rename the executable to something else and run it again:
+Copy the manifest next to the executable:
 
 ```cmd
-copy version.exe version2.exe
-version2.exe
+copy resources\manifest.exe.manifest build\bundle\bin\
 ```
 
-You'll see that the same executable, in the absence of a matching app manifest,
-reports `Windows 6.2` as before.
+Now run the application:
+
+```cmd
+build\bundle\bin\manifest.exe
+```
+
+Windows detects the manifest, displays a UAC prompt, and — if approved —
+launches the process with **elevated privileges**.
+
+## 3. Running the same executable without a manifest
+
+Windows associates manifests strictly by filename. If the manifest is missing
+or the executable name changes, the manifest is ignored.
+
+For example:
+
+```cmd
+copy build\bundle\bin\manifest.exe build\bundle\bin\manifest2.exe
+build\bundle\bin\manifest2.exe
+```
+
+Since `manifest2.exe.manifest` does not exist, Windows launches the executable
+with **standard user privileges**, without displaying a UAC prompt.
+
+The binary itself is unchanged — only the presence and name of the manifest
+affects elevation behavior.
+
+## Important Notes
+
+- Disabling UAC changes system-wide behavior. If UAC is turned off and you are
+logged in as an administrator, all processes effectively run elevated,
+regardless of manifest settings.
+- Relying on disabled UAC is strongly discouraged; manifests should always
+declare the intended execution level explicitly.
+- Elevation cannot be requested dynamically at runtime. It must be declared
+before process creation via the manifest.
+
+[Windows application manifests]: https://learn.microsoft.com/windows/win32/sysinfo/targeting-your-application-at-windows-8-1

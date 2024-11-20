@@ -2,13 +2,15 @@
 
 import 'dart:ffi';
 
-import 'package:ffi/ffi.dart';
+import 'package:ffi_leak_tracker/ffi_leak_tracker.dart';
 import 'package:win32/win32.dart';
 
 void main() {
-  CoInitializeEx(nullptr, COINIT_MULTITHREADED);
-  XInputEnable(TRUE);
-  final state = calloc<XINPUT_STATE>();
+  CoInitializeEx(COINIT_MULTITHREADED);
+
+  XInputEnable(true);
+  final state = adaptiveCalloc<XINPUT_STATE>();
+
   for (var controller = 0; controller < XUSER_MAX_COUNT; controller++) {
     ZeroMemory(state, sizeOf<XINPUT_STATE>());
     final dwResult = XInputGetState(controller, state);
@@ -17,10 +19,9 @@ void main() {
     } else if (dwResult == ERROR_DEVICE_NOT_CONNECTED) {
       print('Controller $controller is not connected.');
     } else {
-      throw WindowsException(dwResult);
+      throw WindowsException(WIN32_ERROR(dwResult).toHRESULT());
     }
   }
 
   free(state);
-  print('All done');
 }

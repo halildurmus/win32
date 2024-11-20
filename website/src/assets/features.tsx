@@ -16,9 +16,9 @@ export type Feature = {
 export const features = [
   {
     icon: WindowsAPIIcon,
-    title: 'Direct access to Windows API',
+    title: 'Direct access to Windows APIs',
     description:
-      'Invoke Windows API functions directly from Dart without the need for a C compiler or additional setup.',
+      'Invoke Windows APIs directly from Dart without the need for a C compiler or additional setup.',
   },
   {
     icon: COMIcon,

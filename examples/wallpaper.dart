@@ -1,68 +1,90 @@
-// Shows retrieval of various information from the IDesktopWallpaper interface.
+// Demonstrates querying desktop wallpaper configuration using the
+// IDesktopWallpaper COM interface.
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-late DesktopWallpaper wallpaper;
+final class DesktopWallpaperInfo {
+  DesktopWallpaperInfo(this._wallpaper);
 
-void printWallpaper() {
-  final pathPtr = calloc<Pointer<Utf16>>();
+  final IDesktopWallpaper _wallpaper;
 
-  try {
-    final hr = wallpaper.getWallpaper(nullptr, pathPtr);
-
-    switch (hr) {
-      case S_OK:
-        final path = pathPtr.value.toDartString();
-        print(
-          path.isEmpty ? 'No wallpaper is set.' : 'Wallpaper path is: $path',
-        );
-
-      case S_FALSE:
-        print(
-          'Different monitors are displaying different wallpapers, or a '
-          'slideshow is running.',
-        );
-
-      default:
-        throw WindowsException(hr);
-    }
-  } finally {
-    free(pathPtr);
+  /// Returns the global wallpaper path, if one is in use.
+  ///
+  /// If the desktop is configured with per-monitor wallpapers or a slideshow,
+  /// this will return `null`.
+  String? get globalWallpaper {
+    final ptr = _wallpaper.getWallpaper(PCWSTR(nullptr));
+    final path = ptr.toDartString();
+    free(ptr);
+    return path.isEmpty ? null : path;
   }
-}
 
-void printBackgroundColor() {
-  final colorPtr = calloc<COLORREF>();
+  /// Returns the wallpaper path for each monitor.
+  Map<String, String> get perMonitorWallpapers {
+    final result = <String, String>{};
+    final count = _wallpaper.getMonitorDevicePathCount();
 
-  try {
-    final hr = wallpaper.getBackgroundColor(colorPtr);
+    for (var i = 0; i < count; i++) {
+      final monitorId = _wallpaper.getMonitorDevicePathAt(i);
+      final wallpaper = _wallpaper.getWallpaper(PCWSTR(monitorId));
+      final id = monitorId.toDartString();
+      final path = wallpaper.toDartString();
+      free(monitorId);
+      free(wallpaper);
 
-    if (SUCCEEDED(hr)) {
-      final color = colorPtr.value;
-      print(
-        'Background color is: RGB(${GetRValue(color)}, '
-        '${GetGValue(color)}, ${GetBValue(color)})',
-      );
-    } else {
-      throw WindowsException(hr);
+      if (path.isNotEmpty) {
+        result[id] = path;
+      }
     }
-  } finally {
-    free(colorPtr);
+
+    return result;
+  }
+
+  /// Returns the desktop background color as (R, G, B).
+  ({int r, int g, int b}) get backgroundColor {
+    final color = _wallpaper.getBackgroundColor();
+    return (r: GetRValue(color), g: GetGValue(color), b: GetBValue(color));
   }
 }
 
 void main() {
-  final hr = CoInitializeEx(
-    nullptr,
-    COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE,
-  );
-  if (FAILED(hr)) throw WindowsException(hr);
+  CoInitializeEx(COINIT_MULTITHREADED);
 
-  wallpaper = DesktopWallpaper.createInstance();
+  using((arena) {
+    final wallpaper = arena.com<IDesktopWallpaper>(DesktopWallpaper);
+    final info = DesktopWallpaperInfo(wallpaper);
+    print('Desktop wallpaper information:\n');
 
-  printWallpaper();
-  printBackgroundColor();
+    final global = info.globalWallpaper;
+    if (global != null) {
+      print('Global wallpaper:');
+      print('  $global\n');
+    } else {
+      print(
+        'No single global wallpaper detected '
+        '(per-monitor wallpapers or slideshow in use).\n',
+      );
+
+      final perMonitor = info.perMonitorWallpapers;
+      if (perMonitor.isEmpty) {
+        print('No per-monitor wallpapers reported.');
+      } else {
+        print('Per-monitor wallpapers:');
+        for (final entry in perMonitor.entries) {
+          print('  ${entry.key}');
+          print('    ${entry.value}');
+        }
+      }
+      print('');
+    }
+
+    final color = info.backgroundColor;
+    print(
+      'Background color: '
+      'RGB(${color.r}, ${color.g}, ${color.b})',
+    );
+  });
 }

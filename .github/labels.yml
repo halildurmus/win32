@@ -2,6 +2,10 @@
   color: '8C9FDB'
   description: Issue with COM support
 
+- name: 'package: ffi_leak_tracker'
+  color: '2FE436'
+  description: Issue with package:ffi_leak_tracker
+
 - name: 'package: generator'
   color: '2FE436'
   description: Issue with package:generator

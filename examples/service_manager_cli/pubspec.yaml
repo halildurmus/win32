@@ -1,17 +1,18 @@
 name: service_manager_cli
-description: Service Manager CLI
 publish_to: none
 
 environment:
-  sdk: ^3.8.0
+  sdk: ^3.11.0
+
+resolution: workspace
 
 dependencies:
-  ffi: ^2.1.4
-  win32:
-    path: ../../packages/win32
+  args: ^2.7.0
+  ffi: ^2.2.0
+  win32: ^6.0.0
 
 dev_dependencies:
-  halildurmus_lints: ^1.0.1
+  halildurmus_lints: ^2.0.0
 
 executables:
   service_manager_cli:

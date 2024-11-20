@@ -1,0 +1,2 @@
+HKEY_LOCAL_MACHINE|
+final HKEY_LOCAL_MACHINE = HKEY(Pointer.fromAddress(-2147483646));

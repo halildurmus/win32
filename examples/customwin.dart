@@ -1,15 +1,17 @@
-// Draw a circular window
+// Example creating a circular (elliptical) window with custom shape.
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
+import 'package:ffi_leak_tracker/ffi_leak_tracker.dart';
 import 'package:win32/win32.dart';
 
-int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
+int mainWindowProc(Pointer hWnd, int uMsg, int wParam, int lParam) {
+  final hwnd = HWND(hWnd);
   switch (uMsg) {
     case WM_CREATE:
       final hRgn = CreateEllipticRgn(0, 0, 500, 500);
-      SetWindowRgn(hWnd, hRgn, TRUE);
+      SetWindowRgn(hwnd, hRgn, true);
       return 0;
 
     case WM_DESTROY:
@@ -18,93 +20,91 @@ int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
 
     case WM_NCHITTEST:
       // A click on the client area is treated as a click on the title bar
-      if (DefWindowProc(hWnd, uMsg, wParam, lParam) == HTCLIENT) {
+      if (DefWindowProc(hwnd, uMsg, WPARAM(wParam), LPARAM(lParam)) ==
+          HTCLIENT) {
         return HTCAPTION;
       }
       return 0;
 
     case WM_PAINT:
-      final ps = calloc<PAINTSTRUCT>();
-      final hdc = BeginPaint(hWnd, ps);
+      final ps = adaptiveCalloc<PAINTSTRUCT>();
+      final hdc = BeginPaint(hwnd, ps);
       final hPen = CreatePen(PS_SOLID, 4, RGB(64, 64, 64));
-      final hPrevPen = SelectObject(hdc, hPen);
+      final hPrevPen = SelectObject(hdc, HGDIOBJ(hPen));
 
       Ellipse(hdc, 0, 0, 499, 499);
       SelectObject(hdc, hPrevPen);
-      DeleteObject(hPen);
+      hPen.close();
 
-      final rect = calloc<RECT>();
-      final msg = TEXT('What a strange window!');
+      final rect = adaptiveCalloc<RECT>();
+      final msg = 'What a strange window!'.toPcwstr();
 
-      GetClientRect(hWnd, rect);
+      GetClientRect(hwnd, rect);
       DrawText(hdc, msg, -1, rect, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 
-      EndPaint(hWnd, ps);
+      EndPaint(hwnd, ps);
 
-      free(rect);
       free(msg);
+      free(rect);
       free(ps);
 
       return 0;
   }
-  return DefWindowProc(hWnd, uMsg, wParam, lParam);
+  return DefWindowProc(hwnd, uMsg, WPARAM(wParam), LPARAM(lParam));
 }
 
 void main() => initApp(winMain);
 
-void winMain(int hInstance, List<String> args, int nShowCmd) {
-  // Register the window class.
-  final className = TEXT('Sample Window Class');
+void winMain(HINSTANCE hInstance, List<String> args, SHOW_WINDOW_CMD nShowCmd) {
+  using((arena) {
+    final className = arena.pcwstr('Sample Window Class');
 
-  final lpfnWndProc = NativeCallable<WNDPROC>.isolateLocal(
-    mainWindowProc,
-    exceptionalReturn: 0,
-  );
+    final lpfnWndProc = NativeCallable<WNDPROC>.isolateLocal(
+      mainWindowProc,
+      exceptionalReturn: 0,
+    );
 
-  final wc = calloc<WNDCLASS>()
-    ..ref.style = CS_HREDRAW | CS_VREDRAW
-    ..ref.lpfnWndProc = lpfnWndProc.nativeFunction
-    ..ref.hInstance = hInstance
-    ..ref.lpszClassName = className
-    ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
-    ..ref.hbrBackground = GetStockObject(WHITE_BRUSH);
-  RegisterClass(wc);
+    final wc = arena<WNDCLASS>();
+    wc.ref
+      ..style = CS_HREDRAW | CS_VREDRAW
+      ..lpfnWndProc = lpfnWndProc.nativeFunction
+      ..hInstance = hInstance
+      ..lpszClassName = PWSTR(className)
+      ..hCursor = LoadCursor(null, IDC_ARROW).value
+      ..hbrBackground = HBRUSH(GetStockObject(WHITE_BRUSH));
+    RegisterClass(wc);
 
-  // Create the window.
-  final hWnd = CreateWindowEx(
-    0, // Optional window styles.
-    className, // Window class
-    nullptr, // Window caption
-    WS_BORDER, // Window style
-    // Size and position
-    CW_USEDEFAULT,
-    CW_USEDEFAULT,
-    500,
-    500,
-    NULL, // Parent window
-    NULL, // Menu
-    hInstance, // Instance handle
-    nullptr, // Additional application data
-  );
+    // Create the window.
+    final Win32Result(value: hWnd, :error) = CreateWindowEx(
+      WS_EX_LEFT, // Optional window styles.
+      className, // Window class
+      null, // Window caption
+      WS_BORDER, // Window style
+      // Size and position
+      CW_USEDEFAULT,
+      CW_USEDEFAULT,
+      500,
+      500,
+      null, // Parent window
+      null, // Menu
+      hInstance, // Instance handle
+      null, // Additional application data
+    );
+    if (hWnd.isNull) throw WindowsException(error.toHRESULT());
 
-  // Remove the title bar
-  SetWindowLongPtr(hWnd, GWL_STYLE, 0);
+    // Remove the title bar
+    SetWindowLongPtr(hWnd, GWL_STYLE, 0);
 
-  if (hWnd == 0) {
-    final error = GetLastError();
-    throw WindowsException(HRESULT_FROM_WIN32(error));
-  }
+    ShowWindow(hWnd, nShowCmd);
+    UpdateWindow(hWnd);
 
-  ShowWindow(hWnd, nShowCmd);
-  UpdateWindow(hWnd);
+    // Run the message loop.
+    final msg = arena<MSG>();
+    while (GetMessage(msg, null, 0, 0).value) {
+      TranslateMessage(msg);
+      DispatchMessage(msg);
+    }
 
-  // Run the message loop.
-  final msg = calloc<MSG>();
-  while (GetMessage(msg, NULL, 0, 0) != 0) {
-    TranslateMessage(msg);
-    DispatchMessage(msg);
-  }
-
-  lpfnWndProc.close();
-  free(className);
+    lpfnWndProc.close();
+  });
 }

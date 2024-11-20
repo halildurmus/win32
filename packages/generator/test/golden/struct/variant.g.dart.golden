@@ -1,0 +1,330 @@
+VARIANT|
+/// A container for a large union that carries many types of data.
+///
+/// The value in the first member of the structure, vt, describes which of the
+/// union members is valid.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oaidl/ns-oaidl-variant>.
+///
+/// {@category struct}
+base class VARIANT extends Struct {
+  external VARIANT_0 Anonymous;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<VARIANT> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// {@category union}
+sealed class VARIANT_0 extends Union {
+  external VARIANT_0_0 Anonymous;
+  external DECIMAL decVal;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<VARIANT_0> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+extension VARIANT_0_Extension on VARIANT {
+  VARIANT_0_0 get Anonymous => this.Anonymous.Anonymous;
+  set Anonymous(VARIANT_0_0 value) => this.Anonymous.Anonymous = value;
+  DECIMAL get decVal => this.Anonymous.decVal;
+  set decVal(DECIMAL value) => this.Anonymous.decVal = value;
+}
+
+/// {@category struct}
+sealed class VARIANT_0_0 extends Struct {
+  @Uint16()
+  external int _vt;
+
+  @Uint16()
+  external int _wReserved1;
+
+  @Uint16()
+  external int _wReserved2;
+
+  @Uint16()
+  external int _wReserved3;
+
+  external VARIANT_0_0_0 Anonymous;
+
+  VARENUM get vt => VARENUM(_vt);
+  set vt(VARENUM value) => _vt = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<VARIANT_0_0> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+extension VARIANT_0_0_Extension on VARIANT {
+  VARENUM get vt => this.Anonymous.Anonymous.vt;
+  set vt(VARENUM value) => this.Anonymous.Anonymous.vt = value;
+  VARIANT_0_0_0 get Anonymous => this.Anonymous.Anonymous.Anonymous;
+  set Anonymous(VARIANT_0_0_0 value) =>
+      this.Anonymous.Anonymous.Anonymous = value;
+}
+
+/// {@category union}
+sealed class VARIANT_0_0_0 extends Union {
+  @Int64()
+  external int llVal;
+
+  @Int32()
+  external int lVal;
+
+  @Uint8()
+  external int bVal;
+
+  @Int16()
+  external int iVal;
+
+  @Float()
+  external double fltVal;
+
+  @Double()
+  external double dblVal;
+
+  @Int16()
+  external int _boolVal;
+
+  @Int16()
+  external int __OBSOLETE__VARIANT_BOOL;
+
+  @Int32()
+  external int scode;
+
+  external CY cyVal;
+
+  @Double()
+  external double date;
+
+  external Pointer<Utf16> _bstrVal;
+  external VTablePointer _punkVal;
+  external VTablePointer _pdispVal;
+  external Pointer<SAFEARRAY> parray;
+  external Pointer<Uint8> pbVal;
+  external Pointer<Int16> piVal;
+  external Pointer<Int32> plVal;
+  external Pointer<Int64> pllVal;
+  external Pointer<Float> pfltVal;
+  external Pointer<Double> pdblVal;
+  external Pointer<Int16> pboolVal;
+  external Pointer<Int16> __OBSOLETE__VARIANT_PBOOL;
+  external Pointer<Int32> pscode;
+  external Pointer<CY> pcyVal;
+  external Pointer<Double> pdate;
+  external Pointer<Pointer<Utf16>> pbstrVal;
+  external Pointer<VTablePointer> ppunkVal;
+  external Pointer<VTablePointer> ppdispVal;
+  external Pointer<Pointer<SAFEARRAY>> pparray;
+  external Pointer<VARIANT> pvarVal;
+  external Pointer byref;
+
+  @Int8()
+  external int _cVal;
+
+  @Uint16()
+  external int uiVal;
+
+  @Uint32()
+  external int ulVal;
+
+  @Uint64()
+  external int ullVal;
+
+  @Int32()
+  external int intVal;
+
+  @Uint32()
+  external int uintVal;
+
+  external Pointer<DECIMAL> pdecVal;
+  external Pointer<Utf8> _pcVal;
+  external Pointer<Uint16> puiVal;
+  external Pointer<Uint32> pulVal;
+  external Pointer<Uint64> pullVal;
+  external Pointer<Int32> pintVal;
+  external Pointer<Uint32> puintVal;
+  external VARIANT_0_0_0_0 Anonymous;
+
+  bool get boolVal => _boolVal != FALSE;
+  set boolVal(bool value) => _boolVal = value ? VARIANT_TRUE : FALSE;
+  BSTR get bstrVal => BSTR(_bstrVal);
+  set bstrVal(BSTR value) => _bstrVal = value;
+  IUnknown? get punkVal => _punkVal.isNull ? null : IUnknown(_punkVal);
+  set punkVal(IUnknown? value) => _punkVal = value?.ptr ?? nullptr;
+  IDispatch? get pdispVal => _pdispVal.isNull ? null : IDispatch(_pdispVal);
+  set pdispVal(IDispatch? value) => _pdispVal = value?.ptr ?? nullptr;
+  CHAR get cVal => CHAR(_cVal);
+  set cVal(CHAR value) => _cVal = value;
+  PSTR get pcVal => PSTR(_pcVal);
+  set pcVal(PSTR value) => _pcVal = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<VARIANT_0_0_0> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+extension VARIANT_0_0_0_Extension on VARIANT {
+  int get llVal => this.Anonymous.Anonymous.Anonymous.llVal;
+  set llVal(int value) => this.Anonymous.Anonymous.Anonymous.llVal = value;
+  int get lVal => this.Anonymous.Anonymous.Anonymous.lVal;
+  set lVal(int value) => this.Anonymous.Anonymous.Anonymous.lVal = value;
+  int get bVal => this.Anonymous.Anonymous.Anonymous.bVal;
+  set bVal(int value) => this.Anonymous.Anonymous.Anonymous.bVal = value;
+  int get iVal => this.Anonymous.Anonymous.Anonymous.iVal;
+  set iVal(int value) => this.Anonymous.Anonymous.Anonymous.iVal = value;
+  double get fltVal => this.Anonymous.Anonymous.Anonymous.fltVal;
+  set fltVal(double value) => this.Anonymous.Anonymous.Anonymous.fltVal = value;
+  double get dblVal => this.Anonymous.Anonymous.Anonymous.dblVal;
+  set dblVal(double value) => this.Anonymous.Anonymous.Anonymous.dblVal = value;
+  bool get boolVal => this.Anonymous.Anonymous.Anonymous.boolVal;
+  set boolVal(bool value) => this.Anonymous.Anonymous.Anonymous.boolVal = value;
+  int get scode => this.Anonymous.Anonymous.Anonymous.scode;
+  set scode(int value) => this.Anonymous.Anonymous.Anonymous.scode = value;
+  CY get cyVal => this.Anonymous.Anonymous.Anonymous.cyVal;
+  set cyVal(CY value) => this.Anonymous.Anonymous.Anonymous.cyVal = value;
+  double get date => this.Anonymous.Anonymous.Anonymous.date;
+  set date(double value) => this.Anonymous.Anonymous.Anonymous.date = value;
+  BSTR get bstrVal => this.Anonymous.Anonymous.Anonymous.bstrVal;
+  set bstrVal(BSTR value) => this.Anonymous.Anonymous.Anonymous.bstrVal = value;
+  IUnknown? get punkVal => this.Anonymous.Anonymous.Anonymous.punkVal;
+  set punkVal(IUnknown? value) =>
+      this.Anonymous.Anonymous.Anonymous.punkVal = value;
+  IDispatch? get pdispVal => this.Anonymous.Anonymous.Anonymous.pdispVal;
+  set pdispVal(IDispatch? value) =>
+      this.Anonymous.Anonymous.Anonymous.pdispVal = value;
+  Pointer<SAFEARRAY> get parray => this.Anonymous.Anonymous.Anonymous.parray;
+  set parray(Pointer<SAFEARRAY> value) =>
+      this.Anonymous.Anonymous.Anonymous.parray = value;
+  Pointer<Uint8> get pbVal => this.Anonymous.Anonymous.Anonymous.pbVal;
+  set pbVal(Pointer<Uint8> value) =>
+      this.Anonymous.Anonymous.Anonymous.pbVal = value;
+  Pointer<Int16> get piVal => this.Anonymous.Anonymous.Anonymous.piVal;
+  set piVal(Pointer<Int16> value) =>
+      this.Anonymous.Anonymous.Anonymous.piVal = value;
+  Pointer<Int32> get plVal => this.Anonymous.Anonymous.Anonymous.plVal;
+  set plVal(Pointer<Int32> value) =>
+      this.Anonymous.Anonymous.Anonymous.plVal = value;
+  Pointer<Int64> get pllVal => this.Anonymous.Anonymous.Anonymous.pllVal;
+  set pllVal(Pointer<Int64> value) =>
+      this.Anonymous.Anonymous.Anonymous.pllVal = value;
+  Pointer<Float> get pfltVal => this.Anonymous.Anonymous.Anonymous.pfltVal;
+  set pfltVal(Pointer<Float> value) =>
+      this.Anonymous.Anonymous.Anonymous.pfltVal = value;
+  Pointer<Double> get pdblVal => this.Anonymous.Anonymous.Anonymous.pdblVal;
+  set pdblVal(Pointer<Double> value) =>
+      this.Anonymous.Anonymous.Anonymous.pdblVal = value;
+  Pointer<Int16> get pboolVal => this.Anonymous.Anonymous.Anonymous.pboolVal;
+  set pboolVal(Pointer<Int16> value) =>
+      this.Anonymous.Anonymous.Anonymous.pboolVal = value;
+  Pointer<Int32> get pscode => this.Anonymous.Anonymous.Anonymous.pscode;
+  set pscode(Pointer<Int32> value) =>
+      this.Anonymous.Anonymous.Anonymous.pscode = value;
+  Pointer<CY> get pcyVal => this.Anonymous.Anonymous.Anonymous.pcyVal;
+  set pcyVal(Pointer<CY> value) =>
+      this.Anonymous.Anonymous.Anonymous.pcyVal = value;
+  Pointer<Double> get pdate => this.Anonymous.Anonymous.Anonymous.pdate;
+  set pdate(Pointer<Double> value) =>
+      this.Anonymous.Anonymous.Anonymous.pdate = value;
+  Pointer<Pointer<Utf16>> get pbstrVal =>
+      this.Anonymous.Anonymous.Anonymous.pbstrVal;
+  set pbstrVal(Pointer<Pointer<Utf16>> value) =>
+      this.Anonymous.Anonymous.Anonymous.pbstrVal = value;
+  Pointer<VTablePointer> get ppunkVal =>
+      this.Anonymous.Anonymous.Anonymous.ppunkVal;
+  set ppunkVal(Pointer<VTablePointer> value) =>
+      this.Anonymous.Anonymous.Anonymous.ppunkVal = value;
+  Pointer<VTablePointer> get ppdispVal =>
+      this.Anonymous.Anonymous.Anonymous.ppdispVal;
+  set ppdispVal(Pointer<VTablePointer> value) =>
+      this.Anonymous.Anonymous.Anonymous.ppdispVal = value;
+  Pointer<Pointer<SAFEARRAY>> get pparray =>
+      this.Anonymous.Anonymous.Anonymous.pparray;
+  set pparray(Pointer<Pointer<SAFEARRAY>> value) =>
+      this.Anonymous.Anonymous.Anonymous.pparray = value;
+  Pointer<VARIANT> get pvarVal => this.Anonymous.Anonymous.Anonymous.pvarVal;
+  set pvarVal(Pointer<VARIANT> value) =>
+      this.Anonymous.Anonymous.Anonymous.pvarVal = value;
+  Pointer get byref => this.Anonymous.Anonymous.Anonymous.byref;
+  set byref(Pointer value) => this.Anonymous.Anonymous.Anonymous.byref = value;
+  CHAR get cVal => this.Anonymous.Anonymous.Anonymous.cVal;
+  set cVal(CHAR value) => this.Anonymous.Anonymous.Anonymous.cVal = value;
+  int get uiVal => this.Anonymous.Anonymous.Anonymous.uiVal;
+  set uiVal(int value) => this.Anonymous.Anonymous.Anonymous.uiVal = value;
+  int get ulVal => this.Anonymous.Anonymous.Anonymous.ulVal;
+  set ulVal(int value) => this.Anonymous.Anonymous.Anonymous.ulVal = value;
+  int get ullVal => this.Anonymous.Anonymous.Anonymous.ullVal;
+  set ullVal(int value) => this.Anonymous.Anonymous.Anonymous.ullVal = value;
+  int get intVal => this.Anonymous.Anonymous.Anonymous.intVal;
+  set intVal(int value) => this.Anonymous.Anonymous.Anonymous.intVal = value;
+  int get uintVal => this.Anonymous.Anonymous.Anonymous.uintVal;
+  set uintVal(int value) => this.Anonymous.Anonymous.Anonymous.uintVal = value;
+  Pointer<DECIMAL> get pdecVal => this.Anonymous.Anonymous.Anonymous.pdecVal;
+  set pdecVal(Pointer<DECIMAL> value) =>
+      this.Anonymous.Anonymous.Anonymous.pdecVal = value;
+  PSTR get pcVal => this.Anonymous.Anonymous.Anonymous.pcVal;
+  set pcVal(PSTR value) => this.Anonymous.Anonymous.Anonymous.pcVal = value;
+  Pointer<Uint16> get puiVal => this.Anonymous.Anonymous.Anonymous.puiVal;
+  set puiVal(Pointer<Uint16> value) =>
+      this.Anonymous.Anonymous.Anonymous.puiVal = value;
+  Pointer<Uint32> get pulVal => this.Anonymous.Anonymous.Anonymous.pulVal;
+  set pulVal(Pointer<Uint32> value) =>
+      this.Anonymous.Anonymous.Anonymous.pulVal = value;
+  Pointer<Uint64> get pullVal => this.Anonymous.Anonymous.Anonymous.pullVal;
+  set pullVal(Pointer<Uint64> value) =>
+      this.Anonymous.Anonymous.Anonymous.pullVal = value;
+  Pointer<Int32> get pintVal => this.Anonymous.Anonymous.Anonymous.pintVal;
+  set pintVal(Pointer<Int32> value) =>
+      this.Anonymous.Anonymous.Anonymous.pintVal = value;
+  Pointer<Uint32> get puintVal => this.Anonymous.Anonymous.Anonymous.puintVal;
+  set puintVal(Pointer<Uint32> value) =>
+      this.Anonymous.Anonymous.Anonymous.puintVal = value;
+  VARIANT_0_0_0_0 get Anonymous => this.Anonymous.Anonymous.Anonymous.Anonymous;
+  set Anonymous(VARIANT_0_0_0_0 value) =>
+      this.Anonymous.Anonymous.Anonymous.Anonymous = value;
+}
+
+/// {@category struct}
+sealed class VARIANT_0_0_0_0 extends Struct {
+  external Pointer pvRecord;
+  external VTablePointer _pRecInfo;
+
+  IRecordInfo? get pRecInfo => _pRecInfo.isNull ? null : IRecordInfo(_pRecInfo);
+  set pRecInfo(IRecordInfo? value) => _pRecInfo = value?.ptr ?? nullptr;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<VARIANT_0_0_0_0> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+extension VARIANT_0_0_0_0_Extension on VARIANT {
+  Pointer get pvRecord => this.Anonymous.Anonymous.Anonymous.Anonymous.pvRecord;
+  set pvRecord(Pointer value) =>
+      this.Anonymous.Anonymous.Anonymous.Anonymous.pvRecord = value;
+  IRecordInfo? get pRecInfo =>
+      this.Anonymous.Anonymous.Anonymous.Anonymous.pRecInfo;
+  set pRecInfo(IRecordInfo? value) =>
+      this.Anonymous.Anonymous.Anonymous.Anonymous.pRecInfo = value;
+}

@@ -1,38 +1,45 @@
 # Examples
 
-The package includes a variety of examples in the [examples] subdirectory,
-showcasing different aspects of invoking Windows APIs.
+This package includes a comprehensive set of examples in the [examples]
+directory, demonstrating practical, idiomatic use of Windows APIs from Dart.
 
-These examples cover:
+## What you will find
 
-- Invoking C-style APIs, including creating structs and managing memory
-- Building classic (Win32) desktop UIs
-- Using callback functions with Win32 APIs
-- Invoking COM classes (both `IUnknown` and `IDispatch` interface types)
-- Integrating Windows code with Flutter
+Across the examples, you will see how to:
 
-For practical examples of using `package:win32` in real-world applications,
-visit [pub.dev] to explore packages that depend on it.
+- Invoke C-style Win32 APIs, including struct layout, pointer management, and
+  lifetime control
+- Build classic Win32 desktop applications using `user32`, `gdi32`, and common
+  dialogs
+- Register and use native callback functions safely from Dart
+- Create and consume COM objects via both `IUnknown` and `IDispatch`
+- Integrate low-level Windows APIs into Flutter desktop applications
+
+For real-world usage beyond these samples, explore packages on that depend on
+[package:win32].
 
 [examples]: https://github.com/halildurmus/win32/tree/main/examples
-[pub.dev]: https://pub.dev/packages?q=dependency%3Awin32
+[package:win32]: https://pub.dev/packages?q=dependency%3Awin32
 
 ## Windows system APIs (kernel32)
 
-| Example               | Description                                                   |
-| --------------------- | ------------------------------------------------------------- |
-| [manifest]            | Demonstrates the use of app manifests for compiled apps       |
-| [service_manager_cli] | Demonstrates managing Windows services                        |
-| [credentials.dart]    | Adds a credential to the store and retrieves it               |
-| [dump.dart]           | Use debugger libraries to print DLL exported functions        |
-| [dynamic_load.dart]   | Demonstrate loading a DLL and calling it at runtime           |
-| [fileinfo.dart]       | Shows how to get file information using `GetFileAttributesEx` |
-| [filever.dart]        | Getting file version information from the file resource       |
-| [modules.dart]        | Enumerates all loaded modules on the current system           |
-| [pipe.dart]           | Shows use of named pipes for interprocess communication       |
-| [registry.dart]       | Demonstrates querying the registry for values                 |
-| [vt.dart]             | Shows virtual terminal sequences                              |
-| [wsl.dart]            | Retrieve information from a WSL instance through APIs         |
+Examples focused on core system services such as processes, modules, files,
+pipes, and the registry.
+
+| Example               | Description                                       |
+| --------------------- | ------------------------------------------------- |
+| [manifest]            | App manifests for compiled executables            |
+| [service_manager_cli] | Managing Windows services                         |
+| [credentials.dart]    | Writing and reading credentials from the store    |
+| [dump.dart]           | Enumerating DLL exports using debugger APIs       |
+| [dynamic_load.dart]   | Loading DLLs and resolving symbols at runtime     |
+| [fileinfo.dart]       | Querying file metadata with `GetFileAttributesEx` |
+| [filever.dart]        | Reading version information from file resources   |
+| [modules.dart]        | Enumerating loaded modules                        |
+| [pipe.dart]           | Named pipes and IPC                               |
+| [registry.dart]       | Querying and enumerating registry keys            |
+| [vt.dart]             | Virtual terminal (ANSI) sequences                 |
+| [wsl.dart]            | Accessing WSL instance information                |
 
 [manifest]: https://github.com/halildurmus/win32/blob/main/examples/manifest
 [service_manager_cli]: https://github.com/halildurmus/win32/blob/main/examples/service_manager_cli
@@ -49,24 +56,25 @@ visit [pub.dev] to explore packages that depend on it.
 
 ## Accessing local hardware and devices
 
-| Example             | Description                                               |
-| ------------------- | --------------------------------------------------------- |
-| [bluetooth.dart]    | Demonstrate enumerating Bluetooth devices                 |
-| [bluetoothle.dart]  | Enumerate Bluetooth LE (Low Energy) devices               |
-| [devices.dart]      | Uses volume management APIs to list all disk devices      |
-| [diskinfo.dart]     | Use `DeviceIoControl` API for direct device operations    |
-| [gamepad.dart]      | Show which gamepads are connected                         |
-| [midi.dart]         | Demonstrates MIDI playback using MCI commands             |
-| [monitor.dart]      | Uses DDC and monitor-config API to get monitor caps       |
-| [play_sound.dart]   | Plays a WAV file through the Windows `PlaySound` API      |
-| [printer_list.dart] | Enumerate available printers on the system                |
-| [printer_raw.dart]  | Sends RAW data directly to a Windows Printer              |
-| [serial.dart]       | Demonstrates serial port management                       |
-| [setupapi.dart]     | Show using setup APIs to retrieve device interfaces       |
-| [speech.dart]       | Use Windows speech engine for text-to-speech              |
-| [speech_voice.dart] | Use `ISpeechVoice` for text-to-speech                     |
-| [sysinfo.dart]      | Examples of getting device information from native C APIs |
-| [wasapi.dart]       | Demonstrates sound generation with WASAPI library         |
+Examples that interact directly with hardware, drivers, and device subsystems.
+
+| Example             | Description                                        |
+| ------------------- | -------------------------------------------------- |
+| [bluetooth.dart]    | Enumerating Bluetooth devices                      |
+| [bluetoothle.dart]  | Enumerating Bluetooth LE (Low Energy) devices      |
+| [devices.dart]      | Listing disk devices via volume APIs               |
+| [diskinfo.dart]     | Low-level device operations with `DeviceIoControl` |
+| [gamepad.dart]      | Detecting connected game controllers               |
+| [midi.dart]         | MIDI playback using MCI                            |
+| [monitor.dart]      | Querying monitor capabilities (DDC/CI)             |
+| [play_sound.dart]   | Playing WAV audio with `PlaySound`                 |
+| [printer_list.dart] | Enumerating installed printers                     |
+| [printer_raw.dart]  | Sending RAW data directly to printers              |
+| [serial.dart]       | Serial port enumeration and configuration          |
+| [setupapi.dart]     | Device interface discovery via SetupAPI            |
+| [speech.dart]       | Text-to-speech via Windows Speech APIs             |
+| [sysinfo.dart]      | System information from native APIs                |
+| [wasapi.dart]       | Audio generation with WASAPI                       |
 
 [bluetooth.dart]: https://github.com/halildurmus/win32/blob/main/examples/bluetooth.dart
 [bluetoothle.dart]: https://github.com/halildurmus/win32/blob/main/examples/bluetoothle.dart
@@ -81,23 +89,24 @@ visit [pub.dev] to explore packages that depend on it.
 [serial.dart]: https://github.com/halildurmus/win32/blob/main/examples/serial.dart
 [setupapi.dart]: https://github.com/halildurmus/win32/blob/main/examples/setupapi.dart
 [speech.dart]: https://github.com/halildurmus/win32/blob/main/examples/speech.dart
-[speech_voice.dart]: https://github.com/halildurmus/win32/blob/main/examples/speech_voice.dart
 [sysinfo.dart]: https://github.com/halildurmus/win32/blob/main/examples/sysinfo.dart
 [wasapi.dart]: https://github.com/halildurmus/win32/blob/main/examples/wasapi.dart
 
 ## Windows shell manipulation (shell32)
 
-| Example             | Description                                             |
-| ------------------- | ------------------------------------------------------- |
-| [shell_notify_icon] | Demonstrates adding an icon to the system tray          |
-| [knownfolder.dart]  | Retrieves known folders from the current user profile   |
-| [magnifier.dart]    | Provides a magnifier window using the Magnification API |
-| [recycle_bin.dart]  | Queries the recycle bin and adds an item to it          |
-| [screenshot.dart]   | Takes snapshots of all connected displays               |
-| [shortcut.dart]     | Demonstrates creating a Windows shell link              |
-| [wallpaper.dart]    | Shows what wallpaper and background color are set       |
+Examples that integrate with the Windows shell and user environment.
 
-[shell_notify_icon]: https://github.com/halildurmus/win32/blob/main/examples/shell_notify_icon
+| Example             | Description                                      |
+| ------------------- | ------------------------------------------------ |
+| [system_tray_icon]  | Adding an icon to the system tray                |
+| [knownfolder.dart]  | Accessing known user folders                     |
+| [magnifier.dart]    | Screen magnification using the Magnification API |
+| [recycle_bin.dart]  | Querying and modifying the recycle bin           |
+| [screenshot.dart]   | Capturing screenshots of all displays            |
+| [shortcut.dart]     | Creating `.lnk` shell shortcuts                  |
+| [wallpaper.dart]    | Querying wallpaper and background settings       |
+
+[system_tray_icon]: https://github.com/halildurmus/win32/blob/main/examples/system_tray_icon
 [knownfolder.dart]: https://github.com/halildurmus/win32/blob/main/examples/knownfolder.dart
 [magnifier.dart]: https://github.com/halildurmus/win32/blob/main/examples/magnifier.dart
 [recycle_bin.dart]: https://github.com/halildurmus/win32/blob/main/examples/recycle_bin.dart
@@ -107,27 +116,33 @@ visit [pub.dev] to explore packages that depend on it.
 
 ## Win32-style UI development (user32, gdi32, commdlg32)
 
-| Example               | Description                                               |
-| --------------------- | --------------------------------------------------------- |
-| [notepad]             | Lightweight replica of the Windows notepad applet         |
-| [tetris]              | Port of an open-source Tetris game to Dart                |
-| [hello.dart]          | Basic Petzoldian "hello world" Win32 app                  |
-| [msgbox.dart]         | Demonstrates a MessageBox from the console                |
-| [commdlg.dart]        | Demonstrates using the color chooser common dialog box    |
-| [customtitlebar.dart] | Demonstrates creation of owner-draw title bar region      |
-| [customwin.dart]      | Displays a non-rectangular window                         |
-| [dialogbox.dart]      | Create a custom dialog box in code                        |
-| [dialogshow.dart]     | Creates a common item dialog (file picker) using COM      |
-| [paint.dart]          | Demonstrates simple GDI drawing and min/max window sizing |
-| [scroll.dart]         | Example of horizontal and vertical scrolling text window  |
-| [sendinput.dart]      | Sends keyboard and mouse input to another window          |
-| [snake.dart]          | Snake game using various GDI features                     |
-| [taskdialog.dart]     | Demonstrates using modern task dialog boxes               |
-| [usb_drive.dart]      | Monitors USB drive insertion and removal events           |
-| [window.dart]         | Enumerates open windows and basic window manipulation     |
+Classic desktop UI examples demonstrating message loops, painting, dialogs,
+and input handling.
 
-[notepad]: https://github.com/halildurmus/win32/blob/main/examples/notepad
+| Example               | Description                                 |
+| --------------------- | --------------------------------------------|
+| [dartnote]            | Lightweight Notepad-style text editor       |
+| [snake]               | Snake game using GDI rendering              |
+| [task_dialog]         | Modern task dialogs                         |
+| [tetris]              | Tetris game using GDI rendering             |
+| [usb_drive_monitor]   | Monitoring USB insertion and removal events |
+| [hello.dart]          | Canonical Win32 “Hello, world”              |
+| [msgbox.dart]         | Displaying a message box from the console   |
+| [commdlg.dart]        | Color chooser common dialog                 |
+| [customtitlebar.dart] | Owner-drawn title bar regions               |
+| [customwin.dart]      | Non-rectangular window rendering            |
+| [dialogbox.dart]      | Custom dialogs defined entirely in code     |
+| [dialogshow.dart]     | File picker dialogs via COM                 |
+| [paint.dart]          | Basic painting and window sizing            |
+| [scroll.dart]         | Horizontal and vertical scrolling           |
+| [sendinput.dart]      | Synthesizing keyboard and mouse input       |
+| [window.dart]         | Enumerating and manipulating windows        |
+
+[dartnote]: https://github.com/halildurmus/win32/blob/main/examples/dartnote
+[snake]: https://github.com/halildurmus/win32/blob/main/examples/snake
+[task_dialog]: https://github.com/halildurmus/win32/blob/main/examples/task_dialog
 [tetris]: https://github.com/halildurmus/win32/blob/main/examples/tetris
+[usb_drive_monitor]: https://github.com/halildurmus/win32/blob/main/examples/usb_drive_monitor
 [hello.dart]: https://github.com/halildurmus/win32/blob/main/examples/hello.dart
 [msgbox.dart]: https://github.com/halildurmus/win32/blob/main/examples/msgbox.dart
 [commdlg.dart]: https://github.com/halildurmus/win32/blob/main/examples/commdlg.dart
@@ -138,49 +153,50 @@ visit [pub.dev] to explore packages that depend on it.
 [paint.dart]: https://github.com/halildurmus/win32/blob/main/examples/paint.dart
 [scroll.dart]: https://github.com/halildurmus/win32/blob/main/examples/scroll.dart
 [sendinput.dart]: https://github.com/halildurmus/win32/blob/main/examples/sendinput.dart
-[snake.dart]: https://github.com/halildurmus/win32/blob/main/examples/snake.dart
-[taskdialog.dart]: https://github.com/halildurmus/win32/blob/main/examples/taskdialog.dart
-[usb_drive.dart]: https://github.com/halildurmus/win32/blob/main/examples/usb_drive.dart
 [window.dart]: https://github.com/halildurmus/win32/blob/main/examples/window.dart
-
-## Misc
-
-| Example               | Description                                |
-| --------------------- | ------------------------------------------ |
-| [events.dart]         | Queries for events from a specific channel |
-
-[events.dart]: https://github.com/halildurmus/win32/blob/main/examples/events.dart
 
 ## COM APIs
 
-| Example             | Description                                                              |
-| ------------------- | ------------------------------------------------------------------------ |
-| [com_context.dart]  | Shows interaction of Dart isolates and COM apartments                    |
-| [com_demo.dart]     | Demonstrates COM object creation, casting, and calling methods           |
-| [dispatcher.dart]   | Demonstrates calling methods on COM automation objects with `Dispatcher` |
-| [com_interop]       | Demonstrates accessing .NET components through COM interop               |
-| [guid.dart]         | Creates a globally unique identifier (GUID)                              |
-| [uiautomation.dart] | Demonstrates calling Windows UI Automation APIs                          |
-| [winhttp.dart]      | Demonstrates using WinHTTP APIs to make HTTP requests                    |
-| [wmi_perf.dart]     | Uses WMI to retrieve performance counters                                |
-| [wmi_wql.dart]      | Uses WMI to retrieve information using WQL                               |
+Examples demonstrating COM fundamentals, automation, and system components.
 
+| Example             | Description                              |
+| ------------------- | ---------------------------------------- |
+| [com_interop]       | Accessing .NET components through COM    |
+| [com_context.dart]  | COM apartments and Dart isolates         |
+| [com_demo.dart]     | Object creation, casting, and invocation |
+| [dispatcher.dart]   | Automation via `Dispatcher`              |
+| [guid.dart]         | Creating and manipulating GUIDs          |
+| [uiautomation.dart] | Windows UI Automation APIs               |
+| [winhttp.dart]      | HTTP requests using WinHTTP              |
+| [wmi_perf.dart]     | Performance counters via WMI             |
+| [wmi_wql.dart]      | Querying WMI with WQL                    |
+
+[com_interop]: https://github.com/halildurmus/win32/blob/main/examples/com_interop
 [com_context.dart]: https://github.com/halildurmus/win32/blob/main/examples/com_context.dart
 [com_demo.dart]: https://github.com/halildurmus/win32/blob/main/examples/com_demo.dart
 [dispatcher.dart]: https://github.com/halildurmus/win32/blob/main/examples/dispatcher.dart
-[com_interop]: https://github.com/halildurmus/win32/blob/main/examples/com_interop
 [guid.dart]: https://github.com/halildurmus/win32/blob/main/examples/guid.dart
 [uiautomation.dart]: https://github.com/halildurmus/win32/blob/main/examples/uiautomation.dart
 [winhttp.dart]: https://github.com/halildurmus/win32/blob/main/examples/winhttp.dart
 [wmi_perf.dart]: https://github.com/halildurmus/win32/blob/main/examples/wmi_perf.dart
 [wmi_wql.dart]: https://github.com/halildurmus/win32/blob/main/examples/wmi_wql.dart
 
-## Flutter
+## Flutter integration
 
-| Example        | Description                                 |
-| -------------- | ------------------------------------------- |
-| [explorer]     | Demonstrates calling Win32 file picker APIs |
-| [task_manager] | Demonstrates managing running processes     |
+Examples that bridge low-level Win32 APIs into Flutter desktop applications.
+
+| Example        | Description                                |
+| -------------- | ------------------------------------------ |
+| [explorer]     | Retrieving volumes on the computer         |
+| [task_manager] | Enumerating and managing running processes |
 
 [explorer]: https://github.com/halildurmus/win32/blob/main/examples/explorer
 [task_manager]: https://github.com/halildurmus/win32/blob/main/examples/task_manager
+
+## Miscellaneous
+
+| Example               | Description                     |
+| --------------------- | ------------------------------- |
+| [events.dart]         | Querying Windows event channels |
+
+[events.dart]: https://github.com/halildurmus/win32/blob/main/examples/events.dart

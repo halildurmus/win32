@@ -7,7 +7,9 @@ on:
       - analysis_options.yaml
       - codecov.yml
       - pubspec.yaml
+      - packages/win32/hook/**
       - packages/win32/lib/**
+      - packages/win32/src/**
       - packages/win32/test/**
       - packages/win32/test_fixes/**
       - packages/win32/analysis_options.yaml
@@ -20,7 +22,9 @@ on:
       - analysis_options.yaml
       - codecov.yml
       - pubspec.yaml
+      - packages/win32/hook/**
       - packages/win32/lib/**
+      - packages/win32/src/**
       - packages/win32/test/**
       - packages/win32/test_fixes/**
       - packages/win32/analysis_options.yaml
@@ -32,16 +36,14 @@ on:
 jobs:
   build:
     strategy:
-      # We want to see the results on stable even if main fails (and vice
-      # versa). This prevents one failure from stopping the entire run.
+      # We want to see the results on stable even if dev fails (and vice versa).
+      # This prevents one failure from stopping the entire run.
       fail-fast: false
 
-      # Free config supports up to 20 concurrent jobs, so pick a sparse matrix
-      # that tiles the space well.
       matrix:
         include:
-          - os: windows-latest
-            sdk: main
+          - os: windows-2025
+            sdk: dev
           - os: windows-2022
             sdk: beta
           - os: windows-2022
@@ -51,7 +53,7 @@ jobs:
 
     uses: halildurmus/workflows/.github/workflows/dart.yml@main
     with:
-      check_coverage: ${{ matrix.sdk == 'main' }}
+      check_coverage: ${{ matrix.sdk == 'dev' }}
       codecov_flags: win32
       concurrency: '1'
       dart_sdk: ${{ matrix.sdk }}

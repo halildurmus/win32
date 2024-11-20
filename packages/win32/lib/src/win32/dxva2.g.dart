@@ -1,124 +1,101 @@
-// Maps FFI prototypes onto the corresponding Win32 API function calls
-
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-
-// ignore_for_file: unused_import, non_constant_identifier_names
-// ignore_for_file: constant_identifier_names, camel_case_types
-// ignore_for_file: specify_nonobvious_property_types
+//
+// Maps FFI prototypes onto the corresponding Win32 API function calls.
+//
+// ignore_for_file: avoid_positional_boolean_parameters
+// ignore_for_file: non_constant_identifier_names, unused_import
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
+import 'package:ffi_leak_tracker/ffi_leak_tracker.dart';
 
-import '../callbacks.dart';
-import '../combase.dart';
-import '../guid.dart';
+import '../_internal/dxva2.g.dart';
+import '../_internal/win32.dart';
+import '../bstr.dart';
+import '../com/interface.g.dart';
+import '../com/iunknown.g.dart';
+import '../constants.dart';
+import '../constants.g.dart';
+import '../enums.g.dart';
+import '../exception.dart';
+import '../extensions/pointer.dart';
+import '../hresult.dart';
+import '../hstring.dart';
+import '../macros.dart';
+import '../ntstatus.dart';
+import '../pcstr.dart';
+import '../pcwstr.dart';
+import '../pstr.dart';
+import '../pwstr.dart';
+import '../rpc_status.dart';
 import '../structs.g.dart';
-import '../variant.dart';
+import '../types.dart';
+import '../utils.dart';
+import '../win32_error.dart';
+import '../win32_result.dart';
 
-final _dxva2 = DynamicLibrary.open('dxva2.dll');
-
-/// Closes a handle to a physical monitor. Call this function to close a
-/// monitor handle obtained from the GetPhysicalMonitorsFromHMONITOR or
-/// GetPhysicalMonitorsFromIDirect3DDevice9 function.
+/// Closes a handle to a physical monitor.
 ///
-/// ```c
-/// _BOOL DestroyPhysicalMonitor(
-///   HANDLE hMonitor
-/// );
-/// ```
-/// {@category dxva2}
-int DestroyPhysicalMonitor(int hMonitor) => _DestroyPhysicalMonitor(hMonitor);
-
-final _DestroyPhysicalMonitor = _dxva2
-    .lookupFunction<
-      Int32 Function(IntPtr hMonitor),
-      int Function(int hMonitor)
-    >('DestroyPhysicalMonitor');
-
-/// Closes an array of physical monitor handles. Call this function to close
-/// an array of monitor handles obtained from the
-/// GetPhysicalMonitorsFromHMONITOR or
-/// GetPhysicalMonitorsFromIDirect3DDevice9 function.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/physicalmonitorenumerationapi/nf-physicalmonitorenumerationapi-destroyphysicalmonitor>.
 ///
-/// ```c
-/// _BOOL DestroyPhysicalMonitors(
-///   DWORD              dwPhysicalMonitorArraySize,
-///   LPPHYSICAL_MONITOR pPhysicalMonitorArray
-/// );
-/// ```
 /// {@category dxva2}
-int DestroyPhysicalMonitors(
+Win32Result<bool> DestroyPhysicalMonitor(HANDLE hMonitor) {
+  final result_ = DestroyPhysicalMonitor_Wrapper(hMonitor);
+  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+}
+
+/// Closes an array of physical monitor handles.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/physicalmonitorenumerationapi/nf-physicalmonitorenumerationapi-destroyphysicalmonitors>.
+///
+/// {@category dxva2}
+Win32Result<bool> DestroyPhysicalMonitors(
   int dwPhysicalMonitorArraySize,
   Pointer<PHYSICAL_MONITOR> pPhysicalMonitorArray,
-) =>
-    _DestroyPhysicalMonitors(dwPhysicalMonitorArraySize, pPhysicalMonitorArray);
-
-final _DestroyPhysicalMonitors = _dxva2
-    .lookupFunction<
-      Int32 Function(
-        Uint32 dwPhysicalMonitorArraySize,
-        Pointer<PHYSICAL_MONITOR> pPhysicalMonitorArray,
-      ),
-      int Function(
-        int dwPhysicalMonitorArraySize,
-        Pointer<PHYSICAL_MONITOR> pPhysicalMonitorArray,
-      )
-    >('DestroyPhysicalMonitors');
+) {
+  final result_ = DestroyPhysicalMonitors_Wrapper(
+    dwPhysicalMonitorArraySize,
+    pPhysicalMonitorArray,
+  );
+  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+}
 
 /// Retrieves a monitor's minimum, maximum, and current brightness settings.
 ///
-/// ```c
-/// _BOOL GetMonitorBrightness(
-///   HANDLE  hMonitor,
-///   LPDWORD pdwMinimumBrightness,
-///   LPDWORD pdwCurrentBrightness,
-///   LPDWORD pdwMaximumBrightness
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/highlevelmonitorconfigurationapi/nf-highlevelmonitorconfigurationapi-getmonitorbrightness>.
+///
 /// {@category dxva2}
-int GetMonitorBrightness(
-  int hMonitor,
+Win32Result<int> GetMonitorBrightness(
+  HANDLE hMonitor,
   Pointer<Uint32> pdwMinimumBrightness,
   Pointer<Uint32> pdwCurrentBrightness,
   Pointer<Uint32> pdwMaximumBrightness,
-) => _GetMonitorBrightness(
-  hMonitor,
-  pdwMinimumBrightness,
-  pdwCurrentBrightness,
-  pdwMaximumBrightness,
-);
+) {
+  final result_ = GetMonitorBrightness_Wrapper(
+    hMonitor,
+    pdwMinimumBrightness,
+    pdwCurrentBrightness,
+    pdwMaximumBrightness,
+  );
+  return Win32Result(value: result_.value.i32, error: result_.error);
+}
 
-final _GetMonitorBrightness = _dxva2
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hMonitor,
-        Pointer<Uint32> pdwMinimumBrightness,
-        Pointer<Uint32> pdwCurrentBrightness,
-        Pointer<Uint32> pdwMaximumBrightness,
-      ),
-      int Function(
-        int hMonitor,
-        Pointer<Uint32> pdwMinimumBrightness,
-        Pointer<Uint32> pdwCurrentBrightness,
-        Pointer<Uint32> pdwMaximumBrightness,
-      )
-    >('GetMonitorBrightness');
-
-/// Retrieves the configuration capabilities of a monitor. Call this
-/// function to find out which high-level monitor configuration functions
-/// are supported by the monitor.
+/// Retrieves the configuration capabilities of a monitor.
 ///
-/// ```c
-/// _BOOL GetMonitorCapabilities(
-///   HANDLE  hMonitor,
-///   LPDWORD pdwMonitorCapabilities,
-///   LPDWORD pdwSupportedColorTemperatures
-/// );
-/// ```
+/// Call this function to find out which high-level monitor configuration
+/// functions are supported by the monitor.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/highlevelmonitorconfigurationapi/nf-highlevelmonitorconfigurationapi-getmonitorcapabilities>.
+///
 /// {@category dxva2}
+@pragma('vm:prefer-inline')
 int GetMonitorCapabilities(
-  int hMonitor,
+  HANDLE hMonitor,
   Pointer<Uint32> pdwMonitorCapabilities,
   Pointer<Uint32> pdwSupportedColorTemperatures,
 ) => _GetMonitorCapabilities(
@@ -127,517 +104,328 @@ int GetMonitorCapabilities(
   pdwSupportedColorTemperatures,
 );
 
-final _GetMonitorCapabilities = _dxva2
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hMonitor,
-        Pointer<Uint32> pdwMonitorCapabilities,
-        Pointer<Uint32> pdwSupportedColorTemperatures,
-      ),
-      int Function(
-        int hMonitor,
-        Pointer<Uint32> pdwMonitorCapabilities,
-        Pointer<Uint32> pdwSupportedColorTemperatures,
-      )
-    >('GetMonitorCapabilities');
+@Native<Int32 Function(Pointer, Pointer<Uint32>, Pointer<Uint32>)>(
+  symbol: 'GetMonitorCapabilities',
+)
+external int _GetMonitorCapabilities(
+  Pointer hMonitor,
+  Pointer<Uint32> pdwMonitorCapabilities,
+  Pointer<Uint32> pdwSupportedColorTemperatures,
+);
 
 /// Retrieves a monitor's current color temperature.
 ///
-/// ```c
-/// _BOOL GetMonitorColorTemperature(
-///   HANDLE                 hMonitor,
-///   LPMC_COLOR_TEMPERATURE pctCurrentColorTemperature
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/highlevelmonitorconfigurationapi/nf-highlevelmonitorconfigurationapi-getmonitorcolortemperature>.
+///
 /// {@category dxva2}
-int GetMonitorColorTemperature(
-  int hMonitor,
+Win32Result<int> GetMonitorColorTemperature(
+  HANDLE hMonitor,
   Pointer<Int32> pctCurrentColorTemperature,
-) => _GetMonitorColorTemperature(hMonitor, pctCurrentColorTemperature);
-
-final _GetMonitorColorTemperature = _dxva2
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hMonitor,
-        Pointer<Int32> pctCurrentColorTemperature,
-      ),
-      int Function(int hMonitor, Pointer<Int32> pctCurrentColorTemperature)
-    >('GetMonitorColorTemperature');
+) {
+  final result_ = GetMonitorColorTemperature_Wrapper(
+    hMonitor,
+    pctCurrentColorTemperature,
+  );
+  return Win32Result(value: result_.value.i32, error: result_.error);
+}
 
 /// Retrieves a monitor's minimum, maximum, and current contrast settings.
 ///
-/// ```c
-/// _BOOL GetMonitorContrast(
-///   HANDLE  hMonitor,
-///   LPDWORD pdwMinimumContrast,
-///   LPDWORD pdwCurrentContrast,
-///   LPDWORD pdwMaximumContrast
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/highlevelmonitorconfigurationapi/nf-highlevelmonitorconfigurationapi-getmonitorcontrast>.
+///
 /// {@category dxva2}
-int GetMonitorContrast(
-  int hMonitor,
+Win32Result<int> GetMonitorContrast(
+  HANDLE hMonitor,
   Pointer<Uint32> pdwMinimumContrast,
   Pointer<Uint32> pdwCurrentContrast,
   Pointer<Uint32> pdwMaximumContrast,
-) => _GetMonitorContrast(
-  hMonitor,
-  pdwMinimumContrast,
-  pdwCurrentContrast,
-  pdwMaximumContrast,
-);
+) {
+  final result_ = GetMonitorContrast_Wrapper(
+    hMonitor,
+    pdwMinimumContrast,
+    pdwCurrentContrast,
+    pdwMaximumContrast,
+  );
+  return Win32Result(value: result_.value.i32, error: result_.error);
+}
 
-final _GetMonitorContrast = _dxva2
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hMonitor,
-        Pointer<Uint32> pdwMinimumContrast,
-        Pointer<Uint32> pdwCurrentContrast,
-        Pointer<Uint32> pdwMaximumContrast,
-      ),
-      int Function(
-        int hMonitor,
-        Pointer<Uint32> pdwMinimumContrast,
-        Pointer<Uint32> pdwCurrentContrast,
-        Pointer<Uint32> pdwMaximumContrast,
-      )
-    >('GetMonitorContrast');
-
-/// Retrieves a monitor's minimum, maximum, and current horizontal or
-/// vertical position.
+/// Retrieves a monitor's minimum, maximum, and current horizontal or vertical
+/// position.
 ///
-/// ```c
-/// _BOOL GetMonitorDisplayAreaPosition(
-///   HANDLE           hMonitor,
-///   MC_POSITION_TYPE ptPositionType,
-///   LPDWORD          pdwMinimumPosition,
-///   LPDWORD          pdwCurrentPosition,
-///   LPDWORD          pdwMaximumPosition
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/highlevelmonitorconfigurationapi/nf-highlevelmonitorconfigurationapi-getmonitordisplayareaposition>.
+///
 /// {@category dxva2}
-int GetMonitorDisplayAreaPosition(
-  int hMonitor,
-  int ptPositionType,
+Win32Result<int> GetMonitorDisplayAreaPosition(
+  HANDLE hMonitor,
+  MC_POSITION_TYPE ptPositionType,
   Pointer<Uint32> pdwMinimumPosition,
   Pointer<Uint32> pdwCurrentPosition,
   Pointer<Uint32> pdwMaximumPosition,
-) => _GetMonitorDisplayAreaPosition(
-  hMonitor,
-  ptPositionType,
-  pdwMinimumPosition,
-  pdwCurrentPosition,
-  pdwMaximumPosition,
-);
-
-final _GetMonitorDisplayAreaPosition = _dxva2
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hMonitor,
-        Int32 ptPositionType,
-        Pointer<Uint32> pdwMinimumPosition,
-        Pointer<Uint32> pdwCurrentPosition,
-        Pointer<Uint32> pdwMaximumPosition,
-      ),
-      int Function(
-        int hMonitor,
-        int ptPositionType,
-        Pointer<Uint32> pdwMinimumPosition,
-        Pointer<Uint32> pdwCurrentPosition,
-        Pointer<Uint32> pdwMaximumPosition,
-      )
-    >('GetMonitorDisplayAreaPosition');
+) {
+  final result_ = GetMonitorDisplayAreaPosition_Wrapper(
+    hMonitor,
+    ptPositionType,
+    pdwMinimumPosition,
+    pdwCurrentPosition,
+    pdwMaximumPosition,
+  );
+  return Win32Result(value: result_.value.i32, error: result_.error);
+}
 
 /// Retrieves a monitor's minimum, maximum, and current width or height.
 ///
-/// ```c
-/// _BOOL GetMonitorDisplayAreaSize(
-///   HANDLE       hMonitor,
-///   MC_SIZE_TYPE stSizeType,
-///   LPDWORD      pdwMinimumWidthOrHeight,
-///   LPDWORD      pdwCurrentWidthOrHeight,
-///   LPDWORD      pdwMaximumWidthOrHeight
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/highlevelmonitorconfigurationapi/nf-highlevelmonitorconfigurationapi-getmonitordisplayareasize>.
+///
 /// {@category dxva2}
-int GetMonitorDisplayAreaSize(
-  int hMonitor,
-  int stSizeType,
+Win32Result<int> GetMonitorDisplayAreaSize(
+  HANDLE hMonitor,
+  MC_SIZE_TYPE stSizeType,
   Pointer<Uint32> pdwMinimumWidthOrHeight,
   Pointer<Uint32> pdwCurrentWidthOrHeight,
   Pointer<Uint32> pdwMaximumWidthOrHeight,
-) => _GetMonitorDisplayAreaSize(
-  hMonitor,
-  stSizeType,
-  pdwMinimumWidthOrHeight,
-  pdwCurrentWidthOrHeight,
-  pdwMaximumWidthOrHeight,
-);
-
-final _GetMonitorDisplayAreaSize = _dxva2
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hMonitor,
-        Int32 stSizeType,
-        Pointer<Uint32> pdwMinimumWidthOrHeight,
-        Pointer<Uint32> pdwCurrentWidthOrHeight,
-        Pointer<Uint32> pdwMaximumWidthOrHeight,
-      ),
-      int Function(
-        int hMonitor,
-        int stSizeType,
-        Pointer<Uint32> pdwMinimumWidthOrHeight,
-        Pointer<Uint32> pdwCurrentWidthOrHeight,
-        Pointer<Uint32> pdwMaximumWidthOrHeight,
-      )
-    >('GetMonitorDisplayAreaSize');
+) {
+  final result_ = GetMonitorDisplayAreaSize_Wrapper(
+    hMonitor,
+    stSizeType,
+    pdwMinimumWidthOrHeight,
+    pdwCurrentWidthOrHeight,
+    pdwMaximumWidthOrHeight,
+  );
+  return Win32Result(value: result_.value.i32, error: result_.error);
+}
 
 /// Retrieves a monitor's red, green, or blue drive value.
 ///
-/// ```c
-/// _BOOL GetMonitorRedGreenOrBlueDrive(
-///   HANDLE        hMonitor,
-///   MC_DRIVE_TYPE dtDriveType,
-///   LPDWORD       pdwMinimumDrive,
-///   LPDWORD       pdwCurrentDrive,
-///   LPDWORD       pdwMaximumDrive
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/highlevelmonitorconfigurationapi/nf-highlevelmonitorconfigurationapi-getmonitorredgreenorbluedrive>.
+///
 /// {@category dxva2}
-int GetMonitorRedGreenOrBlueDrive(
-  int hMonitor,
-  int dtDriveType,
+Win32Result<int> GetMonitorRedGreenOrBlueDrive(
+  HANDLE hMonitor,
+  MC_DRIVE_TYPE dtDriveType,
   Pointer<Uint32> pdwMinimumDrive,
   Pointer<Uint32> pdwCurrentDrive,
   Pointer<Uint32> pdwMaximumDrive,
-) => _GetMonitorRedGreenOrBlueDrive(
-  hMonitor,
-  dtDriveType,
-  pdwMinimumDrive,
-  pdwCurrentDrive,
-  pdwMaximumDrive,
-);
-
-final _GetMonitorRedGreenOrBlueDrive = _dxva2
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hMonitor,
-        Int32 dtDriveType,
-        Pointer<Uint32> pdwMinimumDrive,
-        Pointer<Uint32> pdwCurrentDrive,
-        Pointer<Uint32> pdwMaximumDrive,
-      ),
-      int Function(
-        int hMonitor,
-        int dtDriveType,
-        Pointer<Uint32> pdwMinimumDrive,
-        Pointer<Uint32> pdwCurrentDrive,
-        Pointer<Uint32> pdwMaximumDrive,
-      )
-    >('GetMonitorRedGreenOrBlueDrive');
+) {
+  final result_ = GetMonitorRedGreenOrBlueDrive_Wrapper(
+    hMonitor,
+    dtDriveType,
+    pdwMinimumDrive,
+    pdwCurrentDrive,
+    pdwMaximumDrive,
+  );
+  return Win32Result(value: result_.value.i32, error: result_.error);
+}
 
 /// Retrieves a monitor's red, green, or blue gain value.
 ///
-/// ```c
-/// _BOOL GetMonitorRedGreenOrBlueGain(
-///   HANDLE       hMonitor,
-///   MC_GAIN_TYPE gtGainType,
-///   LPDWORD      pdwMinimumGain,
-///   LPDWORD      pdwCurrentGain,
-///   LPDWORD      pdwMaximumGain
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/highlevelmonitorconfigurationapi/nf-highlevelmonitorconfigurationapi-getmonitorredgreenorbluegain>.
+///
 /// {@category dxva2}
-int GetMonitorRedGreenOrBlueGain(
-  int hMonitor,
-  int gtGainType,
+Win32Result<int> GetMonitorRedGreenOrBlueGain(
+  HANDLE hMonitor,
+  MC_GAIN_TYPE gtGainType,
   Pointer<Uint32> pdwMinimumGain,
   Pointer<Uint32> pdwCurrentGain,
   Pointer<Uint32> pdwMaximumGain,
-) => _GetMonitorRedGreenOrBlueGain(
-  hMonitor,
-  gtGainType,
-  pdwMinimumGain,
-  pdwCurrentGain,
-  pdwMaximumGain,
-);
-
-final _GetMonitorRedGreenOrBlueGain = _dxva2
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hMonitor,
-        Int32 gtGainType,
-        Pointer<Uint32> pdwMinimumGain,
-        Pointer<Uint32> pdwCurrentGain,
-        Pointer<Uint32> pdwMaximumGain,
-      ),
-      int Function(
-        int hMonitor,
-        int gtGainType,
-        Pointer<Uint32> pdwMinimumGain,
-        Pointer<Uint32> pdwCurrentGain,
-        Pointer<Uint32> pdwMaximumGain,
-      )
-    >('GetMonitorRedGreenOrBlueGain');
+) {
+  final result_ = GetMonitorRedGreenOrBlueGain_Wrapper(
+    hMonitor,
+    gtGainType,
+    pdwMinimumGain,
+    pdwCurrentGain,
+    pdwMaximumGain,
+  );
+  return Win32Result(value: result_.value.i32, error: result_.error);
+}
 
 /// Retrieves the type of technology used by a monitor.
 ///
-/// ```c
-/// _BOOL GetMonitorTechnologyType(
-///   HANDLE                       hMonitor,
-///   LPMC_DISPLAY_TECHNOLOGY_TYPE pdtyDisplayTechnologyType
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/highlevelmonitorconfigurationapi/nf-highlevelmonitorconfigurationapi-getmonitortechnologytype>.
+///
 /// {@category dxva2}
-int GetMonitorTechnologyType(
-  int hMonitor,
+Win32Result<int> GetMonitorTechnologyType(
+  HANDLE hMonitor,
   Pointer<Int32> pdtyDisplayTechnologyType,
-) => _GetMonitorTechnologyType(hMonitor, pdtyDisplayTechnologyType);
-
-final _GetMonitorTechnologyType = _dxva2
-    .lookupFunction<
-      Int32 Function(IntPtr hMonitor, Pointer<Int32> pdtyDisplayTechnologyType),
-      int Function(int hMonitor, Pointer<Int32> pdtyDisplayTechnologyType)
-    >('GetMonitorTechnologyType');
+) {
+  final result_ = GetMonitorTechnologyType_Wrapper(
+    hMonitor,
+    pdtyDisplayTechnologyType,
+  );
+  return Win32Result(value: result_.value.i32, error: result_.error);
+}
 
 /// Retrieves the number of physical monitors associated with an HMONITOR
-/// monitor handle. Call this function before calling
-/// GetPhysicalMonitorsFromHMONITOR.
+/// monitor handle.
 ///
-/// ```c
-/// _BOOL GetNumberOfPhysicalMonitorsFromHMONITOR(
-///   HMONITOR hMonitor,
-///   LPDWORD  pdwNumberOfPhysicalMonitors
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/physicalmonitorenumerationapi/nf-physicalmonitorenumerationapi-getnumberofphysicalmonitorsfromhmonitor>.
+///
 /// {@category dxva2}
-int GetNumberOfPhysicalMonitorsFromHMONITOR(
-  int hMonitor,
+Win32Result<bool> GetNumberOfPhysicalMonitorsFromHMONITOR(
+  HMONITOR hMonitor,
   Pointer<Uint32> pdwNumberOfPhysicalMonitors,
-) => _GetNumberOfPhysicalMonitorsFromHMONITOR(
-  hMonitor,
-  pdwNumberOfPhysicalMonitors,
-);
+) {
+  final result_ = GetNumberOfPhysicalMonitorsFromHMONITOR_Wrapper(
+    hMonitor,
+    pdwNumberOfPhysicalMonitors,
+  );
+  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+}
 
-final _GetNumberOfPhysicalMonitorsFromHMONITOR = _dxva2
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hMonitor,
-        Pointer<Uint32> pdwNumberOfPhysicalMonitors,
-      ),
-      int Function(int hMonitor, Pointer<Uint32> pdwNumberOfPhysicalMonitors)
-    >('GetNumberOfPhysicalMonitorsFromHMONITOR');
-
-/// Retrieves the physical monitors associated with an HMONITOR monitor
-/// handle.
+/// Retrieves the physical monitors associated with an HMONITOR monitor handle.
 ///
-/// ```c
-/// _BOOL GetPhysicalMonitorsFromHMONITOR(
-///   HMONITOR           hMonitor,
-///   DWORD              dwPhysicalMonitorArraySize,
-///   LPPHYSICAL_MONITOR pPhysicalMonitorArray
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/physicalmonitorenumerationapi/nf-physicalmonitorenumerationapi-getphysicalmonitorsfromhmonitor>.
+///
 /// {@category dxva2}
-int GetPhysicalMonitorsFromHMONITOR(
-  int hMonitor,
+Win32Result<bool> GetPhysicalMonitorsFromHMONITOR(
+  HMONITOR hMonitor,
   int dwPhysicalMonitorArraySize,
   Pointer<PHYSICAL_MONITOR> pPhysicalMonitorArray,
-) => _GetPhysicalMonitorsFromHMONITOR(
-  hMonitor,
-  dwPhysicalMonitorArraySize,
-  pPhysicalMonitorArray,
-);
-
-final _GetPhysicalMonitorsFromHMONITOR = _dxva2
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hMonitor,
-        Uint32 dwPhysicalMonitorArraySize,
-        Pointer<PHYSICAL_MONITOR> pPhysicalMonitorArray,
-      ),
-      int Function(
-        int hMonitor,
-        int dwPhysicalMonitorArraySize,
-        Pointer<PHYSICAL_MONITOR> pPhysicalMonitorArray,
-      )
-    >('GetPhysicalMonitorsFromHMONITOR');
+) {
+  final result_ = GetPhysicalMonitorsFromHMONITOR_Wrapper(
+    hMonitor,
+    dwPhysicalMonitorArraySize,
+    pPhysicalMonitorArray,
+  );
+  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+}
 
 /// Saves the current monitor settings to the display's nonvolatile storage.
 ///
-/// ```c
-/// _BOOL SaveCurrentMonitorSettings(
-///   HANDLE hMonitor
-/// );
-/// ```
-/// {@category dxva2}
-int SaveCurrentMonitorSettings(int hMonitor) =>
-    _SaveCurrentMonitorSettings(hMonitor);
-
-final _SaveCurrentMonitorSettings = _dxva2
-    .lookupFunction<
-      Int32 Function(IntPtr hMonitor),
-      int Function(int hMonitor)
-    >('SaveCurrentMonitorSettings');
-
-/// Sets a monitor's brightness value. Increasing the brightness value makes
-/// the display on the monitor brighter, and decreasing it makes the display
-/// dimmer.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/highlevelmonitorconfigurationapi/nf-highlevelmonitorconfigurationapi-savecurrentmonitorsettings>.
 ///
-/// ```c
-/// _BOOL SetMonitorBrightness(
-///   HANDLE hMonitor,
-///   DWORD  dwNewBrightness
-/// );
-/// ```
 /// {@category dxva2}
-int SetMonitorBrightness(int hMonitor, int dwNewBrightness) =>
-    _SetMonitorBrightness(hMonitor, dwNewBrightness);
+Win32Result<int> SaveCurrentMonitorSettings(HANDLE hMonitor) {
+  final result_ = SaveCurrentMonitorSettings_Wrapper(hMonitor);
+  return Win32Result(value: result_.value.i32, error: result_.error);
+}
 
-final _SetMonitorBrightness = _dxva2
-    .lookupFunction<
-      Int32 Function(IntPtr hMonitor, Uint32 dwNewBrightness),
-      int Function(int hMonitor, int dwNewBrightness)
-    >('SetMonitorBrightness');
+/// Sets a monitor's brightness value.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/highlevelmonitorconfigurationapi/nf-highlevelmonitorconfigurationapi-setmonitorbrightness>.
+///
+/// {@category dxva2}
+Win32Result<int> SetMonitorBrightness(HANDLE hMonitor, int dwNewBrightness) {
+  final result_ = SetMonitorBrightness_Wrapper(hMonitor, dwNewBrightness);
+  return Win32Result(value: result_.value.i32, error: result_.error);
+}
 
 /// Sets a monitor's color temperature.
 ///
-/// ```c
-/// _BOOL SetMonitorColorTemperature(
-///   HANDLE               hMonitor,
-///   MC_COLOR_TEMPERATURE ctCurrentColorTemperature
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/highlevelmonitorconfigurationapi/nf-highlevelmonitorconfigurationapi-setmonitorcolortemperature>.
+///
 /// {@category dxva2}
-int SetMonitorColorTemperature(int hMonitor, int ctCurrentColorTemperature) =>
-    _SetMonitorColorTemperature(hMonitor, ctCurrentColorTemperature);
-
-final _SetMonitorColorTemperature = _dxva2
-    .lookupFunction<
-      Int32 Function(IntPtr hMonitor, Int32 ctCurrentColorTemperature),
-      int Function(int hMonitor, int ctCurrentColorTemperature)
-    >('SetMonitorColorTemperature');
+Win32Result<int> SetMonitorColorTemperature(
+  HANDLE hMonitor,
+  MC_COLOR_TEMPERATURE ctCurrentColorTemperature,
+) {
+  final result_ = SetMonitorColorTemperature_Wrapper(
+    hMonitor,
+    ctCurrentColorTemperature,
+  );
+  return Win32Result(value: result_.value.i32, error: result_.error);
+}
 
 /// Sets a monitor's contrast value.
 ///
-/// ```c
-/// _BOOL SetMonitorContrast(
-///   HANDLE hMonitor,
-///   DWORD  dwNewContrast
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/highlevelmonitorconfigurationapi/nf-highlevelmonitorconfigurationapi-setmonitorcontrast>.
+///
 /// {@category dxva2}
-int SetMonitorContrast(int hMonitor, int dwNewContrast) =>
-    _SetMonitorContrast(hMonitor, dwNewContrast);
-
-final _SetMonitorContrast = _dxva2
-    .lookupFunction<
-      Int32 Function(IntPtr hMonitor, Uint32 dwNewContrast),
-      int Function(int hMonitor, int dwNewContrast)
-    >('SetMonitorContrast');
+Win32Result<int> SetMonitorContrast(HANDLE hMonitor, int dwNewContrast) {
+  final result_ = SetMonitorContrast_Wrapper(hMonitor, dwNewContrast);
+  return Win32Result(value: result_.value.i32, error: result_.error);
+}
 
 /// Sets the horizontal or vertical position of a monitor's display area.
-/// Increasing the horizontal position moves the display area toward the
-/// right side of the screen; decreasing it moves the display area toward
-/// the left. Increasing the vertical position moves the display area toward
-/// the top of the screen; decreasing it moves the display area toward the
-/// bottom.
 ///
-/// ```c
-/// _BOOL SetMonitorDisplayAreaPosition(
-///   HANDLE           hMonitor,
-///   MC_POSITION_TYPE ptPositionType,
-///   DWORD            dwNewPosition
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/highlevelmonitorconfigurationapi/nf-highlevelmonitorconfigurationapi-setmonitordisplayareaposition>.
+///
 /// {@category dxva2}
-int SetMonitorDisplayAreaPosition(
-  int hMonitor,
-  int ptPositionType,
+Win32Result<int> SetMonitorDisplayAreaPosition(
+  HANDLE hMonitor,
+  MC_POSITION_TYPE ptPositionType,
   int dwNewPosition,
-) => _SetMonitorDisplayAreaPosition(hMonitor, ptPositionType, dwNewPosition);
-
-final _SetMonitorDisplayAreaPosition = _dxva2
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hMonitor,
-        Int32 ptPositionType,
-        Uint32 dwNewPosition,
-      ),
-      int Function(int hMonitor, int ptPositionType, int dwNewPosition)
-    >('SetMonitorDisplayAreaPosition');
+) {
+  final result_ = SetMonitorDisplayAreaPosition_Wrapper(
+    hMonitor,
+    ptPositionType,
+    dwNewPosition,
+  );
+  return Win32Result(value: result_.value.i32, error: result_.error);
+}
 
 /// Sets the width or height of a monitor's display area.
 ///
-/// ```c
-/// _BOOL SetMonitorDisplayAreaSize(
-///   HANDLE       hMonitor,
-///   MC_SIZE_TYPE stSizeType,
-///   DWORD        dwNewDisplayAreaWidthOrHeight
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/highlevelmonitorconfigurationapi/nf-highlevelmonitorconfigurationapi-setmonitordisplayareasize>.
+///
 /// {@category dxva2}
-int SetMonitorDisplayAreaSize(
-  int hMonitor,
-  int stSizeType,
+Win32Result<int> SetMonitorDisplayAreaSize(
+  HANDLE hMonitor,
+  MC_SIZE_TYPE stSizeType,
   int dwNewDisplayAreaWidthOrHeight,
-) => _SetMonitorDisplayAreaSize(
-  hMonitor,
-  stSizeType,
-  dwNewDisplayAreaWidthOrHeight,
-);
-
-final _SetMonitorDisplayAreaSize = _dxva2
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hMonitor,
-        Int32 stSizeType,
-        Uint32 dwNewDisplayAreaWidthOrHeight,
-      ),
-      int Function(
-        int hMonitor,
-        int stSizeType,
-        int dwNewDisplayAreaWidthOrHeight,
-      )
-    >('SetMonitorDisplayAreaSize');
+) {
+  final result_ = SetMonitorDisplayAreaSize_Wrapper(
+    hMonitor,
+    stSizeType,
+    dwNewDisplayAreaWidthOrHeight,
+  );
+  return Win32Result(value: result_.value.i32, error: result_.error);
+}
 
 /// Sets a monitor's red, green, or blue drive value.
 ///
-/// ```c
-/// _BOOL SetMonitorRedGreenOrBlueDrive(
-///   HANDLE        hMonitor,
-///   MC_DRIVE_TYPE dtDriveType,
-///   DWORD         dwNewDrive
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/highlevelmonitorconfigurationapi/nf-highlevelmonitorconfigurationapi-setmonitorredgreenorbluedrive>.
+///
 /// {@category dxva2}
+@pragma('vm:prefer-inline')
 int SetMonitorRedGreenOrBlueDrive(
-  int hMonitor,
-  int dtDriveType,
+  HANDLE hMonitor,
+  MC_DRIVE_TYPE dtDriveType,
   int dwNewDrive,
 ) => _SetMonitorRedGreenOrBlueDrive(hMonitor, dtDriveType, dwNewDrive);
 
-final _SetMonitorRedGreenOrBlueDrive = _dxva2
-    .lookupFunction<
-      Int32 Function(IntPtr hMonitor, Int32 dtDriveType, Uint32 dwNewDrive),
-      int Function(int hMonitor, int dtDriveType, int dwNewDrive)
-    >('SetMonitorRedGreenOrBlueDrive');
+@Native<Int32 Function(Pointer, Int32, Uint32)>(
+  symbol: 'SetMonitorRedGreenOrBlueDrive',
+)
+external int _SetMonitorRedGreenOrBlueDrive(
+  Pointer hMonitor,
+  int dtDriveType,
+  int dwNewDrive,
+);
 
 /// Sets a monitor's red, green, or blue gain value.
 ///
-/// ```c
-/// _BOOL SetMonitorRedGreenOrBlueGain(
-///   HANDLE       hMonitor,
-///   MC_GAIN_TYPE gtGainType,
-///   DWORD        dwNewGain
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/highlevelmonitorconfigurationapi/nf-highlevelmonitorconfigurationapi-setmonitorredgreenorbluegain>.
+///
 /// {@category dxva2}
-int SetMonitorRedGreenOrBlueGain(int hMonitor, int gtGainType, int dwNewGain) =>
-    _SetMonitorRedGreenOrBlueGain(hMonitor, gtGainType, dwNewGain);
+@pragma('vm:prefer-inline')
+int SetMonitorRedGreenOrBlueGain(
+  HANDLE hMonitor,
+  MC_GAIN_TYPE gtGainType,
+  int dwNewGain,
+) => _SetMonitorRedGreenOrBlueGain(hMonitor, gtGainType, dwNewGain);
 
-final _SetMonitorRedGreenOrBlueGain = _dxva2
-    .lookupFunction<
-      Int32 Function(IntPtr hMonitor, Int32 gtGainType, Uint32 dwNewGain),
-      int Function(int hMonitor, int gtGainType, int dwNewGain)
-    >('SetMonitorRedGreenOrBlueGain');
+@Native<Int32 Function(Pointer, Int32, Uint32)>(
+  symbol: 'SetMonitorRedGreenOrBlueGain',
+)
+external int _SetMonitorRedGreenOrBlueGain(
+  Pointer hMonitor,
+  int gtGainType,
+  int dwNewGain,
+);

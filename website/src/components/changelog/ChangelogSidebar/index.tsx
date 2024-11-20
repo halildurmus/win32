@@ -1,5 +1,5 @@
 import Link from '@docusaurus/Link';
-import { useVisibleBlogSidebarItems } from '@docusaurus/theme-common/internal';
+import { useVisibleBlogSidebarItems } from '@docusaurus/plugin-content-blog/client';
 import type { Props } from '@theme/BlogSidebar';
 import clsx from 'clsx';
 

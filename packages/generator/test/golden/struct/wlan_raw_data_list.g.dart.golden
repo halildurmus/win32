@@ -1,0 +1,49 @@
+WLAN_RAW_DATA_LIST|
+/// Contains raw data in the form of an array of data blobs that are used by
+/// some Native Wifi functions.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/ns-wlanapi-wlan_raw_data_list>.
+///
+/// {@category struct}
+base class WLAN_RAW_DATA_LIST extends Struct {
+  /// The total size, in bytes, of the <b>WLAN_RAW_DATA_LIST</b> structure.
+  @Uint32()
+  external int dwTotalSize;
+
+  /// The number of raw data entries or blobs in the <b>WLAN_RAW_DATA_LIST</b>
+  /// structure.
+  @Uint32()
+  external int dwNumberOfItems;
+
+  /// An array of raw data entries or blobs that make up the data list.
+  @Array.variableWithVariableDimension(1)
+  external Array<WLAN_RAW_DATA_LIST_0> DataList;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<WLAN_RAW_DATA_LIST> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// {@category struct}
+sealed class WLAN_RAW_DATA_LIST_0 extends Struct {
+  @Uint32()
+  external int dwDataOffset;
+
+  @Uint32()
+  external int dwDataSize;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<WLAN_RAW_DATA_LIST_0> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}

@@ -40,7 +40,7 @@ export const LandingHeroAnimation = React.memo(function HeroAnimation() {
         }, 2000);
         t2 = setTimeout(() => {
           setActiveWindowsFeature(
-            (prev) => (prev + 1) % windowsFeatureItems.length
+            (prev) => (prev + 1) % windowsFeatureItems.length,
           );
         }, 4000);
         t3 = setTimeout(() => {
@@ -69,7 +69,7 @@ export const LandingHeroAnimation = React.memo(function HeroAnimation() {
             'left-0',
             'top-0',
             'bottom-0',
-            'right-0'
+            'right-0',
           )}
         />
         <div
@@ -83,15 +83,13 @@ export const LandingHeroAnimation = React.memo(function HeroAnimation() {
             'content-center',
             'bg-white dark:bg-gray-700',
             'rounded-full',
-            'ring-1 ring-gray-300 dark:ring-gray-600'
+            'ring-1 ring-gray-300 dark:ring-gray-600',
           )}
         >
           <Win32Icon
             className={clsx(
               'w-[72px] h-[72px]',
-              'text-win32-blue dark:text-win32-cyan-alt',
-              'rounded-full',
-              'dark:drop-shadow-landing-hero-animation-center-glow'
+              'dark:drop-shadow-landing-hero-animation-center-glow',
             )}
           />
         </div>
@@ -110,7 +108,7 @@ export const LandingHeroAnimation = React.memo(function HeroAnimation() {
             'px-[89px]',
             'flex-col',
             'items-start',
-            'justify-between'
+            'justify-between',
           )}
         >
           <div
@@ -147,7 +145,7 @@ export const LandingHeroAnimation = React.memo(function HeroAnimation() {
               'w-full',
               'flex',
               'items-end',
-              'justify-between'
+              'justify-between',
             )}
           >
             <LandingHeroAnimationItem
@@ -185,7 +183,7 @@ export const LandingHeroAnimation = React.memo(function HeroAnimation() {
             '-translate-x-1/2',
             'translate-y-0',
             'landing-lg:translate-y-16',
-            'dark:animate-landing-hero-beam-line'
+            'dark:animate-landing-hero-beam-line',
           )}
         />
         <LandingHeroBeamGlowSvg
@@ -198,7 +196,7 @@ export const LandingHeroAnimation = React.memo(function HeroAnimation() {
             'translate-y-0',
             'landing-lg:translate-y-16',
             'blur-sm',
-            'dark:animate-landing-hero-beam-glow'
+            'dark:animate-landing-hero-beam-glow',
           )}
           style={{
             fillOpacity: 0,
@@ -218,7 +216,7 @@ export const LandingHeroAnimation = React.memo(function HeroAnimation() {
             'top-1/2',
             'landing-lg:top-[calc(50%+64px)]',
             'translate-y-64',
-            'z-[1]'
+            'z-[1]',
           )}
         >
           <div
@@ -228,7 +226,7 @@ export const LandingHeroAnimation = React.memo(function HeroAnimation() {
               'w-40',
               'h-px',
               'bg-landing-hero-beam-bottom-light dark:bg-landing-hero-beam-bottom',
-              'animate-landing-hero-beam-bottom'
+              'animate-landing-hero-beam-bottom',
             )}
           />
         </div>

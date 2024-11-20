@@ -1,93 +1,98 @@
-// ignore_for_file: unreachable_from_main
-
-import 'package:dart_style/dart_style.dart';
 import 'package:generator/generator.dart';
 import 'package:winmd/winmd.dart';
 
-void printCallback([
-  String type = 'Windows.Win32.System.StationsAndDesktops.DESKTOPENUMPROCW',
-]) {
-  final typeDef = MetadataStore.findTypeDef(type);
-  if (typeDef != null && typeDef.isDelegate) {
-    final callbackProjection = CallbackProjection(typeDef);
-    print(callbackProjection.format());
+void printProjection<T>(
+  String type,
+  T Function(TypeDef) projectionFactory,
+  bool Function(TypeDef) typePredicate,
+) {
+  final typeDef = WindowsMetadata.findTypeDefByName(type);
+  if (typePredicate(typeDef)) {
+    final projection = projectionFactory(typeDef);
+    print(projection);
   }
+}
+
+void printCallback([String type = 'DESKTOPENUMPROCW']) {
+  printProjection(
+    type,
+    CallbackProjection.new,
+    (typeDef) => typeDef.isDelegate,
+  );
+}
+
+void printConstant([String name = 'HKEY_LOCAL_MACHINE']) {
+  final constant = WindowsMetadata.findConstantByName(name);
+  final projection = ConstantProjection(constant);
+  print(projection);
+}
+
+void printEnum([String type = 'APTTYPE']) {
+  printProjection(type, EnumProjection.new, (typeDef) => typeDef.isEnum);
 }
 
 void printFunction([String name = 'BroadcastSystemMessageW']) {
-  final scopes = MetadataStore.scopeCache.values;
-  for (final typeDef
-      in scopes
-          .expand((scope) => scope.typeDefs)
-          .where((typeDef) => typeDef.name.endsWith('Apis'))) {
-    final method = typeDef.findMethod(name);
-    if (method != null) {
-      final functionProjection = FunctionProjection(method, 'user32');
-      print(functionProjection.format());
-    }
-  }
+  final function = WindowsMetadata.findFunctionByName(name);
+  final projection = FunctionProjection(function);
+  print(projection);
+  print(projection.originalReturnType);
 }
 
-void printStruct([
-  String type = 'Windows.Win32.Graphics.Gdi.BITMAPFILEHEADER',
+void printGetProperty([
+  String interface = 'ISpeechVoice',
+  String propertyName = 'get_Volume',
 ]) {
-  final typeDef = MetadataStore.findTypeDef(type);
-  if (typeDef != null && typeDef.isStruct) {
-    final structProjection = StructProjection(typeDef, lastComponent(type));
-    print(structProjection.format());
+  final typeDef = WindowsMetadata.findTypeDefByName(interface);
+  final method = typeDef.findMethod(propertyName);
+  if (method.canBeProjectedAsGetter) {
+    final projection = ComGetPropertyProjection(method);
+    print(projection);
   }
 }
 
-void printComInterface([
-  String type = 'Windows.Win32.UI.Shell.IFileOpenDialog',
+void printInterface([String type = 'IFileOpenDialog']) {
+  printProjection(
+    type,
+    ComInterfaceProjection.new,
+    (typeDef) => typeDef.isInterface,
+  );
+}
+
+void printMethod([
+  String interface = 'IUnknown',
+  String methodName = 'QueryInterface',
 ]) {
-  final typeDef = MetadataStore.findTypeDef(type);
-  if (typeDef != null && typeDef.isInterface) {
-    final interfaceProjection = ComInterfaceProjection(typeDef);
-    print(interfaceProjection.format());
+  final typeDef = WindowsMetadata.findTypeDefByName(interface);
+  final method = typeDef.findMethod(methodName);
+  final projection = ComMethodProjection(method);
+  print(projection);
+}
+
+void printSetProperty([
+  String interface = 'ISpeechVoice',
+  String propertyName = 'put_Volume',
+]) {
+  final typeDef = WindowsMetadata.findTypeDefByName(interface);
+  final method = typeDef.findMethod(propertyName);
+  if (method.canBeProjectedAsSetter) {
+    final projection = ComSetPropertyProjection(method);
+    print(projection);
   }
 }
 
-void printComMethod(String interface, String methodName) {
-  final typeDef = MetadataStore.findTypeDef(interface);
-  final method = typeDef?.findMethod(methodName);
-  if (method != null) {
-    final methodProjection = ComMethodProjection(method, 3);
-    print(methodProjection.format());
-  }
-}
-
-void printComGetProperty(String interface, String propertyName) {
-  final typeDef = MetadataStore.findTypeDef(interface);
-  final method = typeDef?.findMethod(propertyName);
-  if (method != null) {
-    final methodProjection = ComGetPropertyProjection(method, 3);
-    print(methodProjection.format());
-  }
-}
-
-void printComSetProperty(String interface, String propertyName) {
-  final typeDef = MetadataStore.findTypeDef(interface);
-  final method = typeDef?.findMethod(propertyName);
-  if (method != null) {
-    final methodProjection = ComSetPropertyProjection(method, 3);
-    print(methodProjection.format());
-  }
-}
-
-extension on Object {
-  String format() => DartFormatter(
-    languageVersion: DartFormatter.latestLanguageVersion,
-    lineEnding: '\n',
-  ).format(toString());
+void printStruct([String type = 'DEVMODEW']) {
+  printProjection(type, StructProjection.new, (typeDef) => typeDef.isStruct);
 }
 
 void main() async {
-  await (
-    MetadataStore.loadWdkScope(version: wdkMetadataVersion),
-    MetadataStore.loadWin32Scope(version: win32MetadataVersion),
-    MetadataStore.loadWinrtScope(version: winrtMetadataVersion),
-  ).wait;
+  await WindowsMetadata.load();
+  printCallback();
+  printConstant();
+  printEnum();
+  printFunction();
+  printGetProperty();
+  printInterface();
+  printMethod();
+  printSetProperty();
   printStruct();
-  MetadataStore.close();
 }

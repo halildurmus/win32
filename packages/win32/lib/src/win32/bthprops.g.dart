@@ -1,123 +1,122 @@
-// Maps FFI prototypes onto the corresponding Win32 API function calls
-
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-
-// ignore_for_file: unused_import, non_constant_identifier_names
-// ignore_for_file: constant_identifier_names, camel_case_types
-// ignore_for_file: specify_nonobvious_property_types
+//
+// Maps FFI prototypes onto the corresponding Win32 API function calls.
+//
+// ignore_for_file: avoid_positional_boolean_parameters
+// ignore_for_file: non_constant_identifier_names, unused_import
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
+import 'package:ffi_leak_tracker/ffi_leak_tracker.dart';
 
-import '../callbacks.dart';
-import '../combase.dart';
-import '../guid.dart';
+import '../_internal/bthprops.g.dart';
+import '../_internal/win32.dart';
+import '../bstr.dart';
+import '../com/interface.g.dart';
+import '../com/iunknown.g.dart';
+import '../constants.dart';
+import '../constants.g.dart';
+import '../enums.g.dart';
+import '../exception.dart';
+import '../extensions/pointer.dart';
+import '../hresult.dart';
+import '../hstring.dart';
+import '../macros.dart';
+import '../ntstatus.dart';
+import '../pcstr.dart';
+import '../pcwstr.dart';
+import '../pstr.dart';
+import '../pwstr.dart';
+import '../rpc_status.dart';
 import '../structs.g.dart';
-import '../variant.dart';
+import '../types.dart';
+import '../utils.dart';
+import '../win32_error.dart';
+import '../win32_result.dart';
 
-final _bthprops = DynamicLibrary.open('bthprops.cpl');
-
-/// The BluetoothAuthenticateDeviceEx function sends an authentication
-/// request to a remote Bluetooth device. Additionally, this function allows
-/// for out-of-band data to be passed into the function call for the device
-/// being authenticated.
+/// Sends an authentication request to a remote Bluetooth device.
 ///
-/// ```c
-/// DWORD BluetoothAuthenticateDeviceEx(
-///   HWND                        hwndParentIn,
-///   HANDLE                      hRadioIn,
-///   BLUETOOTH_DEVICE_INFO       *pbtdiInout,
-///   PBLUETOOTH_OOB_DATA_INFO    pbtOobData,
-///   AUTHENTICATION_REQUIREMENTS authenticationRequirement
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothauthenticatedeviceex>.
+///
 /// {@category bthprops}
+@pragma('vm:prefer-inline')
 int BluetoothAuthenticateDeviceEx(
-  int hwndParentIn,
-  int hRadioIn,
+  HWND? hwndParentIn,
+  HANDLE? hRadioIn,
   Pointer<BLUETOOTH_DEVICE_INFO> pbtdiInout,
-  Pointer<BLUETOOTH_OOB_DATA_INFO> pbtOobData,
-  int authenticationRequirement,
+  Pointer<BLUETOOTH_OOB_DATA_INFO>? pbtOobData,
+  AUTHENTICATION_REQUIREMENTS authenticationRequirement,
 ) => _BluetoothAuthenticateDeviceEx(
-  hwndParentIn,
-  hRadioIn,
+  hwndParentIn ?? nullptr,
+  hRadioIn ?? nullptr,
   pbtdiInout,
-  pbtOobData,
+  pbtOobData ?? nullptr,
   authenticationRequirement,
 );
 
-final _BluetoothAuthenticateDeviceEx = _bthprops
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hwndParentIn,
-        IntPtr hRadioIn,
-        Pointer<BLUETOOTH_DEVICE_INFO> pbtdiInout,
-        Pointer<BLUETOOTH_OOB_DATA_INFO> pbtOobData,
-        Int32 authenticationRequirement,
-      ),
-      int Function(
-        int hwndParentIn,
-        int hRadioIn,
-        Pointer<BLUETOOTH_DEVICE_INFO> pbtdiInout,
-        Pointer<BLUETOOTH_OOB_DATA_INFO> pbtOobData,
-        int authenticationRequirement,
-      )
-    >('BluetoothAuthenticateDeviceEx');
+@Native<
+  Uint32 Function(
+    Pointer,
+    Pointer,
+    Pointer<BLUETOOTH_DEVICE_INFO>,
+    Pointer<BLUETOOTH_OOB_DATA_INFO>,
+    Int32,
+  )
+>(symbol: 'BluetoothAuthenticateDeviceEx')
+external int _BluetoothAuthenticateDeviceEx(
+  Pointer hwndParentIn,
+  Pointer hRadioIn,
+  Pointer<BLUETOOTH_DEVICE_INFO> pbtdiInout,
+  Pointer<BLUETOOTH_OOB_DATA_INFO> pbtOobData,
+  int authenticationRequirement,
+);
 
-/// The BluetoothDisplayDeviceProperties function opens the Control Panel
-/// device information property sheet.
+/// Starts Control Panel device information property sheet.
 ///
-/// ```c
-/// BOOL BluetoothDisplayDeviceProperties(
-///   HWND                  hwndParent,
-///   BLUETOOTH_DEVICE_INFO *pbtdi
-/// );
-/// ```
-/// {@category bluetooth}
-int BluetoothDisplayDeviceProperties(
-  int hwndParent,
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothdisplaydeviceproperties>.
+///
+/// {@category bthprops}
+Win32Result<bool> BluetoothDisplayDeviceProperties(
+  HWND? hwndParent,
   Pointer<BLUETOOTH_DEVICE_INFO> pbtdi,
-) => _BluetoothDisplayDeviceProperties(hwndParent, pbtdi);
+) {
+  final result_ = BluetoothDisplayDeviceProperties_Wrapper(
+    hwndParent ?? nullptr,
+    pbtdi,
+  );
+  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+}
 
-final _BluetoothDisplayDeviceProperties = _bthprops
-    .lookupFunction<
-      Int32 Function(IntPtr hwndParent, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi),
-      int Function(int hwndParent, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi)
-    >('BluetoothDisplayDeviceProperties');
-
-/// The BluetoothSelectDevices function enables Bluetooth device selection.
+/// Enables Bluetooth device selection.
 ///
-/// ```c
-/// BOOL BluetoothSelectDevices(
-///   BLUETOOTH_SELECT_DEVICE_PARAMS *pbtsdp
-/// );
-/// ```
-/// {@category bluetooth}
-int BluetoothSelectDevices(Pointer<BLUETOOTH_SELECT_DEVICE_PARAMS> pbtsdp) =>
-    _BluetoothSelectDevices(pbtsdp);
-
-final _BluetoothSelectDevices = _bthprops
-    .lookupFunction<
-      Int32 Function(Pointer<BLUETOOTH_SELECT_DEVICE_PARAMS> pbtsdp),
-      int Function(Pointer<BLUETOOTH_SELECT_DEVICE_PARAMS> pbtsdp)
-    >('BluetoothSelectDevices');
-
-/// The BluetoothSelectDevicesFree function frees resources associated with
-/// a previous call to BluetoothSelectDevices.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothselectdevices>.
 ///
-/// ```c
-/// BOOL BluetoothSelectDevicesFree(
-///   BLUETOOTH_SELECT_DEVICE_PARAMS *pbtsdp
-/// );
-/// ```
-/// {@category bluetooth}
-int BluetoothSelectDevicesFree(
+/// {@category bthprops}
+Win32Result<bool> BluetoothSelectDevices(
   Pointer<BLUETOOTH_SELECT_DEVICE_PARAMS> pbtsdp,
-) => _BluetoothSelectDevicesFree(pbtsdp);
+) {
+  final result_ = BluetoothSelectDevices_Wrapper(pbtsdp);
+  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+}
 
-final _BluetoothSelectDevicesFree = _bthprops
-    .lookupFunction<
-      Int32 Function(Pointer<BLUETOOTH_SELECT_DEVICE_PARAMS> pbtsdp),
-      int Function(Pointer<BLUETOOTH_SELECT_DEVICE_PARAMS> pbtsdp)
-    >('BluetoothSelectDevicesFree');
+/// Frees resources associated with a previous call to BluetoothSelectDevices.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothselectdevicesfree>.
+///
+/// {@category bthprops}
+@pragma('vm:prefer-inline')
+bool BluetoothSelectDevicesFree(
+  Pointer<BLUETOOTH_SELECT_DEVICE_PARAMS> pbtsdp,
+) => _BluetoothSelectDevicesFree(pbtsdp) != FALSE;
+
+@Native<Int32 Function(Pointer<BLUETOOTH_SELECT_DEVICE_PARAMS>)>(
+  symbol: 'BluetoothSelectDevicesFree',
+)
+external int _BluetoothSelectDevicesFree(
+  Pointer<BLUETOOTH_SELECT_DEVICE_PARAMS> pbtsdp,
+);

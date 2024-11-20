@@ -4,15 +4,16 @@ import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:win32/win32.dart';
 
-import 'models/winver.dart';
 import 'volumepanel.dart';
 import 'windowroundingselector.dart';
 
 void main() {
-  runApp(ExplorerApp());
+  runApp(const ExplorerApp());
 }
 
 class ExplorerApp extends StatelessWidget {
+  const ExplorerApp({super.key});
+
   @override
   Widget build(BuildContext context) => MaterialApp(
     theme: ThemeData.light(),
@@ -33,21 +34,18 @@ class MainPageState extends State<MainPage> {
 
   @override
   void initState() {
-    showRoundedCornerSwitch = isWindows11();
-
+    showRoundedCornerSwitch = IsWindows11OrGreater();
     super.initState();
   }
 
   Future<void> showDocumentsPath() async {
     final appDocDir = await getApplicationDocumentsDirectory();
-    final hwnd = GetForegroundWindow();
-    final pMessage = 'Path: ${appDocDir.path}'.toNativeUtf16();
-    final pTitle = 'Application Documents'.toNativeUtf16();
-
-    MessageBox(hwnd, pMessage, pTitle, MB_OK);
-
-    free(pMessage);
-    free(pTitle);
+    using((arena) {
+      final hwnd = GetForegroundWindow();
+      final text = arena.pcwstr('Path: ${appDocDir.path}');
+      final caption = arena.pcwstr('Application Documents');
+      MessageBox(hwnd, text, caption, MB_OK);
+    });
   }
 
   @override
@@ -62,7 +60,7 @@ class MainPageState extends State<MainPage> {
             PlatformMenuItemGroup(
               members: [
                 PlatformMenuItem(
-                  label: 'Show Docs Path...',
+                  label: 'Show Documents Path',
                   shortcut: const SingleActivator(
                     LogicalKeyboardKey.keyP,
                     control: true,
@@ -78,14 +76,15 @@ class MainPageState extends State<MainPage> {
       child: Column(
         children: [
           if (showRoundedCornerSwitch) const WindowRoundingSelector(),
-          Expanded(child: VolumePanel()),
+          const Expanded(child: VolumePanel()),
 
-          // TODO(halildurmus): Can be removed when PlatformMenuBar is
+          // TODO(halildurmus): Can be removed if/when PlatformMenuBar is
           // supported on Windows.
           FloatingActionButton(
-            mini: true,
-            child: const Icon(Icons.folder),
             onPressed: () async => showDocumentsPath(),
+            mini: true,
+            tooltip: 'Show Documents Path',
+            child: const Icon(Icons.folder),
           ),
         ],
       ),

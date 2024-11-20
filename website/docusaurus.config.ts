@@ -9,13 +9,14 @@ const githubRepoUrl = 'https://github.com/halildurmus/win32';
 
 const config: Config = {
   title: 'win32',
-  tagline: 'Access Win32 APIs Directly from Dart',
+  tagline: 'Call Windows APIs from Dart',
   url: 'https://win32.pub',
   baseUrl: '/',
   organizationName: 'halildurmus',
   projectName: 'win32',
 
   future: {
+    v4: true,
     experimental_faster: true,
   },
 
@@ -91,14 +92,14 @@ const config: Config = {
         routeBasePath: '/blog',
         blogTitle: 'win32 Blog',
         blogDescription:
-          'A resource for win32, Flutter and Dart ecosystem, and Windows development.',
+          'A resource for package:win32, Flutter and Dart ecosystem, and Windows development.',
         blogSidebarCount: 0,
         blogSidebarTitle: 'All posts',
         feedOptions: {
           type: 'all',
           title: 'win32 Blog',
           description:
-            'A resource for win32, Flutter and Dart ecosystem, and Windows development.',
+            'A resource for package:win32, Flutter and Dart ecosystem, and Windows development.',
           copyright: `Copyright © ${new Date().getFullYear()} • Halil Durmus`,
         },
         postsPerPage: 12,
@@ -107,28 +108,27 @@ const config: Config = {
         },
       } satisfies BlogPluginOptions,
     ],
-    // TODO(halildurmus): Enable changelog plugin.
-    // [
-    //   './plugins/changelog.js',
-    //   {
-    //     routeBasePath: '/changelog',
-    //     authorsMapPath: 'authors.json',
-    //     blogTitle: 'win32 Changelog',
-    //     blogDescription:
-    //       'Keep yourself up-to-date about new features in every release',
-    //     blogSidebarCount: 'ALL',
-    //     blogSidebarTitle: 'Changelog',
-    //     feedOptions: {
-    //       type: 'all',
-    //       title: 'win32 Changelog',
-    //       description:
-    //         'Keep yourself up-to-date about new features in every release',
-    //       copyright: `Copyright © ${new Date().getFullYear()} • Halil Durmus`,
-    //     },
-    //     postsPerPage: 20,
-    //     showReadingTime: false,
-    //   },
-    // ],
+    [
+      './plugins/changelog.js',
+      {
+        routeBasePath: '/changelog',
+        authorsMapPath: 'authors.json',
+        blogTitle: 'win32 Changelog',
+        blogDescription:
+          'Keep yourself up-to-date about new features in every release',
+        blogSidebarCount: 'ALL',
+        blogSidebarTitle: 'Changelog',
+        feedOptions: {
+          type: 'all',
+          title: 'win32 Changelog',
+          description:
+            'Keep yourself up-to-date about new features in every release',
+          copyright: `Copyright © ${new Date().getFullYear()} • Halil Durmus`,
+        },
+        postsPerPage: 20,
+        showReadingTime: false,
+      },
+    ],
     './plugins/clarity.ts',
   ],
 
@@ -225,12 +225,12 @@ const config: Config = {
     metadata: [
       {
         name: 'twitter:title',
-        content: 'win32 | Access Win32 APIs Directly from Dart',
+        content: 'win32 | Call Windows APIs from Dart',
       },
       {
         name: 'twitter:description',
         content:
-          'Bring the full capability of the Windows API to your Flutter and Dart applications.',
+          'Bring the full capability of the Windows APIs to your Flutter and Dart applications.',
       },
     ],
   } satisfies Preset.ThemeConfig,
@@ -239,7 +239,7 @@ const config: Config = {
 
   customFields: {
     description:
-      'Bring the full capability of the Windows API to your Flutter and Dart applications.',
+      'Bring the full capability of the Windows APIs to your Flutter and Dart applications.',
   },
 };
 

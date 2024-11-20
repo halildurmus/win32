@@ -7,138 +7,188 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
+// Control IDs
 const ID_TEXT = 200;
 const ID_EDITTEXT = 201;
 const ID_PROGRESS = 202;
-const PROGRESS_CLASS = 'msctls_progress32';
 
-final int hInstance = GetModuleHandle(nullptr);
-String? textEntered;
+// Window class constants
+const WINDOW_CLASS_BUTTON = 0x0080;
+const WINDOW_CLASS_EDIT = 0x0081;
+const WINDOW_CLASS_STATIC = 0x0082;
+
+final hInstance = HINSTANCE(GetModuleHandle(null).value);
 
 void main() {
-  // Allocate 8KB, which is more than enough space for the dialog in memory.
-  final ptr = calloc<Uint16>(4096);
-  var idx = 0;
+  final dialog = DialogBuilder();
+  final result = dialog.show();
+  if (result != null) {
+    print('Entered: $result');
+  }
+}
 
-  idx += (ptr + idx).cast<DLGTEMPLATE>().setDialog(
-    style:
-        WS_POPUP |
-        WS_BORDER |
-        WS_SYSMENU |
-        DS_MODALFRAME |
-        DS_SETFONT |
-        WS_CAPTION,
-    title: 'Sample dialog',
-    cdit: 5, // number of controls in the dialog
-    cx: 300,
-    cy: 200,
-    fontName: 'MS Shell Dlg',
-    fontSize: 8,
-  );
+/// Builds and displays a custom dialog box.
+class DialogBuilder {
+  static const _bufferSize = 4096;
+  static const _textBufferSize = 256;
 
-  idx += (ptr + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
-    style: WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_DEFPUSHBUTTON,
-    x: 100,
-    y: 160,
-    cx: 50,
-    cy: 14,
-    id: IDOK,
-    windowSystemClass: 0x0080, // button
-    text: 'OK',
-  );
+  String? _textEntered;
 
-  idx += (ptr + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
-    style: WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON,
-    x: 190,
-    y: 160,
-    cx: 50,
-    cy: 14,
-    id: IDCANCEL,
-    windowSystemClass: 0x0080, // button
-    text: 'Cancel',
-  );
+  /// Creates and displays the dialog, returning the entered text if OK was clicked.
+  String? show() => using((arena) {
+    final ptr = arena<Uint16>(_bufferSize);
+    var idx = 0;
+    idx += _setDialogProperties(ptr, idx);
+    idx += _addOkButton(ptr, idx);
+    idx += _addCancelButton(ptr, idx);
+    idx += _addStaticText(ptr, idx);
+    idx += _addProgressBar(ptr, idx);
+    idx += _addEditControl(ptr, idx);
+    final result = _showDialog(ptr);
+    if (result <= 0) {
+      print('Error: $result');
+      return null;
+    }
 
-  idx += (ptr + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
-    style: WS_CHILD | WS_VISIBLE,
-    x: 10,
-    y: 10,
-    cx: 60,
-    cy: 20,
-    id: ID_TEXT,
-    windowSystemClass: 0x0082, // static
-    text: 'Some static wrapped text here.',
-  );
+    return _textEntered;
+  });
 
-  idx += (ptr + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
-    style: PBS_SMOOTH | WS_BORDER | WS_VISIBLE,
-    x: 10,
-    y: 30,
-    cx: 150,
-    cy: 12,
-    id: ID_PROGRESS,
-    windowClass: PROGRESS_CLASS, // progress bar
-  );
+  int _setDialogProperties(Pointer<Uint16> ptr, int idx) =>
+      (ptr + idx).cast<DLGTEMPLATE>().setDialog(
+        style:
+            WS_POPUP |
+            WS_BORDER |
+            WS_SYSMENU |
+            DS_MODALFRAME |
+            DS_SETFONT |
+            WS_CAPTION,
+        title: 'Sample dialog',
+        cdit: 5, // number of controls
+        cx: 300, // width
+        cy: 200, // height
+        fontName: 'MS Shell Dlg',
+        fontSize: 8,
+      );
 
-  idx += (ptr + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
-    style: WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER | ES_AUTOHSCROLL,
-    x: 10,
-    y: 50,
-    cx: 150,
-    cy: 20,
-    id: ID_EDITTEXT,
-    windowSystemClass: 0x0081, // edit
-    text: 'Enter text',
-  );
+  int _addOkButton(Pointer<Uint16> ptr, int idx) =>
+      (ptr + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
+        style: WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_DEFPUSHBUTTON,
+        x: 100,
+        y: 160,
+        cx: 50,
+        cy: 14,
+        id: IDOK,
+        windowSystemClass: WINDOW_CLASS_BUTTON,
+        text: 'OK',
+      );
 
-  final lpDialogFunc = NativeCallable<DLGPROC>.isolateLocal(
-    dialogReturnProc,
-    exceptionalReturn: 0,
-  );
+  int _addCancelButton(Pointer<Uint16> ptr, int idx) =>
+      (ptr + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
+        style: WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON,
+        x: 190,
+        y: 160,
+        cx: 50,
+        cy: 14,
+        id: IDCANCEL,
+        windowSystemClass: WINDOW_CLASS_BUTTON,
+        text: 'Cancel',
+      );
 
-  final nResult = DialogBoxIndirectParam(
-    hInstance,
-    ptr.cast<DLGTEMPLATE>(),
-    NULL,
-    lpDialogFunc.nativeFunction,
-    0,
-  );
+  int _addStaticText(Pointer<Uint16> ptr, int idx) =>
+      (ptr + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
+        style: WS_CHILD | WS_VISIBLE,
+        x: 10,
+        y: 10,
+        cx: 60,
+        cy: 20,
+        id: ID_TEXT,
+        windowSystemClass: WINDOW_CLASS_STATIC,
+        text: 'Some static wrapped text here.',
+      );
 
-  if (nResult <= 0) {
-    print('Error: $nResult');
-  } else {
-    if (textEntered != null) {
-      print('Entered: $textEntered');
+  int _addProgressBar(Pointer<Uint16> ptr, int idx) =>
+      (ptr + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
+        style: PBS_SMOOTH | WS_BORDER | WS_VISIBLE,
+        x: 10,
+        y: 30,
+        cx: 150,
+        cy: 12,
+        id: ID_PROGRESS,
+        windowClass: PROGRESS_CLASS,
+      );
+
+  int _addEditControl(Pointer<Uint16> ptr, int idx) =>
+      (ptr + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
+        style: WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER | ES_AUTOHSCROLL,
+        x: 10,
+        y: 50,
+        cx: 150,
+        cy: 20,
+        id: ID_EDITTEXT,
+        windowSystemClass: WINDOW_CLASS_EDIT,
+        text: 'Enter text',
+      );
+
+  int _showDialog(Pointer<Uint16> ptr) {
+    final lpDialogFunc = NativeCallable<DLGPROC>.isolateLocal(
+      _dialogProc,
+      exceptionalReturn: 0,
+    );
+    try {
+      return DialogBoxIndirectParam(
+        hInstance,
+        ptr.cast<DLGTEMPLATE>(),
+        null,
+        lpDialogFunc.nativeFunction,
+        const LPARAM(0),
+      ).value;
+    } finally {
+      lpDialogFunc.close();
     }
   }
 
-  lpDialogFunc.close();
-  free(ptr);
-}
+  // Documentation: https://learn.microsoft.com/windows/win32/dlgbox/using-dialog-boxes
+  int _dialogProc(Pointer hWndDlg, int message, int wParam, int lParam) {
+    final hwndDlg = HWND(hWndDlg);
+    switch (message) {
+      case WM_INITDIALOG:
+        SendDlgItemMessage(
+          hwndDlg,
+          ID_PROGRESS,
+          PBM_SETPOS,
+          const WPARAM(35),
+          const LPARAM(0),
+        );
+        return TRUE;
 
-// Documentation on this function here:
-// https://learn.microsoft.com/windows/win32/dlgbox/using-dialog-boxes
-int dialogReturnProc(int hwndDlg, int message, int wParam, int lParam) {
-  switch (message) {
-    case WM_INITDIALOG:
-      SendDlgItemMessage(hwndDlg, ID_PROGRESS, PBM_SETPOS, 35, 0);
-    case WM_COMMAND:
-      switch (LOWORD(wParam)) {
-        case IDOK:
-          print('OK');
-          final textPtr = wsalloc(256);
-          final result = GetDlgItemText(hwndDlg, ID_EDITTEXT, textPtr, 256);
-          if (result != NULL) {
-            textEntered = textPtr.toDartString();
-          }
-          free(textPtr);
-          EndDialog(hwndDlg, wParam);
-          return TRUE;
-        case IDCANCEL:
-          print('Cancel');
-          EndDialog(hwndDlg, wParam);
-          return TRUE;
-      }
+      case WM_COMMAND:
+        switch (LOWORD(wParam)) {
+          case IDOK:
+            print('OK');
+            _textEntered = _getEditText(hwndDlg);
+            EndDialog(hwndDlg, wParam);
+            return TRUE;
+
+          case IDCANCEL:
+            print('Cancel');
+            EndDialog(hwndDlg, wParam);
+            return TRUE;
+        }
+
+        return FALSE;
+    }
+
+    return FALSE;
   }
 
-  return FALSE;
+  String? _getEditText(HWND hwndDlg) => using((arena) {
+    final textPtr = arena.pwstrBuffer(_textBufferSize);
+    final result = GetDlgItemText(
+      hwndDlg,
+      ID_EDITTEXT,
+      textPtr,
+      _textBufferSize,
+    ).value;
+    return result != NULL ? textPtr.toDartString() : null;
+  });
 }

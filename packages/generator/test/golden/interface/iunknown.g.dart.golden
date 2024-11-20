@@ -1,0 +1,223 @@
+IUnknown|
+import 'dart:ffi';
+import 'dart:typed_data';
+
+import 'package:ffi/ffi.dart';
+import 'package:ffi_leak_tracker/ffi_leak_tracker.dart';
+import 'package:meta/meta.dart';
+
+import '../_internal/win32.dart';
+import '../bstr.dart';
+import '../constants.dart';
+import '../constants.g.dart';
+import '../exception.dart';
+import '../extensions/pointer.dart';
+import '../guid.dart';
+import '../hresult.dart';
+import '../hstring.dart';
+import '../macros.dart';
+import '../ntstatus.dart';
+import '../pcstr.dart';
+import '../pcwstr.dart';
+import '../pstr.dart';
+import '../pwstr.dart';
+import '../rpc_status.dart';
+import '../structs.g.dart';
+import '../types.dart';
+import '../utils.dart';
+import 'interface.g.dart';
+
+/// @nodoc
+final IID_IUnknown = GUID.fromComponents(
+  0x0,
+  0x0,
+  0x0,
+  Uint8List.fromList(const [0xc0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x46]),
+);
+
+/// The foundational COM interface that provides methods for querying other
+/// interfaces and managing the lifecycle of a COM object.
+///
+/// All COM interfaces directly or indirectly inherit from [IUnknown]. As such,
+/// the three methods defined by [IUnknown] ([queryInterface], [addRef], and
+/// [release]) are always the first entries in the VTable for any COM interface.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/unknwn/nn-unknwn-iunknown>.
+///
+/// {@category com}
+class IUnknown implements ComInterface {
+  /// Creates a new instance of [IUnknown] from a [VTablePointer].
+  ///
+  /// This constructor requires a valid pointer to the [IUnknown] interface. The
+  /// [ptr] must not be [nullptr]; otherwise, an assertion error is thrown.
+  IUnknown(this.ptr)
+    : assert(ptr != nullptr, "Pointer must not be 'nullptr'."),
+      _vtable = ptr.value.cast<IUnknownVtbl>().ref;
+
+  /// Creates a new instance of [IUnknown] from an existing [interface].
+  ///
+  /// This factory constructor calls the [queryInterface] method to obtain a
+  /// reference to the [IUnknown] interface.
+  ///
+  /// Throws a [WindowsException] if the [queryInterface] call fails.
+  @pragma('vm:prefer-inline')
+  factory IUnknown.from(IUnknown interface) => interface.queryInterface();
+
+  final VTablePointer ptr;
+  final IUnknownVtbl _vtable;
+  late final _QueryInterfaceFn =
+      _vtable.QueryInterface.asFunction<
+        int Function(VTablePointer, Pointer<GUID>, Pointer<Pointer>)
+      >();
+  late final _AddRefFn =
+      _vtable.AddRef.asFunction<int Function(VTablePointer)>();
+  late final _ReleaseFn =
+      _vtable.Release.asFunction<int Function(VTablePointer)>();
+
+  /// Queries this COM object for a specific interface defined by the type
+  /// parameter [T].
+  ///
+  /// This method attempts to retrieve an interface implemented by the same COM
+  /// object. If the interface is supported, it returns an instance of that
+  /// interface, ensuring that [addRef] is called to increment the reference
+  /// count.
+  ///
+  /// Throws a [WindowsException] if the requested interface is not implemented
+  /// by the object.
+  ///
+  /// This method uses the [ComInterface.type] method to retrieve metadata about
+  /// the target interface, including its IID (Interface ID) and instantiation
+  /// logic. All COM interfaces provided by this package are pre-registered.
+  /// Custom COM interfaces must be registered manually using the
+  /// [ComInterface.register] method before calling this method.
+  ///
+  /// Example:
+  /// ```dart
+  /// // Create a COM object instance (e.g., IFileDialog).
+  /// final fileDialog = createInstance<IFileDialog>(FileOpenDialog);
+  /// // Query for the IFileDialog2 interface.
+  /// final fileDialog2 = fileDialog.queryInterface<IFileDialog2>();
+  /// ```
+  ///
+  /// To learn more, see
+  /// <https://learn.microsoft.com/windows/win32/api/unknwn/nf-unknwn-iunknown-queryinterface(refiid_void)>.
+  T queryInterface<T extends IUnknown>() {
+    final companion = ComInterface.type<T>();
+    final riid = companion.iid.toNative();
+    final ppvObject = adaptiveCalloc<Pointer>();
+    final hr$ = HRESULT(_QueryInterfaceFn(ptr, riid, ppvObject));
+    free(riid);
+    if (hr$.isError) {
+      free(ppvObject);
+      throw WindowsException(hr$);
+    }
+    final result = companion.fromPointer(ppvObject.value.cast());
+    free(ppvObject);
+    return result;
+  }
+
+  /// Increments the reference count of this COM object.
+  ///
+  /// Call this method for every new copy of an interface pointer that you make.
+  /// For example, if you return a copy of a pointer from a method, then you
+  /// must call [addRef] on it before returning. Similarly, if you pass a
+  /// pointer as an `in-out` parameter to a method, you should call [addRef] on
+  /// it before the call. This ensures the method has a valid reference to the
+  /// object and can safely call [release] before replacing the original pointer
+  /// with the out-value.
+  ///
+  /// Each call to [addRef] must be balanced by a corresponding call to
+  /// [release] to properly manage the object's lifetime.
+  ///
+  /// Example:
+  /// ```dart
+  /// // Create a new COM object instance (e.g., IFileDialog).
+  /// final fileDialog = createInstance<IFileDialog>(FileOpenDialog);
+  ///
+  /// // Increment the reference count before assigning the object to a VARIANT.
+  /// fileDialog.addRef();
+  ///
+  /// // Create a VARIANT to hold the COM object.
+  /// final variant = Variant.unknown(fileDialog);
+  ///
+  /// // Pass the VARIANT to a native function.
+  /// // ...
+  ///
+  /// // Clear the VARIANT eagerly, releasing its resources (including calling
+  /// // release on the COM object).
+  /// variant.free();
+  ///
+  /// // Release the final reference to the COM object.
+  /// fileDialog.release();
+  /// ```
+  ///
+  /// To learn more, see
+  /// <https://learn.microsoft.com/windows/win32/api/unknwn/nf-unknwn-iunknown-addref>.
+  @pragma('vm:prefer-inline')
+  int addRef() => _AddRefFn(ptr);
+
+  /// Decrements the reference count of this COM object.
+  ///
+  /// If this is the last reference to the object, the COM object is destroyed,
+  /// and its resources are freed. Ensure that you do not access the object after
+  /// calling [release] if its reference count reaches zero.
+  ///
+  /// Example:
+  /// ```dart
+  /// // Create a new COM object instance (e.g., IFileDialog).
+  /// final fileDialog = createInstance<IFileDialog>(FileOpenDialog);
+  ///
+  /// // Perform some operations with the file dialog instance.
+  /// // ...
+  ///
+  /// // Later, when done with the file dialog:
+  /// fileDialog.release(); // Ensures resources are freed immediately.
+  /// ```
+  ///
+  /// To learn more, see
+  /// <https://learn.microsoft.com/windows/win32/api/unknwn/nf-unknwn-iunknown-release>.
+  @pragma('vm:prefer-inline')
+  int release() => _ReleaseFn(ptr);
+
+  @override
+  String toString() => 'IUnknown(ptr: $ptr)';
+}
+
+/// @nodoc
+base class IUnknownVtbl extends Struct {
+  external Pointer<
+    NativeFunction<
+      Int32 Function(
+        VTablePointer this$,
+        Pointer<GUID> riid,
+        Pointer<Pointer> ppvObject,
+      )
+    >
+  >
+  QueryInterface;
+  external Pointer<NativeFunction<Uint32 Function(VTablePointer this$)>> AddRef;
+  external Pointer<NativeFunction<Uint32 Function(VTablePointer this$)>>
+  Release;
+}
+
+@internal
+final class IUnknownCompanion extends ComCompanion<IUnknown> {
+  const IUnknownCompanion();
+
+  @pragma('vm:prefer-inline')
+  @override
+  IUnknown Function(VTablePointer) get fromPointer => IUnknown.new;
+
+  @pragma('vm:prefer-inline')
+  @override
+  GUID get iid => IID_IUnknown;
+}
+
+/// Returns the current reference count of the [object].
+///
+/// This value is intended to be used for testing purposes.
+int refCount(IUnknown object) {
+  object._AddRefFn(object.ptr);
+  return object._ReleaseFn(object.ptr);
+}

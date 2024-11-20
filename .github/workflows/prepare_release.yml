@@ -2,12 +2,19 @@ name: Prepare Release
 
 on:
   workflow_dispatch:
+    inputs:
+      package:
+        required: true
+        description: Package to release
+        type: choice
+        options:
+          - ffi_leak_tracker
+          - win32
 
 jobs:
   prepare-release:
     uses: halildurmus/workflows/.github/workflows/prepare_release.yml@main
     with:
-      update_changelog_args: '--include-path "packages/win32/**/*" --include-path "website/docs/**/*" --repository "../../"'
-      working_directory: packages/win32
+      working_directory: packages/${{ inputs.package }}
     secrets:
       token: ${{ secrets.PAT }}

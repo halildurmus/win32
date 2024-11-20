@@ -5,75 +5,36 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-// https://stackoverflow.com/questions/36029230
-/// Converts FILETIME format to seconds.
-double fileTimeToSeconds(FILETIME fileTime) =>
-    ((fileTime.dwHighDateTime << 32) + fileTime.dwLowDateTime) / 10E6;
-
-/// Constructs a DateTime from SYSTEMTIME format.
-DateTime systemTimeToDateTime(
-  SYSTEMTIME systemTime, {
-  bool convertToLocalTimeZone = true,
-}) {
-  final dateTime = DateTime.utc(
-    systemTime.wYear,
-    systemTime.wMonth,
-    systemTime.wDay,
-    systemTime.wHour,
-    systemTime.wMinute,
-    systemTime.wSecond,
-    systemTime.wMilliseconds,
-  );
-
-  return convertToLocalTimeZone ? dateTime.toLocal() : dateTime;
-}
-
 void main() {
-  final hProcess = GetCurrentProcess();
-  final pCreationTime = calloc<FILETIME>();
-  final pExitTime = calloc<FILETIME>();
-  final pKernelTime = calloc<FILETIME>();
-  final pUserTime = calloc<FILETIME>();
-  final pCreationTimeAsSystemTime = calloc<SYSTEMTIME>();
-  final pExitTimeAsSystemTime = calloc<SYSTEMTIME>();
-  int result;
+  using((arena) {
+    final hProcess = GetCurrentProcess();
+    final pCreationTime = arena<FILETIME>();
+    final pExitTime = arena<FILETIME>();
+    final pKernelTime = arena<FILETIME>();
+    final pUserTime = arena<FILETIME>();
+    final pCreationTimeAsSystemTime = arena<SYSTEMTIME>();
+    final pExitTimeAsSystemTime = arena<SYSTEMTIME>();
 
-  try {
-    // Retrieve timing information for the current process
-    result = GetProcessTimes(
-      hProcess,
-      pCreationTime,
-      pExitTime,
-      pKernelTime,
-      pUserTime,
-    );
-    if (result == FALSE) {
-      throw WindowsException(result);
-    }
+    // Retrieve timing information for the current process.
+    GetProcessTimes(hProcess, pCreationTime, pExitTime, pKernelTime, pUserTime);
 
-    // Convert process creation time to SYSTEMTIME format
-    result = FileTimeToSystemTime(pCreationTime, pCreationTimeAsSystemTime);
-    if (result == FALSE) {
-      throw WindowsException(result);
-    }
+    // Convert process creation time to SYSTEMTIME format.
+    FileTimeToSystemTime(pCreationTime, pCreationTimeAsSystemTime);
 
     final processExited =
         pExitTime.ref.dwLowDateTime != 0 && pExitTime.ref.dwHighDateTime != 0;
-
     if (processExited) {
-      // Convert process exit time to SYSTEMTIME format
-      result = FileTimeToSystemTime(pExitTime, pExitTimeAsSystemTime);
-      if (result == FALSE) {
-        throw WindowsException(result);
-      }
+      // Convert process exit time to SYSTEMTIME format.
+      FileTimeToSystemTime(pExitTime, pExitTimeAsSystemTime);
     }
 
-    final creationTime = systemTimeToDateTime(pCreationTimeAsSystemTime.ref);
-
+    final creationTime = pCreationTimeAsSystemTime.ref.toDateTime();
     DateTime? exitTime;
     if (processExited) {
-      exitTime = systemTimeToDateTime(pExitTimeAsSystemTime.ref);
+      exitTime = pExitTimeAsSystemTime.ref.toDateTime();
     }
+    final kernelTime = pKernelTime.ref.toDuration();
+    final userTime = pUserTime.ref.toDuration();
 
     print('Process creation time: $creationTime');
     print(
@@ -81,14 +42,7 @@ void main() {
           ? 'Process exit time: $exitTime'
           : 'Process has not exited!',
     );
-    print('Process kernel time: ${fileTimeToSeconds(pKernelTime.ref)} seconds');
-    print('Process user time: ${fileTimeToSeconds(pUserTime.ref)} seconds');
-  } finally {
-    free(pCreationTime);
-    free(pExitTime);
-    free(pKernelTime);
-    free(pUserTime);
-    free(pCreationTimeAsSystemTime);
-    free(pExitTimeAsSystemTime);
-  }
+    print('Process kernel time: $kernelTime');
+    print('Process user time: $userTime');
+  });
 }

@@ -1,0 +1,34 @@
+NtQueryObject|
+/// Retrieves various kinds of object information.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winternl/nf-winternl-ntqueryobject>.
+///
+/// {@category ntdll}
+@pragma('vm:prefer-inline')
+NTSTATUS NtQueryObject(
+  HANDLE? handle,
+  OBJECT_INFORMATION_CLASS objectInformationClass,
+  Pointer? objectInformation,
+  int objectInformationLength,
+  Pointer<Uint32>? returnLength,
+) => NTSTATUS(
+  _NtQueryObject(
+    handle ?? nullptr,
+    objectInformationClass,
+    objectInformation ?? nullptr,
+    objectInformationLength,
+    returnLength ?? nullptr,
+  ),
+);
+
+@Native<Int32 Function(Pointer, Int32, Pointer, Uint32, Pointer<Uint32>)>(
+  symbol: 'NtQueryObject',
+)
+external int _NtQueryObject(
+  Pointer handle,
+  int objectInformationClass,
+  Pointer objectInformation,
+  int objectInformationLength,
+  Pointer<Uint32> returnLength,
+);

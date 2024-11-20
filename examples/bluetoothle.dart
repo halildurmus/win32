@@ -1,282 +1,277 @@
-// Enumerates device interfaces that support Bluetooth LE
+// Demonstrates enumeration of Bluetooth LE devices and their GATT hierarchy
+// (services, characteristics, descriptors) using SetupAPI and Bluetooth GATT APIs.
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
+import 'package:ffi_leak_tracker/ffi_leak_tracker.dart';
 import 'package:win32/win32.dart';
 
-void main() {
-  final devicePaths = using((arena) {
-    final interfaceGuid = arena<GUID>()
-      ..ref.setGUID(GUID_BLUETOOTHLE_DEVICE_INTERFACE);
-
-    final hDevInfo = SetupDiGetClassDevs(
-      interfaceGuid,
-      nullptr,
-      NULL,
-      DIGCF_PRESENT | DIGCF_DEVICEINTERFACE,
-    );
-    try {
-      return devicesByInterface(hDevInfo, interfaceGuid).toList();
-    } finally {
-      SetupDiDestroyDeviceInfoList(hDevInfo);
-    }
-  });
-
-  for (final path in devicePaths) {
-    final pathPtr = path.toNativeUtf16();
-    final hDevice = CreateFile(
-      pathPtr,
-      0,
-      FILE_SHARE_READ | FILE_SHARE_WRITE,
-      nullptr,
-      OPEN_EXISTING,
-      FILE_ATTRIBUTE_NORMAL,
-      NULL,
-    );
-    if (hDevice == INVALID_HANDLE_VALUE) {
-      final error = GetLastError();
-      print('CreateFile - Get Device Handle error: $error');
-      throw WindowsException(error);
-    }
-
-    try {
-      print('BLUETOOTHLE_DEVICE - $path');
-      printServicesByDevice(hDevice);
-    } finally {
-      CloseHandle(hDevice);
-      free(pathPtr);
-    }
-  }
-}
-
-Iterable<String> devicesByInterface(
-  int hDevInfo,
+List<String> enumerateDeviceInterfacePaths(
+  HDEVINFO deviceInfoSet,
   Pointer<GUID> interfaceGuid,
-) sync* {
-  final requiredSizePtr = calloc<DWORD>();
-  final deviceInterfaceDataPtr = calloc<SP_DEVICE_INTERFACE_DATA>()
-    ..ref.cbSize = sizeOf<SP_DEVICE_INTERFACE_DATA>();
+) {
+  final paths = <String>[];
 
+  final interfaceData = adaptiveCalloc<SP_DEVICE_INTERFACE_DATA>()
+    ..ref.cbSize = sizeOf<SP_DEVICE_INTERFACE_DATA>();
+  final requiredSize = adaptiveCalloc<DWORD>();
   try {
-    for (
-      var index = 0;
-      SetupDiEnumDeviceInterfaces(
-            hDevInfo,
-            nullptr,
-            interfaceGuid,
-            index,
-            deviceInterfaceDataPtr,
-          ) ==
-          TRUE;
-      index++
-    ) {
-      // final hr =
-      SetupDiGetDeviceInterfaceDetail(
-        hDevInfo,
-        deviceInterfaceDataPtr,
+    for (var index = 0; ; index++) {
+      final enumResult = SetupDiEnumDeviceInterfaces(
+        deviceInfoSet,
+        null,
+        interfaceGuid,
+        index,
+        interfaceData,
+      );
+      if (!enumResult.value) {
+        final error = enumResult.error;
+        if (error == ERROR_NO_MORE_ITEMS) return paths;
+        throw WindowsException(error.toHRESULT());
+      }
+
+      final sizeResult = SetupDiGetDeviceInterfaceDetail(
+        deviceInfoSet,
+        interfaceData,
         nullptr,
         0,
-        requiredSizePtr,
+        requiredSize,
         nullptr,
       );
+      if (!sizeResult.value && sizeResult.error != ERROR_INSUFFICIENT_BUFFER) {
+        throw WindowsException(sizeResult.error.toHRESULT());
+      }
 
-      // TODO(halildurmus): Uncomment when
-      // https://github.com/halildurmus/win32/issues/384 is fixed.
-
-      // if (hr != TRUE) {
-      //   final error = GetLastError();
-      //   if (error != ERROR_INSUFFICIENT_BUFFER) {
-      //     print(
-      //         'SetupDiGetDeviceInterfaceDetail - Get Data Size error: $error');
-      //     throw WindowsException(error);
-      //   }
-      // }
-
-      final detailDataMemoryPtr = calloc<BYTE>(requiredSizePtr.value);
-
+      final detailData =
+          adaptiveCalloc<Uint8>(
+              requiredSize.value,
+            ).cast<SP_DEVICE_INTERFACE_DETAIL_DATA>()
+            ..ref.cbSize = sizeOf<SP_DEVICE_INTERFACE_DETAIL_DATA>();
       try {
-        final deviceInterfaceDetailDataPtr =
-            Pointer<SP_DEVICE_INTERFACE_DETAIL_DATA_>.fromAddress(
-              detailDataMemoryPtr.address,
-            );
-        deviceInterfaceDetailDataPtr.ref.cbSize =
-            sizeOf<SP_DEVICE_INTERFACE_DETAIL_DATA_>();
-
-        final hr = SetupDiGetDeviceInterfaceDetail(
-          hDevInfo,
-          deviceInterfaceDataPtr,
-          deviceInterfaceDetailDataPtr,
-          requiredSizePtr.value,
+        final detailResult = SetupDiGetDeviceInterfaceDetail(
+          deviceInfoSet,
+          interfaceData,
+          detailData,
+          requiredSize.value,
           nullptr,
           nullptr,
         );
-        if (hr != TRUE) {
-          print(
-            'SetupDiGetDeviceInterfaceDetail - Get Data error: ${GetLastError()}',
-          );
-          continue;
+        if (!detailResult.value) {
+          throw WindowsException(detailResult.error.toHRESULT());
         }
-
-        yield deviceInterfaceDetailDataPtr.ref.DevicePath;
+        paths.add(detailData.ref.DevicePath);
       } finally {
-        free(detailDataMemoryPtr);
+        free(detailData);
       }
     }
-
-    final error = GetLastError();
-    if (error != S_OK && error != ERROR_NO_MORE_ITEMS) {
-      throw WindowsException(error);
-    }
   } finally {
-    free(requiredSizePtr);
-    free(deviceInterfaceDataPtr);
+    free(interfaceData);
+    free(requiredSize);
   }
 }
 
-// -----------------------------------------------------------------------------
-// GATT Security and Other Flag-related Facilities
-// -----------------------------------------------------------------------------
+List<BTH_LE_GATT_SERVICE> enumerateGattServices(HANDLE deviceHandle) {
+  final services = <BTH_LE_GATT_SERVICE>[];
 
-void printServicesByDevice(int hDevice) {
-  int hr;
-  using((arena) {
-    final bufferCountPtr = arena<USHORT>();
-    hr = BluetoothGATTGetServices(
-      hDevice,
+  final serviceCount = adaptiveCalloc<USHORT>();
+  try {
+    BluetoothGATTGetServices(
+      deviceHandle,
       0,
       nullptr,
-      bufferCountPtr,
+      serviceCount,
       BLUETOOTH_GATT_FLAG_NONE,
     );
-    if (hr != HRESULT_FROM_WIN32(ERROR_MORE_DATA)) {
-      print('BluetoothGATTGetServices - Get Buffer Count error: $hr');
-      throw WindowsException(hr);
-    }
+    if (serviceCount.value == 0) return services;
 
-    final bufferPtr = arena<BTH_LE_GATT_SERVICE>(bufferCountPtr.value);
-    final numberPtr = arena<USHORT>();
-
-    hr = BluetoothGATTGetServices(
-      hDevice,
-      bufferCountPtr.value,
-      bufferPtr,
-      numberPtr,
-      BLUETOOTH_GATT_FLAG_NONE,
+    final servicesBuffer = adaptiveCalloc<BTH_LE_GATT_SERVICE>(
+      serviceCount.value,
     );
-
-    if (hr != S_OK) {
-      print('BluetoothGATTGetServices - Get Buffer Data error: $hr');
-      throw WindowsException(hr);
-    }
-
-    for (var i = 0; i < numberPtr.value; i++) {
-      final servicePtr = Pointer<BTH_LE_GATT_SERVICE>.fromAddress(
-        bufferPtr.address + i * sizeOf<BTH_LE_GATT_SERVICE>(),
+    final actualCount = adaptiveCalloc<USHORT>();
+    try {
+      BluetoothGATTGetServices(
+        deviceHandle,
+        serviceCount.value,
+        servicesBuffer,
+        actualCount,
+        BLUETOOTH_GATT_FLAG_NONE,
       );
-      print('└─BTH_LE_GATT_SERVICE - ${servicePtr.ref.ServiceUuid.LongUuid}');
-      printCharacteristicsByService(hDevice, servicePtr);
+      for (var i = 0; i < actualCount.value; i++) {
+        services.add(servicesBuffer[i]);
+      }
+      return services;
+    } finally {
+      free(servicesBuffer);
+      free(actualCount);
     }
-  });
+  } finally {
+    free(serviceCount);
+  }
 }
 
-void printCharacteristicsByService(
-  int hDevice,
-  Pointer<BTH_LE_GATT_SERVICE> servicePtr,
+List<BTH_LE_GATT_CHARACTERISTIC> enumerateGattCharacteristics(
+  HANDLE deviceHandle,
+  Pointer<BTH_LE_GATT_SERVICE> service,
 ) {
-  int hr;
-  using((arena) {
-    final bufferCountPtr = arena<USHORT>();
-    hr = BluetoothGATTGetCharacteristics(
-      hDevice,
-      servicePtr,
+  final characteristics = <BTH_LE_GATT_CHARACTERISTIC>[];
+
+  final count = adaptiveCalloc<USHORT>();
+  try {
+    BluetoothGATTGetCharacteristics(
+      deviceHandle,
+      service,
       0,
       nullptr,
-      bufferCountPtr,
+      count,
       BLUETOOTH_GATT_FLAG_NONE,
     );
-    if (hr != HRESULT_FROM_WIN32(ERROR_MORE_DATA)) {
-      if (hr == HRESULT_FROM_WIN32(ERROR_NOT_FOUND)) {
-        return;
+    if (count.value == 0) return characteristics;
+
+    final characteristicsBuffer = adaptiveCalloc<BTH_LE_GATT_CHARACTERISTIC>(
+      count.value,
+    );
+    final actualCount = adaptiveCalloc<USHORT>();
+    try {
+      BluetoothGATTGetCharacteristics(
+        deviceHandle,
+        service,
+        count.value,
+        characteristicsBuffer,
+        actualCount,
+        BLUETOOTH_GATT_FLAG_NONE,
+      );
+      for (var i = 0; i < actualCount.value; i++) {
+        characteristics.add(characteristicsBuffer[i]);
       }
-      print('BluetoothGATTGetCharacteristics - Get Buffer Count error: $hr');
-      throw WindowsException(hr);
+      return characteristics;
+    } finally {
+      free(characteristicsBuffer);
+      free(actualCount);
     }
-
-    final bufferPtr = arena<BTH_LE_GATT_CHARACTERISTIC>(bufferCountPtr.value);
-    final numberPtr = arena<USHORT>();
-
-    hr = BluetoothGATTGetCharacteristics(
-      hDevice,
-      servicePtr,
-      bufferCountPtr.value,
-      bufferPtr,
-      numberPtr,
-      BLUETOOTH_GATT_FLAG_NONE,
-    );
-    if (hr != S_OK) {
-      print('BluetoothGATTGetCharacteristics - Get Buffer Data error: $hr');
-      throw WindowsException(hr);
-    }
-
-    for (var i = 0; i < numberPtr.value; i++) {
-      final characteristicPtr = Pointer<BTH_LE_GATT_CHARACTERISTIC>.fromAddress(
-        bufferPtr.address + i * sizeOf<BTH_LE_GATT_CHARACTERISTIC>(),
-      );
-      print(
-        '  └─BTH_LE_GATT_CHARACTERISTIC - ${characteristicPtr.ref.CharacteristicUuid.LongUuid}',
-      );
-      printDescriptorsByCharacteristic(hDevice, characteristicPtr);
-    }
-  });
+  } finally {
+    free(count);
+  }
 }
 
-void printDescriptorsByCharacteristic(
-  int hDevice,
-  Pointer<BTH_LE_GATT_CHARACTERISTIC> characteristicPtr,
+List<BTH_LE_GATT_DESCRIPTOR> enumerateGattDescriptors(
+  HANDLE deviceHandle,
+  Pointer<BTH_LE_GATT_CHARACTERISTIC> characteristic,
 ) {
-  int hr;
-  using((arena) {
-    final bufferCountPtr = arena<USHORT>();
-    hr = BluetoothGATTGetDescriptors(
-      hDevice,
-      characteristicPtr,
+  final descriptors = <BTH_LE_GATT_DESCRIPTOR>[];
+
+  final count = adaptiveCalloc<USHORT>();
+  try {
+    BluetoothGATTGetDescriptors(
+      deviceHandle,
+      characteristic,
       0,
       nullptr,
-      bufferCountPtr,
+      count,
       BLUETOOTH_GATT_FLAG_NONE,
     );
-    if (hr != HRESULT_FROM_WIN32(ERROR_MORE_DATA)) {
-      if (hr == HRESULT_FROM_WIN32(ERROR_NOT_FOUND)) {
+    if (count.value == 0) return descriptors;
+
+    final descriptorsBuffer = adaptiveCalloc<BTH_LE_GATT_DESCRIPTOR>(
+      count.value,
+    );
+    final actualCount = adaptiveCalloc<USHORT>();
+    try {
+      BluetoothGATTGetDescriptors(
+        deviceHandle,
+        characteristic,
+        count.value,
+        descriptorsBuffer,
+        actualCount,
+        BLUETOOTH_GATT_FLAG_NONE,
+      );
+      for (var i = 0; i < actualCount.value; i++) {
+        descriptors.add(descriptorsBuffer[i]);
+      }
+      return descriptors;
+    } finally {
+      free(descriptorsBuffer);
+      free(actualCount);
+    }
+  } finally {
+    free(count);
+  }
+}
+
+void main() {
+  using((arena) {
+    final bleInterfaceGuid = GUID_BLUETOOTHLE_DEVICE_INTERFACE.toNative(
+      allocator: arena,
+    );
+    final deviceInfoSet = SetupDiGetClassDevs(
+      bleInterfaceGuid,
+      null,
+      null,
+      DIGCF_PRESENT | DIGCF_DEVICEINTERFACE,
+    ).value;
+
+    try {
+      final devicePaths = enumerateDeviceInterfacePaths(
+        deviceInfoSet,
+        bleInterfaceGuid,
+      ).toList();
+
+      if (devicePaths.isEmpty) {
+        print('No Bluetooth LE devices found.');
         return;
       }
-      print('BluetoothGATTGetDescriptors - Get Buffer Count error: $hr');
-      throw WindowsException(hr);
-    }
 
-    final bufferPtr = arena<BTH_LE_GATT_DESCRIPTOR>(bufferCountPtr.value);
-    final numberPtr = arena<USHORT>();
+      for (final path in devicePaths) {
+        final devicePath = arena.pcwstr(path);
+        final result = CreateFile(
+          devicePath,
+          0,
+          FILE_SHARE_READ | FILE_SHARE_WRITE,
+          nullptr,
+          OPEN_EXISTING,
+          FILE_ATTRIBUTE_NORMAL,
+          null,
+        );
+        if (result.value == INVALID_HANDLE_VALUE) {
+          print('Failed to open device: $path');
+          continue;
+        }
 
-    hr = BluetoothGATTGetDescriptors(
-      hDevice,
-      characteristicPtr,
-      bufferCountPtr.value,
-      bufferPtr,
-      numberPtr,
-      BLUETOOTH_GATT_FLAG_NONE,
-    );
-    if (hr != S_OK) {
-      print('BluetoothGATTGetDescriptors - Get Buffer Data error: $hr');
-      throw WindowsException(hr);
-    }
+        final deviceHandle = result.value;
+        try {
+          print('\nBluetooth LE Device');
+          print('Path: $path');
+          for (final service in enumerateGattServices(deviceHandle)) {
+            print('└─ Service: ${service.ServiceUuid.LongUuid}');
+            final servicePtr = arena<BTH_LE_GATT_SERVICE>()..ref = service;
+            for (final characteristic in enumerateGattCharacteristics(
+              deviceHandle,
+              servicePtr,
+            )) {
+              print(
+                '   └─ Characteristic: '
+                '${characteristic.CharacteristicUuid.LongUuid}',
+              );
 
-    for (var i = 0; i < numberPtr.value; i++) {
-      final descriptorPtr = Pointer<BTH_LE_GATT_DESCRIPTOR>.fromAddress(
-        bufferPtr.address + i * sizeOf<BTH_LE_GATT_DESCRIPTOR>(),
-      );
-      print(
-        '    └─BTH_LE_GATT_DESCRIPTOR - ${descriptorPtr.ref.DescriptorUuid.LongUuid}',
-      );
+              final characteristicPtr = arena<BTH_LE_GATT_CHARACTERISTIC>()
+                ..ref = characteristic;
+              for (final descriptor in enumerateGattDescriptors(
+                deviceHandle,
+                characteristicPtr,
+              )) {
+                print(
+                  '      └─ Descriptor: '
+                  '${descriptor.DescriptorUuid.LongUuid}',
+                );
+              }
+            }
+          }
+        } finally {
+          deviceHandle.close();
+        }
+      }
+    } finally {
+      deviceInfoSet.close();
     }
   });
 }

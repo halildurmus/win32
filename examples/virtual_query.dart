@@ -1,80 +1,82 @@
+// Demonstrates querying virtual memory information using VirtualAlloc and
+// VirtualQuery.
+
 import 'dart:ffi';
-import 'dart:io';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-// Virtual Query Example
 void main() {
-  // Allocate a buffer to hold information about allocated memory
-  final pMBI = calloc<MEMORY_BASIC_INFORMATION>();
+  using((arena) {
+    // Allocate a small region of virtual memory.
+    final allocResult = VirtualAlloc(
+      nullptr,
+      8,
+      MEM_COMMIT,
+      PAGE_EXECUTE_READWRITE,
+    );
+    if (allocResult.value.isNull) {
+      throw WindowsException(allocResult.error.toHRESULT());
+    }
 
-  // Allocate some memory and return a pointer to the base address.
-  final baseAddress = VirtualAlloc(
-    nullptr, // Windows determines starting address
-    8, // bytes allocated
-    MEM_COMMIT,
-    PAGE_EXECUTE_READWRITE,
-  );
+    final baseAddress = allocResult.value;
 
-  // Query information about the allocated memory
-  final retValue = VirtualQuery(
-    baseAddress,
-    pMBI,
-    sizeOf<MEMORY_BASIC_INFORMATION>(),
-  );
+    final mbi = arena<MEMORY_BASIC_INFORMATION>();
+    final queryResult = VirtualQuery(
+      baseAddress,
+      mbi,
+      sizeOf<MEMORY_BASIC_INFORMATION>(),
+    );
+    if (queryResult.value == 0) {
+      VirtualFree(baseAddress, 0, MEM_RELEASE);
+      throw WindowsException(queryResult.error.toHRESULT());
+    }
 
-  if (retValue == 0) {
-    print('VirtualQuery function failed.');
-    exit(GetLastError());
-  }
+    print('Virtual memory region information:\n');
+    print('Base address     : ${mbi.ref.BaseAddress}');
+    print('Allocation base  : ${mbi.ref.AllocationBase}');
+    print('Region size      : ${mbi.ref.RegionSize} bytes');
+    print('Partition ID     : ${mbi.ref.PartitionId}');
 
-  print('Region Size: ${pMBI.ref.RegionSize}');
-  print('Base Address: ${pMBI.ref.BaseAddress}');
-  print('Allocation Base: ${pMBI.ref.AllocationBase}');
-  print('Partition ID: ${pMBI.ref.PartitionId}');
+    print('\nRegion type:');
+    switch (mbi.ref.Type) {
+      case MEM_IMAGE:
+        print('• MEM_IMAGE');
+      case MEM_MAPPED:
+        print('• MEM_MAPPED');
+      case MEM_PRIVATE:
+        print('• MEM_PRIVATE');
+      default:
+        print('• Unknown');
+    }
 
-  // Print what kind of section this buffer is in.
-  switch (pMBI.ref.Type) {
-    case MEM_IMAGE:
-      print('Type: MEM_IMAGE');
-    case MEM_MAPPED:
-      print('Type: MEM_MAPPED');
-    case MEM_PRIVATE:
-      print('Type: MEM_PRIVATE');
-    default:
-      print('Type not found.');
-  }
+    print('\nAllocation protection:');
+    switch (mbi.ref.AllocationProtect) {
+      case PAGE_EXECUTE_READWRITE:
+        print('• EXECUTE | READ | WRITE');
+      case PAGE_EXECUTE_READ:
+        print('• EXECUTE | READ');
+      case PAGE_READWRITE:
+        print('• READ | WRITE');
+      case PAGE_READONLY:
+        print('• READ');
+      default:
+        print('• Other (${mbi.ref.AllocationProtect})');
+    }
 
-  // Print what can be done with the buffer's memory region
-  switch (pMBI.ref.AllocationProtect) {
-    case PAGE_EXECUTE_READWRITE:
-      print('AllocationProtect flags: EXECUTE + READ + WRITE');
-    case PAGE_EXECUTE_READ:
-      print('AllocationProtect flags: EXECUTE + READ');
-    case PAGE_READWRITE:
-      print('AllocationProtect flags: READ + WRITE');
-    case PAGE_READONLY:
-      print('AllocationProtect flag: READ');
-    default:
-      print('AllocationProtect not found.');
-  }
+    print('\nRegion state:');
+    switch (mbi.ref.State) {
+      case MEM_COMMIT:
+        print('• Committed');
+      case MEM_RESERVE:
+        print('• Reserved');
+      case MEM_FREE:
+        print('• Free');
+      default:
+        print('• Unknown');
+    }
 
-  // Print the state of the buffer's region
-  switch (pMBI.ref.State) {
-    case MEM_COMMIT:
-      print('State of Buffer Region: Committed');
-    case MEM_FREE:
-      print('State of Buffer Region: Free');
-    case MEM_RESERVE:
-      print('State of Buffer Region: Reserve');
-    default:
-      print('State of Buffer Region not found.');
-  }
-
-  // Freeing temporary memory.
-  free(pMBI);
-
-  // This frees up the entire region reserved from previously allocating it.
-  VirtualFree(baseAddress, 0, MEM_RELEASE);
+    // Always release memory allocated with VirtualAlloc.
+    VirtualFree(baseAddress, 0, MEM_RELEASE);
+  });
 }

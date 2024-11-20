@@ -1,3 +1,5 @@
+import { NewBadgeIcon } from '../win32-theme/icons/popover';
+
 export type FooterItemType = {
   label: string;
   items: {
@@ -22,7 +24,7 @@ export const footerItems: FooterItemType[] = [
       // {
       //   label: 'FAQ',
       //   badge: NewBadgeIcon,
-      //   href: '/docs/guides-concepts/faq',
+      //   href: '/docs/core/faq',
       // },
       {
         label: 'Examples',
@@ -32,10 +34,11 @@ export const footerItems: FooterItemType[] = [
         label: 'Packages',
         href: '/packages',
       },
-      // {
-      //   label: 'Migrating from v5 to v6',
-      //   href: '/docs/migration-guide/5x-to-6x',
-      // },
+      {
+        label: 'Migrating from 5.x.x to 6.x.x',
+        badge: NewBadgeIcon,
+        href: '/docs/migration/5xx-to-6xx',
+      },
     ],
   },
   {
@@ -43,20 +46,12 @@ export const footerItems: FooterItemType[] = [
     items: [
       {
         label: 'Contributing',
-        href: '/docs/guides-concepts/contributing',
+        href: '/docs/community/contributing',
       },
       {
         label: 'GitHub',
         href: 'https://github.com/halildurmus/win32',
       },
-      {
-        label: 'Stack Overflow',
-        href: 'https://stackoverflow.com/questions/tagged/dart+winapi',
-      },
-      // {
-      //   label: '𝕏',
-      //   href: 'https://x.com/thehalildurmus',
-      // },
     ],
   },
   {
@@ -66,11 +61,10 @@ export const footerItems: FooterItemType[] = [
         label: 'Blog',
         href: '/blog',
       },
-      // TODO(halildurmus): Uncomment when the page is ready.
-      // {
-      //   label: 'Changelog',
-      //   href: '/changelog',
-      // },
+      {
+        label: 'Changelog',
+        href: '/changelog',
+      },
       // {
       //   label: 'Roadmap',
       //   badge: NewBadgeIcon,
