@@ -5,67 +5,52 @@
 import 'dart:ffi';
 import 'dart:io';
 
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 class RecycleBinInfo {
+  const RecycleBinInfo(this.itemCount, this.totalSizeInBytes);
+
   final int itemCount;
   final int totalSizeInBytes;
-
-  const RecycleBinInfo(this.itemCount, this.totalSizeInBytes);
 }
 
 RecycleBinInfo queryRecycleBin(String rootPath) {
-  final pszRootPath = rootPath.toNativeUtf16();
   final pSHQueryRBInfo =
-      calloc<SHQUERYRBINFO>()..ref.cbSize = sizeOf<SHQUERYRBINFO>();
+      loggingCalloc<SHQUERYRBINFO>()..ref.cbSize = sizeOf<SHQUERYRBINFO>();
 
   try {
-    final hr = SHQueryRecycleBin(pszRootPath, pSHQueryRBInfo);
-    if (hr != S_OK) throw WindowsException(hr);
-
+    SHQueryRecycleBin(w(rootPath).ptr, pSHQueryRBInfo);
     return RecycleBinInfo(
       pSHQueryRBInfo.ref.i64NumItems,
       pSHQueryRBInfo.ref.i64Size,
     );
   } finally {
-    free(pszRootPath);
     free(pSHQueryRBInfo);
   }
 }
 
 String getTempFileName() {
-  final lpPathName = '.'.toNativeUtf16();
-  final lpPrefixString = 'dart'.toNativeUtf16();
-  final lpTempFileName = wsalloc(MAX_PATH);
-
-  try {
-    final result = GetTempFileName(
-      lpPathName,
-      lpPrefixString,
-      0,
-      lpTempFileName,
-    );
-    if (result == 0) throw 'Unable to create filename';
-
-    return lpTempFileName.toDartString();
-  } finally {
-    free(lpPathName);
-    free(lpPrefixString);
-    free(lpTempFileName);
-  }
+  final lpTempFileName = Pwstr.allocate(MAX_PATH);
+  final result = GetTempFileName(
+    w('.').ptr,
+    w('dart').ptr,
+    0,
+    lpTempFileName.ptr,
+  );
+  if (result == 0) throw StateError('Unable to create filename');
+  return lpTempFileName.toDartString();
 }
 
 bool recycleFile(String file) {
   final hwnd = GetActiveWindow();
-  final pFrom = [file].toWideCharArray();
-  final lpFileOp =
-      calloc<SHFILEOPSTRUCT>()
-        ..ref.hwnd = hwnd
-        ..ref.wFunc = FO_DELETE
-        ..ref.pFrom = pFrom
-        ..ref.pTo = nullptr
-        ..ref.fFlags = FOF_ALLOWUNDO;
+  final pFrom = [file].toPWSTR();
+  final lpFileOp = loggingCalloc<SHFILEOPSTRUCT>();
+  lpFileOp.ref
+    ..hwnd = hwnd
+    ..wFunc = FO_DELETE
+    ..pFrom = pFrom
+    ..pTo = nullptr
+    ..fFlags = FOF_ALLOWUNDO;
 
   try {
     final result = SHFileOperation(lpFileOp);
@@ -77,9 +62,10 @@ bool recycleFile(String file) {
 }
 
 void main(List<String> args) {
-  final info = queryRecycleBin('c:\\');
+  final info = queryRecycleBin(r'c:\');
   print(
-    'There are ${info.itemCount} items in the '
+    'There are ${info.itemCount} items with a total size of '
+    '${info.totalSizeInBytes} bytes in the '
     'Recycle Bin on the C: drive.',
   );
 
@@ -92,9 +78,10 @@ void main(List<String> args) {
   print('Sending temporary file $tempFile to the Recycle Bin.');
   recycleFile(tempFile);
 
-  final newInfo = queryRecycleBin('c:\\');
+  final newInfo = queryRecycleBin(r'c:\');
   print(
-    'There now are ${newInfo.itemCount} items in the '
+    'There now are ${newInfo.itemCount} items with a total size of '
+    '${newInfo.totalSizeInBytes} bytes in the '
     'Recycle Bin on the C: drive.',
   );
 }

@@ -1,298 +1,964 @@
+// This script generates Dart projections for various components of the Win32
+// API, including callbacks, constants, enums, functions, interfaces, and
+// structs from Windows metadata using the `winmd` package.
+//
+// Each section is responsible for generating specific parts of the API
+// (callbacks, constants, etc.), ensuring that metadata is processed and
+// converted into Dart code.
+
+import 'dart:collection';
 import 'dart:io';
 
+import 'package:args/args.dart';
 import 'package:dart_style/dart_style.dart';
 import 'package:generator/generator.dart';
+import 'package:generator/src/logger.dart';
+import 'package:nuget/nuget.dart';
 import 'package:winmd/winmd.dart';
 
-bool methodMatches(String methodName, String rawPrototype) =>
-    rawPrototype.contains(' $methodName(');
+const generatedFileHeader = '''
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
-String generateDocComment(Win32Function func, String libraryDartName) {
-  final category = func.category.isNotEmpty ? func.category : libraryDartName;
+''';
 
-  final comment = StringBuffer();
+const callbackFileHeader = '''
+// Dart representations of Win32 callbacks.
+//
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+//
+// ignore_for_file: camel_case_types, non_constant_identifier_names
 
-  if (func.comment.isNotEmpty) {
-    comment
-      ..writeln(wrapCommentText(func.comment))
-      ..writeln('///');
-  }
+import 'dart:ffi';
 
-  comment
-    ..writeln('/// ```c')
-    ..write('/// ')
-    ..writeln(func.prototype.split('\\n').join('\n/// '))
-    ..writeln('/// ```')
-    ..write('/// {@category $category}');
-  return comment.toString();
+import 'pcwstr.dart';
+import 'structs.g.dart';
+''';
+
+const constantFileHeader = '''
+// Dart representations of Win32 constants.
+//
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+//
+// ignore_for_file: camel_case_types, constant_identifier_names
+// ignore_for_file: non_constant_identifier_names
+
+import 'dart:ffi';
+import 'dart:typed_data';
+
+import 'package:ffi/ffi.dart';
+
+import 'guid.dart';
+import 'hresult.dart';
+import 'ntstatus.dart';
+import 'propertykey.dart';
+''';
+
+const dynamicLibraryFileHeader = '''
+// Maps FFI prototypes onto the corresponding Win32 API function calls.
+//
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+//
+// ignore_for_file: avoid_positional_boolean_parameters
+// ignore_for_file: non_constant_identifier_names, unused_import
+''';
+
+const dynamicLibraryTestFileHeader = '''
+// Tests that Win32 API prototypes can be successfully loaded (i.e. that
+// lookupFunction works for all the APIs generated).
+//
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+//
+// ignore_for_file: non_constant_identifier_names, unused_import,
+// ignore_for_file: unused_local_variable
+
+@TestOn('windows')
+library;
+''';
+
+const dynamicLibraryWrapperCFileHeader = '''
+// These functions wrap the native APIs and preserve the result of
+// GetLastError(), making it easier to debug issues and handle errors reliably.
+//
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+
+''';
+
+const dynamicLibraryWrapperDartFileHeader = '''
+// Wrappers for Win32 API functions.
+//
+// These functions wrap the native APIs and preserve the result of
+// GetLastError(), making it easier to debug issues and handle errors reliably.
+//
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+//
+// ignore_for_file: non_constant_identifier_names, unused_import
+
+@DefaultAsset('package:win32/win32.dart')
+library;
+
+import 'dart:ffi';
+
+import 'package:meta/meta.dart';
+
+import '../callbacks.g.dart';
+import '../functions.dart';
+import '../guid.dart';
+import '../pcstr.dart';
+import '../pcwstr.dart';
+import '../structs.g.dart';
+import '../types.dart';
+''';
+
+const enumFileHeader = '''
+// Dart representations of Win32 enums.
+//
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+//
+// ignore_for_file: camel_case_types, constant_identifier_names
+''';
+
+const interfaceHeader = '''
+// Dart representation of a COM interface.
+//
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+//
+// ignore_for_file: avoid_positional_boolean_parameters
+// ignore_for_file: constant_identifier_names, non_constant_identifier_names
+// ignore_for_file: unused_import
+''';
+
+const structFileHeader = '''
+// Dart representations of Win32 structs.
+//
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+//
+// ignore_for_file: camel_case_extensions, camel_case_types
+// ignore_for_file: non_constant_identifier_names, unnecessary_this
+// ignore_for_file: unused_field
+
+import 'dart:ffi';
+import 'dart:typed_data';
+
+import 'package:ffi/ffi.dart';
+
+import '../_com.g.dart';
+import 'callbacks.g.dart';
+import 'constants.g.dart';
+import 'enums.g.dart';
+import 'extensions/_internal.dart';
+import 'extensions/pointer.dart';
+import 'guid.dart';
+import 'types.dart';
+''';
+
+const excludedNamespaces = <String>{
+  'Windows.Win32.Foundation.Metadata',
+  'Windows.Win32.System.Diagnostics.Debug.WebApp',
+  'Windows.Win32.System.WinRT.Xaml',
+  'Windows.Win32.UI.Xaml',
+  'Windows.Win32.Web.MsHtml',
+};
+
+/// Generates Dart projections for Win32 API callbacks.
+///
+/// This method extracts callback definitions and generates a Dart file (
+/// `callbacks.g.dart`) located in the directory `packages/win32/lib/src/` that
+/// contains the callback projections.
+void generateCallbacks() {
+  final win32CallbacksPath =
+      Platform.script.resolve('../data/win32_callbacks.json').toFilePath();
+  final callbacks = loadMap(win32CallbacksPath);
+  saveMap(callbacks, win32CallbacksPath);
+  generateProjections(
+    items: callbacks,
+    outputPath: '../../win32/lib/src/callbacks.g.dart',
+    fileHeader: callbackFileHeader,
+    projectionFactory: CallbackProjection.new,
+    scopeFilter: (scope) => scope.delegates.where((d) => !d.isObsolete),
+  );
+  info('🚀 Total callbacks generated: ${callbacks.length}');
 }
 
-int generateStructs(List<Scope> scopes, Map<String, String> structs) {
-  final file = File('../win32/lib/src/structs.g.dart');
+/// Generates Dart projections for Win32 API constants.
+///
+/// This method extracts constant definitions and generates a Dart file (
+/// `constants.g.dart`) located in the directory `packages/win32/lib/src/` that
+/// contains the constant projections.
+void generateConstants() {
+  final win32ConstantsPath =
+      Platform.script.resolve('../data/win32_constants.json').toFilePath();
+  final constants = loadMap(win32ConstantsPath);
+  saveMap(constants, win32ConstantsPath);
+  final fields =
+      WindowsMetadata.constants
+          .where((f) => constants.containsKey('${f.parent.name}.${f.name}'))
+          .toFixedList()
+        ..sort((a, b) => a.name.compareTo(b.name));
+  final projections = fields.map(ConstantProjection.new).toFixedList();
+  final buffer =
+      StringBuffer()
+        ..writeln(constantFileHeader)
+        ..writeAll(projections, '\n');
+  final filePath =
+      Platform.script
+          .resolve('../../win32/lib/src/constants.g.dart')
+          .toFilePath();
+  writeToFile(filePath, buffer.toString());
+  info('🚀 Total constants generated: ${constants.length}');
+}
 
-  final typeDefs = scopes.expand(
-    (scope) =>
-        scope.typeDefs
-            .where((typeDef) => structs.keys.contains(typeDef.name))
-            .where((typeDef) => typeDef.supportedArchitectures.x64)
-            .toList()
-          ..sort(
-            (a, b) => lastComponent(a.name).compareTo(lastComponent(b.name)),
-          ),
+/// Generates Dart projections for Win32 API enums.
+///
+/// This method extracts enum definitions and generates a Dart file (
+/// `enums.g.dart`) located in the directory `packages/win32/lib/src/` that
+/// contains the enum projections.
+void generateEnums() {
+  final win32EnumsPath =
+      Platform.script.resolve('../data/win32_enums.json').toFilePath();
+  final enums = loadMap(win32EnumsPath);
+  saveMap(enums, win32EnumsPath);
+  generateProjections(
+    items: enums,
+    outputPath: '../../win32/lib/src/enums.g.dart',
+    fileHeader: enumFileHeader,
+    projectionFactory: EnumProjection.new,
+    scopeFilter: (scope) => scope.enums,
   );
+  info('🚀 Total enums generated: ${enums.length}');
+}
 
-  final structProjections = typeDefs.map(
-    (struct) => StructProjection(
-      struct,
-      stripAnsiUnicodeSuffix(lastComponent(struct.name)),
-      comment: structs[struct.name]!,
-    ),
+/// Generates a Dart file for a specified dynamic [library] (e.g.,
+/// `kernel32.dll`) containing Win32 functions defined by the provided
+/// [methods].
+///
+/// The generated file is saved in the directory `packages/win32/lib/src/win32/`
+/// and named after the dynamic library (e.g., `kernel32.g.dart` for
+/// `kernel32.dll`).
+///
+/// This file contains function declarations for all the methods from the
+/// dynamic library that are projected into Dart.
+void generateDynamicLibrary(ModuleRef library, List<Method> methods) {
+  final fileName = library.safeName.safeFilename;
+  final projection = DynamicLibraryProjection(methods[0].module, methods);
+  final buffer =
+      StringBuffer()
+        ..writeln(dynamicLibraryFileHeader)
+        ..write(projection);
+  final filePath =
+      Platform.script
+          .resolve('../../win32/lib/src/win32/$fileName')
+          .toFilePath();
+  writeToFile(filePath, buffer.toString());
+}
+
+/// Generates a Dart file that exports all the dynamic libraries projected from
+/// the Win32 API.
+///
+/// The generated file is saved in the directory `packages/win32/lib/` and named
+/// `_win32.g.dart`.
+void generateDynamicLibraryExports(Set<ModuleRef> dynamicLibraries) {
+  final buffer = StringBuffer(generatedFileHeader)
+    ..writeln('/// @nodoc\nlibrary;\n');
+  for (final library in dynamicLibraries) {
+    final fileName = library.safeName.safeFilename;
+    buffer.writeln("export 'src/win32/$fileName';");
+  }
+  final filePath =
+      Platform.script.resolve('../../win32/lib/_win32.g.dart').toFilePath();
+  writeToFile(filePath, buffer.toString());
+}
+
+/// Generates Dart test file for the specified dynamic [library] (e.g.,
+/// `kernel32.dll`) that tests the projected functions provided in [methods] and
+/// [functions].
+///
+/// The generated file is saved in the directory
+/// `packages/win32/test/win32/dll/` and named after the dynamic library (e.g.,
+/// `kernel32.g_test.dart` for `kernel32.dll`).
+///
+/// This file contains unit tests for all the functions projected from the
+/// dynamic library.
+void generateDynamicLibraryTests(
+  ModuleRef library,
+  List<Method> methods,
+  List<Win32Function> functions,
+) {
+  final libraryName = library.safeName;
+  final projection = DynamicLibraryTestProjection(
+    methods[0].module,
+    methods,
+    functions,
   );
+  final buffer =
+      StringBuffer()
+        ..writeln(dynamicLibraryTestFileHeader)
+        ..write(projection);
+  final filePath =
+      Platform.script
+          .resolve('../../win32/test/win32/dll/$libraryName.g_test.dart')
+          .toFilePath();
+  writeToFile(filePath, buffer.toString());
+}
 
-  final structsFile = [structFileHeader, ...structProjections].join();
+/// Generates dynamic library wrappers for the specified [library] and its
+/// [methods].
+///
+/// This method creates three files for each dynamic library:
+/// - A C header file (e.g., `kernel32.g.h`) containing function prototypes.
+/// - A C source file (e.g., `kernel32.g.c`) with function implementations.
+/// - A Dart file (e.g., `kernel32.g.dart`) with native bindings.
+///
+/// These wrappers are used to call the native functions from Dart and preserve
+/// the result of `GetLastError()` so that errors can be handled reliably.
+void generateDynamicLibraryWrappers(ModuleRef library, List<Method> methods) {
+  final libraryName = library.name.toLowerCase();
+  final safeLibraryName = library.safeName;
+  const includes = <String, List<String>>{
+    'advapi32.dll': ['wincred.h'],
+    'bluetoothapis.dll': ['bluetoothapis.h'],
+    'bthprops.cpl': ['bluetoothapis.h'],
+    'dbghelp.dll': ['DbgHelp.h'],
+    'dxva2.dll': [
+      'highlevelmonitorconfigurationapi.h',
+      'physicalmonitorenumerationapi.h',
+    ],
+    'psapi.dll': ['Psapi.h'],
+    'setupapi.dll': ['SetupAPI.h'],
+    'ws2_32.dll': ['winsock2.h', 'ws2tcpip.h'],
+  };
 
-  file.writeAsStringSync(
+  final hFilePath =
+      Platform.script
+          .resolve('../../win32/src/$safeLibraryName.g.h')
+          .toFilePath();
+  final cFilePath =
+      Platform.script
+          .resolve('../../win32/src/$safeLibraryName.g.c')
+          .toFilePath();
+  final dartFilePath =
+      Platform.script
+          .resolve('../../win32/lib/src/_internal/$safeLibraryName.g.dart')
+          .toFilePath();
+
+  final hBuffer = StringBuffer()..write(dynamicLibraryWrapperCFileHeader);
+  final cBuffer = StringBuffer()..write(dynamicLibraryWrapperCFileHeader);
+  final dartBuffer = StringBuffer()..write(dynamicLibraryWrapperDartFileHeader);
+
+  void writeIncludes(StringBuffer buffer) {
+    if (libraryName != 'ws2_32.dll') {
+      buffer.writeln('#include "win32.h"');
+    }
+
+    includes[libraryName]?.forEach(
+      (include) => buffer.writeln('#include <$include>'),
+    );
+
+    if (libraryName == 'ws2_32.dll') {
+      buffer.writeln('#include "win32.h"');
+    }
+
+    buffer.writeln();
+  }
+
+  String generatePrototype(FunctionProjection p) {
+    final parameters = p.parameters
+        .map(
+          (param) => switch (param.name) {
+            'hRegHandle' => 'HBLUETOOTH_AUTHENTICATION_REGISTRATION hRegHandle',
+            'liDistanceToMove' => 'LARGE_INTEGER liDistanceToMove',
+            _ => '${param.type.cType} ${param.name}',
+          },
+        )
+        .join(', ');
+
+    return '${p.originalReturnType.cType} ${p.wrapperName}($parameters)';
+  }
+
+  void writeFunctionHeader(FunctionProjection p, StringBuffer buffer) {
+    buffer.writeln('MYLIB_EXPORT ${generatePrototype(p)};');
+  }
+
+  void writeFunctionImplementation(FunctionProjection p, StringBuffer buffer) {
+    final callStatement =
+        '${p.originalReturnType.cType} result_ = ${p.originalName}(${p.parameters.map((param) => param.name).join(', ')});';
+    buffer
+      ..writeln('${generatePrototype(p)} {')
+      ..writeln('  trace_print("Calling ${p.originalName}\\n");')
+      ..writeln('  $callStatement')
+      ..writeln(
+        '  trace_print("${p.originalName} returned ${p.originalReturnType.isPointer || (p.originalReturnType is TypeDefType && (p.originalReturnType as TypeDefType).typeDef.isVoidPtrHandle) ? '%p' : '%d'}\\n", result_);',
+      )
+      ..writeln('  DWORD error = GetLastError();')
+      ..writeln('  setLastError(error);')
+      ..writeln(r'  trace_print("Set lastError to %d\n", error);')
+      ..writeln('  return result_;')
+      ..writeln('}');
+  }
+
+  void writeNativeFunction(FunctionProjection p, StringBuffer buffer) {
+    buffer
+      ..writeln('@internal')
+      ..writeln(
+        '@Native<${p.nativePrototype.accept(DartEmitter())}>(${p.method.isLeaf ? 'isLeaf: true' : ''})',
+      )
+      ..writeln(
+        'external ${p.originalReturnType.dartType} ${p.wrapperName}(${p.parameters.map((p) => '${p.dartProjection.symbol} ${p.name}').join(', ')});',
+      );
+  }
+
+  void processMethods() {
+    for (var i = 0; i < methods.length; i++) {
+      final projection = FunctionProjection(methods[i]);
+      writeFunctionHeader(projection, hBuffer);
+      writeFunctionImplementation(projection, cBuffer);
+      writeNativeFunction(projection, dartBuffer);
+      if (i < methods.length - 1) {
+        hBuffer.writeln();
+        cBuffer.writeln();
+        dartBuffer.writeln();
+      }
+    }
+  }
+
+  writeIncludes(hBuffer);
+  cBuffer
+    ..writeln('#include "$safeLibraryName.g.h"')
+    ..writeln();
+  processMethods();
+  writeToFile(hFilePath, hBuffer.toString());
+  writeToFile(cFilePath, cBuffer.toString());
+  writeToFile(
+    dartFilePath,
     DartFormatter(
       languageVersion: DartFormatter.latestLanguageVersion,
-    ).format(structsFile),
+    ).format(dartBuffer.toString()),
   );
-  return structProjections.length;
 }
 
-void generateDllFile(
-  String library,
-  List<Method> filteredMethods,
-  Iterable<Win32Function> functions,
-) {
-  /// Methods we're trying to project
-  final libraryMethods = filteredMethods.where(
-    (method) => method.module.name.toLowerCase() == library,
+/// Generates Dart projections for Win32 API functions.
+///
+/// This method generates the Dart files for the projected functions from
+/// different dynamic libraries. Test files are also generated for these
+/// functions in the corresponding dynamic library test directory.
+void generateFunctions() {
+  final functions = loadFunctionsFromJson();
+  saveFunctionsToJson(functions);
+  final methods = [
+    for (final function in WindowsMetadata.functions.where(
+      (t) => !excludedNamespaces.contains(t.parent.namespace),
+    ))
+      if ( // Exclude inline functions.
+      function.module.name != 'FORCEINLINE' &&
+          // Exclude ordinal functions.
+          !function.pinvokeMap.importName.startsWith('#'))
+        function,
+  ];
+  final filteredMethods =
+      functions.values
+          .map(
+            (f) => methods.singleWhere(
+              (m) => m.name == f.originalName,
+              orElse:
+                  () =>
+                      throw StateError(
+                        'Function "${f.originalName}" not found.',
+                      ),
+            ),
+          )
+          .where((m) => !m.isObsolete)
+          .toFixedList();
+  final dynamicLibraries = SplayTreeSet<ModuleRef>.from(
+    filteredMethods.map((m) => m.module).toFixedList(),
+    (a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()),
   );
 
-  final buffer = StringBuffer();
-
-  // API set names aren't legal Dart identifiers, so we rename them.
-  // Also strip off the trailing .dll (or .cpl, .drv, etc.).
-  final libraryDartName = library.replaceAll('-', '_').split('.').first;
-
-  buffer.write('''
-  $functionsFileHeader
-
-  final _$libraryDartName = DynamicLibrary.open('$library');\n
-  ''');
-
-  for (final method in libraryMethods) {
-    final function = functions.firstWhere(
-      (f) => f.functionSymbol == method.name,
+  for (final library in dynamicLibraries) {
+    final methods =
+        filteredMethods
+            .where((method) => method.module.safeName == library.safeName)
+            .toFixedList();
+    generateDynamicLibrary(library, methods);
+    if (methods.any((m) => m.supportsLastError)) {
+      generateDynamicLibraryWrappers(
+        library,
+        methods.where((m) => m.supportsLastError).toFixedList(),
+      );
+    }
+    // As GitHub Actions runners do not include the Native Wifi API by default,
+    // 'wlanapi.dll' is excluded to prevent test failures.
+    if (library.safeName == 'wlanapi') continue;
+    generateDynamicLibraryTests(
+      library,
+      methods,
+      functions.values.toFixedList(),
     );
-    buffer.write('''
-  ${generateDocComment(function, libraryDartName)}
-  ${FunctionProjection(method, libraryDartName).toString()}
-  ''');
   }
 
-  File('../win32/lib/src/win32/$libraryDartName.g.dart').writeAsStringSync(
+  generateDynamicLibraryExports(dynamicLibraries);
+  info('🚀 Total functions generated: ${functions.length}');
+}
+
+/// Generates a Dart file that contains predefined `ComInterface` companions map
+/// for COM interfaces projected from the Win32 API.
+///
+/// The generated file is saved in the directory `packages/win32/lib/src/com/`
+/// and named `interface.g.dart`.
+void generatePredefinedCompanions(Set<TypeDef> interfaces) {
+  final buffer =
+      StringBuffer(generatedFileHeader)
+        ..writeln("import 'package:meta/meta.dart';")
+        ..writeln()
+        ..writeln("import '../guid.dart';")
+        ..writeln("import '../types.dart';");
+  for (final interface in interfaces.where((i) => i.guid != null)) {
+    final name = interface.safeIdentifier;
+    final fileName = name.safeFilename;
+    buffer.writeln("import '$fileName';");
+  }
+  buffer
+    ..writeln()
+    ..writeln("part 'interface.dart';")
+    ..writeln()
+    ..writeln('const _predefinedCompanions = <Type, ComCompanion>{');
+  for (final interface in interfaces.where((i) => i.guid != null)) {
+    final name = interface.safeIdentifier;
+    buffer.writeln('  $name: ${name}Companion(),');
+  }
+  buffer.writeln('};');
+  final filePath =
+      Platform.script
+          .resolve('../../win32/lib/src/com/interface.g.dart')
+          .toFilePath();
+  writeToFile(
+    filePath,
     DartFormatter(
       languageVersion: DartFormatter.latestLanguageVersion,
     ).format(buffer.toString()),
   );
 }
 
-void generateFunctions(
-  List<Scope> scopes,
-  Map<String, Win32Function> functions,
-) {
-  final apis = scopes.expand(
-    (scope) => scope.typeDefs.where((typeDef) => typeDef.name.endsWith('Apis')),
-  );
-
-  final methods = <Method>[];
-  final filteredMethods = <Method>[];
-
-  // Create a flat list for every method in the Win32 metadata, and a set
-  // containing all the modules (DLLs) referenced.
-  for (final api in apis) {
-    methods.addAll(api.methods);
+/// Generates a Dart file that exports all the COM interfaces projected from the
+/// Win32 API.
+///
+/// The generated file is saved in the directory `packages/win32/lib/` and named
+/// `_com.g.dart`.
+void generateInterfaceExports(Set<TypeDef> interfaces) {
+  final buffer = StringBuffer(generatedFileHeader)
+    ..writeln('/// @nodoc\nlibrary;\n');
+  for (final interface in interfaces) {
+    final name = interface.safeIdentifier;
+    final fileName = name.safeFilename;
+    final hiddenTypes = [if (interface.guid != null) '${name}Companion'];
+    final hide = hiddenTypes.isNotEmpty ? 'hide ${hiddenTypes.join(', ')}' : '';
+    buffer.writeln("export 'src/com/$fileName'$hide;");
   }
-
-  // Gather metadata for all the functions in the JSON file
-  for (final function in functions.values) {
-    final method = methods.where((m) => m.name == function.functionSymbol);
-    if (method.length != 1) {
-      throw Exception('${function.functionSymbol} metadata match error.');
-    }
-    filteredMethods.add(method.first);
-  }
-
-  // Gather a list of all the affected libraries
-  final dllLibraries =
-      filteredMethods.map((m) => m.module.name.toLowerCase()).toSet();
-
-  final tests = <String>[];
-
-  for (final library in dllLibraries) {
-    generateDllFile(library, filteredMethods, functions.values);
-    tests.add(
-      generateFunctionTests(library, filteredMethods, functions.values),
-    );
-  }
-
-  writeFunctionTests(tests);
-}
-
-void writeFunctionTests(Iterable<String> tests) {
-  final testFile = '''
-$testFunctionsHeader
-
-import 'helpers.dart';
-
-void main() {
-  final windowsBuildNumber = getWindowsBuildNumber();
-  ${tests.join('\n')}
-}
-''';
-
-  File('../win32/test/api_test.dart').writeAsStringSync(
+  final filePath =
+      Platform.script.resolve('../../win32/lib/_com.g.dart').toFilePath();
+  writeToFile(
+    filePath,
     DartFormatter(
       languageVersion: DartFormatter.latestLanguageVersion,
-    ).format(testFile),
+    ).format(buffer.toString()),
   );
 }
 
-String generateFunctionTests(
-  String library,
-  Iterable<Method> methods,
-  Iterable<Win32Function> functions,
-) {
-  final buffer = StringBuffer();
-
-  // GitHub Actions doesn't install Native Wifi API on runners, so we remove
-  // wlanapi manually to prevent test failures.
-  if (library == 'wlanapi.dll') return '';
-
-  /// Methods we're trying to project
-  final filteredMethods = methods.where(
-    (method) => method.module.name.toLowerCase() == library,
+/// Generates Dart projections for COM interfaces.
+///
+/// This method generates individual Dart files for each COM interface (e.g.,
+/// `iunknown.g.dart`) located in the directory `packages/win32/lib/src/com/`.
+void generateInterfaces() {
+  final comTypesPath =
+      Platform.script.resolve('../data/com_types.json').toFilePath();
+  final interfaces = loadMap(comTypesPath);
+  saveMap(interfaces, comTypesPath);
+  final typeDefs = SplayTreeSet<TypeDef>(
+    (a, b) => a.nameWithoutEncoding.safeFilename.compareTo(
+      b.nameWithoutEncoding.safeFilename,
+    ),
   );
 
-  buffer.write("group('Test ${library.split('.').first} functions', () {\n");
+  for (final interface in interfaces.keys) {
+    final typeDef =
+        WindowsMetadata.interfaces
+            .where((t) => !excludedNamespaces.contains(t.namespace))
+            .where((t) => t.name == interface)
+            .firstOrNull;
+    if (typeDef == null) throw StateError('Could not find "$interface".');
 
-  for (final method in filteredMethods) {
-    // API set names aren't legal Dart identifiers, so we rename them.
-    // Also strip off the trailing .dll (or .cpl, .drv, etc.).
-    final libraryDartName = library.replaceAll('-', '_').split('.').first;
+    final interfaceProjection = ComInterfaceProjection(typeDef);
+    final fileName = typeDef.nameWithoutEncoding.safeFilename;
+    typeDefs.add(typeDef);
+    final buffer =
+        StringBuffer()
+          ..writeln(interfaceHeader)
+          ..write(interfaceProjection);
+    final filePath =
+        Platform.script
+            .resolve('../../win32/lib/src/com/$fileName')
+            .toFilePath();
+    writeToFile(filePath, buffer.toString());
+  }
 
-    final function = functions.firstWhere(
-      (f) => f.functionSymbol == method.name,
+  generatePredefinedCompanions(typeDefs);
+  generateInterfaceExports(typeDefs);
+  info('🚀 Total COM interfaces generated: ${interfaces.length}');
+}
+
+/// Generates Dart code projections for Win32 API components based on metadata
+/// provided in [items] and.
+///
+/// This method processes the metadata in [items], filters it using the
+/// [scopeFilter], and then applies [projectionFactory] to generate Dart code
+/// for each matched Win32 API component (e.g., enums, structs, functions).
+///
+/// The generated Dart file will be written to the location specified by
+/// [outputPath].
+void generateProjections({
+  required Map<String, String> items,
+  required String outputPath,
+  required String fileHeader,
+  required Projection Function(TypeDef) projectionFactory,
+  required Iterable<TypeDef> Function(Scope) scopeFilter,
+}) {
+  final typeDefs =
+      WindowsMetadata.scopes
+          .expand(scopeFilter)
+          .where((t) => !excludedNamespaces.contains(t.namespace))
+          .where(
+            (t) => items.containsKey(t.name) && t.supportedArchitectures.x64,
+          )
+          .toFixedList()
+        ..sort((a, b) => a.safeTypeName.compareTo(b.safeTypeName));
+  final projections = typeDefs.map(projectionFactory).toFixedList();
+  final buffer =
+      StringBuffer()
+        ..writeln(fileHeader)
+        ..writeAll(projections, '\n');
+  final filePath = Platform.script.resolve(outputPath).toFilePath();
+  writeToFile(filePath, buffer.toString());
+}
+
+/// Generates Dart projections for Win32 API structs.
+///
+/// This method extracts struct definitions and generates a Dart file (
+/// `structs.g.dart`) located in the directory `packages/win32/lib/src/` that
+/// contains the struct projections.
+void generateStructs() {
+  final win32StructsPath =
+      Platform.script.resolve('../data/win32_structs.json').toFilePath();
+  final structs = loadMap(win32StructsPath);
+  saveMap(structs, win32StructsPath);
+  generateProjections(
+    items: structs,
+    outputPath: '../../win32/lib/src/structs.g.dart',
+    fileHeader: structFileHeader,
+    projectionFactory: StructProjection.new,
+    scopeFilter: (scope) => scope.typeDefs,
+  );
+  info('🚀 Total structs generated: ${structs.length}');
+}
+
+/// Create a file at [path] and write [content] to it synchronously.
+void writeToFile(String path, String content) =>
+    File(path)
+      ..createSync(recursive: true)
+      ..writeAsStringSync(content);
+
+/// Parses the command-line arguments provided in [args] and returns the parsed
+/// arguments.
+ArgResults parseArgs(List<String> args) {
+  // List of all supported flags.
+  const supportedFlags = [
+    '--callbacks',
+    '--constants',
+    '--enums',
+    '--functions',
+    '--interfaces',
+    '--structs',
+  ];
+
+  // Check if any of the supported flags are provided in the arguments.
+  // If no flags are provided, all flags should be enabled by default.
+  final isFlagExplicitlyProvided = args.any(supportedFlags.contains);
+
+  final parser =
+      ArgParser()
+        ..addFlag(
+          'help',
+          abbr: 'h',
+          negatable: false,
+          help: 'Show this help message.',
+        )
+        ..addFlag('latest', help: 'Use the latest metadata versions.')
+        ..addOption(
+          'logLevel',
+          abbr: 'l',
+          defaultsTo: 'info',
+          help: 'Set the logging level.',
+        )
+        ..addFlag(
+          'callbacks',
+          defaultsTo: !isFlagExplicitlyProvided,
+          help: 'Generate callbacks.',
+        )
+        ..addFlag(
+          'constants',
+          defaultsTo: !isFlagExplicitlyProvided,
+          help: 'Generate constants.',
+        )
+        ..addFlag(
+          'enums',
+          defaultsTo: !isFlagExplicitlyProvided,
+          help: 'Generate enums.',
+        )
+        ..addFlag(
+          'functions',
+          defaultsTo: !isFlagExplicitlyProvided,
+          help: 'Generate functions.',
+        )
+        ..addFlag(
+          'interfaces',
+          defaultsTo: !isFlagExplicitlyProvided,
+          help: 'Generate COM interfaces.',
+        )
+        ..addFlag(
+          'structs',
+          defaultsTo: !isFlagExplicitlyProvided,
+          help: 'Generate structs.',
+        );
+
+  void printUsage() {
+    print('''
+generator -- Generates various Win32 API projections using Windows metadata.
+''');
+    print(parser.usage);
+  }
+
+  final ArgResults argResults;
+  try {
+    argResults = parser.parse(args);
+  } on FormatException {
+    printUsage();
+    exit(255);
+  }
+
+  if (argResults.flag('help')) {
+    printUsage();
+    exit(0);
+  }
+
+  return argResults;
+}
+
+/// Checks for new versions of the metadata packages and logs the results.
+///
+/// This function compares the current metadata package versions defined in
+/// the `..\lib\src\versions.yaml` file with the latest available versions on
+/// NuGet.
+///
+/// If [updateVersions] is set to `true`, the versions in the file will be
+/// updated to the latest versions.
+Future<void> checkForNewMetadataVersions({bool updateVersions = false}) async {
+  info('🔍 Checking for new metadata versions...');
+  try {
+    final versionManager = VersionManager.load();
+    final currentVersions = versionManager.versions;
+    final latestVersions = await getLatestPackageVersions(
+      currentVersions.keys.toFixedList(),
     );
+    final outdatedPackages = compareVersions(currentVersions, latestVersions);
+    if (outdatedPackages.isNotEmpty) {
+      if (updateVersions) {
+        info('📦 Updating metadata versions...');
+        for (final package in outdatedPackages.keys) {
+          final latestVersion = latestVersions[package]!;
+          versionManager.updateVersion(package, latestVersion);
+          info(
+            "${green('✅ Updated $package version to:')} "
+            '${green(bold(latestVersion))}',
+          );
+        }
+        versionManager.save();
+        metadataUpdated = true;
+      } else {
+        info(
+          gray(
+            bold(
+              '💡 To update the metadata versions, run the script with the '
+              '"--latest" flag.',
+            ),
+          ),
+        );
+      }
+    }
+  } catch (e) {
+    error('❌ Failed to check for new metadata versions.');
+    error(e);
+  }
+}
 
-    // Some functions (e.g. TaskDialog APIs) can only be loaded if the EXE has a
-    // manifest, so we ignore those for the purpose of test generation.
-    if (!function.test) continue;
+/// Fetches the latest versions of the specified NuGet packages.
+Future<Map<MetadataPackage, String>> getLatestPackageVersions(
+  List<MetadataPackage> packages,
+) async {
+  final client = NuGetClient();
+  final latestVersions = <MetadataPackage, String>{};
 
-    final projection = FunctionProjection(method, libraryDartName);
+  try {
+    final versions =
+        await packages
+            .map(
+              (package) => client.getLatestPackageVersion(
+                package.packageId,
+                includePrerelease: package != MetadataPackage.winrt,
+              ),
+            )
+            .wait;
+    for (var i = 0; i < packages.length; i++) {
+      latestVersions[packages.elementAt(i)] = versions[i];
+    }
+  } finally {
+    client.close();
+  }
 
-    final returnFFIType =
-        TypeProjection(method.returnType.typeIdentifier).nativeType;
-    final returnDartType =
-        TypeProjection(method.returnType.typeIdentifier).dartType;
+  return latestVersions;
+}
 
-    final methodDartName = stripAnsiUnicodeSuffix(method.name);
+/// Compares the current versions with the latest versions and returns a map of
+/// outdated packages with their respective latest versions.
+Map<MetadataPackage, String> compareVersions(
+  Map<MetadataPackage, String> currentVersions,
+  Map<MetadataPackage, String> latestVersions,
+) {
+  final outdatedPackages = <MetadataPackage, String>{};
 
-    final test = '''
-      test('Can instantiate $methodDartName', () {
-        final $libraryDartName = DynamicLibrary.open('$library');
-        final $methodDartName = $libraryDartName.lookupFunction<\n
-          $returnFFIType Function(${projection.nativeParams}),
-          $returnDartType Function(${projection.dartParams})>
-          ('${method.name}');
-        expect($methodDartName, isA<Function>());
-      });''';
-
-    if (function.minimumWindowsVersion > 0) {
-      buffer.writeln('''
-          if (windowsBuildNumber >= ${function.minimumWindowsVersion}) {
-            $test
-          }''');
+  for (final MapEntry(key: packageName, value: latestVersion)
+      in latestVersions.entries) {
+    final currentVersion = currentVersions[packageName]!;
+    if (currentVersion == latestVersion) {
+      info(gray('✅ $packageName is up-to-date (version: $currentVersion)'));
     } else {
-      buffer.writeln(test);
+      outdatedPackages[packageName] = latestVersion;
+      info(
+        "${yellow('⚠️ A new version of $packageName is available:')} "
+        '${red(bold(currentVersion))} → ${green(bold(latestVersion))}',
+      );
     }
   }
-  buffer.write('});\n\n');
 
-  return buffer.toString();
+  return outdatedPackages;
 }
 
-void generateComApis(Scope scope, Map<String, String> comTypesToGenerate) {
-  for (final interface in comTypesToGenerate.keys) {
-    final typeDef = scope.findTypeDef(interface);
-    if (typeDef == null) throw Exception("Can't find $interface");
-    final comment = comTypesToGenerate[interface] ?? '';
-    final interfaceProjection = ComInterfaceProjection(typeDef, comment);
+/// Generates a Dart file (`_unicode_suffixed_types.g.dart`) located in the
+/// directory `packages/generator/lib/src/extensions` that contains a set of
+/// Unicode suffixed (`W`) functions and typeDefs without corresponding ANSI
+/// variants.
+void generateUnicodeSuffixedTypesWithoutAnsiVariants() {
+  final pattern = RegExp(r'([0-9a-z]|_\d)W$');
+  final filePath =
+      Platform.script
+          .resolve('../lib/src/extensions/_unicode_suffixed_types.g.dart')
+          .toFilePath();
+  final buffer = StringBuffer(generatedFileHeader);
 
-    // In v2, we put classes and interfaces in the same file.
-    final className = ComClassProjection.generateClassName(typeDef);
-    final classNameExists = scope.findTypeDef(className) != null;
-
-    final comObject =
-        classNameExists
-            ? ComClassProjection.fromInterface(
-              typeDef,
-              interfaceComment: comment,
-            )
-            : interfaceProjection;
-
-    // Generate class
-    final dartClass = comObject.toString();
-    final classOutputFilename =
-        stripAnsiUnicodeSuffix(lastComponent(interface)).toLowerCase();
-    final classOutputPath = '../win32/lib/src/com/$classOutputFilename.dart';
-
-    File(classOutputPath).writeAsStringSync(
-      DartFormatter(
-        languageVersion: DartFormatter.latestLanguageVersion,
-      ).format(dartClass),
-    );
+  final unicodeSuffixedFunctions = SplayTreeSet<String>();
+  final functions = WindowsMetadata.functions.toFixedList();
+  for (final function in functions) {
+    if (pattern.hasMatch(function.name) && !function.isUnicode) {
+      final hasAnsiVariant = functions.any(
+        (f) => f.name == function.name.stripAnsiUnicodeSuffix(),
+      );
+      if (!hasAnsiVariant) unicodeSuffixedFunctions.add(function.name);
+    }
   }
+
+  buffer.writeln('''
+/// Set of Unicode suffixed (`W`) functions without corresponding ANSI variants.
+///
+/// This set serves as a reference to identify functions that have Unicode
+/// suffixes (`W`) but lack corresponding ANSI variants. These functions
+/// typically do not possess the `UnicodeAttribute` and used to determine
+/// whether a given function name should have its Unicode suffix stripped.
+const unicodeSuffixedFunctions = <String>{''');
+  for (final function in unicodeSuffixedFunctions) {
+    buffer.writeln("  '$function',");
+  }
+  buffer
+    ..writeln('};')
+    ..writeln();
+
+  final unicodeSuffixedTypeDefs = SplayTreeSet<String>();
+  final typeDefs = WindowsMetadata.typeDefs.toFixedList();
+  for (final typeDef in typeDefs) {
+    if (pattern.hasMatch(typeDef.name) && !typeDef.isUnicode) {
+      final hasAnsiVariant = typeDefs.any(
+        (t) => t.name == typeDef.name.stripAnsiUnicodeSuffix(),
+      );
+      if (!hasAnsiVariant) unicodeSuffixedTypeDefs.add(typeDef.name);
+    }
+  }
+
+  buffer.writeln('''
+/// Set of Unicode suffixed (`W`) typeDefs without corresponding ANSI variants.
+///
+/// This set serves as a reference to identify typeDefs that have Unicode
+/// suffixes (`W`) but lack corresponding ANSI variants. These typically do not
+/// possess the `UnicodeAttribute` and used to determine whether a given typeDef
+/// name should have its Unicode suffix stripped.
+const unicodeSuffixedTypeDefs = <String>{''');
+  for (final typeDef in unicodeSuffixedTypeDefs) {
+    buffer.writeln("  '$typeDef',");
+  }
+  buffer.writeln('};');
+
+  writeToFile(filePath, buffer.toString());
 }
 
-void main() async {
+String bold(String message) => '\x1B[1m$message\x1B[0m';
+String gray(String message) => '\x1B[90m$message\x1B[0m';
+String green(String message) => '\x1B[32m$message\x1B[0m';
+String red(String message) => '\x1B[31m$message\x1B[0m';
+String yellow(String message) => '\x1B[33m$message\x1B[0m';
+
+/// Mapping of generation tasks to their respective functions.
+const generationTasks = {
+  'callbacks': generateCallbacks,
+  'constants': generateConstants,
+  'enums': generateEnums,
+  'functions': generateFunctions,
+  'interfaces': generateInterfaces,
+  'structs': generateStructs,
+};
+
+/// Whether the metadata has been updated.
+var metadataUpdated = false;
+
+void main(List<String> args) async {
+  final argResults = parseArgs(args);
+  setLogLevel(argResults.option('logLevel')!);
+  info('🔧 Logging level set to $logLevel.');
+  await checkForNewMetadataVersions(updateVersions: argResults.flag('latest'));
+
   final stopwatch = Stopwatch()..start();
+  info('📦 [${stopwatch.elapsed}] Loading Windows metadata and docs...');
+  await WindowsMetadata.load();
+  if (metadataUpdated) {
+    info(
+      '⚙️ [${stopwatch.elapsed}] Regenerating Unicode suffixed (`W`) types '
+      'without ANSI variants...',
+    );
+    generateUnicodeSuffixedTypesWithoutAnsiVariants();
+  }
 
-  print('[${stopwatch.elapsed}] Loading Windows metadata...');
-  final wdkScope = await MetadataStore.loadWdkMetadata(
-    version: wdkMetadataVersion,
-  );
-  final win32Scope = await MetadataStore.loadWin32Metadata(
-    version: win32MetadataVersion,
-  );
-  // Additionally, load WinRT metadata to ensure the correct resolution of
-  // references from Win32 metadata.
-  await MetadataStore.loadWinrtMetadata();
+  // Run the generation tasks based on the flags.
+  for (final MapEntry(key: flag, value: task) in generationTasks.entries) {
+    if (argResults.flag(flag)) {
+      info('⚙️ [${stopwatch.elapsed}] Generating $flag...');
+      task();
+    }
+  }
 
-  print('[${stopwatch.elapsed}] Loading and sorting functions...');
-  final functionsToGenerate = loadFunctionsFromJson();
-  saveFunctionsToJson(functionsToGenerate);
-
-  print('[${stopwatch.elapsed}] Generating structs...');
-  final structsToGenerate = loadMap('win32_structs.json');
-  saveMap(structsToGenerate, 'win32_structs.json');
-  generateStructs([wdkScope, win32Scope], structsToGenerate);
-
-  print('[${stopwatch.elapsed}] Validating callbacks...');
-  final callbacks = loadMap('win32_callbacks.json');
-  saveMap(callbacks, 'win32_callbacks.json');
-  // Win32 callbacks are manually created
-
-  print('[${stopwatch.elapsed}] Generating FFI function bindings...');
-  generateFunctions([wdkScope, win32Scope], functionsToGenerate);
-
-  print('[${stopwatch.elapsed}] Generating COM interfaces...');
-  final comTypesToGenerate = loadMap('com_types.json');
-  saveMap(comTypesToGenerate, 'com_types.json');
-  generateComApis(win32Scope, comTypesToGenerate);
-
-  MetadataStore.close();
+  WindowsMetadata.close();
   stopwatch.stop();
-  print('[${stopwatch.elapsed}] Completed.');
+  info('🏁 [${stopwatch.elapsed}] Done.');
 }

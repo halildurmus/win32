@@ -1,0 +1,45 @@
+DMLCreateDevice|
+/// Creates a DirectML device for a given Direct3D 12 device.
+///
+/// This method uses the [ComInterface.type] method to retrieve metadata about
+/// the target interface defined by [T], including its IID (Interface ID) and
+/// instantiation logic.
+///
+/// All COM interfaces provided by this package are pre-registered. Custom COM
+/// interfaces must be registered manually using the [ComInterface.register]
+/// method before calling this method.
+///
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/directml/nf-directml-dmlcreatedevice>.
+///
+/// {@category directml}
+void DMLCreateDevice<T extends IUnknown>(
+  ID3D12Device? d3d12Device,
+  DML_CREATE_DEVICE_FLAGS flags,
+  Pointer<VTablePointer>? ppv,
+) {
+  final companion = ComInterface.type<T>();
+  final riid = companion.iid;
+  final ppv = loggingCalloc<Pointer>();
+  final hr$ = HRESULT(
+    _DMLCreateDevice(
+      d3d12Device?.ptr ?? nullptr,
+      flags,
+      riid.ptr,
+      ppv ?? nullptr,
+    ),
+  );
+  if (hr$.isError) throw WindowsException(hr$);
+}
+
+@Native<Int32 Function(VTablePointer, Int32, Pointer<GUID>, Pointer<Pointer>)>(
+  symbol: 'DMLCreateDevice',
+)
+external int _DMLCreateDevice(
+  VTablePointer d3d12Device,
+  int flags,
+  Pointer<GUID> riid,
+  Pointer<Pointer> ppv,
+);

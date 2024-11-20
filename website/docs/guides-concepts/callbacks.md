@@ -78,7 +78,7 @@ Here's an example:
 
 ```dart
 int enumerateFonts(
-    Pointer<LOGFONT> logFont, Pointer<TEXTMETRIC> _, int __, int ___) {
+    Pointer<LOGFONT> logFont, Pointer<TEXTMETRIC> _, int _, int _) {
   // Get extended information from the font.
   final logFontEx = logFont.cast<ENUMLOGFONTEX>();
   print(logFontEx.ref.elfFullName);
@@ -106,7 +106,7 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 int enumerateFonts(
-    Pointer<LOGFONT> logFont, Pointer<TEXTMETRIC> _, int __, int ___) {
+    Pointer<LOGFONT> logFont, Pointer<TEXTMETRIC> _, int _, int _) {
   // Get extended information from the font.
   final logFontEx = logFont.cast<ENUMLOGFONTEX>();
   print(logFontEx.ref.elfFullName);

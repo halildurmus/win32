@@ -1,0 +1,14 @@
+{
+  "com": {
+    "latency": 4369.088
+  },
+  "com_optimized": {
+    "latency": 4926.41797752809
+  },
+  "credread": {
+    "latency": 1.865005
+  },
+  "credread_wrapper": {
+    "latency": 1.8898730550634724
+  }
+}

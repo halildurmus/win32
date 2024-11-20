@@ -1,0 +1,60 @@
+CoCreateInstance|
+/// Creates a single uninitialized object of the class associated with a
+/// specified CLSID.
+///
+/// This method uses the [ComInterface.type] method to retrieve metadata about
+/// the target interface defined by [T], including its IID (Interface ID) and
+/// instantiation logic.
+///
+/// All COM interfaces provided by this package are pre-registered. Custom COM
+/// interfaces must be registered manually using the [ComInterface.register]
+/// method before calling this method.
+///
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cocreateinstance>.
+///
+/// {@category ole32}
+T CoCreateInstance<T extends IUnknown>(
+  Pointer<GUID> rclsid,
+  IUnknown? pUnkOuter,
+  CLSCTX dwClsContext,
+) {
+  final companion = ComInterface.type<T>();
+  final riid = companion.iid;
+  final ppv = loggingCalloc<Pointer>();
+  final hr$ = HRESULT(
+    _CoCreateInstance(
+      rclsid,
+      pUnkOuter?.ptr ?? nullptr,
+      dwClsContext,
+      riid.ptr,
+      ppv,
+    ),
+  );
+  if (hr$.isError) {
+    free(ppv);
+    throw WindowsException(hr$);
+  }
+  final result = companion.fromPointer(ppv.value.cast());
+  free(ppv);
+  return result;
+}
+
+@Native<
+  Int32 Function(
+    Pointer<GUID>,
+    VTablePointer,
+    Uint32,
+    Pointer<GUID>,
+    Pointer<Pointer>,
+  )
+>(symbol: 'CoCreateInstance')
+external int _CoCreateInstance(
+  Pointer<GUID> rclsid,
+  VTablePointer pUnkOuter,
+  int dwClsContext,
+  Pointer<GUID> riid,
+  Pointer<Pointer> ppv,
+);
