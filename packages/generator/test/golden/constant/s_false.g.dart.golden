@@ -1,0 +1,3 @@
+S_FALSE|
+/// Represents the HRESULT value `0x1` (`1`).
+const S_FALSE = HRESULT(0x1);

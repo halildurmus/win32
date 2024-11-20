@@ -1,0 +1,14 @@
+IWinHttpRequest.get_ResponseBody|
+/// Retrieves the response entity body as an array of unsigned bytes.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/WinHttp/iwinhttprequest-responsebody>.
+Pointer<VARIANT> get responseBody {
+  final body = loggingCalloc<VARIANT>();
+  final hr$ = HRESULT(_get_ResponseBodyFn(ptr, body));
+  if (hr$.isError) {
+    free(body);
+    throw WindowsException(hr$);
+  }
+  return body;
+}

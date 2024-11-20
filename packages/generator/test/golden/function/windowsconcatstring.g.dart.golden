@@ -1,0 +1,31 @@
+WindowsConcatString|
+/// Concatenates two specified strings.
+///
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowsconcatstring>.
+///
+/// {@category winrt}
+int WindowsConcatString(int? string1, int? string2) {
+  final newString = loggingCalloc<HSTRING>();
+  final hr$ = HRESULT(
+    _WindowsConcatString(string1 ?? NULL, string2 ?? NULL, newString),
+  );
+  if (hr$.isError) {
+    free(newString);
+    throw WindowsException(hr$);
+  }
+  final result$ = newString.value;
+  free(newString);
+  return result$;
+}
+
+@Native<Int32 Function(HSTRING, HSTRING, Pointer<HSTRING>)>(
+  symbol: 'WindowsConcatString',
+)
+external int _WindowsConcatString(
+  int string1,
+  int string2,
+  Pointer<HSTRING> newString,
+);

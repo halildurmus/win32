@@ -1,0 +1,10 @@
+WNDPROC|
+/// An application-defined callback function that processes messages sent to a
+/// window.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winuser/nc-winuser-wndproc>.
+///
+/// {@category callback}
+typedef WNDPROC =
+    LRESULT Function(HWND param0, Uint32 param1, WPARAM param2, LPARAM param3);

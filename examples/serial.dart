@@ -8,7 +8,6 @@
 import 'dart:ffi';
 import 'dart:io';
 
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 void printCommState(DCB dcb) => print(
@@ -19,18 +18,18 @@ void printCommState(DCB dcb) => print(
 );
 
 void main() {
-  final pcCommPort = 'COM1'.toNativeUtf16();
-  final dcb = calloc<DCB>();
+  final dcb = loggingCalloc<DCB>();
 
   try {
+    final fileName = w('COM1');
     final hCom = CreateFile(
-      pcCommPort,
+      fileName.ptr,
       GENERIC_READ | GENERIC_WRITE,
-      0,
-      nullptr,
+      FILE_SHARE_NONE,
+      null,
       OPEN_EXISTING,
-      0,
-      NULL,
+      FILE_ATTRIBUTE_NORMAL,
+      null,
     );
 
     if (hCom == INVALID_HANDLE_VALUE) {
@@ -40,28 +39,25 @@ void main() {
 
     dcb.ref.DCBlength = sizeOf<DCB>();
 
-    var fSuccess = GetCommState(hCom, dcb);
-    if (fSuccess == 0) {
+    if (!GetCommState(hCom, dcb)) {
       print('GetCommState failed.');
       exit(2);
     }
     printCommState(dcb.ref);
 
-    dcb
-      ..ref.BaudRate = CBR_57600
-      ..ref.ByteSize = 8
-      ..ref.Parity = NOPARITY
-      ..ref.StopBits = ONESTOPBIT;
+    dcb.ref
+      ..BaudRate = CBR_57600
+      ..ByteSize = 8
+      ..Parity = NOPARITY
+      ..StopBits = ONESTOPBIT;
 
-    fSuccess = SetCommState(hCom, dcb);
-    if (fSuccess == 0) {
+    if (!SetCommState(hCom, dcb)) {
       print('SetCommState failed.');
       exit(3);
     }
 
     printCommState(dcb.ref);
   } finally {
-    free(pcCommPort);
     free(dcb);
   }
 }

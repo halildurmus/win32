@@ -11,23 +11,27 @@ import 'package:test/test.dart' show fail;
 const keepTempDir = false;
 
 void main() {
-  test("'dart fix' integration", () {
-    final tempDir = Directory.systemTemp.createTempSync('test');
-    try {
-      // Set up project.
-      createPubspec(tempDir);
-      copyTestFiles('test_fixes', p.join(tempDir.path, 'lib'));
-      pubGet(tempDir);
-      dartFix(tempDir);
-      dartAnalyze(tempDir);
-    } finally {
-      if (keepTempDir) {
-        print('dart fix test temp dir: ${tempDir.path}');
-      } else {
-        tempDir.deleteSync(recursive: true);
+  test(
+    "'dart fix' integration",
+    skip: 'There are no "dart fix" transformations at the moment',
+    () {
+      final tempDir = Directory.systemTemp.createTempSync('test');
+      try {
+        // Set up project.
+        createPubspec(tempDir);
+        copyTestFiles('test_fixes', p.join(tempDir.path, 'lib'));
+        pubGet(tempDir);
+        dartFix(tempDir);
+        dartAnalyze(tempDir);
+      } finally {
+        if (keepTempDir) {
+          print('dart fix test temp dir: ${tempDir.path}');
+        } else {
+          tempDir.deleteSync(recursive: true);
+        }
       }
-    }
-  });
+    },
+  );
 }
 
 void createPubspec(Directory dir) {
