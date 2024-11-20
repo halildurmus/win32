@@ -1,3 +1,7 @@
+// Dart representations of Win32 enums.
+//
+// These enums are handwritten as they are not included in the metadata.
+
 // ignore_for_file: camel_case_types, constant_identifier_names
 
 import 'structs.dart';
@@ -56,33 +60,3 @@ const WCA_HOLOGRAPHIC = WINDOWCOMPOSITIONATTRIB(23);
 const WCA_EXCLUDED_FROM_DDA = WINDOWCOMPOSITIONATTRIB(24);
 const WCA_PASSIVEUPDATEMODE = WINDOWCOMPOSITIONATTRIB(25);
 const WCA_LAST = WINDOWCOMPOSITIONATTRIB(26);
-
-/// Represents the trust level of an activatable class.
-///
-/// {@category enum}
-enum TrustLevel {
-  /// The component has access to resources that are not protected.
-  baseTrust(0),
-
-  /// The component has access to resources requested in the app manifest and
-  /// approved by the user.
-  partialTrust(1),
-
-  /// The component requires the full privileges of the user.
-  fullTrust(2);
-
-  final int value;
-
-  const TrustLevel(this.value);
-
-  factory TrustLevel.from(int value) => TrustLevel.values.firstWhere(
-    (e) => e.value == value,
-    orElse:
-        () =>
-            throw ArgumentError.value(
-              value,
-              'value',
-              'No enum value with that value',
-            ),
-  );
-}

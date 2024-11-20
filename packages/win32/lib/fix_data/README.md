@@ -7,9 +7,10 @@ When adding a new `.yaml` file, make a copy of `fix_template.yaml`. See the
 `test_fixes` directory for the tests that validate these fix rules.
 
 To run these tests locally, execute this command in the `test_fixes` directory.
-```sh
+
+```cmd
 dart fix --compare-to-golden
 ```
 
 For more documentation about Data Driven Fixes, see
-https://dart.dev/go/data-driven-fixes#test-folder.
+<https://dart.dev/go/data-driven-fixes#test-folder>.

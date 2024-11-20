@@ -1,0 +1,23 @@
+APTTYPE|
+/// Specifies different types of apartments.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/objidlbase/ne-objidlbase-apttype>.
+///
+/// {@category enum}
+extension type const APTTYPE(int _) implements int {}
+
+/// The current thread.
+const APTTYPE_CURRENT = APTTYPE(-1);
+
+/// A single-threaded apartment.
+const APTTYPE_STA = APTTYPE(0);
+
+/// A multithreaded apartment.
+const APTTYPE_MTA = APTTYPE(1);
+
+/// A neutral apartment.
+const APTTYPE_NA = APTTYPE(2);
+
+/// The main single-threaded apartment.
+const APTTYPE_MAINSTA = APTTYPE(3);

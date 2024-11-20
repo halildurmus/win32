@@ -16,7 +16,6 @@ import 'dart:ffi';
 import 'dart:io';
 
 import 'package:args/command_runner.dart';
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 const pipeName = r'\\.\pipe\dart_pipe';
@@ -31,19 +30,18 @@ class ClientCommand extends Command<void> {
 
   @override
   void run() {
-    final lpPipeName = pipeName.toNativeUtf16();
-    final lpBuffer = wsalloc(128);
-    final lpNumBytesRead = calloc<DWORD>();
+    final lpBuffer = Pwstr.allocate(128);
+    final lpNumBytesRead = loggingCalloc<DWORD>();
     try {
       stdout.writeln('Connecting to pipe...');
       final pipe = CreateFile(
-        lpPipeName,
+        w(pipeName).ptr,
         GENERIC_READ,
         FILE_SHARE_READ | FILE_SHARE_WRITE,
-        nullptr,
+        null,
         OPEN_EXISTING,
         FILE_ATTRIBUTE_NORMAL,
-        NULL,
+        null,
       );
       if (pipe == INVALID_HANDLE_VALUE) {
         stderr.writeln('Failed to connect to pipe.');
@@ -51,14 +49,7 @@ class ClientCommand extends Command<void> {
       }
 
       stdout.writeln('Reading data from pipe...');
-      final result = ReadFile(
-        pipe,
-        lpBuffer.cast(),
-        128,
-        lpNumBytesRead,
-        nullptr,
-      );
-      if (result == NULL) {
+      if (!ReadFile(pipe, lpBuffer.ptr.cast(), 128, lpNumBytesRead, null)) {
         stderr.writeln('Failed to read data from the pipe.');
       } else {
         final numBytesRead = lpNumBytesRead.value;
@@ -70,8 +61,6 @@ class ClientCommand extends Command<void> {
       CloseHandle(pipe);
       stdout.writeln('Done.');
     } finally {
-      free(lpPipeName);
-      free(lpBuffer);
       free(lpNumBytesRead);
     }
   }
@@ -86,19 +75,18 @@ class ServerCommand extends Command<void> {
 
   @override
   void run() {
-    final lpPipeName = pipeName.toNativeUtf16();
-    final lpPipeMessage = pipeMessage.toNativeUtf16();
-    final lpNumBytesWritten = calloc<DWORD>();
+    final lpPipeMessage = w(pipeMessage);
+    final lpNumBytesWritten = loggingCalloc<DWORD>();
     try {
       final pipe = CreateNamedPipe(
-        lpPipeName,
+        w(pipeName).ptr,
         PIPE_ACCESS_OUTBOUND,
         PIPE_TYPE_BYTE,
         1,
         0,
         0,
         0,
-        nullptr,
+        null,
       );
       if (pipe == NULL || pipe == INVALID_HANDLE_VALUE) {
         stderr.writeln('Failed to create outbound pipe instance.');
@@ -106,21 +94,19 @@ class ServerCommand extends Command<void> {
       }
 
       stdout.writeln('Sending data to pipe...');
-      var result = ConnectNamedPipe(pipe, nullptr);
-      if (result == NULL) {
+      if (!ConnectNamedPipe(pipe, null)) {
         CloseHandle(pipe);
         stderr.writeln('Failed to make connection on named pipe.');
         exit(1);
       }
 
-      result = WriteFile(
+      if (!WriteFile(
         pipe,
-        lpPipeMessage.cast(),
+        lpPipeMessage.ptr.cast(),
         pipeMessage.length * 2,
         lpNumBytesWritten,
-        nullptr,
-      );
-      if (result == NULL) {
+        null,
+      )) {
         stderr.writeln('Failed to send data.');
       } else {
         final numBytesWritten = lpNumBytesWritten.value;
@@ -129,8 +115,6 @@ class ServerCommand extends Command<void> {
       CloseHandle(pipe);
       stdout.writeln('Done.');
     } finally {
-      free(lpPipeName);
-      free(lpPipeMessage);
       free(lpNumBytesWritten);
     }
   }
@@ -141,6 +125,5 @@ void main(List<String> args) async {
       CommandRunner<void>('pipe', 'A demonstration of Win32 named pipes.')
         ..addCommand(ClientCommand())
         ..addCommand(ServerCommand());
-
   await command.run(args);
 }

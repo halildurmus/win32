@@ -1,0 +1,4 @@
+SECURITY_NT_AUTHORITY|
+final SECURITY_NT_AUTHORITY = SidIdentifierAuthority(
+  Uint8List.fromList(const [0, 0, 0, 0, 0, 5]),
+);

@@ -1,90 +1,44 @@
-// volumes.dart
-
-// Finds physical volumes on the system
-
 import 'dart:ffi';
+
 import 'package:ffi/ffi.dart';
+import 'package:flutter/foundation.dart';
 import 'package:win32/win32.dart';
 
-final volumeHandles = <int, String>{};
-
 class Volume {
+  const Volume(this.deviceName, this.volumeName, this.paths);
+
   final String deviceName;
   final String volumeName;
   final List<String> paths;
-
-  const Volume(this.deviceName, this.volumeName, this.paths);
 }
 
 class Volumes {
-  final _volumes = <Volume>[];
-
-  List<Volume> getVolumes() => _volumes;
-
-  List<String> getVolumePaths(String volumeName) {
-    final paths = <String>[];
-
-    // Could be arbitrarily long, but 4*MAX_PATH is a reasonable default.
-    // More sophisticated solutions can be found online
-    final pathNamePtr = wsalloc(MAX_PATH * 4);
-    final charCount = calloc<DWORD>();
-    final volumeNamePtr = volumeName.toNativeUtf16();
-
-    try {
-      charCount.value = MAX_PATH;
-      final success = GetVolumePathNamesForVolumeName(
-        volumeNamePtr,
-        pathNamePtr,
-        charCount.value,
-        charCount,
-      );
-
-      if (success != FALSE) {
-        if (charCount.value > 1) {
-          for (final path in pathNamePtr.unpackStringArray(charCount.value)) {
-            paths.add(path);
-          }
-        }
-      } else {
-        final error = GetLastError();
-        throw Exception(
-          'GetVolumePathNamesForVolumeName failed with error code $error',
-        );
-      }
-      return paths;
-    } finally {
-      free(pathNamePtr);
-      free(charCount);
-    }
-  }
-
   Volumes() {
     var error = 0;
-    final volumeNamePtr = wsalloc(MAX_PATH);
+    final volumeNamePtr = Pwstr.allocate(MAX_PATH);
 
-    final hFindVolume = FindFirstVolume(volumeNamePtr, MAX_PATH);
+    final hFindVolume = FindFirstVolume(volumeNamePtr.ptr, MAX_PATH);
     if (hFindVolume == INVALID_HANDLE_VALUE) {
       error = GetLastError();
-      throw Exception('FindFirstVolume failed with error code $error');
+      throw StateError('FindFirstVolume failed with error code $error');
     }
 
     while (true) {
       final volumeName = volumeNamePtr.toDartString();
 
-      //  Skip the \\?\ prefix and remove the trailing backslash.
+      // Skip the \\?\ prefix and remove the trailing backslash.
       final shortVolumeName = volumeName.substring(4, volumeName.length - 1);
-      final shortVolumeNamePtr = shortVolumeName.toNativeUtf16();
 
-      final deviceName = wsalloc(MAX_PATH);
+      final deviceName = Pwstr.allocate(MAX_PATH);
       final charCount = QueryDosDevice(
-        shortVolumeNamePtr,
-        deviceName,
+        w(shortVolumeName).ptr,
+        deviceName.ptr,
         MAX_PATH,
       );
 
       if (charCount == 0) {
         error = GetLastError();
-        throw Exception('QueryDosDevice failed with error code $error');
+        throw StateError('QueryDosDevice failed with error code $error');
       }
 
       _volumes.add(
@@ -95,19 +49,59 @@ class Volumes {
         ),
       );
 
-      final success = FindNextVolume(hFindVolume, volumeNamePtr, MAX_PATH);
-      if (success == FALSE) {
+      if (!FindNextVolume(hFindVolume, volumeNamePtr.ptr, MAX_PATH)) {
         error = GetLastError();
         if (error != ERROR_NO_MORE_FILES && error != ERROR_SUCCESS) {
-          print('FindNextVolume failed with error code $error');
+          if (kDebugMode) {
+            print('FindNextVolume failed with error code $error');
+          }
           break;
         } else {
           break;
         }
       }
-      free(shortVolumeNamePtr);
     }
-    free(volumeNamePtr);
+
+    volumeNamePtr.free();
     FindVolumeClose(hFindVolume);
+  }
+
+  final _volumes = <Volume>[];
+
+  List<Volume> getVolumes() => _volumes;
+
+  List<String> getVolumePaths(String volumeName) {
+    final paths = <String>[];
+
+    // Could be arbitrarily long, but 4*MAX_PATH is a reasonable default.
+    // More sophisticated solutions can be found online
+    final pathNamePtr = Pwstr.allocate(MAX_PATH * 4);
+    final charCount = loggingCalloc<DWORD>();
+
+    try {
+      charCount.value = MAX_PATH;
+
+      if (GetVolumePathNamesForVolumeName(
+        w(volumeName).ptr,
+        pathNamePtr.ptr,
+        charCount.value,
+        charCount,
+      )) {
+        if (charCount.value > 1) {
+          for (final path in pathNamePtr.toDartStringList(charCount.value)) {
+            paths.add(path);
+          }
+        }
+      } else {
+        final error = GetLastError();
+        throw StateError(
+          'GetVolumePathNamesForVolumeName failed with error code $error',
+        );
+      }
+      return paths;
+    } finally {
+      pathNamePtr.free();
+      free(charCount);
+    }
   }
 }

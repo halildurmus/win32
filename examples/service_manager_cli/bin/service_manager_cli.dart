@@ -10,21 +10,18 @@ void main(List<String> arguments) {
     return;
   }
 
-  bool verbose = false;
-  if (arguments.contains('-v') || arguments.contains('--verbose')) {
-    verbose = true;
-    arguments = arguments.where((arg) => arg != '-v').toList();
-  }
+  final verbose = arguments.contains('-v') || arguments.contains('--verbose');
+  final args =
+      arguments.where((arg) => arg != '-v' && arg != '--verbose').toList();
 
   ServiceManager.log = verbose;
 
-  final command = arguments[0];
-  final serviceName = arguments.length > 1 ? arguments[1] : null;
+  final command = args[0];
+  final serviceName = args.length > 1 ? args[1] : null;
 
   switch (command) {
     case 'list':
       listServices();
-      break;
 
     case 'start':
       if (serviceName == null) {
@@ -32,7 +29,6 @@ void main(List<String> arguments) {
         exit(1);
       }
       startService(serviceName);
-      break;
 
     case 'status':
       if (serviceName == null) {
@@ -40,7 +36,6 @@ void main(List<String> arguments) {
         exit(1);
       }
       status(serviceName);
-      break;
 
     case 'stop':
       if (serviceName == null) {
@@ -48,7 +43,6 @@ void main(List<String> arguments) {
         exit(1);
       }
       stopService(serviceName);
-      break;
 
     default:
       print('Unknown command: $command');
@@ -98,7 +92,7 @@ void startService(String serviceName) {
       'Service "$serviceName" is already running.',
     ServiceStartResult.failed => 'Failed to start service "$serviceName".',
     ServiceStartResult.timedOut =>
-      'The attempt to start service "$serviceName" timed out.'
+      'The attempt to start service "$serviceName" timed out.',
   });
 }
 
@@ -121,6 +115,6 @@ void stopService(String serviceName) {
       'Service "$serviceName" is already stopped.',
     ServiceStopResult.failed => 'Failed to stop service "$serviceName".',
     ServiceStopResult.timedOut =>
-      'The attempt to stop service "$serviceName" timed out.'
+      'The attempt to stop service "$serviceName" timed out.',
   });
 }
