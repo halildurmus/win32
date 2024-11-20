@@ -15,33 +15,27 @@ class WindowRoundingSelector extends StatefulWidget {
 class WindowRoundingSelectorState extends State<WindowRoundingSelector> {
   bool _isWindowRounded = true;
 
-  void setWindowRoundingEffect(bool isRounded) {
-    final pref = calloc<DWORD>();
+  void setWindowRoundingEffect({bool isRounded = true}) {
+    final pref = loggingCalloc<DWORD>();
     try {
       final hwnd = GetForegroundWindow();
-      final attr = DWMWA_WINDOW_CORNER_PREFERENCE;
+      const attr = DWMWA_WINDOW_CORNER_PREFERENCE;
       pref.value = isRounded ? DWMWCP_ROUND : DWMWCP_DONOTROUND;
-
       DwmSetWindowAttribute(hwnd, attr, pref, sizeOf<DWORD>());
-
-      setState(() {
-        _isWindowRounded = isRounded;
-      });
+      setState(() => _isWindowRounded = isRounded);
     } finally {
       free(pref);
     }
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 20),
-      child: SwitchListTile(
-        title: const Text('Round window corners (Windows 11 style)'),
-        secondary: const FaIcon(FontAwesomeIcons.windowMaximize),
-        value: _isWindowRounded,
-        onChanged: setWindowRoundingEffect,
-      ),
-    );
-  }
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 20),
+    child: SwitchListTile(
+      title: const Text('Round window corners (Windows 11 style)'),
+      secondary: const FaIcon(FontAwesomeIcons.windowMaximize),
+      value: _isWindowRounded,
+      onChanged: (value) => setWindowRoundingEffect(isRounded: value),
+    ),
+  );
 }

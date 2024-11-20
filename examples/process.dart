@@ -2,7 +2,6 @@
 
 import 'dart:ffi';
 
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 // https://stackoverflow.com/questions/36029230
@@ -24,48 +23,30 @@ DateTime systemTimeToDateTime(
     systemTime.wSecond,
     systemTime.wMilliseconds,
   );
-
   return convertToLocalTimeZone ? dateTime.toLocal() : dateTime;
 }
 
 void main() {
   final hProcess = GetCurrentProcess();
-  final pCreationTime = calloc<FILETIME>();
-  final pExitTime = calloc<FILETIME>();
-  final pKernelTime = calloc<FILETIME>();
-  final pUserTime = calloc<FILETIME>();
-  final pCreationTimeAsSystemTime = calloc<SYSTEMTIME>();
-  final pExitTimeAsSystemTime = calloc<SYSTEMTIME>();
-  int result;
+  final pCreationTime = loggingCalloc<FILETIME>();
+  final pExitTime = loggingCalloc<FILETIME>();
+  final pKernelTime = loggingCalloc<FILETIME>();
+  final pUserTime = loggingCalloc<FILETIME>();
+  final pCreationTimeAsSystemTime = loggingCalloc<SYSTEMTIME>();
+  final pExitTimeAsSystemTime = loggingCalloc<SYSTEMTIME>();
 
   try {
     // Retrieve timing information for the current process
-    result = GetProcessTimes(
-      hProcess,
-      pCreationTime,
-      pExitTime,
-      pKernelTime,
-      pUserTime,
-    );
-    if (result == FALSE) {
-      throw WindowsException(result);
-    }
+    GetProcessTimes(hProcess, pCreationTime, pExitTime, pKernelTime, pUserTime);
 
     // Convert process creation time to SYSTEMTIME format
-    result = FileTimeToSystemTime(pCreationTime, pCreationTimeAsSystemTime);
-    if (result == FALSE) {
-      throw WindowsException(result);
-    }
+    FileTimeToSystemTime(pCreationTime, pCreationTimeAsSystemTime);
 
     final processExited =
         pExitTime.ref.dwLowDateTime != 0 && pExitTime.ref.dwHighDateTime != 0;
-
     if (processExited) {
       // Convert process exit time to SYSTEMTIME format
-      result = FileTimeToSystemTime(pExitTime, pExitTimeAsSystemTime);
-      if (result == FALSE) {
-        throw WindowsException(result);
-      }
+      FileTimeToSystemTime(pExitTime, pExitTimeAsSystemTime);
     }
 
     final creationTime = systemTimeToDateTime(pCreationTimeAsSystemTime.ref);

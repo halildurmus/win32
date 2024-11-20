@@ -1,0 +1,346 @@
+DEVMODEW|
+/// Used for specifying characteristics of display and print devices in the
+/// Unicode (wide) character set.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wingdi/ns-wingdi-devmodew>.
+///
+/// {@category struct}
+base class DEVMODE extends Struct {
+  @Array(32)
+  external Array<Uint16> _dmDeviceName;
+
+  /// Specifies the version number of this DEVMODEW structure.
+  @Uint16()
+  external int dmSpecVersion;
+
+  /// For a printer, specifies the printer driver version number assigned by the
+  /// printer driver developer.
+  @Uint16()
+  external int dmDriverVersion;
+
+  /// Specifies the size in bytes of the public DEVMODEW structure, not
+  /// including any private, driver-specified members identified by the
+  /// <b>dmDriverExtra</b> member.
+  @Uint16()
+  external int dmSize;
+
+  /// Specifies the number of bytes of private driver data that follow the
+  /// public structure members.
+  @Uint16()
+  external int dmDriverExtra;
+
+  @Uint32()
+  external int _dmFields;
+
+  external DEVMODE_0 Anonymous1;
+
+  @Int16()
+  external int _dmColor;
+
+  @Int16()
+  external int _dmDuplex;
+
+  /// For printers, specifies the <i>y</i> resolution of the printer, in DPI.
+  @Int16()
+  external int dmYResolution;
+
+  @Int16()
+  external int _dmTTOption;
+
+  @Int16()
+  external int _dmCollate;
+
+  @Array(32)
+  external Array<Uint16> _dmFormName;
+
+  /// For displays, specifies the number of logical pixels per inch of a display
+  /// device and should be equal to the <b>ulLogPixels</b> member of the <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/winddi/ns-winddi-gdiinfo">GDIINFO</a>
+  /// structure.
+  @Uint16()
+  external int dmLogPixels;
+
+  /// For displays, specifies the color resolution, in bits per pixel, of a
+  /// display device.
+  @Uint32()
+  external int dmBitsPerPel;
+
+  /// For displays, specifies the width, in pixels, of the visible device
+  /// surface.
+  @Uint32()
+  external int dmPelsWidth;
+
+  /// For displays, specifies the height, in pixels, of the visible device
+  /// surface.
+  @Uint32()
+  external int dmPelsHeight;
+
+  external DEVMODE_1 Anonymous2;
+
+  /// For displays, specifies the frequency, in hertz, of a display device in
+  /// its current mode.
+  @Uint32()
+  external int dmDisplayFrequency;
+
+  /// Specifies one of the DMICMMETHOD-prefixed constants defined in
+  /// <i>wingdi.h</i>.
+  @Uint32()
+  external int dmICMMethod;
+
+  /// Specifies one of the DMICM-prefixed constants defined in <i>wingdi.h</i>.
+  @Uint32()
+  external int dmICMIntent;
+
+  /// Specifies one of the DMMEDIA-prefixed constants defined in
+  /// <i>wingdi.h</i>.
+  @Uint32()
+  external int dmMediaType;
+
+  /// Specifies one of the DMDITHER-prefixed constants defined in
+  /// <i>wingdi.h</i>.
+  @Uint32()
+  external int dmDitherType;
+
+  @Uint32()
+  external int _dmReserved1;
+
+  @Uint32()
+  external int _dmReserved2;
+
+  /// Is reserved for system use and should be ignored by the driver.
+  @Uint32()
+  external int dmPanningWidth;
+
+  /// Is reserved for system use and should be ignored by the driver.
+  @Uint32()
+  external int dmPanningHeight;
+
+  /// For a display, specifies the name of the display driver's DLL; for
+  /// example, "perm3dd" for the 3Dlabs Permedia3 display driver.
+  @pragma('vm:prefer-inline')
+  String get dmDeviceName => _dmDeviceName.toDartString();
+
+  @pragma('vm:prefer-inline')
+  set dmDeviceName(String value) => _dmDeviceName.setString(value);
+
+  /// Specifies bit flags identifying which of the following DEVMODEW members
+  /// are in use.
+  @pragma('vm:prefer-inline')
+  DEVMODE_FIELD_FLAGS get dmFields => DEVMODE_FIELD_FLAGS(_dmFields);
+
+  @pragma('vm:prefer-inline')
+  set dmFields(DEVMODE_FIELD_FLAGS value) => _dmFields = value;
+
+  /// For printers, specifies whether a color printer should print color or
+  /// monochrome.
+  @pragma('vm:prefer-inline')
+  DEVMODE_COLOR get dmColor => DEVMODE_COLOR(_dmColor);
+
+  @pragma('vm:prefer-inline')
+  set dmColor(DEVMODE_COLOR value) => _dmColor = value;
+
+  @pragma('vm:prefer-inline')
+  DEVMODE_DUPLEX get dmDuplex => DEVMODE_DUPLEX(_dmDuplex);
+
+  @pragma('vm:prefer-inline')
+  set dmDuplex(DEVMODE_DUPLEX value) => _dmDuplex = value;
+
+  /// For printers, specifies how TrueType fonts should be printed.
+  @pragma('vm:prefer-inline')
+  DEVMODE_TRUETYPE_OPTION get dmTTOption =>
+      DEVMODE_TRUETYPE_OPTION(_dmTTOption);
+
+  @pragma('vm:prefer-inline')
+  set dmTTOption(DEVMODE_TRUETYPE_OPTION value) => _dmTTOption = value;
+
+  @pragma('vm:prefer-inline')
+  DEVMODE_COLLATE get dmCollate => DEVMODE_COLLATE(_dmCollate);
+
+  @pragma('vm:prefer-inline')
+  set dmCollate(DEVMODE_COLLATE value) => _dmCollate = value;
+
+  /// For printers, specifies the name of the form to use; such as "Letter" or
+  /// "Legal".
+  @pragma('vm:prefer-inline')
+  String get dmFormName => _dmFormName.toDartString();
+
+  @pragma('vm:prefer-inline')
+  set dmFormName(String value) => _dmFormName.setString(value);
+}
+
+/// {@category union}
+sealed class DEVMODE_0 extends Union {
+  external DEVMODE_0_0 Anonymous1;
+  external DEVMODE_0_1 Anonymous2;
+}
+
+extension DEVMODE_0_Extension on DEVMODE {
+  @pragma('vm:prefer-inline')
+  DEVMODE_0_0 get Anonymous1 => this.Anonymous1.Anonymous1;
+
+  @pragma('vm:prefer-inline')
+  set Anonymous1(DEVMODE_0_0 value) => this.Anonymous1.Anonymous1 = value;
+
+  @pragma('vm:prefer-inline')
+  DEVMODE_0_1 get Anonymous2 => this.Anonymous1.Anonymous2;
+
+  @pragma('vm:prefer-inline')
+  set Anonymous2(DEVMODE_0_1 value) => this.Anonymous1.Anonymous2 = value;
+}
+
+/// {@category struct}
+sealed class DEVMODE_0_0 extends Struct {
+  @Int16()
+  external int dmOrientation;
+
+  @Int16()
+  external int dmPaperSize;
+
+  @Int16()
+  external int dmPaperLength;
+
+  @Int16()
+  external int dmPaperWidth;
+
+  @Int16()
+  external int dmScale;
+
+  @Int16()
+  external int dmCopies;
+
+  @Int16()
+  external int dmDefaultSource;
+
+  @Int16()
+  external int dmPrintQuality;
+}
+
+extension DEVMODE_0_0_Extension on DEVMODE {
+  @pragma('vm:prefer-inline')
+  int get dmOrientation => this.Anonymous1.Anonymous1.dmOrientation;
+
+  @pragma('vm:prefer-inline')
+  set dmOrientation(int value) =>
+      this.Anonymous1.Anonymous1.dmOrientation = value;
+
+  @pragma('vm:prefer-inline')
+  int get dmPaperSize => this.Anonymous1.Anonymous1.dmPaperSize;
+
+  @pragma('vm:prefer-inline')
+  set dmPaperSize(int value) => this.Anonymous1.Anonymous1.dmPaperSize = value;
+
+  @pragma('vm:prefer-inline')
+  int get dmPaperLength => this.Anonymous1.Anonymous1.dmPaperLength;
+
+  @pragma('vm:prefer-inline')
+  set dmPaperLength(int value) =>
+      this.Anonymous1.Anonymous1.dmPaperLength = value;
+
+  @pragma('vm:prefer-inline')
+  int get dmPaperWidth => this.Anonymous1.Anonymous1.dmPaperWidth;
+
+  @pragma('vm:prefer-inline')
+  set dmPaperWidth(int value) =>
+      this.Anonymous1.Anonymous1.dmPaperWidth = value;
+
+  @pragma('vm:prefer-inline')
+  int get dmScale => this.Anonymous1.Anonymous1.dmScale;
+
+  @pragma('vm:prefer-inline')
+  set dmScale(int value) => this.Anonymous1.Anonymous1.dmScale = value;
+
+  @pragma('vm:prefer-inline')
+  int get dmCopies => this.Anonymous1.Anonymous1.dmCopies;
+
+  @pragma('vm:prefer-inline')
+  set dmCopies(int value) => this.Anonymous1.Anonymous1.dmCopies = value;
+
+  @pragma('vm:prefer-inline')
+  int get dmDefaultSource => this.Anonymous1.Anonymous1.dmDefaultSource;
+
+  @pragma('vm:prefer-inline')
+  set dmDefaultSource(int value) =>
+      this.Anonymous1.Anonymous1.dmDefaultSource = value;
+
+  @pragma('vm:prefer-inline')
+  int get dmPrintQuality => this.Anonymous1.Anonymous1.dmPrintQuality;
+
+  @pragma('vm:prefer-inline')
+  set dmPrintQuality(int value) =>
+      this.Anonymous1.Anonymous1.dmPrintQuality = value;
+}
+
+/// {@category struct}
+sealed class DEVMODE_0_1 extends Struct {
+  external POINTL dmPosition;
+
+  @Uint32()
+  external int _dmDisplayOrientation;
+
+  @Uint32()
+  external int _dmDisplayFixedOutput;
+
+  @pragma('vm:prefer-inline')
+  DEVMODE_DISPLAY_ORIENTATION get dmDisplayOrientation =>
+      DEVMODE_DISPLAY_ORIENTATION(_dmDisplayOrientation);
+
+  @pragma('vm:prefer-inline')
+  set dmDisplayOrientation(DEVMODE_DISPLAY_ORIENTATION value) =>
+      _dmDisplayOrientation = value;
+
+  @pragma('vm:prefer-inline')
+  DEVMODE_DISPLAY_FIXED_OUTPUT get dmDisplayFixedOutput =>
+      DEVMODE_DISPLAY_FIXED_OUTPUT(_dmDisplayFixedOutput);
+
+  @pragma('vm:prefer-inline')
+  set dmDisplayFixedOutput(DEVMODE_DISPLAY_FIXED_OUTPUT value) =>
+      _dmDisplayFixedOutput = value;
+}
+
+extension DEVMODE_0_1_Extension on DEVMODE {
+  @pragma('vm:prefer-inline')
+  POINTL get dmPosition => this.Anonymous1.Anonymous2.dmPosition;
+
+  @pragma('vm:prefer-inline')
+  set dmPosition(POINTL value) => this.Anonymous1.Anonymous2.dmPosition = value;
+
+  @pragma('vm:prefer-inline')
+  DEVMODE_DISPLAY_ORIENTATION get dmDisplayOrientation =>
+      this.Anonymous1.Anonymous2.dmDisplayOrientation;
+
+  @pragma('vm:prefer-inline')
+  set dmDisplayOrientation(DEVMODE_DISPLAY_ORIENTATION value) =>
+      this.Anonymous1.Anonymous2.dmDisplayOrientation = value;
+
+  @pragma('vm:prefer-inline')
+  DEVMODE_DISPLAY_FIXED_OUTPUT get dmDisplayFixedOutput =>
+      this.Anonymous1.Anonymous2.dmDisplayFixedOutput;
+
+  @pragma('vm:prefer-inline')
+  set dmDisplayFixedOutput(DEVMODE_DISPLAY_FIXED_OUTPUT value) =>
+      this.Anonymous1.Anonymous2.dmDisplayFixedOutput = value;
+}
+
+/// {@category union}
+sealed class DEVMODE_1 extends Union {
+  @Uint32()
+  external int dmDisplayFlags;
+
+  @Uint32()
+  external int dmNup;
+}
+
+extension DEVMODE_1_Extension on DEVMODE {
+  @pragma('vm:prefer-inline')
+  int get dmDisplayFlags => this.Anonymous2.dmDisplayFlags;
+
+  @pragma('vm:prefer-inline')
+  set dmDisplayFlags(int value) => this.Anonymous2.dmDisplayFlags = value;
+
+  @pragma('vm:prefer-inline')
+  int get dmNup => this.Anonymous2.dmNup;
+
+  @pragma('vm:prefer-inline')
+  set dmNup(int value) => this.Anonymous2.dmNup = value;
+}

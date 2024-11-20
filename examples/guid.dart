@@ -1,17 +1,10 @@
-// Creates a globally unique identifier (GUID)
+// Creates a globally unique identifier (GUID).
 
-import 'dart:ffi';
-
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 void main() {
-  final guid = calloc<GUID>();
+  final guid = Guid.generate();
+  print(guid);
 
-  final hr = CoCreateGuid(guid);
-  if (SUCCEEDED(hr)) {
-    print(guid.ref);
-  }
-
-  free(guid);
+  // TODO(halildurmus): Add more examples
 }

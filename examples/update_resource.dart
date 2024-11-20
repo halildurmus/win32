@@ -7,34 +7,33 @@ import 'package:win32/win32.dart';
 void main(List<String> args) {
   if (args.length != 2) {
     print('update_resource <executable> <manifest>');
-    print('\nUpdates an executable with the specified manifest.');
+    print('');
+    print('Updates an executable with the specified manifest.');
     print('Example: update_resource myApp.exe myApp.manifest');
   }
 
+  final fileNamePtr = w(args[0]);
   final manifest = File(args[1]).readAsStringSync();
-  final manifestPtr = TEXT(manifest);
-  final filenamePtr = TEXT(args[0]);
+  final manifestPtr = w(manifest);
 
-  final handle = BeginUpdateResource(filenamePtr, FALSE);
+  final handle = BeginUpdateResource(fileNamePtr.ptr, false);
   if (handle == NULL) {
     print("Error: couldn't get handle to executable to be updated.");
     return;
   }
 
-  var result = UpdateResource(
+  if (!UpdateResource(
     handle,
     RT_MANIFEST,
     RT_MANIFEST,
     0,
-    manifestPtr,
+    manifestPtr.ptr,
     manifest.length * 2,
-  );
-  if (result == FALSE) {
+  )) {
     print('Error: failed to create update resource.');
   }
 
-  result = EndUpdateResource(handle, FALSE);
-  if (result == FALSE) {
+  if (!EndUpdateResource(handle, false)) {
     print('Error: failed to write updated resources to executable.');
   }
 
