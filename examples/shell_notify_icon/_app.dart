@@ -3,10 +3,9 @@
 import 'dart:ffi';
 import 'dart:io';
 
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-final int hInst = GetModuleHandle(nullptr);
+final int hInst = GetModuleHandle(null);
 
 const int EVENT_QUIT = WM_APP + 2;
 const int EVENT_TRAY_NOTIFY = WM_APP + 1;
@@ -20,8 +19,8 @@ final lpfnWndProc = NativeCallable<WNDPROC>.isolateLocal(
 );
 
 void exec() {
-  final msg = calloc<MSG>();
-  while (GetMessage(msg, NULL, 0, 0) != 0) {
+  final msg = loggingCalloc<MSG>();
+  while (GetMessage(msg, null, 0, 0)) {
     TranslateMessage(msg);
     DispatchMessage(msg);
   }
@@ -30,9 +29,10 @@ void exec() {
 
 int loadDartIcon() {
   final dartIconPath = _thisPath('dart.ico');
+  final name = w(dartIconPath);
   return LoadImage(
-    0,
-    TEXT(dartIconPath),
+    null,
+    name.ptr,
     IMAGE_ICON,
     0,
     0,

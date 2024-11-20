@@ -4,7 +4,6 @@
 
 import 'dart:ffi';
 
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 const ID_TEXT = 200;
@@ -12,12 +11,12 @@ const ID_EDITTEXT = 201;
 const ID_PROGRESS = 202;
 const PROGRESS_CLASS = 'msctls_progress32';
 
-final int hInstance = GetModuleHandle(nullptr);
+final int hInstance = GetModuleHandle(null);
 String? textEntered;
 
 void main() {
   // Allocate 8KB, which is more than enough space for the dialog in memory.
-  final ptr = calloc<Uint16>(4096);
+  final ptr = loggingCalloc<Uint16>(4096);
   var idx = 0;
 
   idx += (ptr + idx).cast<DLGTEMPLATE>().setDialog(
@@ -98,7 +97,7 @@ void main() {
   final nResult = DialogBoxIndirectParam(
     hInstance,
     ptr.cast<DLGTEMPLATE>(),
-    NULL,
+    null,
     lpDialogFunc.nativeFunction,
     0,
   );
@@ -125,12 +124,11 @@ int dialogReturnProc(int hwndDlg, int message, int wParam, int lParam) {
       switch (LOWORD(wParam)) {
         case IDOK:
           print('OK');
-          final textPtr = wsalloc(256);
-          final result = GetDlgItemText(hwndDlg, ID_EDITTEXT, textPtr, 256);
+          final textPtr = Pwstr.allocate(256);
+          final result = GetDlgItemText(hwndDlg, ID_EDITTEXT, textPtr.ptr, 256);
           if (result != NULL) {
             textEntered = textPtr.toDartString();
           }
-          free(textPtr);
           EndDialog(hwndDlg, wParam);
           return TRUE;
         case IDCANCEL:

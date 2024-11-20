@@ -1,0 +1,15 @@
+CoInitializeEx|
+/// Initializes the COM library for use by the calling thread, sets the thread's
+/// concurrency model, and creates a new apartment for the thread if one is
+/// required.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-coinitializeex>.
+///
+/// {@category ole32}
+@pragma('vm:prefer-inline')
+HRESULT CoInitializeEx(COINIT dwCoInit) =>
+    HRESULT(_CoInitializeEx(nullptr, dwCoInit));
+
+@Native<Int32 Function(Pointer, Uint32)>(symbol: 'CoInitializeEx')
+external int _CoInitializeEx(Pointer pvReserved, int dwCoInit);

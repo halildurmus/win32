@@ -1,0 +1,16 @@
+IWinHttpRequest.get_ResponseText|
+/// Retrieves the response entity body as text.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/WinHttp/iwinhttprequest-responsetext>.
+BSTR get responseText {
+  final body = loggingCalloc<BSTR>();
+  final hr$ = HRESULT(_get_ResponseTextFn(ptr, body));
+  if (hr$.isError) {
+    free(body);
+    throw WindowsException(hr$);
+  }
+  final result$ = body.value;
+  free(body);
+  return result$;
+}

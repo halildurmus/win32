@@ -1,78 +1,104 @@
-// Helpful utilities
-
-// ignore_for_file: constant_identifier_names, non_constant_identifier_names
-
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import 'com/iunknown.dart';
+import 'allocator.dart';
+import 'com/interface.g.dart';
+import 'com/iunknown.g.dart';
 import 'constants.dart';
-import 'exceptions.dart';
-import 'extensions/int_to_hexstring.dart';
-import 'macros.dart';
+import 'constants.g.dart';
+import 'enums.g.dart';
+import 'exception.dart';
+import 'extensions/int.dart';
+import 'extensions/pointer.dart';
+import 'guid.dart';
+import 'pcwstr.dart';
 import 'structs.g.dart';
 import 'types.dart';
-import 'win32/api_ms_win_core_winrt_string_l1_1_0.g.dart';
 import 'win32/kernel32.g.dart';
 import 'win32/ole32.g.dart';
 import 'win32/shell32.g.dart';
 import 'win32/user32.g.dart';
 
-/// Registers a traditional Win32 app process as supporting high-DPI.
+/// Creates an instance of a COM object using its CLSID (class identifier) and
+/// casts it to a specific interface defined by the type parameter [T].
 ///
-/// Reduces blurriness but requires the app to provide necessary DPI awareness.
-void registerHighDPISupport() {
-  final result = SetProcessDpiAwarenessContext(
-    DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2,
-  );
-  if (result == FALSE) {
-    final debugMessage = 'WARNING: could not set DPI awareness'.toNativeUtf16();
-    OutputDebugString(debugMessage);
-    free(debugMessage);
-  }
-}
+/// Ensure COM is initialized on the current thread before calling this
+/// function, typically using [CoInitializeEx].
+///
+/// Throws a [WindowsException] if COM is not initialized, the class is not
+/// registered, or the requested interface is unavailable.
+///
+/// This function calls the [CoCreateInstance] function to create the
+/// COM object, which uses the [ComInterface.type] method to retrieve metadata
+/// about the target interface defined by [T], including its IID (Interface ID)
+/// and instantiation logic.
+/// All COM interfaces provided by this package are pre-registered. Custom COM
+/// interfaces must be registered manually using the [ComInterface.register]
+/// method before calling this function.
+///
+/// Example:
+/// ```dart
+/// // Create a COM object instance (e.g., IFileDialog).
+/// final fileDialog = createInstance<IFileDialog>(FileOpenDialog);
+/// ```
+///
+/// {@category com}
+@pragma('vm:prefer-inline')
+T createInstance<T extends IUnknown>(Guid clsid) =>
+    CoCreateInstance<T>(clsid.ptr, null, CLSCTX_ALL);
 
-/// Sets up a WinMain function with all the relevant information.
+/// Sets up a [WinMain](https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-winmain)
+/// entry point with all the necessary initialization for a Windows application.
 ///
-/// Add the following line to your command line app:
+/// To use, add the following to your command-line app:
 /// ```dart
 /// void main() => initApp(winMain);
 /// ```
 ///
-/// Now you can declare a winMain function as:
+/// Then define a [winMain] function as:
 /// ```dart
-/// void winMain(int hInstance, List<String> args, int nShowCmd) {
-/// ...
+/// void winMain(int hInstance, List<String> args, SHOW_WINDOW_CMD nShowCmd) {
+///   // Your application logic here...
 /// }
 /// ```
-void initApp(Function winMain) {
-  final nArgs = calloc<Int32>();
+void initApp(
+  void Function(int hInstance, List<String> args, SHOW_WINDOW_CMD nShowCmd)
+  winMain,
+) {
+  final nArgs = loggingCalloc<Int32>();
+  final lpStartupInfo = loggingCalloc<STARTUPINFO>();
   final args = <String>[];
-  final lpStartupInfo = calloc<STARTUPINFO>();
 
   // Parse command line args using Win32 functions, to reduce ceremony in the
   // app that uses this.
-  final szArgList = CommandLineToArgv(GetCommandLine(), nArgs);
-  if (szArgList.address != 0) {
-    final numberOfArgs = nArgs.value;
-    for (var i = 0; i < numberOfArgs; i++) {
+  final commandLine = GetCommandLine();
+  if (commandLine.isNull) {
+    free(nArgs);
+    free(lpStartupInfo);
+    throw StateError('Could not retrieve command-line arguments.');
+  }
+
+  final szArgList = CommandLineToArgv(commandLine, nArgs);
+  if (!szArgList.isNull) {
+    for (var i = 0; i < nArgs.value; i++) {
       final arg = szArgList[i].toDartString();
       args.add(arg);
     }
-    LocalFree(szArgList);
+    final result = LocalFree(szArgList.address);
+    assert(result == NULL, 'LocalFree failed for handle $result');
   }
 
-  final hInstance = GetModuleHandle(nullptr);
+  final hInstance = GetModuleHandle(null);
   GetStartupInfo(lpStartupInfo);
 
   try {
-    // ignore: avoid_dynamic_calls
+    // Invoke the user-defined WinMain function.
     winMain(
       hInstance,
       args,
       lpStartupInfo.ref.dwFlags & STARTF_USESHOWWINDOW == STARTF_USESHOWWINDOW
-          ? lpStartupInfo.ref.wShowWindow
+          ? SHOW_WINDOW_CMD(lpStartupInfo.ref.wShowWindow)
           : SW_SHOWDEFAULT,
     );
   } finally {
@@ -81,105 +107,81 @@ void initApp(Function winMain) {
   }
 }
 
-/// Determines whether the Component Object Model (COM) is initialized on the
-/// current thread.
-@Deprecated('Use isComInitialized instead')
-bool get isCOMInitialized => isComInitialized;
-
-/// Determines whether the Component Object Model (COM) is initialized on the
-/// current thread.
+/// Checks if the Component Object Model (COM) is initialized on the current
+/// thread.
+///
+/// {@category com}
 bool get isComInitialized {
-  final pAptType = calloc<Int32>();
-  final pAptQualifier = calloc<Int32>();
+  final pAptType = loggingCalloc<Int32>();
+  final pAptQualifier = loggingCalloc<Int32>();
   try {
-    return CoGetApartmentType(pAptType, pAptQualifier) == S_OK;
+    CoGetApartmentType(pAptType, pAptQualifier);
+    return true;
+  } on WindowsException {
+    // COM is not initialized on this thread.
+    return false;
   } finally {
     free(pAptType);
     free(pAptQualifier);
   }
 }
 
-/// Detects whether the Windows Runtime (WinRT) is available by attempting to
-/// open its core library.
-bool isWindowsRuntimeAvailable() {
+/// Checks if the Windows Runtime (WinRT) is available by attempting to load its
+/// core library.
+///
+/// {@category winrt}
+bool get isWindowsRuntimeAvailable {
   try {
     DynamicLibrary.open('api-ms-win-core-winrt-l1-1-0.dll');
     // ignore: avoid_catching_errors
   } on ArgumentError {
+    // The library is not available.
     return false;
   }
-
   return true;
 }
 
-/// For debugging, print the memory structure of a given struct.
+/// Frees the allocated memory for the given [pointer].
+///
+/// The [pointer] must not be NULL, otherwise an assertion error is thrown.
+///
+/// This function can safely free memory allocated with either [calloc],
+/// [malloc], [loggingCalloc], or [loggingMalloc], as the underlying memory
+/// allocation functions are interchangeable.
+@pragma('vm:prefer-inline')
+void free(Pointer pointer) {
+  assert(!pointer.isNull, "Pointer must not be a 'nullptr'.");
+  loggingCalloc.free(pointer);
+}
+
+/// Prints the memory content of a given struct for debugging purposes.
+///
+/// Reads and displays the memory as a sequence of 16-bit words in hexadecimal
+/// format. Useful for inspecting the layout and content of a struct in memory.
 void printStruct(Pointer struct, int sizeInBytes) {
+  assert(!struct.isNull, "Pointer must not be a 'nullptr'.");
   final words = <int>[];
-  final ptr = struct.cast<Uint16>();
+  final ptr = struct.cast<WCHAR>();
   for (var i = 0; i < sizeInBytes ~/ 2; i++) {
     words.add((ptr + i).value);
   }
   print(words.map((word) => word.toHexString(16)).join(', '));
 }
 
-/// Converts a Dart string to a natively-allocated string.
+/// Enables high-DPI support for the current process.
 ///
-/// The receiver is responsible for disposing its memory, typically by calling
-/// [free] when it has been used.
-LPWSTR TEXT(String string) => string.toNativeUtf16();
-
-/// Takes a `HSTRING` (a WinRT String handle), and converts it to a Dart
-/// `String`.
+/// Configures the process to use the
+/// [DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2] setting, reducing blurriness on
+/// high-DPI displays.
 ///
-/// {@category winrt}
-@Deprecated('No replacement')
-String convertFromHString(int hstring) =>
-    WindowsGetStringRawBuffer(hstring, nullptr).toDartString();
-
-/// Takes a Dart String and converts it to an `HSTRING` (a WinRT String),
-/// returning an integer handle.
-///
-/// The caller is responsible for deleting the `HSTRING` when it is no longer
-/// used, through a call to `WindowsDeleteString(HSTRING hstr)`, which
-/// decrements the reference count of that string. If the reference count
-/// reaches 0, the Windows Runtime deallocates the buffer.
-///
-/// {@category winrt}
-@Deprecated('No replacement')
-int convertToHString(String string) {
-  final hString = calloc<HSTRING>();
-  final stringPtr = string.toNativeUtf16();
-
-  // Create a HSTRING representing the object
-  try {
-    final hr = WindowsCreateString(stringPtr, string.length, hString);
-    if (FAILED(hr)) throw WindowsException(hr);
-    return hString.value;
-  } finally {
-    free(stringPtr);
-    free(hString);
+/// Note: This requires the application to handle DPI scaling appropriately.
+/// If the configuration fails, a warning is logged to the debugger.
+void registerHighDPISupport() {
+  if (!SetProcessDpiAwarenessContext(
+    DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2,
+  )) {
+    final outputString = w('WARNING: Could not set DPI awareness');
+    OutputDebugString(outputString.ptr);
+    outputString.free();
   }
-}
-
-/// Allocates memory for a Unicode string and returns a pointer.
-///
-/// The parameter indicates how many characters should be allocated. The
-/// receiver is responsible for disposing the memory allocated, typically by
-/// calling [free] when it is no longer required.
-LPWSTR wsalloc(int wChars) => calloc<WCHAR>(wChars).cast();
-
-/// Frees allocated memory.
-///
-/// `calloc.free` and `malloc.free` do the same thing, so this works regardless
-/// of whether memory was zero-allocated on creation or not.
-void free(Pointer pointer) => calloc.free(pointer);
-
-/// Returns the current reference count of the COM object.
-int refCount(IUnknown unk) {
-  // Call addRef() and release(), which are inherited from IUnknown. Both return
-  // the refcount after the operation, so by adding a reference and immediately
-  // removing it, we can get the original refcount.
-  unk.addRef();
-  final refCount = unk.release();
-  return refCount;
 }

@@ -1,7 +1,6 @@
 import 'dart:ffi';
 import 'dart:math';
 
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import '_app.dart' as app;
@@ -18,7 +17,7 @@ void show({required int hWndParent}) {
     mousePos.x,
     mousePos.y,
     hWndParent,
-    nullptr,
+    null,
   );
 
   DestroyMenu(hMenu);
@@ -33,23 +32,28 @@ bool wndProc(int hWnd, int uMsg, int wParam, int lParam) {
           tray.removeIcon();
           PostQuitMessage(0);
           return true;
+        default:
+          return false;
       }
+    default:
+      return false;
   }
-  return false;
 }
 
 int _buildMenu() {
   final hMenu = CreateMenu();
-  AppendMenu(hMenu, MF_STRING, app.EVENT_QUIT, TEXT('&Quit'));
+  final quitItem = w('&Quit');
+  AppendMenu(hMenu, MF_STRING, app.EVENT_QUIT, quitItem.ptr);
 
   final hMenubar = CreateMenu();
-  AppendMenu(hMenubar, MF_POPUP, hMenu, TEXT('_Parent'));
+  final parentItem = w('_Parent');
+  AppendMenu(hMenubar, MF_POPUP, hMenu, parentItem.ptr);
 
   return GetSubMenu(hMenubar, 0);
 }
 
 Point<int> _currentMousePos() {
-  final point = calloc<POINT>();
+  final point = loggingCalloc<POINT>();
   GetCursorPos(point);
   final result = Point(point.ref.x, point.ref.y);
   free(point);
@@ -59,9 +63,10 @@ Point<int> _currentMousePos() {
 int get _contextMenuFlags {
   var uFlags = TPM_RIGHTBUTTON;
   if (GetSystemMetrics(SM_MENUDROPALIGNMENT) != 0) {
-    uFlags |= TPM_RIGHTALIGN;
+    uFlags = TRACK_POPUP_MENU_FLAGS(uFlags | TPM_RIGHTALIGN);
+    uFlags = TRACK_POPUP_MENU_FLAGS(uFlags & TPM_LEFTALIGN);
   } else {
-    uFlags |= TPM_LEFTALIGN;
+    uFlags = TRACK_POPUP_MENU_FLAGS(uFlags | TPM_LEFTALIGN);
   }
   return uFlags;
 }

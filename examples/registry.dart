@@ -14,40 +14,39 @@ const MAX_ITEMLENGTH = 1024;
 
 class RegistryKeyValuePair {
   const RegistryKeyValuePair(this.key, this.value);
+
   final String key;
   final String value;
 }
 
 int getRegistryKeyHandle(int hive, String key) {
-  final phKey = calloc<HANDLE>();
-  final lpKeyPath = key.toNativeUtf16();
+  final phKey = loggingCalloc<HANDLE>();
 
   try {
-    if (RegOpenKeyEx(hive, lpKeyPath, 0, KEY_READ, phKey) != ERROR_SUCCESS) {
-      throw Exception("Can't open registry key");
+    final subKey = w(key);
+    if (RegOpenKeyEx(hive, subKey.ptr, 0, KEY_READ, phKey) != ERROR_SUCCESS) {
+      throw StateError("Can't open registry key");
     }
 
     return phKey.value;
   } finally {
     free(phKey);
-    free(lpKeyPath);
   }
 }
 
 RegistryKeyValuePair? enumerateKey(int hKey, int index) {
-  final lpValueName = wsalloc(MAX_PATH);
-  final lpcchValueName = calloc<DWORD>()..value = MAX_PATH;
-  final lpType = calloc<DWORD>();
-  final lpData = calloc<BYTE>(MAX_ITEMLENGTH);
-  final lpcbData = calloc<DWORD>()..value = MAX_ITEMLENGTH;
+  final lpValueName = Pwstr.allocate(MAX_PATH);
+  final lpcchValueName = loggingCalloc<DWORD>()..value = MAX_PATH;
+  final lpType = loggingCalloc<DWORD>();
+  final lpData = loggingCalloc<BYTE>(MAX_ITEMLENGTH);
+  final lpcbData = loggingCalloc<DWORD>()..value = MAX_ITEMLENGTH;
 
   try {
     final status = RegEnumValue(
       hKey,
       index,
-      lpValueName,
+      lpValueName.ptr,
       lpcchValueName,
-      nullptr,
       lpType,
       lpData,
       lpcbData,
@@ -56,7 +55,7 @@ RegistryKeyValuePair? enumerateKey(int hKey, int index) {
     switch (status) {
       case ERROR_SUCCESS:
         if (lpType.value != REG_SZ) {
-          throw Exception('Non-string content.');
+          throw StateError('Non-string content.');
         }
         return RegistryKeyValuePair(
           lpValueName.toDartString(),
@@ -64,16 +63,15 @@ RegistryKeyValuePair? enumerateKey(int hKey, int index) {
         );
 
       case ERROR_MORE_DATA:
-        throw Exception('An item required more than $MAX_ITEMLENGTH bytes.');
+        throw StateError('An item required more than $MAX_ITEMLENGTH bytes.');
 
       case ERROR_NO_MORE_ITEMS:
         return null;
 
       default:
-        throw Exception('unknown error');
+        throw StateError('unknown error');
     }
   } finally {
-    free(lpValueName);
     free(lpcchValueName);
     free(lpType);
     free(lpData);

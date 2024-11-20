@@ -1,48 +1,6 @@
-// Windows Sockets library constants
+// Windows Sockets library constants.
 
 // ignore_for_file: constant_identifier_names
-
-// -----------------------------------------------------------------------------
-// Socket types
-// -----------------------------------------------------------------------------
-
-/// Stream socket.
-///
-/// A socket type that provides sequenced, reliable, two-way, connection-based
-/// byte streams with an OOB data transmission mechanism. This socket type uses
-/// the Transmission Control Protocol (TCP) for the Internet address family
-/// (AF_INET or AF_INET6).
-const SOCK_STREAM = 1;
-
-/// Datagram socket.
-///
-/// A socket type that supports datagrams, which are connectionless, unreliable
-/// buffers of a fixed (typically small) maximum length. This socket type uses
-/// the User Datagram Protocol (UDP) for the Internet address family (AF_INET or
-/// AF_INET6).
-const SOCK_DGRAM = 2;
-
-/// Raw protocol interface.
-///
-/// A socket type that provides a raw socket that allows an application to
-/// manipulate the next upper-layer protocol header. To manipulate the IPv4
-/// header, the IP_HDRINCL socket option must be set on the socket. To
-/// manipulate the IPv6 header, the IPV6_HDRINCL socket option must be set on
-/// the socket.
-const SOCK_RAW = 3;
-
-/// Reliably-delivered message.
-///
-/// A socket type that provides a reliable message datagram. An example of this
-/// type is the Pragmatic General Multicast (PGM) multicast protocol
-/// implementation in Windows, often referred to as reliable multicast
-/// programming.
-const SOCK_RDM = 4;
-
-/// Sequenced packet stream.
-///
-/// A socket type that provides a pseudo-stream packet based on datagrams.
-const SOCK_SEQPACKET = 5;
 
 // -----------------------------------------------------------------------------
 // Per-socket option types
@@ -229,12 +187,7 @@ const FD_CONNECT = 0x10;
 const FD_CLOSE = 0x20;
 
 // Address formats
-const AF_UNSPEC = 0;
-
 const AF_UNIX = 1;
-
-const AF_INET = 2;
-
 const AF_IMPLINK = 3;
 const AF_PUP = 4;
 const AF_CHAOS = 5;
@@ -257,9 +210,6 @@ const AF_FIREFOX = 19;
 const AF_UNKNOWN1 = 20;
 const AF_BAN = 21;
 const AF_ATM = 22;
-
-const AF_INET6 = 23;
-
 const AF_CLUSTER = 24;
 const AF_12844 = 25;
 const AF_IRDA = 26;

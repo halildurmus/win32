@@ -9,17 +9,14 @@ import 'dart:ffi';
 import 'dart:io';
 import 'dart:math';
 
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 const LLKHF_INJECTED = 0x00000010;
-const VK_A = 0x41;
-const VK_B = 0x42;
 
 const szTop = 'Message        Key          Char       Scan Ext ALT Prev Tran';
 const szUnd = '_______        ___          ____       ____ ___ ___ ____ ____';
-final LPWSTR pszTop = TEXT(szTop);
-final LPWSTR pszUnd = TEXT(szUnd);
+final Pcwstr pszTop = w(szTop);
+final Pcwstr pszUnd = w(szUnd);
 
 const messages = <String>[
   'WM_KEYDOWN',
@@ -32,10 +29,10 @@ const messages = <String>[
   'WM_SYSDEADCHAR',
 ];
 
-var /* HHOOK */ keyHook = 0;
+int keyHook = NULL;
 
-final Pointer<RECT> rectScroll = calloc<RECT>();
-var hdc = 0;
+final Pointer<RECT> rectScroll = loggingCalloc<RECT>();
+int hdc = NULL;
 var cxClient = 0;
 var cyClient = 0;
 var cxClientMax = 0;
@@ -47,14 +44,15 @@ var cyChar = 0;
 
 class Message {
   const Message(this.uMsg, this.wParam, this.lParam);
+
   final int uMsg;
   final int wParam;
   final int lParam;
 }
 
 final msgArr = <Message>[];
-final LPWSTR className = TEXT('Keyboard Hook WndClass');
-final LPWSTR windowCaption = TEXT('Keyboard message viewer');
+final Pcwstr className = w('Keyboard Hook WndClass');
+final Pcwstr windowCaption = w('Keyboard message viewer');
 
 int lowlevelKeyboardHookProc(int code, int wParam, int lParam) {
   if (code == HC_ACTION) {
@@ -62,9 +60,11 @@ int lowlevelKeyboardHookProc(int code, int wParam, int lParam) {
     final kbs = Pointer<KBDLLHOOKSTRUCT>.fromAddress(lParam);
 
     if ((kbs.ref.flags & LLKHF_INJECTED) == 0) {
-      final input = calloc<INPUT>();
+      final input = loggingCalloc<INPUT>();
       input.ref.type = INPUT_KEYBOARD;
-      input.ref.ki.dwFlags = wParam == WM_KEYDOWN ? 0 : KEYEVENTF_KEYUP;
+      input.ref.ki.dwFlags = wParam == WM_KEYDOWN
+          ? const KEYBD_EVENT_FLAGS(0)
+          : KEYEVENTF_KEYUP;
 
       // Demonstrate that we're successfully intercepting codes
       if (wParam == WM_KEYUP && kbs.ref.vkCode > 0 && kbs.ref.vkCode < 128) {
@@ -72,7 +72,9 @@ int lowlevelKeyboardHookProc(int code, int wParam, int lParam) {
       }
 
       // Swap 'A' with 'B' in output
-      input.ref.ki.wVk = kbs.ref.vkCode == VK_A ? VK_B : kbs.ref.vkCode;
+      input.ref.ki.wVk = kbs.ref.vkCode == VK_A
+          ? VK_B
+          : VIRTUAL_KEY(kbs.ref.vkCode);
       SendInput(1, input, sizeOf<INPUT>());
       free(input);
       return -1;
@@ -85,7 +87,7 @@ int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
   switch (uMsg) {
     case WM_CREATE:
     case WM_DISPLAYCHANGE:
-      final textMetrics = calloc<TEXTMETRIC>();
+      final textMetrics = loggingCalloc<TEXTMETRIC>();
 
       // Get maximum size of client area
       cxClientMax = GetSystemMetrics(SM_CXMAXIMIZED);
@@ -117,7 +119,7 @@ int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
       rectScroll.ref.top = cyChar;
       rectScroll.ref.bottom = cyChar * (cyClient ~/ cyChar);
 
-      InvalidateRect(hWnd, nullptr, TRUE);
+      InvalidateRect(hWnd, null, true);
       return 0;
 
     case WM_KEYDOWN:
@@ -133,16 +135,16 @@ int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
 
       // Scroll up
       ScrollWindow(hWnd, 0, -cyChar, rectScroll, rectScroll);
-      InvalidateRect(hWnd, nullptr, TRUE);
+      InvalidateRect(hWnd, null, true);
 
     case WM_PAINT:
-      final ps = calloc<PAINTSTRUCT>();
+      final ps = loggingCalloc<PAINTSTRUCT>();
       final hdc = BeginPaint(hWnd, ps);
 
       SelectObject(hdc, GetStockObject(SYSTEM_FIXED_FONT));
       SetBkMode(hdc, TRANSPARENT);
-      TextOut(hdc, 0, 0, pszTop, szTop.length);
-      TextOut(hdc, 0, 0, pszUnd, szUnd.length);
+      TextOut(hdc, 0, 0, pszTop.ptr, szTop.length);
+      TextOut(hdc, 0, 0, pszUnd.ptr, szUnd.length);
 
       var index = 0;
       for (final msg in msgArr) {
@@ -152,10 +154,9 @@ int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
             msg.uMsg == WM_DEADCHAR ||
             msg.uMsg == WM_SYSDEADCHAR;
 
-        final pszKeyName = wsalloc(256);
-        GetKeyNameText(msg.lParam, pszKeyName, 256);
+        final pszKeyName = Pwstr.allocate(256);
+        GetKeyNameText(msg.lParam, pszKeyName.ptr, 256);
         final keyName = pszKeyName.toDartString();
-        free(pszKeyName);
 
         final szBuffer =
             '${messages[msg.uMsg - WM_KEYDOWN].padRight(15)}'
@@ -168,15 +169,14 @@ int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
             '${msg.lParam & 0x02000000 == 0x02000000 ? 'Yes' : 'No '}   '
             '${msg.lParam & 0x04000000 == 0x04000000 ? 'Down' : 'Up  '}  '
             '${msg.lParam & 0x08000000 == 0x08000000 ? 'Up  ' : 'Down'} ';
-        final pszBuffer = szBuffer.toNativeUtf16();
+        final pszBuffer = w(szBuffer);
         TextOut(
           hdc,
           0,
           ((cyClient ~/ cyChar) - 1 - index++) * cyChar,
-          pszBuffer,
+          pszBuffer.ptr,
           szBuffer.length,
         );
-        free(pszBuffer);
       }
 
       EndPaint(hWnd, ps);
@@ -189,45 +189,47 @@ int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
       PostQuitMessage(0);
       return 0;
   }
+
   return DefWindowProc(hWnd, uMsg, wParam, lParam);
 }
 
 void main() => initApp(winMain);
 
-void winMain(int hInstance, List<String> args, int nShowCmd) {
+void winMain(int hInstance, List<String> args, SHOW_WINDOW_CMD nShowCmd) {
   final lpfn = NativeCallable<HOOKPROC>.isolateLocal(
     lowlevelKeyboardHookProc,
     exceptionalReturn: 0,
   );
 
-  keyHook = SetWindowsHookEx(WH_KEYBOARD_LL, lpfn.nativeFunction, NULL, 0);
+  keyHook = SetWindowsHookEx(WH_KEYBOARD_LL, lpfn.nativeFunction, null, 0);
 
   final lpfnWndProc = NativeCallable<WNDPROC>.isolateLocal(
     mainWindowProc,
     exceptionalReturn: 0,
   );
 
-  final wc = calloc<WNDCLASS>()
-    ..ref.style = CS_HREDRAW | CS_VREDRAW
-    ..ref.lpfnWndProc = lpfnWndProc.nativeFunction
-    ..ref.hInstance = hInstance
-    ..ref.lpszClassName = className
-    ..ref.hIcon = LoadIcon(NULL, IDI_APPLICATION)
-    ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
-    ..ref.hbrBackground = GetStockObject(WHITE_BRUSH);
+  final wc = loggingCalloc<WNDCLASS>();
+  wc.ref
+    ..style = CS_HREDRAW | CS_VREDRAW
+    ..lpfnWndProc = lpfnWndProc.nativeFunction
+    ..hInstance = hInstance
+    ..lpszClassName = className.ptr
+    ..hIcon = LoadIcon(null, IDI_APPLICATION)
+    ..hCursor = LoadCursor(null, IDC_ARROW)
+    ..hbrBackground = GetStockObject(WHITE_BRUSH);
   RegisterClass(wc);
 
   final hWnd = CreateWindow(
-    className, // Window class
-    windowCaption, // Window caption
+    className.ptr, // Window class
+    windowCaption.ptr, // Window caption
     WS_OVERLAPPEDWINDOW, // Window style
     // Size and position
     CW_USEDEFAULT,
     CW_USEDEFAULT,
     CW_USEDEFAULT,
     CW_USEDEFAULT,
-    NULL, // Parent window
-    NULL, // Menu
+    null, // Parent window
+    null, // Menu
     hInstance, // Instance handle
     nullptr, // Additional application data
   );
@@ -235,12 +237,15 @@ void winMain(int hInstance, List<String> args, int nShowCmd) {
   ShowWindow(hWnd, nShowCmd);
   UpdateWindow(hWnd);
 
-  final msg = calloc<MSG>();
-  while (GetMessage(msg, NULL, 0, 0) != 0) {
+  final msg = loggingCalloc<MSG>();
+  while (GetMessage(msg, null, 0, 0)) {
     TranslateMessage(msg);
     DispatchMessage(msg);
   }
 
   lpfnWndProc.close();
   lpfn.close();
+  free(msg);
+  free(wc);
+  free(rectScroll);
 }

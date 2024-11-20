@@ -31,7 +31,7 @@
 //
 // 3) connected via SSH to a remote machine
 // ```
-// C:\src\win32> dart examples\monitor.dart
+// C:\src\win32> dart example\monitor.dart
 // Number of monitors: 1
 // Primary monitor handle: 65537
 // No physical monitors attached.
@@ -39,12 +39,16 @@
 
 import 'dart:ffi';
 
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 final monitors = <int>[];
 
-int enumMonitorCallback(int hMonitor, int hDC, Pointer lpRect, int lParam) {
+int enumMonitorCallback(
+  int hMonitor,
+  int hDC,
+  Pointer<RECT> lpRect,
+  int lParam,
+) {
   monitors.add(hMonitor);
   return TRUE;
 }
@@ -52,11 +56,11 @@ int enumMonitorCallback(int hMonitor, int hDC, Pointer lpRect, int lParam) {
 bool testBitmask(int bitmask, int value) => bitmask & value == value;
 
 int findPrimaryMonitor(List<int> monitors) {
-  final monitorInfo = calloc<MONITORINFO>()..ref.cbSize = sizeOf<MONITORINFO>();
+  final monitorInfo = loggingCalloc<MONITORINFO>()
+    ..ref.cbSize = sizeOf<MONITORINFO>();
 
   for (final monitor in monitors) {
-    final result = GetMonitorInfo(monitor, monitorInfo);
-    if (result == TRUE) {
+    if (GetMonitorInfo(monitor, monitorInfo)) {
       if (testBitmask(monitorInfo.ref.dwFlags, MONITORINFOF_PRIMARY)) {
         free(monitorInfo);
         return monitor;
@@ -65,7 +69,7 @@ int findPrimaryMonitor(List<int> monitors) {
   }
 
   free(monitorInfo);
-  return 0;
+  return NULL;
 }
 
 void printMonitorCapabilities(int capabilitiesBitmask) {
@@ -87,22 +91,17 @@ void printMonitorCapabilities(int capabilitiesBitmask) {
 }
 
 void main() {
-  var result = FALSE;
-
   final lpfnEnum = NativeCallable<MONITORENUMPROC>.isolateLocal(
     enumMonitorCallback,
     exceptionalReturn: 0,
   );
 
-  result = EnumDisplayMonitors(
-    NULL, // all displays
-    nullptr, // no clipping region
+  EnumDisplayMonitors(
+    null, // all displays
+    null, // no clipping region
     lpfnEnum.nativeFunction,
     NULL,
   );
-  if (result == FALSE) {
-    throw WindowsException(result);
-  }
 
   lpfnEnum.close();
 
@@ -111,12 +110,11 @@ void main() {
   final primaryMonitorHandle = findPrimaryMonitor(monitors);
   print('Primary monitor handle: $primaryMonitorHandle');
 
-  final physicalMonitorCountPtr = calloc<DWORD>();
-  result = GetNumberOfPhysicalMonitorsFromHMONITOR(
+  final physicalMonitorCountPtr = loggingCalloc<DWORD>();
+  if (!GetNumberOfPhysicalMonitorsFromHMONITOR(
     primaryMonitorHandle,
     physicalMonitorCountPtr,
-  );
-  if (result == FALSE) {
+  )) {
     print('No physical monitors attached.');
     free(physicalMonitorCountPtr);
     return;
@@ -129,31 +127,28 @@ void main() {
   // Since fixed-size arrays are difficult to allocate with Dart FFI at present,
   // and since we only need the first entry, we can manually allocate space of
   // the right size.
-  final physicalMonitorArray = calloc<PHYSICAL_MONITOR>(
+  final physicalMonitorArray = loggingCalloc<PHYSICAL_MONITOR>(
     physicalMonitorCountPtr.value,
   );
 
-  result = GetPhysicalMonitorsFromHMONITOR(
+  GetPhysicalMonitorsFromHMONITOR(
     primaryMonitorHandle,
     physicalMonitorCountPtr.value,
     physicalMonitorArray,
   );
-  if (result == FALSE) {
-    throw WindowsException(result);
-  }
+
   // Retrieve the monitor handle for the first physical monitor in the returned
   // array.
-  final physicalMonitorHandle = physicalMonitorArray.cast<IntPtr>().value;
+  final physicalMonitorHandle = physicalMonitorArray.cast<HANDLE>().value;
   print('Physical monitor handle: $physicalMonitorHandle');
-  final physicalMonitorDescription = (physicalMonitorArray + sizeOf<IntPtr>())
-      .cast<Utf16>()
-      .toDartString();
+  final physicalMonitorDescription =
+      physicalMonitorArray.ref.szPhysicalMonitorDescription;
   print('Physical monitor description: $physicalMonitorDescription');
 
-  final monitorCapabilitiesPtr = calloc<DWORD>();
-  final monitorColorTemperaturesPtr = calloc<DWORD>();
+  final monitorCapabilitiesPtr = loggingCalloc<DWORD>();
+  final monitorColorTemperaturesPtr = loggingCalloc<DWORD>();
 
-  result = GetMonitorCapabilities(
+  var result = GetMonitorCapabilities(
     physicalMonitorHandle,
     monitorCapabilitiesPtr,
     monitorColorTemperaturesPtr,
@@ -165,9 +160,9 @@ void main() {
     print('Monitor does not support DDC/CI.');
   }
 
-  final minimumBrightnessPtr = calloc<DWORD>();
-  final currentBrightnessPtr = calloc<DWORD>();
-  final maximumBrightnessPtr = calloc<DWORD>();
+  final minimumBrightnessPtr = loggingCalloc<DWORD>();
+  final currentBrightnessPtr = loggingCalloc<DWORD>();
+  final maximumBrightnessPtr = loggingCalloc<DWORD>();
   result = GetMonitorBrightness(
     physicalMonitorHandle,
     minimumBrightnessPtr,

@@ -1,24 +1,20 @@
-// Enumerates open windows and demonstrates basic window manipulation
+// Enumerates open windows and demonstrates basic window manipulation.
 
 import 'dart:ffi';
 
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 // Callback for each window found
 int enumWindowsProc(int hWnd, int lParam) {
   // Don't enumerate windows unless they are marked as WS_VISIBLE
-  if (IsWindowVisible(hWnd) == FALSE) return TRUE;
+  if (!IsWindowVisible(hWnd)) return TRUE;
 
   final length = GetWindowTextLength(hWnd);
-  if (length == 0) {
-    return TRUE;
-  }
+  if (length == 0) return TRUE;
 
-  final buffer = wsalloc(length + 1);
-  GetWindowText(hWnd, buffer, length + 1);
+  final buffer = Pwstr.allocate(length + 1);
+  GetWindowText(hWnd, buffer.ptr, length + 1);
   print('hWnd $hWnd: ${buffer.toDartString()}');
-  free(buffer);
 
   return TRUE;
 }
@@ -36,11 +32,13 @@ void enumerateWindows() {
 
 /// Find the first open Notepad window and maximize it
 void findNotepad() {
-  final hwnd = FindWindowEx(0, 0, TEXT('Notepad'), nullptr);
-
-  if (hwnd == 0) {
+  final lpszClass = w('Notepad');
+  final hwnd = FindWindowEx(null, null, lpszClass.ptr, null);
+  if (hwnd == NULL) {
     print('No Notepad window found.');
   } else {
+    print('Found Notepad window: $hwnd');
+    print('Maximizing window...');
     ShowWindow(hwnd, SW_MAXIMIZE);
   }
 }

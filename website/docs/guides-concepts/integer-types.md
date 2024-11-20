@@ -43,11 +43,10 @@ Here’s an example demonstrating how to retrieve the size of system memory usin
 ```dart title="memory.dart"
 import 'dart:ffi';
 
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 void main() {
-  final lpMemorySize = calloc<ULONGLONG>();
+  final lpMemorySize = loggingCalloc<ULONGLONG>();
   GetPhysicallyInstalledSystemMemory(lpMemorySize);
   final memorySizeMB = lpMemorySize.value ~/ 1024;
   print('System has ${memorySizeMB}MB of RAM installed.');
@@ -57,8 +56,8 @@ void main() {
 
 :::simple
 
-`lpMemorySize` could also be allocated as `calloc<ULONG64>()` or
-`calloc<Uint64>()` — they all refer to the _same_ type.
+`lpMemorySize` could also be allocated as `loggingCalloc<ULONG64>()` or
+`loggingCalloc<Uint64>()` — they all refer to the _same_ type.
 
 :::
 

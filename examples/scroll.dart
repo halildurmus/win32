@@ -1,12 +1,11 @@
-// Demonstrates simple GDI drawing and min/max window sizing
+// Demonstrates simple GDI drawing and min/max window sizing.
 
 import 'dart:ffi';
 import 'dart:math' show max, min;
 
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-final abc = [
+const abc = [
   'anteater',
   'bear',
   'cougar',
@@ -55,7 +54,7 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       final hdc = GetDC(hwnd);
 
       // Extract font dimensions from the text metrics.
-      final tm = calloc<TEXTMETRIC>();
+      final tm = loggingCalloc<TEXTMETRIC>();
       GetTextMetrics(hdc, tm);
       xChar = tm.ref.tmAveCharWidth;
       xUpper = (tm.ref.tmPitchAndFamily & 1 == 1 ? 3 : 2) * xChar ~/ 2;
@@ -80,13 +79,14 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       xClient = LOWORD(lParam);
 
       // Set the vertical scrolling range and page size
-      final si = calloc<SCROLLINFO>()
-        ..ref.cbSize = sizeOf<SCROLLINFO>()
-        ..ref.fMask = SIF_RANGE | SIF_PAGE
-        ..ref.nMin = 0
-        ..ref.nMax = abc.length - 1
-        ..ref.nPage = yClient ~/ yChar;
-      SetScrollInfo(hwnd, SB_VERT, si, TRUE);
+      final si = loggingCalloc<SCROLLINFO>();
+      si.ref
+        ..cbSize = sizeOf<SCROLLINFO>()
+        ..fMask = SIF_RANGE | SIF_PAGE
+        ..nMin = 0
+        ..nMax = abc.length - 1
+        ..nPage = yClient ~/ yChar;
+      SetScrollInfo(hwnd, SB_VERT, si, true);
 
       // Set the horizontal scrolling range and page size.
       si.ref.cbSize = sizeOf<SCROLLINFO>();
@@ -94,14 +94,14 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       si.ref.nMin = 0;
       si.ref.nMax = 2 + xClientMax ~/ xChar;
       si.ref.nPage = xClient ~/ xChar;
-      SetScrollInfo(hwnd, SB_HORZ, si, TRUE);
+      SetScrollInfo(hwnd, SB_HORZ, si, true);
 
       free(si);
 
       return 0;
 
     case WM_HSCROLL:
-      final si = calloc<SCROLLINFO>();
+      final si = loggingCalloc<SCROLLINFO>();
 
       // Get all the vertial scroll bar information.
       si.ref.cbSize = sizeOf<SCROLLINFO>();
@@ -138,19 +138,19 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       // Set the position and then retrieve it.  Due to adjustments
       // by Windows it may not be the same as the value set.
       si.ref.fMask = SIF_POS;
-      SetScrollInfo(hwnd, SB_HORZ, si, TRUE);
+      SetScrollInfo(hwnd, SB_HORZ, si, true);
       GetScrollInfo(hwnd, SB_HORZ, si);
 
       // If the position has changed, scroll the window.
       if (si.ref.nPos != xPos) {
-        ScrollWindow(hwnd, xChar * (xPos - si.ref.nPos), 0, nullptr, nullptr);
+        ScrollWindow(hwnd, xChar * (xPos - si.ref.nPos), 0, null, null);
       }
 
       free(si);
       return 0;
 
     case WM_VSCROLL:
-      final si = calloc<SCROLLINFO>();
+      final si = loggingCalloc<SCROLLINFO>();
 
       // Get all the vertial scroll bar information.
       si.ref.cbSize = sizeOf<SCROLLINFO>();
@@ -195,12 +195,12 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       // Set the position and then retrieve it. Due to adjustments
       // by Windows it may not be the same as the value set.
       si.ref.fMask = SIF_POS;
-      SetScrollInfo(hwnd, SB_VERT, si, TRUE);
+      SetScrollInfo(hwnd, SB_VERT, si, true);
       GetScrollInfo(hwnd, SB_VERT, si);
 
       // If the position has changed, scroll window and update it.
       if (si.ref.nPos != yPos) {
-        ScrollWindow(hwnd, 0, yChar * (yPos - si.ref.nPos), nullptr, nullptr);
+        ScrollWindow(hwnd, 0, yChar * (yPos - si.ref.nPos), null, null);
         UpdateWindow(hwnd);
       }
 
@@ -208,8 +208,8 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       return 0;
 
     case WM_PAINT:
-      final ps = calloc<PAINTSTRUCT>();
-      final si = calloc<SCROLLINFO>();
+      final ps = loggingCalloc<PAINTSTRUCT>();
+      final si = loggingCalloc<SCROLLINFO>();
 
       // Prepare the window for painting.
       final hdc = BeginPaint(hwnd, ps);
@@ -236,7 +236,8 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
         final y = yChar * (i - yPos);
 
         // Write a line of text to the client area.
-        TextOut(hdc, x, y, TEXT(abc[i]), abc[i].length);
+        final string = w(abc[i]);
+        TextOut(hdc, x, y, string.ptr, abc[i].length);
       }
 
       // Indicate that painting is finished.
@@ -255,57 +256,55 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
 
 void main() => initApp(winMain);
 
-void winMain(int hInstance, List<String> args, int nShowCmd) {
+void winMain(int hInstance, List<String> args, SHOW_WINDOW_CMD nShowCmd) {
   // Register the window class.
-  final className = TEXT('Scrollbar Sample');
+  final className = w('Scrollbar Sample');
 
   final lpfnWndProc = NativeCallable<WNDPROC>.isolateLocal(
     mainWindowProc,
     exceptionalReturn: 0,
   );
 
-  final wc = calloc<WNDCLASS>()
-    ..ref.style = CS_HREDRAW | CS_VREDRAW
-    ..ref.lpfnWndProc = lpfnWndProc.nativeFunction
-    ..ref.hInstance = hInstance
-    ..ref.lpszClassName = className
-    ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
-    ..ref.hbrBackground = GetStockObject(WHITE_BRUSH);
+  final wc = loggingCalloc<WNDCLASS>();
+  wc.ref
+    ..style = CS_HREDRAW | CS_VREDRAW
+    ..lpfnWndProc = lpfnWndProc.nativeFunction
+    ..hInstance = hInstance
+    ..lpszClassName = className.ptr
+    ..hCursor = LoadCursor(null, IDC_ARROW)
+    ..hbrBackground = GetStockObject(WHITE_BRUSH);
   RegisterClass(wc);
 
   // Create the window.
 
   final hWnd = CreateWindowEx(
-    0, // Optional window styles.
-    className, // Window class
-    className, // Window caption
+    WS_EX_LEFT, // Optional window styles.
+    className.ptr, // Window class
+    className.ptr, // Window caption
     WS_OVERLAPPEDWINDOW | WS_VSCROLL | WS_HSCROLL, // Window style
     // Size and position
     CW_USEDEFAULT,
     CW_USEDEFAULT,
     250,
     250,
-    NULL, // Parent window
-    NULL, // Menu
+    null, // Parent window
+    null, // Menu
     hInstance, // Instance handle
-    nullptr, // Additional application data
+    null, // Additional application data
   );
-
-  if (hWnd == 0) {
-    final error = GetLastError();
-    throw WindowsException(HRESULT_FROM_WIN32(error));
-  }
+  if (hWnd == NULL) throw WindowsException(GetLastError().toHRESULT());
 
   ShowWindow(hWnd, nShowCmd);
   UpdateWindow(hWnd);
 
   // Run the message loop.
-
-  final msg = calloc<MSG>();
-  while (GetMessage(msg, NULL, 0, 0) != 0) {
+  final msg = loggingCalloc<MSG>();
+  while (GetMessage(msg, null, 0, 0)) {
     TranslateMessage(msg);
     DispatchMessage(msg);
   }
 
   lpfnWndProc.close();
+  free(msg);
+  free(wc);
 }

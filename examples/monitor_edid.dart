@@ -1,30 +1,31 @@
 // Reads out the EDID information of the monitor.
 
-// ignore_for_file: camel_case_extensions
-
 import 'dart:ffi';
 
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 class Size {
   const Size({required this.width, required this.height});
+
   final int width;
   final int height;
 }
 
 Size getMonitorSizeInMM() {
-  final guidptr = GUIDFromString(GUID_CLASS_MONITOR);
   // Get the handle for the first monitor.
-  final ptr = SetupDiGetClassDevs(guidptr, nullptr, 0, DIGCF_PRESENT);
+  final ptr = SetupDiGetClassDevs(
+    GUID_CLASS_MONITOR.ptr,
+    null,
+    null,
+    DIGCF_PRESENT,
+  );
   var width = 0;
   var height = 0;
 
-  final data = calloc<SP_DEVINFO_DATA>();
+  final data = loggingCalloc<SP_DEVINFO_DATA>();
   data.ref.cbSize = sizeOf<SP_DEVINFO_DATA>();
   // Get the device information for the first member of the first monitor
-  final ret = SetupDiEnumDeviceInfo(ptr, 0, data);
-  if (ret == TRUE) {
+  if (SetupDiEnumDeviceInfo(ptr, 0, data)) {
     // Get the registry key for the first member of the first monitor
     final hDevRegKey = SetupDiOpenDevRegKey(
       ptr,
@@ -36,21 +37,20 @@ Size getMonitorSizeInMM() {
     );
 
     const nameSize = 128;
-    final lpValueName = wsalloc(nameSize);
+    final lpValueName = Pwstr.allocate(nameSize);
     const edidDataSize = 256;
 
-    final lpcchValueName = calloc<DWORD>()..value = nameSize;
-    final lpData = calloc<BYTE>(edidDataSize);
-    final lpcbData = calloc<DWORD>()..value = edidDataSize;
+    final lpcchValueName = loggingCalloc<DWORD>()..value = nameSize;
+    final lpData = loggingCalloc<BYTE>(edidDataSize);
+    final lpcbData = loggingCalloc<DWORD>()..value = edidDataSize;
 
     // Get the first value of the registry key for the first member of the first monitor
     final retValue = RegEnumValue(
       hDevRegKey,
       0,
-      lpValueName,
+      lpValueName.ptr,
       lpcchValueName,
-      nullptr,
-      nullptr,
+      null,
       lpData,
       lpcbData,
     );
@@ -72,7 +72,6 @@ Size getMonitorSizeInMM() {
       height = ((lpData[bound] & 0x0F) << 8) + lpData[vSize];
     }
 
-    free(lpValueName);
     free(lpcchValueName);
     free(lpData);
     free(lpcbData);
@@ -82,14 +81,13 @@ Size getMonitorSizeInMM() {
   free(data);
 
   SetupDiDestroyDeviceInfoList(ptr);
-  free(guidptr);
   return Size(width: width, height: height);
 }
 
 Size getMonitorSizeInMMBackup() {
-  final hdc = GetDC(NULL);
-  final width = GetDeviceCaps(hdc, 4);
-  final height = GetDeviceCaps(hdc, 6);
+  final hdc = GetDC(null);
+  final width = GetDeviceCaps(hdc, HORZSIZE);
+  final height = GetDeviceCaps(hdc, VERTSIZE);
   return Size(width: width, height: height);
 }
 

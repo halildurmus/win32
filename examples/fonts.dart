@@ -3,20 +3,19 @@
 import 'dart:collection';
 import 'dart:ffi';
 
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 void main() {
-  final hDC = GetDC(NULL);
-  final searchFont = calloc<LOGFONT>()..ref.lfCharSet = ANSI_CHARSET;
+  final hDC = GetDC(null);
+  final searchFont = loggingCalloc<LOGFONT>()..ref.lfCharSet = ANSI_CHARSET;
 
   final fontNames = SplayTreeSet<String>();
 
   int enumerateFonts(
     Pointer<LOGFONT> logFont,
     Pointer<TEXTMETRIC> _,
-    int __,
-    int ___,
+    int _,
+    int _,
   ) {
     // Get extended information from the font
     final logFontEx = logFont.cast<ENUMLOGFONTEX>();

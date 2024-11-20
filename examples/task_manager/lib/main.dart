@@ -90,9 +90,7 @@ class TaskManagerHomeScreenState extends State<TaskManagerHomeScreen> {
           ),
           TextButton(
             child: const Text('Cancel'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
+            onPressed: () => Navigator.of(context).pop(),
           ),
         ],
       ),
@@ -164,9 +162,7 @@ class TaskManagerHomeScreenState extends State<TaskManagerHomeScreen> {
           autofocus: true,
           onSubmitted: (_) async {
             final path = taskNameController.text;
-            if (path.isNotEmpty) {
-              await runTask(path);
-            }
+            if (path.isNotEmpty) await runTask(path);
           },
           controller: taskNameController,
           decoration: const InputDecoration(hintText: 'Enter task name'),
@@ -175,16 +171,12 @@ class TaskManagerHomeScreenState extends State<TaskManagerHomeScreen> {
           TextButton(
             onPressed: () async {
               final path = taskNameController.text;
-              if (path.isNotEmpty) {
-                await runTask(path);
-              }
+              if (path.isNotEmpty) await runTask(path);
             },
             child: const Text('Run'),
           ),
           TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
+            onPressed: () => Navigator.of(context).pop(),
             child: const Text('Cancel'),
           ),
         ],
@@ -348,7 +340,7 @@ class TaskManagerHomeScreenState extends State<TaskManagerHomeScreen> {
                                   Icons.cancel_outlined,
                                   color: Colors.red,
                                 ),
-                                onPressed: () =>
+                                onPressed: () async =>
                                     confirmEndTask(task.pid, task.name),
                                 tooltip: 'End the task',
                               ),

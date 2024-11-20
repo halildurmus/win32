@@ -1,371 +1,209 @@
-// Maps FFI prototypes onto the corresponding Win32 API function calls
-
+// Maps FFI prototypes onto the corresponding Win32 API function calls.
+//
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-
-// ignore_for_file: unused_import, non_constant_identifier_names
-// ignore_for_file: constant_identifier_names, camel_case_types
-// ignore_for_file: specify_nonobvious_property_types
+//
+// ignore_for_file: avoid_positional_boolean_parameters
+// ignore_for_file: non_constant_identifier_names, unused_import
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../callbacks.dart';
-import '../combase.dart';
-import '../guid.dart';
+import '../_internal/wevtapi.g.dart';
+import '../allocator.dart';
+import '../bstr.dart';
+import '../com/interface.g.dart';
+import '../com/iunknown.g.dart';
+import '../constants.dart';
+import '../constants.g.dart';
+import '../enums.g.dart';
+import '../exception.dart';
+import '../extensions/pointer.dart';
+import '../hresult.dart';
+import '../hstring.dart';
+import '../macros.dart';
+import '../ntstatus.dart';
+import '../pcstr.dart';
+import '../pcwstr.dart';
+import '../pstr.dart';
+import '../pwstr.dart';
+import '../rpc_status.dart';
 import '../structs.g.dart';
-import '../variant.dart';
-
-final _wevtapi = DynamicLibrary.open('wevtapi.dll');
+import '../types.dart';
+import '../utils.dart';
+import '../win32_error.dart';
 
 /// Closes an open handle.
 ///
-/// ```c
-/// BOOL EvtClose(
-///   EVT_HANDLE Object
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtclose>.
+///
 /// {@category wevtapi}
-int EvtClose(int Object) => _EvtClose(Object);
-
-final _EvtClose = _wevtapi
-    .lookupFunction<Int32 Function(IntPtr Object), int Function(int Object)>(
-      'EvtClose',
-    );
+@pragma('vm:prefer-inline')
+bool EvtClose(int object) => EvtClose_Wrapper(object) != FALSE;
 
 /// Creates a bookmark that identifies an event in a channel.
 ///
-/// ```c
-/// EVT_HANDLE EvtCreateBookmark(
-///   [in, optional] LPCWSTR BookmarkXml
-/// );
-/// ```
-/// {@category wevtapi}
-int EvtCreateBookmark(Pointer<Utf16> BookmarkXml) =>
-    _EvtCreateBookmark(BookmarkXml);
-
-final _EvtCreateBookmark = _wevtapi
-    .lookupFunction<
-      IntPtr Function(Pointer<Utf16> BookmarkXml),
-      int Function(Pointer<Utf16> BookmarkXml)
-    >('EvtCreateBookmark');
-
-/// Creates a context that specifies the information in the event that you
-/// want to render.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtcreatebookmark>.
 ///
-/// ```c
-/// EVT_HANDLE EvtCreateRenderContext(
-///   DWORD   ValuePathsCount,
-///   LPCWSTR *ValuePaths,
-///   DWORD   Flags
-/// );
-/// ```
 /// {@category wevtapi}
+@pragma('vm:prefer-inline')
+int EvtCreateBookmark(PCWSTR? bookmarkXml) =>
+    EvtCreateBookmark_Wrapper(bookmarkXml ?? nullptr);
+
+/// Creates a context that specifies the information in the event that you want
+/// to render.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtcreaterendercontext>.
+///
+/// {@category wevtapi}
+@pragma('vm:prefer-inline')
 int EvtCreateRenderContext(
-  int ValuePathsCount,
-  Pointer<Pointer<Utf16>> ValuePaths,
-  int Flags,
-) => _EvtCreateRenderContext(ValuePathsCount, ValuePaths, Flags);
+  int valuePathsCount,
+  Pointer<PCWSTR>? valuePaths,
+  int flags,
+) => EvtCreateRenderContext_Wrapper(
+  valuePathsCount,
+  valuePaths ?? nullptr,
+  flags,
+);
 
-final _EvtCreateRenderContext = _wevtapi
-    .lookupFunction<
-      IntPtr Function(
-        Uint32 ValuePathsCount,
-        Pointer<Pointer<Utf16>> ValuePaths,
-        Uint32 Flags,
-      ),
-      int Function(
-        int ValuePathsCount,
-        Pointer<Pointer<Utf16>> ValuePaths,
-        int Flags,
-      )
-    >('EvtCreateRenderContext');
-
-/// Retrieves extended error information for the last operation that failed.
+/// Gets a text message that contains the extended error information for the
+/// current error.
 ///
-/// ```c
-/// DWORD EvtGetExtendedStatus(
-///   [in]  DWORD  BufferSize,
-///   [in]  LPWSTR Buffer,
-///   [out] PDWORD BufferUsed
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtgetextendedstatus>.
+///
 /// {@category wevtapi}
+@pragma('vm:prefer-inline')
 int EvtGetExtendedStatus(
-  int BufferSize,
-  Pointer<Utf16> Buffer,
-  Pointer<Uint32> BufferUsed,
-) => _EvtGetExtendedStatus(BufferSize, Buffer, BufferUsed);
+  int bufferSize,
+  PWSTR? buffer,
+  Pointer<Uint32> bufferUsed,
+) => _EvtGetExtendedStatus(bufferSize, buffer ?? nullptr, bufferUsed);
 
-final _EvtGetExtendedStatus = _wevtapi
-    .lookupFunction<
-      Uint32 Function(
-        Uint32 BufferSize,
-        Pointer<Utf16> Buffer,
-        Pointer<Uint32> BufferUsed,
-      ),
-      int Function(
-        int BufferSize,
-        Pointer<Utf16> Buffer,
-        Pointer<Uint32> BufferUsed,
-      )
-    >('EvtGetExtendedStatus');
+@Native<Uint32 Function(Uint32, PWSTR, Pointer<Uint32>)>(
+  symbol: 'EvtGetExtendedStatus',
+)
+external int _EvtGetExtendedStatus(
+  int bufferSize,
+  PWSTR buffer,
+  Pointer<Uint32> bufferUsed,
+);
 
 /// Gets information about a query that you ran that identifies the list of
 /// channels or log files that the query attempted to access.
 ///
-/// ```c
-/// BOOL EvtGetQueryInfo(
-///   [in]  EVT_HANDLE            QueryOrSubscription,
-///   [in]  EVT_QUERY_PROPERTY_ID PropertyId,
-///   [in]  DWORD                 PropertyValueBufferSize,
-///   [in]  PEVT_VARIANT          PropertyValueBuffer,
-///   [out] PDWORD                PropertyValueBufferUsed
-/// );
-/// ```
+/// The function also gets a list of return codes that indicates the success or
+/// failure of each access.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtgetqueryinfo>.
+///
 /// {@category wevtapi}
-int EvtGetQueryInfo(
-  int QueryOrSubscription,
-  int PropertyId,
-  int PropertyValueBufferSize,
-  Pointer<EVT_VARIANT> PropertyValueBuffer,
-  Pointer<Uint32> PropertyValueBufferUsed,
-) => _EvtGetQueryInfo(
-  QueryOrSubscription,
-  PropertyId,
-  PropertyValueBufferSize,
-  PropertyValueBuffer,
-  PropertyValueBufferUsed,
-);
-
-final _EvtGetQueryInfo = _wevtapi
-    .lookupFunction<
-      Int32 Function(
-        IntPtr QueryOrSubscription,
-        Int32 PropertyId,
-        Uint32 PropertyValueBufferSize,
-        Pointer<EVT_VARIANT> PropertyValueBuffer,
-        Pointer<Uint32> PropertyValueBufferUsed,
-      ),
-      int Function(
-        int QueryOrSubscription,
-        int PropertyId,
-        int PropertyValueBufferSize,
-        Pointer<EVT_VARIANT> PropertyValueBuffer,
-        Pointer<Uint32> PropertyValueBufferUsed,
-      )
-    >('EvtGetQueryInfo');
+@pragma('vm:prefer-inline')
+bool EvtGetQueryInfo(
+  int queryOrSubscription,
+  EVT_QUERY_PROPERTY_ID propertyId,
+  int propertyValueBufferSize,
+  Pointer<EVT_VARIANT>? propertyValueBuffer,
+  Pointer<Uint32> propertyValueBufferUsed,
+) =>
+    EvtGetQueryInfo_Wrapper(
+      queryOrSubscription,
+      propertyId,
+      propertyValueBufferSize,
+      propertyValueBuffer ?? nullptr,
+      propertyValueBufferUsed,
+    ) !=
+    FALSE;
 
 /// Gets the next event from the query or subscription results.
 ///
-/// ```c
-/// BOOL EvtNext(
-///   [in]  EVT_HANDLE  ResultSet,
-///   [in]  DWORD       EventsSize,
-///   [in]  PEVT_HANDLE Events,
-///   [in]  DWORD       Timeout,
-///   [in]  DWORD       Flags,
-///   [out] PDWORD      Returned
-/// );
-/// ```
-/// {@category wevtapi}
-int EvtNext(
-  int ResultSet,
-  int EventsSize,
-  Pointer<IntPtr> Events,
-  int Timeout,
-  int Flags,
-  Pointer<Uint32> Returned,
-) => _EvtNext(ResultSet, EventsSize, Events, Timeout, Flags, Returned);
-
-final _EvtNext = _wevtapi
-    .lookupFunction<
-      Int32 Function(
-        IntPtr ResultSet,
-        Uint32 EventsSize,
-        Pointer<IntPtr> Events,
-        Uint32 Timeout,
-        Uint32 Flags,
-        Pointer<Uint32> Returned,
-      ),
-      int Function(
-        int ResultSet,
-        int EventsSize,
-        Pointer<IntPtr> Events,
-        int Timeout,
-        int Flags,
-        Pointer<Uint32> Returned,
-      )
-    >('EvtNext');
-
-/// Opens a session for event log operations. This session can be used to
-/// query events, subscribe to events, and manage event logs.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtnext>.
 ///
-/// ```c
-/// EVT_HANDLE EvtOpenSession(
-///   EVT_LOGIN_CLASS LoginClass,
-///   PVOID           Login,
-///   DWORD           Timeout,
-///   DWORD           Flags
-/// );
-/// ```
 /// {@category wevtapi}
-int EvtOpenSession(int LoginClass, Pointer Login, int Timeout, int Flags) =>
-    _EvtOpenSession(LoginClass, Login, Timeout, Flags);
+@pragma('vm:prefer-inline')
+bool EvtNext(
+  int resultSet,
+  int eventsSize,
+  Pointer<IntPtr> events,
+  int timeout,
+  int flags,
+  Pointer<Uint32> returned,
+) =>
+    EvtNext_Wrapper(resultSet, eventsSize, events, timeout, flags, returned) !=
+    FALSE;
 
-final _EvtOpenSession = _wevtapi
-    .lookupFunction<
-      IntPtr Function(
-        Int32 LoginClass,
-        Pointer Login,
-        Uint32 Timeout,
-        Uint32 Flags,
-      ),
-      int Function(int LoginClass, Pointer Login, int Timeout, int Flags)
-    >('EvtOpenSession');
-
-/// Runs a query to retrieve events from a channel or log file that match
-/// the specified query criteria.
+/// Establishes a connection to a remote computer that you can use when calling
+/// the other Windows Event Log functions.
 ///
-/// ```c
-/// EVT_HANDLE EvtQuery(
-///   EVT_HANDLE Session,
-///   LPCWSTR    Path,
-///   LPCWSTR    Query,
-///   DWORD      Flags
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtopensession>.
+///
 /// {@category wevtapi}
-int EvtQuery(
-  int Session,
-  Pointer<Utf16> Path,
-  Pointer<Utf16> Query,
-  int Flags,
-) => _EvtQuery(Session, Path, Query, Flags);
+@pragma('vm:prefer-inline')
+int EvtOpenSession(EVT_LOGIN_CLASS loginClass, Pointer login) =>
+    EvtOpenSession_Wrapper(loginClass, login, NULL, NULL);
 
-final _EvtQuery = _wevtapi
-    .lookupFunction<
-      IntPtr Function(
-        IntPtr Session,
-        Pointer<Utf16> Path,
-        Pointer<Utf16> Query,
-        Uint32 Flags,
-      ),
-      int Function(
-        int Session,
-        Pointer<Utf16> Path,
-        Pointer<Utf16> Query,
-        int Flags,
-      )
-    >('EvtQuery');
+/// Runs a query to retrieve events from a channel or log file that match the
+/// specified query criteria.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtquery>.
+///
+/// {@category wevtapi}
+@pragma('vm:prefer-inline')
+int EvtQuery(int? session, PCWSTR? path, PCWSTR? query, int flags) =>
+    EvtQuery_Wrapper(session ?? NULL, path ?? nullptr, query ?? nullptr, flags);
 
 /// Renders an XML fragment based on the rendering context that you specify.
 ///
-/// ```c
-/// BOOL EvtRender(
-///   [in]  EVT_HANDLE Context,
-///   [in]  EVT_HANDLE Fragment,
-///   [in]  DWORD      Flags,
-///   [in]  DWORD      BufferSize,
-///   [in]  PVOID      Buffer,
-///   [out] PDWORD     BufferUsed,
-///   [out] PDWORD     PropertyCount
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtrender>.
+///
 /// {@category wevtapi}
-int EvtRender(
-  int Context,
-  int Fragment,
-  int Flags,
-  int BufferSize,
-  Pointer Buffer,
-  Pointer<Uint32> BufferUsed,
-  Pointer<Uint32> PropertyCount,
-) => _EvtRender(
-  Context,
-  Fragment,
-  Flags,
-  BufferSize,
-  Buffer,
-  BufferUsed,
-  PropertyCount,
-);
-
-final _EvtRender = _wevtapi
-    .lookupFunction<
-      Int32 Function(
-        IntPtr Context,
-        IntPtr Fragment,
-        Uint32 Flags,
-        Uint32 BufferSize,
-        Pointer Buffer,
-        Pointer<Uint32> BufferUsed,
-        Pointer<Uint32> PropertyCount,
-      ),
-      int Function(
-        int Context,
-        int Fragment,
-        int Flags,
-        int BufferSize,
-        Pointer Buffer,
-        Pointer<Uint32> BufferUsed,
-        Pointer<Uint32> PropertyCount,
-      )
-    >('EvtRender');
+@pragma('vm:prefer-inline')
+bool EvtRender(
+  int? context,
+  int fragment,
+  int flags,
+  int bufferSize,
+  Pointer? buffer,
+  Pointer<Uint32> bufferUsed,
+  Pointer<Uint32> propertyCount,
+) =>
+    EvtRender_Wrapper(
+      context ?? NULL,
+      fragment,
+      flags,
+      bufferSize,
+      buffer ?? nullptr,
+      bufferUsed,
+      propertyCount,
+    ) !=
+    FALSE;
 
 /// Seeks to a specific event in a query result set.
 ///
-/// ```c
-/// BOOL EvtSeek(
-///   EVT_HANDLE ResultSet,
-///   LONGLONG   Position,
-///   EVT_HANDLE Bookmark,
-///   DWORD      Timeout,
-///   DWORD      Flags
-/// );
-/// ```
-/// {@category wevtapi}
-int EvtSeek(
-  int ResultSet,
-  int Position,
-  int Bookmark,
-  int Timeout,
-  int Flags,
-) => _EvtSeek(ResultSet, Position, Bookmark, Timeout, Flags);
-
-final _EvtSeek = _wevtapi
-    .lookupFunction<
-      Int32 Function(
-        IntPtr ResultSet,
-        Int64 Position,
-        IntPtr Bookmark,
-        Uint32 Timeout,
-        Uint32 Flags,
-      ),
-      int Function(
-        int ResultSet,
-        int Position,
-        int Bookmark,
-        int Timeout,
-        int Flags,
-      )
-    >('EvtSeek');
-
-/// Updates the bookmark with information that identifies the specified
-/// event.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtseek>.
 ///
-/// ```c
-/// BOOL EvtUpdateBookmark(
-///   EVT_HANDLE Bookmark,
-///   EVT_HANDLE Event
-/// );
-/// ```
 /// {@category wevtapi}
-int EvtUpdateBookmark(int Bookmark, int Event) =>
-    _EvtUpdateBookmark(Bookmark, Event);
+@pragma('vm:prefer-inline')
+bool EvtSeek(int resultSet, int position, int? bookmark, int flags) =>
+    EvtSeek_Wrapper(resultSet, position, bookmark ?? NULL, NULL, flags) !=
+    FALSE;
 
-final _EvtUpdateBookmark = _wevtapi
-    .lookupFunction<
-      Int32 Function(IntPtr Bookmark, IntPtr Event),
-      int Function(int Bookmark, int Event)
-    >('EvtUpdateBookmark');
+/// Updates the bookmark with information that identifies the specified event.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtupdatebookmark>.
+///
+/// {@category wevtapi}
+@pragma('vm:prefer-inline')
+bool EvtUpdateBookmark(int bookmark, int event) =>
+    EvtUpdateBookmark_Wrapper(bookmark, event) != FALSE;

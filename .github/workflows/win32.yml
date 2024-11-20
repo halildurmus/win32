@@ -40,7 +40,7 @@ jobs:
       # that tiles the space well.
       matrix:
         include:
-          - os: windows-latest
+          - os: windows-2025
             sdk: main
           - os: windows-2022
             sdk: beta

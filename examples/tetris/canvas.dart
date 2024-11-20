@@ -1,6 +1,5 @@
 import 'dart:ffi';
 
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'piece.dart';
@@ -14,15 +13,15 @@ class Canvas {
     this.width = 10,
     this.height = 20,
   ]) {
-    GetClientRect(hwnd, rect);
+    GetClientRect(hwnd, rect.ptr);
 
     SaveDC(hdc);
 
     // Set up coordinate system
     SetMapMode(hdc, MM_ISOTROPIC);
-    SetViewportExtEx(hdc, pxPerBlock, pxPerBlock, nullptr);
-    SetWindowExtEx(hdc, 1, -1, nullptr);
-    SetViewportOrgEx(hdc, 0, rect.ref.bottom, nullptr);
+    SetViewportExtEx(hdc, pxPerBlock, pxPerBlock, null);
+    SetWindowExtEx(hdc, 1, -1, null);
+    SetViewportOrgEx(hdc, 0, rect.ptr.ref.bottom, null);
 
     // Set default colors
     SetTextColor(hdc, RGB(255, 255, 255));
@@ -30,34 +29,36 @@ class Canvas {
     SetBkMode(hdc, TRANSPARENT);
   }
 
-  /// Handle to DC
+  /// Handle to DC.
   final int hdc;
 
-  /// Handle to window
+  /// Handle to window.
   final int hwnd;
 
-  /// Rectangle for drawing. This will last for the lifetime of the app and
-  /// memory will be released at app termination.
-  final Pointer<RECT> rect = calloc<RECT>();
+  /// Rectangle for drawing.
+  final SmartPointer<RECT> rect = SmartPointer(
+    loggingCalloc<RECT>(),
+    sizeInBytes: sizeOf<RECT>(),
+  );
 
-  /// Level width
+  /// Level width.
   final int width;
 
-  /// Level height
+  /// Level height.
   final int height;
 
   void drawBlock(int x, int y, int color) {
     final hBrush = CreateSolidBrush(color);
-    rect.ref
+    rect.ptr.ref
       ..left = x
       ..right = x + 1
       ..top = y
       ..bottom = y + 1;
 
-    FillRect(hdc, rect, hBrush);
+    FillRect(hdc, rect.ptr, hBrush);
 
     // Draw left and bottom black border
-    MoveToEx(hdc, x, y + 1, nullptr);
+    MoveToEx(hdc, x, y + 1, null);
     LineTo(hdc, x, y);
     LineTo(hdc, x + 1, y);
     DeleteObject(hBrush);
@@ -65,19 +66,18 @@ class Canvas {
 
   void drawInterface() {
     final hBrush = CreateSolidBrush(RGB(70, 70, 70));
-    rect.ref
+    rect.ptr.ref
       ..top = height
       ..left = width
       ..bottom = 0
       ..right = width + 8;
-    FillRect(hdc, rect, hBrush);
+    FillRect(hdc, rect.ptr, hBrush);
     DeleteObject(hBrush);
   }
 
   void drawText(String text, int x, int y) {
-    final lpString = text.toNativeUtf16();
-    TextOut(hdc, x, y, lpString, text.length);
-    free(lpString);
+    final lpString = w(text);
+    TextOut(hdc, x, y, lpString.ptr, text.length);
   }
 
   void drawTextOpaque(String text, int x, int y) {

@@ -1,0 +1,7 @@
+WM_CREATE|
+/// Sent when an application requests that a window be created by calling the
+/// CreateWindowEx or CreateWindow function.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/winmsg/wm-create>.
+const WM_CREATE = 1;

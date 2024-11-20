@@ -1,6 +1,5 @@
 import 'dart:ffi';
 
-import 'package:ffi/ffi.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:win32/win32.dart';
@@ -15,18 +14,14 @@ class WindowRoundingSelector extends StatefulWidget {
 class WindowRoundingSelectorState extends State<WindowRoundingSelector> {
   var _isWindowRounded = true;
 
-  void setWindowRoundingEffect({required bool isRounded}) {
-    final pref = calloc<DWORD>();
+  void setWindowRoundingEffect({bool isRounded = true}) {
+    final pref = loggingCalloc<DWORD>();
     try {
       final hwnd = GetForegroundWindow();
       const attr = DWMWA_WINDOW_CORNER_PREFERENCE;
       pref.value = isRounded ? DWMWCP_ROUND : DWMWCP_DONOTROUND;
-
       DwmSetWindowAttribute(hwnd, attr, pref, sizeOf<DWORD>());
-
-      setState(() {
-        _isWindowRounded = isRounded;
-      });
+      setState(() => _isWindowRounded = isRounded);
     } finally {
       free(pref);
     }

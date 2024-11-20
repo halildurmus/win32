@@ -1,0 +1,11 @@
+DRIVER_EXTENSION|
+/// {@category struct}
+base class DRIVER_EXTENSION extends Struct {
+  external Pointer<DRIVER_OBJECT> DriverObject;
+  external Pointer<NativeFunction<DRIVER_ADD_DEVICE>> AddDevice;
+
+  @Uint32()
+  external int Count;
+
+  external UNICODE_STRING ServiceKeyName;
+}

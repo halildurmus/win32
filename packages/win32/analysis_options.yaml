@@ -3,13 +3,3 @@ include: ../../analysis_options.yaml
 analyzer:
   exclude:
     - test_fixes/**
-
-linter:
-  rules:
-    # This is a good lint, but
-    # https://github.com/microsoft/win32metadata/issues/99 makes it impossible
-    # to resolve today.
-    library_private_types_in_public_api: false
-
-    # Unnecessary in most cases, but avoids accidental name clashes.
-    unnecessary_this: false

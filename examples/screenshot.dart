@@ -15,11 +15,12 @@ void main() {
 
 class Displays {
   static Iterable<Display> all() sync* {
-    final device = calloc<DISPLAY_DEVICE>()..ref.cb = sizeOf<DISPLAY_DEVICE>();
+    final device = loggingCalloc<DISPLAY_DEVICE>()
+      ..ref.cb = sizeOf<DISPLAY_DEVICE>();
     var deviceIndex = 0;
 
     try {
-      while (EnumDisplayDevices(nullptr, deviceIndex, device, 0) != 0) {
+      while (EnumDisplayDevices(null, deviceIndex, device, 0)) {
         yield Display(device.ref.DeviceName, device.ref.StateFlags);
         deviceIndex++;
       }
@@ -31,6 +32,7 @@ class Displays {
 
 class Display {
   Display(this.rawName, this._stateFlags);
+
   final String rawName;
 
   void saveScreenshot(String fileName) {
@@ -39,18 +41,14 @@ class Display {
 
     BmpFile(hdcScreen, hbmScreen).save(fileName);
 
-    ReleaseDC(NULL, hdcScreen);
+    ReleaseDC(null, hdcScreen);
     DeleteObject(hbmScreen);
   }
 
-  int _createDC() => using(
-    (arena) => CreateDC(
-      nullptr,
-      rawName.toNativeUtf16(allocator: arena),
-      nullptr,
-      nullptr,
-    ),
-  );
+  int _createDC() {
+    final device = w(rawName);
+    return CreateDC(null, device.ptr, null, null);
+  }
 
   int _createScreenshot(int hdcScreen) {
     final hdcMemDC = CreateCompatibleDC(hdcScreen);
@@ -78,6 +76,7 @@ class Display {
 
 class BmpFile {
   BmpFile(this.hdcScreen, this.hbmScreen);
+
   final int hdcScreen;
   final int hbmScreen;
 
@@ -92,13 +91,14 @@ class BmpFile {
     final bmpScreen = arena<BITMAP>();
     GetObject(hbmScreen, sizeOf<BITMAP>(), bmpScreen);
 
-    final bitmapInfoHeader = arena<BITMAPINFOHEADER>()
-      ..ref.biSize = sizeOf<BITMAPINFOHEADER>()
-      ..ref.biWidth = bmpScreen.ref.bmWidth
-      ..ref.biHeight = bmpScreen.ref.bmHeight
-      ..ref.biPlanes = 1
-      ..ref.biBitCount = 32
-      ..ref.biCompression = BI_RGB;
+    final bitmapInfoHeader = arena<BITMAPINFOHEADER>();
+    bitmapInfoHeader.ref
+      ..biSize = sizeOf<BITMAPINFOHEADER>()
+      ..biWidth = bmpScreen.ref.bmWidth
+      ..biHeight = bmpScreen.ref.bmHeight
+      ..biPlanes = 1
+      ..biBitCount = 32
+      ..biCompression = BI_RGB;
 
     final dwBmpSize =
         ((bmpScreen.ref.bmWidth * bitmapInfoHeader.ref.biBitCount + 31) /
@@ -107,7 +107,7 @@ class BmpFile {
                 bmpScreen.ref.bmHeight)
             .toInt();
 
-    final lpBitmap = arena<Uint8>(dwBmpSize);
+    final lpBitmap = arena<BYTE>(dwBmpSize);
 
     GetDIBits(
       hdcScreen,
@@ -132,14 +132,15 @@ class BmpFile {
   }
 
   void _writeFile(Arena arena, String fileName, BmpBinary bmpFileStructure) {
+    final lpFileName = w(fileName);
     final hFile = CreateFile(
-      fileName.toNativeUtf16(allocator: arena),
+      lpFileName.ptr,
       GENERIC_WRITE,
-      0,
-      nullptr,
+      FILE_SHARE_NONE,
+      null,
       CREATE_ALWAYS,
       FILE_ATTRIBUTE_NORMAL,
-      NULL,
+      null,
     );
 
     final dwBytesWritten = arena<DWORD>();
@@ -151,16 +152,16 @@ class BmpFile {
       bitmapFileHeader.cast(),
       sizeOf<BITMAPFILEHEADER>(),
       dwBytesWritten,
-      nullptr,
+      null,
     );
     WriteFile(
       hFile,
       bitmapInfoHeader.cast(),
       sizeOf<BITMAPINFOHEADER>(),
       dwBytesWritten,
-      nullptr,
+      null,
     );
-    WriteFile(hFile, lpBitmap, dwBmpSize, dwBytesWritten, nullptr);
+    WriteFile(hFile, lpBitmap, dwBmpSize, dwBytesWritten, null);
 
     CloseHandle(hFile);
   }

@@ -9,18 +9,17 @@ void main() {
   GetLastError();
 
   using((arena) {
-    // The name of the channel that contains the events that you want to query.
-    final channelPath = 'Microsoft-Windows-WindowsUpdateClient/Operational'
-        .toNativeUtf16(allocator: arena);
+    // The path of the channel that contains the events that you want to query.
+    final channelPath = w('Microsoft-Windows-WindowsUpdateClient/Operational');
     // The query that specifies the types of events that you want to retrieve.
     // In this case, we are querying for events with EventID 26. To receive all
     // events in the channel, set it to '*'.
-    final query = 'Event/System[EventID=26]'.toNativeUtf16(allocator: arena);
+    final query = w('Event/System[EventID=26]');
 
     final hResults = EvtQuery(
       NULL,
-      channelPath,
-      query,
+      channelPath.ptr,
+      query.ptr,
       EvtQueryChannelPath | EvtQueryForwardDirection,
     );
 
@@ -53,7 +52,7 @@ void printResults(int hResults, Arena arena, {int maxEvents = 10}) {
 
   while (true) {
     // Get a block of events from the result set.
-    if (EvtNext(hResults, maxEvents, events, INFINITE, 0, returned) == FALSE) {
+    if (!EvtNext(hResults, maxEvents, events, INFINITE, 0, returned)) {
       final error = GetLastError();
       if (error != ERROR_NO_MORE_ITEMS) {
         print('EvtNext failed with $error.');
@@ -79,30 +78,29 @@ void printResults(int hResults, Arena arena, {int maxEvents = 10}) {
       );
 
       final error = GetLastError();
-      if (result == FALSE && error != ERROR_INSUFFICIENT_BUFFER) {
+      if (!result && error != ERROR_INSUFFICIENT_BUFFER) {
         print('EvtRender failed with $error.');
         continue;
       }
 
       final bufferSizeInBytes = bufferUsed.value;
-      final buffer = arena<Uint16>(bufferSizeInBytes ~/ 2);
+      final buffer = Pwstr.allocate(bufferSizeInBytes ~/ 2);
 
-      if (EvtRender(
-            NULL,
-            events[i],
-            EvtRenderEventXml,
-            bufferSizeInBytes,
-            buffer,
-            bufferUsed,
-            propertyCount,
-          ) ==
-          FALSE) {
+      if (!EvtRender(
+        NULL,
+        events[i],
+        EvtRenderEventXml,
+        bufferSizeInBytes,
+        buffer.ptr,
+        bufferUsed,
+        propertyCount,
+      )) {
         final error = GetLastError();
         print('EvtRender failed with $error.');
         continue;
       }
 
-      final xml = buffer.cast<Utf16>().toDartString();
+      final xml = buffer.toDartString();
       print('Event XML:\n$xml\n');
 
       EvtClose(events[i]);

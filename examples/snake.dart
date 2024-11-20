@@ -1,18 +1,17 @@
 // The classic Snake game, as popularized by the Nokia phones of the 1990s.
 
 // Original C implementation by David Jones, available here:
-//     https://github.com/davidejones/winsnake
+// https://github.com/davidejones/winsnake
 
 // Note: This code isn't very idiomatic for Dart, since it's an almost direct
 // translation of the C code. Nevertheless, it demonstrates some useful
 // concepts, including pointer arithmetic and use of virtual memory in Win32.
 
-// ignore_for_file: constant_identifier_names, unreachable_from_main
+// ignore_for_file: constant_identifier_names
 
 import 'dart:ffi';
 import 'dart:math' show Random;
 
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 late int hWnd;
@@ -21,7 +20,7 @@ const IDT_TIMER2 = 2;
 
 final rng = Random();
 
-final Pointer<BITMAPINFO> bitmapInfo = calloc<BITMAPINFO>();
+final Pointer<BITMAPINFO> bitmapInfo = loggingCalloc<BITMAPINFO>();
 
 Pointer bitmapMemory = nullptr;
 late int bitmapWidth;
@@ -45,50 +44,11 @@ var data = <List<int>>[<int>[]];
 class Point {
   Point([this.x = 0, this.y = 0]);
 
-  factory Point.clone(Point orig) => Point(orig.x, orig.y);
-
   int x;
   int y;
 
   @override
   String toString() => '($x, $y)';
-}
-
-/// Fill rectangle with supplied 24-bit color in RGB format
-void drawRect(int rectX, int rectY, int width, int height, int color) {
-  final red = (color >> 16) & 0xFF;
-  final green = (color >> 8) & 0xFF;
-  final blue = color & 0xFF;
-
-  final pitch = bitmapWidth * bytesPerPixel;
-
-  final ptr = Pointer<Uint8>.fromAddress(bitmapMemory.address);
-  var rowOffset = 0;
-
-  for (var y = 0; y < bitmapHeight; y++) {
-    var pixelOffset = rowOffset;
-
-    for (var x = 0; x < bitmapWidth; x++) {
-      if ((x >= rectX && y >= rectY) &&
-          (x <= (rectX + width) && y <= (rectY + height))) {
-        (ptr + pixelOffset).value = blue;
-        pixelOffset++;
-
-        (ptr + pixelOffset).value = green;
-        pixelOffset++;
-
-        (ptr + pixelOffset).value = red;
-        pixelOffset++;
-
-        (ptr + pixelOffset).value = 0;
-        pixelOffset++;
-      } else {
-        // move along
-        pixelOffset += bytesPerPixel;
-      }
-    }
-    rowOffset += pitch;
-  }
 }
 
 // Return a random integer from (rangeMin <= n < rangeMax)
@@ -129,7 +89,7 @@ void collectApple() {
   if (timerAmount <= 20) {
     timerAmount = 20;
   }
-  SetTimer(hWnd, IDT_TIMER1, timerAmount, nullptr);
+  SetTimer(hWnd, IDT_TIMER1, timerAmount, null);
 
   // set new apple
   setApple();
@@ -334,7 +294,7 @@ void gameOver() {
   Beep(350, 300);
   KillTimer(hWnd, IDT_TIMER1);
   gameOverRow = 0;
-  SetTimer(hWnd, IDT_TIMER2, 20, nullptr);
+  SetTimer(hWnd, IDT_TIMER2, 20, null);
 }
 
 void gameOverUpdateComplete() {
@@ -386,7 +346,7 @@ void init(int width, int height) {
 
   final bitmapMemorySize = (width * height) * bytesPerPixel;
   bitmapMemory = VirtualAlloc(
-    nullptr,
+    null,
     bitmapMemorySize,
     MEM_COMMIT,
     PAGE_READWRITE,
@@ -457,7 +417,7 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
 
   switch (uMsg) {
     case WM_SIZE:
-      final rect = calloc<RECT>();
+      final rect = loggingCalloc<RECT>();
       GetClientRect(hwnd, rect);
       final width = rect.ref.right - rect.ref.left;
       final height = rect.ref.bottom - rect.ref.top;
@@ -474,14 +434,14 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       isRunning = false;
 
     case WM_PAINT:
-      final ps = calloc<PAINTSTRUCT>();
+      final ps = loggingCalloc<PAINTSTRUCT>();
       final dc = BeginPaint(hwnd, ps);
       final x = ps.ref.rcPaint.left;
       final y = ps.ref.rcPaint.top;
       final width = ps.ref.rcPaint.right - ps.ref.rcPaint.left;
       final height = ps.ref.rcPaint.bottom - ps.ref.rcPaint.top;
 
-      final rect = calloc<RECT>();
+      final rect = loggingCalloc<RECT>();
       GetClientRect(hwnd, rect);
       gameTick();
       draw(dc, rect.ref, x, y, width, height);
@@ -542,23 +502,25 @@ void main() => initApp(winMain);
 
 void winMain(int hInstance, List<String> args, int nShowCmd) {
   // Register the window class.
-  final className = TEXT('WinSnakeWindowClass');
+  final className = w('WinSnakeWindowClass');
 
   final lpfnWndProc = NativeCallable<WNDPROC>.isolateLocal(
     mainWindowProc,
     exceptionalReturn: 0,
   );
 
-  final wc = calloc<WNDCLASS>()
-    ..ref.lpfnWndProc = lpfnWndProc.nativeFunction
-    ..ref.hInstance = hInstance
-    ..ref.lpszClassName = className;
+  final wc = loggingCalloc<WNDCLASS>();
+  wc.ref
+    ..lpfnWndProc = lpfnWndProc.nativeFunction
+    ..hInstance = hInstance
+    ..lpszClassName = className.ptr;
   if (RegisterClass(wc) != 0) {
     // Create the window.
+    final windowName = w('Dart WinSnake');
     hWnd = CreateWindowEx(
-      0, // Optional window styles.
-      className, // Window class
-      TEXT('Dart WinSnake'), // Window caption
+      WS_EX_LEFT, // Optional window styles.
+      className.ptr, // Window class
+      windowName.ptr, // Window caption
       WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX | WS_VISIBLE,
 
       // Size and position
@@ -566,21 +528,20 @@ void winMain(int hInstance, List<String> args, int nShowCmd) {
       CW_USEDEFAULT,
       800,
       600,
-      NULL, // Parent window
-      NULL, // Menu
+      null, // Parent window
+      null, // Menu
       hInstance, // Instance handle
-      nullptr, // Additional application data
+      null, // Additional application data
     );
 
-    if (hWnd != 0) {
-      SetTimer(hWnd, IDT_TIMER1, timerAmount, nullptr);
+    if (hWnd != NULL) {
+      SetTimer(hWnd, IDT_TIMER1, timerAmount, null);
 
       isRunning = true;
       while (isRunning) {
         // Run the message loop.
-
-        final msg = calloc<MSG>();
-        while (PeekMessage(msg, 0, 0, 0, PM_REMOVE) != 0) {
+        final msg = loggingCalloc<MSG>();
+        while (PeekMessage(msg, null, 0, 0, PM_REMOVE)) {
           if (msg.ref.message == WM_QUIT) {
             isRunning = false;
           }
@@ -590,7 +551,7 @@ void winMain(int hInstance, List<String> args, int nShowCmd) {
         free(msg);
 
         final dc = GetDC(hWnd);
-        final rect = calloc<RECT>();
+        final rect = loggingCalloc<RECT>();
 
         GetClientRect(hWnd, rect);
 
@@ -605,19 +566,13 @@ void winMain(int hInstance, List<String> args, int nShowCmd) {
 
       lpfnWndProc.close();
     } else {
-      MessageBox(
-        0,
-        TEXT('Failed to create window'),
-        TEXT('Error'),
-        MB_ICONEXCLAMATION | MB_OK,
-      );
+      final text = w('Failed to create window');
+      final caption = w('Error');
+      MessageBox(null, text.ptr, caption.ptr, MB_ICONEXCLAMATION | MB_OK);
     }
   } else {
-    MessageBox(
-      0,
-      TEXT('Failed to create window'),
-      TEXT('Error'),
-      MB_ICONEXCLAMATION | MB_OK,
-    );
+    final text = w('Failed to create window');
+    final caption = w('Error');
+    MessageBox(null, text.ptr, caption.ptr, MB_ICONEXCLAMATION | MB_OK);
   }
 }

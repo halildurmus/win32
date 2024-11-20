@@ -7,7 +7,6 @@
 
 import 'dart:ffi';
 
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 class HoveredButton {
@@ -22,11 +21,12 @@ int dpiScale(int value, int dpi) => value * dpi ~/ 96;
 
 /// Given a Win32 RECT, duplicates it and returns the duplicate.
 Pointer<RECT> cloneRect(Pointer<RECT> rect) {
-  final clone = calloc<RECT>()
-    ..ref.bottom = rect.ref.bottom
-    ..ref.left = rect.ref.left
-    ..ref.top = rect.ref.top
-    ..ref.right = rect.ref.right;
+  final clone = loggingCalloc<RECT>();
+  clone.ref
+    ..bottom = rect.ref.bottom
+    ..left = rect.ref.left
+    ..top = rect.ref.top
+    ..right = rect.ref.right;
   return clone;
 }
 
@@ -72,48 +72,39 @@ Pointer<RECT> getMinimizeRect(int hwnd, Pointer<RECT> titleBarRect) {
 /// Returns a handle for the theme. The handle should be closed when it is no
 /// longer needed.
 int getWindowThemeHandle(int hwnd) {
-  final classDataSection = 'WINDOW'.toNativeUtf16();
-  final hTheme = OpenThemeData(hwnd, classDataSection);
-  free(classDataSection);
-  return hTheme;
+  final classList = w('WINDOW');
+  return OpenThemeData(hwnd, classList.ptr);
 }
 
 /// Returns a rect representing the non-client titlebar area.
 Pointer<RECT> getTitlebarRect(int hwnd) {
   const topAndBottomBorders = 2;
 
-  final rect = calloc<RECT>();
-  final titleBarSize = calloc<SIZE>();
+  final rect = loggingCalloc<RECT>();
+  final hTheme = getWindowThemeHandle(hwnd);
+  final dpi = GetDpiForWindow(hwnd);
+  final titleBarSize = GetThemePartSize(
+    hTheme,
+    null,
+    WP_CAPTION,
+    CS_ACTIVE,
+    null,
+    TS_TRUE,
+  );
+  CloseThemeData(hTheme);
 
-  try {
-    final hTheme = getWindowThemeHandle(hwnd);
-    final dpi = GetDpiForWindow(hwnd);
-    GetThemePartSize(
-      hTheme,
-      NULL,
-      WP_CAPTION,
-      CS_ACTIVE,
-      nullptr,
-      TS_TRUE,
-      titleBarSize,
-    );
-    CloseThemeData(hTheme);
+  final height = dpiScale(titleBarSize.ref.cy, dpi) + topAndBottomBorders;
+  free(titleBarSize);
+  GetClientRect(hwnd, rect);
+  rect.ref.bottom = rect.ref.top + height;
 
-    final height = dpiScale(titleBarSize.ref.cy, dpi) + topAndBottomBorders;
-
-    GetClientRect(hwnd, rect);
-    rect.ref.bottom = rect.ref.top + height;
-
-    return rect;
-  } finally {
-    free(titleBarSize);
-  }
+  return rect;
 }
 
 /// Returns a shadow representing the client area of the screen, including space
 /// for a fake shadow.
 Pointer<RECT> getFakeShadowRect(int hwnd) {
-  final rect = calloc<RECT>();
+  final rect = loggingCalloc<RECT>();
   GetClientRect(hwnd, rect);
   rect.ref.bottom = rect.ref.top + 1;
   return rect;
@@ -121,11 +112,11 @@ Pointer<RECT> getFakeShadowRect(int hwnd) {
 
 /// Returns true if the window is maximized within the Windows definition.
 bool isWindowMaximized(int hwnd) {
-  final windowPlacement = calloc<WINDOWPLACEMENT>()
+  final windowPlacement = loggingCalloc<WINDOWPLACEMENT>()
     ..ref.length = sizeOf<WINDOWPLACEMENT>();
 
   try {
-    if (GetWindowPlacement(hwnd, windowPlacement) != FALSE) {
+    if (GetWindowPlacement(hwnd, windowPlacement)) {
       return windowPlacement.ref.showCmd == SW_SHOWMAXIMIZED;
     }
     return false;
@@ -145,11 +136,11 @@ void centerRectInParent(Pointer<RECT> child, Pointer<RECT> parent) {
   final paddingX = (parentWidth - childWidth) ~/ 2;
   final paddingY = (parentHeight - childHeight) ~/ 2;
 
-  child
-    ..ref.left = parent.ref.left + paddingX
-    ..ref.top = parent.ref.top + paddingY
-    ..ref.right = child.ref.left + childWidth
-    ..ref.bottom = child.ref.top + childHeight;
+  child.ref
+    ..left = parent.ref.left + paddingX
+    ..top = parent.ref.top + paddingY
+    ..right = child.ref.left + childWidth
+    ..bottom = child.ref.top + childHeight;
 }
 
 /// Paints title bar buttons. Returns the left most extent of the buttons within
@@ -173,9 +164,10 @@ int paintButtons(
 
   // Paint minimize button
   final minimizeButtonRect = getMinimizeRect(hwnd, titleBarRect);
-  final minimizeIconRect = calloc<RECT>()
-    ..ref.right = iconDimension
-    ..ref.bottom = 1;
+  final minimizeIconRect = loggingCalloc<RECT>();
+  minimizeIconRect.ref
+    ..right = iconDimension
+    ..bottom = 1;
 
   try {
     if (hoveredButton == HoveredButton.minimize) {
@@ -191,9 +183,10 @@ int paintButtons(
 
   // Paint maximize button
   final maximizeButtonRect = getMaximizeRect(hwnd, titleBarRect);
-  final maximizeIconRect = calloc<RECT>()
-    ..ref.right = iconDimension
-    ..ref.bottom = iconDimension;
+  final maximizeIconRect = loggingCalloc<RECT>();
+  maximizeIconRect.ref
+    ..right = iconDimension
+    ..bottom = iconDimension;
 
   try {
     if (hoveredButton == HoveredButton.maximize) {
@@ -217,9 +210,10 @@ int paintButtons(
 
   // Paint close button
   final closeButtonRect = getCloseRect(hwnd, titleBarRect);
-  final closeIconRect = calloc<RECT>()
-    ..ref.right = iconDimension
-    ..ref.bottom = iconDimension;
+  final closeIconRect = loggingCalloc<RECT>();
+  closeIconRect.ref
+    ..right = iconDimension
+    ..bottom = iconDimension;
   try {
     int? customPen;
     if (hoveredButton == HoveredButton.close) {
@@ -231,9 +225,9 @@ int paintButtons(
     }
 
     centerRectInParent(closeIconRect, closeButtonRect);
-    MoveToEx(hdc, closeIconRect.ref.left, closeIconRect.ref.top, nullptr);
+    MoveToEx(hdc, closeIconRect.ref.left, closeIconRect.ref.top, null);
     LineTo(hdc, closeIconRect.ref.right + 1, closeIconRect.ref.bottom + 1);
-    MoveToEx(hdc, closeIconRect.ref.left, closeIconRect.ref.bottom, nullptr);
+    MoveToEx(hdc, closeIconRect.ref.left, closeIconRect.ref.bottom, null);
     LineTo(hdc, closeIconRect.ref.right + 1, closeIconRect.ref.top - 1);
     if (customPen != null) DeleteObject(customPen);
   } finally {
@@ -255,41 +249,38 @@ void drawWindowCaption(
   Pointer<RECT> titleBarTextRect,
   int titleBarItemColor,
 ) {
-  final logicalFont = calloc<LOGFONT>();
-  final titleText = wsalloc(256);
-  final drawThemeOptions = calloc<DTTOPTS>()
-    ..ref.dwSize = sizeOf<DTTOPTS>()
-    ..ref.dwFlags = DTT_TEXTCOLOR
-    ..ref.crText = titleBarItemColor;
+  final titleText = Pwstr.allocate(256);
+  final drawThemeOptions = loggingCalloc<DTTOPTS>();
+  drawThemeOptions.ref
+    ..dwSize = sizeOf<DTTOPTS>()
+    ..dwFlags = DTT_TEXTCOLOR
+    ..crText = titleBarItemColor;
 
   try {
-    int? savedFont;
-
     final hTheme = getWindowThemeHandle(hwnd);
-    if (SUCCEEDED(GetThemeSysFont(hTheme, TMT_CAPTIONFONT, logicalFont))) {
-      final themeFont = CreateFontIndirect(logicalFont);
-      savedFont = SelectObject(hdc, themeFont);
-    }
-    CloseThemeData(hTheme);
+    final logicalFont = GetThemeSysFont(hTheme, TMT_CAPTIONFONT);
 
-    GetWindowText(hwnd, titleText, 256);
+    final themeFont = CreateFontIndirect(logicalFont);
+    final savedFont = SelectObject(hdc, themeFont);
+    CloseThemeData(hTheme);
+    free(logicalFont);
+
+    GetWindowText(hwnd, titleText.ptr, 256);
     DrawThemeTextEx(
       hTheme,
       hdc,
       0,
       0,
-      titleText,
+      titleText.ptr,
       -1,
       DT_VCENTER | DT_SINGLELINE | DT_WORD_ELLIPSIS,
       titleBarTextRect,
       drawThemeOptions,
     );
 
-    if (savedFont != null) SelectObject(hdc, savedFont);
+    SelectObject(hdc, savedFont);
   } finally {
     free(drawThemeOptions);
-    free(titleText);
-    free(logicalFont);
   }
 }
 
@@ -301,12 +292,12 @@ void paintWindow(int hwnd) {
   final windowBackgroundColor = RGB(200, 250, 230);
   final shadowColor = RGB(100, 100, 100);
 
-  final hasFocus = GetFocus() != FALSE;
+  final hasFocus = GetFocus() != NULL;
   final titleBarItemColor = hasFocus
       ? titleBarFocusedItemColor
       : titleBarInactiveItemColor;
 
-  final ps = calloc<PAINTSTRUCT>();
+  final ps = loggingCalloc<PAINTSTRUCT>();
   final hdc = BeginPaint(hwnd, ps);
   const psRectOffset = 12;
   final psRect = Pointer<RECT>.fromAddress(ps.address + psRectOffset);
@@ -333,9 +324,10 @@ void paintWindow(int hwnd) {
 
   // Draw window caption
   const textPadding = 10;
-  final titleBarTextRect = cloneRect(titleBarRect)
-    ..ref.left += textPadding
-    ..ref.right = leftButtonExtent - textPadding;
+  final titleBarTextRect = cloneRect(titleBarRect);
+  titleBarTextRect.ref
+    ..left += textPadding
+    ..right = leftButtonExtent - textPadding;
   drawWindowCaption(hwnd, hdc, titleBarTextRect, titleBarItemColor);
   free(titleBarTextRect);
 
@@ -391,14 +383,14 @@ int mainWindowProc(int hwnd, int msg, int wParam, int lParam) {
       return 0;
 
     case WM_CREATE:
-      final sizeRect = calloc<RECT>();
+      final sizeRect = loggingCalloc<RECT>();
       GetWindowRect(hwnd, sizeRect);
 
       // Inform the application of the frame change to force redrawing with the
       // new client area that is extended into the title bar.
       SetWindowPos(
         hwnd,
-        NULL,
+        null,
         sizeRect.ref.left,
         sizeRect.ref.top,
         sizeRect.ref.right - sizeRect.ref.left,
@@ -410,7 +402,7 @@ int mainWindowProc(int hwnd, int msg, int wParam, int lParam) {
 
     case WM_ACTIVATE:
       final titleBarRect = getTitlebarRect(hwnd);
-      InvalidateRect(hwnd, titleBarRect, FALSE);
+      InvalidateRect(hwnd, titleBarRect, false);
       free(titleBarRect);
 
     case WM_NCHITTEST:
@@ -435,9 +427,10 @@ int mainWindowProc(int hwnd, int msg, int wParam, int lParam) {
       final dpi = GetDpiForWindow(hwnd);
       final frameY = GetSystemMetricsForDpi(SM_CYFRAME, dpi);
       final padding = GetSystemMetricsForDpi(SM_CXPADDEDBORDER, dpi);
-      final cursorPoint = calloc<POINT>()
-        ..ref.x = LOWORD(lParam)
-        ..ref.y = HIWORD(lParam);
+      final cursorPoint = loggingCalloc<POINT>();
+      cursorPoint.ref
+        ..x = LOWORD(lParam)
+        ..y = HIWORD(lParam);
 
       try {
         ScreenToClient(hwnd, cursorPoint);
@@ -464,7 +457,7 @@ int mainWindowProc(int hwnd, int msg, int wParam, int lParam) {
     case WM_NCMOUSEMOVE:
       final hoveredButton = GetWindowLongPtr(hwnd, GWLP_USERDATA);
 
-      final cursorPoint = calloc<POINT>();
+      final cursorPoint = loggingCalloc<POINT>();
       GetCursorPos(cursorPoint);
       ScreenToClient(hwnd, cursorPoint);
 
@@ -475,17 +468,17 @@ int mainWindowProc(int hwnd, int msg, int wParam, int lParam) {
 
       try {
         var newHoveredButton = HoveredButton.none;
-        if (PtInRect(closeRect, cursorPoint.ref) != FALSE) {
+        if (PtInRect(closeRect, cursorPoint.ref)) {
           newHoveredButton = HoveredButton.close;
-        } else if (PtInRect(maximizeRect, cursorPoint.ref) != FALSE) {
+        } else if (PtInRect(maximizeRect, cursorPoint.ref)) {
           newHoveredButton = HoveredButton.maximize;
-        } else if (PtInRect(minimizeRect, cursorPoint.ref) != FALSE) {
+        } else if (PtInRect(minimizeRect, cursorPoint.ref)) {
           newHoveredButton = HoveredButton.minimize;
         }
         if (newHoveredButton != hoveredButton) {
-          InvalidateRect(hwnd, closeRect, FALSE);
-          InvalidateRect(hwnd, maximizeRect, FALSE);
-          InvalidateRect(hwnd, minimizeRect, FALSE);
+          InvalidateRect(hwnd, closeRect, false);
+          InvalidateRect(hwnd, maximizeRect, false);
+          InvalidateRect(hwnd, minimizeRect, false);
           SetWindowLongPtr(hwnd, GWLP_USERDATA, newHoveredButton);
         }
       } finally {
@@ -501,7 +494,7 @@ int mainWindowProc(int hwnd, int msg, int wParam, int lParam) {
 
       if (hoveredButton != HoveredButton.none) {
         final titleBarRect = getTitlebarRect(hwnd);
-        InvalidateRect(hwnd, titleBarRect, FALSE);
+        InvalidateRect(hwnd, titleBarRect, false);
         free(titleBarRect);
         SetWindowLongPtr(hwnd, GWLP_USERDATA, HoveredButton.none);
       }
@@ -543,56 +536,54 @@ void main() {
   registerHighDPISupport();
 
   // Register the window class.
-  final windowClassName = 'WIN32_CUSTOM_TITLEBAR_EXAMPLE'.toNativeUtf16();
+  final windowClassName = w('WIN32_CUSTOM_TITLEBAR_EXAMPLE');
 
   final lpfnWndProc = NativeCallable<WNDPROC>.isolateLocal(
     mainWindowProc,
     exceptionalReturn: 0,
   );
 
-  final windowClass = calloc<WNDCLASSEX>()
-    ..ref.cbSize = sizeOf<WNDCLASSEX>()
-    ..ref.lpszClassName = windowClassName
-    ..ref.style = CS_HREDRAW | CS_VREDRAW
-    ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
-    ..ref.lpfnWndProc = lpfnWndProc.nativeFunction;
+  final windowClass = loggingCalloc<WNDCLASSEX>();
+  windowClass.ref
+    ..cbSize = sizeOf<WNDCLASSEX>()
+    ..lpszClassName = windowClassName.ptr
+    ..style = CS_HREDRAW | CS_VREDRAW
+    ..hCursor = LoadCursor(null, IDC_ARROW)
+    ..lpfnWndProc = lpfnWndProc.nativeFunction;
 
   RegisterClassEx(windowClass);
 
   // Create the window.
-  const windowStyle =
+  final windowStyle =
       WS_THICKFRAME | // Standard resizeable window
       WS_SYSMENU | // Explicitly ask for the titlebar to support snapping
       WS_MAXIMIZEBOX | // Support maximizing via mouse dragging to screen top
       WS_MINIMIZEBOX | // Support minimizing via clicking taskbar icon
       WS_VISIBLE; // Make window visible after creation.
 
-  final windowCaption = 'Win32 Custom Title Bar Example'.toNativeUtf16();
-
+  final windowCaption = w('Win32 Custom Title Bar Example');
   CreateWindowEx(
     WS_EX_APPWINDOW,
-    windowClassName,
-    windowCaption,
+    windowClassName.ptr,
+    windowCaption.ptr,
     windowStyle,
     CW_USEDEFAULT,
     CW_USEDEFAULT,
     800,
     600,
-    NULL,
-    NULL,
-    NULL,
-    nullptr,
+    null,
+    null,
+    null,
+    null,
   );
 
-  final msg = calloc<MSG>();
-  while (GetMessage(msg, NULL, 0, 0) != 0) {
+  final msg = loggingCalloc<MSG>();
+  while (GetMessage(msg, null, 0, 0)) {
     TranslateMessage(msg);
     DispatchMessage(msg);
   }
 
   lpfnWndProc.close();
   free(msg);
-  free(windowCaption);
   free(windowClass);
-  free(windowClassName);
 }

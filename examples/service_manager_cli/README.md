@@ -13,16 +13,16 @@ A command-line interface for managing Windows services.
 
 Activate the CLI tool globally by running the following command:
 
-```sh
-cd example
-dart pub global activate service_manager_cli -s path
+```cmd
+> cd example
+> dart pub global activate service_manager_cli -s path
 ```
 
 ## Usage
 
 Run the CLI tool to see the usage information:
 
-```sh
+```cmd
 service_manager_cli
 ```
 

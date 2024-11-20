@@ -1,7 +1,6 @@
 import 'dart:ffi';
 import 'dart:math' as math;
 
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import '_app.dart' as app;
@@ -16,35 +15,37 @@ bool _windowWndProc(int hWnd, int uMsg, int wParam, int lParam) {
 }
 
 int createHidden() {
-  final windowClassNme = _regWinClass();
+  final windowClassName = _regWinClass();
   final rect = _getWindowCenterRect();
+  final windowName = w('Tray Callback Window');
   final hWnd = CreateWindowEx(
-    0,
-    TEXT(windowClassNme),
-    TEXT('Tray Callback Window'),
+    WS_EX_LEFT,
+    windowClassName.ptr,
+    windowName.ptr,
     WS_OVERLAPPEDWINDOW,
     rect.left,
     rect.top,
     rect.width,
     rect.height,
-    NULL,
-    NULL,
+    null,
+    null,
     app.hInst,
-    nullptr,
+    null,
   );
   app.registerWndProc(_windowWndProc);
   return hWnd;
 }
 
-String _regWinClass() {
-  const windowClass = 'Tray_Callback_Window';
-  final pWndClass = calloc<WNDCLASS>()
-    ..ref.style = CS_HREDRAW | CS_VREDRAW
-    ..ref.lpfnWndProc = app.lpfnWndProc.nativeFunction
-    ..ref.hInstance = app.hInst
-    ..ref.hIcon = app.loadDartIcon()
-    ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
-    ..ref.lpszClassName = TEXT(windowClass);
+Pcwstr _regWinClass() {
+  final windowClass = w('Tray_Callback_Window');
+  final pWndClass = loggingCalloc<WNDCLASS>();
+  pWndClass.ref
+    ..style = CS_HREDRAW | CS_VREDRAW
+    ..lpfnWndProc = app.lpfnWndProc.nativeFunction
+    ..hInstance = app.hInst
+    ..hIcon = app.loadDartIcon()
+    ..hCursor = LoadCursor(null, IDC_ARROW)
+    ..lpszClassName = windowClass.ptr;
   RegisterClass(pWndClass);
   return windowClass;
 }

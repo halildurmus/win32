@@ -1,22 +1,15 @@
-// notepad.dart
-
-// Comprehensive example of Win32 APIs for a non-game scenario.
-
-// ignore_for_file: constant_identifier_names
-
 import 'dart:ffi';
 
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'editor.dart';
 import 'find.dart';
 import 'resources.dart';
 
-const APP_NAME = 'DartNote'; // DartPad was taken :)
+const appName = 'DartNote'; // DartPad was taken :)
 
 /// Win32 handle to the current window instance
-final int hInstance = GetModuleHandle(nullptr);
+final int hInstance = GetModuleHandle(null);
 
 late NotepadEditor editor;
 late NotepadFind find;
@@ -26,17 +19,19 @@ late int hwndEdit;
 
 late Pointer<FINDREPLACE> findReplace;
 var messageFindReplace = 0;
-int hDlgModeless = NULL;
+var hDlgModeless = 0;
 
-final Pointer<Uint32> iOffset = calloc<Uint32>();
+final SmartPointer<Uint32> iOffset = SmartPointer(loggingCalloc<Uint32>());
 
 int mainWindowProc(int hwnd, int message, int wParam, int lParam) {
   switch (message) {
     case WM_CREATE:
+      const hMenu = EDITID;
+      final className = w('edit');
       hwndEdit = CreateWindowEx(
-        0,
-        TEXT('edit'),
-        nullptr,
+        WS_EX_LEFT,
+        className.ptr,
+        null,
         WS_CHILD |
             WS_VISIBLE |
             WS_HSCROLL |
@@ -52,18 +47,15 @@ int mainWindowProc(int hwnd, int message, int wParam, int lParam) {
         0,
         0,
         hwnd,
-        EDITID,
+        hMenu,
         hInstance,
-        nullptr,
+        null,
       );
-
       SendMessage(hwndEdit, EM_LIMITTEXT, 32767, 0);
-
       editor = NotepadEditor(hwnd, hwndEdit);
       find = NotepadFind();
-
-      messageFindReplace = RegisterWindowMessage(TEXT(FINDMSGSTRING));
-
+      final lpString = w(FINDMSGSTRING);
+      messageFindReplace = RegisterWindowMessage(lpString.ptr);
       editor.updateWindowTitle();
       return 0;
 
@@ -72,16 +64,17 @@ int mainWindowProc(int hwnd, int message, int wParam, int lParam) {
       return 0;
 
     case WM_SIZE:
-      MoveWindow(hwndEdit, 0, 0, LOWORD(lParam), HIWORD(lParam), TRUE);
+      MoveWindow(hwndEdit, 0, 0, LOWORD(lParam), HIWORD(lParam), true);
       return 0;
 
     case WM_INITMENUPOPUP:
       switch (lParam) {
         case 1: // Edit menu
+          final hMenu = wParam;
 
           // Enable Undo if edit control can do it
           EnableMenuItem(
-            wParam,
+            hMenu,
             IDM_EDIT_UNDO,
             SendMessage(hwndEdit, EM_CANUNDO, 0, 0) != FALSE
                 ? MF_ENABLED
@@ -90,26 +83,25 @@ int mainWindowProc(int hwnd, int message, int wParam, int lParam) {
 
           // Enable Paste if clipboard contains text
           EnableMenuItem(
-            wParam,
+            hMenu,
             IDM_EDIT_PASTE,
-            IsClipboardFormatAvailable(CF_TEXT) != FALSE
-                ? MF_ENABLED
-                : MF_GRAYED,
+            IsClipboardFormatAvailable(CF_TEXT) ? MF_ENABLED : MF_GRAYED,
           );
 
           // Enable Cut / Copy / Clear if there is a selection
           final menuStyle = editor.isTextSelected ? MF_ENABLED : MF_GRAYED;
 
-          EnableMenuItem(wParam, IDM_EDIT_CUT, menuStyle);
-          EnableMenuItem(wParam, IDM_EDIT_COPY, menuStyle);
-          EnableMenuItem(wParam, IDM_EDIT_CLEAR, menuStyle);
+          EnableMenuItem(hMenu, IDM_EDIT_CUT, menuStyle);
+          EnableMenuItem(hMenu, IDM_EDIT_COPY, menuStyle);
+          EnableMenuItem(hMenu, IDM_EDIT_CLEAR, menuStyle);
 
         case 2: // Search menu
+          final hMenu = wParam;
           final menuStyle = hDlgModeless == NULL ? MF_ENABLED : MF_GRAYED;
 
-          EnableMenuItem(wParam, IDM_SEARCH_FIND, menuStyle);
-          EnableMenuItem(wParam, IDM_SEARCH_NEXT, menuStyle);
-          EnableMenuItem(wParam, IDM_SEARCH_REPLACE, menuStyle);
+          EnableMenuItem(hMenu, IDM_SEARCH_FIND, menuStyle);
+          EnableMenuItem(hMenu, IDM_SEARCH_NEXT, menuStyle);
+          EnableMenuItem(hMenu, IDM_SEARCH_REPLACE, menuStyle);
       }
       return 0;
 
@@ -122,12 +114,9 @@ int mainWindowProc(int hwnd, int message, int wParam, int lParam) {
             return 0;
           case EN_ERRSPACE:
           case EN_MAXTEXT:
-            MessageBox(
-              hwnd,
-              TEXT('Edit control out of space.'),
-              TEXT(APP_NAME),
-              MB_OK | MB_ICONSTOP,
-            );
+            final text = w('Edit control out of space.');
+            final caption = w(appName);
+            MessageBox(hwnd, text.ptr, caption.ptr, MB_OK | MB_ICONSTOP);
             return 0;
         }
         break;
@@ -141,7 +130,8 @@ int mainWindowProc(int hwnd, int message, int wParam, int lParam) {
           }
 
           // Empty edit control
-          SetWindowText(hwndEdit, TEXT('\u{0}'));
+          final string = w('\u{0}');
+          SetWindowText(hwndEdit, string.ptr);
 
           editor.newFile();
           return 0;
@@ -197,7 +187,7 @@ int mainWindowProc(int hwnd, int message, int wParam, int lParam) {
           SendMessage(hwndEdit, EM_GETSEL, 0, iOffset.address);
 
           if (find.findValidFind()) {
-            find.findNextTextInEditWindow(hwndEdit, iOffset);
+            find.findNextTextInEditWindow(hwndEdit, iOffset.ptr);
           } else {
             hDlgModeless = find.showFindDialog(hwnd);
           }
@@ -218,14 +208,13 @@ int mainWindowProc(int hwnd, int message, int wParam, int lParam) {
 
         case IDM_APP_ABOUT:
           final pDialog = NotepadResources.loadAboutBox();
-
           final lpDialogFunc = NativeCallable<DLGPROC>.isolateLocal(
             dialogReturnProc,
             exceptionalReturn: 0,
           );
           DialogBoxIndirect(
             hInstance,
-            pDialog,
+            pDialog.ptr,
             hwnd,
             lpDialogFunc.nativeFunction,
           );
@@ -257,18 +246,22 @@ int mainWindowProc(int hwnd, int message, int wParam, int lParam) {
         findReplace = Pointer<FINDREPLACE>.fromAddress(lParam);
 
         if (findReplace.ref.Flags & FR_DIALOGTERM == FR_DIALOGTERM) {
-          hDlgModeless = NULL;
+          hDlgModeless = 0;
         }
 
         if (findReplace.ref.Flags & FR_FINDNEXT == FR_FINDNEXT) {
-          if (!find.findTextInEditWindow(hwndEdit, iOffset, findReplace)) {
+          if (!find.findTextInEditWindow(hwndEdit, iOffset.ptr, findReplace)) {
             editor.showMessage('Text not found!');
           }
         }
 
         if ((findReplace.ref.Flags & FR_REPLACE == FR_REPLACE) ||
             (findReplace.ref.Flags & FR_REPLACEALL == FR_REPLACEALL)) {
-          if (!find.replaceTextInEditWindow(hwndEdit, iOffset, findReplace)) {
+          if (!find.replaceTextInEditWindow(
+            hwndEdit,
+            iOffset.ptr,
+            findReplace,
+          )) {
             editor.showMessage('Text not found!');
           }
         }
@@ -276,7 +269,7 @@ int mainWindowProc(int hwnd, int message, int wParam, int lParam) {
         if (findReplace.ref.Flags & FR_REPLACEALL == FR_REPLACEALL) {
           while (find.replaceTextInEditWindow(
             hwndEdit,
-            iOffset,
+            iOffset.ptr,
             findReplace,
           )) {}
         }
@@ -305,44 +298,46 @@ void main() {
   registerHighDPISupport();
 
   // Register the window class.
-  final className = TEXT(APP_NAME);
+  final className = w(appName);
 
   final lpfnWndProc = NativeCallable<WNDPROC>.isolateLocal(
     mainWindowProc,
     exceptionalReturn: 0,
   );
 
-  final wc = calloc<WNDCLASS>()
-    ..ref.style = CS_HREDRAW | CS_VREDRAW
-    ..ref.lpfnWndProc = lpfnWndProc.nativeFunction
-    ..ref.hInstance = hInstance
-    ..ref.lpszClassName = className
-    ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
-    ..ref.hbrBackground = GetStockObject(WHITE_BRUSH);
+  final wc = loggingCalloc<WNDCLASS>();
+  wc.ref
+    ..style = CS_HREDRAW | CS_VREDRAW
+    ..lpfnWndProc = lpfnWndProc.nativeFunction
+    ..hInstance = hInstance
+    ..lpszClassName = className.ptr
+    ..hCursor = LoadCursor(null, IDC_ARROW)
+    ..hbrBackground = GetStockObject(WHITE_BRUSH);
   RegisterClass(wc);
 
   final hMenu = NotepadResources.loadMenus();
 
   // Create the window.
+  final lpWindowName = w(appName);
   final hWnd = CreateWindowEx(
-    0, // Optional window styles.
-    className, // Window class
-    TEXT(APP_NAME),
+    WS_EX_LEFT, // Optional window styles.
+    className.ptr, // Window class
+    lpWindowName.ptr,
     WS_OVERLAPPEDWINDOW, // Window style
     // Size and position
     CW_USEDEFAULT,
     CW_USEDEFAULT,
     CW_USEDEFAULT,
     CW_USEDEFAULT,
-    NULL, // Parent window
+    null, // Parent window
     hMenu, // Menu
     hInstance, // Instance handle
-    nullptr, // Additional application data
+    null, // Additional application data
   );
 
-  if (hWnd == 0) {
+  if (hWnd == NULL) {
     final error = GetLastError();
-    throw WindowsException(HRESULT_FROM_WIN32(error));
+    throw WindowsException(error.toHRESULT());
   }
 
   ShowWindow(hWnd, SW_SHOWNORMAL);
@@ -352,11 +347,10 @@ void main() {
 
   // Run the message loop.
 
-  final msg = calloc<MSG>();
-  while (GetMessage(msg, NULL, 0, 0) != 0) {
+  final msg = loggingCalloc<MSG>();
+  while (GetMessage(msg, null, 0, 0)) {
     // Translate dialog messages
-    if ((hDlgModeless == NULL) ||
-        (IsDialogMessage(hDlgModeless, msg) == FALSE)) {
+    if (hDlgModeless == NULL || !IsDialogMessage(hDlgModeless, msg)) {
       // Translate window accelerators and messages
       if (TranslateAccelerator(hWnd, hAccel, msg) == FALSE) {
         TranslateMessage(msg);
@@ -367,4 +361,5 @@ void main() {
 
   lpfnWndProc.close();
   free(msg);
+  free(wc);
 }

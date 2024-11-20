@@ -1,0 +1,2 @@
+ALERTER_MAILSLOT|
+const ALERTER_MAILSLOT = '\\\\.\\MAILSLOT\\Alerter';

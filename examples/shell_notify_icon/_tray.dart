@@ -1,14 +1,13 @@
 import 'dart:ffi';
 
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import '_app.dart' as app;
 import '_app.dart';
 import '_menu.dart' as menu;
 
-final Pointer<GUID> _guid = Guid.generate().toNativeGUID();
-final Pointer<NOTIFYICONDATA> _nid = calloc<NOTIFYICONDATA>()
+final _guid = Guid.generate();
+final Pointer<NOTIFYICONDATA> _nid = loggingCalloc<NOTIFYICONDATA>()
   ..ref.cbSize = sizeOf<NOTIFYICONDATA>();
 
 bool _trayWndProc(int hWnd, int msg, int wParam, int lParam) {
@@ -17,7 +16,7 @@ bool _trayWndProc(int hWnd, int msg, int wParam, int lParam) {
     case app.EVENT_TRAY_NOTIFY:
       switch (LOWORD(lParam)) {
         case NIN_SELECT:
-          ShowWindow(hWnd, IsWindowVisible(hWnd) == 1 ? SW_HIDE : SW_SHOW);
+          ShowWindow(hWnd, IsWindowVisible(hWnd) ? SW_HIDE : SW_SHOW);
           SetForegroundWindow(hWnd);
           return true;
 
@@ -48,7 +47,6 @@ void addIcon({required int hWndParent}) {
 
 void removeIcon() {
   Shell_NotifyIcon(NIM_DELETE, _nid);
-  free(_guid);
   free(_nid);
   app.deregisterWndProc(_trayWndProc);
   lpfnWndProc.close();

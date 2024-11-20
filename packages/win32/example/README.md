@@ -63,8 +63,7 @@ visit [pub.dev] to explore packages that depend on it.
 | [printer_raw.dart]  | Sends RAW data directly to a Windows Printer              |
 | [serial.dart]       | Demonstrates serial port management                       |
 | [setupapi.dart]     | Show using setup APIs to retrieve device interfaces       |
-| [speech.dart]       | Use Windows speech engine for text-to-speech              |
-| [speech_voice.dart] | Use `ISpeechVoice` for text-to-speech                     |
+| [speech.dart]       | Use Windows speech client for text-to-speech              |
 | [sysinfo.dart]      | Examples of getting device information from native C APIs |
 | [wasapi.dart]       | Demonstrates sound generation with WASAPI library         |
 
@@ -81,7 +80,6 @@ visit [pub.dev] to explore packages that depend on it.
 [serial.dart]: https://github.com/halildurmus/win32/blob/main/examples/serial.dart
 [setupapi.dart]: https://github.com/halildurmus/win32/blob/main/examples/setupapi.dart
 [speech.dart]: https://github.com/halildurmus/win32/blob/main/examples/speech.dart
-[speech_voice.dart]: https://github.com/halildurmus/win32/blob/main/examples/speech_voice.dart
 [sysinfo.dart]: https://github.com/halildurmus/win32/blob/main/examples/sysinfo.dart
 [wasapi.dart]: https://github.com/halildurmus/win32/blob/main/examples/wasapi.dart
 
