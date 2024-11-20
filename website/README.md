@@ -5,13 +5,13 @@ static website generator.
 
 ## ⚙️ Installation
 
-```sh
+```cmd
 npm install
 ```
 
 ## 🧑‍💻 Local Development
 
-```sh
+```cmd
 npm start
 ```
 
@@ -19,7 +19,7 @@ This command starts a local development server and opens up a browser window. Mo
 
 ## 📦 Build
 
-```sh
+```cmd
 npm build
 ```
 

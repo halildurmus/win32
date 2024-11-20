@@ -110,9 +110,9 @@ documentation, you need to install the dependencies and start the development
 server:
 
 ```cmd title="Terminal"
-cd website
-npm install
-npm start
+> cd website
+> npm install
+> npm start
 ```
 
 Now, head over `localhost:3000` to see the documentation.
