@@ -1,10 +1,3 @@
-# Directory that contains images used in README.
-assets/
-
-# We don't need to publish the tools folder - it's only used for code
-# generation.
-tools/
-
 # Get rid of any unwanted executables.
 *.exe
 *.obj
@@ -33,6 +26,5 @@ tools/
 # Documentation doesn't need checking in here.
 **/doc/api/
 
-# We create these files for inspection if the goldens tests fail, but we don't
-# need to check them in.
-**/goldens/*.comparison
+# Don't need to check in the git-cliff configuration file.
+cliff.toml
