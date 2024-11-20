@@ -36,7 +36,7 @@ release:
 test:
   - changed-files:
       - any-glob-to-all-files:
-          - test/**
+          - packages/*/test/**
 
 website:
   - changed-files:
