@@ -12,6 +12,9 @@
 *.iml
 **/.idea/
 
+# Visual Studio Code related files.
+**/.vscode/
+
 # Library packages shouldn't check in their pubspec.lock files.
 **/pubspec.lock
 
@@ -24,6 +27,6 @@
 # Documentation doesn't need checking in here.
 **/doc/api/
 
-# We create these files for inspection if the goldens tests fail, but we don't
+# We create these files for inspection if the golden tests fail, but we don't
 # need to check them in.
 **/goldens/*.comparison
