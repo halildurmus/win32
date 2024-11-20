@@ -12,7 +12,7 @@ void main(List<String> args) async {
   print('🚧 Starting code generation...');
   final generatorProcess = await Process.start(
     'dart',
-    ['bin/generate.dart', ...argResults.rest],
+    ['bin/generator.dart', ...argResults.rest],
     workingDirectory: p.normalize(
       p.join(
         Platform.script.resolve('..').toFilePath(),
