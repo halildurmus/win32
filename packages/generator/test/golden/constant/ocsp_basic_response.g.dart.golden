@@ -1,0 +1,2 @@
+OCSP_BASIC_RESPONSE|
+final OCSP_BASIC_RESPONSE = Pointer<Utf8>.fromAddress(69);

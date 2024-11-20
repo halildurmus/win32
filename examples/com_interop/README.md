@@ -97,10 +97,10 @@ runtime. This process involves using the `IDispatch` methods to locate the
 desired function, akin to looking up a page number in a table of contents rather
 than having it printed directly in the text.
 
-The two key functions that facilitate late binding are `GetIDsOfNames` and
+The two key methods that facilitate late binding are `GetIDsOfNames` and
 `Invoke`. The `GetIDsOfNames` maps method names (as strings) to a unique
 identifier known as a **dispid**. Once the dispid for the desired function is
-obtained, you can invoke it using the `Invoke` function.
+obtained, you can invoke it using the `Invoke` method.
 
 ### Choosing Between Early and Late Binding
 

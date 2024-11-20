@@ -54,6 +54,7 @@ class PieceSet {
     // Create piece rotations
     rotateAll();
   }
+
   static const numRotations = 4;
   static const numPieces = 7;
 

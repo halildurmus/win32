@@ -3,34 +3,21 @@
 // C++ implementation can be found here:
 // https://learn.microsoft.com/windows/win32/sensorsapi/retrieving-a-sensor
 
-import 'dart:ffi';
-
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 void main() {
-  CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
+  CoInitializeEx(COINIT_MULTITHREADED);
 
-  final sensorManager = SensorManager.createInstance();
+  final sensorManager = createInstance<ISensorManager>(SensorManager);
 
   // Replace this with the sensor category you're looking for.
-  final sampleDateTimeSensorCategory = GUIDFromString(
-    '{062A5C3B-44C1-4ad1-8EFC-0F65B2E4AD48}',
+  final sampleDateTimeSensorCategory = Guid(
+    '{062a5c3b-44c1-4ad1-8efc-0f65b2e4ad48}',
   );
-  final pSensorsColl = calloc<Pointer<COMObject>>();
-  final hr = sensorManager.getSensorsByCategory(
-    sampleDateTimeSensorCategory,
-    pSensorsColl,
+  final coll = sensorManager.getSensorsByCategory(
+    sampleDateTimeSensorCategory.ptr,
   );
-  if (FAILED(hr)) throw WindowsException(hr);
-
-  final coll = ISensorCollection(pSensorsColl.cast());
-  final pCount = calloc<Uint32>();
-  if (coll.getCount(pCount) > 1) {
+  if (coll != null && coll.getCount() > 1) {
     print('Found items');
   }
-
-  free(pCount);
-  free(pSensorsColl);
-  free(sampleDateTimeSensorCategory);
 }

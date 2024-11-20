@@ -1,4 +1,4 @@
-// Enumerates device interfaces that support Bluetooth LE
+// Example demonstrating Bluetooth LE device and GATT service enumeration.
 
 import 'dart:ffi';
 
@@ -6,127 +6,114 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 void main() {
-  final devicePaths = using((arena) {
-    final interfaceGuid = arena<GUID>()
-      ..ref.setGUID(GUID_BLUETOOTHLE_DEVICE_INTERFACE);
-
+  try {
+    final interfaceGuid = GUID_BLUETOOTHLE_DEVICE_INTERFACE;
     final hDevInfo = SetupDiGetClassDevs(
-      interfaceGuid,
-      nullptr,
-      NULL,
+      interfaceGuid.ptr,
+      null,
+      null,
       DIGCF_PRESENT | DIGCF_DEVICEINTERFACE,
-    );
-    try {
-      return devicesByInterface(hDevInfo, interfaceGuid).toList();
-    } finally {
+    ).value;
+    final devicePaths = devicesByInterface(hDevInfo, interfaceGuid).toList();
+    if (devicePaths.isEmpty) {
+      print('No Bluetooth LE devices found.');
       SetupDiDestroyDeviceInfoList(hDevInfo);
+      return;
     }
-  });
+    SetupDiDestroyDeviceInfoList(hDevInfo);
 
-  for (final path in devicePaths) {
-    final pathPtr = path.toNativeUtf16();
-    final hDevice = CreateFile(
-      pathPtr,
-      0,
-      FILE_SHARE_READ | FILE_SHARE_WRITE,
-      nullptr,
-      OPEN_EXISTING,
-      FILE_ATTRIBUTE_NORMAL,
-      NULL,
-    );
-    if (hDevice == INVALID_HANDLE_VALUE) {
-      final error = GetLastError();
-      print('CreateFile - Get Device Handle error: $error');
-      throw WindowsException(error);
-    }
+    for (final path in devicePaths) {
+      final fileName = w(path);
+      final Win32Result(value: hDevice, :error) = CreateFile(
+        fileName.ptr,
+        0,
+        FILE_SHARE_READ | FILE_SHARE_WRITE,
+        null,
+        OPEN_EXISTING,
+        FILE_ATTRIBUTE_NORMAL,
+        null,
+      );
+      if (hDevice == INVALID_HANDLE_VALUE) {
+        print('Error opening device: ${error.toHRESULT()}');
+        continue;
+      }
 
-    try {
-      print('BLUETOOTHLE_DEVICE - $path');
-      printServicesByDevice(hDevice);
-    } finally {
-      CloseHandle(hDevice);
-      free(pathPtr);
+      try {
+        print('\nBluetooth LE Device: $path');
+        print('GATT Services:');
+        printServicesByDevice(hDevice);
+      } finally {
+        CloseHandle(hDevice);
+      }
     }
+  } catch (e) {
+    print('Error: $e');
   }
 }
 
-Iterable<String> devicesByInterface(
-  int hDevInfo,
-  Pointer<GUID> interfaceGuid,
-) sync* {
-  final requiredSizePtr = calloc<DWORD>();
-  final deviceInterfaceDataPtr = calloc<SP_DEVICE_INTERFACE_DATA>()
+Iterable<String> devicesByInterface(int hDevInfo, Guid interfaceGuid) sync* {
+  final requiredSizePtr = loggingCalloc<DWORD>();
+  final deviceInterfaceDataPtr = loggingCalloc<SP_DEVICE_INTERFACE_DATA>()
     ..ref.cbSize = sizeOf<SP_DEVICE_INTERFACE_DATA>();
 
   try {
     for (
       var index = 0;
       SetupDiEnumDeviceInterfaces(
-            hDevInfo,
-            nullptr,
-            interfaceGuid,
-            index,
-            deviceInterfaceDataPtr,
-          ) ==
-          TRUE;
+        hDevInfo,
+        null,
+        interfaceGuid.ptr,
+        index,
+        deviceInterfaceDataPtr,
+      ).value;
       index++
     ) {
-      // final hr =
-      SetupDiGetDeviceInterfaceDetail(
+      final Win32Result(:value, :error) = SetupDiGetDeviceInterfaceDetail(
         hDevInfo,
         deviceInterfaceDataPtr,
-        nullptr,
+        null,
         0,
         requiredSizePtr,
-        nullptr,
+        null,
       );
+      if (!value) {
+        print(
+          'SetupDiGetDeviceInterfaceDetail - Get Size error: ${error.toHRESULT()}',
+        );
+        continue;
+      }
 
-      // TODO(halildurmus): Uncomment when
-      // https://github.com/halildurmus/win32/issues/384 is fixed.
-
-      // if (hr != TRUE) {
-      //   final error = GetLastError();
-      //   if (error != ERROR_INSUFFICIENT_BUFFER) {
-      //     print(
-      //         'SetupDiGetDeviceInterfaceDetail - Get Data Size error: $error');
-      //     throw WindowsException(error);
-      //   }
-      // }
-
-      final detailDataMemoryPtr = calloc<BYTE>(requiredSizePtr.value);
+      final deviceInterfaceDetailDataPtr =
+          loggingCalloc<BYTE>(
+              requiredSizePtr.value,
+            ).cast<SP_DEVICE_INTERFACE_DETAIL_DATA>()
+            ..ref.cbSize = sizeOf<SP_DEVICE_INTERFACE_DETAIL_DATA>();
 
       try {
-        final deviceInterfaceDetailDataPtr =
-            Pointer<SP_DEVICE_INTERFACE_DETAIL_DATA_>.fromAddress(
-              detailDataMemoryPtr.address,
-            );
-        deviceInterfaceDetailDataPtr.ref.cbSize =
-            sizeOf<SP_DEVICE_INTERFACE_DETAIL_DATA_>();
-
-        final hr = SetupDiGetDeviceInterfaceDetail(
+        final Win32Result(:value, :error) = SetupDiGetDeviceInterfaceDetail(
           hDevInfo,
           deviceInterfaceDataPtr,
           deviceInterfaceDetailDataPtr,
           requiredSizePtr.value,
-          nullptr,
-          nullptr,
+          null,
+          null,
         );
-        if (hr != TRUE) {
+        if (!value) {
           print(
-            'SetupDiGetDeviceInterfaceDetail - Get Data error: ${GetLastError()}',
+            'SetupDiGetDeviceInterfaceDetail - Get Data error: ${error.toHRESULT()}',
           );
           continue;
         }
 
         yield deviceInterfaceDetailDataPtr.ref.DevicePath;
       } finally {
-        free(detailDataMemoryPtr);
+        free(deviceInterfaceDetailDataPtr);
       }
     }
 
     final error = GetLastError();
-    if (error != S_OK && error != ERROR_NO_MORE_ITEMS) {
-      throw WindowsException(error);
+    if (error != ERROR_SUCCESS && error != ERROR_NO_MORE_ITEMS) {
+      throw WindowsException(error.toHRESULT());
     }
   } finally {
     free(requiredSizePtr);
@@ -134,41 +121,27 @@ Iterable<String> devicesByInterface(
   }
 }
 
-// -----------------------------------------------------------------------------
-// GATT Security and Other Flag-related Facilities
-// -----------------------------------------------------------------------------
-
+/// Retrieves and displays all GATT services available on a device.
 void printServicesByDevice(int hDevice) {
-  int hr;
   using((arena) {
     final bufferCountPtr = arena<USHORT>();
-    hr = BluetoothGATTGetServices(
+    BluetoothGATTGetServices(
       hDevice,
       0,
-      nullptr,
+      null,
       bufferCountPtr,
       BLUETOOTH_GATT_FLAG_NONE,
     );
-    if (hr != HRESULT_FROM_WIN32(ERROR_MORE_DATA)) {
-      print('BluetoothGATTGetServices - Get Buffer Count error: $hr');
-      throw WindowsException(hr);
-    }
-
     final bufferPtr = arena<BTH_LE_GATT_SERVICE>(bufferCountPtr.value);
     final numberPtr = arena<USHORT>();
 
-    hr = BluetoothGATTGetServices(
+    BluetoothGATTGetServices(
       hDevice,
       bufferCountPtr.value,
       bufferPtr,
       numberPtr,
       BLUETOOTH_GATT_FLAG_NONE,
     );
-
-    if (hr != S_OK) {
-      print('BluetoothGATTGetServices - Get Buffer Data error: $hr');
-      throw WindowsException(hr);
-    }
 
     for (var i = 0; i < numberPtr.value; i++) {
       final servicePtr = Pointer<BTH_LE_GATT_SERVICE>.fromAddress(
@@ -180,33 +153,26 @@ void printServicesByDevice(int hDevice) {
   });
 }
 
+/// Retrieves and displays all characteristics for a GATT service.
 void printCharacteristicsByService(
   int hDevice,
   Pointer<BTH_LE_GATT_SERVICE> servicePtr,
 ) {
-  int hr;
   using((arena) {
     final bufferCountPtr = arena<USHORT>();
-    hr = BluetoothGATTGetCharacteristics(
+    BluetoothGATTGetCharacteristics(
       hDevice,
       servicePtr,
       0,
-      nullptr,
+      null,
       bufferCountPtr,
       BLUETOOTH_GATT_FLAG_NONE,
     );
-    if (hr != HRESULT_FROM_WIN32(ERROR_MORE_DATA)) {
-      if (hr == HRESULT_FROM_WIN32(ERROR_NOT_FOUND)) {
-        return;
-      }
-      print('BluetoothGATTGetCharacteristics - Get Buffer Count error: $hr');
-      throw WindowsException(hr);
-    }
 
     final bufferPtr = arena<BTH_LE_GATT_CHARACTERISTIC>(bufferCountPtr.value);
     final numberPtr = arena<USHORT>();
 
-    hr = BluetoothGATTGetCharacteristics(
+    BluetoothGATTGetCharacteristics(
       hDevice,
       servicePtr,
       bufferCountPtr.value,
@@ -214,10 +180,6 @@ void printCharacteristicsByService(
       numberPtr,
       BLUETOOTH_GATT_FLAG_NONE,
     );
-    if (hr != S_OK) {
-      print('BluetoothGATTGetCharacteristics - Get Buffer Data error: $hr');
-      throw WindowsException(hr);
-    }
 
     for (var i = 0; i < numberPtr.value; i++) {
       final characteristicPtr = Pointer<BTH_LE_GATT_CHARACTERISTIC>.fromAddress(
@@ -231,33 +193,26 @@ void printCharacteristicsByService(
   });
 }
 
+/// Retrieves and displays all descriptors for a GATT characteristic.
 void printDescriptorsByCharacteristic(
   int hDevice,
   Pointer<BTH_LE_GATT_CHARACTERISTIC> characteristicPtr,
 ) {
-  int hr;
   using((arena) {
     final bufferCountPtr = arena<USHORT>();
-    hr = BluetoothGATTGetDescriptors(
+    BluetoothGATTGetDescriptors(
       hDevice,
       characteristicPtr,
       0,
-      nullptr,
+      null,
       bufferCountPtr,
       BLUETOOTH_GATT_FLAG_NONE,
     );
-    if (hr != HRESULT_FROM_WIN32(ERROR_MORE_DATA)) {
-      if (hr == HRESULT_FROM_WIN32(ERROR_NOT_FOUND)) {
-        return;
-      }
-      print('BluetoothGATTGetDescriptors - Get Buffer Count error: $hr');
-      throw WindowsException(hr);
-    }
 
     final bufferPtr = arena<BTH_LE_GATT_DESCRIPTOR>(bufferCountPtr.value);
     final numberPtr = arena<USHORT>();
 
-    hr = BluetoothGATTGetDescriptors(
+    BluetoothGATTGetDescriptors(
       hDevice,
       characteristicPtr,
       bufferCountPtr.value,
@@ -265,10 +220,6 @@ void printDescriptorsByCharacteristic(
       numberPtr,
       BLUETOOTH_GATT_FLAG_NONE,
     );
-    if (hr != S_OK) {
-      print('BluetoothGATTGetDescriptors - Get Buffer Data error: $hr');
-      throw WindowsException(hr);
-    }
 
     for (var i = 0; i < numberPtr.value; i++) {
       final descriptorPtr = Pointer<BTH_LE_GATT_DESCRIPTOR>.fromAddress(

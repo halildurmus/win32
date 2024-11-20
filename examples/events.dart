@@ -4,28 +4,22 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 void main() {
-  // Workaround for Dart FFI issue: Call GetLastError once before calling any
-  // Win32 API functions that might set the error code.
-  GetLastError();
-
   using((arena) {
-    // The name of the channel that contains the events that you want to query.
-    final channelPath = 'Microsoft-Windows-WindowsUpdateClient/Operational'
-        .toNativeUtf16(allocator: arena);
+    // The path of the channel that contains the events that you want to query.
+    final channelPath = w('Microsoft-Windows-WindowsUpdateClient/Operational');
     // The query that specifies the types of events that you want to retrieve.
     // In this case, we are querying for events with EventID 26. To receive all
     // events in the channel, set it to '*'.
-    final query = 'Event/System[EventID=26]'.toNativeUtf16(allocator: arena);
+    final query = w('Event/System[EventID=26]');
 
-    final hResults = EvtQuery(
+    final Win32Result(value: hResults, :error) = EvtQuery(
       NULL,
-      channelPath,
-      query,
+      channelPath.ptr,
+      query.ptr,
       EvtQueryChannelPath | EvtQueryForwardDirection,
     );
 
     if (hResults == NULL) {
-      final error = GetLastError();
       if (error == ERROR_EVT_CHANNEL_NOT_FOUND) {
         print('The specified event channel was not found.');
       } else if (error == ERROR_EVT_INVALID_QUERY) {
@@ -53,8 +47,16 @@ void printResults(int hResults, Arena arena, {int maxEvents = 10}) {
 
   while (true) {
     // Get a block of events from the result set.
-    if (EvtNext(hResults, maxEvents, events, INFINITE, 0, returned) == FALSE) {
-      final error = GetLastError();
+    final Win32Result(:value, :error) = EvtNext(
+      hResults,
+      maxEvents,
+      events,
+      INFINITE,
+      0,
+      returned,
+    );
+
+    if (!value) {
       if (error != ERROR_NO_MORE_ITEMS) {
         print('EvtNext failed with $error.');
       }
@@ -68,7 +70,7 @@ void printResults(int hResults, Arena arena, {int maxEvents = 10}) {
 
     for (var i = 0; i < returned.value; i++) {
       // First call to get buffer size needed.
-      final result = EvtRender(
+      var Win32Result(:value, :error) = EvtRender(
         NULL,
         events[i],
         EvtRenderEventXml,
@@ -78,31 +80,30 @@ void printResults(int hResults, Arena arena, {int maxEvents = 10}) {
         propertyCount,
       );
 
-      final error = GetLastError();
-      if (result == FALSE && error != ERROR_INSUFFICIENT_BUFFER) {
+      if (!value && error != ERROR_INSUFFICIENT_BUFFER) {
         print('EvtRender failed with $error.');
         continue;
       }
 
       final bufferSizeInBytes = bufferUsed.value;
-      final buffer = arena<Uint16>(bufferSizeInBytes ~/ 2);
+      final buffer = Pwstr.allocate(bufferSizeInBytes ~/ 2);
 
-      if (EvtRender(
-            NULL,
-            events[i],
-            EvtRenderEventXml,
-            bufferSizeInBytes,
-            buffer,
-            bufferUsed,
-            propertyCount,
-          ) ==
-          FALSE) {
-        final error = GetLastError();
+      Win32Result(:value, :error) = EvtRender(
+        NULL,
+        events[i],
+        EvtRenderEventXml,
+        bufferSizeInBytes,
+        buffer.ptr,
+        bufferUsed,
+        propertyCount,
+      );
+
+      if (!value) {
         print('EvtRender failed with $error.');
         continue;
       }
 
-      final xml = buffer.cast<Utf16>().toDartString();
+      final xml = buffer.toDartString();
       print('Event XML:\n$xml\n');
 
       EvtClose(events[i]);

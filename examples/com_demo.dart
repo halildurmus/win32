@@ -1,68 +1,42 @@
-// Demonstrates COM object creation and casting from Dart
-
-import 'dart:ffi';
+// Example demonstrating COM object creation, interface casting, and method calls.
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 void main() {
-  final pTitle = 'Dart Open File Dialog'.toNativeUtf16();
+  CoInitializeEx(COINIT_MULTITHREADED);
 
-  // Initialize COM
-  var hr = CoInitializeEx(
-    nullptr,
-    COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE,
-  );
-  if (FAILED(hr)) throw WindowsException(hr);
+  // Create an instance of the FileOpenDialog class with IFileDialog interface.
+  final fileDialog = createInstance<IFileDialog>(FileOpenDialog);
 
-  // Create an instance of the FileOpenDialog class w/ IFileDialog interface
-  final fileDialog = FileOpenDialog.createInstance();
-  print(
-    'Created fileDialog.\n'
-    'fileDialog.ptr is  ${fileDialog.ptr.address.toHexString(64)}',
-  );
-  print('refCount is now ${refCount(fileDialog)}\n');
+  // Cast the IFileDialog interface to an IFileDialog2 interface.
+  final fileDialog2 = fileDialog.cast<IFileDialog2>();
 
-  // QueryInterface for the IFileDialog2 interface, which is inherited from
-  // IFileDialog
-  final fileDialog2 = IFileDialog2.from(fileDialog);
-  print(
-    'Get IFileDialog2 interface.\n'
-    'fileDialog2.ptr is ${fileDialog2.ptr.address.toHexString(64)}',
-  );
-  print('refCount is now ${refCount(fileDialog2)}\n');
+  // Change the title of the dialog.
+  final title = w('Dart Open File Dialog');
+  fileDialog2.setTitle(title.ptr);
 
-  // Use IFileDialog2.SetTitle
-  hr = fileDialog2.setTitle(pTitle);
-  if (FAILED(hr)) throw WindowsException(hr);
+  // Cast the IFileDialog2 interface to an IModalWindow interface.
+  final modalWindow = fileDialog2.cast<IModalWindow>();
 
-  // QueryInterface for the IModalWindow interface, just to demonstrate it.
-  final modalWindow = IModalWindow.from(fileDialog2);
-  print(
-    'Get IModalWindow interface.\n'
-    'modalWindow.ptr is ${modalWindow.ptr.address.toHexString(64)}',
-  );
-  print('refCount is now ${refCount(modalWindow)}\n');
+  // Cast the IModalWindow interface to an IFileOpenDialog interface.
+  final fileOpenDialog = modalWindow.cast<IFileOpenDialog>();
 
-  // Now get the IFileOpenDialog interface.
-  final fileOpenDialog = IFileOpenDialog.from(modalWindow);
-  print(
-    'Get IFileOpenDialog interface.\n'
-    'fileOpenDialog.ptr is ${fileOpenDialog.ptr.address.toHexString(64)}',
-  );
-  print('refCount is now ${refCount(fileOpenDialog)}\n');
-
-  // Use IFileOpenDialog.Show, which is inherited from IModalWindow
-  hr = fileOpenDialog.show(NULL);
-  if (FAILED(hr)) {
-    if (hr == HRESULT_FROM_WIN32(ERROR_CANCELLED)) {
+  try {
+    // Launch the dialog.
+    fileOpenDialog.show(null);
+    // Get the selected file.
+    final result = fileOpenDialog.getResult();
+    if (result != null) {
+      final displayName = result.getDisplayName(SIGDN_FILESYSPATH);
+      print('Selected file: ${displayName.toDartString()}');
+      free(displayName);
+    }
+  } on WindowsException catch (e) {
+    if (e.hr == ERROR_CANCELLED.toHRESULT()) {
       print('Dialog cancelled.');
     } else {
-      throw WindowsException(hr);
+      rethrow;
     }
   }
-
-  // Clear up
-  free(pTitle);
-  print('All done!');
 }

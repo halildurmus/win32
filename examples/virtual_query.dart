@@ -1,32 +1,30 @@
 import 'dart:ffi';
 import 'dart:io';
 
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-// Virtual Query Example
 void main() {
   // Allocate a buffer to hold information about allocated memory
-  final pMBI = calloc<MEMORY_BASIC_INFORMATION>();
+  final pMBI = loggingCalloc<MEMORY_BASIC_INFORMATION>();
 
   // Allocate some memory and return a pointer to the base address.
   final baseAddress = VirtualAlloc(
-    nullptr, // Windows determines starting address
+    null, // Windows determines starting address
     8, // bytes allocated
     MEM_COMMIT,
     PAGE_EXECUTE_READWRITE,
-  );
+  ).value;
 
   // Query information about the allocated memory
-  final retValue = VirtualQuery(
+  final Win32Result(:value, :error) = VirtualQuery(
     baseAddress,
     pMBI,
     sizeOf<MEMORY_BASIC_INFORMATION>(),
   );
 
-  if (retValue == 0) {
-    print('VirtualQuery function failed.');
-    exit(GetLastError());
+  if (value == 0) {
+    print('VirtualQuery function failed with ${error.toHRESULT()}');
+    exit(error);
   }
 
   print('Region Size: ${pMBI.ref.RegionSize}');

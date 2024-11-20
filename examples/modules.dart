@@ -1,39 +1,46 @@
-// Enumerates all processes and modules loaded within the process
+// Enumerates all processes and modules loaded within the process.
 
 import 'dart:ffi';
 import 'dart:io';
 
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-int printModules(int processID) {
+void printModules(int processID) {
   // Print the process identifier.
   print('\nProcess ID: $processID');
 
   // Get a handle to the process.
   final hProcess = OpenProcess(
     PROCESS_QUERY_INFORMATION | PROCESS_VM_READ,
-    FALSE,
+    false,
     processID,
-  );
+  ).value;
 
-  if (hProcess == 0) {
-    return 1;
-  }
+  if (hProcess == NULL) return;
 
   // Get a list of all the modules in this process.
-  final hMods = calloc<HMODULE>(1024);
-  final cbNeeded = calloc<DWORD>();
+  final hMods = loggingCalloc<HMODULE>(1024);
+  final cbNeeded = loggingCalloc<DWORD>();
 
-  if (EnumProcessModules(hProcess, hMods, sizeOf<HMODULE>() * 1024, cbNeeded) ==
-      1) {
+  if (EnumProcessModules(
+    hProcess,
+    hMods,
+    sizeOf<HMODULE>() * 1024,
+    cbNeeded,
+  ).value) {
     for (var i = 0; i < (cbNeeded.value ~/ sizeOf<HMODULE>()); i++) {
-      final szModName = wsalloc(MAX_PATH);
+      final szModName = Pwstr.allocate(MAX_PATH);
 
       // Get the full path to the module's file.
       final hModule = (hMods + i).value;
 
-      if (GetModuleFileNameEx(hProcess, hModule, szModName, MAX_PATH) != 0) {
+      if (GetModuleFileNameEx(
+            hProcess,
+            hModule,
+            szModName.ptr,
+            MAX_PATH,
+          ).value !=
+          0) {
         final hexModuleValue = hModule
             .toRadixString(16)
             .padLeft(sizeOf<HMODULE>(), '0')
@@ -42,7 +49,6 @@ int printModules(int processID) {
         // Print the module name and handle value.
         print('\t${szModName.toDartString()} (0x$hexModuleValue)');
       }
-      free(szModName);
     }
   }
 
@@ -51,16 +57,14 @@ int printModules(int processID) {
 
   // Release the handle to the process.
   CloseHandle(hProcess);
-
-  return 0;
 }
 
 void main() {
-  final aProcesses = calloc<DWORD>(1024);
-  final cbNeeded = calloc<DWORD>();
+  final aProcesses = loggingCalloc<DWORD>(1024);
+  final cbNeeded = loggingCalloc<DWORD>();
 
   // Get the list of process identifiers.
-  if (EnumProcesses(aProcesses, sizeOf<DWORD>() * 1024, cbNeeded) == 0) {
+  if (!EnumProcesses(aProcesses, sizeOf<DWORD>() * 1024, cbNeeded).value) {
     print('EnumProcesses failed.');
     exit(1);
   }
@@ -72,4 +76,7 @@ void main() {
   for (var i = 0; i < cProcesses; i++) {
     printModules(aProcesses[i]);
   }
+
+  free(aProcesses);
+  free(cbNeeded);
 }

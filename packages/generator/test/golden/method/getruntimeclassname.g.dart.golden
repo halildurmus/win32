@@ -1,0 +1,18 @@
+IInspectable.GetRuntimeClassName|
+/// Gets the fully qualified name of the current Windows Runtime object.
+///
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/inspectable/nf-inspectable-iinspectable-getruntimeclassname>.
+int getRuntimeClassName() {
+  final className = loggingCalloc<HSTRING>();
+  final hr$ = HRESULT(_GetRuntimeClassNameFn(ptr, className));
+  if (hr$.isError) {
+    free(className);
+    throw WindowsException(hr$);
+  }
+  final result$ = className.value;
+  free(className);
+  return result$;
+}

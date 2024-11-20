@@ -1,0 +1,3 @@
+S_OK|
+/// Represents the HRESULT value `0x0` (`0`).
+const S_OK = HRESULT(0x0);

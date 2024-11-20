@@ -15,16 +15,16 @@ abstract class TaskManager {
   ///
   /// Returns `true` if the task was successfully started; otherwise, `false`.
   static bool run(String path) {
-    final lpFile = path.toNativeUtf16();
+    final operation = w('open');
+    final file = w(path);
     final result = ShellExecute(
-      0,
-      'open'.toNativeUtf16(),
-      lpFile,
-      nullptr,
-      nullptr,
+      null,
+      operation.ptr,
+      file.ptr,
+      null,
+      null,
       SW_SHOWNORMAL,
     );
-    free(lpFile);
     return result > 32;
   }
 
@@ -37,7 +37,7 @@ abstract class TaskManager {
     final buffer = arena<Uint32>(1024);
     final cbNeeded = arena<Uint32>();
 
-    if (EnumProcesses(buffer, sizeOf<Uint32>() * 1024, cbNeeded) == FALSE) {
+    if (!EnumProcesses(buffer, sizeOf<Uint32>() * 1024, cbNeeded)) {
       return null;
     }
 
@@ -47,7 +47,7 @@ abstract class TaskManager {
     for (final pid in processIds) {
       final hProcess = OpenProcess(
         PROCESS_QUERY_INFORMATION | PROCESS_VM_READ,
-        FALSE,
+        false,
         pid,
       );
 
@@ -56,33 +56,38 @@ abstract class TaskManager {
         final cbNeededMod = arena<Uint32>();
 
         if (EnumProcessModules(
-              hProcess,
-              hModule,
-              sizeOf<HMODULE>(),
-              cbNeededMod,
-            ) !=
-            0) {
-          final moduleName = arena<WCHAR>(MAX_PATH).cast<Utf16>();
+          hProcess,
+          hModule,
+          sizeOf<HMODULE>(),
+          cbNeededMod,
+        )) {
+          final moduleName = Pwstr.allocate(MAX_PATH);
 
-          if (GetModuleBaseName(hProcess, hModule.value, moduleName, MAX_PATH) >
+          if (GetModuleBaseName(
+                hProcess,
+                hModule.value,
+                moduleName.ptr,
+                MAX_PATH,
+              ) >
               0) {
             final name = moduleName.toDartString();
-            final filePath = arena<WCHAR>(MAX_PATH).cast<Utf16>();
+            final filePath = Pwstr.allocate(MAX_PATH);
             final result = GetModuleFileNameEx(
               hProcess,
               hModule.value,
-              filePath,
+              filePath.ptr,
               MAX_PATH,
             );
             final path = result != 0 ? filePath.toDartString() : null;
+
             final description = path != null
                 ? (_getFileDescription(path) ?? name)
                 : name;
-            final iconAsBytes = path != null
-                ? (_extractIcon(path) ?? Uint8List(0))
-                : Uint8List(0);
+
             final task = Task(
-              iconAsBytes: iconAsBytes,
+              iconAsBytes: path != null
+                  ? (_extractIcon(path) ?? Uint8List(0))
+                  : Uint8List(0),
               name: name,
               pid: pid,
               description: description,
@@ -103,39 +108,32 @@ abstract class TaskManager {
   /// Returns `true` if the task was successfully terminated; otherwise,
   /// `false`.
   static bool terminate(int pid) {
-    final handle = OpenProcess(PROCESS_TERMINATE, FALSE, pid);
+    final handle = OpenProcess(PROCESS_TERMINATE, false, pid);
     if (handle == NULL) return false;
 
     try {
-      return TerminateProcess(handle, 0) == TRUE;
+      return TerminateProcess(handle, 0);
     } finally {
       CloseHandle(handle);
     }
   }
 
   static String? _getFileDescription(String path) => using((arena) {
-    final lptstrFileName = path.toNativeUtf16(allocator: arena);
+    final lptstrFileName = w(path);
     final handle = arena<Uint32>();
-    final size = GetFileVersionInfoSize(lptstrFileName, handle);
+    final size = GetFileVersionInfoSize(lptstrFileName.ptr, handle);
     if (size == 0) return null;
 
     final versionInfo = arena<Uint8>(size);
-    if (GetFileVersionInfo(lptstrFileName, 0, size, versionInfo) == FALSE) {
+    if (!GetFileVersionInfo(lptstrFileName.ptr, size, versionInfo)) {
       return null;
     }
 
-    final lplpBuffer = arena<Pointer<Utf16>>();
+    final lplpBuffer = arena<PWSTR>();
     final puLen = arena<Uint32>();
 
-    if (VerQueryValue(
-          versionInfo,
-          r'\StringFileInfo\040904b0\FileDescription'.toNativeUtf16(
-            allocator: arena,
-          ),
-          lplpBuffer.cast(),
-          puLen,
-        ) ==
-        FALSE) {
+    final subBlock = w(r'\StringFileInfo\040904b0\FileDescription');
+    if (!VerQueryValue(versionInfo, subBlock.ptr, lplpBuffer, puLen)) {
       return null;
     }
 
@@ -145,13 +143,10 @@ abstract class TaskManager {
   });
 
   static Uint8List? _extractIcon(String path) => using((arena) {
-    final filePath = path.toNativeUtf16(allocator: arena);
-    final instance = GetModuleHandle(nullptr);
+    final filePath = w(path);
     final iconID = arena<WORD>();
-
-    final hIcon = ExtractAssociatedIcon(instance, filePath, iconID);
+    final hIcon = ExtractAssociatedIcon(filePath.ptr, iconID);
     if (hIcon == NULL) return null;
-
     final iconData = _getIconData(hIcon);
     DestroyIcon(hIcon);
     return iconData;
@@ -161,13 +156,13 @@ abstract class TaskManager {
     arena,
   ) {
     final buffer = <int>[];
-    final hdc = CreateCompatibleDC(NULL);
+    final hdc = CreateCompatibleDC(null);
 
     final icoHeader = [0, 0, 1, 0, 1, 0];
     buffer.addAll(icoHeader);
 
     final iconInfo = arena<ICONINFO>();
-    if (GetIconInfo(hIcon, iconInfo) == 0) {
+    if (!GetIconInfo(hIcon, iconInfo)) {
       DeleteDC(hdc);
       return null;
     }
@@ -182,7 +177,7 @@ abstract class TaskManager {
           iconInfo.ref.hbmColor,
           0,
           0,
-          nullptr,
+          null,
           bmInfo,
           DIB_RGB_COLORS,
         ) ==
@@ -231,7 +226,7 @@ abstract class TaskManager {
               iconInfo.ref.hbmMask,
               0,
               0,
-              nullptr,
+              null,
               maskInfo,
               DIB_RGB_COLORS,
             ) ==

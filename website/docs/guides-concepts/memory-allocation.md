@@ -23,7 +23,7 @@ the heap.
 Here's a simple example:
 
 ```dart
-final pBuffer = calloc<Uint8>(256);
+final pBuffer = loggingCalloc<Uint8>(256);
 ```
 
 This snippet allocates **256 bytes** and returns a `Pointer<Uint8>` object,

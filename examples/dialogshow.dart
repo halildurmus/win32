@@ -1,85 +1,71 @@
-// Opens the File Open dialog box and shows results
+// Example demonstrating how to create a file open dialog.
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-void main() {
-  var hr = CoInitializeEx(
-    nullptr,
-    COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE,
-  );
+/// Configures the file dialog with custom options and filters.
+void _configureFileDialog(IFileOpenDialog fileDialog) {
+  var options = fileDialog.getOptions();
+  options = FOS_FORCEFILESYSTEM | options;
+  final defaultExtension = w('txt;csv');
+  final fileNameLabel = w('Custom Label:');
+  final title = w('Custom Title');
+  final okButtonLabel = w('Go');
+  fileDialog
+    ..setOptions(options)
+    ..setDefaultExtension(defaultExtension.ptr)
+    ..setFileNameLabel(fileNameLabel.ptr)
+    ..setTitle(title.ptr)
+    ..setOkButtonLabel(okButtonLabel.ptr);
 
-  if (SUCCEEDED(hr)) {
-    final fileDialog = FileOpenDialog.createInstance();
+  // Set file type filters.
+  final rgSpec = loggingCalloc<COMDLG_FILTERSPEC>(3);
+  final jpgName = w('JPEG Files');
+  final jpgSpec = w('*.jpg;*.jpeg');
+  final bmpName = w('Bitmap Files');
+  final bmpSpec = w('*.bmp');
+  final allName = w('All Files (*.*)');
+  final allSpec = w('*.*');
+  rgSpec[0]
+    ..pszName = jpgName.ptr
+    ..pszSpec = jpgSpec.ptr;
+  rgSpec[1]
+    ..pszName = bmpName.ptr
+    ..pszSpec = bmpSpec.ptr;
+  rgSpec[2]
+    ..pszName = allName.ptr
+    ..pszSpec = allSpec.ptr;
+  fileDialog.setFileTypes(3, rgSpec);
+  free(rgSpec);
+}
 
-    final pfos = calloc<Uint32>();
-    hr = fileDialog.getOptions(pfos);
-    if (!SUCCEEDED(hr)) throw WindowsException(hr);
-
-    final options = pfos.value | FOS_FORCEFILESYSTEM;
-    hr = fileDialog.setOptions(options);
-    if (!SUCCEEDED(hr)) throw WindowsException(hr);
-
-    final defaultExtensions = TEXT('txt;csv');
-    hr = fileDialog.setDefaultExtension(defaultExtensions);
-    if (!SUCCEEDED(hr)) throw WindowsException(hr);
-    free(defaultExtensions);
-
-    final fileNameLabel = TEXT('Custom Label:');
-    hr = fileDialog.setFileNameLabel(fileNameLabel);
-    if (!SUCCEEDED(hr)) throw WindowsException(hr);
-    free(fileNameLabel);
-
-    final title = TEXT('Custom Title');
-    hr = fileDialog.setTitle(title);
-    if (!SUCCEEDED(hr)) throw WindowsException(hr);
-    free(title);
-
-    final okButtonLabel = TEXT('Go');
-    hr = fileDialog.setOkButtonLabel(okButtonLabel);
-    if (!SUCCEEDED(hr)) throw WindowsException(hr);
-    free(okButtonLabel);
-
-    final rgSpec = calloc<COMDLG_FILTERSPEC>(3);
-    rgSpec[0]
-      ..pszName = TEXT('JPEG Files')
-      ..pszSpec = TEXT('*.jpg;*.jpeg');
-    rgSpec[1]
-      ..pszName = TEXT('Bitmap Files')
-      ..pszSpec = TEXT('*.bmp');
-    rgSpec[2]
-      ..pszName = TEXT('All Files (*.*)')
-      ..pszSpec = TEXT('*.*');
-    hr = fileDialog.setFileTypes(3, rgSpec);
-    if (!SUCCEEDED(hr)) throw WindowsException(hr);
-
-    hr = fileDialog.show(NULL);
-    if (!SUCCEEDED(hr)) {
-      if (hr == HRESULT_FROM_WIN32(ERROR_CANCELLED)) {
-        print('Dialog cancelled.');
-      } else {
-        throw WindowsException(hr);
-      }
-    } else {
-      final ppsi = calloc<COMObject>();
-      hr = fileDialog.getResult(ppsi.cast());
-      if (!SUCCEEDED(hr)) throw WindowsException(hr);
-
-      final item = IShellItem(ppsi);
-      final pathPtr = calloc<Pointer<Utf16>>();
-      hr = item.getDisplayName(SIGDN_FILESYSPATH, pathPtr);
-      if (!SUCCEEDED(hr)) throw WindowsException(hr);
-
-      // MAX_PATH may truncate early if long filename support is enabled
-      final path = pathPtr.value.toDartString();
-
-      print('Result: $path');
-    }
-  } else {
-    throw WindowsException(hr);
+/// Handles the dialog result and returns the selected file path.
+String? _handleDialogResult(IFileOpenDialog fileDialog) {
+  fileDialog.show(null);
+  final item = fileDialog.getResult();
+  if (item != null) {
+    final displayName = item.getDisplayName(SIGDN_FILESYSPATH);
+    return displayName.toDartString();
   }
+  return null;
+}
 
-  print('All done!');
+void main() {
+  CoInitializeEx(COINIT_MULTITHREADED);
+  final fileDialog = createInstance<IFileOpenDialog>(FileOpenDialog);
+  try {
+    _configureFileDialog(fileDialog);
+    final selectedPath = _handleDialogResult(fileDialog);
+    if (selectedPath != null) {
+      print('Selected file: $selectedPath');
+    }
+  } on WindowsException catch (e) {
+    if (e.hr == ERROR_CANCELLED.toHRESULT()) {
+      print('Dialog cancelled.');
+    } else {
+      rethrow;
+    }
+  }
 }

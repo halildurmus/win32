@@ -6,103 +6,90 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-void initializeCOM() {
-  // Initialize COM
-  var hr = CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
-  if (FAILED(hr)) throw WindowsException(hr);
+void initializeCom() {
+  CoInitializeEx(COINIT_MULTITHREADED);
 
   // Initialize security model
-  hr = CoInitializeSecurity(
-    nullptr,
+  CoInitializeSecurity(
+    null,
     -1, // COM negotiates service
-    nullptr, // Authentication services
-    nullptr, // Reserved
+    null, // Authentication services
     RPC_C_AUTHN_LEVEL_DEFAULT, // authentication
     RPC_C_IMP_LEVEL_IMPERSONATE, // Impersonation
-    nullptr, // Authentication info
+    null, // Authentication info
     EOAC_NONE, // Additional capabilities
-    nullptr, // Reserved
   );
-  if (FAILED(hr)) throw WindowsException(hr);
 }
 
-int connectWMI(WbemLocator pLoc, Pointer<Pointer<COMObject>> ppNamespace) {
+IWbemServices connectWMI(IWbemLocator pLoc) {
+  final networkResource = b(r'ROOT\CIMV2');
   // Connect to the root\cimv2 namespace with the current user and obtain
   // pointer pSvc to make IWbemServices calls.
-  var hr = pLoc.connectServer(
-    TEXT(r'ROOT\CIMV2'), // WMI namespace
-    nullptr, // User name
-    nullptr, // User password
-    nullptr, // Locale
-    NULL, // Security flags
-    nullptr, // Authority
-    nullptr, // Context object
-    ppNamespace, // IWbemServices proxy
-  );
-  if (FAILED(hr)) throw WindowsException(hr);
+  final services = pLoc.connectServer(
+    networkResource.ptr,
+    nullptr,
+    nullptr,
+    nullptr,
+    NULL,
+    nullptr,
+    null,
+  )!;
 
-  hr = CoSetProxyBlanket(
-    ppNamespace.value, // the proxy to set
+  CoSetProxyBlanket(
+    services, // the proxy to set
     RPC_C_AUTHN_WINNT, // authentication service
     RPC_C_AUTHZ_NONE, // authorization service
-    nullptr, // Server principal name
+    null, // Server principal name
     RPC_C_AUTHN_LEVEL_CALL, // authentication level
     RPC_C_IMP_LEVEL_IMPERSONATE, // impersonation level
-    nullptr, // client identity
+    null, // client identity
     EOAC_NONE, // proxy capabilities
   );
-  if (FAILED(hr)) throw WindowsException(hr);
-  return hr;
+
+  return services;
 }
 
 void main() {
   const processToMonitor = 'winlogon';
 
-  // Initialize COM
-  initializeCOM();
+  initializeCom();
 
   using((arena) {
-    final pLoc = WbemLocator.createInstance();
-    final ppNamespace = calloc<Pointer<COMObject>>();
+    final locator = createInstance<IWbemLocator>(WbemLocator);
+    final services = connectWMI(locator);
 
-    connectWMI(pLoc, ppNamespace);
-
-    final refresher = WbemRefresher.createInstance();
+    final refresher = createInstance<IWbemRefresher>(WbemRefresher);
     final pConfig = IWbemConfigureRefresher.from(refresher);
-    final ppRefreshable = calloc<Pointer<COMObject>>();
-
-    final pszQuery =
-        'Win32_PerfRawData_PerfProc_Process.Name="$processToMonitor"'
-            .toNativeUtf16(allocator: arena);
+    final ppRefreshable = loggingCalloc<VTablePointer>();
 
     // Add the instance to be refreshed.
-    var hr = pConfig.addObjectByPath(
-      ppNamespace.value,
-      pszQuery,
+    final path = w(
+      'Win32_PerfRawData_PerfProc_Process.Name="$processToMonitor"',
+    );
+    pConfig.addObjectByPath(
+      services,
+      path.ptr,
       0,
-      nullptr,
+      null,
       ppRefreshable,
       nullptr,
     );
-    if (FAILED(hr)) throw WindowsException(hr);
 
-    final pObj = IWbemClassObject(ppRefreshable.cast());
-    final pAccess = IWbemObjectAccess.from(pObj);
+    final classObject = IWbemClassObject(ppRefreshable.value);
+    free(ppRefreshable);
+    final objectAccess = IWbemObjectAccess.from(classObject);
 
-    final pszVirtualBytes = 'WorkingSet'.toNativeUtf16(allocator: arena);
     final cimType = arena<Int32>();
     final plHandle = arena<Int32>();
 
-    hr = pAccess.getPropertyHandle(pszVirtualBytes, cimType, plHandle);
-    if (FAILED(hr)) throw WindowsException(hr);
+    final propertyName = w('WorkingSet');
+    objectAccess.getPropertyHandle(propertyName.ptr, cimType, plHandle);
 
-    final dwWorkingSetBytes = arena<DWORD>();
     for (var x = 0; x < 10; x++) {
       refresher.refresh(WBEM_FLAG_REFRESH_AUTO_RECONNECT);
-      hr = pAccess.readDWORD(plHandle.value, dwWorkingSetBytes);
-      if (FAILED(hr)) throw WindowsException(hr);
+      final workingSetBytes = objectAccess.readDWORD(plHandle.value);
       print(
-        'Winlogon process is using ${dwWorkingSetBytes.value / 1000}'
+        'Winlogon process is using ${workingSetBytes / 1000}'
         ' kilobytes of working set.',
       );
 

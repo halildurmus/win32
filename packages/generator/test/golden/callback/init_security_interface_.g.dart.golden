@@ -1,0 +1,3 @@
+INIT_SECURITY_INTERFACE_W|
+/// {@category callback}
+typedef INIT_SECURITY_INTERFACE = Pointer<SecurityFunctionTable> Function();

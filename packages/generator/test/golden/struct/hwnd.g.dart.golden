@@ -1,0 +1,2 @@
+HWND|
+typedef HWND = IntPtr;

@@ -43,9 +43,6 @@ enum ServiceStatus {
   paused;
 
   /// Converts an integer value to a corresponding [ServiceStatus] enum.
-  ///
-  /// Throws an [ArgumentError] if the value does not correspond to a valid
-  /// value.
   static ServiceStatus fromValue(int value) => switch (value) {
     SERVICE_STOPPED => ServiceStatus.stopped,
     SERVICE_START_PENDING => ServiceStatus.startPending,

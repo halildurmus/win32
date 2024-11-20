@@ -1,5 +1,10 @@
 include: package:halildurmus_lints/dart.yaml
 
 analyzer:
-  errors:
-    todo: ignore
+  exclude: [examples/explorer/**, examples/task_manager/**]
+
+linter:
+  rules:
+    - remove_deprecations_in_breaking_versions
+    - switch_on_type
+    - unnecessary_unawaited

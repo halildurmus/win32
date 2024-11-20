@@ -257,7 +257,7 @@ static List<Task>? get tasks {
         if (EnumProcessModules(
                 hProcess, hModule, sizeOf<HMODULE>(), cbNeededMod) !=
             0) {
-          final moduleName = arena<WCHAR>(MAX_PATH).cast<Utf16>();
+          final moduleName = arena<WCHAR>(MAX_PATH);
 
           if (GetModuleBaseName(
                 hProcess,
@@ -268,7 +268,7 @@ static List<Task>? get tasks {
               0) {
             final name = moduleName.toDartString();
 
-            final filePath = arena<WCHAR>(MAX_PATH).cast<Utf16>();
+            final filePath = arena<WCHAR>(MAX_PATH);
             final result = GetModuleFileNameEx(
                 hProcess, hModule.value, filePath, MAX_PATH);
             final path = result != 0 ? filePath.toDartString() : null;
@@ -329,7 +329,7 @@ static String? _getFileDescription(String path) {
       return null;
     }
 
-    final lplpBuffer = arena<Pointer<Utf16>>();
+    final lplpBuffer = arena<Pointer<Uint16>>();
     final puLen = arena<Uint32>();
 
     if (VerQueryValue(

@@ -1,5 +1,3 @@
-// ignore_for_file: parameter_assignments
-
 import 'dart:io';
 
 import 'package:service_manager_cli/service_manager_cli.dart';
@@ -12,16 +10,15 @@ void main(List<String> arguments) {
     return;
   }
 
-  var verbose = false;
-  if (arguments.contains('-v') || arguments.contains('--verbose')) {
-    verbose = true;
-    arguments = arguments.where((arg) => arg != '-v').toList();
-  }
+  final verbose = arguments.contains('-v') || arguments.contains('--verbose');
+  final args = arguments
+      .where((arg) => arg != '-v' && arg != '--verbose')
+      .toList();
 
   ServiceManager.log = verbose;
 
-  final command = arguments[0];
-  final serviceName = arguments.length > 1 ? arguments[1] : null;
+  final command = args[0];
+  final serviceName = args.length > 1 ? args[1] : null;
 
   switch (command) {
     case 'list':

@@ -1,56 +1,51 @@
 # Application Manifests
 
-This example demonstrates the use of app manifests in Windows.
+This example demonstrates how [app manifest]s in Windows allow you to specify
+execution-level settings for your application, such as requiring administrator
+privileges.
 
-By default, Windows emphasizes maximum backwards compatibility, even to the
-point of modeling older behavior on newer systems. For example, if you call the
-`GetVersionEx()` function to ask Windows what version it is, it will return the
-same version information, regardless of whether you are running Windows 8,
-Windows 8.1, or Windows 10.
-
-You can tell Windows that your app is aware of later versions with an [app
-manifest](https://learn.microsoft.com/windows/win32/sysinfo/targeting-your-application-at-windows-8-1),
-which opts your app into new behavior.
-
-You can see this behavior in action by running `version.dart` (which calls
-`GetVersionEx()`) in a few different configurations. The documented behavior
-below assumes that you are running Windows 10.
-
-Note that Windows 11 reports itself as 10.0.22000.0, so these APIs cannot be
-used to differentiate between Windows 10 and Windows 11. For that, you should
-check the build number. An example of that can be found in `sysinfo.dart`.
+By including an appropriate manifest file, you can control whether your
+application prompts for elevated permissions or runs with standard user
+privileges.
 
 ## 1. Running a Dart file directly
 
 ```cmd
-dart version.dart
+dart run execution_level.dart
 ```
 
 In this scenario, the Dart command-line utility is called to run the Dart file.
-Since no app manifest exists, this command returns `Windows 6.2` (which
-is the version number reported by Windows 8).
+Since no app manifest exists, this command runs with standard user privileges
+and does not prompt for elevation.
 
 ## 2. Compiling with an app manifest
 
-Run this command to compile `version.dart`:
+Run this command to compile `execution_level.dart`:
 
 ```cmd
-dart compile exe -o version.exe version.dart
+dart compile exe -o execution_level.exe execution_level.dart
 ```
 
-Supplied in this folder is `version.exe.manifest`, which is an app compat
-manifest that expressly identifies that this app is designed for Windows 10.
+Supplied in this folder is `execution_level.exe.manifest`, which is an app
+manifest that explicitly requests administrator privileges. When you run
+`execution_level.exe`, Windows will display a User Account Control (UAC) prompt.
+If you approve, the app will run with elevated privileges.
 
-Now, you should see the same app code respond with `Windows 10.0`.
+**Note:** If UAC is disabled on your machine, all processes run with elevated
+privileges by default, assuming you are logged in with an administrator account.
+Therefore, even without an app manifest, the script will execute with elevated
+privileges in such a scenario.
 
 ## 3. Executing without an app manifest
 
 If you copy or rename the executable to something else and run it again:
 
 ```cmd
-copy version.exe version2.exe
-version2.exe
+> copy execution_level.exe execution_level2.exe
+> execution_level2.exe
 ```
 
 You'll see that the same executable, in the absence of a matching app manifest,
-reports `Windows 6.2` as before.
+runs with standard user privileges and does not prompt for elevation.
+
+[app manifest]: https://learn.microsoft.com/windows/win32/sysinfo/targeting-your-application-at-windows-8-1
