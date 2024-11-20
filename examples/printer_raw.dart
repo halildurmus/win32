@@ -1,4 +1,4 @@
-// Sends RAW data (string or hex sequences) directly to the printer
+// Sends RAW data (string or hex sequences) directly to the printer.
 
 // Example taken from:
 // https://learn.microsoft.com/windows/win32/printdocs/sending-data-directly-to-a-printer
@@ -8,85 +8,92 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-class RawPrinter {
-  RawPrinter(this.printerName, this.alloc);
-  final String printerName;
-  final Arena alloc;
+enum DataType {
+  raw('RAW'),
+  text('TEXT'),
+  xpsPass('XPS_PASS');
 
-  Pointer<HANDLE> _startRawPrintJob({
+  const DataType(this.value);
+
+  final String value;
+}
+
+class RawPrinter {
+  RawPrinter(this.printerName, this.allocator);
+
+  final String printerName;
+  final Arena allocator;
+
+  int _startRawPrintJob({
     required String printerName,
     required String documentTitle,
-    String dataType = 'RAW',
+    DataType dataType = DataType.raw,
   }) {
-    final pPrinterName = printerName.toNativeUtf16(allocator: alloc);
-    final phPrinter = alloc<HANDLE>();
+    final pPrinterName = w(printerName);
+    final phPrinter = allocator<PRINTER_HANDLE>();
 
     // https://learn.microsoft.com/windows/win32/printdocs/openprinter
-    var fSuccess = OpenPrinter(pPrinterName, phPrinter, nullptr);
-    if (fSuccess == 0) {
+    if (!OpenPrinter(pPrinterName.ptr, phPrinter, null)) {
       final error = GetLastError();
-      throw Exception('OpenPrint error, status: $fSuccess, error: $error');
+      throw StateError('OpenPrint error, error: $error');
     }
+
+    final hPrinter = phPrinter.value;
 
     // https://learn.microsoft.com/windows/win32/printdocs/doc-info-1
-    final pDocInfo = alloc<DOC_INFO_1>()
-      ..ref.pDocName = printerName.toNativeUtf16(allocator: alloc)
-      ..ref.pDatatype = dataType
-          .toNativeUtf16(allocator: alloc) // RAW, TEXT or XPS_PASS
-      ..ref.pOutputFile = nullptr;
+    final pDocInfo = allocator<DOC_INFO_1>();
+    final pDocName = w(printerName);
+    final pDataType = w(dataType.value);
+    pDocInfo.ref
+      ..pDocName = pDocName.ptr
+      ..pDatatype = pDataType.ptr
+      ..pOutputFile = nullptr;
 
-    //https://learn.microsoft.com/windows/win32/printdocs/startdocprinter
-    fSuccess = StartDocPrinter(
-      phPrinter.value,
-      1, // Version of the structure to which pDocInfo points.
-      pDocInfo,
-    );
-    if (fSuccess == 0) {
+    // https://learn.microsoft.com/windows/win32/printdocs/startdocprinter
+    if (StartDocPrinter(
+          hPrinter,
+          1, // Version of the structure to which pDocInfo points.
+          pDocInfo,
+        ) ==
+        0) {
       final error = GetLastError();
-      throw Exception(
-        'StartDocPrinter error, status: $fSuccess, error: $error',
-      );
+      throw StateError('StartDocPrinter error, error: $error');
     }
 
-    return phPrinter;
+    return hPrinter;
   }
 
-  //https://learn.microsoft.com/windows/win32/printdocs/startpageprinter
-  bool _startRawPrintPage(Pointer<HANDLE> phPrinter) =>
-      StartPagePrinter(phPrinter.value) != 0;
+  bool _startRawPrintPage(int phPrinter) => StartPagePrinter(phPrinter);
 
-  bool _endRawPrintPage(Pointer<HANDLE> phPrinter) =>
-      EndPagePrinter(phPrinter.value) != 0;
+  bool _endRawPrintPage(int phPrinter) => EndPagePrinter(phPrinter);
 
-  bool _endRawPrintJob(Pointer<HANDLE> phPrinter) =>
-      EndDocPrinter(phPrinter.value) > 0 && ClosePrinter(phPrinter.value) != 0;
+  bool _endRawPrintJob(int phPrinter) =>
+      EndDocPrinter(phPrinter) && ClosePrinter(phPrinter);
 
-  bool _printRawData(Pointer<HANDLE> phPrinter, String dataToPrint) {
-    final cWritten = alloc<DWORD>();
-    final data = dataToPrint.toNativeUtf8(allocator: alloc);
+  bool _printRawData(int phPrinter, String dataToPrint) {
+    final cWritten = allocator<DWORD>();
+    final data = s(dataToPrint);
 
     // https://learn.microsoft.com/windows/win32/printdocs/writeprinter
     final result = WritePrinter(
-      phPrinter.value,
-      data,
+      phPrinter,
+      data.ptr,
       dataToPrint.length,
       cWritten,
     );
 
     if (dataToPrint.length != cWritten.value) {
       final error = GetLastError();
-      throw Exception('WritePrinter error, status: $result, error: $error');
+      throw StateError('WritePrinter error, status: $result, error: $error');
     }
 
-    return result != 0;
+    return result;
   }
 
   bool printLines(List<String> data) {
     var res = false;
 
-    if (data.isEmpty) {
-      return res;
-    }
+    if (data.isEmpty) return res;
 
     final printerHandle = _startRawPrintJob(
       printerName: printerName,
@@ -100,6 +107,7 @@ class RawPrinter {
         res = _printRawData(printerHandle, item);
       }
     }
+
     _endRawPrintPage(printerHandle);
     _endRawPrintJob(printerHandle);
 
@@ -108,21 +116,21 @@ class RawPrinter {
 }
 
 void main() {
-  // Example: ESC/POS sequence to open the cash drawer
+  // Example: ESC/POS sequence to open the cash drawer.
   const openCashDrawer = '\x1b\x70\x00';
 
-  using((alloc) {
-    // NOTE: You can get the printer name from the printer_list.dart example
-    final printer = RawPrinter('EPSON TM-T20II Receipt', alloc);
+  using((arena) {
+    // NOTE: You can get the printer name from the printer_list.dart example.
+    final printer = RawPrinter('EPSON TM-T20II Receipt', arena);
 
     // At the end we send a printer command to open the cash drawer
-    // for example for thermal printers using ESC/POS
+    // for example for thermal printers using ESC/POS.
     final data = <String>[
       for (var i = 0; i < 10; i++) 'Hello world line $i',
       openCashDrawer,
     ];
 
-    // Send to print all the lines at once
+    // Send to print all the lines at once.
     if (printer.printLines(data)) {
       print('Success!');
     }

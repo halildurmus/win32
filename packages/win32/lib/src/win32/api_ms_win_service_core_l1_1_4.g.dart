@@ -1,66 +1,64 @@
-// Maps FFI prototypes onto the corresponding Win32 API function calls
-
+// Maps FFI prototypes onto the corresponding Win32 API function calls.
+//
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-
-// ignore_for_file: unused_import, non_constant_identifier_names
-// ignore_for_file: constant_identifier_names, camel_case_types
-// ignore_for_file: specify_nonobvious_property_types
+//
+// ignore_for_file: avoid_positional_boolean_parameters
+// ignore_for_file: non_constant_identifier_names, unused_import
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../callbacks.dart';
-import '../combase.dart';
-import '../guid.dart';
+import '../allocator.dart';
+import '../bstr.dart';
+import '../com/interface.g.dart';
+import '../com/iunknown.g.dart';
+import '../constants.dart';
+import '../constants.g.dart';
+import '../enums.g.dart';
+import '../exception.dart';
+import '../extensions/pointer.dart';
+import '../hresult.dart';
+import '../hstring.dart';
+import '../macros.dart';
+import '../ntstatus.dart';
+import '../pcstr.dart';
+import '../pcwstr.dart';
+import '../pstr.dart';
+import '../pwstr.dart';
 import '../structs.g.dart';
-import '../variant.dart';
+import '../types.dart';
+import '../utils.dart';
 
-final _api_ms_win_service_core_l1_1_4 = DynamicLibrary.open(
-  'api-ms-win-service-core-l1-1-4.dll',
-);
-
-/// Returns a path for a per-service filesystem location for a service to
-/// read and/or write state to.
+/// Returns a path for a per-service filesystem location for a service to read
+/// and/or write state to.
 ///
-/// ```c
-/// DWORD GetServiceDirectory(
-///   SERVICE_STATUS_HANDLE  hServiceStatus,
-///   SERVICE_DIRECTORY_TYPE eDirectoryType,
-///   PWCHAR                 lpPathBuffer,
-///   DWORD                  cchPathBufferLength,
-///   DWORD                  *lpcchRequiredBufferLength
-/// );
-/// ```
-/// {@category api_ms_win_service_core_l1_1_4}
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-getservicedirectory>.
+///
+/// {@category onecore}
+@pragma('vm:prefer-inline')
 int GetServiceDirectory(
   int hServiceStatus,
-  int eDirectoryType,
-  Pointer<Utf16> lpPathBuffer,
+  SERVICE_DIRECTORY_TYPE eDirectoryType,
+  PWSTR? lpPathBuffer,
   int cchPathBufferLength,
   Pointer<Uint32> lpcchRequiredBufferLength,
 ) => _GetServiceDirectory(
   hServiceStatus,
   eDirectoryType,
-  lpPathBuffer,
+  lpPathBuffer ?? nullptr,
   cchPathBufferLength,
   lpcchRequiredBufferLength,
 );
 
-final _GetServiceDirectory = _api_ms_win_service_core_l1_1_4
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hServiceStatus,
-        Int32 eDirectoryType,
-        Pointer<Utf16> lpPathBuffer,
-        Uint32 cchPathBufferLength,
-        Pointer<Uint32> lpcchRequiredBufferLength,
-      ),
-      int Function(
-        int hServiceStatus,
-        int eDirectoryType,
-        Pointer<Utf16> lpPathBuffer,
-        int cchPathBufferLength,
-        Pointer<Uint32> lpcchRequiredBufferLength,
-      )
-    >('GetServiceDirectory');
+@Native<
+  Uint32 Function(SERVICE_STATUS_HANDLE, Int32, PWSTR, Uint32, Pointer<Uint32>)
+>(symbol: 'GetServiceDirectory')
+external int _GetServiceDirectory(
+  int hServiceStatus,
+  int eDirectoryType,
+  PWSTR lpPathBuffer,
+  int cchPathBufferLength,
+  Pointer<Uint32> lpcchRequiredBufferLength,
+);

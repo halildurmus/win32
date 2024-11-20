@@ -1,945 +1,854 @@
-// Maps FFI prototypes onto the corresponding Win32 API function calls
-
+// Maps FFI prototypes onto the corresponding Win32 API function calls.
+//
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-
-// ignore_for_file: unused_import, non_constant_identifier_names
-// ignore_for_file: constant_identifier_names, camel_case_types
-// ignore_for_file: specify_nonobvious_property_types
+//
+// ignore_for_file: avoid_positional_boolean_parameters
+// ignore_for_file: non_constant_identifier_names, unused_import
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../callbacks.dart';
-import '../combase.dart';
+import '../_internal/bluetoothapis.g.dart';
+import '../allocator.dart';
+import '../bstr.dart';
+import '../callbacks.g.dart';
+import '../com/interface.g.dart';
+import '../com/iunknown.g.dart';
+import '../constants.dart';
+import '../constants.g.dart';
+import '../enums.g.dart';
+import '../exception.dart';
+import '../extensions/pointer.dart';
 import '../guid.dart';
+import '../hresult.dart';
+import '../hstring.dart';
+import '../macros.dart';
+import '../ntstatus.dart';
+import '../pcstr.dart';
+import '../pcwstr.dart';
+import '../pstr.dart';
+import '../pwstr.dart';
 import '../structs.g.dart';
-import '../variant.dart';
+import '../types.dart';
+import '../utils.dart';
 
-final _bluetoothapis = DynamicLibrary.open('bluetoothapis.dll');
-
-/// The BluetoothEnableDiscovery function changes the discovery state of a
-/// local Bluetooth radio or radios.
+/// Changes the discovery state of a local Bluetooth radio or radios.
 ///
-/// ```c
-/// BOOL BluetoothEnableDiscovery(
-///   HANDLE hRadio,
-///   BOOL   fEnabled
-/// );
-/// ```
-/// {@category bluetooth}
-int BluetoothEnableDiscovery(int hRadio, int fEnabled) =>
-    _BluetoothEnableDiscovery(hRadio, fEnabled);
-
-final _BluetoothEnableDiscovery = _bluetoothapis
-    .lookupFunction<
-      Int32 Function(IntPtr hRadio, Int32 fEnabled),
-      int Function(int hRadio, int fEnabled)
-    >('BluetoothEnableDiscovery');
-
-/// The BluetoothEnableIncomingConnections function modifies whether a local
-/// Bluetooth radio accepts incoming connections.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothenablediscovery>.
 ///
-/// ```c
-/// BOOL BluetoothEnableIncomingConnections(
-///   HANDLE hRadio,
-///   BOOL   fEnabled
-/// );
-/// ```
-/// {@category bluetooth}
-int BluetoothEnableIncomingConnections(int hRadio, int fEnabled) =>
-    _BluetoothEnableIncomingConnections(hRadio, fEnabled);
+/// {@category bluetoothapis}
+@pragma('vm:prefer-inline')
+bool BluetoothEnableDiscovery(int? hRadio, bool fEnabled) =>
+    _BluetoothEnableDiscovery(hRadio ?? NULL, fEnabled ? TRUE : FALSE) != FALSE;
 
-final _BluetoothEnableIncomingConnections = _bluetoothapis
-    .lookupFunction<
-      Int32 Function(IntPtr hRadio, Int32 fEnabled),
-      int Function(int hRadio, int fEnabled)
-    >('BluetoothEnableIncomingConnections');
+@Native<BOOL Function(HANDLE, BOOL)>(symbol: 'BluetoothEnableDiscovery')
+external int _BluetoothEnableDiscovery(int hRadio, int fEnabled);
 
-/// The BluetoothEnumerateInstalledServices function enumerates the services
-/// GUIDs (Globally Unique Identifiers) enabled on a Bluetooth device.
+/// Modifies whether a local Bluetooth radio accepts incoming connections.
 ///
-/// ```c
-/// DWORD BluetoothEnumerateInstalledServices(
-///   HANDLE                      hRadio,
-///   const BLUETOOTH_DEVICE_INFO *pbtdi,
-///   DWORD                       *pcServiceInout,
-///   GUID                        *pGuidServices
-/// );
-/// ```
-/// {@category bluetooth}
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothenableincomingconnections>.
+///
+/// {@category bluetoothapis}
+@pragma('vm:prefer-inline')
+bool BluetoothEnableIncomingConnections(int? hRadio, bool fEnabled) =>
+    _BluetoothEnableIncomingConnections(
+      hRadio ?? NULL,
+      fEnabled ? TRUE : FALSE,
+    ) !=
+    FALSE;
+
+@Native<BOOL Function(HANDLE, BOOL)>(
+  symbol: 'BluetoothEnableIncomingConnections',
+)
+external int _BluetoothEnableIncomingConnections(int hRadio, int fEnabled);
+
+/// Enumerates the services GUIDs (Globally Unique Identifiers) enabled on a
+/// Bluetooth device.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothenumerateinstalledservices>.
+///
+/// {@category bluetoothapis}
+@pragma('vm:prefer-inline')
 int BluetoothEnumerateInstalledServices(
+  int? hRadio,
+  Pointer<BLUETOOTH_DEVICE_INFO> pbtdi,
+  Pointer<Uint32> pcServiceInout,
+  Pointer<GUID>? pGuidServices,
+) => _BluetoothEnumerateInstalledServices(
+  hRadio ?? NULL,
+  pbtdi,
+  pcServiceInout,
+  pGuidServices ?? nullptr,
+);
+
+@Native<
+  Uint32 Function(
+    HANDLE,
+    Pointer<BLUETOOTH_DEVICE_INFO>,
+    Pointer<Uint32>,
+    Pointer<GUID>,
+  )
+>(symbol: 'BluetoothEnumerateInstalledServices')
+external int _BluetoothEnumerateInstalledServices(
   int hRadio,
   Pointer<BLUETOOTH_DEVICE_INFO> pbtdi,
   Pointer<Uint32> pcServiceInout,
   Pointer<GUID> pGuidServices,
-) => _BluetoothEnumerateInstalledServices(
-  hRadio,
-  pbtdi,
-  pcServiceInout,
-  pGuidServices,
 );
 
-final _BluetoothEnumerateInstalledServices = _bluetoothapis
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hRadio,
-        Pointer<BLUETOOTH_DEVICE_INFO> pbtdi,
-        Pointer<Uint32> pcServiceInout,
-        Pointer<GUID> pGuidServices,
-      ),
-      int Function(
-        int hRadio,
-        Pointer<BLUETOOTH_DEVICE_INFO> pbtdi,
-        Pointer<Uint32> pcServiceInout,
-        Pointer<GUID> pGuidServices,
-      )
-    >('BluetoothEnumerateInstalledServices');
-
-/// The BluetoothFindDeviceClose function closes an enumeration handle
-/// associated with a device query.
+/// Closes an enumeration handle associated with a device query.
 ///
-/// ```c
-/// BOOL BluetoothFindDeviceClose(
-///   HBLUETOOTH_DEVICE_FIND hFind
-/// );
-/// ```
-/// {@category bluetooth}
-int BluetoothFindDeviceClose(int hFind) => _BluetoothFindDeviceClose(hFind);
-
-final _BluetoothFindDeviceClose = _bluetoothapis
-    .lookupFunction<Int32 Function(IntPtr hFind), int Function(int hFind)>(
-      'BluetoothFindDeviceClose',
-    );
-
-/// The BluetoothFindFirstDevice function begins the enumeration Bluetooth
-/// devices.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothfinddeviceclose>.
 ///
-/// ```c
-/// HBLUETOOTH_DEVICE_FIND BluetoothFindFirstDevice(
-///   const BLUETOOTH_DEVICE_SEARCH_PARAMS *pbtsp,
-///   BLUETOOTH_DEVICE_INFO                *pbtdi
-/// );
-/// ```
-/// {@category bluetooth}
+/// {@category bluetoothapis}
+@pragma('vm:prefer-inline')
+bool BluetoothFindDeviceClose(int hFind) =>
+    BluetoothFindDeviceClose_Wrapper(hFind) != FALSE;
+
+/// Begins the enumeration Bluetooth devices.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothfindfirstdevice>.
+///
+/// {@category bluetoothapis}
+@pragma('vm:prefer-inline')
 int BluetoothFindFirstDevice(
   Pointer<BLUETOOTH_DEVICE_SEARCH_PARAMS> pbtsp,
   Pointer<BLUETOOTH_DEVICE_INFO> pbtdi,
-) => _BluetoothFindFirstDevice(pbtsp, pbtdi);
+) => BluetoothFindFirstDevice_Wrapper(pbtsp, pbtdi);
 
-final _BluetoothFindFirstDevice = _bluetoothapis
-    .lookupFunction<
-      IntPtr Function(
-        Pointer<BLUETOOTH_DEVICE_SEARCH_PARAMS> pbtsp,
-        Pointer<BLUETOOTH_DEVICE_INFO> pbtdi,
-      ),
-      int Function(
-        Pointer<BLUETOOTH_DEVICE_SEARCH_PARAMS> pbtsp,
-        Pointer<BLUETOOTH_DEVICE_INFO> pbtdi,
-      )
-    >('BluetoothFindFirstDevice');
-
-/// The BluetoothFindFirstRadio function begins the enumeration of local
-/// Bluetooth radios.
+/// Begins the enumeration of local Bluetooth radios.
 ///
-/// ```c
-/// HBLUETOOTH_RADIO_FIND BluetoothFindFirstRadio(
-///   const BLUETOOTH_FIND_RADIO_PARAMS *pbtfrp,
-///   HANDLE                            *phRadio
-/// );
-/// ```
-/// {@category bluetooth}
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothfindfirstradio>.
+///
+/// {@category bluetoothapis}
+@pragma('vm:prefer-inline')
 int BluetoothFindFirstRadio(
   Pointer<BLUETOOTH_FIND_RADIO_PARAMS> pbtfrp,
-  Pointer<IntPtr> phRadio,
-) => _BluetoothFindFirstRadio(pbtfrp, phRadio);
+  Pointer<HANDLE> phRadio,
+) => BluetoothFindFirstRadio_Wrapper(pbtfrp, phRadio);
 
-final _BluetoothFindFirstRadio = _bluetoothapis
-    .lookupFunction<
-      IntPtr Function(
-        Pointer<BLUETOOTH_FIND_RADIO_PARAMS> pbtfrp,
-        Pointer<IntPtr> phRadio,
-      ),
-      int Function(
-        Pointer<BLUETOOTH_FIND_RADIO_PARAMS> pbtfrp,
-        Pointer<IntPtr> phRadio,
-      )
-    >('BluetoothFindFirstRadio');
-
-/// The BluetoothFindNextDevice function finds the next Bluetooth device.
+/// Finds the next Bluetooth device.
 ///
-/// ```c
-/// BOOL BluetoothFindNextDevice(
-///   HBLUETOOTH_DEVICE_FIND hFind,
-///   BLUETOOTH_DEVICE_INFO  *pbtdi
-/// );
-/// ```
-/// {@category bluetooth}
-int BluetoothFindNextDevice(int hFind, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi) =>
-    _BluetoothFindNextDevice(hFind, pbtdi);
-
-final _BluetoothFindNextDevice = _bluetoothapis
-    .lookupFunction<
-      Int32 Function(IntPtr hFind, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi),
-      int Function(int hFind, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi)
-    >('BluetoothFindNextDevice');
-
-/// The BluetoothFindNextRadio function finds the next Bluetooth radio.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothfindnextdevice>.
 ///
-/// ```c
-/// BOOL BluetoothFindNextRadio(
-///   HBLUETOOTH_RADIO_FIND hFind,
-///   HANDLE                *phRadio
-/// );
-/// ```
-/// {@category bluetooth}
-int BluetoothFindNextRadio(int hFind, Pointer<IntPtr> phRadio) =>
-    _BluetoothFindNextRadio(hFind, phRadio);
+/// {@category bluetoothapis}
+@pragma('vm:prefer-inline')
+bool BluetoothFindNextDevice(int hFind, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi) =>
+    BluetoothFindNextDevice_Wrapper(hFind, pbtdi) != FALSE;
 
-final _BluetoothFindNextRadio = _bluetoothapis
-    .lookupFunction<
-      Int32 Function(IntPtr hFind, Pointer<IntPtr> phRadio),
-      int Function(int hFind, Pointer<IntPtr> phRadio)
-    >('BluetoothFindNextRadio');
-
-/// The BluetoothFindRadioClose function closes the enumeration handle
-/// associated with finding Bluetooth radios.
+/// Finds the next Bluetooth radio.
 ///
-/// ```c
-/// BOOL BluetoothFindRadioClose(
-///   HBLUETOOTH_RADIO_FIND hFind
-/// );
-/// ```
-/// {@category bluetooth}
-int BluetoothFindRadioClose(int hFind) => _BluetoothFindRadioClose(hFind);
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothfindnextradio>.
+///
+/// {@category bluetoothapis}
+@pragma('vm:prefer-inline')
+bool BluetoothFindNextRadio(int hFind, Pointer<HANDLE> phRadio) =>
+    BluetoothFindNextRadio_Wrapper(hFind, phRadio) != FALSE;
 
-final _BluetoothFindRadioClose = _bluetoothapis
-    .lookupFunction<Int32 Function(IntPtr hFind), int Function(int hFind)>(
-      'BluetoothFindRadioClose',
-    );
+/// Closes the enumeration handle associated with finding Bluetooth radios.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothfindradioclose>.
+///
+/// {@category bluetoothapis}
+@pragma('vm:prefer-inline')
+bool BluetoothFindRadioClose(int hFind) =>
+    BluetoothFindRadioClose_Wrapper(hFind) != FALSE;
 
 /// Specifies the end of reliable write procedures, and the writes should be
 /// aborted.
 ///
-/// ```c
-/// HRESULT BluetoothGATTAbortReliableWrite(
-///   HANDLE                             hDevice,
-///   BTH_LE_GATT_RELIABLE_WRITE_CONTEXT ReliableWriteContext,
-///   ULONG                              Flags
-/// );
-/// ```
-/// {@category bluetooth}
-int BluetoothGATTAbortReliableWrite(
-  int hDevice,
-  int ReliableWriteContext,
-  int Flags,
-) => _BluetoothGATTAbortReliableWrite(hDevice, ReliableWriteContext, Flags);
-
-final _BluetoothGATTAbortReliableWrite = _bluetoothapis
-    .lookupFunction<
-      Int32 Function(IntPtr hDevice, Uint64 ReliableWriteContext, Uint32 Flags),
-      int Function(int hDevice, int ReliableWriteContext, int Flags)
-    >('BluetoothGATTAbortReliableWrite');
-
-/// The BluetoothGATTBeginReliableWrite function specifies that reliable
-/// writes are about to begin.
+/// Throws a [WindowsException] on failure.
 ///
-/// ```c
-/// HRESULT BluetoothGATTBeginReliableWrite(
-///   HANDLE                              hDevice,
-///   PBTH_LE_GATT_RELIABLE_WRITE_CONTEXT ReliableWriteContext,
-///   ULONG                               Flags
-/// );
-/// ```
-/// {@category bluetooth}
-int BluetoothGATTBeginReliableWrite(
-  int hDevice,
-  Pointer<Uint64> ReliableWriteContext,
-  int Flags,
-) => _BluetoothGATTBeginReliableWrite(hDevice, ReliableWriteContext, Flags);
-
-final _BluetoothGATTBeginReliableWrite = _bluetoothapis
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hDevice,
-        Pointer<Uint64> ReliableWriteContext,
-        Uint32 Flags,
-      ),
-      int Function(int hDevice, Pointer<Uint64> ReliableWriteContext, int Flags)
-    >('BluetoothGATTBeginReliableWrite');
-
-/// Specifies the end of reliable writes, and the writes should be
-/// committed.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothleapis/nf-bluetoothleapis-bluetoothgattabortreliablewrite>.
 ///
-/// ```c
-/// HRESULT BluetoothGATTEndReliableWrite(
-///   HANDLE                             hDevice,
-///   BTH_LE_GATT_RELIABLE_WRITE_CONTEXT ReliableWriteContext,
-///   ULONG                              Flags
-/// );
-/// ```
-/// {@category bluetooth}
-int BluetoothGATTEndReliableWrite(
+/// {@category bluetoothapis}
+@pragma('vm:prefer-inline')
+void BluetoothGATTAbortReliableWrite(
   int hDevice,
-  int ReliableWriteContext,
-  int Flags,
-) => _BluetoothGATTEndReliableWrite(hDevice, ReliableWriteContext, Flags);
+  int reliableWriteContext,
+  int flags,
+) {
+  final hr$ = HRESULT(
+    _BluetoothGATTAbortReliableWrite(hDevice, reliableWriteContext, flags),
+  );
+  if (hr$.isError) throw WindowsException(hr$);
+}
 
-final _BluetoothGATTEndReliableWrite = _bluetoothapis
-    .lookupFunction<
-      Int32 Function(IntPtr hDevice, Uint64 ReliableWriteContext, Uint32 Flags),
-      int Function(int hDevice, int ReliableWriteContext, int Flags)
-    >('BluetoothGATTEndReliableWrite');
+@Native<Int32 Function(HANDLE, Uint64, Uint32)>(
+  symbol: 'BluetoothGATTAbortReliableWrite',
+)
+external int _BluetoothGATTAbortReliableWrite(
+  int hDevice,
+  int reliableWriteContext,
+  int flags,
+);
+
+/// Specifies that reliable writes are about to begin.
+///
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothleapis/nf-bluetoothleapis-bluetoothgattbeginreliablewrite>.
+///
+/// {@category bluetoothapis}
+@pragma('vm:prefer-inline')
+void BluetoothGATTBeginReliableWrite(
+  int hDevice,
+  Pointer<Uint64> reliableWriteContext,
+  int flags,
+) {
+  final hr$ = HRESULT(
+    _BluetoothGATTBeginReliableWrite(hDevice, reliableWriteContext, flags),
+  );
+  if (hr$.isError) throw WindowsException(hr$);
+}
+
+@Native<Int32 Function(HANDLE, Pointer<Uint64>, Uint32)>(
+  symbol: 'BluetoothGATTBeginReliableWrite',
+)
+external int _BluetoothGATTBeginReliableWrite(
+  int hDevice,
+  Pointer<Uint64> reliableWriteContext,
+  int flags,
+);
+
+/// Specifies the end of reliable writes, and the writes should be committed.
+///
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothleapis/nf-bluetoothleapis-bluetoothgattendreliablewrite>.
+///
+/// {@category bluetoothapis}
+@pragma('vm:prefer-inline')
+void BluetoothGATTEndReliableWrite(
+  int hDevice,
+  int reliableWriteContext,
+  int flags,
+) {
+  final hr$ = HRESULT(
+    _BluetoothGATTEndReliableWrite(hDevice, reliableWriteContext, flags),
+  );
+  if (hr$.isError) throw WindowsException(hr$);
+}
+
+@Native<Int32 Function(HANDLE, Uint64, Uint32)>(
+  symbol: 'BluetoothGATTEndReliableWrite',
+)
+external int _BluetoothGATTEndReliableWrite(
+  int hDevice,
+  int reliableWriteContext,
+  int flags,
+);
 
 /// Gets all the characteristics available for the specified service.
 ///
-/// ```c
-/// HRESULT BluetoothGATTGetCharacteristics(
-///   HANDLE                      hDevice,
-///   PBTH_LE_GATT_SERVICE        Service,
-///   USHORT                      CharacteristicsBufferCount,
-///   PBTH_LE_GATT_CHARACTERISTIC CharacteristicsBuffer,
-///   USHORT                      *CharacteristicsBufferActual,
-///   ULONG                       Flags
-/// );
-/// ```
-/// {@category bluetooth}
-int BluetoothGATTGetCharacteristics(
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothleapis/nf-bluetoothleapis-bluetoothgattgetcharacteristics>.
+///
+/// {@category bluetoothapis}
+@pragma('vm:prefer-inline')
+void BluetoothGATTGetCharacteristics(
   int hDevice,
-  Pointer<BTH_LE_GATT_SERVICE> Service,
-  int CharacteristicsBufferCount,
-  Pointer<BTH_LE_GATT_CHARACTERISTIC> CharacteristicsBuffer,
-  Pointer<Uint16> CharacteristicsBufferActual,
-  int Flags,
-) => _BluetoothGATTGetCharacteristics(
-  hDevice,
-  Service,
-  CharacteristicsBufferCount,
-  CharacteristicsBuffer,
-  CharacteristicsBufferActual,
-  Flags,
-);
+  Pointer<BTH_LE_GATT_SERVICE>? service,
+  int characteristicsBufferCount,
+  Pointer<BTH_LE_GATT_CHARACTERISTIC>? characteristicsBuffer,
+  Pointer<Uint16> characteristicsBufferActual,
+  int flags,
+) {
+  final hr$ = HRESULT(
+    _BluetoothGATTGetCharacteristics(
+      hDevice,
+      service ?? nullptr,
+      characteristicsBufferCount,
+      characteristicsBuffer ?? nullptr,
+      characteristicsBufferActual,
+      flags,
+    ),
+  );
+  if (hr$.isError) throw WindowsException(hr$);
+}
 
-final _BluetoothGATTGetCharacteristics = _bluetoothapis
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hDevice,
-        Pointer<BTH_LE_GATT_SERVICE> Service,
-        Uint16 CharacteristicsBufferCount,
-        Pointer<BTH_LE_GATT_CHARACTERISTIC> CharacteristicsBuffer,
-        Pointer<Uint16> CharacteristicsBufferActual,
-        Uint32 Flags,
-      ),
-      int Function(
-        int hDevice,
-        Pointer<BTH_LE_GATT_SERVICE> Service,
-        int CharacteristicsBufferCount,
-        Pointer<BTH_LE_GATT_CHARACTERISTIC> CharacteristicsBuffer,
-        Pointer<Uint16> CharacteristicsBufferActual,
-        int Flags,
-      )
-    >('BluetoothGATTGetCharacteristics');
+@Native<
+  Int32 Function(
+    HANDLE,
+    Pointer<BTH_LE_GATT_SERVICE>,
+    Uint16,
+    Pointer<BTH_LE_GATT_CHARACTERISTIC>,
+    Pointer<Uint16>,
+    Uint32,
+  )
+>(symbol: 'BluetoothGATTGetCharacteristics')
+external int _BluetoothGATTGetCharacteristics(
+  int hDevice,
+  Pointer<BTH_LE_GATT_SERVICE> service,
+  int characteristicsBufferCount,
+  Pointer<BTH_LE_GATT_CHARACTERISTIC> characteristicsBuffer,
+  Pointer<Uint16> characteristicsBufferActual,
+  int flags,
+);
 
 /// Gets the value of the specified characteristic.
 ///
-/// ```c
-/// HRESULT BluetoothGATTGetCharacteristicValue(
-///   HANDLE                            hDevice,
-///   PBTH_LE_GATT_CHARACTERISTIC       Characteristic,
-///   ULONG                             CharacteristicValueDataSize,
-///   PBTH_LE_GATT_CHARACTERISTIC_VALUE CharacteristicValue,
-///   USHORT                            *CharacteristicValueSizeRequired,
-///   ULONG                             Flags
-/// );
-/// ```
-/// {@category bluetooth}
-int BluetoothGATTGetCharacteristicValue(
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothleapis/nf-bluetoothleapis-bluetoothgattgetcharacteristicvalue>.
+///
+/// {@category bluetoothapis}
+@pragma('vm:prefer-inline')
+void BluetoothGATTGetCharacteristicValue(
   int hDevice,
-  Pointer<BTH_LE_GATT_CHARACTERISTIC> Characteristic,
-  int CharacteristicValueDataSize,
-  Pointer<BTH_LE_GATT_CHARACTERISTIC_VALUE> CharacteristicValue,
-  Pointer<Uint16> CharacteristicValueSizeRequired,
-  int Flags,
-) => _BluetoothGATTGetCharacteristicValue(
-  hDevice,
-  Characteristic,
-  CharacteristicValueDataSize,
-  CharacteristicValue,
-  CharacteristicValueSizeRequired,
-  Flags,
-);
+  Pointer<BTH_LE_GATT_CHARACTERISTIC> characteristic,
+  int characteristicValueDataSize,
+  Pointer<BTH_LE_GATT_CHARACTERISTIC_VALUE>? characteristicValue,
+  Pointer<Uint16>? characteristicValueSizeRequired,
+  int flags,
+) {
+  final hr$ = HRESULT(
+    _BluetoothGATTGetCharacteristicValue(
+      hDevice,
+      characteristic,
+      characteristicValueDataSize,
+      characteristicValue ?? nullptr,
+      characteristicValueSizeRequired ?? nullptr,
+      flags,
+    ),
+  );
+  if (hr$.isError) throw WindowsException(hr$);
+}
 
-final _BluetoothGATTGetCharacteristicValue = _bluetoothapis
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hDevice,
-        Pointer<BTH_LE_GATT_CHARACTERISTIC> Characteristic,
-        Uint32 CharacteristicValueDataSize,
-        Pointer<BTH_LE_GATT_CHARACTERISTIC_VALUE> CharacteristicValue,
-        Pointer<Uint16> CharacteristicValueSizeRequired,
-        Uint32 Flags,
-      ),
-      int Function(
-        int hDevice,
-        Pointer<BTH_LE_GATT_CHARACTERISTIC> Characteristic,
-        int CharacteristicValueDataSize,
-        Pointer<BTH_LE_GATT_CHARACTERISTIC_VALUE> CharacteristicValue,
-        Pointer<Uint16> CharacteristicValueSizeRequired,
-        int Flags,
-      )
-    >('BluetoothGATTGetCharacteristicValue');
+@Native<
+  Int32 Function(
+    HANDLE,
+    Pointer<BTH_LE_GATT_CHARACTERISTIC>,
+    Uint32,
+    Pointer<BTH_LE_GATT_CHARACTERISTIC_VALUE>,
+    Pointer<Uint16>,
+    Uint32,
+  )
+>(symbol: 'BluetoothGATTGetCharacteristicValue')
+external int _BluetoothGATTGetCharacteristicValue(
+  int hDevice,
+  Pointer<BTH_LE_GATT_CHARACTERISTIC> characteristic,
+  int characteristicValueDataSize,
+  Pointer<BTH_LE_GATT_CHARACTERISTIC_VALUE> characteristicValue,
+  Pointer<Uint16> characteristicValueSizeRequired,
+  int flags,
+);
 
 /// Gets all the descriptors available for the specified characteristic.
 ///
-/// ```c
-/// HRESULT BluetoothGATTGetDescriptors(
-///   HANDLE                      hDevice,
-///   PBTH_LE_GATT_CHARACTERISTIC Characteristic,
-///   USHORT                      DescriptorsBufferCount,
-///   PBTH_LE_GATT_DESCRIPTOR     DescriptorsBuffer,
-///   USHORT                      *DescriptorsBufferActual,
-///   ULONG                       Flags
-/// );
-/// ```
-/// {@category bluetooth}
-int BluetoothGATTGetDescriptors(
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothleapis/nf-bluetoothleapis-bluetoothgattgetdescriptors>.
+///
+/// {@category bluetoothapis}
+@pragma('vm:prefer-inline')
+void BluetoothGATTGetDescriptors(
   int hDevice,
-  Pointer<BTH_LE_GATT_CHARACTERISTIC> Characteristic,
-  int DescriptorsBufferCount,
-  Pointer<BTH_LE_GATT_DESCRIPTOR> DescriptorsBuffer,
-  Pointer<Uint16> DescriptorsBufferActual,
-  int Flags,
-) => _BluetoothGATTGetDescriptors(
-  hDevice,
-  Characteristic,
-  DescriptorsBufferCount,
-  DescriptorsBuffer,
-  DescriptorsBufferActual,
-  Flags,
-);
+  Pointer<BTH_LE_GATT_CHARACTERISTIC> characteristic,
+  int descriptorsBufferCount,
+  Pointer<BTH_LE_GATT_DESCRIPTOR>? descriptorsBuffer,
+  Pointer<Uint16> descriptorsBufferActual,
+  int flags,
+) {
+  final hr$ = HRESULT(
+    _BluetoothGATTGetDescriptors(
+      hDevice,
+      characteristic,
+      descriptorsBufferCount,
+      descriptorsBuffer ?? nullptr,
+      descriptorsBufferActual,
+      flags,
+    ),
+  );
+  if (hr$.isError) throw WindowsException(hr$);
+}
 
-final _BluetoothGATTGetDescriptors = _bluetoothapis
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hDevice,
-        Pointer<BTH_LE_GATT_CHARACTERISTIC> Characteristic,
-        Uint16 DescriptorsBufferCount,
-        Pointer<BTH_LE_GATT_DESCRIPTOR> DescriptorsBuffer,
-        Pointer<Uint16> DescriptorsBufferActual,
-        Uint32 Flags,
-      ),
-      int Function(
-        int hDevice,
-        Pointer<BTH_LE_GATT_CHARACTERISTIC> Characteristic,
-        int DescriptorsBufferCount,
-        Pointer<BTH_LE_GATT_DESCRIPTOR> DescriptorsBuffer,
-        Pointer<Uint16> DescriptorsBufferActual,
-        int Flags,
-      )
-    >('BluetoothGATTGetDescriptors');
+@Native<
+  Int32 Function(
+    HANDLE,
+    Pointer<BTH_LE_GATT_CHARACTERISTIC>,
+    Uint16,
+    Pointer<BTH_LE_GATT_DESCRIPTOR>,
+    Pointer<Uint16>,
+    Uint32,
+  )
+>(symbol: 'BluetoothGATTGetDescriptors')
+external int _BluetoothGATTGetDescriptors(
+  int hDevice,
+  Pointer<BTH_LE_GATT_CHARACTERISTIC> characteristic,
+  int descriptorsBufferCount,
+  Pointer<BTH_LE_GATT_DESCRIPTOR> descriptorsBuffer,
+  Pointer<Uint16> descriptorsBufferActual,
+  int flags,
+);
 
 /// Gets the value of the specified descriptor.
 ///
-/// ```c
-/// HRESULT BluetoothGATTGetDescriptorValue(
-///   HANDLE                        hDevice,
-///   PBTH_LE_GATT_DESCRIPTOR       Descriptor,
-///   ULONG                         DescriptorValueDataSize,
-///   PBTH_LE_GATT_DESCRIPTOR_VALUE DescriptorValue,
-///   USHORT                        *DescriptorValueSizeRequired,
-///   ULONG                         Flags
-/// );
-/// ```
-/// {@category bluetooth}
-int BluetoothGATTGetDescriptorValue(
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothleapis/nf-bluetoothleapis-bluetoothgattgetdescriptorvalue>.
+///
+/// {@category bluetoothapis}
+@pragma('vm:prefer-inline')
+void BluetoothGATTGetDescriptorValue(
   int hDevice,
-  Pointer<BTH_LE_GATT_DESCRIPTOR> Descriptor,
-  int DescriptorValueDataSize,
-  Pointer<BTH_LE_GATT_DESCRIPTOR_VALUE> DescriptorValue,
-  Pointer<Uint16> DescriptorValueSizeRequired,
-  int Flags,
-) => _BluetoothGATTGetDescriptorValue(
-  hDevice,
-  Descriptor,
-  DescriptorValueDataSize,
-  DescriptorValue,
-  DescriptorValueSizeRequired,
-  Flags,
-);
+  Pointer<BTH_LE_GATT_DESCRIPTOR> descriptor,
+  int descriptorValueDataSize,
+  Pointer<BTH_LE_GATT_DESCRIPTOR_VALUE>? descriptorValue,
+  Pointer<Uint16>? descriptorValueSizeRequired,
+  int flags,
+) {
+  final hr$ = HRESULT(
+    _BluetoothGATTGetDescriptorValue(
+      hDevice,
+      descriptor,
+      descriptorValueDataSize,
+      descriptorValue ?? nullptr,
+      descriptorValueSizeRequired ?? nullptr,
+      flags,
+    ),
+  );
+  if (hr$.isError) throw WindowsException(hr$);
+}
 
-final _BluetoothGATTGetDescriptorValue = _bluetoothapis
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hDevice,
-        Pointer<BTH_LE_GATT_DESCRIPTOR> Descriptor,
-        Uint32 DescriptorValueDataSize,
-        Pointer<BTH_LE_GATT_DESCRIPTOR_VALUE> DescriptorValue,
-        Pointer<Uint16> DescriptorValueSizeRequired,
-        Uint32 Flags,
-      ),
-      int Function(
-        int hDevice,
-        Pointer<BTH_LE_GATT_DESCRIPTOR> Descriptor,
-        int DescriptorValueDataSize,
-        Pointer<BTH_LE_GATT_DESCRIPTOR_VALUE> DescriptorValue,
-        Pointer<Uint16> DescriptorValueSizeRequired,
-        int Flags,
-      )
-    >('BluetoothGATTGetDescriptorValue');
+@Native<
+  Int32 Function(
+    HANDLE,
+    Pointer<BTH_LE_GATT_DESCRIPTOR>,
+    Uint32,
+    Pointer<BTH_LE_GATT_DESCRIPTOR_VALUE>,
+    Pointer<Uint16>,
+    Uint32,
+  )
+>(symbol: 'BluetoothGATTGetDescriptorValue')
+external int _BluetoothGATTGetDescriptorValue(
+  int hDevice,
+  Pointer<BTH_LE_GATT_DESCRIPTOR> descriptor,
+  int descriptorValueDataSize,
+  Pointer<BTH_LE_GATT_DESCRIPTOR_VALUE> descriptorValue,
+  Pointer<Uint16> descriptorValueSizeRequired,
+  int flags,
+);
 
 /// Gets all the included services available for a given service.
 ///
-/// ```c
-/// HRESULT BluetoothGATTGetIncludedServices(
-///   HANDLE               hDevice,
-///   PBTH_LE_GATT_SERVICE ParentService,
-///   USHORT               IncludedServicesBufferCount,
-///   PBTH_LE_GATT_SERVICE IncludedServicesBuffer,
-///   USHORT               *IncludedServicesBufferActual,
-///   ULONG                Flags
-/// );
-/// ```
-/// {@category bluetooth}
-int BluetoothGATTGetIncludedServices(
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothleapis/nf-bluetoothleapis-bluetoothgattgetincludedservices>.
+///
+/// {@category bluetoothapis}
+@pragma('vm:prefer-inline')
+void BluetoothGATTGetIncludedServices(
   int hDevice,
-  Pointer<BTH_LE_GATT_SERVICE> ParentService,
-  int IncludedServicesBufferCount,
-  Pointer<BTH_LE_GATT_SERVICE> IncludedServicesBuffer,
-  Pointer<Uint16> IncludedServicesBufferActual,
-  int Flags,
-) => _BluetoothGATTGetIncludedServices(
-  hDevice,
-  ParentService,
-  IncludedServicesBufferCount,
-  IncludedServicesBuffer,
-  IncludedServicesBufferActual,
-  Flags,
+  Pointer<BTH_LE_GATT_SERVICE>? parentService,
+  int includedServicesBufferCount,
+  Pointer<BTH_LE_GATT_SERVICE>? includedServicesBuffer,
+  Pointer<Uint16> includedServicesBufferActual,
+  int flags,
+) {
+  final hr$ = HRESULT(
+    _BluetoothGATTGetIncludedServices(
+      hDevice,
+      parentService ?? nullptr,
+      includedServicesBufferCount,
+      includedServicesBuffer ?? nullptr,
+      includedServicesBufferActual,
+      flags,
+    ),
+  );
+  if (hr$.isError) throw WindowsException(hr$);
+}
+
+@Native<
+  Int32 Function(
+    HANDLE,
+    Pointer<BTH_LE_GATT_SERVICE>,
+    Uint16,
+    Pointer<BTH_LE_GATT_SERVICE>,
+    Pointer<Uint16>,
+    Uint32,
+  )
+>(symbol: 'BluetoothGATTGetIncludedServices')
+external int _BluetoothGATTGetIncludedServices(
+  int hDevice,
+  Pointer<BTH_LE_GATT_SERVICE> parentService,
+  int includedServicesBufferCount,
+  Pointer<BTH_LE_GATT_SERVICE> includedServicesBuffer,
+  Pointer<Uint16> includedServicesBufferActual,
+  int flags,
 );
 
-final _BluetoothGATTGetIncludedServices = _bluetoothapis
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hDevice,
-        Pointer<BTH_LE_GATT_SERVICE> ParentService,
-        Uint16 IncludedServicesBufferCount,
-        Pointer<BTH_LE_GATT_SERVICE> IncludedServicesBuffer,
-        Pointer<Uint16> IncludedServicesBufferActual,
-        Uint32 Flags,
-      ),
-      int Function(
-        int hDevice,
-        Pointer<BTH_LE_GATT_SERVICE> ParentService,
-        int IncludedServicesBufferCount,
-        Pointer<BTH_LE_GATT_SERVICE> IncludedServicesBuffer,
-        Pointer<Uint16> IncludedServicesBufferActual,
-        int Flags,
-      )
-    >('BluetoothGATTGetIncludedServices');
-
-/// The BluetoothGATTGetServices function gets all the primary services
-/// available for a server.
+/// Gets all the primary services available for a server.
 ///
-/// ```c
-/// HRESULT BluetoothGATTGetServices(
-///   HANDLE               hDevice,
-///   USHORT               ServicesBufferCount,
-///   PBTH_LE_GATT_SERVICE ServicesBuffer,
-///   USHORT               *ServicesBufferActual,
-///   ULONG                Flags
-/// );
-/// ```
-/// {@category bluetooth}
-int BluetoothGATTGetServices(
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothleapis/nf-bluetoothleapis-bluetoothgattgetservices>.
+///
+/// {@category bluetoothapis}
+@pragma('vm:prefer-inline')
+void BluetoothGATTGetServices(
   int hDevice,
-  int ServicesBufferCount,
-  Pointer<BTH_LE_GATT_SERVICE> ServicesBuffer,
-  Pointer<Uint16> ServicesBufferActual,
-  int Flags,
-) => _BluetoothGATTGetServices(
-  hDevice,
-  ServicesBufferCount,
-  ServicesBuffer,
-  ServicesBufferActual,
-  Flags,
+  int servicesBufferCount,
+  Pointer<BTH_LE_GATT_SERVICE>? servicesBuffer,
+  Pointer<Uint16> servicesBufferActual,
+  int flags,
+) {
+  final hr$ = HRESULT(
+    _BluetoothGATTGetServices(
+      hDevice,
+      servicesBufferCount,
+      servicesBuffer ?? nullptr,
+      servicesBufferActual,
+      flags,
+    ),
+  );
+  if (hr$.isError) throw WindowsException(hr$);
+}
+
+@Native<
+  Int32 Function(
+    HANDLE,
+    Uint16,
+    Pointer<BTH_LE_GATT_SERVICE>,
+    Pointer<Uint16>,
+    Uint32,
+  )
+>(symbol: 'BluetoothGATTGetServices')
+external int _BluetoothGATTGetServices(
+  int hDevice,
+  int servicesBufferCount,
+  Pointer<BTH_LE_GATT_SERVICE> servicesBuffer,
+  Pointer<Uint16> servicesBufferActual,
+  int flags,
 );
 
-final _BluetoothGATTGetServices = _bluetoothapis
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hDevice,
-        Uint16 ServicesBufferCount,
-        Pointer<BTH_LE_GATT_SERVICE> ServicesBuffer,
-        Pointer<Uint16> ServicesBufferActual,
-        Uint32 Flags,
-      ),
-      int Function(
-        int hDevice,
-        int ServicesBufferCount,
-        Pointer<BTH_LE_GATT_SERVICE> ServicesBuffer,
-        Pointer<Uint16> ServicesBufferActual,
-        int Flags,
-      )
-    >('BluetoothGATTGetServices');
-
-/// Registers a routine to be called back during a characteristic value
-/// change event on the given characteristic identified by its
-/// characteristic handle.
+/// Registers a routine to be called back during a characteristic value change
+/// event on the given characteristic identified by its characteristic handle.
 ///
-/// ```c
-/// HRESULT BluetoothGATTRegisterEvent(
-///   HANDLE                           hService,
-///   BTH_LE_GATT_EVENT_TYPE           EventType,
-///   PVOID                            EventParameterIn,
-///   PFNBLUETOOTH_GATT_EVENT_CALLBACK Callback,
-///   PVOID                            CallbackContext,
-///   BLUETOOTH_GATT_EVENT_HANDLE      *pEventHandle,
-///   ULONG                            Flags
-/// );
-/// ```
-/// {@category bluetooth}
-int BluetoothGATTRegisterEvent(
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothleapis/nf-bluetoothleapis-bluetoothgattregisterevent>.
+///
+/// {@category bluetoothapis}
+@pragma('vm:prefer-inline')
+void BluetoothGATTRegisterEvent(
   int hService,
-  int EventType,
-  Pointer EventParameterIn,
-  Pointer<NativeFunction<PFNBLUETOOTH_GATT_EVENT_CALLBACK>> Callback,
-  Pointer CallbackContext,
+  BTH_LE_GATT_EVENT_TYPE eventType,
+  Pointer eventParameterIn,
+  Pointer<NativeFunction<PFNBLUETOOTH_GATT_EVENT_CALLBACK>> callback,
+  Pointer? callbackContext,
   Pointer<IntPtr> pEventHandle,
-  int Flags,
-) => _BluetoothGATTRegisterEvent(
-  hService,
-  EventType,
-  EventParameterIn,
-  Callback,
-  CallbackContext,
-  pEventHandle,
-  Flags,
-);
+  int flags,
+) {
+  final hr$ = HRESULT(
+    _BluetoothGATTRegisterEvent(
+      hService,
+      eventType,
+      eventParameterIn,
+      callback,
+      callbackContext ?? nullptr,
+      pEventHandle,
+      flags,
+    ),
+  );
+  if (hr$.isError) throw WindowsException(hr$);
+}
 
-final _BluetoothGATTRegisterEvent = _bluetoothapis
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hService,
-        Int32 EventType,
-        Pointer EventParameterIn,
-        Pointer<NativeFunction<PFNBLUETOOTH_GATT_EVENT_CALLBACK>> Callback,
-        Pointer CallbackContext,
-        Pointer<IntPtr> pEventHandle,
-        Uint32 Flags,
-      ),
-      int Function(
-        int hService,
-        int EventType,
-        Pointer EventParameterIn,
-        Pointer<NativeFunction<PFNBLUETOOTH_GATT_EVENT_CALLBACK>> Callback,
-        Pointer CallbackContext,
-        Pointer<IntPtr> pEventHandle,
-        int Flags,
-      )
-    >('BluetoothGATTRegisterEvent');
+@Native<
+  Int32 Function(
+    HANDLE,
+    Int32,
+    Pointer,
+    Pointer<NativeFunction<PFNBLUETOOTH_GATT_EVENT_CALLBACK>>,
+    Pointer,
+    Pointer<IntPtr>,
+    Uint32,
+  )
+>(symbol: 'BluetoothGATTRegisterEvent')
+external int _BluetoothGATTRegisterEvent(
+  int hService,
+  int eventType,
+  Pointer eventParameterIn,
+  Pointer<NativeFunction<PFNBLUETOOTH_GATT_EVENT_CALLBACK>> callback,
+  Pointer callbackContext,
+  Pointer<IntPtr> pEventHandle,
+  int flags,
+);
 
 /// Writes the specified characteristic value to the Bluetooth device.
 ///
-/// ```c
-/// HRESULT BluetoothGATTSetCharacteristicValue(
-///   HANDLE                             hDevice,
-///   PBTH_LE_GATT_CHARACTERISTIC        Characteristic,
-///   PBTH_LE_GATT_CHARACTERISTIC_VALUE  CharacteristicValue,
-///   BTH_LE_GATT_RELIABLE_WRITE_CONTEXT ReliableWriteContext,
-///   ULONG                              Flags
-/// );
-/// ```
-/// {@category bluetooth}
-int BluetoothGATTSetCharacteristicValue(
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothleapis/nf-bluetoothleapis-bluetoothgattsetcharacteristicvalue>.
+///
+/// {@category bluetoothapis}
+@pragma('vm:prefer-inline')
+void BluetoothGATTSetCharacteristicValue(
   int hDevice,
-  Pointer<BTH_LE_GATT_CHARACTERISTIC> Characteristic,
-  Pointer<BTH_LE_GATT_CHARACTERISTIC_VALUE> CharacteristicValue,
-  int ReliableWriteContext,
-  int Flags,
-) => _BluetoothGATTSetCharacteristicValue(
-  hDevice,
-  Characteristic,
-  CharacteristicValue,
-  ReliableWriteContext,
-  Flags,
-);
+  Pointer<BTH_LE_GATT_CHARACTERISTIC> characteristic,
+  Pointer<BTH_LE_GATT_CHARACTERISTIC_VALUE> characteristicValue,
+  int? reliableWriteContext,
+  int flags,
+) {
+  final hr$ = HRESULT(
+    _BluetoothGATTSetCharacteristicValue(
+      hDevice,
+      characteristic,
+      characteristicValue,
+      reliableWriteContext ?? NULL,
+      flags,
+    ),
+  );
+  if (hr$.isError) throw WindowsException(hr$);
+}
 
-final _BluetoothGATTSetCharacteristicValue = _bluetoothapis
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hDevice,
-        Pointer<BTH_LE_GATT_CHARACTERISTIC> Characteristic,
-        Pointer<BTH_LE_GATT_CHARACTERISTIC_VALUE> CharacteristicValue,
-        Uint64 ReliableWriteContext,
-        Uint32 Flags,
-      ),
-      int Function(
-        int hDevice,
-        Pointer<BTH_LE_GATT_CHARACTERISTIC> Characteristic,
-        Pointer<BTH_LE_GATT_CHARACTERISTIC_VALUE> CharacteristicValue,
-        int ReliableWriteContext,
-        int Flags,
-      )
-    >('BluetoothGATTSetCharacteristicValue');
+@Native<
+  Int32 Function(
+    HANDLE,
+    Pointer<BTH_LE_GATT_CHARACTERISTIC>,
+    Pointer<BTH_LE_GATT_CHARACTERISTIC_VALUE>,
+    Uint64,
+    Uint32,
+  )
+>(symbol: 'BluetoothGATTSetCharacteristicValue')
+external int _BluetoothGATTSetCharacteristicValue(
+  int hDevice,
+  Pointer<BTH_LE_GATT_CHARACTERISTIC> characteristic,
+  Pointer<BTH_LE_GATT_CHARACTERISTIC_VALUE> characteristicValue,
+  int reliableWriteContext,
+  int flags,
+);
 
 /// Writes the specified descriptor value to the Bluetooth device.
 ///
-/// ```c
-/// HRESULT BluetoothGATTSetDescriptorValue(
-///   HANDLE                        hDevice,
-///   PBTH_LE_GATT_DESCRIPTOR       Descriptor,
-///   PBTH_LE_GATT_DESCRIPTOR_VALUE DescriptorValue,
-///   ULONG                         Flags
-/// );
-/// ```
-/// {@category bluetooth}
-int BluetoothGATTSetDescriptorValue(
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothleapis/nf-bluetoothleapis-bluetoothgattsetdescriptorvalue>.
+///
+/// {@category bluetoothapis}
+@pragma('vm:prefer-inline')
+void BluetoothGATTSetDescriptorValue(
   int hDevice,
-  Pointer<BTH_LE_GATT_DESCRIPTOR> Descriptor,
-  Pointer<BTH_LE_GATT_DESCRIPTOR_VALUE> DescriptorValue,
-  int Flags,
-) => _BluetoothGATTSetDescriptorValue(
-  hDevice,
-  Descriptor,
-  DescriptorValue,
-  Flags,
-);
+  Pointer<BTH_LE_GATT_DESCRIPTOR> descriptor,
+  Pointer<BTH_LE_GATT_DESCRIPTOR_VALUE> descriptorValue,
+  int flags,
+) {
+  final hr$ = HRESULT(
+    _BluetoothGATTSetDescriptorValue(
+      hDevice,
+      descriptor,
+      descriptorValue,
+      flags,
+    ),
+  );
+  if (hr$.isError) throw WindowsException(hr$);
+}
 
-final _BluetoothGATTSetDescriptorValue = _bluetoothapis
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hDevice,
-        Pointer<BTH_LE_GATT_DESCRIPTOR> Descriptor,
-        Pointer<BTH_LE_GATT_DESCRIPTOR_VALUE> DescriptorValue,
-        Uint32 Flags,
-      ),
-      int Function(
-        int hDevice,
-        Pointer<BTH_LE_GATT_DESCRIPTOR> Descriptor,
-        Pointer<BTH_LE_GATT_DESCRIPTOR_VALUE> DescriptorValue,
-        int Flags,
-      )
-    >('BluetoothGATTSetDescriptorValue');
+@Native<
+  Int32 Function(
+    HANDLE,
+    Pointer<BTH_LE_GATT_DESCRIPTOR>,
+    Pointer<BTH_LE_GATT_DESCRIPTOR_VALUE>,
+    Uint32,
+  )
+>(symbol: 'BluetoothGATTSetDescriptorValue')
+external int _BluetoothGATTSetDescriptorValue(
+  int hDevice,
+  Pointer<BTH_LE_GATT_DESCRIPTOR> descriptor,
+  Pointer<BTH_LE_GATT_DESCRIPTOR_VALUE> descriptorValue,
+  int flags,
+);
 
 /// Unregisters the given characteristic value change event.
 ///
-/// ```c
-/// HRESULT BluetoothGATTUnregisterEvent(
-///   BLUETOOTH_GATT_EVENT_HANDLE EventHandle,
-///   ULONG                       Flags
-/// );
-/// ```
-/// {@category bluetooth}
-int BluetoothGATTUnregisterEvent(int EventHandle, int Flags) =>
-    _BluetoothGATTUnregisterEvent(EventHandle, Flags);
-
-final _BluetoothGATTUnregisterEvent = _bluetoothapis
-    .lookupFunction<
-      Int32 Function(IntPtr EventHandle, Uint32 Flags),
-      int Function(int EventHandle, int Flags)
-    >('BluetoothGATTUnregisterEvent');
-
-/// TThe BluetoothGetDeviceInfo function retrieves information about a
-/// remote Bluetooth device. The Bluetooth device must have been previously
-/// identified through a successful device inquiry function call.
+/// Throws a [WindowsException] on failure.
 ///
-/// ```c
-/// DWORD BluetoothGetDeviceInfo(
-///   HANDLE                hRadio,
-///   BLUETOOTH_DEVICE_INFO *pbtdi
-/// );
-/// ```
-/// {@category bluetooth}
-int BluetoothGetDeviceInfo(int hRadio, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi) =>
-    _BluetoothGetDeviceInfo(hRadio, pbtdi);
-
-final _BluetoothGetDeviceInfo = _bluetoothapis
-    .lookupFunction<
-      Uint32 Function(IntPtr hRadio, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi),
-      int Function(int hRadio, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi)
-    >('BluetoothGetDeviceInfo');
-
-/// The BluetoothGetRadioInfo function obtains information about a Bluetooth
-/// radio.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothleapis/nf-bluetoothleapis-bluetoothgattunregisterevent>.
 ///
-/// ```c
-/// DWORD BluetoothGetRadioInfo(
-///   HANDLE                hRadio,
-///   PBLUETOOTH_RADIO_INFO pRadioInfo
-/// );
-/// ```
-/// {@category bluetooth}
+/// {@category bluetoothapis}
+@pragma('vm:prefer-inline')
+void BluetoothGATTUnregisterEvent(int eventHandle, int flags) {
+  final hr$ = HRESULT(_BluetoothGATTUnregisterEvent(eventHandle, flags));
+  if (hr$.isError) throw WindowsException(hr$);
+}
+
+@Native<Int32 Function(IntPtr, Uint32)>(symbol: 'BluetoothGATTUnregisterEvent')
+external int _BluetoothGATTUnregisterEvent(int eventHandle, int flags);
+
+/// Retrieves information about a remote Bluetooth device.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothgetdeviceinfo>.
+///
+/// {@category bluetoothapis}
+@pragma('vm:prefer-inline')
+int BluetoothGetDeviceInfo(int? hRadio, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi) =>
+    _BluetoothGetDeviceInfo(hRadio ?? NULL, pbtdi);
+
+@Native<Uint32 Function(HANDLE, Pointer<BLUETOOTH_DEVICE_INFO>)>(
+  symbol: 'BluetoothGetDeviceInfo',
+)
+external int _BluetoothGetDeviceInfo(
+  int hRadio,
+  Pointer<BLUETOOTH_DEVICE_INFO> pbtdi,
+);
+
+/// Obtains information about a Bluetooth radio.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothgetradioinfo>.
+///
+/// {@category bluetoothapis}
+@pragma('vm:prefer-inline')
 int BluetoothGetRadioInfo(
   int hRadio,
   Pointer<BLUETOOTH_RADIO_INFO> pRadioInfo,
-) => _BluetoothGetRadioInfo(hRadio, pRadioInfo);
+) => BluetoothGetRadioInfo_Wrapper(hRadio, pRadioInfo);
 
-final _BluetoothGetRadioInfo = _bluetoothapis
-    .lookupFunction<
-      Uint32 Function(IntPtr hRadio, Pointer<BLUETOOTH_RADIO_INFO> pRadioInfo),
-      int Function(int hRadio, Pointer<BLUETOOTH_RADIO_INFO> pRadioInfo)
-    >('BluetoothGetRadioInfo');
-
-/// The BluetoothIsConnectable function determines whether a Bluetooth radio
-/// or radios is connectable.
+/// Determines whether a Bluetooth radio or radios is connectable.
 ///
-/// ```c
-/// BOOL BluetoothIsConnectable(
-///   HANDLE hRadio
-/// );
-/// ```
-/// {@category bluetooth}
-int BluetoothIsConnectable(int hRadio) => _BluetoothIsConnectable(hRadio);
-
-final _BluetoothIsConnectable = _bluetoothapis
-    .lookupFunction<Int32 Function(IntPtr hRadio), int Function(int hRadio)>(
-      'BluetoothIsConnectable',
-    );
-
-/// The BluetoothIsDiscoverable function determines whether a Bluetooth
-/// radio or radios is discoverable.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothisconnectable>.
 ///
-/// ```c
-/// BOOL BluetoothIsDiscoverable(
-///   HANDLE hRadio
-/// );
-/// ```
-/// {@category bluetooth}
-int BluetoothIsDiscoverable(int hRadio) => _BluetoothIsDiscoverable(hRadio);
+/// {@category bluetoothapis}
+@pragma('vm:prefer-inline')
+bool BluetoothIsConnectable(int? hRadio) =>
+    _BluetoothIsConnectable(hRadio ?? NULL) != FALSE;
 
-final _BluetoothIsDiscoverable = _bluetoothapis
-    .lookupFunction<Int32 Function(IntPtr hRadio), int Function(int hRadio)>(
-      'BluetoothIsDiscoverable',
-    );
+@Native<BOOL Function(HANDLE)>(symbol: 'BluetoothIsConnectable')
+external int _BluetoothIsConnectable(int hRadio);
 
-/// The BluetoothIsVersionAvailable function indicates if the installed
-/// Bluetooth binary set supports the requested version.
+/// Determines whether a Bluetooth radio or radios is discoverable.
 ///
-/// ```c
-/// BOOL BluetoothIsVersionAvailable(
-///   UCHAR MajorVersion,
-///   UCHAR MinorVersion
-/// );
-/// ```
-/// {@category bluetooth}
-int BluetoothIsVersionAvailable(int MajorVersion, int MinorVersion) =>
-    _BluetoothIsVersionAvailable(MajorVersion, MinorVersion);
-
-final _BluetoothIsVersionAvailable = _bluetoothapis
-    .lookupFunction<
-      Int32 Function(Uint8 MajorVersion, Uint8 MinorVersion),
-      int Function(int MajorVersion, int MinorVersion)
-    >('BluetoothIsVersionAvailable');
-
-/// The BluetoothRegisterForAuthenticationEx function registers an
-/// application for a pin request, numeric comparison and callback function.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothisdiscoverable>.
 ///
-/// ```c
-/// DWORD BluetoothRegisterForAuthenticationEx(
-///   const BLUETOOTH_DEVICE_INFO            *pbtdiIn,
-///   HBLUETOOTH_AUTHENTICATION_REGISTRATION *phRegHandleOut,
-///   PFN_AUTHENTICATION_CALLBACK_EX         pfnCallbackIn,
-///   PVOID                                  pvParam
-/// );
-/// ```
-/// {@category bluetooth}
+/// {@category bluetoothapis}
+@pragma('vm:prefer-inline')
+bool BluetoothIsDiscoverable(int? hRadio) =>
+    _BluetoothIsDiscoverable(hRadio ?? NULL) != FALSE;
+
+@Native<BOOL Function(HANDLE)>(symbol: 'BluetoothIsDiscoverable')
+external int _BluetoothIsDiscoverable(int hRadio);
+
+/// Indicates if the installed Bluetooth binary set supports the requested
+/// version.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothisversionavailable>.
+///
+/// {@category bluetoothapis}
+@pragma('vm:prefer-inline')
+bool BluetoothIsVersionAvailable(int majorVersion, int minorVersion) =>
+    _BluetoothIsVersionAvailable(majorVersion, minorVersion) != FALSE;
+
+@Native<BOOL Function(Uint8, Uint8)>(symbol: 'BluetoothIsVersionAvailable')
+external int _BluetoothIsVersionAvailable(int majorVersion, int minorVersion);
+
+/// Registers an application for a pin request, numeric comparison and callback
+/// function.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothregisterforauthenticationex>.
+///
+/// {@category bluetoothapis}
+@pragma('vm:prefer-inline')
 int BluetoothRegisterForAuthenticationEx(
+  Pointer<BLUETOOTH_DEVICE_INFO>? pbtdiIn,
+  Pointer<IntPtr> phRegHandleOut,
+  Pointer<NativeFunction<PFN_AUTHENTICATION_CALLBACK_EX>>? pfnCallbackIn,
+  Pointer? pvParam,
+) => _BluetoothRegisterForAuthenticationEx(
+  pbtdiIn ?? nullptr,
+  phRegHandleOut,
+  pfnCallbackIn ?? nullptr,
+  pvParam ?? nullptr,
+);
+
+@Native<
+  Uint32 Function(
+    Pointer<BLUETOOTH_DEVICE_INFO>,
+    Pointer<IntPtr>,
+    Pointer<NativeFunction<PFN_AUTHENTICATION_CALLBACK_EX>>,
+    Pointer,
+  )
+>(symbol: 'BluetoothRegisterForAuthenticationEx')
+external int _BluetoothRegisterForAuthenticationEx(
   Pointer<BLUETOOTH_DEVICE_INFO> pbtdiIn,
   Pointer<IntPtr> phRegHandleOut,
   Pointer<NativeFunction<PFN_AUTHENTICATION_CALLBACK_EX>> pfnCallbackIn,
   Pointer pvParam,
-) => _BluetoothRegisterForAuthenticationEx(
-  pbtdiIn,
-  phRegHandleOut,
-  pfnCallbackIn,
-  pvParam,
 );
 
-final _BluetoothRegisterForAuthenticationEx = _bluetoothapis
-    .lookupFunction<
-      Uint32 Function(
-        Pointer<BLUETOOTH_DEVICE_INFO> pbtdiIn,
-        Pointer<IntPtr> phRegHandleOut,
-        Pointer<NativeFunction<PFN_AUTHENTICATION_CALLBACK_EX>> pfnCallbackIn,
-        Pointer pvParam,
-      ),
-      int Function(
-        Pointer<BLUETOOTH_DEVICE_INFO> pbtdiIn,
-        Pointer<IntPtr> phRegHandleOut,
-        Pointer<NativeFunction<PFN_AUTHENTICATION_CALLBACK_EX>> pfnCallbackIn,
-        Pointer pvParam,
-      )
-    >('BluetoothRegisterForAuthenticationEx');
-
-/// The BluetoothRemoveDevice function removes authentication between a
-/// Bluetooth device and the computer and clears cached service information
-/// for the device.
+/// Removes authentication between a Bluetooth device and the computer and
+/// clears cached service information for the device.
 ///
-/// ```c
-/// DWORD BluetoothRemoveDevice(
-///   const BLUETOOTH_ADDRESS *pAddress
-/// );
-/// ```
-/// {@category bluetooth}
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothremovedevice>.
+///
+/// {@category bluetoothapis}
+@pragma('vm:prefer-inline')
 int BluetoothRemoveDevice(Pointer<BLUETOOTH_ADDRESS> pAddress) =>
     _BluetoothRemoveDevice(pAddress);
 
-final _BluetoothRemoveDevice = _bluetoothapis
-    .lookupFunction<
-      Uint32 Function(Pointer<BLUETOOTH_ADDRESS> pAddress),
-      int Function(Pointer<BLUETOOTH_ADDRESS> pAddress)
-    >('BluetoothRemoveDevice');
+@Native<Uint32 Function(Pointer<BLUETOOTH_ADDRESS>)>(
+  symbol: 'BluetoothRemoveDevice',
+)
+external int _BluetoothRemoveDevice(Pointer<BLUETOOTH_ADDRESS> pAddress);
 
-/// The BluetoothSdpEnumAttributes function enumerates through the SDP
-/// record stream, and calls the callback function for each attribute in the
-/// record.
+/// Enumerates through the SDP record stream, and calls the callback function
+/// for each attribute in the record.
 ///
-/// ```c
-/// BOOL BluetoothSdpEnumAttributes(
-///   LPBYTE                                 pSDPStream,
-///   ULONG                                  cbStreamSize,
-///   PFN_BLUETOOTH_ENUM_ATTRIBUTES_CALLBACK pfnCallback,
-///   LPVOID                                 pvParam
-/// );
-/// ```
-/// {@category bluetooth}
-int BluetoothSdpEnumAttributes(
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothsdpenumattributes>.
+///
+/// {@category bluetoothapis}
+@pragma('vm:prefer-inline')
+bool BluetoothSdpEnumAttributes(
   Pointer<Uint8> pSDPStream,
   int cbStreamSize,
   Pointer<NativeFunction<PFN_BLUETOOTH_ENUM_ATTRIBUTES_CALLBACK>> pfnCallback,
   Pointer pvParam,
 ) =>
-    _BluetoothSdpEnumAttributes(pSDPStream, cbStreamSize, pfnCallback, pvParam);
+    BluetoothSdpEnumAttributes_Wrapper(
+      pSDPStream,
+      cbStreamSize,
+      pfnCallback,
+      pvParam,
+    ) !=
+    FALSE;
 
-final _BluetoothSdpEnumAttributes = _bluetoothapis
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Uint8> pSDPStream,
-        Uint32 cbStreamSize,
-        Pointer<NativeFunction<PFN_BLUETOOTH_ENUM_ATTRIBUTES_CALLBACK>>
-        pfnCallback,
-        Pointer pvParam,
-      ),
-      int Function(
-        Pointer<Uint8> pSDPStream,
-        int cbStreamSize,
-        Pointer<NativeFunction<PFN_BLUETOOTH_ENUM_ATTRIBUTES_CALLBACK>>
-        pfnCallback,
-        Pointer pvParam,
-      )
-    >('BluetoothSdpEnumAttributes');
-
-/// The BluetoothSdpGetAttributeValue function retrieves the attribute value
-/// for an attribute identifier.
+/// Retrieves the attribute value for an attribute identifier.
 ///
-/// ```c
-/// DWORD BluetoothSdpGetAttributeValue(
-///   [in]  LPBYTE            pRecordStream,
-///   [in]  ULONG             cbRecordLength,
-///   [in]  USHORT            usAttributeId,
-///   [out] PSDP_ELEMENT_DATA pAttributeData
-/// );
-/// ```
-/// {@category bluetooth}
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothsdpgetattributevalue>.
+///
+/// {@category bluetoothapis}
+@pragma('vm:prefer-inline')
 int BluetoothSdpGetAttributeValue(
   Pointer<Uint8> pRecordStream,
   int cbRecordLength,
@@ -952,34 +861,24 @@ int BluetoothSdpGetAttributeValue(
   pAttributeData,
 );
 
-final _BluetoothSdpGetAttributeValue = _bluetoothapis
-    .lookupFunction<
-      Uint32 Function(
-        Pointer<Uint8> pRecordStream,
-        Uint32 cbRecordLength,
-        Uint16 usAttributeId,
-        Pointer<SDP_ELEMENT_DATA> pAttributeData,
-      ),
-      int Function(
-        Pointer<Uint8> pRecordStream,
-        int cbRecordLength,
-        int usAttributeId,
-        Pointer<SDP_ELEMENT_DATA> pAttributeData,
-      )
-    >('BluetoothSdpGetAttributeValue');
+@Native<
+  Uint32 Function(Pointer<Uint8>, Uint32, Uint16, Pointer<SDP_ELEMENT_DATA>)
+>(symbol: 'BluetoothSdpGetAttributeValue')
+external int _BluetoothSdpGetAttributeValue(
+  Pointer<Uint8> pRecordStream,
+  int cbRecordLength,
+  int usAttributeId,
+  Pointer<SDP_ELEMENT_DATA> pAttributeData,
+);
 
-/// The BluetoothSdpGetContainerElementData function iterates a container
-/// stream and returns each element contained within the container element.
+/// Iterates a container stream and returns each element contained within the
+/// container element.
 ///
-/// ```c
-/// DWORD BluetoothSdpGetContainerElementData(
-///   [in]      LPBYTE                       pContainerStream,
-///   [in]      ULONG                        cbContainerLength,
-///   [in, out] HBLUETOOTH_CONTAINER_ELEMENT *pElement,
-///   [out]     PSDP_ELEMENT_DATA            pData
-/// );
-/// ```
-/// {@category bluetooth}
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothsdpgetcontainerelementdata>.
+///
+/// {@category bluetoothapis}
+@pragma('vm:prefer-inline')
 int BluetoothSdpGetContainerElementData(
   Pointer<Uint8> pContainerStream,
   int cbContainerLength,
@@ -992,199 +891,157 @@ int BluetoothSdpGetContainerElementData(
   pData,
 );
 
-final _BluetoothSdpGetContainerElementData = _bluetoothapis
-    .lookupFunction<
-      Uint32 Function(
-        Pointer<Uint8> pContainerStream,
-        Uint32 cbContainerLength,
-        Pointer<IntPtr> pElement,
-        Pointer<SDP_ELEMENT_DATA> pData,
-      ),
-      int Function(
-        Pointer<Uint8> pContainerStream,
-        int cbContainerLength,
-        Pointer<IntPtr> pElement,
-        Pointer<SDP_ELEMENT_DATA> pData,
-      )
-    >('BluetoothSdpGetContainerElementData');
+@Native<
+  Uint32 Function(
+    Pointer<Uint8>,
+    Uint32,
+    Pointer<IntPtr>,
+    Pointer<SDP_ELEMENT_DATA>,
+  )
+>(symbol: 'BluetoothSdpGetContainerElementData')
+external int _BluetoothSdpGetContainerElementData(
+  Pointer<Uint8> pContainerStream,
+  int cbContainerLength,
+  Pointer<IntPtr> pElement,
+  Pointer<SDP_ELEMENT_DATA> pData,
+);
 
-/// The BluetoothSdpGetElementData function retrieves and parses a single
-/// element from an SDP stream.
+/// Retrieves and parses a single element from an SDP stream.
 ///
-/// ```c
-/// DWORD BluetoothSdpGetElementData(
-///   [in]  LPBYTE            pSdpStream,
-///   [in]  ULONG             cbSdpStreamLength,
-///   [out] PSDP_ELEMENT_DATA pData
-/// );
-/// ```
-/// {@category bluetooth}
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothsdpgetelementdata>.
+///
+/// {@category bluetoothapis}
+@pragma('vm:prefer-inline')
 int BluetoothSdpGetElementData(
   Pointer<Uint8> pSdpStream,
   int cbSdpStreamLength,
   Pointer<SDP_ELEMENT_DATA> pData,
 ) => _BluetoothSdpGetElementData(pSdpStream, cbSdpStreamLength, pData);
 
-final _BluetoothSdpGetElementData = _bluetoothapis
-    .lookupFunction<
-      Uint32 Function(
-        Pointer<Uint8> pSdpStream,
-        Uint32 cbSdpStreamLength,
-        Pointer<SDP_ELEMENT_DATA> pData,
-      ),
-      int Function(
-        Pointer<Uint8> pSdpStream,
-        int cbSdpStreamLength,
-        Pointer<SDP_ELEMENT_DATA> pData,
-      )
-    >('BluetoothSdpGetElementData');
+@Native<Uint32 Function(Pointer<Uint8>, Uint32, Pointer<SDP_ELEMENT_DATA>)>(
+  symbol: 'BluetoothSdpGetElementData',
+)
+external int _BluetoothSdpGetElementData(
+  Pointer<Uint8> pSdpStream,
+  int cbSdpStreamLength,
+  Pointer<SDP_ELEMENT_DATA> pData,
+);
 
-/// The BluetoothSdpGetString function converts a raw string embedded in the
-/// SDP record into a Unicode string.
+/// Converts a raw string embedded in the SDP record into a Unicode string.
 ///
-/// ```c
-/// DWORD BluetoothSdpGetString(
-///   [in]      LPBYTE                      pRecordStream,
-///   [in]      ULONG                       cbRecordLength,
-///   [in]      const PSDP_STRING_TYPE_DATA pStringData,
-///   [in]      USHORT                      usStringOffset,
-///   [out]     PWSTR                       pszString,
-///   [in, out] PULONG                      pcchStringLength
-/// );
-/// ```
-/// {@category bluetooth}
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothsdpgetstring>.
+///
+/// {@category bluetoothapis}
+@pragma('vm:prefer-inline')
 int BluetoothSdpGetString(
   Pointer<Uint8> pRecordStream,
   int cbRecordLength,
-  Pointer<SDP_STRING_TYPE_DATA> pStringData,
+  Pointer<SDP_STRING_TYPE_DATA>? pStringData,
   int usStringOffset,
-  Pointer<Utf16> pszString,
+  PWSTR pszString,
   Pointer<Uint32> pcchStringLength,
 ) => _BluetoothSdpGetString(
   pRecordStream,
   cbRecordLength,
-  pStringData,
+  pStringData ?? nullptr,
   usStringOffset,
   pszString,
   pcchStringLength,
 );
 
-final _BluetoothSdpGetString = _bluetoothapis
-    .lookupFunction<
-      Uint32 Function(
-        Pointer<Uint8> pRecordStream,
-        Uint32 cbRecordLength,
-        Pointer<SDP_STRING_TYPE_DATA> pStringData,
-        Uint16 usStringOffset,
-        Pointer<Utf16> pszString,
-        Pointer<Uint32> pcchStringLength,
-      ),
-      int Function(
-        Pointer<Uint8> pRecordStream,
-        int cbRecordLength,
-        Pointer<SDP_STRING_TYPE_DATA> pStringData,
-        int usStringOffset,
-        Pointer<Utf16> pszString,
-        Pointer<Uint32> pcchStringLength,
-      )
-    >('BluetoothSdpGetString');
+@Native<
+  Uint32 Function(
+    Pointer<Uint8>,
+    Uint32,
+    Pointer<SDP_STRING_TYPE_DATA>,
+    Uint16,
+    PWSTR,
+    Pointer<Uint32>,
+  )
+>(symbol: 'BluetoothSdpGetString')
+external int _BluetoothSdpGetString(
+  Pointer<Uint8> pRecordStream,
+  int cbRecordLength,
+  Pointer<SDP_STRING_TYPE_DATA> pStringData,
+  int usStringOffset,
+  PWSTR pszString,
+  Pointer<Uint32> pcchStringLength,
+);
 
-/// The BluetoothSendAuthenticationResponseEx function is called when an
-/// authentication request to send the passkey or a Numeric Comparison
-/// response is made.
+/// Called when an authentication request to send the passkey or a Numeric
+/// Comparison response is made.
 ///
-/// ```c
-/// DWORD BluetoothSendAuthenticationResponseEx(
-///   [in, optional] HANDLE                           hRadioIn,
-///   [in]           PBLUETOOTH_AUTHENTICATE_RESPONSE pauthResponse
-/// );
-/// ```
-/// {@category bluetooth}
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothsendauthenticationresponseex>.
+///
+/// {@category bluetoothapis}
+@pragma('vm:prefer-inline')
 int BluetoothSendAuthenticationResponseEx(
+  int? hRadioIn,
+  Pointer<BLUETOOTH_AUTHENTICATE_RESPONSE> pauthResponse,
+) => _BluetoothSendAuthenticationResponseEx(hRadioIn ?? NULL, pauthResponse);
+
+@Native<Uint32 Function(HANDLE, Pointer<BLUETOOTH_AUTHENTICATE_RESPONSE>)>(
+  symbol: 'BluetoothSendAuthenticationResponseEx',
+)
+external int _BluetoothSendAuthenticationResponseEx(
   int hRadioIn,
   Pointer<BLUETOOTH_AUTHENTICATE_RESPONSE> pauthResponse,
-) => _BluetoothSendAuthenticationResponseEx(hRadioIn, pauthResponse);
+);
 
-final _BluetoothSendAuthenticationResponseEx = _bluetoothapis
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hRadioIn,
-        Pointer<BLUETOOTH_AUTHENTICATE_RESPONSE> pauthResponse,
-      ),
-      int Function(
-        int hRadioIn,
-        Pointer<BLUETOOTH_AUTHENTICATE_RESPONSE> pauthResponse,
-      )
-    >('BluetoothSendAuthenticationResponseEx');
-
-/// The BluetoothSetServiceState function enables or disables services for a
-/// Bluetooth device.
+/// Enables or disables services for a Bluetooth device.
 ///
-/// ```c
-/// DWORD BluetoothSetServiceState(
-///   HANDLE                      hRadio,
-///   const BLUETOOTH_DEVICE_INFO *pbtdi,
-///   const GUID                  *pGuidService,
-///   DWORD                       dwServiceFlags
-/// );
-/// ```
-/// {@category bluetooth}
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothsetservicestate>.
+///
+/// {@category bluetoothapis}
+@pragma('vm:prefer-inline')
 int BluetoothSetServiceState(
+  int? hRadio,
+  Pointer<BLUETOOTH_DEVICE_INFO> pbtdi,
+  Pointer<GUID> pGuidService,
+  int dwServiceFlags,
+) => _BluetoothSetServiceState(
+  hRadio ?? NULL,
+  pbtdi,
+  pGuidService,
+  dwServiceFlags,
+);
+
+@Native<
+  Uint32 Function(HANDLE, Pointer<BLUETOOTH_DEVICE_INFO>, Pointer<GUID>, Uint32)
+>(symbol: 'BluetoothSetServiceState')
+external int _BluetoothSetServiceState(
   int hRadio,
   Pointer<BLUETOOTH_DEVICE_INFO> pbtdi,
   Pointer<GUID> pGuidService,
   int dwServiceFlags,
-) => _BluetoothSetServiceState(hRadio, pbtdi, pGuidService, dwServiceFlags);
+);
 
-final _BluetoothSetServiceState = _bluetoothapis
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hRadio,
-        Pointer<BLUETOOTH_DEVICE_INFO> pbtdi,
-        Pointer<GUID> pGuidService,
-        Uint32 dwServiceFlags,
-      ),
-      int Function(
-        int hRadio,
-        Pointer<BLUETOOTH_DEVICE_INFO> pbtdi,
-        Pointer<GUID> pGuidService,
-        int dwServiceFlags,
-      )
-    >('BluetoothSetServiceState');
-
-/// The BluetoothUnregisterAuthentication function removes registration for
-/// a callback routine that was previously registered with a call to the
-/// BluetoothRegisterForAuthentication function.
+/// Removes registration for a callback routine that was previously registered
+/// with a call to the BluetoothRegisterForAuthentication function.
 ///
-/// ```c
-/// BOOL BluetoothUnregisterAuthentication(
-///   HBLUETOOTH_AUTHENTICATION_REGISTRATION hRegHandle
-/// );
-/// ```
-/// {@category bluetooth}
-int BluetoothUnregisterAuthentication(int hRegHandle) =>
-    _BluetoothUnregisterAuthentication(hRegHandle);
-
-final _BluetoothUnregisterAuthentication = _bluetoothapis
-    .lookupFunction<
-      Int32 Function(IntPtr hRegHandle),
-      int Function(int hRegHandle)
-    >('BluetoothUnregisterAuthentication');
-
-/// The BluetoothUpdateDeviceRecord function updates the local computer
-/// cache about a Bluetooth device.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothunregisterauthentication>.
 ///
-/// ```c
-/// DWORD BluetoothUpdateDeviceRecord(
-///   const BLUETOOTH_DEVICE_INFO *pbtdi
-/// );
-/// ```
-/// {@category bluetooth}
+/// {@category bluetoothapis}
+@pragma('vm:prefer-inline')
+bool BluetoothUnregisterAuthentication(int hRegHandle) =>
+    BluetoothUnregisterAuthentication_Wrapper(hRegHandle) != FALSE;
+
+/// Updates the local computer cache about a Bluetooth device.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothupdatedevicerecord>.
+///
+/// {@category bluetoothapis}
+@pragma('vm:prefer-inline')
 int BluetoothUpdateDeviceRecord(Pointer<BLUETOOTH_DEVICE_INFO> pbtdi) =>
     _BluetoothUpdateDeviceRecord(pbtdi);
 
-final _BluetoothUpdateDeviceRecord = _bluetoothapis
-    .lookupFunction<
-      Uint32 Function(Pointer<BLUETOOTH_DEVICE_INFO> pbtdi),
-      int Function(Pointer<BLUETOOTH_DEVICE_INFO> pbtdi)
-    >('BluetoothUpdateDeviceRecord');
+@Native<Uint32 Function(Pointer<BLUETOOTH_DEVICE_INFO>)>(
+  symbol: 'BluetoothUpdateDeviceRecord',
+)
+external int _BluetoothUpdateDeviceRecord(Pointer<BLUETOOTH_DEVICE_INFO> pbtdi);

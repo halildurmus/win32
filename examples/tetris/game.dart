@@ -9,10 +9,10 @@ import 'level.dart';
 //
 class Game {
   Game(this.canvas) : isPaused = false, level = Level(canvas);
-  final Canvas canvas;
-  Level level;
 
+  final Canvas canvas;
   bool isPaused;
+  Level level;
 
   bool get isGameOver => level.isGameOver;
 

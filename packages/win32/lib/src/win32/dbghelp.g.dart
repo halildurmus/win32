@@ -1,448 +1,264 @@
-// Maps FFI prototypes onto the corresponding Win32 API function calls
-
+// Maps FFI prototypes onto the corresponding Win32 API function calls.
+//
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-
-// ignore_for_file: unused_import, non_constant_identifier_names
-// ignore_for_file: constant_identifier_names, camel_case_types
-// ignore_for_file: specify_nonobvious_property_types
+//
+// ignore_for_file: avoid_positional_boolean_parameters
+// ignore_for_file: non_constant_identifier_names, unused_import
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../callbacks.dart';
-import '../combase.dart';
-import '../guid.dart';
+import '../_internal/dbghelp.g.dart';
+import '../allocator.dart';
+import '../bstr.dart';
+import '../callbacks.g.dart';
+import '../com/interface.g.dart';
+import '../com/iunknown.g.dart';
+import '../constants.dart';
+import '../constants.g.dart';
+import '../enums.g.dart';
+import '../exception.dart';
+import '../extensions/pointer.dart';
+import '../hresult.dart';
+import '../hstring.dart';
+import '../macros.dart';
+import '../ntstatus.dart';
+import '../pcstr.dart';
+import '../pcwstr.dart';
+import '../pstr.dart';
+import '../pwstr.dart';
 import '../structs.g.dart';
-import '../variant.dart';
-
-final _dbghelp = DynamicLibrary.open('dbghelp.dll');
+import '../types.dart';
+import '../utils.dart';
 
 /// Deallocates all resources associated with the process handle.
 ///
-/// ```c
-/// BOOL SymCleanup(
-///   HANDLE hProcess);
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symcleanup>.
+///
 /// {@category dbghelp}
-int SymCleanup(int hProcess) => _SymCleanup(hProcess);
-
-final _SymCleanup = _dbghelp
-    .lookupFunction<
-      Int32 Function(IntPtr hProcess),
-      int Function(int hProcess)
-    >('SymCleanup');
+@pragma('vm:prefer-inline')
+bool SymCleanup(int hProcess) => SymCleanup_Wrapper(hProcess) != FALSE;
 
 /// Enumerates all symbols in a process.
 ///
-/// ```c
-/// BOOL SymEnumSymbolsW(
-///   HANDLE                          hProcess,
-///   ULONG64                         BaseOfDll,
-///   PCWSTR                          Mask,
-///   PSYM_ENUMERATESYMBOLS_CALLBACKW EnumSymbolsCallback,
-///   PVOID                           UserContext
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symenumsymbolsw>.
+///
 /// {@category dbghelp}
-int SymEnumSymbols(
+@pragma('vm:prefer-inline')
+bool SymEnumSymbols(
   int hProcess,
-  int BaseOfDll,
-  Pointer<Utf16> Mask,
-  Pointer<NativeFunction<PSYM_ENUMERATESYMBOLS_CALLBACK>> EnumSymbolsCallback,
-  Pointer UserContext,
-) => _SymEnumSymbols(
-  hProcess,
-  BaseOfDll,
-  Mask,
-  EnumSymbolsCallback,
-  UserContext,
-);
-
-final _SymEnumSymbols = _dbghelp
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hProcess,
-        Uint64 BaseOfDll,
-        Pointer<Utf16> Mask,
-        Pointer<NativeFunction<PSYM_ENUMERATESYMBOLS_CALLBACK>>
-        EnumSymbolsCallback,
-        Pointer UserContext,
-      ),
-      int Function(
-        int hProcess,
-        int BaseOfDll,
-        Pointer<Utf16> Mask,
-        Pointer<NativeFunction<PSYM_ENUMERATESYMBOLS_CALLBACK>>
-        EnumSymbolsCallback,
-        Pointer UserContext,
-      )
-    >('SymEnumSymbolsW');
+  int baseOfDll,
+  PCWSTR? mask,
+  Pointer<NativeFunction<PSYM_ENUMERATESYMBOLS_CALLBACK>> enumSymbolsCallback,
+  Pointer? userContext,
+) =>
+    SymEnumSymbolsW_Wrapper(
+      hProcess,
+      baseOfDll,
+      mask ?? nullptr,
+      enumSymbolsCallback,
+      userContext ?? nullptr,
+    ) !=
+    FALSE;
 
 /// Retrieves symbol information for the specified address.
 ///
-/// ```c
-/// BOOL SymFromAddrW(
-///   HANDLE        hProcess,
-///   DWORD64       Address,
-///   PDWORD64      Displacement,
-///   PSYMBOL_INFOW Symbol
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symfromaddrw>.
+///
 /// {@category dbghelp}
-int SymFromAddr(
+@pragma('vm:prefer-inline')
+bool SymFromAddr(
   int hProcess,
-  int Address,
-  Pointer<Uint64> Displacement,
-  Pointer<SYMBOL_INFO> Symbol,
-) => _SymFromAddr(hProcess, Address, Displacement, Symbol);
-
-final _SymFromAddr = _dbghelp
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hProcess,
-        Uint64 Address,
-        Pointer<Uint64> Displacement,
-        Pointer<SYMBOL_INFO> Symbol,
-      ),
-      int Function(
-        int hProcess,
-        int Address,
-        Pointer<Uint64> Displacement,
-        Pointer<SYMBOL_INFO> Symbol,
-      )
-    >('SymFromAddrW');
+  int address,
+  Pointer<Uint64>? displacement,
+  Pointer<SYMBOL_INFO> symbol,
+) =>
+    SymFromAddrW_Wrapper(hProcess, address, displacement ?? nullptr, symbol) !=
+    FALSE;
 
 /// Retrieves symbol information for the specified managed code token.
 ///
-/// ```c
-/// BOOL SymFromTokenW(
-///   HANDLE        hProcess,
-///   DWORD64       Base,
-///   DWORD         Token,
-///   PSYMBOL_INFOW Symbol
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symfromtokenw>.
+///
 /// {@category dbghelp}
-int SymFromToken(
+@pragma('vm:prefer-inline')
+bool SymFromToken(
   int hProcess,
-  int Base,
-  int Token,
-  Pointer<SYMBOL_INFO> Symbol,
-) => _SymFromToken(hProcess, Base, Token, Symbol);
-
-final _SymFromToken = _dbghelp
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hProcess,
-        Uint64 Base,
-        Uint32 Token,
-        Pointer<SYMBOL_INFO> Symbol,
-      ),
-      int Function(
-        int hProcess,
-        int Base,
-        int Token,
-        Pointer<SYMBOL_INFO> Symbol,
-      )
-    >('SymFromTokenW');
+  int base,
+  int token,
+  Pointer<SYMBOL_INFO> symbol,
+) => SymFromTokenW_Wrapper(hProcess, base, token, symbol) != FALSE;
 
 /// Gets whether the specified extended symbol option on or off.
 ///
-/// ```c
-/// BOOL SymGetExtendedOption(
-///   IMAGEHLP_EXTENDED_OPTIONS option
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symgetextendedoption>.
+///
 /// {@category dbghelp}
-int SymGetExtendedOption(int option) => _SymGetExtendedOption(option);
+@pragma('vm:prefer-inline')
+bool SymGetExtendedOption(IMAGEHLP_EXTENDED_OPTIONS option) =>
+    _SymGetExtendedOption(option) != FALSE;
 
-final _SymGetExtendedOption = _dbghelp
-    .lookupFunction<Int32 Function(Int32 option), int Function(int option)>(
-      'SymGetExtendedOption',
-    );
+@Native<BOOL Function(Int32)>(symbol: 'SymGetExtendedOption')
+external int _SymGetExtendedOption(int option);
 
 /// Initializes the symbol handler for a process.
 ///
-/// ```c
-/// BOOL SymInitializeW(
-///   HANDLE hProcess,
-///   PCWSTR UserSearchPath,
-///   BOOL   fInvadeProcess
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-syminitializew>.
+///
 /// {@category dbghelp}
-int SymInitialize(
-  int hProcess,
-  Pointer<Utf16> UserSearchPath,
-  int fInvadeProcess,
-) => _SymInitialize(hProcess, UserSearchPath, fInvadeProcess);
-
-final _SymInitialize = _dbghelp
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hProcess,
-        Pointer<Utf16> UserSearchPath,
-        Int32 fInvadeProcess,
-      ),
-      int Function(
-        int hProcess,
-        Pointer<Utf16> UserSearchPath,
-        int fInvadeProcess,
-      )
-    >('SymInitializeW');
+@pragma('vm:prefer-inline')
+bool SymInitialize(int hProcess, PCWSTR? userSearchPath, bool fInvadeProcess) =>
+    SymInitializeW_Wrapper(
+      hProcess,
+      userSearchPath ?? nullptr,
+      fInvadeProcess ? TRUE : FALSE,
+    ) !=
+    FALSE;
 
 /// Loads the symbol table for the specified module.
 ///
-/// ```c
-/// DWORD64 SymLoadModuleExW(
-///   HANDLE        hProcess,
-///   HANDLE        hFile,
-///   PCWSTR        ImageName,
-///   PCWSTR        ModuleName,
-///   DWORD64       BaseOfDll,
-///   DWORD         DllSize,
-///   PMODLOAD_DATA Data,
-///   DWORD         Flags);
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symloadmoduleexw>.
+///
 /// {@category dbghelp}
+@pragma('vm:prefer-inline')
 int SymLoadModuleEx(
   int hProcess,
-  int hFile,
-  Pointer<Utf16> ImageName,
-  Pointer<Utf16> ModuleName,
-  int BaseOfDll,
-  int DllSize,
-  Pointer<MODLOAD_DATA> Data,
-  int Flags,
-) => _SymLoadModuleEx(
+  int? hFile,
+  PCWSTR? imageName,
+  PCWSTR? moduleName,
+  int baseOfDll,
+  int dllSize,
+  Pointer<MODLOAD_DATA>? data,
+  SYM_LOAD_FLAGS? flags,
+) => SymLoadModuleExW_Wrapper(
   hProcess,
-  hFile,
-  ImageName,
-  ModuleName,
-  BaseOfDll,
-  DllSize,
-  Data,
-  Flags,
+  hFile ?? NULL,
+  imageName ?? nullptr,
+  moduleName ?? nullptr,
+  baseOfDll,
+  dllSize,
+  data ?? nullptr,
+  flags ?? NULL,
 );
-
-final _SymLoadModuleEx = _dbghelp
-    .lookupFunction<
-      Uint64 Function(
-        IntPtr hProcess,
-        IntPtr hFile,
-        Pointer<Utf16> ImageName,
-        Pointer<Utf16> ModuleName,
-        Uint64 BaseOfDll,
-        Uint32 DllSize,
-        Pointer<MODLOAD_DATA> Data,
-        Uint32 Flags,
-      ),
-      int Function(
-        int hProcess,
-        int hFile,
-        Pointer<Utf16> ImageName,
-        Pointer<Utf16> ModuleName,
-        int BaseOfDll,
-        int DllSize,
-        Pointer<MODLOAD_DATA> Data,
-        int Flags,
-      )
-    >('SymLoadModuleExW');
 
 /// Turns the specified extended symbol option on or off.
 ///
-/// ```c
-/// BOOL SymSetExtendedOption(
-///   IMAGEHLP_EXTENDED_OPTIONS option,
-///   BOOL                      value
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symsetextendedoption>.
+///
 /// {@category dbghelp}
-int SymSetExtendedOption(int option, int value) =>
-    _SymSetExtendedOption(option, value);
+@pragma('vm:prefer-inline')
+bool SymSetExtendedOption(IMAGEHLP_EXTENDED_OPTIONS option, bool value) =>
+    _SymSetExtendedOption(option, value ? TRUE : FALSE) != FALSE;
 
-final _SymSetExtendedOption = _dbghelp
-    .lookupFunction<
-      Int32 Function(Int32 option, Int32 value),
-      int Function(int option, int value)
-    >('SymSetExtendedOption');
+@Native<BOOL Function(Int32, BOOL)>(symbol: 'SymSetExtendedOption')
+external int _SymSetExtendedOption(int option, int value);
 
 /// Sets the options mask.
 ///
-/// ```c
-/// DWORD SymSetOptions(
-///   DWORD SymOptions
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symsetoptions>.
+///
 /// {@category dbghelp}
-int SymSetOptions(int SymOptions) => _SymSetOptions(SymOptions);
+@pragma('vm:prefer-inline')
+int SymSetOptions(int symOptions) => _SymSetOptions(symOptions);
 
-final _SymSetOptions = _dbghelp
-    .lookupFunction<
-      Uint32 Function(Uint32 SymOptions),
-      int Function(int SymOptions)
-    >('SymSetOptions');
+@Native<Uint32 Function(Uint32)>(symbol: 'SymSetOptions')
+external int _SymSetOptions(int symOptions);
 
 /// Sets the window that the caller will use to display a user interface.
 ///
-/// ```c
-/// BOOL SymSetParentWindow(
-///   HWND hwnd
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symsetparentwindow>.
+///
 /// {@category dbghelp}
-int SymSetParentWindow(int hwnd) => _SymSetParentWindow(hwnd);
-
-final _SymSetParentWindow = _dbghelp
-    .lookupFunction<Int32 Function(IntPtr hwnd), int Function(int hwnd)>(
-      'SymSetParentWindow',
-    );
+@pragma('vm:prefer-inline')
+bool SymSetParentWindow(int hwnd) => SymSetParentWindow_Wrapper(hwnd) != FALSE;
 
 /// Sets the local scope to the symbol that matches the specified address.
 ///
-/// ```c
-/// BOOL SymSetScopeFromAddr(
-///   HANDLE  hProcess,
-///   ULONG64 Address
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symsetscopefromaddr>.
+///
 /// {@category dbghelp}
-int SymSetScopeFromAddr(int hProcess, int Address) =>
-    _SymSetScopeFromAddr(hProcess, Address);
-
-final _SymSetScopeFromAddr = _dbghelp
-    .lookupFunction<
-      Int32 Function(IntPtr hProcess, Uint64 Address),
-      int Function(int hProcess, int Address)
-    >('SymSetScopeFromAddr');
+@pragma('vm:prefer-inline')
+bool SymSetScopeFromAddr(int hProcess, int address) =>
+    SymSetScopeFromAddr_Wrapper(hProcess, address) != FALSE;
 
 /// Sets the local scope to the symbol that matches the specified index.
 ///
-/// ```c
-/// BOOL SymSetScopeFromIndex(
-///   HANDLE  hProcess,
-///   ULONG64 BaseOfDll,
-///   DWORD   Index
-/// );
-/// ```
-/// {@category dbghelp}
-int SymSetScopeFromIndex(int hProcess, int BaseOfDll, int Index) =>
-    _SymSetScopeFromIndex(hProcess, BaseOfDll, Index);
-
-final _SymSetScopeFromIndex = _dbghelp
-    .lookupFunction<
-      Int32 Function(IntPtr hProcess, Uint64 BaseOfDll, Uint32 Index),
-      int Function(int hProcess, int BaseOfDll, int Index)
-    >('SymSetScopeFromIndex');
-
-/// Sets the local scope to the symbol that matches the specified address
-/// and inline context.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symsetscopefromindex>.
 ///
-/// ```c
-/// BOOL SymSetScopeFromInlineContext(
-///   HANDLE  hProcess,
-///   ULONG64 Address,
-///   ULONG   InlineContext
-/// );
-/// ```
 /// {@category dbghelp}
-int SymSetScopeFromInlineContext(
-  int hProcess,
-  int Address,
-  int InlineContext,
-) => _SymSetScopeFromInlineContext(hProcess, Address, InlineContext);
+@pragma('vm:prefer-inline')
+bool SymSetScopeFromIndex(int hProcess, int baseOfDll, int index) =>
+    SymSetScopeFromIndex_Wrapper(hProcess, baseOfDll, index) != FALSE;
 
-final _SymSetScopeFromInlineContext = _dbghelp
-    .lookupFunction<
-      Int32 Function(IntPtr hProcess, Uint64 Address, Uint32 InlineContext),
-      int Function(int hProcess, int Address, int InlineContext)
-    >('SymSetScopeFromInlineContext');
+/// Sets the local scope to the symbol that matches the specified address and
+/// inline context.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symsetscopefrominlinecontext>.
+///
+/// {@category dbghelp}
+@pragma('vm:prefer-inline')
+bool SymSetScopeFromInlineContext(
+  int hProcess,
+  int address,
+  int inlineContext,
+) =>
+    SymSetScopeFromInlineContext_Wrapper(hProcess, address, inlineContext) !=
+    FALSE;
 
 /// Sets the search path for the specified process.
 ///
-/// ```c
-/// BOOL SymSetSearchPathW(
-///   HANDLE hProcess,
-///   PCWSTR SearchPath
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symsetsearchpathw>.
+///
 /// {@category dbghelp}
-int SymSetSearchPath(int hProcess, Pointer<Utf16> SearchPathA) =>
-    _SymSetSearchPath(hProcess, SearchPathA);
-
-final _SymSetSearchPath = _dbghelp
-    .lookupFunction<
-      Int32 Function(IntPtr hProcess, Pointer<Utf16> SearchPathA),
-      int Function(int hProcess, Pointer<Utf16> SearchPathA)
-    >('SymSetSearchPathW');
+@pragma('vm:prefer-inline')
+bool SymSetSearchPath(int hProcess, PCWSTR? searchPathA) =>
+    SymSetSearchPathW_Wrapper(hProcess, searchPathA ?? nullptr) != FALSE;
 
 /// Unloads the symbol table.
 ///
-/// ```c
-/// BOOL SymUnloadModule(
-///   HANDLE hProcess,
-///   DWORD  BaseOfDll
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symunloadmodule>.
+///
 /// {@category dbghelp}
-int SymUnloadModule(int hProcess, int BaseOfDll) =>
-    _SymUnloadModule(hProcess, BaseOfDll);
-
-final _SymUnloadModule = _dbghelp
-    .lookupFunction<
-      Int32 Function(IntPtr hProcess, Uint32 BaseOfDll),
-      int Function(int hProcess, int BaseOfDll)
-    >('SymUnloadModule');
+@pragma('vm:prefer-inline')
+bool SymUnloadModule(int hProcess, int baseOfDll) =>
+    SymUnloadModule_Wrapper(hProcess, baseOfDll) != FALSE;
 
 /// Unloads the symbol table.
 ///
-/// ```c
-/// BOOL SymUnloadModule64(
-///   HANDLE  hProcess,
-///   DWORD64 BaseOfDll
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symunloadmodule64>.
+///
 /// {@category dbghelp}
-int SymUnloadModule64(int hProcess, int BaseOfDll) =>
-    _SymUnloadModule64(hProcess, BaseOfDll);
-
-final _SymUnloadModule64 = _dbghelp
-    .lookupFunction<
-      Int32 Function(IntPtr hProcess, Uint64 BaseOfDll),
-      int Function(int hProcess, int BaseOfDll)
-    >('SymUnloadModule64');
+@pragma('vm:prefer-inline')
+bool SymUnloadModule64(int hProcess, int baseOfDll) =>
+    SymUnloadModule64_Wrapper(hProcess, baseOfDll) != FALSE;
 
 /// Undecorates the specified decorated C++ symbol name.
 ///
-/// ```c
-/// DWORD UnDecorateSymbolNameW(
-///   PCWSTR name,
-///   PWSTR  outputString,
-///   DWORD  maxStringLength,
-///   DWORD  flags
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-undecoratesymbolnamew>.
+///
 /// {@category dbghelp}
+@pragma('vm:prefer-inline')
 int UnDecorateSymbolName(
-  Pointer<Utf16> name,
-  Pointer<Utf16> outputString,
+  PCWSTR name,
+  PWSTR outputString,
   int maxStringLength,
   int flags,
-) => _UnDecorateSymbolName(name, outputString, maxStringLength, flags);
-
-final _UnDecorateSymbolName = _dbghelp
-    .lookupFunction<
-      Uint32 Function(
-        Pointer<Utf16> name,
-        Pointer<Utf16> outputString,
-        Uint32 maxStringLength,
-        Uint32 flags,
-      ),
-      int Function(
-        Pointer<Utf16> name,
-        Pointer<Utf16> outputString,
-        int maxStringLength,
-        int flags,
-      )
-    >('UnDecorateSymbolNameW');
+) => UnDecorateSymbolNameW_Wrapper(name, outputString, maxStringLength, flags);

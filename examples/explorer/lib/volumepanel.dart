@@ -4,6 +4,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'models/volumes.dart';
 
 class VolumePanel extends StatefulWidget {
+  const VolumePanel({super.key});
+
   @override
   VolumePanelState createState() => VolumePanelState();
 }
@@ -41,7 +43,7 @@ class VolumePanelState extends State<VolumePanel> {
 }
 
 class VolumeCard extends StatefulWidget {
-  const VolumeCard({required this.volume});
+  const VolumeCard({required this.volume, super.key});
 
   final Volume volume;
 

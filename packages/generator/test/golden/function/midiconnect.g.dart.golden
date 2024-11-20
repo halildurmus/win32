@@ -1,0 +1,13 @@
+midiConnect|
+/// Connects a MIDI input device to a MIDI thru or output device, or connects a
+/// MIDI thru device to a MIDI output device.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midiconnect>.
+///
+/// {@category winmm}
+@pragma('vm:prefer-inline')
+int midiConnect(int hmi, int hmo) => _midiConnect(hmi, hmo, nullptr);
+
+@Native<Uint32 Function(HMIDI, HMIDIOUT, Pointer)>(symbol: 'midiConnect')
+external int _midiConnect(int hmi, int hmo, Pointer pReserved);

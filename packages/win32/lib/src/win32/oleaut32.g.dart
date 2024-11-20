@@ -1,1138 +1,1093 @@
-// Maps FFI prototypes onto the corresponding Win32 API function calls
-
+// Maps FFI prototypes onto the corresponding Win32 API function calls.
+//
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-
-// ignore_for_file: unused_import, non_constant_identifier_names
-// ignore_for_file: constant_identifier_names, camel_case_types
-// ignore_for_file: specify_nonobvious_property_types
+//
+// ignore_for_file: avoid_positional_boolean_parameters
+// ignore_for_file: non_constant_identifier_names, unused_import
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../callbacks.dart';
-import '../combase.dart';
+import '../allocator.dart';
+import '../bstr.dart';
+import '../com/interface.g.dart';
+import '../com/irecordinfo.g.dart';
+import '../com/iunknown.g.dart';
+import '../constants.dart';
+import '../constants.g.dart';
+import '../enums.g.dart';
+import '../exception.dart';
+import '../extensions/pointer.dart';
 import '../guid.dart';
+import '../hresult.dart';
+import '../hstring.dart';
+import '../macros.dart';
+import '../ntstatus.dart';
+import '../pcstr.dart';
+import '../pcwstr.dart';
+import '../pstr.dart';
+import '../pwstr.dart';
 import '../structs.g.dart';
+import '../types.dart';
+import '../utils.dart';
 import '../variant.dart';
-
-final _oleaut32 = DynamicLibrary.open('oleaut32.dll');
 
 /// Converts the MS-DOS representation of time to the date and time
 /// representation stored in a variant.
 ///
-/// ```c
-/// INT DosDateTimeToVariantTime(
-///   USHORT wDosDate,
-///   USHORT wDosTime,
-///   DOUBLE *pvtime
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-dosdatetimetovarianttime>.
+///
 /// {@category oleaut32}
+@pragma('vm:prefer-inline')
 int DosDateTimeToVariantTime(
   int wDosDate,
   int wDosTime,
   Pointer<Double> pvtime,
 ) => _DosDateTimeToVariantTime(wDosDate, wDosTime, pvtime);
 
-final _DosDateTimeToVariantTime = _oleaut32
-    .lookupFunction<
-      Int32 Function(Uint16 wDosDate, Uint16 wDosTime, Pointer<Double> pvtime),
-      int Function(int wDosDate, int wDosTime, Pointer<Double> pvtime)
-    >('DosDateTimeToVariantTime');
+@Native<Int32 Function(Uint16, Uint16, Pointer<Double>)>(
+  symbol: 'DosDateTimeToVariantTime',
+)
+external int _DosDateTimeToVariantTime(
+  int wDosDate,
+  int wDosTime,
+  Pointer<Double> pvtime,
+);
 
-/// Retrieves a pointer to a running object that has been registered with
-/// OLE.
+/// Retrieves a pointer to a running object that has been registered with OLE.
 ///
-/// ```c
-/// HRESULT GetActiveObject(
-///   REFCLSID rclsid,
-///   void     *pvReserved,
-///   IUnknown **ppunk
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-getactiveobject>.
+///
 /// {@category oleaut32}
-int GetActiveObject(
+@pragma('vm:prefer-inline')
+void GetActiveObject(Pointer<GUID> rclsid, Pointer<VTablePointer> ppunk) {
+  final hr$ = HRESULT(_GetActiveObject(rclsid, nullptr, ppunk));
+  if (hr$.isError) throw WindowsException(hr$);
+}
+
+@Native<Int32 Function(Pointer<GUID>, Pointer, Pointer<VTablePointer>)>(
+  symbol: 'GetActiveObject',
+)
+external int _GetActiveObject(
   Pointer<GUID> rclsid,
   Pointer pvReserved,
-  Pointer<Pointer<COMObject>> ppunk,
-) => _GetActiveObject(rclsid, pvReserved, ppunk);
+  Pointer<VTablePointer> ppunk,
+);
 
-final _GetActiveObject = _oleaut32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<GUID> rclsid,
-        Pointer pvReserved,
-        Pointer<Pointer<COMObject>> ppunk,
-      ),
-      int Function(
-        Pointer<GUID> rclsid,
-        Pointer pvReserved,
-        Pointer<Pointer<COMObject>> ppunk,
-      )
-    >('GetActiveObject');
-
-/// Increments the lock count of an array, and retrieves a pointer to the
-/// array data.
+/// Increments the lock count of an array, and retrieves a pointer to the array
+/// data.
 ///
-/// ```c
-/// HRESULT SafeArrayAccessData(
-///   [in]  SAFEARRAY *psa,
-///   [out] void **ppvData
-/// );
-/// ```
-/// {@category oleaut32}
-int SafeArrayAccessData(Pointer<SAFEARRAY> psa, Pointer<Pointer> ppvData) =>
-    _SafeArrayAccessData(psa, ppvData);
-
-final _SafeArrayAccessData = _oleaut32
-    .lookupFunction<
-      Int32 Function(Pointer<SAFEARRAY> psa, Pointer<Pointer> ppvData),
-      int Function(Pointer<SAFEARRAY> psa, Pointer<Pointer> ppvData)
-    >('SafeArrayAccessData');
-
-/// Increases the pinning reference count of the descriptor for the
-/// specified safe array by one, and may increase the pinning reference
-/// count of the data for the specified safe array by one if that data was
-/// dynamically allocated, as determined by the descriptor of the safe
-/// array.
+/// Throws a [WindowsException] on failure.
 ///
-/// ```c
-/// HRESULT SafeArrayAddRef(
-///   [in]  SAFEARRAY *psa,
-///   [out] PVOID     *ppDataToRelease
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearrayaccessdata>.
+///
 /// {@category oleaut32}
-int SafeArrayAddRef(Pointer<SAFEARRAY> psa, Pointer<Pointer> ppDataToRelease) =>
-    _SafeArrayAddRef(psa, ppDataToRelease);
+@pragma('vm:prefer-inline')
+void SafeArrayAccessData(Pointer<SAFEARRAY> psa, Pointer<Pointer> ppvData) {
+  final hr$ = HRESULT(_SafeArrayAccessData(psa, ppvData));
+  if (hr$.isError) throw WindowsException(hr$);
+}
 
-final _SafeArrayAddRef = _oleaut32
-    .lookupFunction<
-      Int32 Function(Pointer<SAFEARRAY> psa, Pointer<Pointer> ppDataToRelease),
-      int Function(Pointer<SAFEARRAY> psa, Pointer<Pointer> ppDataToRelease)
-    >('SafeArrayAddRef');
+@Native<Int32 Function(Pointer<SAFEARRAY>, Pointer<Pointer>)>(
+  symbol: 'SafeArrayAccessData',
+)
+external int _SafeArrayAccessData(
+  Pointer<SAFEARRAY> psa,
+  Pointer<Pointer> ppvData,
+);
+
+/// Increases the pinning reference count of the descriptor for the specified
+/// safe array by one, and may increase the pinning reference count of the data
+/// for the specified safe array by one if that data was dynamically allocated,
+/// as determined by the descriptor of the safe array.
+///
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearrayaddref>.
+///
+/// {@category oleaut32}
+@pragma('vm:prefer-inline')
+void SafeArrayAddRef(Pointer<SAFEARRAY> psa, Pointer<Pointer> ppDataToRelease) {
+  final hr$ = HRESULT(_SafeArrayAddRef(psa, ppDataToRelease));
+  if (hr$.isError) throw WindowsException(hr$);
+}
+
+@Native<Int32 Function(Pointer<SAFEARRAY>, Pointer<Pointer>)>(
+  symbol: 'SafeArrayAddRef',
+)
+external int _SafeArrayAddRef(
+  Pointer<SAFEARRAY> psa,
+  Pointer<Pointer> ppDataToRelease,
+);
 
 /// Allocates memory for a safe array, based on a descriptor created with
 /// SafeArrayAllocDescriptor.
 ///
-/// ```c
-/// HRESULT SafeArrayAllocData(
-///   [in] SAFEARRAY *psa
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearrayallocdata>.
+///
 /// {@category oleaut32}
-int SafeArrayAllocData(Pointer<SAFEARRAY> psa) => _SafeArrayAllocData(psa);
+@pragma('vm:prefer-inline')
+void SafeArrayAllocData(Pointer<SAFEARRAY> psa) {
+  final hr$ = HRESULT(_SafeArrayAllocData(psa));
+  if (hr$.isError) throw WindowsException(hr$);
+}
 
-final _SafeArrayAllocData = _oleaut32
-    .lookupFunction<
-      Int32 Function(Pointer<SAFEARRAY> psa),
-      int Function(Pointer<SAFEARRAY> psa)
-    >('SafeArrayAllocData');
+@Native<Int32 Function(Pointer<SAFEARRAY>)>(symbol: 'SafeArrayAllocData')
+external int _SafeArrayAllocData(Pointer<SAFEARRAY> psa);
 
 /// Allocates memory for a safe array descriptor.
 ///
-/// ```c
-/// HRESULT SafeArrayAllocDescriptor(
-///   [in]  UINT      cDims,
-///   [out] SAFEARRAY **ppsaOut
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearrayallocdescriptor>.
+///
 /// {@category oleaut32}
-int SafeArrayAllocDescriptor(int cDims, Pointer<Pointer<SAFEARRAY>> ppsaOut) =>
-    _SafeArrayAllocDescriptor(cDims, ppsaOut);
+Pointer<SAFEARRAY> SafeArrayAllocDescriptor(int cDims) {
+  final ppsaOut = loggingCalloc<Pointer<SAFEARRAY>>();
+  final hr$ = HRESULT(_SafeArrayAllocDescriptor(cDims, ppsaOut));
+  if (hr$.isError) {
+    free(ppsaOut);
+    throw WindowsException(hr$);
+  }
+  final result$ = ppsaOut.value;
+  free(ppsaOut);
+  return result$;
+}
 
-final _SafeArrayAllocDescriptor = _oleaut32
-    .lookupFunction<
-      Int32 Function(Uint32 cDims, Pointer<Pointer<SAFEARRAY>> ppsaOut),
-      int Function(int cDims, Pointer<Pointer<SAFEARRAY>> ppsaOut)
-    >('SafeArrayAllocDescriptor');
+@Native<Int32 Function(Uint32, Pointer<Pointer<SAFEARRAY>>)>(
+  symbol: 'SafeArrayAllocDescriptor',
+)
+external int _SafeArrayAllocDescriptor(
+  int cDims,
+  Pointer<Pointer<SAFEARRAY>> ppsaOut,
+);
 
 /// Creates a safe array descriptor for an array of any valid variant type,
 /// including VT_RECORD, without allocating the array data.
 ///
-/// ```c
-/// HRESULT SafeArrayAllocDescriptorEx(
-///   [in]  VARTYPE   vt,
-///   [in]  UINT      cDims,
-///   [out] SAFEARRAY **ppsaOut
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearrayallocdescriptorex>.
+///
 /// {@category oleaut32}
-int SafeArrayAllocDescriptorEx(
+Pointer<SAFEARRAY> SafeArrayAllocDescriptorEx(VARENUM vt, int cDims) {
+  final ppsaOut = loggingCalloc<Pointer<SAFEARRAY>>();
+  final hr$ = HRESULT(_SafeArrayAllocDescriptorEx(vt, cDims, ppsaOut));
+  if (hr$.isError) {
+    free(ppsaOut);
+    throw WindowsException(hr$);
+  }
+  final result$ = ppsaOut.value;
+  free(ppsaOut);
+  return result$;
+}
+
+@Native<Int32 Function(Uint16, Uint32, Pointer<Pointer<SAFEARRAY>>)>(
+  symbol: 'SafeArrayAllocDescriptorEx',
+)
+external int _SafeArrayAllocDescriptorEx(
   int vt,
   int cDims,
   Pointer<Pointer<SAFEARRAY>> ppsaOut,
-) => _SafeArrayAllocDescriptorEx(vt, cDims, ppsaOut);
-
-final _SafeArrayAllocDescriptorEx = _oleaut32
-    .lookupFunction<
-      Int32 Function(
-        Uint16 vt,
-        Uint32 cDims,
-        Pointer<Pointer<SAFEARRAY>> ppsaOut,
-      ),
-      int Function(int vt, int cDims, Pointer<Pointer<SAFEARRAY>> ppsaOut)
-    >('SafeArrayAllocDescriptorEx');
+);
 
 /// Creates a copy of an existing safe array.
 ///
-/// ```c
-/// HRESULT SafeArrayCopy(
-///   [in]  SAFEARRAY *psa,
-///   [out] SAFEARRAY **ppsaOut
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearraycopy>.
+///
 /// {@category oleaut32}
-int SafeArrayCopy(
+Pointer<SAFEARRAY> SafeArrayCopy(Pointer<SAFEARRAY> psa) {
+  final ppsaOut = loggingCalloc<Pointer<SAFEARRAY>>();
+  final hr$ = HRESULT(_SafeArrayCopy(psa, ppsaOut));
+  if (hr$.isError) {
+    free(ppsaOut);
+    throw WindowsException(hr$);
+  }
+  final result$ = ppsaOut.value;
+  free(ppsaOut);
+  return result$;
+}
+
+@Native<Int32 Function(Pointer<SAFEARRAY>, Pointer<Pointer<SAFEARRAY>>)>(
+  symbol: 'SafeArrayCopy',
+)
+external int _SafeArrayCopy(
   Pointer<SAFEARRAY> psa,
   Pointer<Pointer<SAFEARRAY>> ppsaOut,
-) => _SafeArrayCopy(psa, ppsaOut);
+);
 
-final _SafeArrayCopy = _oleaut32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<SAFEARRAY> psa,
-        Pointer<Pointer<SAFEARRAY>> ppsaOut,
-      ),
-      int Function(Pointer<SAFEARRAY> psa, Pointer<Pointer<SAFEARRAY>> ppsaOut)
-    >('SafeArrayCopy');
-
-/// Copies the source array to the specified target array after releasing
-/// any resources in the target array. This is similar to SafeArrayCopy,
-/// except that the target array has to be set up by the caller. The target
-/// is not allocated or reallocated.
+/// Copies the source array to the specified target array after releasing any
+/// resources in the target array.
 ///
-/// ```c
-/// HRESULT SafeArrayCopyData(
-///   [in] SAFEARRAY *psaSource,
-///   [in] SAFEARRAY *psaTarget
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearraycopydata>.
+///
 /// {@category oleaut32}
-int SafeArrayCopyData(
+@pragma('vm:prefer-inline')
+void SafeArrayCopyData(
   Pointer<SAFEARRAY> psaSource,
   Pointer<SAFEARRAY> psaTarget,
-) => _SafeArrayCopyData(psaSource, psaTarget);
+) {
+  final hr$ = HRESULT(_SafeArrayCopyData(psaSource, psaTarget));
+  if (hr$.isError) throw WindowsException(hr$);
+}
 
-final _SafeArrayCopyData = _oleaut32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<SAFEARRAY> psaSource,
-        Pointer<SAFEARRAY> psaTarget,
-      ),
-      int Function(Pointer<SAFEARRAY> psaSource, Pointer<SAFEARRAY> psaTarget)
-    >('SafeArrayCopyData');
+@Native<Int32 Function(Pointer<SAFEARRAY>, Pointer<SAFEARRAY>)>(
+  symbol: 'SafeArrayCopyData',
+)
+external int _SafeArrayCopyData(
+  Pointer<SAFEARRAY> psaSource,
+  Pointer<SAFEARRAY> psaTarget,
+);
 
-/// Creates a new array descriptor, allocates and initializes the data for
-/// the array, and returns a pointer to the new array descriptor.
+/// Creates a new array descriptor, allocates and initializes the data for the
+/// array, and returns a pointer to the new array descriptor.
 ///
-/// ```c
-/// SAFEARRAY * SafeArrayCreate(
-///   [in] VARTYPE        vt,
-///   [in] UINT           cDims,
-///   [in] SAFEARRAYBOUND *rgsabound
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearraycreate>.
+///
 /// {@category oleaut32}
+@pragma('vm:prefer-inline')
 Pointer<SAFEARRAY> SafeArrayCreate(
-  int vt,
+  VARENUM vt,
   int cDims,
   Pointer<SAFEARRAYBOUND> rgsabound,
 ) => _SafeArrayCreate(vt, cDims, rgsabound);
 
-final _SafeArrayCreate = _oleaut32
-    .lookupFunction<
-      Pointer<SAFEARRAY> Function(
-        Uint16 vt,
-        Uint32 cDims,
-        Pointer<SAFEARRAYBOUND> rgsabound,
-      ),
-      Pointer<SAFEARRAY> Function(
-        int vt,
-        int cDims,
-        Pointer<SAFEARRAYBOUND> rgsabound,
-      )
-    >('SafeArrayCreate');
+@Native<Pointer<SAFEARRAY> Function(Uint16, Uint32, Pointer<SAFEARRAYBOUND>)>(
+  symbol: 'SafeArrayCreate',
+)
+external Pointer<SAFEARRAY> _SafeArrayCreate(
+  int vt,
+  int cDims,
+  Pointer<SAFEARRAYBOUND> rgsabound,
+);
 
 /// Creates and returns a safe array descriptor from the specified VARTYPE,
 /// number of dimensions and bounds.
 ///
-/// ```c
-/// SAFEARRAY * SafeArrayCreateEx(
-///   [in] VARTYPE        vt,
-///   [in] UINT           cDims,
-///   [in] SAFEARRAYBOUND *rgsabound,
-///   [in] PVOID          pvExtra
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearraycreateex>.
+///
 /// {@category oleaut32}
+@pragma('vm:prefer-inline')
 Pointer<SAFEARRAY> SafeArrayCreateEx(
-  int vt,
+  VARENUM vt,
   int cDims,
   Pointer<SAFEARRAYBOUND> rgsabound,
   Pointer pvExtra,
 ) => _SafeArrayCreateEx(vt, cDims, rgsabound, pvExtra);
 
-final _SafeArrayCreateEx = _oleaut32
-    .lookupFunction<
-      Pointer<SAFEARRAY> Function(
-        Uint16 vt,
-        Uint32 cDims,
-        Pointer<SAFEARRAYBOUND> rgsabound,
-        Pointer pvExtra,
-      ),
-      Pointer<SAFEARRAY> Function(
-        int vt,
-        int cDims,
-        Pointer<SAFEARRAYBOUND> rgsabound,
-        Pointer pvExtra,
-      )
-    >('SafeArrayCreateEx');
-
-/// Creates a one-dimensional array. A safe array created with
-/// SafeArrayCreateVector is a fixed size, so the constant FADF_FIXEDSIZE is
-/// always set.
-///
-/// ```c
-/// SAFEARRAY * SafeArrayCreateVector(
-///   [in] VARTYPE vt,
-///   [in] int lLbound,
-///   [in] int cElements
-/// );
-/// ```
-/// {@category oleaut32}
-Pointer<SAFEARRAY> SafeArrayCreateVector(int vt, int lLbound, int cElements) =>
-    _SafeArrayCreateVector(vt, lLbound, cElements);
-
-final _SafeArrayCreateVector = _oleaut32
-    .lookupFunction<
-      Pointer<SAFEARRAY> Function(Uint16 vt, Int32 lLbound, Uint32 cElements),
-      Pointer<SAFEARRAY> Function(int vt, int lLbound, int cElements)
-    >('SafeArrayCreateVector');
-
-/// Creates and returns a one-dimensional safe array of the specified
-/// VARTYPE and bounds.
-///
-/// ```c
-/// SAFEARRAY * SafeArrayCreateVectorEx(
-///   [in] VARTYPE vt,
-///   [in] LONG    lLbound,
-///   [in] ULONG   cElements,
-///   [in] PVOID   pvExtra
-/// );
-/// ```
-/// {@category oleaut32}
-Pointer<SAFEARRAY> SafeArrayCreateVectorEx(
+@Native<
+  Pointer<SAFEARRAY> Function(Uint16, Uint32, Pointer<SAFEARRAYBOUND>, Pointer)
+>(symbol: 'SafeArrayCreateEx')
+external Pointer<SAFEARRAY> _SafeArrayCreateEx(
   int vt,
+  int cDims,
+  Pointer<SAFEARRAYBOUND> rgsabound,
+  Pointer pvExtra,
+);
+
+/// Creates a one-dimensional array.
+///
+/// A safe array created with SafeArrayCreateVector is a fixed size, so the
+/// constant FADF_FIXEDSIZE is always set.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearraycreatevector>.
+///
+/// {@category oleaut32}
+@pragma('vm:prefer-inline')
+Pointer<SAFEARRAY> SafeArrayCreateVector(
+  VARENUM vt,
+  int lLbound,
+  int cElements,
+) => _SafeArrayCreateVector(vt, lLbound, cElements);
+
+@Native<Pointer<SAFEARRAY> Function(Uint16, Int32, Uint32)>(
+  symbol: 'SafeArrayCreateVector',
+)
+external Pointer<SAFEARRAY> _SafeArrayCreateVector(
+  int vt,
+  int lLbound,
+  int cElements,
+);
+
+/// Creates and returns a one-dimensional safe array of the specified VARTYPE
+/// and bounds.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearraycreatevectorex>.
+///
+/// {@category oleaut32}
+@pragma('vm:prefer-inline')
+Pointer<SAFEARRAY> SafeArrayCreateVectorEx(
+  VARENUM vt,
   int lLbound,
   int cElements,
   Pointer pvExtra,
 ) => _SafeArrayCreateVectorEx(vt, lLbound, cElements, pvExtra);
 
-final _SafeArrayCreateVectorEx = _oleaut32
-    .lookupFunction<
-      Pointer<SAFEARRAY> Function(
-        Uint16 vt,
-        Int32 lLbound,
-        Uint32 cElements,
-        Pointer pvExtra,
-      ),
-      Pointer<SAFEARRAY> Function(
-        int vt,
-        int lLbound,
-        int cElements,
-        Pointer pvExtra,
-      )
-    >('SafeArrayCreateVectorEx');
+@Native<Pointer<SAFEARRAY> Function(Uint16, Int32, Uint32, Pointer)>(
+  symbol: 'SafeArrayCreateVectorEx',
+)
+external Pointer<SAFEARRAY> _SafeArrayCreateVectorEx(
+  int vt,
+  int lLbound,
+  int cElements,
+  Pointer pvExtra,
+);
 
 /// Destroys an existing array descriptor and all of the data in the array.
-/// If objects are stored in the array, Release is called on each object in
-/// the array.
 ///
-/// ```c
-/// HRESULT SafeArrayDestroy(
-///   [in] SAFEARRAY *psa
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearraydestroy>.
+///
 /// {@category oleaut32}
-int SafeArrayDestroy(Pointer<SAFEARRAY> psa) => _SafeArrayDestroy(psa);
+@pragma('vm:prefer-inline')
+void SafeArrayDestroy(Pointer<SAFEARRAY> psa) {
+  final hr$ = HRESULT(_SafeArrayDestroy(psa));
+  if (hr$.isError) throw WindowsException(hr$);
+}
 
-final _SafeArrayDestroy = _oleaut32
-    .lookupFunction<
-      Int32 Function(Pointer<SAFEARRAY> psa),
-      int Function(Pointer<SAFEARRAY> psa)
-    >('SafeArrayDestroy');
+@Native<Int32 Function(Pointer<SAFEARRAY>)>(symbol: 'SafeArrayDestroy')
+external int _SafeArrayDestroy(Pointer<SAFEARRAY> psa);
 
 /// Destroys all the data in the specified safe array.
 ///
-/// ```c
-/// HRESULT SafeArrayDestroyData(
-///   [in] SAFEARRAY *psa
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearraydestroydata>.
+///
 /// {@category oleaut32}
-int SafeArrayDestroyData(Pointer<SAFEARRAY> psa) => _SafeArrayDestroyData(psa);
+@pragma('vm:prefer-inline')
+void SafeArrayDestroyData(Pointer<SAFEARRAY> psa) {
+  final hr$ = HRESULT(_SafeArrayDestroyData(psa));
+  if (hr$.isError) throw WindowsException(hr$);
+}
 
-final _SafeArrayDestroyData = _oleaut32
-    .lookupFunction<
-      Int32 Function(Pointer<SAFEARRAY> psa),
-      int Function(Pointer<SAFEARRAY> psa)
-    >('SafeArrayDestroyData');
+@Native<Int32 Function(Pointer<SAFEARRAY>)>(symbol: 'SafeArrayDestroyData')
+external int _SafeArrayDestroyData(Pointer<SAFEARRAY> psa);
 
 /// Destroys the descriptor of the specified safe array.
 ///
-/// ```c
-/// HRESULT SafeArrayDestroyDescriptor(
-///   [in] SAFEARRAY *psa
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearraydestroydescriptor>.
+///
 /// {@category oleaut32}
-int SafeArrayDestroyDescriptor(Pointer<SAFEARRAY> psa) =>
-    _SafeArrayDestroyDescriptor(psa);
+@pragma('vm:prefer-inline')
+void SafeArrayDestroyDescriptor(Pointer<SAFEARRAY> psa) {
+  final hr$ = HRESULT(_SafeArrayDestroyDescriptor(psa));
+  if (hr$.isError) throw WindowsException(hr$);
+}
 
-final _SafeArrayDestroyDescriptor = _oleaut32
-    .lookupFunction<
-      Int32 Function(Pointer<SAFEARRAY> psa),
-      int Function(Pointer<SAFEARRAY> psa)
-    >('SafeArrayDestroyDescriptor');
+@Native<Int32 Function(Pointer<SAFEARRAY>)>(
+  symbol: 'SafeArrayDestroyDescriptor',
+)
+external int _SafeArrayDestroyDescriptor(Pointer<SAFEARRAY> psa);
 
 /// Gets the number of dimensions in the array.
 ///
-/// ```c
-/// UINT SafeArrayGetDim(
-///   [in] SAFEARRAY *psa
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearraygetdim>.
+///
 /// {@category oleaut32}
+@pragma('vm:prefer-inline')
 int SafeArrayGetDim(Pointer<SAFEARRAY> psa) => _SafeArrayGetDim(psa);
 
-final _SafeArrayGetDim = _oleaut32
-    .lookupFunction<
-      Uint32 Function(Pointer<SAFEARRAY> psa),
-      int Function(Pointer<SAFEARRAY> psa)
-    >('SafeArrayGetDim');
+@Native<Uint32 Function(Pointer<SAFEARRAY>)>(symbol: 'SafeArrayGetDim')
+external int _SafeArrayGetDim(Pointer<SAFEARRAY> psa);
 
 /// Retrieves a single element of the array.
 ///
-/// ```c
-/// HRESULT SafeArrayGetElement(
-///   [in]  SAFEARRAY *psa,
-///   [in]  LONG      *rgIndices,
-///   [out] void      *pv
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearraygetelement>.
+///
 /// {@category oleaut32}
-int SafeArrayGetElement(
+@pragma('vm:prefer-inline')
+void SafeArrayGetElement(
   Pointer<SAFEARRAY> psa,
   Pointer<Int32> rgIndices,
   Pointer pv,
-) => _SafeArrayGetElement(psa, rgIndices, pv);
+) {
+  final hr$ = HRESULT(_SafeArrayGetElement(psa, rgIndices, pv));
+  if (hr$.isError) throw WindowsException(hr$);
+}
 
-final _SafeArrayGetElement = _oleaut32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<SAFEARRAY> psa,
-        Pointer<Int32> rgIndices,
-        Pointer pv,
-      ),
-      int Function(Pointer<SAFEARRAY> psa, Pointer<Int32> rgIndices, Pointer pv)
-    >('SafeArrayGetElement');
+@Native<Int32 Function(Pointer<SAFEARRAY>, Pointer<Int32>, Pointer)>(
+  symbol: 'SafeArrayGetElement',
+)
+external int _SafeArrayGetElement(
+  Pointer<SAFEARRAY> psa,
+  Pointer<Int32> rgIndices,
+  Pointer pv,
+);
 
 /// Gets the size of an element.
 ///
-/// ```c
-/// UINT SafeArrayGetElemsize(
-///   [in] SAFEARRAY *psa
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearraygetelemsize>.
+///
 /// {@category oleaut32}
+@pragma('vm:prefer-inline')
 int SafeArrayGetElemsize(Pointer<SAFEARRAY> psa) => _SafeArrayGetElemsize(psa);
 
-final _SafeArrayGetElemsize = _oleaut32
-    .lookupFunction<
-      Uint32 Function(Pointer<SAFEARRAY> psa),
-      int Function(Pointer<SAFEARRAY> psa)
-    >('SafeArrayGetElemsize');
+@Native<Uint32 Function(Pointer<SAFEARRAY>)>(symbol: 'SafeArrayGetElemsize')
+external int _SafeArrayGetElemsize(Pointer<SAFEARRAY> psa);
 
-/// Gets the GUID of the interface contained within the specified safe
-/// array.
+/// Gets the GUID of the interface contained within the specified safe array.
 ///
-/// ```c
-/// HRESULT SafeArrayGetIID(
-///   [in]  SAFEARRAY *psa,
-///   [out] GUID      *pguid
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearraygetiid>.
+///
 /// {@category oleaut32}
-int SafeArrayGetIID(Pointer<SAFEARRAY> psa, Pointer<GUID> pguid) =>
-    _SafeArrayGetIID(psa, pguid);
+Pointer<GUID> SafeArrayGetIID(Pointer<SAFEARRAY> psa) {
+  final pguid = loggingCalloc<GUID>();
+  final hr$ = HRESULT(_SafeArrayGetIID(psa, pguid));
+  if (hr$.isError) {
+    free(pguid);
+    throw WindowsException(hr$);
+  }
+  return pguid;
+}
 
-final _SafeArrayGetIID = _oleaut32
-    .lookupFunction<
-      Int32 Function(Pointer<SAFEARRAY> psa, Pointer<GUID> pguid),
-      int Function(Pointer<SAFEARRAY> psa, Pointer<GUID> pguid)
-    >('SafeArrayGetIID');
+@Native<Int32 Function(Pointer<SAFEARRAY>, Pointer<GUID>)>(
+  symbol: 'SafeArrayGetIID',
+)
+external int _SafeArrayGetIID(Pointer<SAFEARRAY> psa, Pointer<GUID> pguid);
 
 /// Gets the lower bound for any dimension of the specified safe array.
 ///
-/// ```c
-/// HRESULT SafeArrayGetLBound(
-///   [in]  SAFEARRAY *psa,
-///   [in]  UINT      nDim,
-///   [out] LONG      *plLbound
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearraygetlbound>.
+///
 /// {@category oleaut32}
-int SafeArrayGetLBound(
+int SafeArrayGetLBound(Pointer<SAFEARRAY> psa, int nDim) {
+  final plLbound = loggingCalloc<Int32>();
+  final hr$ = HRESULT(_SafeArrayGetLBound(psa, nDim, plLbound));
+  if (hr$.isError) {
+    free(plLbound);
+    throw WindowsException(hr$);
+  }
+  final result$ = plLbound.value;
+  free(plLbound);
+  return result$;
+}
+
+@Native<Int32 Function(Pointer<SAFEARRAY>, Uint32, Pointer<Int32>)>(
+  symbol: 'SafeArrayGetLBound',
+)
+external int _SafeArrayGetLBound(
   Pointer<SAFEARRAY> psa,
   int nDim,
   Pointer<Int32> plLbound,
-) => _SafeArrayGetLBound(psa, nDim, plLbound);
+);
 
-final _SafeArrayGetLBound = _oleaut32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<SAFEARRAY> psa,
-        Uint32 nDim,
-        Pointer<Int32> plLbound,
-      ),
-      int Function(Pointer<SAFEARRAY> psa, int nDim, Pointer<Int32> plLbound)
-    >('SafeArrayGetLBound');
-
-/// Retrieves the IRecordInfo interface of the UDT contained in the
-/// specified safe array.
+/// Retrieves the IRecordInfo interface of the UDT contained in the specified
+/// safe array.
 ///
-/// ```c
-/// HRESULT SafeArrayGetRecordInfo(
-///   [in]  SAFEARRAY   *psa,
-///   [out] IRecordInfo **prinfo
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearraygetrecordinfo>.
+///
 /// {@category oleaut32}
-int SafeArrayGetRecordInfo(
-  Pointer<SAFEARRAY> psa,
-  Pointer<Pointer<COMObject>> prinfo,
-) => _SafeArrayGetRecordInfo(psa, prinfo);
+IRecordInfo? SafeArrayGetRecordInfo(Pointer<SAFEARRAY> psa) {
+  final prinfo = loggingCalloc<VTablePointer>();
+  final hr$ = HRESULT(_SafeArrayGetRecordInfo(psa, prinfo));
+  if (hr$.isError) {
+    free(prinfo);
+    throw WindowsException(hr$);
+  }
+  final result$ = prinfo.value;
+  free(prinfo);
+  if (result$.isNull) return null;
+  return IRecordInfo(result$);
+}
 
-final _SafeArrayGetRecordInfo = _oleaut32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<SAFEARRAY> psa,
-        Pointer<Pointer<COMObject>> prinfo,
-      ),
-      int Function(Pointer<SAFEARRAY> psa, Pointer<Pointer<COMObject>> prinfo)
-    >('SafeArrayGetRecordInfo');
+@Native<Int32 Function(Pointer<SAFEARRAY>, Pointer<VTablePointer>)>(
+  symbol: 'SafeArrayGetRecordInfo',
+)
+external int _SafeArrayGetRecordInfo(
+  Pointer<SAFEARRAY> psa,
+  Pointer<VTablePointer> prinfo,
+);
 
 /// Gets the upper bound for any dimension of the specified safe array.
 ///
-/// ```c
-/// HRESULT SafeArrayGetUBound(
-///   [in]  SAFEARRAY *psa,
-///   [in]  UINT      nDim,
-///   [out] LONG      *plUbound
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearraygetubound>.
+///
 /// {@category oleaut32}
-int SafeArrayGetUBound(
+int SafeArrayGetUBound(Pointer<SAFEARRAY> psa, int nDim) {
+  final plUbound = loggingCalloc<Int32>();
+  final hr$ = HRESULT(_SafeArrayGetUBound(psa, nDim, plUbound));
+  if (hr$.isError) {
+    free(plUbound);
+    throw WindowsException(hr$);
+  }
+  final result$ = plUbound.value;
+  free(plUbound);
+  return result$;
+}
+
+@Native<Int32 Function(Pointer<SAFEARRAY>, Uint32, Pointer<Int32>)>(
+  symbol: 'SafeArrayGetUBound',
+)
+external int _SafeArrayGetUBound(
   Pointer<SAFEARRAY> psa,
   int nDim,
   Pointer<Int32> plUbound,
-) => _SafeArrayGetUBound(psa, nDim, plUbound);
-
-final _SafeArrayGetUBound = _oleaut32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<SAFEARRAY> psa,
-        Uint32 nDim,
-        Pointer<Int32> plUbound,
-      ),
-      int Function(Pointer<SAFEARRAY> psa, int nDim, Pointer<Int32> plUbound)
-    >('SafeArrayGetUBound');
+);
 
 /// Gets the VARTYPE stored in the specified safe array.
 ///
-/// ```c
-/// HRESULT SafeArrayGetVartype(
-///   [in]  SAFEARRAY *psa,
-///   [out] VARTYPE   *pvt
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearraygetvartype>.
+///
 /// {@category oleaut32}
-int SafeArrayGetVartype(Pointer<SAFEARRAY> psa, Pointer<Uint16> pvt) =>
-    _SafeArrayGetVartype(psa, pvt);
+VARENUM SafeArrayGetVartype(Pointer<SAFEARRAY> psa) {
+  final pvt = loggingCalloc<Uint16>();
+  final hr$ = HRESULT(_SafeArrayGetVartype(psa, pvt));
+  if (hr$.isError) {
+    free(pvt);
+    throw WindowsException(hr$);
+  }
+  final result$ = pvt.value;
+  free(pvt);
+  return VARENUM(result$);
+}
 
-final _SafeArrayGetVartype = _oleaut32
-    .lookupFunction<
-      Int32 Function(Pointer<SAFEARRAY> psa, Pointer<Uint16> pvt),
-      int Function(Pointer<SAFEARRAY> psa, Pointer<Uint16> pvt)
-    >('SafeArrayGetVartype');
+@Native<Int32 Function(Pointer<SAFEARRAY>, Pointer<Uint16>)>(
+  symbol: 'SafeArrayGetVartype',
+)
+external int _SafeArrayGetVartype(Pointer<SAFEARRAY> psa, Pointer<Uint16> pvt);
 
 /// Increments the lock count of an array, and places a pointer to the array
 /// data in pvData of the array descriptor.
 ///
-/// ```c
-/// HRESULT SafeArrayLock(
-///   [in] SAFEARRAY *psa
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearraylock>.
+///
 /// {@category oleaut32}
-int SafeArrayLock(Pointer<SAFEARRAY> psa) => _SafeArrayLock(psa);
+@pragma('vm:prefer-inline')
+void SafeArrayLock(Pointer<SAFEARRAY> psa) {
+  final hr$ = HRESULT(_SafeArrayLock(psa));
+  if (hr$.isError) throw WindowsException(hr$);
+}
 
-final _SafeArrayLock = _oleaut32
-    .lookupFunction<
-      Int32 Function(Pointer<SAFEARRAY> psa),
-      int Function(Pointer<SAFEARRAY> psa)
-    >('SafeArrayLock');
+@Native<Int32 Function(Pointer<SAFEARRAY>)>(symbol: 'SafeArrayLock')
+external int _SafeArrayLock(Pointer<SAFEARRAY> psa);
 
 /// Gets a pointer to an array element.
 ///
-/// ```c
-/// HRESULT SafeArrayPtrOfIndex(
-///   [in]  SAFEARRAY *psa,
-///   [in]  LONG      *rgIndices,
-///   [out] void      **ppvData
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearrayptrofindex>.
+///
 /// {@category oleaut32}
-int SafeArrayPtrOfIndex(
+@pragma('vm:prefer-inline')
+void SafeArrayPtrOfIndex(
   Pointer<SAFEARRAY> psa,
   Pointer<Int32> rgIndices,
   Pointer<Pointer> ppvData,
-) => _SafeArrayPtrOfIndex(psa, rgIndices, ppvData);
+) {
+  final hr$ = HRESULT(_SafeArrayPtrOfIndex(psa, rgIndices, ppvData));
+  if (hr$.isError) throw WindowsException(hr$);
+}
 
-final _SafeArrayPtrOfIndex = _oleaut32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<SAFEARRAY> psa,
-        Pointer<Int32> rgIndices,
-        Pointer<Pointer> ppvData,
-      ),
-      int Function(
-        Pointer<SAFEARRAY> psa,
-        Pointer<Int32> rgIndices,
-        Pointer<Pointer> ppvData,
-      )
-    >('SafeArrayPtrOfIndex');
+@Native<Int32 Function(Pointer<SAFEARRAY>, Pointer<Int32>, Pointer<Pointer>)>(
+  symbol: 'SafeArrayPtrOfIndex',
+)
+external int _SafeArrayPtrOfIndex(
+  Pointer<SAFEARRAY> psa,
+  Pointer<Int32> rgIndices,
+  Pointer<Pointer> ppvData,
+);
 
 /// Stores the data element at the specified location in the array.
 ///
-/// ```c
-/// HRESULT SafeArrayPutElement(
-///   [in] SAFEARRAY *psa,
-///   [in] LONG      *rgIndices,
-///   [in] void      *pv
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearrayputelement>.
+///
 /// {@category oleaut32}
-int SafeArrayPutElement(
+@pragma('vm:prefer-inline')
+void SafeArrayPutElement(
   Pointer<SAFEARRAY> psa,
   Pointer<Int32> rgIndices,
   Pointer pv,
-) => _SafeArrayPutElement(psa, rgIndices, pv);
+) {
+  final hr$ = HRESULT(_SafeArrayPutElement(psa, rgIndices, pv));
+  if (hr$.isError) throw WindowsException(hr$);
+}
 
-final _SafeArrayPutElement = _oleaut32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<SAFEARRAY> psa,
-        Pointer<Int32> rgIndices,
-        Pointer pv,
-      ),
-      int Function(Pointer<SAFEARRAY> psa, Pointer<Int32> rgIndices, Pointer pv)
-    >('SafeArrayPutElement');
+@Native<Int32 Function(Pointer<SAFEARRAY>, Pointer<Int32>, Pointer)>(
+  symbol: 'SafeArrayPutElement',
+)
+external int _SafeArrayPutElement(
+  Pointer<SAFEARRAY> psa,
+  Pointer<Int32> rgIndices,
+  Pointer pv,
+);
 
 /// Changes the right-most (least significant) bound of the specified safe
 /// array.
 ///
-/// ```c
-/// HRESULT SafeArrayRedim(
-///   [in, out] SAFEARRAY      *psa,
-///   [in]      SAFEARRAYBOUND *psaboundNew
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearrayredim>.
+///
 /// {@category oleaut32}
-int SafeArrayRedim(
+@pragma('vm:prefer-inline')
+void SafeArrayRedim(
   Pointer<SAFEARRAY> psa,
   Pointer<SAFEARRAYBOUND> psaboundNew,
-) => _SafeArrayRedim(psa, psaboundNew);
+) {
+  final hr$ = HRESULT(_SafeArrayRedim(psa, psaboundNew));
+  if (hr$.isError) throw WindowsException(hr$);
+}
 
-final _SafeArrayRedim = _oleaut32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<SAFEARRAY> psa,
-        Pointer<SAFEARRAYBOUND> psaboundNew,
-      ),
-      int Function(Pointer<SAFEARRAY> psa, Pointer<SAFEARRAYBOUND> psaboundNew)
-    >('SafeArrayRedim');
+@Native<Int32 Function(Pointer<SAFEARRAY>, Pointer<SAFEARRAYBOUND>)>(
+  symbol: 'SafeArrayRedim',
+)
+external int _SafeArrayRedim(
+  Pointer<SAFEARRAY> psa,
+  Pointer<SAFEARRAYBOUND> psaboundNew,
+);
 
-/// Decreases the pinning reference count for the specified safe array data
-/// by one. When that count reaches 0, the memory for that data is no longer
-/// prevented from being freed.
+/// Decreases the pinning reference count for the specified safe array data by
+/// one.
 ///
-/// ```c
-/// void SafeArrayReleaseData(
-///   [in] PVOID pData
-/// );
-/// ```
+/// When that count reaches 0, the memory for that data is no longer prevented
+/// from being freed.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearrayreleasedata>.
+///
 /// {@category oleaut32}
+@pragma('vm:prefer-inline')
 void SafeArrayReleaseData(Pointer pData) => _SafeArrayReleaseData(pData);
 
-final _SafeArrayReleaseData = _oleaut32
-    .lookupFunction<Void Function(Pointer pData), void Function(Pointer pData)>(
-      'SafeArrayReleaseData',
-    );
+@Native<Void Function(Pointer)>(symbol: 'SafeArrayReleaseData')
+external void _SafeArrayReleaseData(Pointer pData);
 
-/// Decreases the pinning reference count for the descriptor of the
-/// specified safe array by one. When that count reaches 0, the memory for
-/// that descriptor is no longer prevented from being freed.
+/// Decreases the pinning reference count for the descriptor of the specified
+/// safe array by one.
 ///
-/// ```c
-/// void SafeArrayReleaseDescriptor(
-///   [in] SAFEARRAY *psa
-/// );
-/// ```
+/// When that count reaches 0, the memory for that descriptor is no longer
+/// prevented from being freed.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearrayreleasedescriptor>.
+///
 /// {@category oleaut32}
+@pragma('vm:prefer-inline')
 void SafeArrayReleaseDescriptor(Pointer<SAFEARRAY> psa) =>
     _SafeArrayReleaseDescriptor(psa);
 
-final _SafeArrayReleaseDescriptor = _oleaut32
-    .lookupFunction<
-      Void Function(Pointer<SAFEARRAY> psa),
-      void Function(Pointer<SAFEARRAY> psa)
-    >('SafeArrayReleaseDescriptor');
+@Native<Void Function(Pointer<SAFEARRAY>)>(symbol: 'SafeArrayReleaseDescriptor')
+external void _SafeArrayReleaseDescriptor(Pointer<SAFEARRAY> psa);
 
 /// Sets the GUID of the interface for the specified safe array.
 ///
-/// ```c
-/// HRESULT SafeArraySetIID(
-///   [in] SAFEARRAY *psa,
-///   [in] REFGUID   guid
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearraysetiid>.
+///
 /// {@category oleaut32}
-int SafeArraySetIID(Pointer<SAFEARRAY> psa, Pointer<GUID> guid) =>
-    _SafeArraySetIID(psa, guid);
+@pragma('vm:prefer-inline')
+void SafeArraySetIID(Pointer<SAFEARRAY> psa, Pointer<GUID> guid) {
+  final hr$ = HRESULT(_SafeArraySetIID(psa, guid));
+  if (hr$.isError) throw WindowsException(hr$);
+}
 
-final _SafeArraySetIID = _oleaut32
-    .lookupFunction<
-      Int32 Function(Pointer<SAFEARRAY> psa, Pointer<GUID> guid),
-      int Function(Pointer<SAFEARRAY> psa, Pointer<GUID> guid)
-    >('SafeArraySetIID');
+@Native<Int32 Function(Pointer<SAFEARRAY>, Pointer<GUID>)>(
+  symbol: 'SafeArraySetIID',
+)
+external int _SafeArraySetIID(Pointer<SAFEARRAY> psa, Pointer<GUID> guid);
 
 /// Sets the record info in the specified safe array.
 ///
-/// ```c
-/// HRESULT SafeArraySetRecordInfo(
-///   [in] SAFEARRAY   *psa,
-///   [in] IRecordInfo *prinfo
-/// );
-/// ```
-/// {@category oleaut32}
-int SafeArraySetRecordInfo(Pointer<SAFEARRAY> psa, Pointer<COMObject> prinfo) =>
-    _SafeArraySetRecordInfo(psa, prinfo);
-
-final _SafeArraySetRecordInfo = _oleaut32
-    .lookupFunction<
-      Int32 Function(Pointer<SAFEARRAY> psa, Pointer<COMObject> prinfo),
-      int Function(Pointer<SAFEARRAY> psa, Pointer<COMObject> prinfo)
-    >('SafeArraySetRecordInfo');
-
-/// Decrements the lock count of an array, and invalidates the pointer
-/// retrieved by SafeArrayAccessData.
+/// Throws a [WindowsException] on failure.
 ///
-/// ```c
-/// HRESULT SafeArrayUnaccessData(
-///   SAFEARRAY *psa
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearraysetrecordinfo>.
+///
 /// {@category oleaut32}
-int SafeArrayUnaccessData(Pointer<SAFEARRAY> psa) =>
-    _SafeArrayUnaccessData(psa);
+@pragma('vm:prefer-inline')
+void SafeArraySetRecordInfo(Pointer<SAFEARRAY> psa, IRecordInfo? prinfo) {
+  final hr$ = HRESULT(_SafeArraySetRecordInfo(psa, prinfo?.ptr ?? nullptr));
+  if (hr$.isError) throw WindowsException(hr$);
+}
 
-final _SafeArrayUnaccessData = _oleaut32
-    .lookupFunction<
-      Int32 Function(Pointer<SAFEARRAY> psa),
-      int Function(Pointer<SAFEARRAY> psa)
-    >('SafeArrayUnaccessData');
+@Native<Int32 Function(Pointer<SAFEARRAY>, VTablePointer)>(
+  symbol: 'SafeArraySetRecordInfo',
+)
+external int _SafeArraySetRecordInfo(
+  Pointer<SAFEARRAY> psa,
+  VTablePointer prinfo,
+);
+
+/// Decrements the lock count of an array, and invalidates the pointer retrieved
+/// by SafeArrayAccessData.
+///
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearrayunaccessdata>.
+///
+/// {@category oleaut32}
+@pragma('vm:prefer-inline')
+void SafeArrayUnaccessData(Pointer<SAFEARRAY> psa) {
+  final hr$ = HRESULT(_SafeArrayUnaccessData(psa));
+  if (hr$.isError) throw WindowsException(hr$);
+}
+
+@Native<Int32 Function(Pointer<SAFEARRAY>)>(symbol: 'SafeArrayUnaccessData')
+external int _SafeArrayUnaccessData(Pointer<SAFEARRAY> psa);
 
 /// Decrements the lock count of an array so it can be freed or resized.
 ///
-/// ```c
-/// HRESULT SafeArrayUnlock(
-///   SAFEARRAY *psa
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearrayunlock>.
+///
 /// {@category oleaut32}
-int SafeArrayUnlock(Pointer<SAFEARRAY> psa) => _SafeArrayUnlock(psa);
+@pragma('vm:prefer-inline')
+void SafeArrayUnlock(Pointer<SAFEARRAY> psa) {
+  final hr$ = HRESULT(_SafeArrayUnlock(psa));
+  if (hr$.isError) throw WindowsException(hr$);
+}
 
-final _SafeArrayUnlock = _oleaut32
-    .lookupFunction<
-      Int32 Function(Pointer<SAFEARRAY> psa),
-      int Function(Pointer<SAFEARRAY> psa)
-    >('SafeArrayUnlock');
+@Native<Int32 Function(Pointer<SAFEARRAY>)>(symbol: 'SafeArrayUnlock')
+external int _SafeArrayUnlock(Pointer<SAFEARRAY> psa);
 
 /// Allocates a new string and copies the passed string into it.
 ///
-/// ```c
-/// BSTR SysAllocString(
-///   const OLECHAR *psz
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-sysallocstring>.
+///
 /// {@category oleaut32}
-Pointer<Utf16> SysAllocString(Pointer<Utf16> psz) => _SysAllocString(psz);
+@pragma('vm:prefer-inline')
+BSTR SysAllocString(PCWSTR? psz) => _SysAllocString(psz ?? nullptr);
 
-final _SysAllocString = _oleaut32
-    .lookupFunction<
-      Pointer<Utf16> Function(Pointer<Utf16> psz),
-      Pointer<Utf16> Function(Pointer<Utf16> psz)
-    >('SysAllocString');
+@Native<BSTR Function(PCWSTR)>(symbol: 'SysAllocString')
+external BSTR _SysAllocString(PCWSTR psz);
 
 /// Takes an ANSI string as input, and returns a BSTR that contains an ANSI
-/// string. Does not perform any ANSI-to-Unicode translation.
+/// string.
 ///
-/// ```c
-/// BSTR SysAllocStringByteLen(
-///   LPCSTR psz,
-///   UINT   len
-/// );
-/// ```
-/// {@category oleaut32}
-Pointer<Utf16> SysAllocStringByteLen(Pointer<Utf8> psz, int len) =>
-    _SysAllocStringByteLen(psz, len);
-
-final _SysAllocStringByteLen = _oleaut32
-    .lookupFunction<
-      Pointer<Utf16> Function(Pointer<Utf8> psz, Uint32 len),
-      Pointer<Utf16> Function(Pointer<Utf8> psz, int len)
-    >('SysAllocStringByteLen');
-
-/// Allocates a new string, copies the specified number of characters from
-/// the passed string, and appends a null-terminating character.
+/// Does not perform any ANSI-to-Unicode translation.
 ///
-/// ```c
-/// BSTR SysAllocStringLen(
-///   const OLECHAR *strIn,
-///   UINT          ui
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-sysallocstringbytelen>.
+///
 /// {@category oleaut32}
-Pointer<Utf16> SysAllocStringLen(Pointer<Utf16> strIn, int ui) =>
-    _SysAllocStringLen(strIn, ui);
+@pragma('vm:prefer-inline')
+BSTR SysAllocStringByteLen(PCSTR? psz, int len) =>
+    _SysAllocStringByteLen(psz ?? nullptr, len);
 
-final _SysAllocStringLen = _oleaut32
-    .lookupFunction<
-      Pointer<Utf16> Function(Pointer<Utf16> strIn, Uint32 ui),
-      Pointer<Utf16> Function(Pointer<Utf16> strIn, int ui)
-    >('SysAllocStringLen');
+@Native<BSTR Function(PCSTR, Uint32)>(symbol: 'SysAllocStringByteLen')
+external BSTR _SysAllocStringByteLen(PCSTR psz, int len);
+
+/// Allocates a new string, copies the specified number of characters from the
+/// passed string, and appends a null-terminating character.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-sysallocstringlen>.
+///
+/// {@category oleaut32}
+@pragma('vm:prefer-inline')
+BSTR SysAllocStringLen(PCWSTR? strIn, int ui) =>
+    _SysAllocStringLen(strIn ?? nullptr, ui);
+
+@Native<BSTR Function(PCWSTR, Uint32)>(symbol: 'SysAllocStringLen')
+external BSTR _SysAllocStringLen(PCWSTR strIn, int ui);
 
 /// Deallocates a string allocated previously by SysAllocString,
 /// SysAllocStringByteLen, SysReAllocString, SysAllocStringLen, or
 /// SysReAllocStringLen.
 ///
-/// ```c
-/// void SysFreeString(
-///   BSTR bstrString
-/// );
-/// ```
-/// {@category oleaut32}
-void SysFreeString(Pointer<Utf16> bstrString) => _SysFreeString(bstrString);
-
-final _SysFreeString = _oleaut32
-    .lookupFunction<
-      Void Function(Pointer<Utf16> bstrString),
-      void Function(Pointer<Utf16> bstrString)
-    >('SysFreeString');
-
-/// Reallocates a previously allocated string to be the size of a second
-/// string and copies the second string into the reallocated memory.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-sysfreestring>.
 ///
-/// ```c
-/// INT SysReAllocString(
-///   BSTR          *pbstr,
-///   const OLECHAR *psz
-/// );
-/// ```
 /// {@category oleaut32}
-int SysReAllocString(Pointer<Pointer<Utf16>> pbstr, Pointer<Utf16> psz) =>
-    _SysReAllocString(pbstr, psz);
+@pragma('vm:prefer-inline')
+void SysFreeString(BSTR? bstrString) => _SysFreeString(bstrString ?? nullptr);
 
-final _SysReAllocString = _oleaut32
-    .lookupFunction<
-      Int32 Function(Pointer<Pointer<Utf16>> pbstr, Pointer<Utf16> psz),
-      int Function(Pointer<Pointer<Utf16>> pbstr, Pointer<Utf16> psz)
-    >('SysReAllocString');
+@Native<Void Function(BSTR)>(symbol: 'SysFreeString')
+external void _SysFreeString(BSTR bstrString);
 
-/// Creates a new BSTR containing a specified number of characters from an
-/// old BSTR, and frees the old BSTR.
+/// Reallocates a previously allocated string to be the size of a second string
+/// and copies the second string into the reallocated memory.
 ///
-/// ```c
-/// INT SysReAllocStringLen(
-///   BSTR          *pbstr,
-///   const OLECHAR *psz,
-///   UINT  len
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-sysreallocstring>.
+///
 /// {@category oleaut32}
-int SysReAllocStringLen(
-  Pointer<Pointer<Utf16>> pbstr,
-  Pointer<Utf16> psz,
-  int len,
-) => _SysReAllocStringLen(pbstr, psz, len);
+@pragma('vm:prefer-inline')
+int SysReAllocString(Pointer<BSTR> pbstr, PCWSTR? psz) =>
+    _SysReAllocString(pbstr, psz ?? nullptr);
 
-final _SysReAllocStringLen = _oleaut32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Pointer<Utf16>> pbstr,
-        Pointer<Utf16> psz,
-        Uint32 len,
-      ),
-      int Function(Pointer<Pointer<Utf16>> pbstr, Pointer<Utf16> psz, int len)
-    >('SysReAllocStringLen');
+@Native<Int32 Function(Pointer<BSTR>, PCWSTR)>(symbol: 'SysReAllocString')
+external int _SysReAllocString(Pointer<BSTR> pbstr, PCWSTR psz);
+
+/// Creates a new BSTR containing a specified number of characters from an old
+/// BSTR, and frees the old BSTR.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-sysreallocstringlen>.
+///
+/// {@category oleaut32}
+@pragma('vm:prefer-inline')
+int SysReAllocStringLen(Pointer<BSTR> pbstr, PCWSTR? psz, int len) =>
+    _SysReAllocStringLen(pbstr, psz ?? nullptr, len);
+
+@Native<Int32 Function(Pointer<BSTR>, PCWSTR, Uint32)>(
+  symbol: 'SysReAllocStringLen',
+)
+external int _SysReAllocStringLen(Pointer<BSTR> pbstr, PCWSTR psz, int len);
 
 /// Decreases the pinning reference count for the specified string by one.
-/// When that count reaches 0, the memory for that string is no longer
-/// prevented from being freed.
 ///
-/// ```c
-/// void SysReleaseString(
-/// BSTR bstrString
-/// );
-/// ```
+/// When that count reaches 0, the memory for that string is no longer prevented
+/// from being freed.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-sysreleasestring>.
+///
 /// {@category oleaut32}
-void SysReleaseString(Pointer<Utf16> bstrString) =>
-    _SysReleaseString(bstrString);
+@pragma('vm:prefer-inline')
+void SysReleaseString(BSTR bstrString) => _SysReleaseString(bstrString);
 
-final _SysReleaseString = _oleaut32
-    .lookupFunction<
-      Void Function(Pointer<Utf16> bstrString),
-      void Function(Pointer<Utf16> bstrString)
-    >('SysReleaseString');
+@Native<Void Function(BSTR)>(symbol: 'SysReleaseString')
+external void _SysReleaseString(BSTR bstrString);
 
 /// Returns the length (in bytes) of a BSTR.
 ///
-/// ```c
-/// UINT SysStringByteLen(
-///   BSTR bstr
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-sysstringbytelen>.
+///
 /// {@category oleaut32}
-int SysStringByteLen(Pointer<Utf16> bstr) => _SysStringByteLen(bstr);
+@pragma('vm:prefer-inline')
+int SysStringByteLen(BSTR? bstr) => _SysStringByteLen(bstr ?? nullptr);
 
-final _SysStringByteLen = _oleaut32
-    .lookupFunction<
-      Uint32 Function(Pointer<Utf16> bstr),
-      int Function(Pointer<Utf16> bstr)
-    >('SysStringByteLen');
+@Native<Uint32 Function(BSTR)>(symbol: 'SysStringByteLen')
+external int _SysStringByteLen(BSTR bstr);
 
 /// Returns the length of a BSTR.
 ///
-/// ```c
-/// UINT SysStringLen(
-///   BSTR pbstr
-/// );
-/// ```
-/// {@category oleaut32}
-int SysStringLen(Pointer<Utf16> pbstr) => _SysStringLen(pbstr);
-
-final _SysStringLen = _oleaut32
-    .lookupFunction<
-      Uint32 Function(Pointer<Utf16> pbstr),
-      int Function(Pointer<Utf16> pbstr)
-    >('SysStringLen');
-
-/// Converts a variant from one type to another.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-sysstringlen>.
 ///
-/// ```c
-/// HRESULT VarBstrCat(
-///   [in]  BSTR   bstrLeft,
-///   [in]  BSTR   bstrRight,
-///   [out] LPBSTR pbstrResult
-/// );
-/// ```
 /// {@category oleaut32}
-int VarBstrCat(
-  Pointer<Utf16> bstrLeft,
-  Pointer<Utf16> bstrRight,
-  Pointer<Pointer<Utf16>> pbstrResult,
-) => _VarBstrCat(bstrLeft, bstrRight, pbstrResult);
+@pragma('vm:prefer-inline')
+int SysStringLen(BSTR? pbstr) => _SysStringLen(pbstr ?? nullptr);
 
-final _VarBstrCat = _oleaut32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Utf16> bstrLeft,
-        Pointer<Utf16> bstrRight,
-        Pointer<Pointer<Utf16>> pbstrResult,
-      ),
-      int Function(
-        Pointer<Utf16> bstrLeft,
-        Pointer<Utf16> bstrRight,
-        Pointer<Pointer<Utf16>> pbstrResult,
-      )
-    >('VarBstrCat');
+@Native<Uint32 Function(BSTR)>(symbol: 'SysStringLen')
+external int _SysStringLen(BSTR pbstr);
+
+/// Concatenates two variants of type BSTR and returns the resulting BSTR.
+///
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varbstrcat>.
+///
+/// {@category oleaut32}
+BSTR VarBstrCat(BSTR bstrLeft, BSTR bstrRight) {
+  final pbstrResult = loggingCalloc<BSTR>();
+  final hr$ = HRESULT(_VarBstrCat(bstrLeft, bstrRight, pbstrResult));
+  if (hr$.isError) {
+    free(pbstrResult);
+    throw WindowsException(hr$);
+  }
+  final result$ = pbstrResult.value;
+  free(pbstrResult);
+  return result$;
+}
+
+@Native<Int32 Function(BSTR, BSTR, Pointer<BSTR>)>(symbol: 'VarBstrCat')
+external int _VarBstrCat(
+  BSTR bstrLeft,
+  BSTR bstrRight,
+  Pointer<BSTR> pbstrResult,
+);
 
 /// Compares two variants of type BSTR.
 ///
-/// ```c
-/// HRESULT VarBstrCmp(
-///   [in] BSTR  bstrLeft,
-///   [in] BSTR  bstrRight,
-///   [in] LCID  lcid,
-///   [in] ULONG dwFlags
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varbstrcmp>.
+///
 /// {@category oleaut32}
-int VarBstrCmp(
-  Pointer<Utf16> bstrLeft,
-  Pointer<Utf16> bstrRight,
-  int lcid,
-  int dwFlags,
-) => _VarBstrCmp(bstrLeft, bstrRight, lcid, dwFlags);
+@pragma('vm:prefer-inline')
+void VarBstrCmp(BSTR bstrLeft, BSTR bstrRight, int lcid, int dwFlags) {
+  final hr$ = HRESULT(_VarBstrCmp(bstrLeft, bstrRight, lcid, dwFlags));
+  if (hr$.isError) throw WindowsException(hr$);
+}
 
-final _VarBstrCmp = _oleaut32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Utf16> bstrLeft,
-        Pointer<Utf16> bstrRight,
-        Uint32 lcid,
-        Uint32 dwFlags,
-      ),
-      int Function(
-        Pointer<Utf16> bstrLeft,
-        Pointer<Utf16> bstrRight,
-        int lcid,
-        int dwFlags,
-      )
-    >('VarBstrCmp');
+@Native<Int32 Function(BSTR, BSTR, Uint32, Uint32)>(symbol: 'VarBstrCmp')
+external int _VarBstrCmp(BSTR bstrLeft, BSTR bstrRight, int lcid, int dwFlags);
 
 /// Converts a variant from one type to another.
 ///
-/// ```c
-/// HRESULT VariantChangeType(
-///   VARIANTARG       *pvargDest,
-///   const VARIANTARG *pvarSrc,
-///   USHORT           wFlags,
-///   VARTYPE          vt
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-variantchangetype>.
+///
 /// {@category oleaut32}
-int VariantChangeType(
+@pragma('vm:prefer-inline')
+void VariantChangeType(
+  Pointer<VARIANT> pvargDest,
+  Pointer<VARIANT> pvarSrc,
+  VAR_CHANGE_FLAGS wFlags,
+  VARENUM vt,
+) {
+  final hr$ = HRESULT(_VariantChangeType(pvargDest, pvarSrc, wFlags, vt));
+  if (hr$.isError) throw WindowsException(hr$);
+}
+
+@Native<Int32 Function(Pointer<VARIANT>, Pointer<VARIANT>, Uint16, Uint16)>(
+  symbol: 'VariantChangeType',
+)
+external int _VariantChangeType(
   Pointer<VARIANT> pvargDest,
   Pointer<VARIANT> pvarSrc,
   int wFlags,
   int vt,
-) => _VariantChangeType(pvargDest, pvarSrc, wFlags, vt);
-
-final _VariantChangeType = _oleaut32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<VARIANT> pvargDest,
-        Pointer<VARIANT> pvarSrc,
-        Uint16 wFlags,
-        Uint16 vt,
-      ),
-      int Function(
-        Pointer<VARIANT> pvargDest,
-        Pointer<VARIANT> pvarSrc,
-        int wFlags,
-        int vt,
-      )
-    >('VariantChangeType');
+);
 
 /// Clears a variant.
 ///
-/// ```c
-/// HRESULT VariantClear(
-///   VARIANTARG *pvarg
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-variantclear>.
+///
 /// {@category oleaut32}
-int VariantClear(Pointer<VARIANT> pvarg) => _VariantClear(pvarg);
+@pragma('vm:prefer-inline')
+void VariantClear(Pointer<VARIANT> pvarg) {
+  final hr$ = HRESULT(_VariantClear(pvarg));
+  if (hr$.isError) throw WindowsException(hr$);
+}
 
-final _VariantClear = _oleaut32
-    .lookupFunction<
-      Int32 Function(Pointer<VARIANT> pvarg),
-      int Function(Pointer<VARIANT> pvarg)
-    >('VariantClear');
+@Native<Int32 Function(Pointer<VARIANT>)>(symbol: 'VariantClear')
+external int _VariantClear(Pointer<VARIANT> pvarg);
 
 /// Frees the destination variant and makes a copy of the source variant.
 ///
-/// ```c
-/// HRESULT VariantCopy(
-///   VARIANTARG       *pvargDest,
-///   const VARIANTARG *pvargSrc
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-variantcopy>.
+///
 /// {@category oleaut32}
-int VariantCopy(Pointer<VARIANT> pvargDest, Pointer<VARIANT> pvargSrc) =>
-    _VariantCopy(pvargDest, pvargSrc);
+@pragma('vm:prefer-inline')
+void VariantCopy(Pointer<VARIANT> pvargDest, Pointer<VARIANT> pvargSrc) {
+  final hr$ = HRESULT(_VariantCopy(pvargDest, pvargSrc));
+  if (hr$.isError) throw WindowsException(hr$);
+}
 
-final _VariantCopy = _oleaut32
-    .lookupFunction<
-      Int32 Function(Pointer<VARIANT> pvargDest, Pointer<VARIANT> pvargSrc),
-      int Function(Pointer<VARIANT> pvargDest, Pointer<VARIANT> pvargSrc)
-    >('VariantCopy');
+@Native<Int32 Function(Pointer<VARIANT>, Pointer<VARIANT>)>(
+  symbol: 'VariantCopy',
+)
+external int _VariantCopy(
+  Pointer<VARIANT> pvargDest,
+  Pointer<VARIANT> pvargSrc,
+);
 
 /// Initializes a variant.
 ///
-/// ```c
-/// void VariantInit(
-///   VARIANTARG *pvarg
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-variantinit>.
+///
 /// {@category oleaut32}
+@pragma('vm:prefer-inline')
 void VariantInit(Pointer<VARIANT> pvarg) => _VariantInit(pvarg);
 
-final _VariantInit = _oleaut32
-    .lookupFunction<
-      Void Function(Pointer<VARIANT> pvarg),
-      void Function(Pointer<VARIANT> pvarg)
-    >('VariantInit');
+@Native<Void Function(Pointer<VARIANT>)>(symbol: 'VariantInit')
+external void _VariantInit(Pointer<VARIANT> pvarg);
 
-/// Converts the variant representation of a date and time to MS-DOS date
-/// and time values.
+/// Converts the variant representation of a date and time to MS-DOS date and
+/// time values.
 ///
-/// ```c
-/// INT VariantTimeToDosDateTime(
-///   DOUBLE vtime,
-///   USHORT *pwDosDate,
-///   USHORT *pwDosTime
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varianttimetodosdatetime>.
+///
 /// {@category oleaut32}
+@pragma('vm:prefer-inline')
 int VariantTimeToDosDateTime(
   double vtime,
   Pointer<Uint16> pwDosDate,
   Pointer<Uint16> pwDosTime,
 ) => _VariantTimeToDosDateTime(vtime, pwDosDate, pwDosTime);
 
-final _VariantTimeToDosDateTime = _oleaut32
-    .lookupFunction<
-      Int32 Function(
-        Double vtime,
-        Pointer<Uint16> pwDosDate,
-        Pointer<Uint16> pwDosTime,
-      ),
-      int Function(
-        double vtime,
-        Pointer<Uint16> pwDosDate,
-        Pointer<Uint16> pwDosTime,
-      )
-    >('VariantTimeToDosDateTime');
+@Native<Int32 Function(Double, Pointer<Uint16>, Pointer<Uint16>)>(
+  symbol: 'VariantTimeToDosDateTime',
+)
+external int _VariantTimeToDosDateTime(
+  double vtime,
+  Pointer<Uint16> pwDosDate,
+  Pointer<Uint16> pwDosTime,
+);
 
 /// Converts the variant representation of time to system time values.
 ///
-/// ```c
-/// INT VariantTimeToSystemTime(
-///   DOUBLE       vtime,
-///   LPSYSTEMTIME lpSystemTime
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varianttimetosystemtime>.
+///
 /// {@category oleaut32}
+@pragma('vm:prefer-inline')
 int VariantTimeToSystemTime(double vtime, Pointer<SYSTEMTIME> lpSystemTime) =>
     _VariantTimeToSystemTime(vtime, lpSystemTime);
 
-final _VariantTimeToSystemTime = _oleaut32
-    .lookupFunction<
-      Int32 Function(Double vtime, Pointer<SYSTEMTIME> lpSystemTime),
-      int Function(double vtime, Pointer<SYSTEMTIME> lpSystemTime)
-    >('VariantTimeToSystemTime');
+@Native<Int32 Function(Double, Pointer<SYSTEMTIME>)>(
+  symbol: 'VariantTimeToSystemTime',
+)
+external int _VariantTimeToSystemTime(
+  double vtime,
+  Pointer<SYSTEMTIME> lpSystemTime,
+);

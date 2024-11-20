@@ -1,61 +1,61 @@
-// Maps FFI prototypes onto the corresponding Win32 API function calls
-
+// Maps FFI prototypes onto the corresponding Win32 API function calls.
+//
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-
-// ignore_for_file: unused_import, non_constant_identifier_names
-// ignore_for_file: constant_identifier_names, camel_case_types
-// ignore_for_file: specify_nonobvious_property_types
+//
+// ignore_for_file: avoid_positional_boolean_parameters
+// ignore_for_file: non_constant_identifier_names, unused_import
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../callbacks.dart';
-import '../combase.dart';
-import '../guid.dart';
+import '../allocator.dart';
+import '../bstr.dart';
+import '../com/interface.g.dart';
+import '../com/iunknown.g.dart';
+import '../constants.dart';
+import '../constants.g.dart';
+import '../enums.g.dart';
+import '../exception.dart';
+import '../extensions/pointer.dart';
+import '../hresult.dart';
+import '../hstring.dart';
+import '../macros.dart';
+import '../ntstatus.dart';
+import '../pcstr.dart';
+import '../pcwstr.dart';
+import '../pstr.dart';
+import '../pwstr.dart';
 import '../structs.g.dart';
-import '../variant.dart';
+import '../types.dart';
+import '../utils.dart';
 
-final _api_ms_win_service_core_l1_1_3 = DynamicLibrary.open(
-  'api-ms-win-service-core-l1-1-3.dll',
-);
-
-/// Returns a handle for a registry key for a service to read and/or write
-/// state to.
+/// Returns a handle for a registry key for a service to read and/or write state
+/// to.
 ///
-/// ```c
-/// DWORD GetServiceRegistryStateKey(
-///   SERVICE_STATUS_HANDLE       ServiceStatusHandle,
-///   SERVICE_REGISTRY_STATE_TYPE StateType,
-///   DWORD                       AccessMask,
-///   HKEY                        *ServiceStateKey
-/// );
-/// ```
-/// {@category api_ms_win_service_core_l1_1_3}
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-getserviceregistrystatekey>.
+///
+/// {@category onecore}
+@pragma('vm:prefer-inline')
 int GetServiceRegistryStateKey(
-  int ServiceStatusHandle,
-  int StateType,
-  int AccessMask,
-  Pointer<IntPtr> ServiceStateKey,
+  int serviceStatusHandle,
+  SERVICE_REGISTRY_STATE_TYPE stateType,
+  int accessMask,
+  Pointer<HKEY> serviceStateKey,
 ) => _GetServiceRegistryStateKey(
-  ServiceStatusHandle,
-  StateType,
-  AccessMask,
-  ServiceStateKey,
+  serviceStatusHandle,
+  stateType,
+  accessMask,
+  serviceStateKey,
 );
 
-final _GetServiceRegistryStateKey = _api_ms_win_service_core_l1_1_3
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr ServiceStatusHandle,
-        Int32 StateType,
-        Uint32 AccessMask,
-        Pointer<IntPtr> ServiceStateKey,
-      ),
-      int Function(
-        int ServiceStatusHandle,
-        int StateType,
-        int AccessMask,
-        Pointer<IntPtr> ServiceStateKey,
-      )
-    >('GetServiceRegistryStateKey');
+@Native<Uint32 Function(SERVICE_STATUS_HANDLE, Int32, Uint32, Pointer<HKEY>)>(
+  symbol: 'GetServiceRegistryStateKey',
+)
+external int _GetServiceRegistryStateKey(
+  int serviceStatusHandle,
+  int stateType,
+  int accessMask,
+  Pointer<HKEY> serviceStateKey,
+);

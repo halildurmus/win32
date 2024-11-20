@@ -2,7 +2,7 @@ codecov:
   require_ci_to_pass: true
 
 comment:
-  layout: "header, diff, flags, files"
+  layout: header, diff, flags, files
   require_base: false
 
 flag_management:
@@ -17,7 +17,7 @@ flag_management:
   individual_flags:
     - name: generator
       paths:
-      - packages/generator
+        - packages/generator
       carryforward: true
       statuses:
         - type: project
@@ -26,20 +26,19 @@ flag_management:
           target: 100%
     - name: win32
       paths:
-      - packages/win32
+        - packages/win32
       carryforward: true
       statuses:
-      - type: project
-        target: 20%
-      - type: patch
-        target: 100%
+        - type: project
+          target: 20%
+        - type: patch
+          target: 100%
 
 # Exclude generated files and examples from the coverage report.
 ignore:
-  - 'examples'
+  - examples
   - '**/example/'
   - '**/*.g.dart'
-  - packages/win32/lib/src/com
-  - packages/win32/lib/src/constants_nodoc.dart
-  - packages/win32/lib/src/propertykey.dart
-  - packages/win32/lib/src/variant.dart
+  - packages/win32/lib/src/callbacks.dart
+  - packages/win32/lib/src/constants.dart
+  - packages/win32/lib/src/constants_winsock.dart

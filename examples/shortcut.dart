@@ -2,28 +2,18 @@
 
 // ignore_for_file: non_constant_identifier_names
 
-import 'dart:ffi';
-
 import 'package:args/args.dart';
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 void createShortcut(String path, String pathLink, String? description) {
-  final shellLink = ShellLink.createInstance();
-  final lpPath = path.toNativeUtf16();
-  final lpPathLink = pathLink.toNativeUtf16();
-  final lpDescription = description?.toNativeUtf16() ?? nullptr;
-
-  try {
-    shellLink.setPath(lpPath);
-    if (description != null) shellLink.setDescription(lpDescription);
-
-    IPersistFile.from(shellLink).save(lpPathLink, TRUE);
-  } finally {
-    free(lpPath);
-    free(lpPathLink);
-    if (lpDescription != nullptr) free(lpDescription);
+  final pszFile = w(path);
+  final shellLink = createInstance<IShellLink>(ShellLink)..setPath(pszFile.ptr);
+  if (description != null) {
+    final pszName = w(description);
+    shellLink.setDescription(pszName.ptr);
   }
+  final pszFileName = w(pathLink);
+  shellLink.cast<IPersistFile>().save(pszFileName.ptr, true);
 }
 
 void main(List<String> args) {
@@ -48,7 +38,7 @@ void main(List<String> args) {
 
   try {
     final results = parser.parse(args);
-    CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
+    CoInitializeEx(COINIT_MULTITHREADED);
     createShortcut(
       results['path'] as String,
       results['shortcut'] as String,

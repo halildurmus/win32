@@ -1,66 +1,78 @@
-// Maps FFI prototypes onto the corresponding Win32 API function calls
-
+// Maps FFI prototypes onto the corresponding Win32 API function calls.
+//
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-
-// ignore_for_file: unused_import, non_constant_identifier_names
-// ignore_for_file: constant_identifier_names, camel_case_types
-// ignore_for_file: specify_nonobvious_property_types
+//
+// ignore_for_file: avoid_positional_boolean_parameters
+// ignore_for_file: non_constant_identifier_names, unused_import
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../callbacks.dart';
-import '../combase.dart';
-import '../guid.dart';
+import '../allocator.dart';
+import '../bstr.dart';
+import '../com/imetadatadispenserex.g.dart';
+import '../com/imetadataimport2.g.dart';
+import '../com/interface.g.dart';
+import '../com/iunknown.g.dart';
+import '../constants.dart';
+import '../constants.g.dart';
+import '../exception.dart';
+import '../extensions/pointer.dart';
+import '../hresult.dart';
+import '../hstring.dart';
+import '../macros.dart';
+import '../ntstatus.dart';
+import '../pcstr.dart';
+import '../pcwstr.dart';
+import '../pstr.dart';
+import '../pwstr.dart';
 import '../structs.g.dart';
-import '../variant.dart';
-
-final _api_ms_win_ro_typeresolution_l1_1_0 = DynamicLibrary.open(
-  'api-ms-win-ro-typeresolution-l1-1-0.dll',
-);
+import '../types.dart';
+import '../utils.dart';
 
 /// Locates and retrieves the metadata file that describes the Application
 /// Binary Interface (ABI) for the specified typename.
 ///
-/// ```c
-/// HRESULT RoGetMetaDataFile(
-///   [in]            const HSTRING        name,
-///   [in, optional]  IMetaDataDispenserEx *metaDataDispenser,
-///   [out, optional] HSTRING              *metaDataFilePath,
-///   [out, optional] IMetaDataImport2     **metaDataImport,
-///   [out, optional] mdTypeDef            *typeDefToken
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/rometadataresolution/nf-rometadataresolution-rogetmetadatafile>.
+///
 /// {@category winrt}
-int RoGetMetaDataFile(
+@pragma('vm:prefer-inline')
+void RoGetMetaDataFile(
   int name,
-  Pointer<COMObject> metaDataDispenser,
-  Pointer<IntPtr> metaDataFilePath,
-  Pointer<Pointer<COMObject>> metaDataImport,
-  Pointer<Uint32> typeDefToken,
-) => _RoGetMetaDataFile(
-  name,
-  metaDataDispenser,
-  metaDataFilePath,
-  metaDataImport,
-  typeDefToken,
-);
+  IMetaDataDispenserEx? metaDataDispenser,
+  Pointer<HSTRING>? metaDataFilePath,
+  Pointer<VTablePointer>? metaDataImport,
+  Pointer<Uint32>? typeDefToken,
+) {
+  final hr$ = HRESULT(
+    _RoGetMetaDataFile(
+      name,
+      metaDataDispenser?.ptr ?? nullptr,
+      metaDataFilePath ?? nullptr,
+      metaDataImport ?? nullptr,
+      typeDefToken ?? nullptr,
+    ),
+  );
+  if (hr$.isError) throw WindowsException(hr$);
+}
 
-final _RoGetMetaDataFile = _api_ms_win_ro_typeresolution_l1_1_0
-    .lookupFunction<
-      Int32 Function(
-        IntPtr name,
-        Pointer<COMObject> metaDataDispenser,
-        Pointer<IntPtr> metaDataFilePath,
-        Pointer<Pointer<COMObject>> metaDataImport,
-        Pointer<Uint32> typeDefToken,
-      ),
-      int Function(
-        int name,
-        Pointer<COMObject> metaDataDispenser,
-        Pointer<IntPtr> metaDataFilePath,
-        Pointer<Pointer<COMObject>> metaDataImport,
-        Pointer<Uint32> typeDefToken,
-      )
-    >('RoGetMetaDataFile');
+@Native<
+  Int32 Function(
+    HSTRING,
+    VTablePointer,
+    Pointer<HSTRING>,
+    Pointer<VTablePointer>,
+    Pointer<Uint32>,
+  )
+>(symbol: 'RoGetMetaDataFile')
+external int _RoGetMetaDataFile(
+  int name,
+  VTablePointer metaDataDispenser,
+  Pointer<HSTRING> metaDataFilePath,
+  Pointer<VTablePointer> metaDataImport,
+  Pointer<Uint32> typeDefToken,
+);

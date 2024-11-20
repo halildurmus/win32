@@ -29,4 +29,7 @@
 
 # We create these files for inspection if the golden tests fail, but we don't
 # need to check them in.
-**/goldens/*.comparison
+**/golden/**/*.comparison
+
+# Don't need to check in benchmark results.
+benchmark/results.json

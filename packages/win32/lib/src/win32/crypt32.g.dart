@@ -1,226 +1,128 @@
-// Maps FFI prototypes onto the corresponding Win32 API function calls
-
+// Maps FFI prototypes onto the corresponding Win32 API function calls.
+//
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-
-// ignore_for_file: unused_import, non_constant_identifier_names
-// ignore_for_file: constant_identifier_names, camel_case_types
-// ignore_for_file: specify_nonobvious_property_types
+//
+// ignore_for_file: avoid_positional_boolean_parameters
+// ignore_for_file: non_constant_identifier_names, unused_import
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../callbacks.dart';
-import '../combase.dart';
-import '../guid.dart';
+import '../_internal/crypt32.g.dart';
+import '../allocator.dart';
+import '../bstr.dart';
+import '../com/interface.g.dart';
+import '../com/iunknown.g.dart';
+import '../constants.dart';
+import '../constants.g.dart';
+import '../exception.dart';
+import '../extensions/pointer.dart';
+import '../hresult.dart';
+import '../hstring.dart';
+import '../macros.dart';
+import '../ntstatus.dart';
+import '../pcstr.dart';
+import '../pcwstr.dart';
+import '../pstr.dart';
+import '../pwstr.dart';
 import '../structs.g.dart';
-import '../variant.dart';
+import '../types.dart';
+import '../utils.dart';
 
-final _crypt32 = DynamicLibrary.open('crypt32.dll');
-
-/// The CryptProtectData function performs encryption on the data in a
-/// DATA_BLOB structure. Typically, only a user with the same logon
-/// credential as the user who encrypted the data can decrypt the data. In
-/// addition, the encryption and decryption usually must be done on the same
-/// computer.
+/// Performs encryption on the data in a DATA_BLOB structure.
 ///
-/// ```c
-/// BOOL CryptProtectData(
-///   [in]           DATA_BLOB                 *pDataIn,
-///   [in, optional] LPCWSTR                   szDataDescr,
-///   [in, optional] DATA_BLOB                 *pOptionalEntropy,
-///   [in]           PVOID                     pvReserved,
-///   [in, optional] CRYPTPROTECT_PROMPTSTRUCT *pPromptStruct,
-///   [in]           DWORD                     dwFlags,
-///   [out]          DATA_BLOB                 *pDataOut
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dpapi/nf-dpapi-cryptprotectdata>.
+///
 /// {@category crypt32}
-int CryptProtectData(
+@pragma('vm:prefer-inline')
+bool CryptProtectData(
   Pointer<CRYPT_INTEGER_BLOB> pDataIn,
-  Pointer<Utf16> szDataDescr,
-  Pointer<CRYPT_INTEGER_BLOB> pOptionalEntropy,
-  Pointer pvReserved,
-  Pointer<CRYPTPROTECT_PROMPTSTRUCT> pPromptStruct,
+  PCWSTR? szDataDescr,
+  Pointer<CRYPT_INTEGER_BLOB>? pOptionalEntropy,
+  Pointer<CRYPTPROTECT_PROMPTSTRUCT>? pPromptStruct,
   int dwFlags,
   Pointer<CRYPT_INTEGER_BLOB> pDataOut,
-) => _CryptProtectData(
-  pDataIn,
-  szDataDescr,
-  pOptionalEntropy,
-  pvReserved,
-  pPromptStruct,
-  dwFlags,
-  pDataOut,
-);
+) =>
+    CryptProtectData_Wrapper(
+      pDataIn,
+      szDataDescr ?? nullptr,
+      pOptionalEntropy ?? nullptr,
+      nullptr,
+      pPromptStruct ?? nullptr,
+      dwFlags,
+      pDataOut,
+    ) !=
+    FALSE;
 
-final _CryptProtectData = _crypt32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<CRYPT_INTEGER_BLOB> pDataIn,
-        Pointer<Utf16> szDataDescr,
-        Pointer<CRYPT_INTEGER_BLOB> pOptionalEntropy,
-        Pointer pvReserved,
-        Pointer<CRYPTPROTECT_PROMPTSTRUCT> pPromptStruct,
-        Uint32 dwFlags,
-        Pointer<CRYPT_INTEGER_BLOB> pDataOut,
-      ),
-      int Function(
-        Pointer<CRYPT_INTEGER_BLOB> pDataIn,
-        Pointer<Utf16> szDataDescr,
-        Pointer<CRYPT_INTEGER_BLOB> pOptionalEntropy,
-        Pointer pvReserved,
-        Pointer<CRYPTPROTECT_PROMPTSTRUCT> pPromptStruct,
-        int dwFlags,
-        Pointer<CRYPT_INTEGER_BLOB> pDataOut,
-      )
-    >('CryptProtectData');
-
-/// The CryptProtectMemory function encrypts memory to prevent others from
-/// viewing sensitive information in your process. For example, use the
-/// CryptProtectMemory function to encrypt memory that contains a password.
-/// Encrypting the password prevents others from viewing it when the process
-/// is paged out to the swap file. Otherwise, the password is in plaintext
-/// and viewable by others.
+/// Encrypts memory to prevent others from viewing sensitive information in your
+/// process.
 ///
-/// ```c
-/// BOOL CryptProtectMemory(
-///   [in, out] LPVOID pDataIn,
-///   [in]      DWORD  cbDataIn,
-///   [in]      DWORD  dwFlags
-/// );
-/// ```
-/// {@category crypt32}
-int CryptProtectMemory(Pointer pDataIn, int cbDataIn, int dwFlags) =>
-    _CryptProtectMemory(pDataIn, cbDataIn, dwFlags);
-
-final _CryptProtectMemory = _crypt32
-    .lookupFunction<
-      Int32 Function(Pointer pDataIn, Uint32 cbDataIn, Uint32 dwFlags),
-      int Function(Pointer pDataIn, int cbDataIn, int dwFlags)
-    >('CryptProtectMemory');
-
-/// The CryptUnprotectData function decrypts and does an integrity check of
-/// the data in a DATA_BLOB structure. Usually, the only user who can
-/// decrypt the data is a user with the same logon credentials as the user
-/// who encrypted the data. In addition, the encryption and decryption must
-/// be done on the same computer.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dpapi/nf-dpapi-cryptprotectmemory>.
 ///
-/// ```c
-/// BOOL CryptUnprotectData(
-///   [in]            DATA_BLOB                 *pDataIn,
-///   [out, optional] LPWSTR                    *ppszDataDescr,
-///   [in, optional]  DATA_BLOB                 *pOptionalEntropy,
-///                   PVOID                     pvReserved,
-///   [in, optional]  CRYPTPROTECT_PROMPTSTRUCT *pPromptStruct,
-///   [in]            DWORD                     dwFlags,
-///   [out]           DATA_BLOB                 *pDataOut
-/// );
-/// ```
 /// {@category crypt32}
-int CryptUnprotectData(
+@pragma('vm:prefer-inline')
+bool CryptProtectMemory(Pointer pDataIn, int cbDataIn, int dwFlags) =>
+    CryptProtectMemory_Wrapper(pDataIn, cbDataIn, dwFlags) != FALSE;
+
+/// Decrypts and does an integrity check of the data in a DATA_BLOB structure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dpapi/nf-dpapi-cryptunprotectdata>.
+///
+/// {@category crypt32}
+@pragma('vm:prefer-inline')
+bool CryptUnprotectData(
   Pointer<CRYPT_INTEGER_BLOB> pDataIn,
-  Pointer<Pointer<Utf16>> ppszDataDescr,
-  Pointer<CRYPT_INTEGER_BLOB> pOptionalEntropy,
-  Pointer pvReserved,
-  Pointer<CRYPTPROTECT_PROMPTSTRUCT> pPromptStruct,
+  Pointer<PWSTR>? ppszDataDescr,
+  Pointer<CRYPT_INTEGER_BLOB>? pOptionalEntropy,
+  Pointer<CRYPTPROTECT_PROMPTSTRUCT>? pPromptStruct,
   int dwFlags,
   Pointer<CRYPT_INTEGER_BLOB> pDataOut,
-) => _CryptUnprotectData(
-  pDataIn,
-  ppszDataDescr,
-  pOptionalEntropy,
-  pvReserved,
-  pPromptStruct,
-  dwFlags,
-  pDataOut,
-);
+) =>
+    CryptUnprotectData_Wrapper(
+      pDataIn,
+      ppszDataDescr ?? nullptr,
+      pOptionalEntropy ?? nullptr,
+      nullptr,
+      pPromptStruct ?? nullptr,
+      dwFlags,
+      pDataOut,
+    ) !=
+    FALSE;
 
-final _CryptUnprotectData = _crypt32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<CRYPT_INTEGER_BLOB> pDataIn,
-        Pointer<Pointer<Utf16>> ppszDataDescr,
-        Pointer<CRYPT_INTEGER_BLOB> pOptionalEntropy,
-        Pointer pvReserved,
-        Pointer<CRYPTPROTECT_PROMPTSTRUCT> pPromptStruct,
-        Uint32 dwFlags,
-        Pointer<CRYPT_INTEGER_BLOB> pDataOut,
-      ),
-      int Function(
-        Pointer<CRYPT_INTEGER_BLOB> pDataIn,
-        Pointer<Pointer<Utf16>> ppszDataDescr,
-        Pointer<CRYPT_INTEGER_BLOB> pOptionalEntropy,
-        Pointer pvReserved,
-        Pointer<CRYPTPROTECT_PROMPTSTRUCT> pPromptStruct,
-        int dwFlags,
-        Pointer<CRYPT_INTEGER_BLOB> pDataOut,
-      )
-    >('CryptUnprotectData');
-
-/// The CryptUnprotectMemory function decrypts memory that was encrypted
-/// using the CryptProtectMemory function.
+/// Decrypts memory that was encrypted using the CryptProtectMemory function.
 ///
-/// ```c
-/// BOOL CryptUnprotectMemory(
-///   [in, out] LPVOID pDataIn,
-///   [in]      DWORD  cbDataIn,
-///   [in]      DWORD  dwFlags
-/// );
-/// ```
-/// {@category crypt32}
-int CryptUnprotectMemory(Pointer pDataIn, int cbDataIn, int dwFlags) =>
-    _CryptUnprotectMemory(pDataIn, cbDataIn, dwFlags);
-
-final _CryptUnprotectMemory = _crypt32
-    .lookupFunction<
-      Int32 Function(Pointer pDataIn, Uint32 cbDataIn, Uint32 dwFlags),
-      int Function(Pointer pDataIn, int cbDataIn, int dwFlags)
-    >('CryptUnprotectMemory');
-
-/// The CryptUpdateProtectedState function migrates the current user's
-/// master keys after the user's security identifier (SID) has changed. This
-/// function can be used to preserve encrypted data after a user has been
-/// moved from one domain to another.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dpapi/nf-dpapi-cryptunprotectmemory>.
 ///
-/// ```c
-/// BOOL CryptUpdateProtectedState(
-///   [in]  PSID    pOldSid,
-///   [in]  LPCWSTR pwszOldPassword,
-///   [in]  DWORD   dwFlags,
-///   [out] DWORD   *pdwSuccessCount,
-///   [out] DWORD   *pdwFailureCount
-/// );
-/// ```
 /// {@category crypt32}
-int CryptUpdateProtectedState(
-  Pointer pOldSid,
-  Pointer<Utf16> pwszOldPassword,
+@pragma('vm:prefer-inline')
+bool CryptUnprotectMemory(Pointer pDataIn, int cbDataIn, int dwFlags) =>
+    CryptUnprotectMemory_Wrapper(pDataIn, cbDataIn, dwFlags) != FALSE;
+
+/// Migrates the current user's master keys after the user's security identifier
+/// (SID) has changed.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dpapi/nf-dpapi-cryptupdateprotectedstate>.
+///
+/// {@category crypt32}
+@pragma('vm:prefer-inline')
+bool CryptUpdateProtectedState(
+  int? pOldSid,
+  PCWSTR? pwszOldPassword,
   int dwFlags,
-  Pointer<Uint32> pdwSuccessCount,
-  Pointer<Uint32> pdwFailureCount,
-) => _CryptUpdateProtectedState(
-  pOldSid,
-  pwszOldPassword,
-  dwFlags,
-  pdwSuccessCount,
-  pdwFailureCount,
-);
-
-final _CryptUpdateProtectedState = _crypt32
-    .lookupFunction<
-      Int32 Function(
-        Pointer pOldSid,
-        Pointer<Utf16> pwszOldPassword,
-        Uint32 dwFlags,
-        Pointer<Uint32> pdwSuccessCount,
-        Pointer<Uint32> pdwFailureCount,
-      ),
-      int Function(
-        Pointer pOldSid,
-        Pointer<Utf16> pwszOldPassword,
-        int dwFlags,
-        Pointer<Uint32> pdwSuccessCount,
-        Pointer<Uint32> pdwFailureCount,
-      )
-    >('CryptUpdateProtectedState');
+  Pointer<Uint32>? pdwSuccessCount,
+  Pointer<Uint32>? pdwFailureCount,
+) =>
+    CryptUpdateProtectedState_Wrapper(
+      pOldSid ?? NULL,
+      pwszOldPassword ?? nullptr,
+      dwFlags,
+      pdwSuccessCount ?? nullptr,
+      pdwFailureCount ?? nullptr,
+    ) !=
+    FALSE;

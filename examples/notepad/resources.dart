@@ -1,12 +1,7 @@
-// resources.dart
-
-// Global resource identifiers, menus and accelerators
-
 // ignore_for_file: constant_identifier_names
 
 import 'dart:ffi';
 
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'notepad.dart';
@@ -42,67 +37,69 @@ class NotepadResources {
     final hMenu = CreateMenu();
 
     var hMenuPopup = CreateMenu();
-    AppendMenu(hMenuPopup, MF_STRING, IDM_FILE_NEW, TEXT('&New\tCtrl+N'));
-    AppendMenu(hMenuPopup, MF_STRING, IDM_FILE_OPEN, TEXT('&Open...\tCtrl+O'));
-    AppendMenu(hMenuPopup, MF_STRING, IDM_FILE_SAVE, TEXT('&Save\tCtrl+S'));
-    AppendMenu(hMenuPopup, MF_STRING, IDM_FILE_SAVE_AS, TEXT('Save &As...'));
-    AppendMenu(hMenuPopup, MF_SEPARATOR, 0, nullptr);
-    AppendMenu(hMenuPopup, MF_STRING, IDM_FILE_PRINT, TEXT('&Print\tCtrl+P'));
-    AppendMenu(hMenuPopup, MF_SEPARATOR, 0, nullptr);
-    AppendMenu(hMenuPopup, MF_STRING, IDM_APP_EXIT, TEXT('E&xit'));
-    AppendMenu(hMenu, MF_POPUP, hMenuPopup, TEXT('&File'));
+    final newItem = w('&New\tCtrl+N');
+    AppendMenu(hMenuPopup, MF_STRING, IDM_FILE_NEW, newItem.ptr);
+    final openItem = w('&Open...\tCtrl+O');
+    AppendMenu(hMenuPopup, MF_STRING, IDM_FILE_OPEN, openItem.ptr);
+    final saveItem = w('&Save\tCtrl+S');
+    AppendMenu(hMenuPopup, MF_STRING, IDM_FILE_SAVE, saveItem.ptr);
+    final saveAsItem = w('Save &As...');
+    AppendMenu(hMenuPopup, MF_STRING, IDM_FILE_SAVE_AS, saveAsItem.ptr);
+    AppendMenu(hMenuPopup, MF_SEPARATOR, 0, null);
+    final printItem = w('&Print\tCtrl+P');
+    AppendMenu(hMenuPopup, MF_STRING, IDM_FILE_PRINT, printItem.ptr);
+    AppendMenu(hMenuPopup, MF_SEPARATOR, 0, null);
+    final exitItem = w('E&xit');
+    AppendMenu(hMenuPopup, MF_STRING, IDM_APP_EXIT, exitItem.ptr);
+    final fileItem = w('&File');
+    AppendMenu(hMenu, MF_POPUP, hMenuPopup, fileItem.ptr);
 
     hMenuPopup = CreateMenu();
-    AppendMenu(hMenuPopup, MF_STRING, IDM_EDIT_UNDO, TEXT('&Undo\tCtrl+Z'));
-    AppendMenu(hMenuPopup, MF_SEPARATOR, 0, nullptr);
-    AppendMenu(hMenuPopup, MF_STRING, IDM_EDIT_CUT, TEXT('Cu&t\tCtrl+X'));
-    AppendMenu(hMenuPopup, MF_STRING, IDM_EDIT_COPY, TEXT('&Copy\tCtrl+C'));
-    AppendMenu(hMenuPopup, MF_STRING, IDM_EDIT_PASTE, TEXT('&Paste\tCtrl+V'));
-    AppendMenu(hMenuPopup, MF_STRING, IDM_EDIT_CLEAR, TEXT('De&lete\tDel'));
-    AppendMenu(hMenuPopup, MF_SEPARATOR, 0, nullptr);
-    AppendMenu(
-      hMenuPopup,
-      MF_STRING,
-      IDM_EDIT_SELECT_ALL,
-      TEXT('&Select All\tCtrl+A'),
-    );
-    AppendMenu(hMenu, MF_POPUP, hMenuPopup, TEXT('&Edit'));
+    final undoItem = w('&Undo\tCtrl+Z');
+    AppendMenu(hMenuPopup, MF_STRING, IDM_EDIT_UNDO, undoItem.ptr);
+    AppendMenu(hMenuPopup, MF_SEPARATOR, 0, null);
+    final cutItem = w('Cu&t\tCtrl+X');
+    AppendMenu(hMenuPopup, MF_STRING, IDM_EDIT_CUT, cutItem.ptr);
+    final copyItem = w('&Copy\tCtrl+C');
+    AppendMenu(hMenuPopup, MF_STRING, IDM_EDIT_COPY, copyItem.ptr);
+    final pasteItem = w('&Paste\tCtrl+V');
+    AppendMenu(hMenuPopup, MF_STRING, IDM_EDIT_PASTE, pasteItem.ptr);
+    final clearItem = w('De&lete\tDel');
+    AppendMenu(hMenuPopup, MF_STRING, IDM_EDIT_CLEAR, clearItem.ptr);
+    AppendMenu(hMenuPopup, MF_SEPARATOR, 0, null);
+    final selectAllItem = w('&Select All\tCtrl+A');
+    AppendMenu(hMenuPopup, MF_STRING, IDM_EDIT_SELECT_ALL, selectAllItem.ptr);
+    final editItem = w('&Edit');
+    AppendMenu(hMenu, MF_POPUP, hMenuPopup, editItem.ptr);
 
     hMenuPopup = CreateMenu();
-    AppendMenu(
-      hMenuPopup,
-      MF_STRING,
-      IDM_SEARCH_FIND,
-      TEXT('&Find...\tCtrl+F'),
-    );
-    AppendMenu(hMenuPopup, MF_STRING, IDM_SEARCH_NEXT, TEXT('Find &Next\tF3'));
-    AppendMenu(
-      hMenuPopup,
-      MF_STRING,
-      IDM_SEARCH_REPLACE,
-      TEXT('&Replace...\tCtrl+R'),
-    );
-    AppendMenu(hMenu, MF_POPUP, hMenuPopup, TEXT('&Search'));
+    final findItem = w('&Find...\tCtrl+F');
+    AppendMenu(hMenuPopup, MF_STRING, IDM_SEARCH_FIND, findItem.ptr);
+    final findNextItem = w('Find &Next\tF3');
+    AppendMenu(hMenuPopup, MF_STRING, IDM_SEARCH_NEXT, findNextItem.ptr);
+    final replaceItem = w('&Replace...\tCtrl+R');
+    AppendMenu(hMenuPopup, MF_STRING, IDM_SEARCH_REPLACE, replaceItem.ptr);
+    final searchItem = w('&Search');
+    AppendMenu(hMenu, MF_POPUP, hMenuPopup, searchItem.ptr);
 
     hMenuPopup = CreateMenu();
-    AppendMenu(hMenuPopup, MF_STRING, IDM_FORMAT_FONT, TEXT('&Font...'));
-    AppendMenu(hMenu, MF_POPUP, hMenuPopup, TEXT('F&ormat'));
+    final fontItem = w('&Font...');
+    AppendMenu(hMenuPopup, MF_STRING, IDM_FORMAT_FONT, fontItem.ptr);
+    final formatItem = w('F&ormat');
+    AppendMenu(hMenu, MF_POPUP, hMenuPopup, formatItem.ptr);
 
     hMenuPopup = CreateMenu();
-    AppendMenu(hMenuPopup, MF_STRING, IDM_HELP, TEXT('&Help'));
-    AppendMenu(
-      hMenuPopup,
-      MF_STRING,
-      IDM_APP_ABOUT,
-      TEXT('&About $APP_NAME...'),
-    );
-    AppendMenu(hMenu, MF_POPUP, hMenuPopup, TEXT('&Help'));
+    final helpItem = w('&Help');
+    AppendMenu(hMenuPopup, MF_STRING, IDM_HELP, helpItem.ptr);
+    final aboutItem = w('&About $appName...');
+    AppendMenu(hMenuPopup, MF_STRING, IDM_APP_ABOUT, aboutItem.ptr);
+    AppendMenu(hMenu, MF_POPUP, hMenuPopup, helpItem.ptr);
 
     return hMenu;
   }
 
-  static Pointer<DLGTEMPLATE> loadAboutBox() {
-    final pDialog = calloc<Uint16>(1024);
+  static SmartPointer<DLGTEMPLATE> loadAboutBox() {
+    final pDialog = loggingCalloc<Uint16>(1024);
     var idx = 0;
 
     idx += pDialog.cast<DLGTEMPLATE>().setDialog(
@@ -165,17 +162,20 @@ class NotepadResources {
       x: 27,
       y: 52,
       cx: 126,
-      cy: 20,
+      cy: 30,
       windowSystemClass: 0x0082,
-      text: 'Copyright (C) 1998 Charles Petzold and (C) 2020 Tim Sneath',
+      text:
+          'Copyright (C) 1998 Charles Petzold, '
+          '(C) 2020 Tim Sneath, and '
+          '(C) 2024 Halil Durmus',
       id: IDC_STATIC,
     );
 
-    return pDialog.cast();
+    return SmartPointer(pDialog.cast(), sizeInBytes: 1024 * sizeOf<Uint16>());
   }
 
   static int loadAccelerators() {
-    final pTable = calloc<ACCEL>(18);
+    final pTable = loggingCalloc<ACCEL>(18);
 
     pTable[0]
       ..fVirt = FVIRTKEY | FALT | FNOINVERT
@@ -282,6 +282,8 @@ class NotepadResources {
     if (result == NULL) {
       print('Error loading accelerators: ${GetLastError()}');
     }
+
+    free(pTable);
     return result;
   }
 }

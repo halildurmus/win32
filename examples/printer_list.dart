@@ -1,80 +1,58 @@
-// Enumerates locally-connected printers.
-
 import 'dart:ffi';
 import 'dart:io';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-class PrinterNames {
-  PrinterNames(this._flags);
-  final int _flags;
+extension type const Printer(String name) implements String {
+  /// Enumerates available printers.
+  ///
+  /// The [flags] parameter is a bitmask that specifies the type of printer
+  /// information the method should enumerate.
+  static Iterable<Printer> all([int flags = PRINTER_ENUM_LOCAL]) sync* {
+    final pcbNeeded = loggingCalloc<DWORD>();
+    final pcReturned = loggingCalloc<DWORD>();
 
-  Iterable<String> all() sync* {
     try {
-      _getBufferSize();
+      EnumPrinters(flags, null, 2, null, 0, pcbNeeded, pcReturned);
 
+      if (pcbNeeded.value == 0) {
+        throw StateError('Read printer buffer size fail');
+      }
+
+      final pPrinterEnum = loggingMalloc<BYTE>(pcbNeeded.value);
       try {
-        _readRawBuff();
-        yield* parse();
+        if (!EnumPrinters(
+          flags,
+          null,
+          2,
+          pPrinterEnum,
+          pcbNeeded.value,
+          pcbNeeded,
+          pcReturned,
+        )) {
+          throw StateError('Read printer raw buffer fail');
+        }
+
+        for (var i = 0; i < pcReturned.value; i++) {
+          final printerInfo = pPrinterEnum.cast<PRINTER_INFO_2>() + i;
+          final pPrinterName = printerInfo.ref.pPrinterName;
+          yield Printer(pPrinterName.toDartString());
+        }
       } finally {
-        free(_rawBuffer);
+        free(pPrinterEnum);
       }
     } finally {
-      free(_pBuffSize);
-      free(_bPrinterLen);
-    }
-  }
-
-  late Pointer<DWORD> _pBuffSize;
-  late Pointer<DWORD> _bPrinterLen;
-
-  void _getBufferSize() {
-    _pBuffSize = calloc<DWORD>();
-    _bPrinterLen = calloc<DWORD>();
-
-    EnumPrinters(_flags, nullptr, 2, nullptr, 0, _pBuffSize, _bPrinterLen);
-
-    if (_pBuffSize.value == 0) {
-      throw StateError('Read printer buffer size fail');
-    }
-  }
-
-  late Pointer<BYTE> _rawBuffer;
-
-  void _readRawBuff() {
-    _rawBuffer = malloc.allocate<BYTE>(_pBuffSize.value);
-
-    final isRawBuffFail =
-        EnumPrinters(
-          _flags,
-          nullptr,
-          2,
-          _rawBuffer,
-          _pBuffSize.value,
-          _pBuffSize,
-          _bPrinterLen,
-        ) ==
-        0;
-
-    if (isRawBuffFail) {
-      throw StateError('Read printer raw buffer fail');
-    }
-  }
-
-  Iterable<String> parse() sync* {
-    for (var i = 0; i < _bPrinterLen.value; i++) {
-      final printer = _rawBuffer.cast<PRINTER_INFO_2>() + i;
-      yield printer.ref.pPrinterName.toDartString();
+      free(pcbNeeded);
+      free(pcReturned);
     }
   }
 }
 
 void main() {
-  final printerNames = PrinterNames(PRINTER_ENUM_LOCAL);
   try {
-    for (final name in printerNames.all()) {
-      print(name);
+    for (final printer in Printer.all()) {
+      print(printer);
     }
   } catch (e) {
     stderr.writeln(e);

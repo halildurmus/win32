@@ -1,0 +1,21 @@
+XINPUT_CAPABILITIES_FLAGS|
+/// {@category enum}
+extension type const XINPUT_CAPABILITIES_FLAGS(int _) implements int {
+  /// Whether this instance has all the bit fields specified in [other].
+  bool has(XINPUT_CAPABILITIES_FLAGS other) => _ & other._ == other._;
+
+  XINPUT_CAPABILITIES_FLAGS operator &(int other) =>
+      XINPUT_CAPABILITIES_FLAGS(_ & other);
+  XINPUT_CAPABILITIES_FLAGS operator |(int other) =>
+      XINPUT_CAPABILITIES_FLAGS(_ | other);
+}
+
+const XINPUT_CAPS_VOICE_SUPPORTED = XINPUT_CAPABILITIES_FLAGS(4);
+
+const XINPUT_CAPS_FFB_SUPPORTED = XINPUT_CAPABILITIES_FLAGS(1);
+
+const XINPUT_CAPS_WIRELESS = XINPUT_CAPABILITIES_FLAGS(2);
+
+const XINPUT_CAPS_PMD_SUPPORTED = XINPUT_CAPABILITIES_FLAGS(8);
+
+const XINPUT_CAPS_NO_NAVIGATION = XINPUT_CAPABILITIES_FLAGS(16);

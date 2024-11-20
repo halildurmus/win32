@@ -1,145 +1,120 @@
-// Maps FFI prototypes onto the corresponding Win32 API function calls
-
+// Maps FFI prototypes onto the corresponding Win32 API function calls.
+//
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-
-// ignore_for_file: unused_import, non_constant_identifier_names
-// ignore_for_file: constant_identifier_names, camel_case_types
-// ignore_for_file: specify_nonobvious_property_types
+//
+// ignore_for_file: avoid_positional_boolean_parameters
+// ignore_for_file: non_constant_identifier_names, unused_import
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../callbacks.dart';
-import '../combase.dart';
+import '../_internal/winscard.g.dart';
+import '../allocator.dart';
+import '../bstr.dart';
+import '../com/interface.g.dart';
+import '../com/iunknown.g.dart';
+import '../constants.dart';
+import '../constants.g.dart';
+import '../enums.g.dart';
+import '../exception.dart';
+import '../extensions/pointer.dart';
 import '../guid.dart';
+import '../hresult.dart';
+import '../hstring.dart';
+import '../macros.dart';
+import '../ntstatus.dart';
+import '../pcstr.dart';
+import '../pcwstr.dart';
+import '../pstr.dart';
+import '../pwstr.dart';
 import '../structs.g.dart';
-import '../variant.dart';
+import '../types.dart';
+import '../utils.dart';
 
-final _winscard = DynamicLibrary.open('winscard.dll');
-
-/// The SCardAccessStartedEvent function returns an event handle when an
-/// event signals that the smart card resource manager is started. The
-/// event-object handle can be specified in a call to one of the wait
-/// functions.
+/// Returns an event handle when an event signals that the smart card resource
+/// manager is started.
 ///
-/// ```c
-/// HANDLE SCardAccessStartedEvent();
-/// ```
-/// {@category winscard}
-int SCardAccessStartedEvent() => _SCardAccessStartedEvent();
-
-final _SCardAccessStartedEvent = _winscard
-    .lookupFunction<IntPtr Function(), int Function()>(
-      'SCardAccessStartedEvent',
-    );
-
-/// The SCardAddReaderToGroup function adds a reader to a reader group.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardaccessstartedevent>.
 ///
-/// ```c
-/// LONG SCardAddReaderToGroupW(
-///   SCARDCONTEXT hContext,
-///   LPCWSTR      szReaderName,
-///   LPCWSTR      szGroupName
-/// );
-/// ```
 /// {@category winscard}
+@pragma('vm:prefer-inline')
+int SCardAccessStartedEvent() => SCardAccessStartedEvent_Wrapper();
+
+/// Adds a reader to a reader group.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardaddreadertogroupw>.
+///
+/// {@category winscard}
+@pragma('vm:prefer-inline')
 int SCardAddReaderToGroup(
   int hContext,
-  Pointer<Utf16> szReaderName,
-  Pointer<Utf16> szGroupName,
+  PCWSTR szReaderName,
+  PCWSTR szGroupName,
 ) => _SCardAddReaderToGroup(hContext, szReaderName, szGroupName);
 
-final _SCardAddReaderToGroup = _winscard
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hContext,
-        Pointer<Utf16> szReaderName,
-        Pointer<Utf16> szGroupName,
-      ),
-      int Function(
-        int hContext,
-        Pointer<Utf16> szReaderName,
-        Pointer<Utf16> szGroupName,
-      )
-    >('SCardAddReaderToGroupW');
+@Native<Int32 Function(IntPtr, PCWSTR, PCWSTR)>(
+  symbol: 'SCardAddReaderToGroupW',
+)
+external int _SCardAddReaderToGroup(
+  int hContext,
+  PCWSTR szReaderName,
+  PCWSTR szGroupName,
+);
 
-/// The SCardAudit function writes event messages to the Windows application
-/// log Microsoft-Windows-SmartCard-Audit/Authentication.
+/// Writes event messages to the Windows application log
+/// Microsoft-Windows-SmartCard-Audit/Authentication.
 ///
-/// ```c
-/// LONG SCardAudit(
-///   SCARDCONTEXT hContext,
-///   DWORD        dwEvent
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardaudit>.
+///
 /// {@category winscard}
+@pragma('vm:prefer-inline')
 int SCardAudit(int hContext, int dwEvent) => _SCardAudit(hContext, dwEvent);
 
-final _SCardAudit = _winscard
-    .lookupFunction<
-      Int32 Function(IntPtr hContext, Uint32 dwEvent),
-      int Function(int hContext, int dwEvent)
-    >('SCardAudit');
+@Native<Int32 Function(IntPtr, Uint32)>(symbol: 'SCardAudit')
+external int _SCardAudit(int hContext, int dwEvent);
 
-/// The SCardBeginTransaction function starts a transaction. The function
-/// waits for the completion of all other transactions before it begins.
-/// After the transaction starts, all other applications are blocked from
-/// accessing the smart card while the transaction is in progress.
+/// Starts a transaction.
 ///
-/// ```c
-/// LONG SCardBeginTransaction(
-///   SCARDHANDLE hCard
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardbegintransaction>.
+///
 /// {@category winscard}
+@pragma('vm:prefer-inline')
 int SCardBeginTransaction(int hCard) => _SCardBeginTransaction(hCard);
 
-final _SCardBeginTransaction = _winscard
-    .lookupFunction<Int32 Function(IntPtr hCard), int Function(int hCard)>(
-      'SCardBeginTransaction',
-    );
+@Native<Int32 Function(IntPtr)>(symbol: 'SCardBeginTransaction')
+external int _SCardBeginTransaction(int hCard);
 
-/// The SCardCancel function terminates all outstanding actions within a
-/// specific resource manager context. The only requests that you can cancel
-/// are those that require waiting for external action by the smart card or
-/// user. Any such outstanding action requests will terminate with a status
-/// indication that the action was canceled. This is especially useful to
-/// force outstanding SCardGetStatusChange calls to terminate.
+/// Terminates all outstanding actions within a specific resource manager
+/// context.
 ///
-/// ```c
-/// LONG SCardCancel(
-///   SCARDCONTEXT hContext
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardcancel>.
+///
 /// {@category winscard}
+@pragma('vm:prefer-inline')
 int SCardCancel(int hContext) => _SCardCancel(hContext);
 
-final _SCardCancel = _winscard
-    .lookupFunction<
-      Int32 Function(IntPtr hContext),
-      int Function(int hContext)
-    >('SCardCancel');
+@Native<Int32 Function(IntPtr)>(symbol: 'SCardCancel')
+external int _SCardCancel(int hContext);
 
-/// The SCardConnect function establishes a connection (using a specific
-/// resource manager context) between the calling application and a smart
-/// card contained by a specific reader. If no card exists in the specified
-/// reader, an error is returned.
+/// Establishes a connection (using a specific resource manager context) between
+/// the calling application and a smart card contained by a specific reader.
 ///
-/// ```c
-/// LONG SCardConnectW(
-///   SCARDCONTEXT  hContext,
-///   LPCWSTR       szReader,
-///   DWORD         dwShareMode,
-///   DWORD         dwPreferredProtocols,
-///   LPSCARDHANDLE phCard,
-///   LPDWORD       pdwActiveProtocol
-/// );
-/// ```
+/// If no card exists in the specified reader, an error is returned.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardconnectw>.
+///
 /// {@category winscard}
+@pragma('vm:prefer-inline')
 int SCardConnect(
   int hContext,
-  Pointer<Utf16> szReader,
+  PCWSTR szReader,
   int dwShareMode,
   int dwPreferredProtocols,
   Pointer<IntPtr> phCard,
@@ -153,43 +128,35 @@ int SCardConnect(
   pdwActiveProtocol,
 );
 
-final _SCardConnect = _winscard
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hContext,
-        Pointer<Utf16> szReader,
-        Uint32 dwShareMode,
-        Uint32 dwPreferredProtocols,
-        Pointer<IntPtr> phCard,
-        Pointer<Uint32> pdwActiveProtocol,
-      ),
-      int Function(
-        int hContext,
-        Pointer<Utf16> szReader,
-        int dwShareMode,
-        int dwPreferredProtocols,
-        Pointer<IntPtr> phCard,
-        Pointer<Uint32> pdwActiveProtocol,
-      )
-    >('SCardConnectW');
+@Native<
+  Int32 Function(
+    IntPtr,
+    PCWSTR,
+    Uint32,
+    Uint32,
+    Pointer<IntPtr>,
+    Pointer<Uint32>,
+  )
+>(symbol: 'SCardConnectW')
+external int _SCardConnect(
+  int hContext,
+  PCWSTR szReader,
+  int dwShareMode,
+  int dwPreferredProtocols,
+  Pointer<IntPtr> phCard,
+  Pointer<Uint32> pdwActiveProtocol,
+);
 
-/// The SCardControl function gives you direct control of the reader. You
-/// can call it any time after a successful call to SCardConnect and before
-/// a successful call to SCardDisconnect. The effect on the state of the
-/// reader depends on the control code.
+/// Gives you direct control of the reader.
 ///
-/// ```c
-/// LONG SCardControl(
-///  SCARDHANDLE hCard,
-///  DWORD       dwControlCode,
-///  LPCVOID     lpInBuffer,
-///  DWORD       cbInBufferSize,
-///  LPVOID      lpOutBuffer,
-///  DWORD       cbOutBufferSize,
-///  LPDWORD     lpBytesReturned
-/// );
-/// ```
+/// You can call it any time after a successful call to SCardConnect and before
+/// a successful call to SCardDisconnect.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardcontrol>.
+///
 /// {@category winscard}
+@pragma('vm:prefer-inline')
 int SCardControl(
   int hCard,
   int dwControlCode,
@@ -208,237 +175,176 @@ int SCardControl(
   lpBytesReturned,
 );
 
-final _SCardControl = _winscard
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hCard,
-        Uint32 dwControlCode,
-        Pointer lpInBuffer,
-        Uint32 cbInBufferSize,
-        Pointer lpOutBuffer,
-        Uint32 cbOutBufferSize,
-        Pointer<Uint32> lpBytesReturned,
-      ),
-      int Function(
-        int hCard,
-        int dwControlCode,
-        Pointer lpInBuffer,
-        int cbInBufferSize,
-        Pointer lpOutBuffer,
-        int cbOutBufferSize,
-        Pointer<Uint32> lpBytesReturned,
-      )
-    >('SCardControl');
+@Native<
+  Int32 Function(
+    IntPtr,
+    Uint32,
+    Pointer,
+    Uint32,
+    Pointer,
+    Uint32,
+    Pointer<Uint32>,
+  )
+>(symbol: 'SCardControl')
+external int _SCardControl(
+  int hCard,
+  int dwControlCode,
+  Pointer lpInBuffer,
+  int cbInBufferSize,
+  Pointer lpOutBuffer,
+  int cbOutBufferSize,
+  Pointer<Uint32> lpBytesReturned,
+);
 
-/// The SCardDisconnect function terminates a connection previously opened
-/// between the calling application and a smart card in the target reader.
+/// Terminates a connection previously opened between the calling application
+/// and a smart card in the target reader.
 ///
-/// ```c
-/// LONG SCardDisconnect(
-///   SCARDHANDLE hCard,
-///   DWORD       dwDisposition
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scarddisconnect>.
+///
 /// {@category winscard}
+@pragma('vm:prefer-inline')
 int SCardDisconnect(int hCard, int dwDisposition) =>
     _SCardDisconnect(hCard, dwDisposition);
 
-final _SCardDisconnect = _winscard
-    .lookupFunction<
-      Int32 Function(IntPtr hCard, Uint32 dwDisposition),
-      int Function(int hCard, int dwDisposition)
-    >('SCardDisconnect');
+@Native<Int32 Function(IntPtr, Uint32)>(symbol: 'SCardDisconnect')
+external int _SCardDisconnect(int hCard, int dwDisposition);
 
-/// The SCardEndTransaction function completes a previously declared
-/// transaction, allowing other applications to resume interactions with the
-/// card.
+/// Completes a previously declared transaction, allowing other applications to
+/// resume interactions with the card.
 ///
-/// ```c
-/// LONG SCardEndTransaction(
-///   SCARDHANDLE hCard,
-///   DWORD       dwDisposition
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardendtransaction>.
+///
 /// {@category winscard}
+@pragma('vm:prefer-inline')
 int SCardEndTransaction(int hCard, int dwDisposition) =>
     _SCardEndTransaction(hCard, dwDisposition);
 
-final _SCardEndTransaction = _winscard
-    .lookupFunction<
-      Int32 Function(IntPtr hCard, Uint32 dwDisposition),
-      int Function(int hCard, int dwDisposition)
-    >('SCardEndTransaction');
+@Native<Int32 Function(IntPtr, Uint32)>(symbol: 'SCardEndTransaction')
+external int _SCardEndTransaction(int hCard, int dwDisposition);
 
-/// The SCardEstablishContext function establishes the resource manager
-/// context (the scope) within which database operations are performed.
+/// Establishes the resource manager context (the scope) within which database
+/// operations are performed.
 ///
-/// ```c
-/// LONG SCardEstablishContext(
-///   DWORD          dwScope,
-///   LPCVOID        pvReserved1,
-///   LPCVOID        pvReserved2,
-///   LPSCARDCONTEXT phContext
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardestablishcontext>.
+///
 /// {@category winscard}
-int SCardEstablishContext(
+@pragma('vm:prefer-inline')
+int SCardEstablishContext(SCARD_SCOPE dwScope, Pointer<IntPtr> phContext) =>
+    _SCardEstablishContext(dwScope, nullptr, nullptr, phContext);
+
+@Native<Int32 Function(Uint32, Pointer, Pointer, Pointer<IntPtr>)>(
+  symbol: 'SCardEstablishContext',
+)
+external int _SCardEstablishContext(
   int dwScope,
   Pointer pvReserved1,
   Pointer pvReserved2,
   Pointer<IntPtr> phContext,
-) => _SCardEstablishContext(dwScope, pvReserved1, pvReserved2, phContext);
+);
 
-final _SCardEstablishContext = _winscard
-    .lookupFunction<
-      Int32 Function(
-        Uint32 dwScope,
-        Pointer pvReserved1,
-        Pointer pvReserved2,
-        Pointer<IntPtr> phContext,
-      ),
-      int Function(
-        int dwScope,
-        Pointer pvReserved1,
-        Pointer pvReserved2,
-        Pointer<IntPtr> phContext,
-      )
-    >('SCardEstablishContext');
-
-/// The SCardForgetCardType function removes an introduced smart card from
-/// the smart card subsystem.
+/// Removes an introduced smart card from the smart card subsystem.
 ///
-/// ```c
-/// LONG SCardForgetCardTypeW(
-///   SCARDCONTEXT hContext,
-///   LPCWSTR      szCardName
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardforgetcardtypew>.
+///
 /// {@category winscard}
-int SCardForgetCardType(int hContext, Pointer<Utf16> szCardName) =>
+@pragma('vm:prefer-inline')
+int SCardForgetCardType(int hContext, PCWSTR szCardName) =>
     _SCardForgetCardType(hContext, szCardName);
 
-final _SCardForgetCardType = _winscard
-    .lookupFunction<
-      Int32 Function(IntPtr hContext, Pointer<Utf16> szCardName),
-      int Function(int hContext, Pointer<Utf16> szCardName)
-    >('SCardForgetCardTypeW');
+@Native<Int32 Function(IntPtr, PCWSTR)>(symbol: 'SCardForgetCardTypeW')
+external int _SCardForgetCardType(int hContext, PCWSTR szCardName);
 
-/// The SCardForgetReader function removes a previously introduced reader
-/// from control by the smart card subsystem. It is removed from the smart
-/// card database, including from any reader group that it may have been
-/// added to.
+/// Removes a previously introduced reader from control by the smart card
+/// subsystem.
 ///
-/// ```c
-/// LONG SCardForgetReaderW(
-///   SCARDCONTEXT hContext,
-///   LPCWSTR      szReaderName
-/// );
-/// ```
+/// It is removed from the smart card database, including from any reader group
+/// that it may have been added to.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardforgetreaderw>.
+///
 /// {@category winscard}
-int SCardForgetReader(int hContext, Pointer<Utf16> szReaderName) =>
+@pragma('vm:prefer-inline')
+int SCardForgetReader(int hContext, PCWSTR szReaderName) =>
     _SCardForgetReader(hContext, szReaderName);
 
-final _SCardForgetReader = _winscard
-    .lookupFunction<
-      Int32 Function(IntPtr hContext, Pointer<Utf16> szReaderName),
-      int Function(int hContext, Pointer<Utf16> szReaderName)
-    >('SCardForgetReaderW');
+@Native<Int32 Function(IntPtr, PCWSTR)>(symbol: 'SCardForgetReaderW')
+external int _SCardForgetReader(int hContext, PCWSTR szReaderName);
 
-/// The SCardForgetReaderGroup function removes a previously introduced
-/// smart card reader group from the smart card subsystem. Although this
-/// function automatically clears all readers from the group, it does not
-/// affect the existence of the individual readers in the database.
+/// Removes a previously introduced smart card reader group from the smart card
+/// subsystem.
 ///
-/// ```c
-/// LONG SCardForgetReaderGroupW(
-///   SCARDCONTEXT hContext,
-///   LPCWSTR      szGroupName
-/// );
-/// ```
+/// Although this function automatically clears all readers from the group, it
+/// does not affect the existence of the individual readers in the database.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardforgetreadergroupw>.
+///
 /// {@category winscard}
-int SCardForgetReaderGroup(int hContext, Pointer<Utf16> szGroupName) =>
+@pragma('vm:prefer-inline')
+int SCardForgetReaderGroup(int hContext, PCWSTR szGroupName) =>
     _SCardForgetReaderGroup(hContext, szGroupName);
 
-final _SCardForgetReaderGroup = _winscard
-    .lookupFunction<
-      Int32 Function(IntPtr hContext, Pointer<Utf16> szGroupName),
-      int Function(int hContext, Pointer<Utf16> szGroupName)
-    >('SCardForgetReaderGroupW');
+@Native<Int32 Function(IntPtr, PCWSTR)>(symbol: 'SCardForgetReaderGroupW')
+external int _SCardForgetReaderGroup(int hContext, PCWSTR szGroupName);
 
-/// The SCardFreeMemory function releases memory that has been returned from
-/// the resource manager using the SCARD_AUTOALLOCATE length designator.
+/// Releases memory that has been returned from the resource manager using the
+/// SCARD_AUTOALLOCATE length designator.
 ///
-/// ```c
-/// LONG SCardFreeMemory(
-///   SCARDCONTEXT hContext,
-///   LPCVOID      pvMem
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardfreememory>.
+///
 /// {@category winscard}
+@pragma('vm:prefer-inline')
 int SCardFreeMemory(int hContext, Pointer pvMem) =>
     _SCardFreeMemory(hContext, pvMem);
 
-final _SCardFreeMemory = _winscard
-    .lookupFunction<
-      Int32 Function(IntPtr hContext, Pointer pvMem),
-      int Function(int hContext, Pointer pvMem)
-    >('SCardFreeMemory');
+@Native<Int32 Function(IntPtr, Pointer)>(symbol: 'SCardFreeMemory')
+external int _SCardFreeMemory(int hContext, Pointer pvMem);
 
-/// The SCardGetAttrib function retrieves the current reader attributes for
-/// the given handle. It does not affect the state of the reader, driver, or
-/// card.
+/// Retrieves the current reader attributes for the given handle.
 ///
-/// ```c
-/// LONG SCardGetAttrib(
-///   SCARDHANDLE hCard,
-///   DWORD       dwAttrId,
-///   LPBYTE      pbAttr,
-///   LPDWORD     pcbAttrLen
-/// );
-/// ```
+/// It does not affect the state of the reader, driver, or card.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardgetattrib>.
+///
 /// {@category winscard}
+@pragma('vm:prefer-inline')
 int SCardGetAttrib(
+  int hCard,
+  int dwAttrId,
+  Pointer<Uint8>? pbAttr,
+  Pointer<Uint32> pcbAttrLen,
+) => _SCardGetAttrib(hCard, dwAttrId, pbAttr ?? nullptr, pcbAttrLen);
+
+@Native<Int32 Function(IntPtr, Uint32, Pointer<Uint8>, Pointer<Uint32>)>(
+  symbol: 'SCardGetAttrib',
+)
+external int _SCardGetAttrib(
   int hCard,
   int dwAttrId,
   Pointer<Uint8> pbAttr,
   Pointer<Uint32> pcbAttrLen,
-) => _SCardGetAttrib(hCard, dwAttrId, pbAttr, pcbAttrLen);
+);
 
-final _SCardGetAttrib = _winscard
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hCard,
-        Uint32 dwAttrId,
-        Pointer<Uint8> pbAttr,
-        Pointer<Uint32> pcbAttrLen,
-      ),
-      int Function(
-        int hCard,
-        int dwAttrId,
-        Pointer<Uint8> pbAttr,
-        Pointer<Uint32> pcbAttrLen,
-      )
-    >('SCardGetAttrib');
-
-/// The SCardGetCardTypeProviderName function returns the name of the module
-/// (dynamic link library) that contains the provider for a given card name
-/// and provider type.
+/// Returns the name of the module (dynamic link library) that contains the
+/// provider for a given card name and provider type.
 ///
-/// ```c
-/// LONG SCardGetCardTypeProviderNameW(
-///  SCARDCONTEXT hContext,
-///  LPCWSTR      szCardName,
-///  DWORD        dwProviderId,
-///  WCHAR        *szProvider,
-///  LPDWORD      pcchProvider
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardgetcardtypeprovidernamew>.
+///
 /// {@category winscard}
+@pragma('vm:prefer-inline')
 int SCardGetCardTypeProviderName(
   int hContext,
-  Pointer<Utf16> szCardName,
+  PCWSTR szCardName,
   int dwProviderId,
-  Pointer<Utf16> szProvider,
+  PWSTR szProvider,
   Pointer<Uint32> pcchProvider,
 ) => _SCardGetCardTypeProviderName(
   hContext,
@@ -448,187 +354,129 @@ int SCardGetCardTypeProviderName(
   pcchProvider,
 );
 
-final _SCardGetCardTypeProviderName = _winscard
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hContext,
-        Pointer<Utf16> szCardName,
-        Uint32 dwProviderId,
-        Pointer<Utf16> szProvider,
-        Pointer<Uint32> pcchProvider,
-      ),
-      int Function(
-        int hContext,
-        Pointer<Utf16> szCardName,
-        int dwProviderId,
-        Pointer<Utf16> szProvider,
-        Pointer<Uint32> pcchProvider,
-      )
-    >('SCardGetCardTypeProviderNameW');
+@Native<Int32 Function(IntPtr, PCWSTR, Uint32, PWSTR, Pointer<Uint32>)>(
+  symbol: 'SCardGetCardTypeProviderNameW',
+)
+external int _SCardGetCardTypeProviderName(
+  int hContext,
+  PCWSTR szCardName,
+  int dwProviderId,
+  PWSTR szProvider,
+  Pointer<Uint32> pcchProvider,
+);
 
-/// The SCardGetDeviceTypeId function gets the device type identifier of the
-/// card reader for the given reader name. This function does not affect the
-/// state of the reader.
+/// Gets the device type identifier of the card reader for the given reader
+/// name.
 ///
-/// ```c
-/// LONG SCardGetDeviceTypeIdW(
-///   SCARDCONTEXT hContext,
-///   LPCWSTR      szReaderName,
-///   LPDWORD      pdwDeviceTypeId
-/// );
-/// ```
+/// This function does not affect the state of the reader.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardgetdevicetypeidw>.
+///
 /// {@category winscard}
+@pragma('vm:prefer-inline')
 int SCardGetDeviceTypeId(
   int hContext,
-  Pointer<Utf16> szReaderName,
+  PCWSTR szReaderName,
   Pointer<Uint32> pdwDeviceTypeId,
 ) => _SCardGetDeviceTypeId(hContext, szReaderName, pdwDeviceTypeId);
 
-final _SCardGetDeviceTypeId = _winscard
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hContext,
-        Pointer<Utf16> szReaderName,
-        Pointer<Uint32> pdwDeviceTypeId,
-      ),
-      int Function(
-        int hContext,
-        Pointer<Utf16> szReaderName,
-        Pointer<Uint32> pdwDeviceTypeId,
-      )
-    >('SCardGetDeviceTypeIdW');
+@Native<Int32 Function(IntPtr, PCWSTR, Pointer<Uint32>)>(
+  symbol: 'SCardGetDeviceTypeIdW',
+)
+external int _SCardGetDeviceTypeId(
+  int hContext,
+  PCWSTR szReaderName,
+  Pointer<Uint32> pdwDeviceTypeId,
+);
 
-/// The SCardGetProviderId function returns the identifier (GUID) of the
-/// primary service provider for a given card. The caller supplies the name
-/// of a smart card (previously introduced to the system) and receives the
-/// registered identifier of the primary service provider GUID, if one
-/// exists.
+/// Returns the identifier (GUID) of the primary service provider for a given
+/// card.
 ///
-/// ```c
-/// LONG SCardGetProviderIdW(
-///   SCARDCONTEXT hContext,
-///   LPCWSTR      szCard,
-///   LPGUID       pguidProviderId
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardgetprovideridw>.
+///
 /// {@category winscard}
+@pragma('vm:prefer-inline')
 int SCardGetProviderId(
   int hContext,
-  Pointer<Utf16> szCard,
+  PCWSTR szCard,
   Pointer<GUID> pguidProviderId,
 ) => _SCardGetProviderId(hContext, szCard, pguidProviderId);
 
-final _SCardGetProviderId = _winscard
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hContext,
-        Pointer<Utf16> szCard,
-        Pointer<GUID> pguidProviderId,
-      ),
-      int Function(
-        int hContext,
-        Pointer<Utf16> szCard,
-        Pointer<GUID> pguidProviderId,
-      )
-    >('SCardGetProviderIdW');
+@Native<Int32 Function(IntPtr, PCWSTR, Pointer<GUID>)>(
+  symbol: 'SCardGetProviderIdW',
+)
+external int _SCardGetProviderId(
+  int hContext,
+  PCWSTR szCard,
+  Pointer<GUID> pguidProviderId,
+);
 
-/// The SCardGetReaderDeviceInstanceId function gets the device instance
-/// identifier of the card reader for the given reader name. This function
-/// does not affect the state of the reader.
+/// Gets the device instance identifier of the card reader for the given reader
+/// name.
 ///
-/// ```c
-/// LONG SCardGetReaderDeviceInstanceIdW(
-///   SCARDCONTEXT hContext,
-///   LPCWSTR      szReaderName,
-///   LPWSTR       szDeviceInstanceId,
-///   LPDWORD      pcchDeviceInstanceId
-/// );
-/// ```
+/// This function does not affect the state of the reader.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardgetreaderdeviceinstanceidw>.
+///
 /// {@category winscard}
+@pragma('vm:prefer-inline')
 int SCardGetReaderDeviceInstanceId(
   int hContext,
-  Pointer<Utf16> szReaderName,
-  Pointer<Utf16> szDeviceInstanceId,
+  PCWSTR szReaderName,
+  PWSTR? szDeviceInstanceId,
   Pointer<Uint32> pcchDeviceInstanceId,
 ) => _SCardGetReaderDeviceInstanceId(
   hContext,
   szReaderName,
-  szDeviceInstanceId,
+  szDeviceInstanceId ?? nullptr,
   pcchDeviceInstanceId,
 );
 
-final _SCardGetReaderDeviceInstanceId = _winscard
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hContext,
-        Pointer<Utf16> szReaderName,
-        Pointer<Utf16> szDeviceInstanceId,
-        Pointer<Uint32> pcchDeviceInstanceId,
-      ),
-      int Function(
-        int hContext,
-        Pointer<Utf16> szReaderName,
-        Pointer<Utf16> szDeviceInstanceId,
-        Pointer<Uint32> pcchDeviceInstanceId,
-      )
-    >('SCardGetReaderDeviceInstanceIdW');
+@Native<Int32 Function(IntPtr, PCWSTR, PWSTR, Pointer<Uint32>)>(
+  symbol: 'SCardGetReaderDeviceInstanceIdW',
+)
+external int _SCardGetReaderDeviceInstanceId(
+  int hContext,
+  PCWSTR szReaderName,
+  PWSTR szDeviceInstanceId,
+  Pointer<Uint32> pcchDeviceInstanceId,
+);
 
-/// The SCardGetReaderIcon function gets an icon of the smart card reader
-/// for a given reader's name. This function does not affect the state of
-/// the card reader.
+/// Gets an icon of the smart card reader for a given reader's name.
 ///
-/// ```c
-/// LONG SCardGetReaderIconW(
-///   SCARDCONTEXT hContext,
-///   LPCWSTR      szReaderName,
-///   LPBYTE       pbIcon,
-///   LPDWORD      pcbIcon
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardgetreadericonw>.
+///
 /// {@category winscard}
+@pragma('vm:prefer-inline')
 int SCardGetReaderIcon(
   int hContext,
-  Pointer<Utf16> szReaderName,
+  PCWSTR szReaderName,
   Pointer<Uint8> pbIcon,
   Pointer<Uint32> pcbIcon,
 ) => _SCardGetReaderIcon(hContext, szReaderName, pbIcon, pcbIcon);
 
-final _SCardGetReaderIcon = _winscard
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hContext,
-        Pointer<Utf16> szReaderName,
-        Pointer<Uint8> pbIcon,
-        Pointer<Uint32> pcbIcon,
-      ),
-      int Function(
-        int hContext,
-        Pointer<Utf16> szReaderName,
-        Pointer<Uint8> pbIcon,
-        Pointer<Uint32> pcbIcon,
-      )
-    >('SCardGetReaderIconW');
+@Native<Int32 Function(IntPtr, PCWSTR, Pointer<Uint8>, Pointer<Uint32>)>(
+  symbol: 'SCardGetReaderIconW',
+)
+external int _SCardGetReaderIcon(
+  int hContext,
+  PCWSTR szReaderName,
+  Pointer<Uint8> pbIcon,
+  Pointer<Uint32> pcbIcon,
+);
 
-/// The SCardGetStatusChange function blocks execution until the current
-/// availability of the cards in a specific set of readers changes. The
-/// caller supplies a list of readers to be monitored by an
-/// SCARD_READERSTATE array and the maximum amount of time (in milliseconds)
-/// that it is willing to wait for an action to occur on one of the listed
-/// readers. Note that SCardGetStatusChange uses the user-supplied value in
-/// the dwCurrentState members of the rgReaderStatesSCARD_READERSTATE array
-/// as the definition of the current state of the readers. The function
-/// returns when there is a change in availability, having filled in the
-/// dwEventState members of rgReaderStates appropriately.
+/// Blocks execution until the current availability of the cards in a specific
+/// set of readers changes.
 ///
-/// ```c
-/// LONG SCardGetStatusChangeW(
-///   SCARDCONTEXT         hContext,
-///   DWORD                dwTimeout,
-///   LPSCARD_READERSTATEW rgReaderStates,
-///   DWORD                cReaders
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardgetstatuschangew>.
+///
 /// {@category winscard}
+@pragma('vm:prefer-inline')
 int SCardGetStatusChange(
   int hContext,
   int dwTimeout,
@@ -636,64 +484,45 @@ int SCardGetStatusChange(
   int cReaders,
 ) => _SCardGetStatusChange(hContext, dwTimeout, rgReaderStates, cReaders);
 
-final _SCardGetStatusChange = _winscard
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hContext,
-        Uint32 dwTimeout,
-        Pointer<SCARD_READERSTATE> rgReaderStates,
-        Uint32 cReaders,
-      ),
-      int Function(
-        int hContext,
-        int dwTimeout,
-        Pointer<SCARD_READERSTATE> rgReaderStates,
-        int cReaders,
-      )
-    >('SCardGetStatusChangeW');
+@Native<Int32 Function(IntPtr, Uint32, Pointer<SCARD_READERSTATE>, Uint32)>(
+  symbol: 'SCardGetStatusChangeW',
+)
+external int _SCardGetStatusChange(
+  int hContext,
+  int dwTimeout,
+  Pointer<SCARD_READERSTATE> rgReaderStates,
+  int cReaders,
+);
 
-/// The SCardGetTransmitCount function retrieves the number of transmit
-/// operations that have completed since the specified card reader was
-/// inserted.
+/// Retrieves the number of transmit operations that have completed since the
+/// specified card reader was inserted.
 ///
-/// ```c
-/// LONG SCardGetTransmitCount(
-///   SCARDHANDLE hCard,
-///   LPDWORD     pcTransmitCount
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardgettransmitcount>.
+///
 /// {@category winscard}
+@pragma('vm:prefer-inline')
 int SCardGetTransmitCount(int hCard, Pointer<Uint32> pcTransmitCount) =>
     _SCardGetTransmitCount(hCard, pcTransmitCount);
 
-final _SCardGetTransmitCount = _winscard
-    .lookupFunction<
-      Int32 Function(IntPtr hCard, Pointer<Uint32> pcTransmitCount),
-      int Function(int hCard, Pointer<Uint32> pcTransmitCount)
-    >('SCardGetTransmitCount');
+@Native<Int32 Function(IntPtr, Pointer<Uint32>)>(
+  symbol: 'SCardGetTransmitCount',
+)
+external int _SCardGetTransmitCount(int hCard, Pointer<Uint32> pcTransmitCount);
 
-/// The SCardIntroduceCardType function introduces a smart card to the smart
-/// card subsystem (for the active user) by adding it to the smart card
-/// database.
+/// Introduces a smart card to the smart card subsystem (for the active user) by
+/// adding it to the smart card database.
 ///
-/// ```c
-/// LONG SCardIntroduceCardTypeW(
-///   SCARDCONTEXT hContext,
-///   LPCWSTR      szCardName,
-///   LPCGUID      pguidPrimaryProvider,
-///   LPCGUID      rgguidInterfaces,
-///   DWORD        dwInterfaceCount,
-///   LPCBYTE      pbAtr,
-///   LPCBYTE      pbAtrMask,
-///   DWORD        cbAtrLen
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardintroducecardtypew>.
+///
 /// {@category winscard}
+@pragma('vm:prefer-inline')
 int SCardIntroduceCardType(
   int hContext,
-  Pointer<Utf16> szCardName,
-  Pointer<GUID> pguidPrimaryProvider,
-  Pointer<GUID> rgguidInterfaces,
+  PCWSTR szCardName,
+  Pointer<GUID>? pguidPrimaryProvider,
+  Pointer<GUID>? rgguidInterfaces,
   int dwInterfaceCount,
   Pointer<Uint8> pbAtr,
   Pointer<Uint8> pbAtrMask,
@@ -701,360 +530,271 @@ int SCardIntroduceCardType(
 ) => _SCardIntroduceCardType(
   hContext,
   szCardName,
-  pguidPrimaryProvider,
-  rgguidInterfaces,
+  pguidPrimaryProvider ?? nullptr,
+  rgguidInterfaces ?? nullptr,
   dwInterfaceCount,
   pbAtr,
   pbAtrMask,
   cbAtrLen,
 );
 
-final _SCardIntroduceCardType = _winscard
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hContext,
-        Pointer<Utf16> szCardName,
-        Pointer<GUID> pguidPrimaryProvider,
-        Pointer<GUID> rgguidInterfaces,
-        Uint32 dwInterfaceCount,
-        Pointer<Uint8> pbAtr,
-        Pointer<Uint8> pbAtrMask,
-        Uint32 cbAtrLen,
-      ),
-      int Function(
-        int hContext,
-        Pointer<Utf16> szCardName,
-        Pointer<GUID> pguidPrimaryProvider,
-        Pointer<GUID> rgguidInterfaces,
-        int dwInterfaceCount,
-        Pointer<Uint8> pbAtr,
-        Pointer<Uint8> pbAtrMask,
-        int cbAtrLen,
-      )
-    >('SCardIntroduceCardTypeW');
+@Native<
+  Int32 Function(
+    IntPtr,
+    PCWSTR,
+    Pointer<GUID>,
+    Pointer<GUID>,
+    Uint32,
+    Pointer<Uint8>,
+    Pointer<Uint8>,
+    Uint32,
+  )
+>(symbol: 'SCardIntroduceCardTypeW')
+external int _SCardIntroduceCardType(
+  int hContext,
+  PCWSTR szCardName,
+  Pointer<GUID> pguidPrimaryProvider,
+  Pointer<GUID> rgguidInterfaces,
+  int dwInterfaceCount,
+  Pointer<Uint8> pbAtr,
+  Pointer<Uint8> pbAtrMask,
+  int cbAtrLen,
+);
 
-/// The SCardIntroduceReader function introduces a new name for an existing
-/// smart card reader.
+/// Introduces a new name for an existing smart card reader.
 ///
-/// ```c
-/// LONG SCardIntroduceReaderW(
-///   SCARDCONTEXT hContext,
-///   LPCWSTR      szReaderName,
-///   LPCWSTR      szDeviceName
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardintroducereaderw>.
+///
 /// {@category winscard}
+@pragma('vm:prefer-inline')
 int SCardIntroduceReader(
   int hContext,
-  Pointer<Utf16> szReaderName,
-  Pointer<Utf16> szDeviceName,
+  PCWSTR szReaderName,
+  PCWSTR szDeviceName,
 ) => _SCardIntroduceReader(hContext, szReaderName, szDeviceName);
 
-final _SCardIntroduceReader = _winscard
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hContext,
-        Pointer<Utf16> szReaderName,
-        Pointer<Utf16> szDeviceName,
-      ),
-      int Function(
-        int hContext,
-        Pointer<Utf16> szReaderName,
-        Pointer<Utf16> szDeviceName,
-      )
-    >('SCardIntroduceReaderW');
+@Native<Int32 Function(IntPtr, PCWSTR, PCWSTR)>(symbol: 'SCardIntroduceReaderW')
+external int _SCardIntroduceReader(
+  int hContext,
+  PCWSTR szReaderName,
+  PCWSTR szDeviceName,
+);
 
-/// The SCardIntroduceReaderGroup function introduces a reader group to the
-/// smart card subsystem. However, the reader group is not created until the
-/// group is specified when adding a reader to the smart card database.
+/// Introduces a reader group to the smart card subsystem.
 ///
-/// ```c
-/// LONG SCardIntroduceReaderGroupW(
-///   SCARDCONTEXT hContext,
-///   LPCWSTR      szGroupName
-/// );
-/// ```
+/// However, the reader group is not created until the group is specified when
+/// adding a reader to the smart card database.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardintroducereadergroupw>.
+///
 /// {@category winscard}
-int SCardIntroduceReaderGroup(int hContext, Pointer<Utf16> szGroupName) =>
+@pragma('vm:prefer-inline')
+int SCardIntroduceReaderGroup(int hContext, PCWSTR szGroupName) =>
     _SCardIntroduceReaderGroup(hContext, szGroupName);
 
-final _SCardIntroduceReaderGroup = _winscard
-    .lookupFunction<
-      Int32 Function(IntPtr hContext, Pointer<Utf16> szGroupName),
-      int Function(int hContext, Pointer<Utf16> szGroupName)
-    >('SCardIntroduceReaderGroupW');
+@Native<Int32 Function(IntPtr, PCWSTR)>(symbol: 'SCardIntroduceReaderGroupW')
+external int _SCardIntroduceReaderGroup(int hContext, PCWSTR szGroupName);
 
-/// The SCardIsValidContext function determines whether a smart card context
-/// handle is valid.
+/// Determines whether a smart card context handle is valid.
 ///
-/// ```c
-/// LONG SCardIsValidContext(
-///   SCARDCONTEXT hContext
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardisvalidcontext>.
+///
 /// {@category winscard}
+@pragma('vm:prefer-inline')
 int SCardIsValidContext(int hContext) => _SCardIsValidContext(hContext);
 
-final _SCardIsValidContext = _winscard
-    .lookupFunction<
-      Int32 Function(IntPtr hContext),
-      int Function(int hContext)
-    >('SCardIsValidContext');
+@Native<Int32 Function(IntPtr)>(symbol: 'SCardIsValidContext')
+external int _SCardIsValidContext(int hContext);
 
-/// The SCardListCards function searches the smart card database and
-/// provides a list of named cards previously introduced to the system by
-/// the user. The caller specifies an ATR string, a set of interface
-/// identifiers (GUIDs), or both. If both an ATR string and an identifier
-/// array are supplied, the cards returned will match the ATR string
-/// supplied and support the interfaces specified.
+/// Searches the smart card database and provides a list of named cards
+/// previously introduced to the system by the user.
 ///
-/// ```c
-/// LONG SCardListCardsW(
-///   SCARDCONTEXT hContext,
-///   LPCBYTE      pbAtr,
-///   LPCGUID      rgquidInterfaces,
-///   DWORD        cguidInterfaceCount,
-///   WCHAR        *mszCards,
-///   LPDWORD      pcchCards
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardlistcardsw>.
+///
 /// {@category winscard}
+@pragma('vm:prefer-inline')
 int SCardListCards(
+  int hContext,
+  Pointer<Uint8>? pbAtr,
+  Pointer<GUID>? rgquidInterfaces,
+  int cguidInterfaceCount,
+  PWSTR? mszCards,
+  Pointer<Uint32> pcchCards,
+) => _SCardListCards(
+  hContext,
+  pbAtr ?? nullptr,
+  rgquidInterfaces ?? nullptr,
+  cguidInterfaceCount,
+  mszCards ?? nullptr,
+  pcchCards,
+);
+
+@Native<
+  Int32 Function(
+    IntPtr,
+    Pointer<Uint8>,
+    Pointer<GUID>,
+    Uint32,
+    PWSTR,
+    Pointer<Uint32>,
+  )
+>(symbol: 'SCardListCardsW')
+external int _SCardListCards(
   int hContext,
   Pointer<Uint8> pbAtr,
   Pointer<GUID> rgquidInterfaces,
   int cguidInterfaceCount,
-  Pointer<Utf16> mszCards,
+  PWSTR mszCards,
   Pointer<Uint32> pcchCards,
-) => _SCardListCards(
-  hContext,
-  pbAtr,
-  rgquidInterfaces,
-  cguidInterfaceCount,
-  mszCards,
-  pcchCards,
 );
 
-final _SCardListCards = _winscard
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hContext,
-        Pointer<Uint8> pbAtr,
-        Pointer<GUID> rgquidInterfaces,
-        Uint32 cguidInterfaceCount,
-        Pointer<Utf16> mszCards,
-        Pointer<Uint32> pcchCards,
-      ),
-      int Function(
-        int hContext,
-        Pointer<Uint8> pbAtr,
-        Pointer<GUID> rgquidInterfaces,
-        int cguidInterfaceCount,
-        Pointer<Utf16> mszCards,
-        Pointer<Uint32> pcchCards,
-      )
-    >('SCardListCardsW');
-
-/// The SCardListInterfaces function provides a list of interfaces supplied
-/// by a given card. The caller supplies the name of a smart card previously
-/// introduced to the subsystem, and receives the list of interfaces
-/// supported by the card.
+/// Provides a list of interfaces supplied by a given card.
 ///
-/// ```c
-/// LONG SCardListInterfacesW(
-///   SCARDCONTEXT hContext,
-///   LPCWSTR      szCard,
-///   LPGUID       pguidInterfaces,
-///   LPDWORD      pcguidInterfaces
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardlistinterfacesw>.
+///
 /// {@category winscard}
+@pragma('vm:prefer-inline')
 int SCardListInterfaces(
   int hContext,
-  Pointer<Utf16> szCard,
+  PCWSTR szCard,
   Pointer<GUID> pguidInterfaces,
   Pointer<Uint32> pcguidInterfaces,
 ) => _SCardListInterfaces(hContext, szCard, pguidInterfaces, pcguidInterfaces);
 
-final _SCardListInterfaces = _winscard
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hContext,
-        Pointer<Utf16> szCard,
-        Pointer<GUID> pguidInterfaces,
-        Pointer<Uint32> pcguidInterfaces,
-      ),
-      int Function(
-        int hContext,
-        Pointer<Utf16> szCard,
-        Pointer<GUID> pguidInterfaces,
-        Pointer<Uint32> pcguidInterfaces,
-      )
-    >('SCardListInterfacesW');
+@Native<Int32 Function(IntPtr, PCWSTR, Pointer<GUID>, Pointer<Uint32>)>(
+  symbol: 'SCardListInterfacesW',
+)
+external int _SCardListInterfaces(
+  int hContext,
+  PCWSTR szCard,
+  Pointer<GUID> pguidInterfaces,
+  Pointer<Uint32> pcguidInterfaces,
+);
 
-/// The SCardListReaderGroups function provides the list of reader groups
-/// that have previously been introduced to the system.
+/// Provides the list of reader groups that have previously been introduced to
+/// the system.
 ///
-/// ```c
-/// LONG SCardListReaderGroupsW(
-///   SCARDCONTEXT hContext,
-///   LPWSTR       mszGroups,
-///   LPDWORD      pcchGroups
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardlistreadergroupsw>.
+///
 /// {@category winscard}
+@pragma('vm:prefer-inline')
 int SCardListReaderGroups(
   int hContext,
-  Pointer<Utf16> mszGroups,
+  PWSTR? mszGroups,
   Pointer<Uint32> pcchGroups,
-) => _SCardListReaderGroups(hContext, mszGroups, pcchGroups);
+) => _SCardListReaderGroups(hContext, mszGroups ?? nullptr, pcchGroups);
 
-final _SCardListReaderGroups = _winscard
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hContext,
-        Pointer<Utf16> mszGroups,
-        Pointer<Uint32> pcchGroups,
-      ),
-      int Function(
-        int hContext,
-        Pointer<Utf16> mszGroups,
-        Pointer<Uint32> pcchGroups,
-      )
-    >('SCardListReaderGroupsW');
+@Native<Int32 Function(IntPtr, PWSTR, Pointer<Uint32>)>(
+  symbol: 'SCardListReaderGroupsW',
+)
+external int _SCardListReaderGroups(
+  int hContext,
+  PWSTR mszGroups,
+  Pointer<Uint32> pcchGroups,
+);
 
-/// The SCardListReaders function provides the list of readers within a set
-/// of named reader groups, eliminating duplicates. The caller supplies a
-/// list of reader groups, and receives the list of readers within the named
-/// groups. Unrecognized group names are ignored. This function only returns
-/// readers within the named groups that are currently attached to the
-/// system and available for use.
+/// Provides the list of readers within a set of named reader groups,
+/// eliminating duplicates.
 ///
-/// ```c
-/// LONG SCardListReadersW(
-///   SCARDCONTEXT hContext,
-///   LPCWSTR      mszGroups,
-///   LPWSTR       mszReaders,
-///   LPDWORD      pcchReaders
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardlistreadersw>.
+///
 /// {@category winscard}
+@pragma('vm:prefer-inline')
 int SCardListReaders(
   int hContext,
-  Pointer<Utf16> mszGroups,
-  Pointer<Utf16> mszReaders,
+  PCWSTR? mszGroups,
+  PWSTR? mszReaders,
   Pointer<Uint32> pcchReaders,
-) => _SCardListReaders(hContext, mszGroups, mszReaders, pcchReaders);
+) => _SCardListReaders(
+  hContext,
+  mszGroups ?? nullptr,
+  mszReaders ?? nullptr,
+  pcchReaders,
+);
 
-final _SCardListReaders = _winscard
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hContext,
-        Pointer<Utf16> mszGroups,
-        Pointer<Utf16> mszReaders,
-        Pointer<Uint32> pcchReaders,
-      ),
-      int Function(
-        int hContext,
-        Pointer<Utf16> mszGroups,
-        Pointer<Utf16> mszReaders,
-        Pointer<Uint32> pcchReaders,
-      )
-    >('SCardListReadersW');
+@Native<Int32 Function(IntPtr, PCWSTR, PWSTR, Pointer<Uint32>)>(
+  symbol: 'SCardListReadersW',
+)
+external int _SCardListReaders(
+  int hContext,
+  PCWSTR mszGroups,
+  PWSTR mszReaders,
+  Pointer<Uint32> pcchReaders,
+);
 
-/// The SCardListReadersWithDeviceInstanceId function gets the list of
-/// readers that have provided a device instance identifier. This function
-/// does not affect the state of the reader.
+/// Gets the list of readers that have provided a device instance identifier.
 ///
-/// ```c
-/// LONG SCardListReadersWithDeviceInstanceIdW(
-///   SCARDCONTEXT hContext,
-///   LPCWSTR      szDeviceInstanceId,
-///   LPWSTR       mszReaders,
-///   LPDWORD      pcchReaders
-/// );
-/// ```
+/// This function does not affect the state of the reader.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardlistreaderswithdeviceinstanceidw>.
+///
 /// {@category winscard}
+@pragma('vm:prefer-inline')
 int SCardListReadersWithDeviceInstanceId(
   int hContext,
-  Pointer<Utf16> szDeviceInstanceId,
-  Pointer<Utf16> mszReaders,
+  PCWSTR szDeviceInstanceId,
+  PWSTR? mszReaders,
   Pointer<Uint32> pcchReaders,
 ) => _SCardListReadersWithDeviceInstanceId(
   hContext,
   szDeviceInstanceId,
-  mszReaders,
+  mszReaders ?? nullptr,
   pcchReaders,
 );
 
-final _SCardListReadersWithDeviceInstanceId = _winscard
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hContext,
-        Pointer<Utf16> szDeviceInstanceId,
-        Pointer<Utf16> mszReaders,
-        Pointer<Uint32> pcchReaders,
-      ),
-      int Function(
-        int hContext,
-        Pointer<Utf16> szDeviceInstanceId,
-        Pointer<Utf16> mszReaders,
-        Pointer<Uint32> pcchReaders,
-      )
-    >('SCardListReadersWithDeviceInstanceIdW');
+@Native<Int32 Function(IntPtr, PCWSTR, PWSTR, Pointer<Uint32>)>(
+  symbol: 'SCardListReadersWithDeviceInstanceIdW',
+)
+external int _SCardListReadersWithDeviceInstanceId(
+  int hContext,
+  PCWSTR szDeviceInstanceId,
+  PWSTR mszReaders,
+  Pointer<Uint32> pcchReaders,
+);
 
-/// The SCardLocateCards function searches the readers listed in the
-/// rgReaderStates parameter for a card with an ATR string that matches one
-/// of the card names specified in mszCards, returning immediately with the
-/// result.
+/// Searches the readers listed in the rgReaderStates parameter for a card with
+/// an ATR string that matches one of the card names specified in mszCards,
+/// returning immediately with the result.
 ///
-/// ```c
-/// LONG SCardLocateCardsW(
-///   SCARDCONTEXT         hContext,
-///   LPCWSTR              mszCards,
-///   LPSCARD_READERSTATEW rgReaderStates,
-///   DWORD                cReaders
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardlocatecardsw>.
+///
 /// {@category winscard}
+@pragma('vm:prefer-inline')
 int SCardLocateCards(
   int hContext,
-  Pointer<Utf16> mszCards,
+  PCWSTR mszCards,
   Pointer<SCARD_READERSTATE> rgReaderStates,
   int cReaders,
 ) => _SCardLocateCards(hContext, mszCards, rgReaderStates, cReaders);
 
-final _SCardLocateCards = _winscard
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hContext,
-        Pointer<Utf16> mszCards,
-        Pointer<SCARD_READERSTATE> rgReaderStates,
-        Uint32 cReaders,
-      ),
-      int Function(
-        int hContext,
-        Pointer<Utf16> mszCards,
-        Pointer<SCARD_READERSTATE> rgReaderStates,
-        int cReaders,
-      )
-    >('SCardLocateCardsW');
+@Native<Int32 Function(IntPtr, PCWSTR, Pointer<SCARD_READERSTATE>, Uint32)>(
+  symbol: 'SCardLocateCardsW',
+)
+external int _SCardLocateCards(
+  int hContext,
+  PCWSTR mszCards,
+  Pointer<SCARD_READERSTATE> rgReaderStates,
+  int cReaders,
+);
 
-/// The SCardLocateCardsByATR function searches the readers listed in the
-/// rgReaderStates parameter for a card with a name that matches one of the
-/// card names contained in one of the SCARD_ATRMASK structures specified by
-/// the rgAtrMasks parameter.
+/// Searches the readers listed in the rgReaderStates parameter for a card with
+/// a name that matches one of the card names contained in one of the
+/// SCARD_ATRMASK structures specified by the rgAtrMasks parameter.
 ///
-/// ```c
-/// LONG SCardLocateCardsByATRW(
-///   SCARDCONTEXT         hContext,
-///   LPSCARD_ATRMASK      rgAtrMasks,
-///   DWORD                cAtrs,
-///   LPSCARD_READERSTATEW rgReaderStates,
-///   DWORD                cReaders
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardlocatecardsbyatrw>.
+///
 /// {@category winscard}
+@pragma('vm:prefer-inline')
 int SCardLocateCardsByATR(
   int hContext,
   Pointer<SCARD_ATRMASK> rgAtrMasks,
@@ -1069,201 +809,157 @@ int SCardLocateCardsByATR(
   cReaders,
 );
 
-final _SCardLocateCardsByATR = _winscard
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hContext,
-        Pointer<SCARD_ATRMASK> rgAtrMasks,
-        Uint32 cAtrs,
-        Pointer<SCARD_READERSTATE> rgReaderStates,
-        Uint32 cReaders,
-      ),
-      int Function(
-        int hContext,
-        Pointer<SCARD_ATRMASK> rgAtrMasks,
-        int cAtrs,
-        Pointer<SCARD_READERSTATE> rgReaderStates,
-        int cReaders,
-      )
-    >('SCardLocateCardsByATRW');
-
-/// The SCardReadCache function retrieves the value portion of a name-value
-/// pair from the global cache maintained by the Smart Card Resource
-/// Manager.
-///
-/// ```c
-/// LONG SCardReadCacheW(
-///   SCARDCONTEXT hContext,
-///   UUID         *CardIdentifier,
-///   DWORD        FreshnessCounter,
-///   LPWSTR       LookupName,
-///   PBYTE        Data,
-///   DWORD        *DataLen
-/// );
-/// ```
-/// {@category winscard}
-int SCardReadCache(
+@Native<
+  Int32 Function(
+    IntPtr,
+    Pointer<SCARD_ATRMASK>,
+    Uint32,
+    Pointer<SCARD_READERSTATE>,
+    Uint32,
+  )
+>(symbol: 'SCardLocateCardsByATRW')
+external int _SCardLocateCardsByATR(
   int hContext,
-  Pointer<GUID> CardIdentifier,
-  int FreshnessCounter,
-  Pointer<Utf16> LookupName,
-  Pointer<Uint8> Data,
-  Pointer<Uint32> DataLen,
-) => _SCardReadCache(
-  hContext,
-  CardIdentifier,
-  FreshnessCounter,
-  LookupName,
-  Data,
-  DataLen,
+  Pointer<SCARD_ATRMASK> rgAtrMasks,
+  int cAtrs,
+  Pointer<SCARD_READERSTATE> rgReaderStates,
+  int cReaders,
 );
 
-final _SCardReadCache = _winscard
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hContext,
-        Pointer<GUID> CardIdentifier,
-        Uint32 FreshnessCounter,
-        Pointer<Utf16> LookupName,
-        Pointer<Uint8> Data,
-        Pointer<Uint32> DataLen,
-      ),
-      int Function(
-        int hContext,
-        Pointer<GUID> CardIdentifier,
-        int FreshnessCounter,
-        Pointer<Utf16> LookupName,
-        Pointer<Uint8> Data,
-        Pointer<Uint32> DataLen,
-      )
-    >('SCardReadCacheW');
-
-/// The SCardReconnect function reestablishes an existing connection between
-/// the calling application and a smart card. This function moves a card
-/// handle from direct access to general access, or acknowledges and clears
-/// an error condition that is preventing further access to the card.
+/// Retrieves the value portion of a name-value pair from the global cache
+/// maintained by the Smart Card Resource Manager.
 ///
-/// ```c
-/// LONG SCardReconnect(
-///   SCARDHANDLE hCard,
-///   DWORD       dwShareMode,
-///   DWORD       dwPreferredProtocols,
-///   DWORD       dwInitialization,
-///   LPDWORD     pdwActiveProtocol
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardreadcachew>.
+///
 /// {@category winscard}
+@pragma('vm:prefer-inline')
+int SCardReadCache(
+  int hContext,
+  Pointer<GUID> cardIdentifier,
+  int freshnessCounter,
+  PCWSTR lookupName,
+  Pointer<Uint8> data,
+  Pointer<Uint32> dataLen,
+) => _SCardReadCache(
+  hContext,
+  cardIdentifier,
+  freshnessCounter,
+  lookupName,
+  data,
+  dataLen,
+);
+
+@Native<
+  Int32 Function(
+    IntPtr,
+    Pointer<GUID>,
+    Uint32,
+    PCWSTR,
+    Pointer<Uint8>,
+    Pointer<Uint32>,
+  )
+>(symbol: 'SCardReadCacheW')
+external int _SCardReadCache(
+  int hContext,
+  Pointer<GUID> cardIdentifier,
+  int freshnessCounter,
+  PCWSTR lookupName,
+  Pointer<Uint8> data,
+  Pointer<Uint32> dataLen,
+);
+
+/// Reestablishes an existing connection between the calling application and a
+/// smart card.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardreconnect>.
+///
+/// {@category winscard}
+@pragma('vm:prefer-inline')
 int SCardReconnect(
   int hCard,
   int dwShareMode,
   int dwPreferredProtocols,
   int dwInitialization,
-  Pointer<Uint32> pdwActiveProtocol,
+  Pointer<Uint32>? pdwActiveProtocol,
 ) => _SCardReconnect(
   hCard,
   dwShareMode,
   dwPreferredProtocols,
   dwInitialization,
-  pdwActiveProtocol,
+  pdwActiveProtocol ?? nullptr,
 );
 
-final _SCardReconnect = _winscard
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hCard,
-        Uint32 dwShareMode,
-        Uint32 dwPreferredProtocols,
-        Uint32 dwInitialization,
-        Pointer<Uint32> pdwActiveProtocol,
-      ),
-      int Function(
-        int hCard,
-        int dwShareMode,
-        int dwPreferredProtocols,
-        int dwInitialization,
-        Pointer<Uint32> pdwActiveProtocol,
-      )
-    >('SCardReconnect');
+@Native<Int32 Function(IntPtr, Uint32, Uint32, Uint32, Pointer<Uint32>)>(
+  symbol: 'SCardReconnect',
+)
+external int _SCardReconnect(
+  int hCard,
+  int dwShareMode,
+  int dwPreferredProtocols,
+  int dwInitialization,
+  Pointer<Uint32> pdwActiveProtocol,
+);
 
-/// The SCardReleaseContext function closes an established resource manager
-/// context, freeing any resources allocated under that context, including
-/// SCARDHANDLE objects and memory allocated using the SCARD_AUTOALLOCATE
-/// length designator.
+/// Closes an established resource manager context, freeing any resources
+/// allocated under that context, including SCARDHANDLE objects and memory
+/// allocated using the SCARD_AUTOALLOCATE length designator.
 ///
-/// ```c
-/// LONG SCardReleaseContext(
-/// SCARDCONTEXT hContext);
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardreleasecontext>.
+///
 /// {@category winscard}
+@pragma('vm:prefer-inline')
 int SCardReleaseContext(int hContext) => _SCardReleaseContext(hContext);
 
-final _SCardReleaseContext = _winscard
-    .lookupFunction<
-      Int32 Function(IntPtr hContext),
-      int Function(int hContext)
-    >('SCardReleaseContext');
+@Native<Int32 Function(IntPtr)>(symbol: 'SCardReleaseContext')
+external int _SCardReleaseContext(int hContext);
 
-/// The SCardReleaseStartedEvent function decrements the reference count for
-/// a handle acquired by a previous call to the SCardAccessStartedEvent
-/// function.
+/// Decrements the reference count for a handle acquired by a previous call to
+/// the SCardAccessStartedEvent function.
 ///
-/// ```c
-/// void SCardReleaseStartedEvent();
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardreleasestartedevent>.
+///
 /// {@category winscard}
+@pragma('vm:prefer-inline')
 void SCardReleaseStartedEvent() => _SCardReleaseStartedEvent();
 
-final _SCardReleaseStartedEvent = _winscard
-    .lookupFunction<Void Function(), void Function()>(
-      'SCardReleaseStartedEvent',
-    );
+@Native<Void Function()>(symbol: 'SCardReleaseStartedEvent')
+external void _SCardReleaseStartedEvent();
 
-/// The SCardRemoveReaderFromGroup function removes a reader from an
-/// existing reader group. This function has no effect on the reader.
+/// Removes a reader from an existing reader group.
 ///
-/// ```c
-/// LONG SCardRemoveReaderFromGroupW(
-///   SCARDCONTEXT hContext,
-///   LPCWSTR      szReaderName,
-///   LPCWSTR      szGroupName
-/// );
-/// ```
+/// This function has no effect on the reader.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardremovereaderfromgroupw>.
+///
 /// {@category winscard}
+@pragma('vm:prefer-inline')
 int SCardRemoveReaderFromGroup(
   int hContext,
-  Pointer<Utf16> szReaderName,
-  Pointer<Utf16> szGroupName,
+  PCWSTR szReaderName,
+  PCWSTR szGroupName,
 ) => _SCardRemoveReaderFromGroup(hContext, szReaderName, szGroupName);
 
-final _SCardRemoveReaderFromGroup = _winscard
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hContext,
-        Pointer<Utf16> szReaderName,
-        Pointer<Utf16> szGroupName,
-      ),
-      int Function(
-        int hContext,
-        Pointer<Utf16> szReaderName,
-        Pointer<Utf16> szGroupName,
-      )
-    >('SCardRemoveReaderFromGroupW');
+@Native<Int32 Function(IntPtr, PCWSTR, PCWSTR)>(
+  symbol: 'SCardRemoveReaderFromGroupW',
+)
+external int _SCardRemoveReaderFromGroup(
+  int hContext,
+  PCWSTR szReaderName,
+  PCWSTR szGroupName,
+);
 
-/// The SCardSetAttrib function sets the given reader attribute for the
-/// given handle. It does not affect the state of the reader, reader driver,
-/// or smart card. Not all attributes are supported by all readers (nor can
-/// they be set at all times) as many of the attributes are under direct
-/// control of the transport protocol.
+/// Sets the given reader attribute for the given handle.
 ///
-/// ```c
-/// LONG SCardSetAttrib(
-///   SCARDHANDLE hCard,
-///   DWORD       dwAttrId,
-///   LPCBYTE     pbAttr,
-///   DWORD       cbAttrLen
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardsetattrib>.
+///
 /// {@category winscard}
+@pragma('vm:prefer-inline')
 int SCardSetAttrib(
   int hCard,
   int dwAttrId,
@@ -1271,40 +967,29 @@ int SCardSetAttrib(
   int cbAttrLen,
 ) => _SCardSetAttrib(hCard, dwAttrId, pbAttr, cbAttrLen);
 
-final _SCardSetAttrib = _winscard
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hCard,
-        Uint32 dwAttrId,
-        Pointer<Uint8> pbAttr,
-        Uint32 cbAttrLen,
-      ),
-      int Function(
-        int hCard,
-        int dwAttrId,
-        Pointer<Uint8> pbAttr,
-        int cbAttrLen,
-      )
-    >('SCardSetAttrib');
+@Native<Int32 Function(IntPtr, Uint32, Pointer<Uint8>, Uint32)>(
+  symbol: 'SCardSetAttrib',
+)
+external int _SCardSetAttrib(
+  int hCard,
+  int dwAttrId,
+  Pointer<Uint8> pbAttr,
+  int cbAttrLen,
+);
 
-/// The SCardSetCardTypeProviderName function specifies the name of the
-/// module (dynamic link library) containing the provider for a given card
-/// name and provider type.
+/// Specifies the name of the module (dynamic link library) containing the
+/// provider for a given card name and provider type.
 ///
-/// ```c
-/// LONG SCardSetCardTypeProviderNameW(
-///   SCARDCONTEXT hContext,
-///   LPCWSTR      szCardName,
-///   DWORD        dwProviderId,
-///   LPCWSTR      szProvider
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardsetcardtypeprovidernamew>.
+///
 /// {@category winscard}
+@pragma('vm:prefer-inline')
 int SCardSetCardTypeProviderName(
   int hContext,
-  Pointer<Utf16> szCardName,
+  PCWSTR szCardName,
   int dwProviderId,
-  Pointer<Utf16> szProvider,
+  PCWSTR szProvider,
 ) => _SCardSetCardTypeProviderName(
   hContext,
   szCardName,
@@ -1312,100 +997,76 @@ int SCardSetCardTypeProviderName(
   szProvider,
 );
 
-final _SCardSetCardTypeProviderName = _winscard
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hContext,
-        Pointer<Utf16> szCardName,
-        Uint32 dwProviderId,
-        Pointer<Utf16> szProvider,
-      ),
-      int Function(
-        int hContext,
-        Pointer<Utf16> szCardName,
-        int dwProviderId,
-        Pointer<Utf16> szProvider,
-      )
-    >('SCardSetCardTypeProviderNameW');
+@Native<Int32 Function(IntPtr, PCWSTR, Uint32, PCWSTR)>(
+  symbol: 'SCardSetCardTypeProviderNameW',
+)
+external int _SCardSetCardTypeProviderName(
+  int hContext,
+  PCWSTR szCardName,
+  int dwProviderId,
+  PCWSTR szProvider,
+);
 
-/// The SCardStatus function provides the current status of a smart card in
-/// a reader. You can call it any time after a successful call to
-/// SCardConnect and before a successful call to SCardDisconnect. It does
-/// not affect the state of the reader or reader driver.
+/// Provides the current status of a smart card in a reader.
 ///
-/// ```c
-/// LONG SCardStatusW(
-///   SCARDHANDLE hCard,
-///   LPWSTR      mszReaderNames,
-///   LPDWORD     pcchReaderLen,
-///   LPDWORD     pdwState,
-///   LPDWORD     pdwProtocol,
-///   LPBYTE      pbAtr,
-///   LPDWORD     pcbAtrLen
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardstatusw>.
+///
 /// {@category winscard}
+@pragma('vm:prefer-inline')
 int SCardStatus(
   int hCard,
-  Pointer<Utf16> mszReaderNames,
+  PWSTR? mszReaderNames,
+  Pointer<Uint32>? pcchReaderLen,
+  Pointer<Uint32>? pdwState,
+  Pointer<Uint32>? pdwProtocol,
+  Pointer<Uint8>? pbAtr,
+  Pointer<Uint32>? pcbAtrLen,
+) => _SCardStatus(
+  hCard,
+  mszReaderNames ?? nullptr,
+  pcchReaderLen ?? nullptr,
+  pdwState ?? nullptr,
+  pdwProtocol ?? nullptr,
+  pbAtr ?? nullptr,
+  pcbAtrLen ?? nullptr,
+);
+
+@Native<
+  Int32 Function(
+    IntPtr,
+    PWSTR,
+    Pointer<Uint32>,
+    Pointer<Uint32>,
+    Pointer<Uint32>,
+    Pointer<Uint8>,
+    Pointer<Uint32>,
+  )
+>(symbol: 'SCardStatusW')
+external int _SCardStatus(
+  int hCard,
+  PWSTR mszReaderNames,
   Pointer<Uint32> pcchReaderLen,
   Pointer<Uint32> pdwState,
   Pointer<Uint32> pdwProtocol,
   Pointer<Uint8> pbAtr,
   Pointer<Uint32> pcbAtrLen,
-) => _SCardStatus(
-  hCard,
-  mszReaderNames,
-  pcchReaderLen,
-  pdwState,
-  pdwProtocol,
-  pbAtr,
-  pcbAtrLen,
 );
 
-final _SCardStatus = _winscard
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hCard,
-        Pointer<Utf16> mszReaderNames,
-        Pointer<Uint32> pcchReaderLen,
-        Pointer<Uint32> pdwState,
-        Pointer<Uint32> pdwProtocol,
-        Pointer<Uint8> pbAtr,
-        Pointer<Uint32> pcbAtrLen,
-      ),
-      int Function(
-        int hCard,
-        Pointer<Utf16> mszReaderNames,
-        Pointer<Uint32> pcchReaderLen,
-        Pointer<Uint32> pdwState,
-        Pointer<Uint32> pdwProtocol,
-        Pointer<Uint8> pbAtr,
-        Pointer<Uint32> pcbAtrLen,
-      )
-    >('SCardStatusW');
-
-/// The SCardTransmit function sends a service request to the smart card and
-/// expects to receive data back from the card.
+/// Sends a service request to the smart card and expects to receive data back
+/// from the card.
 ///
-/// ```c
-/// LONG SCardTransmit(
-///   SCARDHANDLE         hCard,
-///   LPCSCARD_IO_REQUEST pioSendPci,
-///   LPCBYTE             pbSendBuffer,
-///   DWORD               cbSendLength,
-///   LPSCARD_IO_REQUEST  pioRecvPci,
-///   LPBYTE              pbRecvBuffer,
-///   LPDWORD             pcbRecvLength
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardtransmit>.
+///
 /// {@category winscard}
+@pragma('vm:prefer-inline')
 int SCardTransmit(
   int hCard,
   Pointer<SCARD_IO_REQUEST> pioSendPci,
   Pointer<Uint8> pbSendBuffer,
   int cbSendLength,
-  Pointer<SCARD_IO_REQUEST> pioRecvPci,
+  Pointer<SCARD_IO_REQUEST>? pioRecvPci,
   Pointer<Uint8> pbRecvBuffer,
   Pointer<Uint32> pcbRecvLength,
 ) => _SCardTransmit(
@@ -1413,79 +1074,64 @@ int SCardTransmit(
   pioSendPci,
   pbSendBuffer,
   cbSendLength,
-  pioRecvPci,
+  pioRecvPci ?? nullptr,
   pbRecvBuffer,
   pcbRecvLength,
 );
 
-final _SCardTransmit = _winscard
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hCard,
-        Pointer<SCARD_IO_REQUEST> pioSendPci,
-        Pointer<Uint8> pbSendBuffer,
-        Uint32 cbSendLength,
-        Pointer<SCARD_IO_REQUEST> pioRecvPci,
-        Pointer<Uint8> pbRecvBuffer,
-        Pointer<Uint32> pcbRecvLength,
-      ),
-      int Function(
-        int hCard,
-        Pointer<SCARD_IO_REQUEST> pioSendPci,
-        Pointer<Uint8> pbSendBuffer,
-        int cbSendLength,
-        Pointer<SCARD_IO_REQUEST> pioRecvPci,
-        Pointer<Uint8> pbRecvBuffer,
-        Pointer<Uint32> pcbRecvLength,
-      )
-    >('SCardTransmit');
-
-/// The SCardWriteCache function writes a name-value pair from a smart card
-/// to the global cache maintained by the Smart Card Resource Manager.
-///
-/// ```c
-/// LONG SCardWriteCacheW(
-///   SCARDCONTEXT hContext,
-///   UUID         *CardIdentifier,
-///   DWORD        FreshnessCounter,
-///   LPWSTR       LookupName,
-///   PBYTE        Data,
-///   DWORD        DataLen
-/// );
-/// ```
-/// {@category winscard}
-int SCardWriteCache(
-  int hContext,
-  Pointer<GUID> CardIdentifier,
-  int FreshnessCounter,
-  Pointer<Utf16> LookupName,
-  Pointer<Uint8> Data,
-  int DataLen,
-) => _SCardWriteCache(
-  hContext,
-  CardIdentifier,
-  FreshnessCounter,
-  LookupName,
-  Data,
-  DataLen,
+@Native<
+  Int32 Function(
+    IntPtr,
+    Pointer<SCARD_IO_REQUEST>,
+    Pointer<Uint8>,
+    Uint32,
+    Pointer<SCARD_IO_REQUEST>,
+    Pointer<Uint8>,
+    Pointer<Uint32>,
+  )
+>(symbol: 'SCardTransmit')
+external int _SCardTransmit(
+  int hCard,
+  Pointer<SCARD_IO_REQUEST> pioSendPci,
+  Pointer<Uint8> pbSendBuffer,
+  int cbSendLength,
+  Pointer<SCARD_IO_REQUEST> pioRecvPci,
+  Pointer<Uint8> pbRecvBuffer,
+  Pointer<Uint32> pcbRecvLength,
 );
 
-final _SCardWriteCache = _winscard
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hContext,
-        Pointer<GUID> CardIdentifier,
-        Uint32 FreshnessCounter,
-        Pointer<Utf16> LookupName,
-        Pointer<Uint8> Data,
-        Uint32 DataLen,
-      ),
-      int Function(
-        int hContext,
-        Pointer<GUID> CardIdentifier,
-        int FreshnessCounter,
-        Pointer<Utf16> LookupName,
-        Pointer<Uint8> Data,
-        int DataLen,
-      )
-    >('SCardWriteCacheW');
+/// Writes a name-value pair from a smart card to the global cache maintained by
+/// the Smart Card Resource Manager.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardwritecachew>.
+///
+/// {@category winscard}
+@pragma('vm:prefer-inline')
+int SCardWriteCache(
+  int hContext,
+  Pointer<GUID> cardIdentifier,
+  int freshnessCounter,
+  PCWSTR lookupName,
+  Pointer<Uint8> data,
+  int dataLen,
+) => _SCardWriteCache(
+  hContext,
+  cardIdentifier,
+  freshnessCounter,
+  lookupName,
+  data,
+  dataLen,
+);
+
+@Native<
+  Int32 Function(IntPtr, Pointer<GUID>, Uint32, PCWSTR, Pointer<Uint8>, Uint32)
+>(symbol: 'SCardWriteCacheW')
+external int _SCardWriteCache(
+  int hContext,
+  Pointer<GUID> cardIdentifier,
+  int freshnessCounter,
+  PCWSTR lookupName,
+  Pointer<Uint8> data,
+  int dataLen,
+);

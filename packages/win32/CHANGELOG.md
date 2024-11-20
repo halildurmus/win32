@@ -56,9 +56,9 @@ All notable changes to this project will be documented in this file.
 - Add `.gitattributes` to normalize line endings by [@halildurmus](https://github.com/halildurmus)
 - Tweak git-cliff configuration by [@halildurmus](https://github.com/halildurmus)
 
-## New Contributors ❤️
+### New Contributors ❤️
 
-- [@weasdown](https://github.com/weasdown) made their first contribution in [#949](https://github.com/halildurmus/win32/pull/949)
+- @weasdown made their first contribution in [#949](https://github.com/halildurmus/win32/pull/949)
 
 [5.10.1]: https://github.com/halildurmus/win32/compare/v5.10.0..v5.10.1
 

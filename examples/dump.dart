@@ -1,9 +1,8 @@
-// Retrieves the exported symbols from kernel32
+// Retrieves the exported symbols from kernel32.
 
 import 'dart:ffi';
 import 'dart:io' show exit;
 
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 final _exportedSymbols = <String, int>{};
@@ -20,23 +19,21 @@ int _enumSymbolProc(Pointer<SYMBOL_INFO> pSymInfo, int size, Pointer ctx) {
 }
 
 Map<String, int> getExports(int hProcess, String module) {
-  final status = SymInitialize(hProcess, nullptr, FALSE);
-  if (status == FALSE) {
+  if (!SymInitialize(hProcess, null, false)) {
     print('SymInitialize failed.');
     exit(1);
   }
 
-  final modulePtr = module.toNativeUtf16();
-
+  final imageName = w(module);
   final baseOfDll = SymLoadModuleEx(
     hProcess,
-    NULL,
-    modulePtr,
-    nullptr,
+    null,
+    imageName.ptr,
+    null,
     0,
     0,
-    nullptr,
-    0,
+    null,
+    null,
   );
 
   if (baseOfDll == 0) {
@@ -46,36 +43,32 @@ Map<String, int> getExports(int hProcess, String module) {
     exit(1);
   }
 
-  final mask = '*'.toNativeUtf16();
-
   final callback = NativeCallable<PSYM_ENUMERATESYMBOLS_CALLBACK>.isolateLocal(
     _enumSymbolProc,
     exceptionalReturn: 0,
   );
 
-  if (SymEnumSymbols(
-        hProcess,
-        baseOfDll,
-        mask,
-        callback.nativeFunction,
-        nullptr,
-      ) ==
-      FALSE) {
+  final mask = w('*');
+  if (!SymEnumSymbols(
+    hProcess,
+    baseOfDll,
+    mask.ptr,
+    callback.nativeFunction,
+    null,
+  )) {
     print('SymEnumSymbols failed.');
   }
 
   callback.close();
   SymCleanup(hProcess);
-  free(modulePtr);
-  free(mask);
 
   return _exportedSymbols;
 }
 
 /// Test which processor architecture Windows is running
 bool isWindowsOnArm(int hProcess) {
-  final pProcessMachine = calloc<USHORT>();
-  final pNativeMachine = calloc<USHORT>();
+  final pProcessMachine = loggingCalloc<USHORT>();
+  final pNativeMachine = loggingCalloc<USHORT>();
 
   try {
     IsWow64Process2(hProcess, pProcessMachine, pNativeMachine);
@@ -96,5 +89,5 @@ void main() {
   getExports(
     hProcess,
     kernel32,
-  ).forEach((name, address) => print('[${address.toHexString(32)}] $name'));
+  ).forEach((name, address) => print('[${address.toHexString()}] $name'));
 }

@@ -13,20 +13,16 @@ class WindowRoundingSelector extends StatefulWidget {
 }
 
 class WindowRoundingSelectorState extends State<WindowRoundingSelector> {
-  var _isWindowRounded = true;
+  bool _isWindowRounded = true;
 
-  void setWindowRoundingEffect({required bool isRounded}) {
-    final pref = calloc<DWORD>();
+  void setWindowRoundingEffect({bool isRounded = true}) {
+    final pref = loggingCalloc<DWORD>();
     try {
       final hwnd = GetForegroundWindow();
       const attr = DWMWA_WINDOW_CORNER_PREFERENCE;
       pref.value = isRounded ? DWMWCP_ROUND : DWMWCP_DONOTROUND;
-
       DwmSetWindowAttribute(hwnd, attr, pref, sizeOf<DWORD>());
-
-      setState(() {
-        _isWindowRounded = isRounded;
-      });
+      setState(() => _isWindowRounded = isRounded);
     } finally {
       free(pref);
     }

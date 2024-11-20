@@ -1,58 +1,75 @@
-// Maps FFI prototypes onto the corresponding Win32 API function calls
-
+// Maps FFI prototypes onto the corresponding Win32 API function calls.
+//
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-
-// ignore_for_file: unused_import, non_constant_identifier_names
-// ignore_for_file: constant_identifier_names, camel_case_types
-// ignore_for_file: specify_nonobvious_property_types
+//
+// ignore_for_file: avoid_positional_boolean_parameters
+// ignore_for_file: non_constant_identifier_names, unused_import
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../callbacks.dart';
-import '../combase.dart';
-import '../guid.dart';
+import '../allocator.dart';
+import '../bstr.dart';
+import '../com/interface.g.dart';
+import '../com/iunknown.g.dart';
+import '../constants.dart';
+import '../constants.g.dart';
+import '../enums.g.dart';
+import '../exception.dart';
+import '../extensions/pointer.dart';
+import '../hresult.dart';
+import '../hstring.dart';
+import '../macros.dart';
+import '../ntstatus.dart';
+import '../pcstr.dart';
+import '../pcwstr.dart';
+import '../pstr.dart';
+import '../pwstr.dart';
 import '../structs.g.dart';
-import '../variant.dart';
-
-final _ntdll = DynamicLibrary.open('ntdll.dll');
+import '../types.dart';
+import '../utils.dart';
 
 /// Retrieves the specified system information.
 ///
-/// ```c
-/// NTSTATUS NtQuerySystemInformation(
-///    [in]            SYSTEM_INFORMATION_CLASS SystemInformationClass,
-///    [in, out]       PVOID                    SystemInformation,
-///    [in]            ULONG                    SystemInformationLength,
-///    [out, optional] PULONG                   ReturnLength
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winternl/nf-winternl-ntquerysysteminformation>.
+///
 /// {@category ntdll}
-int NtQuerySystemInformation(
-  int SystemInformationClass,
-  Pointer SystemInformation,
-  int SystemInformationLength,
-  Pointer<Uint32> ReturnLength,
-) => _NtQuerySystemInformation(
-  SystemInformationClass,
-  SystemInformation,
-  SystemInformationLength,
-  ReturnLength,
+@pragma('vm:prefer-inline')
+NTSTATUS NtQuerySystemInformation(
+  SYSTEM_INFORMATION_CLASS systemInformationClass,
+  Pointer systemInformation,
+  int systemInformationLength,
+  Pointer<Uint32> returnLength,
+) => NTSTATUS(
+  _NtQuerySystemInformation(
+    systemInformationClass,
+    systemInformation,
+    systemInformationLength,
+    returnLength,
+  ),
 );
 
-final _NtQuerySystemInformation = _ntdll
-    .lookupFunction<
-      Int32 Function(
-        Int32 SystemInformationClass,
-        Pointer SystemInformation,
-        Uint32 SystemInformationLength,
-        Pointer<Uint32> ReturnLength,
-      ),
-      int Function(
-        int SystemInformationClass,
-        Pointer SystemInformation,
-        int SystemInformationLength,
-        Pointer<Uint32> ReturnLength,
-      )
-    >('NtQuerySystemInformation');
+@Native<Int32 Function(Int32, Pointer, Uint32, Pointer<Uint32>)>(
+  symbol: 'NtQuerySystemInformation',
+)
+external int _NtQuerySystemInformation(
+  int systemInformationClass,
+  Pointer systemInformation,
+  int systemInformationLength,
+  Pointer<Uint32> returnLength,
+);
+
+/// Gets version information about the currently running operating system.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/DevNotes/rtlgetversion>.
+///
+/// {@category ntdll}
+@pragma('vm:prefer-inline')
+NTSTATUS RtlGetVersion(Pointer<OSVERSIONINFO> lpVersionInformation) =>
+    NTSTATUS(_RtlGetVersion(lpVersionInformation));
+
+@Native<Int32 Function(Pointer<OSVERSIONINFO>)>(symbol: 'RtlGetVersion')
+external int _RtlGetVersion(Pointer<OSVERSIONINFO> lpVersionInformation);

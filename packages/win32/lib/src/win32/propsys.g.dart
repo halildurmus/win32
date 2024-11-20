@@ -1,67 +1,80 @@
-// Maps FFI prototypes onto the corresponding Win32 API function calls
-
+// Maps FFI prototypes onto the corresponding Win32 API function calls.
+//
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-
-// ignore_for_file: unused_import, non_constant_identifier_names
-// ignore_for_file: constant_identifier_names, camel_case_types
-// ignore_for_file: specify_nonobvious_property_types
+//
+// ignore_for_file: avoid_positional_boolean_parameters
+// ignore_for_file: non_constant_identifier_names, unused_import
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../callbacks.dart';
-import '../combase.dart';
-import '../guid.dart';
+import '../allocator.dart';
+import '../bstr.dart';
+import '../com/interface.g.dart';
+import '../com/iunknown.g.dart';
+import '../constants.dart';
+import '../constants.g.dart';
+import '../exception.dart';
+import '../extensions/pointer.dart';
+import '../hresult.dart';
+import '../hstring.dart';
+import '../macros.dart';
+import '../ntstatus.dart';
+import '../pcstr.dart';
+import '../pcwstr.dart';
+import '../propvariant.dart';
+import '../pstr.dart';
+import '../pwstr.dart';
 import '../structs.g.dart';
-import '../variant.dart';
+import '../types.dart';
+import '../utils.dart';
 
-final _propsys = DynamicLibrary.open('propsys.dll');
-
-/// Extracts the string property value of a PROPVARIANT structure. If no
-/// value exists, then the specified default value is returned.
+/// Extracts the string property value of a PROPVARIANT structure.
 ///
-/// ```c
-/// PWSTR PropVariantToStringWithDefault(
-///    [in] REFPROPVARIANT propvarIn,
-///    [in] LPCWSTR        pszDefault
-/// );
-/// ```
+/// If no value exists, then the specified default value is returned.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttostringwithdefault>.
+///
 /// {@category propsys}
-Pointer<Utf16> PropVariantToStringWithDefault(
+@pragma('vm:prefer-inline')
+PCWSTR PropVariantToStringWithDefault(
   Pointer<PROPVARIANT> propvarIn,
-  Pointer<Utf16> pszDefault,
-) => _PropVariantToStringWithDefault(propvarIn, pszDefault);
+  PCWSTR? pszDefault,
+) => _PropVariantToStringWithDefault(propvarIn, pszDefault ?? nullptr);
 
-final _PropVariantToStringWithDefault = _propsys
-    .lookupFunction<
-      Pointer<Utf16> Function(
-        Pointer<PROPVARIANT> propvarIn,
-        Pointer<Utf16> pszDefault,
-      ),
-      Pointer<Utf16> Function(
-        Pointer<PROPVARIANT> propvarIn,
-        Pointer<Utf16> pszDefault,
-      )
-    >('PropVariantToStringWithDefault');
+@Native<PCWSTR Function(Pointer<PROPVARIANT>, PCWSTR)>(
+  symbol: 'PropVariantToStringWithDefault',
+)
+external PCWSTR _PropVariantToStringWithDefault(
+  Pointer<PROPVARIANT> propvarIn,
+  PCWSTR pszDefault,
+);
 
-/// Extracts a string from a PROPVARIANT structure and places it into a
-/// STRRET structure.
+/// Extracts a string from a PROPVARIANT structure and places it into a STRRET
+/// structure.
 ///
-/// ```c
-/// HRESULT PropVariantToStrRet(
-///    [in]  REFPROPVARIANT propvar,
-///    [out] STRRET         *pstrret
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttostrret>.
+///
 /// {@category propsys}
-int PropVariantToStrRet(
+Pointer<STRRET> PropVariantToStrRet(Pointer<PROPVARIANT> propvar) {
+  final pstrret = loggingCalloc<STRRET>();
+  final hr$ = HRESULT(_PropVariantToStrRet(propvar, pstrret));
+  if (hr$.isError) {
+    free(pstrret);
+    throw WindowsException(hr$);
+  }
+  return pstrret;
+}
+
+@Native<Int32 Function(Pointer<PROPVARIANT>, Pointer<STRRET>)>(
+  symbol: 'PropVariantToStrRet',
+)
+external int _PropVariantToStrRet(
   Pointer<PROPVARIANT> propvar,
   Pointer<STRRET> pstrret,
-) => _PropVariantToStrRet(propvar, pstrret);
-
-final _PropVariantToStrRet = _propsys
-    .lookupFunction<
-      Int32 Function(Pointer<PROPVARIANT> propvar, Pointer<STRRET> pstrret),
-      int Function(Pointer<PROPVARIANT> propvar, Pointer<STRRET> pstrret)
-    >('PropVariantToStrRet');
+);

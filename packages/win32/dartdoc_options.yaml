@@ -4,18 +4,33 @@ dartdoc:
       markdown: doc/advapi32.md
     'bluetooth':
       markdown: doc/bluetooth.md
+    'callback':
+      name: 'Callbacks'
+      markdown: doc/callback.md
+    'com':
+      name: 'COM-based APIs'
+      markdown: doc/com.md
     'comctl32':
       markdown: doc/comctl32.md
     'comdlg32':
       markdown: doc/comdlg32.md
     'crypt32':
       markdown: doc/crypt32.md
+    'dbghelp':
+      markdown: doc/dbghelp.md
+    'dwmapi':
+      markdown: doc/dwmapi.md
     'dxva2':
       markdown: doc/dxva2.md
+    'enum':
+      name: 'Enumerations'
+      markdown: doc/enum.md
     'gdi32':
       markdown: doc/gdi32.md
     'kernel32':
       markdown: doc/kernel32.md
+    'magnification':
+      markdown: doc/magnification.md
     'netapi32':
       markdown: doc/netapi32.md
     'ntdll':
@@ -24,87 +39,83 @@ dartdoc:
       markdown: doc/ole32.md
     'oleaut32':
       markdown: doc/oleaut32.md
-    'winsock':
-      markdown: doc/winsock.md
+    'onecore':
+      markdown: doc/onecore.md
     'powrprof':
       markdown: doc/powrprof.md
     'psapi':
       markdown: doc/psapi.md
-    'winscard':
-      markdown: doc/winscard.md
-    'winspool':
-      markdown: doc/winspool.md
-    'wlanapi':
-      markdown: doc/wlanapi.md
+    'setupapi':
+      markdown: doc/setupapi.md
     'shell32':
       markdown: doc/shell32.md
+    'shlwapi':
+      markdown: doc/shlwapi.md
+    'struct':
+      name: 'Structures'
+      markdown: doc/struct.md
+    'union':
+      name: 'Unions'
+      markdown: doc/union.md
     'user32':
       markdown: doc/user32.md
     'uxtheme':
       markdown: doc/uxtheme.md
-    'dwmapi':
-      markdown: doc/dwmapi.md
-    'magnification':
-      markdown: doc/magnification.md
-    'onecore':
-      markdown: doc/onecore.md
-    'setupapi':
-      markdown: doc/setupapi.md
     'version':
       markdown: doc/version.md
-    'xinput':
-      markdown: doc/xinput.md
     'winmm':
       markdown: doc/winmm.md
-    'com':
-      name: 'COM-based APIs'
-      markdown: doc/com.md
     'winrt':
       name: 'WinRT APIs'
       markdown: doc/winrt.md
-    'struct':
-      name: 'Structures'
-      markdown: doc/struct.md
-    'enum':
-      name: 'Enumerations'
-      markdown: doc/enum.md
-    'examples':
-      name: 'Sample apps'
-      markdown: doc/examples.md
+    'winscard':
+      markdown: doc/winscard.md
+    'winsock':
+      markdown: doc/winsock.md
+    'winspool':
+      markdown: doc/winspool.md
+    'wlanapi':
+      markdown: doc/wlanapi.md
+    'xinput':
+      markdown: doc/xinput.md
   categoryOrder:
     [
-      'kernel32',
-      'user32',
-      'gdi32',
-      'shell32',
-      'ole32',
-      'oleaut32',
+      'advapi32',
+      'bluetooth',
       'comctl32',
       'comdlg32',
-      'netapi32',
-      'uxtheme',
+      'crypt32',
+      'dbghelp',
       'dwmapi',
+      'dxva2',
+      'gdi32',
+      'kernel32',
       'magnification',
+      'netapi32',
       'ntdll',
+      'ole32',
+      'oleaut32',
       'onecore',
+      'powrprof',
       'psapi',
       'setupapi',
+      'shell32',
+      'shlwapi',
+      'user32',
+      'uxtheme',
       'version',
-      'xinput',
-      'advapi32',
-      'winsock',
-      'bluetooth',
-      'powrprof',
       'winscard',
+      'winsock',
       'winspool',
-      'wlanapi',
-      'dxva2',
       'winmm',
+      'wlanapi',
+      'xinput',
       'com',
       'winrt',
-      'struct',
+      'callback',
       'enum',
-      'examples',
+      'struct',
+      'union',
     ]
   showUndocumentedCategories: true
   ignore:

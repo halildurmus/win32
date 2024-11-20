@@ -1,941 +1,566 @@
-// Maps FFI prototypes onto the corresponding Win32 API function calls
-
+// Maps FFI prototypes onto the corresponding Win32 API function calls.
+//
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-
-// ignore_for_file: unused_import, non_constant_identifier_names
-// ignore_for_file: constant_identifier_names, camel_case_types
-// ignore_for_file: specify_nonobvious_property_types
+//
+// ignore_for_file: avoid_positional_boolean_parameters
+// ignore_for_file: non_constant_identifier_names, unused_import
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../callbacks.dart';
-import '../combase.dart';
-import '../guid.dart';
+import '../_internal/kernel32.g.dart';
+import '../allocator.dart';
+import '../bstr.dart';
+import '../callbacks.g.dart';
+import '../com/interface.g.dart';
+import '../com/iunknown.g.dart';
+import '../constants.dart';
+import '../constants.g.dart';
+import '../enums.g.dart';
+import '../exception.dart';
+import '../extensions/pointer.dart';
+import '../hresult.dart';
+import '../hstring.dart';
+import '../macros.dart';
+import '../ntstatus.dart';
+import '../pcstr.dart';
+import '../pcwstr.dart';
+import '../pstr.dart';
+import '../pwstr.dart';
 import '../structs.g.dart';
-import '../variant.dart';
+import '../types.dart';
+import '../utils.dart';
 
-final _kernel32 = DynamicLibrary.open('kernel32.dll');
-
-/// The ActivateActCtx function activates the specified activation context.
-/// It does this by pushing the specified activation context to the top of
-/// the activation stack. The specified activation context is thus
-/// associated with the current thread and any appropriate side-by-side API
-/// functions.
+/// Activates the specified activation context.
 ///
-/// ```c
-/// BOOL ActivateActCtx(
-///   HANDLE    hActCtx,
-///   ULONG_PTR *lpCookie
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-activateactctx>.
+///
 /// {@category kernel32}
-int ActivateActCtx(int hActCtx, Pointer<IntPtr> lpCookie) =>
-    _ActivateActCtx(hActCtx, lpCookie);
-
-final _ActivateActCtx = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hActCtx, Pointer<IntPtr> lpCookie),
-      int Function(int hActCtx, Pointer<IntPtr> lpCookie)
-    >('ActivateActCtx');
+@pragma('vm:prefer-inline')
+bool ActivateActCtx(int? hActCtx, Pointer<IntPtr> lpCookie) =>
+    ActivateActCtx_Wrapper(hActCtx ?? NULL, lpCookie) != FALSE;
 
 /// Adds a directory to the process DLL search path.
 ///
-/// ```c
-/// DLL_DIRECTORY_COOKIE AddDllDirectory(
-///   [in] PCWSTR NewDirectory
-/// );
-/// ```
-/// {@category kernel32}
-Pointer AddDllDirectory(Pointer<Utf16> NewDirectory) =>
-    _AddDllDirectory(NewDirectory);
-
-final _AddDllDirectory = _kernel32
-    .lookupFunction<
-      Pointer Function(Pointer<Utf16> NewDirectory),
-      Pointer Function(Pointer<Utf16> NewDirectory)
-    >('AddDllDirectory');
-
-/// The AddRefActCtx function increments the reference count of the
-/// specified activation context.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-adddlldirectory>.
 ///
-/// ```c
-/// void AddRefActCtx(
-///   HANDLE hActCtx
-/// );
-/// ```
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
+Pointer AddDllDirectory(PCWSTR newDirectory) =>
+    AddDllDirectory_Wrapper(newDirectory);
+
+/// Increments the reference count of the specified activation context.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-addrefactctx>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
 void AddRefActCtx(int hActCtx) => _AddRefActCtx(hActCtx);
 
-final _AddRefActCtx = _kernel32
-    .lookupFunction<Void Function(IntPtr hActCtx), void Function(int hActCtx)>(
-      'AddRefActCtx',
-    );
+@Native<Void Function(HANDLE)>(symbol: 'AddRefActCtx')
+external void _AddRefActCtx(int hActCtx);
 
 /// Allocates a new console for the calling process.
 ///
-/// ```c
-/// BOOL AllocConsole(void);
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/console/allocconsole>.
+///
 /// {@category kernel32}
-int AllocConsole() => _AllocConsole();
-
-final _AllocConsole = _kernel32
-    .lookupFunction<Int32 Function(), int Function()>('AllocConsole');
+@pragma('vm:prefer-inline')
+bool AllocConsole() => AllocConsole_Wrapper() != FALSE;
 
 /// Determines whether the file I/O functions are using the ANSI or OEM
-/// character set code page. This function is useful for 8-bit console input
-/// and output operations.
+/// character set code page.
 ///
-/// ```c
-/// BOOL AreFileApisANSI();
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-arefileapisansi>.
+///
 /// {@category kernel32}
-int AreFileApisANSI() => _AreFileApisANSI();
+@pragma('vm:prefer-inline')
+bool AreFileApisANSI() => _AreFileApisANSI() != FALSE;
 
-final _AreFileApisANSI = _kernel32
-    .lookupFunction<Int32 Function(), int Function()>('AreFileApisANSI');
+@Native<BOOL Function()>(symbol: 'AreFileApisANSI')
+external int _AreFileApisANSI();
 
 /// Assigns a process to an existing job object.
 ///
-/// ```c
-/// BOOL AssignProcessToJobObject(
-///   [in] HANDLE hJob,
-///   [in] HANDLE hProcess
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/jobapi2/nf-jobapi2-assignprocesstojobobject>.
+///
 /// {@category kernel32}
-int AssignProcessToJobObject(int hJob, int hProcess) =>
-    _AssignProcessToJobObject(hJob, hProcess);
-
-final _AssignProcessToJobObject = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hJob, IntPtr hProcess),
-      int Function(int hJob, int hProcess)
-    >('AssignProcessToJobObject');
+@pragma('vm:prefer-inline')
+bool AssignProcessToJobObject(int hJob, int hProcess) =>
+    AssignProcessToJobObject_Wrapper(hJob, hProcess) != FALSE;
 
 /// Attaches the calling process to the console of the specified process.
 ///
-/// ```c
-/// BOOL AttachConsole(
-///   _In_ DWORD dwProcessId
-/// );
-/// ```
-/// {@category kernel32}
-int AttachConsole(int dwProcessId) => _AttachConsole(dwProcessId);
-
-final _AttachConsole = _kernel32
-    .lookupFunction<
-      Int32 Function(Uint32 dwProcessId),
-      int Function(int dwProcessId)
-    >('AttachConsole');
-
-/// Generates simple tones on the speaker. The function is synchronous; it
-/// performs an alertable wait and does not return control to its caller
-/// until the sound finishes.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/console/attachconsole>.
 ///
-/// ```c
-/// BOOL Beep(
-///   DWORD dwFreq,
-///   DWORD dwDuration
-/// );
-/// ```
 /// {@category kernel32}
-int Beep(int dwFreq, int dwDuration) => _Beep(dwFreq, dwDuration);
+@pragma('vm:prefer-inline')
+bool AttachConsole(int dwProcessId) =>
+    AttachConsole_Wrapper(dwProcessId) != FALSE;
 
-final _Beep = _kernel32
-    .lookupFunction<
-      Int32 Function(Uint32 dwFreq, Uint32 dwDuration),
-      int Function(int dwFreq, int dwDuration)
-    >('Beep');
-
-/// Retrieves a handle that can be used by the UpdateResource function to
-/// add, delete, or replace resources in a binary module.
+/// Generates simple tones on the speaker.
 ///
-/// ```c
-/// HANDLE BeginUpdateResourceW(
-///   LPCWSTR pFileName,
-///   BOOL    bDeleteExistingResources
-/// );
-/// ```
-/// {@category kernel32}
-int BeginUpdateResource(
-  Pointer<Utf16> pFileName,
-  int bDeleteExistingResources,
-) => _BeginUpdateResource(pFileName, bDeleteExistingResources);
-
-final _BeginUpdateResource = _kernel32
-    .lookupFunction<
-      IntPtr Function(Pointer<Utf16> pFileName, Int32 bDeleteExistingResources),
-      int Function(Pointer<Utf16> pFileName, int bDeleteExistingResources)
-    >('BeginUpdateResourceW');
-
-/// Fills a specified DCB structure with values specified in a
-/// device-control string. The device-control string uses the syntax of the
-/// mode command.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/utilapiset/nf-utilapiset-beep>.
 ///
-/// ```c
-/// BOOL BuildCommDCBW(
-///   LPCWSTR lpDef,
-///   LPDCB   lpDCB
-/// );
-/// ```
 /// {@category kernel32}
-int BuildCommDCB(Pointer<Utf16> lpDef, Pointer<DCB> lpDCB) =>
-    _BuildCommDCB(lpDef, lpDCB);
+@pragma('vm:prefer-inline')
+bool Beep(int dwFreq, int dwDuration) =>
+    Beep_Wrapper(dwFreq, dwDuration) != FALSE;
 
-final _BuildCommDCB = _kernel32
-    .lookupFunction<
-      Int32 Function(Pointer<Utf16> lpDef, Pointer<DCB> lpDCB),
-      int Function(Pointer<Utf16> lpDef, Pointer<DCB> lpDCB)
-    >('BuildCommDCBW');
-
-/// Translates a device-definition string into appropriate device-control
-/// block codes and places them into a device control block. The function
-/// can also set up time-out values, including the possibility of no
-/// time-outs, for a device; the function's behavior in this regard depends
-/// on the contents of the device-definition string.
+/// Retrieves a handle that can be used by the UpdateResource function to add,
+/// delete, or replace resources in a binary module.
 ///
-/// ```c
-/// BOOL BuildCommDCBAndTimeoutsW(
-///   LPCWSTR        lpDef,
-///   LPDCB          lpDCB,
-///   LPCOMMTIMEOUTS lpCommTimeouts
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-beginupdateresourcew>.
+///
 /// {@category kernel32}
-int BuildCommDCBAndTimeouts(
-  Pointer<Utf16> lpDef,
+@pragma('vm:prefer-inline')
+int BeginUpdateResource(PCWSTR pFileName, bool bDeleteExistingResources) =>
+    BeginUpdateResourceW_Wrapper(
+      pFileName,
+      bDeleteExistingResources ? TRUE : FALSE,
+    );
+
+/// Fills a specified DCB structure with values specified in a device-control
+/// string.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-buildcommdcbw>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool BuildCommDCB(PCWSTR lpDef, Pointer<DCB> lpDCB) =>
+    BuildCommDCBW_Wrapper(lpDef, lpDCB) != FALSE;
+
+/// Translates a device-definition string into appropriate device-control block
+/// codes and places them into a device control block.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-buildcommdcbandtimeoutsw>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool BuildCommDCBAndTimeouts(
+  PCWSTR lpDef,
   Pointer<DCB> lpDCB,
   Pointer<COMMTIMEOUTS> lpCommTimeouts,
-) => _BuildCommDCBAndTimeouts(lpDef, lpDCB, lpCommTimeouts);
+) => BuildCommDCBAndTimeoutsW_Wrapper(lpDef, lpDCB, lpCommTimeouts) != FALSE;
 
-final _BuildCommDCBAndTimeouts = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Utf16> lpDef,
-        Pointer<DCB> lpDCB,
-        Pointer<COMMTIMEOUTS> lpCommTimeouts,
-      ),
-      int Function(
-        Pointer<Utf16> lpDef,
-        Pointer<DCB> lpDCB,
-        Pointer<COMMTIMEOUTS> lpCommTimeouts,
-      )
-    >('BuildCommDCBAndTimeoutsW');
-
-/// Connects to a message-type pipe (and waits if an instance of the pipe is
-/// not available), writes to and reads from the pipe, and then closes the
-/// pipe.
+/// Connects to a message-type pipe (and waits if an instance of the pipe is not
+/// available), writes to and reads from the pipe, and then closes the pipe.
 ///
-/// ```c
-/// BOOL CallNamedPipeW(
-///   LPCWSTR lpNamedPipeName,
-///   LPVOID  lpInBuffer,
-///   DWORD   nInBufferSize,
-///   LPVOID  lpOutBuffer,
-///   DWORD   nOutBufferSize,
-///   LPDWORD lpBytesRead,
-///   DWORD   nTimeOut
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/namedpipeapi/nf-namedpipeapi-callnamedpipew>.
+///
 /// {@category kernel32}
-int CallNamedPipe(
-  Pointer<Utf16> lpNamedPipeName,
+@pragma('vm:prefer-inline')
+bool CallNamedPipe(
+  PCWSTR lpNamedPipeName,
+  Pointer? lpInBuffer,
+  int nInBufferSize,
+  Pointer? lpOutBuffer,
+  int nOutBufferSize,
+  Pointer<Uint32> lpBytesRead,
+  int nTimeOut,
+) =>
+    _CallNamedPipe(
+      lpNamedPipeName,
+      lpInBuffer ?? nullptr,
+      nInBufferSize,
+      lpOutBuffer ?? nullptr,
+      nOutBufferSize,
+      lpBytesRead,
+      nTimeOut,
+    ) !=
+    FALSE;
+
+@Native<
+  BOOL Function(
+    PCWSTR,
+    Pointer,
+    Uint32,
+    Pointer,
+    Uint32,
+    Pointer<Uint32>,
+    Uint32,
+  )
+>(symbol: 'CallNamedPipeW')
+external int _CallNamedPipe(
+  PCWSTR lpNamedPipeName,
   Pointer lpInBuffer,
   int nInBufferSize,
   Pointer lpOutBuffer,
   int nOutBufferSize,
   Pointer<Uint32> lpBytesRead,
   int nTimeOut,
-) => _CallNamedPipe(
-  lpNamedPipeName,
-  lpInBuffer,
-  nInBufferSize,
-  lpOutBuffer,
-  nOutBufferSize,
-  lpBytesRead,
-  nTimeOut,
 );
 
-final _CallNamedPipe = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Utf16> lpNamedPipeName,
-        Pointer lpInBuffer,
-        Uint32 nInBufferSize,
-        Pointer lpOutBuffer,
-        Uint32 nOutBufferSize,
-        Pointer<Uint32> lpBytesRead,
-        Uint32 nTimeOut,
-      ),
-      int Function(
-        Pointer<Utf16> lpNamedPipeName,
-        Pointer lpInBuffer,
-        int nInBufferSize,
-        Pointer lpOutBuffer,
-        int nOutBufferSize,
-        Pointer<Uint32> lpBytesRead,
-        int nTimeOut,
-      )
-    >('CallNamedPipeW');
-
-/// Cancels all pending input and output (I/O) operations that are issued by
-/// the calling thread for the specified file. The function does not cancel
-/// I/O operations that other threads issue for a file handle.
+/// Cancels all pending input and output (I/O) operations that are issued by the
+/// calling thread for the specified file.
 ///
-/// ```c
-/// BOOL CancelIo(
-///   HANDLE hFile
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/ioapiset/nf-ioapiset-cancelio>.
+///
 /// {@category kernel32}
-int CancelIo(int hFile) => _CancelIo(hFile);
+@pragma('vm:prefer-inline')
+bool CancelIo(int hFile) => CancelIo_Wrapper(hFile) != FALSE;
 
-final _CancelIo = _kernel32
-    .lookupFunction<Int32 Function(IntPtr hFile), int Function(int hFile)>(
-      'CancelIo',
-    );
-
-/// Marks any outstanding I/O operations for the specified file handle. The
-/// function only cancels I/O operations in the current process, regardless
+/// Marks any outstanding I/O operations for the specified file handle.
+///
+/// The function only cancels I/O operations in the current process, regardless
 /// of which thread created the I/O operation.
 ///
-/// ```c
-/// BOOL CancelIoEx(
-///   HANDLE       hFile,
-///   LPOVERLAPPED lpOverlapped
-/// );
-/// ```
-/// {@category kernel32}
-int CancelIoEx(int hFile, Pointer<OVERLAPPED> lpOverlapped) =>
-    _CancelIoEx(hFile, lpOverlapped);
-
-final _CancelIoEx = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hFile, Pointer<OVERLAPPED> lpOverlapped),
-      int Function(int hFile, Pointer<OVERLAPPED> lpOverlapped)
-    >('CancelIoEx');
-
-/// Marks pending synchronous I/O operations that are issued by the
-/// specified thread as canceled.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/ioapiset/nf-ioapiset-cancelioex>.
 ///
-/// ```c
-/// BOOL CancelSynchronousIo(
-/// HANDLE hThread
-/// );
-/// ```
 /// {@category kernel32}
-int CancelSynchronousIo(int hThread) => _CancelSynchronousIo(hThread);
+@pragma('vm:prefer-inline')
+bool CancelIoEx(int hFile, Pointer<OVERLAPPED>? lpOverlapped) =>
+    CancelIoEx_Wrapper(hFile, lpOverlapped ?? nullptr) != FALSE;
 
-final _CancelSynchronousIo = _kernel32
-    .lookupFunction<Int32 Function(IntPtr hThread), int Function(int hThread)>(
-      'CancelSynchronousIo',
-    );
+/// Marks pending synchronous I/O operations that are issued by the specified
+/// thread as canceled.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/ioapiset/nf-ioapiset-cancelsynchronousio>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool CancelSynchronousIo(int hThread) =>
+    CancelSynchronousIo_Wrapper(hThread) != FALSE;
 
 /// Determines whether the specified process is being debugged.
 ///
-/// ```c
-/// BOOL CheckRemoteDebuggerPresent(
-///   HANDLE hProcess,
-///   PBOOL  pbDebuggerPresent
-///       );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/debugapi/nf-debugapi-checkremotedebuggerpresent>.
+///
 /// {@category kernel32}
-int CheckRemoteDebuggerPresent(
+@pragma('vm:prefer-inline')
+bool CheckRemoteDebuggerPresent(
   int hProcess,
-  Pointer<Int32> pbDebuggerPresent,
-) => _CheckRemoteDebuggerPresent(hProcess, pbDebuggerPresent);
+  Pointer<BOOL> pbDebuggerPresent,
+) => CheckRemoteDebuggerPresent_Wrapper(hProcess, pbDebuggerPresent) != FALSE;
 
-final _CheckRemoteDebuggerPresent = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hProcess, Pointer<Int32> pbDebuggerPresent),
-      int Function(int hProcess, Pointer<Int32> pbDebuggerPresent)
-    >('CheckRemoteDebuggerPresent');
-
-/// Restores character transmission for a specified communications device
-/// and places the transmission line in a nonbreak state.
+/// Restores character transmission for a specified communications device and
+/// places the transmission line in a nonbreak state.
 ///
-/// ```c
-/// BOOL ClearCommBreak(
-///   HANDLE hFile
-/// );
-/// ```
-/// {@category kernel32}
-int ClearCommBreak(int hFile) => _ClearCommBreak(hFile);
-
-final _ClearCommBreak = _kernel32
-    .lookupFunction<Int32 Function(IntPtr hFile), int Function(int hFile)>(
-      'ClearCommBreak',
-    );
-
-/// Retrieves information about a communications error and reports the
-/// current status of a communications device. The function is called when a
-/// communications error occurs, and it clears the device's error flag to
-/// enable additional input and output (I/O) operations.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-clearcommbreak>.
 ///
-/// ```c
-/// BOOL ClearCommError(
-///   HANDLE    hFile,
-///   LPDWORD   lpErrors,
-///   LPCOMSTAT lpStat
-/// );
-/// ```
 /// {@category kernel32}
-int ClearCommError(
+@pragma('vm:prefer-inline')
+bool ClearCommBreak(int hFile) => ClearCommBreak_Wrapper(hFile) != FALSE;
+
+/// Retrieves information about a communications error and reports the current
+/// status of a communications device.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-clearcommerror>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool ClearCommError(
   int hFile,
-  Pointer<Uint32> lpErrors,
-  Pointer<COMSTAT> lpStat,
-) => _ClearCommError(hFile, lpErrors, lpStat);
-
-final _ClearCommError = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hFile,
-        Pointer<Uint32> lpErrors,
-        Pointer<COMSTAT> lpStat,
-      ),
-      int Function(int hFile, Pointer<Uint32> lpErrors, Pointer<COMSTAT> lpStat)
-    >('ClearCommError');
+  Pointer<Uint32>? lpErrors,
+  Pointer<COMSTAT>? lpStat,
+) =>
+    ClearCommError_Wrapper(hFile, lpErrors ?? nullptr, lpStat ?? nullptr) !=
+    FALSE;
 
 /// Closes an open object handle.
 ///
-/// ```c
-/// BOOL CloseHandle(
-///   HANDLE hObject
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/handleapi/nf-handleapi-closehandle>.
+///
 /// {@category kernel32}
-int CloseHandle(int hObject) => _CloseHandle(hObject);
-
-final _CloseHandle = _kernel32
-    .lookupFunction<Int32 Function(IntPtr hObject), int Function(int hObject)>(
-      'CloseHandle',
-    );
+@pragma('vm:prefer-inline')
+bool CloseHandle(int hObject) => CloseHandle_Wrapper(hObject) != FALSE;
 
 /// Closes a pseudoconsole from the given handle.
 ///
-/// ```c
-/// void ClosePseudoConsole(
-///   _In_ HPCON hPC
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/console/closepseudoconsole>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 void ClosePseudoConsole(int hPC) => _ClosePseudoConsole(hPC);
 
-final _ClosePseudoConsole = _kernel32
-    .lookupFunction<Void Function(IntPtr hPC), void Function(int hPC)>(
-      'ClosePseudoConsole',
-    );
+@Native<Void Function(HPCON)>(symbol: 'ClosePseudoConsole')
+external void _ClosePseudoConsole(int hPC);
 
 /// Displays a driver-supplied configuration dialog box.
 ///
-/// ```c
-/// BOOL CommConfigDialogW(
-///   LPCWSTR      lpszName,
-///   HWND         hWnd,
-///   LPCOMMCONFIG lpCC
-/// );
-/// ```
-/// {@category kernel32}
-int CommConfigDialog(
-  Pointer<Utf16> lpszName,
-  int hWnd,
-  Pointer<COMMCONFIG> lpCC,
-) => _CommConfigDialog(lpszName, hWnd, lpCC);
-
-final _CommConfigDialog = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Utf16> lpszName,
-        IntPtr hWnd,
-        Pointer<COMMCONFIG> lpCC,
-      ),
-      int Function(Pointer<Utf16> lpszName, int hWnd, Pointer<COMMCONFIG> lpCC)
-    >('CommConfigDialogW');
-
-/// Enables a named pipe server process to wait for a client process to
-/// connect to an instance of a named pipe. A client process connects by
-/// calling either the CreateFile or CallNamedPipe function.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-commconfigdialogw>.
 ///
-/// ```c
-/// BOOL ConnectNamedPipe(
-///   HANDLE       hNamedPipe,
-///   LPOVERLAPPED lpOverlapped);
-/// ```
 /// {@category kernel32}
-int ConnectNamedPipe(int hNamedPipe, Pointer<OVERLAPPED> lpOverlapped) =>
-    _ConnectNamedPipe(hNamedPipe, lpOverlapped);
+@pragma('vm:prefer-inline')
+bool CommConfigDialog(PCWSTR lpszName, int? hWnd, Pointer<COMMCONFIG> lpCC) =>
+    CommConfigDialogW_Wrapper(lpszName, hWnd ?? NULL, lpCC) != FALSE;
 
-final _ConnectNamedPipe = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hNamedPipe, Pointer<OVERLAPPED> lpOverlapped),
-      int Function(int hNamedPipe, Pointer<OVERLAPPED> lpOverlapped)
-    >('ConnectNamedPipe');
-
-/// Enables a debugger to continue a thread that previously reported a
-/// debugging event.
+/// Enables a named pipe server process to wait for a client process to connect
+/// to an instance of a named pipe.
 ///
-/// ```c
-/// BOOL ContinueDebugEvent(
-///   DWORD dwProcessId,
-///   DWORD dwThreadId,
-///   DWORD dwContinueStatus
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/namedpipeapi/nf-namedpipeapi-connectnamedpipe>.
+///
 /// {@category kernel32}
-int ContinueDebugEvent(int dwProcessId, int dwThreadId, int dwContinueStatus) =>
-    _ContinueDebugEvent(dwProcessId, dwThreadId, dwContinueStatus);
+@pragma('vm:prefer-inline')
+bool ConnectNamedPipe(int hNamedPipe, Pointer<OVERLAPPED>? lpOverlapped) =>
+    ConnectNamedPipe_Wrapper(hNamedPipe, lpOverlapped ?? nullptr) != FALSE;
 
-final _ContinueDebugEvent = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Uint32 dwProcessId,
-        Uint32 dwThreadId,
-        Int32 dwContinueStatus,
-      ),
-      int Function(int dwProcessId, int dwThreadId, int dwContinueStatus)
-    >('ContinueDebugEvent');
+/// Enables a debugger to continue a thread that previously reported a debugging
+/// event.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/debugapi/nf-debugapi-continuedebugevent>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool ContinueDebugEvent(
+  int dwProcessId,
+  int dwThreadId,
+  NTSTATUS dwContinueStatus,
+) =>
+    ContinueDebugEvent_Wrapper(dwProcessId, dwThreadId, dwContinueStatus) !=
+    FALSE;
 
 /// Copies an existing file to a new file.
 ///
-/// ```c
-/// BOOL CopyFileW(
-///   LPCTSTR lpExistingFileName,
-///   LPCTSTR lpNewFileName,
-///   BOOL    bFailIfExists
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-copyfilew>.
+///
 /// {@category kernel32}
-int CopyFile(
-  Pointer<Utf16> lpExistingFileName,
-  Pointer<Utf16> lpNewFileName,
-  int bFailIfExists,
-) => _CopyFile(lpExistingFileName, lpNewFileName, bFailIfExists);
-
-final _CopyFile = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Utf16> lpExistingFileName,
-        Pointer<Utf16> lpNewFileName,
-        Int32 bFailIfExists,
-      ),
-      int Function(
-        Pointer<Utf16> lpExistingFileName,
-        Pointer<Utf16> lpNewFileName,
-        int bFailIfExists,
-      )
-    >('CopyFileW');
+@pragma('vm:prefer-inline')
+bool CopyFile(
+  PCWSTR lpExistingFileName,
+  PCWSTR lpNewFileName,
+  bool bFailIfExists,
+) =>
+    CopyFileW_Wrapper(
+      lpExistingFileName,
+      lpNewFileName,
+      bFailIfExists ? TRUE : FALSE,
+    ) !=
+    FALSE;
 
 /// Copies an existing file to a new file, notifying the application of its
 /// progress through a callback function.
 ///
-/// ```c
-/// BOOL CopyFileExW(
-///   LPCWSTR lpExistingFileName,
-///   LPCWSTR lpNewFileName,
-///   LPPROGRESS_ROUTINE lpProgressRoutine,
-///   LPVOID lpData,
-///   LPBOOL pbCancel,
-///   DWORD dwCopyFlags
-/// );
-/// ```
-/// {@category kernel32}
-int CopyFileEx(
-  Pointer<Utf16> lpExistingFileName,
-  Pointer<Utf16> lpNewFileName,
-  Pointer<NativeFunction<LPPROGRESS_ROUTINE>> lpProgressRoutine,
-  Pointer lpData,
-  Pointer<Int32> pbCancel,
-  int dwCopyFlags,
-) => _CopyFileEx(
-  lpExistingFileName,
-  lpNewFileName,
-  lpProgressRoutine,
-  lpData,
-  pbCancel,
-  dwCopyFlags,
-);
-
-final _CopyFileEx = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Utf16> lpExistingFileName,
-        Pointer<Utf16> lpNewFileName,
-        Pointer<NativeFunction<LPPROGRESS_ROUTINE>> lpProgressRoutine,
-        Pointer lpData,
-        Pointer<Int32> pbCancel,
-        Uint32 dwCopyFlags,
-      ),
-      int Function(
-        Pointer<Utf16> lpExistingFileName,
-        Pointer<Utf16> lpNewFileName,
-        Pointer<NativeFunction<LPPROGRESS_ROUTINE>> lpProgressRoutine,
-        Pointer lpData,
-        Pointer<Int32> pbCancel,
-        int dwCopyFlags,
-      )
-    >('CopyFileExW');
-
-/// The CreateActCtx function creates an activation context.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-copyfileexw>.
 ///
-/// ```c
-/// HANDLE CreateActCtxW(
-///   PCACTCTXW pActCtx
-/// );
-/// ```
 /// {@category kernel32}
-int CreateActCtx(Pointer<ACTCTX> pActCtx) => _CreateActCtx(pActCtx);
+@pragma('vm:prefer-inline')
+bool CopyFileEx(
+  PCWSTR lpExistingFileName,
+  PCWSTR lpNewFileName,
+  Pointer<NativeFunction<LPPROGRESS_ROUTINE>>? lpProgressRoutine,
+  Pointer? lpData,
+  Pointer<BOOL>? pbCancel,
+  COPYFILE_FLAGS dwCopyFlags,
+) =>
+    CopyFileExW_Wrapper(
+      lpExistingFileName,
+      lpNewFileName,
+      lpProgressRoutine ?? nullptr,
+      lpData ?? nullptr,
+      pbCancel ?? nullptr,
+      dwCopyFlags,
+    ) !=
+    FALSE;
 
-final _CreateActCtx = _kernel32
-    .lookupFunction<
-      IntPtr Function(Pointer<ACTCTX> pActCtx),
-      int Function(Pointer<ACTCTX> pActCtx)
-    >('CreateActCtxW');
-
-/// Creates a console screen buffer.
+/// Creates an activation context.
 ///
-/// ```c
-/// HANDLE CreateConsoleScreenBuffer(
-///   _In_             DWORD               dwDesiredAccess,
-///   _In_             DWORD               dwShareMode,
-///   _In_opt_   const SECURITY_ATTRIBUTES *lpSecurityAttributes,
-///   _In_             DWORD               dwFlags,
-///   _Reserved_       LPVOID              lpScreenBufferData
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createactctxw>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
+int CreateActCtx(Pointer<ACTCTX> pActCtx) => CreateActCtxW_Wrapper(pActCtx);
+
+/// Creates a screen buffer for the Windows Console.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/console/createconsolescreenbuffer>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
 int CreateConsoleScreenBuffer(
   int dwDesiredAccess,
   int dwShareMode,
-  Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes,
+  Pointer<SECURITY_ATTRIBUTES>? lpSecurityAttributes,
   int dwFlags,
-  Pointer lpScreenBufferData,
-) => _CreateConsoleScreenBuffer(
+) => CreateConsoleScreenBuffer_Wrapper(
   dwDesiredAccess,
   dwShareMode,
-  lpSecurityAttributes,
+  lpSecurityAttributes ?? nullptr,
   dwFlags,
-  lpScreenBufferData,
+  nullptr,
 );
 
-final _CreateConsoleScreenBuffer = _kernel32
-    .lookupFunction<
-      IntPtr Function(
-        Uint32 dwDesiredAccess,
-        Uint32 dwShareMode,
-        Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes,
-        Uint32 dwFlags,
-        Pointer lpScreenBufferData,
-      ),
-      int Function(
-        int dwDesiredAccess,
-        int dwShareMode,
-        Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes,
-        int dwFlags,
-        Pointer lpScreenBufferData,
-      )
-    >('CreateConsoleScreenBuffer');
-
-/// Creates a new directory. If the underlying file system supports security
-/// on files and directories, the function applies a specified security
-/// descriptor to the new directory.
+/// Creates a new directory.
 ///
-/// ```c
-/// BOOL CreateDirectoryW(
-///   LPCWSTR               lpPathName,
-///   LPSECURITY_ATTRIBUTES lpSecurityAttributes
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-createdirectoryw>.
+///
 /// {@category kernel32}
-int CreateDirectory(
-  Pointer<Utf16> lpPathName,
-  Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes,
-) => _CreateDirectory(lpPathName, lpSecurityAttributes);
-
-final _CreateDirectory = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Utf16> lpPathName,
-        Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes,
-      ),
-      int Function(
-        Pointer<Utf16> lpPathName,
-        Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes,
-      )
-    >('CreateDirectoryW');
+@pragma('vm:prefer-inline')
+bool CreateDirectory(
+  PCWSTR lpPathName,
+  Pointer<SECURITY_ATTRIBUTES>? lpSecurityAttributes,
+) =>
+    CreateDirectoryW_Wrapper(lpPathName, lpSecurityAttributes ?? nullptr) !=
+    FALSE;
 
 /// Creates or opens a named or unnamed event object.
 ///
-/// ```c
-/// HANDLE CreateEventW(
-///   LPSECURITY_ATTRIBUTES lpEventAttributes,
-///   BOOL bManualReset,
-///   BOOL  bInitialState,
-///   LPCWSTR lpName
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-createeventw>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 int CreateEvent(
-  Pointer<SECURITY_ATTRIBUTES> lpEventAttributes,
-  int bManualReset,
-  int bInitialState,
-  Pointer<Utf16> lpName,
-) => _CreateEvent(lpEventAttributes, bManualReset, bInitialState, lpName);
+  Pointer<SECURITY_ATTRIBUTES>? lpEventAttributes,
+  bool bManualReset,
+  bool bInitialState,
+  PCWSTR? lpName,
+) => CreateEventW_Wrapper(
+  lpEventAttributes ?? nullptr,
+  bManualReset ? TRUE : FALSE,
+  bInitialState ? TRUE : FALSE,
+  lpName ?? nullptr,
+);
 
-final _CreateEvent = _kernel32
-    .lookupFunction<
-      IntPtr Function(
-        Pointer<SECURITY_ATTRIBUTES> lpEventAttributes,
-        Int32 bManualReset,
-        Int32 bInitialState,
-        Pointer<Utf16> lpName,
-      ),
-      int Function(
-        Pointer<SECURITY_ATTRIBUTES> lpEventAttributes,
-        int bManualReset,
-        int bInitialState,
-        Pointer<Utf16> lpName,
-      )
-    >('CreateEventW');
-
-/// Creates or opens a named or unnamed event object and returns a handle to
-/// the object.
+/// Creates or opens a named or unnamed event object and returns a handle to the
+/// object.
 ///
-/// ```c
-/// HANDLE CreateEventExW(
-///   LPSECURITY_ATTRIBUTES lpEventAttributes,
-///   LPCWSTR               lpName,
-///   DWORD                 dwFlags,
-///   DWORD                 dwDesiredAccess
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-createeventexw>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 int CreateEventEx(
-  Pointer<SECURITY_ATTRIBUTES> lpEventAttributes,
-  Pointer<Utf16> lpName,
-  int dwFlags,
+  Pointer<SECURITY_ATTRIBUTES>? lpEventAttributes,
+  PCWSTR? lpName,
+  CREATE_EVENT dwFlags,
   int dwDesiredAccess,
-) => _CreateEventEx(lpEventAttributes, lpName, dwFlags, dwDesiredAccess);
+) => CreateEventExW_Wrapper(
+  lpEventAttributes ?? nullptr,
+  lpName ?? nullptr,
+  dwFlags,
+  dwDesiredAccess,
+);
 
-final _CreateEventEx = _kernel32
-    .lookupFunction<
-      IntPtr Function(
-        Pointer<SECURITY_ATTRIBUTES> lpEventAttributes,
-        Pointer<Utf16> lpName,
-        Uint32 dwFlags,
-        Uint32 dwDesiredAccess,
-      ),
-      int Function(
-        Pointer<SECURITY_ATTRIBUTES> lpEventAttributes,
-        Pointer<Utf16> lpName,
-        int dwFlags,
-        int dwDesiredAccess,
-      )
-    >('CreateEventExW');
-
-/// Creates or opens a file or I/O device. The most commonly used I/O
-/// devices are as follows: file, file stream, directory, physical disk,
-/// volume, console buffer, tape drive, communications resource, mailslot,
-/// and pipe. The function returns a handle that can be used to access the
-/// file or device for various types of I/O depending on the file or device
-/// and the flags and attributes specified.
+/// Creates or opens a file or I/O device.
 ///
-/// ```c
-/// HANDLE CreateFileW(
-///   LPCWSTR               lpFileName,
-///   DWORD                 dwDesiredAccess,
-///   DWORD                 dwShareMode,
-///   LPSECURITY_ATTRIBUTES lpSecurityAttributes,
-///   DWORD                 dwCreationDisposition,
-///   DWORD                 dwFlagsAndAttributes,
-///   HANDLE                hTemplateFile
-/// );
-/// ```
+/// The most commonly used I/O devices are as follows: file, file stream,
+/// directory, physical disk, volume, console buffer, tape drive, communications
+/// resource, mailslot, and pipe.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-createfilew>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 int CreateFile(
-  Pointer<Utf16> lpFileName,
+  PCWSTR lpFileName,
   int dwDesiredAccess,
-  int dwShareMode,
-  Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes,
-  int dwCreationDisposition,
-  int dwFlagsAndAttributes,
-  int hTemplateFile,
-) => _CreateFile(
+  FILE_SHARE_MODE dwShareMode,
+  Pointer<SECURITY_ATTRIBUTES>? lpSecurityAttributes,
+  FILE_CREATION_DISPOSITION dwCreationDisposition,
+  FILE_FLAGS_AND_ATTRIBUTES dwFlagsAndAttributes,
+  int? hTemplateFile,
+) => CreateFileW_Wrapper(
   lpFileName,
   dwDesiredAccess,
   dwShareMode,
-  lpSecurityAttributes,
+  lpSecurityAttributes ?? nullptr,
   dwCreationDisposition,
   dwFlagsAndAttributes,
-  hTemplateFile,
+  hTemplateFile ?? NULL,
 );
 
-final _CreateFile = _kernel32
-    .lookupFunction<
-      IntPtr Function(
-        Pointer<Utf16> lpFileName,
-        Uint32 dwDesiredAccess,
-        Uint32 dwShareMode,
-        Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes,
-        Uint32 dwCreationDisposition,
-        Uint32 dwFlagsAndAttributes,
-        IntPtr hTemplateFile,
-      ),
-      int Function(
-        Pointer<Utf16> lpFileName,
-        int dwDesiredAccess,
-        int dwShareMode,
-        Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes,
-        int dwCreationDisposition,
-        int dwFlagsAndAttributes,
-        int hTemplateFile,
-      )
-    >('CreateFileW');
-
-/// Creates or opens a file or I/O device. The most commonly used I/O
-/// devices are as follows: file, file stream, directory, physical disk,
-/// volume, console buffer, tape drive, communications resource, mailslot,
-/// and pipe. The function returns a handle that can be used to access the
-/// file or device for various types of I/O depending on the file or device
-/// and the flags and attributes specified.
+/// Creates or opens a file or I/O device.
 ///
-/// ```c
-/// HANDLE CreateFile2(
-///   [in]           LPCWSTR                           lpFileName,
-///   [in]           DWORD                             dwDesiredAccess,
-///   [in]           DWORD                             dwShareMode,
-///   [in]           DWORD                             dwCreationDisposition,
-///   [in, optional] LPCREATEFILE2_EXTENDED_PARAMETERS pCreateExParams
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-createfile2>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 int CreateFile2(
-  Pointer<Utf16> lpFileName,
+  PCWSTR lpFileName,
   int dwDesiredAccess,
-  int dwShareMode,
-  int dwCreationDisposition,
-  Pointer<CREATEFILE2_EXTENDED_PARAMETERS> pCreateExParams,
-) => _CreateFile2(
+  FILE_SHARE_MODE dwShareMode,
+  FILE_CREATION_DISPOSITION dwCreationDisposition,
+  Pointer<CREATEFILE2_EXTENDED_PARAMETERS>? pCreateExParams,
+) => CreateFile2_Wrapper(
   lpFileName,
   dwDesiredAccess,
   dwShareMode,
   dwCreationDisposition,
-  pCreateExParams,
+  pCreateExParams ?? nullptr,
 );
-
-final _CreateFile2 = _kernel32
-    .lookupFunction<
-      IntPtr Function(
-        Pointer<Utf16> lpFileName,
-        Uint32 dwDesiredAccess,
-        Uint32 dwShareMode,
-        Uint32 dwCreationDisposition,
-        Pointer<CREATEFILE2_EXTENDED_PARAMETERS> pCreateExParams,
-      ),
-      int Function(
-        Pointer<Utf16> lpFileName,
-        int dwDesiredAccess,
-        int dwShareMode,
-        int dwCreationDisposition,
-        Pointer<CREATEFILE2_EXTENDED_PARAMETERS> pCreateExParams,
-      )
-    >('CreateFile2');
 
 /// Creates an input/output (I/O) completion port and associates it with a
 /// specified file handle, or creates an I/O completion port that is not yet
 /// associated with a file handle, allowing association at a later time.
 ///
-/// ```c
-/// HANDLE CreateIoCompletionPort(
-///   HANDLE    FileHandle,
-///   HANDLE    ExistingCompletionPort,
-///   ULONG_PTR CompletionKey,
-///   DWORD     NumberOfConcurrentThreads
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/ioapiset/nf-ioapiset-createiocompletionport>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 int CreateIoCompletionPort(
-  int FileHandle,
-  int ExistingCompletionPort,
-  int CompletionKey,
-  int NumberOfConcurrentThreads,
-) => _CreateIoCompletionPort(
-  FileHandle,
-  ExistingCompletionPort,
-  CompletionKey,
-  NumberOfConcurrentThreads,
+  int fileHandle,
+  int? existingCompletionPort,
+  int completionKey,
+  int numberOfConcurrentThreads,
+) => CreateIoCompletionPort_Wrapper(
+  fileHandle,
+  existingCompletionPort ?? NULL,
+  completionKey,
+  numberOfConcurrentThreads,
 );
-
-final _CreateIoCompletionPort = _kernel32
-    .lookupFunction<
-      IntPtr Function(
-        IntPtr FileHandle,
-        IntPtr ExistingCompletionPort,
-        IntPtr CompletionKey,
-        Uint32 NumberOfConcurrentThreads,
-      ),
-      int Function(
-        int FileHandle,
-        int ExistingCompletionPort,
-        int CompletionKey,
-        int NumberOfConcurrentThreads,
-      )
-    >('CreateIoCompletionPort');
 
 /// Creates or opens a job object.
 ///
-/// ```c
-/// HANDLE CreateJobObjectW(
-///   [in, optional] LPSECURITY_ATTRIBUTES lpJobAttributes,
-///   [in, optional] LPCWSTR               lpName
-/// );
-/// ```
-/// {@category kernel32}
-int CreateJobObject(
-  Pointer<SECURITY_ATTRIBUTES> lpJobAttributes,
-  Pointer<Utf16> lpName,
-) => _CreateJobObject(lpJobAttributes, lpName);
-
-final _CreateJobObject = _kernel32
-    .lookupFunction<
-      IntPtr Function(
-        Pointer<SECURITY_ATTRIBUTES> lpJobAttributes,
-        Pointer<Utf16> lpName,
-      ),
-      int Function(
-        Pointer<SECURITY_ATTRIBUTES> lpJobAttributes,
-        Pointer<Utf16> lpName,
-      )
-    >('CreateJobObjectW');
-
-/// Creates an instance of a named pipe and returns a handle for subsequent
-/// pipe operations. A named pipe server process uses this function either
-/// to create the first instance of a specific named pipe and establish its
-/// basic attributes or to create a new instance of an existing named pipe.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/jobapi2/nf-jobapi2-createjobobjectw>.
 ///
-/// ```c
-/// HANDLE CreateNamedPipeW(
-///   LPCWSTR                lpName,
-///   DWORD                 dwOpenMode,
-///   DWORD                 dwPipeMode,
-///   DWORD                 nMaxInstances,
-///   DWORD                 nOutBufferSize,
-///   DWORD                 nInBufferSize,
-///   DWORD                 nDefaultTimeOut,
-///   LPSECURITY_ATTRIBUTES lpSecurityAttributes);
-/// ```
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
+int CreateJobObject(
+  Pointer<SECURITY_ATTRIBUTES>? lpJobAttributes,
+  PCWSTR? lpName,
+) => CreateJobObjectW_Wrapper(lpJobAttributes ?? nullptr, lpName ?? nullptr);
+
+/// Creates an instance of a named pipe and returns a handle for subsequent pipe
+/// operations.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/namedpipeapi/nf-namedpipeapi-createnamedpipew>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
 int CreateNamedPipe(
-  Pointer<Utf16> lpName,
-  int dwOpenMode,
-  int dwPipeMode,
+  PCWSTR lpName,
+  FILE_FLAGS_AND_ATTRIBUTES dwOpenMode,
+  NAMED_PIPE_MODE dwPipeMode,
   int nMaxInstances,
   int nOutBufferSize,
   int nInBufferSize,
   int nDefaultTimeOut,
-  Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes,
+  Pointer<SECURITY_ATTRIBUTES>? lpSecurityAttributes,
 ) => _CreateNamedPipe(
   lpName,
   dwOpenMode,
@@ -944,8638 +569,4855 @@ int CreateNamedPipe(
   nOutBufferSize,
   nInBufferSize,
   nDefaultTimeOut,
-  lpSecurityAttributes,
+  lpSecurityAttributes ?? nullptr,
 );
 
-final _CreateNamedPipe = _kernel32
-    .lookupFunction<
-      IntPtr Function(
-        Pointer<Utf16> lpName,
-        Uint32 dwOpenMode,
-        Uint32 dwPipeMode,
-        Uint32 nMaxInstances,
-        Uint32 nOutBufferSize,
-        Uint32 nInBufferSize,
-        Uint32 nDefaultTimeOut,
-        Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes,
-      ),
-      int Function(
-        Pointer<Utf16> lpName,
-        int dwOpenMode,
-        int dwPipeMode,
-        int nMaxInstances,
-        int nOutBufferSize,
-        int nInBufferSize,
-        int nDefaultTimeOut,
-        Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes,
-      )
-    >('CreateNamedPipeW');
+@Native<
+  HANDLE Function(
+    PCWSTR,
+    Uint32,
+    Uint32,
+    Uint32,
+    Uint32,
+    Uint32,
+    Uint32,
+    Pointer<SECURITY_ATTRIBUTES>,
+  )
+>(symbol: 'CreateNamedPipeW')
+external int _CreateNamedPipe(
+  PCWSTR lpName,
+  int dwOpenMode,
+  int dwPipeMode,
+  int nMaxInstances,
+  int nOutBufferSize,
+  int nInBufferSize,
+  int nDefaultTimeOut,
+  Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes,
+);
 
-/// Creates an anonymous pipe, and returns handles to the read and write
-/// ends of the pipe.
+/// Creates an anonymous pipe, and returns handles to the read and write ends of
+/// the pipe.
 ///
-/// ```c
-/// BOOL CreatePipe(
-///   PHANDLE               hReadPipe,
-///   PHANDLE               hWritePipe,
-///   LPSECURITY_ATTRIBUTES lpPipeAttributes,
-///   DWORD                 nSize
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/namedpipeapi/nf-namedpipeapi-createpipe>.
+///
 /// {@category kernel32}
-int CreatePipe(
-  Pointer<IntPtr> hReadPipe,
-  Pointer<IntPtr> hWritePipe,
-  Pointer<SECURITY_ATTRIBUTES> lpPipeAttributes,
+@pragma('vm:prefer-inline')
+bool CreatePipe(
+  Pointer<HANDLE> hReadPipe,
+  Pointer<HANDLE> hWritePipe,
+  Pointer<SECURITY_ATTRIBUTES>? lpPipeAttributes,
   int nSize,
-) => _CreatePipe(hReadPipe, hWritePipe, lpPipeAttributes, nSize);
+) =>
+    CreatePipe_Wrapper(
+      hReadPipe,
+      hWritePipe,
+      lpPipeAttributes ?? nullptr,
+      nSize,
+    ) !=
+    FALSE;
 
-final _CreatePipe = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<IntPtr> hReadPipe,
-        Pointer<IntPtr> hWritePipe,
-        Pointer<SECURITY_ATTRIBUTES> lpPipeAttributes,
-        Uint32 nSize,
-      ),
-      int Function(
-        Pointer<IntPtr> hReadPipe,
-        Pointer<IntPtr> hWritePipe,
-        Pointer<SECURITY_ATTRIBUTES> lpPipeAttributes,
-        int nSize,
-      )
-    >('CreatePipe');
-
-/// Creates a new process and its primary thread. The new process runs in
-/// the security context of the calling process.
+/// Creates a new process and its primary thread.
 ///
-/// ```c
-/// BOOL CreateProcessW(
-///   LPCWSTR               lpApplicationName,
-///   LPWSTR                lpCommandLine,
-///   LPSECURITY_ATTRIBUTES lpProcessAttributes,
-///   LPSECURITY_ATTRIBUTES lpThreadAttributes,
-///   BOOL                  bInheritHandles,
-///   DWORD                 dwCreationFlags,
-///   LPVOID                lpEnvironment,
-///   LPCWSTR               lpCurrentDirectory,
-///   LPSTARTUPINFOW        lpStartupInfo,
-///   LPPROCESS_INFORMATION lpProcessInformation
-/// );
-/// ```
+/// The new process runs in the security context of the calling process.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-createprocessw>.
+///
 /// {@category kernel32}
-int CreateProcess(
-  Pointer<Utf16> lpApplicationName,
-  Pointer<Utf16> lpCommandLine,
-  Pointer<SECURITY_ATTRIBUTES> lpProcessAttributes,
-  Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
-  int bInheritHandles,
-  int dwCreationFlags,
-  Pointer lpEnvironment,
-  Pointer<Utf16> lpCurrentDirectory,
+@pragma('vm:prefer-inline')
+bool CreateProcess(
+  PCWSTR? lpApplicationName,
+  PWSTR? lpCommandLine,
+  Pointer<SECURITY_ATTRIBUTES>? lpProcessAttributes,
+  Pointer<SECURITY_ATTRIBUTES>? lpThreadAttributes,
+  bool bInheritHandles,
+  PROCESS_CREATION_FLAGS dwCreationFlags,
+  Pointer? lpEnvironment,
+  PCWSTR? lpCurrentDirectory,
   Pointer<STARTUPINFO> lpStartupInfo,
   Pointer<PROCESS_INFORMATION> lpProcessInformation,
-) => _CreateProcess(
-  lpApplicationName,
-  lpCommandLine,
-  lpProcessAttributes,
-  lpThreadAttributes,
-  bInheritHandles,
-  dwCreationFlags,
-  lpEnvironment,
-  lpCurrentDirectory,
-  lpStartupInfo,
-  lpProcessInformation,
-);
+) =>
+    CreateProcessW_Wrapper(
+      lpApplicationName ?? nullptr,
+      lpCommandLine ?? nullptr,
+      lpProcessAttributes ?? nullptr,
+      lpThreadAttributes ?? nullptr,
+      bInheritHandles ? TRUE : FALSE,
+      dwCreationFlags,
+      lpEnvironment ?? nullptr,
+      lpCurrentDirectory ?? nullptr,
+      lpStartupInfo,
+      lpProcessInformation,
+    ) !=
+    FALSE;
 
-final _CreateProcess = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Utf16> lpApplicationName,
-        Pointer<Utf16> lpCommandLine,
-        Pointer<SECURITY_ATTRIBUTES> lpProcessAttributes,
-        Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
-        Int32 bInheritHandles,
-        Uint32 dwCreationFlags,
-        Pointer lpEnvironment,
-        Pointer<Utf16> lpCurrentDirectory,
-        Pointer<STARTUPINFO> lpStartupInfo,
-        Pointer<PROCESS_INFORMATION> lpProcessInformation,
-      ),
-      int Function(
-        Pointer<Utf16> lpApplicationName,
-        Pointer<Utf16> lpCommandLine,
-        Pointer<SECURITY_ATTRIBUTES> lpProcessAttributes,
-        Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
-        int bInheritHandles,
-        int dwCreationFlags,
-        Pointer lpEnvironment,
-        Pointer<Utf16> lpCurrentDirectory,
-        Pointer<STARTUPINFO> lpStartupInfo,
-        Pointer<PROCESS_INFORMATION> lpProcessInformation,
-      )
-    >('CreateProcessW');
-
-/// Creates a new pseudoconsole object for the calling process.
+/// Allocates a new pseudoconsole for the calling process.
 ///
-/// ```c
-/// HRESULT CreatePseudoConsole(
-///   _In_ COORD size,
-///   _In_ HANDLE hInput,
-///   _In_ HANDLE hOutput,
-///   _In_ DWORD dwFlags,
-///   _Out_ HPCON* phPC
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/console/createpseudoconsole>.
+///
 /// {@category kernel32}
-int CreatePseudoConsole(
+int CreatePseudoConsole(COORD size, int hInput, int hOutput, int dwFlags) {
+  final phPC = loggingCalloc<HPCON>();
+  final hr$ = HRESULT(
+    _CreatePseudoConsole(size, hInput, hOutput, dwFlags, phPC),
+  );
+  if (hr$.isError) {
+    free(phPC);
+    throw WindowsException(hr$);
+  }
+  final result$ = phPC.value;
+  free(phPC);
+  return result$;
+}
+
+@Native<Int32 Function(COORD, HANDLE, HANDLE, Uint32, Pointer<HPCON>)>(
+  symbol: 'CreatePseudoConsole',
+)
+external int _CreatePseudoConsole(
   COORD size,
   int hInput,
   int hOutput,
   int dwFlags,
-  Pointer<IntPtr> phPC,
-) => _CreatePseudoConsole(size, hInput, hOutput, dwFlags, phPC);
+  Pointer<HPCON> phPC,
+);
 
-final _CreatePseudoConsole = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        COORD size,
-        IntPtr hInput,
-        IntPtr hOutput,
-        Uint32 dwFlags,
-        Pointer<IntPtr> phPC,
-      ),
-      int Function(
-        COORD size,
-        int hInput,
-        int hOutput,
-        int dwFlags,
-        Pointer<IntPtr> phPC,
-      )
-    >('CreatePseudoConsole');
-
-/// Creates a thread that runs in the virtual address space of another
-/// process. Use the CreateRemoteThreadEx function to create a thread that
-/// runs in the virtual address space of another process and optionally
-/// specify extended attributes.
+/// Creates a thread that runs in the virtual address space of another process.
 ///
-/// ```c
-/// HANDLE CreateRemoteThread(
-///   HANDLE hProcess,
-///   LPSECURITY_ATTRIBUTES lpThreadAttributes,
-///   SIZE_T dwStackSize,
-///   LPTHREAD_START_ROUTINE lpStartAddress,
-///   LPVOID lpParameter,
-///   DWORD dwCreationFlags,
-///   LPDWORD lpThreadId
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-createremotethread>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 int CreateRemoteThread(
   int hProcess,
-  Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
+  Pointer<SECURITY_ATTRIBUTES>? lpThreadAttributes,
   int dwStackSize,
   Pointer<NativeFunction<LPTHREAD_START_ROUTINE>> lpStartAddress,
-  Pointer lpParameter,
+  Pointer? lpParameter,
   int dwCreationFlags,
-  Pointer<Uint32> lpThreadId,
-) => _CreateRemoteThread(
+  Pointer<Uint32>? lpThreadId,
+) => CreateRemoteThread_Wrapper(
   hProcess,
-  lpThreadAttributes,
+  lpThreadAttributes ?? nullptr,
   dwStackSize,
   lpStartAddress,
-  lpParameter,
+  lpParameter ?? nullptr,
   dwCreationFlags,
-  lpThreadId,
+  lpThreadId ?? nullptr,
 );
 
-final _CreateRemoteThread = _kernel32
-    .lookupFunction<
-      IntPtr Function(
-        IntPtr hProcess,
-        Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
-        IntPtr dwStackSize,
-        Pointer<NativeFunction<LPTHREAD_START_ROUTINE>> lpStartAddress,
-        Pointer lpParameter,
-        Uint32 dwCreationFlags,
-        Pointer<Uint32> lpThreadId,
-      ),
-      int Function(
-        int hProcess,
-        Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
-        int dwStackSize,
-        Pointer<NativeFunction<LPTHREAD_START_ROUTINE>> lpStartAddress,
-        Pointer lpParameter,
-        int dwCreationFlags,
-        Pointer<Uint32> lpThreadId,
-      )
-    >('CreateRemoteThread');
-
-/// Creates a thread that runs in the virtual address space of another
-/// process and optionally specifies extended attributes such as processor
-/// group affinity.
+/// Creates a thread that runs in the virtual address space of another process
+/// and optionally specifies extended attributes such as processor group
+/// affinity.
 ///
-/// ```c
-/// HANDLE CreateRemoteThreadEx(
-///   HANDLE hProcess,
-///   LPSECURITY_ATTRIBUTES lpThreadAttributes,
-///   SIZE_T dwStackSize,
-///   LPTHREAD_START_ROUTINE lpStartAddress,
-///   LPVOID lpParameter,
-///   DWORD dwCreationFlags,
-///   LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList,
-///   LPDWORD lpThreadId
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-createremotethreadex>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 int CreateRemoteThreadEx(
   int hProcess,
-  Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
+  Pointer<SECURITY_ATTRIBUTES>? lpThreadAttributes,
   int dwStackSize,
   Pointer<NativeFunction<LPTHREAD_START_ROUTINE>> lpStartAddress,
-  Pointer lpParameter,
+  Pointer? lpParameter,
   int dwCreationFlags,
-  Pointer lpAttributeList,
-  Pointer<Uint32> lpThreadId,
-) => _CreateRemoteThreadEx(
+  int? lpAttributeList,
+  Pointer<Uint32>? lpThreadId,
+) => CreateRemoteThreadEx_Wrapper(
   hProcess,
-  lpThreadAttributes,
+  lpThreadAttributes ?? nullptr,
   dwStackSize,
   lpStartAddress,
-  lpParameter,
+  lpParameter ?? nullptr,
   dwCreationFlags,
-  lpAttributeList,
-  lpThreadId,
+  lpAttributeList ?? NULL,
+  lpThreadId ?? nullptr,
 );
-
-final _CreateRemoteThreadEx = _kernel32
-    .lookupFunction<
-      IntPtr Function(
-        IntPtr hProcess,
-        Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
-        IntPtr dwStackSize,
-        Pointer<NativeFunction<LPTHREAD_START_ROUTINE>> lpStartAddress,
-        Pointer lpParameter,
-        Uint32 dwCreationFlags,
-        Pointer lpAttributeList,
-        Pointer<Uint32> lpThreadId,
-      ),
-      int Function(
-        int hProcess,
-        Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
-        int dwStackSize,
-        Pointer<NativeFunction<LPTHREAD_START_ROUTINE>> lpStartAddress,
-        Pointer lpParameter,
-        int dwCreationFlags,
-        Pointer lpAttributeList,
-        Pointer<Uint32> lpThreadId,
-      )
-    >('CreateRemoteThreadEx');
 
 /// Creates a symbolic link.
 ///
-/// ```c
-/// BOOLEAN CreateSymbolicLinkW(
-///   LPCWSTR lpSymlinkFileName,
-///   LPCWSTR lpTargetFileName,
-///   DWORD   dwFlags
-/// );
-/// ```
-/// {@category kernel32}
-int CreateSymbolicLink(
-  Pointer<Utf16> lpSymlinkFileName,
-  Pointer<Utf16> lpTargetFileName,
-  int dwFlags,
-) => _CreateSymbolicLink(lpSymlinkFileName, lpTargetFileName, dwFlags);
-
-final _CreateSymbolicLink = _kernel32
-    .lookupFunction<
-      Uint8 Function(
-        Pointer<Utf16> lpSymlinkFileName,
-        Pointer<Utf16> lpTargetFileName,
-        Uint32 dwFlags,
-      ),
-      int Function(
-        Pointer<Utf16> lpSymlinkFileName,
-        Pointer<Utf16> lpTargetFileName,
-        int dwFlags,
-      )
-    >('CreateSymbolicLinkW');
-
-/// Creates a thread to execute within the virtual address space of the
-/// calling process.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createsymboliclinkw>.
 ///
-/// ```c
-/// HANDLE CreateThread(
-///   LPSECURITY_ATTRIBUTES lpThreadAttributes,
-///   SIZE_T dwStackSize,
-///   LPTHREAD_START_ROUTINE lpStartAddress,
-///   LPVOID lpParameter,
-///   DWORD dwCreationFlags,
-///   LPDWORD lpThreadId
-/// );
-/// ```
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool CreateSymbolicLink(
+  PCWSTR lpSymlinkFileName,
+  PCWSTR lpTargetFileName,
+  SYMBOLIC_LINK_FLAGS dwFlags,
+) =>
+    CreateSymbolicLinkW_Wrapper(lpSymlinkFileName, lpTargetFileName, dwFlags) !=
+    FALSE;
+
+/// Creates a thread to execute within the virtual address space of the calling
+/// process.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-createthread>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
 int CreateThread(
-  Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
+  Pointer<SECURITY_ATTRIBUTES>? lpThreadAttributes,
   int dwStackSize,
   Pointer<NativeFunction<LPTHREAD_START_ROUTINE>> lpStartAddress,
-  Pointer lpParameter,
-  int dwCreationFlags,
-  Pointer<Uint32> lpThreadId,
-) => _CreateThread(
-  lpThreadAttributes,
+  Pointer? lpParameter,
+  THREAD_CREATION_FLAGS dwCreationFlags,
+  Pointer<Uint32>? lpThreadId,
+) => CreateThread_Wrapper(
+  lpThreadAttributes ?? nullptr,
   dwStackSize,
   lpStartAddress,
-  lpParameter,
+  lpParameter ?? nullptr,
   dwCreationFlags,
-  lpThreadId,
+  lpThreadId ?? nullptr,
 );
 
-final _CreateThread = _kernel32
-    .lookupFunction<
-      IntPtr Function(
-        Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
-        IntPtr dwStackSize,
-        Pointer<NativeFunction<LPTHREAD_START_ROUTINE>> lpStartAddress,
-        Pointer lpParameter,
-        Uint32 dwCreationFlags,
-        Pointer<Uint32> lpThreadId,
-      ),
-      int Function(
-        Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
-        int dwStackSize,
-        Pointer<NativeFunction<LPTHREAD_START_ROUTINE>> lpStartAddress,
-        Pointer lpParameter,
-        int dwCreationFlags,
-        Pointer<Uint32> lpThreadId,
-      )
-    >('CreateThread');
-
-/// The DeactivateActCtx function deactivates the activation context
-/// corresponding to the specified cookie.
+/// Deactivates the activation context corresponding to the specified cookie.
 ///
-/// ```c
-/// BOOL DeactivateActCtx(
-///   DWORD     dwFlags,
-///   ULONG_PTR ulCookie
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-deactivateactctx>.
+///
 /// {@category kernel32}
-int DeactivateActCtx(int dwFlags, int ulCookie) =>
-    _DeactivateActCtx(dwFlags, ulCookie);
+@pragma('vm:prefer-inline')
+bool DeactivateActCtx(int dwFlags, int ulCookie) =>
+    DeactivateActCtx_Wrapper(dwFlags, ulCookie) != FALSE;
 
-final _DeactivateActCtx = _kernel32
-    .lookupFunction<
-      Int32 Function(Uint32 dwFlags, IntPtr ulCookie),
-      int Function(int dwFlags, int ulCookie)
-    >('DeactivateActCtx');
-
-/// Causes a breakpoint exception to occur in the current process. This
-/// allows the calling thread to signal the debugger to handle the
+/// Causes a breakpoint exception to occur in the current process.
+///
+/// This allows the calling thread to signal the debugger to handle the
 /// exception.
 ///
-/// ```c
-/// void DebugBreak();
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/debugapi/nf-debugapi-debugbreak>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 void DebugBreak() => _DebugBreak();
 
-final _DebugBreak = _kernel32.lookupFunction<Void Function(), void Function()>(
-  'DebugBreak',
-);
+@Native<Void Function()>(symbol: 'DebugBreak')
+external void _DebugBreak();
 
-/// Causes a breakpoint exception to occur in the specified process. This
-/// allows the calling thread to signal the debugger to handle the
+/// Causes a breakpoint exception to occur in the specified process.
+///
+/// This allows the calling thread to signal the debugger to handle the
 /// exception.
 ///
-/// ```c
-/// BOOL DebugBreakProcess(
-///   HANDLE Process
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-debugbreakprocess>.
+///
 /// {@category kernel32}
-int DebugBreakProcess(int Process) => _DebugBreakProcess(Process);
-
-final _DebugBreakProcess = _kernel32
-    .lookupFunction<Int32 Function(IntPtr Process), int Function(int Process)>(
-      'DebugBreakProcess',
-    );
+@pragma('vm:prefer-inline')
+bool DebugBreakProcess(int process) =>
+    DebugBreakProcess_Wrapper(process) != FALSE;
 
 /// Sets the action to be performed when the calling thread exits.
 ///
-/// ```c
-/// BOOL DebugSetProcessKillOnExit(
-///   BOOL KillOnExit
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-debugsetprocesskillonexit>.
+///
 /// {@category kernel32}
-int DebugSetProcessKillOnExit(int KillOnExit) =>
-    _DebugSetProcessKillOnExit(KillOnExit);
-
-final _DebugSetProcessKillOnExit = _kernel32
-    .lookupFunction<
-      Int32 Function(Int32 KillOnExit),
-      int Function(int KillOnExit)
-    >('DebugSetProcessKillOnExit');
+@pragma('vm:prefer-inline')
+bool DebugSetProcessKillOnExit(bool killOnExit) =>
+    DebugSetProcessKillOnExit_Wrapper(killOnExit ? TRUE : FALSE) != FALSE;
 
 /// Defines, redefines, or deletes MS-DOS device names.
 ///
-/// ```c
-/// BOOL DefineDosDeviceW(
-///   [in]           DWORD   dwFlags,
-///   [in]           LPCWSTR lpDeviceName,
-///   [in, optional] LPCWSTR lpTargetPath
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-definedosdevicew>.
+///
 /// {@category kernel32}
-int DefineDosDevice(
-  int dwFlags,
-  Pointer<Utf16> lpDeviceName,
-  Pointer<Utf16> lpTargetPath,
-) => _DefineDosDevice(dwFlags, lpDeviceName, lpTargetPath);
-
-final _DefineDosDevice = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Uint32 dwFlags,
-        Pointer<Utf16> lpDeviceName,
-        Pointer<Utf16> lpTargetPath,
-      ),
-      int Function(
-        int dwFlags,
-        Pointer<Utf16> lpDeviceName,
-        Pointer<Utf16> lpTargetPath,
-      )
-    >('DefineDosDeviceW');
+@pragma('vm:prefer-inline')
+bool DefineDosDevice(
+  DEFINE_DOS_DEVICE_FLAGS dwFlags,
+  PCWSTR lpDeviceName,
+  PCWSTR? lpTargetPath,
+) =>
+    DefineDosDeviceW_Wrapper(dwFlags, lpDeviceName, lpTargetPath ?? nullptr) !=
+    FALSE;
 
 /// Deletes an existing file.
 ///
-/// ```c
-/// BOOL DeleteFileW(
-///   LPCWSTR lpFileName
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-deletefilew>.
+///
 /// {@category kernel32}
-int DeleteFile(Pointer<Utf16> lpFileName) => _DeleteFile(lpFileName);
-
-final _DeleteFile = _kernel32
-    .lookupFunction<
-      Int32 Function(Pointer<Utf16> lpFileName),
-      int Function(Pointer<Utf16> lpFileName)
-    >('DeleteFileW');
+@pragma('vm:prefer-inline')
+bool DeleteFile(PCWSTR lpFileName) => DeleteFileW_Wrapper(lpFileName) != FALSE;
 
 /// Deletes a drive letter or mounted folder.
 ///
-/// ```c
-/// BOOL DeleteVolumeMountPointW(
-///   [in] LPCWSTR lpszVolumeMountPoint
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-deletevolumemountpointw>.
+///
 /// {@category kernel32}
-int DeleteVolumeMountPoint(Pointer<Utf16> lpszVolumeMountPoint) =>
-    _DeleteVolumeMountPoint(lpszVolumeMountPoint);
-
-final _DeleteVolumeMountPoint = _kernel32
-    .lookupFunction<
-      Int32 Function(Pointer<Utf16> lpszVolumeMountPoint),
-      int Function(Pointer<Utf16> lpszVolumeMountPoint)
-    >('DeleteVolumeMountPointW');
+@pragma('vm:prefer-inline')
+bool DeleteVolumeMountPoint(PCWSTR lpszVolumeMountPoint) =>
+    DeleteVolumeMountPointW_Wrapper(lpszVolumeMountPoint) != FALSE;
 
 /// Sends a control code directly to a specified device driver, causing the
 /// corresponding device to perform the corresponding operation.
 ///
-/// ```c
-/// BOOL DeviceIoControl(
-///   HANDLE       hDevice,
-///   DWORD        dwIoControlCode,
-///   LPVOID       lpInBuffer,
-///   DWORD        nInBufferSize,
-///   LPVOID       lpOutBuffer,
-///   DWORD        nOutBufferSize,
-///   LPDWORD      lpBytesReturned,
-///   LPOVERLAPPED lpOverlapped
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/ioapiset/nf-ioapiset-deviceiocontrol>.
+///
 /// {@category kernel32}
-int DeviceIoControl(
+@pragma('vm:prefer-inline')
+bool DeviceIoControl(
   int hDevice,
   int dwIoControlCode,
-  Pointer lpInBuffer,
+  Pointer? lpInBuffer,
   int nInBufferSize,
-  Pointer lpOutBuffer,
+  Pointer? lpOutBuffer,
   int nOutBufferSize,
-  Pointer<Uint32> lpBytesReturned,
-  Pointer<OVERLAPPED> lpOverlapped,
-) => _DeviceIoControl(
-  hDevice,
-  dwIoControlCode,
-  lpInBuffer,
-  nInBufferSize,
-  lpOutBuffer,
-  nOutBufferSize,
-  lpBytesReturned,
-  lpOverlapped,
-);
+  Pointer<Uint32>? lpBytesReturned,
+  Pointer<OVERLAPPED>? lpOverlapped,
+) =>
+    DeviceIoControl_Wrapper(
+      hDevice,
+      dwIoControlCode,
+      lpInBuffer ?? nullptr,
+      nInBufferSize,
+      lpOutBuffer ?? nullptr,
+      nOutBufferSize,
+      lpBytesReturned ?? nullptr,
+      lpOverlapped ?? nullptr,
+    ) !=
+    FALSE;
 
-final _DeviceIoControl = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hDevice,
-        Uint32 dwIoControlCode,
-        Pointer lpInBuffer,
-        Uint32 nInBufferSize,
-        Pointer lpOutBuffer,
-        Uint32 nOutBufferSize,
-        Pointer<Uint32> lpBytesReturned,
-        Pointer<OVERLAPPED> lpOverlapped,
-      ),
-      int Function(
-        int hDevice,
-        int dwIoControlCode,
-        Pointer lpInBuffer,
-        int nInBufferSize,
-        Pointer lpOutBuffer,
-        int nOutBufferSize,
-        Pointer<Uint32> lpBytesReturned,
-        Pointer<OVERLAPPED> lpOverlapped,
-      )
-    >('DeviceIoControl');
-
-/// Disables the DLL_THREAD_ATTACH and DLL_THREAD_DETACH notifications for
-/// the specified dynamic-link library (DLL). This can reduce the size of
-/// the working set for some applications.
+/// Disables the DLL_THREAD_ATTACH and DLL_THREAD_DETACH notifications for the
+/// specified dynamic-link library (DLL).
 ///
-/// ```c
-/// BOOL DisableThreadLibraryCalls(
-///   HMODULE hLibModule
-/// );
-/// ```
-/// {@category kernel32}
-int DisableThreadLibraryCalls(int hLibModule) =>
-    _DisableThreadLibraryCalls(hLibModule);
-
-final _DisableThreadLibraryCalls = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hLibModule),
-      int Function(int hLibModule)
-    >('DisableThreadLibraryCalls');
-
-/// Disconnects the server end of a named pipe instance from a client
-/// process.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-disablethreadlibrarycalls>.
 ///
-/// ```c
-/// BOOL DisconnectNamedPipe(
-///   HANDLE hNamedPipe);
-/// ```
 /// {@category kernel32}
-int DisconnectNamedPipe(int hNamedPipe) => _DisconnectNamedPipe(hNamedPipe);
+@pragma('vm:prefer-inline')
+bool DisableThreadLibraryCalls(int hLibModule) =>
+    DisableThreadLibraryCalls_Wrapper(hLibModule) != FALSE;
 
-final _DisconnectNamedPipe = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hNamedPipe),
-      int Function(int hNamedPipe)
-    >('DisconnectNamedPipe');
+/// Disconnects the server end of a named pipe instance from a client process.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/namedpipeapi/nf-namedpipeapi-disconnectnamedpipe>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool DisconnectNamedPipe(int hNamedPipe) =>
+    DisconnectNamedPipe_Wrapper(hNamedPipe) != FALSE;
 
 /// Converts a DNS-style host name to a NetBIOS-style computer name.
 ///
-/// ```c
-/// BOOL DnsHostnameToComputerNameW(
-///   LPCWSTR Hostname,
-///   LPWSTR  ComputerName,
-///   LPDWORD nSize
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-dnshostnametocomputernamew>.
+///
 /// {@category kernel32}
-int DnsHostnameToComputerName(
-  Pointer<Utf16> Hostname,
-  Pointer<Utf16> ComputerName,
+@pragma('vm:prefer-inline')
+bool DnsHostnameToComputerName(
+  PCWSTR hostname,
+  PWSTR? computerName,
   Pointer<Uint32> nSize,
-) => _DnsHostnameToComputerName(Hostname, ComputerName, nSize);
-
-final _DnsHostnameToComputerName = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Utf16> Hostname,
-        Pointer<Utf16> ComputerName,
-        Pointer<Uint32> nSize,
-      ),
-      int Function(
-        Pointer<Utf16> Hostname,
-        Pointer<Utf16> ComputerName,
-        Pointer<Uint32> nSize,
-      )
-    >('DnsHostnameToComputerNameW');
+) =>
+    DnsHostnameToComputerNameW_Wrapper(
+      hostname,
+      computerName ?? nullptr,
+      nSize,
+    ) !=
+    FALSE;
 
 /// Converts MS-DOS date and time values to a file time.
 ///
-/// ```c
-/// BOOL DosDateTimeToFileTime(
-///   WORD       wFatDate,
-///   WORD       wFatTime,
-///   LPFILETIME lpFileTime
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-dosdatetimetofiletime>.
+///
 /// {@category kernel32}
-int DosDateTimeToFileTime(
+@pragma('vm:prefer-inline')
+bool DosDateTimeToFileTime(
   int wFatDate,
   int wFatTime,
   Pointer<FILETIME> lpFileTime,
-) => _DosDateTimeToFileTime(wFatDate, wFatTime, lpFileTime);
-
-final _DosDateTimeToFileTime = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Uint16 wFatDate,
-        Uint16 wFatTime,
-        Pointer<FILETIME> lpFileTime,
-      ),
-      int Function(int wFatDate, int wFatTime, Pointer<FILETIME> lpFileTime)
-    >('DosDateTimeToFileTime');
+) => DosDateTimeToFileTime_Wrapper(wFatDate, wFatTime, lpFileTime) != FALSE;
 
 /// Duplicates an object handle.
 ///
-/// ```c
-/// BOOL DuplicateHandle(
-///   HANDLE   hSourceProcessHandle,
-///   HANDLE   hSourceHandle,
-///   HANDLE   hTargetProcessHandle,
-///   LPHANDLE lpTargetHandle,
-///   DWORD    dwDesiredAccess,
-///   BOOL     bInheritHandle,
-///   DWORD    dwOptions
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/handleapi/nf-handleapi-duplicatehandle>.
+///
 /// {@category kernel32}
-int DuplicateHandle(
+@pragma('vm:prefer-inline')
+bool DuplicateHandle(
   int hSourceProcessHandle,
   int hSourceHandle,
   int hTargetProcessHandle,
-  Pointer<IntPtr> lpTargetHandle,
+  Pointer<HANDLE> lpTargetHandle,
   int dwDesiredAccess,
-  int bInheritHandle,
-  int dwOptions,
-) => _DuplicateHandle(
-  hSourceProcessHandle,
-  hSourceHandle,
-  hTargetProcessHandle,
-  lpTargetHandle,
-  dwDesiredAccess,
-  bInheritHandle,
-  dwOptions,
-);
-
-final _DuplicateHandle = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hSourceProcessHandle,
-        IntPtr hSourceHandle,
-        IntPtr hTargetProcessHandle,
-        Pointer<IntPtr> lpTargetHandle,
-        Uint32 dwDesiredAccess,
-        Int32 bInheritHandle,
-        Uint32 dwOptions,
-      ),
-      int Function(
-        int hSourceProcessHandle,
-        int hSourceHandle,
-        int hTargetProcessHandle,
-        Pointer<IntPtr> lpTargetHandle,
-        int dwDesiredAccess,
-        int bInheritHandle,
-        int dwOptions,
-      )
-    >('DuplicateHandle');
-
-/// Removes as many pages as possible from the working set of the specified
-/// process.
-///
-/// ```c
-/// BOOL K32EmptyWorkingSet(
-///   [in] HANDLE hProcess
-/// );
-/// ```
-/// {@category kernel32}
-int EmptyWorkingSet(int hProcess) => _K32EmptyWorkingSet(hProcess);
-
-final _K32EmptyWorkingSet = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hProcess),
-      int Function(int hProcess)
-    >('K32EmptyWorkingSet');
+  bool bInheritHandle,
+  DUPLICATE_HANDLE_OPTIONS dwOptions,
+) =>
+    DuplicateHandle_Wrapper(
+      hSourceProcessHandle,
+      hSourceHandle,
+      hTargetProcessHandle,
+      lpTargetHandle,
+      dwDesiredAccess,
+      bInheritHandle ? TRUE : FALSE,
+      dwOptions,
+    ) !=
+    FALSE;
 
 /// Commits or discards changes made prior to a call to UpdateResource.
 ///
-/// ```c
-/// BOOL EndUpdateResourceW(
-///   HANDLE hUpdate,
-///   BOOL   fDiscard
-/// );
-/// ```
-/// {@category kernel32}
-int EndUpdateResource(int hUpdate, int fDiscard) =>
-    _EndUpdateResource(hUpdate, fDiscard);
-
-final _EndUpdateResource = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hUpdate, Int32 fDiscard),
-      int Function(int hUpdate, int fDiscard)
-    >('EndUpdateResourceW');
-
-/// Retrieves the load address for each device driver in the system.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-endupdateresourcew>.
 ///
-/// ```c
-/// BOOL K32EnumDeviceDrivers(
-///   [out] LPVOID  *lpImageBase,
-///   [in]  DWORD   cb,
-///   [out] LPDWORD lpcbNeeded
-/// );
-/// ```
 /// {@category kernel32}
-int EnumDeviceDrivers(
-  Pointer<Pointer> lpImageBase,
-  int cb,
-  Pointer<Uint32> lpcbNeeded,
-) => _K32EnumDeviceDrivers(lpImageBase, cb, lpcbNeeded);
+@pragma('vm:prefer-inline')
+bool EndUpdateResource(int hUpdate, bool fDiscard) =>
+    EndUpdateResourceW_Wrapper(hUpdate, fDiscard ? TRUE : FALSE) != FALSE;
 
-final _K32EnumDeviceDrivers = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Pointer> lpImageBase,
-        Uint32 cb,
-        Pointer<Uint32> lpcbNeeded,
-      ),
-      int Function(
-        Pointer<Pointer> lpImageBase,
-        int cb,
-        Pointer<Uint32> lpcbNeeded,
-      )
-    >('K32EnumDeviceDrivers');
-
-/// Calls the callback routine for each installed pagefile in the system.
+/// Enumerates resources of a specified type within a binary module.
 ///
-/// ```c
-/// BOOL K32EnumPageFilesW(
-///   [out] PENUM_PAGE_FILE_CALLBACKW pCallBackRoutine,
-///   [in]  LPVOID                    pContext
-/// );
-/// ```
-/// {@category kernel32}
-int EnumPageFiles(
-  Pointer<NativeFunction<PENUM_PAGE_FILE_CALLBACK>> pCallBackRoutine,
-  Pointer pContext,
-) => _K32EnumPageFiles(pCallBackRoutine, pContext);
-
-final _K32EnumPageFiles = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<NativeFunction<PENUM_PAGE_FILE_CALLBACK>> pCallBackRoutine,
-        Pointer pContext,
-      ),
-      int Function(
-        Pointer<NativeFunction<PENUM_PAGE_FILE_CALLBACK>> pCallBackRoutine,
-        Pointer pContext,
-      )
-    >('K32EnumPageFilesW');
-
-/// Retrieves the process identifier for each process object in the system.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-enumresourcenamesw>.
 ///
-/// ```c
-/// BOOL K32EnumProcesses(
-///   DWORD   *lpidProcess,
-///   DWORD   cb,
-///   LPDWORD lpcbNeeded
-/// );
-/// ```
 /// {@category kernel32}
-int EnumProcesses(
-  Pointer<Uint32> lpidProcess,
-  int cb,
-  Pointer<Uint32> lpcbNeeded,
-) => _K32EnumProcesses(lpidProcess, cb, lpcbNeeded);
-
-final _K32EnumProcesses = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Uint32> lpidProcess,
-        Uint32 cb,
-        Pointer<Uint32> lpcbNeeded,
-      ),
-      int Function(
-        Pointer<Uint32> lpidProcess,
-        int cb,
-        Pointer<Uint32> lpcbNeeded,
-      )
-    >('K32EnumProcesses');
-
-/// Retrieves a handle for each module in the specified process.
-///
-/// ```c
-/// BOOL K32EnumProcessModules(
-///   HANDLE  hProcess,
-///   HMODULE *lphModule,
-///   DWORD   cb,
-///   LPDWORD lpcbNeeded
-/// );
-/// ```
-/// {@category kernel32}
-int EnumProcessModules(
-  int hProcess,
-  Pointer<IntPtr> lphModule,
-  int cb,
-  Pointer<Uint32> lpcbNeeded,
-) => _K32EnumProcessModules(hProcess, lphModule, cb, lpcbNeeded);
-
-final _K32EnumProcessModules = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hProcess,
-        Pointer<IntPtr> lphModule,
-        Uint32 cb,
-        Pointer<Uint32> lpcbNeeded,
-      ),
-      int Function(
-        int hProcess,
-        Pointer<IntPtr> lphModule,
-        int cb,
-        Pointer<Uint32> lpcbNeeded,
-      )
-    >('K32EnumProcessModules');
-
-/// Retrieves a handle for each module in the specified process that meets
-/// the specified filter criteria.
-///
-/// ```c
-/// BOOL K32EnumProcessModulesEx(
-///   HANDLE  hProcess,
-///   HMODULE *lphModule,
-///   DWORD   cb,
-///   LPDWORD lpcbNeeded,
-///   DWORD   dwFilterFlag
-/// );
-/// ```
-/// {@category kernel32}
-int EnumProcessModulesEx(
-  int hProcess,
-  Pointer<IntPtr> lphModule,
-  int cb,
-  Pointer<Uint32> lpcbNeeded,
-  int dwFilterFlag,
-) =>
-    _K32EnumProcessModulesEx(hProcess, lphModule, cb, lpcbNeeded, dwFilterFlag);
-
-final _K32EnumProcessModulesEx = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hProcess,
-        Pointer<IntPtr> lphModule,
-        Uint32 cb,
-        Pointer<Uint32> lpcbNeeded,
-        Uint32 dwFilterFlag,
-      ),
-      int Function(
-        int hProcess,
-        Pointer<IntPtr> lphModule,
-        int cb,
-        Pointer<Uint32> lpcbNeeded,
-        int dwFilterFlag,
-      )
-    >('K32EnumProcessModulesEx');
-
-/// Enumerates resources of a specified type within a binary module. For
-/// Windows Vista and later, this is typically a language-neutral Portable
-/// Executable (LN file), and the enumeration will also include resources
-/// from the corresponding language-specific resource files (.mui files)
-/// that contain localizable language resources. It is also possible for
-/// hModule to specify an .mui file, in which case only that file is
-/// searched for resources.
-///
-/// ```c
-/// BOOL EnumResourceNamesW(
-///   HMODULE          hModule,
-///   LPCWSTR          lpType,
-///   ENUMRESNAMEPROCW lpEnumFunc,
-///   LONG_PTR         lParam
-/// );
-/// ```
-/// {@category kernel32}
-int EnumResourceNames(
-  int hModule,
-  Pointer<Utf16> lpType,
+@pragma('vm:prefer-inline')
+bool EnumResourceNames(
+  int? hModule,
+  PCWSTR lpType,
   Pointer<NativeFunction<ENUMRESNAMEPROC>> lpEnumFunc,
   int lParam,
-) => _EnumResourceNames(hModule, lpType, lpEnumFunc, lParam);
+) => _EnumResourceNames(hModule ?? NULL, lpType, lpEnumFunc, lParam) != FALSE;
 
-final _EnumResourceNames = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hModule,
-        Pointer<Utf16> lpType,
-        Pointer<NativeFunction<ENUMRESNAMEPROC>> lpEnumFunc,
-        IntPtr lParam,
-      ),
-      int Function(
-        int hModule,
-        Pointer<Utf16> lpType,
-        Pointer<NativeFunction<ENUMRESNAMEPROC>> lpEnumFunc,
-        int lParam,
-      )
-    >('EnumResourceNamesW');
-
-/// Enumerates resource types within a binary module. Starting with Windows
-/// Vista, this is typically a language-neutral Portable Executable (LN
-/// file), and the enumeration also includes resources from one of the
-/// corresponding language-specific resource files (.mui files)—if one
-/// exists—that contain localizable language resources. It is also possible
-/// to use hModule to specify a .mui file, in which case only that file is
-/// searched for resource types.
-///
-/// ```c
-/// BOOL EnumResourceTypesW(
-///   HMODULE          hModule,
-///   ENUMRESTYPEPROCW lpEnumFunc,
-///   LONG_PTR         lParam
-/// );
-/// ```
-/// {@category kernel32}
-int EnumResourceTypes(
+@Native<
+  BOOL Function(
+    HMODULE,
+    PCWSTR,
+    Pointer<NativeFunction<ENUMRESNAMEPROC>>,
+    IntPtr,
+  )
+>(symbol: 'EnumResourceNamesW')
+external int _EnumResourceNames(
   int hModule,
+  PCWSTR lpType,
+  Pointer<NativeFunction<ENUMRESNAMEPROC>> lpEnumFunc,
+  int lParam,
+);
+
+/// Enumerates resource types within a binary module.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-enumresourcetypesw>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool EnumResourceTypes(
+  int? hModule,
   Pointer<NativeFunction<ENUMRESTYPEPROC>> lpEnumFunc,
   int lParam,
-) => _EnumResourceTypes(hModule, lpEnumFunc, lParam);
-
-final _EnumResourceTypes = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hModule,
-        Pointer<NativeFunction<ENUMRESTYPEPROC>> lpEnumFunc,
-        IntPtr lParam,
-      ),
-      int Function(
-        int hModule,
-        Pointer<NativeFunction<ENUMRESTYPEPROC>> lpEnumFunc,
-        int lParam,
-      )
-    >('EnumResourceTypesW');
+) => EnumResourceTypesW_Wrapper(hModule ?? NULL, lpEnumFunc, lParam) != FALSE;
 
 /// Enumerates all system firmware tables of the specified type.
 ///
-/// ```c
-/// UINT EnumSystemFirmwareTables(
-///   DWORD FirmwareTableProviderSignature,
-///   PVOID pFirmwareTableEnumBuffer,
-///   DWORD BufferSize
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-enumsystemfirmwaretables>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 int EnumSystemFirmwareTables(
-  int FirmwareTableProviderSignature,
-  Pointer<Uint8> pFirmwareTableEnumBuffer,
-  int BufferSize,
-) => _EnumSystemFirmwareTables(
-  FirmwareTableProviderSignature,
-  pFirmwareTableEnumBuffer,
-  BufferSize,
+  FIRMWARE_TABLE_PROVIDER firmwareTableProviderSignature,
+  Pointer<Uint8>? pFirmwareTableEnumBuffer,
+  int bufferSize,
+) => EnumSystemFirmwareTables_Wrapper(
+  firmwareTableProviderSignature,
+  pFirmwareTableEnumBuffer ?? nullptr,
+  bufferSize,
 );
 
-final _EnumSystemFirmwareTables = _kernel32
-    .lookupFunction<
-      Uint32 Function(
-        Uint32 FirmwareTableProviderSignature,
-        Pointer<Uint8> pFirmwareTableEnumBuffer,
-        Uint32 BufferSize,
-      ),
-      int Function(
-        int FirmwareTableProviderSignature,
-        Pointer<Uint8> pFirmwareTableEnumBuffer,
-        int BufferSize,
-      )
-    >('EnumSystemFirmwareTables');
-
-/// Directs the specified communications device to perform an extended
-/// function.
+/// Directs the specified communications device to perform an extended function.
 ///
-/// ```c
-/// BOOL EscapeCommFunction(
-///   HANDLE hFile,
-///   DWORD  dwFunc
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-escapecommfunction>.
+///
 /// {@category kernel32}
-int EscapeCommFunction(int hFile, int dwFunc) =>
-    _EscapeCommFunction(hFile, dwFunc);
-
-final _EscapeCommFunction = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hFile, Uint32 dwFunc),
-      int Function(int hFile, int dwFunc)
-    >('EscapeCommFunction');
+@pragma('vm:prefer-inline')
+bool EscapeCommFunction(int hFile, ESCAPE_COMM_FUNCTION dwFunc) =>
+    EscapeCommFunction_Wrapper(hFile, dwFunc) != FALSE;
 
 /// Ends the calling process and all its threads.
 ///
-/// ```c
-/// void ExitProcess(
-///   UINT uExitCode
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-exitprocess>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 void ExitProcess(int uExitCode) => _ExitProcess(uExitCode);
 
-final _ExitProcess = _kernel32
-    .lookupFunction<
-      Void Function(Uint32 uExitCode),
-      void Function(int uExitCode)
-    >('ExitProcess');
+@Native<Void Function(Uint32)>(symbol: 'ExitProcess')
+external void _ExitProcess(int uExitCode);
 
 /// Ends the calling thread.
 ///
-/// ```c
-/// void ExitThread(
-///   DWORD dwExitCode
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-exitthread>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 void ExitThread(int dwExitCode) => _ExitThread(dwExitCode);
 
-final _ExitThread = _kernel32
-    .lookupFunction<
-      Void Function(Uint32 dwExitCode),
-      void Function(int dwExitCode)
-    >('ExitThread');
+@Native<Void Function(Uint32)>(symbol: 'ExitThread')
+external void _ExitThread(int dwExitCode);
 
 /// Converts a file time to MS-DOS date and time values.
 ///
-/// ```c
-/// BOOL FileTimeToDosDateTime(
-///   const FILETIME *lpFileTime,
-///   LPWORD         lpFatDate,
-///   LPWORD         lpFatTime
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-filetimetodosdatetime>.
+///
 /// {@category kernel32}
-int FileTimeToDosDateTime(
+@pragma('vm:prefer-inline')
+bool FileTimeToDosDateTime(
   Pointer<FILETIME> lpFileTime,
   Pointer<Uint16> lpFatDate,
   Pointer<Uint16> lpFatTime,
-) => _FileTimeToDosDateTime(lpFileTime, lpFatDate, lpFatTime);
+) => FileTimeToDosDateTime_Wrapper(lpFileTime, lpFatDate, lpFatTime) != FALSE;
 
-final _FileTimeToDosDateTime = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<FILETIME> lpFileTime,
-        Pointer<Uint16> lpFatDate,
-        Pointer<Uint16> lpFatTime,
-      ),
-      int Function(
-        Pointer<FILETIME> lpFileTime,
-        Pointer<Uint16> lpFatDate,
-        Pointer<Uint16> lpFatTime,
-      )
-    >('FileTimeToDosDateTime');
-
-/// Converts a file time to system time format. System time is based on
-/// Coordinated Universal Time (UTC).
+/// Converts a file time to system time format.
 ///
-/// ```c
-/// BOOL FileTimeToSystemTime(
-///   const FILETIME *lpFileTime,
-///   LPSYSTEMTIME   lpSystemTime
-/// );
-/// ```
+/// System time is based on Coordinated Universal Time (UTC).
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/timezoneapi/nf-timezoneapi-filetimetosystemtime>.
+///
 /// {@category kernel32}
-int FileTimeToSystemTime(
+@pragma('vm:prefer-inline')
+bool FileTimeToSystemTime(
   Pointer<FILETIME> lpFileTime,
   Pointer<SYSTEMTIME> lpSystemTime,
-) => _FileTimeToSystemTime(lpFileTime, lpSystemTime);
-
-final _FileTimeToSystemTime = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<FILETIME> lpFileTime,
-        Pointer<SYSTEMTIME> lpSystemTime,
-      ),
-      int Function(
-        Pointer<FILETIME> lpFileTime,
-        Pointer<SYSTEMTIME> lpSystemTime,
-      )
-    >('FileTimeToSystemTime');
+) => FileTimeToSystemTime_Wrapper(lpFileTime, lpSystemTime) != FALSE;
 
 /// Sets the character attributes for a specified number of character cells,
 /// beginning at the specified coordinates in a screen buffer.
 ///
-/// ```c
-/// BOOL FillConsoleOutputAttribute(
-///   _In_  HANDLE  hConsoleOutput,
-///   _In_  WORD    wAttribute,
-///   _In_  DWORD   nLength,
-///   _In_  COORD   dwWriteCoord,
-///   _Out_ LPDWORD lpNumberOfAttrsWritten
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/console/fillconsoleoutputattribute>.
+///
 /// {@category kernel32}
-int FillConsoleOutputAttribute(
+@pragma('vm:prefer-inline')
+bool FillConsoleOutputAttribute(
   int hConsoleOutput,
   int wAttribute,
   int nLength,
   COORD dwWriteCoord,
   Pointer<Uint32> lpNumberOfAttrsWritten,
-) => _FillConsoleOutputAttribute(
-  hConsoleOutput,
-  wAttribute,
-  nLength,
-  dwWriteCoord,
-  lpNumberOfAttrsWritten,
-);
+) =>
+    FillConsoleOutputAttribute_Wrapper(
+      hConsoleOutput,
+      wAttribute,
+      nLength,
+      dwWriteCoord,
+      lpNumberOfAttrsWritten,
+    ) !=
+    FALSE;
 
-final _FillConsoleOutputAttribute = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hConsoleOutput,
-        Uint16 wAttribute,
-        Uint32 nLength,
-        COORD dwWriteCoord,
-        Pointer<Uint32> lpNumberOfAttrsWritten,
-      ),
-      int Function(
-        int hConsoleOutput,
-        int wAttribute,
-        int nLength,
-        COORD dwWriteCoord,
-        Pointer<Uint32> lpNumberOfAttrsWritten,
-      )
-    >('FillConsoleOutputAttribute');
-
-/// Writes a character to the console screen buffer a specified number of
-/// times, beginning at the specified coordinates.
+/// Writes a character to the console screen buffer a specified number of times,
+/// beginning at the specified coordinates.
 ///
-/// ```c
-/// BOOL FillConsoleOutputCharacterW(
-///   _In_  HANDLE  hConsoleOutput,
-///   _In_  WCHAR   cCharacter,
-///   _In_  DWORD   nLength,
-///   _In_  COORD   dwWriteCoord,
-///   _Out_ LPDWORD lpNumberOfCharsWritten
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/console/fillconsoleoutputcharacter>.
+///
 /// {@category kernel32}
-int FillConsoleOutputCharacter(
+@pragma('vm:prefer-inline')
+bool FillConsoleOutputCharacter(
   int hConsoleOutput,
   int cCharacter,
   int nLength,
   COORD dwWriteCoord,
   Pointer<Uint32> lpNumberOfCharsWritten,
-) => _FillConsoleOutputCharacter(
-  hConsoleOutput,
-  cCharacter,
-  nLength,
-  dwWriteCoord,
-  lpNumberOfCharsWritten,
-);
+) =>
+    FillConsoleOutputCharacterW_Wrapper(
+      hConsoleOutput,
+      cCharacter,
+      nLength,
+      dwWriteCoord,
+      lpNumberOfCharsWritten,
+    ) !=
+    FALSE;
 
-final _FillConsoleOutputCharacter = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hConsoleOutput,
-        Uint16 cCharacter,
-        Uint32 nLength,
-        COORD dwWriteCoord,
-        Pointer<Uint32> lpNumberOfCharsWritten,
-      ),
-      int Function(
-        int hConsoleOutput,
-        int cCharacter,
-        int nLength,
-        COORD dwWriteCoord,
-        Pointer<Uint32> lpNumberOfCharsWritten,
-      )
-    >('FillConsoleOutputCharacterW');
-
-/// Closes a file search handle opened by the FindFirstFile,
-/// FindFirstFileEx, FindFirstFileNameW, FindFirstFileNameTransactedW,
-/// FindFirstFileTransacted, FindFirstStreamTransactedW, or FindFirstStreamW
-/// functions.
+/// Closes a file search handle opened by the FindFirstFile, FindFirstFileEx,
+/// FindFirstFileNameW, FindFirstFileNameTransactedW, FindFirstFileTransacted,
+/// FindFirstStreamTransactedW, or FindFirstStreamW functions.
 ///
-/// ```c
-/// BOOL FindClose(
-///   HANDLE hFindFile
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-findclose>.
+///
 /// {@category kernel32}
-int FindClose(int hFindFile) => _FindClose(hFindFile);
-
-final _FindClose = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hFindFile),
-      int Function(int hFindFile)
-    >('FindClose');
+@pragma('vm:prefer-inline')
+bool FindClose(int hFindFile) => FindClose_Wrapper(hFindFile) != FALSE;
 
 /// Stops change notification handle monitoring.
 ///
-/// ```c
-/// BOOL FindCloseChangeNotification(
-///   HANDLE hChangeHandle
-/// );
-/// ```
-/// {@category kernel32}
-int FindCloseChangeNotification(int hChangeHandle) =>
-    _FindCloseChangeNotification(hChangeHandle);
-
-final _FindCloseChangeNotification = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hChangeHandle),
-      int Function(int hChangeHandle)
-    >('FindCloseChangeNotification');
-
-/// Creates a change notification handle and sets up initial change
-/// notification filter conditions. A wait on a notification handle succeeds
-/// when a change matching the filter conditions occurs in the specified
-/// directory or subtree. The function does not report changes to the
-/// specified directory itself.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-findclosechangenotification>.
 ///
-/// ```c
-/// HANDLE FindFirstChangeNotificationW(
-///   LPCWSTR lpPathName,
-///   BOOL    bWatchSubtree,
-///   DWORD   dwNotifyFilter
-/// );
-/// ```
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool FindCloseChangeNotification(int hChangeHandle) =>
+    FindCloseChangeNotification_Wrapper(hChangeHandle) != FALSE;
+
+/// Creates a change notification handle and sets up initial change notification
+/// filter conditions.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-findfirstchangenotificationw>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
 int FindFirstChangeNotification(
-  Pointer<Utf16> lpPathName,
-  int bWatchSubtree,
-  int dwNotifyFilter,
-) => _FindFirstChangeNotification(lpPathName, bWatchSubtree, dwNotifyFilter);
+  PCWSTR lpPathName,
+  bool bWatchSubtree,
+  FILE_NOTIFY_CHANGE dwNotifyFilter,
+) => FindFirstChangeNotificationW_Wrapper(
+  lpPathName,
+  bWatchSubtree ? TRUE : FALSE,
+  dwNotifyFilter,
+);
 
-final _FindFirstChangeNotification = _kernel32
-    .lookupFunction<
-      IntPtr Function(
-        Pointer<Utf16> lpPathName,
-        Int32 bWatchSubtree,
-        Uint32 dwNotifyFilter,
-      ),
-      int Function(
-        Pointer<Utf16> lpPathName,
-        int bWatchSubtree,
-        int dwNotifyFilter,
-      )
-    >('FindFirstChangeNotificationW');
-
-/// Searches a directory for a file or subdirectory with a name that matches
-/// a specific name (or partial name if wildcards are used).
+/// Searches a directory for a file or subdirectory with a name that matches a
+/// specific name (or partial name if wildcards are used).
 ///
-/// ```c
-/// HANDLE FindFirstFileW(
-///   LPCWSTR            lpFileName,
-///   LPWIN32_FIND_DATAW lpFindFileData
-/// );
-/// ```
-/// {@category kernel32}
-int FindFirstFile(
-  Pointer<Utf16> lpFileName,
-  Pointer<WIN32_FIND_DATA> lpFindFileData,
-) => _FindFirstFile(lpFileName, lpFindFileData);
-
-final _FindFirstFile = _kernel32
-    .lookupFunction<
-      IntPtr Function(
-        Pointer<Utf16> lpFileName,
-        Pointer<WIN32_FIND_DATA> lpFindFileData,
-      ),
-      int Function(
-        Pointer<Utf16> lpFileName,
-        Pointer<WIN32_FIND_DATA> lpFindFileData,
-      )
-    >('FindFirstFileW');
-
-/// Searches a directory for a file or subdirectory with a name and
-/// attributes that match those specified.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-findfirstfilew>.
 ///
-/// ```c
-/// HANDLE FindFirstFileExW(
-///   [in]  LPCWSTR            lpFileName,
-///   [in]  FINDEX_INFO_LEVELS fInfoLevelId,
-///   [out] LPVOID             lpFindFileData,
-///   [in]  FINDEX_SEARCH_OPS  fSearchOp,
-///         LPVOID             lpSearchFilter,
-///   [in]  DWORD              dwAdditionalFlags
-/// );
-/// ```
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
+int FindFirstFile(PCWSTR lpFileName, Pointer<WIN32_FIND_DATA> lpFindFileData) =>
+    FindFirstFileW_Wrapper(lpFileName, lpFindFileData);
+
+/// Searches a directory for a file or subdirectory with a name and attributes
+/// that match those specified.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-findfirstfileexw>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
 int FindFirstFileEx(
-  Pointer<Utf16> lpFileName,
-  int fInfoLevelId,
+  PCWSTR lpFileName,
+  FINDEX_INFO_LEVELS fInfoLevelId,
   Pointer lpFindFileData,
-  int fSearchOp,
-  Pointer lpSearchFilter,
-  int dwAdditionalFlags,
-) => _FindFirstFileEx(
+  FINDEX_SEARCH_OPS fSearchOp,
+  FIND_FIRST_EX_FLAGS dwAdditionalFlags,
+) => FindFirstFileExW_Wrapper(
   lpFileName,
   fInfoLevelId,
   lpFindFileData,
   fSearchOp,
-  lpSearchFilter,
+  nullptr,
   dwAdditionalFlags,
 );
 
-final _FindFirstFileEx = _kernel32
-    .lookupFunction<
-      IntPtr Function(
-        Pointer<Utf16> lpFileName,
-        Int32 fInfoLevelId,
-        Pointer lpFindFileData,
-        Int32 fSearchOp,
-        Pointer lpSearchFilter,
-        Uint32 dwAdditionalFlags,
-      ),
-      int Function(
-        Pointer<Utf16> lpFileName,
-        int fInfoLevelId,
-        Pointer lpFindFileData,
-        int fSearchOp,
-        Pointer lpSearchFilter,
-        int dwAdditionalFlags,
-      )
-    >('FindFirstFileExW');
-
-/// Creates an enumeration of all the hard links to the specified file. The
-/// FindFirstFileNameW function returns a handle to the enumeration that can
+/// Creates an enumeration of all the hard links to the specified file.
+///
+/// The FindFirstFileNameW function returns a handle to the enumeration that can
 /// be used on subsequent calls to the FindNextFileNameW function.
 ///
-/// ```c
-/// HANDLE FindFirstFileNameW(
-///   [in]      LPCWSTR lpFileName,
-///   [in]      DWORD   dwFlags,
-///   [in, out] LPDWORD StringLength,
-///   [in, out] PWSTR   LinkName
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-findfirstfilenamew>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 int FindFirstFileName(
-  Pointer<Utf16> lpFileName,
+  PCWSTR lpFileName,
   int dwFlags,
-  Pointer<Uint32> StringLength,
-  Pointer<Utf16> LinkName,
-) => _FindFirstFileName(lpFileName, dwFlags, StringLength, LinkName);
+  Pointer<Uint32> stringLength,
+  PWSTR linkName,
+) => FindFirstFileNameW_Wrapper(lpFileName, dwFlags, stringLength, linkName);
 
-final _FindFirstFileName = _kernel32
-    .lookupFunction<
-      IntPtr Function(
-        Pointer<Utf16> lpFileName,
-        Uint32 dwFlags,
-        Pointer<Uint32> StringLength,
-        Pointer<Utf16> LinkName,
-      ),
-      int Function(
-        Pointer<Utf16> lpFileName,
-        int dwFlags,
-        Pointer<Uint32> StringLength,
-        Pointer<Utf16> LinkName,
-      )
-    >('FindFirstFileNameW');
-
-/// Enumerates the first stream with a ::$DATA stream type in the specified
-/// file or directory.
+/// Enumerates the first stream with a ::$DATA stream type in the specified file
+/// or directory.
 ///
-/// ```c
-/// HANDLE FindFirstStreamW(
-///   [in]  LPCWSTR            lpFileName,
-///   [in]  STREAM_INFO_LEVELS InfoLevel,
-///   [out] LPVOID             lpFindStreamData,
-///         DWORD              dwFlags
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-findfirststreamw>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 int FindFirstStream(
-  Pointer<Utf16> lpFileName,
-  int InfoLevel,
+  PCWSTR lpFileName,
+  STREAM_INFO_LEVELS infoLevel,
   Pointer lpFindStreamData,
-  int dwFlags,
-) => _FindFirstStream(lpFileName, InfoLevel, lpFindStreamData, dwFlags);
+) => FindFirstStreamW_Wrapper(lpFileName, infoLevel, lpFindStreamData, NULL);
 
-final _FindFirstStream = _kernel32
-    .lookupFunction<
-      IntPtr Function(
-        Pointer<Utf16> lpFileName,
-        Int32 InfoLevel,
-        Pointer lpFindStreamData,
-        Uint32 dwFlags,
-      ),
-      int Function(
-        Pointer<Utf16> lpFileName,
-        int InfoLevel,
-        Pointer lpFindStreamData,
-        int dwFlags,
-      )
-    >('FindFirstStreamW');
-
-/// Retrieves the name of a volume on a computer. FindFirstVolume is used to
-/// begin scanning the volumes of a computer.
+/// Retrieves the name of a volume on a computer.
 ///
-/// ```c
-/// HANDLE FindFirstVolumeW(
-///   LPWSTR lpszVolumeName,
-///   DWORD  cchBufferLength
-/// );
-/// ```
-/// {@category kernel32}
-int FindFirstVolume(Pointer<Utf16> lpszVolumeName, int cchBufferLength) =>
-    _FindFirstVolume(lpszVolumeName, cchBufferLength);
-
-final _FindFirstVolume = _kernel32
-    .lookupFunction<
-      IntPtr Function(Pointer<Utf16> lpszVolumeName, Uint32 cchBufferLength),
-      int Function(Pointer<Utf16> lpszVolumeName, int cchBufferLength)
-    >('FindFirstVolumeW');
-
-/// Requests that the operating system signal a change notification handle
-/// the next time it detects an appropriate change.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-findfirstvolumew>.
 ///
-/// ```c
-/// BOOL FindNextChangeNotification(
-///   HANDLE hChangeHandle
-/// );
-/// ```
 /// {@category kernel32}
-int FindNextChangeNotification(int hChangeHandle) =>
-    _FindNextChangeNotification(hChangeHandle);
+@pragma('vm:prefer-inline')
+int FindFirstVolume(PWSTR lpszVolumeName, int cchBufferLength) =>
+    FindFirstVolumeW_Wrapper(lpszVolumeName, cchBufferLength);
 
-final _FindNextChangeNotification = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hChangeHandle),
-      int Function(int hChangeHandle)
-    >('FindNextChangeNotification');
+/// Requests that the operating system signal a change notification handle the
+/// next time it detects an appropriate change.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-findnextchangenotification>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool FindNextChangeNotification(int hChangeHandle) =>
+    FindNextChangeNotification_Wrapper(hChangeHandle) != FALSE;
 
 /// Continues a file search from a previous call to the FindFirstFile,
 /// FindFirstFileEx, or FindFirstFileTransacted functions.
 ///
-/// ```c
-/// BOOL FindNextFileW(
-///   HANDLE             hFindFile,
-///   LPWIN32_FIND_DATAW lpFindFileData
-/// );
-/// ```
-/// {@category kernel32}
-int FindNextFile(int hFindFile, Pointer<WIN32_FIND_DATA> lpFindFileData) =>
-    _FindNextFile(hFindFile, lpFindFileData);
-
-final _FindNextFile = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hFindFile, Pointer<WIN32_FIND_DATA> lpFindFileData),
-      int Function(int hFindFile, Pointer<WIN32_FIND_DATA> lpFindFileData)
-    >('FindNextFileW');
-
-/// Continues enumerating the hard links to a file using the handle returned
-/// by a successful call to the FindFirstFileNameW function.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-findnextfilew>.
 ///
-/// ```c
-/// BOOL FindNextFileNameW(
-///   [in]      HANDLE  hFindStream,
-///   [in, out] LPDWORD StringLength,
-///   [in, out] PWSTR   LinkName
-/// );
-/// ```
 /// {@category kernel32}
-int FindNextFileName(
+@pragma('vm:prefer-inline')
+bool FindNextFile(int hFindFile, Pointer<WIN32_FIND_DATA> lpFindFileData) =>
+    FindNextFileW_Wrapper(hFindFile, lpFindFileData) != FALSE;
+
+/// Continues enumerating the hard links to a file using the handle returned by
+/// a successful call to the FindFirstFileNameW function.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-findnextfilenamew>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool FindNextFileName(
   int hFindStream,
-  Pointer<Uint32> StringLength,
-  Pointer<Utf16> LinkName,
-) => _FindNextFileName(hFindStream, StringLength, LinkName);
+  Pointer<Uint32> stringLength,
+  PWSTR linkName,
+) => FindNextFileNameW_Wrapper(hFindStream, stringLength, linkName) != FALSE;
 
-final _FindNextFileName = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hFindStream,
-        Pointer<Uint32> StringLength,
-        Pointer<Utf16> LinkName,
-      ),
-      int Function(
-        int hFindStream,
-        Pointer<Uint32> StringLength,
-        Pointer<Utf16> LinkName,
-      )
-    >('FindNextFileNameW');
-
-/// Continues a stream search started by a previous call to the
-/// FindFirstStreamW function.
+/// Continues a stream search started by a previous call to the FindFirstStreamW
+/// function.
 ///
-/// ```c
-/// BOOL FindNextStreamW(
-///   [in]  HANDLE hFindStream,
-///   [out] LPVOID lpFindStreamData
-/// );
-/// ```
-/// {@category kernel32}
-int FindNextStream(int hFindStream, Pointer lpFindStreamData) =>
-    _FindNextStream(hFindStream, lpFindStreamData);
-
-final _FindNextStream = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hFindStream, Pointer lpFindStreamData),
-      int Function(int hFindStream, Pointer lpFindStreamData)
-    >('FindNextStreamW');
-
-/// Continues a volume search started by a call to the FindFirstVolume
-/// function. FindNextVolume finds one volume per call.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-findnextstreamw>.
 ///
-/// ```c
-/// BOOL FindNextVolumeW(
-///   HANDLE hFindVolume,
-///   LPWSTR lpszVolumeName,
-///   DWORD  cchBufferLength
-/// );
-/// ```
 /// {@category kernel32}
-int FindNextVolume(
+@pragma('vm:prefer-inline')
+bool FindNextStream(int hFindStream, Pointer lpFindStreamData) =>
+    FindNextStreamW_Wrapper(hFindStream, lpFindStreamData) != FALSE;
+
+/// Continues a volume search started by a call to the FindFirstVolume function.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-findnextvolumew>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool FindNextVolume(
   int hFindVolume,
-  Pointer<Utf16> lpszVolumeName,
+  PWSTR lpszVolumeName,
   int cchBufferLength,
-) => _FindNextVolume(hFindVolume, lpszVolumeName, cchBufferLength);
-
-final _FindNextVolume = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hFindVolume,
-        Pointer<Utf16> lpszVolumeName,
-        Uint32 cchBufferLength,
-      ),
-      int Function(
-        int hFindVolume,
-        Pointer<Utf16> lpszVolumeName,
-        int cchBufferLength,
-      )
-    >('FindNextVolumeW');
+) =>
+    FindNextVolumeW_Wrapper(hFindVolume, lpszVolumeName, cchBufferLength) !=
+    FALSE;
 
 /// Finds the packages with the specified family name for the current user.
 ///
-/// ```c
-/// LONG FindPackagesByPackageFamily(
-///   PCWSTR packageFamilyName,
-///   UINT32 packageFilters,
-///   UINT32 *count,
-///   PWSTR  *packageFullNames,
-///   UINT32 *bufferLength,
-///   WCHAR  *buffer,
-///   UINT32 *packageProperties
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-findpackagesbypackagefamily>.
+///
 /// {@category kernel32}
-int FindPackagesByPackageFamily(
-  Pointer<Utf16> packageFamilyName,
+@pragma('vm:prefer-inline')
+WIN32_ERROR FindPackagesByPackageFamily(
+  PCWSTR packageFamilyName,
   int packageFilters,
   Pointer<Uint32> count,
-  Pointer<Pointer<Utf16>> packageFullNames,
+  Pointer<PWSTR>? packageFullNames,
   Pointer<Uint32> bufferLength,
-  Pointer<Utf16> buffer,
-  Pointer<Uint32> packageProperties,
-) => _FindPackagesByPackageFamily(
-  packageFamilyName,
-  packageFilters,
-  count,
-  packageFullNames,
-  bufferLength,
-  buffer,
-  packageProperties,
+  PWSTR? buffer,
+  Pointer<Uint32>? packageProperties,
+) => WIN32_ERROR(
+  _FindPackagesByPackageFamily(
+    packageFamilyName,
+    packageFilters,
+    count,
+    packageFullNames ?? nullptr,
+    bufferLength,
+    buffer ?? nullptr,
+    packageProperties ?? nullptr,
+  ),
 );
 
-final _FindPackagesByPackageFamily = _kernel32
-    .lookupFunction<
-      Uint32 Function(
-        Pointer<Utf16> packageFamilyName,
-        Uint32 packageFilters,
-        Pointer<Uint32> count,
-        Pointer<Pointer<Utf16>> packageFullNames,
-        Pointer<Uint32> bufferLength,
-        Pointer<Utf16> buffer,
-        Pointer<Uint32> packageProperties,
-      ),
-      int Function(
-        Pointer<Utf16> packageFamilyName,
-        int packageFilters,
-        Pointer<Uint32> count,
-        Pointer<Pointer<Utf16>> packageFullNames,
-        Pointer<Uint32> bufferLength,
-        Pointer<Utf16> buffer,
-        Pointer<Uint32> packageProperties,
-      )
-    >('FindPackagesByPackageFamily');
+@Native<
+  Uint32 Function(
+    PCWSTR,
+    Uint32,
+    Pointer<Uint32>,
+    Pointer<PWSTR>,
+    Pointer<Uint32>,
+    PWSTR,
+    Pointer<Uint32>,
+  )
+>(symbol: 'FindPackagesByPackageFamily')
+external int _FindPackagesByPackageFamily(
+  PCWSTR packageFamilyName,
+  int packageFilters,
+  Pointer<Uint32> count,
+  Pointer<PWSTR> packageFullNames,
+  Pointer<Uint32> bufferLength,
+  PWSTR buffer,
+  Pointer<Uint32> packageProperties,
+);
 
-/// Determines the location of a resource with the specified type and name
-/// in the specified module.
+/// Determines the location of a resource with the specified type and name in
+/// the specified module.
 ///
-/// ```c
-/// HRSRC FindResourceW(
-///   HMODULE hModule,
-///   LPCWSTR  lpName,
-///   LPCWSTR  lpType
-/// );
-/// ```
-/// {@category kernel32}
-int FindResource(int hModule, Pointer<Utf16> lpName, Pointer<Utf16> lpType) =>
-    _FindResource(hModule, lpName, lpType);
-
-final _FindResource = _kernel32
-    .lookupFunction<
-      IntPtr Function(
-        IntPtr hModule,
-        Pointer<Utf16> lpName,
-        Pointer<Utf16> lpType,
-      ),
-      int Function(int hModule, Pointer<Utf16> lpName, Pointer<Utf16> lpType)
-    >('FindResourceW');
-
-/// Determines the location of the resource with the specified type, name,
-/// and language in the specified module.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-findresourcew>.
 ///
-/// ```c
-/// HRSRC FindResourceExW(
-///   HMODULE hModule,
-///   LPCWSTR  lpType,
-///   LPCWSTR  lpName,
-///   WORD    wLanguage
-/// );
-/// ```
 /// {@category kernel32}
-int FindResourceEx(
+@pragma('vm:prefer-inline')
+int FindResource(int? hModule, PCWSTR lpName, PCWSTR lpType) =>
+    _FindResource(hModule ?? NULL, lpName, lpType);
+
+@Native<HRSRC Function(HMODULE, PCWSTR, PCWSTR)>(symbol: 'FindResourceW')
+external int _FindResource(int hModule, PCWSTR lpName, PCWSTR lpType);
+
+/// Determines the location of the resource with the specified type, name, and
+/// language in the specified module.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-findresourceexw>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+int FindResourceEx(int? hModule, PCWSTR lpType, PCWSTR lpName, int wLanguage) =>
+    _FindResourceEx(hModule ?? NULL, lpType, lpName, wLanguage);
+
+@Native<HRSRC Function(HMODULE, PCWSTR, PCWSTR, Uint16)>(
+  symbol: 'FindResourceExW',
+)
+external int _FindResourceEx(
   int hModule,
-  Pointer<Utf16> lpType,
-  Pointer<Utf16> lpName,
+  PCWSTR lpType,
+  PCWSTR lpName,
   int wLanguage,
-) => _FindResourceEx(hModule, lpType, lpName, wLanguage);
+);
 
-final _FindResourceEx = _kernel32
-    .lookupFunction<
-      IntPtr Function(
-        IntPtr hModule,
-        Pointer<Utf16> lpType,
-        Pointer<Utf16> lpName,
-        Uint16 wLanguage,
-      ),
-      int Function(
-        int hModule,
-        Pointer<Utf16> lpType,
-        Pointer<Utf16> lpName,
-        int wLanguage,
-      )
-    >('FindResourceExW');
-
-/// Locates a Unicode string (wide characters) in another Unicode string for
-/// a non-linguistic comparison.
+/// Locates a Unicode string (wide characters) in another Unicode string for a
+/// non-linguistic comparison.
 ///
-/// ```c
-/// int FindStringOrdinal(
-///   [in] DWORD   dwFindStringOrdinalFlags,
-///   [in] LPCWSTR lpStringSource,
-///   [in] int     cchSource,
-///   [in] LPCWSTR lpStringValue,
-///   [in] int     cchValue,
-///   [in] BOOL    bIgnoreCase
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-findstringordinal>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 int FindStringOrdinal(
   int dwFindStringOrdinalFlags,
-  Pointer<Utf16> lpStringSource,
+  PCWSTR lpStringSource,
   int cchSource,
-  Pointer<Utf16> lpStringValue,
+  PCWSTR lpStringValue,
   int cchValue,
-  int bIgnoreCase,
-) => _FindStringOrdinal(
+  bool bIgnoreCase,
+) => FindStringOrdinal_Wrapper(
   dwFindStringOrdinalFlags,
   lpStringSource,
   cchSource,
   lpStringValue,
   cchValue,
-  bIgnoreCase,
+  bIgnoreCase ? TRUE : FALSE,
 );
 
-final _FindStringOrdinal = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Uint32 dwFindStringOrdinalFlags,
-        Pointer<Utf16> lpStringSource,
-        Int32 cchSource,
-        Pointer<Utf16> lpStringValue,
-        Int32 cchValue,
-        Int32 bIgnoreCase,
-      ),
-      int Function(
-        int dwFindStringOrdinalFlags,
-        Pointer<Utf16> lpStringSource,
-        int cchSource,
-        Pointer<Utf16> lpStringValue,
-        int cchValue,
-        int bIgnoreCase,
-      )
-    >('FindStringOrdinal');
-
-/// Closes the specified volume search handle. The FindFirstVolume and
-/// FindNextVolume functions use this search handle to locate volumes.
+/// Closes the specified volume search handle.
 ///
-/// ```c
-/// BOOL FindVolumeClose(
-///   HANDLE hFindVolume
-/// );
-/// ```
-/// {@category kernel32}
-int FindVolumeClose(int hFindVolume) => _FindVolumeClose(hFindVolume);
-
-final _FindVolumeClose = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hFindVolume),
-      int Function(int hFindVolume)
-    >('FindVolumeClose');
-
-/// Flushes the console input buffer. All input records currently in the
-/// input buffer are discarded.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-findvolumeclose>.
 ///
-/// ```c
-/// BOOL FlushConsoleInputBuffer(
-///   _In_ HANDLE hConsoleInput
-/// );
-/// ```
 /// {@category kernel32}
-int FlushConsoleInputBuffer(int hConsoleInput) =>
-    _FlushConsoleInputBuffer(hConsoleInput);
+@pragma('vm:prefer-inline')
+bool FindVolumeClose(int hFindVolume) =>
+    FindVolumeClose_Wrapper(hFindVolume) != FALSE;
 
-final _FlushConsoleInputBuffer = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hConsoleInput),
-      int Function(int hConsoleInput)
-    >('FlushConsoleInputBuffer');
-
-/// Flushes the buffers of a specified file and causes all buffered data to
-/// be written to a file.
+/// Flushes the console input buffer.
 ///
-/// ```c
-/// BOOL FlushFileBuffers(
-///   HANDLE hFile
-/// );
-/// ```
-/// {@category kernel32}
-int FlushFileBuffers(int hFile) => _FlushFileBuffers(hFile);
-
-final _FlushFileBuffers = _kernel32
-    .lookupFunction<Int32 Function(IntPtr hFile), int Function(int hFile)>(
-      'FlushFileBuffers',
-    );
-
-/// Formats a message string. The function requires a message definition as
-/// input. The message definition can come from a buffer passed into the
-/// function. It can come from a message table resource in an already-loaded
-/// module. Or the caller can ask the function to search the system's
-/// message table resource(s) for the message definition. The function finds
-/// the message definition in a message table resource based on a message
-/// identifier and a language identifier. The function copies the formatted
-/// message text to an output buffer, processing any embedded insert
-/// sequences if requested.
+/// All input records currently in the input buffer are discarded.
 ///
-/// ```c
-/// DWORD FormatMessageW(
-///   DWORD   dwFlags,
-///   LPCVOID lpSource,
-///   DWORD   dwMessageId,
-///   DWORD   dwLanguageId,
-///   LPWSTR  lpBuffer,
-///   DWORD   nSize,
-///   va_list *Arguments
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/console/flushconsoleinputbuffer>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool FlushConsoleInputBuffer(int hConsoleInput) =>
+    FlushConsoleInputBuffer_Wrapper(hConsoleInput) != FALSE;
+
+/// Flushes the buffers of a specified file and causes all buffered data to be
+/// written to a file.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-flushfilebuffers>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool FlushFileBuffers(int hFile) => FlushFileBuffers_Wrapper(hFile) != FALSE;
+
+/// Formats a message string.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-formatmessagew>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
 int FormatMessage(
-  int dwFlags,
-  Pointer lpSource,
+  FORMAT_MESSAGE_OPTIONS dwFlags,
+  Pointer? lpSource,
   int dwMessageId,
   int dwLanguageId,
-  Pointer<Utf16> lpBuffer,
+  PWSTR lpBuffer,
   int nSize,
-  Pointer<Pointer<Int8>> Arguments,
-) => _FormatMessage(
+  Pointer<Pointer<Int8>>? arguments,
+) => FormatMessageW_Wrapper(
   dwFlags,
-  lpSource,
+  lpSource ?? nullptr,
   dwMessageId,
   dwLanguageId,
   lpBuffer,
   nSize,
-  Arguments,
+  arguments ?? nullptr,
 );
-
-final _FormatMessage = _kernel32
-    .lookupFunction<
-      Uint32 Function(
-        Uint32 dwFlags,
-        Pointer lpSource,
-        Uint32 dwMessageId,
-        Uint32 dwLanguageId,
-        Pointer<Utf16> lpBuffer,
-        Uint32 nSize,
-        Pointer<Pointer<Int8>> Arguments,
-      ),
-      int Function(
-        int dwFlags,
-        Pointer lpSource,
-        int dwMessageId,
-        int dwLanguageId,
-        Pointer<Utf16> lpBuffer,
-        int nSize,
-        Pointer<Pointer<Int8>> Arguments,
-      )
-    >('FormatMessageW');
 
 /// Detaches the calling process from its console.
 ///
-/// ```c
-/// BOOL FreeConsole(void);
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/console/freeconsole>.
+///
 /// {@category kernel32}
-int FreeConsole() => _FreeConsole();
-
-final _FreeConsole = _kernel32.lookupFunction<Int32 Function(), int Function()>(
-  'FreeConsole',
-);
+@pragma('vm:prefer-inline')
+bool FreeConsole() => FreeConsole_Wrapper() != FALSE;
 
 /// Frees the loaded dynamic-link library (DLL) module and, if necessary,
-/// decrements its reference count. When the reference count reaches zero,
-/// the module is unloaded from the address space of the calling process and
-/// the handle is no longer valid.
+/// decrements its reference count.
 ///
-/// ```c
-/// BOOL FreeLibrary(
-///   HMODULE hLibModule
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-freelibrary>.
+///
 /// {@category kernel32}
-int FreeLibrary(int hLibModule) => _FreeLibrary(hLibModule);
-
-final _FreeLibrary = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hLibModule),
-      int Function(int hLibModule)
-    >('FreeLibrary');
+@pragma('vm:prefer-inline')
+bool FreeLibrary(int hLibModule) => FreeLibrary_Wrapper(hLibModule) != FALSE;
 
 /// Decrements the reference count of a loaded dynamic-link library (DLL) by
-/// one, then calls ExitThread to terminate the calling thread. The function
-/// does not return.
+/// one, then calls ExitThread to terminate the calling thread.
 ///
-/// ```c
-/// void FreeLibraryAndExitThread(
-///   [in] HMODULE hLibModule,
-///   [in] DWORD   dwExitCode
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-freelibraryandexitthread>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 void FreeLibraryAndExitThread(int hLibModule, int dwExitCode) =>
     _FreeLibraryAndExitThread(hLibModule, dwExitCode);
 
-final _FreeLibraryAndExitThread = _kernel32
-    .lookupFunction<
-      Void Function(IntPtr hLibModule, Uint32 dwExitCode),
-      void Function(int hLibModule, int dwExitCode)
-    >('FreeLibraryAndExitThread');
+@Native<Void Function(HMODULE, Uint32)>(symbol: 'FreeLibraryAndExitThread')
+external void _FreeLibraryAndExitThread(int hLibModule, int dwExitCode);
 
 /// Frees memory that a function related to job objects allocated.
 ///
-/// ```c
-/// void FreeMemoryJobObject(
-///   [in] _Frees_ptr_ VOID *Buffer
-/// );
-/// ```
+/// Functions related to job objects that allocate memory include
+/// QueryIoRateControlInformationJobObject.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/jobapi2/nf-jobapi2-freememoryjobobject>.
+///
 /// {@category kernel32}
-void FreeMemoryJobObject(Pointer Buffer) => _FreeMemoryJobObject(Buffer);
+@pragma('vm:prefer-inline')
+void FreeMemoryJobObject(Pointer buffer) => _FreeMemoryJobObject(buffer);
 
-final _FreeMemoryJobObject = _kernel32
-    .lookupFunction<
-      Void Function(Pointer Buffer),
-      void Function(Pointer Buffer)
-    >('FreeMemoryJobObject');
+@Native<Void Function(Pointer)>(symbol: 'FreeMemoryJobObject')
+external void _FreeMemoryJobObject(Pointer buffer);
 
 /// Returns the number of active processors in a processor group or in the
 /// system.
 ///
-/// ```c
-/// DWORD GetActiveProcessorCount(
-///   WORD GroupNumber
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getactiveprocessorcount>.
+///
 /// {@category kernel32}
-int GetActiveProcessorCount(int GroupNumber) =>
-    _GetActiveProcessorCount(GroupNumber);
-
-final _GetActiveProcessorCount = _kernel32
-    .lookupFunction<
-      Uint32 Function(Uint16 GroupNumber),
-      int Function(int GroupNumber)
-    >('GetActiveProcessorCount');
+@pragma('vm:prefer-inline')
+int GetActiveProcessorCount(int groupNumber) =>
+    GetActiveProcessorCount_Wrapper(groupNumber);
 
 /// Returns the number of active processor groups in the system.
 ///
-/// ```c
-/// WORD GetActiveProcessorGroupCount();
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getactiveprocessorgroupcount>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 int GetActiveProcessorGroupCount() => _GetActiveProcessorGroupCount();
 
-final _GetActiveProcessorGroupCount = _kernel32
-    .lookupFunction<Uint16 Function(), int Function()>(
-      'GetActiveProcessorGroupCount',
-    );
+@Native<Uint16 Function()>(symbol: 'GetActiveProcessorGroupCount')
+external int _GetActiveProcessorGroupCount();
 
 /// Determines whether a file is an executable (.exe) file, and if so, which
 /// subsystem runs the executable file.
 ///
-/// ```c
-/// BOOL GetBinaryTypeW(
-///   LPCWSTR lpApplicationName,
-///   LPDWORD lpBinaryType);
-/// ```
-/// {@category kernel32}
-int GetBinaryType(
-  Pointer<Utf16> lpApplicationName,
-  Pointer<Uint32> lpBinaryType,
-) => _GetBinaryType(lpApplicationName, lpBinaryType);
-
-final _GetBinaryType = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Utf16> lpApplicationName,
-        Pointer<Uint32> lpBinaryType,
-      ),
-      int Function(
-        Pointer<Utf16> lpApplicationName,
-        Pointer<Uint32> lpBinaryType,
-      )
-    >('GetBinaryTypeW');
-
-/// Parses a Unicode command line string and returns an array of pointers to
-/// the command line arguments, along with a count of such arguments, in a
-/// way that is similar to the standard C run-time argv and argc values.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getbinarytypew>.
 ///
-/// ```c
-/// LPWSTR GetCommandLineW();
-/// ```
 /// {@category kernel32}
-Pointer<Utf16> GetCommandLine() => _GetCommandLine();
+@pragma('vm:prefer-inline')
+bool GetBinaryType(PCWSTR lpApplicationName, Pointer<Uint32> lpBinaryType) =>
+    GetBinaryTypeW_Wrapper(lpApplicationName, lpBinaryType) != FALSE;
 
-final _GetCommandLine = _kernel32
-    .lookupFunction<Pointer<Utf16> Function(), Pointer<Utf16> Function()>(
-      'GetCommandLineW',
-    );
+/// Retrieves the command-line string for the current process.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/processenv/nf-processenv-getcommandlinew>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+PCWSTR GetCommandLine() => _GetCommandLine();
+
+@Native<PCWSTR Function()>(symbol: 'GetCommandLineW')
+external PCWSTR _GetCommandLine();
 
 /// Retrieves the current configuration of a communications device.
 ///
-/// ```c
-/// BOOL GetCommConfig(
-///   HANDLE       hCommDev,
-///   LPCOMMCONFIG lpCC,
-///   LPDWORD      lpdwSize
-/// );
-/// ```
-/// {@category kernel32}
-int GetCommConfig(
-  int hCommDev,
-  Pointer<COMMCONFIG> lpCC,
-  Pointer<Uint32> lpdwSize,
-) => _GetCommConfig(hCommDev, lpCC, lpdwSize);
-
-final _GetCommConfig = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hCommDev,
-        Pointer<COMMCONFIG> lpCC,
-        Pointer<Uint32> lpdwSize,
-      ),
-      int Function(
-        int hCommDev,
-        Pointer<COMMCONFIG> lpCC,
-        Pointer<Uint32> lpdwSize,
-      )
-    >('GetCommConfig');
-
-/// Retrieves the value of the event mask for a specified communications
-/// device.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getcommconfig>.
 ///
-/// ```c
-/// BOOL GetCommMask(
-///   HANDLE  hFile,
-///   LPDWORD lpEvtMask
-/// );
-/// ```
 /// {@category kernel32}
-int GetCommMask(int hFile, Pointer<Uint32> lpEvtMask) =>
-    _GetCommMask(hFile, lpEvtMask);
+@pragma('vm:prefer-inline')
+bool GetCommConfig(
+  int hCommDev,
+  Pointer<COMMCONFIG>? lpCC,
+  Pointer<Uint32> lpdwSize,
+) => GetCommConfig_Wrapper(hCommDev, lpCC ?? nullptr, lpdwSize) != FALSE;
 
-final _GetCommMask = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hFile, Pointer<Uint32> lpEvtMask),
-      int Function(int hFile, Pointer<Uint32> lpEvtMask)
-    >('GetCommMask');
+/// Retrieves the value of the event mask for a specified communications device.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getcommmask>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool GetCommMask(int hFile, Pointer<Uint32> lpEvtMask) =>
+    GetCommMask_Wrapper(hFile, lpEvtMask) != FALSE;
 
 /// Retrieves the modem control-register values.
 ///
-/// ```c
-/// BOOL GetCommModemStatus(
-///   HANDLE  hFile,
-///   LPDWORD lpModemStat
-/// );
-/// ```
-/// {@category kernel32}
-int GetCommModemStatus(int hFile, Pointer<Uint32> lpModemStat) =>
-    _GetCommModemStatus(hFile, lpModemStat);
-
-final _GetCommModemStatus = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hFile, Pointer<Uint32> lpModemStat),
-      int Function(int hFile, Pointer<Uint32> lpModemStat)
-    >('GetCommModemStatus');
-
-/// Retrieves information about the communications properties for a
-/// specified communications device.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getcommmodemstatus>.
 ///
-/// ```c
-/// BOOL GetCommProperties(
-///   HANDLE     hFile,
-///   LPCOMMPROP lpCommProp
-/// );
-/// ```
 /// {@category kernel32}
-int GetCommProperties(int hFile, Pointer<COMMPROP> lpCommProp) =>
-    _GetCommProperties(hFile, lpCommProp);
+@pragma('vm:prefer-inline')
+bool GetCommModemStatus(int hFile, Pointer<Uint32> lpModemStat) =>
+    GetCommModemStatus_Wrapper(hFile, lpModemStat) != FALSE;
 
-final _GetCommProperties = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hFile, Pointer<COMMPROP> lpCommProp),
-      int Function(int hFile, Pointer<COMMPROP> lpCommProp)
-    >('GetCommProperties');
+/// Retrieves information about the communications properties for a specified
+/// communications device.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getcommproperties>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool GetCommProperties(int hFile, Pointer<COMMPROP> lpCommProp) =>
+    GetCommProperties_Wrapper(hFile, lpCommProp) != FALSE;
 
 /// Retrieves the current control settings for a specified communications
 /// device.
 ///
-/// ```c
-/// BOOL GetCommState(
-///   HANDLE hFile,
-///   LPDCB  lpDCB
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getcommstate>.
+///
 /// {@category kernel32}
-int GetCommState(int hFile, Pointer<DCB> lpDCB) => _GetCommState(hFile, lpDCB);
-
-final _GetCommState = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hFile, Pointer<DCB> lpDCB),
-      int Function(int hFile, Pointer<DCB> lpDCB)
-    >('GetCommState');
+@pragma('vm:prefer-inline')
+bool GetCommState(int hFile, Pointer<DCB> lpDCB) =>
+    GetCommState_Wrapper(hFile, lpDCB) != FALSE;
 
 /// Retrieves the time-out parameters for all read and write operations on a
 /// specified communications device.
 ///
-/// ```c
-/// BOOL GetCommTimeouts(
-///   HANDLE         hFile,
-///   LPCOMMTIMEOUTS lpCommTimeouts
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getcommtimeouts>.
+///
 /// {@category kernel32}
-int GetCommTimeouts(int hFile, Pointer<COMMTIMEOUTS> lpCommTimeouts) =>
-    _GetCommTimeouts(hFile, lpCommTimeouts);
-
-final _GetCommTimeouts = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hFile, Pointer<COMMTIMEOUTS> lpCommTimeouts),
-      int Function(int hFile, Pointer<COMMTIMEOUTS> lpCommTimeouts)
-    >('GetCommTimeouts');
+@pragma('vm:prefer-inline')
+bool GetCommTimeouts(int hFile, Pointer<COMMTIMEOUTS> lpCommTimeouts) =>
+    GetCommTimeouts_Wrapper(hFile, lpCommTimeouts) != FALSE;
 
 /// Retrieves the actual number of bytes of disk storage used to store a
-/// specified file. If the file is located on a volume that supports
-/// compression and the file is compressed, the value obtained is the
-/// compressed size of the specified file. If the file is located on a
-/// volume that supports sparse files and the file is a sparse file, the
-/// value obtained is the sparse size of the specified file.
+/// specified file.
 ///
-/// ```c
-/// DWORD GetCompressedFileSizeW(
-///   LPCWSTR lpFileName,
-///   LPDWORD lpFileSizeHigh
-/// );
-/// ```
-/// {@category kernel32}
-int GetCompressedFileSize(
-  Pointer<Utf16> lpFileName,
-  Pointer<Uint32> lpFileSizeHigh,
-) => _GetCompressedFileSize(lpFileName, lpFileSizeHigh);
-
-final _GetCompressedFileSize = _kernel32
-    .lookupFunction<
-      Uint32 Function(
-        Pointer<Utf16> lpFileName,
-        Pointer<Uint32> lpFileSizeHigh,
-      ),
-      int Function(Pointer<Utf16> lpFileName, Pointer<Uint32> lpFileSizeHigh)
-    >('GetCompressedFileSizeW');
-
-/// Retrieves the NetBIOS name of the local computer. This name is
-/// established at system startup, when the system reads it from the
-/// registry.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getcompressedfilesizew>.
 ///
-/// ```c
-/// BOOL GetComputerNameW(
-///   LPWSTR  lpBuffer,
-///   LPDWORD nSize
-/// );
-/// ```
 /// {@category kernel32}
-int GetComputerName(Pointer<Utf16> lpBuffer, Pointer<Uint32> nSize) =>
-    _GetComputerName(lpBuffer, nSize);
+@pragma('vm:prefer-inline')
+int GetCompressedFileSize(PCWSTR lpFileName, Pointer<Uint32>? lpFileSizeHigh) =>
+    GetCompressedFileSizeW_Wrapper(lpFileName, lpFileSizeHigh ?? nullptr);
 
-final _GetComputerName = _kernel32
-    .lookupFunction<
-      Int32 Function(Pointer<Utf16> lpBuffer, Pointer<Uint32> nSize),
-      int Function(Pointer<Utf16> lpBuffer, Pointer<Uint32> nSize)
-    >('GetComputerNameW');
-
-/// Retrieves a NetBIOS or DNS name associated with the local computer. The
-/// names are established at system startup, when the system reads them from
+/// Retrieves the NetBIOS name of the local computer.
+///
+/// This name is established at system startup, when the system reads it from
 /// the registry.
 ///
-/// ```c
-/// BOOL GetComputerNameExW(
-///   COMPUTER_NAME_FORMAT NameType,
-///   LPWSTR               lpBuffer,
-///   LPDWORD              nSize
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getcomputernamew>.
+///
 /// {@category kernel32}
-int GetComputerNameEx(
-  int NameType,
-  Pointer<Utf16> lpBuffer,
-  Pointer<Uint32> nSize,
-) => _GetComputerNameEx(NameType, lpBuffer, nSize);
+@pragma('vm:prefer-inline')
+bool GetComputerName(PWSTR? lpBuffer, Pointer<Uint32> nSize) =>
+    GetComputerNameW_Wrapper(lpBuffer ?? nullptr, nSize) != FALSE;
 
-final _GetComputerNameEx = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Int32 NameType,
-        Pointer<Utf16> lpBuffer,
-        Pointer<Uint32> nSize,
-      ),
-      int Function(int NameType, Pointer<Utf16> lpBuffer, Pointer<Uint32> nSize)
-    >('GetComputerNameExW');
+/// Retrieves a NetBIOS or DNS name associated with the local computer.
+///
+/// The names are established at system startup, when the system reads them from
+/// the registry.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-getcomputernameexw>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool GetComputerNameEx(
+  COMPUTER_NAME_FORMAT nameType,
+  PWSTR? lpBuffer,
+  Pointer<Uint32> nSize,
+) => GetComputerNameExW_Wrapper(nameType, lpBuffer ?? nullptr, nSize) != FALSE;
 
 /// Retrieves the input code page used by the console associated with the
-/// calling process. A console uses its input code page to translate
-/// keyboard input into the corresponding character value.
+/// calling process.
 ///
-/// ```c
-/// UINT GetConsoleCP(void);
-/// ```
-/// {@category kernel32}
-int GetConsoleCP() => _GetConsoleCP();
-
-final _GetConsoleCP = _kernel32
-    .lookupFunction<Uint32 Function(), int Function()>('GetConsoleCP');
-
-/// Retrieves information about the size and visibility of the cursor for
-/// the specified console screen buffer.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/console/getconsolecp>.
 ///
-/// ```c
-/// BOOL GetConsoleCursorInfo(
-///   _In_  HANDLE               hConsoleOutput,
-///   _Out_ PCONSOLE_CURSOR_INFO lpConsoleCursorInfo
-/// );
-/// ```
 /// {@category kernel32}
-int GetConsoleCursorInfo(
+@pragma('vm:prefer-inline')
+int GetConsoleCP() => GetConsoleCP_Wrapper();
+
+/// Retrieves information about the size and visibility of the cursor for the
+/// specified console screen buffer.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/console/getconsolecursorinfo>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool GetConsoleCursorInfo(
   int hConsoleOutput,
   Pointer<CONSOLE_CURSOR_INFO> lpConsoleCursorInfo,
-) => _GetConsoleCursorInfo(hConsoleOutput, lpConsoleCursorInfo);
+) => GetConsoleCursorInfo_Wrapper(hConsoleOutput, lpConsoleCursorInfo) != FALSE;
 
-final _GetConsoleCursorInfo = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hConsoleOutput,
-        Pointer<CONSOLE_CURSOR_INFO> lpConsoleCursorInfo,
-      ),
-      int Function(
-        int hConsoleOutput,
-        Pointer<CONSOLE_CURSOR_INFO> lpConsoleCursorInfo,
-      )
-    >('GetConsoleCursorInfo');
-
-/// Retrieves the current input mode of a console's input buffer or the
-/// current output mode of a console screen buffer.
+/// Retrieves the current input mode of a console's input buffer or the current
+/// output mode of a console screen buffer.
 ///
-/// ```c
-/// BOOL GetConsoleMode(
-///   _In_  HANDLE  hConsoleHandle,
-///   _Out_ LPDWORD lpMode
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/console/getconsolemode>.
+///
 /// {@category kernel32}
-int GetConsoleMode(int hConsoleHandle, Pointer<Uint32> lpMode) =>
-    _GetConsoleMode(hConsoleHandle, lpMode);
-
-final _GetConsoleMode = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hConsoleHandle, Pointer<Uint32> lpMode),
-      int Function(int hConsoleHandle, Pointer<Uint32> lpMode)
-    >('GetConsoleMode');
+@pragma('vm:prefer-inline')
+bool GetConsoleMode(int hConsoleHandle, Pointer<Uint32> lpMode) =>
+    GetConsoleMode_Wrapper(hConsoleHandle, lpMode) != FALSE;
 
 /// Retrieves the output code page used by the console associated with the
-/// calling process. A console uses its output code page to translate the
-/// character values written by the various output functions into the images
-/// displayed in the console window.
+/// calling process.
 ///
-/// ```c
-/// UINT GetConsoleOutputCP(void);
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/console/getconsoleoutputcp>.
+///
 /// {@category kernel32}
-int GetConsoleOutputCP() => _GetConsoleOutputCP();
-
-final _GetConsoleOutputCP = _kernel32
-    .lookupFunction<Uint32 Function(), int Function()>('GetConsoleOutputCP');
+@pragma('vm:prefer-inline')
+int GetConsoleOutputCP() => GetConsoleOutputCP_Wrapper();
 
 /// Retrieves information about the specified console screen buffer.
 ///
-/// ```c
-/// BOOL GetConsoleScreenBufferInfo(
-///   _In_  HANDLE                      hConsoleOutput,
-///   _Out_ PCONSOLE_SCREEN_BUFFER_INFO lpConsoleScreenBufferInfo
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/console/getconsolescreenbufferinfo>.
+///
 /// {@category kernel32}
-int GetConsoleScreenBufferInfo(
+@pragma('vm:prefer-inline')
+bool GetConsoleScreenBufferInfo(
   int hConsoleOutput,
   Pointer<CONSOLE_SCREEN_BUFFER_INFO> lpConsoleScreenBufferInfo,
-) => _GetConsoleScreenBufferInfo(hConsoleOutput, lpConsoleScreenBufferInfo);
-
-final _GetConsoleScreenBufferInfo = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hConsoleOutput,
-        Pointer<CONSOLE_SCREEN_BUFFER_INFO> lpConsoleScreenBufferInfo,
-      ),
-      int Function(
-        int hConsoleOutput,
-        Pointer<CONSOLE_SCREEN_BUFFER_INFO> lpConsoleScreenBufferInfo,
-      )
-    >('GetConsoleScreenBufferInfo');
+) =>
+    GetConsoleScreenBufferInfo_Wrapper(
+      hConsoleOutput,
+      lpConsoleScreenBufferInfo,
+    ) !=
+    FALSE;
 
 /// Retrieves information about the current console selection.
 ///
-/// ```c
-/// BOOL GetConsoleSelectionInfo(
-///   _Out_ PCONSOLE_SELECTION_INFO lpConsoleSelectionInfo
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/console/getconsoleselectioninfo>.
+///
 /// {@category kernel32}
-int GetConsoleSelectionInfo(
+@pragma('vm:prefer-inline')
+bool GetConsoleSelectionInfo(
   Pointer<CONSOLE_SELECTION_INFO> lpConsoleSelectionInfo,
-) => _GetConsoleSelectionInfo(lpConsoleSelectionInfo);
+) => GetConsoleSelectionInfo_Wrapper(lpConsoleSelectionInfo) != FALSE;
 
-final _GetConsoleSelectionInfo = _kernel32
-    .lookupFunction<
-      Int32 Function(Pointer<CONSOLE_SELECTION_INFO> lpConsoleSelectionInfo),
-      int Function(Pointer<CONSOLE_SELECTION_INFO> lpConsoleSelectionInfo)
-    >('GetConsoleSelectionInfo');
-
-/// Retrieves the title for the current console window.
+/// Retrieves the title and size of the title for the current console window.
 ///
-/// ```c
-/// DWORD GetConsoleTitleW(
-///   _Out_ LPTSTR lpConsoleTitle,
-///   _In_  DWORD  nSize
-/// );
-/// ```
-/// {@category kernel32}
-int GetConsoleTitle(Pointer<Utf16> lpConsoleTitle, int nSize) =>
-    _GetConsoleTitle(lpConsoleTitle, nSize);
-
-final _GetConsoleTitle = _kernel32
-    .lookupFunction<
-      Uint32 Function(Pointer<Utf16> lpConsoleTitle, Uint32 nSize),
-      int Function(Pointer<Utf16> lpConsoleTitle, int nSize)
-    >('GetConsoleTitleW');
-
-/// Retrieves the window handle used by the console associated with the
-/// calling process.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/console/getconsoletitle>.
 ///
-/// ```c
-/// HWND GetConsoleWindow(void);
-/// ```
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
+int GetConsoleTitle(PWSTR lpConsoleTitle, int nSize) =>
+    GetConsoleTitleW_Wrapper(lpConsoleTitle, nSize);
+
+/// Retrieves the window handle used by the console associated with the calling
+/// process.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/console/getconsolewindow>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
 int GetConsoleWindow() => _GetConsoleWindow();
 
-final _GetConsoleWindow = _kernel32
-    .lookupFunction<IntPtr Function(), int Function()>('GetConsoleWindow');
+@Native<HWND Function()>(symbol: 'GetConsoleWindow')
+external int _GetConsoleWindow();
 
-/// The GetCurrentActCtx function returns the handle to the active
-/// activation context of the calling thread.
+/// Returns the handle to the active activation context of the calling thread.
 ///
-/// ```c
-/// BOOL GetCurrentActCtx(
-///   HANDLE *lphActCtx
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getcurrentactctx>.
+///
 /// {@category kernel32}
-int GetCurrentActCtx(Pointer<IntPtr> lphActCtx) => _GetCurrentActCtx(lphActCtx);
-
-final _GetCurrentActCtx = _kernel32
-    .lookupFunction<
-      Int32 Function(Pointer<IntPtr> lphActCtx),
-      int Function(Pointer<IntPtr> lphActCtx)
-    >('GetCurrentActCtx');
+@pragma('vm:prefer-inline')
+bool GetCurrentActCtx(Pointer<HANDLE> lphActCtx) =>
+    GetCurrentActCtx_Wrapper(lphActCtx) != FALSE;
 
 /// Retrieves the current directory for the current process.
 ///
-/// ```c
-/// DWORD GetCurrentDirectoryW(
-///   DWORD nBufferLength,
-///   LPTSTR lpBuffer
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getcurrentdirectory>.
+///
 /// {@category kernel32}
-int GetCurrentDirectory(int nBufferLength, Pointer<Utf16> lpBuffer) =>
-    _GetCurrentDirectory(nBufferLength, lpBuffer);
+@pragma('vm:prefer-inline')
+int GetCurrentDirectory(int nBufferLength, PWSTR? lpBuffer) =>
+    _GetCurrentDirectory(nBufferLength, lpBuffer ?? nullptr);
 
-final _GetCurrentDirectory = _kernel32
-    .lookupFunction<
-      Uint32 Function(Uint32 nBufferLength, Pointer<Utf16> lpBuffer),
-      int Function(int nBufferLength, Pointer<Utf16> lpBuffer)
-    >('GetCurrentDirectoryW');
+@Native<Uint32 Function(Uint32, PWSTR)>(symbol: 'GetCurrentDirectoryW')
+external int _GetCurrentDirectory(int nBufferLength, PWSTR lpBuffer);
 
 /// Gets the package full name for the calling process.
 ///
-/// ```c
-/// LONG GetCurrentPackageFullName(
-/// [in, out]       UINT32 *packageFullNameLength,
-/// [out, optional] PWSTR  packageFullName
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getcurrentpackagefullname>.
+///
 /// {@category kernel32}
-int GetCurrentPackageFullName(
+@pragma('vm:prefer-inline')
+WIN32_ERROR GetCurrentPackageFullName(
   Pointer<Uint32> packageFullNameLength,
-  Pointer<Utf16> packageFullName,
-) => _GetCurrentPackageFullName(packageFullNameLength, packageFullName);
+  PWSTR? packageFullName,
+) => WIN32_ERROR(
+  _GetCurrentPackageFullName(packageFullNameLength, packageFullName ?? nullptr),
+);
 
-final _GetCurrentPackageFullName = _kernel32
-    .lookupFunction<
-      Uint32 Function(
-        Pointer<Uint32> packageFullNameLength,
-        Pointer<Utf16> packageFullName,
-      ),
-      int Function(
-        Pointer<Uint32> packageFullNameLength,
-        Pointer<Utf16> packageFullName,
-      )
-    >('GetCurrentPackageFullName');
+@Native<Uint32 Function(Pointer<Uint32>, PWSTR)>(
+  symbol: 'GetCurrentPackageFullName',
+)
+external int _GetCurrentPackageFullName(
+  Pointer<Uint32> packageFullNameLength,
+  PWSTR packageFullName,
+);
 
 /// Retrieves a pseudo handle for the current process.
 ///
-/// ```c
-/// HANDLE GetCurrentProcess();
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getcurrentprocess>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 int GetCurrentProcess() => _GetCurrentProcess();
 
-final _GetCurrentProcess = _kernel32
-    .lookupFunction<IntPtr Function(), int Function()>('GetCurrentProcess');
+@Native<HANDLE Function()>(symbol: 'GetCurrentProcess')
+external int _GetCurrentProcess();
 
 /// Retrieves the process identifier of the calling process.
 ///
-/// ```c
-/// DWORD GetCurrentProcessId();
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getcurrentprocessid>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 int GetCurrentProcessId() => _GetCurrentProcessId();
 
-final _GetCurrentProcessId = _kernel32
-    .lookupFunction<Uint32 Function(), int Function()>('GetCurrentProcessId');
+@Native<Uint32 Function()>(symbol: 'GetCurrentProcessId')
+external int _GetCurrentProcessId();
 
 /// Retrieves the number of the processor the current thread was running on
 /// during the call to this function.
 ///
-/// ```c
-/// DWORD GetCurrentProcessorNumber();
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getcurrentprocessornumber>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 int GetCurrentProcessorNumber() => _GetCurrentProcessorNumber();
 
-final _GetCurrentProcessorNumber = _kernel32
-    .lookupFunction<Uint32 Function(), int Function()>(
-      'GetCurrentProcessorNumber',
-    );
+@Native<Uint32 Function()>(symbol: 'GetCurrentProcessorNumber')
+external int _GetCurrentProcessorNumber();
 
 /// Retrieves a pseudo handle for the calling thread.
 ///
-/// ```c
-/// HANDLE GetCurrentThread();
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getcurrentthread>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 int GetCurrentThread() => _GetCurrentThread();
 
-final _GetCurrentThread = _kernel32
-    .lookupFunction<IntPtr Function(), int Function()>('GetCurrentThread');
+@Native<HANDLE Function()>(symbol: 'GetCurrentThread')
+external int _GetCurrentThread();
 
 /// Retrieves the thread identifier of the calling thread.
 ///
-/// ```c
-/// DWORD GetCurrentThreadId();
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getcurrentthreadid>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 int GetCurrentThreadId() => _GetCurrentThreadId();
 
-final _GetCurrentThreadId = _kernel32
-    .lookupFunction<Uint32 Function(), int Function()>('GetCurrentThreadId');
+@Native<Uint32 Function()>(symbol: 'GetCurrentThreadId')
+external int _GetCurrentThreadId();
 
-/// Retrieves the default configuration for the specified communications
-/// device.
+/// Retrieves the default configuration for the specified communications device.
 ///
-/// ```c
-/// BOOL GetDefaultCommConfigW(
-///   LPCWSTR      lpszName,
-///   LPCOMMCONFIG lpCC,
-///   LPDWORD      lpdwSize
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getdefaultcommconfigw>.
+///
 /// {@category kernel32}
-int GetDefaultCommConfig(
-  Pointer<Utf16> lpszName,
+@pragma('vm:prefer-inline')
+bool GetDefaultCommConfig(
+  PCWSTR lpszName,
   Pointer<COMMCONFIG> lpCC,
   Pointer<Uint32> lpdwSize,
-) => _GetDefaultCommConfig(lpszName, lpCC, lpdwSize);
+) => GetDefaultCommConfigW_Wrapper(lpszName, lpCC, lpdwSize) != FALSE;
 
-final _GetDefaultCommConfig = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Utf16> lpszName,
-        Pointer<COMMCONFIG> lpCC,
-        Pointer<Uint32> lpdwSize,
-      ),
-      int Function(
-        Pointer<Utf16> lpszName,
-        Pointer<COMMCONFIG> lpCC,
-        Pointer<Uint32> lpdwSize,
-      )
-    >('GetDefaultCommConfigW');
-
-/// Retrieves the base name of the specified device driver.
+/// Retrieves information about the specified disk, including the amount of free
+/// space on the disk.
 ///
-/// ```c
-/// DWORD K32GetDeviceDriverBaseNameW(
-///   [in]  LPVOID ImageBase,
-///   [out] LPWSTR lpBaseName,
-///   [in]  DWORD  nSize
-/// );
-/// ```
-/// {@category kernel32}
-int GetDeviceDriverBaseName(
-  Pointer ImageBase,
-  Pointer<Utf16> lpBaseName,
-  int nSize,
-) => _K32GetDeviceDriverBaseName(ImageBase, lpBaseName, nSize);
-
-final _K32GetDeviceDriverBaseName = _kernel32
-    .lookupFunction<
-      Uint32 Function(
-        Pointer ImageBase,
-        Pointer<Utf16> lpBaseName,
-        Uint32 nSize,
-      ),
-      int Function(Pointer ImageBase, Pointer<Utf16> lpBaseName, int nSize)
-    >('K32GetDeviceDriverBaseNameW');
-
-/// Retrieves the path available for the specified device driver.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getdiskfreespacew>.
 ///
-/// ```c
-/// DWORD K32GetDeviceDriverFileNameW(
-///   [in]  LPVOID ImageBase,
-///   [out] LPWSTR lpFilename,
-///   [in]  DWORD  nSize
-/// );
-/// ```
 /// {@category kernel32}
-int GetDeviceDriverFileName(
-  Pointer ImageBase,
-  Pointer<Utf16> lpFilename,
-  int nSize,
-) => _K32GetDeviceDriverFileName(ImageBase, lpFilename, nSize);
+@pragma('vm:prefer-inline')
+bool GetDiskFreeSpace(
+  PCWSTR? lpRootPathName,
+  Pointer<Uint32>? lpSectorsPerCluster,
+  Pointer<Uint32>? lpBytesPerSector,
+  Pointer<Uint32>? lpNumberOfFreeClusters,
+  Pointer<Uint32>? lpTotalNumberOfClusters,
+) =>
+    GetDiskFreeSpaceW_Wrapper(
+      lpRootPathName ?? nullptr,
+      lpSectorsPerCluster ?? nullptr,
+      lpBytesPerSector ?? nullptr,
+      lpNumberOfFreeClusters ?? nullptr,
+      lpTotalNumberOfClusters ?? nullptr,
+    ) !=
+    FALSE;
 
-final _K32GetDeviceDriverFileName = _kernel32
-    .lookupFunction<
-      Uint32 Function(
-        Pointer ImageBase,
-        Pointer<Utf16> lpFilename,
-        Uint32 nSize,
-      ),
-      int Function(Pointer ImageBase, Pointer<Utf16> lpFilename, int nSize)
-    >('K32GetDeviceDriverFileNameW');
-
-/// Retrieves information about the specified disk, including the amount of
-/// free space on the disk.
+/// Retrieves information about the amount of space that is available on a disk
+/// volume, which is the total amount of space, the total amount of free space,
+/// and the total amount of free space available to the user that is associated
+/// with the calling thread.
 ///
-/// ```c
-/// BOOL GetDiskFreeSpaceW(
-///   LPCWSTR lpRootPathName,
-///   LPDWORD lpSectorsPerCluster,
-///   LPDWORD lpBytesPerSector,
-///   LPDWORD lpNumberOfFreeClusters,
-///   LPDWORD lpTotalNumberOfClusters
-/// );
-/// ```
-/// {@category kernel32}
-int GetDiskFreeSpace(
-  Pointer<Utf16> lpRootPathName,
-  Pointer<Uint32> lpSectorsPerCluster,
-  Pointer<Uint32> lpBytesPerSector,
-  Pointer<Uint32> lpNumberOfFreeClusters,
-  Pointer<Uint32> lpTotalNumberOfClusters,
-) => _GetDiskFreeSpace(
-  lpRootPathName,
-  lpSectorsPerCluster,
-  lpBytesPerSector,
-  lpNumberOfFreeClusters,
-  lpTotalNumberOfClusters,
-);
-
-final _GetDiskFreeSpace = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Utf16> lpRootPathName,
-        Pointer<Uint32> lpSectorsPerCluster,
-        Pointer<Uint32> lpBytesPerSector,
-        Pointer<Uint32> lpNumberOfFreeClusters,
-        Pointer<Uint32> lpTotalNumberOfClusters,
-      ),
-      int Function(
-        Pointer<Utf16> lpRootPathName,
-        Pointer<Uint32> lpSectorsPerCluster,
-        Pointer<Uint32> lpBytesPerSector,
-        Pointer<Uint32> lpNumberOfFreeClusters,
-        Pointer<Uint32> lpTotalNumberOfClusters,
-      )
-    >('GetDiskFreeSpaceW');
-
-/// Retrieves information about the amount of space that is available on a
-/// disk volume, which is the total amount of space, the total amount of
-/// free space, and the total amount of free space available to the user
-/// that is associated with the calling thread.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getdiskfreespaceexw>.
 ///
-/// ```c
-/// BOOL GetDiskFreeSpaceExW(
-///   [in, optional]  LPCWSTR         lpDirectoryName,
-///   [out, optional] PULARGE_INTEGER lpFreeBytesAvailableToCaller,
-///   [out, optional] PULARGE_INTEGER lpTotalNumberOfBytes,
-///   [out, optional] PULARGE_INTEGER lpTotalNumberOfFreeBytes
-/// );
-/// ```
 /// {@category kernel32}
-int GetDiskFreeSpaceEx(
-  Pointer<Utf16> lpDirectoryName,
-  Pointer<Uint64> lpFreeBytesAvailableToCaller,
-  Pointer<Uint64> lpTotalNumberOfBytes,
-  Pointer<Uint64> lpTotalNumberOfFreeBytes,
-) => _GetDiskFreeSpaceEx(
-  lpDirectoryName,
-  lpFreeBytesAvailableToCaller,
-  lpTotalNumberOfBytes,
-  lpTotalNumberOfFreeBytes,
-);
+@pragma('vm:prefer-inline')
+bool GetDiskFreeSpaceEx(
+  PCWSTR? lpDirectoryName,
+  Pointer<Uint64>? lpFreeBytesAvailableToCaller,
+  Pointer<Uint64>? lpTotalNumberOfBytes,
+  Pointer<Uint64>? lpTotalNumberOfFreeBytes,
+) =>
+    GetDiskFreeSpaceExW_Wrapper(
+      lpDirectoryName ?? nullptr,
+      lpFreeBytesAvailableToCaller ?? nullptr,
+      lpTotalNumberOfBytes ?? nullptr,
+      lpTotalNumberOfFreeBytes ?? nullptr,
+    ) !=
+    FALSE;
 
-final _GetDiskFreeSpaceEx = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Utf16> lpDirectoryName,
-        Pointer<Uint64> lpFreeBytesAvailableToCaller,
-        Pointer<Uint64> lpTotalNumberOfBytes,
-        Pointer<Uint64> lpTotalNumberOfFreeBytes,
-      ),
-      int Function(
-        Pointer<Utf16> lpDirectoryName,
-        Pointer<Uint64> lpFreeBytesAvailableToCaller,
-        Pointer<Uint64> lpTotalNumberOfBytes,
-        Pointer<Uint64> lpTotalNumberOfFreeBytes,
-      )
-    >('GetDiskFreeSpaceExW');
-
-/// Retrieves the application-specific portion of the search path used to
-/// locate DLLs for the application.
+/// Retrieves the application-specific portion of the search path used to locate
+/// DLLs for the application.
 ///
-/// ```c
-/// DWORD GetDllDirectoryW(
-///   DWORD  nBufferLength,
-///   LPWSTR lpBuffer
-/// );
-/// ```
-/// {@category kernel32}
-int GetDllDirectory(int nBufferLength, Pointer<Utf16> lpBuffer) =>
-    _GetDllDirectory(nBufferLength, lpBuffer);
-
-final _GetDllDirectory = _kernel32
-    .lookupFunction<
-      Uint32 Function(Uint32 nBufferLength, Pointer<Utf16> lpBuffer),
-      int Function(int nBufferLength, Pointer<Utf16> lpBuffer)
-    >('GetDllDirectoryW');
-
-/// Determines whether a disk drive is a removable, fixed, CD-ROM, RAM disk,
-/// or network drive.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getdlldirectoryw>.
 ///
-/// ```c
-/// UINT GetDriveTypeW(
-///   LPCWSTR lpRootPathName
-/// );
-/// ```
 /// {@category kernel32}
-int GetDriveType(Pointer<Utf16> lpRootPathName) =>
-    _GetDriveType(lpRootPathName);
+@pragma('vm:prefer-inline')
+int GetDllDirectory(int nBufferLength, PWSTR? lpBuffer) =>
+    GetDllDirectoryW_Wrapper(nBufferLength, lpBuffer ?? nullptr);
 
-final _GetDriveType = _kernel32
-    .lookupFunction<
-      Uint32 Function(Pointer<Utf16> lpRootPathName),
-      int Function(Pointer<Utf16> lpRootPathName)
-    >('GetDriveTypeW');
-
-/// Retrieves the contents of the specified variable from the environment
-/// block of the calling process.
+/// Determines whether a disk drive is a removable, fixed, CD-ROM, RAM disk, or
+/// network drive.
 ///
-/// ```c
-/// DWORD GetEnvironmentVariableW(
-///   LPCTSTR lpName,
-///   LPTSTR  lpBuffer,
-///   DWORD   nSize
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getdrivetypew>.
+///
 /// {@category kernel32}
-int GetEnvironmentVariable(
-  Pointer<Utf16> lpName,
-  Pointer<Utf16> lpBuffer,
-  int nSize,
-) => _GetEnvironmentVariable(lpName, lpBuffer, nSize);
+@pragma('vm:prefer-inline')
+int GetDriveType(PCWSTR? lpRootPathName) =>
+    _GetDriveType(lpRootPathName ?? nullptr);
 
-final _GetEnvironmentVariable = _kernel32
-    .lookupFunction<
-      Uint32 Function(
-        Pointer<Utf16> lpName,
-        Pointer<Utf16> lpBuffer,
-        Uint32 nSize,
-      ),
-      int Function(Pointer<Utf16> lpName, Pointer<Utf16> lpBuffer, int nSize)
-    >('GetEnvironmentVariableW');
+@Native<Uint32 Function(PCWSTR)>(symbol: 'GetDriveTypeW')
+external int _GetDriveType(PCWSTR lpRootPathName);
+
+/// Retrieves the contents of the specified variable from the environment block
+/// of the calling process.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/processenv/nf-processenv-getenvironmentvariablew>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+int GetEnvironmentVariable(PCWSTR? lpName, PWSTR? lpBuffer, int nSize) =>
+    GetEnvironmentVariableW_Wrapper(
+      lpName ?? nullptr,
+      lpBuffer ?? nullptr,
+      nSize,
+    );
 
 /// Retrieves the termination status of the specified process.
 ///
-/// ```c
-/// BOOL GetExitCodeProcess(
-///   HANDLE  hProcess,
-///   LPDWORD lpExitCode);
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getexitcodeprocess>.
+///
 /// {@category kernel32}
-int GetExitCodeProcess(int hProcess, Pointer<Uint32> lpExitCode) =>
-    _GetExitCodeProcess(hProcess, lpExitCode);
-
-final _GetExitCodeProcess = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hProcess, Pointer<Uint32> lpExitCode),
-      int Function(int hProcess, Pointer<Uint32> lpExitCode)
-    >('GetExitCodeProcess');
+@pragma('vm:prefer-inline')
+bool GetExitCodeProcess(int hProcess, Pointer<Uint32> lpExitCode) =>
+    GetExitCodeProcess_Wrapper(hProcess, lpExitCode) != FALSE;
 
 /// Retrieves file system attributes for a specified file or directory.
 ///
-/// ```c
-/// DWORD GetFileAttributesW(
-///   LPCWSTR lpFileName
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getfileattributesw>.
+///
 /// {@category kernel32}
-int GetFileAttributes(Pointer<Utf16> lpFileName) =>
-    _GetFileAttributes(lpFileName);
-
-final _GetFileAttributes = _kernel32
-    .lookupFunction<
-      Uint32 Function(Pointer<Utf16> lpFileName),
-      int Function(Pointer<Utf16> lpFileName)
-    >('GetFileAttributesW');
+@pragma('vm:prefer-inline')
+int GetFileAttributes(PCWSTR lpFileName) =>
+    GetFileAttributesW_Wrapper(lpFileName);
 
 /// Retrieves attributes for a specified file or directory.
 ///
-/// ```c
-/// BOOL GetFileAttributesExW(
-///   LPCWSTR                lpFileName,
-///   GET_FILEEX_INFO_LEVELS fInfoLevelId,
-///   LPVOID                 lpFileInformation
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getfileattributesexw>.
+///
 /// {@category kernel32}
-int GetFileAttributesEx(
-  Pointer<Utf16> lpFileName,
-  int fInfoLevelId,
+@pragma('vm:prefer-inline')
+bool GetFileAttributesEx(
+  PCWSTR lpFileName,
+  GET_FILEEX_INFO_LEVELS fInfoLevelId,
   Pointer lpFileInformation,
-) => _GetFileAttributesEx(lpFileName, fInfoLevelId, lpFileInformation);
-
-final _GetFileAttributesEx = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Utf16> lpFileName,
-        Int32 fInfoLevelId,
-        Pointer lpFileInformation,
-      ),
-      int Function(
-        Pointer<Utf16> lpFileName,
-        int fInfoLevelId,
-        Pointer lpFileInformation,
-      )
-    >('GetFileAttributesExW');
+) =>
+    GetFileAttributesExW_Wrapper(lpFileName, fInfoLevelId, lpFileInformation) !=
+    FALSE;
 
 /// Retrieves file information for the specified file.
 ///
-/// ```c
-/// BOOL GetFileInformationByHandle(
-///   HANDLE                       hFile,
-///   LPBY_HANDLE_FILE_INFORMATION lpFileInformation
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getfileinformationbyhandle>.
+///
 /// {@category kernel32}
-int GetFileInformationByHandle(
+@pragma('vm:prefer-inline')
+bool GetFileInformationByHandle(
   int hFile,
   Pointer<BY_HANDLE_FILE_INFORMATION> lpFileInformation,
-) => _GetFileInformationByHandle(hFile, lpFileInformation);
+) => GetFileInformationByHandle_Wrapper(hFile, lpFileInformation) != FALSE;
 
-final _GetFileInformationByHandle = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hFile,
-        Pointer<BY_HANDLE_FILE_INFORMATION> lpFileInformation,
-      ),
-      int Function(
-        int hFile,
-        Pointer<BY_HANDLE_FILE_INFORMATION> lpFileInformation,
-      )
-    >('GetFileInformationByHandle');
-
-/// Retrieves the size of the specified file, in bytes. It is recommended
-/// that you use GetFileSizeEx.
+/// Retrieves the size of the specified file, in bytes.
 ///
-/// ```c
-/// DWORD GetFileSize(
-///   HANDLE  hFile,
-///   LPDWORD lpFileSizeHigh
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getfilesize>.
+///
 /// {@category kernel32}
-int GetFileSize(int hFile, Pointer<Uint32> lpFileSizeHigh) =>
-    _GetFileSize(hFile, lpFileSizeHigh);
-
-final _GetFileSize = _kernel32
-    .lookupFunction<
-      Uint32 Function(IntPtr hFile, Pointer<Uint32> lpFileSizeHigh),
-      int Function(int hFile, Pointer<Uint32> lpFileSizeHigh)
-    >('GetFileSize');
+@pragma('vm:prefer-inline')
+int GetFileSize(int hFile, Pointer<Uint32>? lpFileSizeHigh) =>
+    GetFileSize_Wrapper(hFile, lpFileSizeHigh ?? nullptr);
 
 /// Retrieves the size of the specified file.
 ///
-/// ```c
-/// BOOL GetFileSizeEx(
-///   HANDLE         hFile,
-///   PLARGE_INTEGER lpFileSize
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getfilesizeex>.
+///
 /// {@category kernel32}
-int GetFileSizeEx(int hFile, Pointer<Int64> lpFileSize) =>
-    _GetFileSizeEx(hFile, lpFileSize);
-
-final _GetFileSizeEx = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hFile, Pointer<Int64> lpFileSize),
-      int Function(int hFile, Pointer<Int64> lpFileSize)
-    >('GetFileSizeEx');
+@pragma('vm:prefer-inline')
+bool GetFileSizeEx(int hFile, Pointer<Int64> lpFileSize) =>
+    GetFileSizeEx_Wrapper(hFile, lpFileSize) != FALSE;
 
 /// Retrieves the file type of the specified file.
 ///
-/// ```c
-/// DWORD GetFileType(
-///   HANDLE hFile
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getfiletype>.
+///
 /// {@category kernel32}
-int GetFileType(int hFile) => _GetFileType(hFile);
-
-final _GetFileType = _kernel32
-    .lookupFunction<Uint32 Function(IntPtr hFile), int Function(int hFile)>(
-      'GetFileType',
-    );
+@pragma('vm:prefer-inline')
+FILE_TYPE GetFileType(int hFile) => FILE_TYPE(GetFileType_Wrapper(hFile));
 
 /// Retrieves the final path for the specified file.
 ///
-/// ```c
-/// DWORD GetFinalPathNameByHandleW(
-///   HANDLE hFile,
-///   LPWSTR lpszFilePath,
-///   DWORD  cchFilePath,
-///   DWORD  dwFlags
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getfinalpathnamebyhandlew>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 int GetFinalPathNameByHandle(
   int hFile,
-  Pointer<Utf16> lpszFilePath,
+  PWSTR lpszFilePath,
   int cchFilePath,
-  int dwFlags,
-) => _GetFinalPathNameByHandle(hFile, lpszFilePath, cchFilePath, dwFlags);
-
-final _GetFinalPathNameByHandle = _kernel32
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hFile,
-        Pointer<Utf16> lpszFilePath,
-        Uint32 cchFilePath,
-        Uint32 dwFlags,
-      ),
-      int Function(
-        int hFile,
-        Pointer<Utf16> lpszFilePath,
-        int cchFilePath,
-        int dwFlags,
-      )
-    >('GetFinalPathNameByHandleW');
+  GETFINALPATHNAMEBYHANDLE_FLAGS dwFlags,
+) => GetFinalPathNameByHandleW_Wrapper(
+  hFile,
+  lpszFilePath,
+  cchFilePath,
+  dwFlags,
+);
 
 /// Retrieves the full path and file name of the specified file.
 ///
-/// ```c
-/// DWORD GetFullPathNameW(
-///   LPCWSTR lpFileName,
-///   DWORD   nBufferLength,
-///   LPWSTR  lpBuffer,
-///   LPWSTR  *lpFilePart
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getfullpathnamew>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 int GetFullPathName(
-  Pointer<Utf16> lpFileName,
+  PCWSTR lpFileName,
   int nBufferLength,
-  Pointer<Utf16> lpBuffer,
-  Pointer<Pointer<Utf16>> lpFilePart,
-) => _GetFullPathName(lpFileName, nBufferLength, lpBuffer, lpFilePart);
-
-final _GetFullPathName = _kernel32
-    .lookupFunction<
-      Uint32 Function(
-        Pointer<Utf16> lpFileName,
-        Uint32 nBufferLength,
-        Pointer<Utf16> lpBuffer,
-        Pointer<Pointer<Utf16>> lpFilePart,
-      ),
-      int Function(
-        Pointer<Utf16> lpFileName,
-        int nBufferLength,
-        Pointer<Utf16> lpBuffer,
-        Pointer<Pointer<Utf16>> lpFilePart,
-      )
-    >('GetFullPathNameW');
+  PWSTR? lpBuffer,
+  Pointer<PWSTR>? lpFilePart,
+) => GetFullPathNameW_Wrapper(
+  lpFileName,
+  nBufferLength,
+  lpBuffer ?? nullptr,
+  lpFilePart ?? nullptr,
+);
 
 /// Retrieves certain properties of an object handle.
 ///
-/// ```c
-/// BOOL GetHandleInformation(
-///   HANDLE  hObject,
-///   LPDWORD lpdwFlags
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/handleapi/nf-handleapi-gethandleinformation>.
+///
 /// {@category kernel32}
-int GetHandleInformation(int hObject, Pointer<Uint32> lpdwFlags) =>
-    _GetHandleInformation(hObject, lpdwFlags);
-
-final _GetHandleInformation = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hObject, Pointer<Uint32> lpdwFlags),
-      int Function(int hObject, Pointer<Uint32> lpdwFlags)
-    >('GetHandleInformation');
+@pragma('vm:prefer-inline')
+bool GetHandleInformation(int hObject, Pointer<Uint32> lpdwFlags) =>
+    GetHandleInformation_Wrapper(hObject, lpdwFlags) != FALSE;
 
 /// Retrieves the size of the largest possible console window, based on the
 /// current font and the size of the display.
 ///
-/// ```c
-/// COORD GetLargestConsoleWindowSize(
-///   _In_ HANDLE hConsoleOutput
-/// );
-/// ```
-/// {@category kernel32}
-COORD GetLargestConsoleWindowSize(int hConsoleOutput) =>
-    _GetLargestConsoleWindowSize(hConsoleOutput);
-
-final _GetLargestConsoleWindowSize = _kernel32
-    .lookupFunction<
-      COORD Function(IntPtr hConsoleOutput),
-      COORD Function(int hConsoleOutput)
-    >('GetLargestConsoleWindowSize');
-
-/// Retrieves the calling thread's last-error code value. The last-error
-/// code is maintained on a per-thread basis. Multiple threads do not
-/// overwrite each other's last-error code.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/console/getlargestconsolewindowsize>.
 ///
-/// ```c
-/// DWORD GetLastError();
-/// ```
 /// {@category kernel32}
-int GetLastError() => _GetLastError();
-
-final _GetLastError = _kernel32
-    .lookupFunction<Uint32 Function(), int Function()>('GetLastError');
+@pragma('vm:prefer-inline')
+COORD GetLargestConsoleWindowSize(int hConsoleOutput) =>
+    GetLargestConsoleWindowSize_Wrapper(hConsoleOutput);
 
 /// Retrieves information about a locale specified by name.
 ///
-/// ```c
-/// int GetLocaleInfoEx(
-///   LPCWSTR lpLocaleName,
-///   LCTYPE  LCType,
-///   LPWSTR  lpLCData,
-///   int     cchData
-/// );
-/// ```
+/// **Note:** The application should call this function in preference to
+/// GetLocaleInfo if designed to run only on Windows Vista and later. **Note:**
+/// This function can retrieve data that changes between releases, for example,
+/// due to a custom locale. If your application must persist or transmit data,
+/// see Using Persistent Locale Data.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getlocaleinfoex>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 int GetLocaleInfoEx(
-  Pointer<Utf16> lpLocaleName,
-  int LCType,
-  Pointer<Utf16> lpLCData,
+  PCWSTR? lpLocaleName,
+  int lCType,
+  PWSTR? lpLCData,
   int cchData,
-) => _GetLocaleInfoEx(lpLocaleName, LCType, lpLCData, cchData);
-
-final _GetLocaleInfoEx = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Utf16> lpLocaleName,
-        Uint32 LCType,
-        Pointer<Utf16> lpLCData,
-        Int32 cchData,
-      ),
-      int Function(
-        Pointer<Utf16> lpLocaleName,
-        int LCType,
-        Pointer<Utf16> lpLCData,
-        int cchData,
-      )
-    >('GetLocaleInfoEx');
+) => GetLocaleInfoEx_Wrapper(
+  lpLocaleName ?? nullptr,
+  lCType,
+  lpLCData ?? nullptr,
+  cchData,
+);
 
 /// Retrieves the current local date and time.
 ///
-/// ```c
-/// void GetLocalTime(
-///   LPSYSTEMTIME lpSystemTime
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-getlocaltime>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 void GetLocalTime(Pointer<SYSTEMTIME> lpSystemTime) =>
     _GetLocalTime(lpSystemTime);
 
-final _GetLocalTime = _kernel32
-    .lookupFunction<
-      Void Function(Pointer<SYSTEMTIME> lpSystemTime),
-      void Function(Pointer<SYSTEMTIME> lpSystemTime)
-    >('GetLocalTime');
+@Native<Void Function(Pointer<SYSTEMTIME>)>(symbol: 'GetLocalTime')
+external void _GetLocalTime(Pointer<SYSTEMTIME> lpSystemTime);
 
 /// Retrieves a bitmask representing the currently available disk drives.
 ///
-/// ```c
-/// DWORD GetLogicalDrives();
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getlogicaldrives>.
+///
 /// {@category kernel32}
-int GetLogicalDrives() => _GetLogicalDrives();
-
-final _GetLogicalDrives = _kernel32
-    .lookupFunction<Uint32 Function(), int Function()>('GetLogicalDrives');
+@pragma('vm:prefer-inline')
+int GetLogicalDrives() => GetLogicalDrives_Wrapper();
 
 /// Fills a buffer with strings that specify valid drives in the system.
 ///
-/// ```c
-/// DWORD GetLogicalDriveStringsW(
-///   DWORD  nBufferLength,
-///   LPWSTR lpBuffer
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getlogicaldrivestringsw>.
+///
 /// {@category kernel32}
-int GetLogicalDriveStrings(int nBufferLength, Pointer<Utf16> lpBuffer) =>
-    _GetLogicalDriveStrings(nBufferLength, lpBuffer);
-
-final _GetLogicalDriveStrings = _kernel32
-    .lookupFunction<
-      Uint32 Function(Uint32 nBufferLength, Pointer<Utf16> lpBuffer),
-      int Function(int nBufferLength, Pointer<Utf16> lpBuffer)
-    >('GetLogicalDriveStringsW');
+@pragma('vm:prefer-inline')
+int GetLogicalDriveStrings(int nBufferLength, PWSTR? lpBuffer) =>
+    GetLogicalDriveStringsW_Wrapper(nBufferLength, lpBuffer ?? nullptr);
 
 /// Retrieves information about logical processors and related hardware.
 ///
-/// ```c
-/// BOOL GetLogicalProcessorInformation(
-///   PSYSTEM_LOGICAL_PROCESSOR_INFORMATION Buffer,
-///   PDWORD ReturnedLength
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-getlogicalprocessorinformation>.
+///
 /// {@category kernel32}
-int GetLogicalProcessorInformation(
-  Pointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION> Buffer,
-  Pointer<Uint32> ReturnedLength,
-) => _GetLogicalProcessorInformation(Buffer, ReturnedLength);
-
-final _GetLogicalProcessorInformation = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION> Buffer,
-        Pointer<Uint32> ReturnedLength,
-      ),
-      int Function(
-        Pointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION> Buffer,
-        Pointer<Uint32> ReturnedLength,
-      )
-    >('GetLogicalProcessorInformation');
+@pragma('vm:prefer-inline')
+bool GetLogicalProcessorInformation(
+  Pointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION>? buffer,
+  Pointer<Uint32> returnedLength,
+) =>
+    GetLogicalProcessorInformation_Wrapper(buffer ?? nullptr, returnedLength) !=
+    FALSE;
 
 /// Converts the specified path to its long form.
 ///
-/// ```c
-/// DWORD GetLongPathNameW(
-///   [in]  LPCWSTR lpszShortPath,
-///   [out] LPWSTR  lpszLongPath,
-///   [in]  DWORD   cchBuffer
-/// );
-/// ```
-/// {@category kernel32}
-int GetLongPathName(
-  Pointer<Utf16> lpszShortPath,
-  Pointer<Utf16> lpszLongPath,
-  int cchBuffer,
-) => _GetLongPathName(lpszShortPath, lpszLongPath, cchBuffer);
-
-final _GetLongPathName = _kernel32
-    .lookupFunction<
-      Uint32 Function(
-        Pointer<Utf16> lpszShortPath,
-        Pointer<Utf16> lpszLongPath,
-        Uint32 cchBuffer,
-      ),
-      int Function(
-        Pointer<Utf16> lpszShortPath,
-        Pointer<Utf16> lpszLongPath,
-        int cchBuffer,
-      )
-    >('GetLongPathNameW');
-
-/// Queries if the specified architecture is supported on the current
-/// system, either natively or by any form of compatibility or emulation
-/// layer.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getlongpathnamew>.
 ///
-/// ```c
-/// HRESULT GetMachineTypeAttributes(
-///   USHORT Machine,
-///   MACHINE_ATTRIBUTES *MachineTypeAttributes
-/// );
-/// ```
 /// {@category kernel32}
-int GetMachineTypeAttributes(
-  int Machine,
-  Pointer<Int32> MachineTypeAttributes,
-) => _GetMachineTypeAttributes(Machine, MachineTypeAttributes);
+@pragma('vm:prefer-inline')
+int GetLongPathName(PCWSTR lpszShortPath, PWSTR? lpszLongPath, int cchBuffer) =>
+    GetLongPathNameW_Wrapper(lpszShortPath, lpszLongPath ?? nullptr, cchBuffer);
 
-final _GetMachineTypeAttributes = _kernel32
-    .lookupFunction<
-      Int32 Function(Uint16 Machine, Pointer<Int32> MachineTypeAttributes),
-      int Function(int Machine, Pointer<Int32> MachineTypeAttributes)
-    >('GetMachineTypeAttributes');
-
-/// Checks whether the specified address is within a memory-mapped file in
-/// the address space of the specified process. If so, the function returns
-/// the name of the memory-mapped file.
+/// Queries if the specified architecture is supported on the current system,
+/// either natively or by any form of compatibility or emulation layer.
 ///
-/// ```c
-/// DWORD K32GetMappedFileNameW(
-///   [in]  HANDLE hProcess,
-///   [in]  LPVOID lpv,
-///   [out] LPWSTR lpFilename,
-///   [in]  DWORD  nSize
-/// );
-/// ```
-/// {@category kernel32}
-int GetMappedFileName(
-  int hProcess,
-  Pointer lpv,
-  Pointer<Utf16> lpFilename,
-  int nSize,
-) => _K32GetMappedFileName(hProcess, lpv, lpFilename, nSize);
-
-final _K32GetMappedFileName = _kernel32
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hProcess,
-        Pointer lpv,
-        Pointer<Utf16> lpFilename,
-        Uint32 nSize,
-      ),
-      int Function(
-        int hProcess,
-        Pointer lpv,
-        Pointer<Utf16> lpFilename,
-        int nSize,
-      )
-    >('K32GetMappedFileNameW');
-
-/// Returns the maximum number of logical processors that a processor group
-/// or the system can have.
+/// Throws a [WindowsException] on failure.
 ///
-/// ```c
-/// DWORD GetMaximumProcessorCount(
-///   WORD GroupNumber
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getmachinetypeattributes>.
+///
 /// {@category kernel32}
-int GetMaximumProcessorCount(int GroupNumber) =>
-    _GetMaximumProcessorCount(GroupNumber);
+MACHINE_ATTRIBUTES GetMachineTypeAttributes(int machine) {
+  final machineTypeAttributes = loggingCalloc<Int32>();
+  final hr$ = HRESULT(
+    _GetMachineTypeAttributes(machine, machineTypeAttributes),
+  );
+  if (hr$.isError) {
+    free(machineTypeAttributes);
+    throw WindowsException(hr$);
+  }
+  final result$ = machineTypeAttributes.value;
+  free(machineTypeAttributes);
+  return MACHINE_ATTRIBUTES(result$);
+}
 
-final _GetMaximumProcessorCount = _kernel32
-    .lookupFunction<
-      Uint32 Function(Uint16 GroupNumber),
-      int Function(int GroupNumber)
-    >('GetMaximumProcessorCount');
+@Native<Int32 Function(Uint16, Pointer<Int32>)>(
+  symbol: 'GetMachineTypeAttributes',
+)
+external int _GetMachineTypeAttributes(
+  int machine,
+  Pointer<Int32> machineTypeAttributes,
+);
+
+/// Returns the maximum number of logical processors that a processor group or
+/// the system can have.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getmaximumprocessorcount>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+int GetMaximumProcessorCount(int groupNumber) =>
+    GetMaximumProcessorCount_Wrapper(groupNumber);
 
 /// Returns the maximum number of processor groups that the system can have.
 ///
-/// ```c
-/// WORD GetMaximumProcessorGroupCount();
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getmaximumprocessorgroupcount>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 int GetMaximumProcessorGroupCount() => _GetMaximumProcessorGroupCount();
 
-final _GetMaximumProcessorGroupCount = _kernel32
-    .lookupFunction<Uint16 Function(), int Function()>(
-      'GetMaximumProcessorGroupCount',
-    );
+@Native<Uint16 Function()>(symbol: 'GetMaximumProcessorGroupCount')
+external int _GetMaximumProcessorGroupCount();
 
-/// Retrieves the base name of the specified module.
-///
-/// ```c
-/// DWORD K32GetModuleBaseNameW(
-///   HANDLE  hProcess,
-///   HMODULE hModule,
-///   LPWSTR  lpBaseName,
-///   DWORD   nSize
-/// );
-/// ```
-/// {@category kernel32}
-int GetModuleBaseName(
-  int hProcess,
-  int hModule,
-  Pointer<Utf16> lpBaseName,
-  int nSize,
-) => _K32GetModuleBaseName(hProcess, hModule, lpBaseName, nSize);
-
-final _K32GetModuleBaseName = _kernel32
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hProcess,
-        IntPtr hModule,
-        Pointer<Utf16> lpBaseName,
-        Uint32 nSize,
-      ),
-      int Function(
-        int hProcess,
-        int hModule,
-        Pointer<Utf16> lpBaseName,
-        int nSize,
-      )
-    >('K32GetModuleBaseNameW');
-
-/// Retrieves the fully qualified path for the file that contains the
-/// specified module. The module must have been loaded by the current
-/// process.
-///
-/// ```c
-/// DWORD GetModuleFileNameW(
-///   HMODULE hModule,
-///   LPWSTR  lpFilename,
-///   DWORD   nSize
-/// );
-/// ```
-/// {@category kernel32}
-int GetModuleFileName(int hModule, Pointer<Utf16> lpFilename, int nSize) =>
-    _GetModuleFileName(hModule, lpFilename, nSize);
-
-final _GetModuleFileName = _kernel32
-    .lookupFunction<
-      Uint32 Function(IntPtr hModule, Pointer<Utf16> lpFilename, Uint32 nSize),
-      int Function(int hModule, Pointer<Utf16> lpFilename, int nSize)
-    >('GetModuleFileNameW');
-
-/// Retrieves the fully qualified path for the file containing the specified
+/// Retrieves the fully qualified path for the file that contains the specified
 /// module.
 ///
-/// ```c
-/// DWORD K32GetModuleFileNameExW(
-///   HANDLE  hProcess,
-///   HMODULE hModule,
-///   LPWSTR  lpFilename,
-///   DWORD   nSize
-/// );
-/// ```
-/// {@category kernel32}
-int GetModuleFileNameEx(
-  int hProcess,
-  int hModule,
-  Pointer<Utf16> lpFilename,
-  int nSize,
-) => _K32GetModuleFileNameEx(hProcess, hModule, lpFilename, nSize);
-
-final _K32GetModuleFileNameEx = _kernel32
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hProcess,
-        IntPtr hModule,
-        Pointer<Utf16> lpFilename,
-        Uint32 nSize,
-      ),
-      int Function(
-        int hProcess,
-        int hModule,
-        Pointer<Utf16> lpFilename,
-        int nSize,
-      )
-    >('K32GetModuleFileNameExW');
-
-/// Retrieves a module handle for the specified module. The module must have
-/// been loaded by the calling process.
+/// The module must have been loaded by the current process.
 ///
-/// ```c
-/// HMODULE GetModuleHandleW(
-///   LPCWSTR lpModuleName
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-getmodulefilenamew>.
+///
 /// {@category kernel32}
-int GetModuleHandle(Pointer<Utf16> lpModuleName) =>
-    _GetModuleHandle(lpModuleName);
+@pragma('vm:prefer-inline')
+int GetModuleFileName(int? hModule, PWSTR lpFilename, int nSize) =>
+    GetModuleFileNameW_Wrapper(hModule ?? NULL, lpFilename, nSize);
 
-final _GetModuleHandle = _kernel32
-    .lookupFunction<
-      IntPtr Function(Pointer<Utf16> lpModuleName),
-      int Function(Pointer<Utf16> lpModuleName)
-    >('GetModuleHandleW');
+/// Retrieves a module handle for the specified module.
+///
+/// The module must have been loaded by the calling process.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-getmodulehandlew>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+int GetModuleHandle(PCWSTR? lpModuleName) =>
+    GetModuleHandleW_Wrapper(lpModuleName ?? nullptr);
 
 /// Retrieves a module handle for the specified module and increments the
-/// module's reference count unless
-/// GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT is specified. The module
-/// must have been loaded by the calling process.
+/// module's reference count unless GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT
+/// is specified.
 ///
-/// ```c
-/// BOOL GetModuleHandleExW(
-///   [in]           DWORD   dwFlags,
-///   [in, optional] LPCWSTR lpModuleName,
-///   [out]          HMODULE *phModule
-/// );
-/// ```
+/// The module must have been loaded by the calling process.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-getmodulehandleexw>.
+///
 /// {@category kernel32}
-int GetModuleHandleEx(
+@pragma('vm:prefer-inline')
+bool GetModuleHandleEx(
   int dwFlags,
-  Pointer<Utf16> lpModuleName,
-  Pointer<IntPtr> phModule,
-) => _GetModuleHandleEx(dwFlags, lpModuleName, phModule);
-
-final _GetModuleHandleEx = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Uint32 dwFlags,
-        Pointer<Utf16> lpModuleName,
-        Pointer<IntPtr> phModule,
-      ),
-      int Function(
-        int dwFlags,
-        Pointer<Utf16> lpModuleName,
-        Pointer<IntPtr> phModule,
-      )
-    >('GetModuleHandleExW');
-
-/// Retrieves information about the specified module in the MODULEINFO
-/// structure.
-///
-/// ```c
-/// BOOL K32GetModuleInformation(
-///   [in]  HANDLE       hProcess,
-///   [in]  HMODULE      hModule,
-///   [out] LPMODULEINFO lpmodinfo,
-///   [in]  DWORD        cb
-/// );
-/// ```
-/// {@category kernel32}
-int GetModuleInformation(
-  int hProcess,
-  int hModule,
-  Pointer<MODULEINFO> lpmodinfo,
-  int cb,
-) => _K32GetModuleInformation(hProcess, hModule, lpmodinfo, cb);
-
-final _K32GetModuleInformation = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hProcess,
-        IntPtr hModule,
-        Pointer<MODULEINFO> lpmodinfo,
-        Uint32 cb,
-      ),
-      int Function(
-        int hProcess,
-        int hModule,
-        Pointer<MODULEINFO> lpmodinfo,
-        int cb,
-      )
-    >('K32GetModuleInformation');
+  PCWSTR? lpModuleName,
+  Pointer<HMODULE> phModule,
+) =>
+    GetModuleHandleExW_Wrapper(dwFlags, lpModuleName ?? nullptr, phModule) !=
+    FALSE;
 
 /// Retrieves the client computer name for the specified named pipe.
 ///
-/// ```c
-/// BOOL GetNamedPipeClientComputerNameW(
-///   HANDLE Pipe,
-///   LPWSTR ClientComputerName,
-///   ULONG  ClientComputerNameLength
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/namedpipeapi/nf-namedpipeapi-getnamedpipeclientcomputernamew>.
+///
 /// {@category kernel32}
-int GetNamedPipeClientComputerName(
-  int Pipe,
-  Pointer<Utf16> ClientComputerName,
-  int ClientComputerNameLength,
-) => _GetNamedPipeClientComputerName(
-  Pipe,
-  ClientComputerName,
-  ClientComputerNameLength,
+@pragma('vm:prefer-inline')
+bool GetNamedPipeClientComputerName(
+  int pipe,
+  PWSTR clientComputerName,
+  int clientComputerNameLength,
+) =>
+    _GetNamedPipeClientComputerName(
+      pipe,
+      clientComputerName,
+      clientComputerNameLength,
+    ) !=
+    FALSE;
+
+@Native<BOOL Function(HANDLE, PWSTR, Uint32)>(
+  symbol: 'GetNamedPipeClientComputerNameW',
+)
+external int _GetNamedPipeClientComputerName(
+  int pipe,
+  PWSTR clientComputerName,
+  int clientComputerNameLength,
 );
 
-final _GetNamedPipeClientComputerName = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr Pipe,
-        Pointer<Utf16> ClientComputerName,
-        Uint32 ClientComputerNameLength,
-      ),
-      int Function(
-        int Pipe,
-        Pointer<Utf16> ClientComputerName,
-        int ClientComputerNameLength,
-      )
-    >('GetNamedPipeClientComputerNameW');
-
 /// Retrieves the client process identifier for the specified named pipe.
 ///
-/// ```c
-/// BOOL GetNamedPipeClientProcessId(
-///   HANDLE Pipe,
-///   PULONG ClientProcessId
-/// );
-/// ```
-/// {@category kernel32}
-int GetNamedPipeClientProcessId(int Pipe, Pointer<Uint32> ClientProcessId) =>
-    _GetNamedPipeClientProcessId(Pipe, ClientProcessId);
-
-final _GetNamedPipeClientProcessId = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr Pipe, Pointer<Uint32> ClientProcessId),
-      int Function(int Pipe, Pointer<Uint32> ClientProcessId)
-    >('GetNamedPipeClientProcessId');
-
-/// Retrieves the client process identifier for the specified named pipe.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getnamedpipeclientprocessid>.
 ///
-/// ```c
-/// BOOL GetNamedPipeClientSessionId(
-///   HANDLE Pipe,
-///   PULONG ClientSessionId
-/// );
-/// ```
 /// {@category kernel32}
-int GetNamedPipeClientSessionId(int Pipe, Pointer<Uint32> ClientSessionId) =>
-    _GetNamedPipeClientSessionId(Pipe, ClientSessionId);
+@pragma('vm:prefer-inline')
+bool GetNamedPipeClientProcessId(int pipe, Pointer<Uint32> clientProcessId) =>
+    GetNamedPipeClientProcessId_Wrapper(pipe, clientProcessId) != FALSE;
 
-final _GetNamedPipeClientSessionId = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr Pipe, Pointer<Uint32> ClientSessionId),
-      int Function(int Pipe, Pointer<Uint32> ClientSessionId)
-    >('GetNamedPipeClientSessionId');
-
-/// Retrieves information about a specified named pipe. The information
-/// returned can vary during the lifetime of an instance of the named pipe.
+/// Retrieves the client session identifier for the specified named pipe.
 ///
-/// ```c
-/// BOOL GetNamedPipeHandleStateW(
-///   HANDLE  hNamedPipe,
-///   LPDWORD lpState,
-///   LPDWORD lpCurInstances,
-///   LPDWORD lpMaxCollectionCount,
-///   LPDWORD lpCollectDataTimeout,
-///   LPWSTR  lpUserName,
-///   DWORD   nMaxUserNameSize
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getnamedpipeclientsessionid>.
+///
 /// {@category kernel32}
-int GetNamedPipeHandleState(
+@pragma('vm:prefer-inline')
+bool GetNamedPipeClientSessionId(int pipe, Pointer<Uint32> clientSessionId) =>
+    GetNamedPipeClientSessionId_Wrapper(pipe, clientSessionId) != FALSE;
+
+/// Retrieves information about a specified named pipe.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/namedpipeapi/nf-namedpipeapi-getnamedpipehandlestatew>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool GetNamedPipeHandleState(
+  int hNamedPipe,
+  Pointer<Uint32>? lpState,
+  Pointer<Uint32>? lpCurInstances,
+  Pointer<Uint32>? lpMaxCollectionCount,
+  Pointer<Uint32>? lpCollectDataTimeout,
+  PWSTR? lpUserName,
+  int nMaxUserNameSize,
+) =>
+    _GetNamedPipeHandleState(
+      hNamedPipe,
+      lpState ?? nullptr,
+      lpCurInstances ?? nullptr,
+      lpMaxCollectionCount ?? nullptr,
+      lpCollectDataTimeout ?? nullptr,
+      lpUserName ?? nullptr,
+      nMaxUserNameSize,
+    ) !=
+    FALSE;
+
+@Native<
+  BOOL Function(
+    HANDLE,
+    Pointer<Uint32>,
+    Pointer<Uint32>,
+    Pointer<Uint32>,
+    Pointer<Uint32>,
+    PWSTR,
+    Uint32,
+  )
+>(symbol: 'GetNamedPipeHandleStateW')
+external int _GetNamedPipeHandleState(
   int hNamedPipe,
   Pointer<Uint32> lpState,
   Pointer<Uint32> lpCurInstances,
   Pointer<Uint32> lpMaxCollectionCount,
   Pointer<Uint32> lpCollectDataTimeout,
-  Pointer<Utf16> lpUserName,
+  PWSTR lpUserName,
   int nMaxUserNameSize,
-) => _GetNamedPipeHandleState(
-  hNamedPipe,
-  lpState,
-  lpCurInstances,
-  lpMaxCollectionCount,
-  lpCollectDataTimeout,
-  lpUserName,
-  nMaxUserNameSize,
 );
-
-final _GetNamedPipeHandleState = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hNamedPipe,
-        Pointer<Uint32> lpState,
-        Pointer<Uint32> lpCurInstances,
-        Pointer<Uint32> lpMaxCollectionCount,
-        Pointer<Uint32> lpCollectDataTimeout,
-        Pointer<Utf16> lpUserName,
-        Uint32 nMaxUserNameSize,
-      ),
-      int Function(
-        int hNamedPipe,
-        Pointer<Uint32> lpState,
-        Pointer<Uint32> lpCurInstances,
-        Pointer<Uint32> lpMaxCollectionCount,
-        Pointer<Uint32> lpCollectDataTimeout,
-        Pointer<Utf16> lpUserName,
-        int nMaxUserNameSize,
-      )
-    >('GetNamedPipeHandleStateW');
 
 /// Retrieves information about the specified named pipe.
 ///
-/// ```c
-/// BOOL GetNamedPipeInfo(
-///   HANDLE  hNamedPipe,
-///   LPDWORD lpFlags,
-///   LPDWORD lpOutBufferSize,
-///   LPDWORD lpInBufferSize,
-///   LPDWORD lpMaxInstances);
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/namedpipeapi/nf-namedpipeapi-getnamedpipeinfo>.
+///
 /// {@category kernel32}
-int GetNamedPipeInfo(
+@pragma('vm:prefer-inline')
+bool GetNamedPipeInfo(
   int hNamedPipe,
-  Pointer<Uint32> lpFlags,
-  Pointer<Uint32> lpOutBufferSize,
-  Pointer<Uint32> lpInBufferSize,
-  Pointer<Uint32> lpMaxInstances,
-) => _GetNamedPipeInfo(
-  hNamedPipe,
-  lpFlags,
-  lpOutBufferSize,
-  lpInBufferSize,
-  lpMaxInstances,
-);
-
-final _GetNamedPipeInfo = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hNamedPipe,
-        Pointer<Uint32> lpFlags,
-        Pointer<Uint32> lpOutBufferSize,
-        Pointer<Uint32> lpInBufferSize,
-        Pointer<Uint32> lpMaxInstances,
-      ),
-      int Function(
-        int hNamedPipe,
-        Pointer<Uint32> lpFlags,
-        Pointer<Uint32> lpOutBufferSize,
-        Pointer<Uint32> lpInBufferSize,
-        Pointer<Uint32> lpMaxInstances,
-      )
-    >('GetNamedPipeInfo');
+  Pointer<Uint32>? lpFlags,
+  Pointer<Uint32>? lpOutBufferSize,
+  Pointer<Uint32>? lpInBufferSize,
+  Pointer<Uint32>? lpMaxInstances,
+) =>
+    GetNamedPipeInfo_Wrapper(
+      hNamedPipe,
+      lpFlags ?? nullptr,
+      lpOutBufferSize ?? nullptr,
+      lpInBufferSize ?? nullptr,
+      lpMaxInstances ?? nullptr,
+    ) !=
+    FALSE;
 
 /// Retrieves information about the current system to an application running
-/// under WOW64. If the function is called from a 64-bit application, or on
-/// a 64-bit system that does not have an Intel64 or x64 processor (such as
-/// ARM64), it is equivalent to the GetSystemInfo function.
+/// under WOW64.
 ///
-/// ```c
-/// void GetNativeSystemInfo(
-///   LPSYSTEM_INFO lpSystemInfo
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-getnativesysteminfo>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 void GetNativeSystemInfo(Pointer<SYSTEM_INFO> lpSystemInfo) =>
     _GetNativeSystemInfo(lpSystemInfo);
 
-final _GetNativeSystemInfo = _kernel32
-    .lookupFunction<
-      Void Function(Pointer<SYSTEM_INFO> lpSystemInfo),
-      void Function(Pointer<SYSTEM_INFO> lpSystemInfo)
-    >('GetNativeSystemInfo');
+@Native<Void Function(Pointer<SYSTEM_INFO>)>(symbol: 'GetNativeSystemInfo')
+external void _GetNativeSystemInfo(Pointer<SYSTEM_INFO> lpSystemInfo);
 
-/// Retrieves the number of unread input records in the console's input
-/// buffer.
+/// Retrieves the number of unread input records in the console's input buffer.
 ///
-/// ```c
-/// BOOL GetNumberOfConsoleInputEvents(
-///   HANDLE hConsoleInput,
-///   LPDWORD lpcNumberOfEvents
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/console/getnumberofconsoleinputevents>.
+///
 /// {@category kernel32}
-int GetNumberOfConsoleInputEvents(
+@pragma('vm:prefer-inline')
+bool GetNumberOfConsoleInputEvents(
   int hConsoleInput,
   Pointer<Uint32> lpNumberOfEvents,
-) => _GetNumberOfConsoleInputEvents(hConsoleInput, lpNumberOfEvents);
-
-final _GetNumberOfConsoleInputEvents = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hConsoleInput, Pointer<Uint32> lpNumberOfEvents),
-      int Function(int hConsoleInput, Pointer<Uint32> lpNumberOfEvents)
-    >('GetNumberOfConsoleInputEvents');
+) =>
+    GetNumberOfConsoleInputEvents_Wrapper(hConsoleInput, lpNumberOfEvents) !=
+    FALSE;
 
 /// Retrieves the results of an overlapped operation on the specified file,
-/// named pipe, or communications device. To specify a timeout interval or
-/// wait on an alertable thread, use GetOverlappedResultEx.
+/// named pipe, or communications device.
 ///
-/// ```c
-/// BOOL GetOverlappedResult(
-///   HANDLE       hFile,
-///   LPOVERLAPPED lpOverlapped,
-///   LPDWORD      lpNumberOfBytesTransferred,
-///   BOOL         bWait
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/ioapiset/nf-ioapiset-getoverlappedresult>.
+///
 /// {@category kernel32}
-int GetOverlappedResult(
+@pragma('vm:prefer-inline')
+bool GetOverlappedResult(
   int hFile,
   Pointer<OVERLAPPED> lpOverlapped,
   Pointer<Uint32> lpNumberOfBytesTransferred,
-  int bWait,
-) => _GetOverlappedResult(
-  hFile,
-  lpOverlapped,
-  lpNumberOfBytesTransferred,
-  bWait,
-);
-
-final _GetOverlappedResult = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hFile,
-        Pointer<OVERLAPPED> lpOverlapped,
-        Pointer<Uint32> lpNumberOfBytesTransferred,
-        Int32 bWait,
-      ),
-      int Function(
-        int hFile,
-        Pointer<OVERLAPPED> lpOverlapped,
-        Pointer<Uint32> lpNumberOfBytesTransferred,
-        int bWait,
-      )
-    >('GetOverlappedResult');
+  bool bWait,
+) =>
+    GetOverlappedResult_Wrapper(
+      hFile,
+      lpOverlapped,
+      lpNumberOfBytesTransferred,
+      bWait ? TRUE : FALSE,
+    ) !=
+    FALSE;
 
 /// Retrieves the results of an overlapped operation on the specified file,
-/// named pipe, or communications device within the specified time-out
-/// interval. The calling thread can perform an alertable wait.
+/// named pipe, or communications device within the specified time-out interval.
 ///
-/// ```c
-/// BOOL GetOverlappedResultEx(
-///   HANDLE       hFile,
-///   LPOVERLAPPED lpOverlapped,
-///   LPDWORD      lpNumberOfBytesTransferred,
-///   DWORD        dwMilliseconds,
-///   BOOL         bAlertable
-/// );
-/// ```
+/// The calling thread can perform an alertable wait.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/ioapiset/nf-ioapiset-getoverlappedresultex>.
+///
 /// {@category kernel32}
-int GetOverlappedResultEx(
+@pragma('vm:prefer-inline')
+bool GetOverlappedResultEx(
   int hFile,
   Pointer<OVERLAPPED> lpOverlapped,
   Pointer<Uint32> lpNumberOfBytesTransferred,
   int dwMilliseconds,
-  int bAlertable,
-) => _GetOverlappedResultEx(
-  hFile,
-  lpOverlapped,
-  lpNumberOfBytesTransferred,
-  dwMilliseconds,
-  bAlertable,
-);
+  bool bAlertable,
+) =>
+    GetOverlappedResultEx_Wrapper(
+      hFile,
+      lpOverlapped,
+      lpNumberOfBytesTransferred,
+      dwMilliseconds,
+      bAlertable ? TRUE : FALSE,
+    ) !=
+    FALSE;
 
-final _GetOverlappedResultEx = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hFile,
-        Pointer<OVERLAPPED> lpOverlapped,
-        Pointer<Uint32> lpNumberOfBytesTransferred,
-        Uint32 dwMilliseconds,
-        Int32 bAlertable,
-      ),
-      int Function(
-        int hFile,
-        Pointer<OVERLAPPED> lpOverlapped,
-        Pointer<Uint32> lpNumberOfBytesTransferred,
-        int dwMilliseconds,
-        int bAlertable,
-      )
-    >('GetOverlappedResultEx');
-
-/// Retrieves the performance values contained in the
-/// PERFORMANCE_INFORMATION structure.
+/// Retrieves the amount of RAM that is physically installed on the computer.
 ///
-/// ```c
-/// BOOL K32GetPerformanceInfo(
-///   [out] PPERFORMANCE_INFORMATION pPerformanceInformation,
-///   [in]  DWORD                    cb
-/// );
-/// ```
-/// {@category kernel32}
-int GetPerformanceInfo(
-  Pointer<PERFORMANCE_INFORMATION> pPerformanceInformation,
-  int cb,
-) => _K32GetPerformanceInfo(pPerformanceInformation, cb);
-
-final _K32GetPerformanceInfo = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<PERFORMANCE_INFORMATION> pPerformanceInformation,
-        Uint32 cb,
-      ),
-      int Function(
-        Pointer<PERFORMANCE_INFORMATION> pPerformanceInformation,
-        int cb,
-      )
-    >('K32GetPerformanceInfo');
-
-/// Retrieves the amount of RAM that is physically installed on the
-/// computer.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-getphysicallyinstalledsystemmemory>.
 ///
-/// ```c
-/// BOOL GetPhysicallyInstalledSystemMemory(
-///   PULONGLONG TotalMemoryInKilobytes
-/// );
-/// ```
 /// {@category kernel32}
-int GetPhysicallyInstalledSystemMemory(
-  Pointer<Uint64> TotalMemoryInKilobytes,
-) => _GetPhysicallyInstalledSystemMemory(TotalMemoryInKilobytes);
+@pragma('vm:prefer-inline')
+bool GetPhysicallyInstalledSystemMemory(
+  Pointer<Uint64> totalMemoryInKilobytes,
+) =>
+    GetPhysicallyInstalledSystemMemory_Wrapper(totalMemoryInKilobytes) != FALSE;
 
-final _GetPhysicallyInstalledSystemMemory = _kernel32
-    .lookupFunction<
-      Int32 Function(Pointer<Uint64> TotalMemoryInKilobytes),
-      int Function(Pointer<Uint64> TotalMemoryInKilobytes)
-    >('GetPhysicallyInstalledSystemMemory');
-
-/// Retrieves the address of an exported function or variable from the
-/// specified dynamic-link library (DLL).
+/// Retrieves the address of an exported function or variable from the specified
+/// dynamic-link library (DLL).
 ///
-/// ```c
-/// FARPROC GetProcAddress(
-///   HMODULE hModule,
-///   LPCSTR  lpProcName
-/// );
-/// ```
-/// {@category kernel32}
-Pointer GetProcAddress(int hModule, Pointer<Utf8> lpProcName) =>
-    _GetProcAddress(hModule, lpProcName);
-
-final _GetProcAddress = _kernel32
-    .lookupFunction<
-      Pointer Function(IntPtr hModule, Pointer<Utf8> lpProcName),
-      Pointer Function(int hModule, Pointer<Utf8> lpProcName)
-    >('GetProcAddress');
-
-/// Retrieves a handle to the default heap of the calling process. This
-/// handle can then be used in subsequent calls to the heap functions.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-getprocaddress>.
 ///
-/// ```c
-/// HANDLE GetProcessHeap();
-/// ```
 /// {@category kernel32}
-int GetProcessHeap() => _GetProcessHeap();
+@pragma('vm:prefer-inline')
+FARPROC GetProcAddress(int hModule, PCSTR lpProcName) =>
+    GetProcAddress_Wrapper(hModule, lpProcName);
 
-final _GetProcessHeap = _kernel32
-    .lookupFunction<IntPtr Function(), int Function()>('GetProcessHeap');
+/// Retrieves a handle to the default heap of the calling process.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/heapapi/nf-heapapi-getprocessheap>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+int GetProcessHeap() => GetProcessHeap_Wrapper();
 
 /// Returns the number of active heaps and retrieves handles to all of the
 /// active heaps for the calling process.
 ///
-/// ```c
-/// DWORD GetProcessHeaps(
-///   DWORD   NumberOfHeaps,
-///   PHANDLE ProcessHeaps
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/heapapi/nf-heapapi-getprocessheaps>.
+///
 /// {@category kernel32}
-int GetProcessHeaps(int NumberOfHeaps, Pointer<IntPtr> ProcessHeaps) =>
-    _GetProcessHeaps(NumberOfHeaps, ProcessHeaps);
-
-final _GetProcessHeaps = _kernel32
-    .lookupFunction<
-      Uint32 Function(Uint32 NumberOfHeaps, Pointer<IntPtr> ProcessHeaps),
-      int Function(int NumberOfHeaps, Pointer<IntPtr> ProcessHeaps)
-    >('GetProcessHeaps');
+@pragma('vm:prefer-inline')
+int GetProcessHeaps(int numberOfHeaps, Pointer<HANDLE> processHeaps) =>
+    GetProcessHeaps_Wrapper(numberOfHeaps, processHeaps);
 
 /// Retrieves the process identifier of the specified process.
 ///
-/// ```c
-/// DWORD GetProcessId(
-///   HANDLE Process
-/// );
-/// ```
-/// {@category kernel32}
-int GetProcessId(int Process) => _GetProcessId(Process);
-
-final _GetProcessId = _kernel32
-    .lookupFunction<Uint32 Function(IntPtr Process), int Function(int Process)>(
-      'GetProcessId',
-    );
-
-/// Retrieves the name of the executable file for the specified process.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getprocessid>.
 ///
-/// ```c
-/// DWORD K32GetProcessImageFileNameW(
-///   [in]  HANDLE hProcess,
-///   [out] LPWSTR lpImageFileName,
-///   [in]  DWORD  nSize
-/// );
-/// ```
 /// {@category kernel32}
-int GetProcessImageFileName(
-  int hProcess,
-  Pointer<Utf16> lpImageFileName,
-  int nSize,
-) => _K32GetProcessImageFileName(hProcess, lpImageFileName, nSize);
-
-final _K32GetProcessImageFileName = _kernel32
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hProcess,
-        Pointer<Utf16> lpImageFileName,
-        Uint32 nSize,
-      ),
-      int Function(int hProcess, Pointer<Utf16> lpImageFileName, int nSize)
-    >('K32GetProcessImageFileNameW');
+@pragma('vm:prefer-inline')
+int GetProcessId(int process) => GetProcessId_Wrapper(process);
 
 /// Retrieves the shutdown parameters for the currently calling process.
 ///
-/// ```c
-/// BOOL GetProcessShutdownParameters(
-///   LPDWORD lpdwLevel,
-///   LPDWORD lpdwFlags
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getprocessshutdownparameters>.
+///
 /// {@category kernel32}
-int GetProcessShutdownParameters(
+@pragma('vm:prefer-inline')
+bool GetProcessShutdownParameters(
   Pointer<Uint32> lpdwLevel,
   Pointer<Uint32> lpdwFlags,
-) => _GetProcessShutdownParameters(lpdwLevel, lpdwFlags);
-
-final _GetProcessShutdownParameters = _kernel32
-    .lookupFunction<
-      Int32 Function(Pointer<Uint32> lpdwLevel, Pointer<Uint32> lpdwFlags),
-      int Function(Pointer<Uint32> lpdwLevel, Pointer<Uint32> lpdwFlags)
-    >('GetProcessShutdownParameters');
+) => GetProcessShutdownParameters_Wrapper(lpdwLevel, lpdwFlags) != FALSE;
 
 /// Retrieves timing information for the specified process.
 ///
-/// ```c
-/// BOOL GetProcessTimes(
-///   HANDLE hProcess,
-///   LPFILETIME lpCreationTime,
-///   LPFILETIME lpExitTime,
-///   LPFILETIME lpKernelTime,
-///   LPFILETIME lpUserTime
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getprocesstimes>.
+///
 /// {@category kernel32}
-int GetProcessTimes(
+@pragma('vm:prefer-inline')
+bool GetProcessTimes(
   int hProcess,
   Pointer<FILETIME> lpCreationTime,
   Pointer<FILETIME> lpExitTime,
   Pointer<FILETIME> lpKernelTime,
   Pointer<FILETIME> lpUserTime,
-) => _GetProcessTimes(
-  hProcess,
-  lpCreationTime,
-  lpExitTime,
-  lpKernelTime,
-  lpUserTime,
-);
-
-final _GetProcessTimes = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hProcess,
-        Pointer<FILETIME> lpCreationTime,
-        Pointer<FILETIME> lpExitTime,
-        Pointer<FILETIME> lpKernelTime,
-        Pointer<FILETIME> lpUserTime,
-      ),
-      int Function(
-        int hProcess,
-        Pointer<FILETIME> lpCreationTime,
-        Pointer<FILETIME> lpExitTime,
-        Pointer<FILETIME> lpKernelTime,
-        Pointer<FILETIME> lpUserTime,
-      )
-    >('GetProcessTimes');
+) =>
+    GetProcessTimes_Wrapper(
+      hProcess,
+      lpCreationTime,
+      lpExitTime,
+      lpKernelTime,
+      lpUserTime,
+    ) !=
+    FALSE;
 
 /// Retrieves the major and minor version numbers of the system on which the
 /// specified process expects to run.
 ///
-/// ```c
-/// DWORD GetProcessVersion(
-///   DWORD ProcessId
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getprocessversion>.
+///
 /// {@category kernel32}
-int GetProcessVersion(int ProcessId) => _GetProcessVersion(ProcessId);
-
-final _GetProcessVersion = _kernel32
-    .lookupFunction<
-      Uint32 Function(Uint32 ProcessId),
-      int Function(int ProcessId)
-    >('GetProcessVersion');
+@pragma('vm:prefer-inline')
+int GetProcessVersion(int processId) => GetProcessVersion_Wrapper(processId);
 
 /// Retrieves the minimum and maximum working set sizes of the specified
 /// process.
 ///
-/// ```c
-/// BOOL GetProcessWorkingSetSize(
-///   HANDLE  hProcess,
-///   PSIZE_T lpMinimumWorkingSetSize,
-///   PSIZE_T lpMaximumWorkingSetSize
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-getprocessworkingsetsize>.
+///
 /// {@category kernel32}
-int GetProcessWorkingSetSize(
+@pragma('vm:prefer-inline')
+bool GetProcessWorkingSetSize(
   int hProcess,
   Pointer<IntPtr> lpMinimumWorkingSetSize,
   Pointer<IntPtr> lpMaximumWorkingSetSize,
-) => _GetProcessWorkingSetSize(
-  hProcess,
-  lpMinimumWorkingSetSize,
-  lpMaximumWorkingSetSize,
-);
+) =>
+    GetProcessWorkingSetSize_Wrapper(
+      hProcess,
+      lpMinimumWorkingSetSize,
+      lpMaximumWorkingSetSize,
+    ) !=
+    FALSE;
 
-final _GetProcessWorkingSetSize = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hProcess,
-        Pointer<IntPtr> lpMinimumWorkingSetSize,
-        Pointer<IntPtr> lpMaximumWorkingSetSize,
-      ),
-      int Function(
-        int hProcess,
-        Pointer<IntPtr> lpMinimumWorkingSetSize,
-        Pointer<IntPtr> lpMaximumWorkingSetSize,
-      )
-    >('GetProcessWorkingSetSize');
-
-/// Retrieves the product type for the operating system on the local
-/// computer, and maps the type to the product types supported by the
-/// specified operating system.
+/// Retrieves the product type for the operating system on the local computer,
+/// and maps the type to the product types supported by the specified operating
+/// system.
 ///
-/// ```c
-/// BOOL GetProductInfo(
-///   DWORD  dwOSMajorVersion,
-///   DWORD  dwOSMinorVersion,
-///   DWORD  dwSpMajorVersion,
-///   DWORD  dwSpMinorVersion,
-///   PDWORD pdwReturnedProductType
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-getproductinfo>.
+///
 /// {@category kernel32}
-int GetProductInfo(
+@pragma('vm:prefer-inline')
+bool GetProductInfo(
   int dwOSMajorVersion,
   int dwOSMinorVersion,
   int dwSpMajorVersion,
   int dwSpMinorVersion,
   Pointer<Uint32> pdwReturnedProductType,
-) => _GetProductInfo(
-  dwOSMajorVersion,
-  dwOSMinorVersion,
-  dwSpMajorVersion,
-  dwSpMinorVersion,
-  pdwReturnedProductType,
+) =>
+    _GetProductInfo(
+      dwOSMajorVersion,
+      dwOSMinorVersion,
+      dwSpMajorVersion,
+      dwSpMinorVersion,
+      pdwReturnedProductType,
+    ) !=
+    FALSE;
+
+@Native<BOOL Function(Uint32, Uint32, Uint32, Uint32, Pointer<Uint32>)>(
+  symbol: 'GetProductInfo',
+)
+external int _GetProductInfo(
+  int dwOSMajorVersion,
+  int dwOSMinorVersion,
+  int dwSpMajorVersion,
+  int dwSpMinorVersion,
+  Pointer<Uint32> pdwReturnedProductType,
 );
 
-final _GetProductInfo = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Uint32 dwOSMajorVersion,
-        Uint32 dwOSMinorVersion,
-        Uint32 dwSpMajorVersion,
-        Uint32 dwSpMinorVersion,
-        Pointer<Uint32> pdwReturnedProductType,
-      ),
-      int Function(
-        int dwOSMajorVersion,
-        int dwOSMinorVersion,
-        int dwSpMajorVersion,
-        int dwSpMinorVersion,
-        Pointer<Uint32> pdwReturnedProductType,
-      )
-    >('GetProductInfo');
-
 /// Attempts to dequeue an I/O completion packet from the specified I/O
-/// completion port. If there is no completion packet queued, the function
-/// waits for a pending I/O operation associated with the completion port to
-/// complete.
+/// completion port.
 ///
-/// ```c
-/// BOOL GetQueuedCompletionStatus(
-///   HANDLE       CompletionPort,
-///   LPDWORD      lpNumberOfBytesTransferred,
-///   PULONG_PTR   lpCompletionKey,
-///   LPOVERLAPPED *lpOverlapped,
-///   DWORD        dwMilliseconds
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/ioapiset/nf-ioapiset-getqueuedcompletionstatus>.
+///
 /// {@category kernel32}
-int GetQueuedCompletionStatus(
-  int CompletionPort,
+@pragma('vm:prefer-inline')
+bool GetQueuedCompletionStatus(
+  int completionPort,
   Pointer<Uint32> lpNumberOfBytesTransferred,
   Pointer<IntPtr> lpCompletionKey,
   Pointer<Pointer<OVERLAPPED>> lpOverlapped,
   int dwMilliseconds,
-) => _GetQueuedCompletionStatus(
-  CompletionPort,
-  lpNumberOfBytesTransferred,
-  lpCompletionKey,
-  lpOverlapped,
-  dwMilliseconds,
-);
+) =>
+    GetQueuedCompletionStatus_Wrapper(
+      completionPort,
+      lpNumberOfBytesTransferred,
+      lpCompletionKey,
+      lpOverlapped,
+      dwMilliseconds,
+    ) !=
+    FALSE;
 
-final _GetQueuedCompletionStatus = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr CompletionPort,
-        Pointer<Uint32> lpNumberOfBytesTransferred,
-        Pointer<IntPtr> lpCompletionKey,
-        Pointer<Pointer<OVERLAPPED>> lpOverlapped,
-        Uint32 dwMilliseconds,
-      ),
-      int Function(
-        int CompletionPort,
-        Pointer<Uint32> lpNumberOfBytesTransferred,
-        Pointer<IntPtr> lpCompletionKey,
-        Pointer<Pointer<OVERLAPPED>> lpOverlapped,
-        int dwMilliseconds,
-      )
-    >('GetQueuedCompletionStatus');
-
-/// Retrieves multiple completion port entries simultaneously. It waits for
-/// pending I/O operations that are associated with the specified completion
-/// port to complete.
+/// Retrieves multiple completion port entries simultaneously.
 ///
-/// ```c
-/// BOOL GetQueuedCompletionStatusEx(
-///   HANDLE             CompletionPort,
-///   LPOVERLAPPED_ENTRY lpCompletionPortEntries,
-///   ULONG              ulCount,
-///   PULONG             ulNumEntriesRemoved,
-///   DWORD              dwMilliseconds,
-///   BOOL               fAlertable
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/ioapiset/nf-ioapiset-getqueuedcompletionstatusex>.
+///
 /// {@category kernel32}
-int GetQueuedCompletionStatusEx(
-  int CompletionPort,
+@pragma('vm:prefer-inline')
+bool GetQueuedCompletionStatusEx(
+  int completionPort,
   Pointer<OVERLAPPED_ENTRY> lpCompletionPortEntries,
   int ulCount,
   Pointer<Uint32> ulNumEntriesRemoved,
   int dwMilliseconds,
-  int fAlertable,
-) => _GetQueuedCompletionStatusEx(
-  CompletionPort,
-  lpCompletionPortEntries,
-  ulCount,
-  ulNumEntriesRemoved,
-  dwMilliseconds,
-  fAlertable,
-);
-
-final _GetQueuedCompletionStatusEx = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr CompletionPort,
-        Pointer<OVERLAPPED_ENTRY> lpCompletionPortEntries,
-        Uint32 ulCount,
-        Pointer<Uint32> ulNumEntriesRemoved,
-        Uint32 dwMilliseconds,
-        Int32 fAlertable,
-      ),
-      int Function(
-        int CompletionPort,
-        Pointer<OVERLAPPED_ENTRY> lpCompletionPortEntries,
-        int ulCount,
-        Pointer<Uint32> ulNumEntriesRemoved,
-        int dwMilliseconds,
-        int fAlertable,
-      )
-    >('GetQueuedCompletionStatusEx');
+  bool fAlertable,
+) =>
+    GetQueuedCompletionStatusEx_Wrapper(
+      completionPort,
+      lpCompletionPortEntries,
+      ulCount,
+      ulNumEntriesRemoved,
+      dwMilliseconds,
+      fAlertable ? TRUE : FALSE,
+    ) !=
+    FALSE;
 
 /// Retrieves the short path form of the specified path.
 ///
-/// ```c
-/// DWORD GetShortPathNameW(
-///   [in]  LPCWSTR lpszLongPath,
-///   [out] LPWSTR  lpszShortPath,
-///   [in]  DWORD   cchBuffer
-/// );
-/// ```
-/// {@category kernel32}
-int GetShortPathName(
-  Pointer<Utf16> lpszLongPath,
-  Pointer<Utf16> lpszShortPath,
-  int cchBuffer,
-) => _GetShortPathName(lpszLongPath, lpszShortPath, cchBuffer);
-
-final _GetShortPathName = _kernel32
-    .lookupFunction<
-      Uint32 Function(
-        Pointer<Utf16> lpszLongPath,
-        Pointer<Utf16> lpszShortPath,
-        Uint32 cchBuffer,
-      ),
-      int Function(
-        Pointer<Utf16> lpszLongPath,
-        Pointer<Utf16> lpszShortPath,
-        int cchBuffer,
-      )
-    >('GetShortPathNameW');
-
-/// Retrieves the contents of the STARTUPINFO structure that was specified
-/// when the calling process was created.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getshortpathnamew>.
 ///
-/// ```c
-/// void GetStartupInfoW(
-///   LPSTARTUPINFOW lpStartupInfo
-/// );
-/// ```
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
+int GetShortPathName(
+  PCWSTR lpszLongPath,
+  PWSTR? lpszShortPath,
+  int cchBuffer,
+) => GetShortPathNameW_Wrapper(
+  lpszLongPath,
+  lpszShortPath ?? nullptr,
+  cchBuffer,
+);
+
+/// Retrieves the contents of the STARTUPINFO structure that was specified when
+/// the calling process was created.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getstartupinfow>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
 void GetStartupInfo(Pointer<STARTUPINFO> lpStartupInfo) =>
     _GetStartupInfo(lpStartupInfo);
 
-final _GetStartupInfo = _kernel32
-    .lookupFunction<
-      Void Function(Pointer<STARTUPINFO> lpStartupInfo),
-      void Function(Pointer<STARTUPINFO> lpStartupInfo)
-    >('GetStartupInfoW');
+@Native<Void Function(Pointer<STARTUPINFO>)>(symbol: 'GetStartupInfoW')
+external void _GetStartupInfo(Pointer<STARTUPINFO> lpStartupInfo);
 
 /// Retrieves a handle to the specified standard device (standard input,
 /// standard output, or standard error).
 ///
-/// ```c
-/// HANDLE GetStdHandle(
-///   _In_ DWORD nStdHandle
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/console/getstdhandle>.
+///
 /// {@category kernel32}
-int GetStdHandle(int nStdHandle) => _GetStdHandle(nStdHandle);
-
-final _GetStdHandle = _kernel32
-    .lookupFunction<
-      IntPtr Function(Uint32 nStdHandle),
-      int Function(int nStdHandle)
-    >('GetStdHandle');
+@pragma('vm:prefer-inline')
+int GetStdHandle(STD_HANDLE nStdHandle) => GetStdHandle_Wrapper(nStdHandle);
 
 /// Returns the language identifier for the system locale.
 ///
-/// ```c
-/// LANGID GetSystemDefaultLangID();
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getsystemdefaultlangid>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 int GetSystemDefaultLangID() => _GetSystemDefaultLangID();
 
-final _GetSystemDefaultLangID = _kernel32
-    .lookupFunction<Uint16 Function(), int Function()>(
-      'GetSystemDefaultLangID',
-    );
+@Native<Uint16 Function()>(symbol: 'GetSystemDefaultLangID')
+external int _GetSystemDefaultLangID();
 
 /// Retrieves the system default locale name.
 ///
-/// ```c
-/// int GetSystemDefaultLocaleName(
-///   LPWSTR lpLocaleName,
-///   int    cchLocaleName
-/// );
-/// ```
-/// {@category kernel32}
-int GetSystemDefaultLocaleName(
-  Pointer<Utf16> lpLocaleName,
-  int cchLocaleName,
-) => _GetSystemDefaultLocaleName(lpLocaleName, cchLocaleName);
-
-final _GetSystemDefaultLocaleName = _kernel32
-    .lookupFunction<
-      Int32 Function(Pointer<Utf16> lpLocaleName, Int32 cchLocaleName),
-      int Function(Pointer<Utf16> lpLocaleName, int cchLocaleName)
-    >('GetSystemDefaultLocaleName');
-
-/// Retrieves the path of the system directory. The system directory
-/// contains system files such as dynamic-link libraries and drivers.
+/// **Note:** It is recommended that applications call GetUserDefaultLocaleName
+/// in preference over this function.
 ///
-/// ```c
-/// UINT GetSystemDirectoryW(
-///   LPWSTR lpBuffer,
-///   UINT   uSize
-/// );
-/// ```
-/// {@category kernel32}
-int GetSystemDirectory(Pointer<Utf16> lpBuffer, int uSize) =>
-    _GetSystemDirectory(lpBuffer, uSize);
-
-final _GetSystemDirectory = _kernel32
-    .lookupFunction<
-      Uint32 Function(Pointer<Utf16> lpBuffer, Uint32 uSize),
-      int Function(Pointer<Utf16> lpBuffer, int uSize)
-    >('GetSystemDirectoryW');
-
-/// Retrieves information about the current system. To retrieve accurate
-/// information for an application running on WOW64, call the
-/// GetNativeSystemInfo function.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getsystemdefaultlocalename>.
 ///
-/// ```c
-/// void GetSystemInfo(
-///   LPSYSTEM_INFO lpSystemInfo
-/// );
-/// ```
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
+int GetSystemDefaultLocaleName(PWSTR lpLocaleName, int cchLocaleName) =>
+    GetSystemDefaultLocaleName_Wrapper(lpLocaleName, cchLocaleName);
+
+/// Retrieves the path of the system directory.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-getsystemdirectoryw>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+int GetSystemDirectory(PWSTR? lpBuffer, int uSize) =>
+    GetSystemDirectoryW_Wrapper(lpBuffer ?? nullptr, uSize);
+
+/// Retrieves information about the current system.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-getsysteminfo>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
 void GetSystemInfo(Pointer<SYSTEM_INFO> lpSystemInfo) =>
     _GetSystemInfo(lpSystemInfo);
 
-final _GetSystemInfo = _kernel32
-    .lookupFunction<
-      Void Function(Pointer<SYSTEM_INFO> lpSystemInfo),
-      void Function(Pointer<SYSTEM_INFO> lpSystemInfo)
-    >('GetSystemInfo');
+@Native<Void Function(Pointer<SYSTEM_INFO>)>(symbol: 'GetSystemInfo')
+external void _GetSystemInfo(Pointer<SYSTEM_INFO> lpSystemInfo);
 
-/// Retrieves the power status of the system. The status indicates whether
-/// the system is running on AC or DC power, whether the battery is
-/// currently charging, how much battery life remains, and if battery saver
-/// is on or off.
+/// Retrieves the power status of the system.
 ///
-/// ```c
-/// BOOL GetSystemPowerStatus(
-///   LPSYSTEM_POWER_STATUS lpSystemPowerStatus
-/// );
-/// ```
-/// {@category kernel32}
-int GetSystemPowerStatus(Pointer<SYSTEM_POWER_STATUS> lpSystemPowerStatus) =>
-    _GetSystemPowerStatus(lpSystemPowerStatus);
-
-final _GetSystemPowerStatus = _kernel32
-    .lookupFunction<
-      Int32 Function(Pointer<SYSTEM_POWER_STATUS> lpSystemPowerStatus),
-      int Function(Pointer<SYSTEM_POWER_STATUS> lpSystemPowerStatus)
-    >('GetSystemPowerStatus');
-
-/// Retrieves the current local date and time.
+/// The status indicates whether the system is running on AC or DC power,
+/// whether the battery is currently charging, how much battery life remains,
+/// and if battery saver is on or off.
 ///
-/// ```c
-/// void GetSystemTime(
-///   LPSYSTEMTIME lpSystemTime
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getsystempowerstatus>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool GetSystemPowerStatus(Pointer<SYSTEM_POWER_STATUS> lpSystemPowerStatus) =>
+    GetSystemPowerStatus_Wrapper(lpSystemPowerStatus) != FALSE;
+
+/// Retrieves the current system date and time in Coordinated Universal Time
+/// (UTC) format.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-getsystemtime>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
 void GetSystemTime(Pointer<SYSTEMTIME> lpSystemTime) =>
     _GetSystemTime(lpSystemTime);
 
-final _GetSystemTime = _kernel32
-    .lookupFunction<
-      Void Function(Pointer<SYSTEMTIME> lpSystemTime),
-      void Function(Pointer<SYSTEMTIME> lpSystemTime)
-    >('GetSystemTime');
+@Native<Void Function(Pointer<SYSTEMTIME>)>(symbol: 'GetSystemTime')
+external void _GetSystemTime(Pointer<SYSTEMTIME> lpSystemTime);
 
-/// Determines whether the system is applying periodic time adjustments to
-/// its time-of-day clock, and obtains the value and period of any such
-/// adjustments.
+/// Determines whether the system is applying periodic time adjustments to its
+/// time-of-day clock, and obtains the value and period of any such adjustments.
 ///
-/// ```c
-/// BOOL GetSystemTimeAdjustment(
-///   PDWORD lpTimeAdjustment,
-///   PDWORD lpTimeIncrement,
-///   PBOOL  lpTimeAdjustmentDisabled
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-getsystemtimeadjustment>.
+///
 /// {@category kernel32}
-int GetSystemTimeAdjustment(
+@pragma('vm:prefer-inline')
+bool GetSystemTimeAdjustment(
   Pointer<Uint32> lpTimeAdjustment,
   Pointer<Uint32> lpTimeIncrement,
-  Pointer<Int32> lpTimeAdjustmentDisabled,
-) => _GetSystemTimeAdjustment(
-  lpTimeAdjustment,
-  lpTimeIncrement,
-  lpTimeAdjustmentDisabled,
-);
+  Pointer<BOOL> lpTimeAdjustmentDisabled,
+) =>
+    GetSystemTimeAdjustment_Wrapper(
+      lpTimeAdjustment,
+      lpTimeIncrement,
+      lpTimeAdjustmentDisabled,
+    ) !=
+    FALSE;
 
-final _GetSystemTimeAdjustment = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Uint32> lpTimeAdjustment,
-        Pointer<Uint32> lpTimeIncrement,
-        Pointer<Int32> lpTimeAdjustmentDisabled,
-      ),
-      int Function(
-        Pointer<Uint32> lpTimeAdjustment,
-        Pointer<Uint32> lpTimeIncrement,
-        Pointer<Int32> lpTimeAdjustmentDisabled,
-      )
-    >('GetSystemTimeAdjustment');
-
-/// Retrieves system timing information. On a multiprocessor system, the
-/// values returned are the sum of the designated times across all
-/// processors.
+/// Retrieves system timing information.
 ///
-/// ```c
-/// BOOL GetSystemTimes(
-///   PFILETIME lpIdleTime,
-///   PFILETIME lpKernelTime,
-///   PFILETIME lpUserTime
-/// );
-/// ```
-/// {@category kernel32}
-int GetSystemTimes(
-  Pointer<FILETIME> lpIdleTime,
-  Pointer<FILETIME> lpKernelTime,
-  Pointer<FILETIME> lpUserTime,
-) => _GetSystemTimes(lpIdleTime, lpKernelTime, lpUserTime);
-
-final _GetSystemTimes = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<FILETIME> lpIdleTime,
-        Pointer<FILETIME> lpKernelTime,
-        Pointer<FILETIME> lpUserTime,
-      ),
-      int Function(
-        Pointer<FILETIME> lpIdleTime,
-        Pointer<FILETIME> lpKernelTime,
-        Pointer<FILETIME> lpUserTime,
-      )
-    >('GetSystemTimes');
-
-/// Creates a name for a temporary file. If a unique file name is generated,
-/// an empty file is created and the handle to it is released; otherwise,
-/// only a file name is generated.
+/// On a multiprocessor system, the values returned are the sum of the
+/// designated times across all processors.
 ///
-/// ```c
-/// UINT GetTempFileNameW(
-///   [in]  LPCWSTR lpPathName,
-///   [in]  LPCWSTR lpPrefixString,
-///   [in]  UINT    uUnique,
-///   [out] LPWSTR  lpTempFileName
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getsystemtimes>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool GetSystemTimes(
+  Pointer<FILETIME>? lpIdleTime,
+  Pointer<FILETIME>? lpKernelTime,
+  Pointer<FILETIME>? lpUserTime,
+) =>
+    GetSystemTimes_Wrapper(
+      lpIdleTime ?? nullptr,
+      lpKernelTime ?? nullptr,
+      lpUserTime ?? nullptr,
+    ) !=
+    FALSE;
+
+/// Creates a name for a temporary file.
+///
+/// If a unique file name is generated, an empty file is created and the handle
+/// to it is released; otherwise, only a file name is generated.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-gettempfilenamew>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
 int GetTempFileName(
-  Pointer<Utf16> lpPathName,
-  Pointer<Utf16> lpPrefixString,
+  PCWSTR lpPathName,
+  PCWSTR lpPrefixString,
   int uUnique,
-  Pointer<Utf16> lpTempFileName,
-) => _GetTempFileName(lpPathName, lpPrefixString, uUnique, lpTempFileName);
-
-final _GetTempFileName = _kernel32
-    .lookupFunction<
-      Uint32 Function(
-        Pointer<Utf16> lpPathName,
-        Pointer<Utf16> lpPrefixString,
-        Uint32 uUnique,
-        Pointer<Utf16> lpTempFileName,
-      ),
-      int Function(
-        Pointer<Utf16> lpPathName,
-        Pointer<Utf16> lpPrefixString,
-        int uUnique,
-        Pointer<Utf16> lpTempFileName,
-      )
-    >('GetTempFileNameW');
+  PWSTR lpTempFileName,
+) => GetTempFileNameW_Wrapper(
+  lpPathName,
+  lpPrefixString,
+  uUnique,
+  lpTempFileName,
+);
 
 /// Retrieves the path of the directory designated for temporary files.
 ///
-/// ```c
-/// DWORD GetTempPathW(
-///   DWORD  nBufferLength,
-///   LPWSTR lpBuffer
-/// );
-/// ```
-/// {@category kernel32}
-int GetTempPath(int nBufferLength, Pointer<Utf16> lpBuffer) =>
-    _GetTempPath(nBufferLength, lpBuffer);
-
-final _GetTempPath = _kernel32
-    .lookupFunction<
-      Uint32 Function(Uint32 nBufferLength, Pointer<Utf16> lpBuffer),
-      int Function(int nBufferLength, Pointer<Utf16> lpBuffer)
-    >('GetTempPathW');
-
-/// Retrieves the path of the directory designated for temporary files,
-/// based on the privileges of the calling process.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-gettemppathw>.
 ///
-/// ```c
-/// DWORD GetTempPath2W(
-///   [in]  DWORD  BufferLength,
-///   [out] LPWSTR Buffer
-/// );
-/// ```
 /// {@category kernel32}
-int GetTempPath2(int BufferLength, Pointer<Utf16> Buffer) =>
-    _GetTempPath2(BufferLength, Buffer);
+@pragma('vm:prefer-inline')
+int GetTempPath(int nBufferLength, PWSTR? lpBuffer) =>
+    GetTempPathW_Wrapper(nBufferLength, lpBuffer ?? nullptr);
 
-final _GetTempPath2 = _kernel32
-    .lookupFunction<
-      Uint32 Function(Uint32 BufferLength, Pointer<Utf16> Buffer),
-      int Function(int BufferLength, Pointer<Utf16> Buffer)
-    >('GetTempPath2W');
+/// Retrieves the path of the directory designated for temporary files, based on
+/// the privileges of the calling process.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-gettemppath2w>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+int GetTempPath2(int bufferLength, PWSTR? buffer) =>
+    _GetTempPath2(bufferLength, buffer ?? nullptr);
+
+@Native<Uint32 Function(Uint32, PWSTR)>(symbol: 'GetTempPath2W')
+external int _GetTempPath2(int bufferLength, PWSTR buffer);
 
 /// Retrieves the thread identifier of the specified thread.
 ///
-/// ```c
-/// DWORD GetThreadId(
-///   HANDLE Thread
-/// );
-/// ```
-/// {@category kernel32}
-int GetThreadId(int Thread) => _GetThreadId(Thread);
-
-final _GetThreadId = _kernel32
-    .lookupFunction<Uint32 Function(IntPtr Thread), int Function(int Thread)>(
-      'GetThreadId',
-    );
-
-/// Returns the locale identifier of the current locale for the calling
-/// thread.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getthreadid>.
 ///
-/// ```c
-/// LCID GetThreadLocale();
-/// ```
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
+int GetThreadId(int thread) => GetThreadId_Wrapper(thread);
+
+/// Returns the locale identifier of the current locale for the calling thread.
+///
+/// **Note:** This function can retrieve data that changes between releases, for
+/// example, due to a custom locale.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getthreadlocale>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
 int GetThreadLocale() => _GetThreadLocale();
 
-final _GetThreadLocale = _kernel32
-    .lookupFunction<Uint32 Function(), int Function()>('GetThreadLocale');
+@Native<Uint32 Function()>(symbol: 'GetThreadLocale')
+external int _GetThreadLocale();
 
 /// Retrieves timing information for the specified thread.
 ///
-/// ```c
-/// BOOL GetThreadTimes(
-///   HANDLE     hThread,
-///   LPFILETIME lpCreationTime,
-///   LPFILETIME lpExitTime,
-///   LPFILETIME lpKernelTime,
-///   LPFILETIME lpUserTime
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getthreadtimes>.
+///
 /// {@category kernel32}
-int GetThreadTimes(
+@pragma('vm:prefer-inline')
+bool GetThreadTimes(
   int hThread,
   Pointer<FILETIME> lpCreationTime,
   Pointer<FILETIME> lpExitTime,
   Pointer<FILETIME> lpKernelTime,
   Pointer<FILETIME> lpUserTime,
-) => _GetThreadTimes(
-  hThread,
-  lpCreationTime,
-  lpExitTime,
-  lpKernelTime,
-  lpUserTime,
-);
+) =>
+    GetThreadTimes_Wrapper(
+      hThread,
+      lpCreationTime,
+      lpExitTime,
+      lpKernelTime,
+      lpUserTime,
+    ) !=
+    FALSE;
 
-final _GetThreadTimes = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hThread,
-        Pointer<FILETIME> lpCreationTime,
-        Pointer<FILETIME> lpExitTime,
-        Pointer<FILETIME> lpKernelTime,
-        Pointer<FILETIME> lpUserTime,
-      ),
-      int Function(
-        int hThread,
-        Pointer<FILETIME> lpCreationTime,
-        Pointer<FILETIME> lpExitTime,
-        Pointer<FILETIME> lpKernelTime,
-        Pointer<FILETIME> lpUserTime,
-      )
-    >('GetThreadTimes');
-
-/// Returns the language identifier of the first user interface language for
-/// the current thread.
+/// Returns the language identifier of the first user interface language for the
+/// current thread.
 ///
-/// ```c
-/// LANGID GetThreadUILanguage();
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getthreaduilanguage>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 int GetThreadUILanguage() => _GetThreadUILanguage();
 
-final _GetThreadUILanguage = _kernel32
-    .lookupFunction<Uint16 Function(), int Function()>('GetThreadUILanguage');
+@Native<Uint16 Function()>(symbol: 'GetThreadUILanguage')
+external int _GetThreadUILanguage();
 
-/// Retrieves the number of milliseconds that have elapsed since the system
-/// was started, up to 49.7 days.
+/// Retrieves the number of milliseconds that have elapsed since the system was
+/// started, up to 49.7 days.
 ///
-/// ```c
-/// DWORD GetTickCount();
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-gettickcount>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 int GetTickCount() => _GetTickCount();
 
-final _GetTickCount = _kernel32
-    .lookupFunction<Uint32 Function(), int Function()>('GetTickCount');
+@Native<Uint32 Function()>(symbol: 'GetTickCount')
+external int _GetTickCount();
 
-/// Returns the language identifier of the Region Format setting for the
-/// current user.
+/// Returns the language identifier of the Region Format setting for the current
+/// user.
 ///
-/// ```c
-/// LANGID GetUserDefaultLangID();
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getuserdefaultlangid>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 int GetUserDefaultLangID() => _GetUserDefaultLangID();
 
-final _GetUserDefaultLangID = _kernel32
-    .lookupFunction<Uint16 Function(), int Function()>('GetUserDefaultLangID');
+@Native<Uint16 Function()>(symbol: 'GetUserDefaultLangID')
+external int _GetUserDefaultLangID();
 
 /// Returns the locale identifier for the user default locale.
 ///
-/// ```c
-/// LCID GetUserDefaultLCID();
-/// ```
+/// Caution If the user default locale is a custom locale, an application cannot
+/// accurately tag data with the value or exchange it.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getuserdefaultlcid>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 int GetUserDefaultLCID() => _GetUserDefaultLCID();
 
-final _GetUserDefaultLCID = _kernel32
-    .lookupFunction<Uint32 Function(), int Function()>('GetUserDefaultLCID');
+@Native<Uint32 Function()>(symbol: 'GetUserDefaultLCID')
+external int _GetUserDefaultLCID();
 
 /// Retrieves the user default locale name.
 ///
-/// ```c
-/// int GetUserDefaultLocaleName(
-///   LPWSTR lpLocaleName,
-///   int    cchLocaleName
-/// );
-/// ```
-/// {@category kernel32}
-int GetUserDefaultLocaleName(Pointer<Utf16> lpLocaleName, int cchLocaleName) =>
-    _GetUserDefaultLocaleName(lpLocaleName, cchLocaleName);
-
-final _GetUserDefaultLocaleName = _kernel32
-    .lookupFunction<
-      Int32 Function(Pointer<Utf16> lpLocaleName, Int32 cchLocaleName),
-      int Function(Pointer<Utf16> lpLocaleName, int cchLocaleName)
-    >('GetUserDefaultLocaleName');
-
-/// Gets information about the operating system version.
+/// **Note:** The application should call this function in preference to
+/// GetUserDefaultLCID if designed to run only on Windows Vista and later.
 ///
-/// ```c
-/// BOOL GetVersionExW(
-///   LPOSVERSIONINFOW lpVersionInformation
-/// );
-/// ```
-/// {@category kernel32}
-int GetVersionEx(Pointer<OSVERSIONINFO> lpVersionInformation) =>
-    _GetVersionEx(lpVersionInformation);
-
-final _GetVersionEx = _kernel32
-    .lookupFunction<
-      Int32 Function(Pointer<OSVERSIONINFO> lpVersionInformation),
-      int Function(Pointer<OSVERSIONINFO> lpVersionInformation)
-    >('GetVersionExW');
-
-/// Retrieves information about the file system and volume associated with
-/// the specified root directory.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getuserdefaultlocalename>.
 ///
-/// ```c
-/// BOOL GetVolumeInformationW(
-///   LPCWSTR lpRootPathName,
-///   LPWSTR  lpVolumeNameBuffer,
-///   DWORD   nVolumeNameSize,
-///   LPDWORD lpVolumeSerialNumber,
-///   LPDWORD lpMaximumComponentLength,
-///   LPDWORD lpFileSystemFlags,
-///   LPWSTR  lpFileSystemNameBuffer,
-///   DWORD   nFileSystemNameSize
-/// );
-/// ```
 /// {@category kernel32}
-int GetVolumeInformation(
-  Pointer<Utf16> lpRootPathName,
-  Pointer<Utf16> lpVolumeNameBuffer,
+@pragma('vm:prefer-inline')
+int GetUserDefaultLocaleName(PWSTR lpLocaleName, int cchLocaleName) =>
+    GetUserDefaultLocaleName_Wrapper(lpLocaleName, cchLocaleName);
+
+/// Retrieves information about the file system and volume associated with the
+/// specified root directory.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getvolumeinformationw>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool GetVolumeInformation(
+  PCWSTR? lpRootPathName,
+  PWSTR? lpVolumeNameBuffer,
   int nVolumeNameSize,
-  Pointer<Uint32> lpVolumeSerialNumber,
-  Pointer<Uint32> lpMaximumComponentLength,
-  Pointer<Uint32> lpFileSystemFlags,
-  Pointer<Utf16> lpFileSystemNameBuffer,
+  Pointer<Uint32>? lpVolumeSerialNumber,
+  Pointer<Uint32>? lpMaximumComponentLength,
+  Pointer<Uint32>? lpFileSystemFlags,
+  PWSTR? lpFileSystemNameBuffer,
   int nFileSystemNameSize,
-) => _GetVolumeInformation(
-  lpRootPathName,
-  lpVolumeNameBuffer,
-  nVolumeNameSize,
-  lpVolumeSerialNumber,
-  lpMaximumComponentLength,
-  lpFileSystemFlags,
-  lpFileSystemNameBuffer,
-  nFileSystemNameSize,
-);
+) =>
+    GetVolumeInformationW_Wrapper(
+      lpRootPathName ?? nullptr,
+      lpVolumeNameBuffer ?? nullptr,
+      nVolumeNameSize,
+      lpVolumeSerialNumber ?? nullptr,
+      lpMaximumComponentLength ?? nullptr,
+      lpFileSystemFlags ?? nullptr,
+      lpFileSystemNameBuffer ?? nullptr,
+      nFileSystemNameSize,
+    ) !=
+    FALSE;
 
-final _GetVolumeInformation = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Utf16> lpRootPathName,
-        Pointer<Utf16> lpVolumeNameBuffer,
-        Uint32 nVolumeNameSize,
-        Pointer<Uint32> lpVolumeSerialNumber,
-        Pointer<Uint32> lpMaximumComponentLength,
-        Pointer<Uint32> lpFileSystemFlags,
-        Pointer<Utf16> lpFileSystemNameBuffer,
-        Uint32 nFileSystemNameSize,
-      ),
-      int Function(
-        Pointer<Utf16> lpRootPathName,
-        Pointer<Utf16> lpVolumeNameBuffer,
-        int nVolumeNameSize,
-        Pointer<Uint32> lpVolumeSerialNumber,
-        Pointer<Uint32> lpMaximumComponentLength,
-        Pointer<Uint32> lpFileSystemFlags,
-        Pointer<Utf16> lpFileSystemNameBuffer,
-        int nFileSystemNameSize,
-      )
-    >('GetVolumeInformationW');
-
-/// Retrieves information about the file system and volume associated with
-/// the specified file.
+/// Retrieves information about the file system and volume associated with the
+/// specified file.
 ///
-/// ```c
-/// BOOL GetVolumeInformationByHandleW(
-///   HANDLE  hFile,
-///   LPWSTR  lpVolumeNameBuffer,
-///   DWORD   nVolumeNameSize,
-///   LPDWORD lpVolumeSerialNumber,
-///   LPDWORD lpMaximumComponentLength,
-///   LPDWORD lpFileSystemFlags,
-///   LPWSTR  lpFileSystemNameBuffer,
-///   DWORD   nFileSystemNameSize
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getvolumeinformationbyhandlew>.
+///
 /// {@category kernel32}
-int GetVolumeInformationByHandle(
+@pragma('vm:prefer-inline')
+bool GetVolumeInformationByHandle(
   int hFile,
-  Pointer<Utf16> lpVolumeNameBuffer,
+  PWSTR? lpVolumeNameBuffer,
   int nVolumeNameSize,
-  Pointer<Uint32> lpVolumeSerialNumber,
-  Pointer<Uint32> lpMaximumComponentLength,
-  Pointer<Uint32> lpFileSystemFlags,
-  Pointer<Utf16> lpFileSystemNameBuffer,
+  Pointer<Uint32>? lpVolumeSerialNumber,
+  Pointer<Uint32>? lpMaximumComponentLength,
+  Pointer<Uint32>? lpFileSystemFlags,
+  PWSTR? lpFileSystemNameBuffer,
   int nFileSystemNameSize,
-) => _GetVolumeInformationByHandle(
-  hFile,
-  lpVolumeNameBuffer,
-  nVolumeNameSize,
-  lpVolumeSerialNumber,
-  lpMaximumComponentLength,
-  lpFileSystemFlags,
-  lpFileSystemNameBuffer,
-  nFileSystemNameSize,
-);
-
-final _GetVolumeInformationByHandle = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hFile,
-        Pointer<Utf16> lpVolumeNameBuffer,
-        Uint32 nVolumeNameSize,
-        Pointer<Uint32> lpVolumeSerialNumber,
-        Pointer<Uint32> lpMaximumComponentLength,
-        Pointer<Uint32> lpFileSystemFlags,
-        Pointer<Utf16> lpFileSystemNameBuffer,
-        Uint32 nFileSystemNameSize,
-      ),
-      int Function(
-        int hFile,
-        Pointer<Utf16> lpVolumeNameBuffer,
-        int nVolumeNameSize,
-        Pointer<Uint32> lpVolumeSerialNumber,
-        Pointer<Uint32> lpMaximumComponentLength,
-        Pointer<Uint32> lpFileSystemFlags,
-        Pointer<Utf16> lpFileSystemNameBuffer,
-        int nFileSystemNameSize,
-      )
-    >('GetVolumeInformationByHandleW');
+) =>
+    GetVolumeInformationByHandleW_Wrapper(
+      hFile,
+      lpVolumeNameBuffer ?? nullptr,
+      nVolumeNameSize,
+      lpVolumeSerialNumber ?? nullptr,
+      lpMaximumComponentLength ?? nullptr,
+      lpFileSystemFlags ?? nullptr,
+      lpFileSystemNameBuffer ?? nullptr,
+      nFileSystemNameSize,
+    ) !=
+    FALSE;
 
 /// Retrieves a volume GUID path for the volume that is associated with the
-/// specified volume mount point (drive letter, volume GUID path, or mounted
+/// specified volume mount point ( drive letter, volume GUID path, or mounted
 /// folder).
 ///
-/// ```c
-/// BOOL GetVolumeNameForVolumeMountPointW(
-///   [in]  LPCWSTR lpszVolumeMountPoint,
-///   [out] LPWSTR  lpszVolumeName,
-///   [in]  DWORD   cchBufferLength
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getvolumenameforvolumemountpointw>.
+///
 /// {@category kernel32}
-int GetVolumeNameForVolumeMountPoint(
-  Pointer<Utf16> lpszVolumeMountPoint,
-  Pointer<Utf16> lpszVolumeName,
+@pragma('vm:prefer-inline')
+bool GetVolumeNameForVolumeMountPoint(
+  PCWSTR lpszVolumeMountPoint,
+  PWSTR lpszVolumeName,
   int cchBufferLength,
-) => _GetVolumeNameForVolumeMountPoint(
-  lpszVolumeMountPoint,
-  lpszVolumeName,
-  cchBufferLength,
-);
-
-final _GetVolumeNameForVolumeMountPoint = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Utf16> lpszVolumeMountPoint,
-        Pointer<Utf16> lpszVolumeName,
-        Uint32 cchBufferLength,
-      ),
-      int Function(
-        Pointer<Utf16> lpszVolumeMountPoint,
-        Pointer<Utf16> lpszVolumeName,
-        int cchBufferLength,
-      )
-    >('GetVolumeNameForVolumeMountPointW');
+) =>
+    GetVolumeNameForVolumeMountPointW_Wrapper(
+      lpszVolumeMountPoint,
+      lpszVolumeName,
+      cchBufferLength,
+    ) !=
+    FALSE;
 
 /// Retrieves the volume mount point where the specified path is mounted.
 ///
-/// ```c
-/// BOOL GetVolumePathNameW(
-///   LPCWSTR lpszFileName,
-///   LPWSTR  lpszVolumePathName,
-///   DWORD   cchBufferLength);
-/// ```
-/// {@category kernel32}
-int GetVolumePathName(
-  Pointer<Utf16> lpszFileName,
-  Pointer<Utf16> lpszVolumePathName,
-  int cchBufferLength,
-) => _GetVolumePathName(lpszFileName, lpszVolumePathName, cchBufferLength);
-
-final _GetVolumePathName = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Utf16> lpszFileName,
-        Pointer<Utf16> lpszVolumePathName,
-        Uint32 cchBufferLength,
-      ),
-      int Function(
-        Pointer<Utf16> lpszFileName,
-        Pointer<Utf16> lpszVolumePathName,
-        int cchBufferLength,
-      )
-    >('GetVolumePathNameW');
-
-/// Retrieves a list of drive letters and mounted folder paths for the
-/// specified volume.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getvolumepathnamew>.
 ///
-/// ```c
-/// BOOL GetVolumePathNamesForVolumeNameW(
-///   LPCWSTR lpszVolumeName,
-///   LPWCH   lpszVolumePathNames,
-///   DWORD   cchBufferLength,
-///   PDWORD  lpcchReturnLength
-/// );
-/// ```
 /// {@category kernel32}
-int GetVolumePathNamesForVolumeName(
-  Pointer<Utf16> lpszVolumeName,
-  Pointer<Utf16> lpszVolumePathNames,
+@pragma('vm:prefer-inline')
+bool GetVolumePathName(
+  PCWSTR lpszFileName,
+  PWSTR lpszVolumePathName,
+  int cchBufferLength,
+) =>
+    GetVolumePathNameW_Wrapper(
+      lpszFileName,
+      lpszVolumePathName,
+      cchBufferLength,
+    ) !=
+    FALSE;
+
+/// Retrieves a list of drive letters and mounted folder paths for the specified
+/// volume.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getvolumepathnamesforvolumenamew>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool GetVolumePathNamesForVolumeName(
+  PCWSTR lpszVolumeName,
+  PWSTR? lpszVolumePathNames,
   int cchBufferLength,
   Pointer<Uint32> lpcchReturnLength,
-) => _GetVolumePathNamesForVolumeName(
-  lpszVolumeName,
-  lpszVolumePathNames,
-  cchBufferLength,
-  lpcchReturnLength,
-);
-
-final _GetVolumePathNamesForVolumeName = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Utf16> lpszVolumeName,
-        Pointer<Utf16> lpszVolumePathNames,
-        Uint32 cchBufferLength,
-        Pointer<Uint32> lpcchReturnLength,
-      ),
-      int Function(
-        Pointer<Utf16> lpszVolumeName,
-        Pointer<Utf16> lpszVolumePathNames,
-        int cchBufferLength,
-        Pointer<Uint32> lpcchReturnLength,
-      )
-    >('GetVolumePathNamesForVolumeNameW');
+) =>
+    GetVolumePathNamesForVolumeNameW_Wrapper(
+      lpszVolumeName,
+      lpszVolumePathNames ?? nullptr,
+      cchBufferLength,
+      lpcchReturnLength,
+    ) !=
+    FALSE;
 
 /// Allocates the specified number of bytes from the heap.
 ///
-/// ```c
-/// HGLOBAL GlobalAlloc(
-///   UINT   uFlags,
-///   SIZE_T dwBytes
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-globalalloc>.
+///
 /// {@category kernel32}
-Pointer GlobalAlloc(int uFlags, int dwBytes) => _GlobalAlloc(uFlags, dwBytes);
-
-final _GlobalAlloc = _kernel32
-    .lookupFunction<
-      Pointer Function(Uint32 uFlags, IntPtr dwBytes),
-      Pointer Function(int uFlags, int dwBytes)
-    >('GlobalAlloc');
+@pragma('vm:prefer-inline')
+int GlobalAlloc(GLOBAL_ALLOC_FLAGS uFlags, int dwBytes) =>
+    GlobalAlloc_Wrapper(uFlags, dwBytes);
 
 /// Frees the specified global memory object and invalidates its handle.
 ///
-/// ```c
-/// HGLOBAL GlobalFree(
-///   _Frees_ptr_opt_ HGLOBAL hMem
-/// );
-/// ```
-/// {@category kernel32}
-Pointer GlobalFree(Pointer hMem) => _GlobalFree(hMem);
-
-final _GlobalFree = _kernel32
-    .lookupFunction<
-      Pointer Function(Pointer hMem),
-      Pointer Function(Pointer hMem)
-    >('GlobalFree');
-
-/// Locks a global memory object and returns a pointer to the first byte of
-/// the object's memory block.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-globalfree>.
 ///
-/// ```c
-/// LPVOID GlobalLock(
-///   HGLOBAL hMem
-/// );
-/// ```
 /// {@category kernel32}
-Pointer GlobalLock(Pointer hMem) => _GlobalLock(hMem);
+@pragma('vm:prefer-inline')
+int GlobalFree(int? hMem) => GlobalFree_Wrapper(hMem ?? NULL);
 
-final _GlobalLock = _kernel32
-    .lookupFunction<
-      Pointer Function(Pointer hMem),
-      Pointer Function(Pointer hMem)
-    >('GlobalLock');
-
-/// Retrieves information about the system's current usage of both physical
-/// and virtual memory.
+/// Locks a global memory object and returns a pointer to the first byte of the
+/// object's memory block.
 ///
-/// ```c
-/// BOOL GlobalMemoryStatusEx(
-///   LPMEMORYSTATUSEX lpBuffer
-/// );
-/// ```
-/// {@category kernel32}
-int GlobalMemoryStatusEx(Pointer<MEMORYSTATUSEX> lpBuffer) =>
-    _GlobalMemoryStatusEx(lpBuffer);
-
-final _GlobalMemoryStatusEx = _kernel32
-    .lookupFunction<
-      Int32 Function(Pointer<MEMORYSTATUSEX> lpBuffer),
-      int Function(Pointer<MEMORYSTATUSEX> lpBuffer)
-    >('GlobalMemoryStatusEx');
-
-/// Retrieves the current size of the specified global memory object, in
-/// bytes.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-globallock>.
 ///
-/// ```c
-/// SIZE_T GlobalSize(
-///   HGLOBAL hMem
-/// );
-/// ```
 /// {@category kernel32}
-int GlobalSize(Pointer hMem) => _GlobalSize(hMem);
+@pragma('vm:prefer-inline')
+Pointer GlobalLock(int hMem) => GlobalLock_Wrapper(hMem);
 
-final _GlobalSize = _kernel32
-    .lookupFunction<IntPtr Function(Pointer hMem), int Function(Pointer hMem)>(
-      'GlobalSize',
-    );
-
-/// Decrements the lock count associated with a memory object that was
-/// allocated with GMEM_MOVEABLE. This function has no effect on memory
-/// objects allocated with GMEM_FIXED.
+/// Retrieves information about the system's current usage of both physical and
+/// virtual memory.
 ///
-/// ```c
-/// BOOL GlobalUnlock(
-///   HGLOBAL hMem
-/// );
-/// ```
-/// {@category kernel32}
-int GlobalUnlock(Pointer hMem) => _GlobalUnlock(hMem);
-
-final _GlobalUnlock = _kernel32
-    .lookupFunction<Int32 Function(Pointer hMem), int Function(Pointer hMem)>(
-      'GlobalUnlock',
-    );
-
-/// Allocates a block of memory from a heap. The allocated memory is not
-/// movable.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-globalmemorystatusex>.
 ///
-/// ```c
-/// LPVOID HeapAlloc(
-///   HANDLE hHeap,
-///   DWORD  dwFlags,
-///   SIZE_T dwBytes
-/// );
-/// ```
 /// {@category kernel32}
-Pointer HeapAlloc(int hHeap, int dwFlags, int dwBytes) =>
+@pragma('vm:prefer-inline')
+bool GlobalMemoryStatusEx(Pointer<MEMORYSTATUSEX> lpBuffer) =>
+    GlobalMemoryStatusEx_Wrapper(lpBuffer) != FALSE;
+
+/// Retrieves the current size of the specified global memory object, in bytes.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-globalsize>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+int GlobalSize(int hMem) => GlobalSize_Wrapper(hMem);
+
+/// Decrements the lock count associated with a memory object that was allocated
+/// with GMEM_MOVEABLE.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-globalunlock>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool GlobalUnlock(int hMem) => GlobalUnlock_Wrapper(hMem) != FALSE;
+
+/// Allocates a block of memory from a heap.
+///
+/// The allocated memory is not movable.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/heapapi/nf-heapapi-heapalloc>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+Pointer HeapAlloc(int hHeap, HEAP_FLAGS dwFlags, int dwBytes) =>
     _HeapAlloc(hHeap, dwFlags, dwBytes);
 
-final _HeapAlloc = _kernel32
-    .lookupFunction<
-      Pointer Function(IntPtr hHeap, Uint32 dwFlags, IntPtr dwBytes),
-      Pointer Function(int hHeap, int dwFlags, int dwBytes)
-    >('HeapAlloc');
+@Native<Pointer Function(HANDLE, Uint32, IntPtr)>(symbol: 'HeapAlloc')
+external Pointer _HeapAlloc(int hHeap, int dwFlags, int dwBytes);
 
-/// Returns the size of the largest committed free block in the specified
-/// heap. If the Disable heap coalesce on free global flag is set, this
-/// function also coalesces adjacent free blocks of memory in the heap.
+/// Returns the size of the largest committed free block in the specified heap.
 ///
-/// ```c
-/// SIZE_T HeapCompact(
-///   HANDLE hHeap,
-///   DWORD  dwFlags
-/// );
-/// ```
+/// If the Disable heap coalesce on free global flag is set, this function also
+/// coalesces adjacent free blocks of memory in the heap.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/heapapi/nf-heapapi-heapcompact>.
+///
 /// {@category kernel32}
-int HeapCompact(int hHeap, int dwFlags) => _HeapCompact(hHeap, dwFlags);
-
-final _HeapCompact = _kernel32
-    .lookupFunction<
-      IntPtr Function(IntPtr hHeap, Uint32 dwFlags),
-      int Function(int hHeap, int dwFlags)
-    >('HeapCompact');
+@pragma('vm:prefer-inline')
+int HeapCompact(int hHeap, HEAP_FLAGS dwFlags) =>
+    HeapCompact_Wrapper(hHeap, dwFlags);
 
 /// Creates a private heap object that can be used by the calling process.
-/// The function reserves space in the virtual address space of the process
-/// and allocates physical storage for a specified initial portion of this
-/// block.
 ///
-/// ```c
-/// HANDLE HeapCreate(
-///   DWORD  flOptions,
-///   SIZE_T dwInitialSize,
-///   SIZE_T dwMaximumSize
-/// );
-/// ```
-/// {@category kernel32}
-int HeapCreate(int flOptions, int dwInitialSize, int dwMaximumSize) =>
-    _HeapCreate(flOptions, dwInitialSize, dwMaximumSize);
-
-final _HeapCreate = _kernel32
-    .lookupFunction<
-      IntPtr Function(
-        Uint32 flOptions,
-        IntPtr dwInitialSize,
-        IntPtr dwMaximumSize,
-      ),
-      int Function(int flOptions, int dwInitialSize, int dwMaximumSize)
-    >('HeapCreate');
-
-/// Destroys the specified heap object. It decommits and releases all the
-/// pages of a private heap object, and it invalidates the handle to the
-/// heap.
+/// The function reserves space in the virtual address space of the process and
+/// allocates physical storage for a specified initial portion of this block.
 ///
-/// ```c
-/// BOOL HeapDestroy(
-///   HANDLE hHeap
-/// );
-/// ```
-/// {@category kernel32}
-int HeapDestroy(int hHeap) => _HeapDestroy(hHeap);
-
-final _HeapDestroy = _kernel32
-    .lookupFunction<Int32 Function(IntPtr hHeap), int Function(int hHeap)>(
-      'HeapDestroy',
-    );
-
-/// Frees a memory block allocated from a heap by the HeapAlloc or
-/// HeapReAlloc function.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/heapapi/nf-heapapi-heapcreate>.
 ///
-/// ```c
-/// BOOL HeapFree(
-///   HANDLE                 hHeap,
-///   DWORD                  dwFlags,
-///   _Frees_ptr_opt_ LPVOID lpMem
-/// );
-/// ```
 /// {@category kernel32}
-int HeapFree(int hHeap, int dwFlags, Pointer lpMem) =>
-    _HeapFree(hHeap, dwFlags, lpMem);
+@pragma('vm:prefer-inline')
+int HeapCreate(HEAP_FLAGS flOptions, int dwInitialSize, int dwMaximumSize) =>
+    HeapCreate_Wrapper(flOptions, dwInitialSize, dwMaximumSize);
 
-final _HeapFree = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hHeap, Uint32 dwFlags, Pointer lpMem),
-      int Function(int hHeap, int dwFlags, Pointer lpMem)
-    >('HeapFree');
-
-/// Attempts to acquire the critical section object, or lock, that is
-/// associated with a specified heap.
+/// Destroys the specified heap object.
 ///
-/// ```c
-/// BOOL HeapLock(
-///   HANDLE hHeap
-/// );
-/// ```
+/// It decommits and releases all the pages of a private heap object, and it
+/// invalidates the handle to the heap.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/heapapi/nf-heapapi-heapdestroy>.
+///
 /// {@category kernel32}
-int HeapLock(int hHeap) => _HeapLock(hHeap);
+@pragma('vm:prefer-inline')
+bool HeapDestroy(int hHeap) => HeapDestroy_Wrapper(hHeap) != FALSE;
 
-final _HeapLock = _kernel32
-    .lookupFunction<Int32 Function(IntPtr hHeap), int Function(int hHeap)>(
-      'HeapLock',
-    );
+/// Frees a memory block allocated from a heap by the HeapAlloc or HeapReAlloc
+/// function.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/heapapi/nf-heapapi-heapfree>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool HeapFree(int hHeap, HEAP_FLAGS dwFlags, Pointer? lpMem) =>
+    HeapFree_Wrapper(hHeap, dwFlags, lpMem ?? nullptr) != FALSE;
+
+/// Attempts to acquire the critical section object, or lock, that is associated
+/// with a specified heap.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/heapapi/nf-heapapi-heaplock>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool HeapLock(int hHeap) => HeapLock_Wrapper(hHeap) != FALSE;
 
 /// Retrieves information about the specified heap.
 ///
-/// ```c
-/// BOOL HeapQueryInformation(
-///   HANDLE                 HeapHandle,
-///   HEAP_INFORMATION_CLASS HeapInformationClass,
-///   PVOID                  HeapInformation,
-///   SIZE_T                 HeapInformationLength,
-///   PSIZE_T                ReturnLength
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/heapapi/nf-heapapi-heapqueryinformation>.
+///
 /// {@category kernel32}
-int HeapQueryInformation(
-  int HeapHandle,
-  int HeapInformationClass,
-  Pointer HeapInformation,
-  int HeapInformationLength,
-  Pointer<IntPtr> ReturnLength,
-) => _HeapQueryInformation(
-  HeapHandle,
-  HeapInformationClass,
-  HeapInformation,
-  HeapInformationLength,
-  ReturnLength,
+@pragma('vm:prefer-inline')
+bool HeapQueryInformation(
+  int? heapHandle,
+  HEAP_INFORMATION_CLASS heapInformationClass,
+  Pointer? heapInformation,
+  int heapInformationLength,
+  Pointer<IntPtr>? returnLength,
+) =>
+    HeapQueryInformation_Wrapper(
+      heapHandle ?? NULL,
+      heapInformationClass,
+      heapInformation ?? nullptr,
+      heapInformationLength,
+      returnLength ?? nullptr,
+    ) !=
+    FALSE;
+
+/// Reallocates a block of memory from a heap.
+///
+/// This function enables you to resize a memory block and change other memory
+/// block properties.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/heapapi/nf-heapapi-heaprealloc>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+Pointer HeapReAlloc(
+  int hHeap,
+  HEAP_FLAGS dwFlags,
+  Pointer? lpMem,
+  int dwBytes,
+) => _HeapReAlloc(hHeap, dwFlags, lpMem ?? nullptr, dwBytes);
+
+@Native<Pointer Function(HANDLE, Uint32, Pointer, IntPtr)>(
+  symbol: 'HeapReAlloc',
+)
+external Pointer _HeapReAlloc(
+  int hHeap,
+  int dwFlags,
+  Pointer lpMem,
+  int dwBytes,
 );
-
-final _HeapQueryInformation = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr HeapHandle,
-        Int32 HeapInformationClass,
-        Pointer HeapInformation,
-        IntPtr HeapInformationLength,
-        Pointer<IntPtr> ReturnLength,
-      ),
-      int Function(
-        int HeapHandle,
-        int HeapInformationClass,
-        Pointer HeapInformation,
-        int HeapInformationLength,
-        Pointer<IntPtr> ReturnLength,
-      )
-    >('HeapQueryInformation');
-
-/// Retrieves information about the specified heap.
-///
-/// ```c
-/// LPVOID HeapReAlloc(
-///   HANDLE                 hHeap,
-///   DWORD                  dwFlags,
-///   _Frees_ptr_opt_ LPVOID lpMem,
-///   SIZE_T                 dwBytes
-/// );
-/// ```
-/// {@category kernel32}
-Pointer HeapReAlloc(int hHeap, int dwFlags, Pointer lpMem, int dwBytes) =>
-    _HeapReAlloc(hHeap, dwFlags, lpMem, dwBytes);
-
-final _HeapReAlloc = _kernel32
-    .lookupFunction<
-      Pointer Function(
-        IntPtr hHeap,
-        Uint32 dwFlags,
-        Pointer lpMem,
-        IntPtr dwBytes,
-      ),
-      Pointer Function(int hHeap, int dwFlags, Pointer lpMem, int dwBytes)
-    >('HeapReAlloc');
 
 /// Enables features for a specified heap.
 ///
-/// ```c
-/// BOOL HeapSetInformation(
-///   HANDLE                 HeapHandle,
-///   HEAP_INFORMATION_CLASS HeapInformationClass,
-///   PVOID                  HeapInformation,
-///   SIZE_T                 HeapInformationLength
-/// );
-/// ```
-/// {@category kernel32}
-int HeapSetInformation(
-  int HeapHandle,
-  int HeapInformationClass,
-  Pointer HeapInformation,
-  int HeapInformationLength,
-) => _HeapSetInformation(
-  HeapHandle,
-  HeapInformationClass,
-  HeapInformation,
-  HeapInformationLength,
-);
-
-final _HeapSetInformation = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr HeapHandle,
-        Int32 HeapInformationClass,
-        Pointer HeapInformation,
-        IntPtr HeapInformationLength,
-      ),
-      int Function(
-        int HeapHandle,
-        int HeapInformationClass,
-        Pointer HeapInformation,
-        int HeapInformationLength,
-      )
-    >('HeapSetInformation');
-
-/// Retrieves the size of a memory block allocated from a heap by the
-/// HeapAlloc or HeapReAlloc function.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/heapapi/nf-heapapi-heapsetinformation>.
 ///
-/// ```c
-/// SIZE_T HeapSize(
-///   HANDLE  hHeap,
-///   DWORD   dwFlags,
-///   LPCVOID lpMem
-/// );
-/// ```
 /// {@category kernel32}
-int HeapSize(int hHeap, int dwFlags, Pointer lpMem) =>
+@pragma('vm:prefer-inline')
+bool HeapSetInformation(
+  int? heapHandle,
+  HEAP_INFORMATION_CLASS heapInformationClass,
+  Pointer? heapInformation,
+  int heapInformationLength,
+) =>
+    HeapSetInformation_Wrapper(
+      heapHandle ?? NULL,
+      heapInformationClass,
+      heapInformation ?? nullptr,
+      heapInformationLength,
+    ) !=
+    FALSE;
+
+/// Retrieves the size of a memory block allocated from a heap by the HeapAlloc
+/// or HeapReAlloc function.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/heapapi/nf-heapapi-heapsize>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+int HeapSize(int hHeap, HEAP_FLAGS dwFlags, Pointer lpMem) =>
     _HeapSize(hHeap, dwFlags, lpMem);
 
-final _HeapSize = _kernel32
-    .lookupFunction<
-      IntPtr Function(IntPtr hHeap, Uint32 dwFlags, Pointer lpMem),
-      int Function(int hHeap, int dwFlags, Pointer lpMem)
-    >('HeapSize');
+@Native<IntPtr Function(HANDLE, Uint32, Pointer)>(symbol: 'HeapSize')
+external int _HeapSize(int hHeap, int dwFlags, Pointer lpMem);
 
 /// Releases ownership of the critical section object, or lock, that is
-/// associated with a specified heap. It reverses the action of the HeapLock
-/// function.
+/// associated with a specified heap.
 ///
-/// ```c
-/// BOOL HeapUnlock(
-///   HANDLE hHeap
-/// );
-/// ```
-/// {@category kernel32}
-int HeapUnlock(int hHeap) => _HeapUnlock(hHeap);
-
-final _HeapUnlock = _kernel32
-    .lookupFunction<Int32 Function(IntPtr hHeap), int Function(int hHeap)>(
-      'HeapUnlock',
-    );
-
-/// Validates the specified heap. The function scans all the memory blocks
-/// in the heap and verifies that the heap control structures maintained by
-/// the heap manager are in a consistent state. You can also use the
-/// HeapValidate function to validate a single memory block within a
-/// specified heap without checking the validity of the entire heap.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/heapapi/nf-heapapi-heapunlock>.
 ///
-/// ```c
-/// BOOL HeapValidate(
-///   HANDLE  hHeap,
-///   DWORD   dwFlags,
-///   LPCVOID lpMem
-/// );
-/// ```
 /// {@category kernel32}
-int HeapValidate(int hHeap, int dwFlags, Pointer lpMem) =>
-    _HeapValidate(hHeap, dwFlags, lpMem);
+@pragma('vm:prefer-inline')
+bool HeapUnlock(int hHeap) => HeapUnlock_Wrapper(hHeap) != FALSE;
 
-final _HeapValidate = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hHeap, Uint32 dwFlags, Pointer lpMem),
-      int Function(int hHeap, int dwFlags, Pointer lpMem)
-    >('HeapValidate');
+/// Validates the specified heap.
+///
+/// The function scans all the memory blocks in the heap and verifies that the
+/// heap control structures maintained by the heap manager are in a consistent
+/// state.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/heapapi/nf-heapapi-heapvalidate>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool HeapValidate(int hHeap, HEAP_FLAGS dwFlags, Pointer? lpMem) =>
+    _HeapValidate(hHeap, dwFlags, lpMem ?? nullptr) != FALSE;
+
+@Native<BOOL Function(HANDLE, Uint32, Pointer)>(symbol: 'HeapValidate')
+external int _HeapValidate(int hHeap, int dwFlags, Pointer lpMem);
 
 /// Enumerates the memory blocks in the specified heap.
 ///
-/// ```c
-/// BOOL HeapWalk(
-///   HANDLE               hHeap,
-///   LPPROCESS_HEAP_ENTRY lpEntry
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/heapapi/nf-heapapi-heapwalk>.
+///
 /// {@category kernel32}
-int HeapWalk(int hHeap, Pointer<PROCESS_HEAP_ENTRY> lpEntry) =>
-    _HeapWalk(hHeap, lpEntry);
-
-final _HeapWalk = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hHeap, Pointer<PROCESS_HEAP_ENTRY> lpEntry),
-      int Function(int hHeap, Pointer<PROCESS_HEAP_ENTRY> lpEntry)
-    >('HeapWalk');
+@pragma('vm:prefer-inline')
+bool HeapWalk(int hHeap, Pointer<PROCESS_HEAP_ENTRY> lpEntry) =>
+    HeapWalk_Wrapper(hHeap, lpEntry) != FALSE;
 
 /// Initializes the specified list of attributes for process and thread
 /// creation.
 ///
-/// ```c
-/// BOOL InitializeProcThreadAttributeList(
-///   LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList,
-///   DWORD                        dwAttributeCount,
-///   DWORD                        dwFlags,
-///   PSIZE_T                      lpSize
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-initializeprocthreadattributelist>.
+///
 /// {@category kernel32}
-int InitializeProcThreadAttributeList(
-  Pointer lpAttributeList,
+@pragma('vm:prefer-inline')
+bool InitializeProcThreadAttributeList(
+  int? lpAttributeList,
   int dwAttributeCount,
-  int dwFlags,
   Pointer<IntPtr> lpSize,
-) => _InitializeProcThreadAttributeList(
-  lpAttributeList,
-  dwAttributeCount,
-  dwFlags,
-  lpSize,
-);
-
-final _InitializeProcThreadAttributeList = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer lpAttributeList,
-        Uint32 dwAttributeCount,
-        Uint32 dwFlags,
-        Pointer<IntPtr> lpSize,
-      ),
-      int Function(
-        Pointer lpAttributeList,
-        int dwAttributeCount,
-        int dwFlags,
-        Pointer<IntPtr> lpSize,
-      )
-    >('InitializeProcThreadAttributeList');
+) =>
+    InitializeProcThreadAttributeList_Wrapper(
+      lpAttributeList ?? NULL,
+      dwAttributeCount,
+      NULL,
+      lpSize,
+    ) !=
+    FALSE;
 
 /// Determines whether the calling process is being debugged by a user-mode
 /// debugger.
 ///
-/// ```c
-/// BOOL IsDebuggerPresent();
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/debugapi/nf-debugapi-isdebuggerpresent>.
+///
 /// {@category kernel32}
-int IsDebuggerPresent() => _IsDebuggerPresent();
+@pragma('vm:prefer-inline')
+bool IsDebuggerPresent() => _IsDebuggerPresent() != FALSE;
 
-final _IsDebuggerPresent = _kernel32
-    .lookupFunction<Int32 Function(), int Function()>('IsDebuggerPresent');
+@Native<BOOL Function()>(symbol: 'IsDebuggerPresent')
+external int _IsDebuggerPresent();
 
 /// Indicates if the OS was booted from a VHD container.
 ///
-/// ```c
-/// BOOL IsNativeVhdBoot(
-///   PBOOL NativeVhdBoot
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-isnativevhdboot>.
+///
 /// {@category kernel32}
-int IsNativeVhdBoot(Pointer<Int32> NativeVhdBoot) =>
-    _IsNativeVhdBoot(NativeVhdBoot);
-
-final _IsNativeVhdBoot = _kernel32
-    .lookupFunction<
-      Int32 Function(Pointer<Int32> NativeVhdBoot),
-      int Function(Pointer<Int32> NativeVhdBoot)
-    >('IsNativeVhdBoot');
+@pragma('vm:prefer-inline')
+bool IsNativeVhdBoot(Pointer<BOOL> nativeVhdBoot) =>
+    IsNativeVhdBoot_Wrapper(nativeVhdBoot) != FALSE;
 
 /// Determines whether the process is running in the specified job.
 ///
-/// ```c
-/// BOOL IsProcessInJob(
-///   [in]           HANDLE ProcessHandle,
-///   [in, optional] HANDLE JobHandle,
-///   [out]          PBOOL  Result
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/jobapi/nf-jobapi-isprocessinjob>.
+///
 /// {@category kernel32}
-int IsProcessInJob(int ProcessHandle, int JobHandle, Pointer<Int32> Result) =>
-    _IsProcessInJob(ProcessHandle, JobHandle, Result);
-
-final _IsProcessInJob = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr ProcessHandle,
-        IntPtr JobHandle,
-        Pointer<Int32> Result,
-      ),
-      int Function(int ProcessHandle, int JobHandle, Pointer<Int32> Result)
-    >('IsProcessInJob');
+@pragma('vm:prefer-inline')
+bool IsProcessInJob(int processHandle, int? jobHandle, Pointer<BOOL> result) =>
+    IsProcessInJob_Wrapper(processHandle, jobHandle ?? NULL, result) != FALSE;
 
 /// Determines the current state of the computer.
 ///
-/// ```c
-/// BOOL IsSystemResumeAutomatic();
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-issystemresumeautomatic>.
+///
 /// {@category kernel32}
-int IsSystemResumeAutomatic() => _IsSystemResumeAutomatic();
+@pragma('vm:prefer-inline')
+bool IsSystemResumeAutomatic() => _IsSystemResumeAutomatic() != FALSE;
 
-final _IsSystemResumeAutomatic = _kernel32
-    .lookupFunction<Int32 Function(), int Function()>(
-      'IsSystemResumeAutomatic',
-    );
+@Native<BOOL Function()>(symbol: 'IsSystemResumeAutomatic')
+external int _IsSystemResumeAutomatic();
 
 /// Determines if the specified locale name is valid for a locale that is
 /// installed or supported on the operating system.
 ///
-/// ```c
-/// BOOL IsValidLocaleName(
-///   LPCWSTR lpLocaleName
-///   );
-/// ```
+/// **Note:** An application running only on Windows Vista and later should call
+/// this function in preference to IsValidLocale to determine the validity of a
+/// supplemental locale.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-isvalidlocalename>.
+///
 /// {@category kernel32}
-int IsValidLocaleName(Pointer<Utf16> lpLocaleName) =>
-    _IsValidLocaleName(lpLocaleName);
+@pragma('vm:prefer-inline')
+bool IsValidLocaleName(PCWSTR lpLocaleName) =>
+    _IsValidLocaleName(lpLocaleName) != FALSE;
 
-final _IsValidLocaleName = _kernel32
-    .lookupFunction<
-      Int32 Function(Pointer<Utf16> lpLocaleName),
-      int Function(Pointer<Utf16> lpLocaleName)
-    >('IsValidLocaleName');
+@Native<BOOL Function(PCWSTR)>(symbol: 'IsValidLocaleName')
+external int _IsValidLocaleName(PCWSTR lpLocaleName);
 
-/// Determines whether the specified process is running under WOW64. Also
+/// Determines whether the specified process is running under WOW64; also
 /// returns additional machine process and architecture information.
 ///
-/// ```c
-/// BOOL IsWow64Process2(
-///   HANDLE hProcess,
-///   USHORT *pProcessMachine,
-///   USHORT *pNativeMachine
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wow64apiset/nf-wow64apiset-iswow64process2>.
+///
 /// {@category kernel32}
-int IsWow64Process2(
+@pragma('vm:prefer-inline')
+bool IsWow64Process2(
   int hProcess,
   Pointer<Uint16> pProcessMachine,
-  Pointer<Uint16> pNativeMachine,
-) => _IsWow64Process2(hProcess, pProcessMachine, pNativeMachine);
+  Pointer<Uint16>? pNativeMachine,
+) =>
+    IsWow64Process2_Wrapper(
+      hProcess,
+      pProcessMachine,
+      pNativeMachine ?? nullptr,
+    ) !=
+    FALSE;
 
-final _IsWow64Process2 = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hProcess,
-        Pointer<Uint16> pProcessMachine,
-        Pointer<Uint16> pNativeMachine,
-      ),
-      int Function(
-        int hProcess,
-        Pointer<Uint16> pProcessMachine,
-        Pointer<Uint16> pNativeMachine,
-      )
-    >('IsWow64Process2');
-
-/// Loads the specified module into the address space of the calling
-/// process. The specified module may cause other modules to be loaded.
+/// Loads the specified module into the address space of the calling process.
 ///
-/// ```c
-/// HMODULE LoadLibraryW(
-///   LPCWSTR lpLibFileName
-/// );
-/// ```
-/// {@category kernel32}
-int LoadLibrary(Pointer<Utf16> lpLibFileName) => _LoadLibrary(lpLibFileName);
-
-final _LoadLibrary = _kernel32
-    .lookupFunction<
-      IntPtr Function(Pointer<Utf16> lpLibFileName),
-      int Function(Pointer<Utf16> lpLibFileName)
-    >('LoadLibraryW');
-
-/// Loads the specified module into the address space of the calling
-/// process. The specified module may cause other modules to be loaded.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-loadlibraryw>.
 ///
-/// ```c
-/// HMODULE LoadLibraryExW(
-///   [in] LPCWSTR lpLibFileName,
-///        HANDLE  hFile,
-///   [in] DWORD   dwFlags
-/// );
-/// ```
 /// {@category kernel32}
-int LoadLibraryEx(Pointer<Utf16> lpLibFileName, int hFile, int dwFlags) =>
-    _LoadLibraryEx(lpLibFileName, hFile, dwFlags);
+@pragma('vm:prefer-inline')
+int LoadLibrary(PCWSTR lpLibFileName) => LoadLibraryW_Wrapper(lpLibFileName);
 
-final _LoadLibraryEx = _kernel32
-    .lookupFunction<
-      IntPtr Function(
-        Pointer<Utf16> lpLibFileName,
-        IntPtr hFile,
-        Uint32 dwFlags,
-      ),
-      int Function(Pointer<Utf16> lpLibFileName, int hFile, int dwFlags)
-    >('LoadLibraryExW');
-
-/// Retrieves a handle that can be used to obtain a pointer to the first
-/// byte of the specified resource in memory.
+/// Loads the specified module into the address space of the calling process.
 ///
-/// ```c
-/// HGLOBAL LoadResource(
-///   HMODULE hModule,
-///   HRSRC   hResInfo
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-loadlibraryexw>.
+///
 /// {@category kernel32}
-Pointer LoadResource(int hModule, int hResInfo) =>
-    _LoadResource(hModule, hResInfo);
+@pragma('vm:prefer-inline')
+int LoadLibraryEx(PCWSTR lpLibFileName, LOAD_LIBRARY_FLAGS dwFlags) =>
+    LoadLibraryExW_Wrapper(lpLibFileName, NULL, dwFlags);
 
-final _LoadResource = _kernel32
-    .lookupFunction<
-      Pointer Function(IntPtr hModule, IntPtr hResInfo),
-      Pointer Function(int hModule, int hResInfo)
-    >('LoadResource');
+/// Retrieves a handle that can be used to obtain a pointer to the first byte of
+/// the specified resource in memory.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-loadresource>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+int LoadResource(int? hModule, int hResInfo) =>
+    LoadResource_Wrapper(hModule ?? NULL, hResInfo);
+
+/// Allocates the specified number of bytes from the heap.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-localalloc>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+int LocalAlloc(LOCAL_ALLOC_FLAGS uFlags, int uBytes) =>
+    LocalAlloc_Wrapper(uFlags, uBytes);
 
 /// Frees the specified local memory object and invalidates its handle.
 ///
-/// ```c
-/// HLOCAL LocalFree(
-///   _Frees_ptr_opt_ HLOCAL hMem
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-localfree>.
+///
 /// {@category kernel32}
-Pointer LocalFree(Pointer hMem) => _LocalFree(hMem);
-
-final _LocalFree = _kernel32
-    .lookupFunction<
-      Pointer Function(Pointer hMem),
-      Pointer Function(Pointer hMem)
-    >('LocalFree');
+@pragma('vm:prefer-inline')
+int LocalFree(int? hMem) => LocalFree_Wrapper(hMem ?? NULL);
 
 /// Locks the specified file for exclusive access by the calling process.
 ///
-/// ```c
-/// BOOL LockFile(
-///   [in] HANDLE hFile,
-///   [in] DWORD  dwFileOffsetLow,
-///   [in] DWORD  dwFileOffsetHigh,
-///   [in] DWORD  nNumberOfBytesToLockLow,
-///   [in] DWORD  nNumberOfBytesToLockHigh
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-lockfile>.
+///
 /// {@category kernel32}
-int LockFile(
+@pragma('vm:prefer-inline')
+bool LockFile(
   int hFile,
   int dwFileOffsetLow,
   int dwFileOffsetHigh,
   int nNumberOfBytesToLockLow,
   int nNumberOfBytesToLockHigh,
-) => _LockFile(
-  hFile,
-  dwFileOffsetLow,
-  dwFileOffsetHigh,
-  nNumberOfBytesToLockLow,
-  nNumberOfBytesToLockHigh,
-);
-
-final _LockFile = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hFile,
-        Uint32 dwFileOffsetLow,
-        Uint32 dwFileOffsetHigh,
-        Uint32 nNumberOfBytesToLockLow,
-        Uint32 nNumberOfBytesToLockHigh,
-      ),
-      int Function(
-        int hFile,
-        int dwFileOffsetLow,
-        int dwFileOffsetHigh,
-        int nNumberOfBytesToLockLow,
-        int nNumberOfBytesToLockHigh,
-      )
-    >('LockFile');
+) =>
+    LockFile_Wrapper(
+      hFile,
+      dwFileOffsetLow,
+      dwFileOffsetHigh,
+      nNumberOfBytesToLockLow,
+      nNumberOfBytesToLockHigh,
+    ) !=
+    FALSE;
 
 /// Locks the specified file for exclusive access by the calling process.
+///
 /// This function can operate either synchronously or asynchronously and can
 /// request either an exclusive or a shared lock.
 ///
-/// ```c
-/// BOOL LockFileEx(
-///   [in]      HANDLE       hFile,
-///   [in]      DWORD        dwFlags,
-///             DWORD        dwReserved,
-///   [in]      DWORD        nNumberOfBytesToLockLow,
-///   [in]      DWORD        nNumberOfBytesToLockHigh,
-///   [in, out] LPOVERLAPPED lpOverlapped
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-lockfileex>.
+///
 /// {@category kernel32}
-int LockFileEx(
+@pragma('vm:prefer-inline')
+bool LockFileEx(
   int hFile,
-  int dwFlags,
-  int dwReserved,
+  LOCK_FILE_FLAGS dwFlags,
   int nNumberOfBytesToLockLow,
   int nNumberOfBytesToLockHigh,
   Pointer<OVERLAPPED> lpOverlapped,
-) => _LockFileEx(
-  hFile,
-  dwFlags,
-  dwReserved,
-  nNumberOfBytesToLockLow,
-  nNumberOfBytesToLockHigh,
-  lpOverlapped,
-);
-
-final _LockFileEx = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hFile,
-        Uint32 dwFlags,
-        Uint32 dwReserved,
-        Uint32 nNumberOfBytesToLockLow,
-        Uint32 nNumberOfBytesToLockHigh,
-        Pointer<OVERLAPPED> lpOverlapped,
-      ),
-      int Function(
-        int hFile,
-        int dwFlags,
-        int dwReserved,
-        int nNumberOfBytesToLockLow,
-        int nNumberOfBytesToLockHigh,
-        Pointer<OVERLAPPED> lpOverlapped,
-      )
-    >('LockFileEx');
+) =>
+    LockFileEx_Wrapper(
+      hFile,
+      dwFlags,
+      NULL,
+      nNumberOfBytesToLockLow,
+      nNumberOfBytesToLockHigh,
+      lpOverlapped,
+    ) !=
+    FALSE;
 
 /// Retrieves a pointer to the specified resource in memory.
 ///
-/// ```c
-/// LPVOID LockResource(
-///   HGLOBAL hResData
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-lockresource>.
+///
 /// {@category kernel32}
-Pointer LockResource(Pointer hResData) => _LockResource(hResData);
+@pragma('vm:prefer-inline')
+Pointer LockResource(int hResData) => _LockResource(hResData);
 
-final _LockResource = _kernel32
-    .lookupFunction<
-      Pointer Function(Pointer hResData),
-      Pointer Function(Pointer hResData)
-    >('LockResource');
+@Native<Pointer Function(HGLOBAL)>(symbol: 'LockResource')
+external Pointer _LockResource(int hResData);
 
 /// Moves an existing file or a directory, including its children.
 ///
-/// ```c
-/// BOOL MoveFileW(
-///   LPCWSTR lpExistingFileName,
-///   LPCWSTR lpNewFileName
-/// );
-/// ```
-/// {@category kernel32}
-int MoveFile(Pointer<Utf16> lpExistingFileName, Pointer<Utf16> lpNewFileName) =>
-    _MoveFile(lpExistingFileName, lpNewFileName);
-
-final _MoveFile = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Utf16> lpExistingFileName,
-        Pointer<Utf16> lpNewFileName,
-      ),
-      int Function(
-        Pointer<Utf16> lpExistingFileName,
-        Pointer<Utf16> lpNewFileName,
-      )
-    >('MoveFileW');
-
-/// Moves an existing file or directory, including its children, with
-/// various move options.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-movefilew>.
 ///
-/// ```c
-/// BOOL MoveFileExW(
-///   LPCWSTR lpExistingFileName,
-///   LPCWSTR lpNewFileName,
-///   DWORD  dwFlags
-/// );
-/// ```
 /// {@category kernel32}
-int MoveFileEx(
-  Pointer<Utf16> lpExistingFileName,
-  Pointer<Utf16> lpNewFileName,
-  int dwFlags,
-) => _MoveFileEx(lpExistingFileName, lpNewFileName, dwFlags);
+@pragma('vm:prefer-inline')
+bool MoveFile(PCWSTR lpExistingFileName, PCWSTR lpNewFileName) =>
+    MoveFileW_Wrapper(lpExistingFileName, lpNewFileName) != FALSE;
 
-final _MoveFileEx = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Utf16> lpExistingFileName,
-        Pointer<Utf16> lpNewFileName,
-        Uint32 dwFlags,
-      ),
-      int Function(
-        Pointer<Utf16> lpExistingFileName,
-        Pointer<Utf16> lpNewFileName,
-        int dwFlags,
-      )
-    >('MoveFileExW');
+/// Moves an existing file or directory, including its children, with various
+/// move options.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-movefileexw>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool MoveFileEx(
+  PCWSTR lpExistingFileName,
+  PCWSTR? lpNewFileName,
+  MOVE_FILE_FLAGS dwFlags,
+) =>
+    MoveFileExW_Wrapper(
+      lpExistingFileName,
+      lpNewFileName ?? nullptr,
+      dwFlags,
+    ) !=
+    FALSE;
 
 /// Opens an existing named event object.
 ///
-/// ```c
-/// HANDLE OpenEventW(
-///   DWORD   dwDesiredAccess,
-///   BOOL    bInheritHandle,
-///   LPCWSTR lpName
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-openeventw>.
+///
 /// {@category kernel32}
-int OpenEvent(int dwDesiredAccess, int bInheritHandle, Pointer<Utf16> lpName) =>
-    _OpenEvent(dwDesiredAccess, bInheritHandle, lpName);
-
-final _OpenEvent = _kernel32
-    .lookupFunction<
-      IntPtr Function(
-        Uint32 dwDesiredAccess,
-        Int32 bInheritHandle,
-        Pointer<Utf16> lpName,
-      ),
-      int Function(
-        int dwDesiredAccess,
-        int bInheritHandle,
-        Pointer<Utf16> lpName,
-      )
-    >('OpenEventW');
+@pragma('vm:prefer-inline')
+int OpenEvent(
+  SYNCHRONIZATION_ACCESS_RIGHTS dwDesiredAccess,
+  bool bInheritHandle,
+  PCWSTR lpName,
+) => OpenEventW_Wrapper(dwDesiredAccess, bInheritHandle ? TRUE : FALSE, lpName);
 
 /// Opens an existing job object.
 ///
-/// ```c
-/// HANDLE OpenJobObjectW(
-///   [in] DWORD   dwDesiredAccess,
-///   [in] BOOL    bInheritHandle,
-///   [in] LPCWSTR lpName
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/jobapi2/nf-jobapi2-openjobobjectw>.
+///
 /// {@category kernel32}
-int OpenJobObject(
-  int dwDesiredAccess,
-  int bInheritHandle,
-  Pointer<Utf16> lpName,
-) => _OpenJobObject(dwDesiredAccess, bInheritHandle, lpName);
-
-final _OpenJobObject = _kernel32
-    .lookupFunction<
-      IntPtr Function(
-        Uint32 dwDesiredAccess,
-        Int32 bInheritHandle,
-        Pointer<Utf16> lpName,
-      ),
-      int Function(
-        int dwDesiredAccess,
-        int bInheritHandle,
-        Pointer<Utf16> lpName,
-      )
-    >('OpenJobObjectW');
+@pragma('vm:prefer-inline')
+int OpenJobObject(int dwDesiredAccess, bool bInheritHandle, PCWSTR lpName) =>
+    OpenJobObjectW_Wrapper(
+      dwDesiredAccess,
+      bInheritHandle ? TRUE : FALSE,
+      lpName,
+    );
 
 /// Opens an existing local process object.
 ///
-/// ```c
-/// HANDLE OpenProcess(
-///   DWORD dwDesiredAccess,
-///   BOOL  bInheritHandle,
-///   DWORD dwProcessId
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-openprocess>.
+///
 /// {@category kernel32}
-int OpenProcess(int dwDesiredAccess, int bInheritHandle, int dwProcessId) =>
-    _OpenProcess(dwDesiredAccess, bInheritHandle, dwProcessId);
-
-final _OpenProcess = _kernel32
-    .lookupFunction<
-      IntPtr Function(
-        Uint32 dwDesiredAccess,
-        Int32 bInheritHandle,
-        Uint32 dwProcessId,
-      ),
-      int Function(int dwDesiredAccess, int bInheritHandle, int dwProcessId)
-    >('OpenProcess');
+@pragma('vm:prefer-inline')
+int OpenProcess(
+  PROCESS_ACCESS_RIGHTS dwDesiredAccess,
+  bool bInheritHandle,
+  int dwProcessId,
+) => OpenProcess_Wrapper(
+  dwDesiredAccess,
+  bInheritHandle ? TRUE : FALSE,
+  dwProcessId,
+);
 
 /// Sends a string to the debugger for display.
 ///
-/// ```c
-/// void OutputDebugStringW(
-///   LPCWSTR lpOutputString
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/debugapi/nf-debugapi-outputdebugstringw>.
+///
 /// {@category kernel32}
-void OutputDebugString(Pointer<Utf16> lpOutputString) =>
-    _OutputDebugString(lpOutputString);
+@pragma('vm:prefer-inline')
+void OutputDebugString(PCWSTR? lpOutputString) =>
+    _OutputDebugString(lpOutputString ?? nullptr);
 
-final _OutputDebugString = _kernel32
-    .lookupFunction<
-      Void Function(Pointer<Utf16> lpOutputString),
-      void Function(Pointer<Utf16> lpOutputString)
-    >('OutputDebugStringW');
+@Native<Void Function(PCWSTR)>(symbol: 'OutputDebugStringW')
+external void _OutputDebugString(PCWSTR lpOutputString);
 
 /// Gets the package family name for the specified package full name.
 ///
-/// ```c
-/// LONG PackageFamilyNameFromFullName(
-///   PCWSTR packageFullName,
-///   UINT32 *packageFamilyNameLength,
-///   PWSTR  packageFamilyName
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-packagefamilynamefromfullname>.
+///
 /// {@category kernel32}
-int PackageFamilyNameFromFullName(
-  Pointer<Utf16> packageFullName,
+@pragma('vm:prefer-inline')
+WIN32_ERROR PackageFamilyNameFromFullName(
+  PCWSTR packageFullName,
   Pointer<Uint32> packageFamilyNameLength,
-  Pointer<Utf16> packageFamilyName,
-) => _PackageFamilyNameFromFullName(
-  packageFullName,
-  packageFamilyNameLength,
-  packageFamilyName,
+  PWSTR? packageFamilyName,
+) => WIN32_ERROR(
+  _PackageFamilyNameFromFullName(
+    packageFullName,
+    packageFamilyNameLength,
+    packageFamilyName ?? nullptr,
+  ),
 );
 
-final _PackageFamilyNameFromFullName = _kernel32
-    .lookupFunction<
-      Uint32 Function(
-        Pointer<Utf16> packageFullName,
-        Pointer<Uint32> packageFamilyNameLength,
-        Pointer<Utf16> packageFamilyName,
-      ),
-      int Function(
-        Pointer<Utf16> packageFullName,
-        Pointer<Uint32> packageFamilyNameLength,
-        Pointer<Utf16> packageFamilyName,
-      )
-    >('PackageFamilyNameFromFullName');
+@Native<Uint32 Function(PCWSTR, Pointer<Uint32>, PWSTR)>(
+  symbol: 'PackageFamilyNameFromFullName',
+)
+external int _PackageFamilyNameFromFullName(
+  PCWSTR packageFullName,
+  Pointer<Uint32> packageFamilyNameLength,
+  PWSTR packageFamilyName,
+);
 
-/// Reads data from the specified console input buffer without removing it
-/// from the buffer.
+/// Reads data from the specified console input buffer without removing it from
+/// the buffer.
 ///
-/// ```c
-/// BOOL PeekConsoleInputW(
-///   HANDLE        hConsoleInput,
-///   PINPUT_RECORD lpBuffer,
-///   DWORD         nLength,
-///   LPDWORD       lpNumberOfEventsRead
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/console/peekconsoleinput>.
+///
 /// {@category kernel32}
-int PeekConsoleInput(
+@pragma('vm:prefer-inline')
+bool PeekConsoleInput(
   int hConsoleInput,
   Pointer<INPUT_RECORD> lpBuffer,
   int nLength,
   Pointer<Uint32> lpNumberOfEventsRead,
-) => _PeekConsoleInput(hConsoleInput, lpBuffer, nLength, lpNumberOfEventsRead);
+) =>
+    PeekConsoleInputW_Wrapper(
+      hConsoleInput,
+      lpBuffer,
+      nLength,
+      lpNumberOfEventsRead,
+    ) !=
+    FALSE;
 
-final _PeekConsoleInput = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hConsoleInput,
-        Pointer<INPUT_RECORD> lpBuffer,
-        Uint32 nLength,
-        Pointer<Uint32> lpNumberOfEventsRead,
-      ),
-      int Function(
-        int hConsoleInput,
-        Pointer<INPUT_RECORD> lpBuffer,
-        int nLength,
-        Pointer<Uint32> lpNumberOfEventsRead,
-      )
-    >('PeekConsoleInputW');
-
-/// Copies data from a named or anonymous pipe into a buffer without
-/// removing it from the pipe. It also returns information about data in the
-/// pipe.
+/// Copies data from a named or anonymous pipe into a buffer without removing it
+/// from the pipe.
 ///
-/// ```c
-/// BOOL PeekNamedPipe(
-///   HANDLE  hNamedPipe,
-///   LPVOID  lpBuffer,
-///   DWORD   nBufferSize,
-///   LPDWORD lpBytesRead,
-///   LPDWORD lpTotalBytesAvail,
-///   LPDWORD lpBytesLeftThisMessage);
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/namedpipeapi/nf-namedpipeapi-peeknamedpipe>.
+///
 /// {@category kernel32}
-int PeekNamedPipe(
+@pragma('vm:prefer-inline')
+bool PeekNamedPipe(
   int hNamedPipe,
-  Pointer lpBuffer,
+  Pointer? lpBuffer,
   int nBufferSize,
-  Pointer<Uint32> lpBytesRead,
-  Pointer<Uint32> lpTotalBytesAvail,
-  Pointer<Uint32> lpBytesLeftThisMessage,
-) => _PeekNamedPipe(
-  hNamedPipe,
-  lpBuffer,
-  nBufferSize,
-  lpBytesRead,
-  lpTotalBytesAvail,
-  lpBytesLeftThisMessage,
-);
-
-final _PeekNamedPipe = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hNamedPipe,
-        Pointer lpBuffer,
-        Uint32 nBufferSize,
-        Pointer<Uint32> lpBytesRead,
-        Pointer<Uint32> lpTotalBytesAvail,
-        Pointer<Uint32> lpBytesLeftThisMessage,
-      ),
-      int Function(
-        int hNamedPipe,
-        Pointer lpBuffer,
-        int nBufferSize,
-        Pointer<Uint32> lpBytesRead,
-        Pointer<Uint32> lpTotalBytesAvail,
-        Pointer<Uint32> lpBytesLeftThisMessage,
-      )
-    >('PeekNamedPipe');
+  Pointer<Uint32>? lpBytesRead,
+  Pointer<Uint32>? lpTotalBytesAvail,
+  Pointer<Uint32>? lpBytesLeftThisMessage,
+) =>
+    PeekNamedPipe_Wrapper(
+      hNamedPipe,
+      lpBuffer ?? nullptr,
+      nBufferSize,
+      lpBytesRead ?? nullptr,
+      lpTotalBytesAvail ?? nullptr,
+      lpBytesLeftThisMessage ?? nullptr,
+    ) !=
+    FALSE;
 
 /// Posts an I/O completion packet to an I/O completion port.
 ///
-/// ```c
-/// BOOL PostQueuedCompletionStatus(
-///   HANDLE       CompletionPort,
-///   DWORD        dwNumberOfBytesTransferred,
-///   ULONG_PTR    dwCompletionKey,
-///   LPOVERLAPPED lpOverlapped
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/ioapiset/nf-ioapiset-postqueuedcompletionstatus>.
+///
 /// {@category kernel32}
-int PostQueuedCompletionStatus(
-  int CompletionPort,
+@pragma('vm:prefer-inline')
+bool PostQueuedCompletionStatus(
+  int completionPort,
   int dwNumberOfBytesTransferred,
   int dwCompletionKey,
-  Pointer<OVERLAPPED> lpOverlapped,
-) => _PostQueuedCompletionStatus(
-  CompletionPort,
-  dwNumberOfBytesTransferred,
-  dwCompletionKey,
-  lpOverlapped,
-);
-
-final _PostQueuedCompletionStatus = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr CompletionPort,
-        Uint32 dwNumberOfBytesTransferred,
-        IntPtr dwCompletionKey,
-        Pointer<OVERLAPPED> lpOverlapped,
-      ),
-      int Function(
-        int CompletionPort,
-        int dwNumberOfBytesTransferred,
-        int dwCompletionKey,
-        Pointer<OVERLAPPED> lpOverlapped,
-      )
-    >('PostQueuedCompletionStatus');
+  Pointer<OVERLAPPED>? lpOverlapped,
+) =>
+    PostQueuedCompletionStatus_Wrapper(
+      completionPort,
+      dwNumberOfBytesTransferred,
+      dwCompletionKey,
+      lpOverlapped ?? nullptr,
+    ) !=
+    FALSE;
 
 /// Discards all characters from the output or input buffer of a specified
-/// communications resource. It can also terminate pending read or write
-/// operations on the resource.
+/// communications resource.
 ///
-/// ```c
-/// BOOL PurgeComm(
-///   HANDLE hFile,
-///   DWORD  dwFlags
-/// );
-/// ```
-/// {@category kernel32}
-int PurgeComm(int hFile, int dwFlags) => _PurgeComm(hFile, dwFlags);
-
-final _PurgeComm = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hFile, Uint32 dwFlags),
-      int Function(int hFile, int dwFlags)
-    >('PurgeComm');
-
-/// Retrieves information about MS-DOS device names. The function can obtain
-/// the current mapping for a particular MS-DOS device name. The function
-/// can also obtain a list of all existing MS-DOS device names.
+/// It can also terminate pending read or write operations on the resource.
 ///
-/// ```c
-/// DWORD QueryDosDeviceW(
-///   LPCWSTR lpDeviceName,
-///   LPWSTR  lpTargetPath,
-///   DWORD   ucchMax
-/// );
-/// ```
-/// {@category kernel32}
-int QueryDosDevice(
-  Pointer<Utf16> lpDeviceName,
-  Pointer<Utf16> lpTargetPath,
-  int ucchMax,
-) => _QueryDosDevice(lpDeviceName, lpTargetPath, ucchMax);
-
-final _QueryDosDevice = _kernel32
-    .lookupFunction<
-      Uint32 Function(
-        Pointer<Utf16> lpDeviceName,
-        Pointer<Utf16> lpTargetPath,
-        Uint32 ucchMax,
-      ),
-      int Function(
-        Pointer<Utf16> lpDeviceName,
-        Pointer<Utf16> lpTargetPath,
-        int ucchMax,
-      )
-    >('QueryDosDeviceW');
-
-/// Retrieves the full name of the executable image for the specified
-/// process.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-purgecomm>.
 ///
-/// ```c
-/// BOOL QueryFullProcessImageNameW(
-///   HANDLE hProcess,
-///   DWORD  dwFlags,
-///   LPWSTR lpExeName,
-///   PDWORD lpdwSize
-/// );
-/// ```
 /// {@category kernel32}
-int QueryFullProcessImageName(
+@pragma('vm:prefer-inline')
+bool PurgeComm(int hFile, PURGE_COMM_FLAGS dwFlags) =>
+    PurgeComm_Wrapper(hFile, dwFlags) != FALSE;
+
+/// Retrieves information about MS-DOS device names.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-querydosdevicew>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+int QueryDosDevice(PCWSTR? lpDeviceName, PWSTR? lpTargetPath, int ucchMax) =>
+    QueryDosDeviceW_Wrapper(
+      lpDeviceName ?? nullptr,
+      lpTargetPath ?? nullptr,
+      ucchMax,
+    );
+
+/// Retrieves the full name of the executable image for the specified process.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-queryfullprocessimagenamew>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool QueryFullProcessImageName(
   int hProcess,
-  int dwFlags,
-  Pointer<Utf16> lpExeName,
+  PROCESS_NAME_FORMAT dwFlags,
+  PWSTR lpExeName,
   Pointer<Uint32> lpdwSize,
-) => _QueryFullProcessImageName(hProcess, dwFlags, lpExeName, lpdwSize);
-
-final _QueryFullProcessImageName = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hProcess,
-        Uint32 dwFlags,
-        Pointer<Utf16> lpExeName,
-        Pointer<Uint32> lpdwSize,
-      ),
-      int Function(
-        int hProcess,
-        int dwFlags,
-        Pointer<Utf16> lpExeName,
-        Pointer<Uint32> lpdwSize,
-      )
-    >('QueryFullProcessImageNameW');
+) =>
+    QueryFullProcessImageNameW_Wrapper(
+      hProcess,
+      dwFlags,
+      lpExeName,
+      lpdwSize,
+    ) !=
+    FALSE;
 
 /// Retrieves limit and job state information from the job object.
 ///
-/// ```c
-/// BOOL QueryInformationJobObject(
-///   [in, optional]  HANDLE             hJob,
-///   [in]            JOBOBJECTINFOCLASS JobObjectInformationClass,
-///   [out]           LPVOID             lpJobObjectInformation,
-///   [in]            DWORD              cbJobObjectInformationLength,
-///   [out, optional] LPDWORD            lpReturnLength
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/jobapi2/nf-jobapi2-queryinformationjobobject>.
+///
 /// {@category kernel32}
-int QueryInformationJobObject(
-  int hJob,
-  int JobObjectInformationClass,
+@pragma('vm:prefer-inline')
+bool QueryInformationJobObject(
+  int? hJob,
+  JOBOBJECTINFOCLASS jobObjectInformationClass,
   Pointer lpJobObjectInformation,
   int cbJobObjectInformationLength,
-  Pointer<Uint32> lpReturnLength,
-) => _QueryInformationJobObject(
-  hJob,
-  JobObjectInformationClass,
-  lpJobObjectInformation,
-  cbJobObjectInformationLength,
-  lpReturnLength,
-);
-
-final _QueryInformationJobObject = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hJob,
-        Int32 JobObjectInformationClass,
-        Pointer lpJobObjectInformation,
-        Uint32 cbJobObjectInformationLength,
-        Pointer<Uint32> lpReturnLength,
-      ),
-      int Function(
-        int hJob,
-        int JobObjectInformationClass,
-        Pointer lpJobObjectInformation,
-        int cbJobObjectInformationLength,
-        Pointer<Uint32> lpReturnLength,
-      )
-    >('QueryInformationJobObject');
+  Pointer<Uint32>? lpReturnLength,
+) =>
+    QueryInformationJobObject_Wrapper(
+      hJob ?? NULL,
+      jobObjectInformationClass,
+      lpJobObjectInformation,
+      cbJobObjectInformationLength,
+      lpReturnLength ?? nullptr,
+    ) !=
+    FALSE;
 
 /// Gets information about the control of the I/O rate for a job object.
 ///
-/// ```c
-/// DWORD QueryIoRateControlInformationJobObject(
-///   [in, optional] HANDLE                                hJob,
-///   [in, optional] PCWSTR                                VolumeName,
-///   [out]          JOBOBJECT_IO_RATE_CONTROL_INFORMATION **InfoBlocks,
-///   [out]          ULONG                                 *InfoBlockCount
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/jobapi2/nf-jobapi2-queryioratecontrolinformationjobobject>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 int QueryIoRateControlInformationJobObject(
-  int hJob,
-  Pointer<Utf16> VolumeName,
-  Pointer<Pointer<JOBOBJECT_IO_RATE_CONTROL_INFORMATION>> InfoBlocks,
-  Pointer<Uint32> InfoBlockCount,
-) => _QueryIoRateControlInformationJobObject(
-  hJob,
-  VolumeName,
-  InfoBlocks,
-  InfoBlockCount,
+  int? hJob,
+  PCWSTR? volumeName,
+  Pointer<Pointer<JOBOBJECT_IO_RATE_CONTROL_INFORMATION>> infoBlocks,
+  Pointer<Uint32> infoBlockCount,
+) => QueryIoRateControlInformationJobObject_Wrapper(
+  hJob ?? NULL,
+  volumeName ?? nullptr,
+  infoBlocks,
+  infoBlockCount,
 );
 
-final _QueryIoRateControlInformationJobObject = _kernel32
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hJob,
-        Pointer<Utf16> VolumeName,
-        Pointer<Pointer<JOBOBJECT_IO_RATE_CONTROL_INFORMATION>> InfoBlocks,
-        Pointer<Uint32> InfoBlockCount,
-      ),
-      int Function(
-        int hJob,
-        Pointer<Utf16> VolumeName,
-        Pointer<Pointer<JOBOBJECT_IO_RATE_CONTROL_INFORMATION>> InfoBlocks,
-        Pointer<Uint32> InfoBlockCount,
-      )
-    >('QueryIoRateControlInformationJobObject');
-
 /// Retrieves the current value of the performance counter, which is a high
-/// resolution (<1us) time stamp that can be used for time-interval
+/// resolution (&lt;1us) time stamp that can be used for time-interval
 /// measurements.
 ///
-/// ```c
-/// BOOL QueryPerformanceCounter(
-///   LARGE_INTEGER *lpPerformanceCount
-/// );
-/// ```
-/// {@category kernel32}
-int QueryPerformanceCounter(Pointer<Int64> lpPerformanceCount) =>
-    _QueryPerformanceCounter(lpPerformanceCount);
-
-final _QueryPerformanceCounter = _kernel32
-    .lookupFunction<
-      Int32 Function(Pointer<Int64> lpPerformanceCount),
-      int Function(Pointer<Int64> lpPerformanceCount)
-    >('QueryPerformanceCounter');
-
-/// Retrieves the frequency of the performance counter. The frequency of the
-/// performance counter is fixed at system boot and is consistent across all
-/// processors. Therefore, the frequency need only be queried upon
-/// application initialization, and the result can be cached.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/profileapi/nf-profileapi-queryperformancecounter>.
 ///
-/// ```c
-/// BOOL QueryPerformanceFrequency(
-///   LARGE_INTEGER *lpFrequency
-/// );
-/// ```
 /// {@category kernel32}
-int QueryPerformanceFrequency(Pointer<Int64> lpFrequency) =>
-    _QueryPerformanceFrequency(lpFrequency);
+@pragma('vm:prefer-inline')
+bool QueryPerformanceCounter(Pointer<Int64> lpPerformanceCount) =>
+    QueryPerformanceCounter_Wrapper(lpPerformanceCount) != FALSE;
 
-final _QueryPerformanceFrequency = _kernel32
-    .lookupFunction<
-      Int32 Function(Pointer<Int64> lpFrequency),
-      int Function(Pointer<Int64> lpFrequency)
-    >('QueryPerformanceFrequency');
-
-/// Reads character input from the console input buffer and removes it from
-/// the buffer.
+/// Retrieves the frequency of the performance counter.
 ///
-/// ```c
-/// BOOL ReadConsoleW(
-///   _In_     HANDLE  hConsoleInput,
-///   _Out_    LPVOID  lpBuffer,
-///   _In_     DWORD   nNumberOfCharsToRead,
-///   _Out_    LPDWORD lpNumberOfCharsRead,
-///   _In_opt_ LPVOID  pInputControl
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/profileapi/nf-profileapi-queryperformancefrequency>.
+///
 /// {@category kernel32}
-int ReadConsole(
+@pragma('vm:prefer-inline')
+bool QueryPerformanceFrequency(Pointer<Int64> lpFrequency) =>
+    QueryPerformanceFrequency_Wrapper(lpFrequency) != FALSE;
+
+/// Reads character input from the console input buffer and removes it from the
+/// buffer.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/console/readconsole>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool ReadConsole(
   int hConsoleInput,
   Pointer lpBuffer,
   int nNumberOfCharsToRead,
   Pointer<Uint32> lpNumberOfCharsRead,
-  Pointer<CONSOLE_READCONSOLE_CONTROL> pInputControl,
-) => _ReadConsole(
-  hConsoleInput,
-  lpBuffer,
-  nNumberOfCharsToRead,
-  lpNumberOfCharsRead,
-  pInputControl,
-);
-
-final _ReadConsole = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hConsoleInput,
-        Pointer lpBuffer,
-        Uint32 nNumberOfCharsToRead,
-        Pointer<Uint32> lpNumberOfCharsRead,
-        Pointer<CONSOLE_READCONSOLE_CONTROL> pInputControl,
-      ),
-      int Function(
-        int hConsoleInput,
-        Pointer lpBuffer,
-        int nNumberOfCharsToRead,
-        Pointer<Uint32> lpNumberOfCharsRead,
-        Pointer<CONSOLE_READCONSOLE_CONTROL> pInputControl,
-      )
-    >('ReadConsoleW');
+  Pointer<CONSOLE_READCONSOLE_CONTROL>? pInputControl,
+) =>
+    ReadConsoleW_Wrapper(
+      hConsoleInput,
+      lpBuffer,
+      nNumberOfCharsToRead,
+      lpNumberOfCharsRead,
+      pInputControl ?? nullptr,
+    ) !=
+    FALSE;
 
 /// Reads data from a console input buffer and removes it from the buffer.
 ///
-/// ```c
-/// BOOL ReadConsoleInputW(
-///   HANDLE        hConsoleInput,
-///   PINPUT_RECORD lpBuffer,
-///   DWORD         nLength,
-///   LPDWORD       lpNumberOfEventsRead
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/console/readconsoleinput>.
+///
 /// {@category kernel32}
-int ReadConsoleInput(
+@pragma('vm:prefer-inline')
+bool ReadConsoleInput(
   int hConsoleInput,
   Pointer<INPUT_RECORD> lpBuffer,
   int nLength,
   Pointer<Uint32> lpNumberOfEventsRead,
-) => _ReadConsoleInput(hConsoleInput, lpBuffer, nLength, lpNumberOfEventsRead);
+) =>
+    ReadConsoleInputW_Wrapper(
+      hConsoleInput,
+      lpBuffer,
+      nLength,
+      lpNumberOfEventsRead,
+    ) !=
+    FALSE;
 
-final _ReadConsoleInput = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hConsoleInput,
-        Pointer<INPUT_RECORD> lpBuffer,
-        Uint32 nLength,
-        Pointer<Uint32> lpNumberOfEventsRead,
-      ),
-      int Function(
-        int hConsoleInput,
-        Pointer<INPUT_RECORD> lpBuffer,
-        int nLength,
-        Pointer<Uint32> lpNumberOfEventsRead,
-      )
-    >('ReadConsoleInputW');
-
-/// Reads data from the specified file or input/output (I/O) device. Reads
-/// occur at the position specified by the file pointer if supported by the
-/// device.
+/// Reads data from the specified file or input/output (I/O) device.
 ///
-/// ```c
-/// BOOL ReadFile(
-///   HANDLE       hFile,
-///   LPVOID       lpBuffer,
-///   DWORD        nNumberOfBytesToRead,
-///   LPDWORD      lpNumberOfBytesRead,
-///   LPOVERLAPPED lpOverlapped
-/// );
-/// ```
+/// Reads occur at the position specified by the file pointer if supported by
+/// the device.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-readfile>.
+///
 /// {@category kernel32}
-int ReadFile(
+@pragma('vm:prefer-inline')
+bool ReadFile(
   int hFile,
-  Pointer<Uint8> lpBuffer,
+  Pointer<Uint8>? lpBuffer,
   int nNumberOfBytesToRead,
-  Pointer<Uint32> lpNumberOfBytesRead,
-  Pointer<OVERLAPPED> lpOverlapped,
-) => _ReadFile(
-  hFile,
-  lpBuffer,
-  nNumberOfBytesToRead,
-  lpNumberOfBytesRead,
-  lpOverlapped,
-);
+  Pointer<Uint32>? lpNumberOfBytesRead,
+  Pointer<OVERLAPPED>? lpOverlapped,
+) =>
+    ReadFile_Wrapper(
+      hFile,
+      lpBuffer ?? nullptr,
+      nNumberOfBytesToRead,
+      lpNumberOfBytesRead ?? nullptr,
+      lpOverlapped ?? nullptr,
+    ) !=
+    FALSE;
 
-final _ReadFile = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hFile,
-        Pointer<Uint8> lpBuffer,
-        Uint32 nNumberOfBytesToRead,
-        Pointer<Uint32> lpNumberOfBytesRead,
-        Pointer<OVERLAPPED> lpOverlapped,
-      ),
-      int Function(
-        int hFile,
-        Pointer<Uint8> lpBuffer,
-        int nNumberOfBytesToRead,
-        Pointer<Uint32> lpNumberOfBytesRead,
-        Pointer<OVERLAPPED> lpOverlapped,
-      )
-    >('ReadFile');
-
-/// Reads data from the specified file or input/output (I/O) device. It
-/// reports its completion status asynchronously, calling the specified
+/// Reads data from the specified file or input/output (I/O) device.
+///
+/// It reports its completion status asynchronously, calling the specified
 /// completion routine when reading is completed or canceled and the calling
 /// thread is in an alertable wait state.
 ///
-/// ```c
-/// BOOL ReadFileEx(
-///   [in]            HANDLE                          hFile,
-///   [out, optional] LPVOID                          lpBuffer,
-///   [in]            DWORD                           nNumberOfBytesToRead,
-///   [in, out]       LPOVERLAPPED                    lpOverlapped,
-///   [in]            LPOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-readfileex>.
+///
 /// {@category kernel32}
-int ReadFileEx(
+@pragma('vm:prefer-inline')
+bool ReadFileEx(
   int hFile,
-  Pointer<Uint8> lpBuffer,
+  Pointer<Uint8>? lpBuffer,
   int nNumberOfBytesToRead,
   Pointer<OVERLAPPED> lpOverlapped,
   Pointer<NativeFunction<LPOVERLAPPED_COMPLETION_ROUTINE>> lpCompletionRoutine,
-) => _ReadFileEx(
-  hFile,
-  lpBuffer,
-  nNumberOfBytesToRead,
-  lpOverlapped,
-  lpCompletionRoutine,
-);
+) =>
+    ReadFileEx_Wrapper(
+      hFile,
+      lpBuffer ?? nullptr,
+      nNumberOfBytesToRead,
+      lpOverlapped,
+      lpCompletionRoutine,
+    ) !=
+    FALSE;
 
-final _ReadFileEx = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hFile,
-        Pointer<Uint8> lpBuffer,
-        Uint32 nNumberOfBytesToRead,
-        Pointer<OVERLAPPED> lpOverlapped,
-        Pointer<NativeFunction<LPOVERLAPPED_COMPLETION_ROUTINE>>
-        lpCompletionRoutine,
-      ),
-      int Function(
-        int hFile,
-        Pointer<Uint8> lpBuffer,
-        int nNumberOfBytesToRead,
-        Pointer<OVERLAPPED> lpOverlapped,
-        Pointer<NativeFunction<LPOVERLAPPED_COMPLETION_ROUTINE>>
-        lpCompletionRoutine,
-      )
-    >('ReadFileEx');
-
-/// Reads data from a file and stores it in an array of buffers. The
-/// function starts reading data from the file at a position that is
-/// specified by an OVERLAPPED structure. The ReadFileScatter function
-/// operates asynchronously.
+/// Reads data from a file and stores it in an array of buffers.
 ///
-/// ```c
-/// BOOL ReadFileScatter(
-///   [in]      HANDLE                  hFile,
-///   [in]      FILE_SEGMENT_ELEMENT [] aSegmentArray,
-///   [in]      DWORD                   nNumberOfBytesToRead,
-///             LPDWORD                 lpReserved,
-///   [in, out] LPOVERLAPPED            lpOverlapped
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-readfilescatter>.
+///
 /// {@category kernel32}
-int ReadFileScatter(
+@pragma('vm:prefer-inline')
+bool ReadFileScatter(
   int hFile,
   Pointer<FILE_SEGMENT_ELEMENT> aSegmentArray,
   int nNumberOfBytesToRead,
-  Pointer<Uint32> lpReserved,
   Pointer<OVERLAPPED> lpOverlapped,
-) => _ReadFileScatter(
-  hFile,
-  aSegmentArray,
-  nNumberOfBytesToRead,
-  lpReserved,
-  lpOverlapped,
-);
+) =>
+    ReadFileScatter_Wrapper(
+      hFile,
+      aSegmentArray,
+      nNumberOfBytesToRead,
+      nullptr,
+      lpOverlapped,
+    ) !=
+    FALSE;
 
-final _ReadFileScatter = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hFile,
-        Pointer<FILE_SEGMENT_ELEMENT> aSegmentArray,
-        Uint32 nNumberOfBytesToRead,
-        Pointer<Uint32> lpReserved,
-        Pointer<OVERLAPPED> lpOverlapped,
-      ),
-      int Function(
-        int hFile,
-        Pointer<FILE_SEGMENT_ELEMENT> aSegmentArray,
-        int nNumberOfBytesToRead,
-        Pointer<Uint32> lpReserved,
-        Pointer<OVERLAPPED> lpOverlapped,
-      )
-    >('ReadFileScatter');
-
-/// ReadProcessMemory copies the data in the specified address range from
-/// the address space of the specified process into the specified buffer of
-/// the current process. Any process that has a handle with PROCESS_VM_READ
-/// access can call the function.
+/// Reads data from an area of memory in a specified process.
 ///
-/// ```c
-/// BOOL ReadProcessMemory(
-///   HANDLE  hProcess,
-///   LPCVOID lpBaseAddress,
-///   LPVOID  lpBuffer,
-///   SIZE_T  nSize,
-///   SIZE_T  *lpNumberOfBytesRead
-/// );
-/// ```
+/// The entire area to be read must be accessible or the operation fails.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-readprocessmemory>.
+///
 /// {@category kernel32}
-int ReadProcessMemory(
+@pragma('vm:prefer-inline')
+bool ReadProcessMemory(
   int hProcess,
   Pointer lpBaseAddress,
   Pointer lpBuffer,
   int nSize,
-  Pointer<IntPtr> lpNumberOfBytesRead,
-) => _ReadProcessMemory(
-  hProcess,
-  lpBaseAddress,
-  lpBuffer,
-  nSize,
-  lpNumberOfBytesRead,
-);
+  Pointer<IntPtr>? lpNumberOfBytesRead,
+) =>
+    ReadProcessMemory_Wrapper(
+      hProcess,
+      lpBaseAddress,
+      lpBuffer,
+      nSize,
+      lpNumberOfBytesRead ?? nullptr,
+    ) !=
+    FALSE;
 
-final _ReadProcessMemory = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hProcess,
-        Pointer lpBaseAddress,
-        Pointer lpBuffer,
-        IntPtr nSize,
-        Pointer<IntPtr> lpNumberOfBytesRead,
-      ),
-      int Function(
-        int hProcess,
-        Pointer lpBaseAddress,
-        Pointer lpBuffer,
-        int nSize,
-        Pointer<IntPtr> lpNumberOfBytesRead,
-      )
-    >('ReadProcessMemory');
-
-/// The ReleaseActCtx function decrements the reference count of the
-/// specified activation context.
+/// Decrements the reference count of the specified activation context.
 ///
-/// ```c
-/// void ReleaseActCtx(
-///   HANDLE hActCtx
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-releaseactctx>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 void ReleaseActCtx(int hActCtx) => _ReleaseActCtx(hActCtx);
 
-final _ReleaseActCtx = _kernel32
-    .lookupFunction<Void Function(IntPtr hActCtx), void Function(int hActCtx)>(
-      'ReleaseActCtx',
-    );
+@Native<Void Function(HANDLE)>(symbol: 'ReleaseActCtx')
+external void _ReleaseActCtx(int hActCtx);
 
 /// Deletes an existing empty directory.
 ///
-/// ```c
-/// BOOL RemoveDirectoryW(
-///   LPCWSTR lpPathName
-/// );
-/// ```
-/// {@category kernel32}
-int RemoveDirectory(Pointer<Utf16> lpPathName) => _RemoveDirectory(lpPathName);
-
-final _RemoveDirectory = _kernel32
-    .lookupFunction<
-      Int32 Function(Pointer<Utf16> lpPathName),
-      int Function(Pointer<Utf16> lpPathName)
-    >('RemoveDirectoryW');
-
-/// Removes a directory that was added to the process DLL search path by
-/// using AddDllDirectory.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-removedirectoryw>.
 ///
-/// ```c
-/// BOOL RemoveDllDirectory(
-///   [in] DLL_DIRECTORY_COOKIE Cookie
-/// );
-/// ```
 /// {@category kernel32}
-int RemoveDllDirectory(Pointer Cookie) => _RemoveDllDirectory(Cookie);
+@pragma('vm:prefer-inline')
+bool RemoveDirectory(PCWSTR lpPathName) =>
+    RemoveDirectoryW_Wrapper(lpPathName) != FALSE;
 
-final _RemoveDllDirectory = _kernel32
-    .lookupFunction<
-      Int32 Function(Pointer Cookie),
-      int Function(Pointer Cookie)
-    >('RemoveDllDirectory');
+/// Removes a directory that was added to the process DLL search path by using
+/// AddDllDirectory.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-removedlldirectory>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool RemoveDllDirectory(Pointer cookie) =>
+    RemoveDllDirectory_Wrapper(cookie) != FALSE;
 
 /// Reopens the specified file system object with different access rights,
 /// sharing mode, and flags.
 ///
-/// ```c
-/// HANDLE ReOpenFile(
-///   HANDLE hOriginalFile,
-///   DWORD  dwDesiredAccess,
-///   DWORD  dwShareMode,
-///   DWORD  dwFlagsAndAttributes);
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-reopenfile>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 int ReOpenFile(
   int hOriginalFile,
   int dwDesiredAccess,
-  int dwShareMode,
-  int dwFlagsAndAttributes,
-) => _ReOpenFile(
+  FILE_SHARE_MODE dwShareMode,
+  FILE_FLAGS_AND_ATTRIBUTES dwFlagsAndAttributes,
+) => ReOpenFile_Wrapper(
   hOriginalFile,
   dwDesiredAccess,
   dwShareMode,
   dwFlagsAndAttributes,
 );
 
-final _ReOpenFile = _kernel32
-    .lookupFunction<
-      IntPtr Function(
-        IntPtr hOriginalFile,
-        Uint32 dwDesiredAccess,
-        Uint32 dwShareMode,
-        Uint32 dwFlagsAndAttributes,
-      ),
-      int Function(
-        int hOriginalFile,
-        int dwDesiredAccess,
-        int dwShareMode,
-        int dwFlagsAndAttributes,
-      )
-    >('ReOpenFile');
-
 /// Sets the specified event object to the nonsignaled state.
 ///
-/// ```c
-/// BOOL ResetEvent(
-///   HANDLE hEvent
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-resetevent>.
+///
 /// {@category kernel32}
-int ResetEvent(int hEvent) => _ResetEvent(hEvent);
-
-final _ResetEvent = _kernel32
-    .lookupFunction<Int32 Function(IntPtr hEvent), int Function(int hEvent)>(
-      'ResetEvent',
-    );
+@pragma('vm:prefer-inline')
+bool ResetEvent(int hEvent) => ResetEvent_Wrapper(hEvent) != FALSE;
 
 /// Resizes the internal buffers for a pseudoconsole to the given size.
 ///
-/// ```c
-/// HRESULT ResizePseudoConsole(
-///   _In_ HPCON hPC ,
-///   _In_ COORD size
-/// );
-/// ```
-/// {@category kernel32}
-int ResizePseudoConsole(int hPC, COORD size) => _ResizePseudoConsole(hPC, size);
-
-final _ResizePseudoConsole = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hPC, COORD size),
-      int Function(int hPC, COORD size)
-    >('ResizePseudoConsole');
-
-/// Moves a block of data in a screen buffer. The effects of the move can be
-/// limited by specifying a clipping rectangle, so the contents of the
-/// console screen buffer outside the clipping rectangle are unchanged.
+/// Throws a [WindowsException] on failure.
 ///
-/// ```c
-/// BOOL ScrollConsoleScreenBufferW(
-///   _In_           HANDLE     hConsoleOutput,
-///   _In_     const SMALL_RECT *lpScrollRectangle,
-///   _In_opt_ const SMALL_RECT *lpClipRectangle,
-///   _In_           COORD      dwDestinationOrigin,
-///   _In_     const CHAR_INFO  *lpFill
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/console/resizepseudoconsole>.
+///
 /// {@category kernel32}
-int ScrollConsoleScreenBuffer(
+@pragma('vm:prefer-inline')
+void ResizePseudoConsole(int hPC, COORD size) {
+  final hr$ = HRESULT(_ResizePseudoConsole(hPC, size));
+  if (hr$.isError) throw WindowsException(hr$);
+}
+
+@Native<Int32 Function(HPCON, COORD)>(symbol: 'ResizePseudoConsole')
+external int _ResizePseudoConsole(int hPC, COORD size);
+
+/// Moves a block of data in a screen buffer.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/console/scrollconsolescreenbuffer>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool ScrollConsoleScreenBuffer(
   int hConsoleOutput,
   Pointer<SMALL_RECT> lpScrollRectangle,
-  Pointer<SMALL_RECT> lpClipRectangle,
+  Pointer<SMALL_RECT>? lpClipRectangle,
   COORD dwDestinationOrigin,
   Pointer<CHAR_INFO> lpFill,
-) => _ScrollConsoleScreenBuffer(
-  hConsoleOutput,
-  lpScrollRectangle,
-  lpClipRectangle,
-  dwDestinationOrigin,
-  lpFill,
-);
+) =>
+    ScrollConsoleScreenBufferW_Wrapper(
+      hConsoleOutput,
+      lpScrollRectangle,
+      lpClipRectangle ?? nullptr,
+      dwDestinationOrigin,
+      lpFill,
+    ) !=
+    FALSE;
 
-final _ScrollConsoleScreenBuffer = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hConsoleOutput,
-        Pointer<SMALL_RECT> lpScrollRectangle,
-        Pointer<SMALL_RECT> lpClipRectangle,
-        COORD dwDestinationOrigin,
-        Pointer<CHAR_INFO> lpFill,
-      ),
-      int Function(
-        int hConsoleOutput,
-        Pointer<SMALL_RECT> lpScrollRectangle,
-        Pointer<SMALL_RECT> lpClipRectangle,
-        COORD dwDestinationOrigin,
-        Pointer<CHAR_INFO> lpFill,
-      )
-    >('ScrollConsoleScreenBufferW');
-
-/// Suspends character transmission for a specified communications device
-/// and places the transmission line in a break state until the
-/// ClearCommBreak function is called.
+/// Suspends character transmission for a specified communications device and
+/// places the transmission line in a break state until the ClearCommBreak
+/// function is called.
 ///
-/// ```c
-/// BOOL SetCommBreak(
-///   HANDLE hFile
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setcommbreak>.
+///
 /// {@category kernel32}
-int SetCommBreak(int hFile) => _SetCommBreak(hFile);
-
-final _SetCommBreak = _kernel32
-    .lookupFunction<Int32 Function(IntPtr hFile), int Function(int hFile)>(
-      'SetCommBreak',
-    );
+@pragma('vm:prefer-inline')
+bool SetCommBreak(int hFile) => SetCommBreak_Wrapper(hFile) != FALSE;
 
 /// Sets the current configuration of a communications device.
 ///
-/// ```c
-/// BOOL SetCommConfig(
-///   HANDLE       hCommDev,
-///   LPCOMMCONFIG lpCC,
-///   DWORD        dwSize
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setcommconfig>.
+///
 /// {@category kernel32}
-int SetCommConfig(int hCommDev, Pointer<COMMCONFIG> lpCC, int dwSize) =>
-    _SetCommConfig(hCommDev, lpCC, dwSize);
-
-final _SetCommConfig = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hCommDev, Pointer<COMMCONFIG> lpCC, Uint32 dwSize),
-      int Function(int hCommDev, Pointer<COMMCONFIG> lpCC, int dwSize)
-    >('SetCommConfig');
+@pragma('vm:prefer-inline')
+bool SetCommConfig(int hCommDev, Pointer<COMMCONFIG> lpCC, int dwSize) =>
+    SetCommConfig_Wrapper(hCommDev, lpCC, dwSize) != FALSE;
 
 /// Specifies a set of events to be monitored for a communications device.
 ///
-/// ```c
-/// BOOL SetCommMask(
-///   HANDLE hFile,
-///   DWORD  dwEvtMask
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setcommmask>.
+///
 /// {@category kernel32}
-int SetCommMask(int hFile, int dwEvtMask) => _SetCommMask(hFile, dwEvtMask);
-
-final _SetCommMask = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hFile, Uint32 dwEvtMask),
-      int Function(int hFile, int dwEvtMask)
-    >('SetCommMask');
+@pragma('vm:prefer-inline')
+bool SetCommMask(int hFile, COMM_EVENT_MASK dwEvtMask) =>
+    SetCommMask_Wrapper(hFile, dwEvtMask) != FALSE;
 
 /// Configures a communications device according to the specifications in a
-/// device-control block (a DCB structure). The function reinitializes all
-/// hardware and control settings, but it does not empty output or input
-/// queues.
+/// device-control block (a DCB structure).
 ///
-/// ```c
-/// BOOL SetCommState(
-///   HANDLE hFile,
-///   LPDCB  lpDCB
-/// );
-/// ```
+/// The function reinitializes all hardware and control settings, but it does
+/// not empty output or input queues.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setcommstate>.
+///
 /// {@category kernel32}
-int SetCommState(int hFile, Pointer<DCB> lpDCB) => _SetCommState(hFile, lpDCB);
-
-final _SetCommState = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hFile, Pointer<DCB> lpDCB),
-      int Function(int hFile, Pointer<DCB> lpDCB)
-    >('SetCommState');
+@pragma('vm:prefer-inline')
+bool SetCommState(int hFile, Pointer<DCB> lpDCB) =>
+    SetCommState_Wrapper(hFile, lpDCB) != FALSE;
 
 /// Sets the time-out parameters for all read and write operations on a
 /// specified communications device.
 ///
-/// ```c
-/// BOOL SetCommTimeouts(
-///   HANDLE         hFile,
-///   LPCOMMTIMEOUTS lpCommTimeouts
-/// );
-/// ```
-/// {@category kernel32}
-int SetCommTimeouts(int hFile, Pointer<COMMTIMEOUTS> lpCommTimeouts) =>
-    _SetCommTimeouts(hFile, lpCommTimeouts);
-
-final _SetCommTimeouts = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hFile, Pointer<COMMTIMEOUTS> lpCommTimeouts),
-      int Function(int hFile, Pointer<COMMTIMEOUTS> lpCommTimeouts)
-    >('SetCommTimeouts');
-
-/// Adds or removes an application-defined HandlerRoutine function from the
-/// list of handler functions for the calling process.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setcommtimeouts>.
 ///
-/// ```c
-/// BOOL SetConsoleCtrlHandler(
-///   _In_opt_ PHANDLER_ROUTINE HandlerRoutine,
-///   _In_     BOOL             Add
-/// );
-/// ```
 /// {@category kernel32}
-int SetConsoleCtrlHandler(
-  Pointer<NativeFunction<PHANDLER_ROUTINE>> HandlerRoutine,
-  int Add,
-) => _SetConsoleCtrlHandler(HandlerRoutine, Add);
+@pragma('vm:prefer-inline')
+bool SetCommTimeouts(int hFile, Pointer<COMMTIMEOUTS> lpCommTimeouts) =>
+    SetCommTimeouts_Wrapper(hFile, lpCommTimeouts) != FALSE;
 
-final _SetConsoleCtrlHandler = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<NativeFunction<PHANDLER_ROUTINE>> HandlerRoutine,
-        Int32 Add,
-      ),
-      int Function(
-        Pointer<NativeFunction<PHANDLER_ROUTINE>> HandlerRoutine,
-        int Add,
-      )
-    >('SetConsoleCtrlHandler');
-
-/// Sets the size and visibility of the cursor for the specified console
-/// screen buffer.
+/// Adds or removes an application-defined HandlerRoutine function from the list
+/// of handler functions for the calling process.
 ///
-/// ```c
-/// BOOL SetConsoleCursorInfo(
-///   _In_       HANDLE              hConsoleOutput,
-///   _In_ const CONSOLE_CURSOR_INFO *lpConsoleCursorInfo
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/console/setconsolectrlhandler>.
+///
 /// {@category kernel32}
-int SetConsoleCursorInfo(
+@pragma('vm:prefer-inline')
+bool SetConsoleCtrlHandler(
+  Pointer<NativeFunction<PHANDLER_ROUTINE>>? handlerRoutine,
+  bool add,
+) =>
+    SetConsoleCtrlHandler_Wrapper(
+      handlerRoutine ?? nullptr,
+      add ? TRUE : FALSE,
+    ) !=
+    FALSE;
+
+/// Sets the size and visibility of the cursor for the specified console screen
+/// buffer.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/console/setconsolecursorinfo>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool SetConsoleCursorInfo(
   int hConsoleOutput,
   Pointer<CONSOLE_CURSOR_INFO> lpConsoleCursorInfo,
-) => _SetConsoleCursorInfo(hConsoleOutput, lpConsoleCursorInfo);
-
-final _SetConsoleCursorInfo = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hConsoleOutput,
-        Pointer<CONSOLE_CURSOR_INFO> lpConsoleCursorInfo,
-      ),
-      int Function(
-        int hConsoleOutput,
-        Pointer<CONSOLE_CURSOR_INFO> lpConsoleCursorInfo,
-      )
-    >('SetConsoleCursorInfo');
+) => SetConsoleCursorInfo_Wrapper(hConsoleOutput, lpConsoleCursorInfo) != FALSE;
 
 /// Sets the cursor position in the specified console screen buffer.
 ///
-/// ```c
-/// BOOL SetConsoleCursorPosition(
-///   _In_ HANDLE hConsoleOutput,
-///   _In_ COORD  dwCursorPosition
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/console/setconsolecursorposition>.
+///
 /// {@category kernel32}
-int SetConsoleCursorPosition(int hConsoleOutput, COORD dwCursorPosition) =>
-    _SetConsoleCursorPosition(hConsoleOutput, dwCursorPosition);
-
-final _SetConsoleCursorPosition = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hConsoleOutput, COORD dwCursorPosition),
-      int Function(int hConsoleOutput, COORD dwCursorPosition)
-    >('SetConsoleCursorPosition');
+@pragma('vm:prefer-inline')
+bool SetConsoleCursorPosition(int hConsoleOutput, COORD dwCursorPosition) =>
+    SetConsoleCursorPosition_Wrapper(hConsoleOutput, dwCursorPosition) != FALSE;
 
 /// Sets the display mode of the specified console screen buffer.
 ///
-/// ```c
-/// BOOL SetConsoleDisplayMode(
-///   _In_      HANDLE hConsoleOutput,
-///   _In_      DWORD  dwFlags,
-///   _Out_opt_ PCOORD lpNewScreenBufferDimensions
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/console/setconsoledisplaymode>.
+///
 /// {@category kernel32}
-int SetConsoleDisplayMode(
+@pragma('vm:prefer-inline')
+bool SetConsoleDisplayMode(
   int hConsoleOutput,
   int dwFlags,
-  Pointer<COORD> lpNewScreenBufferDimensions,
-) => _SetConsoleDisplayMode(
-  hConsoleOutput,
-  dwFlags,
-  lpNewScreenBufferDimensions,
-);
-
-final _SetConsoleDisplayMode = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hConsoleOutput,
-        Uint32 dwFlags,
-        Pointer<COORD> lpNewScreenBufferDimensions,
-      ),
-      int Function(
-        int hConsoleOutput,
-        int dwFlags,
-        Pointer<COORD> lpNewScreenBufferDimensions,
-      )
-    >('SetConsoleDisplayMode');
+  Pointer<COORD>? lpNewScreenBufferDimensions,
+) =>
+    SetConsoleDisplayMode_Wrapper(
+      hConsoleOutput,
+      dwFlags,
+      lpNewScreenBufferDimensions ?? nullptr,
+    ) !=
+    FALSE;
 
 /// Sets the input mode of a console's input buffer or the output mode of a
 /// console screen buffer.
 ///
-/// ```c
-/// BOOL SetConsoleMode(
-///   _In_ HANDLE hConsoleHandle,
-///   _In_ DWORD  dwMode
-/// );
-/// ```
-/// {@category kernel32}
-int SetConsoleMode(int hConsoleHandle, int dwMode) =>
-    _SetConsoleMode(hConsoleHandle, dwMode);
-
-final _SetConsoleMode = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hConsoleHandle, Uint32 dwMode),
-      int Function(int hConsoleHandle, int dwMode)
-    >('SetConsoleMode');
-
-/// Sets the attributes of characters written to the console screen buffer
-/// by the WriteFile or WriteConsole function, or echoed by the ReadFile or
-/// ReadConsole function. This function affects text written after the
-/// function call.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/console/setconsolemode>.
 ///
-/// ```c
-/// BOOL SetConsoleTextAttribute(
-///   _In_ HANDLE hConsoleOutput,
-///   _In_ WORD   wAttributes
-/// );
-/// ```
 /// {@category kernel32}
-int SetConsoleTextAttribute(int hConsoleOutput, int wAttributes) =>
-    _SetConsoleTextAttribute(hConsoleOutput, wAttributes);
+@pragma('vm:prefer-inline')
+bool SetConsoleMode(int hConsoleHandle, CONSOLE_MODE dwMode) =>
+    SetConsoleMode_Wrapper(hConsoleHandle, dwMode) != FALSE;
 
-final _SetConsoleTextAttribute = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hConsoleOutput, Uint16 wAttributes),
-      int Function(int hConsoleOutput, int wAttributes)
-    >('SetConsoleTextAttribute');
+/// Sets the attributes of characters written to the console screen buffer by
+/// the WriteFile or WriteConsole function, or echoed by the ReadFile or
+/// ReadConsole function.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/console/setconsoletextattribute>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool SetConsoleTextAttribute(
+  int hConsoleOutput,
+  CONSOLE_CHARACTER_ATTRIBUTES wAttributes,
+) => SetConsoleTextAttribute_Wrapper(hConsoleOutput, wAttributes) != FALSE;
 
 /// Sets the current size and position of a console screen buffer's window.
 ///
-/// ```c
-/// BOOL SetConsoleWindowInfo(
-///   _In_       HANDLE     hConsoleOutput,
-///   _In_       BOOL       bAbsolute,
-///   _In_ const SMALL_RECT *lpConsoleWindow
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/console/setconsolewindowinfo>.
+///
 /// {@category kernel32}
-int SetConsoleWindowInfo(
+@pragma('vm:prefer-inline')
+bool SetConsoleWindowInfo(
   int hConsoleOutput,
-  int bAbsolute,
+  bool bAbsolute,
   Pointer<SMALL_RECT> lpConsoleWindow,
-) => _SetConsoleWindowInfo(hConsoleOutput, bAbsolute, lpConsoleWindow);
-
-final _SetConsoleWindowInfo = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hConsoleOutput,
-        Int32 bAbsolute,
-        Pointer<SMALL_RECT> lpConsoleWindow,
-      ),
-      int Function(
-        int hConsoleOutput,
-        int bAbsolute,
-        Pointer<SMALL_RECT> lpConsoleWindow,
-      )
-    >('SetConsoleWindowInfo');
+) =>
+    SetConsoleWindowInfo_Wrapper(
+      hConsoleOutput,
+      bAbsolute ? TRUE : FALSE,
+      lpConsoleWindow,
+    ) !=
+    FALSE;
 
 /// Changes the current directory for the current process.
 ///
-/// ```c
-/// BOOL SetCurrentDirectoryW(
-///   LPCTSTR lpPathName
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setcurrentdirectory>.
+///
 /// {@category kernel32}
-int SetCurrentDirectory(Pointer<Utf16> lpPathName) =>
-    _SetCurrentDirectory(lpPathName);
+@pragma('vm:prefer-inline')
+bool SetCurrentDirectory(PCWSTR lpPathName) =>
+    _SetCurrentDirectory(lpPathName) != FALSE;
 
-final _SetCurrentDirectory = _kernel32
-    .lookupFunction<
-      Int32 Function(Pointer<Utf16> lpPathName),
-      int Function(Pointer<Utf16> lpPathName)
-    >('SetCurrentDirectoryW');
+@Native<BOOL Function(PCWSTR)>(symbol: 'SetCurrentDirectoryW')
+external int _SetCurrentDirectory(PCWSTR lpPathName);
 
 /// Sets the default configuration for a communications device.
 ///
-/// ```c
-/// BOOL SetDefaultCommConfigW(
-///   LPCWSTR      lpszName,
-///   LPCOMMCONFIG lpCC,
-///   DWORD        dwSize
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setdefaultcommconfigw>.
+///
 /// {@category kernel32}
-int SetDefaultCommConfig(
-  Pointer<Utf16> lpszName,
+@pragma('vm:prefer-inline')
+bool SetDefaultCommConfig(
+  PCWSTR lpszName,
   Pointer<COMMCONFIG> lpCC,
   int dwSize,
-) => _SetDefaultCommConfig(lpszName, lpCC, dwSize);
+) => SetDefaultCommConfigW_Wrapper(lpszName, lpCC, dwSize) != FALSE;
 
-final _SetDefaultCommConfig = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Utf16> lpszName,
-        Pointer<COMMCONFIG> lpCC,
-        Uint32 dwSize,
-      ),
-      int Function(
-        Pointer<Utf16> lpszName,
-        Pointer<COMMCONFIG> lpCC,
-        int dwSize,
-      )
-    >('SetDefaultCommConfigW');
-
-/// Specifies a default set of directories to search when the calling
-/// process loads a DLL. This search path is used when LoadLibraryEx is
-/// called with no LOAD_LIBRARY_SEARCH flags.
+/// Specifies a default set of directories to search when the calling process
+/// loads a DLL.
 ///
-/// ```c
-/// BOOL SetDefaultDllDirectories(
-///   [in] DWORD DirectoryFlags
-/// );
-/// ```
-/// {@category kernel32}
-int SetDefaultDllDirectories(int DirectoryFlags) =>
-    _SetDefaultDllDirectories(DirectoryFlags);
-
-final _SetDefaultDllDirectories = _kernel32
-    .lookupFunction<
-      Int32 Function(Uint32 DirectoryFlags),
-      int Function(int DirectoryFlags)
-    >('SetDefaultDllDirectories');
-
-/// Sets the physical file size for the specified file to the current
-/// position of the file pointer.
+/// This search path is used when LoadLibraryEx is called with no
+/// LOAD_LIBRARY_SEARCH flags.
 ///
-/// ```c
-/// BOOL SetEndOfFile(
-///   [in] HANDLE hFile
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-setdefaultdlldirectories>.
+///
 /// {@category kernel32}
-int SetEndOfFile(int hFile) => _SetEndOfFile(hFile);
+@pragma('vm:prefer-inline')
+bool SetDefaultDllDirectories(LOAD_LIBRARY_FLAGS directoryFlags) =>
+    SetDefaultDllDirectories_Wrapper(directoryFlags) != FALSE;
 
-final _SetEndOfFile = _kernel32
-    .lookupFunction<Int32 Function(IntPtr hFile), int Function(int hFile)>(
-      'SetEndOfFile',
-    );
+/// Sets the physical file size for the specified file to the current position
+/// of the file pointer.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-setendoffile>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool SetEndOfFile(int hFile) => SetEndOfFile_Wrapper(hFile) != FALSE;
 
 /// Sets the contents of the specified environment variable for the current
 /// process.
 ///
-/// ```c
-/// BOOL SetEnvironmentVariableW(
-///   LPCWSTR lpName,
-///   LPCWSTR lpValue
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/processenv/nf-processenv-setenvironmentvariablew>.
+///
 /// {@category kernel32}
-int SetEnvironmentVariable(Pointer<Utf16> lpName, Pointer<Utf16> lpValue) =>
-    _SetEnvironmentVariable(lpName, lpValue);
+@pragma('vm:prefer-inline')
+bool SetEnvironmentVariable(PCWSTR lpName, PCWSTR? lpValue) =>
+    SetEnvironmentVariableW_Wrapper(lpName, lpValue ?? nullptr) != FALSE;
 
-final _SetEnvironmentVariable = _kernel32
-    .lookupFunction<
-      Int32 Function(Pointer<Utf16> lpName, Pointer<Utf16> lpValue),
-      int Function(Pointer<Utf16> lpName, Pointer<Utf16> lpValue)
-    >('SetEnvironmentVariableW');
+/// Controls whether the system will handle the specified types of serious
+/// errors or whether the process will handle them.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/errhandlingapi/nf-errhandlingapi-seterrormode>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+THREAD_ERROR_MODE SetErrorMode(THREAD_ERROR_MODE uMode) =>
+    THREAD_ERROR_MODE(_SetErrorMode(uMode));
+
+@Native<Uint32 Function(Uint32)>(symbol: 'SetErrorMode')
+external int _SetErrorMode(int uMode);
 
 /// Sets the specified event object to the signaled state.
 ///
-/// ```c
-/// UINT SetErrorMode(
-///   UINT uMode
-/// );
-/// ```
-/// {@category kernel32}
-int SetErrorMode(int uMode) => _SetErrorMode(uMode);
-
-final _SetErrorMode = _kernel32
-    .lookupFunction<Uint32 Function(Uint32 uMode), int Function(int uMode)>(
-      'SetErrorMode',
-    );
-
-/// Sets the specified event object to the signaled state.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-setevent>.
 ///
-/// ```c
-/// BOOL SetEvent(
-///   HANDLE hEvent
-/// );
-/// ```
 /// {@category kernel32}
-int SetEvent(int hEvent) => _SetEvent(hEvent);
+@pragma('vm:prefer-inline')
+bool SetEvent(int hEvent) => SetEvent_Wrapper(hEvent) != FALSE;
 
-final _SetEvent = _kernel32
-    .lookupFunction<Int32 Function(IntPtr hEvent), int Function(int hEvent)>(
-      'SetEvent',
-    );
-
-/// Causes the file I/O functions to use the ANSI character set code page
-/// for the current process.
+/// Causes the file I/O functions to use the ANSI character set code page for
+/// the current process.
 ///
-/// ```c
-/// void SetFileApisToANSI();
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-setfileapistoansi>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 void SetFileApisToANSI() => _SetFileApisToANSI();
 
-final _SetFileApisToANSI = _kernel32
-    .lookupFunction<Void Function(), void Function()>('SetFileApisToANSI');
+@Native<Void Function()>(symbol: 'SetFileApisToANSI')
+external void _SetFileApisToANSI();
 
-/// Causes the file I/O functions for the process to use the OEM character
-/// set code page.
+/// Causes the file I/O functions for the process to use the OEM character set
+/// code page.
 ///
-/// ```c
-/// void SetFileApisToOEM();
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-setfileapistooem>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 void SetFileApisToOEM() => _SetFileApisToOEM();
 
-final _SetFileApisToOEM = _kernel32
-    .lookupFunction<Void Function(), void Function()>('SetFileApisToOEM');
+@Native<Void Function()>(symbol: 'SetFileApisToOEM')
+external void _SetFileApisToOEM();
 
 /// Sets the attributes for a file or directory.
 ///
-/// ```c
-/// BOOL SetFileAttributesW(
-///   [in] LPCWSTR lpFileName,
-///   [in] DWORD   dwFileAttributes
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-setfileattributesw>.
+///
 /// {@category kernel32}
-int SetFileAttributes(Pointer<Utf16> lpFileName, int dwFileAttributes) =>
-    _SetFileAttributes(lpFileName, dwFileAttributes);
-
-final _SetFileAttributes = _kernel32
-    .lookupFunction<
-      Int32 Function(Pointer<Utf16> lpFileName, Uint32 dwFileAttributes),
-      int Function(Pointer<Utf16> lpFileName, int dwFileAttributes)
-    >('SetFileAttributesW');
+@pragma('vm:prefer-inline')
+bool SetFileAttributes(
+  PCWSTR lpFileName,
+  FILE_FLAGS_AND_ATTRIBUTES dwFileAttributes,
+) => SetFileAttributesW_Wrapper(lpFileName, dwFileAttributes) != FALSE;
 
 /// Sets the file information for the specified file.
 ///
-/// ```c
-/// BOOL SetFileInformationByHandle(
-///   [in] HANDLE                    hFile,
-///   [in] FILE_INFO_BY_HANDLE_CLASS FileInformationClass,
-///   [in] LPVOID                    lpFileInformation,
-///   [in] DWORD                     dwBufferSize
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-setfileinformationbyhandle>.
+///
 /// {@category kernel32}
-int SetFileInformationByHandle(
+@pragma('vm:prefer-inline')
+bool SetFileInformationByHandle(
   int hFile,
-  int FileInformationClass,
+  FILE_INFO_BY_HANDLE_CLASS fileInformationClass,
   Pointer lpFileInformation,
   int dwBufferSize,
-) => _SetFileInformationByHandle(
-  hFile,
-  FileInformationClass,
-  lpFileInformation,
-  dwBufferSize,
-);
+) =>
+    SetFileInformationByHandle_Wrapper(
+      hFile,
+      fileInformationClass,
+      lpFileInformation,
+      dwBufferSize,
+    ) !=
+    FALSE;
 
-final _SetFileInformationByHandle = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hFile,
-        Int32 FileInformationClass,
-        Pointer lpFileInformation,
-        Uint32 dwBufferSize,
-      ),
-      int Function(
-        int hFile,
-        int FileInformationClass,
-        Pointer lpFileInformation,
-        int dwBufferSize,
-      )
-    >('SetFileInformationByHandle');
-
-/// Associates a virtual address range with the specified file handle. This
-/// indicates that the kernel should optimize any further asynchronous I/O
-/// requests with overlapped structures inside this range. The overlapped
-/// range is locked in memory, and then unlocked when the file is closed.
-/// After a range is associated with a file handle, it cannot be
-/// disassociated.
+/// Associates a virtual address range with the specified file handle.
 ///
-/// ```c
-/// BOOL SetFileIoOverlappedRange(
-///   [in] HANDLE FileHandle,
-///   [in] PUCHAR OverlappedRangeStart,
-///   [in] ULONG  Length
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-setfileiooverlappedrange>.
+///
 /// {@category kernel32}
-int SetFileIoOverlappedRange(
-  int FileHandle,
-  Pointer<Uint8> OverlappedRangeStart,
-  int Length,
-) => _SetFileIoOverlappedRange(FileHandle, OverlappedRangeStart, Length);
-
-final _SetFileIoOverlappedRange = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr FileHandle,
-        Pointer<Uint8> OverlappedRangeStart,
-        Uint32 Length,
-      ),
-      int Function(
-        int FileHandle,
-        Pointer<Uint8> OverlappedRangeStart,
-        int Length,
-      )
-    >('SetFileIoOverlappedRange');
+@pragma('vm:prefer-inline')
+bool SetFileIoOverlappedRange(
+  int fileHandle,
+  Pointer<Uint8> overlappedRangeStart,
+  int length,
+) =>
+    SetFileIoOverlappedRange_Wrapper(
+      fileHandle,
+      overlappedRangeStart,
+      length,
+    ) !=
+    FALSE;
 
 /// Moves the file pointer of the specified file.
 ///
-/// ```c
-/// DWORD SetFilePointer(
-///   HANDLE hFile,
-///   LONG   lDistanceToMove,
-///   PLONG  lpDistanceToMoveHigh,
-///   DWORD  dwMoveMethod
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-setfilepointer>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 int SetFilePointer(
   int hFile,
   int lDistanceToMove,
-  Pointer<Int32> lpDistanceToMoveHigh,
-  int dwMoveMethod,
-) =>
-    _SetFilePointer(hFile, lDistanceToMove, lpDistanceToMoveHigh, dwMoveMethod);
-
-final _SetFilePointer = _kernel32
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hFile,
-        Int32 lDistanceToMove,
-        Pointer<Int32> lpDistanceToMoveHigh,
-        Uint32 dwMoveMethod,
-      ),
-      int Function(
-        int hFile,
-        int lDistanceToMove,
-        Pointer<Int32> lpDistanceToMoveHigh,
-        int dwMoveMethod,
-      )
-    >('SetFilePointer');
+  Pointer<Int32>? lpDistanceToMoveHigh,
+  SET_FILE_POINTER_MOVE_METHOD dwMoveMethod,
+) => SetFilePointer_Wrapper(
+  hFile,
+  lDistanceToMove,
+  lpDistanceToMoveHigh ?? nullptr,
+  dwMoveMethod,
+);
 
 /// Moves the file pointer of the specified file.
 ///
-/// ```c
-/// BOOL SetFilePointerEx(
-///   HANDLE         hFile,
-///   LARGE_INTEGER  liDistanceToMove,
-///   PLARGE_INTEGER lpNewFilePointer,
-///   DWORD          dwMoveMethod
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-setfilepointerex>.
+///
 /// {@category kernel32}
-int SetFilePointerEx(
+@pragma('vm:prefer-inline')
+bool SetFilePointerEx(
   int hFile,
   int liDistanceToMove,
-  Pointer<Int64> lpNewFilePointer,
-  int dwMoveMethod,
-) => _SetFilePointerEx(hFile, liDistanceToMove, lpNewFilePointer, dwMoveMethod);
+  Pointer<Int64>? lpNewFilePointer,
+  SET_FILE_POINTER_MOVE_METHOD dwMoveMethod,
+) =>
+    SetFilePointerEx_Wrapper(
+      hFile,
+      liDistanceToMove,
+      lpNewFilePointer ?? nullptr,
+      dwMoveMethod,
+    ) !=
+    FALSE;
 
-final _SetFilePointerEx = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hFile,
-        Int64 liDistanceToMove,
-        Pointer<Int64> lpNewFilePointer,
-        Uint32 dwMoveMethod,
-      ),
-      int Function(
-        int hFile,
-        int liDistanceToMove,
-        Pointer<Int64> lpNewFilePointer,
-        int dwMoveMethod,
-      )
-    >('SetFilePointerEx');
-
-/// Sets the short name for the specified file. The file must be on an NTFS
-/// file system volume.
+/// Sets the short name for the specified file.
 ///
-/// ```c
-/// BOOL SetFileShortNameW(
-///   HANDLE  hFile,
-///   LPCWSTR lpShortName);
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setfileshortnamew>.
+///
 /// {@category kernel32}
-int SetFileShortName(int hFile, Pointer<Utf16> lpShortName) =>
-    _SetFileShortName(hFile, lpShortName);
-
-final _SetFileShortName = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hFile, Pointer<Utf16> lpShortName),
-      int Function(int hFile, Pointer<Utf16> lpShortName)
-    >('SetFileShortNameW');
+@pragma('vm:prefer-inline')
+bool SetFileShortName(int hFile, PCWSTR lpShortName) =>
+    SetFileShortNameW_Wrapper(hFile, lpShortName) != FALSE;
 
 /// Sets the date and time that the specified file or directory was created,
 /// last accessed, or last modified.
 ///
-/// ```c
-/// BOOL SetFileTime(
-///   HANDLE       hFile,
-///   const FILETIME *lpCreationTime,
-///   const FILETIME *lpLastAccessTime,
-///   const FILETIME *lpLastWriteTime
-/// );
-/// ```
-/// {@category kernel32}
-int SetFileTime(
-  int hFile,
-  Pointer<FILETIME> lpCreationTime,
-  Pointer<FILETIME> lpLastAccessTime,
-  Pointer<FILETIME> lpLastWriteTime,
-) => _SetFileTime(hFile, lpCreationTime, lpLastAccessTime, lpLastWriteTime);
-
-final _SetFileTime = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hFile,
-        Pointer<FILETIME> lpCreationTime,
-        Pointer<FILETIME> lpLastAccessTime,
-        Pointer<FILETIME> lpLastWriteTime,
-      ),
-      int Function(
-        int hFile,
-        Pointer<FILETIME> lpCreationTime,
-        Pointer<FILETIME> lpLastAccessTime,
-        Pointer<FILETIME> lpLastWriteTime,
-      )
-    >('SetFileTime');
-
-/// Sets the valid data length of the specified file. This function is
-/// useful in very limited scenarios.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-setfiletime>.
 ///
-/// ```c
-/// BOOL SetFileValidData(
-///   [in] HANDLE   hFile,
-///   [in] LONGLONG ValidDataLength
-/// );
-/// ```
 /// {@category kernel32}
-int SetFileValidData(int hFile, int ValidDataLength) =>
-    _SetFileValidData(hFile, ValidDataLength);
+@pragma('vm:prefer-inline')
+bool SetFileTime(
+  int hFile,
+  Pointer<FILETIME>? lpCreationTime,
+  Pointer<FILETIME>? lpLastAccessTime,
+  Pointer<FILETIME>? lpLastWriteTime,
+) =>
+    SetFileTime_Wrapper(
+      hFile,
+      lpCreationTime ?? nullptr,
+      lpLastAccessTime ?? nullptr,
+      lpLastWriteTime ?? nullptr,
+    ) !=
+    FALSE;
 
-final _SetFileValidData = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hFile, Int64 ValidDataLength),
-      int Function(int hFile, int ValidDataLength)
-    >('SetFileValidData');
+/// Sets the valid data length of the specified file.
+///
+/// This function is useful in very limited scenarios.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-setfilevaliddata>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool SetFileValidData(int hFile, int validDataLength) =>
+    SetFileValidData_Wrapper(hFile, validDataLength) != FALSE;
 
 /// Sets the value of the specified firmware environment variable.
 ///
-/// ```c
-/// BOOL SetFirmwareEnvironmentVariableW(
-///   LPCWSTR lpName,
-///   LPCWSTR lpGuid,
-///   PVOID   pValue,
-///   DWORD   nSize
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setfirmwareenvironmentvariablew>.
+///
 /// {@category kernel32}
-int SetFirmwareEnvironmentVariable(
-  Pointer<Utf16> lpName,
-  Pointer<Utf16> lpGuid,
-  Pointer pValue,
+@pragma('vm:prefer-inline')
+bool SetFirmwareEnvironmentVariable(
+  PCWSTR lpName,
+  PCWSTR lpGuid,
+  Pointer? pValue,
   int nSize,
-) => _SetFirmwareEnvironmentVariable(lpName, lpGuid, pValue, nSize);
-
-final _SetFirmwareEnvironmentVariable = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Utf16> lpName,
-        Pointer<Utf16> lpGuid,
-        Pointer pValue,
-        Uint32 nSize,
-      ),
-      int Function(
-        Pointer<Utf16> lpName,
-        Pointer<Utf16> lpGuid,
-        Pointer pValue,
-        int nSize,
-      )
-    >('SetFirmwareEnvironmentVariableW');
+) =>
+    SetFirmwareEnvironmentVariableW_Wrapper(
+      lpName,
+      lpGuid,
+      pValue ?? nullptr,
+      nSize,
+    ) !=
+    FALSE;
 
 /// Sets the value of the specified firmware environment variable and the
 /// attributes that indicate how this variable is stored and maintained.
 ///
-/// ```c
-/// BOOL SetFirmwareEnvironmentVariableExW(
-///   LPCWSTR lpName,
-///   LPCWSTR lpGuid,
-///   PVOID   pValue,
-///   DWORD   nSize,
-///   DWORD   dwAttributes
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setfirmwareenvironmentvariableexw>.
+///
 /// {@category kernel32}
-int SetFirmwareEnvironmentVariableEx(
-  Pointer<Utf16> lpName,
-  Pointer<Utf16> lpGuid,
-  Pointer pValue,
+@pragma('vm:prefer-inline')
+bool SetFirmwareEnvironmentVariableEx(
+  PCWSTR lpName,
+  PCWSTR lpGuid,
+  Pointer? pValue,
   int nSize,
   int dwAttributes,
-) => _SetFirmwareEnvironmentVariableEx(
-  lpName,
-  lpGuid,
-  pValue,
-  nSize,
-  dwAttributes,
-);
-
-final _SetFirmwareEnvironmentVariableEx = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Utf16> lpName,
-        Pointer<Utf16> lpGuid,
-        Pointer pValue,
-        Uint32 nSize,
-        Uint32 dwAttributes,
-      ),
-      int Function(
-        Pointer<Utf16> lpName,
-        Pointer<Utf16> lpGuid,
-        Pointer pValue,
-        int nSize,
-        int dwAttributes,
-      )
-    >('SetFirmwareEnvironmentVariableExW');
+) =>
+    SetFirmwareEnvironmentVariableExW_Wrapper(
+      lpName,
+      lpGuid,
+      pValue ?? nullptr,
+      nSize,
+      dwAttributes,
+    ) !=
+    FALSE;
 
 /// Sets certain properties of an object handle.
 ///
-/// ```c
-/// BOOL SetHandleInformation(
-///   HANDLE hObject,
-///   DWORD  dwMask,
-///   DWORD  dwFlags
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/handleapi/nf-handleapi-sethandleinformation>.
+///
 /// {@category kernel32}
-int SetHandleInformation(int hObject, int dwMask, int dwFlags) =>
-    _SetHandleInformation(hObject, dwMask, dwFlags);
-
-final _SetHandleInformation = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hObject, Uint32 dwMask, Uint32 dwFlags),
-      int Function(int hObject, int dwMask, int dwFlags)
-    >('SetHandleInformation');
+@pragma('vm:prefer-inline')
+bool SetHandleInformation(int hObject, int dwMask, HANDLE_FLAGS dwFlags) =>
+    SetHandleInformation_Wrapper(hObject, dwMask, dwFlags) != FALSE;
 
 /// Sets limits for a job object.
 ///
-/// ```c
-/// BOOL SetInformationJobObject(
-///   [in] HANDLE             hJob,
-///   [in] JOBOBJECTINFOCLASS JobObjectInformationClass,
-///   [in] LPVOID             lpJobObjectInformation,
-///   [in] DWORD              cbJobObjectInformationLength
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/jobapi2/nf-jobapi2-setinformationjobobject>.
+///
 /// {@category kernel32}
-int SetInformationJobObject(
+@pragma('vm:prefer-inline')
+bool SetInformationJobObject(
   int hJob,
-  int JobObjectInformationClass,
+  JOBOBJECTINFOCLASS jobObjectInformationClass,
   Pointer lpJobObjectInformation,
   int cbJobObjectInformationLength,
-) => _SetInformationJobObject(
-  hJob,
-  JobObjectInformationClass,
-  lpJobObjectInformation,
-  cbJobObjectInformationLength,
-);
-
-final _SetInformationJobObject = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hJob,
-        Int32 JobObjectInformationClass,
-        Pointer lpJobObjectInformation,
-        Uint32 cbJobObjectInformationLength,
-      ),
-      int Function(
-        int hJob,
-        int JobObjectInformationClass,
-        Pointer lpJobObjectInformation,
-        int cbJobObjectInformationLength,
-      )
-    >('SetInformationJobObject');
+) =>
+    SetInformationJobObject_Wrapper(
+      hJob,
+      jobObjectInformationClass,
+      lpJobObjectInformation,
+      cbJobObjectInformationLength,
+    ) !=
+    FALSE;
 
 /// Sets I/O limits on a job object.
 ///
-/// ```c
-/// DWORD SetIoRateControlInformationJobObject(
-///   [in] HANDLE                                hJob,
-///   [in] JOBOBJECT_IO_RATE_CONTROL_INFORMATION *IoRateControlInfo
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/jobapi2/nf-jobapi2-setioratecontrolinformationjobobject>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 int SetIoRateControlInformationJobObject(
   int hJob,
-  Pointer<JOBOBJECT_IO_RATE_CONTROL_INFORMATION> IoRateControlInfo,
-) => _SetIoRateControlInformationJobObject(hJob, IoRateControlInfo);
+  Pointer<JOBOBJECT_IO_RATE_CONTROL_INFORMATION> ioRateControlInfo,
+) => SetIoRateControlInformationJobObject_Wrapper(hJob, ioRateControlInfo);
 
-final _SetIoRateControlInformationJobObject = _kernel32
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hJob,
-        Pointer<JOBOBJECT_IO_RATE_CONTROL_INFORMATION> IoRateControlInfo,
-      ),
-      int Function(
-        int hJob,
-        Pointer<JOBOBJECT_IO_RATE_CONTROL_INFORMATION> IoRateControlInfo,
-      )
-    >('SetIoRateControlInformationJobObject');
-
-/// Sets the last-error code for the calling thread.
+/// Sets the read mode and the blocking mode of the specified named pipe.
 ///
-/// ```c
-/// void SetLastError(
-///   DWORD dwErrCode
-/// );
-/// ```
-/// {@category kernel32}
-void SetLastError(int dwErrCode) => _SetLastError(dwErrCode);
-
-final _SetLastError = _kernel32
-    .lookupFunction<
-      Void Function(Uint32 dwErrCode),
-      void Function(int dwErrCode)
-    >('SetLastError');
-
-/// Sets the read mode and the blocking mode of the specified named pipe. If
-/// the specified handle is to the client end of a named pipe and if the
-/// named pipe server process is on a remote computer, the function can also
-/// be used to control local buffering.
+/// If the specified handle is to the client end of a named pipe and if the
+/// named pipe server process is on a remote computer, the function can also be
+/// used to control local buffering.
 ///
-/// ```c
-/// BOOL SetNamedPipeHandleState(
-///   HANDLE  hNamedPipe,
-///   LPDWORD lpMode,
-///   LPDWORD lpMaxCollectionCount,
-///   LPDWORD lpCollectDataTimeout);
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/namedpipeapi/nf-namedpipeapi-setnamedpipehandlestate>.
+///
 /// {@category kernel32}
-int SetNamedPipeHandleState(
+@pragma('vm:prefer-inline')
+bool SetNamedPipeHandleState(
   int hNamedPipe,
-  Pointer<Uint32> lpMode,
-  Pointer<Uint32> lpMaxCollectionCount,
-  Pointer<Uint32> lpCollectDataTimeout,
-) => _SetNamedPipeHandleState(
-  hNamedPipe,
-  lpMode,
-  lpMaxCollectionCount,
-  lpCollectDataTimeout,
-);
-
-final _SetNamedPipeHandleState = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hNamedPipe,
-        Pointer<Uint32> lpMode,
-        Pointer<Uint32> lpMaxCollectionCount,
-        Pointer<Uint32> lpCollectDataTimeout,
-      ),
-      int Function(
-        int hNamedPipe,
-        Pointer<Uint32> lpMode,
-        Pointer<Uint32> lpMaxCollectionCount,
-        Pointer<Uint32> lpCollectDataTimeout,
-      )
-    >('SetNamedPipeHandleState');
+  Pointer<Uint32>? lpMode,
+  Pointer<Uint32>? lpMaxCollectionCount,
+  Pointer<Uint32>? lpCollectDataTimeout,
+) =>
+    SetNamedPipeHandleState_Wrapper(
+      hNamedPipe,
+      lpMode ?? nullptr,
+      lpMaxCollectionCount ?? nullptr,
+      lpCollectDataTimeout ?? nullptr,
+    ) !=
+    FALSE;
 
 /// Sets a processor affinity mask for the threads of the specified process.
 ///
-/// ```c
-/// BOOL SetProcessAffinityMask(
-///   HANDLE    hProcess,
-///   DWORD_PTR dwProcessAffinityMask
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setprocessaffinitymask>.
+///
 /// {@category kernel32}
-int SetProcessAffinityMask(int hProcess, int dwProcessAffinityMask) =>
-    _SetProcessAffinityMask(hProcess, dwProcessAffinityMask);
-
-final _SetProcessAffinityMask = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hProcess, IntPtr dwProcessAffinityMask),
-      int Function(int hProcess, int dwProcessAffinityMask)
-    >('SetProcessAffinityMask');
+@pragma('vm:prefer-inline')
+bool SetProcessAffinityMask(int hProcess, int dwProcessAffinityMask) =>
+    SetProcessAffinityMask_Wrapper(hProcess, dwProcessAffinityMask) != FALSE;
 
 /// Disables or enables the ability of the system to temporarily boost the
 /// priority of the threads of the specified process.
 ///
-/// ```c
-/// BOOL SetProcessPriorityBoost(
-///   HANDLE hProcess,
-///   BOOL   bDisablePriorityBoost
-/// );
-/// ```
-/// {@category kernel32}
-int SetProcessPriorityBoost(int hProcess, int bDisablePriorityBoost) =>
-    _SetProcessPriorityBoost(hProcess, bDisablePriorityBoost);
-
-final _SetProcessPriorityBoost = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hProcess, Int32 bDisablePriorityBoost),
-      int Function(int hProcess, int bDisablePriorityBoost)
-    >('SetProcessPriorityBoost');
-
-/// Sets the minimum and maximum working set sizes for the specified
-/// process.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-setprocesspriorityboost>.
 ///
-/// ```c
-/// BOOL SetProcessWorkingSetSize(
-///   HANDLE hProcess,
-///   SIZE_T dwMinimumWorkingSetSize,
-///   SIZE_T dwMaximumWorkingSetSize
-/// );
-/// ```
 /// {@category kernel32}
-int SetProcessWorkingSetSize(
+@pragma('vm:prefer-inline')
+bool SetProcessPriorityBoost(int hProcess, bool bDisablePriorityBoost) =>
+    SetProcessPriorityBoost_Wrapper(
+      hProcess,
+      bDisablePriorityBoost ? TRUE : FALSE,
+    ) !=
+    FALSE;
+
+/// Sets the minimum and maximum working set sizes for the specified process.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-setprocessworkingsetsize>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool SetProcessWorkingSetSize(
   int hProcess,
   int dwMinimumWorkingSetSize,
   int dwMaximumWorkingSetSize,
-) => _SetProcessWorkingSetSize(
-  hProcess,
-  dwMinimumWorkingSetSize,
-  dwMaximumWorkingSetSize,
-);
+) =>
+    SetProcessWorkingSetSize_Wrapper(
+      hProcess,
+      dwMinimumWorkingSetSize,
+      dwMaximumWorkingSetSize,
+    ) !=
+    FALSE;
 
-final _SetProcessWorkingSetSize = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hProcess,
-        IntPtr dwMinimumWorkingSetSize,
-        IntPtr dwMaximumWorkingSetSize,
-      ),
-      int Function(
-        int hProcess,
-        int dwMinimumWorkingSetSize,
-        int dwMaximumWorkingSetSize,
-      )
-    >('SetProcessWorkingSetSize');
-
-/// Sets the handle for the specified standard device (standard input,
-/// standard output, or standard error).
+/// Sets the handle for the specified standard device (standard input, standard
+/// output, or standard error).
 ///
-/// ```c
-/// BOOL SetStdHandle(
-///   _In_ DWORD  nStdHandle,
-///   _In_ HANDLE hHandle
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/console/setstdhandle>.
+///
 /// {@category kernel32}
-int SetStdHandle(int nStdHandle, int hHandle) =>
-    _SetStdHandle(nStdHandle, hHandle);
-
-final _SetStdHandle = _kernel32
-    .lookupFunction<
-      Int32 Function(Uint32 nStdHandle, IntPtr hHandle),
-      int Function(int nStdHandle, int hHandle)
-    >('SetStdHandle');
+@pragma('vm:prefer-inline')
+bool SetStdHandle(STD_HANDLE nStdHandle, int hHandle) =>
+    SetStdHandle_Wrapper(nStdHandle, hHandle) != FALSE;
 
 /// Sets a processor affinity mask for the specified thread.
 ///
-/// ```c
-/// DWORD_PTR SetThreadAffinityMask(
-///   HANDLE    hThread,
-///   DWORD_PTR dwThreadAffinityMask
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setthreadaffinitymask>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 int SetThreadAffinityMask(int hThread, int dwThreadAffinityMask) =>
-    _SetThreadAffinityMask(hThread, dwThreadAffinityMask);
-
-final _SetThreadAffinityMask = _kernel32
-    .lookupFunction<
-      IntPtr Function(IntPtr hThread, IntPtr dwThreadAffinityMask),
-      int Function(int hThread, int dwThreadAffinityMask)
-    >('SetThreadAffinityMask');
+    SetThreadAffinityMask_Wrapper(hThread, dwThreadAffinityMask);
 
 /// Controls whether the system will handle the specified types of serious
 /// errors or whether the calling thread will handle them.
 ///
-/// ```c
-/// BOOL SetThreadErrorMode(
-///   DWORD   dwNewMode,
-///   LPDWORD lpOldMode
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/errhandlingapi/nf-errhandlingapi-setthreaderrormode>.
+///
 /// {@category kernel32}
-int SetThreadErrorMode(int dwNewMode, Pointer<Uint32> lpOldMode) =>
-    _SetThreadErrorMode(dwNewMode, lpOldMode);
-
-final _SetThreadErrorMode = _kernel32
-    .lookupFunction<
-      Int32 Function(Uint32 dwNewMode, Pointer<Uint32> lpOldMode),
-      int Function(int dwNewMode, Pointer<Uint32> lpOldMode)
-    >('SetThreadErrorMode');
+@pragma('vm:prefer-inline')
+bool SetThreadErrorMode(
+  THREAD_ERROR_MODE dwNewMode,
+  Pointer<Uint32>? lpOldMode,
+) => SetThreadErrorMode_Wrapper(dwNewMode, lpOldMode ?? nullptr) != FALSE;
 
 /// Enables an application to inform the system that it is in use, thereby
-/// preventing the system from entering sleep or turning off the display
-/// while the application is running.
+/// preventing the system from entering sleep or turning off the display while
+/// the application is running.
 ///
-/// ```c
-/// EXECUTION_STATE SetThreadExecutionState(
-///   EXECUTION_STATE esFlags
-///   );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setthreadexecutionstate>.
+///
 /// {@category kernel32}
-int SetThreadExecutionState(int esFlags) => _SetThreadExecutionState(esFlags);
+@pragma('vm:prefer-inline')
+EXECUTION_STATE SetThreadExecutionState(EXECUTION_STATE esFlags) =>
+    EXECUTION_STATE(_SetThreadExecutionState(esFlags));
 
-final _SetThreadExecutionState = _kernel32
-    .lookupFunction<Uint32 Function(Uint32 esFlags), int Function(int esFlags)>(
-      'SetThreadExecutionState',
-    );
+@Native<Uint32 Function(Uint32)>(symbol: 'SetThreadExecutionState')
+external int _SetThreadExecutionState(int esFlags);
 
 /// Sets the user interface language for the current thread.
 ///
-/// ```c
-/// LANGID SetThreadUILanguage(
-///   LANGID LangId
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-setthreaduilanguage>.
+///
 /// {@category kernel32}
-int SetThreadUILanguage(int LangId) => _SetThreadUILanguage(LangId);
-
-final _SetThreadUILanguage = _kernel32
-    .lookupFunction<Uint16 Function(Uint16 LangId), int Function(int LangId)>(
-      'SetThreadUILanguage',
-    );
+@pragma('vm:prefer-inline')
+int SetThreadUILanguage(int langId) => SetThreadUILanguage_Wrapper(langId);
 
 /// Initializes the communications parameters for a specified communications
 /// device.
 ///
-/// ```c
-/// BOOL SetupComm(
-///   HANDLE hFile,
-///   DWORD  dwInQueue,
-///   DWORD  dwOutQueue
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setupcomm>.
+///
 /// {@category kernel32}
-int SetupComm(int hFile, int dwInQueue, int dwOutQueue) =>
-    _SetupComm(hFile, dwInQueue, dwOutQueue);
-
-final _SetupComm = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hFile, Uint32 dwInQueue, Uint32 dwOutQueue),
-      int Function(int hFile, int dwInQueue, int dwOutQueue)
-    >('SetupComm');
+@pragma('vm:prefer-inline')
+bool SetupComm(int hFile, int dwInQueue, int dwOutQueue) =>
+    SetupComm_Wrapper(hFile, dwInQueue, dwOutQueue) != FALSE;
 
 /// Sets the label of a file system volume.
 ///
-/// ```c
-/// BOOL SetVolumeLabelW(
-///   LPCWSTR lpRootPathName,
-///   LPCWSTR lpVolumeName);
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setvolumelabelw>.
+///
 /// {@category kernel32}
-int SetVolumeLabel(
-  Pointer<Utf16> lpRootPathName,
-  Pointer<Utf16> lpVolumeName,
-) => _SetVolumeLabel(lpRootPathName, lpVolumeName);
-
-final _SetVolumeLabel = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Utf16> lpRootPathName,
-        Pointer<Utf16> lpVolumeName,
-      ),
-      int Function(Pointer<Utf16> lpRootPathName, Pointer<Utf16> lpVolumeName)
-    >('SetVolumeLabelW');
+@pragma('vm:prefer-inline')
+bool SetVolumeLabel(PCWSTR? lpRootPathName, PCWSTR? lpVolumeName) =>
+    SetVolumeLabelW_Wrapper(
+      lpRootPathName ?? nullptr,
+      lpVolumeName ?? nullptr,
+    ) !=
+    FALSE;
 
 /// Retrieves the size, in bytes, of the specified resource.
 ///
-/// ```c
-/// DWORD SizeofResource(
-///   [in, optional] HMODULE hModule,
-///   [in]           HRSRC   hResInfo
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-sizeofresource>.
+///
 /// {@category kernel32}
-int SizeofResource(int hModule, int hResInfo) =>
-    _SizeofResource(hModule, hResInfo);
-
-final _SizeofResource = _kernel32
-    .lookupFunction<
-      Uint32 Function(IntPtr hModule, IntPtr hResInfo),
-      int Function(int hModule, int hResInfo)
-    >('SizeofResource');
+@pragma('vm:prefer-inline')
+int SizeofResource(int? hModule, int hResInfo) =>
+    SizeofResource_Wrapper(hModule ?? NULL, hResInfo);
 
 /// Suspends the execution of the current thread until the time-out interval
 /// elapses.
 ///
-/// ```c
-/// void Sleep(
-///   DWORD dwMilliseconds
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-sleep>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 void Sleep(int dwMilliseconds) => _Sleep(dwMilliseconds);
 
-final _Sleep = _kernel32
-    .lookupFunction<
-      Void Function(Uint32 dwMilliseconds),
-      void Function(int dwMilliseconds)
-    >('Sleep');
+@Native<Void Function(Uint32)>(symbol: 'Sleep')
+external void _Sleep(int dwMilliseconds);
 
 /// Suspends the current thread until the specified condition is met.
-/// Execution resumes when one of the following occurs: (i) an I/O
-/// completion callback function is called; (ii) an asynchronous procedure
-/// call (APC) is queued to the thread; (iii) the time-out interval elapses.
 ///
-/// ```c
-/// DWORD SleepEx(
-///   DWORD dwMilliseconds,
-///   BOOL  bAlertable
-/// );
-/// ```
-/// {@category kernel32}
-int SleepEx(int dwMilliseconds, int bAlertable) =>
-    _SleepEx(dwMilliseconds, bAlertable);
-
-final _SleepEx = _kernel32
-    .lookupFunction<
-      Uint32 Function(Uint32 dwMilliseconds, Int32 bAlertable),
-      int Function(int dwMilliseconds, int bAlertable)
-    >('SleepEx');
-
-/// Converts a system time to file time format. System time is based on
-/// Coordinated Universal Time (UTC).
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-sleepex>.
 ///
-/// ```c
-/// BOOL SystemTimeToFileTime(
-///   const SYSTEMTIME *lpSystemTime,
-///   LPFILETIME       lpFileTime
-/// );
-/// ```
 /// {@category kernel32}
-int SystemTimeToFileTime(
+@pragma('vm:prefer-inline')
+int SleepEx(int dwMilliseconds, bool bAlertable) =>
+    _SleepEx(dwMilliseconds, bAlertable ? TRUE : FALSE);
+
+@Native<Uint32 Function(Uint32, BOOL)>(symbol: 'SleepEx')
+external int _SleepEx(int dwMilliseconds, int bAlertable);
+
+/// Converts a system time to file time format.
+///
+/// System time is based on Coordinated Universal Time (UTC).
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/timezoneapi/nf-timezoneapi-systemtimetofiletime>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool SystemTimeToFileTime(
   Pointer<SYSTEMTIME> lpSystemTime,
   Pointer<FILETIME> lpFileTime,
-) => _SystemTimeToFileTime(lpSystemTime, lpFileTime);
+) => SystemTimeToFileTime_Wrapper(lpSystemTime, lpFileTime) != FALSE;
 
-final _SystemTimeToFileTime = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<SYSTEMTIME> lpSystemTime,
-        Pointer<FILETIME> lpFileTime,
-      ),
-      int Function(
-        Pointer<SYSTEMTIME> lpSystemTime,
-        Pointer<FILETIME> lpFileTime,
-      )
-    >('SystemTimeToFileTime');
-
-/// Terminates all processes currently associated with the job. If the job
-/// is nested, this function terminates all processes currently associated
-/// with the job and all of its child jobs in the hierarchy.
+/// Terminates all processes currently associated with the job.
 ///
-/// ```c
-/// BOOL TerminateJobObject(
-///   [in] HANDLE hJob,
-///   [in] UINT   uExitCode
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/jobapi2/nf-jobapi2-terminatejobobject>.
+///
 /// {@category kernel32}
-int TerminateJobObject(int hJob, int uExitCode) =>
-    _TerminateJobObject(hJob, uExitCode);
-
-final _TerminateJobObject = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hJob, Uint32 uExitCode),
-      int Function(int hJob, int uExitCode)
-    >('TerminateJobObject');
+@pragma('vm:prefer-inline')
+bool TerminateJobObject(int hJob, int uExitCode) =>
+    TerminateJobObject_Wrapper(hJob, uExitCode) != FALSE;
 
 /// Terminates the specified process and all of its threads.
 ///
-/// ```c
-/// BOOL TerminateProcess(
-///   HANDLE hProcess,
-///   UINT   uExitCode);
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-terminateprocess>.
+///
 /// {@category kernel32}
-int TerminateProcess(int hProcess, int uExitCode) =>
-    _TerminateProcess(hProcess, uExitCode);
-
-final _TerminateProcess = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hProcess, Uint32 uExitCode),
-      int Function(int hProcess, int uExitCode)
-    >('TerminateProcess');
+@pragma('vm:prefer-inline')
+bool TerminateProcess(int hProcess, int uExitCode) =>
+    TerminateProcess_Wrapper(hProcess, uExitCode) != FALSE;
 
 /// Terminates a thread.
 ///
-/// ```c
-/// BOOL TerminateThread(
-///   HANDLE hThread,
-///   DWORD  dwExitCode
-/// );
-/// ```
-/// {@category kernel32}
-int TerminateThread(int hThread, int dwExitCode) =>
-    _TerminateThread(hThread, dwExitCode);
-
-final _TerminateThread = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hThread, Uint32 dwExitCode),
-      int Function(int hThread, int dwExitCode)
-    >('TerminateThread');
-
-/// Combines the functions that write a message to and read a message from
-/// the specified named pipe into a single network operation.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-terminatethread>.
 ///
-/// ```c
-/// BOOL TransactNamedPipe(
-///   HANDLE       hNamedPipe,
-///   LPVOID       lpInBuffer,
-///   DWORD        nInBufferSize,
-///   LPVOID       lpOutBuffer,
-///   DWORD        nOutBufferSize,
-///   LPDWORD      lpBytesRead,
-///   LPOVERLAPPED lpOverlapped);
-/// ```
 /// {@category kernel32}
-int TransactNamedPipe(
+@pragma('vm:prefer-inline')
+bool TerminateThread(int hThread, int dwExitCode) =>
+    TerminateThread_Wrapper(hThread, dwExitCode) != FALSE;
+
+/// Combines the functions that write a message to and read a message from the
+/// specified named pipe into a single operation.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/namedpipeapi/nf-namedpipeapi-transactnamedpipe>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool TransactNamedPipe(
   int hNamedPipe,
-  Pointer lpInBuffer,
+  Pointer? lpInBuffer,
   int nInBufferSize,
-  Pointer lpOutBuffer,
+  Pointer? lpOutBuffer,
   int nOutBufferSize,
   Pointer<Uint32> lpBytesRead,
-  Pointer<OVERLAPPED> lpOverlapped,
-) => _TransactNamedPipe(
-  hNamedPipe,
-  lpInBuffer,
-  nInBufferSize,
-  lpOutBuffer,
-  nOutBufferSize,
-  lpBytesRead,
-  lpOverlapped,
-);
-
-final _TransactNamedPipe = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hNamedPipe,
-        Pointer lpInBuffer,
-        Uint32 nInBufferSize,
-        Pointer lpOutBuffer,
-        Uint32 nOutBufferSize,
-        Pointer<Uint32> lpBytesRead,
-        Pointer<OVERLAPPED> lpOverlapped,
-      ),
-      int Function(
-        int hNamedPipe,
-        Pointer lpInBuffer,
-        int nInBufferSize,
-        Pointer lpOutBuffer,
-        int nOutBufferSize,
-        Pointer<Uint32> lpBytesRead,
-        Pointer<OVERLAPPED> lpOverlapped,
-      )
-    >('TransactNamedPipe');
+  Pointer<OVERLAPPED>? lpOverlapped,
+) =>
+    TransactNamedPipe_Wrapper(
+      hNamedPipe,
+      lpInBuffer ?? nullptr,
+      nInBufferSize,
+      lpOutBuffer ?? nullptr,
+      nOutBufferSize,
+      lpBytesRead,
+      lpOverlapped ?? nullptr,
+    ) !=
+    FALSE;
 
 /// Transmits a specified character ahead of any pending data in the output
 /// buffer of the specified communications device.
 ///
-/// ```c
-/// BOOL TransmitCommChar(
-///   HANDLE hFile,
-///   char   cChar
-/// );
-/// ```
-/// {@category kernel32}
-int TransmitCommChar(int hFile, int cChar) => _TransmitCommChar(hFile, cChar);
-
-final _TransmitCommChar = _kernel32
-    .lookupFunction<
-      Int32 Function(IntPtr hFile, Uint8 cChar),
-      int Function(int hFile, int cChar)
-    >('TransmitCommChar');
-
-/// Unlocks a region in an open file. Unlocking a region enables other
-/// processes to access the region.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-transmitcommchar>.
 ///
-/// ```c
-/// BOOL UnlockFile(
-///   [in] HANDLE hFile,
-///   [in] DWORD  dwFileOffsetLow,
-///   [in] DWORD  dwFileOffsetHigh,
-///   [in] DWORD  nNumberOfBytesToUnlockLow,
-///   [in] DWORD  nNumberOfBytesToUnlockHigh
-/// );
-/// ```
 /// {@category kernel32}
-int UnlockFile(
+@pragma('vm:prefer-inline')
+bool TransmitCommChar(int hFile, int cChar) =>
+    TransmitCommChar_Wrapper(hFile, cChar) != FALSE;
+
+/// Unlocks a region in an open file.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-unlockfile>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool UnlockFile(
   int hFile,
   int dwFileOffsetLow,
   int dwFileOffsetHigh,
   int nNumberOfBytesToUnlockLow,
   int nNumberOfBytesToUnlockHigh,
-) => _UnlockFile(
-  hFile,
-  dwFileOffsetLow,
-  dwFileOffsetHigh,
-  nNumberOfBytesToUnlockLow,
-  nNumberOfBytesToUnlockHigh,
-);
+) =>
+    UnlockFile_Wrapper(
+      hFile,
+      dwFileOffsetLow,
+      dwFileOffsetHigh,
+      nNumberOfBytesToUnlockLow,
+      nNumberOfBytesToUnlockHigh,
+    ) !=
+    FALSE;
 
-final _UnlockFile = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hFile,
-        Uint32 dwFileOffsetLow,
-        Uint32 dwFileOffsetHigh,
-        Uint32 nNumberOfBytesToUnlockLow,
-        Uint32 nNumberOfBytesToUnlockHigh,
-      ),
-      int Function(
-        int hFile,
-        int dwFileOffsetLow,
-        int dwFileOffsetHigh,
-        int nNumberOfBytesToUnlockLow,
-        int nNumberOfBytesToUnlockHigh,
-      )
-    >('UnlockFile');
-
-/// Unlocks a region in the specified file. This function can operate either
-/// synchronously or asynchronously.
+/// Unlocks a region in the specified file.
 ///
-/// ```c
-/// BOOL UnlockFileEx(
-///   [in]      HANDLE       hFile,
-///             DWORD        dwReserved,
-///   [in]      DWORD        nNumberOfBytesToUnlockLow,
-///   [in]      DWORD        nNumberOfBytesToUnlockHigh,
-///   [in, out] LPOVERLAPPED lpOverlapped
-/// );
-/// ```
+/// This function can operate either synchronously or asynchronously.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-unlockfileex>.
+///
 /// {@category kernel32}
-int UnlockFileEx(
+@pragma('vm:prefer-inline')
+bool UnlockFileEx(
   int hFile,
-  int dwReserved,
   int nNumberOfBytesToUnlockLow,
   int nNumberOfBytesToUnlockHigh,
   Pointer<OVERLAPPED> lpOverlapped,
-) => _UnlockFileEx(
-  hFile,
-  dwReserved,
-  nNumberOfBytesToUnlockLow,
-  nNumberOfBytesToUnlockHigh,
-  lpOverlapped,
-);
-
-final _UnlockFileEx = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hFile,
-        Uint32 dwReserved,
-        Uint32 nNumberOfBytesToUnlockLow,
-        Uint32 nNumberOfBytesToUnlockHigh,
-        Pointer<OVERLAPPED> lpOverlapped,
-      ),
-      int Function(
-        int hFile,
-        int dwReserved,
-        int nNumberOfBytesToUnlockLow,
-        int nNumberOfBytesToUnlockHigh,
-        Pointer<OVERLAPPED> lpOverlapped,
-      )
-    >('UnlockFileEx');
+) =>
+    UnlockFileEx_Wrapper(
+      hFile,
+      NULL,
+      nNumberOfBytesToUnlockLow,
+      nNumberOfBytesToUnlockHigh,
+      lpOverlapped,
+    ) !=
+    FALSE;
 
 /// Updates the specified attribute in a list of attributes for process and
 /// thread creation.
 ///
-/// ```c
-/// BOOL UpdateProcThreadAttribute(
-///   LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList,
-///   DWORD                        dwFlags,
-///   DWORD_PTR                    Attribute,
-///   PVOID                        lpValue,
-///   SIZE_T                       cbSize,
-///   PVOID                        lpPreviousValue,
-///   PSIZE_T                      lpReturnSize
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-updateprocthreadattribute>.
+///
 /// {@category kernel32}
-int UpdateProcThreadAttribute(
-  Pointer lpAttributeList,
+@pragma('vm:prefer-inline')
+bool UpdateProcThreadAttribute(
+  int lpAttributeList,
   int dwFlags,
-  int Attribute,
-  Pointer lpValue,
+  int attribute,
+  Pointer? lpValue,
   int cbSize,
-  Pointer lpPreviousValue,
-  Pointer<IntPtr> lpReturnSize,
-) => _UpdateProcThreadAttribute(
-  lpAttributeList,
-  dwFlags,
-  Attribute,
-  lpValue,
-  cbSize,
-  lpPreviousValue,
-  lpReturnSize,
-);
+  Pointer? lpPreviousValue,
+  Pointer<IntPtr>? lpReturnSize,
+) =>
+    UpdateProcThreadAttribute_Wrapper(
+      lpAttributeList,
+      dwFlags,
+      attribute,
+      lpValue ?? nullptr,
+      cbSize,
+      lpPreviousValue ?? nullptr,
+      lpReturnSize ?? nullptr,
+    ) !=
+    FALSE;
 
-final _UpdateProcThreadAttribute = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer lpAttributeList,
-        Uint32 dwFlags,
-        IntPtr Attribute,
-        Pointer lpValue,
-        IntPtr cbSize,
-        Pointer lpPreviousValue,
-        Pointer<IntPtr> lpReturnSize,
-      ),
-      int Function(
-        Pointer lpAttributeList,
-        int dwFlags,
-        int Attribute,
-        Pointer lpValue,
-        int cbSize,
-        Pointer lpPreviousValue,
-        Pointer<IntPtr> lpReturnSize,
-      )
-    >('UpdateProcThreadAttribute');
-
-/// Adds, deletes, or replaces a resource in a portable executable (PE)
-/// file.
+/// Adds, deletes, or replaces a resource in a portable executable (PE) file.
 ///
-/// ```c
-/// BOOL UpdateResourceW(
-///   HANDLE  hUpdate,
-///   LPCWSTR lpType,
-///   LPCWSTR lpName,
-///   WORD    wLanguage,
-///   LPVOID  lpData,
-///   DWORD   cb
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-updateresourcew>.
+///
 /// {@category kernel32}
-int UpdateResource(
+@pragma('vm:prefer-inline')
+bool UpdateResource(
   int hUpdate,
-  Pointer<Utf16> lpType,
-  Pointer<Utf16> lpName,
+  PCWSTR lpType,
+  PCWSTR lpName,
   int wLanguage,
-  Pointer lpData,
+  Pointer? lpData,
   int cb,
-) => _UpdateResource(hUpdate, lpType, lpName, wLanguage, lpData, cb);
+) =>
+    UpdateResourceW_Wrapper(
+      hUpdate,
+      lpType,
+      lpName,
+      wLanguage,
+      lpData ?? nullptr,
+      cb,
+    ) !=
+    FALSE;
 
-final _UpdateResource = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hUpdate,
-        Pointer<Utf16> lpType,
-        Pointer<Utf16> lpName,
-        Uint16 wLanguage,
-        Pointer lpData,
-        Uint32 cb,
-      ),
-      int Function(
-        int hUpdate,
-        Pointer<Utf16> lpType,
-        Pointer<Utf16> lpName,
-        int wLanguage,
-        Pointer lpData,
-        int cb,
-      )
-    >('UpdateResourceW');
-
-/// Compares a set of operating system version requirements to the
-/// corresponding values for the currently running version of the system.
-/// This function is subject to manifest-based behavior.
+/// Compares a set of operating system version requirements to the corresponding
+/// values for the currently running version of the system.
 ///
-/// ```c
-/// BOOL VerifyVersionInfoW(
-///   [in] LPOSVERSIONINFOEXW lpVersionInformation,
-///   [in] DWORD              dwTypeMask,
-///   [in] DWORDLONG          dwlConditionMask
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-verifyversioninfow>.
+///
 /// {@category kernel32}
-int VerifyVersionInfo(
+@pragma('vm:prefer-inline')
+bool VerifyVersionInfo(
   Pointer<OSVERSIONINFOEX> lpVersionInformation,
-  int dwTypeMask,
+  VER_FLAGS dwTypeMask,
   int dwlConditionMask,
-) => _VerifyVersionInfo(lpVersionInformation, dwTypeMask, dwlConditionMask);
+) =>
+    VerifyVersionInfoW_Wrapper(
+      lpVersionInformation,
+      dwTypeMask,
+      dwlConditionMask,
+    ) !=
+    FALSE;
 
-final _VerifyVersionInfo = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<OSVERSIONINFOEX> lpVersionInformation,
-        Uint32 dwTypeMask,
-        Uint64 dwlConditionMask,
-      ),
-      int Function(
-        Pointer<OSVERSIONINFOEX> lpVersionInformation,
-        int dwTypeMask,
-        int dwlConditionMask,
-      )
-    >('VerifyVersionInfoW');
-
-/// Retrieves a description string for the language associated with a
-/// specified binary Microsoft language identifier.
+/// Retrieves a description string for the language associated with a specified
+/// binary Microsoft language identifier.
 ///
-/// ```c
-/// DWORD VerLanguageNameW(
-///   DWORD  wLang,
-///   LPWSTR szLang,
-///   DWORD  cchLang
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winver/nf-winver-verlanguagenamew>.
+///
 /// {@category kernel32}
-int VerLanguageName(int wLang, Pointer<Utf16> szLang, int cchLang) =>
+@pragma('vm:prefer-inline')
+int VerLanguageName(int wLang, PWSTR szLang, int cchLang) =>
     _VerLanguageName(wLang, szLang, cchLang);
 
-final _VerLanguageName = _kernel32
-    .lookupFunction<
-      Uint32 Function(Uint32 wLang, Pointer<Utf16> szLang, Uint32 cchLang),
-      int Function(int wLang, Pointer<Utf16> szLang, int cchLang)
-    >('VerLanguageNameW');
+@Native<Uint32 Function(Uint32, PWSTR, Uint32)>(symbol: 'VerLanguageNameW')
+external int _VerLanguageName(int wLang, PWSTR szLang, int cchLang);
 
-/// Sets the bits of a 64-bit value to indicate the comparison operator to
-/// use for a specified operating system version attribute. This function is
-/// used to build the dwlConditionMask parameter of the VerifyVersionInfo
-/// function.
+/// Sets the bits of a 64-bit value to indicate the comparison operator to use
+/// for a specified operating system version attribute.
 ///
-/// ```c
-/// ULONGLONG VerSetConditionMask(
-/// [in] ULONGLONG ConditionMask,
-/// [in] DWORD     TypeMask,
-/// [in] BYTE      Condition
-/// );
-/// ```
-/// {@category kernel32}
-int VerSetConditionMask(int ConditionMask, int TypeMask, int Condition) =>
-    _VerSetConditionMask(ConditionMask, TypeMask, Condition);
-
-final _VerSetConditionMask = _kernel32
-    .lookupFunction<
-      Uint64 Function(Uint64 ConditionMask, Uint32 TypeMask, Uint8 Condition),
-      int Function(int ConditionMask, int TypeMask, int Condition)
-    >('VerSetConditionMask');
-
-/// Reserves, commits, or changes the state of a region of pages in the
-/// virtual address space of the calling process. Memory allocated by this
-/// function is automatically initialized to zero.
+/// This function is used to build the dwlConditionMask parameter of the
+/// VerifyVersionInfo function.
 ///
-/// ```c
-/// LPVOID VirtualAlloc(
-///   LPVOID lpAddress,
-///   SIZE_T dwSize,
-///   DWORD  flAllocationType,
-///   DWORD  flProtect
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winnt/nf-winnt-versetconditionmask>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
+int VerSetConditionMask(int conditionMask, VER_FLAGS typeMask, int condition) =>
+    _VerSetConditionMask(conditionMask, typeMask, condition);
+
+@Native<Uint64 Function(Uint64, Uint32, Uint8)>(symbol: 'VerSetConditionMask')
+external int _VerSetConditionMask(
+  int conditionMask,
+  int typeMask,
+  int condition,
+);
+
+/// Reserves, commits, or changes the state of a region of pages in the virtual
+/// address space of the calling process.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-virtualalloc>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
 Pointer VirtualAlloc(
-  Pointer lpAddress,
+  Pointer? lpAddress,
   int dwSize,
-  int flAllocationType,
-  int flProtect,
-) => _VirtualAlloc(lpAddress, dwSize, flAllocationType, flProtect);
-
-final _VirtualAlloc = _kernel32
-    .lookupFunction<
-      Pointer Function(
-        Pointer lpAddress,
-        IntPtr dwSize,
-        Uint32 flAllocationType,
-        Uint32 flProtect,
-      ),
-      Pointer Function(
-        Pointer lpAddress,
-        int dwSize,
-        int flAllocationType,
-        int flProtect,
-      )
-    >('VirtualAlloc');
+  VIRTUAL_ALLOCATION_TYPE flAllocationType,
+  PAGE_PROTECTION_FLAGS flProtect,
+) => VirtualAlloc_Wrapper(
+  lpAddress ?? nullptr,
+  dwSize,
+  flAllocationType,
+  flProtect,
+);
 
 /// Reserves, commits, or changes the state of a region of memory within the
-/// virtual address space of a specified process. The function initializes
-/// the memory it allocates to zero.
+/// virtual address space of a specified process.
 ///
-/// ```c
-/// LPVOID VirtualAllocEx(
-///   HANDLE hProcess,
-///   LPVOID lpAddress,
-///   SIZE_T dwSize,
-///   DWORD  flAllocationType,
-///   DWORD  flProtect
-/// );
-/// ```
+/// The function initializes the memory it allocates to zero.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-virtualallocex>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 Pointer VirtualAllocEx(
   int hProcess,
-  Pointer lpAddress,
+  Pointer? lpAddress,
   int dwSize,
-  int flAllocationType,
-  int flProtect,
-) => _VirtualAllocEx(hProcess, lpAddress, dwSize, flAllocationType, flProtect);
+  VIRTUAL_ALLOCATION_TYPE flAllocationType,
+  PAGE_PROTECTION_FLAGS flProtect,
+) => VirtualAllocEx_Wrapper(
+  hProcess,
+  lpAddress ?? nullptr,
+  dwSize,
+  flAllocationType,
+  flProtect,
+);
 
-final _VirtualAllocEx = _kernel32
-    .lookupFunction<
-      Pointer Function(
-        IntPtr hProcess,
-        Pointer lpAddress,
-        IntPtr dwSize,
-        Uint32 flAllocationType,
-        Uint32 flProtect,
-      ),
-      Pointer Function(
-        int hProcess,
-        Pointer lpAddress,
-        int dwSize,
-        int flAllocationType,
-        int flProtect,
-      )
-    >('VirtualAllocEx');
-
-/// Releases, decommits, or releases and decommits a region of pages within
-/// the virtual address space of the calling process.
+/// Releases, decommits, or releases and decommits a region of pages within the
+/// virtual address space of the calling process.
 ///
-/// ```c
-/// BOOL VirtualFree(
-///   LPVOID lpAddress,
-///   SIZE_T dwSize,
-///   DWORD  dwFreeType
-/// );
-/// ```
-/// {@category kernel32}
-int VirtualFree(Pointer lpAddress, int dwSize, int dwFreeType) =>
-    _VirtualFree(lpAddress, dwSize, dwFreeType);
-
-final _VirtualFree = _kernel32
-    .lookupFunction<
-      Int32 Function(Pointer lpAddress, IntPtr dwSize, Uint32 dwFreeType),
-      int Function(Pointer lpAddress, int dwSize, int dwFreeType)
-    >('VirtualFree');
-
-/// Releases, decommits, or releases and decommits a region of memory within
-/// the virtual address space of a specified process.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-virtualfree>.
 ///
-/// ```c
-/// BOOL VirtualFreeEx(
-///   HANDLE hProcess,
-///   LPVOID lpAddress,
-///   SIZE_T dwSize,
-///   DWORD  dwFreeType
-/// );
-/// ```
 /// {@category kernel32}
-int VirtualFreeEx(
+@pragma('vm:prefer-inline')
+bool VirtualFree(Pointer lpAddress, int dwSize, VIRTUAL_FREE_TYPE dwFreeType) =>
+    VirtualFree_Wrapper(lpAddress, dwSize, dwFreeType) != FALSE;
+
+/// Releases, decommits, or releases and decommits a region of memory within the
+/// virtual address space of a specified process.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-virtualfreeex>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool VirtualFreeEx(
   int hProcess,
   Pointer lpAddress,
   int dwSize,
-  int dwFreeType,
-) => _VirtualFreeEx(hProcess, lpAddress, dwSize, dwFreeType);
-
-final _VirtualFreeEx = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hProcess,
-        Pointer lpAddress,
-        IntPtr dwSize,
-        Uint32 dwFreeType,
-      ),
-      int Function(int hProcess, Pointer lpAddress, int dwSize, int dwFreeType)
-    >('VirtualFreeEx');
+  VIRTUAL_FREE_TYPE dwFreeType,
+) => VirtualFreeEx_Wrapper(hProcess, lpAddress, dwSize, dwFreeType) != FALSE;
 
 /// Locks the specified region of the process's virtual address space into
 /// physical memory, ensuring that subsequent access to the region will not
 /// incur a page fault.
 ///
-/// ```c
-/// BOOL VirtualLock(
-///   LPVOID lpAddress,
-///   SIZE_T dwSize
-/// );
-/// ```
-/// {@category kernel32}
-int VirtualLock(Pointer lpAddress, int dwSize) =>
-    _VirtualLock(lpAddress, dwSize);
-
-final _VirtualLock = _kernel32
-    .lookupFunction<
-      Int32 Function(Pointer lpAddress, IntPtr dwSize),
-      int Function(Pointer lpAddress, int dwSize)
-    >('VirtualLock');
-
-/// Changes the protection on a region of committed pages in the virtual
-/// address space of the calling process.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-virtuallock>.
 ///
-/// ```c
-/// BOOL VirtualProtect(
-///   LPVOID lpAddress,
-///   SIZE_T dwSize,
-///   DWORD  flNewProtect,
-///   PDWORD lpflOldProtect
-/// );
-/// ```
 /// {@category kernel32}
-int VirtualProtect(
+@pragma('vm:prefer-inline')
+bool VirtualLock(Pointer lpAddress, int dwSize) =>
+    VirtualLock_Wrapper(lpAddress, dwSize) != FALSE;
+
+/// Changes the protection on a region of committed pages in the virtual address
+/// space of the calling process.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-virtualprotect>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+bool VirtualProtect(
   Pointer lpAddress,
   int dwSize,
-  int flNewProtect,
+  PAGE_PROTECTION_FLAGS flNewProtect,
   Pointer<Uint32> lpflOldProtect,
-) => _VirtualProtect(lpAddress, dwSize, flNewProtect, lpflOldProtect);
+) =>
+    VirtualProtect_Wrapper(lpAddress, dwSize, flNewProtect, lpflOldProtect) !=
+    FALSE;
 
-final _VirtualProtect = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Pointer lpAddress,
-        IntPtr dwSize,
-        Uint32 flNewProtect,
-        Pointer<Uint32> lpflOldProtect,
-      ),
-      int Function(
-        Pointer lpAddress,
-        int dwSize,
-        int flNewProtect,
-        Pointer<Uint32> lpflOldProtect,
-      )
-    >('VirtualProtect');
-
-/// Changes the protection on a region of committed pages in the virtual
-/// address space of a specified process.
+/// Changes the protection on a region of committed pages in the virtual address
+/// space of a specified process.
 ///
-/// ```c
-/// BOOL VirtualProtectEx(
-///   HANDLE hProcess,
-///   LPVOID lpAddress,
-///   SIZE_T dwSize,
-///   DWORD  flNewProtect,
-///   PDWORD lpflOldProtect
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-virtualprotectex>.
+///
 /// {@category kernel32}
-int VirtualProtectEx(
+@pragma('vm:prefer-inline')
+bool VirtualProtectEx(
   int hProcess,
   Pointer lpAddress,
   int dwSize,
-  int flNewProtect,
+  PAGE_PROTECTION_FLAGS flNewProtect,
   Pointer<Uint32> lpflOldProtect,
-) => _VirtualProtectEx(
-  hProcess,
-  lpAddress,
-  dwSize,
-  flNewProtect,
-  lpflOldProtect,
-);
+) =>
+    VirtualProtectEx_Wrapper(
+      hProcess,
+      lpAddress,
+      dwSize,
+      flNewProtect,
+      lpflOldProtect,
+    ) !=
+    FALSE;
 
-final _VirtualProtectEx = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hProcess,
-        Pointer lpAddress,
-        IntPtr dwSize,
-        Uint32 flNewProtect,
-        Pointer<Uint32> lpflOldProtect,
-      ),
-      int Function(
-        int hProcess,
-        Pointer lpAddress,
-        int dwSize,
-        int flNewProtect,
-        Pointer<Uint32> lpflOldProtect,
-      )
-    >('VirtualProtectEx');
-
-/// Retrieves information about a range of pages in the virtual address
-/// space of the calling process.
+/// Retrieves information about a range of pages in the virtual address space of
+/// the calling process.
 ///
-/// ```c
-/// SIZE_T VirtualQuery(
-///   LPCVOID lpAddress,
-///   PMEMORY_BASIC_INFORMATION lpBuffer,
-///   SIZE_T dwLength
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-virtualquery>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 int VirtualQuery(
-  Pointer lpAddress,
+  Pointer? lpAddress,
   Pointer<MEMORY_BASIC_INFORMATION> lpBuffer,
   int dwLength,
-) => _VirtualQuery(lpAddress, lpBuffer, dwLength);
-
-final _VirtualQuery = _kernel32
-    .lookupFunction<
-      IntPtr Function(
-        Pointer lpAddress,
-        Pointer<MEMORY_BASIC_INFORMATION> lpBuffer,
-        IntPtr dwLength,
-      ),
-      int Function(
-        Pointer lpAddress,
-        Pointer<MEMORY_BASIC_INFORMATION> lpBuffer,
-        int dwLength,
-      )
-    >('VirtualQuery');
+) => VirtualQuery_Wrapper(lpAddress ?? nullptr, lpBuffer, dwLength);
 
 /// Retrieves information about a range of pages within the virtual address
 /// space of a specified process.
 ///
-/// ```c
-/// SIZE_T VirtualQueryEx(
-///   HANDLE hProcess,
-///   LPCVOID lpAddress,
-///   PMEMORY_BASIC_INFORMATION lpBuffer,
-///   SIZE_T dwLength
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-virtualqueryex>.
+///
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
 int VirtualQueryEx(
   int hProcess,
-  Pointer lpAddress,
+  Pointer? lpAddress,
   Pointer<MEMORY_BASIC_INFORMATION> lpBuffer,
   int dwLength,
-) => _VirtualQueryEx(hProcess, lpAddress, lpBuffer, dwLength);
-
-final _VirtualQueryEx = _kernel32
-    .lookupFunction<
-      IntPtr Function(
-        IntPtr hProcess,
-        Pointer lpAddress,
-        Pointer<MEMORY_BASIC_INFORMATION> lpBuffer,
-        IntPtr dwLength,
-      ),
-      int Function(
-        int hProcess,
-        Pointer lpAddress,
-        Pointer<MEMORY_BASIC_INFORMATION> lpBuffer,
-        int dwLength,
-      )
-    >('VirtualQueryEx');
+) => VirtualQueryEx_Wrapper(hProcess, lpAddress ?? nullptr, lpBuffer, dwLength);
 
 /// Unlocks a specified range of pages in the virtual address space of a
 /// process, enabling the system to swap the pages out to the paging file if
 /// necessary.
 ///
-/// ```c
-/// BOOL VirtualUnlock(
-///   LPVOID lpAddress,
-///   SIZE_T dwSize
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-virtualunlock>.
+///
 /// {@category kernel32}
-int VirtualUnlock(Pointer lpAddress, int dwSize) =>
-    _VirtualUnlock(lpAddress, dwSize);
+@pragma('vm:prefer-inline')
+bool VirtualUnlock(Pointer lpAddress, int dwSize) =>
+    VirtualUnlock_Wrapper(lpAddress, dwSize) != FALSE;
 
-final _VirtualUnlock = _kernel32
-    .lookupFunction<
-      Int32 Function(Pointer lpAddress, IntPtr dwSize),
-      int Function(Pointer lpAddress, int dwSize)
-    >('VirtualUnlock');
-
-/// Waits for an event to occur for a specified communications device. The
-/// set of events that are monitored by this function is contained in the
+/// Waits for an event to occur for a specified communications device.
+///
+/// The set of events that are monitored by this function is contained in the
 /// event mask associated with the device handle.
 ///
-/// ```c
-/// BOOL WaitCommEvent(
-///   HANDLE       hFile,
-///   LPDWORD      lpEvtMask,
-///   LPOVERLAPPED lpOverlapped
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-waitcommevent>.
+///
 /// {@category kernel32}
-int WaitCommEvent(
+@pragma('vm:prefer-inline')
+bool WaitCommEvent(
   int hFile,
   Pointer<Uint32> lpEvtMask,
-  Pointer<OVERLAPPED> lpOverlapped,
-) => _WaitCommEvent(hFile, lpEvtMask, lpOverlapped);
+  Pointer<OVERLAPPED>? lpOverlapped,
+) => WaitCommEvent_Wrapper(hFile, lpEvtMask, lpOverlapped ?? nullptr) != FALSE;
 
-final _WaitCommEvent = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hFile,
-        Pointer<Uint32> lpEvtMask,
-        Pointer<OVERLAPPED> lpOverlapped,
-      ),
-      int Function(
-        int hFile,
-        Pointer<Uint32> lpEvtMask,
-        Pointer<OVERLAPPED> lpOverlapped,
-      )
-    >('WaitCommEvent');
-
-/// Waits until the specified object is in the signaled state or the
-/// time-out interval elapses.
+/// Waits until the specified object is in the signaled state or the time-out
+/// interval elapses.
 ///
-/// ```c
-/// DWORD WaitForSingleObject(
-///   HANDLE hHandle,
-///   DWORD  dwMilliseconds
-/// );
-/// ```
-/// {@category kernel32}
-int WaitForSingleObject(int hHandle, int dwMilliseconds) =>
-    _WaitForSingleObject(hHandle, dwMilliseconds);
-
-final _WaitForSingleObject = _kernel32
-    .lookupFunction<
-      Uint32 Function(IntPtr hHandle, Uint32 dwMilliseconds),
-      int Function(int hHandle, int dwMilliseconds)
-    >('WaitForSingleObject');
-
-/// Maps a UTF-16 (wide character) string to a new character string. The new
-/// character string is not necessarily from a multibyte character set.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-waitforsingleobject>.
 ///
-/// ```c
-/// int WideCharToMultiByte(
-///   UINT   CodePage,
-///   DWORD  dwFlags,
-///   LPCWCH lpWideCharStr,
-///   int    cchWideChar,
-///   LPSTR  lpMultiByteStr,
-///   int    cbMultiByte,
-///   LPCCH  lpDefaultChar,
-///   LPBOOL lpUsedDefaultChar
-/// );
-/// ```
 /// {@category kernel32}
+@pragma('vm:prefer-inline')
+WAIT_EVENT WaitForSingleObject(int hHandle, int dwMilliseconds) =>
+    WAIT_EVENT(WaitForSingleObject_Wrapper(hHandle, dwMilliseconds));
+
+/// Maps a UTF-16 (wide character) string to a new character string.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/stringapiset/nf-stringapiset-widechartomultibyte>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
 int WideCharToMultiByte(
-  int CodePage,
+  int codePage,
   int dwFlags,
-  Pointer<Utf16> lpWideCharStr,
+  PCWSTR lpWideCharStr,
   int cchWideChar,
-  Pointer<Utf8> lpMultiByteStr,
+  PSTR? lpMultiByteStr,
   int cbMultiByte,
-  Pointer<Utf8> lpDefaultChar,
-  Pointer<Int32> lpUsedDefaultChar,
-) => _WideCharToMultiByte(
-  CodePage,
+  PCSTR? lpDefaultChar,
+  Pointer<BOOL>? lpUsedDefaultChar,
+) => WideCharToMultiByte_Wrapper(
+  codePage,
   dwFlags,
   lpWideCharStr,
   cchWideChar,
-  lpMultiByteStr,
+  lpMultiByteStr ?? nullptr,
   cbMultiByte,
-  lpDefaultChar,
-  lpUsedDefaultChar,
+  lpDefaultChar ?? nullptr,
+  lpUsedDefaultChar ?? nullptr,
 );
-
-final _WideCharToMultiByte = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        Uint32 CodePage,
-        Uint32 dwFlags,
-        Pointer<Utf16> lpWideCharStr,
-        Int32 cchWideChar,
-        Pointer<Utf8> lpMultiByteStr,
-        Int32 cbMultiByte,
-        Pointer<Utf8> lpDefaultChar,
-        Pointer<Int32> lpUsedDefaultChar,
-      ),
-      int Function(
-        int CodePage,
-        int dwFlags,
-        Pointer<Utf16> lpWideCharStr,
-        int cchWideChar,
-        Pointer<Utf8> lpMultiByteStr,
-        int cbMultiByte,
-        Pointer<Utf8> lpDefaultChar,
-        Pointer<Int32> lpUsedDefaultChar,
-      )
-    >('WideCharToMultiByte');
 
 /// Suspends the specified WOW64 thread.
 ///
-/// ```c
-/// DWORD Wow64SuspendThread(
-///   HANDLE hThread
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-wow64suspendthread>.
+///
 /// {@category kernel32}
-int Wow64SuspendThread(int hThread) => _Wow64SuspendThread(hThread);
-
-final _Wow64SuspendThread = _kernel32
-    .lookupFunction<Uint32 Function(IntPtr hThread), int Function(int hThread)>(
-      'Wow64SuspendThread',
-    );
+@pragma('vm:prefer-inline')
+int Wow64SuspendThread(int hThread) => Wow64SuspendThread_Wrapper(hThread);
 
 /// Writes a character string to a console screen buffer beginning at the
 /// current cursor location.
 ///
-/// ```c
-/// BOOL WriteConsoleW(
-///   _In_             HANDLE  hConsoleOutput,
-///   _In_       const VOID    *lpBuffer,
-///   _In_             DWORD   nNumberOfCharsToWrite,
-///   _Out_opt_        LPDWORD lpNumberOfCharsWritten,
-///   _Reserved_       LPVOID  lpReserved
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/console/writeconsole>.
+///
 /// {@category kernel32}
-int WriteConsole(
+@pragma('vm:prefer-inline')
+bool WriteConsole(
   int hConsoleOutput,
-  Pointer lpBuffer,
+  PCWSTR lpBuffer,
   int nNumberOfCharsToWrite,
-  Pointer<Uint32> lpNumberOfCharsWritten,
-  Pointer lpReserved,
-) => _WriteConsole(
-  hConsoleOutput,
-  lpBuffer,
-  nNumberOfCharsToWrite,
-  lpNumberOfCharsWritten,
-  lpReserved,
-);
-
-final _WriteConsole = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hConsoleOutput,
-        Pointer lpBuffer,
-        Uint32 nNumberOfCharsToWrite,
-        Pointer<Uint32> lpNumberOfCharsWritten,
-        Pointer lpReserved,
-      ),
-      int Function(
-        int hConsoleOutput,
-        Pointer lpBuffer,
-        int nNumberOfCharsToWrite,
-        Pointer<Uint32> lpNumberOfCharsWritten,
-        Pointer lpReserved,
-      )
-    >('WriteConsoleW');
+  Pointer<Uint32>? lpNumberOfCharsWritten,
+) =>
+    WriteConsoleW_Wrapper(
+      hConsoleOutput,
+      lpBuffer,
+      nNumberOfCharsToWrite,
+      lpNumberOfCharsWritten ?? nullptr,
+      nullptr,
+    ) !=
+    FALSE;
 
 /// Writes data to the specified file or input/output (I/O) device.
 ///
-/// ```c
-/// BOOL WriteFile(
-///   HANDLE       hFile,
-///   LPCVOID      lpBuffer,
-///   DWORD        nNumberOfBytesToWrite,
-///   LPDWORD      lpNumberOfBytesWritten,
-///   LPOVERLAPPED lpOverlapped
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-writefile>.
+///
 /// {@category kernel32}
-int WriteFile(
+@pragma('vm:prefer-inline')
+bool WriteFile(
   int hFile,
-  Pointer<Uint8> lpBuffer,
+  Pointer<Uint8>? lpBuffer,
   int nNumberOfBytesToWrite,
-  Pointer<Uint32> lpNumberOfBytesWritten,
-  Pointer<OVERLAPPED> lpOverlapped,
-) => _WriteFile(
-  hFile,
-  lpBuffer,
-  nNumberOfBytesToWrite,
-  lpNumberOfBytesWritten,
-  lpOverlapped,
-);
+  Pointer<Uint32>? lpNumberOfBytesWritten,
+  Pointer<OVERLAPPED>? lpOverlapped,
+) =>
+    WriteFile_Wrapper(
+      hFile,
+      lpBuffer ?? nullptr,
+      nNumberOfBytesToWrite,
+      lpNumberOfBytesWritten ?? nullptr,
+      lpOverlapped ?? nullptr,
+    ) !=
+    FALSE;
 
-final _WriteFile = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hFile,
-        Pointer<Uint8> lpBuffer,
-        Uint32 nNumberOfBytesToWrite,
-        Pointer<Uint32> lpNumberOfBytesWritten,
-        Pointer<OVERLAPPED> lpOverlapped,
-      ),
-      int Function(
-        int hFile,
-        Pointer<Uint8> lpBuffer,
-        int nNumberOfBytesToWrite,
-        Pointer<Uint32> lpNumberOfBytesWritten,
-        Pointer<OVERLAPPED> lpOverlapped,
-      )
-    >('WriteFile');
-
-/// Writes data to the specified file or input/output (I/O) device. It
-/// reports its completion status asynchronously, calling the specified
+/// Writes data to the specified file or input/output (I/O) device.
+///
+/// It reports its completion status asynchronously, calling the specified
 /// completion routine when writing is completed or canceled and the calling
 /// thread is in an alertable wait state.
 ///
-/// ```c
-/// BOOL WriteFileEx(
-///   [in]           HANDLE                          hFile,
-///   [in, optional] LPCVOID                         lpBuffer,
-///   [in]           DWORD                           nNumberOfBytesToWrite,
-///   [in, out]      LPOVERLAPPED                    lpOverlapped,
-///   [in]           LPOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-writefileex>.
+///
 /// {@category kernel32}
-int WriteFileEx(
+@pragma('vm:prefer-inline')
+bool WriteFileEx(
   int hFile,
-  Pointer<Uint8> lpBuffer,
+  Pointer<Uint8>? lpBuffer,
   int nNumberOfBytesToWrite,
   Pointer<OVERLAPPED> lpOverlapped,
   Pointer<NativeFunction<LPOVERLAPPED_COMPLETION_ROUTINE>> lpCompletionRoutine,
-) => _WriteFileEx(
-  hFile,
-  lpBuffer,
-  nNumberOfBytesToWrite,
-  lpOverlapped,
-  lpCompletionRoutine,
-);
-
-final _WriteFileEx = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hFile,
-        Pointer<Uint8> lpBuffer,
-        Uint32 nNumberOfBytesToWrite,
-        Pointer<OVERLAPPED> lpOverlapped,
-        Pointer<NativeFunction<LPOVERLAPPED_COMPLETION_ROUTINE>>
-        lpCompletionRoutine,
-      ),
-      int Function(
-        int hFile,
-        Pointer<Uint8> lpBuffer,
-        int nNumberOfBytesToWrite,
-        Pointer<OVERLAPPED> lpOverlapped,
-        Pointer<NativeFunction<LPOVERLAPPED_COMPLETION_ROUTINE>>
-        lpCompletionRoutine,
-      )
-    >('WriteFileEx');
+) =>
+    WriteFileEx_Wrapper(
+      hFile,
+      lpBuffer ?? nullptr,
+      nNumberOfBytesToWrite,
+      lpOverlapped,
+      lpCompletionRoutine,
+    ) !=
+    FALSE;
 
 /// Retrieves data from an array of buffers and writes the data to a file.
-/// The function starts writing data to the file at a position that is
-/// specified by an OVERLAPPED structure. The WriteFileGather function
-/// operates asynchronously.
 ///
-/// ```c
-/// BOOL WriteFileGather(
-///   [in]      HANDLE                  hFile,
-///   [in]      FILE_SEGMENT_ELEMENT [] aSegmentArray,
-///   [in]      DWORD                   nNumberOfBytesToWrite,
-///             LPDWORD                 lpReserved,
-///   [in, out] LPOVERLAPPED            lpOverlapped
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-writefilegather>.
+///
 /// {@category kernel32}
-int WriteFileGather(
+@pragma('vm:prefer-inline')
+bool WriteFileGather(
   int hFile,
   Pointer<FILE_SEGMENT_ELEMENT> aSegmentArray,
   int nNumberOfBytesToWrite,
-  Pointer<Uint32> lpReserved,
   Pointer<OVERLAPPED> lpOverlapped,
-) => _WriteFileGather(
-  hFile,
-  aSegmentArray,
-  nNumberOfBytesToWrite,
-  lpReserved,
-  lpOverlapped,
-);
+) =>
+    WriteFileGather_Wrapper(
+      hFile,
+      aSegmentArray,
+      nNumberOfBytesToWrite,
+      nullptr,
+      lpOverlapped,
+    ) !=
+    FALSE;
 
-final _WriteFileGather = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hFile,
-        Pointer<FILE_SEGMENT_ELEMENT> aSegmentArray,
-        Uint32 nNumberOfBytesToWrite,
-        Pointer<Uint32> lpReserved,
-        Pointer<OVERLAPPED> lpOverlapped,
-      ),
-      int Function(
-        int hFile,
-        Pointer<FILE_SEGMENT_ELEMENT> aSegmentArray,
-        int nNumberOfBytesToWrite,
-        Pointer<Uint32> lpReserved,
-        Pointer<OVERLAPPED> lpOverlapped,
-      )
-    >('WriteFileGather');
-
-/// Writes data to an area of memory in a specified process. The entire area
-/// to be written to must be accessible or the operation fails.
+/// Writes data to an area of memory in a specified process.
 ///
-/// ```c
-/// BOOL WriteProcessMemory(
-///   HANDLE  hProcess,
-///   LPVOID  lpBaseAddress,
-///   LPCVOID lpBuffer,
-///   SIZE_T  nSize,
-///   SIZE_T  *lpNumberOfBytesWritten
-/// );
-/// ```
+/// The entire area to be written to must be accessible or the operation fails.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-writeprocessmemory>.
+///
 /// {@category kernel32}
-int WriteProcessMemory(
+@pragma('vm:prefer-inline')
+bool WriteProcessMemory(
   int hProcess,
   Pointer lpBaseAddress,
   Pointer lpBuffer,
   int nSize,
-  Pointer<IntPtr> lpNumberOfBytesWritten,
-) => _WriteProcessMemory(
-  hProcess,
-  lpBaseAddress,
-  lpBuffer,
-  nSize,
-  lpNumberOfBytesWritten,
-);
-
-final _WriteProcessMemory = _kernel32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hProcess,
-        Pointer lpBaseAddress,
-        Pointer lpBuffer,
-        IntPtr nSize,
-        Pointer<IntPtr> lpNumberOfBytesWritten,
-      ),
-      int Function(
-        int hProcess,
-        Pointer lpBaseAddress,
-        Pointer lpBuffer,
-        int nSize,
-        Pointer<IntPtr> lpNumberOfBytesWritten,
-      )
-    >('WriteProcessMemory');
+  Pointer<IntPtr>? lpNumberOfBytesWritten,
+) =>
+    WriteProcessMemory_Wrapper(
+      hProcess,
+      lpBaseAddress,
+      lpBuffer,
+      nSize,
+      lpNumberOfBytesWritten ?? nullptr,
+    ) !=
+    FALSE;

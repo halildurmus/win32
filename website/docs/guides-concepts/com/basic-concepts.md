@@ -20,9 +20,7 @@ threading models are outside the scope of this guide, but typically, you should
 write something like this:
 
 ```dart
-final hr = CoInitializeEx(
-    nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
-if (FAILED(hr)) throw WindowsException(hr);
+CoInitializeEx(COINIT_MULTITHREADED);
 ```
 
 ## Creating COM Objects
@@ -36,17 +34,16 @@ hr = CoCreateInstance(clsid, nullptr, CLSCTX_INPROC_SERVER, iid, ppv);
 
 However, instead of manually allocating `GUID` structs for the `clsid` and `iid`
 values, checking the `hr` result code, and dealing with casting the `ppv` return
-object, it is easier to use the [`createFromID`][createFromID] static helper
+object, it is easier to use the [`createInstance`][createInstance] static helper
 function:
 
 ```dart
-final fileDialog2 = IFileDialog2(
-    COMObject.createFromID(CLSID_FileOpenDialog, IID_IFileDialog2));
+final fileDialog2 = createInstance<IFileDialog2>(CLSID_FileOpenDialog);
 ```
 
-`createFromID` returns a `Pointer<COMObject>` containing the requested object,
-which can then be **cast** into the appropriate interface as shown above. This
-approach **simplifies** the creation process and **reduces** boilerplate code.
+`createInstance` returns an `IFileDialog2` object, which can then be **cast**
+into another interfaces. This approach **simplifies** the creation process and
+**reduces** boilerplate code.
 
 ## Requesting an Interface from a COM Object
 
@@ -62,17 +59,16 @@ COM interfaces provide a method that wraps `queryInterface`. If you have an
 existing COM object, you can call it as follows:
 
 ```dart
-  final modalWindow = IModalWindow(fileDialog2.toInterface(IID_IModalWindow));
+  final modalWindow = fileDialog2.cast<IModalWindow>();
 ```
 
-Alternatively, you can use the `from` constructor that wraps `toInterface` for
-you:
+Alternatively, you can use the `from` constructor that wraps `cast` for you:
 
 ```dart
   final modalWindow = IModalWindow.from(fileDialog2);
 ```
 
-While `createFromID` creates a new COM object, `toInterface` casts an existing
+While `createInstance` creates a new COM object, `cast` casts an existing
 COM object to a new interface.
 
 Attempting to cast a COM object to an unsupported interface will fail, and a
@@ -138,7 +134,7 @@ thrown during the execution of your code.
 
 [CoCreateInstance]: https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cocreateinstance
 [CoInitializeEx]: https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-coinitializeex
-[createFromID]: https://pub.dev/documentation/win32/latest/win32/COMObject/createFromID.html
+[createInstance]: https://pub.dev/documentation/win32/latest/win32/createInstance.html
 [Finalizer]: https://api.dart.dev/stable/dart-core/Finalizer-class.html
 [Microsoft documentation]: https://learn.microsoft.com/windows/win32/learnwin32/asking-an-object-for-an-interface
 [QueryInterface]: https://learn.microsoft.com/windows/win32/api/unknwn/nf-unknwn-iunknown-queryinterface(refiid_void)

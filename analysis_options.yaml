@@ -1,5 +1,6 @@
 include: package:halildurmus_lints/dart.yaml
 
 analyzer:
+  exclude: [examples/explorer/**, examples/task_manager/**]
   errors:
     todo: ignore

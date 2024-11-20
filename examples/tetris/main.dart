@@ -3,7 +3,6 @@
 import 'dart:ffi';
 import 'dart:io';
 
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'canvas.dart';
@@ -15,46 +14,47 @@ const SCREEN_HEIGHT = 20; // Level height in cells
 const GAME_SPEED = 33; // Update the game every GAME_SPEED ms (= 1000/fps)
 const TIMER_ID = 1;
 
-final int hInstance = GetModuleHandle(nullptr);
+final int hInstance = GetModuleHandle(null);
 
 late Game game;
 late Canvas canvas;
 
 void main() {
-  final szAppName = 'Tetris'.toNativeUtf16();
+  final szAppName = w('Tetris');
 
   final lpfnWndProc = NativeCallable<WNDPROC>.isolateLocal(
     mainWindowProc,
     exceptionalReturn: 0,
   );
 
-  final wc = calloc<WNDCLASS>()
-    ..ref.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC
-    ..ref.lpfnWndProc = lpfnWndProc.nativeFunction
-    ..ref.hInstance = hInstance
-    ..ref.hIcon = LoadIcon(NULL, IDI_APPLICATION)
-    ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
-    ..ref.hbrBackground = GetStockObject(BLACK_BRUSH)
-    ..ref.lpszClassName = szAppName;
+  final wc = loggingCalloc<WNDCLASS>();
+  wc.ref
+    ..style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC
+    ..lpfnWndProc = lpfnWndProc.nativeFunction
+    ..hInstance = hInstance
+    ..hIcon = LoadIcon(null, IDI_APPLICATION)
+    ..hCursor = LoadCursor(null, IDC_ARROW)
+    ..hbrBackground = GetStockObject(BLACK_BRUSH)
+    ..lpszClassName = szAppName.ptr;
   RegisterClass(wc);
 
   final hWnd = CreateWindowEx(
-    0, // Optional window styles.
-    szAppName, // Window class
-    szAppName, // Window text
+    WS_EX_LEFT, // Optional window styles.
+    szAppName.ptr, // Window class
+    szAppName.ptr, // Window text
     WS_MINIMIZEBOX | WS_SYSMENU, // Window style
     // Size and position
     CW_USEDEFAULT,
     CW_USEDEFAULT,
     SCREEN_WIDTH * PX_PER_BLOCK + 156,
     SCREEN_HEIGHT * PX_PER_BLOCK + 25,
-    NULL, // Parent window
-    NULL, // Menu
+    null, // Parent window
+    null, // Menu
     hInstance, // Instance handle
     nullptr, // Additional application data
   );
 
-  if (hWnd == 0) {
+  if (hWnd == NULL) {
     stderr.writeln('CreateWindowEx failed with error: ${GetLastError()}');
     exit(-1);
   }
@@ -63,30 +63,27 @@ void main() {
   UpdateWindow(hWnd);
 
   // Run the message loop.
-  final msg = calloc<MSG>();
-  while (GetMessage(msg, NULL, 0, 0) != 0) {
+  final msg = loggingCalloc<MSG>();
+  while (GetMessage(msg, null, 0, 0)) {
     TranslateMessage(msg);
     DispatchMessage(msg);
   }
 
   lpfnWndProc.close();
-  free(szAppName);
+  free(msg);
+  free(wc);
 }
 
 int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
   int hdc;
   var result = 0;
 
-  final ps = calloc<PAINTSTRUCT>();
-
   switch (uMsg) {
     case WM_CREATE:
       hdc = GetDC(hwnd);
-
       canvas = Canvas(hdc, hwnd);
       game = Game(canvas);
-      SetTimer(hwnd, TIMER_ID, GAME_SPEED, nullptr);
-
+      SetTimer(hwnd, TIMER_ID, GAME_SPEED, null);
       ReleaseDC(hwnd, hdc);
 
     case WM_KEYDOWN:
@@ -100,12 +97,14 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       game.pauseGame();
 
     case WM_SETFOCUS:
-      SetTimer(hwnd, TIMER_ID, GAME_SPEED, nullptr);
+      SetTimer(hwnd, TIMER_ID, GAME_SPEED, null);
 
     case WM_PAINT:
+      final ps = loggingCalloc<PAINTSTRUCT>();
       hdc = BeginPaint(hwnd, ps);
       game.repaint();
       EndPaint(hwnd, ps);
+      free(ps);
 
     case WM_DESTROY:
       KillTimer(hwnd, TIMER_ID);
@@ -114,8 +113,6 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
     default:
       result = DefWindowProc(hwnd, uMsg, wParam, lParam);
   }
-
-  free(ps);
 
   return result;
 }

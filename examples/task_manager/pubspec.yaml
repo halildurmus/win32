@@ -5,6 +5,12 @@ publish_to: none
 environment:
   sdk: ^3.8.0
 
+hooks:
+  user_defines:
+    win32:
+      debug: true
+      trace: true
+
 dependencies:
   ffi: ^2.1.4
   flutter:

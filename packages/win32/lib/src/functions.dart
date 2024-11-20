@@ -1,10 +1,45 @@
+// Dart representations of Win32 functions.
+//
+// These functions are handwritten either because they are not included in the
+// metadata, or they require special handling.
+
 // ignore_for_file: non_constant_identifier_names
 
 import 'dart:ffi';
 
+import '_internal/win32.dart';
+import 'constants.g.dart';
+import 'enums.g.dart';
 import 'structs.dart';
+import 'structs.g.dart';
+import 'types.dart';
 
-final _user32 = DynamicLibrary.open('user32.dll');
+/// Retrieves the calling thread's last-error code value.
+///
+/// The last-error code is maintained on a per-thread basis. Multiple threads
+/// do not overwrite each other's last-error code.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/errhandlingapi/nf-errhandlingapi-getlasterror>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+WIN32_ERROR GetLastError() => WIN32_ERROR(getLastError());
+
+/// Sets the last-error code for the calling thread.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/errhandlingapi/nf-errhandlingapi-setlasterror>.
+///
+/// {@category kernel32}
+@pragma('vm:prefer-inline')
+void SetLastError(int dwErrCode) {
+  _SetLastError(dwErrCode);
+  setLastError(dwErrCode);
+}
+
+@Native<Void Function(DWORD)>(symbol: 'SetLastError', isLeaf: true)
+external void _SetLastError(int errorCode);
 
 /// Retrieves the current value of a specified Desktop Window Manager (DWM)
 /// attribute applied to a window.
@@ -13,17 +48,20 @@ final _user32 = DynamicLibrary.open('user32.dll');
 /// <https://learn.microsoft.com/windows/win32/dwm/getwindowcompositionattribute>.
 ///
 /// {@category user32}
-int GetWindowCompositionAttribute(
+@pragma('vm:prefer-inline')
+bool GetWindowCompositionAttribute(
   int hwnd,
   Pointer<WINDOWCOMPOSITIONATTRIBDATA> pwcad,
-) => _GetWindowCompositionAttribute(hwnd, pwcad);
+) => _GetWindowCompositionAttribute(hwnd, pwcad) != FALSE;
 
-final int Function(int hwnd, Pointer<WINDOWCOMPOSITIONATTRIBDATA> pwcad)
-_GetWindowCompositionAttribute = _user32
-    .lookupFunction<
-      Int32 Function(IntPtr hwnd, Pointer<WINDOWCOMPOSITIONATTRIBDATA> pwcad),
-      int Function(int hwnd, Pointer<WINDOWCOMPOSITIONATTRIBDATA> pwcad)
-    >('GetWindowCompositionAttribute');
+@Native<Int32 Function(HWND, Pointer<WINDOWCOMPOSITIONATTRIBDATA>)>(
+  symbol: 'GetWindowCompositionAttribute',
+  isLeaf: true,
+)
+external int _GetWindowCompositionAttribute(
+  int hwnd,
+  Pointer<WINDOWCOMPOSITIONATTRIBDATA> pwcad,
+);
 
 /// Sets the current value of a specified Desktop Window Manager (DWM) attribute
 /// applied to a window.
@@ -32,14 +70,17 @@ _GetWindowCompositionAttribute = _user32
 /// <https://learn.microsoft.com/windows/win32/dwm/setwindowcompositionattribute>.
 ///
 /// {@category user32}
-int SetWindowCompositionAttribute(
+@pragma('vm:prefer-inline')
+bool SetWindowCompositionAttribute(
   int hwnd,
   Pointer<WINDOWCOMPOSITIONATTRIBDATA> pwcad,
-) => _SetWindowCompositionAttribute(hwnd, pwcad);
+) => _SetWindowCompositionAttribute(hwnd, pwcad) != FALSE;
 
-final int Function(int hwnd, Pointer<WINDOWCOMPOSITIONATTRIBDATA> pwcad)
-_SetWindowCompositionAttribute = _user32
-    .lookupFunction<
-      Int32 Function(IntPtr hwnd, Pointer<WINDOWCOMPOSITIONATTRIBDATA> pwcad),
-      int Function(int hwnd, Pointer<WINDOWCOMPOSITIONATTRIBDATA> pwcad)
-    >('SetWindowCompositionAttribute');
+@Native<Int32 Function(HWND, Pointer<WINDOWCOMPOSITIONATTRIBDATA>)>(
+  symbol: 'SetWindowCompositionAttribute',
+  isLeaf: true,
+)
+external int _SetWindowCompositionAttribute(
+  int hwnd,
+  Pointer<WINDOWCOMPOSITIONATTRIBDATA> pwcad,
+);

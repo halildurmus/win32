@@ -1,0 +1,19 @@
+ISpellCheckerFactory.IsSupported|
+/// Determines if the specified language is supported by a registered spell
+/// checker.
+///
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/spellcheck/nf-spellcheck-ispellcheckerfactory-issupported>.
+bool isSupported(PCWSTR languageTag) {
+  final value = loggingCalloc<BOOL>();
+  final hr$ = HRESULT(_IsSupportedFn(ptr, languageTag, value));
+  if (hr$.isError) {
+    free(value);
+    throw WindowsException(hr$);
+  }
+  final result$ = value.value;
+  free(value);
+  return result$ != FALSE;
+}

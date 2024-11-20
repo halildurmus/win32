@@ -7,7 +7,6 @@
 import 'dart:ffi';
 import 'dart:io';
 
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 const VT_ESC = '\x1b';
@@ -23,23 +22,15 @@ class Coord {
 }
 
 bool enableVTMode() {
-  // Set output mode to handle virtual terminal sequences
+  // Set output mode to handle virtual terminal sequences.
   final hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-  if (hOut == INVALID_HANDLE_VALUE) {
-    return false;
-  }
+  if (hOut == INVALID_HANDLE_VALUE) return false;
 
-  final dwMode = calloc<DWORD>();
+  final dwMode = loggingCalloc<DWORD>();
   try {
-    if (GetConsoleMode(hOut, dwMode) == 0) {
-      return false;
-    }
-
+    if (!GetConsoleMode(hOut, dwMode)) return false;
     dwMode.value |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
-    if (SetConsoleMode(hOut, dwMode.value) == 0) {
-      return false;
-    }
-    return true;
+    return SetConsoleMode(hOut, CONSOLE_MODE(dwMode.value));
   } finally {
     free(dwMode);
   }
@@ -76,7 +67,7 @@ void printStatusLine(String pszMessage, Coord Size) {
 }
 
 void main() {
-  //First, enable VT mode
+  // First, enable VT mode
   final fSuccess = enableVTMode();
   if (!fSuccess) {
     printf('Unable to enter VT processing mode. Quitting.\n');
@@ -88,7 +79,7 @@ void main() {
     exit(-1);
   }
 
-  final ScreenBufferInfo = calloc<CONSOLE_SCREEN_BUFFER_INFO>();
+  final ScreenBufferInfo = loggingCalloc<CONSOLE_SCREEN_BUFFER_INFO>();
   GetConsoleScreenBufferInfo(hOut, ScreenBufferInfo);
   final size = Coord()
     ..X =

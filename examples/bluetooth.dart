@@ -3,7 +3,6 @@
 
 import 'dart:ffi';
 
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 String addressAsString(Array<Uint8> bluetoothAddress) {
@@ -17,12 +16,11 @@ String addressAsString(Array<Uint8> bluetoothAddress) {
 }
 
 List<int> findBluetoothRadios() {
-  final findRadioParams = calloc<BLUETOOTH_FIND_RADIO_PARAMS>()
-    ..ref.dwSize = sizeOf<BLUETOOTH_FIND_RADIO_PARAMS>();
-
   final radioHandles = <int>[];
 
-  final hRadio = calloc<HANDLE>();
+  final findRadioParams = loggingCalloc<BLUETOOTH_FIND_RADIO_PARAMS>()
+    ..ref.dwSize = sizeOf<BLUETOOTH_FIND_RADIO_PARAMS>();
+  final hRadio = loggingCalloc<HANDLE>();
 
   try {
     final hEnum = BluetoothFindFirstRadio(findRadioParams, hRadio);
@@ -30,9 +28,8 @@ List<int> findBluetoothRadios() {
       print('No radios found.');
     } else {
       radioHandles.add(hRadio.value);
-      print('Found a radio with handle: ${hRadio.value.toHexString(32)}');
-
-      while (BluetoothFindNextRadio(hEnum, hRadio) == TRUE) {
+      print('Found a radio with handle: ${hRadio.value.toHexString()}');
+      while (BluetoothFindNextRadio(hEnum, hRadio)) {
         radioHandles.add(hRadio.value);
       }
       BluetoothFindRadioClose(hEnum);
@@ -45,7 +42,7 @@ List<int> findBluetoothRadios() {
 }
 
 void findRadioInfo(int hRadio) {
-  final radioInfo = calloc<BLUETOOTH_RADIO_INFO>()
+  final radioInfo = loggingCalloc<BLUETOOTH_RADIO_INFO>()
     ..ref.dwSize = sizeOf<BLUETOOTH_RADIO_INFO>();
 
   try {
@@ -73,29 +70,29 @@ String convertBluetoothAddress(BLUETOOTH_ADDRESS address) {
 void printBluetoothDeviceInfo(BLUETOOTH_DEVICE_INFO info) {
   print('Device address: ${convertBluetoothAddress(info.Address)}');
   print('  Name: ${info.szName}');
-  print('  Authenticated: ${info.fAuthenticated != FALSE ? 'True' : 'False'}');
-  print('  Connected: ${info.fConnected != FALSE ? 'True' : 'False'}');
-  print('  Remembered: ${info.fRemembered != FALSE ? 'True' : 'False'}');
+  print('  Authenticated: ${info.fAuthenticated}');
+  print('  Connected: ${info.fConnected}');
+  print('  Remembered: ${info.fRemembered}');
 }
 
 void findBluetoothDevices() {
-  final params = calloc<BLUETOOTH_DEVICE_SEARCH_PARAMS>()
-    ..ref.dwSize = sizeOf<BLUETOOTH_DEVICE_SEARCH_PARAMS>()
-    ..ref.fReturnConnected = TRUE
-    ..ref.fReturnAuthenticated = TRUE
-    ..ref.fReturnRemembered = TRUE
-    ..ref.fReturnUnknown = TRUE
-    ..ref.fIssueInquiry = TRUE
-    ..ref.cTimeoutMultiplier = 1;
-  final info = calloc<BLUETOOTH_DEVICE_INFO>()
+  final params = loggingCalloc<BLUETOOTH_DEVICE_SEARCH_PARAMS>();
+  params.ref
+    ..dwSize = sizeOf<BLUETOOTH_DEVICE_SEARCH_PARAMS>()
+    ..fReturnConnected = true
+    ..fReturnAuthenticated = true
+    ..fReturnRemembered = true
+    ..fReturnUnknown = true
+    ..fIssueInquiry = true
+    ..cTimeoutMultiplier = 1;
+  final info = loggingCalloc<BLUETOOTH_DEVICE_INFO>()
     ..ref.dwSize = sizeOf<BLUETOOTH_DEVICE_INFO>();
 
   try {
     final firstDeviceHandle = BluetoothFindFirstDevice(params, info);
-
     if (firstDeviceHandle != NULL) {
       printBluetoothDeviceInfo(info.ref);
-      while (BluetoothFindNextDevice(firstDeviceHandle, info) == TRUE) {
+      while (BluetoothFindNextDevice(firstDeviceHandle, info)) {
         printBluetoothDeviceInfo(info.ref);
       }
       BluetoothFindDeviceClose(firstDeviceHandle);
@@ -109,12 +106,9 @@ void findBluetoothDevices() {
 }
 
 void main() {
-  final radioHandles = findBluetoothRadios();
-
-  for (final hRadio in radioHandles) {
+  for (final hRadio in findBluetoothRadios()) {
     findRadioInfo(hRadio);
-
-    if (BluetoothIsDiscoverable(hRadio) == TRUE) {
+    if (BluetoothIsDiscoverable(hRadio)) {
       print('Bluetooth radio is discoverable.');
     } else {
       print('Bluetooth radio is not discoverable.');

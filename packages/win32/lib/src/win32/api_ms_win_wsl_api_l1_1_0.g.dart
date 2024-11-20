@@ -1,263 +1,261 @@
-// Maps FFI prototypes onto the corresponding Win32 API function calls
-
+// Maps FFI prototypes onto the corresponding Win32 API function calls.
+//
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-
-// ignore_for_file: unused_import, non_constant_identifier_names
-// ignore_for_file: constant_identifier_names, camel_case_types
-// ignore_for_file: specify_nonobvious_property_types
+//
+// ignore_for_file: avoid_positional_boolean_parameters
+// ignore_for_file: non_constant_identifier_names, unused_import
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../callbacks.dart';
-import '../combase.dart';
-import '../guid.dart';
+import '../allocator.dart';
+import '../bstr.dart';
+import '../com/interface.g.dart';
+import '../com/iunknown.g.dart';
+import '../constants.dart';
+import '../constants.g.dart';
+import '../enums.g.dart';
+import '../exception.dart';
+import '../extensions/pointer.dart';
+import '../hresult.dart';
+import '../hstring.dart';
+import '../macros.dart';
+import '../ntstatus.dart';
+import '../pcstr.dart';
+import '../pcwstr.dart';
+import '../pstr.dart';
+import '../pwstr.dart';
 import '../structs.g.dart';
-import '../variant.dart';
-
-final _api_ms_win_wsl_api_l1_1_0 = DynamicLibrary.open(
-  'api-ms-win-wsl-api-l1-1-0.dll',
-);
+import '../types.dart';
+import '../utils.dart';
 
 /// Modifies the behavior of a distribution registered with the Windows
 /// Subsystem for Linux (WSL).
 ///
-/// ```c
-/// HRESULT WslConfigureDistribution(
-///   _In_ PCWSTR distributionName,
-///   _In_ ULONG defaultUID,
-///   WSL_DISTRIBUTION_FLAGS wslDistributionFlags
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wslapi/nf-wslapi-wslconfiguredistribution>.
+///
 /// {@category wslapi}
-int WslConfigureDistribution(
-  Pointer<Utf16> distributionName,
+@pragma('vm:prefer-inline')
+void WslConfigureDistribution(
+  PCWSTR distributionName,
+  int defaultUID,
+  WSL_DISTRIBUTION_FLAGS wslDistributionFlags,
+) {
+  final hr$ = HRESULT(
+    _WslConfigureDistribution(
+      distributionName,
+      defaultUID,
+      wslDistributionFlags,
+    ),
+  );
+  if (hr$.isError) throw WindowsException(hr$);
+}
+
+@Native<Int32 Function(PCWSTR, Uint32, Int32)>(
+  symbol: 'WslConfigureDistribution',
+)
+external int _WslConfigureDistribution(
+  PCWSTR distributionName,
   int defaultUID,
   int wslDistributionFlags,
-) => _WslConfigureDistribution(
-  distributionName,
-  defaultUID,
-  wslDistributionFlags,
 );
 
-final _WslConfigureDistribution = _api_ms_win_wsl_api_l1_1_0
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Utf16> distributionName,
-        Uint32 defaultUID,
-        Int32 wslDistributionFlags,
-      ),
-      int Function(
-        Pointer<Utf16> distributionName,
-        int defaultUID,
-        int wslDistributionFlags,
-      )
-    >('WslConfigureDistribution');
-
-/// Retrieves the current configuration of a distribution registered with
-/// the Windows Subsystem for Linux (WSL).
+/// Retrieves the current configuration of a distribution registered with the
+/// Windows Subsystem for Linux (WSL).
 ///
-/// ```c
-/// HRESULT WslGetDistributionConfiguration(
-///   _In_ PCWSTR distributionName,
-///   _Out_ ULONG *distributionVersion,
-///   _Out_ ULONG *defaultUID,
-///   _Out_ WSL_DISTRIBUTION_FLAGS *wslDistributionFlags,
-///   _Outptr_result_buffer_ PSTR **defaultEnvironmentVariables,
-///   _Out_ ULONG *defaultEnvironmentVariableCount
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wslapi/nf-wslapi-wslgetdistributionconfiguration>.
+///
 /// {@category wslapi}
-int WslGetDistributionConfiguration(
-  Pointer<Utf16> distributionName,
+@pragma('vm:prefer-inline')
+void WslGetDistributionConfiguration(
+  PCWSTR distributionName,
   Pointer<Uint32> distributionVersion,
   Pointer<Uint32> defaultUID,
   Pointer<Int32> wslDistributionFlags,
-  Pointer<Pointer<Pointer<Utf8>>> defaultEnvironmentVariables,
+  Pointer<Pointer<PSTR>> defaultEnvironmentVariables,
   Pointer<Uint32> defaultEnvironmentVariableCount,
-) => _WslGetDistributionConfiguration(
-  distributionName,
-  distributionVersion,
-  defaultUID,
-  wslDistributionFlags,
-  defaultEnvironmentVariables,
-  defaultEnvironmentVariableCount,
+) {
+  final hr$ = HRESULT(
+    _WslGetDistributionConfiguration(
+      distributionName,
+      distributionVersion,
+      defaultUID,
+      wslDistributionFlags,
+      defaultEnvironmentVariables,
+      defaultEnvironmentVariableCount,
+    ),
+  );
+  if (hr$.isError) throw WindowsException(hr$);
+}
+
+@Native<
+  Int32 Function(
+    PCWSTR,
+    Pointer<Uint32>,
+    Pointer<Uint32>,
+    Pointer<Int32>,
+    Pointer<Pointer<PSTR>>,
+    Pointer<Uint32>,
+  )
+>(symbol: 'WslGetDistributionConfiguration')
+external int _WslGetDistributionConfiguration(
+  PCWSTR distributionName,
+  Pointer<Uint32> distributionVersion,
+  Pointer<Uint32> defaultUID,
+  Pointer<Int32> wslDistributionFlags,
+  Pointer<Pointer<PSTR>> defaultEnvironmentVariables,
+  Pointer<Uint32> defaultEnvironmentVariableCount,
 );
 
-final _WslGetDistributionConfiguration = _api_ms_win_wsl_api_l1_1_0
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Utf16> distributionName,
-        Pointer<Uint32> distributionVersion,
-        Pointer<Uint32> defaultUID,
-        Pointer<Int32> wslDistributionFlags,
-        Pointer<Pointer<Pointer<Utf8>>> defaultEnvironmentVariables,
-        Pointer<Uint32> defaultEnvironmentVariableCount,
-      ),
-      int Function(
-        Pointer<Utf16> distributionName,
-        Pointer<Uint32> distributionVersion,
-        Pointer<Uint32> defaultUID,
-        Pointer<Int32> wslDistributionFlags,
-        Pointer<Pointer<Pointer<Utf8>>> defaultEnvironmentVariables,
-        Pointer<Uint32> defaultEnvironmentVariableCount,
-      )
-    >('WslGetDistributionConfiguration');
-
-/// Determines if a distribution is registered with the Windows Subsystem
-/// for Linux (WSL).
+/// Determines if a distribution is registered with the Windows Subsystem for
+/// Linux (WSL).
 ///
-/// ```c
-/// BOOL WslIsDistributionRegistered(
-///   _In_ PCWSTR distributionName
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wslapi/nf-wslapi-wslisdistributionregistered>.
+///
 /// {@category wslapi}
-int WslIsDistributionRegistered(Pointer<Utf16> distributionName) =>
-    _WslIsDistributionRegistered(distributionName);
+@pragma('vm:prefer-inline')
+bool WslIsDistributionRegistered(PCWSTR distributionName) =>
+    _WslIsDistributionRegistered(distributionName) != FALSE;
 
-final _WslIsDistributionRegistered = _api_ms_win_wsl_api_l1_1_0
-    .lookupFunction<
-      Int32 Function(Pointer<Utf16> distributionName),
-      int Function(Pointer<Utf16> distributionName)
-    >('WslIsDistributionRegistered');
+@Native<BOOL Function(PCWSTR)>(symbol: 'WslIsDistributionRegistered')
+external int _WslIsDistributionRegistered(PCWSTR distributionName);
 
 /// Launches a Windows Subsystem for Linux (WSL) process in the context of a
 /// particular distribution.
 ///
-/// ```c
-/// HRESULT WslLaunch(
-///   _In_ PCWSTR distributionName,
-///   _In_opt_ PCWSTR command,
-///   _In_ BOOL useCurrentWorkingDirectory,
-///   _In_ HANDLE stdIn,
-///   _In_ HANDLE stdOut,
-///   _In_      HANDLE  stdErr,
-///   _Out_     HANDLE  *process
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wslapi/nf-wslapi-wsllaunch>.
+///
 /// {@category wslapi}
 int WslLaunch(
-  Pointer<Utf16> distributionName,
-  Pointer<Utf16> command,
+  PCWSTR distributionName,
+  PCWSTR? command,
+  bool useCurrentWorkingDirectory,
+  int stdIn,
+  int stdOut,
+  int stdErr,
+) {
+  final process = loggingCalloc<HANDLE>();
+  final hr$ = HRESULT(
+    _WslLaunch(
+      distributionName,
+      command ?? nullptr,
+      useCurrentWorkingDirectory ? TRUE : FALSE,
+      stdIn,
+      stdOut,
+      stdErr,
+      process,
+    ),
+  );
+  if (hr$.isError) {
+    free(process);
+    throw WindowsException(hr$);
+  }
+  final result$ = process.value;
+  free(process);
+  return result$;
+}
+
+@Native<
+  Int32 Function(PCWSTR, PCWSTR, BOOL, HANDLE, HANDLE, HANDLE, Pointer<HANDLE>)
+>(symbol: 'WslLaunch')
+external int _WslLaunch(
+  PCWSTR distributionName,
+  PCWSTR command,
   int useCurrentWorkingDirectory,
   int stdIn,
   int stdOut,
   int stdErr,
-  Pointer<IntPtr> process,
-) => _WslLaunch(
-  distributionName,
-  command,
-  useCurrentWorkingDirectory,
-  stdIn,
-  stdOut,
-  stdErr,
-  process,
+  Pointer<HANDLE> process,
 );
-
-final _WslLaunch = _api_ms_win_wsl_api_l1_1_0
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Utf16> distributionName,
-        Pointer<Utf16> command,
-        Int32 useCurrentWorkingDirectory,
-        IntPtr stdIn,
-        IntPtr stdOut,
-        IntPtr stdErr,
-        Pointer<IntPtr> process,
-      ),
-      int Function(
-        Pointer<Utf16> distributionName,
-        Pointer<Utf16> command,
-        int useCurrentWorkingDirectory,
-        int stdIn,
-        int stdOut,
-        int stdErr,
-        Pointer<IntPtr> process,
-      )
-    >('WslLaunch');
 
 /// Launches an interactive Windows Subsystem for Linux (WSL) process in the
-/// context of a particular distribution.This differs from WslLaunch in that
-/// the end user will be able to interact with the newly-created process.
+/// context of a particular distribution.
 ///
-/// ```c
-/// HRESULT WslLaunchInteractive(
-///   _In_ PCWSTR distributionName,
-///   _In_opt_ command,
-///   _In_ BOOL useCurrentWorkingDirectory,
-///   _Out_ DWORD *exitCode
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wslapi/nf-wslapi-wsllaunchinteractive>.
+///
 /// {@category wslapi}
 int WslLaunchInteractive(
-  Pointer<Utf16> distributionName,
-  Pointer<Utf16> command,
+  PCWSTR distributionName,
+  PCWSTR? command,
+  bool useCurrentWorkingDirectory,
+) {
+  final exitCode = loggingCalloc<Uint32>();
+  final hr$ = HRESULT(
+    _WslLaunchInteractive(
+      distributionName,
+      command ?? nullptr,
+      useCurrentWorkingDirectory ? TRUE : FALSE,
+      exitCode,
+    ),
+  );
+  if (hr$.isError) {
+    free(exitCode);
+    throw WindowsException(hr$);
+  }
+  final result$ = exitCode.value;
+  free(exitCode);
+  return result$;
+}
+
+@Native<Int32 Function(PCWSTR, PCWSTR, BOOL, Pointer<Uint32>)>(
+  symbol: 'WslLaunchInteractive',
+)
+external int _WslLaunchInteractive(
+  PCWSTR distributionName,
+  PCWSTR command,
   int useCurrentWorkingDirectory,
   Pointer<Uint32> exitCode,
-) => _WslLaunchInteractive(
-  distributionName,
-  command,
-  useCurrentWorkingDirectory,
-  exitCode,
 );
-
-final _WslLaunchInteractive = _api_ms_win_wsl_api_l1_1_0
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Utf16> distributionName,
-        Pointer<Utf16> command,
-        Int32 useCurrentWorkingDirectory,
-        Pointer<Uint32> exitCode,
-      ),
-      int Function(
-        Pointer<Utf16> distributionName,
-        Pointer<Utf16> command,
-        int useCurrentWorkingDirectory,
-        Pointer<Uint32> exitCode,
-      )
-    >('WslLaunchInteractive');
 
 /// Registers a new distribution with the Windows Subsystem for Linux (WSL).
 ///
-/// ```c
-/// HRESULT WslRegisterDistribution(
-///   _In_ PCWSTR distributionName,
-///   _In_ PCWSTR tarGzFilename
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wslapi/nf-wslapi-wslregisterdistribution>.
+///
 /// {@category wslapi}
-int WslRegisterDistribution(
-  Pointer<Utf16> distributionName,
-  Pointer<Utf16> tarGzFilename,
-) => _WslRegisterDistribution(distributionName, tarGzFilename);
+@pragma('vm:prefer-inline')
+void WslRegisterDistribution(PCWSTR distributionName, PCWSTR tarGzFilename) {
+  final hr$ = HRESULT(
+    _WslRegisterDistribution(distributionName, tarGzFilename),
+  );
+  if (hr$.isError) throw WindowsException(hr$);
+}
 
-final _WslRegisterDistribution = _api_ms_win_wsl_api_l1_1_0
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Utf16> distributionName,
-        Pointer<Utf16> tarGzFilename,
-      ),
-      int Function(
-        Pointer<Utf16> distributionName,
-        Pointer<Utf16> tarGzFilename,
-      )
-    >('WslRegisterDistribution');
+@Native<Int32 Function(PCWSTR, PCWSTR)>(symbol: 'WslRegisterDistribution')
+external int _WslRegisterDistribution(
+  PCWSTR distributionName,
+  PCWSTR tarGzFilename,
+);
 
 /// Unregisters a distribution from the Windows Subsystem for Linux (WSL).
 ///
-/// ```c
-/// HRESULT WslUnregisterDistribution(
-///   _In_ PCWSTR distributionName
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wslapi/nf-wslapi-wslunregisterdistribution>.
+///
 /// {@category wslapi}
-int WslUnregisterDistribution(Pointer<Utf16> distributionName) =>
-    _WslUnregisterDistribution(distributionName);
+@pragma('vm:prefer-inline')
+void WslUnregisterDistribution(PCWSTR distributionName) {
+  final hr$ = HRESULT(_WslUnregisterDistribution(distributionName));
+  if (hr$.isError) throw WindowsException(hr$);
+}
 
-final _WslUnregisterDistribution = _api_ms_win_wsl_api_l1_1_0
-    .lookupFunction<
-      Int32 Function(Pointer<Utf16> distributionName),
-      int Function(Pointer<Utf16> distributionName)
-    >('WslUnregisterDistribution');
+@Native<Int32 Function(PCWSTR)>(symbol: 'WslUnregisterDistribution')
+external int _WslUnregisterDistribution(PCWSTR distributionName);

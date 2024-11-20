@@ -4,6 +4,7 @@ class Point {
   Point([this.x = 0, this.y = 0]);
 
   factory Point.clone(Point orig) => Point(orig.x, orig.y);
+
   int x;
   int y;
 

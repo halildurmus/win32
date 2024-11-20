@@ -21,11 +21,7 @@ abstract class ServiceManager {
     );
 
     // Get a handle to the SCM database.
-    final scmHandle = OpenSCManager(
-      nullptr,
-      nullptr,
-      SC_MANAGER_ENUMERATE_SERVICE,
-    );
+    final scmHandle = OpenSCManager(null, null, SC_MANAGER_ENUMERATE_SERVICE);
     if (scmHandle == NULL) return services;
 
     return using((arena) {
@@ -42,30 +38,29 @@ abstract class ServiceManager {
           SC_ENUM_PROCESS_INFO,
           SERVICE_WIN32,
           SERVICE_STATE_ALL,
-          nullptr,
+          null,
           0,
           bytesNeeded,
           servicesReturned,
           resumeHandle,
-          nullptr,
+          null,
         );
 
         final buffer = arena<BYTE>(bytesNeeded.value);
 
         // Second call to EnumServicesStatusEx to get the actual data.
         if (EnumServicesStatusEx(
-              scmHandle,
-              SC_ENUM_PROCESS_INFO,
-              SERVICE_WIN32,
-              SERVICE_STATE_ALL,
-              buffer,
-              bytesNeeded.value,
-              bytesNeeded,
-              servicesReturned,
-              resumeHandle,
-              nullptr,
-            ) !=
-            FALSE) {
+          scmHandle,
+          SC_ENUM_PROCESS_INFO,
+          SERVICE_WIN32,
+          SERVICE_STATE_ALL,
+          buffer,
+          bytesNeeded.value,
+          bytesNeeded,
+          servicesReturned,
+          resumeHandle,
+          null,
+        )) {
           final enumBuffer = buffer.cast<ENUM_SERVICE_STATUS_PROCESS>();
           for (var i = 0; i < servicesReturned.value; i++) {
             final serviceStatus = (enumBuffer + i).ref;
@@ -96,17 +91,18 @@ abstract class ServiceManager {
   static ServiceStartResult start(String serviceName) {
     // Get a handle to the SCM database.
     final scmHandle = OpenSCManager(
-      nullptr, // local computer
-      nullptr, // ServicesActive database
+      null, // local computer
+      null, // ServicesActive database
       SC_MANAGER_ALL_ACCESS, // full access rights
     );
     if (scmHandle == NULL) return ServiceStartResult.accessDenied;
 
     return using((arena) {
       // Get a handle to the service.
+      final lpServiceName = w(serviceName);
       final hService = OpenService(
         scmHandle,
-        serviceName.toNativeUtf16(allocator: arena),
+        lpServiceName.ptr,
         SERVICE_ALL_ACCESS,
       );
       if (hService == NULL) {
@@ -118,14 +114,13 @@ abstract class ServiceManager {
       final bytesNeeded = arena<DWORD>();
 
       // Check the status in case the service is not stopped.
-      if (QueryServiceStatusEx(
-            hService,
-            SC_STATUS_PROCESS_INFO,
-            lpBuffer.cast(),
-            sizeOf<SERVICE_STATUS_PROCESS>(),
-            bytesNeeded,
-          ) ==
-          FALSE) {
+      if (!QueryServiceStatusEx(
+        hService,
+        SC_STATUS_PROCESS_INFO,
+        lpBuffer.cast(),
+        sizeOf<SERVICE_STATUS_PROCESS>(),
+        bytesNeeded,
+      )) {
         CloseServiceHandle(hService);
         CloseServiceHandle(scmHandle);
         return ServiceStartResult.failed;
@@ -164,14 +159,13 @@ abstract class ServiceManager {
         Sleep(waitTime);
 
         // Check the status until the service is no longer stop pending.
-        if (QueryServiceStatusEx(
-              hService,
-              SC_STATUS_PROCESS_INFO,
-              lpBuffer.cast(),
-              sizeOf<SERVICE_STATUS_PROCESS>(),
-              bytesNeeded,
-            ) ==
-            FALSE) {
+        if (!QueryServiceStatusEx(
+          hService,
+          SC_STATUS_PROCESS_INFO,
+          lpBuffer.cast(),
+          sizeOf<SERVICE_STATUS_PROCESS>(),
+          bytesNeeded,
+        )) {
           CloseServiceHandle(hService);
           CloseServiceHandle(scmHandle);
           return ServiceStartResult.failed;
@@ -189,7 +183,7 @@ abstract class ServiceManager {
       }
 
       // Attempt to start the service.
-      if (StartService(hService, 0, nullptr) == FALSE) {
+      if (!StartService(hService, 0, null)) {
         CloseServiceHandle(hService);
         CloseServiceHandle(scmHandle);
         return ServiceStartResult.failed;
@@ -198,14 +192,13 @@ abstract class ServiceManager {
       }
 
       // Check the status until the service is no longer start pending.
-      if (QueryServiceStatusEx(
-            hService,
-            SC_STATUS_PROCESS_INFO,
-            lpBuffer.cast(),
-            sizeOf<SERVICE_STATUS_PROCESS>(),
-            bytesNeeded,
-          ) ==
-          FALSE) {
+      if (!QueryServiceStatusEx(
+        hService,
+        SC_STATUS_PROCESS_INFO,
+        lpBuffer.cast(),
+        sizeOf<SERVICE_STATUS_PROCESS>(),
+        bytesNeeded,
+      )) {
         CloseServiceHandle(hService);
         CloseServiceHandle(scmHandle);
         return ServiceStartResult.failed;
@@ -230,14 +223,13 @@ abstract class ServiceManager {
         Sleep(waitTime);
 
         // Check the status again.
-        if (QueryServiceStatusEx(
-              hService,
-              SC_STATUS_PROCESS_INFO,
-              lpBuffer.cast(),
-              sizeOf<SERVICE_STATUS_PROCESS>(),
-              bytesNeeded,
-            ) ==
-            FALSE) {
+        if (!QueryServiceStatusEx(
+          hService,
+          SC_STATUS_PROCESS_INFO,
+          lpBuffer.cast(),
+          sizeOf<SERVICE_STATUS_PROCESS>(),
+          bytesNeeded,
+        )) {
           break;
         }
 
@@ -265,14 +257,15 @@ abstract class ServiceManager {
   /// Retrieves the status of a service defined by [serviceName].
   static ServiceStatus? status(String serviceName) {
     // Get a handle to the SCM database.
-    final scmHandle = OpenSCManager(nullptr, nullptr, SC_MANAGER_CONNECT);
+    final scmHandle = OpenSCManager(null, null, SC_MANAGER_CONNECT);
     if (scmHandle == NULL) return null;
 
     return using((arena) {
       // Get a handle to the service.
+      final lpServiceName = w(serviceName);
       final hService = OpenService(
         scmHandle,
-        serviceName.toNativeUtf16(allocator: arena),
+        lpServiceName.ptr,
         SERVICE_QUERY_STATUS,
       );
       if (hService == NULL) {
@@ -285,14 +278,13 @@ abstract class ServiceManager {
         final bytesNeeded = arena<DWORD>();
 
         // Query the service status.
-        if (QueryServiceStatusEx(
-              hService,
-              SC_STATUS_PROCESS_INFO,
-              lpBuffer.cast(),
-              sizeOf<SERVICE_STATUS_PROCESS>(),
-              bytesNeeded,
-            ) ==
-            FALSE) {
+        if (!QueryServiceStatusEx(
+          hService,
+          SC_STATUS_PROCESS_INFO,
+          lpBuffer.cast(),
+          sizeOf<SERVICE_STATUS_PROCESS>(),
+          bytesNeeded,
+        )) {
           return null;
         }
 
@@ -308,17 +300,18 @@ abstract class ServiceManager {
   static ServiceStopResult stop(String serviceName) {
     // Get a handle to the SCM database.
     final scmHandle = OpenSCManager(
-      nullptr, // local computer
-      nullptr, // ServicesActive database
+      null, // local computer
+      null, // ServicesActive database
       SC_MANAGER_ALL_ACCESS, // full access rights
     );
     if (scmHandle == NULL) return ServiceStopResult.accessDenied;
 
     return using((arena) {
       // Get a handle to the service.
+      final lpServiceName = w(serviceName);
       final hService = OpenService(
         scmHandle,
-        serviceName.toNativeUtf16(allocator: arena),
+        lpServiceName.ptr,
         SERVICE_STOP | SERVICE_QUERY_STATUS | SERVICE_ENUMERATE_DEPENDENTS,
       );
       if (hService == NULL) {
@@ -331,14 +324,13 @@ abstract class ServiceManager {
         final bytesNeeded = arena<DWORD>();
 
         // Make sure the service is not already stopped.
-        if (QueryServiceStatusEx(
-              hService,
-              SC_STATUS_PROCESS_INFO,
-              lpBuffer.cast(),
-              sizeOf<SERVICE_STATUS_PROCESS>(),
-              bytesNeeded,
-            ) ==
-            FALSE) {
+        if (!QueryServiceStatusEx(
+          hService,
+          SC_STATUS_PROCESS_INFO,
+          lpBuffer.cast(),
+          sizeOf<SERVICE_STATUS_PROCESS>(),
+          bytesNeeded,
+        )) {
           return ServiceStopResult.failed;
         }
 
@@ -367,14 +359,13 @@ abstract class ServiceManager {
           _log('Sleeping for ${ssp.dwWaitHint} ms...');
           Sleep(waitTime);
 
-          if (QueryServiceStatusEx(
-                hService,
-                SC_STATUS_PROCESS_INFO,
-                lpBuffer.cast(),
-                sizeOf<SERVICE_STATUS_PROCESS>(),
-                bytesNeeded,
-              ) ==
-              FALSE) {
+          if (!QueryServiceStatusEx(
+            hService,
+            SC_STATUS_PROCESS_INFO,
+            lpBuffer.cast(),
+            sizeOf<SERVICE_STATUS_PROCESS>(),
+            bytesNeeded,
+          )) {
             return ServiceStopResult.failed;
           }
 
@@ -397,12 +388,11 @@ abstract class ServiceManager {
         }
 
         // Send a stop code to the service.
-        if (ControlService(
-              hService,
-              SERVICE_CONTROL_STOP,
-              lpBuffer.cast<SERVICE_STATUS>(),
-            ) ==
-            FALSE) {
+        if (!ControlService(
+          hService,
+          SERVICE_CONTROL_STOP,
+          lpBuffer.cast<SERVICE_STATUS>(),
+        )) {
           return ServiceStopResult.failed;
         }
 
@@ -414,14 +404,13 @@ abstract class ServiceManager {
           _log('Sleeping for ${ssp.dwWaitHint} ms...');
           Sleep(ssp.dwWaitHint);
 
-          if (QueryServiceStatusEx(
-                hService,
-                SC_STATUS_PROCESS_INFO,
-                lpBuffer.cast(),
-                sizeOf<SERVICE_STATUS_PROCESS>(),
-                bytesNeeded,
-              ) ==
-              FALSE) {
+          if (!QueryServiceStatusEx(
+            hService,
+            SC_STATUS_PROCESS_INFO,
+            lpBuffer.cast(),
+            sizeOf<SERVICE_STATUS_PROCESS>(),
+            bytesNeeded,
+          )) {
             return ServiceStopResult.failed;
           }
 
@@ -454,14 +443,13 @@ abstract class ServiceManager {
 
     // Pass a zero-length buffer to get the required buffer size.
     if (EnumDependentServices(
-          hService,
-          SERVICE_ACTIVE,
-          nullptr,
-          0,
-          bytesNeeded,
-          servicesReturned,
-        ) ==
-        TRUE) {
+      hService,
+      SERVICE_ACTIVE,
+      null,
+      0,
+      bytesNeeded,
+      servicesReturned,
+    )) {
       _log('No dependent services found.');
     } else {
       // Allocate a buffer for the dependencies.
@@ -470,30 +458,29 @@ abstract class ServiceManager {
       ).cast<ENUM_SERVICE_STATUS>();
 
       // Enumerate the dependencies.
-      if (EnumDependentServices(
-            hService,
-            SERVICE_ACTIVE,
-            lpServices,
-            bytesNeeded.value,
-            bytesNeeded,
-            servicesReturned,
-          ) ==
-          FALSE) {
+      if (!EnumDependentServices(
+        hService,
+        SERVICE_ACTIVE,
+        lpServices,
+        bytesNeeded.value,
+        bytesNeeded,
+        servicesReturned,
+      )) {
         return ServiceStopResult.failed;
       }
 
       _log('Found ${servicesReturned.value} dependent services:');
       for (var i = 0; i < servicesReturned.value; i++) {
-        final ess = lpServices[i];
+        final ENUM_SERVICE_STATUS(:lpServiceName) = lpServices[i];
         _log(
           ' (${i + 1}/${servicesReturned.value}) Stopping '
-          '${ess.lpServiceName.toDartString()}...',
+          '${lpServiceName.toDartString()}...',
         );
 
         // Open the service.
         final hDepService = OpenService(
           scmHandle,
-          ess.lpServiceName,
+          lpServiceName,
           SERVICE_STOP | SERVICE_QUERY_STATUS,
         );
         if (hDepService == NULL) return ServiceStopResult.failed;
@@ -502,12 +489,11 @@ abstract class ServiceManager {
           final lpServiceStatus = arena<SERVICE_STATUS_PROCESS>();
 
           // Send a stop code.
-          if (ControlService(
-                hDepService,
-                SERVICE_CONTROL_STOP,
-                lpServiceStatus.cast<SERVICE_STATUS>(),
-              ) ==
-              FALSE) {
+          if (!ControlService(
+            hDepService,
+            SERVICE_CONTROL_STOP,
+            lpServiceStatus.cast<SERVICE_STATUS>(),
+          )) {
             return ServiceStopResult.failed;
           }
 
@@ -520,14 +506,13 @@ abstract class ServiceManager {
             _log('Sleeping for ${ssp.dwWaitHint} ms...');
             Sleep(ssp.dwWaitHint);
 
-            if (QueryServiceStatusEx(
-                  hDepService,
-                  SC_STATUS_PROCESS_INFO,
-                  lpServiceStatus.cast(),
-                  sizeOf<SERVICE_STATUS_PROCESS>(),
-                  bytesNeeded,
-                ) ==
-                FALSE) {
+            if (!QueryServiceStatusEx(
+              hDepService,
+              SC_STATUS_PROCESS_INFO,
+              lpServiceStatus.cast(),
+              sizeOf<SERVICE_STATUS_PROCESS>(),
+              bytesNeeded,
+            )) {
               return ServiceStopResult.failed;
             }
 

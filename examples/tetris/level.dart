@@ -21,6 +21,7 @@ class Level {
     );
     next = pieceSet.randomPiece;
   }
+
   List<List<int>> board = []; // The canvas / drawing board
   Canvas engine; // Does graphic rendering
   var pieceSet = PieceSet(); // Piece generator

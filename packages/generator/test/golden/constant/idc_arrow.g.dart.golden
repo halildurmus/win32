@@ -1,0 +1,6 @@
+IDC_ARROW|
+/// Standard arrow cursor.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-geticoninfo>.
+final IDC_ARROW = Pointer<Utf16>.fromAddress(32512);

@@ -3,157 +3,99 @@
 
 import 'dart:ffi';
 
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 void main() {
-  // Initialize COM
-  var hr = CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
-  if (FAILED(hr)) throw WindowsException(hr);
+  CoInitializeEx(COINIT_MULTITHREADED);
 
   // Initialize security model
-  hr = CoInitializeSecurity(
-    nullptr,
+  CoInitializeSecurity(
+    null,
     -1, // COM negotiates service
-    nullptr, // Authentication services
-    nullptr, // Reserved
+    null, // Authentication services
     RPC_C_AUTHN_LEVEL_DEFAULT, // authentication
     RPC_C_IMP_LEVEL_IMPERSONATE, // Impersonation
-    nullptr, // Authentication info
+    null, // Authentication info
     EOAC_NONE, // Additional capabilities
-    nullptr, // Reserved
   );
 
-  if (FAILED(hr)) {
-    final exception = WindowsException(hr);
-    print(exception);
-
-    CoUninitialize();
-    throw exception; // Program has failed.
-  }
-
-  // Obtain the initial locator to Windows Management
-  // on a particular host computer.
-  final pLoc = IWbemLocator(calloc<COMObject>());
-
-  final clsid = calloc<GUID>()..ref.setGUID(CLSID_WbemLocator);
-  final iid = calloc<GUID>()..ref.setGUID(IID_IWbemLocator);
-
-  hr = CoCreateInstance(
-    clsid,
-    nullptr,
+  // Obtain the initial locator to Windows Management on a particular host
+  // computer.
+  final locator = CoCreateInstance<IWbemLocator>(
+    WbemLocator.ptr,
+    null,
     CLSCTX_INPROC_SERVER,
-    iid,
-    pLoc.ptr.cast(),
   );
 
-  if (FAILED(hr)) {
-    final exception = WindowsException(hr);
-    print(exception);
+  final networkResource = b(r'ROOT\CIMV2');
 
-    CoUninitialize();
-    throw exception;
-  }
-
-  final proxy = calloc<Pointer<COMObject>>();
-
-  // Connect to the root\cimv2 namespace with the
-  // current user and obtain pointer pSvc
-  // to make IWbemServices calls.
-
-  hr = pLoc.connectServer(
-    TEXT(r'ROOT\CIMV2'), // WMI namespace
-    nullptr, // User name
-    nullptr, // User password
-    nullptr, // Locale
-    NULL, // Security flags
-    nullptr, // Authority
-    nullptr, // Context object
-    proxy, // IWbemServices proxy
-  );
-
-  if (FAILED(hr)) {
-    final exception = WindowsException(hr);
-    print(exception);
-
-    CoUninitialize();
-    throw exception; // Program has failed.
-  }
-
+  // Connect to the root\cimv2 namespace with the current user and obtain
+  // pointer pSvc to make IWbemServices calls.
+  final services = locator.connectServer(
+    networkResource.ptr,
+    nullptr,
+    nullptr,
+    nullptr,
+    NULL,
+    nullptr,
+    null,
+  )!;
   print(r'Connected to ROOT\CIMV2 WMI namespace');
 
-  final pSvc = IWbemServices(proxy.cast());
-
-  // Set the IWbemServices proxy so that impersonation
-  // of the user (client) occurs.
-  hr = CoSetProxyBlanket(
-    proxy.value, // the proxy to set
+  // Set the IWbemServices proxy so that impersonation of the user (client)
+  // occurs.
+  CoSetProxyBlanket(
+    services, // the proxy to set
     RPC_C_AUTHN_WINNT, // authentication service
     RPC_C_AUTHZ_NONE, // authorization service
-    nullptr, // Server principal name
+    null, // Server principal name
     RPC_C_AUTHN_LEVEL_CALL, // authentication level
     RPC_C_IMP_LEVEL_IMPERSONATE, // impersonation level
-    nullptr, // client identity
+    null, // client identity
     EOAC_NONE, // proxy capabilities
   );
 
-  if (FAILED(hr)) {
-    final exception = WindowsException(hr);
-    print(exception);
-    CoUninitialize();
-    throw exception; // Program has failed.
-  }
+  final queryLanguage = b('WQL');
+  final query = b('SELECT * FROM Win32_Process');
 
   // Use the IWbemServices pointer to make requests of WMI.
-
-  final pEnumerator = calloc<Pointer<COMObject>>();
-  IEnumWbemClassObject enumerator;
-
   // For example, query for all the running processes
-  hr = pSvc.execQuery(
-    TEXT('WQL'),
-    TEXT('SELECT * FROM Win32_Process'),
+  final enumerator = services.execQuery(
+    queryLanguage.ptr,
+    query.ptr,
     WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY,
-    nullptr,
-    pEnumerator,
-  );
+    null,
+  )!;
 
-  if (FAILED(hr)) {
-    final exception = WindowsException(hr);
-    print(exception);
+  final uReturn = loggingCalloc<ULONG>();
 
-    CoUninitialize();
-
-    throw exception;
-  } else {
-    enumerator = IEnumWbemClassObject(pEnumerator.cast());
-
-    final uReturn = calloc<Uint32>();
-
-    var idx = 0;
-    while (enumerator.ptr.address > 0) {
-      final pClsObj = calloc<IntPtr>();
-
-      hr = enumerator.next(WBEM_INFINITE, 1, pClsObj.cast(), uReturn);
-
-      // Break out of the while loop if we've run out of processes to inspect
-      if (uReturn.value == 0) break;
-
-      idx++;
-
-      final clsObj = IWbemClassObject(pClsObj.cast());
-
-      final vtProp = calloc<VARIANT>();
-      hr = clsObj.get(TEXT('Name'), 0, vtProp, nullptr, nullptr);
-      if (SUCCEEDED(hr)) {
-        print('Process: ${vtProp.ref.bstrVal.toDartString()}');
-      }
-      // Free BSTRs in the returned variants
-      VariantClear(vtProp);
-      free(vtProp);
+  var idx = 0;
+  while (enumerator.ptr.address > 0) {
+    final pClsObj = loggingCalloc<VTablePointer>();
+    final hr = enumerator.next(WBEM_INFINITE, 1, pClsObj, uReturn);
+    if (hr.isError) {
+      print('Next failed: ${hr.message}');
+      free(pClsObj);
+      free(uReturn);
+      break;
     }
-    print('$idx processes found.');
-  }
 
-  CoUninitialize();
+    // Break out of the while loop if we've run out of processes to inspect
+    if (uReturn.value == 0) {
+      free(pClsObj);
+      free(uReturn);
+      break;
+    }
+
+    idx++;
+
+    final clsObj = IWbemClassObject(pClsObj.value);
+    free(pClsObj);
+
+    final vtProp = Variant();
+    final name = w('Name');
+    clsObj.get(name.ptr, 0, vtProp.ptr, null, null);
+    print('Process: ${vtProp.value}');
+  }
+  print('$idx processes found.');
 }

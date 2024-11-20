@@ -2,16 +2,21 @@ name: win32_workspace
 publish_to: none
 
 environment:
-  sdk: ^3.8.0
+  sdk: ^3.9.0-0
+
+workspace:
+  - packages/generator
+  - packages/win32
 
 dev_dependencies:
   args: ^2.6.0
+  benchmark_harness: ^2.3.1
   ffi: ^2.1.4
   halildurmus_lints: ^1.0.1
-  hooks:
-    git:
-      url: https://github.com/halildurmus/workflows.git
-      path: packages/hooks
+  # halildurmus_hooks:
+  #   git:
+  #     url: https://github.com/halildurmus/workflows.git
+  #     path: packages/hooks
   path: ^1.9.1
   win32:
     path: packages/win32

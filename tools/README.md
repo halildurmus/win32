@@ -1,37 +1,54 @@
-# Tools
+# 🛠️ Tools
 
-This directory contains utilities to help with developing the `package:win32`.
+This directory contains utilities to support the development of the
+`package:win32`.
 
-## Code-generation tools
+## 🧑‍💻 Code-Generation Tools
 
-The Win32 and COM APIs available in this package are generated from
-[win32metadata]. The metadata is in the form of an ECMA-335 specification
-file, and extracted and parsed using the separate [winmd] package.
+The **Win32** and **COM APIs** available in this package are generated from
+[win32metadata]. This metadata is provided in an ECMA-335 specification file and
+processed using the [winmd] package.
 
-Not every API is projected.
+👉 **Note**: Not all APIs are projected. Here's how it works:
 
-- For Win32 APIs, the JSON files prefixed with `win32_` in the
-  [packages\generator\data] directory are used to determine which APIs to
-  project.
-- For COM APIs, the [com_types.json] file in the [packages\generator\data]
-  directory explicitly names the types that should be projected.
+### 🪛 Win32 API Generation
 
-During the build process, you should run `generate.dart` from the project root
-to instantiate these types and generate the classes from them, for example:
+- JSON files prefixed with `win32_` in the [packages\generator\data] directory
+  determine the APIs to project.
+
+### 🧩 COM API Generation
+
+- The types to project are explicitly named in the [com_types.json] file, also
+  located in the [packages\generator\data] directory.
+
+### ⚙️ How to Generate
+
+To generate the classes, use the `generate.dart` script from the project root:
 
 ```cmd
 dart tools\generate.dart
 ```
 
-If you pass the `--test` (`-t`) flag, this tool will also test `generator` and
-`win32` packages with unit tests after generating the code.
+#### 🧪 Testing During Generation
 
-## Other utilities
+Add the `--test` (`-t`) flag to automatically run unit tests for both
+`generator` and `win32` packages after generating the code:
 
-This folder also includes a few other small utilities of limited usefulness.
+```cmd
+dart tools\generate.dart -t
+```
 
-- `build.dart`: Generates EXE files for some of the Dart examples.
-- `update_changelog.dart`: Updates the CHANGELOG.md with the latest changes.
+## 🧰 Other Utilities
+
+This folder also contains additional utilities for specific tasks:
+
+- 🏗️ **`build.dart`** Builds EXE files for Dart examples.
+
+- 📝 **`update_changelog.dart`** Updates the `CHANGELOG.md` with the latest
+  changes.
+
+- 🖼️ **`update_goldens.dart`** Updates golden files for tests in the
+  `package:generator`.
 
 [com_types.json]: ../packages/generator/data/com_types.json
 [packages\generator\data]: ../packages/generator/data

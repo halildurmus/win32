@@ -1,587 +1,502 @@
-// Maps FFI prototypes onto the corresponding Win32 API function calls
-
+// Maps FFI prototypes onto the corresponding Win32 API function calls.
+//
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-
-// ignore_for_file: unused_import, non_constant_identifier_names
-// ignore_for_file: constant_identifier_names, camel_case_types
-// ignore_for_file: specify_nonobvious_property_types
+//
+// ignore_for_file: avoid_positional_boolean_parameters
+// ignore_for_file: non_constant_identifier_names, unused_import
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../callbacks.dart';
-import '../combase.dart';
+import '../_internal/shell32.g.dart';
+import '../allocator.dart';
+import '../bstr.dart';
+import '../com/ibindctx.g.dart';
+import '../com/interface.g.dart';
+import '../com/ishellfolder.g.dart';
+import '../com/iunknown.g.dart';
+import '../constants.dart';
+import '../constants.g.dart';
+import '../enums.g.dart';
+import '../exception.dart';
+import '../extensions/pointer.dart';
 import '../guid.dart';
+import '../hresult.dart';
+import '../hstring.dart';
+import '../macros.dart';
+import '../ntstatus.dart';
+import '../pcstr.dart';
+import '../pcwstr.dart';
+import '../pstr.dart';
+import '../pwstr.dart';
 import '../structs.g.dart';
-import '../variant.dart';
+import '../types.dart';
+import '../utils.dart';
 
-final _shell32 = DynamicLibrary.open('shell32.dll');
-
-/// Retrieves the command-line string for the current process.
+/// Parses a Unicode command line string and returns an array of pointers to the
+/// command line arguments, along with a count of such arguments, in a way that
+/// is similar to the standard C run-time argv and argc values.
 ///
-/// ```c
-/// LPWSTR CommandLineToArgvW(
-///   LPCWSTR lpCmdLine,
-///   int     *pNumArgs
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-commandlinetoargvw>.
+///
 /// {@category shell32}
-Pointer<Pointer<Utf16>> CommandLineToArgv(
-  Pointer<Utf16> lpCmdLine,
-  Pointer<Int32> pNumArgs,
-) => _CommandLineToArgv(lpCmdLine, pNumArgs);
-
-final _CommandLineToArgv = _shell32
-    .lookupFunction<
-      Pointer<Pointer<Utf16>> Function(
-        Pointer<Utf16> lpCmdLine,
-        Pointer<Int32> pNumArgs,
-      ),
-      Pointer<Pointer<Utf16>> Function(
-        Pointer<Utf16> lpCmdLine,
-        Pointer<Int32> pNumArgs,
-      )
-    >('CommandLineToArgvW');
+@pragma('vm:prefer-inline')
+Pointer<PWSTR> CommandLineToArgv(PCWSTR lpCmdLine, Pointer<Int32> pNumArgs) =>
+    CommandLineToArgvW_Wrapper(lpCmdLine, pNumArgs);
 
 /// Retrieves the names of dropped files that result from a successful
 /// drag-and-drop operation.
 ///
-/// ```c
-/// UINT DragQueryFileW(
-///   [in]  HDROP  hDrop,
-///   [in]  UINT   iFile,
-///   [out] LPWSTR lpszFile,
-///         UINT   cch
-/// );
-/// ```
-/// {@category shell32}
-int DragQueryFile(int hDrop, int iFile, Pointer<Utf16> lpszFile, int cch) =>
-    _DragQueryFile(hDrop, iFile, lpszFile, cch);
-
-final _DragQueryFile = _shell32
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hDrop,
-        Uint32 iFile,
-        Pointer<Utf16> lpszFile,
-        Uint32 cch,
-      ),
-      int Function(int hDrop, int iFile, Pointer<Utf16> lpszFile, int cch)
-    >('DragQueryFileW');
-
-/// Gets a handle to an icon stored as a resource in a file or an icon
-/// stored in a file's associated executable file.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-dragqueryfilew>.
 ///
-/// ```c
-/// HICON ExtractAssociatedIconW(
-///   HINSTANCE hInst,
-///   LPWSTR    pszIconPath,
-///   WORD      *piIcon
-/// );
-/// ```
 /// {@category shell32}
-int ExtractAssociatedIcon(
+@pragma('vm:prefer-inline')
+int DragQueryFile(int hDrop, int iFile, PWSTR? lpszFile, int cch) =>
+    _DragQueryFile(hDrop, iFile, lpszFile ?? nullptr, cch);
+
+@Native<Uint32 Function(HDROP, Uint32, PWSTR, Uint32)>(symbol: 'DragQueryFileW')
+external int _DragQueryFile(int hDrop, int iFile, PWSTR lpszFile, int cch);
+
+/// Gets a handle to an icon stored as a resource in a file or an icon stored in
+/// a file's associated executable file.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-extractassociatediconw>.
+///
+/// {@category shell32}
+@pragma('vm:prefer-inline')
+int ExtractAssociatedIcon(PWSTR pszIconPath, Pointer<Uint16> piIcon) =>
+    _ExtractAssociatedIcon(NULL, pszIconPath, piIcon);
+
+@Native<HICON Function(HINSTANCE, PWSTR, Pointer<Uint16>)>(
+  symbol: 'ExtractAssociatedIconW',
+)
+external int _ExtractAssociatedIcon(
   int hInst,
-  Pointer<Utf16> pszIconPath,
+  PWSTR pszIconPath,
   Pointer<Uint16> piIcon,
-) => _ExtractAssociatedIcon(hInst, pszIconPath, piIcon);
+);
 
-final _ExtractAssociatedIcon = _shell32
-    .lookupFunction<
-      IntPtr Function(
-        IntPtr hInst,
-        Pointer<Utf16> pszIconPath,
-        Pointer<Uint16> piIcon,
-      ),
-      int Function(
-        int hInst,
-        Pointer<Utf16> pszIconPath,
-        Pointer<Uint16> piIcon,
-      )
-    >('ExtractAssociatedIconW');
-
-/// Retrieves the name of and handle to the executable (.exe) file
-/// associated with a specific document file.
+/// Retrieves the name of and handle to the executable (.exe) file associated
+/// with a specific document file.
 ///
-/// ```c
-/// HINSTANCE FindExecutableW(
-///   LPCWSTR lpFile,
-///   LPCWSTR lpDirectory,
-///   LPWSTR  lpResult
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-findexecutablew>.
+///
 /// {@category shell32}
-int FindExecutable(
-  Pointer<Utf16> lpFile,
-  Pointer<Utf16> lpDirectory,
-  Pointer<Utf16> lpResult,
-) => _FindExecutable(lpFile, lpDirectory, lpResult);
+@pragma('vm:prefer-inline')
+int FindExecutable(PCWSTR lpFile, PCWSTR? lpDirectory, PWSTR lpResult) =>
+    _FindExecutable(lpFile, lpDirectory ?? nullptr, lpResult);
 
-final _FindExecutable = _shell32
-    .lookupFunction<
-      IntPtr Function(
-        Pointer<Utf16> lpFile,
-        Pointer<Utf16> lpDirectory,
-        Pointer<Utf16> lpResult,
-      ),
-      int Function(
-        Pointer<Utf16> lpFile,
-        Pointer<Utf16> lpDirectory,
-        Pointer<Utf16> lpResult,
-      )
-    >('FindExecutableW');
+@Native<HINSTANCE Function(PCWSTR, PCWSTR, PWSTR)>(symbol: 'FindExecutableW')
+external int _FindExecutable(PCWSTR lpFile, PCWSTR lpDirectory, PWSTR lpResult);
+
+/// Displays a dialog box that enables the user to select a Shell folder.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shbrowseforfolderw>.
+///
+/// {@category shell32}
+@pragma('vm:prefer-inline')
+Pointer<ITEMIDLIST> SHBrowseForFolder(Pointer<BROWSEINFO> lpbi) =>
+    _SHBrowseForFolder(lpbi);
+
+@Native<Pointer<ITEMIDLIST> Function(Pointer<BROWSEINFO>)>(
+  symbol: 'SHBrowseForFolderW',
+)
+external Pointer<ITEMIDLIST> _SHBrowseForFolder(Pointer<BROWSEINFO> lpbi);
 
 /// Creates and initializes a Shell item object from a parsing name.
 ///
-/// ```c
-/// SHSTDAPI SHCreateItemFromParsingName(
-///   PCWSTR   pszPath,
-///   IBindCtx *pbc,
-///   REFIID   riid,
-///   void     **ppv
-/// );
-/// ```
+/// This method uses the [ComInterface.type] method to retrieve metadata about
+/// the target interface defined by [T], including its IID (Interface ID) and
+/// instantiation logic.
+///
+/// All COM interfaces provided by this package are pre-registered. Custom COM
+/// interfaces must be registered manually using the [ComInterface.register]
+/// method before calling this method.
+///
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shcreateitemfromparsingname>.
+///
 /// {@category shell32}
-int SHCreateItemFromParsingName(
-  Pointer<Utf16> pszPath,
-  Pointer<COMObject> pbc,
+T SHCreateItemFromParsingName<T extends IUnknown>(
+  PCWSTR pszPath,
+  IBindCtx? pbc,
+) {
+  final companion = ComInterface.type<T>();
+  final riid = companion.iid;
+  final ppv = loggingCalloc<Pointer>();
+  final hr$ = HRESULT(
+    _SHCreateItemFromParsingName(pszPath, pbc?.ptr ?? nullptr, riid.ptr, ppv),
+  );
+  if (hr$.isError) {
+    free(ppv);
+    throw WindowsException(hr$);
+  }
+  final result = companion.fromPointer(ppv.value.cast());
+  free(ppv);
+  return result;
+}
+
+@Native<Int32 Function(PCWSTR, VTablePointer, Pointer<GUID>, Pointer<Pointer>)>(
+  symbol: 'SHCreateItemFromParsingName',
+)
+external int _SHCreateItemFromParsingName(
+  PCWSTR pszPath,
+  VTablePointer pbc,
   Pointer<GUID> riid,
   Pointer<Pointer> ppv,
-) => _SHCreateItemFromParsingName(pszPath, pbc, riid, ppv);
-
-final _SHCreateItemFromParsingName = _shell32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Utf16> pszPath,
-        Pointer<COMObject> pbc,
-        Pointer<GUID> riid,
-        Pointer<Pointer> ppv,
-      ),
-      int Function(
-        Pointer<Utf16> pszPath,
-        Pointer<COMObject> pbc,
-        Pointer<GUID> riid,
-        Pointer<Pointer> ppv,
-      )
-    >('SHCreateItemFromParsingName');
+);
 
 /// Sends a message to the taskbar's status area.
 ///
-/// ```c
-/// BOOL Shell_NotifyIconW(
-///   DWORD dwMessage,
-///   NOTIFYICONDATA *lpData
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-shell_notifyiconw>.
+///
 /// {@category shell32}
-int Shell_NotifyIcon(int dwMessage, Pointer<NOTIFYICONDATA> lpData) =>
-    _Shell_NotifyIcon(dwMessage, lpData);
+@pragma('vm:prefer-inline')
+bool Shell_NotifyIcon(
+  NOTIFY_ICON_MESSAGE dwMessage,
+  Pointer<NOTIFYICONDATA> lpData,
+) => _Shell_NotifyIcon(dwMessage, lpData) != FALSE;
 
-final _Shell_NotifyIcon = _shell32
-    .lookupFunction<
-      Int32 Function(Uint32 dwMessage, Pointer<NOTIFYICONDATA> lpData),
-      int Function(int dwMessage, Pointer<NOTIFYICONDATA> lpData)
-    >('Shell_NotifyIconW');
+@Native<BOOL Function(Uint32, Pointer<NOTIFYICONDATA>)>(
+  symbol: 'Shell_NotifyIconW',
+)
+external int _Shell_NotifyIcon(int dwMessage, Pointer<NOTIFYICONDATA> lpData);
 
 /// Displays a ShellAbout dialog box.
 ///
-/// ```c
-/// INT ShellAboutW(
-///   HWND    hWnd,
-///   LPCWSTR szApp,
-///   LPCWSTR szOtherStuff,
-///   HICON   hIcon
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-shellaboutw>.
+///
 /// {@category shell32}
-int ShellAbout(
-  int hWnd,
-  Pointer<Utf16> szApp,
-  Pointer<Utf16> szOtherStuff,
-  int hIcon,
-) => _ShellAbout(hWnd, szApp, szOtherStuff, hIcon);
+@pragma('vm:prefer-inline')
+int ShellAbout(int? hWnd, PCWSTR szApp, PCWSTR? szOtherStuff, int? hIcon) =>
+    _ShellAbout(hWnd ?? NULL, szApp, szOtherStuff ?? nullptr, hIcon ?? NULL);
 
-final _ShellAbout = _shell32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hWnd,
-        Pointer<Utf16> szApp,
-        Pointer<Utf16> szOtherStuff,
-        IntPtr hIcon,
-      ),
-      int Function(
-        int hWnd,
-        Pointer<Utf16> szApp,
-        Pointer<Utf16> szOtherStuff,
-        int hIcon,
-      )
-    >('ShellAboutW');
+@Native<Int32 Function(HWND, PCWSTR, PCWSTR, HICON)>(symbol: 'ShellAboutW')
+external int _ShellAbout(
+  int hWnd,
+  PCWSTR szApp,
+  PCWSTR szOtherStuff,
+  int hIcon,
+);
 
 /// Performs an operation on a specified file.
 ///
-/// ```c
-/// HINSTANCE ShellExecuteW(
-///   HWND    hwnd,
-///   LPCWSTR lpOperation,
-///   LPCWSTR lpFile,
-///   LPCWSTR lpParameters,
-///   LPCWSTR lpDirectory,
-///   INT     nShowCmd
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-shellexecutew>.
+///
 /// {@category shell32}
+@pragma('vm:prefer-inline')
 int ShellExecute(
-  int hwnd,
-  Pointer<Utf16> lpOperation,
-  Pointer<Utf16> lpFile,
-  Pointer<Utf16> lpParameters,
-  Pointer<Utf16> lpDirectory,
-  int nShowCmd,
+  int? hwnd,
+  PCWSTR? lpOperation,
+  PCWSTR lpFile,
+  PCWSTR? lpParameters,
+  PCWSTR? lpDirectory,
+  SHOW_WINDOW_CMD nShowCmd,
 ) => _ShellExecute(
-  hwnd,
-  lpOperation,
+  hwnd ?? NULL,
+  lpOperation ?? nullptr,
   lpFile,
-  lpParameters,
-  lpDirectory,
+  lpParameters ?? nullptr,
+  lpDirectory ?? nullptr,
   nShowCmd,
 );
 
-final _ShellExecute = _shell32
-    .lookupFunction<
-      IntPtr Function(
-        IntPtr hwnd,
-        Pointer<Utf16> lpOperation,
-        Pointer<Utf16> lpFile,
-        Pointer<Utf16> lpParameters,
-        Pointer<Utf16> lpDirectory,
-        Uint32 nShowCmd,
-      ),
-      int Function(
-        int hwnd,
-        Pointer<Utf16> lpOperation,
-        Pointer<Utf16> lpFile,
-        Pointer<Utf16> lpParameters,
-        Pointer<Utf16> lpDirectory,
-        int nShowCmd,
-      )
-    >('ShellExecuteW');
+@Native<HINSTANCE Function(HWND, PCWSTR, PCWSTR, PCWSTR, PCWSTR, Int32)>(
+  symbol: 'ShellExecuteW',
+)
+external int _ShellExecute(
+  int hwnd,
+  PCWSTR lpOperation,
+  PCWSTR lpFile,
+  PCWSTR lpParameters,
+  PCWSTR lpDirectory,
+  int nShowCmd,
+);
 
 /// Performs an operation on a specified file.
 ///
-/// ```c
-/// BOOL ShellExecuteExW(
-///   SHELLEXECUTEINFOW *pExecInfo
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-shellexecuteexw>.
+///
 /// {@category shell32}
-int ShellExecuteEx(Pointer<SHELLEXECUTEINFO> pExecInfo) =>
-    _ShellExecuteEx(pExecInfo);
-
-final _ShellExecuteEx = _shell32
-    .lookupFunction<
-      Int32 Function(Pointer<SHELLEXECUTEINFO> pExecInfo),
-      int Function(Pointer<SHELLEXECUTEINFO> pExecInfo)
-    >('ShellExecuteExW');
+@pragma('vm:prefer-inline')
+bool ShellExecuteEx(Pointer<SHELLEXECUTEINFO> pExecInfo) =>
+    ShellExecuteExW_Wrapper(pExecInfo) != FALSE;
 
 /// Empties the Recycle Bin on the specified drive.
 ///
-/// ```c
-/// SHSTDAPI SHEmptyRecycleBinW(
-///   HWND    hwnd,
-///   LPCWSTR pszRootPath,
-///   DWORD   dwFlags
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-shemptyrecyclebinw>.
+///
 /// {@category shell32}
-int SHEmptyRecycleBin(int hwnd, Pointer<Utf16> pszRootPath, int dwFlags) =>
-    _SHEmptyRecycleBin(hwnd, pszRootPath, dwFlags);
+@pragma('vm:prefer-inline')
+void SHEmptyRecycleBin(int? hwnd, PCWSTR? pszRootPath, int dwFlags) {
+  final hr$ = HRESULT(
+    _SHEmptyRecycleBin(hwnd ?? NULL, pszRootPath ?? nullptr, dwFlags),
+  );
+  if (hr$.isError) throw WindowsException(hr$);
+}
 
-final _SHEmptyRecycleBin = _shell32
-    .lookupFunction<
-      Int32 Function(IntPtr hwnd, Pointer<Utf16> pszRootPath, Uint32 dwFlags),
-      int Function(int hwnd, Pointer<Utf16> pszRootPath, int dwFlags)
-    >('SHEmptyRecycleBinW');
+@Native<Int32 Function(HWND, PCWSTR, Uint32)>(symbol: 'SHEmptyRecycleBinW')
+external int _SHEmptyRecycleBin(int hwnd, PCWSTR pszRootPath, int dwFlags);
 
 /// Copies, moves, renames, or deletes a file system object.
 ///
-/// ```c
-/// int SHFileOperationW(
-///   LPSHFILEOPSTRUCTW lpFileOp
-/// );
-/// ```
+/// On Windows Vista and later releases, we recommend that you use
+/// IFileOperation instead of this function.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-shfileoperationw>.
+///
 /// {@category shell32}
+@pragma('vm:prefer-inline')
 int SHFileOperation(Pointer<SHFILEOPSTRUCT> lpFileOp) =>
-    _SHFileOperation(lpFileOp);
+    SHFileOperationW_Wrapper(lpFileOp);
 
-final _SHFileOperation = _shell32
-    .lookupFunction<
-      Int32 Function(Pointer<SHFILEOPSTRUCT> lpFileOp),
-      int Function(Pointer<SHFILEOPSTRUCT> lpFileOp)
-    >('SHFileOperationW');
-
-/// Frees a file name mapping object that was retrieved by the
-/// SHFileOperation function.
+/// Frees a file name mapping object that was retrieved by the SHFileOperation
+/// function.
 ///
-/// ```c
-/// void SHFreeNameMappings(
-///   HANDLE hNameMappings
-/// );
-/// ```
-/// {@category shell32}
-void SHFreeNameMappings(int hNameMappings) =>
-    _SHFreeNameMappings(hNameMappings);
-
-final _SHFreeNameMappings = _shell32
-    .lookupFunction<
-      Void Function(IntPtr hNameMappings),
-      void Function(int hNameMappings)
-    >('SHFreeNameMappings');
-
-/// Retrieves the IShellFolder interface for the desktop folder, which is
-/// the root of the Shell's namespace.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-shfreenamemappings>.
 ///
-/// ```c
-/// SHSTDAPI SHGetDesktopFolder(
-///   IShellFolder **ppshf
-/// );
-/// ```
 /// {@category shell32}
-int SHGetDesktopFolder(Pointer<Pointer<COMObject>> ppshf) =>
-    _SHGetDesktopFolder(ppshf);
+@pragma('vm:prefer-inline')
+void SHFreeNameMappings(int? hNameMappings) =>
+    _SHFreeNameMappings(hNameMappings ?? NULL);
 
-final _SHGetDesktopFolder = _shell32
-    .lookupFunction<
-      Int32 Function(Pointer<Pointer<COMObject>> ppshf),
-      int Function(Pointer<Pointer<COMObject>> ppshf)
-    >('SHGetDesktopFolder');
+@Native<Void Function(HANDLE)>(symbol: 'SHFreeNameMappings')
+external void _SHFreeNameMappings(int hNameMappings);
+
+/// Retrieves the IShellFolder interface for the desktop folder, which is the
+/// root of the Shell's namespace.
+///
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shgetdesktopfolder>.
+///
+/// {@category shell32}
+IShellFolder? SHGetDesktopFolder() {
+  final ppshf = loggingCalloc<VTablePointer>();
+  final hr$ = HRESULT(_SHGetDesktopFolder(ppshf));
+  if (hr$.isError) {
+    free(ppshf);
+    throw WindowsException(hr$);
+  }
+  final result$ = ppshf.value;
+  free(ppshf);
+  if (result$.isNull) return null;
+  return IShellFolder(result$);
+}
+
+@Native<Int32 Function(Pointer<VTablePointer>)>(symbol: 'SHGetDesktopFolder')
+external int _SHGetDesktopFolder(Pointer<VTablePointer> ppshf);
 
 /// Retrieves disk space information for a disk volume.
 ///
-/// ```c
-/// BOOL SHGetDiskFreeSpaceExW(
-///   LPCWSTR        pszDirectoryName,
-///   ULARGE_INTEGER *pulFreeBytesAvailableToCaller,
-///   ULARGE_INTEGER *pulTotalNumberOfBytes,
-///   ULARGE_INTEGER *pulTotalNumberOfFreeBytes
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-shgetdiskfreespaceexw>.
+///
 /// {@category shell32}
-int SHGetDiskFreeSpaceEx(
-  Pointer<Utf16> pszDirectoryName,
+@pragma('vm:prefer-inline')
+bool SHGetDiskFreeSpaceEx(
+  PCWSTR pszDirectoryName,
+  Pointer<Uint64>? pulFreeBytesAvailableToCaller,
+  Pointer<Uint64>? pulTotalNumberOfBytes,
+  Pointer<Uint64>? pulTotalNumberOfFreeBytes,
+) =>
+    _SHGetDiskFreeSpaceEx(
+      pszDirectoryName,
+      pulFreeBytesAvailableToCaller ?? nullptr,
+      pulTotalNumberOfBytes ?? nullptr,
+      pulTotalNumberOfFreeBytes ?? nullptr,
+    ) !=
+    FALSE;
+
+@Native<
+  BOOL Function(PCWSTR, Pointer<Uint64>, Pointer<Uint64>, Pointer<Uint64>)
+>(symbol: 'SHGetDiskFreeSpaceExW')
+external int _SHGetDiskFreeSpaceEx(
+  PCWSTR pszDirectoryName,
   Pointer<Uint64> pulFreeBytesAvailableToCaller,
   Pointer<Uint64> pulTotalNumberOfBytes,
   Pointer<Uint64> pulTotalNumberOfFreeBytes,
-) => _SHGetDiskFreeSpaceEx(
-  pszDirectoryName,
-  pulFreeBytesAvailableToCaller,
-  pulTotalNumberOfBytes,
-  pulTotalNumberOfFreeBytes,
 );
-
-final _SHGetDiskFreeSpaceEx = _shell32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Utf16> pszDirectoryName,
-        Pointer<Uint64> pulFreeBytesAvailableToCaller,
-        Pointer<Uint64> pulTotalNumberOfBytes,
-        Pointer<Uint64> pulTotalNumberOfFreeBytes,
-      ),
-      int Function(
-        Pointer<Utf16> pszDirectoryName,
-        Pointer<Uint64> pulFreeBytesAvailableToCaller,
-        Pointer<Uint64> pulTotalNumberOfBytes,
-        Pointer<Uint64> pulTotalNumberOfFreeBytes,
-      )
-    >('SHGetDiskFreeSpaceExW');
 
 /// Returns the type of media that is in the given drive.
 ///
-/// ```c
-/// HRESULT SHGetDriveMedia(
-///   PCWSTR pszDrive,
-///   DWORD  *pdwMediaContent
-/// );
-/// ```
-/// {@category shell32}
-int SHGetDriveMedia(Pointer<Utf16> pszDrive, Pointer<Uint32> pdwMediaContent) =>
-    _SHGetDriveMedia(pszDrive, pdwMediaContent);
-
-final _SHGetDriveMedia = _shell32
-    .lookupFunction<
-      Int32 Function(Pointer<Utf16> pszDrive, Pointer<Uint32> pdwMediaContent),
-      int Function(Pointer<Utf16> pszDrive, Pointer<Uint32> pdwMediaContent)
-    >('SHGetDriveMedia');
-
-/// Retrieves information about an object in the file system, such as a
-/// file, folder, directory, or drive root.
+/// Throws a [WindowsException] on failure.
 ///
-/// ```c
-/// DWORD_PTR SHGetFileInfoW(
-///   LPCWSTR     pszPath,
-///   DWORD       dwFileAttributes,
-///   SHFILEINFOW *psfi,
-///   UINT        cbFileInfo,
-///   UINT        uFlags
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-shgetdrivemedia>.
+///
 /// {@category shell32}
+int SHGetDriveMedia(PCWSTR pszDrive) {
+  final pdwMediaContent = loggingCalloc<Uint32>();
+  final hr$ = HRESULT(_SHGetDriveMedia(pszDrive, pdwMediaContent));
+  if (hr$.isError) {
+    free(pdwMediaContent);
+    throw WindowsException(hr$);
+  }
+  final result$ = pdwMediaContent.value;
+  free(pdwMediaContent);
+  return result$;
+}
+
+@Native<Int32 Function(PCWSTR, Pointer<Uint32>)>(symbol: 'SHGetDriveMedia')
+external int _SHGetDriveMedia(PCWSTR pszDrive, Pointer<Uint32> pdwMediaContent);
+
+/// Retrieves information about an object in the file system, such as a file,
+/// folder, directory, or drive root.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-shgetfileinfow>.
+///
+/// {@category shell32}
+@pragma('vm:prefer-inline')
 int SHGetFileInfo(
-  Pointer<Utf16> pszPath,
+  PCWSTR pszPath,
+  FILE_FLAGS_AND_ATTRIBUTES dwFileAttributes,
+  Pointer<SHFILEINFO>? psfi,
+  int cbFileInfo,
+  SHGFI_FLAGS uFlags,
+) => _SHGetFileInfo(
+  pszPath,
+  dwFileAttributes,
+  psfi ?? nullptr,
+  cbFileInfo,
+  uFlags,
+);
+
+@Native<IntPtr Function(PCWSTR, Uint32, Pointer<SHFILEINFO>, Uint32, Uint32)>(
+  symbol: 'SHGetFileInfoW',
+)
+external int _SHGetFileInfo(
+  PCWSTR pszPath,
   int dwFileAttributes,
   Pointer<SHFILEINFO> psfi,
   int cbFileInfo,
   int uFlags,
-) => _SHGetFileInfo(pszPath, dwFileAttributes, psfi, cbFileInfo, uFlags);
-
-final _SHGetFileInfo = _shell32
-    .lookupFunction<
-      IntPtr Function(
-        Pointer<Utf16> pszPath,
-        Uint32 dwFileAttributes,
-        Pointer<SHFILEINFO> psfi,
-        Uint32 cbFileInfo,
-        Int32 uFlags,
-      ),
-      int Function(
-        Pointer<Utf16> pszPath,
-        int dwFileAttributes,
-        Pointer<SHFILEINFO> psfi,
-        int cbFileInfo,
-        int uFlags,
-      )
-    >('SHGetFileInfoW');
-
-/// Gets the path of a folder identified by a CSIDL value.
-///
-/// ```c
-/// SHFOLDERAPI SHGetFolderPathW(
-///   HWND   hwnd,
-///   int    csidl,
-///   HANDLE hToken,
-///   DWORD  dwFlags,
-///   LPWSTR pszPath
-/// );
-/// ```
-/// {@category shell32}
-int SHGetFolderPath(
-  int hwnd,
-  int csidl,
-  int hToken,
-  int dwFlags,
-  Pointer<Utf16> pszPath,
-) => _SHGetFolderPath(hwnd, csidl, hToken, dwFlags, pszPath);
-
-final _SHGetFolderPath = _shell32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr hwnd,
-        Int32 csidl,
-        IntPtr hToken,
-        Uint32 dwFlags,
-        Pointer<Utf16> pszPath,
-      ),
-      int Function(
-        int hwnd,
-        int csidl,
-        int hToken,
-        int dwFlags,
-        Pointer<Utf16> pszPath,
-      )
-    >('SHGetFolderPathW');
+);
 
 /// Retrieves the full path of a known folder identified by the folder's
 /// KNOWNFOLDERID.
 ///
-/// ```c
-/// HRESULT SHGetKnownFolderPath(
-///   REFKNOWNFOLDERID rfid,
-///   DWORD            dwFlags,
-///   HANDLE           hToken,
-///   PWSTR            *ppszPath
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shgetknownfolderpath>.
+///
 /// {@category shell32}
-int SHGetKnownFolderPath(
+PWSTR SHGetKnownFolderPath(
+  Pointer<GUID> rfid,
+  KNOWN_FOLDER_FLAG dwFlags,
+  int? hToken,
+) {
+  final ppszPath = loggingCalloc<PWSTR>();
+  final hr$ = HRESULT(
+    _SHGetKnownFolderPath(rfid, dwFlags, hToken ?? NULL, ppszPath),
+  );
+  if (hr$.isError) {
+    free(ppszPath);
+    throw WindowsException(hr$);
+  }
+  final result$ = ppszPath.value;
+  free(ppszPath);
+  return result$;
+}
+
+@Native<Int32 Function(Pointer<GUID>, Uint32, HANDLE, Pointer<PWSTR>)>(
+  symbol: 'SHGetKnownFolderPath',
+)
+external int _SHGetKnownFolderPath(
   Pointer<GUID> rfid,
   int dwFlags,
   int hToken,
-  Pointer<Pointer<Utf16>> ppszPath,
-) => _SHGetKnownFolderPath(rfid, dwFlags, hToken, ppszPath);
-
-final _SHGetKnownFolderPath = _shell32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<GUID> rfid,
-        Int32 dwFlags,
-        IntPtr hToken,
-        Pointer<Pointer<Utf16>> ppszPath,
-      ),
-      int Function(
-        Pointer<GUID> rfid,
-        int dwFlags,
-        int hToken,
-        Pointer<Pointer<Utf16>> ppszPath,
-      )
-    >('SHGetKnownFolderPath');
+  Pointer<PWSTR> ppszPath,
+);
 
 /// Retrieves the localized name of a file in a Shell folder.
 ///
-/// ```c
-/// SHSTDAPI SHGetLocalizedName(
-///   [in]  PCWSTR pszPath,
-///   [out] PWSTR  pszResModule,
-///         UINT   cch,
-///   [out] int    *pidsRes
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-shgetlocalizedname>.
+///
 /// {@category shell32}
-int SHGetLocalizedName(
-  Pointer<Utf16> pszPath,
-  Pointer<Utf16> pszResModule,
+@pragma('vm:prefer-inline')
+void SHGetLocalizedName(
+  PCWSTR pszPath,
+  PWSTR pszResModule,
   int cch,
   Pointer<Int32> pidsRes,
-) => _SHGetLocalizedName(pszPath, pszResModule, cch, pidsRes);
+) {
+  final hr$ = HRESULT(_SHGetLocalizedName(pszPath, pszResModule, cch, pidsRes));
+  if (hr$.isError) throw WindowsException(hr$);
+}
 
-final _SHGetLocalizedName = _shell32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Utf16> pszPath,
-        Pointer<Utf16> pszResModule,
-        Uint32 cch,
-        Pointer<Int32> pidsRes,
-      ),
-      int Function(
-        Pointer<Utf16> pszPath,
-        Pointer<Utf16> pszResModule,
-        int cch,
-        Pointer<Int32> pidsRes,
-      )
-    >('SHGetLocalizedName');
+@Native<Int32 Function(PCWSTR, PWSTR, Uint32, Pointer<Int32>)>(
+  symbol: 'SHGetLocalizedName',
+)
+external int _SHGetLocalizedName(
+  PCWSTR pszPath,
+  PWSTR pszResModule,
+  int cch,
+  Pointer<Int32> pidsRes,
+);
 
-/// Retrieves the size of the Recycle Bin and the number of items in it, for
-/// a specified drive.
+/// Converts an item identifier list to a file system path.
 ///
-/// ```c
-/// SHSTDAPI SHQueryRecycleBinW(
-///   LPCWSTR         pszRootPath,
-///   LPSHQUERYRBINFO pSHQueryRBInfo
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shgetpathfromidlistw>.
+///
 /// {@category shell32}
-int SHQueryRecycleBin(
-  Pointer<Utf16> pszRootPath,
-  Pointer<SHQUERYRBINFO> pSHQueryRBInfo,
-) => _SHQueryRecycleBin(pszRootPath, pSHQueryRBInfo);
+@pragma('vm:prefer-inline')
+bool SHGetPathFromIDList(Pointer<ITEMIDLIST> pidl, PWSTR pszPath) =>
+    _SHGetPathFromIDList(pidl, pszPath) != FALSE;
 
-final _SHQueryRecycleBin = _shell32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Utf16> pszRootPath,
-        Pointer<SHQUERYRBINFO> pSHQueryRBInfo,
-      ),
-      int Function(
-        Pointer<Utf16> pszRootPath,
-        Pointer<SHQUERYRBINFO> pSHQueryRBInfo,
-      )
-    >('SHQueryRecycleBinW');
+@Native<BOOL Function(Pointer<ITEMIDLIST>, PWSTR)>(
+  symbol: 'SHGetPathFromIDListW',
+)
+external int _SHGetPathFromIDList(Pointer<ITEMIDLIST> pidl, PWSTR pszPath);
+
+/// Retrieves the size of the Recycle Bin and the number of items in it, for a
+/// specified drive.
+///
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-shqueryrecyclebinw>.
+///
+/// {@category shell32}
+@pragma('vm:prefer-inline')
+void SHQueryRecycleBin(
+  PCWSTR? pszRootPath,
+  Pointer<SHQUERYRBINFO> pSHQueryRBInfo,
+) {
+  final hr$ = HRESULT(
+    _SHQueryRecycleBin(pszRootPath ?? nullptr, pSHQueryRBInfo),
+  );
+  if (hr$.isError) throw WindowsException(hr$);
+}
+
+@Native<Int32 Function(PCWSTR, Pointer<SHQUERYRBINFO>)>(
+  symbol: 'SHQueryRecycleBinW',
+)
+external int _SHQueryRecycleBin(
+  PCWSTR pszRootPath,
+  Pointer<SHQUERYRBINFO> pSHQueryRBInfo,
+);

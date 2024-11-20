@@ -1,157 +1,157 @@
-// Maps FFI prototypes onto the corresponding Win32 API function calls
-
+// Maps FFI prototypes onto the corresponding Win32 API function calls.
+//
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-
-// ignore_for_file: unused_import, non_constant_identifier_names
-// ignore_for_file: constant_identifier_names, camel_case_types
-// ignore_for_file: specify_nonobvious_property_types
+//
+// ignore_for_file: avoid_positional_boolean_parameters
+// ignore_for_file: non_constant_identifier_names, unused_import
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../callbacks.dart';
-import '../combase.dart';
+import '../_internal/wlanapi.g.dart';
+import '../allocator.dart';
+import '../bstr.dart';
+import '../callbacks.g.dart';
+import '../com/interface.g.dart';
+import '../com/iunknown.g.dart';
+import '../constants.dart';
+import '../constants.g.dart';
+import '../enums.g.dart';
+import '../exception.dart';
+import '../extensions/pointer.dart';
 import '../guid.dart';
+import '../hresult.dart';
+import '../hstring.dart';
+import '../macros.dart';
+import '../ntstatus.dart';
+import '../pcstr.dart';
+import '../pcwstr.dart';
+import '../pstr.dart';
+import '../pwstr.dart';
 import '../structs.g.dart';
-import '../variant.dart';
+import '../types.dart';
+import '../utils.dart';
 
-final _wlanapi = DynamicLibrary.open('wlanapi.dll');
-
-/// The WlanAllocateMemory function allocates memory. Any memory passed to
-/// other Native Wifi functions must be allocated with this function.
+/// Allocates memory.
 ///
-/// ```c
-/// PVOID WlanAllocateMemory(
-///   DWORD dwMemorySize
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlanallocatememory>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 Pointer WlanAllocateMemory(int dwMemorySize) =>
-    _WlanAllocateMemory(dwMemorySize);
+    WlanAllocateMemory_Wrapper(dwMemorySize);
 
-final _WlanAllocateMemory = _wlanapi
-    .lookupFunction<
-      Pointer Function(Uint32 dwMemorySize),
-      Pointer Function(int dwMemorySize)
-    >('WlanAllocateMemory');
-
-/// The WlanCloseHandle function closes a connection to the server.
+/// Closes a connection to the server.
 ///
-/// ```c
-/// DWORD WlanCloseHandle(
-///   HANDLE hClientHandle,
-///   PVOID  pReserved
-/// );
-/// ```
-/// {@category wlanapi}
-int WlanCloseHandle(int hClientHandle, Pointer pReserved) =>
-    _WlanCloseHandle(hClientHandle, pReserved);
-
-final _WlanCloseHandle = _wlanapi
-    .lookupFunction<
-      Uint32 Function(IntPtr hClientHandle, Pointer pReserved),
-      int Function(int hClientHandle, Pointer pReserved)
-    >('WlanCloseHandle');
-
-/// The WlanConnect function attempts to connect to a specific network.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlanclosehandle>.
 ///
-/// ```c
-/// DWORD WlanConnect(
-///   HANDLE                            hClientHandle,
-///   const GUID                        *pInterfaceGuid,
-///   const PWLAN_CONNECTION_PARAMETERS pConnectionParameters,
-///   PVOID                             pReserved
-/// );
-/// ```
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
+int WlanCloseHandle(int hClientHandle) =>
+    _WlanCloseHandle(hClientHandle, nullptr);
+
+@Native<Uint32 Function(HANDLE, Pointer)>(symbol: 'WlanCloseHandle')
+external int _WlanCloseHandle(int hClientHandle, Pointer pReserved);
+
+/// Attempts to connect to a specific network.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlanconnect>.
+///
+/// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanConnect(
   int hClientHandle,
   Pointer<GUID> pInterfaceGuid,
   Pointer<WLAN_CONNECTION_PARAMETERS> pConnectionParameters,
+) =>
+    _WlanConnect(hClientHandle, pInterfaceGuid, pConnectionParameters, nullptr);
+
+@Native<
+  Uint32 Function(
+    HANDLE,
+    Pointer<GUID>,
+    Pointer<WLAN_CONNECTION_PARAMETERS>,
+    Pointer,
+  )
+>(symbol: 'WlanConnect')
+external int _WlanConnect(
+  int hClientHandle,
+  Pointer<GUID> pInterfaceGuid,
+  Pointer<WLAN_CONNECTION_PARAMETERS> pConnectionParameters,
   Pointer pReserved,
-) => _WlanConnect(
-  hClientHandle,
-  pInterfaceGuid,
-  pConnectionParameters,
-  pReserved,
 );
 
-final _WlanConnect = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Pointer<WLAN_CONNECTION_PARAMETERS> pConnectionParameters,
-        Pointer pReserved,
-      ),
-      int Function(
-        int hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Pointer<WLAN_CONNECTION_PARAMETERS> pConnectionParameters,
-        Pointer pReserved,
-      )
-    >('WlanConnect');
-
-/// The WlanDeleteProfile function deletes a wireless profile for a wireless
-/// interface on the local computer.
+/// Deletes a wireless profile for a wireless interface on the local computer.
 ///
-/// ```c
-/// DWORD WlanDeleteProfile(
-///   HANDLE     hClientHandle,
-///   const GUID *pInterfaceGuid,
-///   LPCWSTR    strProfileName,
-///   PVOID      pReserved
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlandeleteprofile>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanDeleteProfile(
   int hClientHandle,
   Pointer<GUID> pInterfaceGuid,
-  Pointer<Utf16> strProfileName,
+  PCWSTR strProfileName,
+) => _WlanDeleteProfile(hClientHandle, pInterfaceGuid, strProfileName, nullptr);
+
+@Native<Uint32 Function(HANDLE, Pointer<GUID>, PCWSTR, Pointer)>(
+  symbol: 'WlanDeleteProfile',
+)
+external int _WlanDeleteProfile(
+  int hClientHandle,
+  Pointer<GUID> pInterfaceGuid,
+  PCWSTR strProfileName,
   Pointer pReserved,
-) => _WlanDeleteProfile(
-  hClientHandle,
-  pInterfaceGuid,
-  strProfileName,
-  pReserved,
 );
 
-final _WlanDeleteProfile = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Pointer<Utf16> strProfileName,
-        Pointer pReserved,
-      ),
-      int Function(
-        int hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Pointer<Utf16> strProfileName,
-        Pointer pReserved,
-      )
-    >('WlanDeleteProfile');
-
-/// Allows an original equipment manufacturer (OEM) or independent hardware
-/// vendor (IHV) component to communicate with a device service on a
+/// Allows an OEM or IHV component to communicate with a device service on a
 /// particular wireless LAN interface.
 ///
-/// ```c
-/// DWORD WlanDeviceServiceCommand(
-///   HANDLE     hClientHandle,
-///   const GUID *pInterfaceGuid,
-///   LPGUID     pDeviceServiceGuid,
-///   DWORD      dwOpCode,
-///   DWORD      dwInBufferSize,
-///   PVOID      pInBuffer,
-///   DWORD      dwOutBufferSize,
-///   PVOID      pOutBuffer,
-///   PDWORD     pdwBytesReturned
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlandeviceservicecommand>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanDeviceServiceCommand(
+  int hClientHandle,
+  Pointer<GUID> pInterfaceGuid,
+  Pointer<GUID> pDeviceServiceGuid,
+  int dwOpCode,
+  int dwInBufferSize,
+  Pointer? pInBuffer,
+  int dwOutBufferSize,
+  Pointer? pOutBuffer,
+  Pointer<Uint32> pdwBytesReturned,
+) => _WlanDeviceServiceCommand(
+  hClientHandle,
+  pInterfaceGuid,
+  pDeviceServiceGuid,
+  dwOpCode,
+  dwInBufferSize,
+  pInBuffer ?? nullptr,
+  dwOutBufferSize,
+  pOutBuffer ?? nullptr,
+  pdwBytesReturned,
+);
+
+@Native<
+  Uint32 Function(
+    HANDLE,
+    Pointer<GUID>,
+    Pointer<GUID>,
+    Uint32,
+    Uint32,
+    Pointer,
+    Uint32,
+    Pointer,
+    Pointer<Uint32>,
+  )
+>(symbol: 'WlanDeviceServiceCommand')
+external int _WlanDeviceServiceCommand(
   int hClientHandle,
   Pointer<GUID> pInterfaceGuid,
   Pointer<GUID> pDeviceServiceGuid,
@@ -161,316 +161,238 @@ int WlanDeviceServiceCommand(
   int dwOutBufferSize,
   Pointer pOutBuffer,
   Pointer<Uint32> pdwBytesReturned,
-) => _WlanDeviceServiceCommand(
-  hClientHandle,
-  pInterfaceGuid,
-  pDeviceServiceGuid,
-  dwOpCode,
-  dwInBufferSize,
-  pInBuffer,
-  dwOutBufferSize,
-  pOutBuffer,
-  pdwBytesReturned,
 );
 
-final _WlanDeviceServiceCommand = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Pointer<GUID> pDeviceServiceGuid,
-        Uint32 dwOpCode,
-        Uint32 dwInBufferSize,
-        Pointer pInBuffer,
-        Uint32 dwOutBufferSize,
-        Pointer pOutBuffer,
-        Pointer<Uint32> pdwBytesReturned,
-      ),
-      int Function(
-        int hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Pointer<GUID> pDeviceServiceGuid,
-        int dwOpCode,
-        int dwInBufferSize,
-        Pointer pInBuffer,
-        int dwOutBufferSize,
-        Pointer pOutBuffer,
-        Pointer<Uint32> pdwBytesReturned,
-      )
-    >('WlanDeviceServiceCommand');
-
-/// The WlanDisconnect function disconnects an interface from its current
-/// network.
+/// Disconnects an interface from its current network.
 ///
-/// ```c
-/// DWORD WlanDisconnect(
-///   HANDLE     hClientHandle,
-///   const GUID *pInterfaceGuid,
-///   PVOID      pReserved
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlandisconnect>.
+///
 /// {@category wlanapi}
-int WlanDisconnect(
+@pragma('vm:prefer-inline')
+int WlanDisconnect(int hClientHandle, Pointer<GUID> pInterfaceGuid) =>
+    _WlanDisconnect(hClientHandle, pInterfaceGuid, nullptr);
+
+@Native<Uint32 Function(HANDLE, Pointer<GUID>, Pointer)>(
+  symbol: 'WlanDisconnect',
+)
+external int _WlanDisconnect(
   int hClientHandle,
   Pointer<GUID> pInterfaceGuid,
   Pointer pReserved,
-) => _WlanDisconnect(hClientHandle, pInterfaceGuid, pReserved);
+);
 
-final _WlanDisconnect = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Pointer pReserved,
-      ),
-      int Function(
-        int hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Pointer pReserved,
-      )
-    >('WlanDisconnect');
-
-/// The WlanEnumInterfaces function enumerates all of the wireless LAN
-/// interfaces currently enabled on the local computer.
+/// Enumerates all of the wireless LAN interfaces currently enabled on the local
+/// computer.
 ///
-/// ```c
-/// DWORD WlanEnumInterfaces(
-///   HANDLE                    hClientHandle,
-///   PVOID                     pReserved,
-///   PWLAN_INTERFACE_INFO_LIST *ppInterfaceList
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlanenuminterfaces>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanEnumInterfaces(
+  int hClientHandle,
+  Pointer<Pointer<WLAN_INTERFACE_INFO_LIST>> ppInterfaceList,
+) => _WlanEnumInterfaces(hClientHandle, nullptr, ppInterfaceList);
+
+@Native<
+  Uint32 Function(HANDLE, Pointer, Pointer<Pointer<WLAN_INTERFACE_INFO_LIST>>)
+>(symbol: 'WlanEnumInterfaces')
+external int _WlanEnumInterfaces(
   int hClientHandle,
   Pointer pReserved,
   Pointer<Pointer<WLAN_INTERFACE_INFO_LIST>> ppInterfaceList,
-) => _WlanEnumInterfaces(hClientHandle, pReserved, ppInterfaceList);
+);
 
-final _WlanEnumInterfaces = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Pointer pReserved,
-        Pointer<Pointer<WLAN_INTERFACE_INFO_LIST>> ppInterfaceList,
-      ),
-      int Function(
-        int hClientHandle,
-        Pointer pReserved,
-        Pointer<Pointer<WLAN_INTERFACE_INFO_LIST>> ppInterfaceList,
-      )
-    >('WlanEnumInterfaces');
-
-/// The WlanExtractPsdIEDataList function extracts the proximity service
-/// discovery (PSD) information element (IE) data list from raw IE data
-/// included in a beacon.
+/// Extracts the proximity service discovery (PSD) information element (IE) data
+/// list from raw IE data included in a beacon.
 ///
-/// ```c
-/// DWORD WlanExtractPsdIEDataList(
-///   HANDLE              hClientHandle,
-///   DWORD               dwIeDataSize,
-///   const PBYTE         pRawIeData,
-///   LPCWSTR             strFormat,
-///   PVOID               pReserved,
-///   PWLAN_RAW_DATA_LIST *ppPsdIEDataList
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlanextractpsdiedatalist>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanExtractPsdIEDataList(
   int hClientHandle,
   int dwIeDataSize,
   Pointer<Uint8> pRawIeData,
-  Pointer<Utf16> strFormat,
-  Pointer pReserved,
+  PCWSTR strFormat,
   Pointer<Pointer<WLAN_RAW_DATA_LIST>> ppPsdIEDataList,
 ) => _WlanExtractPsdIEDataList(
   hClientHandle,
   dwIeDataSize,
   pRawIeData,
   strFormat,
-  pReserved,
+  nullptr,
   ppPsdIEDataList,
 );
 
-final _WlanExtractPsdIEDataList = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Uint32 dwIeDataSize,
-        Pointer<Uint8> pRawIeData,
-        Pointer<Utf16> strFormat,
-        Pointer pReserved,
-        Pointer<Pointer<WLAN_RAW_DATA_LIST>> ppPsdIEDataList,
-      ),
-      int Function(
-        int hClientHandle,
-        int dwIeDataSize,
-        Pointer<Uint8> pRawIeData,
-        Pointer<Utf16> strFormat,
-        Pointer pReserved,
-        Pointer<Pointer<WLAN_RAW_DATA_LIST>> ppPsdIEDataList,
-      )
-    >('WlanExtractPsdIEDataList');
+@Native<
+  Uint32 Function(
+    HANDLE,
+    Uint32,
+    Pointer<Uint8>,
+    PCWSTR,
+    Pointer,
+    Pointer<Pointer<WLAN_RAW_DATA_LIST>>,
+  )
+>(symbol: 'WlanExtractPsdIEDataList')
+external int _WlanExtractPsdIEDataList(
+  int hClientHandle,
+  int dwIeDataSize,
+  Pointer<Uint8> pRawIeData,
+  PCWSTR strFormat,
+  Pointer pReserved,
+  Pointer<Pointer<WLAN_RAW_DATA_LIST>> ppPsdIEDataList,
+);
 
-/// The WlanFreeMemory function frees memory. Any memory returned from
-/// Native Wifi functions must be freed.
+/// Frees memory.
 ///
-/// ```c
-/// void WlanFreeMemory(
-///   PVOID pMemory
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlanfreememory>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 void WlanFreeMemory(Pointer pMemory) => _WlanFreeMemory(pMemory);
 
-final _WlanFreeMemory = _wlanapi
-    .lookupFunction<
-      Void Function(Pointer pMemory),
-      void Function(Pointer pMemory)
-    >('WlanFreeMemory');
+@Native<Void Function(Pointer)>(symbol: 'WlanFreeMemory')
+external void _WlanFreeMemory(Pointer pMemory);
 
-/// The WlanGetAvailableNetworkList function retrieves the list of available
-/// networks on a wireless LAN interface.
+/// Retrieves the list of available networks on a wireless LAN interface.
 ///
-/// ```c
-/// DWORD WlanGetAvailableNetworkList(
-///   HANDLE                       hClientHandle,
-///   const GUID                   *pInterfaceGuid,
-///   DWORD                        dwFlags,
-///   PVOID                        pReserved,
-///   PWLAN_AVAILABLE_NETWORK_LIST *ppAvailableNetworkList
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlangetavailablenetworklist>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanGetAvailableNetworkList(
   int hClientHandle,
   Pointer<GUID> pInterfaceGuid,
   int dwFlags,
-  Pointer pReserved,
   Pointer<Pointer<WLAN_AVAILABLE_NETWORK_LIST>> ppAvailableNetworkList,
 ) => _WlanGetAvailableNetworkList(
   hClientHandle,
   pInterfaceGuid,
   dwFlags,
-  pReserved,
+  nullptr,
   ppAvailableNetworkList,
 );
 
-final _WlanGetAvailableNetworkList = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Uint32 dwFlags,
-        Pointer pReserved,
-        Pointer<Pointer<WLAN_AVAILABLE_NETWORK_LIST>> ppAvailableNetworkList,
-      ),
-      int Function(
-        int hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        int dwFlags,
-        Pointer pReserved,
-        Pointer<Pointer<WLAN_AVAILABLE_NETWORK_LIST>> ppAvailableNetworkList,
-      )
-    >('WlanGetAvailableNetworkList');
+@Native<
+  Uint32 Function(
+    HANDLE,
+    Pointer<GUID>,
+    Uint32,
+    Pointer,
+    Pointer<Pointer<WLAN_AVAILABLE_NETWORK_LIST>>,
+  )
+>(symbol: 'WlanGetAvailableNetworkList')
+external int _WlanGetAvailableNetworkList(
+  int hClientHandle,
+  Pointer<GUID> pInterfaceGuid,
+  int dwFlags,
+  Pointer pReserved,
+  Pointer<Pointer<WLAN_AVAILABLE_NETWORK_LIST>> ppAvailableNetworkList,
+);
 
-/// The WlanGetFilterList function retrieves a group policy or user
-/// permission list.
+/// Retrieves a group policy or user permission list.
 ///
-/// ```c
-/// DWORD WlanGetFilterList(
-///   HANDLE                hClientHandle,
-///   WLAN_FILTER_LIST_TYPE wlanFilterListType,
-///   PVOID                 pReserved,
-///   PDOT11_NETWORK_LIST   *ppNetworkList
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlangetfilterlist>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanGetFilterList(
   int hClientHandle,
-  int wlanFilterListType,
-  Pointer pReserved,
+  WLAN_FILTER_LIST_TYPE wlanFilterListType,
   Pointer<Pointer<DOT11_NETWORK_LIST>> ppNetworkList,
 ) => _WlanGetFilterList(
   hClientHandle,
   wlanFilterListType,
-  pReserved,
+  nullptr,
   ppNetworkList,
 );
 
-final _WlanGetFilterList = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Int32 wlanFilterListType,
-        Pointer pReserved,
-        Pointer<Pointer<DOT11_NETWORK_LIST>> ppNetworkList,
-      ),
-      int Function(
-        int hClientHandle,
-        int wlanFilterListType,
-        Pointer pReserved,
-        Pointer<Pointer<DOT11_NETWORK_LIST>> ppNetworkList,
-      )
-    >('WlanGetFilterList');
+@Native<
+  Uint32 Function(HANDLE, Int32, Pointer, Pointer<Pointer<DOT11_NETWORK_LIST>>)
+>(symbol: 'WlanGetFilterList')
+external int _WlanGetFilterList(
+  int hClientHandle,
+  int wlanFilterListType,
+  Pointer pReserved,
+  Pointer<Pointer<DOT11_NETWORK_LIST>> ppNetworkList,
+);
 
-/// The WlanGetInterfaceCapability function retrieves the capabilities of an
-/// interface.
+/// Retrieves the capabilities of an interface.
 ///
-/// ```c
-/// DWORD WlanGetInterfaceCapability(
-///   HANDLE                     hClientHandle,
-///   const GUID                 *pInterfaceGuid,
-///   PVOID                      pReserved,
-///   PWLAN_INTERFACE_CAPABILITY *ppCapability
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlangetinterfacecapability>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanGetInterfaceCapability(
   int hClientHandle,
   Pointer<GUID> pInterfaceGuid,
-  Pointer pReserved,
   Pointer<Pointer<WLAN_INTERFACE_CAPABILITY>> ppCapability,
 ) => _WlanGetInterfaceCapability(
   hClientHandle,
   pInterfaceGuid,
-  pReserved,
+  nullptr,
   ppCapability,
 );
 
-final _WlanGetInterfaceCapability = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Pointer pReserved,
-        Pointer<Pointer<WLAN_INTERFACE_CAPABILITY>> ppCapability,
-      ),
-      int Function(
-        int hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Pointer pReserved,
-        Pointer<Pointer<WLAN_INTERFACE_CAPABILITY>> ppCapability,
-      )
-    >('WlanGetInterfaceCapability');
+@Native<
+  Uint32 Function(
+    HANDLE,
+    Pointer<GUID>,
+    Pointer,
+    Pointer<Pointer<WLAN_INTERFACE_CAPABILITY>>,
+  )
+>(symbol: 'WlanGetInterfaceCapability')
+external int _WlanGetInterfaceCapability(
+  int hClientHandle,
+  Pointer<GUID> pInterfaceGuid,
+  Pointer pReserved,
+  Pointer<Pointer<WLAN_INTERFACE_CAPABILITY>> ppCapability,
+);
 
-/// The WlanGetNetworkBssList function retrieves a list of the basic service
-/// set (BSS) entries of the wireless network or networks on a given
-/// wireless LAN interface.
+/// Retrieves a list of the basic service set (BSS) entries of the wireless
+/// network or networks on a given wireless LAN interface.
 ///
-/// ```c
-/// DWORD WlanGetNetworkBssList(
-///   HANDLE            hClientHandle,
-///   const GUID        *pInterfaceGuid,
-///   const PDOT11_SSID pDot11Ssid,
-///   DOT11_BSS_TYPE    dot11BssType,
-///   BOOL              bSecurityEnabled,
-///   PVOID             pReserved,
-///   PWLAN_BSS_LIST    *ppWlanBssList
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlangetnetworkbsslist>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanGetNetworkBssList(
+  int hClientHandle,
+  Pointer<GUID> pInterfaceGuid,
+  Pointer<DOT11_SSID>? pDot11Ssid,
+  DOT11_BSS_TYPE dot11BssType,
+  bool bSecurityEnabled,
+  Pointer<Pointer<WLAN_BSS_LIST>> ppWlanBssList,
+) => _WlanGetNetworkBssList(
+  hClientHandle,
+  pInterfaceGuid,
+  pDot11Ssid ?? nullptr,
+  dot11BssType,
+  bSecurityEnabled ? TRUE : FALSE,
+  nullptr,
+  ppWlanBssList,
+);
+
+@Native<
+  Uint32 Function(
+    HANDLE,
+    Pointer<GUID>,
+    Pointer<DOT11_SSID>,
+    Int32,
+    BOOL,
+    Pointer,
+    Pointer<Pointer<WLAN_BSS_LIST>>,
+  )
+>(symbol: 'WlanGetNetworkBssList')
+external int _WlanGetNetworkBssList(
   int hClientHandle,
   Pointer<GUID> pInterfaceGuid,
   Pointer<DOT11_SSID> pDot11Ssid,
@@ -478,239 +400,168 @@ int WlanGetNetworkBssList(
   int bSecurityEnabled,
   Pointer pReserved,
   Pointer<Pointer<WLAN_BSS_LIST>> ppWlanBssList,
-) => _WlanGetNetworkBssList(
-  hClientHandle,
-  pInterfaceGuid,
-  pDot11Ssid,
-  dot11BssType,
-  bSecurityEnabled,
-  pReserved,
-  ppWlanBssList,
 );
 
-final _WlanGetNetworkBssList = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Pointer<DOT11_SSID> pDot11Ssid,
-        Int32 dot11BssType,
-        Int32 bSecurityEnabled,
-        Pointer pReserved,
-        Pointer<Pointer<WLAN_BSS_LIST>> ppWlanBssList,
-      ),
-      int Function(
-        int hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Pointer<DOT11_SSID> pDot11Ssid,
-        int dot11BssType,
-        int bSecurityEnabled,
-        Pointer pReserved,
-        Pointer<Pointer<WLAN_BSS_LIST>> ppWlanBssList,
-      )
-    >('WlanGetNetworkBssList');
-
-/// The WlanGetProfile function retrieves all information about a specified
-/// wireless profile.
+/// Retrieves all information about a specified wireless profile.
 ///
-/// ```c
-/// DWORD WlanGetProfile(
-///   HANDLE     hClientHandle,
-///   const GUID *pInterfaceGuid,
-///   LPCWSTR    strProfileName,
-///   PVOID      pReserved,
-///   LPWSTR     *pstrProfileXml,
-///   DWORD      *pdwFlags,
-///   DWORD      *pdwGrantedAccess
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlangetprofile>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanGetProfile(
   int hClientHandle,
   Pointer<GUID> pInterfaceGuid,
-  Pointer<Utf16> strProfileName,
-  Pointer pReserved,
-  Pointer<Pointer<Utf16>> pstrProfileXml,
-  Pointer<Uint32> pdwFlags,
-  Pointer<Uint32> pdwGrantedAccess,
+  PCWSTR strProfileName,
+  Pointer<PWSTR> pstrProfileXml,
+  Pointer<Uint32>? pdwFlags,
+  Pointer<Uint32>? pdwGrantedAccess,
 ) => _WlanGetProfile(
   hClientHandle,
   pInterfaceGuid,
   strProfileName,
-  pReserved,
+  nullptr,
   pstrProfileXml,
-  pdwFlags,
-  pdwGrantedAccess,
+  pdwFlags ?? nullptr,
+  pdwGrantedAccess ?? nullptr,
 );
 
-final _WlanGetProfile = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Pointer<Utf16> strProfileName,
-        Pointer pReserved,
-        Pointer<Pointer<Utf16>> pstrProfileXml,
-        Pointer<Uint32> pdwFlags,
-        Pointer<Uint32> pdwGrantedAccess,
-      ),
-      int Function(
-        int hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Pointer<Utf16> strProfileName,
-        Pointer pReserved,
-        Pointer<Pointer<Utf16>> pstrProfileXml,
-        Pointer<Uint32> pdwFlags,
-        Pointer<Uint32> pdwGrantedAccess,
-      )
-    >('WlanGetProfile');
+@Native<
+  Uint32 Function(
+    HANDLE,
+    Pointer<GUID>,
+    PCWSTR,
+    Pointer,
+    Pointer<PWSTR>,
+    Pointer<Uint32>,
+    Pointer<Uint32>,
+  )
+>(symbol: 'WlanGetProfile')
+external int _WlanGetProfile(
+  int hClientHandle,
+  Pointer<GUID> pInterfaceGuid,
+  PCWSTR strProfileName,
+  Pointer pReserved,
+  Pointer<PWSTR> pstrProfileXml,
+  Pointer<Uint32> pdwFlags,
+  Pointer<Uint32> pdwGrantedAccess,
+);
 
-/// The WlanGetProfileCustomUserData function gets the custom user data
-/// associated with a wireless profile.
+/// Gets the custom user data associated with a wireless profile.
 ///
-/// ```c
-/// DWORD WlanGetProfileCustomUserData(
-///   HANDLE     hClientHandle,
-///   const GUID *pInterfaceGuid,
-///   LPCWSTR    strProfileName,
-///   PVOID      pReserved,
-///   DWORD      *pdwDataSize,
-///   PBYTE      *ppData
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlangetprofilecustomuserdata>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanGetProfileCustomUserData(
   int hClientHandle,
   Pointer<GUID> pInterfaceGuid,
-  Pointer<Utf16> strProfileName,
-  Pointer pReserved,
+  PCWSTR strProfileName,
   Pointer<Uint32> pdwDataSize,
   Pointer<Pointer<Uint8>> ppData,
 ) => _WlanGetProfileCustomUserData(
   hClientHandle,
   pInterfaceGuid,
   strProfileName,
-  pReserved,
+  nullptr,
   pdwDataSize,
   ppData,
 );
 
-final _WlanGetProfileCustomUserData = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Pointer<Utf16> strProfileName,
-        Pointer pReserved,
-        Pointer<Uint32> pdwDataSize,
-        Pointer<Pointer<Uint8>> ppData,
-      ),
-      int Function(
-        int hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Pointer<Utf16> strProfileName,
-        Pointer pReserved,
-        Pointer<Uint32> pdwDataSize,
-        Pointer<Pointer<Uint8>> ppData,
-      )
-    >('WlanGetProfileCustomUserData');
+@Native<
+  Uint32 Function(
+    HANDLE,
+    Pointer<GUID>,
+    PCWSTR,
+    Pointer,
+    Pointer<Uint32>,
+    Pointer<Pointer<Uint8>>,
+  )
+>(symbol: 'WlanGetProfileCustomUserData')
+external int _WlanGetProfileCustomUserData(
+  int hClientHandle,
+  Pointer<GUID> pInterfaceGuid,
+  PCWSTR strProfileName,
+  Pointer pReserved,
+  Pointer<Uint32> pdwDataSize,
+  Pointer<Pointer<Uint8>> ppData,
+);
 
-/// The WlanGetProfileList function retrieves the list of profiles in
-/// preference order.
+/// Retrieves the list of profiles.
 ///
-/// ```c
-/// DWORD WlanGetProfileList(
-///   HANDLE                  hClientHandle,
-///   const GUID              *pInterfaceGuid,
-///   PVOID                   pReserved,
-///   PWLAN_PROFILE_INFO_LIST *ppProfileList
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlangetprofilelist>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanGetProfileList(
+  int hClientHandle,
+  Pointer<GUID> pInterfaceGuid,
+  Pointer<Pointer<WLAN_PROFILE_INFO_LIST>> ppProfileList,
+) => _WlanGetProfileList(hClientHandle, pInterfaceGuid, nullptr, ppProfileList);
+
+@Native<
+  Uint32 Function(
+    HANDLE,
+    Pointer<GUID>,
+    Pointer,
+    Pointer<Pointer<WLAN_PROFILE_INFO_LIST>>,
+  )
+>(symbol: 'WlanGetProfileList')
+external int _WlanGetProfileList(
   int hClientHandle,
   Pointer<GUID> pInterfaceGuid,
   Pointer pReserved,
   Pointer<Pointer<WLAN_PROFILE_INFO_LIST>> ppProfileList,
-) => _WlanGetProfileList(
-  hClientHandle,
-  pInterfaceGuid,
-  pReserved,
-  ppProfileList,
 );
 
-final _WlanGetProfileList = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Pointer pReserved,
-        Pointer<Pointer<WLAN_PROFILE_INFO_LIST>> ppProfileList,
-      ),
-      int Function(
-        int hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Pointer pReserved,
-        Pointer<Pointer<WLAN_PROFILE_INFO_LIST>> ppProfileList,
-      )
-    >('WlanGetProfileList');
-
-/// The WlanGetSecuritySettings function gets the security settings
-/// associated with a configurable object.
+/// Gets the security settings associated with a configurable object.
 ///
-/// ```c
-/// DWORD WlanGetSecuritySettings(
-///   HANDLE                  hClientHandle,
-///   WLAN_SECURABLE_OBJECT   SecurableObject,
-///   PWLAN_OPCODE_VALUE_TYPE pValueType,
-///   LPWSTR                  *pstrCurrentSDDL,
-///   PDWORD                  pdwGrantedAccess
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlangetsecuritysettings>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanGetSecuritySettings(
   int hClientHandle,
-  int SecurableObject,
-  Pointer<Int32> pValueType,
-  Pointer<Pointer<Utf16>> pstrCurrentSDDL,
+  WLAN_SECURABLE_OBJECT securableObject,
+  Pointer<Int32>? pValueType,
+  Pointer<PWSTR> pstrCurrentSDDL,
   Pointer<Uint32> pdwGrantedAccess,
 ) => _WlanGetSecuritySettings(
   hClientHandle,
-  SecurableObject,
-  pValueType,
+  securableObject,
+  pValueType ?? nullptr,
   pstrCurrentSDDL,
   pdwGrantedAccess,
 );
 
-final _WlanGetSecuritySettings = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Int32 SecurableObject,
-        Pointer<Int32> pValueType,
-        Pointer<Pointer<Utf16>> pstrCurrentSDDL,
-        Pointer<Uint32> pdwGrantedAccess,
-      ),
-      int Function(
-        int hClientHandle,
-        int SecurableObject,
-        Pointer<Int32> pValueType,
-        Pointer<Pointer<Utf16>> pstrCurrentSDDL,
-        Pointer<Uint32> pdwGrantedAccess,
-      )
-    >('WlanGetSecuritySettings');
+@Native<
+  Uint32 Function(
+    HANDLE,
+    Int32,
+    Pointer<Int32>,
+    Pointer<PWSTR>,
+    Pointer<Uint32>,
+  )
+>(symbol: 'WlanGetSecuritySettings')
+external int _WlanGetSecuritySettings(
+  int hClientHandle,
+  int securableObject,
+  Pointer<Int32> pValueType,
+  Pointer<PWSTR> pstrCurrentSDDL,
+  Pointer<Uint32> pdwGrantedAccess,
+);
 
-/// Retrieves a list of the supported device services on a given wireless
-/// LAN interface.
+/// Retrieves a list of the supported device services on a given wireless LAN
+/// interface.
 ///
-/// ```c
-/// DWORD WlanGetSupportedDeviceServices(
-///   HANDLE                         hClientHandle,
-///   const GUID                     *pInterfaceGuid,
-///   PWLAN_DEVICE_SERVICE_GUID_LIST *ppDevSvcGuidList
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlangetsupporteddeviceservices>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanGetSupportedDeviceServices(
   int hClientHandle,
   Pointer<GUID> pInterfaceGuid,
@@ -721,360 +572,304 @@ int WlanGetSupportedDeviceServices(
   ppDevSvcGuidList,
 );
 
-final _WlanGetSupportedDeviceServices = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Pointer<Pointer<WLAN_DEVICE_SERVICE_GUID_LIST>> ppDevSvcGuidList,
-      ),
-      int Function(
-        int hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Pointer<Pointer<WLAN_DEVICE_SERVICE_GUID_LIST>> ppDevSvcGuidList,
-      )
-    >('WlanGetSupportedDeviceServices');
+@Native<
+  Uint32 Function(
+    HANDLE,
+    Pointer<GUID>,
+    Pointer<Pointer<WLAN_DEVICE_SERVICE_GUID_LIST>>,
+  )
+>(symbol: 'WlanGetSupportedDeviceServices')
+external int _WlanGetSupportedDeviceServices(
+  int hClientHandle,
+  Pointer<GUID> pInterfaceGuid,
+  Pointer<Pointer<WLAN_DEVICE_SERVICE_GUID_LIST>> ppDevSvcGuidList,
+);
 
-/// The WlanHostedNetworkForceStart function transitions the wireless Hosted
-/// Network to the wlan_hosted_network_active state without associating the
-/// request with the application's calling handle.
+/// Transitions the wireless Hosted Network to the wlan_hosted_network_active
+/// state without associating the request with the application's calling handle.
 ///
-/// ```c
-/// DWORD WlanHostedNetworkForceStart(
-///   HANDLE                      hClientHandle,
-///   PWLAN_HOSTED_NETWORK_REASON pFailReason,
-///   PVOID                       pvReserved
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlanhostednetworkforcestart>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanHostedNetworkForceStart(
   int hClientHandle,
+  Pointer<Int32>? pFailReason,
+) => _WlanHostedNetworkForceStart(
+  hClientHandle,
+  pFailReason ?? nullptr,
+  nullptr,
+);
+
+@Native<Uint32 Function(HANDLE, Pointer<Int32>, Pointer)>(
+  symbol: 'WlanHostedNetworkForceStart',
+)
+external int _WlanHostedNetworkForceStart(
+  int hClientHandle,
   Pointer<Int32> pFailReason,
   Pointer pvReserved,
-) => _WlanHostedNetworkForceStart(hClientHandle, pFailReason, pvReserved);
+);
 
-final _WlanHostedNetworkForceStart = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Pointer<Int32> pFailReason,
-        Pointer pvReserved,
-      ),
-      int Function(
-        int hClientHandle,
-        Pointer<Int32> pFailReason,
-        Pointer pvReserved,
-      )
-    >('WlanHostedNetworkForceStart');
-
-/// The WlanHostedNetworkForceStop function transitions the wireless Hosted
-/// Network to the wlan_hosted_network_idle without associating the request
-/// with the application's calling handle.
+/// Transitions the wireless Hosted Network to the wlan_hosted_network_idle
+/// without associating the request with the application's calling handle.
 ///
-/// ```c
-/// DWORD WlanHostedNetworkForceStop(
-///   HANDLE                      hClientHandle,
-///   PWLAN_HOSTED_NETWORK_REASON pFailReason,
-///   PVOID                       pvReserved
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlanhostednetworkforcestop>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanHostedNetworkForceStop(
   int hClientHandle,
+  Pointer<Int32>? pFailReason,
+) =>
+    _WlanHostedNetworkForceStop(hClientHandle, pFailReason ?? nullptr, nullptr);
+
+@Native<Uint32 Function(HANDLE, Pointer<Int32>, Pointer)>(
+  symbol: 'WlanHostedNetworkForceStop',
+)
+external int _WlanHostedNetworkForceStop(
+  int hClientHandle,
   Pointer<Int32> pFailReason,
   Pointer pvReserved,
-) => _WlanHostedNetworkForceStop(hClientHandle, pFailReason, pvReserved);
+);
 
-final _WlanHostedNetworkForceStop = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Pointer<Int32> pFailReason,
-        Pointer pvReserved,
-      ),
-      int Function(
-        int hClientHandle,
-        Pointer<Int32> pFailReason,
-        Pointer pvReserved,
-      )
-    >('WlanHostedNetworkForceStop');
-
-/// The WlanHostedNetworkInitSettings function configures and persists to
-/// storage the network connection settings (SSID and maximum number of
-/// peers, for example) on the wireless Hosted Network if these settings are
-/// not already configured.
+/// Configures and persists to storage the network connection settings (SSID and
+/// maximum number of peers, for example) on the wireless Hosted Network if
+/// these settings are not already configured.
 ///
-/// ```c
-/// DWORD WlanHostedNetworkInitSettings(
-///   HANDLE                      hClientHandle,
-///   PWLAN_HOSTED_NETWORK_REASON pFailReason,
-///   PVOID                       pvReserved
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlanhostednetworkinitsettings>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanHostedNetworkInitSettings(
   int hClientHandle,
+  Pointer<Int32>? pFailReason,
+) => _WlanHostedNetworkInitSettings(
+  hClientHandle,
+  pFailReason ?? nullptr,
+  nullptr,
+);
+
+@Native<Uint32 Function(HANDLE, Pointer<Int32>, Pointer)>(
+  symbol: 'WlanHostedNetworkInitSettings',
+)
+external int _WlanHostedNetworkInitSettings(
+  int hClientHandle,
   Pointer<Int32> pFailReason,
   Pointer pvReserved,
-) => _WlanHostedNetworkInitSettings(hClientHandle, pFailReason, pvReserved);
+);
 
-final _WlanHostedNetworkInitSettings = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Pointer<Int32> pFailReason,
-        Pointer pvReserved,
-      ),
-      int Function(
-        int hClientHandle,
-        Pointer<Int32> pFailReason,
-        Pointer pvReserved,
-      )
-    >('WlanHostedNetworkInitSettings');
-
-/// The WlanHostedNetworkQueryProperty function queries the current static
-/// properties of the wireless Hosted Network.
+/// Queries the current static properties of the wireless Hosted Network.
 ///
-/// ```c
-/// DWORD WlanHostedNetworkQueryProperty(
-///   HANDLE                     hClientHandle,
-///   WLAN_HOSTED_NETWORK_OPCODE OpCode,
-///   PDWORD                     pdwDataSize,
-///   PVOID                      *ppvData,
-///   PWLAN_OPCODE_VALUE_TYPE    pWlanOpcodeValueType,
-///   PVOID                      pvReserved
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlanhostednetworkqueryproperty>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanHostedNetworkQueryProperty(
   int hClientHandle,
-  int OpCode,
+  WLAN_HOSTED_NETWORK_OPCODE opCode,
+  Pointer<Uint32> pdwDataSize,
+  Pointer<Pointer> ppvData,
+  Pointer<Int32> pWlanOpcodeValueType,
+) => _WlanHostedNetworkQueryProperty(
+  hClientHandle,
+  opCode,
+  pdwDataSize,
+  ppvData,
+  pWlanOpcodeValueType,
+  nullptr,
+);
+
+@Native<
+  Uint32 Function(
+    HANDLE,
+    Int32,
+    Pointer<Uint32>,
+    Pointer<Pointer>,
+    Pointer<Int32>,
+    Pointer,
+  )
+>(symbol: 'WlanHostedNetworkQueryProperty')
+external int _WlanHostedNetworkQueryProperty(
+  int hClientHandle,
+  int opCode,
   Pointer<Uint32> pdwDataSize,
   Pointer<Pointer> ppvData,
   Pointer<Int32> pWlanOpcodeValueType,
   Pointer pvReserved,
-) => _WlanHostedNetworkQueryProperty(
-  hClientHandle,
-  OpCode,
-  pdwDataSize,
-  ppvData,
-  pWlanOpcodeValueType,
-  pvReserved,
 );
 
-final _WlanHostedNetworkQueryProperty = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Int32 OpCode,
-        Pointer<Uint32> pdwDataSize,
-        Pointer<Pointer> ppvData,
-        Pointer<Int32> pWlanOpcodeValueType,
-        Pointer pvReserved,
-      ),
-      int Function(
-        int hClientHandle,
-        int OpCode,
-        Pointer<Uint32> pdwDataSize,
-        Pointer<Pointer> ppvData,
-        Pointer<Int32> pWlanOpcodeValueType,
-        Pointer pvReserved,
-      )
-    >('WlanHostedNetworkQueryProperty');
-
-/// The WlanHostedNetworkQuerySecondaryKey function queries the secondary
-/// security key that is configured to be used by the wireless Hosted
-/// Network.
+/// Queries the secondary security key that is configured to be used by the
+/// wireless Hosted Network.
 ///
-/// ```c
-/// DWORD WlanHostedNetworkQuerySecondaryKey(
-///   HANDLE                      hClientHandle,
-///   PDWORD                      pdwKeyLength,
-///   PUCHAR                      *ppucKeyData,
-///   PBOOL                       pbIsPassPhrase,
-///   PBOOL                       pbPersistent,
-///   PWLAN_HOSTED_NETWORK_REASON pFailReason,
-///   PVOID                       pvReserved
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlanhostednetworkquerysecondarykey>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanHostedNetworkQuerySecondaryKey(
   int hClientHandle,
   Pointer<Uint32> pdwKeyLength,
   Pointer<Pointer<Uint8>> ppucKeyData,
-  Pointer<Int32> pbIsPassPhrase,
-  Pointer<Int32> pbPersistent,
-  Pointer<Int32> pFailReason,
-  Pointer pvReserved,
+  Pointer<BOOL> pbIsPassPhrase,
+  Pointer<BOOL> pbPersistent,
+  Pointer<Int32>? pFailReason,
 ) => _WlanHostedNetworkQuerySecondaryKey(
   hClientHandle,
   pdwKeyLength,
   ppucKeyData,
   pbIsPassPhrase,
   pbPersistent,
-  pFailReason,
-  pvReserved,
+  pFailReason ?? nullptr,
+  nullptr,
 );
 
-final _WlanHostedNetworkQuerySecondaryKey = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Pointer<Uint32> pdwKeyLength,
-        Pointer<Pointer<Uint8>> ppucKeyData,
-        Pointer<Int32> pbIsPassPhrase,
-        Pointer<Int32> pbPersistent,
-        Pointer<Int32> pFailReason,
-        Pointer pvReserved,
-      ),
-      int Function(
-        int hClientHandle,
-        Pointer<Uint32> pdwKeyLength,
-        Pointer<Pointer<Uint8>> ppucKeyData,
-        Pointer<Int32> pbIsPassPhrase,
-        Pointer<Int32> pbPersistent,
-        Pointer<Int32> pFailReason,
-        Pointer pvReserved,
-      )
-    >('WlanHostedNetworkQuerySecondaryKey');
+@Native<
+  Uint32 Function(
+    HANDLE,
+    Pointer<Uint32>,
+    Pointer<Pointer<Uint8>>,
+    Pointer<BOOL>,
+    Pointer<BOOL>,
+    Pointer<Int32>,
+    Pointer,
+  )
+>(symbol: 'WlanHostedNetworkQuerySecondaryKey')
+external int _WlanHostedNetworkQuerySecondaryKey(
+  int hClientHandle,
+  Pointer<Uint32> pdwKeyLength,
+  Pointer<Pointer<Uint8>> ppucKeyData,
+  Pointer<BOOL> pbIsPassPhrase,
+  Pointer<BOOL> pbPersistent,
+  Pointer<Int32> pFailReason,
+  Pointer pvReserved,
+);
 
-/// The WlanHostedNetworkQueryStatus function queries the current status of
-/// the wireless Hosted Network.
+/// Queries the current status of the wireless Hosted Network.
 ///
-/// ```c
-/// DWORD WlanHostedNetworkQueryStatus(
-///   HANDLE                      hClientHandle,
-///   PWLAN_HOSTED_NETWORK_STATUS *ppWlanHostedNetworkStatus,
-///   PVOID                       pvReserved
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlanhostednetworkquerystatus>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanHostedNetworkQueryStatus(
   int hClientHandle,
   Pointer<Pointer<WLAN_HOSTED_NETWORK_STATUS>> ppWlanHostedNetworkStatus,
-  Pointer pvReserved,
 ) => _WlanHostedNetworkQueryStatus(
   hClientHandle,
   ppWlanHostedNetworkStatus,
-  pvReserved,
+  nullptr,
 );
 
-final _WlanHostedNetworkQueryStatus = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Pointer<Pointer<WLAN_HOSTED_NETWORK_STATUS>> ppWlanHostedNetworkStatus,
-        Pointer pvReserved,
-      ),
-      int Function(
-        int hClientHandle,
-        Pointer<Pointer<WLAN_HOSTED_NETWORK_STATUS>> ppWlanHostedNetworkStatus,
-        Pointer pvReserved,
-      )
-    >('WlanHostedNetworkQueryStatus');
+@Native<
+  Uint32 Function(HANDLE, Pointer<Pointer<WLAN_HOSTED_NETWORK_STATUS>>, Pointer)
+>(symbol: 'WlanHostedNetworkQueryStatus')
+external int _WlanHostedNetworkQueryStatus(
+  int hClientHandle,
+  Pointer<Pointer<WLAN_HOSTED_NETWORK_STATUS>> ppWlanHostedNetworkStatus,
+  Pointer pvReserved,
+);
 
-/// The WlanHostedNetworkRefreshSecuritySettings function refreshes the
-/// configurable and auto-generated parts of the wireless Hosted Network
-/// security settings.
+/// Refreshes the configurable and auto-generated parts of the wireless Hosted
+/// Network security settings.
 ///
-/// ```c
-/// DWORD WlanHostedNetworkRefreshSecuritySettings(
-///   HANDLE                      hClientHandle,
-///   PWLAN_HOSTED_NETWORK_REASON pFailReason,
-///   PVOID                       pvReserved
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlanhostednetworkrefreshsecuritysettings>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanHostedNetworkRefreshSecuritySettings(
+  int hClientHandle,
+  Pointer<Int32>? pFailReason,
+) => _WlanHostedNetworkRefreshSecuritySettings(
+  hClientHandle,
+  pFailReason ?? nullptr,
+  nullptr,
+);
+
+@Native<Uint32 Function(HANDLE, Pointer<Int32>, Pointer)>(
+  symbol: 'WlanHostedNetworkRefreshSecuritySettings',
+)
+external int _WlanHostedNetworkRefreshSecuritySettings(
   int hClientHandle,
   Pointer<Int32> pFailReason,
   Pointer pvReserved,
-) => _WlanHostedNetworkRefreshSecuritySettings(
-  hClientHandle,
-  pFailReason,
-  pvReserved,
 );
 
-final _WlanHostedNetworkRefreshSecuritySettings = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Pointer<Int32> pFailReason,
-        Pointer pvReserved,
-      ),
-      int Function(
-        int hClientHandle,
-        Pointer<Int32> pFailReason,
-        Pointer pvReserved,
-      )
-    >('WlanHostedNetworkRefreshSecuritySettings');
-
-/// The WlanHostedNetworkSetProperty function sets static properties of the
-/// wireless Hosted Network.
+/// Sets static properties of the wireless Hosted Network.
 ///
-/// ```c
-/// DWORD WlanHostedNetworkSetProperty(
-///   HANDLE                      hClientHandle,
-///   WLAN_HOSTED_NETWORK_OPCODE  OpCode,
-///   DWORD                       dwDataSize,
-///   PVOID                       pvData,
-///   PWLAN_HOSTED_NETWORK_REASON pFailReason,
-///   PVOID                       pvReserved
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlanhostednetworksetproperty>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanHostedNetworkSetProperty(
   int hClientHandle,
-  int OpCode,
+  WLAN_HOSTED_NETWORK_OPCODE opCode,
+  int dwDataSize,
+  Pointer pvData,
+  Pointer<Int32>? pFailReason,
+) => _WlanHostedNetworkSetProperty(
+  hClientHandle,
+  opCode,
+  dwDataSize,
+  pvData,
+  pFailReason ?? nullptr,
+  nullptr,
+);
+
+@Native<
+  Uint32 Function(HANDLE, Int32, Uint32, Pointer, Pointer<Int32>, Pointer)
+>(symbol: 'WlanHostedNetworkSetProperty')
+external int _WlanHostedNetworkSetProperty(
+  int hClientHandle,
+  int opCode,
   int dwDataSize,
   Pointer pvData,
   Pointer<Int32> pFailReason,
   Pointer pvReserved,
-) => _WlanHostedNetworkSetProperty(
-  hClientHandle,
-  OpCode,
-  dwDataSize,
-  pvData,
-  pFailReason,
-  pvReserved,
 );
 
-final _WlanHostedNetworkSetProperty = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Int32 OpCode,
-        Uint32 dwDataSize,
-        Pointer pvData,
-        Pointer<Int32> pFailReason,
-        Pointer pvReserved,
-      ),
-      int Function(
-        int hClientHandle,
-        int OpCode,
-        int dwDataSize,
-        Pointer pvData,
-        Pointer<Int32> pFailReason,
-        Pointer pvReserved,
-      )
-    >('WlanHostedNetworkSetProperty');
-
-/// The WlanHostedNetworkSetSecondaryKey function configures the secondary
-/// security key that will be used by the wireless Hosted Network.
+/// Configures the secondary security key that will be used by the wireless
+/// Hosted Network.
 ///
-/// ```c
-/// DWORD WlanHostedNetworkSetSecondaryKey(
-///   HANDLE                      hClientHandle,
-///   DWORD                       dwKeyLength,
-///   PUCHAR                      pucKeyData,
-///   BOOL                        bIsPassPhrase,
-///   BOOL                        bPersistent,
-///   PWLAN_HOSTED_NETWORK_REASON pFailReason,
-///   PVOID                       pvReserved
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlanhostednetworksetsecondarykey>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanHostedNetworkSetSecondaryKey(
+  int hClientHandle,
+  int dwKeyLength,
+  Pointer<Uint8> pucKeyData,
+  bool bIsPassPhrase,
+  bool bPersistent,
+  Pointer<Int32>? pFailReason,
+) => _WlanHostedNetworkSetSecondaryKey(
+  hClientHandle,
+  dwKeyLength,
+  pucKeyData,
+  bIsPassPhrase ? TRUE : FALSE,
+  bPersistent ? TRUE : FALSE,
+  pFailReason ?? nullptr,
+  nullptr,
+);
+
+@Native<
+  Uint32 Function(
+    HANDLE,
+    Uint32,
+    Pointer<Uint8>,
+    BOOL,
+    BOOL,
+    Pointer<Int32>,
+    Pointer,
+  )
+>(symbol: 'WlanHostedNetworkSetSecondaryKey')
+external int _WlanHostedNetworkSetSecondaryKey(
   int hClientHandle,
   int dwKeyLength,
   Pointer<Uint8> pucKeyData,
@@ -1082,388 +877,305 @@ int WlanHostedNetworkSetSecondaryKey(
   int bPersistent,
   Pointer<Int32> pFailReason,
   Pointer pvReserved,
-) => _WlanHostedNetworkSetSecondaryKey(
-  hClientHandle,
-  dwKeyLength,
-  pucKeyData,
-  bIsPassPhrase,
-  bPersistent,
-  pFailReason,
-  pvReserved,
 );
 
-final _WlanHostedNetworkSetSecondaryKey = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Uint32 dwKeyLength,
-        Pointer<Uint8> pucKeyData,
-        Int32 bIsPassPhrase,
-        Int32 bPersistent,
-        Pointer<Int32> pFailReason,
-        Pointer pvReserved,
-      ),
-      int Function(
-        int hClientHandle,
-        int dwKeyLength,
-        Pointer<Uint8> pucKeyData,
-        int bIsPassPhrase,
-        int bPersistent,
-        Pointer<Int32> pFailReason,
-        Pointer pvReserved,
-      )
-    >('WlanHostedNetworkSetSecondaryKey');
-
-/// The WlanHostedNetworkStartUsing function starts the wireless Hosted
-/// Network.
+/// Starts the wireless Hosted Network.
 ///
-/// ```c
-/// DWORD WlanHostedNetworkStartUsing(
-///   HANDLE                      hClientHandle,
-///   PWLAN_HOSTED_NETWORK_REASON pFailReason,
-///   PVOID                       pvReserved
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlanhostednetworkstartusing>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanHostedNetworkStartUsing(
   int hClientHandle,
-  Pointer<Int32> pFailReason,
-  Pointer pvReserved,
-) => _WlanHostedNetworkStartUsing(hClientHandle, pFailReason, pvReserved);
+  Pointer<Int32>? pFailReason,
+) => _WlanHostedNetworkStartUsing(
+  hClientHandle,
+  pFailReason ?? nullptr,
+  nullptr,
+);
 
-final _WlanHostedNetworkStartUsing = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Pointer<Int32> pFailReason,
-        Pointer pvReserved,
-      ),
-      int Function(
-        int hClientHandle,
-        Pointer<Int32> pFailReason,
-        Pointer pvReserved,
-      )
-    >('WlanHostedNetworkStartUsing');
-
-/// The WlanHostedNetworkStopUsing function stops the wireless Hosted
-/// Network.
-///
-/// ```c
-/// DWORD WlanHostedNetworkStopUsing(
-///   HANDLE                      hClientHandle,
-///   PWLAN_HOSTED_NETWORK_REASON pFailReason,
-///   PVOID                       pvReserved
-/// );
-/// ```
-/// {@category wlanapi}
-int WlanHostedNetworkStopUsing(
+@Native<Uint32 Function(HANDLE, Pointer<Int32>, Pointer)>(
+  symbol: 'WlanHostedNetworkStartUsing',
+)
+external int _WlanHostedNetworkStartUsing(
   int hClientHandle,
   Pointer<Int32> pFailReason,
   Pointer pvReserved,
-) => _WlanHostedNetworkStopUsing(hClientHandle, pFailReason, pvReserved);
+);
 
-final _WlanHostedNetworkStopUsing = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Pointer<Int32> pFailReason,
-        Pointer pvReserved,
-      ),
-      int Function(
-        int hClientHandle,
-        Pointer<Int32> pFailReason,
-        Pointer pvReserved,
-      )
-    >('WlanHostedNetworkStopUsing');
-
-/// The WlanIhvControl function provides a mechanism for independent
-/// hardware vendor (IHV) control of WLAN drivers or services.
+/// Stops the wireless Hosted Network.
 ///
-/// ```c
-/// DWORD WlanIhvControl(
-///   HANDLE                hClientHandle,
-///   const GUID            *pInterfaceGuid,
-///   WLAN_IHV_CONTROL_TYPE Type,
-///   DWORD                 dwInBufferSize,
-///   PVOID                 pInBuffer,
-///   DWORD                 dwOutBufferSize,
-///   PVOID                 pOutBuffer,
-///   PDWORD                pdwBytesReturned
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlanhostednetworkstopusing>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
+int WlanHostedNetworkStopUsing(
+  int hClientHandle,
+  Pointer<Int32>? pFailReason,
+) =>
+    _WlanHostedNetworkStopUsing(hClientHandle, pFailReason ?? nullptr, nullptr);
+
+@Native<Uint32 Function(HANDLE, Pointer<Int32>, Pointer)>(
+  symbol: 'WlanHostedNetworkStopUsing',
+)
+external int _WlanHostedNetworkStopUsing(
+  int hClientHandle,
+  Pointer<Int32> pFailReason,
+  Pointer pvReserved,
+);
+
+/// Provides a mechanism for independent hardware vendor (IHV) control of WLAN
+/// drivers or services.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlanihvcontrol>.
+///
+/// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanIhvControl(
   int hClientHandle,
   Pointer<GUID> pInterfaceGuid,
-  int Type,
+  WLAN_IHV_CONTROL_TYPE type,
+  int dwInBufferSize,
+  Pointer pInBuffer,
+  int dwOutBufferSize,
+  Pointer? pOutBuffer,
+  Pointer<Uint32> pdwBytesReturned,
+) => _WlanIhvControl(
+  hClientHandle,
+  pInterfaceGuid,
+  type,
+  dwInBufferSize,
+  pInBuffer,
+  dwOutBufferSize,
+  pOutBuffer ?? nullptr,
+  pdwBytesReturned,
+);
+
+@Native<
+  Uint32 Function(
+    HANDLE,
+    Pointer<GUID>,
+    Int32,
+    Uint32,
+    Pointer,
+    Uint32,
+    Pointer,
+    Pointer<Uint32>,
+  )
+>(symbol: 'WlanIhvControl')
+external int _WlanIhvControl(
+  int hClientHandle,
+  Pointer<GUID> pInterfaceGuid,
+  int type,
   int dwInBufferSize,
   Pointer pInBuffer,
   int dwOutBufferSize,
   Pointer pOutBuffer,
   Pointer<Uint32> pdwBytesReturned,
-) => _WlanIhvControl(
-  hClientHandle,
-  pInterfaceGuid,
-  Type,
-  dwInBufferSize,
-  pInBuffer,
-  dwOutBufferSize,
-  pOutBuffer,
-  pdwBytesReturned,
 );
 
-final _WlanIhvControl = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Int32 Type,
-        Uint32 dwInBufferSize,
-        Pointer pInBuffer,
-        Uint32 dwOutBufferSize,
-        Pointer pOutBuffer,
-        Pointer<Uint32> pdwBytesReturned,
-      ),
-      int Function(
-        int hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        int Type,
-        int dwInBufferSize,
-        Pointer pInBuffer,
-        int dwOutBufferSize,
-        Pointer pOutBuffer,
-        Pointer<Uint32> pdwBytesReturned,
-      )
-    >('WlanIhvControl');
-
-/// The WlanOpenHandle function opens a connection to the server.
+/// Opens a connection to the server.
 ///
-/// ```c
-/// DWORD WlanOpenHandle(
-///   DWORD   dwClientVersion,
-///   PVOID   pReserved,
-///   PDWORD  pdwNegotiatedVersion,
-///   PHANDLE phClientHandle
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlanopenhandle>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanOpenHandle(
   int dwClientVersion,
-  Pointer pReserved,
   Pointer<Uint32> pdwNegotiatedVersion,
-  Pointer<IntPtr> phClientHandle,
+  Pointer<HANDLE> phClientHandle,
 ) => _WlanOpenHandle(
   dwClientVersion,
-  pReserved,
+  nullptr,
   pdwNegotiatedVersion,
   phClientHandle,
 );
 
-final _WlanOpenHandle = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        Uint32 dwClientVersion,
-        Pointer pReserved,
-        Pointer<Uint32> pdwNegotiatedVersion,
-        Pointer<IntPtr> phClientHandle,
-      ),
-      int Function(
-        int dwClientVersion,
-        Pointer pReserved,
-        Pointer<Uint32> pdwNegotiatedVersion,
-        Pointer<IntPtr> phClientHandle,
-      )
-    >('WlanOpenHandle');
+@Native<Uint32 Function(Uint32, Pointer, Pointer<Uint32>, Pointer<HANDLE>)>(
+  symbol: 'WlanOpenHandle',
+)
+external int _WlanOpenHandle(
+  int dwClientVersion,
+  Pointer pReserved,
+  Pointer<Uint32> pdwNegotiatedVersion,
+  Pointer<HANDLE> phClientHandle,
+);
 
-/// The WlanQueryAutoConfigParameter function queries for the parameters of
-/// the auto configuration service.
+/// Queries for the parameters of the auto configuration service.
 ///
-/// ```c
-/// DWORD WlanQueryAutoConfigParameter(
-///   HANDLE                  hClientHandle,
-///   WLAN_AUTOCONF_OPCODE    OpCode,
-///   PVOID                   pReserved,
-///   PDWORD                  pdwDataSize,
-///   PVOID                   *ppData,
-///   PWLAN_OPCODE_VALUE_TYPE pWlanOpcodeValueType
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlanqueryautoconfigparameter>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanQueryAutoConfigParameter(
   int hClientHandle,
-  int OpCode,
+  WLAN_AUTOCONF_OPCODE opCode,
+  Pointer<Uint32> pdwDataSize,
+  Pointer<Pointer> ppData,
+  Pointer<Int32>? pWlanOpcodeValueType,
+) => _WlanQueryAutoConfigParameter(
+  hClientHandle,
+  opCode,
+  nullptr,
+  pdwDataSize,
+  ppData,
+  pWlanOpcodeValueType ?? nullptr,
+);
+
+@Native<
+  Uint32 Function(
+    HANDLE,
+    Int32,
+    Pointer,
+    Pointer<Uint32>,
+    Pointer<Pointer>,
+    Pointer<Int32>,
+  )
+>(symbol: 'WlanQueryAutoConfigParameter')
+external int _WlanQueryAutoConfigParameter(
+  int hClientHandle,
+  int opCode,
   Pointer pReserved,
   Pointer<Uint32> pdwDataSize,
   Pointer<Pointer> ppData,
   Pointer<Int32> pWlanOpcodeValueType,
-) => _WlanQueryAutoConfigParameter(
-  hClientHandle,
-  OpCode,
-  pReserved,
-  pdwDataSize,
-  ppData,
-  pWlanOpcodeValueType,
 );
 
-final _WlanQueryAutoConfigParameter = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Int32 OpCode,
-        Pointer pReserved,
-        Pointer<Uint32> pdwDataSize,
-        Pointer<Pointer> ppData,
-        Pointer<Int32> pWlanOpcodeValueType,
-      ),
-      int Function(
-        int hClientHandle,
-        int OpCode,
-        Pointer pReserved,
-        Pointer<Uint32> pdwDataSize,
-        Pointer<Pointer> ppData,
-        Pointer<Int32> pWlanOpcodeValueType,
-      )
-    >('WlanQueryAutoConfigParameter');
-
-/// The WlanQueryInterface function queries various parameters of a
-/// specified interface.
+/// Queries various parameters of a specified interface.
 ///
-/// ```c
-/// DWORD WlanQueryInterface(
-///   HANDLE                  hClientHandle,
-///   const GUID              *pInterfaceGuid,
-///   WLAN_INTF_OPCODE        OpCode,
-///   PVOID                   pReserved,
-///   PDWORD                  pdwDataSize,
-///   PVOID                   *ppData,
-///   PWLAN_OPCODE_VALUE_TYPE pWlanOpcodeValueType
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlanqueryinterface>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanQueryInterface(
   int hClientHandle,
   Pointer<GUID> pInterfaceGuid,
-  int OpCode,
+  WLAN_INTF_OPCODE opCode,
+  Pointer<Uint32> pdwDataSize,
+  Pointer<Pointer> ppData,
+  Pointer<Int32>? pWlanOpcodeValueType,
+) => _WlanQueryInterface(
+  hClientHandle,
+  pInterfaceGuid,
+  opCode,
+  nullptr,
+  pdwDataSize,
+  ppData,
+  pWlanOpcodeValueType ?? nullptr,
+);
+
+@Native<
+  Uint32 Function(
+    HANDLE,
+    Pointer<GUID>,
+    Int32,
+    Pointer,
+    Pointer<Uint32>,
+    Pointer<Pointer>,
+    Pointer<Int32>,
+  )
+>(symbol: 'WlanQueryInterface')
+external int _WlanQueryInterface(
+  int hClientHandle,
+  Pointer<GUID> pInterfaceGuid,
+  int opCode,
   Pointer pReserved,
   Pointer<Uint32> pdwDataSize,
   Pointer<Pointer> ppData,
   Pointer<Int32> pWlanOpcodeValueType,
-) => _WlanQueryInterface(
-  hClientHandle,
-  pInterfaceGuid,
-  OpCode,
-  pReserved,
-  pdwDataSize,
-  ppData,
-  pWlanOpcodeValueType,
 );
 
-final _WlanQueryInterface = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Int32 OpCode,
-        Pointer pReserved,
-        Pointer<Uint32> pdwDataSize,
-        Pointer<Pointer> ppData,
-        Pointer<Int32> pWlanOpcodeValueType,
-      ),
-      int Function(
-        int hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        int OpCode,
-        Pointer pReserved,
-        Pointer<Uint32> pdwDataSize,
-        Pointer<Pointer> ppData,
-        Pointer<Int32> pWlanOpcodeValueType,
-      )
-    >('WlanQueryInterface');
-
-/// The WlanReasonCodeToString function retrieves a string that describes a
-/// specified reason code.
+/// Retrieves a string that describes a specified reason code.
 ///
-/// ```c
-/// DWORD WlanReasonCodeToString(
-///   DWORD  dwReasonCode,
-///   DWORD  dwBufferSize,
-///   PWCHAR pStringBuffer,
-///   PVOID  pReserved
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlanreasoncodetostring>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanReasonCodeToString(
   int dwReasonCode,
   int dwBufferSize,
-  Pointer<Utf16> pStringBuffer,
-  Pointer pReserved,
-) => _WlanReasonCodeToString(
-  dwReasonCode,
-  dwBufferSize,
-  pStringBuffer,
-  pReserved,
-);
+  PCWSTR pStringBuffer,
+) =>
+    _WlanReasonCodeToString(dwReasonCode, dwBufferSize, pStringBuffer, nullptr);
 
-final _WlanReasonCodeToString = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        Uint32 dwReasonCode,
-        Uint32 dwBufferSize,
-        Pointer<Utf16> pStringBuffer,
-        Pointer pReserved,
-      ),
-      int Function(
-        int dwReasonCode,
-        int dwBufferSize,
-        Pointer<Utf16> pStringBuffer,
-        Pointer pReserved,
-      )
-    >('WlanReasonCodeToString');
+@Native<Uint32 Function(Uint32, Uint32, PCWSTR, Pointer)>(
+  symbol: 'WlanReasonCodeToString',
+)
+external int _WlanReasonCodeToString(
+  int dwReasonCode,
+  int dwBufferSize,
+  PCWSTR pStringBuffer,
+  Pointer pReserved,
+);
 
 /// Allows user mode clients with admin privileges, or User-Mode Driver
 /// Framework (UMDF) drivers, to register for unsolicited notifications
 /// corresponding to device services that they're interested in.
 ///
-/// ```c
-/// DWORD WlanRegisterDeviceServiceNotification(
-///   HANDLE                               hClientHandle,
-///   const PWLAN_DEVICE_SERVICE_GUID_LIST pDevSvcGuidList
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlanregisterdeviceservicenotification>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanRegisterDeviceServiceNotification(
   int hClientHandle,
+  Pointer<WLAN_DEVICE_SERVICE_GUID_LIST>? pDevSvcGuidList,
+) => _WlanRegisterDeviceServiceNotification(
+  hClientHandle,
+  pDevSvcGuidList ?? nullptr,
+);
+
+@Native<Uint32 Function(HANDLE, Pointer<WLAN_DEVICE_SERVICE_GUID_LIST>)>(
+  symbol: 'WlanRegisterDeviceServiceNotification',
+)
+external int _WlanRegisterDeviceServiceNotification(
+  int hClientHandle,
   Pointer<WLAN_DEVICE_SERVICE_GUID_LIST> pDevSvcGuidList,
-) => _WlanRegisterDeviceServiceNotification(hClientHandle, pDevSvcGuidList);
+);
 
-final _WlanRegisterDeviceServiceNotification = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Pointer<WLAN_DEVICE_SERVICE_GUID_LIST> pDevSvcGuidList,
-      ),
-      int Function(
-        int hClientHandle,
-        Pointer<WLAN_DEVICE_SERVICE_GUID_LIST> pDevSvcGuidList,
-      )
-    >('WlanRegisterDeviceServiceNotification');
-
-/// The WlanRegisterNotification function is used to register and unregister
-/// notifications on all wireless interfaces.
+/// Used to register and unregister notifications on all wireless interfaces.
 ///
-/// ```c
-/// DWORD WlanRegisterNotification(
-///   HANDLE                     hClientHandle,
-///   DWORD                      dwNotifSource,
-///   BOOL                       bIgnoreDuplicate,
-///   WLAN_NOTIFICATION_CALLBACK funcCallback,
-///   PVOID                      pCallbackContext,
-///   PVOID                      pReserved,
-///   PDWORD                     pdwPrevNotifSource
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlanregisternotification>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanRegisterNotification(
+  int hClientHandle,
+  WLAN_NOTIFICATION_SOURCES dwNotifSource,
+  bool bIgnoreDuplicate,
+  Pointer<NativeFunction<WLAN_NOTIFICATION_CALLBACK>>? funcCallback,
+  Pointer? pCallbackContext,
+  Pointer<Uint32>? pdwPrevNotifSource,
+) => _WlanRegisterNotification(
+  hClientHandle,
+  dwNotifSource,
+  bIgnoreDuplicate ? TRUE : FALSE,
+  funcCallback ?? nullptr,
+  pCallbackContext ?? nullptr,
+  nullptr,
+  pdwPrevNotifSource ?? nullptr,
+);
+
+@Native<
+  Uint32 Function(
+    HANDLE,
+    Uint32,
+    BOOL,
+    Pointer<NativeFunction<WLAN_NOTIFICATION_CALLBACK>>,
+    Pointer,
+    Pointer,
+    Pointer<Uint32>,
+  )
+>(symbol: 'WlanRegisterNotification')
+external int _WlanRegisterNotification(
   int hClientHandle,
   int dwNotifSource,
   int bIgnoreDuplicate,
@@ -1471,472 +1183,335 @@ int WlanRegisterNotification(
   Pointer pCallbackContext,
   Pointer pReserved,
   Pointer<Uint32> pdwPrevNotifSource,
-) => _WlanRegisterNotification(
-  hClientHandle,
-  dwNotifSource,
-  bIgnoreDuplicate,
-  funcCallback,
-  pCallbackContext,
-  pReserved,
-  pdwPrevNotifSource,
 );
 
-final _WlanRegisterNotification = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Uint32 dwNotifSource,
-        Int32 bIgnoreDuplicate,
-        Pointer<NativeFunction<WLAN_NOTIFICATION_CALLBACK>> funcCallback,
-        Pointer pCallbackContext,
-        Pointer pReserved,
-        Pointer<Uint32> pdwPrevNotifSource,
-      ),
-      int Function(
-        int hClientHandle,
-        int dwNotifSource,
-        int bIgnoreDuplicate,
-        Pointer<NativeFunction<WLAN_NOTIFICATION_CALLBACK>> funcCallback,
-        Pointer pCallbackContext,
-        Pointer pReserved,
-        Pointer<Uint32> pdwPrevNotifSource,
-      )
-    >('WlanRegisterNotification');
-
-/// The WlanRegisterVirtualStationNotification function is used to register
-/// and unregister notifications on a virtual station.
+/// Used to register and unregister notifications on a virtual station.
 ///
-/// ```c
-/// DWORD WlanRegisterVirtualStationNotification(
-///   HANDLE hClientHandle,
-///   BOOL   bRegister,
-///   PVOID  pReserved
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlanregistervirtualstationnotification>.
+///
 /// {@category wlanapi}
-int WlanRegisterVirtualStationNotification(
+@pragma('vm:prefer-inline')
+int WlanRegisterVirtualStationNotification(int hClientHandle, bool bRegister) =>
+    _WlanRegisterVirtualStationNotification(
+      hClientHandle,
+      bRegister ? TRUE : FALSE,
+      nullptr,
+    );
+
+@Native<Uint32 Function(HANDLE, BOOL, Pointer)>(
+  symbol: 'WlanRegisterVirtualStationNotification',
+)
+external int _WlanRegisterVirtualStationNotification(
   int hClientHandle,
   int bRegister,
   Pointer pReserved,
-) => _WlanRegisterVirtualStationNotification(
-  hClientHandle,
-  bRegister,
-  pReserved,
 );
 
-final _WlanRegisterVirtualStationNotification = _wlanapi
-    .lookupFunction<
-      Uint32 Function(IntPtr hClientHandle, Int32 bRegister, Pointer pReserved),
-      int Function(int hClientHandle, int bRegister, Pointer pReserved)
-    >('WlanRegisterVirtualStationNotification');
-
-/// The WlanRenameProfile function renames the specified profile.
+/// Renames the specified profile.
 ///
-/// ```c
-/// DWORD WlanRenameProfile(
-///   HANDLE     hClientHandle,
-///   const GUID *pInterfaceGuid,
-///   LPCWSTR    strOldProfileName,
-///   LPCWSTR    strNewProfileName,
-///   PVOID      pReserved
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlanrenameprofile>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanRenameProfile(
   int hClientHandle,
   Pointer<GUID> pInterfaceGuid,
-  Pointer<Utf16> strOldProfileName,
-  Pointer<Utf16> strNewProfileName,
-  Pointer pReserved,
+  PCWSTR strOldProfileName,
+  PCWSTR strNewProfileName,
 ) => _WlanRenameProfile(
   hClientHandle,
   pInterfaceGuid,
   strOldProfileName,
   strNewProfileName,
-  pReserved,
+  nullptr,
 );
 
-final _WlanRenameProfile = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Pointer<Utf16> strOldProfileName,
-        Pointer<Utf16> strNewProfileName,
-        Pointer pReserved,
-      ),
-      int Function(
-        int hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Pointer<Utf16> strOldProfileName,
-        Pointer<Utf16> strNewProfileName,
-        Pointer pReserved,
-      )
-    >('WlanRenameProfile');
+@Native<Uint32 Function(HANDLE, Pointer<GUID>, PCWSTR, PCWSTR, Pointer)>(
+  symbol: 'WlanRenameProfile',
+)
+external int _WlanRenameProfile(
+  int hClientHandle,
+  Pointer<GUID> pInterfaceGuid,
+  PCWSTR strOldProfileName,
+  PCWSTR strNewProfileName,
+  Pointer pReserved,
+);
 
-/// The WlanSaveTemporaryProfile function saves a temporary profile to the
-/// profile store.
+/// Saves a temporary profile to the profile store.
 ///
-/// ```c
-/// DWORD WlanSaveTemporaryProfile(
-///   HANDLE     hClientHandle,
-///   const GUID *pInterfaceGuid,
-///   LPCWSTR    strProfileName,
-///   LPCWSTR    strAllUserProfileSecurity,
-///   DWORD      dwFlags,
-///   BOOL       bOverWrite,
-///   PVOID      pReserved
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlansavetemporaryprofile>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanSaveTemporaryProfile(
   int hClientHandle,
   Pointer<GUID> pInterfaceGuid,
-  Pointer<Utf16> strProfileName,
-  Pointer<Utf16> strAllUserProfileSecurity,
+  PCWSTR strProfileName,
+  PCWSTR? strAllUserProfileSecurity,
   int dwFlags,
-  int bOverWrite,
-  Pointer pReserved,
+  bool bOverWrite,
 ) => _WlanSaveTemporaryProfile(
   hClientHandle,
   pInterfaceGuid,
   strProfileName,
-  strAllUserProfileSecurity,
+  strAllUserProfileSecurity ?? nullptr,
   dwFlags,
-  bOverWrite,
-  pReserved,
+  bOverWrite ? TRUE : FALSE,
+  nullptr,
 );
 
-final _WlanSaveTemporaryProfile = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Pointer<Utf16> strProfileName,
-        Pointer<Utf16> strAllUserProfileSecurity,
-        Uint32 dwFlags,
-        Int32 bOverWrite,
-        Pointer pReserved,
-      ),
-      int Function(
-        int hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Pointer<Utf16> strProfileName,
-        Pointer<Utf16> strAllUserProfileSecurity,
-        int dwFlags,
-        int bOverWrite,
-        Pointer pReserved,
-      )
-    >('WlanSaveTemporaryProfile');
+@Native<
+  Uint32 Function(HANDLE, Pointer<GUID>, PCWSTR, PCWSTR, Uint32, BOOL, Pointer)
+>(symbol: 'WlanSaveTemporaryProfile')
+external int _WlanSaveTemporaryProfile(
+  int hClientHandle,
+  Pointer<GUID> pInterfaceGuid,
+  PCWSTR strProfileName,
+  PCWSTR strAllUserProfileSecurity,
+  int dwFlags,
+  int bOverWrite,
+  Pointer pReserved,
+);
 
-/// The WlanScan function requests a scan for available networks on the
-/// indicated interface.
+/// Requests a scan for available networks on the indicated interface.
 ///
-/// ```c
-/// DWORD WlanScan(
-///   HANDLE               hClientHandle,
-///   const GUID           *pInterfaceGuid,
-///   const PDOT11_SSID    pDot11Ssid,
-///   const PWLAN_RAW_DATA pIeData,
-///   PVOID                pReserved
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlanscan>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanScan(
+  int hClientHandle,
+  Pointer<GUID> pInterfaceGuid,
+  Pointer<DOT11_SSID>? pDot11Ssid,
+  Pointer<WLAN_RAW_DATA>? pIeData,
+) => _WlanScan(
+  hClientHandle,
+  pInterfaceGuid,
+  pDot11Ssid ?? nullptr,
+  pIeData ?? nullptr,
+  nullptr,
+);
+
+@Native<
+  Uint32 Function(
+    HANDLE,
+    Pointer<GUID>,
+    Pointer<DOT11_SSID>,
+    Pointer<WLAN_RAW_DATA>,
+    Pointer,
+  )
+>(symbol: 'WlanScan')
+external int _WlanScan(
   int hClientHandle,
   Pointer<GUID> pInterfaceGuid,
   Pointer<DOT11_SSID> pDot11Ssid,
   Pointer<WLAN_RAW_DATA> pIeData,
   Pointer pReserved,
-) => _WlanScan(hClientHandle, pInterfaceGuid, pDot11Ssid, pIeData, pReserved);
+);
 
-final _WlanScan = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Pointer<DOT11_SSID> pDot11Ssid,
-        Pointer<WLAN_RAW_DATA> pIeData,
-        Pointer pReserved,
-      ),
-      int Function(
-        int hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Pointer<DOT11_SSID> pDot11Ssid,
-        Pointer<WLAN_RAW_DATA> pIeData,
-        Pointer pReserved,
-      )
-    >('WlanScan');
-
-/// The WlanSetAutoConfigParameter function sets parameters for the
-/// automatic configuration service.
+/// Sets parameters for the automatic configuration service.
 ///
-/// ```c
-/// DWORD WlanSetAutoConfigParameter(
-///   HANDLE               hClientHandle,
-///   WLAN_AUTOCONF_OPCODE OpCode,
-///   DWORD                dwDataSize,
-///   const PVOID          pData,
-///   PVOID                pReserved
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlansetautoconfigparameter>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanSetAutoConfigParameter(
   int hClientHandle,
-  int OpCode,
+  WLAN_AUTOCONF_OPCODE opCode,
+  int dwDataSize,
+  Pointer pData,
+) => _WlanSetAutoConfigParameter(
+  hClientHandle,
+  opCode,
+  dwDataSize,
+  pData,
+  nullptr,
+);
+
+@Native<Uint32 Function(HANDLE, Int32, Uint32, Pointer, Pointer)>(
+  symbol: 'WlanSetAutoConfigParameter',
+)
+external int _WlanSetAutoConfigParameter(
+  int hClientHandle,
+  int opCode,
   int dwDataSize,
   Pointer pData,
   Pointer pReserved,
-) => _WlanSetAutoConfigParameter(
-  hClientHandle,
-  OpCode,
-  dwDataSize,
-  pData,
-  pReserved,
 );
 
-final _WlanSetAutoConfigParameter = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Int32 OpCode,
-        Uint32 dwDataSize,
-        Pointer pData,
-        Pointer pReserved,
-      ),
-      int Function(
-        int hClientHandle,
-        int OpCode,
-        int dwDataSize,
-        Pointer pData,
-        Pointer pReserved,
-      )
-    >('WlanSetAutoConfigParameter');
-
-/// The WlanSetFilterList function sets the permit/deny list.
+/// Sets the permit/deny list.
 ///
-/// ```c
-/// DWORD WlanSetFilterList(
-///   HANDLE                    hClientHandle,
-///   WLAN_FILTER_LIST_TYPE     wlanFilterListType,
-///   const PDOT11_NETWORK_LIST pNetworkList,
-///   PVOID                     pReserved
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlansetfilterlist>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanSetFilterList(
+  int hClientHandle,
+  WLAN_FILTER_LIST_TYPE wlanFilterListType,
+  Pointer<DOT11_NETWORK_LIST>? pNetworkList,
+) => _WlanSetFilterList(
+  hClientHandle,
+  wlanFilterListType,
+  pNetworkList ?? nullptr,
+  nullptr,
+);
+
+@Native<Uint32 Function(HANDLE, Int32, Pointer<DOT11_NETWORK_LIST>, Pointer)>(
+  symbol: 'WlanSetFilterList',
+)
+external int _WlanSetFilterList(
   int hClientHandle,
   int wlanFilterListType,
   Pointer<DOT11_NETWORK_LIST> pNetworkList,
   Pointer pReserved,
-) => _WlanSetFilterList(
-  hClientHandle,
-  wlanFilterListType,
-  pNetworkList,
-  pReserved,
 );
 
-final _WlanSetFilterList = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Int32 wlanFilterListType,
-        Pointer<DOT11_NETWORK_LIST> pNetworkList,
-        Pointer pReserved,
-      ),
-      int Function(
-        int hClientHandle,
-        int wlanFilterListType,
-        Pointer<DOT11_NETWORK_LIST> pNetworkList,
-        Pointer pReserved,
-      )
-    >('WlanSetFilterList');
-
-/// The WlanSetInterface function sets user-configurable parameters for a
-/// specified interface.
+/// Sets user-configurable parameters.
 ///
-/// ```c
-/// DWORD WlanSetInterface(
-///   HANDLE           hClientHandle,
-///   const GUID       *pInterfaceGuid,
-///   WLAN_INTF_OPCODE OpCode,
-///   DWORD            dwDataSize,
-///   const PVOID      pData,
-///   PVOID            pReserved
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlansetinterface>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanSetInterface(
   int hClientHandle,
   Pointer<GUID> pInterfaceGuid,
-  int OpCode,
+  WLAN_INTF_OPCODE opCode,
   int dwDataSize,
   Pointer pData,
-  Pointer pReserved,
 ) => _WlanSetInterface(
   hClientHandle,
   pInterfaceGuid,
-  OpCode,
+  opCode,
   dwDataSize,
   pData,
-  pReserved,
+  nullptr,
 );
 
-final _WlanSetInterface = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Int32 OpCode,
-        Uint32 dwDataSize,
-        Pointer pData,
-        Pointer pReserved,
-      ),
-      int Function(
-        int hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        int OpCode,
-        int dwDataSize,
-        Pointer pData,
-        Pointer pReserved,
-      )
-    >('WlanSetInterface');
+@Native<
+  Uint32 Function(HANDLE, Pointer<GUID>, Int32, Uint32, Pointer, Pointer)
+>(symbol: 'WlanSetInterface')
+external int _WlanSetInterface(
+  int hClientHandle,
+  Pointer<GUID> pInterfaceGuid,
+  int opCode,
+  int dwDataSize,
+  Pointer pData,
+  Pointer pReserved,
+);
 
-/// The WlanSetProfile function sets the content of a specific profile.
+/// Sets the content of a specific profile.
 ///
-/// ```c
-/// DWORD WlanSetProfile(
-///   HANDLE     hClientHandle,
-///   const GUID *pInterfaceGuid,
-///   DWORD      dwFlags,
-///   LPCWSTR    strProfileXml,
-///   LPCWSTR    strAllUserProfileSecurity,
-///   BOOL       bOverwrite,
-///   PVOID      pReserved,
-///   DWORD      *pdwReasonCode
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlansetprofile>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanSetProfile(
   int hClientHandle,
   Pointer<GUID> pInterfaceGuid,
   int dwFlags,
-  Pointer<Utf16> strProfileXml,
-  Pointer<Utf16> strAllUserProfileSecurity,
-  int bOverwrite,
-  Pointer pReserved,
+  PCWSTR strProfileXml,
+  PCWSTR? strAllUserProfileSecurity,
+  bool bOverwrite,
   Pointer<Uint32> pdwReasonCode,
 ) => _WlanSetProfile(
   hClientHandle,
   pInterfaceGuid,
   dwFlags,
   strProfileXml,
-  strAllUserProfileSecurity,
-  bOverwrite,
-  pReserved,
+  strAllUserProfileSecurity ?? nullptr,
+  bOverwrite ? TRUE : FALSE,
+  nullptr,
   pdwReasonCode,
 );
 
-final _WlanSetProfile = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Uint32 dwFlags,
-        Pointer<Utf16> strProfileXml,
-        Pointer<Utf16> strAllUserProfileSecurity,
-        Int32 bOverwrite,
-        Pointer pReserved,
-        Pointer<Uint32> pdwReasonCode,
-      ),
-      int Function(
-        int hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        int dwFlags,
-        Pointer<Utf16> strProfileXml,
-        Pointer<Utf16> strAllUserProfileSecurity,
-        int bOverwrite,
-        Pointer pReserved,
-        Pointer<Uint32> pdwReasonCode,
-      )
-    >('WlanSetProfile');
+@Native<
+  Uint32 Function(
+    HANDLE,
+    Pointer<GUID>,
+    Uint32,
+    PCWSTR,
+    PCWSTR,
+    BOOL,
+    Pointer,
+    Pointer<Uint32>,
+  )
+>(symbol: 'WlanSetProfile')
+external int _WlanSetProfile(
+  int hClientHandle,
+  Pointer<GUID> pInterfaceGuid,
+  int dwFlags,
+  PCWSTR strProfileXml,
+  PCWSTR strAllUserProfileSecurity,
+  int bOverwrite,
+  Pointer pReserved,
+  Pointer<Uint32> pdwReasonCode,
+);
 
-/// The WlanSetProfileCustomUserData function sets the custom user data
-/// associated with a profile.
+/// Sets the custom user data associated with a profile.
 ///
-/// ```c
-/// DWORD WlanSetProfileCustomUserData(
-///   HANDLE      hClientHandle,
-///   const GUID  *pInterfaceGuid,
-///   LPCWSTR     strProfileName,
-///   DWORD       dwDataSize,
-///   const PBYTE pData,
-///   PVOID       pReserved
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlansetprofilecustomuserdata>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanSetProfileCustomUserData(
   int hClientHandle,
   Pointer<GUID> pInterfaceGuid,
-  Pointer<Utf16> strProfileName,
+  PCWSTR strProfileName,
   int dwDataSize,
   Pointer<Uint8> pData,
-  Pointer pReserved,
 ) => _WlanSetProfileCustomUserData(
   hClientHandle,
   pInterfaceGuid,
   strProfileName,
   dwDataSize,
   pData,
-  pReserved,
+  nullptr,
 );
 
-final _WlanSetProfileCustomUserData = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Pointer<Utf16> strProfileName,
-        Uint32 dwDataSize,
-        Pointer<Uint8> pData,
-        Pointer pReserved,
-      ),
-      int Function(
-        int hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Pointer<Utf16> strProfileName,
-        int dwDataSize,
-        Pointer<Uint8> pData,
-        Pointer pReserved,
-      )
-    >('WlanSetProfileCustomUserData');
+@Native<
+  Uint32 Function(
+    HANDLE,
+    Pointer<GUID>,
+    PCWSTR,
+    Uint32,
+    Pointer<Uint8>,
+    Pointer,
+  )
+>(symbol: 'WlanSetProfileCustomUserData')
+external int _WlanSetProfileCustomUserData(
+  int hClientHandle,
+  Pointer<GUID> pInterfaceGuid,
+  PCWSTR strProfileName,
+  int dwDataSize,
+  Pointer<Uint8> pData,
+  Pointer pReserved,
+);
 
-/// The WlanSetProfileEapUserData function sets the Extensible
-/// Authentication Protocol (EAP) user credentials as specified by raw EAP
-/// data. The user credentials apply to a profile on an interface.
+/// Sets the Extensible Authentication Protocol (EAP) user credentials as
+/// specified by raw EAP data.
 ///
-/// ```c
-/// DWORD WlanSetProfileEapUserData(
-///   HANDLE          hClientHandle,
-///   const GUID      *pInterfaceGuid,
-///   LPCWSTR         strProfileName,
-///   EAP_METHOD_TYPE eapType,
-///   DWORD           dwFlags,
-///   DWORD           dwEapUserDataSize,
-///   const LPBYTE    pbEapUserData,
-///   PVOID           pReserved
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlansetprofileeapuserdata>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanSetProfileEapUserData(
   int hClientHandle,
   Pointer<GUID> pInterfaceGuid,
-  Pointer<Utf16> strProfileName,
+  PCWSTR strProfileName,
   EAP_METHOD_TYPE eapType,
-  int dwFlags,
+  WLAN_SET_EAPHOST_FLAGS dwFlags,
   int dwEapUserDataSize,
-  Pointer<Uint8> pbEapUserData,
-  Pointer pReserved,
+  Pointer<Uint8>? pbEapUserData,
 ) => _WlanSetProfileEapUserData(
   hClientHandle,
   pInterfaceGuid,
@@ -1944,238 +1519,177 @@ int WlanSetProfileEapUserData(
   eapType,
   dwFlags,
   dwEapUserDataSize,
-  pbEapUserData,
-  pReserved,
+  pbEapUserData ?? nullptr,
+  nullptr,
 );
 
-final _WlanSetProfileEapUserData = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Pointer<Utf16> strProfileName,
-        EAP_METHOD_TYPE eapType,
-        Uint32 dwFlags,
-        Uint32 dwEapUserDataSize,
-        Pointer<Uint8> pbEapUserData,
-        Pointer pReserved,
-      ),
-      int Function(
-        int hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Pointer<Utf16> strProfileName,
-        EAP_METHOD_TYPE eapType,
-        int dwFlags,
-        int dwEapUserDataSize,
-        Pointer<Uint8> pbEapUserData,
-        Pointer pReserved,
-      )
-    >('WlanSetProfileEapUserData');
+@Native<
+  Uint32 Function(
+    HANDLE,
+    Pointer<GUID>,
+    PCWSTR,
+    EAP_METHOD_TYPE,
+    Uint32,
+    Uint32,
+    Pointer<Uint8>,
+    Pointer,
+  )
+>(symbol: 'WlanSetProfileEapUserData')
+external int _WlanSetProfileEapUserData(
+  int hClientHandle,
+  Pointer<GUID> pInterfaceGuid,
+  PCWSTR strProfileName,
+  EAP_METHOD_TYPE eapType,
+  int dwFlags,
+  int dwEapUserDataSize,
+  Pointer<Uint8> pbEapUserData,
+  Pointer pReserved,
+);
 
-/// The WlanSetProfileEapXmlUserData function sets the Extensible
-/// Authentication Protocol (EAP) user credentials as specified by an XML
-/// string. The user credentials apply to a profile on an adapter. These
-/// credentials can be used only by the caller.
+/// Sets the Extensible Authentication Protocol (EAP) user credentials as
+/// specified by an XML string.
 ///
-/// ```c
-/// DWORD WlanSetProfileEapXmlUserData(
-///   HANDLE     hClientHandle,
-///   const GUID *pInterfaceGuid,
-///   LPCWSTR    strProfileName,
-///   DWORD      dwFlags,
-///   LPCWSTR    strEapXmlUserData,
-///   PVOID      pReserved
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlansetprofileeapxmluserdata>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanSetProfileEapXmlUserData(
   int hClientHandle,
   Pointer<GUID> pInterfaceGuid,
-  Pointer<Utf16> strProfileName,
-  int dwFlags,
-  Pointer<Utf16> strEapXmlUserData,
-  Pointer pReserved,
+  PCWSTR strProfileName,
+  WLAN_SET_EAPHOST_FLAGS dwFlags,
+  PCWSTR strEapXmlUserData,
 ) => _WlanSetProfileEapXmlUserData(
   hClientHandle,
   pInterfaceGuid,
   strProfileName,
   dwFlags,
   strEapXmlUserData,
-  pReserved,
+  nullptr,
 );
 
-final _WlanSetProfileEapXmlUserData = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Pointer<Utf16> strProfileName,
-        Uint32 dwFlags,
-        Pointer<Utf16> strEapXmlUserData,
-        Pointer pReserved,
-      ),
-      int Function(
-        int hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Pointer<Utf16> strProfileName,
-        int dwFlags,
-        Pointer<Utf16> strEapXmlUserData,
-        Pointer pReserved,
-      )
-    >('WlanSetProfileEapXmlUserData');
+@Native<
+  Uint32 Function(HANDLE, Pointer<GUID>, PCWSTR, Uint32, PCWSTR, Pointer)
+>(symbol: 'WlanSetProfileEapXmlUserData')
+external int _WlanSetProfileEapXmlUserData(
+  int hClientHandle,
+  Pointer<GUID> pInterfaceGuid,
+  PCWSTR strProfileName,
+  int dwFlags,
+  PCWSTR strEapXmlUserData,
+  Pointer pReserved,
+);
 
-/// The WlanSetProfileList function sets the preference order of profiles
-/// for a given interface.
+/// Sets the preference order of profiles.
 ///
-/// ```c
-/// DWORD WlanSetProfileList(
-///   HANDLE     hClientHandle,
-///   const GUID *pInterfaceGuid,
-///   DWORD      dwItems,
-///   LPCWSTR    *strProfileNames,
-///   PVOID      pReserved
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlansetprofilelist>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanSetProfileList(
   int hClientHandle,
   Pointer<GUID> pInterfaceGuid,
   int dwItems,
-  Pointer<Pointer<Utf16>> strProfileNames,
-  Pointer pReserved,
+  Pointer<PCWSTR> strProfileNames,
 ) => _WlanSetProfileList(
   hClientHandle,
   pInterfaceGuid,
   dwItems,
   strProfileNames,
-  pReserved,
+  nullptr,
 );
 
-final _WlanSetProfileList = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Uint32 dwItems,
-        Pointer<Pointer<Utf16>> strProfileNames,
-        Pointer pReserved,
-      ),
-      int Function(
-        int hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        int dwItems,
-        Pointer<Pointer<Utf16>> strProfileNames,
-        Pointer pReserved,
-      )
-    >('WlanSetProfileList');
+@Native<
+  Uint32 Function(HANDLE, Pointer<GUID>, Uint32, Pointer<PCWSTR>, Pointer)
+>(symbol: 'WlanSetProfileList')
+external int _WlanSetProfileList(
+  int hClientHandle,
+  Pointer<GUID> pInterfaceGuid,
+  int dwItems,
+  Pointer<PCWSTR> strProfileNames,
+  Pointer pReserved,
+);
 
-/// The WlanSetProfilePosition function sets the position of a single,
-/// specified profile in the preference list.
+/// Sets the position of a single, specified profile in the preference list.
 ///
-/// ```c
-/// DWORD WlanSetProfilePosition(
-///   HANDLE     hClientHandle,
-///   const GUID *pInterfaceGuid,
-///   LPCWSTR    strProfileName,
-///   DWORD      dwPosition,
-///   PVOID      pReserved
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlansetprofileposition>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanSetProfilePosition(
   int hClientHandle,
   Pointer<GUID> pInterfaceGuid,
-  Pointer<Utf16> strProfileName,
+  PCWSTR strProfileName,
   int dwPosition,
-  Pointer pReserved,
 ) => _WlanSetProfilePosition(
   hClientHandle,
   pInterfaceGuid,
   strProfileName,
   dwPosition,
-  pReserved,
+  nullptr,
 );
 
-final _WlanSetProfilePosition = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Pointer<Utf16> strProfileName,
-        Uint32 dwPosition,
-        Pointer pReserved,
-      ),
-      int Function(
-        int hClientHandle,
-        Pointer<GUID> pInterfaceGuid,
-        Pointer<Utf16> strProfileName,
-        int dwPosition,
-        Pointer pReserved,
-      )
-    >('WlanSetProfilePosition');
+@Native<Uint32 Function(HANDLE, Pointer<GUID>, PCWSTR, Uint32, Pointer)>(
+  symbol: 'WlanSetProfilePosition',
+)
+external int _WlanSetProfilePosition(
+  int hClientHandle,
+  Pointer<GUID> pInterfaceGuid,
+  PCWSTR strProfileName,
+  int dwPosition,
+  Pointer pReserved,
+);
 
-/// The WlanSetPsdIeDataList function sets the proximity service discovery
-/// (PSD) information element (IE) data list.
+/// Sets the proximity service discovery (PSD) information element (IE) data
+/// list.
 ///
-/// ```c
-/// DWORD WlanSetPsdIEDataList(
-///   HANDLE                    hClientHandle,
-///   LPCWSTR                   strFormat,
-///   const PWLAN_RAW_DATA_LIST pPsdIEDataList,
-///   PVOID                     pReserved
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlansetpsdiedatalist>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanSetPsdIEDataList(
   int hClientHandle,
-  Pointer<Utf16> strFormat,
+  PCWSTR? strFormat,
+  Pointer<WLAN_RAW_DATA_LIST>? pPsdIEDataList,
+) => _WlanSetPsdIEDataList(
+  hClientHandle,
+  strFormat ?? nullptr,
+  pPsdIEDataList ?? nullptr,
+  nullptr,
+);
+
+@Native<Uint32 Function(HANDLE, PCWSTR, Pointer<WLAN_RAW_DATA_LIST>, Pointer)>(
+  symbol: 'WlanSetPsdIEDataList',
+)
+external int _WlanSetPsdIEDataList(
+  int hClientHandle,
+  PCWSTR strFormat,
   Pointer<WLAN_RAW_DATA_LIST> pPsdIEDataList,
   Pointer pReserved,
-) => _WlanSetPsdIEDataList(hClientHandle, strFormat, pPsdIEDataList, pReserved);
+);
 
-final _WlanSetPsdIEDataList = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Pointer<Utf16> strFormat,
-        Pointer<WLAN_RAW_DATA_LIST> pPsdIEDataList,
-        Pointer pReserved,
-      ),
-      int Function(
-        int hClientHandle,
-        Pointer<Utf16> strFormat,
-        Pointer<WLAN_RAW_DATA_LIST> pPsdIEDataList,
-        Pointer pReserved,
-      )
-    >('WlanSetPsdIEDataList');
-
-/// The WlanGetProfileList function sets the security settings for a
-/// configurable object.
+/// Sets the security settings for a configurable object.
 ///
-/// ```c
-/// DWORD WlanSetSecuritySettings(
-///   HANDLE                hClientHandle,
-///   WLAN_SECURABLE_OBJECT SecurableObject,
-///   LPCWSTR               strModifiedSDDL
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlansetsecuritysettings>.
+///
 /// {@category wlanapi}
+@pragma('vm:prefer-inline')
 int WlanSetSecuritySettings(
   int hClientHandle,
-  int SecurableObject,
-  Pointer<Utf16> strModifiedSDDL,
-) => _WlanSetSecuritySettings(hClientHandle, SecurableObject, strModifiedSDDL);
+  WLAN_SECURABLE_OBJECT securableObject,
+  PCWSTR strModifiedSDDL,
+) => _WlanSetSecuritySettings(hClientHandle, securableObject, strModifiedSDDL);
 
-final _WlanSetSecuritySettings = _wlanapi
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hClientHandle,
-        Int32 SecurableObject,
-        Pointer<Utf16> strModifiedSDDL,
-      ),
-      int Function(
-        int hClientHandle,
-        int SecurableObject,
-        Pointer<Utf16> strModifiedSDDL,
-      )
-    >('WlanSetSecuritySettings');
+@Native<Uint32 Function(HANDLE, Int32, PCWSTR)>(
+  symbol: 'WlanSetSecuritySettings',
+)
+external int _WlanSetSecuritySettings(
+  int hClientHandle,
+  int securableObject,
+  PCWSTR strModifiedSDDL,
+);

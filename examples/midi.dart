@@ -3,17 +3,17 @@
 import 'dart:ffi';
 import 'dart:io';
 
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 void main() {
   // Open the device by specifying the device and filename.
   // MCI will attempt to choose the MIDI mapper as the output port.
-  final deviceType = TEXT('sequencer');
-  final elementName = TEXT(r'c:\Windows\Media\flourish.mid');
-  final mciOpenParams = calloc<MCI_OPEN_PARMS>()
-    ..ref.lpstrDeviceType = deviceType
-    ..ref.lpstrElementName = elementName;
+  final deviceType = w('sequencer');
+  final elementName = w(r'c:\Windows\Media\flourish.mid');
+  final mciOpenParams = loggingCalloc<MCI_OPEN_PARMS>();
+  mciOpenParams.ref
+    ..lpstrDeviceType = deviceType.ptr
+    ..lpstrElementName = elementName.ptr;
 
   var dwReturn = mciSendCommand(
     NULL,
@@ -32,7 +32,7 @@ void main() {
   final deviceID = mciOpenParams.ref.wDeviceID;
 
   // Check if the output port is the MIDI mapper.
-  final mciStatusParams = calloc<MCI_STATUS_PARMS>()
+  final mciStatusParams = loggingCalloc<MCI_STATUS_PARMS>()
     ..ref.dwItem = MCI_SEQ_STATUS_PORT;
 
   dwReturn = mciSendCommand(
@@ -51,22 +51,20 @@ void main() {
   // The output port is not the MIDI mapper.
   // Ask if the user wants to continue.
   if (LOWORD(mciStatusParams.ref.dwReturn) != MIDI_MAPPER) {
-    final warningMessage = TEXT('The MIDI mapper is not available. Continue?');
-    try {
-      if (MessageBox(NULL, warningMessage, nullptr, MB_YESNO) == IDNO) {
-        // User does not want to continue. Not an error;
-        // just close the device and return.
-        mciSendCommand(deviceID, MCI_CLOSE, 0, NULL);
-        return;
-      }
-    } finally {
-      free(warningMessage);
+    final text = w('The MIDI mapper is not available. Continue?');
+    if (MessageBox(null, text.ptr, null, MB_YESNO) == IDNO) {
+      // User does not want to continue. Not an error;
+      // just close the device and return.
+      mciSendCommand(deviceID, MCI_CLOSE, 0, NULL);
+      free(mciOpenParams);
+      free(mciStatusParams);
+      return;
     }
   }
 
   // Begin playback. The command will not return until playback has finished,
   // unless Ctrl+Break is pressed.
-  final mciPlayParams = calloc<MCI_PLAY_PARMS>();
+  final mciPlayParams = loggingCalloc<MCI_PLAY_PARMS>();
   dwReturn = mciSendCommand(
     deviceID,
     MCI_PLAY,
@@ -81,17 +79,12 @@ void main() {
     exit(dwReturn);
   }
 
-  final message = TEXT('Press OK to stop');
-  final caption = TEXT('Midi Sample');
-  MessageBox(NULL, message, caption, MB_OK);
+  final text = w('Press OK to stop');
+  final caption = w('Midi Sample');
+  MessageBox(null, text.ptr, caption.ptr, MB_OK);
 
   // Clear up
-  free(message);
-  free(caption);
-
   free(mciPlayParams);
   free(mciStatusParams);
   free(mciOpenParams);
-  free(deviceType);
-  free(elementName);
 }

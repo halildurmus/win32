@@ -1,8 +1,6 @@
 // Prints out information about one of a number of given Windows Subsystem for
 // Linux distributions.
 
-// ignore_for_file: unreachable_from_main
-
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -17,6 +15,7 @@ class DistributionConfiguration {
     this.flags,
     this.environmentVariables,
   );
+
   final String name;
   final int wslVersion;
   final int userID;
@@ -26,28 +25,24 @@ class DistributionConfiguration {
 
 /// Check whether a distribution exists
 bool isDistributionRegistered(String distributionName) {
-  final pDistributionName = distributionName.toNativeUtf16();
-  try {
-    return WslIsDistributionRegistered(pDistributionName) == TRUE;
-  } finally {
-    free(pDistributionName);
-  }
+  final name = w(distributionName);
+  return WslIsDistributionRegistered(name.ptr);
 }
 
 /// Get information about a specified WSL distribution.
 DistributionConfiguration getDistributionConfiguration(
   String distributionName,
 ) {
-  final pDistributionName = distributionName.toNativeUtf16();
-  final distributionVersion = calloc<ULONG>();
-  final defaultUID = calloc<ULONG>();
-  final wslDistributionFlags = calloc<LONG>();
-  final defaultEnvironmentVariables = calloc<Pointer<PSTR>>();
-  final defaultEnvironmentVariableCount = calloc<ULONG>();
+  final distributionVersion = loggingCalloc<ULONG>();
+  final defaultUID = loggingCalloc<ULONG>();
+  final wslDistributionFlags = loggingCalloc<LONG>();
+  final defaultEnvironmentVariables = loggingCalloc<Pointer<PSTR>>();
+  final defaultEnvironmentVariableCount = loggingCalloc<ULONG>();
 
   try {
-    final hr = WslGetDistributionConfiguration(
-      TEXT(distributionName),
+    final name = w(distributionName);
+    WslGetDistributionConfiguration(
+      name.ptr,
       distributionVersion,
       defaultUID,
       wslDistributionFlags,
@@ -55,12 +50,11 @@ DistributionConfiguration getDistributionConfiguration(
       defaultEnvironmentVariableCount,
     );
 
-    if (FAILED(hr)) throw WindowsException(hr);
-
     final vars = <String>[];
     for (var idx = 0; idx < defaultEnvironmentVariableCount.value; idx++) {
       vars.add(defaultEnvironmentVariables.value[idx].toDartString());
     }
+
     return DistributionConfiguration(
       distributionName,
       distributionVersion.value,
@@ -69,7 +63,6 @@ DistributionConfiguration getDistributionConfiguration(
       vars,
     );
   } finally {
-    free(pDistributionName);
     free(distributionVersion);
     free(defaultUID);
     free(wslDistributionFlags);
@@ -80,49 +73,62 @@ DistributionConfiguration getDistributionConfiguration(
 
 /// Run a test Linux shell command on a given distribution.
 int runCommand(String distributionName, String command) {
-  final pDistributionName = distributionName.toNativeUtf16();
-  final pCommand = command.toNativeUtf16();
-  final processHandle = calloc<HANDLE>();
-  final exitCode = calloc<DWORD>();
+  final exitCode = loggingCalloc<DWORD>();
   try {
-    final hr = WslLaunch(
-      pDistributionName,
-      pCommand,
-      FALSE,
+    final name = w(distributionName);
+    final lpCommand = w(command);
+    final processHandle = WslLaunch(
+      name.ptr,
+      lpCommand.ptr,
+      false,
       GetStdHandle(STD_INPUT_HANDLE), // redirect as appropriate
       GetStdHandle(STD_OUTPUT_HANDLE), // redirect as appropriate
       GetStdHandle(STD_ERROR_HANDLE), // redirect as appropriate
-      processHandle,
     );
-    if (FAILED(hr)) throw WindowsException(hr);
-    WaitForSingleObject(processHandle.value, INFINITE);
-    GetExitCodeProcess(processHandle.value, exitCode);
+    WaitForSingleObject(processHandle, INFINITE);
+    GetExitCodeProcess(processHandle, exitCode);
     return exitCode.value;
   } finally {
-    free(pDistributionName);
-    free(pCommand);
-    free(processHandle);
     free(exitCode);
   }
 }
 
 void main() {
-  print('WSL distributions registered:');
-  for (final distributionName in ['Ubuntu', 'Debian', 'kali-linux']) {
-    if (isDistributionRegistered(distributionName)) {
-      final config = getDistributionConfiguration(distributionName);
-      print('Distribution: $distributionName');
-      print('Version: ${config.wslVersion}');
-      final driveMounting =
-          config.flags & WSL_DISTRIBUTION_FLAGS_ENABLE_DRIVE_MOUNTING ==
-          WSL_DISTRIBUTION_FLAGS_ENABLE_DRIVE_MOUNTING;
-      print('Windows drives automatically mounted: $driveMounting');
-      print('Environment variables: ');
-      config.environmentVariables.forEach(print);
+  final distributions = [
+    'Ubuntu',
+    'Ubuntu-18.04',
+    'Ubuntu-20.04',
+    'Debian',
+    'kali-linux',
+  ].where(isDistributionRegistered).map(getDistributionConfiguration).toList();
+  if (distributions.isEmpty) {
+    print('No WSL distributions registered.');
+    return;
+  }
 
-      print('Test command (uname -a) reports:');
-      final exitCode = runCommand(distributionName, 'uname -a');
-      print('Command returned exit code: $exitCode');
-    }
+  print('Found ${distributions.length} WSL distributions:\n');
+  for (var i = 0; i < distributions.length; i++) {
+    final DistributionConfiguration(
+      :environmentVariables,
+      :flags,
+      :name,
+      :userID,
+      :wslVersion,
+    ) = distributions[i];
+    print('Distribution: $name');
+    print('Version: $wslVersion');
+    print('Default user ID: $userID');
+    final driveMounting =
+        flags & WSL_DISTRIBUTION_FLAGS_ENABLE_DRIVE_MOUNTING ==
+        WSL_DISTRIBUTION_FLAGS_ENABLE_DRIVE_MOUNTING;
+    print('Windows drives automatically mounted: $driveMounting');
+    print('Environment variables: ');
+    environmentVariables.forEach(print);
+
+    print('Test command (uname -a) reports:');
+    final exitCode = runCommand(name, 'uname -a');
+    print('Command returned exit code: $exitCode');
+
+    if (i < distributions.length - 1) print('');
   }
 }

@@ -1,759 +1,380 @@
-// Maps FFI prototypes onto the corresponding Win32 API function calls
-
+// Maps FFI prototypes onto the corresponding Win32 API function calls.
+//
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-
-// ignore_for_file: unused_import, non_constant_identifier_names
-// ignore_for_file: constant_identifier_names, camel_case_types
-// ignore_for_file: specify_nonobvious_property_types
+//
+// ignore_for_file: avoid_positional_boolean_parameters
+// ignore_for_file: non_constant_identifier_names, unused_import
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../callbacks.dart';
-import '../combase.dart';
-import '../guid.dart';
+import '../_internal/ws2_32.g.dart';
+import '../allocator.dart';
+import '../bstr.dart';
+import '../com/interface.g.dart';
+import '../com/iunknown.g.dart';
+import '../constants.dart';
+import '../constants.g.dart';
+import '../enums.g.dart';
+import '../exception.dart';
+import '../extensions/pointer.dart';
+import '../hresult.dart';
+import '../hstring.dart';
+import '../macros.dart';
+import '../ntstatus.dart';
+import '../pcstr.dart';
+import '../pcwstr.dart';
+import '../pstr.dart';
+import '../pwstr.dart';
 import '../structs.g.dart';
-import '../variant.dart';
+import '../types.dart';
+import '../utils.dart';
 
-final _ws2_32 = DynamicLibrary.open('ws2_32.dll');
-
-/// The accept function permits an incoming connection attempt on a socket.
+/// Permits an incoming connection attempt on a socket.
 ///
-/// ```c
-/// SOCKET accept(
-///   SOCKET   s,
-///   sockaddr *addr,
-///   int      *addrlen
-/// );
-/// ```
-/// {@category winsock}
-int accept(int s, Pointer<SOCKADDR> addr, Pointer<Int32> addrlen) =>
-    _accept(s, addr, addrlen);
-
-final _accept = _ws2_32
-    .lookupFunction<
-      IntPtr Function(IntPtr s, Pointer<SOCKADDR> addr, Pointer<Int32> addrlen),
-      int Function(int s, Pointer<SOCKADDR> addr, Pointer<Int32> addrlen)
-    >('accept');
-
-/// The bind function associates a local address with a socket.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-accept>.
 ///
-/// ```c
-/// int bind(
-///   SOCKET         s,
-///   const sockaddr *name,
-///   int            namelen
-/// );
-/// ```
 /// {@category winsock}
-int bind(int s, Pointer<SOCKADDR> name, int namelen) => _bind(s, name, namelen);
+@pragma('vm:prefer-inline')
+int accept(int s, Pointer<SOCKADDR>? addr, Pointer<Int32>? addrlen) =>
+    accept_Wrapper(s, addr ?? nullptr, addrlen ?? nullptr);
 
-final _bind = _ws2_32
-    .lookupFunction<
-      Int32 Function(IntPtr s, Pointer<SOCKADDR> name, Int32 namelen),
-      int Function(int s, Pointer<SOCKADDR> name, int namelen)
-    >('bind');
-
-/// The closesocket function closes an existing socket.
+/// Associates a local address with a socket.
 ///
-/// ```c
-/// int closesocket(
-///   SOCKET s
-/// );
-/// ```
-/// {@category winsock}
-int closesocket(int s) => _closesocket(s);
-
-final _closesocket = _ws2_32
-    .lookupFunction<Int32 Function(IntPtr s), int Function(int s)>(
-      'closesocket',
-    );
-
-/// The connect function establishes a connection to a specified socket.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-bind>.
 ///
-/// ```c
-/// int connect(
-///   SOCKET         s,
-///   const sockaddr *name,
-///   int            namelen
-/// );
-/// ```
 /// {@category winsock}
+@pragma('vm:prefer-inline')
+int bind(int s, Pointer<SOCKADDR> name, int namelen) =>
+    bind_Wrapper(s, name, namelen);
+
+/// Closes an existing socket.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-closesocket>.
+///
+/// {@category winsock}
+@pragma('vm:prefer-inline')
+int closesocket(int s) => closesocket_Wrapper(s);
+
+/// Establishes a connection to a specified socket.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-connect>.
+///
+/// {@category winsock}
+@pragma('vm:prefer-inline')
 int connect(int s, Pointer<SOCKADDR> name, int namelen) =>
-    _connect(s, name, namelen);
+    connect_Wrapper(s, name, namelen);
 
-final _connect = _ws2_32
-    .lookupFunction<
-      Int32 Function(IntPtr s, Pointer<SOCKADDR> name, Int32 namelen),
-      int Function(int s, Pointer<SOCKADDR> name, int namelen)
-    >('connect');
-
-/// The GetAddrInfoW function provides protocol-independent translation from
-/// a Unicode host name to an address.
+/// Provides protocol-independent translation from a Unicode host name to an
+/// address.
 ///
-/// ```c
-/// INT GetAddrInfoW(
-///   PCWSTR          pNodeName,
-///   PCWSTR          pServiceName,
-///   const ADDRINFOW *pHints,
-///   PADDRINFOW      *ppResult
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/ws2tcpip/nf-ws2tcpip-getaddrinfow>.
+///
 /// {@category winsock}
+@pragma('vm:prefer-inline')
 int GetAddrInfo(
-  Pointer<Utf16> pNodeName,
-  Pointer<Utf16> pServiceName,
-  Pointer<ADDRINFO> pHints,
+  PCWSTR? pNodeName,
+  PCWSTR? pServiceName,
+  Pointer<ADDRINFO>? pHints,
   Pointer<Pointer<ADDRINFO>> ppResult,
-) => _GetAddrInfo(pNodeName, pServiceName, pHints, ppResult);
-
-final _GetAddrInfo = _ws2_32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Utf16> pNodeName,
-        Pointer<Utf16> pServiceName,
-        Pointer<ADDRINFO> pHints,
-        Pointer<Pointer<ADDRINFO>> ppResult,
-      ),
-      int Function(
-        Pointer<Utf16> pNodeName,
-        Pointer<Utf16> pServiceName,
-        Pointer<ADDRINFO> pHints,
-        Pointer<Pointer<ADDRINFO>> ppResult,
-      )
-    >('GetAddrInfoW');
-
-/// The gethostbyaddr function retrieves the host information corresponding
-/// to a network address.
-///
-/// ```c
-/// hostent* gethostbyaddr(
-///    const char *addr,
-///    int        len,
-///    int        type
-/// );
-/// ```
-/// {@category winsock}
-Pointer<HOSTENT> gethostbyaddr(Pointer<Utf8> addr, int len, int type) =>
-    _gethostbyaddr(addr, len, type);
-
-final _gethostbyaddr = _ws2_32
-    .lookupFunction<
-      Pointer<HOSTENT> Function(Pointer<Utf8> addr, Int32 len, Int32 type),
-      Pointer<HOSTENT> Function(Pointer<Utf8> addr, int len, int type)
-    >('gethostbyaddr');
-
-/// The gethostbyname function retrieves host information corresponding to a
-/// host name from a host database.
-///
-/// ```c
-/// hostent* gethostbyname(
-///   const char *name
-/// );
-/// ```
-/// {@category winsock}
-Pointer<HOSTENT> gethostbyname(Pointer<Utf8> name) => _gethostbyname(name);
-
-final _gethostbyname = _ws2_32
-    .lookupFunction<
-      Pointer<HOSTENT> Function(Pointer<Utf8> name),
-      Pointer<HOSTENT> Function(Pointer<Utf8> name)
-    >('gethostbyname');
-
-/// The gethostname function retrieves the standard host name for the local
-/// computer.
-///
-/// ```c
-/// int gethostname(
-///   char *name,
-///   int  namelen
-/// );
-/// ```
-/// {@category winsock}
-int gethostname(Pointer<Utf8> name, int namelen) => _gethostname(name, namelen);
-
-final _gethostname = _ws2_32
-    .lookupFunction<
-      Int32 Function(Pointer<Utf8> name, Int32 namelen),
-      int Function(Pointer<Utf8> name, int namelen)
-    >('gethostname');
-
-/// The getnameinfo function provides protocol-independent name resolution
-/// from an address to an ANSI host name and from a port number to the ANSI
-/// service name.
-///
-/// ```c
-/// INT getnameinfo(
-///   const SOCKADDR *pSockaddr,
-///   socklen_t      SockaddrLength,
-///   PCHAR          pNodeBuffer,
-///   DWORD          NodeBufferSize,
-///   PCHAR          pServiceBuffer,
-///   DWORD          ServiceBufferSize,
-///   INT            Flags
-/// );
-/// ```
-/// {@category winsock}
-int getnameinfo(
-  Pointer<SOCKADDR> pSockaddr,
-  int SockaddrLength,
-  Pointer<Utf8> pNodeBuffer,
-  int NodeBufferSize,
-  Pointer<Utf8> pServiceBuffer,
-  int ServiceBufferSize,
-  int Flags,
-) => _getnameinfo(
-  pSockaddr,
-  SockaddrLength,
-  pNodeBuffer,
-  NodeBufferSize,
-  pServiceBuffer,
-  ServiceBufferSize,
-  Flags,
+) => _GetAddrInfo(
+  pNodeName ?? nullptr,
+  pServiceName ?? nullptr,
+  pHints ?? nullptr,
+  ppResult,
 );
 
-final _getnameinfo = _ws2_32
-    .lookupFunction<
-      Int32 Function(
-        Pointer<SOCKADDR> pSockaddr,
-        Int32 SockaddrLength,
-        Pointer<Utf8> pNodeBuffer,
-        Uint32 NodeBufferSize,
-        Pointer<Utf8> pServiceBuffer,
-        Uint32 ServiceBufferSize,
-        Int32 Flags,
-      ),
-      int Function(
-        Pointer<SOCKADDR> pSockaddr,
-        int SockaddrLength,
-        Pointer<Utf8> pNodeBuffer,
-        int NodeBufferSize,
-        Pointer<Utf8> pServiceBuffer,
-        int ServiceBufferSize,
-        int Flags,
-      )
-    >('getnameinfo');
+@Native<
+  Int32 Function(PCWSTR, PCWSTR, Pointer<ADDRINFO>, Pointer<Pointer<ADDRINFO>>)
+>(symbol: 'GetAddrInfoW')
+external int _GetAddrInfo(
+  PCWSTR pNodeName,
+  PCWSTR pServiceName,
+  Pointer<ADDRINFO> pHints,
+  Pointer<Pointer<ADDRINFO>> ppResult,
+);
 
-/// The getpeername function retrieves the address of the peer to which a
-/// socket is connected.
+/// Retrieves the standard host name for the local computer.
 ///
-/// ```c
-/// int getpeername(
-///   SOCKET   s,
-///   sockaddr *name,
-///   int      *namelen
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-gethostname>.
+///
 /// {@category winsock}
+@pragma('vm:prefer-inline')
+int gethostname(PSTR name, int namelen) => gethostname_Wrapper(name, namelen);
+
+/// Provides protocol-independent name resolution from an address to an ANSI
+/// host name and from a port number to the ANSI service name.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/ws2tcpip/nf-ws2tcpip-getnameinfo>.
+///
+/// {@category winsock}
+@pragma('vm:prefer-inline')
+int getnameinfo(
+  Pointer<SOCKADDR> pSockaddr,
+  int sockaddrLength,
+  PSTR? pNodeBuffer,
+  int nodeBufferSize,
+  PSTR? pServiceBuffer,
+  int serviceBufferSize,
+  int flags,
+) => getnameinfo_Wrapper(
+  pSockaddr,
+  sockaddrLength,
+  pNodeBuffer ?? nullptr,
+  nodeBufferSize,
+  pServiceBuffer ?? nullptr,
+  serviceBufferSize,
+  flags,
+);
+
+/// Retrieves the address of the peer to which a socket is connected.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-getpeername>.
+///
+/// {@category winsock}
+@pragma('vm:prefer-inline')
 int getpeername(int s, Pointer<SOCKADDR> name, Pointer<Int32> namelen) =>
-    _getpeername(s, name, namelen);
+    getpeername_Wrapper(s, name, namelen);
 
-final _getpeername = _ws2_32
-    .lookupFunction<
-      Int32 Function(IntPtr s, Pointer<SOCKADDR> name, Pointer<Int32> namelen),
-      int Function(int s, Pointer<SOCKADDR> name, Pointer<Int32> namelen)
-    >('getpeername');
-
-/// The getprotobyname function retrieves the protocol information
-/// corresponding to a protocol name.
+/// Retrieves the protocol information corresponding to a protocol name.
 ///
-/// ```c
-/// protoent* getprotobyname(
-///   const char *name
-/// );
-/// ```
-/// {@category winsock}
-Pointer<PROTOENT> getprotobyname(Pointer<Utf8> name) => _getprotobyname(name);
-
-final _getprotobyname = _ws2_32
-    .lookupFunction<
-      Pointer<PROTOENT> Function(Pointer<Utf8> name),
-      Pointer<PROTOENT> Function(Pointer<Utf8> name)
-    >('getprotobyname');
-
-/// The getprotobynumber function retrieves protocol information
-/// corresponding to a protocol number.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-getprotobyname>.
 ///
-/// ```c
-/// protoent* getprotobynumber(
-///   int number
-/// );
-/// ```
 /// {@category winsock}
-Pointer<PROTOENT> getprotobynumber(int number) => _getprotobynumber(number);
+@pragma('vm:prefer-inline')
+Pointer<PROTOENT> getprotobyname(PCSTR name) => getprotobyname_Wrapper(name);
 
-final _getprotobynumber = _ws2_32
-    .lookupFunction<
-      Pointer<PROTOENT> Function(Int32 number),
-      Pointer<PROTOENT> Function(int number)
-    >('getprotobynumber');
-
-/// The getservbyname function retrieves service information corresponding
-/// to a service name and protocol.
+/// Retrieves protocol information corresponding to a protocol number.
 ///
-/// ```c
-/// servent* getservbyname(
-///   const char *name,
-///   const char *proto
-/// );
-/// ```
-/// {@category winsock}
-Pointer<SERVENT> getservbyname(Pointer<Utf8> name, Pointer<Utf8> proto) =>
-    _getservbyname(name, proto);
-
-final _getservbyname = _ws2_32
-    .lookupFunction<
-      Pointer<SERVENT> Function(Pointer<Utf8> name, Pointer<Utf8> proto),
-      Pointer<SERVENT> Function(Pointer<Utf8> name, Pointer<Utf8> proto)
-    >('getservbyname');
-
-/// The getservbyport function retrieves service information corresponding
-/// to a port and protocol.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-getprotobynumber>.
 ///
-/// ```c
-/// servent* getservbyport(
-///   int        port,
-///   const char *proto
-/// );
-/// ```
 /// {@category winsock}
-Pointer<SERVENT> getservbyport(int port, Pointer<Utf8> proto) =>
-    _getservbyport(port, proto);
+@pragma('vm:prefer-inline')
+Pointer<PROTOENT> getprotobynumber(int number) =>
+    getprotobynumber_Wrapper(number);
 
-final _getservbyport = _ws2_32
-    .lookupFunction<
-      Pointer<SERVENT> Function(Int32 port, Pointer<Utf8> proto),
-      Pointer<SERVENT> Function(int port, Pointer<Utf8> proto)
-    >('getservbyport');
-
-/// The getsockname function retrieves the local name for a socket.
+/// Retrieves service information corresponding to a service name and protocol.
 ///
-/// ```c
-/// int getsockname(
-///   SOCKET   s,
-///   sockaddr *name,
-///   int      *namelen
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-getservbyname>.
+///
 /// {@category winsock}
+@pragma('vm:prefer-inline')
+Pointer<SERVENT> getservbyname(PCSTR name, PCSTR? proto) =>
+    getservbyname_Wrapper(name, proto ?? nullptr);
+
+/// Retrieves service information corresponding to a port and protocol.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-getservbyport>.
+///
+/// {@category winsock}
+@pragma('vm:prefer-inline')
+Pointer<SERVENT> getservbyport(int port, PCSTR? proto) =>
+    getservbyport_Wrapper(port, proto ?? nullptr);
+
+/// Retrieves the local name for a socket.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-getsockname>.
+///
+/// {@category winsock}
+@pragma('vm:prefer-inline')
 int getsockname(int s, Pointer<SOCKADDR> name, Pointer<Int32> namelen) =>
-    _getsockname(s, name, namelen);
+    getsockname_Wrapper(s, name, namelen);
 
-final _getsockname = _ws2_32
-    .lookupFunction<
-      Int32 Function(IntPtr s, Pointer<SOCKADDR> name, Pointer<Int32> namelen),
-      int Function(int s, Pointer<SOCKADDR> name, Pointer<Int32> namelen)
-    >('getsockname');
-
-/// The getsockopt function retrieves a socket option.
+/// Retrieves a socket option.
 ///
-/// ```c
-/// int getsockopt(
-///   SOCKET s,
-///   int    level,
-///   int    optname,
-///   char   *optval,
-///   int    *optlen
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-getsockopt>.
+///
 /// {@category winsock}
+@pragma('vm:prefer-inline')
 int getsockopt(
   int s,
   int level,
   int optname,
-  Pointer<Utf8> optval,
+  PSTR optval,
   Pointer<Int32> optlen,
-) => _getsockopt(s, level, optname, optval, optlen);
+) => getsockopt_Wrapper(s, level, optname, optval, optlen);
 
-final _getsockopt = _ws2_32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr s,
-        Int32 level,
-        Int32 optname,
-        Pointer<Utf8> optval,
-        Pointer<Int32> optlen,
-      ),
-      int Function(
-        int s,
-        int level,
-        int optname,
-        Pointer<Utf8> optval,
-        Pointer<Int32> optlen,
-      )
-    >('getsockopt');
-
-/// The htonl function converts a u_long from host to TCP/IP network byte
-/// order (which is big-endian).
+/// Converts a u_long from host to TCP/IP network byte order (which is
+/// big-endian).
 ///
-/// ```c
-/// u_long htonl(
-///   u_long hostlong
-/// );
-/// ```
-/// {@category winsock}
-int htonl(int hostlong) => _htonl(hostlong);
-
-final _htonl = _ws2_32
-    .lookupFunction<
-      Uint32 Function(Uint32 hostlong),
-      int Function(int hostlong)
-    >('htonl');
-
-/// The htons function converts a u_short from host to TCP/IP network byte
-/// order (which is big-endian).
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-htonl>.
 ///
-/// ```c
-/// u_short htons(
-///   u_short hostshort
-/// );
-/// ```
 /// {@category winsock}
-int htons(int hostshort) => _htons(hostshort);
+@pragma('vm:prefer-inline')
+int htonl(int hostlong) => htonl_Wrapper(hostlong);
 
-final _htons = _ws2_32
-    .lookupFunction<
-      Uint16 Function(Uint16 hostshort),
-      int Function(int hostshort)
-    >('htons');
-
-/// The inet_addr function converts a string containing an IPv4
-/// dotted-decimal address into a proper address for the IN_ADDR structure.
+/// Converts a u_short from host to TCP/IP network byte order (which is
+/// big-endian).
 ///
-/// ```c
-/// unsigned long inet_addr(
-///   const char *cp
-/// );
-/// ```
-/// {@category winsock}
-int inet_addr(Pointer<Utf8> cp) => _inet_addr(cp);
-
-final _inet_addr = _ws2_32
-    .lookupFunction<
-      Uint32 Function(Pointer<Utf8> cp),
-      int Function(Pointer<Utf8> cp)
-    >('inet_addr');
-
-/// The inet_ntoa function converts an (Ipv4) Internet network address into
-/// an ASCII string in Internet standard dotted-decimal format.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-htons>.
 ///
-/// ```c
-/// char* inet_ntoa(
-///   in_addr in
-/// );
-/// ```
 /// {@category winsock}
-Pointer<Utf8> inet_ntoa(IN_ADDR in_) => _inet_ntoa(in_);
+@pragma('vm:prefer-inline')
+int htons(int hostshort) => htons_Wrapper(hostshort);
 
-final _inet_ntoa = _ws2_32
-    .lookupFunction<
-      Pointer<Utf8> Function(IN_ADDR in_),
-      Pointer<Utf8> Function(IN_ADDR in_)
-    >('inet_ntoa');
-
-/// The inet_ntop function converts an IPv4 or IPv6 Internet network address
-/// into a string in Internet standard format.
+/// Converts an IPv4 or IPv6 Internet network address into a string in Internet
+/// standard format.
 ///
-/// ```c
-/// PCSTR WSAAPI inet_ntop(
-///   [in]  INT        Family,
-///   [in]  const VOID *pAddr,
-///   [out] PSTR       pStringBuf,
-///   [in]  size_t     StringBufSize
-/// );
-/// ```
+/// The ANSI version of this function is inet_ntop.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/ws2tcpip/nf-ws2tcpip-inet_ntop>.
+///
 /// {@category winsock}
-Pointer<Utf8> inet_ntop(
-  int Family,
+@pragma('vm:prefer-inline')
+PCSTR inet_ntop(
+  int family,
   Pointer pAddr,
-  Pointer<Utf8> pStringBuf,
-  int StringBufSize,
-) => _inet_ntop(Family, pAddr, pStringBuf, StringBufSize);
+  PSTR pStringBuf,
+  int stringBufSize,
+) => inet_ntop_Wrapper(family, pAddr, pStringBuf, stringBufSize);
 
-final _inet_ntop = _ws2_32
-    .lookupFunction<
-      Pointer<Utf8> Function(
-        Int32 Family,
-        Pointer pAddr,
-        Pointer<Utf8> pStringBuf,
-        IntPtr StringBufSize,
-      ),
-      Pointer<Utf8> Function(
-        int Family,
-        Pointer pAddr,
-        Pointer<Utf8> pStringBuf,
-        int StringBufSize,
-      )
-    >('inet_ntop');
-
-/// The ioctlsocket function controls the I/O mode of a socket.
+/// Controls the I/O mode of a socket.
 ///
-/// ```c
-/// int ioctlsocket(
-///   SOCKET s,
-///   long   cmd,
-///   u_long *argp
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-ioctlsocket>.
+///
 /// {@category winsock}
+@pragma('vm:prefer-inline')
 int ioctlsocket(int s, int cmd, Pointer<Uint32> argp) =>
-    _ioctlsocket(s, cmd, argp);
+    ioctlsocket_Wrapper(s, cmd, argp);
 
-final _ioctlsocket = _ws2_32
-    .lookupFunction<
-      Int32 Function(IntPtr s, Int32 cmd, Pointer<Uint32> argp),
-      int Function(int s, int cmd, Pointer<Uint32> argp)
-    >('ioctlsocket');
-
-/// The listen function places a socket in a state in which it is listening
-/// for an incoming connection.
+/// Places a socket in a state in which it is listening for an incoming
+/// connection.
 ///
-/// ```c
-/// int listen(
-///   SOCKET s,
-///   int    backlog
-/// );
-/// ```
-/// {@category winsock}
-int listen(int s, int backlog) => _listen(s, backlog);
-
-final _listen = _ws2_32
-    .lookupFunction<
-      Int32 Function(IntPtr s, Int32 backlog),
-      int Function(int s, int backlog)
-    >('listen');
-
-/// The ntohl function converts a u_long from TCP/IP network order to host
-/// byte order (which is little-endian on Intel processors).
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-listen>.
 ///
-/// ```c
-/// u_long ntohl(
-///   u_long netlong
-/// );
-/// ```
 /// {@category winsock}
-int ntohl(int netlong) => _ntohl(netlong);
+@pragma('vm:prefer-inline')
+int listen(int s, int backlog) => listen_Wrapper(s, backlog);
 
-final _ntohl = _ws2_32
-    .lookupFunction<Uint32 Function(Uint32 netlong), int Function(int netlong)>(
-      'ntohl',
-    );
-
-/// The ntohs function converts a u_short from TCP/IP network byte order to
-/// host byte order (which is little-endian on Intel processors).
+/// Converts a u_long from TCP/IP network order to host byte order, which is
+/// little-endian on Intel processors.
 ///
-/// ```c
-/// u_short ntohs(
-///   u_short netshort
-/// );
-/// ```
-/// {@category winsock}
-int ntohs(int netshort) => _ntohs(netshort);
-
-final _ntohs = _ws2_32
-    .lookupFunction<
-      Uint16 Function(Uint16 netshort),
-      int Function(int netshort)
-    >('ntohs');
-
-/// The recv function receives data from a connected socket or a bound
-/// connectionless socket.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-ntohl>.
 ///
-/// ```c
-/// int recv(
-///   SOCKET s,
-///   char   *buf,
-///   int    len,
-///   int    flags
-/// );
-/// ```
 /// {@category winsock}
-int recv(int s, Pointer<Utf8> buf, int len, int flags) =>
-    _recv(s, buf, len, flags);
+@pragma('vm:prefer-inline')
+int ntohl(int netlong) => ntohl_Wrapper(netlong);
 
-final _recv = _ws2_32
-    .lookupFunction<
-      Int32 Function(IntPtr s, Pointer<Utf8> buf, Int32 len, Int32 flags),
-      int Function(int s, Pointer<Utf8> buf, int len, int flags)
-    >('recv');
-
-/// The recvfrom function receives a datagram, and stores the source
-/// address.
+/// Converts a u_short from TCP/IP network byte order to host byte order, which
+/// is little-endian on Intel processors.
 ///
-/// ```c
-/// int recvfrom(
-///   SOCKET   s,
-///   char     *buf,
-///   int      len,
-///   int      flags,
-///   sockaddr *from,
-///   int      *fromlen
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-ntohs>.
+///
 /// {@category winsock}
+@pragma('vm:prefer-inline')
+int ntohs(int netshort) => ntohs_Wrapper(netshort);
+
+/// Receives data from a connected socket or a bound connectionless socket.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-recv>.
+///
+/// {@category winsock}
+@pragma('vm:prefer-inline')
+int recv(int s, PSTR buf, int len, SEND_RECV_FLAGS flags) =>
+    recv_Wrapper(s, buf, len, flags);
+
+/// Receives a datagram and stores the source address.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-recvfrom>.
+///
+/// {@category winsock}
+@pragma('vm:prefer-inline')
 int recvfrom(
   int s,
-  Pointer<Utf8> buf,
+  PSTR buf,
   int len,
   int flags,
-  Pointer<SOCKADDR> from,
-  Pointer<Int32> fromlen,
-) => _recvfrom(s, buf, len, flags, from, fromlen);
+  Pointer<SOCKADDR>? from,
+  Pointer<Int32>? fromlen,
+) => recvfrom_Wrapper(s, buf, len, flags, from ?? nullptr, fromlen ?? nullptr);
 
-final _recvfrom = _ws2_32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr s,
-        Pointer<Utf8> buf,
-        Int32 len,
-        Int32 flags,
-        Pointer<SOCKADDR> from,
-        Pointer<Int32> fromlen,
-      ),
-      int Function(
-        int s,
-        Pointer<Utf8> buf,
-        int len,
-        int flags,
-        Pointer<SOCKADDR> from,
-        Pointer<Int32> fromlen,
-      )
-    >('recvfrom');
-
-/// The select function determines the status of one or more sockets,
-/// waiting if necessary, to perform synchronous I/O.
+/// Determines the status of one or more sockets, waiting if necessary, to
+/// perform synchronous I/O.
 ///
-/// ```c
-/// int select(
-///   int           nfds,
-///   fd_set        *readfds,
-///   fd_set        *writefds,
-///   fd_set        *exceptfds,
-///   const timeval *timeout
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-select>.
+///
 /// {@category winsock}
+@pragma('vm:prefer-inline')
 int select(
   int nfds,
-  Pointer<FD_SET> readfds,
-  Pointer<FD_SET> writefds,
-  Pointer<FD_SET> exceptfds,
-  Pointer<TIMEVAL> timeout,
-) => _select(nfds, readfds, writefds, exceptfds, timeout);
+  Pointer<FD_SET>? readfds,
+  Pointer<FD_SET>? writefds,
+  Pointer<FD_SET>? exceptfds,
+  Pointer<TIMEVAL>? timeout,
+) => select_Wrapper(
+  nfds,
+  readfds ?? nullptr,
+  writefds ?? nullptr,
+  exceptfds ?? nullptr,
+  timeout ?? nullptr,
+);
 
-final _select = _ws2_32
-    .lookupFunction<
-      Int32 Function(
-        Int32 nfds,
-        Pointer<FD_SET> readfds,
-        Pointer<FD_SET> writefds,
-        Pointer<FD_SET> exceptfds,
-        Pointer<TIMEVAL> timeout,
-      ),
-      int Function(
-        int nfds,
-        Pointer<FD_SET> readfds,
-        Pointer<FD_SET> writefds,
-        Pointer<FD_SET> exceptfds,
-        Pointer<TIMEVAL> timeout,
-      )
-    >('select');
-
-/// The send function sends data on a connected socket.
+/// Sends data on a connected socket.
 ///
-/// ```c
-/// int send(
-///   SOCKET     s,
-///   const char *buf,
-///   int        len,
-///   int        flags
-/// );
-/// ```
-/// {@category winsock}
-int send(int s, Pointer<Utf8> buf, int len, int flags) =>
-    _send(s, buf, len, flags);
-
-final _send = _ws2_32
-    .lookupFunction<
-      Int32 Function(IntPtr s, Pointer<Utf8> buf, Int32 len, Int32 flags),
-      int Function(int s, Pointer<Utf8> buf, int len, int flags)
-    >('send');
-
-/// The sendto function sends data to a specific destination.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-send>.
 ///
-/// ```c
-/// int sendto(
-///   SOCKET         s,
-///   const char     *buf,
-///   int            len,
-///   int            flags,
-///   const sockaddr *to,
-///   int            tolen
-/// );
-/// ```
 /// {@category winsock}
+@pragma('vm:prefer-inline')
+int send(int s, PCSTR buf, int len, SEND_RECV_FLAGS flags) =>
+    send_Wrapper(s, buf, len, flags);
+
+/// Sends data to a specific destination.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-sendto>.
+///
+/// {@category winsock}
+@pragma('vm:prefer-inline')
 int sendto(
   int s,
-  Pointer<Utf8> buf,
+  PCSTR buf,
   int len,
   int flags,
   Pointer<SOCKADDR> to,
   int tolen,
-) => _sendto(s, buf, len, flags, to, tolen);
+) => sendto_Wrapper(s, buf, len, flags, to, tolen);
 
-final _sendto = _ws2_32
-    .lookupFunction<
-      Int32 Function(
-        IntPtr s,
-        Pointer<Utf8> buf,
-        Int32 len,
-        Int32 flags,
-        Pointer<SOCKADDR> to,
-        Int32 tolen,
-      ),
-      int Function(
-        int s,
-        Pointer<Utf8> buf,
-        int len,
-        int flags,
-        Pointer<SOCKADDR> to,
-        int tolen,
-      )
-    >('sendto');
-
-/// The shutdown function disables sends or receives on a socket.
+/// Disables sends or receives on a socket.
 ///
-/// ```c
-/// int shutdown(
-///   SOCKET s,
-///   int    how
-/// );
-/// ```
-/// {@category winsock}
-int shutdown(int s, int how) => _shutdown(s, how);
-
-final _shutdown = _ws2_32
-    .lookupFunction<
-      Int32 Function(IntPtr s, Int32 how),
-      int Function(int s, int how)
-    >('shutdown');
-
-/// The socket function creates a socket that is bound to a specific
-/// transport service provider.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-shutdown>.
 ///
-/// ```c
-/// SOCKET socket(
-///   int af,
-///   int type,
-///   int protocol
-/// );
-/// ```
 /// {@category winsock}
-int socket(int af, int type, int protocol) => _socket(af, type, protocol);
+@pragma('vm:prefer-inline')
+int shutdown(int s, WINSOCK_SHUTDOWN_HOW how) => shutdown_Wrapper(s, how);
 
-final _socket = _ws2_32
-    .lookupFunction<
-      IntPtr Function(Int32 af, Int32 type, Int32 protocol),
-      int Function(int af, int type, int protocol)
-    >('socket');
+/// Creates a socket that is bound to a specific transport service provider.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-socket>.
+///
+/// {@category winsock}
+@pragma('vm:prefer-inline')
+int socket(int af, WINSOCK_SOCKET_TYPE type, int protocol) =>
+    socket_Wrapper(af, type, protocol);

@@ -1,65 +1,20 @@
-// Get general Windows system information
+// Get general Windows system information.
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-bool testFlag(int value, int attribute) => value & attribute == attribute;
-
-/// Test for a minimum version of Windows.
-///
-/// Per:
-/// https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-getversionexw,
-/// applications not manifested for Windows 8.1 or Windows 10 will return the
-/// Windows 8 OS version value (6.2).
-bool isWindowsVersionAtLeast(int majorVersion, int minorVersion) {
-  final versionInfo = calloc<OSVERSIONINFO>();
-  versionInfo.ref.dwOSVersionInfoSize = sizeOf<OSVERSIONINFO>();
-
-  try {
-    final result = GetVersionEx(versionInfo);
-
-    if (result != 0) {
-      if (versionInfo.ref.dwMajorVersion >= majorVersion) {
-        if (versionInfo.ref.dwMinorVersion >= minorVersion) {
-          return true;
-        }
-      }
-      return false;
-    } else {
-      throw WindowsException(HRESULT_FROM_WIN32(GetLastError()));
-    }
-  } finally {
-    free(versionInfo);
-  }
-}
-
-/// Test if running Windows is at least Windows XP.
-bool isWindowsXPOrGreater() => isWindowsVersionAtLeast(5, 1);
-
-/// Test if running Windows is at least Windows Vista.
-bool isWindowsVistaOrGreater() => isWindowsVersionAtLeast(6, 0);
-
-/// Test if running Windows is at least Windows 7.
-bool isWindows7OrGreater() => isWindowsVersionAtLeast(6, 1);
-
-/// Test if running Windows is at least Windows 8.
-bool isWindows8OrGreater() => isWindowsVersionAtLeast(6, 2);
-
 /// Return a value representing the physically installed memory in the computer.
 /// This may not be the same as available memory.
 int getSystemMemoryInMegabytes() {
-  final memory = calloc<ULONGLONG>();
-
+  final memory = loggingCalloc<ULONGLONG>();
   try {
-    final result = GetPhysicallyInstalledSystemMemory(memory);
-    if (result != 0) {
+    if (GetPhysicallyInstalledSystemMemory(memory)) {
       return memory.value ~/ 1024;
-    } else {
-      final error = GetLastError();
-      throw WindowsException(HRESULT_FROM_WIN32(error));
     }
+
+    throw WindowsException(GetLastError().toHRESULT());
   } finally {
     free(memory);
   }
@@ -67,27 +22,24 @@ int getSystemMemoryInMegabytes() {
 
 /// Get the computer's fully-qualified DNS name, where available.
 String getComputerName() {
-  final nameLength = calloc<DWORD>();
+  final nameLength = loggingCalloc<DWORD>();
   String name;
 
-  GetComputerNameEx(ComputerNameDnsFullyQualified, nullptr, nameLength);
+  GetComputerNameEx(ComputerNameDnsFullyQualified, null, nameLength);
 
-  final namePtr = wsalloc(nameLength.value);
+  final namePtr = Pwstr.allocate(nameLength.value);
 
   try {
-    final result = GetComputerNameEx(
+    if (GetComputerNameEx(
       ComputerNameDnsFullyQualified,
-      namePtr,
+      namePtr.ptr,
       nameLength,
-    );
-
-    if (result != 0) {
+    )) {
       name = namePtr.toDartString();
     } else {
-      throw WindowsException(HRESULT_FROM_WIN32(GetLastError()));
+      throw WindowsException(GetLastError().toHRESULT());
     }
   } finally {
-    free(namePtr);
     free(nameLength);
   }
   return name;
@@ -97,27 +49,27 @@ String getComputerName() {
 Object getRegistryValue(int key, String subKey, String valueName) {
   late Object dataValue;
 
-  final subKeyPtr = subKey.toNativeUtf16();
-  final valueNamePtr = valueName.toNativeUtf16();
-  final openKeyPtr = calloc<HANDLE>();
-  final dataType = calloc<DWORD>();
+  final openKeyPtr = loggingCalloc<HANDLE>();
+  final dataType = loggingCalloc<DWORD>();
 
   // 256 bytes is more than enough, and Windows will throw ERROR_MORE_DATA if
   // not, so there won't be an overrun.
-  final data = calloc<BYTE>(256);
-  final dataSize = calloc<DWORD>()..value = 256;
+  final data = loggingCalloc<BYTE>(256);
+  final dataSize = loggingCalloc<DWORD>()..value = 256;
 
   try {
-    var result = RegOpenKeyEx(key, subKeyPtr, 0, KEY_READ, openKeyPtr);
+    final lpSubKey = w(subKey);
+    var result = RegOpenKeyEx(key, lpSubKey.ptr, 0, KEY_READ, openKeyPtr);
     if (result == ERROR_SUCCESS) {
+      final lpValueName = w(valueName);
       result = RegQueryValueEx(
         openKeyPtr.value,
-        valueNamePtr,
-        nullptr,
+        lpValueName.ptr,
         dataType,
         data,
         dataSize,
       );
+      RegCloseKey(openKeyPtr.value);
 
       if (result == ERROR_SUCCESS) {
         if (dataType.value == REG_DWORD) {
@@ -128,22 +80,22 @@ Object getRegistryValue(int key, String subKey, String valueName) {
           // other data types are available, but this is a sample
         }
       } else {
-        throw WindowsException(HRESULT_FROM_WIN32(result));
+        throw WindowsException(result.toHRESULT());
       }
     } else {
-      throw WindowsException(HRESULT_FROM_WIN32(result));
+      throw WindowsException(result.toHRESULT());
     }
   } finally {
-    free(subKeyPtr);
-    free(valueNamePtr);
     free(openKeyPtr);
+    free(dataType);
     free(data);
     free(dataSize);
   }
-  RegCloseKey(openKeyPtr.value);
 
   return dataValue;
 }
+
+bool testFlag(int value, int attribute) => value & attribute == attribute;
 
 /// Print system power status information.
 ///
@@ -152,11 +104,10 @@ Object getRegistryValue(int key, String subKey, String valueName) {
 /// documentation, here:
 /// https://learn.microsoft.com/windows/win32/api/winbase/ns-winbase-system_power_status
 void printPowerInfo() {
-  final powerStatus = calloc<SYSTEM_POWER_STATUS>();
+  final powerStatus = loggingCalloc<SYSTEM_POWER_STATUS>();
 
   try {
-    final result = GetSystemPowerStatus(powerStatus);
-    if (result != 0) {
+    if (GetSystemPowerStatus(powerStatus)) {
       print('Power status from GetSystemPowerStatus():');
 
       if (powerStatus.ref.ACLineStatus == 0) {
@@ -191,7 +142,7 @@ void printPowerInfo() {
         }
       }
     } else {
-      throw WindowsException(HRESULT_FROM_WIN32(GetLastError()));
+      throw WindowsException(GetLastError().toHRESULT());
     }
   } finally {
     free(powerStatus);
@@ -204,12 +155,12 @@ void printPowerInfo() {
 /// report more detailed system battery status from the power management
 /// library.
 void printBatteryStatusInfo() {
-  final batteryStatus = calloc<SYSTEM_BATTERY_STATE>();
+  final batteryStatus = loggingCalloc<SYSTEM_BATTERY_STATE>();
 
   try {
     final result = CallNtPowerInformation(
       SystemBatteryState,
-      nullptr,
+      null,
       0,
       batteryStatus,
       sizeOf<SYSTEM_BATTERY_STATE>(),
@@ -219,26 +170,26 @@ void printBatteryStatusInfo() {
       print('Power status from CallNtPowerInformation():');
 
       print(
-        batteryStatus.ref.AcOnLine == TRUE
+        batteryStatus.ref.AcOnLine
             ? ' - System is currently operating on external power.'
             : ' - System is not currently operating on external power.',
       );
 
       print(
-        batteryStatus.ref.BatteryPresent == TRUE
+        batteryStatus.ref.BatteryPresent
             ? ' - At least one battery is present in the system.'
             : ' - No batteries detected in the system.',
       );
 
-      if (batteryStatus.ref.BatteryPresent == TRUE) {
+      if (batteryStatus.ref.BatteryPresent) {
         print(
-          batteryStatus.ref.Charging == TRUE
+          batteryStatus.ref.Charging
               ? ' - Battery is charging.'
               : ' - Battery is not charging.',
         );
 
         print(
-          batteryStatus.ref.Discharging == TRUE
+          batteryStatus.ref.Discharging
               ? ' - Battery is discharging.'
               : ' - Battery is not discharging.',
         );
@@ -280,28 +231,27 @@ void printBatteryStatusInfo() {
 
 String getUserName() {
   const usernameLength = 256;
-  final pcbBuffer = calloc<DWORD>()..value = usernameLength + 1;
-  final lpBuffer = wsalloc(usernameLength + 1);
+  final pcbBuffer = loggingCalloc<DWORD>()..value = usernameLength + 1;
+  final lpBuffer = Pwstr.allocate(usernameLength + 1);
 
   try {
-    final result = GetUserName(lpBuffer, pcbBuffer);
-    if (result != 0) {
+    if (GetUserName(lpBuffer.ptr, pcbBuffer)) {
       return lpBuffer.toDartString();
-    } else {
-      throw WindowsException(HRESULT_FROM_WIN32(GetLastError()));
     }
+
+    throw WindowsException(GetLastError().toHRESULT());
   } finally {
     free(pcbBuffer);
-    free(lpBuffer);
   }
 }
 
 void main() {
   print('This version of Windows supports the APIs in:');
-  if (isWindowsXPOrGreater()) print(' - Windows XP');
-  if (isWindowsVistaOrGreater()) print(' - Windows Vista');
-  if (isWindows7OrGreater()) print(' - Windows 7');
-  if (isWindows8OrGreater()) print(' - Windows 8');
+  if (IsWindowsXPOrGreater()) print(' - Windows XP');
+  if (IsWindowsVistaOrGreater()) print(' - Windows Vista');
+  if (IsWindows7OrGreater()) print(' - Windows 7');
+  if (IsWindows8OrGreater()) print(' - Windows 8');
+  if (IsWindows10OrGreater()) print(' - Windows 10');
 
   // For more recent versions of Windows, Microsoft strongly recommends that
   // developers avoid version testing because of app compat issues caused by
@@ -316,7 +266,6 @@ void main() {
         )
         as String,
   );
-  if (buildNumber >= 10240) print(' - Windows 10');
   if (buildNumber >= 22000) print(' - Windows 11');
 
   print('\nWindows build number is: $buildNumber');

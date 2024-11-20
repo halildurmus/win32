@@ -1,40 +1,47 @@
-// Maps FFI prototypes onto the corresponding Win32 API function calls
-
+// Maps FFI prototypes onto the corresponding Win32 API function calls.
+//
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-
-// ignore_for_file: unused_import, non_constant_identifier_names
-// ignore_for_file: constant_identifier_names, camel_case_types
-// ignore_for_file: specify_nonobvious_property_types
+//
+// ignore_for_file: avoid_positional_boolean_parameters
+// ignore_for_file: non_constant_identifier_names, unused_import
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../callbacks.dart';
-import '../combase.dart';
-import '../guid.dart';
+import '../allocator.dart';
+import '../bstr.dart';
+import '../com/interface.g.dart';
+import '../com/iunknown.g.dart';
+import '../constants.dart';
+import '../constants.g.dart';
+import '../exception.dart';
+import '../extensions/pointer.dart';
+import '../hresult.dart';
+import '../hstring.dart';
+import '../macros.dart';
+import '../ntstatus.dart';
+import '../pcstr.dart';
+import '../pcwstr.dart';
+import '../pstr.dart';
+import '../pwstr.dart';
 import '../structs.g.dart';
-import '../variant.dart';
-
-final _api_ms_win_core_handle_l1_1_0 = DynamicLibrary.open(
-  'api-ms-win-core-handle-l1-1-0.dll',
-);
+import '../types.dart';
+import '../utils.dart';
 
 /// Compares two object handles to determine if they refer to the same
 /// underlying kernel object.
 ///
-/// ```c
-/// BOOL CompareObjectHandles(
-///   HANDLE hFirstObjectHandle,
-///   HANDLE hSecondObjectHandle
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/handleapi/nf-handleapi-compareobjecthandles>.
+///
 /// {@category kernel32}
-int CompareObjectHandles(int hFirstObjectHandle, int hSecondObjectHandle) =>
-    _CompareObjectHandles(hFirstObjectHandle, hSecondObjectHandle);
+@pragma('vm:prefer-inline')
+bool CompareObjectHandles(int hFirstObjectHandle, int hSecondObjectHandle) =>
+    _CompareObjectHandles(hFirstObjectHandle, hSecondObjectHandle) != FALSE;
 
-final _CompareObjectHandles = _api_ms_win_core_handle_l1_1_0
-    .lookupFunction<
-      Int32 Function(IntPtr hFirstObjectHandle, IntPtr hSecondObjectHandle),
-      int Function(int hFirstObjectHandle, int hSecondObjectHandle)
-    >('CompareObjectHandles');
+@Native<BOOL Function(HANDLE, HANDLE)>(symbol: 'CompareObjectHandles')
+external int _CompareObjectHandles(
+  int hFirstObjectHandle,
+  int hSecondObjectHandle,
+);

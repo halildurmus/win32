@@ -1,38 +1,49 @@
-// Maps FFI prototypes onto the corresponding Win32 API function calls
-
+// Maps FFI prototypes onto the corresponding Win32 API function calls.
+//
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-
-// ignore_for_file: unused_import, non_constant_identifier_names
-// ignore_for_file: constant_identifier_names, camel_case_types
-// ignore_for_file: specify_nonobvious_property_types
+//
+// ignore_for_file: avoid_positional_boolean_parameters
+// ignore_for_file: non_constant_identifier_names, unused_import
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../callbacks.dart';
-import '../combase.dart';
-import '../guid.dart';
+import '../allocator.dart';
+import '../bstr.dart';
+import '../com/interface.g.dart';
+import '../com/istream.g.dart';
+import '../com/iunknown.g.dart';
+import '../constants.dart';
+import '../constants.g.dart';
+import '../exception.dart';
+import '../extensions/pointer.dart';
+import '../hresult.dart';
+import '../hstring.dart';
+import '../macros.dart';
+import '../ntstatus.dart';
+import '../pcstr.dart';
+import '../pcwstr.dart';
+import '../pstr.dart';
+import '../pwstr.dart';
 import '../structs.g.dart';
-import '../variant.dart';
+import '../types.dart';
+import '../utils.dart';
 
-final _shlwapi = DynamicLibrary.open('shlwapi.dll');
-
-/// Creates a memory stream using a similar process to
-/// CreateStreamOnHGlobal.
+/// Creates a memory stream using a similar process to CreateStreamOnHGlobal.
 ///
-/// ```c
-/// IStream* SHCreateMemStream(
-///   [in, optional] const BYTE *pInit,
-///   [in]           UINT       cbInit
-/// );
-/// ```
-/// {@category shell32}
-Pointer<COMObject> SHCreateMemStream(Pointer<Uint8> pInit, int cbInit) =>
-    _SHCreateMemStream(pInit, cbInit);
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shcreatememstream>.
+///
+/// {@category shlwapi}
+@pragma('vm:prefer-inline')
+IStream? SHCreateMemStream(Pointer<Uint8>? pInit, int cbInit) {
+  final result = _SHCreateMemStream(pInit ?? nullptr, cbInit);
+  if (result.isNull) return null;
+  return IStream(result);
+}
 
-final _SHCreateMemStream = _shlwapi
-    .lookupFunction<
-      Pointer<COMObject> Function(Pointer<Uint8> pInit, Uint32 cbInit),
-      Pointer<COMObject> Function(Pointer<Uint8> pInit, int cbInit)
-    >('SHCreateMemStream');
+@Native<VTablePointer Function(Pointer<Uint8>, Uint32)>(
+  symbol: 'SHCreateMemStream',
+)
+external VTablePointer _SHCreateMemStream(Pointer<Uint8> pInit, int cbInit);

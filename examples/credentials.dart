@@ -1,4 +1,4 @@
-// Reads and writes credentials
+// Reads and writes credentials.
 
 import 'dart:convert';
 import 'dart:ffi';
@@ -6,87 +6,77 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-void write({
-  required String credentialName,
-  required String userName,
-  required String password,
-}) {
-  print('Writing $credentialName ...');
-  final examplePassword = utf8.encode(password);
-  final blob = examplePassword.allocatePointer();
-
-  final credential = calloc<CREDENTIAL>()
-    ..ref.Type = CRED_TYPE_GENERIC
-    ..ref.TargetName = credentialName.toNativeUtf16()
-    ..ref.Persist = CRED_PERSIST_LOCAL_MACHINE
-    ..ref.UserName = userName.toNativeUtf16()
-    ..ref.CredentialBlob = blob
-    ..ref.CredentialBlobSize = examplePassword.length;
-
-  final result = CredWrite(credential, 0);
-
-  if (result != TRUE) {
-    final errorCode = GetLastError();
-    print('Error ($result): $errorCode');
-    return;
-  }
-  print('Success (blob size: ${credential.ref.CredentialBlobSize})');
-
-  free(blob);
-  free(credential);
-}
-
-void read(String credentialName) {
-  print('Reading $credentialName ...');
-  final credPointer = calloc<Pointer<CREDENTIAL>>();
-  final result = CredRead(
-    credentialName.toNativeUtf16(),
-    CRED_TYPE_GENERIC,
-    0,
-    credPointer,
-  );
-  if (result != TRUE) {
-    final errorCode = GetLastError();
-    var errorText = '$errorCode';
-    if (errorCode == ERROR_NOT_FOUND) {
-      errorText += ' Not found.';
-    }
-    print('Error ($result): $errorText');
-    return;
-  }
-  final cred = credPointer.value.ref;
-  print(
-    'Success. Read username ${cred.UserName.toDartString()} '
-    'password size: ${cred.CredentialBlobSize}',
-  );
-  final blob = cred.CredentialBlob.asTypedList(cred.CredentialBlobSize);
-  final password = utf8.decode(blob);
-  print('read password: $password');
-  CredFree(credPointer.value);
-  free(credPointer);
-}
-
 void delete(String credentialName) {
-  print('Deleting $credentialName');
-  final result = CredDelete(
-    credentialName.toNativeUtf16(),
-    CRED_TYPE_GENERIC,
-    0,
-  );
-  if (result != TRUE) {
-    final errorCode = GetLastError();
-    print('Error ($result): $errorCode');
-    return;
+  print('Deleting $credentialName...');
+  final targetName = w(credentialName);
+  if (!CredDelete(targetName.ptr, CRED_TYPE_GENERIC)) {
+    print('Error deleting credential.');
+    throw WindowsException(GetLastError().toHRESULT());
   }
   print('Successfully deleted credential.');
 }
 
+void read(String credentialName) {
+  print('Reading $credentialName...');
+  final credPointer = loggingCalloc<Pointer<CREDENTIAL>>();
+  final targetName = w(credentialName);
+  final result = CredRead(targetName.ptr, CRED_TYPE_GENERIC, credPointer);
+  if (!result) {
+    print('Error reading credential.');
+    free(credPointer);
+    throw WindowsException(GetLastError().toHRESULT());
+  }
+  final cred = credPointer.value.ref;
+  print('Success.');
+  print('Read username: ${cred.UserName.toDartString()}');
+  print('Password size: ${cred.CredentialBlobSize}');
+  final blob = cred.CredentialBlob.asTypedList(cred.CredentialBlobSize);
+  final password = utf8.decode(blob);
+  print('Read password: $password');
+  CredFree(credPointer.value);
+  free(credPointer);
+}
+
+void write({
+  required String credentialName,
+  required String username,
+  required String password,
+}) {
+  print('Writing $credentialName ...');
+
+  final examplePassword = utf8.encode(password);
+  final blob = examplePassword.toNative();
+  final targetName = w(credentialName);
+  final userName = w(username);
+
+  final credential = loggingCalloc<CREDENTIAL>();
+  credential.ref
+    ..Type = CRED_TYPE_GENERIC
+    ..TargetName = targetName.ptr
+    ..Persist = CRED_PERSIST_LOCAL_MACHINE
+    ..UserName = userName.ptr
+    ..CredentialBlob = blob
+    ..CredentialBlobSize = examplePassword.length;
+
+  try {
+    if (CredWrite(credential, 0)) {
+      print('Success (blob size: ${credential.ref.CredentialBlobSize})');
+    } else {
+      print('Error writing credential.');
+      throw WindowsException(GetLastError().toHRESULT());
+    }
+  } finally {
+    free(blob);
+    free(credential);
+  }
+}
+
 void main() {
-  print('Accessing Credentials.');
+  print('Accessing Credentials...');
   const credentialName = 'exampleCredential';
   write(
     credentialName: credentialName,
-    userName: 'MyUserName',
+    username: 'MyUserName',
     password: 'MyPassword',
   );
   read(credentialName);
