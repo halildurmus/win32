@@ -1,12 +1,7 @@
-// resources.dart
-
-// Global resource identifiers, menus and accelerators
-
 // ignore_for_file: constant_identifier_names
 
 import 'dart:ffi';
 
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'notepad.dart';
@@ -42,67 +37,67 @@ class NotepadResources {
     final hMenu = CreateMenu();
 
     var hMenuPopup = CreateMenu();
-    AppendMenu(hMenuPopup, MF_STRING, IDM_FILE_NEW, TEXT('&New\tCtrl+N'));
-    AppendMenu(hMenuPopup, MF_STRING, IDM_FILE_OPEN, TEXT('&Open...\tCtrl+O'));
-    AppendMenu(hMenuPopup, MF_STRING, IDM_FILE_SAVE, TEXT('&Save\tCtrl+S'));
-    AppendMenu(hMenuPopup, MF_STRING, IDM_FILE_SAVE_AS, TEXT('Save &As...'));
-    AppendMenu(hMenuPopup, MF_SEPARATOR, 0, nullptr);
-    AppendMenu(hMenuPopup, MF_STRING, IDM_FILE_PRINT, TEXT('&Print\tCtrl+P'));
-    AppendMenu(hMenuPopup, MF_SEPARATOR, 0, nullptr);
-    AppendMenu(hMenuPopup, MF_STRING, IDM_APP_EXIT, TEXT('E&xit'));
-    AppendMenu(hMenu, MF_POPUP, hMenuPopup, TEXT('&File'));
+    AppendMenu(hMenuPopup, MF_STRING, IDM_FILE_NEW, w('&New\tCtrl+N').ptr);
+    AppendMenu(hMenuPopup, MF_STRING, IDM_FILE_OPEN, w('&Open...\tCtrl+O').ptr);
+    AppendMenu(hMenuPopup, MF_STRING, IDM_FILE_SAVE, w('&Save\tCtrl+S').ptr);
+    AppendMenu(hMenuPopup, MF_STRING, IDM_FILE_SAVE_AS, w('Save &As...').ptr);
+    AppendMenu(hMenuPopup, MF_SEPARATOR, 0, null);
+    AppendMenu(hMenuPopup, MF_STRING, IDM_FILE_PRINT, w('&Print\tCtrl+P').ptr);
+    AppendMenu(hMenuPopup, MF_SEPARATOR, 0, null);
+    AppendMenu(hMenuPopup, MF_STRING, IDM_APP_EXIT, w('E&xit').ptr);
+    AppendMenu(hMenu, MF_POPUP, hMenuPopup, w('&File').ptr);
 
     hMenuPopup = CreateMenu();
-    AppendMenu(hMenuPopup, MF_STRING, IDM_EDIT_UNDO, TEXT('&Undo\tCtrl+Z'));
-    AppendMenu(hMenuPopup, MF_SEPARATOR, 0, nullptr);
-    AppendMenu(hMenuPopup, MF_STRING, IDM_EDIT_CUT, TEXT('Cu&t\tCtrl+X'));
-    AppendMenu(hMenuPopup, MF_STRING, IDM_EDIT_COPY, TEXT('&Copy\tCtrl+C'));
-    AppendMenu(hMenuPopup, MF_STRING, IDM_EDIT_PASTE, TEXT('&Paste\tCtrl+V'));
-    AppendMenu(hMenuPopup, MF_STRING, IDM_EDIT_CLEAR, TEXT('De&lete\tDel'));
-    AppendMenu(hMenuPopup, MF_SEPARATOR, 0, nullptr);
+    AppendMenu(hMenuPopup, MF_STRING, IDM_EDIT_UNDO, w('&Undo\tCtrl+Z').ptr);
+    AppendMenu(hMenuPopup, MF_SEPARATOR, 0, null);
+    AppendMenu(hMenuPopup, MF_STRING, IDM_EDIT_CUT, w('Cu&t\tCtrl+X').ptr);
+    AppendMenu(hMenuPopup, MF_STRING, IDM_EDIT_COPY, w('&Copy\tCtrl+C').ptr);
+    AppendMenu(hMenuPopup, MF_STRING, IDM_EDIT_PASTE, w('&Paste\tCtrl+V').ptr);
+    AppendMenu(hMenuPopup, MF_STRING, IDM_EDIT_CLEAR, w('De&lete\tDel').ptr);
+    AppendMenu(hMenuPopup, MF_SEPARATOR, 0, null);
     AppendMenu(
       hMenuPopup,
       MF_STRING,
       IDM_EDIT_SELECT_ALL,
-      TEXT('&Select All\tCtrl+A'),
+      w('&Select All\tCtrl+A').ptr,
     );
-    AppendMenu(hMenu, MF_POPUP, hMenuPopup, TEXT('&Edit'));
+    AppendMenu(hMenu, MF_POPUP, hMenuPopup, w('&Edit').ptr);
 
     hMenuPopup = CreateMenu();
     AppendMenu(
       hMenuPopup,
       MF_STRING,
       IDM_SEARCH_FIND,
-      TEXT('&Find...\tCtrl+F'),
+      w('&Find...\tCtrl+F').ptr,
     );
-    AppendMenu(hMenuPopup, MF_STRING, IDM_SEARCH_NEXT, TEXT('Find &Next\tF3'));
+    AppendMenu(hMenuPopup, MF_STRING, IDM_SEARCH_NEXT, w('Find &Next\tF3').ptr);
     AppendMenu(
       hMenuPopup,
       MF_STRING,
       IDM_SEARCH_REPLACE,
-      TEXT('&Replace...\tCtrl+R'),
+      w('&Replace...\tCtrl+R').ptr,
     );
-    AppendMenu(hMenu, MF_POPUP, hMenuPopup, TEXT('&Search'));
+    AppendMenu(hMenu, MF_POPUP, hMenuPopup, w('&Search').ptr);
 
     hMenuPopup = CreateMenu();
-    AppendMenu(hMenuPopup, MF_STRING, IDM_FORMAT_FONT, TEXT('&Font...'));
-    AppendMenu(hMenu, MF_POPUP, hMenuPopup, TEXT('F&ormat'));
+    AppendMenu(hMenuPopup, MF_STRING, IDM_FORMAT_FONT, w('&Font...').ptr);
+    AppendMenu(hMenu, MF_POPUP, hMenuPopup, w('F&ormat').ptr);
 
     hMenuPopup = CreateMenu();
-    AppendMenu(hMenuPopup, MF_STRING, IDM_HELP, TEXT('&Help'));
+    AppendMenu(hMenuPopup, MF_STRING, IDM_HELP, w('&Help').ptr);
     AppendMenu(
       hMenuPopup,
       MF_STRING,
       IDM_APP_ABOUT,
-      TEXT('&About $APP_NAME...'),
+      w('&About $appName...').ptr,
     );
-    AppendMenu(hMenu, MF_POPUP, hMenuPopup, TEXT('&Help'));
+    AppendMenu(hMenu, MF_POPUP, hMenuPopup, w('&Help').ptr);
 
     return hMenu;
   }
 
-  static Pointer<DLGTEMPLATE> loadAboutBox() {
-    final pDialog = calloc<Uint16>(1024);
+  static SmartPointer<DLGTEMPLATE> loadAboutBox() {
+    final pDialog = loggingCalloc<Uint16>(1024);
     var idx = 0;
 
     idx += pDialog.cast<DLGTEMPLATE>().setDialog(
@@ -165,17 +160,20 @@ class NotepadResources {
       x: 27,
       y: 52,
       cx: 126,
-      cy: 20,
+      cy: 30,
       windowSystemClass: 0x0082,
-      text: 'Copyright (C) 1998 Charles Petzold and (C) 2020 Tim Sneath',
+      text:
+          'Copyright (C) 1998 Charles Petzold, '
+          '(C) 2020 Tim Sneath, and '
+          '(C) 2024 Halil Durmus',
       id: IDC_STATIC,
     );
 
-    return pDialog.cast();
+    return SmartPointer(pDialog.cast(), sizeInBytes: 1024 * sizeOf<Uint16>());
   }
 
   static int loadAccelerators() {
-    final pTable = calloc<ACCEL>(18);
+    final pTable = loggingCalloc<ACCEL>(18);
 
     pTable[0]
       ..fVirt = FVIRTKEY | FALT | FNOINVERT
@@ -282,6 +280,8 @@ class NotepadResources {
     if (result == NULL) {
       print('Error loading accelerators: ${GetLastError()}');
     }
+
+    free(pTable);
     return result;
   }
 }

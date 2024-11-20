@@ -21,16 +21,16 @@ int GetSystemPowerStatus(Pointer<SYSTEM_POWER_STATUS> lpSystemPowerStatus) { ...
 As the documentation indicates, [`SYSTEM_POWER_STATUS`][SYSTEM_POWER_STATUS]
 inherits from `dart:ffi`'s [`Struct`][Struct] class.
 
-To create such a struct, you can use `calloc` to allocate memory for it:
+To create such a struct, you can use `loggingCalloc` to allocate memory for it:
 
 ```dart
-final lpSystemPowerStatus = calloc<SYSTEM_POWER_STATUS>();
+final lpSystemPowerStatus = loggingCalloc<SYSTEM_POWER_STATUS>();
 ```
 
 :::info
 
 Dart also provides [`malloc`][malloc], which corresponds to the equivalent C
-runtime function that allocates **uninitialized memory**. In practice, `calloc`
+runtime function that allocates **uninitialized memory**. In practice, `loggingCalloc`
 is a good general choice when writing Windows code, as the performance cost of
 **initializing memory** is negligible compared to the benefits of avoiding
 potential **side effects**.
@@ -48,7 +48,7 @@ The [Dart cascade notation] provides a convenient way to initialize structs like
 this:
 
 ```dart
-final wndClass = calloc<WNDCLASSEX>()..ref.cbSize = sizeOf<WNDCLASSEX>();
+final wndClass = loggingCalloc<WNDCLASSEX>()..ref.cbSize = sizeOf<WNDCLASSEX>();
 ```
 
 :::
@@ -71,7 +71,7 @@ import 'package:win32/win32.dart';
 
 void main() {
   // highlight-next-line
-  final lpSystemPowerStatus = calloc<SYSTEM_POWER_STATUS>();
+  final lpSystemPowerStatus = loggingCalloc<SYSTEM_POWER_STATUS>();
 
   try {
     final hr = GetSystemPowerStatus(lpSystemPowerStatus);

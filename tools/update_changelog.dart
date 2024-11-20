@@ -17,12 +17,13 @@ void main(List<String> args) {
     print('❌ Version number must be provided.');
     exit(1);
   }
-  version = version.replaceFirst(RegExp(r'^v'), '');
+  version = version.replaceFirst(RegExp('^v'), '');
 
   print('🚧 Updating changelog for v$version...');
   final result = Process.runSync(
     'dart',
     [
+      '--enable-experiment=native-assets',
       'run',
       'hooks:update_changelog',
       '--tag',

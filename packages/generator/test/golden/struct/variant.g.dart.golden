@@ -1,0 +1,500 @@
+VARIANT|
+/// A container for a large union that carries many types of data.
+///
+/// The value in the first member of the structure, vt, describes which of the
+/// union members is valid.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/oaidl/ns-oaidl-variant>.
+///
+/// {@category struct}
+base class VARIANT extends Struct {
+  external VARIANT_0 Anonymous;
+}
+
+/// {@category union}
+sealed class VARIANT_0 extends Union {
+  external VARIANT_0_0 Anonymous;
+  external DECIMAL decVal;
+}
+
+extension VARIANT_0_Extension on VARIANT {
+  @pragma('vm:prefer-inline')
+  VARIANT_0_0 get Anonymous => this.Anonymous.Anonymous;
+
+  @pragma('vm:prefer-inline')
+  set Anonymous(VARIANT_0_0 value) => this.Anonymous.Anonymous = value;
+
+  @pragma('vm:prefer-inline')
+  DECIMAL get decVal => this.Anonymous.decVal;
+
+  @pragma('vm:prefer-inline')
+  set decVal(DECIMAL value) => this.Anonymous.decVal = value;
+}
+
+/// {@category struct}
+sealed class VARIANT_0_0 extends Struct {
+  @Uint16()
+  external int _vt;
+
+  @Uint16()
+  external int _wReserved1;
+
+  @Uint16()
+  external int _wReserved2;
+
+  @Uint16()
+  external int _wReserved3;
+
+  external VARIANT_0_0_0 Anonymous;
+
+  @pragma('vm:prefer-inline')
+  VARENUM get vt => VARENUM(_vt);
+
+  @pragma('vm:prefer-inline')
+  set vt(VARENUM value) => _vt = value;
+}
+
+extension VARIANT_0_0_Extension on VARIANT {
+  @pragma('vm:prefer-inline')
+  VARENUM get vt => this.Anonymous.Anonymous.vt;
+
+  @pragma('vm:prefer-inline')
+  set vt(VARENUM value) => this.Anonymous.Anonymous.vt = value;
+
+  @pragma('vm:prefer-inline')
+  VARIANT_0_0_0 get Anonymous => this.Anonymous.Anonymous.Anonymous;
+
+  @pragma('vm:prefer-inline')
+  set Anonymous(VARIANT_0_0_0 value) =>
+      this.Anonymous.Anonymous.Anonymous = value;
+}
+
+/// {@category union}
+sealed class VARIANT_0_0_0 extends Union {
+  @Int64()
+  external int llVal;
+
+  @Int32()
+  external int lVal;
+
+  @Uint8()
+  external int bVal;
+
+  @Int16()
+  external int iVal;
+
+  @Float()
+  external double fltVal;
+
+  @Double()
+  external double dblVal;
+
+  @Int16()
+  external int _boolVal;
+
+  @Int16()
+  external int __OBSOLETE__VARIANT_BOOL;
+
+  @Int32()
+  external int scode;
+
+  external CY cyVal;
+
+  @Double()
+  external double date;
+
+  external BSTR bstrVal;
+  external VTablePointer _punkVal;
+  external VTablePointer _pdispVal;
+  external Pointer<SAFEARRAY> parray;
+  external Pointer<Uint8> pbVal;
+  external Pointer<Int16> piVal;
+  external Pointer<Int32> plVal;
+  external Pointer<Int64> pllVal;
+  external Pointer<Float> pfltVal;
+  external Pointer<Double> pdblVal;
+  external Pointer<VARIANT_BOOL> pboolVal;
+  external Pointer<VARIANT_BOOL> __OBSOLETE__VARIANT_PBOOL;
+  external Pointer<Int32> pscode;
+  external Pointer<CY> pcyVal;
+  external Pointer<Double> pdate;
+  external Pointer<BSTR> pbstrVal;
+  external Pointer<VTablePointer> ppunkVal;
+  external Pointer<VTablePointer> ppdispVal;
+  external Pointer<Pointer<SAFEARRAY>> pparray;
+  external Pointer<VARIANT> pvarVal;
+  external Pointer byref;
+
+  @Int8()
+  external int cVal;
+
+  @Uint16()
+  external int uiVal;
+
+  @Uint32()
+  external int ulVal;
+
+  @Uint64()
+  external int ullVal;
+
+  @Int32()
+  external int intVal;
+
+  @Uint32()
+  external int uintVal;
+
+  external Pointer<DECIMAL> pdecVal;
+  external PSTR pcVal;
+  external Pointer<Uint16> puiVal;
+  external Pointer<Uint32> pulVal;
+  external Pointer<Uint64> pullVal;
+  external Pointer<Int32> pintVal;
+  external Pointer<Uint32> puintVal;
+  external VARIANT_0_0_0_0 Anonymous;
+
+  @pragma('vm:prefer-inline')
+  bool get boolVal => _boolVal != FALSE;
+
+  @pragma('vm:prefer-inline')
+  set boolVal(bool value) => _boolVal = value ? VARIANT_TRUE : FALSE;
+
+  @pragma('vm:prefer-inline')
+  IUnknown? get punkVal =>
+      _punkVal.isNull ? null : (IUnknown(_punkVal)..addRef());
+
+  @pragma('vm:prefer-inline')
+  set punkVal(IUnknown? value) => _punkVal = value?.ptr ?? nullptr;
+
+  @pragma('vm:prefer-inline')
+  IDispatch? get pdispVal =>
+      _pdispVal.isNull ? null : (IDispatch(_pdispVal)..addRef());
+
+  @pragma('vm:prefer-inline')
+  set pdispVal(IDispatch? value) => _pdispVal = value?.ptr ?? nullptr;
+}
+
+extension VARIANT_0_0_0_Extension on VARIANT {
+  @pragma('vm:prefer-inline')
+  int get llVal => this.Anonymous.Anonymous.Anonymous.llVal;
+
+  @pragma('vm:prefer-inline')
+  set llVal(int value) => this.Anonymous.Anonymous.Anonymous.llVal = value;
+
+  @pragma('vm:prefer-inline')
+  int get lVal => this.Anonymous.Anonymous.Anonymous.lVal;
+
+  @pragma('vm:prefer-inline')
+  set lVal(int value) => this.Anonymous.Anonymous.Anonymous.lVal = value;
+
+  @pragma('vm:prefer-inline')
+  int get bVal => this.Anonymous.Anonymous.Anonymous.bVal;
+
+  @pragma('vm:prefer-inline')
+  set bVal(int value) => this.Anonymous.Anonymous.Anonymous.bVal = value;
+
+  @pragma('vm:prefer-inline')
+  int get iVal => this.Anonymous.Anonymous.Anonymous.iVal;
+
+  @pragma('vm:prefer-inline')
+  set iVal(int value) => this.Anonymous.Anonymous.Anonymous.iVal = value;
+
+  @pragma('vm:prefer-inline')
+  double get fltVal => this.Anonymous.Anonymous.Anonymous.fltVal;
+
+  @pragma('vm:prefer-inline')
+  set fltVal(double value) => this.Anonymous.Anonymous.Anonymous.fltVal = value;
+
+  @pragma('vm:prefer-inline')
+  double get dblVal => this.Anonymous.Anonymous.Anonymous.dblVal;
+
+  @pragma('vm:prefer-inline')
+  set dblVal(double value) => this.Anonymous.Anonymous.Anonymous.dblVal = value;
+
+  @pragma('vm:prefer-inline')
+  bool get boolVal => this.Anonymous.Anonymous.Anonymous.boolVal;
+
+  @pragma('vm:prefer-inline')
+  set boolVal(bool value) => this.Anonymous.Anonymous.Anonymous.boolVal = value;
+
+  @pragma('vm:prefer-inline')
+  int get scode => this.Anonymous.Anonymous.Anonymous.scode;
+
+  @pragma('vm:prefer-inline')
+  set scode(int value) => this.Anonymous.Anonymous.Anonymous.scode = value;
+
+  @pragma('vm:prefer-inline')
+  CY get cyVal => this.Anonymous.Anonymous.Anonymous.cyVal;
+
+  @pragma('vm:prefer-inline')
+  set cyVal(CY value) => this.Anonymous.Anonymous.Anonymous.cyVal = value;
+
+  @pragma('vm:prefer-inline')
+  double get date => this.Anonymous.Anonymous.Anonymous.date;
+
+  @pragma('vm:prefer-inline')
+  set date(double value) => this.Anonymous.Anonymous.Anonymous.date = value;
+
+  @pragma('vm:prefer-inline')
+  BSTR get bstrVal => this.Anonymous.Anonymous.Anonymous.bstrVal;
+
+  @pragma('vm:prefer-inline')
+  set bstrVal(BSTR value) => this.Anonymous.Anonymous.Anonymous.bstrVal = value;
+
+  @pragma('vm:prefer-inline')
+  IUnknown? get punkVal => this.Anonymous.Anonymous.Anonymous.punkVal;
+
+  @pragma('vm:prefer-inline')
+  set punkVal(IUnknown? value) =>
+      this.Anonymous.Anonymous.Anonymous.punkVal = value;
+
+  @pragma('vm:prefer-inline')
+  IDispatch? get pdispVal => this.Anonymous.Anonymous.Anonymous.pdispVal;
+
+  @pragma('vm:prefer-inline')
+  set pdispVal(IDispatch? value) =>
+      this.Anonymous.Anonymous.Anonymous.pdispVal = value;
+
+  @pragma('vm:prefer-inline')
+  Pointer<SAFEARRAY> get parray => this.Anonymous.Anonymous.Anonymous.parray;
+
+  @pragma('vm:prefer-inline')
+  set parray(Pointer<SAFEARRAY> value) =>
+      this.Anonymous.Anonymous.Anonymous.parray = value;
+
+  @pragma('vm:prefer-inline')
+  Pointer<Uint8> get pbVal => this.Anonymous.Anonymous.Anonymous.pbVal;
+
+  @pragma('vm:prefer-inline')
+  set pbVal(Pointer<Uint8> value) =>
+      this.Anonymous.Anonymous.Anonymous.pbVal = value;
+
+  @pragma('vm:prefer-inline')
+  Pointer<Int16> get piVal => this.Anonymous.Anonymous.Anonymous.piVal;
+
+  @pragma('vm:prefer-inline')
+  set piVal(Pointer<Int16> value) =>
+      this.Anonymous.Anonymous.Anonymous.piVal = value;
+
+  @pragma('vm:prefer-inline')
+  Pointer<Int32> get plVal => this.Anonymous.Anonymous.Anonymous.plVal;
+
+  @pragma('vm:prefer-inline')
+  set plVal(Pointer<Int32> value) =>
+      this.Anonymous.Anonymous.Anonymous.plVal = value;
+
+  @pragma('vm:prefer-inline')
+  Pointer<Int64> get pllVal => this.Anonymous.Anonymous.Anonymous.pllVal;
+
+  @pragma('vm:prefer-inline')
+  set pllVal(Pointer<Int64> value) =>
+      this.Anonymous.Anonymous.Anonymous.pllVal = value;
+
+  @pragma('vm:prefer-inline')
+  Pointer<Float> get pfltVal => this.Anonymous.Anonymous.Anonymous.pfltVal;
+
+  @pragma('vm:prefer-inline')
+  set pfltVal(Pointer<Float> value) =>
+      this.Anonymous.Anonymous.Anonymous.pfltVal = value;
+
+  @pragma('vm:prefer-inline')
+  Pointer<Double> get pdblVal => this.Anonymous.Anonymous.Anonymous.pdblVal;
+
+  @pragma('vm:prefer-inline')
+  set pdblVal(Pointer<Double> value) =>
+      this.Anonymous.Anonymous.Anonymous.pdblVal = value;
+
+  @pragma('vm:prefer-inline')
+  Pointer<VARIANT_BOOL> get pboolVal =>
+      this.Anonymous.Anonymous.Anonymous.pboolVal;
+
+  @pragma('vm:prefer-inline')
+  set pboolVal(Pointer<VARIANT_BOOL> value) =>
+      this.Anonymous.Anonymous.Anonymous.pboolVal = value;
+
+  @pragma('vm:prefer-inline')
+  Pointer<Int32> get pscode => this.Anonymous.Anonymous.Anonymous.pscode;
+
+  @pragma('vm:prefer-inline')
+  set pscode(Pointer<Int32> value) =>
+      this.Anonymous.Anonymous.Anonymous.pscode = value;
+
+  @pragma('vm:prefer-inline')
+  Pointer<CY> get pcyVal => this.Anonymous.Anonymous.Anonymous.pcyVal;
+
+  @pragma('vm:prefer-inline')
+  set pcyVal(Pointer<CY> value) =>
+      this.Anonymous.Anonymous.Anonymous.pcyVal = value;
+
+  @pragma('vm:prefer-inline')
+  Pointer<Double> get pdate => this.Anonymous.Anonymous.Anonymous.pdate;
+
+  @pragma('vm:prefer-inline')
+  set pdate(Pointer<Double> value) =>
+      this.Anonymous.Anonymous.Anonymous.pdate = value;
+
+  @pragma('vm:prefer-inline')
+  Pointer<BSTR> get pbstrVal => this.Anonymous.Anonymous.Anonymous.pbstrVal;
+
+  @pragma('vm:prefer-inline')
+  set pbstrVal(Pointer<BSTR> value) =>
+      this.Anonymous.Anonymous.Anonymous.pbstrVal = value;
+
+  @pragma('vm:prefer-inline')
+  Pointer<VTablePointer> get ppunkVal =>
+      this.Anonymous.Anonymous.Anonymous.ppunkVal;
+
+  @pragma('vm:prefer-inline')
+  set ppunkVal(Pointer<VTablePointer> value) =>
+      this.Anonymous.Anonymous.Anonymous.ppunkVal = value;
+
+  @pragma('vm:prefer-inline')
+  Pointer<VTablePointer> get ppdispVal =>
+      this.Anonymous.Anonymous.Anonymous.ppdispVal;
+
+  @pragma('vm:prefer-inline')
+  set ppdispVal(Pointer<VTablePointer> value) =>
+      this.Anonymous.Anonymous.Anonymous.ppdispVal = value;
+
+  @pragma('vm:prefer-inline')
+  Pointer<Pointer<SAFEARRAY>> get pparray =>
+      this.Anonymous.Anonymous.Anonymous.pparray;
+
+  @pragma('vm:prefer-inline')
+  set pparray(Pointer<Pointer<SAFEARRAY>> value) =>
+      this.Anonymous.Anonymous.Anonymous.pparray = value;
+
+  @pragma('vm:prefer-inline')
+  Pointer<VARIANT> get pvarVal => this.Anonymous.Anonymous.Anonymous.pvarVal;
+
+  @pragma('vm:prefer-inline')
+  set pvarVal(Pointer<VARIANT> value) =>
+      this.Anonymous.Anonymous.Anonymous.pvarVal = value;
+
+  @pragma('vm:prefer-inline')
+  Pointer get byref => this.Anonymous.Anonymous.Anonymous.byref;
+
+  @pragma('vm:prefer-inline')
+  set byref(Pointer value) => this.Anonymous.Anonymous.Anonymous.byref = value;
+
+  @pragma('vm:prefer-inline')
+  int get cVal => this.Anonymous.Anonymous.Anonymous.cVal;
+
+  @pragma('vm:prefer-inline')
+  set cVal(int value) => this.Anonymous.Anonymous.Anonymous.cVal = value;
+
+  @pragma('vm:prefer-inline')
+  int get uiVal => this.Anonymous.Anonymous.Anonymous.uiVal;
+
+  @pragma('vm:prefer-inline')
+  set uiVal(int value) => this.Anonymous.Anonymous.Anonymous.uiVal = value;
+
+  @pragma('vm:prefer-inline')
+  int get ulVal => this.Anonymous.Anonymous.Anonymous.ulVal;
+
+  @pragma('vm:prefer-inline')
+  set ulVal(int value) => this.Anonymous.Anonymous.Anonymous.ulVal = value;
+
+  @pragma('vm:prefer-inline')
+  int get ullVal => this.Anonymous.Anonymous.Anonymous.ullVal;
+
+  @pragma('vm:prefer-inline')
+  set ullVal(int value) => this.Anonymous.Anonymous.Anonymous.ullVal = value;
+
+  @pragma('vm:prefer-inline')
+  int get intVal => this.Anonymous.Anonymous.Anonymous.intVal;
+
+  @pragma('vm:prefer-inline')
+  set intVal(int value) => this.Anonymous.Anonymous.Anonymous.intVal = value;
+
+  @pragma('vm:prefer-inline')
+  int get uintVal => this.Anonymous.Anonymous.Anonymous.uintVal;
+
+  @pragma('vm:prefer-inline')
+  set uintVal(int value) => this.Anonymous.Anonymous.Anonymous.uintVal = value;
+
+  @pragma('vm:prefer-inline')
+  Pointer<DECIMAL> get pdecVal => this.Anonymous.Anonymous.Anonymous.pdecVal;
+
+  @pragma('vm:prefer-inline')
+  set pdecVal(Pointer<DECIMAL> value) =>
+      this.Anonymous.Anonymous.Anonymous.pdecVal = value;
+
+  @pragma('vm:prefer-inline')
+  PSTR get pcVal => this.Anonymous.Anonymous.Anonymous.pcVal;
+
+  @pragma('vm:prefer-inline')
+  set pcVal(PSTR value) => this.Anonymous.Anonymous.Anonymous.pcVal = value;
+
+  @pragma('vm:prefer-inline')
+  Pointer<Uint16> get puiVal => this.Anonymous.Anonymous.Anonymous.puiVal;
+
+  @pragma('vm:prefer-inline')
+  set puiVal(Pointer<Uint16> value) =>
+      this.Anonymous.Anonymous.Anonymous.puiVal = value;
+
+  @pragma('vm:prefer-inline')
+  Pointer<Uint32> get pulVal => this.Anonymous.Anonymous.Anonymous.pulVal;
+
+  @pragma('vm:prefer-inline')
+  set pulVal(Pointer<Uint32> value) =>
+      this.Anonymous.Anonymous.Anonymous.pulVal = value;
+
+  @pragma('vm:prefer-inline')
+  Pointer<Uint64> get pullVal => this.Anonymous.Anonymous.Anonymous.pullVal;
+
+  @pragma('vm:prefer-inline')
+  set pullVal(Pointer<Uint64> value) =>
+      this.Anonymous.Anonymous.Anonymous.pullVal = value;
+
+  @pragma('vm:prefer-inline')
+  Pointer<Int32> get pintVal => this.Anonymous.Anonymous.Anonymous.pintVal;
+
+  @pragma('vm:prefer-inline')
+  set pintVal(Pointer<Int32> value) =>
+      this.Anonymous.Anonymous.Anonymous.pintVal = value;
+
+  @pragma('vm:prefer-inline')
+  Pointer<Uint32> get puintVal => this.Anonymous.Anonymous.Anonymous.puintVal;
+
+  @pragma('vm:prefer-inline')
+  set puintVal(Pointer<Uint32> value) =>
+      this.Anonymous.Anonymous.Anonymous.puintVal = value;
+
+  @pragma('vm:prefer-inline')
+  VARIANT_0_0_0_0 get Anonymous => this.Anonymous.Anonymous.Anonymous.Anonymous;
+
+  @pragma('vm:prefer-inline')
+  set Anonymous(VARIANT_0_0_0_0 value) =>
+      this.Anonymous.Anonymous.Anonymous.Anonymous = value;
+}
+
+/// {@category struct}
+sealed class VARIANT_0_0_0_0 extends Struct {
+  external Pointer pvRecord;
+  external VTablePointer _pRecInfo;
+
+  @pragma('vm:prefer-inline')
+  IRecordInfo? get pRecInfo =>
+      _pRecInfo.isNull ? null : (IRecordInfo(_pRecInfo)..addRef());
+
+  @pragma('vm:prefer-inline')
+  set pRecInfo(IRecordInfo? value) => _pRecInfo = value?.ptr ?? nullptr;
+}
+
+extension VARIANT_0_0_0_0_Extension on VARIANT {
+  @pragma('vm:prefer-inline')
+  Pointer get pvRecord => this.Anonymous.Anonymous.Anonymous.Anonymous.pvRecord;
+
+  @pragma('vm:prefer-inline')
+  set pvRecord(Pointer value) =>
+      this.Anonymous.Anonymous.Anonymous.Anonymous.pvRecord = value;
+
+  @pragma('vm:prefer-inline')
+  IRecordInfo? get pRecInfo =>
+      this.Anonymous.Anonymous.Anonymous.Anonymous.pRecInfo;
+
+  @pragma('vm:prefer-inline')
+  set pRecInfo(IRecordInfo? value) =>
+      this.Anonymous.Anonymous.Anonymous.Anonymous.pRecInfo = value;
+}

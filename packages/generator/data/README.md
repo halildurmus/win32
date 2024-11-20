@@ -12,9 +12,9 @@ The format for the JSON file (`win32_functions.json`) is as follows:
 
 ```jsonc
 {
-    // API name (the generic name that will be presented in Dart code)
+    // API name (the generic name that will be presented in Dart code).
     "DeleteFile": {
-        // The API prototype, as presented in Windows docs
+        // The original name of the API, as presented in Windows docs.
         // Note that this should include a 'W' postfix if the declared function
         // has both Unicode and ANSI variants. See:
         // https://learn.microsoft.com/windows/win32/intl/unicode-in-the-windows-api
@@ -23,23 +23,11 @@ The format for the JSON file (`win32_functions.json`) is as follows:
         // include it, others don't -- so pay attention here. If you get a
         // failure in lookupFunction when running tests, this is a common
         // source of error.
-        "prototype": "BOOL DeleteFileW(\n  LPCWSTR lpFileName\n);",
-
-        // (Optional) The category for documentation, if not the same as the
-        // DLL library.
-        "category": "winrt",
-
-        // The doc comment for the API (typically, first sentence of the docs)
-        "comment": "Deletes an existing file.",
+        "originalName": "DeleteFileW",
 
         // (Optional) Minimum version of Windows required to use this function.
         // If omitted, this function will be available to all supported OSes.
         "minimumWindowsVersion": "WIN10_RS3",
-
-        // (Optional) Whether a test should be generated for this function.
-        // Unless there's a *really* good mitigation for this, this should be
-        // true.
-        "test": false
     },
     ...
 }

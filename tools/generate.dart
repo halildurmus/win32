@@ -1,3 +1,5 @@
+// ignore_for_file: unawaited_futures
+
 import 'dart:io';
 
 import 'package:args/args.dart';
@@ -57,7 +59,12 @@ void main(List<String> args) async {
     print('🧪 Running package:win32 tests...');
     final win32TestProcess = await Process.start(
       'dart',
-      const ['test', '-j 1', '--test-randomize-ordering-seed=random'],
+      const [
+        '--enable-experiment=native-assets',
+        'test',
+        '-j1',
+        '--test-randomize-ordering-seed=random',
+      ],
       workingDirectory: p.normalize(
         p.join(Platform.script.resolve('..').toFilePath(), 'packages', 'win32'),
       ),

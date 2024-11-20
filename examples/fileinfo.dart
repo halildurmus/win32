@@ -9,7 +9,7 @@ import 'package:win32/win32.dart';
 extension on FILETIME {
   DateTime toDateTime() {
     final microseconds = combineHighLow(dwHighDateTime, dwLowDateTime) ~/ 10;
-    return DateTime.utc(1601, 1, 1).add(Duration(microseconds: microseconds));
+    return DateTime.utc(1601).add(Duration(microseconds: microseconds));
   }
 }
 
@@ -36,12 +36,11 @@ void main() {
 
   using((arena) {
     final lpFileInfo = arena<WIN32_FILE_ATTRIBUTE_DATA>();
-    if (GetFileAttributesEx(
-          filePath.toNativeUtf16(),
-          GetFileExInfoStandard,
-          lpFileInfo,
-        ) ==
-        FALSE) {
+    if (!GetFileAttributesEx(
+      filePath.toNativeUtf16(),
+      GetFileExInfoStandard,
+      lpFileInfo,
+    )) {
       print('Failed to get file information');
       return;
     }
