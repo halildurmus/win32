@@ -1,0 +1,49 @@
+CoCreateInstanceEx|
+/// Creates an instance of a specific class on a specific computer.
+///
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cocreateinstanceex>.
+///
+/// {@category ole32}
+@pragma('vm:prefer-inline')
+void CoCreateInstanceEx(
+  Pointer<GUID> clsid,
+  IUnknown? punkOuter,
+  CLSCTX dwClsCtx,
+  Pointer<COSERVERINFO>? pServerInfo,
+  int dwCount,
+  Pointer<MULTI_QI> pResults,
+) {
+  final hr$ = HRESULT(
+    _CoCreateInstanceEx(
+      clsid,
+      punkOuter?.ptr ?? nullptr,
+      dwClsCtx,
+      pServerInfo ?? nullptr,
+      dwCount,
+      pResults,
+    ),
+  );
+  if (hr$.isError) throw WindowsException(hr$);
+}
+
+@Native<
+  Int32 Function(
+    Pointer<GUID>,
+    VTablePointer,
+    Uint32,
+    Pointer<COSERVERINFO>,
+    Uint32,
+    Pointer<MULTI_QI>,
+  )
+>(symbol: 'CoCreateInstanceEx')
+external int _CoCreateInstanceEx(
+  Pointer<GUID> clsid,
+  VTablePointer punkOuter,
+  int dwClsCtx,
+  Pointer<COSERVERINFO> pServerInfo,
+  int dwCount,
+  Pointer<MULTI_QI> pResults,
+);

@@ -1,105 +1,89 @@
 // Example of using Windows built-in spellchecker.
 //
 // Try it with something like this:
-//   dart examples\spellcheck.dart "The rain inx Spain is very rar"
+// dart examples\spellcheck.dart "The rain inx Spain is is very rar"
 //
-// You should see that the words 'inx' and 'rar' generate errors (and suggested
-// corrections).
+// You should see that the words 'inx' 'is', and 'rar' generate errors (and
+// suggested corrections).
 
 import 'dart:ffi';
-import 'dart:io';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 void main(List<String> args) {
-  if (args.length != 1) {
-    print('Provide text in the argument');
+  if (args.isEmpty) {
+    print('Please provide a text to spellcheck.');
+    ExitProcess(1);
+  }
+
+  final input = args.join(' ');
+
+  CoInitializeEx(COINIT_MULTITHREADED);
+
+  final spellCheckerFactory = createInstance<ISpellCheckerFactory>(
+    SpellCheckerFactory,
+  );
+
+  final languageTag = w('en-US');
+  if (!spellCheckerFactory.isSupported(languageTag.ptr)) {
+    print("Spell checking is not supported for the language tag 'en-US'.");
     return;
   }
 
-  final text = args.first;
+  final spellChecker = spellCheckerFactory.createSpellChecker(languageTag.ptr)!;
 
-  CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
+  // While ISpellChecker works fine for the needs of this example,
+  // ISpellChecker2 extends it with the ability to remove words from the
+  // custom dictionary. We cast to that purely as an example.
+  final spellChecker2 = spellChecker.cast<ISpellChecker2>();
 
-  final spellCheckerFactory = SpellCheckerFactory.createInstance();
+  print("Spell checking the text: '$input'");
 
-  final supportedPtr = calloc<Int32>();
-  final languageTagPtr = Platform.localeName.toNativeUtf16();
+  final text = w(input);
+  final errors = spellChecker2.comprehensiveCheck(text.ptr)!;
+  final errorPtr = loggingCalloc<VTablePointer>();
 
-  spellCheckerFactory.isSupported(languageTagPtr, supportedPtr);
+  while (errors.next(errorPtr) == S_OK) {
+    final error = ISpellingError(errorPtr.value);
 
-  if (supportedPtr.value == 1) {
-    final spellCheckerPtr = calloc<COMObject>();
-    spellCheckerFactory.createSpellChecker(
-      languageTagPtr,
-      spellCheckerPtr.cast(),
-    );
+    // Get the start index and length of the error.
+    final startIndex = error.startIndex;
+    final length = error.length;
 
-    final spellChecker = ISpellChecker(spellCheckerPtr);
+    final word = input.substring(startIndex, startIndex + length);
 
-    // While ISpellChecker works fine for the needs of this example,
-    // ISpellChecker2 extends it with the ability to remove words from the
-    // custom dictionary. We cast to that purely as an example.
-    final spellChecker2 = ISpellChecker2.from(spellChecker);
+    switch (error.correctiveAction) {
+      case CORRECTIVE_ACTION_NONE:
+        print('No errors found!');
 
-    final errorsPtr = calloc<COMObject>();
-    final textPtr = text.toNativeUtf16();
-    spellChecker2.check(textPtr, errorsPtr.cast());
+      case CORRECTIVE_ACTION_DELETE:
+        print("Delete '$word'");
 
-    final errors = IEnumSpellingError(errorsPtr);
-    final errorPtr = calloc<COMObject>();
+      case CORRECTIVE_ACTION_REPLACE:
+        final replacement = error.replacement.toDartString();
+        print("Replace: '$word' with '$replacement'");
 
-    print('Input: "$text"');
-    print('Errors:');
+      case CORRECTIVE_ACTION_GET_SUGGESTIONS:
+        // Get an enumerator for all the suggestions for a substring.
+        final lpWord = w(word);
+        final suggestions = spellChecker2.suggest(lpWord.ptr)!;
 
-    var errorCount = 0;
+        final suggestionArray = loggingCalloc<PWSTR>();
+        final elements = loggingCalloc<ULONG>();
 
-    while (errors.next(errorPtr.cast()) == S_OK) {
-      errorCount++;
+        while (suggestions.next(1, suggestionArray, elements) == S_OK) {
+          if (suggestionArray[0].isNull) break;
+          final element = suggestionArray[0];
+          final suggestion = element.toDartString();
+          free(element);
+          print("Maybe replace: '$word' with '$suggestion'");
+        }
 
-      final error = ISpellingError(errorPtr);
-      final word = text.substring(
-        error.startIndex,
-        error.startIndex + error.length,
-      );
-
-      stdout.write('$errorCount. $word');
-
-      switch (error.correctiveAction) {
-        case CORRECTIVE_ACTION_DELETE:
-          print(' - delete');
-
-        case CORRECTIVE_ACTION_NONE:
-          print('\n');
-
-        case CORRECTIVE_ACTION_REPLACE:
-          final replacment = error.replacement;
-          print(' - replace with "${replacment.toDartString()}"');
-          WindowsDeleteString(replacment.address);
-
-        case CORRECTIVE_ACTION_GET_SUGGESTIONS:
-          print(' - suggestions:');
-
-          final wordPtr = word.toNativeUtf16();
-          final suggestionsPtr = calloc<COMObject>();
-          spellChecker2.suggest(wordPtr, suggestionsPtr.cast());
-          final suggestions = IEnumString(suggestionsPtr);
-
-          final suggestionPtr = calloc<Pointer<Utf16>>();
-          final suggestionResultPtr = calloc<Uint32>();
-
-          while (suggestions.next(1, suggestionPtr, suggestionResultPtr) ==
-              S_OK) {
-            print('\t${suggestionPtr.value.toDartString()}');
-            WindowsDeleteString(suggestionPtr.value.address);
-          }
-      }
+        free(elements);
+        free(suggestionArray);
     }
-
-    free(textPtr);
   }
 
-  free(supportedPtr);
-  free(languageTagPtr);
+  free(errorPtr);
 }

@@ -17,30 +17,27 @@ the `CoInitializeEx` function. Details of the threading models are outside the
 scope of this document, but typically you should write something like:
 
 ```dart
-final hr = CoInitializeEx(
-    nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
-if (FAILED(hr)) throw WindowsException(hr);
+CoInitializeEx(COINIT_MULTITHREADED);
 ```
 
 ### Creating a COM object
 
-You can create COM objects using the [C
-library](https://learn.microsoft.com/windows/win32/learnwin32/creating-an-object-in-com):
+You can create COM objects using the [C library](
+https://learn.microsoft.com/windows/win32/learnwin32/creating-an-object-in-com):
 
 ```dart
-hr = CoCreateInstance(clsid, nullptr, CLSCTX_INPROC_SERVER, iid, ppv);
+hr = CoCreateInstance(clsid, null, CLSCTX_INPROC_SERVER, riid, ppv);
 ```
 
-However, rather than manually allocate GUID structs for the `clsid` and `iid`
+However, rather than manually allocate `GUID` structs for the `clsid` and `riid`
 values, checking the `hr` result code and deal with casting the `ppv` return
-object, it is easier to use the `createFromID` static helper function:
+object, it is easier to use the `createInstance` helper function:
 
 ```dart
-final fileDialog2 = IFileDialog2(
-    COMObject.createFromID(CLSID_FileOpenDialog, IID_IFileDialog2));
+final fileDialog2 = createInstance<IFileDialog2>(FileOpenDialog);
 ```
 
-`createFromID` returns a `Pointer<COMObject>` containing the requested object,
+`createInstance` returns a `VTablePointer` containing the requested object,
 which can then be cast into the appropriate interface as shown above.
 
 ### Asking a COM object for an interface
@@ -52,23 +49,24 @@ derives from `IUnknown`, so as in other language implementations of COM, you
 may call `queryInterface` on any object to retrieve a pointer to a different
 supported interface.
 
-More information on COM interfaces may be found in the [Microsoft
-documentation](https://learn.microsoft.com/windows/win32/learnwin32/asking-an-object-for-an-interface).
+More information on COM interfaces may be found in the
+[Microsoft documentation](
+https://learn.microsoft.com/windows/win32/learnwin32/asking-an-object-for-an-interface).
 
 COM interfaces supply a method that wraps `queryInterface`. If you have an
 existing COM object, you can call it as follows:
 
 ```dart
-  final modalWindow = IModalWindow(fileDialog2.toInterface(IID_IModalWindow));
+  final modalWindow = fileDialog2.cast<IModalWindow>();
 ```
 
-or, you can use the `from` constructor that wraps the `toInterface` for you:
+or, you can use the `from` constructor that wraps the `cast` for you:
 
 ```dart
   final modalWindow = IModalWindow.from(fileDialog2);
 ```
 
-Where `createFromID` creates a new COM object, `toInterface` casts an existing
+Where `createInstance` creates a new COM object, `cast` casts an existing
 COM object to a new interface.
 
 Attempting to cast a COM object to an interface it does not support will fail,
@@ -81,9 +79,9 @@ return value to a variable and test it for success or failure. You can use the
 `SUCCEEDED()` or `FAILED()` top-level functions to do this, for example:
 
 ```dart
-final hr = fileOpenDialog.show(NULL);
+final hr = fileOpenDialog.show(null);
 if (SUCCEEDED(hr)) {
-  // Do something with the returned dialog box values
+  // Do something with the returned dialog box values.
 }
 ```
 
@@ -92,26 +90,23 @@ Win32 error code is converted to an `HRESULT`, as in the case where a user
 cancels a common dialog box:
 
 ```dart
-final hr = fileOpenDialog.show(NULL);
+final hr = fileOpenDialog.show(null);
 if (FAILED(hr) && hr == HRESULT_FROM_WIN32(ERROR_CANCELLED)) {
-  // User clicked cancel
+  // User clicked cancel.
 }
 ```
 
 ### Releasing COM objects
 
-Most of the time, you don't need to do anything as COM objects are
-automatically released by `Finalizer` when they go out of scope.
-
-However, if you're manually managing the lifetime of the object (i.e. by
-calling the `.detach()`), you should release it by calling the `.release()`:
+When you have finished using a COM interface, you should release it with the
+`.release()` method:
 
 ```dart
-fileOpenDialog.release(); // Release the interface
+fileOpenDialog.release(); // Release the interface.
 ```
 
 Often this will be called as part of a `try` / `finally` block, to guarantee
 that the object is released even if an exception is thrown.
 
 A full example of these calls can be found in the `com_demo.dart` file in the
-`examples\` subfolder.
+`examples\` subdirectory.

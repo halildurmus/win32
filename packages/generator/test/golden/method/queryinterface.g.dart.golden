@@ -1,0 +1,41 @@
+IUnknown.QueryInterface|
+/// Queries this COM object for a specific interface defined by the type
+/// parameter [T].
+///
+/// This method attempts to retrieve an interface implemented by the same COM
+/// object. If the interface is supported, it returns an instance of that
+/// interface, ensuring that [addRef] is called to increment the reference
+/// count.
+///
+/// Throws a [WindowsException] if the requested interface is not implemented
+/// by the object.
+///
+/// This method uses the [ComInterface.type] method to retrieve metadata about
+/// the target interface, including its IID (Interface ID) and instantiation
+/// logic. All COM interfaces provided by this package are pre-registered.
+/// Custom COM interfaces must be registered manually using the
+/// [ComInterface.register] method before calling this method.
+///
+/// Example:
+/// ```dart
+/// // Create a COM object instance (e.g., IFileDialog).
+/// final fileDialog = createInstance<IFileDialog>(FileOpenDialog);
+/// // Query for the IFileDialog2 interface.
+/// final fileDialog2 = fileDialog.queryInterface<IFileDialog2>();
+/// ```
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/unknwn/nf-unknwn-iunknown-queryinterface(refiid_void)>.
+T queryInterface<T extends IUnknown>() {
+  final companion = ComInterface.type<T>();
+  final riid = companion.iid;
+  final ppvObject = loggingCalloc<Pointer>();
+  final hr$ = HRESULT(_QueryInterfaceFn(ptr, riid.ptr, ppvObject));
+  if (hr$.isError) {
+    free(ppvObject);
+    throw WindowsException(hr$);
+  }
+  final result = companion.fromPointer(ppvObject.value.cast());
+  free(ppvObject);
+  return result;
+}

@@ -1,15 +1,15 @@
-import 'dart:math' show min, max;
+import 'dart:math' show max, min;
 
 class Point {
+  Point([this.x = 0, this.y = 0]);
+
+  factory Point.clone(Point orig) => Point(orig.x, orig.y);
+
   int x;
   int y;
 
   @override
   String toString() => '($x, $y)';
-
-  Point([this.x = 0, this.y = 0]);
-
-  factory Point.clone(Point orig) => Point(orig.x, orig.y);
 }
 
 // A piece in Tetris game. This class is only used by PieceSet. Other classes
@@ -24,23 +24,6 @@ class Point {
 // (0,0) (0,1) (0,2) (0,3)
 //
 class Piece {
-  // POINT array of which the piece is composed
-  late final List<Point> body;
-
-  // Number of points in body
-  final int pointCount;
-
-  // Make rotation faster
-  int width = 0;
-  int height = 0;
-
-  // Piece type ID and rotation
-  final int id;
-  final int rotation;
-
-  // Piece color in RGB
-  final int color;
-
   /// Constructs a piece
   ///
   /// id: piece type ID
@@ -74,6 +57,22 @@ class Piece {
       height = max(body[i].y + 1, height);
     }
   }
+  // POINT array of which the piece is composed
+  late final List<Point> body;
+
+  // Number of points in body
+  final int pointCount;
+
+  // Make rotation faster
+  var width = 0;
+  var height = 0;
+
+  // Piece type ID and rotation
+  final int id;
+  final int rotation;
+
+  // Piece color in RGB
+  final int color;
 
   /// Gets the bottom part of points of the piece
   List<Point> get skirt {
@@ -82,10 +81,9 @@ class Piece {
     for (var x = 0; x < width; x++) {
       for (var y = 0; y < height; y++) {
         if (isPointExists(x, y)) {
-          final p =
-              Point()
-                ..x = x
-                ..y = y;
+          final p = Point()
+            ..x = x
+            ..y = y;
           points.add(p);
           break;
         }
@@ -100,10 +98,9 @@ class Piece {
     for (var y = 0; y < height; y++) {
       for (var x = 0; x < height; x++) {
         if (isPointExists(x, y)) {
-          final p =
-              Point()
-                ..x = x
-                ..y = y;
+          final p = Point()
+            ..x = x
+            ..y = y;
           points.add(p);
           break;
         }
@@ -118,10 +115,9 @@ class Piece {
     for (var y = 0; y < height; y++) {
       for (var x = width - 1; x >= 0; x--) {
         if (isPointExists(x, y)) {
-          final p =
-              Point()
-                ..x = x
-                ..y = y;
+          final p = Point()
+            ..x = x
+            ..y = y;
           points.add(p);
           break;
         }
@@ -133,12 +129,11 @@ class Piece {
   /// String representation of a piece (for debugging)
   @override
   String toString() {
-    final buffer =
-        StringBuffer()
-          ..write('width = $width | ')
-          ..write('height = $height | ')
-          ..write('nPoints = $pointCount | ')
-          ..writeln('color = ${color.toRadixString(16)}');
+    final buffer = StringBuffer()
+      ..write('width = $width | ')
+      ..write('height = $height | ')
+      ..write('nPoints = $pointCount | ')
+      ..writeln('color = ${color.toRadixString(16)}');
 
     for (var y = height - 1; y >= 0; y--) {
       for (var x = 0; x < width; x++) {

@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import '../structs.g.dart';
+import '../utils.dart';
 
 /// Extension on [FILETIME] to convert `FILETIME` structures to [DateTime]
 /// instances.

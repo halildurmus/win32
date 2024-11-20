@@ -4,7 +4,6 @@ import 'dart:async';
 import 'dart:ffi';
 import 'dart:isolate';
 
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 /// This function sets up a message loop that listens for device change
@@ -21,8 +20,8 @@ Future<void> listenForUsbDriveChanges(SendPort mainSendPort) async {
   // Send the SendPort of stopPort back to the main isolate.
   mainSendPort.send(stopPort.sendPort);
 
-  final hInstance = GetModuleHandle(nullptr);
-  final className = 'USBMonitorWindowClass'.toNativeUtf16();
+  final hInstance = GetModuleHandle(null);
+  final className = w('USBMonitorWindowClass');
 
   int mainWindowProc(int hWnd, int msg, int wParam, int lParam) {
     switch (msg) {
@@ -38,10 +37,9 @@ Future<void> listenForUsbDriveChanges(SendPort mainSendPort) async {
             final driveInfo = getDriveInformation(driveLetter);
             // Send the event information back to the main isolate.
             mainSendPort.send({
-              'event':
-                  wParam == DBT_DEVICEARRIVAL
-                      ? 'USB drive connected'
-                      : 'USB drive disconnected',
+              'event': wParam == DBT_DEVICEARRIVAL
+                  ? 'USB drive connected'
+                  : 'USB drive disconnected',
               'drive': driveLetter,
               'info': driveInfo,
             });
@@ -59,17 +57,16 @@ Future<void> listenForUsbDriveChanges(SendPort mainSendPort) async {
   );
 
   // Define the window class and register it.
-  final wndClass = calloc<WNDCLASS>();
+  final wndClass = loggingCalloc<WNDCLASS>();
   wndClass.ref
     ..lpfnWndProc = nativeCallable.nativeFunction
     ..hInstance = hInstance
-    ..lpszClassName = className;
+    ..lpszClassName = className.ptr;
   if (RegisterClass(wndClass) == 0) {
     // The window class was not registered. Clean up and close the stop port.
     stopPort.close();
     nativeCallable.close();
     free(wndClass);
-    free(className);
     final error = StateError('Failed to register window class.');
     mainSendPort.send(error); // Send the error back to the main isolate.
     throw error;
@@ -77,26 +74,25 @@ Future<void> listenForUsbDriveChanges(SendPort mainSendPort) async {
 
   // Create a hidden window to receive messages.
   final hWnd = CreateWindowEx(
-    0,
-    className,
-    className,
-    0,
-    0,
-    0,
+    WS_EX_LEFT,
+    className.ptr,
+    className.ptr,
+    WS_OVERLAPPEDWINDOW,
     0,
     0,
     0,
     0,
+    null,
+    null,
     hInstance,
     nullptr,
   );
-  if (hWnd == 0) {
+  if (hWnd == NULL) {
     // The window was not created. Clean up and close the stop port.
     stopPort.close();
     nativeCallable.close();
-    UnregisterClass(className, hInstance);
+    UnregisterClass(className.ptr, hInstance);
     free(wndClass);
-    free(className);
     final error = StateError('Failed to create window.');
     mainSendPort.send(error); // Send the error back to the main isolate.
     throw error;
@@ -114,12 +110,12 @@ Future<void> listenForUsbDriveChanges(SendPort mainSendPort) async {
     isRunning = false;
   });
 
-  final msg = calloc<MSG>();
+  final msg = loggingCalloc<MSG>();
 
   // Message loop to keep the isolate running and handle notifications.
   while (isRunning) {
     // Process messages without blocking.
-    while (PeekMessage(msg, hWnd, 0, 0, PM_REMOVE) != 0) {
+    while (PeekMessage(msg, hWnd, 0, 0, PM_REMOVE)) {
       TranslateMessage(msg);
       DispatchMessage(msg);
     }
@@ -131,8 +127,7 @@ Future<void> listenForUsbDriveChanges(SendPort mainSendPort) async {
 
   // Clean up resources.
   DestroyWindow(hWnd);
-  UnregisterClass(className, hInstance);
-  free(className);
+  UnregisterClass(className.ptr, hInstance);
   free(wndClass);
   free(msg);
   nativeCallable.close();
@@ -150,23 +145,22 @@ String getDriveLetter(int bitmask) {
 
 /// Retrieves information about the drive, including its type and volume label.
 String? getDriveInformation(String driveLetter) {
-  final lpRootPathName = '${driveLetter.toUpperCase()}:\\'.toNativeUtf16();
-  final lpVolumeNameBuffer = wsalloc(MAX_PATH);
-  final lpFileSystemNameBuffer = wsalloc(MAX_PATH);
+  final lpRootPathName = w('${driveLetter.toUpperCase()}:\\');
+  final lpVolumeNameBuffer = Pwstr.allocate(MAX_PATH);
+  final lpFileSystemNameBuffer = Pwstr.allocate(MAX_PATH);
 
   try {
-    final result = GetVolumeInformation(
-      lpRootPathName,
-      lpVolumeNameBuffer,
+    if (GetVolumeInformation(
+      lpRootPathName.ptr,
+      lpVolumeNameBuffer.ptr,
       MAX_PATH,
       nullptr,
       nullptr,
       nullptr,
-      lpFileSystemNameBuffer,
+      lpFileSystemNameBuffer.ptr,
       MAX_PATH,
-    );
-    if (result == TRUE) {
-      final driveType = GetDriveType(lpRootPathName);
+    )) {
+      final driveType = GetDriveType(lpRootPathName.ptr);
       final driveTypeDesc = switch (driveType) {
         DRIVE_REMOVABLE => 'Removable',
         DRIVE_FIXED => 'Fixed',
@@ -182,9 +176,7 @@ String? getDriveInformation(String driveLetter) {
 
     return null;
   } finally {
-    free(lpRootPathName);
-    free(lpVolumeNameBuffer);
-    free(lpFileSystemNameBuffer);
+    lpFileSystemNameBuffer.free();
   }
 }
 
@@ -205,16 +197,16 @@ Stream<Map<String, Object?>> get onUsbDriveChanged {
       await Isolate.spawn(listenForUsbDriveChanges, receivePort!.sendPort);
 
       // Listen for messages from the isolate.
-      receivePortSubscription = receivePort!.listen((message) {
+      receivePortSubscription = receivePort!.listen((message) async {
         if (message is SendPort) {
           isolateStopPort = message;
         } else if (message is Map<String, Object?>) {
           controller?.add(message);
         } else if (message is Error) {
-          receivePortSubscription?.cancel();
+          await receivePortSubscription?.cancel();
           receivePort?.close();
           controller?.addError(message);
-          controller?.close();
+          await controller?.close();
         }
       });
     },

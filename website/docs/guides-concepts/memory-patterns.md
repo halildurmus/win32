@@ -14,7 +14,7 @@ import 'package:win32/win32.dart';
 // BAD: Don't do this, since the memory for pGuid may not be released.
 String createGUID() {
   // highlight-next-line
-  final pGuid = calloc<GUID>();
+  final pGuid = loggingCalloc<GUID>();
 
   final hr = CoCreateGuid(pGuid);
   // highlight-next-line
@@ -47,7 +47,7 @@ ensures that the `finally` clause will be **executed** regardless of whether an
 ```dart
 // GOOD: This approach is safe and convenient.
 String createGUID() {
-  final pGuid = calloc<GUID>();
+  final pGuid = loggingCalloc<GUID>();
   // highlight-next-line
   try {
     final hr = CoCreateGuid(pGuid);
@@ -81,11 +81,11 @@ import 'package:win32/win32.dart';
 
 DateTime processCreationTime() {
   final hProcess = GetCurrentProcess();
-  final pCreationTime = calloc<FILETIME>();
-  final pExitTime = calloc<FILETIME>();
-  final pKernelTime = calloc<FILETIME>();
-  final pUserTime = calloc<FILETIME>();
-  final pCreationSystemTime = calloc<SYSTEMTIME>();
+  final pCreationTime = loggingCalloc<FILETIME>();
+  final pExitTime = loggingCalloc<FILETIME>();
+  final pKernelTime = loggingCalloc<FILETIME>();
+  final pUserTime = loggingCalloc<FILETIME>();
+  final pCreationSystemTime = loggingCalloc<SYSTEMTIME>();
 
   try {
     // Retrieve timing information for the current process.

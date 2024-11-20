@@ -1,4 +1,3 @@
-import 'package:ffi/ffi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
@@ -9,18 +8,18 @@ import 'volumepanel.dart';
 import 'windowroundingselector.dart';
 
 void main() {
-  runApp(ExplorerApp());
+  runApp(const ExplorerApp());
 }
 
 class ExplorerApp extends StatelessWidget {
+  const ExplorerApp({super.key});
+
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData.light(),
-      darkTheme: ThemeData.dark(),
-      home: const MainPage(),
-    );
-  }
+  Widget build(BuildContext context) => MaterialApp(
+    theme: ThemeData.light(),
+    darkTheme: ThemeData.dark(),
+    home: const MainPage(),
+  );
 }
 
 class MainPage extends StatefulWidget {
@@ -36,63 +35,56 @@ class MainPageState extends State<MainPage> {
   @override
   void initState() {
     showRoundedCornerSwitch = isWindows11();
-
     super.initState();
   }
 
-  void showDocumentsPath() async {
+  Future<void> showDocumentsPath() async {
     final appDocDir = await getApplicationDocumentsDirectory();
     final hwnd = GetForegroundWindow();
-    final pMessage = 'Path: ${appDocDir.path}'.toNativeUtf16();
-    final pTitle = 'Application Documents'.toNativeUtf16();
-
-    MessageBox(hwnd, pMessage, pTitle, MB_OK);
-
-    free(pMessage);
-    free(pTitle);
+    final text = 'Path: ${appDocDir.path}';
+    final caption = w('Application Documents');
+    MessageBox(hwnd, text.ptr, caption.ptr, MB_OK);
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      // Unsupported on Windows as of Flutter 3. Adding in preparation for later
-      // releases.
-      body: PlatformMenuBar(
-        menus: [
-          PlatformMenu(
-            label: 'Explore',
-            menus: [
-              PlatformMenuItemGroup(
-                members: [
-                  PlatformMenuItem(
-                    label: 'Show Docs Path...',
-                    shortcut: const SingleActivator(
-                      LogicalKeyboardKey.keyP,
-                      control: true,
-                      shift: true,
-                    ),
-                    onSelected: () async => showDocumentsPath(),
+  Widget build(BuildContext context) => Scaffold(
+    // Unsupported on Windows as of Flutter 3. Adding in preparation for later
+    // releases.
+    body: PlatformMenuBar(
+      menus: [
+        PlatformMenu(
+          label: 'Explore',
+          menus: [
+            PlatformMenuItemGroup(
+              members: [
+                PlatformMenuItem(
+                  label: 'Show Docs Path...',
+                  shortcut: const SingleActivator(
+                    LogicalKeyboardKey.keyP,
+                    control: true,
+                    shift: true,
                   ),
-                ],
-              ),
-            ],
-          ),
-        ],
-        child: Column(
-          children: [
-            if (showRoundedCornerSwitch) const WindowRoundingSelector(),
-            Expanded(child: VolumePanel()),
-
-            // TODO(halildurmus): Can be removed when PlatformMenuBar is
-            // supported on Windows.
-            FloatingActionButton(
-              mini: true,
-              child: const Icon(Icons.folder),
-              onPressed: () async => showDocumentsPath(),
+                  onSelected: () async => showDocumentsPath(),
+                ),
+              ],
             ),
           ],
         ),
+      ],
+      child: Column(
+        children: [
+          if (showRoundedCornerSwitch) const WindowRoundingSelector(),
+          const Expanded(child: VolumePanel()),
+
+          // TODO(halildurmus): Can be removed when PlatformMenuBar is
+          // supported on Windows.
+          FloatingActionButton(
+            mini: true,
+            child: const Icon(Icons.folder),
+            onPressed: () async => showDocumentsPath(),
+          ),
+        ],
       ),
-    );
-  }
+    ),
+  );
 }

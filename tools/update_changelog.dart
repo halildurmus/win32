@@ -4,25 +4,26 @@ import 'dart:io';
 import 'package:args/args.dart';
 
 void main(List<String> args) {
-  final argParser =
-      ArgParser()..addOption(
-        'version',
-        abbr: 'v',
-        help: 'The version number to update the changelog with.',
-        mandatory: true,
-      );
+  final argParser = ArgParser()
+    ..addOption(
+      'version',
+      abbr: 'v',
+      help: 'The version number to update the changelog with.',
+      mandatory: true,
+    );
   final argResults = argParser.parse(args);
   var version = argResults.option('version');
   if (version == null) {
     print('❌ Version number must be provided.');
     exit(1);
   }
-  version = version.replaceFirst(RegExp(r'^v'), '');
+  version = version.replaceFirst(RegExp('^v'), '');
 
   print('🚧 Updating changelog for v$version...');
   final result = Process.runSync(
     'dart',
     [
+      '--enable-experiment=native-assets',
       'run',
       'hooks:update_changelog',
       '--tag',

@@ -1,0 +1,29 @@
+BITMAPFILEHEADER|
+/// Contains information about the type, size, and layout of a file that
+/// contains a DIB.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/wingdi/ns-wingdi-bitmapfileheader>.
+///
+/// {@category struct}
+@Packed(2)
+base class BITMAPFILEHEADER extends Struct {
+  /// The file type; must be BM.
+  @Uint16()
+  external int bfType;
+
+  /// The size, in bytes, of the bitmap file.
+  @Uint32()
+  external int bfSize;
+
+  @Uint16()
+  external int _bfReserved1;
+
+  @Uint16()
+  external int _bfReserved2;
+
+  /// The offset, in bytes, from the beginning of the <b>BITMAPFILEHEADER</b>
+  /// structure to the bitmap bits.
+  @Uint32()
+  external int bfOffBits;
+}

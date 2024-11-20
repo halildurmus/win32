@@ -1,9 +1,5 @@
-// editor.dart
-
-// Represents the main editor
 import 'dart:ffi';
 
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'file.dart';
@@ -12,6 +8,10 @@ import 'notepad.dart';
 import 'resources.dart';
 
 class NotepadEditor {
+  NotepadEditor(this._hwnd, this._hwndEdit)
+    : file = NotepadFile(_hwnd, '', ''),
+      font = NotepadFont(_hwndEdit);
+
   // Handles to window and edit control. These don't change after the controls
   // are instantiated, so we take a copy here to minimize ceremony while an
   // instance is being used.
@@ -21,30 +21,16 @@ class NotepadEditor {
   final NotepadFile file;
   final NotepadFont font;
 
-  NotepadEditor(this._hwnd, this._hwndEdit)
-    : file = NotepadFile(_hwnd, '', ''),
-      font = NotepadFont(_hwndEdit);
-
-  void dispose() {
-    font.dispose();
-  }
-
   /// Does the current file in memory contain unsaved changes?
-  bool isFileDirty = false;
+  var isFileDirty = false;
 
   bool get isTextSelected {
-    bool result;
-
-    final iSelBeg = calloc<DWORD>();
-    final iSelEnd = calloc<DWORD>();
-
+    final iSelBeg = loggingCalloc<DWORD>();
+    final iSelEnd = loggingCalloc<DWORD>();
     SendMessage(_hwndEdit, EM_GETSEL, iSelBeg.address, iSelEnd.address);
-
-    result = iSelBeg.value != iSelEnd.value;
-
+    final result = iSelBeg.value != iSelEnd.value;
     free(iSelBeg);
     free(iSelEnd);
-
     return result;
   }
 
@@ -57,9 +43,7 @@ class NotepadEditor {
   }
 
   void openFile() {
-    if (isFileDirty && offerSave() == IDCANCEL) {
-      return;
-    }
+    if (isFileDirty && offerSave() == IDCANCEL) return;
 
     if (file.showOpenDialog(_hwnd)) {
       file.readFileIntoEditControl(_hwndEdit);
@@ -82,7 +66,6 @@ class NotepadEditor {
   bool saveAsFile() {
     if (file.showSaveDialog(_hwnd)) {
       updateWindowTitle();
-
       file.writeFileFromEditControl(_hwndEdit);
       isFileDirty = false;
       return true;
@@ -92,36 +75,35 @@ class NotepadEditor {
   }
 
   void setFont() {
-    if (font.notepadChooseFont(_hwnd)) {
-      font.notepadSetFont();
+    if (font.chooseFont(_hwnd)) {
+      font.setFont();
     }
   }
 
   void updateWindowTitle() {
     final caption =
-        '$APP_NAME - ${file.title.isNotEmpty ? file.title : '(untitled)'}';
-    SetWindowText(_hwnd, TEXT(caption));
+        '$appName - ${file.title.isNotEmpty ? file.title : '(untitled)'}';
+    final string = w(caption);
+    SetWindowText(_hwnd, string.ptr);
   }
 
   void showMessage(String szMessage) {
-    MessageBox(
-      _hwnd,
-      TEXT(szMessage),
-      TEXT(APP_NAME),
-      MB_OK | MB_ICONEXCLAMATION,
-    );
+    final text = w(szMessage);
+    final caption = w(appName);
+    MessageBox(_hwnd, text.ptr, caption.ptr, MB_OK | MB_ICONEXCLAMATION);
   }
 
   int offerSave() {
-    final buffer = TEXT(
+    final text = w(
       file.title.isNotEmpty
           ? 'Save current changes in ${file.title}?'
           : 'Save changes to file?',
     );
+    final caption = w(appName);
     final res = MessageBox(
       _hwnd,
-      buffer,
-      TEXT(APP_NAME),
+      text.ptr,
+      caption.ptr,
       MB_YESNOCANCEL | MB_ICONQUESTION,
     );
 
@@ -133,4 +115,6 @@ class NotepadEditor {
 
     return res;
   }
+
+  void dispose() => font.dispose();
 }

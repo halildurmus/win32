@@ -1,0 +1,16 @@
+INetwork.get_IsConnectedToInternet|
+/// Specifies if the network has internet connectivity.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/netlistmgr/nf-netlistmgr-inetwork-get_isconnectedtointernet>.
+bool get isConnectedToInternet {
+  final pbIsConnected = loggingCalloc<VARIANT_BOOL>();
+  final hr$ = HRESULT(_get_IsConnectedToInternetFn(ptr, pbIsConnected));
+  if (hr$.isError) {
+    free(pbIsConnected);
+    throw WindowsException(hr$);
+  }
+  final result$ = pbIsConnected.value;
+  free(pbIsConnected);
+  return result$ != FALSE;
+}

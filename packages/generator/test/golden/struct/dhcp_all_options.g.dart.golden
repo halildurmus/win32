@@ -1,0 +1,31 @@
+DHCP_ALL_OPTIONS|
+/// Defines the set of all options available on a DHCP server.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dhcpsapi/ns-dhcpsapi-dhcp_all_options>.
+///
+/// {@category struct}
+base class DHCP_ALL_OPTIONS extends Struct {
+  /// Reserved.
+  @Uint32()
+  external int Flags;
+
+  /// <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/dhcpsapi/ns-dhcpsapi-dhcp_option_array">DHCP_OPTION_ARRAY</a>
+  /// structure that contains the set of non-vendor options.
+  external Pointer<DHCP_OPTION_ARRAY> NonVendorOptions;
+
+  /// Specifies the number of vendor options listed in <b>VendorOptions</b>.
+  @Uint32()
+  external int NumVendorOptions;
+
+  /// Pointer to a list of structures that contain the following fields.
+  external Pointer<DHCP_ALL_OPTIONS_0> VendorOptions;
+}
+
+/// {@category struct}
+sealed class DHCP_ALL_OPTIONS_0 extends Struct {
+  external DHCP_OPTION Option;
+  external PWSTR VendorName;
+  external PWSTR ClassName;
+}
