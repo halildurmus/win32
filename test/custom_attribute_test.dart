@@ -142,6 +142,54 @@ void main() {
     check(guidAttr.parameters[10].value).equals(0x80);
   });
 
+  test('MemorySizeAttribute', () {
+    final typeDef =
+        win32Scope.findTypeDef('Windows.Win32.Security.Cryptography.Apis');
+    check(typeDef).isNotNull();
+    final method = typeDef!.findMethod('BCryptGetProperty');
+    check(method).isNotNull();
+    final attr = method!.parameters[2]
+        .findAttribute('Windows.Win32.Foundation.Metadata.MemorySizeAttribute');
+    check(attr).isNotNull();
+    check(attr!.parameters.length).equals(1);
+    final param = attr.parameters[0];
+    check(param.type.baseType).equals(BaseType.int16Type);
+    check(param.type.name).equals('BytesParamIndex');
+    check(param.value).equals(3);
+  });
+
+  test('NativeArrayInfoAttribute(CountFieldName)', () {
+    final typeDef = win32Scope.findTypeDef(
+        'Windows.Win32.Graphics.Direct3D12.D3D12_STREAM_OUTPUT_DESC');
+    check(typeDef).isNotNull();
+    final field = typeDef!.fields[0];
+    check(field).isNotNull();
+    final attr = field.findAttribute(
+        'Windows.Win32.Foundation.Metadata.NativeArrayInfoAttribute');
+    check(attr).isNotNull();
+    check(attr!.parameters.length).equals(1);
+    final param = attr.parameters[0];
+    check(param.type.baseType).equals(BaseType.stringType);
+    check(param.type.name).equals('CountFieldName');
+    check(param.value).equals('NumEntries');
+  });
+
+  test('NativeArrayInfoAttribute(CountParamIndex)', () {
+    final typeDef =
+        win32Scope.findTypeDef('Windows.Win32.System.Com.IDispatch');
+    check(typeDef).isNotNull();
+    final method = typeDef!.findMethod('GetIDsOfNames');
+    check(method).isNotNull();
+    final attr = method!.parameters.last.findAttribute(
+        'Windows.Win32.Foundation.Metadata.NativeArrayInfoAttribute');
+    check(attr).isNotNull();
+    check(attr!.parameters.length).equals(1);
+    final param = attr.parameters[0];
+    check(param.type.baseType).equals(BaseType.int16Type);
+    check(param.type.name).equals('CountParamIndex');
+    check(param.value).equals(2);
+  });
+
   test('Minimum Windows version', () {
     final typeDef =
         win32Scope.findTypeDef('Windows.Win32.Devices.Communication.Apis');

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_asserts_with_message
+
 import 'dart:convert';
 import 'dart:ffi';
 import 'dart:typed_data';
@@ -66,138 +68,120 @@ class CustomAttribute extends TokenObject {
 
   late final List<CustomAttributeParameter> parameters = _getParameters();
 
-  /// The name of the attribute
+  /// The name of the attribute.
   String get name => constructor.name;
 
   /// Parameters for the custom attribute.
   List<CustomAttributeParameter> _getParameters() {
     final parameters = <CustomAttributeParameter>[];
 
-    final paramTypes = _parameterTypes();
-    final paramValues = _parameterValues(paramTypes);
+    // Decode parameters, per §II.23.3 of ECMA-335.
+    final methodRefSig = memberRef.signatureBlob;
+    final data = signatureBlob.buffer.asByteData();
+    var methodRefSigOffset = 0;
+    var dataOffset = 0;
 
-    for (var idx = 0; idx < paramTypes.length; idx++) {
-      final param = CustomAttributeParameter(paramTypes[idx], paramValues[idx]);
-      parameters.add(param);
+    final prolog = data.getUint16(dataOffset, Endian.little);
+    assert(prolog == 0x0001);
+    dataOffset += 2;
+
+    final hasThis = methodRefSig.elementAt(methodRefSigOffset++);
+    assert(hasThis == 0x20);
+
+    final fixedArgCount = methodRefSig.elementAt(methodRefSigOffset++);
+
+    final retType = methodRefSig.elementAt(methodRefSigOffset++);
+    assert(retType == CorElementType.ELEMENT_TYPE_VOID);
+
+    // Process fixed args.
+    for (var i = 0; i < fixedArgCount; i++) {
+      final runtimeType = TypeTuple.fromSignature(
+          methodRefSig.sublist(methodRefSigOffset), scope);
+      methodRefSigOffset += runtimeType.offsetLength;
+      final type = runtimeType.typeIdentifier;
+      final baseType = _resolveBaseType(type);
+      final (value, valueOffset) = _decodeValue(data, baseType, dataOffset);
+      dataOffset += valueOffset;
+      parameters.add(CustomAttributeParameter(type, value));
+    }
+
+    // Process named args.
+    final namedArgCount = data.getUint16(dataOffset, Endian.little);
+    dataOffset += 2;
+
+    for (var i = 0; i < namedArgCount; i++) {
+      // Read a single byte to determine the type of the named argument.
+      data.getUint8(dataOffset++); // FIELD (0x53) or PROPERTY (0x54)
+
+      // Read the type of the named argument (FieldOrPropType).
+      final runtimeType = TypeTuple.fromSignature(
+        data.buffer.asUint8List(dataOffset),
+        scope,
+      );
+      dataOffset += runtimeType.offsetLength;
+      final type = runtimeType.typeIdentifier;
+      final baseType = _resolveBaseType(type);
+
+      // Read the name of the named argument (FieldOrPropName).
+      final (name, stringOffset) = _readString(data, dataOffset);
+      dataOffset += stringOffset;
+
+      // Read the value of the named argument (FixedArg).
+      final (value, valueOffset) = _decodeValue(data, baseType, dataOffset);
+      dataOffset += valueOffset;
+      parameters
+          .add(CustomAttributeParameter(type.copyWith(name: name), value));
     }
 
     return parameters;
   }
 
-  /// Decode parameter types, per §II.23.2.1 of ECMA-335 (MethodDefSig)
-  List<TypeIdentifier> _parameterTypes() {
-    final parameterTypes = <TypeIdentifier>[];
-    final typeSignatureBlob = memberRef.signatureBlob;
-    // Parse through the signature blob, and map each recovered
-    // type to the corresponding parameter.
-    var offset = 1; // skip prolog
-    final paramCount = typeSignatureBlob.elementAt(offset++);
-
-    var paramsIndex = 0;
-    // Signature
-    while (paramsIndex < paramCount + 1) {
-      final runtimeType =
-          TypeTuple.fromSignature(typeSignatureBlob.sublist(offset), scope);
-      offset += runtimeType.offsetLength;
-      parameterTypes.add(runtimeType.typeIdentifier);
-      paramsIndex++;
+  /// Resolves the base type, including special handling for enums.
+  BaseType _resolveBaseType(TypeIdentifier type) {
+    if (type.type?.isEnum ?? false) {
+      // Use the type of the `.value` property for enums.
+      return type.type!.fields.first.typeIdentifier.baseType;
     }
-    parameterTypes.removeAt(0); // throw away return type
-
-    return parameterTypes;
+    return type.baseType;
   }
 
-  /// Decode parameter values per §II.23.3 of ECMA-335.
-  List<Object> _parameterValues(List<TypeIdentifier> paramTypes) {
-    final paramValues = <Object>[];
-    final blob = signatureBlob.buffer.asByteData();
-    var offset = 2; // skip two-byte 0x0001 prolog
-
-    for (var paramIdx = 0; paramIdx < paramTypes.length; paramIdx++) {
-      var baseType = paramTypes[paramIdx].baseType;
-
-      if (paramTypes[paramIdx].type?.isEnum ?? false) {
-        // find the type of the .value property (likely an Int32 or
-        // Uint32) and use that instead...
-        baseType =
-            paramTypes[paramIdx].type!.fields.first.typeIdentifier.baseType;
-      }
-
+  /// Decodes a value from the byte [data] based on the [baseType].
+  (Object, int) _decodeValue(
+    ByteData data,
+    BaseType baseType,
+    int offset,
+  ) =>
       switch (baseType) {
-        case BaseType.stringType:
-        case BaseType.classTypeModifier: // canonical name represented in value
-          // Get string length and move pointer forward
-          final packedLen =
-              UncompressedData.fromBlob(blob.buffer.asUint8List(offset, 4));
-          final stringLength = packedLen.data;
-          offset += packedLen.dataLength;
+        BaseType.stringType ||
+        BaseType.classTypeModifier =>
+          _readString(data, offset),
+        BaseType.booleanType => (data.getUint8(offset) == 1, 1),
+        BaseType.charType => (String.fromCharCode(data.getUint16(offset)), 2),
+        BaseType.floatType => (data.getFloat32(offset, Endian.little), 4),
+        BaseType.doubleType => (data.getFloat64(offset, Endian.little), 8),
+        BaseType.int8Type => (data.getInt8(offset), 1),
+        BaseType.int16Type => (data.getInt16(offset, Endian.little), 2),
+        BaseType.int32Type => (data.getInt32(offset, Endian.little), 4),
+        BaseType.int64Type => (data.getInt64(offset, Endian.little), 8),
+        BaseType.uint8Type => (data.getUint8(offset), 1),
+        BaseType.uint16Type => (data.getUint16(offset, Endian.little), 2),
+        BaseType.uint32Type => (data.getUint32(offset, Endian.little), 4),
+        BaseType.uint64Type => (data.getUint64(offset, Endian.little), 8),
+        _ => throw WinmdException(
+            'Unexpected parameter type in signature blob: $baseType',
+          )
+      };
 
-          // Add decoded string value and move pointer forward
-          paramValues.add(const Utf8Decoder()
-              .convert(blob.buffer.asUint8List(offset, stringLength)));
-          offset += stringLength;
-        case BaseType.booleanType:
-          paramValues.add(blob.getUint8(offset) == 1);
-          offset += 1;
-        case BaseType.charType:
-          paramValues.add(String.fromCharCode(blob.getUint16(offset)));
-          offset += 2;
-        case BaseType.floatType:
-          paramValues.add(blob.getFloat32(offset, Endian.little));
-          offset += 4;
-        case BaseType.doubleType:
-          paramValues.add(blob.getFloat64(offset, Endian.little));
-          offset += 8;
-        case BaseType.int8Type:
-          paramValues.add(blob.getInt8(offset));
-          offset += 1;
-        case BaseType.int16Type:
-          paramValues.add(blob.getInt16(offset, Endian.little));
-          offset += 2;
-        case BaseType.int32Type:
-          paramValues.add(blob.getInt32(offset, Endian.little));
-          offset += 4;
-        case BaseType.int64Type:
-          paramValues.add(blob.getInt64(offset, Endian.little));
-          offset += 8;
-        case BaseType.uint8Type:
-          paramValues.add(blob.getUint8(offset));
-          offset += 1;
-        case BaseType.uint16Type:
-          paramValues.add(blob.getUint16(offset, Endian.little));
-          offset += 2;
-        case BaseType.uint32Type:
-          paramValues.add(blob.getUint32(offset, Endian.little));
-          offset += 4;
-        case BaseType.uint64Type:
-          paramValues.add(blob.getUint64(offset, Endian.little));
-          offset += 8;
-        case BaseType.intPtrType:
-        case BaseType.uintPtrType:
-        case BaseType.voidType:
-        case BaseType.pointerTypeModifier:
-        case BaseType.referenceTypeModifier:
-        case BaseType.valueTypeModifier:
-        case BaseType.classVariableTypeModifier:
-        case BaseType.arrayTypeModifier:
-        case BaseType.genericTypeModifier:
-        case BaseType.typedReference:
-        case BaseType.functionPointerType:
-        case BaseType.objectType:
-        case BaseType.simpleArrayType:
-        case BaseType.methodVariableTypeModifier:
-        case BaseType.cLanguageRequiredModifier:
-        case BaseType.cLanguageOptionalModifier:
-        case BaseType.sentinelTypeModifier:
-          // In the future, we might add more exhaustive checking for esoteric
-          // parameter types that are specified in ECMA-335 but don't seem to
-          // occur in the Win32 or WinRT metadata (e.g. named arguments).
-          throw const WinmdException(
-              'Unexpected parameter type in signature blob.');
-      }
-    }
+  /// Reads a UTF-8 encoded string from the byte [data].
+  (String, int) _readString(ByteData data, int offset) {
+    final packedLen =
+        UncompressedData.fromBlob(data.buffer.asUint8List(offset, 4));
+    final stringLength = packedLen.data;
+    final stringOffset = offset + packedLen.dataLength;
 
-    return paramValues;
+    final decodedString = const Utf8Decoder()
+        .convert(data.buffer.asUint8List(stringOffset, stringLength));
+    return (decodedString, packedLen.dataLength + stringLength);
   }
 
   @override
