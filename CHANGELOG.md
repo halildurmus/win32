@@ -1,3 +1,39 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+## [5.2.0] - 2024-11-26
+
+### 🚀 Features
+
+- Support named arguments in custom attributes ([#103](https://github.com/halildurmus/winmd/issues/103)) - ([8c594fb](https://github.com/halildurmus/winmd/commit/8c594fbead0d0d07a45769ea043f118a1d44fecc))
+
+### 📝 Documentation
+
+- Add PUBLISHING.md - ([4a9b3c5](https://github.com/halildurmus/winmd/commit/4a9b3c56584efdedfb9be9ce651c4e5264eec24b))
+
+### 📦 Dependencies
+
+- *(deps)* Bump nuget from 0.1.1 to 0.2.0 ([#102](https://github.com/halildurmus/winmd/issues/102)) - ([953b30a](https://github.com/halildurmus/winmd/commit/953b30a525184af28ee999ea09907328485727e3))
+- *(deps)* Bump win32 and win32_registry - ([385d820](https://github.com/halildurmus/winmd/commit/385d820c59523734e46b32cefb58fc5962a1284f))
+
+### ⚙️ Miscellaneous Tasks
+
+- Tweak cliff.toml - ([b35ed3a](https://github.com/halildurmus/winmd/commit/b35ed3a1bcc1276c7cf95803cdaf3b1241ad273e))
+- Update workflows - ([470ecb8](https://github.com/halildurmus/winmd/commit/470ecb8cc19e7eb38c323e629ebacdb365f68f62))
+- Tweak semantic_pr.yml - ([fd0b217](https://github.com/halildurmus/winmd/commit/fd0b217b74862b688bdb82cbf73ba8a106f20fe2))
+- Update health.yml - ([ce1bb99](https://github.com/halildurmus/winmd/commit/ce1bb9952581adac8bfb1105e92eb586e6634b29))
+- Tweak health.yml - ([5915508](https://github.com/halildurmus/winmd/commit/5915508e77fd86ee3d8dac9f283bdd6f5f94eb7e))
+- Update workflows - ([90da136](https://github.com/halildurmus/winmd/commit/90da136c63e212928846e59ffc98907a8d8116b9))
+- Update winmd.yml ([#101](https://github.com/halildurmus/winmd/issues/101)) - ([00cd856](https://github.com/halildurmus/winmd/commit/00cd856346e0fbf7c24207731ff36dcafa54c1d0))
+- Don't use lock files - ([438df6e](https://github.com/halildurmus/winmd/commit/438df6e0431d0b373f2b61dbe159db75569820df))
+- Set concurrency to 1 - ([47045b8](https://github.com/halildurmus/winmd/commit/47045b8922855c58f65b518bc347ca4359cf7066))
+- Delete config.yml - ([59e6271](https://github.com/halildurmus/winmd/commit/59e6271d93c38965dc8d08cbe39eb21c76c61880))
+- Update workflows ([#100](https://github.com/halildurmus/winmd/issues/100)) - ([211acba](https://github.com/halildurmus/winmd/commit/211acbaedb2efb8d56ffaf3852767ecf8cc2c56f))
+- Update analysis_options.yaml - ([871d33f](https://github.com/halildurmus/winmd/commit/871d33fe05664a3424f8ad30d56c91e231359bfe))
+
+[5.2.0]: https://github.com/halildurmus/winmd/compare/v5.1.0..v5.2.0
+
 ## 5.1.0
 
 - Add `MetadataStore.loadWinrtMetadata()` to load the Windows Runtime (WinRT)
