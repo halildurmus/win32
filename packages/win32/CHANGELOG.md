@@ -2,6 +2,37 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.9.0] - 2024-11-29
+
+### 🚀 Features
+
+- *(COM)* Add more Core Audio interfaces ([#937](https://github.com/halildurmus/win32/issues/937)) - ([2eaeef1](https://github.com/halildurmus/win32/commit/2eaeef1ac4d89a144eb7038d79ca37cbb7379ea9))
+- Add `GetWindowCompositionAttribute`, `SetWindowCompositionAttribute` APIs ([#938](https://github.com/halildurmus/win32/issues/938)) - ([2081e94](https://github.com/halildurmus/win32/commit/2081e942e5ae2decfa1d51b745cb115fddf800c1))
+- Deprecate `SCARD_SCOPE_SYSTEM` constant ([#930](https://github.com/halildurmus/win32/issues/930)) - ([c6c2c5c](https://github.com/halildurmus/win32/commit/c6c2c5c5107ac73da421428f098dbd5ca9deaa35))
+
+### 🐛 Bug Fixes
+
+- Revert deprecation of several constants ([#929](https://github.com/halildurmus/win32/issues/929)) - ([dd09757](https://github.com/halildurmus/win32/commit/dd09757fa92142dd6fc0a34c428f861d90b0ed1f))
+
+### 🧹 Refactor
+
+- *(tools)* Migrate scripts to Dart ([#931](https://github.com/halildurmus/win32/issues/931)) - ([ac51803](https://github.com/halildurmus/win32/commit/ac51803e69f601b9d174a255910222b49101d800))
+
+### 📝 Documentation
+
+- *(website)* Tweak commands - ([2f75003](https://github.com/halildurmus/win32/commit/2f75003bc513f96e740f245d693e8de618fea2dd))
+- *(website)* Update contributing guide - ([865d9ec](https://github.com/halildurmus/win32/commit/865d9ecc3f993536ee239afd08cb5fc468b4b568))
+- Update PUBLISHING.md - ([18420d6](https://github.com/halildurmus/win32/commit/18420d69dd2699b30bda0bedb8a5d4f7501c2fa9))
+
+### ⚙️ Miscellaneous Tasks
+
+- *(tools)* Remove `struct_sizes` - ([4b3b21c](https://github.com/halildurmus/win32/commit/4b3b21ce374e9392845f0637420b528dfa87143f))
+- Tweak git-cliff configuration - ([7c2ce1a](https://github.com/halildurmus/win32/commit/7c2ce1a6452e29db9289b0b37539fbeb1a7ac4f2))
+- Update workflows - ([25eb3f4](https://github.com/halildurmus/win32/commit/25eb3f4f4cd849823df2fd9e273c892e435d5c39))
+- Update workflows ([#926](https://github.com/halildurmus/win32/issues/926)) - ([5c730c4](https://github.com/halildurmus/win32/commit/5c730c47190b0ed2683b408df8c1cb8390845763))
+
+[5.9.0]: https://github.com/halildurmus/win32/compare/v5.8.0..v5.9.0
+
 ## [5.8.0] - 2024-11-02
 
 - Add `DISP_E_*` constants
