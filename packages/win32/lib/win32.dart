@@ -30,6 +30,7 @@ export 'src/dispatcher.dart';
 export 'src/enums.dart';
 export 'src/enums.g.dart' hide ADDRESS_FAMILY, WINSOCK_SOCKET_TYPE;
 export 'src/exceptions.dart';
+export 'src/functions.dart';
 export 'src/guid.dart';
 export 'src/inline.dart';
 export 'src/macros.dart';
