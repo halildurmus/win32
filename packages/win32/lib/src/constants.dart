@@ -12950,3 +12950,12 @@ final DISP_E_DIVBYZERO = 0x80020012.toSigned(32);
 
 /// Buffer too small.
 final DISP_E_BUFFERTOOSMALL = 0x80020013.toSigned(32);
+
+/// A value for the `fEnable` member has been specified.
+const DWM_BB_ENABLE = 1;
+
+/// A value for the `hRgnBlur` member has been specified.
+const DWM_BB_BLURREGION = 2;
+
+/// A value for the `fTransitionOnMaximized` member has been specified.
+const DWM_BB_TRANSITIONONMAXIMIZED = 4;

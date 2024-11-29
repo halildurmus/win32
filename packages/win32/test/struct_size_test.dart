@@ -11,8 +11,14 @@ import 'package:win32/winsock2.dart';
 
 void main() {
   group('Struct sizeOf', () {
+    test('ACCENT_POLICY', () {
+      expect(sizeOf<ACCENT_POLICY>(), equals(16));
+    });
     test('GUID', () {
       expect(sizeOf<GUID>(), equals(16));
+    });
+    test('WINDOWCOMPOSITIONATTRIBDATA ', () {
+      expect(sizeOf<WINDOWCOMPOSITIONATTRIBDATA>(), equals(24));
     });
     test('ACCEL', () {
       expect(sizeOf<ACCEL>(), equals(6));

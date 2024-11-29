@@ -900,6 +900,11 @@
         "comment": "Creates a new pseudoconsole object for the calling process.",
         "minimumWindowsVersion": "WIN10_RS5"
     },
+    "CreateRectRgn": {
+        "prototype": "HRGN CreateRectRgn(\n  [in] int x1,\n  [in] int y1,\n  [in] int x2,\n  [in] int y2\n);",
+        "comment": "The CreateRectRgn function creates a rectangular region.",
+        "category": "gdi32"
+    },
     "CreateRemoteThread": {
         "prototype": "HANDLE CreateRemoteThread(\n  HANDLE hProcess,\n  LPSECURITY_ATTRIBUTES lpThreadAttributes,\n  SIZE_T dwStackSize,\n  LPTHREAD_START_ROUTINE lpStartAddress,\n  LPVOID lpParameter,\n  DWORD dwCreationFlags,\n  LPDWORD lpThreadId\n);",
         "comment": "Creates a thread that runs in the virtual address space of another process. Use the CreateRemoteThreadEx function to create a thread that runs in the virtual address space of another process and optionally specify extended attributes."

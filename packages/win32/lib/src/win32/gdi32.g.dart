@@ -522,6 +522,24 @@ final _CreatePen = _gdi32.lookupFunction<
     IntPtr Function(Uint32 iStyle, Int32 cWidth, Uint32 color),
     int Function(int iStyle, int cWidth, int color)>('CreatePen');
 
+/// The CreateRectRgn function creates a rectangular region.
+///
+/// ```c
+/// HRGN CreateRectRgn(
+///   [in] int x1,
+///   [in] int y1,
+///   [in] int x2,
+///   [in] int y2
+/// );
+/// ```
+/// {@category gdi32}
+int CreateRectRgn(int x1, int y1, int x2, int y2) =>
+    _CreateRectRgn(x1, y1, x2, y2);
+
+final _CreateRectRgn = _gdi32.lookupFunction<
+    IntPtr Function(Int32 x1, Int32 y1, Int32 x2, Int32 y2),
+    int Function(int x1, int y1, int x2, int y2)>('CreateRectRgn');
+
 /// The CreateSolidBrush function creates a logical brush that has the
 /// specified solid color.
 ///
