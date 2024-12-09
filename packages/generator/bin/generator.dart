@@ -42,7 +42,9 @@ int generateStructs(List<Scope> scopes, Map<String, String> structs) {
 
   final structsFile = [structFileHeader, ...structProjections].join();
 
-  file.writeAsStringSync(DartFormatter().format(structsFile));
+  file.writeAsStringSync(
+      DartFormatter(languageVersion: DartFormatter.latestLanguageVersion)
+          .format(structsFile));
   return structProjections.length;
 }
 
@@ -73,8 +75,9 @@ void generateDllFile(String library, List<Method> filteredMethods,
   ''');
   }
 
-  File('../win32/lib/src/win32/$libraryDartName.g.dart')
-      .writeAsStringSync(DartFormatter().format(buffer.toString()));
+  File('../win32/lib/src/win32/$libraryDartName.g.dart').writeAsStringSync(
+      DartFormatter(languageVersion: DartFormatter.latestLanguageVersion)
+          .format(buffer.toString()));
 }
 
 void generateFunctions(
@@ -127,8 +130,9 @@ void main() {
 }
 ''';
 
-  File('../win32/test/api_test.dart')
-      .writeAsStringSync(DartFormatter().format(testFile));
+  File('../win32/test/api_test.dart').writeAsStringSync(
+      DartFormatter(languageVersion: DartFormatter.latestLanguageVersion)
+          .format(testFile));
 }
 
 String generateFunctionTests(String library, Iterable<Method> methods,
@@ -211,7 +215,9 @@ void generateComApis(Scope scope, Map<String, String> comTypesToGenerate) {
         stripAnsiUnicodeSuffix(lastComponent(interface)).toLowerCase();
     final classOutputPath = '../win32/lib/src/com/$classOutputFilename.dart';
 
-    File(classOutputPath).writeAsStringSync(DartFormatter().format(dartClass));
+    File(classOutputPath).writeAsStringSync(
+        DartFormatter(languageVersion: DartFormatter.latestLanguageVersion)
+            .format(dartClass));
   }
 }
 

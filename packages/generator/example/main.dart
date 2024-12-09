@@ -71,7 +71,10 @@ void printComSetProperty(String interface, String propertyName) {
 }
 
 extension on Object {
-  String format() => DartFormatter(lineEnding: '\n').format(toString());
+  String format() => DartFormatter(
+        languageVersion: DartFormatter.latestLanguageVersion,
+        lineEnding: '\n',
+      ).format(toString());
 }
 
 void main() async {
