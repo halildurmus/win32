@@ -4,8 +4,8 @@ library;
 import 'dart:io';
 
 import 'package:dart_style/dart_style.dart';
-import 'package:test/test.dart';
 import 'package:generator/generator.dart';
+import 'package:test/test.dart';
 import 'package:winmd/winmd.dart';
 
 void main() {
@@ -48,5 +48,7 @@ extension on String {
   String convertLineEndingsToLF() => replaceAll('\r\n', '\n');
 
   /// Formats this string.
-  String format() => DartFormatter().format(this);
+  String format() =>
+      DartFormatter(languageVersion: DartFormatter.latestLanguageVersion)
+          .format(this);
 }
