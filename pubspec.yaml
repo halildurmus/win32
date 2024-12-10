@@ -1,7 +1,7 @@
 name: win32_registry
 description: A package that provides a friendly Dart API for accessing the
   Windows Registry.
-version: 2.0.0
+version: 2.0.1
 repository: https://github.com/halildurmus/win32_registry
 issue_tracker: https://github.com/halildurmus/win32_registry/issues
 
