@@ -13,5 +13,6 @@ export 'src/access_rights.dart';
 export 'src/registry.dart';
 export 'src/registry_hive.dart';
 export 'src/registry_key.dart';
+export 'src/registry_key_info.dart';
 export 'src/registry_value.dart';
 export 'src/registry_value_type.dart';
