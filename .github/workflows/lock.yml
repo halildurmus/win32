@@ -2,7 +2,7 @@ name: Lock Threads
 
 on:
   schedule:
-    - cron: 0 15 * * * # Run every day at 15:00 UTC
+    - cron: 45 2 * * * # Run every day at 02:45 UTC
 
 permissions:
   issues: write
