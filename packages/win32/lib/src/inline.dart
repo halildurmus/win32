@@ -130,7 +130,18 @@ int IsWindowsVersionOrGreater(
   }
 }
 
+const _WIN32_WINNT_WIN8 = 0x0602;
 const _WIN32_WINNT_WINTHRESHOLD = 0x0A00;
+
+/// Indicates if the current OS version matches, or is greater than, the
+/// Windows 8 version.
+///
+/// {@category version}
+int IsWindows8OrGreater() => IsWindowsVersionOrGreater(
+      HIBYTE(_WIN32_WINNT_WIN8),
+      LOBYTE(_WIN32_WINNT_WIN8),
+      0,
+    );
 
 /// Indicates if the current OS version matches, or is greater than, the Windows
 /// 10 version.

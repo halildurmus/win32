@@ -2842,6 +2842,15 @@ void main() {
           int Function(Pointer<IntPtr> lphActCtx)>('GetCurrentActCtx');
       expect(GetCurrentActCtx, isA<Function>());
     });
+    test('Can instantiate GetCurrentPackageFullName', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetCurrentPackageFullName = kernel32.lookupFunction<
+          Uint32 Function(Pointer<Uint32> packageFullNameLength,
+              Pointer<Utf16> packageFullName),
+          int Function(Pointer<Uint32> packageFullNameLength,
+              Pointer<Utf16> packageFullName)>('GetCurrentPackageFullName');
+      expect(GetCurrentPackageFullName, isA<Function>());
+    });
     test('Can instantiate GetCurrentProcess', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetCurrentProcess =
