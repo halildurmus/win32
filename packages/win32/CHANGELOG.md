@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.10.0] - 2025-01-01
+
+### 🚀 Features
+
+- Add `IsWindows8OrGreater` and `GetCurrentPackageFullName` APIs ([#944](https://github.com/halildurmus/win32/issues/944)) - ([73e4c53](https://github.com/halildurmus/win32/commit/73e4c537da60f72c95f9a9457e3af1a771264f94))
+
+[5.10.0]: https://github.com/halildurmus/win32/compare/v5.9.0..v5.10.0
+
 ## [5.9.0] - 2024-11-29
 
 ### 🚀 Features
