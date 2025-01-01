@@ -1844,6 +1844,10 @@
         "prototype": "BOOL GetCurrentActCtx(\n  HANDLE *lphActCtx\n);",
         "comment": "The GetCurrentActCtx function returns the handle to the active activation context of the calling thread."
     },
+    "GetCurrentPackageFullName": {
+        "prototype": "LONG GetCurrentPackageFullName(\n[in, out]       UINT32 *packageFullNameLength,\n[out, optional] PWSTR  packageFullName\n);",
+        "comment": "Gets the package full name for the calling process."
+    },
     "GetCurrentProcess": {
         "prototype": "HANDLE GetCurrentProcess();",
         "comment": "Retrieves a pseudo handle for the current process."

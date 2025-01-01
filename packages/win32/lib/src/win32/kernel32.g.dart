@@ -2532,6 +2532,25 @@ final _GetCurrentActCtx = _kernel32.lookupFunction<
     Int32 Function(Pointer<IntPtr> lphActCtx),
     int Function(Pointer<IntPtr> lphActCtx)>('GetCurrentActCtx');
 
+/// Gets the package full name for the calling process.
+///
+/// ```c
+/// LONG GetCurrentPackageFullName(
+/// [in, out]       UINT32 *packageFullNameLength,
+/// [out, optional] PWSTR  packageFullName
+/// );
+/// ```
+/// {@category kernel32}
+int GetCurrentPackageFullName(Pointer<Uint32> packageFullNameLength,
+        Pointer<Utf16> packageFullName) =>
+    _GetCurrentPackageFullName(packageFullNameLength, packageFullName);
+
+final _GetCurrentPackageFullName = _kernel32.lookupFunction<
+    Uint32 Function(
+        Pointer<Uint32> packageFullNameLength, Pointer<Utf16> packageFullName),
+    int Function(Pointer<Uint32> packageFullNameLength,
+        Pointer<Utf16> packageFullName)>('GetCurrentPackageFullName');
+
 /// Retrieves a pseudo handle for the current process.
 ///
 /// ```c
