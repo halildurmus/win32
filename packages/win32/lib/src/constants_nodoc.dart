@@ -3,10 +3,6 @@
 // *** NOTE: This file contains constants that we have chosen not to document,
 // mostly because their function is obvious, or because they are documented in
 // the public Microsoft Windows documentation online.
-//
-// This file (only) is excluded from dartdoc in `dartdoc_options.yaml`. By
-// keeping non-documented constants in a separate file, we save ourselves the
-// need to add the /// @nodoc modifier to every single constant in this file.
 
 // Contributors are invited and encouraged to submit comments for these
 // constants from the open source Microsoft documentation, such as
@@ -15,6 +11,10 @@
 
 // ignore_for_file: camel_case_types, constant_identifier_names
 // ignore_for_file: non_constant_identifier_names
+
+// Do not document this whole library.
+/// @nodoc
+library;
 
 import 'dart:ffi';
 
