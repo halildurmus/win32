@@ -12,7 +12,7 @@
 // ignore_for_file: camel_case_types, constant_identifier_names
 // ignore_for_file: non_constant_identifier_names
 
-// Do not document this whole library.
+// Do not document anything in this library.
 /// @nodoc
 library;
 
