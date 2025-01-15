@@ -107,7 +107,6 @@ dartdoc:
       'examples',
     ]
   showUndocumentedCategories: true
-  nodoc: ['lib/src/constants_nodoc.dart']
   ignore:
     - broken-link
     - missing-from-search-index
