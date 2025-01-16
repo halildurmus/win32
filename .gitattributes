@@ -5,7 +5,7 @@
 *.dart   text
 *.expect text
 *.gradle text
-*.golden text
+*.golden text eol=lf
 *.html   text
 *.java   text
 *.json   text
