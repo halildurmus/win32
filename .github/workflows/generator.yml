@@ -48,6 +48,7 @@ jobs:
       analyze_directories: bin example lib test
       check_coverage: ${{ matrix.sdk == 'main' }}
       codecov_flags: generator
+      concurrency: '1'
       dart_sdk: ${{ matrix.sdk }}
       format_directories: bin example lib test
       runs_on: ${{ matrix.os }}
