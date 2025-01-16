@@ -41,10 +41,12 @@ void main() {
 void compareGolden(String fileName, String content) {
   File('test/goldens/$fileName.comparison').writeAsStringSync(content);
   final golden = File('test/goldens/$fileName.golden').readAsStringSync();
-  expect(content, equals(golden));
+  expect(content, equals(golden.convertLineEndingsToLF()));
 }
 
 extension on String {
+  String convertLineEndingsToLF() => replaceAll('\r\n', '\n');
+
   /// Formats this string.
   String format() =>
       DartFormatter(languageVersion: DartFormatter.latestLanguageVersion)
