@@ -6,22 +6,17 @@ All notable changes to this project will be documented in this file.
 
 ### 🐛 Bug Fixes
 
-- fix: fix `PRINTER_ENUM_*` constants by [@halildurmus](https://github.com/halildurmus)
- in [#954](https://github.com/halildurmus/win32/pull/954)
-- fix: `nodoc` deprecation fix by [@weasdown](https://github.com/weasdown)
- in [#949](https://github.com/halildurmus/win32/pull/949)
+- fix: fix `PRINTER_ENUM_*` constants by [@halildurmus](https://github.com/halildurmus) in [#954](https://github.com/halildurmus/win32/pull/954)
+- fix: `nodoc` deprecation fix by [@weasdown](https://github.com/weasdown) in [#949](https://github.com/halildurmus/win32/pull/949)
 
 ### ⚙️ Miscellaneous Tasks
 
 - add `.gitattributes` to normalize line endings by [@halildurmus](https://github.com/halildurmus)
-
 - tweak git-cliff configuration by [@halildurmus](https://github.com/halildurmus)
-
 
 ## New Contributors ❤️
 
-- [@weasdown](https://github.com/weasdown)
- made their first contribution in [#949](https://github.com/halildurmus/win32/pull/949)
+- [@weasdown](https://github.com/weasdown) made their first contribution in [#949](https://github.com/halildurmus/win32/pull/949)
 
 [5.10.1]: https://github.com/halildurmus/win32/compare/v5.10.0..v5.10.1
 

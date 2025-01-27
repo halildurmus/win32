@@ -29,9 +29,7 @@ body = """
     {%- endif -%}
 {% endmacro -%}
 
-{% macro print_username(username) -%}
-    [@{{ username }}](<GITHUB>/{{ username }})
-{% endmacro -%}
+{% macro print_username(username) -%}[@{{ username }}](<GITHUB>/{{ username }}){% endmacro -%}
 
 {% if version %}\
     ## [{{ version | trim_start_matches(pat="v") }}] - {{ timestamp | date(format="%Y-%m-%d") }}
