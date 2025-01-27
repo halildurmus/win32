@@ -1053,7 +1053,8 @@ const FILE_FLAG_SESSION_AWARE = 0x00800000;
 /// open the reparse point. When a file is opened, a file handle is returned,
 /// whether or not the filter that controls the reparse point is operational.
 @Deprecated(
-    'Use FILE_FLAGS_AND_ATTRIBUTES.FILE_FLAG_OPEN_REPARSE_POINT instead')
+  'Use FILE_FLAGS_AND_ATTRIBUTES.FILE_FLAG_OPEN_REPARSE_POINT instead',
+)
 const FILE_FLAG_OPEN_REPARSE_POINT = 0x00200000;
 
 /// The file data is requested, but it should continue to be located in remote
@@ -1066,7 +1067,8 @@ const FILE_FLAG_OPEN_NO_RECALL = 0x00100000;
 /// creation of the first instance succeeds, but creation of the next instance
 /// fails with ERROR_ACCESS_DENIED.
 @Deprecated(
-    'Use FILE_FLAGS_AND_ATTRIBUTES.FILE_FLAG_FIRST_PIPE_INSTANCE instead')
+  'Use FILE_FLAGS_AND_ATTRIBUTES.FILE_FLAG_FIRST_PIPE_INSTANCE instead',
+)
 const FILE_FLAG_FIRST_PIPE_INSTANCE = 0x00080000;
 
 // -----------------------------------------------------------------------------
@@ -3197,13 +3199,15 @@ const SPI_SETKEYBOARDSPEED = 0x000B;
 /// To retrieve this value, pvParam must point to an integer that receives the
 /// current value.
 @Deprecated(
-    'Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_ICONHORIZONTALSPACING instead')
+  'Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_ICONHORIZONTALSPACING instead',
+)
 const SPI_ICONHORIZONTALSPACING = 0x000D;
 
 /// Retrieves the screen saver time-out value, in seconds. The pvParam parameter
 /// must point to an integer variable that receives the value.
 @Deprecated(
-    'Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETSCREENSAVETIMEOUT instead')
+  'Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETSCREENSAVETIMEOUT instead',
+)
 const SPI_GETSCREENSAVETIMEOUT = 0x000E;
 
 /// Sets the screen saver time-out value to the value of the uiParam parameter.
@@ -3213,7 +3217,8 @@ const SPI_GETSCREENSAVETIMEOUT = 0x000E;
 /// If the machine has entered power saving mode or system lock state, an
 /// ERROR_OPERATION_IN_PROGRESS exception occurs.
 @Deprecated(
-    'Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETSCREENSAVETIMEOUT instead')
+  'Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETSCREENSAVETIMEOUT instead',
+)
 const SPI_SETSCREENSAVETIMEOUT = 0x000F;
 
 /// Determines whether screen saving is enabled. The pvParam parameter must
@@ -3287,13 +3292,15 @@ const SPI_SETICONTITLEWRAP = 0x001A;
 /// to the corresponding menu-bar item. The pvParam parameter must point to a
 /// BOOL variable that receives TRUE if right-aligned, or FALSE otherwise.
 @Deprecated(
-    'Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETMENUDROPALIGNMENT instead')
+  'Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETMENUDROPALIGNMENT instead',
+)
 const SPI_GETMENUDROPALIGNMENT = 0x001B;
 
 /// Sets the alignment value of pop-up menus. The uiParam parameter specifies
 /// TRUE for right alignment, or FALSE for left alignment.
 @Deprecated(
-    'Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETMENUDROPALIGNMENT instead')
+  'Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETMENUDROPALIGNMENT instead',
+)
 const SPI_SETMENUDROPALIGNMENT = 0x001C;
 
 /// Sets the width of the double-click rectangle to the value of the uiParam
@@ -6780,7 +6787,8 @@ const MEM_LARGE_PAGES = 0x20000000;
 /// temporarily boosted (with automatic short term decay) because the caller
 /// expects that these pages will be accessed again shortly from another thread.
 @Deprecated(
-    'Use UNMAP_VIEW_OF_FILE_FLAGS.MEM_UNMAP_WITH_TRANSIENT_BOOST instead')
+  'Use UNMAP_VIEW_OF_FILE_FLAGS.MEM_UNMAP_WITH_TRANSIENT_BOOST instead',
+)
 const MEM_UNMAP_WITH_TRANSIENT_BOOST = 0x00000001;
 
 /// To coalesce two adjacent placeholders, specify MEM_RELEASE |
@@ -7021,7 +7029,8 @@ const WAVE_FORMAT_DIRECT = 0x0008;
 /// If this flag is specified and the uDeviceID parameter is WAVE_MAPPER, the
 /// function opens the default communication device.
 @Deprecated(
-    'Use MIDI_WAVE_OPEN_TYPE.WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE instead')
+  'Use MIDI_WAVE_OPEN_TYPE.WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE instead',
+)
 const WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE = 0x0010;
 
 // -----------------------------------------------------------------------------
@@ -7519,7 +7528,8 @@ const LOAD_LIBRARY_SEARCH_DLL_LOAD_DIR = 0x00000100;
 /// are not searched. This value cannot be combined with
 /// LOAD_WITH_ALTERED_SEARCH_PATH.
 @Deprecated(
-    'Use LOAD_LIBRARY_FLAGS.LOAD_LIBRARY_SEARCH_APPLICATION_DIR instead')
+  'Use LOAD_LIBRARY_FLAGS.LOAD_LIBRARY_SEARCH_APPLICATION_DIR instead',
+)
 const LOAD_LIBRARY_SEARCH_APPLICATION_DIR = 0x00000200;
 
 /// If this value is used, directories added using the AddDllDirectory or the
@@ -8526,7 +8536,8 @@ const DISPLAY_DEVICE_ACTIVE = 0x00000001;
 /// card, this is always set. For a system with multiple display cards, only one
 /// device can have this set.
 @Deprecated(
-    'Use DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_PRIMARY_DEVICE instead')
+  'Use DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_PRIMARY_DEVICE instead',
+)
 const DISPLAY_DEVICE_PRIMARY_DEVICE = 0x00000004;
 
 /// Represents a pseudo device used to mirror application drawing for remoting
@@ -8534,12 +8545,14 @@ const DISPLAY_DEVICE_PRIMARY_DEVICE = 0x00000004;
 /// device. For example, NetMeeting uses it. Note that GetSystemMetrics
 /// (SM_MONITORS) only accounts for visible display monitors.
 @Deprecated(
-    'Use DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_MIRRORING_DRIVER instead')
+  'Use DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_MIRRORING_DRIVER instead',
+)
 const DISPLAY_DEVICE_MIRRORING_DRIVER = 0x00000008;
 
 /// The device is VGA compatible.
 @Deprecated(
-    'Use DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_VGA_COMPATIBLE instead')
+  'Use DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_VGA_COMPATIBLE instead',
+)
 const DISPLAY_DEVICE_VGA_COMPATIBLE = 0x00000010;
 
 /// The device is removable; it cannot be the primary display.
@@ -9130,14 +9143,16 @@ const NIN_POPUPCLOSE = WM_USER + 7;
 /// Notifications are sent using WM_POWERBROADCAST messages with a wParam
 /// parameter of PBT_POWERSETTINGCHANGE.
 @Deprecated(
-    'Use REGISTER_NOTIFICATION_FLAGS.DEVICE_NOTIFY_WINDOW_HANDLE instead')
+  'Use REGISTER_NOTIFICATION_FLAGS.DEVICE_NOTIFY_WINDOW_HANDLE instead',
+)
 const DEVICE_NOTIFY_WINDOW_HANDLE = 0;
 
 /// Notifications are sent to the HandlerEx callback function with a dwControl
 /// parameter of SERVICE_CONTROL_POWEREVENT and a dwEventType of
 /// PBT_POWERSETTINGCHANGE.
 @Deprecated(
-    'Use REGISTER_NOTIFICATION_FLAGS.DEVICE_NOTIFY_SERVICE_HANDLE instead')
+  'Use REGISTER_NOTIFICATION_FLAGS.DEVICE_NOTIFY_SERVICE_HANDLE instead',
+)
 const DEVICE_NOTIFY_SERVICE_HANDLE = 1;
 
 // -----------------------------------------------------------------------------
@@ -10026,85 +10041,75 @@ const SC_DLG_FORCE_UI = 0x04;
 // EnumPrinters constants
 // -----------------------------------------------------------------------------
 
+/// The function enumerates only 3D printers.
+const PRINTER_ENUM_CATEGORY_3D = 67108864;
+
+const PRINTER_ENUM_CATEGORY_ALL = 33554432;
+
+/// The function enumerates the list of printers to which the user has made
+/// previous connections.
+const PRINTER_ENUM_CONNECTIONS = 4;
+
+/// Indicates that the printer object is capable of containing enumerable
+/// objects. One such object is a print provider, which is a print server that
+/// contains printers.
+const PRINTER_ENUM_CONTAINER = 32768;
+
 /// (Win9.x only) enumerates the default printer.
-const PRINTER_ENUM_DEFAULT = 00000001;
+const PRINTER_ENUM_DEFAULT = 1;
+
+/// Indicates that the printer object contains further enumerable child objects.
+const PRINTER_ENUM_EXPAND = 16384;
+
+const PRINTER_ENUM_FAVORITE = 4;
+
+/// Indicates that an application cannot display the printer object.
+const PRINTER_ENUM_HIDE = 16777216;
+
+const PRINTER_ENUM_ICON1 = 65536;
+
+const PRINTER_ENUM_ICON2 = 131072;
+
+const PRINTER_ENUM_ICON3 = 262144;
+
+const PRINTER_ENUM_ICON4 = 524288;
+
+const PRINTER_ENUM_ICON5 = 1048576;
+
+const PRINTER_ENUM_ICON6 = 2097152;
+
+const PRINTER_ENUM_ICON7 = 4194304;
+
+/// Indicates that, where appropriate, an application treats an object as a
+/// print server. A GUI application can<145> choose to display an icon of choice
+/// for this type of object.
+const PRINTER_ENUM_ICON8 = 8388608;
+
+const PRINTER_ENUM_ICONMASK = 16711680;
 
 /// If the PRINTER_ENUM_NAME flag is not also passed, the function ignores the
 /// Name parameter, and enumerates the locally installed printers.
 /// If PRINTER_ENUM_NAME is also passed, the function enumerates the local
 /// printers on Name.
-const PRINTER_ENUM_LOCAL = 00000002;
-
-/// The function enumerates the list of printers to which the user has made
-/// previous connections.
-const PRINTER_ENUM_CONNECTIONS = 0x00000004;
-
-///
-const PRINTER_ENUM_FAVORITE = 0x00000004;
+const PRINTER_ENUM_LOCAL = 2;
 
 /// The function enumerates the printer identified by Name. This can be a server
 /// a domain, or a print provider. If Name is NULL, the function enumerates
 /// available print providers.
-const PRINTER_ENUM_NAME = 00000008;
+const PRINTER_ENUM_NAME = 8;
+
+/// The function enumerates network printers in the computer's domain. This
+/// value is valid only if Level is 1.
+const PRINTER_ENUM_NETWORK = 64;
 
 /// The function enumerates network printers and print servers in the computer's
 /// domain. This value is valid only if Level is 1.
-const PRINTER_ENUM_REMOTE = 00000010;
+const PRINTER_ENUM_REMOTE = 16;
 
 /// The function enumerates printers that have the shared attribute. Cannot be
 /// used in isolation; use an OR operation to combine with another PRINTER_ENUM
 /// type.
-const PRINTER_ENUM_SHARED = 00000020;
-
-/// The function enumerates network printers in the computer's domain. This
-/// value is valid only if Level is 1.
-const PRINTER_ENUM_NETWORK = 00000040;
-
-/// Indicates that the printer object contains further enumerable child objects.
-const PRINTER_ENUM_EXPAND = 00004000;
-
-/// Indicates that the printer object is capable of containing enumerable
-/// objects. One such object is a print provider, which is a print server that
-/// contains printers.
-const PRINTER_ENUM_CONTAINER = 0x00008000;
-
-///
-const PRINTER_ENUM_ICONMASK = 0x00ff0000;
-
-///
-const PRINTER_ENUM_ICON1 = 00010000;
-
-///
-const PRINTER_ENUM_ICON2 = 00020000;
-
-///
-const PRINTER_ENUM_ICON3 = 00040000;
-
-///
-const PRINTER_ENUM_ICON4 = 00080000;
-
-///
-const PRINTER_ENUM_ICON5 = 00100000;
-
-///
-const PRINTER_ENUM_ICON6 = 00200000;
-
-///
-const PRINTER_ENUM_ICON7 = 00400000;
-
-/// Indicates that, where appropriate, an application treats an object as a
-/// print server. A GUI application can<145> choose to display an icon of choice
-/// for this type of object.
-const PRINTER_ENUM_ICON8 = 00800000;
-
-/// Indicates that an application cannot display the printer object.
-const PRINTER_ENUM_HIDE = 01000000;
-
-/// PRINTER_ENUM_CATEGORY_ALL
-const PRINTER_ENUM_CATEGORY_ALL = 0x02000000;
-
-/// The function enumerates only 3D printers.
-const PRINTER_ENUM_CATEGORY_3D = 0x04000000;
+const PRINTER_ENUM_SHARED = 32;
 
 // -----------------------------------------------------------------------------
 // GetWindow constants
@@ -10366,12 +10371,14 @@ const DICS_FLAG_GLOBAL = 0x00000001;
 
 /// Make the change in the specified profile only.
 @Deprecated(
-    'Use SETUP_DI_PROPERTY_CHANGE_SCOPE.DICS_FLAG_CONFIGSPECIFIC instead')
+  'Use SETUP_DI_PROPERTY_CHANGE_SCOPE.DICS_FLAG_CONFIGSPECIFIC instead',
+)
 const DICS_FLAG_CONFIGSPECIFIC = 0x00000002;
 
 /// (Obsolete. Do not use.)
 @Deprecated(
-    'Use SETUP_DI_PROPERTY_CHANGE_SCOPE.DICS_FLAG_CONFIGGENERAL instead')
+  'Use SETUP_DI_PROPERTY_CHANGE_SCOPE.DICS_FLAG_CONFIGGENERAL instead',
+)
 const DICS_FLAG_CONFIGGENERAL = 0x00000004;
 
 /// Hardware key for the device.
@@ -10577,7 +10584,8 @@ const SDC_USE_DATABASE_CURRENT = SDC_TOPOLOGY_INTERNAL |
 /// pathArray and the modeInfoArray parameters are used, rather than looking up
 /// the configuration in the database.
 @Deprecated(
-    'Use SET_DISPLAY_CONFIG_FLAGS.SDC_USE_SUPPLIED_DISPLAY_CONFIG instead')
+  'Use SET_DISPLAY_CONFIG_FLAGS.SDC_USE_SUPPLIED_DISPLAY_CONFIG instead',
+)
 const SDC_USE_SUPPLIED_DISPLAY_CONFIG = 0x00000020;
 
 /// The system tests for the requested topology, source, and target mode
@@ -10634,7 +10642,8 @@ const SDC_VIRTUAL_MODE_AWARE = 0x00008000;
 /// flags that the caller is aware of virtual refresh rates. Supported starting
 /// in Windows 11.
 @Deprecated(
-    'Use SET_DISPLAY_CONFIG_FLAGS.SDC_VIRTUAL_REFRESH_RATE_AWARE instead')
+  'Use SET_DISPLAY_CONFIG_FLAGS.SDC_VIRTUAL_REFRESH_RATE_AWARE instead',
+)
 const SDC_VIRTUAL_REFRESH_RATE_AWARE = 0x00020000;
 
 // -----------------------------------------------------------------------------
@@ -11740,7 +11749,8 @@ const UIA_NativeWindowHandlePropertyId = 30020;
 /// Identifies the OptimizeForVisualContent property, which is a Boolean value
 /// that indicates whether the provider exposes only elements that are visible.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_OptimizeForVisualContentPropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_OptimizeForVisualContentPropertyId instead',
+)
 const UIA_OptimizeForVisualContentPropertyId = 30111;
 
 /// Identifies the Orientation property, which indicates the orientation of the
@@ -11806,13 +11816,15 @@ const UIA_VisualEffectsPropertyId = 30163;
 
 /// Identifies the AnnotationTypeId property of the Annotation control pattern.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_AnnotationAnnotationTypeIdPropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_AnnotationAnnotationTypeIdPropertyId instead',
+)
 const UIA_AnnotationAnnotationTypeIdPropertyId = 30113;
 
 /// Identifies the AnnotationTypeName property of the Annotation control
 /// pattern.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_AnnotationAnnotationTypeNamePropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_AnnotationAnnotationTypeNamePropertyId instead',
+)
 const UIA_AnnotationAnnotationTypeNamePropertyId = 30114;
 
 /// Identifies the Author property of the Annotation control pattern.
@@ -11849,18 +11861,21 @@ const UIA_DragGrabbedItemsPropertyId = 30144;
 
 /// Identifies the DropTargetEffect property of the DropTarget control pattern.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_DropTargetDropTargetEffectPropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_DropTargetDropTargetEffectPropertyId instead',
+)
 const UIA_DropTargetDropTargetEffectPropertyId = 30142;
 
 /// Identifies the DropTargetEffects property of the DropTarget control pattern.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_DropTargetDropTargetEffectsPropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_DropTargetDropTargetEffectsPropertyId instead',
+)
 const UIA_DropTargetDropTargetEffectsPropertyId = 30143;
 
 /// Identifies the ExpandCollapseState property of the ExpandCollapse control
 /// pattern.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_ExpandCollapseExpandCollapseStatePropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_ExpandCollapseExpandCollapseStatePropertyId instead',
+)
 const UIA_ExpandCollapseExpandCollapseStatePropertyId = 30070;
 
 /// Identifies the ColumnCount property of the Grid control pattern.
@@ -11893,19 +11908,22 @@ const UIA_GridRowCountPropertyId = 30062;
 
 /// Identifies the ChildId property of the LegacyIAccessible control pattern.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_LegacyIAccessibleChildIdPropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_LegacyIAccessibleChildIdPropertyId instead',
+)
 const UIA_LegacyIAccessibleChildIdPropertyId = 30091;
 
 /// Identifies the DefaultAction property of the LegacyIAccessible control
 /// pattern.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_LegacyIAccessibleDefaultActionPropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_LegacyIAccessibleDefaultActionPropertyId instead',
+)
 const UIA_LegacyIAccessibleDefaultActionPropertyId = 30100;
 
 /// Identifies the Description property of the LegacyIAccessible control
 /// pattern.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_LegacyIAccessibleDescriptionPropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_LegacyIAccessibleDescriptionPropertyId instead',
+)
 const UIA_LegacyIAccessibleDescriptionPropertyId = 30094;
 
 /// Identifies the Help property of the LegacyIAccessible control pattern.
@@ -11915,7 +11933,8 @@ const UIA_LegacyIAccessibleHelpPropertyId = 30097;
 /// Identifies the KeyboardShortcut property of the LegacyIAccessible control
 /// pattern.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_LegacyIAccessibleKeyboardShortcutPropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_LegacyIAccessibleKeyboardShortcutPropertyId instead',
+)
 const UIA_LegacyIAccessibleKeyboardShortcutPropertyId = 30098;
 
 /// Identifies the Name property of the LegacyIAccessible control pattern.
@@ -11928,7 +11947,8 @@ const UIA_LegacyIAccessibleRolePropertyId = 30095;
 
 /// Identifies the Selection property of the LegacyIAccessible control pattern.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_LegacyIAccessibleSelectionPropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_LegacyIAccessibleSelectionPropertyId instead',
+)
 const UIA_LegacyIAccessibleSelectionPropertyId = 30099;
 
 /// Identifies the State property of the LegacyIAccessible control pattern.
@@ -11945,7 +11965,8 @@ const UIA_MultipleViewCurrentViewPropertyId = 30071;
 
 /// Identifies the SupportedViews property of the MultipleView control pattern.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_MultipleViewSupportedViewsPropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_MultipleViewSupportedViewsPropertyId instead',
+)
 const UIA_MultipleViewSupportedViewsPropertyId = 30072;
 
 /// Identifies the IsReadOnly property of the RangeValue control pattern.
@@ -11975,28 +11996,33 @@ const UIA_RangeValueValuePropertyId = 30047;
 /// Identifies the HorizontallyScrollable property of the Scroll control
 /// pattern.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_ScrollHorizontallyScrollablePropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_ScrollHorizontallyScrollablePropertyId instead',
+)
 const UIA_ScrollHorizontallyScrollablePropertyId = 30057;
 
 /// Identifies the HorizontalScrollPercent property of the Scroll control
 /// pattern.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_ScrollHorizontalScrollPercentPropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_ScrollHorizontalScrollPercentPropertyId instead',
+)
 const UIA_ScrollHorizontalScrollPercentPropertyId = 30053;
 
 /// Identifies the HorizontalViewSize property of the Scroll control pattern.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_ScrollHorizontalViewSizePropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_ScrollHorizontalViewSizePropertyId instead',
+)
 const UIA_ScrollHorizontalViewSizePropertyId = 30054;
 
 /// Identifies the VerticallyScrollable property of the Scroll control pattern.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_ScrollVerticallyScrollablePropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_ScrollVerticallyScrollablePropertyId instead',
+)
 const UIA_ScrollVerticallyScrollablePropertyId = 30058;
 
 /// Identifies the VerticalScrollPercent property of the Scroll control pattern.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_ScrollVerticalScrollPercentPropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_ScrollVerticalScrollPercentPropertyId instead',
+)
 const UIA_ScrollVerticalScrollPercentPropertyId = 30055;
 
 /// Identifies the VerticalViewSize property of the Scroll control pattern.
@@ -12005,13 +12031,15 @@ const UIA_ScrollVerticalViewSizePropertyId = 30056;
 
 /// Identifies the CanSelectMultiple property of the Selection control pattern.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_SelectionCanSelectMultiplePropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_SelectionCanSelectMultiplePropertyId instead',
+)
 const UIA_SelectionCanSelectMultiplePropertyId = 30060;
 
 /// Identifies the IsSelectionRequired property of the Selection control
 /// pattern.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_SelectionIsSelectionRequiredPropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_SelectionIsSelectionRequiredPropertyId instead',
+)
 const UIA_SelectionIsSelectionRequiredPropertyId = 30061;
 
 /// Identifies the Selection property of the Selection control pattern.
@@ -12025,7 +12053,8 @@ const UIA_SelectionItemIsSelectedPropertyId = 30079;
 /// Identifies the SelectionContainer property of the SelectionItem control
 /// pattern.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_SelectionItemSelectionContainerPropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_SelectionItemSelectionContainerPropertyId instead',
+)
 const UIA_SelectionItemSelectionContainerPropertyId = 30080;
 
 /// Identifies the Formula property of the SpreadsheetItem control pattern.
@@ -12035,18 +12064,21 @@ const UIA_SpreadsheetItemFormulaPropertyId = 30129;
 /// Identifies the AnnotationObjects property of the SpreadsheetItem control
 /// pattern.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_SpreadsheetItemAnnotationObjectsPropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_SpreadsheetItemAnnotationObjectsPropertyId instead',
+)
 const UIA_SpreadsheetItemAnnotationObjectsPropertyId = 30130;
 
 /// Identifies the AnnotationTypes property of the SpreadsheetItem control
 /// pattern.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_SpreadsheetItemAnnotationTypesPropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_SpreadsheetItemAnnotationTypesPropertyId instead',
+)
 const UIA_SpreadsheetItemAnnotationTypesPropertyId = 30131;
 
 /// Identifies the ExtendedProperties property of the Styles control pattern.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_StylesExtendedPropertiesPropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_StylesExtendedPropertiesPropertyId instead',
+)
 const UIA_StylesExtendedPropertiesPropertyId = 30126;
 
 /// Identifies the FillColor property of the Styles control pattern.
@@ -12079,7 +12111,8 @@ const UIA_TableColumnHeadersPropertyId = 30082;
 
 /// Identifies the ColumnHeaderItems property of the TableItem control pattern.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_TableItemColumnHeaderItemsPropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_TableItemColumnHeaderItemsPropertyId instead',
+)
 const UIA_TableItemColumnHeaderItemsPropertyId = 30085;
 
 /// Identifies the RowHeaders property of the Table control pattern.
@@ -12153,7 +12186,8 @@ const UIA_WindowIsTopmostPropertyId = 30078;
 /// Identifies the WindowInteractionState property of the Window control
 ///  pattern.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_WindowWindowInteractionStatePropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_WindowWindowInteractionStatePropertyId instead',
+)
 const UIA_WindowWindowInteractionStatePropertyId = 30076;
 
 /// Identifies the WindowVisualState property of the Window control pattern.
@@ -12168,14 +12202,16 @@ const UIA_WindowWindowVisualStatePropertyId = 30075;
 /// whether the Annotation control pattern is available for the automation
 /// element.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_IsAnnotationPatternAvailablePropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_IsAnnotationPatternAvailablePropertyId instead',
+)
 const UIA_IsAnnotationPatternAvailablePropertyId = 30118;
 
 /// Identifies the IsCustomNavigationPatternAvailable property, which indicates
 /// whether the CustomNavigation control pattern is available for the automation
 /// element.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_IsCustomNavigationPatternAvailablePropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_IsCustomNavigationPatternAvailablePropertyId instead',
+)
 const UIA_IsCustomNavigationPatternAvailablePropertyId = 30151;
 
 /// Identifies the IsDockPatternAvailable property, which indicates whether the
@@ -12192,20 +12228,23 @@ const UIA_IsDragPatternAvailablePropertyId = 30137;
 /// whether the DropTarget control pattern is available for the automation
 /// element.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_IsDropTargetPatternAvailablePropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_IsDropTargetPatternAvailablePropertyId instead',
+)
 const UIA_IsDropTargetPatternAvailablePropertyId = 30141;
 
 /// Identifies the IsExpandCollapsePatternAvailable property, which indicates
 /// whether the ExpandCollapse control pattern is available for the automation
 /// element.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_IsExpandCollapsePatternAvailablePropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_IsExpandCollapsePatternAvailablePropertyId instead',
+)
 const UIA_IsExpandCollapsePatternAvailablePropertyId = 30028;
 
 /// Identifies the IsGridItemPatternAvailable property, which indicates whether
 /// the GridItem control pattern is available for the automation element.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_IsGridItemPatternAvailablePropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_IsGridItemPatternAvailablePropertyId instead',
+)
 const UIA_IsGridItemPatternAvailablePropertyId = 30029;
 
 /// Identifies the IsGridPatternAvailable property, which indicates whether the
@@ -12216,103 +12255,118 @@ const UIA_IsGridPatternAvailablePropertyId = 30030;
 /// Identifies the IsInvokePatternAvailable property, which indicates whether
 /// the Invoke control pattern is available for the automation element.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_IsInvokePatternAvailablePropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_IsInvokePatternAvailablePropertyId instead',
+)
 const UIA_IsInvokePatternAvailablePropertyId = 30031;
 
 /// Identifies the IsItemContainerPatternAvailable property, which indicates
 /// whether the ItemContainer control pattern is available for the automation
 /// element.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_IsItemContainerPatternAvailablePropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_IsItemContainerPatternAvailablePropertyId instead',
+)
 const UIA_IsItemContainerPatternAvailablePropertyId = 30108;
 
 /// Identifies the IsLegacyIAccessiblePatternAvailable property, which
 /// indicates whether the LegacyIAccessible control pattern is available for
 /// the automation element.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_IsLegacyIAccessiblePatternAvailablePropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_IsLegacyIAccessiblePatternAvailablePropertyId instead',
+)
 const UIA_IsLegacyIAccessiblePatternAvailablePropertyId = 30090;
 
 /// Identifies the IsMultipleViewPatternAvailable property, which indicates
 /// whether the MultipleView control pattern is available for the automation
 /// element.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_IsMultipleViewPatternAvailablePropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_IsMultipleViewPatternAvailablePropertyId instead',
+)
 const UIA_IsMultipleViewPatternAvailablePropertyId = 30032;
 
 /// Identifies the IsObjectModelPatternAvailable property, which indicates
 /// whether the ObjectModel control pattern is available for the automation
 /// element.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_IsObjectModelPatternAvailablePropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_IsObjectModelPatternAvailablePropertyId instead',
+)
 const UIA_IsObjectModelPatternAvailablePropertyId = 30112;
 
 /// Identifies the IsRangeValuePatternAvailable property, which indicates
 /// whether the RangeValue control pattern is available for the automation
 /// element.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_IsRangeValuePatternAvailablePropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_IsRangeValuePatternAvailablePropertyId instead',
+)
 const UIA_IsRangeValuePatternAvailablePropertyId = 30033;
 
 /// Identifies the IsScrollItemPatternAvailable property, which indicates
 /// whether the ScrollItem control pattern is available for the automation
 /// element.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_IsScrollItemPatternAvailablePropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_IsScrollItemPatternAvailablePropertyId instead',
+)
 const UIA_IsScrollItemPatternAvailablePropertyId = 30035;
 
 /// Identifies the IsScrollPatternAvailable property, which indicates whether
 /// the Scroll control pattern is available for the automation element.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_IsScrollPatternAvailablePropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_IsScrollPatternAvailablePropertyId instead',
+)
 const UIA_IsScrollPatternAvailablePropertyId = 30034;
 
 /// Identifies the IsSelectionItemPatternAvailable property, which indicates
 /// whether the SelectionItem control pattern is available for the automation
 /// element.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_IsSelectionItemPatternAvailablePropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_IsSelectionItemPatternAvailablePropertyId instead',
+)
 const UIA_IsSelectionItemPatternAvailablePropertyId = 30036;
 
 /// Identifies the IsSelectionPatternAvailable property, which indicates
 /// whether the Selection control pattern is available for the automation
 /// element.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_IsSelectionPatternAvailablePropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_IsSelectionPatternAvailablePropertyId instead',
+)
 const UIA_IsSelectionPatternAvailablePropertyId = 30037;
 
 /// Identifies the IsSpreadsheetPatternAvailable property, which indicates
 /// whether the Spreadsheet control pattern is available for the automation
 /// element.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_IsSpreadsheetPatternAvailablePropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_IsSpreadsheetPatternAvailablePropertyId instead',
+)
 const UIA_IsSpreadsheetPatternAvailablePropertyId = 30128;
 
 /// Identifies the IsSpreadsheetItemPatternAvailable property, which indicates
 /// whether the SpreadsheetItem control pattern is available for the automation
 /// element.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_IsSpreadsheetItemPatternAvailablePropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_IsSpreadsheetItemPatternAvailablePropertyId instead',
+)
 const UIA_IsSpreadsheetItemPatternAvailablePropertyId = 30132;
 
 /// Identifies the IsStylesPatternAvailable property, which indicates whether
 /// the Styles control pattern is available for the automation element.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_IsStylesPatternAvailablePropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_IsStylesPatternAvailablePropertyId instead',
+)
 const UIA_IsStylesPatternAvailablePropertyId = 30127;
 
 /// Identifies the IsSynchronizedInputPatternAvailable property, which
 /// indicates whether the SynchronizedInput control pattern is available for
 /// the automation element.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_IsSynchronizedInputPatternAvailablePropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_IsSynchronizedInputPatternAvailablePropertyId instead',
+)
 const UIA_IsSynchronizedInputPatternAvailablePropertyId = 30110;
 
 /// Identifies the IsTableItemPatternAvailable property, which indicates
 /// whether the TableItem control pattern is available for the automation
 /// element.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_IsTableItemPatternAvailablePropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_IsTableItemPatternAvailablePropertyId instead',
+)
 const UIA_IsTableItemPatternAvailablePropertyId = 30039;
 
 /// Identifies the IsTablePatternAvailable property, which indicates whether
@@ -12324,13 +12378,15 @@ const UIA_IsTablePatternAvailablePropertyId = 30038;
 /// whether the TextChild control pattern is available for the automation
 /// element.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_IsTextChildPatternAvailablePropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_IsTextChildPatternAvailablePropertyId instead',
+)
 const UIA_IsTextChildPatternAvailablePropertyId = 30136;
 
 /// Identifies the IsTextEditPatternAvailable property, which indicates whether
 /// the TextEdit control pattern is available for the automation element.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_IsTextEditPatternAvailablePropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_IsTextEditPatternAvailablePropertyId instead',
+)
 const UIA_IsTextEditPatternAvailablePropertyId = 30149;
 
 /// Identifies the IsTextPatternAvailable property, which indicates whether the
@@ -12347,21 +12403,24 @@ const UIA_IsTextPattern2AvailablePropertyId = 30119;
 /// Identifies the IsTogglePatternAvailable property, which indicates whether
 /// the Toggle control pattern is available for the automation element.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_IsTogglePatternAvailablePropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_IsTogglePatternAvailablePropertyId instead',
+)
 const UIA_IsTogglePatternAvailablePropertyId = 30041;
 
 /// Identifies the IsTransformPatternAvailable property, which indicates
 /// whether the Transform control pattern is available for the automation
 /// element.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_IsTransformPatternAvailablePropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_IsTransformPatternAvailablePropertyId instead',
+)
 const UIA_IsTransformPatternAvailablePropertyId = 30042;
 
 /// Identifies the IsTransformPattern2Available property, which indicates
 /// whether version two of the Transform control pattern is available for the
 /// automation element.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_IsTransformPattern2AvailablePropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_IsTransformPattern2AvailablePropertyId instead',
+)
 const UIA_IsTransformPattern2AvailablePropertyId = 30134;
 
 /// Identifies the IsValuePatternAvailable property, which indicates whether
@@ -12373,13 +12432,15 @@ const UIA_IsValuePatternAvailablePropertyId = 30043;
 /// whether the VirtualizedItem control pattern is available for the automation
 /// element.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_IsVirtualizedItemPatternAvailablePropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_IsVirtualizedItemPatternAvailablePropertyId instead',
+)
 const UIA_IsVirtualizedItemPatternAvailablePropertyId = 30109;
 
 /// Identifies the IsWindowPatternAvailable property, which indicates whether
 /// the Window control pattern is available for the automation element.
 @Deprecated(
-    'Use UIA_PROPERTY_ID.UIA_IsWindowPatternAvailablePropertyId instead')
+  'Use UIA_PROPERTY_ID.UIA_IsWindowPatternAvailablePropertyId instead',
+)
 const UIA_IsWindowPatternAvailablePropertyId = 30044;
 
 /// Possible settings for the Automatic Logon Policy.
