@@ -144,20 +144,20 @@ Do you want to try again?
     NULL,
     lpText,
     lpCaption,
-    MESSAGEBOX_STYLE.MB_ICONWARNING | // Warning icon
-        MESSAGEBOX_STYLE.MB_CANCELTRYCONTINUE | // Action button
-        MESSAGEBOX_STYLE.MB_DEFBUTTON2, // Second button is the default
+    MB_ICONWARNING | // Warning icon
+        MB_CANCELTRYCONTINUE | // Action button
+        MB_DEFBUTTON2, // Second button is the default
   );
 
   free(lpText);
   free(lpCaption);
 
   switch (result) {
-    case MESSAGEBOX_RESULT.IDCANCEL:
+    case IDCANCEL:
       print('Cancel pressed');
-    case MESSAGEBOX_RESULT.IDTRYAGAIN:
+    case IDTRYAGAIN:
       print('Try Again pressed');
-    case MESSAGEBOX_RESULT.IDCONTINUE:
+    case IDCONTINUE:
       print('Continue pressed');
   }
 }

@@ -88,9 +88,9 @@ int runCommand(String distributionName, String command) {
       pDistributionName,
       pCommand,
       FALSE,
-      GetStdHandle(STD_HANDLE.STD_INPUT_HANDLE), // redirect as appropriate
-      GetStdHandle(STD_HANDLE.STD_OUTPUT_HANDLE), // redirect as appropriate
-      GetStdHandle(STD_HANDLE.STD_ERROR_HANDLE), // redirect as appropriate
+      GetStdHandle(STD_INPUT_HANDLE), // redirect as appropriate
+      GetStdHandle(STD_OUTPUT_HANDLE), // redirect as appropriate
+      GetStdHandle(STD_ERROR_HANDLE), // redirect as appropriate
       processHandle,
     );
     if (FAILED(hr)) throw WindowsException(hr);
@@ -113,10 +113,8 @@ void main() {
       print('Distribution: $distributionName');
       print('Version: ${config.wslVersion}');
       final driveMounting =
-          config.flags &
-              WSL_DISTRIBUTION_FLAGS
-                  .WSL_DISTRIBUTION_FLAGS_ENABLE_DRIVE_MOUNTING ==
-          WSL_DISTRIBUTION_FLAGS.WSL_DISTRIBUTION_FLAGS_ENABLE_DRIVE_MOUNTING;
+          config.flags & WSL_DISTRIBUTION_FLAGS_ENABLE_DRIVE_MOUNTING ==
+          WSL_DISTRIBUTION_FLAGS_ENABLE_DRIVE_MOUNTING;
       print('Windows drives automatically mounted: $driveMounting');
       print('Environment variables: ');
       config.environmentVariables.forEach(print);

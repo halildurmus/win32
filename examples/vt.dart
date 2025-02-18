@@ -24,7 +24,7 @@ class Coord {
 
 bool enableVTMode() {
   // Set output mode to handle virtual terminal sequences
-  final hOut = GetStdHandle(STD_HANDLE.STD_OUTPUT_HANDLE);
+  final hOut = GetStdHandle(STD_OUTPUT_HANDLE);
   if (hOut == INVALID_HANDLE_VALUE) {
     return false;
   }
@@ -35,7 +35,7 @@ bool enableVTMode() {
       return false;
     }
 
-    dwMode.value |= CONSOLE_MODE.ENABLE_VIRTUAL_TERMINAL_PROCESSING;
+    dwMode.value |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
     if (SetConsoleMode(hOut, dwMode.value) == 0) {
       return false;
     }
@@ -82,7 +82,7 @@ void main() {
     printf("Unable to enter VT processing mode. Quitting.\n");
     exit(-1);
   }
-  final hOut = GetStdHandle(STD_HANDLE.STD_OUTPUT_HANDLE);
+  final hOut = GetStdHandle(STD_OUTPUT_HANDLE);
   if (hOut == INVALID_HANDLE_VALUE) {
     printf("Couldn't get the console handle. Quitting.\n");
     exit(-1);

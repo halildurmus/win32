@@ -14,9 +14,9 @@ bool GetDriveGeometry(Pointer<Utf16> wszPath, Pointer<DISK_GEOMETRY> pdg) {
     final hDevice = CreateFile(
       wszPath, // drive to open
       0, // no access to the drive
-      FILE_SHARE_MODE.FILE_SHARE_READ | FILE_SHARE_MODE.FILE_SHARE_WRITE,
+      FILE_SHARE_READ | FILE_SHARE_WRITE,
       nullptr, // default security attributes
-      FILE_CREATION_DISPOSITION.OPEN_EXISTING,
+      OPEN_EXISTING,
       0, // file attributes
       NULL,
     ); // do not copy file attributes

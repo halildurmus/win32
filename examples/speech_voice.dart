@@ -9,7 +9,7 @@ const textToSpeak =
     'Dart is a portable, high-performance language from Google.';
 
 void main() {
-  CoInitializeEx(nullptr, COINIT.COINIT_APARTMENTTHREADED);
+  CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 
   final speechVoice = ISpeechVoice(
     COMObject.createFromID(CLSID_SpVoice, IID_ISpeechVoice),
@@ -44,7 +44,7 @@ void main() {
         );
         if (FAILED(hr)) throw WindowsException(hr);
 
-        hr = speechVoice.speak(pText, SPEAKFLAGS.SPF_IS_NOT_XML, nullptr);
+        hr = speechVoice.speak(pText, SPF_IS_NOT_XML, nullptr);
         if (FAILED(hr)) throw WindowsException(hr);
       }
     }

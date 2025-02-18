@@ -4,7 +4,7 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import 'enums.g.dart';
+import 'constants.dart';
 import 'extensions/int_to_hexstring.dart';
 import 'utils.dart';
 import 'win32/kernel32.g.dart';
@@ -36,8 +36,7 @@ class WindowsException extends COMException {
     try {
       String errorMessage;
       final result = FormatMessage(
-        FORMAT_MESSAGE_OPTIONS.FORMAT_MESSAGE_FROM_SYSTEM |
-            FORMAT_MESSAGE_OPTIONS.FORMAT_MESSAGE_IGNORE_INSERTS,
+        FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
         nullptr,
         windowsError,
         0, // default language

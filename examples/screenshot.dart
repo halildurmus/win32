@@ -58,13 +58,13 @@ class Display {
   int _createScreenshot(int hdcScreen) {
     final hdcMemDC = CreateCompatibleDC(hdcScreen);
 
-    final width = GetDeviceCaps(hdcScreen, GET_DEVICE_CAPS_INDEX.HORZRES);
-    final height = GetDeviceCaps(hdcScreen, GET_DEVICE_CAPS_INDEX.VERTRES);
+    final width = GetDeviceCaps(hdcScreen, HORZRES);
+    final height = GetDeviceCaps(hdcScreen, VERTRES);
 
     try {
       final hbmScreen = CreateCompatibleBitmap(hdcScreen, width, height);
       SelectObject(hdcMemDC, hbmScreen);
-      BitBlt(hdcMemDC, 0, 0, width, height, hdcScreen, 0, 0, ROP_CODE.SRCCOPY);
+      BitBlt(hdcMemDC, 0, 0, width, height, hdcScreen, 0, 0, SRCCOPY);
       return hbmScreen;
     } finally {
       DeleteObject(hdcMemDC);
@@ -76,8 +76,7 @@ class Display {
   final int _stateFlags;
 
   bool get isConnected =>
-      (_stateFlags & DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_ACTIVE) ==
-      DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_ACTIVE;
+      (_stateFlags & DISPLAY_DEVICE_ACTIVE) == DISPLAY_DEVICE_ACTIVE;
 }
 
 class BmpFile {
@@ -104,7 +103,7 @@ class BmpFile {
           ..ref.biHeight = bmpScreen.ref.bmHeight
           ..ref.biPlanes = 1
           ..ref.biBitCount = 32
-          ..ref.biCompression = BI_COMPRESSION.BI_RGB;
+          ..ref.biCompression = BI_RGB;
 
     final dwBmpSize =
         ((bmpScreen.ref.bmWidth * bitmapInfoHeader.ref.biBitCount + 31) /
@@ -122,7 +121,7 @@ class BmpFile {
       bmpScreen.ref.bmHeight,
       lpBitmap,
       bitmapInfoHeader.cast(),
-      DIB_USAGE.DIB_RGB_COLORS,
+      DIB_RGB_COLORS,
     );
 
     final bitmapFileHeader = arena<BITMAPFILEHEADER>();
@@ -140,11 +139,11 @@ class BmpFile {
   void _writeFile(Arena arena, String fileName, BmpBinary bmpFileStructure) {
     final hFile = CreateFile(
       fileName.toNativeUtf16(allocator: arena),
-      GENERIC_ACCESS_RIGHTS.GENERIC_WRITE,
+      GENERIC_WRITE,
       0,
       nullptr,
-      FILE_CREATION_DISPOSITION.CREATE_ALWAYS,
-      FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_NORMAL,
+      CREATE_ALWAYS,
+      FILE_ATTRIBUTE_NORMAL,
       NULL,
     );
 

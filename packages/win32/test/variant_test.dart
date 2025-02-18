@@ -16,7 +16,7 @@ void main() {
     test('creation', () {
       final variant = calloc<VARIANT>();
       VariantInit(variant);
-      expect(variant.ref.vt, equals(VARENUM.VT_EMPTY));
+      expect(variant.ref.vt, equals(VT_EMPTY));
       VariantClear(variant);
       free(variant);
     });
@@ -26,7 +26,7 @@ void main() {
       final variant = calloc<VARIANT>();
       VariantInit(variant);
       variant.ref
-        ..vt = VARENUM.VT_UNKNOWN
+        ..vt = VT_UNKNOWN
         ..punkVal = spVoice;
 
       final unk = variant.ref.punkVal..detach();
@@ -46,7 +46,7 @@ void main() {
             ..value =
                 (calloc<COMObject>()..ref.lpVtbl = spVoice.ptr.ref.lpVtbl);
       variant.ref
-        ..vt = VARENUM.VT_UNKNOWN | VARENUM.VT_BYREF
+        ..vt = VT_UNKNOWN | VT_BYREF
         ..ppunkVal = ppunkval;
 
       final unk = IUnknown(variant.ref.ppunkVal.value)..detach();
@@ -88,7 +88,7 @@ void main() {
     test('LONG', () {
       final intVar = calloc<VARIANT>();
       VariantInit(intVar);
-      intVar.ref.vt = VARENUM.VT_I4;
+      intVar.ref.vt = VT_I4;
       intVar.ref.lVal = -2147483648;
       expect(intVar.ref.lVal, equals(-2147483648));
 
@@ -105,7 +105,7 @@ void main() {
     test('INT', () {
       final intVar = calloc<VARIANT>();
       VariantInit(intVar);
-      intVar.ref.vt = VARENUM.VT_I4;
+      intVar.ref.vt = VT_I4;
       intVar.ref.intVal = -2147483648;
       expect(intVar.ref.intVal, equals(-2147483648));
 
@@ -122,7 +122,7 @@ void main() {
     test('ULONGLONG', () {
       final bigint = calloc<VARIANT>();
       VariantInit(bigint);
-      bigint.ref.vt = VARENUM.VT_UI8;
+      bigint.ref.vt = VT_UI8;
       bigint.ref.ullVal = BigInt.zero;
       expect(bigint.ref.ullVal, equals(BigInt.from(0)));
 
@@ -141,7 +141,7 @@ void main() {
     test('ULONG', () {
       final intVar = calloc<VARIANT>();
       VariantInit(intVar);
-      intVar.ref.vt = VARENUM.VT_UI4;
+      intVar.ref.vt = VT_UI4;
       intVar.ref.ulVal = 0;
       expect(intVar.ref.ulVal, equals(0));
 
@@ -158,7 +158,7 @@ void main() {
     test('UINT', () {
       final intVar = calloc<VARIANT>();
       VariantInit(intVar);
-      intVar.ref.vt = VARENUM.VT_UI4;
+      intVar.ref.vt = VT_UI4;
       intVar.ref.uintVal = 0;
       expect(intVar.ref.uintVal, equals(0));
 
@@ -175,7 +175,7 @@ void main() {
     test('SHORT', () {
       final intVar = calloc<VARIANT>();
       VariantInit(intVar);
-      intVar.ref.vt = VARENUM.VT_I2;
+      intVar.ref.vt = VT_I2;
       intVar.ref.iVal = -32768;
       expect(intVar.ref.iVal, equals(-32768));
 
@@ -191,7 +191,7 @@ void main() {
     test('BYTE', () {
       final intVar = calloc<VARIANT>();
       VariantInit(intVar);
-      intVar.ref.vt = VARENUM.VT_UI1;
+      intVar.ref.vt = VT_UI1;
       intVar.ref.bVal = 0;
       expect(intVar.ref.bVal, equals(0));
 
@@ -208,7 +208,7 @@ void main() {
     test('USHORT', () {
       final intVar = calloc<VARIANT>();
       VariantInit(intVar);
-      intVar.ref.vt = VARENUM.VT_UI2;
+      intVar.ref.vt = VT_UI2;
       intVar.ref.uiVal = 0;
       expect(intVar.ref.uiVal, equals(0));
 

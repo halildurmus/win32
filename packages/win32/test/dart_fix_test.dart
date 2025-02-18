@@ -4,7 +4,8 @@ library;
 import 'dart:io';
 
 import 'package:path/path.dart' as p;
-import 'package:test/test.dart';
+import 'package:test/scaffolding.dart';
+import 'package:test/test.dart' show fail;
 
 /// Used for debugging the test.
 const keepTempDir = false;
@@ -12,24 +13,9 @@ const keepTempDir = false;
 void main() {
   test("'dart fix' integration", () {
     final tempDir = Directory.systemTemp.createTempSync('test');
-
-    var sdkVersion = Platform.version;
-    if (sdkVersion.contains(' ')) {
-      sdkVersion = sdkVersion.substring(0, sdkVersion.indexOf(' '));
-    }
-
     try {
       // Set up project.
-      writeFile(tempDir, 'pubspec.yaml', '''
-name: test_project
-environment:
-  sdk: ^$sdkVersion
-
-dependencies:
-  win32:
-    path: ${Directory.current.path.replaceAll(r'\', '/')}
-''');
-
+      createPubspec(tempDir);
       copyTestFiles('test_fixes', p.join(tempDir.path, 'lib'));
       pubGet(tempDir);
       dartFix(tempDir);
@@ -42,6 +28,22 @@ dependencies:
       }
     }
   });
+}
+
+void createPubspec(Directory dir) {
+  var sdkVersion = Platform.version;
+  if (sdkVersion.contains(' ')) {
+    sdkVersion = sdkVersion.substring(0, sdkVersion.indexOf(' '));
+  }
+  writeFile(dir, 'pubspec.yaml', '''
+name: test_project
+environment:
+  sdk: ^$sdkVersion
+
+dependencies:
+  win32:
+    path: ${Directory.current.path.replaceAll(r'\', '/')}
+''');
 }
 
 void copyTestFiles(String sourceDir, String destinationDir) {

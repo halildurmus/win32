@@ -44,14 +44,13 @@ void showSimpleTaskDialog() {
         windowTitle,
         mainInstruction,
         content,
-        TASKDIALOG_COMMON_BUTTON_FLAGS.TDCBF_OK_BUTTON |
-            TASKDIALOG_COMMON_BUTTON_FLAGS.TDCBF_CANCEL_BUTTON,
+        TDCBF_OK_BUTTON | TDCBF_CANCEL_BUTTON,
         TD_INFORMATION_ICON,
         buttonSelected,
       );
       if (SUCCEEDED(hr)) {
         switch (buttonSelected.value) {
-          case MESSAGEBOX_RESULT.IDOK:
+          case IDOK:
             print('User clicked on the OK button.');
           default:
             print('User canceled the task dialog.');
@@ -113,9 +112,7 @@ void showCustomTaskDialog() {
       ..pszExpandedInformation = matrixDescription.toNativeUtf16(
         allocator: arena,
       )
-      ..dwFlags =
-          TASKDIALOG_FLAGS.TDF_USE_COMMAND_LINKS |
-          TASKDIALOG_FLAGS.TDF_EXPAND_FOOTER_AREA
+      ..dwFlags = TDF_USE_COMMAND_LINKS | TDF_EXPAND_FOOTER_AREA
       ..cButtons = numberOfButtons
       ..pButtons = buttons;
 

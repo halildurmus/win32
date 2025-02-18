@@ -13,98 +13,98 @@
 
 version: 1
 transforms:
-  - title: "Migrate to 'ADDRESS_FAMILY.AF_INET'"
+  - title: "Migrate to 'AF_INET'"
     date: 2024-03-17
     element:
       uris: ['package:win32/winsock2.dart']
-      variable: 'AF_INET'
+      field: 'AF_INET'
+      inClass: 'ADDRESS_FAMILY'
     changes:
       - kind: 'replacedBy'
         newElement:
           uris: ['package:win32/winsock2.dart']
-          field: 'AF_INET'
-          inClass: 'ADDRESS_FAMILY'
+          variable: 'AF_INET'
 
-  - title: "Migrate to 'ADDRESS_FAMILY.AF_INET6'"
+  - title: "Migrate to 'AF_INET6'"
     date: 2024-03-17
     element:
       uris: ['package:win32/winsock2.dart']
-      variable: 'AF_INET6'
+      field: 'AF_INET6'
+      inClass: 'ADDRESS_FAMILY'
     changes:
       - kind: 'replacedBy'
         newElement:
           uris: ['package:win32/winsock2.dart']
-          field: 'AF_INET6'
-          inClass: 'ADDRESS_FAMILY'
+          variable: 'AF_INET6'
 
-  - title: "Migrate to 'ADDRESS_FAMILY.AF_UNSPEC'"
+  - title: "Migrate to 'AF_UNSPEC'"
     date: 2024-03-17
     element:
       uris: ['package:win32/winsock2.dart']
-      variable: 'AF_UNSPEC'
+      field: 'AF_UNSPEC'
+      inClass: 'ADDRESS_FAMILY'
     changes:
       - kind: 'replacedBy'
         newElement:
           uris: ['package:win32/winsock2.dart']
-          field: 'AF_UNSPEC'
-          inClass: 'ADDRESS_FAMILY'
+          variable: 'AF_UNSPEC'
 
-  - title: "Migrate to 'WINSOCK_SOCKET_TYPE.SOCK_STREAM'"
+  - title: "Migrate to 'SOCK_STREAM'"
     date: 2024-03-17
     element:
       uris: ['package:win32/winsock2.dart']
-      variable: 'SOCK_STREAM'
+      field: 'SOCK_STREAM'
+      inClass: 'WINSOCK_SOCKET_TYPE'
     changes:
       - kind: 'replacedBy'
         newElement:
           uris: ['package:win32/winsock2.dart']
-          field: 'SOCK_STREAM'
-          inClass: 'WINSOCK_SOCKET_TYPE'
+          variable: 'SOCK_STREAM'
 
-  - title: "Migrate to 'WINSOCK_SOCKET_TYPE.SOCK_DGRAM'"
+  - title: "Migrate to 'SOCK_DGRAM'"
     date: 2024-03-17
     element:
       uris: ['package:win32/winsock2.dart']
-      variable: 'SOCK_DGRAM'
+      field: 'SOCK_DGRAM'
+      inClass: 'WINSOCK_SOCKET_TYPE'
     changes:
       - kind: 'replacedBy'
         newElement:
           uris: ['package:win32/winsock2.dart']
-          field: 'SOCK_DGRAM'
-          inClass: 'WINSOCK_SOCKET_TYPE'
+          variable: 'SOCK_DGRAM'
 
-  - title: "Migrate to 'WINSOCK_SOCKET_TYPE.SOCK_RAW'"
+  - title: "Migrate to 'SOCK_RAW'"
     date: 2024-03-17
     element:
       uris: ['package:win32/winsock2.dart']
-      variable: 'SOCK_RAW'
+      field: 'SOCK_RAW'
+      inClass: 'WINSOCK_SOCKET_TYPE'
     changes:
       - kind: 'replacedBy'
         newElement:
           uris: ['package:win32/winsock2.dart']
-          field: 'SOCK_RAW'
-          inClass: 'WINSOCK_SOCKET_TYPE'
+          variable: 'SOCK_RAW'
 
-  - title: "Migrate to 'WINSOCK_SOCKET_TYPE.SOCK_RDM'"
+  - title: "Migrate to 'SOCK_RDM'"
     date: 2024-03-17
     element:
       uris: ['package:win32/winsock2.dart']
-      variable: 'SOCK_RDM'
+      field: 'SOCK_RDM'
+      inClass: 'WINSOCK_SOCKET_TYPE'
     changes:
       - kind: 'replacedBy'
         newElement:
           uris: ['package:win32/winsock2.dart']
-          field: 'SOCK_RDM'
-          inClass: 'WINSOCK_SOCKET_TYPE'
+          variable: 'SOCK_RDM'
 
-  - title: "Migrate to 'WINSOCK_SOCKET_TYPE.SOCK_SEQPACKET'"
+  - title: "Migrate to 'SOCK_SEQPACKET'"
     date: 2024-03-17
     element:
       uris: ['package:win32/winsock2.dart']
-      variable: 'SOCK_SEQPACKET'
+      field: 'SOCK_SEQPACKET'
+      inClass: 'WINSOCK_SOCKET_TYPE'
     changes:
       - kind: 'replacedBy'
         newElement:
           uris: ['package:win32/winsock2.dart']
-          field: 'SOCK_SEQPACKET'
-          inClass: 'WINSOCK_SOCKET_TYPE'
+          variable: 'SOCK_SEQPACKET'

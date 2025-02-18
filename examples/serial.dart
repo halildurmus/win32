@@ -25,10 +25,10 @@ void main() {
   try {
     final hCom = CreateFile(
       pcCommPort,
-      GENERIC_ACCESS_RIGHTS.GENERIC_READ | GENERIC_ACCESS_RIGHTS.GENERIC_WRITE,
+      GENERIC_READ | GENERIC_WRITE,
       0,
       nullptr,
-      FILE_CREATION_DISPOSITION.OPEN_EXISTING,
+      OPEN_EXISTING,
       0,
       NULL,
     );
@@ -50,8 +50,8 @@ void main() {
     dcb
       ..ref.BaudRate = CBR_57600
       ..ref.ByteSize = 8
-      ..ref.Parity = DCB_PARITY.NOPARITY
-      ..ref.StopBits = DCB_STOP_BITS.ONESTOPBIT;
+      ..ref.Parity = NOPARITY
+      ..ref.StopBits = ONESTOPBIT;
 
     fSuccess = SetCommState(hCom, dcb);
     if (fSuccess == 0) {

@@ -24,7 +24,7 @@ void main() {
         final folderNameParam = arena<VARIANT>();
         VariantInit(folderNameParam);
         folderNameParam.ref
-          ..vt = VARENUM.VT_BSTR
+          ..vt = VT_BSTR
           ..bstrVal = folderName.ptr;
         final params = arena<DISPPARAMS>();
         params.ref
@@ -38,7 +38,7 @@ void main() {
           returnsNormally,
         );
         VariantClear(folderNameParam);
-        expect(result.ref.vt, equals(VARENUM.VT_DISPATCH));
+        expect(result.ref.vt, equals(VT_DISPATCH));
         final folder = arena.using(
           Dispatcher(result.ref.pdispVal),
           (d) => d.dispose(),
@@ -48,13 +48,13 @@ void main() {
         final newFolderNameParam = arena<VARIANT>();
         VariantInit(newFolderNameParam);
         newFolderNameParam.ref
-          ..vt = VARENUM.VT_BSTR
+          ..vt = VT_BSTR
           ..bstrVal = newFolderName.ptr;
         expect(() => folder.set('Name', newFolderNameParam), returnsNormally);
         VariantClear(newFolderNameParam);
 
         final folderPathResult = folder.get('Path');
-        expect(folderPathResult.ref.vt, equals(VARENUM.VT_BSTR));
+        expect(folderPathResult.ref.vt, equals(VT_BSTR));
         expect(
           folderPathResult.ref.bstrVal.toDartString(),
           equals(r'C:\testfolder456'),

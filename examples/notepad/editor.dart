@@ -57,7 +57,7 @@ class NotepadEditor {
   }
 
   void openFile() {
-    if (isFileDirty && offerSave() == MESSAGEBOX_RESULT.IDCANCEL) {
+    if (isFileDirty && offerSave() == IDCANCEL) {
       return;
     }
 
@@ -108,7 +108,7 @@ class NotepadEditor {
       _hwnd,
       TEXT(szMessage),
       TEXT(APP_NAME),
-      MESSAGEBOX_STYLE.MB_OK | MESSAGEBOX_STYLE.MB_ICONEXCLAMATION,
+      MB_OK | MB_ICONEXCLAMATION,
     );
   }
 
@@ -122,12 +122,12 @@ class NotepadEditor {
       _hwnd,
       buffer,
       TEXT(APP_NAME),
-      MESSAGEBOX_STYLE.MB_YESNOCANCEL | MESSAGEBOX_STYLE.MB_ICONQUESTION,
+      MB_YESNOCANCEL | MB_ICONQUESTION,
     );
 
-    if (res == MESSAGEBOX_RESULT.IDYES) {
+    if (res == IDYES) {
       if (SendMessage(_hwnd, WM_COMMAND, IDM_FILE_SAVE, 0) == FALSE) {
-        return MESSAGEBOX_RESULT.IDCANCEL;
+        return IDCANCEL;
       }
     }
 

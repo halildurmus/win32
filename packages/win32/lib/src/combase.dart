@@ -4,7 +4,7 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import 'enums.g.dart';
+import 'constants.dart';
 import 'exceptions.dart';
 import 'guid.dart';
 import 'macros.dart';
@@ -45,7 +45,7 @@ base class COMObject extends Struct {
       final hr = CoCreateInstance(
         pClsid,
         nullptr,
-        CLSCTX.CLSCTX_ALL,
+        CLSCTX_ALL,
         pIid,
         pObj.cast(),
       );

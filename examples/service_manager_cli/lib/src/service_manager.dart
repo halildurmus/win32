@@ -35,9 +35,9 @@ abstract class ServiceManager {
         // First call to EnumServicesStatusEx to get the required buffer size.
         EnumServicesStatusEx(
           scmHandle,
-          SC_ENUM_TYPE.SC_ENUM_PROCESS_INFO,
-          ENUM_SERVICE_TYPE.SERVICE_WIN32,
-          ENUM_SERVICE_STATE.SERVICE_STATE_ALL,
+          SC_ENUM_PROCESS_INFO,
+          SERVICE_WIN32,
+          SERVICE_STATE_ALL,
           nullptr,
           0,
           bytesNeeded,
@@ -51,9 +51,9 @@ abstract class ServiceManager {
         // Second call to EnumServicesStatusEx to get the actual data.
         if (EnumServicesStatusEx(
               scmHandle,
-              SC_ENUM_TYPE.SC_ENUM_PROCESS_INFO,
-              ENUM_SERVICE_TYPE.SERVICE_WIN32,
-              ENUM_SERVICE_STATE.SERVICE_STATE_ALL,
+              SC_ENUM_PROCESS_INFO,
+              SERVICE_WIN32,
+              SERVICE_STATE_ALL,
               buffer,
               bytesNeeded.value,
               bytesNeeded,
@@ -116,7 +116,7 @@ abstract class ServiceManager {
       // Check the status in case the service is not stopped.
       if (QueryServiceStatusEx(
             hService,
-            SC_STATUS_TYPE.SC_STATUS_PROCESS_INFO,
+            SC_STATUS_PROCESS_INFO,
             lpBuffer.cast(),
             sizeOf<SERVICE_STATUS_PROCESS>(),
             bytesNeeded,
@@ -131,9 +131,8 @@ abstract class ServiceManager {
 
       // Check if the service is already running. It would be possible to stop
       // the service here, but for simplicity this example just returns.
-      if (ssp.dwCurrentState != SERVICE_STATUS_CURRENT_STATE.SERVICE_STOPPED &&
-          ssp.dwCurrentState !=
-              SERVICE_STATUS_CURRENT_STATE.SERVICE_STOP_PENDING) {
+      if (ssp.dwCurrentState != SERVICE_STOPPED &&
+          ssp.dwCurrentState != SERVICE_STOP_PENDING) {
         CloseServiceHandle(hService);
         CloseServiceHandle(scmHandle);
         return ServiceStartResult.alreadyRunning;
@@ -144,8 +143,7 @@ abstract class ServiceManager {
       var oldCheckPoint = ssp.dwCheckPoint;
 
       // If a stop is pending, wait for it.
-      while (ssp.dwCurrentState ==
-          SERVICE_STATUS_CURRENT_STATE.SERVICE_STOP_PENDING) {
+      while (ssp.dwCurrentState == SERVICE_STOP_PENDING) {
         _log('Service stop pending...');
 
         // Do not wait longer than the wait hint. A good interval is one-tenth
@@ -164,7 +162,7 @@ abstract class ServiceManager {
         // Check the status until the service is no longer stop pending.
         if (QueryServiceStatusEx(
               hService,
-              SC_STATUS_TYPE.SC_STATUS_PROCESS_INFO,
+              SC_STATUS_PROCESS_INFO,
               lpBuffer.cast(),
               sizeOf<SERVICE_STATUS_PROCESS>(),
               bytesNeeded,
@@ -198,7 +196,7 @@ abstract class ServiceManager {
       // Check the status until the service is no longer start pending.
       if (QueryServiceStatusEx(
             hService,
-            SC_STATUS_TYPE.SC_STATUS_PROCESS_INFO,
+            SC_STATUS_PROCESS_INFO,
             lpBuffer.cast(),
             sizeOf<SERVICE_STATUS_PROCESS>(),
             bytesNeeded,
@@ -213,8 +211,7 @@ abstract class ServiceManager {
       startTickCount = GetTickCount();
       oldCheckPoint = ssp.dwCheckPoint;
 
-      while (ssp.dwCurrentState ==
-          SERVICE_STATUS_CURRENT_STATE.SERVICE_START_PENDING) {
+      while (ssp.dwCurrentState == SERVICE_START_PENDING) {
         // Do not wait longer than the wait hint. A good interval is one-tenth
         // of the wait hint but not less than 1 second and not more than 10
         // seconds.
@@ -231,7 +228,7 @@ abstract class ServiceManager {
         // Check the status again.
         if (QueryServiceStatusEx(
               hService,
-              SC_STATUS_TYPE.SC_STATUS_PROCESS_INFO,
+              SC_STATUS_PROCESS_INFO,
               lpBuffer.cast(),
               sizeOf<SERVICE_STATUS_PROCESS>(),
               bytesNeeded,
@@ -251,8 +248,7 @@ abstract class ServiceManager {
       }
 
       // Determine whether the service is running.
-      final serviceRunning =
-          ssp.dwCurrentState == SERVICE_STATUS_CURRENT_STATE.SERVICE_RUNNING;
+      final serviceRunning = ssp.dwCurrentState == SERVICE_RUNNING;
       CloseServiceHandle(hService);
       CloseServiceHandle(scmHandle);
 
@@ -287,7 +283,7 @@ abstract class ServiceManager {
         // Query the service status.
         if (QueryServiceStatusEx(
               hService,
-              SC_STATUS_TYPE.SC_STATUS_PROCESS_INFO,
+              SC_STATUS_PROCESS_INFO,
               lpBuffer.cast(),
               sizeOf<SERVICE_STATUS_PROCESS>(),
               bytesNeeded,
@@ -333,7 +329,7 @@ abstract class ServiceManager {
         // Make sure the service is not already stopped.
         if (QueryServiceStatusEx(
               hService,
-              SC_STATUS_TYPE.SC_STATUS_PROCESS_INFO,
+              SC_STATUS_PROCESS_INFO,
               lpBuffer.cast(),
               sizeOf<SERVICE_STATUS_PROCESS>(),
               bytesNeeded,
@@ -343,8 +339,7 @@ abstract class ServiceManager {
         }
 
         final ssp = lpBuffer.ref;
-        if (ssp.dwCurrentState ==
-            SERVICE_STATUS_CURRENT_STATE.SERVICE_STOPPED) {
+        if (ssp.dwCurrentState == SERVICE_STOPPED) {
           return ServiceStopResult.alreadyStopped;
         }
 
@@ -352,8 +347,7 @@ abstract class ServiceManager {
         const timeout = 30000; // 30-second timeout
 
         // If a stop is pending, wait for it.
-        while (ssp.dwCurrentState ==
-            SERVICE_STATUS_CURRENT_STATE.SERVICE_STOP_PENDING) {
+        while (ssp.dwCurrentState == SERVICE_STOP_PENDING) {
           _log('Service stop pending...');
 
           // Do not wait longer than the wait hint. A good interval is one-tenth
@@ -371,7 +365,7 @@ abstract class ServiceManager {
 
           if (QueryServiceStatusEx(
                 hService,
-                SC_STATUS_TYPE.SC_STATUS_PROCESS_INFO,
+                SC_STATUS_PROCESS_INFO,
                 lpBuffer.cast(),
                 sizeOf<SERVICE_STATUS_PROCESS>(),
                 bytesNeeded,
@@ -380,8 +374,7 @@ abstract class ServiceManager {
             return ServiceStopResult.failed;
           }
 
-          if (ssp.dwCurrentState ==
-              SERVICE_STATUS_CURRENT_STATE.SERVICE_STOPPED) {
+          if (ssp.dwCurrentState == SERVICE_STOPPED) {
             return ServiceStopResult.success;
           }
 
@@ -413,14 +406,13 @@ abstract class ServiceManager {
 
         _log('Service stop pending...');
 
-        while (ssp.dwCurrentState !=
-            SERVICE_STATUS_CURRENT_STATE.SERVICE_STOPPED) {
+        while (ssp.dwCurrentState != SERVICE_STOPPED) {
           _log('Sleeping for ${ssp.dwWaitHint} ms...');
           Sleep(ssp.dwWaitHint);
 
           if (QueryServiceStatusEx(
                 hService,
-                SC_STATUS_TYPE.SC_STATUS_PROCESS_INFO,
+                SC_STATUS_PROCESS_INFO,
                 lpBuffer.cast(),
                 sizeOf<SERVICE_STATUS_PROCESS>(),
                 bytesNeeded,
@@ -429,8 +421,7 @@ abstract class ServiceManager {
             return ServiceStopResult.failed;
           }
 
-          if (ssp.dwCurrentState ==
-              SERVICE_STATUS_CURRENT_STATE.SERVICE_STOPPED) {
+          if (ssp.dwCurrentState == SERVICE_STOPPED) {
             break;
           }
 
@@ -461,7 +452,7 @@ abstract class ServiceManager {
       // Pass a zero-length buffer to get the required buffer size.
       if (EnumDependentServices(
             hService,
-            ENUM_SERVICE_STATE.SERVICE_ACTIVE,
+            SERVICE_ACTIVE,
             nullptr,
             0,
             bytesNeeded,
@@ -477,7 +468,7 @@ abstract class ServiceManager {
         // Enumerate the dependencies.
         if (EnumDependentServices(
               hService,
-              ENUM_SERVICE_STATE.SERVICE_ACTIVE,
+              SERVICE_ACTIVE,
               lpServices,
               bytesNeeded.value,
               bytesNeeded,
@@ -519,14 +510,13 @@ abstract class ServiceManager {
             final ssp = lpServiceStatus.ref;
 
             // Wait for the service to stop.
-            while (ssp.dwCurrentState !=
-                SERVICE_STATUS_CURRENT_STATE.SERVICE_STOPPED) {
+            while (ssp.dwCurrentState != SERVICE_STOPPED) {
               _log('Sleeping for ${ssp.dwWaitHint} ms...');
               Sleep(ssp.dwWaitHint);
 
               if (QueryServiceStatusEx(
                     hDepService,
-                    SC_STATUS_TYPE.SC_STATUS_PROCESS_INFO,
+                    SC_STATUS_PROCESS_INFO,
                     lpServiceStatus.cast(),
                     sizeOf<SERVICE_STATUS_PROCESS>(),
                     bytesNeeded,
@@ -535,8 +525,7 @@ abstract class ServiceManager {
                 return ServiceStopResult.failed;
               }
 
-              if (ssp.dwCurrentState ==
-                  SERVICE_STATUS_CURRENT_STATE.SERVICE_STOPPED) {
+              if (ssp.dwCurrentState == SERVICE_STOPPED) {
                 break;
               }
 

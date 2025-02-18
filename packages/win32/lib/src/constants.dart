@@ -63,86 +63,69 @@ const STATUS_INVALID_HANDLE = 0xC0000008;
 // -----------------------------------------------------------------------------
 
 /// For broadly applicable common status codes such as S_OK.
-@Deprecated('Use FACILITY_CODE.FACILITY_NULL instead')
 const FACILITY_NULL = 0;
 
 /// For status codes returned from remote procedure calls.
-@Deprecated('Use FACILITY_CODE.FACILITY_RPC instead')
 const FACILITY_RPC = 1;
 
 /// For late-binding IDispatch interface errors.
-@Deprecated('Use FACILITY_CODE.FACILITY_DISPATCH instead')
 const FACILITY_DISPATCH = 2;
 
 /// For status codes returned from IStorage or IStream method calls relating to
 /// structured storage. Status codes whose code (lower 16 bits) value is in the
 /// range of MS-DOS error codes (that is, less than 256) have the same meaning
 /// as the corresponding MS-DOS error.
-@Deprecated('Use FACILITY_CODE.FACILITY_STORAGE instead')
 const FACILITY_STORAGE = 3;
 
 /// For most status codes returned from interface methods. The actual meaning of
 /// the error is defined by the interface. That is, two HRESULTs with exactly
 /// the same 32-bit value returned from two different interfaces might have
 /// different meanings.
-@Deprecated('Use FACILITY_CODE.FACILITY_ITF instead')
 const FACILITY_ITF = 4;
 
 /// Used to provide a means of handling error codes from functions in the
 /// Windows API as an HRESULT. Error codes in 16-bit OLE that duplicated system
 /// error codes have also been changed to FACILITY_WIN32.
-@Deprecated('Use FACILITY_CODE.FACILITY_WIN32 instead')
 const FACILITY_WIN32 = 7;
 
 /// Used for additional error codes from Microsoft-defined interfaces.
-@Deprecated('Use FACILITY_CODE.FACILITY_WINDOWS instead')
 const FACILITY_WINDOWS = 8;
 
 /// The source of the error code is the Security API layer.
-@Deprecated('Use FACILITY_CODE.FACILITY_SSPI instead')
 const FACILITY_SSPI = 9;
 
 /// The source of the error code is the Security API layer.
-@Deprecated('Use FACILITY_CODE.FACILITY_SECURITY instead')
 const FACILITY_SECURITY = 9;
 
 /// The source of the error code is the control mechanism.
-@Deprecated('Use FACILITY_CODE.FACILITY_CONTROL instead')
 const FACILITY_CONTROL = 10;
 
 /// The source of the error code is a certificate client or server
-@Deprecated('Use FACILITY_CODE.FACILITY_CERT instead')
 const FACILITY_CERT = 11;
 
 /// The source of the error code is Wininet related.
-@Deprecated('Use FACILITY_CODE.FACILITY_INTERNET instead')
 const FACILITY_INTERNET = 12;
 
 /// The code that creates and manages objects of this class is a DLL that runs
 /// in the same process as the caller of the function specifying the class
 /// context.
-@Deprecated('Use CLSCTX.CLSCTX_INPROC_SERVER instead')
 const CLSCTX_INPROC_SERVER = 0x1;
 
 /// The code that manages objects of this class is an in-process handler. This
 /// is a DLL that runs in the client process and implements client-side
 /// structures of this class when instances of the class are accessed remotely.
-@Deprecated('Use CLSCTX.CLSCTX_INPROC_HANDLER instead')
 const CLSCTX_INPROC_HANDLER = 0x2;
 
 /// The EXE code that creates and manages objects of this class runs on same
 /// machine but is loaded in a separate process space.
-@Deprecated('Use CLSCTX.CLSCTX_LOCAL_SERVER instead')
 const CLSCTX_LOCAL_SERVER = 0x4;
 
 /// A remote context. The LocalServer32 or LocalService code that creates and
 /// manages objects of this class is run on a different computer.
-@Deprecated('Use CLSCTX.CLSCTX_REMOTE_SERVER instead')
 const CLSCTX_REMOTE_SERVER = 0x10;
 
 /// The combination of `CLSCTX_INPROC_SERVER`, `CLSCTX_INPROC_HANDLER`,
 /// `CLSCTX_LOCAL_SERVER`, and `CLSCTX_REMOTE_SERVER`.
-@Deprecated('Use CLSCTX.CLSCTX_ALL instead')
 const CLSCTX_ALL =
     CLSCTX_INPROC_SERVER |
     CLSCTX_INPROC_HANDLER |
@@ -150,23 +133,18 @@ const CLSCTX_ALL =
     CLSCTX_REMOTE_SERVER;
 
 /// Initializes the thread for multithreaded object concurrency.
-@Deprecated('Use COINITBASE.COINITBASE_MULTITHREADED instead')
 const COINITBASE_MULTITHREADED = 0x0;
 
 /// Initializes the thread for multithreaded object concurrency.
-@Deprecated('Use COINIT.COINIT_MULTITHREADED instead')
 const COINIT_MULTITHREADED = 0x0;
 
 /// Initializes the thread for apartment-threaded object concurrency.
-@Deprecated('Use COINIT.COINIT_APARTMENTTHREADED instead')
 const COINIT_APARTMENTTHREADED = 0x2;
 
 /// Disables DDE for OLE1 support.
-@Deprecated('Use COINIT.COINIT_DISABLE_OLE1DDE instead')
 const COINIT_DISABLE_OLE1DDE = 0x4;
 
 /// Increase memory usage in an attempt to increase performance.
-@Deprecated('Use COINIT.COINIT_SPEED_OVER_MEMORY instead')
 const COINIT_SPEED_OVER_MEMORY = 0x8;
 
 // -----------------------------------------------------------------------------
@@ -176,20 +154,17 @@ const COINIT_SPEED_OVER_MEMORY = 0x8;
 /// Disables all access to the committed region of pages. An attempt to read
 /// from, write to, or execute the committed region results in an access
 /// violation.
-@Deprecated('Use PAGE_PROTECTION_FLAGS.PAGE_NOACCESS instead')
 const PAGE_NOACCESS = 0x01;
 
 /// Enables read-only access to the committed region of pages. An attempt to
 /// write to the committed region results in an access violation. If Data
 /// Execution Prevention is enabled, an attempt to execute code in the committed
 /// region results in an access violation.
-@Deprecated('Use PAGE_PROTECTION_FLAGS.PAGE_READONLY instead')
 const PAGE_READONLY = 0x02;
 
 /// Enables read-only or read/write access to the committed region of pages. If
 /// Data Execution Prevention is enabled, attempting to execute code in the
 /// committed region results in an access violation.
-@Deprecated('Use PAGE_PROTECTION_FLAGS.PAGE_READWRITE instead')
 const PAGE_READWRITE = 0x04;
 
 /// Enables read-only or copy-on-write access to a mapped view of a file mapping
@@ -198,22 +173,18 @@ const PAGE_READWRITE = 0x04;
 /// marked as PAGE_READWRITE, and the change is written to the new page. If Data
 /// Execution Prevention is enabled, attempting to execute code in the committed
 /// region results in an access violation.
-@Deprecated('Use PAGE_PROTECTION_FLAGS.PAGE_WRITECOPY instead')
 const PAGE_WRITECOPY = 0x08;
 
 /// Enables execute access to the committed region of pages. An attempt to write
 /// to the committed region results in an access violation.
-@Deprecated('Use PAGE_PROTECTION_FLAGS.PAGE_EXECUTE instead')
 const PAGE_EXECUTE = 0x10;
 
 /// Enables execute or read-only access to the committed region of pages. An
 /// attempt to write to the committed region results in an access violation.
-@Deprecated('Use PAGE_PROTECTION_FLAGS.PAGE_EXECUTE_READ instead')
 const PAGE_EXECUTE_READ = 0x20;
 
 /// Enables execute, read-only, or read/write access to the committed region of
 /// pages.
-@Deprecated('Use PAGE_PROTECTION_FLAGS.PAGE_EXECUTE_READWRITE instead')
 const PAGE_EXECUTE_READWRITE = 0x40;
 
 /// Enables execute, read-only, or copy-on-write access to a mapped view of a
@@ -221,28 +192,23 @@ const PAGE_EXECUTE_READWRITE = 0x40;
 /// results in a private copy of the page being made for the process. The
 /// private page is marked as PAGE_EXECUTE_READWRITE, and the change is written
 /// to the new page.
-@Deprecated('Use PAGE_PROTECTION_FLAGS.PAGE_EXECUTE_WRITECOPY instead')
 const PAGE_EXECUTE_WRITECOPY = 0x80;
 
 /// Pages in the region become guard pages. Any attempt to access a guard page
 /// causes the system to raise a STATUS_GUARD_PAGE_VIOLATION exception and turn
 /// off the guard page status. Guard pages thus act as a one-time access alarm.
-@Deprecated('Use PAGE_PROTECTION_FLAGS.PAGE_GUARD instead')
 const PAGE_GUARD = 0x100;
 
 /// Sets all pages to be non-cachable. Applications should not use this
 /// attribute except when explicitly required for a device. Using the
 /// interlocked functions with memory that is mapped with SEC_NOCACHE can result
 /// in an EXCEPTION_ILLEGAL_INSTRUCTION exception.
-@Deprecated('Use PAGE_PROTECTION_FLAGS.PAGE_NOCACHE instead')
 const PAGE_NOCACHE = 0x200;
 
 /// Sets all pages to be write-combined.
-@Deprecated('Use PAGE_PROTECTION_FLAGS.PAGE_WRITECOMBINE instead')
 const PAGE_WRITECOMBINE = 0x400;
 
 /// The page contains a thread control structure (TCS).
-@Deprecated('Use PAGE_PROTECTION_FLAGS.PAGE_ENCLAVE_THREAD_CONTROL instead')
 const PAGE_ENCLAVE_THREAD_CONTROL = 0x80000000;
 
 /// Pages in the region will not have their CFG information updated while the
@@ -253,7 +219,6 @@ const PAGE_ENCLAVE_THREAD_CONTROL = 0x80000000;
 /// PAGE_EXECUTE, PAGE_EXECUTE_READ, PAGE_EXECUTE_READWRITE and
 /// PAGE_EXECUTE_WRITECOPY. The default behavior for VirtualProtect protection
 /// change to executable is to mark all locations as valid call targets for CFG.
-@Deprecated('Use PAGE_PROTECTION_FLAGS.PAGE_TARGETS_NO_UPDATE instead')
 const PAGE_TARGETS_NO_UPDATE = 0x40000000;
 
 /// Sets all locations in the pages as invalid targets for CFG. Used along with
@@ -262,17 +227,14 @@ const PAGE_TARGETS_NO_UPDATE = 0x40000000;
 /// locations in those pages will fail CFG checks and the process will be
 /// terminated. The default behavior for executable pages allocated is to be
 /// marked valid call targets for CFG.
-@Deprecated('Use PAGE_PROTECTION_FLAGS.PAGE_TARGETS_INVALID instead')
 const PAGE_TARGETS_INVALID = 0x40000000;
 
 /// The page contents that you supply are excluded from measurement with the
 /// EEXTEND instruction of the Intel SGX programming model.
-@Deprecated('Use PAGE_PROTECTION_FLAGS.PAGE_ENCLAVE_UNVALIDATED instead')
 const PAGE_ENCLAVE_UNVALIDATED = 0x20000000;
 
 /// Indicates that the page will be protected to prevent further use in an
 /// enclave.
-@Deprecated('Use PAGE_PROTECTION_FLAGS.PAGE_ENCLAVE_DECOMMIT instead')
 const PAGE_ENCLAVE_DECOMMIT = 0x10000000;
 
 // -----------------------------------------------------------------------------
@@ -281,21 +243,17 @@ const PAGE_ENCLAVE_DECOMMIT = 0x10000000;
 
 /// The member is invoked as a method. If a property has the same name, both
 /// this and the DISPATCH_PROPERTYGET flag can be set.
-@Deprecated('Use DISPATCH_FLAGS.DISPATCH_METHOD instead')
 const DISPATCH_METHOD = 0x1;
 
 /// The member is retrieved as a property or data member.
-@Deprecated('Use DISPATCH_FLAGS.DISPATCH_PROPERTYGET instead')
 const DISPATCH_PROPERTYGET = 0x2;
 
 /// The member is changed as a property or data member.
-@Deprecated('Use DISPATCH_FLAGS.DISPATCH_PROPERTYPUT instead')
 const DISPATCH_PROPERTYPUT = 0x4;
 
 /// The member is changed by a reference assignment, rather than a value
 /// assignment. This flag is valid only when the property accepts a reference to
 /// an object.
-@Deprecated('Use DISPATCH_FLAGS.DISPATCH_PROPERTYPUTREF instead')
 const DISPATCH_PROPERTYPUTREF = 0x8;
 
 // -----------------------------------------------------------------------------
@@ -303,326 +261,248 @@ const DISPATCH_PROPERTYPUTREF = 0x8;
 // -----------------------------------------------------------------------------
 
 /// The operation completed successfully.
-@Deprecated('Use WIN32_ERROR.ERROR_SUCCESS instead')
 const ERROR_SUCCESS = 0;
 
 /// The operation completed successfully.
-@Deprecated('Use WIN32_ERROR.NO_ERROR instead')
 const NO_ERROR = 0;
 
 /// The operation completed successfully.
 const SEC_E_OK = 0;
 
 /// Incorrect function.
-@Deprecated('Use WIN32_ERROR.ERROR_INVALID_FUNCTION instead')
 const ERROR_INVALID_FUNCTION = 1;
 
 /// The system cannot find the file specified.
-@Deprecated('Use WIN32_ERROR.ERROR_FILE_NOT_FOUND instead')
 const ERROR_FILE_NOT_FOUND = 2;
 
 /// The system cannot find the path specified.
-@Deprecated('Use WIN32_ERROR.ERROR_PATH_NOT_FOUND instead')
 const ERROR_PATH_NOT_FOUND = 3;
 
 /// The system cannot open the file.
-@Deprecated('Use WIN32_ERROR.ERROR_TOO_MANY_OPEN_FILES instead')
 const ERROR_TOO_MANY_OPEN_FILES = 4;
 
 /// Access is denied.
-@Deprecated('Use WIN32_ERROR.ERROR_ACCESS_DENIED instead')
 const ERROR_ACCESS_DENIED = 5;
 
 /// The handle is invalid.
-@Deprecated('Use WIN32_ERROR.ERROR_INVALID_HANDLE instead')
 const ERROR_INVALID_HANDLE = 6;
 
 /// The storage control blocks were destroyed.
-@Deprecated('Use WIN32_ERROR.ERROR_ARENA_TRASHED instead')
 const ERROR_ARENA_TRASHED = 7;
 
 /// Not enough memory resources are available to process this command.
-@Deprecated('Use WIN32_ERROR.ERROR_NOT_ENOUGH_MEMORY instead')
 const ERROR_NOT_ENOUGH_MEMORY = 8;
 
 /// The storage control block address is invalid.
-@Deprecated('Use WIN32_ERROR.ERROR_INVALID_BLOCK instead')
 const ERROR_INVALID_BLOCK = 9;
 
 /// The environment is incorrect.
-@Deprecated('Use WIN32_ERROR.ERROR_BAD_ENVIRONMENT instead')
 const ERROR_BAD_ENVIRONMENT = 10;
 
 /// An attempt was made to load a program with an incorrect format.
-@Deprecated('Use WIN32_ERROR.ERROR_BAD_FORMAT instead')
 const ERROR_BAD_FORMAT = 11;
 
 /// The access code is invalid.
-@Deprecated('Use WIN32_ERROR.ERROR_INVALID_ACCESS instead')
 const ERROR_INVALID_ACCESS = 12;
 
 /// The data is invalid.
-@Deprecated('Use WIN32_ERROR.ERROR_INVALID_DATA instead')
 const ERROR_INVALID_DATA = 13;
 
 /// Not enough storage is available to complete this operation.
-@Deprecated('Use WIN32_ERROR.ERROR_OUTOFMEMORY instead')
 const ERROR_OUTOFMEMORY = 14;
 
 /// The system cannot find the drive specified.
-@Deprecated('Use WIN32_ERROR.ERROR_INVALID_DRIVE instead')
 const ERROR_INVALID_DRIVE = 15;
 
 /// The directory cannot be removed.
-@Deprecated('Use WIN32_ERROR.ERROR_CURRENT_DIRECTORY instead')
 const ERROR_CURRENT_DIRECTORY = 16;
 
 /// The system cannot move the file to a different disk drive.
-@Deprecated('Use WIN32_ERROR.ERROR_NOT_SAME_DEVICE instead')
 const ERROR_NOT_SAME_DEVICE = 17;
 
 /// There are no more files.
-@Deprecated('Use WIN32_ERROR.ERROR_NO_MORE_FILES instead')
 const ERROR_NO_MORE_FILES = 18;
 
 /// The media is write protected.
-@Deprecated('Use WIN32_ERROR.ERROR_WRITE_PROTECT instead')
 const ERROR_WRITE_PROTECT = 19;
 
 /// The system cannot find the device specified.
-@Deprecated('Use WIN32_ERROR.ERROR_BAD_UNIT instead')
 const ERROR_BAD_UNIT = 20;
 
 /// The device is not ready.
-@Deprecated('Use WIN32_ERROR.ERROR_NOT_READY instead')
 const ERROR_NOT_READY = 21;
 
 /// The device does not recognize the command.
-@Deprecated('Use WIN32_ERROR.ERROR_BAD_COMMAND instead')
 const ERROR_BAD_COMMAND = 22;
 
 /// Data error (cyclic redundancy check).
-@Deprecated('Use WIN32_ERROR.ERROR_CRC instead')
 const ERROR_CRC = 23;
 
 /// The program issued a command but the command length is incorrect.
-@Deprecated('Use WIN32_ERROR.ERROR_BAD_LENGTH instead')
 const ERROR_BAD_LENGTH = 24;
 
 /// The drive cannot locate a specific area or track on the disk.
-@Deprecated('Use WIN32_ERROR.ERROR_SEEK instead')
 const ERROR_SEEK = 25;
 
 /// The specified disk or diskette cannot be accessed.
-@Deprecated('Use WIN32_ERROR.ERROR_NOT_DOS_DISK instead')
 const ERROR_NOT_DOS_DISK = 26;
 
 /// The drive cannot find the sector requested.
-@Deprecated('Use WIN32_ERROR.ERROR_SECTOR_NOT_FOUND instead')
 const ERROR_SECTOR_NOT_FOUND = 27;
 
 /// The printer is out of paper.
-@Deprecated('Use WIN32_ERROR.ERROR_OUT_OF_PAPER instead')
 const ERROR_OUT_OF_PAPER = 28;
 
 /// The system cannot write to the specified device.
-@Deprecated('Use WIN32_ERROR.ERROR_WRITE_FAULT instead')
 const ERROR_WRITE_FAULT = 29;
 
 /// The system cannot read from the specified device.
-@Deprecated('Use WIN32_ERROR.ERROR_READ_FAULT instead')
 const ERROR_READ_FAULT = 30;
 
 /// A device attached to the system is not functioning.
-@Deprecated('Use WIN32_ERROR.ERROR_GEN_FAILURE instead')
 const ERROR_GEN_FAILURE = 31;
 
 /// The process cannot access the file because it is being used by another
 /// process.
-@Deprecated('Use WIN32_ERROR.ERROR_SHARING_VIOLATION instead')
 const ERROR_SHARING_VIOLATION = 32;
 
 /// The process cannot access the file because another process has locked a
 /// portion of the file.
-@Deprecated('Use WIN32_ERROR.ERROR_LOCK_VIOLATION instead')
 const ERROR_LOCK_VIOLATION = 33;
 
 /// The wrong diskette is in the drive.
-@Deprecated('Use WIN32_ERROR.ERROR_WRONG_DISK instead')
 const ERROR_WRONG_DISK = 34;
 
 /// Too many files opened for sharing.
-@Deprecated('Use WIN32_ERROR.ERROR_SHARING_BUFFER_EXCEEDED instead')
 const ERROR_SHARING_BUFFER_EXCEEDED = 36;
 
 /// Reached the end of the file.
-@Deprecated('Use WIN32_ERROR.ERROR_HANDLE_EOF instead')
 const ERROR_HANDLE_EOF = 38;
 
 /// The disk is full.
-@Deprecated('Use WIN32_ERROR.ERROR_HANDLE_DISK_FULL instead')
 const ERROR_HANDLE_DISK_FULL = 39;
 
 /// The request is not supported.
-@Deprecated('Use WIN32_ERROR.ERROR_NOT_SUPPORTED instead')
 const ERROR_NOT_SUPPORTED = 50;
 
 /// Windows cannot find the network path. Verify that the network path is
 /// correct and the destination computer is not busy or turned off. If Windows
 /// still cannot find the network path, contact your network administrator.
-@Deprecated('Use WIN32_ERROR.ERROR_REM_NOT_LIST instead')
 const ERROR_REM_NOT_LIST = 51;
 
 /// You were not connected because a duplicate name exists on the network. If
 /// joining a domain, go to System in Control Panel to change the computer name
 /// and try again. If joining a workgroup, choose another workgroup name.
-@Deprecated('Use WIN32_ERROR.ERROR_DUP_NAME instead')
 const ERROR_DUP_NAME = 52;
 
 /// The network path was not found.
-@Deprecated('Use WIN32_ERROR.ERROR_BAD_NETPATH instead')
 const ERROR_BAD_NETPATH = 53;
 
 /// The network is busy.
-@Deprecated('Use WIN32_ERROR.ERROR_NETWORK_BUSY instead')
 const ERROR_NETWORK_BUSY = 54;
 
 /// The specified network resource or device is no longer available.
-@Deprecated('Use WIN32_ERROR.ERROR_DEV_NOT_EXIST instead')
 const ERROR_DEV_NOT_EXIST = 55;
 
 /// The network BIOS command limit has been reached.
-@Deprecated('Use WIN32_ERROR.ERROR_TOO_MANY_CMDS instead')
 const ERROR_TOO_MANY_CMDS = 56;
 
 /// A network adapter hardware error occurred.
-@Deprecated('Use WIN32_ERROR.ERROR_ADAP_HDW_ERR instead')
 const ERROR_ADAP_HDW_ERR = 57;
 
 /// The specified server cannot perform the requested operation.
-@Deprecated('Use WIN32_ERROR.ERROR_BAD_NET_RESP instead')
 const ERROR_BAD_NET_RESP = 58;
 
 /// An unexpected network error occurred.
-@Deprecated('Use WIN32_ERROR.ERROR_UNEXP_NET_ERR instead')
 const ERROR_UNEXP_NET_ERR = 59;
 
 /// The remote adapter is not compatible.
-@Deprecated('Use WIN32_ERROR.ERROR_BAD_REM_ADAP instead')
 const ERROR_BAD_REM_ADAP = 60;
 
 /// The printer queue is full.
-@Deprecated('Use WIN32_ERROR.ERROR_PRINTQ_FULL instead')
 const ERROR_PRINTQ_FULL = 61;
 
 /// Space to store the file waiting to be printed is not available on the
 /// server.
-@Deprecated('Use WIN32_ERROR.ERROR_NO_SPOOL_SPACE instead')
 const ERROR_NO_SPOOL_SPACE = 62;
 
 /// Your file waiting to be printed was deleted.
-@Deprecated('Use WIN32_ERROR.ERROR_PRINT_CANCELLED instead')
 const ERROR_PRINT_CANCELLED = 63;
 
 /// The specified network name is no longer available.
-@Deprecated('Use WIN32_ERROR.ERROR_NETNAME_DELETED instead')
 const ERROR_NETNAME_DELETED = 64;
 
 /// Network access is denied.
-@Deprecated('Use WIN32_ERROR.ERROR_NETWORK_ACCESS_DENIED instead')
 const ERROR_NETWORK_ACCESS_DENIED = 65;
 
 /// The network resource type is not correct.
-@Deprecated('Use WIN32_ERROR.ERROR_BAD_DEV_TYPE instead')
 const ERROR_BAD_DEV_TYPE = 66;
 
 /// The network name cannot be found.
-@Deprecated('Use WIN32_ERROR.ERROR_BAD_NET_NAME instead')
 const ERROR_BAD_NET_NAME = 67;
 
 /// The name limit for the local computer network adapter card was exceeded.
-@Deprecated('Use WIN32_ERROR.ERROR_TOO_MANY_NAMES instead')
 const ERROR_TOO_MANY_NAMES = 68;
 
 /// The network BIOS session limit was exceeded.
-@Deprecated('Use WIN32_ERROR.ERROR_TOO_MANY_SESS instead')
 const ERROR_TOO_MANY_SESS = 69;
 
 /// The remote server has been paused or is in the process of being started.
-@Deprecated('Use WIN32_ERROR.ERROR_SHARING_PAUSED instead')
 const ERROR_SHARING_PAUSED = 70;
 
 /// No more connections can be made to this remote computer at this time because
 /// there are already as many connections as the computer can accept.
-@Deprecated('Use WIN32_ERROR.ERROR_REQ_NOT_ACCEP instead')
 const ERROR_REQ_NOT_ACCEP = 71;
 
 /// The specified printer or disk device has been paused.
-@Deprecated('Use WIN32_ERROR.ERROR_REDIR_PAUSED instead')
 const ERROR_REDIR_PAUSED = 72;
 
 /// The file exists.
-@Deprecated('Use WIN32_ERROR.ERROR_FILE_EXISTS instead')
 const ERROR_FILE_EXISTS = 80;
 
 /// The directory or file cannot be created.
-@Deprecated('Use WIN32_ERROR.ERROR_CANNOT_MAKE instead')
 const ERROR_CANNOT_MAKE = 82;
 
 /// Fail on INT 24.
-@Deprecated('Use WIN32_ERROR.ERROR_FAIL_I24 instead')
 const ERROR_FAIL_I24 = 83;
 
 /// Storage to process this request is not available.
-@Deprecated('Use WIN32_ERROR.ERROR_OUT_OF_STRUCTURES instead')
 const ERROR_OUT_OF_STRUCTURES = 84;
 
 /// The local device name is already in use.
-@Deprecated('Use WIN32_ERROR.ERROR_ALREADY_ASSIGNED instead')
 const ERROR_ALREADY_ASSIGNED = 85;
 
 /// The specified network password is not correct.
-@Deprecated('Use WIN32_ERROR.ERROR_INVALID_PASSWORD instead')
 const ERROR_INVALID_PASSWORD = 86;
 
 /// The parameter is incorrect.
-@Deprecated('Use WIN32_ERROR.ERROR_INVALID_PARAMETER instead')
 const ERROR_INVALID_PARAMETER = 87;
 
 /// A write fault occurred on the network.
-@Deprecated('Use WIN32_ERROR.ERROR_NET_WRITE_FAULT instead')
 const ERROR_NET_WRITE_FAULT = 88;
 
 /// The system cannot start another process at this time.
-@Deprecated('Use WIN32_ERROR.ERROR_NO_PROC_SLOTS instead')
 const ERROR_NO_PROC_SLOTS = 89;
 
 /// Cannot create another system semaphore.
-@Deprecated('Use WIN32_ERROR.ERROR_TOO_MANY_SEMAPHORES instead')
 const ERROR_TOO_MANY_SEMAPHORES = 100;
 
 /// The exclusive semaphore is owned by another process.
-@Deprecated('Use WIN32_ERROR.ERROR_EXCL_SEM_ALREADY_OWNED instead')
 const ERROR_EXCL_SEM_ALREADY_OWNED = 101;
 
 /// The semaphore is set and cannot be closed.
-@Deprecated('Use WIN32_ERROR.ERROR_SEM_IS_SET instead')
 const ERROR_SEM_IS_SET = 102;
 
 /// The semaphore cannot be set again.
-@Deprecated('Use WIN32_ERROR.ERROR_TOO_MANY_SEM_REQUESTS instead')
 const ERROR_TOO_MANY_SEM_REQUESTS = 103;
 
 /// Cannot request exclusive semaphores at interrupt time.
-@Deprecated('Use WIN32_ERROR.ERROR_INVALID_AT_INTERRUPT_TIME instead')
 const ERROR_INVALID_AT_INTERRUPT_TIME = 104;
 
 /// The service has not been started.
-@Deprecated('Use WIN32_ERROR.ERROR_SERVICE_NOT_ACTIVE instead')
 const ERROR_SERVICE_NOT_ACTIVE = 1062;
 
 /// The device is not connected.
-@Deprecated('Use WIN32_ERROR.ERROR_DEVICE_NOT_CONNECTED instead')
 const ERROR_DEVICE_NOT_CONNECTED = 1167;
 
 // -----------------------------------------------------------------------------
@@ -658,47 +538,37 @@ const RO_E_ERROR_STRING_NOT_FOUND = 0x80000016;
 // -----------------------------------------------------------------------------
 
 /// The right to delete the object.
-@Deprecated('Use FILE_ACCESS_RIGHTS.DELETE instead')
 const DELETE = 0x00010000;
 
 /// The right to read the information in the object's security descriptor, not
 /// including the information in the system access control list (SACL).
-@Deprecated('Use FILE_ACCESS_RIGHTS.READ_CONTROL instead')
 const READ_CONTROL = 0x00020000;
 
 /// The right to modify the discretionary access control list (DACL) in the
 /// object's security descriptor.
-@Deprecated('Use FILE_ACCESS_RIGHTS.WRITE_DAC instead')
 const WRITE_DAC = 0x00040000;
 
 /// The right to change the owner in the object's security descriptor.
-@Deprecated('Use FILE_ACCESS_RIGHTS.WRITE_OWNER instead')
 const WRITE_OWNER = 0x00080000;
 
 /// The right to use the object for synchronization. This enables a thread to
 /// wait until the object is in the signaled state.
-@Deprecated('Use FILE_ACCESS_RIGHTS.SYNCHRONIZE instead')
 const SYNCHRONIZE = 0x00100000;
 
 /// Combines DELETE, READ_CONTROL, WRITE_DAC, and WRITE_OWNER access.
-@Deprecated('Use FILE_ACCESS_RIGHTS.STANDARD_RIGHTS_REQUIRED instead')
 const STANDARD_RIGHTS_REQUIRED = 0x000F0000;
 
 /// Currently defined to equal READ_CONTROL.
-@Deprecated('Use FILE_ACCESS_RIGHTS.STANDARD_RIGHTS_READ instead')
 const STANDARD_RIGHTS_READ = READ_CONTROL;
 
 /// Currently defined to equal READ_CONTROL.
-@Deprecated('Use FILE_ACCESS_RIGHTS.STANDARD_RIGHTS_WRITE instead')
 const STANDARD_RIGHTS_WRITE = READ_CONTROL;
 
 /// Currently defined to equal READ_CONTROL.
-@Deprecated('Use FILE_ACCESS_RIGHTS.STANDARD_RIGHTS_EXECUTE instead')
 const STANDARD_RIGHTS_EXECUTE = READ_CONTROL;
 
 /// Combines DELETE, READ_CONTROL, WRITE_DAC, WRITE_OWNER, and SYNCHRONIZE
 /// access.
-@Deprecated('Use FILE_ACCESS_RIGHTS.STANDARD_RIGHTS_ALL instead')
 const STANDARD_RIGHTS_ALL = 0x001F0000;
 
 /// Specifies access to the system security portion of the security descriptor.
@@ -709,40 +579,31 @@ const ACCESS_SYSTEM_SECURITY = 0x01000000;
 const MAXIMUM_ALLOWED = 0x02000000;
 
 /// Specifies access control suitable for reading the object.
-@Deprecated('Use GENERIC_ACCESS_RIGHTS.GENERIC_READ instead')
 const GENERIC_READ = 0x80000000;
 
 /// Specifies access control suitable for updating attributes on the object.
-@Deprecated('Use GENERIC_ACCESS_RIGHTS.GENERIC_WRITE instead')
 const GENERIC_WRITE = 0x40000000;
 
 /// Specifies access control suitable for executing an action on the object.
-@Deprecated('Use GENERIC_ACCESS_RIGHTS.GENERIC_EXECUTE instead')
 const GENERIC_EXECUTE = 0x20000000;
 
 /// Specifies all defined access control on the object.
-@Deprecated('Use GENERIC_ACCESS_RIGHTS.GENERIC_ALL instead')
 const GENERIC_ALL = 0x10000000;
 
 /// Creates a new file, only if it does not already exist.
-@Deprecated('Use FILE_CREATION_DISPOSITION.CREATE_NEW instead')
 const CREATE_NEW = 1;
 
 /// Creates a new file, always.
-@Deprecated('Use FILE_CREATION_DISPOSITION.CREATE_ALWAYS instead')
 const CREATE_ALWAYS = 2;
 
 /// Opens a file or device, only if it exists.
-@Deprecated('Use FILE_CREATION_DISPOSITION.OPEN_EXISTING instead')
 const OPEN_EXISTING = 3;
 
 /// Opens a file, always.
-@Deprecated('Use FILE_CREATION_DISPOSITION.OPEN_ALWAYS instead')
 const OPEN_ALWAYS = 4;
 
 /// Opens a file and truncates it so that its size is zero bytes, only if it
 /// exists.
-@Deprecated('Use FILE_CREATION_DISPOSITION.TRUNCATE_EXISTING instead')
 const TRUNCATE_EXISTING = 5;
 
 // -----------------------------------------------------------------------------
@@ -752,45 +613,35 @@ const TRUNCATE_EXISTING = 5;
 /// Required to attach a primary token to a process. The
 /// SE_ASSIGNPRIMARYTOKEN_NAME privilege is also required to accomplish this
 /// task.
-@Deprecated('Use TOKEN_ACCESS_MASK.TOKEN_ASSIGN_PRIMARY instead')
 const TOKEN_ASSIGN_PRIMARY = 0x0001;
 
 /// Required to duplicate an access token.
-@Deprecated('Use TOKEN_ACCESS_MASK.TOKEN_DUPLICATE instead')
 const TOKEN_DUPLICATE = 0x0002;
 
 /// Required to attach an impersonation access token to a process.
-@Deprecated('Use TOKEN_ACCESS_MASK.TOKEN_IMPERSONATE instead')
 const TOKEN_IMPERSONATE = 0x0004;
 
 /// Required to query an access token.
-@Deprecated('Use TOKEN_ACCESS_MASK.TOKEN_QUERY instead')
 const TOKEN_QUERY = 0x0008;
 
 /// Required to query the source of an access token.
-@Deprecated('Use TOKEN_ACCESS_MASK.TOKEN_QUERY_SOURCE instead')
 const TOKEN_QUERY_SOURCE = 0x0010;
 
 /// Required to enable or disable the privileges in an access token.
-@Deprecated('Use TOKEN_ACCESS_MASK.TOKEN_ADJUST_PRIVILEGES instead')
 const TOKEN_ADJUST_PRIVILEGES = 0x0020;
 
 /// Required to adjust the attributes of the groups in an access token.
-@Deprecated('Use TOKEN_ACCESS_MASK.TOKEN_ADJUST_GROUPS instead')
 const TOKEN_ADJUST_GROUPS = 0x0040;
 
 /// Required to change the default owner, primary group, or DACL of an access
 /// token.
-@Deprecated('Use TOKEN_ACCESS_MASK.TOKEN_ADJUST_DEFAULT instead')
 const TOKEN_ADJUST_DEFAULT = 0x0080;
 
 /// Required to adjust the session ID of an access token. The SE_TCB_NAME
 /// privilege is required.
-@Deprecated('Use TOKEN_ACCESS_MASK.TOKEN_ADJUST_SESSIONID instead')
 const TOKEN_ADJUST_SESSIONID = 0x0100;
 
 /// Combines all possible access rights for a token.
-@Deprecated('Use TOKEN_ACCESS_MASK.TOKEN_ALL_ACCESS instead')
 const TOKEN_ALL_ACCESS =
     STANDARD_RIGHTS_REQUIRED |
     TOKEN_ASSIGN_PRIMARY |
@@ -804,12 +655,10 @@ const TOKEN_ALL_ACCESS =
     TOKEN_ADJUST_SESSIONID;
 
 /// Combines STANDARD_RIGHTS_READ and TOKEN_QUERY.
-@Deprecated('Use TOKEN_ACCESS_MASK.TOKEN_READ instead')
 const TOKEN_READ = STANDARD_RIGHTS_READ | TOKEN_QUERY;
 
 /// Combines STANDARD_RIGHTS_WRITE, TOKEN_ADJUST_PRIVILEGES,
 /// TOKEN_ADJUST_GROUPS, and TOKEN_ADJUST_DEFAULT.
-@Deprecated('Use TOKEN_ACCESS_MASK.TOKEN_WRITE instead')
 const TOKEN_WRITE =
     STANDARD_RIGHTS_WRITE |
     TOKEN_ADJUST_PRIVILEGES |
@@ -817,7 +666,6 @@ const TOKEN_WRITE =
     TOKEN_ADJUST_DEFAULT;
 
 /// Same as STANDARD_RIGHTS_EXECUTE.
-@Deprecated('Use TOKEN_ACCESS_MASK.TOKEN_EXECUTE instead')
 const TOKEN_EXECUTE = STANDARD_RIGHTS_EXECUTE;
 
 // -----------------------------------------------------------------------------
@@ -825,26 +673,21 @@ const TOKEN_EXECUTE = STANDARD_RIGHTS_EXECUTE;
 // -----------------------------------------------------------------------------
 
 /// Serialized access will not be used for this allocation.
-@Deprecated('Use HEAP_FLAGS.HEAP_NO_SERIALIZE instead')
 const HEAP_NO_SERIALIZE = 0x00000001;
 
 /// The system will raise an exception to indicate a function failure, such as
 /// an out-of-memory condition, instead of returning NULL.
-@Deprecated('Use HEAP_FLAGS.HEAP_GENERATE_EXCEPTIONS instead')
 const HEAP_GENERATE_EXCEPTIONS = 0x00000004;
 
 /// The allocated memory will be initialized to zero. Otherwise, the memory is
 /// not initialized to zero.
-@Deprecated('Use HEAP_FLAGS.HEAP_ZERO_MEMORY instead')
 const HEAP_ZERO_MEMORY = 0x00000008;
 
 /// There can be no movement when reallocating a memory block.
-@Deprecated('Use HEAP_FLAGS.HEAP_REALLOC_IN_PLACE_ONLY instead')
 const HEAP_REALLOC_IN_PLACE_ONLY = 0x00000010;
 
 /// All memory blocks that are allocated from this heap allow code execution, if
 /// the hardware enforces data execution prevention.
-@Deprecated('Use HEAP_FLAGS.HEAP_CREATE_ENABLE_EXECUTE instead')
 const HEAP_CREATE_ENABLE_EXECUTE = 0x00040000;
 
 // -----------------------------------------------------------------------------
@@ -853,27 +696,22 @@ const HEAP_CREATE_ENABLE_EXECUTE = 0x00040000;
 
 /// Forces the system to be in the working state by resetting the system idle
 /// timer.
-@Deprecated('Use EXECUTION_STATE.ES_SYSTEM_REQUIRED instead')
 const ES_SYSTEM_REQUIRED = 0x00000001;
 
 /// Forces the display to be on by resetting the display idle timer.
-@Deprecated('Use EXECUTION_STATE.ES_DISPLAY_REQUIRED instead')
 const ES_DISPLAY_REQUIRED = 0x00000002;
 
 /// This value is not supported. If ES_USER_PRESENT is combined with other
 /// esFlags values, the call will fail and none of the specified states will be
 /// set.
-@Deprecated('Use EXECUTION_STATE.ES_USER_PRESENT instead')
 const ES_USER_PRESENT = 0x00000004;
 
 /// Enables away mode. This value must be specified with ES_CONTINUOUS.
-@Deprecated('Use EXECUTION_STATE.ES_AWAYMODE_REQUIRED instead')
 const ES_AWAYMODE_REQUIRED = 0x00000040;
 
 /// Informs the system that the state being set should remain in effect until
 /// the next call that uses ES_CONTINUOUS and one of the other state flags is
 /// cleared.
-@Deprecated('Use EXECUTION_STATE.ES_CONTINUOUS instead')
 const ES_CONTINUOUS = 0x80000000;
 
 /// The thread is still active.
@@ -916,7 +754,6 @@ const VER_OR = 7;
 /// client must read pipe settings by calling the GetNamedPipeInfo or
 /// GetNamedPipeHandleState functions, the client must specify GENERIC_WRITE and
 /// FILE_READ_ATTRIBUTES access when connecting to the pipe.
-@Deprecated('Use FILE_FLAGS_AND_ATTRIBUTES.PIPE_ACCESS_INBOUND instead')
 const PIPE_ACCESS_INBOUND = 0x00000001;
 
 /// The flow of data in the pipe goes from server to client only. This mode
@@ -925,7 +762,6 @@ const PIPE_ACCESS_INBOUND = 0x00000001;
 /// client must change pipe settings by calling the SetNamedPipeHandleState
 /// function, the client must specify GENERIC_READ and FILE_WRITE_ATTRIBUTES
 /// access when connecting to the pipe.
-@Deprecated('Use FILE_FLAGS_AND_ATTRIBUTES.PIPE_ACCESS_OUTBOUND instead')
 const PIPE_ACCESS_OUTBOUND = 0x00000002;
 
 /// The pipe is bi-directional; both server and client processes can read from
@@ -933,18 +769,15 @@ const PIPE_ACCESS_OUTBOUND = 0x00000002;
 /// GENERIC_READ and GENERIC_WRITE access to the pipe. The client can specify
 /// GENERIC_READ or GENERIC_WRITE, or both, when it connects to the pipe using
 /// the CreateFile function.
-@Deprecated('Use FILE_FLAGS_AND_ATTRIBUTES.PIPE_ACCESS_DUPLEX instead')
 const PIPE_ACCESS_DUPLEX = 0x00000003;
 
 /// The handle refers to the client end of a named pipe instance. This is the
 /// default.
-@Deprecated('Use NAMED_PIPE_MODE.PIPE_CLIENT_END instead')
 const PIPE_CLIENT_END = 0x00000000;
 
 /// The handle refers to the server end of a named pipe instance. If this value
 /// is not specified, the handle refers to the client end of a named pipe
 /// instance.
-@Deprecated('Use NAMED_PIPE_MODE.PIPE_SERVER_END instead')
 const PIPE_SERVER_END = 0x00000001;
 
 /// Blocking mode is enabled. When the pipe handle is specified in the ReadFile,
@@ -952,40 +785,32 @@ const PIPE_SERVER_END = 0x00000001;
 /// until there is data to read, all data is written, or a client is connected.
 /// Use of this mode can mean waiting indefinitely in some situations for a
 /// client process to perform an action.
-@Deprecated('Use NAMED_PIPE_MODE.PIPE_WAIT instead')
 const PIPE_WAIT = 0x00000000;
 
 /// Nonblocking mode is enabled. In this mode, ReadFile, WriteFile, and
 /// ConnectNamedPipe always return immediately.
-@Deprecated('Use NAMED_PIPE_MODE.PIPE_NOWAIT instead')
 const PIPE_NOWAIT = 0x00000001;
 
 /// Data is read from the pipe as a stream of bytes. This mode can be used with
 /// either PIPE_TYPE_MESSAGE or PIPE_TYPE_BYTE.
-@Deprecated('Use NAMED_PIPE_MODE.PIPE_READMODE_BYTE instead')
 const PIPE_READMODE_BYTE = 0x00000000;
 
 /// Data is read from the pipe as a stream of messages. This mode can be only
 /// used if PIPE_TYPE_MESSAGE is also specified.
-@Deprecated('Use NAMED_PIPE_MODE.PIPE_READMODE_MESSAGE instead')
 const PIPE_READMODE_MESSAGE = 0x00000002;
 
 /// The named pipe is a byte pipe. This is the default.
-@Deprecated('Use NAMED_PIPE_MODE.PIPE_TYPE_BYTE instead')
 const PIPE_TYPE_BYTE = 0x00000000;
 
 /// The named pipe is a message pipe. If this value is not specified, the pipe
 /// is a byte pipe.
-@Deprecated('Use NAMED_PIPE_MODE.PIPE_TYPE_MESSAGE instead')
 const PIPE_TYPE_MESSAGE = 0x00000004;
 
 /// Connections from remote clients can be accepted and checked against the
 /// security descriptor for the pipe.
-@Deprecated('Use NAMED_PIPE_MODE.PIPE_ACCEPT_REMOTE_CLIENTS instead')
 const PIPE_ACCEPT_REMOTE_CLIENTS = 0x00000000;
 
 /// Connections from remote clients are automatically rejected.
-@Deprecated('Use NAMED_PIPE_MODE.PIPE_REJECT_REMOTE_CLIENTS instead')
 const PIPE_REJECT_REMOTE_CLIENTS = 0x00000008;
 
 /// The number of pipe instances that can be created is limited only by the
@@ -998,7 +823,6 @@ const PIPE_UNLIMITED_INSTANCES = 255;
 
 /// Write operations will not go through any intermediate cache, they will go
 /// directly to disk.
-@Deprecated('Use FILE_FLAGS_AND_ATTRIBUTES.FILE_FLAG_WRITE_THROUGH instead')
 const FILE_FLAG_WRITE_THROUGH = 0x80000000;
 
 /// The file or device is being opened or created for asynchronous I/O. When
@@ -1008,40 +832,33 @@ const FILE_FLAG_WRITE_THROUGH = 0x80000000;
 /// operations. If this flag is not specified, then I/O operations are
 /// serialized, even if the calls to the read and write functions specify an
 /// OVERLAPPED structure.
-@Deprecated('Use FILE_FLAGS_AND_ATTRIBUTES.FILE_FLAG_OVERLAPPED instead')
 const FILE_FLAG_OVERLAPPED = 0x40000000;
 
 /// The file or device is being opened with no system caching for data reads and
 /// writes. This flag does not affect hard disk caching or memory mapped files
-@Deprecated('Use FILE_FLAGS_AND_ATTRIBUTES.FILE_FLAG_NO_BUFFERING instead')
 const FILE_FLAG_NO_BUFFERING = 0x20000000;
 
 /// Access is intended to be random. The system can use this as a hint to
 /// optimize file caching.
-@Deprecated('Use FILE_FLAGS_AND_ATTRIBUTES.FILE_FLAG_RANDOM_ACCESS instead')
 const FILE_FLAG_RANDOM_ACCESS = 0x10000000;
 
 /// Access is intended to be sequential from beginning to end. The system can
 /// use this as a hint to optimize file caching.
-@Deprecated('Use FILE_FLAGS_AND_ATTRIBUTES.FILE_FLAG_SEQUENTIAL_SCAN instead')
 const FILE_FLAG_SEQUENTIAL_SCAN = 0x08000000;
 
 /// The file is to be deleted immediately after all of its handles are closed,
 /// which includes the specified handle and any other open or duplicated
 /// handles.
-@Deprecated('Use FILE_FLAGS_AND_ATTRIBUTES.FILE_FLAG_DELETE_ON_CLOSE instead')
 const FILE_FLAG_DELETE_ON_CLOSE = 0x04000000;
 
 /// The file is being opened or created for a backup or restore operation. The
 /// system ensures that the calling process overrides file security checks when
 /// the process has SE_BACKUP_NAME and SE_RESTORE_NAME privileges.
-@Deprecated('Use FILE_FLAGS_AND_ATTRIBUTES.FILE_FLAG_BACKUP_SEMANTICS instead')
 const FILE_FLAG_BACKUP_SEMANTICS = 0x02000000;
 
 /// Access will occur according to POSIX rules. This includes allowing multiple
 /// files with names, differing only in case, for file systems that support that
 /// naming.
-@Deprecated('Use FILE_FLAGS_AND_ATTRIBUTES.FILE_FLAG_POSIX_SEMANTICS instead')
 const FILE_FLAG_POSIX_SEMANTICS = 0x01000000;
 
 /// The file or device is being opened with session awareness. If this flag is
@@ -1049,29 +866,21 @@ const FILE_FLAG_POSIX_SEMANTICS = 0x01000000;
 /// Redirection) cannot be opened by processes running in session 0. This flag
 /// has no effect for callers not in session 0. This flag is supported only on
 /// server editions of Windows.
-@Deprecated('Use FILE_FLAGS_AND_ATTRIBUTES.FILE_FLAG_SESSION_AWARE instead')
 const FILE_FLAG_SESSION_AWARE = 0x00800000;
 
 /// Normal reparse point processing will not occur; CreateFile will attempt to
 /// open the reparse point. When a file is opened, a file handle is returned,
 /// whether or not the filter that controls the reparse point is operational.
-@Deprecated(
-  'Use FILE_FLAGS_AND_ATTRIBUTES.FILE_FLAG_OPEN_REPARSE_POINT instead',
-)
 const FILE_FLAG_OPEN_REPARSE_POINT = 0x00200000;
 
 /// The file data is requested, but it should continue to be located in remote
 /// storage. It should not be transported back to local storage. This flag is
 /// for use by remote storage systems.
-@Deprecated('Use FILE_FLAGS_AND_ATTRIBUTES.FILE_FLAG_OPEN_NO_RECALL instead')
 const FILE_FLAG_OPEN_NO_RECALL = 0x00100000;
 
 /// If you attempt to create multiple instances of a pipe with this flag,
 /// creation of the first instance succeeds, but creation of the next instance
 /// fails with ERROR_ACCESS_DENIED.
-@Deprecated(
-  'Use FILE_FLAGS_AND_ATTRIBUTES.FILE_FLAG_FIRST_PIPE_INSTANCE instead',
-)
 const FILE_FLAG_FIRST_PIPE_INSTANCE = 0x00080000;
 
 // -----------------------------------------------------------------------------
@@ -1080,12 +889,10 @@ const FILE_FLAG_FIRST_PIPE_INSTANCE = 0x00080000;
 
 /// If this flag is set, a child process created with the bInheritHandles
 /// parameter of CreateProcess set to TRUE will inherit the object handle.
-@Deprecated('Use HANDLE_FLAGS.HANDLE_FLAG_INHERIT instead')
 const HANDLE_FLAG_INHERIT = 0x00000001;
 
 /// If this flag is set, calling the CloseHandle function will not close the
 /// object handle.
-@Deprecated('Use HANDLE_FLAGS.HANDLE_FLAG_PROTECT_FROM_CLOSE instead')
 const HANDLE_FLAG_PROTECT_FROM_CLOSE = 0x00000002;
 
 // -----------------------------------------------------------------------------
@@ -1093,35 +900,27 @@ const HANDLE_FLAG_PROTECT_FROM_CLOSE = 0x00000002;
 // -----------------------------------------------------------------------------
 
 /// No parity.
-@Deprecated('Use DCB_PARITY.NOPARITY instead')
 const NOPARITY = 0;
 
 /// Odd parity.
-@Deprecated('Use DCB_PARITY.ODDPARITY instead')
 const ODDPARITY = 1;
 
 /// Even parity.
-@Deprecated('Use DCB_PARITY.EVENPARITY instead')
 const EVENPARITY = 2;
 
 /// Mark parity.
-@Deprecated('Use DCB_PARITY.MARKPARITY instead')
 const MARKPARITY = 3;
 
 /// Space parity.
-@Deprecated('Use DCB_PARITY.SPACEPARITY instead')
 const SPACEPARITY = 4;
 
 /// 1 stop bit.
-@Deprecated('Use DCB_STOP_BITS.ONESTOPBIT instead')
 const ONESTOPBIT = 0;
 
 /// 1.5 stop bits.
-@Deprecated('Use DCB_STOP_BITS.ONE5STOPBITS instead')
 const ONE5STOPBITS = 1;
 
 /// 2 stop bits.
-@Deprecated('Use DCB_STOP_BITS.TWOSTOPBITS instead')
 const TWOSTOPBITS = 2;
 
 /// 110 bps.
@@ -1230,7 +1029,6 @@ const SCS_64BIT_BINARY = 6;
 /// through to the output buffer unchanged. This flag is useful for fetching a
 /// message for later formatting. If this flag is set, the Arguments parameter
 /// is ignored.
-@Deprecated('Use FORMAT_MESSAGE_OPTIONS.FORMAT_MESSAGE_IGNORE_INSERTS instead')
 const FORMAT_MESSAGE_IGNORE_INSERTS = 0x00000200;
 
 /// The lpSource parameter is a pointer to a null-terminated string that
@@ -1238,14 +1036,12 @@ const FORMAT_MESSAGE_IGNORE_INSERTS = 0x00000200;
 /// sequences, just as the message text in a message table resource may. This
 /// flag cannot be used with FORMAT_MESSAGE_FROM_HMODULE or
 /// FORMAT_MESSAGE_FROM_SYSTEM.
-@Deprecated('Use FORMAT_MESSAGE_OPTIONS.FORMAT_MESSAGE_FROM_STRING instead')
 const FORMAT_MESSAGE_FROM_STRING = 0x00000400;
 
 /// The lpSource parameter is a module handle containing the message-table
 /// resource(s) to search. If this lpSource handle is NULL, the current
 /// process's application image file will be searched. This flag cannot be used
 /// with FORMAT_MESSAGE_FROM_STRING.
-@Deprecated('Use FORMAT_MESSAGE_OPTIONS.FORMAT_MESSAGE_FROM_HMODULE instead')
 const FORMAT_MESSAGE_FROM_HMODULE = 0x00000800;
 
 /// The function should search the system message-table resource(s) for the
@@ -1253,12 +1049,10 @@ const FORMAT_MESSAGE_FROM_HMODULE = 0x00000800;
 /// FORMAT_MESSAGE_FROM_HMODULE, the function searches the system message table
 /// if the message is not found in the module specified by lpSource. This flag
 /// cannot be used with FORMAT_MESSAGE_FROM_STRING.
-@Deprecated('Use FORMAT_MESSAGE_OPTIONS.FORMAT_MESSAGE_FROM_SYSTEM instead')
 const FORMAT_MESSAGE_FROM_SYSTEM = 0x00001000;
 
 /// The Arguments parameter is not a va_list structure, but is a pointer to an
 /// array of values that represent the arguments.
-@Deprecated('Use FORMAT_MESSAGE_OPTIONS.FORMAT_MESSAGE_ARGUMENT_ARRAY instead')
 const FORMAT_MESSAGE_ARGUMENT_ARRAY = 0x00002000;
 
 /// The function ignores regular line breaks in the message definition text. The
@@ -1271,56 +1065,45 @@ const FORMAT_MESSAGE_MAX_WIDTH_MASK = 0x000000FF;
 // -----------------------------------------------------------------------------
 
 /// The wShowWindow member contains additional information.
-@Deprecated('Use STARTUPINFOW_FLAGS.STARTF_USESHOWWINDOW instead')
 const STARTF_USESHOWWINDOW = 0x00000001;
 
 /// The dwXSize and dwYSize members contain additional information.
-@Deprecated('Use STARTUPINFOW_FLAGS.STARTF_USESIZE instead')
 const STARTF_USESIZE = 0x00000002;
 
 /// The dwX and dwY members contain additional information.
-@Deprecated('Use STARTUPINFOW_FLAGS.STARTF_USEPOSITION instead')
 const STARTF_USEPOSITION = 0x00000004;
 
 /// The dwXCountChars and dwYCountChars members contain additional information.
-@Deprecated('Use STARTUPINFOW_FLAGS.STARTF_USECOUNTCHARS instead')
 const STARTF_USECOUNTCHARS = 0x00000008;
 
 /// The dwFillAttribute member contains additional information.
-@Deprecated('Use STARTUPINFOW_FLAGS.STARTF_USEFILLATTRIBUTE instead')
 const STARTF_USEFILLATTRIBUTE = 0x00000010;
 
 /// Indicates that the process should be run in full-screen mode, rather than in
 /// windowed mode. This flag is only valid for console applications running on
 /// an x86 computer.
-@Deprecated('Use STARTUPINFOW_FLAGS.STARTF_RUNFULLSCREEN instead')
 const STARTF_RUNFULLSCREEN = 0x00000020;
 
 /// Indicates that the cursor is in feedback mode for two seconds after
 /// CreateProcess is called. The Working in Background cursor is displayed (see
 /// the Pointers tab in the Mouse control panel utility).
-@Deprecated('Use STARTUPINFOW_FLAGS.STARTF_FORCEONFEEDBACK instead')
 const STARTF_FORCEONFEEDBACK = 0x00000040;
 
 /// Indicates that the feedback cursor is forced off while the process is
 /// starting. The Normal Select cursor is displayed.
-@Deprecated('Use STARTUPINFOW_FLAGS.STARTF_FORCEOFFFEEDBACK instead')
 const STARTF_FORCEOFFFEEDBACK = 0x00000080;
 
 /// The hStdInput, hStdOutput, and hStdError members contain additional
 /// information.
-@Deprecated('Use STARTUPINFOW_FLAGS.STARTF_USESTDHANDLES instead')
 const STARTF_USESTDHANDLES = 0x00000100;
 
 /// The hStdInput member contains additional information.
-@Deprecated('Use STARTUPINFOW_FLAGS.STARTF_USEHOTKEY instead')
 const STARTF_USEHOTKEY = 0x00000200;
 
 /// The lpTitle member contains the path of the shortcut file (.lnk) that the
 /// user invoked to start this process. This is typically set by the shell when
 /// a .lnk file pointing to the launched application is invoked. Most
 /// applications will not need to set this value.
-@Deprecated('Use STARTUPINFOW_FLAGS.STARTF_TITLEISLINKNAME instead')
 const STARTF_TITLEISLINKNAME = 0x00000800;
 
 /// The lpTitle member contains an AppUserModelID. This identifier controls how
@@ -1329,16 +1112,13 @@ const STARTF_TITLEISLINKNAME = 0x00000800;
 /// applications will use the SetCurrentProcessExplicitAppUserModelID and
 /// GetCurrentProcessExplicitAppUserModelID functions instead of setting this
 /// flag.
-@Deprecated('Use STARTUPINFOW_FLAGS.STARTF_TITLEISAPPID instead')
 const STARTF_TITLEISAPPID = 0x00001000;
 
 /// Indicates that any windows created by the process cannot be pinned on the
 /// taskbar.
-@Deprecated('Use STARTUPINFOW_FLAGS.STARTF_PREVENTPINNING instead')
 const STARTF_PREVENTPINNING = 0x00002000;
 
 /// The command line came from an untrusted source.
-@Deprecated('Use STARTUPINFOW_FLAGS.STARTF_UNTRUSTEDSOURCE instead')
 const STARTF_UNTRUSTEDSOURCE = 0x00008000;
 
 // -----------------------------------------------------------------------------
@@ -1346,29 +1126,23 @@ const STARTF_UNTRUSTEDSOURCE = 0x00008000;
 // -----------------------------------------------------------------------------
 
 /// The window is active.
-@Deprecated('Use WINDOW_STYLE.WS_ACTIVECAPTION instead')
 const WS_ACTIVECAPTION = 0x0001;
 
 /// The window has a thin-line border.
-@Deprecated('Use WINDOW_STYLE.WS_BORDER instead')
 const WS_BORDER = 0x00800000;
 
 /// The window has a title bar (includes the WS_BORDER style).
-@Deprecated('Use WINDOW_STYLE.WS_CAPTION instead')
 const WS_CAPTION = 0x00C00000;
 
 /// The window is a child window. A window with this style cannot have a menu
 /// bar. This style cannot be used with the WS_POPUP style.
-@Deprecated('Use WINDOW_STYLE.WS_CHILD instead')
 const WS_CHILD = 0x40000000;
 
 /// Same as the WS_CHILD style.
-@Deprecated('Use WINDOW_STYLE.WS_CHILDWINDOW instead')
 const WS_CHILDWINDOW = WS_CHILD;
 
 /// Excludes the area occupied by child windows when drawing occurs within the
 /// parent window. This style is used when creating the parent window.
-@Deprecated('Use WINDOW_STYLE.WS_CLIPCHILDREN instead')
 const WS_CLIPCHILDREN = 0x02000000;
 
 /// Clips child windows relative to each other; that is, when a particular child
@@ -1377,18 +1151,15 @@ const WS_CLIPCHILDREN = 0x02000000;
 /// updated. If WS_CLIPSIBLINGS is not specified and child windows overlap, it
 /// is possible, when drawing within the client area of a child window, to draw
 /// within the client area of a neighboring child window.
-@Deprecated('Use WINDOW_STYLE.WS_CLIPSIBLINGS instead')
 const WS_CLIPSIBLINGS = 0x04000000;
 
 /// The window is initially disabled. A disabled window cannot receive input
 /// from the user. To change this after a window has been created, use the
 /// EnableWindow function.
-@Deprecated('Use WINDOW_STYLE.WS_DISABLED instead')
 const WS_DISABLED = 0x08000000;
 
 /// The window has a border of a style typically used with dialog boxes. A
 /// window with this style cannot have a title bar.
-@Deprecated('Use WINDOW_STYLE.WS_DLGFRAME instead')
 const WS_DLGFRAME = 0x00400000;
 
 /// The window is the first control of a group of controls.
@@ -1403,42 +1174,33 @@ const WS_DLGFRAME = 0x00400000;
 /// You can turn this style on and off to change dialog box navigation. To
 /// change this style after a window has been created, use the SetWindowLong
 /// function.
-@Deprecated('Use WINDOW_STYLE.WS_GROUP instead')
 const WS_GROUP = 0x00020000;
 
 /// The window has a horizontal scroll bar.
-@Deprecated('Use WINDOW_STYLE.WS_HSCROLL instead')
 const WS_HSCROLL = 0x00100000;
 
 /// The window is initially minimized. Same as the WS_MINIMIZE style.
-@Deprecated('Use WINDOW_STYLE.WS_ICONIC instead')
 const WS_ICONIC = WS_MINIMIZE;
 
 /// The window is initially maximized.
-@Deprecated('Use WINDOW_STYLE.WS_MAXIMIZE instead')
 const WS_MAXIMIZE = 0x01000000;
 
 /// The window has a maximize button. Cannot be combined with the
 /// WS_EX_CONTEXTHELP style. The WS_SYSMENU style must also be specified.
-@Deprecated('Use WINDOW_STYLE.WS_MAXIMIZEBOX instead')
 const WS_MAXIMIZEBOX = 0x00010000;
 
 /// The window is initially minimized. Same as the WS_ICONIC style.
-@Deprecated('Use WINDOW_STYLE.WS_MINIMIZE instead')
 const WS_MINIMIZE = 0x20000000;
 
 /// The window has a minimize button. Cannot be combined with the
 /// WS_EX_CONTEXTHELP style. The WS_SYSMENU style must also be specified.
-@Deprecated('Use WINDOW_STYLE.WS_MINIMIZEBOX instead')
 const WS_MINIMIZEBOX = 0x00020000;
 
 /// The window is an overlapped window. An overlapped window has a title bar and
 /// a border. Same as the WS_TILED style.
-@Deprecated('Use WINDOW_STYLE.WS_OVERLAPPED instead')
 const WS_OVERLAPPED = 0x00000000;
 
 /// The window is an overlapped window. Same as the WS_TILEDWINDOW style.
-@Deprecated('Use WINDOW_STYLE.WS_OVERLAPPEDWINDOW instead')
 const WS_OVERLAPPEDWINDOW =
     WS_OVERLAPPED |
     WS_CAPTION |
@@ -1449,21 +1211,17 @@ const WS_OVERLAPPEDWINDOW =
 
 /// The window is a pop-up window. This style cannot be used with the WS_CHILD
 /// style.
-@Deprecated('Use WINDOW_STYLE.WS_POPUP instead')
 const WS_POPUP = 0x80000000;
 
 /// The window is a pop-up window. The WS_CAPTION and WS_POPUPWINDOW styles must
 /// be combined to make the window menu visible.
-@Deprecated('Use WINDOW_STYLE.WS_POPUPWINDOW instead')
 const WS_POPUPWINDOW = WS_POPUP | WS_BORDER | WS_SYSMENU;
 
 /// The window has a sizing border. Same as the WS_THICKFRAME style.
-@Deprecated('Use WINDOW_STYLE.WS_SIZEBOX instead')
 const WS_SIZEBOX = WS_THICKFRAME;
 
 /// The window has a window menu on its title bar. The WS_CAPTION style must
 /// also be specified.
-@Deprecated('Use WINDOW_STYLE.WS_SYSMENU instead')
 const WS_SYSMENU = 0x00080000;
 
 /// The window is a control that can receive the keyboard focus when the user
@@ -1476,62 +1234,50 @@ const WS_SYSMENU = 0x00080000;
 /// change this style after a window has been created, use the SetWindowLong
 /// function. For user-created windows and modeless dialogs to work with tab
 /// stops, alter the message loop to call the IsDialogMessage function.
-@Deprecated('Use WINDOW_STYLE.WS_TABSTOP instead')
 const WS_TABSTOP = 0x00010000;
 
 /// The window has a sizing border. Same as the WS_SIZEBOX style.
-@Deprecated('Use WINDOW_STYLE.WS_THICKFRAME instead')
 const WS_THICKFRAME = 0x00040000;
 
 /// The window is an overlapped window. An overlapped window has a title bar and
 /// a border. Same as the WS_OVERLAPPED style.
-@Deprecated('Use WINDOW_STYLE.WS_TILED instead')
 const WS_TILED = WS_OVERLAPPED;
 
 /// The window is an overlapped window. Same as the WS_OVERLAPPEDWINDOW style.
-@Deprecated('Use WINDOW_STYLE.WS_TILEDWINDOW instead')
 const WS_TILEDWINDOW = WS_OVERLAPPEDWINDOW;
 
 /// The window is initially visible.
 ///
 /// This style can be turned on and off by using the ShowWindow or SetWindowPos
 /// function.
-@Deprecated('Use WINDOW_STYLE.WS_VISIBLE instead')
 const WS_VISIBLE = 0x10000000;
 
 /// The window has a vertical scroll bar.
-@Deprecated('Use WINDOW_STYLE.WS_VSCROLL instead')
 const WS_VSCROLL = 0x00200000;
 
 /// The window has a double border; the window can, optionally, be created with
 /// a title bar by specifying the WS_CAPTION style in the dwStyle parameter.
-@Deprecated('Use WINDOW_EX_STYLE.WS_EX_DLGMODALFRAME instead')
 const WS_EX_DLGMODALFRAME = 0x00000001;
 
 /// The child window created with this style does not send the WM_PARENTNOTIFY
 /// message to its parent window when it is created or destroyed.
-@Deprecated('Use WINDOW_EX_STYLE.WS_EX_NOPARENTNOTIFY instead')
 const WS_EX_NOPARENTNOTIFY = 0x00000004;
 
 /// The window should be placed above all non-topmost windows and should stay
 /// above them, even when the window is deactivated. To add or remove this
 /// style, use the SetWindowPos function.
-@Deprecated('Use WINDOW_EX_STYLE.WS_EX_TOPMOST instead')
 const WS_EX_TOPMOST = 0x00000008;
 
 /// The window accepts drag-drop files.
-@Deprecated('Use WINDOW_EX_STYLE.WS_EX_ACCEPTFILES instead')
 const WS_EX_ACCEPTFILES = 0x00000010;
 
 /// The window should not be painted until siblings beneath the window (that
 /// were created by the same thread) have been painted. The window appears
 /// transparent because the bits of underlying sibling windows have already been
 /// painted.
-@Deprecated('Use WINDOW_EX_STYLE.WS_EX_TRANSPARENT instead')
 const WS_EX_TRANSPARENT = 0x00000020;
 
 /// The window is a MDI child window.
-@Deprecated('Use WINDOW_EX_STYLE.WS_EX_MDICHILD instead')
 const WS_EX_MDICHILD = 0x00000040;
 
 /// The window is intended to be used as a floating toolbar. A tool window has a
@@ -1540,15 +1286,12 @@ const WS_EX_MDICHILD = 0x00000040;
 /// in the dialog that appears when the user presses ALT+TAB. If a tool window
 /// has a system menu, its icon is not displayed on the title bar. However, you
 /// can display the system menu by right-clicking or by typing ALT+SPACE.
-@Deprecated('Use WINDOW_EX_STYLE.WS_EX_TOOLWINDOW instead')
 const WS_EX_TOOLWINDOW = 0x00000080;
 
 /// The window has a border with a raised edge.
-@Deprecated('Use WINDOW_EX_STYLE.WS_EX_WINDOWEDGE instead')
 const WS_EX_WINDOWEDGE = 0x00000100;
 
 /// The window has a border with a sunken edge.
-@Deprecated('Use WINDOW_EX_STYLE.WS_EX_CLIENTEDGE instead')
 const WS_EX_CLIENTEDGE = 0x00000200;
 
 /// The title bar of the window includes a question mark.
@@ -1560,40 +1303,33 @@ const WS_EX_CLIENTEDGE = 0x00000200;
 /// HELP_WM_HELP command. The Help application displays a pop-up window that
 /// typically contains help for the child window. WS_EX_CONTEXTHELP cannot be
 /// used with the WS_MAXIMIZEBOX or WS_MINIMIZEBOX styles.
-@Deprecated('Use WINDOW_EX_STYLE.WS_EX_CONTEXTHELP instead')
 const WS_EX_CONTEXTHELP = 0x00000400;
 
 /// The window has generic "right-aligned" properties. This depends on the
 /// window class. This style has an effect only if the shell language is Hebrew,
 /// Arabic, or another language that supports reading-order alignment;
 /// otherwise, the style is ignored.
-@Deprecated('Use WINDOW_EX_STYLE.WS_EX_RIGHT instead')
 const WS_EX_RIGHT = 0x00001000;
 
 /// The window has generic left-aligned properties. This is the default.
-@Deprecated('Use WINDOW_EX_STYLE.WS_EX_LEFT instead')
 const WS_EX_LEFT = 0x00000000;
 
 /// If the shell language is Hebrew, Arabic, or another language that supports
 /// reading-order alignment, the window text is displayed using right-to-left
 /// reading-order properties. For other languages, the style is ignored.
-@Deprecated('Use WINDOW_EX_STYLE.WS_EX_RTLREADING instead')
 const WS_EX_RTLREADING = 0x00002000;
 
 /// The window text is displayed using left-to-right reading-order properties.
 /// This is the default.
-@Deprecated('Use WINDOW_EX_STYLE.WS_EX_LTRREADING instead')
 const WS_EX_LTRREADING = 0x00000000;
 
 /// If the shell language is Hebrew, Arabic, or another language that supports
 /// reading order alignment, the vertical scroll bar (if present) is to the left
 /// of the client area. For other languages, the style is ignored.
-@Deprecated('Use WINDOW_EX_STYLE.WS_EX_LEFTSCROLLBAR instead')
 const WS_EX_LEFTSCROLLBAR = 0x00004000;
 
 /// The vertical scroll bar (if present) is to the right of the client area.
 /// This is the default.
-@Deprecated('Use WINDOW_EX_STYLE.WS_EX_RIGHTSCROLLBAR instead')
 const WS_EX_RIGHTSCROLLBAR = 0x00000000;
 
 /// The window itself contains child windows that should take part in dialog box
@@ -1602,46 +1338,37 @@ const WS_EX_RIGHTSCROLLBAR = 0x00000000;
 /// If this style is specified, the dialog manager recurses into children of
 /// this window when performing navigation operations such as handling the TAB
 /// key, an arrow key, or a keyboard mnemonic.
-@Deprecated('Use WINDOW_EX_STYLE.WS_EX_CONTROLPARENT instead')
 const WS_EX_CONTROLPARENT = 0x00010000;
 
 /// The window has a three-dimensional border style intended to be used for
 /// items that do not accept user input.
-@Deprecated('Use WINDOW_EX_STYLE.WS_EX_STATICEDGE instead')
 const WS_EX_STATICEDGE = 0x00020000;
 
 /// Forces a top-level window onto the taskbar when the window is visible.
-@Deprecated('Use WINDOW_EX_STYLE.WS_EX_APPWINDOW instead')
 const WS_EX_APPWINDOW = 0x00040000;
 
 /// The window is an overlapped window.
-@Deprecated('Use WINDOW_EX_STYLE.WS_EX_OVERLAPPEDWINDOW instead')
 const WS_EX_OVERLAPPEDWINDOW = WS_EX_WINDOWEDGE | WS_EX_CLIENTEDGE;
 
 /// The window is palette window, which is a modeless dialog box that presents
 /// an array of commands.
-@Deprecated('Use WINDOW_EX_STYLE.WS_EX_PALETTEWINDOW instead')
 const WS_EX_PALETTEWINDOW = WS_EX_WINDOWEDGE | WS_EX_TOOLWINDOW | WS_EX_TOPMOST;
 
 /// The window is a layered window. This style cannot be used if the window has
 /// a class style of either CS_OWNDC or CS_CLASSDC.
-@Deprecated('Use WINDOW_EX_STYLE.WS_EX_LAYERED instead')
 const WS_EX_LAYERED = 0x00080000;
 
 /// The window does not pass its window layout to its child windows.
-@Deprecated('Use WINDOW_EX_STYLE.WS_EX_NOINHERITLAYOUT instead')
 const WS_EX_NOINHERITLAYOUT = 0x00100000;
 
 /// The window does not render to a redirection surface. This is for windows
 /// that do not have visible content or that use mechanisms other than surfaces
 /// to provide their visual.
-@Deprecated('Use WINDOW_EX_STYLE.WS_EX_NOREDIRECTIONBITMAP instead')
 const WS_EX_NOREDIRECTIONBITMAP = 0x00200000;
 
 /// If the shell language is Hebrew, Arabic, or another language that supports
 /// reading order alignment, the horizontal origin of the window is on the right
 /// edge. Increasing horizontal values advance to the left.
-@Deprecated('Use WINDOW_EX_STYLE.WS_EX_LAYOUTRTL instead')
 const WS_EX_LAYOUTRTL = 0x00400000;
 
 /// Paints all descendants of a window in bottom-to-top painting order using
@@ -1652,13 +1379,11 @@ const WS_EX_LAYOUTRTL = 0x00400000;
 /// window also has the WS_EX_TRANSPARENT bit set. Double-buffering allows the
 /// window and its descendents to be painted without flicker. This cannot be
 /// used if the window has a class style of either CS_OWNDC or CS_CLASSDC.
-@Deprecated('Use WINDOW_EX_STYLE.WS_EX_COMPOSITED instead')
 const WS_EX_COMPOSITED = 0x02000000;
 
 /// A top-level window created with this style does not become the foreground
 /// window when the user clicks it. The system does not bring this window to the
 /// foreground when the user minimizes or closes the foreground window.
-@Deprecated('Use WINDOW_EX_STYLE.WS_EX_NOACTIVATE instead')
 const WS_EX_NOACTIVATE = 0x08000000;
 
 // -----------------------------------------------------------------------------
@@ -2607,27 +2332,22 @@ final RT_MANIFEST = MAKEINTRESOURCE(24);
 
 /// The calling thread is not prevented from processing other requests while
 /// waiting for the function to return.
-@Deprecated('Use SEND_MESSAGE_TIMEOUT_FLAGS.SMTO_NORMAL instead')
 const SMTO_NORMAL = 0x0000;
 
 /// Prevents the calling thread from processing any other requests until the
 /// function returns.
-@Deprecated('Use SEND_MESSAGE_TIMEOUT_FLAGS.SMTO_BLOCK instead')
 const SMTO_BLOCK = 0x0001;
 
 /// The function returns without waiting for the time-out period to elapse if
 /// the receiving thread appears to not respond or "hangs."
-@Deprecated('Use SEND_MESSAGE_TIMEOUT_FLAGS.SMTO_ABORTIFHUNG instead')
 const SMTO_ABORTIFHUNG = 0x0002;
 
 /// The function does not enforce the time-out period as long as the receiving
 /// thread is processing messages.
-@Deprecated('Use SEND_MESSAGE_TIMEOUT_FLAGS.SMTO_NOTIMEOUTIFNOTHUNG instead')
 const SMTO_NOTIMEOUTIFNOTHUNG = 0x0008;
 
 /// The function should return 0 if the receiving window is destroyed or its
 /// owning thread dies while the message is being processed.
-@Deprecated('Use SEND_MESSAGE_TIMEOUT_FLAGS.SMTO_ERRORONEXIT instead')
 const SMTO_ERRORONEXIT = 0x0020;
 
 // -----------------------------------------------------------------------------
@@ -2709,43 +2429,33 @@ const HWND_NOTOPMOST = -2;
 
 /// A WM_KEYUP, WM_KEYDOWN, WM_SYSKEYUP, or WM_SYSKEYDOWN message is in the
 /// queue.
-@Deprecated('Use QUEUE_STATUS_FLAGS.QS_KEY instead')
 const QS_KEY = 0x0001;
 
 /// A WM_MOUSEMOVE message is in the queue.
-@Deprecated('Use QUEUE_STATUS_FLAGS.QS_MOUSEMOVE instead')
 const QS_MOUSEMOVE = 0x0002;
 
 /// A mouse-button message (WM_LBUTTONUP, WM_RBUTTONDOWN, and so on).
-@Deprecated('Use QUEUE_STATUS_FLAGS.QS_MOUSEBUTTON instead')
 const QS_MOUSEBUTTON = 0x0004;
 
 /// A posted message (other than those listed here) is in the queue.
-@Deprecated('Use QUEUE_STATUS_FLAGS.QS_POSTMESSAGE instead')
 const QS_POSTMESSAGE = 0x0008;
 
 /// A WM_TIMER message is in the queue.
-@Deprecated('Use QUEUE_STATUS_FLAGS.QS_TIMER instead')
 const QS_TIMER = 0x0010;
 
 /// A WM_PAINT message is in the queue.
-@Deprecated('Use QUEUE_STATUS_FLAGS.QS_PAINT instead')
 const QS_PAINT = 0x0020;
 
 /// A message sent by another thread or application is in the queue.
-@Deprecated('Use QUEUE_STATUS_FLAGS.QS_SENDMESSAGE instead')
 const QS_SENDMESSAGE = 0x0040;
 
 /// A WM_HOTKEY message is in the queue.
-@Deprecated('Use QUEUE_STATUS_FLAGS.QS_HOTKEY instead')
 const QS_HOTKEY = 0x0080;
 
 /// A posted message (other than those listed here) is in the queue.
-@Deprecated('Use QUEUE_STATUS_FLAGS.QS_ALLPOSTMESSAGE instead')
 const QS_ALLPOSTMESSAGE = 0x0100;
 
 /// A raw input message is in the queue.
-@Deprecated('Use QUEUE_STATUS_FLAGS.QS_RAWINPUT instead')
 const QS_RAWINPUT = 0x0400;
 
 /// A touch message is in the queue.
@@ -2756,20 +2466,16 @@ const QS_POINTER = 0x1000;
 
 /// A WM_MOUSEMOVE message or mouse-button message (WM_LBUTTONUP,
 /// WM_RBUTTONDOWN, and so on).
-@Deprecated('Use QUEUE_STATUS_FLAGS.QS_MOUSE instead')
 const QS_MOUSE = QS_MOUSEMOVE | QS_MOUSEBUTTON;
 
 /// An input message is in the queue.
-@Deprecated('Use QUEUE_STATUS_FLAGS.QS_INPUT instead')
 const QS_INPUT = 1031;
 
 /// An input, WM_TIMER, WM_PAINT, WM_HOTKEY, or posted message is in the queue.
-@Deprecated('Use QUEUE_STATUS_FLAGS.QS_ALLEVENTS instead')
 const QS_ALLEVENTS =
     QS_INPUT | QS_POSTMESSAGE | QS_TIMER | QS_PAINT | QS_HOTKEY;
 
 /// Any message is in the queue.
-@Deprecated('Use QUEUE_STATUS_FLAGS.QS_ALLINPUT instead')
 const QS_ALLINPUT =
     QS_INPUT |
     QS_POSTMESSAGE |
@@ -2784,95 +2490,75 @@ const QS_ALLINPUT =
 
 /// Installs a hook procedure that monitors messages generated as a result of an
 /// input event in a dialog box, message box, menu, or scroll bar.
-@Deprecated('Use WINDOWS_HOOK_ID.WH_MSGFILTER instead')
 const WH_MSGFILTER = -1;
 
 /// Installs a hook procedure that records input messages posted to the system
 /// message queue.
-@Deprecated('Use WINDOWS_HOOK_ID.WH_JOURNALRECORD instead')
 const WH_JOURNALRECORD = 0;
 
 /// Installs a hook procedure that posts messages previously recorded by a
 /// WH_JOURNALRECORD hook procedure.
-@Deprecated('Use WINDOWS_HOOK_ID.WH_JOURNALPLAYBACK instead')
 const WH_JOURNALPLAYBACK = 1;
 
 /// Installs a hook procedure that monitors keystroke messages.
-@Deprecated('Use WINDOWS_HOOK_ID.WH_KEYBOARD instead')
 const WH_KEYBOARD = 2;
 
 /// Installs a hook procedure that monitors messages posted to a message queue.
-@Deprecated('Use WINDOWS_HOOK_ID.WH_GETMESSAGE instead')
 const WH_GETMESSAGE = 3;
 
 /// Installs a hook procedure that monitors messages before the system sends
 /// them to the destination window procedure.
-@Deprecated('Use WINDOWS_HOOK_ID.WH_CALLWNDPROC instead')
 const WH_CALLWNDPROC = 4;
 
 /// Installs a hook procedure that receives notifications useful to a CBT
 /// application.
-@Deprecated('Use WINDOWS_HOOK_ID.WH_CBT instead')
 const WH_CBT = 5;
 
 /// Installs a hook procedure that monitors messages generated as a result of an
 /// input event in a dialog box, message box, menu, or scroll bar. The hook
 /// procedure monitors these messages for all applications in the same desktop
 /// as the calling thread.
-@Deprecated('Use WINDOWS_HOOK_ID.WH_SYSMSGFILTER instead')
 const WH_SYSMSGFILTER = 6;
 
 /// Installs a hook procedure that monitors mouse messages.
-@Deprecated('Use WINDOWS_HOOK_ID.WH_MOUSE instead')
 const WH_MOUSE = 7;
 
 /// Installs a hook procedure useful for debugging other hook procedures.
-@Deprecated('Use WINDOWS_HOOK_ID.WH_DEBUG instead')
 const WH_DEBUG = 9;
 
 /// Installs a hook procedure that receives notifications useful to shell
 /// applications.
-@Deprecated('Use WINDOWS_HOOK_ID.WH_SHELL instead')
 const WH_SHELL = 10;
 
 /// Installs a hook procedure that will be called when the application's
 /// foreground thread is about to become idle. This hook is useful for
 /// performing low priority tasks during idle time.
-@Deprecated('Use WINDOWS_HOOK_ID.WH_FOREGROUNDIDLE instead')
 const WH_FOREGROUNDIDLE = 11;
 
 /// Installs a hook procedure that monitors messages after they have been
 /// processed by the destination window procedure.
-@Deprecated('Use WINDOWS_HOOK_ID.WH_CALLWNDPROCRET instead')
 const WH_CALLWNDPROCRET = 12;
 
 /// Installs a hook procedure that monitors low-level keyboard input events.
-@Deprecated('Use WINDOWS_HOOK_ID.WH_KEYBOARD_LL instead')
 const WH_KEYBOARD_LL = 13;
 
 /// Installs a hook procedure that monitors low-level mouse input events.
-@Deprecated('Use WINDOWS_HOOK_ID.WH_MOUSE_LL instead')
 const WH_MOUSE_LL = 14;
 
 /// Test the extended-key flag.
-@Deprecated('Use KBDLLHOOKSTRUCT_FLAGS.LLKHF_EXTENDED instead')
 const LLKHF_EXTENDED = KF_EXTENDED >> 8;
 
 /// Test the event-injected (from any process) flag.
-@Deprecated('Use KBDLLHOOKSTRUCT_FLAGS.LLKHF_INJECTED instead')
 const LLKHF_INJECTED = 0x00000010;
 
 /// Test the context code.
-@Deprecated('Use KBDLLHOOKSTRUCT_FLAGS.LLKHF_ALTDOWN instead')
 const LLKHF_ALTDOWN = KF_ALTDOWN >> 8;
 
 /// Test the transition-state flag.
-@Deprecated('Use KBDLLHOOKSTRUCT_FLAGS.LLKHF_UP instead')
 const LLKHF_UP = KF_UP >> 8;
 
 /// Test the event-injected (from a process running at lower integrity level)
 /// flag.
-@Deprecated('Use KBDLLHOOKSTRUCT_FLAGS.LLKHF_LOWER_IL_INJECTED instead')
 const LLKHF_LOWER_IL_INJECTED = 0x00000002;
 
 /// Test the event-injected (from any process) flag.
@@ -2910,90 +2596,69 @@ const KF_UP = 0x8000;
 // -----------------------------------------------------------------------------
 
 /// Scroll bar gray area.
-@Deprecated('Use SYS_COLOR_INDEX.COLOR_SCROLLBAR instead')
 const COLOR_SCROLLBAR = 0;
 
 /// Desktop.
-@Deprecated('Use SYS_COLOR_INDEX.COLOR_BACKGROUND instead')
 const COLOR_BACKGROUND = 1;
 
 /// Active window title bar.
-@Deprecated('Use SYS_COLOR_INDEX.COLOR_ACTIVECAPTION instead')
 const COLOR_ACTIVECAPTION = 2;
 
 /// Inactive window caption.
-@Deprecated('Use SYS_COLOR_INDEX.COLOR_INACTIVECAPTION instead')
 const COLOR_INACTIVECAPTION = 3;
 
 /// Menu background.
-@Deprecated('Use SYS_COLOR_INDEX.COLOR_MENU instead')
 const COLOR_MENU = 4;
 
 /// Window background.
-@Deprecated('Use SYS_COLOR_INDEX.COLOR_WINDOW instead')
 const COLOR_WINDOW = 5;
 
 /// Window frame.
-@Deprecated('Use SYS_COLOR_INDEX.COLOR_WINDOWFRAME instead')
 const COLOR_WINDOWFRAME = 6;
 
 /// Text in menus.
-@Deprecated('Use SYS_COLOR_INDEX.COLOR_MENUTEXT instead')
 const COLOR_MENUTEXT = 7;
 
 /// Text in windows.
-@Deprecated('Use SYS_COLOR_INDEX.COLOR_WINDOWTEXT instead')
 const COLOR_WINDOWTEXT = 8;
 
 /// Text in caption, size box, and scroll bar arrow box.
-@Deprecated('Use SYS_COLOR_INDEX.COLOR_CAPTIONTEXT instead')
 const COLOR_CAPTIONTEXT = 9;
 
 /// Active window border.
-@Deprecated('Use SYS_COLOR_INDEX.COLOR_ACTIVEBORDER instead')
 const COLOR_ACTIVEBORDER = 10;
 
 /// Inactive window border.
-@Deprecated('Use SYS_COLOR_INDEX.COLOR_INACTIVEBORDER instead')
 const COLOR_INACTIVEBORDER = 11;
 
 /// Background color of multiple document interface (MDI) applications.
-@Deprecated('Use SYS_COLOR_INDEX.COLOR_APPWORKSPACE instead')
 const COLOR_APPWORKSPACE = 12;
 
 /// Item(s) selected in a control.
-@Deprecated('Use SYS_COLOR_INDEX.COLOR_HIGHLIGHT instead')
 const COLOR_HIGHLIGHT = 13;
 
 /// Text of item(s) selected in a control.
-@Deprecated('Use SYS_COLOR_INDEX.COLOR_HIGHLIGHTTEXT instead')
 const COLOR_HIGHLIGHTTEXT = 14;
 
 /// Face color for three-dimensional display elements and for dialog box
 /// backgrounds.
-@Deprecated('Use SYS_COLOR_INDEX.COLOR_BTNFACE instead')
 const COLOR_BTNFACE = 15;
 
 /// Shadow color for three-dimensional display elements (for edges facing away
 /// from the light source).
-@Deprecated('Use SYS_COLOR_INDEX.COLOR_BTNSHADOW instead')
 const COLOR_BTNSHADOW = 16;
 
 /// Grayed (disabled) text.
-@Deprecated('Use SYS_COLOR_INDEX.COLOR_GRAYTEXT instead')
 const COLOR_GRAYTEXT = 17;
 
 /// Text on push buttons.
-@Deprecated('Use SYS_COLOR_INDEX.COLOR_BTNTEXT instead')
 const COLOR_BTNTEXT = 18;
 
 /// Color of text in an inactive caption.
-@Deprecated('Use SYS_COLOR_INDEX.COLOR_INACTIVECAPTIONTEXT instead')
 const COLOR_INACTIVECAPTIONTEXT = 19;
 
 /// Highlight color for three-dimensional display elements (for edges facing the
 /// light source.)
-@Deprecated('Use SYS_COLOR_INDEX.COLOR_BTNHIGHLIGHT instead')
 const COLOR_BTNHIGHLIGHT = 20;
 
 // -----------------------------------------------------------------------------
@@ -3001,54 +2666,43 @@ const COLOR_BTNHIGHLIGHT = 20;
 // -----------------------------------------------------------------------------
 
 /// Gets/sets the extended window styles.
-@Deprecated('Use WINDOW_LONG_PTR_INDEX.GWL_EXSTYLE instead')
 const GWL_EXSTYLE = -20;
 
 /// Gets/sets a new application instance handle.
-@Deprecated('Use WINDOW_LONG_PTR_INDEX.GWL_HINSTANCE instead')
 const GWL_HINSTANCE = -6;
 
 /// Gets/sets a new identifier of the child window. The window cannot be a
 /// top-level window.
-@Deprecated('Use WINDOW_LONG_PTR_INDEX.GWL_ID instead')
 const GWL_ID = -12;
 
 /// Gets/sets a new window style.
-@Deprecated('Use WINDOW_LONG_PTR_INDEX.GWL_STYLE instead')
 const GWL_STYLE = -16;
 
 /// Gets/sets the user data associated with the window. This data is intended
 /// for use by the application that created the window. Its value is initially
 /// zero.
-@Deprecated('Use WINDOW_LONG_PTR_INDEX.GWL_USERDATA instead')
 const GWL_USERDATA = -21;
 
 /// Sets a new address for the window procedure. You cannot change this
 /// attribute if the window does not belong to the same process as the calling
 /// thread.
-@Deprecated('Use WINDOW_LONG_PTR_INDEX.GWL_WNDPROC instead')
 const GWL_WNDPROC = -4;
 
 /// Sets a new address for the window procedure.
-@Deprecated('Use WINDOW_LONG_PTR_INDEX.GWLP_WNDPROC instead')
 const GWLP_WNDPROC = -4;
 
 /// Sets a new application instance handle.
-@Deprecated('Use WINDOW_LONG_PTR_INDEX.GWLP_HINSTANCE instead')
 const GWLP_HINSTANCE = -6;
 
 /// Retrieves a handle to the parent window, if there is one.
-@Deprecated('Use WINDOW_LONG_PTR_INDEX.GWLP_HWNDPARENT instead')
 const GWLP_HWNDPARENT = -8;
 
 /// Sets the user data associated with the window. This data is intended for use
 /// by the application that created the window. Its value is initially zero.
-@Deprecated('Use WINDOW_LONG_PTR_INDEX.GWLP_USERDATA instead')
 const GWLP_USERDATA = -21;
 
 /// Sets a new identifier of the child window. The window cannot be a top-level
 /// window.
-@Deprecated('Use WINDOW_LONG_PTR_INDEX.GWLP_ID instead')
 const GWLP_ID = -12;
 
 // -----------------------------------------------------------------------------
@@ -3147,35 +2801,29 @@ const HTHELP = 21;
 // -----------------------------------------------------------------------------
 
 /// Determines whether the warning beeper is on.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETBEEP instead')
 const SPI_GETBEEP = 0x0001;
 
 /// Turns the warning beeper on or off. The uiParam parameter specifies TRUE for
 /// on, or FALSE for off.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETBEEP instead')
 const SPI_SETBEEP = 0x0002;
 
 /// Retrieves the two mouse threshold values and the mouse acceleration. The
 /// pvParam parameter must point to an array of three integers that receives
 /// these values. See mouse_event for further information.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETMOUSE instead')
 const SPI_GETMOUSE = 0x0003;
 
 /// Sets the two mouse threshold values and the mouse acceleration. The pvParam
 /// parameter must point to an array of three integers that specifies these
 /// values. See mouse_event for further information.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETMOUSE instead')
 const SPI_SETMOUSE = 0x0004;
 
 /// Retrieves the border multiplier factor that determines the width of a
 /// window's sizing border. The pvParamparameter must point to an integer
 /// variable that receives this value.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETBORDER instead')
 const SPI_GETBORDER = 0x0005;
 
 /// Sets the border multiplier factor that determines the width of a window's
 /// sizing border. The uiParam parameter specifies the new value.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETBORDER instead')
 const SPI_SETBORDER = 0x0006;
 
 /// Retrieves the keyboard repeat-speed setting, which is a value in the range
@@ -3183,7 +2831,6 @@ const SPI_SETBORDER = 0x0006;
 /// 30 repetitions per second). The actual repeat rates are hardware-dependent
 /// and may vary from a linear scale by as much as 20%. The pvParam parameter
 /// must point to a DWORD variable that receives the setting.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETKEYBOARDSPEED instead')
 const SPI_GETKEYBOARDSPEED = 0x000A;
 
 /// Sets the keyboard repeat-speed setting. The uiParam parameter must specify a
@@ -3191,7 +2838,6 @@ const SPI_GETKEYBOARDSPEED = 0x000A;
 /// 31 (approximately 30 repetitions per second). The actual repeat rates are
 /// hardware-dependent and may vary from a linear scale by as much as 20%. If
 /// uiParam is greater than 31, the parameter is set to 31.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETKEYBOARDSPEED instead')
 const SPI_SETKEYBOARDSPEED = 0x000B;
 
 /// Sets or retrieves the width, in pixels, of an icon cell.
@@ -3203,16 +2849,10 @@ const SPI_SETKEYBOARDSPEED = 0x000B;
 ///
 /// To retrieve this value, pvParam must point to an integer that receives the
 /// current value.
-@Deprecated(
-  'Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_ICONHORIZONTALSPACING instead',
-)
 const SPI_ICONHORIZONTALSPACING = 0x000D;
 
 /// Retrieves the screen saver time-out value, in seconds. The pvParam parameter
 /// must point to an integer variable that receives the value.
-@Deprecated(
-  'Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETSCREENSAVETIMEOUT instead',
-)
 const SPI_GETSCREENSAVETIMEOUT = 0x000E;
 
 /// Sets the screen saver time-out value to the value of the uiParam parameter.
@@ -3221,36 +2861,27 @@ const SPI_GETSCREENSAVETIMEOUT = 0x000E;
 ///
 /// If the machine has entered power saving mode or system lock state, an
 /// ERROR_OPERATION_IN_PROGRESS exception occurs.
-@Deprecated(
-  'Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETSCREENSAVETIMEOUT instead',
-)
 const SPI_SETSCREENSAVETIMEOUT = 0x000F;
 
 /// Determines whether screen saving is enabled. The pvParam parameter must
 /// point to a BOOL variable that receives TRUE if screen saving is enabled, or
 /// FALSE otherwise.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETSCREENSAVEACTIVE instead')
 const SPI_GETSCREENSAVEACTIVE = 0x0010;
 
 /// Sets the state of the screen saver. The uiParam parameter specifies TRUE to
 /// activate screen saving, or FALSE to deactivate it.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETSCREENSAVEACTIVE instead')
 const SPI_SETSCREENSAVEACTIVE = 0x0011;
 
 /// @nodoc
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETGRIDGRANULARITY instead')
 const SPI_GETGRIDGRANULARITY = 0x0012;
 
 /// @nodoc
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETGRIDGRANULARITY instead')
 const SPI_SETGRIDGRANULARITY = 0x0013;
 
 /// Sets the desktop wallpaper.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETDESKWALLPAPER instead')
 const SPI_SETDESKWALLPAPER = 0x0014;
 
 /// Sets the current desktop pattern.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETDESKPATTERN instead')
 const SPI_SETDESKPATTERN = 0x0015;
 
 /// Retrieves the keyboard repeat-delay setting, which is a value in the range
@@ -3260,7 +2891,6 @@ const SPI_SETDESKPATTERN = 0x0015;
 /// The actual delay associated with each value may vary depending on the
 /// hardware. The pvParam parameter must point to an integer variable that
 /// receives the setting.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETKEYBOARDDELAY instead')
 const SPI_GETKEYBOARDDELAY = 0x0016;
 
 /// Sets the keyboard repeat-delay setting.
@@ -3269,7 +2899,6 @@ const SPI_GETKEYBOARDDELAY = 0x0016;
 /// shortest delay approximately 250 ms) and 3 sets the longest delay
 /// (approximately 1 second). The actual delay associated with each value may
 /// vary depending on the hardware.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETKEYBOARDDELAY instead')
 const SPI_SETKEYBOARDDELAY = 0x0017;
 
 /// Sets or retrieves the height, in pixels, of an icon cell.
@@ -3279,33 +2908,24 @@ const SPI_SETKEYBOARDDELAY = 0x0017;
 ///
 /// To retrieve this value, pvParam must point to an integer that receives the
 /// current value.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_ICONVERTICALSPACING instead')
 const SPI_ICONVERTICALSPACING = 0x0018;
 
 /// Determines whether icon-title wrapping is enabled. The pvParam parameter
 /// must point to a BOOL variable that receives TRUE if enabled, or FALSE
 /// otherwise.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETICONTITLEWRAP instead')
 const SPI_GETICONTITLEWRAP = 0x0019;
 
 /// Turns icon-title wrapping on or off. The uiParam parameter specifies TRUE
 /// for on, or FALSE for off.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETICONTITLEWRAP instead')
 const SPI_SETICONTITLEWRAP = 0x001A;
 
 /// Determines whether pop-up menus are left-aligned or right-aligned, relative
 /// to the corresponding menu-bar item. The pvParam parameter must point to a
 /// BOOL variable that receives TRUE if right-aligned, or FALSE otherwise.
-@Deprecated(
-  'Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETMENUDROPALIGNMENT instead',
-)
 const SPI_GETMENUDROPALIGNMENT = 0x001B;
 
 /// Sets the alignment value of pop-up menus. The uiParam parameter specifies
 /// TRUE for right alignment, or FALSE for left alignment.
-@Deprecated(
-  'Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETMENUDROPALIGNMENT instead',
-)
 const SPI_SETMENUDROPALIGNMENT = 0x001C;
 
 /// Sets the width of the double-click rectangle to the value of the uiParam
@@ -3316,7 +2936,6 @@ const SPI_SETMENUDROPALIGNMENT = 0x001C;
 ///
 /// To retrieve the width of the double-click rectangle, call GetSystemMetrics
 /// with the SM_CXDOUBLECLK flag.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETDOUBLECLKWIDTH instead')
 const SPI_SETDOUBLECLKWIDTH = 0x001D;
 
 /// Sets the height of the double-click rectangle to the value of the uiParam
@@ -3327,13 +2946,11 @@ const SPI_SETDOUBLECLKWIDTH = 0x001D;
 ///
 /// To retrieve the height of the double-click rectangle, call GetSystemMetrics
 /// with the SM_CYDOUBLECLK flag.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETDOUBLECLKHEIGHT instead')
 const SPI_SETDOUBLECLKHEIGHT = 0x001E;
 
 /// Retrieves the logical font information for the current icon-title font. The
 /// uiParam parameter specifies the size of a LOGFONT structure, and the pvParam
 /// parameter must point to the LOGFONT structure to fill in.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETICONTITLELOGFONT instead')
 const SPI_GETICONTITLELOGFONT = 0x001F;
 
 /// Sets the double-click time for the mouse to the value of the uiParam
@@ -3344,7 +2961,6 @@ const SPI_GETICONTITLELOGFONT = 0x001F;
 /// between the first and second clicks of a double-click. You can also call the
 /// SetDoubleClickTime function to set the double-click time. To get the current
 /// double-click time, call the GetDoubleClickTime function.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETDOUBLECLICKTIME instead')
 const SPI_SETDOUBLECLICKTIME = 0x0020;
 
 /// Swaps or restores the meaning of the left and right mouse buttons. The
@@ -3353,39 +2969,32 @@ const SPI_SETDOUBLECLICKTIME = 0x0020;
 ///
 /// To retrieve the current setting, call GetSystemMetrics with the
 /// SM_SWAPBUTTON flag.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETMOUSEBUTTONSWAP instead')
 const SPI_SETMOUSEBUTTONSWAP = 0x0021;
 
 /// Sets the font that is used for icon titles. The uiParam parameter specifies
 /// the size of a LOGFONT structure, and the pvParam parameter must point to a
 /// LOGFONT structure.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETICONTITLELOGFONT instead')
 const SPI_SETICONTITLELOGFONT = 0x0022;
 
 /// @nodoc
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETFASTTASKSWITCH instead')
 const SPI_GETFASTTASKSWITCH = 0x0023;
 
 /// @nodoc
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETFASTTASKSWITCH instead')
 const SPI_SETFASTTASKSWITCH = 0x0024;
 
 /// Sets dragging of full windows either on or off. The uiParam parameter
 /// specifies TRUE for on, or FALSE for off.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETDRAGFULLWINDOWS instead')
 const SPI_SETDRAGFULLWINDOWS = 0x0025;
 
 /// Determines whether dragging of full windows is enabled. The pvParam
 /// parameter must point to a BOOL variable that receives TRUE if enabled, or
 /// FALSE otherwise.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETDRAGFULLWINDOWS instead')
 const SPI_GETDRAGFULLWINDOWS = 0x0026;
 
 /// Retrieves the metrics associated with the nonclient area of nonminimized
 /// windows. The pvParam parameter must point to a NONCLIENTMETRICS structure
 /// that receives the information. Set the cbSize member of this structure and
 /// the uiParam parameter to sizeof(NONCLIENTMETRICS).
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETNONCLIENTMETRICS instead')
 const SPI_GETNONCLIENTMETRICS = 0x0029;
 
 /// Sets the metrics associated with the nonclient area of nonminimized windows.
@@ -3393,34 +3002,29 @@ const SPI_GETNONCLIENTMETRICS = 0x0029;
 /// contains the new parameters. Set the cbSize member of this structure and the
 /// uiParam parameter to sizeof(NONCLIENTMETRICS). Also, the lfHeight member of
 /// the LOGFONT structure must be a negative value.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETNONCLIENTMETRICS instead')
 const SPI_SETNONCLIENTMETRICS = 0x002A;
 
 /// Retrieves the metrics associated with minimized windows. The pvParam
 /// parameter must point to a MINIMIZEDMETRICS structure that receives the
 /// information. Set the cbSize member of this structure and the uiParam
 /// parameter to sizeof(MINIMIZEDMETRICS).
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETMINIMIZEDMETRICS instead')
 const SPI_GETMINIMIZEDMETRICS = 0x002B;
 
 /// Sets the metrics associated with minimized windows. The pvParam parameter
 /// must point to a MINIMIZEDMETRICS structure that contains the new parameters.
 /// Set the cbSize member of this structure and the uiParam parameter to
 /// sizeof(MINIMIZEDMETRICS).
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETMINIMIZEDMETRICS instead')
 const SPI_SETMINIMIZEDMETRICS = 0x002C;
 
 /// Retrieves the metrics associated with icons. The pvParam parameter must
 /// point to an ICONMETRICS structure that receives the information. Set the
 /// cbSize member of this structure and the uiParam parameter to
 /// sizeof(ICONMETRICS).
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETICONMETRICS instead')
 const SPI_GETICONMETRICS = 0x002D;
 
 /// Sets the metrics associated with icons. The pvParam parameter must point to
 /// an ICONMETRICS structure that contains the new parameters. Set the cbSize
 /// member of this structure and the uiParam parameter to sizeof(ICONMETRICS).
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETICONMETRICS instead')
 const SPI_SETICONMETRICS = 0x002E;
 
 /// Sets the size of the work area. The work area is the portion of the screen
@@ -3429,7 +3033,6 @@ const SPI_SETICONMETRICS = 0x002E;
 /// work area rectangle, expressed in virtual screen coordinates. In a system
 /// with multiple display monitors, the function sets the work area of the
 /// monitor that contains the specified rectangle.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETWORKAREA instead')
 const SPI_SETWORKAREA = 0x002F;
 
 /// Retrieves the size of the work area on the primary display monitor. The work
@@ -3441,39 +3044,33 @@ const SPI_SETWORKAREA = 0x002F;
 ///
 /// To get the work area of a monitor other than the primary display monitor,
 /// call the GetMonitorInfo function.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETWORKAREA instead')
 const SPI_GETWORKAREA = 0x0030;
 
 /// @nodoc
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETPENWINDOWS instead')
 const SPI_SETPENWINDOWS = 0x0031;
 
 /// Retrieves information about the HighContrast accessibility feature. The
 /// pvParam parameter must point to a HIGHCONTRAST structure that receives the
 /// information. Set the cbSize member of this structure and the uiParam
 /// parameter to sizeof(HIGHCONTRAST).
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETHIGHCONTRAST instead')
 const SPI_GETHIGHCONTRAST = 0x0042;
 
 /// Sets the parameters of the HighContrast accessibility feature. The pvParam
 /// parameter must point to a HIGHCONTRAST structure that contains the new
 /// parameters. Set the cbSize member of this structure and the uiParam
 /// parameter to sizeof(HIGHCONTRAST).
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETHIGHCONTRAST instead')
 const SPI_SETHIGHCONTRAST = 0x0043;
 
 /// Determines whether the user relies on the keyboard instead of the mouse, and
 /// wants applications to display keyboard interfaces that would otherwise be
 /// hidden. The pvParam parameter must point to a BOOL variable that receives
 /// TRUE if the user relies on the keyboard; or FALSE otherwise.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETKEYBOARDPREF instead')
 const SPI_GETKEYBOARDPREF = 0x0044;
 
 /// Sets the keyboard preference. The uiParam parameter specifies TRUE if the
 /// user relies on the keyboard instead of the mouse, and wants applications to
 /// display keyboard interfaces that would otherwise be hidden; uiParam is FALSE
 /// otherwise.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETKEYBOARDPREF instead')
 const SPI_SETKEYBOARDPREF = 0x0045;
 
 /// Determines whether a screen reviewer utility is running. A screen reviewer
@@ -3487,7 +3084,6 @@ const SPI_SETKEYBOARDPREF = 0x0045;
 ///
 /// Note: Narrator, the screen reader that is included with Windows, does not
 /// set the SPI_SETSCREENREADER or SPI_GETSCREENREADER flags.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETSCREENREADER instead')
 const SPI_GETSCREENREADER = 0x0046;
 
 /// Determines whether a screen review utility is running. The uiParam parameter
@@ -3495,21 +3091,18 @@ const SPI_GETSCREENREADER = 0x0046;
 ///
 /// Note: Narrator, the screen reader that is included with Windows, does not
 /// set the SPI_SETSCREENREADER or SPI_GETSCREENREADER flags.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETSCREENREADER instead')
 const SPI_SETSCREENREADER = 0x0047;
 
 /// Retrieves the animation effects associated with user actions. The pvParam
 /// parameter must point to an ANIMATIONINFO structure that receives the
 /// information. Set the cbSize member of this structure and the uiParam
 /// parameter to sizeof(ANIMATIONINFO).
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETANIMATION instead')
 const SPI_GETANIMATION = 0x0048;
 
 /// Sets the animation effects associated with user actions. The pvParam
 /// parameter must point to an ANIMATIONINFO structure that contains the new
 /// parameters. Set the cbSize member of this structure and the uiParam
 /// parameter to sizeof(ANIMATIONINFO).
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETANIMATION instead')
 const SPI_SETANIMATION = 0x0049;
 
 /// Determines whether the font smoothing feature is enabled. This feature uses
@@ -3518,7 +3111,6 @@ const SPI_SETANIMATION = 0x0049;
 ///
 /// The pvParam parameter must point to a BOOL variable that receives TRUE if
 /// the feature is enabled, or FALSE if it is not.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETFONTSMOOTHING instead')
 const SPI_GETFONTSMOOTHING = 0x004A;
 
 /// Enables or disables the font smoothing feature, which uses font antialiasing
@@ -3527,72 +3119,57 @@ const SPI_GETFONTSMOOTHING = 0x004A;
 ///
 /// To enable the feature, set the uiParam parameter to TRUE. To disable the
 /// feature, set uiParam to FALSE.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETFONTSMOOTHING instead')
 const SPI_SETFONTSMOOTHING = 0x004B;
 
 /// Sets the width, in pixels, of the rectangle used to detect the start of a
 /// drag operation. Set uiParam to the new value. To retrieve the drag width,
 /// call GetSystemMetrics with the SM_CXDRAG flag.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETDRAGWIDTH instead')
 const SPI_SETDRAGWIDTH = 0x004C;
 
 /// Sets the height, in pixels, of the rectangle used to detect the start of a
 /// drag operation. Set uiParam to the new value. To retrieve the drag height,
 /// call GetSystemMetrics with the SM_CYDRAG flag.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETDRAGHEIGHT instead')
 const SPI_SETDRAGHEIGHT = 0x004D;
 
 /// @nodoc
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETHANDHELD instead')
 const SPI_SETHANDHELD = 0x004E;
 
 /// This parameter is not supported.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETLOWPOWERTIMEOUT instead')
 const SPI_GETLOWPOWERTIMEOUT = 0x004F;
 
 /// This parameter is not supported.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETPOWEROFFTIMEOUT instead')
 const SPI_GETPOWEROFFTIMEOUT = 0x0050;
 
 /// This parameter is not supported.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETLOWPOWERTIMEOUT instead')
 const SPI_SETLOWPOWERTIMEOUT = 0x0051;
 
 /// This parameter is not supported.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETPOWEROFFTIMEOUT instead')
 const SPI_SETPOWEROFFTIMEOUT = 0x0052;
 
 /// @nodoc
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETLOWPOWERACTIVE instead')
 const SPI_GETLOWPOWERACTIVE = 0x0053;
 
 /// This parameter is not supported.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETPOWEROFFACTIVE instead')
 const SPI_GETPOWEROFFACTIVE = 0x0054;
 
 /// This parameter is not supported.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETLOWPOWERACTIVE instead')
 const SPI_SETLOWPOWERACTIVE = 0x0055;
 
 /// This parameter is not supported.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETPOWEROFFACTIVE instead')
 const SPI_SETPOWEROFFACTIVE = 0x0056;
 
 /// Reloads the system cursors. Set the uiParam parameter to zero and the
 /// pvParam parameter to NULL.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETCURSORS instead')
 const SPI_SETCURSORS = 0x0057;
 
 /// Reloads the system icons. Set the uiParam parameter to zero and the pvParam
 /// parameter to NULL.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETICONS instead')
 const SPI_SETICONS = 0x0058;
 
 /// Retrieves the input locale identifier for the system default input language.
 ///
 /// The pvParam parameter must point to an HKL variable that receives this
 /// value.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETDEFAULTINPUTLANG instead')
 const SPI_GETDEFAULTINPUTLANG = 0x0059;
 
 /// Sets the default input language for the system shell and applications.
@@ -3600,7 +3177,6 @@ const SPI_GETDEFAULTINPUTLANG = 0x0059;
 /// The specified language must be displayable using the current system
 /// character set. The pvParam parameter must point to an HKL variable that
 /// contains the input locale identifier for the default language.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETDEFAULTINPUTLANG instead')
 const SPI_SETDEFAULTINPUTLANG = 0x005A;
 
 /// Sets the hot key set for switching between input languages.
@@ -3611,11 +3187,9 @@ const SPI_SETDEFAULTINPUTLANG = 0x005A;
 ///
 /// The path in the registry is HKEY_CURRENT_USER\Keyboard Layout\Toggle. Valid
 /// values are "1" = ALT+SHIFT, "2" = CTRL+SHIFT, and "3" = none.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETLANGTOGGLE instead')
 const SPI_SETLANGTOGGLE = 0x005B;
 
 /// @nodoc
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETWINDOWSEXTENSION instead')
 const SPI_GETWINDOWSEXTENSION = 0x005C;
 
 /// Enables or disables the Mouse Trails feature, which improves the visibility
@@ -3625,7 +3199,6 @@ const SPI_GETWINDOWSEXTENSION = 0x005C;
 /// To disable the feature, set the uiParam parameter to zero or 1. To enable
 /// the feature, set uiParam to a value greater than 1 to indicate the number of
 /// cursors drawn in the trail.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETMOUSETRAILS instead')
 const SPI_SETMOUSETRAILS = 0x005D;
 
 /// Determines whether the Mouse Trails feature is enabled. This feature
@@ -3636,57 +3209,48 @@ const SPI_SETMOUSETRAILS = 0x005D;
 /// value. if the value is zero or 1, the feature is disabled. If the value is
 /// greater than 1, the feature is enabled and the value indicates the number of
 /// cursors drawn in the trail. The uiParam parameter is not used.
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETMOUSETRAILS instead')
 const SPI_GETMOUSETRAILS = 0x005E;
 
 /// @nodoc
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SCREENSAVERRUNNING instead')
 const SPI_SETSCREENSAVERRUNNING = 0x0061;
 
 /// @nodoc
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SCREENSAVERRUNNING instead')
 const SPI_SCREENSAVERRUNNING = SPI_SETSCREENSAVERRUNNING;
 
 /// Retrieves information about the FilterKeys accessibility feature. The
 /// pvParam parameter must point to a FILTERKEYS structure that receives the
 /// information. Set the cbSize member of this structure and the uiParam
 /// parameter to sizeof(FILTERKEYS).
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETFILTERKEYS instead')
 const SPI_GETFILTERKEYS = 0x0032;
 
 /// Sets the parameters of the FilterKeys accessibility feature. The pvParam
 /// parameter must point to a FILTERKEYS structure that contains the new
 /// parameters. Set the cbSize member of this structure and the uiParam
 /// parameter to sizeof(FILTERKEYS).
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETFILTERKEYS instead')
 const SPI_SETFILTERKEYS = 0x0033;
 
 /// Retrieves information about the ToggleKeys accessibility feature. The
 /// pvParam parameter must point to a TOGGLEKEYS structure that receives the
 /// information. Set the cbSize member of this structure and the uiParam
 /// parameter to sizeof(TOGGLEKEYS).
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETTOGGLEKEYS instead')
 const SPI_GETTOGGLEKEYS = 0x0034;
 
 /// Sets the parameters of the ToggleKeys accessibility feature. The pvParam
 /// parameter must point to a TOGGLEKEYS structure that contains the new
 /// parameters. Set the cbSize member of this structure and the uiParam
 /// parameter to sizeof(TOGGLEKEYS).
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETTOGGLEKEYS instead')
 const SPI_SETTOGGLEKEYS = 0x0035;
 
 /// Retrieves information about the MouseKeys accessibility feature. The pvParam
 /// parameter must point to a MOUSEKEYS structure that receives the information.
 /// Set the cbSize member of this structure and the uiParam parameter to
 /// sizeof(MOUSEKEYS).
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETMOUSEKEYS instead')
 const SPI_GETMOUSEKEYS = 0x0036;
 
 /// Sets the parameters of the MouseKeys accessibility feature. The pvParam
 /// parameter must point to a MOUSEKEYS structure that contains the new
 /// parameters. Set the cbSize member of this structure and the uiParam
 /// parameter to sizeof(MOUSEKEYS).
-@Deprecated('Use SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETMOUSEKEYS instead')
 const SPI_SETMOUSEKEYS = 0x0037;
 
 // -----------------------------------------------------------------------------
@@ -3694,12 +3258,10 @@ const SPI_SETMOUSEKEYS = 0x0037;
 // -----------------------------------------------------------------------------
 
 /// Hides the window and activates another window.
-@Deprecated('Use SHOW_WINDOW_CMD.SW_HIDE instead')
 const SW_HIDE = 0;
 
 /// If the window is minimized or maximized, the system restores it to its
 /// original size and position.
-@Deprecated('Use SHOW_WINDOW_CMD.SW_NORMAL instead')
 const SW_NORMAL = 1;
 
 /// Activates and displays a window.
@@ -3707,48 +3269,39 @@ const SW_NORMAL = 1;
 /// If the window is minimized or maximized, the system restores it to its
 /// original size and position. An application should specify this flag when
 /// displaying the window for the first time.
-@Deprecated('Use SHOW_WINDOW_CMD.SW_SHOWNORMAL instead')
 const SW_SHOWNORMAL = 1;
 
 /// Activates the window and displays it as a minimized window.
-@Deprecated('Use SHOW_WINDOW_CMD.SW_SHOWMINIMIZED instead')
 const SW_SHOWMINIMIZED = 2;
 
 /// Maximizes the specified window.
-@Deprecated('Use SHOW_WINDOW_CMD.SW_MAXIMIZE instead')
 const SW_MAXIMIZE = 3;
 
 /// Activates the window and displays it as a maximized window.
-@Deprecated('Use SHOW_WINDOW_CMD.SW_SHOWMAXIMIZED instead')
 const SW_SHOWMAXIMIZED = 3;
 
 /// Displays a window in its most recent size and position.
 ///
 /// This value is similar to SW_SHOWNORMAL, except that the window is not
 /// activated.
-@Deprecated('Use SHOW_WINDOW_CMD.SW_SHOWNOACTIVATE instead')
 const SW_SHOWNOACTIVATE = 4;
 
 /// Activates the window and displays it in its current size and position.
-@Deprecated('Use SHOW_WINDOW_CMD.SW_SHOW instead')
 const SW_SHOW = 5;
 
 /// Minimizes the specified window and activates the next top-level window in
 /// the Z order.
-@Deprecated('Use SHOW_WINDOW_CMD.SW_MINIMIZE instead')
 const SW_MINIMIZE = 6;
 
 /// Displays the window as a minimized window.
 ///
 /// This value is similar to SW_SHOWMINIMIZED, except the window is not
 /// activated.
-@Deprecated('Use SHOW_WINDOW_CMD.SW_SHOWMINNOACTIVE instead')
 const SW_SHOWMINNOACTIVE = 7;
 
 /// Displays the window in its current size and position.
 ///
 /// This value is similar to SW_SHOW, except that the window is not activated.
-@Deprecated('Use SHOW_WINDOW_CMD.SW_SHOWNA instead')
 const SW_SHOWNA = 8;
 
 /// Activates and displays the window.
@@ -3756,13 +3309,11 @@ const SW_SHOWNA = 8;
 /// If the window is minimized or maximized, the system restores it to its
 /// original size and position. An application should specify this flag when
 /// restoring a minimized window.
-@Deprecated('Use SHOW_WINDOW_CMD.SW_RESTORE instead')
 const SW_RESTORE = 9;
 
 /// Sets the show state based on the SW_ value specified in the STARTUPINFO
 /// structure passed to the CreateProcess function by the program that started
 /// the application.
-@Deprecated('Use SHOW_WINDOW_CMD.SW_SHOWDEFAULT instead')
 const SW_SHOWDEFAULT = 10;
 
 /// Minimizes a window, even if the thread that owns the window is not
@@ -3770,7 +3321,6 @@ const SW_SHOWDEFAULT = 10;
 ///
 /// This flag should only be used when minimizing windows from a different
 /// thread.
-@Deprecated('Use SHOW_WINDOW_CMD.SW_FORCEMINIMIZE instead')
 const SW_FORCEMINIMIZE = 11;
 
 // -----------------------------------------------------------------------------
@@ -3779,32 +3329,26 @@ const SW_FORCEMINIMIZE = 11;
 
 /// Each logical unit is mapped to one device pixel. Positive x is to the right;
 /// positive y is down.
-@Deprecated('Use HDC_MAP_MODE.MM_TEXT instead')
 const MM_TEXT = 1;
 
 /// Each logical unit is mapped to 0.1 millimeter. Positive x is to the right;
 /// positive y is up.
-@Deprecated('Use HDC_MAP_MODE.MM_LOMETRIC instead')
 const MM_LOMETRIC = 2;
 
 /// Each logical unit is mapped to 0.01 millimeter. Positive x is to the right;
 /// positive y is up.
-@Deprecated('Use HDC_MAP_MODE.MM_HIMETRIC instead')
 const MM_HIMETRIC = 3;
 
 /// Each logical unit is mapped to 0.01 inch. Positive x is to the right;
 /// positive y is up.
-@Deprecated('Use HDC_MAP_MODE.MM_LOENGLISH instead')
 const MM_LOENGLISH = 4;
 
 /// Each logical unit is mapped to 0.001 inch. Positive x is to the right;
 /// positive y is up.
-@Deprecated('Use HDC_MAP_MODE.MM_HIENGLISH instead')
 const MM_HIENGLISH = 5;
 
 /// Each logical unit is mapped to one twentieth of a printer's point (1/1440
 /// inch, also called a twip). Positive x is to the right; positive y is up.
-@Deprecated('Use HDC_MAP_MODE.MM_TWIPS instead')
 const MM_TWIPS = 6;
 
 /// Logical units are mapped to arbitrary units with equally scaled axes; that
@@ -3814,13 +3358,11 @@ const MM_TWIPS = 6;
 /// as necessary to ensure the x and y units remain the same size (When the
 /// window extent is set, the viewport will be adjusted to keep the units
 /// isotropic).
-@Deprecated('Use HDC_MAP_MODE.MM_ISOTROPIC instead')
 const MM_ISOTROPIC = 7;
 
 /// Logical units are mapped to arbitrary units with arbitrarily scaled axes.
 /// Use the SetWindowExtEx and SetViewportExtEx functions to specify the units,
 /// orientation, and scaling.
-@Deprecated('Use HDC_MAP_MODE.MM_ANISOTROPIC instead')
 const MM_ANISOTROPIC = 8;
 
 // -----------------------------------------------------------------------------
@@ -3828,15 +3370,12 @@ const MM_ANISOTROPIC = 8;
 // -----------------------------------------------------------------------------
 
 /// Retains the current size (ignores the cx and cy parameters).
-@Deprecated('Use SET_WINDOW_POS_FLAGS.SWP_NOSIZE instead')
 const SWP_NOSIZE = 0x0001;
 
 /// Retains the current position (ignores X and Y parameters).
-@Deprecated('Use SET_WINDOW_POS_FLAGS.SWP_NOMOVE instead')
 const SWP_NOMOVE = 0x0002;
 
 /// Retains the current Z order (ignores the hWndInsertAfter parameter).
-@Deprecated('Use SET_WINDOW_POS_FLAGS.SWP_NOZORDER instead')
 const SWP_NOZORDER = 0x0004;
 
 /// Does not redraw changes. If this flag is set, no repainting of any kind
@@ -3845,61 +3384,49 @@ const SWP_NOZORDER = 0x0004;
 /// result of the window being moved. When this flag is set, the application
 /// must explicitly invalidate or redraw any parts of the window and parent
 /// window that need redrawing.
-@Deprecated('Use SET_WINDOW_POS_FLAGS.SWP_NOREDRAW instead')
 const SWP_NOREDRAW = 0x0008;
 
 /// Does not activate the window. If this flag is not set, the window is
 /// activated and moved to the top of either the topmost or non-topmost group
 /// (depending on the setting of the hWndInsertAfter parameter).
-@Deprecated('Use SET_WINDOW_POS_FLAGS.SWP_NOACTIVATE instead')
 const SWP_NOACTIVATE = 0x0010;
 
 /// Applies new frame styles set using the SetWindowLong function. Sends a
 /// WM_NCCALCSIZE message to the window, even if the window's size is not being
 /// changed. If this flag is not specified, WM_NCCALCSIZE is sent only when the
 /// window's size is being changed.
-@Deprecated('Use SET_WINDOW_POS_FLAGS.SWP_FRAMECHANGED instead')
 const SWP_FRAMECHANGED = 0x0020;
 
 /// Displays the window.
-@Deprecated('Use SET_WINDOW_POS_FLAGS.SWP_SHOWWINDOW instead')
 const SWP_SHOWWINDOW = 0x0040;
 
 /// Hides the window.
-@Deprecated('Use SET_WINDOW_POS_FLAGS.SWP_HIDEWINDOW instead')
 const SWP_HIDEWINDOW = 0x0080;
 
 /// Discards the entire contents of the client area. If this flag is not
 /// specified, the valid contents of the client area are saved and copied back
 /// into the client area after the window is sized or repositioned.
-@Deprecated('Use SET_WINDOW_POS_FLAGS.SWP_NOCOPYBITS instead')
 const SWP_NOCOPYBITS = 0x0100;
 
 /// Does not change the owner window's position in the Z order.
-@Deprecated('Use SET_WINDOW_POS_FLAGS.SWP_NOOWNERZORDER instead')
 const SWP_NOOWNERZORDER = 0x0200;
 
 /// Prevents the window from receiving the WM_WINDOWPOSCHANGING message.
-@Deprecated('Use SET_WINDOW_POS_FLAGS.SWP_NOSENDCHANGING instead')
 const SWP_NOSENDCHANGING = 0x0400;
 
 /// Draws a frame (defined in the window's class description) around the window.
-@Deprecated('Use SET_WINDOW_POS_FLAGS.SWP_DRAWFRAME instead')
 const SWP_DRAWFRAME = SWP_FRAMECHANGED;
 
 /// Same as the SWP_NOOWNERZORDER flag.
-@Deprecated('Use SET_WINDOW_POS_FLAGS.SWP_NOREPOSITION instead')
 const SWP_NOREPOSITION = SWP_NOOWNERZORDER;
 
 /// Prevents generation of the WM_SYNCPAINT message.
-@Deprecated('Use SET_WINDOW_POS_FLAGS.SWP_DEFERERASE instead')
 const SWP_DEFERERASE = 0x2000;
 
 /// If the calling thread and the thread that owns the window are attached to
 /// different input queues, the system posts the request to the thread that owns
 /// the window. This prevents the calling thread from blocking its execution
 /// while other threads process the request.
-@Deprecated('Use SET_WINDOW_POS_FLAGS.SWP_ASYNCWINDOWPOS instead')
 const SWP_ASYNCWINDOWPOS = 0x4000;
 
 // -----------------------------------------------------------------------------
@@ -3908,44 +3435,35 @@ const SWP_ASYNCWINDOWPOS = 0x4000;
 
 /// Animates the window from left to right. This flag can be used with roll or
 /// slide animation.
-@Deprecated('Use ANIMATE_WINDOW_FLAGS.AW_HOR_POSITIVE instead')
 const AW_HOR_POSITIVE = 0x00000001;
 
 /// Animates the window from right to left. This flag can be used with roll or
 /// slide animation
-@Deprecated('Use ANIMATE_WINDOW_FLAGS.AW_HOR_NEGATIVE instead')
 const AW_HOR_NEGATIVE = 0x00000002;
 
 /// Animates the window from top to bottom. This flag can be used with roll or
 /// slide animation.
-@Deprecated('Use ANIMATE_WINDOW_FLAGS.AW_VER_POSITIVE instead')
 const AW_VER_POSITIVE = 0x00000004;
 
 /// Animates the window from bottom to top. This flag can be used with roll or
 /// slide animation.
-@Deprecated('Use ANIMATE_WINDOW_FLAGS.AW_VER_NEGATIVE instead')
 const AW_VER_NEGATIVE = 0x00000008;
 
 /// Makes the window appear to collapse inward if AW_HIDE is used or expand
 /// outward if the AW_HIDE is not used. The various direction flags have no
 /// effect.
-@Deprecated('Use ANIMATE_WINDOW_FLAGS.AW_CENTER instead')
 const AW_CENTER = 0x00000010;
 
 /// Hides the window. By default, the window is shown.
-@Deprecated('Use ANIMATE_WINDOW_FLAGS.AW_HIDE instead')
 const AW_HIDE = 0x00010000;
 
 /// Activates the window.
-@Deprecated('Use ANIMATE_WINDOW_FLAGS.AW_ACTIVATE instead')
 const AW_ACTIVATE = 0x00020000;
 
 /// Uses slide animation. By default, roll animation is used.
-@Deprecated('Use ANIMATE_WINDOW_FLAGS.AW_SLIDE instead')
 const AW_SLIDE = 0x00040000;
 
 /// Uses a fade effect.
-@Deprecated('Use ANIMATE_WINDOW_FLAGS.AW_BLEND instead')
 const AW_BLEND = 0x00080000;
 
 // -----------------------------------------------------------------------------
@@ -4017,146 +3535,113 @@ const SCF_ISSECURE = 0x00000001;
 // -----------------------------------------------------------------------------
 
 /// The width of the screen of the primary display monitor, in pixels.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CXSCREEN instead')
 const SM_CXSCREEN = 0;
 
 /// The height of the screen of the primary display monitor, in pixels.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CYSCREEN instead')
 const SM_CYSCREEN = 1;
 
 /// The width of a vertical scroll bar, in pixels.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CXVSCROLL instead')
 const SM_CXVSCROLL = 2;
 
 /// The height of a horizontal scroll bar, in pixels.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CYHSCROLL instead')
 const SM_CYHSCROLL = 3;
 
 /// The height of a caption area, in pixels.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CYCAPTION instead')
 const SM_CYCAPTION = 4;
 
 /// The width of a window border, in pixels.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CXBORDER instead')
 const SM_CXBORDER = 5;
 
 /// The height of a window border, in pixels.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CYBORDER instead')
 const SM_CYBORDER = 6;
 
 /// This value is the same as SM_CXFIXEDFRAME.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CXDLGFRAME instead')
 const SM_CXDLGFRAME = 7;
 
 /// This value is the same as SM_CYFIXEDFRAME.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CYDLGFRAME instead')
 const SM_CYDLGFRAME = 8;
 
 /// The height of the thumb box in a vertical scroll bar, in pixels.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CYVTHUMB instead')
 const SM_CYVTHUMB = 9;
 
 /// The width of the thumb box in a horizontal scroll bar, in pixels.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CXHTHUMB instead')
 const SM_CXHTHUMB = 10;
 
 /// The default width of an icon, in pixels.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CXICON instead')
 const SM_CXICON = 11;
 
 /// The default height of an icon, in pixels.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CYICON instead')
 const SM_CYICON = 12;
 
 /// The width of a cursor, in pixels.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CXCURSOR instead')
 const SM_CXCURSOR = 13;
 
 /// The height of a cursor, in pixels.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CYCURSOR instead')
 const SM_CYCURSOR = 14;
 
 /// The height of a single-line menu bar, in pixels.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CYMENU instead')
 const SM_CYMENU = 15;
 
 /// The width of the client area for a full-screen window on the primary display
 /// monitor, in pixels.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CXFULLSCREEN instead')
 const SM_CXFULLSCREEN = 16;
 
 /// The height of the client area for a full-screen window on the primary
 /// display monitor, in pixels.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CYFULLSCREEN instead')
 const SM_CYFULLSCREEN = 17;
 
 /// For double byte character set versions of the system, this is the height of
 /// the Kanji window at the bottom of the screen, in pixels.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CYKANJIWINDOW instead')
 const SM_CYKANJIWINDOW = 18;
 
 /// Nonzero if a mouse is installed; otherwise, 0. This value is rarely zero,
 /// because of support for virtual mice and because some systems detect the
 /// presence of the port instead of the presence of a mouse.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_MOUSEPRESENT instead')
 const SM_MOUSEPRESENT = 19;
 
 /// The height of the arrow bitmap on a vertical scroll bar, in pixels.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CYVSCROLL instead')
 const SM_CYVSCROLL = 20;
 
 /// The width of the arrow bitmap on a horizontal scroll bar, in pixels.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CXHSCROLL instead')
 const SM_CXHSCROLL = 21;
 
 /// Nonzero if the debug version of User.exe is installed; otherwise, 0.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_DEBUG instead')
 const SM_DEBUG = 22;
 
 /// Nonzero if the meanings of the left and right mouse buttons are swapped;
 /// otherwise, 0.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_SWAPBUTTON instead')
 const SM_SWAPBUTTON = 23;
 
 /// The minimum width of a window, in pixels.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CXMIN instead')
 const SM_CXMIN = 28;
 
 /// The minimum height of a window, in pixels.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CYMIN instead')
 const SM_CYMIN = 29;
 
 /// The width of a button in a window caption or title bar, in pixels.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CXSIZE instead')
 const SM_CXSIZE = 30;
 
 /// The height of a button in a window caption or title bar, in pixels.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CYSIZE instead')
 const SM_CYSIZE = 31;
 
 /// This value is the same as SM_CXSIZEFRAME.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CXFRAME instead')
 const SM_CXFRAME = 32;
 
 /// This value is the same as SM_CYSIZEFRAME.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CYFRAME instead')
 const SM_CYFRAME = 33;
 
 /// The minimum tracking width of a window, in pixels. The user cannot drag the
 /// window frame to a size smaller than these dimensions.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CXMINTRACK instead')
 const SM_CXMINTRACK = 34;
 
 /// The minimum tracking height of a window, in pixels. The user cannot drag the
 /// window frame to a size smaller than these dimensions.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CYMINTRACK instead')
 const SM_CYMINTRACK = 35;
 
 /// The width of the rectangle around the location of a first click in a
 /// double-click sequence, in pixels. The second click must occur within the
 /// rectangle that is defined by SM_CXDOUBLECLK and SM_CYDOUBLECLK for the
 /// system to consider the two clicks a double-click.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CXDOUBLECLK instead')
 const SM_CXDOUBLECLK = 36;
 
 /// The height of the rectangle around the location of a first click in a
@@ -4164,160 +3649,128 @@ const SM_CXDOUBLECLK = 36;
 /// rectangle defined by SM_CXDOUBLECLK and SM_CYDOUBLECLK for the system to
 /// consider the two clicks a double-click. The two clicks must also occur
 /// within a specified time.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CYDOUBLECLK instead')
 const SM_CYDOUBLECLK = 37;
 
 /// The width of a grid cell for items in large icon view, in pixels. Each item
 /// fits into a rectangle of size SM_CXICONSPACING by SM_CYICONSPACING when
 /// arranged. This value is always greater than or equal to SM_CXICON.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CXICONSPACING instead')
 const SM_CXICONSPACING = 38;
 
 /// The height of a grid cell for items in large icon view, in pixels. Each item
 /// fits into a rectangle of size SM_CXICONSPACING by SM_CYICONSPACING when
 /// arranged. This value is always greater than or equal to SM_CYICON.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CYICONSPACING instead')
 const SM_CYICONSPACING = 39;
 
 /// Nonzero if drop-down menus are right-aligned with the corresponding menu-bar
 /// item; 0 if the menus are left-aligned.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_MENUDROPALIGNMENT instead')
 const SM_MENUDROPALIGNMENT = 40;
 
 /// Nonzero if the Microsoft Windows for Pen computing extensions are installed;
 /// zero otherwise.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_PENWINDOWS instead')
 const SM_PENWINDOWS = 41;
 
 /// Nonzero if User32.dll supports DBCS; otherwise, 0.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_DBCSENABLED instead')
 const SM_DBCSENABLED = 42;
 
 /// The number of buttons on a mouse, or zero if no mouse is installed.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CMOUSEBUTTONS instead')
 const SM_CMOUSEBUTTONS = 43;
 
 /// The thickness of the frame around the perimeter of a window that has a
 /// caption but is not sizable, in pixels. SM_CXFIXEDFRAME is the height of the
 /// horizontal border, and SM_CYFIXEDFRAME is the width of the vertical border.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CXFIXEDFRAME instead')
 const SM_CXFIXEDFRAME = SM_CXDLGFRAME;
 
 /// The thickness of the frame around the perimeter of a window that has a
 /// caption but is not sizable, in pixels. SM_CXFIXEDFRAME is the height of the
 /// horizontal border, and SM_CYFIXEDFRAME is the width of the vertical border.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CYFIXEDFRAME instead')
 const SM_CYFIXEDFRAME = SM_CYDLGFRAME;
 
 /// The thickness of the sizing border around the perimeter of a window that can
 /// be resized, in pixels. SM_CXSIZEFRAME is the width of the horizontal border,
 /// and SM_CYSIZEFRAME is the height of the vertical border.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CXSIZEFRAME instead')
 const SM_CXSIZEFRAME = SM_CXFRAME;
 
 /// The thickness of the sizing border around the perimeter of a window that can
 /// be resized, in pixels. SM_CXSIZEFRAME is the width of the horizontal border,
 /// and SM_CYSIZEFRAME is the height of the vertical border.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CYSIZEFRAME instead')
 const SM_CYSIZEFRAME = SM_CYFRAME;
 
 /// This system metric should be ignored; it always returns 0.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_SECURE instead')
 const SM_SECURE = 44;
 
 /// The width of a 3-D border, in pixels.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CXEDGE instead')
 const SM_CXEDGE = 45;
 
 /// The height of a 3-D border, in pixels.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CYEDGE instead')
 const SM_CYEDGE = 46;
 
 /// The width of a grid cell for a minimized window, in pixels. Each minimized
 /// window fits into a rectangle this size when arranged. This value is always
 /// greater than or equal to SM_CXMINIMIZED.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CXMINSPACING instead')
 const SM_CXMINSPACING = 47;
 
 /// The height of a grid cell for a minimized window, in pixels. Each minimized
 /// window fits into a rectangle this size when arranged. This value is always
 /// greater than or equal to SM_CYMINIMIZED.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CYMINSPACING instead')
 const SM_CYMINSPACING = 48;
 
 /// The recommended width of a small icon, in pixels. Small icons typically
 /// appear in window captions and in small icon view.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CXSMICON instead')
 const SM_CXSMICON = 49;
 
 /// The recommended height of a small icon, in pixels. Small icons typically
 /// appear in window captions and in small icon view.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CYSMICON instead')
 const SM_CYSMICON = 50;
 
 /// The height of a small caption, in pixels.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CYSMCAPTION instead')
 const SM_CYSMCAPTION = 51;
 
 /// The width of small caption buttons, in pixels.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CXSMSIZE instead')
 const SM_CXSMSIZE = 52;
 
 /// The height of small caption buttons, in pixels.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CYSMSIZE instead')
 const SM_CYSMSIZE = 53;
 
 /// The width of menu bar buttons, such as the child window close button that is
 /// used in the multiple document interface, in pixels.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CXMENUSIZE instead')
 const SM_CXMENUSIZE = 54;
 
 /// The height of menu bar buttons, such as the child window close button that
 /// is used in the multiple document interface, in pixels.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CYMENUSIZE instead')
 const SM_CYMENUSIZE = 55;
 
 /// The flags that specify how the system arranged minimized windows.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_ARRANGE instead')
 const SM_ARRANGE = 56;
 
 /// The width of a minimized window, in pixels.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CXMINIMIZED instead')
 const SM_CXMINIMIZED = 57;
 
 /// The height of a minimized window, in pixels.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CYMINIMIZED instead')
 const SM_CYMINIMIZED = 58;
 
 /// The default maximum width of a window that has a caption and sizing borders,
 /// in pixels. This metric refers to the entire desktop. The user cannot drag
 /// the window frame to a size larger than these dimensions.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CXMAXTRACK instead')
 const SM_CXMAXTRACK = 59;
 
 /// The default maximum height of a window that has a caption and sizing
 /// borders, in pixels. This metric refers to the entire desktop. The user
 /// cannot drag the window frame to a size larger than these dimensions.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CYMAXTRACK instead')
 const SM_CYMAXTRACK = 60;
 
 /// The default width, in pixels, of a maximized top-level window on the primary
 /// display monitor.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CXMAXIMIZED instead')
 const SM_CXMAXIMIZED = 61;
 
 /// The default height, in pixels, of a maximized top-level window on the
 /// primary display monitor.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CYMAXIMIZED instead')
 const SM_CYMAXIMIZED = 62;
 
 /// The least significant bit is set if a network is present; otherwise, it is
 /// cleared.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_NETWORK instead')
 const SM_NETWORK = 63;
 
 /// The value that specifies how the system is started.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CLEANBOOT instead')
 const SM_CLEANBOOT = 67;
 
 /// The number of pixels on either side of a mouse-down point that the mouse
@@ -4325,7 +3778,6 @@ const SM_CLEANBOOT = 67;
 /// click and release the mouse button easily without unintentionally starting a
 /// drag operation. If this value is negative, it is subtracted from the left of
 /// the mouse-down point and added to the right of it.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CXDRAG instead')
 const SM_CXDRAG = 68;
 
 /// The number of pixels above and below a mouse-down point that the mouse
@@ -4333,61 +3785,49 @@ const SM_CXDRAG = 68;
 /// click and release the mouse button easily without unintentionally starting a
 /// drag operation. If this value is negative, it is subtracted from above the
 /// mouse-down point and added below it.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CYDRAG instead')
 const SM_CYDRAG = 69;
 
 /// Nonzero if the user requires an application to present information visually
 /// in situations where it would otherwise present the information only in
 /// audible form; otherwise, 0.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_SHOWSOUNDS instead')
 const SM_SHOWSOUNDS = 70;
 
 /// The width of the default menu check-mark bitmap, in pixels.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CXMENUCHECK instead')
 const SM_CXMENUCHECK = 71;
 
 /// The height of the default menu check-mark bitmap, in pixels.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CYMENUCHECK instead')
 const SM_CYMENUCHECK = 72;
 
 /// Nonzero if the computer has a low-end (slow) processor; otherwise, 0.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_SLOWMACHINE instead')
 const SM_SLOWMACHINE = 73;
 
 /// Nonzero if the system is enabled for Hebrew and Arabic languages, 0 if not.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_MIDEASTENABLED instead')
 const SM_MIDEASTENABLED = 74;
 
 /// Nonzero if a mouse with a vertical scroll wheel is installed; otherwise 0.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_MOUSEWHEELPRESENT instead')
 const SM_MOUSEWHEELPRESENT = 75;
 
 /// The coordinates for the left side of the virtual screen. The virtual screen
 /// is the bounding rectangle of all display monitors. The SM_CXVIRTUALSCREEN
 /// metric is the width of the virtual screen.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_XVIRTUALSCREEN instead')
 const SM_XVIRTUALSCREEN = 76;
 
 /// The coordinates for the top of the virtual screen. The virtual screen is the
 /// bounding rectangle of all display monitors. The SM_CYVIRTUALSCREEN metric is
 /// the height of the virtual screen.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_YVIRTUALSCREEN instead')
 const SM_YVIRTUALSCREEN = 77;
 
 /// The width of the virtual screen, in pixels. The virtual screen is the
 /// bounding rectangle of all display monitors. The SM_XVIRTUALSCREEN metric is
 /// the coordinates for the left side of the virtual screen.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CXVIRTUALSCREEN instead')
 const SM_CXVIRTUALSCREEN = 78;
 
 /// The height of the virtual screen, in pixels. The virtual screen is the
 /// bounding rectangle of all display monitors. The SM_YVIRTUALSCREEN metric is
 /// the coordinates for the top of the virtual screen.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CYVIRTUALSCREEN instead')
 const SM_CYVIRTUALSCREEN = 79;
 
 /// The number of display monitors on a desktop.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CMONITORS instead')
 const SM_CMONITORS = 80;
 
 /// Nonzero if all the display monitors have the same color format, otherwise,
@@ -4395,57 +3835,46 @@ const SM_CMONITORS = 80;
 /// For example, the red, green, and blue pixels can be encoded with different
 /// numbers of bits, or those bits can be located in different places in a pixel
 /// color value.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_SAMEDISPLAYFORMAT instead')
 const SM_SAMEDISPLAYFORMAT = 81;
 
 /// Nonzero if Input Method Manager/Input Method Editor features are enabled;
 /// otherwise, 0.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_IMMENABLED instead')
 const SM_IMMENABLED = 82;
 
 /// The width of the left and right edges of the focus rectangle that the
 /// DrawFocusRect draws. This value is in pixels.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CXFOCUSBORDER instead')
 const SM_CXFOCUSBORDER = 83;
 
 /// The height of the top and bottom edges of the focus rectangle drawn by
 /// DrawFocusRect. This value is in pixels.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CYFOCUSBORDER instead')
 const SM_CYFOCUSBORDER = 84;
 
 /// Nonzero if the current operating system is the Windows XP Tablet PC edition
 /// or if the current operating system is Windows Vista or Windows 7 and the
 /// Tablet PC Input service is started; otherwise, 0.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_TABLETPC instead')
 const SM_TABLETPC = 86;
 
 /// Nonzero if the current operating system is the Windows XP, Media Center
 /// Edition, 0 if not.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_MEDIACENTER instead')
 const SM_MEDIACENTER = 87;
 
 /// Nonzero if the current operating system is Windows 7 Starter Edition,
 /// Windows Vista Starter, or Windows XP Starter Edition; otherwise, 0.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_STARTER instead')
 const SM_STARTER = 88;
 
 /// The build number if the system is Windows Server 2003 R2; otherwise, 0.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_SERVERR2 instead')
 const SM_SERVERR2 = 89;
 
 /// Nonzero if a mouse with a horizontal scroll wheel is installed; otherwise 0.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_MOUSEHORIZONTALWHEELPRESENT instead')
 const SM_MOUSEHORIZONTALWHEELPRESENT = 91;
 
 /// The amount of border padding for captioned windows, in pixels.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CXPADDEDBORDER instead')
 const SM_CXPADDEDBORDER = 92;
 
 /// Nonzero if the current operating system is Windows 7 or Windows Server 2008
 /// R2 and the Tablet PC Input service is started; otherwise, 0. The return
 /// value is a bitmask that specifies the type of digitizer input supported by
 /// the device.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_DIGITIZER instead')
 const SM_DIGITIZER = 94;
 
 /// Nonzero if there are digitizers in the system; otherwise, 0.
@@ -4454,35 +3883,29 @@ const SM_DIGITIZER = 94;
 /// single-touch digitizers, the return value is 1. If the system has
 /// multi-touch digitizers, the return value is the number of simultaneous
 /// contacts the hardware can provide.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_MAXIMUMTOUCHES instead')
 const SM_MAXIMUMTOUCHES = 95;
 
 /// This system metric is used in a Terminal Services environment. If the
 /// calling process is associated with a Terminal Services client session, the
 /// return value is nonzero. If the calling process is associated with the
 /// Terminal Services console session, the return value is 0
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_REMOTESESSION instead')
 const SM_REMOTESESSION = 0x1000;
 
 /// Nonzero if the current session is shutting down; otherwise, 0.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_SHUTTINGDOWN instead')
 const SM_SHUTTINGDOWN = 0x2000;
 
 /// This system metric is used in a Terminal Services environment to determine
 /// if the current Terminal Server session is being remotely controlled. Its
 /// value is nonzero if the current session is remotely controlled; otherwise,
 /// 0.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_REMOTECONTROL instead')
 const SM_REMOTECONTROL = 0x2001;
 
 /// Reflects the state of the laptop or slate mode, 0 for Slate Mode and
 /// non-zero otherwise.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_CONVERTIBLESLATEMODE instead')
 const SM_CONVERTIBLESLATEMODE = 0x2003;
 
 /// Reflects the state of the docking mode, 0 for Undocked Mode and non-zero
 /// otherwise.
-@Deprecated('Use SYSTEM_METRICS_INDEX.SM_SYSTEMDOCKED instead')
 const SM_SYSTEMDOCKED = 0x2004;
 
 // -----------------------------------------------------------------------------
@@ -4490,80 +3913,61 @@ const SM_SYSTEMDOCKED = 0x2004;
 // -----------------------------------------------------------------------------
 
 /// Apply to the window's standard horizontal scroll bar.
-@Deprecated('Use SCROLLBAR_CONSTANTS.SB_HORZ instead')
 const SB_HORZ = 0;
 
 /// Apply to the window's standard vertical scroll bar.
-@Deprecated('Use SCROLLBAR_CONSTANTS.SB_VERT instead')
 const SB_VERT = 1;
 
 /// Apply to a scroll bar control.
-@Deprecated('Use SCROLLBAR_CONSTANTS.SB_CTL instead')
 const SB_CTL = 2;
 
 /// Apply to the window's standard horizontal and vertical scroll bars.
-@Deprecated('Use SCROLLBAR_CONSTANTS.SB_BOTH instead')
 const SB_BOTH = 3;
 
 /// Scrolls one line up.
-@Deprecated('Use SCROLLBAR_COMMAND.SB_LINEUP instead')
 const SB_LINEUP = 0;
 
 /// Scrolls left by one unit.
-@Deprecated('Use SCROLLBAR_COMMAND.SB_LINELEFT instead')
 const SB_LINELEFT = 0;
 
 /// Scrolls one line down.
-@Deprecated('Use SCROLLBAR_COMMAND.SB_LINEDOWN instead')
 const SB_LINEDOWN = 1;
 
 /// Scrolls right by one unit.
-@Deprecated('Use SCROLLBAR_COMMAND.SB_LINERIGHT instead')
 const SB_LINERIGHT = 1;
 
 /// Scrolls one page up.
-@Deprecated('Use SCROLLBAR_COMMAND.SB_PAGEUP instead')
 const SB_PAGEUP = 2;
 
 /// Scrolls left by the width of the window.
-@Deprecated('Use SCROLLBAR_COMMAND.SB_PAGELEFT instead')
 const SB_PAGELEFT = 2;
 
 /// Scrolls one page down.
-@Deprecated('Use SCROLLBAR_COMMAND.SB_PAGEDOWN instead')
 const SB_PAGEDOWN = 3;
 
 /// Scrolls right by the width of the window.
-@Deprecated('Use SCROLLBAR_COMMAND.SB_PAGERIGHT instead')
 const SB_PAGERIGHT = 3;
 
 /// The user has dragged the scroll box (thumb) and released the mouse button.
-@Deprecated('Use SCROLLBAR_COMMAND.SB_THUMBPOSITION instead')
 const SB_THUMBPOSITION = 4;
 
 /// The user is dragging the scroll box. This message is sent repeatedly until
 /// the user releases the mouse button.
-@Deprecated('Use SCROLLBAR_COMMAND.SB_THUMBTRACK instead')
 const SB_THUMBTRACK = 5;
 
 /// Scrolls to the upper left.
-@Deprecated('Use SCROLLBAR_COMMAND.SB_TOP instead')
 const SB_TOP = 6;
 
 /// Scrolls to the upper left.
-@Deprecated('Use SCROLLBAR_COMMAND.SB_LEFT instead')
 const SB_LEFT = 6;
 
 /// Scrolls to the lower right.
-@Deprecated('Use SCROLLBAR_COMMAND.SB_BOTTOM instead')
 const SB_BOTTOM = 7;
 
 /// Scrolls to the lower right.
-@Deprecated('Use SCROLLBAR_COMMAND.SB_RIGHT instead')
 const SB_RIGHT = 7;
 
 /// Ends scroll.
-@Deprecated('Use SCROLLBAR_COMMAND.SB_ENDSCROLL instead')
 const SB_ENDSCROLL = 8;
 
 // -----------------------------------------------------------------------------
@@ -4707,76 +4111,61 @@ const PBST_PAUSED = 0x0003;
 /// Text format. Each line ends with a carriage return/linefeed (CR-LF)
 /// combination. A null character signals the end of the data. Use this format
 /// for ANSI text.
-@Deprecated('Use CLIPBOARD_FORMAT.CF_TEXT instead')
 const CF_TEXT = 1;
 
 /// A handle to a bitmap (HBITMAP).
-@Deprecated('Use CLIPBOARD_FORMAT.CF_BITMAP instead')
 const CF_BITMAP = 2;
 
 /// Handle to a metafile picture format as defined by the METAFILEPICT
 /// structure. When passing a CF_METAFILEPICT handle by means of DDE, the
 /// application responsible for deleting hMem should also free the metafile
 /// referred to by the CF_METAFILEPICT handle.
-@Deprecated('Use CLIPBOARD_FORMAT.CF_METAFILEPICT instead')
 const CF_METAFILEPICT = 3;
 
 /// Microsoft Symbolic Link (SYLK) format.
-@Deprecated('Use CLIPBOARD_FORMAT.CF_SYLK instead')
 const CF_SYLK = 4;
 
 /// Software Arts' Data Interchange Format.
-@Deprecated('Use CLIPBOARD_FORMAT.CF_DIF instead')
 const CF_DIF = 5;
 
 // Tagged-image file format.
-@Deprecated('Use CLIPBOARD_FORMAT.CF_TIFF instead')
 const CF_TIFF = 6;
 
 /// Text format containing characters in the OEM character set. Each line ends
 /// with a carriage return/linefeed (CR-LF) combination. A null character
 /// signals the end of the data.
-@Deprecated('Use CLIPBOARD_FORMAT.CF_OEMTEXT instead')
 const CF_OEMTEXT = 7;
 
 /// A memory object containing a BITMAPINFO structure followed by the bitmap
 /// bits.
-@Deprecated('Use CLIPBOARD_FORMAT.CF_DIB instead')
 const CF_DIB = 8;
 
 /// Handle to a color palette. Whenever an application places data in the
 /// clipboard that depends on or assumes a color palette, it should place the
 /// palette on the clipboard as well.
-@Deprecated('Use CLIPBOARD_FORMAT.CF_PALETTE instead')
 const CF_PALETTE = 9;
 
 /// Data for the pen extensions to the Microsoft Windows for Pen Computing.
-@Deprecated('Use CLIPBOARD_FORMAT.CF_PENDATA instead')
 const CF_PENDATA = 10;
 
 /// Represents audio data more complex than can be represented in a CF_WAVE
 /// standard wave format.
-@Deprecated('Use CLIPBOARD_FORMAT.CF_RIFF instead')
 const CF_RIFF = 11;
 
 /// Represents audio data in one of the standard wave formats, such as 11 kHz or
 /// 22 kHz PCM.
-@Deprecated('Use CLIPBOARD_FORMAT.CF_WAVE instead')
 const CF_WAVE = 12;
 
 /// Unicode text format. Each line ends with a carriage return/linefeed (CR-LF)
 /// combination. A null character signals the end of the data.
-@Deprecated('Use CLIPBOARD_FORMAT.CF_UNICODETEXT instead')
 const CF_UNICODETEXT = 13;
 
 /// A handle to an enhanced metafile (HENHMETAFILE).
-@Deprecated('Use CLIPBOARD_FORMAT.CF_ENHMETAFILE instead')
 const CF_ENHMETAFILE = 14;
 
 /// A handle to type HDROP that identifies a list of files. An application can
 /// retrieve information about the files by passing the handle to the
 /// DragQueryFile function.
-@Deprecated('Use CLIPBOARD_FORMAT.CF_HDROP instead')
 const CF_HDROP = 15;
 
 /// The data is a handle (HGLOBAL) to the locale identifier (LCID) associated
@@ -4784,54 +4173,43 @@ const CF_HDROP = 15;
 /// CF_TEXT data but no CF_LOCALE data, the system automatically sets the
 /// CF_LOCALE format to the current input language. You can use the CF_LOCALE
 /// format to associate a different locale with the clipboard text.
-@Deprecated('Use CLIPBOARD_FORMAT.CF_LOCALE instead')
 const CF_LOCALE = 16;
 
 /// A memory object containing a BITMAPV5HEADER structure followed by the bitmap
 /// color space information and the bitmap bits.
-@Deprecated('Use CLIPBOARD_FORMAT.CF_DIBV5 instead')
 const CF_DIBV5 = 17;
 
 /// Owner-display format. The clipboard owner must display and update the
 /// clipboard viewer window, and receive the WM_ASKCBFORMATNAME,
 /// WM_HSCROLLCLIPBOARD, WM_PAINTCLIPBOARD, WM_SIZECLIPBOARD, and
 /// WM_VSCROLLCLIPBOARD messages.
-@Deprecated('Use CLIPBOARD_FORMAT.CF_OWNERDISPLAY instead')
 const CF_OWNERDISPLAY = 0x0080;
 
 /// Text display format associated with a private format.
-@Deprecated('Use CLIPBOARD_FORMAT.CF_DSPTEXT instead')
 const CF_DSPTEXT = 0x0081;
 
 /// Bitmap display format associated with a private format.
-@Deprecated('Use CLIPBOARD_FORMAT.CF_DSPBITMAP instead')
 const CF_DSPBITMAP = 0x0082;
 
 /// Metafile-picture display format associated with a private format.
-@Deprecated('Use CLIPBOARD_FORMAT.CF_DSPMETAFILEPICT instead')
 const CF_DSPMETAFILEPICT = 0x0083;
 
 /// Enhanced metafile display format associated with a private format.
-@Deprecated('Use CLIPBOARD_FORMAT.CF_DSPENHMETAFILE instead')
 const CF_DSPENHMETAFILE = 0x008E;
 
 /// Start of a range of integer values for private clipboard formats. The range
 /// ends with CF_PRIVATELAST.
-@Deprecated('Use CLIPBOARD_FORMAT.CF_PRIVATEFIRST instead')
 const CF_PRIVATEFIRST = 0x0200;
 
 /// End of a range of integer values for private clipboard formats.
-@Deprecated('Use CLIPBOARD_FORMAT.CF_PRIVATELAST instead')
 const CF_PRIVATELAST = 0x02FF;
 
 /// Start of a range of integer values for application-defined GDI object
 /// clipboard formats. The range ends with CF_GDIOBJLAST.
-@Deprecated('Use CLIPBOARD_FORMAT.CF_GDIOBJFIRST instead')
 const CF_GDIOBJFIRST = 0x0300;
 
 /// End of a range of integer values for application-defined GDI object
 /// clipboard formats.
-@Deprecated('Use CLIPBOARD_FORMAT.CF_GDIOBJLAST instead')
 const CF_GDIOBJLAST = 0x03FF;
 
 // -----------------------------------------------------------------------------
@@ -5340,31 +4718,25 @@ const BS_RIGHTBUTTON = BS_LEFTTEXT;
 
 /// Copies the scroll range to the nMin and nMax members of the SCROLLINFO
 /// structure pointed to by lpsi.
-@Deprecated('Use SCROLLINFO_MASK.SIF_RANGE instead')
 const SIF_RANGE = 0x0001;
 
 /// Copies the scroll page to the nPage member of the SCROLLINFO structure
 /// pointed to by lpsi.
-@Deprecated('Use SCROLLINFO_MASK.SIF_PAGE instead')
 const SIF_PAGE = 0x0002;
 
 /// Copies the scroll position to the nPos member of the SCROLLINFO structure
 /// pointed to by lpsi.
-@Deprecated('Use SCROLLINFO_MASK.SIF_POS instead')
 const SIF_POS = 0x0004;
 
 /// Disables the scroll bar instead of removing it, if the scroll bar's new
 /// parameters make the scroll bar unnecessary.
-@Deprecated('Use SCROLLINFO_MASK.SIF_DISABLENOSCROLL instead')
 const SIF_DISABLENOSCROLL = 0x0008;
 
 /// Copies the current scroll box tracking position to the nTrackPos member of
 /// the SCROLLINFO structure pointed to by lpsi.
-@Deprecated('Use SCROLLINFO_MASK.SIF_TRACKPOS instead')
 const SIF_TRACKPOS = 0x0010;
 
 /// Combines SIF_RANGE,  SIF_PAGE, SIF_POS and SIF_TRACKPOS.
-@Deprecated('Use SCROLLINFO_MASK.SIF_ALL instead')
 const SIF_ALL = SIF_RANGE | SIF_PAGE | SIF_POS | SIF_TRACKPOS;
 
 // -----------------------------------------------------------------------------
@@ -5372,16 +4744,13 @@ const SIF_ALL = SIF_RANGE | SIF_PAGE | SIF_POS | SIF_TRACKPOS;
 // -----------------------------------------------------------------------------
 
 /// Messages are not removed from the queue after processing by PeekMessage.
-@Deprecated('Use PEEK_MESSAGE_REMOVE_TYPE.PM_NOREMOVE instead')
 const PM_NOREMOVE = 0x0000;
 
 /// Messages are removed from the queue after processing by PeekMessage.
-@Deprecated('Use PEEK_MESSAGE_REMOVE_TYPE.PM_REMOVE instead')
 const PM_REMOVE = 0x0001;
 
 /// Prevents the system from releasing any thread that is waiting for the caller
 /// to go idle.
-@Deprecated('Use PEEK_MESSAGE_REMOVE_TYPE.PM_NOYIELD instead')
 const PM_NOYIELD = 0x0002;
 
 // -----------------------------------------------------------------------------
@@ -5389,46 +4758,37 @@ const PM_NOYIELD = 0x0002;
 // -----------------------------------------------------------------------------
 
 /// Justifies the text to the top of the rectangle.
-@Deprecated('Use DRAW_TEXT_FORMAT.DT_TOP instead')
 const DT_TOP = 0x000;
 
 /// Aligns text to the left.
-@Deprecated('Use DRAW_TEXT_FORMAT.DT_LEFT instead')
 const DT_LEFT = 0x000;
 
 /// Centers text horizontally in the rectangle.
-@Deprecated('Use DRAW_TEXT_FORMAT.DT_CENTER instead')
 const DT_CENTER = 0x001;
 
 /// Aligns text to the right.
-@Deprecated('Use DRAW_TEXT_FORMAT.DT_RIGHT instead')
 const DT_RIGHT = 0x002;
 
 /// Centers text vertically. This value is used only with the DT_SINGLELINE
 /// value.
-@Deprecated('Use DRAW_TEXT_FORMAT.DT_VCENTER instead')
 const DT_VCENTER = 0x004;
 
 /// Justifies the text to the bottom of the rectangle. This value is used only
 /// with the DT_SINGLELINE value.
-@Deprecated('Use DRAW_TEXT_FORMAT.DT_BOTTOM instead')
 const DT_BOTTOM = 0x008;
 
 /// Breaks words. Lines are automatically broken between words if a word would
 /// extend past the edge of the rectangle specified by the lpRect parameter. A
 /// carriage return-line feed sequence also breaks the line.
-@Deprecated('Use DRAW_TEXT_FORMAT.DT_WORDBREAK instead')
 const DT_WORDBREAK = 0x0010;
 
 /// Displays text on a single line only. Carriage returns and line feeds do not
 /// break the line.
-@Deprecated('Use DRAW_TEXT_FORMAT.DT_SINGLELINE instead')
 const DT_SINGLELINE = 0x0020;
 
 /// Expands tab characters. The default number of characters per tab is eight.
 /// The DT_WORD_ELLIPSIS, DT_PATH_ELLIPSIS, and DT_END_ELLIPSIS values cannot be
 /// used with the DT_EXPANDTABS value.
-@Deprecated('Use DRAW_TEXT_FORMAT.DT_EXPANDTABS instead')
 const DT_EXPANDTABS = 0x00000040;
 
 /// Sets tab stops. Bits 15-8 (high-order byte of the low-order word) of the
@@ -5436,16 +4796,13 @@ const DT_EXPANDTABS = 0x00000040;
 /// number of characters per tab is eight. The DT_CALCRECT, DT_EXTERNALLEADING,
 /// DT_INTERNAL, DT_NOCLIP, and DT_NOPREFIX values cannot be used with the
 /// DT_TABSTOP value.
-@Deprecated('Use DRAW_TEXT_FORMAT.DT_TABSTOP instead')
 const DT_TABSTOP = 0x00000080;
 
 /// Draws without clipping. DrawText is somewhat faster when DT_NOCLIP is used.
-@Deprecated('Use DRAW_TEXT_FORMAT.DT_NOCLIP instead')
 const DT_NOCLIP = 0x00000100;
 
 /// Includes the font external leading in line height. Normally, external
 /// leading is not included in the height of a line of text.
-@Deprecated('Use DRAW_TEXT_FORMAT.DT_EXTERNALLEADING instead')
 const DT_EXTERNALLEADING = 0x00000200;
 
 /// Determines the width and height of the rectangle. If there are multiple
@@ -5457,73 +4814,61 @@ const DT_EXTERNALLEADING = 0x00000200;
 /// of the rectangle so that it bounds the last character in the line. In either
 /// case, DrawText returns the height of the formatted text but does not draw
 /// the text.
-@Deprecated('Use DRAW_TEXT_FORMAT.DT_CALCRECT instead')
 const DT_CALCRECT = 0x00000400;
 
 /// Turns off processing of prefix characters. Normally, DrawText interprets the
 /// mnemonic-prefix character & as a directive to underscore the character that
 /// follows, and the mnemonic-prefix characters && as a directive to print a
 /// single &. By specifying DT_NOPREFIX, this processing is turned off.
-@Deprecated('Use DRAW_TEXT_FORMAT.DT_NOPREFIX instead')
 const DT_NOPREFIX = 0x00000800;
 
 /// Uses the system font to calculate text metrics.
-@Deprecated('Use DRAW_TEXT_FORMAT.DT_INTERNAL instead')
 const DT_INTERNAL = 0x00001000;
 
 /// Duplicates the text-displaying characteristics of a multiline edit control.
 /// Specifically, the average character width is calculated in the same manner
 /// as for an edit control, and the function does not display a partially
 /// visible last line.
-@Deprecated('Use DRAW_TEXT_FORMAT.DT_EDITCONTROL instead')
 const DT_EDITCONTROL = 0x00002000;
 
 /// For displayed text, replaces characters in the middle of the string with
 /// ellipses so that the result fits in the specified rectangle. If the string
 /// contains backslash (\\) characters, DT_PATH_ELLIPSIS preserves as much as
 /// possible of the text after the last backslash.
-@Deprecated('Use DRAW_TEXT_FORMAT.DT_PATH_ELLIPSIS instead')
 const DT_PATH_ELLIPSIS = 0x00004000;
 
 /// For displayed text, if the end of a string does not fit in the rectangle, it
 /// is truncated and ellipses are added. If a word that is not at the end of the
 /// string goes beyond the limits of the rectangle, it is truncated without
 /// ellipses.
-@Deprecated('Use DRAW_TEXT_FORMAT.DT_END_ELLIPSIS instead')
 const DT_END_ELLIPSIS = 0x00008000;
 
 /// Modifies the specified string to match the displayed text. This value has no
 /// effect unless DT_END_ELLIPSIS or DT_PATH_ELLIPSIS is specified.
-@Deprecated('Use DRAW_TEXT_FORMAT.DT_MODIFYSTRING instead')
 const DT_MODIFYSTRING = 0x00010000;
 
 /// Layout in right-to-left reading order for bidirectional text when the font
 /// selected into the hdc is a Hebrew or Arabic font. The default reading order
 /// for all text is left-to-right.
-@Deprecated('Use DRAW_TEXT_FORMAT.DT_RTLREADING instead')
 const DT_RTLREADING = 0x00020000;
 
 /// Truncates any word that does not fit in the rectangle and adds ellipses.
-@Deprecated('Use DRAW_TEXT_FORMAT.DT_WORD_ELLIPSIS instead')
 const DT_WORD_ELLIPSIS = 0x00040000;
 
 /// Prevents a line break at a DBCS (double-wide character string), so that the
 /// line breaking rule is equivalent to SBCS strings. For example, this can be
 /// used in Korean windows, for more readability of icon labels. This value has
 /// no effect unless DT_WORDBREAK is specified.
-@Deprecated('Use DRAW_TEXT_FORMAT.DT_NOFULLWIDTHCHARBREAK instead')
 const DT_NOFULLWIDTHCHARBREAK = 0x00080000;
 
 /// Ignores the ampersand (&) prefix character in the text. The letter that
 /// follows will not be underlined, but other mnemonic-prefix characters are
 /// still processed.
-@Deprecated('Use DRAW_TEXT_FORMAT.DT_HIDEPREFIX instead')
 const DT_HIDEPREFIX = 0x00100000;
 
 /// Draws only an underline at the position of the character following the
 /// ampersand (&) prefix character. Does not draw any other characters in the
 /// string.
-@Deprecated('Use DRAW_TEXT_FORMAT.DT_PREFIXONLY instead')
 const DT_PREFIXONLY = 0x00200000;
 
 // -----------------------------------------------------------------------------
@@ -5532,22 +4877,18 @@ const DT_PREFIXONLY = 0x00200000;
 
 /// Redraws the entire window if a movement or size adjustment changes the
 /// height of the client area.
-@Deprecated('Use WNDCLASS_STYLES.CS_VREDRAW instead')
 const CS_VREDRAW = 0x0001;
 
 /// Redraws the entire window if a movement or size adjustment changes the width
 /// of the client area.
-@Deprecated('Use WNDCLASS_STYLES.CS_HREDRAW instead')
 const CS_HREDRAW = 0x0002;
 
 /// Sends a double-click message to the window procedure when the user
 /// double-clicks the mouse while the cursor is within a window belonging to the
 /// class.
-@Deprecated('Use WNDCLASS_STYLES.CS_DBLCLKS instead')
 const CS_DBLCLKS = 0x0008;
 
 /// Allocates a unique device context for each window in the class.
-@Deprecated('Use WNDCLASS_STYLES.CS_OWNDC instead')
 const CS_OWNDC = 0x0020;
 
 /// Allocates one device context to be shared by all windows in the class.
@@ -5556,7 +4897,6 @@ const CS_OWNDC = 0x0020;
 /// possible for the threads to attempt to use the device context
 /// simultaneously. When this happens, the system allows only one thread to
 /// successfully finish its drawing operation.
-@Deprecated('Use WNDCLASS_STYLES.CS_CLASSDC instead')
 const CS_CLASSDC = 0x0040;
 
 /// Sets the clipping rectangle of the child window to that of the parent window
@@ -5565,11 +4905,9 @@ const CS_CLASSDC = 0x0040;
 /// device contexts. It does not give the child the parent's device context or
 /// device context settings. Specifying CS_PARENTDC enhances an application's
 /// performance.
-@Deprecated('Use WNDCLASS_STYLES.CS_PARENTDC instead')
 const CS_PARENTDC = 0x0080;
 
 /// Disables Close on the window menu.
-@Deprecated('Use WNDCLASS_STYLES.CS_NOCLOSE instead')
 const CS_NOCLOSE = 0x0200;
 
 /// Saves, as a bitmap, the portion of the screen image obscured by a window of
@@ -5578,26 +4916,21 @@ const CS_NOCLOSE = 0x0200;
 /// Therefore, the system does not send WM_PAINT messages to windows that were
 /// obscured if the memory used by the bitmap has not been discarded and if
 /// other screen actions have not invalidated the stored image.
-@Deprecated('Use WNDCLASS_STYLES.CS_SAVEBITS instead')
 const CS_SAVEBITS = 0x0800;
 
 /// Aligns the window's client area on a byte boundary (in the x direction).
 /// This style affects the width of the window and its horizontal placement on
 /// the display.
-@Deprecated('Use WNDCLASS_STYLES.CS_BYTEALIGNCLIENT instead')
 const CS_BYTEALIGNCLIENT = 0x1000;
 
 /// Aligns the window on a byte boundary (in the x direction). This style
 /// affects the width of the window and its horizontal placement on the display.
-@Deprecated('Use WNDCLASS_STYLES.CS_BYTEALIGNWINDOW instead')
 const CS_BYTEALIGNWINDOW = 0x2000;
 
 /// Indicates that the window class is an application global class.
-@Deprecated('Use WNDCLASS_STYLES.CS_GLOBALCLASS instead')
 const CS_GLOBALCLASS = 0x4000;
 
 /// @nodoc
-@Deprecated('Use WNDCLASS_STYLES.CS_IME instead')
 const CS_IME = 0x00010000;
 
 /// Enables the drop shadow effect on a window. The effect is turned on and off
@@ -5605,7 +4938,6 @@ const CS_IME = 0x00010000;
 /// windows such as menus to emphasize their Z-order relationship to other
 /// windows. Windows created from a class with this style must be top-level
 /// windows; they may not be child windows.
-@Deprecated('Use WNDCLASS_STYLES.CS_DROPSHADOW instead')
 const CS_DROPSHADOW = 0x00020000;
 
 // ControlWord constant
@@ -5618,36 +4950,28 @@ const CW_USEDEFAULT = 0x80000000;
 // -----------------------------------------------------------------------------
 
 /// The message box contains one push button: OK. This is the default.
-@Deprecated('Use MESSAGEBOX_STYLE.MB_OK instead')
 const MB_OK = 0x00000000;
 
 /// The message box contains two push buttons: OK and Cancel.
-@Deprecated('Use MESSAGEBOX_STYLE.MB_OKCANCEL instead')
 const MB_OKCANCEL = 0x00000001;
 
 /// The message box contains three push buttons: Abort, Retry, and Ignore.
-@Deprecated('Use MESSAGEBOX_STYLE.MB_ABORTRETRYIGNORE instead')
 const MB_ABORTRETRYIGNORE = 0x00000002;
 
 /// The message box contains three push buttons: Yes, No, and Cancel.
-@Deprecated('Use MESSAGEBOX_STYLE.MB_YESNOCANCEL instead')
 const MB_YESNOCANCEL = 0x00000003;
 
 /// The message box contains two push buttons: Yes and No.
-@Deprecated('Use MESSAGEBOX_STYLE.MB_YESNO instead')
 const MB_YESNO = 0x00000004;
 
 /// The message box contains two push buttons: Retry and Cancel.
-@Deprecated('Use MESSAGEBOX_STYLE.MB_RETRYCANCEL instead')
 const MB_RETRYCANCEL = 0x00000005;
 
 /// The message box contains three push buttons: Cancel, Try Again, Continue.
 /// Use this message box type instead of MB_ABORTRETRYIGNORE.
-@Deprecated('Use MESSAGEBOX_STYLE.MB_CANCELTRYCONTINUE instead')
 const MB_CANCELTRYCONTINUE = 0x00000006;
 
 /// A stop-sign icon appears in the message box.
-@Deprecated('Use MESSAGEBOX_STYLE.MB_ICONHAND instead')
 const MB_ICONHAND = 0x00000010;
 
 /// A question-mark icon appears in the message box.
@@ -5659,58 +4983,46 @@ const MB_ICONHAND = 0x00000010;
 /// Therefore, do not use this question mark message symbol in your message
 /// boxes. The system continues to support its inclusion only for backward
 /// compatibility.
-@Deprecated('Use MESSAGEBOX_STYLE.MB_ICONQUESTION instead')
 const MB_ICONQUESTION = 0x00000020;
 
 /// An exclamation-point icon appears in the message box.
-@Deprecated('Use MESSAGEBOX_STYLE.MB_ICONEXCLAMATION instead')
 const MB_ICONEXCLAMATION = 0x00000030;
 
 /// An icon consisting of a lowercase letter i in a circle appears in the
 /// message box.
-@Deprecated('Use MESSAGEBOX_STYLE.MB_ICONASTERISK instead')
 const MB_ICONASTERISK = 0x00000040;
 
 /// An exclamation-point icon appears in the message box.
-@Deprecated('Use MESSAGEBOX_STYLE.MB_ICONWARNING instead')
 const MB_ICONWARNING = MB_ICONEXCLAMATION;
 
 /// A stop-sign icon appears in the message box.
-@Deprecated('Use MESSAGEBOX_STYLE.MB_ICONERROR instead')
 const MB_ICONERROR = MB_ICONHAND;
 
 /// An icon consisting of a lowercase letter i in a circle appears in the
 /// message box.
-@Deprecated('Use MESSAGEBOX_STYLE.MB_ICONINFORMATION instead')
 const MB_ICONINFORMATION = MB_ICONASTERISK;
 
 /// A stop-sign icon appears in the message box.
-@Deprecated('Use MESSAGEBOX_STYLE.MB_ICONSTOP instead')
 const MB_ICONSTOP = MB_ICONHAND;
 
 /// The first button is the default button.
 ///
 /// MB_DEFBUTTON1 is the default unless MB_DEFBUTTON2, MB_DEFBUTTON3, or
 /// MB_DEFBUTTON4 is specified.
-@Deprecated('Use MESSAGEBOX_STYLE.MB_DEFBUTTON1 instead')
 const MB_DEFBUTTON1 = 0x00000000;
 
 /// The second button is the default button.
-@Deprecated('Use MESSAGEBOX_STYLE.MB_DEFBUTTON2 instead')
 const MB_DEFBUTTON2 = 0x00000100;
 
 /// The third button is the default button.
-@Deprecated('Use MESSAGEBOX_STYLE.MB_DEFBUTTON3 instead')
 const MB_DEFBUTTON3 = 0x00000200;
 
 /// The fourth button is the default button.
-@Deprecated('Use MESSAGEBOX_STYLE.MB_DEFBUTTON4 instead')
 const MB_DEFBUTTON4 = 0x00000300;
 
 /// The user must respond to the message box before continuing work in the
 /// window identified by the hWnd parameter. However, the user can move to the
 /// windows of other threads and work in those windows.
-@Deprecated('Use MESSAGEBOX_STYLE.MB_APPLMODAL instead')
 const MB_APPLMODAL = 0x00000000;
 
 /// Same as MB_APPLMODAL except that the message box has the WS_EX_TOPMOST
@@ -5720,7 +5032,6 @@ const MB_APPLMODAL = 0x00000000;
 /// damaging errors that require immediate attention (for example, running out
 /// of memory). This flag has no effect on the user's ability to interact with
 /// windows other than those associated with hWnd.
-@Deprecated('Use MESSAGEBOX_STYLE.MB_SYSTEMMODAL instead')
 const MB_SYSTEMMODAL = 0x00001000;
 
 /// Same as MB_APPLMODAL except that all the top-level windows belonging to the
@@ -5729,43 +5040,35 @@ const MB_SYSTEMMODAL = 0x00001000;
 /// Use this flag when the calling application or library does not have a window
 /// handle available but still needs to prevent input to other windows in the
 /// calling thread without suspending other threads.
-@Deprecated('Use MESSAGEBOX_STYLE.MB_TASKMODAL instead')
 const MB_TASKMODAL = 0x00002000;
 
 /// Adds a Help button to the message box. When the user clicks the Help button
 /// or presses F1, the system sends a WM_HELP message to the owner.
-@Deprecated('Use MESSAGEBOX_STYLE.MB_HELP instead')
 const MB_HELP = 0x00004000;
 
 /// The message box becomes the foreground window. Internally, the system calls
 /// the SetForegroundWindow function for the message box.
-@Deprecated('Use MESSAGEBOX_STYLE.MB_SETFOREGROUND instead')
 const MB_SETFOREGROUND = 0x00010000;
 
 /// Same as desktop of the interactive window station.
 ///
 /// If the current input desktop is not the default desktop, MessageBox does not
 /// return until the user switches to the default desktop.
-@Deprecated('Use MESSAGEBOX_STYLE.MB_DEFAULT_DESKTOP_ONLY instead')
 const MB_DEFAULT_DESKTOP_ONLY = 0x00020000;
 
 /// The message box is created with the WS_EX_TOPMOST window style.
-@Deprecated('Use MESSAGEBOX_STYLE.MB_TOPMOST instead')
 const MB_TOPMOST = 0x00040000;
 
 /// The text is right-justified.
-@Deprecated('Use MESSAGEBOX_STYLE.MB_RIGHT instead')
 const MB_RIGHT = 0x00080000;
 
 /// Displays message and caption text using right-to-left reading order on
 /// Hebrew and Arabic systems.
-@Deprecated('Use MESSAGEBOX_STYLE.MB_RTLREADING instead')
 const MB_RTLREADING = 0x00100000;
 
 /// The caller is a service notifying the user of an event. The function
 /// displays a message box on the current active desktop, even if there is no
 /// user logged on to the computer.
-@Deprecated('Use MESSAGEBOX_STYLE.MB_SERVICE_NOTIFICATION instead')
 const MB_SERVICE_NOTIFICATION = 0x00200000;
 
 // -----------------------------------------------------------------------------
@@ -5773,51 +5076,41 @@ const MB_SERVICE_NOTIFICATION = 0x00200000;
 // -----------------------------------------------------------------------------
 
 /// Indicates that flag gives the identifier of the menu item.
-@Deprecated('Use MENU_ITEM_FLAGS.MF_BYCOMMAND instead')
 const MF_BYCOMMAND = 0x00000000;
 
 /// Indicates that flag gives the zero-based relative position of the menu item.
-@Deprecated('Use MENU_ITEM_FLAGS.MF_BYPOSITION instead')
 const MF_BYPOSITION = 0x00000400;
 
 /// Draws a horizontal dividing line. This flag is used only in a drop-down
 /// menu, submenu, or shortcut menu. The line cannot be grayed, disabled, or
 /// highlighted. The lpNewItem and uIDNewItem parameters are ignored.
-@Deprecated('Use MENU_ITEM_FLAGS.MF_SEPARATOR instead')
 const MF_SEPARATOR = 0x00000800;
 
 /// Enables the menu item so that it can be selected, and restores it from its
 /// grayed state.
-@Deprecated('Use MENU_ITEM_FLAGS.MF_ENABLED instead')
 const MF_ENABLED = 0x00000000;
 
 /// Disables the menu item and grays it so that it cannot be selected.
-@Deprecated('Use MENU_ITEM_FLAGS.MF_GRAYED instead')
 const MF_GRAYED = 0x00000001;
 
 /// Disables the menu item so that it cannot be selected, but the flag does not
 /// gray it.
-@Deprecated('Use MENU_ITEM_FLAGS.MF_DISABLED instead')
 const MF_DISABLED = 0x00000002;
 
 /// Does not place a check mark next to the item (default). If the application
 /// supplies check-mark bitmaps (see SetMenuItemBitmaps), this flag displays the
 /// clear bitmap next to the menu item.
-@Deprecated('Use MENU_ITEM_FLAGS.MF_UNCHECKED instead')
 const MF_UNCHECKED = 0x00000000;
 
 /// Places a check mark next to the menu item.
-@Deprecated('Use MENU_ITEM_FLAGS.MF_CHECKED instead')
 const MF_CHECKED = 0x00000008;
 
 /// Specifies that the menu item is a text string; the lpNewItem parameter is a
 /// pointer to the string.
-@Deprecated('Use MENU_ITEM_FLAGS.MF_STRING instead')
 const MF_STRING = 0x00000000;
 
 /// Uses a bitmap as the menu item. The lpNewItem parameter contains a handle to
 /// the bitmap.
-@Deprecated('Use MENU_ITEM_FLAGS.MF_BITMAP instead')
 const MF_BITMAP = 0x00000004;
 
 /// Specifies that the item is an owner-drawn item. Before the menu is displayed
@@ -5825,34 +5118,28 @@ const MF_BITMAP = 0x00000004;
 /// message to retrieve the width and height of the menu item. The WM_DRAWITEM
 /// message is then sent to the window procedure of the owner window whenever
 /// the appearance of the menu item must be updated.
-@Deprecated('Use MENU_ITEM_FLAGS.MF_OWNERDRAW instead')
 const MF_OWNERDRAW = 0x00000100;
 
 /// Specifies that the menu item opens a drop-down menu or submenu. The
 /// uIDNewItem parameter specifies a handle to the drop-down menu or submenu.
 /// This flag is used to add a menu name to a menu bar, or a menu item that
 /// opens a submenu to a drop-down menu, submenu, or shortcut menu.
-@Deprecated('Use MENU_ITEM_FLAGS.MF_POPUP instead')
 const MF_POPUP = 0x00000010;
 
 /// Functions the same as the MF_MENUBREAK flag for a menu bar. For a drop-down
 /// menu, submenu, or shortcut menu, the new column is separated from the old
 /// column by a vertical line.
-@Deprecated('Use MENU_ITEM_FLAGS.MF_MENUBARBREAK instead')
 const MF_MENUBARBREAK = 0x00000020;
 
 /// Places the item on a new line (for a menu bar) or in a new column (for a
 /// drop-down menu, submenu, or shortcut menu) without separating columns.
-@Deprecated('Use MENU_ITEM_FLAGS.MF_MENUBREAK instead')
 const MF_MENUBREAK = 0x00000040;
 
 /// Removes highlighting from the menu item.
-@Deprecated('Use MENU_ITEM_FLAGS.MF_UNHILITE instead')
 const MF_UNHILITE = 0x00000000;
 
 /// Highlights the menu item. If this flag is not specified, the highlighting is
 /// removed from the item.
-@Deprecated('Use MENU_ITEM_FLAGS.MF_HILITE instead')
 const MF_HILITE = 0x00000080;
 
 // -----------------------------------------------------------------------------
@@ -5936,7 +5223,6 @@ const DS_SHELLFONT = DS_SETFONT | DS_FIXEDSYS;
 /// of a line are automatically wrapped to the beginning of the next
 /// left-aligned line. Words that are longer than the width of the control are
 /// truncated.
-@Deprecated('Use STATIC_STYLES.SS_LEFT instead')
 const SS_LEFT = 0x00000000;
 
 /// A simple rectangle and centers the text in the rectangle.
@@ -5944,7 +5230,6 @@ const SS_LEFT = 0x00000000;
 /// The text is formatted before it is displayed. Words that extend past the end
 /// of a line are automatically wrapped to the beginning of the next centered
 /// line. Words that are longer than the width of the control are truncated.
-@Deprecated('Use STATIC_STYLES.SS_CENTER instead')
 const SS_CENTER = 0x00000001;
 
 /// A simple rectangle and right-aligns the text in the rectangle.
@@ -5953,7 +5238,6 @@ const SS_CENTER = 0x00000001;
 /// of a line are automatically wrapped to the beginning of the next
 /// right-aligned line. Words that are longer than the width of the control are
 /// truncated.
-@Deprecated('Use STATIC_STYLES.SS_RIGHT instead')
 const SS_RIGHT = 0x00000002;
 
 /// An icon to be displayed in the dialog box.
@@ -5963,59 +5247,48 @@ const SS_RIGHT = 0x00000002;
 /// control is created via CreateWindow or a related function, the text is the
 /// name of an icon (not a filename) defined in the resource file associated
 /// with the module specified by the hInstance parameter to CreateWindow.
-@Deprecated('Use STATIC_STYLES.SS_ICON instead')
 const SS_ICON = 0x00000003;
 
 /// A rectangle filled with the current window frame color. This color is black
 /// in the default color scheme.
-@Deprecated('Use STATIC_STYLES.SS_BLACKRECT instead')
 const SS_BLACKRECT = 0x00000004;
 
 /// A rectangle filled with the current screen background color. This color is
 /// gray in the default color scheme.
-@Deprecated('Use STATIC_STYLES.SS_GRAYRECT instead')
 const SS_GRAYRECT = 0x00000005;
 
 /// A rectangle filled with the current window background color. This color is
 /// white in the default color scheme.
-@Deprecated('Use STATIC_STYLES.SS_WHITERECT instead')
 const SS_WHITERECT = 0x00000006;
 
 /// A box with a frame drawn in the same color as the window frames. This color
 /// is black in the default color scheme.
-@Deprecated('Use STATIC_STYLES.SS_BLACKFRAME instead')
 const SS_BLACKFRAME = 0x00000007;
 
 /// A box with a frame drawn with the same color as the screen background
 /// (desktop). This color is gray in the default color scheme.
-@Deprecated('Use STATIC_STYLES.SS_GRAYFRAME instead')
 const SS_GRAYFRAME = 0x00000008;
 
 /// A box with a frame drawn with the same color as the window background. This
 /// color is white in the default color scheme.
-@Deprecated('Use STATIC_STYLES.SS_WHITEFRAME instead')
 const SS_WHITEFRAME = 0x00000009;
 
 /// Specifies a user-defined item.
-@Deprecated('Use STATIC_STYLES.SS_USERITEM instead')
 const SS_USERITEM = 0x0000000A;
 
 /// A simple rectangle and displays a single line of left-aligned text in the
 /// rectangle.
-@Deprecated('Use STATIC_STYLES.SS_SIMPLE instead')
 const SS_SIMPLE = 0x0000000B;
 
 /// A simple rectangle and left-aligns the text in the rectangle.
 ///
 /// Tabs are expanded, but words are not wrapped. Text that extends past the
 /// end of a line is clipped.
-@Deprecated('Use STATIC_STYLES.SS_LEFTNOWORDWRAP instead')
 const SS_LEFTNOWORDWRAP = 0x0000000C;
 
 /// The owner of the static control is responsible for drawing the control. The
 /// owner window receives a WM_DRAWITEM message whenever the control needs to be
 /// drawn.
-@Deprecated('Use STATIC_STYLES.SS_OWNERDRAW instead')
 const SS_OWNERDRAW = 0x0000000D;
 
 /// A bitmap is to be displayed in the static control.
@@ -6023,7 +5296,6 @@ const SS_OWNERDRAW = 0x0000000D;
 /// The text is the name of a bitmap (not a filename) defined elsewhere in the
 /// resource file. The style ignores the nWidth and nHeight parameters; the
 /// control automatically sizes itself to accommodate the bitmap.
-@Deprecated('Use STATIC_STYLES.SS_BITMAP instead')
 const SS_BITMAP = 0x0000000E;
 
 /// An enhanced metafile is to be displayed in the static control.
@@ -6031,21 +5303,17 @@ const SS_BITMAP = 0x0000000E;
 /// The text is the name of a metafile. An enhanced metafile static control has
 /// a fixed size; the metafile is scaled to fit the static control's client
 /// area.
-@Deprecated('Use STATIC_STYLES.SS_ENHMETAFILE instead')
 const SS_ENHMETAFILE = 0x0000000F;
 
 /// Draws the top and bottom edges of the static control using the EDGE_ETCHED
 /// edge style.
-@Deprecated('Use STATIC_STYLES.SS_ETCHEDHORZ instead')
 const SS_ETCHEDHORZ = 0x00000010;
 
 /// Draws the left and right edges of the static control using the EDGE_ETCHED
 /// edge style.
-@Deprecated('Use STATIC_STYLES.SS_ETCHEDVERT instead')
 const SS_ETCHEDVERT = 0x00000011;
 
 /// Draws the frame of the static control using the EDGE_ETCHED edge style.
-@Deprecated('Use STATIC_STYLES.SS_ETCHEDFRAME instead')
 const SS_ETCHEDFRAME = 0x00000012;
 
 /// A composite style bit that results from using the OR operator on SS_* style
@@ -6054,7 +5322,6 @@ const SS_ETCHEDFRAME = 0x00000012;
 /// Can be used to mask out valid SS_* bits from a given bitmask. Note that this
 /// is out of date and does not correctly include all valid styles. Thus, you
 /// should not use this style.
-@Deprecated('Use STATIC_STYLES.SS_TYPEMASK instead')
 const SS_TYPEMASK = 0x0000001F;
 
 /// Adjusts the bitmap to fit the size of the static control.
@@ -6063,7 +5330,6 @@ const SS_TYPEMASK = 0x0000001F;
 /// controls might be resized. If a static control had a bitmap, the bitmap
 /// would no longer fit the control. This style bit dictates automatic
 /// redimensioning of bitmaps to fit their controls.
-@Deprecated('Use STATIC_STYLES.SS_REALSIZECONTROL instead')
 const SS_REALSIZECONTROL = 0x00000040;
 
 /// Prevents interpretation of any ampersand (&) characters in the control's
@@ -6074,12 +5340,10 @@ const SS_REALSIZECONTROL = 0x00000040;
 /// defined static controls. You can combine SS_NOPREFIX with other styles. This
 /// can be useful when filenames or other strings that may contain an ampersand
 /// (&) must be displayed in a static control in a dialog box.
-@Deprecated('Use STATIC_STYLES.SS_NOPREFIX instead')
 const SS_NOPREFIX = 0x00000080;
 
 /// Sends the parent window STN_CLICKED, STN_DBLCLK, STN_DISABLE, and STN_ENABLE
 /// notification codes when the user clicks or double-clicks the control.
-@Deprecated('Use STATIC_STYLES.SS_NOTIFY instead')
 const SS_NOTIFY = 0x00000100;
 
 /// A bitmap is centered in the static control that contains it.
@@ -6087,7 +5351,6 @@ const SS_NOTIFY = 0x00000100;
 /// The control is not resized, so that a bitmap too large for the control will
 /// be clipped. If the static control contains a single line of text, the text
 /// is centered vertically in the client area of the control.
-@Deprecated('Use STATIC_STYLES.SS_CENTERIMAGE instead')
 const SS_CENTERIMAGE = 0x00000200;
 
 /// The lower right corner of a static control with the SS_BITMAP or SS_ICON
@@ -6095,17 +5358,14 @@ const SS_CENTERIMAGE = 0x00000200;
 ///
 /// Only the top and left sides are adjusted to accommodate a new bitmap or
 /// icon.
-@Deprecated('Use STATIC_STYLES.SS_RIGHTJUST instead')
 const SS_RIGHTJUST = 0x00000400;
 
 /// Specifies that the actual resource width is used and the icon is loaded
 /// using LoadImage. SS_REALSIZEIMAGE is always used in conjunction with
 /// SS_ICON.
-@Deprecated('Use STATIC_STYLES.SS_REALSIZEIMAGE instead')
 const SS_REALSIZEIMAGE = 0x00000800;
 
 /// Draws a half-sunken border around a static control.
-@Deprecated('Use STATIC_STYLES.SS_SUNKEN instead')
 const SS_SUNKEN = 0x00001000;
 
 /// The static control duplicates the text-displaying characteristics of a
@@ -6114,7 +5374,6 @@ const SS_SUNKEN = 0x00001000;
 /// Specifically, the average character width is calculated in the same manner
 /// as with an edit control, and the function does not display a partially
 /// visible last line.
-@Deprecated('Use STATIC_STYLES.SS_EDITCONTROL instead')
 const SS_EDITCONTROL = 0x00002000;
 
 /// If the end of a string does not fit in the rectangle, it is truncated and
@@ -6124,7 +5383,6 @@ const SS_EDITCONTROL = 0x00002000;
 /// rectangle, it is truncated without ellipses. Using this style will force the
 /// control's text to be on one line with no word wrap. Compare with
 /// SS_PATHELLIPSIS and SS_WORDELLIPSIS.
-@Deprecated('Use STATIC_STYLES.SS_ENDELLIPSIS instead')
 const SS_ENDELLIPSIS = 0x00004000;
 
 /// Replaces characters in the middle of the string with ellipses so that the
@@ -6133,17 +5391,14 @@ const SS_ENDELLIPSIS = 0x00004000;
 /// If the string contains backslash (\) characters, SS_PATHELLIPSIS preserves
 /// as much as possible of the text after the last backslash. Using this style
 /// will force the control's text to be on one line with no word wrap.
-@Deprecated('Use STATIC_STYLES.SS_PATHELLIPSIS instead')
 const SS_PATHELLIPSIS = 0x00008000;
 
 /// Truncates any word that does not fit in the rectangle and adds ellipses.
 /// Using this style will force the control s text to be on one line with no
 /// word wrap.
-@Deprecated('Use STATIC_STYLES.SS_WORDELLIPSIS instead')
 const SS_WORDELLIPSIS = 0x0000C000;
 
 /// Mask for text ellipsis styles.
-@Deprecated('Use STATIC_STYLES.SS_ELLIPSISMASK instead')
 const SS_ELLIPSISMASK = 0x0000C000;
 
 // -----------------------------------------------------------------------------
@@ -6151,92 +5406,71 @@ const SS_ELLIPSISMASK = 0x0000C000;
 // -----------------------------------------------------------------------------
 
 /// The pen is solid.
-@Deprecated('Use PEN_STYLE.PS_SOLID instead')
 const PS_SOLID = 0;
 
 /// The pen is dashed.
-@Deprecated('Use PEN_STYLE.PS_DASH instead')
 const PS_DASH = 1;
 
 /// The pen is dotted.
-@Deprecated('Use PEN_STYLE.PS_DOT instead')
 const PS_DOT = 2;
 
 /// The pen has alternating dashes and dots.
-@Deprecated('Use PEN_STYLE.PS_DASHDOT instead')
 const PS_DASHDOT = 3;
 
 /// The pen has alternating dashes and double dots.
-@Deprecated('Use PEN_STYLE.PS_DASHDOTDOT instead')
 const PS_DASHDOTDOT = 4;
 
 /// The pen is invisible.
-@Deprecated('Use PEN_STYLE.PS_NULL instead')
 const PS_NULL = 5;
 
 /// The pen is solid. When this pen is used in any GDI drawing function that
 /// takes a bounding rectangle, the dimensions of the figure are shrunk so that
 /// it fits entirely in the bounding rectangle, taking into account the width of
 /// the pen. This applies only to geometric pens.
-@Deprecated('Use PEN_STYLE.PS_INSIDEFRAME instead')
 const PS_INSIDEFRAME = 6;
 
 /// The pen uses a styling array supplied by the user.
-@Deprecated('Use PEN_STYLE.PS_USERSTYLE instead')
 const PS_USERSTYLE = 7;
 
 /// The pen sets every other pixel. (This style is applicable only for cosmetic
 /// pens.)
-@Deprecated('Use PEN_STYLE.PS_ALTERNATE instead')
 const PS_ALTERNATE = 8;
 
 // Mask for pen styles.
-@Deprecated('Use PEN_STYLE.PS_STYLE_MASK instead')
 const PS_STYLE_MASK = 0x0000000F;
 
 /// End caps are round.
-@Deprecated('Use PEN_STYLE.PS_ENDCAP_ROUND instead')
 const PS_ENDCAP_ROUND = 0x00000000;
 
 /// End caps are square.
-@Deprecated('Use PEN_STYLE.PS_ENDCAP_SQUARE instead')
 const PS_ENDCAP_SQUARE = 0x00000100;
 
 /// End caps are flat.
-@Deprecated('Use PEN_STYLE.PS_ENDCAP_FLAT instead')
 const PS_ENDCAP_FLAT = 0x00000200;
 
 /// Mask for pen endcap styles.
-@Deprecated('Use PEN_STYLE.PS_ENDCAP_MASK instead')
 const PS_ENDCAP_MASK = 0x00000F00;
 
 /// Line joins are round.
-@Deprecated('Use PEN_STYLE.PS_JOIN_ROUND instead')
 const PS_JOIN_ROUND = 0x00000000;
 
 /// Line joins are beveled.
-@Deprecated('Use PEN_STYLE.PS_JOIN_BEVEL instead')
 const PS_JOIN_BEVEL = 0x00001000;
 
 /// Line joins are mitered when they are within the current limit set by the
 /// SetMiterLimit function. A join is beveled when it would exceed the limit.
-@Deprecated('Use PEN_STYLE.PS_JOIN_MITER instead')
 const PS_JOIN_MITER = 0x00002000;
 
 /// Mask for pen join values.
-@Deprecated('Use PEN_STYLE.PS_JOIN_MASK instead')
 const PS_JOIN_MASK = 0x0000F000;
 
 /// The pen is cosmetic.
-@Deprecated('Use PEN_STYLE.PS_COSMETIC instead')
 const PS_COSMETIC = 0x00000000;
 
 /// The pen is geometric.
-@Deprecated('Use PEN_STYLE.PS_GEOMETRIC instead')
 const PS_GEOMETRIC = 0x00010000;
 
 /// Mask for pen types.
-@Deprecated('Use PEN_STYLE.PS_TYPE_MASK instead')
 const PS_TYPE_MASK = 0x000F0000;
 
 // -----------------------------------------------------------------------------
@@ -6244,39 +5478,30 @@ const PS_TYPE_MASK = 0x000F0000;
 // -----------------------------------------------------------------------------
 
 /// Solid brush.
-@Deprecated('Use BRUSH_STYLE.BS_SOLID instead')
 const BS_SOLID = 0;
 
 /// Hollow brush.
-@Deprecated('Use BRUSH_STYLE.BS_NULL instead')
 const BS_NULL = 1;
 
 /// Hollow brush.
-@Deprecated('Use BRUSH_STYLE.BS_HOLLOW instead')
 const BS_HOLLOW = BS_NULL;
 
 /// Hatched brush.
-@Deprecated('Use BRUSH_STYLE.BS_HATCHED instead')
 const BS_HATCHED = 2;
 
 /// Pattern brush defined by a memory bitmap.
-@Deprecated('Use BRUSH_STYLE.BS_PATTERN instead')
 const BS_PATTERN = 3;
 
 /// A pattern brush defined by a device-independent bitmap (DIB) specification.
-@Deprecated('Use BRUSH_STYLE.BS_DIBPATTERN instead')
 const BS_DIBPATTERN = 5;
 
 /// A pattern brush defined by a device-independent bitmap (DIB) specification.
-@Deprecated('Use BRUSH_STYLE.BS_DIBPATTERNPT instead')
 const BS_DIBPATTERNPT = 6;
 
 /// Pattern brush defined by a memory bitmap.
-@Deprecated('Use BRUSH_STYLE.BS_PATTERN8X8 instead')
 const BS_PATTERN8X8 = 7;
 
 /// A pattern brush defined by a device-independent bitmap (DIB) specification.
-@Deprecated('Use BRUSH_STYLE.BS_DIBPATTERN8X8 instead')
 const BS_DIBPATTERN8X8 = 8;
 
 // -----------------------------------------------------------------------------
@@ -6284,27 +5509,21 @@ const BS_DIBPATTERN8X8 = 8;
 // -----------------------------------------------------------------------------
 
 /// Horizontal hatch
-@Deprecated('Use HATCH_BRUSH_STYLE.HS_HORIZONTAL instead')
 const HS_HORIZONTAL = 0;
 
 /// Vertical hatch
-@Deprecated('Use HATCH_BRUSH_STYLE.HS_VERTICAL instead')
 const HS_VERTICAL = 1;
 
 /// 45-degree downward left-to-right hatch
-@Deprecated('Use HATCH_BRUSH_STYLE.HS_FDIAGONAL instead')
 const HS_FDIAGONAL = 2;
 
 /// 45-degree upward left-to-right hatch
-@Deprecated('Use HATCH_BRUSH_STYLE.HS_BDIAGONAL instead')
 const HS_BDIAGONAL = 3;
 
 /// Horizontal and vertical crosshatch
-@Deprecated('Use HATCH_BRUSH_STYLE.HS_CROSS instead')
 const HS_CROSS = 4;
 
 /// 45-degree crosshatch
-@Deprecated('Use HATCH_BRUSH_STYLE.HS_DIAGCROSS instead')
 const HS_DIAGCROSS = 5;
 
 // -----------------------------------------------------------------------------
@@ -6314,47 +5533,39 @@ const HS_DIAGCROSS = 5;
 /// Performs a Boolean AND operation using the color values for the eliminated
 /// and existing pixels. If the bitmap is a monochrome bitmap, this mode
 /// preserves black pixels at the expense of white pixels.
-@Deprecated('Use STRETCH_BLT_MODE.BLACKONWHITE instead')
 const BLACKONWHITE = 1;
 
 /// Performs a Boolean OR operation using the color values for the eliminated
 /// and existing pixels. If the bitmap is a monochrome bitmap, this mode
 /// preserves white pixels at the expense of black pixels.
-@Deprecated('Use STRETCH_BLT_MODE.WHITEONBLACK instead')
 const WHITEONBLACK = 2;
 
 /// Deletes the pixels. This mode deletes all eliminated lines of pixels without
 /// trying to preserve their information.
-@Deprecated('Use STRETCH_BLT_MODE.COLORONCOLOR instead')
 const COLORONCOLOR = 3;
 
 /// Maps pixels from the source rectangle into blocks of pixels in the
 /// destination rectangle. The average color over the destination block of
 /// pixels approximates the color of the source pixels.
-@Deprecated('Use STRETCH_BLT_MODE.HALFTONE instead')
 const HALFTONE = 4;
 
 /// Performs a Boolean AND operation using the color values for the eliminated
 /// and existing pixels. If the bitmap is a monochrome bitmap, this mode
 /// preserves black pixels at the expense of white pixels.
-@Deprecated('Use STRETCH_BLT_MODE.STRETCH_ANDSCANS instead')
 const STRETCH_ANDSCANS = BLACKONWHITE;
 
 /// Performs a Boolean OR operation using the color values for the eliminated
 /// and existing pixels. If the bitmap is a monochrome bitmap, this mode
 /// preserves white pixels at the expense of black pixels.
-@Deprecated('Use STRETCH_BLT_MODE.STRETCH_ORSCANS instead')
 const STRETCH_ORSCANS = WHITEONBLACK;
 
 /// Deletes the pixels. This mode deletes all eliminated lines of pixels without
 /// trying to preserve their information.
-@Deprecated('Use STRETCH_BLT_MODE.STRETCH_DELETESCANS instead')
 const STRETCH_DELETESCANS = COLORONCOLOR;
 
 /// Maps pixels from the source rectangle into blocks of pixels in the
 /// destination rectangle. The average color over the destination block of
 /// pixels approximates the color of the source pixels.
-@Deprecated('Use STRETCH_BLT_MODE.STRETCH_HALFTONE instead')
 const STRETCH_HALFTONE = HALFTONE;
 
 // -----------------------------------------------------------------------------
@@ -6365,17 +5576,14 @@ const STRETCH_HALFTONE = HALFTONE;
 
 /// The standard input device. Initially, this is the console input buffer,
 /// CONIN$.
-@Deprecated('Use STD_HANDLE.STD_INPUT_HANDLE instead')
 const STD_INPUT_HANDLE = 4294967286;
 
 /// The standard output device. Initially, this is the active console screen
 /// buffer, CONOUT$.
-@Deprecated('Use STD_HANDLE.STD_OUTPUT_HANDLE instead')
 const STD_OUTPUT_HANDLE = 4294967285;
 
 /// The standard error device. Initially, this is the active console screen
 /// buffer, CONOUT$.
-@Deprecated('Use STD_HANDLE.STD_ERROR_HANDLE instead')
 const STD_ERROR_HANDLE = 4294967284;
 
 /// Return only when the object is signaled.
@@ -6386,12 +5594,10 @@ const INFINITE = 0xFFFFFFFF;
 /// Characters read by the ReadFile or ReadConsole function are written to the
 /// active screen buffer as they are read. This mode can be used only if the
 /// ENABLE_LINE_INPUT mode is also enabled.
-@Deprecated('Use CONSOLE_MODE.ENABLE_ECHO_INPUT instead')
 const ENABLE_ECHO_INPUT = 0x0004;
 
 /// Required to enable or disable extended flags. See ENABLE_INSERT_MODE and
 /// ENABLE_QUICK_EDIT_MODE.
-@Deprecated('Use CONSOLE_MODE.ENABLE_EXTENDED_FLAGS instead')
 const ENABLE_EXTENDED_FLAGS = 0x0080;
 
 /// When enabled, text entered in a console window will be inserted at the
@@ -6400,20 +5606,17 @@ const ENABLE_EXTENDED_FLAGS = 0x0080;
 ///
 /// To enable this mode, use ENABLE_INSERT_MODE | ENABLE_EXTENDED_FLAGS. To
 /// disable this mode, use ENABLE_EXTENDED_FLAGS without this flag.
-@Deprecated('Use CONSOLE_MODE.ENABLE_INSERT_MODE instead')
 const ENABLE_INSERT_MODE = 0x0020;
 
 /// The ReadFile or ReadConsole function returns only when a carriage return
 /// character is read. If this mode is disabled, the functions return when one
 /// or more characters are available.
-@Deprecated('Use CONSOLE_MODE.ENABLE_LINE_INPUT instead')
 const ENABLE_LINE_INPUT = 0x0002;
 
 /// If the mouse pointer is within the borders of the console window and the
 /// window has the keyboard focus, mouse events generated by mouse movement and
 /// button presses are placed in the input buffer. These events are discarded by
 /// ReadFile or ReadConsole, even when this mode is enabled.
-@Deprecated('Use CONSOLE_MODE.ENABLE_MOUSE_INPUT instead')
 const ENABLE_MOUSE_INPUT = 0x0010;
 
 /// CTRL+C is processed by the system and is not placed in the input buffer. If
@@ -6422,21 +5625,18 @@ const ENABLE_MOUSE_INPUT = 0x0010;
 /// ReadConsole buffer. If the ENABLE_LINE_INPUT mode is also enabled,
 /// backspace, carriage return, and line feed characters are handled by the
 /// system.
-@Deprecated('Use CONSOLE_MODE.ENABLE_PROCESSED_INPUT instead')
 const ENABLE_PROCESSED_INPUT = 0x0001;
 
 /// This flag enables the user to use the mouse to select and edit text.
 ///
 /// To enable this mode, use ENABLE_QUICK_EDIT_MODE | ENABLE_EXTENDED_FLAGS. To
 /// disable this mode, use ENABLE_EXTENDED_FLAGS without this flag.
-@Deprecated('Use CONSOLE_MODE.ENABLE_QUICK_EDIT_MODE instead')
 const ENABLE_QUICK_EDIT_MODE = 0x0040;
 
 /// User interactions that change the size of the console screen buffer are
 /// reported in the console's input buffer. Information about these events can
 /// be read from the input buffer by applications using the ReadConsoleInput
 /// function, but not by those using ReadFile or ReadConsole.
-@Deprecated('Use CONSOLE_MODE.ENABLE_WINDOW_INPUT instead')
 const ENABLE_WINDOW_INPUT = 0x0008;
 
 /// Setting this flag directs the Virtual Terminal processing engine to convert
@@ -6447,7 +5647,6 @@ const ENABLE_WINDOW_INPUT = 0x0008;
 /// The typical usage of this flag is intended in conjunction with
 /// ENABLE_VIRTUAL_TERMINAL_PROCESSING on the output handle to connect to an
 /// application that communicates exclusively via virtual terminal sequences.
-@Deprecated('Use CONSOLE_MODE.ENABLE_VIRTUAL_TERMINAL_INPUT instead')
 const ENABLE_VIRTUAL_TERMINAL_INPUT = 0x0200;
 
 // Output flags
@@ -6456,7 +5655,6 @@ const ENABLE_VIRTUAL_TERMINAL_INPUT = 0x0200;
 /// the ReadFile or ReadConsole function are examined for ASCII control
 /// sequences and the correct action is performed. Backspace, tab, bell,
 /// carriage return, and line feed characters are processed.
-@Deprecated('Use CONSOLE_MODE.ENABLE_PROCESSED_OUTPUT instead')
 const ENABLE_PROCESSED_OUTPUT = 0x0001;
 
 /// When writing with WriteFile or WriteConsole or echoing with ReadFile or
@@ -6468,7 +5666,6 @@ const ENABLE_PROCESSED_OUTPUT = 0x0001;
 /// buffer) when the cursor advances beyond the last row in the console screen
 /// buffer. If this mode is disabled, the last character in the row is
 /// overwritten with any subsequent characters.
-@Deprecated('Use CONSOLE_MODE.ENABLE_WRAP_AT_EOL_OUTPUT instead')
 const ENABLE_WRAP_AT_EOL_OUTPUT = 0x0002;
 
 /// When writing with WriteFile or WriteConsole, characters are parsed for VT100
@@ -6476,13 +5673,11 @@ const ENABLE_WRAP_AT_EOL_OUTPUT = 0x0002;
 /// color/font mode, and other operations that can also be performed via the
 /// existing Console APIs. For more information, see Console Virtual Terminal
 /// Sequences.
-@Deprecated('Use CONSOLE_MODE.ENABLE_VIRTUAL_TERMINAL_PROCESSING instead')
 const ENABLE_VIRTUAL_TERMINAL_PROCESSING = 0x0004;
 
 /// When writing with WriteFile or WriteConsole, this adds an additional state
 /// to end-of-line wrapping that can delay the cursor move and buffer scroll
 /// operations.
-@Deprecated('Use CONSOLE_MODE.DISABLE_NEWLINE_AUTO_RETURN instead')
 const DISABLE_NEWLINE_AUTO_RETURN = 0x0008;
 
 /// The APIs for writing character attributes including WriteConsoleOutput and
@@ -6491,7 +5686,6 @@ const DISABLE_NEWLINE_AUTO_RETURN = 0x0008;
 /// Additionally, a range of DBCS flags was specified with the COMMON_LVB
 /// prefix. Historically, these flags only functioned in DBCS code pages for
 /// Chinese, Japanese, and Korean languages.
-@Deprecated('Use CONSOLE_MODE.ENABLE_LVB_GRID_WORLDWIDE instead')
 const ENABLE_LVB_GRID_WORLDWIDE = 0x0010;
 
 /// Indicates how the activation context is to be deactivated.
@@ -6513,58 +5707,47 @@ const DEACTIVATE_ACTCTX_FLAG_FORCE_EARLY_DEACTIVATION = 1;
 // -----------------------------------------------------------------------------
 
 /// Get the raw data from the RAWINPUT structure.
-@Deprecated('Use RAW_INPUT_DATA_COMMAND_FLAGS.RID_INPUT instead')
 const RID_INPUT = 0x10000003;
 
 /// Get the header information from the RAWINPUT structure.
-@Deprecated('Use RAW_INPUT_DATA_COMMAND_FLAGS.RID_HEADER instead')
 const RID_HEADER = 0x10000005;
 
 /// pData is a PHIDP_PREPARSED_DATA pointer to a buffer for a top-level
 /// collection's preparsed data.
-@Deprecated('Use RAW_INPUT_DEVICE_INFO_COMMAND.RIDI_PREPARSEDDATA instead')
 const RIDI_PREPARSEDDATA = 0x20000005;
 
 /// pData points to a string that contains the device interface name.
-@Deprecated('Use RAW_INPUT_DEVICE_INFO_COMMAND.RIDI_DEVICENAME instead')
 const RIDI_DEVICENAME = 0x20000007;
 
 /// pData points to an RID_DEVICE_INFO structure.
-@Deprecated('Use RAW_INPUT_DEVICE_INFO_COMMAND.RIDI_DEVICEINFO instead')
 const RIDI_DEVICEINFO = 0x2000000b;
 
 /// If set, this removes the top level collection from the inclusion list. This
 /// tells the operating system to stop reading from a device which matches the
 /// top level collection.
-@Deprecated('Use RAWINPUTDEVICE_FLAGS.RIDEV_REMOVE instead')
 const RIDEV_REMOVE = 0x00000001;
 
 /// If set, this specifies the top level collections to exclude when reading a
 /// complete usage page. This flag only affects a TLC whose usage page is
 /// already specified with RIDEV_PAGEONLY.
-@Deprecated('Use RAWINPUTDEVICE_FLAGS.RIDEV_EXCLUDE instead')
 const RIDEV_EXCLUDE = 0x00000010;
 
 /// If set, this specifies all devices whose top level collection is from the
 /// specified usUsagePage. Note that usUsage must be zero. To exclude a
 /// particular top level collection, use RIDEV_EXCLUDE.
-@Deprecated('Use RAWINPUTDEVICE_FLAGS.RIDEV_PAGEONLY instead')
 const RIDEV_PAGEONLY = 0x00000020;
 
 /// If set, this prevents any devices specified by usUsagePage or usUsage from
 /// generating legacy messages. This is only for the mouse and keyboard.
-@Deprecated('Use RAWINPUTDEVICE_FLAGS.RIDEV_NOLEGACY instead')
 const RIDEV_NOLEGACY = 0x00000030;
 
 /// If set, this enables the caller to receive the input even when the caller is
 /// not in the foreground. Note that hwndTarget must be specified.
-@Deprecated('Use RAWINPUTDEVICE_FLAGS.RIDEV_INPUTSINK instead')
 const RIDEV_INPUTSINK = 0x00000100;
 
 /// If set, the mouse button click does not activate the other window.
 /// RIDEV_CAPTUREMOUSE can be specified only if RIDEV_NOLEGACY is specified for
 /// a mouse device.
-@Deprecated('Use RAWINPUTDEVICE_FLAGS.RIDEV_CAPTUREMOUSE instead')
 const RIDEV_CAPTUREMOUSE = 0x00000200;
 
 /// If set, the application-defined keyboard device hotkeys are not handled.
@@ -6572,24 +5755,20 @@ const RIDEV_CAPTUREMOUSE = 0x00000200;
 /// still handled. By default, all keyboard hotkeys are handled. RIDEV_NOHOTKEYS
 /// can be specified even if RIDEV_NOLEGACY is not specified and hwndTarget is
 /// NULL.
-@Deprecated('Use RAWINPUTDEVICE_FLAGS.RIDEV_NOHOTKEYS instead')
 const RIDEV_NOHOTKEYS = 0x00000200;
 
 /// If set, the application command keys are handled. RIDEV_APPKEYS can be
 /// specified only if RIDEV_NOLEGACY is specified for a keyboard device.
-@Deprecated('Use RAWINPUTDEVICE_FLAGS.RIDEV_APPKEYS instead')
 const RIDEV_APPKEYS = 0x00000400;
 
 /// If set, this enables the caller to receive input in the background only if
 /// the foreground application does not process it. In other words, if the
 /// foreground application is not registered for raw input, then the background
 /// application that is registered will receive the input.
-@Deprecated('Use RAWINPUTDEVICE_FLAGS.RIDEV_EXINPUTSINK instead')
 const RIDEV_EXINPUTSINK = 0x00001000;
 
 /// If set, this enables the caller to receive WM_INPUT_DEVICE_CHANGE
 /// notifications for device arrival and device removal.
-@Deprecated('Use RAWINPUTDEVICE_FLAGS.RIDEV_DEVNOTIFY instead')
 const RIDEV_DEVNOTIFY = 0x00002000;
 
 // -----------------------------------------------------------------------------
@@ -6648,83 +5827,21 @@ final VARIANT_TRUE = -1;
 /// typedef short VARIANT_BOOL: 0 == FALSE
 final VARIANT_FALSE = 0;
 
-/// Specifies the variant types.
-///
-/// {@category enum}
-class VARENUM {
-  static const VT_EMPTY = 0;
-  static const VT_NULL = 1;
-  static const VT_I2 = 2;
-  static const VT_I4 = 3;
-  static const VT_R4 = 4;
-  static const VT_R8 = 5;
-  static const VT_CY = 6;
-  static const VT_DATE = 7;
-  static const VT_BSTR = 8;
-  static const VT_DISPATCH = 9;
-  static const VT_ERROR = 10;
-  static const VT_BOOL = 11;
-  static const VT_VARIANT = 12;
-  static const VT_UNKNOWN = 13;
-  static const VT_DECIMAL = 14;
-  static const VT_I1 = 16;
-  static const VT_UI1 = 17;
-  static const VT_UI2 = 18;
-  static const VT_UI4 = 19;
-  static const VT_I8 = 20;
-  static const VT_UI8 = 21;
-  static const VT_INT = 22;
-  static const VT_UINT = 23;
-  static const VT_VOID = 24;
-  static const VT_HRESULT = 25;
-  static const VT_PTR = 26;
-  static const VT_SAFEARRAY = 27;
-  static const VT_CARRAY = 28;
-  static const VT_USERDEFINED = 29;
-  static const VT_LPSTR = 30;
-  static const VT_LPWSTR = 31;
-  static const VT_RECORD = 36;
-  static const VT_INT_PTR = 37;
-  static const VT_UINT_PTR = 38;
-  static const VT_FILETIME = 64;
-  static const VT_BLOB = 65;
-  static const VT_STREAM = 66;
-  static const VT_STORAGE = 67;
-  static const VT_STREAMED_OBJECT = 68;
-  static const VT_STORED_OBJECT = 69;
-  static const VT_BLOB_OBJECT = 70;
-  static const VT_CF = 71;
-  static const VT_CLSID = 72;
-  static const VT_VERSIONED_STREAM = 73;
-  static const VT_BSTR_BLOB = 0xfff;
-  static const VT_VECTOR = 0x1000;
-  static const VT_ARRAY = 0x2000;
-  static const VT_BYREF = 0x4000;
-  static const VT_RESERVED = 0x8000;
-  static const VT_ILLEGAL = 0xffff;
-  static const VT_ILLEGALMASKED = 0xfff;
-  static const VT_TYPEMASK = 0xff;
-}
-
 /// Prevents the function from attempting to coerce an object to a fundamental
 /// type by getting the Value property. Applications should set this flag only
 /// if necessary, because it makes their behavior inconsistent with other
 /// applications.
-@Deprecated('Use VAR_CHANGE_FLAGS.VARIANT_NOVALUEPROP instead')
 const VARIANT_NOVALUEPROP = 0x01;
 
 /// Converts a VT_BOOL value to a string containing either "True" or "False".
-@Deprecated('Use VAR_CHANGE_FLAGS.VARIANT_ALPHABOOL instead')
 const VARIANT_ALPHABOOL = 0x02;
 
 /// For conversions to or from VT_BSTR, passes LOCALE_NOUSEROVERRIDE to the core
 /// coercion routines.
-@Deprecated('Use VAR_CHANGE_FLAGS.VARIANT_NOUSEROVERRIDE instead')
 const VARIANT_NOUSEROVERRIDE = 0x04;
 
 /// For conversions from VT_BOOL to VT_BSTR and back, uses the language
 /// specified by the locale in use on the local computer.
-@Deprecated('Use VAR_CHANGE_FLAGS.VARIANT_LOCALBOOL instead')
 const VARIANT_LOCALBOOL = 0x10;
 
 // -----------------------------------------------------------------------------
@@ -6736,30 +5853,25 @@ const VARIANT_LOCALBOOL = 0x10;
 /// guarantees that when the caller later initially accesses the memory, the
 /// contents will be zero. Actual physical pages are not allocated unless/until
 /// the virtual addresses are actually accessed.
-@Deprecated('Use VIRTUAL_ALLOCATION_TYPE.MEM_COMMIT instead')
 const MEM_COMMIT = 0x00001000;
 
 /// Reserves a range of the process's virtual address space without allocating
 /// any actual physical storage in memory or in the paging file on disk.
-@Deprecated('Use VIRTUAL_ALLOCATION_TYPE.MEM_RESERVE instead')
 const MEM_RESERVE = 0x00002000;
 
 /// Replaces a placeholder with a mapped view. Only data/pf-backed section views
 /// are supported (no images, physical memory, etc.). When you replace a
 /// placeholder, BaseAddress and ViewSize must exactly match those of the
 /// placeholder.
-@Deprecated('Use VIRTUAL_ALLOCATION_TYPE.MEM_REPLACE_PLACEHOLDER instead')
 const MEM_REPLACE_PLACEHOLDER = 0x00004000;
 
 /// A placeholder is a type of reserved memory region.
-@Deprecated('Use VIRTUAL_ALLOCATION_TYPE.MEM_RESERVE_PLACEHOLDER instead')
 const MEM_RESERVE_PLACEHOLDER = 0x00040000;
 
 /// Indicates that data in the memory range specified by lpAddress and dwSize is
 /// no longer of interest. The pages should not be read from or written to the
 /// paging file. However, the memory block will be used again later, so it
 /// should not be decommitted. This value cannot be used with any other value.
-@Deprecated('Use VIRTUAL_ALLOCATION_TYPE.MEM_RESET instead')
 const MEM_RESET = 0x00080000;
 
 /// Reserves an address range that can be used to map Address Windowing
@@ -6781,19 +5893,14 @@ const MEM_PHYSICAL = 0x00400000;
 /// succeeds, that means all data in the specified address range is intact. If
 /// the function fails, at least some of the data in the address range has been
 /// replaced with zeroes.
-@Deprecated('Use VIRTUAL_ALLOCATION_TYPE.MEM_RESET_UNDO instead')
 const MEM_RESET_UNDO = 0x01000000;
 
 /// Allocates memory using large page support.
-@Deprecated('Use VIRTUAL_ALLOCATION_TYPE.MEM_LARGE_PAGES instead')
 const MEM_LARGE_PAGES = 0x20000000;
 
 /// Specifies that the priority of the pages being unmapped should be
 /// temporarily boosted (with automatic short term decay) because the caller
 /// expects that these pages will be accessed again shortly from another thread.
-@Deprecated(
-  'Use UNMAP_VIEW_OF_FILE_FLAGS.MEM_UNMAP_WITH_TRANSIENT_BOOST instead',
-)
 const MEM_UNMAP_WITH_TRANSIENT_BOOST = 0x00000001;
 
 /// To coalesce two adjacent placeholders, specify MEM_RELEASE |
@@ -6804,38 +5911,31 @@ const MEM_COALESCE_PLACEHOLDERS = 0x00000001;
 /// Frees an allocation back to a placeholder (after you've replaced a
 /// placeholder with a private allocation using VirtualAlloc2 or
 /// Virtual2AllocFromApp).
-@Deprecated('Use UNMAP_VIEW_OF_FILE_FLAGS.MEM_PRESERVE_PLACEHOLDER instead')
 const MEM_PRESERVE_PLACEHOLDER = 0x00000002;
 
 /// Decommits the specified region of committed pages. After the operation, the
 /// pages are in the reserved state.
-@Deprecated('Use VIRTUAL_FREE_TYPE.MEM_DECOMMIT instead')
 const MEM_DECOMMIT = 0x00004000;
 
 /// Releases the specified region of pages, or placeholder (for a placeholder,
 /// the address space is released and available for other allocations). After
 /// this operation, the pages are in the free state.
-@Deprecated('Use VIRTUAL_FREE_TYPE.MEM_RELEASE instead')
 const MEM_RELEASE = 0x00008000;
 
 /// Indicates free pages not accessible to the calling process and available to
 /// be allocated.
-@Deprecated('Use VIRTUAL_ALLOCATION_TYPE.MEM_FREE instead')
 const MEM_FREE = 0x00010000;
 
 /// Indicates that the memory pages within the region are mapped into the view
 /// of an image section.
-@Deprecated('Use PAGE_TYPE.MEM_IMAGE instead')
 const MEM_IMAGE = 0x01000000;
 
 /// Indicates that the memory pages within the region are mapped into the view
 /// of a section.
-@Deprecated('Use PAGE_TYPE.MEM_MAPPED instead')
 const MEM_MAPPED = 0x00040000;
 
 /// Indicates that the memory pages within the region are private (that is, not
 /// shared by other processes).
-@Deprecated('Use PAGE_TYPE.MEM_PRIVATE instead')
 const MEM_PRIVATE = 0x00020000;
 
 // -----------------------------------------------------------------------------
@@ -6848,24 +5948,20 @@ const MEM_PRIVATE = 0x00020000;
 /// Best practice is that all applications call the process-wide SetErrorMode
 /// function with a parameter of SEM_FAILCRITICALERRORS at startup. This is to
 /// prevent error mode dialogs from hanging the application.
-@Deprecated('Use THREAD_ERROR_MODE.SEM_FAILCRITICALERRORS instead')
 const SEM_FAILCRITICALERRORS = 0x0001;
 
 /// The system does not display the Windows Error Reporting dialog.
-@Deprecated('Use THREAD_ERROR_MODE.SEM_NOGPFAULTERRORBOX instead')
 const SEM_NOGPFAULTERRORBOX = 0x0002;
 
 /// The system automatically fixes memory alignment faults and makes them
 /// invisible to the application. It does this for the calling process and any
 /// descendant processes. This feature is only supported by certain processor
 /// architectures.
-@Deprecated('Use THREAD_ERROR_MODE.SEM_NOALIGNMENTFAULTEXCEPT instead')
 const SEM_NOALIGNMENTFAULTEXCEPT = 0x0004;
 
 /// The OpenFile function does not display a message box when it fails to find a
 /// file. Instead, the error is returned to the caller. This error mode
 /// overrides the OF_PROMPT flag.
-@Deprecated('Use THREAD_ERROR_MODE.SEM_NOOPENFILEERRORBOX instead')
 const SEM_NOOPENFILEERRORBOX = 0x8000;
 
 // -----------------------------------------------------------------------------
@@ -6991,51 +6087,39 @@ const TIME_MIDI = 0x0010;
 const TIME_TICKS = 0x0020;
 
 /// No callback mechanism. This is the default setting.
-@Deprecated('Use MIDI_WAVE_OPEN_TYPE.CALLBACK_NULL instead')
 const CALLBACK_NULL = 0x00000000;
 
 /// The dwCallback parameter is a window handle.
-@Deprecated('Use MIDI_WAVE_OPEN_TYPE.CALLBACK_WINDOW instead')
 const CALLBACK_WINDOW = 0x00010000;
 
 /// The dwCallback parameter is a thread identifier.
-@Deprecated('Use MIDI_WAVE_OPEN_TYPE.CALLBACK_THREAD instead')
 const CALLBACK_THREAD = 0x00020000;
 
 /// The dwCallback parameter is a callback procedure address.
-@Deprecated('Use MIDI_WAVE_OPEN_TYPE.CALLBACK_FUNCTION instead')
 const CALLBACK_FUNCTION = 0x00030000;
 
 /// The dwCallback parameter is an event handle.
-@Deprecated('Use MIDI_WAVE_OPEN_TYPE.CALLBACK_EVENT instead')
 const CALLBACK_EVENT = 0x00050000;
 
 /// The function queries the device to determine whether it supports the given
 /// format, but it does not open the device.
-@Deprecated('Use MIDI_WAVE_OPEN_TYPE.WAVE_FORMAT_QUERY instead')
 const WAVE_FORMAT_QUERY = 0x0001;
 
 /// If this flag is specified, a synchronous waveform-audio device can be
 /// opened. If this flag is not specified while opening a synchronous driver,
 /// the device will fail to open.
-@Deprecated('Use MIDI_WAVE_OPEN_TYPE.WAVE_ALLOWSYNC instead')
 const WAVE_ALLOWSYNC = 0x0002;
 
 /// If this flag is specified, the uDeviceID parameter specifies a
 /// waveform-audio device to be mapped to by the wave mapper.
-@Deprecated('Use MIDI_WAVE_OPEN_TYPE.WAVE_MAPPED instead')
 const WAVE_MAPPED = 0x0004;
 
 /// If this flag is specified, the ACM driver does not perform conversions on
 /// the audio data.
-@Deprecated('Use MIDI_WAVE_OPEN_TYPE.WAVE_FORMAT_DIRECT instead')
 const WAVE_FORMAT_DIRECT = 0x0008;
 
 /// If this flag is specified and the uDeviceID parameter is WAVE_MAPPER, the
 /// function opens the default communication device.
-@Deprecated(
-  'Use MIDI_WAVE_OPEN_TYPE.WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE instead',
-)
 const WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE = 0x0010;
 
 // -----------------------------------------------------------------------------
@@ -7043,11 +6127,9 @@ const WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE = 0x0010;
 // -----------------------------------------------------------------------------
 
 /// Use crKey as the transparency color.
-@Deprecated('Use LAYERED_WINDOW_ATTRIBUTES_FLAGS.LWA_COLORKEY instead')
 const LWA_COLORKEY = 0x00000001;
 
 /// Use bAlpha to determine the opacity of the layered window.
-@Deprecated('Use LAYERED_WINDOW_ATTRIBUTES_FLAGS.LWA_ALPHA instead')
 const LWA_ALPHA = 0x00000002;
 
 // -----------------------------------------------------------------------------
@@ -7067,11 +6149,9 @@ const MS_CLIPAROUNDCURSOR = 0x0002;
 const MS_INVERTCOLORS = 0x0004;
 
 /// Exclude the windows from magnification.
-@Deprecated('Use MW_FILTERMODE.MW_FILTERMODE_EXCLUDE instead')
 const MW_FILTERMODE_EXCLUDE = 0;
 
 /// Magnify the windows.
-@Deprecated('Use MW_FILTERMODE.MW_FILTERMODE_INCLUDE instead')
 const MW_FILTERMODE_INCLUDE = 1;
 
 // -----------------------------------------------------------------------------
@@ -7079,127 +6159,99 @@ const MW_FILTERMODE_INCLUDE = 1;
 // -----------------------------------------------------------------------------
 
 /// The device driver version.
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.DRIVERVERSION instead')
 const DRIVERVERSION = 0;
 
 /// Device technology
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.TECHNOLOGY instead')
 const TECHNOLOGY = 2;
 
 /// Width, in millimeters, of the physical screen.
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.HORZSIZE instead')
 const HORZSIZE = 4;
 
 /// Height, in millimeters, of the physical screen.
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.VERTSIZE instead')
 const VERTSIZE = 6;
 
 /// Width, in pixels, of the screen; or for printers, the width, in pixels, of
 /// the printable area of the page.
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.HORZRES instead')
 const HORZRES = 8;
 
 /// Height, in raster lines, of the screen; or for printers, the height, in
 /// pixels, of the printable area of the page.
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.VERTRES instead')
 const VERTRES = 10;
 
 /// Number of adjacent color bits for each pixel.
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.BITSPIXEL instead')
 const BITSPIXEL = 12;
 
 /// Number of color planes.
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.PLANES instead')
 const PLANES = 14;
 
 /// Number of device-specific brushes.
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.NUMBRUSHES instead')
 const NUMBRUSHES = 16;
 
 /// Number of device-specific pens.
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.NUMPENS instead')
 const NUMPENS = 18;
 
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.NUMMARKERS instead')
 const NUMMARKERS = 20;
 
 /// Number of device-specific fonts.
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.NUMFONTS instead')
 const NUMFONTS = 22;
 
 /// Number of entries in the device's color table, if the device has a color
 /// depth of no more than 8 bits per pixel. For devices with greater color
 /// depths, 1 is returned.
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.NUMCOLORS instead')
 const NUMCOLORS = 24;
 
 /// Reserved.
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.PDEVICESIZE instead')
 const PDEVICESIZE = 26;
 
 /// Value that indicates the curve capabilities of the device.
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.CURVECAPS instead')
 const CURVECAPS = 28;
 
 /// Value that indicates the line capabilities of the device.
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.LINECAPS instead')
 const LINECAPS = 30;
 
 /// Value that indicates the line capabilities of the device.
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.POLYGONALCAPS instead')
 const POLYGONALCAPS = 32;
 
 /// Value that indicates the text capabilities of the device.
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.TEXTCAPS instead')
 const TEXTCAPS = 34;
 
 /// Flag that indicates the clipping capabilities of the device. If the device
 /// can clip to a rectangle, it is 1. Otherwise, it is 0.
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.CLIPCAPS instead')
 const CLIPCAPS = 36;
 
 /// Value that indicates the raster capabilities of the device.
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.RASTERCAPS instead')
 const RASTERCAPS = 38;
 
 /// Relative width of a device pixel used for line drawing.
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.ASPECTX instead')
 const ASPECTX = 40;
 
 /// Relative height of a device pixel used for line drawing.
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.ASPECTY instead')
 const ASPECTY = 42;
 
 /// Diagonal width of the device pixel used for line drawing.
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.ASPECTXY instead')
 const ASPECTXY = 44;
 
 /// Number of pixels per logical inch along the screen width. In a system with
 /// multiple display monitors, this value is the same for all monitors.
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.LOGPIXELSX instead')
 const LOGPIXELSX = 88;
 
 /// Number of pixels per logical inch along the screen height. In a system with
 /// multiple display monitors, this value is the same for all monitors.
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.LOGPIXELSY instead')
 const LOGPIXELSY = 90;
 
 /// Number of entries in the system palette. This index is valid only if the
 /// device driver sets the RC_PALETTE bit in the RASTERCAPS index and is
 /// available only if the driver is compatible with 16-bit Windows.
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.SIZEPALETTE instead')
 const SIZEPALETTE = 104;
 
 /// Number of reserved entries in the system palette. This index is valid only
 /// if the device driver sets the RC_PALETTE bit in the RASTERCAPS index and is
 /// available only if the driver is compatible with 16-bit Windows.
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.NUMRESERVED instead')
 const NUMRESERVED = 106;
 
 /// Actual color resolution of the device, in bits per pixel. This index is
 /// valid only if the device driver sets the RC_PALETTE bit in the RASTERCAPS
 /// index and is available only if the driver is compatible with 16-bit Windows.
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.COLORRES instead')
 const COLORRES = 108;
 
 /// For printing devices: the width of the physical page, in device units. For
@@ -7207,7 +6259,6 @@ const COLORRES = 108;
 /// physical width value of 5100 device units. Note that the physical page is
 /// almost always greater than the printable area of the page, and never
 /// smaller.
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.PHYSICALWIDTH instead')
 const PHYSICALWIDTH = 110;
 
 /// For printing devices: the height of the physical page, in device units. For
@@ -7215,7 +6266,6 @@ const PHYSICALWIDTH = 110;
 /// physical height value of 6600 device units. Note that the physical page is
 /// almost always greater than the printable area of the page, and never
 /// smaller.
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.PHYSICALHEIGHT instead')
 const PHYSICALHEIGHT = 111;
 
 /// For printing devices: the distance from the left edge of the physical page
@@ -7223,7 +6273,6 @@ const PHYSICALHEIGHT = 111;
 /// printer set to print at 600 dpi on 8.5-by-11-inch paper, that cannot print
 /// on the leftmost 0.25-inch of paper, has a horizontal physical offset of 150
 /// device units.
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.PHYSICALOFFSETX instead')
 const PHYSICALOFFSETX = 112;
 
 /// For printing devices: the distance from the top edge of the physical page to
@@ -7231,42 +6280,33 @@ const PHYSICALOFFSETX = 112;
 /// set to print at 600 dpi on 8.5-by-11-inch paper, that cannot print on the
 /// topmost 0.5-inch of paper, has a vertical physical offset of 300 device
 /// units.
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.PHYSICALOFFSETY instead')
 const PHYSICALOFFSETY = 113;
 
 /// Scaling factor for the x-axis of the printer.
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.SCALINGFACTORX instead')
 const SCALINGFACTORX = 114;
 
 /// Scaling factor for the y-axis of the printer.
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.SCALINGFACTORY instead')
 const SCALINGFACTORY = 115;
 
 /// For display devices: the current vertical refresh rate of the device, in
 /// cycles per second (Hz). A vertical refresh rate value of 0 or 1 represents
 /// the display hardware's default refresh rate.
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.VREFRESH instead')
 const VREFRESH = 116;
 
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.DESKTOPVERTRES instead')
 const DESKTOPVERTRES = 117;
 
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.DESKTOPHORZRES instead')
 const DESKTOPHORZRES = 118;
 
 /// Preferred horizontal drawing alignment, expressed as a multiple of pixels.
 /// For best drawing performance, windows should be horizontally aligned to a
 /// multiple of this value. A value of zero indicates that the device is
 /// accelerated, and any alignment may be used.
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.BLTALIGNMENT instead')
 const BLTALIGNMENT = 119;
 
 /// Value that indicates the shading and blending capabilities of the device.
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.SHADEBLENDCAPS instead')
 const SHADEBLENDCAPS = 120;
 
 /// Value that indicates the color management capabilities of the device.
-@Deprecated('Use GET_DEVICE_CAPS_INDEX.COLORMGMTCAPS instead')
 const COLORMGMTCAPS = 121;
 
 // -----------------------------------------------------------------------------
@@ -7408,49 +6448,49 @@ const MM_MIXM_CONTROL_CHANGE = 0x3D1;
 
 /// The MIM_OPEN message is sent to a MIDI input callback function when a MIDI
 /// input device is opened.
-@Deprecated('Use MM_MIM_OPEN instead')
+@Deprecated('Use MM_MIM_OPEN')
 const MIM_OPEN = MM_MIM_OPEN;
 
 /// The MIM_CLOSE message is sent to a MIDI input callback function when a MIDI
 /// input device is closed.
-@Deprecated('Use MM_MIM_CLOSE instead')
+@Deprecated('Use MM_MIM_CLOSE')
 const MIM_CLOSE = MM_MIM_CLOSE;
 
 /// The MIM_DATA message is sent to a MIDI input callback function when a MIDI
 /// message is received by a MIDI input device.
-@Deprecated('Use MM_MIM_DATA instead')
+@Deprecated('Use MM_MIM_DATA')
 const MIM_DATA = MM_MIM_DATA;
 
 /// The MIM_LONGDATA message is sent to a MIDI input callback function when a
 /// system-exclusive buffer has been filled with data and is being returned to
 /// the application.
-@Deprecated('Use MM_MIM_LONGDATA instead')
+@Deprecated('Use MM_MIM_LONGDATA')
 const MIM_LONGDATA = MM_MIM_LONGDATA;
 
 /// The MIM_ERROR message is sent to a MIDI input callback function when an
 /// invalid MIDI message is received.
-@Deprecated('Use MM_MIM_ERROR instead')
+@Deprecated('Use MM_MIM_ERROR')
 const MIM_ERROR = MM_MIM_ERROR;
 
 /// The MIM_LONGERROR message is sent to a MIDI input callback function when an
 /// invalid or incomplete MIDI system-exclusive message is received.
-@Deprecated('Use MM_MIM_LONGERROR instead')
+@Deprecated('Use MM_MIM_LONGERROR')
 const MIM_LONGERROR = MM_MIM_LONGERROR;
 
 /// The MOM_OPEN message is sent to a MIDI output callback function when a MIDI
 /// output device is opened.
-@Deprecated('Use MM_MOM_OPEN instead')
+@Deprecated('Use MM_MOM_OPEN')
 const MOM_OPEN = MM_MOM_OPEN;
 
 /// The MOM_CLOSE message is sent to a MIDI output callback function when a MIDI
 /// output device is closed.
-@Deprecated('Use MM_MOM_CLOSE instead')
+@Deprecated('Use MM_MOM_CLOSE')
 const MOM_CLOSE = MM_MOM_CLOSE;
 
 /// The MOM_DONE message is sent to a MIDI output callback function when the
 /// specified system-exclusive or stream buffer has been played and is being
 /// returned to the application.
-@Deprecated('Use MM_MOM_DONE instead')
+@Deprecated('Use MM_MOM_DONE')
 const MOM_DONE = MM_MOM_DONE;
 
 /// The MIM_MOREDATA message is sent to a MIDI input callback function when a
@@ -7458,12 +6498,12 @@ const MOM_DONE = MM_MOM_DONE;
 /// processing MIM_DATA messages fast enough to keep up with the input device
 /// driver. The callback function receives this message only when the
 /// application specifies MIDI_IO_STATUS in the call to the midiInOpen function.
-@Deprecated('Use MM_MIM_MOREDATA instead')
+@Deprecated('Use MM_MIM_MOREDATA')
 const MIM_MOREDATA = MM_MIM_MOREDATA;
 
 /// The MOM_POSITION message is sent when an MEVT_F_CALLBACK event is reached in
 /// the MIDI output stream.
-@Deprecated('Use MM_MOM_POSITIONCB instead')
+@Deprecated('Use MM_MOM_POSITIONCB')
 const MOM_POSITIONCB = MM_MOM_POSITIONCB;
 
 // -----------------------------------------------------------------------------
@@ -7474,7 +6514,6 @@ const MOM_POSITIONCB = MM_MOM_POSITIONCB;
 /// not call DllMain for process and thread initialization and termination.
 /// Also, the system does not load additional executable modules that are
 /// referenced by the specified module.
-@Deprecated('Use LOAD_LIBRARY_FLAGS.DONT_RESOLVE_DLL_REFERENCES instead')
 const DONT_RESOLVE_DLL_REFERENCES = 0x00000001;
 
 /// If this value is used, the system maps the file into the calling process's
@@ -7484,7 +6523,6 @@ const DONT_RESOLVE_DLL_REFERENCES = 0x00000001;
 /// Using this value causes writes to read-only memory to raise an access
 /// violation. Use this flag when you want to load a DLL only to extract
 /// messages or resources from it.
-@Deprecated('Use LOAD_LIBRARY_FLAGS.LOAD_LIBRARY_AS_DATAFILE instead')
 const LOAD_LIBRARY_AS_DATAFILE = 0x00000002;
 
 /// If this value is used and lpFileName specifies an absolute path, the system
@@ -7492,49 +6530,40 @@ const LOAD_LIBRARY_AS_DATAFILE = 0x00000002;
 /// find associated executable modules that the specified module causes to be
 /// loaded. If this value is used and lpFileName specifies a relative path, the
 /// behavior is undefined.
-@Deprecated('Use LOAD_LIBRARY_FLAGS.LOAD_WITH_ALTERED_SEARCH_PATH instead')
 const LOAD_WITH_ALTERED_SEARCH_PATH = 0x00000008;
 
 /// If this value is used, the system does not check AppLocker rules or apply
 /// Software Restriction Policies for the DLL. This action applies only to the
 /// DLL being loaded and not to its dependencies. This value is recommended for
 /// use in setup programs that must run extracted DLLs during installation.
-@Deprecated('Use LOAD_LIBRARY_FLAGS.LOAD_IGNORE_CODE_AUTHZ_LEVEL instead')
 const LOAD_IGNORE_CODE_AUTHZ_LEVEL = 0x00000010;
 
 /// If this value is used, the system maps the file into the process's virtual
 /// address space as an image file. However, the loader does not load the static
 /// imports or perform the other usual initialization steps. Use this flag when
 /// you want to load a DLL only to extract messages or resources from it.
-@Deprecated('Use LOAD_LIBRARY_FLAGS.LOAD_LIBRARY_AS_IMAGE_RESOURCE instead')
 const LOAD_LIBRARY_AS_IMAGE_RESOURCE = 0x00000020;
 
 /// Similar to LOAD_LIBRARY_AS_DATAFILE, except that the DLL file is opened with
 /// exclusive write access for the calling process. Other processes cannot open
 /// the DLL file for write access while it is in use. However, the DLL can still
 /// be opened by other processes.
-@Deprecated('Use LOAD_LIBRARY_FLAGS.LOAD_LIBRARY_AS_DATAFILE_EXCLUSIVE instead')
 const LOAD_LIBRARY_AS_DATAFILE_EXCLUSIVE = 0x00000040;
 
 /// Specifies that the digital signature of the binary image must be checked at
 /// load time.
-@Deprecated('Use LOAD_LIBRARY_FLAGS.LOAD_LIBRARY_REQUIRE_SIGNED_TARGET instead')
 const LOAD_LIBRARY_REQUIRE_SIGNED_TARGET = 0x00000080;
 
 /// If this value is used, the directory that contains the DLL is temporarily
 /// added to the beginning of the list of directories that are searched for the
 /// DLL's dependencies. Directories in the standard search path are not
 /// searched.
-@Deprecated('Use LOAD_LIBRARY_FLAGS.LOAD_LIBRARY_SEARCH_DLL_LOAD_DIR instead')
 const LOAD_LIBRARY_SEARCH_DLL_LOAD_DIR = 0x00000100;
 
 /// If this value is used, the application's installation directory is searched
 /// for the DLL and its dependencies. Directories in the standard search path
 /// are not searched. This value cannot be combined with
 /// LOAD_WITH_ALTERED_SEARCH_PATH.
-@Deprecated(
-  'Use LOAD_LIBRARY_FLAGS.LOAD_LIBRARY_SEARCH_APPLICATION_DIR instead',
-)
 const LOAD_LIBRARY_SEARCH_APPLICATION_DIR = 0x00000200;
 
 /// If this value is used, directories added using the AddDllDirectory or the
@@ -7542,25 +6571,21 @@ const LOAD_LIBRARY_SEARCH_APPLICATION_DIR = 0x00000200;
 /// more than one directory has been added, the order in which the directories
 /// are searched is unspecified. Directories in the standard search path are not
 /// searched. This value cannot be combined with LOAD_WITH_ALTERED_SEARCH_PATH.
-@Deprecated('Use LOAD_LIBRARY_FLAGS.LOAD_LIBRARY_SEARCH_USER_DIRS instead')
 const LOAD_LIBRARY_SEARCH_USER_DIRS = 0x00000400;
 
 /// If this value is used, %windows%\system32 is searched for the DLL and its
 /// dependencies. Directories in the standard search path are not searched. This
 /// value cannot be combined with LOAD_WITH_ALTERED_SEARCH_PATH.
-@Deprecated('Use LOAD_LIBRARY_FLAGS.LOAD_LIBRARY_SEARCH_SYSTEM32 instead')
 const LOAD_LIBRARY_SEARCH_SYSTEM32 = 0x00000800;
 
 /// This value is a combination of LOAD_LIBRARY_SEARCH_APPLICATION_DIR,
 /// LOAD_LIBRARY_SEARCH_SYSTEM32, and LOAD_LIBRARY_SEARCH_USER_DIRS. Directories
 /// in the standard search path are not searched. This value cannot be combined
 /// with LOAD_WITH_ALTERED_SEARCH_PATH.
-@Deprecated('Use LOAD_LIBRARY_FLAGS.LOAD_LIBRARY_SEARCH_DEFAULT_DIRS instead')
 const LOAD_LIBRARY_SEARCH_DEFAULT_DIRS = 0x00001000;
 
 /// If this value is used, loading a DLL for execution from the current
 /// directory is only allowed if it is under a directory in the Safe load list.
-@Deprecated('Use LOAD_LIBRARY_FLAGS.LOAD_LIBRARY_SAFE_CURRENT_DIRS instead')
 const LOAD_LIBRARY_SAFE_CURRENT_DIRS = 0x00002000;
 
 // -----------------------------------------------------------------------------
@@ -7570,112 +6595,18 @@ const LOAD_LIBRARY_SAFE_CURRENT_DIRS = 0x00002000;
 const GUID_CLASS_MONITOR = '{4d36e96e-e325-11ce-bfc1-08002be10318}';
 
 /// If the point is not contained within any display monitor, return NULL.
-@Deprecated('Use MONITOR_FROM_FLAGS.MONITOR_DEFAULTTONULL instead')
 const MONITOR_DEFAULTTONULL = 0x00000000;
 
 /// If the point is not contained within any display monitor, return a handle to
 /// the primary display monitor.
-@Deprecated('Use MONITOR_FROM_FLAGS.MONITOR_DEFAULTTOPRIMARY instead')
 const MONITOR_DEFAULTTOPRIMARY = 0x00000001;
 
 /// If the point is not contained within any display monitor, return a handle to
 /// the display monitor that is nearest to the point.
-@Deprecated('Use MONITOR_FROM_FLAGS.MONITOR_DEFAULTTONEAREST instead')
 const MONITOR_DEFAULTTONEAREST = 0x00000002;
 
 /// This is the primary display monitor.
 const MONITORINFOF_PRIMARY = 0x00000001;
-
-/// Describes a monitor's color temperature.
-///
-/// {@category enum}
-class MC_COLOR_TEMPERATURE {
-  static const MC_COLOR_TEMPERATURE_UNKNOWN = 0;
-  static const MC_COLOR_TEMPERATURE_4000K = 1;
-  static const MC_COLOR_TEMPERATURE_5000K = 2;
-  static const MC_COLOR_TEMPERATURE_6500K = 3;
-  static const MC_COLOR_TEMPERATURE_7500K = 4;
-  static const MC_COLOR_TEMPERATURE_8200K = 5;
-  static const MC_COLOR_TEMPERATURE_9300K = 6;
-  static const MC_COLOR_TEMPERATURE_10000K = 7;
-  static const MC_COLOR_TEMPERATURE_11500K = 8;
-}
-
-/// Identifies monitor display technologies.
-///
-/// {@category enum}
-class MC_DISPLAY_TECHNOLOGY_TYPE {
-  static const MC_SHADOW_MASK_CATHODE_RAY_TUBE = 0;
-  static const MC_APERTURE_GRILL_CATHODE_RAY_TUBE = 1;
-  static const MC_THIN_FILM_TRANSISTOR = 2;
-  static const MC_LIQUID_CRYSTAL_ON_SILICON = 3;
-  static const MC_PLASMA = 4;
-  static const MC_ORGANIC_LIGHT_EMITTING_DIODE = 5;
-  static const MC_ELECTROLUMINESCENT = 6;
-  static const MC_MICROELECTROMECHANICAL = 7;
-  static const MC_FIELD_EMISSION_DEVICE = 8;
-}
-
-/// Specifies whether to set or get a monitor's red, green, or blue drive.
-///
-/// {@category enum}
-class MC_DRIVE_TYPE {
-  static const MC_RED_DRIVE = 0;
-  static const MC_GREEN_DRIVE = 1;
-  static const MC_BLUE_DRIVE = 2;
-}
-
-/// Specifies whether to get or set a monitor's red, green, or blue gain.
-///
-/// {@category enum}
-class MC_GAIN_TYPE {
-  static const MC_RED_GAIN = 0;
-  static const MC_GREEN_GAIN = 1;
-  static const MC_BLUE_GAIN = 2;
-}
-
-/// Specifies whether to get or set the vertical or horizontal position of a
-/// monitor's display area.
-///
-/// {@category enum}
-class MC_POSITION_TYPE {
-  static const MC_HORIZONTAL_POSITION = 0;
-  static const MC_VERTICAL_POSITION = 1;
-}
-
-/// Specifies whether to get or set the width or height of a monitor's display
-/// area.
-///
-/// {@category enum}
-class MC_SIZE_TYPE {
-  static const MC_WIDTH = 0;
-  static const MC_HEIGHT = 1;
-}
-
-/// Identifies the dots per inch (dpi) setting for a thread, process, or window.
-///
-/// {@category enum}
-class DPI_AWARENESS {
-  /// Invalid DPI awareness. This is an invalid DPI awareness value.
-  static const DPI_AWARENESS_INVALID = -1;
-
-  /// DPI unaware. This process does not scale for DPI changes and is always
-  /// assumed to have a scale factor of 100% (96 DPI). It will be automatically
-  /// scaled by the system on any other DPI setting.
-  static const DPI_AWARENESS_UNAWARE = 0;
-
-  /// System DPI aware. This process does not scale for DPI changes. It will
-  /// query for the DPI once and use that value for the lifetime of the process.
-  /// If the DPI changes, the process will not adjust to the new DPI value. It
-  /// will be automatically scaled up or down by the system when the DPI changes
-  /// from the system value.
-  static const DPI_AWARENESS_SYSTEM_AWARE = 1;
-
-  /// Per monitor DPI aware. This process checks for the DPI when it is created
-  /// and adjusts the scale factor whenever the DPI changes. These processes are
-  /// not automatically scaled by the system.
-  static const DPI_AWARENESS_PER_MONITOR_AWARE = 2;
-}
 
 /// DPI unaware. This window does not scale for DPI changes and is always
 /// assumed to have a scale factor of 100% (96 DPI). It will be automatically
@@ -7711,93 +6642,20 @@ const DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2 = -4;
 /// update of Windows 10 (also known as version 1809).
 const DPI_AWARENESS_CONTEXT_UNAWARE_GDISCALED = -5;
 
-/// Identifies the DPI hosting behavior for a window. This behavior allows
-/// windows created in the thread to host child windows with a different
-/// DPI_AWARENESS_CONTEXT.
-///
-/// {@category enum}
-class DPI_HOSTING_BEHAVIOR {
-  /// Invalid DPI hosting behavior. This usually occurs if the previous
-  /// SetThreadDpiHostingBehavior call used an invalid parameter.
-  static const DPI_HOSTING_BEHAVIOR_INVALID = -1;
-
-  /// Default DPI hosting behavior. The associated window behaves as normal, and
-  /// cannot create or re-parent child windows with a different
-  /// DPI_AWARENESS_CONTEXT.
-  static const DPI_HOSTING_BEHAVIOR_DEFAULT = 0;
-
-  /// Mixed DPI hosting behavior. This enables the creation and re-parenting of
-  /// child windows with different DPI_AWARENESS_CONTEXT. These child windows
-  /// will be independently scaled by the OS.
-  static const DPI_HOSTING_BEHAVIOR_MIXED = 1;
-}
-
-/// Identifies dots per inch (dpi) awareness values. DPI awareness indicates how
-/// much scaling work an application performs for DPI versus how much is done by
-/// the system.
-///
-/// {@category enum}
-class PROCESS_DPI_AWARENESS {
-  /// DPI unaware. This app does not scale for DPI changes and is always assumed
-  /// to have a scale factor of 100% (96 DPI). It will be automatically scaled
-  /// by the system on any other DPI setting.
-  static const PROCESS_DPI_UNAWARE = 0;
-
-  /// System DPI aware. This app does not scale for DPI changes. It will query
-  /// for the DPI once and use that value for the lifetime of the app. If the
-  /// DPI changes, the app will not adjust to the new DPI value. It will be
-  /// automatically scaled up or down by the system when the DPI changes from
-  /// the system value.
-  static const PROCESS_SYSTEM_DPI_AWARE = 1;
-
-  /// Per monitor DPI aware. This app checks for the DPI when it is created and
-  /// adjusts the scale factor whenever the DPI changes. These applications are
-  /// not automatically scaled by the system.
-  static const PROCESS_PER_MONITOR_DPI_AWARE = 2;
-}
-
-/// Identifies the dots per inch (dpi) setting for a monitor.
-///
-/// {@category enum}
-class MONITOR_DPI_TYPE {
-  /// The effective DPI. This value should be used when determining the correct
-  /// scale factor for scaling UI elements. This incorporates the scale factor
-  /// set by the user for this specific display.
-  static const MDT_EFFECTIVE_DPI = 0;
-
-  /// The angular DPI. This DPI ensures rendering at a compliant angular
-  /// resolution on the screen. This does not include the scale factor set by
-  /// the user for this specific display.
-  static const MDT_ANGULAR_DPI = 1;
-
-  /// The raw DPI. This value is the linear DPI of the screen as measured on the
-  /// screen itself. Use this value when you want to read the pixel density and
-  /// not the recommended scaling setting. This does not include the scale
-  /// factor set by the user for this specific display and is not guaranteed to
-  /// be a supported DPI value.
-  static const MDT_RAW_DPI = 2;
-
-  /// The default DPI setting for a monitor is MDT_EFFECTIVE_DPI.
-  static const MDT_DEFAULT = MDT_EFFECTIVE_DPI;
-}
-
 // -----------------------------------------------------------------------------
 // Window Display Affinity constants
 // -----------------------------------------------------------------------------
 
 /// Imposes no restrictions on where the window can be displayed.
-@Deprecated('Use WINDOW_DISPLAY_AFFINITY.WDA_NONE instead')
 const WDA_NONE = 0x00000000;
 
 /// The window content is displayed only on a monitor. Everywhere else, the
 /// window appears with no content.
-@Deprecated('Use WINDOW_DISPLAY_AFFINITY.WDA_MONITOR instead')
 const WDA_MONITOR = 0x00000001;
 
 /// The window is displayed only on a monitor. Everywhere else, the window does
 /// not appear at all. One use for this affinity is for windows that show video
 /// recording controls, so that the controls are not included in the capture.
-@Deprecated('Use WINDOW_DISPLAY_AFFINITY.WDA_EXCLUDEFROMCAPTURE instead')
 const WDA_EXCLUDEFROMCAPTURE = 0x00000011;
 
 // -----------------------------------------------------------------------------
@@ -7805,7 +6663,6 @@ const WDA_EXCLUDEFROMCAPTURE = 0x00000011;
 // -----------------------------------------------------------------------------
 
 /// An uncompressed format.
-@Deprecated('Use BI_COMPRESSION.BI_RGB instead')
 const BI_RGB = 0;
 
 /// A run-length encoded (RLE) format for bitmaps with 8 bpp. The compression
@@ -7813,30 +6670,25 @@ const BI_RGB = 0;
 /// containing a color index. If bV5Compression is BI_RGB and the bV5BitCount
 /// member is 16, 24, or 32, the bitmap array specifies the actual intensities
 /// of blue, green, and red rather than using color table indexes.
-@Deprecated('Use BI_COMPRESSION.BI_RLE8 instead')
 const BI_RLE8 = 1;
 
 /// An RLE format for bitmaps with 4 bpp. The compression format is a two-byte
 /// format consisting of a count byte followed by two word-length color indexes.
-@Deprecated('Use BI_COMPRESSION.BI_RLE4 instead')
 const BI_RLE4 = 2;
 
 /// Specifies that the bitmap is not compressed and that the color masks for the
 /// red, green, and blue components of each pixel are specified in the
 /// bV5RedMask, bV5GreenMask, and bV5BlueMask members. This is valid when used
 /// with 16- and 32-bpp bitmaps.
-@Deprecated('Use BI_COMPRESSION.BI_BITFIELDS instead')
 const BI_BITFIELDS = 3;
 
 /// Specifies that the image is compressed using the JPEG file Interchange
 /// Format. JPEG compression trades off compression against loss; it can achieve
 /// a compression ratio of 20:1 with little noticeable loss.
-@Deprecated('Use BI_COMPRESSION.BI_JPEG instead')
 const BI_JPEG = 4;
 
 /// Specifies that the image is compressed using the PNG file Interchange
 /// Format.
-@Deprecated('Use BI_COMPRESSION.BI_PNG instead')
 const BI_PNG = 5;
 
 // -----------------------------------------------------------------------------
@@ -7845,50 +6697,41 @@ const BI_PNG = 5;
 
 /// Causes the dialog box to use the color specified in the rgbResult member as
 /// the initial color selection.
-@Deprecated('Use CHOOSECOLOR_FLAGS.CC_RGBINIT instead')
 const CC_RGBINIT = 0x00000001;
 
 /// Causes the dialog box to display the additional controls that allow the user
 /// to create custom colors. If this flag is not set, the user must click the
 /// Define Custom Color button to display the custom color controls.
-@Deprecated('Use CHOOSECOLOR_FLAGS.CC_FULLOPEN instead')
 const CC_FULLOPEN = 0x00000002;
 
 /// Disables the Define Custom Color button.
-@Deprecated('Use CHOOSECOLOR_FLAGS.CC_PREVENTFULLOPEN instead')
 const CC_PREVENTFULLOPEN = 0x00000004;
 
 /// Causes the dialog box to display the Help button. The hwndOwner member must
 /// specify the window to receive the HELPMSGSTRING registered messages that the
 /// dialog box sends when the user clicks the Help button.
-@Deprecated('Use CHOOSECOLOR_FLAGS.CC_SHOWHELP instead')
 const CC_SHOWHELP = 0x00000008;
 
 /// Enables the hook procedure specified in the lpfnHook member of this
 /// structure. This flag is used only to initialize the dialog box.
-@Deprecated('Use CHOOSECOLOR_FLAGS.CC_ENABLEHOOK instead')
 const CC_ENABLEHOOK = 0x00000010;
 
 /// The hInstance and lpTemplateName members specify a dialog box template to
 /// use in place of the default template. This flag is used only to initialize
 /// the dialog box.
-@Deprecated('Use CHOOSECOLOR_FLAGS.CC_ENABLETEMPLATE instead')
 const CC_ENABLETEMPLATE = 0x00000020;
 
 /// The hInstance member identifies a data block that contains a preloaded
 /// dialog box template. The system ignores the lpTemplateName member if this
 /// flag is specified. This flag is used only to initialize the dialog box.
-@Deprecated('Use CHOOSECOLOR_FLAGS.CC_ENABLETEMPLATEHANDLE instead')
 const CC_ENABLETEMPLATEHANDLE = 0x00000040;
 
 /// Causes the dialog box to display only solid colors in the set of basic
 /// colors.
-@Deprecated('Use CHOOSECOLOR_FLAGS.CC_SOLIDCOLOR instead')
 const CC_SOLIDCOLOR = 0x00000080;
 
 /// Causes the dialog box to display all available colors in the set of basic
 /// colors.
-@Deprecated('Use CHOOSECOLOR_FLAGS.CC_ANYCOLOR instead')
 const CC_ANYCOLOR = 0x00000100;
 
 // -----------------------------------------------------------------------------
@@ -7897,52 +6740,43 @@ const CC_ANYCOLOR = 0x00000100;
 
 /// This flag is ignored for font enumeration. In Windows Vista or below, it
 /// caused the dialog box to list only the screen fonts supported by the system.
-@Deprecated('Use CHOOSEFONT_FLAGS.CF_SCREENFONTS instead')
 const CF_SCREENFONTS = 0x00000001;
 
 /// This flag is ignored for font enumeration. In Windows Vista or below, it
 /// caused the dialog box to list only the fonts supported by the printer
 /// associated with the device context or information context identified by the
 /// hDC member.
-@Deprecated('Use CHOOSEFONT_FLAGS.CF_PRINTERFONTS instead')
 const CF_PRINTERFONTS = 0x00000002;
 
 /// This flag is ignored for font enumeration.
-@Deprecated('Use CHOOSEFONT_FLAGS.CF_BOTH instead')
 const CF_BOTH = CF_SCREENFONTS | CF_PRINTERFONTS;
 
 /// Causes the dialog box to display the Help button. The hwndOwner member must
 /// specify the window to receive the HELPMSGSTRING registered messages that the
 /// dialog box sends when the user clicks the Help button.
-@Deprecated('Use CHOOSEFONT_FLAGS.CF_SHOWHELP instead')
 const CF_SHOWHELP = 0x00000004;
 
 /// Enables the hook procedure specified in the lpfnHook member of this
 /// structure.
-@Deprecated('Use CHOOSEFONT_FLAGS.CF_ENABLEHOOK instead')
 const CF_ENABLEHOOK = 0x00000008;
 
 /// Indicates that the hInstance and lpTemplateName members specify a dialog box
 /// template to use in place of the default template.
-@Deprecated('Use CHOOSEFONT_FLAGS.CF_ENABLETEMPLATE instead')
 const CF_ENABLETEMPLATE = 0x00000010;
 
 /// Indicates that the hInstance member identifies a data block that contains a
 /// preloaded dialog box template. The system ignores the lpTemplateName member
 /// if this flag is specified.
-@Deprecated('Use CHOOSEFONT_FLAGS.CF_ENABLETEMPLATEHANDLE instead')
 const CF_ENABLETEMPLATEHANDLE = 0x00000020;
 
 /// ChooseFont should use the structure pointed to by the lpLogFont member to
 /// initialize the dialog box controls.
-@Deprecated('Use CHOOSEFONT_FLAGS.CF_INITTOLOGFONTSTRUCT instead')
 const CF_INITTOLOGFONTSTRUCT = 0x00000040;
 
 /// The lpszStyle member is a pointer to a buffer that contains style data that
 /// ChooseFont should use to initialize the Font Style combo box. When the user
 /// closes the dialog box, ChooseFont copies style data for the user's selection
 /// to this buffer.
-@Deprecated('Use CHOOSEFONT_FLAGS.CF_USESTYLE instead')
 const CF_USESTYLE = 0x00000080;
 
 /// Causes the dialog box to display the controls that allow the user to specify
@@ -7951,7 +6785,6 @@ const CF_USESTYLE = 0x00000080;
 /// lfStrikeOut and lfUnderline members of the structure pointed to by lpLogFont
 /// to specify the initial settings of the strikeout and underline check boxes.
 /// ChooseFont can use these members to return the user's selections.
-@Deprecated('Use CHOOSEFONT_FLAGS.CF_EFFECTS instead')
 const CF_EFFECTS = 0x00000100;
 
 /// Causes the dialog box to display the Apply button. You should provide a hook
@@ -7959,98 +6792,79 @@ const CF_EFFECTS = 0x00000100;
 /// procedure can send the WM_CHOOSEFONT_GETLOGFONT message to the dialog box to
 /// retrieve the address of the structure that contains the current selections
 /// for the font.
-@Deprecated('Use CHOOSEFONT_FLAGS.CF_APPLY instead')
 const CF_APPLY = 0x00000200;
 
 /// This flag is obsolete.
-@Deprecated('Use CHOOSEFONT_FLAGS.CF_ANSIONLY instead')
 const CF_ANSIONLY = 0x00000400;
 
 /// ChooseFont should allow selection of fonts for all non-OEM and Symbol
 /// character sets, as well as the ANSI character set.
-@Deprecated('Use CHOOSEFONT_FLAGS.CF_SCRIPTSONLY instead')
 const CF_SCRIPTSONLY = CF_ANSIONLY;
 
 /// ChooseFont should not allow vector font selections.
-@Deprecated('Use CHOOSEFONT_FLAGS.CF_NOVECTORFONTS instead')
 const CF_NOVECTORFONTS = 0x00000800;
 
 /// Same as the CF_NOVECTORFONTS flag.
-@Deprecated('Use CHOOSEFONT_FLAGS.CF_NOOEMFONTS instead')
 const CF_NOOEMFONTS = CF_NOVECTORFONTS;
 
 /// ChooseFont should not display or allow selection of font simulations.
-@Deprecated('Use CHOOSEFONT_FLAGS.CF_NOSIMULATIONS instead')
 const CF_NOSIMULATIONS = 0x00001000;
 
 /// ChooseFont should select only font sizes within the range specified by the
 /// nSizeMin and nSizeMax members.
-@Deprecated('Use CHOOSEFONT_FLAGS.CF_LIMITSIZE instead')
 const CF_LIMITSIZE = 0x00002000;
 
 /// ChooseFont should enumerate and allow selection of only fixed-pitch fonts.
-@Deprecated('Use CHOOSEFONT_FLAGS.CF_FIXEDPITCHONLY instead')
 const CF_FIXEDPITCHONLY = 0x00004000;
 
 /// Obsolete. ChooseFont ignores this flag.
-@Deprecated('Use CHOOSEFONT_FLAGS.CF_WYSIWYG instead')
 const CF_WYSIWYG = 0x00008000;
 
 /// ChooseFont should indicate an error condition if the user attempts to select
 /// a font or style that is not listed in the dialog box.
-@Deprecated('Use CHOOSEFONT_FLAGS.CF_FORCEFONTEXIST instead')
 const CF_FORCEFONTEXIST = 0x00010000;
 
 /// Specifies that ChooseFont should allow only the selection of scalable fonts.
 /// Scalable fonts include vector fonts, scalable printer fonts, TrueType fonts,
 /// and fonts scaled by other technologies.
-@Deprecated('Use CHOOSEFONT_FLAGS.CF_SCALABLEONLY instead')
 const CF_SCALABLEONLY = 0x00020000;
 
 /// ChooseFont should only enumerate and allow the selection of TrueType fonts.
-@Deprecated('Use CHOOSEFONT_FLAGS.CF_TTONLY instead')
 const CF_TTONLY = 0x00040000;
 
 /// When using a LOGFONT structure to initialize the dialog box controls, use
 /// this flag to prevent the dialog box from displaying an initial selection for
 /// the font name combo box. This is useful when there is no single font name
 /// that applies to the text selection.
-@Deprecated('Use CHOOSEFONT_FLAGS.CF_NOFACESEL instead')
 const CF_NOFACESEL = 0x00080000;
 
 /// When using a LOGFONT structure to initialize the dialog box controls, use
 /// this flag to prevent the dialog box from displaying an initial selection for
 /// the Font Style combo box. This is useful when there is no single font style
 /// that applies to the text selection.
-@Deprecated('Use CHOOSEFONT_FLAGS.CF_NOSTYLESEL instead')
 const CF_NOSTYLESEL = 0x00100000;
 
 /// When using a structure to initialize the dialog box controls, use this flag
 /// to prevent the dialog box from displaying an initial selection for the Font
 /// Size combo box. This is useful when there is no single font size that
 /// applies to the text selection.
-@Deprecated('Use CHOOSEFONT_FLAGS.CF_NOSIZESEL instead')
 const CF_NOSIZESEL = 0x00200000;
 
 /// When specified on input, only fonts with the character set identified in the
 /// lfCharSet member of the LOGFONT structure are displayed. The user will not
 /// be allowed to change the character set specified in the Scripts combo box.
-@Deprecated('Use CHOOSEFONT_FLAGS.CF_SELECTSCRIPT instead')
 const CF_SELECTSCRIPT = 0x00400000;
 
 /// Disables the Script combo box. When this flag is set, the lfCharSet member
 /// of the LOGFONT structure is set to DEFAULT_CHARSET when ChooseFont returns.
 /// This flag is used only to initialize the dialog box.
-@Deprecated('Use CHOOSEFONT_FLAGS.CF_NOSCRIPTSEL instead')
 const CF_NOSCRIPTSEL = 0x00800000;
 
 /// Causes the Font dialog box to list only horizontally oriented fonts.
-@Deprecated('Use CHOOSEFONT_FLAGS.CF_NOVERTFONTS instead')
 const CF_NOVERTFONTS = 0x01000000;
 
 /// ChooseFont should additionally display fonts that are set to Hide in Fonts
 /// Control Panel.
-@Deprecated('Use CHOOSEFONT_FLAGS.CF_INACTIVEFONTS instead')
 const CF_INACTIVEFONTS = 0x02000000;
 
 // -----------------------------------------------------------------------------
@@ -8063,7 +6877,6 @@ const CF_INACTIVEFONTS = 0x02000000;
 /// search to the beginning of the document. You can set this flag to initialize
 /// the dialog box. If set in a FINDMSGSTRING message, indicates the user's
 /// selection.
-@Deprecated('Use FINDREPLACE_FLAGS.FR_DOWN instead')
 const FR_DOWN = 0x00000001;
 
 /// If set, the Match Whole Word Only check box is selected indicating that you
@@ -8071,7 +6884,6 @@ const FR_DOWN = 0x00000001;
 /// the check box is unselected so you should also search for word fragments
 /// that match the search string. You can set this flag to initialize the dialog
 /// box. If set in a FINDMSGSTRING message, indicates the user's selection.
-@Deprecated('Use FINDREPLACE_FLAGS.FR_WHOLEWORD instead')
 const FR_WHOLEWORD = 0x00000002;
 
 /// If set, the Match Case check box is selected indicating that the search
@@ -8079,102 +6891,84 @@ const FR_WHOLEWORD = 0x00000002;
 /// search should be case-insensitive. You can set this flag to initialize the
 /// dialog box. If set in a FINDMSGSTRING message, indicates the user's
 /// selection.
-@Deprecated('Use FINDREPLACE_FLAGS.FR_MATCHCASE instead')
 const FR_MATCHCASE = 0x00000004;
 
 /// If set in a FINDMSGSTRING message, indicates that the user clicked the Find
 /// Next button in a Find or Replace dialog box. The lpstrFindWhat member
 /// specifies the string to search for.
-@Deprecated('Use FINDREPLACE_FLAGS.FR_FINDNEXT instead')
 const FR_FINDNEXT = 0x00000008;
 
 /// If set in a FINDMSGSTRING message, indicates that the user clicked the
 /// Replace button in a Replace dialog box. The lpstrFindWhat member specifies
 /// the string to be replaced and the lpstrReplaceWith member specifies the
 /// replacement string.
-@Deprecated('Use FINDREPLACE_FLAGS.FR_REPLACE instead')
 const FR_REPLACE = 0x00000010;
 
 /// If set in a FINDMSGSTRING message, indicates that the user clicked the
 /// Replace All button in a Replace dialog box. The lpstrFindWhat member
 /// specifies the string to be replaced and the lpstrReplaceWith member
 /// specifies the replacement string.
-@Deprecated('Use FINDREPLACE_FLAGS.FR_REPLACEALL instead')
 const FR_REPLACEALL = 0x00000020;
 
 /// If set in a FINDMSGSTRING message, indicates that the dialog box is closing.
 /// When you receive a message with this flag set, the dialog box handle
 /// returned by the FindText or ReplaceText function is no longer valid.
-@Deprecated('Use FINDREPLACE_FLAGS.FR_DIALOGTERM instead')
 const FR_DIALOGTERM = 0x00000040;
 
 /// Causes the dialog box to display the Help button. The hwndOwner member must
 /// specify the window to receive the HELPMSGSTRING registered messages that the
 /// dialog box sends when the user clicks the Help button.
-@Deprecated('Use FINDREPLACE_FLAGS.FR_SHOWHELP instead')
 const FR_SHOWHELP = 0x00000080;
 
 /// Enables the hook function specified in the lpfnHook member. This flag is
 /// used only to initialize the dialog box.
-@Deprecated('Use FINDREPLACE_FLAGS.FR_ENABLEHOOK instead')
 const FR_ENABLEHOOK = 0x00000100;
 
 /// Indicates that the hInstance and lpTemplateName members specify a dialog box
 /// template to use in place of the default template. This flag is used only to
 /// initialize the dialog box.
-@Deprecated('Use FINDREPLACE_FLAGS.FR_ENABLETEMPLATE instead')
 const FR_ENABLETEMPLATE = 0x00000200;
 
 /// If set when initializing a Find dialog box, disables the search direction
 /// radio buttons.
-@Deprecated('Use FINDREPLACE_FLAGS.FR_NOUPDOWN instead')
 const FR_NOUPDOWN = 0x00000400;
 
 /// If set when initializing a Find or Replace dialog box, disables the Match
 /// Case check box.
-@Deprecated('Use FINDREPLACE_FLAGS.FR_NOMATCHCASE instead')
 const FR_NOMATCHCASE = 0x00000800;
 
 /// If set when initializing a Find or Replace dialog box, disables the Whole
 /// Word check box.
-@Deprecated('Use FINDREPLACE_FLAGS.FR_NOWHOLEWORD instead')
 const FR_NOWHOLEWORD = 0x00001000;
 
 /// Indicates that the hInstance member identifies a data block that contains a
 /// preloaded dialog box template. The system ignores the lpTemplateName member
 /// if this flag is specified.
-@Deprecated('Use FINDREPLACE_FLAGS.FR_ENABLETEMPLATEHANDLE instead')
 const FR_ENABLETEMPLATEHANDLE = 0x00002000;
 
 /// If set when initializing a Find dialog box, hides the search direction radio
 /// buttons.
-@Deprecated('Use FINDREPLACE_FLAGS.FR_HIDEUPDOWN instead')
 const FR_HIDEUPDOWN = 0x00004000;
 
 /// If set when initializing a Find or Replace dialog box, hides the Match Case
 /// check box.
-@Deprecated('Use FINDREPLACE_FLAGS.FR_HIDEMATCHCASE instead')
 const FR_HIDEMATCHCASE = 0x00008000;
 
 /// If set when initializing a Find or Replace dialog box, hides the Match Whole
 /// Word Only check box.
-@Deprecated('Use FINDREPLACE_FLAGS.FR_HIDEWHOLEWORD instead')
 const FR_HIDEWHOLEWORD = 0x00010000;
 
 /// If set, the search operation considers Arabic and Hebrew diacritical marks.
 /// If not set, diacritical marks are ignored.
-@Deprecated('Use FINDREPLACE_FLAGS.FR_MATCHDIAC instead')
 const FR_MATCHDIAC = 0x20000000;
 
 /// If set, the search operation considers Arabic and Hebrew kashidas. If not
 /// set, kashidas are ignored.
-@Deprecated('Use FINDREPLACE_FLAGS.FR_MATCHKASHIDA instead')
 const FR_MATCHKASHIDA = 0x40000000;
 
 /// If set, the search differentiates between Arabic and Hebrew alefs with
 /// different accents. If not set, all alefs are matched by the alef character
 /// alone.
-@Deprecated('Use FINDREPLACE_FLAGS.FR_MATCHALEFHAMZA instead')
 const FR_MATCHALEFHAMZA = 0x80000000;
 
 // -----------------------------------------------------------------------------
@@ -8184,21 +6978,17 @@ const FR_MATCHALEFHAMZA = 0x80000000;
 /// Causes the Read Only check box to be selected initially when the dialog box
 /// is created. This flag indicates the state of the Read Only check box when
 /// the dialog box is closed.
-@Deprecated('Use OPEN_FILENAME_FLAGS.OFN_READONLY instead')
 const OFN_READONLY = 0x00000001;
 
 /// Causes the Save As dialog box to generate a message box if the selected file
 /// already exists. The user must confirm whether to overwrite the file.
-@Deprecated('Use OPEN_FILENAME_FLAGS.OFN_OVERWRITEPROMPT instead')
 const OFN_OVERWRITEPROMPT = 0x00000002;
 
 /// Hides the Read Only check box.
-@Deprecated('Use OPEN_FILENAME_FLAGS.OFN_HIDEREADONLY instead')
 const OFN_HIDEREADONLY = 0x00000004;
 
 /// Restores the current directory to its original value if the user changed the
 /// directory while searching for files.
-@Deprecated('Use OPEN_FILENAME_FLAGS.OFN_NOCHANGEDIR instead')
 const OFN_NOCHANGEDIR = 0x00000008;
 
 /// Causes the dialog box to display the Help button. The hwndOwner member must
@@ -8206,11 +6996,9 @@ const OFN_NOCHANGEDIR = 0x00000008;
 /// dialog box sends when the user clicks the Help button. An Explorer-style
 /// dialog box sends a CDN_HELP notification message to your hook procedure when
 /// the user clicks the Help button.
-@Deprecated('Use OPEN_FILENAME_FLAGS.OFN_SHOWHELP instead')
 const OFN_SHOWHELP = 0x00000010;
 
 /// Enables the hook function specified in the lpfnHook member.
-@Deprecated('Use OPEN_FILENAME_FLAGS.OFN_ENABLEHOOK instead')
 const OFN_ENABLEHOOK = 0x00000020;
 
 /// The lpTemplateName member is a pointer to the name of a dialog template
@@ -8219,7 +7007,6 @@ const OFN_ENABLEHOOK = 0x00000020;
 /// dialog box that is a child of the default Explorer-style dialog box. If the
 /// OFN_EXPLORER flag is not set, the system uses the template to create an
 /// old-style dialog box that replaces the default dialog box.
-@Deprecated('Use OPEN_FILENAME_FLAGS.OFN_ENABLETEMPLATE instead')
 const OFN_ENABLETEMPLATE = 0x00000040;
 
 /// The hInstance member identifies a data block that contains a preloaded
@@ -8229,7 +7016,6 @@ const OFN_ENABLETEMPLATE = 0x00000040;
 /// Explorer-style dialog box. If the OFN_EXPLORER flag is not set, the system
 /// uses the template to create an old-style dialog box that replaces the
 /// default dialog box.
-@Deprecated('Use OPEN_FILENAME_FLAGS.OFN_ENABLETEMPLATEHANDLE instead')
 const OFN_ENABLETEMPLATEHANDLE = 0x00000080;
 
 /// The common dialog boxes allow invalid characters in the returned file name.
@@ -8243,25 +7029,21 @@ const OFN_ENABLETEMPLATEHANDLE = 0x00000080;
 /// nFileOffset is less than zero, the file name is invalid. Otherwise, the file
 /// name is valid, and nFileExtension and nFileOffset can be used as if the
 /// OFN_NOVALIDATE flag had not been specified.
-@Deprecated('Use OPEN_FILENAME_FLAGS.OFN_NOVALIDATE instead')
 const OFN_NOVALIDATE = 0x00000100;
 
 /// The File Name list box allows multiple selections. If you also set the
 /// OFN_EXPLORER flag, the dialog box uses the Explorer-style user interface;
 /// otherwise, it uses the old-style user interface.
-@Deprecated('Use OPEN_FILENAME_FLAGS.OFN_ALLOWMULTISELECT instead')
 const OFN_ALLOWMULTISELECT = 0x00000200;
 
 /// The user typed a file name extension that differs from the extension
 /// specified by lpstrDefExt. The function does not use this flag if lpstrDefExt
 /// is NULL.
-@Deprecated('Use OPEN_FILENAME_FLAGS.OFN_EXTENSIONDIFFERENT instead')
 const OFN_EXTENSIONDIFFERENT = 0x00000400;
 
 /// The user can type only valid paths and file names. If this flag is used and
 /// the user types an invalid path and file name in the File Name entry field,
 /// the dialog box function displays a warning in a message box.
-@Deprecated('Use OPEN_FILENAME_FLAGS.OFN_PATHMUSTEXIST instead')
 const OFN_PATHMUSTEXIST = 0x00000800;
 
 /// The user can type only names of existing files in the File Name entry field.
@@ -8269,7 +7051,6 @@ const OFN_PATHMUSTEXIST = 0x00000800;
 /// box procedure displays a warning in a message box. If this flag is
 /// specified, the OFN_PATHMUSTEXIST flag is also used. This flag can be used in
 /// an Open dialog box. It cannot be used with a Save As dialog box.
-@Deprecated('Use OPEN_FILENAME_FLAGS.OFN_FILEMUSTEXIST instead')
 const OFN_FILEMUSTEXIST = 0x00001000;
 
 /// If the user specifies a file that does not exist, this flag causes the
@@ -8278,7 +7059,6 @@ const OFN_FILEMUSTEXIST = 0x00001000;
 /// the specified name; otherwise, the dialog box remains open. If you use this
 /// flag with the OFN_ALLOWMULTISELECT flag, the dialog box allows the user to
 /// specify only one nonexistent file.
-@Deprecated('Use OPEN_FILENAME_FLAGS.OFN_CREATEPROMPT instead')
 const OFN_CREATEPROMPT = 0x00002000;
 
 /// Specifies that if a call to the OpenFile function fails because of a network
@@ -8289,12 +7069,10 @@ const OFN_CREATEPROMPT = 0x00002000;
 /// sends the CDN_SHAREVIOLATION message to the hook procedure. If you do not
 /// set OFN_EXPLORER, the dialog box sends the SHAREVISTRING registered message
 /// to the hook procedure.
-@Deprecated('Use OPEN_FILENAME_FLAGS.OFN_SHAREAWARE instead')
 const OFN_SHAREAWARE = 0x00004000;
 
 /// The returned file does not have the Read Only check box selected and is not
 /// in a write-protected directory.
-@Deprecated('Use OPEN_FILENAME_FLAGS.OFN_NOREADONLYRETURN instead')
 const OFN_NOREADONLYRETURN = 0x00008000;
 
 /// The file is not created before the dialog box is closed. This flag should be
@@ -8303,28 +7081,23 @@ const OFN_NOREADONLYRETURN = 0x00008000;
 /// for write protection, a full disk, an open drive door, or network
 /// protection. Applications using this flag must perform file operations
 /// carefully, because a file cannot be reopened once it is closed.
-@Deprecated('Use OPEN_FILENAME_FLAGS.OFN_NOTESTFILECREATE instead')
 const OFN_NOTESTFILECREATE = 0x00010000;
 
 /// Hides and disables the Network button.
-@Deprecated('Use OPEN_FILENAME_FLAGS.OFN_NONETWORKBUTTON instead')
 const OFN_NONETWORKBUTTON = 0x00020000;
 
 /// For old-style dialog boxes, this flag causes the dialog box to use short
 /// file names (8.3 format). Explorer-style dialog boxes ignore this flag and
 /// always display long file names.
-@Deprecated('Use OPEN_FILENAME_FLAGS.OFN_NOLONGNAMES instead')
 const OFN_NOLONGNAMES = 0x00040000;
 
 /// Indicates that any customizations made to the Open or Save As dialog box use
 /// the Explorer-style customization methods.
-@Deprecated('Use OPEN_FILENAME_FLAGS.OFN_EXPLORER instead')
 const OFN_EXPLORER = 0x00080000;
 
 /// Directs the dialog box to return the path and file name of the selected
 /// shortcut (.LNK) file. If this value is not specified, the dialog box returns
 /// the path and file name of the file referenced by the shortcut.
-@Deprecated('Use OPEN_FILENAME_FLAGS.OFN_NODEREFERENCELINKS instead')
 const OFN_NODEREFERENCELINKS = 0x00100000;
 
 /// For old-style dialog boxes, this flag causes the dialog box to use long file
@@ -8332,7 +7105,6 @@ const OFN_NODEREFERENCELINKS = 0x00100000;
 /// also set, old-style dialog boxes use short file names (8.3 format) for file
 /// names with spaces. Explorer-style dialog boxes ignore this flag and always
 /// display long file names.
-@Deprecated('Use OPEN_FILENAME_FLAGS.OFN_LONGNAMES instead')
 const OFN_LONGNAMES = 0x00200000;
 
 /// Causes the dialog box to send CDN_INCLUDEITEM notification messages to your
@@ -8340,7 +7112,6 @@ const OFN_LONGNAMES = 0x00200000;
 /// sends a notification for each item in the newly opened folder. These
 /// messages enable you to control which items the dialog box displays in the
 /// folder's item list.
-@Deprecated('Use OPEN_FILENAME_FLAGS.OFN_ENABLEINCLUDENOTIFY instead')
 const OFN_ENABLEINCLUDENOTIFY = 0x00400000;
 
 /// Enables the Explorer-style dialog box to be resized using either the mouse
@@ -8348,26 +7119,22 @@ const OFN_ENABLEINCLUDENOTIFY = 0x00400000;
 /// boxes allow the dialog box to be resized regardless of whether this flag is
 /// set. This flag is necessary only if you provide a hook procedure or custom
 /// template. The old-style dialog box does not permit resizing.
-@Deprecated('Use OPEN_FILENAME_FLAGS.OFN_ENABLESIZING instead')
 const OFN_ENABLESIZING = 0x00800000;
 
 /// Prevents the system from adding a link to the selected file in the file
 /// system directory that contains the user's most recently used documents. To
 /// retrieve the location of this directory, call the SHGetSpecialFolderLocation
 /// function with the CSIDL_RECENT flag.
-@Deprecated('Use OPEN_FILENAME_FLAGS.OFN_DONTADDTORECENT instead')
 const OFN_DONTADDTORECENT = 0x02000000;
 
 /// Forces the showing of system and hidden files, thus overriding the user
 /// setting to show or not show hidden files. However, a file that is marked
 /// both system and hidden is not shown.
-@Deprecated('Use OPEN_FILENAME_FLAGS.OFN_FORCESHOWHIDDEN instead')
 const OFN_FORCESHOWHIDDEN = 0x10000000;
 
 /// If this flag is set, the places bar is not displayed. If this flag is not
 /// set, Explorer-style dialog boxes include a places bar containing icons for
 /// commonly-used folders, such as Favorites and Desktop.
-@Deprecated('Use OPEN_FILENAME_FLAGS_EX.OFN_EX_NOPLACESBAR instead')
 const OFN_EX_NOPLACESBAR = 0x00000001;
 
 // -----------------------------------------------------------------------------
@@ -8375,27 +7142,21 @@ const OFN_EX_NOPLACESBAR = 0x00000001;
 // -----------------------------------------------------------------------------
 
 /// The font used by window captions.
-@Deprecated('Use THEME_PROPERTY_SYMBOL_ID.TMT_CAPTIONFONT instead')
 const TMT_CAPTIONFONT = 801;
 
 /// The font used by window small captions.
-@Deprecated('Use THEME_PROPERTY_SYMBOL_ID.TMT_SMALLCAPTIONFONT instead')
 const TMT_SMALLCAPTIONFONT = 802;
 
 /// The font used by menus.
-@Deprecated('Use THEME_PROPERTY_SYMBOL_ID.TMT_MENUFONT instead')
 const TMT_MENUFONT = 803;
 
 /// The font used in status messages.
-@Deprecated('Use THEME_PROPERTY_SYMBOL_ID.TMT_STATUSFONT instead')
 const TMT_STATUSFONT = 804;
 
 /// The font used to display messages in a message box.
-@Deprecated('Use THEME_PROPERTY_SYMBOL_ID.TMT_MSGBOXFONT instead')
 const TMT_MSGBOXFONT = 805;
 
 /// The font used for icons.
-@Deprecated('Use THEME_PROPERTY_SYMBOL_ID.TMT_ICONTITLEFONT instead')
 const TMT_ICONTITLEFONT = 806;
 
 // -----------------------------------------------------------------------------
@@ -8403,68 +7164,53 @@ const TMT_ICONTITLEFONT = 806;
 // -----------------------------------------------------------------------------
 
 /// The crText member value is valid.
-@Deprecated('Use DTTOPTS_FLAGS.DTT_TEXTCOLOR instead')
 const DTT_TEXTCOLOR = 1 << 0;
 
 /// The crBorder member value is valid.
-@Deprecated('Use DTTOPTS_FLAGS.DTT_BORDERCOLOR instead')
 const DTT_BORDERCOLOR = 1 << 1;
 
 /// The crShadow member value is valid.
-@Deprecated('Use DTTOPTS_FLAGS.DTT_SHADOWCOLOR instead')
 const DTT_SHADOWCOLOR = 1 << 2;
 
 /// The iTextShadowType member value is valid.
-@Deprecated('Use DTTOPTS_FLAGS.DTT_SHADOWTYPE instead')
 const DTT_SHADOWTYPE = 1 << 3;
 
 /// The ptShadowOffset member value is valid.
-@Deprecated('Use DTTOPTS_FLAGS.DTT_SHADOWOFFSET instead')
 const DTT_SHADOWOFFSET = 1 << 4;
 
 /// The iBorderSize member value is valid.
-@Deprecated('Use DTTOPTS_FLAGS.DTT_BORDERSIZE instead')
 const DTT_BORDERSIZE = 1 << 5;
 
 /// The iFontPropId member value is valid.
-@Deprecated('Use DTTOPTS_FLAGS.DTT_FONTPROP instead')
 const DTT_FONTPROP = 1 << 6;
 
 /// The iColorPropId member value is valid.
-@Deprecated('Use DTTOPTS_FLAGS.DTT_COLORPROP instead')
 const DTT_COLORPROP = 1 << 7;
 
 /// The iStateId member value is valid.
-@Deprecated('Use DTTOPTS_FLAGS.DTT_STATEID instead')
 const DTT_STATEID = 1 << 8;
 
 /// The pRect parameter of the DrawThemeTextEx function that uses this structure
 /// will be used as both an in and an out parameter. After the function returns,
 /// the pRect parameter will contain the rectangle that corresponds to the
 /// region calculated to be drawn.
-@Deprecated('Use DTTOPTS_FLAGS.DTT_CALCRECT instead')
 const DTT_CALCRECT = 1 << 9;
 
 /// The fApplyOverlay member value is valid.
-@Deprecated('Use DTTOPTS_FLAGS.DTT_APPLYOVERLAY instead')
 const DTT_APPLYOVERLAY = 1 << 10;
 
 /// The iGlowSize member value is valid.
-@Deprecated('Use DTTOPTS_FLAGS.DTT_GLOWSIZE instead')
 const DTT_GLOWSIZE = 1 << 11;
 
 /// The pfnDrawTextCallback member value is valid.
-@Deprecated('Use DTTOPTS_FLAGS.DTT_CALLBACK instead')
 const DTT_CALLBACK = 1 << 12;
 
 /// Draws text with antialiased alpha. Use of this flag requires a top-down DIB
 /// section. This flag works only if the HDC passed to function DrawThemeTextEx
 /// has a top-down DIB section currently selected in it.
-@Deprecated('Use DTTOPTS_FLAGS.DTT_COMPOSITED instead')
 const DTT_COMPOSITED = 1 << 13;
 
 /// All valid bits
-@Deprecated('Use DTTOPTS_FLAGS.DTT_VALIDBITS instead')
 const DTT_VALIDBITS =
     DTT_TEXTCOLOR |
     DTT_BORDERCOLOR |
@@ -8481,296 +7227,83 @@ const DTT_VALIDBITS =
     DTT_COMPOSITED;
 
 // -----------------------------------------------------------------------------
-// High DPI constants & enumerations
-// -----------------------------------------------------------------------------
-
-/// Describes per-monitor DPI scaling behavior overrides for child windows
-/// within dialogs. The values in this enumeration are bitfields and can be
-/// combined.
-///
-/// {@category enum}
-class DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS {
-  /// The default behavior of the dialog manager. The dialog managed will update
-  /// the font, size, and position of the child window on DPI changes.
-  static const DCDC_DEFAULT = 0x0000;
-
-  /// Prevents the dialog manager from sending an updated font to the child
-  /// window via WM_SETFONT in response to a DPI change.
-  static const DCDC_DISABLE_FONT_UPDATE = 0x0001;
-
-  /// Prevents the dialog manager from resizing and repositioning the child
-  /// window in response to a DPI change.
-  static const DCDC_DISABLE_RELAYOUT = 0x0002;
-}
-
-/// In Per Monitor v2 contexts, dialogs will automatically respond to DPI
-/// changes by resizing themselves and re-computing the positions of their child
-/// windows (here referred to as re-layouting). This enum works in conjunction
-/// with SetDialogDpiChangeBehavior in order to override the default DPI scaling
-/// behavior for dialogs.
-///
-/// {@category enum}
-class DIALOG_DPI_CHANGE_BEHAVIORS {
-  /// The default behavior of the dialog manager. In response to a DPI change,
-  /// the dialog manager will re-layout each control, update the font on each
-  /// control, resize the dialog, and update the dialog's own font.
-  static const DDC_DEFAULT = 0x0000;
-
-  /// Prevents the dialog manager from responding to WM_GETDPISCALEDSIZE and
-  /// WM_DPICHANGED, disabling all default DPI scaling behavior.
-  static const DDC_DISABLE_ALL = 0x0001;
-
-  /// Prevents the dialog manager from resizing the dialog in response to a DPI
-  /// change.
-  static const DDC_DISABLE_RESIZE = 0x0002;
-
-  /// Prevents the dialog manager from re-layouting all of the dialogue's
-  /// immediate children HWNDs in response to a DPI change.
-  static const DDC_DISABLE_CONTROL_RELAYOUT = 0x0004;
-}
-
-// -----------------------------------------------------------------------------
 // Display device constants
 // -----------------------------------------------------------------------------
 
 /// DISPLAY_DEVICE_ACTIVE specifies whether a monitor is presented as being "on"
 /// by the respective GDI view.
-@Deprecated('Use DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_ACTIVE instead')
 const DISPLAY_DEVICE_ACTIVE = 0x00000001;
 
 /// The primary desktop is on the device. For a system with a single display
 /// card, this is always set. For a system with multiple display cards, only one
 /// device can have this set.
-@Deprecated(
-  'Use DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_PRIMARY_DEVICE instead',
-)
 const DISPLAY_DEVICE_PRIMARY_DEVICE = 0x00000004;
 
 /// Represents a pseudo device used to mirror application drawing for remoting
 /// or other purposes. An invisible pseudo monitor is associated with this
 /// device. For example, NetMeeting uses it. Note that GetSystemMetrics
 /// (SM_MONITORS) only accounts for visible display monitors.
-@Deprecated(
-  'Use DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_MIRRORING_DRIVER instead',
-)
 const DISPLAY_DEVICE_MIRRORING_DRIVER = 0x00000008;
 
 /// The device is VGA compatible.
-@Deprecated(
-  'Use DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_VGA_COMPATIBLE instead',
-)
 const DISPLAY_DEVICE_VGA_COMPATIBLE = 0x00000010;
 
 /// The device is removable; it cannot be the primary display.
-@Deprecated('Use DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_REMOVABLE instead')
 const DISPLAY_DEVICE_REMOVABLE = 0x00000020;
 
 /// The device has more display modes than its output devices support.
-@Deprecated('Use DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_MODESPRUNED instead')
 const DISPLAY_DEVICE_MODESPRUNED = 0x08000000;
-
-// -----------------------------------------------------------------------------
-// Bluetooth constants & enumerations
-// -----------------------------------------------------------------------------
-
-/// The BLUETOOTH_AUTHENTICATION_METHOD enumeration defines the supported
-/// authentication types during device pairing.
-///
-/// {@category enum}
-class BLUETOOTH_AUTHENTICATION_METHOD {
-  static const BLUETOOTH_AUTHENTICATION_METHOD_LEGACY = 0;
-  static const BLUETOOTH_AUTHENTICATION_METHOD_OOB = 1;
-  static const BLUETOOTH_AUTHENTICATION_METHOD_NUMERIC_COMPARISON = 2;
-  static const BLUETOOTH_AUTHENTICATION_METHOD_PASSKEY_NOTIFICATION = 3;
-  static const BLUETOOTH_AUTHENTICATION_METHOD_PASSKEY = 4;
-}
-
-/// The BLUETOOTH_AUTHENTICATION_REQUIREMENTS enumeration specifies the 'Man in
-/// the Middle' protection required for authentication.
-///
-/// {@category enum}
-class BLUETOOTH_AUTHENTICATION_REQUIREMENTS {
-  static const BLUETOOTH_MITM_ProtectionNotRequired = 0;
-  static const BLUETOOTH_MITM_ProtectionRequired = 1;
-  static const BLUETOOTH_MITM_ProtectionNotRequiredBonding = 2;
-  static const BLUETOOTH_MITM_ProtectionRequiredBonding = 3;
-  static const BLUETOOTH_MITM_ProtectionNotRequiredGeneralBonding = 4;
-  static const BLUETOOTH_MITM_ProtectionRequiredGeneralBonding = 5;
-  static const BLUETOOTH_MITM_ProtectionNotDefined = 6;
-}
-
-/// The BLUETOOTH_IO_CAPABILITY enumeration defines the input/output
-/// capabilities of a Bluetooth Device.
-///
-/// {@category enum}
-class BLUETOOTH_IO_CAPABILITY {
-  static const BLUETOOTH_IO_CAPABILITY_DISPLAYONLY = 0;
-  static const BLUETOOTH_IO_CAPABILITY_DISPLAYYESNO = 1;
-  static const BLUETOOTH_IO_CAPABILITY_KEYBOARDONLY = 2;
-  static const BLUETOOTH_IO_CAPABILITY_NOINPUTNOOUTPUT = 3;
-  static const BLUETOOTH_IO_CAPABILITY_UNDEFINED = 4;
-}
-
-// -----------------------------------------------------------------------------
-/// Common dialog constants & enumerations
-// -----------------------------------------------------------------------------
-
-/// Defines the set of options available to an Open or Save dialog.
-///
-/// {@category enum}
-class FILEOPENDIALOGOPTIONS {
-  static const FOS_OVERWRITEPROMPT = 0x2;
-  static const FOS_STRICTFILETYPES = 0x4;
-  static const FOS_NOCHANGEDIR = 0x8;
-  static const FOS_PICKFOLDERS = 0x20;
-  static const FOS_FORCEFILESYSTEM = 0x40;
-  static const FOS_ALLNONSTORAGEITEMS = 0x80;
-  static const FOS_NOVALIDATE = 0x100;
-  static const FOS_ALLOWMULTISELECT = 0x200;
-  static const FOS_PATHMUSTEXIST = 0x800;
-  static const FOS_FILEMUSTEXIST = 0x1000;
-  static const FOS_CREATEPROMPT = 0x2000;
-  static const FOS_SHAREAWARE = 0x4000;
-  static const FOS_NOREADONLYRETURN = 0x8000;
-  static const FOS_NOTESTFILECREATE = 0x10000;
-  static const FOS_HIDEMRUPLACES = 0x20000;
-  static const FOS_HIDEPINNEDPLACES = 0x40000;
-  static const FOS_NODEREFERENCELINKS = 0x100000;
-  static const FOS_OKBUTTONNEEDSINTERACTION = 0x200000;
-  static const FOS_DONTADDTORECENT = 0x2000000;
-  static const FOS_FORCESHOWHIDDEN = 0x10000000;
-  static const FOS_DEFAULTNOMINIMODE = 0x20000000;
-  static const FOS_FORCEPREVIEWPANEON = 0x40000000;
-  static const FOS_SUPPORTSTREAMABLEITEMS = 0x80000000;
-}
-
-// -----------------------------------------------------------------------------
-// Desktop shell constants & enumerations
-// -----------------------------------------------------------------------------
-
-/// Desktop wallpaper slideshow settings for shuffling images.
-///
-/// {@category enum}
-class DESKTOP_SLIDESHOW_OPTIONS {
-  /// Shuffle is enabled; the images are shown in a random order.
-  static const DSO_SHUFFLEIMAGES = 0x1;
-}
-
-/// Gets the current status of the slideshow.
-///
-/// {@category enum}
-class DESKTOP_SLIDESHOW_STATE {
-  /// Slideshows are enabled.
-  static const DSS_ENABLED = 0x1;
-
-  /// A slideshow is currently configured.
-  static const DSS_SLIDESHOW = 0x2;
-
-  /// A remote session has temporarily disabled the slideshow.
-  static const DSS_DISABLED_BY_REMOTE_SESSION = 0x4;
-}
-
-/// The direction that the slideshow should advance.
-///
-/// {@category enum}
-class DESKTOP_SLIDESHOW_DIRECTION {
-  /// Advance the slideshow forward.
-  static const DSD_FORWARD = 0;
-
-  /// Advance the slideshow backward.
-  static const DSD_BACKWARD = 1;
-}
-
-/// Specifies how the desktop wallpaper should be displayed.
-///
-/// {@category enum}
-class DESKTOP_WALLPAPER_POSITION {
-  /// Center the image; do not stretch.
-  static const DWPOS_CENTER = 0;
-
-  /// Tile the image across all monitors.
-  static const DWPOS_TILE = 1;
-
-  /// Stretch the image to exactly fit on the monitor.
-  static const DWPOS_STRETCH = 2;
-
-  /// Stretch the image to exactly the height or width of the monitor without
-  /// changing its aspect ratio or cropping the image.
-  static const DWPOS_FIT = 3;
-
-  /// Stretch the image to fill the screen, cropping the image as necessary to
-  /// avoid letterbox bars.
-  static const DWPOS_FILL = 4;
-
-  /// Spans a single image across all monitors attached to the system.
-  static const DWPOS_SPAN = 5;
-}
 
 // -----------------------------------------------------------------------------
 // PlaySound constants
 // -----------------------------------------------------------------------------
 
 /// play synchronously (default)
-@Deprecated('Use SND_FLAGS.SND_SYNC instead')
 const SND_SYNC = 0x0000;
 
 /// play asynchronously
-@Deprecated('Use SND_FLAGS.SND_ASYNC instead')
 const SND_ASYNC = 0x0001;
 
 /// silence (!default) if sound not found
-@Deprecated('Use SND_FLAGS.SND_NODEFAULT instead')
 const SND_NODEFAULT = 0x0002;
 
 /// pszSound points to a memory file
-@Deprecated('Use SND_FLAGS.SND_MEMORY instead')
 const SND_MEMORY = 0x0004;
 
 /// loop the sound until next sndPlaySound
-@Deprecated('Use SND_FLAGS.SND_LOOP instead')
 const SND_LOOP = 0x0008;
 
 /// don't stop any currently playing sound
-@Deprecated('Use SND_FLAGS.SND_NOSTOP instead')
 const SND_NOSTOP = 0x0010;
 
 /// don't wait if the driver is busy
-@Deprecated('Use SND_FLAGS.SND_NOWAIT instead')
 const SND_NOWAIT = 0x00002000;
 
 /// name is a registry alias
-@Deprecated('Use SND_FLAGS.SND_ALIAS instead')
 const SND_ALIAS = 0x00010000;
 
 /// alias is a predefined ID
-@Deprecated('Use SND_FLAGS.SND_ALIAS_ID instead')
 const SND_ALIAS_ID = 0x00110000;
 
 /// name is file name
-@Deprecated('Use SND_FLAGS.SND_FILENAME instead')
 const SND_FILENAME = 0x00020000;
 
 /// name is resource name or atom
-@Deprecated('Use SND_FLAGS.SND_RESOURCE instead')
 const SND_RESOURCE = 0x00040004;
 
 /// purge non-static events for task
-@Deprecated('Use SND_FLAGS.SND_PURGE instead')
 const SND_PURGE = 0x0040;
 
 /// look for application specific association
-@Deprecated('Use SND_FLAGS.SND_APPLICATION instead')
 const SND_APPLICATION = 0x0080;
 
 /// Generate a SoundSentry event with this sound
-@Deprecated('Use SND_FLAGS.SND_SENTRY instead')
 const SND_SENTRY = 0x00080000;
 
 /// Treat this as a "ring" from a communications app - don't duck me
 const SND_RING = 0x00100000;
 
 /// Treat this as a system sound
-@Deprecated('Use SND_FLAGS.SND_SYSTEM instead')
 const SND_SYSTEM = 0x00200000;
 
 // -----------------------------------------------------------------------------
@@ -8779,20 +7312,16 @@ const SND_SYSTEM = 0x00200000;
 
 /// Terminates all outstanding overlapped write operations and returns
 /// immediately, even if the write operations have not been completed.
-@Deprecated('Use PURGE_COMM_FLAGS.PURGE_TXABORT instead')
 const PURGE_TXABORT = 0x0001;
 
 /// Terminates all outstanding overlapped read operations and returns
 /// immediately, even if the read operations have not been completed.
-@Deprecated('Use PURGE_COMM_FLAGS.PURGE_RXABORT instead')
 const PURGE_RXABORT = 0x0002;
 
 /// Clears the output buffer (if the device driver has one).
-@Deprecated('Use PURGE_COMM_FLAGS.PURGE_TXCLEAR instead')
 const PURGE_TXCLEAR = 0x0004;
 
 /// Clears the input buffer (if the device driver has one).
-@Deprecated('Use PURGE_COMM_FLAGS.PURGE_RXCLEAR instead')
 const PURGE_RXCLEAR = 0x0008;
 
 // -----------------------------------------------------------------------------
@@ -8803,45 +7332,36 @@ const PURGE_RXCLEAR = 0x0008;
 /// other than the current user are logged on to the computer specified by the
 /// lpMachineName parameter, this function fails with a return value of
 /// ERROR_SHUTDOWN_USERS_LOGGED_ON.
-@Deprecated('Use SHUTDOWN_FLAGS.SHUTDOWN_FORCE_OTHERS instead')
 const SHUTDOWN_FORCE_OTHERS = 0x0000001;
 
 /// Specifies that the originating session is logged off forcefully. If this
 /// flag is not set, the originating session is shut down interactively, so a
 /// shutdown is not guaranteed even if the function returns successfully.
-@Deprecated('Use SHUTDOWN_FLAGS.SHUTDOWN_FORCE_SELF instead')
 const SHUTDOWN_FORCE_SELF = 0x0000002;
 
 /// The computer is shut down and rebooted.
-@Deprecated('Use SHUTDOWN_FLAGS.SHUTDOWN_RESTART instead')
 const SHUTDOWN_RESTART = 0x0000004;
 
 /// The computer is shut down and powered down.
-@Deprecated('Use SHUTDOWN_FLAGS.SHUTDOWN_POWEROFF instead')
 const SHUTDOWN_POWEROFF = 0x0000008;
 
 /// The computer is shut down but is not powered down or rebooted.
-@Deprecated('Use SHUTDOWN_FLAGS.SHUTDOWN_NOREBOOT instead')
 const SHUTDOWN_NOREBOOT = 0x0000010;
 
 /// Overrides the grace period so that the computer is shut down immediately.
-@Deprecated('Use SHUTDOWN_FLAGS.SHUTDOWN_GRACE_OVERRIDE instead')
 const SHUTDOWN_GRACE_OVERRIDE = 0x0000020;
 
 /// The computer installs any updates before starting the shutdown.
-@Deprecated('Use SHUTDOWN_FLAGS.SHUTDOWN_INSTALL_UPDATES instead')
 const SHUTDOWN_INSTALL_UPDATES = 0x0000040;
 
 /// The system is rebooted using the ExitWindowsEx function with the
 /// EWX_RESTARTAPPS flag. This restarts any applications that have been
 /// registered for restart using the RegisterApplicationRestart function.
-@Deprecated('Use SHUTDOWN_FLAGS.SHUTDOWN_RESTARTAPPS instead')
 const SHUTDOWN_RESTARTAPPS = 0x0000080;
 
 /// Beginning with InitiateShutdown running on Windows 8, you must include the
 /// SHUTDOWN_HYBRID flag with one or more of the flags in this table to specify
 /// options for the shutdown.
-@Deprecated('Use SHUTDOWN_FLAGS.SHUTDOWN_HYBRID instead')
 const SHUTDOWN_HYBRID = 0x0000200;
 
 // -----------------------------------------------------------------------------
@@ -8865,74 +7385,59 @@ const FO_RENAME = 0x0004;
 /// The pTo member specifies multiple destination files (one for each source
 /// file in pFrom) rather than one directory where all source files are to be
 /// deposited.
-@Deprecated('Use FILEOPERATION_FLAGS.FOF_MULTIDESTFILES instead')
 const FOF_MULTIDESTFILES = 0x0001;
 
 /// Do not display a progress dialog box.
-@Deprecated('Use FILEOPERATION_FLAGS.FOF_SILENT instead')
 const FOF_SILENT = 0x0004;
 
 /// Give the file being operated on a new name in a move, copy, or rename
 /// operation if a file with the target name already exists at the destination.
-@Deprecated('Use FILEOPERATION_FLAGS.FOF_RENAMEONCOLLISION instead')
 const FOF_RENAMEONCOLLISION = 0x0008;
 
 /// Respond with Yes to All for any dialog box that is displayed.
-@Deprecated('Use FILEOPERATION_FLAGS.FOF_NOCONFIRMATION instead')
 const FOF_NOCONFIRMATION = 0x0010;
 
 /// If FOF_RENAMEONCOLLISION is specified and any files were renamed, assign a
 /// name mapping object that contains their old and new names to the
 /// hNameMappings member. This object must be freed using SHFreeNameMappings
 /// when it is no longer needed.
-@Deprecated('Use FILEOPERATION_FLAGS.FOF_WANTMAPPINGHANDLE instead')
 const FOF_WANTMAPPINGHANDLE = 0x0020;
 
 /// Preserve undo information, if possible.
-@Deprecated('Use FILEOPERATION_FLAGS.FOF_ALLOWUNDO instead')
 const FOF_ALLOWUNDO = 0x0040;
 
 /// Perform the operation only on files (not on folders) if a wildcard file name
 /// (.) is specified.
-@Deprecated('Use FILEOPERATION_FLAGS.FOF_FILESONLY instead')
 const FOF_FILESONLY = 0x0080;
 
 /// Display a progress dialog box but do not show individual file names as they
 /// are operated on.
-@Deprecated('Use FILEOPERATION_FLAGS.FOF_SIMPLEPROGRESS instead')
 const FOF_SIMPLEPROGRESS = 0x0100;
 
 /// Do not ask the user to confirm the creation of a new directory if the
 /// operation requires one to be created.
-@Deprecated('Use FILEOPERATION_FLAGS.FOF_NOCONFIRMMKDIR instead')
 const FOF_NOCONFIRMMKDIR = 0x0200;
 
 /// Do not display a dialog to the user if an error occurs.
-@Deprecated('Use FILEOPERATION_FLAGS.FOF_NOERRORUI instead')
 const FOF_NOERRORUI = 0x0400;
 
 /// Do not copy the security attributes of the file. The destination file
 /// receives the security attributes of its new folder.
-@Deprecated('Use FILEOPERATION_FLAGS.FOF_NOCOPYSECURITYATTRIBS instead')
 const FOF_NOCOPYSECURITYATTRIBS = 0x0800;
 
 /// Only perform the operation in the local directory. Do not operate
 /// recursively into subdirectories, which is the default behavior.
-@Deprecated('Use FILEOPERATION_FLAGS.FOF_NORECURSION instead')
 const FOF_NORECURSION = 0x1000;
 
 /// Do not move connected files as a group. Only move the specified files.
-@Deprecated('Use FILEOPERATION_FLAGS.FOF_NO_CONNECTED_ELEMENTS instead')
 const FOF_NO_CONNECTED_ELEMENTS = 0x2000;
 
 /// Send a warning if a file is being permanently destroyed during a delete
 /// operation rather than recycled. This flag partially overrides
 /// FOF_NOCONFIRMATION.
-@Deprecated('Use FILEOPERATION_FLAGS.FOF_WANTNUKEWARNING instead')
 const FOF_WANTNUKEWARNING = 0x4000;
 
 /// Perform the operation silently, presenting no UI to the user.
-@Deprecated('Use FILEOPERATION_FLAGS.FOF_NO_UI instead')
 const FOF_NO_UI =
     FOF_SILENT | FOF_NOCONFIRMATION | FOF_NOERRORUI | FOF_NOCONFIRMMKDIR;
 
@@ -8944,19 +7449,16 @@ const FOF_NO_UI =
 /// NOTIFYICONDATA structure pointed to by lpdata—either through its uID or
 /// guidItem member. This identifier is used in subsequent calls to
 /// Shell_NotifyIcon to perform later actions on the icon.
-@Deprecated('Use NOTIFY_ICON_MESSAGE.NIM_ADD instead')
 const NIM_ADD = 0x00000000;
 
 /// Modifies an icon in the status area. NOTIFYICONDATA structure pointed to by
 /// lpdata uses the ID originally assigned to the icon when it was added to the
 /// notification area (NIM_ADD) to identify the icon to be modified.
-@Deprecated('Use NOTIFY_ICON_MESSAGE.NIM_MODIFY instead')
 const NIM_MODIFY = 0x00000001;
 
 /// Deletes an icon from the status area. NOTIFYICONDATA structure
 /// pointed to by lpdata uses the ID originally assigned to the icon when it was
 /// added to the notification area (NIM_ADD) to identify the icon to be deleted.
-@Deprecated('Use NOTIFY_ICON_MESSAGE.NIM_DELETE instead')
 const NIM_DELETE = 0x00000002;
 
 /// Shell32.dll version 5.0 and later only. Returns focus to the
@@ -8964,7 +7466,6 @@ const NIM_DELETE = 0x00000002;
 /// when they have completed their UI operation. For example, if the icon
 /// displays a shortcut menu, but the user presses ESC to cancel it, use
 /// NIM_SETFOCUS to return focus to the notification area.
-@Deprecated('Use NOTIFY_ICON_MESSAGE.NIM_SETFOCUS instead')
 const NIM_SETFOCUS = 0x00000003;
 
 /// Shell32.dll version 5.0 and later only. Instructs the notification area to
@@ -8973,7 +7474,6 @@ const NIM_SETFOCUS = 0x00000003;
 /// members are recognized. NIM_SETVERSION must be called every time a
 /// notification area icon is added (NIM_ADD)>. It does not need to be called
 /// with NIM_MOFIDY. The version setting is not persisted once a user logs off.
-@Deprecated('Use NOTIFY_ICON_MESSAGE.NIM_SETVERSION instead')
 const NIM_SETVERSION = 0x00000004;
 
 // -----------------------------------------------------------------------------
@@ -8991,19 +7491,15 @@ const NOTIFYICON_VERSION_4 = 4;
 // -----------------------------------------------------------------------------
 
 /// The uCallbackMessage member is valid.
-@Deprecated('Use NOTIFY_ICON_DATA_FLAGS.NIF_MESSAGE instead')
 const NIF_MESSAGE = 0x00000001;
 
 /// The hIcon member is valid.
-@Deprecated('Use NOTIFY_ICON_DATA_FLAGS.NIF_ICON instead')
 const NIF_ICON = 0x00000002;
 
 /// The szTip member is valid.
-@Deprecated('Use NOTIFY_ICON_DATA_FLAGS.NIF_TIP instead')
 const NIF_TIP = 0x00000004;
 
 /// The dwState and dwStateMask members are valid.
-@Deprecated('Use NOTIFY_ICON_DATA_FLAGS.NIF_STATE instead')
 const NIF_STATE = 0x00000008;
 
 /// To display the balloon notification, specify NIF_INFO and provide
@@ -9012,12 +7508,10 @@ const NIF_STATE = 0x00000008;
 /// string through szInfo.
 /// To add a notification area icon without displaying a notification,
 /// do not set the NIF_INFO flag.
-@Deprecated('Use NOTIFY_ICON_DATA_FLAGS.NIF_INFO instead')
 const NIF_INFO = 0x00000010;
 
 /// Windows 7 and later: The guidItem is valid.
 /// Windows Vista and earlier: Reserved.
-@Deprecated('Use NOTIFY_ICON_DATA_FLAGS.NIF_GUID instead')
 const NIF_GUID = 0x00000020;
 
 /// Windows Vista and later. If the balloon notification cannot be displayed
@@ -9026,7 +7520,6 @@ const NIF_GUID = 0x00000020;
 /// at a later time. For example, a message that states
 /// "Your telephone is ringing." NIF_REALTIME is meaningful only when combined
 /// with the NIF_INFO flag.
-@Deprecated('Use NOTIFY_ICON_DATA_FLAGS.NIF_REALTIME instead')
 const NIF_REALTIME = 0x00000040;
 
 /// Windows Vista and later. Use the standard tooltip. Normally, when uVersion
@@ -9034,7 +7527,6 @@ const NIF_REALTIME = 0x00000040;
 /// can be replaced by the application-drawn, pop-up UI. If the application
 /// wants to show the standard tooltip with NOTIFYICON_VERSION_4, it can
 /// specify NIF_SHOWTIP to indicate the standard tooltip should still be shown.
-@Deprecated('Use NOTIFY_ICON_DATA_FLAGS.NIF_SHOWTIP instead')
 const NIF_SHOWTIP = 0x00000080;
 
 // -----------------------------------------------------------------------------
@@ -9043,11 +7535,9 @@ const NIF_SHOWTIP = 0x00000080;
 // -----------------------------------------------------------------------------
 
 /// The icon is hidden.
-@Deprecated('Use NOTIFY_ICON_STATE.NIS_HIDDEN instead')
 const NIS_HIDDEN = 0x00000001;
 
 /// The icon resource is shared between multiple icons.
-@Deprecated('Use NOTIFY_ICON_STATE.NIS_SHAREDICON instead')
 const NIS_SHAREDICON = 0x00000002;
 
 // -----------------------------------------------------------------------------
@@ -9058,40 +7548,31 @@ const NIS_SHAREDICON = 0x00000002;
 // -----------------------------------------------------------------------------
 
 /// No icon.
-@Deprecated('Use NOTIFY_ICON_INFOTIP_FLAGS.NIIF_NONE instead')
 const NIIF_NONE = 0x00000000;
 
 /// An information icon.
-@Deprecated('Use NOTIFY_ICON_INFOTIP_FLAGS.NIIF_INFO instead')
 const NIIF_INFO = 0x00000001;
 
 /// A warning icon.
-@Deprecated('Use NOTIFY_ICON_INFOTIP_FLAGS.NIIF_WARNING instead')
 const NIIF_WARNING = 0x00000002;
 
 /// An error icon.
-@Deprecated('Use NOTIFY_ICON_INFOTIP_FLAGS.NIIF_ERROR instead')
 const NIIF_ERROR = 0x00000003;
 
 /// Windows Vista and later: Use the icon identified in hBalloonIcon as the
 /// notification balloon's title icon.
-@Deprecated('Use NOTIFY_ICON_INFOTIP_FLAGS.NIIF_USER instead')
 const NIIF_USER = 0x00000004;
 
 /// Windows XP and later. Reserved.
-@Deprecated('Use NOTIFY_ICON_INFOTIP_FLAGS.NIIF_ICON_MASK instead')
 const NIIF_ICON_MASK = 0x0000000F;
 
 /// Do not play the associated sound. Applies only to notifications.
-@Deprecated('Use NOTIFY_ICON_INFOTIP_FLAGS.NIIF_NOSOUND instead')
 const NIIF_NOSOUND = 0x00000010;
 
 /// The large version of the icon should be used as the notification icon
-@Deprecated('Use NOTIFY_ICON_INFOTIP_FLAGS.NIIF_LARGE_ICON instead')
 const NIIF_LARGE_ICON = 0x00000020;
 
 /// Do not display the balloon notification if the curr user is in "quiet time"
-@Deprecated('Use NOTIFY_ICON_INFOTIP_FLAGS.NIIF_RESPECT_QUIET_TIME instead')
 const NIIF_RESPECT_QUIET_TIME = 0x00000080;
 
 /// Used to define private messages, usually of the form WM_APP+x, where x
@@ -9148,17 +7629,11 @@ const NIN_POPUPCLOSE = WM_USER + 7;
 
 /// Notifications are sent using WM_POWERBROADCAST messages with a wParam
 /// parameter of PBT_POWERSETTINGCHANGE.
-@Deprecated(
-  'Use REGISTER_NOTIFICATION_FLAGS.DEVICE_NOTIFY_WINDOW_HANDLE instead',
-)
 const DEVICE_NOTIFY_WINDOW_HANDLE = 0;
 
 /// Notifications are sent to the HandlerEx callback function with a dwControl
 /// parameter of SERVICE_CONTROL_POWEREVENT and a dwEventType of
 /// PBT_POWERSETTINGCHANGE.
-@Deprecated(
-  'Use REGISTER_NOTIFICATION_FLAGS.DEVICE_NOTIFY_SERVICE_HANDLE instead',
-)
 const DEVICE_NOTIFY_SERVICE_HANDLE = 1;
 
 // -----------------------------------------------------------------------------
@@ -9166,97 +7641,77 @@ const DEVICE_NOTIFY_SERVICE_HANDLE = 1;
 // -----------------------------------------------------------------------------
 
 /// The user can select menu items with only the left mouse button.
-@Deprecated('Use TRACK_POPUP_MENU_FLAGS.TPM_LEFTBUTTON instead')
 const TPM_LEFTBUTTON = 0x0000;
 
 /// The user can select menu items with both the left and right mouse buttons.
-@Deprecated('Use TRACK_POPUP_MENU_FLAGS.TPM_RIGHTBUTTON instead')
 const TPM_RIGHTBUTTON = 0x0002;
 
 /// Positions the shortcut menu so that its left side is aligned with the
 /// coordinate specified by the x parameter.
-@Deprecated('Use TRACK_POPUP_MENU_FLAGS.TPM_LEFTALIGN instead')
 const TPM_LEFTALIGN = 0x0000;
 
 /// Centers the shortcut menu horizontally relative to the coordinate specified
 /// by the x parameter.
-@Deprecated('Use TRACK_POPUP_MENU_FLAGS.TPM_CENTERALIGN instead')
 const TPM_CENTERALIGN = 0x0004;
 
 /// Positions the shortcut menu so that its right side is aligned with the
 /// coordinate specified by the x parameter.
-@Deprecated('Use TRACK_POPUP_MENU_FLAGS.TPM_RIGHTALIGN instead')
 const TPM_RIGHTALIGN = 0x0008;
 
 /// Positions the shortcut menu so that its top side is aligned with the
 /// coordinate specified by the y parameter.
-@Deprecated('Use TRACK_POPUP_MENU_FLAGS.TPM_TOPALIGN instead')
 const TPM_TOPALIGN = 0x0000;
 
 /// Centers the shortcut menu vertically relative to the coordinate specified by
 /// the y parameter.
-@Deprecated('Use TRACK_POPUP_MENU_FLAGS.TPM_VCENTERALIGN instead')
 const TPM_VCENTERALIGN = 0x0010;
 
 /// Positions the shortcut menu so that its bottom side is aligned with the
 /// coordinate specified by the y parameter.
-@Deprecated('Use TRACK_POPUP_MENU_FLAGS.TPM_BOTTOMALIGN instead')
 const TPM_BOTTOMALIGN = 0x0020;
 
 /// If the menu cannot be shown at the specified location without overlapping
 /// the excluded rectangle, the system tries to accommodate the requested
 /// horizontal alignment before the requested vertical alignment.
-@Deprecated('Use TRACK_POPUP_MENU_FLAGS.TPM_HORIZONTAL instead')
 const TPM_HORIZONTAL = 0x0000;
 
 /// If the menu cannot be shown at the specified location without overlapping
 /// the excluded rectangle, the system tries to accommodate the requested
 /// vertical alignment before the requested horizontal alignment.
-@Deprecated('Use TRACK_POPUP_MENU_FLAGS.TPM_VERTICAL instead')
 const TPM_VERTICAL = 0x0040;
 
 /// The function does not send notification messages when the user clicks a menu
 /// item.
-@Deprecated('Use TRACK_POPUP_MENU_FLAGS.TPM_NONOTIFY instead')
 const TPM_NONOTIFY = 0x0080;
 
 /// The function returns the menu item identifier of the user's selection in the
 /// return value.
-@Deprecated('Use TRACK_POPUP_MENU_FLAGS.TPM_RETURNCMD instead')
 const TPM_RETURNCMD = 0x0100;
 
 /// Use the TPM_RECURSE flag to display a menu when another menu is already
 /// displayed. This is intended to support context menus within a menu.
-@Deprecated('Use TRACK_POPUP_MENU_FLAGS.TPM_RECURSE instead')
 const TPM_RECURSE = 0x0001;
 
 /// Animates the menu from left to right.
-@Deprecated('Use TRACK_POPUP_MENU_FLAGS.TPM_HORPOSANIMATION instead')
 const TPM_HORPOSANIMATION = 0x0400;
 
 /// Animates the menu from right to left.
-@Deprecated('Use TRACK_POPUP_MENU_FLAGS.TPM_HORNEGANIMATION instead')
 const TPM_HORNEGANIMATION = 0x0800;
 
 /// Animates the menu from top to bottom.
-@Deprecated('Use TRACK_POPUP_MENU_FLAGS.TPM_VERPOSANIMATION instead')
 const TPM_VERPOSANIMATION = 0x1000;
 
 /// Animates the menu from bottom to top.
-@Deprecated('Use TRACK_POPUP_MENU_FLAGS.TPM_VERNEGANIMATION instead')
 const TPM_VERNEGANIMATION = 0x2000;
 
 /// Displays menu without animation.
-@Deprecated('Use TRACK_POPUP_MENU_FLAGS.TPM_NOANIMATION instead')
 const TPM_NOANIMATION = 0x4000;
 
 /// For right-to-left text layout, use TPM_LAYOUTRTL. By default, the text
 /// layout is left-to-right.
-@Deprecated('Use TRACK_POPUP_MENU_FLAGS.TPM_LAYOUTRTL instead')
 const TPM_LAYOUTRTL = 0x8000;
 
 /// Restricts the pop-up window to within the work area.
-@Deprecated('Use TRACK_POPUP_MENU_FLAGS.TPM_WORKAREA instead')
 const TPM_WORKAREA = 0x10000;
 
 // -----------------------------------------------------------------------------
@@ -9264,15 +7719,12 @@ const TPM_WORKAREA = 0x10000;
 // -----------------------------------------------------------------------------
 
 /// Loads a bitmap.
-@Deprecated('Use GDI_IMAGE_TYPE.IMAGE_BITMAP instead')
 const IMAGE_BITMAP = 0;
 
 /// Loads an icon.
-@Deprecated('Use GDI_IMAGE_TYPE.IMAGE_ICON instead')
 const IMAGE_ICON = 1;
 
 /// Loads a cursor.
-@Deprecated('Use GDI_IMAGE_TYPE.IMAGE_CURSOR instead')
 const IMAGE_CURSOR = 2;
 
 /// Loads an enhanced metafile.
@@ -9364,27 +7816,22 @@ final IDC_HELP = Pointer<Utf16>.fromAddress(32651);
 // -----------------------------------------------------------------------------
 
 /// The default flag; it does nothing.
-@Deprecated('Use IMAGE_FLAGS.LR_DEFAULTCOLOR instead')
 const LR_DEFAULTCOLOR = 0x00000000;
 
 /// Loads the image in black and white.
-@Deprecated('Use IMAGE_FLAGS.LR_MONOCHROME instead')
 const LR_MONOCHROME = 0x00000001;
 
 /// Returns the original hImage if it satisfies the criteria for the copy—that
 /// is, correct dimensions and color depth—in which case the LR_COPYDELETEORG
 /// flag is ignored. If this flag is not specified, a new object is always
 /// created.
-@Deprecated('Use IMAGE_FLAGS.LR_COPYRETURNORG instead')
 const LR_COPYRETURNORG = 0x00000004;
 
 /// Deletes the original image after creating the copy.
-@Deprecated('Use IMAGE_FLAGS.LR_COPYDELETEORG instead')
 const LR_COPYDELETEORG = 0x00000008;
 
 /// Loads the stand-alone image from the file specified by lpszName (icon,
 /// cursor, or bitmap file).
-@Deprecated('Use IMAGE_FLAGS.LR_LOADFROMFILE instead')
 const LR_LOADFROMFILE = 0x00000010;
 
 /// Retrieves the color value of the first pixel in the image and replaces the
@@ -9392,27 +7839,22 @@ const LR_LOADFROMFILE = 0x00000010;
 /// (COLOR_WINDOW). All pixels in the image that use that entry become the
 /// default window color. This value applies only to images that have
 /// corresponding color tables.
-@Deprecated('Use IMAGE_FLAGS.LR_LOADTRANSPARENT instead')
 const LR_LOADTRANSPARENT = 0x00000020;
 
 /// Uses the width or height specified by the system metric values for cursors
 /// or icons, if the cxDesired or cyDesired values are set to zero.
-@Deprecated('Use IMAGE_FLAGS.LR_DEFAULTSIZE instead')
 const LR_DEFAULTSIZE = 0x00000040;
 
 /// Uses true VGA colors.
-@Deprecated('Use IMAGE_FLAGS.LR_VGACOLOR instead')
 const LR_VGACOLOR = 0x00000080;
 
 /// Searches the color table for the image and replaces shades of gray with the
 /// corresponding 3-D color.
-@Deprecated('Use IMAGE_FLAGS.LR_LOADMAP3DCOLORS instead')
 const LR_LOADMAP3DCOLORS = 0x00001000;
 
 /// Causes the function to return a DIB section bitmap rather than a compatible
 /// bitmap. This flag is useful for loading a bitmap without mapping it to the
 /// colors of the display device.
-@Deprecated('Use IMAGE_FLAGS.LR_CREATEDIBSECTION instead')
 const LR_CREATEDIBSECTION = 0x00002000;
 
 /// Tries to reload an icon or cursor resource from the original resource file
@@ -9421,30 +7863,12 @@ const LR_CREATEDIBSECTION = 0x00002000;
 /// resource. Without this flag, CopyImage stretches the original image to the
 /// new size. If this flag is set, CopyImage uses the size in the resource file
 /// closest to the desired size.
-@Deprecated('Use IMAGE_FLAGS.LR_COPYFROMRESOURCE instead')
 const LR_COPYFROMRESOURCE = 0x00004000;
 
 /// Shares the image handle if the image is loaded multiple times. If LR_SHARED
 /// is not set, a second call to LoadImage for the same resource will load the
 /// image again and return a different handle.
-@Deprecated('Use IMAGE_FLAGS.LR_SHARED instead')
 const LR_SHARED = 0x00008000;
-
-// -----------------------------------------------------------------------------
-// Windows Runtime constants
-// -----------------------------------------------------------------------------
-
-/// Determines the concurrency model used for incoming calls to the objects
-/// created by this thread.
-///
-/// {@category enum}
-class RO_INIT_TYPE {
-  static const RO_INIT_SINGLETHREADED = 0;
-
-  /// Initializes the thread for multi-threaded concurrency. The current thread
-  /// is initialized in the MTA.
-  static const RO_INIT_MULTITHREADED = 1;
-}
 
 // -----------------------------------------------------------------------------
 // Internationalization for Windows Applications constants
@@ -9467,48 +7891,22 @@ class CORRECTIVE_ACTION {
   static const DELETE = 3;
 
   /// There are no errors.
+  @Deprecated('Use CORRECTIVE_ACTION_NONE instead')
   static const CORRECTIVE_ACTION_NONE = 0;
 
   /// The user should be prompted with a list of suggestions as returned by
   /// ISpellChecker::Suggest.
+  @Deprecated('Use CORRECTIVE_ACTION_GET_SUGGESTIONS instead')
   static const CORRECTIVE_ACTION_GET_SUGGESTIONS = 1;
 
   /// Replace the indicated erroneous text with the text provided in the
   /// suggestion. The user does not need to be prompted.
+  @Deprecated('Use CORRECTIVE_ACTION_REPLACE instead')
   static const CORRECTIVE_ACTION_REPLACE = 2;
 
   /// The user should be prompted to delete the indicated erroneous text.
+  @Deprecated('Use CORRECTIVE_ACTION_DELETE instead')
   static const CORRECTIVE_ACTION_DELETE = 3;
-}
-
-// -----------------------------------------------------------------------------
-// IApplicationActivationManager constants
-// -----------------------------------------------------------------------------
-
-/// Flags used to support design mode, debugging, and testing scenarios.
-class ACTIVATEOPTIONS {
-  /// No flags are set.
-  static const AO_NONE = 0;
-
-  /// The app is being activated for design mode, so it can't create its normal
-  /// window. The creation of the app's window must be done by design tools that
-  /// load the necessary components by communicating with a designer-specified
-  /// service on the site chain established through the activation manager. Note
-  /// that this means that the splash screen seen during regular activations
-  /// won't be seen.
-  static const AO_DESIGNMODE = 0x1;
-
-  /// Do not display an error dialog if the app fails to activate.
-  static const AO_NOERRORUI = 0x2;
-
-  /// Do not display the app's splash screen when the app is activated. You must
-  /// enable debug mode on the app's package when you use this flag; otherwise,
-  /// the PLM will terminate the app after a few seconds.
-  static const AO_NOSPLASHSCREEN = 0x4;
-
-  /// The application is being activated in prelaunch mode. This value is
-  /// supported starting in Windows 10.
-  static const AO_PRELAUNCH = 0x2000000;
 }
 
 // -----------------------------------------------------------------------------
@@ -9516,72 +7914,55 @@ class ACTIVATEOPTIONS {
 // -----------------------------------------------------------------------------
 
 /// The Value member is used.
-@Deprecated('Use SYMBOL_INFO_FLAGS.SYMFLAG_VALUEPRESENT instead')
 const SYMFLAG_VALUEPRESENT = 0x00000001;
 
 /// The symbol is a register. The Register member is used.
-@Deprecated('Use SYMBOL_INFO_FLAGS.SYMFLAG_REGISTER instead')
 const SYMFLAG_REGISTER = 0x00000008;
 
 /// Offsets are register relative.
-@Deprecated('Use SYMBOL_INFO_FLAGS.SYMFLAG_REGREL instead')
 const SYMFLAG_REGREL = 0x00000010;
 
 /// Offsets are frame relative.
-@Deprecated('Use SYMBOL_INFO_FLAGS.SYMFLAG_FRAMEREL instead')
 const SYMFLAG_FRAMEREL = 0x00000020;
 
 /// The symbol is a parameter.
-@Deprecated('Use SYMBOL_INFO_FLAGS.SYMFLAG_PARAMETER instead')
 const SYMFLAG_PARAMETER = 0x00000040;
 
 /// The symbol is a local variable.
-@Deprecated('Use SYMBOL_INFO_FLAGS.SYMFLAG_LOCAL instead')
 const SYMFLAG_LOCAL = 0x00000080;
 
 /// The symbol is a constant.
-@Deprecated('Use SYMBOL_INFO_FLAGS.SYMFLAG_CONSTANT instead')
 const SYMFLAG_CONSTANT = 0x00000100;
 
 /// The symbol is from the export table.
-@Deprecated('Use SYMBOL_INFO_FLAGS.SYMFLAG_EXPORT instead')
 const SYMFLAG_EXPORT = 0x00000200;
 
 /// The symbol is a forwarder.
-@Deprecated('Use SYMBOL_INFO_FLAGS.SYMFLAG_FORWARDER instead')
 const SYMFLAG_FORWARDER = 0x00000400;
 
 /// The symbol is a known function.
-@Deprecated('Use SYMBOL_INFO_FLAGS.SYMFLAG_FUNCTION instead')
 const SYMFLAG_FUNCTION = 0x00000800;
 
 /// The symbol is a virtual symbol created by the SymAddSymbol function.
-@Deprecated('Use SYMBOL_INFO_FLAGS.SYMFLAG_VIRTUAL instead')
 const SYMFLAG_VIRTUAL = 0x00001000;
 
 /// The symbol is a thunk.
-@Deprecated('Use SYMBOL_INFO_FLAGS.SYMFLAG_THUNK instead')
 const SYMFLAG_THUNK = 0x00002000;
 
 /// The symbol is an offset into the TLS data area.
-@Deprecated('Use SYMBOL_INFO_FLAGS.SYMFLAG_TLSREL instead')
 const SYMFLAG_TLSREL = 0x00004000;
 
 /// The symbol is a managed code slot.
-@Deprecated('Use SYMBOL_INFO_FLAGS.SYMFLAG_SLOT instead')
 const SYMFLAG_SLOT = 0x00008000;
 
 /// The symbol address is an offset relative to the beginning of the
 /// intermediate language block. This applies to managed code only.
-@Deprecated('Use SYMBOL_INFO_FLAGS.SYMFLAG_ILREL instead')
 const SYMFLAG_ILREL = 0x00010000;
 
 /// The symbol is managed metadata.
-@Deprecated('Use SYMBOL_INFO_FLAGS.SYMFLAG_METADATA instead')
 const SYMFLAG_METADATA = 0x00020000;
 
 /// The symbol is a CLR token.
-@Deprecated('Use SYMBOL_INFO_FLAGS.SYMFLAG_CLR_TOKEN instead')
 const SYMFLAG_CLR_TOKEN = 0x00040000;
 
 // -----------------------------------------------------------------------------
@@ -9703,219 +8084,6 @@ const SYMOPT_DISABLE_SYMSRV_AUTODETECT = 0x02000000;
 const SYMOPT_DEBUG = 0x80000000;
 
 // -----------------------------------------------------------------------------
-// DWM constants
-// -----------------------------------------------------------------------------
-
-/// Flags used by the DwmGetWindowAttribute and DwmSetWindowAttribute functions
-/// to specify window attributes for Desktop Window Manager (DWM) non-client
-/// rendering.
-class DWMWINDOWATTRIBUTE {
-  /// Use with DwmGetWindowAttribute. Discovers whether non-client rendering is
-  /// enabled. The retrieved value is of type BOOL. TRUE if non-client rendering
-  /// is enabled; otherwise, FALSE.
-  static const DWMWA_NCRENDERING_ENABLED = 1;
-
-  /// Use with DwmSetWindowAttribute. Sets the non-client rendering policy. The
-  /// pvAttribute parameter points to a value from the DWMNCRENDERINGPOLICY
-  /// enumeration.
-  static const DWMWA_NCRENDERING_POLICY = 2;
-
-  /// Use with DwmSetWindowAttribute. Enables or forcibly disables DWM
-  /// transitions. The pvAttribute parameter points to a value of type BOOL.
-  /// TRUE to disable transitions, or FALSE to enable transitions.
-  static const DWMWA_TRANSITIONS_FORCEDISABLED = 3;
-
-  /// Use with DwmSetWindowAttribute. Enables content rendered in the non-client
-  /// area to be visible on the frame drawn by DWM. The pvAttribute parameter
-  /// points to a value of type BOOL. TRUE to enable content rendered in the
-  /// non-client area to be visible on the frame; otherwise, FALSE.
-  static const DWMWA_ALLOW_NCPAINT = 4;
-
-  /// Use with DwmGetWindowAttribute. Retrieves the bounds of the caption button
-  /// area in the window-relative space. The retrieved value is of type RECT. If
-  /// the window is minimized or otherwise not visible to the user, then the
-  /// value of the RECT retrieved is undefined. You should check whether the
-  /// retrieved RECT contains a boundary that you can work with, and if it
-  /// doesn't then you can conclude that the window is minimized or otherwise
-  /// not visible.
-  static const DWMWA_CAPTION_BUTTON_BOUNDS = 5;
-
-  /// Use with DwmSetWindowAttribute. Specifies whether non-client content is
-  /// right-to-left (RTL) mirrored. The pvAttribute parameter points to a value
-  /// of type BOOL. TRUE if the non-client content is right-to-left (RTL)
-  /// mirrored; otherwise, FALSE.
-  static const DWMWA_NONCLIENT_RTL_LAYOUT = 6;
-
-  /// Use with DwmSetWindowAttribute. Forces the window to display an iconic
-  /// thumbnail or peek representation (a static bitmap), even if a live or
-  /// snapshot representation of the window is available. This value is normally
-  /// set during a window's creation, and not changed throughout the window's
-  /// lifetime. Some scenarios, however, might require the value to change over
-  /// time. The pvAttribute parameter points to a value of type BOOL. TRUE to
-  /// require a iconic thumbnail or peek representation; otherwise, FALSE.
-  static const DWMWA_FORCE_ICONIC_REPRESENTATION = 7;
-
-  /// Use with DwmSetWindowAttribute. Sets how Flip3D treats the window. The
-  /// pvAttribute parameter points to a value from the DWMFLIP3DWINDOWPOLICY
-  /// enumeration.
-  static const DWMWA_FLIP3D_POLICY = 8;
-
-  /// Use with DwmGetWindowAttribute. Retrieves the extended frame bounds
-  /// rectangle in screen space. The retrieved value is of type RECT.
-  static const DWMWA_EXTENDED_FRAME_BOUNDS = 9;
-
-  /// Use with DwmSetWindowAttribute. The window will provide a bitmap for use
-  /// by DWM as an iconic thumbnail or peek representation (a static bitmap) for
-  /// the window. DWMWA_HAS_ICONIC_BITMAP can be specified with
-  /// DWMWA_FORCE_ICONIC_REPRESENTATION. DWMWA_HAS_ICONIC_BITMAP normally is set
-  /// during a window's creation and not changed throughout the window's
-  /// lifetime. Some scenarios, however, might require the value to change over
-  /// time. The pvAttribute parameter points to a value of type BOOL. TRUE to
-  /// inform DWM that the window will provide an iconic thumbnail or peek
-  /// representation; otherwise, FALSE.
-  static const DWMWA_HAS_ICONIC_BITMAP = 10;
-
-  /// Use with DwmSetWindowAttribute. Do not show peek preview for the window.
-  /// The peek view shows a full-sized preview of the window when the mouse
-  /// hovers over the window's thumbnail in the taskbar. If this attribute is
-  /// set, hovering the mouse pointer over the window's thumbnail dismisses peek
-  /// (in case another window in the group has a peek preview showing). The
-  /// pvAttribute parameter points to a value of type BOOL. TRUE to prevent peek
-  /// functionality, or FALSE to allow it.
-  static const DWMWA_DISALLOW_PEEK = 11;
-
-  /// Use with DwmSetWindowAttribute. Prevents a window from fading to a glass
-  /// sheet when peek is invoked. The pvAttribute parameter points to a value of
-  /// type BOOL. TRUE to prevent the window from fading during another window's
-  /// peek, or FALSE for normal behavior.
-  static const DWMWA_EXCLUDED_FROM_PEEK = 12;
-
-  /// Use with DwmSetWindowAttribute. Cloaks the window such that it is not
-  /// visible to the user. The window is still composed by DWM.
-  static const DWMWA_CLOAK = 13;
-
-  /// Use with DwmGetWindowAttribute. If the window is cloaked, provides one of
-  /// the following values explaining why.
-  ///
-  /// - DWM_CLOAKED_APP (value 0x0000001). The window was cloaked by its owner
-  ///   application.
-  /// - DWM_CLOAKED_SHELL (value 0x0000002). The window was cloaked by the
-  ///   Shell.
-  /// - DWM_CLOAKED_INHERITED (value 0x0000004). The cloak value was inherited
-  ///   from its owner window.
-  static const DWMWA_CLOAKED = 14;
-
-  /// Use with DwmSetWindowAttribute. Freeze the window's thumbnail image with
-  /// its current visuals. Do no further live updates on the thumbnail image to
-  /// match the window's contents.
-  static const DWMWA_FREEZE_REPRESENTATION = 15;
-
-  /// Use with DwmSetWindowAttribute. Enables a non-UWP window to use host
-  /// backdrop brushes. If this flag is set, then a Win32 app that calls
-  /// Windows::UI::Composition APIs can build transparency effects using the
-  /// host backdrop brush (see Compositor.CreateHostBackdropBrush). The
-  /// retrieved value is of type BOOL. TRUE to enable host backdrop brushes for
-  /// the window; otherwise, FALSE. (Supported on Windows 11 and above.)
-  static const DWMWA_USE_HOSTBACKDROPBRUSH = 17;
-
-  /// Allows a window to either use the accent color, or
-  /// dark, according to the user Color Mode preferences. (Supported on
-  /// Windows 11 and above.)
-  static const DWMWA_USE_IMMERSIVE_DARK_MODE = 20;
-
-  /// Controls the policy that rounds top-level window corners. (Supported on
-  /// Windows 11 and above.)
-  static const DWMWA_WINDOW_CORNER_PREFERENCE = 33;
-
-  /// The color of the thin border around a top-level window. (Supported on
-  /// Windows 11 and above.)
-  static const DWMWA_BORDER_COLOR = 34;
-
-  /// The color of the caption. (Supported on Windows 11 and above.)
-  static const DWMWA_CAPTION_COLOR = 35;
-
-  /// The color of the caption text. (Supported on Windows 11 and above.)
-  static const DWMWA_TEXT_COLOR = 36;
-
-  /// Width of the visible border around a thick frame window. (Supported on
-  /// Windows 11 and above.)
-  static const DWMWA_VISIBLE_FRAME_BORDER_THICKNESS = 37;
-}
-
-class DWM_WINDOW_CORNER_PREFERENCE {
-  /// Let the system decide whether or not to round window corners
-  static const DWMWCP_DEFAULT = 0;
-
-  /// Never round window corners
-  static const DWMWCP_DONOTROUND = 1;
-
-  /// Round the corners if appropriate
-  static const DWMWCP_ROUND = 2;
-
-  /// Round the corners if appropriate, with a small radius
-  static const DWMWCP_ROUNDSMALL = 3;
-}
-
-// -----------------------------------------------------------------------------
-// Token information constants
-// -----------------------------------------------------------------------------
-
-/// The TOKEN_INFORMATION_CLASS enumeration contains values that specify the
-/// type of information being assigned to or retrieved from an access token.
-///
-/// {@category struct}
-class TOKEN_INFORMATION_CLASS {
-  static const TokenUser = 1;
-  static const TokenGroups = 2;
-  static const TokenPrivileges = 3;
-  static const TokenOwner = 4;
-  static const TokenPrimaryGroup = 5;
-  static const TokenDefaultDacl = 6;
-  static const TokenSource = 7;
-  static const TokenType = 8;
-  static const TokenImpersonationLevel = 9;
-  static const TokenStatistics = 10;
-  static const TokenRestrictedSids = 11;
-  static const TokenSessionId = 12;
-  static const TokenGroupsAndPrivileges = 13;
-  static const TokenSessionReference = 14;
-  static const TokenSandBoxInert = 15;
-  static const TokenAuditPolicy = 16;
-  static const TokenOrigin = 17;
-  static const TokenElevationType = 18;
-  static const TokenLinkedToken = 19;
-  static const TokenElevation = 20;
-  static const TokenHasRestrictions = 21;
-  static const TokenAccessInformation = 22;
-  static const TokenVirtualizationAllowed = 23;
-  static const TokenVirtualizationEnabled = 24;
-  static const TokenIntegrityLevel = 25;
-  static const TokenUIAccess = 26;
-  static const TokenMandatoryPolicy = 27;
-  static const TokenLogonSid = 28;
-  static const TokenIsAppContainer = 29;
-  static const TokenCapabilities = 30;
-  static const TokenAppContainerSid = 31;
-  static const TokenAppContainerNumber = 32;
-  static const TokenUserClaimAttributes = 33;
-  static const TokenDeviceClaimAttributes = 34;
-  static const TokenRestrictedUserClaimAttributes = 35;
-  static const TokenRestrictedDeviceClaimAttributes = 36;
-  static const TokenDeviceGroups = 37;
-  static const TokenRestrictedDeviceGroups = 38;
-  static const TokenSecurityAttributes = 39;
-  static const TokenIsRestricted = 40;
-  static const TokenProcessTrustLevel = 41;
-  static const TokenPrivateNameSpace = 42;
-  static const TokenSingletonAttributes = 43;
-  static const TokenBnoIsolation = 44;
-  static const TokenChildProcessFlags = 45;
-  static const TokenIsLessPrivilegedAppContainer = 46;
-  static const TokenIsSandboxed = 47;
-  static const TokenOriginatingProcessTrustLevel = 48;
-}
-
-// -----------------------------------------------------------------------------
 // Smartcard constants
 // -----------------------------------------------------------------------------
 
@@ -10005,7 +8173,6 @@ const SCARD_UNPOWER_CARD = 2;
 const SCARD_EJECT_CARD = 3;
 
 /// Database operations are performed within the domain of the user.
-@Deprecated('Use SCARD_SCOPE.SCARD_SCOPE_USER instead')
 const SCARD_SCOPE_USER = 0;
 
 /// Database operations are performed within the domain of the current terminal.
@@ -10014,7 +8181,6 @@ const SCARD_SCOPE_TERMINAL = 1;
 /// Database operations are performed within the domain of the system. The
 /// calling application must have appropriate access permissions for any
 /// database actions.
-@Deprecated('Use SCARD_SCOPE.SCARD_SCOPE_SYSTEM instead')
 const SCARD_SCOPE_SYSTEM = 2;
 
 /// The function retrieves the name of the smart card's primary service provider
@@ -10047,75 +8213,85 @@ const SC_DLG_FORCE_UI = 0x04;
 // EnumPrinters constants
 // -----------------------------------------------------------------------------
 
-/// The function enumerates only 3D printers.
-const PRINTER_ENUM_CATEGORY_3D = 67108864;
-
-const PRINTER_ENUM_CATEGORY_ALL = 33554432;
-
-/// The function enumerates the list of printers to which the user has made
-/// previous connections.
-const PRINTER_ENUM_CONNECTIONS = 4;
-
-/// Indicates that the printer object is capable of containing enumerable
-/// objects. One such object is a print provider, which is a print server that
-/// contains printers.
-const PRINTER_ENUM_CONTAINER = 32768;
-
 /// (Win9.x only) enumerates the default printer.
-const PRINTER_ENUM_DEFAULT = 1;
-
-/// Indicates that the printer object contains further enumerable child objects.
-const PRINTER_ENUM_EXPAND = 16384;
-
-const PRINTER_ENUM_FAVORITE = 4;
-
-/// Indicates that an application cannot display the printer object.
-const PRINTER_ENUM_HIDE = 16777216;
-
-const PRINTER_ENUM_ICON1 = 65536;
-
-const PRINTER_ENUM_ICON2 = 131072;
-
-const PRINTER_ENUM_ICON3 = 262144;
-
-const PRINTER_ENUM_ICON4 = 524288;
-
-const PRINTER_ENUM_ICON5 = 1048576;
-
-const PRINTER_ENUM_ICON6 = 2097152;
-
-const PRINTER_ENUM_ICON7 = 4194304;
-
-/// Indicates that, where appropriate, an application treats an object as a
-/// print server. A GUI application can<145> choose to display an icon of choice
-/// for this type of object.
-const PRINTER_ENUM_ICON8 = 8388608;
-
-const PRINTER_ENUM_ICONMASK = 16711680;
+const PRINTER_ENUM_DEFAULT = 00000001;
 
 /// If the PRINTER_ENUM_NAME flag is not also passed, the function ignores the
 /// Name parameter, and enumerates the locally installed printers.
 /// If PRINTER_ENUM_NAME is also passed, the function enumerates the local
 /// printers on Name.
-const PRINTER_ENUM_LOCAL = 2;
+const PRINTER_ENUM_LOCAL = 00000002;
+
+/// The function enumerates the list of printers to which the user has made
+/// previous connections.
+const PRINTER_ENUM_CONNECTIONS = 0x00000004;
+
+///
+const PRINTER_ENUM_FAVORITE = 0x00000004;
 
 /// The function enumerates the printer identified by Name. This can be a server
 /// a domain, or a print provider. If Name is NULL, the function enumerates
 /// available print providers.
-const PRINTER_ENUM_NAME = 8;
-
-/// The function enumerates network printers in the computer's domain. This
-/// value is valid only if Level is 1.
-const PRINTER_ENUM_NETWORK = 64;
+const PRINTER_ENUM_NAME = 00000008;
 
 /// The function enumerates network printers and print servers in the computer's
 /// domain. This value is valid only if Level is 1.
-const PRINTER_ENUM_REMOTE = 16;
+const PRINTER_ENUM_REMOTE = 00000010;
 
 /// The function enumerates printers that have the shared attribute. Cannot be
 /// used in isolation; use an OR operation to combine with another PRINTER_ENUM
 /// type.
-const PRINTER_ENUM_SHARED = 32;
+const PRINTER_ENUM_SHARED = 00000020;
+
+/// The function enumerates network printers in the computer's domain. This
+/// value is valid only if Level is 1.
+const PRINTER_ENUM_NETWORK = 00000040;
+
+/// Indicates that the printer object contains further enumerable child objects.
+const PRINTER_ENUM_EXPAND = 00004000;
+
+/// Indicates that the printer object is capable of containing enumerable
+/// objects. One such object is a print provider, which is a print server that
+/// contains printers.
+const PRINTER_ENUM_CONTAINER = 0x00008000;
+
+///
+const PRINTER_ENUM_ICONMASK = 0x00ff0000;
+
+///
+const PRINTER_ENUM_ICON1 = 00010000;
+
+///
+const PRINTER_ENUM_ICON2 = 00020000;
+
+///
+const PRINTER_ENUM_ICON3 = 00040000;
+
+///
+const PRINTER_ENUM_ICON4 = 00080000;
+
+///
+const PRINTER_ENUM_ICON5 = 00100000;
+
+///
+const PRINTER_ENUM_ICON6 = 00200000;
+
+///
+const PRINTER_ENUM_ICON7 = 00400000;
+
+/// Indicates that, where appropriate, an application treats an object as a
+/// print server. A GUI application can<145> choose to display an icon of choice
+/// for this type of object.
+const PRINTER_ENUM_ICON8 = 00800000;
+
+/// Indicates that an application cannot display the printer object.
+const PRINTER_ENUM_HIDE = 01000000;
+
+/// PRINTER_ENUM_CATEGORY_ALL
+const PRINTER_ENUM_CATEGORY_ALL = 0x02000000;
+
+/// The function enumerates only 3D printers.
+const PRINTER_ENUM_CATEGORY_3D = 0x04000000;
 
 // -----------------------------------------------------------------------------
 // GetWindow constants
@@ -10124,14 +8300,12 @@ const PRINTER_ENUM_SHARED = 32;
 /// if the specified window is a parent window; otherwise, the retrieved handle
 /// is NULL. The function examines only child windows of the specified window.
 /// It does not examine descendant windows.
-@Deprecated('Use GET_WINDOW_CMD.GW_CHILD instead')
 const GW_CHILD = 5;
 
 /// The retrieved handle identifies the enabled popup window owned by the
 /// specified window (the search uses the first such window found using
 /// GW_HWNDNEXT); otherwise, if there are no enabled popup windows, the
 /// retrieved handle is that of the specified window.
-@Deprecated('Use GET_WINDOW_CMD.GW_ENABLEDPOPUP instead')
 const GW_ENABLEDPOPUP = 6;
 
 /// The retrieved handle identifies the window of the same type that is highest
@@ -10140,7 +8314,6 @@ const GW_ENABLEDPOPUP = 6;
 /// window. If the specified window is a top-level window, the handle identifies
 /// a top-level window. If the specified window is a child window, the handle
 /// identifies a sibling window.
-@Deprecated('Use GET_WINDOW_CMD.GW_HWNDFIRST instead')
 const GW_HWNDFIRST = 0;
 
 /// The retrieved handle identifies the window of the same type that is lowest
@@ -10149,7 +8322,6 @@ const GW_HWNDFIRST = 0;
 /// window. If the specified window is a top-level window, the handle identifies
 /// a top-level window. If the specified window is a child window, the handle
 /// identifies a sibling window.
-@Deprecated('Use GET_WINDOW_CMD.GW_HWNDLAST instead')
 const GW_HWNDLAST = 1;
 
 /// The retrieved handle identifies the window below the specified window in the
@@ -10158,7 +8330,6 @@ const GW_HWNDLAST = 1;
 /// window. If the specified window is a top-level window, the handle identifies
 /// a top-level window. If the specified window is a child window, the handle
 /// identifies a sibling window.
-@Deprecated('Use GET_WINDOW_CMD.GW_HWNDNEXT instead')
 const GW_HWNDNEXT = 2;
 
 /// The retrieved handle identifies the window above the specified window in the
@@ -10167,79 +8338,11 @@ const GW_HWNDNEXT = 2;
 /// window. If the specified window is a top-level window, the handle identifies
 /// a top-level window. If the specified window is a child window, the handle
 /// identifies a sibling window.
-@Deprecated('Use GET_WINDOW_CMD.GW_HWNDPREV instead')
 const GW_HWNDPREV = 3;
 
 /// The retrieved handle identifies the specified window's owner window, if any.
 /// For more information, see Owned Windows.
-@Deprecated('Use GET_WINDOW_CMD.GW_OWNER instead')
 const GW_OWNER = 4;
-
-/// The WSL_DISTRIBUTION_FLAGS enumeration specifies the behavior of a
-/// distribution in the Windows Subsystem for Linux (WSL).
-///
-/// {@category enum}
-class WSL_DISTRIBUTION_FLAGS {
-  /// No flags are being supplied.
-  static const WSL_DISTRIBUTION_FLAGS_NONE = 0x0;
-
-  /// Allow the distribution to interoperate with Windows processes (for
-  /// example, the user can invoke "cmd.exe" or "notepad.exe" from within a WSL
-  /// session).
-  static const WSL_DISTRIBUTION_FLAGS_ENABLE_INTEROP = 0x1;
-
-  /// Add the Windows %PATH% environment variable values to WSL sessions.
-  static const WSL_DISTRIBUTION_FLAGS_APPEND_NT_PATH = 0x2;
-
-  /// Automatically mount Windows drives inside of WSL sessions (for example,
-  /// "C:" will be available under "/mnt/c").
-  static const WSL_DISTRIBUTION_FLAGS_ENABLE_DRIVE_MOUNTING = 0x4;
-}
-
-/// Specifies the type of visual style attribute to set on a window.
-class WINDOWTHEMEATTRIBUTETYPE {
-  /// Non-client area window attributes will be set.
-  static const WTA_NONCLIENT = 1;
-}
-
-class SPEAKFLAGS {
-  /// Specifies that the default settings should be used.
-  static const SPF_DEFAULT = 0;
-
-  /// Specifies that the Speak call should be asynchronous. That is, it will
-  /// return immediately after the speak request is queued.
-  static const SPF_ASYNC = 1;
-
-  /// Purges all pending speak requests prior to this speak call.
-  static const SPF_PURGEBEFORESPEAK = 2;
-
-  /// The string passed to ISpVoice::Speak is a file name, and the file text
-  /// should be spoken.
-  static const SPF_IS_FILENAME = 4;
-
-  /// The input text will be parsed for XML markup.
-  static const SPF_IS_XML = 8;
-
-  /// The input text will not be parsed for XML markup.
-  static const SPF_IS_NOT_XML = 0x10;
-
-  /// Global state changes in the XML markup will persist across speak calls.
-  static const SPF_PERSIST_XML = 0x20;
-
-  /// Punctuation characters should be expanded into words (for example, "This
-  /// is a sentence." would become "This is a sentence period").
-  static const SPF_NLP_SPEAK_PUNC = 0x40;
-
-  /// Force XML parsing As MS SAPI.
-  static const SPF_PARSE_SAPI = 0x80;
-
-  /// Force XML parsing As W3C SSML.
-  static const SPF_PARSE_SSML = 0x100;
-
-  /// The TTS XML format is auto-detected. This is the default if none of these
-  /// TTS XML format values are present in the bit-field.
-  static const SPF_PARSE_AUTODETECT = 0;
-}
 
 // -----------------------------------------------------------------------------
 // Bluetooth IDs
@@ -10301,47 +8404,37 @@ const ICON_SMALL2 = 2;
 
 /// Replaces the address of the menu name string. The string identifies the menu
 /// resource associated with the class.
-@Deprecated('Use GET_CLASS_LONG_INDEX.GCL_MENUNAME instead')
 const GCL_MENUNAME = -8;
 
 /// Replaces a handle to the background brush associated with the class.
-@Deprecated('Use GET_CLASS_LONG_INDEX.GCL_HBRBACKGROUND instead')
 const GCL_HBRBACKGROUND = -10;
 
 /// Replaces a handle to the cursor associated with the class.
-@Deprecated('Use GET_CLASS_LONG_INDEX.GCL_HCURSOR instead')
 const GCL_HCURSOR = -12;
 
 /// Replaces a handle to the icon associated with the class.
-@Deprecated('Use GET_CLASS_LONG_INDEX.GCL_HICON instead')
 const GCL_HICON = -14;
 
 /// Replaces a handle to the module that registered the class.
-@Deprecated('Use GET_CLASS_LONG_INDEX.GCL_HMODULE instead')
 const GCL_HMODULE = -16;
 
 /// Sets the size, in bytes, of the extra window memory associated with each
 /// window in the class. Setting this value does not change the number of extra
 /// bytes already allocated.
-@Deprecated('Use GET_CLASS_LONG_INDEX.GCL_CBWNDEXTRA instead')
 const GCL_CBWNDEXTRA = -18;
 
 /// Sets the size, in bytes, of the extra memory associated with the class.
 /// Setting this value does not change the number of extra bytes already
 /// allocated.
-@Deprecated('Use GET_CLASS_LONG_INDEX.GCL_CBCLSEXTRA instead')
 const GCL_CBCLSEXTRA = -20;
 
 /// Replaces the address of the window procedure associated with the class.
-@Deprecated('Use GET_CLASS_LONG_INDEX.GCL_WNDPROC instead')
 const GCL_WNDPROC = -24;
 
 /// Replaces the window-class style bits.
-@Deprecated('Use GET_CLASS_LONG_INDEX.GCL_STYLE instead')
 const GCL_STYLE = -26;
 
 /// Retrieves an ATOM value that uniquely identifies the window class.
-@Deprecated('Use GET_CLASS_LONG_INDEX.GCW_ATOM instead')
 const GCW_ATOM = -32;
 
 // -----------------------------------------------------------------------------
@@ -10350,41 +8443,29 @@ const GCW_ATOM = -32;
 
 /// Return only the device that is associated with the system default device
 /// interface, if one is set, for the specified device interface classes.
-@Deprecated('Use SETUP_DI_GET_CLASS_DEVS_FLAGS.DIGCF_DEFAULT instead')
 const DIGCF_DEFAULT = 0x00000001;
 
 /// Return only devices that are currently present in a system.
-@Deprecated('Use SETUP_DI_GET_CLASS_DEVS_FLAGS.DIGCF_PRESENT instead')
 const DIGCF_PRESENT = 0x00000002;
 
 /// Return a list of installed devices for all device setup classes or all
 /// device interface classes.
-@Deprecated('Use SETUP_DI_GET_CLASS_DEVS_FLAGS.DIGCF_ALLCLASSES instead')
 const DIGCF_ALLCLASSES = 0x00000004;
 
 /// Return only devices that are a part of the current hardware profile.
-@Deprecated('Use SETUP_DI_GET_CLASS_DEVS_FLAGS.DIGCF_PROFILE instead')
 const DIGCF_PROFILE = 0x00000008;
 
 /// Return devices that support device interfaces for the specified device
 /// interface classes.
-@Deprecated('Use SETUP_DI_GET_CLASS_DEVS_FLAGS.DIGCF_DEVICEINTERFACE instead')
 const DIGCF_DEVICEINTERFACE = 0x00000010;
 
 /// Make the change in all hardware profiles.
-@Deprecated('Use SETUP_DI_PROPERTY_CHANGE_SCOPE.DICS_FLAG_GLOBAL instead')
 const DICS_FLAG_GLOBAL = 0x00000001;
 
 /// Make the change in the specified profile only.
-@Deprecated(
-  'Use SETUP_DI_PROPERTY_CHANGE_SCOPE.DICS_FLAG_CONFIGSPECIFIC instead',
-)
 const DICS_FLAG_CONFIGSPECIFIC = 0x00000002;
 
 /// (Obsolete. Do not use.)
-@Deprecated(
-  'Use SETUP_DI_PROPERTY_CHANGE_SCOPE.DICS_FLAG_CONFIGGENERAL instead',
-)
 const DICS_FLAG_CONFIGGENERAL = 0x00000004;
 
 /// Hardware key for the device.
@@ -10401,43 +8482,35 @@ const DIREG_BOTH = 0x00000004;
 // -----------------------------------------------------------------------------
 
 /// No defined value type.
-@Deprecated('Use REG_VALUE_TYPE.REG_NONE instead')
 const REG_NONE = 0;
 
 /// A null-terminated string. It's either a Unicode or an ANSI string, depending
 /// on whether you use the Unicode or ANSI functions.
-@Deprecated('Use REG_VALUE_TYPE.REG_SZ instead')
 const REG_SZ = 1;
 
 /// A null-terminated string that contains unexpanded references to environment
 /// variables, for example, %PATH%. It's either a Unicode or an ANSI string,
 /// depending on whether you use the Unicode or ANSI functions
-@Deprecated('Use REG_VALUE_TYPE.REG_EXPAND_SZ instead')
 const REG_EXPAND_SZ = 2;
 
 /// Binary data in any form.
-@Deprecated('Use REG_VALUE_TYPE.REG_BINARY instead')
 const REG_BINARY = 3;
 
 /// A 32-bit number.
-@Deprecated('Use REG_VALUE_TYPE.REG_DWORD instead')
 const REG_DWORD = 4;
 
 /// A 32-bit number in little-endian format. Windows is designed to run on
 /// little-endian computer architectures. Therefore, this value is defined as
 /// REG_DWORD in the Windows header files.
-@Deprecated('Use REG_VALUE_TYPE.REG_DWORD_LITTLE_ENDIAN instead')
 const REG_DWORD_LITTLE_ENDIAN = 4;
 
 /// A 32-bit number in big-endian format. Some UNIX systems support big-endian
 /// architectures.
-@Deprecated('Use REG_VALUE_TYPE.REG_DWORD_BIG_ENDIAN instead')
 const REG_DWORD_BIG_ENDIAN = 5;
 
 /// A null-terminated Unicode string that contains the target path of a symbolic
 /// link that was created by calling the RegCreateKeyEx function with
 /// REG_OPTION_CREATE_LINK.
-@Deprecated('Use REG_VALUE_TYPE.REG_LINK instead')
 const REG_LINK = 6;
 
 /// A sequence of null-terminated strings, terminated by an empty string (\0).
@@ -10445,57 +8518,45 @@ const REG_LINK = 6;
 /// first \0 terminates the first string, the second-from-last \0 terminates the
 /// last string, and the final \0 terminates the sequence. Note that the final
 /// terminator must be factored into the length of the string.
-@Deprecated('Use REG_VALUE_TYPE.REG_MULTI_SZ instead')
 const REG_MULTI_SZ = 7;
 
 /// A 64-bit number.
-@Deprecated('Use REG_VALUE_TYPE.REG_QWORD instead')
 const REG_QWORD = 11;
 
 /// A 64-bit number in little-endian format. Windows is designed to run on
 /// little-endian computer architectures. Therefore, this value is defined as
 /// REG_QWORD in the Windows header files.
-@Deprecated('Use REG_VALUE_TYPE.REG_QWORD_LITTLE_ENDIAN instead')
 const REG_QWORD_LITTLE_ENDIAN = 11;
 
 /// Required to query the values of a registry key.
-@Deprecated('Use REG_SAM_FLAGS.KEY_QUERY_VALUE instead')
 const KEY_QUERY_VALUE = 0x0001;
 
 /// Required to create, delete, or set a registry value.
-@Deprecated('Use REG_SAM_FLAGS.KEY_SET_VALUE instead')
 const KEY_SET_VALUE = 0x0002;
 
 /// Required to create a subkey of a registry key.
-@Deprecated('Use REG_SAM_FLAGS.KEY_CREATE_SUB_KEY instead')
 const KEY_CREATE_SUB_KEY = 0x0004;
 
 /// Required to enumerate the subkeys of a registry key.
-@Deprecated('Use REG_SAM_FLAGS.KEY_ENUMERATE_SUB_KEYS instead')
 const KEY_ENUMERATE_SUB_KEYS = 0x0008;
 
 /// Required to request change notifications for a registry key or for subkeys
 /// of a registry key.
-@Deprecated('Use REG_SAM_FLAGS.KEY_NOTIFY instead')
 const KEY_NOTIFY = 0x0010;
 
 /// Reserved for system use.
-@Deprecated('Use REG_SAM_FLAGS.KEY_CREATE_LINK instead')
 const KEY_CREATE_LINK = 0x0020;
 
 /// Indicates that an application on 64-bit Windows should operate on the 32-bit
 /// registry view. This flag is ignored by 32-bit Windows.
-@Deprecated('Use REG_SAM_FLAGS.KEY_WOW64_32KEY instead')
 const KEY_WOW64_32KEY = 0x0200;
 
 /// Indicates that an application on 64-bit Windows should operate on the 64-bit
 /// registry view. This flag is ignored by 32-bit Windows.
-@Deprecated('Use REG_SAM_FLAGS.KEY_WOW64_64KEY instead')
 const KEY_WOW64_64KEY = 0x0100;
 
 /// Combines the STANDARD_RIGHTS_READ, KEY_QUERY_VALUE, KEY_ENUMERATE_SUB_KEYS,
 /// and KEY_NOTIFY values.
-@Deprecated('Use REG_SAM_FLAGS.KEY_READ instead')
 const KEY_READ =
     (STANDARD_RIGHTS_READ |
         KEY_QUERY_VALUE |
@@ -10505,19 +8566,16 @@ const KEY_READ =
 
 /// Combines the STANDARD_RIGHTS_WRITE, KEY_SET_VALUE, and KEY_CREATE_SUB_KEY
 /// access rights.
-@Deprecated('Use REG_SAM_FLAGS.KEY_WRITE instead')
 const KEY_WRITE =
     (STANDARD_RIGHTS_WRITE | KEY_SET_VALUE | KEY_CREATE_SUB_KEY) &
     (~SYNCHRONIZE);
 
 /// Equivalent to KEY_READ.
-@Deprecated('Use REG_SAM_FLAGS.KEY_EXECUTE instead')
 const KEY_EXECUTE = KEY_READ & (~SYNCHRONIZE);
 
 /// Combines the STANDARD_RIGHTS_REQUIRED, KEY_QUERY_VALUE, KEY_SET_VALUE,
 /// KEY_CREATE_SUB_KEY, KEY_ENUMERATE_SUB_KEYS, KEY_NOTIFY, and KEY_CREATE_LINK
 /// access rights.
-@Deprecated('Use REG_SAM_FLAGS.KEY_ALL_ACCESS instead')
 const KEY_ALL_ACCESS =
     (STANDARD_RIGHTS_ALL |
         KEY_QUERY_VALUE |
@@ -10529,26 +8587,21 @@ const KEY_ALL_ACCESS =
     (~SYNCHRONIZE);
 
 /// Notify the caller if a subkey is added or deleted.
-@Deprecated('Use REG_NOTIFY_FILTER.REG_NOTIFY_CHANGE_NAME instead')
 const REG_NOTIFY_CHANGE_NAME = 0x00000001;
 
 /// Notify the caller of changes to the attributes of the key, such as the
 /// security descriptor information.
-@Deprecated('Use REG_NOTIFY_FILTER.REG_NOTIFY_CHANGE_ATTRIBUTES instead')
 const REG_NOTIFY_CHANGE_ATTRIBUTES = 0x00000002;
 
 /// Notify the caller of changes to a value of the key. This can include adding
 /// or deleting a value, or changing an existing value.
-@Deprecated('Use REG_NOTIFY_FILTER.REG_NOTIFY_CHANGE_LAST_SET instead')
 const REG_NOTIFY_CHANGE_LAST_SET = 0x00000004;
 
 /// Notify the caller of changes to the security descriptor of the key.
-@Deprecated('Use REG_NOTIFY_FILTER.REG_NOTIFY_CHANGE_SECURITY instead')
 const REG_NOTIFY_CHANGE_SECURITY = 0x00000008;
 
 /// Indicates that the lifetime of the registration must not be tied to the
 /// lifetime of the thread issuing the RegNotifyChangeKeyValue call.
-@Deprecated('Use REG_NOTIFY_FILTER.REG_NOTIFY_THREAD_AGNOSTIC instead')
 const REG_NOTIFY_THREAD_AGNOSTIC = 0x10000000;
 
 // -----------------------------------------------------------------------------
@@ -10557,33 +8610,27 @@ const REG_NOTIFY_THREAD_AGNOSTIC = 0x10000000;
 
 /// The caller requests the last internal configuration from the persistence
 /// database.
-@Deprecated('Use SET_DISPLAY_CONFIG_FLAGS.SDC_TOPOLOGY_INTERNAL instead')
 const SDC_TOPOLOGY_INTERNAL = 0x00000001;
 
 /// The caller requests the last clone configuration from the persistence
 /// database.
-@Deprecated('Use SET_DISPLAY_CONFIG_FLAGS.SDC_TOPOLOGY_CLONE instead')
 const SDC_TOPOLOGY_CLONE = 0x00000002;
 
 /// The caller requests the last extended configuration from the persistence
 /// database.
-@Deprecated('Use SET_DISPLAY_CONFIG_FLAGS.SDC_TOPOLOGY_EXTEND instead')
 const SDC_TOPOLOGY_EXTEND = 0x00000004;
 
 /// The caller requests the last external configuration from the persistence
 /// database.
-@Deprecated('Use SET_DISPLAY_CONFIG_FLAGS.SDC_TOPOLOGY_EXTERNAL instead')
 const SDC_TOPOLOGY_EXTERNAL = 0x00000008;
 
 /// The caller provides the path data so the function only queries the
 /// persistence database to find and use the source and target mode.
-@Deprecated('Use SET_DISPLAY_CONFIG_FLAGS.SDC_TOPOLOGY_SUPPLIED instead')
 const SDC_TOPOLOGY_SUPPLIED = 0x00000010;
 
 /// The caller requests a combination of all four SDC_TOPOLOGY_XXX
 /// configurations. This value informs the API to set the last known display
 /// configuration for the current connected monitors.
-@Deprecated('Use SET_DISPLAY_CONFIG_FLAGS.SDC_USE_DATABASE_CURRENT instead')
 const SDC_USE_DATABASE_CURRENT =
     SDC_TOPOLOGY_INTERNAL |
     SDC_TOPOLOGY_CLONE |
@@ -10593,729 +8640,158 @@ const SDC_USE_DATABASE_CURRENT =
 /// The topology, source, and target mode information that are supplied in the
 /// pathArray and the modeInfoArray parameters are used, rather than looking up
 /// the configuration in the database.
-@Deprecated(
-  'Use SET_DISPLAY_CONFIG_FLAGS.SDC_USE_SUPPLIED_DISPLAY_CONFIG instead',
-)
 const SDC_USE_SUPPLIED_DISPLAY_CONFIG = 0x00000020;
 
 /// The system tests for the requested topology, source, and target mode
 /// information to determine whether it can be set.
-@Deprecated('Use SET_DISPLAY_CONFIG_FLAGS.SDC_VALIDATE instead')
 const SDC_VALIDATE = 0x00000040;
 
 /// The resulting topology, source, and target mode is set.
-@Deprecated('Use SET_DISPLAY_CONFIG_FLAGS.SDC_APPLY instead')
 const SDC_APPLY = 0x00000080;
 
 /// A modifier to the SDC_APPLY flag. This causes the change mode to be forced
 /// all the way down to the driver for each active display.
-@Deprecated('Use SET_DISPLAY_CONFIG_FLAGS.SDC_NO_OPTIMIZATION instead')
 const SDC_NO_OPTIMIZATION = 0x00000100;
 
 /// The resulting topology, source, and target mode are saved to the database.
-@Deprecated('Use SET_DISPLAY_CONFIG_FLAGS.SDC_SAVE_TO_DATABASE instead')
 const SDC_SAVE_TO_DATABASE = 0x00000200;
 
 /// If required, the function can modify the specified source and target mode
 /// information in order to create a functional display path set.
-@Deprecated('Use SET_DISPLAY_CONFIG_FLAGS.SDC_ALLOW_CHANGES instead')
 const SDC_ALLOW_CHANGES = 0x00000400;
 
 /// When the function processes a SDC_TOPOLOGY_XXX request, it can force path
 /// persistence on a target to satisfy the request if necessary. For information
 /// about the other flags that this flag can be combined with, see the following
 /// list.
-@Deprecated('Use SET_DISPLAY_CONFIG_FLAGS.SDC_PATH_PERSIST_IF_REQUIRED instead')
 const SDC_PATH_PERSIST_IF_REQUIRED = 0x00000800;
 
 /// The caller requests that the driver is given an opportunity to update the
 /// GDI mode list while SetDisplayConfig sets the new display configuration.
 /// This flag value is only valid when the SDC_USE_SUPPLIED_DISPLAY_CONFIG and
 /// SDC_APPLY flag values are also specified.
-@Deprecated('Use SET_DISPLAY_CONFIG_FLAGS.SDC_FORCE_MODE_ENUMERATION instead')
 const SDC_FORCE_MODE_ENUMERATION = 0x00001000;
 
 /// A modifier to the SDC_TOPOLOGY_SUPPLIED flag that indicates that
 /// SetDisplayConfig should ignore the path order of the supplied topology when
 /// searching the database. When this flag is set, the topology set is the most
 /// recent topology that contains all the paths regardless of the path order.
-@Deprecated('Use SET_DISPLAY_CONFIG_FLAGS.SDC_ALLOW_PATH_ORDER_CHANGES instead')
 const SDC_ALLOW_PATH_ORDER_CHANGES = 0x00002000;
 
 /// A modifier to the SDC_USE_SUPPLIED_DISPLAY_CONFIG and SDC_TOPOLOGY_SUPPLIED
 /// flags that the caller is aware of virtual modes. Supported starting in
 /// Windows 10.
-@Deprecated('Use SET_DISPLAY_CONFIG_FLAGS.SDC_VIRTUAL_MODE_AWARE instead')
 const SDC_VIRTUAL_MODE_AWARE = 0x00008000;
 
 /// A modifier to the SDC_USE_SUPPLIED_DISPLAY_CONFIG and SDC_TOPOLOGY_SUPPLIED
 /// flags that the caller is aware of virtual refresh rates. Supported starting
 /// in Windows 11.
-@Deprecated(
-  'Use SET_DISPLAY_CONFIG_FLAGS.SDC_VIRTUAL_REFRESH_RATE_AWARE instead',
-)
 const SDC_VIRTUAL_REFRESH_RATE_AWARE = 0x00020000;
-
-// -----------------------------------------------------------------------------
-// IAudioClient constants
-// -----------------------------------------------------------------------------
-
-/// The AUDCLNT_SHAREMODE enumeration defines constants that indicate whether an
-/// audio stream will run in shared mode or in exclusive mode.
-///
-/// {@category enum}
-class AUDCLNT_SHAREMODE {
-  /// The audio stream will run in shared mode.
-  static const AUDCLNT_SHAREMODE_SHARED = 0;
-
-  /// The audio stream will run in exclusive mode.
-  static const AUDCLNT_SHAREMODE_EXCLUSIVE = 1;
-}
-
-/// The AUDCLNT_BUFFERFLAGS enumeration defines flags that indicate the status
-/// of an audio endpoint buffer.
-///
-/// {@category enum}
-class AUDCLNT_BUFFERFLAGS {
-  /// The data in the packet is not correlated with the previous packet's device
-  /// position; this is possibly due to a stream state transition or timing
-  /// glitch.
-  static const AUDCLNT_BUFFERFLAGS_DATA_DISCONTINUITY = 0x1;
-
-  /// Treat all of the data in the packet as silence and ignore the actual data
-  /// values.
-  static const AUDCLNT_BUFFERFLAGS_SILENT = 0x2;
-
-  /// The time at which the device's stream position was recorded is uncertain.
-  /// Thus, the client might be unable to accurately set the time stamp for the
-  /// current data packet.
-  static const AUDCLNT_BUFFERFLAGS_TIMESTAMP_ERROR = 0x4;
-}
-
-/// Defines values that describe the characteristics of an audio stream.
-///
-/// {@category enum}
-class AUDCLNT_STREAMOPTIONS {
-  /// No stream options.
-  static const AUDCLNT_STREAMOPTIONS_NONE = 0;
-
-  /// The audio stream is a 'raw' stream that bypasses all signal processing
-  /// except for endpoint specific, always-on processing in the Audio Processing
-  /// Object (APO), driver, and hardware.
-  static const AUDCLNT_STREAMOPTIONS_RAW = 0x1;
-
-  /// The audio client is requesting that the audio engine match the format
-  /// proposed by the client.
-  static const AUDCLNT_STREAMOPTIONS_MATCH_FORMAT = 0x2;
-  static const AUDCLNT_STREAMOPTIONS_AMBISONICS = 0x4;
-}
-
-/// Device registry property codes.
-///
-/// {@category enum}
-class SPDRP {
-  /// The function retrieves a REG_SZ string that contains the description of a
-  /// device.
-  static const SPDRP_DEVICEDESC = 0x00000000;
-
-  /// The function retrieves a REG_MULTI_SZ string that contains the list of
-  /// hardware IDs for a device.
-  static const SPDRP_HARDWAREID = 0x00000001;
-
-  /// The function retrieves a REG_MULTI_SZ string that contains the list of
-  /// compatible IDs for a device.
-  static const SPDRP_COMPATIBLEIDS = 0x00000002;
-
-  /// The function retrieves a REG_SZ string that contains the service name for
-  /// a device.
-  static const SPDRP_SERVICE = 0x00000004;
-
-  /// The function retrieves a REG_SZ string that contains the device setup
-  /// class of a device.
-  static const SPDRP_CLASS = 0x00000007;
-
-  /// The function retrieves a REG_SZ string that contains the GUID that
-  /// represents the device setup class of a device.
-  static const SPDRP_CLASSGUID = 0x00000008;
-
-  /// The function retrieves a string that identifies the device's software key
-  /// (sometimes called the driver key).
-  static const SPDRP_DRIVER = 0x00000009;
-
-  /// The function retrieves a bitwise OR of a device's configuration flags in a
-  /// DWORD value. The configuration flags are represented by the CONFIGFLAG_Xxx
-  /// bitmasks that are defined in Regstr.h.
-  static const SPDRP_CONFIGFLAGS = 0x0000000A;
-
-  /// The function retrieves a REG_SZ string that contains the name of the
-  /// device manufacturer.
-  static const SPDRP_MFG = 0x0000000B;
-
-  /// The function retrieves a REG_SZ string that contains the friendly name of
-  /// a device.
-  static const SPDRP_FRIENDLYNAME = 0x0000000C;
-
-  /// The function retrieves a REG_SZ string that contains the hardware location
-  /// of a device.
-  static const SPDRP_LOCATION_INFORMATION = 0x0000000D;
-
-  /// The function retrieves a REG_SZ string that contains the name that is
-  /// associated with the device's PDO.
-  static const SPDRP_PHYSICAL_DEVICE_OBJECT_NAME = 0x0000000E;
-
-  /// The function retrieves a bitwise OR of the following CM_DEVCAP_Xxx flags
-  /// in a DWORD. The device capabilities that are represented by these flags
-  /// correspond to the device capabilities that are represented by the members
-  /// of the DEVICE_CAPABILITIES structure.
-  static const SPDRP_CAPABILITIES = 0x0000000F;
-
-  /// The function retrieves a DWORD value set to the value of the UINumber
-  /// member of the device's DEVICE_CAPABILITIES structure.
-  static const SPDRP_UI_NUMBER = 0x00000010;
-
-  /// The function retrieves a REG_MULTI_SZ string that contains the names of a
-  /// device's upper filter drivers.
-  static const SPDRP_UPPERFILTERS = 0x00000011;
-
-  /// The function retrieves a REG_MULTI_SZ string that contains the names of a
-  /// device's lower-filter drivers.
-  static const SPDRP_LOWERFILTERS = 0x00000012;
-
-  /// The function retrieves the GUID for the device's bus type.
-  static const SPDRP_BUSTYPEGUID = 0x00000013;
-
-  /// The function retrieves the device's legacy bus type as an INTERFACE_TYPE
-  /// value (defined in Wdm.h and Ntddk.h).
-  static const SPDRP_LEGACYBUSTYPE = 0x00000014;
-
-  /// The function retrieves the device's bus number.
-  static const SPDRP_BUSNUMBER = 0x00000015;
-
-  /// The function retrieves a REG_SZ string that contains the name of the
-  /// device's enumerator.
-  static const SPDRP_ENUMERATOR_NAME = 0x00000016;
-
-  /// The function retrieves a SECURITY_DESCRIPTOR structure for a device.
-  static const SPDRP_SECURITY = 0x00000017;
-
-  /// The function retrieves a REG_SZ string that contains the device's security
-  /// descriptor.
-  static const SPDRP_SECURITY_SDS = 0x00000018;
-
-  /// The function retrieves a DWORD value that represents the device's type.
-  /// For more information, see Specifying Device Types.
-  static const SPDRP_DEVTYPE = 0x00000019;
-
-  /// The function retrieves a DWORD value that indicates whether a user can
-  /// obtain exclusive use of the device. The returned value is one if exclusive
-  /// use is allowed, or zero otherwise.
-  static const SPDRP_EXCLUSIVE = 0x0000001A;
-
-  /// The function retrieves a bitwise OR of a device's characteristics flags in
-  /// a DWORD.
-  static const SPDRP_CHARACTERISTICS = 0x0000001B;
-
-  /// The function retrieves the device's address.
-  static const SPDRP_ADDRESS = 0x0000001C;
-
-  /// The function retrieves a format string (REG_SZ) used to display the
-  /// UINumber value.
-  static const SPDRP_UI_NUMBER_DESC_FORMAT = 0X0000001D;
-
-  /// The function retrieves a CM_POWER_DATA structure that contains the
-  /// device's power management information.
-  static const SPDRP_DEVICE_POWER_DATA = 0x0000001E;
-
-  /// The function retrieves the device's current removal policy as a DWORD that
-  /// contains one of the CM_REMOVAL_POLICY_Xxx values that are defined in
-  /// Cfgmgr32.h.
-  static const SPDRP_REMOVAL_POLICY = 0x0000001F;
-
-  /// The function retrieves the device's hardware-specified default removal
-  /// policy as a DWORD that contains one of the CM_REMOVAL_POLICY_Xxx values
-  /// that are defined in Cfgmgr32.h.
-  static const SPDRP_REMOVAL_POLICY_HW_DEFAULT = 0x00000020;
-
-  /// The function retrieves the device's override removal policy (if it exists)
-  /// from the registry, as a DWORD that contains one of the
-  /// CM_REMOVAL_POLICY_Xxx values that are defined in Cfgmgr32.h.
-  static const SPDRP_REMOVAL_POLICY_OVERRIDE = 0x00000021;
-
-  /// The function retrieves a DWORD value that indicates the installation state
-  /// of a device. The installation state is represented by one of the
-  /// CM_INSTALL_STATE_Xxx values that are defined in Cfgmgr32.h. The
-  /// CM_INSTALL_STATE_Xxx values correspond to the DEVICE_INSTALL_STATE
-  /// enumeration values.
-  static const SPDRP_INSTALL_STATE = 0x00000022;
-
-  /// The function retrieves a REG_MULTI_SZ string that represents the location
-  /// of the device in the device tree.
-  static const SPDRP_LOCATION_PATHS = 0x00000023;
-}
-
-// -----------------------------------------------------------------------------
-// COM Apartment constants
-// -----------------------------------------------------------------------------
-
-/// Specifies the set of possible COM apartment type qualifiers.
-///
-/// {@category enum}
-class APTTYPEQUALIFIER {
-  /// No qualifier information for the current COM apartment type is available.
-  static const APTTYPEQUALIFIER_NONE = 0;
-
-  /// This qualifier is only valid when the pAptType parameter of the
-  /// CoGetApartmentType function specifies APTTYPE_MTA on return. A thread has
-  /// an implicit MTA apartment type if it does not initialize the COM apartment
-  /// itself, and if another thread has already initialized the MTA in the
-  /// process. This qualifier informs the API caller that the MTA of the thread
-  /// is implicitly inherited from other threads and is not initialized
-  /// directly.
-  static const APTTYPEQUALIFIER_IMPLICIT_MTA = 1;
-
-  /// This qualifier is only valid when the pAptType parameter of the
-  /// CoGetApartmentType function contains APTTYPE_NA on return. When an MTA
-  /// thread creates or invokes a COM in-process object using the "Neutral"
-  /// threading model, the COM apartment type of the thread switches from MTA to
-  /// a Neutral apartment type. This qualifier informs the API caller that the
-  /// thread has switched from the MTA apartment type to the NA type.
-  static const APTTYPEQUALIFIER_NA_ON_MTA = 2;
-
-  /// This qualifier is only valid when the pAptType parameter of the
-  /// CoGetApartmentType function contains APTTYPE_NA on return. When an STA
-  /// thread creates or invokes a COM in-process object using the "Neutral"
-  /// threading model, the COM apartment type of the thread switches from STA to
-  /// a Neutral apartment type. This qualifier informs the API caller that the
-  /// thread has switched from the STA apartment type to the NA type.
-  static const APTTYPEQUALIFIER_NA_ON_STA = 3;
-
-  /// This qualifier is only valid when the pAptType parameter of the
-  /// CoGetApartmentType function contains APTTYPE_NA on return. When an
-  /// implicit MTA thread creates or invokes a COM in-process object using the
-  /// "Neutral" threading model, the COM apartment type of the thread switches
-  /// from the implicit MTA type to a Neutral apartment type. This qualifier
-  /// informs the API caller that the thread has switched from the implicit MTA
-  /// apartment type to the NA type.
-  static const APTTYPEQUALIFIER_NA_ON_IMPLICIT_MTA = 4;
-
-  /// This qualifier is only valid when the pAptType parameter of the
-  /// CoGetApartmentType function contains APTTYPE_NA on return. When the main
-  /// STA thread creates or invokes a COM in-process object using the "Neutral"
-  /// threading model, the COM apartment type of the thread switches from the
-  /// main STA type to a Neutral apartment type. This qualifier informs the API
-  /// caller that the thread has switched from the main STA apartment type to
-  /// the NA type.
-  static const APTTYPEQUALIFIER_NA_ON_MAINSTA = 5;
-  static const APTTYPEQUALIFIER_APPLICATION_STA = 6;
-  static const APTTYPEQUALIFIER_RESERVED_1 = 7;
-}
-
-/// Specifies different types of apartments.
-///
-/// {@category enum}
-class APTTYPE {
-  /// The current thread.
-  static const APTTYPE_CURRENT = -1;
-
-  /// A single-threaded apartment.
-  static const APTTYPE_STA = 0;
-
-  /// A multithreaded apartment.
-  static const APTTYPE_MTA = 1;
-
-  /// A neutral apartment.
-  static const APTTYPE_NA = 2;
-
-  /// The main single-threaded apartment.
-  static const APTTYPE_MAINSTA = 3;
-}
-
-/// Contains values that specify the type of reference to use when returning UI
-/// Automation elements.
-///
-/// {@category enum}
-class AutomationElementMode {
-  /// Specifies that returned elements have no reference to the underlying UI
-  /// and contain only cached information.
-  static const AutomationElementMode_None = 0;
-
-  /// Specifies that returned elements have a full reference to the underlying
-  /// UI.
-  static const AutomationElementMode_Full = 0x1;
-}
-
-/// Contains possible values for the CoalesceEvents property, which indicates
-/// whether an accessible technology client receives all events, or a subset
-/// where duplicate events are detected and filtered.
-///
-/// {@category enum}
-class CoalesceEventsOptions {
-  /// Event coalescing is disabled.
-  static const CoalesceEventsOptions_Disabled = 0;
-
-  /// Event coalescing is enabled.
-  static const CoalesceEventsOptions_Enabled = 0x1;
-}
-
-/// Contains possible values for the ConnectionRecoveryBehavior property, which
-/// indicates whether an accessible technology client adjusts provider request
-/// timeouts when the provider is non-responsive.
-///
-/// {@category enum}
-class ConnectionRecoveryBehaviorOptions {
-  /// Connection recovery is disabled.
-  static const ConnectionRecoveryBehaviorOptions_Disabled = 0;
-
-  /// Connection recovery is enabled.
-  static const ConnectionRecoveryBehaviorOptions_Enabled = 0x1;
-}
-
-/// The PropertyConditionFlags (uiautomationclient.h) enumeration contains
-/// values used in creating property conditions.
-///
-/// {@category enum}
-class PropertyConditionFlags {
-  /// No flags.
-  static const PropertyConditionFlags_None = 0;
-
-  /// Comparison of string properties is not case-sensitive.
-  static const PropertyConditionFlags_IgnoreCase = 0x1;
-
-  /// Comparison of substring properties is enabled.
-  static const PropertyConditionFlags_MatchSubstring = 0x2;
-}
-
-/// Contains values that specify the direction and distance to scroll.
-///
-/// {@category enum}
-class ScrollAmount {
-  /// Scrolling is done in large decrements, equivalent to pressing the PAGE UP
-  /// key or clicking on a blank part of a scroll bar.
-  static const ScrollAmount_LargeDecrement = 0;
-
-  /// Scrolling is done in small decrements, equivalent to pressing an arrow
-  /// key or clicking the arrow button on a scroll bar.
-  static const ScrollAmount_SmallDecrement = 1;
-
-  /// No scrolling is done.
-  static const ScrollAmount_NoAmount = 2;
-
-  /// Scrolling is done in large increments, equivalent to pressing the PAGE
-  /// DOWN or PAGE UP key or clicking on a blank part of a scroll bar.
-  static const ScrollAmount_LargeIncrement = 3;
-
-  /// Scrolling is done in small increments, equivalent to pressing an arrow
-  /// key or clicking the arrow button on a scroll bar.
-  static const ScrollAmount_SmallIncrement = 4;
-}
-
-/// The STGM constants are flags that indicate conditions for creating and
-/// deleting the object and access modes for the object.
-///
-/// {@category enum}
-class STGM {
-  /// Indicates that the object is read-only, meaning that modifications
-  /// cannot be made.
-  static const STGM_READ = 0x00000000;
-
-  /// Enables you to save changes to the object, but does not permit access
-  /// to its data.
-  static const STGM_WRITE = 0x00000001;
-
-  /// Enables access and modification of object data.
-  static const STGM_READWRITE = 0x00000002;
-
-  /// Specifies that subsequent openings of the object are not denied read or
-  /// write access.
-  static const STGM_SHARE_DENY_NONE = 0x00000040;
-
-  /// Prevents others from subsequently opening the object in STGM_READ mode.
-  /// It is typically used on a root storage object.
-  static const STGM_SHARE_DENY_READ = 0x00000030;
-
-  /// Prevents others from subsequently opening the object for `STGM_WRITE`
-  /// or `STGM_READWRITE` access.
-  static const STGM_SHARE_DENY_WRITE = 0x00000020;
-
-  /// Prevents others from subsequently opening the object in any mode.
-  static const STGM_SHARE_EXCLUSIVE = 0x00000010;
-
-  /// Opens the storage object with exclusive access to the most recently
-  /// committed version.
-  static const STGM_PRIORITY = 0x00040000;
-
-  /// Indicates that an existing storage object or stream should be removed
-  /// before the new object replaces it.
-  static const STGM_CREATE = 0x00001000;
-
-  /// Creates the new object while preserving existing data in a stream named
-  /// "Contents".
-  static const STGM_CONVERT = 0x00020000;
-
-  /// Causes the create operation to fail if an existing object with the
-  /// specified name exists.
-  static const STGM_FAILIFTHERE = 0x00000000;
-
-  /// Indicates that, in direct mode, each change to a storage or stream
-  /// element is written as it occurs.
-  static const STGM_DIRECT = 0x00000000;
-
-  /// Indicates that, in transacted mode, changes are buffered and written
-  /// only if an explicit commit operation is called.
-  static const STGM_TRANSACTED = 0x00010000;
-
-  /// Indicates that, in transacted mode, a temporary scratch file is usually
-  /// used to save modifications until the Commit method is called.
-  static const STGM_NOSCRATCH = 0x00100000;
-
-  /// This flag is used when opening a storage object with STGM_TRANSACTED
-  /// and without STGM_SHARE_EXCLUSIVE or STGM_SHARE_DENY_WRITE.
-  static const STGM_NOSNAPSHOT = 0x00200000;
-
-  /// Provides a faster implementation of a compound file in a limited, but
-  /// frequently used, case. For more information, see the Remarks section.
-  static const STGM_SIMPLE = 0x08000000;
-
-  /// Supports direct mode for single-writer, multireader file operations.
-  static const STGM_DIRECT_SWMR = 0x00400000;
-
-  /// Indicates that the underlying file is to be automatically destroyed
-  /// when the root storage object is released.
-  static const STGM_DELETEONRELEASE = 0x04000000;
-}
-
-/// Contains values that specify the toggle state of a Microsoft UI Automation
-/// element that implements the Toggle control pattern.
-///
-/// {@category enum}
-class ToggleState {
-  /// The UI Automation element is not selected, checked, marked or otherwise
-  /// activated.
-  static const ToggleState_Off = 0;
-
-  /// The UI Automation element is selected, checked, marked or otherwise
-  /// activated.
-  static const ToggleState_On = 1;
-
-  /// The UI Automation element is in an indeterminate state.
-  static const ToggleState_Indeterminate = 2;
-}
-
-/// The TreeScope enumeration contains values that specify the scope of various
-/// operations in the Microsoft UI Automation tree.
-class TreeScope {
-  /// The scope excludes the subtree from the search.
-  static const TreeScope_None = 0;
-
-  /// The scope includes the element itself.
-  static const TreeScope_Element = 0x1;
-
-  /// The scope includes children of the element.
-  static const TreeScope_Children = 0x2;
-
-  /// The scope includes children and more distant descendants of the element.
-  static const TreeScope_Descendants = 0x4;
-
-  /// The scope includes the parent of the element.
-  static const TreeScope_Parent = 0x8;
-
-  /// The scope includes the parent and more distant ancestors of the element.
-  static const TreeScope_Ancestors = 0x10;
-
-  /// The scope includes the element and all its descendants. This flag is a
-  /// combination of the TreeScope_Element and TreeScope_Descendants values.
-  static const TreeScope_Subtree = 0x7;
-}
-
-/// The TreeTraversalOptions enumeration defines values that can be used to
-/// customize tree navigation order.
-///
-/// {@category enum}
-class TreeTraversalOptions {
-  /// Pre-order, visit children from first to last.
-  static const TreeTraversalOptions_Default = 0;
-
-  /// Post-order.
-  static const TreeTraversalOptions_PostOrder = 0x1;
-
-  /// Visit children from last to first.
-  static const TreeTraversalOptions_LastToFirstOrder = 0x2;
-}
-
-/// Contains values that specify the current state of the window for purposes
-/// of user interaction.
-///
-/// {@category enum}
-class WindowInteractionState {
-  /// The window is running. This does not guarantee that the window is ready
-  /// for user interaction or is responding.
-  static const WindowInteractionState_Running = 0;
-
-  /// The window is closing.
-  static const WindowInteractionState_Closing = 1;
-
-  /// The window is ready for user interaction.
-  static const WindowInteractionState_ReadyForUserInteraction = 2;
-
-  /// The window is blocked by a modal window.
-  static const WindowInteractionState_BlockedByModalWindow = 3;
-
-  /// The window is not responding.
-  static const WindowInteractionState_NotResponding = 4;
-}
-
-/// Contains values that specify the visual state of a window.
-///
-/// {@category enum}
-class WindowVisualState {
-  /// The window is normal (restored).
-  static const WindowVisualState_Normal = 0;
-
-  /// The window is maximized.
-  static const WindowVisualState_Maximized = 1;
-
-  /// The window is minimized.
-  static const WindowVisualState_Minimized = 2;
-}
 
 // -----------------------------------------------------------------------------
 // UI Automation Control Pattern constants
 // -----------------------------------------------------------------------------
 
 /// Identifies the Annotation control pattern.
-@Deprecated('Use UIA_PATTERN_ID.UIA_AnnotationPatternId instead')
 const UIA_AnnotationPatternId = 10023;
 
 /// Identifies the CustomNavigation control pattern.
-@Deprecated('Use UIA_PATTERN_ID.UIA_CustomNavigationPatternId instead')
 const UIA_CustomNavigationPatternId = 10033;
 
 /// Identifies the Dock control pattern.
-@Deprecated('Use UIA_PATTERN_ID.UIA_DockPatternId instead')
 const UIA_DockPatternId = 10011;
 
 /// Identifies the Drag control pattern.
-@Deprecated('Use UIA_PATTERN_ID.UIA_DragPatternId instead')
 const UIA_DragPatternId = 10030;
 
 /// Identifies the DropTarget control pattern.
-@Deprecated('Use UIA_PATTERN_ID.UIA_DropTargetPatternId instead')
 const UIA_DropTargetPatternId = 10031;
 
 /// Identifies the ExpandCollapse control pattern.
-@Deprecated('Use UIA_PATTERN_ID.UIA_ExpandCollapsePatternId instead')
 const UIA_ExpandCollapsePatternId = 10005;
 
 /// Identifies the GridItem control pattern.
-@Deprecated('Use UIA_PATTERN_ID.UIA_GridItemPatternId instead')
 const UIA_GridItemPatternId = 10007;
 
 /// Identifies the Grid control pattern.
-@Deprecated('Use UIA_PATTERN_ID.UIA_GridPatternId instead')
 const UIA_GridPatternId = 10006;
 
 /// Identifies the Invoke control pattern.
-@Deprecated('Use UIA_PATTERN_ID.UIA_InvokePatternId instead')
 const UIA_InvokePatternId = 10000;
 
 /// Identifies the ItemContainer control pattern.
-@Deprecated('Use UIA_PATTERN_ID.UIA_ItemContainerPatternId instead')
 const UIA_ItemContainerPatternId = 10019;
 
 /// Identifies the LegacyIAccessible control pattern.
-@Deprecated('Use UIA_PATTERN_ID.UIA_LegacyIAccessiblePatternId instead')
 const UIA_LegacyIAccessiblePatternId = 10018;
 
 /// Identifies the MultipleView control pattern.
-@Deprecated('Use UIA_PATTERN_ID.UIA_MultipleViewPatternId instead')
 const UIA_MultipleViewPatternId = 10008;
 
 /// Identifies the ObjectModel control pattern.
-@Deprecated('Use UIA_PATTERN_ID.UIA_ObjectModelPatternId instead')
 const UIA_ObjectModelPatternId = 10022;
 
 /// Identifies the RangeValue control pattern.
-@Deprecated('Use UIA_PATTERN_ID.UIA_RangeValuePatternId instead')
 const UIA_RangeValuePatternId = 10003;
 
 /// Identifies the ScrollItem control pattern.
-@Deprecated('Use UIA_PATTERN_ID.UIA_ScrollItemPatternId instead')
 const UIA_ScrollItemPatternId = 10017;
 
 /// Identifies the Scroll control pattern.
-@Deprecated('Use UIA_PATTERN_ID.UIA_ScrollPatternId instead')
 const UIA_ScrollPatternId = 10004;
 
 /// Identifies the SelectionItem control pattern.
-@Deprecated('Use UIA_PATTERN_ID.UIA_SelectionItemPatternId instead')
 const UIA_SelectionItemPatternId = 10010;
 
 /// Identifies the Selection control pattern.
-@Deprecated('Use UIA_PATTERN_ID.UIA_SelectionPatternId instead')
 const UIA_SelectionPatternId = 10001;
 
 /// Identifies the Spreadsheet control pattern.
-@Deprecated('Use UIA_PATTERN_ID.UIA_SpreadsheetPatternId instead')
 const UIA_SpreadsheetPatternId = 10026;
 
 /// Identifies the SpreadsheetItem control pattern.
-@Deprecated('Use UIA_PATTERN_ID.UIA_SpreadsheetItemPatternId instead')
 const UIA_SpreadsheetItemPatternId = 10027;
 
 /// Identifies the Styles control pattern.
-@Deprecated('Use UIA_PATTERN_ID.UIA_StylesPatternId instead')
 const UIA_StylesPatternId = 10025;
 
 /// Identifies the SynchronizedInput control pattern.
-@Deprecated('Use UIA_PATTERN_ID.UIA_SynchronizedInputPatternId instead')
 const UIA_SynchronizedInputPatternId = 10021;
 
 /// Identifies the TableItem control pattern.
-@Deprecated('Use UIA_PATTERN_ID.UIA_TableItemPatternId instead')
 const UIA_TableItemPatternId = 10013;
 
 /// Identifies the Table control pattern.
-@Deprecated('Use UIA_PATTERN_ID.UIA_TablePatternId instead')
 const UIA_TablePatternId = 10012;
 
 /// Identifies the TextChild control pattern.
-@Deprecated('Use UIA_PATTERN_ID.UIA_TextChildPatternId instead')
 const UIA_TextChildPatternId = 10029;
 
 /// Identifies the TextEdit control pattern.
-@Deprecated('Use UIA_PATTERN_ID.UIA_TextEditPatternId instead')
 const UIA_TextEditPatternId = 10032;
 
 /// Identifies the Text control pattern.
-@Deprecated('Use UIA_PATTERN_ID.UIA_TextPatternId instead')
 const UIA_TextPatternId = 10014;
 
 /// Identifies the second version of the Text control pattern.
-@Deprecated('Use UIA_PATTERN_ID.UIA_TextPattern2Id instead')
 const UIA_TextPattern2Id = 10024;
 
 /// Identifies the Toggle control pattern.
-@Deprecated('Use UIA_PATTERN_ID.UIA_TogglePatternId instead')
 const UIA_TogglePatternId = 10015;
 
 /// Identifies the Transform control pattern.
-@Deprecated('Use UIA_PATTERN_ID.UIA_TransformPatternId instead')
 const UIA_TransformPatternId = 10016;
 
 /// Identifies the second version of the Transform control pattern.
-@Deprecated('Use UIA_PATTERN_ID.UIA_TransformPattern2Id instead')
 const UIA_TransformPattern2Id = 10028;
 
 /// Identifies the Value control pattern.
-@Deprecated('Use UIA_PATTERN_ID.UIA_ValuePatternId instead')
 const UIA_ValuePatternId = 10002;
 
 /// Identifies the VirtualizedItem control pattern.
-@Deprecated('Use UIA_PATTERN_ID.UIA_VirtualizedItemPatternId instead')
 const UIA_VirtualizedItemPatternId = 10020;
 
 /// Identifies the Window control pattern.
-@Deprecated('Use UIA_PATTERN_ID.UIA_WindowPatternId instead')
 const UIA_WindowPatternId = 10009;
 
 // -----------------------------------------------------------------------------
@@ -11323,167 +8799,126 @@ const UIA_WindowPatternId = 10009;
 // -----------------------------------------------------------------------------
 
 /// Identifies the AppBar control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_AppBarControlTypeId instead')
 const UIA_AppBarControlTypeId = 50040;
 
 /// Identifies the Button control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_ButtonControlTypeId instead')
 const UIA_ButtonControlTypeId = 50000;
 
 /// Identifies the Calendar control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_CalendarControlTypeId instead')
 const UIA_CalendarControlTypeId = 50001;
 
 /// Identifies the CheckBox control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_CheckBoxControlTypeId instead')
 const UIA_CheckBoxControlTypeId = 50002;
 
 /// Identifies the ComboBox control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_ComboBoxControlTypeId instead')
 const UIA_ComboBoxControlTypeId = 50003;
 
 /// Identifies the Custom control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_CustomControlTypeId instead')
 const UIA_CustomControlTypeId = 50025;
 
 /// Identifies the DataGrid control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_DataGridControlTypeId instead')
 const UIA_DataGridControlTypeId = 50028;
 
 /// Identifies the DataItem control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_DataItemControlTypeId instead')
 const UIA_DataItemControlTypeId = 50029;
 
 /// Identifies the Document control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_DocumentControlTypeId instead')
 const UIA_DocumentControlTypeId = 50030;
 
 /// Identifies the Edit control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_EditControlTypeId instead')
 const UIA_EditControlTypeId = 50004;
 
 /// Identifies the Group control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_GroupControlTypeId instead')
 const UIA_GroupControlTypeId = 50026;
 
 /// Identifies the Header control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_HeaderControlTypeId instead')
 const UIA_HeaderControlTypeId = 50034;
 
 /// Identifies the HeaderItem control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_HeaderItemControlTypeId instead')
 const UIA_HeaderItemControlTypeId = 50035;
 
 /// Identifies the Hyperlink control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_HyperlinkControlTypeId instead')
 const UIA_HyperlinkControlTypeId = 50005;
 
 /// Identifies the Image control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_ImageControlTypeId instead')
 const UIA_ImageControlTypeId = 50006;
 
 /// Identifies the List control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_ListControlTypeId instead')
 const UIA_ListControlTypeId = 50008;
 
 /// Identifies the ListItem control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_ListItemControlTypeId instead')
 const UIA_ListItemControlTypeId = 50007;
 
 /// Identifies the MenuBar control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_MenuBarControlTypeId instead')
 const UIA_MenuBarControlTypeId = 50010;
 
 /// Identifies the Menu control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_MenuControlTypeId instead')
 const UIA_MenuControlTypeId = 50009;
 
 /// Identifies the MenuItem control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_MenuItemControlTypeId instead')
 const UIA_MenuItemControlTypeId = 50011;
 
 /// Identifies the Pane control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_PaneControlTypeId instead')
 const UIA_PaneControlTypeId = 50033;
 
 /// Identifies the ProgressBar control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_ProgressBarControlTypeId instead')
 const UIA_ProgressBarControlTypeId = 50012;
 
 /// Identifies the RadioButton control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_RadioButtonControlTypeId instead')
 const UIA_RadioButtonControlTypeId = 50013;
 
 /// Identifies the ScrollBar control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_ScrollBarControlTypeId instead')
 const UIA_ScrollBarControlTypeId = 50014;
 
 /// Identifies the SemanticZoom control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_SemanticZoomControlTypeId instead')
 const UIA_SemanticZoomControlTypeId = 50039;
 
 /// Identifies the Separator control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_SeparatorControlTypeId instead')
 const UIA_SeparatorControlTypeId = 50038;
 
 /// Identifies the Slider control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_SliderControlTypeId instead')
 const UIA_SliderControlTypeId = 50015;
 
 /// Identifies the Spinner control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_SpinnerControlTypeId instead')
 const UIA_SpinnerControlTypeId = 50016;
 
 /// Identifies the SplitButton control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_SplitButtonControlTypeId instead')
 const UIA_SplitButtonControlTypeId = 50031;
 
 /// Identifies the StatusBar control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_StatusBarControlTypeId instead')
 const UIA_StatusBarControlTypeId = 50017;
 
 /// Identifies the Tab control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_TabControlTypeId instead')
 const UIA_TabControlTypeId = 50018;
 
 /// Identifies the TabItem control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_TabItemControlTypeId instead')
 const UIA_TabItemControlTypeId = 50019;
 
 /// Identifies the Table control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_TableControlTypeId instead')
 const UIA_TableControlTypeId = 50036;
 
 /// Identifies the Text control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_TextControlTypeId instead')
 const UIA_TextControlTypeId = 50020;
 
 /// Identifies the Thumb control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_ThumbControlTypeId instead')
 const UIA_ThumbControlTypeId = 50027;
 
 /// Identifies the TitleBar control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_TitleBarControlTypeId instead')
 const UIA_TitleBarControlTypeId = 50037;
 
 /// Identifies the ToolBar control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_ToolBarControlTypeId instead')
 const UIA_ToolBarControlTypeId = 50021;
 
 /// Identifies the ToolTip control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_ToolTipControlTypeId instead')
 const UIA_ToolTipControlTypeId = 50022;
 
 /// Identifies the Tree control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_TreeControlTypeId instead')
 const UIA_TreeControlTypeId = 50023;
 
 /// Identifies the TreeItem control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_TreeItemControlTypeId instead')
 const UIA_TreeItemControlTypeId = 50024;
 
 /// Identifies the Window control type.
-@Deprecated('Use UIA_CONTROLTYPE_ID.UIA_WindowControlTypeId instead')
 const UIA_WindowControlTypeId = 50032;
 
 // -----------------------------------------------------------------------------
@@ -11525,299 +8960,241 @@ const UIA_E_TIMEOUT = 0x80131505;
 /// Identifies the AcceleratorKey property, which is a string containing the
 /// accelerator key (also called shortcut key) combinations for the automation
 /// element.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_AcceleratorKeyPropertyId instead')
 const UIA_AcceleratorKeyPropertyId = 30006;
 
 /// Identifies the AccessKey property, which is a string containing the access
 /// key character for the automation element.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_AccessKeyPropertyId instead')
 const UIA_AccessKeyPropertyId = 30007;
 
 /// Identifies the AnnotationObjects property, which is a list of annotation
 /// objects in a document, such as comment, header, footer, and so on.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_AnnotationObjectsPropertyId instead')
 const UIA_AnnotationObjectsPropertyId = 30156;
 
 /// Identifies the AnnotationTypes property, which is a list of the types of
 /// annotations in a document, such as comment, header, footer, and so on.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_AnnotationTypesPropertyId instead')
 const UIA_AnnotationTypesPropertyId = 30155;
 
 /// Identifies the AriaProperties property, which is a formatted string
 /// containing the Accessible Rich Internet Application (ARIA) property
 /// information for the automation element.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_AriaPropertiesPropertyId instead')
 const UIA_AriaPropertiesPropertyId = 30102;
 
 /// Identifies the AriaRole property, which is a string containing the
 /// Accessible Rich Internet Application (ARIA) role information for the
 /// automation element.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_AriaRolePropertyId instead')
 const UIA_AriaRolePropertyId = 30101;
 
 /// Identifies the AutomationId property, which is a string containing the UI
 /// Automation identifier (ID) for the automation element.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_AutomationIdPropertyId instead')
 const UIA_AutomationIdPropertyId = 30011;
 
 /// Identifies the BoundingRectangle property, which specifies the coordinates
 /// of the rectangle that completely encloses the automation element.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_BoundingRectanglePropertyId instead')
 const UIA_BoundingRectanglePropertyId = 30001;
 
 /// Identifies the CenterPoint property, which specifies the center X and Y
 /// point coordinates of the automation element.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_CenterPointPropertyId instead')
 const UIA_CenterPointPropertyId = 30165;
 
 /// Identifies the ClassName property, which is a string containing the class
 /// name for the automation element as assigned by the control developer.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_ClassNamePropertyId instead')
 const UIA_ClassNamePropertyId = 30012;
 
 /// Identifies the ClickablePoint property, which is a point on the automation
 /// element that can be clicked.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_ClickablePointPropertyId instead')
 const UIA_ClickablePointPropertyId = 30014;
 
 /// Identifies the ControllerFor property, which is an array of automation
 /// elements that are manipulated by the automation element that supports this
 /// property.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_ControllerForPropertyId instead')
 const UIA_ControllerForPropertyId = 30104;
 
 /// Identifies the ControlType property, which is a class that identifies the
 /// type of the automation element.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_ControlTypePropertyId instead')
 const UIA_ControlTypePropertyId = 30003;
 
 /// Identifies the Culture property, which contains a locale identifier for the
 /// automation element (for example, 0x0409 for "en-US" or English (United
 /// States)).
-@Deprecated('Use UIA_PROPERTY_ID.UIA_CulturePropertyId instead')
 const UIA_CulturePropertyId = 30015;
 
 /// Identifies the DescribedBy property, which is an array of elements that
 /// provide more information about the automation element.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_DescribedByPropertyId instead')
 const UIA_DescribedByPropertyId = 30105;
 
 /// Identifies the FillColor property, which specifies the color used to fill
 /// the automation element. This attribute is specified as a COLORREF, a 32-bit
 /// value used to specify an RGB or RGBA color.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_FillColorPropertyId instead')
 const UIA_FillColorPropertyId = 30160;
 
 /// Identifies the FillType property, which specifies the pattern used to fill
 /// the automation element, such as none, color, gradient, picture, pattern, and
 /// so on.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_FillTypePropertyId instead')
 const UIA_FillTypePropertyId = 30162;
 
 /// Identifies the FlowsFrom property, which is an array of automation elements
 /// that suggests the reading order before the current automation element.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_FlowsFromPropertyId instead')
 const UIA_FlowsFromPropertyId = 30148;
 
 /// Identifies the FlowsTo property, which is an array of automation elements
 /// that suggests the reading order after the current automation element.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_FlowsToPropertyId instead')
 const UIA_FlowsToPropertyId = 30106;
 
 /// Identifies the FrameworkId property, which is a string containing the name
 /// of the underlying UI framework that the automation element belongs to.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_FrameworkIdPropertyId instead')
 const UIA_FrameworkIdPropertyId = 30024;
 
 /// Identifies the FullDescription property, which exposes a localized string
 /// that can contain extended description text for an element.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_FullDescriptionPropertyId instead')
 const UIA_FullDescriptionPropertyId = 30159;
 
 /// Identifies the HasKeyboardFocus property, which is a Boolean value that
 /// indicates whether the automation element has keyboard focus.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_HasKeyboardFocusPropertyId instead')
 const UIA_HasKeyboardFocusPropertyId = 30008;
 
 /// Identifies the HeadingLevel property, which indicates the heading level of
 /// a UI Automation element.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_HeadingLevelPropertyId instead')
 const UIA_HeadingLevelPropertyId = 30173;
 
 /// Identifies the HelpText property, which is a help text string associated
 /// with the automation element.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_HelpTextPropertyId instead')
 const UIA_HelpTextPropertyId = 30013;
 
 /// Identifies the IsContentElement property, which is a Boolean value that
 /// specifies whether the element appears in the content view of the automation
 /// element tree.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_IsContentElementPropertyId instead')
 const UIA_IsContentElementPropertyId = 30017;
 
 /// Identifies the IsControlElement property, which is a Boolean value that
 /// specifies whether the element appears in the control view of the automation
 /// element tree.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_IsControlElementPropertyId instead')
 const UIA_IsControlElementPropertyId = 30016;
 
 /// Identifies the IsDataValidForForm property, which is a Boolean value that
 /// indicates whether the entered or selected value is valid for the form rule
 /// associated with the automation element.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_IsDataValidForFormPropertyId instead')
 const UIA_IsDataValidForFormPropertyId = 30103;
 
 /// Identifies the IsDialog property, which is a Boolean value that indicates
 /// whether the automation element is a dialog window.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_IsDialogPropertyId instead')
 const UIA_IsDialogPropertyId = 30174;
 
 /// Identifies the IsEnabled property, which is a Boolean value that indicates
 /// whether the UI item referenced by the automation element is enabled and can
 /// be interacted with.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_IsEnabledPropertyId instead')
 const UIA_IsEnabledPropertyId = 30010;
 
 /// Identifies the IsKeyboardFocusable property, which is a Boolean value that
 /// indicates whether the automation element can accept keyboard focus.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_IsKeyboardFocusablePropertyId instead')
 const UIA_IsKeyboardFocusablePropertyId = 30009;
 
 /// Identifies the IsOffscreen property, which is a Boolean value that
 /// indicates whether the automation element is entirely scrolled out of view
 /// or collapsed out of view.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_IsOffscreenPropertyId instead')
 const UIA_IsOffscreenPropertyId = 30022;
 
 /// Identifies the IsPassword property, which is a Boolean value that indicates
 /// whether the automation element contains protected content or a password.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_IsPasswordPropertyId instead')
 const UIA_IsPasswordPropertyId = 30019;
 
 /// Identifies the IsPeripheral property, which is a Boolean value that
 /// indicates whether the automation element represents peripheral UI.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_IsPeripheralPropertyId instead')
 const UIA_IsPeripheralPropertyId = 30150;
 
 /// Identifies the IsRequiredForForm property, which is a Boolean value that
 /// indicates whether the automation element is required to be filled out on a
 /// form.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_IsRequiredForFormPropertyId instead')
 const UIA_IsRequiredForFormPropertyId = 30025;
 
 /// Identifies the ItemStatus property, which is a text string describing the
 /// status of an item of the automation element.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_ItemStatusPropertyId instead')
 const UIA_ItemStatusPropertyId = 30026;
 
 /// Identifies the ItemType property, which is a text string describing the
 /// type of the automation element.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_ItemTypePropertyId instead')
 const UIA_ItemTypePropertyId = 30021;
 
 /// Identifies the LabeledBy property, which is an automation element that
 /// contains the text label for this element.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_LabeledByPropertyId instead')
 const UIA_LabeledByPropertyId = 30018;
 
 /// Identifies the LandmarkType property, which is a Landmark Type Identifier
 /// associated with an element.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_LandmarkTypePropertyId instead')
 const UIA_LandmarkTypePropertyId = 30157;
 
 /// Identifies the Level property, which is a 1-based integer associated with
 /// an automation element.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_LevelPropertyId instead')
 const UIA_LevelPropertyId = 30154;
 
 /// Identifies the LiveSetting property, which is supported by an automation
 /// element that represents a live region.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_LiveSettingPropertyId instead')
 const UIA_LiveSettingPropertyId = 30135;
 
 /// Identifies the LocalizedControlType property, which is a text string
 /// describing the type of control that the automation element represents.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_LocalizedControlTypePropertyId instead')
 const UIA_LocalizedControlTypePropertyId = 30004;
 
 /// Identifies the LocalizedLandmarkType, which is a text string describing the
 /// type of landmark that the automation element represents.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_LocalizedLandmarkTypePropertyId instead')
 const UIA_LocalizedLandmarkTypePropertyId = 30158;
 
 /// Identifies the Name property, which is a string that holds the name of the
 /// automation element.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_NamePropertyId instead')
 const UIA_NamePropertyId = 30005;
 
 /// Identifies the NativeWindowHandle property, which is an integer that
 /// represents the handle (HWND) of the automation element window, if it
 /// exists; otherwise, this property is 0.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_NativeWindowHandlePropertyId instead')
 const UIA_NativeWindowHandlePropertyId = 30020;
 
 /// Identifies the OptimizeForVisualContent property, which is a Boolean value
 /// that indicates whether the provider exposes only elements that are visible.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_OptimizeForVisualContentPropertyId instead',
-)
 const UIA_OptimizeForVisualContentPropertyId = 30111;
 
 /// Identifies the Orientation property, which indicates the orientation of the
 /// control represented by the automation element.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_OrientationPropertyId instead')
 const UIA_OrientationPropertyId = 30023;
 
 /// Identifies the OutlineColor property, which specifies the color used for
 /// the outline of the automation element.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_OutlineColorPropertyId instead')
 const UIA_OutlineColorPropertyId = 30161;
 
 /// Identifies the OutlineThickness property, which specifies the width for the
 /// outline of the automation element.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_OutlineThicknessPropertyId instead')
 const UIA_OutlineThicknessPropertyId = 30164;
 
 /// Identifies the PositionInSet property, which is a 1-based integer
 /// associated with an automation element.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_PositionInSetPropertyId instead')
 const UIA_PositionInSetPropertyId = 30152;
 
 /// Identifies the ProcessId property, which is an integer representing the
 /// process identifier (ID) of the automation element.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_ProcessIdPropertyId instead')
 const UIA_ProcessIdPropertyId = 30002;
 
 /// Identifies the ProviderDescription property, which is a formatted string
 /// containing the source information of the UI Automation provider for the
 /// automation element, including proxy information.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_ProviderDescriptionPropertyId instead')
 const UIA_ProviderDescriptionPropertyId = 30107;
 
 /// Identifies the Rotation property, which specifies the angle of rotation in
 /// unspecified units.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_RotationPropertyId instead')
 const UIA_RotationPropertyId = 30166;
 
 /// Identifies the RuntimeId property, which is an array of integers
 /// representing the identifier for an automation element.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_RuntimeIdPropertyId instead')
 const UIA_RuntimeIdPropertyId = 30000;
 
 /// Identifies the Size property, which specifies the width and height of the
 /// automation element.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_SizePropertyId instead')
 const UIA_SizePropertyId = 30167;
 
 /// Identifies the SizeOfSet property, which is a 1-based integer associated
 /// with an automation element.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_SizeOfSetPropertyId instead')
 const UIA_SizeOfSetPropertyId = 30153;
 
 /// Identifies the VisualEffects property, which is a bit field that specifies
 /// effects on the automation element, such as shadow, reflection, glow, soft
 /// edges, or bevel.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_VisualEffectsPropertyId instead')
 const UIA_VisualEffectsPropertyId = 30163;
 
 // -----------------------------------------------------------------------------
@@ -11825,383 +9202,255 @@ const UIA_VisualEffectsPropertyId = 30163;
 // -----------------------------------------------------------------------------
 
 /// Identifies the AnnotationTypeId property of the Annotation control pattern.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_AnnotationAnnotationTypeIdPropertyId instead',
-)
 const UIA_AnnotationAnnotationTypeIdPropertyId = 30113;
 
 /// Identifies the AnnotationTypeName property of the Annotation control
 /// pattern.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_AnnotationAnnotationTypeNamePropertyId instead',
-)
 const UIA_AnnotationAnnotationTypeNamePropertyId = 30114;
 
 /// Identifies the Author property of the Annotation control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_AnnotationAuthorPropertyId instead')
 const UIA_AnnotationAuthorPropertyId = 30115;
 
 /// Identifies the DateTime property of the Annotation control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_AnnotationDateTimePropertyId instead')
 const UIA_AnnotationDateTimePropertyId = 30116;
 
 /// Identifies the Target property of the Annotation control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_AnnotationTargetPropertyId instead')
 const UIA_AnnotationTargetPropertyId = 30117;
 
 /// Identifies the DockPosition property of the Dock control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_DockDockPositionPropertyId instead')
 const UIA_DockDockPositionPropertyId = 30069;
 
 /// Identifies the DropEffect property of the Drag control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_DragDropEffectPropertyId instead')
 const UIA_DragDropEffectPropertyId = 30139;
 
 /// Identifies the DropEffects property of the Drag control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_DragDropEffectsPropertyId instead')
 const UIA_DragDropEffectsPropertyId = 30140;
 
 /// Identifies the IsGrabbed property of the Drag control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_DragIsGrabbedPropertyId instead')
 const UIA_DragIsGrabbedPropertyId = 30138;
 
 /// Identifies the GrabbedItems property of the Drag control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_DragGrabbedItemsPropertyId instead')
 const UIA_DragGrabbedItemsPropertyId = 30144;
 
 /// Identifies the DropTargetEffect property of the DropTarget control pattern.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_DropTargetDropTargetEffectPropertyId instead',
-)
 const UIA_DropTargetDropTargetEffectPropertyId = 30142;
 
 /// Identifies the DropTargetEffects property of the DropTarget control pattern.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_DropTargetDropTargetEffectsPropertyId instead',
-)
 const UIA_DropTargetDropTargetEffectsPropertyId = 30143;
 
 /// Identifies the ExpandCollapseState property of the ExpandCollapse control
 /// pattern.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_ExpandCollapseExpandCollapseStatePropertyId instead',
-)
 const UIA_ExpandCollapseExpandCollapseStatePropertyId = 30070;
 
 /// Identifies the ColumnCount property of the Grid control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_GridColumnCountPropertyId instead')
 const UIA_GridColumnCountPropertyId = 30063;
 
 /// Identifies the Column property of the GridItem control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_GridItemColumnPropertyId instead')
 const UIA_GridItemColumnPropertyId = 30065;
 
 /// Identifies the ColumnSpan property of the GridItem control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_GridItemColumnSpanPropertyId instead')
 const UIA_GridItemColumnSpanPropertyId = 30067;
 
 /// Identifies the ContainingGrid property of the GridItem control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_GridItemContainingGridPropertyId instead')
 const UIA_GridItemContainingGridPropertyId = 30068;
 
 /// Identifies the Row property of the GridItem control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_GridItemRowPropertyId instead')
 const UIA_GridItemRowPropertyId = 30064;
 
 /// Identifies the RowSpan property of the GridItem control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_GridItemRowSpanPropertyId instead')
 const UIA_GridItemRowSpanPropertyId = 30066;
 
 /// Identifies the RowCount property of the Grid control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_GridRowCountPropertyId instead')
 const UIA_GridRowCountPropertyId = 30062;
 
 /// Identifies the ChildId property of the LegacyIAccessible control pattern.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_LegacyIAccessibleChildIdPropertyId instead',
-)
 const UIA_LegacyIAccessibleChildIdPropertyId = 30091;
 
 /// Identifies the DefaultAction property of the LegacyIAccessible control
 /// pattern.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_LegacyIAccessibleDefaultActionPropertyId instead',
-)
 const UIA_LegacyIAccessibleDefaultActionPropertyId = 30100;
 
 /// Identifies the Description property of the LegacyIAccessible control
 /// pattern.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_LegacyIAccessibleDescriptionPropertyId instead',
-)
 const UIA_LegacyIAccessibleDescriptionPropertyId = 30094;
 
 /// Identifies the Help property of the LegacyIAccessible control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_LegacyIAccessibleHelpPropertyId instead')
 const UIA_LegacyIAccessibleHelpPropertyId = 30097;
 
 /// Identifies the KeyboardShortcut property of the LegacyIAccessible control
 /// pattern.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_LegacyIAccessibleKeyboardShortcutPropertyId instead',
-)
 const UIA_LegacyIAccessibleKeyboardShortcutPropertyId = 30098;
 
 /// Identifies the Name property of the LegacyIAccessible control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_LegacyIAccessibleNamePropertyId instead')
 const UIA_LegacyIAccessibleNamePropertyId = 30092;
 
 /// Identifies the Role property of the LegacyIAccessible control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_LegacyIAccessibleRolePropertyId instead')
 const UIA_LegacyIAccessibleRolePropertyId = 30095;
 
 /// Identifies the Selection property of the LegacyIAccessible control pattern.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_LegacyIAccessibleSelectionPropertyId instead',
-)
 const UIA_LegacyIAccessibleSelectionPropertyId = 30099;
 
 /// Identifies the State property of the LegacyIAccessible control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_LegacyIAccessibleStatePropertyId instead')
 const UIA_LegacyIAccessibleStatePropertyId = 30096;
 
 /// Identifies the Value property of the LegacyIAccessible control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_LegacyIAccessibleValuePropertyId instead')
 const UIA_LegacyIAccessibleValuePropertyId = 30093;
 
 /// Identifies the CurrentView property of the MultipleView control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_MultipleViewCurrentViewPropertyId instead')
 const UIA_MultipleViewCurrentViewPropertyId = 30071;
 
 /// Identifies the SupportedViews property of the MultipleView control pattern.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_MultipleViewSupportedViewsPropertyId instead',
-)
 const UIA_MultipleViewSupportedViewsPropertyId = 30072;
 
 /// Identifies the IsReadOnly property of the RangeValue control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_RangeValueIsReadOnlyPropertyId instead')
 const UIA_RangeValueIsReadOnlyPropertyId = 30048;
 
 /// Identifies the LargeChange property of the RangeValue control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_RangeValueLargeChangePropertyId instead')
 const UIA_RangeValueLargeChangePropertyId = 30051;
 
 /// Identifies the Maximum property of the RangeValue control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_RangeValueMaximumPropertyId instead')
 const UIA_RangeValueMaximumPropertyId = 30050;
 
 /// Identifies the Minimum property of the RangeValue control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_RangeValueMinimumPropertyId instead')
 const UIA_RangeValueMinimumPropertyId = 30049;
 
 /// Identifies the SmallChange property of the RangeValue control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_RangeValueSmallChangePropertyId instead')
 const UIA_RangeValueSmallChangePropertyId = 30052;
 
 /// Identifies the Value property of the RangeValue control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_RangeValueValuePropertyId instead')
 const UIA_RangeValueValuePropertyId = 30047;
 
 /// Identifies the HorizontallyScrollable property of the Scroll control
 /// pattern.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_ScrollHorizontallyScrollablePropertyId instead',
-)
 const UIA_ScrollHorizontallyScrollablePropertyId = 30057;
 
 /// Identifies the HorizontalScrollPercent property of the Scroll control
 /// pattern.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_ScrollHorizontalScrollPercentPropertyId instead',
-)
 const UIA_ScrollHorizontalScrollPercentPropertyId = 30053;
 
 /// Identifies the HorizontalViewSize property of the Scroll control pattern.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_ScrollHorizontalViewSizePropertyId instead',
-)
 const UIA_ScrollHorizontalViewSizePropertyId = 30054;
 
 /// Identifies the VerticallyScrollable property of the Scroll control pattern.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_ScrollVerticallyScrollablePropertyId instead',
-)
 const UIA_ScrollVerticallyScrollablePropertyId = 30058;
 
 /// Identifies the VerticalScrollPercent property of the Scroll control pattern.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_ScrollVerticalScrollPercentPropertyId instead',
-)
 const UIA_ScrollVerticalScrollPercentPropertyId = 30055;
 
 /// Identifies the VerticalViewSize property of the Scroll control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_ScrollVerticalViewSizePropertyId instead')
 const UIA_ScrollVerticalViewSizePropertyId = 30056;
 
 /// Identifies the CanSelectMultiple property of the Selection control pattern.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_SelectionCanSelectMultiplePropertyId instead',
-)
 const UIA_SelectionCanSelectMultiplePropertyId = 30060;
 
 /// Identifies the IsSelectionRequired property of the Selection control
 /// pattern.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_SelectionIsSelectionRequiredPropertyId instead',
-)
 const UIA_SelectionIsSelectionRequiredPropertyId = 30061;
 
 /// Identifies the Selection property of the Selection control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_SelectionSelectionPropertyId instead')
 const UIA_SelectionSelectionPropertyId = 30059;
 
 /// Identifies the IsSelected property of the SelectionItem control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_SelectionItemIsSelectedPropertyId instead')
 const UIA_SelectionItemIsSelectedPropertyId = 30079;
 
 /// Identifies the SelectionContainer property of the SelectionItem control
 /// pattern.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_SelectionItemSelectionContainerPropertyId instead',
-)
 const UIA_SelectionItemSelectionContainerPropertyId = 30080;
 
 /// Identifies the Formula property of the SpreadsheetItem control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_SpreadsheetItemFormulaPropertyId instead')
 const UIA_SpreadsheetItemFormulaPropertyId = 30129;
 
 /// Identifies the AnnotationObjects property of the SpreadsheetItem control
 /// pattern.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_SpreadsheetItemAnnotationObjectsPropertyId instead',
-)
 const UIA_SpreadsheetItemAnnotationObjectsPropertyId = 30130;
 
 /// Identifies the AnnotationTypes property of the SpreadsheetItem control
 /// pattern.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_SpreadsheetItemAnnotationTypesPropertyId instead',
-)
 const UIA_SpreadsheetItemAnnotationTypesPropertyId = 30131;
 
 /// Identifies the ExtendedProperties property of the Styles control pattern.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_StylesExtendedPropertiesPropertyId instead',
-)
 const UIA_StylesExtendedPropertiesPropertyId = 30126;
 
 /// Identifies the FillColor property of the Styles control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_StylesFillColorPropertyId instead')
 const UIA_StylesFillColorPropertyId = 30122;
 
 /// Identifies the FillPatternColor property of the Styles control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_StylesFillPatternColorPropertyId instead')
 const UIA_StylesFillPatternColorPropertyId = 30125;
 
 /// Identifies the FillPatternStyle property of the Styles control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_StylesFillPatternStylePropertyId instead')
 const UIA_StylesFillPatternStylePropertyId = 30123;
 
 /// Identifies the Shape property of the Styles control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_StylesShapePropertyId instead')
 const UIA_StylesShapePropertyId = 30124;
 
 /// Identifies the StyleId property of the Styles control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_StylesStyleIdPropertyId instead')
 const UIA_StylesStyleIdPropertyId = 30120;
 
 /// Identifies the StyleName property of the Styles control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_StylesStyleNamePropertyId instead')
 const UIA_StylesStyleNamePropertyId = 30121;
 
 /// Identifies the ColumnHeaders property of the Table control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_TableColumnHeadersPropertyId instead')
 const UIA_TableColumnHeadersPropertyId = 30082;
 
 /// Identifies the ColumnHeaderItems property of the TableItem control pattern.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_TableItemColumnHeaderItemsPropertyId instead',
-)
 const UIA_TableItemColumnHeaderItemsPropertyId = 30085;
 
 /// Identifies the RowHeaders property of the Table control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_TableRowHeadersPropertyId instead')
 const UIA_TableRowHeadersPropertyId = 30081;
 
 /// Identifies the RowOrColumnMajor property of the Table control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_TableRowOrColumnMajorPropertyId instead')
 const UIA_TableRowOrColumnMajorPropertyId = 30083;
 
 /// Identifies the RowHeaderItems property of the TableItem control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_TableItemRowHeaderItemsPropertyId instead')
 const UIA_TableItemRowHeaderItemsPropertyId = 30084;
 
 /// Identifies the ToggleState property of the Toggle control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_ToggleToggleStatePropertyId instead')
 const UIA_ToggleToggleStatePropertyId = 30086;
 
 /// Identifies the CanMove property of the Transform control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_TransformCanMovePropertyId instead')
 const UIA_TransformCanMovePropertyId = 30087;
 
 /// Identifies the CanResize property of the Transform control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_TransformCanResizePropertyId instead')
 const UIA_TransformCanResizePropertyId = 30088;
 
 /// Identifies the CanRotate property of the Transform control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_TransformCanRotatePropertyId instead')
 const UIA_TransformCanRotatePropertyId = 30089;
 
 /// Identifies the CanZoom property of the Transform control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_Transform2CanZoomPropertyId instead')
 const UIA_Transform2CanZoomPropertyId = 30133;
 
 /// Identifies the ZoomLevel property of the Transform control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_Transform2ZoomLevelPropertyId instead')
 const UIA_Transform2ZoomLevelPropertyId = 30145;
 
 /// Identifies the ZoomMaximum property of the Transform control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_Transform2ZoomMaximumPropertyId instead')
 const UIA_Transform2ZoomMaximumPropertyId = 30147;
 
 /// Identifies the ZoomMinimum property of the Transform control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_Transform2ZoomMinimumPropertyId instead')
 const UIA_Transform2ZoomMinimumPropertyId = 30146;
 
 /// Identifies the IsReadOnly property of the Value control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_ValueIsReadOnlyPropertyId instead')
 const UIA_ValueIsReadOnlyPropertyId = 30046;
 
 /// Identifies the Value property of the Value control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_ValueValuePropertyId instead')
 const UIA_ValueValuePropertyId = 30045;
 
 /// Identifies the CanMaximize property of the Window control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_WindowCanMaximizePropertyId instead')
 const UIA_WindowCanMaximizePropertyId = 30073;
 
 /// Identifies the CanMinimize property of the Window control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_WindowCanMinimizePropertyId instead')
 const UIA_WindowCanMinimizePropertyId = 30074;
 
 /// Identifies the IsModal property of the Window control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_WindowIsModalPropertyId instead')
 const UIA_WindowIsModalPropertyId = 30077;
 
 /// Identifies the IsTopmost property of the Window control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_WindowIsTopmostPropertyId instead')
 const UIA_WindowIsTopmostPropertyId = 30078;
 
 /// Identifies the WindowInteractionState property of the Window control
 ///  pattern.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_WindowWindowInteractionStatePropertyId instead',
-)
 const UIA_WindowWindowInteractionStatePropertyId = 30076;
 
 /// Identifies the WindowVisualState property of the Window control pattern.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_WindowWindowVisualStatePropertyId instead')
 const UIA_WindowWindowVisualStatePropertyId = 30075;
 
 // -----------------------------------------------------------------------------
@@ -12211,342 +9460,159 @@ const UIA_WindowWindowVisualStatePropertyId = 30075;
 /// Identifies the IsAnnotationPatternAvailable property, which indicates
 /// whether the Annotation control pattern is available for the automation
 /// element.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_IsAnnotationPatternAvailablePropertyId instead',
-)
 const UIA_IsAnnotationPatternAvailablePropertyId = 30118;
 
 /// Identifies the IsCustomNavigationPatternAvailable property, which indicates
 /// whether the CustomNavigation control pattern is available for the automation
 /// element.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_IsCustomNavigationPatternAvailablePropertyId instead',
-)
 const UIA_IsCustomNavigationPatternAvailablePropertyId = 30151;
 
 /// Identifies the IsDockPatternAvailable property, which indicates whether the
 /// Dock control pattern is available for the automation element.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_IsDockPatternAvailablePropertyId instead')
 const UIA_IsDockPatternAvailablePropertyId = 30027;
 
 /// Identifies the IsDragPatternAvailable property, which indicates whether the
 /// Drag control pattern is available for the automation element.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_IsDragPatternAvailablePropertyId instead')
 const UIA_IsDragPatternAvailablePropertyId = 30137;
 
 /// Identifies the IsDropTargetPatternAvailable property, which indicates
 /// whether the DropTarget control pattern is available for the automation
 /// element.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_IsDropTargetPatternAvailablePropertyId instead',
-)
 const UIA_IsDropTargetPatternAvailablePropertyId = 30141;
 
 /// Identifies the IsExpandCollapsePatternAvailable property, which indicates
 /// whether the ExpandCollapse control pattern is available for the automation
 /// element.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_IsExpandCollapsePatternAvailablePropertyId instead',
-)
 const UIA_IsExpandCollapsePatternAvailablePropertyId = 30028;
 
 /// Identifies the IsGridItemPatternAvailable property, which indicates whether
 /// the GridItem control pattern is available for the automation element.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_IsGridItemPatternAvailablePropertyId instead',
-)
 const UIA_IsGridItemPatternAvailablePropertyId = 30029;
 
 /// Identifies the IsGridPatternAvailable property, which indicates whether the
 /// Grid control pattern is available for the automation element.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_IsGridPatternAvailablePropertyId instead')
 const UIA_IsGridPatternAvailablePropertyId = 30030;
 
 /// Identifies the IsInvokePatternAvailable property, which indicates whether
 /// the Invoke control pattern is available for the automation element.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_IsInvokePatternAvailablePropertyId instead',
-)
 const UIA_IsInvokePatternAvailablePropertyId = 30031;
 
 /// Identifies the IsItemContainerPatternAvailable property, which indicates
 /// whether the ItemContainer control pattern is available for the automation
 /// element.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_IsItemContainerPatternAvailablePropertyId instead',
-)
 const UIA_IsItemContainerPatternAvailablePropertyId = 30108;
 
 /// Identifies the IsLegacyIAccessiblePatternAvailable property, which
 /// indicates whether the LegacyIAccessible control pattern is available for
 /// the automation element.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_IsLegacyIAccessiblePatternAvailablePropertyId instead',
-)
 const UIA_IsLegacyIAccessiblePatternAvailablePropertyId = 30090;
 
 /// Identifies the IsMultipleViewPatternAvailable property, which indicates
 /// whether the MultipleView control pattern is available for the automation
 /// element.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_IsMultipleViewPatternAvailablePropertyId instead',
-)
 const UIA_IsMultipleViewPatternAvailablePropertyId = 30032;
 
 /// Identifies the IsObjectModelPatternAvailable property, which indicates
 /// whether the ObjectModel control pattern is available for the automation
 /// element.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_IsObjectModelPatternAvailablePropertyId instead',
-)
 const UIA_IsObjectModelPatternAvailablePropertyId = 30112;
 
 /// Identifies the IsRangeValuePatternAvailable property, which indicates
 /// whether the RangeValue control pattern is available for the automation
 /// element.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_IsRangeValuePatternAvailablePropertyId instead',
-)
 const UIA_IsRangeValuePatternAvailablePropertyId = 30033;
 
 /// Identifies the IsScrollItemPatternAvailable property, which indicates
 /// whether the ScrollItem control pattern is available for the automation
 /// element.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_IsScrollItemPatternAvailablePropertyId instead',
-)
 const UIA_IsScrollItemPatternAvailablePropertyId = 30035;
 
 /// Identifies the IsScrollPatternAvailable property, which indicates whether
 /// the Scroll control pattern is available for the automation element.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_IsScrollPatternAvailablePropertyId instead',
-)
 const UIA_IsScrollPatternAvailablePropertyId = 30034;
 
 /// Identifies the IsSelectionItemPatternAvailable property, which indicates
 /// whether the SelectionItem control pattern is available for the automation
 /// element.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_IsSelectionItemPatternAvailablePropertyId instead',
-)
 const UIA_IsSelectionItemPatternAvailablePropertyId = 30036;
 
 /// Identifies the IsSelectionPatternAvailable property, which indicates
 /// whether the Selection control pattern is available for the automation
 /// element.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_IsSelectionPatternAvailablePropertyId instead',
-)
 const UIA_IsSelectionPatternAvailablePropertyId = 30037;
 
 /// Identifies the IsSpreadsheetPatternAvailable property, which indicates
 /// whether the Spreadsheet control pattern is available for the automation
 /// element.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_IsSpreadsheetPatternAvailablePropertyId instead',
-)
 const UIA_IsSpreadsheetPatternAvailablePropertyId = 30128;
 
 /// Identifies the IsSpreadsheetItemPatternAvailable property, which indicates
 /// whether the SpreadsheetItem control pattern is available for the automation
 /// element.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_IsSpreadsheetItemPatternAvailablePropertyId instead',
-)
 const UIA_IsSpreadsheetItemPatternAvailablePropertyId = 30132;
 
 /// Identifies the IsStylesPatternAvailable property, which indicates whether
 /// the Styles control pattern is available for the automation element.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_IsStylesPatternAvailablePropertyId instead',
-)
 const UIA_IsStylesPatternAvailablePropertyId = 30127;
 
 /// Identifies the IsSynchronizedInputPatternAvailable property, which
 /// indicates whether the SynchronizedInput control pattern is available for
 /// the automation element.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_IsSynchronizedInputPatternAvailablePropertyId instead',
-)
 const UIA_IsSynchronizedInputPatternAvailablePropertyId = 30110;
 
 /// Identifies the IsTableItemPatternAvailable property, which indicates
 /// whether the TableItem control pattern is available for the automation
 /// element.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_IsTableItemPatternAvailablePropertyId instead',
-)
 const UIA_IsTableItemPatternAvailablePropertyId = 30039;
 
 /// Identifies the IsTablePatternAvailable property, which indicates whether
 /// the Table control pattern is available for the automation element.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_IsTablePatternAvailablePropertyId instead')
 const UIA_IsTablePatternAvailablePropertyId = 30038;
 
 /// Identifies the IsTextChildPatternAvailable property, which indicates
 /// whether the TextChild control pattern is available for the automation
 /// element.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_IsTextChildPatternAvailablePropertyId instead',
-)
 const UIA_IsTextChildPatternAvailablePropertyId = 30136;
 
 /// Identifies the IsTextEditPatternAvailable property, which indicates whether
 /// the TextEdit control pattern is available for the automation element.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_IsTextEditPatternAvailablePropertyId instead',
-)
 const UIA_IsTextEditPatternAvailablePropertyId = 30149;
 
 /// Identifies the IsTextPatternAvailable property, which indicates whether the
 /// Text control pattern is available for the automation element.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_IsTextPatternAvailablePropertyId instead')
 const UIA_IsTextPatternAvailablePropertyId = 30040;
 
 /// Identifies the IsTextPattern2Available property, which indicates whether
 /// version two of the Text control pattern is available for the automation
 /// element.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_IsTextPattern2AvailablePropertyId instead')
 const UIA_IsTextPattern2AvailablePropertyId = 30119;
 
 /// Identifies the IsTogglePatternAvailable property, which indicates whether
 /// the Toggle control pattern is available for the automation element.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_IsTogglePatternAvailablePropertyId instead',
-)
 const UIA_IsTogglePatternAvailablePropertyId = 30041;
 
 /// Identifies the IsTransformPatternAvailable property, which indicates
 /// whether the Transform control pattern is available for the automation
 /// element.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_IsTransformPatternAvailablePropertyId instead',
-)
 const UIA_IsTransformPatternAvailablePropertyId = 30042;
 
 /// Identifies the IsTransformPattern2Available property, which indicates
 /// whether version two of the Transform control pattern is available for the
 /// automation element.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_IsTransformPattern2AvailablePropertyId instead',
-)
 const UIA_IsTransformPattern2AvailablePropertyId = 30134;
 
 /// Identifies the IsValuePatternAvailable property, which indicates whether
 /// the Value control pattern is available for the automation element.
-@Deprecated('Use UIA_PROPERTY_ID.UIA_IsValuePatternAvailablePropertyId instead')
 const UIA_IsValuePatternAvailablePropertyId = 30043;
 
 /// Identifies the IsVirtualizedItemPatternAvailable property, which indicates
 /// whether the VirtualizedItem control pattern is available for the automation
 /// element.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_IsVirtualizedItemPatternAvailablePropertyId instead',
-)
 const UIA_IsVirtualizedItemPatternAvailablePropertyId = 30109;
 
 /// Identifies the IsWindowPatternAvailable property, which indicates whether
 /// the Window control pattern is available for the automation element.
-@Deprecated(
-  'Use UIA_PROPERTY_ID.UIA_IsWindowPatternAvailablePropertyId instead',
-)
 const UIA_IsWindowPatternAvailablePropertyId = 30044;
-
-/// Possible settings for the Automatic Logon Policy.
-///
-/// {@category enum}
-class WinHttpRequestAutoLogonPolicy {
-  /// An authenticated log on, using the default credentials, is performed for
-  /// all requests.
-  static const AutoLogonPolicy_Always = 0;
-
-  /// An authenticated log on, using the default credentials, is performed only
-  /// for requests on the local intranet. The local intranet is considered to
-  /// be any server on the proxy bypass list in the current proxy configuration.
-  static const AutoLogonPolicy_OnlyIfBypassProxy = 1;
-
-  /// Authentication is not used automatically.
-  static const AutoLogonPolicy_Never = 2;
-}
-
-/// Options that can be set or retrieved for the current WinHTTP session.
-///
-/// {@category enum}
-class WinHttpRequestOption {
-  /// Sets or retrieves a VARIANT that contains the user agent string.
-  static const WinHttpRequestOption_UserAgentString = 0;
-
-  /// Retrieves a VARIANT that contains the URL of the resource.
-  static const WinHttpRequestOption_URL = 1;
-
-  /// Sets or retrieves a VARIANT that identifies the code page for the URL
-  /// string.
-  static const WinHttpRequestOption_URLCodePage = 2;
-
-  /// Sets or retrieves a VARIANT that indicates whether percent characters in
-  /// the URL string are converted to an escape sequence.
-  static const WinHttpRequestOption_EscapePercentInURL = 3;
-
-  /// Sets or retrieves a VARIANT that indicates which server certificate
-  /// errors should be ignored.
-  static const WinHttpRequestOption_SslErrorIgnoreFlags = 4;
-
-  /// Sets a VARIANT that specifies the client certificate that is sent to a
-  /// server for authentication.
-  static const WinHttpRequestOption_SelectCertificate = 5;
-
-  /// Sets or retrieves a VARIANT that indicates whether requests are
-  /// automatically redirected when the server specifies a new location for the
-  /// resource.
-  static const WinHttpRequestOption_EnableRedirects = 6;
-
-  /// Sets or retrieves a VARIANT that indicates whether unsafe characters in
-  /// the path and query components of a URL are converted to escape sequences.
-  static const WinHttpRequestOption_UrlEscapeDisable = 7;
-
-  /// Sets or retrieves a VARIANT that indicates whether unsafe characters in
-  /// the query component of the URL are converted to escape sequences.
-  static const WinHttpRequestOption_UrlEscapeDisableQuery = 8;
-
-  /// Sets or retrieves a VARIANT that indicates which secure protocols can be
-  /// used.
-  static const WinHttpRequestOption_SecureProtocols = 9;
-
-  /// Sets or retrieves a VARIANT that indicates whether tracing is currently
-  /// enabled.
-  static const WinHttpRequestOption_EnableTracing = 10;
-
-  /// Controls whether the WinHttpRequest object temporarily reverts client
-  /// impersonation for the duration of the SSL certificate authentication
-  /// operations.
-  static const WinHttpRequestOption_RevertImpersonationOverSsl = 11;
-
-  /// Controls whether or not WinHTTP allows redirects.
-  static const WinHttpRequestOption_EnableHttpsToHttpRedirects = 12;
-
-  /// Enables or disables support for Passport authentication.
-  static const WinHttpRequestOption_EnablePassportAuthentication = 13;
-
-  /// Sets or retrieves the maximum number of redirects that WinHTTP follows;
-  /// the default is 10.
-  static const WinHttpRequestOption_MaxAutomaticRedirects = 14;
-
-  /// Sets or retrieves a bound set on the maximum size of the header portion
-  /// of the server's response.
-  static const WinHttpRequestOption_MaxResponseHeaderSize = 15;
-
-  /// Sets or retrieves a bound on the amount of data that will be drained from
-  /// responses in order to reuse a connection.
-  static const WinHttpRequestOption_MaxResponseDrainSize = 16;
-
-  /// Sets or retrieves a boolean value that indicates whether HTTP/1.1 or
-  /// HTTP/1.0 should be used.
-  static const WinHttpRequestOption_EnableHttp1_1 = 17;
-
-  /// Enables server certificate revocation checking during SSL negotiation.
-  static const WinHttpRequestOption_EnableCertificateRevocationCheck = 18;
-}
 
 // -----------------------------------------------------------------------------
 // WinHttpRequest PROXYSETTING flags
@@ -12624,7 +9690,6 @@ const DBT_USERDEFINED = 0xFFFF;
 // -----------------------------------------------------------------------------
 
 /// Allocates fixed memory. The return value is a pointer.
-@Deprecated('Use GLOBAL_ALLOC_FLAGS.GMEM_FIXED instead')
 const GMEM_FIXED = 0x0000;
 
 /// Allocates movable memory. Memory blocks are never moved in physical memory,
@@ -12633,292 +9698,17 @@ const GMEM_FIXED = 0x0000;
 /// GlobalLock function.
 ///
 /// This value cannot be combined with GMEM_FIXED.
-@Deprecated('Use GLOBAL_ALLOC_FLAGS.GMEM_MOVEABLE instead')
+@Deprecated('Use GMEM_MOVEABLE instead')
 const GMEM_MOVABLE = 0x0002;
 
 /// Initializes memory contents to zero.
-@Deprecated('Use GLOBAL_ALLOC_FLAGS.GMEM_ZEROINIT instead')
 const GMEM_ZEROINIT = 0x0040;
 
 /// Combines GMEM_FIXED and GMEM_ZEROINIT.
-@Deprecated('Use GLOBAL_ALLOC_FLAGS.GPTR instead')
 const GPTR = 0x0040;
 
 /// Combines GMEM_MOVABLE and GMEM_ZEROINIT.
-@Deprecated('Use GLOBAL_ALLOC_FLAGS.GHND instead')
 const GHND = 0x0042;
-
-/// Indicates the kind of system information to be retrieved.
-/// {@category enum}
-class SYSTEM_INFORMATION_CLASS {
-  static const SystemBasicInformation = 0;
-  static const SystemPerformanceInformation = 2;
-  static const SystemTimeOfDayInformation = 3;
-  static const SystemProcessInformation = 5;
-  static const SystemProcessorPerformanceInformation = 8;
-  static const SystemInterruptInformation = 23;
-  static const SystemExceptionInformation = 33;
-  static const SystemRegistryQuotaInformation = 37;
-  static const SystemLookasideInformation = 45;
-  static const SystemCodeIntegrityInformation = 103;
-  static const SystemPolicyInformation = 134;
-}
-
-/// The SpeechAudioFormatType enumeration lists the supported stream formats.
-/// {@category enum}
-class SpeechAudioFormatType {
-  static const SAFTDefault = -1;
-  static const SAFTNoAssignedFormat = 0;
-  static const SAFTText = 1;
-  static const SAFTNonStandardFormat = 2;
-  static const SAFTExtendedAudioFormat = 3;
-
-  // Standard PCM wave formats
-  static const SAFT8kHz8BitMono = 4;
-  static const SAFT8kHz8BitStereo = 5;
-  static const SAFT8kHz16BitMono = 6;
-  static const SAFT8kHz16BitStereo = 7;
-  static const SAFT11kHz8BitMono = 8;
-  static const SAFT11kHz8BitStereo = 9;
-  static const SAFT11kHz16BitMono = 10;
-  static const SAFT11kHz16BitStereo = 11;
-  static const SAFT12kHz8BitMono = 12;
-  static const SAFT12kHz8BitStereo = 13;
-  static const SAFT12kHz16BitMono = 14;
-  static const SAFT12kHz16BitStereo = 15;
-  static const SAFT16kHz8BitMono = 16;
-  static const SAFT16kHz8BitStereo = 17;
-  static const SAFT16kHz16BitMono = 18;
-  static const SAFT16kHz16BitStereo = 19;
-  static const SAFT22kHz8BitMono = 20;
-  static const SAFT22kHz8BitStereo = 21;
-  static const SAFT22kHz16BitMono = 22;
-  static const SAFT22kHz16BitStereo = 23;
-  static const SAFT24kHz8BitMono = 24;
-  static const SAFT24kHz8BitStereo = 25;
-  static const SAFT24kHz16BitMono = 26;
-  static const SAFT24kHz16BitStereo = 27;
-  static const SAFT32kHz8BitMono = 28;
-  static const SAFT32kHz8BitStereo = 29;
-  static const SAFT32kHz16BitMono = 30;
-  static const SAFT32kHz16BitStereo = 31;
-  static const SAFT44kHz8BitMono = 32;
-  static const SAFT44kHz8BitStereo = 33;
-  static const SAFT44kHz16BitMono = 34;
-  static const SAFT44kHz16BitStereo = 35;
-  static const SAFT48kHz8BitMono = 36;
-  static const SAFT48kHz8BitStereo = 37;
-  static const SAFT48kHz16BitMono = 38;
-  static const SAFT48kHz16BitStereo = 39;
-
-  // TrueSpeech format
-  static const SAFTTrueSpeech_8kHz1BitMono = 40;
-
-  // A-Law formats
-  static const SAFTCCITT_ALaw_8kHzMono = 41;
-  static const SAFTCCITT_ALaw_8kHzStereo = 42;
-  static const SAFTCCITT_ALaw_11kHzMono = 43;
-  static const SAFTCCITT_ALaw_11kHzStereo = 4;
-  static const SAFTCCITT_ALaw_22kHzMono = 44;
-  static const SAFTCCITT_ALaw_22kHzStereo = 45;
-  static const SAFTCCITT_ALaw_44kHzMono = 46;
-  static const SAFTCCITT_ALaw_44kHzStereo = 47;
-
-  // u-Law formats
-  static const SAFTCCITT_uLaw_8kHzMono = 48;
-  static const SAFTCCITT_uLaw_8kHzStereo = 49;
-  static const SAFTCCITT_uLaw_11kHzMono = 50;
-  static const SAFTCCITT_uLaw_11kHzStereo = 51;
-  static const SAFTCCITT_uLaw_22kHzMono = 52;
-  static const SAFTCCITT_uLaw_22kHzStereo = 53;
-  static const SAFTCCITT_uLaw_44kHzMono = 54;
-  static const SAFTCCITT_uLaw_44kHzStereo = 55;
-  static const SAFTADPCM_8kHzMono = 56;
-  static const SAFTADPCM_8kHzStereo = 57;
-  static const SAFTADPCM_11kHzMono = 58;
-  static const SAFTADPCM_11kHzStereo = 59;
-  static const SAFTADPCM_22kHzMono = 60;
-  static const SAFTADPCM_22kHzStereo = 61;
-  static const SAFTADPCM_44kHzMono = 62;
-  static const SAFTADPCM_44kHzStereo = 63;
-
-  // GSM 6.10 formats
-  static const SAFTGSM610_8kHzMono = 64;
-  static const SAFTGSM610_11kHzMono = 65;
-  static const SAFTGSM610_22kHzMono = 66;
-  static const SAFTGSM610_44kHzMono = 67;
-
-  // Other formats
-  static const SAFTNUM_FORMATS = 68;
-}
-
-/// The SpeechRunState enumeration lists the running states of a TTS voice.
-/// {@category enum}
-class SpeechRunState {
-  /// The voice has finished rendering all queued phrases.
-  static const SRSEDone = 1;
-
-  /// The SpVoice currently claims the audio queue.
-  static const SRSEIsSpeaking = 2;
-}
-
-/// The SpeechStreamSeekPositionType enumeration lists the types of positioning
-/// from which a Seek method can be performed.
-/// {@category enum}
-class SpeechStreamSeekPositionType {
-  /// Calculates the stream offset relative from the start of the stream.
-  static const SSSPTRelativeToStart = 0;
-
-  /// Calculates the stream offset relative from the current position.
-  static const SSSPTRelativeToCurrentPosition = 1;
-
-  /// Calculates the stream offset relative from the end of the stream.
-  static const SSSPTRelativeToEnd = 2;
-}
-
-/// The SpeechVoiceEvents enumeration lists the types of events which a
-/// text-to-speech (TTS) engine can send to an SpVoice object.
-/// {@category enum}
-class SpeechVoiceEvents {
-  /// Represents the StartStream event, which occurs when the engine begins
-  /// speaking a stream.
-  static const SVEStartInputStream = 2;
-
-  /// Represents the EndStream event, which occurs when the engine encounters
-  /// the end of a stream while speaking.
-  static const SVEEndInputStream = 4;
-
-  /// Represents the VoiceChange event, which occurs when the engine encounters
-  /// a change of Voice while speaking.
-  static const SVEVoiceChange = 8;
-
-  /// Represents the Bookmark event, which occurs when the engine encounters a
-  /// bookmark while speaking.
-  static const SVEBookmark = 16;
-
-  /// Represents the WordBoundary event, which occurs when the engine completes
-  /// a word while speaking.
-  static const SVEWordBoundary = 32;
-
-  /// Represents the Phoneme event, which occurs when the engine completes a
-  /// phoneme while speaking.
-  static const SVEPhoneme = 64;
-
-  /// Represents the SentenceBoundary event, which occurs when the engine
-  /// completes a sentence while speaking.
-  static const SVESentenceBoundary = 128;
-
-  /// Represents the Viseme event, which occurs when the engine completes a
-  /// viseme while speaking.
-  static const SVEViseme = 256;
-
-  /// Represents the AudioLevel event, which occurs when the engine has
-  /// completed an audio level change while speaking.
-  static const SVEAudioLevel = 512;
-
-  /// Represents a private engine event.
-  static const SVEPrivate = 32768;
-
-  /// Represents all speech voice events.
-  static const SVEAllEvents = 33790;
-}
-
-/// The SpeechVoicePriority enumeration lists the possible Priority settings of
-/// an SpVoice object.
-/// {@category enum}
-class SpeechVoicePriority {
-  /// The priority of a normal voice. Text streams spoken by a normal voice are
-  /// added to the end of the voice queue. A voice with SVPNormal priority
-  /// cannot interrupt another voice.
-  static const SVPNormal = 0;
-
-  /// The priority of an alert voice. Text streams spoken by an alert voice are
-  /// inserted into the voice queue ahead of normal voice streams. An alert
-  /// voice will interrupt a normal voice, which will resume speaking when the
-  /// alert voice has finished speaking.
-  static const SVPAlert = 1;
-
-  /// The priority of an over voice. Text streams spoken by an over voice go
-  /// into the voice queue ahead of normal and alert streams. An over voice will
-  /// not interrupt, but speaks over (mixes with) the voices of lower
-  /// priorities.
-  static const SVPOver = 2;
-}
-
-/// The SpeechVoiceSpeakFlags enumeration lists flags that control the
-/// SpVoice.Speak method.
-/// {@category enum}
-class SpeechVoiceSpeakFlags {
-  // SpVoice Flags
-
-  /// Specifies that the default settings should be used. The defaults are:
-  /// * To speak the given text string synchronously (override with
-  ///   SVSFlagsAsync),
-  /// * Not to purge pending speak requests (override with
-  ///   SVSFPurgeBeforeSpeak),
-  /// * To parse the text as XML only if the first character is a
-  ///   left-angle-bracket (override with SVSFIsXML or SVSFIsNotXML),
-  /// * Not to persist global XML state changes across speak calls (override
-  ///   with SVSFPersistXML), and
-  /// * Not to expand punctuation characters into words (override with
-  ///   SVSFNLPSpeakPunc).
-  static const SVSFDefault = 0;
-
-  /// Specifies that the Speak call should be asynchronous. That is, it will
-  /// return immediately after the speak request is queued.
-  static const SVSFlagsAsync = 1;
-
-  /// Purges all pending speak requests prior to this speak call.
-  static const SVSFPurgeBeforeSpeak = 2;
-
-  /// The string passed to the Speak method is a file name rather than text. As
-  /// a result, the string itself is not spoken but rather the file the path
-  /// that points to is spoken.
-  static const SVSFIsFilename = 4;
-
-  /// The input text will be parsed for XML markup.
-  static const SVSFIsXML = 8;
-
-  /// The input text will not be parsed for XML markup.
-  static const SVSFIsNotXML = 16;
-
-  /// Global state changes in the XML markup will persist across speak calls.
-  static const SVSFPersistXML = 32;
-
-  // Normalizer Flags
-
-  /// Punctuation characters should be expanded into words (e.g. "This is it."
-  /// would become "This is it period").
-  static const SVSFNLPSpeakPunc = 64;
-
-  // TTS Format
-
-  /// Force XML parsing as MS SAPI.
-  static const SVSFParseSapi = 128;
-
-  /// Force XML parsing as W3C SSML.
-  static const SVSFParseSsml = 256;
-
-  /// The TTS XML format is auto-detected. This is the default if none of these
-  /// TTS XML format values are present in the bit-field.
-  static const SVSFParseAutoDetect = 0;
-
-  // Masks
-
-  /// Flags handled by SAPI (as opposed to the text-to-speech engine) are set in
-  /// this mask.
-  static const SVSFNLPMask = 64;
-
-  /// SVSFParseSapi|SVSFParseSsml
-  static const SVSFParseMask = 384;
-
-  /// This is an existing SAPI 5.1 mask that has every flag bit set. In 5.3, it
-  /// has been extended to contain SVSFParseMask.
-  static const SVSFVoiceMask = 511;
-
-  /// This mask has every unused bit set.
-  static const SVSFUnusedFlags = -512;
-}
 
 /// Only session notifications involving the session attached to by the window
 /// identified by the _hWnd_ parameter value are to be received.
@@ -13030,3 +9820,3533 @@ const DWM_BB_BLURREGION = 2;
 
 /// A value for the `fTransitionOnMaximized` member has been specified.
 const DWM_BB_TRANSITIONONMAXIMIZED = 4;
+
+/// Specifies the variant types.
+///
+/// {@category enum}
+class VARENUM {
+  @Deprecated('Use VT_EMPTY instead')
+  static const VT_EMPTY = 0;
+  @Deprecated('Use VT_NULL instead')
+  static const VT_NULL = 1;
+  @Deprecated('Use VT_I2 instead')
+  static const VT_I2 = 2;
+  @Deprecated('Use VT_I4 instead')
+  static const VT_I4 = 3;
+  @Deprecated('Use VT_R4 instead')
+  static const VT_R4 = 4;
+  @Deprecated('Use VT_R8 instead')
+  static const VT_R8 = 5;
+  @Deprecated('Use VT_CY instead')
+  static const VT_CY = 6;
+  @Deprecated('Use VT_DATE instead')
+  static const VT_DATE = 7;
+  @Deprecated('Use VT_BSTR instead')
+  static const VT_BSTR = 8;
+  @Deprecated('Use VT_DISPATCH instead')
+  static const VT_DISPATCH = 9;
+  @Deprecated('Use VT_ERROR instead')
+  static const VT_ERROR = 10;
+  @Deprecated('Use VT_BOOL instead')
+  static const VT_BOOL = 11;
+  @Deprecated('Use VT_VARIANT instead')
+  static const VT_VARIANT = 12;
+  @Deprecated('Use VT_UNKNOWN instead')
+  static const VT_UNKNOWN = 13;
+  @Deprecated('Use VT_DECIMAL instead')
+  static const VT_DECIMAL = 14;
+  @Deprecated('Use VT_I1 instead')
+  static const VT_I1 = 16;
+  @Deprecated('Use VT_UI1 instead')
+  static const VT_UI1 = 17;
+  @Deprecated('Use VT_UI2 instead')
+  static const VT_UI2 = 18;
+  @Deprecated('Use VT_UI4 instead')
+  static const VT_UI4 = 19;
+  @Deprecated('Use VT_I8 instead')
+  static const VT_I8 = 20;
+  @Deprecated('Use VT_UI8 instead')
+  static const VT_UI8 = 21;
+  @Deprecated('Use VT_INT instead')
+  static const VT_INT = 22;
+  @Deprecated('Use VT_UINT instead')
+  static const VT_UINT = 23;
+  @Deprecated('Use VT_VOID instead')
+  static const VT_VOID = 24;
+  @Deprecated('Use VT_HRESULT instead')
+  static const VT_HRESULT = 25;
+  @Deprecated('Use VT_PTR instead')
+  static const VT_PTR = 26;
+  @Deprecated('Use VT_SAFEARRAY instead')
+  static const VT_SAFEARRAY = 27;
+  @Deprecated('Use VT_CARRAY instead')
+  static const VT_CARRAY = 28;
+  @Deprecated('Use VT_USERDEFINED instead')
+  static const VT_USERDEFINED = 29;
+  @Deprecated('Use VT_LPSTR instead')
+  static const VT_LPSTR = 30;
+  @Deprecated('Use VT_LPWSTR instead')
+  static const VT_LPWSTR = 31;
+  @Deprecated('Use VT_RECORD instead')
+  static const VT_RECORD = 36;
+  @Deprecated('Use VT_INT_PTR instead')
+  static const VT_INT_PTR = 37;
+  @Deprecated('Use VT_UINT_PTR instead')
+  static const VT_UINT_PTR = 38;
+  @Deprecated('Use VT_FILETIME instead')
+  static const VT_FILETIME = 64;
+  @Deprecated('Use VT_BLOB instead')
+  static const VT_BLOB = 65;
+  @Deprecated('Use VT_STREAM instead')
+  static const VT_STREAM = 66;
+  @Deprecated('Use VT_STORAGE instead')
+  static const VT_STORAGE = 67;
+  @Deprecated('Use VT_STREAMED_OBJECT instead')
+  static const VT_STREAMED_OBJECT = 68;
+  @Deprecated('Use VT_STORED_OBJECT instead')
+  static const VT_STORED_OBJECT = 69;
+  @Deprecated('Use VT_BLOB_OBJECT instead')
+  static const VT_BLOB_OBJECT = 70;
+  @Deprecated('Use VT_CF instead')
+  static const VT_CF = 71;
+  @Deprecated('Use VT_CLSID instead')
+  static const VT_CLSID = 72;
+  @Deprecated('Use VT_VERSIONED_STREAM instead')
+  static const VT_VERSIONED_STREAM = 73;
+  @Deprecated('Use VT_BSTR_BLOB instead')
+  static const VT_BSTR_BLOB = 0xfff;
+  @Deprecated('Use VT_VECTOR instead')
+  static const VT_VECTOR = 0x1000;
+  @Deprecated('Use VT_ARRAY instead')
+  static const VT_ARRAY = 0x2000;
+  @Deprecated('Use VT_BYREF instead')
+  static const VT_BYREF = 0x4000;
+  @Deprecated('Use VT_RESERVED instead')
+  static const VT_RESERVED = 0x8000;
+  @Deprecated('Use VT_ILLEGAL instead')
+  static const VT_ILLEGAL = 0xffff;
+  @Deprecated('Use VT_ILLEGALMASKED instead')
+  static const VT_ILLEGALMASKED = 0xfff;
+  @Deprecated('Use VT_TYPEMASK instead')
+  static const VT_TYPEMASK = 0xff;
+}
+
+/// Describes a monitor's color temperature.
+///
+/// {@category enum}
+class MC_COLOR_TEMPERATURE {
+  @Deprecated('Use MC_COLOR_TEMPERATURE_UNKNOWN instead')
+  static const MC_COLOR_TEMPERATURE_UNKNOWN = 0;
+  @Deprecated('Use MC_COLOR_TEMPERATURE_4000K instead')
+  static const MC_COLOR_TEMPERATURE_4000K = 1;
+  @Deprecated('Use MC_COLOR_TEMPERATURE_5000K instead')
+  static const MC_COLOR_TEMPERATURE_5000K = 2;
+  @Deprecated('Use MC_COLOR_TEMPERATURE_6500K instead')
+  static const MC_COLOR_TEMPERATURE_6500K = 3;
+  @Deprecated('Use MC_COLOR_TEMPERATURE_7500K instead')
+  static const MC_COLOR_TEMPERATURE_7500K = 4;
+  @Deprecated('Use MC_COLOR_TEMPERATURE_8200K instead')
+  static const MC_COLOR_TEMPERATURE_8200K = 5;
+  @Deprecated('Use MC_COLOR_TEMPERATURE_9300K instead')
+  static const MC_COLOR_TEMPERATURE_9300K = 6;
+  @Deprecated('Use MC_COLOR_TEMPERATURE_10000K instead')
+  static const MC_COLOR_TEMPERATURE_10000K = 7;
+  @Deprecated('Use MC_COLOR_TEMPERATURE_11500K instead')
+  static const MC_COLOR_TEMPERATURE_11500K = 8;
+}
+
+/// Identifies monitor display technologies.
+///
+/// {@category enum}
+class MC_DISPLAY_TECHNOLOGY_TYPE {
+  @Deprecated('Use MC_SHADOW_MASK_CATHODE_RAY_TUBE instead')
+  static const MC_SHADOW_MASK_CATHODE_RAY_TUBE = 0;
+  @Deprecated('Use MC_APERTURE_GRILL_CATHODE_RAY_TUBE instead')
+  static const MC_APERTURE_GRILL_CATHODE_RAY_TUBE = 1;
+  @Deprecated('Use MC_THIN_FILM_TRANSISTOR instead')
+  static const MC_THIN_FILM_TRANSISTOR = 2;
+  @Deprecated('Use MC_LIQUID_CRYSTAL_ON_SILICON instead')
+  static const MC_LIQUID_CRYSTAL_ON_SILICON = 3;
+  @Deprecated('Use MC_PLASMA instead')
+  static const MC_PLASMA = 4;
+  @Deprecated('Use MC_ORGANIC_LIGHT_EMITTING_DIODE instead')
+  static const MC_ORGANIC_LIGHT_EMITTING_DIODE = 5;
+  @Deprecated('Use MC_ELECTROLUMINESCENT instead')
+  static const MC_ELECTROLUMINESCENT = 6;
+  @Deprecated('Use MC_MICROELECTROMECHANICAL instead')
+  static const MC_MICROELECTROMECHANICAL = 7;
+  @Deprecated('Use MC_FIELD_EMISSION_DEVICE instead')
+  static const MC_FIELD_EMISSION_DEVICE = 8;
+}
+
+/// Specifies whether to set or get a monitor's red, green, or blue drive.
+///
+/// {@category enum}
+class MC_DRIVE_TYPE {
+  @Deprecated('Use MC_RED_DRIVE instead')
+  static const MC_RED_DRIVE = 0;
+  @Deprecated('Use MC_GREEN_DRIVE instead')
+  static const MC_GREEN_DRIVE = 1;
+  @Deprecated('Use MC_BLUE_DRIVE instead')
+  static const MC_BLUE_DRIVE = 2;
+}
+
+/// Specifies whether to get or set a monitor's red, green, or blue gain.
+///
+/// {@category enum}
+class MC_GAIN_TYPE {
+  @Deprecated('Use MC_RED_GAIN instead')
+  static const MC_RED_GAIN = 0;
+  @Deprecated('Use MC_GREEN_GAIN instead')
+  static const MC_GREEN_GAIN = 1;
+  @Deprecated('Use MC_BLUE_GAIN instead')
+  static const MC_BLUE_GAIN = 2;
+}
+
+/// Specifies whether to get or set the vertical or horizontal position of a
+/// monitor's display area.
+///
+/// {@category enum}
+class MC_POSITION_TYPE {
+  @Deprecated('Use MC_HORIZONTAL_POSITION instead')
+  static const MC_HORIZONTAL_POSITION = 0;
+  @Deprecated('Use MC_VERTICAL_POSITION instead')
+  static const MC_VERTICAL_POSITION = 1;
+}
+
+/// Specifies whether to get or set the width or height of a monitor's display
+/// area.
+///
+/// {@category enum}
+class MC_SIZE_TYPE {
+  @Deprecated('Use MC_WIDTH instead')
+  static const MC_WIDTH = 0;
+  @Deprecated('Use MC_HEIGHT instead')
+  static const MC_HEIGHT = 1;
+}
+
+/// Identifies the dots per inch (dpi) setting for a thread, process, or window.
+///
+/// {@category enum}
+class DPI_AWARENESS {
+  /// Invalid DPI awareness. This is an invalid DPI awareness value.
+  @Deprecated('Use DPI_AWARENESS_INVALID instead')
+  static const DPI_AWARENESS_INVALID = -1;
+
+  /// DPI unaware. This process does not scale for DPI changes and is always
+  /// assumed to have a scale factor of 100% (96 DPI). It will be automatically
+  /// scaled by the system on any other DPI setting.
+  @Deprecated('Use DPI_AWARENESS_UNAWARE instead')
+  static const DPI_AWARENESS_UNAWARE = 0;
+
+  /// System DPI aware. This process does not scale for DPI changes. It will
+  /// query for the DPI once and use that value for the lifetime of the process.
+  /// If the DPI changes, the process will not adjust to the new DPI value. It
+  /// will be automatically scaled up or down by the system when the DPI changes
+  /// from the system value.
+  @Deprecated('Use DPI_AWARENESS_SYSTEM_AWARE instead')
+  static const DPI_AWARENESS_SYSTEM_AWARE = 1;
+
+  /// Per monitor DPI aware. This process checks for the DPI when it is created
+  /// and adjusts the scale factor whenever the DPI changes. These processes are
+  /// not automatically scaled by the system.
+  @Deprecated('Use DPI_AWARENESS_PER_MONITOR_AWARE instead')
+  static const DPI_AWARENESS_PER_MONITOR_AWARE = 2;
+}
+
+/// Identifies the DPI hosting behavior for a window. This behavior allows
+/// windows created in the thread to host child windows with a different
+/// DPI_AWARENESS_CONTEXT.
+///
+/// {@category enum}
+class DPI_HOSTING_BEHAVIOR {
+  /// Invalid DPI hosting behavior. This usually occurs if the previous
+  /// SetThreadDpiHostingBehavior call used an invalid parameter.
+  @Deprecated('Use DPI_HOSTING_BEHAVIOR_INVALID instead')
+  static const DPI_HOSTING_BEHAVIOR_INVALID = -1;
+
+  /// Default DPI hosting behavior. The associated window behaves as normal, and
+  /// cannot create or re-parent child windows with a different
+  /// DPI_AWARENESS_CONTEXT.
+  @Deprecated('Use DPI_HOSTING_BEHAVIOR_DEFAULT instead')
+  static const DPI_HOSTING_BEHAVIOR_DEFAULT = 0;
+
+  /// Mixed DPI hosting behavior. This enables the creation and re-parenting of
+  /// child windows with different DPI_AWARENESS_CONTEXT. These child windows
+  /// will be independently scaled by the OS.
+  @Deprecated('Use DPI_HOSTING_BEHAVIOR_MIXED instead')
+  static const DPI_HOSTING_BEHAVIOR_MIXED = 1;
+}
+
+/// Identifies dots per inch (dpi) awareness values. DPI awareness indicates how
+/// much scaling work an application performs for DPI versus how much is done by
+/// the system.
+///
+/// {@category enum}
+class PROCESS_DPI_AWARENESS {
+  /// DPI unaware. This app does not scale for DPI changes and is always assumed
+  /// to have a scale factor of 100% (96 DPI). It will be automatically scaled
+  /// by the system on any other DPI setting.
+  @Deprecated('Use PROCESS_DPI_UNAWARE instead')
+  static const PROCESS_DPI_UNAWARE = 0;
+
+  /// System DPI aware. This app does not scale for DPI changes. It will query
+  /// for the DPI once and use that value for the lifetime of the app. If the
+  /// DPI changes, the app will not adjust to the new DPI value. It will be
+  /// automatically scaled up or down by the system when the DPI changes from
+  /// the system value.
+  @Deprecated('Use PROCESS_SYSTEM_DPI_AWARE instead')
+  static const PROCESS_SYSTEM_DPI_AWARE = 1;
+
+  /// Per monitor DPI aware. This app checks for the DPI when it is created and
+  /// adjusts the scale factor whenever the DPI changes. These applications are
+  /// not automatically scaled by the system.
+  @Deprecated('Use PROCESS_PER_MONITOR_DPI_AWARE instead')
+  static const PROCESS_PER_MONITOR_DPI_AWARE = 2;
+}
+
+/// Identifies the dots per inch (dpi) setting for a monitor.
+///
+/// {@category enum}
+class MONITOR_DPI_TYPE {
+  /// The effective DPI. This value should be used when determining the correct
+  /// scale factor for scaling UI elements. This incorporates the scale factor
+  /// set by the user for this specific display.
+  @Deprecated('Use MDT_EFFECTIVE_DPI instead')
+  static const MDT_EFFECTIVE_DPI = 0;
+
+  /// The angular DPI. This DPI ensures rendering at a compliant angular
+  /// resolution on the screen. This does not include the scale factor set by
+  /// the user for this specific display.
+  @Deprecated('Use MDT_ANGULAR_DPI instead')
+  static const MDT_ANGULAR_DPI = 1;
+
+  /// The raw DPI. This value is the linear DPI of the screen as measured on the
+  /// screen itself. Use this value when you want to read the pixel density and
+  /// not the recommended scaling setting. This does not include the scale
+  /// factor set by the user for this specific display and is not guaranteed to
+  /// be a supported DPI value.
+  @Deprecated('Use MDT_RAW_DPI instead')
+  static const MDT_RAW_DPI = 2;
+
+  /// The default DPI setting for a monitor is MDT_EFFECTIVE_DPI.
+  @Deprecated('Use MDT_DEFAULT instead')
+  static const MDT_DEFAULT = MDT_EFFECTIVE_DPI;
+}
+
+/// Describes per-monitor DPI scaling behavior overrides for child windows
+/// within dialogs. The values in this enumeration are bitfields and can be
+/// combined.
+///
+/// {@category enum}
+class DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS {
+  /// The default behavior of the dialog manager. The dialog managed will update
+  /// the font, size, and position of the child window on DPI changes.
+  @Deprecated('Use DCDC_DEFAULT instead')
+  static const DCDC_DEFAULT = 0x0000;
+
+  /// Prevents the dialog manager from sending an updated font to the child
+  /// window via WM_SETFONT in response to a DPI change.
+  @Deprecated('Use DCDC_DISABLE_FONT_UPDATE instead')
+  static const DCDC_DISABLE_FONT_UPDATE = 0x0001;
+
+  /// Prevents the dialog manager from resizing and repositioning the child
+  /// window in response to a DPI change.
+  @Deprecated('Use DCDC_DISABLE_RELAYOUT instead')
+  static const DCDC_DISABLE_RELAYOUT = 0x0002;
+}
+
+/// In Per Monitor v2 contexts, dialogs will automatically respond to DPI
+/// changes by resizing themselves and re-computing the positions of their child
+/// windows (here referred to as re-layouting). This enum works in conjunction
+/// with SetDialogDpiChangeBehavior in order to override the default DPI scaling
+/// behavior for dialogs.
+///
+/// {@category enum}
+class DIALOG_DPI_CHANGE_BEHAVIORS {
+  /// The default behavior of the dialog manager. In response to a DPI change,
+  /// the dialog manager will re-layout each control, update the font on each
+  /// control, resize the dialog, and update the dialog's own font.
+  @Deprecated('Use DDC_DEFAULT instead')
+  static const DDC_DEFAULT = 0x0000;
+
+  /// Prevents the dialog manager from responding to WM_GETDPISCALEDSIZE and
+  /// WM_DPICHANGED, disabling all default DPI scaling behavior.
+  @Deprecated('Use DDC_DISABLE_ALL instead')
+  static const DDC_DISABLE_ALL = 0x0001;
+
+  /// Prevents the dialog manager from resizing the dialog in response to a DPI
+  /// change.
+  @Deprecated('Use DDC_DISABLE_RESIZE instead')
+  static const DDC_DISABLE_RESIZE = 0x0002;
+
+  /// Prevents the dialog manager from re-layouting all of the dialogue's
+  /// immediate children HWNDs in response to a DPI change.
+  @Deprecated('Use DDC_DISABLE_CONTROL_RELAYOUT instead')
+  static const DDC_DISABLE_CONTROL_RELAYOUT = 0x0004;
+}
+
+/// The BLUETOOTH_AUTHENTICATION_METHOD enumeration defines the supported
+/// authentication types during device pairing.
+///
+/// {@category enum}
+class BLUETOOTH_AUTHENTICATION_METHOD {
+  @Deprecated('Use BLUETOOTH_AUTHENTICATION_METHOD_LEGACY instead')
+  static const BLUETOOTH_AUTHENTICATION_METHOD_LEGACY = 0;
+  @Deprecated('Use BLUETOOTH_AUTHENTICATION_METHOD_OOB instead')
+  static const BLUETOOTH_AUTHENTICATION_METHOD_OOB = 1;
+  @Deprecated('Use BLUETOOTH_AUTHENTICATION_METHOD_NUMERIC_COMPARISON instead')
+  static const BLUETOOTH_AUTHENTICATION_METHOD_NUMERIC_COMPARISON = 2;
+  @Deprecated(
+    'Use BLUETOOTH_AUTHENTICATION_METHOD_PASSKEY_NOTIFICATION instead',
+  )
+  static const BLUETOOTH_AUTHENTICATION_METHOD_PASSKEY_NOTIFICATION = 3;
+  @Deprecated('Use BLUETOOTH_AUTHENTICATION_METHOD_PASSKEY instead')
+  static const BLUETOOTH_AUTHENTICATION_METHOD_PASSKEY = 4;
+}
+
+/// The BLUETOOTH_AUTHENTICATION_REQUIREMENTS enumeration specifies the 'Man in
+/// the Middle' protection required for authentication.
+///
+/// {@category enum}
+class BLUETOOTH_AUTHENTICATION_REQUIREMENTS {
+  @Deprecated('Use BLUETOOTH_MITM_ProtectionNotRequired instead')
+  static const BLUETOOTH_MITM_ProtectionNotRequired = 0;
+  @Deprecated('Use BLUETOOTH_MITM_ProtectionRequired instead')
+  static const BLUETOOTH_MITM_ProtectionRequired = 1;
+  @Deprecated('Use BLUETOOTH_MITM_ProtectionNotRequiredBonding instead')
+  static const BLUETOOTH_MITM_ProtectionNotRequiredBonding = 2;
+  @Deprecated('Use BLUETOOTH_MITM_ProtectionRequiredBonding instead')
+  static const BLUETOOTH_MITM_ProtectionRequiredBonding = 3;
+  @Deprecated('Use BLUETOOTH_MITM_ProtectionNotRequiredGeneralBonding instead')
+  static const BLUETOOTH_MITM_ProtectionNotRequiredGeneralBonding = 4;
+  @Deprecated('Use BLUETOOTH_MITM_ProtectionRequiredGeneralBonding instead')
+  static const BLUETOOTH_MITM_ProtectionRequiredGeneralBonding = 5;
+  @Deprecated('Use BLUETOOTH_MITM_ProtectionNotDefined instead')
+  static const BLUETOOTH_MITM_ProtectionNotDefined = 6;
+}
+
+/// The BLUETOOTH_IO_CAPABILITY enumeration defines the input/output
+/// capabilities of a Bluetooth Device.
+///
+/// {@category enum}
+class BLUETOOTH_IO_CAPABILITY {
+  @Deprecated('Use BLUETOOTH_IO_CAPABILITY_DISPLAYONLY instead')
+  static const BLUETOOTH_IO_CAPABILITY_DISPLAYONLY = 0;
+  @Deprecated('Use BLUETOOTH_IO_CAPABILITY_DISPLAYYESNO instead')
+  static const BLUETOOTH_IO_CAPABILITY_DISPLAYYESNO = 1;
+  @Deprecated('Use BLUETOOTH_IO_CAPABILITY_KEYBOARDONLY instead')
+  static const BLUETOOTH_IO_CAPABILITY_KEYBOARDONLY = 2;
+  @Deprecated('Use BLUETOOTH_IO_CAPABILITY_NOINPUTNOOUTPUT instead')
+  static const BLUETOOTH_IO_CAPABILITY_NOINPUTNOOUTPUT = 3;
+  @Deprecated('Use BLUETOOTH_IO_CAPABILITY_UNDEFINED instead')
+  static const BLUETOOTH_IO_CAPABILITY_UNDEFINED = 4;
+}
+
+/// Common dialog constants & enumerations
+/// Defines the set of options available to an Open or Save dialog.
+///
+/// {@category enum}
+class FILEOPENDIALOGOPTIONS {
+  @Deprecated('Use FOS_OVERWRITEPROMPT instead')
+  static const FOS_OVERWRITEPROMPT = 0x2;
+  @Deprecated('Use FOS_STRICTFILETYPES instead')
+  static const FOS_STRICTFILETYPES = 0x4;
+  @Deprecated('Use FOS_NOCHANGEDIR instead')
+  static const FOS_NOCHANGEDIR = 0x8;
+  @Deprecated('Use FOS_PICKFOLDERS instead')
+  static const FOS_PICKFOLDERS = 0x20;
+  @Deprecated('Use FOS_FORCEFILESYSTEM instead')
+  static const FOS_FORCEFILESYSTEM = 0x40;
+  @Deprecated('Use FOS_ALLNONSTORAGEITEMS instead')
+  static const FOS_ALLNONSTORAGEITEMS = 0x80;
+  @Deprecated('Use FOS_NOVALIDATE instead')
+  static const FOS_NOVALIDATE = 0x100;
+  @Deprecated('Use FOS_ALLOWMULTISELECT instead')
+  static const FOS_ALLOWMULTISELECT = 0x200;
+  @Deprecated('Use FOS_PATHMUSTEXIST instead')
+  static const FOS_PATHMUSTEXIST = 0x800;
+  @Deprecated('Use FOS_FILEMUSTEXIST instead')
+  static const FOS_FILEMUSTEXIST = 0x1000;
+  @Deprecated('Use FOS_CREATEPROMPT instead')
+  static const FOS_CREATEPROMPT = 0x2000;
+  @Deprecated('Use FOS_SHAREAWARE instead')
+  static const FOS_SHAREAWARE = 0x4000;
+  @Deprecated('Use FOS_NOREADONLYRETURN instead')
+  static const FOS_NOREADONLYRETURN = 0x8000;
+  @Deprecated('Use FOS_NOTESTFILECREATE instead')
+  static const FOS_NOTESTFILECREATE = 0x10000;
+  @Deprecated('Use FOS_HIDEMRUPLACES instead')
+  static const FOS_HIDEMRUPLACES = 0x20000;
+  @Deprecated('Use FOS_HIDEPINNEDPLACES instead')
+  static const FOS_HIDEPINNEDPLACES = 0x40000;
+  @Deprecated('Use FOS_NODEREFERENCELINKS instead')
+  static const FOS_NODEREFERENCELINKS = 0x100000;
+  @Deprecated('Use FOS_OKBUTTONNEEDSINTERACTION instead')
+  static const FOS_OKBUTTONNEEDSINTERACTION = 0x200000;
+  @Deprecated('Use FOS_DONTADDTORECENT instead')
+  static const FOS_DONTADDTORECENT = 0x2000000;
+  @Deprecated('Use FOS_FORCESHOWHIDDEN instead')
+  static const FOS_FORCESHOWHIDDEN = 0x10000000;
+  @Deprecated('Use FOS_DEFAULTNOMINIMODE instead')
+  static const FOS_DEFAULTNOMINIMODE = 0x20000000;
+  @Deprecated('Use FOS_FORCEPREVIEWPANEON instead')
+  static const FOS_FORCEPREVIEWPANEON = 0x40000000;
+  @Deprecated('Use FOS_SUPPORTSTREAMABLEITEMS instead')
+  static const FOS_SUPPORTSTREAMABLEITEMS = 0x80000000;
+}
+
+/// Desktop wallpaper slideshow settings for shuffling images.
+///
+/// {@category enum}
+class DESKTOP_SLIDESHOW_OPTIONS {
+  /// Shuffle is enabled; the images are shown in a random order.
+  @Deprecated('Use DSO_SHUFFLEIMAGES instead')
+  static const DSO_SHUFFLEIMAGES = 0x1;
+}
+
+/// Gets the current status of the slideshow.
+///
+/// {@category enum}
+class DESKTOP_SLIDESHOW_STATE {
+  /// Slideshows are enabled.
+  @Deprecated('Use DSS_ENABLED instead')
+  static const DSS_ENABLED = 0x1;
+
+  /// A slideshow is currently configured.
+  @Deprecated('Use DSS_SLIDESHOW instead')
+  static const DSS_SLIDESHOW = 0x2;
+
+  /// A remote session has temporarily disabled the slideshow.
+  @Deprecated('Use DSS_DISABLED_BY_REMOTE_SESSION instead')
+  static const DSS_DISABLED_BY_REMOTE_SESSION = 0x4;
+}
+
+/// The direction that the slideshow should advance.
+///
+/// {@category enum}
+class DESKTOP_SLIDESHOW_DIRECTION {
+  /// Advance the slideshow forward.
+  @Deprecated('Use DSD_FORWARD instead')
+  static const DSD_FORWARD = 0;
+
+  /// Advance the slideshow backward.
+  @Deprecated('Use DSD_BACKWARD instead')
+  static const DSD_BACKWARD = 1;
+}
+
+/// Specifies how the desktop wallpaper should be displayed.
+///
+/// {@category enum}
+class DESKTOP_WALLPAPER_POSITION {
+  /// Center the image; do not stretch.
+  @Deprecated('Use DWPOS_CENTER instead')
+  static const DWPOS_CENTER = 0;
+
+  /// Tile the image across all monitors.
+  @Deprecated('Use DWPOS_TILE instead')
+  static const DWPOS_TILE = 1;
+
+  /// Stretch the image to exactly fit on the monitor.
+  @Deprecated('Use DWPOS_STRETCH instead')
+  static const DWPOS_STRETCH = 2;
+
+  /// Stretch the image to exactly the height or width of the monitor without
+  /// changing its aspect ratio or cropping the image.
+  @Deprecated('Use DWPOS_FIT instead')
+  static const DWPOS_FIT = 3;
+
+  /// Stretch the image to fill the screen, cropping the image as necessary to
+  /// avoid letterbox bars.
+  @Deprecated('Use DWPOS_FILL instead')
+  static const DWPOS_FILL = 4;
+
+  /// Spans a single image across all monitors attached to the system.
+  @Deprecated('Use DWPOS_SPAN instead')
+  static const DWPOS_SPAN = 5;
+}
+
+/// Determines the concurrency model used for incoming calls to the objects
+/// created by this thread.
+///
+/// {@category enum}
+class RO_INIT_TYPE {
+  @Deprecated('Use RO_INIT_SINGLETHREADED instead')
+  static const RO_INIT_SINGLETHREADED = 0;
+
+  /// Initializes the thread for multi-threaded concurrency. The current thread
+  /// is initialized in the MTA.
+  @Deprecated('Use RO_INIT_MULTITHREADED instead')
+  static const RO_INIT_MULTITHREADED = 1;
+}
+
+/// Flags used to support design mode, debugging, and testing scenarios.
+class ACTIVATEOPTIONS {
+  /// No flags are set.
+  @Deprecated('Use AO_NONE instead')
+  static const AO_NONE = 0;
+
+  /// The app is being activated for design mode, so it can't create its normal
+  /// window. The creation of the app's window must be done by design tools that
+  /// load the necessary components by communicating with a designer-specified
+  /// service on the site chain established through the activation manager. Note
+  /// that this means that the splash screen seen during regular activations
+  /// won't be seen.
+  @Deprecated('Use AO_DESIGNMODE instead')
+  static const AO_DESIGNMODE = 0x1;
+
+  /// Do not display an error dialog if the app fails to activate.
+  @Deprecated('Use AO_NOERRORUI instead')
+  static const AO_NOERRORUI = 0x2;
+
+  /// Do not display the app's splash screen when the app is activated. You must
+  /// enable debug mode on the app's package when you use this flag; otherwise,
+  /// the PLM will terminate the app after a few seconds.
+  @Deprecated('Use AO_NOSPLASHSCREEN instead')
+  static const AO_NOSPLASHSCREEN = 0x4;
+
+  /// The application is being activated in prelaunch mode. This value is
+  /// supported starting in Windows 10.
+  @Deprecated('Use AO_PRELAUNCH instead')
+  static const AO_PRELAUNCH = 0x2000000;
+}
+
+/// Flags used by the DwmGetWindowAttribute and DwmSetWindowAttribute functions
+/// to specify window attributes for Desktop Window Manager (DWM) non-client
+/// rendering.
+class DWMWINDOWATTRIBUTE {
+  /// Use with DwmGetWindowAttribute. Discovers whether non-client rendering is
+  /// enabled. The retrieved value is of type BOOL. TRUE if non-client rendering
+  /// is enabled; otherwise, FALSE.
+  @Deprecated('Use DWMWA_NCRENDERING_ENABLED instead')
+  static const DWMWA_NCRENDERING_ENABLED = 1;
+
+  /// Use with DwmSetWindowAttribute. Sets the non-client rendering policy. The
+  /// pvAttribute parameter points to a value from the DWMNCRENDERINGPOLICY
+  /// enumeration.
+  @Deprecated('Use DWMWA_NCRENDERING_POLICY instead')
+  static const DWMWA_NCRENDERING_POLICY = 2;
+
+  /// Use with DwmSetWindowAttribute. Enables or forcibly disables DWM
+  /// transitions. The pvAttribute parameter points to a value of type BOOL.
+  /// TRUE to disable transitions, or FALSE to enable transitions.
+  @Deprecated('Use DWMWA_TRANSITIONS_FORCEDISABLED instead')
+  static const DWMWA_TRANSITIONS_FORCEDISABLED = 3;
+
+  /// Use with DwmSetWindowAttribute. Enables content rendered in the non-client
+  /// area to be visible on the frame drawn by DWM. The pvAttribute parameter
+  /// points to a value of type BOOL. TRUE to enable content rendered in the
+  /// non-client area to be visible on the frame; otherwise, FALSE.
+  @Deprecated('Use DWMWA_ALLOW_NCPAINT instead')
+  static const DWMWA_ALLOW_NCPAINT = 4;
+
+  /// Use with DwmGetWindowAttribute. Retrieves the bounds of the caption button
+  /// area in the window-relative space. The retrieved value is of type RECT. If
+  /// the window is minimized or otherwise not visible to the user, then the
+  /// value of the RECT retrieved is undefined. You should check whether the
+  /// retrieved RECT contains a boundary that you can work with, and if it
+  /// doesn't then you can conclude that the window is minimized or otherwise
+  /// not visible.
+  @Deprecated('Use DWMWA_CAPTION_BUTTON_BOUNDS instead')
+  static const DWMWA_CAPTION_BUTTON_BOUNDS = 5;
+
+  /// Use with DwmSetWindowAttribute. Specifies whether non-client content is
+  /// right-to-left (RTL) mirrored. The pvAttribute parameter points to a value
+  /// of type BOOL. TRUE if the non-client content is right-to-left (RTL)
+  /// mirrored; otherwise, FALSE.
+  @Deprecated('Use DWMWA_NONCLIENT_RTL_LAYOUT instead')
+  static const DWMWA_NONCLIENT_RTL_LAYOUT = 6;
+
+  /// Use with DwmSetWindowAttribute. Forces the window to display an iconic
+  /// thumbnail or peek representation (a static bitmap), even if a live or
+  /// snapshot representation of the window is available. This value is normally
+  /// set during a window's creation, and not changed throughout the window's
+  /// lifetime. Some scenarios, however, might require the value to change over
+  /// time. The pvAttribute parameter points to a value of type BOOL. TRUE to
+  /// require a iconic thumbnail or peek representation; otherwise, FALSE.
+  @Deprecated('Use DWMWA_FORCE_ICONIC_REPRESENTATION instead')
+  static const DWMWA_FORCE_ICONIC_REPRESENTATION = 7;
+
+  /// Use with DwmSetWindowAttribute. Sets how Flip3D treats the window. The
+  /// pvAttribute parameter points to a value from the DWMFLIP3DWINDOWPOLICY
+  /// enumeration.
+  @Deprecated('Use DWMWA_FLIP3D_POLICY instead')
+  static const DWMWA_FLIP3D_POLICY = 8;
+
+  /// Use with DwmGetWindowAttribute. Retrieves the extended frame bounds
+  /// rectangle in screen space. The retrieved value is of type RECT.
+  @Deprecated('Use DWMWA_EXTENDED_FRAME_BOUNDS instead')
+  static const DWMWA_EXTENDED_FRAME_BOUNDS = 9;
+
+  /// Use with DwmSetWindowAttribute. The window will provide a bitmap for use
+  /// by DWM as an iconic thumbnail or peek representation (a static bitmap) for
+  /// the window. DWMWA_HAS_ICONIC_BITMAP can be specified with
+  /// DWMWA_FORCE_ICONIC_REPRESENTATION. DWMWA_HAS_ICONIC_BITMAP normally is set
+  /// during a window's creation and not changed throughout the window's
+  /// lifetime. Some scenarios, however, might require the value to change over
+  /// time. The pvAttribute parameter points to a value of type BOOL. TRUE to
+  /// inform DWM that the window will provide an iconic thumbnail or peek
+  /// representation; otherwise, FALSE.
+  @Deprecated('Use DWMWA_HAS_ICONIC_BITMAP instead')
+  static const DWMWA_HAS_ICONIC_BITMAP = 10;
+
+  /// Use with DwmSetWindowAttribute. Do not show peek preview for the window.
+  /// The peek view shows a full-sized preview of the window when the mouse
+  /// hovers over the window's thumbnail in the taskbar. If this attribute is
+  /// set, hovering the mouse pointer over the window's thumbnail dismisses peek
+  /// (in case another window in the group has a peek preview showing). The
+  /// pvAttribute parameter points to a value of type BOOL. TRUE to prevent peek
+  /// functionality, or FALSE to allow it.
+  @Deprecated('Use DWMWA_DISALLOW_PEEK instead')
+  static const DWMWA_DISALLOW_PEEK = 11;
+
+  /// Use with DwmSetWindowAttribute. Prevents a window from fading to a glass
+  /// sheet when peek is invoked. The pvAttribute parameter points to a value of
+  /// type BOOL. TRUE to prevent the window from fading during another window's
+  /// peek, or FALSE for normal behavior.
+  @Deprecated('Use DWMWA_EXCLUDED_FROM_PEEK instead')
+  static const DWMWA_EXCLUDED_FROM_PEEK = 12;
+
+  /// Use with DwmSetWindowAttribute. Cloaks the window such that it is not
+  /// visible to the user. The window is still composed by DWM.
+  @Deprecated('Use DWMWA_CLOAK instead')
+  static const DWMWA_CLOAK = 13;
+
+  /// Use with DwmGetWindowAttribute. If the window is cloaked, provides one of
+  /// the following values explaining why.
+  ///
+  /// - DWM_CLOAKED_APP (value 0x0000001). The window was cloaked by its owner
+  ///   application.
+  /// - DWM_CLOAKED_SHELL (value 0x0000002). The window was cloaked by the
+  ///   Shell.
+  /// - DWM_CLOAKED_INHERITED (value 0x0000004). The cloak value was inherited
+  ///   from its owner window.
+  @Deprecated('Use DWMWA_CLOAKED instead')
+  static const DWMWA_CLOAKED = 14;
+
+  /// Use with DwmSetWindowAttribute. Freeze the window's thumbnail image with
+  /// its current visuals. Do no further live updates on the thumbnail image to
+  /// match the window's contents.
+  @Deprecated('Use DWMWA_FREEZE_REPRESENTATION instead')
+  static const DWMWA_FREEZE_REPRESENTATION = 15;
+
+  /// Use with DwmSetWindowAttribute. Enables a non-UWP window to use host
+  /// backdrop brushes. If this flag is set, then a Win32 app that calls
+  /// Windows::UI::Composition APIs can build transparency effects using the
+  /// host backdrop brush (see Compositor.CreateHostBackdropBrush). The
+  /// retrieved value is of type BOOL. TRUE to enable host backdrop brushes for
+  /// the window; otherwise, FALSE. (Supported on Windows 11 and above.)
+  @Deprecated('Use DWMWA_USE_HOSTBACKDROPBRUSH instead')
+  static const DWMWA_USE_HOSTBACKDROPBRUSH = 17;
+
+  /// Allows a window to either use the accent color, or
+  /// dark, according to the user Color Mode preferences. (Supported on
+  /// Windows 11 and above.)
+  @Deprecated('Use DWMWA_USE_IMMERSIVE_DARK_MODE instead')
+  static const DWMWA_USE_IMMERSIVE_DARK_MODE = 20;
+
+  /// Controls the policy that rounds top-level window corners. (Supported on
+  /// Windows 11 and above.)
+  @Deprecated('Use DWMWA_WINDOW_CORNER_PREFERENCE instead')
+  static const DWMWA_WINDOW_CORNER_PREFERENCE = 33;
+
+  /// The color of the thin border around a top-level window. (Supported on
+  /// Windows 11 and above.)
+  @Deprecated('Use DWMWA_BORDER_COLOR instead')
+  static const DWMWA_BORDER_COLOR = 34;
+
+  /// The color of the caption. (Supported on Windows 11 and above.)
+  @Deprecated('Use DWMWA_CAPTION_COLOR instead')
+  static const DWMWA_CAPTION_COLOR = 35;
+
+  /// The color of the caption text. (Supported on Windows 11 and above.)
+  @Deprecated('Use DWMWA_TEXT_COLOR instead')
+  static const DWMWA_TEXT_COLOR = 36;
+
+  /// Width of the visible border around a thick frame window. (Supported on
+  /// Windows 11 and above.)
+  @Deprecated('Use DWMWA_VISIBLE_FRAME_BORDER_THICKNESS instead')
+  static const DWMWA_VISIBLE_FRAME_BORDER_THICKNESS = 37;
+}
+
+class DWM_WINDOW_CORNER_PREFERENCE {
+  /// Let the system decide whether or not to round window corners
+  @Deprecated('Use DWMWCP_DEFAULT instead')
+  static const DWMWCP_DEFAULT = 0;
+
+  /// Never round window corners
+  @Deprecated('Use DWMWCP_DONOTROUND instead')
+  static const DWMWCP_DONOTROUND = 1;
+
+  /// Round the corners if appropriate
+  @Deprecated('Use DWMWCP_ROUND instead')
+  static const DWMWCP_ROUND = 2;
+
+  /// Round the corners if appropriate, with a small radius
+  @Deprecated('Use DWMWCP_ROUNDSMALL instead')
+  static const DWMWCP_ROUNDSMALL = 3;
+}
+
+/// The TOKEN_INFORMATION_CLASS enumeration contains values that specify the
+/// type of information being assigned to or retrieved from an access token.
+///
+/// {@category struct}
+class TOKEN_INFORMATION_CLASS {
+  @Deprecated('Use TokenUser instead')
+  static const TokenUser = 1;
+  @Deprecated('Use TokenGroups instead')
+  static const TokenGroups = 2;
+  @Deprecated('Use TokenPrivileges instead')
+  static const TokenPrivileges = 3;
+  @Deprecated('Use TokenOwner instead')
+  static const TokenOwner = 4;
+  @Deprecated('Use TokenPrimaryGroup instead')
+  static const TokenPrimaryGroup = 5;
+  @Deprecated('Use TokenDefaultDacl instead')
+  static const TokenDefaultDacl = 6;
+  @Deprecated('Use TokenSource instead')
+  static const TokenSource = 7;
+  @Deprecated('Use TokenType instead')
+  static const TokenType = 8;
+  @Deprecated('Use TokenImpersonationLevel instead')
+  static const TokenImpersonationLevel = 9;
+  @Deprecated('Use TokenStatistics instead')
+  static const TokenStatistics = 10;
+  @Deprecated('Use TokenRestrictedSids instead')
+  static const TokenRestrictedSids = 11;
+  @Deprecated('Use TokenSessionId instead')
+  static const TokenSessionId = 12;
+  @Deprecated('Use TokenGroupsAndPrivileges instead')
+  static const TokenGroupsAndPrivileges = 13;
+  @Deprecated('Use TokenSessionReference instead')
+  static const TokenSessionReference = 14;
+  @Deprecated('Use TokenSandBoxInert instead')
+  static const TokenSandBoxInert = 15;
+  @Deprecated('Use TokenAuditPolicy instead')
+  static const TokenAuditPolicy = 16;
+  @Deprecated('Use TokenOrigin instead')
+  static const TokenOrigin = 17;
+  @Deprecated('Use TokenElevationType instead')
+  static const TokenElevationType = 18;
+  @Deprecated('Use TokenLinkedToken instead')
+  static const TokenLinkedToken = 19;
+  @Deprecated('Use TokenElevation instead')
+  static const TokenElevation = 20;
+  @Deprecated('Use TokenHasRestrictions instead')
+  static const TokenHasRestrictions = 21;
+  @Deprecated('Use TokenAccessInformation instead')
+  static const TokenAccessInformation = 22;
+  @Deprecated('Use TokenVirtualizationAllowed instead')
+  static const TokenVirtualizationAllowed = 23;
+  @Deprecated('Use TokenVirtualizationEnabled instead')
+  static const TokenVirtualizationEnabled = 24;
+  @Deprecated('Use TokenIntegrityLevel instead')
+  static const TokenIntegrityLevel = 25;
+  @Deprecated('Use TokenUIAccess instead')
+  static const TokenUIAccess = 26;
+  @Deprecated('Use TokenMandatoryPolicy instead')
+  static const TokenMandatoryPolicy = 27;
+  @Deprecated('Use TokenLogonSid instead')
+  static const TokenLogonSid = 28;
+  @Deprecated('Use TokenIsAppContainer instead')
+  static const TokenIsAppContainer = 29;
+  @Deprecated('Use TokenCapabilities instead')
+  static const TokenCapabilities = 30;
+  @Deprecated('Use TokenAppContainerSid instead')
+  static const TokenAppContainerSid = 31;
+  @Deprecated('Use TokenAppContainerNumber instead')
+  static const TokenAppContainerNumber = 32;
+  @Deprecated('Use TokenUserClaimAttributes instead')
+  static const TokenUserClaimAttributes = 33;
+  @Deprecated('Use TokenDeviceClaimAttributes instead')
+  static const TokenDeviceClaimAttributes = 34;
+  @Deprecated('Use TokenRestrictedUserClaimAttributes instead')
+  static const TokenRestrictedUserClaimAttributes = 35;
+  @Deprecated('Use TokenRestrictedDeviceClaimAttributes instead')
+  static const TokenRestrictedDeviceClaimAttributes = 36;
+  @Deprecated('Use TokenDeviceGroups instead')
+  static const TokenDeviceGroups = 37;
+  @Deprecated('Use TokenRestrictedDeviceGroups instead')
+  static const TokenRestrictedDeviceGroups = 38;
+  @Deprecated('Use TokenSecurityAttributes instead')
+  static const TokenSecurityAttributes = 39;
+  @Deprecated('Use TokenIsRestricted instead')
+  static const TokenIsRestricted = 40;
+  @Deprecated('Use TokenProcessTrustLevel instead')
+  static const TokenProcessTrustLevel = 41;
+  @Deprecated('Use TokenPrivateNameSpace instead')
+  static const TokenPrivateNameSpace = 42;
+  @Deprecated('Use TokenSingletonAttributes instead')
+  static const TokenSingletonAttributes = 43;
+  @Deprecated('Use TokenBnoIsolation instead')
+  static const TokenBnoIsolation = 44;
+  @Deprecated('Use TokenChildProcessFlags instead')
+  static const TokenChildProcessFlags = 45;
+  @Deprecated('Use TokenIsLessPrivilegedAppContainer instead')
+  static const TokenIsLessPrivilegedAppContainer = 46;
+  @Deprecated('Use TokenIsSandboxed instead')
+  static const TokenIsSandboxed = 47;
+  @Deprecated('Use TokenOriginatingProcessTrustLevel instead')
+  static const TokenOriginatingProcessTrustLevel = 48;
+}
+
+/// The WSL_DISTRIBUTION_FLAGS enumeration specifies the behavior of a
+/// distribution in the Windows Subsystem for Linux (WSL).
+///
+/// {@category enum}
+class WSL_DISTRIBUTION_FLAGS {
+  /// No flags are being supplied.
+  @Deprecated('Use WSL_DISTRIBUTION_FLAGS_NONE instead')
+  static const WSL_DISTRIBUTION_FLAGS_NONE = 0x0;
+
+  /// Allow the distribution to interoperate with Windows processes (for
+  /// example, the user can invoke "cmd.exe" or "notepad.exe" from within a WSL
+  /// session).
+  @Deprecated('Use WSL_DISTRIBUTION_FLAGS_ENABLE_INTEROP instead')
+  static const WSL_DISTRIBUTION_FLAGS_ENABLE_INTEROP = 0x1;
+
+  /// Add the Windows %PATH% environment variable values to WSL sessions.
+  @Deprecated('Use WSL_DISTRIBUTION_FLAGS_APPEND_NT_PATH instead')
+  static const WSL_DISTRIBUTION_FLAGS_APPEND_NT_PATH = 0x2;
+
+  /// Automatically mount Windows drives inside of WSL sessions (for example,
+  /// "C:" will be available under "/mnt/c").
+  @Deprecated('Use WSL_DISTRIBUTION_FLAGS_ENABLE_DRIVE_MOUNTING instead')
+  static const WSL_DISTRIBUTION_FLAGS_ENABLE_DRIVE_MOUNTING = 0x4;
+}
+
+/// Specifies the type of visual style attribute to set on a window.
+class WINDOWTHEMEATTRIBUTETYPE {
+  /// Non-client area window attributes will be set.
+  @Deprecated('Use WTA_NONCLIENT instead')
+  static const WTA_NONCLIENT = 1;
+}
+
+class SPEAKFLAGS {
+  /// Specifies that the default settings should be used.
+  @Deprecated('Use SPF_DEFAULT instead')
+  static const SPF_DEFAULT = 0;
+
+  /// Specifies that the Speak call should be asynchronous. That is, it will
+  /// return immediately after the speak request is queued.
+  @Deprecated('Use SPF_ASYNC instead')
+  static const SPF_ASYNC = 1;
+
+  /// Purges all pending speak requests prior to this speak call.
+  @Deprecated('Use SPF_PURGEBEFORESPEAK instead')
+  static const SPF_PURGEBEFORESPEAK = 2;
+
+  /// The string passed to ISpVoice::Speak is a file name, and the file text
+  /// should be spoken.
+  @Deprecated('Use SPF_IS_FILENAME instead')
+  static const SPF_IS_FILENAME = 4;
+
+  /// The input text will be parsed for XML markup.
+  @Deprecated('Use SPF_IS_XML instead')
+  static const SPF_IS_XML = 8;
+
+  /// The input text will not be parsed for XML markup.
+  @Deprecated('Use SPF_IS_NOT_XML instead')
+  static const SPF_IS_NOT_XML = 0x10;
+
+  /// Global state changes in the XML markup will persist across speak calls.
+  @Deprecated('Use SPF_PERSIST_XML instead')
+  static const SPF_PERSIST_XML = 0x20;
+
+  /// Punctuation characters should be expanded into words (for example, "This
+  /// is a sentence." would become "This is a sentence period").
+  @Deprecated('Use SPF_NLP_SPEAK_PUNC instead')
+  static const SPF_NLP_SPEAK_PUNC = 0x40;
+
+  /// Force XML parsing As MS SAPI.
+  @Deprecated('Use SPF_PARSE_SAPI instead')
+  static const SPF_PARSE_SAPI = 0x80;
+
+  /// Force XML parsing As W3C SSML.
+  @Deprecated('Use SPF_PARSE_SSML instead')
+  static const SPF_PARSE_SSML = 0x100;
+
+  /// The TTS XML format is auto-detected. This is the default if none of these
+  /// TTS XML format values are present in the bit-field.
+  @Deprecated('Use SPF_PARSE_AUTODETECT instead')
+  static const SPF_PARSE_AUTODETECT = 0;
+}
+
+/// The AUDCLNT_SHAREMODE enumeration defines constants that indicate whether an
+/// audio stream will run in shared mode or in exclusive mode.
+///
+/// {@category enum}
+class AUDCLNT_SHAREMODE {
+  /// The audio stream will run in shared mode.
+  @Deprecated('Use AUDCLNT_SHAREMODE_SHARED instead')
+  static const AUDCLNT_SHAREMODE_SHARED = 0;
+
+  /// The audio stream will run in exclusive mode.
+  @Deprecated('Use AUDCLNT_SHAREMODE_EXCLUSIVE instead')
+  static const AUDCLNT_SHAREMODE_EXCLUSIVE = 1;
+}
+
+/// The AUDCLNT_BUFFERFLAGS enumeration defines flags that indicate the status
+/// of an audio endpoint buffer.
+///
+/// {@category enum}
+class AUDCLNT_BUFFERFLAGS {
+  /// The data in the packet is not correlated with the previous packet's device
+  /// position; this is possibly due to a stream state transition or timing
+  /// glitch.
+  @Deprecated('Use AUDCLNT_BUFFERFLAGS_DATA_DISCONTINUITY instead')
+  static const AUDCLNT_BUFFERFLAGS_DATA_DISCONTINUITY = 0x1;
+
+  /// Treat all of the data in the packet as silence and ignore the actual data
+  /// values.
+  @Deprecated('Use AUDCLNT_BUFFERFLAGS_SILENT instead')
+  static const AUDCLNT_BUFFERFLAGS_SILENT = 0x2;
+
+  /// The time at which the device's stream position was recorded is uncertain.
+  /// Thus, the client might be unable to accurately set the time stamp for the
+  /// current data packet.
+  @Deprecated('Use AUDCLNT_BUFFERFLAGS_TIMESTAMP_ERROR instead')
+  static const AUDCLNT_BUFFERFLAGS_TIMESTAMP_ERROR = 0x4;
+}
+
+/// Defines values that describe the characteristics of an audio stream.
+///
+/// {@category enum}
+class AUDCLNT_STREAMOPTIONS {
+  /// No stream options.
+  @Deprecated('Use AUDCLNT_STREAMOPTIONS_NONE instead')
+  static const AUDCLNT_STREAMOPTIONS_NONE = 0;
+
+  /// The audio stream is a 'raw' stream that bypasses all signal processing
+  /// except for endpoint specific, always-on processing in the Audio Processing
+  /// Object (APO), driver, and hardware.
+  @Deprecated('Use AUDCLNT_STREAMOPTIONS_RAW instead')
+  static const AUDCLNT_STREAMOPTIONS_RAW = 0x1;
+
+  /// The audio client is requesting that the audio engine match the format
+  /// proposed by the client.
+  @Deprecated('Use AUDCLNT_STREAMOPTIONS_MATCH_FORMAT instead')
+  static const AUDCLNT_STREAMOPTIONS_MATCH_FORMAT = 0x2;
+  @Deprecated('Use AUDCLNT_STREAMOPTIONS_AMBISONICS instead')
+  static const AUDCLNT_STREAMOPTIONS_AMBISONICS = 0x4;
+}
+
+/// Device registry property codes.
+///
+/// {@category enum}
+class SPDRP {
+  /// The function retrieves a REG_SZ string that contains the description of a
+  /// device.
+  @Deprecated('Use SPDRP_DEVICEDESC instead')
+  static const SPDRP_DEVICEDESC = 0x00000000;
+
+  /// The function retrieves a REG_MULTI_SZ string that contains the list of
+  /// hardware IDs for a device.
+  @Deprecated('Use SPDRP_HARDWAREID instead')
+  static const SPDRP_HARDWAREID = 0x00000001;
+
+  /// The function retrieves a REG_MULTI_SZ string that contains the list of
+  /// compatible IDs for a device.
+  @Deprecated('Use SPDRP_COMPATIBLEIDS instead')
+  static const SPDRP_COMPATIBLEIDS = 0x00000002;
+
+  /// The function retrieves a REG_SZ string that contains the service name for
+  /// a device.
+  @Deprecated('Use SPDRP_SERVICE instead')
+  static const SPDRP_SERVICE = 0x00000004;
+
+  /// The function retrieves a REG_SZ string that contains the device setup
+  /// class of a device.
+  @Deprecated('Use SPDRP_CLASS instead')
+  static const SPDRP_CLASS = 0x00000007;
+
+  /// The function retrieves a REG_SZ string that contains the GUID that
+  /// represents the device setup class of a device.
+  @Deprecated('Use SPDRP_CLASSGUID instead')
+  static const SPDRP_CLASSGUID = 0x00000008;
+
+  /// The function retrieves a string that identifies the device's software key
+  /// (sometimes called the driver key).
+  @Deprecated('Use SPDRP_DRIVER instead')
+  static const SPDRP_DRIVER = 0x00000009;
+
+  /// The function retrieves a bitwise OR of a device's configuration flags in a
+  /// DWORD value. The configuration flags are represented by the CONFIGFLAG_Xxx
+  /// bitmasks that are defined in Regstr.h.
+  @Deprecated('Use SPDRP_CONFIGFLAGS instead')
+  static const SPDRP_CONFIGFLAGS = 0x0000000A;
+
+  /// The function retrieves a REG_SZ string that contains the name of the
+  /// device manufacturer.
+  @Deprecated('Use SPDRP_MFG instead')
+  static const SPDRP_MFG = 0x0000000B;
+
+  /// The function retrieves a REG_SZ string that contains the friendly name of
+  /// a device.
+  @Deprecated('Use SPDRP_FRIENDLYNAME instead')
+  static const SPDRP_FRIENDLYNAME = 0x0000000C;
+
+  /// The function retrieves a REG_SZ string that contains the hardware location
+  /// of a device.
+  @Deprecated('Use SPDRP_LOCATION_INFORMATION instead')
+  static const SPDRP_LOCATION_INFORMATION = 0x0000000D;
+
+  /// The function retrieves a REG_SZ string that contains the name that is
+  /// associated with the device's PDO.
+  @Deprecated('Use SPDRP_PHYSICAL_DEVICE_OBJECT_NAME instead')
+  static const SPDRP_PHYSICAL_DEVICE_OBJECT_NAME = 0x0000000E;
+
+  /// The function retrieves a bitwise OR of the following CM_DEVCAP_Xxx flags
+  /// in a DWORD. The device capabilities that are represented by these flags
+  /// correspond to the device capabilities that are represented by the members
+  /// of the DEVICE_CAPABILITIES structure.
+  @Deprecated('Use SPDRP_CAPABILITIES instead')
+  static const SPDRP_CAPABILITIES = 0x0000000F;
+
+  /// The function retrieves a DWORD value set to the value of the UINumber
+  /// member of the device's DEVICE_CAPABILITIES structure.
+  @Deprecated('Use SPDRP_UI_NUMBER instead')
+  static const SPDRP_UI_NUMBER = 0x00000010;
+
+  /// The function retrieves a REG_MULTI_SZ string that contains the names of a
+  /// device's upper filter drivers.
+  @Deprecated('Use SPDRP_UPPERFILTERS instead')
+  static const SPDRP_UPPERFILTERS = 0x00000011;
+
+  /// The function retrieves a REG_MULTI_SZ string that contains the names of a
+  /// device's lower-filter drivers.
+  @Deprecated('Use SPDRP_LOWERFILTERS instead')
+  static const SPDRP_LOWERFILTERS = 0x00000012;
+
+  /// The function retrieves the GUID for the device's bus type.
+  @Deprecated('Use SPDRP_BUSTYPEGUID instead')
+  static const SPDRP_BUSTYPEGUID = 0x00000013;
+
+  /// The function retrieves the device's legacy bus type as an INTERFACE_TYPE
+  /// value (defined in Wdm.h and Ntddk.h).
+  @Deprecated('Use SPDRP_LEGACYBUSTYPE instead')
+  static const SPDRP_LEGACYBUSTYPE = 0x00000014;
+
+  /// The function retrieves the device's bus number.
+  @Deprecated('Use SPDRP_BUSNUMBER instead')
+  static const SPDRP_BUSNUMBER = 0x00000015;
+
+  /// The function retrieves a REG_SZ string that contains the name of the
+  /// device's enumerator.
+  @Deprecated('Use SPDRP_ENUMERATOR_NAME instead')
+  static const SPDRP_ENUMERATOR_NAME = 0x00000016;
+
+  /// The function retrieves a SECURITY_DESCRIPTOR structure for a device.
+  @Deprecated('Use SPDRP_SECURITY instead')
+  static const SPDRP_SECURITY = 0x00000017;
+
+  /// The function retrieves a REG_SZ string that contains the device's security
+  /// descriptor.
+  @Deprecated('Use SPDRP_SECURITY_SDS instead')
+  static const SPDRP_SECURITY_SDS = 0x00000018;
+
+  /// The function retrieves a DWORD value that represents the device's type.
+  /// For more information, see Specifying Device Types.
+  @Deprecated('Use SPDRP_DEVTYPE instead')
+  static const SPDRP_DEVTYPE = 0x00000019;
+
+  /// The function retrieves a DWORD value that indicates whether a user can
+  /// obtain exclusive use of the device. The returned value is one if exclusive
+  /// use is allowed, or zero otherwise.
+  @Deprecated('Use SPDRP_EXCLUSIVE instead')
+  static const SPDRP_EXCLUSIVE = 0x0000001A;
+
+  /// The function retrieves a bitwise OR of a device's characteristics flags in
+  /// a DWORD.
+  @Deprecated('Use SPDRP_CHARACTERISTICS instead')
+  static const SPDRP_CHARACTERISTICS = 0x0000001B;
+
+  /// The function retrieves the device's address.
+  @Deprecated('Use SPDRP_ADDRESS instead')
+  static const SPDRP_ADDRESS = 0x0000001C;
+
+  /// The function retrieves a format string (REG_SZ) used to display the
+  /// UINumber value.
+  @Deprecated('Use SPDRP_UI_NUMBER_DESC_FORMAT instead')
+  static const SPDRP_UI_NUMBER_DESC_FORMAT = 0X0000001D;
+
+  /// The function retrieves a CM_POWER_DATA structure that contains the
+  /// device's power management information.
+  @Deprecated('Use SPDRP_DEVICE_POWER_DATA instead')
+  static const SPDRP_DEVICE_POWER_DATA = 0x0000001E;
+
+  /// The function retrieves the device's current removal policy as a DWORD that
+  /// contains one of the CM_REMOVAL_POLICY_Xxx values that are defined in
+  /// Cfgmgr32.h.
+  @Deprecated('Use SPDRP_REMOVAL_POLICY instead')
+  static const SPDRP_REMOVAL_POLICY = 0x0000001F;
+
+  /// The function retrieves the device's hardware-specified default removal
+  /// policy as a DWORD that contains one of the CM_REMOVAL_POLICY_Xxx values
+  /// that are defined in Cfgmgr32.h.
+  @Deprecated('Use SPDRP_REMOVAL_POLICY_HW_DEFAULT instead')
+  static const SPDRP_REMOVAL_POLICY_HW_DEFAULT = 0x00000020;
+
+  /// The function retrieves the device's override removal policy (if it exists)
+  /// from the registry, as a DWORD that contains one of the
+  /// CM_REMOVAL_POLICY_Xxx values that are defined in Cfgmgr32.h.
+  @Deprecated('Use SPDRP_REMOVAL_POLICY_OVERRIDE instead')
+  static const SPDRP_REMOVAL_POLICY_OVERRIDE = 0x00000021;
+
+  /// The function retrieves a DWORD value that indicates the installation state
+  /// of a device. The installation state is represented by one of the
+  /// CM_INSTALL_STATE_Xxx values that are defined in Cfgmgr32.h. The
+  /// CM_INSTALL_STATE_Xxx values correspond to the DEVICE_INSTALL_STATE
+  /// enumeration values.
+  @Deprecated('Use SPDRP_INSTALL_STATE instead')
+  static const SPDRP_INSTALL_STATE = 0x00000022;
+
+  /// The function retrieves a REG_MULTI_SZ string that represents the location
+  /// of the device in the device tree.
+  @Deprecated('Use SPDRP_LOCATION_PATHS instead')
+  static const SPDRP_LOCATION_PATHS = 0x00000023;
+}
+
+/// Specifies the set of possible COM apartment type qualifiers.
+///
+/// {@category enum}
+class APTTYPEQUALIFIER {
+  /// No qualifier information for the current COM apartment type is available.
+  @Deprecated('Use APTTYPEQUALIFIER_NONE instead')
+  static const APTTYPEQUALIFIER_NONE = 0;
+
+  /// This qualifier is only valid when the pAptType parameter of the
+  /// CoGetApartmentType function specifies APTTYPE_MTA on return. A thread has
+  /// an implicit MTA apartment type if it does not initialize the COM apartment
+  /// itself, and if another thread has already initialized the MTA in the
+  /// process. This qualifier informs the API caller that the MTA of the thread
+  /// is implicitly inherited from other threads and is not initialized
+  /// directly.
+  @Deprecated('Use APTTYPEQUALIFIER_IMPLICIT_MTA instead')
+  static const APTTYPEQUALIFIER_IMPLICIT_MTA = 1;
+
+  /// This qualifier is only valid when the pAptType parameter of the
+  /// CoGetApartmentType function contains APTTYPE_NA on return. When an MTA
+  /// thread creates or invokes a COM in-process object using the "Neutral"
+  /// threading model, the COM apartment type of the thread switches from MTA to
+  /// a Neutral apartment type. This qualifier informs the API caller that the
+  /// thread has switched from the MTA apartment type to the NA type.
+  @Deprecated('Use APTTYPEQUALIFIER_NA_ON_MTA instead')
+  static const APTTYPEQUALIFIER_NA_ON_MTA = 2;
+
+  /// This qualifier is only valid when the pAptType parameter of the
+  /// CoGetApartmentType function contains APTTYPE_NA on return. When an STA
+  /// thread creates or invokes a COM in-process object using the "Neutral"
+  /// threading model, the COM apartment type of the thread switches from STA to
+  /// a Neutral apartment type. This qualifier informs the API caller that the
+  /// thread has switched from the STA apartment type to the NA type.
+  @Deprecated('Use APTTYPEQUALIFIER_NA_ON_STA instead')
+  static const APTTYPEQUALIFIER_NA_ON_STA = 3;
+
+  /// This qualifier is only valid when the pAptType parameter of the
+  /// CoGetApartmentType function contains APTTYPE_NA on return. When an
+  /// implicit MTA thread creates or invokes a COM in-process object using the
+  /// "Neutral" threading model, the COM apartment type of the thread switches
+  /// from the implicit MTA type to a Neutral apartment type. This qualifier
+  /// informs the API caller that the thread has switched from the implicit MTA
+  /// apartment type to the NA type.
+  @Deprecated('Use APTTYPEQUALIFIER_NA_ON_IMPLICIT_MTA instead')
+  static const APTTYPEQUALIFIER_NA_ON_IMPLICIT_MTA = 4;
+
+  /// This qualifier is only valid when the pAptType parameter of the
+  /// CoGetApartmentType function contains APTTYPE_NA on return. When the main
+  /// STA thread creates or invokes a COM in-process object using the "Neutral"
+  /// threading model, the COM apartment type of the thread switches from the
+  /// main STA type to a Neutral apartment type. This qualifier informs the API
+  /// caller that the thread has switched from the main STA apartment type to
+  /// the NA type.
+  @Deprecated('Use APTTYPEQUALIFIER_NA_ON_MAINSTA instead')
+  static const APTTYPEQUALIFIER_NA_ON_MAINSTA = 5;
+  @Deprecated('Use APTTYPEQUALIFIER_APPLICATION_STA instead')
+  static const APTTYPEQUALIFIER_APPLICATION_STA = 6;
+  @Deprecated('Use APTTYPEQUALIFIER_RESERVED_1 instead')
+  static const APTTYPEQUALIFIER_RESERVED_1 = 7;
+}
+
+/// Specifies different types of apartments.
+///
+/// {@category enum}
+class APTTYPE {
+  /// The current thread.
+  @Deprecated('Use APTTYPE_CURRENT instead')
+  static const APTTYPE_CURRENT = -1;
+
+  /// A single-threaded apartment.
+  @Deprecated('Use APTTYPE_STA instead')
+  static const APTTYPE_STA = 0;
+
+  /// A multithreaded apartment.
+  @Deprecated('Use APTTYPE_MTA instead')
+  static const APTTYPE_MTA = 1;
+
+  /// A neutral apartment.
+  @Deprecated('Use APTTYPE_NA instead')
+  static const APTTYPE_NA = 2;
+
+  /// The main single-threaded apartment.
+  @Deprecated('Use APTTYPE_MAINSTA instead')
+  static const APTTYPE_MAINSTA = 3;
+}
+
+/// Contains values that specify the type of reference to use when returning UI
+/// Automation elements.
+///
+/// {@category enum}
+class AutomationElementMode {
+  /// Specifies that returned elements have no reference to the underlying UI
+  /// and contain only cached information.
+  @Deprecated('Use AutomationElementMode_None instead')
+  static const AutomationElementMode_None = 0;
+
+  /// Specifies that returned elements have a full reference to the underlying
+  /// UI.
+  @Deprecated('Use AutomationElementMode_Full instead')
+  static const AutomationElementMode_Full = 0x1;
+}
+
+/// Contains possible values for the CoalesceEvents property, which indicates
+/// whether an accessible technology client receives all events, or a subset
+/// where duplicate events are detected and filtered.
+///
+/// {@category enum}
+class CoalesceEventsOptions {
+  /// Event coalescing is disabled.
+  @Deprecated('Use CoalesceEventsOptions_Disabled instead')
+  static const CoalesceEventsOptions_Disabled = 0;
+
+  /// Event coalescing is enabled.
+  @Deprecated('Use CoalesceEventsOptions_Enabled instead')
+  static const CoalesceEventsOptions_Enabled = 0x1;
+}
+
+/// Contains possible values for the ConnectionRecoveryBehavior property, which
+/// indicates whether an accessible technology client adjusts provider request
+/// timeouts when the provider is non-responsive.
+///
+/// {@category enum}
+class ConnectionRecoveryBehaviorOptions {
+  /// Connection recovery is disabled.
+  @Deprecated('Use ConnectionRecoveryBehaviorOptions_Disabled instead')
+  static const ConnectionRecoveryBehaviorOptions_Disabled = 0;
+
+  /// Connection recovery is enabled.
+  @Deprecated('Use ConnectionRecoveryBehaviorOptions_Enabled instead')
+  static const ConnectionRecoveryBehaviorOptions_Enabled = 0x1;
+}
+
+/// The PropertyConditionFlags (uiautomationclient.h) enumeration contains
+/// values used in creating property conditions.
+///
+/// {@category enum}
+class PropertyConditionFlags {
+  /// No flags.
+  @Deprecated('Use PropertyConditionFlags_None instead')
+  static const PropertyConditionFlags_None = 0;
+
+  /// Comparison of string properties is not case-sensitive.
+  @Deprecated('Use PropertyConditionFlags_IgnoreCase instead')
+  static const PropertyConditionFlags_IgnoreCase = 0x1;
+
+  /// Comparison of substring properties is enabled.
+  @Deprecated('Use PropertyConditionFlags_MatchSubstring instead')
+  static const PropertyConditionFlags_MatchSubstring = 0x2;
+}
+
+/// Contains values that specify the direction and distance to scroll.
+///
+/// {@category enum}
+class ScrollAmount {
+  /// Scrolling is done in large decrements, equivalent to pressing the PAGE UP
+  /// key or clicking on a blank part of a scroll bar.
+  @Deprecated('Use ScrollAmount_LargeDecrement instead')
+  static const ScrollAmount_LargeDecrement = 0;
+
+  /// Scrolling is done in small decrements, equivalent to pressing an arrow
+  /// key or clicking the arrow button on a scroll bar.
+  @Deprecated('Use ScrollAmount_SmallDecrement instead')
+  static const ScrollAmount_SmallDecrement = 1;
+
+  /// No scrolling is done.
+  @Deprecated('Use ScrollAmount_NoAmount instead')
+  static const ScrollAmount_NoAmount = 2;
+
+  /// Scrolling is done in large increments, equivalent to pressing the PAGE
+  /// DOWN or PAGE UP key or clicking on a blank part of a scroll bar.
+  @Deprecated('Use ScrollAmount_LargeIncrement instead')
+  static const ScrollAmount_LargeIncrement = 3;
+
+  /// Scrolling is done in small increments, equivalent to pressing an arrow
+  /// key or clicking the arrow button on a scroll bar.
+  @Deprecated('Use ScrollAmount_SmallIncrement instead')
+  static const ScrollAmount_SmallIncrement = 4;
+}
+
+/// The STGM constants are flags that indicate conditions for creating and
+/// deleting the object and access modes for the object.
+///
+/// {@category enum}
+class STGM {
+  /// Indicates that the object is read-only, meaning that modifications
+  /// cannot be made.
+  @Deprecated('Use STGM_READ instead')
+  static const STGM_READ = 0x00000000;
+
+  /// Enables you to save changes to the object, but does not permit access
+  /// to its data.
+  @Deprecated('Use STGM_WRITE instead')
+  static const STGM_WRITE = 0x00000001;
+
+  /// Enables access and modification of object data.
+  @Deprecated('Use STGM_READWRITE instead')
+  static const STGM_READWRITE = 0x00000002;
+
+  /// Specifies that subsequent openings of the object are not denied read or
+  /// write access.
+  @Deprecated('Use STGM_SHARE_DENY_NONE instead')
+  static const STGM_SHARE_DENY_NONE = 0x00000040;
+
+  /// Prevents others from subsequently opening the object in STGM_READ mode.
+  /// It is typically used on a root storage object.
+  @Deprecated('Use STGM_SHARE_DENY_READ instead')
+  static const STGM_SHARE_DENY_READ = 0x00000030;
+
+  /// Prevents others from subsequently opening the object for `STGM_WRITE`
+  /// or `STGM_READWRITE` access.
+  @Deprecated('Use STGM_SHARE_DENY_WRITE instead')
+  static const STGM_SHARE_DENY_WRITE = 0x00000020;
+
+  /// Prevents others from subsequently opening the object in any mode.
+  @Deprecated('Use STGM_SHARE_EXCLUSIVE instead')
+  static const STGM_SHARE_EXCLUSIVE = 0x00000010;
+
+  /// Opens the storage object with exclusive access to the most recently
+  /// committed version.
+  @Deprecated('Use STGM_PRIORITY instead')
+  static const STGM_PRIORITY = 0x00040000;
+
+  /// Indicates that an existing storage object or stream should be removed
+  /// before the new object replaces it.
+  @Deprecated('Use STGM_CREATE instead')
+  static const STGM_CREATE = 0x00001000;
+
+  /// Creates the new object while preserving existing data in a stream named
+  /// "Contents".
+  @Deprecated('Use STGM_CONVERT instead')
+  static const STGM_CONVERT = 0x00020000;
+
+  /// Causes the create operation to fail if an existing object with the
+  /// specified name exists.
+  @Deprecated('Use STGM_FAILIFTHERE instead')
+  static const STGM_FAILIFTHERE = 0x00000000;
+
+  /// Indicates that, in direct mode, each change to a storage or stream
+  /// element is written as it occurs.
+  @Deprecated('Use STGM_DIRECT instead')
+  static const STGM_DIRECT = 0x00000000;
+
+  /// Indicates that, in transacted mode, changes are buffered and written
+  /// only if an explicit commit operation is called.
+  @Deprecated('Use STGM_TRANSACTED instead')
+  static const STGM_TRANSACTED = 0x00010000;
+
+  /// Indicates that, in transacted mode, a temporary scratch file is usually
+  /// used to save modifications until the Commit method is called.
+  @Deprecated('Use STGM_NOSCRATCH instead')
+  static const STGM_NOSCRATCH = 0x00100000;
+
+  /// This flag is used when opening a storage object with STGM_TRANSACTED
+  /// and without STGM_SHARE_EXCLUSIVE or STGM_SHARE_DENY_WRITE.
+  @Deprecated('Use STGM_NOSNAPSHOT instead')
+  static const STGM_NOSNAPSHOT = 0x00200000;
+
+  /// Provides a faster implementation of a compound file in a limited, but
+  /// frequently used, case. For more information, see the Remarks section.
+  @Deprecated('Use STGM_SIMPLE instead')
+  static const STGM_SIMPLE = 0x08000000;
+
+  /// Supports direct mode for single-writer, multireader file operations.
+  @Deprecated('Use STGM_DIRECT_SWMR instead')
+  static const STGM_DIRECT_SWMR = 0x00400000;
+
+  /// Indicates that the underlying file is to be automatically destroyed
+  /// when the root storage object is released.
+  @Deprecated('Use STGM_DELETEONRELEASE instead')
+  static const STGM_DELETEONRELEASE = 0x04000000;
+}
+
+/// Contains values that specify the toggle state of a Microsoft UI Automation
+/// element that implements the Toggle control pattern.
+///
+/// {@category enum}
+class ToggleState {
+  /// The UI Automation element is not selected, checked, marked or otherwise
+  /// activated.
+  @Deprecated('Use ToggleState_Off instead')
+  static const ToggleState_Off = 0;
+
+  /// The UI Automation element is selected, checked, marked or otherwise
+  /// activated.
+  @Deprecated('Use ToggleState_On instead')
+  static const ToggleState_On = 1;
+
+  /// The UI Automation element is in an indeterminate state.
+  @Deprecated('Use ToggleState_Indeterminate instead')
+  static const ToggleState_Indeterminate = 2;
+}
+
+/// The TreeScope enumeration contains values that specify the scope of various
+/// operations in the Microsoft UI Automation tree.
+class TreeScope {
+  /// The scope excludes the subtree from the search.
+  @Deprecated('Use TreeScope_None instead')
+  static const TreeScope_None = 0;
+
+  /// The scope includes the element itself.
+  @Deprecated('Use TreeScope_Element instead')
+  static const TreeScope_Element = 0x1;
+
+  /// The scope includes children of the element.
+  @Deprecated('Use TreeScope_Children instead')
+  static const TreeScope_Children = 0x2;
+
+  /// The scope includes children and more distant descendants of the element.
+  @Deprecated('Use TreeScope_Descendants instead')
+  static const TreeScope_Descendants = 0x4;
+
+  /// The scope includes the parent of the element.
+  @Deprecated('Use TreeScope_Parent instead')
+  static const TreeScope_Parent = 0x8;
+
+  /// The scope includes the parent and more distant ancestors of the element.
+  @Deprecated('Use TreeScope_Ancestors instead')
+  static const TreeScope_Ancestors = 0x10;
+
+  /// The scope includes the element and all its descendants. This flag is a
+  /// combination of the TreeScope_Element and TreeScope_Descendants values.
+  @Deprecated('Use TreeScope_Subtree instead')
+  static const TreeScope_Subtree = 0x7;
+}
+
+/// The TreeTraversalOptions enumeration defines values that can be used to
+/// customize tree navigation order.
+///
+/// {@category enum}
+class TreeTraversalOptions {
+  /// Pre-order, visit children from first to last.
+  @Deprecated('Use TreeTraversalOptions_Default instead')
+  static const TreeTraversalOptions_Default = 0;
+
+  /// Post-order.
+  @Deprecated('Use TreeTraversalOptions_PostOrder instead')
+  static const TreeTraversalOptions_PostOrder = 0x1;
+
+  /// Visit children from last to first.
+  @Deprecated('Use TreeTraversalOptions_LastToFirstOrder instead')
+  static const TreeTraversalOptions_LastToFirstOrder = 0x2;
+}
+
+/// Contains values that specify the current state of the window for purposes
+/// of user interaction.
+///
+/// {@category enum}
+class WindowInteractionState {
+  /// The window is running. This does not guarantee that the window is ready
+  /// for user interaction or is responding.
+  @Deprecated('Use WindowInteractionState_Running instead')
+  static const WindowInteractionState_Running = 0;
+
+  /// The window is closing.
+  @Deprecated('Use WindowInteractionState_Closing instead')
+  static const WindowInteractionState_Closing = 1;
+
+  /// The window is ready for user interaction.
+  @Deprecated('Use WindowInteractionState_ReadyForUserInteraction instead')
+  static const WindowInteractionState_ReadyForUserInteraction = 2;
+
+  /// The window is blocked by a modal window.
+  @Deprecated('Use WindowInteractionState_BlockedByModalWindow instead')
+  static const WindowInteractionState_BlockedByModalWindow = 3;
+
+  /// The window is not responding.
+  @Deprecated('Use WindowInteractionState_NotResponding instead')
+  static const WindowInteractionState_NotResponding = 4;
+}
+
+/// Contains values that specify the visual state of a window.
+///
+/// {@category enum}
+class WindowVisualState {
+  /// The window is normal (restored).
+  @Deprecated('Use WindowVisualState_Normal instead')
+  static const WindowVisualState_Normal = 0;
+
+  /// The window is maximized.
+  @Deprecated('Use WindowVisualState_Maximized instead')
+  static const WindowVisualState_Maximized = 1;
+
+  /// The window is minimized.
+  @Deprecated('Use WindowVisualState_Minimized instead')
+  static const WindowVisualState_Minimized = 2;
+}
+
+/// Possible settings for the Automatic Logon Policy.
+///
+/// {@category enum}
+class WinHttpRequestAutoLogonPolicy {
+  /// An authenticated log on, using the default credentials, is performed for
+  /// all requests.
+  @Deprecated('Use AutoLogonPolicy_Always instead')
+  static const AutoLogonPolicy_Always = 0;
+
+  /// An authenticated log on, using the default credentials, is performed only
+  /// for requests on the local intranet. The local intranet is considered to
+  /// be any server on the proxy bypass list in the current proxy configuration.
+  @Deprecated('Use AutoLogonPolicy_OnlyIfBypassProxy instead')
+  static const AutoLogonPolicy_OnlyIfBypassProxy = 1;
+
+  /// Authentication is not used automatically.
+  @Deprecated('Use AutoLogonPolicy_Never instead')
+  static const AutoLogonPolicy_Never = 2;
+}
+
+/// Options that can be set or retrieved for the current WinHTTP session.
+///
+/// {@category enum}
+class WinHttpRequestOption {
+  /// Sets or retrieves a VARIANT that contains the user agent string.
+  @Deprecated('Use WinHttpRequestOption_UserAgentString instead')
+  static const WinHttpRequestOption_UserAgentString = 0;
+
+  /// Retrieves a VARIANT that contains the URL of the resource.
+  @Deprecated('Use WinHttpRequestOption_URL instead')
+  static const WinHttpRequestOption_URL = 1;
+
+  /// Sets or retrieves a VARIANT that identifies the code page for the URL
+  /// string.
+  @Deprecated('Use WinHttpRequestOption_URLCodePage instead')
+  static const WinHttpRequestOption_URLCodePage = 2;
+
+  /// Sets or retrieves a VARIANT that indicates whether percent characters in
+  /// the URL string are converted to an escape sequence.
+  @Deprecated('Use WinHttpRequestOption_EscapePercentInURL instead')
+  static const WinHttpRequestOption_EscapePercentInURL = 3;
+
+  /// Sets or retrieves a VARIANT that indicates which server certificate
+  /// errors should be ignored.
+  @Deprecated('Use WinHttpRequestOption_SslErrorIgnoreFlags instead')
+  static const WinHttpRequestOption_SslErrorIgnoreFlags = 4;
+
+  /// Sets a VARIANT that specifies the client certificate that is sent to a
+  /// server for authentication.
+  @Deprecated('Use WinHttpRequestOption_SelectCertificate instead')
+  static const WinHttpRequestOption_SelectCertificate = 5;
+
+  /// Sets or retrieves a VARIANT that indicates whether requests are
+  /// automatically redirected when the server specifies a new location for the
+  /// resource.
+  @Deprecated('Use WinHttpRequestOption_EnableRedirects instead')
+  static const WinHttpRequestOption_EnableRedirects = 6;
+
+  /// Sets or retrieves a VARIANT that indicates whether unsafe characters in
+  /// the path and query components of a URL are converted to escape sequences.
+  @Deprecated('Use WinHttpRequestOption_UrlEscapeDisable instead')
+  static const WinHttpRequestOption_UrlEscapeDisable = 7;
+
+  /// Sets or retrieves a VARIANT that indicates whether unsafe characters in
+  /// the query component of the URL are converted to escape sequences.
+  @Deprecated('Use WinHttpRequestOption_UrlEscapeDisableQuery instead')
+  static const WinHttpRequestOption_UrlEscapeDisableQuery = 8;
+
+  /// Sets or retrieves a VARIANT that indicates which secure protocols can be
+  /// used.
+  @Deprecated('Use WinHttpRequestOption_SecureProtocols instead')
+  static const WinHttpRequestOption_SecureProtocols = 9;
+
+  /// Sets or retrieves a VARIANT that indicates whether tracing is currently
+  /// enabled.
+  @Deprecated('Use WinHttpRequestOption_EnableTracing instead')
+  static const WinHttpRequestOption_EnableTracing = 10;
+
+  /// Controls whether the WinHttpRequest object temporarily reverts client
+  /// impersonation for the duration of the SSL certificate authentication
+  /// operations.
+  @Deprecated('Use WinHttpRequestOption_RevertImpersonationOverSsl instead')
+  static const WinHttpRequestOption_RevertImpersonationOverSsl = 11;
+
+  /// Controls whether or not WinHTTP allows redirects.
+  @Deprecated('Use WinHttpRequestOption_EnableHttpsToHttpRedirects instead')
+  static const WinHttpRequestOption_EnableHttpsToHttpRedirects = 12;
+
+  /// Enables or disables support for Passport authentication.
+  @Deprecated('Use WinHttpRequestOption_EnablePassportAuthentication instead')
+  static const WinHttpRequestOption_EnablePassportAuthentication = 13;
+
+  /// Sets or retrieves the maximum number of redirects that WinHTTP follows;
+  /// the default is 10.
+  @Deprecated('Use WinHttpRequestOption_MaxAutomaticRedirects instead')
+  static const WinHttpRequestOption_MaxAutomaticRedirects = 14;
+
+  /// Sets or retrieves a bound set on the maximum size of the header portion
+  /// of the server's response.
+  @Deprecated('Use WinHttpRequestOption_MaxResponseHeaderSize instead')
+  static const WinHttpRequestOption_MaxResponseHeaderSize = 15;
+
+  /// Sets or retrieves a bound on the amount of data that will be drained from
+  /// responses in order to reuse a connection.
+  @Deprecated('Use WinHttpRequestOption_MaxResponseDrainSize instead')
+  static const WinHttpRequestOption_MaxResponseDrainSize = 16;
+
+  /// Sets or retrieves a boolean value that indicates whether HTTP/1.1 or
+  /// HTTP/1.0 should be used.
+  @Deprecated('Use WinHttpRequestOption_EnableHttp1_1 instead')
+  static const WinHttpRequestOption_EnableHttp1_1 = 17;
+
+  /// Enables server certificate revocation checking during SSL negotiation.
+  @Deprecated(
+    'Use WinHttpRequestOption_EnableCertificateRevocationCheck instead',
+  )
+  static const WinHttpRequestOption_EnableCertificateRevocationCheck = 18;
+}
+
+/// Indicates the kind of system information to be retrieved.
+/// {@category enum}
+class SYSTEM_INFORMATION_CLASS {
+  @Deprecated('Use SystemBasicInformation instead')
+  static const SystemBasicInformation = 0;
+  @Deprecated('Use SystemPerformanceInformation instead')
+  static const SystemPerformanceInformation = 2;
+  @Deprecated('Use SystemTimeOfDayInformation instead')
+  static const SystemTimeOfDayInformation = 3;
+  @Deprecated('Use SystemProcessInformation instead')
+  static const SystemProcessInformation = 5;
+  @Deprecated('Use SystemProcessorPerformanceInformation instead')
+  static const SystemProcessorPerformanceInformation = 8;
+  @Deprecated('Use SystemInterruptInformation instead')
+  static const SystemInterruptInformation = 23;
+  @Deprecated('Use SystemExceptionInformation instead')
+  static const SystemExceptionInformation = 33;
+  @Deprecated('Use SystemRegistryQuotaInformation instead')
+  static const SystemRegistryQuotaInformation = 37;
+  @Deprecated('Use SystemLookasideInformation instead')
+  static const SystemLookasideInformation = 45;
+  @Deprecated('Use SystemCodeIntegrityInformation instead')
+  static const SystemCodeIntegrityInformation = 103;
+  @Deprecated('Use SystemPolicyInformation instead')
+  static const SystemPolicyInformation = 134;
+}
+
+/// The SpeechAudioFormatType enumeration lists the supported stream formats.
+/// {@category enum}
+class SpeechAudioFormatType {
+  @Deprecated('Use SAFTDefault instead')
+  static const SAFTDefault = -1;
+  @Deprecated('Use SAFTNoAssignedFormat instead')
+  static const SAFTNoAssignedFormat = 0;
+  @Deprecated('Use SAFTText instead')
+  static const SAFTText = 1;
+  @Deprecated('Use SAFTNonStandardFormat instead')
+  static const SAFTNonStandardFormat = 2;
+  @Deprecated('Use SAFTExtendedAudioFormat instead')
+  static const SAFTExtendedAudioFormat = 3;
+  @Deprecated('Use SAFT8kHz8BitMono instead')
+  static const SAFT8kHz8BitMono = 4;
+  @Deprecated('Use SAFT8kHz8BitStereo instead')
+  static const SAFT8kHz8BitStereo = 5;
+  @Deprecated('Use SAFT8kHz16BitMono instead')
+  static const SAFT8kHz16BitMono = 6;
+  @Deprecated('Use SAFT8kHz16BitStereo instead')
+  static const SAFT8kHz16BitStereo = 7;
+  @Deprecated('Use SAFT11kHz8BitMono instead')
+  static const SAFT11kHz8BitMono = 8;
+  @Deprecated('Use SAFT11kHz8BitStereo instead')
+  static const SAFT11kHz8BitStereo = 9;
+  @Deprecated('Use SAFT11kHz16BitMono instead')
+  static const SAFT11kHz16BitMono = 10;
+  @Deprecated('Use SAFT11kHz16BitStereo instead')
+  static const SAFT11kHz16BitStereo = 11;
+  @Deprecated('Use SAFT12kHz8BitMono instead')
+  static const SAFT12kHz8BitMono = 12;
+  @Deprecated('Use SAFT12kHz8BitStereo instead')
+  static const SAFT12kHz8BitStereo = 13;
+  @Deprecated('Use SAFT12kHz16BitMono instead')
+  static const SAFT12kHz16BitMono = 14;
+  @Deprecated('Use SAFT12kHz16BitStereo instead')
+  static const SAFT12kHz16BitStereo = 15;
+  @Deprecated('Use SAFT16kHz8BitMono instead')
+  static const SAFT16kHz8BitMono = 16;
+  @Deprecated('Use SAFT16kHz8BitStereo instead')
+  static const SAFT16kHz8BitStereo = 17;
+  @Deprecated('Use SAFT16kHz16BitMono instead')
+  static const SAFT16kHz16BitMono = 18;
+  @Deprecated('Use SAFT16kHz16BitStereo instead')
+  static const SAFT16kHz16BitStereo = 19;
+  @Deprecated('Use SAFT22kHz8BitMono instead')
+  static const SAFT22kHz8BitMono = 20;
+  @Deprecated('Use SAFT22kHz8BitStereo instead')
+  static const SAFT22kHz8BitStereo = 21;
+  @Deprecated('Use SAFT22kHz16BitMono instead')
+  static const SAFT22kHz16BitMono = 22;
+  @Deprecated('Use SAFT22kHz16BitStereo instead')
+  static const SAFT22kHz16BitStereo = 23;
+  @Deprecated('Use SAFT24kHz8BitMono instead')
+  static const SAFT24kHz8BitMono = 24;
+  @Deprecated('Use SAFT24kHz8BitStereo instead')
+  static const SAFT24kHz8BitStereo = 25;
+  @Deprecated('Use SAFT24kHz16BitMono instead')
+  static const SAFT24kHz16BitMono = 26;
+  @Deprecated('Use SAFT24kHz16BitStereo instead')
+  static const SAFT24kHz16BitStereo = 27;
+  @Deprecated('Use SAFT32kHz8BitMono instead')
+  static const SAFT32kHz8BitMono = 28;
+  @Deprecated('Use SAFT32kHz8BitStereo instead')
+  static const SAFT32kHz8BitStereo = 29;
+  @Deprecated('Use SAFT32kHz16BitMono instead')
+  static const SAFT32kHz16BitMono = 30;
+  @Deprecated('Use SAFT32kHz16BitStereo instead')
+  static const SAFT32kHz16BitStereo = 31;
+  @Deprecated('Use SAFT44kHz8BitMono instead')
+  static const SAFT44kHz8BitMono = 32;
+  @Deprecated('Use SAFT44kHz8BitStereo instead')
+  static const SAFT44kHz8BitStereo = 33;
+  @Deprecated('Use SAFT44kHz16BitMono instead')
+  static const SAFT44kHz16BitMono = 34;
+  @Deprecated('Use SAFT44kHz16BitStereo instead')
+  static const SAFT44kHz16BitStereo = 35;
+  @Deprecated('Use SAFT48kHz8BitMono instead')
+  static const SAFT48kHz8BitMono = 36;
+  @Deprecated('Use SAFT48kHz8BitStereo instead')
+  static const SAFT48kHz8BitStereo = 37;
+  @Deprecated('Use SAFT48kHz16BitMono instead')
+  static const SAFT48kHz16BitMono = 38;
+  @Deprecated('Use SAFT48kHz16BitStereo instead')
+  static const SAFT48kHz16BitStereo = 39;
+  @Deprecated('Use SAFTTrueSpeech_8kHz1BitMono instead')
+  static const SAFTTrueSpeech_8kHz1BitMono = 40;
+  @Deprecated('Use SAFTCCITT_ALaw_8kHzMono instead')
+  static const SAFTCCITT_ALaw_8kHzMono = 41;
+  @Deprecated('Use SAFTCCITT_ALaw_8kHzStereo instead')
+  static const SAFTCCITT_ALaw_8kHzStereo = 42;
+  @Deprecated('Use SAFTCCITT_ALaw_11kHzMono instead')
+  static const SAFTCCITT_ALaw_11kHzMono = 43;
+  @Deprecated('Use SAFTCCITT_ALaw_11kHzStereo instead')
+  static const SAFTCCITT_ALaw_11kHzStereo = 4;
+  @Deprecated('Use SAFTCCITT_ALaw_22kHzMono instead')
+  static const SAFTCCITT_ALaw_22kHzMono = 44;
+  @Deprecated('Use SAFTCCITT_ALaw_22kHzStereo instead')
+  static const SAFTCCITT_ALaw_22kHzStereo = 45;
+  @Deprecated('Use SAFTCCITT_ALaw_44kHzMono instead')
+  static const SAFTCCITT_ALaw_44kHzMono = 46;
+  @Deprecated('Use SAFTCCITT_ALaw_44kHzStereo instead')
+  static const SAFTCCITT_ALaw_44kHzStereo = 47;
+  @Deprecated('Use SAFTCCITT_uLaw_8kHzMono instead')
+  static const SAFTCCITT_uLaw_8kHzMono = 48;
+  @Deprecated('Use SAFTCCITT_uLaw_8kHzStereo instead')
+  static const SAFTCCITT_uLaw_8kHzStereo = 49;
+  @Deprecated('Use SAFTCCITT_uLaw_11kHzMono instead')
+  static const SAFTCCITT_uLaw_11kHzMono = 50;
+  @Deprecated('Use SAFTCCITT_uLaw_11kHzStereo instead')
+  static const SAFTCCITT_uLaw_11kHzStereo = 51;
+  @Deprecated('Use SAFTCCITT_uLaw_22kHzMono instead')
+  static const SAFTCCITT_uLaw_22kHzMono = 52;
+  @Deprecated('Use SAFTCCITT_uLaw_22kHzStereo instead')
+  static const SAFTCCITT_uLaw_22kHzStereo = 53;
+  @Deprecated('Use SAFTCCITT_uLaw_44kHzMono instead')
+  static const SAFTCCITT_uLaw_44kHzMono = 54;
+  @Deprecated('Use SAFTCCITT_uLaw_44kHzStereo instead')
+  static const SAFTCCITT_uLaw_44kHzStereo = 55;
+  @Deprecated('Use SAFTADPCM_8kHzMono instead')
+  static const SAFTADPCM_8kHzMono = 56;
+  @Deprecated('Use SAFTADPCM_8kHzStereo instead')
+  static const SAFTADPCM_8kHzStereo = 57;
+  @Deprecated('Use SAFTADPCM_11kHzMono instead')
+  static const SAFTADPCM_11kHzMono = 58;
+  @Deprecated('Use SAFTADPCM_11kHzStereo instead')
+  static const SAFTADPCM_11kHzStereo = 59;
+  @Deprecated('Use SAFTADPCM_22kHzMono instead')
+  static const SAFTADPCM_22kHzMono = 60;
+  @Deprecated('Use SAFTADPCM_22kHzStereo instead')
+  static const SAFTADPCM_22kHzStereo = 61;
+  @Deprecated('Use SAFTADPCM_44kHzMono instead')
+  static const SAFTADPCM_44kHzMono = 62;
+  @Deprecated('Use SAFTADPCM_44kHzStereo instead')
+  static const SAFTADPCM_44kHzStereo = 63;
+  @Deprecated('Use SAFTGSM610_8kHzMono instead')
+  static const SAFTGSM610_8kHzMono = 64;
+  @Deprecated('Use SAFTGSM610_11kHzMono instead')
+  static const SAFTGSM610_11kHzMono = 65;
+  @Deprecated('Use SAFTGSM610_22kHzMono instead')
+  static const SAFTGSM610_22kHzMono = 66;
+  @Deprecated('Use SAFTGSM610_44kHzMono instead')
+  static const SAFTGSM610_44kHzMono = 67;
+  @Deprecated('Use SAFTNUM_FORMATS instead')
+  static const SAFTNUM_FORMATS = 68;
+}
+
+/// The SpeechRunState enumeration lists the running states of a TTS voice.
+/// {@category enum}
+class SpeechRunState {
+  /// The voice has finished rendering all queued phrases.
+  @Deprecated('Use SRSEDone instead')
+  static const SRSEDone = 1;
+
+  /// The SpVoice currently claims the audio queue.
+  @Deprecated('Use SRSEIsSpeaking instead')
+  static const SRSEIsSpeaking = 2;
+}
+
+/// The SpeechStreamSeekPositionType enumeration lists the types of positioning
+/// from which a Seek method can be performed.
+/// {@category enum}
+class SpeechStreamSeekPositionType {
+  /// Calculates the stream offset relative from the start of the stream.
+  @Deprecated('Use SSSPTRelativeToStart instead')
+  static const SSSPTRelativeToStart = 0;
+
+  /// Calculates the stream offset relative from the current position.
+  @Deprecated('Use SSSPTRelativeToCurrentPosition instead')
+  static const SSSPTRelativeToCurrentPosition = 1;
+
+  /// Calculates the stream offset relative from the end of the stream.
+  @Deprecated('Use SSSPTRelativeToEnd instead')
+  static const SSSPTRelativeToEnd = 2;
+}
+
+/// The SpeechVoiceEvents enumeration lists the types of events which a
+/// text-to-speech (TTS) engine can send to an SpVoice object.
+/// {@category enum}
+class SpeechVoiceEvents {
+  /// Represents the StartStream event, which occurs when the engine begins
+  /// speaking a stream.
+  @Deprecated('Use SVEStartInputStream instead')
+  static const SVEStartInputStream = 2;
+
+  /// Represents the EndStream event, which occurs when the engine encounters
+  /// the end of a stream while speaking.
+  @Deprecated('Use SVEEndInputStream instead')
+  static const SVEEndInputStream = 4;
+
+  /// Represents the VoiceChange event, which occurs when the engine encounters
+  /// a change of Voice while speaking.
+  @Deprecated('Use SVEVoiceChange instead')
+  static const SVEVoiceChange = 8;
+
+  /// Represents the Bookmark event, which occurs when the engine encounters a
+  /// bookmark while speaking.
+  @Deprecated('Use SVEBookmark instead')
+  static const SVEBookmark = 16;
+
+  /// Represents the WordBoundary event, which occurs when the engine completes
+  /// a word while speaking.
+  @Deprecated('Use SVEWordBoundary instead')
+  static const SVEWordBoundary = 32;
+
+  /// Represents the Phoneme event, which occurs when the engine completes a
+  /// phoneme while speaking.
+  @Deprecated('Use SVEPhoneme instead')
+  static const SVEPhoneme = 64;
+
+  /// Represents the SentenceBoundary event, which occurs when the engine
+  /// completes a sentence while speaking.
+  @Deprecated('Use SVESentenceBoundary instead')
+  static const SVESentenceBoundary = 128;
+
+  /// Represents the Viseme event, which occurs when the engine completes a
+  /// viseme while speaking.
+  @Deprecated('Use SVEViseme instead')
+  static const SVEViseme = 256;
+
+  /// Represents the AudioLevel event, which occurs when the engine has
+  /// completed an audio level change while speaking.
+  @Deprecated('Use SVEAudioLevel instead')
+  static const SVEAudioLevel = 512;
+
+  /// Represents a private engine event.
+  @Deprecated('Use SVEPrivate instead')
+  static const SVEPrivate = 32768;
+
+  /// Represents all speech voice events.
+  @Deprecated('Use SVEAllEvents instead')
+  static const SVEAllEvents = 33790;
+}
+
+/// The SpeechVoicePriority enumeration lists the possible Priority settings of
+/// an SpVoice object.
+/// {@category enum}
+class SpeechVoicePriority {
+  /// The priority of a normal voice. Text streams spoken by a normal voice are
+  /// added to the end of the voice queue. A voice with SVPNormal priority
+  /// cannot interrupt another voice.
+  @Deprecated('Use SVPNormal instead')
+  static const SVPNormal = 0;
+
+  /// The priority of an alert voice. Text streams spoken by an alert voice are
+  /// inserted into the voice queue ahead of normal voice streams. An alert
+  /// voice will interrupt a normal voice, which will resume speaking when the
+  /// alert voice has finished speaking.
+  @Deprecated('Use SVPAlert instead')
+  static const SVPAlert = 1;
+
+  /// The priority of an over voice. Text streams spoken by an over voice go
+  /// into the voice queue ahead of normal and alert streams. An over voice will
+  /// not interrupt, but speaks over (mixes with) the voices of lower
+  /// priorities.
+  @Deprecated('Use SVPOver instead')
+  static const SVPOver = 2;
+}
+
+/// The SpeechVoiceSpeakFlags enumeration lists flags that control the
+/// SpVoice.Speak method.
+/// {@category enum}
+class SpeechVoiceSpeakFlags {
+  /// Specifies that the default settings should be used. The defaults are:
+  /// * To speak the given text string synchronously (override with
+  ///   SVSFlagsAsync),
+  /// * Not to purge pending speak requests (override with
+  ///   SVSFPurgeBeforeSpeak),
+  /// * To parse the text as XML only if the first character is a
+  ///   left-angle-bracket (override with SVSFIsXML or SVSFIsNotXML),
+  /// * Not to persist global XML state changes across speak calls (override
+  ///   with SVSFPersistXML), and
+  /// * Not to expand punctuation characters into words (override with
+  ///   SVSFNLPSpeakPunc).
+  @Deprecated('Use SVSFDefault instead')
+  static const SVSFDefault = 0;
+
+  /// Specifies that the Speak call should be asynchronous. That is, it will
+  /// return immediately after the speak request is queued.
+  @Deprecated('Use SVSFlagsAsync instead')
+  static const SVSFlagsAsync = 1;
+
+  /// Purges all pending speak requests prior to this speak call.
+  @Deprecated('Use SVSFPurgeBeforeSpeak instead')
+  static const SVSFPurgeBeforeSpeak = 2;
+
+  /// The string passed to the Speak method is a file name rather than text. As
+  /// a result, the string itself is not spoken but rather the file the path
+  /// that points to is spoken.
+  @Deprecated('Use SVSFIsFilename instead')
+  static const SVSFIsFilename = 4;
+
+  /// The input text will be parsed for XML markup.
+  @Deprecated('Use SVSFIsXML instead')
+  static const SVSFIsXML = 8;
+
+  /// The input text will not be parsed for XML markup.
+  @Deprecated('Use SVSFIsNotXML instead')
+  static const SVSFIsNotXML = 16;
+
+  /// Global state changes in the XML markup will persist across speak calls.
+  @Deprecated('Use SVSFPersistXML instead')
+  static const SVSFPersistXML = 32;
+
+  /// Punctuation characters should be expanded into words (e.g. "This is it."
+  /// would become "This is it period").
+  @Deprecated('Use SVSFNLPSpeakPunc instead')
+  static const SVSFNLPSpeakPunc = 64;
+
+  /// Force XML parsing as MS SAPI.
+  @Deprecated('Use SVSFParseSapi instead')
+  static const SVSFParseSapi = 128;
+
+  /// Force XML parsing as W3C SSML.
+  @Deprecated('Use SVSFParseSsml instead')
+  static const SVSFParseSsml = 256;
+
+  /// The TTS XML format is auto-detected. This is the default if none of these
+  /// TTS XML format values are present in the bit-field.
+  @Deprecated('Use SVSFParseAutoDetect instead')
+  static const SVSFParseAutoDetect = 0;
+
+  /// Flags handled by SAPI (as opposed to the text-to-speech engine) are set in
+  /// this mask.
+  @Deprecated('Use SVSFNLPMask instead')
+  static const SVSFNLPMask = 64;
+
+  /// SVSFParseSapi|SVSFParseSsml
+  @Deprecated('Use SVSFParseMask instead')
+  static const SVSFParseMask = 384;
+
+  /// This is an existing SAPI 5.1 mask that has every flag bit set. In 5.3, it
+  /// has been extended to contain SVSFParseMask.
+  @Deprecated('Use SVSFVoiceMask instead')
+  static const SVSFVoiceMask = 511;
+
+  /// This mask has every unused bit set.
+  @Deprecated('Use SVSFUnusedFlags instead')
+  static const SVSFUnusedFlags = -512;
+}
+
+const VT_EMPTY = 0;
+const VT_NULL = 1;
+const VT_I2 = 2;
+const VT_I4 = 3;
+const VT_R4 = 4;
+const VT_R8 = 5;
+const VT_CY = 6;
+const VT_DATE = 7;
+const VT_BSTR = 8;
+const VT_DISPATCH = 9;
+const VT_ERROR = 10;
+const VT_BOOL = 11;
+const VT_VARIANT = 12;
+const VT_UNKNOWN = 13;
+const VT_DECIMAL = 14;
+const VT_I1 = 16;
+const VT_UI1 = 17;
+const VT_UI2 = 18;
+const VT_UI4 = 19;
+const VT_I8 = 20;
+const VT_UI8 = 21;
+const VT_INT = 22;
+const VT_UINT = 23;
+const VT_VOID = 24;
+const VT_HRESULT = 25;
+const VT_PTR = 26;
+const VT_SAFEARRAY = 27;
+const VT_CARRAY = 28;
+const VT_USERDEFINED = 29;
+const VT_LPSTR = 30;
+const VT_LPWSTR = 31;
+const VT_RECORD = 36;
+const VT_INT_PTR = 37;
+const VT_UINT_PTR = 38;
+const VT_FILETIME = 64;
+const VT_BLOB = 65;
+const VT_STREAM = 66;
+const VT_STORAGE = 67;
+const VT_STREAMED_OBJECT = 68;
+const VT_STORED_OBJECT = 69;
+const VT_BLOB_OBJECT = 70;
+const VT_CF = 71;
+const VT_CLSID = 72;
+const VT_VERSIONED_STREAM = 73;
+const VT_BSTR_BLOB = 0xfff;
+const VT_VECTOR = 0x1000;
+const VT_ARRAY = 0x2000;
+const VT_BYREF = 0x4000;
+const VT_RESERVED = 0x8000;
+const VT_ILLEGAL = 0xffff;
+const VT_ILLEGALMASKED = 0xfff;
+const VT_TYPEMASK = 0xff;
+
+const MC_COLOR_TEMPERATURE_UNKNOWN = 0;
+
+const MC_COLOR_TEMPERATURE_4000K = 1;
+
+const MC_COLOR_TEMPERATURE_5000K = 2;
+
+const MC_COLOR_TEMPERATURE_6500K = 3;
+
+const MC_COLOR_TEMPERATURE_7500K = 4;
+
+const MC_COLOR_TEMPERATURE_8200K = 5;
+
+const MC_COLOR_TEMPERATURE_9300K = 6;
+
+const MC_COLOR_TEMPERATURE_10000K = 7;
+
+const MC_COLOR_TEMPERATURE_11500K = 8;
+
+const MC_SHADOW_MASK_CATHODE_RAY_TUBE = 0;
+
+const MC_APERTURE_GRILL_CATHODE_RAY_TUBE = 1;
+
+const MC_THIN_FILM_TRANSISTOR = 2;
+
+const MC_LIQUID_CRYSTAL_ON_SILICON = 3;
+
+const MC_PLASMA = 4;
+
+const MC_ORGANIC_LIGHT_EMITTING_DIODE = 5;
+
+const MC_ELECTROLUMINESCENT = 6;
+
+const MC_MICROELECTROMECHANICAL = 7;
+
+const MC_FIELD_EMISSION_DEVICE = 8;
+
+const MC_RED_DRIVE = 0;
+
+const MC_GREEN_DRIVE = 1;
+
+const MC_BLUE_DRIVE = 2;
+
+const MC_RED_GAIN = 0;
+
+const MC_GREEN_GAIN = 1;
+
+const MC_BLUE_GAIN = 2;
+
+const MC_HORIZONTAL_POSITION = 0;
+
+const MC_VERTICAL_POSITION = 1;
+
+const MC_WIDTH = 0;
+
+const MC_HEIGHT = 1;
+
+/// Invalid DPI awareness. This is an invalid DPI awareness value.
+const DPI_AWARENESS_INVALID = -1;
+
+/// DPI unaware. This process does not scale for DPI changes and is always
+/// assumed to have a scale factor of 100% (96 DPI). It will be automatically
+/// scaled by the system on any other DPI setting.
+const DPI_AWARENESS_UNAWARE = 0;
+
+/// System DPI aware. This process does not scale for DPI changes. It will
+/// query for the DPI once and use that value for the lifetime of the process.
+/// If the DPI changes, the process will not adjust to the new DPI value. It
+/// will be automatically scaled up or down by the system when the DPI changes
+/// from the system value.
+const DPI_AWARENESS_SYSTEM_AWARE = 1;
+
+/// Per monitor DPI aware. This process checks for the DPI when it is created
+/// and adjusts the scale factor whenever the DPI changes. These processes are
+/// not automatically scaled by the system.
+const DPI_AWARENESS_PER_MONITOR_AWARE = 2;
+
+/// Invalid DPI hosting behavior. This usually occurs if the previous
+/// SetThreadDpiHostingBehavior call used an invalid parameter.
+const DPI_HOSTING_BEHAVIOR_INVALID = -1;
+
+/// Default DPI hosting behavior. The associated window behaves as normal, and
+/// cannot create or re-parent child windows with a different
+/// DPI_AWARENESS_CONTEXT.
+const DPI_HOSTING_BEHAVIOR_DEFAULT = 0;
+
+/// Mixed DPI hosting behavior. This enables the creation and re-parenting of
+/// child windows with different DPI_AWARENESS_CONTEXT. These child windows
+/// will be independently scaled by the OS.
+const DPI_HOSTING_BEHAVIOR_MIXED = 1;
+
+/// DPI unaware. This app does not scale for DPI changes and is always assumed
+/// to have a scale factor of 100% (96 DPI). It will be automatically scaled
+/// by the system on any other DPI setting.
+const PROCESS_DPI_UNAWARE = 0;
+
+/// System DPI aware. This app does not scale for DPI changes. It will query
+/// for the DPI once and use that value for the lifetime of the app. If the
+/// DPI changes, the app will not adjust to the new DPI value. It will be
+/// automatically scaled up or down by the system when the DPI changes from
+/// the system value.
+const PROCESS_SYSTEM_DPI_AWARE = 1;
+
+/// Per monitor DPI aware. This app checks for the DPI when it is created and
+/// adjusts the scale factor whenever the DPI changes. These applications are
+/// not automatically scaled by the system.
+const PROCESS_PER_MONITOR_DPI_AWARE = 2;
+
+/// The effective DPI. This value should be used when determining the correct
+/// scale factor for scaling UI elements. This incorporates the scale factor
+/// set by the user for this specific display.
+const MDT_EFFECTIVE_DPI = 0;
+
+/// The angular DPI. This DPI ensures rendering at a compliant angular
+/// resolution on the screen. This does not include the scale factor set by
+/// the user for this specific display.
+const MDT_ANGULAR_DPI = 1;
+
+/// The raw DPI. This value is the linear DPI of the screen as measured on the
+/// screen itself. Use this value when you want to read the pixel density and
+/// not the recommended scaling setting. This does not include the scale
+/// factor set by the user for this specific display and is not guaranteed to
+/// be a supported DPI value.
+const MDT_RAW_DPI = 2;
+
+/// The default DPI setting for a monitor is MDT_EFFECTIVE_DPI.
+const MDT_DEFAULT = MDT_EFFECTIVE_DPI;
+
+/// The default behavior of the dialog manager. The dialog managed will update
+/// the font, size, and position of the child window on DPI changes.
+const DCDC_DEFAULT = 0x0000;
+
+/// Prevents the dialog manager from sending an updated font to the child
+/// window via WM_SETFONT in response to a DPI change.
+const DCDC_DISABLE_FONT_UPDATE = 0x0001;
+
+/// Prevents the dialog manager from resizing and repositioning the child
+/// window in response to a DPI change.
+const DCDC_DISABLE_RELAYOUT = 0x0002;
+
+/// The default behavior of the dialog manager. In response to a DPI change,
+/// the dialog manager will re-layout each control, update the font on each
+/// control, resize the dialog, and update the dialog's own font.
+const DDC_DEFAULT = 0x0000;
+
+/// Prevents the dialog manager from responding to WM_GETDPISCALEDSIZE and
+/// WM_DPICHANGED, disabling all default DPI scaling behavior.
+const DDC_DISABLE_ALL = 0x0001;
+
+/// Prevents the dialog manager from resizing the dialog in response to a DPI
+/// change.
+const DDC_DISABLE_RESIZE = 0x0002;
+
+/// Prevents the dialog manager from re-layouting all of the dialogue's
+/// immediate children HWNDs in response to a DPI change.
+const DDC_DISABLE_CONTROL_RELAYOUT = 0x0004;
+
+const BLUETOOTH_AUTHENTICATION_METHOD_LEGACY = 0;
+
+const BLUETOOTH_AUTHENTICATION_METHOD_OOB = 1;
+
+const BLUETOOTH_AUTHENTICATION_METHOD_NUMERIC_COMPARISON = 2;
+
+const BLUETOOTH_AUTHENTICATION_METHOD_PASSKEY_NOTIFICATION = 3;
+
+const BLUETOOTH_AUTHENTICATION_METHOD_PASSKEY = 4;
+
+const BLUETOOTH_MITM_ProtectionNotRequired = 0;
+
+const BLUETOOTH_MITM_ProtectionRequired = 1;
+
+const BLUETOOTH_MITM_ProtectionNotRequiredBonding = 2;
+
+const BLUETOOTH_MITM_ProtectionRequiredBonding = 3;
+
+const BLUETOOTH_MITM_ProtectionNotRequiredGeneralBonding = 4;
+
+const BLUETOOTH_MITM_ProtectionRequiredGeneralBonding = 5;
+
+const BLUETOOTH_MITM_ProtectionNotDefined = 6;
+
+const BLUETOOTH_IO_CAPABILITY_DISPLAYONLY = 0;
+
+const BLUETOOTH_IO_CAPABILITY_DISPLAYYESNO = 1;
+
+const BLUETOOTH_IO_CAPABILITY_KEYBOARDONLY = 2;
+
+const BLUETOOTH_IO_CAPABILITY_NOINPUTNOOUTPUT = 3;
+
+const BLUETOOTH_IO_CAPABILITY_UNDEFINED = 4;
+
+const FOS_OVERWRITEPROMPT = 0x2;
+
+const FOS_STRICTFILETYPES = 0x4;
+
+const FOS_NOCHANGEDIR = 0x8;
+
+const FOS_PICKFOLDERS = 0x20;
+
+const FOS_FORCEFILESYSTEM = 0x40;
+
+const FOS_ALLNONSTORAGEITEMS = 0x80;
+
+const FOS_NOVALIDATE = 0x100;
+
+const FOS_ALLOWMULTISELECT = 0x200;
+
+const FOS_PATHMUSTEXIST = 0x800;
+
+const FOS_FILEMUSTEXIST = 0x1000;
+
+const FOS_CREATEPROMPT = 0x2000;
+
+const FOS_SHAREAWARE = 0x4000;
+
+const FOS_NOREADONLYRETURN = 0x8000;
+
+const FOS_NOTESTFILECREATE = 0x10000;
+
+const FOS_HIDEMRUPLACES = 0x20000;
+
+const FOS_HIDEPINNEDPLACES = 0x40000;
+
+const FOS_NODEREFERENCELINKS = 0x100000;
+
+const FOS_OKBUTTONNEEDSINTERACTION = 0x200000;
+
+const FOS_DONTADDTORECENT = 0x2000000;
+
+const FOS_FORCESHOWHIDDEN = 0x10000000;
+
+const FOS_DEFAULTNOMINIMODE = 0x20000000;
+
+const FOS_FORCEPREVIEWPANEON = 0x40000000;
+
+const FOS_SUPPORTSTREAMABLEITEMS = 0x80000000;
+
+/// Shuffle is enabled; the images are shown in a random order.
+const DSO_SHUFFLEIMAGES = 0x1;
+
+/// Slideshows are enabled.
+const DSS_ENABLED = 0x1;
+
+/// A slideshow is currently configured.
+const DSS_SLIDESHOW = 0x2;
+
+/// A remote session has temporarily disabled the slideshow.
+const DSS_DISABLED_BY_REMOTE_SESSION = 0x4;
+
+/// Advance the slideshow forward.
+const DSD_FORWARD = 0;
+
+/// Advance the slideshow backward.
+const DSD_BACKWARD = 1;
+
+/// Center the image; do not stretch.
+const DWPOS_CENTER = 0;
+
+/// Tile the image across all monitors.
+const DWPOS_TILE = 1;
+
+/// Stretch the image to exactly fit on the monitor.
+const DWPOS_STRETCH = 2;
+
+/// Stretch the image to exactly the height or width of the monitor without
+/// changing its aspect ratio or cropping the image.
+const DWPOS_FIT = 3;
+
+/// Stretch the image to fill the screen, cropping the image as necessary to
+/// avoid letterbox bars.
+const DWPOS_FILL = 4;
+
+/// Spans a single image across all monitors attached to the system.
+const DWPOS_SPAN = 5;
+
+const RO_INIT_SINGLETHREADED = 0;
+
+/// Initializes the thread for multi-threaded concurrency. The current thread
+/// is initialized in the MTA.
+const RO_INIT_MULTITHREADED = 1;
+
+/// There are no errors.
+const CORRECTIVE_ACTION_NONE = 0;
+
+/// The user should be prompted with a list of suggestions as returned by
+/// ISpellChecker::Suggest.
+const CORRECTIVE_ACTION_GET_SUGGESTIONS = 1;
+
+/// Replace the indicated erroneous text with the text provided in the
+/// suggestion. The user does not need to be prompted.
+const CORRECTIVE_ACTION_REPLACE = 2;
+
+/// The user should be prompted to delete the indicated erroneous text.
+const CORRECTIVE_ACTION_DELETE = 3;
+
+/// No flags are set.
+const AO_NONE = 0;
+
+/// The app is being activated for design mode, so it can't create its normal
+/// window. The creation of the app's window must be done by design tools that
+/// load the necessary components by communicating with a designer-specified
+/// service on the site chain established through the activation manager. Note
+/// that this means that the splash screen seen during regular activations
+/// won't be seen.
+const AO_DESIGNMODE = 0x1;
+
+/// Do not display an error dialog if the app fails to activate.
+const AO_NOERRORUI = 0x2;
+
+/// Do not display the app's splash screen when the app is activated. You must
+/// enable debug mode on the app's package when you use this flag; otherwise,
+/// the PLM will terminate the app after a few seconds.
+const AO_NOSPLASHSCREEN = 0x4;
+
+/// The application is being activated in prelaunch mode. This value is
+/// supported starting in Windows 10.
+const AO_PRELAUNCH = 0x2000000;
+
+/// Use with DwmGetWindowAttribute. Discovers whether non-client rendering is
+/// enabled. The retrieved value is of type BOOL. TRUE if non-client rendering
+/// is enabled; otherwise, FALSE.
+const DWMWA_NCRENDERING_ENABLED = 1;
+
+/// Use with DwmSetWindowAttribute. Sets the non-client rendering policy. The
+/// pvAttribute parameter points to a value from the DWMNCRENDERINGPOLICY
+/// enumeration.
+const DWMWA_NCRENDERING_POLICY = 2;
+
+/// Use with DwmSetWindowAttribute. Enables or forcibly disables DWM
+/// transitions. The pvAttribute parameter points to a value of type BOOL.
+/// TRUE to disable transitions, or FALSE to enable transitions.
+const DWMWA_TRANSITIONS_FORCEDISABLED = 3;
+
+/// Use with DwmSetWindowAttribute. Enables content rendered in the non-client
+/// area to be visible on the frame drawn by DWM. The pvAttribute parameter
+/// points to a value of type BOOL. TRUE to enable content rendered in the
+/// non-client area to be visible on the frame; otherwise, FALSE.
+const DWMWA_ALLOW_NCPAINT = 4;
+
+/// Use with DwmGetWindowAttribute. Retrieves the bounds of the caption button
+/// area in the window-relative space. The retrieved value is of type RECT. If
+/// the window is minimized or otherwise not visible to the user, then the
+/// value of the RECT retrieved is undefined. You should check whether the
+/// retrieved RECT contains a boundary that you can work with, and if it
+/// doesn't then you can conclude that the window is minimized or otherwise
+/// not visible.
+const DWMWA_CAPTION_BUTTON_BOUNDS = 5;
+
+/// Use with DwmSetWindowAttribute. Specifies whether non-client content is
+/// right-to-left (RTL) mirrored. The pvAttribute parameter points to a value
+/// of type BOOL. TRUE if the non-client content is right-to-left (RTL)
+/// mirrored; otherwise, FALSE.
+const DWMWA_NONCLIENT_RTL_LAYOUT = 6;
+
+/// Use with DwmSetWindowAttribute. Forces the window to display an iconic
+/// thumbnail or peek representation (a static bitmap), even if a live or
+/// snapshot representation of the window is available. This value is normally
+/// set during a window's creation, and not changed throughout the window's
+/// lifetime. Some scenarios, however, might require the value to change over
+/// time. The pvAttribute parameter points to a value of type BOOL. TRUE to
+/// require a iconic thumbnail or peek representation; otherwise, FALSE.
+const DWMWA_FORCE_ICONIC_REPRESENTATION = 7;
+
+/// Use with DwmSetWindowAttribute. Sets how Flip3D treats the window. The
+/// pvAttribute parameter points to a value from the DWMFLIP3DWINDOWPOLICY
+/// enumeration.
+const DWMWA_FLIP3D_POLICY = 8;
+
+/// Use with DwmGetWindowAttribute. Retrieves the extended frame bounds
+/// rectangle in screen space. The retrieved value is of type RECT.
+const DWMWA_EXTENDED_FRAME_BOUNDS = 9;
+
+/// Use with DwmSetWindowAttribute. The window will provide a bitmap for use
+/// by DWM as an iconic thumbnail or peek representation (a static bitmap) for
+/// the window. DWMWA_HAS_ICONIC_BITMAP can be specified with
+/// DWMWA_FORCE_ICONIC_REPRESENTATION. DWMWA_HAS_ICONIC_BITMAP normally is set
+/// during a window's creation and not changed throughout the window's
+/// lifetime. Some scenarios, however, might require the value to change over
+/// time. The pvAttribute parameter points to a value of type BOOL. TRUE to
+/// inform DWM that the window will provide an iconic thumbnail or peek
+/// representation; otherwise, FALSE.
+const DWMWA_HAS_ICONIC_BITMAP = 10;
+
+/// Use with DwmSetWindowAttribute. Do not show peek preview for the window.
+/// The peek view shows a full-sized preview of the window when the mouse
+/// hovers over the window's thumbnail in the taskbar. If this attribute is
+/// set, hovering the mouse pointer over the window's thumbnail dismisses peek
+/// (in case another window in the group has a peek preview showing). The
+/// pvAttribute parameter points to a value of type BOOL. TRUE to prevent peek
+/// functionality, or FALSE to allow it.
+const DWMWA_DISALLOW_PEEK = 11;
+
+/// Use with DwmSetWindowAttribute. Prevents a window from fading to a glass
+/// sheet when peek is invoked. The pvAttribute parameter points to a value of
+/// type BOOL. TRUE to prevent the window from fading during another window's
+/// peek, or FALSE for normal behavior.
+const DWMWA_EXCLUDED_FROM_PEEK = 12;
+
+/// Use with DwmSetWindowAttribute. Cloaks the window such that it is not
+/// visible to the user. The window is still composed by DWM.
+const DWMWA_CLOAK = 13;
+
+/// Use with DwmGetWindowAttribute. If the window is cloaked, provides one of
+/// the following values explaining why.
+///
+/// - DWM_CLOAKED_APP (value 0x0000001). The window was cloaked by its owner
+///   application.
+/// - DWM_CLOAKED_SHELL (value 0x0000002). The window was cloaked by the
+///   Shell.
+/// - DWM_CLOAKED_INHERITED (value 0x0000004). The cloak value was inherited
+///   from its owner window.
+const DWMWA_CLOAKED = 14;
+
+/// Use with DwmSetWindowAttribute. Freeze the window's thumbnail image with
+/// its current visuals. Do no further live updates on the thumbnail image to
+/// match the window's contents.
+const DWMWA_FREEZE_REPRESENTATION = 15;
+
+/// Use with DwmSetWindowAttribute. Enables a non-UWP window to use host
+/// backdrop brushes. If this flag is set, then a Win32 app that calls
+/// Windows::UI::Composition APIs can build transparency effects using the
+/// host backdrop brush (see Compositor.CreateHostBackdropBrush). The
+/// retrieved value is of type BOOL. TRUE to enable host backdrop brushes for
+/// the window; otherwise, FALSE. (Supported on Windows 11 and above.)
+const DWMWA_USE_HOSTBACKDROPBRUSH = 17;
+
+/// Allows a window to either use the accent color, or
+/// dark, according to the user Color Mode preferences. (Supported on
+/// Windows 11 and above.)
+const DWMWA_USE_IMMERSIVE_DARK_MODE = 20;
+
+/// Controls the policy that rounds top-level window corners. (Supported on
+/// Windows 11 and above.)
+const DWMWA_WINDOW_CORNER_PREFERENCE = 33;
+
+/// The color of the thin border around a top-level window. (Supported on
+/// Windows 11 and above.)
+const DWMWA_BORDER_COLOR = 34;
+
+/// The color of the caption. (Supported on Windows 11 and above.)
+const DWMWA_CAPTION_COLOR = 35;
+
+/// The color of the caption text. (Supported on Windows 11 and above.)
+const DWMWA_TEXT_COLOR = 36;
+
+/// Width of the visible border around a thick frame window. (Supported on
+/// Windows 11 and above.)
+const DWMWA_VISIBLE_FRAME_BORDER_THICKNESS = 37;
+
+/// Let the system decide whether or not to round window corners
+const DWMWCP_DEFAULT = 0;
+
+/// Never round window corners
+const DWMWCP_DONOTROUND = 1;
+
+/// Round the corners if appropriate
+const DWMWCP_ROUND = 2;
+
+/// Round the corners if appropriate, with a small radius
+const DWMWCP_ROUNDSMALL = 3;
+
+const TokenUser = 1;
+
+const TokenGroups = 2;
+
+const TokenPrivileges = 3;
+
+const TokenOwner = 4;
+
+const TokenPrimaryGroup = 5;
+
+const TokenDefaultDacl = 6;
+
+const TokenSource = 7;
+
+const TokenType = 8;
+
+const TokenImpersonationLevel = 9;
+
+const TokenStatistics = 10;
+
+const TokenRestrictedSids = 11;
+
+const TokenSessionId = 12;
+
+const TokenGroupsAndPrivileges = 13;
+
+const TokenSessionReference = 14;
+
+const TokenSandBoxInert = 15;
+
+const TokenAuditPolicy = 16;
+
+const TokenOrigin = 17;
+
+const TokenElevationType = 18;
+
+const TokenLinkedToken = 19;
+
+const TokenElevation = 20;
+
+const TokenHasRestrictions = 21;
+
+const TokenAccessInformation = 22;
+
+const TokenVirtualizationAllowed = 23;
+
+const TokenVirtualizationEnabled = 24;
+
+const TokenIntegrityLevel = 25;
+
+const TokenUIAccess = 26;
+
+const TokenMandatoryPolicy = 27;
+
+const TokenLogonSid = 28;
+
+const TokenIsAppContainer = 29;
+
+const TokenCapabilities = 30;
+
+const TokenAppContainerSid = 31;
+
+const TokenAppContainerNumber = 32;
+
+const TokenUserClaimAttributes = 33;
+
+const TokenDeviceClaimAttributes = 34;
+
+const TokenRestrictedUserClaimAttributes = 35;
+
+const TokenRestrictedDeviceClaimAttributes = 36;
+
+const TokenDeviceGroups = 37;
+
+const TokenRestrictedDeviceGroups = 38;
+
+const TokenSecurityAttributes = 39;
+
+const TokenIsRestricted = 40;
+
+const TokenProcessTrustLevel = 41;
+
+const TokenPrivateNameSpace = 42;
+
+const TokenSingletonAttributes = 43;
+
+const TokenBnoIsolation = 44;
+
+const TokenChildProcessFlags = 45;
+
+const TokenIsLessPrivilegedAppContainer = 46;
+
+const TokenIsSandboxed = 47;
+
+const TokenOriginatingProcessTrustLevel = 48;
+
+/// No flags are being supplied.
+const WSL_DISTRIBUTION_FLAGS_NONE = 0x0;
+
+/// Allow the distribution to interoperate with Windows processes (for
+/// example, the user can invoke "cmd.exe" or "notepad.exe" from within a WSL
+/// session).
+const WSL_DISTRIBUTION_FLAGS_ENABLE_INTEROP = 0x1;
+
+/// Add the Windows %PATH% environment variable values to WSL sessions.
+const WSL_DISTRIBUTION_FLAGS_APPEND_NT_PATH = 0x2;
+
+/// Automatically mount Windows drives inside of WSL sessions (for example,
+/// "C:" will be available under "/mnt/c").
+const WSL_DISTRIBUTION_FLAGS_ENABLE_DRIVE_MOUNTING = 0x4;
+
+/// Non-client area window attributes will be set.
+const WTA_NONCLIENT = 1;
+
+/// Specifies that the default settings should be used.
+const SPF_DEFAULT = 0;
+
+/// Specifies that the Speak call should be asynchronous. That is, it will
+/// return immediately after the speak request is queued.
+const SPF_ASYNC = 1;
+
+/// Purges all pending speak requests prior to this speak call.
+const SPF_PURGEBEFORESPEAK = 2;
+
+/// The string passed to ISpVoice::Speak is a file name, and the file text
+/// should be spoken.
+const SPF_IS_FILENAME = 4;
+
+/// The input text will be parsed for XML markup.
+const SPF_IS_XML = 8;
+
+/// The input text will not be parsed for XML markup.
+const SPF_IS_NOT_XML = 0x10;
+
+/// Global state changes in the XML markup will persist across speak calls.
+const SPF_PERSIST_XML = 0x20;
+
+/// Punctuation characters should be expanded into words (for example, "This
+/// is a sentence." would become "This is a sentence period").
+const SPF_NLP_SPEAK_PUNC = 0x40;
+
+/// Force XML parsing As MS SAPI.
+const SPF_PARSE_SAPI = 0x80;
+
+/// Force XML parsing As W3C SSML.
+const SPF_PARSE_SSML = 0x100;
+
+/// The TTS XML format is auto-detected. This is the default if none of these
+/// TTS XML format values are present in the bit-field.
+const SPF_PARSE_AUTODETECT = 0;
+
+/// The audio stream will run in shared mode.
+const AUDCLNT_SHAREMODE_SHARED = 0;
+
+/// The audio stream will run in exclusive mode.
+const AUDCLNT_SHAREMODE_EXCLUSIVE = 1;
+
+/// The data in the packet is not correlated with the previous packet's device
+/// position; this is possibly due to a stream state transition or timing
+/// glitch.
+const AUDCLNT_BUFFERFLAGS_DATA_DISCONTINUITY = 0x1;
+
+/// Treat all of the data in the packet as silence and ignore the actual data
+/// values.
+const AUDCLNT_BUFFERFLAGS_SILENT = 0x2;
+
+/// The time at which the device's stream position was recorded is uncertain.
+/// Thus, the client might be unable to accurately set the time stamp for the
+/// current data packet.
+const AUDCLNT_BUFFERFLAGS_TIMESTAMP_ERROR = 0x4;
+
+/// No stream options.
+const AUDCLNT_STREAMOPTIONS_NONE = 0;
+
+/// The audio stream is a 'raw' stream that bypasses all signal processing
+/// except for endpoint specific, always-on processing in the Audio Processing
+/// Object (APO), driver, and hardware.
+const AUDCLNT_STREAMOPTIONS_RAW = 0x1;
+
+/// The audio client is requesting that the audio engine match the format
+/// proposed by the client.
+const AUDCLNT_STREAMOPTIONS_MATCH_FORMAT = 0x2;
+
+const AUDCLNT_STREAMOPTIONS_AMBISONICS = 0x4;
+
+/// The function retrieves a REG_SZ string that contains the description of a
+/// device.
+const SPDRP_DEVICEDESC = 0x00000000;
+
+/// The function retrieves a REG_MULTI_SZ string that contains the list of
+/// hardware IDs for a device.
+const SPDRP_HARDWAREID = 0x00000001;
+
+/// The function retrieves a REG_MULTI_SZ string that contains the list of
+/// compatible IDs for a device.
+const SPDRP_COMPATIBLEIDS = 0x00000002;
+
+/// The function retrieves a REG_SZ string that contains the service name for
+/// a device.
+const SPDRP_SERVICE = 0x00000004;
+
+/// The function retrieves a REG_SZ string that contains the device setup
+/// class of a device.
+const SPDRP_CLASS = 0x00000007;
+
+/// The function retrieves a REG_SZ string that contains the GUID that
+/// represents the device setup class of a device.
+const SPDRP_CLASSGUID = 0x00000008;
+
+/// The function retrieves a string that identifies the device's software key
+/// (sometimes called the driver key).
+const SPDRP_DRIVER = 0x00000009;
+
+/// The function retrieves a bitwise OR of a device's configuration flags in a
+/// DWORD value. The configuration flags are represented by the CONFIGFLAG_Xxx
+/// bitmasks that are defined in Regstr.h.
+const SPDRP_CONFIGFLAGS = 0x0000000A;
+
+/// The function retrieves a REG_SZ string that contains the name of the
+/// device manufacturer.
+const SPDRP_MFG = 0x0000000B;
+
+/// The function retrieves a REG_SZ string that contains the friendly name of
+/// a device.
+const SPDRP_FRIENDLYNAME = 0x0000000C;
+
+/// The function retrieves a REG_SZ string that contains the hardware location
+/// of a device.
+const SPDRP_LOCATION_INFORMATION = 0x0000000D;
+
+/// The function retrieves a REG_SZ string that contains the name that is
+/// associated with the device's PDO.
+const SPDRP_PHYSICAL_DEVICE_OBJECT_NAME = 0x0000000E;
+
+/// The function retrieves a bitwise OR of the following CM_DEVCAP_Xxx flags
+/// in a DWORD. The device capabilities that are represented by these flags
+/// correspond to the device capabilities that are represented by the members
+/// of the DEVICE_CAPABILITIES structure.
+const SPDRP_CAPABILITIES = 0x0000000F;
+
+/// The function retrieves a DWORD value set to the value of the UINumber
+/// member of the device's DEVICE_CAPABILITIES structure.
+const SPDRP_UI_NUMBER = 0x00000010;
+
+/// The function retrieves a REG_MULTI_SZ string that contains the names of a
+/// device's upper filter drivers.
+const SPDRP_UPPERFILTERS = 0x00000011;
+
+/// The function retrieves a REG_MULTI_SZ string that contains the names of a
+/// device's lower-filter drivers.
+const SPDRP_LOWERFILTERS = 0x00000012;
+
+/// The function retrieves the GUID for the device's bus type.
+const SPDRP_BUSTYPEGUID = 0x00000013;
+
+/// The function retrieves the device's legacy bus type as an INTERFACE_TYPE
+/// value (defined in Wdm.h and Ntddk.h).
+const SPDRP_LEGACYBUSTYPE = 0x00000014;
+
+/// The function retrieves the device's bus number.
+const SPDRP_BUSNUMBER = 0x00000015;
+
+/// The function retrieves a REG_SZ string that contains the name of the
+/// device's enumerator.
+const SPDRP_ENUMERATOR_NAME = 0x00000016;
+
+/// The function retrieves a SECURITY_DESCRIPTOR structure for a device.
+const SPDRP_SECURITY = 0x00000017;
+
+/// The function retrieves a REG_SZ string that contains the device's security
+/// descriptor.
+const SPDRP_SECURITY_SDS = 0x00000018;
+
+/// The function retrieves a DWORD value that represents the device's type.
+/// For more information, see Specifying Device Types.
+const SPDRP_DEVTYPE = 0x00000019;
+
+/// The function retrieves a DWORD value that indicates whether a user can
+/// obtain exclusive use of the device. The returned value is one if exclusive
+/// use is allowed, or zero otherwise.
+const SPDRP_EXCLUSIVE = 0x0000001A;
+
+/// The function retrieves a bitwise OR of a device's characteristics flags in
+/// a DWORD.
+const SPDRP_CHARACTERISTICS = 0x0000001B;
+
+/// The function retrieves the device's address.
+const SPDRP_ADDRESS = 0x0000001C;
+
+/// The function retrieves a format string (REG_SZ) used to display the
+/// UINumber value.
+const SPDRP_UI_NUMBER_DESC_FORMAT = 0X0000001D;
+
+/// The function retrieves a CM_POWER_DATA structure that contains the
+/// device's power management information.
+const SPDRP_DEVICE_POWER_DATA = 0x0000001E;
+
+/// The function retrieves the device's current removal policy as a DWORD that
+/// contains one of the CM_REMOVAL_POLICY_Xxx values that are defined in
+/// Cfgmgr32.h.
+const SPDRP_REMOVAL_POLICY = 0x0000001F;
+
+/// The function retrieves the device's hardware-specified default removal
+/// policy as a DWORD that contains one of the CM_REMOVAL_POLICY_Xxx values
+/// that are defined in Cfgmgr32.h.
+const SPDRP_REMOVAL_POLICY_HW_DEFAULT = 0x00000020;
+
+/// The function retrieves the device's override removal policy (if it exists)
+/// from the registry, as a DWORD that contains one of the
+/// CM_REMOVAL_POLICY_Xxx values that are defined in Cfgmgr32.h.
+const SPDRP_REMOVAL_POLICY_OVERRIDE = 0x00000021;
+
+/// The function retrieves a DWORD value that indicates the installation state
+/// of a device. The installation state is represented by one of the
+/// CM_INSTALL_STATE_Xxx values that are defined in Cfgmgr32.h. The
+/// CM_INSTALL_STATE_Xxx values correspond to the DEVICE_INSTALL_STATE
+/// enumeration values.
+const SPDRP_INSTALL_STATE = 0x00000022;
+
+/// The function retrieves a REG_MULTI_SZ string that represents the location
+/// of the device in the device tree.
+const SPDRP_LOCATION_PATHS = 0x00000023;
+
+/// No qualifier information for the current COM apartment type is available.
+const APTTYPEQUALIFIER_NONE = 0;
+
+/// This qualifier is only valid when the pAptType parameter of the
+/// CoGetApartmentType function specifies APTTYPE_MTA on return. A thread has
+/// an implicit MTA apartment type if it does not initialize the COM apartment
+/// itself, and if another thread has already initialized the MTA in the
+/// process. This qualifier informs the API caller that the MTA of the thread
+/// is implicitly inherited from other threads and is not initialized
+/// directly.
+const APTTYPEQUALIFIER_IMPLICIT_MTA = 1;
+
+/// This qualifier is only valid when the pAptType parameter of the
+/// CoGetApartmentType function contains APTTYPE_NA on return. When an MTA
+/// thread creates or invokes a COM in-process object using the "Neutral"
+/// threading model, the COM apartment type of the thread switches from MTA to
+/// a Neutral apartment type. This qualifier informs the API caller that the
+/// thread has switched from the MTA apartment type to the NA type.
+const APTTYPEQUALIFIER_NA_ON_MTA = 2;
+
+/// This qualifier is only valid when the pAptType parameter of the
+/// CoGetApartmentType function contains APTTYPE_NA on return. When an STA
+/// thread creates or invokes a COM in-process object using the "Neutral"
+/// threading model, the COM apartment type of the thread switches from STA to
+/// a Neutral apartment type. This qualifier informs the API caller that the
+/// thread has switched from the STA apartment type to the NA type.
+const APTTYPEQUALIFIER_NA_ON_STA = 3;
+
+/// This qualifier is only valid when the pAptType parameter of the
+/// CoGetApartmentType function contains APTTYPE_NA on return. When an
+/// implicit MTA thread creates or invokes a COM in-process object using the
+/// "Neutral" threading model, the COM apartment type of the thread switches
+/// from the implicit MTA type to a Neutral apartment type. This qualifier
+/// informs the API caller that the thread has switched from the implicit MTA
+/// apartment type to the NA type.
+const APTTYPEQUALIFIER_NA_ON_IMPLICIT_MTA = 4;
+
+/// This qualifier is only valid when the pAptType parameter of the
+/// CoGetApartmentType function contains APTTYPE_NA on return. When the main
+/// STA thread creates or invokes a COM in-process object using the "Neutral"
+/// threading model, the COM apartment type of the thread switches from the
+/// main STA type to a Neutral apartment type. This qualifier informs the API
+/// caller that the thread has switched from the main STA apartment type to
+/// the NA type.
+const APTTYPEQUALIFIER_NA_ON_MAINSTA = 5;
+
+const APTTYPEQUALIFIER_APPLICATION_STA = 6;
+
+const APTTYPEQUALIFIER_RESERVED_1 = 7;
+
+/// The current thread.
+const APTTYPE_CURRENT = -1;
+
+/// A single-threaded apartment.
+const APTTYPE_STA = 0;
+
+/// A multithreaded apartment.
+const APTTYPE_MTA = 1;
+
+/// A neutral apartment.
+const APTTYPE_NA = 2;
+
+/// The main single-threaded apartment.
+const APTTYPE_MAINSTA = 3;
+
+/// Specifies that returned elements have no reference to the underlying UI
+/// and contain only cached information.
+const AutomationElementMode_None = 0;
+
+/// Specifies that returned elements have a full reference to the underlying
+/// UI.
+const AutomationElementMode_Full = 0x1;
+
+/// Event coalescing is disabled.
+const CoalesceEventsOptions_Disabled = 0;
+
+/// Event coalescing is enabled.
+const CoalesceEventsOptions_Enabled = 0x1;
+
+/// Connection recovery is disabled.
+const ConnectionRecoveryBehaviorOptions_Disabled = 0;
+
+/// Connection recovery is enabled.
+const ConnectionRecoveryBehaviorOptions_Enabled = 0x1;
+
+/// No flags.
+const PropertyConditionFlags_None = 0;
+
+/// Comparison of string properties is not case-sensitive.
+const PropertyConditionFlags_IgnoreCase = 0x1;
+
+/// Comparison of substring properties is enabled.
+const PropertyConditionFlags_MatchSubstring = 0x2;
+
+/// Scrolling is done in large decrements, equivalent to pressing the PAGE UP
+/// key or clicking on a blank part of a scroll bar.
+const ScrollAmount_LargeDecrement = 0;
+
+/// Scrolling is done in small decrements, equivalent to pressing an arrow
+/// key or clicking the arrow button on a scroll bar.
+const ScrollAmount_SmallDecrement = 1;
+
+/// No scrolling is done.
+const ScrollAmount_NoAmount = 2;
+
+/// Scrolling is done in large increments, equivalent to pressing the PAGE
+/// DOWN or PAGE UP key or clicking on a blank part of a scroll bar.
+const ScrollAmount_LargeIncrement = 3;
+
+/// Scrolling is done in small increments, equivalent to pressing an arrow
+/// key or clicking the arrow button on a scroll bar.
+const ScrollAmount_SmallIncrement = 4;
+
+/// Indicates that the object is read-only, meaning that modifications
+/// cannot be made.
+const STGM_READ = 0x00000000;
+
+/// Enables you to save changes to the object, but does not permit access
+/// to its data.
+const STGM_WRITE = 0x00000001;
+
+/// Enables access and modification of object data.
+const STGM_READWRITE = 0x00000002;
+
+/// Specifies that subsequent openings of the object are not denied read or
+/// write access.
+const STGM_SHARE_DENY_NONE = 0x00000040;
+
+/// Prevents others from subsequently opening the object in STGM_READ mode.
+/// It is typically used on a root storage object.
+const STGM_SHARE_DENY_READ = 0x00000030;
+
+/// Prevents others from subsequently opening the object for `STGM_WRITE`
+/// or `STGM_READWRITE` access.
+const STGM_SHARE_DENY_WRITE = 0x00000020;
+
+/// Prevents others from subsequently opening the object in any mode.
+const STGM_SHARE_EXCLUSIVE = 0x00000010;
+
+/// Opens the storage object with exclusive access to the most recently
+/// committed version.
+const STGM_PRIORITY = 0x00040000;
+
+/// Indicates that an existing storage object or stream should be removed
+/// before the new object replaces it.
+const STGM_CREATE = 0x00001000;
+
+/// Creates the new object while preserving existing data in a stream named
+/// "Contents".
+const STGM_CONVERT = 0x00020000;
+
+/// Causes the create operation to fail if an existing object with the
+/// specified name exists.
+const STGM_FAILIFTHERE = 0x00000000;
+
+/// Indicates that, in direct mode, each change to a storage or stream
+/// element is written as it occurs.
+const STGM_DIRECT = 0x00000000;
+
+/// Indicates that, in transacted mode, changes are buffered and written
+/// only if an explicit commit operation is called.
+const STGM_TRANSACTED = 0x00010000;
+
+/// Indicates that, in transacted mode, a temporary scratch file is usually
+/// used to save modifications until the Commit method is called.
+const STGM_NOSCRATCH = 0x00100000;
+
+/// This flag is used when opening a storage object with STGM_TRANSACTED
+/// and without STGM_SHARE_EXCLUSIVE or STGM_SHARE_DENY_WRITE.
+const STGM_NOSNAPSHOT = 0x00200000;
+
+/// Provides a faster implementation of a compound file in a limited, but
+/// frequently used, case. For more information, see the Remarks section.
+const STGM_SIMPLE = 0x08000000;
+
+/// Supports direct mode for single-writer, multireader file operations.
+const STGM_DIRECT_SWMR = 0x00400000;
+
+/// Indicates that the underlying file is to be automatically destroyed
+/// when the root storage object is released.
+const STGM_DELETEONRELEASE = 0x04000000;
+
+/// The UI Automation element is not selected, checked, marked or otherwise
+/// activated.
+const ToggleState_Off = 0;
+
+/// The UI Automation element is selected, checked, marked or otherwise
+/// activated.
+const ToggleState_On = 1;
+
+/// The UI Automation element is in an indeterminate state.
+const ToggleState_Indeterminate = 2;
+
+/// The scope excludes the subtree from the search.
+const TreeScope_None = 0;
+
+/// The scope includes the element itself.
+const TreeScope_Element = 0x1;
+
+/// The scope includes children of the element.
+const TreeScope_Children = 0x2;
+
+/// The scope includes children and more distant descendants of the element.
+const TreeScope_Descendants = 0x4;
+
+/// The scope includes the parent of the element.
+const TreeScope_Parent = 0x8;
+
+/// The scope includes the parent and more distant ancestors of the element.
+const TreeScope_Ancestors = 0x10;
+
+/// The scope includes the element and all its descendants. This flag is a
+/// combination of the TreeScope_Element and TreeScope_Descendants values.
+const TreeScope_Subtree = 0x7;
+
+/// Pre-order, visit children from first to last.
+const TreeTraversalOptions_Default = 0;
+
+/// Post-order.
+const TreeTraversalOptions_PostOrder = 0x1;
+
+/// Visit children from last to first.
+const TreeTraversalOptions_LastToFirstOrder = 0x2;
+
+/// The window is running. This does not guarantee that the window is ready
+/// for user interaction or is responding.
+const WindowInteractionState_Running = 0;
+
+/// The window is closing.
+const WindowInteractionState_Closing = 1;
+
+/// The window is ready for user interaction.
+const WindowInteractionState_ReadyForUserInteraction = 2;
+
+/// The window is blocked by a modal window.
+const WindowInteractionState_BlockedByModalWindow = 3;
+
+/// The window is not responding.
+const WindowInteractionState_NotResponding = 4;
+
+/// The window is normal (restored).
+const WindowVisualState_Normal = 0;
+
+/// The window is maximized.
+const WindowVisualState_Maximized = 1;
+
+/// The window is minimized.
+const WindowVisualState_Minimized = 2;
+
+/// An authenticated log on, using the default credentials, is performed for
+/// all requests.
+const AutoLogonPolicy_Always = 0;
+
+/// An authenticated log on, using the default credentials, is performed only
+/// for requests on the local intranet. The local intranet is considered to
+/// be any server on the proxy bypass list in the current proxy configuration.
+const AutoLogonPolicy_OnlyIfBypassProxy = 1;
+
+/// Authentication is not used automatically.
+const AutoLogonPolicy_Never = 2;
+
+/// Sets or retrieves a VARIANT that contains the user agent string.
+const WinHttpRequestOption_UserAgentString = 0;
+
+/// Retrieves a VARIANT that contains the URL of the resource.
+const WinHttpRequestOption_URL = 1;
+
+/// Sets or retrieves a VARIANT that identifies the code page for the URL
+/// string.
+const WinHttpRequestOption_URLCodePage = 2;
+
+/// Sets or retrieves a VARIANT that indicates whether percent characters in
+/// the URL string are converted to an escape sequence.
+const WinHttpRequestOption_EscapePercentInURL = 3;
+
+/// Sets or retrieves a VARIANT that indicates which server certificate
+/// errors should be ignored.
+const WinHttpRequestOption_SslErrorIgnoreFlags = 4;
+
+/// Sets a VARIANT that specifies the client certificate that is sent to a
+/// server for authentication.
+const WinHttpRequestOption_SelectCertificate = 5;
+
+/// Sets or retrieves a VARIANT that indicates whether requests are
+/// automatically redirected when the server specifies a new location for the
+/// resource.
+const WinHttpRequestOption_EnableRedirects = 6;
+
+/// Sets or retrieves a VARIANT that indicates whether unsafe characters in
+/// the path and query components of a URL are converted to escape sequences.
+const WinHttpRequestOption_UrlEscapeDisable = 7;
+
+/// Sets or retrieves a VARIANT that indicates whether unsafe characters in
+/// the query component of the URL are converted to escape sequences.
+const WinHttpRequestOption_UrlEscapeDisableQuery = 8;
+
+/// Sets or retrieves a VARIANT that indicates which secure protocols can be
+/// used.
+const WinHttpRequestOption_SecureProtocols = 9;
+
+/// Sets or retrieves a VARIANT that indicates whether tracing is currently
+/// enabled.
+const WinHttpRequestOption_EnableTracing = 10;
+
+/// Controls whether the WinHttpRequest object temporarily reverts client
+/// impersonation for the duration of the SSL certificate authentication
+/// operations.
+const WinHttpRequestOption_RevertImpersonationOverSsl = 11;
+
+/// Controls whether or not WinHTTP allows redirects.
+const WinHttpRequestOption_EnableHttpsToHttpRedirects = 12;
+
+/// Enables or disables support for Passport authentication.
+const WinHttpRequestOption_EnablePassportAuthentication = 13;
+
+/// Sets or retrieves the maximum number of redirects that WinHTTP follows;
+/// the default is 10.
+const WinHttpRequestOption_MaxAutomaticRedirects = 14;
+
+/// Sets or retrieves a bound set on the maximum size of the header portion
+/// of the server's response.
+const WinHttpRequestOption_MaxResponseHeaderSize = 15;
+
+/// Sets or retrieves a bound on the amount of data that will be drained from
+/// responses in order to reuse a connection.
+const WinHttpRequestOption_MaxResponseDrainSize = 16;
+
+/// Sets or retrieves a boolean value that indicates whether HTTP/1.1 or
+/// HTTP/1.0 should be used.
+const WinHttpRequestOption_EnableHttp1_1 = 17;
+
+/// Enables server certificate revocation checking during SSL negotiation.
+const WinHttpRequestOption_EnableCertificateRevocationCheck = 18;
+
+const SystemBasicInformation = 0;
+
+const SystemPerformanceInformation = 2;
+
+const SystemTimeOfDayInformation = 3;
+
+const SystemProcessInformation = 5;
+
+const SystemProcessorPerformanceInformation = 8;
+
+const SystemInterruptInformation = 23;
+
+const SystemExceptionInformation = 33;
+
+const SystemRegistryQuotaInformation = 37;
+
+const SystemLookasideInformation = 45;
+
+const SystemCodeIntegrityInformation = 103;
+
+const SystemPolicyInformation = 134;
+
+const SAFTDefault = -1;
+
+const SAFTNoAssignedFormat = 0;
+
+const SAFTText = 1;
+
+const SAFTNonStandardFormat = 2;
+
+const SAFTExtendedAudioFormat = 3;
+
+const SAFT8kHz8BitMono = 4;
+
+const SAFT8kHz8BitStereo = 5;
+
+const SAFT8kHz16BitMono = 6;
+
+const SAFT8kHz16BitStereo = 7;
+
+const SAFT11kHz8BitMono = 8;
+
+const SAFT11kHz8BitStereo = 9;
+
+const SAFT11kHz16BitMono = 10;
+
+const SAFT11kHz16BitStereo = 11;
+
+const SAFT12kHz8BitMono = 12;
+
+const SAFT12kHz8BitStereo = 13;
+
+const SAFT12kHz16BitMono = 14;
+
+const SAFT12kHz16BitStereo = 15;
+
+const SAFT16kHz8BitMono = 16;
+
+const SAFT16kHz8BitStereo = 17;
+
+const SAFT16kHz16BitMono = 18;
+
+const SAFT16kHz16BitStereo = 19;
+
+const SAFT22kHz8BitMono = 20;
+
+const SAFT22kHz8BitStereo = 21;
+
+const SAFT22kHz16BitMono = 22;
+
+const SAFT22kHz16BitStereo = 23;
+
+const SAFT24kHz8BitMono = 24;
+
+const SAFT24kHz8BitStereo = 25;
+
+const SAFT24kHz16BitMono = 26;
+
+const SAFT24kHz16BitStereo = 27;
+
+const SAFT32kHz8BitMono = 28;
+
+const SAFT32kHz8BitStereo = 29;
+
+const SAFT32kHz16BitMono = 30;
+
+const SAFT32kHz16BitStereo = 31;
+
+const SAFT44kHz8BitMono = 32;
+
+const SAFT44kHz8BitStereo = 33;
+
+const SAFT44kHz16BitMono = 34;
+
+const SAFT44kHz16BitStereo = 35;
+
+const SAFT48kHz8BitMono = 36;
+
+const SAFT48kHz8BitStereo = 37;
+
+const SAFT48kHz16BitMono = 38;
+
+const SAFT48kHz16BitStereo = 39;
+
+const SAFTTrueSpeech_8kHz1BitMono = 40;
+
+const SAFTCCITT_ALaw_8kHzMono = 41;
+
+const SAFTCCITT_ALaw_8kHzStereo = 42;
+
+const SAFTCCITT_ALaw_11kHzMono = 43;
+
+const SAFTCCITT_ALaw_11kHzStereo = 4;
+
+const SAFTCCITT_ALaw_22kHzMono = 44;
+
+const SAFTCCITT_ALaw_22kHzStereo = 45;
+
+const SAFTCCITT_ALaw_44kHzMono = 46;
+
+const SAFTCCITT_ALaw_44kHzStereo = 47;
+
+const SAFTCCITT_uLaw_8kHzMono = 48;
+
+const SAFTCCITT_uLaw_8kHzStereo = 49;
+
+const SAFTCCITT_uLaw_11kHzMono = 50;
+
+const SAFTCCITT_uLaw_11kHzStereo = 51;
+
+const SAFTCCITT_uLaw_22kHzMono = 52;
+
+const SAFTCCITT_uLaw_22kHzStereo = 53;
+
+const SAFTCCITT_uLaw_44kHzMono = 54;
+
+const SAFTCCITT_uLaw_44kHzStereo = 55;
+
+const SAFTADPCM_8kHzMono = 56;
+
+const SAFTADPCM_8kHzStereo = 57;
+
+const SAFTADPCM_11kHzMono = 58;
+
+const SAFTADPCM_11kHzStereo = 59;
+
+const SAFTADPCM_22kHzMono = 60;
+
+const SAFTADPCM_22kHzStereo = 61;
+
+const SAFTADPCM_44kHzMono = 62;
+
+const SAFTADPCM_44kHzStereo = 63;
+
+const SAFTGSM610_8kHzMono = 64;
+
+const SAFTGSM610_11kHzMono = 65;
+
+const SAFTGSM610_22kHzMono = 66;
+
+const SAFTGSM610_44kHzMono = 67;
+
+const SAFTNUM_FORMATS = 68;
+
+/// The voice has finished rendering all queued phrases.
+const SRSEDone = 1;
+
+/// The SpVoice currently claims the audio queue.
+const SRSEIsSpeaking = 2;
+
+/// Calculates the stream offset relative from the start of the stream.
+const SSSPTRelativeToStart = 0;
+
+/// Calculates the stream offset relative from the current position.
+const SSSPTRelativeToCurrentPosition = 1;
+
+/// Calculates the stream offset relative from the end of the stream.
+const SSSPTRelativeToEnd = 2;
+
+/// Represents the StartStream event, which occurs when the engine begins
+/// speaking a stream.
+const SVEStartInputStream = 2;
+
+/// Represents the EndStream event, which occurs when the engine encounters
+/// the end of a stream while speaking.
+const SVEEndInputStream = 4;
+
+/// Represents the VoiceChange event, which occurs when the engine encounters
+/// a change of Voice while speaking.
+const SVEVoiceChange = 8;
+
+/// Represents the Bookmark event, which occurs when the engine encounters a
+/// bookmark while speaking.
+const SVEBookmark = 16;
+
+/// Represents the WordBoundary event, which occurs when the engine completes
+/// a word while speaking.
+const SVEWordBoundary = 32;
+
+/// Represents the Phoneme event, which occurs when the engine completes a
+/// phoneme while speaking.
+const SVEPhoneme = 64;
+
+/// Represents the SentenceBoundary event, which occurs when the engine
+/// completes a sentence while speaking.
+const SVESentenceBoundary = 128;
+
+/// Represents the Viseme event, which occurs when the engine completes a
+/// viseme while speaking.
+const SVEViseme = 256;
+
+/// Represents the AudioLevel event, which occurs when the engine has
+/// completed an audio level change while speaking.
+const SVEAudioLevel = 512;
+
+/// Represents a private engine event.
+const SVEPrivate = 32768;
+
+/// Represents all speech voice events.
+const SVEAllEvents = 33790;
+
+/// The priority of a normal voice. Text streams spoken by a normal voice are
+/// added to the end of the voice queue. A voice with SVPNormal priority
+/// cannot interrupt another voice.
+const SVPNormal = 0;
+
+/// The priority of an alert voice. Text streams spoken by an alert voice are
+/// inserted into the voice queue ahead of normal voice streams. An alert
+/// voice will interrupt a normal voice, which will resume speaking when the
+/// alert voice has finished speaking.
+const SVPAlert = 1;
+
+/// The priority of an over voice. Text streams spoken by an over voice go
+/// into the voice queue ahead of normal and alert streams. An over voice will
+/// not interrupt, but speaks over (mixes with) the voices of lower
+/// priorities.
+const SVPOver = 2;
+
+/// Specifies that the default settings should be used. The defaults are:
+/// * To speak the given text string synchronously (override with
+///   SVSFlagsAsync),
+/// * Not to purge pending speak requests (override with
+///   SVSFPurgeBeforeSpeak),
+/// * To parse the text as XML only if the first character is a
+///   left-angle-bracket (override with SVSFIsXML or SVSFIsNotXML),
+/// * Not to persist global XML state changes across speak calls (override
+///   with SVSFPersistXML), and
+/// * Not to expand punctuation characters into words (override with
+///   SVSFNLPSpeakPunc).
+const SVSFDefault = 0;
+
+/// Specifies that the Speak call should be asynchronous. That is, it will
+/// return immediately after the speak request is queued.
+const SVSFlagsAsync = 1;
+
+/// Purges all pending speak requests prior to this speak call.
+const SVSFPurgeBeforeSpeak = 2;
+
+/// The string passed to the Speak method is a file name rather than text. As
+/// a result, the string itself is not spoken but rather the file the path
+/// that points to is spoken.
+const SVSFIsFilename = 4;
+
+/// The input text will be parsed for XML markup.
+const SVSFIsXML = 8;
+
+/// The input text will not be parsed for XML markup.
+const SVSFIsNotXML = 16;
+
+/// Global state changes in the XML markup will persist across speak calls.
+const SVSFPersistXML = 32;
+
+/// Punctuation characters should be expanded into words (e.g. "This is it."
+/// would become "This is it period").
+const SVSFNLPSpeakPunc = 64;
+
+/// Force XML parsing as MS SAPI.
+const SVSFParseSapi = 128;
+
+/// Force XML parsing as W3C SSML.
+const SVSFParseSsml = 256;
+
+/// The TTS XML format is auto-detected. This is the default if none of these
+/// TTS XML format values are present in the bit-field.
+const SVSFParseAutoDetect = 0;
+
+/// Flags handled by SAPI (as opposed to the text-to-speech engine) are set in
+/// this mask.
+const SVSFNLPMask = 64;
+
+/// SVSFParseSapi|SVSFParseSsml
+const SVSFParseMask = 384;
+
+/// This is an existing SAPI 5.1 mask that has every flag bit set. In 5.3, it
+/// has been extended to contain SVSFParseMask.
+const SVSFVoiceMask = 511;
+
+/// This mask has every unused bit set.
+const SVSFUnusedFlags = -512;

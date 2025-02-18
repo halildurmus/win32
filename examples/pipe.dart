@@ -38,11 +38,11 @@ class ClientCommand extends Command<void> {
       stdout.writeln('Connecting to pipe...');
       final pipe = CreateFile(
         lpPipeName,
-        GENERIC_ACCESS_RIGHTS.GENERIC_READ,
-        FILE_SHARE_MODE.FILE_SHARE_READ | FILE_SHARE_MODE.FILE_SHARE_WRITE,
+        GENERIC_READ,
+        FILE_SHARE_READ | FILE_SHARE_WRITE,
         nullptr,
-        FILE_CREATION_DISPOSITION.OPEN_EXISTING,
-        FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_NORMAL,
+        OPEN_EXISTING,
+        FILE_ATTRIBUTE_NORMAL,
         NULL,
       );
       if (pipe == INVALID_HANDLE_VALUE) {
@@ -92,8 +92,8 @@ class ServerCommand extends Command<void> {
     try {
       final pipe = CreateNamedPipe(
         lpPipeName,
-        FILE_FLAGS_AND_ATTRIBUTES.PIPE_ACCESS_OUTBOUND,
-        NAMED_PIPE_MODE.PIPE_TYPE_BYTE,
+        PIPE_ACCESS_OUTBOUND,
+        PIPE_TYPE_BYTE,
         1,
         0,
         0,

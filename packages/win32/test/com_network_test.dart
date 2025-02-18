@@ -29,10 +29,7 @@ void main() {
       final netPtr = calloc<COMObject>();
 
       expect(
-        nlm.getNetworks(
-          NLM_ENUM_NETWORK.NLM_ENUM_NETWORK_CONNECTED,
-          enumPtr.cast(),
-        ),
+        nlm.getNetworks(NLM_ENUM_NETWORK_CONNECTED, enumPtr.cast()),
         equals(S_OK),
       );
 
@@ -55,10 +52,7 @@ void main() {
       final descPtr = calloc<Pointer<Utf16>>();
 
       expect(
-        nlm.getNetworks(
-          NLM_ENUM_NETWORK.NLM_ENUM_NETWORK_CONNECTED,
-          enumPtr.cast(),
-        ),
+        nlm.getNetworks(NLM_ENUM_NETWORK_CONNECTED, enumPtr.cast()),
         equals(S_OK),
       );
 

@@ -116,7 +116,7 @@ int enumerateFonts(
 void main() {
   final hDC = GetDC(NULL);
   final searchFont = calloc<LOGFONT>()
-    ..ref.lfCharSet = FONT_CHARSET.HANGUL_CHARSET;
+    ..ref.lfCharSet = HANGUL_CHARSET;
   // highlight-start
   final lpProc = NativeCallable<FONTENUMPROC>.isolateLocal(
     enumerateFonts,

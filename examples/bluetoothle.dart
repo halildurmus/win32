@@ -14,8 +14,7 @@ void main() {
       interfaceGuid,
       nullptr,
       NULL,
-      SETUP_DI_GET_CLASS_DEVS_FLAGS.DIGCF_PRESENT |
-          SETUP_DI_GET_CLASS_DEVS_FLAGS.DIGCF_DEVICEINTERFACE,
+      DIGCF_PRESENT | DIGCF_DEVICEINTERFACE,
     );
     try {
       return devicesByInterface(hDevInfo, interfaceGuid).toList();
@@ -29,10 +28,10 @@ void main() {
     final hDevice = CreateFile(
       pathPtr,
       0,
-      FILE_SHARE_MODE.FILE_SHARE_READ | FILE_SHARE_MODE.FILE_SHARE_WRITE,
+      FILE_SHARE_READ | FILE_SHARE_WRITE,
       nullptr,
-      FILE_CREATION_DISPOSITION.OPEN_EXISTING,
-      FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_NORMAL,
+      OPEN_EXISTING,
+      FILE_ATTRIBUTE_NORMAL,
       NULL,
     );
     if (hDevice == INVALID_HANDLE_VALUE) {
@@ -127,7 +126,7 @@ Iterable<String> devicesByInterface(
     }
 
     final error = GetLastError();
-    if (error != S_OK && error != WIN32_ERROR.ERROR_NO_MORE_ITEMS) {
+    if (error != S_OK && error != ERROR_NO_MORE_ITEMS) {
       throw WindowsException(error);
     }
   } finally {
@@ -151,7 +150,7 @@ void printServicesByDevice(int hDevice) {
       bufferCountPtr,
       BLUETOOTH_GATT_FLAG_NONE,
     );
-    if (hr != HRESULT_FROM_WIN32(WIN32_ERROR.ERROR_MORE_DATA)) {
+    if (hr != HRESULT_FROM_WIN32(ERROR_MORE_DATA)) {
       print('BluetoothGATTGetServices - Get Buffer Count error: $hr');
       throw WindowsException(hr);
     }
@@ -197,8 +196,8 @@ void printCharacteristicsByService(
       bufferCountPtr,
       BLUETOOTH_GATT_FLAG_NONE,
     );
-    if (hr != HRESULT_FROM_WIN32(WIN32_ERROR.ERROR_MORE_DATA)) {
-      if (hr == HRESULT_FROM_WIN32(WIN32_ERROR.ERROR_NOT_FOUND)) {
+    if (hr != HRESULT_FROM_WIN32(ERROR_MORE_DATA)) {
+      if (hr == HRESULT_FROM_WIN32(ERROR_NOT_FOUND)) {
         return;
       }
       print('BluetoothGATTGetCharacteristics - Get Buffer Count error: $hr');
@@ -248,8 +247,8 @@ void printDescriptorsByCharacteristic(
       bufferCountPtr,
       BLUETOOTH_GATT_FLAG_NONE,
     );
-    if (hr != HRESULT_FROM_WIN32(WIN32_ERROR.ERROR_MORE_DATA)) {
-      if (hr == HRESULT_FROM_WIN32(WIN32_ERROR.ERROR_NOT_FOUND)) {
+    if (hr != HRESULT_FROM_WIN32(ERROR_MORE_DATA)) {
+      if (hr == HRESULT_FROM_WIN32(ERROR_NOT_FOUND)) {
         return;
       }
       print('BluetoothGATTGetDescriptors - Get Buffer Count error: $hr');

@@ -17,10 +17,7 @@ import 'package:win32/win32.dart';
 
 void main() {
   // Initialize COM.
-  CoInitializeEx(
-    nullptr,
-    COINIT.COINIT_APARTMENTTHREADED | COINIT.COINIT_DISABLE_OLE1DDE,
-  );
+  CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
 
   // Create a Dispatcher instance for the "Scripting.FileSystemObject" object.
   // https://learn.microsoft.com/office/vba/language/reference/user-interface-help/filesystemobject-object
@@ -33,7 +30,7 @@ void main() {
       final folderPathParam = arena<VARIANT>();
       VariantInit(folderPathParam);
       folderPathParam.ref
-        ..vt = VARENUM.VT_BSTR
+        ..vt = VT_BSTR
         ..bstrVal = folderPath.ptr;
       final folderParams = arena<DISPPARAMS>();
       folderParams.ref
@@ -55,7 +52,7 @@ void main() {
         final newFolderNameParam = arena<VARIANT>();
         VariantInit(newFolderNameParam);
         newFolderNameParam.ref
-          ..vt = VARENUM.VT_BSTR
+          ..vt = VT_BSTR
           ..bstrVal = newFolderName.ptr;
         folder.set('Name', newFolderNameParam);
         VariantClear(newFolderNameParam);

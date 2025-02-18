@@ -20,7 +20,7 @@ void main(List<String> args) {
 
   final text = args.first;
 
-  CoInitializeEx(nullptr, COINIT.COINIT_APARTMENTTHREADED);
+  CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 
   final spellCheckerFactory = SpellCheckerFactory.createInstance();
 
@@ -67,18 +67,18 @@ void main(List<String> args) {
       stdout.write('$errorCount. $word');
 
       switch (error.correctiveAction) {
-        case CORRECTIVE_ACTION.CORRECTIVE_ACTION_DELETE:
+        case CORRECTIVE_ACTION_DELETE:
           print(' - delete');
 
-        case CORRECTIVE_ACTION.CORRECTIVE_ACTION_NONE:
+        case CORRECTIVE_ACTION_NONE:
           print('\n');
 
-        case CORRECTIVE_ACTION.CORRECTIVE_ACTION_REPLACE:
+        case CORRECTIVE_ACTION_REPLACE:
           final replacment = error.replacement;
           print(' - replace with "${replacment.toDartString()}"');
           WindowsDeleteString(replacment.address);
 
-        case CORRECTIVE_ACTION.CORRECTIVE_ACTION_GET_SUGGESTIONS:
+        case CORRECTIVE_ACTION_GET_SUGGESTIONS:
           print(' - suggestions:');
 
           final wordPtr = word.toNativeUtf16();

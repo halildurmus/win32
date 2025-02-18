@@ -57,7 +57,7 @@ void printBackgroundColor() {
 void main() {
   final hr = CoInitializeEx(
     nullptr,
-    COINIT.COINIT_APARTMENTTHREADED | COINIT.COINIT_DISABLE_OLE1DDE,
+    COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE,
   );
   if (FAILED(hr)) throw WindowsException(hr);
 

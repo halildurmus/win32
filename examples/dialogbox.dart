@@ -22,12 +22,12 @@ void main() {
 
   idx += (ptr + idx).cast<DLGTEMPLATE>().setDialog(
     style:
-        WINDOW_STYLE.WS_POPUP |
-        WINDOW_STYLE.WS_BORDER |
-        WINDOW_STYLE.WS_SYSMENU |
+        WS_POPUP |
+        WS_BORDER |
+        WS_SYSMENU |
         DS_MODALFRAME |
         DS_SETFONT |
-        WINDOW_STYLE.WS_CAPTION,
+        WS_CAPTION,
     title: 'Sample dialog',
     cdit: 5, // number of controls in the dialog
     cx: 300,
@@ -37,37 +37,29 @@ void main() {
   );
 
   idx += (ptr + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
-    style:
-        WINDOW_STYLE.WS_CHILD |
-        WINDOW_STYLE.WS_VISIBLE |
-        WINDOW_STYLE.WS_TABSTOP |
-        BS_DEFPUSHBUTTON,
+    style: WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_DEFPUSHBUTTON,
     x: 100,
     y: 160,
     cx: 50,
     cy: 14,
-    id: MESSAGEBOX_RESULT.IDOK,
+    id: IDOK,
     windowSystemClass: 0x0080, // button
     text: 'OK',
   );
 
   idx += (ptr + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
-    style:
-        WINDOW_STYLE.WS_CHILD |
-        WINDOW_STYLE.WS_VISIBLE |
-        WINDOW_STYLE.WS_TABSTOP |
-        BS_PUSHBUTTON,
+    style: WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON,
     x: 190,
     y: 160,
     cx: 50,
     cy: 14,
-    id: MESSAGEBOX_RESULT.IDCANCEL,
+    id: IDCANCEL,
     windowSystemClass: 0x0080, // button
     text: 'Cancel',
   );
 
   idx += (ptr + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
-    style: WINDOW_STYLE.WS_CHILD | WINDOW_STYLE.WS_VISIBLE,
+    style: WS_CHILD | WS_VISIBLE,
     x: 10,
     y: 10,
     cx: 60,
@@ -78,7 +70,7 @@ void main() {
   );
 
   idx += (ptr + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
-    style: PBS_SMOOTH | WINDOW_STYLE.WS_BORDER | WINDOW_STYLE.WS_VISIBLE,
+    style: PBS_SMOOTH | WS_BORDER | WS_VISIBLE,
     x: 10,
     y: 30,
     cx: 150,
@@ -88,12 +80,7 @@ void main() {
   );
 
   idx += (ptr + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
-    style:
-        WINDOW_STYLE.WS_CHILD |
-        WINDOW_STYLE.WS_VISIBLE |
-        WINDOW_STYLE.WS_TABSTOP |
-        WINDOW_STYLE.WS_BORDER |
-        ES_AUTOHSCROLL,
+    style: WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER | ES_AUTOHSCROLL,
     x: 10,
     y: 50,
     cx: 150,
@@ -136,7 +123,7 @@ int dialogReturnProc(int hwndDlg, int message, int wParam, int lParam) {
       SendDlgItemMessage(hwndDlg, ID_PROGRESS, PBM_SETPOS, 35, 0);
     case WM_COMMAND:
       switch (LOWORD(wParam)) {
-        case MESSAGEBOX_RESULT.IDOK:
+        case IDOK:
           print('OK');
           final textPtr = wsalloc(256);
           final result = GetDlgItemText(hwndDlg, ID_EDITTEXT, textPtr, 256);
@@ -146,7 +133,7 @@ int dialogReturnProc(int hwndDlg, int message, int wParam, int lParam) {
           free(textPtr);
           EndDialog(hwndDlg, wParam);
           return TRUE;
-        case MESSAGEBOX_RESULT.IDCANCEL:
+        case IDCANCEL:
           print('Cancel');
           EndDialog(hwndDlg, wParam);
           return TRUE;

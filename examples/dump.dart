@@ -11,8 +11,7 @@ final _exportedSymbols = <String, int>{};
 /// Callback called once for each enumerated symbol by SymEnumSymbols.
 int _enumSymbolProc(Pointer<SYMBOL_INFO> pSymInfo, int size, Pointer ctx) {
   // Only include symbols from the export table
-  if (pSymInfo.ref.Flags & SYMBOL_INFO_FLAGS.SYMFLAG_EXPORT ==
-      SYMBOL_INFO_FLAGS.SYMFLAG_EXPORT) {
+  if (pSymInfo.ref.Flags & SYMFLAG_EXPORT == SYMFLAG_EXPORT) {
     final SYMBOL_INFO(:Address, :Name) = pSymInfo.ref;
     _exportedSymbols[Name] = Address;
   }
@@ -80,7 +79,7 @@ bool isWindowsOnArm(int hProcess) {
 
   try {
     IsWow64Process2(hProcess, pProcessMachine, pNativeMachine);
-    return pNativeMachine.value == IMAGE_FILE_MACHINE.IMAGE_FILE_MACHINE_ARM64;
+    return pNativeMachine.value == IMAGE_FILE_MACHINE_ARM64;
   } finally {
     free(pProcessMachine);
     free(pNativeMachine);

@@ -24,13 +24,13 @@ IUIAutomationElement getTopLevelWindowByProcessId(int processId) {
 
   final valueParam = calloc<VARIANT>();
   VariantInit(valueParam);
-  valueParam.ref.vt = VARENUM.VT_I4;
+  valueParam.ref.vt = VT_I4;
   valueParam.ref.intVal = processId;
 
   try {
     final pCondition = calloc<COMObject>();
     var hr = uiAutomation.createPropertyCondition(
-      UIA_PROPERTY_ID.UIA_ProcessIdPropertyId,
+      UIA_ProcessIdPropertyId,
       valueParam.ref,
       pCondition.cast(),
     );
@@ -42,7 +42,7 @@ IUIAutomationElement getTopLevelWindowByProcessId(int processId) {
 
     final pElement = calloc<COMObject>();
     hr = root.findFirst(
-      TreeScope.TreeScope_Children,
+      TreeScope_Children,
       propertyCondition.ptr.cast<Pointer<COMObject>>().value,
       pElement.cast(),
     );
@@ -69,7 +69,7 @@ IUIAutomationElement getTopLevelWindowByProcessId(int processId) {
 bool isControlPatternAvailable(int propertyId, IUIAutomationElement element) {
   final retValParam = calloc<VARIANT>();
   VariantInit(retValParam);
-  retValParam.ref.vt = VARENUM.VT_BOOL;
+  retValParam.ref.vt = VT_BOOL;
 
   try {
     final hr = element.getCurrentPropertyValue(propertyId, retValParam);
@@ -85,17 +85,14 @@ bool isControlPatternAvailable(int propertyId, IUIAutomationElement element) {
 IUIAutomationWindowPattern getWindowPattern(IUIAutomationElement element) {
   // Check if the window pattern is available for the element
   if (!isControlPatternAvailable(
-    UIA_PROPERTY_ID.UIA_IsWindowPatternAvailablePropertyId,
+    UIA_IsWindowPatternAvailablePropertyId,
     element,
   )) {
     throw Exception('Window pattern is not available for this element');
   }
 
   final pPattern = calloc<COMObject>();
-  final hr = element.getCurrentPattern(
-    UIA_PATTERN_ID.UIA_WindowPatternId,
-    pPattern.cast(),
-  );
+  final hr = element.getCurrentPattern(UIA_WindowPatternId, pPattern.cast());
   if (FAILED(hr)) {
     free(pPattern);
     throw WindowsException(hr);
@@ -110,16 +107,12 @@ IUIAutomationWindowPattern getWindowPattern(IUIAutomationElement element) {
 }
 
 void maximizeWindow(IUIAutomationWindowPattern window) {
-  final hr = window.setWindowVisualState(
-    WindowVisualState.WindowVisualState_Maximized,
-  );
+  final hr = window.setWindowVisualState(WindowVisualState_Maximized);
   if (FAILED(hr)) throw WindowsException(hr);
 }
 
 void restoreWindow(IUIAutomationWindowPattern window) {
-  final hr = window.setWindowVisualState(
-    WindowVisualState.WindowVisualState_Normal,
-  );
+  final hr = window.setWindowVisualState(WindowVisualState_Normal);
   if (FAILED(hr)) throw WindowsException(hr);
 }
 
@@ -132,7 +125,7 @@ void main() async {
   final process = await Process.start('notepad.exe', []); // Start notepad.exe
   Sleep(500); // Wait for the Notepad to start
 
-  CoInitializeEx(nullptr, COINIT.COINIT_APARTMENTTHREADED); // Initialize COM
+  CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED); // Initialize COM
 
   final notepad = getTopLevelWindowByProcessId(process.pid);
   final window = getWindowPattern(notepad);

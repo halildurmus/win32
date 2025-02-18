@@ -98,7 +98,7 @@ void main() {
   final verb = 'open'.toNativeUtf16();
   final process = 'notepad.exe'.toNativeUtf16();
   // highlight-end
-  ShellExecute(0, verb, process, nullptr, nullptr, SHOW_WINDOW_CMD.SW_SHOW);
+  ShellExecute(0, verb, process, nullptr, nullptr, SW_SHOW);
 
   // Do something...
 

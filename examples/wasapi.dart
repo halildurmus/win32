@@ -80,7 +80,7 @@ void check(int hr) {
 
 void main() {
   // Initialize COM
-  check(CoInitializeEx(nullptr, COINIT.COINIT_APARTMENTTHREADED));
+  check(CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED));
 
   // Retrieve the list of available audio output devices.
   final pDeviceEnumerator = MMDeviceEnumerator.createInstance();
@@ -118,7 +118,7 @@ void main() {
     final ppProps = calloc<COMObject>();
     check(
       pEndpoint.openPropertyStore(
-        STGM.STGM_READ, // Storage-access mode: read
+        STGM_READ, // Storage-access mode: read
         ppProps.cast(),
       ),
     );
@@ -134,7 +134,7 @@ void main() {
 
     // Check the retrieved device friendly name.
     final varName = pVal.ref;
-    if (varName.vt != VARENUM.VT_EMPTY) {
+    if (varName.vt != VT_EMPTY) {
       final bstrVal = varName.bstrVal;
       final name = bstrVal.toDartString();
       print(" ID: $id Name: $name");
@@ -161,12 +161,7 @@ void main() {
   final iidAudioClient = convertToIID(IID_IAudioClient3);
   final ppAudioClient = calloc<COMObject>();
   check(
-    pDevice.activate(
-      iidAudioClient,
-      CLSCTX.CLSCTX_ALL,
-      nullptr,
-      ppAudioClient.cast(),
-    ),
+    pDevice.activate(iidAudioClient, CLSCTX_ALL, nullptr, ppAudioClient.cast()),
   );
   free(iidAudioClient);
   final pAudioClient = IAudioClient3(ppAudioClient);
@@ -178,7 +173,7 @@ void main() {
   final sampleRate = pWaveFormat.ref.nSamplesPerSec;
   check(
     pAudioClient.initialize(
-      AUDCLNT_SHAREMODE.AUDCLNT_SHAREMODE_SHARED,
+      AUDCLNT_SHAREMODE_SHARED,
       0,
       30000, // buffer capacity of 3s (30,000 * 100ns)
       0,
@@ -212,7 +207,7 @@ void main() {
   check(
     pAudioRenderClient.releaseBuffer(
       bufferFrameCount,
-      dataLoaded ? 0 : AUDCLNT_BUFFERFLAGS.AUDCLNT_BUFFERFLAGS_SILENT,
+      dataLoaded ? 0 : AUDCLNT_BUFFERFLAGS_SILENT,
     ),
   );
 
@@ -239,7 +234,7 @@ void main() {
     check(
       pAudioRenderClient.releaseBuffer(
         numFramesAvailable,
-        dataLoaded ? 0 : AUDCLNT_BUFFERFLAGS.AUDCLNT_BUFFERFLAGS_SILENT,
+        dataLoaded ? 0 : AUDCLNT_BUFFERFLAGS_SILENT,
       ),
     );
   }
