@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwebsite=self.webpackChunkwebsite||[]).push([[4514],{1618:e=>{e.exports=JSON.parse('{"label":"win32","permalink":"/blog/tags/win-32","allTagsPath":"/blog/tags","count":3}')}}]);
