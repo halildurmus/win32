@@ -11,11 +11,7 @@ import 'package:win32/win32.dart';
 // For simplicity, the sample uses a constant magnification factor
 const MAGFACTOR = 2.0;
 const RESTOREDWINDOWSTYLES =
-    WINDOW_STYLE.WS_SIZEBOX |
-    WINDOW_STYLE.WS_SYSMENU |
-    WINDOW_STYLE.WS_CLIPCHILDREN |
-    WINDOW_STYLE.WS_CAPTION |
-    WINDOW_STYLE.WS_MAXIMIZEBOX;
+    WS_SIZEBOX | WS_SYSMENU | WS_CLIPCHILDREN | WS_CAPTION | WS_MAXIMIZEBOX;
 
 const timerInterval = 16;
 final windowClassName = TEXT('MagnifierWindow');
@@ -75,7 +71,7 @@ void winMain(int hInstance, List<String> args, int nCmdShow) {
 int hostWndProc(int hWnd, int message, int wParam, int lParam) {
   switch (message) {
     case WM_KEYDOWN:
-      if (wParam == VIRTUAL_KEY.VK_ESCAPE) {
+      if (wParam == VK_ESCAPE) {
         if (isFullScreen) {
           goPartialScreen();
         }
@@ -122,11 +118,11 @@ int registerHostWindowClass(
   final wcex =
       calloc<WNDCLASSEX>()
         ..ref.cbSize = sizeOf<WNDCLASSEX>()
-        ..ref.style = WNDCLASS_STYLES.CS_HREDRAW | WNDCLASS_STYLES.CS_VREDRAW
+        ..ref.style = CS_HREDRAW | CS_VREDRAW
         ..ref.lpfnWndProc = lpfnWndProc
         ..ref.hInstance = hInstance
         ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
-        ..ref.hbrBackground = SYS_COLOR_INDEX.COLOR_BTNFACE + 1
+        ..ref.hbrBackground = COLOR_BTNFACE + 1
         ..ref.lpszClassName = windowClassName;
 
   return RegisterClassEx(wcex);
@@ -136,14 +132,14 @@ bool setupMagnifier(int hInst, Pointer<NativeFunction<WNDPROC>> lpfnWndProc) {
   // Set bounds of host window according to screen size
   hostWindowRect
     ..ref.top = 0
-    ..ref.bottom = GetSystemMetrics(SYSTEM_METRICS_INDEX.SM_CYSCREEN) ~/ 4
+    ..ref.bottom = GetSystemMetrics(SM_CYSCREEN) ~/ 4
     ..ref.left = 0
-    ..ref.right = GetSystemMetrics(SYSTEM_METRICS_INDEX.SM_CXSCREEN);
+    ..ref.right = GetSystemMetrics(SM_CXSCREEN);
 
   // Create the host window
   registerHostWindowClass(hInst, lpfnWndProc);
   hwndHost = CreateWindowEx(
-    WINDOW_EX_STYLE.WS_EX_TOPMOST | WINDOW_EX_STYLE.WS_EX_LAYERED,
+    WS_EX_TOPMOST | WS_EX_LAYERED,
     windowClassName,
     windowTitle,
     RESTOREDWINDOWSTYLES,
@@ -160,19 +156,14 @@ bool setupMagnifier(int hInst, Pointer<NativeFunction<WNDPROC>> lpfnWndProc) {
   if (hwndHost == FALSE) return false;
 
   // Make the window opaque
-  SetLayeredWindowAttributes(
-    hwndHost,
-    0,
-    255,
-    LAYERED_WINDOW_ATTRIBUTES_FLAGS.LWA_ALPHA,
-  );
+  SetLayeredWindowAttributes(hwndHost, 0, 255, LWA_ALPHA);
 
   // Create a magnifier control that fills the client area
   GetClientRect(hwndHost, magWindowRect);
   hwndMag = CreateWindow(
     TEXT('Magnifier'),
     TEXT('MagnifierWindow'),
-    WINDOW_STYLE.WS_CHILD | MS_SHOWMAGNIFIEDCURSOR | WINDOW_STYLE.WS_VISIBLE,
+    WS_CHILD | MS_SHOWMAGNIFIEDCURSOR | WS_VISIBLE,
     magWindowRect.ref.left,
     magWindowRect.ref.top,
     magWindowRect.ref.right,
@@ -254,20 +245,16 @@ void updateMagWindow(int hwnd, int uMsg, Pointer<Uint32> idEvent, int dwTime) {
     if (sourceRect.left < 0) {
       sourceRect.left = 0;
     }
-    if (sourceRect.left >
-        GetSystemMetrics(SYSTEM_METRICS_INDEX.SM_CXSCREEN) - width) {
-      sourceRect.left =
-          GetSystemMetrics(SYSTEM_METRICS_INDEX.SM_CXSCREEN) - width;
+    if (sourceRect.left > GetSystemMetrics(SM_CXSCREEN) - width) {
+      sourceRect.left = GetSystemMetrics(SM_CXSCREEN) - width;
     }
     sourceRect.right = sourceRect.left + width;
 
     if (sourceRect.top < 0) {
       sourceRect.top = 0;
     }
-    if (sourceRect.top >
-        GetSystemMetrics(SYSTEM_METRICS_INDEX.SM_CYSCREEN) - height) {
-      sourceRect.top =
-          GetSystemMetrics(SYSTEM_METRICS_INDEX.SM_CYSCREEN) - height;
+    if (sourceRect.top > GetSystemMetrics(SM_CYSCREEN) - height) {
+      sourceRect.top = GetSystemMetrics(SM_CYSCREEN) - height;
     }
     sourceRect.bottom = sourceRect.top + height;
 
@@ -283,9 +270,7 @@ void updateMagWindow(int hwnd, int uMsg, Pointer<Uint32> idEvent, int dwTime) {
       0,
       0,
       0,
-      SET_WINDOW_POS_FLAGS.SWP_NOACTIVATE |
-          SET_WINDOW_POS_FLAGS.SWP_NOMOVE |
-          SET_WINDOW_POS_FLAGS.SWP_NOSIZE,
+      SWP_NOACTIVATE | SWP_NOMOVE | SWP_NOSIZE,
     );
 
     // Force redraw.
@@ -305,29 +290,23 @@ void goFullScreen() {
   // It is styled as transparent so that it does not capture mouse clicks.
   SetWindowLongPtr(
     hwndHost,
-    WINDOW_LONG_PTR_INDEX.GWL_EXSTYLE,
-    WINDOW_EX_STYLE.WS_EX_TOPMOST |
-        WINDOW_EX_STYLE.WS_EX_LAYERED |
-        WINDOW_EX_STYLE.WS_EX_TRANSPARENT,
+    GWL_EXSTYLE,
+    WS_EX_TOPMOST | WS_EX_LAYERED | WS_EX_TRANSPARENT,
   );
 
   // Give the window a system menu so it can be closed on the taskbar.
-  SetWindowLongPtr(
-    hwndHost,
-    WINDOW_LONG_PTR_INDEX.GWL_STYLE,
-    WINDOW_STYLE.WS_CAPTION | WINDOW_STYLE.WS_SYSMENU,
-  );
+  SetWindowLongPtr(hwndHost, GWL_STYLE, WS_CAPTION | WS_SYSMENU);
 
   // Calculate the span of the display area.
   final hDC = GetDC(NULL);
-  var xSpan = GetSystemMetrics(SYSTEM_METRICS_INDEX.SM_CXSCREEN);
-  var ySpan = GetSystemMetrics(SYSTEM_METRICS_INDEX.SM_CYSCREEN);
+  var xSpan = GetSystemMetrics(SM_CXSCREEN);
+  var ySpan = GetSystemMetrics(SM_CYSCREEN);
   ReleaseDC(NULL, hDC);
 
   // Calculate the size of system elements.
-  final xBorder = GetSystemMetrics(SYSTEM_METRICS_INDEX.SM_CXFRAME);
-  final yCaption = GetSystemMetrics(SYSTEM_METRICS_INDEX.SM_CYCAPTION);
-  final yBorder = GetSystemMetrics(SYSTEM_METRICS_INDEX.SM_CYFRAME);
+  final xBorder = GetSystemMetrics(SM_CXFRAME);
+  final yCaption = GetSystemMetrics(SM_CYCAPTION);
+  final yBorder = GetSystemMetrics(SM_CYFRAME);
 
   // Calculate the window origin and span for full-screen mode.
   final xOrigin = -xBorder;
@@ -342,9 +321,7 @@ void goFullScreen() {
     yOrigin,
     xSpan,
     ySpan,
-    SET_WINDOW_POS_FLAGS.SWP_SHOWWINDOW |
-        SET_WINDOW_POS_FLAGS.SWP_NOZORDER |
-        SET_WINDOW_POS_FLAGS.SWP_NOACTIVATE,
+    SWP_SHOWWINDOW | SWP_NOZORDER | SWP_NOACTIVATE,
   );
 }
 
@@ -352,16 +329,8 @@ void goFullScreen() {
 void goPartialScreen() {
   isFullScreen = false;
 
-  SetWindowLongPtr(
-    hwndHost,
-    WINDOW_LONG_PTR_INDEX.GWL_EXSTYLE,
-    WINDOW_EX_STYLE.WS_EX_TOPMOST | WINDOW_EX_STYLE.WS_EX_LAYERED,
-  );
-  SetWindowLongPtr(
-    hwndHost,
-    WINDOW_LONG_PTR_INDEX.GWL_STYLE,
-    RESTOREDWINDOWSTYLES,
-  );
+  SetWindowLongPtr(hwndHost, GWL_EXSTYLE, WS_EX_TOPMOST | WS_EX_LAYERED);
+  SetWindowLongPtr(hwndHost, GWL_STYLE, RESTOREDWINDOWSTYLES);
   SetWindowPos(
     hwndHost,
     HWND_TOPMOST,
@@ -369,8 +338,6 @@ void goPartialScreen() {
     hostWindowRect.ref.top,
     hostWindowRect.ref.right,
     hostWindowRect.ref.bottom,
-    SET_WINDOW_POS_FLAGS.SWP_SHOWWINDOW |
-        SET_WINDOW_POS_FLAGS.SWP_NOZORDER |
-        SET_WINDOW_POS_FLAGS.SWP_NOACTIVATE,
+    SWP_SHOWWINDOW | SWP_NOZORDER | SWP_NOACTIVATE,
   );
 }

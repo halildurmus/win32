@@ -41,7 +41,7 @@ void main() {
     final batteryStatus = calloc<SYSTEM_BATTERY_STATE>();
 
     final result = CallNtPowerInformation(
-      POWER_INFORMATION_LEVEL.SystemBatteryState,
+      SystemBatteryState,
       nullptr,
       0,
       batteryStatus,

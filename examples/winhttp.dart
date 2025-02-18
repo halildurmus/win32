@@ -5,7 +5,7 @@ import 'package:win32/win32.dart';
 
 void main() {
   // Initialize COM
-  CoInitializeEx(nullptr, COINIT.COINIT_APARTMENTTHREADED);
+  CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 
   final method = BSTR.fromString('GET');
   final url = BSTR.fromString('https://dart.dev');
@@ -14,11 +14,11 @@ void main() {
   final varEmpty = calloc<VARIANT>();
 
   VariantInit(varFalse);
-  varFalse.ref.vt = VARENUM.VT_BOOL;
+  varFalse.ref.vt = VT_BOOL;
   varFalse.ref.boolVal = false;
 
   VariantInit(varEmpty);
-  varEmpty.ref.vt = VARENUM.VT_ERROR;
+  varEmpty.ref.vt = VT_ERROR;
 
   try {
     // Create an instance of WinHttpRequest class

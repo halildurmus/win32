@@ -8,7 +8,7 @@ import 'package:win32/win32.dart';
 
 void main() {
   // Initialize COM
-  var hr = CoInitializeEx(nullptr, COINIT.COINIT_APARTMENTTHREADED);
+  var hr = CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
   if (FAILED(hr)) throw WindowsException(hr);
 
   // Initialize security model
@@ -17,10 +17,10 @@ void main() {
     -1, // COM negotiates service
     nullptr, // Authentication services
     nullptr, // Reserved
-    RPC_C_AUTHN_LEVEL.RPC_C_AUTHN_LEVEL_DEFAULT, // authentication
-    RPC_C_IMP_LEVEL.RPC_C_IMP_LEVEL_IMPERSONATE, // Impersonation
+    RPC_C_AUTHN_LEVEL_DEFAULT, // authentication
+    RPC_C_IMP_LEVEL_IMPERSONATE, // Impersonation
     nullptr, // Authentication info
-    EOLE_AUTHENTICATION_CAPABILITIES.EOAC_NONE, // Additional capabilities
+    EOAC_NONE, // Additional capabilities
     nullptr, // Reserved
   );
 
@@ -42,7 +42,7 @@ void main() {
   hr = CoCreateInstance(
     clsid,
     nullptr,
-    CLSCTX.CLSCTX_INPROC_SERVER,
+    CLSCTX_INPROC_SERVER,
     iid,
     pLoc.ptr.cast(),
   );
@@ -91,10 +91,10 @@ void main() {
     RPC_C_AUTHN_WINNT, // authentication service
     RPC_C_AUTHZ_NONE, // authorization service
     nullptr, // Server principal name
-    RPC_C_AUTHN_LEVEL.RPC_C_AUTHN_LEVEL_CALL, // authentication level
-    RPC_C_IMP_LEVEL.RPC_C_IMP_LEVEL_IMPERSONATE, // impersonation level
+    RPC_C_AUTHN_LEVEL_CALL, // authentication level
+    RPC_C_IMP_LEVEL_IMPERSONATE, // impersonation level
     nullptr, // client identity
-    EOLE_AUTHENTICATION_CAPABILITIES.EOAC_NONE, // proxy capabilities
+    EOAC_NONE, // proxy capabilities
   );
 
   if (FAILED(hr)) {
@@ -113,8 +113,7 @@ void main() {
   hr = pSvc.execQuery(
     TEXT('WQL'),
     TEXT('SELECT * FROM Win32_Process'),
-    WBEM_GENERIC_FLAG_TYPE.WBEM_FLAG_FORWARD_ONLY |
-        WBEM_GENERIC_FLAG_TYPE.WBEM_FLAG_RETURN_IMMEDIATELY,
+    WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY,
     nullptr,
     pEnumerator,
   );

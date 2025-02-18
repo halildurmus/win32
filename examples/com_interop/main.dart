@@ -101,13 +101,7 @@ void invokeMethodsViaEarlyBinding() => using((arena) {
   final ppv = calloc<COMObject>();
 
   // Create an instance of the IExampleCom interface.
-  var hr = CoCreateInstance(
-    lpclsid,
-    nullptr,
-    CLSCTX.CLSCTX_ALL,
-    riid,
-    ppv.cast(),
-  );
+  var hr = CoCreateInstance(lpclsid, nullptr, CLSCTX_ALL, riid, ppv.cast());
   if (FAILED(hr)) throw WindowsException(hr);
 
   // Pass the interface pointer to the IExampleCom class.
@@ -157,10 +151,10 @@ void invokeMethodsViaLateBinding() {
   final args = calloc<VARIANT>(2); // Allocate memory for two arguments.
   // Note: these arguments appear in reverse order.
   args[0]
-    ..vt = VARENUM.VT_I4
+    ..vt = VT_I4
     ..intVal = 7; // This is the second argument to the method.
   args[1]
-    ..vt = VARENUM.VT_I4
+    ..vt = VT_I4
     ..intVal = 5; // This is the first argument to the method.
   dispParams.ref
     ..cArgs =
@@ -184,10 +178,7 @@ void invokeMethodsViaLateBinding() {
 
 void main() {
   // Initialize COM.
-  CoInitializeEx(
-    nullptr,
-    COINIT.COINIT_APARTMENTTHREADED | COINIT.COINIT_DISABLE_OLE1DDE,
-  );
+  CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
 
   invokeMethodsViaEarlyBinding();
   invokeMethodsViaLateBinding();

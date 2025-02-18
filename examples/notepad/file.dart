@@ -43,9 +43,7 @@ class NotepadFile {
 
     ofn.ref.lpstrFile = strFile;
     ofn.ref.lpstrFileTitle = strFileTitle;
-    ofn.ref.Flags =
-        OPEN_FILENAME_FLAGS.OFN_HIDEREADONLY |
-        OPEN_FILENAME_FLAGS.OFN_CREATEPROMPT;
+    ofn.ref.Flags = OFN_HIDEREADONLY | OFN_CREATEPROMPT;
 
     final result = GetOpenFileName(ofn);
     if (result == 0) {
@@ -70,7 +68,7 @@ class NotepadFile {
 
     ofn.ref.lpstrFile = strFile;
     ofn.ref.lpstrFileTitle = strFileTitle;
-    ofn.ref.Flags = OPEN_FILENAME_FLAGS.OFN_OVERWRITEPROMPT;
+    ofn.ref.Flags = OFN_OVERWRITEPROMPT;
 
     final result = GetSaveFileName(ofn);
     if (result == 0) {

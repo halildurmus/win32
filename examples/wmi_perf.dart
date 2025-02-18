@@ -8,7 +8,7 @@ import 'package:win32/win32.dart';
 
 void initializeCOM() {
   // Initialize COM
-  var hr = CoInitializeEx(nullptr, COINIT.COINIT_APARTMENTTHREADED);
+  var hr = CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
   if (FAILED(hr)) throw WindowsException(hr);
 
   // Initialize security model
@@ -17,10 +17,10 @@ void initializeCOM() {
     -1, // COM negotiates service
     nullptr, // Authentication services
     nullptr, // Reserved
-    RPC_C_AUTHN_LEVEL.RPC_C_AUTHN_LEVEL_DEFAULT, // authentication
-    RPC_C_IMP_LEVEL.RPC_C_IMP_LEVEL_IMPERSONATE, // Impersonation
+    RPC_C_AUTHN_LEVEL_DEFAULT, // authentication
+    RPC_C_IMP_LEVEL_IMPERSONATE, // Impersonation
     nullptr, // Authentication info
-    EOLE_AUTHENTICATION_CAPABILITIES.EOAC_NONE, // Additional capabilities
+    EOAC_NONE, // Additional capabilities
     nullptr, // Reserved
   );
   if (FAILED(hr)) throw WindowsException(hr);
@@ -46,10 +46,10 @@ int connectWMI(WbemLocator pLoc, Pointer<Pointer<COMObject>> ppNamespace) {
     RPC_C_AUTHN_WINNT, // authentication service
     RPC_C_AUTHZ_NONE, // authorization service
     nullptr, // Server principal name
-    RPC_C_AUTHN_LEVEL.RPC_C_AUTHN_LEVEL_CALL, // authentication level
-    RPC_C_IMP_LEVEL.RPC_C_IMP_LEVEL_IMPERSONATE, // impersonation level
+    RPC_C_AUTHN_LEVEL_CALL, // authentication level
+    RPC_C_IMP_LEVEL_IMPERSONATE, // impersonation level
     nullptr, // client identity
-    EOLE_AUTHENTICATION_CAPABILITIES.EOAC_NONE, // proxy capabilities
+    EOAC_NONE, // proxy capabilities
   );
   if (FAILED(hr)) throw WindowsException(hr);
   return hr;
@@ -98,7 +98,7 @@ void main() {
 
     final dwWorkingSetBytes = arena<DWORD>();
     for (var x = 0; x < 10; x++) {
-      refresher.refresh(WBEM_REFRESHER_FLAGS.WBEM_FLAG_REFRESH_AUTO_RECONNECT);
+      refresher.refresh(WBEM_FLAG_REFRESH_AUTO_RECONNECT);
       hr = pAccess.readDWORD(plHandle.value, dwWorkingSetBytes);
       if (FAILED(hr)) throw WindowsException(hr);
       print(

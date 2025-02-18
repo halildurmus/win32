@@ -50,7 +50,7 @@ void main(List<String> args) {
 
   try {
     final results = parser.parse(args);
-    CoInitializeEx(nullptr, COINIT.COINIT_APARTMENTTHREADED);
+    CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
     createShortcut(
       results['path'] as String,
       results['shortcut'] as String,

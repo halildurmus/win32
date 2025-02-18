@@ -61,12 +61,12 @@ void main() {
 
     idx += (ptr + idx).cast<DLGTEMPLATE>().setDialog(
       style:
-          WINDOW_STYLE.WS_POPUP |
-          WINDOW_STYLE.WS_BORDER |
-          WINDOW_STYLE.WS_SYSMENU |
+          WS_POPUP |
+          WS_BORDER |
+          WS_SYSMENU |
           DS_MODALFRAME |
           DS_SETFONT |
-          WINDOW_STYLE.WS_CAPTION,
+          WS_CAPTION,
       title: 'Sample dialog',
       cdit: 4,
       cx: 300,
@@ -76,37 +76,29 @@ void main() {
     );
 
     idx += (ptr + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
-      style:
-          WINDOW_STYLE.WS_CHILD |
-          WINDOW_STYLE.WS_VISIBLE |
-          WINDOW_STYLE.WS_TABSTOP |
-          BS_DEFPUSHBUTTON,
+      style: WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_DEFPUSHBUTTON,
       x: 100,
       y: 160,
       cx: 50,
       cy: 14,
-      id: MESSAGEBOX_RESULT.IDOK,
+      id: IDOK,
       windowSystemClass: 0x0080, // button
       text: 'OK',
     );
 
     idx += (ptr + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
-      style:
-          WINDOW_STYLE.WS_CHILD |
-          WINDOW_STYLE.WS_VISIBLE |
-          WINDOW_STYLE.WS_TABSTOP |
-          BS_PUSHBUTTON,
+      style: WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON,
       x: 190,
       y: 160,
       cx: 50,
       cy: 14,
-      id: MESSAGEBOX_RESULT.IDCANCEL,
+      id: IDCANCEL,
       windowSystemClass: 0x0080, // button
       text: 'Cancel',
     );
 
     idx += (ptr + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
-      style: WINDOW_STYLE.WS_CHILD | WINDOW_STYLE.WS_VISIBLE,
+      style: WS_CHILD | WS_VISIBLE,
       x: 10,
       y: 10,
       cx: 60,
@@ -117,7 +109,7 @@ void main() {
     );
 
     idx += (ptr + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
-      style: PBS_SMOOTH | WINDOW_STYLE.WS_BORDER | WINDOW_STYLE.WS_VISIBLE,
+      style: PBS_SMOOTH | WS_BORDER | WS_VISIBLE,
       x: 6,
       y: 49,
       cx: 158,
@@ -127,11 +119,7 @@ void main() {
     );
 
     idx += (ptr + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
-      style:
-          WINDOW_STYLE.WS_CHILD |
-          WINDOW_STYLE.WS_VISIBLE |
-          WINDOW_STYLE.WS_TABSTOP |
-          WINDOW_STYLE.WS_BORDER,
+      style: WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,
       x: 20,
       y: 50,
       cx: 100,

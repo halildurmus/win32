@@ -22,7 +22,7 @@ abstract class TaskManager {
       lpFile,
       nullptr,
       nullptr,
-      SHOW_WINDOW_CMD.SW_SHOWNORMAL,
+      SW_SHOWNORMAL,
     );
     free(lpFile);
     return result > 32;
@@ -47,8 +47,7 @@ abstract class TaskManager {
 
       for (final pid in processIds) {
         final hProcess = OpenProcess(
-          PROCESS_ACCESS_RIGHTS.PROCESS_QUERY_INFORMATION |
-              PROCESS_ACCESS_RIGHTS.PROCESS_VM_READ,
+          PROCESS_QUERY_INFORMATION | PROCESS_VM_READ,
           FALSE,
           pid,
         );
@@ -111,11 +110,7 @@ abstract class TaskManager {
   /// Returns `true` if the task was successfully terminated; otherwise,
   /// `false`.
   static bool terminate(int pid) {
-    final handle = OpenProcess(
-      PROCESS_ACCESS_RIGHTS.PROCESS_TERMINATE,
-      FALSE,
-      pid,
-    );
+    final handle = OpenProcess(PROCESS_TERMINATE, FALSE, pid);
     if (handle == NULL) return false;
 
     try {
@@ -199,7 +194,7 @@ abstract class TaskManager {
             0,
             nullptr,
             bmInfo,
-            DIB_USAGE.DIB_RGB_COLORS,
+            DIB_RGB_COLORS,
           ) ==
           0) {
         DeleteDC(hdc);
@@ -220,7 +215,7 @@ abstract class TaskManager {
 
       bmInfo.ref.bmiHeader
         ..biBitCount = nColorBits
-        ..biCompression = BI_COMPRESSION.BI_RGB;
+        ..biCompression = BI_RGB;
 
       if (GetDIBits(
             hdc,
@@ -229,7 +224,7 @@ abstract class TaskManager {
             bmInfo.ref.bmiHeader.biHeight,
             bits,
             bmInfo,
-            DIB_USAGE.DIB_RGB_COLORS,
+            DIB_RGB_COLORS,
           ) ==
           0) {
         DeleteDC(hdc);
@@ -248,7 +243,7 @@ abstract class TaskManager {
                 0,
                 nullptr,
                 maskInfo,
-                DIB_USAGE.DIB_RGB_COLORS,
+                DIB_RGB_COLORS,
               ) ==
               0 ||
           maskInfo.ref.bmiHeader.biBitCount != 1) {
@@ -264,7 +259,7 @@ abstract class TaskManager {
             maskInfo.ref.bmiHeader.biHeight,
             maskBits,
             maskInfo,
-            DIB_USAGE.DIB_RGB_COLORS,
+            DIB_RGB_COLORS,
           ) ==
           0) {
         DeleteDC(hdc);

@@ -7,7 +7,7 @@ import 'package:win32/win32.dart';
 void main() {
   test('Win32 error', () {
     expect(
-      WindowsException(WIN32_ERROR.ERROR_INVALID_HANDLE).toString(),
+      WindowsException(ERROR_INVALID_HANDLE).toString(),
       endsWith('The handle is invalid.'),
     );
   });
@@ -27,7 +27,7 @@ void main() {
   });
 
   test('HRESULT_FROM_WIN32 should give a valid result', () {
-    final hr = HRESULT_FROM_WIN32(WIN32_ERROR.ERROR_INVALID_HANDLE);
+    final hr = HRESULT_FROM_WIN32(ERROR_INVALID_HANDLE);
     expect(WindowsException(hr).toString(), endsWith('The handle is invalid.'));
   });
 

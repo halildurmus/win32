@@ -52,7 +52,7 @@ void findRadioInfo(int hRadio) {
 
   try {
     final res = BluetoothGetRadioInfo(hRadio, radioInfo);
-    if (res == WIN32_ERROR.ERROR_SUCCESS) {
+    if (res == ERROR_SUCCESS) {
       final bluetoothAddress = addressAsString(radioInfo.ref.address.rgBytes);
       print('Radio name: ${radioInfo.ref.szName}');
       print('Radio address: $bluetoothAddress');

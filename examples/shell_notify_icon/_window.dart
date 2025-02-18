@@ -9,7 +9,7 @@ import '_app.dart' as app;
 bool _windowWndProc(int hWnd, int uMsg, int wParam, int lParam) {
   switch (uMsg) {
     case WM_CLOSE:
-      ShowWindow(hWnd, SHOW_WINDOW_CMD.SW_HIDE);
+      ShowWindow(hWnd, SW_HIDE);
       return true;
   }
   return false;
@@ -22,7 +22,7 @@ int createHidden() {
     0,
     TEXT(windowClassNme),
     TEXT('Tray Callback Window'),
-    WINDOW_STYLE.WS_OVERLAPPEDWINDOW,
+    WS_OVERLAPPEDWINDOW,
     rect.left,
     rect.top,
     rect.width,
@@ -40,7 +40,7 @@ String _regWinClass() {
   const windowClass = 'Tray_Callback_Window';
   final pWndClass =
       calloc<WNDCLASS>()
-        ..ref.style = WNDCLASS_STYLES.CS_HREDRAW | WNDCLASS_STYLES.CS_VREDRAW
+        ..ref.style = CS_HREDRAW | CS_VREDRAW
         ..ref.lpfnWndProc = app.lpfnWndProc.nativeFunction
         ..ref.hInstance = app.hInst
         ..ref.hIcon = app.loadDartIcon()
@@ -54,8 +54,8 @@ math.Rectangle<int> _getWindowCenterRect() {
   const windowWidth = 500;
   const windowHeight = 250;
 
-  final screenWidth = GetSystemMetrics(SYSTEM_METRICS_INDEX.SM_CXFULLSCREEN);
-  final screenHeight = GetSystemMetrics(SYSTEM_METRICS_INDEX.SM_CYFULLSCREEN);
+  final screenWidth = GetSystemMetrics(SM_CXFULLSCREEN);
+  final screenHeight = GetSystemMetrics(SM_CYFULLSCREEN);
 
   final x = (screenWidth - windowWidth) ~/ 2;
   final y = (screenHeight - windowHeight) ~/ 2;

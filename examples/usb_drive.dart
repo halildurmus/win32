@@ -30,8 +30,7 @@ Future<void> listenForUsbDriveChanges(SendPort mainSendPort) async {
         if (wParam case DBT_DEVICEARRIVAL || DBT_DEVICEREMOVECOMPLETE
             when lParam != 0) {
           final dbhdr = Pointer<DEV_BROADCAST_HDR>.fromAddress(lParam);
-          if (dbhdr.ref.dbch_devicetype ==
-              DEV_BROADCAST_HDR_DEVICE_TYPE.DBT_DEVTYP_VOLUME) {
+          if (dbhdr.ref.dbch_devicetype == DBT_DEVTYP_VOLUME) {
             final devBroadcastVolume = dbhdr.cast<DEV_BROADCAST_VOLUME>().ref;
             final driveLetter = getDriveLetter(
               devBroadcastVolume.dbcv_unitmask,
@@ -120,8 +119,7 @@ Future<void> listenForUsbDriveChanges(SendPort mainSendPort) async {
   // Message loop to keep the isolate running and handle notifications.
   while (isRunning) {
     // Process messages without blocking.
-    while (PeekMessage(msg, hWnd, 0, 0, PEEK_MESSAGE_REMOVE_TYPE.PM_REMOVE) !=
-        0) {
+    while (PeekMessage(msg, hWnd, 0, 0, PM_REMOVE) != 0) {
       TranslateMessage(msg);
       DispatchMessage(msg);
     }

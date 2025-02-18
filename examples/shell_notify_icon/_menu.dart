@@ -40,10 +40,10 @@ bool wndProc(int hWnd, int uMsg, int wParam, int lParam) {
 
 int _buildMenu() {
   final hMenu = CreateMenu();
-  AppendMenu(hMenu, MENU_ITEM_FLAGS.MF_STRING, app.EVENT_QUIT, TEXT('&Quit'));
+  AppendMenu(hMenu, MF_STRING, app.EVENT_QUIT, TEXT('&Quit'));
 
   final hMenubar = CreateMenu();
-  AppendMenu(hMenubar, MENU_ITEM_FLAGS.MF_POPUP, hMenu, TEXT('_Parent'));
+  AppendMenu(hMenubar, MF_POPUP, hMenu, TEXT('_Parent'));
 
   return GetSubMenu(hMenubar, 0);
 }
@@ -57,11 +57,11 @@ Point<int> _currentMousePos() {
 }
 
 int get _contextMenuFlags {
-  var uFlags = TRACK_POPUP_MENU_FLAGS.TPM_RIGHTBUTTON;
-  if (GetSystemMetrics(SYSTEM_METRICS_INDEX.SM_MENUDROPALIGNMENT) != 0) {
-    uFlags |= TRACK_POPUP_MENU_FLAGS.TPM_RIGHTALIGN;
+  var uFlags = TPM_RIGHTBUTTON;
+  if (GetSystemMetrics(SM_MENUDROPALIGNMENT) != 0) {
+    uFlags |= TPM_RIGHTALIGN;
   } else {
-    uFlags |= TRACK_POPUP_MENU_FLAGS.TPM_LEFTALIGN;
+    uFlags |= TPM_LEFTALIGN;
   }
   return uFlags;
 }

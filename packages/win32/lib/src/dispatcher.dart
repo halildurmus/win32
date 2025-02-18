@@ -6,7 +6,6 @@ import 'com/idispatch.dart';
 import 'combase.dart';
 import 'constants.dart';
 import 'constants_nodoc.dart';
-import 'enums.g.dart';
 import 'exceptions.dart';
 import 'guid.dart';
 import 'macros.dart';
@@ -38,7 +37,7 @@ final class Dispatcher {
     final hr = CoCreateInstance(
       lpclsid,
       nullptr,
-      CLSCTX.CLSCTX_INPROC_SERVER,
+      CLSCTX_INPROC_SERVER,
       riid,
       ppv.cast(),
     );
@@ -75,11 +74,8 @@ final class Dispatcher {
   /// [free] on it.
   ///
   /// Throws a [WindowsException] if the invocation fails.
-  Pointer<VARIANT> get(String name) => _invokeProperty(
-    name,
-    DISPATCH_FLAGS.DISPATCH_PROPERTYGET,
-    returnResult: true,
-  );
+  Pointer<VARIANT> get(String name) =>
+      _invokeProperty(name, DISPATCH_PROPERTYGET, returnResult: true);
 
   /// Sets the value of the property with the given [name] to [value].
   ///
@@ -90,9 +86,7 @@ final class Dispatcher {
       _invokeProperty(
         name,
         argument: value,
-        byReference
-            ? DISPATCH_FLAGS.DISPATCH_PROPERTYPUTREF
-            : DISPATCH_FLAGS.DISPATCH_PROPERTYPUT,
+        byReference ? DISPATCH_PROPERTYPUTREF : DISPATCH_PROPERTYPUT,
       );
 
   /// Invokes a method on the COM object.
@@ -118,7 +112,7 @@ final class Dispatcher {
       dispIdMember,
       _nilGuid,
       LOCALE_SYSTEM_DEFAULT,
-      DISPATCH_FLAGS.DISPATCH_METHOD,
+      DISPATCH_METHOD,
       args ?? arena<DISPPARAMS>(),
       result ?? nullptr,
       pExcepInfo,

@@ -41,7 +41,7 @@ void findNotepad() {
   if (hwnd == 0) {
     print('No Notepad window found.');
   } else {
-    ShowWindow(hwnd, SHOW_WINDOW_CMD.SW_MAXIMIZE);
+    ShowWindow(hwnd, SW_MAXIMIZE);
   }
 }
 

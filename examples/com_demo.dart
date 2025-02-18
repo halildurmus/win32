@@ -11,7 +11,7 @@ void main() {
   // Initialize COM
   var hr = CoInitializeEx(
     nullptr,
-    COINIT.COINIT_APARTMENTTHREADED | COINIT.COINIT_DISABLE_OLE1DDE,
+    COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE,
   );
   if (FAILED(hr)) throw WindowsException(hr);
 
@@ -55,7 +55,7 @@ void main() {
   // Use IFileOpenDialog.Show, which is inherited from IModalWindow
   hr = fileOpenDialog.show(NULL);
   if (FAILED(hr)) {
-    if (hr == HRESULT_FROM_WIN32(WIN32_ERROR.ERROR_CANCELLED)) {
+    if (hr == HRESULT_FROM_WIN32(ERROR_CANCELLED)) {
       print('Dialog cancelled.');
     } else {
       throw WindowsException(hr);

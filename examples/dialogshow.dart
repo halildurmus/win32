@@ -8,7 +8,7 @@ import 'package:win32/win32.dart';
 void main() {
   var hr = CoInitializeEx(
     nullptr,
-    COINIT.COINIT_APARTMENTTHREADED | COINIT.COINIT_DISABLE_OLE1DDE,
+    COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE,
   );
 
   if (SUCCEEDED(hr)) {
@@ -18,7 +18,7 @@ void main() {
     hr = fileDialog.getOptions(pfos);
     if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
-    final options = pfos.value | FILEOPENDIALOGOPTIONS.FOS_FORCEFILESYSTEM;
+    final options = pfos.value | FOS_FORCEFILESYSTEM;
     hr = fileDialog.setOptions(options);
     if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
@@ -57,7 +57,7 @@ void main() {
 
     hr = fileDialog.show(NULL);
     if (!SUCCEEDED(hr)) {
-      if (hr == HRESULT_FROM_WIN32(WIN32_ERROR.ERROR_CANCELLED)) {
+      if (hr == HRESULT_FROM_WIN32(ERROR_CANCELLED)) {
         print('Dialog cancelled.');
       } else {
         throw WindowsException(hr);
@@ -69,7 +69,7 @@ void main() {
 
       final item = IShellItem(ppsi);
       final pathPtr = calloc<Pointer<Utf16>>();
-      hr = item.getDisplayName(SIGDN.SIGDN_FILESYSPATH, pathPtr);
+      hr = item.getDisplayName(SIGDN_FILESYSPATH, pathPtr);
       if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
       // MAX_PATH may truncate early if long filename support is enabled

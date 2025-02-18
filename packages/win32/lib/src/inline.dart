@@ -9,7 +9,6 @@ import 'package:ffi/ffi.dart';
 import 'callbacks.dart';
 import 'constants.dart';
 import 'constants_nodoc.dart';
-import 'enums.g.dart';
 import 'macros.dart';
 import 'structs.g.dart';
 import 'utils.dart';
@@ -122,11 +121,11 @@ int IsWindowsVersionOrGreater(
 ) {
   final dwlConditionMask = VerSetConditionMask(
     VerSetConditionMask(
-      VerSetConditionMask(0, VER_FLAGS.VER_MAJORVERSION, VER_GREATER_EQUAL),
-      VER_FLAGS.VER_MINORVERSION,
+      VerSetConditionMask(0, VER_MAJORVERSION, VER_GREATER_EQUAL),
+      VER_MINORVERSION,
       VER_GREATER_EQUAL,
     ),
-    VER_FLAGS.VER_SERVICEPACKMAJOR,
+    VER_SERVICEPACKMAJOR,
     VER_GREATER_EQUAL,
   );
 
@@ -139,9 +138,7 @@ int IsWindowsVersionOrGreater(
   try {
     return VerifyVersionInfo(
       osvi,
-      VER_FLAGS.VER_MAJORVERSION |
-          VER_FLAGS.VER_MINORVERSION |
-          VER_FLAGS.VER_SERVICEPACKMAJOR,
+      VER_MAJORVERSION | VER_MINORVERSION | VER_SERVICEPACKMAJOR,
       dwlConditionMask,
     );
   } finally {
@@ -179,18 +176,10 @@ int IsWindows10OrGreater() => IsWindowsVersionOrGreater(
 /// {@category version}
 int IsWindowsServer() {
   final osvi = calloc<OSVERSIONINFOEX>()..ref.wProductType = VER_NT_SERVER;
-  final dwlConditionMask = VerSetConditionMask(
-    0,
-    VER_FLAGS.VER_PRODUCT_TYPE,
-    VER_EQUAL,
-  );
+  final dwlConditionMask = VerSetConditionMask(0, VER_PRODUCT_TYPE, VER_EQUAL);
 
   try {
-    return VerifyVersionInfo(
-      osvi,
-      VER_FLAGS.VER_PRODUCT_TYPE,
-      dwlConditionMask,
-    );
+    return VerifyVersionInfo(osvi, VER_PRODUCT_TYPE, dwlConditionMask);
   } finally {
     free(osvi);
   }
@@ -215,7 +204,7 @@ int SetWindowThemeNonClientAttributes(int hwnd, int dwMask, int dwAttributes) {
   try {
     return SetWindowThemeAttribute(
       hwnd,
-      WINDOWTHEMEATTRIBUTETYPE.WTA_NONCLIENT,
+      WTA_NONCLIENT,
       wta,
       sizeOf<WTA_OPTIONS>(),
     );

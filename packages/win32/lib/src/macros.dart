@@ -7,7 +7,6 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import 'constants.dart';
-import 'enums.g.dart';
 import 'inline.dart';
 import 'variant.dart';
 
@@ -91,10 +90,9 @@ bool FAILED(int result) => result < 0;
 //
 // #define __HRESULT_FROM_WIN32(x) ((HRESULT)(x) <= 0 ? ((HRESULT)(x)) :
 //       ((HRESULT) (((x) & 0x0000FFFF) | (FACILITY_WIN32 << 16) | 0x80000000)))
-int HRESULT_FROM_WIN32(int x) => (x <= 0
-        ? x
-        : (x & 0x0000FFFF | (FACILITY_CODE.FACILITY_WIN32 << 16) | 0x80000000))
-    .toSigned(32);
+int HRESULT_FROM_WIN32(int x) =>
+    (x <= 0 ? x : (x & 0x0000FFFF | (FACILITY_WIN32 << 16) | 0x80000000))
+        .toSigned(32);
 
 /// Maps a control code to a constant
 //
@@ -117,5 +115,5 @@ int GET_SC_WPARAM(int wParam) => wParam & 0xFFF0;
 // #define PropVariantInit(pvar) memset ( (pvar), 0, sizeof(PROPVARIANT) )
 void PropVariantInit(Pointer<PROPVARIANT> pvar) {
   ZeroMemory(pvar, sizeOf<PROPVARIANT>());
-  pvar.ref.vt = VARENUM.VT_EMPTY;
+  pvar.ref.vt = VT_EMPTY;
 }

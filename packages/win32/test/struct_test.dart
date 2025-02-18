@@ -65,19 +65,19 @@ void main() {
     const VK_A = 0x41;
     final kbd = calloc<INPUT>();
     kbd.ref
-      ..type = INPUT_TYPE.INPUT_KEYBOARD
+      ..type = INPUT_KEYBOARD
       ..ki.wVk = VK_A
-      ..ki.dwFlags = KEYBD_EVENT_FLAGS.KEYEVENTF_KEYUP;
+      ..ki.dwFlags = KEYEVENTF_KEYUP;
     expect(kbd.ref.ki.wVk, equals(VK_A));
 
     kbd.ref
       ..ki.wVk = 0
       ..ki.wScan =
           0x20AC // euro sign
-      ..ki.dwFlags = KEYBD_EVENT_FLAGS.KEYEVENTF_UNICODE;
-    expect(kbd.ref.type, equals(INPUT_TYPE.INPUT_KEYBOARD));
+      ..ki.dwFlags = KEYEVENTF_UNICODE;
+    expect(kbd.ref.type, equals(INPUT_KEYBOARD));
     expect(kbd.ref.ki.wVk, isZero);
-    expect(kbd.ref.ki.dwFlags, equals(KEYBD_EVENT_FLAGS.KEYEVENTF_UNICODE));
+    expect(kbd.ref.ki.dwFlags, equals(KEYEVENTF_UNICODE));
 
     free(kbd);
   });

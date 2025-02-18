@@ -12,7 +12,6 @@
 /// byte streams with an OOB data transmission mechanism. This socket type uses
 /// the Transmission Control Protocol (TCP) for the Internet address family
 /// (AF_INET or AF_INET6).
-@Deprecated('Use WINSOCK_SOCKET_TYPE.SOCK_STREAM instead')
 const SOCK_STREAM = 1;
 
 /// Datagram socket.
@@ -21,7 +20,6 @@ const SOCK_STREAM = 1;
 /// buffers of a fixed (typically small) maximum length. This socket type uses
 /// the User Datagram Protocol (UDP) for the Internet address family (AF_INET or
 /// AF_INET6).
-@Deprecated('Use WINSOCK_SOCKET_TYPE.SOCK_DGRAM instead')
 const SOCK_DGRAM = 2;
 
 /// Raw protocol interface.
@@ -31,7 +29,6 @@ const SOCK_DGRAM = 2;
 /// header, the IP_HDRINCL socket option must be set on the socket. To
 /// manipulate the IPv6 header, the IPV6_HDRINCL socket option must be set on
 /// the socket.
-@Deprecated('Use WINSOCK_SOCKET_TYPE.SOCK_RAW instead')
 const SOCK_RAW = 3;
 
 /// Reliably-delivered message.
@@ -40,13 +37,11 @@ const SOCK_RAW = 3;
 /// type is the Pragmatic General Multicast (PGM) multicast protocol
 /// implementation in Windows, often referred to as reliable multicast
 /// programming.
-@Deprecated('Use WINSOCK_SOCKET_TYPE.SOCK_RDM instead')
 const SOCK_RDM = 4;
 
 /// Sequenced packet stream.
 ///
 /// A socket type that provides a pseudo-stream packet based on datagrams.
-@Deprecated('Use WINSOCK_SOCKET_TYPE.SOCK_SEQPACKET instead')
 const SOCK_SEQPACKET = 5;
 
 // -----------------------------------------------------------------------------
@@ -234,12 +229,10 @@ const FD_CONNECT = 0x10;
 const FD_CLOSE = 0x20;
 
 // Address formats
-@Deprecated('Use ADDRESS_FAMILY.AF_UNSPEC instead')
 const AF_UNSPEC = 0;
 
 const AF_UNIX = 1;
 
-@Deprecated('Use ADDRESS_FAMILY.AF_INET instead')
 const AF_INET = 2;
 
 const AF_IMPLINK = 3;
@@ -265,7 +258,6 @@ const AF_UNKNOWN1 = 20;
 const AF_BAN = 21;
 const AF_ATM = 22;
 
-@Deprecated('Use ADDRESS_FAMILY.AF_INET6 instead')
 const AF_INET6 = 23;
 
 const AF_CLUSTER = 24;
