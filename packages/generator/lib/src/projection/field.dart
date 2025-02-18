@@ -19,26 +19,19 @@ class FieldProjection {
       throw Exception('Array $fieldName should have dimensions.');
     }
 
+    final attribute =
+        _isFlexibleArray
+            ? '  @Array.variableWithVariableDimension($dimensionsUpperBound)'
+            : '  @Array($dimensionsUpperBound)';
+
     final dartCode = '''
-      ${typeProjection.attribute}
+      $attribute
       external ${typeProjection.nativeType} _$fieldName;
 
-      String get $fieldName {
-        final charCodes = <int>[];
-        for (var i = 0; i < $dimensionsUpperBound; i++) {
-          if (_$fieldName[i] == 0x00) break;
-          charCodes.add(_$fieldName[i]);
-        }
-        return String.fromCharCodes(charCodes);
-      }
+      String get $fieldName => _$fieldName.toDartString();
 
-      set $fieldName(String value) {
-        final stringToStore = value.padRight($dimensionsUpperBound, '\\x00');
-        for (var i = 0; i < $dimensionsUpperBound; i++) {
-          _$fieldName[i] = stringToStore.codeUnitAt(i);
-        }
-      }
-    ''';
+      set $fieldName(String value) => _$fieldName.setString(value);
+''';
     return dartCode;
   }
 
@@ -46,12 +39,16 @@ class FieldProjection {
       field.typeIdentifier.baseType == BaseType.arrayTypeModifier &&
       field.typeIdentifier.typeArg?.baseType == BaseType.charType;
 
+  bool get _isFlexibleArray =>
+      field.typeIdentifier.baseType == BaseType.arrayTypeModifier &&
+      field.existsAttribute(
+        'Windows.Win32.Foundation.Metadata.FlexibleArrayAttribute',
+      );
+
   @override
   String toString() {
     final typeProjection = TypeProjection(field.typeIdentifier);
-    if (_isCharArray) {
-      return _printCharArray(typeProjection);
-    }
+    if (_isCharArray) return _printCharArray(typeProjection);
 
     // If the field is a nested type (e.g. a nested union), then it's OK for it
     // to be internal only, since it will be accessed via a property instead.
@@ -71,6 +68,11 @@ class FieldProjection {
       dartType = typeProjection.dartType;
     }
 
-    return '  ${typeProjection.attribute}\n  external $dartType $fieldName;\n';
+    final attribute =
+        _isFlexibleArray
+            ? '@Array.variableWithVariableDimension(${typeProjection.arrayUpperBound})'
+            : typeProjection.attribute;
+
+    return '  $attribute\n  external $dartType $fieldName;\n';
   }
 }
