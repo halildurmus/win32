@@ -37,21 +37,27 @@ class ClientCommand extends Command<void> {
     try {
       stdout.writeln('Connecting to pipe...');
       final pipe = CreateFile(
-          lpPipeName,
-          GENERIC_ACCESS_RIGHTS.GENERIC_READ,
-          FILE_SHARE_MODE.FILE_SHARE_READ | FILE_SHARE_MODE.FILE_SHARE_WRITE,
-          nullptr,
-          FILE_CREATION_DISPOSITION.OPEN_EXISTING,
-          FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_NORMAL,
-          NULL);
+        lpPipeName,
+        GENERIC_ACCESS_RIGHTS.GENERIC_READ,
+        FILE_SHARE_MODE.FILE_SHARE_READ | FILE_SHARE_MODE.FILE_SHARE_WRITE,
+        nullptr,
+        FILE_CREATION_DISPOSITION.OPEN_EXISTING,
+        FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_NORMAL,
+        NULL,
+      );
       if (pipe == INVALID_HANDLE_VALUE) {
         stderr.writeln('Failed to connect to pipe.');
         exit(1);
       }
 
       stdout.writeln('Reading data from pipe...');
-      final result =
-          ReadFile(pipe, lpBuffer.cast(), 128, lpNumBytesRead, nullptr);
+      final result = ReadFile(
+        pipe,
+        lpBuffer.cast(),
+        128,
+        lpNumBytesRead,
+        nullptr,
+      );
       if (result == NULL) {
         stderr.writeln('Failed to read data from the pipe.');
       } else {
@@ -85,14 +91,15 @@ class ServerCommand extends Command<void> {
     final lpNumBytesWritten = calloc<DWORD>();
     try {
       final pipe = CreateNamedPipe(
-          lpPipeName,
-          FILE_FLAGS_AND_ATTRIBUTES.PIPE_ACCESS_OUTBOUND,
-          NAMED_PIPE_MODE.PIPE_TYPE_BYTE,
-          1,
-          0,
-          0,
-          0,
-          nullptr);
+        lpPipeName,
+        FILE_FLAGS_AND_ATTRIBUTES.PIPE_ACCESS_OUTBOUND,
+        NAMED_PIPE_MODE.PIPE_TYPE_BYTE,
+        1,
+        0,
+        0,
+        0,
+        nullptr,
+      );
       if (pipe == NULL || pipe == INVALID_HANDLE_VALUE) {
         stderr.writeln('Failed to create outbound pipe instance.');
         exit(1);
@@ -106,8 +113,13 @@ class ServerCommand extends Command<void> {
         exit(1);
       }
 
-      result = WriteFile(pipe, lpPipeMessage.cast(), pipeMessage.length * 2,
-          lpNumBytesWritten, nullptr);
+      result = WriteFile(
+        pipe,
+        lpPipeMessage.cast(),
+        pipeMessage.length * 2,
+        lpNumBytesWritten,
+        nullptr,
+      );
       if (result == NULL) {
         stderr.writeln('Failed to send data.');
       } else {

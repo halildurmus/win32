@@ -39,11 +39,15 @@ class IProvideClassInfo extends IUnknown {
 
   int getClassInfo(Pointer<Pointer<COMObject>> ppTI) => (ptr.ref.vtable + 3)
       .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(Pointer, Pointer<Pointer<COMObject>> ppTI)>>>()
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<Pointer<COMObject>> ppTI)
+          >
+        >
+      >()
       .value
-      .asFunction<
-          int Function(Pointer,
-              Pointer<Pointer<COMObject>> ppTI)>()(ptr.ref.lpVtbl, ppTI);
+      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> ppTI)>()(
+    ptr.ref.lpVtbl,
+    ppTI,
+  );
 }

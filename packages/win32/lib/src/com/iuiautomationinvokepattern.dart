@@ -36,7 +36,8 @@ class IUIAutomationInvokePattern extends IUnknown {
 
   factory IUIAutomationInvokePattern.from(IUnknown interface) =>
       IUIAutomationInvokePattern(
-          interface.toInterface(IID_IUIAutomationInvokePattern));
+        interface.toInterface(IID_IUIAutomationInvokePattern),
+      );
 
   int invoke() => (ptr.ref.vtable + 3)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()

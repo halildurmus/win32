@@ -5,13 +5,13 @@ import 'package:win32/win32.dart';
 
 void main() {
   final lpCaption = 'Dart MessageBox Demo'.toNativeUtf16();
-  final lpText = '''
+  final lpText =
+      '''
 This is not really an error, but we are pretending for the sake of this demo.
 
 Resource error.
 Do you want to try again?
-'''
-      .toNativeUtf16();
+'''.toNativeUtf16();
 
   final result = MessageBox(
     NULL,

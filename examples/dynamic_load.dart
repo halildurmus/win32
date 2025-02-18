@@ -6,10 +6,10 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-typedef GetNativeSystemInfoNative = Void Function(
-    Pointer<SYSTEM_INFO> lpSystemInfo);
-typedef GetNativeSystemInfoDart = void Function(
-    Pointer<SYSTEM_INFO> lpSystemInfo);
+typedef GetNativeSystemInfoNative =
+    Void Function(Pointer<SYSTEM_INFO> lpSystemInfo);
+typedef GetNativeSystemInfoDart =
+    void Function(Pointer<SYSTEM_INFO> lpSystemInfo);
 
 void main() {
   final systemInfo = calloc<SYSTEM_INFO>();
@@ -25,14 +25,17 @@ void main() {
 
   if (pGetNativeSystemInfo != nullptr) {
     print('GetNativeSystemInfo() is available on this system.');
-    final funcGetNativeSystemInfo = pGetNativeSystemInfo
-        .cast<NativeFunction<GetNativeSystemInfoNative>>()
-        .asFunction<GetNativeSystemInfoDart>();
+    final funcGetNativeSystemInfo =
+        pGetNativeSystemInfo
+            .cast<NativeFunction<GetNativeSystemInfoNative>>()
+            .asFunction<GetNativeSystemInfoDart>();
 
     funcGetNativeSystemInfo(systemInfo);
   } else {
-    print('GetNativeSystemInfo() not available on this system. '
-        'Falling back to GetSystemInfo().');
+    print(
+      'GetNativeSystemInfo() not available on this system. '
+      'Falling back to GetSystemInfo().',
+    );
 
     GetSystemInfo(systemInfo);
   }

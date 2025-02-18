@@ -42,13 +42,16 @@ class IUIAutomationElement8 extends IUIAutomationElement7 {
 
     try {
       final hr = (ptr.ref.vtable + 115)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Uint32> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Uint32> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Uint32> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Uint32> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -64,13 +67,16 @@ class IUIAutomationElement8 extends IUIAutomationElement7 {
 
     try {
       final hr = (ptr.ref.vtable + 116)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Uint32> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Uint32> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Uint32> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Uint32> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 

@@ -13,16 +13,16 @@ void initializeCOM() {
 
   // Initialize security model
   hr = CoInitializeSecurity(
-      nullptr,
-      -1, // COM negotiates service
-      nullptr, // Authentication services
-      nullptr, // Reserved
-      RPC_C_AUTHN_LEVEL.RPC_C_AUTHN_LEVEL_DEFAULT, // authentication
-      RPC_C_IMP_LEVEL.RPC_C_IMP_LEVEL_IMPERSONATE, // Impersonation
-      nullptr, // Authentication info
-      EOLE_AUTHENTICATION_CAPABILITIES.EOAC_NONE, // Additional capabilities
-      nullptr // Reserved
-      );
+    nullptr,
+    -1, // COM negotiates service
+    nullptr, // Authentication services
+    nullptr, // Reserved
+    RPC_C_AUTHN_LEVEL.RPC_C_AUTHN_LEVEL_DEFAULT, // authentication
+    RPC_C_IMP_LEVEL.RPC_C_IMP_LEVEL_IMPERSONATE, // Impersonation
+    nullptr, // Authentication info
+    EOLE_AUTHENTICATION_CAPABILITIES.EOAC_NONE, // Additional capabilities
+    nullptr, // Reserved
+  );
   if (FAILED(hr)) throw WindowsException(hr);
 }
 
@@ -30,27 +30,27 @@ int connectWMI(WbemLocator pLoc, Pointer<Pointer<COMObject>> ppNamespace) {
   // Connect to the root\cimv2 namespace with the current user and obtain
   // pointer pSvc to make IWbemServices calls.
   var hr = pLoc.connectServer(
-      TEXT('ROOT\\CIMV2'), // WMI namespace
-      nullptr, // User name
-      nullptr, // User password
-      nullptr, // Locale
-      NULL, // Security flags
-      nullptr, // Authority
-      nullptr, // Context object
-      ppNamespace // IWbemServices proxy
-      );
+    TEXT('ROOT\\CIMV2'), // WMI namespace
+    nullptr, // User name
+    nullptr, // User password
+    nullptr, // Locale
+    NULL, // Security flags
+    nullptr, // Authority
+    nullptr, // Context object
+    ppNamespace, // IWbemServices proxy
+  );
   if (FAILED(hr)) throw WindowsException(hr);
 
   hr = CoSetProxyBlanket(
-      ppNamespace.value, // the proxy to set
-      RPC_C_AUTHN_WINNT, // authentication service
-      RPC_C_AUTHZ_NONE, // authorization service
-      nullptr, // Server principal name
-      RPC_C_AUTHN_LEVEL.RPC_C_AUTHN_LEVEL_CALL, // authentication level
-      RPC_C_IMP_LEVEL.RPC_C_IMP_LEVEL_IMPERSONATE, // impersonation level
-      nullptr, // client identity
-      EOLE_AUTHENTICATION_CAPABILITIES.EOAC_NONE // proxy capabilities
-      );
+    ppNamespace.value, // the proxy to set
+    RPC_C_AUTHN_WINNT, // authentication service
+    RPC_C_AUTHZ_NONE, // authorization service
+    nullptr, // Server principal name
+    RPC_C_AUTHN_LEVEL.RPC_C_AUTHN_LEVEL_CALL, // authentication level
+    RPC_C_IMP_LEVEL.RPC_C_IMP_LEVEL_IMPERSONATE, // impersonation level
+    nullptr, // client identity
+    EOLE_AUTHENTICATION_CAPABILITIES.EOAC_NONE, // proxy capabilities
+  );
   if (FAILED(hr)) throw WindowsException(hr);
   return hr;
 }
@@ -77,7 +77,13 @@ void main() {
 
     // Add the instance to be refreshed.
     var hr = pConfig.addObjectByPath(
-        ppNamespace.value, pszQuery, 0, nullptr, ppRefreshable, nullptr);
+      ppNamespace.value,
+      pszQuery,
+      0,
+      nullptr,
+      ppRefreshable,
+      nullptr,
+    );
     if (FAILED(hr)) throw WindowsException(hr);
 
     final pObj = IWbemClassObject(ppRefreshable.cast());
@@ -95,8 +101,10 @@ void main() {
       refresher.refresh(WBEM_REFRESHER_FLAGS.WBEM_FLAG_REFRESH_AUTO_RECONNECT);
       hr = pAccess.readDWORD(plHandle.value, dwWorkingSetBytes);
       if (FAILED(hr)) throw WindowsException(hr);
-      print('Winlogon process is using ${dwWorkingSetBytes.value / 1000}'
-          ' kilobytes of working set.');
+      print(
+        'Winlogon process is using ${dwWorkingSetBytes.value / 1000}'
+        ' kilobytes of working set.',
+      );
 
       Sleep(1000); // Sleep for a second.
     }

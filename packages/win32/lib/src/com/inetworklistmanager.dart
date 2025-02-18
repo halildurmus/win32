@@ -40,59 +40,87 @@ class INetworkListManager extends IDispatch {
 
   int getNetworks(int Flags, Pointer<Pointer<COMObject>> ppEnumNetwork) =>
       (ptr.ref.vtable + 7)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Int32 Flags,
-                              Pointer<Pointer<COMObject>> ppEnumNetwork)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, int Flags,
-                      Pointer<Pointer<COMObject>> ppEnumNetwork)>()(
-          ptr.ref.lpVtbl, Flags, ppEnumNetwork);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Int32 Flags,
+                  Pointer<Pointer<COMObject>> ppEnumNetwork,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
+              Pointer,
+              int Flags,
+              Pointer<Pointer<COMObject>> ppEnumNetwork,
+            )
+          >()(ptr.ref.lpVtbl, Flags, ppEnumNetwork);
 
   int getNetwork(GUID gdNetworkId, Pointer<Pointer<COMObject>> ppNetwork) =>
       (ptr.ref.vtable + 8)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, GUID gdNetworkId,
-                              Pointer<Pointer<COMObject>> ppNetwork)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, GUID gdNetworkId,
-                      Pointer<Pointer<COMObject>> ppNetwork)>()(
-          ptr.ref.lpVtbl, gdNetworkId, ppNetwork);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  GUID gdNetworkId,
+                  Pointer<Pointer<COMObject>> ppNetwork,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
+              Pointer,
+              GUID gdNetworkId,
+              Pointer<Pointer<COMObject>> ppNetwork,
+            )
+          >()(ptr.ref.lpVtbl, gdNetworkId, ppNetwork);
 
-  int getNetworkConnections(Pointer<Pointer<COMObject>> ppEnum) =>
-      (ptr.ref.vtable + 9)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<COMObject>> ppEnum)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<COMObject>> ppEnum)>()(
-          ptr.ref.lpVtbl, ppEnum);
+  int getNetworkConnections(
+    Pointer<Pointer<COMObject>> ppEnum,
+  ) => (ptr.ref.vtable + 9)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<Pointer<COMObject>> ppEnum)
+          >
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> ppEnum)>()(
+    ptr.ref.lpVtbl,
+    ppEnum,
+  );
 
-  int
-      getNetworkConnection(GUID gdNetworkConnectionId,
-              Pointer<Pointer<COMObject>> ppNetworkConnection) =>
-          (ptr.ref.vtable + 10)
-                  .cast<
-                      Pointer<
-                          NativeFunction<
-                              Int32 Function(
-                                  Pointer,
-                                  GUID gdNetworkConnectionId,
-                                  Pointer<Pointer<COMObject>>
-                                      ppNetworkConnection)>>>()
-                  .value
-                  .asFunction<
-                      int Function(Pointer, GUID gdNetworkConnectionId,
-                          Pointer<Pointer<COMObject>> ppNetworkConnection)>()(
-              ptr.ref.lpVtbl, gdNetworkConnectionId, ppNetworkConnection);
+  int getNetworkConnection(
+    GUID gdNetworkConnectionId,
+    Pointer<Pointer<COMObject>> ppNetworkConnection,
+  ) => (ptr.ref.vtable + 10)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              GUID gdNetworkConnectionId,
+              Pointer<Pointer<COMObject>> ppNetworkConnection,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          GUID gdNetworkConnectionId,
+          Pointer<Pointer<COMObject>> ppNetworkConnection,
+        )
+      >()(ptr.ref.lpVtbl, gdNetworkConnectionId, ppNetworkConnection);
 
   int get isConnectedToInternet {
     final retValuePtr = calloc<Int16>();
@@ -100,13 +128,17 @@ class INetworkListManager extends IDispatch {
     try {
       final hr = (ptr.ref.vtable + 11)
           .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<Int16> pbIsConnected)>>>()
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Int16> pbIsConnected)
+              >
+            >
+          >()
           .value
-          .asFunction<
-              int Function(Pointer,
-                  Pointer<Int16> pbIsConnected)>()(ptr.ref.lpVtbl, retValuePtr);
+          .asFunction<int Function(Pointer, Pointer<Int16> pbIsConnected)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -123,13 +155,17 @@ class INetworkListManager extends IDispatch {
     try {
       final hr = (ptr.ref.vtable + 12)
           .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<Int16> pbIsConnected)>>>()
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Int16> pbIsConnected)
+              >
+            >
+          >()
           .value
-          .asFunction<
-              int Function(Pointer,
-                  Pointer<Int16> pbIsConnected)>()(ptr.ref.lpVtbl, retValuePtr);
+          .asFunction<int Function(Pointer, Pointer<Int16> pbIsConnected)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -141,29 +177,37 @@ class INetworkListManager extends IDispatch {
   }
 
   int getConnectivity(Pointer<Int32> pConnectivity) => (ptr.ref.vtable + 13)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<Int32> pConnectivity)>>>()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Int32> pConnectivity)>()(
-      ptr.ref.lpVtbl, pConnectivity);
+      .cast<
+        Pointer<
+          NativeFunction<Int32 Function(Pointer, Pointer<Int32> pConnectivity)>
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Int32> pConnectivity)>()(
+    ptr.ref.lpVtbl,
+    pConnectivity,
+  );
 
   int setSimulatedProfileInfo(
-          Pointer<NLM_SIMULATED_PROFILE_INFO> pSimulatedInfo) =>
-      (ptr.ref.vtable + 14)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<NLM_SIMULATED_PROFILE_INFO>
-                                  pSimulatedInfo)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer,
-                      Pointer<NLM_SIMULATED_PROFILE_INFO> pSimulatedInfo)>()(
-          ptr.ref.lpVtbl, pSimulatedInfo);
+    Pointer<NLM_SIMULATED_PROFILE_INFO> pSimulatedInfo,
+  ) => (ptr.ref.vtable + 14)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<NLM_SIMULATED_PROFILE_INFO> pSimulatedInfo,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<NLM_SIMULATED_PROFILE_INFO> pSimulatedInfo,
+        )
+      >()(ptr.ref.lpVtbl, pSimulatedInfo);
 
   int clearSimulatedProfileInfo() => (ptr.ref.vtable + 15)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
@@ -178,7 +222,7 @@ const CLSID_NetworkListManager = '{dcb00c01-570f-4a9b-8d69-199fdba5723b}';
 class NetworkListManager extends INetworkListManager {
   NetworkListManager(super.ptr);
 
-  factory NetworkListManager.createInstance() =>
-      NetworkListManager(COMObject.createFromID(
-          CLSID_NetworkListManager, IID_INetworkListManager));
+  factory NetworkListManager.createInstance() => NetworkListManager(
+    COMObject.createFromID(CLSID_NetworkListManager, IID_INetworkListManager),
+  );
 }

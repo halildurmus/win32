@@ -38,8 +38,11 @@ class IModalWindow extends IUnknown {
 
   int show(int hwndOwner) => (ptr.ref.vtable + 3)
       .cast<
-          Pointer<NativeFunction<Int32 Function(Pointer, IntPtr hwndOwner)>>>()
+        Pointer<NativeFunction<Int32 Function(Pointer, IntPtr hwndOwner)>>
+      >()
       .value
-      .asFunction<
-          int Function(Pointer, int hwndOwner)>()(ptr.ref.lpVtbl, hwndOwner);
+      .asFunction<int Function(Pointer, int hwndOwner)>()(
+    ptr.ref.lpVtbl,
+    hwndOwner,
+  );
 }

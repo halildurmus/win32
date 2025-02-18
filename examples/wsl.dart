@@ -14,8 +14,13 @@ class DistributionConfiguration {
   final int flags;
   final List<String> environmentVariables;
 
-  const DistributionConfiguration(this.name, this.wslVersion, this.userID,
-      this.flags, this.environmentVariables);
+  const DistributionConfiguration(
+    this.name,
+    this.wslVersion,
+    this.userID,
+    this.flags,
+    this.environmentVariables,
+  );
 }
 
 /// Check whether a distribution exists
@@ -30,7 +35,8 @@ bool isDistributionRegistered(String distributionName) {
 
 /// Get information about a specified WSL distribution.
 DistributionConfiguration getDistributionConfiguration(
-    String distributionName) {
+  String distributionName,
+) {
   final pDistributionName = distributionName.toNativeUtf16();
   final distributionVersion = calloc<ULONG>();
   final defaultUID = calloc<ULONG>();
@@ -40,12 +46,13 @@ DistributionConfiguration getDistributionConfiguration(
 
   try {
     final hr = WslGetDistributionConfiguration(
-        TEXT(distributionName),
-        distributionVersion,
-        defaultUID,
-        wslDistributionFlags,
-        defaultEnvironmentVariables,
-        defaultEnvironmentVariableCount);
+      TEXT(distributionName),
+      distributionVersion,
+      defaultUID,
+      wslDistributionFlags,
+      defaultEnvironmentVariables,
+      defaultEnvironmentVariableCount,
+    );
 
     if (FAILED(hr)) throw WindowsException(hr);
 
@@ -54,11 +61,12 @@ DistributionConfiguration getDistributionConfiguration(
       vars.add(defaultEnvironmentVariables.value[idx].toDartString());
     }
     return DistributionConfiguration(
-        distributionName,
-        distributionVersion.value,
-        defaultUID.value,
-        wslDistributionFlags.value,
-        vars);
+      distributionName,
+      distributionVersion.value,
+      defaultUID.value,
+      wslDistributionFlags.value,
+      vars,
+    );
   } finally {
     free(pDistributionName);
     free(distributionVersion);
@@ -77,13 +85,14 @@ int runCommand(String distributionName, String command) {
   final exitCode = calloc<DWORD>();
   try {
     final hr = WslLaunch(
-        pDistributionName,
-        pCommand,
-        FALSE,
-        GetStdHandle(STD_HANDLE.STD_INPUT_HANDLE), // redirect as appropriate
-        GetStdHandle(STD_HANDLE.STD_OUTPUT_HANDLE), // redirect as appropriate
-        GetStdHandle(STD_HANDLE.STD_ERROR_HANDLE), // redirect as appropriate
-        processHandle);
+      pDistributionName,
+      pCommand,
+      FALSE,
+      GetStdHandle(STD_HANDLE.STD_INPUT_HANDLE), // redirect as appropriate
+      GetStdHandle(STD_HANDLE.STD_OUTPUT_HANDLE), // redirect as appropriate
+      GetStdHandle(STD_HANDLE.STD_ERROR_HANDLE), // redirect as appropriate
+      processHandle,
+    );
     if (FAILED(hr)) throw WindowsException(hr);
     WaitForSingleObject(processHandle.value, INFINITE);
     GetExitCodeProcess(processHandle.value, exitCode);
@@ -103,7 +112,8 @@ void main() {
       final config = getDistributionConfiguration(distributionName);
       print('Distribution: $distributionName');
       print('Version: ${config.wslVersion}');
-      final driveMounting = config.flags &
+      final driveMounting =
+          config.flags &
               WSL_DISTRIBUTION_FLAGS
                   .WSL_DISTRIBUTION_FLAGS_ENABLE_DRIVE_MOUNTING ==
           WSL_DISTRIBUTION_FLAGS.WSL_DISTRIBUTION_FLAGS_ENABLE_DRIVE_MOUNTING;

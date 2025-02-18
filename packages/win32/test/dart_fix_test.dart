@@ -20,10 +20,7 @@ void main() {
 
     try {
       // Set up project.
-      writeFile(
-        tempDir,
-        'pubspec.yaml',
-        '''
+      writeFile(tempDir, 'pubspec.yaml', '''
 name: test_project
 environment:
   sdk: ^$sdkVersion
@@ -31,8 +28,7 @@ environment:
 dependencies:
   win32:
     path: ${Directory.current.path.replaceAll(r'\', '/')}
-''',
-      );
+''');
 
       copyTestFiles('test_fixes', p.join(tempDir.path, 'lib'));
       pubGet(tempDir);
@@ -85,11 +81,10 @@ void dartAnalyze(Directory dir) => exec('analyze', [], cwd: dir);
 void exec(String command, List<String> args, {required Directory cwd}) {
   printOnFailure('dart $command ${args.join(', ')}');
 
-  final result = Process.runSync(
-    Platform.resolvedExecutable,
-    [command, ...args],
-    workingDirectory: cwd.path,
-  );
+  final result = Process.runSync(Platform.resolvedExecutable, [
+    command,
+    ...args,
+  ], workingDirectory: cwd.path);
 
   var out = result.stdout as String;
   if (out.isNotEmpty) printOnFailure(out);

@@ -15,9 +15,7 @@ class TaskManagerApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Task Manager',
-      theme: ThemeData(
-        brightness: Brightness.dark,
-      ),
+      theme: ThemeData(brightness: Brightness.dark),
       home: const TaskManagerHomeScreen(),
     );
   }
@@ -88,9 +86,7 @@ class TaskManagerHomeScreenState extends State<TaskManagerHomeScreen> {
                   loadTasks();
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Failed to end task "$taskName"'),
-                    ),
+                    SnackBar(content: Text('Failed to end task "$taskName"')),
                   );
                 }
               },
@@ -108,11 +104,12 @@ class TaskManagerHomeScreenState extends State<TaskManagerHomeScreen> {
   }
 
   void searchTasks(String query) {
-    final filtered = _tasks.where((task) {
-      return task.name.toLowerCase().contains(query.toLowerCase()) ||
-          task.description.toLowerCase().contains(query.toLowerCase()) ||
-          task.pid.toString().contains(query);
-    }).toList();
+    final filtered =
+        _tasks.where((task) {
+          return task.name.toLowerCase().contains(query.toLowerCase()) ||
+              task.description.toLowerCase().contains(query.toLowerCase()) ||
+              task.pid.toString().contains(query);
+        }).toList();
 
     setState(() {
       _filteredTasks = filtered;
@@ -138,9 +135,7 @@ class TaskManagerHomeScreenState extends State<TaskManagerHomeScreen> {
     if (result) {
       Navigator.of(context).pop();
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Task "$path" started successfully'),
-        ),
+        SnackBar(content: Text('Task "$path" started successfully')),
       );
     } else {
       showDialog(
@@ -223,20 +218,21 @@ class TaskManagerHomeScreenState extends State<TaskManagerHomeScreen> {
                     labelText: 'Type a name or PID to search',
                     border: const OutlineInputBorder(),
                     prefixIcon: const Icon(Icons.search),
-                    suffix: _searchController!.text.isNotEmpty
-                        ? IconButton(
-                            icon: const Icon(Icons.clear),
-                            onPressed: () {
-                              setState(() {
-                                _searchController!.clear();
-                                _searchFocusNode!.unfocus();
-                                _tasks = TaskManager.tasks ?? [];
-                                _filteredTasks = List.from(_tasks);
-                                sortTasks();
-                              });
-                            },
-                          )
-                        : null,
+                    suffix:
+                        _searchController!.text.isNotEmpty
+                            ? IconButton(
+                              icon: const Icon(Icons.clear),
+                              onPressed: () {
+                                setState(() {
+                                  _searchController!.clear();
+                                  _searchFocusNode!.unfocus();
+                                  _tasks = TaskManager.tasks ?? [];
+                                  _filteredTasks = List.from(_tasks);
+                                  sortTasks();
+                                });
+                              },
+                            )
+                            : null,
                   ),
                   onChanged: searchTasks,
                 ),
@@ -274,105 +270,111 @@ class TaskManagerHomeScreenState extends State<TaskManagerHomeScreen> {
       body: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
-            child: _filteredTasks.isEmpty
-                ? const Center(
-                    child: Padding(
-                      padding: EdgeInsets.all(16),
-                      child: Text('No tasks found'),
-                    ),
-                  )
-                : DataTable(
-                    showCheckboxColumn: false,
-                    columns: [
-                      DataColumn(
-                        label: const Text('Name'),
-                        onSort: (columnIndex, ascending) {
-                          setState(() {
-                            _sortBy = SortBy.name;
-                            _sortOrder = ascending
-                                ? SortOrder.ascending
-                                : SortOrder.descending;
-                            sortTasks();
-                          });
-                        },
+            child:
+                _filteredTasks.isEmpty
+                    ? const Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(16),
+                        child: Text('No tasks found'),
                       ),
-                      DataColumn(
-                        label: const Text('PID'),
-                        numeric: true,
-                        onSort: (columnIndex, ascending) {
-                          setState(() {
-                            _sortBy = SortBy.pid;
-                            _sortOrder = ascending
-                                ? SortOrder.ascending
-                                : SortOrder.descending;
-                            sortTasks();
-                          });
-                        },
-                        tooltip: 'Process ID',
-                      ),
-                      DataColumn(
-                        label: const Text('Description'),
-                        onSort: (columnIndex, ascending) {
-                          setState(() {
-                            _sortBy = SortBy.description;
-                            _sortOrder = ascending
-                                ? SortOrder.ascending
-                                : SortOrder.descending;
-                            sortTasks();
-                          });
-                        },
-                      ),
-                      const DataColumn(label: Text('Actions')),
-                    ],
-                    rows: _filteredTasks.map((task) {
-                      return DataRow(
-                        onSelectChanged: (selected) {
-                          setState(() {
-                            _selectedTask =
-                                (selected ?? false) ? task.pid : null;
-                          });
-                        },
-                        selected: _selectedTask == task.pid,
-                        cells: [
-                          DataCell(
-                            Row(
-                              children: [
-                                if (task.iconAsBytes.isNotEmpty)
-                                  Image.memory(
-                                    task.iconAsBytes,
-                                    width: 24,
-                                    height: 24,
-                                  )
-                                else
-                                  const Icon(Icons.apps),
-                                const SizedBox(width: 8),
-                                Text(task.name),
+                    )
+                    : DataTable(
+                      showCheckboxColumn: false,
+                      columns: [
+                        DataColumn(
+                          label: const Text('Name'),
+                          onSort: (columnIndex, ascending) {
+                            setState(() {
+                              _sortBy = SortBy.name;
+                              _sortOrder =
+                                  ascending
+                                      ? SortOrder.ascending
+                                      : SortOrder.descending;
+                              sortTasks();
+                            });
+                          },
+                        ),
+                        DataColumn(
+                          label: const Text('PID'),
+                          numeric: true,
+                          onSort: (columnIndex, ascending) {
+                            setState(() {
+                              _sortBy = SortBy.pid;
+                              _sortOrder =
+                                  ascending
+                                      ? SortOrder.ascending
+                                      : SortOrder.descending;
+                              sortTasks();
+                            });
+                          },
+                          tooltip: 'Process ID',
+                        ),
+                        DataColumn(
+                          label: const Text('Description'),
+                          onSort: (columnIndex, ascending) {
+                            setState(() {
+                              _sortBy = SortBy.description;
+                              _sortOrder =
+                                  ascending
+                                      ? SortOrder.ascending
+                                      : SortOrder.descending;
+                              sortTasks();
+                            });
+                          },
+                        ),
+                        const DataColumn(label: Text('Actions')),
+                      ],
+                      rows:
+                          _filteredTasks.map((task) {
+                            return DataRow(
+                              onSelectChanged: (selected) {
+                                setState(() {
+                                  _selectedTask =
+                                      (selected ?? false) ? task.pid : null;
+                                });
+                              },
+                              selected: _selectedTask == task.pid,
+                              cells: [
+                                DataCell(
+                                  Row(
+                                    children: [
+                                      if (task.iconAsBytes.isNotEmpty)
+                                        Image.memory(
+                                          task.iconAsBytes,
+                                          width: 24,
+                                          height: 24,
+                                        )
+                                      else
+                                        const Icon(Icons.apps),
+                                      const SizedBox(width: 8),
+                                      Text(task.name),
+                                    ],
+                                  ),
+                                ),
+                                DataCell(Text(task.pid.toString())),
+                                DataCell(Text(task.description)),
+                                DataCell(
+                                  IconButton(
+                                    icon: const Icon(
+                                      Icons.cancel_outlined,
+                                      color: Colors.red,
+                                    ),
+                                    onPressed:
+                                        () =>
+                                            confirmEndTask(task.pid, task.name),
+                                    tooltip: 'End the task',
+                                  ),
+                                ),
                               ],
-                            ),
-                          ),
-                          DataCell(Text(task.pid.toString())),
-                          DataCell(Text(task.description)),
-                          DataCell(
-                            IconButton(
-                              icon: const Icon(
-                                Icons.cancel_outlined,
-                                color: Colors.red,
-                              ),
-                              onPressed: () =>
-                                  confirmEndTask(task.pid, task.name),
-                              tooltip: 'End the task',
-                            ),
-                          ),
-                        ],
-                      );
-                    }).toList(),
-                    sortAscending: _sortOrder == SortOrder.ascending,
-                    sortColumnIndex: switch (_sortBy) {
-                      SortBy.name => 0,
-                      SortBy.pid => 1,
-                      SortBy.description => 2,
-                    },
-                  ),
+                            );
+                          }).toList(),
+                      sortAscending: _sortOrder == SortOrder.ascending,
+                      sortColumnIndex: switch (_sortBy) {
+                        SortBy.name => 0,
+                        SortBy.pid => 1,
+                        SortBy.description => 2,
+                      },
+                    ),
           ),
         ],
       ),

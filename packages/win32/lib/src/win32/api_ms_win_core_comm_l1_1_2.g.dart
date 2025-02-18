@@ -15,8 +15,9 @@ import '../guid.dart';
 import '../structs.g.dart';
 import '../variant.dart';
 
-final _api_ms_win_core_comm_l1_1_2 =
-    DynamicLibrary.open('api-ms-win-core-comm-l1-1-2.dll');
+final _api_ms_win_core_comm_l1_1_2 = DynamicLibrary.open(
+  'api-ms-win-core-comm-l1-1-2.dll',
+);
 
 /// Gets an array that contains the well-formed COM ports.
 ///
@@ -28,12 +29,21 @@ final _api_ms_win_core_comm_l1_1_2 =
 /// );
 /// ```
 /// {@category kernel32}
-int GetCommPorts(Pointer<Uint32> lpPortNumbers, int uPortNumbersCount,
-        Pointer<Uint32> puPortNumbersFound) =>
-    _GetCommPorts(lpPortNumbers, uPortNumbersCount, puPortNumbersFound);
+int GetCommPorts(
+  Pointer<Uint32> lpPortNumbers,
+  int uPortNumbersCount,
+  Pointer<Uint32> puPortNumbersFound,
+) => _GetCommPorts(lpPortNumbers, uPortNumbersCount, puPortNumbersFound);
 
 final _GetCommPorts = _api_ms_win_core_comm_l1_1_2.lookupFunction<
-    Uint32 Function(Pointer<Uint32> lpPortNumbers, Uint32 uPortNumbersCount,
-        Pointer<Uint32> puPortNumbersFound),
-    int Function(Pointer<Uint32> lpPortNumbers, int uPortNumbersCount,
-        Pointer<Uint32> puPortNumbersFound)>('GetCommPorts');
+  Uint32 Function(
+    Pointer<Uint32> lpPortNumbers,
+    Uint32 uPortNumbersCount,
+    Pointer<Uint32> puPortNumbersFound,
+  ),
+  int Function(
+    Pointer<Uint32> lpPortNumbers,
+    int uPortNumbersCount,
+    Pointer<Uint32> puPortNumbersFound,
+  )
+>('GetCommPorts');

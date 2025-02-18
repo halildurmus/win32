@@ -34,9 +34,10 @@ class StructProjection {
   String get classPreamble {
     const structCategoryComment = '/// {@category struct}';
     final classComment = wrapCommentText(comment);
-    final docComment = classComment.isEmpty
-        ? structCategoryComment
-        : '$classComment\n///\n$structCategoryComment';
+    final docComment =
+        classComment.isEmpty
+            ? structCategoryComment
+            : '$classComment\n///\n$structCategoryComment';
 
     if (packingAlignment > 0) {
       return '$docComment\n@Packed($packingAlignment)';
@@ -45,9 +46,10 @@ class StructProjection {
     }
   }
 
-  String get _projectedName => typeDef.isNested
-      ? '_${safeTypenameForString(mangleName(typeDef))}'
-      : safeTypenameForString(structName);
+  String get _projectedName =>
+      typeDef.isNested
+          ? '_${safeTypenameForString(mangleName(typeDef))}'
+          : safeTypenameForString(structName);
 
   String get _fieldsProjection =>
       typeDef.fields.map(FieldProjection.new).join('\n');
@@ -71,8 +73,11 @@ class StructProjection {
       // Nested types should have just one leading underscore, so we strip the
       // others off and add one back.
       final nestedTypeProjection = NestedStructProjection(
-          nestedType, '_${stripLeadingUnderscores(nestedType.name)}',
-          suffix: fieldIdx, rootTypePackingAlignment: packingAlignment);
+        nestedType,
+        '_${stripLeadingUnderscores(nestedType.name)}',
+        suffix: fieldIdx,
+        rootTypePackingAlignment: packingAlignment,
+      );
 
       buffer.write('\n$nestedTypeProjection\n');
       fieldIdx++;
@@ -103,8 +108,9 @@ class StructProjection {
       }
       if (field.typeIdentifier.baseType == BaseType.arrayTypeModifier &&
           field.typeIdentifier.typeArg?.type != null) {
-        final arrayPacking =
-            calculatePackingAlignment(field.typeIdentifier.typeArg!.type!);
+        final arrayPacking = calculatePackingAlignment(
+          field.typeIdentifier.typeArg!.type!,
+        );
         alignment = min(arrayPacking, alignment);
       }
     }
@@ -124,8 +130,10 @@ class StructProjection {
 
     for (final field in nestedArrays.keys) {
       final nestedType = nestedArrays[field]!;
-      final nestedTypeProjection =
-          StructProjection(nestedType, '_${nestedType.name}');
+      final nestedTypeProjection = StructProjection(
+        nestedType,
+        '_${nestedType.name}',
+      );
 
       buffer.write('\n$nestedTypeProjection\n');
     }

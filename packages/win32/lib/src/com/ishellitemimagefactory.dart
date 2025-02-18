@@ -41,12 +41,19 @@ class IShellItemImageFactory extends IUnknown {
   int getImage(SIZE size, int flags, Pointer<IntPtr> phbm) =>
       (ptr.ref.vtable + 3)
           .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, SIZE size, Int32 flags,
-                          Pointer<IntPtr> phbm)>>>()
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  SIZE size,
+                  Int32 flags,
+                  Pointer<IntPtr> phbm,
+                )
+              >
+            >
+          >()
           .value
           .asFunction<
-              int Function(Pointer, SIZE size, int flags,
-                  Pointer<IntPtr> phbm)>()(ptr.ref.lpVtbl, size, flags, phbm);
+            int Function(Pointer, SIZE size, int flags, Pointer<IntPtr> phbm)
+          >()(ptr.ref.lpVtbl, size, flags, phbm);
 }

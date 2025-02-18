@@ -8,13 +8,17 @@ import 'package:win32/win32.dart';
 
 void main() {
   final hDC = GetDC(NULL);
-  final searchFont = calloc<LOGFONT>()
-    ..ref.lfCharSet = FONT_CHARSET.ANSI_CHARSET;
+  final searchFont =
+      calloc<LOGFONT>()..ref.lfCharSet = FONT_CHARSET.ANSI_CHARSET;
 
   final fontNames = SplayTreeSet<String>();
 
   int enumerateFonts(
-      Pointer<LOGFONT> logFont, Pointer<TEXTMETRIC> _, int __, int ___) {
+    Pointer<LOGFONT> logFont,
+    Pointer<TEXTMETRIC> _,
+    int __,
+    int ___,
+  ) {
     // Get extended information from the font
     final logFontEx = logFont.cast<ENUMLOGFONTEX>();
     fontNames.add(logFontEx.ref.elfFullName);

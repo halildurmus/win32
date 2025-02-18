@@ -15,8 +15,9 @@ import '../guid.dart';
 import '../structs.g.dart';
 import '../variant.dart';
 
-final _api_ms_win_core_comm_l1_1_1 =
-    DynamicLibrary.open('api-ms-win-core-comm-l1-1-1.dll');
+final _api_ms_win_core_comm_l1_1_1 = DynamicLibrary.open(
+  'api-ms-win-core-comm-l1-1-1.dll',
+);
 
 /// Attempts to open a communication device.
 ///
@@ -29,11 +30,16 @@ final _api_ms_win_core_comm_l1_1_1 =
 /// ```
 /// {@category kernel32}
 int OpenCommPort(
-        int uPortNumber, int dwDesiredAccess, int dwFlagsAndAttributes) =>
-    _OpenCommPort(uPortNumber, dwDesiredAccess, dwFlagsAndAttributes);
+  int uPortNumber,
+  int dwDesiredAccess,
+  int dwFlagsAndAttributes,
+) => _OpenCommPort(uPortNumber, dwDesiredAccess, dwFlagsAndAttributes);
 
 final _OpenCommPort = _api_ms_win_core_comm_l1_1_1.lookupFunction<
-    IntPtr Function(Uint32 uPortNumber, Uint32 dwDesiredAccess,
-        Uint32 dwFlagsAndAttributes),
-    int Function(int uPortNumber, int dwDesiredAccess,
-        int dwFlagsAndAttributes)>('OpenCommPort');
+  IntPtr Function(
+    Uint32 uPortNumber,
+    Uint32 dwDesiredAccess,
+    Uint32 dwFlagsAndAttributes,
+  ),
+  int Function(int uPortNumber, int dwDesiredAccess, int dwFlagsAndAttributes)
+>('OpenCommPort');

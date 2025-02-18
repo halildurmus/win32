@@ -11,12 +11,17 @@ void main() {
   // MCI will attempt to choose the MIDI mapper as the output port.
   final deviceType = TEXT('sequencer');
   final elementName = TEXT(r'c:\Windows\Media\flourish.mid');
-  final mciOpenParams = calloc<MCI_OPEN_PARMS>()
-    ..ref.lpstrDeviceType = deviceType
-    ..ref.lpstrElementName = elementName;
+  final mciOpenParams =
+      calloc<MCI_OPEN_PARMS>()
+        ..ref.lpstrDeviceType = deviceType
+        ..ref.lpstrElementName = elementName;
 
   var dwReturn = mciSendCommand(
-      NULL, MCI_OPEN, MCI_OPEN_TYPE | MCI_OPEN_ELEMENT, mciOpenParams.address);
+    NULL,
+    MCI_OPEN,
+    MCI_OPEN_TYPE | MCI_OPEN_ELEMENT,
+    mciOpenParams.address,
+  );
 
   if (dwReturn != 0) {
     // Don't close it; just return error.
@@ -28,11 +33,15 @@ void main() {
   final deviceID = mciOpenParams.ref.wDeviceID;
 
   // Check if the output port is the MIDI mapper.
-  final mciStatusParams = calloc<MCI_STATUS_PARMS>()
-    ..ref.dwItem = MCI_SEQ_STATUS_PORT;
+  final mciStatusParams =
+      calloc<MCI_STATUS_PARMS>()..ref.dwItem = MCI_SEQ_STATUS_PORT;
 
   dwReturn = mciSendCommand(
-      deviceID, MCI_STATUS, MCI_STATUS_ITEM, mciStatusParams.address);
+    deviceID,
+    MCI_STATUS,
+    MCI_STATUS_ITEM,
+    mciStatusParams.address,
+  );
 
   if (dwReturn != 0) {
     print('Status command failed.');
@@ -46,7 +55,11 @@ void main() {
     final warningMessage = TEXT('The MIDI mapper is not available. Continue?');
     try {
       if (MessageBox(
-              NULL, warningMessage, nullptr, MESSAGEBOX_STYLE.MB_YESNO) ==
+            NULL,
+            warningMessage,
+            nullptr,
+            MESSAGEBOX_STYLE.MB_YESNO,
+          ) ==
           MESSAGEBOX_RESULT.IDNO) {
         // User does not want to continue. Not an error;
         // just close the device and return.
@@ -61,8 +74,12 @@ void main() {
   // Begin playback. The command will not return until playback has finished,
   // unless Ctrl+Break is pressed.
   final mciPlayParams = calloc<MCI_PLAY_PARMS>();
-  dwReturn =
-      mciSendCommand(deviceID, MCI_PLAY, MCI_WAIT, mciPlayParams.address);
+  dwReturn = mciSendCommand(
+    deviceID,
+    MCI_PLAY,
+    MCI_WAIT,
+    mciPlayParams.address,
+  );
 
   mciSendCommand(deviceID, MCI_CLOSE, 0, NULL);
 

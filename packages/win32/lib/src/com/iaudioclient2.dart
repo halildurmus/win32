@@ -43,52 +43,72 @@ class IAudioClient2 extends IAudioClient {
 
   int isOffloadCapable(int Category, Pointer<Int32> pbOffloadCapable) =>
       (ptr.ref.vtable + 15)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Int32 Category,
-                              Pointer<Int32> pbOffloadCapable)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, int Category,
-                      Pointer<Int32> pbOffloadCapable)>()(
-          ptr.ref.lpVtbl, Category, pbOffloadCapable);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Int32 Category,
+                  Pointer<Int32> pbOffloadCapable,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, int Category, Pointer<Int32> pbOffloadCapable)
+          >()(ptr.ref.lpVtbl, Category, pbOffloadCapable);
 
   int setClientProperties(Pointer<AudioClientProperties> pProperties) =>
       (ptr.ref.vtable + 16)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer,
-                              Pointer<AudioClientProperties> pProperties)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, Pointer<AudioClientProperties> pProperties)>()(
-          ptr.ref.lpVtbl, pProperties);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<AudioClientProperties> pProperties,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<AudioClientProperties> pProperties)
+          >()(ptr.ref.lpVtbl, pProperties);
 
   int getBufferSizeLimits(
+    Pointer<WAVEFORMATEX> pFormat,
+    int bEventDriven,
+    Pointer<Int64> phnsMinBufferDuration,
+    Pointer<Int64> phnsMaxBufferDuration,
+  ) => (ptr.ref.vtable + 17)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<WAVEFORMATEX> pFormat,
+              Int32 bEventDriven,
+              Pointer<Int64> phnsMinBufferDuration,
+              Pointer<Int64> phnsMaxBufferDuration,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
           Pointer<WAVEFORMATEX> pFormat,
           int bEventDriven,
           Pointer<Int64> phnsMinBufferDuration,
-          Pointer<Int64> phnsMaxBufferDuration) =>
-      (ptr.ref.vtable + 17)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<WAVEFORMATEX> pFormat,
-                              Int32 bEventDriven,
-                              Pointer<Int64> phnsMinBufferDuration,
-                              Pointer<Int64> phnsMaxBufferDuration)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      Pointer<WAVEFORMATEX> pFormat,
-                      int bEventDriven,
-                      Pointer<Int64> phnsMinBufferDuration,
-                      Pointer<Int64> phnsMaxBufferDuration)>()(ptr.ref.lpVtbl,
-          pFormat, bEventDriven, phnsMinBufferDuration, phnsMaxBufferDuration);
+          Pointer<Int64> phnsMaxBufferDuration,
+        )
+      >()(
+    ptr.ref.lpVtbl,
+    pFormat,
+    bEventDriven,
+    phnsMinBufferDuration,
+    phnsMaxBufferDuration,
+  );
 }

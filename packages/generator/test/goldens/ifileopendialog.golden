@@ -39,27 +39,33 @@ class IFileOpenDialog extends IFileDialog {
       IFileOpenDialog(interface.toInterface(IID_IFileOpenDialog));
 
   int getResults(Pointer<Pointer<COMObject>> ppenum) => (ptr.ref.vtable + 27)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<Pointer<COMObject>> ppenum)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, Pointer<Pointer<COMObject>> ppenum)>()(
-      ptr.ref.lpVtbl, ppenum);
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<Pointer<COMObject>> ppenum)
+          >
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> ppenum)>()(
+    ptr.ref.lpVtbl,
+    ppenum,
+  );
 
-  int getSelectedItems(Pointer<Pointer<COMObject>> ppsai) =>
-      (ptr.ref.vtable + 28)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<COMObject>> ppsai)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<COMObject>> ppsai)>()(
-          ptr.ref.lpVtbl, ppsai);
+  int getSelectedItems(Pointer<Pointer<COMObject>> ppsai) => (ptr.ref.vtable +
+          28)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<Pointer<COMObject>> ppsai)
+          >
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> ppsai)>()(
+    ptr.ref.lpVtbl,
+    ppsai,
+  );
 }
 
 /// @nodoc
@@ -70,5 +76,6 @@ class FileOpenDialog extends IFileOpenDialog {
   FileOpenDialog(super.ptr);
 
   factory FileOpenDialog.createInstance() => FileOpenDialog(
-      COMObject.createFromID(CLSID_FileOpenDialog, IID_IFileOpenDialog));
+    COMObject.createFromID(CLSID_FileOpenDialog, IID_IFileOpenDialog),
+  );
 }

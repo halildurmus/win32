@@ -2,7 +2,7 @@ name: win32_workspace
 publish_to: none
 
 environment:
-  sdk: ^3.5.0
+  sdk: ^3.7.0
 
 dev_dependencies:
   args: ^2.6.0
@@ -11,7 +11,7 @@ dev_dependencies:
     git:
       url: https://github.com/halildurmus/workflows.git
       path: packages/hooks
-  lints: ^5.0.0
+  lints: ^5.1.1
   path: ^1.9.1
   win32:
     path: packages/win32

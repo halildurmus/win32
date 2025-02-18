@@ -67,7 +67,9 @@ void main() {
       if (supportedPtr.value == 1) {
         final spellCheckerPtr = calloc<COMObject>();
         hr = spellCheckerFactory.createSpellChecker(
-            languageTagPtr, spellCheckerPtr.cast());
+          languageTagPtr,
+          spellCheckerPtr.cast(),
+        );
         expect(hr, equals(S_OK));
         expect(spellCheckerPtr.ref.isNull, isFalse);
 

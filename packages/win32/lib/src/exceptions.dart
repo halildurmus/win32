@@ -36,14 +36,15 @@ class WindowsException extends COMException {
     try {
       String errorMessage;
       final result = FormatMessage(
-          FORMAT_MESSAGE_OPTIONS.FORMAT_MESSAGE_FROM_SYSTEM |
-              FORMAT_MESSAGE_OPTIONS.FORMAT_MESSAGE_IGNORE_INSERTS,
-          nullptr,
-          windowsError,
-          0, // default language
-          buffer,
-          256,
-          nullptr);
+        FORMAT_MESSAGE_OPTIONS.FORMAT_MESSAGE_FROM_SYSTEM |
+            FORMAT_MESSAGE_OPTIONS.FORMAT_MESSAGE_IGNORE_INSERTS,
+        nullptr,
+        windowsError,
+        0, // default language
+        buffer,
+        256,
+        nullptr,
+      );
 
       if (result == 0) {
         // Failed to get error string

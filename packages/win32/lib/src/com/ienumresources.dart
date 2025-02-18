@@ -36,25 +36,32 @@ class IEnumResources extends IUnknown {
   factory IEnumResources.from(IUnknown interface) =>
       IEnumResources(interface.toInterface(IID_IEnumResources));
 
-  int next(int celt, Pointer<SHELL_ITEM_RESOURCE> psir,
-          Pointer<Uint32> pceltFetched) =>
-      (ptr.ref.vtable + 3)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Uint32 celt,
-                              Pointer<SHELL_ITEM_RESOURCE> psir,
-                              Pointer<Uint32> pceltFetched)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      int celt,
-                      Pointer<SHELL_ITEM_RESOURCE> psir,
-                      Pointer<Uint32> pceltFetched)>()(
-          ptr.ref.lpVtbl, celt, psir, pceltFetched);
+  int next(
+    int celt,
+    Pointer<SHELL_ITEM_RESOURCE> psir,
+    Pointer<Uint32> pceltFetched,
+  ) => (ptr.ref.vtable + 3)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Uint32 celt,
+              Pointer<SHELL_ITEM_RESOURCE> psir,
+              Pointer<Uint32> pceltFetched,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          int celt,
+          Pointer<SHELL_ITEM_RESOURCE> psir,
+          Pointer<Uint32> pceltFetched,
+        )
+      >()(ptr.ref.lpVtbl, celt, psir, pceltFetched);
 
   int skip(int celt) => (ptr.ref.vtable + 4)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint32 celt)>>>()
@@ -67,13 +74,16 @@ class IEnumResources extends IUnknown {
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
   int clone(Pointer<Pointer<COMObject>> ppenumr) => (ptr.ref.vtable + 6)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<Pointer<COMObject>> ppenumr)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, Pointer<Pointer<COMObject>> ppenumr)>()(
-      ptr.ref.lpVtbl, ppenumr);
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<Pointer<COMObject>> ppenumr)
+          >
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> ppenumr)>()(
+    ptr.ref.lpVtbl,
+    ppenumr,
+  );
 }

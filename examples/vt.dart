@@ -60,7 +60,8 @@ void printHorizontalBorder(Coord size, bool isTop) {
 
   for (var i = 1; i < size.X - 1; i++) {
     printf(
-        "q"); // in line drawing mode, \x71 -> \u2500 "HORIZONTAL SCAN LINE-5"
+      "q",
+    ); // in line drawing mode, \x71 -> \u2500 "HORIZONTAL SCAN LINE-5"
   }
 
   printf(isTop ? "k" : "j"); // print right corner
@@ -89,13 +90,16 @@ void main() {
 
   final ScreenBufferInfo = calloc<CONSOLE_SCREEN_BUFFER_INFO>();
   GetConsoleScreenBufferInfo(hOut, ScreenBufferInfo);
-  final size = Coord()
-    ..X = ScreenBufferInfo.ref.srWindow.Right -
-        ScreenBufferInfo.ref.srWindow.Left +
-        1
-    ..Y = ScreenBufferInfo.ref.srWindow.Bottom -
-        ScreenBufferInfo.ref.srWindow.Top +
-        1;
+  final size =
+      Coord()
+        ..X =
+            ScreenBufferInfo.ref.srWindow.Right -
+            ScreenBufferInfo.ref.srWindow.Left +
+            1
+        ..Y =
+            ScreenBufferInfo.ref.srWindow.Bottom -
+            ScreenBufferInfo.ref.srWindow.Top +
+            1;
   free(ScreenBufferInfo);
 
   // Enter the alternate buffer
@@ -127,9 +131,7 @@ void main() {
   printHorizontalBorder(size, true);
 
   // // Print a bottom border
-  CSI(
-    "${size.Y - 1};1H",
-  );
+  CSI("${size.Y - 1};1H");
   printHorizontalBorder(size, false);
 
   // draw columns

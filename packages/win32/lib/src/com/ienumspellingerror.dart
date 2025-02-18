@@ -37,13 +37,16 @@ class IEnumSpellingError extends IUnknown {
       IEnumSpellingError(interface.toInterface(IID_IEnumSpellingError));
 
   int next(Pointer<Pointer<COMObject>> value) => (ptr.ref.vtable + 3)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<Pointer<COMObject>> value)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, Pointer<Pointer<COMObject>> value)>()(
-      ptr.ref.lpVtbl, value);
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<Pointer<COMObject>> value)
+          >
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> value)>()(
+    ptr.ref.lpVtbl,
+    value,
+  );
 }

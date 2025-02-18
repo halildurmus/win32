@@ -38,27 +38,40 @@ class IAudioSessionEnumerator extends IUnknown {
 
   factory IAudioSessionEnumerator.from(IUnknown interface) =>
       IAudioSessionEnumerator(
-          interface.toInterface(IID_IAudioSessionEnumerator));
+        interface.toInterface(IID_IAudioSessionEnumerator),
+      );
 
   int getCount(Pointer<Int32> SessionCount) => (ptr.ref.vtable + 3)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<Int32> SessionCount)>>>()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Int32> SessionCount)>()(
-      ptr.ref.lpVtbl, SessionCount);
+      .cast<
+        Pointer<
+          NativeFunction<Int32 Function(Pointer, Pointer<Int32> SessionCount)>
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Int32> SessionCount)>()(
+    ptr.ref.lpVtbl,
+    SessionCount,
+  );
 
   int getSession(int SessionCount, Pointer<Pointer<COMObject>> Session) =>
       (ptr.ref.vtable + 4)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Int32 SessionCount,
-                              Pointer<Pointer<COMObject>> Session)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, int SessionCount,
-                      Pointer<Pointer<COMObject>> Session)>()(
-          ptr.ref.lpVtbl, SessionCount, Session);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Int32 SessionCount,
+                  Pointer<Pointer<COMObject>> Session,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
+              Pointer,
+              int SessionCount,
+              Pointer<Pointer<COMObject>> Session,
+            )
+          >()(ptr.ref.lpVtbl, SessionCount, Session);
 }

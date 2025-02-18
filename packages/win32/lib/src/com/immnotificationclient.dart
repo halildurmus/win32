@@ -42,56 +42,87 @@ class IMMNotificationClient extends IUnknown {
   int onDeviceStateChanged(Pointer<Utf16> pwstrDeviceId, int dwNewState) =>
       (ptr.ref.vtable + 3)
           .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<Utf16> pwstrDeviceId,
-                          Uint32 dwNewState)>>>()
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<Utf16> pwstrDeviceId,
+                  Uint32 dwNewState,
+                )
+              >
+            >
+          >()
           .value
           .asFunction<
-              int Function(Pointer, Pointer<Utf16> pwstrDeviceId,
-                  int dwNewState)>()(ptr.ref.lpVtbl, pwstrDeviceId, dwNewState);
+            int Function(Pointer, Pointer<Utf16> pwstrDeviceId, int dwNewState)
+          >()(ptr.ref.lpVtbl, pwstrDeviceId, dwNewState);
 
   int onDeviceAdded(Pointer<Utf16> pwstrDeviceId) => (ptr.ref.vtable + 4)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<Utf16> pwstrDeviceId)>>>()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Utf16> pwstrDeviceId)>()(
-      ptr.ref.lpVtbl, pwstrDeviceId);
+      .cast<
+        Pointer<
+          NativeFunction<Int32 Function(Pointer, Pointer<Utf16> pwstrDeviceId)>
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Utf16> pwstrDeviceId)>()(
+    ptr.ref.lpVtbl,
+    pwstrDeviceId,
+  );
 
   int onDeviceRemoved(Pointer<Utf16> pwstrDeviceId) => (ptr.ref.vtable + 5)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<Utf16> pwstrDeviceId)>>>()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Utf16> pwstrDeviceId)>()(
-      ptr.ref.lpVtbl, pwstrDeviceId);
+      .cast<
+        Pointer<
+          NativeFunction<Int32 Function(Pointer, Pointer<Utf16> pwstrDeviceId)>
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Utf16> pwstrDeviceId)>()(
+    ptr.ref.lpVtbl,
+    pwstrDeviceId,
+  );
 
   int onDefaultDeviceChanged(
-          int flow, int role, Pointer<Utf16> pwstrDefaultDeviceId) =>
-      (ptr.ref.vtable + 6)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Int32 flow, Int32 role,
-                              Pointer<Utf16> pwstrDefaultDeviceId)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, int flow, int role,
-                      Pointer<Utf16> pwstrDefaultDeviceId)>()(
-          ptr.ref.lpVtbl, flow, role, pwstrDefaultDeviceId);
+    int flow,
+    int role,
+    Pointer<Utf16> pwstrDefaultDeviceId,
+  ) => (ptr.ref.vtable + 6)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Int32 flow,
+              Int32 role,
+              Pointer<Utf16> pwstrDefaultDeviceId,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          int flow,
+          int role,
+          Pointer<Utf16> pwstrDefaultDeviceId,
+        )
+      >()(ptr.ref.lpVtbl, flow, role, pwstrDefaultDeviceId);
 
   int onPropertyValueChanged(Pointer<Utf16> pwstrDeviceId, PROPERTYKEY key) =>
       (ptr.ref.vtable + 7)
           .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<Utf16> pwstrDeviceId,
-                          PROPERTYKEY key)>>>()
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<Utf16> pwstrDeviceId,
+                  PROPERTYKEY key,
+                )
+              >
+            >
+          >()
           .value
           .asFunction<
-              int Function(Pointer, Pointer<Utf16> pwstrDeviceId,
-                  PROPERTYKEY key)>()(ptr.ref.lpVtbl, pwstrDeviceId, key);
+            int Function(Pointer, Pointer<Utf16> pwstrDeviceId, PROPERTYKEY key)
+          >()(ptr.ref.lpVtbl, pwstrDeviceId, key);
 }

@@ -29,9 +29,12 @@ void main() {
       final netPtr = calloc<COMObject>();
 
       expect(
-          nlm.getNetworks(
-              NLM_ENUM_NETWORK.NLM_ENUM_NETWORK_CONNECTED, enumPtr.cast()),
-          equals(S_OK));
+        nlm.getNetworks(
+          NLM_ENUM_NETWORK.NLM_ENUM_NETWORK_CONNECTED,
+          enumPtr.cast(),
+        ),
+        equals(S_OK),
+      );
 
       final enumerator = IEnumNetworks(enumPtr);
       expect(enumerator.next(1, netPtr.cast(), nullptr), equals(S_OK));
@@ -39,8 +42,10 @@ void main() {
       final network = INetwork(netPtr);
 
       // network should be connected, given the filter
-      expect(network.isConnected,
-          anyOf(equals(VARIANT_TRUE), equals(VARIANT_FALSE)));
+      expect(
+        network.isConnected,
+        anyOf(equals(VARIANT_TRUE), equals(VARIANT_FALSE)),
+      );
     });
 
     test('first network connection has a description', () {
@@ -50,9 +55,12 @@ void main() {
       final descPtr = calloc<Pointer<Utf16>>();
 
       expect(
-          nlm.getNetworks(
-              NLM_ENUM_NETWORK.NLM_ENUM_NETWORK_CONNECTED, enumPtr.cast()),
-          equals(S_OK));
+        nlm.getNetworks(
+          NLM_ENUM_NETWORK.NLM_ENUM_NETWORK_CONNECTED,
+          enumPtr.cast(),
+        ),
+        equals(S_OK),
+      );
 
       final enumerator = IEnumNetworks(enumPtr);
       expect(enumerator.next(1, netPtr.cast(), nullptr), equals(S_OK));

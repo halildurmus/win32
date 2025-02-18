@@ -11,8 +11,8 @@ final hInst = GetModuleHandle(nullptr);
 const EVENT_QUIT = WM_APP + 2;
 const EVENT_TRAY_NOTIFY = WM_APP + 1;
 
-typedef LocalWndProc = bool Function(
-    int hWnd, int uMsg, int wParam, int lParam);
+typedef LocalWndProc =
+    bool Function(int hWnd, int uMsg, int wParam, int lParam);
 
 final lpfnWndProc = NativeCallable<WNDPROC>.isolateLocal(
   _appWndProc,
@@ -31,14 +31,15 @@ void exec() {
 int loadDartIcon() {
   final dartIconPath = _thisPath('dart.ico');
   return LoadImage(
-      0,
-      TEXT(dartIconPath),
-      GDI_IMAGE_TYPE.IMAGE_ICON,
-      0,
-      0,
-      IMAGE_FLAGS.LR_LOADFROMFILE |
-          IMAGE_FLAGS.LR_DEFAULTSIZE |
-          IMAGE_FLAGS.LR_SHARED);
+    0,
+    TEXT(dartIconPath),
+    GDI_IMAGE_TYPE.IMAGE_ICON,
+    0,
+    0,
+    IMAGE_FLAGS.LR_LOADFROMFILE |
+        IMAGE_FLAGS.LR_DEFAULTSIZE |
+        IMAGE_FLAGS.LR_SHARED,
+  );
 }
 
 final _localWndProcs = <LocalWndProc>[];

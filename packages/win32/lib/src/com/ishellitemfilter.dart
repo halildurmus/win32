@@ -38,23 +38,34 @@ class IShellItemFilter extends IUnknown {
       IShellItemFilter(interface.toInterface(IID_IShellItemFilter));
 
   int includeItem(Pointer<COMObject> psi) => (ptr.ref.vtable + 3)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<COMObject> psi)>>>()
-          .value
-          .asFunction<int Function(Pointer, Pointer<COMObject> psi)>()(
-      ptr.ref.lpVtbl, psi);
+      .cast<
+        Pointer<NativeFunction<Int32 Function(Pointer, Pointer<COMObject> psi)>>
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<COMObject> psi)>()(
+    ptr.ref.lpVtbl,
+    psi,
+  );
 
   int getEnumFlagsForItem(Pointer<COMObject> psi, Pointer<Uint32> pgrfFlags) =>
       (ptr.ref.vtable + 4)
           .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<COMObject> psi,
-                          Pointer<Uint32> pgrfFlags)>>>()
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<COMObject> psi,
+                  Pointer<Uint32> pgrfFlags,
+                )
+              >
+            >
+          >()
           .value
           .asFunction<
-              int Function(Pointer, Pointer<COMObject> psi,
-                  Pointer<Uint32> pgrfFlags)>()(ptr.ref.lpVtbl, psi, pgrfFlags);
+            int Function(
+              Pointer,
+              Pointer<COMObject> psi,
+              Pointer<Uint32> pgrfFlags,
+            )
+          >()(ptr.ref.lpVtbl, psi, pgrfFlags);
 }

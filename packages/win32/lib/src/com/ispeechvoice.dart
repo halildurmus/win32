@@ -39,13 +39,16 @@ class ISpeechVoice extends IDispatch {
     final retValuePtr = calloc<COMObject>();
 
     final hr = (ptr.ref.vtable + 7)
-            .cast<
-                Pointer<
-                    NativeFunction<
-                        Int32 Function(Pointer, Pointer<COMObject> Status)>>>()
-            .value
-            .asFunction<int Function(Pointer, Pointer<COMObject> Status)>()(
-        ptr.ref.lpVtbl, retValuePtr);
+        .cast<
+          Pointer<
+            NativeFunction<Int32 Function(Pointer, Pointer<COMObject> Status)>
+          >
+        >()
+        .value
+        .asFunction<int Function(Pointer, Pointer<COMObject> Status)>()(
+      ptr.ref.lpVtbl,
+      retValuePtr,
+    );
 
     if (FAILED(hr)) {
       free(retValuePtr);
@@ -59,13 +62,16 @@ class ISpeechVoice extends IDispatch {
     final retValuePtr = calloc<COMObject>();
 
     final hr = (ptr.ref.vtable + 8)
-            .cast<
-                Pointer<
-                    NativeFunction<
-                        Int32 Function(Pointer, Pointer<COMObject> Voice)>>>()
-            .value
-            .asFunction<int Function(Pointer, Pointer<COMObject> Voice)>()(
-        ptr.ref.lpVtbl, retValuePtr);
+        .cast<
+          Pointer<
+            NativeFunction<Int32 Function(Pointer, Pointer<COMObject> Voice)>
+          >
+        >()
+        .value
+        .asFunction<int Function(Pointer, Pointer<COMObject> Voice)>()(
+      ptr.ref.lpVtbl,
+      retValuePtr,
+    );
 
     if (FAILED(hr)) {
       free(retValuePtr);
@@ -76,26 +82,33 @@ class ISpeechVoice extends IDispatch {
   }
 
   int putref_Voice(Pointer<COMObject> Voice) => (ptr.ref.vtable + 9)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<COMObject> Voice)>>>()
-          .value
-          .asFunction<int Function(Pointer, Pointer<COMObject> Voice)>()(
-      ptr.ref.lpVtbl, Voice);
+      .cast<
+        Pointer<
+          NativeFunction<Int32 Function(Pointer, Pointer<COMObject> Voice)>
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<COMObject> Voice)>()(
+    ptr.ref.lpVtbl,
+    Voice,
+  );
 
   Pointer<COMObject> get audioOutput {
     final retValuePtr = calloc<COMObject>();
 
     final hr = (ptr.ref.vtable + 10)
         .cast<
-            Pointer<
-                NativeFunction<
-                    Int32 Function(Pointer, Pointer<COMObject> AudioOutput)>>>()
+          Pointer<
+            NativeFunction<
+              Int32 Function(Pointer, Pointer<COMObject> AudioOutput)
+            >
+          >
+        >()
         .value
-        .asFunction<
-            int Function(Pointer,
-                Pointer<COMObject> AudioOutput)>()(ptr.ref.lpVtbl, retValuePtr);
+        .asFunction<int Function(Pointer, Pointer<COMObject> AudioOutput)>()(
+      ptr.ref.lpVtbl,
+      retValuePtr,
+    );
 
     if (FAILED(hr)) {
       free(retValuePtr);
@@ -107,29 +120,34 @@ class ISpeechVoice extends IDispatch {
 
   int putref_AudioOutput(Pointer<COMObject> AudioOutput) =>
       (ptr.ref.vtable + 11)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<COMObject> AudioOutput)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<COMObject> AudioOutput)>()(
-          ptr.ref.lpVtbl, AudioOutput);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<COMObject> AudioOutput)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<COMObject> AudioOutput)>()(
+        ptr.ref.lpVtbl,
+        AudioOutput,
+      );
 
   Pointer<COMObject> get audioOutputStream {
     final retValuePtr = calloc<COMObject>();
 
     final hr = (ptr.ref.vtable + 12)
-            .cast<
-                Pointer<
-                    NativeFunction<
-                        Int32 Function(
-                            Pointer, Pointer<COMObject> AudioOutputStream)>>>()
-            .value
-            .asFunction<
-                int Function(Pointer, Pointer<COMObject> AudioOutputStream)>()(
-        ptr.ref.lpVtbl, retValuePtr);
+        .cast<
+          Pointer<
+            NativeFunction<
+              Int32 Function(Pointer, Pointer<COMObject> AudioOutputStream)
+            >
+          >
+        >()
+        .value
+        .asFunction<
+          int Function(Pointer, Pointer<COMObject> AudioOutputStream)
+        >()(ptr.ref.lpVtbl, retValuePtr);
 
     if (FAILED(hr)) {
       free(retValuePtr);
@@ -141,29 +159,33 @@ class ISpeechVoice extends IDispatch {
 
   int putref_AudioOutputStream(Pointer<COMObject> AudioOutputStream) =>
       (ptr.ref.vtable + 13)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer,
-                              Pointer<COMObject> AudioOutputStream)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, Pointer<COMObject> AudioOutputStream)>()(
-          ptr.ref.lpVtbl, AudioOutputStream);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<COMObject> AudioOutputStream)
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<COMObject> AudioOutputStream)
+          >()(ptr.ref.lpVtbl, AudioOutputStream);
 
   int get rate {
     final retValuePtr = calloc<Int32>();
 
     try {
       final hr = (ptr.ref.vtable + 14)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> Rate)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> Rate)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> Rate)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> Rate)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -188,13 +210,16 @@ class ISpeechVoice extends IDispatch {
 
     try {
       final hr = (ptr.ref.vtable + 16)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> Volume)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> Volume)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> Volume)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> Volume)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -228,13 +253,16 @@ class ISpeechVoice extends IDispatch {
 
     try {
       final hr = (ptr.ref.vtable + 19)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int16> Allow)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int16> Allow)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int16> Allow)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int16> Allow)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -250,15 +278,17 @@ class ISpeechVoice extends IDispatch {
 
     try {
       final hr = (ptr.ref.vtable + 20)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Int32> EventInterestFlags)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Int32> EventInterestFlags)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Int32> EventInterestFlags)
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<Int32> EventInterestFlags)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -271,13 +301,16 @@ class ISpeechVoice extends IDispatch {
 
   set eventInterests(int value) {
     final hr = (ptr.ref.vtable + 21)
-            .cast<
-                Pointer<
-                    NativeFunction<
-                        Int32 Function(Pointer, Int32 EventInterestFlags)>>>()
-            .value
-            .asFunction<int Function(Pointer, int EventInterestFlags)>()(
-        ptr.ref.lpVtbl, value);
+        .cast<
+          Pointer<
+            NativeFunction<Int32 Function(Pointer, Int32 EventInterestFlags)>
+          >
+        >()
+        .value
+        .asFunction<int Function(Pointer, int EventInterestFlags)>()(
+      ptr.ref.lpVtbl,
+      value,
+    );
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
@@ -285,10 +318,13 @@ class ISpeechVoice extends IDispatch {
   set priority(int value) {
     final hr = (ptr.ref.vtable + 22)
         .cast<
-            Pointer<NativeFunction<Int32 Function(Pointer, Int32 Priority)>>>()
+          Pointer<NativeFunction<Int32 Function(Pointer, Int32 Priority)>>
+        >()
         .value
-        .asFunction<
-            int Function(Pointer, int Priority)>()(ptr.ref.lpVtbl, value);
+        .asFunction<int Function(Pointer, int Priority)>()(
+      ptr.ref.lpVtbl,
+      value,
+    );
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
@@ -298,13 +334,16 @@ class ISpeechVoice extends IDispatch {
 
     try {
       final hr = (ptr.ref.vtable + 23)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> Priority)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> Priority)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> Priority)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> Priority)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -318,10 +357,13 @@ class ISpeechVoice extends IDispatch {
   set alertBoundary(int value) {
     final hr = (ptr.ref.vtable + 24)
         .cast<
-            Pointer<NativeFunction<Int32 Function(Pointer, Int32 Boundary)>>>()
+          Pointer<NativeFunction<Int32 Function(Pointer, Int32 Boundary)>>
+        >()
         .value
-        .asFunction<
-            int Function(Pointer, int Boundary)>()(ptr.ref.lpVtbl, value);
+        .asFunction<int Function(Pointer, int Boundary)>()(
+      ptr.ref.lpVtbl,
+      value,
+    );
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
@@ -331,13 +373,16 @@ class ISpeechVoice extends IDispatch {
 
     try {
       final hr = (ptr.ref.vtable + 25)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> Boundary)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> Boundary)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> Boundary)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> Boundary)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -351,10 +396,13 @@ class ISpeechVoice extends IDispatch {
   set synchronousSpeakTimeout(int value) {
     final hr = (ptr.ref.vtable + 26)
         .cast<
-            Pointer<NativeFunction<Int32 Function(Pointer, Int32 msTimeout)>>>()
+          Pointer<NativeFunction<Int32 Function(Pointer, Int32 msTimeout)>>
+        >()
         .value
-        .asFunction<
-            int Function(Pointer, int msTimeout)>()(ptr.ref.lpVtbl, value);
+        .asFunction<int Function(Pointer, int msTimeout)>()(
+      ptr.ref.lpVtbl,
+      value,
+    );
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
@@ -364,13 +412,16 @@ class ISpeechVoice extends IDispatch {
 
     try {
       final hr = (ptr.ref.vtable + 27)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> msTimeout)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> msTimeout)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> msTimeout)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> msTimeout)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -381,33 +432,56 @@ class ISpeechVoice extends IDispatch {
     }
   }
 
-  int
-      speak(Pointer<Utf16> Text, int Flags, Pointer<Int32> StreamNumber) =>
-          (ptr.ref.vtable + 28)
-                  .cast<
-                      Pointer<
-                          NativeFunction<
-                              Int32 Function(Pointer, Pointer<Utf16> Text,
-                                  Int32 Flags, Pointer<Int32> StreamNumber)>>>()
-                  .value
-                  .asFunction<
-                      int Function(Pointer, Pointer<Utf16> Text, int Flags,
-                          Pointer<Int32> StreamNumber)>()(
-              ptr.ref.lpVtbl, Text, Flags, StreamNumber);
+  int speak(Pointer<Utf16> Text, int Flags, Pointer<Int32> StreamNumber) =>
+      (ptr.ref.vtable + 28)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<Utf16> Text,
+                  Int32 Flags,
+                  Pointer<Int32> StreamNumber,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
+              Pointer,
+              Pointer<Utf16> Text,
+              int Flags,
+              Pointer<Int32> StreamNumber,
+            )
+          >()(ptr.ref.lpVtbl, Text, Flags, StreamNumber);
 
   int speakStream(
-          Pointer<COMObject> Stream, int Flags, Pointer<Int32> StreamNumber) =>
-      (ptr.ref.vtable + 29)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<COMObject> Stream,
-                              Int32 Flags, Pointer<Int32> StreamNumber)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<COMObject> Stream, int Flags,
-                      Pointer<Int32> StreamNumber)>()(
-          ptr.ref.lpVtbl, Stream, Flags, StreamNumber);
+    Pointer<COMObject> Stream,
+    int Flags,
+    Pointer<Int32> StreamNumber,
+  ) => (ptr.ref.vtable + 29)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<COMObject> Stream,
+              Int32 Flags,
+              Pointer<Int32> StreamNumber,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<COMObject> Stream,
+          int Flags,
+          Pointer<Int32> StreamNumber,
+        )
+      >()(ptr.ref.lpVtbl, Stream, Flags, StreamNumber);
 
   int pause() => (ptr.ref.vtable + 30)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
@@ -421,113 +495,161 @@ class ISpeechVoice extends IDispatch {
 
   int skip(Pointer<Utf16> Type, int NumItems, Pointer<Int32> NumSkipped) =>
       (ptr.ref.vtable + 32)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Utf16> Type,
-                              Int32 NumItems, Pointer<Int32> NumSkipped)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Utf16> Type, int NumItems,
-                      Pointer<Int32> NumSkipped)>()(
-          ptr.ref.lpVtbl, Type, NumItems, NumSkipped);
-
-  int getVoices(
-          Pointer<Utf16> RequiredAttributes,
-          Pointer<Utf16> OptionalAttributes,
-          Pointer<Pointer<COMObject>> ObjectTokens) =>
-      (ptr.ref.vtable + 33)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<Utf16> RequiredAttributes,
-                              Pointer<Utf16> OptionalAttributes,
-                              Pointer<Pointer<COMObject>> ObjectTokens)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      Pointer<Utf16> RequiredAttributes,
-                      Pointer<Utf16> OptionalAttributes,
-                      Pointer<Pointer<COMObject>> ObjectTokens)>()(
-          ptr.ref.lpVtbl, RequiredAttributes, OptionalAttributes, ObjectTokens);
-
-  int getAudioOutputs(
-          Pointer<Utf16> RequiredAttributes,
-          Pointer<Utf16> OptionalAttributes,
-          Pointer<Pointer<COMObject>> ObjectTokens) =>
-      (ptr.ref.vtable + 34)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<Utf16> RequiredAttributes,
-                              Pointer<Utf16> OptionalAttributes,
-                              Pointer<Pointer<COMObject>> ObjectTokens)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      Pointer<Utf16> RequiredAttributes,
-                      Pointer<Utf16> OptionalAttributes,
-                      Pointer<Pointer<COMObject>> ObjectTokens)>()(
-          ptr.ref.lpVtbl, RequiredAttributes, OptionalAttributes, ObjectTokens);
-
-  int waitUntilDone(int msTimeout, Pointer<Int16> Done) => (ptr.ref.vtable + 35)
           .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Int32 msTimeout, Pointer<Int16> Done)>>>()
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<Utf16> Type,
+                  Int32 NumItems,
+                  Pointer<Int32> NumSkipped,
+                )
+              >
+            >
+          >()
           .value
           .asFunction<
-              int Function(Pointer, int msTimeout, Pointer<Int16> Done)>()(
-      ptr.ref.lpVtbl, msTimeout, Done);
+            int Function(
+              Pointer,
+              Pointer<Utf16> Type,
+              int NumItems,
+              Pointer<Int32> NumSkipped,
+            )
+          >()(ptr.ref.lpVtbl, Type, NumItems, NumSkipped);
+
+  int getVoices(
+    Pointer<Utf16> RequiredAttributes,
+    Pointer<Utf16> OptionalAttributes,
+    Pointer<Pointer<COMObject>> ObjectTokens,
+  ) => (ptr.ref.vtable + 33)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<Utf16> RequiredAttributes,
+              Pointer<Utf16> OptionalAttributes,
+              Pointer<Pointer<COMObject>> ObjectTokens,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<Utf16> RequiredAttributes,
+          Pointer<Utf16> OptionalAttributes,
+          Pointer<Pointer<COMObject>> ObjectTokens,
+        )
+      >()(ptr.ref.lpVtbl, RequiredAttributes, OptionalAttributes, ObjectTokens);
+
+  int getAudioOutputs(
+    Pointer<Utf16> RequiredAttributes,
+    Pointer<Utf16> OptionalAttributes,
+    Pointer<Pointer<COMObject>> ObjectTokens,
+  ) => (ptr.ref.vtable + 34)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<Utf16> RequiredAttributes,
+              Pointer<Utf16> OptionalAttributes,
+              Pointer<Pointer<COMObject>> ObjectTokens,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<Utf16> RequiredAttributes,
+          Pointer<Utf16> OptionalAttributes,
+          Pointer<Pointer<COMObject>> ObjectTokens,
+        )
+      >()(ptr.ref.lpVtbl, RequiredAttributes, OptionalAttributes, ObjectTokens);
+
+  int waitUntilDone(int msTimeout, Pointer<Int16> Done) => (ptr.ref.vtable + 35)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Int32 msTimeout, Pointer<Int16> Done)
+          >
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, int msTimeout, Pointer<Int16> Done)>()(
+    ptr.ref.lpVtbl,
+    msTimeout,
+    Done,
+  );
 
   int speakCompleteEvent(Pointer<Int32> Handle) => (ptr.ref.vtable + 36)
       .cast<
-          Pointer<
-              NativeFunction<Int32 Function(Pointer, Pointer<Int32> Handle)>>>()
+        Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Int32> Handle)>>
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Int32> Handle)>()(
+    ptr.ref.lpVtbl,
+    Handle,
+  );
+
+  int isUISupported(
+    Pointer<Utf16> TypeOfUI,
+    Pointer<VARIANT> ExtraData,
+    Pointer<Int16> Supported,
+  ) => (ptr.ref.vtable + 37)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<Utf16> TypeOfUI,
+              Pointer<VARIANT> ExtraData,
+              Pointer<Int16> Supported,
+            )
+          >
+        >
+      >()
       .value
       .asFunction<
-          int Function(
-              Pointer, Pointer<Int32> Handle)>()(ptr.ref.lpVtbl, Handle);
+        int Function(
+          Pointer,
+          Pointer<Utf16> TypeOfUI,
+          Pointer<VARIANT> ExtraData,
+          Pointer<Int16> Supported,
+        )
+      >()(ptr.ref.lpVtbl, TypeOfUI, ExtraData, Supported);
 
-  int isUISupported(Pointer<Utf16> TypeOfUI, Pointer<VARIANT> ExtraData,
-          Pointer<Int16> Supported) =>
-      (ptr.ref.vtable + 37)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<Utf16> TypeOfUI,
-                              Pointer<VARIANT> ExtraData,
-                              Pointer<Int16> Supported)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Utf16> TypeOfUI,
-                      Pointer<VARIANT> ExtraData, Pointer<Int16> Supported)>()(
-          ptr.ref.lpVtbl, TypeOfUI, ExtraData, Supported);
-
-  int displayUI(int hWndParent, Pointer<Utf16> Title, Pointer<Utf16> TypeOfUI,
-          Pointer<VARIANT> ExtraData) =>
-      (ptr.ref.vtable + 38)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Int32 hWndParent,
-                              Pointer<Utf16> Title,
-                              Pointer<Utf16> TypeOfUI,
-                              Pointer<VARIANT> ExtraData)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, int hWndParent, Pointer<Utf16> Title,
-                      Pointer<Utf16> TypeOfUI, Pointer<VARIANT> ExtraData)>()(
-          ptr.ref.lpVtbl, hWndParent, Title, TypeOfUI, ExtraData);
+  int displayUI(
+    int hWndParent,
+    Pointer<Utf16> Title,
+    Pointer<Utf16> TypeOfUI,
+    Pointer<VARIANT> ExtraData,
+  ) => (ptr.ref.vtable + 38)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Int32 hWndParent,
+              Pointer<Utf16> Title,
+              Pointer<Utf16> TypeOfUI,
+              Pointer<VARIANT> ExtraData,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          int hWndParent,
+          Pointer<Utf16> Title,
+          Pointer<Utf16> TypeOfUI,
+          Pointer<VARIANT> ExtraData,
+        )
+      >()(ptr.ref.lpVtbl, hWndParent, Title, TypeOfUI, ExtraData);
 }

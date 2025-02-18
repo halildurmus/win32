@@ -42,269 +42,394 @@ class IUIAutomationElement extends IUnknown {
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  int getRuntimeId(Pointer<Pointer<SAFEARRAY>> runtimeId) => (ptr.ref.vtable +
-              4)
+  int getRuntimeId(Pointer<Pointer<SAFEARRAY>> runtimeId) =>
+      (ptr.ref.vtable + 4)
           .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<Pointer<SAFEARRAY>> runtimeId)>>>()
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<SAFEARRAY>> runtimeId)
+              >
+            >
+          >()
           .value
           .asFunction<
-              int Function(Pointer, Pointer<Pointer<SAFEARRAY>> runtimeId)>()(
-      ptr.ref.lpVtbl, runtimeId);
+            int Function(Pointer, Pointer<Pointer<SAFEARRAY>> runtimeId)
+          >()(ptr.ref.lpVtbl, runtimeId);
 
-  int findFirst(int scope, Pointer<COMObject> condition,
-          Pointer<Pointer<COMObject>> found) =>
-      (ptr.ref.vtable + 5)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Int32 scope,
-                              Pointer<COMObject> condition,
-                              Pointer<Pointer<COMObject>> found)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, int scope, Pointer<COMObject> condition,
-                      Pointer<Pointer<COMObject>> found)>()(
-          ptr.ref.lpVtbl, scope, condition, found);
+  int findFirst(
+    int scope,
+    Pointer<COMObject> condition,
+    Pointer<Pointer<COMObject>> found,
+  ) => (ptr.ref.vtable + 5)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Int32 scope,
+              Pointer<COMObject> condition,
+              Pointer<Pointer<COMObject>> found,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          int scope,
+          Pointer<COMObject> condition,
+          Pointer<Pointer<COMObject>> found,
+        )
+      >()(ptr.ref.lpVtbl, scope, condition, found);
 
-  int findAll(int scope, Pointer<COMObject> condition,
-          Pointer<Pointer<COMObject>> found) =>
-      (ptr.ref.vtable + 6)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Int32 scope,
-                              Pointer<COMObject> condition,
-                              Pointer<Pointer<COMObject>> found)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, int scope, Pointer<COMObject> condition,
-                      Pointer<Pointer<COMObject>> found)>()(
-          ptr.ref.lpVtbl, scope, condition, found);
+  int findAll(
+    int scope,
+    Pointer<COMObject> condition,
+    Pointer<Pointer<COMObject>> found,
+  ) => (ptr.ref.vtable + 6)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Int32 scope,
+              Pointer<COMObject> condition,
+              Pointer<Pointer<COMObject>> found,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          int scope,
+          Pointer<COMObject> condition,
+          Pointer<Pointer<COMObject>> found,
+        )
+      >()(ptr.ref.lpVtbl, scope, condition, found);
 
-  int findFirstBuildCache(int scope, Pointer<COMObject> condition,
-          Pointer<COMObject> cacheRequest, Pointer<Pointer<COMObject>> found) =>
-      (ptr.ref.vtable + 7)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Int32 scope,
-                              Pointer<COMObject> condition,
-                              Pointer<COMObject> cacheRequest,
-                              Pointer<Pointer<COMObject>> found)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      int scope,
-                      Pointer<COMObject> condition,
-                      Pointer<COMObject> cacheRequest,
-                      Pointer<Pointer<COMObject>> found)>()(
-          ptr.ref.lpVtbl, scope, condition, cacheRequest, found);
+  int findFirstBuildCache(
+    int scope,
+    Pointer<COMObject> condition,
+    Pointer<COMObject> cacheRequest,
+    Pointer<Pointer<COMObject>> found,
+  ) => (ptr.ref.vtable + 7)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Int32 scope,
+              Pointer<COMObject> condition,
+              Pointer<COMObject> cacheRequest,
+              Pointer<Pointer<COMObject>> found,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          int scope,
+          Pointer<COMObject> condition,
+          Pointer<COMObject> cacheRequest,
+          Pointer<Pointer<COMObject>> found,
+        )
+      >()(ptr.ref.lpVtbl, scope, condition, cacheRequest, found);
 
-  int findAllBuildCache(int scope, Pointer<COMObject> condition,
-          Pointer<COMObject> cacheRequest, Pointer<Pointer<COMObject>> found) =>
-      (ptr.ref.vtable + 8)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Int32 scope,
-                              Pointer<COMObject> condition,
-                              Pointer<COMObject> cacheRequest,
-                              Pointer<Pointer<COMObject>> found)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      int scope,
-                      Pointer<COMObject> condition,
-                      Pointer<COMObject> cacheRequest,
-                      Pointer<Pointer<COMObject>> found)>()(
-          ptr.ref.lpVtbl, scope, condition, cacheRequest, found);
+  int findAllBuildCache(
+    int scope,
+    Pointer<COMObject> condition,
+    Pointer<COMObject> cacheRequest,
+    Pointer<Pointer<COMObject>> found,
+  ) => (ptr.ref.vtable + 8)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Int32 scope,
+              Pointer<COMObject> condition,
+              Pointer<COMObject> cacheRequest,
+              Pointer<Pointer<COMObject>> found,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          int scope,
+          Pointer<COMObject> condition,
+          Pointer<COMObject> cacheRequest,
+          Pointer<Pointer<COMObject>> found,
+        )
+      >()(ptr.ref.lpVtbl, scope, condition, cacheRequest, found);
 
-  int buildUpdatedCache(Pointer<COMObject> cacheRequest,
-          Pointer<Pointer<COMObject>> updatedElement) =>
-      (ptr.ref.vtable + 9)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<COMObject> cacheRequest,
-                              Pointer<Pointer<COMObject>> updatedElement)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<COMObject> cacheRequest,
-                      Pointer<Pointer<COMObject>> updatedElement)>()(
-          ptr.ref.lpVtbl, cacheRequest, updatedElement);
+  int buildUpdatedCache(
+    Pointer<COMObject> cacheRequest,
+    Pointer<Pointer<COMObject>> updatedElement,
+  ) => (ptr.ref.vtable + 9)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<COMObject> cacheRequest,
+              Pointer<Pointer<COMObject>> updatedElement,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<COMObject> cacheRequest,
+          Pointer<Pointer<COMObject>> updatedElement,
+        )
+      >()(ptr.ref.lpVtbl, cacheRequest, updatedElement);
 
   int getCurrentPropertyValue(int propertyId, Pointer<VARIANT> retVal) =>
       (ptr.ref.vtable + 10)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Uint32 propertyId,
-                              Pointer<VARIANT> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, int propertyId, Pointer<VARIANT> retVal)>()(
-          ptr.ref.lpVtbl, propertyId, retVal);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Uint32 propertyId,
+                  Pointer<VARIANT> retVal,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, int propertyId, Pointer<VARIANT> retVal)
+          >()(ptr.ref.lpVtbl, propertyId, retVal);
 
   int getCurrentPropertyValueEx(
-          int propertyId, int ignoreDefaultValue, Pointer<VARIANT> retVal) =>
-      (ptr.ref.vtable + 11)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Uint32 propertyId,
-                              Int32 ignoreDefaultValue,
-                              Pointer<VARIANT> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, int propertyId, int ignoreDefaultValue,
-                      Pointer<VARIANT> retVal)>()(
-          ptr.ref.lpVtbl, propertyId, ignoreDefaultValue, retVal);
+    int propertyId,
+    int ignoreDefaultValue,
+    Pointer<VARIANT> retVal,
+  ) => (ptr.ref.vtable + 11)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Uint32 propertyId,
+              Int32 ignoreDefaultValue,
+              Pointer<VARIANT> retVal,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          int propertyId,
+          int ignoreDefaultValue,
+          Pointer<VARIANT> retVal,
+        )
+      >()(ptr.ref.lpVtbl, propertyId, ignoreDefaultValue, retVal);
 
   int getCachedPropertyValue(int propertyId, Pointer<VARIANT> retVal) =>
       (ptr.ref.vtable + 12)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Uint32 propertyId,
-                              Pointer<VARIANT> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, int propertyId, Pointer<VARIANT> retVal)>()(
-          ptr.ref.lpVtbl, propertyId, retVal);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Uint32 propertyId,
+                  Pointer<VARIANT> retVal,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, int propertyId, Pointer<VARIANT> retVal)
+          >()(ptr.ref.lpVtbl, propertyId, retVal);
 
   int getCachedPropertyValueEx(
-          int propertyId, int ignoreDefaultValue, Pointer<VARIANT> retVal) =>
-      (ptr.ref.vtable + 13)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Uint32 propertyId,
-                              Int32 ignoreDefaultValue,
-                              Pointer<VARIANT> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, int propertyId, int ignoreDefaultValue,
-                      Pointer<VARIANT> retVal)>()(
-          ptr.ref.lpVtbl, propertyId, ignoreDefaultValue, retVal);
+    int propertyId,
+    int ignoreDefaultValue,
+    Pointer<VARIANT> retVal,
+  ) => (ptr.ref.vtable + 13)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Uint32 propertyId,
+              Int32 ignoreDefaultValue,
+              Pointer<VARIANT> retVal,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          int propertyId,
+          int ignoreDefaultValue,
+          Pointer<VARIANT> retVal,
+        )
+      >()(ptr.ref.lpVtbl, propertyId, ignoreDefaultValue, retVal);
 
   int getCurrentPatternAs(
-          int patternId, Pointer<GUID> riid, Pointer<Pointer> patternObject) =>
-      (ptr.ref.vtable + 14)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Uint32 patternId,
-                              Pointer<GUID> riid,
-                              Pointer<Pointer> patternObject)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, int patternId, Pointer<GUID> riid,
-                      Pointer<Pointer> patternObject)>()(
-          ptr.ref.lpVtbl, patternId, riid, patternObject);
+    int patternId,
+    Pointer<GUID> riid,
+    Pointer<Pointer> patternObject,
+  ) => (ptr.ref.vtable + 14)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Uint32 patternId,
+              Pointer<GUID> riid,
+              Pointer<Pointer> patternObject,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          int patternId,
+          Pointer<GUID> riid,
+          Pointer<Pointer> patternObject,
+        )
+      >()(ptr.ref.lpVtbl, patternId, riid, patternObject);
 
   int getCachedPatternAs(
-          int patternId, Pointer<GUID> riid, Pointer<Pointer> patternObject) =>
-      (ptr.ref.vtable + 15)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Uint32 patternId,
-                              Pointer<GUID> riid,
-                              Pointer<Pointer> patternObject)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, int patternId, Pointer<GUID> riid,
-                      Pointer<Pointer> patternObject)>()(
-          ptr.ref.lpVtbl, patternId, riid, patternObject);
+    int patternId,
+    Pointer<GUID> riid,
+    Pointer<Pointer> patternObject,
+  ) => (ptr.ref.vtable + 15)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Uint32 patternId,
+              Pointer<GUID> riid,
+              Pointer<Pointer> patternObject,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          int patternId,
+          Pointer<GUID> riid,
+          Pointer<Pointer> patternObject,
+        )
+      >()(ptr.ref.lpVtbl, patternId, riid, patternObject);
 
   int getCurrentPattern(
-          int patternId, Pointer<Pointer<COMObject>> patternObject) =>
-      (ptr.ref.vtable + 16)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Uint32 patternId,
-                              Pointer<Pointer<COMObject>> patternObject)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, int patternId,
-                      Pointer<Pointer<COMObject>> patternObject)>()(
-          ptr.ref.lpVtbl, patternId, patternObject);
+    int patternId,
+    Pointer<Pointer<COMObject>> patternObject,
+  ) => (ptr.ref.vtable + 16)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Uint32 patternId,
+              Pointer<Pointer<COMObject>> patternObject,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          int patternId,
+          Pointer<Pointer<COMObject>> patternObject,
+        )
+      >()(ptr.ref.lpVtbl, patternId, patternObject);
 
   int getCachedPattern(
-          int patternId, Pointer<Pointer<COMObject>> patternObject) =>
-      (ptr.ref.vtable + 17)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Uint32 patternId,
-                              Pointer<Pointer<COMObject>> patternObject)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, int patternId,
-                      Pointer<Pointer<COMObject>> patternObject)>()(
-          ptr.ref.lpVtbl, patternId, patternObject);
+    int patternId,
+    Pointer<Pointer<COMObject>> patternObject,
+  ) => (ptr.ref.vtable + 17)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Uint32 patternId,
+              Pointer<Pointer<COMObject>> patternObject,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          int patternId,
+          Pointer<Pointer<COMObject>> patternObject,
+        )
+      >()(ptr.ref.lpVtbl, patternId, patternObject);
 
-  int getCachedParent(Pointer<Pointer<COMObject>> parent) =>
-      (ptr.ref.vtable + 18)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<COMObject>> parent)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<COMObject>> parent)>()(
-          ptr.ref.lpVtbl, parent);
+  int getCachedParent(Pointer<Pointer<COMObject>> parent) => (ptr.ref.vtable +
+          18)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<Pointer<COMObject>> parent)
+          >
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> parent)>()(
+    ptr.ref.lpVtbl,
+    parent,
+  );
 
   int getCachedChildren(Pointer<Pointer<COMObject>> children) =>
       (ptr.ref.vtable + 19)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer,
-                              Pointer<Pointer<COMObject>> children)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, Pointer<Pointer<COMObject>> children)>()(
-          ptr.ref.lpVtbl, children);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<COMObject>> children)
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<COMObject>> children)
+          >()(ptr.ref.lpVtbl, children);
 
   int get currentProcessId {
     final retValuePtr = calloc<Int32>();
 
     try {
       final hr = (ptr.ref.vtable + 20)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -320,13 +445,16 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 21)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Uint32> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Uint32> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Uint32> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Uint32> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -342,15 +470,18 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 22)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<Utf16>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<Utf16>> retVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -366,15 +497,18 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 23)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<Utf16>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<Utf16>> retVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -390,15 +524,18 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 24)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<Utf16>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<Utf16>> retVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -414,15 +551,18 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 25)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<Utf16>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<Utf16>> retVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -438,13 +578,16 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 26)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -460,13 +603,16 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 27)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -482,13 +628,16 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 28)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -504,15 +653,18 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 29)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<Utf16>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<Utf16>> retVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -528,15 +680,18 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 30)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<Utf16>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<Utf16>> retVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -552,15 +707,18 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 31)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<Utf16>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<Utf16>> retVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -576,13 +734,16 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 32)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -598,13 +759,16 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 33)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -620,13 +784,16 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 34)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -642,13 +809,16 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 35)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -664,13 +834,16 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 36)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<IntPtr> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<IntPtr> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<IntPtr> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<IntPtr> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -686,15 +859,18 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 37)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<Utf16>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<Utf16>> retVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -710,13 +886,16 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 38)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -732,13 +911,16 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 39)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -754,15 +936,18 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 40)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<Utf16>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<Utf16>> retVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -778,13 +963,16 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 41)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -800,15 +988,18 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 42)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<Utf16>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<Utf16>> retVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -824,13 +1015,16 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 43)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<RECT> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<RECT> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<RECT> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<RECT> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -845,13 +1039,16 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<COMObject>();
 
     final hr = (ptr.ref.vtable + 44)
-            .cast<
-                Pointer<
-                    NativeFunction<
-                        Int32 Function(Pointer, Pointer<COMObject> retVal)>>>()
-            .value
-            .asFunction<int Function(Pointer, Pointer<COMObject> retVal)>()(
-        ptr.ref.lpVtbl, retValuePtr);
+        .cast<
+          Pointer<
+            NativeFunction<Int32 Function(Pointer, Pointer<COMObject> retVal)>
+          >
+        >()
+        .value
+        .asFunction<int Function(Pointer, Pointer<COMObject> retVal)>()(
+      ptr.ref.lpVtbl,
+      retValuePtr,
+    );
 
     if (FAILED(hr)) {
       free(retValuePtr);
@@ -866,15 +1063,18 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 45)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<Utf16>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<Utf16>> retVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -890,15 +1090,18 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 46)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<Utf16>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<Utf16>> retVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -914,13 +1117,16 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 47)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -935,13 +1141,16 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<COMObject>();
 
     final hr = (ptr.ref.vtable + 48)
-            .cast<
-                Pointer<
-                    NativeFunction<
-                        Int32 Function(Pointer, Pointer<COMObject> retVal)>>>()
-            .value
-            .asFunction<int Function(Pointer, Pointer<COMObject> retVal)>()(
-        ptr.ref.lpVtbl, retValuePtr);
+        .cast<
+          Pointer<
+            NativeFunction<Int32 Function(Pointer, Pointer<COMObject> retVal)>
+          >
+        >()
+        .value
+        .asFunction<int Function(Pointer, Pointer<COMObject> retVal)>()(
+      ptr.ref.lpVtbl,
+      retValuePtr,
+    );
 
     if (FAILED(hr)) {
       free(retValuePtr);
@@ -955,13 +1164,16 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<COMObject>();
 
     final hr = (ptr.ref.vtable + 49)
-            .cast<
-                Pointer<
-                    NativeFunction<
-                        Int32 Function(Pointer, Pointer<COMObject> retVal)>>>()
-            .value
-            .asFunction<int Function(Pointer, Pointer<COMObject> retVal)>()(
-        ptr.ref.lpVtbl, retValuePtr);
+        .cast<
+          Pointer<
+            NativeFunction<Int32 Function(Pointer, Pointer<COMObject> retVal)>
+          >
+        >()
+        .value
+        .asFunction<int Function(Pointer, Pointer<COMObject> retVal)>()(
+      ptr.ref.lpVtbl,
+      retValuePtr,
+    );
 
     if (FAILED(hr)) {
       free(retValuePtr);
@@ -975,13 +1187,16 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<COMObject>();
 
     final hr = (ptr.ref.vtable + 50)
-            .cast<
-                Pointer<
-                    NativeFunction<
-                        Int32 Function(Pointer, Pointer<COMObject> retVal)>>>()
-            .value
-            .asFunction<int Function(Pointer, Pointer<COMObject> retVal)>()(
-        ptr.ref.lpVtbl, retValuePtr);
+        .cast<
+          Pointer<
+            NativeFunction<Int32 Function(Pointer, Pointer<COMObject> retVal)>
+          >
+        >()
+        .value
+        .asFunction<int Function(Pointer, Pointer<COMObject> retVal)>()(
+      ptr.ref.lpVtbl,
+      retValuePtr,
+    );
 
     if (FAILED(hr)) {
       free(retValuePtr);
@@ -996,15 +1211,18 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 51)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<Utf16>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<Utf16>> retVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -1020,13 +1238,16 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 52)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -1042,13 +1263,16 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 53)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Uint32> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Uint32> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Uint32> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Uint32> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -1064,15 +1288,18 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 54)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<Utf16>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<Utf16>> retVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -1088,15 +1315,18 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 55)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<Utf16>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<Utf16>> retVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -1112,15 +1342,18 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 56)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<Utf16>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<Utf16>> retVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -1136,15 +1369,18 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 57)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<Utf16>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<Utf16>> retVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -1160,13 +1396,16 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 58)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -1182,13 +1421,16 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 59)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -1204,13 +1446,16 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 60)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -1226,15 +1471,18 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 61)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<Utf16>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<Utf16>> retVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -1250,15 +1498,18 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 62)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<Utf16>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<Utf16>> retVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -1274,15 +1525,18 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 63)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<Utf16>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<Utf16>> retVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -1298,13 +1552,16 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 64)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -1320,13 +1577,16 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 65)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -1342,13 +1602,16 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 66)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -1364,13 +1627,16 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 67)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -1386,13 +1652,16 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 68)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<IntPtr> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<IntPtr> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<IntPtr> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<IntPtr> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -1408,15 +1677,18 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 69)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<Utf16>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<Utf16>> retVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -1432,13 +1704,16 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 70)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -1454,13 +1729,16 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 71)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -1476,15 +1754,18 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 72)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<Utf16>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<Utf16>> retVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -1500,13 +1781,16 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 73)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -1522,15 +1806,18 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 74)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<Utf16>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<Utf16>> retVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -1546,13 +1833,16 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 75)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<RECT> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<RECT> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<RECT> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<RECT> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -1567,13 +1857,16 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<COMObject>();
 
     final hr = (ptr.ref.vtable + 76)
-            .cast<
-                Pointer<
-                    NativeFunction<
-                        Int32 Function(Pointer, Pointer<COMObject> retVal)>>>()
-            .value
-            .asFunction<int Function(Pointer, Pointer<COMObject> retVal)>()(
-        ptr.ref.lpVtbl, retValuePtr);
+        .cast<
+          Pointer<
+            NativeFunction<Int32 Function(Pointer, Pointer<COMObject> retVal)>
+          >
+        >()
+        .value
+        .asFunction<int Function(Pointer, Pointer<COMObject> retVal)>()(
+      ptr.ref.lpVtbl,
+      retValuePtr,
+    );
 
     if (FAILED(hr)) {
       free(retValuePtr);
@@ -1588,15 +1881,18 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 77)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<Utf16>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<Utf16>> retVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -1612,15 +1908,18 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 78)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<Utf16>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<Utf16>> retVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -1636,13 +1935,16 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 79)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -1657,13 +1959,16 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<COMObject>();
 
     final hr = (ptr.ref.vtable + 80)
-            .cast<
-                Pointer<
-                    NativeFunction<
-                        Int32 Function(Pointer, Pointer<COMObject> retVal)>>>()
-            .value
-            .asFunction<int Function(Pointer, Pointer<COMObject> retVal)>()(
-        ptr.ref.lpVtbl, retValuePtr);
+        .cast<
+          Pointer<
+            NativeFunction<Int32 Function(Pointer, Pointer<COMObject> retVal)>
+          >
+        >()
+        .value
+        .asFunction<int Function(Pointer, Pointer<COMObject> retVal)>()(
+      ptr.ref.lpVtbl,
+      retValuePtr,
+    );
 
     if (FAILED(hr)) {
       free(retValuePtr);
@@ -1677,13 +1982,16 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<COMObject>();
 
     final hr = (ptr.ref.vtable + 81)
-            .cast<
-                Pointer<
-                    NativeFunction<
-                        Int32 Function(Pointer, Pointer<COMObject> retVal)>>>()
-            .value
-            .asFunction<int Function(Pointer, Pointer<COMObject> retVal)>()(
-        ptr.ref.lpVtbl, retValuePtr);
+        .cast<
+          Pointer<
+            NativeFunction<Int32 Function(Pointer, Pointer<COMObject> retVal)>
+          >
+        >()
+        .value
+        .asFunction<int Function(Pointer, Pointer<COMObject> retVal)>()(
+      ptr.ref.lpVtbl,
+      retValuePtr,
+    );
 
     if (FAILED(hr)) {
       free(retValuePtr);
@@ -1697,13 +2005,16 @@ class IUIAutomationElement extends IUnknown {
     final retValuePtr = calloc<COMObject>();
 
     final hr = (ptr.ref.vtable + 82)
-            .cast<
-                Pointer<
-                    NativeFunction<
-                        Int32 Function(Pointer, Pointer<COMObject> retVal)>>>()
-            .value
-            .asFunction<int Function(Pointer, Pointer<COMObject> retVal)>()(
-        ptr.ref.lpVtbl, retValuePtr);
+        .cast<
+          Pointer<
+            NativeFunction<Int32 Function(Pointer, Pointer<COMObject> retVal)>
+          >
+        >()
+        .value
+        .asFunction<int Function(Pointer, Pointer<COMObject> retVal)>()(
+      ptr.ref.lpVtbl,
+      retValuePtr,
+    );
 
     if (FAILED(hr)) {
       free(retValuePtr);
@@ -1718,15 +2029,18 @@ class IUIAutomationElement extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 83)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<Utf16>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<Utf16>> retVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -1738,16 +2052,26 @@ class IUIAutomationElement extends IUnknown {
   }
 
   int getClickablePoint(
-          Pointer<POINT> clickable, Pointer<Int32> gotClickable) =>
-      (ptr.ref.vtable + 84)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<POINT> clickable,
-                              Pointer<Int32> gotClickable)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<POINT> clickable,
-                      Pointer<Int32> gotClickable)>()(
-          ptr.ref.lpVtbl, clickable, gotClickable);
+    Pointer<POINT> clickable,
+    Pointer<Int32> gotClickable,
+  ) => (ptr.ref.vtable + 84)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<POINT> clickable,
+              Pointer<Int32> gotClickable,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<POINT> clickable,
+          Pointer<Int32> gotClickable,
+        )
+      >()(ptr.ref.lpVtbl, clickable, gotClickable);
 }

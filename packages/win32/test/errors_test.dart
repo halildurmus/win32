@@ -6,18 +6,24 @@ import 'package:win32/win32.dart';
 
 void main() {
   test('Win32 error', () {
-    expect(WindowsException(WIN32_ERROR.ERROR_INVALID_HANDLE).toString(),
-        endsWith('The handle is invalid.'));
+    expect(
+      WindowsException(WIN32_ERROR.ERROR_INVALID_HANDLE).toString(),
+      endsWith('The handle is invalid.'),
+    );
   });
 
   test('Invalid argument error', () {
-    expect(WindowsException(E_INVALIDARG).toString(),
-        endsWith('The parameter is incorrect.'));
+    expect(
+      WindowsException(E_INVALIDARG).toString(),
+      endsWith('The parameter is incorrect.'),
+    );
   });
 
   test('COM error CO_E_ALREADYINITIALIZED', () {
-    expect(WindowsException(CO_E_ALREADYINITIALIZED).toString(),
-        endsWith('CoInitialize has already been called.'));
+    expect(
+      WindowsException(CO_E_ALREADYINITIALIZED).toString(),
+      endsWith('CoInitialize has already been called.'),
+    );
   });
 
   test('HRESULT_FROM_WIN32 should give a valid result', () {

@@ -47,40 +47,44 @@ class Win32Function {
   }
 
   Map<String, dynamic> toJson() => <String, dynamic>{
-        'prototype': prototype,
-        'comment': comment,
-        if (_isCustomCategorySet) 'category': category,
-        if (minimumWindowsVersion != 0)
-          'minimumWindowsVersion': windowsBuilds.keys.firstWhere(
-              (build) => windowsBuilds[build] == minimumWindowsVersion),
-        if (!test) 'test': false
-      };
+    'prototype': prototype,
+    'comment': comment,
+    if (_isCustomCategorySet) 'category': category,
+    if (minimumWindowsVersion != 0)
+      'minimumWindowsVersion': windowsBuilds.keys.firstWhere(
+        (build) => windowsBuilds[build] == minimumWindowsVersion,
+      ),
+    if (!test) 'test': false,
+  };
 
   Win32Function.fromJson(Map<String, dynamic> json)
-      : assert(json['prototype'] != null),
-        assert(json['comment'] != null),
-        prototype = json['prototype'] as String,
-        functionSymbol = functionNameFromPrototype(json['prototype'] as String),
-        comment = json['comment'] as String,
-        category = json['category'] != null ? json['category'] as String : '',
-        _isCustomCategorySet = json['category'] != null,
-        minimumWindowsVersion = json['minimumWindowsVersion'] != null
-            ? windowsBuilds[(json['minimumWindowsVersion'] as String)]!
-            : 0,
-        test = json['test'] as bool? ?? true;
+    : assert(json['prototype'] != null),
+      assert(json['comment'] != null),
+      prototype = json['prototype'] as String,
+      functionSymbol = functionNameFromPrototype(json['prototype'] as String),
+      comment = json['comment'] as String,
+      category = json['category'] != null ? json['category'] as String : '',
+      _isCustomCategorySet = json['category'] != null,
+      minimumWindowsVersion =
+          json['minimumWindowsVersion'] != null
+              ? windowsBuilds[(json['minimumWindowsVersion'] as String)]!
+              : 0,
+      test = json['test'] as bool? ?? true;
 }
 
 SplayTreeMap<String, Win32Function> loadFunctionsFromJson() {
-  final jsonFile = File('data/win32_functions.json')
-      .readAsStringSync()
-      .replaceAll(r'\n', r'\\n');
+  final jsonFile = File(
+    'data/win32_functions.json',
+  ).readAsStringSync().replaceAll(r'\n', r'\\n');
   final decodedJson = json.decode(jsonFile) as Map<String, dynamic>;
   final functions = SplayTreeMap<String, Win32Function>(
-      (str1, str2) => str1.toLowerCase().compareTo(str2.toLowerCase()));
+    (str1, str2) => str1.toLowerCase().compareTo(str2.toLowerCase()),
+  );
 
   for (final api in decodedJson.keys) {
-    functions[api] =
-        Win32Function.fromJson(decodedJson[api] as Map<String, dynamic>);
+    functions[api] = Win32Function.fromJson(
+      decodedJson[api] as Map<String, dynamic>,
+    );
   }
   return functions;
 }

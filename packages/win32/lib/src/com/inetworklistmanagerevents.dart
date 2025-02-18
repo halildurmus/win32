@@ -38,14 +38,16 @@ class INetworkListManagerEvents extends IUnknown {
 
   factory INetworkListManagerEvents.from(IUnknown interface) =>
       INetworkListManagerEvents(
-          interface.toInterface(IID_INetworkListManagerEvents));
+        interface.toInterface(IID_INetworkListManagerEvents),
+      );
 
   int connectivityChanged(int newConnectivity) => (ptr.ref.vtable + 3)
       .cast<
-          Pointer<
-              NativeFunction<Int32 Function(Pointer, Int32 newConnectivity)>>>()
+        Pointer<NativeFunction<Int32 Function(Pointer, Int32 newConnectivity)>>
+      >()
       .value
-      .asFunction<
-          int Function(
-              Pointer, int newConnectivity)>()(ptr.ref.lpVtbl, newConnectivity);
+      .asFunction<int Function(Pointer, int newConnectivity)>()(
+    ptr.ref.lpVtbl,
+    newConnectivity,
+  );
 }

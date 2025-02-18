@@ -37,121 +37,146 @@ class IAppxManifestReader extends IUnknown {
   factory IAppxManifestReader.from(IUnknown interface) =>
       IAppxManifestReader(interface.toInterface(IID_IAppxManifestReader));
 
-  int getPackageId(Pointer<Pointer<COMObject>> packageId) => (ptr.ref.vtable +
-              3)
+  int getPackageId(Pointer<Pointer<COMObject>> packageId) =>
+      (ptr.ref.vtable + 3)
           .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<Pointer<COMObject>> packageId)>>>()
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<COMObject>> packageId)
+              >
+            >
+          >()
           .value
           .asFunction<
-              int Function(Pointer, Pointer<Pointer<COMObject>> packageId)>()(
-      ptr.ref.lpVtbl, packageId);
+            int Function(Pointer, Pointer<Pointer<COMObject>> packageId)
+          >()(ptr.ref.lpVtbl, packageId);
 
   int getProperties(Pointer<Pointer<COMObject>> packageProperties) =>
       (ptr.ref.vtable + 4)
           .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer,
-                          Pointer<Pointer<COMObject>> packageProperties)>>>()
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<Pointer<COMObject>> packageProperties,
+                )
+              >
+            >
+          >()
           .value
           .asFunction<
-              int Function(
-                  Pointer,
-                  Pointer<Pointer<COMObject>>
-                      packageProperties)>()(ptr.ref.lpVtbl, packageProperties);
+            int Function(Pointer, Pointer<Pointer<COMObject>> packageProperties)
+          >()(ptr.ref.lpVtbl, packageProperties);
 
   int getPackageDependencies(Pointer<Pointer<COMObject>> dependencies) =>
       (ptr.ref.vtable + 5)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer,
-                              Pointer<Pointer<COMObject>> dependencies)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, Pointer<Pointer<COMObject>> dependencies)>()(
-          ptr.ref.lpVtbl, dependencies);
-
-  int getCapabilities(Pointer<Int32> capabilities) => (ptr.ref.vtable + 6)
           .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<Int32> capabilities)>>>()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Int32> capabilities)>()(
-      ptr.ref.lpVtbl, capabilities);
-
-  int getResources(Pointer<Pointer<COMObject>> resources) => (ptr.ref.vtable +
-              7)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<Pointer<COMObject>> resources)>>>()
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<Pointer<COMObject>> dependencies,
+                )
+              >
+            >
+          >()
           .value
           .asFunction<
-              int Function(Pointer, Pointer<Pointer<COMObject>> resources)>()(
-      ptr.ref.lpVtbl, resources);
+            int Function(Pointer, Pointer<Pointer<COMObject>> dependencies)
+          >()(ptr.ref.lpVtbl, dependencies);
 
-  int
-      getDeviceCapabilities(
-              Pointer<Pointer<COMObject>> deviceCapabilities) =>
-          (ptr.ref.vtable + 8)
-                  .cast<
-                      Pointer<
-                          NativeFunction<
-                              Int32 Function(
-                                  Pointer,
-                                  Pointer<Pointer<COMObject>>
-                                      deviceCapabilities)>>>()
-                  .value
-                  .asFunction<
-                      int Function(Pointer,
-                          Pointer<Pointer<COMObject>> deviceCapabilities)>()(
-              ptr.ref.lpVtbl, deviceCapabilities);
+  int getCapabilities(Pointer<Int32> capabilities) => (ptr.ref.vtable + 6)
+      .cast<
+        Pointer<
+          NativeFunction<Int32 Function(Pointer, Pointer<Int32> capabilities)>
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Int32> capabilities)>()(
+    ptr.ref.lpVtbl,
+    capabilities,
+  );
+
+  int getResources(Pointer<Pointer<COMObject>> resources) =>
+      (ptr.ref.vtable + 7)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<COMObject>> resources)
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<COMObject>> resources)
+          >()(ptr.ref.lpVtbl, resources);
+
+  int getDeviceCapabilities(Pointer<Pointer<COMObject>> deviceCapabilities) =>
+      (ptr.ref.vtable + 8)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<Pointer<COMObject>> deviceCapabilities,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
+              Pointer,
+              Pointer<Pointer<COMObject>> deviceCapabilities,
+            )
+          >()(ptr.ref.lpVtbl, deviceCapabilities);
 
   int getPrerequisite(Pointer<Utf16> name, Pointer<Uint64> value) =>
       (ptr.ref.vtable + 9)
           .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<Utf16> name,
-                          Pointer<Uint64> value)>>>()
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<Utf16> name,
+                  Pointer<Uint64> value,
+                )
+              >
+            >
+          >()
           .value
           .asFunction<
-              int Function(Pointer, Pointer<Utf16> name,
-                  Pointer<Uint64> value)>()(ptr.ref.lpVtbl, name, value);
+            int Function(Pointer, Pointer<Utf16> name, Pointer<Uint64> value)
+          >()(ptr.ref.lpVtbl, name, value);
 
-  int getApplications(
-          Pointer<Pointer<COMObject>> applications) =>
-      (ptr.ref.vtable +
-                  10)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer,
-                              Pointer<Pointer<COMObject>> applications)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, Pointer<Pointer<COMObject>> applications)>()(
-          ptr.ref.lpVtbl, applications);
+  int getApplications(Pointer<Pointer<COMObject>> applications) =>
+      (ptr.ref.vtable + 10)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<Pointer<COMObject>> applications,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<COMObject>> applications)
+          >()(ptr.ref.lpVtbl, applications);
 
-  int getStream(
-          Pointer<Pointer<COMObject>> manifestStream) =>
-      (ptr.ref.vtable + 11)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer,
-                              Pointer<Pointer<COMObject>> manifestStream)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, Pointer<Pointer<COMObject>> manifestStream)>()(
-          ptr.ref.lpVtbl, manifestStream);
+  int getStream(Pointer<Pointer<COMObject>> manifestStream) => (ptr.ref.vtable +
+          11)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<Pointer<COMObject>> manifestStream)
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(Pointer, Pointer<Pointer<COMObject>> manifestStream)
+      >()(ptr.ref.lpVtbl, manifestStream);
 }

@@ -40,14 +40,15 @@ class IAppxManifestReader2 extends IAppxManifestReader {
 
   int getQualifiedResources(Pointer<Pointer<COMObject>> resources) =>
       (ptr.ref.vtable + 12)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer,
-                              Pointer<Pointer<COMObject>> resources)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, Pointer<Pointer<COMObject>> resources)>()(
-          ptr.ref.lpVtbl, resources);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<COMObject>> resources)
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<COMObject>> resources)
+          >()(ptr.ref.lpVtbl, resources);
 }

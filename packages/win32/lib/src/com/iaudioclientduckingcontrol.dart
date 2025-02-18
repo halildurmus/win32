@@ -37,11 +37,14 @@ class IAudioClientDuckingControl extends IUnknown {
 
   factory IAudioClientDuckingControl.from(IUnknown interface) =>
       IAudioClientDuckingControl(
-          interface.toInterface(IID_IAudioClientDuckingControl));
+        interface.toInterface(IID_IAudioClientDuckingControl),
+      );
 
   int setDuckingOptionsForCurrentStream(int options) => (ptr.ref.vtable + 3)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 options)>>>()
       .value
-      .asFunction<
-          int Function(Pointer, int options)>()(ptr.ref.lpVtbl, options);
+      .asFunction<int Function(Pointer, int options)>()(
+    ptr.ref.lpVtbl,
+    options,
+  );
 }

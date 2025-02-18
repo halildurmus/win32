@@ -36,33 +36,54 @@ class IUIAutomationTextPattern2 extends IUIAutomationTextPattern {
 
   factory IUIAutomationTextPattern2.from(IUnknown interface) =>
       IUIAutomationTextPattern2(
-          interface.toInterface(IID_IUIAutomationTextPattern2));
+        interface.toInterface(IID_IUIAutomationTextPattern2),
+      );
 
   int rangeFromAnnotation(
-          Pointer<COMObject> annotation, Pointer<Pointer<COMObject>> range) =>
-      (ptr.ref.vtable + 9)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<COMObject> annotation,
-                              Pointer<Pointer<COMObject>> range)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<COMObject> annotation,
-                      Pointer<Pointer<COMObject>> range)>()(
-          ptr.ref.lpVtbl, annotation, range);
+    Pointer<COMObject> annotation,
+    Pointer<Pointer<COMObject>> range,
+  ) => (ptr.ref.vtable + 9)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<COMObject> annotation,
+              Pointer<Pointer<COMObject>> range,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<COMObject> annotation,
+          Pointer<Pointer<COMObject>> range,
+        )
+      >()(ptr.ref.lpVtbl, annotation, range);
 
   int getCaretRange(
-          Pointer<Int32> isActive, Pointer<Pointer<COMObject>> range) =>
-      (ptr.ref.vtable + 10)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> isActive,
-                              Pointer<Pointer<COMObject>> range)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Int32> isActive,
-                      Pointer<Pointer<COMObject>> range)>()(
-          ptr.ref.lpVtbl, isActive, range);
+    Pointer<Int32> isActive,
+    Pointer<Pointer<COMObject>> range,
+  ) => (ptr.ref.vtable + 10)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<Int32> isActive,
+              Pointer<Pointer<COMObject>> range,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<Int32> isActive,
+          Pointer<Pointer<COMObject>> range,
+        )
+      >()(ptr.ref.lpVtbl, isActive, range);
 }

@@ -20,9 +20,10 @@ class WindowRoundingSelectorState extends State<WindowRoundingSelector> {
     try {
       final hwnd = GetForegroundWindow();
       final attr = DWMWINDOWATTRIBUTE.DWMWA_WINDOW_CORNER_PREFERENCE;
-      pref.value = isRounded
-          ? DWM_WINDOW_CORNER_PREFERENCE.DWMWCP_ROUND
-          : DWM_WINDOW_CORNER_PREFERENCE.DWMWCP_DONOTROUND;
+      pref.value =
+          isRounded
+              ? DWM_WINDOW_CORNER_PREFERENCE.DWMWCP_ROUND
+              : DWM_WINDOW_CORNER_PREFERENCE.DWMWCP_DONOTROUND;
 
       DwmSetWindowAttribute(hwnd, attr, pref, sizeOf<DWORD>());
 

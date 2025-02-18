@@ -41,46 +41,54 @@ class ISimpleAudioVolume extends IUnknown {
   factory ISimpleAudioVolume.from(IUnknown interface) =>
       ISimpleAudioVolume(interface.toInterface(IID_ISimpleAudioVolume));
 
-  int setMasterVolume(
-          double fLevel, Pointer<GUID> EventContext) =>
+  int setMasterVolume(double fLevel, Pointer<GUID> EventContext) =>
       (ptr.ref.vtable + 3)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Float fLevel,
-                              Pointer<GUID> EventContext)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, double fLevel, Pointer<GUID> EventContext)>()(
-          ptr.ref.lpVtbl, fLevel, EventContext);
-
-  int getMasterVolume(Pointer<Float> pfLevel) => (ptr.ref.vtable + 4)
           .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<Float> pfLevel)>>>()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Float> pfLevel)>()(
-      ptr.ref.lpVtbl, pfLevel);
-
-  int setMute(int bMute, Pointer<GUID> EventContext) => (ptr.ref.vtable + 5)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Int32 bMute, Pointer<GUID> EventContext)>>>()
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Float fLevel,
+                  Pointer<GUID> EventContext,
+                )
+              >
+            >
+          >()
           .value
           .asFunction<
-              int Function(Pointer, int bMute, Pointer<GUID> EventContext)>()(
-      ptr.ref.lpVtbl, bMute, EventContext);
+            int Function(Pointer, double fLevel, Pointer<GUID> EventContext)
+          >()(ptr.ref.lpVtbl, fLevel, EventContext);
+
+  int getMasterVolume(Pointer<Float> pfLevel) => (ptr.ref.vtable + 4)
+      .cast<
+        Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Float> pfLevel)>>
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Float> pfLevel)>()(
+    ptr.ref.lpVtbl,
+    pfLevel,
+  );
+
+  int setMute(int bMute, Pointer<GUID> EventContext) => (ptr.ref.vtable + 5)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Int32 bMute, Pointer<GUID> EventContext)
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(Pointer, int bMute, Pointer<GUID> EventContext)
+      >()(ptr.ref.lpVtbl, bMute, EventContext);
 
   int getMute(Pointer<Int32> pbMute) => (ptr.ref.vtable + 6)
       .cast<
-          Pointer<
-              NativeFunction<Int32 Function(Pointer, Pointer<Int32> pbMute)>>>()
+        Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Int32> pbMute)>>
+      >()
       .value
-      .asFunction<
-          int Function(
-              Pointer, Pointer<Int32> pbMute)>()(ptr.ref.lpVtbl, pbMute);
+      .asFunction<int Function(Pointer, Pointer<Int32> pbMute)>()(
+    ptr.ref.lpVtbl,
+    pbMute,
+  );
 }

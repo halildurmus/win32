@@ -11,10 +11,12 @@ import 'dart:io';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-void printCommState(DCB dcb) => print('BaudRate = ${dcb.BaudRate}, '
-    'ByteSize = ${dcb.ByteSize}, '
-    'Parity = ${dcb.Parity}, '
-    'StopBits = ${dcb.StopBits}');
+void printCommState(DCB dcb) => print(
+  'BaudRate = ${dcb.BaudRate}, '
+  'ByteSize = ${dcb.ByteSize}, '
+  'Parity = ${dcb.Parity}, '
+  'StopBits = ${dcb.StopBits}',
+);
 
 void main() {
   final pcCommPort = 'COM1'.toNativeUtf16();
@@ -22,14 +24,14 @@ void main() {
 
   try {
     final hCom = CreateFile(
-        pcCommPort,
-        GENERIC_ACCESS_RIGHTS.GENERIC_READ |
-            GENERIC_ACCESS_RIGHTS.GENERIC_WRITE,
-        0,
-        nullptr,
-        FILE_CREATION_DISPOSITION.OPEN_EXISTING,
-        0,
-        NULL);
+      pcCommPort,
+      GENERIC_ACCESS_RIGHTS.GENERIC_READ | GENERIC_ACCESS_RIGHTS.GENERIC_WRITE,
+      0,
+      nullptr,
+      FILE_CREATION_DISPOSITION.OPEN_EXISTING,
+      0,
+      NULL,
+    );
 
     if (hCom == INVALID_HANDLE_VALUE) {
       print('Invalid handle.');

@@ -33,7 +33,11 @@ class Volumes {
     try {
       charCount.value = MAX_PATH;
       final success = GetVolumePathNamesForVolumeName(
-          volumeNamePtr, pathNamePtr, charCount.value, charCount);
+        volumeNamePtr,
+        pathNamePtr,
+        charCount.value,
+        charCount,
+      );
 
       if (success != FALSE) {
         if (charCount.value > 1) {
@@ -44,7 +48,8 @@ class Volumes {
       } else {
         final error = GetLastError();
         throw Exception(
-            'GetVolumePathNamesForVolumeName failed with error code $error');
+          'GetVolumePathNamesForVolumeName failed with error code $error',
+        );
       }
       return paths;
     } finally {
@@ -71,16 +76,24 @@ class Volumes {
       final shortVolumeNamePtr = shortVolumeName.toNativeUtf16();
 
       final deviceName = wsalloc(MAX_PATH);
-      final charCount =
-          QueryDosDevice(shortVolumeNamePtr, deviceName, MAX_PATH);
+      final charCount = QueryDosDevice(
+        shortVolumeNamePtr,
+        deviceName,
+        MAX_PATH,
+      );
 
       if (charCount == 0) {
         error = GetLastError();
         throw Exception('QueryDosDevice failed with error code $error');
       }
 
-      _volumes.add(Volume(
-          deviceName.toDartString(), volumeName, getVolumePaths(volumeName)));
+      _volumes.add(
+        Volume(
+          deviceName.toDartString(),
+          volumeName,
+          getVolumePaths(volumeName),
+        ),
+      );
 
       final success = FindNextVolume(hFindVolume, volumeNamePtr, MAX_PATH);
       if (success == FALSE) {

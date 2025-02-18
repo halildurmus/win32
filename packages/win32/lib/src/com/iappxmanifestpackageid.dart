@@ -37,92 +37,117 @@ class IAppxManifestPackageId extends IUnknown {
       IAppxManifestPackageId(interface.toInterface(IID_IAppxManifestPackageId));
 
   int getName(Pointer<Pointer<Utf16>> name) => (ptr.ref.vtable + 3)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<Pointer<Utf16>> name)>>>()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> name)>()(
-      ptr.ref.lpVtbl, name);
+      .cast<
+        Pointer<
+          NativeFunction<Int32 Function(Pointer, Pointer<Pointer<Utf16>> name)>
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> name)>()(
+    ptr.ref.lpVtbl,
+    name,
+  );
 
   int getArchitecture(Pointer<Int32> architecture) => (ptr.ref.vtable + 4)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<Int32> architecture)>>>()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Int32> architecture)>()(
-      ptr.ref.lpVtbl, architecture);
+      .cast<
+        Pointer<
+          NativeFunction<Int32 Function(Pointer, Pointer<Int32> architecture)>
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Int32> architecture)>()(
+    ptr.ref.lpVtbl,
+    architecture,
+  );
 
   int getPublisher(Pointer<Pointer<Utf16>> publisher) => (ptr.ref.vtable + 5)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<Pointer<Utf16>> publisher)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, Pointer<Pointer<Utf16>> publisher)>()(
-      ptr.ref.lpVtbl, publisher);
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<Pointer<Utf16>> publisher)
+          >
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> publisher)>()(
+    ptr.ref.lpVtbl,
+    publisher,
+  );
 
-  int getVersion(Pointer<Uint64> packageVersion) =>
-      (ptr.ref.vtable + 6)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Uint64> packageVersion)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Uint64> packageVersion)>()(
-          ptr.ref.lpVtbl, packageVersion);
+  int getVersion(Pointer<Uint64> packageVersion) => (ptr.ref.vtable + 6)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<Uint64> packageVersion)
+          >
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Uint64> packageVersion)>()(
+    ptr.ref.lpVtbl,
+    packageVersion,
+  );
 
   int getResourceId(Pointer<Pointer<Utf16>> resourceId) => (ptr.ref.vtable + 7)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<Pointer<Utf16>> resourceId)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, Pointer<Pointer<Utf16>> resourceId)>()(
-      ptr.ref.lpVtbl, resourceId);
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<Pointer<Utf16>> resourceId)
+          >
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> resourceId)>()(
+    ptr.ref.lpVtbl,
+    resourceId,
+  );
 
   int comparePublisher(Pointer<Utf16> other, Pointer<Int32> isSame) =>
       (ptr.ref.vtable + 8)
           .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<Utf16> other,
-                          Pointer<Int32> isSame)>>>()
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<Utf16> other,
+                  Pointer<Int32> isSame,
+                )
+              >
+            >
+          >()
           .value
           .asFunction<
-              int Function(Pointer, Pointer<Utf16> other,
-                  Pointer<Int32> isSame)>()(ptr.ref.lpVtbl, other, isSame);
+            int Function(Pointer, Pointer<Utf16> other, Pointer<Int32> isSame)
+          >()(ptr.ref.lpVtbl, other, isSame);
 
   int getPackageFullName(Pointer<Pointer<Utf16>> packageFullName) =>
       (ptr.ref.vtable + 9)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer,
-                              Pointer<Pointer<Utf16>> packageFullName)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, Pointer<Pointer<Utf16>> packageFullName)>()(
-          ptr.ref.lpVtbl, packageFullName);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<Utf16>> packageFullName)
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<Utf16>> packageFullName)
+          >()(ptr.ref.lpVtbl, packageFullName);
 
   int getPackageFamilyName(Pointer<Pointer<Utf16>> packageFamilyName) =>
       (ptr.ref.vtable + 10)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer,
-                              Pointer<Pointer<Utf16>> packageFamilyName)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, Pointer<Pointer<Utf16>> packageFamilyName)>()(
-          ptr.ref.lpVtbl, packageFamilyName);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<Pointer<Utf16>> packageFamilyName,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<Utf16>> packageFamilyName)
+          >()(ptr.ref.lpVtbl, packageFamilyName);
 }

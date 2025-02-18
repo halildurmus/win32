@@ -6,13 +6,15 @@ class ComMethodProjection extends MethodProjection {
 
   @override
   String get nativeParams => [
-        'Pointer',
-        ...parameters.map((param) => switch (param.type.dartType) {
-              'Pointer<Pointer<COMObject>>' when method.isGetProperty =>
-                'Pointer<COMObject> ${safeIdentifierForString(param.name)}',
-              _ => param.ffiProjection
-            }),
-      ].join(', ');
+    'Pointer',
+    ...parameters.map(
+      (param) => switch (param.type.dartType) {
+        'Pointer<Pointer<COMObject>>' when method.isGetProperty =>
+          'Pointer<COMObject> ${safeIdentifierForString(param.name)}',
+        _ => param.ffiProjection,
+      },
+    ),
+  ].join(', ');
 
   @override
   String get nativePrototype =>
@@ -20,22 +22,24 @@ class ComMethodProjection extends MethodProjection {
 
   @override
   String get dartParams => [
-        'Pointer',
-        ...parameters.map((param) => switch (param.type.dartType) {
-              'Pointer<Pointer<COMObject>>' when method.isGetProperty =>
-                'Pointer<COMObject> ${safeIdentifierForString(param.name)}',
-              _ => param.dartProjection
-            }),
-      ].join(', ');
+    'Pointer',
+    ...parameters.map(
+      (param) => switch (param.type.dartType) {
+        'Pointer<Pointer<COMObject>>' when method.isGetProperty =>
+          'Pointer<COMObject> ${safeIdentifierForString(param.name)}',
+        _ => param.dartProjection,
+      },
+    ),
+  ].join(', ');
 
   @override
   String get dartPrototype => '${returnType.dartType} Function($dartParams)';
 
   @override
   String get identifiers => [
-        'ptr.ref.lpVtbl',
-        ...parameters.map((param) => param.identifier)
-      ].join(', ');
+    'ptr.ref.lpVtbl',
+    ...parameters.map((param) => param.identifier),
+  ].join(', ');
 
   @override
   String toString() {

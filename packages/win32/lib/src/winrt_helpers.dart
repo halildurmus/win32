@@ -32,23 +32,30 @@ List<String> getInterfaces(IInspectable object) {
 
   try {
     final hr = (object.ptr.ref.vtable + 3)
-            .cast<
-                Pointer<
-                    NativeFunction<
-                        Int32 Function(
-                            VTablePointer lpVtbl,
-                            Pointer<Uint32> iidCount,
-                            Pointer<Pointer<GUID>> iids)>>>()
-            .value
-            .asFunction<
-                int Function(VTablePointer lpVtbl, Pointer<Uint32> iidCount,
-                    Pointer<Pointer<GUID>> iids)>()(
-        object.ptr.ref.lpVtbl, pIIDCount, pIIDs);
+        .cast<
+          Pointer<
+            NativeFunction<
+              Int32 Function(
+                VTablePointer lpVtbl,
+                Pointer<Uint32> iidCount,
+                Pointer<Pointer<GUID>> iids,
+              )
+            >
+          >
+        >()
+        .value
+        .asFunction<
+          int Function(
+            VTablePointer lpVtbl,
+            Pointer<Uint32> iidCount,
+            Pointer<Pointer<GUID>> iids,
+          )
+        >()(object.ptr.ref.lpVtbl, pIIDCount, pIIDs);
 
     if (FAILED(hr)) throw WindowsException(hr);
 
     return [
-      for (var i = 0; i < pIIDCount.value; i++) pIIDs.value[i].toString()
+      for (var i = 0; i < pIIDCount.value; i++) pIIDs.value[i].toString(),
     ];
   } finally {
     free(pIIDCount);
@@ -63,16 +70,17 @@ String getClassName(IInspectable object) {
 
   try {
     final hr = (object.ptr.ref.vtable + 4)
-            .cast<
-                Pointer<
-                    NativeFunction<
-                        Int32 Function(VTablePointer lpVtbl,
-                            Pointer<IntPtr> className)>>>()
-            .value
-            .asFunction<
-                int Function(
-                    VTablePointer lpVtbl, Pointer<IntPtr> className)>()(
-        object.ptr.ref.lpVtbl, hClassName);
+        .cast<
+          Pointer<
+            NativeFunction<
+              Int32 Function(VTablePointer lpVtbl, Pointer<IntPtr> className)
+            >
+          >
+        >()
+        .value
+        .asFunction<
+          int Function(VTablePointer lpVtbl, Pointer<IntPtr> className)
+        >()(object.ptr.ref.lpVtbl, hClassName);
 
     if (FAILED(hr)) throw WindowsException(hr);
 
@@ -90,16 +98,17 @@ TrustLevel getTrustLevel(IInspectable object) {
 
   try {
     final hr = (object.ptr.ref.vtable + 5)
-            .cast<
-                Pointer<
-                    NativeFunction<
-                        Int32 Function(VTablePointer lpVtbl,
-                            Pointer<Int32> trustLevel)>>>()
-            .value
-            .asFunction<
-                int Function(
-                    VTablePointer lpVtbl, Pointer<Int32> trustLevel)>()(
-        object.ptr.ref.lpVtbl, pTrustLevel);
+        .cast<
+          Pointer<
+            NativeFunction<
+              Int32 Function(VTablePointer lpVtbl, Pointer<Int32> trustLevel)
+            >
+          >
+        >()
+        .value
+        .asFunction<
+          int Function(VTablePointer lpVtbl, Pointer<Int32> trustLevel)
+        >()(object.ptr.ref.lpVtbl, pTrustLevel);
 
     if (FAILED(hr)) throw WindowsException(hr);
 

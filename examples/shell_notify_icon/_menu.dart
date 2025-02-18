@@ -13,7 +13,13 @@ void show({required int hWndParent}) {
 
   SetForegroundWindow(hWndParent);
   TrackPopupMenuEx(
-      hMenu, _contextMenuFlags, mousePos.x, mousePos.y, hWndParent, nullptr);
+    hMenu,
+    _contextMenuFlags,
+    mousePos.x,
+    mousePos.y,
+    hWndParent,
+    nullptr,
+  );
 
   DestroyMenu(hMenu);
 }

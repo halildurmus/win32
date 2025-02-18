@@ -2,9 +2,9 @@ import 'package:dart_style/dart_style.dart';
 import 'package:generator/generator.dart';
 import 'package:winmd/winmd.dart';
 
-void printCallback(
-    [String type =
-        'Windows.Win32.System.StationsAndDesktops.DESKTOPENUMPROCW']) {
+void printCallback([
+  String type = 'Windows.Win32.System.StationsAndDesktops.DESKTOPENUMPROCW',
+]) {
   final typeDef = MetadataStore.getMetadataForType(type);
   if (typeDef != null && typeDef.isDelegate) {
     final callbackProjection = CallbackProjection(typeDef);
@@ -25,8 +25,9 @@ void printFunction([String name = 'BroadcastSystemMessageW']) {
   }
 }
 
-void printStruct(
-    [String type = 'Windows.Win32.Graphics.Gdi.BITMAPFILEHEADER']) {
+void printStruct([
+  String type = 'Windows.Win32.Graphics.Gdi.BITMAPFILEHEADER',
+]) {
   final typeDef = MetadataStore.getMetadataForType(type);
   if (typeDef != null && typeDef.isStruct) {
     final structProjection = StructProjection(typeDef, lastComponent(type));
@@ -34,8 +35,9 @@ void printStruct(
   }
 }
 
-void printComInterface(
-    [String type = 'Windows.Win32.UI.Shell.IFileOpenDialog']) {
+void printComInterface([
+  String type = 'Windows.Win32.UI.Shell.IFileOpenDialog',
+]) {
   final typeDef = MetadataStore.getMetadataForType(type);
   if (typeDef != null && typeDef.isInterface) {
     final interfaceProjection = ComInterfaceProjection(typeDef);
@@ -72,9 +74,9 @@ void printComSetProperty(String interface, String propertyName) {
 
 extension on Object {
   String format() => DartFormatter(
-        languageVersion: DartFormatter.latestLanguageVersion,
-        lineEnding: '\n',
-      ).format(toString());
+    languageVersion: DartFormatter.latestLanguageVersion,
+    lineEnding: '\n',
+  ).format(toString());
 }
 
 void main() async {

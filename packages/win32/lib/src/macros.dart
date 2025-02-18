@@ -101,8 +101,9 @@ int HRESULT_FROM_WIN32(int x) => (x <= 0
 // #define CTL_CODE( DeviceType, Function, Method, Access ) (
 //   ((DeviceType) << 16) | ((Access) << 14) | ((Function) << 2) | (Method)
 int CTL_CODE(int DeviceType, int Function, int Method, int Access) =>
-    ((DeviceType << 16) | (Access << 14) | (Function << 2) | Method)
-        .toSigned(32);
+    ((DeviceType << 16) | (Access << 14) | (Function << 2) | Method).toSigned(
+      32,
+    );
 
 /// Retrieves the parameters to WM_SYSCOMMAND.
 ///

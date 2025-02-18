@@ -37,7 +37,8 @@ class IUIAutomationSelectionItemPattern extends IUnknown {
 
   factory IUIAutomationSelectionItemPattern.from(IUnknown interface) =>
       IUIAutomationSelectionItemPattern(
-          interface.toInterface(IID_IUIAutomationSelectionItemPattern));
+        interface.toInterface(IID_IUIAutomationSelectionItemPattern),
+      );
 
   int select() => (ptr.ref.vtable + 3)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
@@ -59,13 +60,16 @@ class IUIAutomationSelectionItemPattern extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 6)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -80,13 +84,16 @@ class IUIAutomationSelectionItemPattern extends IUnknown {
     final retValuePtr = calloc<COMObject>();
 
     final hr = (ptr.ref.vtable + 7)
-            .cast<
-                Pointer<
-                    NativeFunction<
-                        Int32 Function(Pointer, Pointer<COMObject> retVal)>>>()
-            .value
-            .asFunction<int Function(Pointer, Pointer<COMObject> retVal)>()(
-        ptr.ref.lpVtbl, retValuePtr);
+        .cast<
+          Pointer<
+            NativeFunction<Int32 Function(Pointer, Pointer<COMObject> retVal)>
+          >
+        >()
+        .value
+        .asFunction<int Function(Pointer, Pointer<COMObject> retVal)>()(
+      ptr.ref.lpVtbl,
+      retValuePtr,
+    );
 
     if (FAILED(hr)) {
       free(retValuePtr);
@@ -101,13 +108,16 @@ class IUIAutomationSelectionItemPattern extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 8)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -122,13 +132,16 @@ class IUIAutomationSelectionItemPattern extends IUnknown {
     final retValuePtr = calloc<COMObject>();
 
     final hr = (ptr.ref.vtable + 9)
-            .cast<
-                Pointer<
-                    NativeFunction<
-                        Int32 Function(Pointer, Pointer<COMObject> retVal)>>>()
-            .value
-            .asFunction<int Function(Pointer, Pointer<COMObject> retVal)>()(
-        ptr.ref.lpVtbl, retValuePtr);
+        .cast<
+          Pointer<
+            NativeFunction<Int32 Function(Pointer, Pointer<COMObject> retVal)>
+          >
+        >()
+        .value
+        .asFunction<int Function(Pointer, Pointer<COMObject> retVal)>()(
+      ptr.ref.lpVtbl,
+      retValuePtr,
+    );
 
     if (FAILED(hr)) {
       free(retValuePtr);

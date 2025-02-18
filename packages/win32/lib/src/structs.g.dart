@@ -536,7 +536,7 @@ base class BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS extends Struct {
   external int authenticationRequirements;
 
   external _BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS__Anonymous_e__Union
-      Anonymous;
+  Anonymous;
 }
 
 /// {@category struct}
@@ -980,16 +980,16 @@ base class BTH_LE_GATT_DESCRIPTOR_VALUE extends Struct {
 /// {@category struct}
 sealed class _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union extends Union {
   external _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicExtendedProperties_e__Struct
-      CharacteristicExtendedProperties;
+  CharacteristicExtendedProperties;
 
   external _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ClientCharacteristicConfiguration_e__Struct
-      ClientCharacteristicConfiguration;
+  ClientCharacteristicConfiguration;
 
   external _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ServerCharacteristicConfiguration_e__Struct
-      ServerCharacteristicConfiguration;
+  ServerCharacteristicConfiguration;
 
   external _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicFormat_e__Struct
-      CharacteristicFormat;
+  CharacteristicFormat;
 }
 
 /// {@category struct}
@@ -1029,14 +1029,16 @@ sealed class _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ClientCharacteri
 
 extension BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union_Extension_1
     on BTH_LE_GATT_DESCRIPTOR_VALUE {
-  int get IsSubscribeToNotification => this
-      .Anonymous
-      .ClientCharacteristicConfiguration
-      .IsSubscribeToNotification;
-  set IsSubscribeToNotification(int value) => this
-      .Anonymous
-      .ClientCharacteristicConfiguration
-      .IsSubscribeToNotification = value;
+  int get IsSubscribeToNotification =>
+      this
+          .Anonymous
+          .ClientCharacteristicConfiguration
+          .IsSubscribeToNotification;
+  set IsSubscribeToNotification(int value) =>
+      this
+          .Anonymous
+          .ClientCharacteristicConfiguration
+          .IsSubscribeToNotification = value;
 
   int get IsSubscribeToIndication =>
       this.Anonymous.ClientCharacteristicConfiguration.IsSubscribeToIndication;
@@ -1103,35 +1105,35 @@ extension BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union_Extension_3
 extension BTH_LE_GATT_DESCRIPTOR_VALUE_Extension
     on BTH_LE_GATT_DESCRIPTOR_VALUE {
   _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicExtendedProperties_e__Struct
-      get CharacteristicExtendedProperties =>
-          this.Anonymous.CharacteristicExtendedProperties;
+  get CharacteristicExtendedProperties =>
+      this.Anonymous.CharacteristicExtendedProperties;
   set CharacteristicExtendedProperties(
-          _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicExtendedProperties_e__Struct
-              value) =>
-      this.Anonymous.CharacteristicExtendedProperties = value;
+    _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicExtendedProperties_e__Struct
+    value,
+  ) => this.Anonymous.CharacteristicExtendedProperties = value;
 
   _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ClientCharacteristicConfiguration_e__Struct
-      get ClientCharacteristicConfiguration =>
-          this.Anonymous.ClientCharacteristicConfiguration;
+  get ClientCharacteristicConfiguration =>
+      this.Anonymous.ClientCharacteristicConfiguration;
   set ClientCharacteristicConfiguration(
-          _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ClientCharacteristicConfiguration_e__Struct
-              value) =>
-      this.Anonymous.ClientCharacteristicConfiguration = value;
+    _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ClientCharacteristicConfiguration_e__Struct
+    value,
+  ) => this.Anonymous.ClientCharacteristicConfiguration = value;
 
   _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ServerCharacteristicConfiguration_e__Struct
-      get ServerCharacteristicConfiguration =>
-          this.Anonymous.ServerCharacteristicConfiguration;
+  get ServerCharacteristicConfiguration =>
+      this.Anonymous.ServerCharacteristicConfiguration;
   set ServerCharacteristicConfiguration(
-          _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ServerCharacteristicConfiguration_e__Struct
-              value) =>
-      this.Anonymous.ServerCharacteristicConfiguration = value;
+    _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ServerCharacteristicConfiguration_e__Struct
+    value,
+  ) => this.Anonymous.ServerCharacteristicConfiguration = value;
 
   _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicFormat_e__Struct
-      get CharacteristicFormat => this.Anonymous.CharacteristicFormat;
+  get CharacteristicFormat => this.Anonymous.CharacteristicFormat;
   set CharacteristicFormat(
-          _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicFormat_e__Struct
-              value) =>
-      this.Anonymous.CharacteristicFormat = value;
+    _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicFormat_e__Struct
+    value,
+  ) => this.Anonymous.CharacteristicFormat = value;
 }
 
 /// The BTH_LE_GATT_SERVICE structure describes a Bluetooth Low Energy (LE)
@@ -2955,7 +2957,7 @@ sealed class _DISPLAYCONFIG_PATH_SOURCE_INFO__Anonymous_e__Union extends Union {
   external int modeInfoIdx;
 
   external _DISPLAYCONFIG_PATH_SOURCE_INFO__Anonymous_e__Union__Anonymous_e__Struct
-      Anonymous;
+  Anonymous;
 }
 
 /// {@category struct}
@@ -2977,11 +2979,11 @@ extension DISPLAYCONFIG_PATH_SOURCE_INFO_Extension
   set modeInfoIdx(int value) => this.Anonymous.modeInfoIdx = value;
 
   _DISPLAYCONFIG_PATH_SOURCE_INFO__Anonymous_e__Union__Anonymous_e__Struct
-      get Anonymous => this.Anonymous.Anonymous;
+  get Anonymous => this.Anonymous.Anonymous;
   set Anonymous(
-          _DISPLAYCONFIG_PATH_SOURCE_INFO__Anonymous_e__Union__Anonymous_e__Struct
-              value) =>
-      this.Anonymous.Anonymous = value;
+    _DISPLAYCONFIG_PATH_SOURCE_INFO__Anonymous_e__Union__Anonymous_e__Struct
+    value,
+  ) => this.Anonymous.Anonymous = value;
 }
 
 /// The DISPLAYCONFIG_PATH_TARGET_INFO structure contains target information
@@ -3023,7 +3025,7 @@ sealed class _DISPLAYCONFIG_PATH_TARGET_INFO__Anonymous_e__Union extends Union {
   external int modeInfoIdx;
 
   external _DISPLAYCONFIG_PATH_TARGET_INFO__Anonymous_e__Union__Anonymous_e__Struct
-      Anonymous;
+  Anonymous;
 }
 
 /// {@category struct}
@@ -3045,11 +3047,11 @@ extension DISPLAYCONFIG_PATH_TARGET_INFO_Extension
   set modeInfoIdx(int value) => this.Anonymous.modeInfoIdx = value;
 
   _DISPLAYCONFIG_PATH_TARGET_INFO__Anonymous_e__Union__Anonymous_e__Struct
-      get Anonymous => this.Anonymous.Anonymous;
+  get Anonymous => this.Anonymous.Anonymous;
   set Anonymous(
-          _DISPLAYCONFIG_PATH_TARGET_INFO__Anonymous_e__Union__Anonymous_e__Struct
-              value) =>
-      this.Anonymous.Anonymous = value;
+    _DISPLAYCONFIG_PATH_TARGET_INFO__Anonymous_e__Union__Anonymous_e__Struct
+    value,
+  ) => this.Anonymous.Anonymous = value;
 }
 
 /// The DISPLAYCONFIG_RATIONAL structure describes a fractional value that
@@ -3116,7 +3118,7 @@ base class DISPLAYCONFIG_VIDEO_SIGNAL_INFO extends Struct {
 sealed class _DISPLAYCONFIG_VIDEO_SIGNAL_INFO__Anonymous_e__Union
     extends Union {
   external _DISPLAYCONFIG_VIDEO_SIGNAL_INFO__Anonymous_e__Union__AdditionalSignalInfo_e__Struct
-      AdditionalSignalInfo;
+  AdditionalSignalInfo;
 
   @Uint32()
   external int videoStandard;
@@ -3139,11 +3141,11 @@ extension DISPLAYCONFIG_VIDEO_SIGNAL_INFO__Anonymous_e__Union_Extension
 extension DISPLAYCONFIG_VIDEO_SIGNAL_INFO_Extension
     on DISPLAYCONFIG_VIDEO_SIGNAL_INFO {
   _DISPLAYCONFIG_VIDEO_SIGNAL_INFO__Anonymous_e__Union__AdditionalSignalInfo_e__Struct
-      get AdditionalSignalInfo => this.Anonymous.AdditionalSignalInfo;
+  get AdditionalSignalInfo => this.Anonymous.AdditionalSignalInfo;
   set AdditionalSignalInfo(
-          _DISPLAYCONFIG_VIDEO_SIGNAL_INFO__Anonymous_e__Union__AdditionalSignalInfo_e__Struct
-              value) =>
-      this.Anonymous.AdditionalSignalInfo = value;
+    _DISPLAYCONFIG_VIDEO_SIGNAL_INFO__Anonymous_e__Union__AdditionalSignalInfo_e__Struct
+    value,
+  ) => this.Anonymous.AdditionalSignalInfo = value;
 
   int get videoStandard => this.Anonymous.videoStandard;
   set videoStandard(int value) => this.Anonymous.videoStandard = value;
@@ -3778,7 +3780,7 @@ base class EXCEPINFO extends Struct {
   external Pointer pvReserved;
 
   external Pointer<NativeFunction<LPEXCEPFINO_DEFERRED_FILLIN>>
-      pfnDeferredFillIn;
+  pfnDeferredFillIn;
 
   @Int32()
   external int scode;
@@ -4366,8 +4368,8 @@ extension INPUT_TRANSFORM_Extension on INPUT_TRANSFORM {
   _INPUT_TRANSFORM__Anonymous_e__Union__Anonymous_e__Struct get Anonymous =>
       this.Anonymous.Anonymous;
   set Anonymous(
-          _INPUT_TRANSFORM__Anonymous_e__Union__Anonymous_e__Struct value) =>
-      this.Anonymous.Anonymous = value;
+    _INPUT_TRANSFORM__Anonymous_e__Union__Anonymous_e__Struct value,
+  ) => this.Anonymous.Anonymous = value;
 
   Array<Float> get m => this.Anonymous.m;
   set m(Array<Float> value) => this.Anonymous.m = value;
@@ -4551,7 +4553,7 @@ sealed class _IP_ADAPTER_ADDRESSES_LH__Anonymous1_e__Union extends Union {
   external int Alignment;
 
   external _IP_ADAPTER_ADDRESSES_LH__Anonymous1_e__Union__Anonymous_e__Struct
-      Anonymous;
+  Anonymous;
 }
 
 /// {@category struct}
@@ -4578,11 +4580,10 @@ extension IP_ADAPTER_ADDRESSES_LH_Extension on IP_ADAPTER_ADDRESSES_LH {
   set Alignment(int value) => this.Anonymous1.Alignment = value;
 
   _IP_ADAPTER_ADDRESSES_LH__Anonymous1_e__Union__Anonymous_e__Struct
-      get Anonymous => this.Anonymous1.Anonymous;
+  get Anonymous => this.Anonymous1.Anonymous;
   set Anonymous(
-          _IP_ADAPTER_ADDRESSES_LH__Anonymous1_e__Union__Anonymous_e__Struct
-              value) =>
-      this.Anonymous1.Anonymous = value;
+    _IP_ADAPTER_ADDRESSES_LH__Anonymous1_e__Union__Anonymous_e__Struct value,
+  ) => this.Anonymous1.Anonymous = value;
 }
 
 /// {@category struct}
@@ -4591,7 +4592,7 @@ sealed class _IP_ADAPTER_ADDRESSES_LH__Anonymous2_e__Union extends Union {
   external int Flags;
 
   external _IP_ADAPTER_ADDRESSES_LH__Anonymous2_e__Union__Anonymous_e__Struct
-      Anonymous;
+  Anonymous;
 }
 
 /// {@category struct}
@@ -4612,11 +4613,10 @@ extension IP_ADAPTER_ADDRESSES_LH_Extension_1 on IP_ADAPTER_ADDRESSES_LH {
   set Flags(int value) => this.Anonymous2.Flags = value;
 
   _IP_ADAPTER_ADDRESSES_LH__Anonymous2_e__Union__Anonymous_e__Struct
-      get Anonymous => this.Anonymous2.Anonymous;
+  get Anonymous => this.Anonymous2.Anonymous;
   set Anonymous(
-          _IP_ADAPTER_ADDRESSES_LH__Anonymous2_e__Union__Anonymous_e__Struct
-              value) =>
-      this.Anonymous2.Anonymous = value;
+    _IP_ADAPTER_ADDRESSES_LH__Anonymous2_e__Union__Anonymous_e__Struct value,
+  ) => this.Anonymous2.Anonymous = value;
 }
 
 /// The IP_ADAPTER_ANYCAST_ADDRESS structure stores a single anycast IP
@@ -4637,7 +4637,7 @@ sealed class _IP_ADAPTER_ANYCAST_ADDRESS_XP__Anonymous_e__Union extends Union {
   external int Alignment;
 
   external _IP_ADAPTER_ANYCAST_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
-      Anonymous;
+  Anonymous;
 }
 
 /// {@category struct}
@@ -4665,11 +4665,11 @@ extension IP_ADAPTER_ANYCAST_ADDRESS_XP_Extension
   set Alignment(int value) => this.Anonymous.Alignment = value;
 
   _IP_ADAPTER_ANYCAST_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
-      get Anonymous => this.Anonymous.Anonymous;
+  get Anonymous => this.Anonymous.Anonymous;
   set Anonymous(
-          _IP_ADAPTER_ANYCAST_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
-              value) =>
-      this.Anonymous.Anonymous = value;
+    _IP_ADAPTER_ANYCAST_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
+    value,
+  ) => this.Anonymous.Anonymous = value;
 }
 
 /// The IP_ADAPTER_DNS_SERVER_ADDRESS structure stores a single DNS server
@@ -4692,7 +4692,7 @@ sealed class _IP_ADAPTER_DNS_SERVER_ADDRESS_XP__Anonymous_e__Union
   external int Alignment;
 
   external _IP_ADAPTER_DNS_SERVER_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
-      Anonymous;
+  Anonymous;
 }
 
 /// {@category struct}
@@ -4720,11 +4720,11 @@ extension IP_ADAPTER_DNS_SERVER_ADDRESS_XP_Extension
   set Alignment(int value) => this.Anonymous.Alignment = value;
 
   _IP_ADAPTER_DNS_SERVER_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
-      get Anonymous => this.Anonymous.Anonymous;
+  get Anonymous => this.Anonymous.Anonymous;
   set Anonymous(
-          _IP_ADAPTER_DNS_SERVER_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
-              value) =>
-      this.Anonymous.Anonymous = value;
+    _IP_ADAPTER_DNS_SERVER_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
+    value,
+  ) => this.Anonymous.Anonymous = value;
 }
 
 /// The IP_ADAPTER_DNS_SUFFIX structure stores a DNS suffix in a linked list
@@ -4772,7 +4772,7 @@ sealed class _IP_ADAPTER_GATEWAY_ADDRESS_LH__Anonymous_e__Union extends Union {
   external int Alignment;
 
   external _IP_ADAPTER_GATEWAY_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
-      Anonymous;
+  Anonymous;
 }
 
 /// {@category struct}
@@ -4800,11 +4800,11 @@ extension IP_ADAPTER_GATEWAY_ADDRESS_LH_Extension
   set Alignment(int value) => this.Anonymous.Alignment = value;
 
   _IP_ADAPTER_GATEWAY_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
-      get Anonymous => this.Anonymous.Anonymous;
+  get Anonymous => this.Anonymous.Anonymous;
   set Anonymous(
-          _IP_ADAPTER_GATEWAY_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
-              value) =>
-      this.Anonymous.Anonymous = value;
+    _IP_ADAPTER_GATEWAY_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
+    value,
+  ) => this.Anonymous.Anonymous = value;
 }
 
 /// The IP_ADAPTER_INDEX_MAP structure stores the interface index associated
@@ -4855,7 +4855,7 @@ sealed class _IP_ADAPTER_MULTICAST_ADDRESS_XP__Anonymous_e__Union
   external int Alignment;
 
   external _IP_ADAPTER_MULTICAST_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
-      Anonymous;
+  Anonymous;
 }
 
 /// {@category struct}
@@ -4883,11 +4883,11 @@ extension IP_ADAPTER_MULTICAST_ADDRESS_XP_Extension
   set Alignment(int value) => this.Anonymous.Alignment = value;
 
   _IP_ADAPTER_MULTICAST_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
-      get Anonymous => this.Anonymous.Anonymous;
+  get Anonymous => this.Anonymous.Anonymous;
   set Anonymous(
-          _IP_ADAPTER_MULTICAST_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
-              value) =>
-      this.Anonymous.Anonymous = value;
+    _IP_ADAPTER_MULTICAST_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
+    value,
+  ) => this.Anonymous.Anonymous = value;
 }
 
 /// The IP_ADAPTER_PREFIX structure stores an IP address prefix.
@@ -4910,7 +4910,7 @@ sealed class _IP_ADAPTER_PREFIX_XP__Anonymous_e__Union extends Union {
   external int Alignment;
 
   external _IP_ADAPTER_PREFIX_XP__Anonymous_e__Union__Anonymous_e__Struct
-      Anonymous;
+  Anonymous;
 }
 
 /// {@category struct}
@@ -4937,11 +4937,10 @@ extension IP_ADAPTER_PREFIX_XP_Extension on IP_ADAPTER_PREFIX_XP {
   set Alignment(int value) => this.Anonymous.Alignment = value;
 
   _IP_ADAPTER_PREFIX_XP__Anonymous_e__Union__Anonymous_e__Struct
-      get Anonymous => this.Anonymous.Anonymous;
+  get Anonymous => this.Anonymous.Anonymous;
   set Anonymous(
-          _IP_ADAPTER_PREFIX_XP__Anonymous_e__Union__Anonymous_e__Struct
-              value) =>
-      this.Anonymous.Anonymous = value;
+    _IP_ADAPTER_PREFIX_XP__Anonymous_e__Union__Anonymous_e__Struct value,
+  ) => this.Anonymous.Anonymous = value;
 }
 
 /// The IP_ADAPTER_UNICAST_ADDRESS structure stores a single unicast IP
@@ -4983,7 +4982,7 @@ sealed class _IP_ADAPTER_UNICAST_ADDRESS_LH__Anonymous_e__Union extends Union {
   external int Alignment;
 
   external _IP_ADAPTER_UNICAST_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
-      Anonymous;
+  Anonymous;
 }
 
 /// {@category struct}
@@ -5011,11 +5010,11 @@ extension IP_ADAPTER_UNICAST_ADDRESS_LH_Extension
   set Alignment(int value) => this.Anonymous.Alignment = value;
 
   _IP_ADAPTER_UNICAST_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
-      get Anonymous => this.Anonymous.Anonymous;
+  get Anonymous => this.Anonymous.Anonymous;
   set Anonymous(
-          _IP_ADAPTER_UNICAST_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
-              value) =>
-      this.Anonymous.Anonymous = value;
+    _IP_ADAPTER_UNICAST_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
+    value,
+  ) => this.Anonymous.Anonymous = value;
 }
 
 /// The IP_ADAPTER_WINS_SERVER_ADDRESS structure stores a single Windows
@@ -5038,7 +5037,7 @@ sealed class _IP_ADAPTER_WINS_SERVER_ADDRESS_LH__Anonymous_e__Union
   external int Alignment;
 
   external _IP_ADAPTER_WINS_SERVER_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
-      Anonymous;
+  Anonymous;
 }
 
 /// {@category struct}
@@ -5066,11 +5065,11 @@ extension IP_ADAPTER_WINS_SERVER_ADDRESS_LH_Extension
   set Alignment(int value) => this.Anonymous.Alignment = value;
 
   _IP_ADAPTER_WINS_SERVER_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
-      get Anonymous => this.Anonymous.Anonymous;
+  get Anonymous => this.Anonymous.Anonymous;
   set Anonymous(
-          _IP_ADAPTER_WINS_SERVER_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
-              value) =>
-      this.Anonymous.Anonymous = value;
+    _IP_ADAPTER_WINS_SERVER_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
+    value,
+  ) => this.Anonymous.Anonymous = value;
 }
 
 /// The IP_ADDRESS_STRING structure stores an IPv4 address in dotted decimal
@@ -7678,9 +7677,8 @@ extension PRINTER_NOTIFY_INFO_DATA_Extension on PRINTER_NOTIFY_INFO_DATA {
   _PRINTER_NOTIFY_INFO_DATA__NotifyData_e__Union__Data_e__Struct get Data =>
       this.NotifyData.Data;
   set Data(
-          _PRINTER_NOTIFY_INFO_DATA__NotifyData_e__Union__Data_e__Struct
-              value) =>
-      this.NotifyData.Data = value;
+    _PRINTER_NOTIFY_INFO_DATA__NotifyData_e__Union__Data_e__Struct value,
+  ) => this.NotifyData.Data = value;
 }
 
 /// Represents printer options.
@@ -8467,8 +8465,8 @@ extension SDP_ELEMENT_DATA_Extension on SDP_ELEMENT_DATA {
   _SDP_ELEMENT_DATA__data_e__Union__alternative_e__Struct get alternative =>
       this.data.alternative;
   set alternative(
-          _SDP_ELEMENT_DATA__data_e__Union__alternative_e__Struct value) =>
-      this.data.alternative = value;
+    _SDP_ELEMENT_DATA__data_e__Union__alternative_e__Struct value,
+  ) => this.data.alternative = value;
 }
 
 /// The union member for a 128-bit integer.
@@ -9704,10 +9702,10 @@ base class SYSTEM_LOGICAL_PROCESSOR_INFORMATION extends Struct {
 sealed class _SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union
     extends Union {
   external _SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__ProcessorCore_e__Struct
-      ProcessorCore;
+  ProcessorCore;
 
   external _SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__NumaNode_e__Struct
-      NumaNode;
+  NumaNode;
 
   external CACHE_DESCRIPTOR Cache;
 
@@ -9744,18 +9742,18 @@ extension SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union_Extension_1
 extension SYSTEM_LOGICAL_PROCESSOR_INFORMATION_Extension
     on SYSTEM_LOGICAL_PROCESSOR_INFORMATION {
   _SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__ProcessorCore_e__Struct
-      get ProcessorCore => this.Anonymous.ProcessorCore;
+  get ProcessorCore => this.Anonymous.ProcessorCore;
   set ProcessorCore(
-          _SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__ProcessorCore_e__Struct
-              value) =>
-      this.Anonymous.ProcessorCore = value;
+    _SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__ProcessorCore_e__Struct
+    value,
+  ) => this.Anonymous.ProcessorCore = value;
 
   _SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__NumaNode_e__Struct
-      get NumaNode => this.Anonymous.NumaNode;
+  get NumaNode => this.Anonymous.NumaNode;
   set NumaNode(
-          _SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__NumaNode_e__Struct
-              value) =>
-      this.Anonymous.NumaNode = value;
+    _SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__NumaNode_e__Struct
+    value,
+  ) => this.Anonymous.NumaNode = value;
 
   CACHE_DESCRIPTOR get Cache => this.Anonymous.Cache;
   set Cache(CACHE_DESCRIPTOR value) => this.Anonymous.Cache = value;

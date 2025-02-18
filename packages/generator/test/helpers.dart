@@ -3,10 +3,14 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-int getWindowsBuildNumber() => int.parse(getRegistryValue(
-    HKEY_LOCAL_MACHINE,
-    'SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\',
-    'CurrentBuildNumber') as String);
+int getWindowsBuildNumber() => int.parse(
+  getRegistryValue(
+        HKEY_LOCAL_MACHINE,
+        'SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\',
+        'CurrentBuildNumber',
+      )
+      as String,
+);
 
 Object getRegistryValue(int key, String subKey, String valueName) {
   late Object dataValue;
@@ -22,11 +26,22 @@ Object getRegistryValue(int key, String subKey, String valueName) {
   final dataSize = calloc<DWORD>()..value = 256;
 
   try {
-    var result =
-        RegOpenKeyEx(key, subKeyPtr, 0, REG_SAM_FLAGS.KEY_READ, openKeyPtr);
+    var result = RegOpenKeyEx(
+      key,
+      subKeyPtr,
+      0,
+      REG_SAM_FLAGS.KEY_READ,
+      openKeyPtr,
+    );
     if (result == WIN32_ERROR.ERROR_SUCCESS) {
       result = RegQueryValueEx(
-          openKeyPtr.value, valueNamePtr, nullptr, dataType, data, dataSize);
+        openKeyPtr.value,
+        valueNamePtr,
+        nullptr,
+        dataType,
+        data,
+        dataSize,
+      );
 
       if (result == WIN32_ERROR.ERROR_SUCCESS) {
         if (dataType.value == REG_VALUE_TYPE.REG_DWORD) {

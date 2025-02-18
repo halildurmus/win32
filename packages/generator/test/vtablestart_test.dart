@@ -62,8 +62,9 @@ void main() {
       'Windows.Win32.UI.Shell.IShellItemFilter': 3,
     };
 
-    final scope =
-        await MetadataStore.loadWin32Metadata(version: win32MetadataVersion);
+    final scope = await MetadataStore.loadWin32Metadata(
+      version: win32MetadataVersion,
+    );
 
     for (final type in testedTypes.keys) {
       final typeDef = scope.findTypeDef(type);
@@ -72,8 +73,11 @@ void main() {
         final projectedClass = ComInterfaceProjection(typeDef);
         final calculatedVTableStart = projectedClass.vtableStart;
 
-        expect(calculatedVTableStart, equals(testedTypes[type]),
-            reason: typeDef.name);
+        expect(
+          calculatedVTableStart,
+          equals(testedTypes[type]),
+          reason: typeDef.name,
+        );
       }
     }
 

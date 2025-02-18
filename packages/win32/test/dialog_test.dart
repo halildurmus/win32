@@ -51,7 +51,7 @@ const dialogGolden = [
 
   // DLGITEMTEMPLATE [Text Box]
   0x0000, 0x5081, 0x0000, 0x0000, 0x0014, 0x0032, 0x0064, 0x0014,
-  0x00c9, 0xffff, 0x0081, 0x0000, 0x0000, 0x0000
+  0x00c9, 0xffff, 0x0081, 0x0000, 0x0000, 0x0000,
 ];
 
 void main() {
@@ -60,77 +60,86 @@ void main() {
     var idx = 0;
 
     idx += (ptr + idx).cast<DLGTEMPLATE>().setDialog(
-        style: WINDOW_STYLE.WS_POPUP |
-            WINDOW_STYLE.WS_BORDER |
-            WINDOW_STYLE.WS_SYSMENU |
-            DS_MODALFRAME |
-            DS_SETFONT |
-            WINDOW_STYLE.WS_CAPTION,
-        title: 'Sample dialog',
-        cdit: 4,
-        cx: 300,
-        cy: 200,
-        fontName: 'MS Shell Dlg',
-        fontSize: 8);
+      style:
+          WINDOW_STYLE.WS_POPUP |
+          WINDOW_STYLE.WS_BORDER |
+          WINDOW_STYLE.WS_SYSMENU |
+          DS_MODALFRAME |
+          DS_SETFONT |
+          WINDOW_STYLE.WS_CAPTION,
+      title: 'Sample dialog',
+      cdit: 4,
+      cx: 300,
+      cy: 200,
+      fontName: 'MS Shell Dlg',
+      fontSize: 8,
+    );
 
     idx += (ptr + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
-        style: WINDOW_STYLE.WS_CHILD |
-            WINDOW_STYLE.WS_VISIBLE |
-            WINDOW_STYLE.WS_TABSTOP |
-            BS_DEFPUSHBUTTON,
-        x: 100,
-        y: 160,
-        cx: 50,
-        cy: 14,
-        id: MESSAGEBOX_RESULT.IDOK,
-        windowSystemClass: 0x0080, // button
-        text: 'OK');
+      style:
+          WINDOW_STYLE.WS_CHILD |
+          WINDOW_STYLE.WS_VISIBLE |
+          WINDOW_STYLE.WS_TABSTOP |
+          BS_DEFPUSHBUTTON,
+      x: 100,
+      y: 160,
+      cx: 50,
+      cy: 14,
+      id: MESSAGEBOX_RESULT.IDOK,
+      windowSystemClass: 0x0080, // button
+      text: 'OK',
+    );
 
     idx += (ptr + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
-        style: WINDOW_STYLE.WS_CHILD |
-            WINDOW_STYLE.WS_VISIBLE |
-            WINDOW_STYLE.WS_TABSTOP |
-            BS_PUSHBUTTON,
-        x: 190,
-        y: 160,
-        cx: 50,
-        cy: 14,
-        id: MESSAGEBOX_RESULT.IDCANCEL,
-        windowSystemClass: 0x0080, // button
-        text: 'Cancel');
+      style:
+          WINDOW_STYLE.WS_CHILD |
+          WINDOW_STYLE.WS_VISIBLE |
+          WINDOW_STYLE.WS_TABSTOP |
+          BS_PUSHBUTTON,
+      x: 190,
+      y: 160,
+      cx: 50,
+      cy: 14,
+      id: MESSAGEBOX_RESULT.IDCANCEL,
+      windowSystemClass: 0x0080, // button
+      text: 'Cancel',
+    );
 
     idx += (ptr + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
-        style: WINDOW_STYLE.WS_CHILD | WINDOW_STYLE.WS_VISIBLE,
-        x: 10,
-        y: 10,
-        cx: 60,
-        cy: 20,
-        id: ID_TEXT,
-        windowSystemClass: 0x0082, // static
-        text: 'Some static wrapped text here.');
+      style: WINDOW_STYLE.WS_CHILD | WINDOW_STYLE.WS_VISIBLE,
+      x: 10,
+      y: 10,
+      cx: 60,
+      cy: 20,
+      id: ID_TEXT,
+      windowSystemClass: 0x0082, // static
+      text: 'Some static wrapped text here.',
+    );
 
     idx += (ptr + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
-        style: PBS_SMOOTH | WINDOW_STYLE.WS_BORDER | WINDOW_STYLE.WS_VISIBLE,
-        x: 6,
-        y: 49,
-        cx: 158,
-        cy: 12,
-        id: ID_PROGRESS,
-        windowClass: 'msctls_progress32' // progress bar
-        );
+      style: PBS_SMOOTH | WINDOW_STYLE.WS_BORDER | WINDOW_STYLE.WS_VISIBLE,
+      x: 6,
+      y: 49,
+      cx: 158,
+      cy: 12,
+      id: ID_PROGRESS,
+      windowClass: 'msctls_progress32', // progress bar
+    );
 
     idx += (ptr + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
-        style: WINDOW_STYLE.WS_CHILD |
-            WINDOW_STYLE.WS_VISIBLE |
-            WINDOW_STYLE.WS_TABSTOP |
-            WINDOW_STYLE.WS_BORDER,
-        x: 20,
-        y: 50,
-        cx: 100,
-        cy: 20,
-        id: ID_EDITTEXT,
-        windowSystemClass: 0x0081, // edit
-        text: '');
+      style:
+          WINDOW_STYLE.WS_CHILD |
+          WINDOW_STYLE.WS_VISIBLE |
+          WINDOW_STYLE.WS_TABSTOP |
+          WINDOW_STYLE.WS_BORDER,
+      x: 20,
+      y: 50,
+      cx: 100,
+      cy: 20,
+      id: ID_EDITTEXT,
+      windowSystemClass: 0x0081, // edit
+      text: '',
+    );
 
     expect(idx, equals(dialogGolden.length));
     expect(ptr.cast<Uint16>().asTypedList(idx), equals(dialogGolden));

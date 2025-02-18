@@ -34,27 +34,28 @@ int mainWindowProc(int hwnd, int message, int wParam, int lParam) {
   switch (message) {
     case WM_CREATE:
       hwndEdit = CreateWindowEx(
-          0,
-          TEXT('edit'),
-          nullptr,
-          WINDOW_STYLE.WS_CHILD |
-              WINDOW_STYLE.WS_VISIBLE |
-              WINDOW_STYLE.WS_HSCROLL |
-              WINDOW_STYLE.WS_VSCROLL |
-              WINDOW_STYLE.WS_BORDER |
-              ES_LEFT |
-              ES_MULTILINE |
-              ES_NOHIDESEL |
-              ES_AUTOHSCROLL |
-              ES_AUTOVSCROLL,
-          0,
-          0,
-          0,
-          0,
-          hwnd,
-          EDITID,
-          hInstance,
-          nullptr);
+        0,
+        TEXT('edit'),
+        nullptr,
+        WINDOW_STYLE.WS_CHILD |
+            WINDOW_STYLE.WS_VISIBLE |
+            WINDOW_STYLE.WS_HSCROLL |
+            WINDOW_STYLE.WS_VSCROLL |
+            WINDOW_STYLE.WS_BORDER |
+            ES_LEFT |
+            ES_MULTILINE |
+            ES_NOHIDESEL |
+            ES_AUTOHSCROLL |
+            ES_AUTOVSCROLL,
+        0,
+        0,
+        0,
+        0,
+        hwnd,
+        EDITID,
+        hInstance,
+        nullptr,
+      );
 
       SendMessage(hwndEdit, EM_LIMITTEXT, 32767, 0);
 
@@ -80,33 +81,37 @@ int mainWindowProc(int hwnd, int message, int wParam, int lParam) {
 
           // Enable Undo if edit control can do it
           EnableMenuItem(
-              wParam,
-              IDM_EDIT_UNDO,
-              SendMessage(hwndEdit, EM_CANUNDO, 0, 0) != FALSE
-                  ? MENU_ITEM_FLAGS.MF_ENABLED
-                  : MENU_ITEM_FLAGS.MF_GRAYED);
+            wParam,
+            IDM_EDIT_UNDO,
+            SendMessage(hwndEdit, EM_CANUNDO, 0, 0) != FALSE
+                ? MENU_ITEM_FLAGS.MF_ENABLED
+                : MENU_ITEM_FLAGS.MF_GRAYED,
+          );
 
           // Enable Paste if clipboard contains text
           EnableMenuItem(
-              wParam,
-              IDM_EDIT_PASTE,
-              IsClipboardFormatAvailable(CLIPBOARD_FORMAT.CF_TEXT) != FALSE
-                  ? MENU_ITEM_FLAGS.MF_ENABLED
-                  : MENU_ITEM_FLAGS.MF_GRAYED);
+            wParam,
+            IDM_EDIT_PASTE,
+            IsClipboardFormatAvailable(CLIPBOARD_FORMAT.CF_TEXT) != FALSE
+                ? MENU_ITEM_FLAGS.MF_ENABLED
+                : MENU_ITEM_FLAGS.MF_GRAYED,
+          );
 
           // Enable Cut / Copy / Clear if there is a selection
-          final menuStyle = editor.isTextSelected
-              ? MENU_ITEM_FLAGS.MF_ENABLED
-              : MENU_ITEM_FLAGS.MF_GRAYED;
+          final menuStyle =
+              editor.isTextSelected
+                  ? MENU_ITEM_FLAGS.MF_ENABLED
+                  : MENU_ITEM_FLAGS.MF_GRAYED;
 
           EnableMenuItem(wParam, IDM_EDIT_CUT, menuStyle);
           EnableMenuItem(wParam, IDM_EDIT_COPY, menuStyle);
           EnableMenuItem(wParam, IDM_EDIT_CLEAR, menuStyle);
 
         case 2: // Search menu
-          final menuStyle = hDlgModeless == NULL
-              ? MENU_ITEM_FLAGS.MF_ENABLED
-              : MENU_ITEM_FLAGS.MF_GRAYED;
+          final menuStyle =
+              hDlgModeless == NULL
+                  ? MENU_ITEM_FLAGS.MF_ENABLED
+                  : MENU_ITEM_FLAGS.MF_GRAYED;
 
           EnableMenuItem(wParam, IDM_SEARCH_FIND, menuStyle);
           EnableMenuItem(wParam, IDM_SEARCH_NEXT, menuStyle);
@@ -123,8 +128,12 @@ int mainWindowProc(int hwnd, int message, int wParam, int lParam) {
             return 0;
           case EN_ERRSPACE:
           case EN_MAXTEXT:
-            MessageBox(hwnd, TEXT('Edit control out of space.'), TEXT(APP_NAME),
-                MESSAGEBOX_STYLE.MB_OK | MESSAGEBOX_STYLE.MB_ICONSTOP);
+            MessageBox(
+              hwnd,
+              TEXT('Edit control out of space.'),
+              TEXT(APP_NAME),
+              MESSAGEBOX_STYLE.MB_OK | MESSAGEBOX_STYLE.MB_ICONSTOP,
+            );
             return 0;
         }
         break;
@@ -222,7 +231,11 @@ int mainWindowProc(int hwnd, int message, int wParam, int lParam) {
             exceptionalReturn: 0,
           );
           DialogBoxIndirect(
-              hInstance, pDialog, hwnd, lpDialogFunc.nativeFunction);
+            hInstance,
+            pDialog,
+            hwnd,
+            lpDialogFunc.nativeFunction,
+          );
           lpDialogFunc.close();
           return 0;
       }
@@ -275,8 +288,11 @@ int mainWindowProc(int hwnd, int message, int wParam, int lParam) {
 
         if (findReplace.ref.Flags & FINDREPLACE_FLAGS.FR_REPLACEALL ==
             FINDREPLACE_FLAGS.FR_REPLACEALL) {
-          while (
-              find.replaceTextInEditWindow(hwndEdit, iOffset, findReplace)) {}
+          while (find.replaceTextInEditWindow(
+            hwndEdit,
+            iOffset,
+            findReplace,
+          )) {}
         }
 
         return 0;
@@ -310,34 +326,36 @@ void main() {
     exceptionalReturn: 0,
   );
 
-  final wc = calloc<WNDCLASS>()
-    ..ref.style = WNDCLASS_STYLES.CS_HREDRAW | WNDCLASS_STYLES.CS_VREDRAW
-    ..ref.lpfnWndProc = lpfnWndProc.nativeFunction
-    ..ref.hInstance = hInstance
-    ..ref.lpszClassName = className
-    ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
-    ..ref.hbrBackground = GetStockObject(GET_STOCK_OBJECT_FLAGS.WHITE_BRUSH);
+  final wc =
+      calloc<WNDCLASS>()
+        ..ref.style = WNDCLASS_STYLES.CS_HREDRAW | WNDCLASS_STYLES.CS_VREDRAW
+        ..ref.lpfnWndProc = lpfnWndProc.nativeFunction
+        ..ref.hInstance = hInstance
+        ..ref.lpszClassName = className
+        ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
+        ..ref.hbrBackground = GetStockObject(
+          GET_STOCK_OBJECT_FLAGS.WHITE_BRUSH,
+        );
   RegisterClass(wc);
 
   final hMenu = NotepadResources.loadMenus();
 
   // Create the window.
   final hWnd = CreateWindowEx(
-      0, // Optional window styles.
-      className, // Window class
-      TEXT(APP_NAME),
-      WINDOW_STYLE.WS_OVERLAPPEDWINDOW, // Window style
-
-      // Size and position
-      CW_USEDEFAULT,
-      CW_USEDEFAULT,
-      CW_USEDEFAULT,
-      CW_USEDEFAULT,
-      NULL, // Parent window
-      hMenu, // Menu
-      hInstance, // Instance handle
-      nullptr // Additional application data
-      );
+    0, // Optional window styles.
+    className, // Window class
+    TEXT(APP_NAME),
+    WINDOW_STYLE.WS_OVERLAPPEDWINDOW, // Window style
+    // Size and position
+    CW_USEDEFAULT,
+    CW_USEDEFAULT,
+    CW_USEDEFAULT,
+    CW_USEDEFAULT,
+    NULL, // Parent window
+    hMenu, // Menu
+    hInstance, // Instance handle
+    nullptr, // Additional application data
+  );
 
   if (hWnd == 0) {
     final error = GetLastError();

@@ -14,10 +14,11 @@ class RawPrinter {
 
   RawPrinter(this.printerName, this.alloc);
 
-  Pointer<HANDLE> _startRawPrintJob(
-      {required String printerName,
-      required String documentTitle,
-      String dataType = 'RAW'}) {
+  Pointer<HANDLE> _startRawPrintJob({
+    required String printerName,
+    required String documentTitle,
+    String dataType = 'RAW',
+  }) {
     final pPrinterName = printerName.toNativeUtf16(allocator: alloc);
     final phPrinter = alloc<HANDLE>();
 
@@ -29,21 +30,25 @@ class RawPrinter {
     }
 
     // https://learn.microsoft.com/windows/win32/printdocs/doc-info-1
-    final pDocInfo = alloc<DOC_INFO_1>()
-      ..ref.pDocName = printerName.toNativeUtf16(allocator: alloc)
-      ..ref.pDatatype =
-          dataType.toNativeUtf16(allocator: alloc) // RAW, TEXT or XPS_PASS
-      ..ref.pOutputFile = nullptr;
+    final pDocInfo =
+        alloc<DOC_INFO_1>()
+          ..ref.pDocName = printerName.toNativeUtf16(allocator: alloc)
+          ..ref.pDatatype = dataType.toNativeUtf16(
+            allocator: alloc,
+          ) // RAW, TEXT or XPS_PASS
+          ..ref.pOutputFile = nullptr;
 
     //https://learn.microsoft.com/windows/win32/printdocs/startdocprinter
     fSuccess = StartDocPrinter(
-        phPrinter.value,
-        1, // Version of the structure to which pDocInfo points.
-        pDocInfo);
+      phPrinter.value,
+      1, // Version of the structure to which pDocInfo points.
+      pDocInfo,
+    );
     if (fSuccess == 0) {
       final error = GetLastError();
       throw Exception(
-          'StartDocPrinter error, status: $fSuccess, error: $error');
+        'StartDocPrinter error, status: $fSuccess, error: $error',
+      );
     }
 
     return phPrinter;
@@ -68,8 +73,12 @@ class RawPrinter {
     final data = dataToPrint.toNativeUtf8(allocator: alloc);
 
     // https://learn.microsoft.com/windows/win32/printdocs/writeprinter
-    final result =
-        WritePrinter(phPrinter.value, data, dataToPrint.length, cWritten);
+    final result = WritePrinter(
+      phPrinter.value,
+      data,
+      dataToPrint.length,
+      cWritten,
+    );
 
     if (dataToPrint.length != cWritten.value) {
       final error = GetLastError();
@@ -87,9 +96,10 @@ class RawPrinter {
     }
 
     final printerHandle = _startRawPrintJob(
-        printerName: printerName,
-        documentTitle: 'My document',
-        dataType: 'RAW');
+      printerName: printerName,
+      documentTitle: 'My document',
+      dataType: 'RAW',
+    );
 
     res = _startRawPrintPage(printerHandle);
 
@@ -117,7 +127,7 @@ void main() {
     // for example for thermal printers using ESC/POS
     final data = <String>[
       for (var i = 0; i < 10; i++) 'Hello world line $i',
-      openCashDrawer
+      openCashDrawer,
     ];
 
     // Send to print all the lines at once

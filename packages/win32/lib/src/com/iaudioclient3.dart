@@ -42,73 +42,102 @@ class IAudioClient3 extends IAudioClient2 {
       IAudioClient3(interface.toInterface(IID_IAudioClient3));
 
   int getSharedModeEnginePeriod(
+    Pointer<WAVEFORMATEX> pFormat,
+    Pointer<Uint32> pDefaultPeriodInFrames,
+    Pointer<Uint32> pFundamentalPeriodInFrames,
+    Pointer<Uint32> pMinPeriodInFrames,
+    Pointer<Uint32> pMaxPeriodInFrames,
+  ) => (ptr.ref.vtable + 18)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<WAVEFORMATEX> pFormat,
+              Pointer<Uint32> pDefaultPeriodInFrames,
+              Pointer<Uint32> pFundamentalPeriodInFrames,
+              Pointer<Uint32> pMinPeriodInFrames,
+              Pointer<Uint32> pMaxPeriodInFrames,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
           Pointer<WAVEFORMATEX> pFormat,
           Pointer<Uint32> pDefaultPeriodInFrames,
           Pointer<Uint32> pFundamentalPeriodInFrames,
           Pointer<Uint32> pMinPeriodInFrames,
-          Pointer<Uint32> pMaxPeriodInFrames) =>
-      (ptr.ref.vtable + 18)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<WAVEFORMATEX> pFormat,
-                              Pointer<Uint32> pDefaultPeriodInFrames,
-                              Pointer<Uint32> pFundamentalPeriodInFrames,
-                              Pointer<Uint32> pMinPeriodInFrames,
-                              Pointer<Uint32> pMaxPeriodInFrames)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      Pointer<WAVEFORMATEX> pFormat,
-                      Pointer<Uint32> pDefaultPeriodInFrames,
-                      Pointer<Uint32> pFundamentalPeriodInFrames,
-                      Pointer<Uint32> pMinPeriodInFrames,
-                      Pointer<Uint32> pMaxPeriodInFrames)>()(
-          ptr.ref.lpVtbl,
-          pFormat,
-          pDefaultPeriodInFrames,
-          pFundamentalPeriodInFrames,
-          pMinPeriodInFrames,
-          pMaxPeriodInFrames);
+          Pointer<Uint32> pMaxPeriodInFrames,
+        )
+      >()(
+    ptr.ref.lpVtbl,
+    pFormat,
+    pDefaultPeriodInFrames,
+    pFundamentalPeriodInFrames,
+    pMinPeriodInFrames,
+    pMaxPeriodInFrames,
+  );
 
-  int getCurrentSharedModeEnginePeriod(Pointer<Pointer<WAVEFORMATEX>> ppFormat,
-          Pointer<Uint32> pCurrentPeriodInFrames) =>
-      (ptr.ref.vtable + 19)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<Pointer<WAVEFORMATEX>> ppFormat,
-                              Pointer<Uint32> pCurrentPeriodInFrames)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<WAVEFORMATEX>> ppFormat,
-                      Pointer<Uint32> pCurrentPeriodInFrames)>()(
-          ptr.ref.lpVtbl, ppFormat, pCurrentPeriodInFrames);
+  int getCurrentSharedModeEnginePeriod(
+    Pointer<Pointer<WAVEFORMATEX>> ppFormat,
+    Pointer<Uint32> pCurrentPeriodInFrames,
+  ) => (ptr.ref.vtable + 19)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<Pointer<WAVEFORMATEX>> ppFormat,
+              Pointer<Uint32> pCurrentPeriodInFrames,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<Pointer<WAVEFORMATEX>> ppFormat,
+          Pointer<Uint32> pCurrentPeriodInFrames,
+        )
+      >()(ptr.ref.lpVtbl, ppFormat, pCurrentPeriodInFrames);
 
-  int initializeSharedAudioStream(int StreamFlags, int PeriodInFrames,
-          Pointer<WAVEFORMATEX> pFormat, Pointer<GUID> AudioSessionGuid) =>
-      (ptr.ref.vtable + 20)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Uint32 StreamFlags,
-                              Uint32 PeriodInFrames,
-                              Pointer<WAVEFORMATEX> pFormat,
-                              Pointer<GUID> AudioSessionGuid)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      int StreamFlags,
-                      int PeriodInFrames,
-                      Pointer<WAVEFORMATEX> pFormat,
-                      Pointer<GUID> AudioSessionGuid)>()(ptr.ref.lpVtbl,
-          StreamFlags, PeriodInFrames, pFormat, AudioSessionGuid);
+  int initializeSharedAudioStream(
+    int StreamFlags,
+    int PeriodInFrames,
+    Pointer<WAVEFORMATEX> pFormat,
+    Pointer<GUID> AudioSessionGuid,
+  ) => (ptr.ref.vtable + 20)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Uint32 StreamFlags,
+              Uint32 PeriodInFrames,
+              Pointer<WAVEFORMATEX> pFormat,
+              Pointer<GUID> AudioSessionGuid,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          int StreamFlags,
+          int PeriodInFrames,
+          Pointer<WAVEFORMATEX> pFormat,
+          Pointer<GUID> AudioSessionGuid,
+        )
+      >()(
+    ptr.ref.lpVtbl,
+    StreamFlags,
+    PeriodInFrames,
+    pFormat,
+    AudioSessionGuid,
+  );
 }

@@ -41,8 +41,10 @@ void main() {
     test('IUnknown BYREF', () {
       final spVoice = SpVoice.createInstance()..detach();
       final variant = calloc<VARIANT>();
-      final ppunkval = calloc<Pointer<COMObject>>()
-        ..value = (calloc<COMObject>()..ref.lpVtbl = spVoice.ptr.ref.lpVtbl);
+      final ppunkval =
+          calloc<Pointer<COMObject>>()
+            ..value =
+                (calloc<COMObject>()..ref.lpVtbl = spVoice.ptr.ref.lpVtbl);
       variant.ref
         ..vt = VARENUM.VT_UNKNOWN | VARENUM.VT_BYREF
         ..ppunkVal = ppunkval;
@@ -71,8 +73,10 @@ void main() {
 
       final dosDate = calloc<USHORT>();
       final dosTime = calloc<USHORT>();
-      expect(VariantTimeToDosDateTime(pvTime.value, dosDate, dosTime),
-          equals(TRUE));
+      expect(
+        VariantTimeToDosDateTime(pvTime.value, dosDate, dosTime),
+        equals(TRUE),
+      );
       expect(dosDate.value, equals(theDate));
 
       free(pvTime);

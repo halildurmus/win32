@@ -41,56 +41,79 @@ class IStream extends ISequentialStream {
   factory IStream.from(IUnknown interface) =>
       IStream(interface.toInterface(IID_IStream));
 
-  int
-      seek(int dlibMove, int dwOrigin, Pointer<Uint64> plibNewPosition) =>
-          (ptr.ref.vtable + 5)
-                  .cast<
-                      Pointer<
-                          NativeFunction<
-                              Int32 Function(
-                                  Pointer,
-                                  Int64 dlibMove,
-                                  Uint32 dwOrigin,
-                                  Pointer<Uint64> plibNewPosition)>>>()
-                  .value
-                  .asFunction<
-                      int Function(Pointer, int dlibMove, int dwOrigin,
-                          Pointer<Uint64> plibNewPosition)>()(
-              ptr.ref.lpVtbl, dlibMove, dwOrigin, plibNewPosition);
+  int seek(int dlibMove, int dwOrigin, Pointer<Uint64> plibNewPosition) =>
+      (ptr.ref.vtable + 5)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Int64 dlibMove,
+                  Uint32 dwOrigin,
+                  Pointer<Uint64> plibNewPosition,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
+              Pointer,
+              int dlibMove,
+              int dwOrigin,
+              Pointer<Uint64> plibNewPosition,
+            )
+          >()(ptr.ref.lpVtbl, dlibMove, dwOrigin, plibNewPosition);
 
   int setSize(int libNewSize) => (ptr.ref.vtable + 6)
       .cast<
-          Pointer<NativeFunction<Int32 Function(Pointer, Uint64 libNewSize)>>>()
+        Pointer<NativeFunction<Int32 Function(Pointer, Uint64 libNewSize)>>
+      >()
+      .value
+      .asFunction<int Function(Pointer, int libNewSize)>()(
+    ptr.ref.lpVtbl,
+    libNewSize,
+  );
+
+  int copyTo(
+    Pointer<COMObject> pstm,
+    int cb,
+    Pointer<Uint64> pcbRead,
+    Pointer<Uint64> pcbWritten,
+  ) => (ptr.ref.vtable + 7)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<COMObject> pstm,
+              Uint64 cb,
+              Pointer<Uint64> pcbRead,
+              Pointer<Uint64> pcbWritten,
+            )
+          >
+        >
+      >()
       .value
       .asFunction<
-          int Function(Pointer, int libNewSize)>()(ptr.ref.lpVtbl, libNewSize);
-
-  int copyTo(Pointer<COMObject> pstm, int cb, Pointer<Uint64> pcbRead,
-          Pointer<Uint64> pcbWritten) =>
-      (ptr.ref.vtable + 7)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<COMObject> pstm,
-                              Uint64 cb,
-                              Pointer<Uint64> pcbRead,
-                              Pointer<Uint64> pcbWritten)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<COMObject> pstm, int cb,
-                      Pointer<Uint64> pcbRead, Pointer<Uint64> pcbWritten)>()(
-          ptr.ref.lpVtbl, pstm, cb, pcbRead, pcbWritten);
+        int Function(
+          Pointer,
+          Pointer<COMObject> pstm,
+          int cb,
+          Pointer<Uint64> pcbRead,
+          Pointer<Uint64> pcbWritten,
+        )
+      >()(ptr.ref.lpVtbl, pstm, cb, pcbRead, pcbWritten);
 
   int commit(int grfCommitFlags) => (ptr.ref.vtable + 8)
       .cast<
-          Pointer<
-              NativeFunction<Int32 Function(Pointer, Int32 grfCommitFlags)>>>()
+        Pointer<NativeFunction<Int32 Function(Pointer, Int32 grfCommitFlags)>>
+      >()
       .value
-      .asFunction<
-          int Function(
-              Pointer, int grfCommitFlags)>()(ptr.ref.lpVtbl, grfCommitFlags);
+      .asFunction<int Function(Pointer, int grfCommitFlags)>()(
+    ptr.ref.lpVtbl,
+    grfCommitFlags,
+  );
 
   int revert() => (ptr.ref.vtable + 9)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
@@ -98,47 +121,70 @@ class IStream extends ISequentialStream {
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
   int lockRegion(int libOffset, int cb, int dwLockType) => (ptr.ref.vtable + 10)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Uint64 libOffset, Uint64 cb,
-                          Int32 dwLockType)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, int libOffset, int cb, int dwLockType)>()(
-      ptr.ref.lpVtbl, libOffset, cb, dwLockType);
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Uint64 libOffset,
+              Uint64 cb,
+              Int32 dwLockType,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(Pointer, int libOffset, int cb, int dwLockType)
+      >()(ptr.ref.lpVtbl, libOffset, cb, dwLockType);
 
   int unlockRegion(int libOffset, int cb, int dwLockType) =>
       (ptr.ref.vtable + 11)
           .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Uint64 libOffset, Uint64 cb,
-                          Uint32 dwLockType)>>>()
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Uint64 libOffset,
+                  Uint64 cb,
+                  Uint32 dwLockType,
+                )
+              >
+            >
+          >()
           .value
           .asFunction<
-              int Function(Pointer, int libOffset, int cb,
-                  int dwLockType)>()(ptr.ref.lpVtbl, libOffset, cb, dwLockType);
+            int Function(Pointer, int libOffset, int cb, int dwLockType)
+          >()(ptr.ref.lpVtbl, libOffset, cb, dwLockType);
 
   int stat(Pointer<STATSTG> pstatstg, int grfStatFlag) => (ptr.ref.vtable + 12)
       .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(Pointer, Pointer<STATSTG> pstatstg,
-                      Int32 grfStatFlag)>>>()
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<STATSTG> pstatstg,
+              Int32 grfStatFlag,
+            )
+          >
+        >
+      >()
       .value
       .asFunction<
-          int Function(Pointer, Pointer<STATSTG> pstatstg,
-              int grfStatFlag)>()(ptr.ref.lpVtbl, pstatstg, grfStatFlag);
+        int Function(Pointer, Pointer<STATSTG> pstatstg, int grfStatFlag)
+      >()(ptr.ref.lpVtbl, pstatstg, grfStatFlag);
 
   int clone(Pointer<Pointer<COMObject>> ppstm) => (ptr.ref.vtable + 13)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<Pointer<COMObject>> ppstm)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, Pointer<Pointer<COMObject>> ppstm)>()(
-      ptr.ref.lpVtbl, ppstm);
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<Pointer<COMObject>> ppstm)
+          >
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> ppstm)>()(
+    ptr.ref.lpVtbl,
+    ppstm,
+  );
 }

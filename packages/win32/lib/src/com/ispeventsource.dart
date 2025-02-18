@@ -43,44 +43,60 @@ class ISpEventSource extends ISpNotifySource {
 
   int setInterest(int ullEventInterest, int ullQueuedInterest) =>
       (ptr.ref.vtable + 10)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Uint64 ullEventInterest,
-                              Uint64 ullQueuedInterest)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, int ullEventInterest, int ullQueuedInterest)>()(
-          ptr.ref.lpVtbl, ullEventInterest, ullQueuedInterest);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Uint64 ullEventInterest,
+                  Uint64 ullQueuedInterest,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, int ullEventInterest, int ullQueuedInterest)
+          >()(ptr.ref.lpVtbl, ullEventInterest, ullQueuedInterest);
 
-  int getEvents(int ulCount, Pointer<SPEVENT> pEventArray,
-          Pointer<Uint32> pulFetched) =>
-      (ptr.ref.vtable + 11)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Uint32 ulCount,
-                              Pointer<SPEVENT> pEventArray,
-                              Pointer<Uint32> pulFetched)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      int ulCount,
-                      Pointer<SPEVENT> pEventArray,
-                      Pointer<Uint32> pulFetched)>()(
-          ptr.ref.lpVtbl, ulCount, pEventArray, pulFetched);
+  int getEvents(
+    int ulCount,
+    Pointer<SPEVENT> pEventArray,
+    Pointer<Uint32> pulFetched,
+  ) => (ptr.ref.vtable + 11)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Uint32 ulCount,
+              Pointer<SPEVENT> pEventArray,
+              Pointer<Uint32> pulFetched,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          int ulCount,
+          Pointer<SPEVENT> pEventArray,
+          Pointer<Uint32> pulFetched,
+        )
+      >()(ptr.ref.lpVtbl, ulCount, pEventArray, pulFetched);
 
   int getInfo(Pointer<SPEVENTSOURCEINFO> pInfo) => (ptr.ref.vtable + 12)
       .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(Pointer, Pointer<SPEVENTSOURCEINFO> pInfo)>>>()
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<SPEVENTSOURCEINFO> pInfo)
+          >
+        >
+      >()
       .value
-      .asFunction<
-          int Function(Pointer,
-              Pointer<SPEVENTSOURCEINFO> pInfo)>()(ptr.ref.lpVtbl, pInfo);
+      .asFunction<int Function(Pointer, Pointer<SPEVENTSOURCEINFO> pInfo)>()(
+    ptr.ref.lpVtbl,
+    pInfo,
+  );
 }

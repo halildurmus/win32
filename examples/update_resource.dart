@@ -22,7 +22,13 @@ void main(List<String> args) {
   }
 
   var result = UpdateResource(
-      handle, RT_MANIFEST, RT_MANIFEST, 0, manifestPtr, manifest.length * 2);
+    handle,
+    RT_MANIFEST,
+    RT_MANIFEST,
+    0,
+    manifestPtr,
+    manifest.length * 2,
+  );
   if (result == FALSE) {
     print('Error: failed to create update resource.');
   }

@@ -46,8 +46,16 @@ class PrinterNames {
   void _readRawBuff() {
     _rawBuffer = malloc.allocate<BYTE>(_pBuffSize.value);
 
-    final isRawBuffFail = EnumPrinters(_flags, nullptr, 2, _rawBuffer,
-            _pBuffSize.value, _pBuffSize, _bPrinterLen) ==
+    final isRawBuffFail =
+        EnumPrinters(
+          _flags,
+          nullptr,
+          2,
+          _rawBuffer,
+          _pBuffSize.value,
+          _pBuffSize,
+          _bPrinterLen,
+        ) ==
         0;
 
     if (isRawBuffFail) {

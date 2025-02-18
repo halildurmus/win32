@@ -9,8 +9,9 @@ void main() {
   late Scope scope;
 
   setUpAll(() async {
-    scope =
-        await MetadataStore.loadWin32Metadata(version: win32MetadataVersion);
+    scope = await MetadataStore.loadWin32Metadata(
+      version: win32MetadataVersion,
+    );
   });
 
   test('Simple int type', () {
@@ -26,8 +27,9 @@ void main() {
   });
 
   test('HANDLE type', () {
-    final typedef =
-        scope.findTypeDef('Windows.Win32.UI.WindowsAndMessaging.Apis');
+    final typedef = scope.findTypeDef(
+      'Windows.Win32.UI.WindowsAndMessaging.Apis',
+    );
     final api = typedef?.findMethod('CloseWindow');
     expect(api, isNotNull);
 
@@ -63,8 +65,9 @@ void main() {
   });
 
   test('PWSTR type', () {
-    final typedef =
-        scope.findTypeDef('Windows.Win32.UI.WindowsAndMessaging.Apis');
+    final typedef = scope.findTypeDef(
+      'Windows.Win32.UI.WindowsAndMessaging.Apis',
+    );
     final api = typedef?.findMethod('GetWindowTextW');
     expect(api, isNotNull);
 
@@ -76,8 +79,9 @@ void main() {
   });
 
   test('LPSTR type', () {
-    final typedef =
-        scope.findTypeDef('Windows.Win32.UI.Input.KeyboardAndMouse.Apis');
+    final typedef = scope.findTypeDef(
+      'Windows.Win32.UI.Input.KeyboardAndMouse.Apis',
+    );
     final api = typedef?.findMethod('GetKeyNameTextA');
 
     expect(api, isNotNull);
@@ -90,8 +94,9 @@ void main() {
   });
 
   test('Pointer<T>', () {
-    final typedef =
-        scope.findTypeDef('Windows.Win32.UI.Input.KeyboardAndMouse.Apis');
+    final typedef = scope.findTypeDef(
+      'Windows.Win32.UI.Input.KeyboardAndMouse.Apis',
+    );
     final api = typedef?.findMethod('GetKeyboardState');
 
     expect(api, isNotNull);
@@ -104,8 +109,9 @@ void main() {
   });
 
   test('LPHANDLE-style parameters have the correct projection', () {
-    final typedef =
-        scope.findTypeDef('Windows.Win32.UI.WindowsAndMessaging.Apis');
+    final typedef = scope.findTypeDef(
+      'Windows.Win32.UI.WindowsAndMessaging.Apis',
+    );
     final api = typedef?.findMethod('CascadeWindows');
     expect(api, isNotNull);
 
@@ -130,8 +136,9 @@ void main() {
   });
 
   test('Pointer<Pointer<T>>', () {
-    final typedef =
-        scope.findTypeDef('Windows.Win32.Security.Credentials.Apis');
+    final typedef = scope.findTypeDef(
+      'Windows.Win32.Security.Credentials.Apis',
+    );
     final api = typedef?.findMethod('CredReadW');
 
     expect(api, isNotNull);
@@ -216,15 +223,20 @@ void main() {
     final type = api!.parameters[2].typeIdentifier; // FONTENUMPROCW
     final typeProjection = TypeProjection(type);
 
-    expect(typeProjection.nativeType,
-        equals('Pointer<NativeFunction<FONTENUMPROC>>'));
-    expect(typeProjection.dartType,
-        equals('Pointer<NativeFunction<FONTENUMPROC>>'));
+    expect(
+      typeProjection.nativeType,
+      equals('Pointer<NativeFunction<FONTENUMPROC>>'),
+    );
+    expect(
+      typeProjection.dartType,
+      equals('Pointer<NativeFunction<FONTENUMPROC>>'),
+    );
   });
 
   test('Callbacks are represented correctly 2', () {
-    final typedef =
-        scope.findTypeDef('Windows.Win32.System.Diagnostics.Debug.Apis');
+    final typedef = scope.findTypeDef(
+      'Windows.Win32.System.Diagnostics.Debug.Apis',
+    );
     final api = typedef?.findMethod('SymEnumSymbolsW');
 
     expect(api, isNotNull);
@@ -233,10 +245,14 @@ void main() {
         api!.parameters[3].typeIdentifier; // PSYM_ENUMERATESYMBOLS_CALLBACKW
     final typeProjection = TypeProjection(type);
 
-    expect(typeProjection.nativeType,
-        equals('Pointer<NativeFunction<PSYM_ENUMERATESYMBOLS_CALLBACK>>'));
-    expect(typeProjection.dartType,
-        equals('Pointer<NativeFunction<PSYM_ENUMERATESYMBOLS_CALLBACK>>'));
+    expect(
+      typeProjection.nativeType,
+      equals('Pointer<NativeFunction<PSYM_ENUMERATESYMBOLS_CALLBACK>>'),
+    );
+    expect(
+      typeProjection.dartType,
+      equals('Pointer<NativeFunction<PSYM_ENUMERATESYMBOLS_CALLBACK>>'),
+    );
   });
 
   test('Pointers to structs are represented correctly', () {
@@ -304,8 +320,9 @@ void main() {
   });
 
   test('Void returns are represented correctly', () {
-    final typedef =
-        scope.findTypeDef('Windows.Win32.Security.Credentials.Apis');
+    final typedef = scope.findTypeDef(
+      'Windows.Win32.Security.Credentials.Apis',
+    );
     final api = typedef?.findMethod('CredFree');
 
     expect(api, isNotNull);
@@ -383,8 +400,9 @@ void main() {
   });
 
   test('LPVOID parameters are projected to Pointer, not Pointer<Void>', () {
-    final typedef =
-        scope.findTypeDef('Windows.Win32.Security.Credentials.Apis');
+    final typedef = scope.findTypeDef(
+      'Windows.Win32.Security.Credentials.Apis',
+    );
     final api = typedef?.findMethod('CredFree');
 
     expect(api, isNotNull);
@@ -412,8 +430,9 @@ void main() {
   });
 
   test('Array is projected correctly 1', () {
-    final struct = scope
-        .findTypeDef('Windows.Win32.Devices.Bluetooth.BLUETOOTH_RADIO_INFO');
+    final struct = scope.findTypeDef(
+      'Windows.Win32.Devices.Bluetooth.BLUETOOTH_RADIO_INFO',
+    );
     expect(struct, isNotNull);
 
     final field = struct!.fields[2];
@@ -426,8 +445,9 @@ void main() {
   });
 
   test('Array is projected correctly 2', () {
-    final struct = scope
-        .findTypeDef('Windows.Win32.NetworkManagement.WiFi.DOT11_NETWORK_LIST');
+    final struct = scope.findTypeDef(
+      'Windows.Win32.NetworkManagement.WiFi.DOT11_NETWORK_LIST',
+    );
     expect(struct, isNotNull);
 
     final field = struct!.fields.last;
@@ -440,8 +460,9 @@ void main() {
   });
 
   test('Array is projected correctly 3', () {
-    final struct =
-        scope.findTypeDef('Windows.Win32.UI.Magnification.MAGCOLOREFFECT');
+    final struct = scope.findTypeDef(
+      'Windows.Win32.UI.Magnification.MAGCOLOREFFECT',
+    );
     expect(struct, isNotNull);
 
     final field = struct!.fields.first;
@@ -453,8 +474,9 @@ void main() {
   });
 
   test('GUIDs are projected correctly', () {
-    final typedef =
-        scope.findTypeDef('Windows.Win32.UI.Shell.PropertiesSystem.Apis');
+    final typedef = scope.findTypeDef(
+      'Windows.Win32.UI.Shell.PropertiesSystem.Apis',
+    );
     final api = typedef?.findMethod('PSPropertyBag_WriteGUID');
 
     expect(api, isNotNull);
@@ -468,8 +490,9 @@ void main() {
   });
 
   test('FARPROC is projected correctly', () {
-    final typedef =
-        scope.findTypeDef('Windows.Win32.System.LibraryLoader.Apis');
+    final typedef = scope.findTypeDef(
+      'Windows.Win32.System.LibraryLoader.Apis',
+    );
     final api = typedef?.findMethod('GetProcAddress');
 
     expect(api, isNotNull);
@@ -495,8 +518,10 @@ void main() {
   });
 
   test('Structs are projected to classes', () {
-    final typeDef = scope
-        .findTypeDef('Windows.Win32.Media.Multimedia.YAMAHA_ADPCMWAVEFORMAT')!;
+    final typeDef =
+        scope.findTypeDef(
+          'Windows.Win32.Media.Multimedia.YAMAHA_ADPCMWAVEFORMAT',
+        )!;
 
     // WAVEFORMATEX wfx;
     final wfx = typeDef.fields.first.typeIdentifier;

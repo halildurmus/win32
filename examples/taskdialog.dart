@@ -22,10 +22,12 @@ import 'package:win32/win32.dart';
 
 void showSimpleTaskDialog() {
   using((arena) {
-    final windowTitle =
-        'Dart TaskDialog Sample'.toNativeUtf16(allocator: arena);
-    final mainInstruction =
-        'Please read this important message'.toNativeUtf16(allocator: arena);
+    final windowTitle = 'Dart TaskDialog Sample'.toNativeUtf16(
+      allocator: arena,
+    );
+    final mainInstruction = 'Please read this important message'.toNativeUtf16(
+      allocator: arena,
+    );
     final content = 'Task dialogs are great for sharing a longer string of '
             'explanatory content, where you need a user to read an instruction '
             'before making a decision. Of course, you cannot guarantee that '
@@ -99,16 +101,20 @@ void showCustomTaskDialog() {
     final config = arena<TASKDIALOGCONFIG>();
     config.ref
       ..cbSize = sizeOf<TASKDIALOGCONFIG>()
-      ..pszWindowTitle =
-          'TaskDialogIndirect Sample'.toNativeUtf16(allocator: arena)
-      ..pszMainInstruction =
-          'Which pill will you take?'.toNativeUtf16(allocator: arena)
+      ..pszWindowTitle = 'TaskDialogIndirect Sample'.toNativeUtf16(
+        allocator: arena,
+      )
+      ..pszMainInstruction = 'Which pill will you take?'.toNativeUtf16(
+        allocator: arena,
+      )
       ..pszContent = 'This is your last chance. There is no turning back.'
           .toNativeUtf16(allocator: arena)
       ..hMainIcon = TD_WARNING_ICON.address
-      ..pszExpandedInformation =
-          matrixDescription.toNativeUtf16(allocator: arena)
-      ..dwFlags = TASKDIALOG_FLAGS.TDF_USE_COMMAND_LINKS |
+      ..pszExpandedInformation = matrixDescription.toNativeUtf16(
+        allocator: arena,
+      )
+      ..dwFlags =
+          TASKDIALOG_FLAGS.TDF_USE_COMMAND_LINKS |
           TASKDIALOG_FLAGS.TDF_EXPAND_FOOTER_AREA
       ..cButtons = numberOfButtons
       ..pButtons = buttons;

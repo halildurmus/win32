@@ -44,8 +44,16 @@ RegistryKeyValuePair? enumerateKey(int hKey, int index) {
   final lpcbData = calloc<DWORD>()..value = MAX_ITEMLENGTH;
 
   try {
-    final status = RegEnumValue(hKey, index, lpValueName, lpcchValueName,
-        nullptr, lpType, lpData, lpcbData);
+    final status = RegEnumValue(
+      hKey,
+      index,
+      lpValueName,
+      lpcchValueName,
+      nullptr,
+      lpType,
+      lpData,
+      lpcbData,
+    );
 
     switch (status) {
       case WIN32_ERROR.ERROR_SUCCESS:
@@ -53,7 +61,9 @@ RegistryKeyValuePair? enumerateKey(int hKey, int index) {
           throw Exception('Non-string content.');
         }
         return RegistryKeyValuePair(
-            lpValueName.toDartString(), lpData.cast<Utf16>().toDartString());
+          lpValueName.toDartString(),
+          lpData.cast<Utf16>().toDartString(),
+        );
 
       case WIN32_ERROR.ERROR_MORE_DATA:
         throw Exception('An item required more than $MAX_ITEMLENGTH bytes.');

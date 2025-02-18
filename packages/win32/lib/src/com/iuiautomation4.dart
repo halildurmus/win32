@@ -39,47 +39,70 @@ class IUIAutomation4 extends IUIAutomation3 {
       IUIAutomation4(interface.toInterface(IID_IUIAutomation4));
 
   int addChangesEventHandler(
+    Pointer<COMObject> element,
+    int scope,
+    Pointer<Int32> changeTypes,
+    int changesCount,
+    Pointer<COMObject> pCacheRequest,
+    Pointer<COMObject> handler,
+  ) => (ptr.ref.vtable + 66)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<COMObject> element,
+              Int32 scope,
+              Pointer<Int32> changeTypes,
+              Int32 changesCount,
+              Pointer<COMObject> pCacheRequest,
+              Pointer<COMObject> handler,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
           Pointer<COMObject> element,
           int scope,
           Pointer<Int32> changeTypes,
           int changesCount,
           Pointer<COMObject> pCacheRequest,
-          Pointer<COMObject> handler) =>
-      (ptr.ref.vtable + 66)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<COMObject> element,
-                              Int32 scope,
-                              Pointer<Int32> changeTypes,
-                              Int32 changesCount,
-                              Pointer<COMObject> pCacheRequest,
-                              Pointer<COMObject> handler)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      Pointer<COMObject> element,
-                      int scope,
-                      Pointer<Int32> changeTypes,
-                      int changesCount,
-                      Pointer<COMObject> pCacheRequest,
-                      Pointer<COMObject> handler)>()(ptr.ref.lpVtbl, element,
-          scope, changeTypes, changesCount, pCacheRequest, handler);
+          Pointer<COMObject> handler,
+        )
+      >()(
+    ptr.ref.lpVtbl,
+    element,
+    scope,
+    changeTypes,
+    changesCount,
+    pCacheRequest,
+    handler,
+  );
 
   int removeChangesEventHandler(
-          Pointer<COMObject> element, Pointer<COMObject> handler) =>
-      (ptr.ref.vtable + 67)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<COMObject> element,
-                              Pointer<COMObject> handler)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<COMObject> element,
-                      Pointer<COMObject> handler)>()(
-          ptr.ref.lpVtbl, element, handler);
+    Pointer<COMObject> element,
+    Pointer<COMObject> handler,
+  ) => (ptr.ref.vtable + 67)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<COMObject> element,
+              Pointer<COMObject> handler,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<COMObject> element,
+          Pointer<COMObject> handler,
+        )
+      >()(ptr.ref.lpVtbl, element, handler);
 }

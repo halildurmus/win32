@@ -36,45 +36,63 @@ class IUIAutomationScrollPattern extends IUnknown {
 
   factory IUIAutomationScrollPattern.from(IUnknown interface) =>
       IUIAutomationScrollPattern(
-          interface.toInterface(IID_IUIAutomationScrollPattern));
+        interface.toInterface(IID_IUIAutomationScrollPattern),
+      );
 
   int scroll(int horizontalAmount, int verticalAmount) => (ptr.ref.vtable + 3)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Int32 horizontalAmount,
-                          Int32 verticalAmount)>>>()
-          .value
-          .asFunction<
-              int Function(
-                  Pointer, int horizontalAmount, int verticalAmount)>()(
-      ptr.ref.lpVtbl, horizontalAmount, verticalAmount);
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Int32 horizontalAmount,
+              Int32 verticalAmount,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(Pointer, int horizontalAmount, int verticalAmount)
+      >()(ptr.ref.lpVtbl, horizontalAmount, verticalAmount);
 
   int setScrollPercent(double horizontalPercent, double verticalPercent) =>
       (ptr.ref.vtable + 4)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Double horizontalPercent,
-                              Double verticalPercent)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, double horizontalPercent,
-                      double verticalPercent)>()(
-          ptr.ref.lpVtbl, horizontalPercent, verticalPercent);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Double horizontalPercent,
+                  Double verticalPercent,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
+              Pointer,
+              double horizontalPercent,
+              double verticalPercent,
+            )
+          >()(ptr.ref.lpVtbl, horizontalPercent, verticalPercent);
 
   double get currentHorizontalScrollPercent {
     final retValuePtr = calloc<Double>();
 
     try {
       final hr = (ptr.ref.vtable + 5)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Double> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Double> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Double> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Double> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -90,13 +108,16 @@ class IUIAutomationScrollPattern extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 6)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Double> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Double> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Double> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Double> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -112,13 +133,16 @@ class IUIAutomationScrollPattern extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 7)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Double> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Double> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Double> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Double> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -134,13 +158,16 @@ class IUIAutomationScrollPattern extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 8)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Double> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Double> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Double> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Double> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -156,13 +183,16 @@ class IUIAutomationScrollPattern extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 9)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -178,13 +208,16 @@ class IUIAutomationScrollPattern extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 10)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -200,13 +233,16 @@ class IUIAutomationScrollPattern extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 11)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Double> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Double> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Double> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Double> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -222,13 +258,16 @@ class IUIAutomationScrollPattern extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 12)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Double> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Double> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Double> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Double> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -244,13 +283,16 @@ class IUIAutomationScrollPattern extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 13)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Double> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Double> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Double> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Double> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -266,13 +308,16 @@ class IUIAutomationScrollPattern extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 14)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Double> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Double> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Double> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Double> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -288,13 +333,16 @@ class IUIAutomationScrollPattern extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 15)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -310,13 +358,16 @@ class IUIAutomationScrollPattern extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 16)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 

@@ -19,7 +19,11 @@ void displayVolumePaths(String volumeName) {
   try {
     charCount.value = MAX_PATH;
     error = GetVolumePathNamesForVolumeName(
-        volumeNamePtr, pathNamePtr, charCount.value, charCount);
+      volumeNamePtr,
+      pathNamePtr,
+      charCount.value,
+      charCount,
+    );
 
     if (error != 0) {
       if (charCount.value > 1) {

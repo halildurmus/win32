@@ -37,46 +37,57 @@ class IUIAutomationCacheRequest extends IUnknown {
 
   factory IUIAutomationCacheRequest.from(IUnknown interface) =>
       IUIAutomationCacheRequest(
-          interface.toInterface(IID_IUIAutomationCacheRequest));
+        interface.toInterface(IID_IUIAutomationCacheRequest),
+      );
 
   int addProperty(int propertyId) => (ptr.ref.vtable + 3)
       .cast<
-          Pointer<NativeFunction<Int32 Function(Pointer, Uint32 propertyId)>>>()
+        Pointer<NativeFunction<Int32 Function(Pointer, Uint32 propertyId)>>
+      >()
       .value
-      .asFunction<
-          int Function(Pointer, int propertyId)>()(ptr.ref.lpVtbl, propertyId);
+      .asFunction<int Function(Pointer, int propertyId)>()(
+    ptr.ref.lpVtbl,
+    propertyId,
+  );
 
   int addPattern(int patternId) => (ptr.ref.vtable + 4)
       .cast<
-          Pointer<NativeFunction<Int32 Function(Pointer, Uint32 patternId)>>>()
+        Pointer<NativeFunction<Int32 Function(Pointer, Uint32 patternId)>>
+      >()
       .value
-      .asFunction<
-          int Function(Pointer, int patternId)>()(ptr.ref.lpVtbl, patternId);
+      .asFunction<int Function(Pointer, int patternId)>()(
+    ptr.ref.lpVtbl,
+    patternId,
+  );
 
   int clone(Pointer<Pointer<COMObject>> clonedRequest) => (ptr.ref.vtable + 5)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer,
-                          Pointer<Pointer<COMObject>> clonedRequest)>>>()
-          .value
-          .asFunction<
-              int Function(
-                  Pointer, Pointer<Pointer<COMObject>> clonedRequest)>()(
-      ptr.ref.lpVtbl, clonedRequest);
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<Pointer<COMObject>> clonedRequest)
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(Pointer, Pointer<Pointer<COMObject>> clonedRequest)
+      >()(ptr.ref.lpVtbl, clonedRequest);
 
   int get treeScope {
     final retValuePtr = calloc<Int32>();
 
     try {
       final hr = (ptr.ref.vtable + 6)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> scope)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> scope)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> scope)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> scope)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -100,13 +111,16 @@ class IUIAutomationCacheRequest extends IUnknown {
     final retValuePtr = calloc<COMObject>();
 
     final hr = (ptr.ref.vtable + 8)
-            .cast<
-                Pointer<
-                    NativeFunction<
-                        Int32 Function(Pointer, Pointer<COMObject> filter)>>>()
-            .value
-            .asFunction<int Function(Pointer, Pointer<COMObject> filter)>()(
-        ptr.ref.lpVtbl, retValuePtr);
+        .cast<
+          Pointer<
+            NativeFunction<Int32 Function(Pointer, Pointer<COMObject> filter)>
+          >
+        >()
+        .value
+        .asFunction<int Function(Pointer, Pointer<COMObject> filter)>()(
+      ptr.ref.lpVtbl,
+      retValuePtr,
+    );
 
     if (FAILED(hr)) {
       free(retValuePtr);
@@ -118,13 +132,16 @@ class IUIAutomationCacheRequest extends IUnknown {
 
   set treeFilter(Pointer<COMObject> value) {
     final hr = (ptr.ref.vtable + 9)
-            .cast<
-                Pointer<
-                    NativeFunction<
-                        Int32 Function(Pointer, Pointer<COMObject> filter)>>>()
-            .value
-            .asFunction<int Function(Pointer, Pointer<COMObject> filter)>()(
-        ptr.ref.lpVtbl, value);
+        .cast<
+          Pointer<
+            NativeFunction<Int32 Function(Pointer, Pointer<COMObject> filter)>
+          >
+        >()
+        .value
+        .asFunction<int Function(Pointer, Pointer<COMObject> filter)>()(
+      ptr.ref.lpVtbl,
+      value,
+    );
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
@@ -134,13 +151,16 @@ class IUIAutomationCacheRequest extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 10)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> mode)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> mode)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> mode)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> mode)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 

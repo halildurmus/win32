@@ -10,16 +10,21 @@ import 'package:win32/win32.dart';
 
 void main() {
   CoInitializeEx(
-      nullptr, COINIT.COINIT_APARTMENTTHREADED | COINIT.COINIT_DISABLE_OLE1DDE);
+    nullptr,
+    COINIT.COINIT_APARTMENTTHREADED | COINIT.COINIT_DISABLE_OLE1DDE,
+  );
 
   final sensorManager = SensorManager.createInstance();
 
   // Replace this with the sensor category you're looking for.
-  final sampleDateTimeSensorCategory =
-      GUIDFromString('{062A5C3B-44C1-4ad1-8EFC-0F65B2E4AD48}');
+  final sampleDateTimeSensorCategory = GUIDFromString(
+    '{062A5C3B-44C1-4ad1-8EFC-0F65B2E4AD48}',
+  );
   final pSensorsColl = calloc<Pointer<COMObject>>();
   final hr = sensorManager.getSensorsByCategory(
-      sampleDateTimeSensorCategory, pSensorsColl);
+    sampleDateTimeSensorCategory,
+    pSensorsColl,
+  );
   if (FAILED(hr)) throw WindowsException(hr);
 
   final coll = ISensorCollection(pSensorsColl.cast());

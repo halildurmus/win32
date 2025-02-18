@@ -15,8 +15,9 @@ import '../guid.dart';
 import '../structs.g.dart';
 import '../variant.dart';
 
-final _api_ms_win_core_sysinfo_l1_2_3 =
-    DynamicLibrary.open('api-ms-win-core-sysinfo-l1-2-3.dll');
+final _api_ms_win_core_sysinfo_l1_2_3 = DynamicLibrary.open(
+  'api-ms-win-core-sysinfo-l1-2-3.dll',
+);
 
 /// Retrieves the best estimate of the diagonal size of the built-in screen,
 /// in inches.
@@ -30,7 +31,8 @@ final _api_ms_win_core_sysinfo_l1_2_3 =
 int GetIntegratedDisplaySize(Pointer<Double> sizeInInches) =>
     _GetIntegratedDisplaySize(sizeInInches);
 
-final _GetIntegratedDisplaySize =
-    _api_ms_win_core_sysinfo_l1_2_3.lookupFunction<
-        Int32 Function(Pointer<Double> sizeInInches),
-        int Function(Pointer<Double> sizeInInches)>('GetIntegratedDisplaySize');
+final _GetIntegratedDisplaySize = _api_ms_win_core_sysinfo_l1_2_3
+    .lookupFunction<
+      Int32 Function(Pointer<Double> sizeInInches),
+      int Function(Pointer<Double> sizeInInches)
+    >('GetIntegratedDisplaySize');

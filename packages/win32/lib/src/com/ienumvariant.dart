@@ -41,19 +41,27 @@ class IEnumVARIANT extends IUnknown {
 
   int next(int celt, Pointer<VARIANT> rgVar, Pointer<Uint32> pCeltFetched) =>
       (ptr.ref.vtable + 3)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Uint32 celt,
-                              Pointer<VARIANT> rgVar,
-                              Pointer<Uint32> pCeltFetched)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, int celt, Pointer<VARIANT> rgVar,
-                      Pointer<Uint32> pCeltFetched)>()(
-          ptr.ref.lpVtbl, celt, rgVar, pCeltFetched);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Uint32 celt,
+                  Pointer<VARIANT> rgVar,
+                  Pointer<Uint32> pCeltFetched,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
+              Pointer,
+              int celt,
+              Pointer<VARIANT> rgVar,
+              Pointer<Uint32> pCeltFetched,
+            )
+          >()(ptr.ref.lpVtbl, celt, rgVar, pCeltFetched);
 
   int skip(int celt) => (ptr.ref.vtable + 4)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint32 celt)>>>()
@@ -66,13 +74,16 @@ class IEnumVARIANT extends IUnknown {
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
   int clone(Pointer<Pointer<COMObject>> ppEnum) => (ptr.ref.vtable + 6)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<Pointer<COMObject>> ppEnum)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, Pointer<Pointer<COMObject>> ppEnum)>()(
-      ptr.ref.lpVtbl, ppEnum);
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<Pointer<COMObject>> ppEnum)
+          >
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> ppEnum)>()(
+    ptr.ref.lpVtbl,
+    ppEnum,
+  );
 }

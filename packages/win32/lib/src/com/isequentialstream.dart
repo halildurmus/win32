@@ -40,25 +40,38 @@ class ISequentialStream extends IUnknown {
 
   int read(Pointer pv, int cb, Pointer<Uint32> pcbRead) => (ptr.ref.vtable + 3)
       .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(Pointer, Pointer pv, Uint32 cb,
-                      Pointer<Uint32> pcbRead)>>>()
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer pv,
+              Uint32 cb,
+              Pointer<Uint32> pcbRead,
+            )
+          >
+        >
+      >()
       .value
       .asFunction<
-          int Function(Pointer, Pointer pv, int cb,
-              Pointer<Uint32> pcbRead)>()(ptr.ref.lpVtbl, pv, cb, pcbRead);
+        int Function(Pointer, Pointer pv, int cb, Pointer<Uint32> pcbRead)
+      >()(ptr.ref.lpVtbl, pv, cb, pcbRead);
 
-  int write(Pointer pv, int cb, Pointer<Uint32> pcbWritten) =>
-      (ptr.ref.vtable + 4)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer pv, Uint32 cb,
-                              Pointer<Uint32> pcbWritten)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer pv, int cb,
-                      Pointer<Uint32> pcbWritten)>()(
-          ptr.ref.lpVtbl, pv, cb, pcbWritten);
+  int write(Pointer pv, int cb, Pointer<Uint32> pcbWritten) => (ptr.ref.vtable +
+          4)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer pv,
+              Uint32 cb,
+              Pointer<Uint32> pcbWritten,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(Pointer, Pointer pv, int cb, Pointer<Uint32> pcbWritten)
+      >()(ptr.ref.lpVtbl, pv, cb, pcbWritten);
 }

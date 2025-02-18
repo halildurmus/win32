@@ -32,7 +32,9 @@ void main(List<String> args) {
   if (supportedPtr.value == 1) {
     final spellCheckerPtr = calloc<COMObject>();
     spellCheckerFactory.createSpellChecker(
-        languageTagPtr, spellCheckerPtr.cast());
+      languageTagPtr,
+      spellCheckerPtr.cast(),
+    );
 
     final spellChecker = ISpellChecker(spellCheckerPtr);
 
@@ -87,8 +89,8 @@ void main(List<String> args) {
           final suggestionPtr = calloc<Pointer<Utf16>>();
           final suggestionResultPtr = calloc<Uint32>();
 
-          while (
-              suggestions.next(1, suggestionPtr, suggestionResultPtr) == S_OK) {
+          while (suggestions.next(1, suggestionPtr, suggestionResultPtr) ==
+              S_OK) {
             print('\t${suggestionPtr.value.toDartString()}');
             WindowsDeleteString(suggestionPtr.value.address);
           }

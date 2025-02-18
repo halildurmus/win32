@@ -30,9 +30,10 @@ IUIAutomationElement getTopLevelWindowByProcessId(int processId) {
   try {
     final pCondition = calloc<COMObject>();
     var hr = uiAutomation.createPropertyCondition(
-        UIA_PROPERTY_ID.UIA_ProcessIdPropertyId,
-        valueParam.ref,
-        pCondition.cast());
+      UIA_PROPERTY_ID.UIA_ProcessIdPropertyId,
+      valueParam.ref,
+      pCondition.cast(),
+    );
     if (FAILED(hr)) {
       free(pCondition);
       throw WindowsException(hr);
@@ -41,9 +42,10 @@ IUIAutomationElement getTopLevelWindowByProcessId(int processId) {
 
     final pElement = calloc<COMObject>();
     hr = root.findFirst(
-        TreeScope.TreeScope_Children,
-        propertyCondition.ptr.cast<Pointer<COMObject>>().value,
-        pElement.cast());
+      TreeScope.TreeScope_Children,
+      propertyCondition.ptr.cast<Pointer<COMObject>>().value,
+      pElement.cast(),
+    );
     if (FAILED(hr)) {
       free(pElement);
       throw WindowsException(hr);
@@ -83,13 +85,17 @@ bool isControlPatternAvailable(int propertyId, IUIAutomationElement element) {
 IUIAutomationWindowPattern getWindowPattern(IUIAutomationElement element) {
   // Check if the window pattern is available for the element
   if (!isControlPatternAvailable(
-      UIA_PROPERTY_ID.UIA_IsWindowPatternAvailablePropertyId, element)) {
+    UIA_PROPERTY_ID.UIA_IsWindowPatternAvailablePropertyId,
+    element,
+  )) {
     throw Exception('Window pattern is not available for this element');
   }
 
   final pPattern = calloc<COMObject>();
   final hr = element.getCurrentPattern(
-      UIA_PATTERN_ID.UIA_WindowPatternId, pPattern.cast());
+    UIA_PATTERN_ID.UIA_WindowPatternId,
+    pPattern.cast(),
+  );
   if (FAILED(hr)) {
     free(pPattern);
     throw WindowsException(hr);
@@ -104,14 +110,16 @@ IUIAutomationWindowPattern getWindowPattern(IUIAutomationElement element) {
 }
 
 void maximizeWindow(IUIAutomationWindowPattern window) {
-  final hr = window
-      .setWindowVisualState(WindowVisualState.WindowVisualState_Maximized);
+  final hr = window.setWindowVisualState(
+    WindowVisualState.WindowVisualState_Maximized,
+  );
   if (FAILED(hr)) throw WindowsException(hr);
 }
 
 void restoreWindow(IUIAutomationWindowPattern window) {
-  final hr =
-      window.setWindowVisualState(WindowVisualState.WindowVisualState_Normal);
+  final hr = window.setWindowVisualState(
+    WindowVisualState.WindowVisualState_Normal,
+  );
   if (FAILED(hr)) throw WindowsException(hr);
 }
 

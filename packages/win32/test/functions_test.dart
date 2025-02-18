@@ -14,21 +14,17 @@ void main() {
 
     test('Can instantiate GetWindowCompositionAttribute', () {
       final GetWindowCompositionAttribute = user32.lookupFunction<
-          Int32 Function(
-              IntPtr hwnd, Pointer<WINDOWCOMPOSITIONATTRIBDATA> pwcad),
-          int Function(int hwnd, Pointer<WINDOWCOMPOSITIONATTRIBDATA> pwcad)>(
-        'GetWindowCompositionAttribute',
-      );
+        Int32 Function(IntPtr hwnd, Pointer<WINDOWCOMPOSITIONATTRIBDATA> pwcad),
+        int Function(int hwnd, Pointer<WINDOWCOMPOSITIONATTRIBDATA> pwcad)
+      >('GetWindowCompositionAttribute');
       expect(GetWindowCompositionAttribute, isA<Function>());
     });
 
     test('Can instantiate SetWindowCompositionAttribute', () {
       final SetWindowCompositionAttribute = user32.lookupFunction<
-          Int32 Function(
-              IntPtr hwnd, Pointer<WINDOWCOMPOSITIONATTRIBDATA> pwcad),
-          int Function(int hwnd, Pointer<WINDOWCOMPOSITIONATTRIBDATA> pwcad)>(
-        'SetWindowCompositionAttribute',
-      );
+        Int32 Function(IntPtr hwnd, Pointer<WINDOWCOMPOSITIONATTRIBDATA> pwcad),
+        int Function(int hwnd, Pointer<WINDOWCOMPOSITIONATTRIBDATA> pwcad)
+      >('SetWindowCompositionAttribute');
       expect(SetWindowCompositionAttribute, isA<Function>());
     });
   });

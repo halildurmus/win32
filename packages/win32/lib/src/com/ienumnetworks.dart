@@ -44,13 +44,17 @@ class IEnumNetworks extends IDispatch {
 
     final hr = (ptr.ref.vtable + 7)
         .cast<
-            Pointer<
-                NativeFunction<
-                    Int32 Function(Pointer, Pointer<COMObject> ppEnumVar)>>>()
+          Pointer<
+            NativeFunction<
+              Int32 Function(Pointer, Pointer<COMObject> ppEnumVar)
+            >
+          >
+        >()
         .value
-        .asFunction<
-            int Function(Pointer,
-                Pointer<COMObject> ppEnumVar)>()(ptr.ref.lpVtbl, retValuePtr);
+        .asFunction<int Function(Pointer, Pointer<COMObject> ppEnumVar)>()(
+      ptr.ref.lpVtbl,
+      retValuePtr,
+    );
 
     if (FAILED(hr)) {
       free(retValuePtr);
@@ -60,25 +64,32 @@ class IEnumNetworks extends IDispatch {
     return retValuePtr;
   }
 
-  int next(int celt, Pointer<Pointer<COMObject>> rgelt,
-          Pointer<Uint32> pceltFetched) =>
-      (ptr.ref.vtable + 8)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Uint32 celt,
-                              Pointer<Pointer<COMObject>> rgelt,
-                              Pointer<Uint32> pceltFetched)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      int celt,
-                      Pointer<Pointer<COMObject>> rgelt,
-                      Pointer<Uint32> pceltFetched)>()(
-          ptr.ref.lpVtbl, celt, rgelt, pceltFetched);
+  int next(
+    int celt,
+    Pointer<Pointer<COMObject>> rgelt,
+    Pointer<Uint32> pceltFetched,
+  ) => (ptr.ref.vtable + 8)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Uint32 celt,
+              Pointer<Pointer<COMObject>> rgelt,
+              Pointer<Uint32> pceltFetched,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          int celt,
+          Pointer<Pointer<COMObject>> rgelt,
+          Pointer<Uint32> pceltFetched,
+        )
+      >()(ptr.ref.lpVtbl, celt, rgelt, pceltFetched);
 
   int skip(int celt) => (ptr.ref.vtable + 9)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint32 celt)>>>()
@@ -91,14 +102,15 @@ class IEnumNetworks extends IDispatch {
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
   int clone(Pointer<Pointer<COMObject>> ppEnumNetwork) => (ptr.ref.vtable + 11)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer,
-                          Pointer<Pointer<COMObject>> ppEnumNetwork)>>>()
-          .value
-          .asFunction<
-              int Function(
-                  Pointer, Pointer<Pointer<COMObject>> ppEnumNetwork)>()(
-      ptr.ref.lpVtbl, ppEnumNetwork);
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<Pointer<COMObject>> ppEnumNetwork)
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(Pointer, Pointer<Pointer<COMObject>> ppEnumNetwork)
+      >()(ptr.ref.lpVtbl, ppEnumNetwork);
 }

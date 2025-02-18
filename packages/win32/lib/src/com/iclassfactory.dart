@@ -37,22 +37,32 @@ class IClassFactory extends IUnknown {
   factory IClassFactory.from(IUnknown interface) =>
       IClassFactory(interface.toInterface(IID_IClassFactory));
 
-  int createInstance(Pointer<COMObject> pUnkOuter, Pointer<GUID> riid,
-          Pointer<Pointer> ppvObject) =>
-      (ptr.ref.vtable + 3)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<COMObject> pUnkOuter,
-                          Pointer<GUID> riid, Pointer<Pointer> ppvObject)>>>()
-          .value
-          .asFunction<
-              int Function(
-                  Pointer,
-                  Pointer<COMObject> pUnkOuter,
-                  Pointer<GUID> riid,
-                  Pointer<Pointer>
-                      ppvObject)>()(ptr.ref.lpVtbl, pUnkOuter, riid, ppvObject);
+  int createInstance(
+    Pointer<COMObject> pUnkOuter,
+    Pointer<GUID> riid,
+    Pointer<Pointer> ppvObject,
+  ) => (ptr.ref.vtable + 3)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<COMObject> pUnkOuter,
+              Pointer<GUID> riid,
+              Pointer<Pointer> ppvObject,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<COMObject> pUnkOuter,
+          Pointer<GUID> riid,
+          Pointer<Pointer> ppvObject,
+        )
+      >()(ptr.ref.lpVtbl, pUnkOuter, riid, ppvObject);
 
   int lockServer(int fLock) => (ptr.ref.vtable + 4)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 fLock)>>>()

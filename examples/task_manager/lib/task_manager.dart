@@ -58,7 +58,11 @@ abstract class TaskManager {
           final cbNeededMod = arena<Uint32>();
 
           if (EnumProcessModules(
-                  hProcess, hModule, sizeOf<HMODULE>(), cbNeededMod) !=
+                hProcess,
+                hModule,
+                sizeOf<HMODULE>(),
+                cbNeededMod,
+              ) !=
               0) {
             final moduleName = arena<WCHAR>(MAX_PATH).cast<Utf16>();
 
@@ -73,16 +77,21 @@ abstract class TaskManager {
 
               final filePath = arena<WCHAR>(MAX_PATH).cast<Utf16>();
               final result = GetModuleFileNameEx(
-                  hProcess, hModule.value, filePath, MAX_PATH);
+                hProcess,
+                hModule.value,
+                filePath,
+                MAX_PATH,
+              );
               final path = result != 0 ? filePath.toDartString() : null;
 
               final description =
                   path != null ? (_getFileDescription(path) ?? name) : name;
 
               final task = Task(
-                iconAsBytes: path != null
-                    ? (_extractIcon(path) ?? Uint8List(0))
-                    : Uint8List(0),
+                iconAsBytes:
+                    path != null
+                        ? (_extractIcon(path) ?? Uint8List(0))
+                        : Uint8List(0),
                 name: name,
                 pid: pid,
                 description: description,
@@ -104,8 +113,11 @@ abstract class TaskManager {
   /// Returns `true` if the task was successfully terminated; otherwise,
   /// `false`.
   static bool terminate(int pid) {
-    final handle =
-        OpenProcess(PROCESS_ACCESS_RIGHTS.PROCESS_TERMINATE, FALSE, pid);
+    final handle = OpenProcess(
+      PROCESS_ACCESS_RIGHTS.PROCESS_TERMINATE,
+      FALSE,
+      pid,
+    );
     if (handle == NULL) return false;
 
     try {
@@ -132,8 +144,9 @@ abstract class TaskManager {
 
       if (VerQueryValue(
             versionInfo,
-            r'\StringFileInfo\040904b0\FileDescription'
-                .toNativeUtf16(allocator: arena),
+            r'\StringFileInfo\040904b0\FileDescription'.toNativeUtf16(
+              allocator: arena,
+            ),
             lplpBuffer.cast(),
             puLen,
           ) ==
@@ -265,13 +278,15 @@ abstract class TaskManager {
         ..nNumColorsInPalette = (nColorBits == 4 ? 16 : 0)
         ..nNumColorPlanes = 0
         ..nBitsPerPixel = bmInfo.ref.bmiHeader.biBitCount
-        ..nDataLength = bmInfo.ref.bmiHeader.biSizeImage +
+        ..nDataLength =
+            bmInfo.ref.bmiHeader.biSizeImage +
             maskInfo.ref.bmiHeader.biSizeImage +
             nBmInfoSize
         ..nOffset = sizeOf<_IconDirectoryEntry>() + 6;
 
-      buffer
-          .addAll(dir.cast<Uint8>().asTypedList(sizeOf<_IconDirectoryEntry>()));
+      buffer.addAll(
+        dir.cast<Uint8>().asTypedList(sizeOf<_IconDirectoryEntry>()),
+      );
 
       bmInfo.ref.bmiHeader
         ..biHeight *= 2

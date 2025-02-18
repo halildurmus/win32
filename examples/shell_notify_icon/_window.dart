@@ -19,31 +19,33 @@ int createHidden() {
   final windowClassNme = _regWinClass();
   final rect = _getWindowCenterRect();
   final hWnd = CreateWindowEx(
-      0,
-      TEXT(windowClassNme),
-      TEXT('Tray Callback Window'),
-      WINDOW_STYLE.WS_OVERLAPPEDWINDOW,
-      rect.left,
-      rect.top,
-      rect.width,
-      rect.height,
-      NULL,
-      NULL,
-      app.hInst,
-      nullptr);
+    0,
+    TEXT(windowClassNme),
+    TEXT('Tray Callback Window'),
+    WINDOW_STYLE.WS_OVERLAPPEDWINDOW,
+    rect.left,
+    rect.top,
+    rect.width,
+    rect.height,
+    NULL,
+    NULL,
+    app.hInst,
+    nullptr,
+  );
   app.registerWndProc(_windowWndProc);
   return hWnd;
 }
 
 String _regWinClass() {
   const windowClass = 'Tray_Callback_Window';
-  final pWndClass = calloc<WNDCLASS>()
-    ..ref.style = WNDCLASS_STYLES.CS_HREDRAW | WNDCLASS_STYLES.CS_VREDRAW
-    ..ref.lpfnWndProc = app.lpfnWndProc.nativeFunction
-    ..ref.hInstance = app.hInst
-    ..ref.hIcon = app.loadDartIcon()
-    ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
-    ..ref.lpszClassName = TEXT(windowClass);
+  final pWndClass =
+      calloc<WNDCLASS>()
+        ..ref.style = WNDCLASS_STYLES.CS_HREDRAW | WNDCLASS_STYLES.CS_VREDRAW
+        ..ref.lpfnWndProc = app.lpfnWndProc.nativeFunction
+        ..ref.hInstance = app.hInst
+        ..ref.hIcon = app.loadDartIcon()
+        ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
+        ..ref.lpszClassName = TEXT(windowClass);
   RegisterClass(pWndClass);
   return windowClass;
 }

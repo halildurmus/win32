@@ -38,38 +38,52 @@ class IRestrictedErrorInfo extends IUnknown {
       IRestrictedErrorInfo(interface.toInterface(IID_IRestrictedErrorInfo));
 
   int getErrorDetails(
+    Pointer<Pointer<Utf16>> description,
+    Pointer<Int32> error,
+    Pointer<Pointer<Utf16>> restrictedDescription,
+    Pointer<Pointer<Utf16>> capabilitySid,
+  ) => (ptr.ref.vtable + 3)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<Pointer<Utf16>> description,
+              Pointer<Int32> error,
+              Pointer<Pointer<Utf16>> restrictedDescription,
+              Pointer<Pointer<Utf16>> capabilitySid,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
           Pointer<Pointer<Utf16>> description,
           Pointer<Int32> error,
           Pointer<Pointer<Utf16>> restrictedDescription,
-          Pointer<Pointer<Utf16>> capabilitySid) =>
-      (ptr.ref.vtable + 3)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<Pointer<Utf16>> description,
-                              Pointer<Int32> error,
-                              Pointer<Pointer<Utf16>> restrictedDescription,
-                              Pointer<Pointer<Utf16>> capabilitySid)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      Pointer<Pointer<Utf16>> description,
-                      Pointer<Int32> error,
-                      Pointer<Pointer<Utf16>> restrictedDescription,
-                      Pointer<Pointer<Utf16>> capabilitySid)>()(ptr.ref.lpVtbl,
-          description, error, restrictedDescription, capabilitySid);
+          Pointer<Pointer<Utf16>> capabilitySid,
+        )
+      >()(
+    ptr.ref.lpVtbl,
+    description,
+    error,
+    restrictedDescription,
+    capabilitySid,
+  );
 
   int getReference(Pointer<Pointer<Utf16>> reference) => (ptr.ref.vtable + 4)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<Pointer<Utf16>> reference)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, Pointer<Pointer<Utf16>> reference)>()(
-      ptr.ref.lpVtbl, reference);
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<Pointer<Utf16>> reference)
+          >
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> reference)>()(
+    ptr.ref.lpVtbl,
+    reference,
+  );
 }

@@ -32,12 +32,17 @@ abstract class MethodProjection {
   final TypeProjection returnType;
 
   MethodProjection(this.method, this.vtableOffset)
-      : name = uniquelyNameMethod(method),
-        returnType = TypeProjection(method.returnType.typeIdentifier),
-        parameters = method.parameters
-            .map((param) => ParameterProjection(
-                param.name, TypeProjection(param.typeIdentifier)))
-            .toList();
+    : name = uniquelyNameMethod(method),
+      returnType = TypeProjection(method.returnType.typeIdentifier),
+      parameters =
+          method.parameters
+              .map(
+                (param) => ParameterProjection(
+                  param.name,
+                  TypeProjection(param.typeIdentifier),
+                ),
+              )
+              .toList();
 
   /// Uniquely name the method.
   ///
@@ -45,8 +50,9 @@ abstract class MethodProjection {
   /// are duplicated.
   static String uniquelyNameMethod(Method method) {
     // Is it a WinRT method overloaded with a name provided by the metadata?
-    final overloadName = method
-        .attributeAsString('Windows.Foundation.Metadata.OverloadAttribute');
+    final overloadName = method.attributeAsString(
+      'Windows.Foundation.Metadata.OverloadAttribute',
+    );
     if (overloadName.isNotEmpty) return overloadName;
 
     // If not, we check whether multiple methods exist with the same name. We
@@ -61,16 +67,18 @@ abstract class MethodProjection {
         !(interfaceTypeDef.interfaces.first.name ==
             'Windows.Win32.System.Com.IUnknown')) {
       interfaceTypeDef = interfaceTypeDef.interfaces.first;
-      overloads
-          .addAll(interfaceTypeDef.methods.where((m) => m.name == method.name));
+      overloads.addAll(
+        interfaceTypeDef.methods.where((m) => m.name == method.name),
+      );
     }
 
     // If so, and there is more than one entry with the same name, add a suffix
     // to all but the first.
     if (overloads.length > 1) {
       final reversedOverloads = overloads.reversed.toList();
-      final overloadIndex =
-          reversedOverloads.indexWhere((m) => m.token == method.token);
+      final overloadIndex = reversedOverloads.indexWhere(
+        (m) => m.token == method.token,
+      );
       if (overloadIndex > 0) {
         return '${safeIdentifierForString(method.name)}_$overloadIndex';
       }
@@ -96,7 +104,8 @@ abstract class MethodProjection {
       if (name.startsWith(acronym)) {
         // e.g. IPInformation -> ipInformation
         return safeIdentifierForString(
-            acronym.toLowerCase() + name.substring(acronym.length));
+          acronym.toLowerCase() + name.substring(acronym.length),
+        );
       }
     }
 

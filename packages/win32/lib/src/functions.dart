@@ -16,14 +16,12 @@ final _user32 = DynamicLibrary.open('user32.dll');
 int GetWindowCompositionAttribute(
   int hwnd,
   Pointer<WINDOWCOMPOSITIONATTRIBDATA> pwcad,
-) =>
-    _GetWindowCompositionAttribute(hwnd, pwcad);
+) => _GetWindowCompositionAttribute(hwnd, pwcad);
 
 final _GetWindowCompositionAttribute = _user32.lookupFunction<
-    Int32 Function(IntPtr hwnd, Pointer<WINDOWCOMPOSITIONATTRIBDATA> pwcad),
-    int Function(int hwnd, Pointer<WINDOWCOMPOSITIONATTRIBDATA> pwcad)>(
-  'GetWindowCompositionAttribute',
-);
+  Int32 Function(IntPtr hwnd, Pointer<WINDOWCOMPOSITIONATTRIBDATA> pwcad),
+  int Function(int hwnd, Pointer<WINDOWCOMPOSITIONATTRIBDATA> pwcad)
+>('GetWindowCompositionAttribute');
 
 /// Sets the current value of a specified Desktop Window Manager (DWM) attribute
 /// applied to a window.
@@ -35,11 +33,9 @@ final _GetWindowCompositionAttribute = _user32.lookupFunction<
 int SetWindowCompositionAttribute(
   int hwnd,
   Pointer<WINDOWCOMPOSITIONATTRIBDATA> pwcad,
-) =>
-    _SetWindowCompositionAttribute(hwnd, pwcad);
+) => _SetWindowCompositionAttribute(hwnd, pwcad);
 
 final _SetWindowCompositionAttribute = _user32.lookupFunction<
-    Int32 Function(IntPtr hwnd, Pointer<WINDOWCOMPOSITIONATTRIBDATA> pwcad),
-    int Function(int hwnd, Pointer<WINDOWCOMPOSITIONATTRIBDATA> pwcad)>(
-  'SetWindowCompositionAttribute',
-);
+  Int32 Function(IntPtr hwnd, Pointer<WINDOWCOMPOSITIONATTRIBDATA> pwcad),
+  int Function(int hwnd, Pointer<WINDOWCOMPOSITIONATTRIBDATA> pwcad)
+>('SetWindowCompositionAttribute');

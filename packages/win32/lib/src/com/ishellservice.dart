@@ -39,11 +39,14 @@ class IShellService extends IUnknown {
       IShellService(interface.toInterface(IID_IShellService));
 
   int setOwner(Pointer<COMObject> punkOwner) => (ptr.ref.vtable + 3)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<COMObject> punkOwner)>>>()
-          .value
-          .asFunction<int Function(Pointer, Pointer<COMObject> punkOwner)>()(
-      ptr.ref.lpVtbl, punkOwner);
+      .cast<
+        Pointer<
+          NativeFunction<Int32 Function(Pointer, Pointer<COMObject> punkOwner)>
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<COMObject> punkOwner)>()(
+    ptr.ref.lpVtbl,
+    punkOwner,
+  );
 }

@@ -29,11 +29,13 @@ void main() {
     final fixedFileVersionInfo =
         lpFixedFileVersionInfo.value.cast<VS_FIXEDFILEINFO>();
 
-    print('Version of shell32.dll: '
-        '${HIWORD(fixedFileVersionInfo.ref.dwFileVersionMS)}.'
-        '${LOWORD(fixedFileVersionInfo.ref.dwFileVersionMS)}.'
-        '${HIWORD(fixedFileVersionInfo.ref.dwFileVersionLS)}.'
-        '${LOWORD(fixedFileVersionInfo.ref.dwFileVersionLS)}');
+    print(
+      'Version of shell32.dll: '
+      '${HIWORD(fixedFileVersionInfo.ref.dwFileVersionMS)}.'
+      '${LOWORD(fixedFileVersionInfo.ref.dwFileVersionMS)}.'
+      '${HIWORD(fixedFileVersionInfo.ref.dwFileVersionLS)}.'
+      '${LOWORD(fixedFileVersionInfo.ref.dwFileVersionLS)}',
+    );
   } finally {
     free(lpFilename);
     free(pBlock);

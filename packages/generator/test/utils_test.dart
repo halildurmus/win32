@@ -9,8 +9,9 @@ void main() {
   late Scope scope;
 
   setUpAll(() async {
-    scope =
-        await MetadataStore.loadWin32Metadata(version: win32MetadataVersion);
+    scope = await MetadataStore.loadWin32Metadata(
+      version: win32MetadataVersion,
+    );
   });
 
   test('typePretendsToBeAnsi', () {
@@ -26,38 +27,41 @@ void main() {
 
   test('sortImports', () {
     expect(
-        sortImports([
-          "import 'dart:ffi';",
-          "import 'package:ffi/ffi.dart';",
-          "import 'dart:async';",
-          "import 'package:win32/win32.dart';",
-          "import '../../../combase.dart';",
-          "import '../../../exceptions.dart';",
-          "import '../../../types.dart';",
-          "import '../../../utils.dart';",
-          "import '../../../win32/api_ms_win_core_winrt_string_l1_1_0.g.dart';",
-          "import '../../../macros.dart';",
-        ]),
-        orderedEquals([
-          "import 'dart:async';",
-          "import 'dart:ffi';",
-          "",
-          "import 'package:ffi/ffi.dart';",
-          "import 'package:win32/win32.dart';",
-          "",
-          "import '../../../combase.dart';",
-          "import '../../../exceptions.dart';",
-          "import '../../../macros.dart';",
-          "import '../../../types.dart';",
-          "import '../../../utils.dart';",
-          "import '../../../win32/api_ms_win_core_winrt_string_l1_1_0.g.dart';",
-        ]));
+      sortImports([
+        "import 'dart:ffi';",
+        "import 'package:ffi/ffi.dart';",
+        "import 'dart:async';",
+        "import 'package:win32/win32.dart';",
+        "import '../../../combase.dart';",
+        "import '../../../exceptions.dart';",
+        "import '../../../types.dart';",
+        "import '../../../utils.dart';",
+        "import '../../../win32/api_ms_win_core_winrt_string_l1_1_0.g.dart';",
+        "import '../../../macros.dart';",
+      ]),
+      orderedEquals([
+        "import 'dart:async';",
+        "import 'dart:ffi';",
+        "",
+        "import 'package:ffi/ffi.dart';",
+        "import 'package:win32/win32.dart';",
+        "",
+        "import '../../../combase.dart';",
+        "import '../../../exceptions.dart';",
+        "import '../../../macros.dart';",
+        "import '../../../types.dart';",
+        "import '../../../utils.dart';",
+        "import '../../../win32/api_ms_win_core_winrt_string_l1_1_0.g.dart';",
+      ]),
+    );
   });
 
   test('stripGenerics', () {
     expect(stripGenerics('TypedEventHandler`2'), equals('TypedEventHandler'));
-    expect(stripGenerics('LicenseChangedEventHandler'),
-        equals('LicenseChangedEventHandler'));
+    expect(
+      stripGenerics('LicenseChangedEventHandler'),
+      equals('LicenseChangedEventHandler'),
+    );
   });
 
   test('typedefIsAnsi', () {
@@ -74,8 +78,10 @@ void main() {
   });
 
   test('mangleName', () {
-    final propVariant = scope
-        .findTypeDef('Windows.Win32.System.Com.StructuredStorage.PROPVARIANT')!;
+    final propVariant =
+        scope.findTypeDef(
+          'Windows.Win32.System.Com.StructuredStorage.PROPVARIANT',
+        )!;
 
     final union1 = propVariant.fields.first.typeIdentifier.type;
     expect(union1, isNotNull);
@@ -83,48 +89,68 @@ void main() {
 
     final struct1 = union1.fields.first.typeIdentifier.type;
     expect(struct1, isNotNull);
-    expect(mangleName(struct1!),
-        equals('_PROPVARIANT__Anonymous_e__Union__Anonymous_e__Struct'));
+    expect(
+      mangleName(struct1!),
+      equals('_PROPVARIANT__Anonymous_e__Union__Anonymous_e__Struct'),
+    );
 
     final union2 = struct1.fields.last.typeIdentifier.type;
     expect(union2, isNotNull);
     expect(
-        mangleName(union2!),
-        equals(
-            '_PROPVARIANT__Anonymous_e__Union__Anonymous_e__Struct__Anonymous_e__Union'));
+      mangleName(union2!),
+      equals(
+        '_PROPVARIANT__Anonymous_e__Union__Anonymous_e__Struct__Anonymous_e__Union',
+      ),
+    );
   });
 
   test('stripAnsiUnicodeSuffix', () {
     expect(stripAnsiUnicodeSuffix('AREA'), equals('AREA'));
     expect(stripAnsiUnicodeSuffix('Pointer<AREA>'), equals('Pointer<AREA>'));
     expect(stripAnsiUnicodeSuffix('ADDJOB_INFO_1W'), equals('ADDJOB_INFO_1'));
-    expect(stripAnsiUnicodeSuffix('Pointer<ADDJOB_INFO_1W>'),
-        equals('Pointer<ADDJOB_INFO_1>'));
+    expect(
+      stripAnsiUnicodeSuffix('Pointer<ADDJOB_INFO_1W>'),
+      equals('Pointer<ADDJOB_INFO_1>'),
+    );
   });
 
   test('wrapCommentText', () {
     expect(wrapCommentText('', 12), isEmpty);
 
-    expect(wrapCommentText('This is a short string', 8),
-        equals('/// This\n/// is a\n/// short\n/// string'));
+    expect(
+      wrapCommentText('This is a short string', 8),
+      equals('/// This\n/// is a\n/// short\n/// string'),
+    );
 
-    expect(wrapCommentText('This is a short string', 12),
-        equals('/// This is\n/// a short\n/// string'));
+    expect(
+      wrapCommentText('This is a short string', 12),
+      equals('/// This is\n/// a short\n/// string'),
+    );
 
-    expect(wrapCommentText('This is a short string', 20),
-        equals('/// This is a short\n/// string'));
+    expect(
+      wrapCommentText('This is a short string', 20),
+      equals('/// This is a short\n/// string'),
+    );
 
-    expect(wrapCommentText('This is a short string', 200),
-        equals('/// This is a short string'));
+    expect(
+      wrapCommentText('This is a short string', 200),
+      equals('/// This is a short string'),
+    );
   });
 
   test('classNameForInterfaceName', () {
-    expect(classNameForInterfaceName('Windows.Win32.UI.Shell.IShellLinkW'),
-        equals('Windows.Win32.UI.Shell.ShellLink'));
-    expect(classNameForInterfaceName('Windows.Win32.UI.Shell.IShellLinkA'),
-        equals('Windows.Win32.UI.Shell.ShellLink'));
-    expect(classNameForInterfaceName('Windows.Win32.UI.Shell.IShellLink'),
-        equals('Windows.Win32.UI.Shell.ShellLink'));
+    expect(
+      classNameForInterfaceName('Windows.Win32.UI.Shell.IShellLinkW'),
+      equals('Windows.Win32.UI.Shell.ShellLink'),
+    );
+    expect(
+      classNameForInterfaceName('Windows.Win32.UI.Shell.IShellLinkA'),
+      equals('Windows.Win32.UI.Shell.ShellLink'),
+    );
+    expect(
+      classNameForInterfaceName('Windows.Win32.UI.Shell.IShellLink'),
+      equals('Windows.Win32.UI.Shell.ShellLink'),
+    );
   });
 
   test('toCamelCase', () {
@@ -147,9 +173,13 @@ void main() {
 
   test('folderFromNamespace', () {
     expect(
-        folderFromNamespace('Windows.Win32.System.Console'), equals('system'));
-    expect(folderFromNamespace('Windows.Win32.UI.Shell.Common'),
-        equals('ui/shell'));
+      folderFromNamespace('Windows.Win32.System.Console'),
+      equals('system'),
+    );
+    expect(
+      folderFromNamespace('Windows.Win32.UI.Shell.Common'),
+      equals('ui/shell'),
+    );
   });
 
   tearDownAll(MetadataStore.close);

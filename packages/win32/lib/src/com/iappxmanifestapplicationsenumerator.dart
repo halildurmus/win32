@@ -36,35 +36,42 @@ class IAppxManifestApplicationsEnumerator extends IUnknown {
 
   factory IAppxManifestApplicationsEnumerator.from(IUnknown interface) =>
       IAppxManifestApplicationsEnumerator(
-          interface.toInterface(IID_IAppxManifestApplicationsEnumerator));
+        interface.toInterface(IID_IAppxManifestApplicationsEnumerator),
+      );
 
-  int getCurrent(Pointer<Pointer<COMObject>> application) => (ptr.ref.vtable +
-              3)
+  int getCurrent(Pointer<Pointer<COMObject>> application) =>
+      (ptr.ref.vtable + 3)
           .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<Pointer<COMObject>> application)>>>()
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<COMObject>> application)
+              >
+            >
+          >()
           .value
           .asFunction<
-              int Function(Pointer, Pointer<Pointer<COMObject>> application)>()(
-      ptr.ref.lpVtbl, application);
+            int Function(Pointer, Pointer<Pointer<COMObject>> application)
+          >()(ptr.ref.lpVtbl, application);
 
   int getHasCurrent(Pointer<Int32> hasCurrent) => (ptr.ref.vtable + 4)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<Int32> hasCurrent)>>>()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Int32> hasCurrent)>()(
-      ptr.ref.lpVtbl, hasCurrent);
+      .cast<
+        Pointer<
+          NativeFunction<Int32 Function(Pointer, Pointer<Int32> hasCurrent)>
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Int32> hasCurrent)>()(
+    ptr.ref.lpVtbl,
+    hasCurrent,
+  );
 
   int moveNext(Pointer<Int32> hasNext) => (ptr.ref.vtable + 5)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<Int32> hasNext)>>>()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Int32> hasNext)>()(
-      ptr.ref.lpVtbl, hasNext);
+      .cast<
+        Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Int32> hasNext)>>
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Int32> hasNext)>()(
+    ptr.ref.lpVtbl,
+    hasNext,
+  );
 }

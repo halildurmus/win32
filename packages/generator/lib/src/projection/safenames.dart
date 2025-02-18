@@ -54,7 +54,7 @@ const badIdentifierNames = <String>[
   ...dartTypes,
   ...ffiTypes,
   ...win32TypesUsedAsIdentifiers,
-  'ptr' // used in COM
+  'ptr', // used in COM
 ];
 
 /// Take a [TypeDef] and return a name suitable for filenames.
@@ -84,9 +84,10 @@ String safeIdentifierForTypeDef(TypeDef typeDef) {
 ///
 /// For example, `VARIANT var` should be converted to `VARIANT $var`, and
 /// `_XmlWriterProperty` should be converted to `XmlWriterProperty`.
-String safeIdentifierForString(String name) => badIdentifierNames.contains(name)
-    ? '${name}_'
-    : stripLeadingUnderscores(name);
+String safeIdentifierForString(String name) =>
+    badIdentifierNames.contains(name)
+        ? '${name}_'
+        : stripLeadingUnderscores(name);
 
 String safeTypenameForTypeDef(TypeDef typeDef) =>
     safeTypenameForString(lastComponent(typeDef.name));

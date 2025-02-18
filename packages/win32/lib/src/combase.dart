@@ -32,15 +32,23 @@ base class COMObject extends Struct {
   /// The caller is responsible for disposing of the memory of the returned
   /// object when it is no longer required. A FFI `Arena` may be passed as a
   /// custom allocator for ease of memory management.
-  static Pointer<COMObject> createFromID(String clsid, String iid,
-      {Allocator allocator = calloc}) {
+  static Pointer<COMObject> createFromID(
+    String clsid,
+    String iid, {
+    Allocator allocator = calloc,
+  }) {
     final pClsid = convertToCLSID(clsid);
     final pIid = convertToIID(iid);
     final pObj = allocator<COMObject>();
 
     try {
       final hr = CoCreateInstance(
-          pClsid, nullptr, CLSCTX.CLSCTX_ALL, pIid, pObj.cast());
+        pClsid,
+        nullptr,
+        CLSCTX.CLSCTX_ALL,
+        pIid,
+        pObj.cast(),
+      );
       if (FAILED(hr)) throw WindowsException(hr);
       return pObj;
     } finally {

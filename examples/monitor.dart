@@ -95,10 +95,11 @@ void main() {
   );
 
   result = EnumDisplayMonitors(
-      NULL, // all displays
-      nullptr, // no clipping region
-      lpfnEnum.nativeFunction,
-      NULL);
+    NULL, // all displays
+    nullptr, // no clipping region
+    lpfnEnum.nativeFunction,
+    NULL,
+  );
   if (result == FALSE) {
     throw WindowsException(result);
   }
@@ -112,7 +113,9 @@ void main() {
 
   final physicalMonitorCountPtr = calloc<DWORD>();
   result = GetNumberOfPhysicalMonitorsFromHMONITOR(
-      primaryMonitorHandle, physicalMonitorCountPtr);
+    primaryMonitorHandle,
+    physicalMonitorCountPtr,
+  );
   if (result == FALSE) {
     print('No physical monitors attached.');
     free(physicalMonitorCountPtr);
@@ -126,11 +129,15 @@ void main() {
   // Since fixed-size arrays are difficult to allocate with Dart FFI at present,
   // and since we only need the first entry, we can manually allocate space of
   // the right size.
-  final physicalMonitorArray =
-      calloc<PHYSICAL_MONITOR>(physicalMonitorCountPtr.value);
+  final physicalMonitorArray = calloc<PHYSICAL_MONITOR>(
+    physicalMonitorCountPtr.value,
+  );
 
-  result = GetPhysicalMonitorsFromHMONITOR(primaryMonitorHandle,
-      physicalMonitorCountPtr.value, physicalMonitorArray);
+  result = GetPhysicalMonitorsFromHMONITOR(
+    primaryMonitorHandle,
+    physicalMonitorCountPtr.value,
+    physicalMonitorArray,
+  );
   if (result == FALSE) {
     throw WindowsException(result);
   }
@@ -145,8 +152,11 @@ void main() {
   final monitorCapabilitiesPtr = calloc<DWORD>();
   final monitorColorTemperaturesPtr = calloc<DWORD>();
 
-  result = GetMonitorCapabilities(physicalMonitorHandle, monitorCapabilitiesPtr,
-      monitorColorTemperaturesPtr);
+  result = GetMonitorCapabilities(
+    physicalMonitorHandle,
+    monitorCapabilitiesPtr,
+    monitorColorTemperaturesPtr,
+  );
   if (result == TRUE) {
     print('Capabilities: ');
     printMonitorCapabilities(monitorCapabilitiesPtr.value);
@@ -157,12 +167,18 @@ void main() {
   final minimumBrightnessPtr = calloc<DWORD>();
   final currentBrightnessPtr = calloc<DWORD>();
   final maximumBrightnessPtr = calloc<DWORD>();
-  result = GetMonitorBrightness(physicalMonitorHandle, minimumBrightnessPtr,
-      currentBrightnessPtr, maximumBrightnessPtr);
+  result = GetMonitorBrightness(
+    physicalMonitorHandle,
+    minimumBrightnessPtr,
+    currentBrightnessPtr,
+    maximumBrightnessPtr,
+  );
   if (result == TRUE) {
-    print('Brightness: minimum(${minimumBrightnessPtr.value}), '
-        'current(${currentBrightnessPtr.value}), '
-        'maximum(${maximumBrightnessPtr.value})');
+    print(
+      'Brightness: minimum(${minimumBrightnessPtr.value}), '
+      'current(${currentBrightnessPtr.value}), '
+      'maximum(${maximumBrightnessPtr.value})',
+    );
   }
 
   DestroyPhysicalMonitors(physicalMonitorCountPtr.value, physicalMonitorArray);

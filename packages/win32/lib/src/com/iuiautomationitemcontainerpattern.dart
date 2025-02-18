@@ -37,27 +37,36 @@ class IUIAutomationItemContainerPattern extends IUnknown {
 
   factory IUIAutomationItemContainerPattern.from(IUnknown interface) =>
       IUIAutomationItemContainerPattern(
-          interface.toInterface(IID_IUIAutomationItemContainerPattern));
+        interface.toInterface(IID_IUIAutomationItemContainerPattern),
+      );
 
-  int findItemByProperty(Pointer<COMObject> pStartAfter, int propertyId,
-          VARIANT value, Pointer<Pointer<COMObject>> pFound) =>
-      (ptr.ref.vtable + 3)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<COMObject> pStartAfter,
-                              Uint32 propertyId,
-                              VARIANT value,
-                              Pointer<Pointer<COMObject>> pFound)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      Pointer<COMObject> pStartAfter,
-                      int propertyId,
-                      VARIANT value,
-                      Pointer<Pointer<COMObject>> pFound)>()(
-          ptr.ref.lpVtbl, pStartAfter, propertyId, value, pFound);
+  int findItemByProperty(
+    Pointer<COMObject> pStartAfter,
+    int propertyId,
+    VARIANT value,
+    Pointer<Pointer<COMObject>> pFound,
+  ) => (ptr.ref.vtable + 3)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<COMObject> pStartAfter,
+              Uint32 propertyId,
+              VARIANT value,
+              Pointer<Pointer<COMObject>> pFound,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<COMObject> pStartAfter,
+          int propertyId,
+          VARIANT value,
+          Pointer<Pointer<COMObject>> pFound,
+        )
+      >()(ptr.ref.lpVtbl, pStartAfter, propertyId, value, pFound);
 }

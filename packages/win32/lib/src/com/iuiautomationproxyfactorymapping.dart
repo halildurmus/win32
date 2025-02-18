@@ -39,20 +39,24 @@ class IUIAutomationProxyFactoryMapping extends IUnknown {
 
   factory IUIAutomationProxyFactoryMapping.from(IUnknown interface) =>
       IUIAutomationProxyFactoryMapping(
-          interface.toInterface(IID_IUIAutomationProxyFactoryMapping));
+        interface.toInterface(IID_IUIAutomationProxyFactoryMapping),
+      );
 
   int get count {
     final retValuePtr = calloc<Uint32>();
 
     try {
       final hr = (ptr.ref.vtable + 3)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Uint32> count)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Uint32> count)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Uint32> count)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Uint32> count)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -64,64 +68,82 @@ class IUIAutomationProxyFactoryMapping extends IUnknown {
   }
 
   int getTable(Pointer<Pointer<SAFEARRAY>> table) => (ptr.ref.vtable + 4)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<Pointer<SAFEARRAY>> table)
+          >
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Pointer<SAFEARRAY>> table)>()(
+    ptr.ref.lpVtbl,
+    table,
+  );
+
+  int getEntry(int index, Pointer<Pointer<COMObject>> entry) =>
+      (ptr.ref.vtable + 5)
           .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<Pointer<SAFEARRAY>> table)>>>()
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Uint32 index,
+                  Pointer<Pointer<COMObject>> entry,
+                )
+              >
+            >
+          >()
           .value
           .asFunction<
-              int Function(Pointer, Pointer<Pointer<SAFEARRAY>> table)>()(
-      ptr.ref.lpVtbl, table);
-
-  int getEntry(
-          int index, Pointer<Pointer<COMObject>> entry) =>
-      (ptr.ref.vtable + 5)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Uint32 index,
-                              Pointer<Pointer<COMObject>> entry)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, int index, Pointer<Pointer<COMObject>> entry)>()(
-          ptr.ref.lpVtbl, index, entry);
+            int Function(Pointer, int index, Pointer<Pointer<COMObject>> entry)
+          >()(ptr.ref.lpVtbl, index, entry);
 
   int setTable(Pointer<SAFEARRAY> factoryList) => (ptr.ref.vtable + 6)
       .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(Pointer, Pointer<SAFEARRAY> factoryList)>>>()
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<SAFEARRAY> factoryList)
+          >
+        >
+      >()
       .value
-      .asFunction<
-          int Function(Pointer,
-              Pointer<SAFEARRAY> factoryList)>()(ptr.ref.lpVtbl, factoryList);
+      .asFunction<int Function(Pointer, Pointer<SAFEARRAY> factoryList)>()(
+    ptr.ref.lpVtbl,
+    factoryList,
+  );
 
   int insertEntries(int before, Pointer<SAFEARRAY> factoryList) =>
       (ptr.ref.vtable + 7)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Uint32 before,
-                              Pointer<SAFEARRAY> factoryList)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, int before, Pointer<SAFEARRAY> factoryList)>()(
-          ptr.ref.lpVtbl, before, factoryList);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Uint32 before,
+                  Pointer<SAFEARRAY> factoryList,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, int before, Pointer<SAFEARRAY> factoryList)
+          >()(ptr.ref.lpVtbl, before, factoryList);
 
   int insertEntry(int before, Pointer<COMObject> factory) => (ptr.ref.vtable +
           8)
       .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(
-                      Pointer, Uint32 before, Pointer<COMObject> factory)>>>()
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Uint32 before, Pointer<COMObject> factory)
+          >
+        >
+      >()
       .value
       .asFunction<
-          int Function(Pointer, int before,
-              Pointer<COMObject> factory)>()(ptr.ref.lpVtbl, before, factory);
+        int Function(Pointer, int before, Pointer<COMObject> factory)
+      >()(ptr.ref.lpVtbl, before, factory);
 
   int removeEntry(int index) => (ptr.ref.vtable + 9)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint32 index)>>>()

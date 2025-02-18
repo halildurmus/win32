@@ -42,104 +42,140 @@ class IRunningObjectTable extends IUnknown {
   factory IRunningObjectTable.from(IUnknown interface) =>
       IRunningObjectTable(interface.toInterface(IID_IRunningObjectTable));
 
-  int register(int grfFlags, Pointer<COMObject> punkObject,
-          Pointer<COMObject> pmkObjectName, Pointer<Uint32> pdwRegister) =>
-      (ptr.ref.vtable + 3)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Uint32 grfFlags,
-                              Pointer<COMObject> punkObject,
-                              Pointer<COMObject> pmkObjectName,
-                              Pointer<Uint32> pdwRegister)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      int grfFlags,
-                      Pointer<COMObject> punkObject,
-                      Pointer<COMObject> pmkObjectName,
-                      Pointer<Uint32> pdwRegister)>()(
-          ptr.ref.lpVtbl, grfFlags, punkObject, pmkObjectName, pdwRegister);
+  int register(
+    int grfFlags,
+    Pointer<COMObject> punkObject,
+    Pointer<COMObject> pmkObjectName,
+    Pointer<Uint32> pdwRegister,
+  ) => (ptr.ref.vtable + 3)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Uint32 grfFlags,
+              Pointer<COMObject> punkObject,
+              Pointer<COMObject> pmkObjectName,
+              Pointer<Uint32> pdwRegister,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          int grfFlags,
+          Pointer<COMObject> punkObject,
+          Pointer<COMObject> pmkObjectName,
+          Pointer<Uint32> pdwRegister,
+        )
+      >()(ptr.ref.lpVtbl, grfFlags, punkObject, pmkObjectName, pdwRegister);
 
   int revoke(int dwRegister) => (ptr.ref.vtable + 4)
       .cast<
-          Pointer<NativeFunction<Int32 Function(Pointer, Uint32 dwRegister)>>>()
+        Pointer<NativeFunction<Int32 Function(Pointer, Uint32 dwRegister)>>
+      >()
+      .value
+      .asFunction<int Function(Pointer, int dwRegister)>()(
+    ptr.ref.lpVtbl,
+    dwRegister,
+  );
+
+  int isRunning(Pointer<COMObject> pmkObjectName) => (ptr.ref.vtable + 5)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<COMObject> pmkObjectName)
+          >
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<COMObject> pmkObjectName)>()(
+    ptr.ref.lpVtbl,
+    pmkObjectName,
+  );
+
+  int getObject(
+    Pointer<COMObject> pmkObjectName,
+    Pointer<Pointer<COMObject>> ppunkObject,
+  ) => (ptr.ref.vtable + 6)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<COMObject> pmkObjectName,
+              Pointer<Pointer<COMObject>> ppunkObject,
+            )
+          >
+        >
+      >()
       .value
       .asFunction<
-          int Function(Pointer, int dwRegister)>()(ptr.ref.lpVtbl, dwRegister);
-
-  int isRunning(Pointer<COMObject> pmkObjectName) =>
-      (ptr.ref.vtable + 5)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<COMObject> pmkObjectName)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<COMObject> pmkObjectName)>()(
-          ptr.ref.lpVtbl, pmkObjectName);
-
-  int
-      getObject(Pointer<COMObject> pmkObjectName,
-              Pointer<Pointer<COMObject>> ppunkObject) =>
-          (ptr.ref.vtable + 6)
-                  .cast<
-                      Pointer<
-                          NativeFunction<
-                              Int32 Function(
-                                  Pointer,
-                                  Pointer<COMObject> pmkObjectName,
-                                  Pointer<Pointer<COMObject>> ppunkObject)>>>()
-                  .value
-                  .asFunction<
-                      int Function(Pointer, Pointer<COMObject> pmkObjectName,
-                          Pointer<Pointer<COMObject>> ppunkObject)>()(
-              ptr.ref.lpVtbl, pmkObjectName, ppunkObject);
+        int Function(
+          Pointer,
+          Pointer<COMObject> pmkObjectName,
+          Pointer<Pointer<COMObject>> ppunkObject,
+        )
+      >()(ptr.ref.lpVtbl, pmkObjectName, ppunkObject);
 
   int noteChangeTime(int dwRegister, Pointer<FILETIME> pfiletime) =>
       (ptr.ref.vtable + 7)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Uint32 dwRegister,
-                              Pointer<FILETIME> pfiletime)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, int dwRegister, Pointer<FILETIME> pfiletime)>()(
-          ptr.ref.lpVtbl, dwRegister, pfiletime);
-
-  int getTimeOfLastChange(
-          Pointer<COMObject> pmkObjectName, Pointer<FILETIME> pfiletime) =>
-      (ptr.ref.vtable + 8)
           .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<COMObject> pmkObjectName,
-                          Pointer<FILETIME> pfiletime)>>>()
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Uint32 dwRegister,
+                  Pointer<FILETIME> pfiletime,
+                )
+              >
+            >
+          >()
           .value
           .asFunction<
-              int Function(
-                  Pointer,
-                  Pointer<COMObject> pmkObjectName,
-                  Pointer<FILETIME>
-                      pfiletime)>()(ptr.ref.lpVtbl, pmkObjectName, pfiletime);
+            int Function(Pointer, int dwRegister, Pointer<FILETIME> pfiletime)
+          >()(ptr.ref.lpVtbl, dwRegister, pfiletime);
 
-  int enumRunning(
-          Pointer<Pointer<COMObject>> ppenumMoniker) =>
+  int getTimeOfLastChange(
+    Pointer<COMObject> pmkObjectName,
+    Pointer<FILETIME> pfiletime,
+  ) => (ptr.ref.vtable + 8)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<COMObject> pmkObjectName,
+              Pointer<FILETIME> pfiletime,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<COMObject> pmkObjectName,
+          Pointer<FILETIME> pfiletime,
+        )
+      >()(ptr.ref.lpVtbl, pmkObjectName, pfiletime);
+
+  int enumRunning(Pointer<Pointer<COMObject>> ppenumMoniker) =>
       (ptr.ref.vtable + 9)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer,
-                              Pointer<Pointer<COMObject>> ppenumMoniker)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, Pointer<Pointer<COMObject>> ppenumMoniker)>()(
-          ptr.ref.lpVtbl, ppenumMoniker);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<Pointer<COMObject>> ppenumMoniker,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<COMObject>> ppenumMoniker)
+          >()(ptr.ref.lpVtbl, ppenumMoniker);
 }

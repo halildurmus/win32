@@ -93,8 +93,10 @@ void main() {
       expect(sizeOf<BLUETOOTH_GATT_VALUE_CHANGED_EVENT>(), equals(24));
     });
     test('Struct BLUETOOTH_GATT_VALUE_CHANGED_EVENT_REGISTRATION', () {
-      expect(sizeOf<BLUETOOTH_GATT_VALUE_CHANGED_EVENT_REGISTRATION>(),
-          equals(40));
+      expect(
+        sizeOf<BLUETOOTH_GATT_VALUE_CHANGED_EVENT_REGISTRATION>(),
+        equals(40),
+      );
     });
     test('BLUETOOTH_NUMERIC_COMPARISON_INFO', () {
       expect(sizeOf<BLUETOOTH_NUMERIC_COMPARISON_INFO>(), equals(4));

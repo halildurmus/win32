@@ -15,8 +15,9 @@ import '../guid.dart';
 import '../structs.g.dart';
 import '../variant.dart';
 
-final _api_ms_win_core_winrt_string_l1_1_0 =
-    DynamicLibrary.open('api-ms-win-core-winrt-string-l1-1-0.dll');
+final _api_ms_win_core_winrt_string_l1_1_0 = DynamicLibrary.open(
+  'api-ms-win-core-winrt-string-l1-1-0.dll',
+);
 
 /// Compares two specified HSTRING objects and returns an integer that
 /// indicates their relative position in a sort order.
@@ -30,14 +31,16 @@ final _api_ms_win_core_winrt_string_l1_1_0 =
 /// ```
 /// {@category winrt}
 int WindowsCompareStringOrdinal(
-        int string1, int string2, Pointer<Int32> result) =>
-    _WindowsCompareStringOrdinal(string1, string2, result);
+  int string1,
+  int string2,
+  Pointer<Int32> result,
+) => _WindowsCompareStringOrdinal(string1, string2, result);
 
-final _WindowsCompareStringOrdinal =
-    _api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
-        Int32 Function(IntPtr string1, IntPtr string2, Pointer<Int32> result),
-        int Function(int string1, int string2,
-            Pointer<Int32> result)>('WindowsCompareStringOrdinal');
+final _WindowsCompareStringOrdinal = _api_ms_win_core_winrt_string_l1_1_0
+    .lookupFunction<
+      Int32 Function(IntPtr string1, IntPtr string2, Pointer<Int32> result),
+      int Function(int string1, int string2, Pointer<Int32> result)
+    >('WindowsCompareStringOrdinal');
 
 /// Concatenates two specified strings.
 ///
@@ -52,12 +55,11 @@ final _WindowsCompareStringOrdinal =
 int WindowsConcatString(int string1, int string2, Pointer<IntPtr> newString) =>
     _WindowsConcatString(string1, string2, newString);
 
-final _WindowsConcatString =
-    _api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
-        Int32 Function(
-            IntPtr string1, IntPtr string2, Pointer<IntPtr> newString),
-        int Function(int string1, int string2,
-            Pointer<IntPtr> newString)>('WindowsConcatString');
+final _WindowsConcatString = _api_ms_win_core_winrt_string_l1_1_0
+    .lookupFunction<
+      Int32 Function(IntPtr string1, IntPtr string2, Pointer<IntPtr> newString),
+      int Function(int string1, int string2, Pointer<IntPtr> newString)
+    >('WindowsConcatString');
 
 /// Creates a new HSTRING based on the specified source string.
 ///
@@ -70,15 +72,24 @@ final _WindowsConcatString =
 /// ```
 /// {@category winrt}
 int WindowsCreateString(
-        Pointer<Utf16> sourceString, int length, Pointer<IntPtr> string) =>
-    _WindowsCreateString(sourceString, length, string);
+  Pointer<Utf16> sourceString,
+  int length,
+  Pointer<IntPtr> string,
+) => _WindowsCreateString(sourceString, length, string);
 
-final _WindowsCreateString =
-    _api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
-        Int32 Function(
-            Pointer<Utf16> sourceString, Uint32 length, Pointer<IntPtr> string),
-        int Function(Pointer<Utf16> sourceString, int length,
-            Pointer<IntPtr> string)>('WindowsCreateString');
+final _WindowsCreateString = _api_ms_win_core_winrt_string_l1_1_0
+    .lookupFunction<
+      Int32 Function(
+        Pointer<Utf16> sourceString,
+        Uint32 length,
+        Pointer<IntPtr> string,
+      ),
+      int Function(
+        Pointer<Utf16> sourceString,
+        int length,
+        Pointer<IntPtr> string,
+      )
+    >('WindowsCreateString');
 
 /// Decrements the reference count of a string buffer.
 ///
@@ -92,7 +103,8 @@ int WindowsDeleteString(int string) => _WindowsDeleteString(string);
 
 final _WindowsDeleteString = _api_ms_win_core_winrt_string_l1_1_0
     .lookupFunction<Int32 Function(IntPtr string), int Function(int string)>(
-        'WindowsDeleteString');
+      'WindowsDeleteString',
+    );
 
 /// Discards a preallocated string buffer if it was not promoted to an
 /// HSTRING.
@@ -106,10 +118,11 @@ final _WindowsDeleteString = _api_ms_win_core_winrt_string_l1_1_0
 int WindowsDeleteStringBuffer(int bufferHandle) =>
     _WindowsDeleteStringBuffer(bufferHandle);
 
-final _WindowsDeleteStringBuffer =
-    _api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
-        Int32 Function(IntPtr bufferHandle),
-        int Function(int bufferHandle)>('WindowsDeleteStringBuffer');
+final _WindowsDeleteStringBuffer = _api_ms_win_core_winrt_string_l1_1_0
+    .lookupFunction<
+      Int32 Function(IntPtr bufferHandle),
+      int Function(int bufferHandle)
+    >('WindowsDeleteStringBuffer');
 
 /// Creates a copy of the specified string.
 ///
@@ -123,11 +136,11 @@ final _WindowsDeleteStringBuffer =
 int WindowsDuplicateString(int string, Pointer<IntPtr> newString) =>
     _WindowsDuplicateString(string, newString);
 
-final _WindowsDuplicateString =
-    _api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
-        Int32 Function(IntPtr string, Pointer<IntPtr> newString),
-        int Function(
-            int string, Pointer<IntPtr> newString)>('WindowsDuplicateString');
+final _WindowsDuplicateString = _api_ms_win_core_winrt_string_l1_1_0
+    .lookupFunction<
+      Int32 Function(IntPtr string, Pointer<IntPtr> newString),
+      int Function(int string, Pointer<IntPtr> newString)
+    >('WindowsDuplicateString');
 
 /// Gets the length, in Unicode characters, of the specified string.
 ///
@@ -141,7 +154,8 @@ int WindowsGetStringLen(int string) => _WindowsGetStringLen(string);
 
 final _WindowsGetStringLen = _api_ms_win_core_winrt_string_l1_1_0
     .lookupFunction<Uint32 Function(IntPtr string), int Function(int string)>(
-        'WindowsGetStringLen');
+      'WindowsGetStringLen',
+    );
 
 /// Retrieves the backing buffer for the specified string.
 ///
@@ -155,11 +169,11 @@ final _WindowsGetStringLen = _api_ms_win_core_winrt_string_l1_1_0
 Pointer<Utf16> WindowsGetStringRawBuffer(int string, Pointer<Uint32> length) =>
     _WindowsGetStringRawBuffer(string, length);
 
-final _WindowsGetStringRawBuffer =
-    _api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
-        Pointer<Utf16> Function(IntPtr string, Pointer<Uint32> length),
-        Pointer<Utf16> Function(
-            int string, Pointer<Uint32> length)>('WindowsGetStringRawBuffer');
+final _WindowsGetStringRawBuffer = _api_ms_win_core_winrt_string_l1_1_0
+    .lookupFunction<
+      Pointer<Utf16> Function(IntPtr string, Pointer<Uint32> length),
+      Pointer<Utf16> Function(int string, Pointer<Uint32> length)
+    >('WindowsGetStringRawBuffer');
 
 /// Indicates whether the specified string is the empty string.
 ///
@@ -173,7 +187,8 @@ int WindowsIsStringEmpty(int string) => _WindowsIsStringEmpty(string);
 
 final _WindowsIsStringEmpty = _api_ms_win_core_winrt_string_l1_1_0
     .lookupFunction<Int32 Function(IntPtr string), int Function(int string)>(
-        'WindowsIsStringEmpty');
+      'WindowsIsStringEmpty',
+    );
 
 /// Allocates a mutable character buffer for use in HSTRING creation.
 ///
@@ -185,16 +200,25 @@ final _WindowsIsStringEmpty = _api_ms_win_core_winrt_string_l1_1_0
 /// );
 /// ```
 /// {@category winrt}
-int WindowsPreallocateStringBuffer(int length,
-        Pointer<Pointer<Uint16>> charBuffer, Pointer<IntPtr> bufferHandle) =>
-    _WindowsPreallocateStringBuffer(length, charBuffer, bufferHandle);
+int WindowsPreallocateStringBuffer(
+  int length,
+  Pointer<Pointer<Uint16>> charBuffer,
+  Pointer<IntPtr> bufferHandle,
+) => _WindowsPreallocateStringBuffer(length, charBuffer, bufferHandle);
 
-final _WindowsPreallocateStringBuffer =
-    _api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
-        Int32 Function(Uint32 length, Pointer<Pointer<Uint16>> charBuffer,
-            Pointer<IntPtr> bufferHandle),
-        int Function(int length, Pointer<Pointer<Uint16>> charBuffer,
-            Pointer<IntPtr> bufferHandle)>('WindowsPreallocateStringBuffer');
+final _WindowsPreallocateStringBuffer = _api_ms_win_core_winrt_string_l1_1_0
+    .lookupFunction<
+      Int32 Function(
+        Uint32 length,
+        Pointer<Pointer<Uint16>> charBuffer,
+        Pointer<IntPtr> bufferHandle,
+      ),
+      int Function(
+        int length,
+        Pointer<Pointer<Uint16>> charBuffer,
+        Pointer<IntPtr> bufferHandle,
+      )
+    >('WindowsPreallocateStringBuffer');
 
 /// Creates an HSTRING from the specified HSTRING_BUFFER.
 ///
@@ -208,11 +232,11 @@ final _WindowsPreallocateStringBuffer =
 int WindowsPromoteStringBuffer(int bufferHandle, Pointer<IntPtr> string) =>
     _WindowsPromoteStringBuffer(bufferHandle, string);
 
-final _WindowsPromoteStringBuffer =
-    _api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
-        Int32 Function(IntPtr bufferHandle, Pointer<IntPtr> string),
-        int Function(int bufferHandle,
-            Pointer<IntPtr> string)>('WindowsPromoteStringBuffer');
+final _WindowsPromoteStringBuffer = _api_ms_win_core_winrt_string_l1_1_0
+    .lookupFunction<
+      Int32 Function(IntPtr bufferHandle, Pointer<IntPtr> string),
+      int Function(int bufferHandle, Pointer<IntPtr> string)
+    >('WindowsPromoteStringBuffer');
 
 /// Replaces all occurrences of a set of characters in the specified string
 /// with another set of characters to create a new string.
@@ -226,16 +250,29 @@ final _WindowsPromoteStringBuffer =
 /// );
 /// ```
 /// {@category winrt}
-int WindowsReplaceString(int string, int stringReplaced, int stringReplaceWith,
-        Pointer<IntPtr> newString) =>
+int WindowsReplaceString(
+  int string,
+  int stringReplaced,
+  int stringReplaceWith,
+  Pointer<IntPtr> newString,
+) =>
     _WindowsReplaceString(string, stringReplaced, stringReplaceWith, newString);
 
-final _WindowsReplaceString =
-    _api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
-        Int32 Function(IntPtr string, IntPtr stringReplaced,
-            IntPtr stringReplaceWith, Pointer<IntPtr> newString),
-        int Function(int string, int stringReplaced, int stringReplaceWith,
-            Pointer<IntPtr> newString)>('WindowsReplaceString');
+final _WindowsReplaceString = _api_ms_win_core_winrt_string_l1_1_0
+    .lookupFunction<
+      Int32 Function(
+        IntPtr string,
+        IntPtr stringReplaced,
+        IntPtr stringReplaceWith,
+        Pointer<IntPtr> newString,
+      ),
+      int Function(
+        int string,
+        int stringReplaced,
+        int stringReplaceWith,
+        Pointer<IntPtr> newString,
+      )
+    >('WindowsReplaceString');
 
 /// Indicates whether the specified string has embedded null characters.
 ///
@@ -248,11 +285,11 @@ final _WindowsReplaceString =
 int WindowsStringHasEmbeddedNull(int string, Pointer<Int32> hasEmbedNull) =>
     _WindowsStringHasEmbeddedNull(string, hasEmbedNull);
 
-final _WindowsStringHasEmbeddedNull =
-    _api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
-        Int32 Function(IntPtr string, Pointer<Int32> hasEmbedNull),
-        int Function(int string,
-            Pointer<Int32> hasEmbedNull)>('WindowsStringHasEmbeddedNull');
+final _WindowsStringHasEmbeddedNull = _api_ms_win_core_winrt_string_l1_1_0
+    .lookupFunction<
+      Int32 Function(IntPtr string, Pointer<Int32> hasEmbedNull),
+      int Function(int string, Pointer<Int32> hasEmbedNull)
+    >('WindowsStringHasEmbeddedNull');
 
 /// Retrieves a substring from the specified string. The substring starts at
 /// the specified character position.
@@ -269,9 +306,9 @@ int WindowsSubstring(int string, int startIndex, Pointer<IntPtr> newString) =>
     _WindowsSubstring(string, startIndex, newString);
 
 final _WindowsSubstring = _api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
-    Int32 Function(IntPtr string, Uint32 startIndex, Pointer<IntPtr> newString),
-    int Function(int string, int startIndex,
-        Pointer<IntPtr> newString)>('WindowsSubstring');
+  Int32 Function(IntPtr string, Uint32 startIndex, Pointer<IntPtr> newString),
+  int Function(int string, int startIndex, Pointer<IntPtr> newString)
+>('WindowsSubstring');
 
 /// Retrieves a substring from the specified string. The substring starts at
 /// a specified character position and has a specified length.
@@ -286,15 +323,28 @@ final _WindowsSubstring = _api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
 /// ```
 /// {@category winrt}
 int WindowsSubstringWithSpecifiedLength(
-        int string, int startIndex, int length, Pointer<IntPtr> newString) =>
+  int string,
+  int startIndex,
+  int length,
+  Pointer<IntPtr> newString,
+) =>
     _WindowsSubstringWithSpecifiedLength(string, startIndex, length, newString);
 
 final _WindowsSubstringWithSpecifiedLength =
     _api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
-        Int32 Function(IntPtr string, Uint32 startIndex, Uint32 length,
-            Pointer<IntPtr> newString),
-        int Function(int string, int startIndex, int length,
-            Pointer<IntPtr> newString)>('WindowsSubstringWithSpecifiedLength');
+      Int32 Function(
+        IntPtr string,
+        Uint32 startIndex,
+        Uint32 length,
+        Pointer<IntPtr> newString,
+      ),
+      int Function(
+        int string,
+        int startIndex,
+        int length,
+        Pointer<IntPtr> newString,
+      )
+    >('WindowsSubstringWithSpecifiedLength');
 
 /// Removes all trailing occurrences of a specified set of characters from
 /// the source string.
@@ -308,15 +358,20 @@ final _WindowsSubstringWithSpecifiedLength =
 /// ```
 /// {@category winrt}
 int WindowsTrimStringEnd(
-        int string, int trimString, Pointer<IntPtr> newString) =>
-    _WindowsTrimStringEnd(string, trimString, newString);
+  int string,
+  int trimString,
+  Pointer<IntPtr> newString,
+) => _WindowsTrimStringEnd(string, trimString, newString);
 
-final _WindowsTrimStringEnd =
-    _api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
-        Int32 Function(
-            IntPtr string, IntPtr trimString, Pointer<IntPtr> newString),
-        int Function(int string, int trimString,
-            Pointer<IntPtr> newString)>('WindowsTrimStringEnd');
+final _WindowsTrimStringEnd = _api_ms_win_core_winrt_string_l1_1_0
+    .lookupFunction<
+      Int32 Function(
+        IntPtr string,
+        IntPtr trimString,
+        Pointer<IntPtr> newString,
+      ),
+      int Function(int string, int trimString, Pointer<IntPtr> newString)
+    >('WindowsTrimStringEnd');
 
 /// Removes all leading occurrences of a specified set of characters from
 /// the source string.
@@ -330,12 +385,17 @@ final _WindowsTrimStringEnd =
 /// ```
 /// {@category winrt}
 int WindowsTrimStringStart(
-        int string, int trimString, Pointer<IntPtr> newString) =>
-    _WindowsTrimStringStart(string, trimString, newString);
+  int string,
+  int trimString,
+  Pointer<IntPtr> newString,
+) => _WindowsTrimStringStart(string, trimString, newString);
 
-final _WindowsTrimStringStart =
-    _api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
-        Int32 Function(
-            IntPtr string, IntPtr trimString, Pointer<IntPtr> newString),
-        int Function(int string, int trimString,
-            Pointer<IntPtr> newString)>('WindowsTrimStringStart');
+final _WindowsTrimStringStart = _api_ms_win_core_winrt_string_l1_1_0
+    .lookupFunction<
+      Int32 Function(
+        IntPtr string,
+        IntPtr trimString,
+        Pointer<IntPtr> newString,
+      ),
+      int Function(int string, int trimString, Pointer<IntPtr> newString)
+    >('WindowsTrimStringStart');

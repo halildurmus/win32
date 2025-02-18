@@ -36,34 +36,44 @@ class IAppxManifestPackageDependency extends IUnknown {
 
   factory IAppxManifestPackageDependency.from(IUnknown interface) =>
       IAppxManifestPackageDependency(
-          interface.toInterface(IID_IAppxManifestPackageDependency));
+        interface.toInterface(IID_IAppxManifestPackageDependency),
+      );
 
   int getName(Pointer<Pointer<Utf16>> name) => (ptr.ref.vtable + 3)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<Pointer<Utf16>> name)>>>()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> name)>()(
-      ptr.ref.lpVtbl, name);
+      .cast<
+        Pointer<
+          NativeFunction<Int32 Function(Pointer, Pointer<Pointer<Utf16>> name)>
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> name)>()(
+    ptr.ref.lpVtbl,
+    name,
+  );
 
   int getPublisher(Pointer<Pointer<Utf16>> publisher) => (ptr.ref.vtable + 4)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<Pointer<Utf16>> publisher)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, Pointer<Pointer<Utf16>> publisher)>()(
-      ptr.ref.lpVtbl, publisher);
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<Pointer<Utf16>> publisher)
+          >
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> publisher)>()(
+    ptr.ref.lpVtbl,
+    publisher,
+  );
 
   int getMinVersion(Pointer<Uint64> minVersion) => (ptr.ref.vtable + 5)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<Uint64> minVersion)>>>()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Uint64> minVersion)>()(
-      ptr.ref.lpVtbl, minVersion);
+      .cast<
+        Pointer<
+          NativeFunction<Int32 Function(Pointer, Pointer<Uint64> minVersion)>
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Uint64> minVersion)>()(
+    ptr.ref.lpVtbl,
+    minVersion,
+  );
 }

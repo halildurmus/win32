@@ -40,5 +40,5 @@ const excludedComInterfaces = <String>{
 
 const excludedTypes = <String>[
   ...excludedWin32Structs,
-  ...excludedComInterfaces
+  ...excludedComInterfaces,
 ];

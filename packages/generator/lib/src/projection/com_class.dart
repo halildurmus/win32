@@ -47,10 +47,10 @@ class ComClassProjection extends ComInterfaceProjection {
     final interfaceNameAsList = interface.name.split('.');
 
     // Strip off the 'I' from the last component
-    final fullyQualifiedClassName =
-        (interfaceNameAsList.sublist(0, interfaceNameAsList.length - 1)
-              ..add(interfaceNameAsList.last.substring(1)))
-            .join('.');
+    final fullyQualifiedClassName = (interfaceNameAsList.sublist(
+      0,
+      interfaceNameAsList.length - 1,
+    )..add(interfaceNameAsList.last.substring(1))).join('.');
 
     // If class has a 'W' or 'A' suffix, erase it.
     return stripAnsiUnicodeSuffix(fullyQualifiedClassName);

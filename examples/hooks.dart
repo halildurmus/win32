@@ -29,7 +29,7 @@ const messages = <String>[
   'WM_SYSKEYDOWN',
   'WM_SYSKEYUP',
   'WM_SYSCHAR',
-  'WM_SYSDEADCHAR'
+  'WM_SYSDEADCHAR',
 ];
 
 int /* HHOOK */ keyHook = 0;
@@ -96,7 +96,9 @@ int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
       hdc = GetDC(hWnd);
 
       SelectObject(
-          hdc, GetStockObject(GET_STOCK_OBJECT_FLAGS.SYSTEM_FIXED_FONT));
+        hdc,
+        GetStockObject(GET_STOCK_OBJECT_FLAGS.SYSTEM_FIXED_FONT),
+      );
       GetTextMetrics(hdc, textMetrics);
       cxChar = textMetrics.ref.tmAveCharWidth;
       cyChar = textMetrics.ref.tmHeight;
@@ -143,14 +145,17 @@ int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
       final hdc = BeginPaint(hWnd, ps);
 
       SelectObject(
-          hdc, GetStockObject(GET_STOCK_OBJECT_FLAGS.SYSTEM_FIXED_FONT));
+        hdc,
+        GetStockObject(GET_STOCK_OBJECT_FLAGS.SYSTEM_FIXED_FONT),
+      );
       SetBkMode(hdc, BACKGROUND_MODE.TRANSPARENT);
       TextOut(hdc, 0, 0, pszTop, szTop.length);
       TextOut(hdc, 0, 0, pszUnd, szUnd.length);
 
       var index = 0;
       for (final msg in msgArr) {
-        final iType = msg.uMsg == WM_CHAR ||
+        final iType =
+            msg.uMsg == WM_CHAR ||
             msg.uMsg == WM_SYSCHAR ||
             msg.uMsg == WM_DEADCHAR ||
             msg.uMsg == WM_SYSDEADCHAR;
@@ -160,7 +165,8 @@ int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
         final keyName = pszKeyName.toDartString();
         free(pszKeyName);
 
-        final szBuffer = '${messages[msg.uMsg - WM_KEYDOWN].padRight(15)}'
+        final szBuffer =
+            '${messages[msg.uMsg - WM_KEYDOWN].padRight(15)}'
             '${msg.wParam.toString().padRight(3)}'
             '${!iType ? keyName.padRight(3) : '   '}'
             '${String.fromCharCode(msg.wParam).padRight(6)} '
@@ -171,8 +177,13 @@ int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
             '${msg.lParam & 0x04000000 == 0x04000000 ? 'Down' : 'Up  '}  '
             '${msg.lParam & 0x08000000 == 0x08000000 ? 'Up  ' : 'Down'} ';
         final pszBuffer = szBuffer.toNativeUtf16();
-        TextOut(hdc, 0, ((cyClient ~/ cyChar) - 1 - index++) * cyChar,
-            pszBuffer, szBuffer.length);
+        TextOut(
+          hdc,
+          0,
+          ((cyClient ~/ cyChar) - 1 - index++) * cyChar,
+          pszBuffer,
+          szBuffer.length,
+        );
         free(pszBuffer);
       }
 
@@ -198,38 +209,44 @@ void winMain(int hInstance, List<String> args, int nShowCmd) {
   );
 
   keyHook = SetWindowsHookEx(
-      WINDOWS_HOOK_ID.WH_KEYBOARD_LL, lpfn.nativeFunction, NULL, 0);
+    WINDOWS_HOOK_ID.WH_KEYBOARD_LL,
+    lpfn.nativeFunction,
+    NULL,
+    0,
+  );
 
   final lpfnWndProc = NativeCallable<WNDPROC>.isolateLocal(
     mainWindowProc,
     exceptionalReturn: 0,
   );
 
-  final wc = calloc<WNDCLASS>()
-    ..ref.style = WNDCLASS_STYLES.CS_HREDRAW | WNDCLASS_STYLES.CS_VREDRAW
-    ..ref.lpfnWndProc = lpfnWndProc.nativeFunction
-    ..ref.hInstance = hInstance
-    ..ref.lpszClassName = className
-    ..ref.hIcon = LoadIcon(NULL, IDI_APPLICATION)
-    ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
-    ..ref.hbrBackground = GetStockObject(GET_STOCK_OBJECT_FLAGS.WHITE_BRUSH);
+  final wc =
+      calloc<WNDCLASS>()
+        ..ref.style = WNDCLASS_STYLES.CS_HREDRAW | WNDCLASS_STYLES.CS_VREDRAW
+        ..ref.lpfnWndProc = lpfnWndProc.nativeFunction
+        ..ref.hInstance = hInstance
+        ..ref.lpszClassName = className
+        ..ref.hIcon = LoadIcon(NULL, IDI_APPLICATION)
+        ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
+        ..ref.hbrBackground = GetStockObject(
+          GET_STOCK_OBJECT_FLAGS.WHITE_BRUSH,
+        );
   RegisterClass(wc);
 
   final hWnd = CreateWindow(
-      className, // Window class
-      windowCaption, // Window caption
-      WINDOW_STYLE.WS_OVERLAPPEDWINDOW, // Window style
-
-      // Size and position
-      CW_USEDEFAULT,
-      CW_USEDEFAULT,
-      CW_USEDEFAULT,
-      CW_USEDEFAULT,
-      NULL, // Parent window
-      NULL, // Menu
-      hInstance, // Instance handle
-      nullptr // Additional application data
-      );
+    className, // Window class
+    windowCaption, // Window caption
+    WINDOW_STYLE.WS_OVERLAPPEDWINDOW, // Window style
+    // Size and position
+    CW_USEDEFAULT,
+    CW_USEDEFAULT,
+    CW_USEDEFAULT,
+    CW_USEDEFAULT,
+    NULL, // Parent window
+    NULL, // Menu
+    hInstance, // Instance handle
+    nullptr, // Additional application data
+  );
 
   ShowWindow(hWnd, nShowCmd);
   UpdateWindow(hWnd);

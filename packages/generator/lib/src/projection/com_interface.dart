@@ -42,14 +42,18 @@ class ComInterfaceProjection {
     var vtableOffset = vtableStart;
     for (final method in typeDef.methods) {
       if (method.isGetProperty && !isExcludedGetProperty(method)) {
-        final getPropertyProjection =
-            ComGetPropertyProjection(method, vtableOffset++);
+        final getPropertyProjection = ComGetPropertyProjection(
+          method,
+          vtableOffset++,
+        );
         projection.add(getPropertyProjection);
       } else if (method.isSetProperty &&
           method.parameters.isNotEmpty &&
           !isExcludedSetProperty(method)) {
-        final setPropertyProjection =
-            ComSetPropertyProjection(method, vtableOffset++);
+        final setPropertyProjection = ComSetPropertyProjection(
+          method,
+          vtableOffset++,
+        );
         projection.add(setPropertyProjection);
       } else {
         final methodProjection = ComMethodProjection(method, vtableOffset++);
@@ -61,11 +65,13 @@ class ComInterfaceProjection {
 
   // TODO: May need to review suffix stripping on v3
   String get shortName => stripAnsiUnicodeSuffix(
-      stripLeadingUnderscores(safeIdentifierForTypeDef(typeDef)));
+    stripLeadingUnderscores(safeIdentifierForTypeDef(typeDef)),
+  );
 
-  String get inheritsFrom => typeDef.interfaces.isNotEmpty
-      ? safeIdentifierForTypeDef(typeDef.interfaces.first)
-      : '';
+  String get inheritsFrom =>
+      typeDef.interfaces.isNotEmpty
+          ? safeIdentifierForTypeDef(typeDef.interfaces.first)
+          : '';
 
   String getImportForTypeDef(TypeDef typeDef) {
     if (typeDef.isDelegate) {
@@ -94,7 +100,7 @@ class ComInterfaceProjection {
     final methods = {
       ...typeDef.methods,
       // Also add the methods in typeDef's interfaces
-      ...[for (final typeDef in typeDef.interfaces) ...typeDef.methods]
+      ...[for (final typeDef in typeDef.interfaces) ...typeDef.methods],
     };
 
     for (final method in methods) {
@@ -146,18 +152,18 @@ class ComInterfaceProjection {
   }
 
   List<String> get extraImports => [
-        '../callbacks.dart',
-        '../combase.dart',
-        '../constants.dart',
-        '../exceptions.dart',
-        '../guid.dart',
-        '../macros.dart',
-        '../propertykey.dart',
-        '../structs.g.dart',
-        '../utils.dart',
-        '../variant.dart',
-        '../win32/ole32.g.dart',
-      ];
+    '../callbacks.dart',
+    '../combase.dart',
+    '../constants.dart',
+    '../exceptions.dart',
+    '../guid.dart',
+    '../macros.dart',
+    '../propertykey.dart',
+    '../structs.g.dart',
+    '../utils.dart',
+    '../variant.dart',
+    '../win32/ole32.g.dart',
+  ];
 
   String get importHeader {
     final imports = {...coreImports, ...interfaceImports, ...extraImports};
@@ -190,9 +196,10 @@ class ComInterfaceProjection {
   @override
   String toString() {
     final extendsClause = inheritsFrom.isEmpty ? '' : 'extends $inheritsFrom';
-    final constructor = inheritsFrom.isEmpty
-        ? 'Pointer<COMObject> ptr;\n\n$shortName(this.ptr);'
-        : '$shortName(super.ptr);';
+    final constructor =
+        inheritsFrom.isEmpty
+            ? 'Pointer<COMObject> ptr;\n\n$shortName(this.ptr);'
+            : '$shortName(super.ptr);';
 
     return '''
       $header

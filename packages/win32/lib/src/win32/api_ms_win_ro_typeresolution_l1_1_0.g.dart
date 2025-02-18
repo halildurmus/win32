@@ -15,8 +15,9 @@ import '../guid.dart';
 import '../structs.g.dart';
 import '../variant.dart';
 
-final _api_ms_win_ro_typeresolution_l1_1_0 =
-    DynamicLibrary.open('api-ms-win-ro-typeresolution-l1-1-0.dll');
+final _api_ms_win_ro_typeresolution_l1_1_0 = DynamicLibrary.open(
+  'api-ms-win-ro-typeresolution-l1-1-0.dll',
+);
 
 /// Locates and retrieves the metadata file that describes the Application
 /// Binary Interface (ABI) for the specified typename.
@@ -32,24 +33,32 @@ final _api_ms_win_ro_typeresolution_l1_1_0 =
 /// ```
 /// {@category winrt}
 int RoGetMetaDataFile(
-        int name,
-        Pointer<COMObject> metaDataDispenser,
-        Pointer<IntPtr> metaDataFilePath,
-        Pointer<Pointer<COMObject>> metaDataImport,
-        Pointer<Uint32> typeDefToken) =>
-    _RoGetMetaDataFile(name, metaDataDispenser, metaDataFilePath,
-        metaDataImport, typeDefToken);
+  int name,
+  Pointer<COMObject> metaDataDispenser,
+  Pointer<IntPtr> metaDataFilePath,
+  Pointer<Pointer<COMObject>> metaDataImport,
+  Pointer<Uint32> typeDefToken,
+) => _RoGetMetaDataFile(
+  name,
+  metaDataDispenser,
+  metaDataFilePath,
+  metaDataImport,
+  typeDefToken,
+);
 
 final _RoGetMetaDataFile = _api_ms_win_ro_typeresolution_l1_1_0.lookupFunction<
-    Int32 Function(
-        IntPtr name,
-        Pointer<COMObject> metaDataDispenser,
-        Pointer<IntPtr> metaDataFilePath,
-        Pointer<Pointer<COMObject>> metaDataImport,
-        Pointer<Uint32> typeDefToken),
-    int Function(
-        int name,
-        Pointer<COMObject> metaDataDispenser,
-        Pointer<IntPtr> metaDataFilePath,
-        Pointer<Pointer<COMObject>> metaDataImport,
-        Pointer<Uint32> typeDefToken)>('RoGetMetaDataFile');
+  Int32 Function(
+    IntPtr name,
+    Pointer<COMObject> metaDataDispenser,
+    Pointer<IntPtr> metaDataFilePath,
+    Pointer<Pointer<COMObject>> metaDataImport,
+    Pointer<Uint32> typeDefToken,
+  ),
+  int Function(
+    int name,
+    Pointer<COMObject> metaDataDispenser,
+    Pointer<IntPtr> metaDataFilePath,
+    Pointer<Pointer<COMObject>> metaDataImport,
+    Pointer<Uint32> typeDefToken,
+  )
+>('RoGetMetaDataFile');

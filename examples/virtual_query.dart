@@ -11,14 +11,18 @@ void main() {
 
   // Allocate some memory and return a pointer to the base address.
   final baseAddress = VirtualAlloc(
-      nullptr, // Windows determines starting address
-      8, // bytes allocated
-      VIRTUAL_ALLOCATION_TYPE.MEM_COMMIT,
-      PAGE_PROTECTION_FLAGS.PAGE_EXECUTE_READWRITE);
+    nullptr, // Windows determines starting address
+    8, // bytes allocated
+    VIRTUAL_ALLOCATION_TYPE.MEM_COMMIT,
+    PAGE_PROTECTION_FLAGS.PAGE_EXECUTE_READWRITE,
+  );
 
   // Query information about the allocated memory
-  final retValue =
-      VirtualQuery(baseAddress, pMBI, sizeOf<MEMORY_BASIC_INFORMATION>());
+  final retValue = VirtualQuery(
+    baseAddress,
+    pMBI,
+    sizeOf<MEMORY_BASIC_INFORMATION>(),
+  );
 
   if (retValue == 0) {
     print('VirtualQuery function failed.');

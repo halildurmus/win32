@@ -12,10 +12,11 @@ int printModules(int processID) {
 
   // Get a handle to the process.
   final hProcess = OpenProcess(
-      PROCESS_ACCESS_RIGHTS.PROCESS_QUERY_INFORMATION |
-          PROCESS_ACCESS_RIGHTS.PROCESS_VM_READ,
-      FALSE,
-      processID);
+    PROCESS_ACCESS_RIGHTS.PROCESS_QUERY_INFORMATION |
+        PROCESS_ACCESS_RIGHTS.PROCESS_VM_READ,
+    FALSE,
+    processID,
+  );
 
   if (hProcess == 0) {
     return 1;
@@ -34,10 +35,11 @@ int printModules(int processID) {
       final hModule = (hMods + i).value;
 
       if (GetModuleFileNameEx(hProcess, hModule, szModName, MAX_PATH) != 0) {
-        final hexModuleValue = hModule
-            .toRadixString(16)
-            .padLeft(sizeOf<HMODULE>(), '0')
-            .toUpperCase();
+        final hexModuleValue =
+            hModule
+                .toRadixString(16)
+                .padLeft(sizeOf<HMODULE>(), '0')
+                .toUpperCase();
 
         // Print the module name and handle value.
         print('\t${szModName.toDartString()} (0x$hexModuleValue)');

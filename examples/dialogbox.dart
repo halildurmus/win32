@@ -21,78 +21,87 @@ void main() {
   var idx = 0;
 
   idx += (ptr + idx).cast<DLGTEMPLATE>().setDialog(
-      style: WINDOW_STYLE.WS_POPUP |
-          WINDOW_STYLE.WS_BORDER |
-          WINDOW_STYLE.WS_SYSMENU |
-          DS_MODALFRAME |
-          DS_SETFONT |
-          WINDOW_STYLE.WS_CAPTION,
-      title: 'Sample dialog',
-      cdit: 5, // number of controls in the dialog
-      cx: 300,
-      cy: 200,
-      fontName: 'MS Shell Dlg',
-      fontSize: 8);
+    style:
+        WINDOW_STYLE.WS_POPUP |
+        WINDOW_STYLE.WS_BORDER |
+        WINDOW_STYLE.WS_SYSMENU |
+        DS_MODALFRAME |
+        DS_SETFONT |
+        WINDOW_STYLE.WS_CAPTION,
+    title: 'Sample dialog',
+    cdit: 5, // number of controls in the dialog
+    cx: 300,
+    cy: 200,
+    fontName: 'MS Shell Dlg',
+    fontSize: 8,
+  );
 
   idx += (ptr + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
-      style: WINDOW_STYLE.WS_CHILD |
-          WINDOW_STYLE.WS_VISIBLE |
-          WINDOW_STYLE.WS_TABSTOP |
-          BS_DEFPUSHBUTTON,
-      x: 100,
-      y: 160,
-      cx: 50,
-      cy: 14,
-      id: MESSAGEBOX_RESULT.IDOK,
-      windowSystemClass: 0x0080, // button
-      text: 'OK');
+    style:
+        WINDOW_STYLE.WS_CHILD |
+        WINDOW_STYLE.WS_VISIBLE |
+        WINDOW_STYLE.WS_TABSTOP |
+        BS_DEFPUSHBUTTON,
+    x: 100,
+    y: 160,
+    cx: 50,
+    cy: 14,
+    id: MESSAGEBOX_RESULT.IDOK,
+    windowSystemClass: 0x0080, // button
+    text: 'OK',
+  );
 
   idx += (ptr + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
-      style: WINDOW_STYLE.WS_CHILD |
-          WINDOW_STYLE.WS_VISIBLE |
-          WINDOW_STYLE.WS_TABSTOP |
-          BS_PUSHBUTTON,
-      x: 190,
-      y: 160,
-      cx: 50,
-      cy: 14,
-      id: MESSAGEBOX_RESULT.IDCANCEL,
-      windowSystemClass: 0x0080, // button
-      text: 'Cancel');
+    style:
+        WINDOW_STYLE.WS_CHILD |
+        WINDOW_STYLE.WS_VISIBLE |
+        WINDOW_STYLE.WS_TABSTOP |
+        BS_PUSHBUTTON,
+    x: 190,
+    y: 160,
+    cx: 50,
+    cy: 14,
+    id: MESSAGEBOX_RESULT.IDCANCEL,
+    windowSystemClass: 0x0080, // button
+    text: 'Cancel',
+  );
 
   idx += (ptr + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
-      style: WINDOW_STYLE.WS_CHILD | WINDOW_STYLE.WS_VISIBLE,
-      x: 10,
-      y: 10,
-      cx: 60,
-      cy: 20,
-      id: ID_TEXT,
-      windowSystemClass: 0x0082, // static
-      text: 'Some static wrapped text here.');
+    style: WINDOW_STYLE.WS_CHILD | WINDOW_STYLE.WS_VISIBLE,
+    x: 10,
+    y: 10,
+    cx: 60,
+    cy: 20,
+    id: ID_TEXT,
+    windowSystemClass: 0x0082, // static
+    text: 'Some static wrapped text here.',
+  );
 
   idx += (ptr + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
-      style: PBS_SMOOTH | WINDOW_STYLE.WS_BORDER | WINDOW_STYLE.WS_VISIBLE,
-      x: 10,
-      y: 30,
-      cx: 150,
-      cy: 12,
-      id: ID_PROGRESS,
-      windowClass: PROGRESS_CLASS // progress bar
-      );
+    style: PBS_SMOOTH | WINDOW_STYLE.WS_BORDER | WINDOW_STYLE.WS_VISIBLE,
+    x: 10,
+    y: 30,
+    cx: 150,
+    cy: 12,
+    id: ID_PROGRESS,
+    windowClass: PROGRESS_CLASS, // progress bar
+  );
 
   idx += (ptr + idx).cast<DLGITEMTEMPLATE>().setDialogItem(
-      style: WINDOW_STYLE.WS_CHILD |
-          WINDOW_STYLE.WS_VISIBLE |
-          WINDOW_STYLE.WS_TABSTOP |
-          WINDOW_STYLE.WS_BORDER |
-          ES_AUTOHSCROLL,
-      x: 10,
-      y: 50,
-      cx: 150,
-      cy: 20,
-      id: ID_EDITTEXT,
-      windowSystemClass: 0x0081, // edit
-      text: 'Enter text');
+    style:
+        WINDOW_STYLE.WS_CHILD |
+        WINDOW_STYLE.WS_VISIBLE |
+        WINDOW_STYLE.WS_TABSTOP |
+        WINDOW_STYLE.WS_BORDER |
+        ES_AUTOHSCROLL,
+    x: 10,
+    y: 50,
+    cx: 150,
+    cy: 20,
+    id: ID_EDITTEXT,
+    windowSystemClass: 0x0081, // edit
+    text: 'Enter text',
+  );
 
   final lpDialogFunc = NativeCallable<DLGPROC>.isolateLocal(
     dialogReturnProc,
@@ -100,7 +109,12 @@ void main() {
   );
 
   final nResult = DialogBoxIndirectParam(
-      hInstance, ptr.cast<DLGTEMPLATE>(), NULL, lpDialogFunc.nativeFunction, 0);
+    hInstance,
+    ptr.cast<DLGTEMPLATE>(),
+    NULL,
+    lpDialogFunc.nativeFunction,
+    0,
+  );
 
   if (nResult <= 0) {
     print('Error: $nResult');

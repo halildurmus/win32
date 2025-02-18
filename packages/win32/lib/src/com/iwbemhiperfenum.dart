@@ -40,65 +40,89 @@ class IWbemHiPerfEnum extends IUnknown {
   factory IWbemHiPerfEnum.from(IUnknown interface) =>
       IWbemHiPerfEnum(interface.toInterface(IID_IWbemHiPerfEnum));
 
-  int addObjects(int lFlags, int uNumObjects, Pointer<Int32> apIds,
-          Pointer<Pointer<COMObject>> apObj) =>
-      (ptr.ref.vtable + 3)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Int32 lFlags,
-                              Uint32 uNumObjects,
-                              Pointer<Int32> apIds,
-                              Pointer<Pointer<COMObject>> apObj)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      int lFlags,
-                      int uNumObjects,
-                      Pointer<Int32> apIds,
-                      Pointer<Pointer<COMObject>> apObj)>()(
-          ptr.ref.lpVtbl, lFlags, uNumObjects, apIds, apObj);
+  int addObjects(
+    int lFlags,
+    int uNumObjects,
+    Pointer<Int32> apIds,
+    Pointer<Pointer<COMObject>> apObj,
+  ) => (ptr.ref.vtable + 3)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Int32 lFlags,
+              Uint32 uNumObjects,
+              Pointer<Int32> apIds,
+              Pointer<Pointer<COMObject>> apObj,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          int lFlags,
+          int uNumObjects,
+          Pointer<Int32> apIds,
+          Pointer<Pointer<COMObject>> apObj,
+        )
+      >()(ptr.ref.lpVtbl, lFlags, uNumObjects, apIds, apObj);
 
   int removeObjects(int lFlags, int uNumObjects, Pointer<Int32> apIds) =>
       (ptr.ref.vtable + 4)
           .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Int32 lFlags, Uint32 uNumObjects,
-                          Pointer<Int32> apIds)>>>()
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Int32 lFlags,
+                  Uint32 uNumObjects,
+                  Pointer<Int32> apIds,
+                )
+              >
+            >
+          >()
           .value
           .asFunction<
-              int Function(
-                  Pointer,
-                  int lFlags,
-                  int uNumObjects,
-                  Pointer<Int32>
-                      apIds)>()(ptr.ref.lpVtbl, lFlags, uNumObjects, apIds);
+            int Function(
+              Pointer,
+              int lFlags,
+              int uNumObjects,
+              Pointer<Int32> apIds,
+            )
+          >()(ptr.ref.lpVtbl, lFlags, uNumObjects, apIds);
 
-  int getObjects(int lFlags, int uNumObjects, Pointer<Pointer<COMObject>> apObj,
-          Pointer<Uint32> puReturned) =>
-      (ptr.ref.vtable + 5)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Int32 lFlags,
-                              Uint32 uNumObjects,
-                              Pointer<Pointer<COMObject>> apObj,
-                              Pointer<Uint32> puReturned)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      int lFlags,
-                      int uNumObjects,
-                      Pointer<Pointer<COMObject>> apObj,
-                      Pointer<Uint32> puReturned)>()(
-          ptr.ref.lpVtbl, lFlags, uNumObjects, apObj, puReturned);
+  int getObjects(
+    int lFlags,
+    int uNumObjects,
+    Pointer<Pointer<COMObject>> apObj,
+    Pointer<Uint32> puReturned,
+  ) => (ptr.ref.vtable + 5)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Int32 lFlags,
+              Uint32 uNumObjects,
+              Pointer<Pointer<COMObject>> apObj,
+              Pointer<Uint32> puReturned,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          int lFlags,
+          int uNumObjects,
+          Pointer<Pointer<COMObject>> apObj,
+          Pointer<Uint32> puReturned,
+        )
+      >()(ptr.ref.lpVtbl, lFlags, uNumObjects, apObj, puReturned);
 
   int removeAll(int lFlags) => (ptr.ref.vtable + 6)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 lFlags)>>>()

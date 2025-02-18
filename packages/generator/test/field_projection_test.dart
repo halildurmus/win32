@@ -9,8 +9,9 @@ void main() {
   late Scope scope;
 
   setUpAll(() async {
-    scope =
-        await MetadataStore.loadWin32Metadata(version: win32MetadataVersion);
+    scope = await MetadataStore.loadWin32Metadata(
+      version: win32MetadataVersion,
+    );
   });
 
   test('BOOL types are projected to int', () {
@@ -26,8 +27,10 @@ void main() {
   });
 
   test('Structs are projected appropriately', () {
-    final typeDef = scope
-        .findTypeDef('Windows.Win32.Media.Multimedia.YAMAHA_ADPCMWAVEFORMAT')!;
+    final typeDef =
+        scope.findTypeDef(
+          'Windows.Win32.Media.Multimedia.YAMAHA_ADPCMWAVEFORMAT',
+        )!;
 
     // BOOL fEnable;
     final fEnable = typeDef.fields.first;

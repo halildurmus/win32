@@ -39,20 +39,27 @@ class IAudioClock2 extends IUnknown {
   factory IAudioClock2.from(IUnknown interface) =>
       IAudioClock2(interface.toInterface(IID_IAudioClock2));
 
-  int
-      getDevicePosition(
-              Pointer<Uint64> DevicePosition, Pointer<Uint64> QPCPosition) =>
-          (ptr.ref.vtable + 3)
-                  .cast<
-                      Pointer<
-                          NativeFunction<
-                              Int32 Function(
-                                  Pointer,
-                                  Pointer<Uint64> DevicePosition,
-                                  Pointer<Uint64> QPCPosition)>>>()
-                  .value
-                  .asFunction<
-                      int Function(Pointer, Pointer<Uint64> DevicePosition,
-                          Pointer<Uint64> QPCPosition)>()(
-              ptr.ref.lpVtbl, DevicePosition, QPCPosition);
+  int getDevicePosition(
+    Pointer<Uint64> DevicePosition,
+    Pointer<Uint64> QPCPosition,
+  ) => (ptr.ref.vtable + 3)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<Uint64> DevicePosition,
+              Pointer<Uint64> QPCPosition,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<Uint64> DevicePosition,
+          Pointer<Uint64> QPCPosition,
+        )
+      >()(ptr.ref.lpVtbl, DevicePosition, QPCPosition);
 }

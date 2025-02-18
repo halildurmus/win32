@@ -11,8 +11,9 @@ const textToSpeak =
 void main() {
   CoInitializeEx(nullptr, COINIT.COINIT_APARTMENTTHREADED);
 
-  final speechVoice =
-      ISpeechVoice(COMObject.createFromID(CLSID_SpVoice, IID_ISpeechVoice));
+  final speechVoice = ISpeechVoice(
+    COMObject.createFromID(CLSID_SpVoice, IID_ISpeechVoice),
+  );
   final pText = textToSpeak.toNativeUtf16();
 
   final pTokens = calloc<COMObject>();
@@ -38,8 +39,9 @@ void main() {
         print(' - Voice ${i + 1}: $description');
 
         // Set the current voice for text-to-speech
-        hr = speechVoice
-            .putref_Voice(token.ptr.cast<Pointer<COMObject>>().value);
+        hr = speechVoice.putref_Voice(
+          token.ptr.cast<Pointer<COMObject>>().value,
+        );
         if (FAILED(hr)) throw WindowsException(hr);
 
         hr = speechVoice.speak(pText, SPEAKFLAGS.SPF_IS_NOT_XML, nullptr);

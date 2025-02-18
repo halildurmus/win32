@@ -30,29 +30,44 @@ String generateDocComment(Win32Function func, String libraryDartName) {
 int generateStructs(List<Scope> scopes, Map<String, String> structs) {
   final file = File('../win32/lib/src/structs.g.dart');
 
-  final typeDefs = scopes.expand((scope) => scope.typeDefs
-      .where((typeDef) => structs.keys.contains(typeDef.name))
-      .where((typeDef) => typeDef.supportedArchitectures.x64)
-      .toList()
-    ..sort((a, b) => lastComponent(a.name).compareTo(lastComponent(b.name))));
+  final typeDefs = scopes.expand(
+    (scope) =>
+        scope.typeDefs
+            .where((typeDef) => structs.keys.contains(typeDef.name))
+            .where((typeDef) => typeDef.supportedArchitectures.x64)
+            .toList()
+          ..sort(
+            (a, b) => lastComponent(a.name).compareTo(lastComponent(b.name)),
+          ),
+  );
 
-  final structProjections = typeDefs.map((struct) => StructProjection(
-      struct, stripAnsiUnicodeSuffix(lastComponent(struct.name)),
-      comment: structs[struct.name]!));
+  final structProjections = typeDefs.map(
+    (struct) => StructProjection(
+      struct,
+      stripAnsiUnicodeSuffix(lastComponent(struct.name)),
+      comment: structs[struct.name]!,
+    ),
+  );
 
   final structsFile = [structFileHeader, ...structProjections].join();
 
   file.writeAsStringSync(
-      DartFormatter(languageVersion: DartFormatter.latestLanguageVersion)
-          .format(structsFile));
+    DartFormatter(
+      languageVersion: DartFormatter.latestLanguageVersion,
+    ).format(structsFile),
+  );
   return structProjections.length;
 }
 
-void generateDllFile(String library, List<Method> filteredMethods,
-    Iterable<Win32Function> functions) {
+void generateDllFile(
+  String library,
+  List<Method> filteredMethods,
+  Iterable<Win32Function> functions,
+) {
   /// Methods we're trying to project
-  final libraryMethods = filteredMethods
-      .where((method) => method.module.name.toLowerCase() == library);
+  final libraryMethods = filteredMethods.where(
+    (method) => method.module.name.toLowerCase() == library,
+  );
 
   final buffer = StringBuffer();
 
@@ -67,8 +82,9 @@ void generateDllFile(String library, List<Method> filteredMethods,
   ''');
 
   for (final method in libraryMethods) {
-    final function =
-        functions.firstWhere((f) => f.functionSymbol == method.name);
+    final function = functions.firstWhere(
+      (f) => f.functionSymbol == method.name,
+    );
     buffer.write('''
   ${generateDocComment(function, libraryDartName)}
   ${FunctionProjection(method, libraryDartName).toString()}
@@ -76,14 +92,19 @@ void generateDllFile(String library, List<Method> filteredMethods,
   }
 
   File('../win32/lib/src/win32/$libraryDartName.g.dart').writeAsStringSync(
-      DartFormatter(languageVersion: DartFormatter.latestLanguageVersion)
-          .format(buffer.toString()));
+    DartFormatter(
+      languageVersion: DartFormatter.latestLanguageVersion,
+    ).format(buffer.toString()),
+  );
 }
 
 void generateFunctions(
-    List<Scope> scopes, Map<String, Win32Function> functions) {
-  final apis = scopes.expand((scope) =>
-      scope.typeDefs.where((typeDef) => typeDef.name.endsWith('Apis')));
+  List<Scope> scopes,
+  Map<String, Win32Function> functions,
+) {
+  final apis = scopes.expand(
+    (scope) => scope.typeDefs.where((typeDef) => typeDef.name.endsWith('Apis')),
+  );
 
   final methods = <Method>[];
   final filteredMethods = <Method>[];
@@ -111,8 +132,9 @@ void generateFunctions(
 
   for (final library in dllLibraries) {
     generateDllFile(library, filteredMethods, functions.values);
-    tests
-        .add(generateFunctionTests(library, filteredMethods, functions.values));
+    tests.add(
+      generateFunctionTests(library, filteredMethods, functions.values),
+    );
   }
 
   writeFunctionTests(tests);
@@ -131,12 +153,17 @@ void main() {
 ''';
 
   File('../win32/test/api_test.dart').writeAsStringSync(
-      DartFormatter(languageVersion: DartFormatter.latestLanguageVersion)
-          .format(testFile));
+    DartFormatter(
+      languageVersion: DartFormatter.latestLanguageVersion,
+    ).format(testFile),
+  );
 }
 
-String generateFunctionTests(String library, Iterable<Method> methods,
-    Iterable<Win32Function> functions) {
+String generateFunctionTests(
+  String library,
+  Iterable<Method> methods,
+  Iterable<Win32Function> functions,
+) {
   final buffer = StringBuffer();
 
   // GitHub Actions doesn't install Native Wifi API on runners, so we remove
@@ -144,8 +171,9 @@ String generateFunctionTests(String library, Iterable<Method> methods,
   if (library == 'wlanapi.dll') return '';
 
   /// Methods we're trying to project
-  final filteredMethods =
-      methods.where((method) => method.module.name.toLowerCase() == library);
+  final filteredMethods = methods.where(
+    (method) => method.module.name.toLowerCase() == library,
+  );
 
   buffer.write("group('Test ${library.split('.').first} functions', () {\n");
 
@@ -154,8 +182,9 @@ String generateFunctionTests(String library, Iterable<Method> methods,
     // Also strip off the trailing .dll (or .cpl, .drv, etc.).
     final libraryDartName = library.replaceAll('-', '_').split('.').first;
 
-    final function =
-        functions.firstWhere((f) => f.functionSymbol == method.name);
+    final function = functions.firstWhere(
+      (f) => f.functionSymbol == method.name,
+    );
 
     // Some functions (e.g. TaskDialog APIs) can only be loaded if the EXE has a
     // manifest, so we ignore those for the purpose of test generation.
@@ -205,9 +234,13 @@ void generateComApis(Scope scope, Map<String, String> comTypesToGenerate) {
     final className = ComClassProjection.generateClassName(typeDef);
     final classNameExists = scope.findTypeDef(className) != null;
 
-    final comObject = classNameExists
-        ? ComClassProjection.fromInterface(typeDef, interfaceComment: comment)
-        : interfaceProjection;
+    final comObject =
+        classNameExists
+            ? ComClassProjection.fromInterface(
+              typeDef,
+              interfaceComment: comment,
+            )
+            : interfaceProjection;
 
     // Generate class
     final dartClass = comObject.toString();
@@ -216,8 +249,10 @@ void generateComApis(Scope scope, Map<String, String> comTypesToGenerate) {
     final classOutputPath = '../win32/lib/src/com/$classOutputFilename.dart';
 
     File(classOutputPath).writeAsStringSync(
-        DartFormatter(languageVersion: DartFormatter.latestLanguageVersion)
-            .format(dartClass));
+      DartFormatter(
+        languageVersion: DartFormatter.latestLanguageVersion,
+      ).format(dartClass),
+    );
   }
 }
 
@@ -225,10 +260,12 @@ void main() async {
   final stopwatch = Stopwatch()..start();
 
   print('[${stopwatch.elapsed}] Loading Windows metadata...');
-  final wdkScope =
-      await MetadataStore.loadWdkMetadata(version: wdkMetadataVersion);
-  final win32Scope =
-      await MetadataStore.loadWin32Metadata(version: win32MetadataVersion);
+  final wdkScope = await MetadataStore.loadWdkMetadata(
+    version: wdkMetadataVersion,
+  );
+  final win32Scope = await MetadataStore.loadWin32Metadata(
+    version: win32MetadataVersion,
+  );
   // Additionally, load WinRT metadata to ensure the correct resolution of
   // references from Win32 metadata.
   await MetadataStore.loadWinrtMetadata();
