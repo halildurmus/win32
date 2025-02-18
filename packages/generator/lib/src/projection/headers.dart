@@ -33,6 +33,7 @@ import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
 import 'combase.dart';
+import 'extensions/_internal.dart';
 import 'guid.dart';
 import 'variant.dart';
 ''';

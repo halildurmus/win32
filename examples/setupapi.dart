@@ -133,10 +133,7 @@ Iterable<String> devicePathsByInterface(
           );
           continue;
         }
-        yield deviceInterfaceDetailDataPtr
-            .getDevicePathData(requiredSizePtr.value)
-            .cast<Utf16>()
-            .toDartString();
+        yield deviceInterfaceDetailDataPtr.ref.DevicePath;
       } finally {
         free(deviceInterfaceDetailDataPtr);
       }
@@ -150,11 +147,4 @@ Iterable<String> devicePathsByInterface(
     free(requiredSizePtr);
     free(deviceInterfaceDataPtr);
   }
-}
-
-// ignore: camel_case_extensions
-extension Pointer_SP_DEVICE_INTERFACE_DETAIL_DATA_
-    on Pointer<SP_DEVICE_INTERFACE_DETAIL_DATA_> {
-  Pointer<WCHAR> getDevicePathData(int requiredSize) =>
-      Pointer<WCHAR>.fromAddress(address + 4);
 }

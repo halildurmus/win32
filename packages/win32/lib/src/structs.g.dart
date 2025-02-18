@@ -13,6 +13,7 @@ import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
 import 'combase.dart';
+import 'extensions/_internal.dart';
 import 'guid.dart';
 import 'variant.dart';
 
@@ -170,7 +171,7 @@ base class ARRAYDESC extends Struct {
   @Uint16()
   external int cDims;
 
-  @Array(1)
+  @Array.variableWithVariableDimension(1)
   external Array<SAFEARRAYBOUND> rgbounds;
 }
 
@@ -298,7 +299,7 @@ base class BITMAPFILEHEADER extends Struct {
 base class BITMAPINFO extends Struct {
   external BITMAPINFOHEADER bmiHeader;
 
-  @Array(1)
+  @Array.variableWithVariableDimension(1)
   external Array<RGBQUAD> bmiColors;
 }
 
@@ -598,21 +599,9 @@ base class BLUETOOTH_DEVICE_INFO extends Struct {
   @Array(248)
   external Array<Uint16> _szName;
 
-  String get szName {
-    final charCodes = <int>[];
-    for (var i = 0; i < 248; i++) {
-      if (_szName[i] == 0x00) break;
-      charCodes.add(_szName[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get szName => _szName.toDartString();
 
-  set szName(String value) {
-    final stringToStore = value.padRight(248, '\x00');
-    for (var i = 0; i < 248; i++) {
-      _szName[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set szName(String value) => _szName.setString(value);
 }
 
 /// The BLUETOOTH_DEVICE_SEARCH_PARAMS structure specifies search criteria
@@ -676,7 +665,7 @@ base class BLUETOOTH_GATT_VALUE_CHANGED_EVENT_REGISTRATION extends Struct {
   @Uint16()
   external int NumCharacteristics;
 
-  @Array(1)
+  @Array.variableWithVariableDimension(1)
   external Array<BTH_LE_GATT_CHARACTERISTIC> Characteristics;
 }
 
@@ -736,21 +725,9 @@ base class BLUETOOTH_RADIO_INFO extends Struct {
   @Array(248)
   external Array<Uint16> _szName;
 
-  String get szName {
-    final charCodes = <int>[];
-    for (var i = 0; i < 248; i++) {
-      if (_szName[i] == 0x00) break;
-      charCodes.add(_szName[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get szName => _szName.toDartString();
 
-  set szName(String value) {
-    final stringToStore = value.padRight(248, '\x00');
-    for (var i = 0; i < 248; i++) {
-      _szName[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set szName(String value) => _szName.setString(value);
 
   @Uint32()
   external int ulClassofDevice;
@@ -934,7 +911,7 @@ base class BTH_LE_GATT_CHARACTERISTIC_VALUE extends Struct {
   @Uint32()
   external int DataSize;
 
-  @Array(1)
+  @Array.variableWithVariableDimension(1)
   external Array<Uint8> Data;
 }
 
@@ -973,7 +950,7 @@ base class BTH_LE_GATT_DESCRIPTOR_VALUE extends Struct {
   @Uint32()
   external int DataSize;
 
-  @Array(1)
+  @Array.variableWithVariableDimension(1)
   external Array<Uint8> Data;
 }
 
@@ -1203,7 +1180,7 @@ base class BTH_QUERY_SERVICE extends Struct {
   @Uint32()
   external int numRange;
 
-  @Array(1)
+  @Array.variableWithVariableDimension(1)
   external Array<SdpAttributeRange> pRange;
 }
 
@@ -1237,7 +1214,7 @@ base class BTH_SET_SERVICE extends Struct {
   @Uint32()
   external int ulRecordLength;
 
-  @Array(1)
+  @Array.variableWithVariableDimension(1)
   external Array<Uint8> pRecord;
 }
 
@@ -1821,24 +1798,12 @@ base class COMMCONFIG extends Struct {
   @Uint32()
   external int dwProviderSize;
 
-  @Array(1)
+  @Array.variableWithVariableDimension(1)
   external Array<Uint16> _wcProviderData;
 
-  String get wcProviderData {
-    final charCodes = <int>[];
-    for (var i = 0; i < 1; i++) {
-      if (_wcProviderData[i] == 0x00) break;
-      charCodes.add(_wcProviderData[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get wcProviderData => _wcProviderData.toDartString();
 
-  set wcProviderData(String value) {
-    final stringToStore = value.padRight(1, '\x00');
-    for (var i = 0; i < 1; i++) {
-      _wcProviderData[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set wcProviderData(String value) => _wcProviderData.setString(value);
 }
 
 /// Contains information about a communications driver.
@@ -1896,24 +1861,12 @@ base class COMMPROP extends Struct {
   @Uint32()
   external int dwProvSpec2;
 
-  @Array(1)
+  @Array.variableWithVariableDimension(1)
   external Array<Uint16> _wcProvChar;
 
-  String get wcProvChar {
-    final charCodes = <int>[];
-    for (var i = 0; i < 1; i++) {
-      if (_wcProvChar[i] == 0x00) break;
-      charCodes.add(_wcProvChar[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get wcProvChar => _wcProvChar.toDartString();
 
-  set wcProvChar(String value) {
-    final stringToStore = value.padRight(1, '\x00');
-    for (var i = 0; i < 1; i++) {
-      _wcProvChar[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set wcProvChar(String value) => _wcProvChar.setString(value);
 }
 
 /// Contains the time-out parameters for a communications device. The
@@ -2470,21 +2423,9 @@ base class DEVMODE extends Struct {
   @Array(32)
   external Array<Uint16> _dmDeviceName;
 
-  String get dmDeviceName {
-    final charCodes = <int>[];
-    for (var i = 0; i < 32; i++) {
-      if (_dmDeviceName[i] == 0x00) break;
-      charCodes.add(_dmDeviceName[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get dmDeviceName => _dmDeviceName.toDartString();
 
-  set dmDeviceName(String value) {
-    final stringToStore = value.padRight(32, '\x00');
-    for (var i = 0; i < 32; i++) {
-      _dmDeviceName[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set dmDeviceName(String value) => _dmDeviceName.setString(value);
 
   @Uint16()
   external int dmSpecVersion;
@@ -2521,21 +2462,9 @@ base class DEVMODE extends Struct {
   @Array(32)
   external Array<Uint16> _dmFormName;
 
-  String get dmFormName {
-    final charCodes = <int>[];
-    for (var i = 0; i < 32; i++) {
-      if (_dmFormName[i] == 0x00) break;
-      charCodes.add(_dmFormName[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get dmFormName => _dmFormName.toDartString();
 
-  set dmFormName(String value) {
-    final stringToStore = value.padRight(32, '\x00');
-    for (var i = 0; i < 32; i++) {
-      _dmFormName[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set dmFormName(String value) => _dmFormName.setString(value);
 
   @Uint16()
   external int dmLogPixels;
@@ -2716,24 +2645,12 @@ base class DEV_BROADCAST_DEVICEINTERFACE_ extends Struct {
 
   external GUID dbcc_classguid;
 
-  @Array(1)
+  @Array.variableWithVariableDimension(1)
   external Array<Uint16> _dbcc_name;
 
-  String get dbcc_name {
-    final charCodes = <int>[];
-    for (var i = 0; i < 1; i++) {
-      if (_dbcc_name[i] == 0x00) break;
-      charCodes.add(_dbcc_name[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get dbcc_name => _dbcc_name.toDartString();
 
-  set dbcc_name(String value) {
-    final stringToStore = value.padRight(1, '\x00');
-    for (var i = 0; i < 1; i++) {
-      _dbcc_name[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set dbcc_name(String value) => _dbcc_name.setString(value);
 }
 
 /// Serves as a standard header for information related to a device event
@@ -2837,7 +2754,7 @@ base class DISK_GEOMETRY_EX extends Struct {
   @Int64()
   external int DiskSize;
 
-  @Array(1)
+  @Array.variableWithVariableDimension(1)
   external Array<Uint8> Data;
 }
 
@@ -3163,40 +3080,16 @@ base class DISPLAY_DEVICE extends Struct {
   @Array(32)
   external Array<Uint16> _DeviceName;
 
-  String get DeviceName {
-    final charCodes = <int>[];
-    for (var i = 0; i < 32; i++) {
-      if (_DeviceName[i] == 0x00) break;
-      charCodes.add(_DeviceName[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get DeviceName => _DeviceName.toDartString();
 
-  set DeviceName(String value) {
-    final stringToStore = value.padRight(32, '\x00');
-    for (var i = 0; i < 32; i++) {
-      _DeviceName[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set DeviceName(String value) => _DeviceName.setString(value);
 
   @Array(128)
   external Array<Uint16> _DeviceString;
 
-  String get DeviceString {
-    final charCodes = <int>[];
-    for (var i = 0; i < 128; i++) {
-      if (_DeviceString[i] == 0x00) break;
-      charCodes.add(_DeviceString[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get DeviceString => _DeviceString.toDartString();
 
-  set DeviceString(String value) {
-    final stringToStore = value.padRight(128, '\x00');
-    for (var i = 0; i < 128; i++) {
-      _DeviceString[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set DeviceString(String value) => _DeviceString.setString(value);
 
   @Uint32()
   external int StateFlags;
@@ -3204,40 +3097,16 @@ base class DISPLAY_DEVICE extends Struct {
   @Array(128)
   external Array<Uint16> _DeviceID;
 
-  String get DeviceID {
-    final charCodes = <int>[];
-    for (var i = 0; i < 128; i++) {
-      if (_DeviceID[i] == 0x00) break;
-      charCodes.add(_DeviceID[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get DeviceID => _DeviceID.toDartString();
 
-  set DeviceID(String value) {
-    final stringToStore = value.padRight(128, '\x00');
-    for (var i = 0; i < 128; i++) {
-      _DeviceID[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set DeviceID(String value) => _DeviceID.setString(value);
 
   @Array(128)
   external Array<Uint16> _DeviceKey;
 
-  String get DeviceKey {
-    final charCodes = <int>[];
-    for (var i = 0; i < 128; i++) {
-      if (_DeviceKey[i] == 0x00) break;
-      charCodes.add(_DeviceKey[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get DeviceKey => _DeviceKey.toDartString();
 
-  set DeviceKey(String value) {
-    final stringToStore = value.padRight(128, '\x00');
-    for (var i = 0; i < 128; i++) {
-      _DeviceKey[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set DeviceKey(String value) => _DeviceKey.setString(value);
 }
 
 /// Contains the arguments passed to a method or property.
@@ -3372,7 +3241,7 @@ base class DOT11_BSSID_LIST extends Struct {
   @Uint32()
   external int uTotalNumOfEntries;
 
-  @Array(6)
+  @Array.variableWithVariableDimension(6)
   external Array<Uint8> BSSIDs;
 }
 
@@ -3398,7 +3267,7 @@ base class DOT11_NETWORK_LIST extends Struct {
   @Uint32()
   external int dwIndex;
 
-  @Array(1)
+  @Array.variableWithVariableDimension(1)
   external Array<DOT11_NETWORK> Network;
 }
 
@@ -3635,59 +3504,23 @@ base class ENUMLOGFONTEX extends Struct {
   @Array(64)
   external Array<Uint16> _elfFullName;
 
-  String get elfFullName {
-    final charCodes = <int>[];
-    for (var i = 0; i < 64; i++) {
-      if (_elfFullName[i] == 0x00) break;
-      charCodes.add(_elfFullName[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get elfFullName => _elfFullName.toDartString();
 
-  set elfFullName(String value) {
-    final stringToStore = value.padRight(64, '\x00');
-    for (var i = 0; i < 64; i++) {
-      _elfFullName[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set elfFullName(String value) => _elfFullName.setString(value);
 
   @Array(32)
   external Array<Uint16> _elfStyle;
 
-  String get elfStyle {
-    final charCodes = <int>[];
-    for (var i = 0; i < 32; i++) {
-      if (_elfStyle[i] == 0x00) break;
-      charCodes.add(_elfStyle[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get elfStyle => _elfStyle.toDartString();
 
-  set elfStyle(String value) {
-    final stringToStore = value.padRight(32, '\x00');
-    for (var i = 0; i < 32; i++) {
-      _elfStyle[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set elfStyle(String value) => _elfStyle.setString(value);
 
   @Array(32)
   external Array<Uint16> _elfScript;
 
-  String get elfScript {
-    final charCodes = <int>[];
-    for (var i = 0; i < 32; i++) {
-      if (_elfScript[i] == 0x00) break;
-      charCodes.add(_elfScript[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get elfScript => _elfScript.toDartString();
 
-  set elfScript(String value) {
-    final stringToStore = value.padRight(32, '\x00');
-    for (var i = 0; i < 32; i++) {
-      _elfScript[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set elfScript(String value) => _elfScript.setString(value);
 }
 
 /// Contains information about a pagefile.
@@ -4107,40 +3940,16 @@ base class ICONINFOEX extends Struct {
   @Array(260)
   external Array<Uint16> _szModName;
 
-  String get szModName {
-    final charCodes = <int>[];
-    for (var i = 0; i < 260; i++) {
-      if (_szModName[i] == 0x00) break;
-      charCodes.add(_szModName[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get szModName => _szModName.toDartString();
 
-  set szModName(String value) {
-    final stringToStore = value.padRight(260, '\x00');
-    for (var i = 0; i < 260; i++) {
-      _szModName[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set szModName(String value) => _szModName.setString(value);
 
   @Array(260)
   external Array<Uint16> _szResName;
 
-  String get szResName {
-    final charCodes = <int>[];
-    for (var i = 0; i < 260; i++) {
-      if (_szResName[i] == 0x00) break;
-      charCodes.add(_szResName[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get szResName => _szResName.toDartString();
 
-  set szResName(String value) {
-    final stringToStore = value.padRight(260, '\x00');
-    for (var i = 0; i < 260; i++) {
-      _szResName[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set szResName(String value) => _szResName.setString(value);
 }
 
 /// Contains the IDL attributes of a type.
@@ -4737,21 +4546,9 @@ base class IP_ADAPTER_DNS_SUFFIX extends Struct {
   @Array(256)
   external Array<Uint16> _String_;
 
-  String get String_ {
-    final charCodes = <int>[];
-    for (var i = 0; i < 256; i++) {
-      if (_String_[i] == 0x00) break;
-      charCodes.add(_String_[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get String_ => _String_.toDartString();
 
-  set String_(String value) {
-    final stringToStore = value.padRight(256, '\x00');
-    for (var i = 0; i < 256; i++) {
-      _String_[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set String_(String value) => _String_.setString(value);
 }
 
 /// The IP_ADAPTER_GATEWAY_ADDRESS structure stores a single gateway address
@@ -4819,21 +4616,9 @@ base class IP_ADAPTER_INDEX_MAP extends Struct {
   @Array(128)
   external Array<Uint16> _Name;
 
-  String get Name {
-    final charCodes = <int>[];
-    for (var i = 0; i < 128; i++) {
-      if (_Name[i] == 0x00) break;
-      charCodes.add(_Name[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get Name => _Name.toDartString();
 
-  set Name(String value) {
-    final stringToStore = value.padRight(128, '\x00');
-    for (var i = 0; i < 128; i++) {
-      _Name[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set Name(String value) => _Name.setString(value);
 }
 
 /// The IP_ADAPTER_MULTICAST_ADDRESS structure stores a single multicast
@@ -5105,7 +4890,7 @@ base class IP_INTERFACE_INFO extends Struct {
   @Int32()
   external int NumAdapters;
 
-  @Array(1)
+  @Array.variableWithVariableDimension(1)
   external Array<IP_ADAPTER_INDEX_MAP> Adapter;
 }
 
@@ -5401,21 +5186,9 @@ base class LOGFONT extends Struct {
   @Array(32)
   external Array<Uint16> _lfFaceName;
 
-  String get lfFaceName {
-    final charCodes = <int>[];
-    for (var i = 0; i < 32; i++) {
-      if (_lfFaceName[i] == 0x00) break;
-      charCodes.add(_lfFaceName[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get lfFaceName => _lfFaceName.toDartString();
 
-  set lfFaceName(String value) {
-    final stringToStore = value.padRight(32, '\x00');
-    for (var i = 0; i < 32; i++) {
-      _lfFaceName[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set lfFaceName(String value) => _lfFaceName.setString(value);
 }
 
 /// The LOGPALETTE structure defines a logical palette.
@@ -5428,7 +5201,7 @@ base class LOGPALETTE extends Struct {
   @Uint16()
   external int palNumEntries;
 
-  @Array(1)
+  @Array.variableWithVariableDimension(1)
   external Array<PALETTEENTRY> palPalEntry;
 }
 
@@ -5729,24 +5502,12 @@ base class MENUITEMTEMPLATE extends Struct {
   @Uint16()
   external int mtID;
 
-  @Array(1)
+  @Array.variableWithVariableDimension(1)
   external Array<Uint16> _mtString;
 
-  String get mtString {
-    final charCodes = <int>[];
-    for (var i = 0; i < 1; i++) {
-      if (_mtString[i] == 0x00) break;
-      charCodes.add(_mtString[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get mtString => _mtString.toDartString();
 
-  set mtString(String value) {
-    final stringToStore = value.padRight(1, '\x00');
-    for (var i = 0; i < 1; i++) {
-      _mtString[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set mtString(String value) => _mtString.setString(value);
 }
 
 /// Defines the header for a menu template. A complete menu template
@@ -5802,7 +5563,7 @@ base class MIDIEVENT extends Struct {
   @Uint32()
   external int dwEvent;
 
-  @Array(1)
+  @Array.variableWithVariableDimension(1)
   external Array<Uint32> dwParms;
 }
 
@@ -5856,21 +5617,9 @@ base class MIDIINCAPS extends Struct {
   @Array(32)
   external Array<Uint16> _szPname;
 
-  String get szPname {
-    final charCodes = <int>[];
-    for (var i = 0; i < 32; i++) {
-      if (_szPname[i] == 0x00) break;
-      charCodes.add(_szPname[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get szPname => _szPname.toDartString();
 
-  set szPname(String value) {
-    final stringToStore = value.padRight(32, '\x00');
-    for (var i = 0; i < 32; i++) {
-      _szPname[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set szPname(String value) => _szPname.setString(value);
 
   @Uint32()
   external int dwSupport;
@@ -5894,21 +5643,9 @@ base class MIDIOUTCAPS extends Struct {
   @Array(32)
   external Array<Uint16> _szPname;
 
-  String get szPname {
-    final charCodes = <int>[];
-    for (var i = 0; i < 32; i++) {
-      if (_szPname[i] == 0x00) break;
-      charCodes.add(_szPname[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get szPname => _szPname.toDartString();
 
-  set szPname(String value) {
-    final stringToStore = value.padRight(32, '\x00');
-    for (var i = 0; i < 32; i++) {
-      _szPname[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set szPname(String value) => _szPname.setString(value);
 
   @Uint16()
   external int wTechnology;
@@ -6153,7 +5890,7 @@ base class MODEMDEVCAPS extends Struct {
   @Uint32()
   external int dwMaxDCERate;
 
-  @Array(1)
+  @Array.variableWithVariableDimension(1)
   external Array<Uint8> abVariablePortion;
 }
 
@@ -6194,7 +5931,7 @@ base class MODEMSETTINGS extends Struct {
   @Uint32()
   external int dwNegotiatedDCERate;
 
-  @Array(1)
+  @Array.variableWithVariableDimension(1)
   external Array<Uint8> abVariablePortion;
 }
 
@@ -6254,21 +5991,9 @@ base class MONITORINFOEX extends Struct {
   @Array(32)
   external Array<Uint16> _szDevice;
 
-  String get szDevice {
-    final charCodes = <int>[];
-    for (var i = 0; i < 32; i++) {
-      if (_szDevice[i] == 0x00) break;
-      charCodes.add(_szDevice[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get szDevice => _szDevice.toDartString();
 
-  set szDevice(String value) {
-    final stringToStore = value.padRight(32, '\x00');
-    for (var i = 0; i < 32; i++) {
-      _szDevice[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set szDevice(String value) => _szDevice.setString(value);
 }
 
 /// Contains information about a mouse event passed to a WH_MOUSE hook
@@ -6535,21 +6260,9 @@ base class NLM_SIMULATED_PROFILE_INFO extends Struct {
   @Array(256)
   external Array<Uint16> _ProfileName;
 
-  String get ProfileName {
-    final charCodes = <int>[];
-    for (var i = 0; i < 256; i++) {
-      if (_ProfileName[i] == 0x00) break;
-      charCodes.add(_ProfileName[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get ProfileName => _ProfileName.toDartString();
 
-  set ProfileName(String value) {
-    final stringToStore = value.padRight(256, '\x00');
-    for (var i = 0; i < 256; i++) {
-      _ProfileName[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set ProfileName(String value) => _ProfileName.setString(value);
 
   @Int32()
   external int cost;
@@ -6638,21 +6351,9 @@ base class NOTIFYICONDATA extends Struct {
   @Array(128)
   external Array<Uint16> _szTip;
 
-  String get szTip {
-    final charCodes = <int>[];
-    for (var i = 0; i < 128; i++) {
-      if (_szTip[i] == 0x00) break;
-      charCodes.add(_szTip[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get szTip => _szTip.toDartString();
 
-  set szTip(String value) {
-    final stringToStore = value.padRight(128, '\x00');
-    for (var i = 0; i < 128; i++) {
-      _szTip[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set szTip(String value) => _szTip.setString(value);
 
   @Uint32()
   external int dwState;
@@ -6663,42 +6364,18 @@ base class NOTIFYICONDATA extends Struct {
   @Array(256)
   external Array<Uint16> _szInfo;
 
-  String get szInfo {
-    final charCodes = <int>[];
-    for (var i = 0; i < 256; i++) {
-      if (_szInfo[i] == 0x00) break;
-      charCodes.add(_szInfo[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get szInfo => _szInfo.toDartString();
 
-  set szInfo(String value) {
-    final stringToStore = value.padRight(256, '\x00');
-    for (var i = 0; i < 256; i++) {
-      _szInfo[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set szInfo(String value) => _szInfo.setString(value);
 
   external _NOTIFYICONDATAW__Anonymous_e__Union Anonymous;
 
   @Array(64)
   external Array<Uint16> _szInfoTitle;
 
-  String get szInfoTitle {
-    final charCodes = <int>[];
-    for (var i = 0; i < 64; i++) {
-      if (_szInfoTitle[i] == 0x00) break;
-      charCodes.add(_szInfoTitle[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get szInfoTitle => _szInfoTitle.toDartString();
 
-  set szInfoTitle(String value) {
-    final stringToStore = value.padRight(64, '\x00');
-    for (var i = 0; i < 64; i++) {
-      _szInfoTitle[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set szInfoTitle(String value) => _szInfoTitle.setString(value);
 
   @Uint32()
   external int dwInfoFlags;
@@ -6995,21 +6672,9 @@ base class OSVERSIONINFOEX extends Struct {
   @Array(128)
   external Array<Uint16> _szCSDVersion;
 
-  String get szCSDVersion {
-    final charCodes = <int>[];
-    for (var i = 0; i < 128; i++) {
-      if (_szCSDVersion[i] == 0x00) break;
-      charCodes.add(_szCSDVersion[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get szCSDVersion => _szCSDVersion.toDartString();
 
-  set szCSDVersion(String value) {
-    final stringToStore = value.padRight(128, '\x00');
-    for (var i = 0; i < 128; i++) {
-      _szCSDVersion[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set szCSDVersion(String value) => _szCSDVersion.setString(value);
 
   @Uint16()
   external int wServicePackMajor;
@@ -7052,21 +6717,9 @@ base class OSVERSIONINFO extends Struct {
   @Array(128)
   external Array<Uint16> _szCSDVersion;
 
-  String get szCSDVersion {
-    final charCodes = <int>[];
-    for (var i = 0; i < 128; i++) {
-      if (_szCSDVersion[i] == 0x00) break;
-      charCodes.add(_szCSDVersion[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get szCSDVersion => _szCSDVersion.toDartString();
 
-  set szCSDVersion(String value) {
-    final stringToStore = value.padRight(128, '\x00');
-    for (var i = 0; i < 128; i++) {
-      _szCSDVersion[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set szCSDVersion(String value) => _szCSDVersion.setString(value);
 }
 
 /// Contains information used in asynchronous (or overlapped) input and
@@ -7261,21 +6914,11 @@ base class PHYSICAL_MONITOR extends Struct {
   @Array(128)
   external Array<Uint16> _szPhysicalMonitorDescription;
 
-  String get szPhysicalMonitorDescription {
-    final charCodes = <int>[];
-    for (var i = 0; i < 128; i++) {
-      if (_szPhysicalMonitorDescription[i] == 0x00) break;
-      charCodes.add(_szPhysicalMonitorDescription[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get szPhysicalMonitorDescription =>
+      _szPhysicalMonitorDescription.toDartString();
 
-  set szPhysicalMonitorDescription(String value) {
-    final stringToStore = value.padRight(128, '\x00');
-    for (var i = 0; i < 128; i++) {
-      _szPhysicalMonitorDescription[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set szPhysicalMonitorDescription(String value) =>
+      _szPhysicalMonitorDescription.setString(value);
 }
 
 /// The POINT structure defines the x- and y-coordinates of a point.
@@ -7469,7 +7112,7 @@ base class POWERBROADCAST_SETTING extends Struct {
   @Uint32()
   external int DataLength;
 
-  @Array(1)
+  @Array.variableWithVariableDimension(1)
   external Array<Uint8> Data;
 }
 
@@ -7620,7 +7263,7 @@ base class PRINTER_NOTIFY_INFO extends Struct {
   @Uint32()
   external int Count;
 
-  @Array(1)
+  @Array.variableWithVariableDimension(1)
   external Array<PRINTER_NOTIFY_INFO_DATA> aData;
 }
 
@@ -7913,7 +7556,7 @@ base class RAWHID extends Struct {
   @Uint32()
   external int dwCount;
 
-  @Array(1)
+  @Array.variableWithVariableDimension(1)
   external Array<Uint8> bRawData;
 }
 
@@ -8144,7 +7787,7 @@ base class SAFEARRAY extends Struct {
 
   external Pointer pvData;
 
-  @Array(1)
+  @Array.variableWithVariableDimension(1)
   external Array<SAFEARRAYBOUND> rgsabound;
 }
 
@@ -8885,21 +8528,9 @@ base class SHELL_ITEM_RESOURCE extends Struct {
   @Array(260)
   external Array<Uint16> _szName;
 
-  String get szName {
-    final charCodes = <int>[];
-    for (var i = 0; i < 260; i++) {
-      if (_szName[i] == 0x00) break;
-      charCodes.add(_szName[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get szName => _szName.toDartString();
 
-  set szName(String value) {
-    final stringToStore = value.padRight(260, '\x00');
-    for (var i = 0; i < 260; i++) {
-      _szName[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set szName(String value) => _szName.setString(value);
 }
 
 /// Contains information about a file object.
@@ -8918,40 +8549,16 @@ base class SHFILEINFO extends Struct {
   @Array(260)
   external Array<Uint16> _szDisplayName;
 
-  String get szDisplayName {
-    final charCodes = <int>[];
-    for (var i = 0; i < 260; i++) {
-      if (_szDisplayName[i] == 0x00) break;
-      charCodes.add(_szDisplayName[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get szDisplayName => _szDisplayName.toDartString();
 
-  set szDisplayName(String value) {
-    final stringToStore = value.padRight(260, '\x00');
-    for (var i = 0; i < 260; i++) {
-      _szDisplayName[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set szDisplayName(String value) => _szDisplayName.setString(value);
 
   @Array(80)
   external Array<Uint16> _szTypeName;
 
-  String get szTypeName {
-    final charCodes = <int>[];
-    for (var i = 0; i < 80; i++) {
-      if (_szTypeName[i] == 0x00) break;
-      charCodes.add(_szTypeName[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get szTypeName => _szTypeName.toDartString();
 
-  set szTypeName(String value) {
-    final stringToStore = value.padRight(80, '\x00');
-    for (var i = 0; i < 80; i++) {
-      _szTypeName[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set szTypeName(String value) => _szTypeName.setString(value);
 }
 
 /// Contains information that the SHFileOperation function uses to perform
@@ -8988,7 +8595,7 @@ base class SHITEMID extends Struct {
   @Uint16()
   external int cb;
 
-  @Array(1)
+  @Array.variableWithVariableDimension(1)
   external Array<Uint8> abID;
 }
 
@@ -9201,24 +8808,12 @@ base class SP_DEVICE_INTERFACE_DETAIL_DATA_ extends Struct {
   @Uint32()
   external int cbSize;
 
-  @Array(1)
+  @Array.variableWithVariableDimension(1)
   external Array<Uint16> _DevicePath;
 
-  String get DevicePath {
-    final charCodes = <int>[];
-    for (var i = 0; i < 1; i++) {
-      if (_DevicePath[i] == 0x00) break;
-      charCodes.add(_DevicePath[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get DevicePath => _DevicePath.toDartString();
 
-  set DevicePath(String value) {
-    final stringToStore = value.padRight(1, '\x00');
-    for (var i = 0; i < 1; i++) {
-      _DevicePath[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set DevicePath(String value) => _DevicePath.setString(value);
 }
 
 /// An SP_DEVINFO_DATA structure defines a device instance that is a member
@@ -9480,24 +9075,12 @@ base class SYMBOL_INFO extends Struct {
   @Uint32()
   external int MaxNameLen;
 
-  @Array(1)
+  @Array.variableWithVariableDimension(1)
   external Array<Uint16> _Name;
 
-  String get Name {
-    final charCodes = <int>[];
-    for (var i = 0; i < 1; i++) {
-      if (_Name[i] == 0x00) break;
-      charCodes.add(_Name[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get Name => _Name.toDartString();
 
-  set Name(String value) {
-    final stringToStore = value.padRight(1, '\x00');
-    for (var i = 0; i < 1; i++) {
-      _Name[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set Name(String value) => _Name.setString(value);
 }
 
 /// Specifies a date and time, using individual members for the month, day,
@@ -10485,7 +10068,7 @@ base class VOLUME_DISK_EXTENTS extends Struct {
   @Uint32()
   external int NumberOfDiskExtents;
 
-  @Array(1)
+  @Array.variableWithVariableDimension(1)
   external Array<DISK_EXTENT> Extents;
 }
 
@@ -10655,21 +10238,9 @@ base class WAVEINCAPS extends Struct {
   @Array(32)
   external Array<Uint16> _szPname;
 
-  String get szPname {
-    final charCodes = <int>[];
-    for (var i = 0; i < 32; i++) {
-      if (_szPname[i] == 0x00) break;
-      charCodes.add(_szPname[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get szPname => _szPname.toDartString();
 
-  set szPname(String value) {
-    final stringToStore = value.padRight(32, '\x00');
-    for (var i = 0; i < 32; i++) {
-      _szPname[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set szPname(String value) => _szPname.setString(value);
 
   @Uint32()
   external int dwFormats;
@@ -10699,21 +10270,9 @@ base class WAVEOUTCAPS extends Struct {
   @Array(32)
   external Array<Uint16> _szPname;
 
-  String get szPname {
-    final charCodes = <int>[];
-    for (var i = 0; i < 32; i++) {
-      if (_szPname[i] == 0x00) break;
-      charCodes.add(_szPname[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get szPname => _szPname.toDartString();
 
-  set szPname(String value) {
-    final stringToStore = value.padRight(32, '\x00');
-    for (var i = 0; i < 32; i++) {
-      _szPname[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set szPname(String value) => _szPname.setString(value);
 
   @Uint32()
   external int dwFormats;
@@ -10757,40 +10316,16 @@ base class WIN32_FIND_DATA extends Struct {
   @Array(260)
   external Array<Uint16> _cFileName;
 
-  String get cFileName {
-    final charCodes = <int>[];
-    for (var i = 0; i < 260; i++) {
-      if (_cFileName[i] == 0x00) break;
-      charCodes.add(_cFileName[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get cFileName => _cFileName.toDartString();
 
-  set cFileName(String value) {
-    final stringToStore = value.padRight(260, '\x00');
-    for (var i = 0; i < 260; i++) {
-      _cFileName[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set cFileName(String value) => _cFileName.setString(value);
 
   @Array(14)
   external Array<Uint16> _cAlternateFileName;
 
-  String get cAlternateFileName {
-    final charCodes = <int>[];
-    for (var i = 0; i < 14; i++) {
-      if (_cAlternateFileName[i] == 0x00) break;
-      charCodes.add(_cAlternateFileName[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get cAlternateFileName => _cAlternateFileName.toDartString();
 
-  set cAlternateFileName(String value) {
-    final stringToStore = value.padRight(14, '\x00');
-    for (var i = 0; i < 14; i++) {
-      _cAlternateFileName[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set cAlternateFileName(String value) => _cAlternateFileName.setString(value);
 }
 
 /// Contains window information.
@@ -10916,7 +10451,7 @@ base class WLAN_AUTH_CIPHER_PAIR_LIST extends Struct {
   @Uint32()
   external int dwNumberOfItems;
 
-  @Array(1)
+  @Array.variableWithVariableDimension(1)
   external Array<DOT11_AUTH_CIPHER_PAIR> pAuthCipherPairList;
 }
 
@@ -10928,21 +10463,9 @@ base class WLAN_AVAILABLE_NETWORK extends Struct {
   @Array(256)
   external Array<Uint16> _strProfileName;
 
-  String get strProfileName {
-    final charCodes = <int>[];
-    for (var i = 0; i < 256; i++) {
-      if (_strProfileName[i] == 0x00) break;
-      charCodes.add(_strProfileName[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get strProfileName => _strProfileName.toDartString();
 
-  set strProfileName(String value) {
-    final stringToStore = value.padRight(256, '\x00');
-    for (var i = 0; i < 256; i++) {
-      _strProfileName[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set strProfileName(String value) => _strProfileName.setString(value);
 
   external DOT11_SSID dot11Ssid;
 
@@ -10997,7 +10520,7 @@ base class WLAN_AVAILABLE_NETWORK_LIST extends Struct {
   @Uint32()
   external int dwIndex;
 
-  @Array(1)
+  @Array.variableWithVariableDimension(1)
   external Array<WLAN_AVAILABLE_NETWORK> Network;
 }
 
@@ -11064,7 +10587,7 @@ base class WLAN_BSS_LIST extends Struct {
   @Uint32()
   external int dwNumberOfItems;
 
-  @Array(1)
+  @Array.variableWithVariableDimension(1)
   external Array<WLAN_BSS_ENTRY> wlanBssEntries;
 }
 
@@ -11082,21 +10605,9 @@ base class WLAN_CONNECTION_ATTRIBUTES extends Struct {
   @Array(256)
   external Array<Uint16> _strProfileName;
 
-  String get strProfileName {
-    final charCodes = <int>[];
-    for (var i = 0; i < 256; i++) {
-      if (_strProfileName[i] == 0x00) break;
-      charCodes.add(_strProfileName[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get strProfileName => _strProfileName.toDartString();
 
-  set strProfileName(String value) {
-    final stringToStore = value.padRight(256, '\x00');
-    for (var i = 0; i < 256; i++) {
-      _strProfileName[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set strProfileName(String value) => _strProfileName.setString(value);
 
   external WLAN_ASSOCIATION_ATTRIBUTES wlanAssociationAttributes;
 
@@ -11114,21 +10625,9 @@ base class WLAN_CONNECTION_NOTIFICATION_DATA extends Struct {
   @Array(256)
   external Array<Uint16> _strProfileName;
 
-  String get strProfileName {
-    final charCodes = <int>[];
-    for (var i = 0; i < 256; i++) {
-      if (_strProfileName[i] == 0x00) break;
-      charCodes.add(_strProfileName[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get strProfileName => _strProfileName.toDartString();
 
-  set strProfileName(String value) {
-    final stringToStore = value.padRight(256, '\x00');
-    for (var i = 0; i < 256; i++) {
-      _strProfileName[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set strProfileName(String value) => _strProfileName.setString(value);
 
   external DOT11_SSID dot11Ssid;
 
@@ -11144,24 +10643,12 @@ base class WLAN_CONNECTION_NOTIFICATION_DATA extends Struct {
   @Uint32()
   external int dwFlags;
 
-  @Array(1)
+  @Array.variableWithVariableDimension(1)
   external Array<Uint16> _strProfileXml;
 
-  String get strProfileXml {
-    final charCodes = <int>[];
-    for (var i = 0; i < 1; i++) {
-      if (_strProfileXml[i] == 0x00) break;
-      charCodes.add(_strProfileXml[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get strProfileXml => _strProfileXml.toDartString();
 
-  set strProfileXml(String value) {
-    final stringToStore = value.padRight(1, '\x00');
-    for (var i = 0; i < 1; i++) {
-      _strProfileXml[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set strProfileXml(String value) => _strProfileXml.setString(value);
 }
 
 /// The WLAN_CONNECTION_PARAMETERS structure specifies the parameters used
@@ -11193,7 +10680,7 @@ base class WLAN_COUNTRY_OR_REGION_STRING_LIST extends Struct {
   @Uint32()
   external int dwNumberOfItems;
 
-  @Array(3)
+  @Array.variableWithVariableDimension(3)
   external Array<Uint8> pCountryOrRegionStringList;
 }
 
@@ -11207,7 +10694,7 @@ base class WLAN_DEVICE_SERVICE_GUID_LIST extends Struct {
   @Uint32()
   external int dwIndex;
 
-  @Array(1)
+  @Array.variableWithVariableDimension(1)
   external Array<GUID> DeviceService;
 }
 
@@ -11223,7 +10710,7 @@ base class WLAN_DEVICE_SERVICE_NOTIFICATION_DATA extends Struct {
   @Uint32()
   external int dwDataSize;
 
-  @Array(1)
+  @Array.variableWithVariableDimension(1)
   external Array<Uint8> DataBlob;
 }
 
@@ -11326,7 +10813,7 @@ base class WLAN_HOSTED_NETWORK_STATUS extends Struct {
   @Uint32()
   external int dwNumberOfPeers;
 
-  @Array(1)
+  @Array.variableWithVariableDimension(1)
   external Array<WLAN_HOSTED_NETWORK_PEER_STATE> PeerList;
 }
 
@@ -11364,21 +10851,10 @@ base class WLAN_INTERFACE_INFO extends Struct {
   @Array(256)
   external Array<Uint16> _strInterfaceDescription;
 
-  String get strInterfaceDescription {
-    final charCodes = <int>[];
-    for (var i = 0; i < 256; i++) {
-      if (_strInterfaceDescription[i] == 0x00) break;
-      charCodes.add(_strInterfaceDescription[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get strInterfaceDescription => _strInterfaceDescription.toDartString();
 
-  set strInterfaceDescription(String value) {
-    final stringToStore = value.padRight(256, '\x00');
-    for (var i = 0; i < 256; i++) {
-      _strInterfaceDescription[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set strInterfaceDescription(String value) =>
+      _strInterfaceDescription.setString(value);
 
   @Int32()
   external int isState;
@@ -11395,7 +10871,7 @@ base class WLAN_INTERFACE_INFO_LIST extends Struct {
   @Uint32()
   external int dwIndex;
 
-  @Array(1)
+  @Array.variableWithVariableDimension(1)
   external Array<WLAN_INTERFACE_INFO> InterfaceInfo;
 }
 
@@ -11452,21 +10928,9 @@ base class WLAN_MSM_NOTIFICATION_DATA extends Struct {
   @Array(256)
   external Array<Uint16> _strProfileName;
 
-  String get strProfileName {
-    final charCodes = <int>[];
-    for (var i = 0; i < 256; i++) {
-      if (_strProfileName[i] == 0x00) break;
-      charCodes.add(_strProfileName[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get strProfileName => _strProfileName.toDartString();
 
-  set strProfileName(String value) {
-    final stringToStore = value.padRight(256, '\x00');
-    for (var i = 0; i < 256; i++) {
-      _strProfileName[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set strProfileName(String value) => _strProfileName.setString(value);
 
   external DOT11_SSID dot11Ssid;
 
@@ -11572,21 +11036,9 @@ base class WLAN_PROFILE_INFO extends Struct {
   @Array(256)
   external Array<Uint16> _strProfileName;
 
-  String get strProfileName {
-    final charCodes = <int>[];
-    for (var i = 0; i < 256; i++) {
-      if (_strProfileName[i] == 0x00) break;
-      charCodes.add(_strProfileName[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
+  String get strProfileName => _strProfileName.toDartString();
 
-  set strProfileName(String value) {
-    final stringToStore = value.padRight(256, '\x00');
-    for (var i = 0; i < 256; i++) {
-      _strProfileName[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  set strProfileName(String value) => _strProfileName.setString(value);
 
   @Uint32()
   external int dwFlags;
@@ -11603,7 +11055,7 @@ base class WLAN_PROFILE_INFO_LIST extends Struct {
   @Uint32()
   external int dwIndex;
 
-  @Array(1)
+  @Array.variableWithVariableDimension(1)
   external Array<WLAN_PROFILE_INFO> ProfileInfo;
 }
 
@@ -11638,7 +11090,7 @@ base class WLAN_RAW_DATA extends Struct {
   @Uint32()
   external int dwDataSize;
 
-  @Array(1)
+  @Array.variableWithVariableDimension(1)
   external Array<Uint8> DataBlob;
 }
 
@@ -11653,7 +11105,7 @@ base class WLAN_RAW_DATA_LIST extends Struct {
   @Uint32()
   external int dwNumberOfItems;
 
-  @Array(1)
+  @Array.variableWithVariableDimension(1)
   external Array<_WLAN_RAW_DATA_LIST__Anonymous_e__Struct> DataList;
 }
 
@@ -11705,7 +11157,7 @@ base class WLAN_STATISTICS extends Struct {
   @Uint32()
   external int dwNumberOfPhys;
 
-  @Array(1)
+  @Array.variableWithVariableDimension(1)
   external Array<WLAN_PHY_FRAME_STATISTICS> PhyCounters;
 }
 

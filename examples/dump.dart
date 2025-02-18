@@ -6,11 +6,6 @@ import 'dart:io' show exit;
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-extension SymbolInfoHelper on Pointer<SYMBOL_INFO> {
-  int get virtAddress => ref.Address;
-  String get name => (cast<Uint8>() + 84).cast<Utf16>().toDartString();
-}
-
 final _exportedSymbols = <String, int>{};
 
 /// Callback called once for each enumerated symbol by SymEnumSymbols.
@@ -18,7 +13,8 @@ int _enumSymbolProc(Pointer<SYMBOL_INFO> pSymInfo, int size, Pointer ctx) {
   // Only include symbols from the export table
   if (pSymInfo.ref.Flags & SYMBOL_INFO_FLAGS.SYMFLAG_EXPORT ==
       SYMBOL_INFO_FLAGS.SYMFLAG_EXPORT) {
-    _exportedSymbols[pSymInfo.name] = pSymInfo.virtAddress;
+    final SYMBOL_INFO(:Address, :Name) = pSymInfo.ref;
+    _exportedSymbols[Name] = Address;
   }
 
   return TRUE; // Keep enumerating.
