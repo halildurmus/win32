@@ -38,19 +38,23 @@ class IAppxManifestReader4 extends IAppxManifestReader3 {
   factory IAppxManifestReader4.from(IUnknown interface) =>
       IAppxManifestReader4(interface.toInterface(IID_IAppxManifestReader4));
 
-  int
-      getOptionalPackageInfo(Pointer<Pointer<COMObject>> optionalPackageInfo) =>
-          (ptr.ref.vtable + 15)
-                  .cast<
-                      Pointer<
-                          NativeFunction<
-                              Int32 Function(
-                                  Pointer,
-                                  Pointer<Pointer<COMObject>>
-                                      optionalPackageInfo)>>>()
-                  .value
-                  .asFunction<
-                      int Function(Pointer,
-                          Pointer<Pointer<COMObject>> optionalPackageInfo)>()(
-              ptr.ref.lpVtbl, optionalPackageInfo);
+  int getOptionalPackageInfo(Pointer<Pointer<COMObject>> optionalPackageInfo) =>
+      (ptr.ref.vtable + 15)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<Pointer<COMObject>> optionalPackageInfo,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
+              Pointer,
+              Pointer<Pointer<COMObject>> optionalPackageInfo,
+            )
+          >()(ptr.ref.lpVtbl, optionalPackageInfo);
 }

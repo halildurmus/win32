@@ -22,8 +22,8 @@ class NotepadEditor {
   final NotepadFont font;
 
   NotepadEditor(this._hwnd, this._hwndEdit)
-      : file = NotepadFile(_hwnd, '', ''),
-        font = NotepadFont(_hwndEdit);
+    : file = NotepadFile(_hwnd, '', ''),
+      font = NotepadFont(_hwndEdit);
 
   void dispose() {
     font.dispose();
@@ -104,16 +104,26 @@ class NotepadEditor {
   }
 
   void showMessage(String szMessage) {
-    MessageBox(_hwnd, TEXT(szMessage), TEXT(APP_NAME),
-        MESSAGEBOX_STYLE.MB_OK | MESSAGEBOX_STYLE.MB_ICONEXCLAMATION);
+    MessageBox(
+      _hwnd,
+      TEXT(szMessage),
+      TEXT(APP_NAME),
+      MESSAGEBOX_STYLE.MB_OK | MESSAGEBOX_STYLE.MB_ICONEXCLAMATION,
+    );
   }
 
   int offerSave() {
-    final buffer = TEXT(file.title.isNotEmpty
-        ? 'Save current changes in ${file.title}?'
-        : 'Save changes to file?');
-    final res = MessageBox(_hwnd, buffer, TEXT(APP_NAME),
-        MESSAGEBOX_STYLE.MB_YESNOCANCEL | MESSAGEBOX_STYLE.MB_ICONQUESTION);
+    final buffer = TEXT(
+      file.title.isNotEmpty
+          ? 'Save current changes in ${file.title}?'
+          : 'Save changes to file?',
+    );
+    final res = MessageBox(
+      _hwnd,
+      buffer,
+      TEXT(APP_NAME),
+      MESSAGEBOX_STYLE.MB_YESNOCANCEL | MESSAGEBOX_STYLE.MB_ICONQUESTION,
+    );
 
     if (res == MESSAGEBOX_RESULT.IDYES) {
       if (SendMessage(_hwnd, WM_COMMAND, IDM_FILE_SAVE, 0) == FALSE) {

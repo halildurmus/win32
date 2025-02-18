@@ -15,11 +15,13 @@ void compileDartExecutable(String source, String output) {
   final index = sourceToOutputMap.keys.toList().indexOf(source) + 1;
   final total = sourceToOutputMap.length;
   print('⚙️ [$index/$total] Compiling: $source → $output');
-  final result = Process.runSync(
-    'dart',
-    ['compile', 'exe', source, '-o', output],
-    workingDirectory: Platform.script.resolve('..').toFilePath(),
-  );
+  final result = Process.runSync('dart', [
+    'compile',
+    'exe',
+    source,
+    '-o',
+    output,
+  ], workingDirectory: Platform.script.resolve('..').toFilePath());
   if (result.exitCode == 0) {
     print('✅ Success: $source → $output');
   } else {

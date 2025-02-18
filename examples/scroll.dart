@@ -34,7 +34,7 @@ final abc = [
   'yak',
   'zebra',
   'This line contains words, but no character. Go figure.',
-  ''
+  '',
 ];
 
 late int xClient; // width of client area
@@ -80,12 +80,13 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       xClient = LOWORD(lParam);
 
       // Set the vertical scrolling range and page size
-      final si = calloc<SCROLLINFO>()
-        ..ref.cbSize = sizeOf<SCROLLINFO>()
-        ..ref.fMask = SCROLLINFO_MASK.SIF_RANGE | SCROLLINFO_MASK.SIF_PAGE
-        ..ref.nMin = 0
-        ..ref.nMax = abc.length - 1
-        ..ref.nPage = yClient ~/ yChar;
+      final si =
+          calloc<SCROLLINFO>()
+            ..ref.cbSize = sizeOf<SCROLLINFO>()
+            ..ref.fMask = SCROLLINFO_MASK.SIF_RANGE | SCROLLINFO_MASK.SIF_PAGE
+            ..ref.nMin = 0
+            ..ref.nMax = abc.length - 1
+            ..ref.nPage = yClient ~/ yChar;
       SetScrollInfo(hwnd, SCROLLBAR_CONSTANTS.SB_VERT, si, TRUE);
 
       // Set the horizontal scrolling range and page size.
@@ -226,8 +227,10 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
 
       // Find painting limits.
       final firstLine = max(0, yPos + (ps.ref.rcPaint.top ~/ yChar));
-      final lastLine =
-          min(abc.length - 1, yPos + (ps.ref.rcPaint.bottom ~/ yChar));
+      final lastLine = min(
+        abc.length - 1,
+        yPos + (ps.ref.rcPaint.bottom ~/ yChar),
+      );
 
       for (var i = firstLine; i <= lastLine; i++) {
         final x = xChar * (1 - xPos);
@@ -262,35 +265,37 @@ void winMain(int hInstance, List<String> args, int nShowCmd) {
     exceptionalReturn: 0,
   );
 
-  final wc = calloc<WNDCLASS>()
-    ..ref.style = WNDCLASS_STYLES.CS_HREDRAW | WNDCLASS_STYLES.CS_VREDRAW
-    ..ref.lpfnWndProc = lpfnWndProc.nativeFunction
-    ..ref.hInstance = hInstance
-    ..ref.lpszClassName = className
-    ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
-    ..ref.hbrBackground = GetStockObject(GET_STOCK_OBJECT_FLAGS.WHITE_BRUSH);
+  final wc =
+      calloc<WNDCLASS>()
+        ..ref.style = WNDCLASS_STYLES.CS_HREDRAW | WNDCLASS_STYLES.CS_VREDRAW
+        ..ref.lpfnWndProc = lpfnWndProc.nativeFunction
+        ..ref.hInstance = hInstance
+        ..ref.lpszClassName = className
+        ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
+        ..ref.hbrBackground = GetStockObject(
+          GET_STOCK_OBJECT_FLAGS.WHITE_BRUSH,
+        );
   RegisterClass(wc);
 
   // Create the window.
 
   final hWnd = CreateWindowEx(
-      0, // Optional window styles.
-      className, // Window class
-      className, // Window caption
-      WINDOW_STYLE.WS_OVERLAPPEDWINDOW |
-          WINDOW_STYLE.WS_VSCROLL |
-          WINDOW_STYLE.WS_HSCROLL, // Window style
-
-      // Size and position
-      CW_USEDEFAULT,
-      CW_USEDEFAULT,
-      250,
-      250,
-      NULL, // Parent window
-      NULL, // Menu
-      hInstance, // Instance handle
-      nullptr // Additional application data
-      );
+    0, // Optional window styles.
+    className, // Window class
+    className, // Window caption
+    WINDOW_STYLE.WS_OVERLAPPEDWINDOW |
+        WINDOW_STYLE.WS_VSCROLL |
+        WINDOW_STYLE.WS_HSCROLL, // Window style
+    // Size and position
+    CW_USEDEFAULT,
+    CW_USEDEFAULT,
+    250,
+    250,
+    NULL, // Parent window
+    NULL, // Menu
+    hInstance, // Instance handle
+    nullptr, // Additional application data
+  );
 
   if (hWnd == 0) {
     final error = GetLastError();

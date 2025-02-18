@@ -16,19 +16,18 @@ abstract class ComPropertyProjection extends ComMethodProjection {
   String ffiCall({
     required String identifier,
     bool freeRetValOnFailure = false,
-  }) =>
-      [
-        '''
+  }) => [
+    '''
     final hr = (ptr.ref.vtable + $vtableOffset)
         .cast<Pointer<NativeFunction<$nativePrototype>>>()
         .value
         .asFunction<$dartPrototype>()(ptr.ref.lpVtbl, $identifier);
 ''',
-        if (freeRetValOnFailure)
-          'if (FAILED(hr)) { free(retValuePtr); throw WindowsException(hr); }'
-        else
-          'if (FAILED(hr)) throw WindowsException(hr);'
-      ].join('\n');
+    if (freeRetValOnFailure)
+      'if (FAILED(hr)) { free(retValuePtr); throw WindowsException(hr); }'
+    else
+      'if (FAILED(hr)) throw WindowsException(hr);',
+  ].join('\n');
 }
 
 class ComGetPropertyProjection extends ComPropertyProjection {
@@ -51,11 +50,12 @@ class ComGetPropertyProjection extends ComPropertyProjection {
 ''';
     }
 
-    final valRef = returnValue.dartType == 'double' ||
-            returnValue.dartType == 'int' ||
-            returnValue.dartType.startsWith('Pointer')
-        ? 'value'
-        : 'ref';
+    final valRef =
+        returnValue.dartType == 'double' ||
+                returnValue.dartType == 'int' ||
+                returnValue.dartType.startsWith('Pointer')
+            ? 'value'
+            : 'ref';
     return '''
       ${returnValue.dartType} get $exposedMethodName {
         final retValuePtr = calloc<${returnValue.nativeType}>();

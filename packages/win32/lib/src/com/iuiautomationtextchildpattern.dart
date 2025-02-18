@@ -37,20 +37,25 @@ class IUIAutomationTextChildPattern extends IUnknown {
 
   factory IUIAutomationTextChildPattern.from(IUnknown interface) =>
       IUIAutomationTextChildPattern(
-          interface.toInterface(IID_IUIAutomationTextChildPattern));
+        interface.toInterface(IID_IUIAutomationTextChildPattern),
+      );
 
   Pointer<COMObject> get textContainer {
     final retValuePtr = calloc<COMObject>();
 
     final hr = (ptr.ref.vtable + 3)
         .cast<
-            Pointer<
-                NativeFunction<
-                    Int32 Function(Pointer, Pointer<COMObject> container)>>>()
+          Pointer<
+            NativeFunction<
+              Int32 Function(Pointer, Pointer<COMObject> container)
+            >
+          >
+        >()
         .value
-        .asFunction<
-            int Function(Pointer,
-                Pointer<COMObject> container)>()(ptr.ref.lpVtbl, retValuePtr);
+        .asFunction<int Function(Pointer, Pointer<COMObject> container)>()(
+      ptr.ref.lpVtbl,
+      retValuePtr,
+    );
 
     if (FAILED(hr)) {
       free(retValuePtr);
@@ -64,13 +69,16 @@ class IUIAutomationTextChildPattern extends IUnknown {
     final retValuePtr = calloc<COMObject>();
 
     final hr = (ptr.ref.vtable + 4)
-            .cast<
-                Pointer<
-                    NativeFunction<
-                        Int32 Function(Pointer, Pointer<COMObject> range)>>>()
-            .value
-            .asFunction<int Function(Pointer, Pointer<COMObject> range)>()(
-        ptr.ref.lpVtbl, retValuePtr);
+        .cast<
+          Pointer<
+            NativeFunction<Int32 Function(Pointer, Pointer<COMObject> range)>
+          >
+        >()
+        .value
+        .asFunction<int Function(Pointer, Pointer<COMObject> range)>()(
+      ptr.ref.lpVtbl,
+      retValuePtr,
+    );
 
     if (FAILED(hr)) {
       free(retValuePtr);

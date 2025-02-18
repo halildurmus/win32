@@ -16,9 +16,12 @@ class NestedStructProjection extends StructProjection {
   final int rootTypePackingAlignment;
   final TypeDef rootType;
 
-  NestedStructProjection(super.typeDef, super.structName,
-      {required this.suffix, required this.rootTypePackingAlignment})
-      : rootType = _getRootTypeDef(typeDef);
+  NestedStructProjection(
+    super.typeDef,
+    super.structName, {
+    required this.suffix,
+    required this.rootTypePackingAlignment,
+  }) : rootType = _getRootTypeDef(typeDef);
 
   /// Finds the topmost [TypeDef] in the nested tree. This is the one that
   /// should be extended.
@@ -37,8 +40,9 @@ class NestedStructProjection extends StructProjection {
     var name = safeIdentifierForString(field.name);
 
     while (typeDef.enclosingClass != null) {
-      final parentField = typeDef.enclosingClass!.fields
-          .firstWhere((field) => field.typeIdentifier.type == typeDef);
+      final parentField = typeDef.enclosingClass!.fields.firstWhere(
+        (field) => field.typeIdentifier.type == typeDef,
+      );
       final parentName = safeIdentifierForString(parentField.name);
       name = '$parentName.$name';
       typeDef = typeDef.enclosingClass!;
@@ -50,24 +54,30 @@ class NestedStructProjection extends StructProjection {
   /// do this through an extension that contains the field accessors.
   String get propertyAccessors {
     final parentName = mangleName(typeDef.enclosingClass!).substring(1);
-    final extensionName = stripLeadingUnderscores(suffix == 0
-        ? '${parentName}_Extension'
-        : '${parentName}_Extension_$suffix');
+    final extensionName = stripLeadingUnderscores(
+      suffix == 0
+          ? '${parentName}_Extension'
+          : '${parentName}_Extension_$suffix',
+    );
     final rootTypeName = stripLeadingUnderscores(
-        stripAnsiUnicodeSuffix(lastComponent(rootType.name)));
+      stripAnsiUnicodeSuffix(lastComponent(rootType.name)),
+    );
 
-    final buffer = StringBuffer()
-      ..writeln('extension $extensionName on $rootTypeName {');
+    final buffer =
+        StringBuffer()..writeln('extension $extensionName on $rootTypeName {');
     for (final field in typeDef.fields) {
       final instanceName = _instanceName(field);
-      final dartTypeProjection = field.typeIdentifier.type?.isNested ?? false
-          ? TypeProjection(field.typeIdentifier).dartType
-          : stripLeadingUnderscores(
-              TypeProjection(field.typeIdentifier).dartType);
+      final dartTypeProjection =
+          field.typeIdentifier.type?.isNested ?? false
+              ? TypeProjection(field.typeIdentifier).dartType
+              : stripLeadingUnderscores(
+                TypeProjection(field.typeIdentifier).dartType,
+              );
 
       // TODO: Need to figure out why this is needed at all. Shouldn't the type
       // projection figure out the difference here?
-      final typeIsString = (dartTypeProjection == 'Array<Uint16>') &&
+      final typeIsString =
+          (dartTypeProjection == 'Array<Uint16>') &&
           (field.typeIdentifier.typeArg!.baseType == BaseType.charType);
       final fieldType = typeIsString ? 'String' : dartTypeProjection;
 

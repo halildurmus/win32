@@ -71,15 +71,19 @@ String getComputerName() {
   String name;
 
   GetComputerNameEx(
-      COMPUTER_NAME_FORMAT.ComputerNameDnsFullyQualified, nullptr, nameLength);
+    COMPUTER_NAME_FORMAT.ComputerNameDnsFullyQualified,
+    nullptr,
+    nameLength,
+  );
 
   final namePtr = wsalloc(nameLength.value);
 
   try {
     final result = GetComputerNameEx(
-        COMPUTER_NAME_FORMAT.ComputerNameDnsFullyQualified,
-        namePtr,
-        nameLength);
+      COMPUTER_NAME_FORMAT.ComputerNameDnsFullyQualified,
+      namePtr,
+      nameLength,
+    );
 
     if (result != 0) {
       name = namePtr.toDartString();
@@ -108,11 +112,22 @@ Object getRegistryValue(int key, String subKey, String valueName) {
   final dataSize = calloc<DWORD>()..value = 256;
 
   try {
-    var result =
-        RegOpenKeyEx(key, subKeyPtr, 0, REG_SAM_FLAGS.KEY_READ, openKeyPtr);
+    var result = RegOpenKeyEx(
+      key,
+      subKeyPtr,
+      0,
+      REG_SAM_FLAGS.KEY_READ,
+      openKeyPtr,
+    );
     if (result == WIN32_ERROR.ERROR_SUCCESS) {
       result = RegQueryValueEx(
-          openKeyPtr.value, valueNamePtr, nullptr, dataType, data, dataSize);
+        openKeyPtr.value,
+        valueNamePtr,
+        nullptr,
+        dataType,
+        data,
+        dataSize,
+      );
 
       if (result == WIN32_ERROR.ERROR_SUCCESS) {
         if (dataType.value == REG_VALUE_TYPE.REG_DWORD) {
@@ -168,13 +183,17 @@ void printPowerInfo() {
         if (powerStatus.ref.BatteryLifePercent == 255) {
           print(' - Battery status unknown.');
         } else {
-          print(' - ${powerStatus.ref.BatteryLifePercent}% '
-              'percent battery remaining.');
+          print(
+            ' - ${powerStatus.ref.BatteryLifePercent}% '
+            'percent battery remaining.',
+          );
         }
 
         if (powerStatus.ref.BatteryLifeTime != 0xFFFFFFFF) {
-          print(' - ${powerStatus.ref.BatteryLifeTime / 60} minutes of power '
-              'estimated to remain.');
+          print(
+            ' - ${powerStatus.ref.BatteryLifeTime / 60} minutes of power '
+            'estimated to remain.',
+          );
         }
         // New in Windows 10, but should report 0 on older systems
         if (powerStatus.ref.SystemStatusFlag == 1) {
@@ -199,48 +218,69 @@ void printBatteryStatusInfo() {
 
   try {
     final result = CallNtPowerInformation(
-        POWER_INFORMATION_LEVEL.SystemBatteryState,
-        nullptr,
-        0,
-        batteryStatus,
-        sizeOf<SYSTEM_BATTERY_STATE>());
+      POWER_INFORMATION_LEVEL.SystemBatteryState,
+      nullptr,
+      0,
+      batteryStatus,
+      sizeOf<SYSTEM_BATTERY_STATE>(),
+    );
 
     if (result == STATUS_SUCCESS) {
       print('Power status from CallNtPowerInformation():');
 
-      print(batteryStatus.ref.AcOnLine == TRUE
-          ? ' - System is currently operating on external power.'
-          : ' - System is not currently operating on external power.');
+      print(
+        batteryStatus.ref.AcOnLine == TRUE
+            ? ' - System is currently operating on external power.'
+            : ' - System is not currently operating on external power.',
+      );
 
-      print(batteryStatus.ref.BatteryPresent == TRUE
-          ? ' - At least one battery is present in the system.'
-          : ' - No batteries detected in the system.');
+      print(
+        batteryStatus.ref.BatteryPresent == TRUE
+            ? ' - At least one battery is present in the system.'
+            : ' - No batteries detected in the system.',
+      );
 
       if (batteryStatus.ref.BatteryPresent == TRUE) {
-        print(batteryStatus.ref.Charging == TRUE
-            ? ' - Battery is charging.'
-            : ' - Battery is not charging.');
+        print(
+          batteryStatus.ref.Charging == TRUE
+              ? ' - Battery is charging.'
+              : ' - Battery is not charging.',
+        );
 
-        print(batteryStatus.ref.Discharging == TRUE
-            ? ' - Battery is discharging.'
-            : ' - Battery is not discharging.');
+        print(
+          batteryStatus.ref.Discharging == TRUE
+              ? ' - Battery is discharging.'
+              : ' - Battery is not discharging.',
+        );
 
-        print(' - Theoretical max capacity of the battery is '
-            '${batteryStatus.ref.MaxCapacity}.');
+        print(
+          ' - Theoretical max capacity of the battery is '
+          '${batteryStatus.ref.MaxCapacity}.',
+        );
 
-        print(' - Estimated remaining capacity of the battery is '
-            '${batteryStatus.ref.RemainingCapacity}.');
+        print(
+          ' - Estimated remaining capacity of the battery is '
+          '${batteryStatus.ref.RemainingCapacity}.',
+        );
 
-        print(' - Charge/discharge rate of the battery is '
-            '${batteryStatus.ref.EstimatedTime.abs()} mW.');
+        print(
+          ' - Charge/discharge rate of the battery is '
+          '${batteryStatus.ref.EstimatedTime.abs()} mW.',
+        );
 
-        print(' - Estimated time remaining on the battery is '
-            '${batteryStatus.ref.EstimatedTime} seconds.');
+        print(
+          ' - Estimated time remaining on the battery is '
+          '${batteryStatus.ref.EstimatedTime} seconds.',
+        );
 
-        print(' - Manufacturer suggested low battery alert is at '
-            '${batteryStatus.ref.DefaultAlert1} mWh.');
-        print(' - Manufacturer suggested warning battery alert is at '
-            '${batteryStatus.ref.DefaultAlert2} mWh.');
+        print(
+          ' - Manufacturer suggested low battery alert is at '
+          '${batteryStatus.ref.DefaultAlert1} mWh.',
+        );
+        print(
+          ' - Manufacturer suggested warning battery alert is at '
+          '${batteryStatus.ref.DefaultAlert2} mWh.',
+        );
       }
     }
   } finally {
@@ -278,20 +318,28 @@ void main() {
   // buggy version testing. Indeed, the API goes to some lengths to make it hard
   // to test versions. Yet version detection is the only reliable solution for
   // certain API calls, so the recommendation is noted but not followed.
-  final buildNumber = int.parse(getRegistryValue(
-      HKEY_LOCAL_MACHINE,
-      'SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\',
-      'CurrentBuildNumber') as String);
+  final buildNumber = int.parse(
+    getRegistryValue(
+          HKEY_LOCAL_MACHINE,
+          'SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\',
+          'CurrentBuildNumber',
+        )
+        as String,
+  );
   if (buildNumber >= 10240) print(' - Windows 10');
   if (buildNumber >= 22000) print(' - Windows 11');
 
   print('\nWindows build number is: $buildNumber');
 
-  print('\nRAM physically installed on this computer: '
-      '${getSystemMemoryInMegabytes()}MB');
+  print(
+    '\nRAM physically installed on this computer: '
+    '${getSystemMemoryInMegabytes()}MB',
+  );
 
-  print('\nActive processors on the system: '
-      '${GetActiveProcessorCount(ALL_PROCESSOR_GROUPS)}\n');
+  print(
+    '\nActive processors on the system: '
+    '${GetActiveProcessorCount(ALL_PROCESSOR_GROUPS)}\n',
+  );
 
   print('User name is: ${getUserName()}');
   print('Computer name is: ${getComputerName()}\n');

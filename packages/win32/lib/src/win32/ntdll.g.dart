@@ -29,18 +29,28 @@ final _ntdll = DynamicLibrary.open('ntdll.dll');
 /// ```
 /// {@category ntdll}
 int NtQuerySystemInformation(
-        int SystemInformationClass,
-        Pointer SystemInformation,
-        int SystemInformationLength,
-        Pointer<Uint32> ReturnLength) =>
-    _NtQuerySystemInformation(SystemInformationClass, SystemInformation,
-        SystemInformationLength, ReturnLength);
+  int SystemInformationClass,
+  Pointer SystemInformation,
+  int SystemInformationLength,
+  Pointer<Uint32> ReturnLength,
+) => _NtQuerySystemInformation(
+  SystemInformationClass,
+  SystemInformation,
+  SystemInformationLength,
+  ReturnLength,
+);
 
 final _NtQuerySystemInformation = _ntdll.lookupFunction<
-    Int32 Function(Int32 SystemInformationClass, Pointer SystemInformation,
-        Uint32 SystemInformationLength, Pointer<Uint32> ReturnLength),
-    int Function(
-        int SystemInformationClass,
-        Pointer SystemInformation,
-        int SystemInformationLength,
-        Pointer<Uint32> ReturnLength)>('NtQuerySystemInformation');
+  Int32 Function(
+    Int32 SystemInformationClass,
+    Pointer SystemInformation,
+    Uint32 SystemInformationLength,
+    Pointer<Uint32> ReturnLength,
+  ),
+  int Function(
+    int SystemInformationClass,
+    Pointer SystemInformation,
+    int SystemInformationLength,
+    Pointer<Uint32> ReturnLength,
+  )
+>('NtQuerySystemInformation');

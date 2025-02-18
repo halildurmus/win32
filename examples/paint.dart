@@ -26,7 +26,8 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       for (var i = 1; i <= 20; i++) {
         final color = (255 - 256 / 10 * i).round();
         final hBrush = CreateSolidBrush(
-            RGB(0, color >= 0 ? color : 0, color >= 0 ? color : 0));
+          RGB(0, color >= 0 ? color : 0, color >= 0 ? color : 0),
+        );
         rect.ref.left = rect.ref.left + 10;
         rect.ref.right = rect.ref.right - 10;
         rect.ref.top = rect.ref.top + 10;
@@ -55,33 +56,35 @@ void winMain(int hInstance, List<String> args, int nShowCmd) {
     exceptionalReturn: 0,
   );
 
-  final wc = calloc<WNDCLASS>()
-    ..ref.style = WNDCLASS_STYLES.CS_HREDRAW | WNDCLASS_STYLES.CS_VREDRAW
-    ..ref.lpfnWndProc = lpfnWndProc.nativeFunction
-    ..ref.hInstance = hInstance
-    ..ref.lpszClassName = className
-    ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
-    ..ref.hbrBackground = GetStockObject(GET_STOCK_OBJECT_FLAGS.WHITE_BRUSH);
+  final wc =
+      calloc<WNDCLASS>()
+        ..ref.style = WNDCLASS_STYLES.CS_HREDRAW | WNDCLASS_STYLES.CS_VREDRAW
+        ..ref.lpfnWndProc = lpfnWndProc.nativeFunction
+        ..ref.hInstance = hInstance
+        ..ref.lpszClassName = className
+        ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
+        ..ref.hbrBackground = GetStockObject(
+          GET_STOCK_OBJECT_FLAGS.WHITE_BRUSH,
+        );
   RegisterClass(wc);
 
   // Create the window.
 
   final hWnd = CreateWindowEx(
-      0, // Optional window styles.
-      className, // Window class
-      className, // Window caption
-      WINDOW_STYLE.WS_OVERLAPPEDWINDOW, // Window style
-
-      // Size and position
-      CW_USEDEFAULT,
-      CW_USEDEFAULT,
-      CW_USEDEFAULT,
-      CW_USEDEFAULT,
-      NULL, // Parent window
-      NULL, // Menu
-      hInstance, // Instance handle
-      nullptr // Additional application data
-      );
+    0, // Optional window styles.
+    className, // Window class
+    className, // Window caption
+    WINDOW_STYLE.WS_OVERLAPPEDWINDOW, // Window style
+    // Size and position
+    CW_USEDEFAULT,
+    CW_USEDEFAULT,
+    CW_USEDEFAULT,
+    CW_USEDEFAULT,
+    NULL, // Parent window
+    NULL, // Menu
+    hInstance, // Instance handle
+    nullptr, // Additional application data
+  );
 
   if (hWnd == 0) {
     final error = GetLastError();

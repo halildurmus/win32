@@ -31,9 +31,9 @@ void NetFreeAadJoinInformation(Pointer<DSREG_JOIN_INFO> pJoinInfo) =>
     _NetFreeAadJoinInformation(pJoinInfo);
 
 final _NetFreeAadJoinInformation = _netapi32.lookupFunction<
-    Void Function(Pointer<DSREG_JOIN_INFO> pJoinInfo),
-    void Function(
-        Pointer<DSREG_JOIN_INFO> pJoinInfo)>('NetFreeAadJoinInformation');
+  Void Function(Pointer<DSREG_JOIN_INFO> pJoinInfo),
+  void Function(Pointer<DSREG_JOIN_INFO> pJoinInfo)
+>('NetFreeAadJoinInformation');
 
 /// Retrieves the join information for the specified tenant. This function
 /// examines the join information for Microsoft Azure Active Directory and
@@ -46,13 +46,18 @@ final _NetFreeAadJoinInformation = _netapi32.lookupFunction<
 /// );
 /// ```
 /// {@category netapi32}
-int NetGetAadJoinInformation(Pointer<Utf16> pcszTenantId,
-        Pointer<Pointer<DSREG_JOIN_INFO>> ppJoinInfo) =>
-    _NetGetAadJoinInformation(pcszTenantId, ppJoinInfo);
+int NetGetAadJoinInformation(
+  Pointer<Utf16> pcszTenantId,
+  Pointer<Pointer<DSREG_JOIN_INFO>> ppJoinInfo,
+) => _NetGetAadJoinInformation(pcszTenantId, ppJoinInfo);
 
 final _NetGetAadJoinInformation = _netapi32.lookupFunction<
-        Int32 Function(Pointer<Utf16> pcszTenantId,
-            Pointer<Pointer<DSREG_JOIN_INFO>> ppJoinInfo),
-        int Function(Pointer<Utf16> pcszTenantId,
-            Pointer<Pointer<DSREG_JOIN_INFO>> ppJoinInfo)>(
-    'NetGetAadJoinInformation');
+  Int32 Function(
+    Pointer<Utf16> pcszTenantId,
+    Pointer<Pointer<DSREG_JOIN_INFO>> ppJoinInfo,
+  ),
+  int Function(
+    Pointer<Utf16> pcszTenantId,
+    Pointer<Pointer<DSREG_JOIN_INFO>> ppJoinInfo,
+  )
+>('NetGetAadJoinInformation');

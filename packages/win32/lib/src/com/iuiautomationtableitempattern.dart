@@ -37,53 +37,70 @@ class IUIAutomationTableItemPattern extends IUnknown {
 
   factory IUIAutomationTableItemPattern.from(IUnknown interface) =>
       IUIAutomationTableItemPattern(
-          interface.toInterface(IID_IUIAutomationTableItemPattern));
+        interface.toInterface(IID_IUIAutomationTableItemPattern),
+      );
 
-  int getCurrentRowHeaderItems(Pointer<Pointer<COMObject>> retVal) =>
-      (ptr.ref.vtable + 3)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<COMObject>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<COMObject>> retVal)>()(
-          ptr.ref.lpVtbl, retVal);
+  int getCurrentRowHeaderItems(
+    Pointer<Pointer<COMObject>> retVal,
+  ) => (ptr.ref.vtable + 3)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<Pointer<COMObject>> retVal)
+          >
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> retVal)>()(
+    ptr.ref.lpVtbl,
+    retVal,
+  );
 
-  int getCurrentColumnHeaderItems(Pointer<Pointer<COMObject>> retVal) =>
-      (ptr.ref.vtable + 4)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<COMObject>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<COMObject>> retVal)>()(
-          ptr.ref.lpVtbl, retVal);
+  int getCurrentColumnHeaderItems(
+    Pointer<Pointer<COMObject>> retVal,
+  ) => (ptr.ref.vtable + 4)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<Pointer<COMObject>> retVal)
+          >
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> retVal)>()(
+    ptr.ref.lpVtbl,
+    retVal,
+  );
 
-  int getCachedRowHeaderItems(Pointer<Pointer<COMObject>> retVal) =>
-      (ptr.ref.vtable + 5)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<COMObject>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<COMObject>> retVal)>()(
-          ptr.ref.lpVtbl, retVal);
+  int getCachedRowHeaderItems(
+    Pointer<Pointer<COMObject>> retVal,
+  ) => (ptr.ref.vtable + 5)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<Pointer<COMObject>> retVal)
+          >
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> retVal)>()(
+    ptr.ref.lpVtbl,
+    retVal,
+  );
 
-  int getCachedColumnHeaderItems(Pointer<Pointer<COMObject>> retVal) =>
-      (ptr.ref.vtable + 6)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<COMObject>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<COMObject>> retVal)>()(
-          ptr.ref.lpVtbl, retVal);
+  int getCachedColumnHeaderItems(
+    Pointer<Pointer<COMObject>> retVal,
+  ) => (ptr.ref.vtable + 6)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<Pointer<COMObject>> retVal)
+          >
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> retVal)>()(
+    ptr.ref.lpVtbl,
+    retVal,
+  );
 }

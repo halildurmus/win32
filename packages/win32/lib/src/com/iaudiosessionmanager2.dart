@@ -40,66 +40,83 @@ class IAudioSessionManager2 extends IAudioSessionManager {
 
   int getSessionEnumerator(Pointer<Pointer<COMObject>> SessionEnum) =>
       (ptr.ref.vtable + 5)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer,
-                              Pointer<Pointer<COMObject>> SessionEnum)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, Pointer<Pointer<COMObject>> SessionEnum)>()(
-          ptr.ref.lpVtbl, SessionEnum);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<COMObject>> SessionEnum)
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<COMObject>> SessionEnum)
+          >()(ptr.ref.lpVtbl, SessionEnum);
 
   int registerSessionNotification(Pointer<COMObject> SessionNotification) =>
       (ptr.ref.vtable + 6)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer,
-                              Pointer<COMObject> SessionNotification)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, Pointer<COMObject> SessionNotification)>()(
-          ptr.ref.lpVtbl, SessionNotification);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<COMObject> SessionNotification)
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<COMObject> SessionNotification)
+          >()(ptr.ref.lpVtbl, SessionNotification);
 
   int unregisterSessionNotification(Pointer<COMObject> SessionNotification) =>
       (ptr.ref.vtable + 7)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer,
-                              Pointer<COMObject> SessionNotification)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, Pointer<COMObject> SessionNotification)>()(
-          ptr.ref.lpVtbl, SessionNotification);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<COMObject> SessionNotification)
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<COMObject> SessionNotification)
+          >()(ptr.ref.lpVtbl, SessionNotification);
 
   int registerDuckNotification(
-          Pointer<Utf16> sessionID, Pointer<COMObject> duckNotification) =>
-      (ptr.ref.vtable + 8)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Utf16> sessionID,
-                              Pointer<COMObject> duckNotification)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Utf16> sessionID,
-                      Pointer<COMObject> duckNotification)>()(
-          ptr.ref.lpVtbl, sessionID, duckNotification);
+    Pointer<Utf16> sessionID,
+    Pointer<COMObject> duckNotification,
+  ) => (ptr.ref.vtable + 8)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<Utf16> sessionID,
+              Pointer<COMObject> duckNotification,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<Utf16> sessionID,
+          Pointer<COMObject> duckNotification,
+        )
+      >()(ptr.ref.lpVtbl, sessionID, duckNotification);
 
-  int unregisterDuckNotification(Pointer<COMObject> duckNotification) =>
-      (ptr.ref.vtable + 9)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<COMObject> duckNotification)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<COMObject> duckNotification)>()(
-          ptr.ref.lpVtbl, duckNotification);
+  int unregisterDuckNotification(
+    Pointer<COMObject> duckNotification,
+  ) => (ptr.ref.vtable + 9)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<COMObject> duckNotification)
+          >
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<COMObject> duckNotification)>()(
+    ptr.ref.lpVtbl,
+    duckNotification,
+  );
 }

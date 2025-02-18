@@ -37,14 +37,18 @@ class ISpellCheckerChangedEventHandler extends IUnknown {
 
   factory ISpellCheckerChangedEventHandler.from(IUnknown interface) =>
       ISpellCheckerChangedEventHandler(
-          interface.toInterface(IID_ISpellCheckerChangedEventHandler));
+        interface.toInterface(IID_ISpellCheckerChangedEventHandler),
+      );
 
   int invoke(Pointer<COMObject> sender) => (ptr.ref.vtable + 3)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<COMObject> sender)>>>()
-          .value
-          .asFunction<int Function(Pointer, Pointer<COMObject> sender)>()(
-      ptr.ref.lpVtbl, sender);
+      .cast<
+        Pointer<
+          NativeFunction<Int32 Function(Pointer, Pointer<COMObject> sender)>
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<COMObject> sender)>()(
+    ptr.ref.lpVtbl,
+    sender,
+  );
 }

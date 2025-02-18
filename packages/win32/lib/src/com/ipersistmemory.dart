@@ -43,33 +43,47 @@ class IPersistMemory extends IPersist {
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
   int load(Pointer pMem, int cbSize) => (ptr.ref.vtable + 5)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer pMem, Uint32 cbSize)>>>()
-          .value
-          .asFunction<int Function(Pointer, Pointer pMem, int cbSize)>()(
-      ptr.ref.lpVtbl, pMem, cbSize);
+      .cast<
+        Pointer<
+          NativeFunction<Int32 Function(Pointer, Pointer pMem, Uint32 cbSize)>
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer pMem, int cbSize)>()(
+    ptr.ref.lpVtbl,
+    pMem,
+    cbSize,
+  );
 
   int save(Pointer pMem, int fClearDirty, int cbSize) => (ptr.ref.vtable + 6)
       .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(Pointer, Pointer pMem, Int32 fClearDirty,
-                      Uint32 cbSize)>>>()
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer pMem,
+              Int32 fClearDirty,
+              Uint32 cbSize,
+            )
+          >
+        >
+      >()
       .value
       .asFunction<
-          int Function(Pointer, Pointer pMem, int fClearDirty,
-              int cbSize)>()(ptr.ref.lpVtbl, pMem, fClearDirty, cbSize);
+        int Function(Pointer, Pointer pMem, int fClearDirty, int cbSize)
+      >()(ptr.ref.lpVtbl, pMem, fClearDirty, cbSize);
 
   int getSizeMax(Pointer<Uint32> pCbSize) => (ptr.ref.vtable + 7)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<Uint32> pCbSize)>>>()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Uint32> pCbSize)>()(
-      ptr.ref.lpVtbl, pCbSize);
+      .cast<
+        Pointer<
+          NativeFunction<Int32 Function(Pointer, Pointer<Uint32> pCbSize)>
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Uint32> pCbSize)>()(
+    ptr.ref.lpVtbl,
+    pCbSize,
+  );
 
   int initNew() => (ptr.ref.vtable + 8)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()

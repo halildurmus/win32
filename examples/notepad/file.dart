@@ -19,14 +19,16 @@ class NotepadFile {
   late Pointer<OPENFILENAME> ofn;
 
   NotepadFile(int hwnd, this.path, this.title) {
-    ofn = calloc<OPENFILENAME>()
-      ..ref.lStructSize = sizeOf<OPENFILENAME>()
-      ..ref.hwndOwner = hwnd
-      ..ref.lpstrFilter = TEXT(
-          'Text Files (*.txt)\u{0}*.txt\u{0}All Files (*.*)\u{0}*.*\u{0}\u{0}')
-      ..ref.nMaxFile = MAX_PATH
-      ..ref.nMaxFileTitle = MAX_PATH
-      ..ref.lpstrDefExt = TEXT('txt');
+    ofn =
+        calloc<OPENFILENAME>()
+          ..ref.lStructSize = sizeOf<OPENFILENAME>()
+          ..ref.hwndOwner = hwnd
+          ..ref.lpstrFilter = TEXT(
+            'Text Files (*.txt)\u{0}*.txt\u{0}All Files (*.*)\u{0}*.*\u{0}\u{0}',
+          )
+          ..ref.nMaxFile = MAX_PATH
+          ..ref.nMaxFileTitle = MAX_PATH
+          ..ref.lpstrDefExt = TEXT('txt');
   }
 
   /// Shows open dialog.
@@ -41,7 +43,8 @@ class NotepadFile {
 
     ofn.ref.lpstrFile = strFile;
     ofn.ref.lpstrFileTitle = strFileTitle;
-    ofn.ref.Flags = OPEN_FILENAME_FLAGS.OFN_HIDEREADONLY |
+    ofn.ref.Flags =
+        OPEN_FILENAME_FLAGS.OFN_HIDEREADONLY |
         OPEN_FILENAME_FLAGS.OFN_CREATEPROMPT;
 
     final result = GetOpenFileName(ofn);

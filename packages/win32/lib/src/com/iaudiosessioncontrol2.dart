@@ -40,36 +40,45 @@ class IAudioSessionControl2 extends IAudioSessionControl {
 
   int getSessionIdentifier(Pointer<Pointer<Utf16>> pRetVal) =>
       (ptr.ref.vtable + 12)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<Utf16>> pRetVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<Utf16>> pRetVal)>()(
-          ptr.ref.lpVtbl, pRetVal);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<Utf16>> pRetVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> pRetVal)>()(
+        ptr.ref.lpVtbl,
+        pRetVal,
+      );
 
   int getSessionInstanceIdentifier(Pointer<Pointer<Utf16>> pRetVal) =>
       (ptr.ref.vtable + 13)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<Utf16>> pRetVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<Utf16>> pRetVal)>()(
-          ptr.ref.lpVtbl, pRetVal);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<Utf16>> pRetVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> pRetVal)>()(
+        ptr.ref.lpVtbl,
+        pRetVal,
+      );
 
   int getProcessId(Pointer<Uint32> pRetVal) => (ptr.ref.vtable + 14)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<Uint32> pRetVal)>>>()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Uint32> pRetVal)>()(
-      ptr.ref.lpVtbl, pRetVal);
+      .cast<
+        Pointer<
+          NativeFunction<Int32 Function(Pointer, Pointer<Uint32> pRetVal)>
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Uint32> pRetVal)>()(
+    ptr.ref.lpVtbl,
+    pRetVal,
+  );
 
   int isSystemSoundsSession() => (ptr.ref.vtable + 15)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()

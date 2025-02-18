@@ -37,71 +37,96 @@ class IMetaDataDispenser extends IUnknown {
   factory IMetaDataDispenser.from(IUnknown interface) =>
       IMetaDataDispenser(interface.toInterface(IID_IMetaDataDispenser));
 
-  int defineScope(Pointer<GUID> rclsid, int dwCreateFlags, Pointer<GUID> riid,
-          Pointer<Pointer<COMObject>> ppIUnk) =>
-      (ptr.ref.vtable + 3)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<GUID> rclsid,
-                              Uint32 dwCreateFlags,
-                              Pointer<GUID> riid,
-                              Pointer<Pointer<COMObject>> ppIUnk)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      Pointer<GUID> rclsid,
-                      int dwCreateFlags,
-                      Pointer<GUID> riid,
-                      Pointer<Pointer<COMObject>> ppIUnk)>()(
-          ptr.ref.lpVtbl, rclsid, dwCreateFlags, riid, ppIUnk);
+  int defineScope(
+    Pointer<GUID> rclsid,
+    int dwCreateFlags,
+    Pointer<GUID> riid,
+    Pointer<Pointer<COMObject>> ppIUnk,
+  ) => (ptr.ref.vtable + 3)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<GUID> rclsid,
+              Uint32 dwCreateFlags,
+              Pointer<GUID> riid,
+              Pointer<Pointer<COMObject>> ppIUnk,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<GUID> rclsid,
+          int dwCreateFlags,
+          Pointer<GUID> riid,
+          Pointer<Pointer<COMObject>> ppIUnk,
+        )
+      >()(ptr.ref.lpVtbl, rclsid, dwCreateFlags, riid, ppIUnk);
 
-  int openScope(Pointer<Utf16> szScope, int dwOpenFlags, Pointer<GUID> riid,
-          Pointer<Pointer<COMObject>> ppIUnk) =>
-      (ptr.ref.vtable + 4)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<Utf16> szScope,
-                              Uint32 dwOpenFlags,
-                              Pointer<GUID> riid,
-                              Pointer<Pointer<COMObject>> ppIUnk)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      Pointer<Utf16> szScope,
-                      int dwOpenFlags,
-                      Pointer<GUID> riid,
-                      Pointer<Pointer<COMObject>> ppIUnk)>()(
-          ptr.ref.lpVtbl, szScope, dwOpenFlags, riid, ppIUnk);
+  int openScope(
+    Pointer<Utf16> szScope,
+    int dwOpenFlags,
+    Pointer<GUID> riid,
+    Pointer<Pointer<COMObject>> ppIUnk,
+  ) => (ptr.ref.vtable + 4)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<Utf16> szScope,
+              Uint32 dwOpenFlags,
+              Pointer<GUID> riid,
+              Pointer<Pointer<COMObject>> ppIUnk,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<Utf16> szScope,
+          int dwOpenFlags,
+          Pointer<GUID> riid,
+          Pointer<Pointer<COMObject>> ppIUnk,
+        )
+      >()(ptr.ref.lpVtbl, szScope, dwOpenFlags, riid, ppIUnk);
 
-  int openScopeOnMemory(Pointer pData, int cbData, int dwOpenFlags,
-          Pointer<GUID> riid, Pointer<Pointer<COMObject>> ppIUnk) =>
-      (ptr.ref.vtable + 5)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer pData,
-                              Uint32 cbData,
-                              Uint32 dwOpenFlags,
-                              Pointer<GUID> riid,
-                              Pointer<Pointer<COMObject>> ppIUnk)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      Pointer pData,
-                      int cbData,
-                      int dwOpenFlags,
-                      Pointer<GUID> riid,
-                      Pointer<Pointer<COMObject>> ppIUnk)>()(
-          ptr.ref.lpVtbl, pData, cbData, dwOpenFlags, riid, ppIUnk);
+  int openScopeOnMemory(
+    Pointer pData,
+    int cbData,
+    int dwOpenFlags,
+    Pointer<GUID> riid,
+    Pointer<Pointer<COMObject>> ppIUnk,
+  ) => (ptr.ref.vtable + 5)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer pData,
+              Uint32 cbData,
+              Uint32 dwOpenFlags,
+              Pointer<GUID> riid,
+              Pointer<Pointer<COMObject>> ppIUnk,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer pData,
+          int cbData,
+          int dwOpenFlags,
+          Pointer<GUID> riid,
+          Pointer<Pointer<COMObject>> ppIUnk,
+        )
+      >()(ptr.ref.lpVtbl, pData, cbData, dwOpenFlags, riid, ppIUnk);
 }

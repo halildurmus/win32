@@ -30,8 +30,9 @@ int WTSRegisterSessionNotification(int hWnd, int dwFlags) =>
     _WTSRegisterSessionNotification(hWnd, dwFlags);
 
 final _WTSRegisterSessionNotification = _wtsapi32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Uint32 dwFlags),
-    int Function(int hWnd, int dwFlags)>('WTSRegisterSessionNotification');
+  Int32 Function(IntPtr hWnd, Uint32 dwFlags),
+  int Function(int hWnd, int dwFlags)
+>('WTSRegisterSessionNotification');
 
 /// Unregisters the specified window so that it receives no further session
 /// change notifications.
@@ -45,6 +46,7 @@ final _WTSRegisterSessionNotification = _wtsapi32.lookupFunction<
 int WTSUnRegisterSessionNotification(int hWnd) =>
     _WTSUnRegisterSessionNotification(hWnd);
 
-final _WTSUnRegisterSessionNotification = _wtsapi32.lookupFunction<
-    Int32 Function(IntPtr hWnd),
-    int Function(int hWnd)>('WTSUnRegisterSessionNotification');
+final _WTSUnRegisterSessionNotification = _wtsapi32
+    .lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
+      'WTSUnRegisterSessionNotification',
+    );

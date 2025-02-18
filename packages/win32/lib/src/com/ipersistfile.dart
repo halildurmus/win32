@@ -47,43 +47,52 @@ class IPersistFile extends IPersist {
 
   int load(Pointer<Utf16> pszFileName, int dwMode) => (ptr.ref.vtable + 5)
       .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(
-                      Pointer, Pointer<Utf16> pszFileName, Uint32 dwMode)>>>()
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<Utf16> pszFileName, Uint32 dwMode)
+          >
+        >
+      >()
       .value
       .asFunction<
-          int Function(Pointer, Pointer<Utf16> pszFileName,
-              int dwMode)>()(ptr.ref.lpVtbl, pszFileName, dwMode);
+        int Function(Pointer, Pointer<Utf16> pszFileName, int dwMode)
+      >()(ptr.ref.lpVtbl, pszFileName, dwMode);
 
   int save(Pointer<Utf16> pszFileName, int fRemember) => (ptr.ref.vtable + 6)
       .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(
-                      Pointer, Pointer<Utf16> pszFileName, Int32 fRemember)>>>()
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<Utf16> pszFileName, Int32 fRemember)
+          >
+        >
+      >()
       .value
       .asFunction<
-          int Function(Pointer, Pointer<Utf16> pszFileName,
-              int fRemember)>()(ptr.ref.lpVtbl, pszFileName, fRemember);
+        int Function(Pointer, Pointer<Utf16> pszFileName, int fRemember)
+      >()(ptr.ref.lpVtbl, pszFileName, fRemember);
 
   int saveCompleted(Pointer<Utf16> pszFileName) => (ptr.ref.vtable + 7)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<Utf16> pszFileName)>>>()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Utf16> pszFileName)>()(
-      ptr.ref.lpVtbl, pszFileName);
+      .cast<
+        Pointer<
+          NativeFunction<Int32 Function(Pointer, Pointer<Utf16> pszFileName)>
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Utf16> pszFileName)>()(
+    ptr.ref.lpVtbl,
+    pszFileName,
+  );
 
   int getCurFile(Pointer<Pointer<Utf16>> ppszFileName) => (ptr.ref.vtable + 8)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<Pointer<Utf16>> ppszFileName)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, Pointer<Pointer<Utf16>> ppszFileName)>()(
-      ptr.ref.lpVtbl, ppszFileName);
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<Pointer<Utf16>> ppszFileName)
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(Pointer, Pointer<Pointer<Utf16>> ppszFileName)
+      >()(ptr.ref.lpVtbl, ppszFileName);
 }

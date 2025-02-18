@@ -37,7 +37,10 @@ void initData(WAVEFORMATEX waveFormat, int totalFrames) {
 ///
 /// Returns true if there is data, else returns false (indicating silence).
 bool fillMemoryBuffer(
-    int totalFrames, Pointer<BYTE> dataOut, WAVEFORMATEX waveFormat) {
+  int totalFrames,
+  Pointer<BYTE> dataOut,
+  WAVEFORMATEX waveFormat,
+) {
   final fData = dataOut.cast<FLOAT>();
   final totalSamples = totalFrames * waveFormat.nChannels;
   print("Frames to Fill = $totalFrames");
@@ -82,10 +85,13 @@ void main() {
   // Retrieve the list of available audio output devices.
   final pDeviceEnumerator = MMDeviceEnumerator.createInstance();
   final ppDevices = calloc<COMObject>();
-  check(pDeviceEnumerator.enumAudioEndpoints(
+  check(
+    pDeviceEnumerator.enumAudioEndpoints(
       0, // dataflow: rendering device
       1, // device state: only enumerate active device
-      ppDevices.cast()));
+      ppDevices.cast(),
+    ),
+  );
 
   // Get the number of available audio output devices.
   final pDevices = IMMDeviceCollection(ppDevices);
@@ -110,9 +116,12 @@ void main() {
 
     // Retrieve the current device properties.
     final ppProps = calloc<COMObject>();
-    check(pEndpoint.openPropertyStore(
+    check(
+      pEndpoint.openPropertyStore(
         STGM.STGM_READ, // Storage-access mode: read
-        ppProps.cast()));
+        ppProps.cast(),
+      ),
+    );
 
     // Build property key to get device friendly name.
     final pProps = IPropertyStore(ppProps.cast());
@@ -139,17 +148,26 @@ void main() {
 
   // Retrieve the default audio output device.
   final ppDevice = calloc<COMObject>();
-  check(pDeviceEnumerator.getDefaultAudioEndpoint(
+  check(
+    pDeviceEnumerator.getDefaultAudioEndpoint(
       0, // dataflow: rendering device
       0, // role: system notification sound
-      ppDevice.cast()));
+      ppDevice.cast(),
+    ),
+  );
 
   // Activate an IAudioClient interface for the output device.
   final pDevice = IMMDevice(ppDevice);
   final iidAudioClient = convertToIID(IID_IAudioClient3);
   final ppAudioClient = calloc<COMObject>();
-  check(pDevice.activate(
-      iidAudioClient, CLSCTX.CLSCTX_ALL, nullptr, ppAudioClient.cast()));
+  check(
+    pDevice.activate(
+      iidAudioClient,
+      CLSCTX.CLSCTX_ALL,
+      nullptr,
+      ppAudioClient.cast(),
+    ),
+  );
   free(iidAudioClient);
   final pAudioClient = IAudioClient3(ppAudioClient);
 
@@ -158,19 +176,23 @@ void main() {
   check(pAudioClient.getMixFormat(ppFormat));
   final pWaveFormat = ppFormat.value;
   final sampleRate = pWaveFormat.ref.nSamplesPerSec;
-  check(pAudioClient.initialize(
+  check(
+    pAudioClient.initialize(
       AUDCLNT_SHAREMODE.AUDCLNT_SHAREMODE_SHARED,
       0,
       30000, // buffer capacity of 3s (30,000 * 100ns)
       0,
       ppFormat.value,
-      nullptr));
+      nullptr,
+    ),
+  );
 
   // Activate an IAudioRenderClient interface.
   final iidAudioRenderClient = convertToIID(IID_IAudioRenderClient);
   final ppAudioRenderClient = calloc<COMObject>();
-  check(pAudioClient.getService(
-      iidAudioRenderClient, ppAudioRenderClient.cast()));
+  check(
+    pAudioClient.getService(iidAudioRenderClient, ppAudioRenderClient.cast()),
+  );
   free(iidAudioRenderClient);
   final pAudioRenderClient = IAudioRenderClient(ppAudioRenderClient);
 
@@ -182,10 +204,17 @@ void main() {
 
   // Load the initial data into the shared buffer.
   initData(pWaveFormat.ref, bufferFrameCount);
-  var dataLoaded =
-      fillMemoryBuffer(bufferFrameCount, pData.value, pWaveFormat.ref);
-  check(pAudioRenderClient.releaseBuffer(bufferFrameCount,
-      dataLoaded ? 0 : AUDCLNT_BUFFERFLAGS.AUDCLNT_BUFFERFLAGS_SILENT));
+  var dataLoaded = fillMemoryBuffer(
+    bufferFrameCount,
+    pData.value,
+    pWaveFormat.ref,
+  );
+  check(
+    pAudioRenderClient.releaseBuffer(
+      bufferFrameCount,
+      dataLoaded ? 0 : AUDCLNT_BUFFERFLAGS.AUDCLNT_BUFFERFLAGS_SILENT,
+    ),
+  );
 
   // Calculate the actual duration of the allocated buffer.
   final hnsActualDuration = refTimesPerSecond * bufferFrameCount / sampleRate;
@@ -202,10 +231,17 @@ void main() {
     // Grab all the available space in the shared buffer.
     check(pAudioRenderClient.getBuffer(numFramesAvailable, pData));
     // Get next half second of data from the audio source.
-    dataLoaded =
-        fillMemoryBuffer(numFramesAvailable, pData.value, pWaveFormat.ref);
-    check(pAudioRenderClient.releaseBuffer(numFramesAvailable,
-        dataLoaded ? 0 : AUDCLNT_BUFFERFLAGS.AUDCLNT_BUFFERFLAGS_SILENT));
+    dataLoaded = fillMemoryBuffer(
+      numFramesAvailable,
+      pData.value,
+      pWaveFormat.ref,
+    );
+    check(
+      pAudioRenderClient.releaseBuffer(
+        numFramesAvailable,
+        dataLoaded ? 0 : AUDCLNT_BUFFERFLAGS.AUDCLNT_BUFFERFLAGS_SILENT,
+      ),
+    );
   }
   free(pNumFramesPadding);
 

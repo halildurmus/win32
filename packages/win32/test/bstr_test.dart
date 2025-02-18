@@ -31,15 +31,17 @@ void main() {
       final bstr = BSTR.fromString(testString);
 
       // A BSTR should have a DWORD-length prefix containing its length.
-      final pIndex =
-          Pointer<DWORD>.fromAddress(bstr.ptr.address - sizeOf<DWORD>());
+      final pIndex = Pointer<DWORD>.fromAddress(
+        bstr.ptr.address - sizeOf<DWORD>(),
+      );
       expect(pIndex.value, equals(testString.length * 2));
 
       expect(bstr.ptr.toDartString(), equals(testString));
 
       // A BSTR should end with a word-length null terminator.
-      final pNull =
-          Pointer<WORD>.fromAddress(bstr.ptr.address + testString.length * 2);
+      final pNull = Pointer<WORD>.fromAddress(
+        bstr.ptr.address + testString.length * 2,
+      );
       expect(pNull.value, isZero, reason: 'test run $i');
 
       bstr.free();
@@ -55,15 +57,17 @@ void main() {
       final bstr = BSTR.fromString(longString);
 
       // A BSTR should have a DWORD-length prefix containing its length.
-      final pIndex =
-          Pointer<DWORD>.fromAddress(bstr.ptr.address - sizeOf<DWORD>());
+      final pIndex = Pointer<DWORD>.fromAddress(
+        bstr.ptr.address - sizeOf<DWORD>(),
+      );
       expect(pIndex.value, equals(longString.length * 2));
 
       expect(bstr.ptr.toDartString(), equals(longString));
 
       // A BSTR should end with a word-length null terminator.
-      final pNull =
-          Pointer<WORD>.fromAddress(bstr.ptr.address + longString.length * 2);
+      final pNull = Pointer<WORD>.fromAddress(
+        bstr.ptr.address + longString.length * 2,
+      );
       expect(pNull.value, isZero);
 
       bstr.free();
@@ -71,7 +75,8 @@ void main() {
   });
 
   test('BSTR lengths', () {
-    const testString = 'Longhorn is a bar in the village resort between the '
+    const testString =
+        'Longhorn is a bar in the village resort between the '
         'Whistler and Blackcomb mountains';
 
     for (var i = 0; i < testRuns; i++) {

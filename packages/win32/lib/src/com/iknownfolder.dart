@@ -42,103 +42,140 @@ class IKnownFolder extends IUnknown {
 
   int getId(Pointer<GUID> pkfid) => (ptr.ref.vtable + 3)
       .cast<
-          Pointer<
-              NativeFunction<Int32 Function(Pointer, Pointer<GUID> pkfid)>>>()
+        Pointer<NativeFunction<Int32 Function(Pointer, Pointer<GUID> pkfid)>>
+      >()
       .value
-      .asFunction<
-          int Function(Pointer, Pointer<GUID> pkfid)>()(ptr.ref.lpVtbl, pkfid);
+      .asFunction<int Function(Pointer, Pointer<GUID> pkfid)>()(
+    ptr.ref.lpVtbl,
+    pkfid,
+  );
 
   int getCategory(Pointer<Int32> pCategory) => (ptr.ref.vtable + 4)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<Int32> pCategory)>>>()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Int32> pCategory)>()(
-      ptr.ref.lpVtbl, pCategory);
+      .cast<
+        Pointer<
+          NativeFunction<Int32 Function(Pointer, Pointer<Int32> pCategory)>
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Int32> pCategory)>()(
+    ptr.ref.lpVtbl,
+    pCategory,
+  );
 
   int getShellItem(int dwFlags, Pointer<GUID> riid, Pointer<Pointer> ppv) =>
       (ptr.ref.vtable + 5)
           .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Uint32 dwFlags,
-                          Pointer<GUID> riid, Pointer<Pointer> ppv)>>>()
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Uint32 dwFlags,
+                  Pointer<GUID> riid,
+                  Pointer<Pointer> ppv,
+                )
+              >
+            >
+          >()
           .value
           .asFunction<
-              int Function(Pointer, int dwFlags, Pointer<GUID> riid,
-                  Pointer<Pointer> ppv)>()(ptr.ref.lpVtbl, dwFlags, riid, ppv);
+            int Function(
+              Pointer,
+              int dwFlags,
+              Pointer<GUID> riid,
+              Pointer<Pointer> ppv,
+            )
+          >()(ptr.ref.lpVtbl, dwFlags, riid, ppv);
 
-  int getPath(
-          int dwFlags, Pointer<Pointer<Utf16>> ppszPath) =>
+  int getPath(int dwFlags, Pointer<Pointer<Utf16>> ppszPath) =>
       (ptr.ref.vtable + 6)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Uint32 dwFlags,
-                              Pointer<Pointer<Utf16>> ppszPath)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, int dwFlags,
-                      Pointer<Pointer<Utf16>> ppszPath)>()(
-          ptr.ref.lpVtbl, dwFlags, ppszPath);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Uint32 dwFlags,
+                  Pointer<Pointer<Utf16>> ppszPath,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, int dwFlags, Pointer<Pointer<Utf16>> ppszPath)
+          >()(ptr.ref.lpVtbl, dwFlags, ppszPath);
 
   int setPath(int dwFlags, Pointer<Utf16> pszPath) => (ptr.ref.vtable + 7)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Uint32 dwFlags, Pointer<Utf16> pszPath)
+          >
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, int dwFlags, Pointer<Utf16> pszPath)>()(
+    ptr.ref.lpVtbl,
+    dwFlags,
+    pszPath,
+  );
+
+  int getIDList(int dwFlags, Pointer<Pointer<ITEMIDLIST>> ppidl) =>
+      (ptr.ref.vtable + 8)
           .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Uint32 dwFlags, Pointer<Utf16> pszPath)>>>()
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Uint32 dwFlags,
+                  Pointer<Pointer<ITEMIDLIST>> ppidl,
+                )
+              >
+            >
+          >()
           .value
           .asFunction<
-              int Function(Pointer, int dwFlags, Pointer<Utf16> pszPath)>()(
-      ptr.ref.lpVtbl, dwFlags, pszPath);
-
-  int getIDList(
-          int dwFlags, Pointer<Pointer<ITEMIDLIST>> ppidl) =>
-      (ptr.ref.vtable + 8)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Uint32 dwFlags,
-                              Pointer<Pointer<ITEMIDLIST>> ppidl)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, int dwFlags,
-                      Pointer<Pointer<ITEMIDLIST>> ppidl)>()(
-          ptr.ref.lpVtbl, dwFlags, ppidl);
+            int Function(
+              Pointer,
+              int dwFlags,
+              Pointer<Pointer<ITEMIDLIST>> ppidl,
+            )
+          >()(ptr.ref.lpVtbl, dwFlags, ppidl);
 
   int getFolderType(Pointer<GUID> pftid) => (ptr.ref.vtable + 9)
       .cast<
-          Pointer<
-              NativeFunction<Int32 Function(Pointer, Pointer<GUID> pftid)>>>()
+        Pointer<NativeFunction<Int32 Function(Pointer, Pointer<GUID> pftid)>>
+      >()
       .value
-      .asFunction<
-          int Function(Pointer, Pointer<GUID> pftid)>()(ptr.ref.lpVtbl, pftid);
+      .asFunction<int Function(Pointer, Pointer<GUID> pftid)>()(
+    ptr.ref.lpVtbl,
+    pftid,
+  );
 
-  int getRedirectionCapabilities(Pointer<Uint32> pCapabilities) =>
-      (ptr.ref.vtable +
-                  10)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Uint32> pCapabilities)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Uint32> pCapabilities)>()(
-          ptr.ref.lpVtbl, pCapabilities);
+  int getRedirectionCapabilities(
+    Pointer<Uint32> pCapabilities,
+  ) => (ptr.ref.vtable + 10)
+      .cast<
+        Pointer<
+          NativeFunction<Int32 Function(Pointer, Pointer<Uint32> pCapabilities)>
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Uint32> pCapabilities)>()(
+    ptr.ref.lpVtbl,
+    pCapabilities,
+  );
 
-  int getFolderDefinition(Pointer<KNOWNFOLDER_DEFINITION> pKFD) => (ptr
-                  .ref.vtable +
-              11)
+  int getFolderDefinition(Pointer<KNOWNFOLDER_DEFINITION> pKFD) =>
+      (ptr.ref.vtable + 11)
           .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<KNOWNFOLDER_DEFINITION> pKFD)>>>()
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<KNOWNFOLDER_DEFINITION> pKFD)
+              >
+            >
+          >()
           .value
           .asFunction<
-              int Function(Pointer, Pointer<KNOWNFOLDER_DEFINITION> pKFD)>()(
-      ptr.ref.lpVtbl, pKFD);
+            int Function(Pointer, Pointer<KNOWNFOLDER_DEFINITION> pKFD)
+          >()(ptr.ref.lpVtbl, pKFD);
 }

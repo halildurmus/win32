@@ -41,7 +41,9 @@ void main() {
 
     final enumPtr = calloc<COMObject>();
     hr = netManager.getNetworks(
-        NLM_ENUM_NETWORK.NLM_ENUM_NETWORK_ALL, enumPtr.cast());
+      NLM_ENUM_NETWORK.NLM_ENUM_NETWORK_ALL,
+      enumPtr.cast(),
+    );
     if (FAILED(hr)) throw WindowsException(hr);
 
     print('\nNetworks (connected and disconnected) on this machine:');
@@ -55,7 +57,8 @@ void main() {
         final networkName = descPtr.value.toDartString();
         final isNetworkConnected = network.isConnected == VARIANT_TRUE;
         print(
-            '$networkName: ${isNetworkConnected ? 'connected' : 'disconnected'}');
+          '$networkName: ${isNetworkConnected ? 'connected' : 'disconnected'}',
+        );
       }
 
       netPtr = calloc<COMObject>();

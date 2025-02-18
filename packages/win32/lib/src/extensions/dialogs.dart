@@ -12,19 +12,20 @@ extension DialogTemplateHelper on Pointer<DLGTEMPLATE> {
   /// Sets the memory at the pointer location to the dialog supplied.
   ///
   /// Returns the number of WORDs written.
-  int setDialog(
-      {required int style,
-      int dwExtendedStyle = 0,
-      required int cdit,
-      int x = 0,
-      int y = 0,
-      required int cx,
-      required int cy,
-      int windowSystemClass = 0,
-      String windowClass = '',
-      String title = '',
-      String fontName = '',
-      int fontSize = 0}) {
+  int setDialog({
+    required int style,
+    int dwExtendedStyle = 0,
+    required int cdit,
+    int x = 0,
+    int y = 0,
+    required int cx,
+    required int cy,
+    int windowSystemClass = 0,
+    String windowClass = '',
+    String title = '',
+    String fontName = '',
+    int fontSize = 0,
+  }) {
     /// Size in 16-bit WORDs of the DLGTEMPLATE struct
     const dlgTemplateSize = 9;
 

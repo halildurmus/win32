@@ -15,8 +15,9 @@ import '../guid.dart';
 import '../structs.g.dart';
 import '../variant.dart';
 
-final _api_ms_win_core_winrt_error_l1_1_0 =
-    DynamicLibrary.open('api-ms-win-core-winrt-error-l1-1-0.dll');
+final _api_ms_win_core_winrt_error_l1_1_0 = DynamicLibrary.open(
+  'api-ms-win-core-winrt-error-l1-1-0.dll',
+);
 
 /// Gets the restricted error information object set by a previous call to
 /// SetRestrictedErrorInfo in the current logical thread.
@@ -30,8 +31,8 @@ final _api_ms_win_core_winrt_error_l1_1_0 =
 int GetRestrictedErrorInfo(Pointer<Pointer<COMObject>> ppRestrictedErrorInfo) =>
     _GetRestrictedErrorInfo(ppRestrictedErrorInfo);
 
-final _GetRestrictedErrorInfo =
-    _api_ms_win_core_winrt_error_l1_1_0.lookupFunction<
-            Int32 Function(Pointer<Pointer<COMObject>> ppRestrictedErrorInfo),
-            int Function(Pointer<Pointer<COMObject>> ppRestrictedErrorInfo)>(
-        'GetRestrictedErrorInfo');
+final _GetRestrictedErrorInfo = _api_ms_win_core_winrt_error_l1_1_0
+    .lookupFunction<
+      Int32 Function(Pointer<Pointer<COMObject>> ppRestrictedErrorInfo),
+      int Function(Pointer<Pointer<COMObject>> ppRestrictedErrorInfo)
+    >('GetRestrictedErrorInfo');

@@ -63,7 +63,7 @@ sealed class _VARIANT_Anonymous_2 extends Union {
   external Pointer<Utf16> bstrVal;
   external VTablePointer punkVal;
   external VTablePointer pdispVal;
-  external Pointer/*<SAFEARRAY>*/ parray;
+  external Pointer /*<SAFEARRAY>*/ parray;
   external Pointer<Uint8> pbVal;
   external Pointer<Int16> piVal;
   external Pointer<Int32> plVal;
@@ -74,12 +74,12 @@ sealed class _VARIANT_Anonymous_2 extends Union {
   // ignore: unused_field
   external Pointer<Int16> __OBSOLETE__VARIANT_PBOOL;
   external Pointer<Int32> pscode;
-  external Pointer/*<CY>*/ pcyVal;
+  external Pointer /*<CY>*/ pcyVal;
   external Pointer<Double> pdate;
   external Pointer<Pointer<Utf16>> pbstrVal;
   external Pointer<Pointer<COMObject>> ppunkVal;
   external Pointer<Pointer<COMObject>> ppdispVal;
-  external Pointer<Pointer/*<SAFEARRAY>*/ > pparray;
+  external Pointer<Pointer /*<SAFEARRAY>*/> pparray;
   external Pointer<VARIANT> pvarVal;
   external Pointer byref;
   @Int8()
@@ -208,15 +208,20 @@ base class VARIANT extends Struct {
       __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.bstrVal = value;
 
   // IUnknown
-  IUnknown get punkVal => IUnknown(calloc<COMObject>()
-    ..ref.lpVtbl = __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.punkVal);
+  IUnknown get punkVal => IUnknown(
+    calloc<COMObject>()
+      ..ref.lpVtbl = __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.punkVal,
+  );
   set punkVal(IUnknown value) =>
       __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.punkVal =
           value.ptr.ref.lpVtbl;
 
   // IDispatch
-  IDispatch get pdispVal => IDispatch(calloc<COMObject>()
-    ..ref.lpVtbl = __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pdispVal);
+  IDispatch get pdispVal => IDispatch(
+    calloc<COMObject>()
+      ..ref.lpVtbl =
+          __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pdispVal,
+  );
   set pdispVal(IDispatch value) =>
       __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pdispVal =
           value.ptr.ref.lpVtbl;
@@ -388,16 +393,33 @@ base class VARIANT extends Struct {
   set puintVal(Pointer<Uint32> value) =>
       __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.puintVal = value;
 
-  Pointer get pvRecord => __VARIANT_NAME_1
-      .__VARIANT_NAME_2.__VARIANT_NAME_3.__VARIANT_NAME_4.pvRecord;
-  set pvRecord(Pointer value) => __VARIANT_NAME_1
-      .__VARIANT_NAME_2.__VARIANT_NAME_3.__VARIANT_NAME_4.pvRecord = value;
+  Pointer get pvRecord =>
+      __VARIANT_NAME_1
+          .__VARIANT_NAME_2
+          .__VARIANT_NAME_3
+          .__VARIANT_NAME_4
+          .pvRecord;
+  set pvRecord(Pointer value) =>
+      __VARIANT_NAME_1
+          .__VARIANT_NAME_2
+          .__VARIANT_NAME_3
+          .__VARIANT_NAME_4
+          .pvRecord = value;
 
-  Pointer<COMObject> get pRecInfo => calloc<COMObject>()
-    ..ref.lpVtbl = __VARIANT_NAME_1
-        .__VARIANT_NAME_2.__VARIANT_NAME_3.__VARIANT_NAME_4.pRecInfo;
-  set pRecInfo(Pointer<COMObject> value) => __VARIANT_NAME_1.__VARIANT_NAME_2
-      .__VARIANT_NAME_3.__VARIANT_NAME_4.pRecInfo = value.ref.lpVtbl;
+  Pointer<COMObject> get pRecInfo =>
+      calloc<COMObject>()
+        ..ref.lpVtbl =
+            __VARIANT_NAME_1
+                .__VARIANT_NAME_2
+                .__VARIANT_NAME_3
+                .__VARIANT_NAME_4
+                .pRecInfo;
+  set pRecInfo(Pointer<COMObject> value) =>
+      __VARIANT_NAME_1
+          .__VARIANT_NAME_2
+          .__VARIANT_NAME_3
+          .__VARIANT_NAME_4
+          .pRecInfo = value.ref.lpVtbl;
 }
 
 /// Used in the ReadMultiple and WriteMultiple methods of IPropertyStorage to

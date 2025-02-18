@@ -33,8 +33,9 @@ int ActivateKeyboardLayout(int hkl, int Flags) =>
     _ActivateKeyboardLayout(hkl, Flags);
 
 final _ActivateKeyboardLayout = _user32.lookupFunction<
-    IntPtr Function(IntPtr hkl, Uint32 Flags),
-    int Function(int hkl, int Flags)>('ActivateKeyboardLayout');
+  IntPtr Function(IntPtr hkl, Uint32 Flags),
+  int Function(int hkl, int Flags)
+>('ActivateKeyboardLayout');
 
 /// Places the given window in the system-maintained clipboard format
 /// listener list.
@@ -47,9 +48,10 @@ final _ActivateKeyboardLayout = _user32.lookupFunction<
 /// {@category user32}
 int AddClipboardFormatListener(int hwnd) => _AddClipboardFormatListener(hwnd);
 
-final _AddClipboardFormatListener =
-    _user32.lookupFunction<Int32 Function(IntPtr hwnd), int Function(int hwnd)>(
-        'AddClipboardFormatListener');
+final _AddClipboardFormatListener = _user32
+    .lookupFunction<Int32 Function(IntPtr hwnd), int Function(int hwnd)>(
+      'AddClipboardFormatListener',
+    );
 
 /// Calculates the required size of the window rectangle, based on the
 /// desired client-rectangle size. The window rectangle can then be passed
@@ -68,9 +70,9 @@ int AdjustWindowRect(Pointer<RECT> lpRect, int dwStyle, int bMenu) =>
     _AdjustWindowRect(lpRect, dwStyle, bMenu);
 
 final _AdjustWindowRect = _user32.lookupFunction<
-    Int32 Function(Pointer<RECT> lpRect, Uint32 dwStyle, Int32 bMenu),
-    int Function(
-        Pointer<RECT> lpRect, int dwStyle, int bMenu)>('AdjustWindowRect');
+  Int32 Function(Pointer<RECT> lpRect, Uint32 dwStyle, Int32 bMenu),
+  int Function(Pointer<RECT> lpRect, int dwStyle, int bMenu)
+>('AdjustWindowRect');
 
 /// Calculates the required size of the window rectangle, based on the
 /// desired size of the client rectangle. The window rectangle can then be
@@ -87,14 +89,21 @@ final _AdjustWindowRect = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int AdjustWindowRectEx(
-        Pointer<RECT> lpRect, int dwStyle, int bMenu, int dwExStyle) =>
-    _AdjustWindowRectEx(lpRect, dwStyle, bMenu, dwExStyle);
+  Pointer<RECT> lpRect,
+  int dwStyle,
+  int bMenu,
+  int dwExStyle,
+) => _AdjustWindowRectEx(lpRect, dwStyle, bMenu, dwExStyle);
 
 final _AdjustWindowRectEx = _user32.lookupFunction<
-    Int32 Function(
-        Pointer<RECT> lpRect, Uint32 dwStyle, Int32 bMenu, Uint32 dwExStyle),
-    int Function(Pointer<RECT> lpRect, int dwStyle, int bMenu,
-        int dwExStyle)>('AdjustWindowRectEx');
+  Int32 Function(
+    Pointer<RECT> lpRect,
+    Uint32 dwStyle,
+    Int32 bMenu,
+    Uint32 dwExStyle,
+  ),
+  int Function(Pointer<RECT> lpRect, int dwStyle, int bMenu, int dwExStyle)
+>('AdjustWindowRectEx');
 
 /// Calculates the required size of the window rectangle, based on the
 /// desired size of the client rectangle and the provided DPI. This window
@@ -112,14 +121,29 @@ final _AdjustWindowRectEx = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int AdjustWindowRectExForDpi(
-        Pointer<RECT> lpRect, int dwStyle, int bMenu, int dwExStyle, int dpi) =>
-    _AdjustWindowRectExForDpi(lpRect, dwStyle, bMenu, dwExStyle, dpi);
+  Pointer<RECT> lpRect,
+  int dwStyle,
+  int bMenu,
+  int dwExStyle,
+  int dpi,
+) => _AdjustWindowRectExForDpi(lpRect, dwStyle, bMenu, dwExStyle, dpi);
 
 final _AdjustWindowRectExForDpi = _user32.lookupFunction<
-    Int32 Function(Pointer<RECT> lpRect, Uint32 dwStyle, Int32 bMenu,
-        Uint32 dwExStyle, Uint32 dpi),
-    int Function(Pointer<RECT> lpRect, int dwStyle, int bMenu, int dwExStyle,
-        int dpi)>('AdjustWindowRectExForDpi');
+  Int32 Function(
+    Pointer<RECT> lpRect,
+    Uint32 dwStyle,
+    Int32 bMenu,
+    Uint32 dwExStyle,
+    Uint32 dpi,
+  ),
+  int Function(
+    Pointer<RECT> lpRect,
+    int dwStyle,
+    int bMenu,
+    int dwExStyle,
+    int dpi,
+  )
+>('AdjustWindowRectExForDpi');
 
 /// Enables the specified process to set the foreground window using the
 /// SetForegroundWindow function. The calling process must already be able
@@ -135,8 +159,9 @@ int AllowSetForegroundWindow(int dwProcessId) =>
     _AllowSetForegroundWindow(dwProcessId);
 
 final _AllowSetForegroundWindow = _user32.lookupFunction<
-    Int32 Function(Uint32 dwProcessId),
-    int Function(int dwProcessId)>('AllowSetForegroundWindow');
+  Int32 Function(Uint32 dwProcessId),
+  int Function(int dwProcessId)
+>('AllowSetForegroundWindow');
 
 /// Enables you to produce special effects when showing or hiding windows.
 /// There are four types of animation: roll, slide, collapse or expand, and
@@ -154,8 +179,9 @@ int AnimateWindow(int hWnd, int dwTime, int dwFlags) =>
     _AnimateWindow(hWnd, dwTime, dwFlags);
 
 final _AnimateWindow = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Uint32 dwTime, Uint32 dwFlags),
-    int Function(int hWnd, int dwTime, int dwFlags)>('AnimateWindow');
+  Int32 Function(IntPtr hWnd, Uint32 dwTime, Uint32 dwFlags),
+  int Function(int hWnd, int dwTime, int dwFlags)
+>('AnimateWindow');
 
 /// Indicates whether an owned, visible, top-level pop-up, or overlapped
 /// window exists on the screen. The function searches the entire screen,
@@ -167,8 +193,9 @@ final _AnimateWindow = _user32.lookupFunction<
 /// {@category user32}
 int AnyPopup() => _AnyPopup();
 
-final _AnyPopup =
-    _user32.lookupFunction<Int32 Function(), int Function()>('AnyPopup');
+final _AnyPopup = _user32.lookupFunction<Int32 Function(), int Function()>(
+  'AnyPopup',
+);
 
 /// Appends a new item to the end of the specified menu bar, drop-down menu,
 /// submenu, or shortcut menu. You can use this function to specify the
@@ -184,14 +211,21 @@ final _AnyPopup =
 /// ```
 /// {@category user32}
 int AppendMenu(
-        int hMenu, int uFlags, int uIDNewItem, Pointer<Utf16> lpNewItem) =>
-    _AppendMenu(hMenu, uFlags, uIDNewItem, lpNewItem);
+  int hMenu,
+  int uFlags,
+  int uIDNewItem,
+  Pointer<Utf16> lpNewItem,
+) => _AppendMenu(hMenu, uFlags, uIDNewItem, lpNewItem);
 
 final _AppendMenu = _user32.lookupFunction<
-    Int32 Function(IntPtr hMenu, Uint32 uFlags, IntPtr uIDNewItem,
-        Pointer<Utf16> lpNewItem),
-    int Function(int hMenu, int uFlags, int uIDNewItem,
-        Pointer<Utf16> lpNewItem)>('AppendMenuW');
+  Int32 Function(
+    IntPtr hMenu,
+    Uint32 uFlags,
+    IntPtr uIDNewItem,
+    Pointer<Utf16> lpNewItem,
+  ),
+  int Function(int hMenu, int uFlags, int uIDNewItem, Pointer<Utf16> lpNewItem)
+>('AppendMenuW');
 
 /// Determines whether two DPI_AWARENESS_CONTEXT values are identical.
 ///
@@ -206,9 +240,9 @@ int AreDpiAwarenessContextsEqual(int dpiContextA, int dpiContextB) =>
     _AreDpiAwarenessContextsEqual(dpiContextA, dpiContextB);
 
 final _AreDpiAwarenessContextsEqual = _user32.lookupFunction<
-    Int32 Function(IntPtr dpiContextA, IntPtr dpiContextB),
-    int Function(
-        int dpiContextA, int dpiContextB)>('AreDpiAwarenessContextsEqual');
+  Int32 Function(IntPtr dpiContextA, IntPtr dpiContextB),
+  int Function(int dpiContextA, int dpiContextB)
+>('AreDpiAwarenessContextsEqual');
 
 /// Arranges all the minimized (iconic) child windows of the specified
 /// parent window.
@@ -221,9 +255,10 @@ final _AreDpiAwarenessContextsEqual = _user32.lookupFunction<
 /// {@category user32}
 int ArrangeIconicWindows(int hWnd) => _ArrangeIconicWindows(hWnd);
 
-final _ArrangeIconicWindows = _user32.lookupFunction<
-    Uint32 Function(IntPtr hWnd),
-    int Function(int hWnd)>('ArrangeIconicWindows');
+final _ArrangeIconicWindows = _user32
+    .lookupFunction<Uint32 Function(IntPtr hWnd), int Function(int hWnd)>(
+      'ArrangeIconicWindows',
+    );
 
 /// Attaches or detaches the input processing mechanism of one thread to
 /// that of another thread.
@@ -240,9 +275,9 @@ int AttachThreadInput(int idAttach, int idAttachTo, int fAttach) =>
     _AttachThreadInput(idAttach, idAttachTo, fAttach);
 
 final _AttachThreadInput = _user32.lookupFunction<
-    Int32 Function(Uint32 idAttach, Uint32 idAttachTo, Int32 fAttach),
-    int Function(
-        int idAttach, int idAttachTo, int fAttach)>('AttachThreadInput');
+  Int32 Function(Uint32 idAttach, Uint32 idAttachTo, Int32 fAttach),
+  int Function(int idAttach, int idAttachTo, int fAttach)
+>('AttachThreadInput');
 
 /// Allocates memory for a multiple-window- position structure and returns
 /// the handle to the structure.
@@ -256,8 +291,9 @@ final _AttachThreadInput = _user32.lookupFunction<
 int BeginDeferWindowPos(int nNumWindows) => _BeginDeferWindowPos(nNumWindows);
 
 final _BeginDeferWindowPos = _user32.lookupFunction<
-    IntPtr Function(Int32 nNumWindows),
-    int Function(int nNumWindows)>('BeginDeferWindowPos');
+  IntPtr Function(Int32 nNumWindows),
+  int Function(int nNumWindows)
+>('BeginDeferWindowPos');
 
 /// The BeginPaint function prepares the specified window for painting and
 /// fills a PAINTSTRUCT structure with information about the painting.
@@ -273,8 +309,9 @@ int BeginPaint(int hWnd, Pointer<PAINTSTRUCT> lpPaint) =>
     _BeginPaint(hWnd, lpPaint);
 
 final _BeginPaint = _user32.lookupFunction<
-    IntPtr Function(IntPtr hWnd, Pointer<PAINTSTRUCT> lpPaint),
-    int Function(int hWnd, Pointer<PAINTSTRUCT> lpPaint)>('BeginPaint');
+  IntPtr Function(IntPtr hWnd, Pointer<PAINTSTRUCT> lpPaint),
+  int Function(int hWnd, Pointer<PAINTSTRUCT> lpPaint)
+>('BeginPaint');
 
 /// Blocks keyboard and mouse input events from reaching applications.
 ///
@@ -285,8 +322,10 @@ final _BeginPaint = _user32.lookupFunction<
 /// {@category user32}
 int BlockInput(int fBlockIt) => _BlockInput(fBlockIt);
 
-final _BlockInput = _user32.lookupFunction<Int32 Function(Int32 fBlockIt),
-    int Function(int fBlockIt)>('BlockInput');
+final _BlockInput = _user32
+    .lookupFunction<Int32 Function(Int32 fBlockIt), int Function(int fBlockIt)>(
+      'BlockInput',
+    );
 
 /// Brings the specified window to the top of the Z order. If the window is
 /// a top-level window, it is activated. If the window is a child window,
@@ -301,9 +340,10 @@ final _BlockInput = _user32.lookupFunction<Int32 Function(Int32 fBlockIt),
 /// {@category user32}
 int BringWindowToTop(int hWnd) => _BringWindowToTop(hWnd);
 
-final _BringWindowToTop =
-    _user32.lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
-        'BringWindowToTop');
+final _BringWindowToTop = _user32
+    .lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
+      'BringWindowToTop',
+    );
 
 /// Sends a message to the specified recipients. The recipients can be
 /// applications, installable drivers, network drivers, system-level device
@@ -320,14 +360,29 @@ final _BringWindowToTop =
 /// ```
 /// {@category user32}
 int BroadcastSystemMessage(
-        int flags, Pointer<Uint32> lpInfo, int Msg, int wParam, int lParam) =>
-    _BroadcastSystemMessage(flags, lpInfo, Msg, wParam, lParam);
+  int flags,
+  Pointer<Uint32> lpInfo,
+  int Msg,
+  int wParam,
+  int lParam,
+) => _BroadcastSystemMessage(flags, lpInfo, Msg, wParam, lParam);
 
 final _BroadcastSystemMessage = _user32.lookupFunction<
-    Int32 Function(Uint32 flags, Pointer<Uint32> lpInfo, Uint32 Msg,
-        IntPtr wParam, IntPtr lParam),
-    int Function(int flags, Pointer<Uint32> lpInfo, int Msg, int wParam,
-        int lParam)>('BroadcastSystemMessageW');
+  Int32 Function(
+    Uint32 flags,
+    Pointer<Uint32> lpInfo,
+    Uint32 Msg,
+    IntPtr wParam,
+    IntPtr lParam,
+  ),
+  int Function(
+    int flags,
+    Pointer<Uint32> lpInfo,
+    int Msg,
+    int wParam,
+    int lParam,
+  )
+>('BroadcastSystemMessageW');
 
 /// Sends a message to the specified recipients. The recipients can be
 /// applications, installable drivers, network drivers, system-level device
@@ -344,15 +399,33 @@ final _BroadcastSystemMessage = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int BroadcastSystemMessageEx(int flags, Pointer<Uint32> lpInfo, int Msg,
-        int wParam, int lParam, Pointer<BSMINFO> pbsmInfo) =>
-    _BroadcastSystemMessageEx(flags, lpInfo, Msg, wParam, lParam, pbsmInfo);
+int BroadcastSystemMessageEx(
+  int flags,
+  Pointer<Uint32> lpInfo,
+  int Msg,
+  int wParam,
+  int lParam,
+  Pointer<BSMINFO> pbsmInfo,
+) => _BroadcastSystemMessageEx(flags, lpInfo, Msg, wParam, lParam, pbsmInfo);
 
 final _BroadcastSystemMessageEx = _user32.lookupFunction<
-    Int32 Function(Uint32 flags, Pointer<Uint32> lpInfo, Uint32 Msg,
-        IntPtr wParam, IntPtr lParam, Pointer<BSMINFO> pbsmInfo),
-    int Function(int flags, Pointer<Uint32> lpInfo, int Msg, int wParam,
-        int lParam, Pointer<BSMINFO> pbsmInfo)>('BroadcastSystemMessageExW');
+  Int32 Function(
+    Uint32 flags,
+    Pointer<Uint32> lpInfo,
+    Uint32 Msg,
+    IntPtr wParam,
+    IntPtr lParam,
+    Pointer<BSMINFO> pbsmInfo,
+  ),
+  int Function(
+    int flags,
+    Pointer<Uint32> lpInfo,
+    int Msg,
+    int wParam,
+    int lParam,
+    Pointer<BSMINFO> pbsmInfo,
+  )
+>('BroadcastSystemMessageExW');
 
 /// Calculates an appropriate pop-up window position using the specified
 /// anchor point, pop-up window size, flags, and the optional exclude
@@ -372,27 +445,35 @@ final _BroadcastSystemMessageEx = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int CalculatePopupWindowPosition(
-        Pointer<POINT> anchorPoint,
-        Pointer<SIZE> windowSize,
-        int flags,
-        Pointer<RECT> excludeRect,
-        Pointer<RECT> popupWindowPosition) =>
-    _CalculatePopupWindowPosition(
-        anchorPoint, windowSize, flags, excludeRect, popupWindowPosition);
+  Pointer<POINT> anchorPoint,
+  Pointer<SIZE> windowSize,
+  int flags,
+  Pointer<RECT> excludeRect,
+  Pointer<RECT> popupWindowPosition,
+) => _CalculatePopupWindowPosition(
+  anchorPoint,
+  windowSize,
+  flags,
+  excludeRect,
+  popupWindowPosition,
+);
 
 final _CalculatePopupWindowPosition = _user32.lookupFunction<
-    Int32 Function(
-        Pointer<POINT> anchorPoint,
-        Pointer<SIZE> windowSize,
-        Uint32 flags,
-        Pointer<RECT> excludeRect,
-        Pointer<RECT> popupWindowPosition),
-    int Function(
-        Pointer<POINT> anchorPoint,
-        Pointer<SIZE> windowSize,
-        int flags,
-        Pointer<RECT> excludeRect,
-        Pointer<RECT> popupWindowPosition)>('CalculatePopupWindowPosition');
+  Int32 Function(
+    Pointer<POINT> anchorPoint,
+    Pointer<SIZE> windowSize,
+    Uint32 flags,
+    Pointer<RECT> excludeRect,
+    Pointer<RECT> popupWindowPosition,
+  ),
+  int Function(
+    Pointer<POINT> anchorPoint,
+    Pointer<SIZE> windowSize,
+    int flags,
+    Pointer<RECT> excludeRect,
+    Pointer<RECT> popupWindowPosition,
+  )
+>('CalculatePopupWindowPosition');
 
 /// Passes the specified message and hook code to the hook procedures
 /// associated with the WH_SYSMSGFILTER and WH_MSGFILTER hooks. A
@@ -411,8 +492,9 @@ int CallMsgFilter(Pointer<MSG> lpMsg, int nCode) =>
     _CallMsgFilter(lpMsg, nCode);
 
 final _CallMsgFilter = _user32.lookupFunction<
-    Int32 Function(Pointer<MSG> lpMsg, Int32 nCode),
-    int Function(Pointer<MSG> lpMsg, int nCode)>('CallMsgFilterW');
+  Int32 Function(Pointer<MSG> lpMsg, Int32 nCode),
+  int Function(Pointer<MSG> lpMsg, int nCode)
+>('CallMsgFilterW');
 
 /// Passes the hook information to the next hook procedure in the current
 /// hook chain. A hook procedure can call this function either before or
@@ -431,8 +513,9 @@ int CallNextHookEx(int hhk, int nCode, int wParam, int lParam) =>
     _CallNextHookEx(hhk, nCode, wParam, lParam);
 
 final _CallNextHookEx = _user32.lookupFunction<
-    IntPtr Function(IntPtr hhk, Int32 nCode, IntPtr wParam, IntPtr lParam),
-    int Function(int hhk, int nCode, int wParam, int lParam)>('CallNextHookEx');
+  IntPtr Function(IntPtr hhk, Int32 nCode, IntPtr wParam, IntPtr lParam),
+  int Function(int hhk, int nCode, int wParam, int lParam)
+>('CallNextHookEx');
 
 /// Passes message information to the specified window procedure.
 ///
@@ -446,15 +529,30 @@ final _CallNextHookEx = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int CallWindowProc(Pointer<NativeFunction<WNDPROC>> lpPrevWndFunc, int hWnd,
-        int Msg, int wParam, int lParam) =>
-    _CallWindowProc(lpPrevWndFunc, hWnd, Msg, wParam, lParam);
+int CallWindowProc(
+  Pointer<NativeFunction<WNDPROC>> lpPrevWndFunc,
+  int hWnd,
+  int Msg,
+  int wParam,
+  int lParam,
+) => _CallWindowProc(lpPrevWndFunc, hWnd, Msg, wParam, lParam);
 
 final _CallWindowProc = _user32.lookupFunction<
-    IntPtr Function(Pointer<NativeFunction<WNDPROC>> lpPrevWndFunc, IntPtr hWnd,
-        Uint32 Msg, IntPtr wParam, IntPtr lParam),
-    int Function(Pointer<NativeFunction<WNDPROC>> lpPrevWndFunc, int hWnd,
-        int Msg, int wParam, int lParam)>('CallWindowProcW');
+  IntPtr Function(
+    Pointer<NativeFunction<WNDPROC>> lpPrevWndFunc,
+    IntPtr hWnd,
+    Uint32 Msg,
+    IntPtr wParam,
+    IntPtr lParam,
+  ),
+  int Function(
+    Pointer<NativeFunction<WNDPROC>> lpPrevWndFunc,
+    int hWnd,
+    int Msg,
+    int wParam,
+    int lParam,
+  )
+>('CallWindowProcW');
 
 /// Cascades the specified child windows of the specified parent window.
 ///
@@ -468,15 +566,30 @@ final _CallWindowProc = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int CascadeWindows(int hwndParent, int wHow, Pointer<RECT> lpRect, int cKids,
-        Pointer<IntPtr> lpKids) =>
-    _CascadeWindows(hwndParent, wHow, lpRect, cKids, lpKids);
+int CascadeWindows(
+  int hwndParent,
+  int wHow,
+  Pointer<RECT> lpRect,
+  int cKids,
+  Pointer<IntPtr> lpKids,
+) => _CascadeWindows(hwndParent, wHow, lpRect, cKids, lpKids);
 
 final _CascadeWindows = _user32.lookupFunction<
-    Uint16 Function(IntPtr hwndParent, Uint32 wHow, Pointer<RECT> lpRect,
-        Uint32 cKids, Pointer<IntPtr> lpKids),
-    int Function(int hwndParent, int wHow, Pointer<RECT> lpRect, int cKids,
-        Pointer<IntPtr> lpKids)>('CascadeWindows');
+  Uint16 Function(
+    IntPtr hwndParent,
+    Uint32 wHow,
+    Pointer<RECT> lpRect,
+    Uint32 cKids,
+    Pointer<IntPtr> lpKids,
+  ),
+  int Function(
+    int hwndParent,
+    int wHow,
+    Pointer<RECT> lpRect,
+    int cKids,
+    Pointer<IntPtr> lpKids,
+  )
+>('CascadeWindows');
 
 /// Removes a specified window from the chain of clipboard viewers.
 ///
@@ -491,8 +604,9 @@ int ChangeClipboardChain(int hWndRemove, int hWndNewNext) =>
     _ChangeClipboardChain(hWndRemove, hWndNewNext);
 
 final _ChangeClipboardChain = _user32.lookupFunction<
-    Int32 Function(IntPtr hWndRemove, IntPtr hWndNewNext),
-    int Function(int hWndRemove, int hWndNewNext)>('ChangeClipboardChain');
+  Int32 Function(IntPtr hWndRemove, IntPtr hWndNewNext),
+  int Function(int hWndRemove, int hWndNewNext)
+>('ChangeClipboardChain');
 
 /// The ChangeDisplaySettings function changes the settings of the default
 /// display device to the specified graphics mode.
@@ -508,9 +622,9 @@ int ChangeDisplaySettings(Pointer<DEVMODE> lpDevMode, int dwFlags) =>
     _ChangeDisplaySettings(lpDevMode, dwFlags);
 
 final _ChangeDisplaySettings = _user32.lookupFunction<
-    Int32 Function(Pointer<DEVMODE> lpDevMode, Uint32 dwFlags),
-    int Function(
-        Pointer<DEVMODE> lpDevMode, int dwFlags)>('ChangeDisplaySettingsW');
+  Int32 Function(Pointer<DEVMODE> lpDevMode, Uint32 dwFlags),
+  int Function(Pointer<DEVMODE> lpDevMode, int dwFlags)
+>('ChangeDisplaySettingsW');
 
 /// The ChangeDisplaySettingsEx function changes the settings of the
 /// specified display device to the specified graphics mode.
@@ -525,15 +639,30 @@ final _ChangeDisplaySettings = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int ChangeDisplaySettingsEx(Pointer<Utf16> lpszDeviceName,
-        Pointer<DEVMODE> lpDevMode, int hwnd, int dwflags, Pointer lParam) =>
-    _ChangeDisplaySettingsEx(lpszDeviceName, lpDevMode, hwnd, dwflags, lParam);
+int ChangeDisplaySettingsEx(
+  Pointer<Utf16> lpszDeviceName,
+  Pointer<DEVMODE> lpDevMode,
+  int hwnd,
+  int dwflags,
+  Pointer lParam,
+) => _ChangeDisplaySettingsEx(lpszDeviceName, lpDevMode, hwnd, dwflags, lParam);
 
 final _ChangeDisplaySettingsEx = _user32.lookupFunction<
-    Int32 Function(Pointer<Utf16> lpszDeviceName, Pointer<DEVMODE> lpDevMode,
-        IntPtr hwnd, Uint32 dwflags, Pointer lParam),
-    int Function(Pointer<Utf16> lpszDeviceName, Pointer<DEVMODE> lpDevMode,
-        int hwnd, int dwflags, Pointer lParam)>('ChangeDisplaySettingsExW');
+  Int32 Function(
+    Pointer<Utf16> lpszDeviceName,
+    Pointer<DEVMODE> lpDevMode,
+    IntPtr hwnd,
+    Uint32 dwflags,
+    Pointer lParam,
+  ),
+  int Function(
+    Pointer<Utf16> lpszDeviceName,
+    Pointer<DEVMODE> lpDevMode,
+    int hwnd,
+    int dwflags,
+    Pointer lParam,
+  )
+>('ChangeDisplaySettingsExW');
 
 /// Adds or removes a message from the User Interface Privilege Isolation
 /// (UIPI) message filter.
@@ -549,8 +678,9 @@ int ChangeWindowMessageFilter(int message, int dwFlag) =>
     _ChangeWindowMessageFilter(message, dwFlag);
 
 final _ChangeWindowMessageFilter = _user32.lookupFunction<
-    Int32 Function(Uint32 message, Uint32 dwFlag),
-    int Function(int message, int dwFlag)>('ChangeWindowMessageFilter');
+  Int32 Function(Uint32 message, Uint32 dwFlag),
+  int Function(int message, int dwFlag)
+>('ChangeWindowMessageFilter');
 
 /// Modifies the User Interface Privilege Isolation (UIPI) message filter
 /// for a specified window.
@@ -564,16 +694,27 @@ final _ChangeWindowMessageFilter = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int ChangeWindowMessageFilterEx(int hwnd, int message, int action,
-        Pointer<CHANGEFILTERSTRUCT> pChangeFilterStruct) =>
-    _ChangeWindowMessageFilterEx(hwnd, message, action, pChangeFilterStruct);
+int ChangeWindowMessageFilterEx(
+  int hwnd,
+  int message,
+  int action,
+  Pointer<CHANGEFILTERSTRUCT> pChangeFilterStruct,
+) => _ChangeWindowMessageFilterEx(hwnd, message, action, pChangeFilterStruct);
 
 final _ChangeWindowMessageFilterEx = _user32.lookupFunction<
-        Int32 Function(IntPtr hwnd, Uint32 message, Uint32 action,
-            Pointer<CHANGEFILTERSTRUCT> pChangeFilterStruct),
-        int Function(int hwnd, int message, int action,
-            Pointer<CHANGEFILTERSTRUCT> pChangeFilterStruct)>(
-    'ChangeWindowMessageFilterEx');
+  Int32 Function(
+    IntPtr hwnd,
+    Uint32 message,
+    Uint32 action,
+    Pointer<CHANGEFILTERSTRUCT> pChangeFilterStruct,
+  ),
+  int Function(
+    int hwnd,
+    int message,
+    int action,
+    Pointer<CHANGEFILTERSTRUCT> pChangeFilterStruct,
+  )
+>('ChangeWindowMessageFilterEx');
 
 /// Changes the check state of a button control.
 ///
@@ -589,8 +730,9 @@ int CheckDlgButton(int hDlg, int nIDButton, int uCheck) =>
     _CheckDlgButton(hDlg, nIDButton, uCheck);
 
 final _CheckDlgButton = _user32.lookupFunction<
-    Int32 Function(IntPtr hDlg, Int32 nIDButton, Uint32 uCheck),
-    int Function(int hDlg, int nIDButton, int uCheck)>('CheckDlgButton');
+  Int32 Function(IntPtr hDlg, Int32 nIDButton, Uint32 uCheck),
+  int Function(int hDlg, int nIDButton, int uCheck)
+>('CheckDlgButton');
 
 /// Adds a check mark to (checks) a specified radio button in a group and
 /// removes a check mark from (clears) all other radio buttons in the group.
@@ -605,14 +747,26 @@ final _CheckDlgButton = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int CheckRadioButton(
-        int hDlg, int nIDFirstButton, int nIDLastButton, int nIDCheckButton) =>
-    _CheckRadioButton(hDlg, nIDFirstButton, nIDLastButton, nIDCheckButton);
+  int hDlg,
+  int nIDFirstButton,
+  int nIDLastButton,
+  int nIDCheckButton,
+) => _CheckRadioButton(hDlg, nIDFirstButton, nIDLastButton, nIDCheckButton);
 
 final _CheckRadioButton = _user32.lookupFunction<
-    Int32 Function(IntPtr hDlg, Int32 nIDFirstButton, Int32 nIDLastButton,
-        Int32 nIDCheckButton),
-    int Function(int hDlg, int nIDFirstButton, int nIDLastButton,
-        int nIDCheckButton)>('CheckRadioButton');
+  Int32 Function(
+    IntPtr hDlg,
+    Int32 nIDFirstButton,
+    Int32 nIDLastButton,
+    Int32 nIDCheckButton,
+  ),
+  int Function(
+    int hDlg,
+    int nIDFirstButton,
+    int nIDLastButton,
+    int nIDCheckButton,
+  )
+>('CheckRadioButton');
 
 /// Determines which, if any, of the child windows belonging to a parent
 /// window contains the specified point. The search is restricted to
@@ -630,8 +784,9 @@ int ChildWindowFromPoint(int hWndParent, POINT Point) =>
     _ChildWindowFromPoint(hWndParent, Point);
 
 final _ChildWindowFromPoint = _user32.lookupFunction<
-    IntPtr Function(IntPtr hWndParent, POINT Point),
-    int Function(int hWndParent, POINT Point)>('ChildWindowFromPoint');
+  IntPtr Function(IntPtr hWndParent, POINT Point),
+  int Function(int hWndParent, POINT Point)
+>('ChildWindowFromPoint');
 
 /// Determines which, if any, of the child windows belonging to the
 /// specified parent window contains the specified point. The function can
@@ -650,8 +805,9 @@ int ChildWindowFromPointEx(int hwnd, POINT pt, int flags) =>
     _ChildWindowFromPointEx(hwnd, pt, flags);
 
 final _ChildWindowFromPointEx = _user32.lookupFunction<
-    IntPtr Function(IntPtr hwnd, POINT pt, Uint32 flags),
-    int Function(int hwnd, POINT pt, int flags)>('ChildWindowFromPointEx');
+  IntPtr Function(IntPtr hwnd, POINT pt, Uint32 flags),
+  int Function(int hwnd, POINT pt, int flags)
+>('ChildWindowFromPointEx');
 
 /// The ClientToScreen function converts the client-area coordinates of a
 /// specified point to screen coordinates.
@@ -667,8 +823,9 @@ int ClientToScreen(int hWnd, Pointer<POINT> lpPoint) =>
     _ClientToScreen(hWnd, lpPoint);
 
 final _ClientToScreen = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Pointer<POINT> lpPoint),
-    int Function(int hWnd, Pointer<POINT> lpPoint)>('ClientToScreen');
+  Int32 Function(IntPtr hWnd, Pointer<POINT> lpPoint),
+  int Function(int hWnd, Pointer<POINT> lpPoint)
+>('ClientToScreen');
 
 /// Confines the cursor to a rectangular area on the screen. If a subsequent
 /// cursor position (set by the SetCursorPos function or the mouse) lies
@@ -683,8 +840,10 @@ final _ClientToScreen = _user32.lookupFunction<
 /// {@category user32}
 int ClipCursor(Pointer<RECT> lpRect) => _ClipCursor(lpRect);
 
-final _ClipCursor = _user32.lookupFunction<Int32 Function(Pointer<RECT> lpRect),
-    int Function(Pointer<RECT> lpRect)>('ClipCursor');
+final _ClipCursor = _user32.lookupFunction<
+  Int32 Function(Pointer<RECT> lpRect),
+  int Function(Pointer<RECT> lpRect)
+>('ClipCursor');
 
 /// Closes the clipboard.
 ///
@@ -694,8 +853,8 @@ final _ClipCursor = _user32.lookupFunction<Int32 Function(Pointer<RECT> lpRect),
 /// {@category user32}
 int CloseClipboard() => _CloseClipboard();
 
-final _CloseClipboard =
-    _user32.lookupFunction<Int32 Function(), int Function()>('CloseClipboard');
+final _CloseClipboard = _user32
+    .lookupFunction<Int32 Function(), int Function()>('CloseClipboard');
 
 /// Closes resources associated with a gesture information handle.
 ///
@@ -709,8 +868,9 @@ int CloseGestureInfoHandle(int hGestureInfo) =>
     _CloseGestureInfoHandle(hGestureInfo);
 
 final _CloseGestureInfoHandle = _user32.lookupFunction<
-    Int32 Function(IntPtr hGestureInfo),
-    int Function(int hGestureInfo)>('CloseGestureInfoHandle');
+  Int32 Function(IntPtr hGestureInfo),
+  int Function(int hGestureInfo)
+>('CloseGestureInfoHandle');
 
 /// Closes a touch input handle, frees process memory associated with it,
 /// and invalidates the handle.
@@ -725,8 +885,9 @@ int CloseTouchInputHandle(int hTouchInput) =>
     _CloseTouchInputHandle(hTouchInput);
 
 final _CloseTouchInputHandle = _user32.lookupFunction<
-    Int32 Function(IntPtr hTouchInput),
-    int Function(int hTouchInput)>('CloseTouchInputHandle');
+  Int32 Function(IntPtr hTouchInput),
+  int Function(int hTouchInput)
+>('CloseTouchInputHandle');
 
 /// Minimizes (but does not destroy) the specified window.
 ///
@@ -738,9 +899,10 @@ final _CloseTouchInputHandle = _user32.lookupFunction<
 /// {@category user32}
 int CloseWindow(int hWnd) => _CloseWindow(hWnd);
 
-final _CloseWindow =
-    _user32.lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
-        'CloseWindow');
+final _CloseWindow = _user32
+    .lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
+      'CloseWindow',
+    );
 
 /// Copies the specified accelerator table. This function is used to obtain
 /// the accelerator-table data that corresponds to an accelerator-table
@@ -755,14 +917,19 @@ final _CloseWindow =
 /// ```
 /// {@category user32}
 int CopyAcceleratorTable(
-        int hAccelSrc, Pointer<ACCEL> lpAccelDst, int cAccelEntries) =>
-    _CopyAcceleratorTable(hAccelSrc, lpAccelDst, cAccelEntries);
+  int hAccelSrc,
+  Pointer<ACCEL> lpAccelDst,
+  int cAccelEntries,
+) => _CopyAcceleratorTable(hAccelSrc, lpAccelDst, cAccelEntries);
 
 final _CopyAcceleratorTable = _user32.lookupFunction<
-    Int32 Function(
-        IntPtr hAccelSrc, Pointer<ACCEL> lpAccelDst, Int32 cAccelEntries),
-    int Function(int hAccelSrc, Pointer<ACCEL> lpAccelDst,
-        int cAccelEntries)>('CopyAcceleratorTableW');
+  Int32 Function(
+    IntPtr hAccelSrc,
+    Pointer<ACCEL> lpAccelDst,
+    Int32 cAccelEntries,
+  ),
+  int Function(int hAccelSrc, Pointer<ACCEL> lpAccelDst, int cAccelEntries)
+>('CopyAcceleratorTableW');
 
 /// Copies the specified icon from another module to the current module.
 ///
@@ -774,8 +941,10 @@ final _CopyAcceleratorTable = _user32.lookupFunction<
 /// {@category user32}
 int CopyIcon(int hIcon) => _CopyIcon(hIcon);
 
-final _CopyIcon = _user32.lookupFunction<IntPtr Function(IntPtr hIcon),
-    int Function(int hIcon)>('CopyIcon');
+final _CopyIcon = _user32
+    .lookupFunction<IntPtr Function(IntPtr hIcon), int Function(int hIcon)>(
+      'CopyIcon',
+    );
 
 /// Creates a new image (icon, cursor, or bitmap) and copies the attributes
 /// of the specified image to the new one. If necessary, the function
@@ -795,8 +964,9 @@ int CopyImage(int h, int type, int cx, int cy, int flags) =>
     _CopyImage(h, type, cx, cy, flags);
 
 final _CopyImage = _user32.lookupFunction<
-    IntPtr Function(IntPtr h, Uint32 type, Int32 cx, Int32 cy, Uint32 flags),
-    int Function(int h, int type, int cx, int cy, int flags)>('CopyImage');
+  IntPtr Function(IntPtr h, Uint32 type, Int32 cx, Int32 cy, Uint32 flags),
+  int Function(int h, int type, int cx, int cy, int flags)
+>('CopyImage');
 
 /// The CopyRect function copies the coordinates of one rectangle to
 /// another.
@@ -812,8 +982,9 @@ int CopyRect(Pointer<RECT> lprcDst, Pointer<RECT> lprcSrc) =>
     _CopyRect(lprcDst, lprcSrc);
 
 final _CopyRect = _user32.lookupFunction<
-    Int32 Function(Pointer<RECT> lprcDst, Pointer<RECT> lprcSrc),
-    int Function(Pointer<RECT> lprcDst, Pointer<RECT> lprcSrc)>('CopyRect');
+  Int32 Function(Pointer<RECT> lprcDst, Pointer<RECT> lprcSrc),
+  int Function(Pointer<RECT> lprcDst, Pointer<RECT> lprcSrc)
+>('CopyRect');
 
 /// Retrieves the number of different data formats currently on the
 /// clipboard.
@@ -840,8 +1011,9 @@ int CreateAcceleratorTable(Pointer<ACCEL> paccel, int cAccel) =>
     _CreateAcceleratorTable(paccel, cAccel);
 
 final _CreateAcceleratorTable = _user32.lookupFunction<
-    IntPtr Function(Pointer<ACCEL> paccel, Int32 cAccel),
-    int Function(Pointer<ACCEL> paccel, int cAccel)>('CreateAcceleratorTableW');
+  IntPtr Function(Pointer<ACCEL> paccel, Int32 cAccel),
+  int Function(Pointer<ACCEL> paccel, int cAccel)
+>('CreateAcceleratorTableW');
 
 /// Creates a new shape for the system caret and assigns ownership of the
 /// caret to the specified window. The caret shape can be a line, a block,
@@ -860,9 +1032,9 @@ int CreateCaret(int hWnd, int hBitmap, int nWidth, int nHeight) =>
     _CreateCaret(hWnd, hBitmap, nWidth, nHeight);
 
 final _CreateCaret = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, IntPtr hBitmap, Int32 nWidth, Int32 nHeight),
-    int Function(
-        int hWnd, int hBitmap, int nWidth, int nHeight)>('CreateCaret');
+  Int32 Function(IntPtr hWnd, IntPtr hBitmap, Int32 nWidth, Int32 nHeight),
+  int Function(int hWnd, int hBitmap, int nWidth, int nHeight)
+>('CreateCaret');
 
 /// Creates a monochrome cursor having the specified size, bit patterns, and
 /// hot spot.
@@ -879,16 +1051,44 @@ final _CreateCaret = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int CreateCursor(int hInst, int xHotSpot, int yHotSpot, int nWidth, int nHeight,
-        Pointer pvANDPlane, Pointer pvXORPlane) =>
-    _CreateCursor(
-        hInst, xHotSpot, yHotSpot, nWidth, nHeight, pvANDPlane, pvXORPlane);
+int CreateCursor(
+  int hInst,
+  int xHotSpot,
+  int yHotSpot,
+  int nWidth,
+  int nHeight,
+  Pointer pvANDPlane,
+  Pointer pvXORPlane,
+) => _CreateCursor(
+  hInst,
+  xHotSpot,
+  yHotSpot,
+  nWidth,
+  nHeight,
+  pvANDPlane,
+  pvXORPlane,
+);
 
 final _CreateCursor = _user32.lookupFunction<
-    IntPtr Function(IntPtr hInst, Int32 xHotSpot, Int32 yHotSpot, Int32 nWidth,
-        Int32 nHeight, Pointer pvANDPlane, Pointer pvXORPlane),
-    int Function(int hInst, int xHotSpot, int yHotSpot, int nWidth, int nHeight,
-        Pointer pvANDPlane, Pointer pvXORPlane)>('CreateCursor');
+  IntPtr Function(
+    IntPtr hInst,
+    Int32 xHotSpot,
+    Int32 yHotSpot,
+    Int32 nWidth,
+    Int32 nHeight,
+    Pointer pvANDPlane,
+    Pointer pvXORPlane,
+  ),
+  int Function(
+    int hInst,
+    int xHotSpot,
+    int yHotSpot,
+    int nWidth,
+    int nHeight,
+    Pointer pvANDPlane,
+    Pointer pvXORPlane,
+  )
+>('CreateCursor');
 
 /// Creates a new desktop, associates it with the current window station of
 /// the calling process, and assigns it to the calling thread. The calling
@@ -908,30 +1108,39 @@ final _CreateCursor = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int CreateDesktop(
-        Pointer<Utf16> lpszDesktop,
-        Pointer<Utf16> lpszDevice,
-        Pointer<DEVMODE> pDevmode,
-        int dwFlags,
-        int dwDesiredAccess,
-        Pointer<SECURITY_ATTRIBUTES> lpsa) =>
-    _CreateDesktop(
-        lpszDesktop, lpszDevice, pDevmode, dwFlags, dwDesiredAccess, lpsa);
+  Pointer<Utf16> lpszDesktop,
+  Pointer<Utf16> lpszDevice,
+  Pointer<DEVMODE> pDevmode,
+  int dwFlags,
+  int dwDesiredAccess,
+  Pointer<SECURITY_ATTRIBUTES> lpsa,
+) => _CreateDesktop(
+  lpszDesktop,
+  lpszDevice,
+  pDevmode,
+  dwFlags,
+  dwDesiredAccess,
+  lpsa,
+);
 
 final _CreateDesktop = _user32.lookupFunction<
-    IntPtr Function(
-        Pointer<Utf16> lpszDesktop,
-        Pointer<Utf16> lpszDevice,
-        Pointer<DEVMODE> pDevmode,
-        Uint32 dwFlags,
-        Uint32 dwDesiredAccess,
-        Pointer<SECURITY_ATTRIBUTES> lpsa),
-    int Function(
-        Pointer<Utf16> lpszDesktop,
-        Pointer<Utf16> lpszDevice,
-        Pointer<DEVMODE> pDevmode,
-        int dwFlags,
-        int dwDesiredAccess,
-        Pointer<SECURITY_ATTRIBUTES> lpsa)>('CreateDesktopW');
+  IntPtr Function(
+    Pointer<Utf16> lpszDesktop,
+    Pointer<Utf16> lpszDevice,
+    Pointer<DEVMODE> pDevmode,
+    Uint32 dwFlags,
+    Uint32 dwDesiredAccess,
+    Pointer<SECURITY_ATTRIBUTES> lpsa,
+  ),
+  int Function(
+    Pointer<Utf16> lpszDesktop,
+    Pointer<Utf16> lpszDevice,
+    Pointer<DEVMODE> pDevmode,
+    int dwFlags,
+    int dwDesiredAccess,
+    Pointer<SECURITY_ATTRIBUTES> lpsa,
+  )
+>('CreateDesktopW');
 
 /// Creates a new desktop with the specified heap, associates it with the
 /// current window station of the calling process, and assigns it to the
@@ -953,36 +1162,47 @@ final _CreateDesktop = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int CreateDesktopEx(
-        Pointer<Utf16> lpszDesktop,
-        Pointer<Utf16> lpszDevice,
-        Pointer<DEVMODE> pDevmode,
-        int dwFlags,
-        int dwDesiredAccess,
-        Pointer<SECURITY_ATTRIBUTES> lpsa,
-        int ulHeapSize,
-        Pointer pvoid) =>
-    _CreateDesktopEx(lpszDesktop, lpszDevice, pDevmode, dwFlags,
-        dwDesiredAccess, lpsa, ulHeapSize, pvoid);
+  Pointer<Utf16> lpszDesktop,
+  Pointer<Utf16> lpszDevice,
+  Pointer<DEVMODE> pDevmode,
+  int dwFlags,
+  int dwDesiredAccess,
+  Pointer<SECURITY_ATTRIBUTES> lpsa,
+  int ulHeapSize,
+  Pointer pvoid,
+) => _CreateDesktopEx(
+  lpszDesktop,
+  lpszDevice,
+  pDevmode,
+  dwFlags,
+  dwDesiredAccess,
+  lpsa,
+  ulHeapSize,
+  pvoid,
+);
 
 final _CreateDesktopEx = _user32.lookupFunction<
-    IntPtr Function(
-        Pointer<Utf16> lpszDesktop,
-        Pointer<Utf16> lpszDevice,
-        Pointer<DEVMODE> pDevmode,
-        Uint32 dwFlags,
-        Uint32 dwDesiredAccess,
-        Pointer<SECURITY_ATTRIBUTES> lpsa,
-        Uint32 ulHeapSize,
-        Pointer pvoid),
-    int Function(
-        Pointer<Utf16> lpszDesktop,
-        Pointer<Utf16> lpszDevice,
-        Pointer<DEVMODE> pDevmode,
-        int dwFlags,
-        int dwDesiredAccess,
-        Pointer<SECURITY_ATTRIBUTES> lpsa,
-        int ulHeapSize,
-        Pointer pvoid)>('CreateDesktopExW');
+  IntPtr Function(
+    Pointer<Utf16> lpszDesktop,
+    Pointer<Utf16> lpszDevice,
+    Pointer<DEVMODE> pDevmode,
+    Uint32 dwFlags,
+    Uint32 dwDesiredAccess,
+    Pointer<SECURITY_ATTRIBUTES> lpsa,
+    Uint32 ulHeapSize,
+    Pointer pvoid,
+  ),
+  int Function(
+    Pointer<Utf16> lpszDesktop,
+    Pointer<Utf16> lpszDevice,
+    Pointer<DEVMODE> pDevmode,
+    int dwFlags,
+    int dwDesiredAccess,
+    Pointer<SECURITY_ATTRIBUTES> lpsa,
+    int ulHeapSize,
+    Pointer pvoid,
+  )
+>('CreateDesktopExW');
 
 /// Creates a modeless dialog box from a dialog box template in memory.
 /// Before displaying the dialog box, the function passes an
@@ -1001,27 +1221,35 @@ final _CreateDesktopEx = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int CreateDialogIndirectParam(
-        int hInstance,
-        Pointer<DLGTEMPLATE> lpTemplate,
-        int hWndParent,
-        Pointer<NativeFunction<DLGPROC>> lpDialogFunc,
-        int dwInitParam) =>
-    _CreateDialogIndirectParam(
-        hInstance, lpTemplate, hWndParent, lpDialogFunc, dwInitParam);
+  int hInstance,
+  Pointer<DLGTEMPLATE> lpTemplate,
+  int hWndParent,
+  Pointer<NativeFunction<DLGPROC>> lpDialogFunc,
+  int dwInitParam,
+) => _CreateDialogIndirectParam(
+  hInstance,
+  lpTemplate,
+  hWndParent,
+  lpDialogFunc,
+  dwInitParam,
+);
 
 final _CreateDialogIndirectParam = _user32.lookupFunction<
-    IntPtr Function(
-        IntPtr hInstance,
-        Pointer<DLGTEMPLATE> lpTemplate,
-        IntPtr hWndParent,
-        Pointer<NativeFunction<DLGPROC>> lpDialogFunc,
-        IntPtr dwInitParam),
-    int Function(
-        int hInstance,
-        Pointer<DLGTEMPLATE> lpTemplate,
-        int hWndParent,
-        Pointer<NativeFunction<DLGPROC>> lpDialogFunc,
-        int dwInitParam)>('CreateDialogIndirectParamW');
+  IntPtr Function(
+    IntPtr hInstance,
+    Pointer<DLGTEMPLATE> lpTemplate,
+    IntPtr hWndParent,
+    Pointer<NativeFunction<DLGPROC>> lpDialogFunc,
+    IntPtr dwInitParam,
+  ),
+  int Function(
+    int hInstance,
+    Pointer<DLGTEMPLATE> lpTemplate,
+    int hWndParent,
+    Pointer<NativeFunction<DLGPROC>> lpDialogFunc,
+    int dwInitParam,
+  )
+>('CreateDialogIndirectParamW');
 
 /// Creates an icon that has the specified size, colors, and bit patterns.
 ///
@@ -1037,28 +1265,44 @@ final _CreateDialogIndirectParam = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int CreateIcon(int hInstance, int nWidth, int nHeight, int cPlanes,
-        int cBitsPixel, Pointer<Uint8> lpbANDbits, Pointer<Uint8> lpbXORbits) =>
-    _CreateIcon(hInstance, nWidth, nHeight, cPlanes, cBitsPixel, lpbANDbits,
-        lpbXORbits);
+int CreateIcon(
+  int hInstance,
+  int nWidth,
+  int nHeight,
+  int cPlanes,
+  int cBitsPixel,
+  Pointer<Uint8> lpbANDbits,
+  Pointer<Uint8> lpbXORbits,
+) => _CreateIcon(
+  hInstance,
+  nWidth,
+  nHeight,
+  cPlanes,
+  cBitsPixel,
+  lpbANDbits,
+  lpbXORbits,
+);
 
 final _CreateIcon = _user32.lookupFunction<
-    IntPtr Function(
-        IntPtr hInstance,
-        Int32 nWidth,
-        Int32 nHeight,
-        Uint8 cPlanes,
-        Uint8 cBitsPixel,
-        Pointer<Uint8> lpbANDbits,
-        Pointer<Uint8> lpbXORbits),
-    int Function(
-        int hInstance,
-        int nWidth,
-        int nHeight,
-        int cPlanes,
-        int cBitsPixel,
-        Pointer<Uint8> lpbANDbits,
-        Pointer<Uint8> lpbXORbits)>('CreateIcon');
+  IntPtr Function(
+    IntPtr hInstance,
+    Int32 nWidth,
+    Int32 nHeight,
+    Uint8 cPlanes,
+    Uint8 cBitsPixel,
+    Pointer<Uint8> lpbANDbits,
+    Pointer<Uint8> lpbXORbits,
+  ),
+  int Function(
+    int hInstance,
+    int nWidth,
+    int nHeight,
+    int cPlanes,
+    int cBitsPixel,
+    Pointer<Uint8> lpbANDbits,
+    Pointer<Uint8> lpbXORbits,
+  )
+>('CreateIcon');
 
 /// Creates an icon or cursor from resource bits describing the icon.
 ///
@@ -1072,14 +1316,21 @@ final _CreateIcon = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int CreateIconFromResource(
-        Pointer<Uint8> presbits, int dwResSize, int fIcon, int dwVer) =>
-    _CreateIconFromResource(presbits, dwResSize, fIcon, dwVer);
+  Pointer<Uint8> presbits,
+  int dwResSize,
+  int fIcon,
+  int dwVer,
+) => _CreateIconFromResource(presbits, dwResSize, fIcon, dwVer);
 
 final _CreateIconFromResource = _user32.lookupFunction<
-    IntPtr Function(
-        Pointer<Uint8> presbits, Uint32 dwResSize, Int32 fIcon, Uint32 dwVer),
-    int Function(Pointer<Uint8> presbits, int dwResSize, int fIcon,
-        int dwVer)>('CreateIconFromResource');
+  IntPtr Function(
+    Pointer<Uint8> presbits,
+    Uint32 dwResSize,
+    Int32 fIcon,
+    Uint32 dwVer,
+  ),
+  int Function(Pointer<Uint8> presbits, int dwResSize, int fIcon, int dwVer)
+>('CreateIconFromResource');
 
 /// Creates an icon or cursor from resource bits describing the icon.
 ///
@@ -1095,16 +1346,44 @@ final _CreateIconFromResource = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int CreateIconFromResourceEx(Pointer<Uint8> presbits, int dwResSize, int fIcon,
-        int dwVer, int cxDesired, int cyDesired, int Flags) =>
-    _CreateIconFromResourceEx(
-        presbits, dwResSize, fIcon, dwVer, cxDesired, cyDesired, Flags);
+int CreateIconFromResourceEx(
+  Pointer<Uint8> presbits,
+  int dwResSize,
+  int fIcon,
+  int dwVer,
+  int cxDesired,
+  int cyDesired,
+  int Flags,
+) => _CreateIconFromResourceEx(
+  presbits,
+  dwResSize,
+  fIcon,
+  dwVer,
+  cxDesired,
+  cyDesired,
+  Flags,
+);
 
 final _CreateIconFromResourceEx = _user32.lookupFunction<
-    IntPtr Function(Pointer<Uint8> presbits, Uint32 dwResSize, Int32 fIcon,
-        Uint32 dwVer, Int32 cxDesired, Int32 cyDesired, Uint32 Flags),
-    int Function(Pointer<Uint8> presbits, int dwResSize, int fIcon, int dwVer,
-        int cxDesired, int cyDesired, int Flags)>('CreateIconFromResourceEx');
+  IntPtr Function(
+    Pointer<Uint8> presbits,
+    Uint32 dwResSize,
+    Int32 fIcon,
+    Uint32 dwVer,
+    Int32 cxDesired,
+    Int32 cyDesired,
+    Uint32 Flags,
+  ),
+  int Function(
+    Pointer<Uint8> presbits,
+    int dwResSize,
+    int fIcon,
+    int dwVer,
+    int cxDesired,
+    int cyDesired,
+    int Flags,
+  )
+>('CreateIconFromResourceEx');
 
 /// Creates an icon or cursor from an ICONINFO structure.
 ///
@@ -1118,8 +1397,9 @@ int CreateIconIndirect(Pointer<ICONINFO> piconinfo) =>
     _CreateIconIndirect(piconinfo);
 
 final _CreateIconIndirect = _user32.lookupFunction<
-    IntPtr Function(Pointer<ICONINFO> piconinfo),
-    int Function(Pointer<ICONINFO> piconinfo)>('CreateIconIndirect');
+  IntPtr Function(Pointer<ICONINFO> piconinfo),
+  int Function(Pointer<ICONINFO> piconinfo)
+>('CreateIconIndirect');
 
 /// Creates a multiple-document interface (MDI) child window.
 ///
@@ -1139,42 +1419,55 @@ final _CreateIconIndirect = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int CreateMDIWindow(
-        Pointer<Utf16> lpClassName,
-        Pointer<Utf16> lpWindowName,
-        int dwStyle,
-        int X,
-        int Y,
-        int nWidth,
-        int nHeight,
-        int hWndParent,
-        int hInstance,
-        int lParam) =>
-    _CreateMDIWindow(lpClassName, lpWindowName, dwStyle, X, Y, nWidth, nHeight,
-        hWndParent, hInstance, lParam);
+  Pointer<Utf16> lpClassName,
+  Pointer<Utf16> lpWindowName,
+  int dwStyle,
+  int X,
+  int Y,
+  int nWidth,
+  int nHeight,
+  int hWndParent,
+  int hInstance,
+  int lParam,
+) => _CreateMDIWindow(
+  lpClassName,
+  lpWindowName,
+  dwStyle,
+  X,
+  Y,
+  nWidth,
+  nHeight,
+  hWndParent,
+  hInstance,
+  lParam,
+);
 
 final _CreateMDIWindow = _user32.lookupFunction<
-    IntPtr Function(
-        Pointer<Utf16> lpClassName,
-        Pointer<Utf16> lpWindowName,
-        Uint32 dwStyle,
-        Int32 X,
-        Int32 Y,
-        Int32 nWidth,
-        Int32 nHeight,
-        IntPtr hWndParent,
-        IntPtr hInstance,
-        IntPtr lParam),
-    int Function(
-        Pointer<Utf16> lpClassName,
-        Pointer<Utf16> lpWindowName,
-        int dwStyle,
-        int X,
-        int Y,
-        int nWidth,
-        int nHeight,
-        int hWndParent,
-        int hInstance,
-        int lParam)>('CreateMDIWindowW');
+  IntPtr Function(
+    Pointer<Utf16> lpClassName,
+    Pointer<Utf16> lpWindowName,
+    Uint32 dwStyle,
+    Int32 X,
+    Int32 Y,
+    Int32 nWidth,
+    Int32 nHeight,
+    IntPtr hWndParent,
+    IntPtr hInstance,
+    IntPtr lParam,
+  ),
+  int Function(
+    Pointer<Utf16> lpClassName,
+    Pointer<Utf16> lpWindowName,
+    int dwStyle,
+    int X,
+    int Y,
+    int nWidth,
+    int nHeight,
+    int hWndParent,
+    int hInstance,
+    int lParam,
+  )
+>('CreateMDIWindowW');
 
 /// Creates a menu. The menu is initially empty, but it can be filled with
 /// menu items by using the InsertMenuItem, AppendMenu, and InsertMenu
@@ -1186,8 +1479,9 @@ final _CreateMDIWindow = _user32.lookupFunction<
 /// {@category user32}
 int CreateMenu() => _CreateMenu();
 
-final _CreateMenu =
-    _user32.lookupFunction<IntPtr Function(), int Function()>('CreateMenu');
+final _CreateMenu = _user32.lookupFunction<IntPtr Function(), int Function()>(
+  'CreateMenu',
+);
 
 /// Creates a drop-down menu, submenu, or shortcut menu. The menu is
 /// initially empty. You can insert or append menu items by using the
@@ -1226,48 +1520,63 @@ final _CreatePopupMenu = _user32
 /// ```
 /// {@category user32}
 int CreateWindowEx(
-        int dwExStyle,
-        Pointer<Utf16> lpClassName,
-        Pointer<Utf16> lpWindowName,
-        int dwStyle,
-        int X,
-        int Y,
-        int nWidth,
-        int nHeight,
-        int hWndParent,
-        int hMenu,
-        int hInstance,
-        Pointer lpParam) =>
-    _CreateWindowEx(dwExStyle, lpClassName, lpWindowName, dwStyle, X, Y, nWidth,
-        nHeight, hWndParent, hMenu, hInstance, lpParam);
+  int dwExStyle,
+  Pointer<Utf16> lpClassName,
+  Pointer<Utf16> lpWindowName,
+  int dwStyle,
+  int X,
+  int Y,
+  int nWidth,
+  int nHeight,
+  int hWndParent,
+  int hMenu,
+  int hInstance,
+  Pointer lpParam,
+) => _CreateWindowEx(
+  dwExStyle,
+  lpClassName,
+  lpWindowName,
+  dwStyle,
+  X,
+  Y,
+  nWidth,
+  nHeight,
+  hWndParent,
+  hMenu,
+  hInstance,
+  lpParam,
+);
 
 final _CreateWindowEx = _user32.lookupFunction<
-    IntPtr Function(
-        Uint32 dwExStyle,
-        Pointer<Utf16> lpClassName,
-        Pointer<Utf16> lpWindowName,
-        Uint32 dwStyle,
-        Int32 X,
-        Int32 Y,
-        Int32 nWidth,
-        Int32 nHeight,
-        IntPtr hWndParent,
-        IntPtr hMenu,
-        IntPtr hInstance,
-        Pointer lpParam),
-    int Function(
-        int dwExStyle,
-        Pointer<Utf16> lpClassName,
-        Pointer<Utf16> lpWindowName,
-        int dwStyle,
-        int X,
-        int Y,
-        int nWidth,
-        int nHeight,
-        int hWndParent,
-        int hMenu,
-        int hInstance,
-        Pointer lpParam)>('CreateWindowExW');
+  IntPtr Function(
+    Uint32 dwExStyle,
+    Pointer<Utf16> lpClassName,
+    Pointer<Utf16> lpWindowName,
+    Uint32 dwStyle,
+    Int32 X,
+    Int32 Y,
+    Int32 nWidth,
+    Int32 nHeight,
+    IntPtr hWndParent,
+    IntPtr hMenu,
+    IntPtr hInstance,
+    Pointer lpParam,
+  ),
+  int Function(
+    int dwExStyle,
+    Pointer<Utf16> lpClassName,
+    Pointer<Utf16> lpWindowName,
+    int dwStyle,
+    int X,
+    int Y,
+    int nWidth,
+    int nHeight,
+    int hWndParent,
+    int hMenu,
+    int hInstance,
+    Pointer lpParam,
+  )
+>('CreateWindowExW');
 
 /// Creates a window station object, associates it with the calling process,
 /// and assigns it to the current session.
@@ -1281,15 +1590,27 @@ final _CreateWindowEx = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int CreateWindowStation(Pointer<Utf16> lpwinsta, int dwFlags,
-        int dwDesiredAccess, Pointer<SECURITY_ATTRIBUTES> lpsa) =>
-    _CreateWindowStation(lpwinsta, dwFlags, dwDesiredAccess, lpsa);
+int CreateWindowStation(
+  Pointer<Utf16> lpwinsta,
+  int dwFlags,
+  int dwDesiredAccess,
+  Pointer<SECURITY_ATTRIBUTES> lpsa,
+) => _CreateWindowStation(lpwinsta, dwFlags, dwDesiredAccess, lpsa);
 
 final _CreateWindowStation = _user32.lookupFunction<
-    IntPtr Function(Pointer<Utf16> lpwinsta, Uint32 dwFlags,
-        Uint32 dwDesiredAccess, Pointer<SECURITY_ATTRIBUTES> lpsa),
-    int Function(Pointer<Utf16> lpwinsta, int dwFlags, int dwDesiredAccess,
-        Pointer<SECURITY_ATTRIBUTES> lpsa)>('CreateWindowStationW');
+  IntPtr Function(
+    Pointer<Utf16> lpwinsta,
+    Uint32 dwFlags,
+    Uint32 dwDesiredAccess,
+    Pointer<SECURITY_ATTRIBUTES> lpsa,
+  ),
+  int Function(
+    Pointer<Utf16> lpwinsta,
+    int dwFlags,
+    int dwDesiredAccess,
+    Pointer<SECURITY_ATTRIBUTES> lpsa,
+  )
+>('CreateWindowStationW');
 
 /// Updates the specified multiple-window – position structure for the
 /// specified window. The function then returns a handle to the updated
@@ -1310,15 +1631,39 @@ final _CreateWindowStation = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int DeferWindowPos(int hWinPosInfo, int hWnd, int hWndInsertAfter, int x, int y,
-        int cx, int cy, int uFlags) =>
-    _DeferWindowPos(hWinPosInfo, hWnd, hWndInsertAfter, x, y, cx, cy, uFlags);
+int DeferWindowPos(
+  int hWinPosInfo,
+  int hWnd,
+  int hWndInsertAfter,
+  int x,
+  int y,
+  int cx,
+  int cy,
+  int uFlags,
+) => _DeferWindowPos(hWinPosInfo, hWnd, hWndInsertAfter, x, y, cx, cy, uFlags);
 
 final _DeferWindowPos = _user32.lookupFunction<
-    IntPtr Function(IntPtr hWinPosInfo, IntPtr hWnd, IntPtr hWndInsertAfter,
-        Int32 x, Int32 y, Int32 cx, Int32 cy, Uint32 uFlags),
-    int Function(int hWinPosInfo, int hWnd, int hWndInsertAfter, int x, int y,
-        int cx, int cy, int uFlags)>('DeferWindowPos');
+  IntPtr Function(
+    IntPtr hWinPosInfo,
+    IntPtr hWnd,
+    IntPtr hWndInsertAfter,
+    Int32 x,
+    Int32 y,
+    Int32 cx,
+    Int32 cy,
+    Uint32 uFlags,
+  ),
+  int Function(
+    int hWinPosInfo,
+    int hWnd,
+    int hWndInsertAfter,
+    int x,
+    int y,
+    int cx,
+    int cy,
+    int uFlags,
+  )
+>('DeferWindowPos');
 
 /// Provides default processing for any window message that the window
 /// procedure of a multiple-document interface (MDI) child window does not
@@ -1339,9 +1684,9 @@ int DefMDIChildProc(int hWnd, int uMsg, int wParam, int lParam) =>
     _DefMDIChildProc(hWnd, uMsg, wParam, lParam);
 
 final _DefMDIChildProc = _user32.lookupFunction<
-    IntPtr Function(IntPtr hWnd, Uint32 uMsg, IntPtr wParam, IntPtr lParam),
-    int Function(
-        int hWnd, int uMsg, int wParam, int lParam)>('DefMDIChildProcW');
+  IntPtr Function(IntPtr hWnd, Uint32 uMsg, IntPtr wParam, IntPtr lParam),
+  int Function(int hWnd, int uMsg, int wParam, int lParam)
+>('DefMDIChildProcW');
 
 /// Unlike DefWindowProcA and DefWindowProcW, this function doesn't do any
 /// processing. DefRawInputProc only checks whether cbSizeHeader's value
@@ -1356,14 +1701,23 @@ final _DefMDIChildProc = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int DefRawInputProc(
-        Pointer<Pointer<RAWINPUT>> paRawInput, int nInput, int cbSizeHeader) =>
-    _DefRawInputProc(paRawInput, nInput, cbSizeHeader);
+  Pointer<Pointer<RAWINPUT>> paRawInput,
+  int nInput,
+  int cbSizeHeader,
+) => _DefRawInputProc(paRawInput, nInput, cbSizeHeader);
 
 final _DefRawInputProc = _user32.lookupFunction<
-    IntPtr Function(Pointer<Pointer<RAWINPUT>> paRawInput, Int32 nInput,
-        Uint32 cbSizeHeader),
-    int Function(Pointer<Pointer<RAWINPUT>> paRawInput, int nInput,
-        int cbSizeHeader)>('DefRawInputProc');
+  IntPtr Function(
+    Pointer<Pointer<RAWINPUT>> paRawInput,
+    Int32 nInput,
+    Uint32 cbSizeHeader,
+  ),
+  int Function(
+    Pointer<Pointer<RAWINPUT>> paRawInput,
+    int nInput,
+    int cbSizeHeader,
+  )
+>('DefRawInputProc');
 
 /// Calls the default window procedure to provide default processing for any
 /// window messages that an application does not process. This function
@@ -1383,8 +1737,9 @@ int DefWindowProc(int hWnd, int Msg, int wParam, int lParam) =>
     _DefWindowProc(hWnd, Msg, wParam, lParam);
 
 final _DefWindowProc = _user32.lookupFunction<
-    IntPtr Function(IntPtr hWnd, Uint32 Msg, IntPtr wParam, IntPtr lParam),
-    int Function(int hWnd, int Msg, int wParam, int lParam)>('DefWindowProcW');
+  IntPtr Function(IntPtr hWnd, Uint32 Msg, IntPtr wParam, IntPtr lParam),
+  int Function(int hWnd, int Msg, int wParam, int lParam)
+>('DefWindowProcW');
 
 /// Deletes an item from the specified menu. If the menu item opens a menu
 /// or submenu, this function destroys the handle to the menu or submenu and
@@ -1402,8 +1757,9 @@ int DeleteMenu(int hMenu, int uPosition, int uFlags) =>
     _DeleteMenu(hMenu, uPosition, uFlags);
 
 final _DeleteMenu = _user32.lookupFunction<
-    Int32 Function(IntPtr hMenu, Uint32 uPosition, Uint32 uFlags),
-    int Function(int hMenu, int uPosition, int uFlags)>('DeleteMenu');
+  Int32 Function(IntPtr hMenu, Uint32 uPosition, Uint32 uFlags),
+  int Function(int hMenu, int uPosition, int uFlags)
+>('DeleteMenu');
 
 /// Destroys an accelerator table.
 ///
@@ -1415,9 +1771,10 @@ final _DeleteMenu = _user32.lookupFunction<
 /// {@category user32}
 int DestroyAcceleratorTable(int hAccel) => _DestroyAcceleratorTable(hAccel);
 
-final _DestroyAcceleratorTable = _user32.lookupFunction<
-    Int32 Function(IntPtr hAccel),
-    int Function(int hAccel)>('DestroyAcceleratorTable');
+final _DestroyAcceleratorTable = _user32
+    .lookupFunction<Int32 Function(IntPtr hAccel), int Function(int hAccel)>(
+      'DestroyAcceleratorTable',
+    );
 
 /// Destroys the caret's current shape, frees the caret from the window, and
 /// removes the caret from the screen.
@@ -1428,8 +1785,9 @@ final _DestroyAcceleratorTable = _user32.lookupFunction<
 /// {@category user32}
 int DestroyCaret() => _DestroyCaret();
 
-final _DestroyCaret =
-    _user32.lookupFunction<Int32 Function(), int Function()>('DestroyCaret');
+final _DestroyCaret = _user32.lookupFunction<Int32 Function(), int Function()>(
+  'DestroyCaret',
+);
 
 /// Destroys a cursor and frees any memory the cursor occupied. Do not use
 /// this function to destroy a shared cursor.
@@ -1442,8 +1800,10 @@ final _DestroyCaret =
 /// {@category user32}
 int DestroyCursor(int hCursor) => _DestroyCursor(hCursor);
 
-final _DestroyCursor = _user32.lookupFunction<Int32 Function(IntPtr hCursor),
-    int Function(int hCursor)>('DestroyCursor');
+final _DestroyCursor = _user32
+    .lookupFunction<Int32 Function(IntPtr hCursor), int Function(int hCursor)>(
+      'DestroyCursor',
+    );
 
 /// Destroys an icon and frees any memory the icon occupied.
 ///
@@ -1455,8 +1815,10 @@ final _DestroyCursor = _user32.lookupFunction<Int32 Function(IntPtr hCursor),
 /// {@category user32}
 int DestroyIcon(int hIcon) => _DestroyIcon(hIcon);
 
-final _DestroyIcon = _user32.lookupFunction<Int32 Function(IntPtr hIcon),
-    int Function(int hIcon)>('DestroyIcon');
+final _DestroyIcon = _user32
+    .lookupFunction<Int32 Function(IntPtr hIcon), int Function(int hIcon)>(
+      'DestroyIcon',
+    );
 
 /// Destroys the specified menu and frees any memory that the menu occupies.
 ///
@@ -1468,8 +1830,10 @@ final _DestroyIcon = _user32.lookupFunction<Int32 Function(IntPtr hIcon),
 /// {@category user32}
 int DestroyMenu(int hMenu) => _DestroyMenu(hMenu);
 
-final _DestroyMenu = _user32.lookupFunction<Int32 Function(IntPtr hMenu),
-    int Function(int hMenu)>('DestroyMenu');
+final _DestroyMenu = _user32
+    .lookupFunction<Int32 Function(IntPtr hMenu), int Function(int hMenu)>(
+      'DestroyMenu',
+    );
 
 /// Destroys the specified window. The function sends WM_DESTROY and
 /// WM_NCDESTROY messages to the window to deactivate it and remove the
@@ -1486,9 +1850,10 @@ final _DestroyMenu = _user32.lookupFunction<Int32 Function(IntPtr hMenu),
 /// {@category user32}
 int DestroyWindow(int hWnd) => _DestroyWindow(hWnd);
 
-final _DestroyWindow =
-    _user32.lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
-        'DestroyWindow');
+final _DestroyWindow = _user32
+    .lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
+      'DestroyWindow',
+    );
 
 /// Creates a modal dialog box from a dialog box template in memory. Before
 /// displaying the dialog box, the function passes an application-defined
@@ -1507,27 +1872,35 @@ final _DestroyWindow =
 /// ```
 /// {@category user32}
 int DialogBoxIndirectParam(
-        int hInstance,
-        Pointer<DLGTEMPLATE> hDialogTemplate,
-        int hWndParent,
-        Pointer<NativeFunction<DLGPROC>> lpDialogFunc,
-        int dwInitParam) =>
-    _DialogBoxIndirectParam(
-        hInstance, hDialogTemplate, hWndParent, lpDialogFunc, dwInitParam);
+  int hInstance,
+  Pointer<DLGTEMPLATE> hDialogTemplate,
+  int hWndParent,
+  Pointer<NativeFunction<DLGPROC>> lpDialogFunc,
+  int dwInitParam,
+) => _DialogBoxIndirectParam(
+  hInstance,
+  hDialogTemplate,
+  hWndParent,
+  lpDialogFunc,
+  dwInitParam,
+);
 
 final _DialogBoxIndirectParam = _user32.lookupFunction<
-    IntPtr Function(
-        IntPtr hInstance,
-        Pointer<DLGTEMPLATE> hDialogTemplate,
-        IntPtr hWndParent,
-        Pointer<NativeFunction<DLGPROC>> lpDialogFunc,
-        IntPtr dwInitParam),
-    int Function(
-        int hInstance,
-        Pointer<DLGTEMPLATE> hDialogTemplate,
-        int hWndParent,
-        Pointer<NativeFunction<DLGPROC>> lpDialogFunc,
-        int dwInitParam)>('DialogBoxIndirectParamW');
+  IntPtr Function(
+    IntPtr hInstance,
+    Pointer<DLGTEMPLATE> hDialogTemplate,
+    IntPtr hWndParent,
+    Pointer<NativeFunction<DLGPROC>> lpDialogFunc,
+    IntPtr dwInitParam,
+  ),
+  int Function(
+    int hInstance,
+    Pointer<DLGTEMPLATE> hDialogTemplate,
+    int hWndParent,
+    Pointer<NativeFunction<DLGPROC>> lpDialogFunc,
+    int dwInitParam,
+  )
+>('DialogBoxIndirectParamW');
 
 /// Disables the window ghosting feature for the calling GUI process. Window
 /// ghosting is a Windows Manager feature that lets the user minimize, move,
@@ -1539,9 +1912,10 @@ final _DialogBoxIndirectParam = _user32.lookupFunction<
 /// {@category user32}
 void DisableProcessWindowsGhosting() => _DisableProcessWindowsGhosting();
 
-final _DisableProcessWindowsGhosting =
-    _user32.lookupFunction<Void Function(), void Function()>(
-        'DisableProcessWindowsGhosting');
+final _DisableProcessWindowsGhosting = _user32
+    .lookupFunction<Void Function(), void Function()>(
+      'DisableProcessWindowsGhosting',
+    );
 
 /// Dispatches a message to a window procedure. It is typically used to
 /// dispatch a message retrieved by the GetMessage function.
@@ -1555,8 +1929,9 @@ final _DisableProcessWindowsGhosting =
 int DispatchMessage(Pointer<MSG> lpMsg) => _DispatchMessage(lpMsg);
 
 final _DispatchMessage = _user32.lookupFunction<
-    IntPtr Function(Pointer<MSG> lpMsg),
-    int Function(Pointer<MSG> lpMsg)>('DispatchMessageW');
+  IntPtr Function(Pointer<MSG> lpMsg),
+  int Function(Pointer<MSG> lpMsg)
+>('DispatchMessageW');
 
 /// Captures the mouse and tracks its movement until the user releases the
 /// left button, presses the ESC key, or moves the mouse outside the drag
@@ -1571,8 +1946,9 @@ final _DispatchMessage = _user32.lookupFunction<
 int DragDetect(int hwnd, POINT pt) => _DragDetect(hwnd, pt);
 
 final _DragDetect = _user32.lookupFunction<
-    Int32 Function(IntPtr hwnd, POINT pt),
-    int Function(int hwnd, POINT pt)>('DragDetect');
+  Int32 Function(IntPtr hwnd, POINT pt),
+  int Function(int hwnd, POINT pt)
+>('DragDetect');
 
 /// Animates the caption of a window to indicate the opening of an icon or
 /// the minimizing or maximizing of a window.
@@ -1586,14 +1962,26 @@ final _DragDetect = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int DrawAnimatedRects(
-        int hwnd, int idAni, Pointer<RECT> lprcFrom, Pointer<RECT> lprcTo) =>
-    _DrawAnimatedRects(hwnd, idAni, lprcFrom, lprcTo);
+  int hwnd,
+  int idAni,
+  Pointer<RECT> lprcFrom,
+  Pointer<RECT> lprcTo,
+) => _DrawAnimatedRects(hwnd, idAni, lprcFrom, lprcTo);
 
 final _DrawAnimatedRects = _user32.lookupFunction<
-    Int32 Function(
-        IntPtr hwnd, Int32 idAni, Pointer<RECT> lprcFrom, Pointer<RECT> lprcTo),
-    int Function(int hwnd, int idAni, Pointer<RECT> lprcFrom,
-        Pointer<RECT> lprcTo)>('DrawAnimatedRects');
+  Int32 Function(
+    IntPtr hwnd,
+    Int32 idAni,
+    Pointer<RECT> lprcFrom,
+    Pointer<RECT> lprcTo,
+  ),
+  int Function(
+    int hwnd,
+    int idAni,
+    Pointer<RECT> lprcFrom,
+    Pointer<RECT> lprcTo,
+  )
+>('DrawAnimatedRects');
 
 /// The DrawCaption function draws a window caption.
 ///
@@ -1610,9 +1998,9 @@ int DrawCaption(int hwnd, int hdc, Pointer<RECT> lprect, int flags) =>
     _DrawCaption(hwnd, hdc, lprect, flags);
 
 final _DrawCaption = _user32.lookupFunction<
-    Int32 Function(IntPtr hwnd, IntPtr hdc, Pointer<RECT> lprect, Uint32 flags),
-    int Function(
-        int hwnd, int hdc, Pointer<RECT> lprect, int flags)>('DrawCaption');
+  Int32 Function(IntPtr hwnd, IntPtr hdc, Pointer<RECT> lprect, Uint32 flags),
+  int Function(int hwnd, int hdc, Pointer<RECT> lprect, int flags)
+>('DrawCaption');
 
 /// The DrawEdge function draws one or more edges of rectangle.
 ///
@@ -1628,9 +2016,9 @@ int DrawEdge(int hdc, Pointer<RECT> qrc, int edge, int grfFlags) =>
     _DrawEdge(hdc, qrc, edge, grfFlags);
 
 final _DrawEdge = _user32.lookupFunction<
-    Int32 Function(IntPtr hdc, Pointer<RECT> qrc, Uint32 edge, Uint32 grfFlags),
-    int Function(
-        int hdc, Pointer<RECT> qrc, int edge, int grfFlags)>('DrawEdge');
+  Int32 Function(IntPtr hdc, Pointer<RECT> qrc, Uint32 edge, Uint32 grfFlags),
+  int Function(int hdc, Pointer<RECT> qrc, int edge, int grfFlags)
+>('DrawEdge');
 
 /// The DrawFocusRect function draws a rectangle in the style used to
 /// indicate that the rectangle has the focus.
@@ -1644,8 +2032,9 @@ final _DrawEdge = _user32.lookupFunction<
 int DrawFocusRect(int hDC, Pointer<RECT> lprc) => _DrawFocusRect(hDC, lprc);
 
 final _DrawFocusRect = _user32.lookupFunction<
-    Int32 Function(IntPtr hDC, Pointer<RECT> lprc),
-    int Function(int hDC, Pointer<RECT> lprc)>('DrawFocusRect');
+  Int32 Function(IntPtr hDC, Pointer<RECT> lprc),
+  int Function(int hDC, Pointer<RECT> lprc)
+>('DrawFocusRect');
 
 /// The DrawFrameControl function draws a frame control of the specified
 /// type and style.
@@ -1659,14 +2048,21 @@ final _DrawFocusRect = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int DrawFrameControl(
-        int param0, Pointer<RECT> param1, int param2, int param3) =>
-    _DrawFrameControl(param0, param1, param2, param3);
+  int param0,
+  Pointer<RECT> param1,
+  int param2,
+  int param3,
+) => _DrawFrameControl(param0, param1, param2, param3);
 
 final _DrawFrameControl = _user32.lookupFunction<
-    Int32 Function(
-        IntPtr param0, Pointer<RECT> param1, Uint32 param2, Uint32 param3),
-    int Function(int param0, Pointer<RECT> param1, int param2,
-        int param3)>('DrawFrameControl');
+  Int32 Function(
+    IntPtr param0,
+    Pointer<RECT> param1,
+    Uint32 param2,
+    Uint32 param3,
+  ),
+  int Function(int param0, Pointer<RECT> param1, int param2, int param3)
+>('DrawFrameControl');
 
 /// Draws an icon or cursor into the specified device context.
 ///
@@ -1682,8 +2078,9 @@ final _DrawFrameControl = _user32.lookupFunction<
 int DrawIcon(int hDC, int X, int Y, int hIcon) => _DrawIcon(hDC, X, Y, hIcon);
 
 final _DrawIcon = _user32.lookupFunction<
-    Int32 Function(IntPtr hDC, Int32 X, Int32 Y, IntPtr hIcon),
-    int Function(int hDC, int X, int Y, int hIcon)>('DrawIcon');
+  Int32 Function(IntPtr hDC, Int32 X, Int32 Y, IntPtr hIcon),
+  int Function(int hDC, int X, int Y, int hIcon)
+>('DrawIcon');
 
 /// The DrawState function displays an image and applies a visual effect to
 /// indicate a state, such as a disabled or default state.
@@ -1703,41 +2100,44 @@ final _DrawIcon = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int DrawState(
-        int hdc,
-        int hbrFore,
-        Pointer<NativeFunction<DRAWSTATEPROC>> qfnCallBack,
-        int lData,
-        int wData,
-        int x,
-        int y,
-        int cx,
-        int cy,
-        int uFlags) =>
-    _DrawState(hdc, hbrFore, qfnCallBack, lData, wData, x, y, cx, cy, uFlags);
+  int hdc,
+  int hbrFore,
+  Pointer<NativeFunction<DRAWSTATEPROC>> qfnCallBack,
+  int lData,
+  int wData,
+  int x,
+  int y,
+  int cx,
+  int cy,
+  int uFlags,
+) => _DrawState(hdc, hbrFore, qfnCallBack, lData, wData, x, y, cx, cy, uFlags);
 
 final _DrawState = _user32.lookupFunction<
-    Int32 Function(
-        IntPtr hdc,
-        IntPtr hbrFore,
-        Pointer<NativeFunction<DRAWSTATEPROC>> qfnCallBack,
-        IntPtr lData,
-        IntPtr wData,
-        Int32 x,
-        Int32 y,
-        Int32 cx,
-        Int32 cy,
-        Uint32 uFlags),
-    int Function(
-        int hdc,
-        int hbrFore,
-        Pointer<NativeFunction<DRAWSTATEPROC>> qfnCallBack,
-        int lData,
-        int wData,
-        int x,
-        int y,
-        int cx,
-        int cy,
-        int uFlags)>('DrawStateW');
+  Int32 Function(
+    IntPtr hdc,
+    IntPtr hbrFore,
+    Pointer<NativeFunction<DRAWSTATEPROC>> qfnCallBack,
+    IntPtr lData,
+    IntPtr wData,
+    Int32 x,
+    Int32 y,
+    Int32 cx,
+    Int32 cy,
+    Uint32 uFlags,
+  ),
+  int Function(
+    int hdc,
+    int hbrFore,
+    Pointer<NativeFunction<DRAWSTATEPROC>> qfnCallBack,
+    int lData,
+    int wData,
+    int x,
+    int y,
+    int cx,
+    int cy,
+    int uFlags,
+  )
+>('DrawStateW');
 
 /// The DrawText function draws formatted text in the specified rectangle.
 /// It formats the text according to the specified method (expanding tabs,
@@ -1753,15 +2153,30 @@ final _DrawState = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int DrawText(int hdc, Pointer<Utf16> lpchText, int cchText, Pointer<RECT> lprc,
-        int format) =>
-    _DrawText(hdc, lpchText, cchText, lprc, format);
+int DrawText(
+  int hdc,
+  Pointer<Utf16> lpchText,
+  int cchText,
+  Pointer<RECT> lprc,
+  int format,
+) => _DrawText(hdc, lpchText, cchText, lprc, format);
 
 final _DrawText = _user32.lookupFunction<
-    Int32 Function(IntPtr hdc, Pointer<Utf16> lpchText, Int32 cchText,
-        Pointer<RECT> lprc, Uint32 format),
-    int Function(int hdc, Pointer<Utf16> lpchText, int cchText,
-        Pointer<RECT> lprc, int format)>('DrawTextW');
+  Int32 Function(
+    IntPtr hdc,
+    Pointer<Utf16> lpchText,
+    Int32 cchText,
+    Pointer<RECT> lprc,
+    Uint32 format,
+  ),
+  int Function(
+    int hdc,
+    Pointer<Utf16> lpchText,
+    int cchText,
+    Pointer<RECT> lprc,
+    int format,
+  )
+>('DrawTextW');
 
 /// The DrawTextEx function draws formatted text in the specified rectangle.
 ///
@@ -1776,20 +2191,33 @@ final _DrawText = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int DrawTextEx(int hdc, Pointer<Utf16> lpchText, int cchText,
-        Pointer<RECT> lprc, int format, Pointer<DRAWTEXTPARAMS> lpdtp) =>
-    _DrawTextEx(hdc, lpchText, cchText, lprc, format, lpdtp);
+int DrawTextEx(
+  int hdc,
+  Pointer<Utf16> lpchText,
+  int cchText,
+  Pointer<RECT> lprc,
+  int format,
+  Pointer<DRAWTEXTPARAMS> lpdtp,
+) => _DrawTextEx(hdc, lpchText, cchText, lprc, format, lpdtp);
 
 final _DrawTextEx = _user32.lookupFunction<
-    Int32 Function(IntPtr hdc, Pointer<Utf16> lpchText, Int32 cchText,
-        Pointer<RECT> lprc, Uint32 format, Pointer<DRAWTEXTPARAMS> lpdtp),
-    int Function(
-        int hdc,
-        Pointer<Utf16> lpchText,
-        int cchText,
-        Pointer<RECT> lprc,
-        int format,
-        Pointer<DRAWTEXTPARAMS> lpdtp)>('DrawTextExW');
+  Int32 Function(
+    IntPtr hdc,
+    Pointer<Utf16> lpchText,
+    Int32 cchText,
+    Pointer<RECT> lprc,
+    Uint32 format,
+    Pointer<DRAWTEXTPARAMS> lpdtp,
+  ),
+  int Function(
+    int hdc,
+    Pointer<Utf16> lpchText,
+    int cchText,
+    Pointer<RECT> lprc,
+    int format,
+    Pointer<DRAWTEXTPARAMS> lpdtp,
+  )
+>('DrawTextExW');
 
 /// Empties the clipboard and frees handles to data in the clipboard. The
 /// function then assigns ownership of the clipboard to the window that
@@ -1801,8 +2229,8 @@ final _DrawTextEx = _user32.lookupFunction<
 /// {@category user32}
 int EmptyClipboard() => _EmptyClipboard();
 
-final _EmptyClipboard =
-    _user32.lookupFunction<Int32 Function(), int Function()>('EmptyClipboard');
+final _EmptyClipboard = _user32
+    .lookupFunction<Int32 Function(), int Function()>('EmptyClipboard');
 
 /// Enables, disables, or grays the specified menu item.
 ///
@@ -1818,8 +2246,9 @@ int EnableMenuItem(int hMenu, int uIDEnableItem, int uEnable) =>
     _EnableMenuItem(hMenu, uIDEnableItem, uEnable);
 
 final _EnableMenuItem = _user32.lookupFunction<
-    Int32 Function(IntPtr hMenu, Uint32 uIDEnableItem, Uint32 uEnable),
-    int Function(int hMenu, int uIDEnableItem, int uEnable)>('EnableMenuItem');
+  Int32 Function(IntPtr hMenu, Uint32 uIDEnableItem, Uint32 uEnable),
+  int Function(int hMenu, int uIDEnableItem, int uEnable)
+>('EnableMenuItem');
 
 /// Enables the mouse to act as a pointer input device and send WM_POINTER
 /// messages.
@@ -1832,9 +2261,10 @@ final _EnableMenuItem = _user32.lookupFunction<
 /// {@category user32}
 int EnableMouseInPointer(int fEnable) => _EnableMouseInPointer(fEnable);
 
-final _EnableMouseInPointer = _user32.lookupFunction<
-    Int32 Function(Int32 fEnable),
-    int Function(int fEnable)>('EnableMouseInPointer');
+final _EnableMouseInPointer = _user32
+    .lookupFunction<Int32 Function(Int32 fEnable), int Function(int fEnable)>(
+      'EnableMouseInPointer',
+    );
 
 /// In high-DPI displays, enables automatic display scaling of the
 /// non-client area portions of the specified top-level window. Must be
@@ -1848,9 +2278,10 @@ final _EnableMouseInPointer = _user32.lookupFunction<
 /// {@category user32}
 int EnableNonClientDpiScaling(int hwnd) => _EnableNonClientDpiScaling(hwnd);
 
-final _EnableNonClientDpiScaling =
-    _user32.lookupFunction<Int32 Function(IntPtr hwnd), int Function(int hwnd)>(
-        'EnableNonClientDpiScaling');
+final _EnableNonClientDpiScaling = _user32
+    .lookupFunction<Int32 Function(IntPtr hwnd), int Function(int hwnd)>(
+      'EnableNonClientDpiScaling',
+    );
 
 /// The EnableScrollBar function enables or disables one or both scroll bar
 /// arrows.
@@ -1867,8 +2298,9 @@ int EnableScrollBar(int hWnd, int wSBflags, int wArrows) =>
     _EnableScrollBar(hWnd, wSBflags, wArrows);
 
 final _EnableScrollBar = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Uint32 wSBflags, Uint32 wArrows),
-    int Function(int hWnd, int wSBflags, int wArrows)>('EnableScrollBar');
+  Int32 Function(IntPtr hWnd, Uint32 wSBflags, Uint32 wArrows),
+  int Function(int hWnd, int wSBflags, int wArrows)
+>('EnableScrollBar');
 
 /// Enables or disables mouse and keyboard input to the specified window or
 /// control. When input is disabled, the window does not receive input such
@@ -1885,8 +2317,9 @@ final _EnableScrollBar = _user32.lookupFunction<
 int EnableWindow(int hWnd, int bEnable) => _EnableWindow(hWnd, bEnable);
 
 final _EnableWindow = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Int32 bEnable),
-    int Function(int hWnd, int bEnable)>('EnableWindow');
+  Int32 Function(IntPtr hWnd, Int32 bEnable),
+  int Function(int hWnd, int bEnable)
+>('EnableWindow');
 
 /// Simultaneously updates the position and size of one or more windows in a
 /// single screen-refreshing cycle.
@@ -1900,8 +2333,9 @@ final _EnableWindow = _user32.lookupFunction<
 int EndDeferWindowPos(int hWinPosInfo) => _EndDeferWindowPos(hWinPosInfo);
 
 final _EndDeferWindowPos = _user32.lookupFunction<
-    Int32 Function(IntPtr hWinPosInfo),
-    int Function(int hWinPosInfo)>('EndDeferWindowPos');
+  Int32 Function(IntPtr hWinPosInfo),
+  int Function(int hWinPosInfo)
+>('EndDeferWindowPos');
 
 /// Destroys a modal dialog box, causing the system to end any processing
 /// for the dialog box.
@@ -1916,8 +2350,9 @@ final _EndDeferWindowPos = _user32.lookupFunction<
 int EndDialog(int hDlg, int nResult) => _EndDialog(hDlg, nResult);
 
 final _EndDialog = _user32.lookupFunction<
-    Int32 Function(IntPtr hDlg, IntPtr nResult),
-    int Function(int hDlg, int nResult)>('EndDialog');
+  Int32 Function(IntPtr hDlg, IntPtr nResult),
+  int Function(int hDlg, int nResult)
+>('EndDialog');
 
 /// Ends the calling thread's active menu.
 ///
@@ -1927,8 +2362,9 @@ final _EndDialog = _user32.lookupFunction<
 /// {@category user32}
 int EndMenu() => _EndMenu();
 
-final _EndMenu =
-    _user32.lookupFunction<Int32 Function(), int Function()>('EndMenu');
+final _EndMenu = _user32.lookupFunction<Int32 Function(), int Function()>(
+  'EndMenu',
+);
 
 /// The EndPaint function marks the end of painting in the specified window.
 /// This function is required for each call to the BeginPaint function, but
@@ -1945,8 +2381,9 @@ int EndPaint(int hWnd, Pointer<PAINTSTRUCT> lpPaint) =>
     _EndPaint(hWnd, lpPaint);
 
 final _EndPaint = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Pointer<PAINTSTRUCT> lpPaint),
-    int Function(int hWnd, Pointer<PAINTSTRUCT> lpPaint)>('EndPaint');
+  Int32 Function(IntPtr hWnd, Pointer<PAINTSTRUCT> lpPaint),
+  int Function(int hWnd, Pointer<PAINTSTRUCT> lpPaint)
+>('EndPaint');
 
 /// Enumerates the child windows that belong to the specified parent window
 /// by passing the handle to each child window, in turn, to an
@@ -1962,17 +2399,24 @@ final _EndPaint = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int EnumChildWindows(int hWndParent,
-        Pointer<NativeFunction<WNDENUMPROC>> lpEnumFunc, int lParam) =>
-    _EnumChildWindows(hWndParent, lpEnumFunc, lParam);
+int EnumChildWindows(
+  int hWndParent,
+  Pointer<NativeFunction<WNDENUMPROC>> lpEnumFunc,
+  int lParam,
+) => _EnumChildWindows(hWndParent, lpEnumFunc, lParam);
 
 final _EnumChildWindows = _user32.lookupFunction<
-    Int32 Function(IntPtr hWndParent,
-        Pointer<NativeFunction<WNDENUMPROC>> lpEnumFunc, IntPtr lParam),
-    int Function(
-        int hWndParent,
-        Pointer<NativeFunction<WNDENUMPROC>> lpEnumFunc,
-        int lParam)>('EnumChildWindows');
+  Int32 Function(
+    IntPtr hWndParent,
+    Pointer<NativeFunction<WNDENUMPROC>> lpEnumFunc,
+    IntPtr lParam,
+  ),
+  int Function(
+    int hWndParent,
+    Pointer<NativeFunction<WNDENUMPROC>> lpEnumFunc,
+    int lParam,
+  )
+>('EnumChildWindows');
 
 /// Enumerates the data formats currently available on the clipboard.
 ///
@@ -1984,9 +2428,10 @@ final _EnumChildWindows = _user32.lookupFunction<
 /// {@category user32}
 int EnumClipboardFormats(int format) => _EnumClipboardFormats(format);
 
-final _EnumClipboardFormats = _user32.lookupFunction<
-    Uint32 Function(Uint32 format),
-    int Function(int format)>('EnumClipboardFormats');
+final _EnumClipboardFormats = _user32
+    .lookupFunction<Uint32 Function(Uint32 format), int Function(int format)>(
+      'EnumClipboardFormats',
+    );
 
 /// Enumerates all top-level windows associated with the specified desktop.
 /// It passes the handle to each window, in turn, to an application-defined
@@ -2001,14 +2446,23 @@ final _EnumClipboardFormats = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int EnumDesktopWindows(
-        int hDesktop, Pointer<NativeFunction<WNDENUMPROC>> lpfn, int lParam) =>
-    _EnumDesktopWindows(hDesktop, lpfn, lParam);
+  int hDesktop,
+  Pointer<NativeFunction<WNDENUMPROC>> lpfn,
+  int lParam,
+) => _EnumDesktopWindows(hDesktop, lpfn, lParam);
 
 final _EnumDesktopWindows = _user32.lookupFunction<
-    Int32 Function(IntPtr hDesktop, Pointer<NativeFunction<WNDENUMPROC>> lpfn,
-        IntPtr lParam),
-    int Function(int hDesktop, Pointer<NativeFunction<WNDENUMPROC>> lpfn,
-        int lParam)>('EnumDesktopWindows');
+  Int32 Function(
+    IntPtr hDesktop,
+    Pointer<NativeFunction<WNDENUMPROC>> lpfn,
+    IntPtr lParam,
+  ),
+  int Function(
+    int hDesktop,
+    Pointer<NativeFunction<WNDENUMPROC>> lpfn,
+    int lParam,
+  )
+>('EnumDesktopWindows');
 
 /// The EnumDisplayDevices function lets you obtain information about the
 /// display devices in the current session.
@@ -2022,18 +2476,27 @@ final _EnumDesktopWindows = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int EnumDisplayDevices(Pointer<Utf16> lpDevice, int iDevNum,
-        Pointer<DISPLAY_DEVICE> lpDisplayDevice, int dwFlags) =>
-    _EnumDisplayDevices(lpDevice, iDevNum, lpDisplayDevice, dwFlags);
+int EnumDisplayDevices(
+  Pointer<Utf16> lpDevice,
+  int iDevNum,
+  Pointer<DISPLAY_DEVICE> lpDisplayDevice,
+  int dwFlags,
+) => _EnumDisplayDevices(lpDevice, iDevNum, lpDisplayDevice, dwFlags);
 
 final _EnumDisplayDevices = _user32.lookupFunction<
-    Int32 Function(Pointer<Utf16> lpDevice, Uint32 iDevNum,
-        Pointer<DISPLAY_DEVICE> lpDisplayDevice, Uint32 dwFlags),
-    int Function(
-        Pointer<Utf16> lpDevice,
-        int iDevNum,
-        Pointer<DISPLAY_DEVICE> lpDisplayDevice,
-        int dwFlags)>('EnumDisplayDevicesW');
+  Int32 Function(
+    Pointer<Utf16> lpDevice,
+    Uint32 iDevNum,
+    Pointer<DISPLAY_DEVICE> lpDisplayDevice,
+    Uint32 dwFlags,
+  ),
+  int Function(
+    Pointer<Utf16> lpDevice,
+    int iDevNum,
+    Pointer<DISPLAY_DEVICE> lpDisplayDevice,
+    int dwFlags,
+  )
+>('EnumDisplayDevicesW');
 
 /// The EnumDisplayMonitors function enumerates display monitors (including
 /// invisible pseudo-monitors associated with the mirroring drivers) that
@@ -2052,18 +2515,27 @@ final _EnumDisplayDevices = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int EnumDisplayMonitors(int hdc, Pointer<RECT> lprcClip,
-        Pointer<NativeFunction<MONITORENUMPROC>> lpfnEnum, int dwData) =>
-    _EnumDisplayMonitors(hdc, lprcClip, lpfnEnum, dwData);
+int EnumDisplayMonitors(
+  int hdc,
+  Pointer<RECT> lprcClip,
+  Pointer<NativeFunction<MONITORENUMPROC>> lpfnEnum,
+  int dwData,
+) => _EnumDisplayMonitors(hdc, lprcClip, lpfnEnum, dwData);
 
 final _EnumDisplayMonitors = _user32.lookupFunction<
-    Int32 Function(IntPtr hdc, Pointer<RECT> lprcClip,
-        Pointer<NativeFunction<MONITORENUMPROC>> lpfnEnum, IntPtr dwData),
-    int Function(
-        int hdc,
-        Pointer<RECT> lprcClip,
-        Pointer<NativeFunction<MONITORENUMPROC>> lpfnEnum,
-        int dwData)>('EnumDisplayMonitors');
+  Int32 Function(
+    IntPtr hdc,
+    Pointer<RECT> lprcClip,
+    Pointer<NativeFunction<MONITORENUMPROC>> lpfnEnum,
+    IntPtr dwData,
+  ),
+  int Function(
+    int hdc,
+    Pointer<RECT> lprcClip,
+    Pointer<NativeFunction<MONITORENUMPROC>> lpfnEnum,
+    int dwData,
+  )
+>('EnumDisplayMonitors');
 
 /// The EnumDisplaySettings function retrieves information about one of the
 /// graphics modes for a display device. To retrieve information for all the
@@ -2078,15 +2550,24 @@ final _EnumDisplayMonitors = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int EnumDisplaySettings(Pointer<Utf16> lpszDeviceName, int iModeNum,
-        Pointer<DEVMODE> lpDevMode) =>
-    _EnumDisplaySettings(lpszDeviceName, iModeNum, lpDevMode);
+int EnumDisplaySettings(
+  Pointer<Utf16> lpszDeviceName,
+  int iModeNum,
+  Pointer<DEVMODE> lpDevMode,
+) => _EnumDisplaySettings(lpszDeviceName, iModeNum, lpDevMode);
 
 final _EnumDisplaySettings = _user32.lookupFunction<
-    Int32 Function(Pointer<Utf16> lpszDeviceName, Uint32 iModeNum,
-        Pointer<DEVMODE> lpDevMode),
-    int Function(Pointer<Utf16> lpszDeviceName, int iModeNum,
-        Pointer<DEVMODE> lpDevMode)>('EnumDisplaySettingsW');
+  Int32 Function(
+    Pointer<Utf16> lpszDeviceName,
+    Uint32 iModeNum,
+    Pointer<DEVMODE> lpDevMode,
+  ),
+  int Function(
+    Pointer<Utf16> lpszDeviceName,
+    int iModeNum,
+    Pointer<DEVMODE> lpDevMode,
+  )
+>('EnumDisplaySettingsW');
 
 /// The EnumDisplaySettingsEx function retrieves information about one of
 /// the graphics modes for a display device. To retrieve information for all
@@ -2102,15 +2583,27 @@ final _EnumDisplaySettings = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int EnumDisplaySettingsEx(Pointer<Utf16> lpszDeviceName, int iModeNum,
-        Pointer<DEVMODE> lpDevMode, int dwFlags) =>
-    _EnumDisplaySettingsEx(lpszDeviceName, iModeNum, lpDevMode, dwFlags);
+int EnumDisplaySettingsEx(
+  Pointer<Utf16> lpszDeviceName,
+  int iModeNum,
+  Pointer<DEVMODE> lpDevMode,
+  int dwFlags,
+) => _EnumDisplaySettingsEx(lpszDeviceName, iModeNum, lpDevMode, dwFlags);
 
 final _EnumDisplaySettingsEx = _user32.lookupFunction<
-    Int32 Function(Pointer<Utf16> lpszDeviceName, Uint32 iModeNum,
-        Pointer<DEVMODE> lpDevMode, Uint32 dwFlags),
-    int Function(Pointer<Utf16> lpszDeviceName, int iModeNum,
-        Pointer<DEVMODE> lpDevMode, int dwFlags)>('EnumDisplaySettingsExW');
+  Int32 Function(
+    Pointer<Utf16> lpszDeviceName,
+    Uint32 iModeNum,
+    Pointer<DEVMODE> lpDevMode,
+    Uint32 dwFlags,
+  ),
+  int Function(
+    Pointer<Utf16> lpszDeviceName,
+    int iModeNum,
+    Pointer<DEVMODE> lpDevMode,
+    int dwFlags,
+  )
+>('EnumDisplaySettingsExW');
 
 /// Enumerates all nonchild windows associated with a thread by passing the
 /// handle to each window, in turn, to an application-defined callback
@@ -2125,15 +2618,24 @@ final _EnumDisplaySettingsEx = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int EnumThreadWindows(int dwThreadId, Pointer<NativeFunction<WNDENUMPROC>> lpfn,
-        int lParam) =>
-    _EnumThreadWindows(dwThreadId, lpfn, lParam);
+int EnumThreadWindows(
+  int dwThreadId,
+  Pointer<NativeFunction<WNDENUMPROC>> lpfn,
+  int lParam,
+) => _EnumThreadWindows(dwThreadId, lpfn, lParam);
 
 final _EnumThreadWindows = _user32.lookupFunction<
-    Int32 Function(Uint32 dwThreadId, Pointer<NativeFunction<WNDENUMPROC>> lpfn,
-        IntPtr lParam),
-    int Function(int dwThreadId, Pointer<NativeFunction<WNDENUMPROC>> lpfn,
-        int lParam)>('EnumThreadWindows');
+  Int32 Function(
+    Uint32 dwThreadId,
+    Pointer<NativeFunction<WNDENUMPROC>> lpfn,
+    IntPtr lParam,
+  ),
+  int Function(
+    int dwThreadId,
+    Pointer<NativeFunction<WNDENUMPROC>> lpfn,
+    int lParam,
+  )
+>('EnumThreadWindows');
 
 /// Enumerates all top-level windows on the screen by passing the handle to
 /// each window, in turn, to an application-defined callback function.
@@ -2151,10 +2653,12 @@ int EnumWindows(Pointer<NativeFunction<WNDENUMPROC>> lpEnumFunc, int lParam) =>
     _EnumWindows(lpEnumFunc, lParam);
 
 final _EnumWindows = _user32.lookupFunction<
-    Int32 Function(
-        Pointer<NativeFunction<WNDENUMPROC>> lpEnumFunc, IntPtr lParam),
-    int Function(Pointer<NativeFunction<WNDENUMPROC>> lpEnumFunc,
-        int lParam)>('EnumWindows');
+  Int32 Function(
+    Pointer<NativeFunction<WNDENUMPROC>> lpEnumFunc,
+    IntPtr lParam,
+  ),
+  int Function(Pointer<NativeFunction<WNDENUMPROC>> lpEnumFunc, int lParam)
+>('EnumWindows');
 
 /// The EqualRect function determines whether the two specified rectangles
 /// are equal by comparing the coordinates of their upper-left and
@@ -2171,8 +2675,9 @@ int EqualRect(Pointer<RECT> lprc1, Pointer<RECT> lprc2) =>
     _EqualRect(lprc1, lprc2);
 
 final _EqualRect = _user32.lookupFunction<
-    Int32 Function(Pointer<RECT> lprc1, Pointer<RECT> lprc2),
-    int Function(Pointer<RECT> lprc1, Pointer<RECT> lprc2)>('EqualRect');
+  Int32 Function(Pointer<RECT> lprc1, Pointer<RECT> lprc2),
+  int Function(Pointer<RECT> lprc1, Pointer<RECT> lprc2)
+>('EqualRect');
 
 /// The ExcludeUpdateRgn function prevents drawing within invalid areas of a
 /// window by excluding an updated region in the window from a clipping
@@ -2188,8 +2693,9 @@ final _EqualRect = _user32.lookupFunction<
 int ExcludeUpdateRgn(int hDC, int hWnd) => _ExcludeUpdateRgn(hDC, hWnd);
 
 final _ExcludeUpdateRgn = _user32.lookupFunction<
-    Int32 Function(IntPtr hDC, IntPtr hWnd),
-    int Function(int hDC, int hWnd)>('ExcludeUpdateRgn');
+  Int32 Function(IntPtr hDC, IntPtr hWnd),
+  int Function(int hDC, int hWnd)
+>('ExcludeUpdateRgn');
 
 /// The FillRect function fills a rectangle by using the specified brush.
 /// This function includes the left and top borders, but excludes the right
@@ -2206,8 +2712,9 @@ final _ExcludeUpdateRgn = _user32.lookupFunction<
 int FillRect(int hDC, Pointer<RECT> lprc, int hbr) => _FillRect(hDC, lprc, hbr);
 
 final _FillRect = _user32.lookupFunction<
-    Int32 Function(IntPtr hDC, Pointer<RECT> lprc, IntPtr hbr),
-    int Function(int hDC, Pointer<RECT> lprc, int hbr)>('FillRect');
+  Int32 Function(IntPtr hDC, Pointer<RECT> lprc, IntPtr hbr),
+  int Function(int hDC, Pointer<RECT> lprc, int hbr)
+>('FillRect');
 
 /// Retrieves a handle to the top-level window whose class name and window
 /// name match the specified strings. This function does not search child
@@ -2224,9 +2731,9 @@ int FindWindow(Pointer<Utf16> lpClassName, Pointer<Utf16> lpWindowName) =>
     _FindWindow(lpClassName, lpWindowName);
 
 final _FindWindow = _user32.lookupFunction<
-    IntPtr Function(Pointer<Utf16> lpClassName, Pointer<Utf16> lpWindowName),
-    int Function(Pointer<Utf16> lpClassName,
-        Pointer<Utf16> lpWindowName)>('FindWindowW');
+  IntPtr Function(Pointer<Utf16> lpClassName, Pointer<Utf16> lpWindowName),
+  int Function(Pointer<Utf16> lpClassName, Pointer<Utf16> lpWindowName)
+>('FindWindowW');
 
 /// Retrieves a handle to a window whose class name and window name match
 /// the specified strings. The function searches child windows, beginning
@@ -2242,15 +2749,27 @@ final _FindWindow = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int FindWindowEx(int hWndParent, int hWndChildAfter, Pointer<Utf16> lpszClass,
-        Pointer<Utf16> lpszWindow) =>
-    _FindWindowEx(hWndParent, hWndChildAfter, lpszClass, lpszWindow);
+int FindWindowEx(
+  int hWndParent,
+  int hWndChildAfter,
+  Pointer<Utf16> lpszClass,
+  Pointer<Utf16> lpszWindow,
+) => _FindWindowEx(hWndParent, hWndChildAfter, lpszClass, lpszWindow);
 
 final _FindWindowEx = _user32.lookupFunction<
-    IntPtr Function(IntPtr hWndParent, IntPtr hWndChildAfter,
-        Pointer<Utf16> lpszClass, Pointer<Utf16> lpszWindow),
-    int Function(int hWndParent, int hWndChildAfter, Pointer<Utf16> lpszClass,
-        Pointer<Utf16> lpszWindow)>('FindWindowExW');
+  IntPtr Function(
+    IntPtr hWndParent,
+    IntPtr hWndChildAfter,
+    Pointer<Utf16> lpszClass,
+    Pointer<Utf16> lpszWindow,
+  ),
+  int Function(
+    int hWndParent,
+    int hWndChildAfter,
+    Pointer<Utf16> lpszClass,
+    Pointer<Utf16> lpszWindow,
+  )
+>('FindWindowExW');
 
 /// The FrameRect function draws a border around the specified rectangle by
 /// using the specified brush. The width and height of the border are always
@@ -2268,8 +2787,9 @@ int FrameRect(int hDC, Pointer<RECT> lprc, int hbr) =>
     _FrameRect(hDC, lprc, hbr);
 
 final _FrameRect = _user32.lookupFunction<
-    Int32 Function(IntPtr hDC, Pointer<RECT> lprc, IntPtr hbr),
-    int Function(int hDC, Pointer<RECT> lprc, int hbr)>('FrameRect');
+  Int32 Function(IntPtr hDC, Pointer<RECT> lprc, IntPtr hbr),
+  int Function(int hDC, Pointer<RECT> lprc, int hbr)
+>('FrameRect');
 
 /// Retrieves the window handle to the active window attached to the calling
 /// thread's message queue.
@@ -2296,15 +2816,30 @@ final _GetActiveWindow = _user32
 /// );
 /// ```
 /// {@category user32}
-int GetAltTabInfo(int hwnd, int iItem, Pointer<ALTTABINFO> pati,
-        Pointer<Utf16> pszItemText, int cchItemText) =>
-    _GetAltTabInfo(hwnd, iItem, pati, pszItemText, cchItemText);
+int GetAltTabInfo(
+  int hwnd,
+  int iItem,
+  Pointer<ALTTABINFO> pati,
+  Pointer<Utf16> pszItemText,
+  int cchItemText,
+) => _GetAltTabInfo(hwnd, iItem, pati, pszItemText, cchItemText);
 
 final _GetAltTabInfo = _user32.lookupFunction<
-    Int32 Function(IntPtr hwnd, Int32 iItem, Pointer<ALTTABINFO> pati,
-        Pointer<Utf16> pszItemText, Uint32 cchItemText),
-    int Function(int hwnd, int iItem, Pointer<ALTTABINFO> pati,
-        Pointer<Utf16> pszItemText, int cchItemText)>('GetAltTabInfoW');
+  Int32 Function(
+    IntPtr hwnd,
+    Int32 iItem,
+    Pointer<ALTTABINFO> pati,
+    Pointer<Utf16> pszItemText,
+    Uint32 cchItemText,
+  ),
+  int Function(
+    int hwnd,
+    int iItem,
+    Pointer<ALTTABINFO> pati,
+    Pointer<Utf16> pszItemText,
+    int cchItemText,
+  )
+>('GetAltTabInfoW');
 
 /// Retrieves the handle to the ancestor of the specified window.
 ///
@@ -2318,8 +2853,9 @@ final _GetAltTabInfo = _user32.lookupFunction<
 int GetAncestor(int hwnd, int gaFlags) => _GetAncestor(hwnd, gaFlags);
 
 final _GetAncestor = _user32.lookupFunction<
-    IntPtr Function(IntPtr hwnd, Uint32 gaFlags),
-    int Function(int hwnd, int gaFlags)>('GetAncestor');
+  IntPtr Function(IntPtr hwnd, Uint32 gaFlags),
+  int Function(int hwnd, int gaFlags)
+>('GetAncestor');
 
 /// Determines whether a key is up or down at the time the function is
 /// called, and whether the key was pressed after a previous call to
@@ -2333,9 +2869,10 @@ final _GetAncestor = _user32.lookupFunction<
 /// {@category user32}
 int GetAsyncKeyState(int vKey) => _GetAsyncKeyState(vKey);
 
-final _GetAsyncKeyState =
-    _user32.lookupFunction<Int16 Function(Int32 vKey), int Function(int vKey)>(
-        'GetAsyncKeyState');
+final _GetAsyncKeyState = _user32
+    .lookupFunction<Int16 Function(Int32 vKey), int Function(int vKey)>(
+      'GetAsyncKeyState',
+    );
 
 /// Retrieves the DPI_AWARENESS value from a DPI_AWARENESS_CONTEXT.
 ///
@@ -2348,9 +2885,10 @@ final _GetAsyncKeyState =
 int GetAwarenessFromDpiAwarenessContext(int value) =>
     _GetAwarenessFromDpiAwarenessContext(value);
 
-final _GetAwarenessFromDpiAwarenessContext = _user32.lookupFunction<
-    Int32 Function(IntPtr value),
-    int Function(int value)>('GetAwarenessFromDpiAwarenessContext');
+final _GetAwarenessFromDpiAwarenessContext = _user32
+    .lookupFunction<Int32 Function(IntPtr value), int Function(int value)>(
+      'GetAwarenessFromDpiAwarenessContext',
+    );
 
 /// Retrieves a handle to the window (if any) that has captured the mouse.
 /// Only one window at a time can capture the mouse; this window receives
@@ -2362,8 +2900,9 @@ final _GetAwarenessFromDpiAwarenessContext = _user32.lookupFunction<
 /// {@category user32}
 int GetCapture() => _GetCapture();
 
-final _GetCapture =
-    _user32.lookupFunction<IntPtr Function(), int Function()>('GetCapture');
+final _GetCapture = _user32.lookupFunction<IntPtr Function(), int Function()>(
+  'GetCapture',
+);
 
 /// Retrieves the time required to invert the caret's pixels. The user can
 /// set this value.
@@ -2388,8 +2927,9 @@ final _GetCaretBlinkTime = _user32
 int GetCaretPos(Pointer<POINT> lpPoint) => _GetCaretPos(lpPoint);
 
 final _GetCaretPos = _user32.lookupFunction<
-    Int32 Function(Pointer<POINT> lpPoint),
-    int Function(Pointer<POINT> lpPoint)>('GetCaretPos');
+  Int32 Function(Pointer<POINT> lpPoint),
+  int Function(Pointer<POINT> lpPoint)
+>('GetCaretPos');
 
 /// Retrieves information about a window class.
 ///
@@ -2401,15 +2941,24 @@ final _GetCaretPos = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int GetClassInfo(int hInstance, Pointer<Utf16> lpClassName,
-        Pointer<WNDCLASS> lpWndClass) =>
-    _GetClassInfo(hInstance, lpClassName, lpWndClass);
+int GetClassInfo(
+  int hInstance,
+  Pointer<Utf16> lpClassName,
+  Pointer<WNDCLASS> lpWndClass,
+) => _GetClassInfo(hInstance, lpClassName, lpWndClass);
 
 final _GetClassInfo = _user32.lookupFunction<
-    Int32 Function(IntPtr hInstance, Pointer<Utf16> lpClassName,
-        Pointer<WNDCLASS> lpWndClass),
-    int Function(int hInstance, Pointer<Utf16> lpClassName,
-        Pointer<WNDCLASS> lpWndClass)>('GetClassInfoW');
+  Int32 Function(
+    IntPtr hInstance,
+    Pointer<Utf16> lpClassName,
+    Pointer<WNDCLASS> lpWndClass,
+  ),
+  int Function(
+    int hInstance,
+    Pointer<Utf16> lpClassName,
+    Pointer<WNDCLASS> lpWndClass,
+  )
+>('GetClassInfoW');
 
 /// Retrieves information about a window class, including a handle to the
 /// small icon associated with the window class. The GetClassInfo function
@@ -2424,14 +2973,23 @@ final _GetClassInfo = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int GetClassInfoEx(
-        int hInstance, Pointer<Utf16> lpszClass, Pointer<WNDCLASSEX> lpwcx) =>
-    _GetClassInfoEx(hInstance, lpszClass, lpwcx);
+  int hInstance,
+  Pointer<Utf16> lpszClass,
+  Pointer<WNDCLASSEX> lpwcx,
+) => _GetClassInfoEx(hInstance, lpszClass, lpwcx);
 
 final _GetClassInfoEx = _user32.lookupFunction<
-    Int32 Function(
-        IntPtr hInstance, Pointer<Utf16> lpszClass, Pointer<WNDCLASSEX> lpwcx),
-    int Function(int hInstance, Pointer<Utf16> lpszClass,
-        Pointer<WNDCLASSEX> lpwcx)>('GetClassInfoExW');
+  Int32 Function(
+    IntPtr hInstance,
+    Pointer<Utf16> lpszClass,
+    Pointer<WNDCLASSEX> lpwcx,
+  ),
+  int Function(
+    int hInstance,
+    Pointer<Utf16> lpszClass,
+    Pointer<WNDCLASSEX> lpwcx,
+  )
+>('GetClassInfoExW');
 
 /// Retrieves the specified value from the WNDCLASSEX structure associated
 /// with the specified window.
@@ -2446,8 +3004,9 @@ final _GetClassInfoEx = _user32.lookupFunction<
 int GetClassLongPtr(int hWnd, int nIndex) => _GetClassLongPtr(hWnd, nIndex);
 
 final _GetClassLongPtr = _user32.lookupFunction<
-    IntPtr Function(IntPtr hWnd, Int32 nIndex),
-    int Function(int hWnd, int nIndex)>('GetClassLongPtrW');
+  IntPtr Function(IntPtr hWnd, Int32 nIndex),
+  int Function(int hWnd, int nIndex)
+>('GetClassLongPtrW');
 
 /// Retrieves the name of the class to which the specified window belongs.
 ///
@@ -2463,9 +3022,9 @@ int GetClassName(int hWnd, Pointer<Utf16> lpClassName, int nMaxCount) =>
     _GetClassName(hWnd, lpClassName, nMaxCount);
 
 final _GetClassName = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Pointer<Utf16> lpClassName, Int32 nMaxCount),
-    int Function(
-        int hWnd, Pointer<Utf16> lpClassName, int nMaxCount)>('GetClassNameW');
+  Int32 Function(IntPtr hWnd, Pointer<Utf16> lpClassName, Int32 nMaxCount),
+  int Function(int hWnd, Pointer<Utf16> lpClassName, int nMaxCount)
+>('GetClassNameW');
 
 /// Retrieves the coordinates of a window's client area. The client
 /// coordinates specify the upper-left and lower-right corners of the client
@@ -2484,8 +3043,9 @@ int GetClientRect(int hWnd, Pointer<RECT> lpRect) =>
     _GetClientRect(hWnd, lpRect);
 
 final _GetClientRect = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Pointer<RECT> lpRect),
-    int Function(int hWnd, Pointer<RECT> lpRect)>('GetClientRect');
+  Int32 Function(IntPtr hWnd, Pointer<RECT> lpRect),
+  int Function(int hWnd, Pointer<RECT> lpRect)
+>('GetClientRect');
 
 /// Retrieves data from the clipboard in a specified format. The clipboard
 /// must have been opened previously.
@@ -2498,9 +3058,10 @@ final _GetClientRect = _user32.lookupFunction<
 /// {@category user32}
 int GetClipboardData(int uFormat) => _GetClipboardData(uFormat);
 
-final _GetClipboardData = _user32.lookupFunction<
-    IntPtr Function(Uint32 uFormat),
-    int Function(int uFormat)>('GetClipboardData');
+final _GetClipboardData = _user32
+    .lookupFunction<IntPtr Function(Uint32 uFormat), int Function(int uFormat)>(
+      'GetClipboardData',
+    );
 
 /// Retrieves from the clipboard the name of the specified registered
 /// format. The function copies the name to the specified buffer.
@@ -2514,14 +3075,19 @@ final _GetClipboardData = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int GetClipboardFormatName(
-        int format, Pointer<Utf16> lpszFormatName, int cchMaxCount) =>
-    _GetClipboardFormatName(format, lpszFormatName, cchMaxCount);
+  int format,
+  Pointer<Utf16> lpszFormatName,
+  int cchMaxCount,
+) => _GetClipboardFormatName(format, lpszFormatName, cchMaxCount);
 
 final _GetClipboardFormatName = _user32.lookupFunction<
-    Int32 Function(
-        Uint32 format, Pointer<Utf16> lpszFormatName, Int32 cchMaxCount),
-    int Function(int format, Pointer<Utf16> lpszFormatName,
-        int cchMaxCount)>('GetClipboardFormatNameW');
+  Int32 Function(
+    Uint32 format,
+    Pointer<Utf16> lpszFormatName,
+    Int32 cchMaxCount,
+  ),
+  int Function(int format, Pointer<Utf16> lpszFormatName, int cchMaxCount)
+>('GetClipboardFormatNameW');
 
 /// Retrieves the window handle of the current owner of the clipboard.
 ///
@@ -2542,9 +3108,10 @@ final _GetClipboardOwner = _user32
 /// {@category user32}
 int GetClipboardSequenceNumber() => _GetClipboardSequenceNumber();
 
-final _GetClipboardSequenceNumber =
-    _user32.lookupFunction<Uint32 Function(), int Function()>(
-        'GetClipboardSequenceNumber');
+final _GetClipboardSequenceNumber = _user32
+    .lookupFunction<Uint32 Function(), int Function()>(
+      'GetClipboardSequenceNumber',
+    );
 
 /// Retrieves the handle to the first window in the clipboard viewer chain.
 ///
@@ -2569,8 +3136,9 @@ final _GetClipboardViewer = _user32
 int GetClipCursor(Pointer<RECT> lpRect) => _GetClipCursor(lpRect);
 
 final _GetClipCursor = _user32.lookupFunction<
-    Int32 Function(Pointer<RECT> lpRect),
-    int Function(Pointer<RECT> lpRect)>('GetClipCursor');
+  Int32 Function(Pointer<RECT> lpRect),
+  int Function(Pointer<RECT> lpRect)
+>('GetClipCursor');
 
 /// Retrieves a handle to the current cursor.
 ///
@@ -2580,8 +3148,9 @@ final _GetClipCursor = _user32.lookupFunction<
 /// {@category user32}
 int GetCursor() => _GetCursor();
 
-final _GetCursor =
-    _user32.lookupFunction<IntPtr Function(), int Function()>('GetCursor');
+final _GetCursor = _user32.lookupFunction<IntPtr Function(), int Function()>(
+  'GetCursor',
+);
 
 /// Retrieves information about the global cursor.
 ///
@@ -2594,8 +3163,9 @@ final _GetCursor =
 int GetCursorInfo(Pointer<CURSORINFO> pci) => _GetCursorInfo(pci);
 
 final _GetCursorInfo = _user32.lookupFunction<
-    Int32 Function(Pointer<CURSORINFO> pci),
-    int Function(Pointer<CURSORINFO> pci)>('GetCursorInfo');
+  Int32 Function(Pointer<CURSORINFO> pci),
+  int Function(Pointer<CURSORINFO> pci)
+>('GetCursorInfo');
 
 /// Retrieves the position of the mouse cursor, in screen coordinates.
 ///
@@ -2608,8 +3178,9 @@ final _GetCursorInfo = _user32.lookupFunction<
 int GetCursorPos(Pointer<POINT> lpPoint) => _GetCursorPos(lpPoint);
 
 final _GetCursorPos = _user32.lookupFunction<
-    Int32 Function(Pointer<POINT> lpPoint),
-    int Function(Pointer<POINT> lpPoint)>('GetCursorPos');
+  Int32 Function(Pointer<POINT> lpPoint),
+  int Function(Pointer<POINT> lpPoint)
+>('GetCursorPos');
 
 /// The GetDC function retrieves a handle to a device context (DC) for the
 /// client area of a specified window or for the entire screen. You can use
@@ -2625,8 +3196,10 @@ final _GetCursorPos = _user32.lookupFunction<
 /// {@category user32}
 int GetDC(int hWnd) => _GetDC(hWnd);
 
-final _GetDC = _user32.lookupFunction<IntPtr Function(IntPtr hWnd),
-    int Function(int hWnd)>('GetDC');
+final _GetDC = _user32
+    .lookupFunction<IntPtr Function(IntPtr hWnd), int Function(int hWnd)>(
+      'GetDC',
+    );
 
 /// The GetDCEx function retrieves a handle to a device context (DC) for the
 /// client area of a specified window or for the entire screen. You can use
@@ -2646,8 +3219,9 @@ int GetDCEx(int hWnd, int hrgnClip, int flags) =>
     _GetDCEx(hWnd, hrgnClip, flags);
 
 final _GetDCEx = _user32.lookupFunction<
-    IntPtr Function(IntPtr hWnd, IntPtr hrgnClip, Uint32 flags),
-    int Function(int hWnd, int hrgnClip, int flags)>('GetDCEx');
+  IntPtr Function(IntPtr hWnd, IntPtr hrgnClip, Uint32 flags),
+  int Function(int hWnd, int hrgnClip, int flags)
+>('GetDCEx');
 
 /// Retrieves a handle to the desktop window. The desktop window covers the
 /// entire screen. The desktop window is the area on top of which other
@@ -2690,9 +3264,10 @@ final _GetDialogBaseUnits = _user32
 int GetDialogControlDpiChangeBehavior(int hWnd) =>
     _GetDialogControlDpiChangeBehavior(hWnd);
 
-final _GetDialogControlDpiChangeBehavior =
-    _user32.lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
-        'GetDialogControlDpiChangeBehavior');
+final _GetDialogControlDpiChangeBehavior = _user32
+    .lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
+      'GetDialogControlDpiChangeBehavior',
+    );
 
 /// Returns the flags that might have been set on a given dialog by an
 /// earlier call to SetDialogDpiChangeBehavior. If that function was never
@@ -2706,9 +3281,10 @@ final _GetDialogControlDpiChangeBehavior =
 /// {@category user32}
 int GetDialogDpiChangeBehavior(int hDlg) => _GetDialogDpiChangeBehavior(hDlg);
 
-final _GetDialogDpiChangeBehavior =
-    _user32.lookupFunction<Int32 Function(IntPtr hDlg), int Function(int hDlg)>(
-        'GetDialogDpiChangeBehavior');
+final _GetDialogDpiChangeBehavior = _user32
+    .lookupFunction<Int32 Function(IntPtr hDlg), int Function(int hDlg)>(
+      'GetDialogDpiChangeBehavior',
+    );
 
 /// Retrieves the screen auto-rotation preferences for the current process.
 ///
@@ -2722,9 +3298,9 @@ int GetDisplayAutoRotationPreferences(Pointer<Int32> pOrientation) =>
     _GetDisplayAutoRotationPreferences(pOrientation);
 
 final _GetDisplayAutoRotationPreferences = _user32.lookupFunction<
-    Int32 Function(Pointer<Int32> pOrientation),
-    int Function(
-        Pointer<Int32> pOrientation)>('GetDisplayAutoRotationPreferences');
+  Int32 Function(Pointer<Int32> pOrientation),
+  int Function(Pointer<Int32> pOrientation)
+>('GetDisplayAutoRotationPreferences');
 
 /// Retrieves a handle to a control in the specified dialog box.
 ///
@@ -2738,8 +3314,9 @@ final _GetDisplayAutoRotationPreferences = _user32.lookupFunction<
 int GetDlgItem(int hDlg, int nIDDlgItem) => _GetDlgItem(hDlg, nIDDlgItem);
 
 final _GetDlgItem = _user32.lookupFunction<
-    IntPtr Function(IntPtr hDlg, Int32 nIDDlgItem),
-    int Function(int hDlg, int nIDDlgItem)>('GetDlgItem');
+  IntPtr Function(IntPtr hDlg, Int32 nIDDlgItem),
+  int Function(int hDlg, int nIDDlgItem)
+>('GetDlgItem');
 
 /// Translates the text of a specified control in a dialog box into an
 /// integer value.
@@ -2754,14 +3331,26 @@ final _GetDlgItem = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int GetDlgItemInt(
-        int hDlg, int nIDDlgItem, Pointer<Int32> lpTranslated, int bSigned) =>
-    _GetDlgItemInt(hDlg, nIDDlgItem, lpTranslated, bSigned);
+  int hDlg,
+  int nIDDlgItem,
+  Pointer<Int32> lpTranslated,
+  int bSigned,
+) => _GetDlgItemInt(hDlg, nIDDlgItem, lpTranslated, bSigned);
 
 final _GetDlgItemInt = _user32.lookupFunction<
-    Uint32 Function(IntPtr hDlg, Int32 nIDDlgItem, Pointer<Int32> lpTranslated,
-        Int32 bSigned),
-    int Function(int hDlg, int nIDDlgItem, Pointer<Int32> lpTranslated,
-        int bSigned)>('GetDlgItemInt');
+  Uint32 Function(
+    IntPtr hDlg,
+    Int32 nIDDlgItem,
+    Pointer<Int32> lpTranslated,
+    Int32 bSigned,
+  ),
+  int Function(
+    int hDlg,
+    int nIDDlgItem,
+    Pointer<Int32> lpTranslated,
+    int bSigned,
+  )
+>('GetDlgItemInt');
 
 /// Retrieves the title or text associated with a control in a dialog box.
 ///
@@ -2775,14 +3364,21 @@ final _GetDlgItemInt = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int GetDlgItemText(
-        int hDlg, int nIDDlgItem, Pointer<Utf16> lpString, int cchMax) =>
-    _GetDlgItemText(hDlg, nIDDlgItem, lpString, cchMax);
+  int hDlg,
+  int nIDDlgItem,
+  Pointer<Utf16> lpString,
+  int cchMax,
+) => _GetDlgItemText(hDlg, nIDDlgItem, lpString, cchMax);
 
 final _GetDlgItemText = _user32.lookupFunction<
-    Uint32 Function(
-        IntPtr hDlg, Int32 nIDDlgItem, Pointer<Utf16> lpString, Int32 cchMax),
-    int Function(int hDlg, int nIDDlgItem, Pointer<Utf16> lpString,
-        int cchMax)>('GetDlgItemTextW');
+  Uint32 Function(
+    IntPtr hDlg,
+    Int32 nIDDlgItem,
+    Pointer<Utf16> lpString,
+    Int32 cchMax,
+  ),
+  int Function(int hDlg, int nIDDlgItem, Pointer<Utf16> lpString, int cchMax)
+>('GetDlgItemTextW');
 
 /// Retrieves the current double-click time for the mouse. A double-click is
 /// a series of two clicks of the mouse button, the second occurring within
@@ -2820,8 +3416,10 @@ final _GetDpiForSystem = _user32
 /// {@category user32}
 int GetDpiForWindow(int hwnd) => _GetDpiForWindow(hwnd);
 
-final _GetDpiForWindow = _user32.lookupFunction<Uint32 Function(IntPtr hwnd),
-    int Function(int hwnd)>('GetDpiForWindow');
+final _GetDpiForWindow = _user32
+    .lookupFunction<Uint32 Function(IntPtr hwnd), int Function(int hwnd)>(
+      'GetDpiForWindow',
+    );
 
 /// Retrieves the DPI from a given DPI_AWARENESS_CONTEXT handle. This
 /// enables you to determine the DPI of a thread without needed to examine a
@@ -2835,9 +3433,10 @@ final _GetDpiForWindow = _user32.lookupFunction<Uint32 Function(IntPtr hwnd),
 int GetDpiFromDpiAwarenessContext(int value) =>
     _GetDpiFromDpiAwarenessContext(value);
 
-final _GetDpiFromDpiAwarenessContext = _user32.lookupFunction<
-    Uint32 Function(IntPtr value),
-    int Function(int value)>('GetDpiFromDpiAwarenessContext');
+final _GetDpiFromDpiAwarenessContext = _user32
+    .lookupFunction<Uint32 Function(IntPtr value), int Function(int value)>(
+      'GetDpiFromDpiAwarenessContext',
+    );
 
 /// Retrieves the handle to the window that has the keyboard focus, if the
 /// window is attached to the calling thread's message queue.
@@ -2848,8 +3447,9 @@ final _GetDpiFromDpiAwarenessContext = _user32.lookupFunction<
 /// {@category user32}
 int GetFocus() => _GetFocus();
 
-final _GetFocus =
-    _user32.lookupFunction<IntPtr Function(), int Function()>('GetFocus');
+final _GetFocus = _user32.lookupFunction<IntPtr Function(), int Function()>(
+  'GetFocus',
+);
 
 /// Retrieves a handle to the foreground window (the window with which the
 /// user is currently working). The system assigns a slightly higher
@@ -2880,24 +3480,33 @@ final _GetForegroundWindow = _user32
 /// ```
 /// {@category user32}
 int GetGestureConfig(
-        int hwnd,
-        int dwReserved,
-        int dwFlags,
-        Pointer<Uint32> pcIDs,
-        Pointer<GESTURECONFIG> pGestureConfig,
-        int cbSize) =>
+  int hwnd,
+  int dwReserved,
+  int dwFlags,
+  Pointer<Uint32> pcIDs,
+  Pointer<GESTURECONFIG> pGestureConfig,
+  int cbSize,
+) =>
     _GetGestureConfig(hwnd, dwReserved, dwFlags, pcIDs, pGestureConfig, cbSize);
 
 final _GetGestureConfig = _user32.lookupFunction<
-    Int32 Function(
-        IntPtr hwnd,
-        Uint32 dwReserved,
-        Uint32 dwFlags,
-        Pointer<Uint32> pcIDs,
-        Pointer<GESTURECONFIG> pGestureConfig,
-        Uint32 cbSize),
-    int Function(int hwnd, int dwReserved, int dwFlags, Pointer<Uint32> pcIDs,
-        Pointer<GESTURECONFIG> pGestureConfig, int cbSize)>('GetGestureConfig');
+  Int32 Function(
+    IntPtr hwnd,
+    Uint32 dwReserved,
+    Uint32 dwFlags,
+    Pointer<Uint32> pcIDs,
+    Pointer<GESTURECONFIG> pGestureConfig,
+    Uint32 cbSize,
+  ),
+  int Function(
+    int hwnd,
+    int dwReserved,
+    int dwFlags,
+    Pointer<Uint32> pcIDs,
+    Pointer<GESTURECONFIG> pGestureConfig,
+    int cbSize,
+  )
+>('GetGestureConfig');
 
 /// Retrieves additional information about a gesture from its GESTUREINFO
 /// handle.
@@ -2911,14 +3520,19 @@ final _GetGestureConfig = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int GetGestureExtraArgs(
-        int hGestureInfo, int cbExtraArgs, Pointer<Uint8> pExtraArgs) =>
-    _GetGestureExtraArgs(hGestureInfo, cbExtraArgs, pExtraArgs);
+  int hGestureInfo,
+  int cbExtraArgs,
+  Pointer<Uint8> pExtraArgs,
+) => _GetGestureExtraArgs(hGestureInfo, cbExtraArgs, pExtraArgs);
 
 final _GetGestureExtraArgs = _user32.lookupFunction<
-    Int32 Function(
-        IntPtr hGestureInfo, Uint32 cbExtraArgs, Pointer<Uint8> pExtraArgs),
-    int Function(int hGestureInfo, int cbExtraArgs,
-        Pointer<Uint8> pExtraArgs)>('GetGestureExtraArgs');
+  Int32 Function(
+    IntPtr hGestureInfo,
+    Uint32 cbExtraArgs,
+    Pointer<Uint8> pExtraArgs,
+  ),
+  int Function(int hGestureInfo, int cbExtraArgs, Pointer<Uint8> pExtraArgs)
+>('GetGestureExtraArgs');
 
 /// Retrieves a GESTUREINFO structure given a handle to the gesture
 /// information.
@@ -2934,9 +3548,9 @@ int GetGestureInfo(int hGestureInfo, Pointer<GESTUREINFO> pGestureInfo) =>
     _GetGestureInfo(hGestureInfo, pGestureInfo);
 
 final _GetGestureInfo = _user32.lookupFunction<
-    Int32 Function(IntPtr hGestureInfo, Pointer<GESTUREINFO> pGestureInfo),
-    int Function(
-        int hGestureInfo, Pointer<GESTUREINFO> pGestureInfo)>('GetGestureInfo');
+  Int32 Function(IntPtr hGestureInfo, Pointer<GESTUREINFO> pGestureInfo),
+  int Function(int hGestureInfo, Pointer<GESTUREINFO> pGestureInfo)
+>('GetGestureInfo');
 
 /// Retrieves information about the active window or a specified GUI thread.
 ///
@@ -2951,9 +3565,9 @@ int GetGUIThreadInfo(int idThread, Pointer<GUITHREADINFO> pgui) =>
     _GetGUIThreadInfo(idThread, pgui);
 
 final _GetGUIThreadInfo = _user32.lookupFunction<
-    Int32 Function(Uint32 idThread, Pointer<GUITHREADINFO> pgui),
-    int Function(
-        int idThread, Pointer<GUITHREADINFO> pgui)>('GetGUIThreadInfo');
+  Int32 Function(Uint32 idThread, Pointer<GUITHREADINFO> pgui),
+  int Function(int idThread, Pointer<GUITHREADINFO> pgui)
+>('GetGUIThreadInfo');
 
 /// Retrieves information about the specified icon or cursor.
 ///
@@ -2968,8 +3582,9 @@ int GetIconInfo(int hIcon, Pointer<ICONINFO> piconinfo) =>
     _GetIconInfo(hIcon, piconinfo);
 
 final _GetIconInfo = _user32.lookupFunction<
-    Int32 Function(IntPtr hIcon, Pointer<ICONINFO> piconinfo),
-    int Function(int hIcon, Pointer<ICONINFO> piconinfo)>('GetIconInfo');
+  Int32 Function(IntPtr hIcon, Pointer<ICONINFO> piconinfo),
+  int Function(int hIcon, Pointer<ICONINFO> piconinfo)
+>('GetIconInfo');
 
 /// Retrieves the opacity and transparency color key of a layered window.
 ///
@@ -2984,8 +3599,9 @@ int GetIconInfoEx(int hicon, Pointer<ICONINFOEX> piconinfo) =>
     _GetIconInfoEx(hicon, piconinfo);
 
 final _GetIconInfoEx = _user32.lookupFunction<
-    Int32 Function(IntPtr hicon, Pointer<ICONINFOEX> piconinfo),
-    int Function(int hicon, Pointer<ICONINFOEX> piconinfo)>('GetIconInfoExW');
+  Int32 Function(IntPtr hicon, Pointer<ICONINFOEX> piconinfo),
+  int Function(int hicon, Pointer<ICONINFOEX> piconinfo)
+>('GetIconInfoExW');
 
 /// Determines whether there are mouse-button or keyboard messages in the
 /// calling thread's message queue.
@@ -2996,8 +3612,9 @@ final _GetIconInfoEx = _user32.lookupFunction<
 /// {@category user32}
 int GetInputState() => _GetInputState();
 
-final _GetInputState =
-    _user32.lookupFunction<Int32 Function(), int Function()>('GetInputState');
+final _GetInputState = _user32.lookupFunction<Int32 Function(), int Function()>(
+  'GetInputState',
+);
 
 /// Retrieves the active input locale identifier (formerly called the
 /// keyboard layout).
@@ -3011,8 +3628,9 @@ final _GetInputState =
 int GetKeyboardLayout(int idThread) => _GetKeyboardLayout(idThread);
 
 final _GetKeyboardLayout = _user32.lookupFunction<
-    IntPtr Function(Uint32 idThread),
-    int Function(int idThread)>('GetKeyboardLayout');
+  IntPtr Function(Uint32 idThread),
+  int Function(int idThread)
+>('GetKeyboardLayout');
 
 /// Retrieves the input locale identifiers (formerly called keyboard layout
 /// handles) corresponding to the current set of input locales in the
@@ -3029,8 +3647,9 @@ int GetKeyboardLayoutList(int nBuff, Pointer<IntPtr> lpList) =>
     _GetKeyboardLayoutList(nBuff, lpList);
 
 final _GetKeyboardLayoutList = _user32.lookupFunction<
-    Int32 Function(Int32 nBuff, Pointer<IntPtr> lpList),
-    int Function(int nBuff, Pointer<IntPtr> lpList)>('GetKeyboardLayoutList');
+  Int32 Function(Int32 nBuff, Pointer<IntPtr> lpList),
+  int Function(int nBuff, Pointer<IntPtr> lpList)
+>('GetKeyboardLayoutList');
 
 /// Retrieves the name of the active input locale identifier (formerly
 /// called the keyboard layout) for the system.
@@ -3045,8 +3664,9 @@ int GetKeyboardLayoutName(Pointer<Utf16> pwszKLID) =>
     _GetKeyboardLayoutName(pwszKLID);
 
 final _GetKeyboardLayoutName = _user32.lookupFunction<
-    Int32 Function(Pointer<Utf16> pwszKLID),
-    int Function(Pointer<Utf16> pwszKLID)>('GetKeyboardLayoutNameW');
+  Int32 Function(Pointer<Utf16> pwszKLID),
+  int Function(Pointer<Utf16> pwszKLID)
+>('GetKeyboardLayoutNameW');
 
 /// Copies the status of the 256 virtual keys to the specified buffer.
 ///
@@ -3060,8 +3680,9 @@ int GetKeyboardState(Pointer<Uint8> lpKeyState) =>
     _GetKeyboardState(lpKeyState);
 
 final _GetKeyboardState = _user32.lookupFunction<
-    Int32 Function(Pointer<Uint8> lpKeyState),
-    int Function(Pointer<Uint8> lpKeyState)>('GetKeyboardState');
+  Int32 Function(Pointer<Uint8> lpKeyState),
+  int Function(Pointer<Uint8> lpKeyState)
+>('GetKeyboardState');
 
 /// Retrieves information about the current keyboard.
 ///
@@ -3073,8 +3694,10 @@ final _GetKeyboardState = _user32.lookupFunction<
 /// {@category user32}
 int GetKeyboardType(int nTypeFlag) => _GetKeyboardType(nTypeFlag);
 
-final _GetKeyboardType = _user32.lookupFunction<Int32 Function(Int32 nTypeFlag),
-    int Function(int nTypeFlag)>('GetKeyboardType');
+final _GetKeyboardType = _user32.lookupFunction<
+  Int32 Function(Int32 nTypeFlag),
+  int Function(int nTypeFlag)
+>('GetKeyboardType');
 
 /// Retrieves a string that represents the name of a key.
 ///
@@ -3090,9 +3713,9 @@ int GetKeyNameText(int lParam, Pointer<Utf16> lpString, int cchSize) =>
     _GetKeyNameText(lParam, lpString, cchSize);
 
 final _GetKeyNameText = _user32.lookupFunction<
-    Int32 Function(Int32 lParam, Pointer<Utf16> lpString, Int32 cchSize),
-    int Function(
-        int lParam, Pointer<Utf16> lpString, int cchSize)>('GetKeyNameTextW');
+  Int32 Function(Int32 lParam, Pointer<Utf16> lpString, Int32 cchSize),
+  int Function(int lParam, Pointer<Utf16> lpString, int cchSize)
+>('GetKeyNameTextW');
 
 /// Retrieves the status of the specified virtual key. The status specifies
 /// whether the key is up, down, or toggled (on, off—alternating each time
@@ -3106,8 +3729,10 @@ final _GetKeyNameText = _user32.lookupFunction<
 /// {@category user32}
 int GetKeyState(int nVirtKey) => _GetKeyState(nVirtKey);
 
-final _GetKeyState = _user32.lookupFunction<Int16 Function(Int32 nVirtKey),
-    int Function(int nVirtKey)>('GetKeyState');
+final _GetKeyState = _user32
+    .lookupFunction<Int16 Function(Int32 nVirtKey), int Function(int nVirtKey)>(
+      'GetKeyState',
+    );
 
 /// Retrieves the time of the last input event.
 ///
@@ -3120,8 +3745,9 @@ final _GetKeyState = _user32.lookupFunction<Int16 Function(Int32 nVirtKey),
 int GetLastInputInfo(Pointer<LASTINPUTINFO> plii) => _GetLastInputInfo(plii);
 
 final _GetLastInputInfo = _user32.lookupFunction<
-    Int32 Function(Pointer<LASTINPUTINFO> plii),
-    int Function(Pointer<LASTINPUTINFO> plii)>('GetLastInputInfo');
+  Int32 Function(Pointer<LASTINPUTINFO> plii),
+  int Function(Pointer<LASTINPUTINFO> plii)
+>('GetLastInputInfo');
 
 /// Retrieves the opacity and transparency color key of a layered window.
 ///
@@ -3134,15 +3760,27 @@ final _GetLastInputInfo = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int GetLayeredWindowAttributes(int hwnd, Pointer<Uint32> pcrKey,
-        Pointer<Uint8> pbAlpha, Pointer<Uint32> pdwFlags) =>
-    _GetLayeredWindowAttributes(hwnd, pcrKey, pbAlpha, pdwFlags);
+int GetLayeredWindowAttributes(
+  int hwnd,
+  Pointer<Uint32> pcrKey,
+  Pointer<Uint8> pbAlpha,
+  Pointer<Uint32> pdwFlags,
+) => _GetLayeredWindowAttributes(hwnd, pcrKey, pbAlpha, pdwFlags);
 
 final _GetLayeredWindowAttributes = _user32.lookupFunction<
-    Int32 Function(IntPtr hwnd, Pointer<Uint32> pcrKey, Pointer<Uint8> pbAlpha,
-        Pointer<Uint32> pdwFlags),
-    int Function(int hwnd, Pointer<Uint32> pcrKey, Pointer<Uint8> pbAlpha,
-        Pointer<Uint32> pdwFlags)>('GetLayeredWindowAttributes');
+  Int32 Function(
+    IntPtr hwnd,
+    Pointer<Uint32> pcrKey,
+    Pointer<Uint8> pbAlpha,
+    Pointer<Uint32> pdwFlags,
+  ),
+  int Function(
+    int hwnd,
+    Pointer<Uint32> pcrKey,
+    Pointer<Uint8> pbAlpha,
+    Pointer<Uint32> pdwFlags,
+  )
+>('GetLayeredWindowAttributes');
 
 /// Retrieves a handle to the menu assigned to the specified window.
 ///
@@ -3154,8 +3792,10 @@ final _GetLayeredWindowAttributes = _user32.lookupFunction<
 /// {@category user32}
 int GetMenu(int hWnd) => _GetMenu(hWnd);
 
-final _GetMenu = _user32.lookupFunction<IntPtr Function(IntPtr hWnd),
-    int Function(int hWnd)>('GetMenu');
+final _GetMenu = _user32
+    .lookupFunction<IntPtr Function(IntPtr hWnd), int Function(int hWnd)>(
+      'GetMenu',
+    );
 
 /// Retrieves information about the specified menu bar.
 ///
@@ -3169,14 +3809,21 @@ final _GetMenu = _user32.lookupFunction<IntPtr Function(IntPtr hWnd),
 /// ```
 /// {@category user32}
 int GetMenuBarInfo(
-        int hwnd, int idObject, int idItem, Pointer<MENUBARINFO> pmbi) =>
-    _GetMenuBarInfo(hwnd, idObject, idItem, pmbi);
+  int hwnd,
+  int idObject,
+  int idItem,
+  Pointer<MENUBARINFO> pmbi,
+) => _GetMenuBarInfo(hwnd, idObject, idItem, pmbi);
 
 final _GetMenuBarInfo = _user32.lookupFunction<
-    Int32 Function(
-        IntPtr hwnd, Int32 idObject, Int32 idItem, Pointer<MENUBARINFO> pmbi),
-    int Function(int hwnd, int idObject, int idItem,
-        Pointer<MENUBARINFO> pmbi)>('GetMenuBarInfo');
+  Int32 Function(
+    IntPtr hwnd,
+    Int32 idObject,
+    Int32 idItem,
+    Pointer<MENUBARINFO> pmbi,
+  ),
+  int Function(int hwnd, int idObject, int idItem, Pointer<MENUBARINFO> pmbi)
+>('GetMenuBarInfo');
 
 /// Determines the default menu item on the specified menu.
 ///
@@ -3192,8 +3839,9 @@ int GetMenuDefaultItem(int hMenu, int fByPos, int gmdiFlags) =>
     _GetMenuDefaultItem(hMenu, fByPos, gmdiFlags);
 
 final _GetMenuDefaultItem = _user32.lookupFunction<
-    Uint32 Function(IntPtr hMenu, Uint32 fByPos, Uint32 gmdiFlags),
-    int Function(int hMenu, int fByPos, int gmdiFlags)>('GetMenuDefaultItem');
+  Uint32 Function(IntPtr hMenu, Uint32 fByPos, Uint32 gmdiFlags),
+  int Function(int hMenu, int fByPos, int gmdiFlags)
+>('GetMenuDefaultItem');
 
 /// Retrieves information about a specified menu.
 ///
@@ -3208,8 +3856,9 @@ int GetMenuInfo(int param0, Pointer<MENUINFO> param1) =>
     _GetMenuInfo(param0, param1);
 
 final _GetMenuInfo = _user32.lookupFunction<
-    Int32 Function(IntPtr param0, Pointer<MENUINFO> param1),
-    int Function(int param0, Pointer<MENUINFO> param1)>('GetMenuInfo');
+  Int32 Function(IntPtr param0, Pointer<MENUINFO> param1),
+  int Function(int param0, Pointer<MENUINFO> param1)
+>('GetMenuInfo');
 
 /// Determines the number of items in the specified menu.
 ///
@@ -3221,8 +3870,10 @@ final _GetMenuInfo = _user32.lookupFunction<
 /// {@category user32}
 int GetMenuItemCount(int hMenu) => _GetMenuItemCount(hMenu);
 
-final _GetMenuItemCount = _user32.lookupFunction<Int32 Function(IntPtr hMenu),
-    int Function(int hMenu)>('GetMenuItemCount');
+final _GetMenuItemCount = _user32
+    .lookupFunction<Int32 Function(IntPtr hMenu), int Function(int hMenu)>(
+      'GetMenuItemCount',
+    );
 
 /// Retrieves the menu item identifier of a menu item located at the
 /// specified position in a menu.
@@ -3237,8 +3888,9 @@ final _GetMenuItemCount = _user32.lookupFunction<Int32 Function(IntPtr hMenu),
 int GetMenuItemID(int hMenu, int nPos) => _GetMenuItemID(hMenu, nPos);
 
 final _GetMenuItemID = _user32.lookupFunction<
-    Uint32 Function(IntPtr hMenu, Int32 nPos),
-    int Function(int hMenu, int nPos)>('GetMenuItemID');
+  Uint32 Function(IntPtr hMenu, Int32 nPos),
+  int Function(int hMenu, int nPos)
+>('GetMenuItemID');
 
 /// Retrieves information about a menu item.
 ///
@@ -3252,14 +3904,26 @@ final _GetMenuItemID = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int GetMenuItemInfo(
-        int hmenu, int item, int fByPosition, Pointer<MENUITEMINFO> lpmii) =>
-    _GetMenuItemInfo(hmenu, item, fByPosition, lpmii);
+  int hmenu,
+  int item,
+  int fByPosition,
+  Pointer<MENUITEMINFO> lpmii,
+) => _GetMenuItemInfo(hmenu, item, fByPosition, lpmii);
 
 final _GetMenuItemInfo = _user32.lookupFunction<
-    Int32 Function(IntPtr hmenu, Uint32 item, Int32 fByPosition,
-        Pointer<MENUITEMINFO> lpmii),
-    int Function(int hmenu, int item, int fByPosition,
-        Pointer<MENUITEMINFO> lpmii)>('GetMenuItemInfoW');
+  Int32 Function(
+    IntPtr hmenu,
+    Uint32 item,
+    Int32 fByPosition,
+    Pointer<MENUITEMINFO> lpmii,
+  ),
+  int Function(
+    int hmenu,
+    int item,
+    int fByPosition,
+    Pointer<MENUITEMINFO> lpmii,
+  )
+>('GetMenuItemInfoW');
 
 /// Retrieves the bounding rectangle for the specified menu item.
 ///
@@ -3276,10 +3940,14 @@ int GetMenuItemRect(int hWnd, int hMenu, int uItem, Pointer<RECT> lprcItem) =>
     _GetMenuItemRect(hWnd, hMenu, uItem, lprcItem);
 
 final _GetMenuItemRect = _user32.lookupFunction<
-    Int32 Function(
-        IntPtr hWnd, IntPtr hMenu, Uint32 uItem, Pointer<RECT> lprcItem),
-    int Function(int hWnd, int hMenu, int uItem,
-        Pointer<RECT> lprcItem)>('GetMenuItemRect');
+  Int32 Function(
+    IntPtr hWnd,
+    IntPtr hMenu,
+    Uint32 uItem,
+    Pointer<RECT> lprcItem,
+  ),
+  int Function(int hWnd, int hMenu, int uItem, Pointer<RECT> lprcItem)
+>('GetMenuItemRect');
 
 /// Retrieves the menu flags associated with the specified menu item. If the
 /// menu item opens a submenu, this function also returns the number of
@@ -3297,8 +3965,9 @@ int GetMenuState(int hMenu, int uId, int uFlags) =>
     _GetMenuState(hMenu, uId, uFlags);
 
 final _GetMenuState = _user32.lookupFunction<
-    Uint32 Function(IntPtr hMenu, Uint32 uId, Uint32 uFlags),
-    int Function(int hMenu, int uId, int uFlags)>('GetMenuState');
+  Uint32 Function(IntPtr hMenu, Uint32 uId, Uint32 uFlags),
+  int Function(int hMenu, int uId, int uFlags)
+>('GetMenuState');
 
 /// Copies the text string of the specified menu item into the specified
 /// buffer.
@@ -3313,15 +3982,30 @@ final _GetMenuState = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int GetMenuString(int hMenu, int uIDItem, Pointer<Utf16> lpString, int cchMax,
-        int flags) =>
-    _GetMenuString(hMenu, uIDItem, lpString, cchMax, flags);
+int GetMenuString(
+  int hMenu,
+  int uIDItem,
+  Pointer<Utf16> lpString,
+  int cchMax,
+  int flags,
+) => _GetMenuString(hMenu, uIDItem, lpString, cchMax, flags);
 
 final _GetMenuString = _user32.lookupFunction<
-    Int32 Function(IntPtr hMenu, Uint32 uIDItem, Pointer<Utf16> lpString,
-        Int32 cchMax, Uint32 flags),
-    int Function(int hMenu, int uIDItem, Pointer<Utf16> lpString, int cchMax,
-        int flags)>('GetMenuStringW');
+  Int32 Function(
+    IntPtr hMenu,
+    Uint32 uIDItem,
+    Pointer<Utf16> lpString,
+    Int32 cchMax,
+    Uint32 flags,
+  ),
+  int Function(
+    int hMenu,
+    int uIDItem,
+    Pointer<Utf16> lpString,
+    int cchMax,
+    int flags,
+  )
+>('GetMenuStringW');
 
 /// Retrieves a message from the calling thread's message queue. The
 /// function dispatches incoming sent messages until a posted message is
@@ -3337,14 +4021,26 @@ final _GetMenuString = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int GetMessage(
-        Pointer<MSG> lpMsg, int hWnd, int wMsgFilterMin, int wMsgFilterMax) =>
-    _GetMessage(lpMsg, hWnd, wMsgFilterMin, wMsgFilterMax);
+  Pointer<MSG> lpMsg,
+  int hWnd,
+  int wMsgFilterMin,
+  int wMsgFilterMax,
+) => _GetMessage(lpMsg, hWnd, wMsgFilterMin, wMsgFilterMax);
 
 final _GetMessage = _user32.lookupFunction<
-    Int32 Function(Pointer<MSG> lpMsg, IntPtr hWnd, Uint32 wMsgFilterMin,
-        Uint32 wMsgFilterMax),
-    int Function(Pointer<MSG> lpMsg, int hWnd, int wMsgFilterMin,
-        int wMsgFilterMax)>('GetMessageW');
+  Int32 Function(
+    Pointer<MSG> lpMsg,
+    IntPtr hWnd,
+    Uint32 wMsgFilterMin,
+    Uint32 wMsgFilterMax,
+  ),
+  int Function(
+    Pointer<MSG> lpMsg,
+    int hWnd,
+    int wMsgFilterMin,
+    int wMsgFilterMax,
+  )
+>('GetMessageW');
 
 /// Retrieves the extra message information for the current thread. Extra
 /// message information is an application- or driver-defined value
@@ -3368,8 +4064,8 @@ final _GetMessageExtraInfo = _user32
 /// {@category user32}
 int GetMessagePos() => _GetMessagePos();
 
-final _GetMessagePos =
-    _user32.lookupFunction<Uint32 Function(), int Function()>('GetMessagePos');
+final _GetMessagePos = _user32
+    .lookupFunction<Uint32 Function(), int Function()>('GetMessagePos');
 
 /// Retrieves the message time for the last message retrieved by the
 /// GetMessage function. The time is a long integer that specifies the
@@ -3383,8 +4079,8 @@ final _GetMessagePos =
 /// {@category user32}
 int GetMessageTime() => _GetMessageTime();
 
-final _GetMessageTime =
-    _user32.lookupFunction<Int32 Function(), int Function()>('GetMessageTime');
+final _GetMessageTime = _user32
+    .lookupFunction<Int32 Function(), int Function()>('GetMessageTime');
 
 /// The GetMonitorInfo function retrieves information about a display
 /// monitor.
@@ -3400,8 +4096,9 @@ int GetMonitorInfo(int hMonitor, Pointer<MONITORINFO> lpmi) =>
     _GetMonitorInfo(hMonitor, lpmi);
 
 final _GetMonitorInfo = _user32.lookupFunction<
-    Int32 Function(IntPtr hMonitor, Pointer<MONITORINFO> lpmi),
-    int Function(int hMonitor, Pointer<MONITORINFO> lpmi)>('GetMonitorInfoW');
+  Int32 Function(IntPtr hMonitor, Pointer<MONITORINFO> lpmi),
+  int Function(int hMonitor, Pointer<MONITORINFO> lpmi)
+>('GetMonitorInfoW');
 
 /// Retrieves a history of up to 64 previous coordinates of the mouse or
 /// pen.
@@ -3416,19 +4113,30 @@ final _GetMonitorInfo = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int GetMouseMovePointsEx(int cbSize, Pointer<MOUSEMOVEPOINT> lppt,
-        Pointer<MOUSEMOVEPOINT> lpptBuf, int nBufPoints, int resolution) =>
-    _GetMouseMovePointsEx(cbSize, lppt, lpptBuf, nBufPoints, resolution);
+int GetMouseMovePointsEx(
+  int cbSize,
+  Pointer<MOUSEMOVEPOINT> lppt,
+  Pointer<MOUSEMOVEPOINT> lpptBuf,
+  int nBufPoints,
+  int resolution,
+) => _GetMouseMovePointsEx(cbSize, lppt, lpptBuf, nBufPoints, resolution);
 
 final _GetMouseMovePointsEx = _user32.lookupFunction<
-    Int32 Function(Uint32 cbSize, Pointer<MOUSEMOVEPOINT> lppt,
-        Pointer<MOUSEMOVEPOINT> lpptBuf, Int32 nBufPoints, Uint32 resolution),
-    int Function(
-        int cbSize,
-        Pointer<MOUSEMOVEPOINT> lppt,
-        Pointer<MOUSEMOVEPOINT> lpptBuf,
-        int nBufPoints,
-        int resolution)>('GetMouseMovePointsEx');
+  Int32 Function(
+    Uint32 cbSize,
+    Pointer<MOUSEMOVEPOINT> lppt,
+    Pointer<MOUSEMOVEPOINT> lpptBuf,
+    Int32 nBufPoints,
+    Uint32 resolution,
+  ),
+  int Function(
+    int cbSize,
+    Pointer<MOUSEMOVEPOINT> lppt,
+    Pointer<MOUSEMOVEPOINT> lpptBuf,
+    int nBufPoints,
+    int resolution,
+  )
+>('GetMouseMovePointsEx');
 
 /// Retrieves a handle to the first control in a group of controls that
 /// precedes (or follows) the specified control in a dialog box.
@@ -3445,8 +4153,9 @@ int GetNextDlgGroupItem(int hDlg, int hCtl, int bPrevious) =>
     _GetNextDlgGroupItem(hDlg, hCtl, bPrevious);
 
 final _GetNextDlgGroupItem = _user32.lookupFunction<
-    IntPtr Function(IntPtr hDlg, IntPtr hCtl, Int32 bPrevious),
-    int Function(int hDlg, int hCtl, int bPrevious)>('GetNextDlgGroupItem');
+  IntPtr Function(IntPtr hDlg, IntPtr hCtl, Int32 bPrevious),
+  int Function(int hDlg, int hCtl, int bPrevious)
+>('GetNextDlgGroupItem');
 
 /// Retrieves a handle to the first control that has the WS_TABSTOP style
 /// that precedes (or follows) the specified control.
@@ -3463,8 +4172,9 @@ int GetNextDlgTabItem(int hDlg, int hCtl, int bPrevious) =>
     _GetNextDlgTabItem(hDlg, hCtl, bPrevious);
 
 final _GetNextDlgTabItem = _user32.lookupFunction<
-    IntPtr Function(IntPtr hDlg, IntPtr hCtl, Int32 bPrevious),
-    int Function(int hDlg, int hCtl, int bPrevious)>('GetNextDlgTabItem');
+  IntPtr Function(IntPtr hDlg, IntPtr hCtl, Int32 bPrevious),
+  int Function(int hDlg, int hCtl, int bPrevious)
+>('GetNextDlgTabItem');
 
 /// Retrieves the handle to the window that currently has the clipboard
 /// open.
@@ -3475,9 +4185,10 @@ final _GetNextDlgTabItem = _user32.lookupFunction<
 /// {@category user32}
 int GetOpenClipboardWindow() => _GetOpenClipboardWindow();
 
-final _GetOpenClipboardWindow =
-    _user32.lookupFunction<IntPtr Function(), int Function()>(
-        'GetOpenClipboardWindow');
+final _GetOpenClipboardWindow = _user32
+    .lookupFunction<IntPtr Function(), int Function()>(
+      'GetOpenClipboardWindow',
+    );
 
 /// Retrieves a handle to the specified window's parent or owner.
 ///
@@ -3489,8 +4200,10 @@ final _GetOpenClipboardWindow =
 /// {@category user32}
 int GetParent(int hWnd) => _GetParent(hWnd);
 
-final _GetParent = _user32.lookupFunction<IntPtr Function(IntPtr hWnd),
-    int Function(int hWnd)>('GetParent');
+final _GetParent = _user32
+    .lookupFunction<IntPtr Function(IntPtr hWnd), int Function(int hWnd)>(
+      'GetParent',
+    );
 
 /// Retrieves the position of the cursor in physical coordinates.
 ///
@@ -3504,8 +4217,9 @@ int GetPhysicalCursorPos(Pointer<POINT> lpPoint) =>
     _GetPhysicalCursorPos(lpPoint);
 
 final _GetPhysicalCursorPos = _user32.lookupFunction<
-    Int32 Function(Pointer<POINT> lpPoint),
-    int Function(Pointer<POINT> lpPoint)>('GetPhysicalCursorPos');
+  Int32 Function(Pointer<POINT> lpPoint),
+  int Function(Pointer<POINT> lpPoint)
+>('GetPhysicalCursorPos');
 
 /// Retrieves the cursor identifier associated with the specified pointer.
 ///
@@ -3520,9 +4234,9 @@ int GetPointerCursorId(int pointerId, Pointer<Uint32> cursorId) =>
     _GetPointerCursorId(pointerId, cursorId);
 
 final _GetPointerCursorId = _user32.lookupFunction<
-    Int32 Function(Uint32 pointerId, Pointer<Uint32> cursorId),
-    int Function(
-        int pointerId, Pointer<Uint32> cursorId)>('GetPointerCursorId');
+  Int32 Function(Uint32 pointerId, Pointer<Uint32> cursorId),
+  int Function(int pointerId, Pointer<Uint32> cursorId)
+>('GetPointerCursorId');
 
 /// Gets the entire frame of information for the specified pointers
 /// associated with the current message.
@@ -3535,15 +4249,24 @@ final _GetPointerCursorId = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int GetPointerFrameInfo(int pointerId, Pointer<Uint32> pointerCount,
-        Pointer<POINTER_INFO> pointerInfo) =>
-    _GetPointerFrameInfo(pointerId, pointerCount, pointerInfo);
+int GetPointerFrameInfo(
+  int pointerId,
+  Pointer<Uint32> pointerCount,
+  Pointer<POINTER_INFO> pointerInfo,
+) => _GetPointerFrameInfo(pointerId, pointerCount, pointerInfo);
 
 final _GetPointerFrameInfo = _user32.lookupFunction<
-    Int32 Function(Uint32 pointerId, Pointer<Uint32> pointerCount,
-        Pointer<POINTER_INFO> pointerInfo),
-    int Function(int pointerId, Pointer<Uint32> pointerCount,
-        Pointer<POINTER_INFO> pointerInfo)>('GetPointerFrameInfo');
+  Int32 Function(
+    Uint32 pointerId,
+    Pointer<Uint32> pointerCount,
+    Pointer<POINTER_INFO> pointerInfo,
+  ),
+  int Function(
+    int pointerId,
+    Pointer<Uint32> pointerCount,
+    Pointer<POINTER_INFO> pointerInfo,
+  )
+>('GetPointerFrameInfo');
 
 /// Gets the entire frame of information (including coalesced input frames)
 /// for the specified pointers associated with the current message.
@@ -3557,19 +4280,32 @@ final _GetPointerFrameInfo = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int GetPointerFrameInfoHistory(int pointerId, Pointer<Uint32> entriesCount,
-        Pointer<Uint32> pointerCount, Pointer<POINTER_INFO> pointerInfo) =>
-    _GetPointerFrameInfoHistory(
-        pointerId, entriesCount, pointerCount, pointerInfo);
+int GetPointerFrameInfoHistory(
+  int pointerId,
+  Pointer<Uint32> entriesCount,
+  Pointer<Uint32> pointerCount,
+  Pointer<POINTER_INFO> pointerInfo,
+) => _GetPointerFrameInfoHistory(
+  pointerId,
+  entriesCount,
+  pointerCount,
+  pointerInfo,
+);
 
 final _GetPointerFrameInfoHistory = _user32.lookupFunction<
-    Int32 Function(Uint32 pointerId, Pointer<Uint32> entriesCount,
-        Pointer<Uint32> pointerCount, Pointer<POINTER_INFO> pointerInfo),
-    int Function(
-        int pointerId,
-        Pointer<Uint32> entriesCount,
-        Pointer<Uint32> pointerCount,
-        Pointer<POINTER_INFO> pointerInfo)>('GetPointerFrameInfoHistory');
+  Int32 Function(
+    Uint32 pointerId,
+    Pointer<Uint32> entriesCount,
+    Pointer<Uint32> pointerCount,
+    Pointer<POINTER_INFO> pointerInfo,
+  ),
+  int Function(
+    int pointerId,
+    Pointer<Uint32> entriesCount,
+    Pointer<Uint32> pointerCount,
+    Pointer<POINTER_INFO> pointerInfo,
+  )
+>('GetPointerFrameInfoHistory');
 
 /// Gets the entire frame of pen-based information for the specified
 /// pointers (of type PT_PEN) associated with the current message.
@@ -3582,15 +4318,24 @@ final _GetPointerFrameInfoHistory = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int GetPointerFramePenInfo(int pointerId, Pointer<Uint32> pointerCount,
-        Pointer<POINTER_PEN_INFO> penInfo) =>
-    _GetPointerFramePenInfo(pointerId, pointerCount, penInfo);
+int GetPointerFramePenInfo(
+  int pointerId,
+  Pointer<Uint32> pointerCount,
+  Pointer<POINTER_PEN_INFO> penInfo,
+) => _GetPointerFramePenInfo(pointerId, pointerCount, penInfo);
 
 final _GetPointerFramePenInfo = _user32.lookupFunction<
-    Int32 Function(Uint32 pointerId, Pointer<Uint32> pointerCount,
-        Pointer<POINTER_PEN_INFO> penInfo),
-    int Function(int pointerId, Pointer<Uint32> pointerCount,
-        Pointer<POINTER_PEN_INFO> penInfo)>('GetPointerFramePenInfo');
+  Int32 Function(
+    Uint32 pointerId,
+    Pointer<Uint32> pointerCount,
+    Pointer<POINTER_PEN_INFO> penInfo,
+  ),
+  int Function(
+    int pointerId,
+    Pointer<Uint32> pointerCount,
+    Pointer<POINTER_PEN_INFO> penInfo,
+  )
+>('GetPointerFramePenInfo');
 
 /// Gets the entire frame of pen-based information (including coalesced
 /// input frames) for the specified pointers (of type PT_PEN) associated
@@ -3605,19 +4350,32 @@ final _GetPointerFramePenInfo = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int GetPointerFramePenInfoHistory(int pointerId, Pointer<Uint32> entriesCount,
-        Pointer<Uint32> pointerCount, Pointer<POINTER_PEN_INFO> penInfo) =>
-    _GetPointerFramePenInfoHistory(
-        pointerId, entriesCount, pointerCount, penInfo);
+int GetPointerFramePenInfoHistory(
+  int pointerId,
+  Pointer<Uint32> entriesCount,
+  Pointer<Uint32> pointerCount,
+  Pointer<POINTER_PEN_INFO> penInfo,
+) => _GetPointerFramePenInfoHistory(
+  pointerId,
+  entriesCount,
+  pointerCount,
+  penInfo,
+);
 
 final _GetPointerFramePenInfoHistory = _user32.lookupFunction<
-    Int32 Function(Uint32 pointerId, Pointer<Uint32> entriesCount,
-        Pointer<Uint32> pointerCount, Pointer<POINTER_PEN_INFO> penInfo),
-    int Function(
-        int pointerId,
-        Pointer<Uint32> entriesCount,
-        Pointer<Uint32> pointerCount,
-        Pointer<POINTER_PEN_INFO> penInfo)>('GetPointerFramePenInfoHistory');
+  Int32 Function(
+    Uint32 pointerId,
+    Pointer<Uint32> entriesCount,
+    Pointer<Uint32> pointerCount,
+    Pointer<POINTER_PEN_INFO> penInfo,
+  ),
+  int Function(
+    int pointerId,
+    Pointer<Uint32> entriesCount,
+    Pointer<Uint32> pointerCount,
+    Pointer<POINTER_PEN_INFO> penInfo,
+  )
+>('GetPointerFramePenInfoHistory');
 
 /// Gets the entire frame of touch-based information for the specified
 /// pointers (of type PT_TOUCH) associated with the current message.
@@ -3630,15 +4388,24 @@ final _GetPointerFramePenInfoHistory = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int GetPointerFrameTouchInfo(int pointerId, Pointer<Uint32> pointerCount,
-        Pointer<POINTER_TOUCH_INFO> touchInfo) =>
-    _GetPointerFrameTouchInfo(pointerId, pointerCount, touchInfo);
+int GetPointerFrameTouchInfo(
+  int pointerId,
+  Pointer<Uint32> pointerCount,
+  Pointer<POINTER_TOUCH_INFO> touchInfo,
+) => _GetPointerFrameTouchInfo(pointerId, pointerCount, touchInfo);
 
 final _GetPointerFrameTouchInfo = _user32.lookupFunction<
-    Int32 Function(Uint32 pointerId, Pointer<Uint32> pointerCount,
-        Pointer<POINTER_TOUCH_INFO> touchInfo),
-    int Function(int pointerId, Pointer<Uint32> pointerCount,
-        Pointer<POINTER_TOUCH_INFO> touchInfo)>('GetPointerFrameTouchInfo');
+  Int32 Function(
+    Uint32 pointerId,
+    Pointer<Uint32> pointerCount,
+    Pointer<POINTER_TOUCH_INFO> touchInfo,
+  ),
+  int Function(
+    int pointerId,
+    Pointer<Uint32> pointerCount,
+    Pointer<POINTER_TOUCH_INFO> touchInfo,
+  )
+>('GetPointerFrameTouchInfo');
 
 /// Gets the entire frame of touch-based information (including coalesced
 /// input frames) for the specified pointers (of type PT_TOUCH) associated
@@ -3653,20 +4420,32 @@ final _GetPointerFrameTouchInfo = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int GetPointerFrameTouchInfoHistory(int pointerId, Pointer<Uint32> entriesCount,
-        Pointer<Uint32> pointerCount, Pointer<POINTER_TOUCH_INFO> touchInfo) =>
-    _GetPointerFrameTouchInfoHistory(
-        pointerId, entriesCount, pointerCount, touchInfo);
+int GetPointerFrameTouchInfoHistory(
+  int pointerId,
+  Pointer<Uint32> entriesCount,
+  Pointer<Uint32> pointerCount,
+  Pointer<POINTER_TOUCH_INFO> touchInfo,
+) => _GetPointerFrameTouchInfoHistory(
+  pointerId,
+  entriesCount,
+  pointerCount,
+  touchInfo,
+);
 
 final _GetPointerFrameTouchInfoHistory = _user32.lookupFunction<
-    Int32 Function(Uint32 pointerId, Pointer<Uint32> entriesCount,
-        Pointer<Uint32> pointerCount, Pointer<POINTER_TOUCH_INFO> touchInfo),
-    int Function(
-        int pointerId,
-        Pointer<Uint32> entriesCount,
-        Pointer<Uint32> pointerCount,
-        Pointer<POINTER_TOUCH_INFO>
-            touchInfo)>('GetPointerFrameTouchInfoHistory');
+  Int32 Function(
+    Uint32 pointerId,
+    Pointer<Uint32> entriesCount,
+    Pointer<Uint32> pointerCount,
+    Pointer<POINTER_TOUCH_INFO> touchInfo,
+  ),
+  int Function(
+    int pointerId,
+    Pointer<Uint32> entriesCount,
+    Pointer<Uint32> pointerCount,
+    Pointer<POINTER_TOUCH_INFO> touchInfo,
+  )
+>('GetPointerFrameTouchInfoHistory');
 
 /// Gets the information for the specified pointer associated with the
 /// current message.
@@ -3682,9 +4461,9 @@ int GetPointerInfo(int pointerId, Pointer<POINTER_INFO> pointerInfo) =>
     _GetPointerInfo(pointerId, pointerInfo);
 
 final _GetPointerInfo = _user32.lookupFunction<
-    Int32 Function(Uint32 pointerId, Pointer<POINTER_INFO> pointerInfo),
-    int Function(
-        int pointerId, Pointer<POINTER_INFO> pointerInfo)>('GetPointerInfo');
+  Int32 Function(Uint32 pointerId, Pointer<POINTER_INFO> pointerInfo),
+  int Function(int pointerId, Pointer<POINTER_INFO> pointerInfo)
+>('GetPointerInfo');
 
 /// Gets the information associated with the individual inputs, if any, that
 /// were coalesced into the current message for the specified pointer. The
@@ -3699,15 +4478,24 @@ final _GetPointerInfo = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int GetPointerInfoHistory(int pointerId, Pointer<Uint32> entriesCount,
-        Pointer<POINTER_INFO> pointerInfo) =>
-    _GetPointerInfoHistory(pointerId, entriesCount, pointerInfo);
+int GetPointerInfoHistory(
+  int pointerId,
+  Pointer<Uint32> entriesCount,
+  Pointer<POINTER_INFO> pointerInfo,
+) => _GetPointerInfoHistory(pointerId, entriesCount, pointerInfo);
 
 final _GetPointerInfoHistory = _user32.lookupFunction<
-    Int32 Function(Uint32 pointerId, Pointer<Uint32> entriesCount,
-        Pointer<POINTER_INFO> pointerInfo),
-    int Function(int pointerId, Pointer<Uint32> entriesCount,
-        Pointer<POINTER_INFO> pointerInfo)>('GetPointerInfoHistory');
+  Int32 Function(
+    Uint32 pointerId,
+    Pointer<Uint32> entriesCount,
+    Pointer<POINTER_INFO> pointerInfo,
+  ),
+  int Function(
+    int pointerId,
+    Pointer<Uint32> entriesCount,
+    Pointer<POINTER_INFO> pointerInfo,
+  )
+>('GetPointerInfoHistory');
 
 /// Gets one or more transforms for the pointer information coordinates
 /// associated with the current message.
@@ -3720,15 +4508,24 @@ final _GetPointerInfoHistory = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int GetPointerInputTransform(int pointerId, int historyCount,
-        Pointer<INPUT_TRANSFORM> inputTransform) =>
-    _GetPointerInputTransform(pointerId, historyCount, inputTransform);
+int GetPointerInputTransform(
+  int pointerId,
+  int historyCount,
+  Pointer<INPUT_TRANSFORM> inputTransform,
+) => _GetPointerInputTransform(pointerId, historyCount, inputTransform);
 
 final _GetPointerInputTransform = _user32.lookupFunction<
-    Int32 Function(Uint32 pointerId, Uint32 historyCount,
-        Pointer<INPUT_TRANSFORM> inputTransform),
-    int Function(int pointerId, int historyCount,
-        Pointer<INPUT_TRANSFORM> inputTransform)>('GetPointerInputTransform');
+  Int32 Function(
+    Uint32 pointerId,
+    Uint32 historyCount,
+    Pointer<INPUT_TRANSFORM> inputTransform,
+  ),
+  int Function(
+    int pointerId,
+    int historyCount,
+    Pointer<INPUT_TRANSFORM> inputTransform,
+  )
+>('GetPointerInputTransform');
 
 /// Gets the pen-based information for the specified pointer (of type
 /// PT_PEN) associated with the current message.
@@ -3744,9 +4541,9 @@ int GetPointerPenInfo(int pointerId, Pointer<POINTER_PEN_INFO> penInfo) =>
     _GetPointerPenInfo(pointerId, penInfo);
 
 final _GetPointerPenInfo = _user32.lookupFunction<
-    Int32 Function(Uint32 pointerId, Pointer<POINTER_PEN_INFO> penInfo),
-    int Function(
-        int pointerId, Pointer<POINTER_PEN_INFO> penInfo)>('GetPointerPenInfo');
+  Int32 Function(Uint32 pointerId, Pointer<POINTER_PEN_INFO> penInfo),
+  int Function(int pointerId, Pointer<POINTER_PEN_INFO> penInfo)
+>('GetPointerPenInfo');
 
 /// Gets the pen-based information associated with the individual inputs, if
 /// any, that were coalesced into the current message for the specified
@@ -3762,15 +4559,24 @@ final _GetPointerPenInfo = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int GetPointerPenInfoHistory(int pointerId, Pointer<Uint32> entriesCount,
-        Pointer<POINTER_PEN_INFO> penInfo) =>
-    _GetPointerPenInfoHistory(pointerId, entriesCount, penInfo);
+int GetPointerPenInfoHistory(
+  int pointerId,
+  Pointer<Uint32> entriesCount,
+  Pointer<POINTER_PEN_INFO> penInfo,
+) => _GetPointerPenInfoHistory(pointerId, entriesCount, penInfo);
 
 final _GetPointerPenInfoHistory = _user32.lookupFunction<
-    Int32 Function(Uint32 pointerId, Pointer<Uint32> entriesCount,
-        Pointer<POINTER_PEN_INFO> penInfo),
-    int Function(int pointerId, Pointer<Uint32> entriesCount,
-        Pointer<POINTER_PEN_INFO> penInfo)>('GetPointerPenInfoHistory');
+  Int32 Function(
+    Uint32 pointerId,
+    Pointer<Uint32> entriesCount,
+    Pointer<POINTER_PEN_INFO> penInfo,
+  ),
+  int Function(
+    int pointerId,
+    Pointer<Uint32> entriesCount,
+    Pointer<POINTER_PEN_INFO> penInfo,
+  )
+>('GetPointerPenInfoHistory');
 
 /// Gets the touch-based information for the specified pointer (of type
 /// PT_TOUCH) associated with the current message.
@@ -3786,9 +4592,9 @@ int GetPointerTouchInfo(int pointerId, Pointer<POINTER_TOUCH_INFO> touchInfo) =>
     _GetPointerTouchInfo(pointerId, touchInfo);
 
 final _GetPointerTouchInfo = _user32.lookupFunction<
-    Int32 Function(Uint32 pointerId, Pointer<POINTER_TOUCH_INFO> touchInfo),
-    int Function(int pointerId,
-        Pointer<POINTER_TOUCH_INFO> touchInfo)>('GetPointerTouchInfo');
+  Int32 Function(Uint32 pointerId, Pointer<POINTER_TOUCH_INFO> touchInfo),
+  int Function(int pointerId, Pointer<POINTER_TOUCH_INFO> touchInfo)
+>('GetPointerTouchInfo');
 
 /// Gets the touch-based information associated with the individual inputs,
 /// if any, that were coalesced into the current message for the specified
@@ -3804,15 +4610,24 @@ final _GetPointerTouchInfo = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int GetPointerTouchInfoHistory(int pointerId, Pointer<Uint32> entriesCount,
-        Pointer<POINTER_TOUCH_INFO> touchInfo) =>
-    _GetPointerTouchInfoHistory(pointerId, entriesCount, touchInfo);
+int GetPointerTouchInfoHistory(
+  int pointerId,
+  Pointer<Uint32> entriesCount,
+  Pointer<POINTER_TOUCH_INFO> touchInfo,
+) => _GetPointerTouchInfoHistory(pointerId, entriesCount, touchInfo);
 
 final _GetPointerTouchInfoHistory = _user32.lookupFunction<
-    Int32 Function(Uint32 pointerId, Pointer<Uint32> entriesCount,
-        Pointer<POINTER_TOUCH_INFO> touchInfo),
-    int Function(int pointerId, Pointer<Uint32> entriesCount,
-        Pointer<POINTER_TOUCH_INFO> touchInfo)>('GetPointerTouchInfoHistory');
+  Int32 Function(
+    Uint32 pointerId,
+    Pointer<Uint32> entriesCount,
+    Pointer<POINTER_TOUCH_INFO> touchInfo,
+  ),
+  int Function(
+    int pointerId,
+    Pointer<Uint32> entriesCount,
+    Pointer<POINTER_TOUCH_INFO> touchInfo,
+  )
+>('GetPointerTouchInfoHistory');
 
 /// Retrieves the pointer type for a specified pointer.
 ///
@@ -3827,8 +4642,9 @@ int GetPointerType(int pointerId, Pointer<Int32> pointerType) =>
     _GetPointerType(pointerId, pointerType);
 
 final _GetPointerType = _user32.lookupFunction<
-    Int32 Function(Uint32 pointerId, Pointer<Int32> pointerType),
-    int Function(int pointerId, Pointer<Int32> pointerType)>('GetPointerType');
+  Int32 Function(Uint32 pointerId, Pointer<Int32> pointerType),
+  int Function(int pointerId, Pointer<Int32> pointerType)
+>('GetPointerType');
 
 /// Retrieves the first available clipboard format in the specified list.
 ///
@@ -3840,13 +4656,14 @@ final _GetPointerType = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int GetPriorityClipboardFormat(
-        Pointer<Uint32> paFormatPriorityList, int cFormats) =>
-    _GetPriorityClipboardFormat(paFormatPriorityList, cFormats);
+  Pointer<Uint32> paFormatPriorityList,
+  int cFormats,
+) => _GetPriorityClipboardFormat(paFormatPriorityList, cFormats);
 
 final _GetPriorityClipboardFormat = _user32.lookupFunction<
-    Int32 Function(Pointer<Uint32> paFormatPriorityList, Int32 cFormats),
-    int Function(Pointer<Uint32> paFormatPriorityList,
-        int cFormats)>('GetPriorityClipboardFormat');
+  Int32 Function(Pointer<Uint32> paFormatPriorityList, Int32 cFormats),
+  int Function(Pointer<Uint32> paFormatPriorityList, int cFormats)
+>('GetPriorityClipboardFormat');
 
 /// Retrieves a handle to the current window station for the calling
 /// process.
@@ -3857,9 +4674,10 @@ final _GetPriorityClipboardFormat = _user32.lookupFunction<
 /// {@category user32}
 int GetProcessWindowStation() => _GetProcessWindowStation();
 
-final _GetProcessWindowStation =
-    _user32.lookupFunction<IntPtr Function(), int Function()>(
-        'GetProcessWindowStation');
+final _GetProcessWindowStation = _user32
+    .lookupFunction<IntPtr Function(), int Function()>(
+      'GetProcessWindowStation',
+    );
 
 /// Retrieves a data handle from the property list of the specified window.
 /// The character string identifies the handle to be retrieved. The string
@@ -3876,8 +4694,9 @@ final _GetProcessWindowStation =
 int GetProp(int hWnd, Pointer<Utf16> lpString) => _GetProp(hWnd, lpString);
 
 final _GetProp = _user32.lookupFunction<
-    IntPtr Function(IntPtr hWnd, Pointer<Utf16> lpString),
-    int Function(int hWnd, Pointer<Utf16> lpString)>('GetPropW');
+  IntPtr Function(IntPtr hWnd, Pointer<Utf16> lpString),
+  int Function(int hWnd, Pointer<Utf16> lpString)
+>('GetPropW');
 
 /// Performs a buffered read of the raw input messages data found in the
 /// calling thread's message queue.
@@ -3891,14 +4710,23 @@ final _GetProp = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int GetRawInputBuffer(
-        Pointer<RAWINPUT> pData, Pointer<Uint32> pcbSize, int cbSizeHeader) =>
-    _GetRawInputBuffer(pData, pcbSize, cbSizeHeader);
+  Pointer<RAWINPUT> pData,
+  Pointer<Uint32> pcbSize,
+  int cbSizeHeader,
+) => _GetRawInputBuffer(pData, pcbSize, cbSizeHeader);
 
 final _GetRawInputBuffer = _user32.lookupFunction<
-    Uint32 Function(
-        Pointer<RAWINPUT> pData, Pointer<Uint32> pcbSize, Uint32 cbSizeHeader),
-    int Function(Pointer<RAWINPUT> pData, Pointer<Uint32> pcbSize,
-        int cbSizeHeader)>('GetRawInputBuffer');
+  Uint32 Function(
+    Pointer<RAWINPUT> pData,
+    Pointer<Uint32> pcbSize,
+    Uint32 cbSizeHeader,
+  ),
+  int Function(
+    Pointer<RAWINPUT> pData,
+    Pointer<Uint32> pcbSize,
+    int cbSizeHeader,
+  )
+>('GetRawInputBuffer');
 
 /// Retrieves the raw input from the specified device.
 ///
@@ -3912,15 +4740,30 @@ final _GetRawInputBuffer = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int GetRawInputData(int hRawInput, int uiCommand, Pointer pData,
-        Pointer<Uint32> pcbSize, int cbSizeHeader) =>
-    _GetRawInputData(hRawInput, uiCommand, pData, pcbSize, cbSizeHeader);
+int GetRawInputData(
+  int hRawInput,
+  int uiCommand,
+  Pointer pData,
+  Pointer<Uint32> pcbSize,
+  int cbSizeHeader,
+) => _GetRawInputData(hRawInput, uiCommand, pData, pcbSize, cbSizeHeader);
 
 final _GetRawInputData = _user32.lookupFunction<
-    Uint32 Function(IntPtr hRawInput, Uint32 uiCommand, Pointer pData,
-        Pointer<Uint32> pcbSize, Uint32 cbSizeHeader),
-    int Function(int hRawInput, int uiCommand, Pointer pData,
-        Pointer<Uint32> pcbSize, int cbSizeHeader)>('GetRawInputData');
+  Uint32 Function(
+    IntPtr hRawInput,
+    Uint32 uiCommand,
+    Pointer pData,
+    Pointer<Uint32> pcbSize,
+    Uint32 cbSizeHeader,
+  ),
+  int Function(
+    int hRawInput,
+    int uiCommand,
+    Pointer pData,
+    Pointer<Uint32> pcbSize,
+    int cbSizeHeader,
+  )
+>('GetRawInputData');
 
 /// Retrieves information about the raw input device.
 ///
@@ -3934,14 +4777,26 @@ final _GetRawInputData = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int GetRawInputDeviceInfo(
-        int hDevice, int uiCommand, Pointer pData, Pointer<Uint32> pcbSize) =>
-    _GetRawInputDeviceInfo(hDevice, uiCommand, pData, pcbSize);
+  int hDevice,
+  int uiCommand,
+  Pointer pData,
+  Pointer<Uint32> pcbSize,
+) => _GetRawInputDeviceInfo(hDevice, uiCommand, pData, pcbSize);
 
 final _GetRawInputDeviceInfo = _user32.lookupFunction<
-    Uint32 Function(IntPtr hDevice, Uint32 uiCommand, Pointer pData,
-        Pointer<Uint32> pcbSize),
-    int Function(int hDevice, int uiCommand, Pointer pData,
-        Pointer<Uint32> pcbSize)>('GetRawInputDeviceInfoW');
+  Uint32 Function(
+    IntPtr hDevice,
+    Uint32 uiCommand,
+    Pointer pData,
+    Pointer<Uint32> pcbSize,
+  ),
+  int Function(
+    int hDevice,
+    int uiCommand,
+    Pointer pData,
+    Pointer<Uint32> pcbSize,
+  )
+>('GetRawInputDeviceInfoW');
 
 /// Enumerates the raw input devices attached to the system.
 ///
@@ -3953,15 +4808,24 @@ final _GetRawInputDeviceInfo = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int GetRawInputDeviceList(Pointer<RAWINPUTDEVICELIST> pRawInputDeviceList,
-        Pointer<Uint32> puiNumDevices, int cbSize) =>
-    _GetRawInputDeviceList(pRawInputDeviceList, puiNumDevices, cbSize);
+int GetRawInputDeviceList(
+  Pointer<RAWINPUTDEVICELIST> pRawInputDeviceList,
+  Pointer<Uint32> puiNumDevices,
+  int cbSize,
+) => _GetRawInputDeviceList(pRawInputDeviceList, puiNumDevices, cbSize);
 
 final _GetRawInputDeviceList = _user32.lookupFunction<
-    Uint32 Function(Pointer<RAWINPUTDEVICELIST> pRawInputDeviceList,
-        Pointer<Uint32> puiNumDevices, Uint32 cbSize),
-    int Function(Pointer<RAWINPUTDEVICELIST> pRawInputDeviceList,
-        Pointer<Uint32> puiNumDevices, int cbSize)>('GetRawInputDeviceList');
+  Uint32 Function(
+    Pointer<RAWINPUTDEVICELIST> pRawInputDeviceList,
+    Pointer<Uint32> puiNumDevices,
+    Uint32 cbSize,
+  ),
+  int Function(
+    Pointer<RAWINPUTDEVICELIST> pRawInputDeviceList,
+    Pointer<Uint32> puiNumDevices,
+    int cbSize,
+  )
+>('GetRawInputDeviceList');
 
 /// Retrieves the information about the raw input devices for the current
 /// application.
@@ -3974,17 +4838,24 @@ final _GetRawInputDeviceList = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int GetRegisteredRawInputDevices(Pointer<RAWINPUTDEVICE> pRawInputDevices,
-        Pointer<Uint32> puiNumDevices, int cbSize) =>
-    _GetRegisteredRawInputDevices(pRawInputDevices, puiNumDevices, cbSize);
+int GetRegisteredRawInputDevices(
+  Pointer<RAWINPUTDEVICE> pRawInputDevices,
+  Pointer<Uint32> puiNumDevices,
+  int cbSize,
+) => _GetRegisteredRawInputDevices(pRawInputDevices, puiNumDevices, cbSize);
 
 final _GetRegisteredRawInputDevices = _user32.lookupFunction<
-    Uint32 Function(Pointer<RAWINPUTDEVICE> pRawInputDevices,
-        Pointer<Uint32> puiNumDevices, Uint32 cbSize),
-    int Function(
-        Pointer<RAWINPUTDEVICE> pRawInputDevices,
-        Pointer<Uint32> puiNumDevices,
-        int cbSize)>('GetRegisteredRawInputDevices');
+  Uint32 Function(
+    Pointer<RAWINPUTDEVICE> pRawInputDevices,
+    Pointer<Uint32> puiNumDevices,
+    Uint32 cbSize,
+  ),
+  int Function(
+    Pointer<RAWINPUTDEVICE> pRawInputDevices,
+    Pointer<Uint32> puiNumDevices,
+    int cbSize,
+  )
+>('GetRegisteredRawInputDevices');
 
 /// The GetScrollBarInfo function retrieves information about the specified
 /// scroll bar.
@@ -4001,9 +4872,9 @@ int GetScrollBarInfo(int hwnd, int idObject, Pointer<SCROLLBARINFO> psbi) =>
     _GetScrollBarInfo(hwnd, idObject, psbi);
 
 final _GetScrollBarInfo = _user32.lookupFunction<
-    Int32 Function(IntPtr hwnd, Int32 idObject, Pointer<SCROLLBARINFO> psbi),
-    int Function(int hwnd, int idObject,
-        Pointer<SCROLLBARINFO> psbi)>('GetScrollBarInfo');
+  Int32 Function(IntPtr hwnd, Int32 idObject, Pointer<SCROLLBARINFO> psbi),
+  int Function(int hwnd, int idObject, Pointer<SCROLLBARINFO> psbi)
+>('GetScrollBarInfo');
 
 /// The GetScrollInfo function retrieves the parameters of a scroll bar,
 /// including the minimum and maximum scrolling positions, the page size,
@@ -4021,9 +4892,9 @@ int GetScrollInfo(int hwnd, int nBar, Pointer<SCROLLINFO> lpsi) =>
     _GetScrollInfo(hwnd, nBar, lpsi);
 
 final _GetScrollInfo = _user32.lookupFunction<
-    Int32 Function(IntPtr hwnd, Uint32 nBar, Pointer<SCROLLINFO> lpsi),
-    int Function(
-        int hwnd, int nBar, Pointer<SCROLLINFO> lpsi)>('GetScrollInfo');
+  Int32 Function(IntPtr hwnd, Uint32 nBar, Pointer<SCROLLINFO> lpsi),
+  int Function(int hwnd, int nBar, Pointer<SCROLLINFO> lpsi)
+>('GetScrollInfo');
 
 /// Retrieves a handle to the Shell's desktop window.
 ///
@@ -4033,8 +4904,8 @@ final _GetScrollInfo = _user32.lookupFunction<
 /// {@category user32}
 int GetShellWindow() => _GetShellWindow();
 
-final _GetShellWindow =
-    _user32.lookupFunction<IntPtr Function(), int Function()>('GetShellWindow');
+final _GetShellWindow = _user32
+    .lookupFunction<IntPtr Function(), int Function()>('GetShellWindow');
 
 /// Retrieves a handle to the drop-down menu or submenu activated by the
 /// specified menu item.
@@ -4049,8 +4920,9 @@ final _GetShellWindow =
 int GetSubMenu(int hMenu, int nPos) => _GetSubMenu(hMenu, nPos);
 
 final _GetSubMenu = _user32.lookupFunction<
-    IntPtr Function(IntPtr hMenu, Int32 nPos),
-    int Function(int hMenu, int nPos)>('GetSubMenu');
+  IntPtr Function(IntPtr hMenu, Int32 nPos),
+  int Function(int hMenu, int nPos)
+>('GetSubMenu');
 
 /// Retrieves the current color of the specified display element. Display
 /// elements are the parts of a window and the display that appear on the
@@ -4064,8 +4936,10 @@ final _GetSubMenu = _user32.lookupFunction<
 /// {@category user32}
 int GetSysColor(int nIndex) => _GetSysColor(nIndex);
 
-final _GetSysColor = _user32.lookupFunction<Uint32 Function(Int32 nIndex),
-    int Function(int nIndex)>('GetSysColor');
+final _GetSysColor = _user32
+    .lookupFunction<Uint32 Function(Int32 nIndex), int Function(int nIndex)>(
+      'GetSysColor',
+    );
 
 /// The GetSysColorBrush function retrieves a handle identifying a logical
 /// brush that corresponds to the specified color index.
@@ -4078,8 +4952,10 @@ final _GetSysColor = _user32.lookupFunction<Uint32 Function(Int32 nIndex),
 /// {@category user32}
 int GetSysColorBrush(int nIndex) => _GetSysColorBrush(nIndex);
 
-final _GetSysColorBrush = _user32.lookupFunction<IntPtr Function(Int32 nIndex),
-    int Function(int nIndex)>('GetSysColorBrush');
+final _GetSysColorBrush = _user32
+    .lookupFunction<IntPtr Function(Int32 nIndex), int Function(int nIndex)>(
+      'GetSysColorBrush',
+    );
 
 /// Retrieves the system DPI associated with a given process. This is useful
 /// for avoiding compatibility issues that arise from sharing DPI-sensitive
@@ -4095,8 +4971,9 @@ final _GetSysColorBrush = _user32.lookupFunction<IntPtr Function(Int32 nIndex),
 int GetSystemDpiForProcess(int hProcess) => _GetSystemDpiForProcess(hProcess);
 
 final _GetSystemDpiForProcess = _user32.lookupFunction<
-    Uint32 Function(IntPtr hProcess),
-    int Function(int hProcess)>('GetSystemDpiForProcess');
+  Uint32 Function(IntPtr hProcess),
+  int Function(int hProcess)
+>('GetSystemDpiForProcess');
 
 /// Enables the application to access the window menu (also known as the
 /// system menu or the control menu) for copying and modifying.
@@ -4111,8 +4988,9 @@ final _GetSystemDpiForProcess = _user32.lookupFunction<
 int GetSystemMenu(int hWnd, int bRevert) => _GetSystemMenu(hWnd, bRevert);
 
 final _GetSystemMenu = _user32.lookupFunction<
-    IntPtr Function(IntPtr hWnd, Int32 bRevert),
-    int Function(int hWnd, int bRevert)>('GetSystemMenu');
+  IntPtr Function(IntPtr hWnd, Int32 bRevert),
+  int Function(int hWnd, int bRevert)
+>('GetSystemMenu');
 
 /// Retrieves the specified system metric or system configuration setting.
 /// Note that all dimensions retrieved by GetSystemMetrics are in pixels.
@@ -4125,8 +5003,10 @@ final _GetSystemMenu = _user32.lookupFunction<
 /// {@category user32}
 int GetSystemMetrics(int nIndex) => _GetSystemMetrics(nIndex);
 
-final _GetSystemMetrics = _user32.lookupFunction<Int32 Function(Uint32 nIndex),
-    int Function(int nIndex)>('GetSystemMetrics');
+final _GetSystemMetrics = _user32
+    .lookupFunction<Int32 Function(Uint32 nIndex), int Function(int nIndex)>(
+      'GetSystemMetrics',
+    );
 
 /// Retrieves the specified system metric or system configuration setting
 /// taking into account a provided DPI.
@@ -4142,8 +5022,9 @@ int GetSystemMetricsForDpi(int nIndex, int dpi) =>
     _GetSystemMetricsForDpi(nIndex, dpi);
 
 final _GetSystemMetricsForDpi = _user32.lookupFunction<
-    Int32 Function(Uint32 nIndex, Uint32 dpi),
-    int Function(int nIndex, int dpi)>('GetSystemMetricsForDpi');
+  Int32 Function(Uint32 nIndex, Uint32 dpi),
+  int Function(int nIndex, int dpi)
+>('GetSystemMetricsForDpi');
 
 /// The GetTabbedTextExtent function computes the width and height of a
 /// character string. If the string contains one or more tab characters, the
@@ -4161,20 +5042,36 @@ final _GetSystemMetricsForDpi = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int GetTabbedTextExtent(int hdc, Pointer<Utf16> lpString, int chCount,
-        int nTabPositions, Pointer<Int32> lpnTabStopPositions) =>
-    _GetTabbedTextExtent(
-        hdc, lpString, chCount, nTabPositions, lpnTabStopPositions);
+int GetTabbedTextExtent(
+  int hdc,
+  Pointer<Utf16> lpString,
+  int chCount,
+  int nTabPositions,
+  Pointer<Int32> lpnTabStopPositions,
+) => _GetTabbedTextExtent(
+  hdc,
+  lpString,
+  chCount,
+  nTabPositions,
+  lpnTabStopPositions,
+);
 
 final _GetTabbedTextExtent = _user32.lookupFunction<
-    Uint32 Function(IntPtr hdc, Pointer<Utf16> lpString, Int32 chCount,
-        Int32 nTabPositions, Pointer<Int32> lpnTabStopPositions),
-    int Function(
-        int hdc,
-        Pointer<Utf16> lpString,
-        int chCount,
-        int nTabPositions,
-        Pointer<Int32> lpnTabStopPositions)>('GetTabbedTextExtentW');
+  Uint32 Function(
+    IntPtr hdc,
+    Pointer<Utf16> lpString,
+    Int32 chCount,
+    Int32 nTabPositions,
+    Pointer<Int32> lpnTabStopPositions,
+  ),
+  int Function(
+    int hdc,
+    Pointer<Utf16> lpString,
+    int chCount,
+    int nTabPositions,
+    Pointer<Int32> lpnTabStopPositions,
+  )
+>('GetTabbedTextExtentW');
 
 /// Retrieves a handle to the desktop assigned to the specified thread.
 ///
@@ -4187,8 +5084,9 @@ final _GetTabbedTextExtent = _user32.lookupFunction<
 int GetThreadDesktop(int dwThreadId) => _GetThreadDesktop(dwThreadId);
 
 final _GetThreadDesktop = _user32.lookupFunction<
-    IntPtr Function(Uint32 dwThreadId),
-    int Function(int dwThreadId)>('GetThreadDesktop');
+  IntPtr Function(Uint32 dwThreadId),
+  int Function(int dwThreadId)
+>('GetThreadDesktop');
 
 /// Gets the DPI_AWARENESS_CONTEXT for the current thread.
 ///
@@ -4198,9 +5096,10 @@ final _GetThreadDesktop = _user32.lookupFunction<
 /// {@category user32}
 int GetThreadDpiAwarenessContext() => _GetThreadDpiAwarenessContext();
 
-final _GetThreadDpiAwarenessContext =
-    _user32.lookupFunction<IntPtr Function(), int Function()>(
-        'GetThreadDpiAwarenessContext');
+final _GetThreadDpiAwarenessContext = _user32
+    .lookupFunction<IntPtr Function(), int Function()>(
+      'GetThreadDpiAwarenessContext',
+    );
 
 /// Retrieves the DPI_HOSTING_BEHAVIOR from the current thread.
 ///
@@ -4210,9 +5109,10 @@ final _GetThreadDpiAwarenessContext =
 /// {@category user32}
 int GetThreadDpiHostingBehavior() => _GetThreadDpiHostingBehavior();
 
-final _GetThreadDpiHostingBehavior =
-    _user32.lookupFunction<Int32 Function(), int Function()>(
-        'GetThreadDpiHostingBehavior');
+final _GetThreadDpiHostingBehavior = _user32
+    .lookupFunction<Int32 Function(), int Function()>(
+      'GetThreadDpiHostingBehavior',
+    );
 
 /// Retrieves information about the specified title bar.
 ///
@@ -4227,8 +5127,9 @@ int GetTitleBarInfo(int hwnd, Pointer<TITLEBARINFO> pti) =>
     _GetTitleBarInfo(hwnd, pti);
 
 final _GetTitleBarInfo = _user32.lookupFunction<
-    Int32 Function(IntPtr hwnd, Pointer<TITLEBARINFO> pti),
-    int Function(int hwnd, Pointer<TITLEBARINFO> pti)>('GetTitleBarInfo');
+  Int32 Function(IntPtr hwnd, Pointer<TITLEBARINFO> pti),
+  int Function(int hwnd, Pointer<TITLEBARINFO> pti)
+>('GetTitleBarInfo');
 
 /// Examines the Z order of the child windows associated with the specified
 /// parent window and retrieves a handle to the child window at the top of
@@ -4242,8 +5143,10 @@ final _GetTitleBarInfo = _user32.lookupFunction<
 /// {@category user32}
 int GetTopWindow(int hWnd) => _GetTopWindow(hWnd);
 
-final _GetTopWindow = _user32.lookupFunction<IntPtr Function(IntPtr hWnd),
-    int Function(int hWnd)>('GetTopWindow');
+final _GetTopWindow = _user32
+    .lookupFunction<IntPtr Function(IntPtr hWnd), int Function(int hWnd)>(
+      'GetTopWindow',
+    );
 
 /// Retrieves detailed information about touch inputs associated with a
 /// particular touch input handle.
@@ -4257,15 +5160,27 @@ final _GetTopWindow = _user32.lookupFunction<IntPtr Function(IntPtr hWnd),
 /// );
 /// ```
 /// {@category user32}
-int GetTouchInputInfo(int hTouchInput, int cInputs, Pointer<TOUCHINPUT> pInputs,
-        int cbSize) =>
-    _GetTouchInputInfo(hTouchInput, cInputs, pInputs, cbSize);
+int GetTouchInputInfo(
+  int hTouchInput,
+  int cInputs,
+  Pointer<TOUCHINPUT> pInputs,
+  int cbSize,
+) => _GetTouchInputInfo(hTouchInput, cInputs, pInputs, cbSize);
 
 final _GetTouchInputInfo = _user32.lookupFunction<
-    Int32 Function(IntPtr hTouchInput, Uint32 cInputs,
-        Pointer<TOUCHINPUT> pInputs, Int32 cbSize),
-    int Function(int hTouchInput, int cInputs, Pointer<TOUCHINPUT> pInputs,
-        int cbSize)>('GetTouchInputInfo');
+  Int32 Function(
+    IntPtr hTouchInput,
+    Uint32 cInputs,
+    Pointer<TOUCHINPUT> pInputs,
+    Int32 cbSize,
+  ),
+  int Function(
+    int hTouchInput,
+    int cInputs,
+    Pointer<TOUCHINPUT> pInputs,
+    int cbSize,
+  )
+>('GetTouchInputInfo');
 
 /// Gets pointer data before it has gone through touch prediction
 /// processing.
@@ -4276,9 +5191,10 @@ final _GetTouchInputInfo = _user32.lookupFunction<
 /// {@category user32}
 int GetUnpredictedMessagePos() => _GetUnpredictedMessagePos();
 
-final _GetUnpredictedMessagePos =
-    _user32.lookupFunction<Uint32 Function(), int Function()>(
-        'GetUnpredictedMessagePos');
+final _GetUnpredictedMessagePos = _user32
+    .lookupFunction<Uint32 Function(), int Function()>(
+      'GetUnpredictedMessagePos',
+    );
 
 /// Retrieves the currently supported clipboard formats.
 ///
@@ -4290,15 +5206,24 @@ final _GetUnpredictedMessagePos =
 /// );
 /// ```
 /// {@category user32}
-int GetUpdatedClipboardFormats(Pointer<Uint32> lpuiFormats, int cFormats,
-        Pointer<Uint32> pcFormatsOut) =>
-    _GetUpdatedClipboardFormats(lpuiFormats, cFormats, pcFormatsOut);
+int GetUpdatedClipboardFormats(
+  Pointer<Uint32> lpuiFormats,
+  int cFormats,
+  Pointer<Uint32> pcFormatsOut,
+) => _GetUpdatedClipboardFormats(lpuiFormats, cFormats, pcFormatsOut);
 
 final _GetUpdatedClipboardFormats = _user32.lookupFunction<
-    Int32 Function(Pointer<Uint32> lpuiFormats, Uint32 cFormats,
-        Pointer<Uint32> pcFormatsOut),
-    int Function(Pointer<Uint32> lpuiFormats, int cFormats,
-        Pointer<Uint32> pcFormatsOut)>('GetUpdatedClipboardFormats');
+  Int32 Function(
+    Pointer<Uint32> lpuiFormats,
+    Uint32 cFormats,
+    Pointer<Uint32> pcFormatsOut,
+  ),
+  int Function(
+    Pointer<Uint32> lpuiFormats,
+    int cFormats,
+    Pointer<Uint32> pcFormatsOut,
+  )
+>('GetUpdatedClipboardFormats');
 
 /// The GetUpdateRect function retrieves the coordinates of the smallest
 /// rectangle that completely encloses the update region of the specified
@@ -4318,8 +5243,9 @@ int GetUpdateRect(int hWnd, Pointer<RECT> lpRect, int bErase) =>
     _GetUpdateRect(hWnd, lpRect, bErase);
 
 final _GetUpdateRect = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Pointer<RECT> lpRect, Int32 bErase),
-    int Function(int hWnd, Pointer<RECT> lpRect, int bErase)>('GetUpdateRect');
+  Int32 Function(IntPtr hWnd, Pointer<RECT> lpRect, Int32 bErase),
+  int Function(int hWnd, Pointer<RECT> lpRect, int bErase)
+>('GetUpdateRect');
 
 /// The GetUpdateRgn function retrieves the update region of a window by
 /// copying it into the specified region. The coordinates of the update
@@ -4338,8 +5264,9 @@ int GetUpdateRgn(int hWnd, int hRgn, int bErase) =>
     _GetUpdateRgn(hWnd, hRgn, bErase);
 
 final _GetUpdateRgn = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, IntPtr hRgn, Int32 bErase),
-    int Function(int hWnd, int hRgn, int bErase)>('GetUpdateRgn');
+  Int32 Function(IntPtr hWnd, IntPtr hRgn, Int32 bErase),
+  int Function(int hWnd, int hRgn, int bErase)
+>('GetUpdateRgn');
 
 /// Retrieves information about the specified window station or desktop
 /// object.
@@ -4354,15 +5281,30 @@ final _GetUpdateRgn = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int GetUserObjectInformation(int hObj, int nIndex, Pointer pvInfo, int nLength,
-        Pointer<Uint32> lpnLengthNeeded) =>
-    _GetUserObjectInformation(hObj, nIndex, pvInfo, nLength, lpnLengthNeeded);
+int GetUserObjectInformation(
+  int hObj,
+  int nIndex,
+  Pointer pvInfo,
+  int nLength,
+  Pointer<Uint32> lpnLengthNeeded,
+) => _GetUserObjectInformation(hObj, nIndex, pvInfo, nLength, lpnLengthNeeded);
 
 final _GetUserObjectInformation = _user32.lookupFunction<
-    Int32 Function(IntPtr hObj, Uint32 nIndex, Pointer pvInfo, Uint32 nLength,
-        Pointer<Uint32> lpnLengthNeeded),
-    int Function(int hObj, int nIndex, Pointer pvInfo, int nLength,
-        Pointer<Uint32> lpnLengthNeeded)>('GetUserObjectInformationW');
+  Int32 Function(
+    IntPtr hObj,
+    Uint32 nIndex,
+    Pointer pvInfo,
+    Uint32 nLength,
+    Pointer<Uint32> lpnLengthNeeded,
+  ),
+  int Function(
+    int hObj,
+    int nIndex,
+    Pointer pvInfo,
+    int nLength,
+    Pointer<Uint32> lpnLengthNeeded,
+  )
+>('GetUserObjectInformationW');
 
 /// Retrieves a handle to a window that has the specified relationship
 /// (Z-Order or owner) to the specified window.
@@ -4377,8 +5319,9 @@ final _GetUserObjectInformation = _user32.lookupFunction<
 int GetWindow(int hWnd, int uCmd) => _GetWindow(hWnd, uCmd);
 
 final _GetWindow = _user32.lookupFunction<
-    IntPtr Function(IntPtr hWnd, Uint32 uCmd),
-    int Function(int hWnd, int uCmd)>('GetWindow');
+  IntPtr Function(IntPtr hWnd, Uint32 uCmd),
+  int Function(int hWnd, int uCmd)
+>('GetWindow');
 
 /// The GetWindowDC function retrieves the device context (DC) for the
 /// entire window, including title bar, menus, and scroll bars. A window
@@ -4394,8 +5337,10 @@ final _GetWindow = _user32.lookupFunction<
 /// {@category user32}
 int GetWindowDC(int hWnd) => _GetWindowDC(hWnd);
 
-final _GetWindowDC = _user32.lookupFunction<IntPtr Function(IntPtr hWnd),
-    int Function(int hWnd)>('GetWindowDC');
+final _GetWindowDC = _user32
+    .lookupFunction<IntPtr Function(IntPtr hWnd), int Function(int hWnd)>(
+      'GetWindowDC',
+    );
 
 /// Retrieves the current display affinity setting, from any process, for a
 /// given window.
@@ -4411,9 +5356,9 @@ int GetWindowDisplayAffinity(int hWnd, Pointer<Uint32> pdwAffinity) =>
     _GetWindowDisplayAffinity(hWnd, pdwAffinity);
 
 final _GetWindowDisplayAffinity = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Pointer<Uint32> pdwAffinity),
-    int Function(
-        int hWnd, Pointer<Uint32> pdwAffinity)>('GetWindowDisplayAffinity');
+  Int32 Function(IntPtr hWnd, Pointer<Uint32> pdwAffinity),
+  int Function(int hWnd, Pointer<Uint32> pdwAffinity)
+>('GetWindowDisplayAffinity');
 
 /// Returns the DPI_AWARENESS_CONTEXT associated with a window.
 ///
@@ -4425,9 +5370,10 @@ final _GetWindowDisplayAffinity = _user32.lookupFunction<
 int GetWindowDpiAwarenessContext(int hwnd) =>
     _GetWindowDpiAwarenessContext(hwnd);
 
-final _GetWindowDpiAwarenessContext = _user32.lookupFunction<
-    IntPtr Function(IntPtr hwnd),
-    int Function(int hwnd)>('GetWindowDpiAwarenessContext');
+final _GetWindowDpiAwarenessContext = _user32
+    .lookupFunction<IntPtr Function(IntPtr hwnd), int Function(int hwnd)>(
+      'GetWindowDpiAwarenessContext',
+    );
 
 /// Returns the DPI_HOSTING_BEHAVIOR of the specified window.
 ///
@@ -4438,9 +5384,10 @@ final _GetWindowDpiAwarenessContext = _user32.lookupFunction<
 /// {@category user32}
 int GetWindowDpiHostingBehavior(int hwnd) => _GetWindowDpiHostingBehavior(hwnd);
 
-final _GetWindowDpiHostingBehavior =
-    _user32.lookupFunction<Int32 Function(IntPtr hwnd), int Function(int hwnd)>(
-        'GetWindowDpiHostingBehavior');
+final _GetWindowDpiHostingBehavior = _user32
+    .lookupFunction<Int32 Function(IntPtr hwnd), int Function(int hwnd)>(
+      'GetWindowDpiHostingBehavior',
+    );
 
 /// Retrieves information about the specified window.
 ///
@@ -4455,8 +5402,9 @@ int GetWindowInfo(int hwnd, Pointer<WINDOWINFO> pwi) =>
     _GetWindowInfo(hwnd, pwi);
 
 final _GetWindowInfo = _user32.lookupFunction<
-    Int32 Function(IntPtr hwnd, Pointer<WINDOWINFO> pwi),
-    int Function(int hwnd, Pointer<WINDOWINFO> pwi)>('GetWindowInfo');
+  Int32 Function(IntPtr hwnd, Pointer<WINDOWINFO> pwi),
+  int Function(int hwnd, Pointer<WINDOWINFO> pwi)
+>('GetWindowInfo');
 
 /// Retrieves information about the specified window. The function also
 /// retrieves the value at a specified offset into the extra window memory.
@@ -4471,8 +5419,9 @@ final _GetWindowInfo = _user32.lookupFunction<
 int GetWindowLongPtr(int hWnd, int nIndex) => _GetWindowLongPtr(hWnd, nIndex);
 
 final _GetWindowLongPtr = _user32.lookupFunction<
-    IntPtr Function(IntPtr hWnd, Int32 nIndex),
-    int Function(int hWnd, int nIndex)>('GetWindowLongPtrW');
+  IntPtr Function(IntPtr hWnd, Int32 nIndex),
+  int Function(int hWnd, int nIndex)
+>('GetWindowLongPtrW');
 
 /// Retrieves the full path and file name of the module associated with the
 /// specified window handle.
@@ -4486,14 +5435,19 @@ final _GetWindowLongPtr = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int GetWindowModuleFileName(
-        int hwnd, Pointer<Utf16> pszFileName, int cchFileNameMax) =>
-    _GetWindowModuleFileName(hwnd, pszFileName, cchFileNameMax);
+  int hwnd,
+  Pointer<Utf16> pszFileName,
+  int cchFileNameMax,
+) => _GetWindowModuleFileName(hwnd, pszFileName, cchFileNameMax);
 
 final _GetWindowModuleFileName = _user32.lookupFunction<
-    Uint32 Function(
-        IntPtr hwnd, Pointer<Utf16> pszFileName, Uint32 cchFileNameMax),
-    int Function(int hwnd, Pointer<Utf16> pszFileName,
-        int cchFileNameMax)>('GetWindowModuleFileNameW');
+  Uint32 Function(
+    IntPtr hwnd,
+    Pointer<Utf16> pszFileName,
+    Uint32 cchFileNameMax,
+  ),
+  int Function(int hwnd, Pointer<Utf16> pszFileName, int cchFileNameMax)
+>('GetWindowModuleFileNameW');
 
 /// Retrieves the show state and the restored, minimized, and maximized
 /// positions of the specified window.
@@ -4508,9 +5462,9 @@ int GetWindowPlacement(int hWnd, Pointer<WINDOWPLACEMENT> lpwndpl) =>
     _GetWindowPlacement(hWnd, lpwndpl);
 
 final _GetWindowPlacement = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Pointer<WINDOWPLACEMENT> lpwndpl),
-    int Function(
-        int hWnd, Pointer<WINDOWPLACEMENT> lpwndpl)>('GetWindowPlacement');
+  Int32 Function(IntPtr hWnd, Pointer<WINDOWPLACEMENT> lpwndpl),
+  int Function(int hWnd, Pointer<WINDOWPLACEMENT> lpwndpl)
+>('GetWindowPlacement');
 
 /// Retrieves the dimensions of the bounding rectangle of the specified
 /// window. The dimensions are given in screen coordinates that are relative
@@ -4527,8 +5481,9 @@ int GetWindowRect(int hWnd, Pointer<RECT> lpRect) =>
     _GetWindowRect(hWnd, lpRect);
 
 final _GetWindowRect = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Pointer<RECT> lpRect),
-    int Function(int hWnd, Pointer<RECT> lpRect)>('GetWindowRect');
+  Int32 Function(IntPtr hWnd, Pointer<RECT> lpRect),
+  int Function(int hWnd, Pointer<RECT> lpRect)
+>('GetWindowRect');
 
 /// The GetWindowRgn function obtains a copy of the window region of a
 /// window. The window region of a window is set by calling the SetWindowRgn
@@ -4546,8 +5501,9 @@ final _GetWindowRect = _user32.lookupFunction<
 int GetWindowRgn(int hWnd, int hRgn) => _GetWindowRgn(hWnd, hRgn);
 
 final _GetWindowRgn = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, IntPtr hRgn),
-    int Function(int hWnd, int hRgn)>('GetWindowRgn');
+  Int32 Function(IntPtr hWnd, IntPtr hRgn),
+  int Function(int hWnd, int hRgn)
+>('GetWindowRgn');
 
 /// The GetWindowRgnBox function retrieves the dimensions of the tightest
 /// bounding rectangle for the window region of a window.
@@ -4563,8 +5519,9 @@ int GetWindowRgnBox(int hWnd, Pointer<RECT> lprc) =>
     _GetWindowRgnBox(hWnd, lprc);
 
 final _GetWindowRgnBox = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Pointer<RECT> lprc),
-    int Function(int hWnd, Pointer<RECT> lprc)>('GetWindowRgnBox');
+  Int32 Function(IntPtr hWnd, Pointer<RECT> lprc),
+  int Function(int hWnd, Pointer<RECT> lprc)
+>('GetWindowRgnBox');
 
 /// Copies the text of the specified window's title bar (if it has one) into
 /// a buffer. If the specified window is a control, the text of the control
@@ -4583,9 +5540,9 @@ int GetWindowText(int hWnd, Pointer<Utf16> lpString, int nMaxCount) =>
     _GetWindowText(hWnd, lpString, nMaxCount);
 
 final _GetWindowText = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Pointer<Utf16> lpString, Int32 nMaxCount),
-    int Function(
-        int hWnd, Pointer<Utf16> lpString, int nMaxCount)>('GetWindowTextW');
+  Int32 Function(IntPtr hWnd, Pointer<Utf16> lpString, Int32 nMaxCount),
+  int Function(int hWnd, Pointer<Utf16> lpString, int nMaxCount)
+>('GetWindowTextW');
 
 /// Retrieves the length, in characters, of the specified window's title bar
 /// text (if the window has a title bar). If the specified window is a
@@ -4601,9 +5558,10 @@ final _GetWindowText = _user32.lookupFunction<
 /// {@category user32}
 int GetWindowTextLength(int hWnd) => _GetWindowTextLength(hWnd);
 
-final _GetWindowTextLength =
-    _user32.lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
-        'GetWindowTextLengthW');
+final _GetWindowTextLength = _user32
+    .lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
+      'GetWindowTextLengthW',
+    );
 
 /// Retrieves the identifier of the thread that created the specified window
 /// and, optionally, the identifier of the process that created the window.
@@ -4619,9 +5577,9 @@ int GetWindowThreadProcessId(int hWnd, Pointer<Uint32> lpdwProcessId) =>
     _GetWindowThreadProcessId(hWnd, lpdwProcessId);
 
 final _GetWindowThreadProcessId = _user32.lookupFunction<
-    Uint32 Function(IntPtr hWnd, Pointer<Uint32> lpdwProcessId),
-    int Function(
-        int hWnd, Pointer<Uint32> lpdwProcessId)>('GetWindowThreadProcessId');
+  Uint32 Function(IntPtr hWnd, Pointer<Uint32> lpdwProcessId),
+  int Function(int hWnd, Pointer<Uint32> lpdwProcessId)
+>('GetWindowThreadProcessId');
 
 /// The GrayString function draws gray text at the specified location. The
 /// function draws the text by copying it into a memory bitmap, graying the
@@ -4644,39 +5602,51 @@ final _GetWindowThreadProcessId = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int GrayString(
-        int hDC,
-        int hBrush,
-        Pointer<NativeFunction<GRAYSTRINGPROC>> lpOutputFunc,
-        int lpData,
-        int nCount,
-        int X,
-        int Y,
-        int nWidth,
-        int nHeight) =>
-    _GrayString(
-        hDC, hBrush, lpOutputFunc, lpData, nCount, X, Y, nWidth, nHeight);
+  int hDC,
+  int hBrush,
+  Pointer<NativeFunction<GRAYSTRINGPROC>> lpOutputFunc,
+  int lpData,
+  int nCount,
+  int X,
+  int Y,
+  int nWidth,
+  int nHeight,
+) => _GrayString(
+  hDC,
+  hBrush,
+  lpOutputFunc,
+  lpData,
+  nCount,
+  X,
+  Y,
+  nWidth,
+  nHeight,
+);
 
 final _GrayString = _user32.lookupFunction<
-    Int32 Function(
-        IntPtr hDC,
-        IntPtr hBrush,
-        Pointer<NativeFunction<GRAYSTRINGPROC>> lpOutputFunc,
-        IntPtr lpData,
-        Int32 nCount,
-        Int32 X,
-        Int32 Y,
-        Int32 nWidth,
-        Int32 nHeight),
-    int Function(
-        int hDC,
-        int hBrush,
-        Pointer<NativeFunction<GRAYSTRINGPROC>> lpOutputFunc,
-        int lpData,
-        int nCount,
-        int X,
-        int Y,
-        int nWidth,
-        int nHeight)>('GrayStringW');
+  Int32 Function(
+    IntPtr hDC,
+    IntPtr hBrush,
+    Pointer<NativeFunction<GRAYSTRINGPROC>> lpOutputFunc,
+    IntPtr lpData,
+    Int32 nCount,
+    Int32 X,
+    Int32 Y,
+    Int32 nWidth,
+    Int32 nHeight,
+  ),
+  int Function(
+    int hDC,
+    int hBrush,
+    Pointer<NativeFunction<GRAYSTRINGPROC>> lpOutputFunc,
+    int lpData,
+    int nCount,
+    int X,
+    int Y,
+    int nWidth,
+    int nHeight,
+  )
+>('GrayStringW');
 
 /// Removes the caret from the screen. Hiding a caret does not destroy its
 /// current shape or invalidate the insertion point.
@@ -4689,9 +5659,10 @@ final _GrayString = _user32.lookupFunction<
 /// {@category user32}
 int HideCaret(int hWnd) => _HideCaret(hWnd);
 
-final _HideCaret =
-    _user32.lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
-        'HideCaret');
+final _HideCaret = _user32
+    .lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
+      'HideCaret',
+    );
 
 /// Adds or removes highlighting from an item in a menu bar.
 ///
@@ -4708,10 +5679,14 @@ int HiliteMenuItem(int hWnd, int hMenu, int uIDHiliteItem, int uHilite) =>
     _HiliteMenuItem(hWnd, hMenu, uIDHiliteItem, uHilite);
 
 final _HiliteMenuItem = _user32.lookupFunction<
-    Int32 Function(
-        IntPtr hWnd, IntPtr hMenu, Uint32 uIDHiliteItem, Uint32 uHilite),
-    int Function(
-        int hWnd, int hMenu, int uIDHiliteItem, int uHilite)>('HiliteMenuItem');
+  Int32 Function(
+    IntPtr hWnd,
+    IntPtr hMenu,
+    Uint32 uIDHiliteItem,
+    Uint32 uHilite,
+  ),
+  int Function(int hWnd, int hMenu, int uIDHiliteItem, int uHilite)
+>('HiliteMenuItem');
 
 /// The InflateRect function increases or decreases the width and height of
 /// the specified rectangle. The InflateRect function adds -dx units to the
@@ -4732,8 +5707,9 @@ int InflateRect(Pointer<RECT> lprc, int dx, int dy) =>
     _InflateRect(lprc, dx, dy);
 
 final _InflateRect = _user32.lookupFunction<
-    Int32 Function(Pointer<RECT> lprc, Int32 dx, Int32 dy),
-    int Function(Pointer<RECT> lprc, int dx, int dy)>('InflateRect');
+  Int32 Function(Pointer<RECT> lprc, Int32 dx, Int32 dy),
+  int Function(Pointer<RECT> lprc, int dx, int dy)
+>('InflateRect');
 
 /// Determines whether the current window procedure is processing a message
 /// that was sent from another thread (in the same process or a different
@@ -4745,8 +5721,9 @@ final _InflateRect = _user32.lookupFunction<
 /// {@category user32}
 int InSendMessage() => _InSendMessage();
 
-final _InSendMessage =
-    _user32.lookupFunction<Int32 Function(), int Function()>('InSendMessage');
+final _InSendMessage = _user32.lookupFunction<Int32 Function(), int Function()>(
+  'InSendMessage',
+);
 
 /// Determines whether the current window procedure is processing a message
 /// that was sent from another thread (in the same process or a different
@@ -4761,8 +5738,9 @@ final _InSendMessage =
 int InSendMessageEx(Pointer lpReserved) => _InSendMessageEx(lpReserved);
 
 final _InSendMessageEx = _user32.lookupFunction<
-    Uint32 Function(Pointer lpReserved),
-    int Function(Pointer lpReserved)>('InSendMessageEx');
+  Uint32 Function(Pointer lpReserved),
+  int Function(Pointer lpReserved)
+>('InSendMessageEx');
 
 /// Inserts a new menu item into a menu, moving other items down the menu.
 ///
@@ -4776,15 +5754,30 @@ final _InSendMessageEx = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int InsertMenu(int hMenu, int uPosition, int uFlags, int uIDNewItem,
-        Pointer<Utf16> lpNewItem) =>
-    _InsertMenu(hMenu, uPosition, uFlags, uIDNewItem, lpNewItem);
+int InsertMenu(
+  int hMenu,
+  int uPosition,
+  int uFlags,
+  int uIDNewItem,
+  Pointer<Utf16> lpNewItem,
+) => _InsertMenu(hMenu, uPosition, uFlags, uIDNewItem, lpNewItem);
 
 final _InsertMenu = _user32.lookupFunction<
-    Int32 Function(IntPtr hMenu, Uint32 uPosition, Uint32 uFlags,
-        IntPtr uIDNewItem, Pointer<Utf16> lpNewItem),
-    int Function(int hMenu, int uPosition, int uFlags, int uIDNewItem,
-        Pointer<Utf16> lpNewItem)>('InsertMenuW');
+  Int32 Function(
+    IntPtr hMenu,
+    Uint32 uPosition,
+    Uint32 uFlags,
+    IntPtr uIDNewItem,
+    Pointer<Utf16> lpNewItem,
+  ),
+  int Function(
+    int hMenu,
+    int uPosition,
+    int uFlags,
+    int uIDNewItem,
+    Pointer<Utf16> lpNewItem,
+  )
+>('InsertMenuW');
 
 /// Inserts a new menu item at the specified position in a menu.
 ///
@@ -4798,14 +5791,21 @@ final _InsertMenu = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int InsertMenuItem(
-        int hmenu, int item, int fByPosition, Pointer<MENUITEMINFO> lpmi) =>
-    _InsertMenuItem(hmenu, item, fByPosition, lpmi);
+  int hmenu,
+  int item,
+  int fByPosition,
+  Pointer<MENUITEMINFO> lpmi,
+) => _InsertMenuItem(hmenu, item, fByPosition, lpmi);
 
 final _InsertMenuItem = _user32.lookupFunction<
-    Int32 Function(IntPtr hmenu, Uint32 item, Int32 fByPosition,
-        Pointer<MENUITEMINFO> lpmi),
-    int Function(int hmenu, int item, int fByPosition,
-        Pointer<MENUITEMINFO> lpmi)>('InsertMenuItemW');
+  Int32 Function(
+    IntPtr hmenu,
+    Uint32 item,
+    Int32 fByPosition,
+    Pointer<MENUITEMINFO> lpmi,
+  ),
+  int Function(int hmenu, int item, int fByPosition, Pointer<MENUITEMINFO> lpmi)
+>('InsertMenuItemW');
 
 /// The IntersectRect function calculates the intersection of two source
 /// rectangles and places the coordinates of the intersection rectangle into
@@ -4821,15 +5821,24 @@ final _InsertMenuItem = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int IntersectRect(Pointer<RECT> lprcDst, Pointer<RECT> lprcSrc1,
-        Pointer<RECT> lprcSrc2) =>
-    _IntersectRect(lprcDst, lprcSrc1, lprcSrc2);
+int IntersectRect(
+  Pointer<RECT> lprcDst,
+  Pointer<RECT> lprcSrc1,
+  Pointer<RECT> lprcSrc2,
+) => _IntersectRect(lprcDst, lprcSrc1, lprcSrc2);
 
 final _IntersectRect = _user32.lookupFunction<
-    Int32 Function(
-        Pointer<RECT> lprcDst, Pointer<RECT> lprcSrc1, Pointer<RECT> lprcSrc2),
-    int Function(Pointer<RECT> lprcDst, Pointer<RECT> lprcSrc1,
-        Pointer<RECT> lprcSrc2)>('IntersectRect');
+  Int32 Function(
+    Pointer<RECT> lprcDst,
+    Pointer<RECT> lprcSrc1,
+    Pointer<RECT> lprcSrc2,
+  ),
+  int Function(
+    Pointer<RECT> lprcDst,
+    Pointer<RECT> lprcSrc1,
+    Pointer<RECT> lprcSrc2,
+  )
+>('IntersectRect');
 
 /// The InvalidateRect function adds a rectangle to the specified window's
 /// update region. The update region represents the portion of the window's
@@ -4847,8 +5856,9 @@ int InvalidateRect(int hWnd, Pointer<RECT> lpRect, int bErase) =>
     _InvalidateRect(hWnd, lpRect, bErase);
 
 final _InvalidateRect = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Pointer<RECT> lpRect, Int32 bErase),
-    int Function(int hWnd, Pointer<RECT> lpRect, int bErase)>('InvalidateRect');
+  Int32 Function(IntPtr hWnd, Pointer<RECT> lpRect, Int32 bErase),
+  int Function(int hWnd, Pointer<RECT> lpRect, int bErase)
+>('InvalidateRect');
 
 /// The InvalidateRgn function invalidates the client area within the
 /// specified region by adding it to the current update region of a window.
@@ -4867,8 +5877,9 @@ int InvalidateRgn(int hWnd, int hRgn, int bErase) =>
     _InvalidateRgn(hWnd, hRgn, bErase);
 
 final _InvalidateRgn = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, IntPtr hRgn, Int32 bErase),
-    int Function(int hWnd, int hRgn, int bErase)>('InvalidateRgn');
+  Int32 Function(IntPtr hWnd, IntPtr hRgn, Int32 bErase),
+  int Function(int hWnd, int hRgn, int bErase)
+>('InvalidateRgn');
 
 /// The InvertRect function inverts a rectangle in a window by performing a
 /// logical NOT operation on the color values for each pixel in the
@@ -4884,8 +5895,9 @@ final _InvalidateRgn = _user32.lookupFunction<
 int InvertRect(int hDC, Pointer<RECT> lprc) => _InvertRect(hDC, lprc);
 
 final _InvertRect = _user32.lookupFunction<
-    Int32 Function(IntPtr hDC, Pointer<RECT> lprc),
-    int Function(int hDC, Pointer<RECT> lprc)>('InvertRect');
+  Int32 Function(IntPtr hDC, Pointer<RECT> lprc),
+  int Function(int hDC, Pointer<RECT> lprc)
+>('InvertRect');
 
 /// Determines whether a window is a child window or descendant window of a
 /// specified parent window. A child window is the direct descendant of a
@@ -4903,8 +5915,9 @@ final _InvertRect = _user32.lookupFunction<
 int IsChild(int hWndParent, int hWnd) => _IsChild(hWndParent, hWnd);
 
 final _IsChild = _user32.lookupFunction<
-    Int32 Function(IntPtr hWndParent, IntPtr hWnd),
-    int Function(int hWndParent, int hWnd)>('IsChild');
+  Int32 Function(IntPtr hWndParent, IntPtr hWnd),
+  int Function(int hWndParent, int hWnd)
+>('IsChild');
 
 /// Determines whether the clipboard contains data in the specified format.
 ///
@@ -4917,9 +5930,10 @@ final _IsChild = _user32.lookupFunction<
 int IsClipboardFormatAvailable(int format) =>
     _IsClipboardFormatAvailable(format);
 
-final _IsClipboardFormatAvailable = _user32.lookupFunction<
-    Int32 Function(Uint32 format),
-    int Function(int format)>('IsClipboardFormatAvailable');
+final _IsClipboardFormatAvailable = _user32
+    .lookupFunction<Int32 Function(Uint32 format), int Function(int format)>(
+      'IsClipboardFormatAvailable',
+    );
 
 /// Determines whether a message is intended for the specified dialog box
 /// and, if it is, processes the message.
@@ -4935,8 +5949,9 @@ int IsDialogMessage(int hDlg, Pointer<MSG> lpMsg) =>
     _IsDialogMessage(hDlg, lpMsg);
 
 final _IsDialogMessage = _user32.lookupFunction<
-    Int32 Function(IntPtr hDlg, Pointer<MSG> lpMsg),
-    int Function(int hDlg, Pointer<MSG> lpMsg)>('IsDialogMessageW');
+  Int32 Function(IntPtr hDlg, Pointer<MSG> lpMsg),
+  int Function(int hDlg, Pointer<MSG> lpMsg)
+>('IsDialogMessageW');
 
 /// The IsDlgButtonChecked function determines whether a button control is
 /// checked or whether a three-state button control is checked, unchecked,
@@ -4953,8 +5968,9 @@ int IsDlgButtonChecked(int hDlg, int nIDButton) =>
     _IsDlgButtonChecked(hDlg, nIDButton);
 
 final _IsDlgButtonChecked = _user32.lookupFunction<
-    Uint32 Function(IntPtr hDlg, Int32 nIDButton),
-    int Function(int hDlg, int nIDButton)>('IsDlgButtonChecked');
+  Uint32 Function(IntPtr hDlg, Int32 nIDButton),
+  int Function(int hDlg, int nIDButton)
+>('IsDlgButtonChecked');
 
 /// Determines whether the calling thread is already a GUI thread. It can
 /// also optionally convert the thread to a GUI thread.
@@ -4967,8 +5983,10 @@ final _IsDlgButtonChecked = _user32.lookupFunction<
 /// {@category user32}
 int IsGUIThread(int bConvert) => _IsGUIThread(bConvert);
 
-final _IsGUIThread = _user32.lookupFunction<Int32 Function(Int32 bConvert),
-    int Function(int bConvert)>('IsGUIThread');
+final _IsGUIThread = _user32
+    .lookupFunction<Int32 Function(Int32 bConvert), int Function(int bConvert)>(
+      'IsGUIThread',
+    );
 
 /// Determines whether the system considers that a specified application is
 /// not responding. An application is considered to be not responding if it
@@ -4983,9 +6001,10 @@ final _IsGUIThread = _user32.lookupFunction<Int32 Function(Int32 bConvert),
 /// {@category user32}
 int IsHungAppWindow(int hwnd) => _IsHungAppWindow(hwnd);
 
-final _IsHungAppWindow =
-    _user32.lookupFunction<Int32 Function(IntPtr hwnd), int Function(int hwnd)>(
-        'IsHungAppWindow');
+final _IsHungAppWindow = _user32
+    .lookupFunction<Int32 Function(IntPtr hwnd), int Function(int hwnd)>(
+      'IsHungAppWindow',
+    );
 
 /// Determines whether the specified window is minimized (iconic).
 ///
@@ -4997,9 +6016,10 @@ final _IsHungAppWindow =
 /// {@category user32}
 int IsIconic(int hWnd) => _IsIconic(hWnd);
 
-final _IsIconic =
-    _user32.lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
-        'IsIconic');
+final _IsIconic = _user32
+    .lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
+      'IsIconic',
+    );
 
 /// Determines whether the process belongs to a Windows Store app.
 ///
@@ -5012,8 +6032,9 @@ final _IsIconic =
 int IsImmersiveProcess(int hProcess) => _IsImmersiveProcess(hProcess);
 
 final _IsImmersiveProcess = _user32.lookupFunction<
-    Int32 Function(IntPtr hProcess),
-    int Function(int hProcess)>('IsImmersiveProcess');
+  Int32 Function(IntPtr hProcess),
+  int Function(int hProcess)
+>('IsImmersiveProcess');
 
 /// Determines whether a handle is a menu handle.
 ///
@@ -5025,8 +6046,10 @@ final _IsImmersiveProcess = _user32.lookupFunction<
 /// {@category user32}
 int IsMenu(int hMenu) => _IsMenu(hMenu);
 
-final _IsMenu = _user32.lookupFunction<Int32 Function(IntPtr hMenu),
-    int Function(int hMenu)>('IsMenu');
+final _IsMenu = _user32
+    .lookupFunction<Int32 Function(IntPtr hMenu), int Function(int hMenu)>(
+      'IsMenu',
+    );
 
 /// Indicates whether EnableMouseInPointer is set for the mouse to act as a
 /// pointer input device and send WM_POINTER messages.
@@ -5037,9 +6060,10 @@ final _IsMenu = _user32.lookupFunction<Int32 Function(IntPtr hMenu),
 /// {@category user32}
 int IsMouseInPointerEnabled() => _IsMouseInPointerEnabled();
 
-final _IsMouseInPointerEnabled =
-    _user32.lookupFunction<Int32 Function(), int Function()>(
-        'IsMouseInPointerEnabled');
+final _IsMouseInPointerEnabled = _user32
+    .lookupFunction<Int32 Function(), int Function()>(
+      'IsMouseInPointerEnabled',
+    );
 
 /// Determines whether the current process is dots per inch (dpi) aware such
 /// that it adjusts the sizes of UI elements to compensate for the dpi
@@ -5068,8 +6092,10 @@ final _IsProcessDPIAware = _user32
 /// {@category user32}
 int IsRectEmpty(Pointer<RECT> lprc) => _IsRectEmpty(lprc);
 
-final _IsRectEmpty = _user32.lookupFunction<Int32 Function(Pointer<RECT> lprc),
-    int Function(Pointer<RECT> lprc)>('IsRectEmpty');
+final _IsRectEmpty = _user32.lookupFunction<
+  Int32 Function(Pointer<RECT> lprc),
+  int Function(Pointer<RECT> lprc)
+>('IsRectEmpty');
 
 /// Checks whether a specified window is touch-capable and, optionally,
 /// retrieves the modifier flags set for the window's touch capability.
@@ -5085,8 +6111,9 @@ int IsTouchWindow(int hwnd, Pointer<Uint32> pulFlags) =>
     _IsTouchWindow(hwnd, pulFlags);
 
 final _IsTouchWindow = _user32.lookupFunction<
-    Int32 Function(IntPtr hwnd, Pointer<Uint32> pulFlags),
-    int Function(int hwnd, Pointer<Uint32> pulFlags)>('IsTouchWindow');
+  Int32 Function(IntPtr hwnd, Pointer<Uint32> pulFlags),
+  int Function(int hwnd, Pointer<Uint32> pulFlags)
+>('IsTouchWindow');
 
 /// Determines if a specified DPI_AWARENESS_CONTEXT is valid and supported
 /// by the current system.
@@ -5098,9 +6125,10 @@ final _IsTouchWindow = _user32.lookupFunction<
 /// {@category user32}
 int IsValidDpiAwarenessContext(int value) => _IsValidDpiAwarenessContext(value);
 
-final _IsValidDpiAwarenessContext = _user32.lookupFunction<
-    Int32 Function(IntPtr value),
-    int Function(int value)>('IsValidDpiAwarenessContext');
+final _IsValidDpiAwarenessContext = _user32
+    .lookupFunction<Int32 Function(IntPtr value), int Function(int value)>(
+      'IsValidDpiAwarenessContext',
+    );
 
 /// Determines whether the specified window handle identifies an existing
 /// window.
@@ -5112,9 +6140,10 @@ final _IsValidDpiAwarenessContext = _user32.lookupFunction<
 /// {@category user32}
 int IsWindow(int hWnd) => _IsWindow(hWnd);
 
-final _IsWindow =
-    _user32.lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
-        'IsWindow');
+final _IsWindow = _user32
+    .lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
+      'IsWindow',
+    );
 
 /// Determines whether the specified window is enabled for mouse and
 /// keyboard input.
@@ -5127,9 +6156,10 @@ final _IsWindow =
 /// {@category user32}
 int IsWindowEnabled(int hWnd) => _IsWindowEnabled(hWnd);
 
-final _IsWindowEnabled =
-    _user32.lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
-        'IsWindowEnabled');
+final _IsWindowEnabled = _user32
+    .lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
+      'IsWindowEnabled',
+    );
 
 /// Determines whether the specified window is a native Unicode window.
 ///
@@ -5140,9 +6170,10 @@ final _IsWindowEnabled =
 /// {@category user32}
 int IsWindowUnicode(int hWnd) => _IsWindowUnicode(hWnd);
 
-final _IsWindowUnicode =
-    _user32.lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
-        'IsWindowUnicode');
+final _IsWindowUnicode = _user32
+    .lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
+      'IsWindowUnicode',
+    );
 
 /// Determines the visibility state of the specified window.
 ///
@@ -5154,9 +6185,10 @@ final _IsWindowUnicode =
 /// {@category user32}
 int IsWindowVisible(int hWnd) => _IsWindowVisible(hWnd);
 
-final _IsWindowVisible =
-    _user32.lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
-        'IsWindowVisible');
+final _IsWindowVisible = _user32
+    .lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
+      'IsWindowVisible',
+    );
 
 /// Determines whether the last message read from the current thread's queue
 /// originated from a WOW64 process.
@@ -5167,8 +6199,8 @@ final _IsWindowVisible =
 /// {@category user32}
 int IsWow64Message() => _IsWow64Message();
 
-final _IsWow64Message =
-    _user32.lookupFunction<Int32 Function(), int Function()>('IsWow64Message');
+final _IsWow64Message = _user32
+    .lookupFunction<Int32 Function(), int Function()>('IsWow64Message');
 
 /// Determines whether a window is maximized.
 ///
@@ -5180,9 +6212,10 @@ final _IsWow64Message =
 /// {@category user32}
 int IsZoomed(int hWnd) => _IsZoomed(hWnd);
 
-final _IsZoomed =
-    _user32.lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
-        'IsZoomed');
+final _IsZoomed = _user32
+    .lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
+      'IsZoomed',
+    );
 
 /// Destroys the specified timer.
 ///
@@ -5196,8 +6229,9 @@ final _IsZoomed =
 int KillTimer(int hWnd, int uIDEvent) => _KillTimer(hWnd, uIDEvent);
 
 final _KillTimer = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, IntPtr uIDEvent),
-    int Function(int hWnd, int uIDEvent)>('KillTimer');
+  Int32 Function(IntPtr hWnd, IntPtr uIDEvent),
+  int Function(int hWnd, int uIDEvent)
+>('KillTimer');
 
 /// Loads the specified accelerator table.
 ///
@@ -5212,9 +6246,9 @@ int LoadAccelerators(int hInstance, Pointer<Utf16> lpTableName) =>
     _LoadAccelerators(hInstance, lpTableName);
 
 final _LoadAccelerators = _user32.lookupFunction<
-    IntPtr Function(IntPtr hInstance, Pointer<Utf16> lpTableName),
-    int Function(
-        int hInstance, Pointer<Utf16> lpTableName)>('LoadAcceleratorsW');
+  IntPtr Function(IntPtr hInstance, Pointer<Utf16> lpTableName),
+  int Function(int hInstance, Pointer<Utf16> lpTableName)
+>('LoadAcceleratorsW');
 
 /// Loads the specified cursor resource from the executable (.EXE) file
 /// associated with an application instance. Note: this function has been
@@ -5231,8 +6265,9 @@ int LoadCursor(int hInstance, Pointer<Utf16> lpCursorName) =>
     _LoadCursor(hInstance, lpCursorName);
 
 final _LoadCursor = _user32.lookupFunction<
-    IntPtr Function(IntPtr hInstance, Pointer<Utf16> lpCursorName),
-    int Function(int hInstance, Pointer<Utf16> lpCursorName)>('LoadCursorW');
+  IntPtr Function(IntPtr hInstance, Pointer<Utf16> lpCursorName),
+  int Function(int hInstance, Pointer<Utf16> lpCursorName)
+>('LoadCursorW');
 
 /// Creates a cursor based on data contained in a file.
 ///
@@ -5246,8 +6281,9 @@ int LoadCursorFromFile(Pointer<Utf16> lpFileName) =>
     _LoadCursorFromFile(lpFileName);
 
 final _LoadCursorFromFile = _user32.lookupFunction<
-    IntPtr Function(Pointer<Utf16> lpFileName),
-    int Function(Pointer<Utf16> lpFileName)>('LoadCursorFromFileW');
+  IntPtr Function(Pointer<Utf16> lpFileName),
+  int Function(Pointer<Utf16> lpFileName)
+>('LoadCursorFromFileW');
 
 /// Loads the specified icon resource from the executable (.exe) file
 /// associated with an application instance.
@@ -5263,8 +6299,9 @@ int LoadIcon(int hInstance, Pointer<Utf16> lpIconName) =>
     _LoadIcon(hInstance, lpIconName);
 
 final _LoadIcon = _user32.lookupFunction<
-    IntPtr Function(IntPtr hInstance, Pointer<Utf16> lpIconName),
-    int Function(int hInstance, Pointer<Utf16> lpIconName)>('LoadIconW');
+  IntPtr Function(IntPtr hInstance, Pointer<Utf16> lpIconName),
+  int Function(int hInstance, Pointer<Utf16> lpIconName)
+>('LoadIconW');
 
 /// Loads an icon, cursor, animated cursor, or bitmap.
 ///
@@ -5280,14 +6317,32 @@ final _LoadIcon = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int LoadImage(
-        int hInst, Pointer<Utf16> name, int type, int cx, int cy, int fuLoad) =>
-    _LoadImage(hInst, name, type, cx, cy, fuLoad);
+  int hInst,
+  Pointer<Utf16> name,
+  int type,
+  int cx,
+  int cy,
+  int fuLoad,
+) => _LoadImage(hInst, name, type, cx, cy, fuLoad);
 
 final _LoadImage = _user32.lookupFunction<
-    IntPtr Function(IntPtr hInst, Pointer<Utf16> name, Uint32 type, Int32 cx,
-        Int32 cy, Uint32 fuLoad),
-    int Function(int hInst, Pointer<Utf16> name, int type, int cx, int cy,
-        int fuLoad)>('LoadImageW');
+  IntPtr Function(
+    IntPtr hInst,
+    Pointer<Utf16> name,
+    Uint32 type,
+    Int32 cx,
+    Int32 cy,
+    Uint32 fuLoad,
+  ),
+  int Function(
+    int hInst,
+    Pointer<Utf16> name,
+    int type,
+    int cx,
+    int cy,
+    int fuLoad,
+  )
+>('LoadImageW');
 
 /// Loads a new input locale identifier (formerly called the keyboard
 /// layout) into the system.
@@ -5303,8 +6358,9 @@ int LoadKeyboardLayout(Pointer<Utf16> pwszKLID, int Flags) =>
     _LoadKeyboardLayout(pwszKLID, Flags);
 
 final _LoadKeyboardLayout = _user32.lookupFunction<
-    IntPtr Function(Pointer<Utf16> pwszKLID, Uint32 Flags),
-    int Function(Pointer<Utf16> pwszKLID, int Flags)>('LoadKeyboardLayoutW');
+  IntPtr Function(Pointer<Utf16> pwszKLID, Uint32 Flags),
+  int Function(Pointer<Utf16> pwszKLID, int Flags)
+>('LoadKeyboardLayoutW');
 
 /// Loads the specified menu resource from the executable (.exe) file
 /// associated with an application instance.
@@ -5320,8 +6376,9 @@ int LoadMenu(int hInstance, Pointer<Utf16> lpMenuName) =>
     _LoadMenu(hInstance, lpMenuName);
 
 final _LoadMenu = _user32.lookupFunction<
-    IntPtr Function(IntPtr hInstance, Pointer<Utf16> lpMenuName),
-    int Function(int hInstance, Pointer<Utf16> lpMenuName)>('LoadMenuW');
+  IntPtr Function(IntPtr hInstance, Pointer<Utf16> lpMenuName),
+  int Function(int hInstance, Pointer<Utf16> lpMenuName)
+>('LoadMenuW');
 
 /// Creates a cursor based on data contained in a file.
 ///
@@ -5335,8 +6392,9 @@ int LoadMenuIndirect(Pointer lpMenuTemplate) =>
     _LoadMenuIndirect(lpMenuTemplate);
 
 final _LoadMenuIndirect = _user32.lookupFunction<
-    IntPtr Function(Pointer lpMenuTemplate),
-    int Function(Pointer lpMenuTemplate)>('LoadMenuIndirectW');
+  IntPtr Function(Pointer lpMenuTemplate),
+  int Function(Pointer lpMenuTemplate)
+>('LoadMenuIndirectW');
 
 /// Loads a string resource from the executable file associated with a
 /// specified module and either copies the string into a buffer with a
@@ -5353,14 +6411,26 @@ final _LoadMenuIndirect = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int LoadString(
-        int hInstance, int uID, Pointer<Utf16> lpBuffer, int cchBufferMax) =>
-    _LoadString(hInstance, uID, lpBuffer, cchBufferMax);
+  int hInstance,
+  int uID,
+  Pointer<Utf16> lpBuffer,
+  int cchBufferMax,
+) => _LoadString(hInstance, uID, lpBuffer, cchBufferMax);
 
 final _LoadString = _user32.lookupFunction<
-    Int32 Function(IntPtr hInstance, Uint32 uID, Pointer<Utf16> lpBuffer,
-        Int32 cchBufferMax),
-    int Function(int hInstance, int uID, Pointer<Utf16> lpBuffer,
-        int cchBufferMax)>('LoadStringW');
+  Int32 Function(
+    IntPtr hInstance,
+    Uint32 uID,
+    Pointer<Utf16> lpBuffer,
+    Int32 cchBufferMax,
+  ),
+  int Function(
+    int hInstance,
+    int uID,
+    Pointer<Utf16> lpBuffer,
+    int cchBufferMax,
+  )
+>('LoadStringW');
 
 /// The foreground process can call the LockSetForegroundWindow function to
 /// disable calls to the SetForegroundWindow function.
@@ -5375,8 +6445,9 @@ int LockSetForegroundWindow(int uLockCode) =>
     _LockSetForegroundWindow(uLockCode);
 
 final _LockSetForegroundWindow = _user32.lookupFunction<
-    Int32 Function(Uint32 uLockCode),
-    int Function(int uLockCode)>('LockSetForegroundWindow');
+  Int32 Function(Uint32 uLockCode),
+  int Function(int uLockCode)
+>('LockSetForegroundWindow');
 
 /// The LockWindowUpdate function disables or enables drawing in the
 /// specified window. Only one window can be locked at a time.
@@ -5390,8 +6461,9 @@ final _LockSetForegroundWindow = _user32.lookupFunction<
 int LockWindowUpdate(int hWndLock) => _LockWindowUpdate(hWndLock);
 
 final _LockWindowUpdate = _user32.lookupFunction<
-    Int32 Function(IntPtr hWndLock),
-    int Function(int hWndLock)>('LockWindowUpdate');
+  Int32 Function(IntPtr hWndLock),
+  int Function(int hWndLock)
+>('LockWindowUpdate');
 
 /// Locks the workstation's display. Locking a workstation protects it from
 /// unauthorized use.
@@ -5402,8 +6474,8 @@ final _LockWindowUpdate = _user32.lookupFunction<
 /// {@category user32}
 int LockWorkStation() => _LockWorkStation();
 
-final _LockWorkStation =
-    _user32.lookupFunction<Int32 Function(), int Function()>('LockWorkStation');
+final _LockWorkStation = _user32
+    .lookupFunction<Int32 Function(), int Function()>('LockWorkStation');
 
 /// Converts the logical coordinates of a point in a window to physical
 /// coordinates.
@@ -5419,8 +6491,9 @@ int LogicalToPhysicalPoint(int hWnd, Pointer<POINT> lpPoint) =>
     _LogicalToPhysicalPoint(hWnd, lpPoint);
 
 final _LogicalToPhysicalPoint = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Pointer<POINT> lpPoint),
-    int Function(int hWnd, Pointer<POINT> lpPoint)>('LogicalToPhysicalPoint');
+  Int32 Function(IntPtr hWnd, Pointer<POINT> lpPoint),
+  int Function(int hWnd, Pointer<POINT> lpPoint)
+>('LogicalToPhysicalPoint');
 
 /// Converts a point in a window from logical coordinates into physical
 /// coordinates, regardless of the dots per inch (dpi) awareness of the
@@ -5437,9 +6510,9 @@ int LogicalToPhysicalPointForPerMonitorDPI(int hWnd, Pointer<POINT> lpPoint) =>
     _LogicalToPhysicalPointForPerMonitorDPI(hWnd, lpPoint);
 
 final _LogicalToPhysicalPointForPerMonitorDPI = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Pointer<POINT> lpPoint),
-    int Function(int hWnd,
-        Pointer<POINT> lpPoint)>('LogicalToPhysicalPointForPerMonitorDPI');
+  Int32 Function(IntPtr hWnd, Pointer<POINT> lpPoint),
+  int Function(int hWnd, Pointer<POINT> lpPoint)
+>('LogicalToPhysicalPointForPerMonitorDPI');
 
 /// Searches through icon or cursor data for the icon or cursor that best
 /// fits the current display device.
@@ -5455,9 +6528,9 @@ int LookupIconIdFromDirectory(Pointer<Uint8> presbits, int fIcon) =>
     _LookupIconIdFromDirectory(presbits, fIcon);
 
 final _LookupIconIdFromDirectory = _user32.lookupFunction<
-    Int32 Function(Pointer<Uint8> presbits, Int32 fIcon),
-    int Function(
-        Pointer<Uint8> presbits, int fIcon)>('LookupIconIdFromDirectory');
+  Int32 Function(Pointer<Uint8> presbits, Int32 fIcon),
+  int Function(Pointer<Uint8> presbits, int fIcon)
+>('LookupIconIdFromDirectory');
 
 /// Searches through icon or cursor data for the icon or cursor that best
 /// fits the current display device.
@@ -5472,15 +6545,30 @@ final _LookupIconIdFromDirectory = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int LookupIconIdFromDirectoryEx(Pointer<Uint8> presbits, int fIcon,
-        int cxDesired, int cyDesired, int Flags) =>
-    _LookupIconIdFromDirectoryEx(presbits, fIcon, cxDesired, cyDesired, Flags);
+int LookupIconIdFromDirectoryEx(
+  Pointer<Uint8> presbits,
+  int fIcon,
+  int cxDesired,
+  int cyDesired,
+  int Flags,
+) => _LookupIconIdFromDirectoryEx(presbits, fIcon, cxDesired, cyDesired, Flags);
 
 final _LookupIconIdFromDirectoryEx = _user32.lookupFunction<
-    Int32 Function(Pointer<Uint8> presbits, Int32 fIcon, Int32 cxDesired,
-        Int32 cyDesired, Uint32 Flags),
-    int Function(Pointer<Uint8> presbits, int fIcon, int cxDesired,
-        int cyDesired, int Flags)>('LookupIconIdFromDirectoryEx');
+  Int32 Function(
+    Pointer<Uint8> presbits,
+    Int32 fIcon,
+    Int32 cxDesired,
+    Int32 cyDesired,
+    Uint32 Flags,
+  ),
+  int Function(
+    Pointer<Uint8> presbits,
+    int fIcon,
+    int cxDesired,
+    int cyDesired,
+    int Flags,
+  )
+>('LookupIconIdFromDirectoryEx');
 
 /// Converts the specified dialog box units to screen units (pixels). The
 /// function replaces the coordinates in the specified RECT structure with
@@ -5498,8 +6586,9 @@ int MapDialogRect(int hDlg, Pointer<RECT> lpRect) =>
     _MapDialogRect(hDlg, lpRect);
 
 final _MapDialogRect = _user32.lookupFunction<
-    Int32 Function(IntPtr hDlg, Pointer<RECT> lpRect),
-    int Function(int hDlg, Pointer<RECT> lpRect)>('MapDialogRect');
+  Int32 Function(IntPtr hDlg, Pointer<RECT> lpRect),
+  int Function(int hDlg, Pointer<RECT> lpRect)
+>('MapDialogRect');
 
 /// Translates (maps) a virtual-key code into a scan code or character
 /// value, or translates a scan code into a virtual-key code.
@@ -5514,8 +6603,9 @@ final _MapDialogRect = _user32.lookupFunction<
 int MapVirtualKey(int uCode, int uMapType) => _MapVirtualKey(uCode, uMapType);
 
 final _MapVirtualKey = _user32.lookupFunction<
-    Uint32 Function(Uint32 uCode, Uint32 uMapType),
-    int Function(int uCode, int uMapType)>('MapVirtualKeyW');
+  Uint32 Function(Uint32 uCode, Uint32 uMapType),
+  int Function(int uCode, int uMapType)
+>('MapVirtualKeyW');
 
 /// Translates (maps) a virtual-key code into a scan code or character
 /// value, or translates a scan code into a virtual-key code. The function
@@ -5534,8 +6624,9 @@ int MapVirtualKeyEx(int uCode, int uMapType, int dwhkl) =>
     _MapVirtualKeyEx(uCode, uMapType, dwhkl);
 
 final _MapVirtualKeyEx = _user32.lookupFunction<
-    Uint32 Function(Uint32 uCode, Uint32 uMapType, IntPtr dwhkl),
-    int Function(int uCode, int uMapType, int dwhkl)>('MapVirtualKeyExW');
+  Uint32 Function(Uint32 uCode, Uint32 uMapType, IntPtr dwhkl),
+  int Function(int uCode, int uMapType, int dwhkl)
+>('MapVirtualKeyExW');
 
 /// The MapWindowPoints function converts (maps) a set of points from a
 /// coordinate space relative to one window to a coordinate space relative
@@ -5551,14 +6642,21 @@ final _MapVirtualKeyEx = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int MapWindowPoints(
-        int hWndFrom, int hWndTo, Pointer<POINT> lpPoints, int cPoints) =>
-    _MapWindowPoints(hWndFrom, hWndTo, lpPoints, cPoints);
+  int hWndFrom,
+  int hWndTo,
+  Pointer<POINT> lpPoints,
+  int cPoints,
+) => _MapWindowPoints(hWndFrom, hWndTo, lpPoints, cPoints);
 
 final _MapWindowPoints = _user32.lookupFunction<
-    Int32 Function(IntPtr hWndFrom, IntPtr hWndTo, Pointer<POINT> lpPoints,
-        Uint32 cPoints),
-    int Function(int hWndFrom, int hWndTo, Pointer<POINT> lpPoints,
-        int cPoints)>('MapWindowPoints');
+  Int32 Function(
+    IntPtr hWndFrom,
+    IntPtr hWndTo,
+    Pointer<POINT> lpPoints,
+    Uint32 cPoints,
+  ),
+  int Function(int hWndFrom, int hWndTo, Pointer<POINT> lpPoints, int cPoints)
+>('MapWindowPoints');
 
 /// Determines which menu item, if any, is at the specified location.
 ///
@@ -5574,8 +6672,9 @@ int MenuItemFromPoint(int hWnd, int hMenu, POINT ptScreen) =>
     _MenuItemFromPoint(hWnd, hMenu, ptScreen);
 
 final _MenuItemFromPoint = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, IntPtr hMenu, POINT ptScreen),
-    int Function(int hWnd, int hMenu, POINT ptScreen)>('MenuItemFromPoint');
+  Int32 Function(IntPtr hWnd, IntPtr hMenu, POINT ptScreen),
+  int Function(int hWnd, int hMenu, POINT ptScreen)
+>('MenuItemFromPoint');
 
 /// Displays a modal dialog box that contains a system icon, a set of
 /// buttons, and a brief application-specific message, such as status or
@@ -5592,14 +6691,26 @@ final _MenuItemFromPoint = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int MessageBox(
-        int hWnd, Pointer<Utf16> lpText, Pointer<Utf16> lpCaption, int uType) =>
-    _MessageBox(hWnd, lpText, lpCaption, uType);
+  int hWnd,
+  Pointer<Utf16> lpText,
+  Pointer<Utf16> lpCaption,
+  int uType,
+) => _MessageBox(hWnd, lpText, lpCaption, uType);
 
 final _MessageBox = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Pointer<Utf16> lpText, Pointer<Utf16> lpCaption,
-        Uint32 uType),
-    int Function(int hWnd, Pointer<Utf16> lpText, Pointer<Utf16> lpCaption,
-        int uType)>('MessageBoxW');
+  Int32 Function(
+    IntPtr hWnd,
+    Pointer<Utf16> lpText,
+    Pointer<Utf16> lpCaption,
+    Uint32 uType,
+  ),
+  int Function(
+    int hWnd,
+    Pointer<Utf16> lpText,
+    Pointer<Utf16> lpCaption,
+    int uType,
+  )
+>('MessageBoxW');
 
 /// Creates, displays, and operates a message box. The message box contains
 /// an application-defined message and title, plus any combination of
@@ -5616,15 +6727,30 @@ final _MessageBox = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int MessageBoxEx(int hWnd, Pointer<Utf16> lpText, Pointer<Utf16> lpCaption,
-        int uType, int wLanguageId) =>
-    _MessageBoxEx(hWnd, lpText, lpCaption, uType, wLanguageId);
+int MessageBoxEx(
+  int hWnd,
+  Pointer<Utf16> lpText,
+  Pointer<Utf16> lpCaption,
+  int uType,
+  int wLanguageId,
+) => _MessageBoxEx(hWnd, lpText, lpCaption, uType, wLanguageId);
 
 final _MessageBoxEx = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Pointer<Utf16> lpText, Pointer<Utf16> lpCaption,
-        Uint32 uType, Uint16 wLanguageId),
-    int Function(int hWnd, Pointer<Utf16> lpText, Pointer<Utf16> lpCaption,
-        int uType, int wLanguageId)>('MessageBoxExW');
+  Int32 Function(
+    IntPtr hWnd,
+    Pointer<Utf16> lpText,
+    Pointer<Utf16> lpCaption,
+    Uint32 uType,
+    Uint16 wLanguageId,
+  ),
+  int Function(
+    int hWnd,
+    Pointer<Utf16> lpText,
+    Pointer<Utf16> lpCaption,
+    int uType,
+    int wLanguageId,
+  )
+>('MessageBoxExW');
 
 /// Changes an existing menu item. This function is used to specify the
 /// content, appearance, and behavior of the menu item.
@@ -5639,15 +6765,30 @@ final _MessageBoxEx = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int ModifyMenu(int hMnu, int uPosition, int uFlags, int uIDNewItem,
-        Pointer<Utf16> lpNewItem) =>
-    _ModifyMenu(hMnu, uPosition, uFlags, uIDNewItem, lpNewItem);
+int ModifyMenu(
+  int hMnu,
+  int uPosition,
+  int uFlags,
+  int uIDNewItem,
+  Pointer<Utf16> lpNewItem,
+) => _ModifyMenu(hMnu, uPosition, uFlags, uIDNewItem, lpNewItem);
 
 final _ModifyMenu = _user32.lookupFunction<
-    Int32 Function(IntPtr hMnu, Uint32 uPosition, Uint32 uFlags,
-        IntPtr uIDNewItem, Pointer<Utf16> lpNewItem),
-    int Function(int hMnu, int uPosition, int uFlags, int uIDNewItem,
-        Pointer<Utf16> lpNewItem)>('ModifyMenuW');
+  Int32 Function(
+    IntPtr hMnu,
+    Uint32 uPosition,
+    Uint32 uFlags,
+    IntPtr uIDNewItem,
+    Pointer<Utf16> lpNewItem,
+  ),
+  int Function(
+    int hMnu,
+    int uPosition,
+    int uFlags,
+    int uIDNewItem,
+    Pointer<Utf16> lpNewItem,
+  )
+>('ModifyMenuW');
 
 /// The MonitorFromPoint function retrieves a handle to the display monitor
 /// that contains a specified point.
@@ -5662,8 +6803,9 @@ final _ModifyMenu = _user32.lookupFunction<
 int MonitorFromPoint(POINT pt, int dwFlags) => _MonitorFromPoint(pt, dwFlags);
 
 final _MonitorFromPoint = _user32.lookupFunction<
-    IntPtr Function(POINT pt, Uint32 dwFlags),
-    int Function(POINT pt, int dwFlags)>('MonitorFromPoint');
+  IntPtr Function(POINT pt, Uint32 dwFlags),
+  int Function(POINT pt, int dwFlags)
+>('MonitorFromPoint');
 
 /// The MonitorFromRect function retrieves a handle to the display monitor
 /// that has the largest area of intersection with a specified rectangle.
@@ -5679,8 +6821,9 @@ int MonitorFromRect(Pointer<RECT> lprc, int dwFlags) =>
     _MonitorFromRect(lprc, dwFlags);
 
 final _MonitorFromRect = _user32.lookupFunction<
-    IntPtr Function(Pointer<RECT> lprc, Uint32 dwFlags),
-    int Function(Pointer<RECT> lprc, int dwFlags)>('MonitorFromRect');
+  IntPtr Function(Pointer<RECT> lprc, Uint32 dwFlags),
+  int Function(Pointer<RECT> lprc, int dwFlags)
+>('MonitorFromRect');
 
 /// The MonitorFromWindow function retrieves a handle to the display monitor
 /// that has the largest area of intersection with the bounding rectangle of
@@ -5697,8 +6840,9 @@ int MonitorFromWindow(int hwnd, int dwFlags) =>
     _MonitorFromWindow(hwnd, dwFlags);
 
 final _MonitorFromWindow = _user32.lookupFunction<
-    IntPtr Function(IntPtr hwnd, Uint32 dwFlags),
-    int Function(int hwnd, int dwFlags)>('MonitorFromWindow');
+  IntPtr Function(IntPtr hwnd, Uint32 dwFlags),
+  int Function(int hwnd, int dwFlags)
+>('MonitorFromWindow');
 
 /// Changes the position and dimensions of the specified window. For a
 /// top-level window, the position and dimensions are relative to the
@@ -5720,10 +6864,16 @@ int MoveWindow(int hWnd, int X, int Y, int nWidth, int nHeight, int bRepaint) =>
     _MoveWindow(hWnd, X, Y, nWidth, nHeight, bRepaint);
 
 final _MoveWindow = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Int32 X, Int32 Y, Int32 nWidth, Int32 nHeight,
-        Int32 bRepaint),
-    int Function(int hWnd, int X, int Y, int nWidth, int nHeight,
-        int bRepaint)>('MoveWindow');
+  Int32 Function(
+    IntPtr hWnd,
+    Int32 X,
+    Int32 Y,
+    Int32 nWidth,
+    Int32 nHeight,
+    Int32 bRepaint,
+  ),
+  int Function(int hWnd, int X, int Y, int nWidth, int nHeight, int bRepaint)
+>('MoveWindow');
 
 /// Waits until one or all of the specified objects are in the signaled
 /// state or the time-out interval elapses. The objects can include input
@@ -5739,16 +6889,36 @@ final _MoveWindow = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int MsgWaitForMultipleObjects(int nCount, Pointer<IntPtr> pHandles,
-        int fWaitAll, int dwMilliseconds, int dwWakeMask) =>
-    _MsgWaitForMultipleObjects(
-        nCount, pHandles, fWaitAll, dwMilliseconds, dwWakeMask);
+int MsgWaitForMultipleObjects(
+  int nCount,
+  Pointer<IntPtr> pHandles,
+  int fWaitAll,
+  int dwMilliseconds,
+  int dwWakeMask,
+) => _MsgWaitForMultipleObjects(
+  nCount,
+  pHandles,
+  fWaitAll,
+  dwMilliseconds,
+  dwWakeMask,
+);
 
 final _MsgWaitForMultipleObjects = _user32.lookupFunction<
-    Uint32 Function(Uint32 nCount, Pointer<IntPtr> pHandles, Int32 fWaitAll,
-        Uint32 dwMilliseconds, Uint32 dwWakeMask),
-    int Function(int nCount, Pointer<IntPtr> pHandles, int fWaitAll,
-        int dwMilliseconds, int dwWakeMask)>('MsgWaitForMultipleObjects');
+  Uint32 Function(
+    Uint32 nCount,
+    Pointer<IntPtr> pHandles,
+    Int32 fWaitAll,
+    Uint32 dwMilliseconds,
+    Uint32 dwWakeMask,
+  ),
+  int Function(
+    int nCount,
+    Pointer<IntPtr> pHandles,
+    int fWaitAll,
+    int dwMilliseconds,
+    int dwWakeMask,
+  )
+>('MsgWaitForMultipleObjects');
 
 /// Waits until one or all of the specified objects are in the signaled
 /// state, an I/O completion routine or asynchronous procedure call (APC) is
@@ -5766,16 +6936,36 @@ final _MsgWaitForMultipleObjects = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int MsgWaitForMultipleObjectsEx(int nCount, Pointer<IntPtr> pHandles,
-        int dwMilliseconds, int dwWakeMask, int dwFlags) =>
-    _MsgWaitForMultipleObjectsEx(
-        nCount, pHandles, dwMilliseconds, dwWakeMask, dwFlags);
+int MsgWaitForMultipleObjectsEx(
+  int nCount,
+  Pointer<IntPtr> pHandles,
+  int dwMilliseconds,
+  int dwWakeMask,
+  int dwFlags,
+) => _MsgWaitForMultipleObjectsEx(
+  nCount,
+  pHandles,
+  dwMilliseconds,
+  dwWakeMask,
+  dwFlags,
+);
 
 final _MsgWaitForMultipleObjectsEx = _user32.lookupFunction<
-    Uint32 Function(Uint32 nCount, Pointer<IntPtr> pHandles,
-        Uint32 dwMilliseconds, Uint32 dwWakeMask, Uint32 dwFlags),
-    int Function(int nCount, Pointer<IntPtr> pHandles, int dwMilliseconds,
-        int dwWakeMask, int dwFlags)>('MsgWaitForMultipleObjectsEx');
+  Uint32 Function(
+    Uint32 nCount,
+    Pointer<IntPtr> pHandles,
+    Uint32 dwMilliseconds,
+    Uint32 dwWakeMask,
+    Uint32 dwFlags,
+  ),
+  int Function(
+    int nCount,
+    Pointer<IntPtr> pHandles,
+    int dwMilliseconds,
+    int dwWakeMask,
+    int dwFlags,
+  )
+>('MsgWaitForMultipleObjectsEx');
 
 /// Signals the system that a predefined event occurred. If any client
 /// applications have registered a hook function for the event, the system
@@ -5794,9 +6984,9 @@ void NotifyWinEvent(int event, int hwnd, int idObject, int idChild) =>
     _NotifyWinEvent(event, hwnd, idObject, idChild);
 
 final _NotifyWinEvent = _user32.lookupFunction<
-    Void Function(Uint32 event, IntPtr hwnd, Int32 idObject, Int32 idChild),
-    void Function(
-        int event, int hwnd, int idObject, int idChild)>('NotifyWinEvent');
+  Void Function(Uint32 event, IntPtr hwnd, Int32 idObject, Int32 idChild),
+  void Function(int event, int hwnd, int idObject, int idChild)
+>('NotifyWinEvent');
 
 /// Maps OEMASCII codes 0 through 0x0FF into the OEM scan codes and shift
 /// states. The function provides information that allows a program to send
@@ -5810,8 +7000,10 @@ final _NotifyWinEvent = _user32.lookupFunction<
 /// {@category user32}
 int OemKeyScan(int wOemChar) => _OemKeyScan(wOemChar);
 
-final _OemKeyScan = _user32.lookupFunction<Uint32 Function(Uint16 wOemChar),
-    int Function(int wOemChar)>('OemKeyScan');
+final _OemKeyScan = _user32.lookupFunction<
+  Uint32 Function(Uint16 wOemChar),
+  int Function(int wOemChar)
+>('OemKeyScan');
 
 /// The OffsetRect function moves the specified rectangle by the specified
 /// offsets.
@@ -5827,8 +7019,9 @@ final _OemKeyScan = _user32.lookupFunction<Uint32 Function(Uint16 wOemChar),
 int OffsetRect(Pointer<RECT> lprc, int dx, int dy) => _OffsetRect(lprc, dx, dy);
 
 final _OffsetRect = _user32.lookupFunction<
-    Int32 Function(Pointer<RECT> lprc, Int32 dx, Int32 dy),
-    int Function(Pointer<RECT> lprc, int dx, int dy)>('OffsetRect');
+  Int32 Function(Pointer<RECT> lprc, Int32 dx, Int32 dy),
+  int Function(Pointer<RECT> lprc, int dx, int dy)
+>('OffsetRect');
 
 /// Opens the clipboard for examination and prevents other applications from
 /// modifying the clipboard content.
@@ -5842,8 +7035,9 @@ final _OffsetRect = _user32.lookupFunction<
 int OpenClipboard(int hWndNewOwner) => _OpenClipboard(hWndNewOwner);
 
 final _OpenClipboard = _user32.lookupFunction<
-    Int32 Function(IntPtr hWndNewOwner),
-    int Function(int hWndNewOwner)>('OpenClipboard');
+  Int32 Function(IntPtr hWndNewOwner),
+  int Function(int hWndNewOwner)
+>('OpenClipboard');
 
 /// Opens the specified desktop object.
 ///
@@ -5856,15 +7050,27 @@ final _OpenClipboard = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int OpenDesktop(Pointer<Utf16> lpszDesktop, int dwFlags, int fInherit,
-        int dwDesiredAccess) =>
-    _OpenDesktop(lpszDesktop, dwFlags, fInherit, dwDesiredAccess);
+int OpenDesktop(
+  Pointer<Utf16> lpszDesktop,
+  int dwFlags,
+  int fInherit,
+  int dwDesiredAccess,
+) => _OpenDesktop(lpszDesktop, dwFlags, fInherit, dwDesiredAccess);
 
 final _OpenDesktop = _user32.lookupFunction<
-    IntPtr Function(Pointer<Utf16> lpszDesktop, Uint32 dwFlags, Int32 fInherit,
-        Uint32 dwDesiredAccess),
-    int Function(Pointer<Utf16> lpszDesktop, int dwFlags, int fInherit,
-        int dwDesiredAccess)>('OpenDesktopW');
+  IntPtr Function(
+    Pointer<Utf16> lpszDesktop,
+    Uint32 dwFlags,
+    Int32 fInherit,
+    Uint32 dwDesiredAccess,
+  ),
+  int Function(
+    Pointer<Utf16> lpszDesktop,
+    int dwFlags,
+    int fInherit,
+    int dwDesiredAccess,
+  )
+>('OpenDesktopW');
 
 /// Restores a minimized (iconic) window to its previous size and position;
 /// it then activates the window.
@@ -5877,9 +7083,10 @@ final _OpenDesktop = _user32.lookupFunction<
 /// {@category user32}
 int OpenIcon(int hWnd) => _OpenIcon(hWnd);
 
-final _OpenIcon =
-    _user32.lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
-        'OpenIcon');
+final _OpenIcon = _user32
+    .lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
+      'OpenIcon',
+    );
 
 /// Opens the desktop that receives user input.
 ///
@@ -5895,9 +7102,9 @@ int OpenInputDesktop(int dwFlags, int fInherit, int dwDesiredAccess) =>
     _OpenInputDesktop(dwFlags, fInherit, dwDesiredAccess);
 
 final _OpenInputDesktop = _user32.lookupFunction<
-    IntPtr Function(Uint32 dwFlags, Int32 fInherit, Uint32 dwDesiredAccess),
-    int Function(
-        int dwFlags, int fInherit, int dwDesiredAccess)>('OpenInputDesktop');
+  IntPtr Function(Uint32 dwFlags, Int32 fInherit, Uint32 dwDesiredAccess),
+  int Function(int dwFlags, int fInherit, int dwDesiredAccess)
+>('OpenInputDesktop');
 
 /// Opens the specified window station.
 ///
@@ -5910,14 +7117,19 @@ final _OpenInputDesktop = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int OpenWindowStation(
-        Pointer<Utf16> lpszWinSta, int fInherit, int dwDesiredAccess) =>
-    _OpenWindowStation(lpszWinSta, fInherit, dwDesiredAccess);
+  Pointer<Utf16> lpszWinSta,
+  int fInherit,
+  int dwDesiredAccess,
+) => _OpenWindowStation(lpszWinSta, fInherit, dwDesiredAccess);
 
 final _OpenWindowStation = _user32.lookupFunction<
-    IntPtr Function(
-        Pointer<Utf16> lpszWinSta, Int32 fInherit, Uint32 dwDesiredAccess),
-    int Function(Pointer<Utf16> lpszWinSta, int fInherit,
-        int dwDesiredAccess)>('OpenWindowStationW');
+  IntPtr Function(
+    Pointer<Utf16> lpszWinSta,
+    Int32 fInherit,
+    Uint32 dwDesiredAccess,
+  ),
+  int Function(Pointer<Utf16> lpszWinSta, int fInherit, int dwDesiredAccess)
+>('OpenWindowStationW');
 
 /// The PaintDesktop function fills the clipping region in the specified
 /// device context with the desktop pattern or wallpaper. The function is
@@ -5931,9 +7143,10 @@ final _OpenWindowStation = _user32.lookupFunction<
 /// {@category user32}
 int PaintDesktop(int hdc) => _PaintDesktop(hdc);
 
-final _PaintDesktop =
-    _user32.lookupFunction<Int32 Function(IntPtr hdc), int Function(int hdc)>(
-        'PaintDesktop');
+final _PaintDesktop = _user32
+    .lookupFunction<Int32 Function(IntPtr hdc), int Function(int hdc)>(
+      'PaintDesktop',
+    );
 
 /// Dispatches incoming sent messages, checks the thread message queue for a
 /// posted message, and retrieves the message (if any exist).
@@ -5948,15 +7161,30 @@ final _PaintDesktop =
 /// );
 /// ```
 /// {@category user32}
-int PeekMessage(Pointer<MSG> lpMsg, int hWnd, int wMsgFilterMin,
-        int wMsgFilterMax, int wRemoveMsg) =>
-    _PeekMessage(lpMsg, hWnd, wMsgFilterMin, wMsgFilterMax, wRemoveMsg);
+int PeekMessage(
+  Pointer<MSG> lpMsg,
+  int hWnd,
+  int wMsgFilterMin,
+  int wMsgFilterMax,
+  int wRemoveMsg,
+) => _PeekMessage(lpMsg, hWnd, wMsgFilterMin, wMsgFilterMax, wRemoveMsg);
 
 final _PeekMessage = _user32.lookupFunction<
-    Int32 Function(Pointer<MSG> lpMsg, IntPtr hWnd, Uint32 wMsgFilterMin,
-        Uint32 wMsgFilterMax, Uint32 wRemoveMsg),
-    int Function(Pointer<MSG> lpMsg, int hWnd, int wMsgFilterMin,
-        int wMsgFilterMax, int wRemoveMsg)>('PeekMessageW');
+  Int32 Function(
+    Pointer<MSG> lpMsg,
+    IntPtr hWnd,
+    Uint32 wMsgFilterMin,
+    Uint32 wMsgFilterMax,
+    Uint32 wRemoveMsg,
+  ),
+  int Function(
+    Pointer<MSG> lpMsg,
+    int hWnd,
+    int wMsgFilterMin,
+    int wMsgFilterMax,
+    int wRemoveMsg,
+  )
+>('PeekMessageW');
 
 /// Converts the physical coordinates of a point in a window to logical
 /// coordinates.
@@ -5972,8 +7200,9 @@ int PhysicalToLogicalPoint(int hWnd, Pointer<POINT> lpPoint) =>
     _PhysicalToLogicalPoint(hWnd, lpPoint);
 
 final _PhysicalToLogicalPoint = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Pointer<POINT> lpPoint),
-    int Function(int hWnd, Pointer<POINT> lpPoint)>('PhysicalToLogicalPoint');
+  Int32 Function(IntPtr hWnd, Pointer<POINT> lpPoint),
+  int Function(int hWnd, Pointer<POINT> lpPoint)
+>('PhysicalToLogicalPoint');
 
 /// Converts a point in a window from physical coordinates into logical
 /// coordinates, regardless of the dots per inch (dpi) awareness of the
@@ -5990,9 +7219,9 @@ int PhysicalToLogicalPointForPerMonitorDPI(int hWnd, Pointer<POINT> lpPoint) =>
     _PhysicalToLogicalPointForPerMonitorDPI(hWnd, lpPoint);
 
 final _PhysicalToLogicalPointForPerMonitorDPI = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Pointer<POINT> lpPoint),
-    int Function(int hWnd,
-        Pointer<POINT> lpPoint)>('PhysicalToLogicalPointForPerMonitorDPI');
+  Int32 Function(IntPtr hWnd, Pointer<POINT> lpPoint),
+  int Function(int hWnd, Pointer<POINT> lpPoint)
+>('PhysicalToLogicalPointForPerMonitorDPI');
 
 /// Places (posts) a message in the message queue associated with the thread
 /// that created the specified window and returns without waiting for the
@@ -6011,8 +7240,9 @@ int PostMessage(int hWnd, int Msg, int wParam, int lParam) =>
     _PostMessage(hWnd, Msg, wParam, lParam);
 
 final _PostMessage = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Uint32 Msg, IntPtr wParam, IntPtr lParam),
-    int Function(int hWnd, int Msg, int wParam, int lParam)>('PostMessageW');
+  Int32 Function(IntPtr hWnd, Uint32 Msg, IntPtr wParam, IntPtr lParam),
+  int Function(int hWnd, int Msg, int wParam, int lParam)
+>('PostMessageW');
 
 /// Indicates to the system that a thread has made a request to terminate
 /// (quit). It is typically used in response to a WM_DESTROY message.
@@ -6025,8 +7255,10 @@ final _PostMessage = _user32.lookupFunction<
 /// {@category user32}
 void PostQuitMessage(int nExitCode) => _PostQuitMessage(nExitCode);
 
-final _PostQuitMessage = _user32.lookupFunction<Void Function(Int32 nExitCode),
-    void Function(int nExitCode)>('PostQuitMessage');
+final _PostQuitMessage = _user32.lookupFunction<
+  Void Function(Int32 nExitCode),
+  void Function(int nExitCode)
+>('PostQuitMessage');
 
 /// Posts a message to the message queue of the specified thread. It returns
 /// without waiting for the thread to process the message.
@@ -6044,9 +7276,9 @@ int PostThreadMessage(int idThread, int Msg, int wParam, int lParam) =>
     _PostThreadMessage(idThread, Msg, wParam, lParam);
 
 final _PostThreadMessage = _user32.lookupFunction<
-    Int32 Function(Uint32 idThread, Uint32 Msg, IntPtr wParam, IntPtr lParam),
-    int Function(
-        int idThread, int Msg, int wParam, int lParam)>('PostThreadMessageW');
+  Int32 Function(Uint32 idThread, Uint32 Msg, IntPtr wParam, IntPtr lParam),
+  int Function(int idThread, int Msg, int wParam, int lParam)
+>('PostThreadMessageW');
 
 /// The PrintWindow function copies a visual window into the specified
 /// device context (DC), typically a printer DC.
@@ -6063,8 +7295,9 @@ int PrintWindow(int hwnd, int hdcBlt, int nFlags) =>
     _PrintWindow(hwnd, hdcBlt, nFlags);
 
 final _PrintWindow = _user32.lookupFunction<
-    Int32 Function(IntPtr hwnd, IntPtr hdcBlt, Uint32 nFlags),
-    int Function(int hwnd, int hdcBlt, int nFlags)>('PrintWindow');
+  Int32 Function(IntPtr hwnd, IntPtr hdcBlt, Uint32 nFlags),
+  int Function(int hwnd, int hdcBlt, int nFlags)
+>('PrintWindow');
 
 /// Creates an array of handles to icons that are extracted from a specified
 /// file.
@@ -6083,36 +7316,47 @@ final _PrintWindow = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int PrivateExtractIcons(
-        Pointer<Utf16> szFileName,
-        int nIconIndex,
-        int cxIcon,
-        int cyIcon,
-        Pointer<IntPtr> phicon,
-        Pointer<Uint32> piconid,
-        int nIcons,
-        int flags) =>
-    _PrivateExtractIcons(
-        szFileName, nIconIndex, cxIcon, cyIcon, phicon, piconid, nIcons, flags);
+  Pointer<Utf16> szFileName,
+  int nIconIndex,
+  int cxIcon,
+  int cyIcon,
+  Pointer<IntPtr> phicon,
+  Pointer<Uint32> piconid,
+  int nIcons,
+  int flags,
+) => _PrivateExtractIcons(
+  szFileName,
+  nIconIndex,
+  cxIcon,
+  cyIcon,
+  phicon,
+  piconid,
+  nIcons,
+  flags,
+);
 
 final _PrivateExtractIcons = _user32.lookupFunction<
-    Uint32 Function(
-        Pointer<Utf16> szFileName,
-        Int32 nIconIndex,
-        Int32 cxIcon,
-        Int32 cyIcon,
-        Pointer<IntPtr> phicon,
-        Pointer<Uint32> piconid,
-        Uint32 nIcons,
-        Uint32 flags),
-    int Function(
-        Pointer<Utf16> szFileName,
-        int nIconIndex,
-        int cxIcon,
-        int cyIcon,
-        Pointer<IntPtr> phicon,
-        Pointer<Uint32> piconid,
-        int nIcons,
-        int flags)>('PrivateExtractIconsW');
+  Uint32 Function(
+    Pointer<Utf16> szFileName,
+    Int32 nIconIndex,
+    Int32 cxIcon,
+    Int32 cyIcon,
+    Pointer<IntPtr> phicon,
+    Pointer<Uint32> piconid,
+    Uint32 nIcons,
+    Uint32 flags,
+  ),
+  int Function(
+    Pointer<Utf16> szFileName,
+    int nIconIndex,
+    int cxIcon,
+    int cyIcon,
+    Pointer<IntPtr> phicon,
+    Pointer<Uint32> piconid,
+    int nIcons,
+    int flags,
+  )
+>('PrivateExtractIconsW');
 
 /// The PtInRect function determines whether the specified point lies within
 /// the specified rectangle. A point is within a rectangle if it lies on the
@@ -6129,8 +7373,9 @@ final _PrivateExtractIcons = _user32.lookupFunction<
 int PtInRect(Pointer<RECT> lprc, POINT pt) => _PtInRect(lprc, pt);
 
 final _PtInRect = _user32.lookupFunction<
-    Int32 Function(Pointer<RECT> lprc, POINT pt),
-    int Function(Pointer<RECT> lprc, POINT pt)>('PtInRect');
+  Int32 Function(Pointer<RECT> lprc, POINT pt),
+  int Function(Pointer<RECT> lprc, POINT pt)
+>('PtInRect');
 
 /// The RedrawWindow function updates the specified rectangle or region in a
 /// window's client area.
@@ -6145,14 +7390,21 @@ final _PtInRect = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int RedrawWindow(
-        int hWnd, Pointer<RECT> lprcUpdate, int hrgnUpdate, int flags) =>
-    _RedrawWindow(hWnd, lprcUpdate, hrgnUpdate, flags);
+  int hWnd,
+  Pointer<RECT> lprcUpdate,
+  int hrgnUpdate,
+  int flags,
+) => _RedrawWindow(hWnd, lprcUpdate, hrgnUpdate, flags);
 
 final _RedrawWindow = _user32.lookupFunction<
-    Int32 Function(
-        IntPtr hWnd, Pointer<RECT> lprcUpdate, IntPtr hrgnUpdate, Uint32 flags),
-    int Function(int hWnd, Pointer<RECT> lprcUpdate, int hrgnUpdate,
-        int flags)>('RedrawWindow');
+  Int32 Function(
+    IntPtr hWnd,
+    Pointer<RECT> lprcUpdate,
+    IntPtr hrgnUpdate,
+    Uint32 flags,
+  ),
+  int Function(int hWnd, Pointer<RECT> lprcUpdate, int hrgnUpdate, int flags)
+>('RedrawWindow');
 
 /// Registers a window class for subsequent use in calls to the CreateWindow
 /// or CreateWindowEx function.
@@ -6166,8 +7418,9 @@ final _RedrawWindow = _user32.lookupFunction<
 int RegisterClass(Pointer<WNDCLASS> lpWndClass) => _RegisterClass(lpWndClass);
 
 final _RegisterClass = _user32.lookupFunction<
-    Uint16 Function(Pointer<WNDCLASS> lpWndClass),
-    int Function(Pointer<WNDCLASS> lpWndClass)>('RegisterClassW');
+  Uint16 Function(Pointer<WNDCLASS> lpWndClass),
+  int Function(Pointer<WNDCLASS> lpWndClass)
+>('RegisterClassW');
 
 /// Registers a window class for subsequent use in calls to the CreateWindow
 /// or CreateWindowEx function.
@@ -6180,8 +7433,9 @@ final _RegisterClass = _user32.lookupFunction<
 int RegisterClassEx(Pointer<WNDCLASSEX> param0) => _RegisterClassEx(param0);
 
 final _RegisterClassEx = _user32.lookupFunction<
-    Uint16 Function(Pointer<WNDCLASSEX> param0),
-    int Function(Pointer<WNDCLASSEX> param0)>('RegisterClassExW');
+  Uint16 Function(Pointer<WNDCLASSEX> param0),
+  int Function(Pointer<WNDCLASSEX> param0)
+>('RegisterClassExW');
 
 /// Registers a new clipboard format. This format can then be used as a
 /// valid clipboard format.
@@ -6196,8 +7450,9 @@ int RegisterClipboardFormat(Pointer<Utf16> lpszFormat) =>
     _RegisterClipboardFormat(lpszFormat);
 
 final _RegisterClipboardFormat = _user32.lookupFunction<
-    Uint32 Function(Pointer<Utf16> lpszFormat),
-    int Function(Pointer<Utf16> lpszFormat)>('RegisterClipboardFormatW');
+  Uint32 Function(Pointer<Utf16> lpszFormat),
+  int Function(Pointer<Utf16> lpszFormat)
+>('RegisterClipboardFormatW');
 
 /// Registers the device or type of device for which a window will receive
 /// notifications.
@@ -6211,14 +7466,15 @@ final _RegisterClipboardFormat = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 Pointer RegisterDeviceNotification(
-        int hRecipient, Pointer NotificationFilter, int Flags) =>
-    _RegisterDeviceNotification(hRecipient, NotificationFilter, Flags);
+  int hRecipient,
+  Pointer NotificationFilter,
+  int Flags,
+) => _RegisterDeviceNotification(hRecipient, NotificationFilter, Flags);
 
 final _RegisterDeviceNotification = _user32.lookupFunction<
-    Pointer Function(
-        IntPtr hRecipient, Pointer NotificationFilter, Uint32 Flags),
-    Pointer Function(int hRecipient, Pointer NotificationFilter,
-        int Flags)>('RegisterDeviceNotificationW');
+  Pointer Function(IntPtr hRecipient, Pointer NotificationFilter, Uint32 Flags),
+  Pointer Function(int hRecipient, Pointer NotificationFilter, int Flags)
+>('RegisterDeviceNotificationW');
 
 /// Defines a system-wide hot key.
 ///
@@ -6235,8 +7491,9 @@ int RegisterHotKey(int hWnd, int id, int fsModifiers, int vk) =>
     _RegisterHotKey(hWnd, id, fsModifiers, vk);
 
 final _RegisterHotKey = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Int32 id, Uint32 fsModifiers, Uint32 vk),
-    int Function(int hWnd, int id, int fsModifiers, int vk)>('RegisterHotKey');
+  Int32 Function(IntPtr hWnd, Int32 id, Uint32 fsModifiers, Uint32 vk),
+  int Function(int hWnd, int id, int fsModifiers, int vk)
+>('RegisterHotKey');
 
 /// Registers the application to receive power setting notifications for the
 /// specific power setting event.
@@ -6250,14 +7507,19 @@ final _RegisterHotKey = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int RegisterPowerSettingNotification(
-        int hRecipient, Pointer<GUID> PowerSettingGuid, int Flags) =>
-    _RegisterPowerSettingNotification(hRecipient, PowerSettingGuid, Flags);
+  int hRecipient,
+  Pointer<GUID> PowerSettingGuid,
+  int Flags,
+) => _RegisterPowerSettingNotification(hRecipient, PowerSettingGuid, Flags);
 
 final _RegisterPowerSettingNotification = _user32.lookupFunction<
-    IntPtr Function(
-        IntPtr hRecipient, Pointer<GUID> PowerSettingGuid, Uint32 Flags),
-    int Function(int hRecipient, Pointer<GUID> PowerSettingGuid,
-        int Flags)>('RegisterPowerSettingNotification');
+  IntPtr Function(
+    IntPtr hRecipient,
+    Pointer<GUID> PowerSettingGuid,
+    Uint32 Flags,
+  ),
+  int Function(int hRecipient, Pointer<GUID> PowerSettingGuid, int Flags)
+>('RegisterPowerSettingNotification');
 
 /// Registers the devices that supply the raw input data.
 ///
@@ -6269,15 +7531,24 @@ final _RegisterPowerSettingNotification = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int RegisterRawInputDevices(Pointer<RAWINPUTDEVICE> pRawInputDevices,
-        int uiNumDevices, int cbSize) =>
-    _RegisterRawInputDevices(pRawInputDevices, uiNumDevices, cbSize);
+int RegisterRawInputDevices(
+  Pointer<RAWINPUTDEVICE> pRawInputDevices,
+  int uiNumDevices,
+  int cbSize,
+) => _RegisterRawInputDevices(pRawInputDevices, uiNumDevices, cbSize);
 
 final _RegisterRawInputDevices = _user32.lookupFunction<
-    Int32 Function(Pointer<RAWINPUTDEVICE> pRawInputDevices,
-        Uint32 uiNumDevices, Uint32 cbSize),
-    int Function(Pointer<RAWINPUTDEVICE> pRawInputDevices, int uiNumDevices,
-        int cbSize)>('RegisterRawInputDevices');
+  Int32 Function(
+    Pointer<RAWINPUTDEVICE> pRawInputDevices,
+    Uint32 uiNumDevices,
+    Uint32 cbSize,
+  ),
+  int Function(
+    Pointer<RAWINPUTDEVICE> pRawInputDevices,
+    int uiNumDevices,
+    int cbSize,
+  )
+>('RegisterRawInputDevices');
 
 /// Registers a window to process the WM_TOUCHHITTESTING notification.
 ///
@@ -6292,8 +7563,9 @@ int RegisterTouchHitTestingWindow(int hwnd, int value) =>
     _RegisterTouchHitTestingWindow(hwnd, value);
 
 final _RegisterTouchHitTestingWindow = _user32.lookupFunction<
-    Int32 Function(IntPtr hwnd, Uint32 value),
-    int Function(int hwnd, int value)>('RegisterTouchHitTestingWindow');
+  Int32 Function(IntPtr hwnd, Uint32 value),
+  int Function(int hwnd, int value)
+>('RegisterTouchHitTestingWindow');
 
 /// Registers a window as being touch-capable.
 ///
@@ -6308,8 +7580,9 @@ int RegisterTouchWindow(int hwnd, int ulFlags) =>
     _RegisterTouchWindow(hwnd, ulFlags);
 
 final _RegisterTouchWindow = _user32.lookupFunction<
-    Int32 Function(IntPtr hwnd, Uint32 ulFlags),
-    int Function(int hwnd, int ulFlags)>('RegisterTouchWindow');
+  Int32 Function(IntPtr hwnd, Uint32 ulFlags),
+  int Function(int hwnd, int ulFlags)
+>('RegisterTouchWindow');
 
 /// Defines a new window message that is guaranteed to be unique throughout
 /// the system. The message value can be used when sending or posting
@@ -6325,8 +7598,9 @@ int RegisterWindowMessage(Pointer<Utf16> lpString) =>
     _RegisterWindowMessage(lpString);
 
 final _RegisterWindowMessage = _user32.lookupFunction<
-    Uint32 Function(Pointer<Utf16> lpString),
-    int Function(Pointer<Utf16> lpString)>('RegisterWindowMessageW');
+  Uint32 Function(Pointer<Utf16> lpString),
+  int Function(Pointer<Utf16> lpString)
+>('RegisterWindowMessageW');
 
 /// Releases the mouse capture from a window in the current thread and
 /// restores normal mouse input processing. A window that has captured the
@@ -6340,8 +7614,8 @@ final _RegisterWindowMessage = _user32.lookupFunction<
 /// {@category user32}
 int ReleaseCapture() => _ReleaseCapture();
 
-final _ReleaseCapture =
-    _user32.lookupFunction<Int32 Function(), int Function()>('ReleaseCapture');
+final _ReleaseCapture = _user32
+    .lookupFunction<Int32 Function(), int Function()>('ReleaseCapture');
 
 /// The ReleaseDC function releases a device context (DC), freeing it for
 /// use by other applications. The effect of the ReleaseDC function depends
@@ -6358,8 +7632,9 @@ final _ReleaseCapture =
 int ReleaseDC(int hWnd, int hDC) => _ReleaseDC(hWnd, hDC);
 
 final _ReleaseDC = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, IntPtr hDC),
-    int Function(int hWnd, int hDC)>('ReleaseDC');
+  Int32 Function(IntPtr hWnd, IntPtr hDC),
+  int Function(int hWnd, int hDC)
+>('ReleaseDC');
 
 /// Removes the given window from the system-maintained clipboard format
 /// listener list.
@@ -6373,9 +7648,10 @@ final _ReleaseDC = _user32.lookupFunction<
 int RemoveClipboardFormatListener(int hwnd) =>
     _RemoveClipboardFormatListener(hwnd);
 
-final _RemoveClipboardFormatListener =
-    _user32.lookupFunction<Int32 Function(IntPtr hwnd), int Function(int hwnd)>(
-        'RemoveClipboardFormatListener');
+final _RemoveClipboardFormatListener = _user32
+    .lookupFunction<Int32 Function(IntPtr hwnd), int Function(int hwnd)>(
+      'RemoveClipboardFormatListener',
+    );
 
 /// Deletes a menu item or detaches a submenu from the specified menu. If
 /// the menu item opens a drop-down menu or submenu, RemoveMenu does not
@@ -6395,8 +7671,9 @@ int RemoveMenu(int hMenu, int uPosition, int uFlags) =>
     _RemoveMenu(hMenu, uPosition, uFlags);
 
 final _RemoveMenu = _user32.lookupFunction<
-    Int32 Function(IntPtr hMenu, Uint32 uPosition, Uint32 uFlags),
-    int Function(int hMenu, int uPosition, int uFlags)>('RemoveMenu');
+  Int32 Function(IntPtr hMenu, Uint32 uPosition, Uint32 uFlags),
+  int Function(int hMenu, int uPosition, int uFlags)
+>('RemoveMenu');
 
 /// Removes an entry from the property list of the specified window. The
 /// specified character string identifies the entry to be removed.
@@ -6412,8 +7689,9 @@ int RemoveProp(int hWnd, Pointer<Utf16> lpString) =>
     _RemoveProp(hWnd, lpString);
 
 final _RemoveProp = _user32.lookupFunction<
-    IntPtr Function(IntPtr hWnd, Pointer<Utf16> lpString),
-    int Function(int hWnd, Pointer<Utf16> lpString)>('RemovePropW');
+  IntPtr Function(IntPtr hWnd, Pointer<Utf16> lpString),
+  int Function(int hWnd, Pointer<Utf16> lpString)
+>('RemovePropW');
 
 /// Replies to a message sent from another thread by the SendMessage
 /// function.
@@ -6426,8 +7704,10 @@ final _RemoveProp = _user32.lookupFunction<
 /// {@category user32}
 int ReplyMessage(int lResult) => _ReplyMessage(lResult);
 
-final _ReplyMessage = _user32.lookupFunction<Int32 Function(IntPtr lResult),
-    int Function(int lResult)>('ReplyMessage');
+final _ReplyMessage = _user32
+    .lookupFunction<Int32 Function(IntPtr lResult), int Function(int lResult)>(
+      'ReplyMessage',
+    );
 
 /// The ScreenToClient function converts the screen coordinates of a
 /// specified point on the screen to client-area coordinates.
@@ -6443,8 +7723,9 @@ int ScreenToClient(int hWnd, Pointer<POINT> lpPoint) =>
     _ScreenToClient(hWnd, lpPoint);
 
 final _ScreenToClient = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Pointer<POINT> lpPoint),
-    int Function(int hWnd, Pointer<POINT> lpPoint)>('ScreenToClient');
+  Int32 Function(IntPtr hWnd, Pointer<POINT> lpPoint),
+  int Function(int hWnd, Pointer<POINT> lpPoint)
+>('ScreenToClient');
 
 /// The ScrollDC function scrolls a rectangle of bits horizontally and
 /// vertically.
@@ -6461,21 +7742,36 @@ final _ScreenToClient = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int ScrollDC(int hDC, int dx, int dy, Pointer<RECT> lprcScroll,
-        Pointer<RECT> lprcClip, int hrgnUpdate, Pointer<RECT> lprcUpdate) =>
-    _ScrollDC(hDC, dx, dy, lprcScroll, lprcClip, hrgnUpdate, lprcUpdate);
+int ScrollDC(
+  int hDC,
+  int dx,
+  int dy,
+  Pointer<RECT> lprcScroll,
+  Pointer<RECT> lprcClip,
+  int hrgnUpdate,
+  Pointer<RECT> lprcUpdate,
+) => _ScrollDC(hDC, dx, dy, lprcScroll, lprcClip, hrgnUpdate, lprcUpdate);
 
 final _ScrollDC = _user32.lookupFunction<
-    Int32 Function(IntPtr hDC, Int32 dx, Int32 dy, Pointer<RECT> lprcScroll,
-        Pointer<RECT> lprcClip, IntPtr hrgnUpdate, Pointer<RECT> lprcUpdate),
-    int Function(
-        int hDC,
-        int dx,
-        int dy,
-        Pointer<RECT> lprcScroll,
-        Pointer<RECT> lprcClip,
-        int hrgnUpdate,
-        Pointer<RECT> lprcUpdate)>('ScrollDC');
+  Int32 Function(
+    IntPtr hDC,
+    Int32 dx,
+    Int32 dy,
+    Pointer<RECT> lprcScroll,
+    Pointer<RECT> lprcClip,
+    IntPtr hrgnUpdate,
+    Pointer<RECT> lprcUpdate,
+  ),
+  int Function(
+    int hDC,
+    int dx,
+    int dy,
+    Pointer<RECT> lprcScroll,
+    Pointer<RECT> lprcClip,
+    int hrgnUpdate,
+    Pointer<RECT> lprcUpdate,
+  )
+>('ScrollDC');
 
 /// The ScrollWindow function scrolls the contents of the specified window's
 /// client area.
@@ -6490,15 +7786,30 @@ final _ScrollDC = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int ScrollWindow(int hWnd, int XAmount, int YAmount, Pointer<RECT> lpRect,
-        Pointer<RECT> lpClipRect) =>
-    _ScrollWindow(hWnd, XAmount, YAmount, lpRect, lpClipRect);
+int ScrollWindow(
+  int hWnd,
+  int XAmount,
+  int YAmount,
+  Pointer<RECT> lpRect,
+  Pointer<RECT> lpClipRect,
+) => _ScrollWindow(hWnd, XAmount, YAmount, lpRect, lpClipRect);
 
 final _ScrollWindow = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Int32 XAmount, Int32 YAmount,
-        Pointer<RECT> lpRect, Pointer<RECT> lpClipRect),
-    int Function(int hWnd, int XAmount, int YAmount, Pointer<RECT> lpRect,
-        Pointer<RECT> lpClipRect)>('ScrollWindow');
+  Int32 Function(
+    IntPtr hWnd,
+    Int32 XAmount,
+    Int32 YAmount,
+    Pointer<RECT> lpRect,
+    Pointer<RECT> lpClipRect,
+  ),
+  int Function(
+    int hWnd,
+    int XAmount,
+    int YAmount,
+    Pointer<RECT> lpRect,
+    Pointer<RECT> lpClipRect,
+  )
+>('ScrollWindow');
 
 /// The ScrollWindowEx function scrolls the contents of the specified
 /// window's client area.
@@ -6517,36 +7828,47 @@ final _ScrollWindow = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int ScrollWindowEx(
-        int hWnd,
-        int dx,
-        int dy,
-        Pointer<RECT> prcScroll,
-        Pointer<RECT> prcClip,
-        int hrgnUpdate,
-        Pointer<RECT> prcUpdate,
-        int flags) =>
-    _ScrollWindowEx(
-        hWnd, dx, dy, prcScroll, prcClip, hrgnUpdate, prcUpdate, flags);
+  int hWnd,
+  int dx,
+  int dy,
+  Pointer<RECT> prcScroll,
+  Pointer<RECT> prcClip,
+  int hrgnUpdate,
+  Pointer<RECT> prcUpdate,
+  int flags,
+) => _ScrollWindowEx(
+  hWnd,
+  dx,
+  dy,
+  prcScroll,
+  prcClip,
+  hrgnUpdate,
+  prcUpdate,
+  flags,
+);
 
 final _ScrollWindowEx = _user32.lookupFunction<
-    Int32 Function(
-        IntPtr hWnd,
-        Int32 dx,
-        Int32 dy,
-        Pointer<RECT> prcScroll,
-        Pointer<RECT> prcClip,
-        IntPtr hrgnUpdate,
-        Pointer<RECT> prcUpdate,
-        Uint32 flags),
-    int Function(
-        int hWnd,
-        int dx,
-        int dy,
-        Pointer<RECT> prcScroll,
-        Pointer<RECT> prcClip,
-        int hrgnUpdate,
-        Pointer<RECT> prcUpdate,
-        int flags)>('ScrollWindowEx');
+  Int32 Function(
+    IntPtr hWnd,
+    Int32 dx,
+    Int32 dy,
+    Pointer<RECT> prcScroll,
+    Pointer<RECT> prcClip,
+    IntPtr hrgnUpdate,
+    Pointer<RECT> prcUpdate,
+    Uint32 flags,
+  ),
+  int Function(
+    int hWnd,
+    int dx,
+    int dy,
+    Pointer<RECT> prcScroll,
+    Pointer<RECT> prcClip,
+    int hrgnUpdate,
+    Pointer<RECT> prcUpdate,
+    int flags,
+  )
+>('ScrollWindowEx');
 
 /// Sends a message to the specified control in a dialog box.
 ///
@@ -6561,14 +7883,23 @@ final _ScrollWindowEx = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int SendDlgItemMessage(
-        int hDlg, int nIDDlgItem, int Msg, int wParam, int lParam) =>
-    _SendDlgItemMessage(hDlg, nIDDlgItem, Msg, wParam, lParam);
+  int hDlg,
+  int nIDDlgItem,
+  int Msg,
+  int wParam,
+  int lParam,
+) => _SendDlgItemMessage(hDlg, nIDDlgItem, Msg, wParam, lParam);
 
 final _SendDlgItemMessage = _user32.lookupFunction<
-    IntPtr Function(IntPtr hDlg, Int32 nIDDlgItem, Uint32 Msg, IntPtr wParam,
-        IntPtr lParam),
-    int Function(int hDlg, int nIDDlgItem, int Msg, int wParam,
-        int lParam)>('SendDlgItemMessageW');
+  IntPtr Function(
+    IntPtr hDlg,
+    Int32 nIDDlgItem,
+    Uint32 Msg,
+    IntPtr wParam,
+    IntPtr lParam,
+  ),
+  int Function(int hDlg, int nIDDlgItem, int Msg, int wParam, int lParam)
+>('SendDlgItemMessageW');
 
 /// Synthesizes keystrokes, mouse motions, and button clicks.
 ///
@@ -6584,8 +7915,9 @@ int SendInput(int cInputs, Pointer<INPUT> pInputs, int cbSize) =>
     _SendInput(cInputs, pInputs, cbSize);
 
 final _SendInput = _user32.lookupFunction<
-    Uint32 Function(Uint32 cInputs, Pointer<INPUT> pInputs, Int32 cbSize),
-    int Function(int cInputs, Pointer<INPUT> pInputs, int cbSize)>('SendInput');
+  Uint32 Function(Uint32 cInputs, Pointer<INPUT> pInputs, Int32 cbSize),
+  int Function(int cInputs, Pointer<INPUT> pInputs, int cbSize)
+>('SendInput');
 
 /// Sends the specified message to a window or windows. The SendMessage
 /// function calls the window procedure for the specified window and does
@@ -6604,8 +7936,9 @@ int SendMessage(int hWnd, int Msg, int wParam, int lParam) =>
     _SendMessage(hWnd, Msg, wParam, lParam);
 
 final _SendMessage = _user32.lookupFunction<
-    IntPtr Function(IntPtr hWnd, Uint32 Msg, IntPtr wParam, IntPtr lParam),
-    int Function(int hWnd, int Msg, int wParam, int lParam)>('SendMessageW');
+  IntPtr Function(IntPtr hWnd, Uint32 Msg, IntPtr wParam, IntPtr lParam),
+  int Function(int hWnd, int Msg, int wParam, int lParam)
+>('SendMessageW');
 
 /// Sends the specified message to a window or windows. It calls the window
 /// procedure for the specified window and returns immediately if the window
@@ -6625,20 +7958,33 @@ final _SendMessage = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int SendMessageCallback(int hWnd, int Msg, int wParam, int lParam,
-        Pointer<NativeFunction<SENDASYNCPROC>> lpResultCallBack, int dwData) =>
-    _SendMessageCallback(hWnd, Msg, wParam, lParam, lpResultCallBack, dwData);
+int SendMessageCallback(
+  int hWnd,
+  int Msg,
+  int wParam,
+  int lParam,
+  Pointer<NativeFunction<SENDASYNCPROC>> lpResultCallBack,
+  int dwData,
+) => _SendMessageCallback(hWnd, Msg, wParam, lParam, lpResultCallBack, dwData);
 
 final _SendMessageCallback = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Uint32 Msg, IntPtr wParam, IntPtr lParam,
-        Pointer<NativeFunction<SENDASYNCPROC>> lpResultCallBack, IntPtr dwData),
-    int Function(
-        int hWnd,
-        int Msg,
-        int wParam,
-        int lParam,
-        Pointer<NativeFunction<SENDASYNCPROC>> lpResultCallBack,
-        int dwData)>('SendMessageCallbackW');
+  Int32 Function(
+    IntPtr hWnd,
+    Uint32 Msg,
+    IntPtr wParam,
+    IntPtr lParam,
+    Pointer<NativeFunction<SENDASYNCPROC>> lpResultCallBack,
+    IntPtr dwData,
+  ),
+  int Function(
+    int hWnd,
+    int Msg,
+    int wParam,
+    int lParam,
+    Pointer<NativeFunction<SENDASYNCPROC>> lpResultCallBack,
+    int dwData,
+  )
+>('SendMessageCallbackW');
 
 /// Sends the specified message to one or more windows.
 ///
@@ -6654,16 +8000,44 @@ final _SendMessageCallback = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int SendMessageTimeout(int hWnd, int Msg, int wParam, int lParam, int fuFlags,
-        int uTimeout, Pointer<IntPtr> lpdwResult) =>
-    _SendMessageTimeout(
-        hWnd, Msg, wParam, lParam, fuFlags, uTimeout, lpdwResult);
+int SendMessageTimeout(
+  int hWnd,
+  int Msg,
+  int wParam,
+  int lParam,
+  int fuFlags,
+  int uTimeout,
+  Pointer<IntPtr> lpdwResult,
+) => _SendMessageTimeout(
+  hWnd,
+  Msg,
+  wParam,
+  lParam,
+  fuFlags,
+  uTimeout,
+  lpdwResult,
+);
 
 final _SendMessageTimeout = _user32.lookupFunction<
-    IntPtr Function(IntPtr hWnd, Uint32 Msg, IntPtr wParam, IntPtr lParam,
-        Uint32 fuFlags, Uint32 uTimeout, Pointer<IntPtr> lpdwResult),
-    int Function(int hWnd, int Msg, int wParam, int lParam, int fuFlags,
-        int uTimeout, Pointer<IntPtr> lpdwResult)>('SendMessageTimeoutW');
+  IntPtr Function(
+    IntPtr hWnd,
+    Uint32 Msg,
+    IntPtr wParam,
+    IntPtr lParam,
+    Uint32 fuFlags,
+    Uint32 uTimeout,
+    Pointer<IntPtr> lpdwResult,
+  ),
+  int Function(
+    int hWnd,
+    int Msg,
+    int wParam,
+    int lParam,
+    int fuFlags,
+    int uTimeout,
+    Pointer<IntPtr> lpdwResult,
+  )
+>('SendMessageTimeoutW');
 
 /// Sends the specified message to a window or windows. If the window was
 /// created by the calling thread, SendNotifyMessage calls the window
@@ -6686,9 +8060,9 @@ int SendNotifyMessage(int hWnd, int Msg, int wParam, int lParam) =>
     _SendNotifyMessage(hWnd, Msg, wParam, lParam);
 
 final _SendNotifyMessage = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Uint32 Msg, IntPtr wParam, IntPtr lParam),
-    int Function(
-        int hWnd, int Msg, int wParam, int lParam)>('SendNotifyMessageW');
+  Int32 Function(IntPtr hWnd, Uint32 Msg, IntPtr wParam, IntPtr lParam),
+  int Function(int hWnd, int Msg, int wParam, int lParam)
+>('SendNotifyMessageW');
 
 /// Activates a window. The window must be attached to the calling thread's
 /// message queue.
@@ -6701,8 +8075,10 @@ final _SendNotifyMessage = _user32.lookupFunction<
 /// {@category user32}
 int SetActiveWindow(int hWnd) => _SetActiveWindow(hWnd);
 
-final _SetActiveWindow = _user32.lookupFunction<IntPtr Function(IntPtr hWnd),
-    int Function(int hWnd)>('SetActiveWindow');
+final _SetActiveWindow = _user32
+    .lookupFunction<IntPtr Function(IntPtr hWnd), int Function(int hWnd)>(
+      'SetActiveWindow',
+    );
 
 /// Sets the mouse capture to the specified window belonging to the current
 /// thread. SetCapture captures mouse input either when the mouse is over
@@ -6718,8 +8094,10 @@ final _SetActiveWindow = _user32.lookupFunction<IntPtr Function(IntPtr hWnd),
 /// {@category user32}
 int SetCapture(int hWnd) => _SetCapture(hWnd);
 
-final _SetCapture = _user32.lookupFunction<IntPtr Function(IntPtr hWnd),
-    int Function(int hWnd)>('SetCapture');
+final _SetCapture = _user32
+    .lookupFunction<IntPtr Function(IntPtr hWnd), int Function(int hWnd)>(
+      'SetCapture',
+    );
 
 /// Sets the caret blink time to the specified number of milliseconds. The
 /// blink time is the elapsed time, in milliseconds, required to invert the
@@ -6734,8 +8112,9 @@ final _SetCapture = _user32.lookupFunction<IntPtr Function(IntPtr hWnd),
 int SetCaretBlinkTime(int uMSeconds) => _SetCaretBlinkTime(uMSeconds);
 
 final _SetCaretBlinkTime = _user32.lookupFunction<
-    Int32 Function(Uint32 uMSeconds),
-    int Function(int uMSeconds)>('SetCaretBlinkTime');
+  Int32 Function(Uint32 uMSeconds),
+  int Function(int uMSeconds)
+>('SetCaretBlinkTime');
 
 /// Moves the caret to the specified coordinates. If the window that owns
 /// the caret was created with the CS_OWNDC class style, then the specified
@@ -6751,8 +8130,10 @@ final _SetCaretBlinkTime = _user32.lookupFunction<
 /// {@category user32}
 int SetCaretPos(int X, int Y) => _SetCaretPos(X, Y);
 
-final _SetCaretPos = _user32.lookupFunction<Int32 Function(Int32 X, Int32 Y),
-    int Function(int X, int Y)>('SetCaretPos');
+final _SetCaretPos = _user32.lookupFunction<
+  Int32 Function(Int32 X, Int32 Y),
+  int Function(int X, int Y)
+>('SetCaretPos');
 
 /// Changes an attribute of the specified window class.
 ///
@@ -6768,8 +8149,9 @@ int SetClassLongPtr(int hWnd, int nIndex, int dwNewLong) =>
     _SetClassLongPtr(hWnd, nIndex, dwNewLong);
 
 final _SetClassLongPtr = _user32.lookupFunction<
-    IntPtr Function(IntPtr hWnd, Int32 nIndex, IntPtr dwNewLong),
-    int Function(int hWnd, int nIndex, int dwNewLong)>('SetClassLongPtrW');
+  IntPtr Function(IntPtr hWnd, Int32 nIndex, IntPtr dwNewLong),
+  int Function(int hWnd, int nIndex, int dwNewLong)
+>('SetClassLongPtrW');
 
 /// Places data on the clipboard in a specified clipboard format. The window
 /// must be the current clipboard owner, and the application must have
@@ -6785,8 +8167,9 @@ final _SetClassLongPtr = _user32.lookupFunction<
 int SetClipboardData(int uFormat, int hMem) => _SetClipboardData(uFormat, hMem);
 
 final _SetClipboardData = _user32.lookupFunction<
-    IntPtr Function(Uint32 uFormat, IntPtr hMem),
-    int Function(int uFormat, int hMem)>('SetClipboardData');
+  IntPtr Function(Uint32 uFormat, IntPtr hMem),
+  int Function(int uFormat, int hMem)
+>('SetClipboardData');
 
 /// Adds the specified window to the chain of clipboard viewers.
 ///
@@ -6799,8 +8182,9 @@ final _SetClipboardData = _user32.lookupFunction<
 int SetClipboardViewer(int hWndNewViewer) => _SetClipboardViewer(hWndNewViewer);
 
 final _SetClipboardViewer = _user32.lookupFunction<
-    IntPtr Function(IntPtr hWndNewViewer),
-    int Function(int hWndNewViewer)>('SetClipboardViewer');
+  IntPtr Function(IntPtr hWndNewViewer),
+  int Function(int hWndNewViewer)
+>('SetClipboardViewer');
 
 /// Creates a timer with the specified time-out value and coalescing
 /// tolerance delay.
@@ -6815,19 +8199,31 @@ final _SetClipboardViewer = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int SetCoalescableTimer(int hWnd, int nIDEvent, int uElapse,
-        Pointer<NativeFunction<TIMERPROC>> lpTimerFunc, int uToleranceDelay) =>
+int SetCoalescableTimer(
+  int hWnd,
+  int nIDEvent,
+  int uElapse,
+  Pointer<NativeFunction<TIMERPROC>> lpTimerFunc,
+  int uToleranceDelay,
+) =>
     _SetCoalescableTimer(hWnd, nIDEvent, uElapse, lpTimerFunc, uToleranceDelay);
 
 final _SetCoalescableTimer = _user32.lookupFunction<
-    IntPtr Function(IntPtr hWnd, IntPtr nIDEvent, Uint32 uElapse,
-        Pointer<NativeFunction<TIMERPROC>> lpTimerFunc, Uint32 uToleranceDelay),
-    int Function(
-        int hWnd,
-        int nIDEvent,
-        int uElapse,
-        Pointer<NativeFunction<TIMERPROC>> lpTimerFunc,
-        int uToleranceDelay)>('SetCoalescableTimer');
+  IntPtr Function(
+    IntPtr hWnd,
+    IntPtr nIDEvent,
+    Uint32 uElapse,
+    Pointer<NativeFunction<TIMERPROC>> lpTimerFunc,
+    Uint32 uToleranceDelay,
+  ),
+  int Function(
+    int hWnd,
+    int nIDEvent,
+    int uElapse,
+    Pointer<NativeFunction<TIMERPROC>> lpTimerFunc,
+    int uToleranceDelay,
+  )
+>('SetCoalescableTimer');
 
 /// Sets the cursor shape.
 ///
@@ -6839,8 +8235,10 @@ final _SetCoalescableTimer = _user32.lookupFunction<
 /// {@category user32}
 int SetCursor(int hCursor) => _SetCursor(hCursor);
 
-final _SetCursor = _user32.lookupFunction<IntPtr Function(IntPtr hCursor),
-    int Function(int hCursor)>('SetCursor');
+final _SetCursor = _user32
+    .lookupFunction<IntPtr Function(IntPtr hCursor), int Function(int hCursor)>(
+      'SetCursor',
+    );
 
 /// Moves the cursor to the specified screen coordinates. If the new
 /// coordinates are not within the screen rectangle set by the most recent
@@ -6856,8 +8254,10 @@ final _SetCursor = _user32.lookupFunction<IntPtr Function(IntPtr hCursor),
 /// {@category user32}
 int SetCursorPos(int X, int Y) => _SetCursorPos(X, Y);
 
-final _SetCursorPos = _user32.lookupFunction<Int32 Function(Int32 X, Int32 Y),
-    int Function(int X, int Y)>('SetCursorPos');
+final _SetCursorPos = _user32.lookupFunction<
+  Int32 Function(Int32 X, Int32 Y),
+  int Function(int X, int Y)
+>('SetCursorPos');
 
 /// Overrides the default per-monitor DPI scaling behavior of a child window
 /// in a dialog.
@@ -6874,9 +8274,9 @@ int SetDialogControlDpiChangeBehavior(int hWnd, int mask, int values) =>
     _SetDialogControlDpiChangeBehavior(hWnd, mask, values);
 
 final _SetDialogControlDpiChangeBehavior = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Int32 mask, Int32 values),
-    int Function(
-        int hWnd, int mask, int values)>('SetDialogControlDpiChangeBehavior');
+  Int32 Function(IntPtr hWnd, Int32 mask, Int32 values),
+  int Function(int hWnd, int mask, int values)
+>('SetDialogControlDpiChangeBehavior');
 
 /// Dialogs in Per-Monitor v2 contexts are automatically DPI scaled. This
 /// method lets you customize their DPI change behavior. This function works
@@ -6897,8 +8297,9 @@ int SetDialogDpiChangeBehavior(int hDlg, int mask, int values) =>
     _SetDialogDpiChangeBehavior(hDlg, mask, values);
 
 final _SetDialogDpiChangeBehavior = _user32.lookupFunction<
-    Int32 Function(IntPtr hDlg, Int32 mask, Int32 values),
-    int Function(int hDlg, int mask, int values)>('SetDialogDpiChangeBehavior');
+  Int32 Function(IntPtr hDlg, Int32 mask, Int32 values),
+  int Function(int hDlg, int mask, int values)
+>('SetDialogDpiChangeBehavior');
 
 /// Sets the screen auto-rotation preferences for the current process.
 ///
@@ -6912,8 +8313,9 @@ int SetDisplayAutoRotationPreferences(int orientation) =>
     _SetDisplayAutoRotationPreferences(orientation);
 
 final _SetDisplayAutoRotationPreferences = _user32.lookupFunction<
-    Int32 Function(Int32 orientation),
-    int Function(int orientation)>('SetDisplayAutoRotationPreferences');
+  Int32 Function(Int32 orientation),
+  int Function(int orientation)
+>('SetDisplayAutoRotationPreferences');
 
 /// The SetDisplayConfig function modifies the display topology, source, and
 /// target modes by exclusively enabling the specified paths in the current
@@ -6930,27 +8332,35 @@ final _SetDisplayAutoRotationPreferences = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int SetDisplayConfig(
-        int numPathArrayElements,
-        Pointer<DISPLAYCONFIG_PATH_INFO> pathArray,
-        int numModeInfoArrayElements,
-        Pointer<DISPLAYCONFIG_MODE_INFO> modeInfoArray,
-        int flags) =>
-    _SetDisplayConfig(numPathArrayElements, pathArray, numModeInfoArrayElements,
-        modeInfoArray, flags);
+  int numPathArrayElements,
+  Pointer<DISPLAYCONFIG_PATH_INFO> pathArray,
+  int numModeInfoArrayElements,
+  Pointer<DISPLAYCONFIG_MODE_INFO> modeInfoArray,
+  int flags,
+) => _SetDisplayConfig(
+  numPathArrayElements,
+  pathArray,
+  numModeInfoArrayElements,
+  modeInfoArray,
+  flags,
+);
 
 final _SetDisplayConfig = _user32.lookupFunction<
-    Int32 Function(
-        Uint32 numPathArrayElements,
-        Pointer<DISPLAYCONFIG_PATH_INFO> pathArray,
-        Uint32 numModeInfoArrayElements,
-        Pointer<DISPLAYCONFIG_MODE_INFO> modeInfoArray,
-        Uint32 flags),
-    int Function(
-        int numPathArrayElements,
-        Pointer<DISPLAYCONFIG_PATH_INFO> pathArray,
-        int numModeInfoArrayElements,
-        Pointer<DISPLAYCONFIG_MODE_INFO> modeInfoArray,
-        int flags)>('SetDisplayConfig');
+  Int32 Function(
+    Uint32 numPathArrayElements,
+    Pointer<DISPLAYCONFIG_PATH_INFO> pathArray,
+    Uint32 numModeInfoArrayElements,
+    Pointer<DISPLAYCONFIG_MODE_INFO> modeInfoArray,
+    Uint32 flags,
+  ),
+  int Function(
+    int numPathArrayElements,
+    Pointer<DISPLAYCONFIG_PATH_INFO> pathArray,
+    int numModeInfoArrayElements,
+    Pointer<DISPLAYCONFIG_MODE_INFO> modeInfoArray,
+    int flags,
+  )
+>('SetDisplayConfig');
 
 /// Sets the text of a control in a dialog box to the string representation
 /// of a specified integer value.
@@ -6968,9 +8378,9 @@ int SetDlgItemInt(int hDlg, int nIDDlgItem, int uValue, int bSigned) =>
     _SetDlgItemInt(hDlg, nIDDlgItem, uValue, bSigned);
 
 final _SetDlgItemInt = _user32.lookupFunction<
-    Int32 Function(IntPtr hDlg, Int32 nIDDlgItem, Uint32 uValue, Int32 bSigned),
-    int Function(
-        int hDlg, int nIDDlgItem, int uValue, int bSigned)>('SetDlgItemInt');
+  Int32 Function(IntPtr hDlg, Int32 nIDDlgItem, Uint32 uValue, Int32 bSigned),
+  int Function(int hDlg, int nIDDlgItem, int uValue, int bSigned)
+>('SetDlgItemInt');
 
 /// Sets the title or text of a control in a dialog box.
 ///
@@ -6986,9 +8396,9 @@ int SetDlgItemText(int hDlg, int nIDDlgItem, Pointer<Utf16> lpString) =>
     _SetDlgItemText(hDlg, nIDDlgItem, lpString);
 
 final _SetDlgItemText = _user32.lookupFunction<
-    Int32 Function(IntPtr hDlg, Int32 nIDDlgItem, Pointer<Utf16> lpString),
-    int Function(
-        int hDlg, int nIDDlgItem, Pointer<Utf16> lpString)>('SetDlgItemTextW');
+  Int32 Function(IntPtr hDlg, Int32 nIDDlgItem, Pointer<Utf16> lpString),
+  int Function(int hDlg, int nIDDlgItem, Pointer<Utf16> lpString)
+>('SetDlgItemTextW');
 
 /// Sets the double-click time for the mouse. A double-click is a series of
 /// two clicks of a mouse button, the second occurring within a specified
@@ -7004,9 +8414,10 @@ final _SetDlgItemText = _user32.lookupFunction<
 /// {@category user32}
 int SetDoubleClickTime(int param0) => _SetDoubleClickTime(param0);
 
-final _SetDoubleClickTime = _user32.lookupFunction<
-    Int32 Function(Uint32 param0),
-    int Function(int param0)>('SetDoubleClickTime');
+final _SetDoubleClickTime = _user32
+    .lookupFunction<Int32 Function(Uint32 param0), int Function(int param0)>(
+      'SetDoubleClickTime',
+    );
 
 /// Sets the keyboard focus to the specified window. The window must be
 /// attached to the calling thread's message queue.
@@ -7019,8 +8430,10 @@ final _SetDoubleClickTime = _user32.lookupFunction<
 /// {@category user32}
 int SetFocus(int hWnd) => _SetFocus(hWnd);
 
-final _SetFocus = _user32.lookupFunction<IntPtr Function(IntPtr hWnd),
-    int Function(int hWnd)>('SetFocus');
+final _SetFocus = _user32
+    .lookupFunction<IntPtr Function(IntPtr hWnd), int Function(int hWnd)>(
+      'SetFocus',
+    );
 
 /// Brings the thread that created the specified window into the foreground
 /// and activates the window. Keyboard input is directed to the window, and
@@ -7036,9 +8449,10 @@ final _SetFocus = _user32.lookupFunction<IntPtr Function(IntPtr hWnd),
 /// {@category user32}
 int SetForegroundWindow(int hWnd) => _SetForegroundWindow(hWnd);
 
-final _SetForegroundWindow =
-    _user32.lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
-        'SetForegroundWindow');
+final _SetForegroundWindow = _user32
+    .lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
+      'SetForegroundWindow',
+    );
 
 /// Configures the messages that are sent from a window for Windows Touch
 /// gestures.
@@ -7053,15 +8467,30 @@ final _SetForegroundWindow =
 /// );
 /// ```
 /// {@category user32}
-int SetGestureConfig(int hwnd, int dwReserved, int cIDs,
-        Pointer<GESTURECONFIG> pGestureConfig, int cbSize) =>
-    _SetGestureConfig(hwnd, dwReserved, cIDs, pGestureConfig, cbSize);
+int SetGestureConfig(
+  int hwnd,
+  int dwReserved,
+  int cIDs,
+  Pointer<GESTURECONFIG> pGestureConfig,
+  int cbSize,
+) => _SetGestureConfig(hwnd, dwReserved, cIDs, pGestureConfig, cbSize);
 
 final _SetGestureConfig = _user32.lookupFunction<
-    Int32 Function(IntPtr hwnd, Uint32 dwReserved, Uint32 cIDs,
-        Pointer<GESTURECONFIG> pGestureConfig, Uint32 cbSize),
-    int Function(int hwnd, int dwReserved, int cIDs,
-        Pointer<GESTURECONFIG> pGestureConfig, int cbSize)>('SetGestureConfig');
+  Int32 Function(
+    IntPtr hwnd,
+    Uint32 dwReserved,
+    Uint32 cIDs,
+    Pointer<GESTURECONFIG> pGestureConfig,
+    Uint32 cbSize,
+  ),
+  int Function(
+    int hwnd,
+    int dwReserved,
+    int cIDs,
+    Pointer<GESTURECONFIG> pGestureConfig,
+    int cbSize,
+  )
+>('SetGestureConfig');
 
 /// Copies an array of keyboard key states into the calling thread's
 /// keyboard input-state table. This is the same table accessed by the
@@ -7078,8 +8507,9 @@ int SetKeyboardState(Pointer<Uint8> lpKeyState) =>
     _SetKeyboardState(lpKeyState);
 
 final _SetKeyboardState = _user32.lookupFunction<
-    Int32 Function(Pointer<Uint8> lpKeyState),
-    int Function(Pointer<Uint8> lpKeyState)>('SetKeyboardState');
+  Int32 Function(Pointer<Uint8> lpKeyState),
+  int Function(Pointer<Uint8> lpKeyState)
+>('SetKeyboardState');
 
 /// Sets the opacity and transparency color key of a layered window.
 ///
@@ -7096,9 +8526,9 @@ int SetLayeredWindowAttributes(int hwnd, int crKey, int bAlpha, int dwFlags) =>
     _SetLayeredWindowAttributes(hwnd, crKey, bAlpha, dwFlags);
 
 final _SetLayeredWindowAttributes = _user32.lookupFunction<
-    Int32 Function(IntPtr hwnd, Uint32 crKey, Uint8 bAlpha, Uint32 dwFlags),
-    int Function(int hwnd, int crKey, int bAlpha,
-        int dwFlags)>('SetLayeredWindowAttributes');
+  Int32 Function(IntPtr hwnd, Uint32 crKey, Uint8 bAlpha, Uint32 dwFlags),
+  int Function(int hwnd, int crKey, int bAlpha, int dwFlags)
+>('SetLayeredWindowAttributes');
 
 /// Assigns a new menu to the specified window.
 ///
@@ -7112,8 +8542,9 @@ final _SetLayeredWindowAttributes = _user32.lookupFunction<
 int SetMenu(int hWnd, int hMenu) => _SetMenu(hWnd, hMenu);
 
 final _SetMenu = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, IntPtr hMenu),
-    int Function(int hWnd, int hMenu)>('SetMenu');
+  Int32 Function(IntPtr hWnd, IntPtr hMenu),
+  int Function(int hWnd, int hMenu)
+>('SetMenu');
 
 /// Sets the default menu item for the specified menu.
 ///
@@ -7129,8 +8560,9 @@ int SetMenuDefaultItem(int hMenu, int uItem, int fByPos) =>
     _SetMenuDefaultItem(hMenu, uItem, fByPos);
 
 final _SetMenuDefaultItem = _user32.lookupFunction<
-    Int32 Function(IntPtr hMenu, Uint32 uItem, Uint32 fByPos),
-    int Function(int hMenu, int uItem, int fByPos)>('SetMenuDefaultItem');
+  Int32 Function(IntPtr hMenu, Uint32 uItem, Uint32 fByPos),
+  int Function(int hMenu, int uItem, int fByPos)
+>('SetMenuDefaultItem');
 
 /// Sets information for a specified menu.
 ///
@@ -7145,8 +8577,9 @@ int SetMenuInfo(int param0, Pointer<MENUINFO> param1) =>
     _SetMenuInfo(param0, param1);
 
 final _SetMenuInfo = _user32.lookupFunction<
-    Int32 Function(IntPtr param0, Pointer<MENUINFO> param1),
-    int Function(int param0, Pointer<MENUINFO> param1)>('SetMenuInfo');
+  Int32 Function(IntPtr param0, Pointer<MENUINFO> param1),
+  int Function(int param0, Pointer<MENUINFO> param1)
+>('SetMenuInfo');
 
 /// Associates the specified bitmap with a menu item. Whether the menu item
 /// is selected or clear, the system displays the appropriate bitmap next to
@@ -7162,16 +8595,36 @@ final _SetMenuInfo = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int SetMenuItemBitmaps(int hMenu, int uPosition, int uFlags,
-        int hBitmapUnchecked, int hBitmapChecked) =>
-    _SetMenuItemBitmaps(
-        hMenu, uPosition, uFlags, hBitmapUnchecked, hBitmapChecked);
+int SetMenuItemBitmaps(
+  int hMenu,
+  int uPosition,
+  int uFlags,
+  int hBitmapUnchecked,
+  int hBitmapChecked,
+) => _SetMenuItemBitmaps(
+  hMenu,
+  uPosition,
+  uFlags,
+  hBitmapUnchecked,
+  hBitmapChecked,
+);
 
 final _SetMenuItemBitmaps = _user32.lookupFunction<
-    Int32 Function(IntPtr hMenu, Uint32 uPosition, Uint32 uFlags,
-        IntPtr hBitmapUnchecked, IntPtr hBitmapChecked),
-    int Function(int hMenu, int uPosition, int uFlags, int hBitmapUnchecked,
-        int hBitmapChecked)>('SetMenuItemBitmaps');
+  Int32 Function(
+    IntPtr hMenu,
+    Uint32 uPosition,
+    Uint32 uFlags,
+    IntPtr hBitmapUnchecked,
+    IntPtr hBitmapChecked,
+  ),
+  int Function(
+    int hMenu,
+    int uPosition,
+    int uFlags,
+    int hBitmapUnchecked,
+    int hBitmapChecked,
+  )
+>('SetMenuItemBitmaps');
 
 /// Changes information about a menu item.
 ///
@@ -7185,14 +8638,21 @@ final _SetMenuItemBitmaps = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int SetMenuItemInfo(
-        int hmenu, int item, int fByPositon, Pointer<MENUITEMINFO> lpmii) =>
-    _SetMenuItemInfo(hmenu, item, fByPositon, lpmii);
+  int hmenu,
+  int item,
+  int fByPositon,
+  Pointer<MENUITEMINFO> lpmii,
+) => _SetMenuItemInfo(hmenu, item, fByPositon, lpmii);
 
 final _SetMenuItemInfo = _user32.lookupFunction<
-    Int32 Function(IntPtr hmenu, Uint32 item, Int32 fByPositon,
-        Pointer<MENUITEMINFO> lpmii),
-    int Function(int hmenu, int item, int fByPositon,
-        Pointer<MENUITEMINFO> lpmii)>('SetMenuItemInfoW');
+  Int32 Function(
+    IntPtr hmenu,
+    Uint32 item,
+    Int32 fByPositon,
+    Pointer<MENUITEMINFO> lpmii,
+  ),
+  int Function(int hmenu, int item, int fByPositon, Pointer<MENUITEMINFO> lpmii)
+>('SetMenuItemInfoW');
 
 /// Sets the extra message information for the current thread. Extra message
 /// information is an application- or driver-defined value associated with
@@ -7208,9 +8668,10 @@ final _SetMenuItemInfo = _user32.lookupFunction<
 /// {@category user32}
 int SetMessageExtraInfo(int lParam) => _SetMessageExtraInfo(lParam);
 
-final _SetMessageExtraInfo = _user32.lookupFunction<
-    IntPtr Function(IntPtr lParam),
-    int Function(int lParam)>('SetMessageExtraInfo');
+final _SetMessageExtraInfo = _user32
+    .lookupFunction<IntPtr Function(IntPtr lParam), int Function(int lParam)>(
+      'SetMessageExtraInfo',
+    );
 
 /// Changes the parent window of the specified child window.
 ///
@@ -7225,8 +8686,9 @@ int SetParent(int hWndChild, int hWndNewParent) =>
     _SetParent(hWndChild, hWndNewParent);
 
 final _SetParent = _user32.lookupFunction<
-    IntPtr Function(IntPtr hWndChild, IntPtr hWndNewParent),
-    int Function(int hWndChild, int hWndNewParent)>('SetParent');
+  IntPtr Function(IntPtr hWndChild, IntPtr hWndNewParent),
+  int Function(int hWndChild, int hWndNewParent)
+>('SetParent');
 
 /// Sets the position of the cursor in physical coordinates.
 ///
@@ -7240,8 +8702,9 @@ final _SetParent = _user32.lookupFunction<
 int SetPhysicalCursorPos(int X, int Y) => _SetPhysicalCursorPos(X, Y);
 
 final _SetPhysicalCursorPos = _user32.lookupFunction<
-    Int32 Function(Int32 X, Int32 Y),
-    int Function(int X, int Y)>('SetPhysicalCursorPos');
+  Int32 Function(Int32 X, Int32 Y),
+  int Function(int X, int Y)
+>('SetPhysicalCursorPos');
 
 /// Sets the process-default DPI awareness to system-DPI awareness.
 ///
@@ -7270,9 +8733,10 @@ final _SetProcessDPIAware = _user32
 int SetProcessDpiAwarenessContext(int value) =>
     _SetProcessDpiAwarenessContext(value);
 
-final _SetProcessDpiAwarenessContext = _user32.lookupFunction<
-    Int32 Function(IntPtr value),
-    int Function(int value)>('SetProcessDpiAwarenessContext');
+final _SetProcessDpiAwarenessContext = _user32
+    .lookupFunction<Int32 Function(IntPtr value), int Function(int value)>(
+      'SetProcessDpiAwarenessContext',
+    );
 
 /// Adds a new entry or changes an existing entry in the property list of
 /// the specified window. The function adds a new entry to the list if the
@@ -7292,8 +8756,9 @@ int SetProp(int hWnd, Pointer<Utf16> lpString, int hData) =>
     _SetProp(hWnd, lpString, hData);
 
 final _SetProp = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Pointer<Utf16> lpString, IntPtr hData),
-    int Function(int hWnd, Pointer<Utf16> lpString, int hData)>('SetPropW');
+  Int32 Function(IntPtr hWnd, Pointer<Utf16> lpString, IntPtr hData),
+  int Function(int hWnd, Pointer<Utf16> lpString, int hData)
+>('SetPropW');
 
 /// The SetRect function sets the coordinates of the specified rectangle.
 /// This is equivalent to assigning the left, top, right, and bottom
@@ -7313,10 +8778,15 @@ int SetRect(Pointer<RECT> lprc, int xLeft, int yTop, int xRight, int yBottom) =>
     _SetRect(lprc, xLeft, yTop, xRight, yBottom);
 
 final _SetRect = _user32.lookupFunction<
-    Int32 Function(Pointer<RECT> lprc, Int32 xLeft, Int32 yTop, Int32 xRight,
-        Int32 yBottom),
-    int Function(Pointer<RECT> lprc, int xLeft, int yTop, int xRight,
-        int yBottom)>('SetRect');
+  Int32 Function(
+    Pointer<RECT> lprc,
+    Int32 xLeft,
+    Int32 yTop,
+    Int32 xRight,
+    Int32 yBottom,
+  ),
+  int Function(Pointer<RECT> lprc, int xLeft, int yTop, int xRight, int yBottom)
+>('SetRect');
 
 /// The SetRectEmpty function creates an empty rectangle in which all
 /// coordinates are set to zero.
@@ -7329,8 +8799,10 @@ final _SetRect = _user32.lookupFunction<
 /// {@category user32}
 int SetRectEmpty(Pointer<RECT> lprc) => _SetRectEmpty(lprc);
 
-final _SetRectEmpty = _user32.lookupFunction<Int32 Function(Pointer<RECT> lprc),
-    int Function(Pointer<RECT> lprc)>('SetRectEmpty');
+final _SetRectEmpty = _user32.lookupFunction<
+  Int32 Function(Pointer<RECT> lprc),
+  int Function(Pointer<RECT> lprc)
+>('SetRectEmpty');
 
 /// The SetScrollInfo function sets the parameters of a scroll bar,
 /// including the minimum and maximum scrolling positions, the page size,
@@ -7350,10 +8822,14 @@ int SetScrollInfo(int hwnd, int nBar, Pointer<SCROLLINFO> lpsi, int redraw) =>
     _SetScrollInfo(hwnd, nBar, lpsi, redraw);
 
 final _SetScrollInfo = _user32.lookupFunction<
-    Int32 Function(
-        IntPtr hwnd, Uint32 nBar, Pointer<SCROLLINFO> lpsi, Int32 redraw),
-    int Function(int hwnd, int nBar, Pointer<SCROLLINFO> lpsi,
-        int redraw)>('SetScrollInfo');
+  Int32 Function(
+    IntPtr hwnd,
+    Uint32 nBar,
+    Pointer<SCROLLINFO> lpsi,
+    Int32 redraw,
+  ),
+  int Function(int hwnd, int nBar, Pointer<SCROLLINFO> lpsi, int redraw)
+>('SetScrollInfo');
 
 /// Sets the colors for the specified display elements. Display elements are
 /// the various parts of a window and the display that appear on the system
@@ -7367,15 +8843,24 @@ final _SetScrollInfo = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int SetSysColors(int cElements, Pointer<Int32> lpaElements,
-        Pointer<Uint32> lpaRgbValues) =>
-    _SetSysColors(cElements, lpaElements, lpaRgbValues);
+int SetSysColors(
+  int cElements,
+  Pointer<Int32> lpaElements,
+  Pointer<Uint32> lpaRgbValues,
+) => _SetSysColors(cElements, lpaElements, lpaRgbValues);
 
 final _SetSysColors = _user32.lookupFunction<
-    Int32 Function(Int32 cElements, Pointer<Int32> lpaElements,
-        Pointer<Uint32> lpaRgbValues),
-    int Function(int cElements, Pointer<Int32> lpaElements,
-        Pointer<Uint32> lpaRgbValues)>('SetSysColors');
+  Int32 Function(
+    Int32 cElements,
+    Pointer<Int32> lpaElements,
+    Pointer<Uint32> lpaRgbValues,
+  ),
+  int Function(
+    int cElements,
+    Pointer<Int32> lpaElements,
+    Pointer<Uint32> lpaRgbValues,
+  )
+>('SetSysColors');
 
 /// Enables an application to customize the system cursors. It replaces the
 /// contents of the system cursor specified by the id parameter with the
@@ -7392,8 +8877,9 @@ final _SetSysColors = _user32.lookupFunction<
 int SetSystemCursor(int hcur, int id) => _SetSystemCursor(hcur, id);
 
 final _SetSystemCursor = _user32.lookupFunction<
-    Int32 Function(IntPtr hcur, Uint32 id),
-    int Function(int hcur, int id)>('SetSystemCursor');
+  Int32 Function(IntPtr hcur, Uint32 id),
+  int Function(int hcur, int id)
+>('SetSystemCursor');
 
 /// Set the DPI awareness for the current thread to the provided value.
 ///
@@ -7407,8 +8893,9 @@ int SetThreadDpiAwarenessContext(int dpiContext) =>
     _SetThreadDpiAwarenessContext(dpiContext);
 
 final _SetThreadDpiAwarenessContext = _user32.lookupFunction<
-    IntPtr Function(IntPtr dpiContext),
-    int Function(int dpiContext)>('SetThreadDpiAwarenessContext');
+  IntPtr Function(IntPtr dpiContext),
+  int Function(int dpiContext)
+>('SetThreadDpiAwarenessContext');
 
 /// Sets the thread's DPI_HOSTING_BEHAVIOR. This behavior allows windows
 /// created in the thread to host child windows with a different
@@ -7423,9 +8910,10 @@ final _SetThreadDpiAwarenessContext = _user32.lookupFunction<
 int SetThreadDpiHostingBehavior(int value) =>
     _SetThreadDpiHostingBehavior(value);
 
-final _SetThreadDpiHostingBehavior = _user32.lookupFunction<
-    Int32 Function(Int32 value),
-    int Function(int value)>('SetThreadDpiHostingBehavior');
+final _SetThreadDpiHostingBehavior = _user32
+    .lookupFunction<Int32 Function(Int32 value), int Function(int value)>(
+      'SetThreadDpiHostingBehavior',
+    );
 
 /// Creates a timer with the specified time-out value.
 ///
@@ -7438,15 +8926,27 @@ final _SetThreadDpiHostingBehavior = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int SetTimer(int hWnd, int nIDEvent, int uElapse,
-        Pointer<NativeFunction<TIMERPROC>> lpTimerFunc) =>
-    _SetTimer(hWnd, nIDEvent, uElapse, lpTimerFunc);
+int SetTimer(
+  int hWnd,
+  int nIDEvent,
+  int uElapse,
+  Pointer<NativeFunction<TIMERPROC>> lpTimerFunc,
+) => _SetTimer(hWnd, nIDEvent, uElapse, lpTimerFunc);
 
 final _SetTimer = _user32.lookupFunction<
-    IntPtr Function(IntPtr hWnd, IntPtr nIDEvent, Uint32 uElapse,
-        Pointer<NativeFunction<TIMERPROC>> lpTimerFunc),
-    int Function(int hWnd, int nIDEvent, int uElapse,
-        Pointer<NativeFunction<TIMERPROC>> lpTimerFunc)>('SetTimer');
+  IntPtr Function(
+    IntPtr hWnd,
+    IntPtr nIDEvent,
+    Uint32 uElapse,
+    Pointer<NativeFunction<TIMERPROC>> lpTimerFunc,
+  ),
+  int Function(
+    int hWnd,
+    int nIDEvent,
+    int uElapse,
+    Pointer<NativeFunction<TIMERPROC>> lpTimerFunc,
+  )
+>('SetTimer');
 
 /// Sets information about the specified window station or desktop object.
 ///
@@ -7460,13 +8960,16 @@ final _SetTimer = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int SetUserObjectInformation(
-        int hObj, int nIndex, Pointer pvInfo, int nLength) =>
-    _SetUserObjectInformation(hObj, nIndex, pvInfo, nLength);
+  int hObj,
+  int nIndex,
+  Pointer pvInfo,
+  int nLength,
+) => _SetUserObjectInformation(hObj, nIndex, pvInfo, nLength);
 
 final _SetUserObjectInformation = _user32.lookupFunction<
-    Int32 Function(IntPtr hObj, Int32 nIndex, Pointer pvInfo, Uint32 nLength),
-    int Function(int hObj, int nIndex, Pointer pvInfo,
-        int nLength)>('SetUserObjectInformationW');
+  Int32 Function(IntPtr hObj, Int32 nIndex, Pointer pvInfo, Uint32 nLength),
+  int Function(int hObj, int nIndex, Pointer pvInfo, int nLength)
+>('SetUserObjectInformationW');
 
 /// Specifies where the content of the window can be displayed.
 ///
@@ -7481,8 +8984,9 @@ int SetWindowDisplayAffinity(int hWnd, int dwAffinity) =>
     _SetWindowDisplayAffinity(hWnd, dwAffinity);
 
 final _SetWindowDisplayAffinity = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Uint32 dwAffinity),
-    int Function(int hWnd, int dwAffinity)>('SetWindowDisplayAffinity');
+  Int32 Function(IntPtr hWnd, Uint32 dwAffinity),
+  int Function(int hWnd, int dwAffinity)
+>('SetWindowDisplayAffinity');
 
 /// Changes an attribute of the specified window. The function also sets a
 /// value at the specified offset in the extra window memory.
@@ -7499,8 +9003,9 @@ int SetWindowLongPtr(int hWnd, int nIndex, int dwNewLong) =>
     _SetWindowLongPtr(hWnd, nIndex, dwNewLong);
 
 final _SetWindowLongPtr = _user32.lookupFunction<
-    IntPtr Function(IntPtr hWnd, Int32 nIndex, IntPtr dwNewLong),
-    int Function(int hWnd, int nIndex, int dwNewLong)>('SetWindowLongPtrW');
+  IntPtr Function(IntPtr hWnd, Int32 nIndex, IntPtr dwNewLong),
+  int Function(int hWnd, int nIndex, int dwNewLong)
+>('SetWindowLongPtrW');
 
 /// Sets the show state and the restored, minimized, and maximized positions
 /// of the specified window.
@@ -7516,9 +9021,9 @@ int SetWindowPlacement(int hWnd, Pointer<WINDOWPLACEMENT> lpwndpl) =>
     _SetWindowPlacement(hWnd, lpwndpl);
 
 final _SetWindowPlacement = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Pointer<WINDOWPLACEMENT> lpwndpl),
-    int Function(
-        int hWnd, Pointer<WINDOWPLACEMENT> lpwndpl)>('SetWindowPlacement');
+  Int32 Function(IntPtr hWnd, Pointer<WINDOWPLACEMENT> lpwndpl),
+  int Function(int hWnd, Pointer<WINDOWPLACEMENT> lpwndpl)
+>('SetWindowPlacement');
 
 /// Changes the size, position, and Z order of a child, pop-up, or top-level
 /// window. These windows are ordered according to their appearance on the
@@ -7537,15 +9042,36 @@ final _SetWindowPlacement = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int SetWindowPos(int hWnd, int hWndInsertAfter, int X, int Y, int cx, int cy,
-        int uFlags) =>
-    _SetWindowPos(hWnd, hWndInsertAfter, X, Y, cx, cy, uFlags);
+int SetWindowPos(
+  int hWnd,
+  int hWndInsertAfter,
+  int X,
+  int Y,
+  int cx,
+  int cy,
+  int uFlags,
+) => _SetWindowPos(hWnd, hWndInsertAfter, X, Y, cx, cy, uFlags);
 
 final _SetWindowPos = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, IntPtr hWndInsertAfter, Int32 X, Int32 Y,
-        Int32 cx, Int32 cy, Uint32 uFlags),
-    int Function(int hWnd, int hWndInsertAfter, int X, int Y, int cx, int cy,
-        int uFlags)>('SetWindowPos');
+  Int32 Function(
+    IntPtr hWnd,
+    IntPtr hWndInsertAfter,
+    Int32 X,
+    Int32 Y,
+    Int32 cx,
+    Int32 cy,
+    Uint32 uFlags,
+  ),
+  int Function(
+    int hWnd,
+    int hWndInsertAfter,
+    int X,
+    int Y,
+    int cx,
+    int cy,
+    int uFlags,
+  )
+>('SetWindowPos');
 
 /// The SetWindowRgn function sets the window region of a window. The window
 /// region determines the area within the window where the system permits
@@ -7564,8 +9090,9 @@ int SetWindowRgn(int hWnd, int hRgn, int bRedraw) =>
     _SetWindowRgn(hWnd, hRgn, bRedraw);
 
 final _SetWindowRgn = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, IntPtr hRgn, Int32 bRedraw),
-    int Function(int hWnd, int hRgn, int bRedraw)>('SetWindowRgn');
+  Int32 Function(IntPtr hWnd, IntPtr hRgn, Int32 bRedraw),
+  int Function(int hWnd, int hRgn, int bRedraw)
+>('SetWindowRgn');
 
 /// Installs an application-defined hook procedure into a hook chain. You
 /// would install a hook procedure to monitor the system for certain types
@@ -7581,15 +9108,27 @@ final _SetWindowRgn = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int SetWindowsHookEx(int idHook, Pointer<NativeFunction<HOOKPROC>> lpfn,
-        int hmod, int dwThreadId) =>
-    _SetWindowsHookEx(idHook, lpfn, hmod, dwThreadId);
+int SetWindowsHookEx(
+  int idHook,
+  Pointer<NativeFunction<HOOKPROC>> lpfn,
+  int hmod,
+  int dwThreadId,
+) => _SetWindowsHookEx(idHook, lpfn, hmod, dwThreadId);
 
 final _SetWindowsHookEx = _user32.lookupFunction<
-    IntPtr Function(Int32 idHook, Pointer<NativeFunction<HOOKPROC>> lpfn,
-        IntPtr hmod, Uint32 dwThreadId),
-    int Function(int idHook, Pointer<NativeFunction<HOOKPROC>> lpfn, int hmod,
-        int dwThreadId)>('SetWindowsHookExW');
+  IntPtr Function(
+    Int32 idHook,
+    Pointer<NativeFunction<HOOKPROC>> lpfn,
+    IntPtr hmod,
+    Uint32 dwThreadId,
+  ),
+  int Function(
+    int idHook,
+    Pointer<NativeFunction<HOOKPROC>> lpfn,
+    int hmod,
+    int dwThreadId,
+  )
+>('SetWindowsHookExW');
 
 /// Changes the text of the specified window's title bar (if it has one). If
 /// the specified window is a control, the text of the control is changed.
@@ -7607,8 +9146,9 @@ int SetWindowText(int hWnd, Pointer<Utf16> lpString) =>
     _SetWindowText(hWnd, lpString);
 
 final _SetWindowText = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Pointer<Utf16> lpString),
-    int Function(int hWnd, Pointer<Utf16> lpString)>('SetWindowTextW');
+  Int32 Function(IntPtr hWnd, Pointer<Utf16> lpString),
+  int Function(int hWnd, Pointer<Utf16> lpString)
+>('SetWindowTextW');
 
 /// Makes the caret visible on the screen at the caret's current position.
 /// When the caret becomes visible, it begins flashing automatically.
@@ -7621,9 +9161,10 @@ final _SetWindowText = _user32.lookupFunction<
 /// {@category user32}
 int ShowCaret(int hWnd) => _ShowCaret(hWnd);
 
-final _ShowCaret =
-    _user32.lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
-        'ShowCaret');
+final _ShowCaret = _user32
+    .lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
+      'ShowCaret',
+    );
 
 /// Displays or hides the cursor.
 ///
@@ -7635,8 +9176,10 @@ final _ShowCaret =
 /// {@category user32}
 int ShowCursor(int bShow) => _ShowCursor(bShow);
 
-final _ShowCursor = _user32.lookupFunction<Int32 Function(Int32 bShow),
-    int Function(int bShow)>('ShowCursor');
+final _ShowCursor = _user32
+    .lookupFunction<Int32 Function(Int32 bShow), int Function(int bShow)>(
+      'ShowCursor',
+    );
 
 /// Shows or hides all pop-up windows owned by the specified window.
 ///
@@ -7650,8 +9193,9 @@ final _ShowCursor = _user32.lookupFunction<Int32 Function(Int32 bShow),
 int ShowOwnedPopups(int hWnd, int fShow) => _ShowOwnedPopups(hWnd, fShow);
 
 final _ShowOwnedPopups = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Int32 fShow),
-    int Function(int hWnd, int fShow)>('ShowOwnedPopups');
+  Int32 Function(IntPtr hWnd, Int32 fShow),
+  int Function(int hWnd, int fShow)
+>('ShowOwnedPopups');
 
 /// Sets the specified window's show state.
 ///
@@ -7665,8 +9209,9 @@ final _ShowOwnedPopups = _user32.lookupFunction<
 int ShowWindow(int hWnd, int nCmdShow) => _ShowWindow(hWnd, nCmdShow);
 
 final _ShowWindow = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Uint32 nCmdShow),
-    int Function(int hWnd, int nCmdShow)>('ShowWindow');
+  Int32 Function(IntPtr hWnd, Uint32 nCmdShow),
+  int Function(int hWnd, int nCmdShow)
+>('ShowWindow');
 
 /// Sets the show state of a window without waiting for the operation to
 /// complete.
@@ -7681,8 +9226,9 @@ final _ShowWindow = _user32.lookupFunction<
 int ShowWindowAsync(int hWnd, int nCmdShow) => _ShowWindowAsync(hWnd, nCmdShow);
 
 final _ShowWindowAsync = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Uint32 nCmdShow),
-    int Function(int hWnd, int nCmdShow)>('ShowWindowAsync');
+  Int32 Function(IntPtr hWnd, Uint32 nCmdShow),
+  int Function(int hWnd, int nCmdShow)
+>('ShowWindowAsync');
 
 /// Determines which pointer input frame generated the most recently
 /// retrieved message for the specified pointer and discards any queued
@@ -7703,8 +9249,9 @@ int SkipPointerFrameMessages(int pointerId) =>
     _SkipPointerFrameMessages(pointerId);
 
 final _SkipPointerFrameMessages = _user32.lookupFunction<
-    Int32 Function(Uint32 pointerId),
-    int Function(int pointerId)>('SkipPointerFrameMessages');
+  Int32 Function(Uint32 pointerId),
+  int Function(int pointerId)
+>('SkipPointerFrameMessages');
 
 /// Triggers a visual signal to indicate that a sound is playing.
 ///
@@ -7714,8 +9261,9 @@ final _SkipPointerFrameMessages = _user32.lookupFunction<
 /// {@category user32}
 int SoundSentry() => _SoundSentry();
 
-final _SoundSentry =
-    _user32.lookupFunction<Int32 Function(), int Function()>('SoundSentry');
+final _SoundSentry = _user32.lookupFunction<Int32 Function(), int Function()>(
+  'SoundSentry',
+);
 
 /// The SubtractRect function determines the coordinates of a rectangle
 /// formed by subtracting one rectangle from another.
@@ -7728,15 +9276,24 @@ final _SoundSentry =
 /// );
 /// ```
 /// {@category user32}
-int SubtractRect(Pointer<RECT> lprcDst, Pointer<RECT> lprcSrc1,
-        Pointer<RECT> lprcSrc2) =>
-    _SubtractRect(lprcDst, lprcSrc1, lprcSrc2);
+int SubtractRect(
+  Pointer<RECT> lprcDst,
+  Pointer<RECT> lprcSrc1,
+  Pointer<RECT> lprcSrc2,
+) => _SubtractRect(lprcDst, lprcSrc1, lprcSrc2);
 
 final _SubtractRect = _user32.lookupFunction<
-    Int32 Function(
-        Pointer<RECT> lprcDst, Pointer<RECT> lprcSrc1, Pointer<RECT> lprcSrc2),
-    int Function(Pointer<RECT> lprcDst, Pointer<RECT> lprcSrc1,
-        Pointer<RECT> lprcSrc2)>('SubtractRect');
+  Int32 Function(
+    Pointer<RECT> lprcDst,
+    Pointer<RECT> lprcSrc1,
+    Pointer<RECT> lprcSrc2,
+  ),
+  int Function(
+    Pointer<RECT> lprcDst,
+    Pointer<RECT> lprcSrc1,
+    Pointer<RECT> lprcSrc2,
+  )
+>('SubtractRect');
 
 /// Reverses or restores the meaning of the left and right mouse buttons.
 ///
@@ -7748,8 +9305,10 @@ final _SubtractRect = _user32.lookupFunction<
 /// {@category user32}
 int SwapMouseButton(int fSwap) => _SwapMouseButton(fSwap);
 
-final _SwapMouseButton = _user32.lookupFunction<Int32 Function(Int32 fSwap),
-    int Function(int fSwap)>('SwapMouseButton');
+final _SwapMouseButton = _user32
+    .lookupFunction<Int32 Function(Int32 fSwap), int Function(int fSwap)>(
+      'SwapMouseButton',
+    );
 
 /// Makes the specified desktop visible and activates it. This enables the
 /// desktop to receive input from the user. The calling process must have
@@ -7764,8 +9323,10 @@ final _SwapMouseButton = _user32.lookupFunction<Int32 Function(Int32 fSwap),
 /// {@category user32}
 int SwitchDesktop(int hDesktop) => _SwitchDesktop(hDesktop);
 
-final _SwitchDesktop = _user32.lookupFunction<Int32 Function(IntPtr hDesktop),
-    int Function(int hDesktop)>('SwitchDesktop');
+final _SwitchDesktop = _user32.lookupFunction<
+  Int32 Function(IntPtr hDesktop),
+  int Function(int hDesktop)
+>('SwitchDesktop');
 
 /// Switches focus to the specified window and brings it to the foreground.
 ///
@@ -7780,8 +9341,9 @@ void SwitchToThisWindow(int hwnd, int fUnknown) =>
     _SwitchToThisWindow(hwnd, fUnknown);
 
 final _SwitchToThisWindow = _user32.lookupFunction<
-    Void Function(IntPtr hwnd, Int32 fUnknown),
-    void Function(int hwnd, int fUnknown)>('SwitchToThisWindow');
+  Void Function(IntPtr hwnd, Int32 fUnknown),
+  void Function(int hwnd, int fUnknown)
+>('SwitchToThisWindow');
 
 /// Retrieves or sets the value of one of the system-wide parameters. This
 /// function can also update the user profile while setting a parameter.
@@ -7796,14 +9358,21 @@ final _SwitchToThisWindow = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int SystemParametersInfo(
-        int uiAction, int uiParam, Pointer pvParam, int fWinIni) =>
-    _SystemParametersInfo(uiAction, uiParam, pvParam, fWinIni);
+  int uiAction,
+  int uiParam,
+  Pointer pvParam,
+  int fWinIni,
+) => _SystemParametersInfo(uiAction, uiParam, pvParam, fWinIni);
 
 final _SystemParametersInfo = _user32.lookupFunction<
-    Int32 Function(
-        Uint32 uiAction, Uint32 uiParam, Pointer pvParam, Uint32 fWinIni),
-    int Function(int uiAction, int uiParam, Pointer pvParam,
-        int fWinIni)>('SystemParametersInfoW');
+  Int32 Function(
+    Uint32 uiAction,
+    Uint32 uiParam,
+    Pointer pvParam,
+    Uint32 fWinIni,
+  ),
+  int Function(int uiAction, int uiParam, Pointer pvParam, int fWinIni)
+>('SystemParametersInfoW');
 
 /// Retrieves the value of one of the system-wide parameters, taking into
 /// account the provided DPI value.
@@ -7819,14 +9388,23 @@ final _SystemParametersInfo = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int SystemParametersInfoForDpi(
-        int uiAction, int uiParam, Pointer pvParam, int fWinIni, int dpi) =>
-    _SystemParametersInfoForDpi(uiAction, uiParam, pvParam, fWinIni, dpi);
+  int uiAction,
+  int uiParam,
+  Pointer pvParam,
+  int fWinIni,
+  int dpi,
+) => _SystemParametersInfoForDpi(uiAction, uiParam, pvParam, fWinIni, dpi);
 
 final _SystemParametersInfoForDpi = _user32.lookupFunction<
-    Int32 Function(Uint32 uiAction, Uint32 uiParam, Pointer pvParam,
-        Uint32 fWinIni, Uint32 dpi),
-    int Function(int uiAction, int uiParam, Pointer pvParam, int fWinIni,
-        int dpi)>('SystemParametersInfoForDpi');
+  Int32 Function(
+    Uint32 uiAction,
+    Uint32 uiParam,
+    Pointer pvParam,
+    Uint32 fWinIni,
+    Uint32 dpi,
+  ),
+  int Function(int uiAction, int uiParam, Pointer pvParam, int fWinIni, int dpi)
+>('SystemParametersInfoForDpi');
 
 /// The TabbedTextOut function writes a character string at a specified
 /// location, expanding tabs to the values specified in an array of tab-stop
@@ -7847,36 +9425,47 @@ final _SystemParametersInfoForDpi = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int TabbedTextOut(
-        int hdc,
-        int x,
-        int y,
-        Pointer<Utf16> lpString,
-        int chCount,
-        int nTabPositions,
-        Pointer<Int32> lpnTabStopPositions,
-        int nTabOrigin) =>
-    _TabbedTextOut(hdc, x, y, lpString, chCount, nTabPositions,
-        lpnTabStopPositions, nTabOrigin);
+  int hdc,
+  int x,
+  int y,
+  Pointer<Utf16> lpString,
+  int chCount,
+  int nTabPositions,
+  Pointer<Int32> lpnTabStopPositions,
+  int nTabOrigin,
+) => _TabbedTextOut(
+  hdc,
+  x,
+  y,
+  lpString,
+  chCount,
+  nTabPositions,
+  lpnTabStopPositions,
+  nTabOrigin,
+);
 
 final _TabbedTextOut = _user32.lookupFunction<
-    Int32 Function(
-        IntPtr hdc,
-        Int32 x,
-        Int32 y,
-        Pointer<Utf16> lpString,
-        Int32 chCount,
-        Int32 nTabPositions,
-        Pointer<Int32> lpnTabStopPositions,
-        Int32 nTabOrigin),
-    int Function(
-        int hdc,
-        int x,
-        int y,
-        Pointer<Utf16> lpString,
-        int chCount,
-        int nTabPositions,
-        Pointer<Int32> lpnTabStopPositions,
-        int nTabOrigin)>('TabbedTextOutW');
+  Int32 Function(
+    IntPtr hdc,
+    Int32 x,
+    Int32 y,
+    Pointer<Utf16> lpString,
+    Int32 chCount,
+    Int32 nTabPositions,
+    Pointer<Int32> lpnTabStopPositions,
+    Int32 nTabOrigin,
+  ),
+  int Function(
+    int hdc,
+    int x,
+    int y,
+    Pointer<Utf16> lpString,
+    int chCount,
+    int nTabPositions,
+    Pointer<Int32> lpnTabStopPositions,
+    int nTabOrigin,
+  )
+>('TabbedTextOutW');
 
 /// Tiles the specified child windows of the specified parent window.
 ///
@@ -7890,15 +9479,30 @@ final _TabbedTextOut = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int TileWindows(int hwndParent, int wHow, Pointer<RECT> lpRect, int cKids,
-        Pointer<IntPtr> lpKids) =>
-    _TileWindows(hwndParent, wHow, lpRect, cKids, lpKids);
+int TileWindows(
+  int hwndParent,
+  int wHow,
+  Pointer<RECT> lpRect,
+  int cKids,
+  Pointer<IntPtr> lpKids,
+) => _TileWindows(hwndParent, wHow, lpRect, cKids, lpKids);
 
 final _TileWindows = _user32.lookupFunction<
-    Uint16 Function(IntPtr hwndParent, Uint32 wHow, Pointer<RECT> lpRect,
-        Uint32 cKids, Pointer<IntPtr> lpKids),
-    int Function(int hwndParent, int wHow, Pointer<RECT> lpRect, int cKids,
-        Pointer<IntPtr> lpKids)>('TileWindows');
+  Uint16 Function(
+    IntPtr hwndParent,
+    Uint32 wHow,
+    Pointer<RECT> lpRect,
+    Uint32 cKids,
+    Pointer<IntPtr> lpKids,
+  ),
+  int Function(
+    int hwndParent,
+    int wHow,
+    Pointer<RECT> lpRect,
+    int cKids,
+    Pointer<IntPtr> lpKids,
+  )
+>('TileWindows');
 
 /// Translates the specified virtual-key code and keyboard state to the
 /// corresponding character or characters. The function translates the code
@@ -7915,15 +9519,30 @@ final _TileWindows = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int ToAscii(int uVirtKey, int uScanCode, Pointer<Uint8> lpKeyState,
-        Pointer<Uint16> lpChar, int uFlags) =>
-    _ToAscii(uVirtKey, uScanCode, lpKeyState, lpChar, uFlags);
+int ToAscii(
+  int uVirtKey,
+  int uScanCode,
+  Pointer<Uint8> lpKeyState,
+  Pointer<Uint16> lpChar,
+  int uFlags,
+) => _ToAscii(uVirtKey, uScanCode, lpKeyState, lpChar, uFlags);
 
 final _ToAscii = _user32.lookupFunction<
-    Int32 Function(Uint32 uVirtKey, Uint32 uScanCode, Pointer<Uint8> lpKeyState,
-        Pointer<Uint16> lpChar, Uint32 uFlags),
-    int Function(int uVirtKey, int uScanCode, Pointer<Uint8> lpKeyState,
-        Pointer<Uint16> lpChar, int uFlags)>('ToAscii');
+  Int32 Function(
+    Uint32 uVirtKey,
+    Uint32 uScanCode,
+    Pointer<Uint8> lpKeyState,
+    Pointer<Uint16> lpChar,
+    Uint32 uFlags,
+  ),
+  int Function(
+    int uVirtKey,
+    int uScanCode,
+    Pointer<Uint8> lpKeyState,
+    Pointer<Uint16> lpChar,
+    int uFlags,
+  )
+>('ToAscii');
 
 /// Translates the specified virtual-key code and keyboard state to the
 /// corresponding character or characters. The function translates the code
@@ -7941,15 +9560,33 @@ final _ToAscii = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int ToAsciiEx(int uVirtKey, int uScanCode, Pointer<Uint8> lpKeyState,
-        Pointer<Uint16> lpChar, int uFlags, int dwhkl) =>
-    _ToAsciiEx(uVirtKey, uScanCode, lpKeyState, lpChar, uFlags, dwhkl);
+int ToAsciiEx(
+  int uVirtKey,
+  int uScanCode,
+  Pointer<Uint8> lpKeyState,
+  Pointer<Uint16> lpChar,
+  int uFlags,
+  int dwhkl,
+) => _ToAsciiEx(uVirtKey, uScanCode, lpKeyState, lpChar, uFlags, dwhkl);
 
 final _ToAsciiEx = _user32.lookupFunction<
-    Int32 Function(Uint32 uVirtKey, Uint32 uScanCode, Pointer<Uint8> lpKeyState,
-        Pointer<Uint16> lpChar, Uint32 uFlags, IntPtr dwhkl),
-    int Function(int uVirtKey, int uScanCode, Pointer<Uint8> lpKeyState,
-        Pointer<Uint16> lpChar, int uFlags, int dwhkl)>('ToAsciiEx');
+  Int32 Function(
+    Uint32 uVirtKey,
+    Uint32 uScanCode,
+    Pointer<Uint8> lpKeyState,
+    Pointer<Uint16> lpChar,
+    Uint32 uFlags,
+    IntPtr dwhkl,
+  ),
+  int Function(
+    int uVirtKey,
+    int uScanCode,
+    Pointer<Uint8> lpKeyState,
+    Pointer<Uint16> lpChar,
+    int uFlags,
+    int dwhkl,
+  )
+>('ToAsciiEx');
 
 /// Translates the specified virtual-key code and keyboard state to the
 /// corresponding Unicode character or characters.
@@ -7965,15 +9602,33 @@ final _ToAsciiEx = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int ToUnicode(int wVirtKey, int wScanCode, Pointer<Uint8> lpKeyState,
-        Pointer<Utf16> pwszBuff, int cchBuff, int wFlags) =>
-    _ToUnicode(wVirtKey, wScanCode, lpKeyState, pwszBuff, cchBuff, wFlags);
+int ToUnicode(
+  int wVirtKey,
+  int wScanCode,
+  Pointer<Uint8> lpKeyState,
+  Pointer<Utf16> pwszBuff,
+  int cchBuff,
+  int wFlags,
+) => _ToUnicode(wVirtKey, wScanCode, lpKeyState, pwszBuff, cchBuff, wFlags);
 
 final _ToUnicode = _user32.lookupFunction<
-    Int32 Function(Uint32 wVirtKey, Uint32 wScanCode, Pointer<Uint8> lpKeyState,
-        Pointer<Utf16> pwszBuff, Int32 cchBuff, Uint32 wFlags),
-    int Function(int wVirtKey, int wScanCode, Pointer<Uint8> lpKeyState,
-        Pointer<Utf16> pwszBuff, int cchBuff, int wFlags)>('ToUnicode');
+  Int32 Function(
+    Uint32 wVirtKey,
+    Uint32 wScanCode,
+    Pointer<Uint8> lpKeyState,
+    Pointer<Utf16> pwszBuff,
+    Int32 cchBuff,
+    Uint32 wFlags,
+  ),
+  int Function(
+    int wVirtKey,
+    int wScanCode,
+    Pointer<Uint8> lpKeyState,
+    Pointer<Utf16> pwszBuff,
+    int cchBuff,
+    int wFlags,
+  )
+>('ToUnicode');
 
 /// Translates the specified virtual-key code and keyboard state to the
 /// corresponding Unicode character or characters.
@@ -7990,22 +9645,44 @@ final _ToUnicode = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int ToUnicodeEx(int wVirtKey, int wScanCode, Pointer<Uint8> lpKeyState,
-        Pointer<Utf16> pwszBuff, int cchBuff, int wFlags, int dwhkl) =>
-    _ToUnicodeEx(
-        wVirtKey, wScanCode, lpKeyState, pwszBuff, cchBuff, wFlags, dwhkl);
+int ToUnicodeEx(
+  int wVirtKey,
+  int wScanCode,
+  Pointer<Uint8> lpKeyState,
+  Pointer<Utf16> pwszBuff,
+  int cchBuff,
+  int wFlags,
+  int dwhkl,
+) => _ToUnicodeEx(
+  wVirtKey,
+  wScanCode,
+  lpKeyState,
+  pwszBuff,
+  cchBuff,
+  wFlags,
+  dwhkl,
+);
 
 final _ToUnicodeEx = _user32.lookupFunction<
-    Int32 Function(Uint32 wVirtKey, Uint32 wScanCode, Pointer<Uint8> lpKeyState,
-        Pointer<Utf16> pwszBuff, Int32 cchBuff, Uint32 wFlags, IntPtr dwhkl),
-    int Function(
-        int wVirtKey,
-        int wScanCode,
-        Pointer<Uint8> lpKeyState,
-        Pointer<Utf16> pwszBuff,
-        int cchBuff,
-        int wFlags,
-        int dwhkl)>('ToUnicodeEx');
+  Int32 Function(
+    Uint32 wVirtKey,
+    Uint32 wScanCode,
+    Pointer<Uint8> lpKeyState,
+    Pointer<Utf16> pwszBuff,
+    Int32 cchBuff,
+    Uint32 wFlags,
+    IntPtr dwhkl,
+  ),
+  int Function(
+    int wVirtKey,
+    int wScanCode,
+    Pointer<Uint8> lpKeyState,
+    Pointer<Utf16> pwszBuff,
+    int cchBuff,
+    int wFlags,
+    int dwhkl,
+  )
+>('ToUnicodeEx');
 
 /// Displays a shortcut menu at the specified location and tracks the
 /// selection of items on the menu. The shortcut menu can appear anywhere on
@@ -8023,15 +9700,36 @@ final _ToUnicodeEx = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int TrackPopupMenu(int hMenu, int uFlags, int x, int y, int nReserved, int hWnd,
-        Pointer<RECT> prcRect) =>
-    _TrackPopupMenu(hMenu, uFlags, x, y, nReserved, hWnd, prcRect);
+int TrackPopupMenu(
+  int hMenu,
+  int uFlags,
+  int x,
+  int y,
+  int nReserved,
+  int hWnd,
+  Pointer<RECT> prcRect,
+) => _TrackPopupMenu(hMenu, uFlags, x, y, nReserved, hWnd, prcRect);
 
 final _TrackPopupMenu = _user32.lookupFunction<
-    Int32 Function(IntPtr hMenu, Uint32 uFlags, Int32 x, Int32 y,
-        Int32 nReserved, IntPtr hWnd, Pointer<RECT> prcRect),
-    int Function(int hMenu, int uFlags, int x, int y, int nReserved, int hWnd,
-        Pointer<RECT> prcRect)>('TrackPopupMenu');
+  Int32 Function(
+    IntPtr hMenu,
+    Uint32 uFlags,
+    Int32 x,
+    Int32 y,
+    Int32 nReserved,
+    IntPtr hWnd,
+    Pointer<RECT> prcRect,
+  ),
+  int Function(
+    int hMenu,
+    int uFlags,
+    int x,
+    int y,
+    int nReserved,
+    int hWnd,
+    Pointer<RECT> prcRect,
+  )
+>('TrackPopupMenu');
 
 /// Displays a shortcut menu at the specified location and tracks the
 /// selection of items on the shortcut menu. The shortcut menu can appear
@@ -8048,15 +9746,33 @@ final _TrackPopupMenu = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int TrackPopupMenuEx(int hMenu, int uFlags, int x, int y, int hwnd,
-        Pointer<TPMPARAMS> lptpm) =>
-    _TrackPopupMenuEx(hMenu, uFlags, x, y, hwnd, lptpm);
+int TrackPopupMenuEx(
+  int hMenu,
+  int uFlags,
+  int x,
+  int y,
+  int hwnd,
+  Pointer<TPMPARAMS> lptpm,
+) => _TrackPopupMenuEx(hMenu, uFlags, x, y, hwnd, lptpm);
 
 final _TrackPopupMenuEx = _user32.lookupFunction<
-    Int32 Function(IntPtr hMenu, Uint32 uFlags, Int32 x, Int32 y, IntPtr hwnd,
-        Pointer<TPMPARAMS> lptpm),
-    int Function(int hMenu, int uFlags, int x, int y, int hwnd,
-        Pointer<TPMPARAMS> lptpm)>('TrackPopupMenuEx');
+  Int32 Function(
+    IntPtr hMenu,
+    Uint32 uFlags,
+    Int32 x,
+    Int32 y,
+    IntPtr hwnd,
+    Pointer<TPMPARAMS> lptpm,
+  ),
+  int Function(
+    int hMenu,
+    int uFlags,
+    int x,
+    int y,
+    int hwnd,
+    Pointer<TPMPARAMS> lptpm,
+  )
+>('TrackPopupMenuEx');
 
 /// Processes accelerator keys for menu commands. The function translates a
 /// WM_KEYDOWN or WM_SYSKEYDOWN message to a WM_COMMAND or WM_SYSCOMMAND
@@ -8077,9 +9793,9 @@ int TranslateAccelerator(int hWnd, int hAccTable, Pointer<MSG> lpMsg) =>
     _TranslateAccelerator(hWnd, hAccTable, lpMsg);
 
 final _TranslateAccelerator = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, IntPtr hAccTable, Pointer<MSG> lpMsg),
-    int Function(
-        int hWnd, int hAccTable, Pointer<MSG> lpMsg)>('TranslateAcceleratorW');
+  Int32 Function(IntPtr hWnd, IntPtr hAccTable, Pointer<MSG> lpMsg),
+  int Function(int hWnd, int hAccTable, Pointer<MSG> lpMsg)
+>('TranslateAcceleratorW');
 
 /// Processes accelerator keystrokes for window menu commands of the
 /// multiple-document interface (MDI) child windows associated with the
@@ -8098,8 +9814,9 @@ int TranslateMDISysAccel(int hWndClient, Pointer<MSG> lpMsg) =>
     _TranslateMDISysAccel(hWndClient, lpMsg);
 
 final _TranslateMDISysAccel = _user32.lookupFunction<
-    Int32 Function(IntPtr hWndClient, Pointer<MSG> lpMsg),
-    int Function(int hWndClient, Pointer<MSG> lpMsg)>('TranslateMDISysAccel');
+  Int32 Function(IntPtr hWndClient, Pointer<MSG> lpMsg),
+  int Function(int hWndClient, Pointer<MSG> lpMsg)
+>('TranslateMDISysAccel');
 
 /// Translates virtual-key messages into character messages. The character
 /// messages are posted to the calling thread's message queue, to be read
@@ -8114,8 +9831,9 @@ final _TranslateMDISysAccel = _user32.lookupFunction<
 int TranslateMessage(Pointer<MSG> lpMsg) => _TranslateMessage(lpMsg);
 
 final _TranslateMessage = _user32.lookupFunction<
-    Int32 Function(Pointer<MSG> lpMsg),
-    int Function(Pointer<MSG> lpMsg)>('TranslateMessage');
+  Int32 Function(Pointer<MSG> lpMsg),
+  int Function(Pointer<MSG> lpMsg)
+>('TranslateMessage');
 
 /// Removes a hook procedure installed in a hook chain by the
 /// SetWindowsHookEx function.
@@ -8128,9 +9846,10 @@ final _TranslateMessage = _user32.lookupFunction<
 /// {@category user32}
 int UnhookWindowsHookEx(int hhk) => _UnhookWindowsHookEx(hhk);
 
-final _UnhookWindowsHookEx =
-    _user32.lookupFunction<Int32 Function(IntPtr hhk), int Function(int hhk)>(
-        'UnhookWindowsHookEx');
+final _UnhookWindowsHookEx = _user32
+    .lookupFunction<Int32 Function(IntPtr hhk), int Function(int hhk)>(
+      'UnhookWindowsHookEx',
+    );
 
 /// The UnionRect function creates the union of two rectangles. The union is
 /// the smallest rectangle that contains both source rectangles.
@@ -8143,15 +9862,24 @@ final _UnhookWindowsHookEx =
 /// );
 /// ```
 /// {@category user32}
-int UnionRect(Pointer<RECT> lprcDst, Pointer<RECT> lprcSrc1,
-        Pointer<RECT> lprcSrc2) =>
-    _UnionRect(lprcDst, lprcSrc1, lprcSrc2);
+int UnionRect(
+  Pointer<RECT> lprcDst,
+  Pointer<RECT> lprcSrc1,
+  Pointer<RECT> lprcSrc2,
+) => _UnionRect(lprcDst, lprcSrc1, lprcSrc2);
 
 final _UnionRect = _user32.lookupFunction<
-    Int32 Function(
-        Pointer<RECT> lprcDst, Pointer<RECT> lprcSrc1, Pointer<RECT> lprcSrc2),
-    int Function(Pointer<RECT> lprcDst, Pointer<RECT> lprcSrc1,
-        Pointer<RECT> lprcSrc2)>('UnionRect');
+  Int32 Function(
+    Pointer<RECT> lprcDst,
+    Pointer<RECT> lprcSrc1,
+    Pointer<RECT> lprcSrc2,
+  ),
+  int Function(
+    Pointer<RECT> lprcDst,
+    Pointer<RECT> lprcSrc1,
+    Pointer<RECT> lprcSrc2,
+  )
+>('UnionRect');
 
 /// Unloads an input locale identifier (formerly called a keyboard layout).
 ///
@@ -8163,9 +9891,10 @@ final _UnionRect = _user32.lookupFunction<
 /// {@category user32}
 int UnloadKeyboardLayout(int hkl) => _UnloadKeyboardLayout(hkl);
 
-final _UnloadKeyboardLayout =
-    _user32.lookupFunction<Int32 Function(IntPtr hkl), int Function(int hkl)>(
-        'UnloadKeyboardLayout');
+final _UnloadKeyboardLayout = _user32
+    .lookupFunction<Int32 Function(IntPtr hkl), int Function(int hkl)>(
+      'UnloadKeyboardLayout',
+    );
 
 /// Unregisters a window class, freeing the memory required for the class.
 ///
@@ -8180,9 +9909,9 @@ int UnregisterClass(Pointer<Utf16> lpClassName, int hInstance) =>
     _UnregisterClass(lpClassName, hInstance);
 
 final _UnregisterClass = _user32.lookupFunction<
-    Int32 Function(Pointer<Utf16> lpClassName, IntPtr hInstance),
-    int Function(
-        Pointer<Utf16> lpClassName, int hInstance)>('UnregisterClassW');
+  Int32 Function(Pointer<Utf16> lpClassName, IntPtr hInstance),
+  int Function(Pointer<Utf16> lpClassName, int hInstance)
+>('UnregisterClassW');
 
 /// Closes the specified device notification handle.
 ///
@@ -8196,8 +9925,9 @@ int UnregisterDeviceNotification(Pointer Handle) =>
     _UnregisterDeviceNotification(Handle);
 
 final _UnregisterDeviceNotification = _user32.lookupFunction<
-    Int32 Function(Pointer Handle),
-    int Function(Pointer Handle)>('UnregisterDeviceNotification');
+  Int32 Function(Pointer Handle),
+  int Function(Pointer Handle)
+>('UnregisterDeviceNotification');
 
 /// Frees a hot key previously registered by the calling thread.
 ///
@@ -8211,8 +9941,9 @@ final _UnregisterDeviceNotification = _user32.lookupFunction<
 int UnregisterHotKey(int hWnd, int id) => _UnregisterHotKey(hWnd, id);
 
 final _UnregisterHotKey = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Int32 id),
-    int Function(int hWnd, int id)>('UnregisterHotKey');
+  Int32 Function(IntPtr hWnd, Int32 id),
+  int Function(int hWnd, int id)
+>('UnregisterHotKey');
 
 /// Unregisters the power setting notification.
 ///
@@ -8225,9 +9956,10 @@ final _UnregisterHotKey = _user32.lookupFunction<
 int UnregisterPowerSettingNotification(int Handle) =>
     _UnregisterPowerSettingNotification(Handle);
 
-final _UnregisterPowerSettingNotification = _user32.lookupFunction<
-    Int32 Function(IntPtr Handle),
-    int Function(int Handle)>('UnregisterPowerSettingNotification');
+final _UnregisterPowerSettingNotification = _user32
+    .lookupFunction<Int32 Function(IntPtr Handle), int Function(int Handle)>(
+      'UnregisterPowerSettingNotification',
+    );
 
 /// Registers a window as no longer being touch-capable.
 ///
@@ -8239,9 +9971,10 @@ final _UnregisterPowerSettingNotification = _user32.lookupFunction<
 /// {@category user32}
 int UnregisterTouchWindow(int hwnd) => _UnregisterTouchWindow(hwnd);
 
-final _UnregisterTouchWindow =
-    _user32.lookupFunction<Int32 Function(IntPtr hwnd), int Function(int hwnd)>(
-        'UnregisterTouchWindow');
+final _UnregisterTouchWindow = _user32
+    .lookupFunction<Int32 Function(IntPtr hwnd), int Function(int hwnd)>(
+      'UnregisterTouchWindow',
+    );
 
 /// Updates the position, size, shape, content, and translucency of a
 /// layered window.
@@ -8254,13 +9987,14 @@ final _UnregisterTouchWindow =
 /// ```
 /// {@category user32}
 int UpdateLayeredWindowIndirect(
-        int hWnd, Pointer<UPDATELAYEREDWINDOWINFO> pULWInfo) =>
-    _UpdateLayeredWindowIndirect(hWnd, pULWInfo);
+  int hWnd,
+  Pointer<UPDATELAYEREDWINDOWINFO> pULWInfo,
+) => _UpdateLayeredWindowIndirect(hWnd, pULWInfo);
 
 final _UpdateLayeredWindowIndirect = _user32.lookupFunction<
-        Int32 Function(IntPtr hWnd, Pointer<UPDATELAYEREDWINDOWINFO> pULWInfo),
-        int Function(int hWnd, Pointer<UPDATELAYEREDWINDOWINFO> pULWInfo)>(
-    'UpdateLayeredWindowIndirect');
+  Int32 Function(IntPtr hWnd, Pointer<UPDATELAYEREDWINDOWINFO> pULWInfo),
+  int Function(int hWnd, Pointer<UPDATELAYEREDWINDOWINFO> pULWInfo)
+>('UpdateLayeredWindowIndirect');
 
 /// The UpdateWindow function updates the client area of the specified
 /// window by sending a WM_PAINT message to the window if the window's
@@ -8276,9 +10010,10 @@ final _UpdateLayeredWindowIndirect = _user32.lookupFunction<
 /// {@category user32}
 int UpdateWindow(int hWnd) => _UpdateWindow(hWnd);
 
-final _UpdateWindow =
-    _user32.lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
-        'UpdateWindow');
+final _UpdateWindow = _user32
+    .lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
+      'UpdateWindow',
+    );
 
 /// Grants or denies access to a handle to a User object to a job that has a
 /// user-interface restriction. When access is granted, all processes
@@ -8297,9 +10032,9 @@ int UserHandleGrantAccess(int hUserHandle, int hJob, int bGrant) =>
     _UserHandleGrantAccess(hUserHandle, hJob, bGrant);
 
 final _UserHandleGrantAccess = _user32.lookupFunction<
-    Int32 Function(IntPtr hUserHandle, IntPtr hJob, Int32 bGrant),
-    int Function(
-        int hUserHandle, int hJob, int bGrant)>('UserHandleGrantAccess');
+  Int32 Function(IntPtr hUserHandle, IntPtr hJob, Int32 bGrant),
+  int Function(int hUserHandle, int hJob, int bGrant)
+>('UserHandleGrantAccess');
 
 /// The ValidateRect function validates the client area within a rectangle
 /// by removing the rectangle from the update region of the specified
@@ -8315,8 +10050,9 @@ final _UserHandleGrantAccess = _user32.lookupFunction<
 int ValidateRect(int hWnd, Pointer<RECT> lpRect) => _ValidateRect(hWnd, lpRect);
 
 final _ValidateRect = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Pointer<RECT> lpRect),
-    int Function(int hWnd, Pointer<RECT> lpRect)>('ValidateRect');
+  Int32 Function(IntPtr hWnd, Pointer<RECT> lpRect),
+  int Function(int hWnd, Pointer<RECT> lpRect)
+>('ValidateRect');
 
 /// The ValidateRgn function validates the client area within a region by
 /// removing the region from the current update region of the specified
@@ -8332,8 +10068,9 @@ final _ValidateRect = _user32.lookupFunction<
 int ValidateRgn(int hWnd, int hRgn) => _ValidateRgn(hWnd, hRgn);
 
 final _ValidateRgn = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, IntPtr hRgn),
-    int Function(int hWnd, int hRgn)>('ValidateRgn');
+  Int32 Function(IntPtr hWnd, IntPtr hRgn),
+  int Function(int hWnd, int hRgn)
+>('ValidateRgn');
 
 /// Translates a character to the corresponding virtual-key code and shift
 /// state for the current keyboard.
@@ -8346,9 +10083,10 @@ final _ValidateRgn = _user32.lookupFunction<
 /// {@category user32}
 int VkKeyScan(int ch) => _VkKeyScan(ch);
 
-final _VkKeyScan =
-    _user32.lookupFunction<Int16 Function(Uint16 ch), int Function(int ch)>(
-        'VkKeyScanW');
+final _VkKeyScan = _user32
+    .lookupFunction<Int16 Function(Uint16 ch), int Function(int ch)>(
+      'VkKeyScanW',
+    );
 
 /// Translates a character to the corresponding virtual-key code and shift
 /// state. The function translates the character using the input language
@@ -8364,8 +10102,9 @@ final _VkKeyScan =
 int VkKeyScanEx(int ch, int dwhkl) => _VkKeyScanEx(ch, dwhkl);
 
 final _VkKeyScanEx = _user32.lookupFunction<
-    Int16 Function(Uint16 ch, IntPtr dwhkl),
-    int Function(int ch, int dwhkl)>('VkKeyScanExW');
+  Int16 Function(Uint16 ch, IntPtr dwhkl),
+  int Function(int ch, int dwhkl)
+>('VkKeyScanExW');
 
 /// Waits until the specified process has finished processing its initial
 /// input and is waiting for user input with no input pending, or until the
@@ -8382,8 +10121,9 @@ int WaitForInputIdle(int hProcess, int dwMilliseconds) =>
     _WaitForInputIdle(hProcess, dwMilliseconds);
 
 final _WaitForInputIdle = _user32.lookupFunction<
-    Uint32 Function(IntPtr hProcess, Uint32 dwMilliseconds),
-    int Function(int hProcess, int dwMilliseconds)>('WaitForInputIdle');
+  Uint32 Function(IntPtr hProcess, Uint32 dwMilliseconds),
+  int Function(int hProcess, int dwMilliseconds)
+>('WaitForInputIdle');
 
 /// Yields control to other threads when a thread has no other messages in
 /// its message queue. The WaitMessage function suspends the thread and does
@@ -8395,8 +10135,9 @@ final _WaitForInputIdle = _user32.lookupFunction<
 /// {@category user32}
 int WaitMessage() => _WaitMessage();
 
-final _WaitMessage =
-    _user32.lookupFunction<Int32 Function(), int Function()>('WaitMessage');
+final _WaitMessage = _user32.lookupFunction<Int32 Function(), int Function()>(
+  'WaitMessage',
+);
 
 /// The WindowFromDC function returns a handle to the window associated with
 /// the specified display device context (DC). Output functions that use the
@@ -8410,9 +10151,10 @@ final _WaitMessage =
 /// {@category user32}
 int WindowFromDC(int hDC) => _WindowFromDC(hDC);
 
-final _WindowFromDC =
-    _user32.lookupFunction<IntPtr Function(IntPtr hDC), int Function(int hDC)>(
-        'WindowFromDC');
+final _WindowFromDC = _user32
+    .lookupFunction<IntPtr Function(IntPtr hDC), int Function(int hDC)>(
+      'WindowFromDC',
+    );
 
 /// Retrieves a handle to the window that contains the specified physical
 /// point.
@@ -8425,9 +10167,10 @@ final _WindowFromDC =
 /// {@category user32}
 int WindowFromPhysicalPoint(POINT Point) => _WindowFromPhysicalPoint(Point);
 
-final _WindowFromPhysicalPoint = _user32.lookupFunction<
-    IntPtr Function(POINT Point),
-    int Function(POINT Point)>('WindowFromPhysicalPoint');
+final _WindowFromPhysicalPoint = _user32
+    .lookupFunction<IntPtr Function(POINT Point), int Function(POINT Point)>(
+      'WindowFromPhysicalPoint',
+    );
 
 /// Retrieves a handle to the window that contains the specified point.
 ///
@@ -8439,5 +10182,7 @@ final _WindowFromPhysicalPoint = _user32.lookupFunction<
 /// {@category user32}
 int WindowFromPoint(POINT Point) => _WindowFromPoint(Point);
 
-final _WindowFromPoint = _user32.lookupFunction<IntPtr Function(POINT Point),
-    int Function(POINT Point)>('WindowFromPoint');
+final _WindowFromPoint = _user32
+    .lookupFunction<IntPtr Function(POINT Point), int Function(POINT Point)>(
+      'WindowFromPoint',
+    );

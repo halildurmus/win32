@@ -33,14 +33,16 @@ Future<void> listenForUsbDriveChanges(SendPort mainSendPort) async {
           if (dbhdr.ref.dbch_devicetype ==
               DEV_BROADCAST_HDR_DEVICE_TYPE.DBT_DEVTYP_VOLUME) {
             final devBroadcastVolume = dbhdr.cast<DEV_BROADCAST_VOLUME>().ref;
-            final driveLetter =
-                getDriveLetter(devBroadcastVolume.dbcv_unitmask);
+            final driveLetter = getDriveLetter(
+              devBroadcastVolume.dbcv_unitmask,
+            );
             final driveInfo = getDriveInformation(driveLetter);
             // Send the event information back to the main isolate.
             mainSendPort.send({
-              'event': wParam == DBT_DEVICEARRIVAL
-                  ? 'USB drive connected'
-                  : 'USB drive disconnected',
+              'event':
+                  wParam == DBT_DEVICEARRIVAL
+                      ? 'USB drive connected'
+                      : 'USB drive disconnected',
               'drive': driveLetter,
               'info': driveInfo,
             });
@@ -76,7 +78,19 @@ Future<void> listenForUsbDriveChanges(SendPort mainSendPort) async {
 
   // Create a hidden window to receive messages.
   final hWnd = CreateWindowEx(
-      0, className, className, 0, 0, 0, 0, 0, 0, 0, hInstance, nullptr);
+    0,
+    className,
+    className,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    hInstance,
+    nullptr,
+  );
   if (hWnd == 0) {
     // The window was not created. Clean up and close the stop port.
     stopPort.close();
@@ -106,8 +120,8 @@ Future<void> listenForUsbDriveChanges(SendPort mainSendPort) async {
   // Message loop to keep the isolate running and handle notifications.
   while (isRunning) {
     // Process messages without blocking.
-    while (
-        PeekMessage(msg, hWnd, 0, 0, PEEK_MESSAGE_REMOVE_TYPE.PM_REMOVE) != 0) {
+    while (PeekMessage(msg, hWnd, 0, 0, PEEK_MESSAGE_REMOVE_TYPE.PM_REMOVE) !=
+        0) {
       TranslateMessage(msg);
       DispatchMessage(msg);
     }
@@ -161,7 +175,7 @@ String? getDriveInformation(String driveLetter) {
         DRIVE_REMOTE => 'Remote',
         DRIVE_CDROM => 'CD-ROM',
         DRIVE_RAMDISK => 'RAM disk',
-        _ => 'Unknown'
+        _ => 'Unknown',
       };
       final volumeName = lpVolumeNameBuffer.toDartString();
       final label = volumeName.isNotEmpty ? 'Label: $volumeName' : 'N/A';
@@ -225,7 +239,7 @@ void main() async {
     final {
       'event': event as String,
       'drive': drive as String,
-      'info': info as String?
+      'info': info as String?,
     } = message;
     print('$event: Drive $drive:${info != null ? ' ($info)' : ''}');
   }, cancelOnError: true);

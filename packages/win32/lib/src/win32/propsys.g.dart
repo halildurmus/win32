@@ -28,14 +28,20 @@ final _propsys = DynamicLibrary.open('propsys.dll');
 /// ```
 /// {@category propsys}
 Pointer<Utf16> PropVariantToStringWithDefault(
-        Pointer<PROPVARIANT> propvarIn, Pointer<Utf16> pszDefault) =>
-    _PropVariantToStringWithDefault(propvarIn, pszDefault);
+  Pointer<PROPVARIANT> propvarIn,
+  Pointer<Utf16> pszDefault,
+) => _PropVariantToStringWithDefault(propvarIn, pszDefault);
 
 final _PropVariantToStringWithDefault = _propsys.lookupFunction<
-    Pointer<Utf16> Function(
-        Pointer<PROPVARIANT> propvarIn, Pointer<Utf16> pszDefault),
-    Pointer<Utf16> Function(Pointer<PROPVARIANT> propvarIn,
-        Pointer<Utf16> pszDefault)>('PropVariantToStringWithDefault');
+  Pointer<Utf16> Function(
+    Pointer<PROPVARIANT> propvarIn,
+    Pointer<Utf16> pszDefault,
+  ),
+  Pointer<Utf16> Function(
+    Pointer<PROPVARIANT> propvarIn,
+    Pointer<Utf16> pszDefault,
+  )
+>('PropVariantToStringWithDefault');
 
 /// Extracts a string from a PROPVARIANT structure and places it into a
 /// STRRET structure.
@@ -48,10 +54,11 @@ final _PropVariantToStringWithDefault = _propsys.lookupFunction<
 /// ```
 /// {@category propsys}
 int PropVariantToStrRet(
-        Pointer<PROPVARIANT> propvar, Pointer<STRRET> pstrret) =>
-    _PropVariantToStrRet(propvar, pstrret);
+  Pointer<PROPVARIANT> propvar,
+  Pointer<STRRET> pstrret,
+) => _PropVariantToStrRet(propvar, pstrret);
 
 final _PropVariantToStrRet = _propsys.lookupFunction<
-    Int32 Function(Pointer<PROPVARIANT> propvar, Pointer<STRRET> pstrret),
-    int Function(Pointer<PROPVARIANT> propvar,
-        Pointer<STRRET> pstrret)>('PropVariantToStrRet');
+  Int32 Function(Pointer<PROPVARIANT> propvar, Pointer<STRRET> pstrret),
+  int Function(Pointer<PROPVARIANT> propvar, Pointer<STRRET> pstrret)
+>('PropVariantToStrRet');

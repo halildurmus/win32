@@ -38,22 +38,26 @@ class IUIAutomationDropTargetPattern extends IUnknown {
 
   factory IUIAutomationDropTargetPattern.from(IUnknown interface) =>
       IUIAutomationDropTargetPattern(
-          interface.toInterface(IID_IUIAutomationDropTargetPattern));
+        interface.toInterface(IID_IUIAutomationDropTargetPattern),
+      );
 
   Pointer<Utf16> get currentDropTargetEffect {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
       final hr = (ptr.ref.vtable + 3)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<Utf16>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<Utf16>> retVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -69,15 +73,18 @@ class IUIAutomationDropTargetPattern extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 4)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<Utf16>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<Utf16>> retVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -93,15 +100,17 @@ class IUIAutomationDropTargetPattern extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 5)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<SAFEARRAY>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<SAFEARRAY>> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<SAFEARRAY>> retVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<SAFEARRAY>> retVal)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -117,15 +126,17 @@ class IUIAutomationDropTargetPattern extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 6)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<SAFEARRAY>> retVal)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<SAFEARRAY>> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<SAFEARRAY>> retVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<SAFEARRAY>> retVal)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 

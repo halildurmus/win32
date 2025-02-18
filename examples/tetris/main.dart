@@ -28,34 +28,35 @@ void main() {
     exceptionalReturn: 0,
   );
 
-  final wc = calloc<WNDCLASS>()
-    ..ref.style = WNDCLASS_STYLES.CS_HREDRAW |
-        WNDCLASS_STYLES.CS_VREDRAW |
-        WNDCLASS_STYLES.CS_OWNDC
-    ..ref.lpfnWndProc = lpfnWndProc.nativeFunction
-    ..ref.hInstance = hInstance
-    ..ref.hIcon = LoadIcon(NULL, IDI_APPLICATION)
-    ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
-    ..ref.hbrBackground = GetStockObject(GET_STOCK_OBJECT_FLAGS.BLACK_BRUSH)
-    ..ref.lpszClassName = szAppName;
+  final wc =
+      calloc<WNDCLASS>()
+        ..ref.style =
+            WNDCLASS_STYLES.CS_HREDRAW |
+            WNDCLASS_STYLES.CS_VREDRAW |
+            WNDCLASS_STYLES.CS_OWNDC
+        ..ref.lpfnWndProc = lpfnWndProc.nativeFunction
+        ..ref.hInstance = hInstance
+        ..ref.hIcon = LoadIcon(NULL, IDI_APPLICATION)
+        ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
+        ..ref.hbrBackground = GetStockObject(GET_STOCK_OBJECT_FLAGS.BLACK_BRUSH)
+        ..ref.lpszClassName = szAppName;
   RegisterClass(wc);
 
   final hWnd = CreateWindowEx(
-      0, // Optional window styles.
-      szAppName, // Window class
-      szAppName, // Window text
-      WINDOW_STYLE.WS_MINIMIZEBOX | WINDOW_STYLE.WS_SYSMENU, // Window style
-
-      // Size and position
-      CW_USEDEFAULT,
-      CW_USEDEFAULT,
-      SCREEN_WIDTH * PX_PER_BLOCK + 156,
-      SCREEN_HEIGHT * PX_PER_BLOCK + 25,
-      NULL, // Parent window
-      NULL, // Menu
-      hInstance, // Instance handle
-      nullptr // Additional application data
-      );
+    0, // Optional window styles.
+    szAppName, // Window class
+    szAppName, // Window text
+    WINDOW_STYLE.WS_MINIMIZEBOX | WINDOW_STYLE.WS_SYSMENU, // Window style
+    // Size and position
+    CW_USEDEFAULT,
+    CW_USEDEFAULT,
+    SCREEN_WIDTH * PX_PER_BLOCK + 156,
+    SCREEN_HEIGHT * PX_PER_BLOCK + 25,
+    NULL, // Parent window
+    NULL, // Menu
+    hInstance, // Instance handle
+    nullptr, // Additional application data
+  );
 
   if (hWnd == 0) {
     stderr.writeln('CreateWindowEx failed with error: ${GetLastError()}');

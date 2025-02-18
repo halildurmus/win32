@@ -40,297 +40,433 @@ class ITypeInfo extends IUnknown {
       ITypeInfo(interface.toInterface(IID_ITypeInfo));
 
   int getTypeAttr(Pointer<Pointer<TYPEATTR>> ppTypeAttr) => (ptr.ref.vtable + 3)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<Pointer<TYPEATTR>> ppTypeAttr)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, Pointer<Pointer<TYPEATTR>> ppTypeAttr)>()(
-      ptr.ref.lpVtbl, ppTypeAttr);
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<Pointer<TYPEATTR>> ppTypeAttr)
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(Pointer, Pointer<Pointer<TYPEATTR>> ppTypeAttr)
+      >()(ptr.ref.lpVtbl, ppTypeAttr);
 
   int getTypeComp(Pointer<Pointer<COMObject>> ppTComp) => (ptr.ref.vtable + 4)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<Pointer<COMObject>> ppTComp)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, Pointer<Pointer<COMObject>> ppTComp)>()(
-      ptr.ref.lpVtbl, ppTComp);
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<Pointer<COMObject>> ppTComp)
+          >
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> ppTComp)>()(
+    ptr.ref.lpVtbl,
+    ppTComp,
+  );
 
   int getFuncDesc(int index, Pointer<Pointer<FUNCDESC>> ppFuncDesc) =>
       (ptr.ref.vtable + 5)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Uint32 index,
-                              Pointer<Pointer<FUNCDESC>> ppFuncDesc)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, int index,
-                      Pointer<Pointer<FUNCDESC>> ppFuncDesc)>()(
-          ptr.ref.lpVtbl, index, ppFuncDesc);
-
-  int getVarDesc(
-          int index, Pointer<Pointer<VARDESC>> ppVarDesc) =>
-      (ptr.ref.vtable + 6)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Uint32 index,
-                              Pointer<Pointer<VARDESC>> ppVarDesc)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, int index,
-                      Pointer<Pointer<VARDESC>> ppVarDesc)>()(
-          ptr.ref.lpVtbl, index, ppVarDesc);
-
-  int getNames(int memid, Pointer<Pointer<Utf16>> rgBstrNames, int cMaxNames,
-          Pointer<Uint32> pcNames) =>
-      (ptr.ref.vtable + 7)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Int32 memid,
-                              Pointer<Pointer<Utf16>> rgBstrNames,
-                              Uint32 cMaxNames,
-                              Pointer<Uint32> pcNames)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      int memid,
-                      Pointer<Pointer<Utf16>> rgBstrNames,
-                      int cMaxNames,
-                      Pointer<Uint32> pcNames)>()(
-          ptr.ref.lpVtbl, memid, rgBstrNames, cMaxNames, pcNames);
-
-  int getRefTypeOfImplType(int index, Pointer<Uint32> pRefType) =>
-      (ptr.ref.vtable + 8)
           .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Uint32 index, Pointer<Uint32> pRefType)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, int index,
-                  Pointer<Uint32> pRefType)>()(ptr.ref.lpVtbl, index, pRefType);
-
-  int getImplTypeFlags(
-          int index, Pointer<Int32> pImplTypeFlags) =>
-      (ptr.ref.vtable + 9)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Uint32 index,
-                              Pointer<Int32> pImplTypeFlags)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, int index, Pointer<Int32> pImplTypeFlags)>()(
-          ptr.ref.lpVtbl, index, pImplTypeFlags);
-
-  int getIDsOfNames(Pointer<Pointer<Utf16>> rgszNames, int cNames,
-          Pointer<Int32> pMemId) =>
-      (ptr.ref.vtable + 10)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<Pointer<Utf16>> rgszNames,
-                          Uint32 cNames, Pointer<Int32> pMemId)>>>()
-          .value
-          .asFunction<
-              int Function(
+            Pointer<
+              NativeFunction<
+                Int32 Function(
                   Pointer,
-                  Pointer<Pointer<Utf16>> rgszNames,
-                  int cNames,
-                  Pointer<Int32>
-                      pMemId)>()(ptr.ref.lpVtbl, rgszNames, cNames, pMemId);
+                  Uint32 index,
+                  Pointer<Pointer<FUNCDESC>> ppFuncDesc,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
+              Pointer,
+              int index,
+              Pointer<Pointer<FUNCDESC>> ppFuncDesc,
+            )
+          >()(ptr.ref.lpVtbl, index, ppFuncDesc);
+
+  int getVarDesc(int index, Pointer<Pointer<VARDESC>> ppVarDesc) =>
+      (ptr.ref.vtable + 6)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Uint32 index,
+                  Pointer<Pointer<VARDESC>> ppVarDesc,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
+              Pointer,
+              int index,
+              Pointer<Pointer<VARDESC>> ppVarDesc,
+            )
+          >()(ptr.ref.lpVtbl, index, ppVarDesc);
+
+  int getNames(
+    int memid,
+    Pointer<Pointer<Utf16>> rgBstrNames,
+    int cMaxNames,
+    Pointer<Uint32> pcNames,
+  ) => (ptr.ref.vtable + 7)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Int32 memid,
+              Pointer<Pointer<Utf16>> rgBstrNames,
+              Uint32 cMaxNames,
+              Pointer<Uint32> pcNames,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          int memid,
+          Pointer<Pointer<Utf16>> rgBstrNames,
+          int cMaxNames,
+          Pointer<Uint32> pcNames,
+        )
+      >()(ptr.ref.lpVtbl, memid, rgBstrNames, cMaxNames, pcNames);
+
+  int getRefTypeOfImplType(
+    int index,
+    Pointer<Uint32> pRefType,
+  ) => (ptr.ref.vtable + 8)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Uint32 index, Pointer<Uint32> pRefType)
+          >
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, int index, Pointer<Uint32> pRefType)>()(
+    ptr.ref.lpVtbl,
+    index,
+    pRefType,
+  );
+
+  int getImplTypeFlags(int index, Pointer<Int32> pImplTypeFlags) =>
+      (ptr.ref.vtable + 9)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Uint32 index,
+                  Pointer<Int32> pImplTypeFlags,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, int index, Pointer<Int32> pImplTypeFlags)
+          >()(ptr.ref.lpVtbl, index, pImplTypeFlags);
+
+  int getIDsOfNames(
+    Pointer<Pointer<Utf16>> rgszNames,
+    int cNames,
+    Pointer<Int32> pMemId,
+  ) => (ptr.ref.vtable + 10)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<Pointer<Utf16>> rgszNames,
+              Uint32 cNames,
+              Pointer<Int32> pMemId,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<Pointer<Utf16>> rgszNames,
+          int cNames,
+          Pointer<Int32> pMemId,
+        )
+      >()(ptr.ref.lpVtbl, rgszNames, cNames, pMemId);
 
   int invoke(
+    Pointer pvInstance,
+    int memid,
+    int wFlags,
+    Pointer<DISPPARAMS> pDispParams,
+    Pointer<VARIANT> pVarResult,
+    Pointer<EXCEPINFO> pExcepInfo,
+    Pointer<Uint32> puArgErr,
+  ) => (ptr.ref.vtable + 11)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer pvInstance,
+              Int32 memid,
+              Uint16 wFlags,
+              Pointer<DISPPARAMS> pDispParams,
+              Pointer<VARIANT> pVarResult,
+              Pointer<EXCEPINFO> pExcepInfo,
+              Pointer<Uint32> puArgErr,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
           Pointer pvInstance,
           int memid,
           int wFlags,
           Pointer<DISPPARAMS> pDispParams,
           Pointer<VARIANT> pVarResult,
           Pointer<EXCEPINFO> pExcepInfo,
-          Pointer<Uint32> puArgErr) =>
-      (ptr.ref.vtable + 11)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer pvInstance,
-                              Int32 memid,
-                              Uint16 wFlags,
-                              Pointer<DISPPARAMS> pDispParams,
-                              Pointer<VARIANT> pVarResult,
-                              Pointer<EXCEPINFO> pExcepInfo,
-                              Pointer<Uint32> puArgErr)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      Pointer pvInstance,
-                      int memid,
-                      int wFlags,
-                      Pointer<DISPPARAMS> pDispParams,
-                      Pointer<VARIANT> pVarResult,
-                      Pointer<EXCEPINFO> pExcepInfo,
-                      Pointer<Uint32> puArgErr)>()(ptr.ref.lpVtbl, pvInstance,
-          memid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr);
+          Pointer<Uint32> puArgErr,
+        )
+      >()(
+    ptr.ref.lpVtbl,
+    pvInstance,
+    memid,
+    wFlags,
+    pDispParams,
+    pVarResult,
+    pExcepInfo,
+    puArgErr,
+  );
 
   int getDocumentation(
+    int memid,
+    Pointer<Pointer<Utf16>> pBstrName,
+    Pointer<Pointer<Utf16>> pBstrDocString,
+    Pointer<Uint32> pdwHelpContext,
+    Pointer<Pointer<Utf16>> pBstrHelpFile,
+  ) => (ptr.ref.vtable + 12)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Int32 memid,
+              Pointer<Pointer<Utf16>> pBstrName,
+              Pointer<Pointer<Utf16>> pBstrDocString,
+              Pointer<Uint32> pdwHelpContext,
+              Pointer<Pointer<Utf16>> pBstrHelpFile,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
           int memid,
           Pointer<Pointer<Utf16>> pBstrName,
           Pointer<Pointer<Utf16>> pBstrDocString,
           Pointer<Uint32> pdwHelpContext,
-          Pointer<Pointer<Utf16>> pBstrHelpFile) =>
-      (ptr.ref.vtable + 12)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Int32 memid,
-                              Pointer<Pointer<Utf16>> pBstrName,
-                              Pointer<Pointer<Utf16>> pBstrDocString,
-                              Pointer<Uint32> pdwHelpContext,
-                              Pointer<Pointer<Utf16>> pBstrHelpFile)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      int memid,
-                      Pointer<Pointer<Utf16>> pBstrName,
-                      Pointer<Pointer<Utf16>> pBstrDocString,
-                      Pointer<Uint32> pdwHelpContext,
-                      Pointer<Pointer<Utf16>> pBstrHelpFile)>()(ptr.ref.lpVtbl,
-          memid, pBstrName, pBstrDocString, pdwHelpContext, pBstrHelpFile);
+          Pointer<Pointer<Utf16>> pBstrHelpFile,
+        )
+      >()(
+    ptr.ref.lpVtbl,
+    memid,
+    pBstrName,
+    pBstrDocString,
+    pdwHelpContext,
+    pBstrHelpFile,
+  );
 
-  int getDllEntry(int memid, int invKind, Pointer<Pointer<Utf16>> pBstrDllName,
-          Pointer<Pointer<Utf16>> pBstrName, Pointer<Uint16> pwOrdinal) =>
-      (ptr.ref.vtable + 13)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Int32 memid,
-                              Int32 invKind,
-                              Pointer<Pointer<Utf16>> pBstrDllName,
-                              Pointer<Pointer<Utf16>> pBstrName,
-                              Pointer<Uint16> pwOrdinal)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      int memid,
-                      int invKind,
-                      Pointer<Pointer<Utf16>> pBstrDllName,
-                      Pointer<Pointer<Utf16>> pBstrName,
-                      Pointer<Uint16> pwOrdinal)>()(
-          ptr.ref.lpVtbl, memid, invKind, pBstrDllName, pBstrName, pwOrdinal);
+  int getDllEntry(
+    int memid,
+    int invKind,
+    Pointer<Pointer<Utf16>> pBstrDllName,
+    Pointer<Pointer<Utf16>> pBstrName,
+    Pointer<Uint16> pwOrdinal,
+  ) => (ptr.ref.vtable + 13)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Int32 memid,
+              Int32 invKind,
+              Pointer<Pointer<Utf16>> pBstrDllName,
+              Pointer<Pointer<Utf16>> pBstrName,
+              Pointer<Uint16> pwOrdinal,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          int memid,
+          int invKind,
+          Pointer<Pointer<Utf16>> pBstrDllName,
+          Pointer<Pointer<Utf16>> pBstrName,
+          Pointer<Uint16> pwOrdinal,
+        )
+      >()(ptr.ref.lpVtbl, memid, invKind, pBstrDllName, pBstrName, pwOrdinal);
 
   int getRefTypeInfo(int hRefType, Pointer<Pointer<COMObject>> ppTInfo) =>
       (ptr.ref.vtable + 14)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Uint32 hRefType,
-                              Pointer<Pointer<COMObject>> ppTInfo)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, int hRefType,
-                      Pointer<Pointer<COMObject>> ppTInfo)>()(
-          ptr.ref.lpVtbl, hRefType, ppTInfo);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Uint32 hRefType,
+                  Pointer<Pointer<COMObject>> ppTInfo,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
+              Pointer,
+              int hRefType,
+              Pointer<Pointer<COMObject>> ppTInfo,
+            )
+          >()(ptr.ref.lpVtbl, hRefType, ppTInfo);
 
   int addressOfMember(int memid, int invKind, Pointer<Pointer> ppv) =>
       (ptr.ref.vtable + 15)
           .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Int32 memid, Int32 invKind,
-                          Pointer<Pointer> ppv)>>>()
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Int32 memid,
+                  Int32 invKind,
+                  Pointer<Pointer> ppv,
+                )
+              >
+            >
+          >()
           .value
           .asFunction<
-              int Function(Pointer, int memid, int invKind,
-                  Pointer<Pointer> ppv)>()(ptr.ref.lpVtbl, memid, invKind, ppv);
+            int Function(Pointer, int memid, int invKind, Pointer<Pointer> ppv)
+          >()(ptr.ref.lpVtbl, memid, invKind, ppv);
 
-  int createInstance(Pointer<COMObject> pUnkOuter, Pointer<GUID> riid,
-          Pointer<Pointer> ppvObj) =>
-      (ptr.ref.vtable + 16)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<COMObject> pUnkOuter,
-                              Pointer<GUID> riid, Pointer<Pointer> ppvObj)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<COMObject> pUnkOuter,
-                      Pointer<GUID> riid, Pointer<Pointer> ppvObj)>()(
-          ptr.ref.lpVtbl, pUnkOuter, riid, ppvObj);
+  int createInstance(
+    Pointer<COMObject> pUnkOuter,
+    Pointer<GUID> riid,
+    Pointer<Pointer> ppvObj,
+  ) => (ptr.ref.vtable + 16)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<COMObject> pUnkOuter,
+              Pointer<GUID> riid,
+              Pointer<Pointer> ppvObj,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<COMObject> pUnkOuter,
+          Pointer<GUID> riid,
+          Pointer<Pointer> ppvObj,
+        )
+      >()(ptr.ref.lpVtbl, pUnkOuter, riid, ppvObj);
 
-  int getMops(
-          int memid, Pointer<Pointer<Utf16>> pBstrMops) =>
+  int getMops(int memid, Pointer<Pointer<Utf16>> pBstrMops) =>
       (ptr.ref.vtable + 17)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Int32 memid,
-                              Pointer<Pointer<Utf16>> pBstrMops)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, int memid, Pointer<Pointer<Utf16>> pBstrMops)>()(
-          ptr.ref.lpVtbl, memid, pBstrMops);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Int32 memid,
+                  Pointer<Pointer<Utf16>> pBstrMops,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, int memid, Pointer<Pointer<Utf16>> pBstrMops)
+          >()(ptr.ref.lpVtbl, memid, pBstrMops);
 
   int getContainingTypeLib(
-          Pointer<Pointer<COMObject>> ppTLib, Pointer<Uint32> pIndex) =>
-      (ptr.ref.vtable + 18)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer,
-                          Pointer<Pointer<COMObject>> ppTLib,
-                          Pointer<Uint32> pIndex)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, Pointer<Pointer<COMObject>> ppTLib,
-                  Pointer<Uint32> pIndex)>()(ptr.ref.lpVtbl, ppTLib, pIndex);
+    Pointer<Pointer<COMObject>> ppTLib,
+    Pointer<Uint32> pIndex,
+  ) => (ptr.ref.vtable + 18)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<Pointer<COMObject>> ppTLib,
+              Pointer<Uint32> pIndex,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<Pointer<COMObject>> ppTLib,
+          Pointer<Uint32> pIndex,
+        )
+      >()(ptr.ref.lpVtbl, ppTLib, pIndex);
 
   void releaseTypeAttr(Pointer<TYPEATTR> pTypeAttr) => (ptr.ref.vtable + 19)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Void Function(Pointer, Pointer<TYPEATTR> pTypeAttr)>>>()
-          .value
-          .asFunction<void Function(Pointer, Pointer<TYPEATTR> pTypeAttr)>()(
-      ptr.ref.lpVtbl, pTypeAttr);
+      .cast<
+        Pointer<
+          NativeFunction<Void Function(Pointer, Pointer<TYPEATTR> pTypeAttr)>
+        >
+      >()
+      .value
+      .asFunction<void Function(Pointer, Pointer<TYPEATTR> pTypeAttr)>()(
+    ptr.ref.lpVtbl,
+    pTypeAttr,
+  );
 
   void releaseFuncDesc(Pointer<FUNCDESC> pFuncDesc) => (ptr.ref.vtable + 20)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Void Function(Pointer, Pointer<FUNCDESC> pFuncDesc)>>>()
-          .value
-          .asFunction<void Function(Pointer, Pointer<FUNCDESC> pFuncDesc)>()(
-      ptr.ref.lpVtbl, pFuncDesc);
+      .cast<
+        Pointer<
+          NativeFunction<Void Function(Pointer, Pointer<FUNCDESC> pFuncDesc)>
+        >
+      >()
+      .value
+      .asFunction<void Function(Pointer, Pointer<FUNCDESC> pFuncDesc)>()(
+    ptr.ref.lpVtbl,
+    pFuncDesc,
+  );
 
   void releaseVarDesc(Pointer<VARDESC> pVarDesc) => (ptr.ref.vtable + 21)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Void Function(Pointer, Pointer<VARDESC> pVarDesc)>>>()
-          .value
-          .asFunction<void Function(Pointer, Pointer<VARDESC> pVarDesc)>()(
-      ptr.ref.lpVtbl, pVarDesc);
+      .cast<
+        Pointer<
+          NativeFunction<Void Function(Pointer, Pointer<VARDESC> pVarDesc)>
+        >
+      >()
+      .value
+      .asFunction<void Function(Pointer, Pointer<VARDESC> pVarDesc)>()(
+    ptr.ref.lpVtbl,
+    pVarDesc,
+  );
 }

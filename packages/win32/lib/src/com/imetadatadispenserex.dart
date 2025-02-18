@@ -42,99 +42,183 @@ class IMetaDataDispenserEx extends IMetaDataDispenser {
   int setOption(Pointer<GUID> optionid, Pointer<VARIANT> value) =>
       (ptr.ref.vtable + 6)
           .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<GUID> optionid,
-                          Pointer<VARIANT> value)>>>()
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<GUID> optionid,
+                  Pointer<VARIANT> value,
+                )
+              >
+            >
+          >()
           .value
           .asFunction<
-              int Function(Pointer, Pointer<GUID> optionid,
-                  Pointer<VARIANT> value)>()(ptr.ref.lpVtbl, optionid, value);
+            int Function(
+              Pointer,
+              Pointer<GUID> optionid,
+              Pointer<VARIANT> value,
+            )
+          >()(ptr.ref.lpVtbl, optionid, value);
 
-  int getOption(
-          Pointer<GUID> optionid, Pointer<VARIANT> pvalue) =>
+  int getOption(Pointer<GUID> optionid, Pointer<VARIANT> pvalue) =>
       (ptr.ref.vtable + 7)
           .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<GUID> optionid,
-                          Pointer<VARIANT> pvalue)>>>()
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<GUID> optionid,
+                  Pointer<VARIANT> pvalue,
+                )
+              >
+            >
+          >()
           .value
           .asFunction<
-              int Function(Pointer, Pointer<GUID> optionid,
-                  Pointer<VARIANT> pvalue)>()(ptr.ref.lpVtbl, optionid, pvalue);
+            int Function(
+              Pointer,
+              Pointer<GUID> optionid,
+              Pointer<VARIANT> pvalue,
+            )
+          >()(ptr.ref.lpVtbl, optionid, pvalue);
 
-  int openScopeOnITypeInfo(Pointer<COMObject> pITI, int dwOpenFlags,
-          Pointer<GUID> riid, Pointer<Pointer<COMObject>> ppIUnk) =>
-      (ptr.ref.vtable + 8)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<COMObject> pITI,
-                              Uint32 dwOpenFlags,
-                              Pointer<GUID> riid,
-                              Pointer<Pointer<COMObject>> ppIUnk)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      Pointer<COMObject> pITI,
-                      int dwOpenFlags,
-                      Pointer<GUID> riid,
-                      Pointer<Pointer<COMObject>> ppIUnk)>()(
-          ptr.ref.lpVtbl, pITI, dwOpenFlags, riid, ppIUnk);
+  int openScopeOnITypeInfo(
+    Pointer<COMObject> pITI,
+    int dwOpenFlags,
+    Pointer<GUID> riid,
+    Pointer<Pointer<COMObject>> ppIUnk,
+  ) => (ptr.ref.vtable + 8)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<COMObject> pITI,
+              Uint32 dwOpenFlags,
+              Pointer<GUID> riid,
+              Pointer<Pointer<COMObject>> ppIUnk,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<COMObject> pITI,
+          int dwOpenFlags,
+          Pointer<GUID> riid,
+          Pointer<Pointer<COMObject>> ppIUnk,
+        )
+      >()(ptr.ref.lpVtbl, pITI, dwOpenFlags, riid, ppIUnk);
 
   int getCORSystemDirectory(
-          Pointer<Utf16> szBuffer, int cchBuffer, Pointer<Uint32> pchBuffer) =>
-      (ptr.ref.vtable + 9)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Utf16> szBuffer,
-                              Uint32 cchBuffer, Pointer<Uint32> pchBuffer)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Utf16> szBuffer, int cchBuffer,
-                      Pointer<Uint32> pchBuffer)>()(
-          ptr.ref.lpVtbl, szBuffer, cchBuffer, pchBuffer);
+    Pointer<Utf16> szBuffer,
+    int cchBuffer,
+    Pointer<Uint32> pchBuffer,
+  ) => (ptr.ref.vtable + 9)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<Utf16> szBuffer,
+              Uint32 cchBuffer,
+              Pointer<Uint32> pchBuffer,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<Utf16> szBuffer,
+          int cchBuffer,
+          Pointer<Uint32> pchBuffer,
+        )
+      >()(ptr.ref.lpVtbl, szBuffer, cchBuffer, pchBuffer);
 
   int findAssembly(
+    Pointer<Utf16> szAppBase,
+    Pointer<Utf16> szPrivateBin,
+    Pointer<Utf16> szGlobalBin,
+    Pointer<Utf16> szAssemblyName,
+    Pointer<Utf16> szName,
+    int cchName,
+    Pointer<Uint32> pcName,
+  ) => (ptr.ref.vtable + 10)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<Utf16> szAppBase,
+              Pointer<Utf16> szPrivateBin,
+              Pointer<Utf16> szGlobalBin,
+              Pointer<Utf16> szAssemblyName,
+              Pointer<Utf16> szName,
+              Uint32 cchName,
+              Pointer<Uint32> pcName,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
           Pointer<Utf16> szAppBase,
           Pointer<Utf16> szPrivateBin,
           Pointer<Utf16> szGlobalBin,
           Pointer<Utf16> szAssemblyName,
           Pointer<Utf16> szName,
           int cchName,
-          Pointer<Uint32> pcName) =>
-      (ptr.ref.vtable + 10)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<Utf16> szAppBase,
-                              Pointer<Utf16> szPrivateBin,
-                              Pointer<Utf16> szGlobalBin,
-                              Pointer<Utf16> szAssemblyName,
-                              Pointer<Utf16> szName,
-                              Uint32 cchName,
-                              Pointer<Uint32> pcName)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      Pointer<Utf16> szAppBase,
-                      Pointer<Utf16> szPrivateBin,
-                      Pointer<Utf16> szGlobalBin,
-                      Pointer<Utf16> szAssemblyName,
-                      Pointer<Utf16> szName,
-                      int cchName,
-                      Pointer<Uint32> pcName)>()(ptr.ref.lpVtbl, szAppBase,
-          szPrivateBin, szGlobalBin, szAssemblyName, szName, cchName, pcName);
+          Pointer<Uint32> pcName,
+        )
+      >()(
+    ptr.ref.lpVtbl,
+    szAppBase,
+    szPrivateBin,
+    szGlobalBin,
+    szAssemblyName,
+    szName,
+    cchName,
+    pcName,
+  );
 
   int findAssemblyModule(
+    Pointer<Utf16> szAppBase,
+    Pointer<Utf16> szPrivateBin,
+    Pointer<Utf16> szGlobalBin,
+    Pointer<Utf16> szAssemblyName,
+    Pointer<Utf16> szModuleName,
+    Pointer<Utf16> szName,
+    int cchName,
+    Pointer<Uint32> pcName,
+  ) => (ptr.ref.vtable + 11)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<Utf16> szAppBase,
+              Pointer<Utf16> szPrivateBin,
+              Pointer<Utf16> szGlobalBin,
+              Pointer<Utf16> szAssemblyName,
+              Pointer<Utf16> szModuleName,
+              Pointer<Utf16> szName,
+              Uint32 cchName,
+              Pointer<Uint32> pcName,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
           Pointer<Utf16> szAppBase,
           Pointer<Utf16> szPrivateBin,
           Pointer<Utf16> szGlobalBin,
@@ -142,40 +226,17 @@ class IMetaDataDispenserEx extends IMetaDataDispenser {
           Pointer<Utf16> szModuleName,
           Pointer<Utf16> szName,
           int cchName,
-          Pointer<Uint32> pcName) =>
-      (ptr.ref.vtable + 11)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<Utf16> szAppBase,
-                              Pointer<Utf16> szPrivateBin,
-                              Pointer<Utf16> szGlobalBin,
-                              Pointer<Utf16> szAssemblyName,
-                              Pointer<Utf16> szModuleName,
-                              Pointer<Utf16> szName,
-                              Uint32 cchName,
-                              Pointer<Uint32> pcName)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      Pointer<Utf16> szAppBase,
-                      Pointer<Utf16> szPrivateBin,
-                      Pointer<Utf16> szGlobalBin,
-                      Pointer<Utf16> szAssemblyName,
-                      Pointer<Utf16> szModuleName,
-                      Pointer<Utf16> szName,
-                      int cchName,
-                      Pointer<Uint32> pcName)>()(
-          ptr.ref.lpVtbl,
-          szAppBase,
-          szPrivateBin,
-          szGlobalBin,
-          szAssemblyName,
-          szModuleName,
-          szName,
-          cchName,
-          pcName);
+          Pointer<Uint32> pcName,
+        )
+      >()(
+    ptr.ref.lpVtbl,
+    szAppBase,
+    szPrivateBin,
+    szGlobalBin,
+    szAssemblyName,
+    szModuleName,
+    szName,
+    cchName,
+    pcName,
+  );
 }

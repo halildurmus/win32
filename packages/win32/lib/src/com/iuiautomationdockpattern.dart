@@ -36,26 +36,32 @@ class IUIAutomationDockPattern extends IUnknown {
 
   factory IUIAutomationDockPattern.from(IUnknown interface) =>
       IUIAutomationDockPattern(
-          interface.toInterface(IID_IUIAutomationDockPattern));
+        interface.toInterface(IID_IUIAutomationDockPattern),
+      );
 
   int setDockPosition(int dockPos) => (ptr.ref.vtable + 3)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 dockPos)>>>()
       .value
-      .asFunction<
-          int Function(Pointer, int dockPos)>()(ptr.ref.lpVtbl, dockPos);
+      .asFunction<int Function(Pointer, int dockPos)>()(
+    ptr.ref.lpVtbl,
+    dockPos,
+  );
 
   int get currentDockPosition {
     final retValuePtr = calloc<Int32>();
 
     try {
       final hr = (ptr.ref.vtable + 4)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -71,13 +77,16 @@ class IUIAutomationDockPattern extends IUnknown {
 
     try {
       final hr = (ptr.ref.vtable + 5)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> retVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 

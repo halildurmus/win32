@@ -33,8 +33,16 @@ Map<String, int> getExports(int hProcess, String module) {
 
   final modulePtr = module.toNativeUtf16();
 
-  final baseOfDll =
-      SymLoadModuleEx(hProcess, NULL, modulePtr, nullptr, 0, 0, nullptr, 0);
+  final baseOfDll = SymLoadModuleEx(
+    hProcess,
+    NULL,
+    modulePtr,
+    nullptr,
+    0,
+    0,
+    nullptr,
+    0,
+  );
 
   if (baseOfDll == 0) {
     print('SymLoadModuleEx failed.');
@@ -51,7 +59,12 @@ Map<String, int> getExports(int hProcess, String module) {
   );
 
   if (SymEnumSymbols(
-          hProcess, baseOfDll, mask, callback.nativeFunction, nullptr) ==
+        hProcess,
+        baseOfDll,
+        mask,
+        callback.nativeFunction,
+        nullptr,
+      ) ==
       FALSE) {
     print('SymEnumSymbols failed.');
   }
@@ -81,10 +94,13 @@ bool isWindowsOnArm(int hProcess) {
 void main() {
   final hProcess = GetCurrentProcess();
 
-  final kernel32 = isWindowsOnArm(hProcess)
-      ? r'c:\windows\SysArm32\kernel32.dll'
-      : r'c:\windows\system32\kernel32.dll';
+  final kernel32 =
+      isWindowsOnArm(hProcess)
+          ? r'c:\windows\SysArm32\kernel32.dll'
+          : r'c:\windows\system32\kernel32.dll';
 
-  getExports(hProcess, kernel32)
-      .forEach((name, address) => print('[${address.toHexString(32)}] $name'));
+  getExports(
+    hProcess,
+    kernel32,
+  ).forEach((name, address) => print('[${address.toHexString(32)}] $name'));
 }

@@ -24,8 +24,9 @@ import 'win32/user32.g.dart';
 ///
 /// Reduces blurriness but requires the app to provide necessary DPI awareness.
 void registerHighDPISupport() {
-  final result =
-      SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
+  final result = SetProcessDpiAwarenessContext(
+    DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2,
+  );
   if (result == FALSE) {
     final debugMessage = 'WARNING: could not set DPI awareness'.toNativeUtf16();
     OutputDebugString(debugMessage);

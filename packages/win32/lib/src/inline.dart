@@ -42,19 +42,31 @@ import 'win32/uxtheme.g.dart';
 ///
 /// {@category user32}
 int CreateWindow(
-        Pointer<Utf16> lpClassName,
-        Pointer<Utf16> lpWindowName,
-        int dwStyle,
-        int X,
-        int Y,
-        int nWidth,
-        int nHeight,
-        int hWndParent,
-        int hMenu,
-        int hInstance,
-        Pointer lpParam) =>
-    CreateWindowEx(0, lpClassName, lpWindowName, dwStyle, X, Y, nWidth, nHeight,
-        hWndParent, hMenu, hInstance, lpParam);
+  Pointer<Utf16> lpClassName,
+  Pointer<Utf16> lpWindowName,
+  int dwStyle,
+  int X,
+  int Y,
+  int nWidth,
+  int nHeight,
+  int hWndParent,
+  int hMenu,
+  int hInstance,
+  Pointer lpParam,
+) => CreateWindowEx(
+  0,
+  lpClassName,
+  lpWindowName,
+  dwStyle,
+  X,
+  Y,
+  nWidth,
+  nHeight,
+  hWndParent,
+  hMenu,
+  hInstance,
+  lpParam,
+);
 
 /// Creates a modal dialog box from a dialog box template in memory.
 /// DialogBoxIndirect does not return control until the specified callback
@@ -72,9 +84,12 @@ int CreateWindow(
 /// );
 /// ```
 /// {@category user32}
-void DialogBoxIndirect(int hInstance, Pointer<DLGTEMPLATE> lpTemplate,
-        int hWndParent, Pointer<NativeFunction<DLGPROC>> lpDialogFunc) =>
-    DialogBoxIndirectParam(hInstance, lpTemplate, hWndParent, lpDialogFunc, 0);
+void DialogBoxIndirect(
+  int hInstance,
+  Pointer<DLGTEMPLATE> lpTemplate,
+  int hWndParent,
+  Pointer<NativeFunction<DLGPROC>> lpDialogFunc,
+) => DialogBoxIndirectParam(hInstance, lpTemplate, hWndParent, lpDialogFunc, 0);
 
 /// Retrieves a pseudo-handle that you can use as a shorthand way to refer to
 /// the access token associated with a process.
@@ -101,7 +116,10 @@ int GetCurrentThreadEffectiveToken() => -6.toUnsigned(32);
 ///
 /// {@category version}
 int IsWindowsVersionOrGreater(
-    int wMajorVersion, int wMinorVersion, int wServicePackMajor) {
+  int wMajorVersion,
+  int wMinorVersion,
+  int wServicePackMajor,
+) {
   final dwlConditionMask = VerSetConditionMask(
     VerSetConditionMask(
       VerSetConditionMask(0, VER_FLAGS.VER_MAJORVERSION, VER_GREATER_EQUAL),
@@ -112,10 +130,11 @@ int IsWindowsVersionOrGreater(
     VER_GREATER_EQUAL,
   );
 
-  final osvi = calloc<OSVERSIONINFOEX>()
-    ..ref.dwMajorVersion = wMajorVersion
-    ..ref.dwMinorVersion = wMinorVersion
-    ..ref.wServicePackMajor = wServicePackMajor;
+  final osvi =
+      calloc<OSVERSIONINFOEX>()
+        ..ref.dwMajorVersion = wMajorVersion
+        ..ref.dwMinorVersion = wMinorVersion
+        ..ref.wServicePackMajor = wServicePackMajor;
 
   try {
     return VerifyVersionInfo(
@@ -138,17 +157,20 @@ const _WIN32_WINNT_WINTHRESHOLD = 0x0A00;
 ///
 /// {@category version}
 int IsWindows8OrGreater() => IsWindowsVersionOrGreater(
-      HIBYTE(_WIN32_WINNT_WIN8),
-      LOBYTE(_WIN32_WINNT_WIN8),
-      0,
-    );
+  HIBYTE(_WIN32_WINNT_WIN8),
+  LOBYTE(_WIN32_WINNT_WIN8),
+  0,
+);
 
 /// Indicates if the current OS version matches, or is greater than, the Windows
 /// 10 version.
 ///
 /// {@category version}
 int IsWindows10OrGreater() => IsWindowsVersionOrGreater(
-    HIBYTE(_WIN32_WINNT_WINTHRESHOLD), LOBYTE(_WIN32_WINNT_WINTHRESHOLD), 0);
+  HIBYTE(_WIN32_WINNT_WINTHRESHOLD),
+  LOBYTE(_WIN32_WINNT_WINTHRESHOLD),
+  0,
+);
 
 /// Indicates if the current OS is a Windows Server release. Applications that
 /// need to distinguish between server and client versions of Windows should
@@ -157,8 +179,11 @@ int IsWindows10OrGreater() => IsWindowsVersionOrGreater(
 /// {@category version}
 int IsWindowsServer() {
   final osvi = calloc<OSVERSIONINFOEX>()..ref.wProductType = VER_NT_SERVER;
-  final dwlConditionMask =
-      VerSetConditionMask(0, VER_FLAGS.VER_PRODUCT_TYPE, VER_EQUAL);
+  final dwlConditionMask = VerSetConditionMask(
+    0,
+    VER_FLAGS.VER_PRODUCT_TYPE,
+    VER_EQUAL,
+  );
 
   try {
     return VerifyVersionInfo(
@@ -183,9 +208,10 @@ int IsPropVariantString(Pointer<PROPVARIANT> propvar) =>
 ///
 /// {@category uxtheme}
 int SetWindowThemeNonClientAttributes(int hwnd, int dwMask, int dwAttributes) {
-  final wta = calloc<WTA_OPTIONS>()
-    ..ref.dwFlags = dwAttributes
-    ..ref.dwMask = dwMask;
+  final wta =
+      calloc<WTA_OPTIONS>()
+        ..ref.dwFlags = dwAttributes
+        ..ref.dwMask = dwMask;
   try {
     return SetWindowThemeAttribute(
       hwnd,

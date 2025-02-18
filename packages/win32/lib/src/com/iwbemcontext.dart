@@ -40,53 +40,71 @@ class IWbemContext extends IUnknown {
       IWbemContext(interface.toInterface(IID_IWbemContext));
 
   int clone(Pointer<Pointer<COMObject>> ppNewCopy) => (ptr.ref.vtable + 3)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<Pointer<COMObject>> ppNewCopy)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, Pointer<Pointer<COMObject>> ppNewCopy)>()(
-      ptr.ref.lpVtbl, ppNewCopy);
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<Pointer<COMObject>> ppNewCopy)
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(Pointer, Pointer<Pointer<COMObject>> ppNewCopy)
+      >()(ptr.ref.lpVtbl, ppNewCopy);
 
   int getNames(int lFlags, Pointer<Pointer<SAFEARRAY>> pNames) =>
       (ptr.ref.vtable + 4)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Int32 lFlags,
-                              Pointer<Pointer<SAFEARRAY>> pNames)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, int lFlags,
-                      Pointer<Pointer<SAFEARRAY>> pNames)>()(
-          ptr.ref.lpVtbl, lFlags, pNames);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Int32 lFlags,
+                  Pointer<Pointer<SAFEARRAY>> pNames,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
+              Pointer,
+              int lFlags,
+              Pointer<Pointer<SAFEARRAY>> pNames,
+            )
+          >()(ptr.ref.lpVtbl, lFlags, pNames);
 
   int beginEnumeration(int lFlags) => (ptr.ref.vtable + 5)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 lFlags)>>>()
       .value
       .asFunction<int Function(Pointer, int lFlags)>()(ptr.ref.lpVtbl, lFlags);
 
-  int next(int lFlags, Pointer<Pointer<Utf16>> pstrName,
-          Pointer<VARIANT> pValue) =>
-      (ptr.ref.vtable + 6)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Int32 lFlags,
-                              Pointer<Pointer<Utf16>> pstrName,
-                              Pointer<VARIANT> pValue)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      int lFlags,
-                      Pointer<Pointer<Utf16>> pstrName,
-                      Pointer<VARIANT> pValue)>()(
-          ptr.ref.lpVtbl, lFlags, pstrName, pValue);
+  int next(
+    int lFlags,
+    Pointer<Pointer<Utf16>> pstrName,
+    Pointer<VARIANT> pValue,
+  ) => (ptr.ref.vtable + 6)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Int32 lFlags,
+              Pointer<Pointer<Utf16>> pstrName,
+              Pointer<VARIANT> pValue,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          int lFlags,
+          Pointer<Pointer<Utf16>> pstrName,
+          Pointer<VARIANT> pValue,
+        )
+      >()(ptr.ref.lpVtbl, lFlags, pstrName, pValue);
 
   int endEnumeration() => (ptr.ref.vtable + 7)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
@@ -95,40 +113,66 @@ class IWbemContext extends IUnknown {
 
   int setValue(Pointer<Utf16> wszName, int lFlags, Pointer<VARIANT> pValue) =>
       (ptr.ref.vtable + 8)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Utf16> wszName,
-                              Int32 lFlags, Pointer<VARIANT> pValue)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Utf16> wszName, int lFlags,
-                      Pointer<VARIANT> pValue)>()(
-          ptr.ref.lpVtbl, wszName, lFlags, pValue);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<Utf16> wszName,
+                  Int32 lFlags,
+                  Pointer<VARIANT> pValue,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
+              Pointer,
+              Pointer<Utf16> wszName,
+              int lFlags,
+              Pointer<VARIANT> pValue,
+            )
+          >()(ptr.ref.lpVtbl, wszName, lFlags, pValue);
 
   int getValue(Pointer<Utf16> wszName, int lFlags, Pointer<VARIANT> pValue) =>
       (ptr.ref.vtable + 9)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Utf16> wszName,
-                              Int32 lFlags, Pointer<VARIANT> pValue)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Utf16> wszName, int lFlags,
-                      Pointer<VARIANT> pValue)>()(
-          ptr.ref.lpVtbl, wszName, lFlags, pValue);
-
-  int deleteValue(Pointer<Utf16> wszName, int lFlags) => (ptr.ref.vtable + 10)
           .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<Utf16> wszName, Int32 lFlags)>>>()
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<Utf16> wszName,
+                  Int32 lFlags,
+                  Pointer<VARIANT> pValue,
+                )
+              >
+            >
+          >()
           .value
           .asFunction<
-              int Function(Pointer, Pointer<Utf16> wszName, int lFlags)>()(
-      ptr.ref.lpVtbl, wszName, lFlags);
+            int Function(
+              Pointer,
+              Pointer<Utf16> wszName,
+              int lFlags,
+              Pointer<VARIANT> pValue,
+            )
+          >()(ptr.ref.lpVtbl, wszName, lFlags, pValue);
+
+  int deleteValue(Pointer<Utf16> wszName, int lFlags) => (ptr.ref.vtable + 10)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<Utf16> wszName, Int32 lFlags)
+          >
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Utf16> wszName, int lFlags)>()(
+    ptr.ref.lpVtbl,
+    wszName,
+    lFlags,
+  );
 
   int deleteAll() => (ptr.ref.vtable + 11)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()

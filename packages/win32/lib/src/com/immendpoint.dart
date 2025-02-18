@@ -37,11 +37,14 @@ class IMMEndpoint extends IUnknown {
       IMMEndpoint(interface.toInterface(IID_IMMEndpoint));
 
   int getDataFlow(Pointer<Int32> pDataFlow) => (ptr.ref.vtable + 3)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<Int32> pDataFlow)>>>()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Int32> pDataFlow)>()(
-      ptr.ref.lpVtbl, pDataFlow);
+      .cast<
+        Pointer<
+          NativeFunction<Int32 Function(Pointer, Pointer<Int32> pDataFlow)>
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Int32> pDataFlow)>()(
+    ptr.ref.lpVtbl,
+    pDataFlow,
+  );
 }

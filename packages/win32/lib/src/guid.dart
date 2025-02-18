@@ -74,8 +74,11 @@ class Guid {
     // This is a debug assert, becuase it's probably computationally expensive,
     // and int.parse will throw a FormatException anyway if it can't parse the
     // values.
-    assert(RegExp(r'\{[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}}')
-        .hasMatch(guid));
+    assert(
+      RegExp(
+        r'\{[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}}',
+      ).hasMatch(guid),
+    );
 
     if (guid.length != 38) {
       throw FormatException('GUID is not the correct length', guid);
@@ -90,7 +93,7 @@ class Guid {
     // value in the string representation.
     const offsets = [
       7, 5, 3, 1, 12, 10, 17, 15, //
-      20, 22, 25, 27, 29, 31, 33, 35
+      20, 22, 25, 27, 29, 31, 33, 35,
     ];
 
     final guidAsBytes = offsets
@@ -126,8 +129,9 @@ class Guid {
     // value within the 16-byte array.
     const offsets = [3, 2, 1, 0, 5, 4, 7, 6, 8, 9, 10, 11, 12, 13, 14, 15];
 
-    final guidAsHexValues =
-        offsets.map((idx) => bytes[idx].toRadixString(16).padLeft(2, '0'));
+    final guidAsHexValues = offsets.map(
+      (idx) => bytes[idx].toRadixString(16).padLeft(2, '0'),
+    );
 
     final formattedString = guidAsHexValues.join('');
     final part1 = formattedString.substring(0, 8);

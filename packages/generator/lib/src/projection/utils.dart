@@ -14,7 +14,7 @@ const acronyms = <String>{
   // We use this Set while projecting enums and functions to match the Dart
   // style guide.
   // See https://dart.dev/guides/language/effective-dart/style#do-capitalize-acronyms-and-abbreviations-longer-than-two-letters-like-words
-  'AC', 'DB', 'DPad', 'HD', 'HR', 'IO', 'IP', 'NT', 'TV', 'UI', 'WiFi' //
+  'AC', 'DB', 'DPad', 'HD', 'HR', 'IO', 'IP', 'NT', 'TV', 'UI', 'WiFi', //
 };
 
 const falseAnsiEndings = <String>[
@@ -129,10 +129,10 @@ String classNameForInterfaceName(String interfaceName) {
   final interfaceNameAsList = interfaceName.split('.');
 
   // Strip off the 'I' from the last component
-  final fullyQualifiedClassName =
-      (interfaceNameAsList.sublist(0, interfaceNameAsList.length - 1)
-            ..add(interfaceNameAsList.last.substring(1)))
-          .join('.');
+  final fullyQualifiedClassName = (interfaceNameAsList.sublist(
+    0,
+    interfaceNameAsList.length - 1,
+  )..add(interfaceNameAsList.last.substring(1))).join('.');
 
   // If class has a 'W' suffix, erase it.
   return stripAnsiUnicodeSuffix(fullyQualifiedClassName);
@@ -172,17 +172,23 @@ String private(String identifier) => '_$identifier';
 /// Returns true if the string can be converted to an integer.
 bool characterIsNumeral(String c) => int.tryParse(c) != null;
 
-bool isExcludedGetProperty(Method method) => falseProperties
-    .where((p) =>
-        p.interface == safeTypenameForTypeDef(method.parent) &&
-        p.property == method.name)
-    .isNotEmpty;
+bool isExcludedGetProperty(Method method) =>
+    falseProperties
+        .where(
+          (p) =>
+              p.interface == safeTypenameForTypeDef(method.parent) &&
+              p.property == method.name,
+        )
+        .isNotEmpty;
 
-bool isExcludedSetProperty(Method method) => falseProperties
-    .where((p) =>
-        p.interface == safeTypenameForTypeDef(method.parent) &&
-        p.property.replaceFirst('get', 'put') == method.name)
-    .isNotEmpty;
+bool isExcludedSetProperty(Method method) =>
+    falseProperties
+        .where(
+          (p) =>
+              p.interface == safeTypenameForTypeDef(method.parent) &&
+              p.property.replaceFirst('get', 'put') == method.name,
+        )
+        .isNotEmpty;
 
 String stripLeadingUnderscores(String name) {
   if (name.startsWith('_')) {

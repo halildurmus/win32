@@ -10,7 +10,8 @@ import 'package:win32/win32.dart';
 
 // For simplicity, the sample uses a constant magnification factor
 const MAGFACTOR = 2.0;
-const RESTOREDWINDOWSTYLES = WINDOW_STYLE.WS_SIZEBOX |
+const RESTOREDWINDOWSTYLES =
+    WINDOW_STYLE.WS_SIZEBOX |
     WINDOW_STYLE.WS_SYSMENU |
     WINDOW_STYLE.WS_CLIPCHILDREN |
     WINDOW_STYLE.WS_CAPTION |
@@ -31,8 +32,10 @@ void main() => initApp(winMain);
 
 /// Entry point for the application
 void winMain(int hInstance, List<String> args, int nCmdShow) {
-  final lpfnWndProc =
-      NativeCallable<WNDPROC>.isolateLocal(hostWndProc, exceptionalReturn: 0);
+  final lpfnWndProc = NativeCallable<WNDPROC>.isolateLocal(
+    hostWndProc,
+    exceptionalReturn: 0,
+  );
 
   if (MagInitialize() == FALSE ||
       !setupMagnifier(hInstance, lpfnWndProc.nativeFunction)) {
@@ -45,8 +48,12 @@ void winMain(int hInstance, List<String> args, int nCmdShow) {
   final lpTimerFunc = NativeCallable<TIMERPROC>.isolateLocal(updateMagWindow);
 
   // Create a timer to update the control
-  final timerId =
-      SetTimer(hwndHost, 0, timerInterval, lpTimerFunc.nativeFunction);
+  final timerId = SetTimer(
+    hwndHost,
+    0,
+    timerInterval,
+    lpTimerFunc.nativeFunction,
+  );
 
   // Main message loop
   final msg = calloc<MSG>();
@@ -90,13 +97,14 @@ int hostWndProc(int hWnd, int message, int wParam, int lParam) {
 
         // Resize the control to fill the window.
         SetWindowPos(
-            hwndMag,
-            NULL,
-            magWindowRect.ref.left,
-            magWindowRect.ref.top,
-            magWindowRect.ref.right,
-            magWindowRect.ref.bottom,
-            0);
+          hwndMag,
+          NULL,
+          magWindowRect.ref.left,
+          magWindowRect.ref.top,
+          magWindowRect.ref.right,
+          magWindowRect.ref.bottom,
+          0,
+        );
       }
 
     default:
@@ -108,15 +116,18 @@ int hostWndProc(int hWnd, int message, int wParam, int lParam) {
 /// Registers the window class for the window that contains the magnification
 /// control.
 int registerHostWindowClass(
-    int hInstance, Pointer<NativeFunction<WNDPROC>> lpfnWndProc) {
-  final wcex = calloc<WNDCLASSEX>()
-    ..ref.cbSize = sizeOf<WNDCLASSEX>()
-    ..ref.style = WNDCLASS_STYLES.CS_HREDRAW | WNDCLASS_STYLES.CS_VREDRAW
-    ..ref.lpfnWndProc = lpfnWndProc
-    ..ref.hInstance = hInstance
-    ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
-    ..ref.hbrBackground = SYS_COLOR_INDEX.COLOR_BTNFACE + 1
-    ..ref.lpszClassName = windowClassName;
+  int hInstance,
+  Pointer<NativeFunction<WNDPROC>> lpfnWndProc,
+) {
+  final wcex =
+      calloc<WNDCLASSEX>()
+        ..ref.cbSize = sizeOf<WNDCLASSEX>()
+        ..ref.style = WNDCLASS_STYLES.CS_HREDRAW | WNDCLASS_STYLES.CS_VREDRAW
+        ..ref.lpfnWndProc = lpfnWndProc
+        ..ref.hInstance = hInstance
+        ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
+        ..ref.hbrBackground = SYS_COLOR_INDEX.COLOR_BTNFACE + 1
+        ..ref.lpszClassName = windowClassName;
 
   return RegisterClassEx(wcex);
 }
@@ -132,39 +143,45 @@ bool setupMagnifier(int hInst, Pointer<NativeFunction<WNDPROC>> lpfnWndProc) {
   // Create the host window
   registerHostWindowClass(hInst, lpfnWndProc);
   hwndHost = CreateWindowEx(
-      WINDOW_EX_STYLE.WS_EX_TOPMOST | WINDOW_EX_STYLE.WS_EX_LAYERED,
-      windowClassName,
-      windowTitle,
-      RESTOREDWINDOWSTYLES,
-      0,
-      0,
-      hostWindowRect.ref.right,
-      hostWindowRect.ref.bottom,
-      NULL,
-      NULL,
-      hInst,
-      nullptr);
+    WINDOW_EX_STYLE.WS_EX_TOPMOST | WINDOW_EX_STYLE.WS_EX_LAYERED,
+    windowClassName,
+    windowTitle,
+    RESTOREDWINDOWSTYLES,
+    0,
+    0,
+    hostWindowRect.ref.right,
+    hostWindowRect.ref.bottom,
+    NULL,
+    NULL,
+    hInst,
+    nullptr,
+  );
 
   if (hwndHost == FALSE) return false;
 
   // Make the window opaque
   SetLayeredWindowAttributes(
-      hwndHost, 0, 255, LAYERED_WINDOW_ATTRIBUTES_FLAGS.LWA_ALPHA);
+    hwndHost,
+    0,
+    255,
+    LAYERED_WINDOW_ATTRIBUTES_FLAGS.LWA_ALPHA,
+  );
 
   // Create a magnifier control that fills the client area
   GetClientRect(hwndHost, magWindowRect);
   hwndMag = CreateWindow(
-      TEXT('Magnifier'),
-      TEXT('MagnifierWindow'),
-      WINDOW_STYLE.WS_CHILD | MS_SHOWMAGNIFIEDCURSOR | WINDOW_STYLE.WS_VISIBLE,
-      magWindowRect.ref.left,
-      magWindowRect.ref.top,
-      magWindowRect.ref.right,
-      magWindowRect.ref.bottom,
-      hwndHost,
-      NULL,
-      hInst,
-      nullptr);
+    TEXT('Magnifier'),
+    TEXT('MagnifierWindow'),
+    WINDOW_STYLE.WS_CHILD | MS_SHOWMAGNIFIEDCURSOR | WINDOW_STYLE.WS_VISIBLE,
+    magWindowRect.ref.left,
+    magWindowRect.ref.top,
+    magWindowRect.ref.right,
+    magWindowRect.ref.bottom,
+    hwndHost,
+    NULL,
+    hInst,
+    nullptr,
+  );
 
   if (hwndMag == FALSE) return false;
 
@@ -260,15 +277,16 @@ void updateMagWindow(int hwnd, int uMsg, Pointer<Uint32> idEvent, int dwTime) {
     // Reclaim topmost status, to prevent unmagnified menus from remaining in
     // view.
     SetWindowPos(
-        hwndHost,
-        HWND_TOPMOST,
-        0,
-        0,
-        0,
-        0,
-        SET_WINDOW_POS_FLAGS.SWP_NOACTIVATE |
-            SET_WINDOW_POS_FLAGS.SWP_NOMOVE |
-            SET_WINDOW_POS_FLAGS.SWP_NOSIZE);
+      hwndHost,
+      HWND_TOPMOST,
+      0,
+      0,
+      0,
+      0,
+      SET_WINDOW_POS_FLAGS.SWP_NOACTIVATE |
+          SET_WINDOW_POS_FLAGS.SWP_NOMOVE |
+          SET_WINDOW_POS_FLAGS.SWP_NOSIZE,
+    );
 
     // Force redraw.
     InvalidateRect(hwndMag, nullptr, TRUE);
@@ -286,15 +304,19 @@ void goFullScreen() {
   // The window must be styled as layered for proper rendering.
   // It is styled as transparent so that it does not capture mouse clicks.
   SetWindowLongPtr(
-      hwndHost,
-      WINDOW_LONG_PTR_INDEX.GWL_EXSTYLE,
-      WINDOW_EX_STYLE.WS_EX_TOPMOST |
-          WINDOW_EX_STYLE.WS_EX_LAYERED |
-          WINDOW_EX_STYLE.WS_EX_TRANSPARENT);
+    hwndHost,
+    WINDOW_LONG_PTR_INDEX.GWL_EXSTYLE,
+    WINDOW_EX_STYLE.WS_EX_TOPMOST |
+        WINDOW_EX_STYLE.WS_EX_LAYERED |
+        WINDOW_EX_STYLE.WS_EX_TRANSPARENT,
+  );
 
   // Give the window a system menu so it can be closed on the taskbar.
-  SetWindowLongPtr(hwndHost, WINDOW_LONG_PTR_INDEX.GWL_STYLE,
-      WINDOW_STYLE.WS_CAPTION | WINDOW_STYLE.WS_SYSMENU);
+  SetWindowLongPtr(
+    hwndHost,
+    WINDOW_LONG_PTR_INDEX.GWL_STYLE,
+    WINDOW_STYLE.WS_CAPTION | WINDOW_STYLE.WS_SYSMENU,
+  );
 
   // Calculate the span of the display area.
   final hDC = GetDC(NULL);
@@ -314,33 +336,41 @@ void goFullScreen() {
   ySpan += 2 * yBorder + yCaption;
 
   SetWindowPos(
-      hwndHost,
-      HWND_TOPMOST,
-      xOrigin,
-      yOrigin,
-      xSpan,
-      ySpan,
-      SET_WINDOW_POS_FLAGS.SWP_SHOWWINDOW |
-          SET_WINDOW_POS_FLAGS.SWP_NOZORDER |
-          SET_WINDOW_POS_FLAGS.SWP_NOACTIVATE);
+    hwndHost,
+    HWND_TOPMOST,
+    xOrigin,
+    yOrigin,
+    xSpan,
+    ySpan,
+    SET_WINDOW_POS_FLAGS.SWP_SHOWWINDOW |
+        SET_WINDOW_POS_FLAGS.SWP_NOZORDER |
+        SET_WINDOW_POS_FLAGS.SWP_NOACTIVATE,
+  );
 }
 
 /// Makes the host window resizable and focusable.
 void goPartialScreen() {
   isFullScreen = false;
 
-  SetWindowLongPtr(hwndHost, WINDOW_LONG_PTR_INDEX.GWL_EXSTYLE,
-      WINDOW_EX_STYLE.WS_EX_TOPMOST | WINDOW_EX_STYLE.WS_EX_LAYERED);
   SetWindowLongPtr(
-      hwndHost, WINDOW_LONG_PTR_INDEX.GWL_STYLE, RESTOREDWINDOWSTYLES);
+    hwndHost,
+    WINDOW_LONG_PTR_INDEX.GWL_EXSTYLE,
+    WINDOW_EX_STYLE.WS_EX_TOPMOST | WINDOW_EX_STYLE.WS_EX_LAYERED,
+  );
+  SetWindowLongPtr(
+    hwndHost,
+    WINDOW_LONG_PTR_INDEX.GWL_STYLE,
+    RESTOREDWINDOWSTYLES,
+  );
   SetWindowPos(
-      hwndHost,
-      HWND_TOPMOST,
-      hostWindowRect.ref.left,
-      hostWindowRect.ref.top,
-      hostWindowRect.ref.right,
-      hostWindowRect.ref.bottom,
-      SET_WINDOW_POS_FLAGS.SWP_SHOWWINDOW |
-          SET_WINDOW_POS_FLAGS.SWP_NOZORDER |
-          SET_WINDOW_POS_FLAGS.SWP_NOACTIVATE);
+    hwndHost,
+    HWND_TOPMOST,
+    hostWindowRect.ref.left,
+    hostWindowRect.ref.top,
+    hostWindowRect.ref.right,
+    hostWindowRect.ref.bottom,
+    SET_WINDOW_POS_FLAGS.SWP_SHOWWINDOW |
+        SET_WINDOW_POS_FLAGS.SWP_NOZORDER |
+        SET_WINDOW_POS_FLAGS.SWP_NOACTIVATE,
+  );
 }

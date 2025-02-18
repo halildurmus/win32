@@ -37,18 +37,28 @@ class IUIAutomationSpreadsheetPattern extends IUnknown {
 
   factory IUIAutomationSpreadsheetPattern.from(IUnknown interface) =>
       IUIAutomationSpreadsheetPattern(
-          interface.toInterface(IID_IUIAutomationSpreadsheetPattern));
+        interface.toInterface(IID_IUIAutomationSpreadsheetPattern),
+      );
 
   int getItemByName(Pointer<Utf16> name, Pointer<Pointer<COMObject>> element) =>
       (ptr.ref.vtable + 3)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Utf16> name,
-                              Pointer<Pointer<COMObject>> element)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Utf16> name,
-                      Pointer<Pointer<COMObject>> element)>()(
-          ptr.ref.lpVtbl, name, element);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<Utf16> name,
+                  Pointer<Pointer<COMObject>> element,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
+              Pointer,
+              Pointer<Utf16> name,
+              Pointer<Pointer<COMObject>> element,
+            )
+          >()(ptr.ref.lpVtbl, name, element);
 }

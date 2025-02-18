@@ -41,118 +41,169 @@ class IWbemObjectAccess extends IWbemClassObject {
   factory IWbemObjectAccess.from(IUnknown interface) =>
       IWbemObjectAccess(interface.toInterface(IID_IWbemObjectAccess));
 
-  int
-      getPropertyHandle(Pointer<Utf16> wszPropertyName, Pointer<Int32> pType,
-              Pointer<Int32> plHandle) =>
-          (ptr.ref.vtable + 27)
-                  .cast<
-                      Pointer<
-                          NativeFunction<
-                              Int32 Function(
-                                  Pointer,
-                                  Pointer<Utf16> wszPropertyName,
-                                  Pointer<Int32> pType,
-                                  Pointer<Int32> plHandle)>>>()
-                  .value
-                  .asFunction<
-                      int Function(Pointer, Pointer<Utf16> wszPropertyName,
-                          Pointer<Int32> pType, Pointer<Int32> plHandle)>()(
-              ptr.ref.lpVtbl, wszPropertyName, pType, plHandle);
+  int getPropertyHandle(
+    Pointer<Utf16> wszPropertyName,
+    Pointer<Int32> pType,
+    Pointer<Int32> plHandle,
+  ) => (ptr.ref.vtable + 27)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<Utf16> wszPropertyName,
+              Pointer<Int32> pType,
+              Pointer<Int32> plHandle,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<Utf16> wszPropertyName,
+          Pointer<Int32> pType,
+          Pointer<Int32> plHandle,
+        )
+      >()(ptr.ref.lpVtbl, wszPropertyName, pType, plHandle);
 
   int writePropertyValue(int lHandle, int lNumBytes, Pointer<Uint8> aData) =>
       (ptr.ref.vtable + 28)
           .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Int32 lHandle, Int32 lNumBytes,
-                          Pointer<Uint8> aData)>>>()
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Int32 lHandle,
+                  Int32 lNumBytes,
+                  Pointer<Uint8> aData,
+                )
+              >
+            >
+          >()
           .value
           .asFunction<
-              int Function(
-                  Pointer,
-                  int lHandle,
-                  int lNumBytes,
-                  Pointer<Uint8>
-                      aData)>()(ptr.ref.lpVtbl, lHandle, lNumBytes, aData);
+            int Function(
+              Pointer,
+              int lHandle,
+              int lNumBytes,
+              Pointer<Uint8> aData,
+            )
+          >()(ptr.ref.lpVtbl, lHandle, lNumBytes, aData);
 
-  int
-      readPropertyValue(int lHandle, int lBufferSize, Pointer<Int32> plNumBytes,
-              Pointer<Uint8> aData) =>
-          (ptr.ref.vtable + 29)
-                  .cast<
-                      Pointer<
-                          NativeFunction<
-                              Int32 Function(
-                                  Pointer,
-                                  Int32 lHandle,
-                                  Int32 lBufferSize,
-                                  Pointer<Int32> plNumBytes,
-                                  Pointer<Uint8> aData)>>>()
-                  .value
-                  .asFunction<
-                      int Function(Pointer, int lHandle, int lBufferSize,
-                          Pointer<Int32> plNumBytes, Pointer<Uint8> aData)>()(
-              ptr.ref.lpVtbl, lHandle, lBufferSize, plNumBytes, aData);
+  int readPropertyValue(
+    int lHandle,
+    int lBufferSize,
+    Pointer<Int32> plNumBytes,
+    Pointer<Uint8> aData,
+  ) => (ptr.ref.vtable + 29)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Int32 lHandle,
+              Int32 lBufferSize,
+              Pointer<Int32> plNumBytes,
+              Pointer<Uint8> aData,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          int lHandle,
+          int lBufferSize,
+          Pointer<Int32> plNumBytes,
+          Pointer<Uint8> aData,
+        )
+      >()(ptr.ref.lpVtbl, lHandle, lBufferSize, plNumBytes, aData);
 
   int readDWORD(int lHandle, Pointer<Uint32> pdw) => (ptr.ref.vtable + 30)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Int32 lHandle, Pointer<Uint32> pdw)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, int lHandle, Pointer<Uint32> pdw)>()(
-      ptr.ref.lpVtbl, lHandle, pdw);
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Int32 lHandle, Pointer<Uint32> pdw)
+          >
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, int lHandle, Pointer<Uint32> pdw)>()(
+    ptr.ref.lpVtbl,
+    lHandle,
+    pdw,
+  );
 
   int writeDWORD(int lHandle, int dw) => (ptr.ref.vtable + 31)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Int32 lHandle, Uint32 dw)>>>()
-          .value
-          .asFunction<int Function(Pointer, int lHandle, int dw)>()(
-      ptr.ref.lpVtbl, lHandle, dw);
+      .cast<
+        Pointer<
+          NativeFunction<Int32 Function(Pointer, Int32 lHandle, Uint32 dw)>
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, int lHandle, int dw)>()(
+    ptr.ref.lpVtbl,
+    lHandle,
+    dw,
+  );
 
   int readQWORD(int lHandle, Pointer<Uint64> pqw) => (ptr.ref.vtable + 32)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Int32 lHandle, Pointer<Uint64> pqw)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, int lHandle, Pointer<Uint64> pqw)>()(
-      ptr.ref.lpVtbl, lHandle, pqw);
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Int32 lHandle, Pointer<Uint64> pqw)
+          >
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, int lHandle, Pointer<Uint64> pqw)>()(
+    ptr.ref.lpVtbl,
+    lHandle,
+    pqw,
+  );
 
   int writeQWORD(int lHandle, int pw) => (ptr.ref.vtable + 33)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Int32 lHandle, Uint64 pw)>>>()
-          .value
-          .asFunction<int Function(Pointer, int lHandle, int pw)>()(
-      ptr.ref.lpVtbl, lHandle, pw);
+      .cast<
+        Pointer<
+          NativeFunction<Int32 Function(Pointer, Int32 lHandle, Uint64 pw)>
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, int lHandle, int pw)>()(
+    ptr.ref.lpVtbl,
+    lHandle,
+    pw,
+  );
 
-  int getPropertyInfoByHandle(int lHandle, Pointer<Pointer<Utf16>> pstrName,
-          Pointer<Int32> pType) =>
-      (ptr.ref.vtable + 34)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Int32 lHandle,
-                              Pointer<Pointer<Utf16>> pstrName,
-                              Pointer<Int32> pType)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      int lHandle,
-                      Pointer<Pointer<Utf16>> pstrName,
-                      Pointer<Int32> pType)>()(
-          ptr.ref.lpVtbl, lHandle, pstrName, pType);
+  int getPropertyInfoByHandle(
+    int lHandle,
+    Pointer<Pointer<Utf16>> pstrName,
+    Pointer<Int32> pType,
+  ) => (ptr.ref.vtable + 34)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Int32 lHandle,
+              Pointer<Pointer<Utf16>> pstrName,
+              Pointer<Int32> pType,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          int lHandle,
+          Pointer<Pointer<Utf16>> pstrName,
+          Pointer<Int32> pType,
+        )
+      >()(ptr.ref.lpVtbl, lHandle, pstrName, pType);
 
   int lock(int lFlags) => (ptr.ref.vtable + 35)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 lFlags)>>>()

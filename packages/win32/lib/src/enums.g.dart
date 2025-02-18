@@ -98,13 +98,15 @@ extension type const APPX_CAPABILITIES(int _) implements int {
   static const APPX_CAPABILITY_MUSIC_LIBRARY = 64;
 
   /// Your Windows credentials, for access to a corporate intranet.
-  static const APPX_CAPABILITY_ENTERPRISE_AUTHENTICATION =
-      APPX_CAPABILITIES(128);
+  static const APPX_CAPABILITY_ENTERPRISE_AUTHENTICATION = APPX_CAPABILITIES(
+    128,
+  );
 
   /// Software and hardware certificates or a smart card – used to identify you
   /// in the app.
-  static const APPX_CAPABILITY_SHARED_USER_CERTIFICATES =
-      APPX_CAPABILITIES(256);
+  static const APPX_CAPABILITY_SHARED_USER_CERTIFICATES = APPX_CAPABILITIES(
+    256,
+  );
 
   /// Removable storage, such as an external hard drive or USB flash drive, or
   /// MTP portable device, including the capability to add, change, or delete
@@ -191,8 +193,9 @@ extension type const APPX_PACKAGE_ARCHITECTURE(int _) implements int {
   static const APPX_PACKAGE_ARCHITECTURE_X64 = 9;
 
   /// Any processor architecture.
-  static const APPX_PACKAGE_ARCHITECTURE_NEUTRAL =
-      APPX_PACKAGE_ARCHITECTURE(11);
+  static const APPX_PACKAGE_ARCHITECTURE_NEUTRAL = APPX_PACKAGE_ARCHITECTURE(
+    11,
+  );
 
   /// The 64-bit ARM processor architecture.
   static const APPX_PACKAGE_ARCHITECTURE_ARM64 = 12;
@@ -273,8 +276,9 @@ extension type const AUDIO_STREAM_CATEGORY(int _) implements int {
 extension type const AUTHENTICATION_REQUIREMENTS(int _) implements int {
   static const MITMProtectionNotRequired = 0;
   static const MITMProtectionRequired = 1;
-  static const MITMProtectionNotRequiredBonding =
-      AUTHENTICATION_REQUIREMENTS(2);
+  static const MITMProtectionNotRequiredBonding = AUTHENTICATION_REQUIREMENTS(
+    2,
+  );
   static const MITMProtectionRequiredBonding = 3;
   static const MITMProtectionNotRequiredGeneralBonding =
       AUTHENTICATION_REQUIREMENTS(4);
@@ -385,20 +389,23 @@ extension type const BRUSH_STYLE(int _) implements int {
 extension type const BTH_LE_GATT_DESCRIPTOR_TYPE(int _) implements int {
   /// The characteristic value has additional properties that describe how it
   /// can be used, or how it can be accessed.
-  static const CharacteristicExtendedProperties =
-      BTH_LE_GATT_DESCRIPTOR_TYPE(0);
+  static const CharacteristicExtendedProperties = BTH_LE_GATT_DESCRIPTOR_TYPE(
+    0,
+  );
 
   /// The characteristic value contains a UTF-8 string of variable size that is
   /// a user textual description.
   static const CharacteristicUserDescription = 1;
 
   /// The characteristic value may be configured by the client.
-  static const ClientCharacteristicConfiguration =
-      BTH_LE_GATT_DESCRIPTOR_TYPE(2);
+  static const ClientCharacteristicConfiguration = BTH_LE_GATT_DESCRIPTOR_TYPE(
+    2,
+  );
 
   /// The characteristic value may be configured for the server.
-  static const ServerCharacteristicConfiguration =
-      BTH_LE_GATT_DESCRIPTOR_TYPE(3);
+  static const ServerCharacteristicConfiguration = BTH_LE_GATT_DESCRIPTOR_TYPE(
+    3,
+  );
 
   /// The format of the characteristic value.
   static const CharacteristicFormat = 4;
@@ -1476,8 +1483,9 @@ extension type const DOT11_CIPHER_ALGORITHM(int _) implements int {
   static const DOT11_CIPHER_ALGO_WPA_USE_GROUP = 256;
   static const DOT11_CIPHER_ALGO_RSN_USE_GROUP = 256;
   static const DOT11_CIPHER_ALGO_WEP = 257;
-  static const DOT11_CIPHER_ALGO_IHV_START =
-      DOT11_CIPHER_ALGORITHM(-2147483648);
+  static const DOT11_CIPHER_ALGO_IHV_START = DOT11_CIPHER_ALGORITHM(
+    -2147483648,
+  );
   static const DOT11_CIPHER_ALGO_IHV_END = DOT11_CIPHER_ALGORITHM(-1);
 }
 
@@ -2176,20 +2184,24 @@ extension type const FILE_FLAGS_AND_ATTRIBUTES(int _) implements int {
   static const FILE_ATTRIBUTE_REPARSE_POINT = 1024;
   static const FILE_ATTRIBUTE_COMPRESSED = 2048;
   static const FILE_ATTRIBUTE_OFFLINE = 4096;
-  static const FILE_ATTRIBUTE_NOT_CONTENT_INDEXED =
-      FILE_FLAGS_AND_ATTRIBUTES(8192);
+  static const FILE_ATTRIBUTE_NOT_CONTENT_INDEXED = FILE_FLAGS_AND_ATTRIBUTES(
+    8192,
+  );
   static const FILE_ATTRIBUTE_ENCRYPTED = 16384;
-  static const FILE_ATTRIBUTE_INTEGRITY_STREAM =
-      FILE_FLAGS_AND_ATTRIBUTES(32768);
+  static const FILE_ATTRIBUTE_INTEGRITY_STREAM = FILE_FLAGS_AND_ATTRIBUTES(
+    32768,
+  );
   static const FILE_ATTRIBUTE_VIRTUAL = 65536;
   static const FILE_ATTRIBUTE_NO_SCRUB_DATA = 131072;
   static const FILE_ATTRIBUTE_EA = 262144;
   static const FILE_ATTRIBUTE_PINNED = 524288;
   static const FILE_ATTRIBUTE_UNPINNED = 1048576;
-  static const FILE_ATTRIBUTE_RECALL_ON_OPEN =
-      FILE_FLAGS_AND_ATTRIBUTES(262144);
-  static const FILE_ATTRIBUTE_RECALL_ON_DATA_ACCESS =
-      FILE_FLAGS_AND_ATTRIBUTES(4194304);
+  static const FILE_ATTRIBUTE_RECALL_ON_OPEN = FILE_FLAGS_AND_ATTRIBUTES(
+    262144,
+  );
+  static const FILE_ATTRIBUTE_RECALL_ON_DATA_ACCESS = FILE_FLAGS_AND_ATTRIBUTES(
+    4194304,
+  );
   static const FILE_FLAG_WRITE_THROUGH = 2147483648;
   static const FILE_FLAG_OVERLAPPED = 1073741824;
   static const FILE_FLAG_NO_BUFFERING = 536870912;
@@ -2199,11 +2211,13 @@ extension type const FILE_FLAGS_AND_ATTRIBUTES(int _) implements int {
   static const FILE_FLAG_BACKUP_SEMANTICS = 33554432;
   static const FILE_FLAG_POSIX_SEMANTICS = 16777216;
   static const FILE_FLAG_SESSION_AWARE = 8388608;
-  static const FILE_FLAG_OPEN_REPARSE_POINT =
-      FILE_FLAGS_AND_ATTRIBUTES(2097152);
+  static const FILE_FLAG_OPEN_REPARSE_POINT = FILE_FLAGS_AND_ATTRIBUTES(
+    2097152,
+  );
   static const FILE_FLAG_OPEN_NO_RECALL = 1048576;
-  static const FILE_FLAG_FIRST_PIPE_INSTANCE =
-      FILE_FLAGS_AND_ATTRIBUTES(524288);
+  static const FILE_FLAG_FIRST_PIPE_INSTANCE = FILE_FLAGS_AND_ATTRIBUTES(
+    524288,
+  );
   static const PIPE_ACCESS_DUPLEX = 3;
   static const PIPE_ACCESS_INBOUND = 1;
   static const PIPE_ACCESS_OUTBOUND = 2;
@@ -2755,10 +2769,12 @@ extension type const GET_ADAPTERS_ADDRESSES_FLAGS(int _) implements int {
   static const GAA_FLAG_SKIP_FRIENDLY_NAME = 32;
   static const GAA_FLAG_INCLUDE_WINS_INFO = 64;
   static const GAA_FLAG_INCLUDE_GATEWAYS = 128;
-  static const GAA_FLAG_INCLUDE_ALL_INTERFACES =
-      GET_ADAPTERS_ADDRESSES_FLAGS(256);
-  static const GAA_FLAG_INCLUDE_ALL_COMPARTMENTS =
-      GET_ADAPTERS_ADDRESSES_FLAGS(512);
+  static const GAA_FLAG_INCLUDE_ALL_INTERFACES = GET_ADAPTERS_ADDRESSES_FLAGS(
+    256,
+  );
+  static const GAA_FLAG_INCLUDE_ALL_COMPARTMENTS = GET_ADAPTERS_ADDRESSES_FLAGS(
+    512,
+  );
   static const GAA_FLAG_INCLUDE_TUNNEL_BINDINGORDER =
       GET_ADAPTERS_ADDRESSES_FLAGS(1024);
 }
@@ -3193,8 +3209,9 @@ extension type const JOBOBJECTINFOCLASS(int _) implements int {
   static const JobObjectBasicUIRestrictions = 4;
   static const JobObjectSecurityLimitInformation = 5;
   static const JobObjectEndOfJobTimeInformation = 6;
-  static const JobObjectAssociateCompletionPortInformation =
-      JOBOBJECTINFOCLASS(7);
+  static const JobObjectAssociateCompletionPortInformation = JOBOBJECTINFOCLASS(
+    7,
+  );
   static const JobObjectBasicAndIoAccountingInformation = 8;
   static const JobObjectExtendedLimitInformation = 9;
   static const JobObjectJobSetInformation = 10;
@@ -3336,8 +3353,9 @@ extension type const LOAD_LIBRARY_FLAGS(int _) implements int {
   static const LOAD_LIBRARY_SEARCH_SYSTEM32 = 2048;
   static const LOAD_LIBRARY_SEARCH_DEFAULT_DIRS = 4096;
   static const LOAD_LIBRARY_SAFE_CURRENT_DIRS = 8192;
-  static const LOAD_LIBRARY_SEARCH_SYSTEM32_NO_FORWARDER =
-      LOAD_LIBRARY_FLAGS(16384);
+  static const LOAD_LIBRARY_SEARCH_SYSTEM32_NO_FORWARDER = LOAD_LIBRARY_FLAGS(
+    16384,
+  );
 }
 
 /// {@category enum}
@@ -3681,8 +3699,9 @@ extension type const MIDI_WAVE_OPEN_TYPE(int _) implements int {
   static const WAVE_MAPPED = 4;
   static const WAVE_FORMAT_DIRECT = 8;
   static const WAVE_FORMAT_DIRECT_QUERY = 9;
-  static const WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE =
-      MIDI_WAVE_OPEN_TYPE(16);
+  static const WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE = MIDI_WAVE_OPEN_TYPE(
+    16,
+  );
   static const MIDI_IO_STATUS = 32;
 }
 
@@ -3862,8 +3881,9 @@ extension type const NLM_CONNECTION_COST(int _) implements int {
   static const NLM_CONNECTION_COST_ROAMING = 262144;
 
   /// The connection is approaching the data limit specified by the carrier.
-  static const NLM_CONNECTION_COST_APPROACHINGDATALIMIT =
-      NLM_CONNECTION_COST(524288);
+  static const NLM_CONNECTION_COST_APPROACHINGDATALIMIT = NLM_CONNECTION_COST(
+    524288,
+  );
 }
 
 /// A set of flags that specify the domain type of a network.
@@ -3899,8 +3919,9 @@ extension type const NLM_NETWORK_CATEGORY(int _) implements int {
   static const NLM_NETWORK_CATEGORY_PRIVATE = 1;
 
   /// The network is authenticated against an Active Directory domain.
-  static const NLM_NETWORK_CATEGORY_DOMAIN_AUTHENTICATED =
-      NLM_NETWORK_CATEGORY(2);
+  static const NLM_NETWORK_CATEGORY_DOMAIN_AUTHENTICATED = NLM_NETWORK_CATEGORY(
+    2,
+  );
 }
 
 /// Specifies information about the duplicate address detection (DAD) state for
@@ -4175,8 +4196,9 @@ extension type const ORIENTATION_PREFERENCE(int _) implements int {
 
   /// The process represents a desktop app that can be used in flipped portrait
   /// mode.
-  static const ORIENTATION_PREFERENCE_PORTRAIT_FLIPPED =
-      ORIENTATION_PREFERENCE(8);
+  static const ORIENTATION_PREFERENCE_PORTRAIT_FLIPPED = ORIENTATION_PREFERENCE(
+    8,
+  );
 }
 
 /// {@category enum}
@@ -4268,8 +4290,9 @@ extension type const OS_PRODUCT_TYPE(int _) implements int {
   static const PRODUCT_STORAGE_STANDARD_EVALUATION_SERVER = 96;
   static const PRODUCT_STORAGE_STANDARD_SERVER = 21;
   static const PRODUCT_STORAGE_STANDARD_SERVER_CORE = 44;
-  static const PRODUCT_STORAGE_WORKGROUP_EVALUATION_SERVER =
-      OS_PRODUCT_TYPE(95);
+  static const PRODUCT_STORAGE_WORKGROUP_EVALUATION_SERVER = OS_PRODUCT_TYPE(
+    95,
+  );
   static const PRODUCT_STORAGE_WORKGROUP_SERVER = 22;
   static const PRODUCT_STORAGE_WORKGROUP_SERVER_CORE = 45;
   static const PRODUCT_ULTIMATE = 1;
@@ -4548,14 +4571,17 @@ extension type const PROCESSOR_ARCHITECTURE(int _) implements int {
   static const PROCESSOR_ARCHITECTURE_ALPHA64 = 7;
   static const PROCESSOR_ARCHITECTURE_MSIL = 8;
   static const PROCESSOR_ARCHITECTURE_AMD64 = 9;
-  static const PROCESSOR_ARCHITECTURE_IA32_ON_WIN64 =
-      PROCESSOR_ARCHITECTURE(10);
+  static const PROCESSOR_ARCHITECTURE_IA32_ON_WIN64 = PROCESSOR_ARCHITECTURE(
+    10,
+  );
   static const PROCESSOR_ARCHITECTURE_NEUTRAL = 11;
   static const PROCESSOR_ARCHITECTURE_ARM64 = 12;
-  static const PROCESSOR_ARCHITECTURE_ARM32_ON_WIN64 =
-      PROCESSOR_ARCHITECTURE(13);
-  static const PROCESSOR_ARCHITECTURE_IA32_ON_ARM64 =
-      PROCESSOR_ARCHITECTURE(14);
+  static const PROCESSOR_ARCHITECTURE_ARM32_ON_WIN64 = PROCESSOR_ARCHITECTURE(
+    13,
+  );
+  static const PROCESSOR_ARCHITECTURE_IA32_ON_ARM64 = PROCESSOR_ARCHITECTURE(
+    14,
+  );
   static const PROCESSOR_ARCHITECTURE_UNKNOWN = 65535;
 }
 
@@ -4631,15 +4657,17 @@ extension type const PROCESS_CREATION_FLAGS(int _) implements int {
   static const PROCESS_MODE_BACKGROUND_END = 2097152;
   static const CREATE_SECURE_PROCESS = 4194304;
   static const CREATE_BREAKAWAY_FROM_JOB = 16777216;
-  static const CREATE_PRESERVE_CODE_AUTHZ_LEVEL =
-      PROCESS_CREATION_FLAGS(33554432);
+  static const CREATE_PRESERVE_CODE_AUTHZ_LEVEL = PROCESS_CREATION_FLAGS(
+    33554432,
+  );
   static const CREATE_DEFAULT_ERROR_MODE = 67108864;
   static const CREATE_NO_WINDOW = 134217728;
   static const PROFILE_USER = 268435456;
   static const PROFILE_KERNEL = 536870912;
   static const PROFILE_SERVER = 1073741824;
-  static const CREATE_IGNORE_SYSTEM_DEFAULT =
-      PROCESS_CREATION_FLAGS(2147483648);
+  static const CREATE_IGNORE_SYSTEM_DEFAULT = PROCESS_CREATION_FLAGS(
+    2147483648,
+  );
 }
 
 /// {@category enum}
@@ -5206,8 +5234,9 @@ extension type const SERVICE_TRIGGER_TYPE(int _) implements int {
   static const SERVICE_TRIGGER_TYPE_DEVICE_INTERFACE_ARRIVAL =
       SERVICE_TRIGGER_TYPE(1);
   static const SERVICE_TRIGGER_TYPE_DOMAIN_JOIN = 3;
-  static const SERVICE_TRIGGER_TYPE_FIREWALL_PORT_EVENT =
-      SERVICE_TRIGGER_TYPE(4);
+  static const SERVICE_TRIGGER_TYPE_FIREWALL_PORT_EVENT = SERVICE_TRIGGER_TYPE(
+    4,
+  );
   static const SERVICE_TRIGGER_TYPE_GROUP_POLICY = 5;
   static const SERVICE_TRIGGER_TYPE_IP_ADDRESS_AVAILABILITY =
       SERVICE_TRIGGER_TYPE(2);
@@ -5247,8 +5276,9 @@ extension type const SETUP_DI_REGISTRY_PROPERTY(int _) implements int {
   static const SPDRP_MFG = 11;
   static const SPDRP_FRIENDLYNAME = 12;
   static const SPDRP_LOCATION_INFORMATION = 13;
-  static const SPDRP_PHYSICAL_DEVICE_OBJECT_NAME =
-      SETUP_DI_REGISTRY_PROPERTY(14);
+  static const SPDRP_PHYSICAL_DEVICE_OBJECT_NAME = SETUP_DI_REGISTRY_PROPERTY(
+    14,
+  );
   static const SPDRP_CAPABILITIES = 15;
   static const SPDRP_UI_NUMBER = 16;
   static const SPDRP_UPPERFILTERS = 17;
@@ -5292,8 +5322,9 @@ extension type const SET_DISPLAY_CONFIG_FLAGS(int _) implements int {
   static const SDC_FORCE_MODE_ENUMERATION = 4096;
   static const SDC_ALLOW_PATH_ORDER_CHANGES = 8192;
   static const SDC_VIRTUAL_MODE_AWARE = 32768;
-  static const SDC_VIRTUAL_REFRESH_RATE_AWARE =
-      SET_DISPLAY_CONFIG_FLAGS(131072);
+  static const SDC_VIRTUAL_REFRESH_RATE_AWARE = SET_DISPLAY_CONFIG_FLAGS(
+    131072,
+  );
 }
 
 /// {@category enum}
@@ -5445,12 +5476,14 @@ extension type const SHUTDOWN_FLAGS(int _) implements int {
 extension type const SHUTDOWN_REASON(int _) implements int {
   static const SHTDN_REASON_NONE = 0;
   static const SHTDN_REASON_FLAG_COMMENT_REQUIRED = 16777216;
-  static const SHTDN_REASON_FLAG_DIRTY_PROBLEM_ID_REQUIRED =
-      SHUTDOWN_REASON(33554432);
+  static const SHTDN_REASON_FLAG_DIRTY_PROBLEM_ID_REQUIRED = SHUTDOWN_REASON(
+    33554432,
+  );
   static const SHTDN_REASON_FLAG_CLEAN_UI = 67108864;
   static const SHTDN_REASON_FLAG_DIRTY_UI = 134217728;
-  static const SHTDN_REASON_FLAG_MOBILE_UI_RESERVED =
-      SHUTDOWN_REASON(268435456);
+  static const SHTDN_REASON_FLAG_MOBILE_UI_RESERVED = SHUTDOWN_REASON(
+    268435456,
+  );
   static const SHTDN_REASON_FLAG_USER_DEFINED = 1073741824;
   static const SHTDN_REASON_FLAG_PLANNED = 2147483648;
   static const SHTDN_REASON_MAJOR_OTHER = 0;
@@ -5766,14 +5799,18 @@ extension type const SYNCHRONIZATION_ACCESS_RIGHTS(int _) implements int {
   static const TIMER_MODIFY_STATE = 2;
   static const TIMER_QUERY_STATE = 1;
   static const SYNCHRONIZATION_DELETE = 65536;
-  static const SYNCHRONIZATION_READ_CONTROL =
-      SYNCHRONIZATION_ACCESS_RIGHTS(131072);
-  static const SYNCHRONIZATION_WRITE_DAC =
-      SYNCHRONIZATION_ACCESS_RIGHTS(262144);
-  static const SYNCHRONIZATION_WRITE_OWNER =
-      SYNCHRONIZATION_ACCESS_RIGHTS(524288);
-  static const SYNCHRONIZATION_SYNCHRONIZE =
-      SYNCHRONIZATION_ACCESS_RIGHTS(1048576);
+  static const SYNCHRONIZATION_READ_CONTROL = SYNCHRONIZATION_ACCESS_RIGHTS(
+    131072,
+  );
+  static const SYNCHRONIZATION_WRITE_DAC = SYNCHRONIZATION_ACCESS_RIGHTS(
+    262144,
+  );
+  static const SYNCHRONIZATION_WRITE_OWNER = SYNCHRONIZATION_ACCESS_RIGHTS(
+    524288,
+  );
+  static const SYNCHRONIZATION_SYNCHRONIZE = SYNCHRONIZATION_ACCESS_RIGHTS(
+    1048576,
+  );
 }
 
 /// {@category enum}
@@ -6014,26 +6051,32 @@ extension type const SYSTEM_PARAMETERS_INFO_ACTION(int _) implements int {
   static const SPI_SETHUNGAPPTIMEOUT = 121;
   static const SPI_GETWAITTOKILLTIMEOUT = 122;
   static const SPI_SETWAITTOKILLTIMEOUT = 123;
-  static const SPI_GETWAITTOKILLSERVICETIMEOUT =
-      SYSTEM_PARAMETERS_INFO_ACTION(124);
-  static const SPI_SETWAITTOKILLSERVICETIMEOUT =
-      SYSTEM_PARAMETERS_INFO_ACTION(125);
+  static const SPI_GETWAITTOKILLSERVICETIMEOUT = SYSTEM_PARAMETERS_INFO_ACTION(
+    124,
+  );
+  static const SPI_SETWAITTOKILLSERVICETIMEOUT = SYSTEM_PARAMETERS_INFO_ACTION(
+    125,
+  );
   static const SPI_GETMOUSEDOCKTHRESHOLD = 126;
   static const SPI_SETMOUSEDOCKTHRESHOLD = 127;
   static const SPI_GETPENDOCKTHRESHOLD = 128;
   static const SPI_SETPENDOCKTHRESHOLD = 129;
   static const SPI_GETWINARRANGING = 130;
   static const SPI_SETWINARRANGING = 131;
-  static const SPI_GETMOUSEDRAGOUTTHRESHOLD =
-      SYSTEM_PARAMETERS_INFO_ACTION(132);
-  static const SPI_SETMOUSEDRAGOUTTHRESHOLD =
-      SYSTEM_PARAMETERS_INFO_ACTION(133);
+  static const SPI_GETMOUSEDRAGOUTTHRESHOLD = SYSTEM_PARAMETERS_INFO_ACTION(
+    132,
+  );
+  static const SPI_SETMOUSEDRAGOUTTHRESHOLD = SYSTEM_PARAMETERS_INFO_ACTION(
+    133,
+  );
   static const SPI_GETPENDRAGOUTTHRESHOLD = 134;
   static const SPI_SETPENDRAGOUTTHRESHOLD = 135;
-  static const SPI_GETMOUSESIDEMOVETHRESHOLD =
-      SYSTEM_PARAMETERS_INFO_ACTION(136);
-  static const SPI_SETMOUSESIDEMOVETHRESHOLD =
-      SYSTEM_PARAMETERS_INFO_ACTION(137);
+  static const SPI_GETMOUSESIDEMOVETHRESHOLD = SYSTEM_PARAMETERS_INFO_ACTION(
+    136,
+  );
+  static const SPI_SETMOUSESIDEMOVETHRESHOLD = SYSTEM_PARAMETERS_INFO_ACTION(
+    137,
+  );
   static const SPI_GETPENSIDEMOVETHRESHOLD = 138;
   static const SPI_SETPENSIDEMOVETHRESHOLD = 139;
   static const SPI_GETDRAGFROMMAXIMIZE = 140;
@@ -6042,26 +6085,32 @@ extension type const SYSTEM_PARAMETERS_INFO_ACTION(int _) implements int {
   static const SPI_SETSNAPSIZING = 143;
   static const SPI_GETDOCKMOVING = 144;
   static const SPI_SETDOCKMOVING = 145;
-  static const SPI_GETTOUCHPREDICTIONPARAMETERS =
-      SYSTEM_PARAMETERS_INFO_ACTION(156);
-  static const SPI_SETTOUCHPREDICTIONPARAMETERS =
-      SYSTEM_PARAMETERS_INFO_ACTION(157);
+  static const SPI_GETTOUCHPREDICTIONPARAMETERS = SYSTEM_PARAMETERS_INFO_ACTION(
+    156,
+  );
+  static const SPI_SETTOUCHPREDICTIONPARAMETERS = SYSTEM_PARAMETERS_INFO_ACTION(
+    157,
+  );
   static const SPI_GETLOGICALDPIOVERRIDE = 158;
   static const SPI_SETLOGICALDPIOVERRIDE = 159;
   static const SPI_GETMENURECT = 162;
   static const SPI_SETMENURECT = 163;
-  static const SPI_GETACTIVEWINDOWTRACKING =
-      SYSTEM_PARAMETERS_INFO_ACTION(4096);
-  static const SPI_SETACTIVEWINDOWTRACKING =
-      SYSTEM_PARAMETERS_INFO_ACTION(4097);
+  static const SPI_GETACTIVEWINDOWTRACKING = SYSTEM_PARAMETERS_INFO_ACTION(
+    4096,
+  );
+  static const SPI_SETACTIVEWINDOWTRACKING = SYSTEM_PARAMETERS_INFO_ACTION(
+    4097,
+  );
   static const SPI_GETMENUANIMATION = 4098;
   static const SPI_SETMENUANIMATION = 4099;
   static const SPI_GETCOMBOBOXANIMATION = 4100;
   static const SPI_SETCOMBOBOXANIMATION = 4101;
-  static const SPI_GETLISTBOXSMOOTHSCROLLING =
-      SYSTEM_PARAMETERS_INFO_ACTION(4102);
-  static const SPI_SETLISTBOXSMOOTHSCROLLING =
-      SYSTEM_PARAMETERS_INFO_ACTION(4103);
+  static const SPI_GETLISTBOXSMOOTHSCROLLING = SYSTEM_PARAMETERS_INFO_ACTION(
+    4102,
+  );
+  static const SPI_SETLISTBOXSMOOTHSCROLLING = SYSTEM_PARAMETERS_INFO_ACTION(
+    4103,
+  );
   static const SPI_GETGRADIENTCAPTIONS = 4104;
   static const SPI_SETGRADIENTCAPTIONS = 4105;
   static const SPI_GETKEYBOARDCUES = 4106;
@@ -6092,16 +6141,20 @@ extension type const SYSTEM_PARAMETERS_INFO_ACTION(int _) implements int {
   static const SPI_SETFLATMENU = 4131;
   static const SPI_GETDROPSHADOW = 4132;
   static const SPI_SETDROPSHADOW = 4133;
-  static const SPI_GETBLOCKSENDINPUTRESETS =
-      SYSTEM_PARAMETERS_INFO_ACTION(4134);
-  static const SPI_SETBLOCKSENDINPUTRESETS =
-      SYSTEM_PARAMETERS_INFO_ACTION(4135);
+  static const SPI_GETBLOCKSENDINPUTRESETS = SYSTEM_PARAMETERS_INFO_ACTION(
+    4134,
+  );
+  static const SPI_SETBLOCKSENDINPUTRESETS = SYSTEM_PARAMETERS_INFO_ACTION(
+    4135,
+  );
   static const SPI_GETUIEFFECTS = 4158;
   static const SPI_SETUIEFFECTS = 4159;
-  static const SPI_GETDISABLEOVERLAPPEDCONTENT =
-      SYSTEM_PARAMETERS_INFO_ACTION(4160);
-  static const SPI_SETDISABLEOVERLAPPEDCONTENT =
-      SYSTEM_PARAMETERS_INFO_ACTION(4161);
+  static const SPI_GETDISABLEOVERLAPPEDCONTENT = SYSTEM_PARAMETERS_INFO_ACTION(
+    4160,
+  );
+  static const SPI_SETDISABLEOVERLAPPEDCONTENT = SYSTEM_PARAMETERS_INFO_ACTION(
+    4161,
+  );
   static const SPI_GETCLIENTAREAANIMATION = 4162;
   static const SPI_SETCLIENTAREAANIMATION = 4163;
   static const SPI_GETCLEARTYPE = 4168;
@@ -6110,52 +6163,66 @@ extension type const SYSTEM_PARAMETERS_INFO_ACTION(int _) implements int {
   static const SPI_SETSPEECHRECOGNITION = 4171;
   static const SPI_GETCARETBROWSING = 4172;
   static const SPI_SETCARETBROWSING = 4173;
-  static const SPI_GETTHREADLOCALINPUTSETTINGS =
-      SYSTEM_PARAMETERS_INFO_ACTION(4174);
-  static const SPI_SETTHREADLOCALINPUTSETTINGS =
-      SYSTEM_PARAMETERS_INFO_ACTION(4175);
+  static const SPI_GETTHREADLOCALINPUTSETTINGS = SYSTEM_PARAMETERS_INFO_ACTION(
+    4174,
+  );
+  static const SPI_SETTHREADLOCALINPUTSETTINGS = SYSTEM_PARAMETERS_INFO_ACTION(
+    4175,
+  );
   static const SPI_GETSYSTEMLANGUAGEBAR = 4176;
   static const SPI_SETSYSTEMLANGUAGEBAR = 4177;
-  static const SPI_GETFOREGROUNDLOCKTIMEOUT =
-      SYSTEM_PARAMETERS_INFO_ACTION(8192);
-  static const SPI_SETFOREGROUNDLOCKTIMEOUT =
-      SYSTEM_PARAMETERS_INFO_ACTION(8193);
+  static const SPI_GETFOREGROUNDLOCKTIMEOUT = SYSTEM_PARAMETERS_INFO_ACTION(
+    8192,
+  );
+  static const SPI_SETFOREGROUNDLOCKTIMEOUT = SYSTEM_PARAMETERS_INFO_ACTION(
+    8193,
+  );
   static const SPI_GETACTIVEWNDTRKTIMEOUT = 8194;
   static const SPI_SETACTIVEWNDTRKTIMEOUT = 8195;
-  static const SPI_GETFOREGROUNDFLASHCOUNT =
-      SYSTEM_PARAMETERS_INFO_ACTION(8196);
-  static const SPI_SETFOREGROUNDFLASHCOUNT =
-      SYSTEM_PARAMETERS_INFO_ACTION(8197);
+  static const SPI_GETFOREGROUNDFLASHCOUNT = SYSTEM_PARAMETERS_INFO_ACTION(
+    8196,
+  );
+  static const SPI_SETFOREGROUNDFLASHCOUNT = SYSTEM_PARAMETERS_INFO_ACTION(
+    8197,
+  );
   static const SPI_GETCARETWIDTH = 8198;
   static const SPI_SETCARETWIDTH = 8199;
   static const SPI_GETMOUSECLICKLOCKTIME = 8200;
   static const SPI_SETMOUSECLICKLOCKTIME = 8201;
   static const SPI_GETFONTSMOOTHINGTYPE = 8202;
   static const SPI_SETFONTSMOOTHINGTYPE = 8203;
-  static const SPI_GETFONTSMOOTHINGCONTRAST =
-      SYSTEM_PARAMETERS_INFO_ACTION(8204);
-  static const SPI_SETFONTSMOOTHINGCONTRAST =
-      SYSTEM_PARAMETERS_INFO_ACTION(8205);
+  static const SPI_GETFONTSMOOTHINGCONTRAST = SYSTEM_PARAMETERS_INFO_ACTION(
+    8204,
+  );
+  static const SPI_SETFONTSMOOTHINGCONTRAST = SYSTEM_PARAMETERS_INFO_ACTION(
+    8205,
+  );
   static const SPI_GETFOCUSBORDERWIDTH = 8206;
   static const SPI_SETFOCUSBORDERWIDTH = 8207;
   static const SPI_GETFOCUSBORDERHEIGHT = 8208;
   static const SPI_SETFOCUSBORDERHEIGHT = 8209;
-  static const SPI_GETFONTSMOOTHINGORIENTATION =
-      SYSTEM_PARAMETERS_INFO_ACTION(8210);
-  static const SPI_SETFONTSMOOTHINGORIENTATION =
-      SYSTEM_PARAMETERS_INFO_ACTION(8211);
+  static const SPI_GETFONTSMOOTHINGORIENTATION = SYSTEM_PARAMETERS_INFO_ACTION(
+    8210,
+  );
+  static const SPI_SETFONTSMOOTHINGORIENTATION = SYSTEM_PARAMETERS_INFO_ACTION(
+    8211,
+  );
   static const SPI_GETMINIMUMHITRADIUS = 8212;
   static const SPI_SETMINIMUMHITRADIUS = 8213;
   static const SPI_GETMESSAGEDURATION = 8214;
   static const SPI_SETMESSAGEDURATION = 8215;
-  static const SPI_GETCONTACTVISUALIZATION =
-      SYSTEM_PARAMETERS_INFO_ACTION(8216);
-  static const SPI_SETCONTACTVISUALIZATION =
-      SYSTEM_PARAMETERS_INFO_ACTION(8217);
-  static const SPI_GETGESTUREVISUALIZATION =
-      SYSTEM_PARAMETERS_INFO_ACTION(8218);
-  static const SPI_SETGESTUREVISUALIZATION =
-      SYSTEM_PARAMETERS_INFO_ACTION(8219);
+  static const SPI_GETCONTACTVISUALIZATION = SYSTEM_PARAMETERS_INFO_ACTION(
+    8216,
+  );
+  static const SPI_SETCONTACTVISUALIZATION = SYSTEM_PARAMETERS_INFO_ACTION(
+    8217,
+  );
+  static const SPI_GETGESTUREVISUALIZATION = SYSTEM_PARAMETERS_INFO_ACTION(
+    8218,
+  );
+  static const SPI_SETGESTUREVISUALIZATION = SYSTEM_PARAMETERS_INFO_ACTION(
+    8219,
+  );
   static const SPI_GETMOUSEWHEELROUTING = 8220;
   static const SPI_SETMOUSEWHEELROUTING = 8221;
   static const SPI_GETPENVISUALIZATION = 8222;
@@ -6832,8 +6899,9 @@ extension type const UIA_ANNOTATIONTYPE(int _) implements int {
   static const AnnotationType_Author = 60019;
   static const AnnotationType_AdvancedProofingIssue = 60020;
   static const AnnotationType_DataValidationError = 60021;
-  static const AnnotationType_CircularReferenceError =
-      UIA_ANNOTATIONTYPE(60022);
+  static const AnnotationType_CircularReferenceError = UIA_ANNOTATIONTYPE(
+    60022,
+  );
   static const AnnotationType_Mathematics = 60023;
   static const AnnotationType_Sensitive = 60024;
 }
@@ -6895,8 +6963,9 @@ extension type const UIA_EVENT_ID(int _) implements int {
   static const UIA_MenuClosedEventId = 20007;
   static const UIA_LayoutInvalidatedEventId = 20008;
   static const UIA_Invoke_InvokedEventId = 20009;
-  static const UIA_SelectionItem_ElementAddedToSelectionEventId =
-      UIA_EVENT_ID(20010);
+  static const UIA_SelectionItem_ElementAddedToSelectionEventId = UIA_EVENT_ID(
+    20010,
+  );
   static const UIA_SelectionItem_ElementRemovedFromSelectionEventId =
       UIA_EVENT_ID(20011);
   static const UIA_SelectionItem_ElementSelectedEventId = 20012;
@@ -6920,8 +6989,9 @@ extension type const UIA_EVENT_ID(int _) implements int {
   static const UIA_DropTarget_DragLeaveEventId = 20030;
   static const UIA_DropTarget_DroppedEventId = 20031;
   static const UIA_TextEdit_TextChangedEventId = 20032;
-  static const UIA_TextEdit_ConversionTargetChangedEventId =
-      UIA_EVENT_ID(20033);
+  static const UIA_TextEdit_ConversionTargetChangedEventId = UIA_EVENT_ID(
+    20033,
+  );
   static const UIA_ChangesEventId = 20034;
   static const UIA_NotificationEventId = 20035;
   static const UIA_ActiveTextPositionChangedEventId = 20036;
@@ -7024,30 +7094,39 @@ extension type const UIA_PROPERTY_ID(int _) implements int {
   static const UIA_IsRequiredForFormPropertyId = 30025;
   static const UIA_ItemStatusPropertyId = 30026;
   static const UIA_IsDockPatternAvailablePropertyId = 30027;
-  static const UIA_IsExpandCollapsePatternAvailablePropertyId =
-      UIA_PROPERTY_ID(30028);
-  static const UIA_IsGridItemPatternAvailablePropertyId =
-      UIA_PROPERTY_ID(30029);
+  static const UIA_IsExpandCollapsePatternAvailablePropertyId = UIA_PROPERTY_ID(
+    30028,
+  );
+  static const UIA_IsGridItemPatternAvailablePropertyId = UIA_PROPERTY_ID(
+    30029,
+  );
   static const UIA_IsGridPatternAvailablePropertyId = 30030;
   static const UIA_IsInvokePatternAvailablePropertyId = 30031;
-  static const UIA_IsMultipleViewPatternAvailablePropertyId =
-      UIA_PROPERTY_ID(30032);
-  static const UIA_IsRangeValuePatternAvailablePropertyId =
-      UIA_PROPERTY_ID(30033);
+  static const UIA_IsMultipleViewPatternAvailablePropertyId = UIA_PROPERTY_ID(
+    30032,
+  );
+  static const UIA_IsRangeValuePatternAvailablePropertyId = UIA_PROPERTY_ID(
+    30033,
+  );
   static const UIA_IsScrollPatternAvailablePropertyId = 30034;
-  static const UIA_IsScrollItemPatternAvailablePropertyId =
-      UIA_PROPERTY_ID(30035);
-  static const UIA_IsSelectionItemPatternAvailablePropertyId =
-      UIA_PROPERTY_ID(30036);
-  static const UIA_IsSelectionPatternAvailablePropertyId =
-      UIA_PROPERTY_ID(30037);
+  static const UIA_IsScrollItemPatternAvailablePropertyId = UIA_PROPERTY_ID(
+    30035,
+  );
+  static const UIA_IsSelectionItemPatternAvailablePropertyId = UIA_PROPERTY_ID(
+    30036,
+  );
+  static const UIA_IsSelectionPatternAvailablePropertyId = UIA_PROPERTY_ID(
+    30037,
+  );
   static const UIA_IsTablePatternAvailablePropertyId = 30038;
-  static const UIA_IsTableItemPatternAvailablePropertyId =
-      UIA_PROPERTY_ID(30039);
+  static const UIA_IsTableItemPatternAvailablePropertyId = UIA_PROPERTY_ID(
+    30039,
+  );
   static const UIA_IsTextPatternAvailablePropertyId = 30040;
   static const UIA_IsTogglePatternAvailablePropertyId = 30041;
-  static const UIA_IsTransformPatternAvailablePropertyId =
-      UIA_PROPERTY_ID(30042);
+  static const UIA_IsTransformPatternAvailablePropertyId = UIA_PROPERTY_ID(
+    30042,
+  );
   static const UIA_IsValuePatternAvailablePropertyId = 30043;
   static const UIA_IsWindowPatternAvailablePropertyId = 30044;
   static const UIA_ValueValuePropertyId = 30045;
@@ -7058,21 +7137,27 @@ extension type const UIA_PROPERTY_ID(int _) implements int {
   static const UIA_RangeValueMaximumPropertyId = 30050;
   static const UIA_RangeValueLargeChangePropertyId = 30051;
   static const UIA_RangeValueSmallChangePropertyId = 30052;
-  static const UIA_ScrollHorizontalScrollPercentPropertyId =
-      UIA_PROPERTY_ID(30053);
+  static const UIA_ScrollHorizontalScrollPercentPropertyId = UIA_PROPERTY_ID(
+    30053,
+  );
   static const UIA_ScrollHorizontalViewSizePropertyId = 30054;
-  static const UIA_ScrollVerticalScrollPercentPropertyId =
-      UIA_PROPERTY_ID(30055);
+  static const UIA_ScrollVerticalScrollPercentPropertyId = UIA_PROPERTY_ID(
+    30055,
+  );
   static const UIA_ScrollVerticalViewSizePropertyId = 30056;
-  static const UIA_ScrollHorizontallyScrollablePropertyId =
-      UIA_PROPERTY_ID(30057);
-  static const UIA_ScrollVerticallyScrollablePropertyId =
-      UIA_PROPERTY_ID(30058);
+  static const UIA_ScrollHorizontallyScrollablePropertyId = UIA_PROPERTY_ID(
+    30057,
+  );
+  static const UIA_ScrollVerticallyScrollablePropertyId = UIA_PROPERTY_ID(
+    30058,
+  );
   static const UIA_SelectionSelectionPropertyId = 30059;
-  static const UIA_SelectionCanSelectMultiplePropertyId =
-      UIA_PROPERTY_ID(30060);
-  static const UIA_SelectionIsSelectionRequiredPropertyId =
-      UIA_PROPERTY_ID(30061);
+  static const UIA_SelectionCanSelectMultiplePropertyId = UIA_PROPERTY_ID(
+    30060,
+  );
+  static const UIA_SelectionIsSelectionRequiredPropertyId = UIA_PROPERTY_ID(
+    30061,
+  );
   static const UIA_GridRowCountPropertyId = 30062;
   static const UIA_GridColumnCountPropertyId = 30063;
   static const UIA_GridItemRowPropertyId = 30064;
@@ -7084,24 +7169,28 @@ extension type const UIA_PROPERTY_ID(int _) implements int {
   static const UIA_ExpandCollapseExpandCollapseStatePropertyId =
       UIA_PROPERTY_ID(30070);
   static const UIA_MultipleViewCurrentViewPropertyId = 30071;
-  static const UIA_MultipleViewSupportedViewsPropertyId =
-      UIA_PROPERTY_ID(30072);
+  static const UIA_MultipleViewSupportedViewsPropertyId = UIA_PROPERTY_ID(
+    30072,
+  );
   static const UIA_WindowCanMaximizePropertyId = 30073;
   static const UIA_WindowCanMinimizePropertyId = 30074;
   static const UIA_WindowWindowVisualStatePropertyId = 30075;
-  static const UIA_WindowWindowInteractionStatePropertyId =
-      UIA_PROPERTY_ID(30076);
+  static const UIA_WindowWindowInteractionStatePropertyId = UIA_PROPERTY_ID(
+    30076,
+  );
   static const UIA_WindowIsModalPropertyId = 30077;
   static const UIA_WindowIsTopmostPropertyId = 30078;
   static const UIA_SelectionItemIsSelectedPropertyId = 30079;
-  static const UIA_SelectionItemSelectionContainerPropertyId =
-      UIA_PROPERTY_ID(30080);
+  static const UIA_SelectionItemSelectionContainerPropertyId = UIA_PROPERTY_ID(
+    30080,
+  );
   static const UIA_TableRowHeadersPropertyId = 30081;
   static const UIA_TableColumnHeadersPropertyId = 30082;
   static const UIA_TableRowOrColumnMajorPropertyId = 30083;
   static const UIA_TableItemRowHeaderItemsPropertyId = 30084;
-  static const UIA_TableItemColumnHeaderItemsPropertyId =
-      UIA_PROPERTY_ID(30085);
+  static const UIA_TableItemColumnHeaderItemsPropertyId = UIA_PROPERTY_ID(
+    30085,
+  );
   static const UIA_ToggleToggleStatePropertyId = 30086;
   static const UIA_TransformCanMovePropertyId = 30087;
   static const UIA_TransformCanResizePropertyId = 30088;
@@ -7111,17 +7200,20 @@ extension type const UIA_PROPERTY_ID(int _) implements int {
   static const UIA_LegacyIAccessibleChildIdPropertyId = 30091;
   static const UIA_LegacyIAccessibleNamePropertyId = 30092;
   static const UIA_LegacyIAccessibleValuePropertyId = 30093;
-  static const UIA_LegacyIAccessibleDescriptionPropertyId =
-      UIA_PROPERTY_ID(30094);
+  static const UIA_LegacyIAccessibleDescriptionPropertyId = UIA_PROPERTY_ID(
+    30094,
+  );
   static const UIA_LegacyIAccessibleRolePropertyId = 30095;
   static const UIA_LegacyIAccessibleStatePropertyId = 30096;
   static const UIA_LegacyIAccessibleHelpPropertyId = 30097;
   static const UIA_LegacyIAccessibleKeyboardShortcutPropertyId =
       UIA_PROPERTY_ID(30098);
-  static const UIA_LegacyIAccessibleSelectionPropertyId =
-      UIA_PROPERTY_ID(30099);
-  static const UIA_LegacyIAccessibleDefaultActionPropertyId =
-      UIA_PROPERTY_ID(30100);
+  static const UIA_LegacyIAccessibleSelectionPropertyId = UIA_PROPERTY_ID(
+    30099,
+  );
+  static const UIA_LegacyIAccessibleDefaultActionPropertyId = UIA_PROPERTY_ID(
+    30100,
+  );
   static const UIA_AriaRolePropertyId = 30101;
   static const UIA_AriaPropertiesPropertyId = 30102;
   static const UIA_IsDataValidForFormPropertyId = 30103;
@@ -7129,24 +7221,29 @@ extension type const UIA_PROPERTY_ID(int _) implements int {
   static const UIA_DescribedByPropertyId = 30105;
   static const UIA_FlowsToPropertyId = 30106;
   static const UIA_ProviderDescriptionPropertyId = 30107;
-  static const UIA_IsItemContainerPatternAvailablePropertyId =
-      UIA_PROPERTY_ID(30108);
+  static const UIA_IsItemContainerPatternAvailablePropertyId = UIA_PROPERTY_ID(
+    30108,
+  );
   static const UIA_IsVirtualizedItemPatternAvailablePropertyId =
       UIA_PROPERTY_ID(30109);
   static const UIA_IsSynchronizedInputPatternAvailablePropertyId =
       UIA_PROPERTY_ID(30110);
   static const UIA_OptimizeForVisualContentPropertyId = 30111;
-  static const UIA_IsObjectModelPatternAvailablePropertyId =
-      UIA_PROPERTY_ID(30112);
-  static const UIA_AnnotationAnnotationTypeIdPropertyId =
-      UIA_PROPERTY_ID(30113);
-  static const UIA_AnnotationAnnotationTypeNamePropertyId =
-      UIA_PROPERTY_ID(30114);
+  static const UIA_IsObjectModelPatternAvailablePropertyId = UIA_PROPERTY_ID(
+    30112,
+  );
+  static const UIA_AnnotationAnnotationTypeIdPropertyId = UIA_PROPERTY_ID(
+    30113,
+  );
+  static const UIA_AnnotationAnnotationTypeNamePropertyId = UIA_PROPERTY_ID(
+    30114,
+  );
   static const UIA_AnnotationAuthorPropertyId = 30115;
   static const UIA_AnnotationDateTimePropertyId = 30116;
   static const UIA_AnnotationTargetPropertyId = 30117;
-  static const UIA_IsAnnotationPatternAvailablePropertyId =
-      UIA_PROPERTY_ID(30118);
+  static const UIA_IsAnnotationPatternAvailablePropertyId = UIA_PROPERTY_ID(
+    30118,
+  );
   static const UIA_IsTextPattern2AvailablePropertyId = 30119;
   static const UIA_StylesStyleIdPropertyId = 30120;
   static const UIA_StylesStyleNamePropertyId = 30121;
@@ -7156,38 +7253,47 @@ extension type const UIA_PROPERTY_ID(int _) implements int {
   static const UIA_StylesFillPatternColorPropertyId = 30125;
   static const UIA_StylesExtendedPropertiesPropertyId = 30126;
   static const UIA_IsStylesPatternAvailablePropertyId = 30127;
-  static const UIA_IsSpreadsheetPatternAvailablePropertyId =
-      UIA_PROPERTY_ID(30128);
+  static const UIA_IsSpreadsheetPatternAvailablePropertyId = UIA_PROPERTY_ID(
+    30128,
+  );
   static const UIA_SpreadsheetItemFormulaPropertyId = 30129;
-  static const UIA_SpreadsheetItemAnnotationObjectsPropertyId =
-      UIA_PROPERTY_ID(30130);
-  static const UIA_SpreadsheetItemAnnotationTypesPropertyId =
-      UIA_PROPERTY_ID(30131);
+  static const UIA_SpreadsheetItemAnnotationObjectsPropertyId = UIA_PROPERTY_ID(
+    30130,
+  );
+  static const UIA_SpreadsheetItemAnnotationTypesPropertyId = UIA_PROPERTY_ID(
+    30131,
+  );
   static const UIA_IsSpreadsheetItemPatternAvailablePropertyId =
       UIA_PROPERTY_ID(30132);
   static const UIA_Transform2CanZoomPropertyId = 30133;
-  static const UIA_IsTransformPattern2AvailablePropertyId =
-      UIA_PROPERTY_ID(30134);
+  static const UIA_IsTransformPattern2AvailablePropertyId = UIA_PROPERTY_ID(
+    30134,
+  );
   static const UIA_LiveSettingPropertyId = 30135;
-  static const UIA_IsTextChildPatternAvailablePropertyId =
-      UIA_PROPERTY_ID(30136);
+  static const UIA_IsTextChildPatternAvailablePropertyId = UIA_PROPERTY_ID(
+    30136,
+  );
   static const UIA_IsDragPatternAvailablePropertyId = 30137;
   static const UIA_DragIsGrabbedPropertyId = 30138;
   static const UIA_DragDropEffectPropertyId = 30139;
   static const UIA_DragDropEffectsPropertyId = 30140;
-  static const UIA_IsDropTargetPatternAvailablePropertyId =
-      UIA_PROPERTY_ID(30141);
-  static const UIA_DropTargetDropTargetEffectPropertyId =
-      UIA_PROPERTY_ID(30142);
-  static const UIA_DropTargetDropTargetEffectsPropertyId =
-      UIA_PROPERTY_ID(30143);
+  static const UIA_IsDropTargetPatternAvailablePropertyId = UIA_PROPERTY_ID(
+    30141,
+  );
+  static const UIA_DropTargetDropTargetEffectPropertyId = UIA_PROPERTY_ID(
+    30142,
+  );
+  static const UIA_DropTargetDropTargetEffectsPropertyId = UIA_PROPERTY_ID(
+    30143,
+  );
   static const UIA_DragGrabbedItemsPropertyId = 30144;
   static const UIA_Transform2ZoomLevelPropertyId = 30145;
   static const UIA_Transform2ZoomMinimumPropertyId = 30146;
   static const UIA_Transform2ZoomMaximumPropertyId = 30147;
   static const UIA_FlowsFromPropertyId = 30148;
-  static const UIA_IsTextEditPatternAvailablePropertyId =
-      UIA_PROPERTY_ID(30149);
+  static const UIA_IsTextEditPatternAvailablePropertyId = UIA_PROPERTY_ID(
+    30149,
+  );
   static const UIA_IsPeripheralPropertyId = 30150;
   static const UIA_IsCustomNavigationPatternAvailablePropertyId =
       UIA_PROPERTY_ID(30151);
@@ -7207,14 +7313,18 @@ extension type const UIA_PROPERTY_ID(int _) implements int {
   static const UIA_CenterPointPropertyId = 30165;
   static const UIA_RotationPropertyId = 30166;
   static const UIA_SizePropertyId = 30167;
-  static const UIA_IsSelectionPattern2AvailablePropertyId =
-      UIA_PROPERTY_ID(30168);
-  static const UIA_Selection2FirstSelectedItemPropertyId =
-      UIA_PROPERTY_ID(30169);
-  static const UIA_Selection2LastSelectedItemPropertyId =
-      UIA_PROPERTY_ID(30170);
-  static const UIA_Selection2CurrentSelectedItemPropertyId =
-      UIA_PROPERTY_ID(30171);
+  static const UIA_IsSelectionPattern2AvailablePropertyId = UIA_PROPERTY_ID(
+    30168,
+  );
+  static const UIA_Selection2FirstSelectedItemPropertyId = UIA_PROPERTY_ID(
+    30169,
+  );
+  static const UIA_Selection2LastSelectedItemPropertyId = UIA_PROPERTY_ID(
+    30170,
+  );
+  static const UIA_Selection2CurrentSelectedItemPropertyId = UIA_PROPERTY_ID(
+    30171,
+  );
   static const UIA_Selection2ItemCountPropertyId = 30172;
   static const UIA_HeadingLevelPropertyId = 30173;
   static const UIA_IsDialogPropertyId = 30174;
@@ -7252,10 +7362,12 @@ extension type const UIA_TEXTATTRIBUTE_ID(int _) implements int {
   static const UIA_FontSizeAttributeId = 40006;
   static const UIA_FontWeightAttributeId = 40007;
   static const UIA_ForegroundColorAttributeId = 40008;
-  static const UIA_HorizontalTextAlignmentAttributeId =
-      UIA_TEXTATTRIBUTE_ID(40009);
-  static const UIA_IndentationFirstLineAttributeId =
-      UIA_TEXTATTRIBUTE_ID(40010);
+  static const UIA_HorizontalTextAlignmentAttributeId = UIA_TEXTATTRIBUTE_ID(
+    40009,
+  );
+  static const UIA_IndentationFirstLineAttributeId = UIA_TEXTATTRIBUTE_ID(
+    40010,
+  );
   static const UIA_IndentationLeadingAttributeId = 40011;
   static const UIA_IndentationTrailingAttributeId = 40012;
   static const UIA_IsHiddenAttributeId = 40013;
@@ -7286,10 +7398,12 @@ extension type const UIA_TEXTATTRIBUTE_ID(int _) implements int {
   static const UIA_CaretPositionAttributeId = 40038;
   static const UIA_CaretBidiModeAttributeId = 40039;
   static const UIA_LineSpacingAttributeId = 40040;
-  static const UIA_BeforeParagraphSpacingAttributeId =
-      UIA_TEXTATTRIBUTE_ID(40041);
-  static const UIA_AfterParagraphSpacingAttributeId =
-      UIA_TEXTATTRIBUTE_ID(40042);
+  static const UIA_BeforeParagraphSpacingAttributeId = UIA_TEXTATTRIBUTE_ID(
+    40041,
+  );
+  static const UIA_AfterParagraphSpacingAttributeId = UIA_TEXTATTRIBUTE_ID(
+    40042,
+  );
   static const UIA_SayAsInterpretAsAttributeId = 40043;
 }
 
@@ -7858,8 +7972,9 @@ extension type const WBEM_CONDITION_FLAG_TYPE(int _) implements int {
 
   static const WBEM_FLAG_CLASS_OVERRIDES_ONLY = 256;
 
-  static const WBEM_FLAG_CLASS_LOCAL_AND_OVERRIDES =
-      WBEM_CONDITION_FLAG_TYPE(512);
+  static const WBEM_FLAG_CLASS_LOCAL_AND_OVERRIDES = WBEM_CONDITION_FLAG_TYPE(
+    512,
+  );
 
   static const WBEM_MASK_CLASS_CONDITION = 768;
 }
@@ -7940,10 +8055,12 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_NO_AUTHENTICODE_CATALOG = 3758096959;
   static const ERROR_AUTHENTICODE_DISALLOWED = 3758096960;
   static const ERROR_AUTHENTICODE_TRUSTED_PUBLISHER = 3758096961;
-  static const ERROR_AUTHENTICODE_TRUST_NOT_ESTABLISHED =
-      WIN32_ERROR(3758096962);
-  static const ERROR_AUTHENTICODE_PUBLISHER_NOT_TRUSTED =
-      WIN32_ERROR(3758096963);
+  static const ERROR_AUTHENTICODE_TRUST_NOT_ESTABLISHED = WIN32_ERROR(
+    3758096962,
+  );
+  static const ERROR_AUTHENTICODE_PUBLISHER_NOT_TRUSTED = WIN32_ERROR(
+    3758096963,
+  );
   static const ERROR_SIGNATURE_OSATTRIBUTE_MISMATCH = 3758096964;
   static const ERROR_ONLY_VALIDATE_VIA_AUTHENTICODE = 3758096965;
   static const ERROR_DEVICE_INSTALLER_NOT_READY = 3758096966;
@@ -8223,20 +8340,24 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_CLOUD_FILE_METADATA_CORRUPT = 363;
   static const ERROR_CLOUD_FILE_METADATA_TOO_LARGE = 364;
   static const ERROR_CLOUD_FILE_PROPERTY_BLOB_TOO_LARGE = 365;
-  static const ERROR_CLOUD_FILE_PROPERTY_BLOB_CHECKSUM_MISMATCH =
-      WIN32_ERROR(366);
+  static const ERROR_CLOUD_FILE_PROPERTY_BLOB_CHECKSUM_MISMATCH = WIN32_ERROR(
+    366,
+  );
   static const ERROR_CHILD_PROCESS_BLOCKED = 367;
   static const ERROR_STORAGE_LOST_DATA_PERSISTENCE = 368;
   static const ERROR_FILE_SYSTEM_VIRTUALIZATION_UNAVAILABLE = 369;
-  static const ERROR_FILE_SYSTEM_VIRTUALIZATION_METADATA_CORRUPT =
-      WIN32_ERROR(370);
+  static const ERROR_FILE_SYSTEM_VIRTUALIZATION_METADATA_CORRUPT = WIN32_ERROR(
+    370,
+  );
   static const ERROR_FILE_SYSTEM_VIRTUALIZATION_BUSY = 371;
-  static const ERROR_FILE_SYSTEM_VIRTUALIZATION_PROVIDER_UNKNOWN =
-      WIN32_ERROR(372);
+  static const ERROR_FILE_SYSTEM_VIRTUALIZATION_PROVIDER_UNKNOWN = WIN32_ERROR(
+    372,
+  );
   static const ERROR_GDI_HANDLE_LEAK = 373;
   static const ERROR_CLOUD_FILE_TOO_MANY_PROPERTY_BLOBS = 374;
-  static const ERROR_CLOUD_FILE_PROPERTY_VERSION_NOT_SUPPORTED =
-      WIN32_ERROR(375);
+  static const ERROR_CLOUD_FILE_PROPERTY_VERSION_NOT_SUPPORTED = WIN32_ERROR(
+    375,
+  );
   static const ERROR_NOT_A_CLOUD_FILE = 376;
   static const ERROR_CLOUD_FILE_NOT_IN_SYNC = 377;
   static const ERROR_CLOUD_FILE_ALREADY_CONNECTED = 378;
@@ -8246,8 +8367,9 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_CLOUD_FILE_CONNECTED_PROVIDER_ONLY = 382;
   static const ERROR_CLOUD_FILE_VALIDATION_FAILED = 383;
   static const ERROR_SMB1_NOT_AVAILABLE = 384;
-  static const ERROR_FILE_SYSTEM_VIRTUALIZATION_INVALID_OPERATION =
-      WIN32_ERROR(385);
+  static const ERROR_FILE_SYSTEM_VIRTUALIZATION_INVALID_OPERATION = WIN32_ERROR(
+    385,
+  );
   static const ERROR_CLOUD_FILE_AUTHENTICATION_FAILED = 386;
   static const ERROR_CLOUD_FILE_INSUFFICIENT_RESOURCES = 387;
   static const ERROR_CLOUD_FILE_NETWORK_UNAVAILABLE = 388;
@@ -8273,12 +8395,15 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_NO_PHYSICALLY_ALIGNED_FREE_SPACE_FOUND = 408;
   static const ERROR_APPX_FILE_NOT_ENCRYPTED = 409;
   static const ERROR_RWRAW_ENCRYPTED_FILE_NOT_ENCRYPTED = 410;
-  static const ERROR_RWRAW_ENCRYPTED_INVALID_EDATAINFO_FILEOFFSET =
-      WIN32_ERROR(411);
-  static const ERROR_RWRAW_ENCRYPTED_INVALID_EDATAINFO_FILERANGE =
-      WIN32_ERROR(412);
-  static const ERROR_RWRAW_ENCRYPTED_INVALID_EDATAINFO_PARAMETER =
-      WIN32_ERROR(413);
+  static const ERROR_RWRAW_ENCRYPTED_INVALID_EDATAINFO_FILEOFFSET = WIN32_ERROR(
+    411,
+  );
+  static const ERROR_RWRAW_ENCRYPTED_INVALID_EDATAINFO_FILERANGE = WIN32_ERROR(
+    412,
+  );
+  static const ERROR_RWRAW_ENCRYPTED_INVALID_EDATAINFO_PARAMETER = WIN32_ERROR(
+    413,
+  );
   static const ERROR_LINUX_SUBSYSTEM_NOT_PRESENT = 414;
   static const ERROR_FT_READ_FAILURE = 415;
   static const ERROR_STORAGE_RESERVE_ID_INVALID = 416;
@@ -8338,8 +8463,9 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_INVALID_CONFIG_VALUE = 479;
   static const ERROR_PNP_QUERY_REMOVE_DEVICE_TIMEOUT = 480;
   static const ERROR_PNP_QUERY_REMOVE_RELATED_DEVICE_TIMEOUT = 481;
-  static const ERROR_PNP_QUERY_REMOVE_UNRELATED_DEVICE_TIMEOUT =
-      WIN32_ERROR(482);
+  static const ERROR_PNP_QUERY_REMOVE_UNRELATED_DEVICE_TIMEOUT = WIN32_ERROR(
+    482,
+  );
   static const ERROR_DEVICE_HARDWARE_ERROR = 483;
   static const ERROR_INVALID_ADDRESS = 487;
   static const ERROR_HAS_SYSTEM_CRITICAL_FILES = 488;
@@ -8618,10 +8744,12 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_ACCESS_AUDIT_BY_POLICY = 785;
   static const ERROR_ACCESS_DISABLED_NO_SAFER_UI_BY_POLICY = 786;
   static const ERROR_ABANDON_HIBERFILE = 787;
-  static const ERROR_LOST_WRITEBEHIND_DATA_NETWORK_DISCONNECTED =
-      WIN32_ERROR(788);
-  static const ERROR_LOST_WRITEBEHIND_DATA_NETWORK_SERVER_ERROR =
-      WIN32_ERROR(789);
+  static const ERROR_LOST_WRITEBEHIND_DATA_NETWORK_DISCONNECTED = WIN32_ERROR(
+    788,
+  );
+  static const ERROR_LOST_WRITEBEHIND_DATA_NETWORK_SERVER_ERROR = WIN32_ERROR(
+    789,
+  );
   static const ERROR_LOST_WRITEBEHIND_DATA_LOCAL_DISK_ERROR = 790;
   static const ERROR_BAD_MCFG_TABLE = 791;
   static const ERROR_DISK_REPAIR_REDIRECTED = 792;
@@ -8649,8 +8777,9 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_ENCLAVE_NOT_TERMINATED = 814;
   static const ERROR_ENCLAVE_VIOLATION = 815;
   static const ERROR_SERVER_TRANSPORT_CONFLICT = 816;
-  static const ERROR_CERTIFICATE_VALIDATION_PREFERENCE_CONFLICT =
-      WIN32_ERROR(817);
+  static const ERROR_CERTIFICATE_VALIDATION_PREFERENCE_CONFLICT = WIN32_ERROR(
+    817,
+  );
   static const ERROR_FT_READ_FROM_COPY_FAILURE = 818;
   static const ERROR_SECTION_DIRECT_MAP_ONLY = 819;
   static const ERROR_EA_ACCESS_DENIED = 994;
@@ -9230,16 +9359,18 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_APPEXEC_CONDITION_NOT_SATISFIED = 3060;
   static const ERROR_APPEXEC_HANDLE_INVALIDATED = 3061;
   static const ERROR_APPEXEC_INVALID_HOST_GENERATION = 3062;
-  static const ERROR_APPEXEC_UNEXPECTED_PROCESS_REGISTRATION =
-      WIN32_ERROR(3063);
+  static const ERROR_APPEXEC_UNEXPECTED_PROCESS_REGISTRATION = WIN32_ERROR(
+    3063,
+  );
   static const ERROR_APPEXEC_INVALID_HOST_STATE = 3064;
   static const ERROR_APPEXEC_NO_DONOR = 3065;
   static const ERROR_APPEXEC_HOST_ID_MISMATCH = 3066;
   static const ERROR_APPEXEC_UNKNOWN_USER = 3067;
   static const ERROR_APPEXEC_APP_COMPAT_BLOCK = 3068;
   static const ERROR_APPEXEC_CALLER_WAIT_TIMEOUT = 3069;
-  static const ERROR_APPEXEC_CALLER_WAIT_TIMEOUT_TERMINATION =
-      WIN32_ERROR(3070);
+  static const ERROR_APPEXEC_CALLER_WAIT_TIMEOUT_TERMINATION = WIN32_ERROR(
+    3070,
+  );
   static const ERROR_APPEXEC_CALLER_WAIT_TIMEOUT_LICENSING = 3071;
   static const ERROR_APPEXEC_CALLER_WAIT_TIMEOUT_RESOURCES = 3072;
   static const ERROR_VRF_VOLATILE_CFG_AND_IO_ENABLED = 3080;
@@ -9358,8 +9489,9 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_SECUREBOOT_PLATFORM_ID_MISMATCH = 4430;
   static const ERROR_SECUREBOOT_POLICY_ROLLBACK_DETECTED = 4431;
   static const ERROR_SECUREBOOT_POLICY_UPGRADE_MISMATCH = 4432;
-  static const ERROR_SECUREBOOT_REQUIRED_POLICY_FILE_MISSING =
-      WIN32_ERROR(4433);
+  static const ERROR_SECUREBOOT_REQUIRED_POLICY_FILE_MISSING = WIN32_ERROR(
+    4433,
+  );
   static const ERROR_SECUREBOOT_NOT_BASE_POLICY = 4434;
   static const ERROR_SECUREBOOT_NOT_SUPPLEMENTAL_POLICY = 4435;
   static const ERROR_OFFLOAD_READ_FLT_NOT_SUPPORTED = 4440;
@@ -9382,23 +9514,27 @@ extension type const WIN32_ERROR(int _) implements int {
       WIN32_ERROR(4555);
   static const ERROR_SYSTEM_INTEGRITY_REPUTATION_MALICIOUS = 4556;
   static const ERROR_SYSTEM_INTEGRITY_REPUTATION_PUA = 4557;
-  static const ERROR_SYSTEM_INTEGRITY_REPUTATION_DANGEROUS_EXT =
-      WIN32_ERROR(4558);
+  static const ERROR_SYSTEM_INTEGRITY_REPUTATION_DANGEROUS_EXT = WIN32_ERROR(
+    4558,
+  );
   static const ERROR_SYSTEM_INTEGRITY_REPUTATION_OFFLINE = 4559;
   static const ERROR_VSM_NOT_INITIALIZED = 4560;
   static const ERROR_VSM_DMA_PROTECTION_NOT_IN_USE = 4561;
   static const ERROR_PLATFORM_MANIFEST_NOT_AUTHORIZED = 4570;
   static const ERROR_PLATFORM_MANIFEST_INVALID = 4571;
   static const ERROR_PLATFORM_MANIFEST_FILE_NOT_AUTHORIZED = 4572;
-  static const ERROR_PLATFORM_MANIFEST_CATALOG_NOT_AUTHORIZED =
-      WIN32_ERROR(4573);
+  static const ERROR_PLATFORM_MANIFEST_CATALOG_NOT_AUTHORIZED = WIN32_ERROR(
+    4573,
+  );
   static const ERROR_PLATFORM_MANIFEST_BINARY_ID_NOT_FOUND = 4574;
   static const ERROR_PLATFORM_MANIFEST_NOT_ACTIVE = 4575;
   static const ERROR_PLATFORM_MANIFEST_NOT_SIGNED = 4576;
-  static const ERROR_SYSTEM_INTEGRITY_REPUTATION_UNFRIENDLY_FILE =
-      WIN32_ERROR(4580);
-  static const ERROR_SYSTEM_INTEGRITY_REPUTATION_UNATTAINABLE =
-      WIN32_ERROR(4581);
+  static const ERROR_SYSTEM_INTEGRITY_REPUTATION_UNFRIENDLY_FILE = WIN32_ERROR(
+    4580,
+  );
+  static const ERROR_SYSTEM_INTEGRITY_REPUTATION_UNATTAINABLE = WIN32_ERROR(
+    4581,
+  );
   static const ERROR_SYSTEM_INTEGRITY_REPUTATION_EXPLICIT_DENY_FILE =
       WIN32_ERROR(4582);
   static const ERROR_DEPENDENT_RESOURCE_EXISTS = 5001;
@@ -9503,8 +9639,9 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_CLUSTER_CANT_CREATE_DUP_CLUSTER_NAME = 5900;
   static const ERROR_CLUSCFG_ALREADY_COMMITTED = 5901;
   static const ERROR_CLUSCFG_ROLLBACK_FAILED = 5902;
-  static const ERROR_CLUSCFG_SYSTEM_DISK_DRIVE_LETTER_CONFLICT =
-      WIN32_ERROR(5903);
+  static const ERROR_CLUSCFG_SYSTEM_DISK_DRIVE_LETTER_CONFLICT = WIN32_ERROR(
+    5903,
+  );
   static const ERROR_CLUSTER_OLD_VERSION = 5904;
   static const ERROR_CLUSTER_MISMATCHED_COMPUTER_ACCT_NAME = 5905;
   static const ERROR_CLUSTER_NO_NET_ADAPTERS = 5906;
@@ -9519,10 +9656,12 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_CLUSTER_REGISTRY_INVALID_FUNCTION = 5915;
   static const ERROR_CLUSTER_INVALID_STRING_TERMINATION = 5916;
   static const ERROR_CLUSTER_INVALID_STRING_FORMAT = 5917;
-  static const ERROR_CLUSTER_DATABASE_TRANSACTION_IN_PROGRESS =
-      WIN32_ERROR(5918);
-  static const ERROR_CLUSTER_DATABASE_TRANSACTION_NOT_IN_PROGRESS =
-      WIN32_ERROR(5919);
+  static const ERROR_CLUSTER_DATABASE_TRANSACTION_IN_PROGRESS = WIN32_ERROR(
+    5918,
+  );
+  static const ERROR_CLUSTER_DATABASE_TRANSACTION_NOT_IN_PROGRESS = WIN32_ERROR(
+    5919,
+  );
   static const ERROR_CLUSTER_NULL_DATA = 5920;
   static const ERROR_CLUSTER_PARTIAL_READ = 5921;
   static const ERROR_CLUSTER_PARTIAL_WRITE = 5922;
@@ -9568,8 +9707,9 @@ extension type const WIN32_ERROR(int _) implements int {
       WIN32_ERROR(5958);
   static const ERROR_CLUSTER_GROUP_QUEUED = 5959;
   static const ERROR_CLUSTER_RESOURCE_LOCKED_STATUS = 5960;
-  static const ERROR_CLUSTER_SHARED_VOLUME_FAILOVER_NOT_ALLOWED =
-      WIN32_ERROR(5961);
+  static const ERROR_CLUSTER_SHARED_VOLUME_FAILOVER_NOT_ALLOWED = WIN32_ERROR(
+    5961,
+  );
   static const ERROR_CLUSTER_NODE_DRAIN_IN_PROGRESS = 5962;
   static const ERROR_CLUSTER_DISK_NOT_CONNECTED = 5963;
   static const ERROR_DISK_NOT_CSV_CAPABLE = 5964;
@@ -9579,14 +9719,17 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_CLUSTER_CANNOT_RETURN_PROPERTIES = 5968;
   static const ERROR_CLUSTER_RESOURCE_CONTAINS_UNSUPPORTED_DIFF_AREA_FOR_SHARED_VOLUMES =
       WIN32_ERROR(5969);
-  static const ERROR_CLUSTER_RESOURCE_IS_IN_MAINTENANCE_MODE =
-      WIN32_ERROR(5970);
+  static const ERROR_CLUSTER_RESOURCE_IS_IN_MAINTENANCE_MODE = WIN32_ERROR(
+    5970,
+  );
   static const ERROR_CLUSTER_AFFINITY_CONFLICT = 5971;
-  static const ERROR_CLUSTER_RESOURCE_IS_REPLICA_VIRTUAL_MACHINE =
-      WIN32_ERROR(5972);
+  static const ERROR_CLUSTER_RESOURCE_IS_REPLICA_VIRTUAL_MACHINE = WIN32_ERROR(
+    5972,
+  );
   static const ERROR_CLUSTER_UPGRADE_INCOMPATIBLE_VERSIONS = 5973;
-  static const ERROR_CLUSTER_UPGRADE_FIX_QUORUM_NOT_SUPPORTED =
-      WIN32_ERROR(5974);
+  static const ERROR_CLUSTER_UPGRADE_FIX_QUORUM_NOT_SUPPORTED = WIN32_ERROR(
+    5974,
+  );
   static const ERROR_CLUSTER_UPGRADE_RESTART_REQUIRED = 5975;
   static const ERROR_CLUSTER_UPGRADE_IN_PROGRESS = 5976;
   static const ERROR_CLUSTER_UPGRADE_INCOMPLETE = 5977;
@@ -9599,26 +9742,31 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_CLUSTER_RESOURCE_IS_REPLICATED = 5983;
   static const ERROR_CLUSTER_NODE_ISOLATED = 5984;
   static const ERROR_CLUSTER_NODE_QUARANTINED = 5985;
-  static const ERROR_CLUSTER_DATABASE_UPDATE_CONDITION_FAILED =
-      WIN32_ERROR(5986);
+  static const ERROR_CLUSTER_DATABASE_UPDATE_CONDITION_FAILED = WIN32_ERROR(
+    5986,
+  );
   static const ERROR_CLUSTER_SPACE_DEGRADED = 5987;
   static const ERROR_CLUSTER_TOKEN_DELEGATION_NOT_SUPPORTED = 5988;
   static const ERROR_CLUSTER_CSV_INVALID_HANDLE = 5989;
-  static const ERROR_CLUSTER_CSV_SUPPORTED_ONLY_ON_COORDINATOR =
-      WIN32_ERROR(5990);
+  static const ERROR_CLUSTER_CSV_SUPPORTED_ONLY_ON_COORDINATOR = WIN32_ERROR(
+    5990,
+  );
   static const ERROR_GROUPSET_NOT_AVAILABLE = 5991;
   static const ERROR_GROUPSET_NOT_FOUND = 5992;
   static const ERROR_GROUPSET_CANT_PROVIDE = 5993;
   static const ERROR_CLUSTER_FAULT_DOMAIN_PARENT_NOT_FOUND = 5994;
   static const ERROR_CLUSTER_FAULT_DOMAIN_INVALID_HIERARCHY = 5995;
-  static const ERROR_CLUSTER_FAULT_DOMAIN_FAILED_S2D_VALIDATION =
-      WIN32_ERROR(5996);
-  static const ERROR_CLUSTER_FAULT_DOMAIN_S2D_CONNECTIVITY_LOSS =
-      WIN32_ERROR(5997);
+  static const ERROR_CLUSTER_FAULT_DOMAIN_FAILED_S2D_VALIDATION = WIN32_ERROR(
+    5996,
+  );
+  static const ERROR_CLUSTER_FAULT_DOMAIN_S2D_CONNECTIVITY_LOSS = WIN32_ERROR(
+    5997,
+  );
   static const ERROR_CLUSTER_INVALID_INFRASTRUCTURE_FILESERVER_NAME =
       WIN32_ERROR(5998);
-  static const ERROR_CLUSTERSET_MANAGEMENT_CLUSTER_UNREACHABLE =
-      WIN32_ERROR(5999);
+  static const ERROR_CLUSTERSET_MANAGEMENT_CLUSTER_UNREACHABLE = WIN32_ERROR(
+    5999,
+  );
   static const ERROR_ENCRYPTION_FAILED = 6000;
   static const ERROR_DECRYPTION_FAILED = 6001;
   static const ERROR_FILE_ENCRYPTED = 6002;
@@ -9714,8 +9862,9 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_ENLISTMENT_NOT_FOUND = 6717;
   static const ERROR_TRANSACTIONMANAGER_NOT_FOUND = 6718;
   static const ERROR_TRANSACTIONMANAGER_NOT_ONLINE = 6719;
-  static const ERROR_TRANSACTIONMANAGER_RECOVERY_NAME_COLLISION =
-      WIN32_ERROR(6720);
+  static const ERROR_TRANSACTIONMANAGER_RECOVERY_NAME_COLLISION = WIN32_ERROR(
+    6720,
+  );
   static const ERROR_TRANSACTION_NOT_ROOT = 6721;
   static const ERROR_TRANSACTION_OBJECT_EXPIRED = 6722;
   static const ERROR_TRANSACTION_RESPONSE_NOT_ENLISTED = 6723;
@@ -9738,8 +9887,9 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_STREAM_MINIVERSION_NOT_VALID = 6809;
   static const ERROR_MINIVERSION_INACCESSIBLE_FROM_SPECIFIED_TRANSACTION =
       WIN32_ERROR(6810);
-  static const ERROR_CANT_OPEN_MINIVERSION_WITH_MODIFY_INTENT =
-      WIN32_ERROR(6811);
+  static const ERROR_CANT_OPEN_MINIVERSION_WITH_MODIFY_INTENT = WIN32_ERROR(
+    6811,
+  );
   static const ERROR_CANT_CREATE_MORE_STREAM_MINIVERSIONS = 6812;
   static const ERROR_REMOTE_FILE_VERSION_MISMATCH = 6814;
   static const ERROR_HANDLE_NO_LONGER_VALID = 6815;
@@ -10098,8 +10248,9 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_DS_INVALID_SEARCH_FLAG = 8500;
   static const ERROR_DS_NO_TREE_DELETE_ABOVE_NC = 8501;
   static const ERROR_DS_COULDNT_LOCK_TREE_FOR_DELETE = 8502;
-  static const ERROR_DS_COULDNT_IDENTIFY_OBJECTS_FOR_TREE_DELETE =
-      WIN32_ERROR(8503);
+  static const ERROR_DS_COULDNT_IDENTIFY_OBJECTS_FOR_TREE_DELETE = WIN32_ERROR(
+    8503,
+  );
   static const ERROR_DS_SAM_INIT_FAILURE = 8504;
   static const ERROR_DS_SENSITIVE_GROUP_VIOLATION = 8505;
   static const ERROR_DS_CANT_MOD_PRIMARYGROUPID = 8506;
@@ -10116,8 +10267,9 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_DS_GLOBAL_CANT_HAVE_UNIVERSAL_MEMBER = 8517;
   static const ERROR_DS_UNIVERSAL_CANT_HAVE_LOCAL_MEMBER = 8518;
   static const ERROR_DS_GLOBAL_CANT_HAVE_CROSSDOMAIN_MEMBER = 8519;
-  static const ERROR_DS_LOCAL_CANT_HAVE_CROSSDOMAIN_LOCAL_MEMBER =
-      WIN32_ERROR(8520);
+  static const ERROR_DS_LOCAL_CANT_HAVE_CROSSDOMAIN_LOCAL_MEMBER = WIN32_ERROR(
+    8520,
+  );
   static const ERROR_DS_HAVE_PRIMARY_MEMBERS = 8521;
   static const ERROR_DS_STRING_SD_CONVERSION_FAILED = 8522;
   static const ERROR_DS_NAMING_MASTER_GC = 8523;
@@ -10176,8 +10328,9 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_DS_RESERVED_LINK_ID = 8576;
   static const ERROR_DS_LINK_ID_NOT_AVAILABLE = 8577;
   static const ERROR_DS_AG_CANT_HAVE_UNIVERSAL_MEMBER = 8578;
-  static const ERROR_DS_MODIFYDN_DISALLOWED_BY_INSTANCE_TYPE =
-      WIN32_ERROR(8579);
+  static const ERROR_DS_MODIFYDN_DISALLOWED_BY_INSTANCE_TYPE = WIN32_ERROR(
+    8579,
+  );
   static const ERROR_DS_NO_OBJECT_MOVE_IN_SCHEMA_NC = 8580;
   static const ERROR_DS_MODIFYDN_DISALLOWED_BY_FLAG = 8581;
   static const ERROR_DS_MODIFYDN_WRONG_GRANDPARENT = 8582;
@@ -10251,10 +10404,12 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_DS_MISSING_FOREST_TRUST = 8649;
   static const ERROR_DS_VALUE_KEY_NOT_UNIQUE = 8650;
   static const ERROR_WEAK_WHFBKEY_BLOCKED = 8651;
-  static const ERROR_DS_PER_ATTRIBUTE_AUTHZ_FAILED_DURING_ADD =
-      WIN32_ERROR(8652);
-  static const ERROR_LOCAL_POLICY_MODIFICATION_NOT_SUPPORTED =
-      WIN32_ERROR(8653);
+  static const ERROR_DS_PER_ATTRIBUTE_AUTHZ_FAILED_DURING_ADD = WIN32_ERROR(
+    8652,
+  );
+  static const ERROR_LOCAL_POLICY_MODIFICATION_NOT_SUPPORTED = WIN32_ERROR(
+    8653,
+  );
   static const ERROR_POLICY_CONTROLLED_ACCOUNT = 8654;
   static const ERROR_LAPS_LEGACY_SCHEMA_MISSING = 8655;
   static const ERROR_LAPS_SCHEMA_MISSING = 8656;
@@ -10306,8 +10461,9 @@ extension type const WIN32_ERROR(int _) implements int {
   static const DNS_ERROR_NO_VALID_TRUST_ANCHORS = 9127;
   static const DNS_ERROR_ROLLOVER_NOT_POKEABLE = 9128;
   static const DNS_ERROR_NSEC3_NAME_COLLISION = 9129;
-  static const DNS_ERROR_NSEC_INCOMPATIBLE_WITH_NSEC3_RSA_SHA1 =
-      WIN32_ERROR(9130);
+  static const DNS_ERROR_NSEC_INCOMPATIBLE_WITH_NSEC3_RSA_SHA1 = WIN32_ERROR(
+    9130,
+  );
   static const DNS_ERROR_PACKET_FMT_BASE = 9500;
   static const DNS_ERROR_BAD_PACKET = 9502;
   static const DNS_ERROR_NO_PACKET = 9503;
@@ -10407,13 +10563,16 @@ extension type const WIN32_ERROR(int _) implements int {
   static const DNS_ERROR_RRL_INVALID_TC_RATE = 9915;
   static const DNS_ERROR_RRL_INVALID_LEAK_RATE = 9916;
   static const DNS_ERROR_RRL_LEAK_RATE_LESSTHAN_TC_RATE = 9917;
-  static const DNS_ERROR_VIRTUALIZATION_INSTANCE_ALREADY_EXISTS =
-      WIN32_ERROR(9921);
-  static const DNS_ERROR_VIRTUALIZATION_INSTANCE_DOES_NOT_EXIST =
-      WIN32_ERROR(9922);
+  static const DNS_ERROR_VIRTUALIZATION_INSTANCE_ALREADY_EXISTS = WIN32_ERROR(
+    9921,
+  );
+  static const DNS_ERROR_VIRTUALIZATION_INSTANCE_DOES_NOT_EXIST = WIN32_ERROR(
+    9922,
+  );
   static const DNS_ERROR_VIRTUALIZATION_TREE_LOCKED = 9923;
-  static const DNS_ERROR_INVAILD_VIRTUALIZATION_INSTANCE_NAME =
-      WIN32_ERROR(9924);
+  static const DNS_ERROR_INVAILD_VIRTUALIZATION_INSTANCE_NAME = WIN32_ERROR(
+    9924,
+  );
   static const DNS_ERROR_DEFAULT_VIRTUALIZATION_INSTANCE = 9925;
   static const DNS_ERROR_ZONESCOPE_ALREADY_EXISTS = 9951;
   static const DNS_ERROR_ZONESCOPE_DOES_NOT_EXIST = 9952;
@@ -10447,17 +10606,20 @@ extension type const WIN32_ERROR(int _) implements int {
   static const DNS_ERROR_POLICY_SCOPE_NOT_ALLOWED = 9987;
   static const DNS_ERROR_SERVERSCOPE_IS_REFERENCED = 9988;
   static const DNS_ERROR_ZONESCOPE_IS_REFERENCED = 9989;
-  static const DNS_ERROR_POLICY_INVALID_CRITERIA_CLIENT_SUBNET =
-      WIN32_ERROR(9990);
+  static const DNS_ERROR_POLICY_INVALID_CRITERIA_CLIENT_SUBNET = WIN32_ERROR(
+    9990,
+  );
   static const DNS_ERROR_POLICY_INVALID_CRITERIA_TRANSPORT_PROTOCOL =
       WIN32_ERROR(9991);
-  static const DNS_ERROR_POLICY_INVALID_CRITERIA_NETWORK_PROTOCOL =
-      WIN32_ERROR(9992);
+  static const DNS_ERROR_POLICY_INVALID_CRITERIA_NETWORK_PROTOCOL = WIN32_ERROR(
+    9992,
+  );
   static const DNS_ERROR_POLICY_INVALID_CRITERIA_INTERFACE = 9993;
   static const DNS_ERROR_POLICY_INVALID_CRITERIA_FQDN = 9994;
   static const DNS_ERROR_POLICY_INVALID_CRITERIA_QUERY_TYPE = 9995;
-  static const DNS_ERROR_POLICY_INVALID_CRITERIA_TIME_OF_DAY =
-      WIN32_ERROR(9996);
+  static const DNS_ERROR_POLICY_INVALID_CRITERIA_TIME_OF_DAY = WIN32_ERROR(
+    9996,
+  );
   static const ERROR_IPSEC_QM_POLICY_EXISTS = 13000;
   static const ERROR_IPSEC_QM_POLICY_NOT_FOUND = 13001;
   static const ERROR_IPSEC_QM_POLICY_IN_USE = 13002;
@@ -10477,8 +10639,9 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_IPSEC_TUNNEL_FILTER_EXISTS = 13016;
   static const ERROR_IPSEC_TUNNEL_FILTER_NOT_FOUND = 13017;
   static const ERROR_IPSEC_MM_FILTER_PENDING_DELETION = 13018;
-  static const ERROR_IPSEC_TRANSPORT_FILTER_PENDING_DELETION =
-      WIN32_ERROR(13019);
+  static const ERROR_IPSEC_TRANSPORT_FILTER_PENDING_DELETION = WIN32_ERROR(
+    13019,
+  );
   static const ERROR_IPSEC_TUNNEL_FILTER_PENDING_DELETION = 13020;
   static const ERROR_IPSEC_MM_POLICY_PENDING_DELETION = 13021;
   static const ERROR_IPSEC_MM_AUTH_PENDING_DELETION = 13022;
@@ -10506,8 +10669,9 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_IPSEC_IKE_NO_PRIVATE_KEY = 13820;
   static const ERROR_IPSEC_IKE_SIMULTANEOUS_REKEY = 13821;
   static const ERROR_IPSEC_IKE_DH_FAIL = 13822;
-  static const ERROR_IPSEC_IKE_CRITICAL_PAYLOAD_NOT_RECOGNIZED =
-      WIN32_ERROR(13823);
+  static const ERROR_IPSEC_IKE_CRITICAL_PAYLOAD_NOT_RECOGNIZED = WIN32_ERROR(
+    13823,
+  );
   static const ERROR_IPSEC_IKE_INVALID_HEADER = 13824;
   static const ERROR_IPSEC_IKE_NO_POLICY = 13825;
   static const ERROR_IPSEC_IKE_INVALID_SIGNATURE = 13826;
@@ -10563,8 +10727,9 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_IPSEC_IKE_LOAD_FAILED = 13876;
   static const ERROR_IPSEC_IKE_RPC_DELETE = 13877;
   static const ERROR_IPSEC_IKE_BENIGN_REINIT = 13878;
-  static const ERROR_IPSEC_IKE_INVALID_RESPONDER_LIFETIME_NOTIFY =
-      WIN32_ERROR(13879);
+  static const ERROR_IPSEC_IKE_INVALID_RESPONDER_LIFETIME_NOTIFY = WIN32_ERROR(
+    13879,
+  );
   static const ERROR_IPSEC_IKE_INVALID_MAJOR_VERSION = 13880;
   static const ERROR_IPSEC_IKE_INVALID_CERT_KEYLEN = 13881;
   static const ERROR_IPSEC_IKE_MM_LIMIT = 13882;
@@ -10592,8 +10757,9 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_IPSEC_IKE_RATELIMIT_DROP = 13903;
   static const ERROR_IPSEC_IKE_PEER_DOESNT_SUPPORT_MOBIKE = 13904;
   static const ERROR_IPSEC_IKE_AUTHORIZATION_FAILURE = 13905;
-  static const ERROR_IPSEC_IKE_STRONG_CRED_AUTHORIZATION_FAILURE =
-      WIN32_ERROR(13906);
+  static const ERROR_IPSEC_IKE_STRONG_CRED_AUTHORIZATION_FAILURE = WIN32_ERROR(
+    13906,
+  );
   static const ERROR_IPSEC_IKE_AUTHORIZATION_FAILURE_WITH_OPTIONAL_RETRY =
       WIN32_ERROR(13907);
   static const ERROR_IPSEC_IKE_STRONG_CRED_AUTHORIZATION_AND_CERTMAP_FAILURE =
@@ -10615,8 +10781,9 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_IPSEC_DOSP_MAX_ENTRIES = 13929;
   static const ERROR_IPSEC_DOSP_KEYMOD_NOT_ALLOWED = 13930;
   static const ERROR_IPSEC_DOSP_NOT_INSTALLED = 13931;
-  static const ERROR_IPSEC_DOSP_MAX_PER_IP_RATELIMIT_QUEUES =
-      WIN32_ERROR(13932);
+  static const ERROR_IPSEC_DOSP_MAX_PER_IP_RATELIMIT_QUEUES = WIN32_ERROR(
+    13932,
+  );
   static const ERROR_SXS_SECTION_NOT_FOUND = 14000;
   static const ERROR_SXS_CANT_GEN_ACTCTX = 14001;
   static const ERROR_SXS_INVALID_ACTCTXDATA_FORMAT = 14002;
@@ -10632,12 +10799,15 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_SXS_UNKNOWN_ENCODING_GROUP = 14012;
   static const ERROR_SXS_UNKNOWN_ENCODING = 14013;
   static const ERROR_SXS_INVALID_XML_NAMESPACE_URI = 14014;
-  static const ERROR_SXS_ROOT_MANIFEST_DEPENDENCY_NOT_INSTALLED =
-      WIN32_ERROR(14015);
-  static const ERROR_SXS_LEAF_MANIFEST_DEPENDENCY_NOT_INSTALLED =
-      WIN32_ERROR(14016);
-  static const ERROR_SXS_INVALID_ASSEMBLY_IDENTITY_ATTRIBUTE =
-      WIN32_ERROR(14017);
+  static const ERROR_SXS_ROOT_MANIFEST_DEPENDENCY_NOT_INSTALLED = WIN32_ERROR(
+    14015,
+  );
+  static const ERROR_SXS_LEAF_MANIFEST_DEPENDENCY_NOT_INSTALLED = WIN32_ERROR(
+    14016,
+  );
+  static const ERROR_SXS_INVALID_ASSEMBLY_IDENTITY_ATTRIBUTE = WIN32_ERROR(
+    14017,
+  );
   static const ERROR_SXS_MANIFEST_MISSING_REQUIRED_DEFAULT_NAMESPACE =
       WIN32_ERROR(14018);
   static const ERROR_SXS_MANIFEST_INVALID_REQUIRED_DEFAULT_NAMESPACE =
@@ -10702,10 +10872,12 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_SXS_PROTECTION_CATALOG_NOT_VALID = 14076;
   static const ERROR_SXS_UNTRANSLATABLE_HRESULT = 14077;
   static const ERROR_SXS_PROTECTION_CATALOG_FILE_MISSING = 14078;
-  static const ERROR_SXS_MISSING_ASSEMBLY_IDENTITY_ATTRIBUTE =
-      WIN32_ERROR(14079);
-  static const ERROR_SXS_INVALID_ASSEMBLY_IDENTITY_ATTRIBUTE_NAME =
-      WIN32_ERROR(14080);
+  static const ERROR_SXS_MISSING_ASSEMBLY_IDENTITY_ATTRIBUTE = WIN32_ERROR(
+    14079,
+  );
+  static const ERROR_SXS_INVALID_ASSEMBLY_IDENTITY_ATTRIBUTE_NAME = WIN32_ERROR(
+    14080,
+  );
   static const ERROR_SXS_ASSEMBLY_MISSING = 14081;
   static const ERROR_SXS_CORRUPT_ACTIVATION_STACK = 14082;
   static const ERROR_SXS_CORRUPTION = 14083;
@@ -10714,8 +10886,9 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_SXS_MULTIPLE_DEACTIVATION = 14086;
   static const ERROR_SXS_PROCESS_TERMINATION_REQUESTED = 14087;
   static const ERROR_SXS_RELEASE_ACTIVATION_CONTEXT = 14088;
-  static const ERROR_SXS_SYSTEM_DEFAULT_ACTIVATION_CONTEXT_EMPTY =
-      WIN32_ERROR(14089);
+  static const ERROR_SXS_SYSTEM_DEFAULT_ACTIVATION_CONTEXT_EMPTY = WIN32_ERROR(
+    14089,
+  );
   static const ERROR_SXS_INVALID_IDENTITY_ATTRIBUTE_VALUE = 14090;
   static const ERROR_SXS_INVALID_IDENTITY_ATTRIBUTE_NAME = 14091;
   static const ERROR_SXS_IDENTITY_DUPLICATE_ATTRIBUTE = 14092;
@@ -10793,8 +10966,9 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_RESOURCE_ENUM_USER_STOP = 15106;
   static const ERROR_MUI_INTLSETTINGS_UILANG_NOT_INSTALLED = 15107;
   static const ERROR_MUI_INTLSETTINGS_INVALID_LOCALE_NAME = 15108;
-  static const ERROR_MRM_RUNTIME_NO_DEFAULT_OR_NEUTRAL_RESOURCE =
-      WIN32_ERROR(15110);
+  static const ERROR_MRM_RUNTIME_NO_DEFAULT_OR_NEUTRAL_RESOURCE = WIN32_ERROR(
+    15110,
+  );
   static const ERROR_MRM_INVALID_PRICONFIG = 15111;
   static const ERROR_MRM_INVALID_FILE_TYPE = 15112;
   static const ERROR_MRM_UNKNOWN_QUALIFIER = 15113;
@@ -10819,12 +10993,15 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_MRM_UNSUPPORTED_FILE_TYPE_FOR_LOAD_UNLOAD_PRI_FILE =
       WIN32_ERROR(15142);
   static const ERROR_MRM_NO_CURRENT_VIEW_ON_THREAD = 15143;
-  static const ERROR_DIFFERENT_PROFILE_RESOURCE_MANAGER_EXIST =
-      WIN32_ERROR(15144);
-  static const ERROR_OPERATION_NOT_ALLOWED_FROM_SYSTEM_COMPONENT =
-      WIN32_ERROR(15145);
-  static const ERROR_MRM_DIRECT_REF_TO_NON_DEFAULT_RESOURCE =
-      WIN32_ERROR(15146);
+  static const ERROR_DIFFERENT_PROFILE_RESOURCE_MANAGER_EXIST = WIN32_ERROR(
+    15144,
+  );
+  static const ERROR_OPERATION_NOT_ALLOWED_FROM_SYSTEM_COMPONENT = WIN32_ERROR(
+    15145,
+  );
+  static const ERROR_MRM_DIRECT_REF_TO_NON_DEFAULT_RESOURCE = WIN32_ERROR(
+    15146,
+  );
   static const ERROR_MRM_GENERATION_COUNT_MISMATCH = 15147;
   static const ERROR_PRI_MERGE_VERSION_MISMATCH = 15148;
   static const ERROR_PRI_MERGE_MISSING_SCHEMA = 15149;
@@ -10833,8 +11010,9 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_PRI_MERGE_WRITE_FILE_FAILED = 15152;
   static const ERROR_PRI_MERGE_MULTIPLE_PACKAGE_FAMILIES_NOT_ALLOWED =
       WIN32_ERROR(15153);
-  static const ERROR_PRI_MERGE_MULTIPLE_MAIN_PACKAGES_NOT_ALLOWED =
-      WIN32_ERROR(15154);
+  static const ERROR_PRI_MERGE_MULTIPLE_MAIN_PACKAGES_NOT_ALLOWED = WIN32_ERROR(
+    15154,
+  );
   static const ERROR_PRI_MERGE_BUNDLE_PACKAGES_NOT_ALLOWED = 15155;
   static const ERROR_PRI_MERGE_MAIN_PACKAGE_REQUIRED = 15156;
   static const ERROR_PRI_MERGE_RESOURCE_PACKAGE_REQUIRED = 15157;
@@ -10844,8 +11022,9 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_MRM_SCOPE_ITEM_CONFLICT = 15161;
   static const ERROR_MCA_INVALID_CAPABILITIES_STRING = 15200;
   static const ERROR_MCA_INVALID_VCP_VERSION = 15201;
-  static const ERROR_MCA_MONITOR_VIOLATES_MCCS_SPECIFICATION =
-      WIN32_ERROR(15202);
+  static const ERROR_MCA_MONITOR_VIOLATES_MCCS_SPECIFICATION = WIN32_ERROR(
+    15202,
+  );
   static const ERROR_MCA_MCCS_VERSION_MISMATCH = 15203;
   static const ERROR_MCA_UNSUPPORTED_MCCS_VERSION = 15204;
   static const ERROR_MCA_INTERNAL_ERROR = 15205;
@@ -10921,33 +11100,43 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_PACKAGES_REPUTATION_CHECK_TIMEDOUT = 15644;
   static const ERROR_DEPLOYMENT_OPTION_NOT_SUPPORTED = 15645;
   static const ERROR_APPINSTALLER_ACTIVATION_BLOCKED = 15646;
-  static const ERROR_REGISTRATION_FROM_REMOTE_DRIVE_NOT_SUPPORTED =
-      WIN32_ERROR(15647);
+  static const ERROR_REGISTRATION_FROM_REMOTE_DRIVE_NOT_SUPPORTED = WIN32_ERROR(
+    15647,
+  );
   static const ERROR_APPX_RAW_DATA_WRITE_FAILED = 15648;
-  static const ERROR_DEPLOYMENT_BLOCKED_BY_VOLUME_POLICY_PACKAGE =
-      WIN32_ERROR(15649);
-  static const ERROR_DEPLOYMENT_BLOCKED_BY_VOLUME_POLICY_MACHINE =
-      WIN32_ERROR(15650);
+  static const ERROR_DEPLOYMENT_BLOCKED_BY_VOLUME_POLICY_PACKAGE = WIN32_ERROR(
+    15649,
+  );
+  static const ERROR_DEPLOYMENT_BLOCKED_BY_VOLUME_POLICY_MACHINE = WIN32_ERROR(
+    15650,
+  );
   static const ERROR_DEPLOYMENT_BLOCKED_BY_PROFILE_POLICY = 15651;
   static const ERROR_DEPLOYMENT_FAILED_CONFLICTING_MUTABLE_PACKAGE_DIRECTORY =
       WIN32_ERROR(15652);
-  static const ERROR_SINGLETON_RESOURCE_INSTALLED_IN_ACTIVE_USER =
-      WIN32_ERROR(15653);
+  static const ERROR_SINGLETON_RESOURCE_INSTALLED_IN_ACTIVE_USER = WIN32_ERROR(
+    15653,
+  );
   static const ERROR_DIFFERENT_VERSION_OF_PACKAGED_SERVICE_INSTALLED =
       WIN32_ERROR(15654);
-  static const ERROR_SERVICE_EXISTS_AS_NON_PACKAGED_SERVICE =
-      WIN32_ERROR(15655);
-  static const ERROR_PACKAGED_SERVICE_REQUIRES_ADMIN_PRIVILEGES =
-      WIN32_ERROR(15656);
-  static const ERROR_REDIRECTION_TO_DEFAULT_ACCOUNT_NOT_ALLOWED =
-      WIN32_ERROR(15657);
-  static const ERROR_PACKAGE_LACKS_CAPABILITY_TO_DEPLOY_ON_HOST =
-      WIN32_ERROR(15658);
+  static const ERROR_SERVICE_EXISTS_AS_NON_PACKAGED_SERVICE = WIN32_ERROR(
+    15655,
+  );
+  static const ERROR_PACKAGED_SERVICE_REQUIRES_ADMIN_PRIVILEGES = WIN32_ERROR(
+    15656,
+  );
+  static const ERROR_REDIRECTION_TO_DEFAULT_ACCOUNT_NOT_ALLOWED = WIN32_ERROR(
+    15657,
+  );
+  static const ERROR_PACKAGE_LACKS_CAPABILITY_TO_DEPLOY_ON_HOST = WIN32_ERROR(
+    15658,
+  );
   static const ERROR_UNSIGNED_PACKAGE_INVALID_CONTENT = 15659;
-  static const ERROR_UNSIGNED_PACKAGE_INVALID_PUBLISHER_NAMESPACE =
-      WIN32_ERROR(15660);
-  static const ERROR_SIGNED_PACKAGE_INVALID_PUBLISHER_NAMESPACE =
-      WIN32_ERROR(15661);
+  static const ERROR_UNSIGNED_PACKAGE_INVALID_PUBLISHER_NAMESPACE = WIN32_ERROR(
+    15660,
+  );
+  static const ERROR_SIGNED_PACKAGE_INVALID_PUBLISHER_NAMESPACE = WIN32_ERROR(
+    15661,
+  );
   static const ERROR_PACKAGE_EXTERNAL_LOCATION_NOT_ALLOWED = 15662;
   static const ERROR_INSTALL_FULLTRUST_HOSTRUNTIME_REQUIRES_MAIN_PACKAGE_FULLTRUST_CAPABILITY =
       WIN32_ERROR(15663);
@@ -10957,8 +11146,9 @@ extension type const WIN32_ERROR(int _) implements int {
       WIN32_ERROR(15665);
   static const ERROR_MACHINE_SCOPE_NOT_ALLOWED = 15666;
   static const ERROR_CLASSIC_COMPAT_MODE_NOT_ALLOWED = 15667;
-  static const ERROR_STAGEFROMUPDATEAGENT_PACKAGE_NOT_APPLICABLE =
-      WIN32_ERROR(15668);
+  static const ERROR_STAGEFROMUPDATEAGENT_PACKAGE_NOT_APPLICABLE = WIN32_ERROR(
+    15668,
+  );
   static const ERROR_PACKAGE_NOT_REGISTERED_FOR_USER = 15669;
   static const ERROR_PACKAGE_NAME_MISMATCH = 15670;
   static const ERROR_APPINSTALLER_URI_IN_USE = 15671;
@@ -10988,12 +11178,15 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_STATE_ENUMERATE_SETTINGS_FAILED = 15814;
   static const ERROR_STATE_COMPOSITE_SETTING_VALUE_SIZE_LIMIT_EXCEEDED =
       WIN32_ERROR(15815);
-  static const ERROR_STATE_SETTING_VALUE_SIZE_LIMIT_EXCEEDED =
-      WIN32_ERROR(15816);
-  static const ERROR_STATE_SETTING_NAME_SIZE_LIMIT_EXCEEDED =
-      WIN32_ERROR(15817);
-  static const ERROR_STATE_CONTAINER_NAME_SIZE_LIMIT_EXCEEDED =
-      WIN32_ERROR(15818);
+  static const ERROR_STATE_SETTING_VALUE_SIZE_LIMIT_EXCEEDED = WIN32_ERROR(
+    15816,
+  );
+  static const ERROR_STATE_SETTING_NAME_SIZE_LIMIT_EXCEEDED = WIN32_ERROR(
+    15817,
+  );
+  static const ERROR_STATE_CONTAINER_NAME_SIZE_LIMIT_EXCEEDED = WIN32_ERROR(
+    15818,
+  );
   static const ERROR_API_UNAVAILABLE = 15841;
   static const ERROR_NDIS_INTERFACE_CLOSING = 2150891522;
   static const ERROR_NDIS_BAD_VERSION = 2150891524;
@@ -11035,14 +11228,17 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_NDIS_DOT11_MEDIA_IN_USE = 2150899713;
   static const ERROR_NDIS_DOT11_POWER_STATE_INVALID = 2150899714;
   static const ERROR_NDIS_PM_WOL_PATTERN_LIST_FULL = 2150899715;
-  static const ERROR_NDIS_PM_PROTOCOL_OFFLOAD_LIST_FULL =
-      WIN32_ERROR(2150899716);
+  static const ERROR_NDIS_PM_PROTOCOL_OFFLOAD_LIST_FULL = WIN32_ERROR(
+    2150899716,
+  );
   static const ERROR_NDIS_DOT11_AP_CHANNEL_CURRENTLY_NOT_AVAILABLE =
       WIN32_ERROR(2150899717);
-  static const ERROR_NDIS_DOT11_AP_BAND_CURRENTLY_NOT_AVAILABLE =
-      WIN32_ERROR(2150899718);
-  static const ERROR_NDIS_DOT11_AP_CHANNEL_NOT_ALLOWED =
-      WIN32_ERROR(2150899719);
+  static const ERROR_NDIS_DOT11_AP_BAND_CURRENTLY_NOT_AVAILABLE = WIN32_ERROR(
+    2150899718,
+  );
+  static const ERROR_NDIS_DOT11_AP_CHANNEL_NOT_ALLOWED = WIN32_ERROR(
+    2150899719,
+  );
   static const ERROR_NDIS_DOT11_AP_BAND_NOT_ALLOWED = 2150899720;
   static const ERROR_NDIS_INDICATION_REQUIRED = 3407873;
   static const ERROR_NDIS_OFFLOAD_POLICY = 3224637455;
@@ -11078,8 +11274,9 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_HV_INSUFFICIENT_BUFFER = 3224698931;
   static const ERROR_HV_INSUFFICIENT_DEVICE_DOMAINS = 3224698936;
   static const ERROR_HV_CPUID_FEATURE_VALIDATION = 3224698940;
-  static const ERROR_HV_CPUID_XSAVE_FEATURE_VALIDATION =
-      WIN32_ERROR(3224698941);
+  static const ERROR_HV_CPUID_XSAVE_FEATURE_VALIDATION = WIN32_ERROR(
+    3224698941,
+  );
   static const ERROR_HV_PROCESSOR_STARTUP_TIMEOUT = 3224698942;
   static const ERROR_HV_SMX_ENABLED = 3224698943;
   static const ERROR_HV_INVALID_LP_INDEX = 3224698945;
@@ -11093,22 +11290,27 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_HV_INVALID_CPU_GROUP_ID = 3224698991;
   static const ERROR_HV_INVALID_CPU_GROUP_STATE = 3224698992;
   static const ERROR_HV_OPERATION_FAILED = 3224698993;
-  static const ERROR_HV_NOT_ALLOWED_WITH_NESTED_VIRT_ACTIVE =
-      WIN32_ERROR(3224698994);
+  static const ERROR_HV_NOT_ALLOWED_WITH_NESTED_VIRT_ACTIVE = WIN32_ERROR(
+    3224698994,
+  );
   static const ERROR_HV_INSUFFICIENT_ROOT_MEMORY = 3224698995;
   static const ERROR_HV_EVENT_BUFFER_ALREADY_FREED = 3224698996;
-  static const ERROR_HV_INSUFFICIENT_CONTIGUOUS_MEMORY =
-      WIN32_ERROR(3224698997);
+  static const ERROR_HV_INSUFFICIENT_CONTIGUOUS_MEMORY = WIN32_ERROR(
+    3224698997,
+  );
   static const ERROR_HV_DEVICE_NOT_IN_DOMAIN = 3224698998;
   static const ERROR_HV_NESTED_VM_EXIT = 3224698999;
   static const ERROR_HV_MSR_ACCESS_FAILED = 3224699008;
   static const ERROR_HV_INSUFFICIENT_MEMORY_MIRRORING = 3224699009;
-  static const ERROR_HV_INSUFFICIENT_CONTIGUOUS_MEMORY_MIRRORING =
-      WIN32_ERROR(3224699010);
-  static const ERROR_HV_INSUFFICIENT_CONTIGUOUS_ROOT_MEMORY =
-      WIN32_ERROR(3224699011);
-  static const ERROR_HV_INSUFFICIENT_ROOT_MEMORY_MIRRORING =
-      WIN32_ERROR(3224699012);
+  static const ERROR_HV_INSUFFICIENT_CONTIGUOUS_MEMORY_MIRRORING = WIN32_ERROR(
+    3224699010,
+  );
+  static const ERROR_HV_INSUFFICIENT_CONTIGUOUS_ROOT_MEMORY = WIN32_ERROR(
+    3224699011,
+  );
+  static const ERROR_HV_INSUFFICIENT_ROOT_MEMORY_MIRRORING = WIN32_ERROR(
+    3224699012,
+  );
   static const ERROR_HV_INSUFFICIENT_CONTIGUOUS_ROOT_MEMORY_MIRRORING =
       WIN32_ERROR(3224699013);
   static const ERROR_HV_NOT_PRESENT = 3224702976;
@@ -11128,54 +11330,69 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_VID_CHILD_GPA_PAGE_SET_CORRUPTED = 3224829966;
   static const ERROR_VID_INVALID_NUMA_SETTINGS = 3224829967;
   static const ERROR_VID_INVALID_NUMA_NODE_INDEX = 3224829968;
-  static const ERROR_VID_NOTIFICATION_QUEUE_ALREADY_ASSOCIATED =
-      WIN32_ERROR(3224829969);
+  static const ERROR_VID_NOTIFICATION_QUEUE_ALREADY_ASSOCIATED = WIN32_ERROR(
+    3224829969,
+  );
   static const ERROR_VID_INVALID_MEMORY_BLOCK_HANDLE = 3224829970;
   static const ERROR_VID_PAGE_RANGE_OVERFLOW = 3224829971;
   static const ERROR_VID_INVALID_MESSAGE_QUEUE_HANDLE = 3224829972;
   static const ERROR_VID_INVALID_GPA_RANGE_HANDLE = 3224829973;
-  static const ERROR_VID_NO_MEMORY_BLOCK_NOTIFICATION_QUEUE =
-      WIN32_ERROR(3224829974);
-  static const ERROR_VID_MEMORY_BLOCK_LOCK_COUNT_EXCEEDED =
-      WIN32_ERROR(3224829975);
+  static const ERROR_VID_NO_MEMORY_BLOCK_NOTIFICATION_QUEUE = WIN32_ERROR(
+    3224829974,
+  );
+  static const ERROR_VID_MEMORY_BLOCK_LOCK_COUNT_EXCEEDED = WIN32_ERROR(
+    3224829975,
+  );
   static const ERROR_VID_INVALID_PPM_HANDLE = 3224829976;
   static const ERROR_VID_MBPS_ARE_LOCKED = 3224829977;
   static const ERROR_VID_MESSAGE_QUEUE_CLOSED = 3224829978;
-  static const ERROR_VID_VIRTUAL_PROCESSOR_LIMIT_EXCEEDED =
-      WIN32_ERROR(3224829979);
+  static const ERROR_VID_VIRTUAL_PROCESSOR_LIMIT_EXCEEDED = WIN32_ERROR(
+    3224829979,
+  );
   static const ERROR_VID_STOP_PENDING = 3224829980;
   static const ERROR_VID_INVALID_PROCESSOR_STATE = 3224829981;
-  static const ERROR_VID_EXCEEDED_KM_CONTEXT_COUNT_LIMIT =
-      WIN32_ERROR(3224829982);
-  static const ERROR_VID_KM_INTERFACE_ALREADY_INITIALIZED =
-      WIN32_ERROR(3224829983);
-  static const ERROR_VID_MB_PROPERTY_ALREADY_SET_RESET =
-      WIN32_ERROR(3224829984);
+  static const ERROR_VID_EXCEEDED_KM_CONTEXT_COUNT_LIMIT = WIN32_ERROR(
+    3224829982,
+  );
+  static const ERROR_VID_KM_INTERFACE_ALREADY_INITIALIZED = WIN32_ERROR(
+    3224829983,
+  );
+  static const ERROR_VID_MB_PROPERTY_ALREADY_SET_RESET = WIN32_ERROR(
+    3224829984,
+  );
   static const ERROR_VID_MMIO_RANGE_DESTROYED = 3224829985;
   static const ERROR_VID_INVALID_CHILD_GPA_PAGE_SET = 3224829986;
-  static const ERROR_VID_RESERVE_PAGE_SET_IS_BEING_USED =
-      WIN32_ERROR(3224829987);
+  static const ERROR_VID_RESERVE_PAGE_SET_IS_BEING_USED = WIN32_ERROR(
+    3224829987,
+  );
   static const ERROR_VID_RESERVE_PAGE_SET_TOO_SMALL = 3224829988;
-  static const ERROR_VID_MBP_ALREADY_LOCKED_USING_RESERVED_PAGE =
-      WIN32_ERROR(3224829989);
+  static const ERROR_VID_MBP_ALREADY_LOCKED_USING_RESERVED_PAGE = WIN32_ERROR(
+    3224829989,
+  );
   static const ERROR_VID_MBP_COUNT_EXCEEDED_LIMIT = 3224829990;
   static const ERROR_VID_SAVED_STATE_CORRUPT = 3224829991;
-  static const ERROR_VID_SAVED_STATE_UNRECOGNIZED_ITEM =
-      WIN32_ERROR(3224829992);
+  static const ERROR_VID_SAVED_STATE_UNRECOGNIZED_ITEM = WIN32_ERROR(
+    3224829992,
+  );
   static const ERROR_VID_SAVED_STATE_INCOMPATIBLE = 3224829993;
   static const ERROR_VID_VTL_ACCESS_DENIED = 3224829994;
-  static const ERROR_VID_INSUFFICIENT_RESOURCES_RESERVE =
-      WIN32_ERROR(3224829995);
-  static const ERROR_VID_INSUFFICIENT_RESOURCES_PHYSICAL_BUFFER =
-      WIN32_ERROR(3224829996);
-  static const ERROR_VID_INSUFFICIENT_RESOURCES_HV_DEPOSIT =
-      WIN32_ERROR(3224829997);
+  static const ERROR_VID_INSUFFICIENT_RESOURCES_RESERVE = WIN32_ERROR(
+    3224829995,
+  );
+  static const ERROR_VID_INSUFFICIENT_RESOURCES_PHYSICAL_BUFFER = WIN32_ERROR(
+    3224829996,
+  );
+  static const ERROR_VID_INSUFFICIENT_RESOURCES_HV_DEPOSIT = WIN32_ERROR(
+    3224829997,
+  );
   static const ERROR_VID_MEMORY_TYPE_NOT_SUPPORTED = 3224829998;
-  static const ERROR_VID_INSUFFICIENT_RESOURCES_WITHDRAW =
-      WIN32_ERROR(3224829999);
+  static const ERROR_VID_INSUFFICIENT_RESOURCES_WITHDRAW = WIN32_ERROR(
+    3224829999,
+  );
   static const ERROR_VID_PROCESS_ALREADY_SET = 3224830000;
-  static const ERROR_VMCOMPUTE_TERMINATED_DURING_START =
-      WIN32_ERROR(3224830208);
+  static const ERROR_VMCOMPUTE_TERMINATED_DURING_START = WIN32_ERROR(
+    3224830208,
+  );
   static const ERROR_VMCOMPUTE_IMAGE_MISMATCH = 3224830209;
   static const ERROR_VMCOMPUTE_HYPERV_NOT_INSTALLED = 3224830210;
   static const ERROR_VMCOMPUTE_OPERATION_PENDING = 3224830211;
@@ -11187,32 +11404,39 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_VMCOMPUTE_TIMEOUT = 3224830217;
   static const ERROR_VMCOMPUTE_CONNECTION_CLOSED = 3224830218;
   static const ERROR_VMCOMPUTE_UNKNOWN_MESSAGE = 3224830219;
-  static const ERROR_VMCOMPUTE_UNSUPPORTED_PROTOCOL_VERSION =
-      WIN32_ERROR(3224830220);
+  static const ERROR_VMCOMPUTE_UNSUPPORTED_PROTOCOL_VERSION = WIN32_ERROR(
+    3224830220,
+  );
   static const ERROR_VMCOMPUTE_INVALID_JSON = 3224830221;
   static const ERROR_VMCOMPUTE_SYSTEM_NOT_FOUND = 3224830222;
   static const ERROR_VMCOMPUTE_SYSTEM_ALREADY_EXISTS = 3224830223;
   static const ERROR_VMCOMPUTE_SYSTEM_ALREADY_STOPPED = 3224830224;
   static const ERROR_VMCOMPUTE_PROTOCOL_ERROR = 3224830225;
   static const ERROR_VMCOMPUTE_INVALID_LAYER = 3224830226;
-  static const ERROR_VMCOMPUTE_WINDOWS_INSIDER_REQUIRED =
-      WIN32_ERROR(3224830227);
-  static const ERROR_VNET_VIRTUAL_SWITCH_NAME_NOT_FOUND =
-      WIN32_ERROR(3224830464);
-  static const ERROR_VID_REMOTE_NODE_PARENT_GPA_PAGES_USED =
-      WIN32_ERROR(2151088129);
+  static const ERROR_VMCOMPUTE_WINDOWS_INSIDER_REQUIRED = WIN32_ERROR(
+    3224830227,
+  );
+  static const ERROR_VNET_VIRTUAL_SWITCH_NAME_NOT_FOUND = WIN32_ERROR(
+    3224830464,
+  );
+  static const ERROR_VID_REMOTE_NODE_PARENT_GPA_PAGES_USED = WIN32_ERROR(
+    2151088129,
+  );
   static const ERROR_VSMB_SAVED_STATE_FILE_NOT_FOUND = 3224830976;
   static const ERROR_VSMB_SAVED_STATE_CORRUPT = 3224830977;
   static const ERROR_VOLMGR_INCOMPLETE_REGENERATION = 2151153665;
   static const ERROR_VOLMGR_INCOMPLETE_DISK_MIGRATION = 2151153666;
   static const ERROR_VOLMGR_DATABASE_FULL = 3224895489;
-  static const ERROR_VOLMGR_DISK_CONFIGURATION_CORRUPTED =
-      WIN32_ERROR(3224895490);
-  static const ERROR_VOLMGR_DISK_CONFIGURATION_NOT_IN_SYNC =
-      WIN32_ERROR(3224895491);
+  static const ERROR_VOLMGR_DISK_CONFIGURATION_CORRUPTED = WIN32_ERROR(
+    3224895490,
+  );
+  static const ERROR_VOLMGR_DISK_CONFIGURATION_NOT_IN_SYNC = WIN32_ERROR(
+    3224895491,
+  );
   static const ERROR_VOLMGR_PACK_CONFIG_UPDATE_FAILED = 3224895492;
-  static const ERROR_VOLMGR_DISK_CONTAINS_NON_SIMPLE_VOLUME =
-      WIN32_ERROR(3224895493);
+  static const ERROR_VOLMGR_DISK_CONTAINS_NON_SIMPLE_VOLUME = WIN32_ERROR(
+    3224895493,
+  );
   static const ERROR_VOLMGR_DISK_DUPLICATE = 3224895494;
   static const ERROR_VOLMGR_DISK_DYNAMIC = 3224895495;
   static const ERROR_VOLMGR_DISK_ID_INVALID = 3224895496;
@@ -11221,37 +11445,47 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_VOLMGR_DISK_LAYOUT_INVALID = 3224895499;
   static const ERROR_VOLMGR_DISK_LAYOUT_NON_BASIC_BETWEEN_BASIC_PARTITIONS =
       WIN32_ERROR(3224895500);
-  static const ERROR_VOLMGR_DISK_LAYOUT_NOT_CYLINDER_ALIGNED =
-      WIN32_ERROR(3224895501);
-  static const ERROR_VOLMGR_DISK_LAYOUT_PARTITIONS_TOO_SMALL =
-      WIN32_ERROR(3224895502);
+  static const ERROR_VOLMGR_DISK_LAYOUT_NOT_CYLINDER_ALIGNED = WIN32_ERROR(
+    3224895501,
+  );
+  static const ERROR_VOLMGR_DISK_LAYOUT_PARTITIONS_TOO_SMALL = WIN32_ERROR(
+    3224895502,
+  );
   static const ERROR_VOLMGR_DISK_LAYOUT_PRIMARY_BETWEEN_LOGICAL_PARTITIONS =
       WIN32_ERROR(3224895503);
-  static const ERROR_VOLMGR_DISK_LAYOUT_TOO_MANY_PARTITIONS =
-      WIN32_ERROR(3224895504);
+  static const ERROR_VOLMGR_DISK_LAYOUT_TOO_MANY_PARTITIONS = WIN32_ERROR(
+    3224895504,
+  );
   static const ERROR_VOLMGR_DISK_MISSING = 3224895505;
   static const ERROR_VOLMGR_DISK_NOT_EMPTY = 3224895506;
   static const ERROR_VOLMGR_DISK_NOT_ENOUGH_SPACE = 3224895507;
   static const ERROR_VOLMGR_DISK_REVECTORING_FAILED = 3224895508;
   static const ERROR_VOLMGR_DISK_SECTOR_SIZE_INVALID = 3224895509;
   static const ERROR_VOLMGR_DISK_SET_NOT_CONTAINED = 3224895510;
-  static const ERROR_VOLMGR_DISK_USED_BY_MULTIPLE_MEMBERS =
-      WIN32_ERROR(3224895511);
-  static const ERROR_VOLMGR_DISK_USED_BY_MULTIPLE_PLEXES =
-      WIN32_ERROR(3224895512);
-  static const ERROR_VOLMGR_DYNAMIC_DISK_NOT_SUPPORTED =
-      WIN32_ERROR(3224895513);
+  static const ERROR_VOLMGR_DISK_USED_BY_MULTIPLE_MEMBERS = WIN32_ERROR(
+    3224895511,
+  );
+  static const ERROR_VOLMGR_DISK_USED_BY_MULTIPLE_PLEXES = WIN32_ERROR(
+    3224895512,
+  );
+  static const ERROR_VOLMGR_DYNAMIC_DISK_NOT_SUPPORTED = WIN32_ERROR(
+    3224895513,
+  );
   static const ERROR_VOLMGR_EXTENT_ALREADY_USED = 3224895514;
   static const ERROR_VOLMGR_EXTENT_NOT_CONTIGUOUS = 3224895515;
-  static const ERROR_VOLMGR_EXTENT_NOT_IN_PUBLIC_REGION =
-      WIN32_ERROR(3224895516);
+  static const ERROR_VOLMGR_EXTENT_NOT_IN_PUBLIC_REGION = WIN32_ERROR(
+    3224895516,
+  );
   static const ERROR_VOLMGR_EXTENT_NOT_SECTOR_ALIGNED = 3224895517;
-  static const ERROR_VOLMGR_EXTENT_OVERLAPS_EBR_PARTITION =
-      WIN32_ERROR(3224895518);
-  static const ERROR_VOLMGR_EXTENT_VOLUME_LENGTHS_DO_NOT_MATCH =
-      WIN32_ERROR(3224895519);
-  static const ERROR_VOLMGR_FAULT_TOLERANT_NOT_SUPPORTED =
-      WIN32_ERROR(3224895520);
+  static const ERROR_VOLMGR_EXTENT_OVERLAPS_EBR_PARTITION = WIN32_ERROR(
+    3224895518,
+  );
+  static const ERROR_VOLMGR_EXTENT_VOLUME_LENGTHS_DO_NOT_MATCH = WIN32_ERROR(
+    3224895519,
+  );
+  static const ERROR_VOLMGR_FAULT_TOLERANT_NOT_SUPPORTED = WIN32_ERROR(
+    3224895520,
+  );
   static const ERROR_VOLMGR_INTERLEAVE_LENGTH_INVALID = 3224895521;
   static const ERROR_VOLMGR_MAXIMUM_REGISTERED_USERS = 3224895522;
   static const ERROR_VOLMGR_MEMBER_IN_SYNC = 3224895523;
@@ -11285,13 +11519,16 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_VOLMGR_PLEX_NOT_RAID5 = 3224895551;
   static const ERROR_VOLMGR_PLEX_NOT_SIMPLE = 3224895552;
   static const ERROR_VOLMGR_STRUCTURE_SIZE_INVALID = 3224895553;
-  static const ERROR_VOLMGR_TOO_MANY_NOTIFICATION_REQUESTS =
-      WIN32_ERROR(3224895554);
+  static const ERROR_VOLMGR_TOO_MANY_NOTIFICATION_REQUESTS = WIN32_ERROR(
+    3224895554,
+  );
   static const ERROR_VOLMGR_TRANSACTION_IN_PROGRESS = 3224895555;
-  static const ERROR_VOLMGR_UNEXPECTED_DISK_LAYOUT_CHANGE =
-      WIN32_ERROR(3224895556);
-  static const ERROR_VOLMGR_VOLUME_CONTAINS_MISSING_DISK =
-      WIN32_ERROR(3224895557);
+  static const ERROR_VOLMGR_UNEXPECTED_DISK_LAYOUT_CHANGE = WIN32_ERROR(
+    3224895556,
+  );
+  static const ERROR_VOLMGR_VOLUME_CONTAINS_MISSING_DISK = WIN32_ERROR(
+    3224895557,
+  );
   static const ERROR_VOLMGR_VOLUME_ID_INVALID = 3224895558;
   static const ERROR_VOLMGR_VOLUME_LENGTH_INVALID = 3224895559;
   static const ERROR_VOLMGR_VOLUME_LENGTH_NOT_SECTOR_SIZE_MULTIPLE =
@@ -11307,10 +11544,12 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_VOLMGR_PACK_CONFIG_ONLINE = 3224895569;
   static const ERROR_VOLMGR_NOT_PRIMARY_PACK = 3224895570;
   static const ERROR_VOLMGR_PACK_LOG_UPDATE_FAILED = 3224895571;
-  static const ERROR_VOLMGR_NUMBER_OF_DISKS_IN_PLEX_INVALID =
-      WIN32_ERROR(3224895572);
-  static const ERROR_VOLMGR_NUMBER_OF_DISKS_IN_MEMBER_INVALID =
-      WIN32_ERROR(3224895573);
+  static const ERROR_VOLMGR_NUMBER_OF_DISKS_IN_PLEX_INVALID = WIN32_ERROR(
+    3224895572,
+  );
+  static const ERROR_VOLMGR_NUMBER_OF_DISKS_IN_MEMBER_INVALID = WIN32_ERROR(
+    3224895573,
+  );
   static const ERROR_VOLMGR_VOLUME_MIRRORED = 3224895574;
   static const ERROR_VOLMGR_PLEX_NOT_SIMPLE_SPANNED = 3224895575;
   static const ERROR_VOLMGR_NO_VALID_LOG_COPIES = 3224895576;
@@ -11322,25 +11561,30 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_BCD_TOO_MANY_ELEMENTS = 3224961026;
   static const ERROR_BCD_NOT_ALL_ENTRIES_SYNCHRONIZED = 2151219203;
   static const ERROR_VHD_DRIVE_FOOTER_MISSING = 3225026561;
-  static const ERROR_VHD_DRIVE_FOOTER_CHECKSUM_MISMATCH =
-      WIN32_ERROR(3225026562);
+  static const ERROR_VHD_DRIVE_FOOTER_CHECKSUM_MISMATCH = WIN32_ERROR(
+    3225026562,
+  );
   static const ERROR_VHD_DRIVE_FOOTER_CORRUPT = 3225026563;
   static const ERROR_VHD_FORMAT_UNKNOWN = 3225026564;
   static const ERROR_VHD_FORMAT_UNSUPPORTED_VERSION = 3225026565;
-  static const ERROR_VHD_SPARSE_HEADER_CHECKSUM_MISMATCH =
-      WIN32_ERROR(3225026566);
-  static const ERROR_VHD_SPARSE_HEADER_UNSUPPORTED_VERSION =
-      WIN32_ERROR(3225026567);
+  static const ERROR_VHD_SPARSE_HEADER_CHECKSUM_MISMATCH = WIN32_ERROR(
+    3225026566,
+  );
+  static const ERROR_VHD_SPARSE_HEADER_UNSUPPORTED_VERSION = WIN32_ERROR(
+    3225026567,
+  );
   static const ERROR_VHD_SPARSE_HEADER_CORRUPT = 3225026568;
   static const ERROR_VHD_BLOCK_ALLOCATION_FAILURE = 3225026569;
-  static const ERROR_VHD_BLOCK_ALLOCATION_TABLE_CORRUPT =
-      WIN32_ERROR(3225026570);
+  static const ERROR_VHD_BLOCK_ALLOCATION_TABLE_CORRUPT = WIN32_ERROR(
+    3225026570,
+  );
   static const ERROR_VHD_INVALID_BLOCK_SIZE = 3225026571;
   static const ERROR_VHD_BITMAP_MISMATCH = 3225026572;
   static const ERROR_VHD_PARENT_VHD_NOT_FOUND = 3225026573;
   static const ERROR_VHD_CHILD_PARENT_ID_MISMATCH = 3225026574;
-  static const ERROR_VHD_CHILD_PARENT_TIMESTAMP_MISMATCH =
-      WIN32_ERROR(3225026575);
+  static const ERROR_VHD_CHILD_PARENT_TIMESTAMP_MISMATCH = WIN32_ERROR(
+    3225026575,
+  );
   static const ERROR_VHD_METADATA_READ_FAILURE = 3225026576;
   static const ERROR_VHD_METADATA_WRITE_FAILURE = 3225026577;
   static const ERROR_VHD_INVALID_SIZE = 3225026578;
@@ -11349,34 +11593,42 @@ extension type const WIN32_ERROR(int _) implements int {
   static const ERROR_VIRTDISK_NOT_VIRTUAL_DISK = 3225026581;
   static const ERROR_VHD_PARENT_VHD_ACCESS_DENIED = 3225026582;
   static const ERROR_VHD_CHILD_PARENT_SIZE_MISMATCH = 3225026583;
-  static const ERROR_VHD_DIFFERENCING_CHAIN_CYCLE_DETECTED =
-      WIN32_ERROR(3225026584);
-  static const ERROR_VHD_DIFFERENCING_CHAIN_ERROR_IN_PARENT =
-      WIN32_ERROR(3225026585);
+  static const ERROR_VHD_DIFFERENCING_CHAIN_CYCLE_DETECTED = WIN32_ERROR(
+    3225026584,
+  );
+  static const ERROR_VHD_DIFFERENCING_CHAIN_ERROR_IN_PARENT = WIN32_ERROR(
+    3225026585,
+  );
   static const ERROR_VIRTUAL_DISK_LIMITATION = 3225026586;
   static const ERROR_VHD_INVALID_TYPE = 3225026587;
   static const ERROR_VHD_INVALID_STATE = 3225026588;
-  static const ERROR_VIRTDISK_UNSUPPORTED_DISK_SECTOR_SIZE =
-      WIN32_ERROR(3225026589);
+  static const ERROR_VIRTDISK_UNSUPPORTED_DISK_SECTOR_SIZE = WIN32_ERROR(
+    3225026589,
+  );
   static const ERROR_VIRTDISK_DISK_ALREADY_OWNED = 3225026590;
-  static const ERROR_VIRTDISK_DISK_ONLINE_AND_WRITABLE =
-      WIN32_ERROR(3225026591);
+  static const ERROR_VIRTDISK_DISK_ONLINE_AND_WRITABLE = WIN32_ERROR(
+    3225026591,
+  );
   static const ERROR_CTLOG_TRACKING_NOT_INITIALIZED = 3225026592;
-  static const ERROR_CTLOG_LOGFILE_SIZE_EXCEEDED_MAXSIZE =
-      WIN32_ERROR(3225026593);
+  static const ERROR_CTLOG_LOGFILE_SIZE_EXCEEDED_MAXSIZE = WIN32_ERROR(
+    3225026593,
+  );
   static const ERROR_CTLOG_VHD_CHANGED_OFFLINE = 3225026594;
   static const ERROR_CTLOG_INVALID_TRACKING_STATE = 3225026595;
   static const ERROR_CTLOG_INCONSISTENT_TRACKING_FILE = 3225026596;
   static const ERROR_VHD_RESIZE_WOULD_TRUNCATE_DATA = 3225026597;
-  static const ERROR_VHD_COULD_NOT_COMPUTE_MINIMUM_VIRTUAL_SIZE =
-      WIN32_ERROR(3225026598);
-  static const ERROR_VHD_ALREADY_AT_OR_BELOW_MINIMUM_VIRTUAL_SIZE =
-      WIN32_ERROR(3225026599);
+  static const ERROR_VHD_COULD_NOT_COMPUTE_MINIMUM_VIRTUAL_SIZE = WIN32_ERROR(
+    3225026598,
+  );
+  static const ERROR_VHD_ALREADY_AT_OR_BELOW_MINIMUM_VIRTUAL_SIZE = WIN32_ERROR(
+    3225026599,
+  );
   static const ERROR_VHD_METADATA_FULL = 3225026600;
   static const ERROR_VHD_INVALID_CHANGE_TRACKING_ID = 3225026601;
   static const ERROR_VHD_CHANGE_TRACKING_DISABLED = 3225026602;
-  static const ERROR_VHD_MISSING_CHANGE_TRACKING_INFORMATION =
-      WIN32_ERROR(3225026608);
+  static const ERROR_VHD_MISSING_CHANGE_TRACKING_INFORMATION = WIN32_ERROR(
+    3225026608,
+  );
   static const ERROR_VHD_UNEXPECTED_ID = 3225026612;
   static const ERROR_QUERY_STORAGE_ERROR = 2151284737;
 }
@@ -11528,8 +11780,9 @@ extension type const WLAN_AUTOCONF_OPCODE(int _) implements int {
   /// The opcode used to set or query the parameter specifying whether user and
   /// group policy denied networks will be included in the available networks
   /// list.
-  static const wlan_autoconf_opcode_show_denied_networks =
-      WLAN_AUTOCONF_OPCODE(1);
+  static const wlan_autoconf_opcode_show_denied_networks = WLAN_AUTOCONF_OPCODE(
+    1,
+  );
 
   /// The opcode used to query the power settings.
   static const wlan_autoconf_opcode_power_setting = 2;
@@ -11542,8 +11795,9 @@ extension type const WLAN_AUTOCONF_OPCODE(int _) implements int {
 
   /// The opcode used to set or query whether the current wireless interface has
   /// shared user credentials allowed.
-  static const wlan_autoconf_opcode_allow_explicit_creds =
-      WLAN_AUTOCONF_OPCODE(4);
+  static const wlan_autoconf_opcode_allow_explicit_creds = WLAN_AUTOCONF_OPCODE(
+    4,
+  );
 
   /// The opcode used to set or query the blocked period setting for the current
   /// wireless interface.
@@ -11574,8 +11828,9 @@ extension type const WLAN_CONNECTION_MODE(int _) implements int {
   static const wlan_connection_mode_discovery_secure = 2;
 
   /// Unsecure discovery will be used to make the connection.
-  static const wlan_connection_mode_discovery_unsecure =
-      WLAN_CONNECTION_MODE(3);
+  static const wlan_connection_mode_discovery_unsecure = WLAN_CONNECTION_MODE(
+    3,
+  );
 
   /// The connection is initiated by the wireless service automatically using a
   /// persistent profile.
@@ -11634,8 +11889,9 @@ extension type const WLAN_HOSTED_NETWORK_OPCODE(int _) implements int {
       WLAN_HOSTED_NETWORK_OPCODE(2);
 
   /// The opcode used to query or set the wireless Hosted Network enabled flag.
-  static const wlan_hosted_network_opcode_enable =
-      WLAN_HOSTED_NETWORK_OPCODE(3);
+  static const wlan_hosted_network_opcode_enable = WLAN_HOSTED_NETWORK_OPCODE(
+    3,
+  );
 }
 
 /// Specifies the possible values for the authentication state of a peer on the
@@ -11664,8 +11920,9 @@ extension type const WLAN_HOSTED_NETWORK_PEER_AUTH_STATE(int _) implements int {
 /// {@category enum}
 extension type const WLAN_HOSTED_NETWORK_REASON(int _) implements int {
   /// The operation was successful.
-  static const wlan_hosted_network_reason_success =
-      WLAN_HOSTED_NETWORK_REASON(0);
+  static const wlan_hosted_network_reason_success = WLAN_HOSTED_NETWORK_REASON(
+    0,
+  );
 
   /// Unknown error.
   static const wlan_hosted_network_reason_unspecified =
@@ -11962,8 +12219,9 @@ extension type const WLAN_NOTIFICATION_SOURCES(int _) implements int {
   static const WLAN_NOTIFICATION_SOURCE_ALL = 65535;
   static const WLAN_NOTIFICATION_SOURCE_ACM = 8;
   static const WLAN_NOTIFICATION_SOURCE_MSM = 16;
-  static const WLAN_NOTIFICATION_SOURCE_SECURITY =
-      WLAN_NOTIFICATION_SOURCES(32);
+  static const WLAN_NOTIFICATION_SOURCE_SECURITY = WLAN_NOTIFICATION_SOURCES(
+    32,
+  );
   static const WLAN_NOTIFICATION_SOURCE_IHV = 64;
   static const WLAN_NOTIFICATION_SOURCE_HNWK = 128;
   static const WLAN_NOTIFICATION_SOURCE_ONEX = 4;
@@ -12035,12 +12293,14 @@ extension type const WLAN_SECURABLE_OBJECT(int _) implements int {
   static const wlan_secure_add_new_all_user_profiles = 9;
 
   /// The permissions for adding new per-user profiles.
-  static const wlan_secure_add_new_per_user_profiles =
-      WLAN_SECURABLE_OBJECT(10);
+  static const wlan_secure_add_new_per_user_profiles = WLAN_SECURABLE_OBJECT(
+    10,
+  );
 
   /// The permissions for setting or querying the media streaming mode.
-  static const wlan_secure_media_streaming_mode_enabled =
-      WLAN_SECURABLE_OBJECT(11);
+  static const wlan_secure_media_streaming_mode_enabled = WLAN_SECURABLE_OBJECT(
+    11,
+  );
 
   /// The permissions for setting or querying the operation mode of the wireless
   /// interface.
@@ -12136,12 +12396,14 @@ extension type const XINPUT_GAMEPAD_BUTTON_FLAGS(int _) implements int {
   static const XINPUT_GAMEPAD_B = 8192;
   static const XINPUT_GAMEPAD_X = 16384;
   static const XINPUT_GAMEPAD_Y = 32768;
-  static const XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE =
-      XINPUT_GAMEPAD_BUTTON_FLAGS(7849);
+  static const XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE = XINPUT_GAMEPAD_BUTTON_FLAGS(
+    7849,
+  );
   static const XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE =
       XINPUT_GAMEPAD_BUTTON_FLAGS(8689);
-  static const XINPUT_GAMEPAD_TRIGGER_THRESHOLD =
-      XINPUT_GAMEPAD_BUTTON_FLAGS(30);
+  static const XINPUT_GAMEPAD_TRIGGER_THRESHOLD = XINPUT_GAMEPAD_BUTTON_FLAGS(
+    30,
+  );
 }
 
 /// {@category enum}

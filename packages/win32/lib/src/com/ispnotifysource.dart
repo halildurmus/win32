@@ -41,61 +41,91 @@ class ISpNotifySource extends IUnknown {
 
   int setNotifySink(Pointer<COMObject> pNotifySink) => (ptr.ref.vtable + 3)
       .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(Pointer, Pointer<COMObject> pNotifySink)>>>()
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<COMObject> pNotifySink)
+          >
+        >
+      >()
       .value
-      .asFunction<
-          int Function(Pointer,
-              Pointer<COMObject> pNotifySink)>()(ptr.ref.lpVtbl, pNotifySink);
+      .asFunction<int Function(Pointer, Pointer<COMObject> pNotifySink)>()(
+    ptr.ref.lpVtbl,
+    pNotifySink,
+  );
 
   int setNotifyWindowMessage(int hWnd, int Msg, int wParam, int lParam) =>
       (ptr.ref.vtable + 4)
           .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, IntPtr hWnd, Uint32 Msg,
-                          IntPtr wParam, IntPtr lParam)>>>()
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  IntPtr hWnd,
+                  Uint32 Msg,
+                  IntPtr wParam,
+                  IntPtr lParam,
+                )
+              >
+            >
+          >()
           .value
           .asFunction<
-              int Function(Pointer, int hWnd, int Msg, int wParam,
-                  int lParam)>()(ptr.ref.lpVtbl, hWnd, Msg, wParam, lParam);
+            int Function(Pointer, int hWnd, int Msg, int wParam, int lParam)
+          >()(ptr.ref.lpVtbl, hWnd, Msg, wParam, lParam);
 
   int setNotifyCallbackFunction(
+    Pointer<Pointer<NativeFunction<SPNOTIFYCALLBACK>>> pfnCallback,
+    int wParam,
+    int lParam,
+  ) => (ptr.ref.vtable + 5)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<Pointer<NativeFunction<SPNOTIFYCALLBACK>>> pfnCallback,
+              IntPtr wParam,
+              IntPtr lParam,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
           Pointer<Pointer<NativeFunction<SPNOTIFYCALLBACK>>> pfnCallback,
           int wParam,
-          int lParam) =>
-      (ptr.ref.vtable + 5)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer,
-                          Pointer<Pointer<NativeFunction<SPNOTIFYCALLBACK>>>
-                              pfnCallback,
-                          IntPtr wParam,
-                          IntPtr lParam)>>>()
-          .value
-          .asFunction<
-              int Function(
-                  Pointer,
-                  Pointer<Pointer<NativeFunction<SPNOTIFYCALLBACK>>>
-                      pfnCallback,
-                  int wParam,
-                  int lParam)>()(ptr.ref.lpVtbl, pfnCallback, wParam, lParam);
+          int lParam,
+        )
+      >()(ptr.ref.lpVtbl, pfnCallback, wParam, lParam);
 
   int setNotifyCallbackInterface(
-          Pointer<COMObject> pSpCallback, int wParam, int lParam) =>
-      (ptr.ref.vtable + 6)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<COMObject> pSpCallback,
-                          IntPtr wParam, IntPtr lParam)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, Pointer<COMObject> pSpCallback, int wParam,
-                  int lParam)>()(ptr.ref.lpVtbl, pSpCallback, wParam, lParam);
+    Pointer<COMObject> pSpCallback,
+    int wParam,
+    int lParam,
+  ) => (ptr.ref.vtable + 6)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<COMObject> pSpCallback,
+              IntPtr wParam,
+              IntPtr lParam,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<COMObject> pSpCallback,
+          int wParam,
+          int lParam,
+        )
+      >()(ptr.ref.lpVtbl, pSpCallback, wParam, lParam);
 
   int setNotifyWin32Event() => (ptr.ref.vtable + 7)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
@@ -104,12 +134,13 @@ class ISpNotifySource extends IUnknown {
 
   int waitForNotifyEvent(int dwMilliseconds) => (ptr.ref.vtable + 8)
       .cast<
-          Pointer<
-              NativeFunction<Int32 Function(Pointer, Uint32 dwMilliseconds)>>>()
+        Pointer<NativeFunction<Int32 Function(Pointer, Uint32 dwMilliseconds)>>
+      >()
       .value
-      .asFunction<
-          int Function(
-              Pointer, int dwMilliseconds)>()(ptr.ref.lpVtbl, dwMilliseconds);
+      .asFunction<int Function(Pointer, int dwMilliseconds)>()(
+    ptr.ref.lpVtbl,
+    dwMilliseconds,
+  );
 
   int getNotifyEventHandle() => (ptr.ref.vtable + 9)
       .cast<Pointer<NativeFunction<IntPtr Function(Pointer)>>>()

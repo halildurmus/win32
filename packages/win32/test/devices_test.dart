@@ -41,11 +41,12 @@ void main() {
     final batteryStatus = calloc<SYSTEM_BATTERY_STATE>();
 
     final result = CallNtPowerInformation(
-        POWER_INFORMATION_LEVEL.SystemBatteryState,
-        nullptr,
-        0,
-        batteryStatus,
-        sizeOf<SYSTEM_BATTERY_STATE>());
+      POWER_INFORMATION_LEVEL.SystemBatteryState,
+      nullptr,
+      0,
+      batteryStatus,
+      sizeOf<SYSTEM_BATTERY_STATE>(),
+    );
 
     // Sanity check results against some API provided ranges
     expect(result, equals(STATUS_SUCCESS));

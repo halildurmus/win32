@@ -23,8 +23,13 @@ class Canvas {
   final int height;
 
   /// Initiate the drawing canvas
-  Canvas(this.hdc, this.hwnd,
-      [int pxPerBlock = 25, this.width = 10, this.height = 20]) {
+  Canvas(
+    this.hdc,
+    this.hwnd, [
+    int pxPerBlock = 25,
+    this.width = 10,
+    this.height = 20,
+  ]) {
     GetClientRect(hwnd, rect);
 
     SaveDC(hdc);

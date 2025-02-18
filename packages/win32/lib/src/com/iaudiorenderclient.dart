@@ -42,25 +42,38 @@ class IAudioRenderClient extends IUnknown {
 
   int getBuffer(int NumFramesRequested, Pointer<Pointer<Uint8>> ppData) =>
       (ptr.ref.vtable + 3)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Uint32 NumFramesRequested,
-                              Pointer<Pointer<Uint8>> ppData)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, int NumFramesRequested,
-                      Pointer<Pointer<Uint8>> ppData)>()(
-          ptr.ref.lpVtbl, NumFramesRequested, ppData);
-
-  int releaseBuffer(int NumFramesWritten, int dwFlags) => (ptr.ref.vtable + 4)
           .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Uint32 NumFramesWritten, Uint32 dwFlags)>>>()
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Uint32 NumFramesRequested,
+                  Pointer<Pointer<Uint8>> ppData,
+                )
+              >
+            >
+          >()
           .value
           .asFunction<
-              int Function(Pointer, int NumFramesWritten, int dwFlags)>()(
-      ptr.ref.lpVtbl, NumFramesWritten, dwFlags);
+            int Function(
+              Pointer,
+              int NumFramesRequested,
+              Pointer<Pointer<Uint8>> ppData,
+            )
+          >()(ptr.ref.lpVtbl, NumFramesRequested, ppData);
+
+  int releaseBuffer(int NumFramesWritten, int dwFlags) => (ptr.ref.vtable + 4)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Uint32 NumFramesWritten, Uint32 dwFlags)
+          >
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, int NumFramesWritten, int dwFlags)>()(
+    ptr.ref.lpVtbl,
+    NumFramesWritten,
+    dwFlags,
+  );
 }

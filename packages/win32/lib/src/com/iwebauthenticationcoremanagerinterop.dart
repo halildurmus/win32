@@ -39,55 +39,69 @@ class IWebAuthenticationCoreManagerInterop extends IInspectable {
 
   factory IWebAuthenticationCoreManagerInterop.from(IUnknown interface) =>
       IWebAuthenticationCoreManagerInterop(
-          interface.toInterface(IID_IWebAuthenticationCoreManagerInterop));
+        interface.toInterface(IID_IWebAuthenticationCoreManagerInterop),
+      );
 
-  int requestTokenForWindowAsync(int appWindow, Pointer<COMObject> request,
-          Pointer<GUID> riid, Pointer<Pointer> asyncInfo) =>
-      (ptr.ref.vtable + 6)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              IntPtr appWindow,
-                              Pointer<COMObject> request,
-                              Pointer<GUID> riid,
-                              Pointer<Pointer> asyncInfo)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      int appWindow,
-                      Pointer<COMObject> request,
-                      Pointer<GUID> riid,
-                      Pointer<Pointer> asyncInfo)>()(
-          ptr.ref.lpVtbl, appWindow, request, riid, asyncInfo);
+  int requestTokenForWindowAsync(
+    int appWindow,
+    Pointer<COMObject> request,
+    Pointer<GUID> riid,
+    Pointer<Pointer> asyncInfo,
+  ) => (ptr.ref.vtable + 6)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              IntPtr appWindow,
+              Pointer<COMObject> request,
+              Pointer<GUID> riid,
+              Pointer<Pointer> asyncInfo,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          int appWindow,
+          Pointer<COMObject> request,
+          Pointer<GUID> riid,
+          Pointer<Pointer> asyncInfo,
+        )
+      >()(ptr.ref.lpVtbl, appWindow, request, riid, asyncInfo);
 
   int requestTokenWithWebAccountForWindowAsync(
+    int appWindow,
+    Pointer<COMObject> request,
+    Pointer<COMObject> webAccount,
+    Pointer<GUID> riid,
+    Pointer<Pointer> asyncInfo,
+  ) => (ptr.ref.vtable + 7)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              IntPtr appWindow,
+              Pointer<COMObject> request,
+              Pointer<COMObject> webAccount,
+              Pointer<GUID> riid,
+              Pointer<Pointer> asyncInfo,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
           int appWindow,
           Pointer<COMObject> request,
           Pointer<COMObject> webAccount,
           Pointer<GUID> riid,
-          Pointer<Pointer> asyncInfo) =>
-      (ptr.ref.vtable + 7)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              IntPtr appWindow,
-                              Pointer<COMObject> request,
-                              Pointer<COMObject> webAccount,
-                              Pointer<GUID> riid,
-                              Pointer<Pointer> asyncInfo)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      int appWindow,
-                      Pointer<COMObject> request,
-                      Pointer<COMObject> webAccount,
-                      Pointer<GUID> riid,
-                      Pointer<Pointer> asyncInfo)>()(
-          ptr.ref.lpVtbl, appWindow, request, webAccount, riid, asyncInfo);
+          Pointer<Pointer> asyncInfo,
+        )
+      >()(ptr.ref.lpVtbl, appWindow, request, webAccount, riid, asyncInfo);
 }

@@ -38,11 +38,17 @@ void main() {
 
   test('Create COM object without calling CoInitialize should fail', () {
     expect(
-        FileOpenDialog.createInstance,
-        throwsA(isA<WindowsException>()
+      FileOpenDialog.createInstance,
+      throwsA(
+        isA<WindowsException>()
             .having((e) => e.hr, 'hr', equals(CO_E_NOTINITIALIZED))
-            .having((e) => e.toString(), 'message',
-                contains('CoInitialize has not been called.'))));
+            .having(
+              (e) => e.toString(),
+              'message',
+              contains('CoInitialize has not been called.'),
+            ),
+      ),
+    );
   });
 
   group('COM testing', () {
@@ -69,14 +75,22 @@ void main() {
       final iidClassFactory = GUIDFromString(IID_IClassFactory);
       final iidFileSaveDialog = GUIDFromString(IID_IFileSaveDialog);
 
-      var hr = CoGetClassObject(clsid, CLSCTX.CLSCTX_ALL, nullptr,
-          iidClassFactory, ptrFactory.cast());
+      var hr = CoGetClassObject(
+        clsid,
+        CLSCTX.CLSCTX_ALL,
+        nullptr,
+        iidClassFactory,
+        ptrFactory.cast(),
+      );
       expect(hr, equals(S_OK));
       expect(ptrFactory.address, isNonZero);
 
       final classFactory = IClassFactory(ptrFactory);
       hr = classFactory.createInstance(
-          nullptr, iidFileSaveDialog, ptrSaveDialog.cast());
+        nullptr,
+        iidFileSaveDialog,
+        ptrSaveDialog.cast(),
+      );
       expect(hr, equals(S_OK));
       expect(ptrSaveDialog.address, isNonZero);
 
@@ -106,11 +120,17 @@ void main() {
     test('cast to random interface fails', () {
       final dialog = FileOpenDialog.createInstance();
       expect(
-          () => dialog.toInterface(IID_IDesktopWallpaper),
-          throwsA(isA<WindowsException>()
+        () => dialog.toInterface(IID_IDesktopWallpaper),
+        throwsA(
+          isA<WindowsException>()
               .having((e) => e.hr, 'hr', equals(E_NOINTERFACE))
-              .having((e) => e.toString(), 'message',
-                  contains('No such interface supported'))));
+              .having(
+                (e) => e.toString(),
+                'message',
+                contains('No such interface supported'),
+              ),
+        ),
+      );
     });
 
     test('addRef / release', () {
@@ -143,13 +163,25 @@ void main() {
       final dialog = FileOpenDialog.createInstance();
 
       expect(
-          () => IShellItem.from(dialog),
-          throwsA(isA<WindowsException>()
-              .having((e) => e.hr, 'hr', equals(E_NOINTERFACE))));
+        () => IShellItem.from(dialog),
+        throwsA(
+          isA<WindowsException>().having(
+            (e) => e.hr,
+            'hr',
+            equals(E_NOINTERFACE),
+          ),
+        ),
+      );
       expect(
-          () => ISpeechObjectToken.from(dialog),
-          throwsA(isA<WindowsException>()
-              .having((e) => e.hr, 'hr', equals(E_NOINTERFACE))));
+        () => ISpeechObjectToken.from(dialog),
+        throwsA(
+          isA<WindowsException>().having(
+            (e) => e.hr,
+            'hr',
+            equals(E_NOINTERFACE),
+          ),
+        ),
+      );
     });
 
     tearDown(forceGC);

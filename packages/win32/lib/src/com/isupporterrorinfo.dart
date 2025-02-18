@@ -40,9 +40,11 @@ class ISupportErrorInfo extends IUnknown {
 
   int interfaceSupportsErrorInfo(Pointer<GUID> riid) => (ptr.ref.vtable + 3)
       .cast<
-          Pointer<
-              NativeFunction<Int32 Function(Pointer, Pointer<GUID> riid)>>>()
+        Pointer<NativeFunction<Int32 Function(Pointer, Pointer<GUID> riid)>>
+      >()
       .value
-      .asFunction<
-          int Function(Pointer, Pointer<GUID> riid)>()(ptr.ref.lpVtbl, riid);
+      .asFunction<int Function(Pointer, Pointer<GUID> riid)>()(
+    ptr.ref.lpVtbl,
+    riid,
+  );
 }

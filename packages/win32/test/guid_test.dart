@@ -38,27 +38,35 @@ void main() {
     final guid = calloc<GUID>();
     try {
       // Note the rogue 'X' here
-      expect(() => guid.ref.setGUID('{X161CA9B-9409-4A77-7327-8B8D3363C6B9}'),
-          throwsA(anyOf(isA<FormatException>(), isA<AssertionError>())));
+      expect(
+        () => guid.ref.setGUID('{X161CA9B-9409-4A77-7327-8B8D3363C6B9}'),
+        throwsA(anyOf(isA<FormatException>(), isA<AssertionError>())),
+      );
     } finally {
       free(guid);
     }
   });
 
   test('Invalid hex string', () {
-    expect(() => GUIDFromString('{123G4567-G89B-12D3-A456-426655440000}'),
-        throwsA(isA<AssertionError>()));
+    expect(
+      () => GUIDFromString('{123G4567-G89B-12D3-A456-426655440000}'),
+      throwsA(isA<AssertionError>()),
+    );
   });
 
   test('Invalid length string', () {
-    expect(() => GUIDFromString('{123E4567-G89B-12D3-426655440000}'),
-        throwsA(isA<AssertionError>()));
+    expect(
+      () => GUIDFromString('{123E4567-G89B-12D3-426655440000}'),
+      throwsA(isA<AssertionError>()),
+    );
   });
 
   test('Create GUID from string', () {
     final guid = GUIDFromString('{123E4567-E89B-12D3-A456-426655440000}');
     expect(
-        guid.ref.toString(), equals('{123e4567-e89b-12d3-a456-426655440000}'));
+      guid.ref.toString(),
+      equals('{123e4567-e89b-12d3-a456-426655440000}'),
+    );
     free(guid);
   });
 
@@ -66,11 +74,12 @@ void main() {
     final guid = GUIDFromString('{00112233-4455-6677-8899-AABBCCDDEEFF}');
     final bytes = guid.cast<Uint8>().toList(length: 16);
     expect(
-        bytes,
-        equals([
-          0x33, 0x22, 0x11, 0x00, 0x55, 0x44, 0x77, 0x66, // Reversed ordering
-          0x88, 0x99, 0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF
-        ]));
+      bytes,
+      equals([
+        0x33, 0x22, 0x11, 0x00, 0x55, 0x44, 0x77, 0x66, // Reversed ordering
+        0x88, 0x99, 0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF,
+      ]),
+    );
   });
 
   test('Guid is ordered correctly', () {
@@ -78,11 +87,12 @@ void main() {
     final pGUID = guid.toNativeGUID();
     final bytes = pGUID.cast<Uint8>().toList(length: 16);
     expect(
-        bytes,
-        equals([
-          0x33, 0x22, 0x11, 0x00, 0x55, 0x44, 0x77, 0x66, // Reversed ordering
-          0x88, 0x99, 0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF
-        ]));
+      bytes,
+      equals([
+        0x33, 0x22, 0x11, 0x00, 0x55, 0x44, 0x77, 0x66, // Reversed ordering
+        0x88, 0x99, 0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF,
+      ]),
+    );
     free(pGUID);
   });
 
@@ -90,17 +100,19 @@ void main() {
     final guid = Guid.parse('{FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF}');
     final pGUID = guid.toNativeGUID();
     expect(
-        guid.bytes,
-        equals([
-          0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, //
-          0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF
-        ]));
+      guid.bytes,
+      equals([
+        0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, //
+        0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
+      ]),
+    );
     expect(
-        pGUID.cast<Uint8>().toList(length: 16),
-        equals([
-          0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, //
-          0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF
-        ]));
+      pGUID.cast<Uint8>().toList(length: 16),
+      equals([
+        0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, //
+        0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
+      ]),
+    );
     free(pGUID);
   });
 
@@ -117,11 +129,12 @@ void main() {
     final pGUID = GUIDFromString('{FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF}');
     final bytes = pGUID.cast<Uint8>().toList(length: 16);
     expect(
-        bytes,
-        equals([
-          0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, //
-          0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF
-        ]));
+      bytes,
+      equals([
+        0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, //
+        0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
+      ]),
+    );
     free(pGUID);
   });
 
@@ -179,12 +192,16 @@ void main() {
     final pGUID = GUIDFromString(guid);
 
     // Check string representation matches
-    expect(guid.toLowerCase(),
-        allOf(equals(pGUID.ref.toString()), equals(pIID.ref.toString())));
+    expect(
+      guid.toLowerCase(),
+      allOf(equals(pGUID.ref.toString()), equals(pIID.ref.toString())),
+    );
 
     // Check binary representation matches
-    expect(pIID.cast<Uint8>().toList(length: 16),
-        equals(pGUID.cast<Uint8>().toList(length: 16)));
+    expect(
+      pIID.cast<Uint8>().toList(length: 16),
+      equals(pGUID.cast<Uint8>().toList(length: 16)),
+    );
 
     free(pIID);
     free(pGUID);

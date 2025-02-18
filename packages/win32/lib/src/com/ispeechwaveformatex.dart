@@ -40,13 +40,16 @@ class ISpeechWaveFormatEx extends IDispatch {
 
     try {
       final hr = (ptr.ref.vtable + 7)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int16> FormatTag)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int16> FormatTag)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int16> FormatTag)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int16> FormatTag)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -60,10 +63,13 @@ class ISpeechWaveFormatEx extends IDispatch {
   set formatTag(int value) {
     final hr = (ptr.ref.vtable + 8)
         .cast<
-            Pointer<NativeFunction<Int32 Function(Pointer, Int16 FormatTag)>>>()
+          Pointer<NativeFunction<Int32 Function(Pointer, Int16 FormatTag)>>
+        >()
         .value
-        .asFunction<
-            int Function(Pointer, int FormatTag)>()(ptr.ref.lpVtbl, value);
+        .asFunction<int Function(Pointer, int FormatTag)>()(
+      ptr.ref.lpVtbl,
+      value,
+    );
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
@@ -73,13 +79,16 @@ class ISpeechWaveFormatEx extends IDispatch {
 
     try {
       final hr = (ptr.ref.vtable + 9)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int16> Channels)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int16> Channels)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int16> Channels)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int16> Channels)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -93,10 +102,13 @@ class ISpeechWaveFormatEx extends IDispatch {
   set channels(int value) {
     final hr = (ptr.ref.vtable + 10)
         .cast<
-            Pointer<NativeFunction<Int32 Function(Pointer, Int16 Channels)>>>()
+          Pointer<NativeFunction<Int32 Function(Pointer, Int16 Channels)>>
+        >()
         .value
-        .asFunction<
-            int Function(Pointer, int Channels)>()(ptr.ref.lpVtbl, value);
+        .asFunction<int Function(Pointer, int Channels)>()(
+      ptr.ref.lpVtbl,
+      value,
+    );
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
@@ -107,13 +119,17 @@ class ISpeechWaveFormatEx extends IDispatch {
     try {
       final hr = (ptr.ref.vtable + 11)
           .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<Int32> SamplesPerSec)>>>()
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Int32> SamplesPerSec)
+              >
+            >
+          >()
           .value
-          .asFunction<
-              int Function(Pointer,
-                  Pointer<Int32> SamplesPerSec)>()(ptr.ref.lpVtbl, retValuePtr);
+          .asFunction<int Function(Pointer, Pointer<Int32> SamplesPerSec)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -127,11 +143,13 @@ class ISpeechWaveFormatEx extends IDispatch {
   set samplesPerSec(int value) {
     final hr = (ptr.ref.vtable + 12)
         .cast<
-            Pointer<
-                NativeFunction<Int32 Function(Pointer, Int32 SamplesPerSec)>>>()
+          Pointer<NativeFunction<Int32 Function(Pointer, Int32 SamplesPerSec)>>
+        >()
         .value
-        .asFunction<
-            int Function(Pointer, int SamplesPerSec)>()(ptr.ref.lpVtbl, value);
+        .asFunction<int Function(Pointer, int SamplesPerSec)>()(
+      ptr.ref.lpVtbl,
+      value,
+    );
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
@@ -141,15 +159,18 @@ class ISpeechWaveFormatEx extends IDispatch {
 
     try {
       final hr = (ptr.ref.vtable + 13)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Int32> AvgBytesPerSec)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Int32> AvgBytesPerSec)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Int32> AvgBytesPerSec)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> AvgBytesPerSec)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -162,13 +183,14 @@ class ISpeechWaveFormatEx extends IDispatch {
 
   set avgBytesPerSec(int value) {
     final hr = (ptr.ref.vtable + 14)
-            .cast<
-                Pointer<
-                    NativeFunction<
-                        Int32 Function(Pointer, Int32 AvgBytesPerSec)>>>()
-            .value
-            .asFunction<int Function(Pointer, int AvgBytesPerSec)>()(
-        ptr.ref.lpVtbl, value);
+        .cast<
+          Pointer<NativeFunction<Int32 Function(Pointer, Int32 AvgBytesPerSec)>>
+        >()
+        .value
+        .asFunction<int Function(Pointer, int AvgBytesPerSec)>()(
+      ptr.ref.lpVtbl,
+      value,
+    );
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
@@ -179,13 +201,15 @@ class ISpeechWaveFormatEx extends IDispatch {
     try {
       final hr = (ptr.ref.vtable + 15)
           .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<Int16> BlockAlign)>>>()
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int16> BlockAlign)>
+            >
+          >()
           .value
-          .asFunction<
-              int Function(Pointer,
-                  Pointer<Int16> BlockAlign)>()(ptr.ref.lpVtbl, retValuePtr);
+          .asFunction<int Function(Pointer, Pointer<Int16> BlockAlign)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -199,11 +223,13 @@ class ISpeechWaveFormatEx extends IDispatch {
   set blockAlign(int value) {
     final hr = (ptr.ref.vtable + 16)
         .cast<
-            Pointer<
-                NativeFunction<Int32 Function(Pointer, Int16 BlockAlign)>>>()
+          Pointer<NativeFunction<Int32 Function(Pointer, Int16 BlockAlign)>>
+        >()
         .value
-        .asFunction<
-            int Function(Pointer, int BlockAlign)>()(ptr.ref.lpVtbl, value);
+        .asFunction<int Function(Pointer, int BlockAlign)>()(
+      ptr.ref.lpVtbl,
+      value,
+    );
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
@@ -214,13 +240,17 @@ class ISpeechWaveFormatEx extends IDispatch {
     try {
       final hr = (ptr.ref.vtable + 17)
           .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<Int16> BitsPerSample)>>>()
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Int16> BitsPerSample)
+              >
+            >
+          >()
           .value
-          .asFunction<
-              int Function(Pointer,
-                  Pointer<Int16> BitsPerSample)>()(ptr.ref.lpVtbl, retValuePtr);
+          .asFunction<int Function(Pointer, Pointer<Int16> BitsPerSample)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -234,11 +264,13 @@ class ISpeechWaveFormatEx extends IDispatch {
   set bitsPerSample(int value) {
     final hr = (ptr.ref.vtable + 18)
         .cast<
-            Pointer<
-                NativeFunction<Int32 Function(Pointer, Int16 BitsPerSample)>>>()
+          Pointer<NativeFunction<Int32 Function(Pointer, Int16 BitsPerSample)>>
+        >()
         .value
-        .asFunction<
-            int Function(Pointer, int BitsPerSample)>()(ptr.ref.lpVtbl, value);
+        .asFunction<int Function(Pointer, int BitsPerSample)>()(
+      ptr.ref.lpVtbl,
+      value,
+    );
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
@@ -249,13 +281,17 @@ class ISpeechWaveFormatEx extends IDispatch {
     try {
       final hr = (ptr.ref.vtable + 19)
           .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<VARIANT> ExtraData)>>>()
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<VARIANT> ExtraData)
+              >
+            >
+          >()
           .value
-          .asFunction<
-              int Function(Pointer,
-                  Pointer<VARIANT> ExtraData)>()(ptr.ref.lpVtbl, retValuePtr);
+          .asFunction<int Function(Pointer, Pointer<VARIANT> ExtraData)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -269,11 +305,13 @@ class ISpeechWaveFormatEx extends IDispatch {
   set extraData(VARIANT value) {
     final hr = (ptr.ref.vtable + 20)
         .cast<
-            Pointer<
-                NativeFunction<Int32 Function(Pointer, VARIANT ExtraData)>>>()
+          Pointer<NativeFunction<Int32 Function(Pointer, VARIANT ExtraData)>>
+        >()
         .value
-        .asFunction<
-            int Function(Pointer, VARIANT ExtraData)>()(ptr.ref.lpVtbl, value);
+        .asFunction<int Function(Pointer, VARIANT ExtraData)>()(
+      ptr.ref.lpVtbl,
+      value,
+    );
 
     if (FAILED(hr)) throw WindowsException(hr);
   }

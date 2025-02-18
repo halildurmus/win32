@@ -15,8 +15,9 @@ import '../guid.dart';
 import '../structs.g.dart';
 import '../variant.dart';
 
-final _api_ms_win_service_core_l1_1_3 =
-    DynamicLibrary.open('api-ms-win-service-core-l1-1-3.dll');
+final _api_ms_win_service_core_l1_1_3 = DynamicLibrary.open(
+  'api-ms-win-service-core-l1-1-3.dll',
+);
 
 /// Returns a handle for a registry key for a service to read and/or write
 /// state to.
@@ -30,14 +31,30 @@ final _api_ms_win_service_core_l1_1_3 =
 /// );
 /// ```
 /// {@category api_ms_win_service_core_l1_1_3}
-int GetServiceRegistryStateKey(int ServiceStatusHandle, int StateType,
-        int AccessMask, Pointer<IntPtr> ServiceStateKey) =>
-    _GetServiceRegistryStateKey(
-        ServiceStatusHandle, StateType, AccessMask, ServiceStateKey);
+int GetServiceRegistryStateKey(
+  int ServiceStatusHandle,
+  int StateType,
+  int AccessMask,
+  Pointer<IntPtr> ServiceStateKey,
+) => _GetServiceRegistryStateKey(
+  ServiceStatusHandle,
+  StateType,
+  AccessMask,
+  ServiceStateKey,
+);
 
-final _GetServiceRegistryStateKey =
-    _api_ms_win_service_core_l1_1_3.lookupFunction<
-        Uint32 Function(IntPtr ServiceStatusHandle, Int32 StateType,
-            Uint32 AccessMask, Pointer<IntPtr> ServiceStateKey),
-        int Function(int ServiceStatusHandle, int StateType, int AccessMask,
-            Pointer<IntPtr> ServiceStateKey)>('GetServiceRegistryStateKey');
+final _GetServiceRegistryStateKey = _api_ms_win_service_core_l1_1_3
+    .lookupFunction<
+      Uint32 Function(
+        IntPtr ServiceStatusHandle,
+        Int32 StateType,
+        Uint32 AccessMask,
+        Pointer<IntPtr> ServiceStateKey,
+      ),
+      int Function(
+        int ServiceStatusHandle,
+        int StateType,
+        int AccessMask,
+        Pointer<IntPtr> ServiceStateKey,
+      )
+    >('GetServiceRegistryStateKey');

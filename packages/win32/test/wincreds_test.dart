@@ -8,22 +8,24 @@ import 'package:ffi/ffi.dart';
 import 'package:test/test.dart';
 import 'package:win32/win32.dart';
 
-void writeCredential(
-    {required String credentialName,
-    required String userName,
-    required String password}) {
+void writeCredential({
+  required String credentialName,
+  required String userName,
+  required String password,
+}) {
   final pUserName = userName.toNativeUtf16();
   final pCredName = credentialName.toNativeUtf16();
   final examplePassword = utf8.encode(password);
   final blob = examplePassword.allocatePointer();
 
-  final credential = calloc<CREDENTIAL>()
-    ..ref.Type = CRED_TYPE.CRED_TYPE_GENERIC
-    ..ref.TargetName = pCredName
-    ..ref.Persist = CRED_PERSIST.CRED_PERSIST_LOCAL_MACHINE
-    ..ref.UserName = pUserName
-    ..ref.CredentialBlob = blob
-    ..ref.CredentialBlobSize = examplePassword.length;
+  final credential =
+      calloc<CREDENTIAL>()
+        ..ref.Type = CRED_TYPE.CRED_TYPE_GENERIC
+        ..ref.TargetName = pCredName
+        ..ref.Persist = CRED_PERSIST.CRED_PERSIST_LOCAL_MACHINE
+        ..ref.UserName = pUserName
+        ..ref.CredentialBlob = blob
+        ..ref.CredentialBlobSize = examplePassword.length;
 
   try {
     if (CredWrite(credential, 0) != TRUE) {
@@ -78,9 +80,10 @@ void main() {
 
     // create credential
     writeCredential(
-        credentialName: credentialName,
-        userName: 'userName',
-        password: credentialValue);
+      credentialName: credentialName,
+      userName: 'userName',
+      password: credentialValue,
+    );
 
     // read
     expect(readCredential(credentialName), equals(credentialValue));
@@ -96,15 +99,17 @@ void main() {
 
     // create credential
     writeCredential(
-        credentialName: credentialName,
-        userName: 'userName',
-        password: credentialValue);
+      credentialName: credentialName,
+      userName: 'userName',
+      password: credentialValue,
+    );
 
     // update credential with a new value
     writeCredential(
-        credentialName: credentialName,
-        userName: 'userName',
-        password: credentialValue2);
+      credentialName: credentialName,
+      userName: 'userName',
+      password: credentialValue2,
+    );
 
     expect(readCredential(credentialName), equals(credentialValue2));
 

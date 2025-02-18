@@ -15,8 +15,9 @@ import '../guid.dart';
 import '../structs.g.dart';
 import '../variant.dart';
 
-final _api_ms_win_core_apiquery_l2_1_0 =
-    DynamicLibrary.open('api-ms-win-core-apiquery-l2-1-0.dll');
+final _api_ms_win_core_apiquery_l2_1_0 = DynamicLibrary.open(
+  'api-ms-win-core-apiquery-l2-1-0.dll',
+);
 
 /// The IsApiSetImplemented function tests if a specified API set is present
 /// on the computer.
@@ -31,5 +32,6 @@ int IsApiSetImplemented(Pointer<Utf8> Contract) =>
     _IsApiSetImplemented(Contract);
 
 final _IsApiSetImplemented = _api_ms_win_core_apiquery_l2_1_0.lookupFunction<
-    Int32 Function(Pointer<Utf8> Contract),
-    int Function(Pointer<Utf8> Contract)>('IsApiSetImplemented');
+  Int32 Function(Pointer<Utf8> Contract),
+  int Function(Pointer<Utf8> Contract)
+>('IsApiSetImplemented');

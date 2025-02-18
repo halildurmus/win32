@@ -56,16 +56,25 @@ class IUnknown {
   /// that interface after calling `addRef` on it.
   int queryInterface(Pointer<GUID> riid, Pointer<Pointer> ppvObject) =>
       (ptr.ref.vtable + 0)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<GUID> riid,
-                              Pointer<Pointer> ppvObject)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<GUID> riid,
-                      Pointer<Pointer> ppvObject)>()(
-          ptr.ref.lpVtbl, riid, ppvObject);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<GUID> riid,
+                  Pointer<Pointer> ppvObject,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
+              Pointer,
+              Pointer<GUID> riid,
+              Pointer<Pointer> ppvObject,
+            )
+          >()(ptr.ref.lpVtbl, riid, ppvObject);
 
   /// Increments the reference count for an interface pointer to a COM object.
   ///

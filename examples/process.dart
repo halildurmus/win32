@@ -11,8 +11,10 @@ double fileTimeToSeconds(FILETIME fileTime) =>
     ((fileTime.dwHighDateTime << 32) + fileTime.dwLowDateTime) / 10E6;
 
 /// Constructs a DateTime from SYSTEMTIME format.
-DateTime systemTimeToDateTime(SYSTEMTIME systemTime,
-    {bool convertToLocalTimeZone = true}) {
+DateTime systemTimeToDateTime(
+  SYSTEMTIME systemTime, {
+  bool convertToLocalTimeZone = true,
+}) {
   final dateTime = DateTime.utc(
     systemTime.wYear,
     systemTime.wMonth,
@@ -39,7 +41,12 @@ void main() {
   try {
     // Retrieve timing information for the current process
     result = GetProcessTimes(
-        hProcess, pCreationTime, pExitTime, pKernelTime, pUserTime);
+      hProcess,
+      pCreationTime,
+      pExitTime,
+      pKernelTime,
+      pUserTime,
+    );
     if (result == FALSE) {
       throw WindowsException(result);
     }
@@ -69,9 +76,11 @@ void main() {
     }
 
     print('Process creation time: $creationTime');
-    print(processExited
-        ? 'Process exit time: $exitTime'
-        : 'Process has not exited!');
+    print(
+      processExited
+          ? 'Process exit time: $exitTime'
+          : 'Process has not exited!',
+    );
     print('Process kernel time: ${fileTimeToSeconds(pKernelTime.ref)} seconds');
     print('Process user time: ${fileTimeToSeconds(pUserTime.ref)} seconds');
   } finally {

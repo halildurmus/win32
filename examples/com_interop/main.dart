@@ -67,62 +67,68 @@ class IExampleCom extends IDispatch {
   IExampleCom(super.ptr);
 
   int GetMessage(Pointer<Pointer<Utf16>> pRetVal) => (ptr.ref.vtable + 7)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      HRESULT Function(
-                          Pointer, Pointer<Pointer<Utf16>> pRetVal)>>>()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> pRetVal)>()(
-      ptr.ref.lpVtbl, pRetVal);
+      .cast<
+        Pointer<
+          NativeFunction<
+            HRESULT Function(Pointer, Pointer<Pointer<Utf16>> pRetVal)
+          >
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> pRetVal)>()(
+    ptr.ref.lpVtbl,
+    pRetVal,
+  );
 
   int GetSum(int a, int b, Pointer<Int32> pRetVal) => (ptr.ref.vtable + 8)
       .cast<
-          Pointer<
-              NativeFunction<
-                  HRESULT Function(
-                      Pointer, Int32 a, Int32 b, Pointer<Int32> pRetVal)>>>()
+        Pointer<
+          NativeFunction<
+            HRESULT Function(Pointer, Int32 a, Int32 b, Pointer<Int32> pRetVal)
+          >
+        >
+      >()
       .value
       .asFunction<
-          int Function(Pointer, int a, int b,
-              Pointer<Int32> pRetVal)>()(ptr.ref.lpVtbl, a, b, pRetVal);
+        int Function(Pointer, int a, int b, Pointer<Int32> pRetVal)
+      >()(ptr.ref.lpVtbl, a, b, pRetVal);
 }
 
 /// Demonstrates early binding with VTable access to the `IExampleCom` methods.
 void invokeMethodsViaEarlyBinding() => using((arena) {
-      final lpclsid = GUIDFromString(CLSID_ExampleCom, allocator: arena);
-      final riid = GUIDFromString(IID_IExampleCom, allocator: arena);
-      final ppv = calloc<COMObject>();
+  final lpclsid = GUIDFromString(CLSID_ExampleCom, allocator: arena);
+  final riid = GUIDFromString(IID_IExampleCom, allocator: arena);
+  final ppv = calloc<COMObject>();
 
-      // Create an instance of the IExampleCom interface.
-      var hr = CoCreateInstance(
-        lpclsid,
-        nullptr,
-        CLSCTX.CLSCTX_ALL,
-        riid,
-        ppv.cast(),
-      );
-      if (FAILED(hr)) throw WindowsException(hr);
+  // Create an instance of the IExampleCom interface.
+  var hr = CoCreateInstance(
+    lpclsid,
+    nullptr,
+    CLSCTX.CLSCTX_ALL,
+    riid,
+    ppv.cast(),
+  );
+  if (FAILED(hr)) throw WindowsException(hr);
 
-      // Pass the interface pointer to the IExampleCom class.
-      final exampleCom = IExampleCom(ppv);
+  // Pass the interface pointer to the IExampleCom class.
+  final exampleCom = IExampleCom(ppv);
 
-      // Call the GetMessage method.
-      final pRetValMessage = arena<Pointer<Utf16>>();
-      hr = exampleCom.GetMessage(pRetValMessage);
-      if (FAILED(hr)) throw WindowsException(hr);
-      final bstr = pRetValMessage.value;
-      final message = bstr.toDartString();
-      print('Message from .NET component: $message');
-      SysFreeString(bstr);
+  // Call the GetMessage method.
+  final pRetValMessage = arena<Pointer<Utf16>>();
+  hr = exampleCom.GetMessage(pRetValMessage);
+  if (FAILED(hr)) throw WindowsException(hr);
+  final bstr = pRetValMessage.value;
+  final message = bstr.toDartString();
+  print('Message from .NET component: $message');
+  SysFreeString(bstr);
 
-      // Call the GetSum method.
-      final pRetValSum = arena<Int32>();
-      hr = exampleCom.GetSum(5, 7, pRetValSum);
-      if (FAILED(hr)) throw WindowsException(hr);
-      final sum = pRetValSum.value;
-      print('Sum from .NET component: $sum');
-    });
+  // Call the GetSum method.
+  final pRetValSum = arena<Int32>();
+  hr = exampleCom.GetSum(5, 7, pRetValSum);
+  if (FAILED(hr)) throw WindowsException(hr);
+  final sum = pRetValSum.value;
+  print('Sum from .NET component: $sum');
+});
 
 /// Demonstrates late binding using the [IDispatch] interface via the
 /// [Dispatcher] to make it easier to call methods on the COM object.
@@ -157,7 +163,8 @@ void invokeMethodsViaLateBinding() {
     ..vt = VARENUM.VT_I4
     ..intVal = 5; // This is the first argument to the method.
   dispParams.ref
-    ..cArgs = 2 // Number of arguments.
+    ..cArgs =
+        2 // Number of arguments.
     ..rgvarg = args; // Pointer to the arguments.
   final pRetValSum = calloc<VARIANT>();
   VariantInit(pRetValSum);

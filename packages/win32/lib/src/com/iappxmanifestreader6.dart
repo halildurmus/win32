@@ -38,16 +38,20 @@ class IAppxManifestReader6 extends IUnknown {
       IAppxManifestReader6(interface.toInterface(IID_IAppxManifestReader6));
 
   int getIsNonQualifiedResourcePackage(
-          Pointer<Int32> isNonQualifiedResourcePackage) =>
-      (ptr.ref.vtable + 3)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer,
-                              Pointer<Int32> isNonQualifiedResourcePackage)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, Pointer<Int32> isNonQualifiedResourcePackage)>()(
-          ptr.ref.lpVtbl, isNonQualifiedResourcePackage);
+    Pointer<Int32> isNonQualifiedResourcePackage,
+  ) => (ptr.ref.vtable + 3)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<Int32> isNonQualifiedResourcePackage,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(Pointer, Pointer<Int32> isNonQualifiedResourcePackage)
+      >()(ptr.ref.lpVtbl, isNonQualifiedResourcePackage);
 }

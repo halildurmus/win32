@@ -35,20 +35,24 @@ class IUIAutomationElementArray extends IUnknown {
 
   factory IUIAutomationElementArray.from(IUnknown interface) =>
       IUIAutomationElementArray(
-          interface.toInterface(IID_IUIAutomationElementArray));
+        interface.toInterface(IID_IUIAutomationElementArray),
+      );
 
   int get length {
     final retValuePtr = calloc<Int32>();
 
     try {
       final hr = (ptr.ref.vtable + 3)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> length)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> length)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> length)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> length)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -59,17 +63,25 @@ class IUIAutomationElementArray extends IUnknown {
     }
   }
 
-  int getElement(
-          int index, Pointer<Pointer<COMObject>> element) =>
+  int getElement(int index, Pointer<Pointer<COMObject>> element) =>
       (ptr.ref.vtable + 4)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Int32 index,
-                              Pointer<Pointer<COMObject>> element)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, int index,
-                      Pointer<Pointer<COMObject>> element)>()(
-          ptr.ref.lpVtbl, index, element);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Int32 index,
+                  Pointer<Pointer<COMObject>> element,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
+              Pointer,
+              int index,
+              Pointer<Pointer<COMObject>> element,
+            )
+          >()(ptr.ref.lpVtbl, index, element);
 }

@@ -34,7 +34,7 @@ void main() {
         '{8ceb6cd2-b446-46f7-b265-90f8e55ad650}', // IFileOpenPicker2
         '{3f57b569-2522-4ca5-aa73-a15509f1fcbf}', // IFileOpenPickerWithOperationId
         if (getWindowsBuildNumber() >= 18362)
-          '{d9a5c5b3-c5dc-5b98-bd80-a8d0ca0584d8}' // IFileOpenPicker3
+          '{d9a5c5b3-c5dc-5b98-bd80-a8d0ca0584d8}', // IFileOpenPicker3
       ];
       final className = 'Windows.Storage.Pickers.FileOpenPicker';
       final object = activateClass(className);

@@ -15,8 +15,9 @@ import '../guid.dart';
 import '../structs.g.dart';
 import '../variant.dart';
 
-final _api_ms_win_ro_typeresolution_l1_1_1 =
-    DynamicLibrary.open('api-ms-win-ro-typeresolution-l1-1-1.dll');
+final _api_ms_win_ro_typeresolution_l1_1_1 = DynamicLibrary.open(
+  'api-ms-win-ro-typeresolution-l1-1-1.dll',
+);
 
 /// Returns true or false to indicate whether the API contract with the
 /// specified name and major version number is present.
@@ -30,15 +31,24 @@ final _api_ms_win_ro_typeresolution_l1_1_1 =
 /// ```
 /// {@category winrt}
 int RoIsApiContractMajorVersionPresent(
-        Pointer<Utf16> name, int majorVersion, Pointer<Int32> present) =>
-    _RoIsApiContractMajorVersionPresent(name, majorVersion, present);
+  Pointer<Utf16> name,
+  int majorVersion,
+  Pointer<Int32> present,
+) => _RoIsApiContractMajorVersionPresent(name, majorVersion, present);
 
-final _RoIsApiContractMajorVersionPresent =
-    _api_ms_win_ro_typeresolution_l1_1_1.lookupFunction<
-        Int32 Function(
-            Pointer<Utf16> name, Uint16 majorVersion, Pointer<Int32> present),
-        int Function(Pointer<Utf16> name, int majorVersion,
-            Pointer<Int32> present)>('RoIsApiContractMajorVersionPresent');
+final _RoIsApiContractMajorVersionPresent = _api_ms_win_ro_typeresolution_l1_1_1
+    .lookupFunction<
+      Int32 Function(
+        Pointer<Utf16> name,
+        Uint16 majorVersion,
+        Pointer<Int32> present,
+      ),
+      int Function(
+        Pointer<Utf16> name,
+        int majorVersion,
+        Pointer<Int32> present,
+      )
+    >('RoIsApiContractMajorVersionPresent');
 
 /// Returns true or false to indicate whether the API contract with the
 /// specified name and major and minor version number is present.
@@ -52,13 +62,25 @@ final _RoIsApiContractMajorVersionPresent =
 /// );
 /// ```
 /// {@category winrt}
-int RoIsApiContractPresent(Pointer<Utf16> name, int majorVersion,
-        int minorVersion, Pointer<Int32> present) =>
-    _RoIsApiContractPresent(name, majorVersion, minorVersion, present);
+int RoIsApiContractPresent(
+  Pointer<Utf16> name,
+  int majorVersion,
+  int minorVersion,
+  Pointer<Int32> present,
+) => _RoIsApiContractPresent(name, majorVersion, minorVersion, present);
 
-final _RoIsApiContractPresent =
-    _api_ms_win_ro_typeresolution_l1_1_1.lookupFunction<
-        Int32 Function(Pointer<Utf16> name, Uint16 majorVersion,
-            Uint16 minorVersion, Pointer<Int32> present),
-        int Function(Pointer<Utf16> name, int majorVersion, int minorVersion,
-            Pointer<Int32> present)>('RoIsApiContractPresent');
+final _RoIsApiContractPresent = _api_ms_win_ro_typeresolution_l1_1_1
+    .lookupFunction<
+      Int32 Function(
+        Pointer<Utf16> name,
+        Uint16 majorVersion,
+        Uint16 minorVersion,
+        Pointer<Int32> present,
+      ),
+      int Function(
+        Pointer<Utf16> name,
+        int majorVersion,
+        int minorVersion,
+        Pointer<Int32> present,
+      )
+    >('RoIsApiContractPresent');

@@ -25,11 +25,13 @@ class Level {
   // de: used to draw the level
   // width & height: level size in cells
   Level(this.engine, [this.width = 10, this.height = 20])
-      : lastTime = 0,
-        speed = 500,
-        score = -1 {
-    board =
-        List.generate(width, (i) => List.generate(height, (i) => RGB(0, 0, 0)));
+    : lastTime = 0,
+      speed = 500,
+      score = -1 {
+    board = List.generate(
+      width,
+      (i) => List.generate(height, (i) => RGB(0, 0, 0)),
+    );
     next = pieceSet.randomPiece;
   }
 

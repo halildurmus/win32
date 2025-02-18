@@ -17,11 +17,22 @@ Object queryRegistryValue(int key, String subKey, String valueName) {
   final dataSize = calloc<DWORD>()..value = 256;
 
   try {
-    var result =
-        RegOpenKeyEx(key, subKeyPtr, 0, REG_SAM_FLAGS.KEY_READ, openKeyPtr);
+    var result = RegOpenKeyEx(
+      key,
+      subKeyPtr,
+      0,
+      REG_SAM_FLAGS.KEY_READ,
+      openKeyPtr,
+    );
     if (result == WIN32_ERROR.ERROR_SUCCESS) {
       result = RegQueryValueEx(
-          openKeyPtr.value, valueNamePtr, nullptr, dataType, data, dataSize);
+        openKeyPtr.value,
+        valueNamePtr,
+        nullptr,
+        dataType,
+        data,
+        dataSize,
+      );
 
       if (result == WIN32_ERROR.ERROR_SUCCESS) {
         if (dataType.value == REG_VALUE_TYPE.REG_DWORD) {
@@ -50,10 +61,14 @@ Object queryRegistryValue(int key, String subKey, String valueName) {
 }
 
 bool isWindows11() {
-  final windowsBuildNumber = int.parse(queryRegistryValue(
-      HKEY_LOCAL_MACHINE,
-      'SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\',
-      'CurrentBuildNumber') as String);
+  final windowsBuildNumber = int.parse(
+    queryRegistryValue(
+          HKEY_LOCAL_MACHINE,
+          'SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\',
+          'CurrentBuildNumber',
+        )
+        as String,
+  );
 
   return windowsBuildNumber >= 22000;
 }

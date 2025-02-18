@@ -38,139 +38,188 @@ class IShellItemResources extends IUnknown {
 
   int getAttributes(Pointer<Uint32> pdwAttributes) => (ptr.ref.vtable + 3)
       .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(Pointer, Pointer<Uint32> pdwAttributes)>>>()
+        Pointer<
+          NativeFunction<Int32 Function(Pointer, Pointer<Uint32> pdwAttributes)>
+        >
+      >()
       .value
-      .asFunction<
-          int Function(Pointer,
-              Pointer<Uint32> pdwAttributes)>()(ptr.ref.lpVtbl, pdwAttributes);
+      .asFunction<int Function(Pointer, Pointer<Uint32> pdwAttributes)>()(
+    ptr.ref.lpVtbl,
+    pdwAttributes,
+  );
 
   int getSize(Pointer<Uint64> pullSize) => (ptr.ref.vtable + 4)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<Uint64> pullSize)>>>()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Uint64> pullSize)>()(
-      ptr.ref.lpVtbl, pullSize);
+      .cast<
+        Pointer<
+          NativeFunction<Int32 Function(Pointer, Pointer<Uint64> pullSize)>
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Uint64> pullSize)>()(
+    ptr.ref.lpVtbl,
+    pullSize,
+  );
 
-  int getTimes(Pointer<FILETIME> pftCreation, Pointer<FILETIME> pftWrite,
-          Pointer<FILETIME> pftAccess) =>
-      (ptr.ref.vtable + 5)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<FILETIME> pftCreation,
-                              Pointer<FILETIME> pftWrite,
-                              Pointer<FILETIME> pftAccess)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      Pointer<FILETIME> pftCreation,
-                      Pointer<FILETIME> pftWrite,
-                      Pointer<FILETIME> pftAccess)>()(
-          ptr.ref.lpVtbl, pftCreation, pftWrite, pftAccess);
+  int getTimes(
+    Pointer<FILETIME> pftCreation,
+    Pointer<FILETIME> pftWrite,
+    Pointer<FILETIME> pftAccess,
+  ) => (ptr.ref.vtable + 5)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<FILETIME> pftCreation,
+              Pointer<FILETIME> pftWrite,
+              Pointer<FILETIME> pftAccess,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<FILETIME> pftCreation,
+          Pointer<FILETIME> pftWrite,
+          Pointer<FILETIME> pftAccess,
+        )
+      >()(ptr.ref.lpVtbl, pftCreation, pftWrite, pftAccess);
 
-  int setTimes(Pointer<FILETIME> pftCreation, Pointer<FILETIME> pftWrite,
-          Pointer<FILETIME> pftAccess) =>
-      (ptr.ref.vtable + 6)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<FILETIME> pftCreation,
-                              Pointer<FILETIME> pftWrite,
-                              Pointer<FILETIME> pftAccess)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      Pointer<FILETIME> pftCreation,
-                      Pointer<FILETIME> pftWrite,
-                      Pointer<FILETIME> pftAccess)>()(
-          ptr.ref.lpVtbl, pftCreation, pftWrite, pftAccess);
+  int setTimes(
+    Pointer<FILETIME> pftCreation,
+    Pointer<FILETIME> pftWrite,
+    Pointer<FILETIME> pftAccess,
+  ) => (ptr.ref.vtable + 6)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<FILETIME> pftCreation,
+              Pointer<FILETIME> pftWrite,
+              Pointer<FILETIME> pftAccess,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<FILETIME> pftCreation,
+          Pointer<FILETIME> pftWrite,
+          Pointer<FILETIME> pftAccess,
+        )
+      >()(ptr.ref.lpVtbl, pftCreation, pftWrite, pftAccess);
 
-  int getResourceDescription(Pointer<SHELL_ITEM_RESOURCE> pcsir,
-          Pointer<Pointer<Utf16>> ppszDescription) =>
-      (ptr.ref.vtable + 7)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<SHELL_ITEM_RESOURCE> pcsir,
-                              Pointer<Pointer<Utf16>> ppszDescription)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<SHELL_ITEM_RESOURCE> pcsir,
-                      Pointer<Pointer<Utf16>> ppszDescription)>()(
-          ptr.ref.lpVtbl, pcsir, ppszDescription);
+  int getResourceDescription(
+    Pointer<SHELL_ITEM_RESOURCE> pcsir,
+    Pointer<Pointer<Utf16>> ppszDescription,
+  ) => (ptr.ref.vtable + 7)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<SHELL_ITEM_RESOURCE> pcsir,
+              Pointer<Pointer<Utf16>> ppszDescription,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<SHELL_ITEM_RESOURCE> pcsir,
+          Pointer<Pointer<Utf16>> ppszDescription,
+        )
+      >()(ptr.ref.lpVtbl, pcsir, ppszDescription);
 
   int enumResources(Pointer<Pointer<COMObject>> ppenumr) => (ptr.ref.vtable + 8)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<Pointer<COMObject>> ppenumr)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, Pointer<Pointer<COMObject>> ppenumr)>()(
-      ptr.ref.lpVtbl, ppenumr);
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<Pointer<COMObject>> ppenumr)
+          >
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> ppenumr)>()(
+    ptr.ref.lpVtbl,
+    ppenumr,
+  );
 
-  int supportsResource(Pointer<SHELL_ITEM_RESOURCE> pcsir) =>
-      (ptr.ref.vtable + 9)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<SHELL_ITEM_RESOURCE> pcsir)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<SHELL_ITEM_RESOURCE> pcsir)>()(
-          ptr.ref.lpVtbl, pcsir);
+  int supportsResource(Pointer<SHELL_ITEM_RESOURCE> pcsir) => (ptr.ref.vtable +
+          9)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<SHELL_ITEM_RESOURCE> pcsir)
+          >
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<SHELL_ITEM_RESOURCE> pcsir)>()(
+    ptr.ref.lpVtbl,
+    pcsir,
+  );
 
-  int openResource(Pointer<SHELL_ITEM_RESOURCE> pcsir, Pointer<GUID> riid,
-          Pointer<Pointer> ppv) =>
-      (ptr.ref.vtable + 10)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer,
-                          Pointer<SHELL_ITEM_RESOURCE> pcsir,
-                          Pointer<GUID> riid,
-                          Pointer<Pointer> ppv)>>>()
-          .value
-          .asFunction<
-              int Function(
-                  Pointer,
-                  Pointer<SHELL_ITEM_RESOURCE> pcsir,
-                  Pointer<GUID> riid,
-                  Pointer<Pointer> ppv)>()(ptr.ref.lpVtbl, pcsir, riid, ppv);
+  int openResource(
+    Pointer<SHELL_ITEM_RESOURCE> pcsir,
+    Pointer<GUID> riid,
+    Pointer<Pointer> ppv,
+  ) => (ptr.ref.vtable + 10)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<SHELL_ITEM_RESOURCE> pcsir,
+              Pointer<GUID> riid,
+              Pointer<Pointer> ppv,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<SHELL_ITEM_RESOURCE> pcsir,
+          Pointer<GUID> riid,
+          Pointer<Pointer> ppv,
+        )
+      >()(ptr.ref.lpVtbl, pcsir, riid, ppv);
 
-  int createResource(Pointer<SHELL_ITEM_RESOURCE> pcsir, Pointer<GUID> riid,
-          Pointer<Pointer> ppv) =>
-      (ptr.ref.vtable + 11)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer,
-                          Pointer<SHELL_ITEM_RESOURCE> pcsir,
-                          Pointer<GUID> riid,
-                          Pointer<Pointer> ppv)>>>()
-          .value
-          .asFunction<
-              int Function(
-                  Pointer,
-                  Pointer<SHELL_ITEM_RESOURCE> pcsir,
-                  Pointer<GUID> riid,
-                  Pointer<Pointer> ppv)>()(ptr.ref.lpVtbl, pcsir, riid, ppv);
+  int createResource(
+    Pointer<SHELL_ITEM_RESOURCE> pcsir,
+    Pointer<GUID> riid,
+    Pointer<Pointer> ppv,
+  ) => (ptr.ref.vtable + 11)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<SHELL_ITEM_RESOURCE> pcsir,
+              Pointer<GUID> riid,
+              Pointer<Pointer> ppv,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<SHELL_ITEM_RESOURCE> pcsir,
+          Pointer<GUID> riid,
+          Pointer<Pointer> ppv,
+        )
+      >()(ptr.ref.lpVtbl, pcsir, riid, ppv);
 
   int markForDelete() => (ptr.ref.vtable + 12)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()

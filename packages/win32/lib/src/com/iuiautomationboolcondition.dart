@@ -37,20 +37,24 @@ class IUIAutomationBoolCondition extends IUIAutomationCondition {
 
   factory IUIAutomationBoolCondition.from(IUnknown interface) =>
       IUIAutomationBoolCondition(
-          interface.toInterface(IID_IUIAutomationBoolCondition));
+        interface.toInterface(IID_IUIAutomationBoolCondition),
+      );
 
   int get booleanValue {
     final retValuePtr = calloc<Int32>();
 
     try {
       final hr = (ptr.ref.vtable + 3)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> boolVal)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> boolVal)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> boolVal)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> boolVal)>()(
+        ptr.ref.lpVtbl,
+        retValuePtr,
+      );
 
       if (FAILED(hr)) throw WindowsException(hr);
 

@@ -13,9 +13,7 @@ class Game {
 
   bool isPaused;
 
-  Game(this.canvas)
-      : isPaused = false,
-        level = Level(canvas);
+  Game(this.canvas) : isPaused = false, level = Level(canvas);
 
   bool get isGameOver => level.isGameOver;
 

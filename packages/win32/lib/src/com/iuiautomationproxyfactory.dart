@@ -37,40 +37,55 @@ class IUIAutomationProxyFactory extends IUnknown {
 
   factory IUIAutomationProxyFactory.from(IUnknown interface) =>
       IUIAutomationProxyFactory(
-          interface.toInterface(IID_IUIAutomationProxyFactory));
+        interface.toInterface(IID_IUIAutomationProxyFactory),
+      );
 
-  int createProvider(int hwnd, int idObject, int idChild,
-          Pointer<Pointer<COMObject>> provider) =>
-      (ptr.ref.vtable + 3)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              IntPtr hwnd,
-                              Int32 idObject,
-                              Int32 idChild,
-                              Pointer<Pointer<COMObject>> provider)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, int hwnd, int idObject, int idChild,
-                      Pointer<Pointer<COMObject>> provider)>()(
-          ptr.ref.lpVtbl, hwnd, idObject, idChild, provider);
+  int createProvider(
+    int hwnd,
+    int idObject,
+    int idChild,
+    Pointer<Pointer<COMObject>> provider,
+  ) => (ptr.ref.vtable + 3)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              IntPtr hwnd,
+              Int32 idObject,
+              Int32 idChild,
+              Pointer<Pointer<COMObject>> provider,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          int hwnd,
+          int idObject,
+          int idChild,
+          Pointer<Pointer<COMObject>> provider,
+        )
+      >()(ptr.ref.lpVtbl, hwnd, idObject, idChild, provider);
 
   Pointer<Utf16> get proxyFactoryId {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
       final hr = (ptr.ref.vtable + 4)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<Utf16>> factoryId)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<Utf16>> factoryId)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<Utf16>> factoryId)
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<Utf16>> factoryId)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 

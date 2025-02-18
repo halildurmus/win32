@@ -38,32 +38,47 @@ class IInspectable extends IUnknown {
 
   int getIids(Pointer<Uint32> iidCount, Pointer<Pointer<GUID>> iids) =>
       (ptr.ref.vtable + 3)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Uint32> iidCount,
-                              Pointer<Pointer<GUID>> iids)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Uint32> iidCount,
-                      Pointer<Pointer<GUID>> iids)>()(
-          ptr.ref.lpVtbl, iidCount, iids);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<Uint32> iidCount,
+                  Pointer<Pointer<GUID>> iids,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
+              Pointer,
+              Pointer<Uint32> iidCount,
+              Pointer<Pointer<GUID>> iids,
+            )
+          >()(ptr.ref.lpVtbl, iidCount, iids);
 
   int getRuntimeClassName(Pointer<IntPtr> className) => (ptr.ref.vtable + 4)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<IntPtr> className)>>>()
-          .value
-          .asFunction<int Function(Pointer, Pointer<IntPtr> className)>()(
-      ptr.ref.lpVtbl, className);
+      .cast<
+        Pointer<
+          NativeFunction<Int32 Function(Pointer, Pointer<IntPtr> className)>
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<IntPtr> className)>()(
+    ptr.ref.lpVtbl,
+    className,
+  );
 
   int getTrustLevel(Pointer<Int32> trustLevel) => (ptr.ref.vtable + 5)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<Int32> trustLevel)>>>()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Int32> trustLevel)>()(
-      ptr.ref.lpVtbl, trustLevel);
+      .cast<
+        Pointer<
+          NativeFunction<Int32 Function(Pointer, Pointer<Int32> trustLevel)>
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Int32> trustLevel)>()(
+    ptr.ref.lpVtbl,
+    trustLevel,
+  );
 }

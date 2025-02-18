@@ -13,18 +13,24 @@ class FunctionProjection {
   final List<ParameterProjection> parameters;
 
   FunctionProjection(this.method, this.lib)
-      : nameWithoutEncoding = stripAnsiUnicodeSuffix(method.name),
-        returnType = TypeProjection(method.returnType.typeIdentifier),
-        parameters = method.parameters
-            .map((param) => ParameterProjection(
-                param.name, TypeProjection(param.typeIdentifier)))
-            .toList();
+    : nameWithoutEncoding = stripAnsiUnicodeSuffix(method.name),
+      returnType = TypeProjection(method.returnType.typeIdentifier),
+      parameters =
+          method.parameters
+              .map(
+                (param) => ParameterProjection(
+                  param.name,
+                  TypeProjection(param.typeIdentifier),
+                ),
+              )
+              .toList();
 
   // TODO: remove when https://github.com/microsoft/win32metadata/issues/229
   //  is fixed.
-  String get k32StrippedName => nameWithoutEncoding.startsWith('K32')
-      ? nameWithoutEncoding.substring(3)
-      : nameWithoutEncoding;
+  String get k32StrippedName =>
+      nameWithoutEncoding.startsWith('K32')
+          ? nameWithoutEncoding.substring(3)
+          : nameWithoutEncoding;
 
   String get nativePrototype =>
       '${returnType.nativeType} Function($nativeParams)';

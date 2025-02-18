@@ -39,44 +39,66 @@ class IUIAutomation3 extends IUIAutomation2 {
       IUIAutomation3(interface.toInterface(IID_IUIAutomation3));
 
   int addTextEditTextChangedEventHandler(
+    Pointer<COMObject> element,
+    int scope,
+    int textEditChangeType,
+    Pointer<COMObject> cacheRequest,
+    Pointer<COMObject> handler,
+  ) => (ptr.ref.vtable + 64)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<COMObject> element,
+              Int32 scope,
+              Int32 textEditChangeType,
+              Pointer<COMObject> cacheRequest,
+              Pointer<COMObject> handler,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
           Pointer<COMObject> element,
           int scope,
           int textEditChangeType,
           Pointer<COMObject> cacheRequest,
-          Pointer<COMObject> handler) =>
-      (ptr.ref.vtable + 64)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<COMObject> element,
-                              Int32 scope,
-                              Int32 textEditChangeType,
-                              Pointer<COMObject> cacheRequest,
-                              Pointer<COMObject> handler)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      Pointer<COMObject> element,
-                      int scope,
-                      int textEditChangeType,
-                      Pointer<COMObject> cacheRequest,
-                      Pointer<COMObject> handler)>()(ptr.ref.lpVtbl, element,
-          scope, textEditChangeType, cacheRequest, handler);
+          Pointer<COMObject> handler,
+        )
+      >()(
+    ptr.ref.lpVtbl,
+    element,
+    scope,
+    textEditChangeType,
+    cacheRequest,
+    handler,
+  );
 
   int removeTextEditTextChangedEventHandler(
-          Pointer<COMObject> element, Pointer<COMObject> handler) =>
-      (ptr.ref.vtable + 65)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<COMObject> element,
-                              Pointer<COMObject> handler)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<COMObject> element,
-                      Pointer<COMObject> handler)>()(
-          ptr.ref.lpVtbl, element, handler);
+    Pointer<COMObject> element,
+    Pointer<COMObject> handler,
+  ) => (ptr.ref.vtable + 65)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<COMObject> element,
+              Pointer<COMObject> handler,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<COMObject> element,
+          Pointer<COMObject> handler,
+        )
+      >()(ptr.ref.lpVtbl, element, handler);
 }

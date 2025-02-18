@@ -53,5 +53,6 @@ class WbemRefresher extends IWbemRefresher {
   WbemRefresher(super.ptr);
 
   factory WbemRefresher.createInstance() => WbemRefresher(
-      COMObject.createFromID(CLSID_WbemRefresher, IID_IWbemRefresher));
+    COMObject.createFromID(CLSID_WbemRefresher, IID_IWbemRefresher),
+  );
 }

@@ -38,60 +38,82 @@ class IMMDevice extends IUnknown {
       IMMDevice(interface.toInterface(IID_IMMDevice));
 
   int activate(
+    Pointer<GUID> iid,
+    int dwClsCtx,
+    Pointer<PROPVARIANT> pActivationParams,
+    Pointer<Pointer> ppInterface,
+  ) => (ptr.ref.vtable + 3)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<GUID> iid,
+              Uint32 dwClsCtx,
+              Pointer<PROPVARIANT> pActivationParams,
+              Pointer<Pointer> ppInterface,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
           Pointer<GUID> iid,
           int dwClsCtx,
           Pointer<PROPVARIANT> pActivationParams,
-          Pointer<Pointer> ppInterface) =>
-      (ptr.ref.vtable + 3)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<GUID> iid,
-                              Uint32 dwClsCtx,
-                              Pointer<PROPVARIANT> pActivationParams,
-                              Pointer<Pointer> ppInterface)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      Pointer<GUID> iid,
-                      int dwClsCtx,
-                      Pointer<PROPVARIANT> pActivationParams,
-                      Pointer<Pointer> ppInterface)>()(
-          ptr.ref.lpVtbl, iid, dwClsCtx, pActivationParams, ppInterface);
+          Pointer<Pointer> ppInterface,
+        )
+      >()(ptr.ref.lpVtbl, iid, dwClsCtx, pActivationParams, ppInterface);
 
   int openPropertyStore(
-          int stgmAccess, Pointer<Pointer<COMObject>> ppProperties) =>
-      (ptr.ref.vtable + 4)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Uint32 stgmAccess,
-                              Pointer<Pointer<COMObject>> ppProperties)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, int stgmAccess,
-                      Pointer<Pointer<COMObject>> ppProperties)>()(
-          ptr.ref.lpVtbl, stgmAccess, ppProperties);
+    int stgmAccess,
+    Pointer<Pointer<COMObject>> ppProperties,
+  ) => (ptr.ref.vtable + 4)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Uint32 stgmAccess,
+              Pointer<Pointer<COMObject>> ppProperties,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          int stgmAccess,
+          Pointer<Pointer<COMObject>> ppProperties,
+        )
+      >()(ptr.ref.lpVtbl, stgmAccess, ppProperties);
 
   int getId(Pointer<Pointer<Utf16>> ppstrId) => (ptr.ref.vtable + 5)
       .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(Pointer, Pointer<Pointer<Utf16>> ppstrId)>>>()
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<Pointer<Utf16>> ppstrId)
+          >
+        >
+      >()
       .value
-      .asFunction<
-          int Function(Pointer,
-              Pointer<Pointer<Utf16>> ppstrId)>()(ptr.ref.lpVtbl, ppstrId);
+      .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> ppstrId)>()(
+    ptr.ref.lpVtbl,
+    ppstrId,
+  );
 
   int getState(Pointer<Uint32> pdwState) => (ptr.ref.vtable + 6)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<Uint32> pdwState)>>>()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Uint32> pdwState)>()(
-      ptr.ref.lpVtbl, pdwState);
+      .cast<
+        Pointer<
+          NativeFunction<Int32 Function(Pointer, Pointer<Uint32> pdwState)>
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Uint32> pdwState)>()(
+    ptr.ref.lpVtbl,
+    pdwState,
+  );
 }

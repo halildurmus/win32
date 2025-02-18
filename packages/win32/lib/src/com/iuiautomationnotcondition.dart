@@ -36,16 +36,19 @@ class IUIAutomationNotCondition extends IUIAutomationCondition {
 
   factory IUIAutomationNotCondition.from(IUnknown interface) =>
       IUIAutomationNotCondition(
-          interface.toInterface(IID_IUIAutomationNotCondition));
+        interface.toInterface(IID_IUIAutomationNotCondition),
+      );
 
   int getChild(Pointer<Pointer<COMObject>> condition) => (ptr.ref.vtable + 3)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<Pointer<COMObject>> condition)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, Pointer<Pointer<COMObject>> condition)>()(
-      ptr.ref.lpVtbl, condition);
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<Pointer<COMObject>> condition)
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(Pointer, Pointer<Pointer<COMObject>> condition)
+      >()(ptr.ref.lpVtbl, condition);
 }

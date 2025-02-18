@@ -40,15 +40,17 @@ class ISpeechObjectToken extends IDispatch {
 
     try {
       final hr = (ptr.ref.vtable + 7)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<Utf16>> ObjectId)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<Utf16>> ObjectId)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<Utf16>> ObjectId)
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<Utf16>> ObjectId)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -63,13 +65,16 @@ class ISpeechObjectToken extends IDispatch {
     final retValuePtr = calloc<COMObject>();
 
     final hr = (ptr.ref.vtable + 8)
-            .cast<
-                Pointer<
-                    NativeFunction<
-                        Int32 Function(Pointer, Pointer<COMObject> DataKey)>>>()
-            .value
-            .asFunction<int Function(Pointer, Pointer<COMObject> DataKey)>()(
-        ptr.ref.lpVtbl, retValuePtr);
+        .cast<
+          Pointer<
+            NativeFunction<Int32 Function(Pointer, Pointer<COMObject> DataKey)>
+          >
+        >()
+        .value
+        .asFunction<int Function(Pointer, Pointer<COMObject> DataKey)>()(
+      ptr.ref.lpVtbl,
+      retValuePtr,
+    );
 
     if (FAILED(hr)) {
       free(retValuePtr);
@@ -84,13 +89,15 @@ class ISpeechObjectToken extends IDispatch {
 
     final hr = (ptr.ref.vtable + 9)
         .cast<
-            Pointer<
-                NativeFunction<
-                    Int32 Function(Pointer, Pointer<COMObject> Category)>>>()
+          Pointer<
+            NativeFunction<Int32 Function(Pointer, Pointer<COMObject> Category)>
+          >
+        >()
         .value
-        .asFunction<
-            int Function(Pointer,
-                Pointer<COMObject> Category)>()(ptr.ref.lpVtbl, retValuePtr);
+        .asFunction<int Function(Pointer, Pointer<COMObject> Category)>()(
+      ptr.ref.lpVtbl,
+      retValuePtr,
+    );
 
     if (FAILED(hr)) {
       free(retValuePtr);
@@ -102,178 +109,267 @@ class ISpeechObjectToken extends IDispatch {
 
   int getDescription(int Locale, Pointer<Pointer<Utf16>> Description) =>
       (ptr.ref.vtable + 10)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Int32 Locale,
-                              Pointer<Pointer<Utf16>> Description)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, int Locale,
-                      Pointer<Pointer<Utf16>> Description)>()(
-          ptr.ref.lpVtbl, Locale, Description);
-
-  int setId(
-          Pointer<Utf16> Id, Pointer<Utf16> CategoryID, int CreateIfNotExist) =>
-      (ptr.ref.vtable + 11)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<Utf16> Id,
-                              Pointer<Utf16> CategoryID,
-                              Int16 CreateIfNotExist)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Utf16> Id,
-                      Pointer<Utf16> CategoryID, int CreateIfNotExist)>()(
-          ptr.ref.lpVtbl, Id, CategoryID, CreateIfNotExist);
-
-  int getAttribute(Pointer<Utf16> AttributeName,
-          Pointer<Pointer<Utf16>> AttributeValue) =>
-      (ptr.ref.vtable + 12)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Utf16> AttributeName,
-                              Pointer<Pointer<Utf16>> AttributeValue)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Utf16> AttributeName,
-                      Pointer<Pointer<Utf16>> AttributeValue)>()(
-          ptr.ref.lpVtbl, AttributeName, AttributeValue);
-
-  int createInstance(Pointer<COMObject> pUnkOuter, int ClsContext,
-          Pointer<Pointer<COMObject>> Object) =>
-      (ptr.ref.vtable + 13)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<COMObject> pUnkOuter,
-                              Uint32 ClsContext,
-                              Pointer<Pointer<COMObject>> Object)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<COMObject> pUnkOuter,
-                      int ClsContext, Pointer<Pointer<COMObject>> Object)>()(
-          ptr.ref.lpVtbl, pUnkOuter, ClsContext, Object);
-
-  int remove(Pointer<Utf16> ObjectStorageCLSID) => (ptr.ref.vtable + 14)
           .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-                          Pointer, Pointer<Utf16> ObjectStorageCLSID)>>>()
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Int32 Locale,
+                  Pointer<Pointer<Utf16>> Description,
+                )
+              >
+            >
+          >()
           .value
           .asFunction<
-              int Function(Pointer, Pointer<Utf16> ObjectStorageCLSID)>()(
-      ptr.ref.lpVtbl, ObjectStorageCLSID);
+            int Function(
+              Pointer,
+              int Locale,
+              Pointer<Pointer<Utf16>> Description,
+            )
+          >()(ptr.ref.lpVtbl, Locale, Description);
+
+  int setId(
+    Pointer<Utf16> Id,
+    Pointer<Utf16> CategoryID,
+    int CreateIfNotExist,
+  ) => (ptr.ref.vtable + 11)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<Utf16> Id,
+              Pointer<Utf16> CategoryID,
+              Int16 CreateIfNotExist,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<Utf16> Id,
+          Pointer<Utf16> CategoryID,
+          int CreateIfNotExist,
+        )
+      >()(ptr.ref.lpVtbl, Id, CategoryID, CreateIfNotExist);
+
+  int getAttribute(
+    Pointer<Utf16> AttributeName,
+    Pointer<Pointer<Utf16>> AttributeValue,
+  ) => (ptr.ref.vtable + 12)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<Utf16> AttributeName,
+              Pointer<Pointer<Utf16>> AttributeValue,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<Utf16> AttributeName,
+          Pointer<Pointer<Utf16>> AttributeValue,
+        )
+      >()(ptr.ref.lpVtbl, AttributeName, AttributeValue);
+
+  int createInstance(
+    Pointer<COMObject> pUnkOuter,
+    int ClsContext,
+    Pointer<Pointer<COMObject>> Object,
+  ) => (ptr.ref.vtable + 13)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<COMObject> pUnkOuter,
+              Uint32 ClsContext,
+              Pointer<Pointer<COMObject>> Object,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<COMObject> pUnkOuter,
+          int ClsContext,
+          Pointer<Pointer<COMObject>> Object,
+        )
+      >()(ptr.ref.lpVtbl, pUnkOuter, ClsContext, Object);
+
+  int remove(Pointer<Utf16> ObjectStorageCLSID) => (ptr.ref.vtable + 14)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<Utf16> ObjectStorageCLSID)
+          >
+        >
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<Utf16> ObjectStorageCLSID)>()(
+    ptr.ref.lpVtbl,
+    ObjectStorageCLSID,
+  );
 
   int getStorageFileName(
+    Pointer<Utf16> ObjectStorageCLSID,
+    Pointer<Utf16> KeyName,
+    Pointer<Utf16> FileName,
+    int Folder,
+    Pointer<Pointer<Utf16>> FilePath,
+  ) => (ptr.ref.vtable + 15)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<Utf16> ObjectStorageCLSID,
+              Pointer<Utf16> KeyName,
+              Pointer<Utf16> FileName,
+              Int32 Folder,
+              Pointer<Pointer<Utf16>> FilePath,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
           Pointer<Utf16> ObjectStorageCLSID,
           Pointer<Utf16> KeyName,
           Pointer<Utf16> FileName,
           int Folder,
-          Pointer<Pointer<Utf16>> FilePath) =>
-      (ptr.ref.vtable + 15)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<Utf16> ObjectStorageCLSID,
-                              Pointer<Utf16> KeyName,
-                              Pointer<Utf16> FileName,
-                              Int32 Folder,
-                              Pointer<Pointer<Utf16>> FilePath)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      Pointer<Utf16> ObjectStorageCLSID,
-                      Pointer<Utf16> KeyName,
-                      Pointer<Utf16> FileName,
-                      int Folder,
-                      Pointer<Pointer<Utf16>> FilePath)>()(ptr.ref.lpVtbl,
-          ObjectStorageCLSID, KeyName, FileName, Folder, FilePath);
+          Pointer<Pointer<Utf16>> FilePath,
+        )
+      >()(
+    ptr.ref.lpVtbl,
+    ObjectStorageCLSID,
+    KeyName,
+    FileName,
+    Folder,
+    FilePath,
+  );
 
-  int
-      removeStorageFileName(Pointer<Utf16> ObjectStorageCLSID,
-              Pointer<Utf16> KeyName, int DeleteFile) =>
-          (ptr.ref.vtable + 16)
-                  .cast<
-                      Pointer<
-                          NativeFunction<
-                              Int32 Function(
-                                  Pointer,
-                                  Pointer<Utf16> ObjectStorageCLSID,
-                                  Pointer<Utf16> KeyName,
-                                  Int16 DeleteFile)>>>()
-                  .value
-                  .asFunction<
-                      int Function(Pointer, Pointer<Utf16> ObjectStorageCLSID,
-                          Pointer<Utf16> KeyName, int DeleteFile)>()(
-              ptr.ref.lpVtbl, ObjectStorageCLSID, KeyName, DeleteFile);
+  int removeStorageFileName(
+    Pointer<Utf16> ObjectStorageCLSID,
+    Pointer<Utf16> KeyName,
+    int DeleteFile,
+  ) => (ptr.ref.vtable + 16)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<Utf16> ObjectStorageCLSID,
+              Pointer<Utf16> KeyName,
+              Int16 DeleteFile,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<Utf16> ObjectStorageCLSID,
+          Pointer<Utf16> KeyName,
+          int DeleteFile,
+        )
+      >()(ptr.ref.lpVtbl, ObjectStorageCLSID, KeyName, DeleteFile);
 
-  int isUISupported(Pointer<Utf16> TypeOfUI, Pointer<VARIANT> ExtraData,
-          Pointer<COMObject> Object, Pointer<Int16> Supported) =>
-      (ptr.ref.vtable + 17)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<Utf16> TypeOfUI,
-                              Pointer<VARIANT> ExtraData,
-                              Pointer<COMObject> Object,
-                              Pointer<Int16> Supported)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      Pointer<Utf16> TypeOfUI,
-                      Pointer<VARIANT> ExtraData,
-                      Pointer<COMObject> Object,
-                      Pointer<Int16> Supported)>()(
-          ptr.ref.lpVtbl, TypeOfUI, ExtraData, Object, Supported);
+  int isUISupported(
+    Pointer<Utf16> TypeOfUI,
+    Pointer<VARIANT> ExtraData,
+    Pointer<COMObject> Object,
+    Pointer<Int16> Supported,
+  ) => (ptr.ref.vtable + 17)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<Utf16> TypeOfUI,
+              Pointer<VARIANT> ExtraData,
+              Pointer<COMObject> Object,
+              Pointer<Int16> Supported,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<Utf16> TypeOfUI,
+          Pointer<VARIANT> ExtraData,
+          Pointer<COMObject> Object,
+          Pointer<Int16> Supported,
+        )
+      >()(ptr.ref.lpVtbl, TypeOfUI, ExtraData, Object, Supported);
 
-  int displayUI(int hWnd, Pointer<Utf16> Title, Pointer<Utf16> TypeOfUI,
-          Pointer<VARIANT> ExtraData, Pointer<COMObject> Object) =>
-      (ptr.ref.vtable + 18)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Int32 hWnd,
-                              Pointer<Utf16> Title,
-                              Pointer<Utf16> TypeOfUI,
-                              Pointer<VARIANT> ExtraData,
-                              Pointer<COMObject> Object)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      int hWnd,
-                      Pointer<Utf16> Title,
-                      Pointer<Utf16> TypeOfUI,
-                      Pointer<VARIANT> ExtraData,
-                      Pointer<COMObject> Object)>()(
-          ptr.ref.lpVtbl, hWnd, Title, TypeOfUI, ExtraData, Object);
+  int displayUI(
+    int hWnd,
+    Pointer<Utf16> Title,
+    Pointer<Utf16> TypeOfUI,
+    Pointer<VARIANT> ExtraData,
+    Pointer<COMObject> Object,
+  ) => (ptr.ref.vtable + 18)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Int32 hWnd,
+              Pointer<Utf16> Title,
+              Pointer<Utf16> TypeOfUI,
+              Pointer<VARIANT> ExtraData,
+              Pointer<COMObject> Object,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          int hWnd,
+          Pointer<Utf16> Title,
+          Pointer<Utf16> TypeOfUI,
+          Pointer<VARIANT> ExtraData,
+          Pointer<COMObject> Object,
+        )
+      >()(ptr.ref.lpVtbl, hWnd, Title, TypeOfUI, ExtraData, Object);
 
   int matchesAttributes(Pointer<Utf16> Attributes, Pointer<Int16> Matches) =>
       (ptr.ref.vtable + 19)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Utf16> Attributes,
-                              Pointer<Int16> Matches)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Utf16> Attributes,
-                      Pointer<Int16> Matches)>()(
-          ptr.ref.lpVtbl, Attributes, Matches);
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<Utf16> Attributes,
+                  Pointer<Int16> Matches,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
+              Pointer,
+              Pointer<Utf16> Attributes,
+              Pointer<Int16> Matches,
+            )
+          >()(ptr.ref.lpVtbl, Attributes, Matches);
 }

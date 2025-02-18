@@ -15,8 +15,9 @@ import '../guid.dart';
 import '../structs.g.dart';
 import '../variant.dart';
 
-final _api_ms_win_service_core_l1_1_5 =
-    DynamicLibrary.open('api-ms-win-service-core-l1-1-5.dll');
+final _api_ms_win_service_core_l1_1_5 = DynamicLibrary.open(
+  'api-ms-win-service-core-l1-1-5.dll',
+);
 
 /// Returns a path for a per-service filesystem location for a service and
 /// associated programs to read and/or write state to.
@@ -32,28 +33,36 @@ final _api_ms_win_service_core_l1_1_5 =
 /// ```
 /// {@category api_ms_win_service_core_l1_1_5}
 int GetSharedServiceDirectory(
+  int ServiceHandle,
+  int DirectoryType,
+  Pointer<Utf16> PathBuffer,
+  int PathBufferLength,
+  Pointer<Uint32> RequiredBufferLength,
+) => _GetSharedServiceDirectory(
+  ServiceHandle,
+  DirectoryType,
+  PathBuffer,
+  PathBufferLength,
+  RequiredBufferLength,
+);
+
+final _GetSharedServiceDirectory = _api_ms_win_service_core_l1_1_5
+    .lookupFunction<
+      Uint32 Function(
+        IntPtr ServiceHandle,
+        Int32 DirectoryType,
+        Pointer<Utf16> PathBuffer,
+        Uint32 PathBufferLength,
+        Pointer<Uint32> RequiredBufferLength,
+      ),
+      int Function(
         int ServiceHandle,
         int DirectoryType,
         Pointer<Utf16> PathBuffer,
         int PathBufferLength,
-        Pointer<Uint32> RequiredBufferLength) =>
-    _GetSharedServiceDirectory(ServiceHandle, DirectoryType, PathBuffer,
-        PathBufferLength, RequiredBufferLength);
-
-final _GetSharedServiceDirectory =
-    _api_ms_win_service_core_l1_1_5.lookupFunction<
-        Uint32 Function(
-            IntPtr ServiceHandle,
-            Int32 DirectoryType,
-            Pointer<Utf16> PathBuffer,
-            Uint32 PathBufferLength,
-            Pointer<Uint32> RequiredBufferLength),
-        int Function(
-            int ServiceHandle,
-            int DirectoryType,
-            Pointer<Utf16> PathBuffer,
-            int PathBufferLength,
-            Pointer<Uint32> RequiredBufferLength)>('GetSharedServiceDirectory');
+        Pointer<Uint32> RequiredBufferLength,
+      )
+    >('GetSharedServiceDirectory');
 
 /// Returns a handle for a registry key for a service and associated
 /// programs to read and/or write state to.
@@ -67,15 +76,30 @@ final _GetSharedServiceDirectory =
 /// );
 /// ```
 /// {@category api_ms_win_service_core_l1_1_5}
-int GetSharedServiceRegistryStateKey(int ServiceHandle, int StateType,
-        int AccessMask, Pointer<IntPtr> ServiceStateKey) =>
-    _GetSharedServiceRegistryStateKey(
-        ServiceHandle, StateType, AccessMask, ServiceStateKey);
+int GetSharedServiceRegistryStateKey(
+  int ServiceHandle,
+  int StateType,
+  int AccessMask,
+  Pointer<IntPtr> ServiceStateKey,
+) => _GetSharedServiceRegistryStateKey(
+  ServiceHandle,
+  StateType,
+  AccessMask,
+  ServiceStateKey,
+);
 
-final _GetSharedServiceRegistryStateKey =
-    _api_ms_win_service_core_l1_1_5.lookupFunction<
-            Uint32 Function(IntPtr ServiceHandle, Int32 StateType,
-                Uint32 AccessMask, Pointer<IntPtr> ServiceStateKey),
-            int Function(int ServiceHandle, int StateType, int AccessMask,
-                Pointer<IntPtr> ServiceStateKey)>(
-        'GetSharedServiceRegistryStateKey');
+final _GetSharedServiceRegistryStateKey = _api_ms_win_service_core_l1_1_5
+    .lookupFunction<
+      Uint32 Function(
+        IntPtr ServiceHandle,
+        Int32 StateType,
+        Uint32 AccessMask,
+        Pointer<IntPtr> ServiceStateKey,
+      ),
+      int Function(
+        int ServiceHandle,
+        int StateType,
+        int AccessMask,
+        Pointer<IntPtr> ServiceStateKey,
+      )
+    >('GetSharedServiceRegistryStateKey');

@@ -42,10 +42,11 @@ class IAudioClockAdjustment extends IUnknown {
 
   int setSampleRate(double flSampleRate) => (ptr.ref.vtable + 3)
       .cast<
-          Pointer<
-              NativeFunction<Int32 Function(Pointer, Float flSampleRate)>>>()
+        Pointer<NativeFunction<Int32 Function(Pointer, Float flSampleRate)>>
+      >()
       .value
-      .asFunction<
-          int Function(
-              Pointer, double flSampleRate)>()(ptr.ref.lpVtbl, flSampleRate);
+      .asFunction<int Function(Pointer, double flSampleRate)>()(
+    ptr.ref.lpVtbl,
+    flSampleRate,
+  );
 }

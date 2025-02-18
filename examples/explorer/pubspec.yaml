@@ -3,23 +3,23 @@ description: Drive explorer, built with Flutter
 publish_to: none
 
 environment:
-  sdk: ^3.4.0
+  sdk: ^3.7.0
 
 dependencies:
-  ffi: ^2.1.2
+  ffi: ^2.1.3
   flutter:
     sdk: flutter
-  font_awesome_flutter: ^10.7.0
+  font_awesome_flutter: ^10.8.0
   menubar:
     git:
       url: https://github.com/google/flutter-desktop-embedding.git
       path: plugins/menubar
-  path_provider: ^2.1.3
+  path_provider: ^2.1.5
   win32:
     path: ../../packages/win32
 
 dev_dependencies:
-  lints: ^5.0.0
+  lints: ^5.1.1
 
 flutter:
   uses-material-design: true

@@ -18,8 +18,10 @@ void main() {
       const type = 'Windows.Win32.UI.Shell.IFileOpenDialog';
       final typeDef = MetadataStore.getMetadataForType(type)!;
       final comTypesToGenerate = loadMap('com_types.json');
-      final projection = ComClassProjection.fromInterface(typeDef,
-          interfaceComment: comTypesToGenerate[type] ?? '');
+      final projection = ComClassProjection.fromInterface(
+        typeDef,
+        interfaceComment: comTypesToGenerate[type] ?? '',
+      );
       compareGolden('ifileopendialog', projection.toString().format());
     });
 
@@ -27,8 +29,10 @@ void main() {
       const type = 'Windows.Win32.Networking.NetworkListManager.INetwork';
       final typeDef = MetadataStore.getMetadataForType(type)!;
       final comTypesToGenerate = loadMap('com_types.json');
-      final projection =
-          ComInterfaceProjection(typeDef, comTypesToGenerate[type] ?? '');
+      final projection = ComInterfaceProjection(
+        typeDef,
+        comTypesToGenerate[type] ?? '',
+      );
       compareGolden('inetwork', projection.toString().format());
     });
 
@@ -46,7 +50,7 @@ void compareGolden(String fileName, String content) {
 
 extension on String {
   /// Formats this string.
-  String format() =>
-      DartFormatter(languageVersion: DartFormatter.latestLanguageVersion)
-          .format(this);
+  String format() => DartFormatter(
+    languageVersion: DartFormatter.latestLanguageVersion,
+  ).format(this);
 }

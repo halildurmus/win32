@@ -40,11 +40,12 @@ class IPersist extends IUnknown {
       IPersist(interface.toInterface(IID_IPersist));
 
   int getClassID(Pointer<GUID> pClassID) => (ptr.ref.vtable + 3)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<GUID> pClassID)>>>()
-          .value
-          .asFunction<int Function(Pointer, Pointer<GUID> pClassID)>()(
-      ptr.ref.lpVtbl, pClassID);
+      .cast<
+        Pointer<NativeFunction<Int32 Function(Pointer, Pointer<GUID> pClassID)>>
+      >()
+      .value
+      .asFunction<int Function(Pointer, Pointer<GUID> pClassID)>()(
+    ptr.ref.lpVtbl,
+    pClassID,
+  );
 }

@@ -39,8 +39,10 @@ void main() {
         );
         VariantClear(folderNameParam);
         expect(result.ref.vt, equals(VARENUM.VT_DISPATCH));
-        final folder =
-            arena.using(Dispatcher(result.ref.pdispVal), (d) => d.dispose());
+        final folder = arena.using(
+          Dispatcher(result.ref.pdispVal),
+          (d) => d.dispose(),
+        );
 
         final newFolderName = BSTR.fromString(r'testfolder456');
         final newFolderNameParam = arena<VARIANT>();
@@ -53,8 +55,10 @@ void main() {
 
         final folderPathResult = folder.get('Path');
         expect(folderPathResult.ref.vt, equals(VARENUM.VT_BSTR));
-        expect(folderPathResult.ref.bstrVal.toDartString(),
-            equals(r'C:\testfolder456'));
+        expect(
+          folderPathResult.ref.bstrVal.toDartString(),
+          equals(r'C:\testfolder456'),
+        );
         VariantClear(folderPathResult);
 
         expect(() => folder.invoke('Delete'), returnsNormally);
@@ -63,8 +67,10 @@ void main() {
     });
 
     test('invoking a non-existeng method throws WindowsException', () {
-      expect(() => dispatcher.invoke('NonExistentMethod'),
-          throwsA(isA<WindowsException>()));
+      expect(
+        () => dispatcher.invoke('NonExistentMethod'),
+        throwsA(isA<WindowsException>()),
+      );
     });
 
     tearDownAll(() => dispatcher.dispose());

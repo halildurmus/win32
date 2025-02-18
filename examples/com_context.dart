@@ -79,8 +79,11 @@ ThreadContext getThreadContext() {
     // Some other error occurred
     if (hr != S_OK) throw WindowsException(hr);
 
-    return ThreadContext(threadID, ApartmentType.fromValue(pAptType.value),
-        ApartmentTypeQualifier.fromValue(pAptQualifier.value));
+    return ThreadContext(
+      threadID,
+      ApartmentType.fromValue(pAptType.value),
+      ApartmentTypeQualifier.fromValue(pAptQualifier.value),
+    );
   } finally {
     free(pAptType);
     free(pAptQualifier);
@@ -138,7 +141,9 @@ Future<void> createIsolates() async {
 void main() async {
   // The main thread is initialized for the COM apartment threading model.
   CoInitializeEx(
-      nullptr, COINIT.COINIT_APARTMENTTHREADED | COINIT.COINIT_DISABLE_OLE1DDE);
+    nullptr,
+    COINIT.COINIT_APARTMENTTHREADED | COINIT.COINIT_DISABLE_OLE1DDE,
+  );
 
   // Should be mainSingleThreaded
   print(getThreadContext().toString());

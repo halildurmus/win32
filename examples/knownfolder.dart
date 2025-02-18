@@ -54,7 +54,11 @@ String getDesktopPath2() {
 
   try {
     final hr = SHGetKnownFolderPath(
-        appsFolder, KNOWN_FOLDER_FLAG.KF_FLAG_DEFAULT, NULL, ppszPath);
+      appsFolder,
+      KNOWN_FOLDER_FLAG.KF_FLAG_DEFAULT,
+      NULL,
+      ppszPath,
+    );
 
     if (FAILED(hr)) {
       throw WindowsException(hr);

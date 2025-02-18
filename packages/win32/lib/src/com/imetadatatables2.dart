@@ -41,30 +41,48 @@ class IMetaDataTables2 extends IMetaDataTables {
   int getMetaDataStorage(Pointer<Pointer> ppvMd, Pointer<Uint32> pcbMd) =>
       (ptr.ref.vtable + 22)
           .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<Pointer> ppvMd,
-                          Pointer<Uint32> pcbMd)>>>()
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<Pointer> ppvMd,
+                  Pointer<Uint32> pcbMd,
+                )
+              >
+            >
+          >()
           .value
           .asFunction<
-              int Function(Pointer, Pointer<Pointer> ppvMd,
-                  Pointer<Uint32> pcbMd)>()(ptr.ref.lpVtbl, ppvMd, pcbMd);
+            int Function(Pointer, Pointer<Pointer> ppvMd, Pointer<Uint32> pcbMd)
+          >()(ptr.ref.lpVtbl, ppvMd, pcbMd);
 
-  int getMetaDataStreamInfo(int ix, Pointer<Pointer<Int8>> ppchName,
-          Pointer<Pointer> ppv, Pointer<Uint32> pcb) =>
-      (ptr.ref.vtable + 23)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Uint32 ix,
-                              Pointer<Pointer<Int8>> ppchName,
-                              Pointer<Pointer> ppv,
-                              Pointer<Uint32> pcb)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, int ix, Pointer<Pointer<Int8>> ppchName,
-                      Pointer<Pointer> ppv, Pointer<Uint32> pcb)>()(
-          ptr.ref.lpVtbl, ix, ppchName, ppv, pcb);
+  int getMetaDataStreamInfo(
+    int ix,
+    Pointer<Pointer<Int8>> ppchName,
+    Pointer<Pointer> ppv,
+    Pointer<Uint32> pcb,
+  ) => (ptr.ref.vtable + 23)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Uint32 ix,
+              Pointer<Pointer<Int8>> ppchName,
+              Pointer<Pointer> ppv,
+              Pointer<Uint32> pcb,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          int ix,
+          Pointer<Pointer<Int8>> ppchName,
+          Pointer<Pointer> ppv,
+          Pointer<Uint32> pcb,
+        )
+      >()(ptr.ref.lpVtbl, ix, ppchName, ppv, pcb);
 }

@@ -72,11 +72,11 @@ class MainPageState extends State<MainPage> {
                       shift: true,
                     ),
                     onSelected: () async => showDocumentsPath(),
-                  )
+                  ),
                 ],
-              )
+              ),
             ],
-          )
+          ),
         ],
         child: Column(
           children: [

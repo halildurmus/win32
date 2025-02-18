@@ -15,8 +15,9 @@ import '../guid.dart';
 import '../structs.g.dart';
 import '../variant.dart';
 
-final _api_ms_win_core_handle_l1_1_0 =
-    DynamicLibrary.open('api-ms-win-core-handle-l1-1-0.dll');
+final _api_ms_win_core_handle_l1_1_0 = DynamicLibrary.open(
+  'api-ms-win-core-handle-l1-1-0.dll',
+);
 
 /// Compares two object handles to determine if they refer to the same
 /// underlying kernel object.
@@ -32,6 +33,6 @@ int CompareObjectHandles(int hFirstObjectHandle, int hSecondObjectHandle) =>
     _CompareObjectHandles(hFirstObjectHandle, hSecondObjectHandle);
 
 final _CompareObjectHandles = _api_ms_win_core_handle_l1_1_0.lookupFunction<
-    Int32 Function(IntPtr hFirstObjectHandle, IntPtr hSecondObjectHandle),
-    int Function(int hFirstObjectHandle,
-        int hSecondObjectHandle)>('CompareObjectHandles');
+  Int32 Function(IntPtr hFirstObjectHandle, IntPtr hSecondObjectHandle),
+  int Function(int hFirstObjectHandle, int hSecondObjectHandle)
+>('CompareObjectHandles');

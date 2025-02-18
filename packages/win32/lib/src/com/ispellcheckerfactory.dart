@@ -41,13 +41,16 @@ class ISpellCheckerFactory extends IUnknown {
     final retValuePtr = calloc<COMObject>();
 
     final hr = (ptr.ref.vtable + 3)
-            .cast<
-                Pointer<
-                    NativeFunction<
-                        Int32 Function(Pointer, Pointer<COMObject> value)>>>()
-            .value
-            .asFunction<int Function(Pointer, Pointer<COMObject> value)>()(
-        ptr.ref.lpVtbl, retValuePtr);
+        .cast<
+          Pointer<
+            NativeFunction<Int32 Function(Pointer, Pointer<COMObject> value)>
+          >
+        >()
+        .value
+        .asFunction<int Function(Pointer, Pointer<COMObject> value)>()(
+      ptr.ref.lpVtbl,
+      retValuePtr,
+    );
 
     if (FAILED(hr)) {
       free(retValuePtr);
@@ -60,28 +63,48 @@ class ISpellCheckerFactory extends IUnknown {
   int isSupported(Pointer<Utf16> languageTag, Pointer<Int32> value) =>
       (ptr.ref.vtable + 4)
           .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<Utf16> languageTag,
-                          Pointer<Int32> value)>>>()
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<Utf16> languageTag,
+                  Pointer<Int32> value,
+                )
+              >
+            >
+          >()
           .value
           .asFunction<
-              int Function(Pointer, Pointer<Utf16> languageTag,
-                  Pointer<Int32> value)>()(ptr.ref.lpVtbl, languageTag, value);
+            int Function(
+              Pointer,
+              Pointer<Utf16> languageTag,
+              Pointer<Int32> value,
+            )
+          >()(ptr.ref.lpVtbl, languageTag, value);
 
   int createSpellChecker(
-          Pointer<Utf16> languageTag, Pointer<Pointer<COMObject>> value) =>
-      (ptr.ref.vtable + 5)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Utf16> languageTag,
-                              Pointer<Pointer<COMObject>> value)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Utf16> languageTag,
-                      Pointer<Pointer<COMObject>> value)>()(
-          ptr.ref.lpVtbl, languageTag, value);
+    Pointer<Utf16> languageTag,
+    Pointer<Pointer<COMObject>> value,
+  ) => (ptr.ref.vtable + 5)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<Utf16> languageTag,
+              Pointer<Pointer<COMObject>> value,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<Utf16> languageTag,
+          Pointer<Pointer<COMObject>> value,
+        )
+      >()(ptr.ref.lpVtbl, languageTag, value);
 }
 
 /// @nodoc
@@ -91,7 +114,7 @@ const CLSID_SpellCheckerFactory = '{7ab36653-1796-484b-bdfa-e74f1db7c1dc}';
 class SpellCheckerFactory extends ISpellCheckerFactory {
   SpellCheckerFactory(super.ptr);
 
-  factory SpellCheckerFactory.createInstance() =>
-      SpellCheckerFactory(COMObject.createFromID(
-          CLSID_SpellCheckerFactory, IID_ISpellCheckerFactory));
+  factory SpellCheckerFactory.createInstance() => SpellCheckerFactory(
+    COMObject.createFromID(CLSID_SpellCheckerFactory, IID_ISpellCheckerFactory),
+  );
 }

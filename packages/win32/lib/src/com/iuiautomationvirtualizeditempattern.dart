@@ -37,7 +37,8 @@ class IUIAutomationVirtualizedItemPattern extends IUnknown {
 
   factory IUIAutomationVirtualizedItemPattern.from(IUnknown interface) =>
       IUIAutomationVirtualizedItemPattern(
-          interface.toInterface(IID_IUIAutomationVirtualizedItemPattern));
+        interface.toInterface(IID_IUIAutomationVirtualizedItemPattern),
+      );
 
   int realize() => (ptr.ref.vtable + 3)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()

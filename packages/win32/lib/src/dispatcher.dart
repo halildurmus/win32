@@ -32,19 +32,19 @@ final class Dispatcher {
   /// Throws a [WindowsException] if the COM object cannot be created or if an
   /// error occurs during initialization.
   factory Dispatcher.fromCLSID(String clsid) => using((arena) {
-        final lpclsid = GUIDFromString(clsid, allocator: arena);
-        final riid = GUIDFromString(IID_IDispatch, allocator: arena);
-        final ppv = calloc<COMObject>();
-        final hr = CoCreateInstance(
-          lpclsid,
-          nullptr,
-          CLSCTX.CLSCTX_INPROC_SERVER,
-          riid,
-          ppv.cast(),
-        );
-        if (FAILED(hr)) throw WindowsException(hr);
-        return Dispatcher(IDispatch(ppv));
-      });
+    final lpclsid = GUIDFromString(clsid, allocator: arena);
+    final riid = GUIDFromString(IID_IDispatch, allocator: arena);
+    final ppv = calloc<COMObject>();
+    final hr = CoCreateInstance(
+      lpclsid,
+      nullptr,
+      CLSCTX.CLSCTX_INPROC_SERVER,
+      riid,
+      ppv.cast(),
+    );
+    if (FAILED(hr)) throw WindowsException(hr);
+    return Dispatcher(IDispatch(ppv));
+  });
 
   /// Creates a [Dispatcher] instance from a given programmatic identifier
   /// (ProgID).
@@ -52,12 +52,12 @@ final class Dispatcher {
   /// Throws a [WindowsException] if the COM object cannot be created or if an
   /// error occurs during initialization.
   factory Dispatcher.fromProgID(String progID) => using((arena) {
-        final lpszProgID = progID.toNativeUtf16(allocator: arena);
-        final lpclsid = arena<GUID>();
-        var hr = CLSIDFromProgID(lpszProgID, lpclsid);
-        if (FAILED(hr)) throw WindowsException(hr);
-        return Dispatcher.fromCLSID(lpclsid.ref.toString());
-      });
+    final lpszProgID = progID.toNativeUtf16(allocator: arena);
+    final lpclsid = arena<GUID>();
+    var hr = CLSIDFromProgID(lpszProgID, lpclsid);
+    if (FAILED(hr)) throw WindowsException(hr);
+    return Dispatcher.fromCLSID(lpclsid.ref.toString());
+  });
 
   /// Instance of [IDispatch] interface associated with the object.
   final IDispatch dispatch;
@@ -76,10 +76,10 @@ final class Dispatcher {
   ///
   /// Throws a [WindowsException] if the invocation fails.
   Pointer<VARIANT> get(String name) => _invokeProperty(
-        name,
-        DISPATCH_FLAGS.DISPATCH_PROPERTYGET,
-        returnResult: true,
-      );
+    name,
+    DISPATCH_FLAGS.DISPATCH_PROPERTYGET,
+    returnResult: true,
+  );
 
   /// Sets the value of the property with the given [name] to [value].
   ///
@@ -111,22 +111,21 @@ final class Dispatcher {
     Pointer<DISPPARAMS>? args,
     Pointer<VARIANT>? result,
     Pointer<Uint32>? argError,
-  ]) =>
-      using((arena) {
-        final dispIdMember = _getDispId(method);
-        final pExcepInfo = arena<EXCEPINFO>();
-        final hr = dispatch.invoke(
-          dispIdMember,
-          _nilGuid,
-          LOCALE_SYSTEM_DEFAULT,
-          DISPATCH_FLAGS.DISPATCH_METHOD,
-          args ?? arena<DISPPARAMS>(),
-          result ?? nullptr,
-          pExcepInfo,
-          argError ?? nullptr,
-        );
-        _throwIfFailed(hr, pExcepInfo.ref);
-      });
+  ]) => using((arena) {
+    final dispIdMember = _getDispId(method);
+    final pExcepInfo = arena<EXCEPINFO>();
+    final hr = dispatch.invoke(
+      dispIdMember,
+      _nilGuid,
+      LOCALE_SYSTEM_DEFAULT,
+      DISPATCH_FLAGS.DISPATCH_METHOD,
+      args ?? arena<DISPPARAMS>(),
+      result ?? nullptr,
+      pExcepInfo,
+      argError ?? nullptr,
+    );
+    _throwIfFailed(hr, pExcepInfo.ref);
+  });
 
   /// Retrieves the dispatch identifier (DISPID) for the given [member] of the
   /// object.
@@ -154,33 +153,32 @@ final class Dispatcher {
     int dispatchFlag, {
     Pointer<VARIANT>? argument,
     bool returnResult = false,
-  }) =>
-      using((arena) {
-        final dispIdMember = _getDispId(name);
-        final pDispParams = arena<DISPPARAMS>();
-        if (argument != null) {
-          pDispParams.ref
-            ..cArgs = 1
-            ..rgvarg = argument
-            ..cNamedArgs = 1
-            ..rgdispidNamedArgs = (arena<Int32>()..value = DISPID_PROPERTYPUT);
-        }
-        final pExcepInfo = arena<EXCEPINFO>();
-        final result = returnResult ? calloc<VARIANT>() : nullptr;
-        if (returnResult) VariantInit(result);
-        final hr = dispatch.invoke(
-          dispIdMember,
-          _nilGuid,
-          LOCALE_SYSTEM_DEFAULT,
-          dispatchFlag,
-          pDispParams,
-          result,
-          pExcepInfo,
-          nullptr,
-        );
-        _throwIfFailed(hr, pExcepInfo.ref);
-        return result;
-      });
+  }) => using((arena) {
+    final dispIdMember = _getDispId(name);
+    final pDispParams = arena<DISPPARAMS>();
+    if (argument != null) {
+      pDispParams.ref
+        ..cArgs = 1
+        ..rgvarg = argument
+        ..cNamedArgs = 1
+        ..rgdispidNamedArgs = (arena<Int32>()..value = DISPID_PROPERTYPUT);
+    }
+    final pExcepInfo = arena<EXCEPINFO>();
+    final result = returnResult ? calloc<VARIANT>() : nullptr;
+    if (returnResult) VariantInit(result);
+    final hr = dispatch.invoke(
+      dispIdMember,
+      _nilGuid,
+      LOCALE_SYSTEM_DEFAULT,
+      dispatchFlag,
+      pDispParams,
+      result,
+      pExcepInfo,
+      nullptr,
+    );
+    _throwIfFailed(hr, pExcepInfo.ref);
+    return result;
+  });
 
   void _throwIfFailed(int hr, EXCEPINFO excepInfo) {
     if (FAILED(hr)) {

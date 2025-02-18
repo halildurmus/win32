@@ -40,39 +40,63 @@ class ISensorDataReport extends IUnknown {
 
   int getTimestamp(Pointer<SYSTEMTIME> pTimeStamp) => (ptr.ref.vtable + 3)
       .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(Pointer, Pointer<SYSTEMTIME> pTimeStamp)>>>()
+        Pointer<
+          NativeFunction<
+            Int32 Function(Pointer, Pointer<SYSTEMTIME> pTimeStamp)
+          >
+        >
+      >()
       .value
-      .asFunction<
-          int Function(Pointer,
-              Pointer<SYSTEMTIME> pTimeStamp)>()(ptr.ref.lpVtbl, pTimeStamp);
+      .asFunction<int Function(Pointer, Pointer<SYSTEMTIME> pTimeStamp)>()(
+    ptr.ref.lpVtbl,
+    pTimeStamp,
+  );
 
   int getSensorValue(Pointer<PROPERTYKEY> pKey, Pointer<PROPVARIANT> pValue) =>
       (ptr.ref.vtable + 4)
           .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<PROPERTYKEY> pKey,
-                          Pointer<PROPVARIANT> pValue)>>>()
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<PROPERTYKEY> pKey,
+                  Pointer<PROPVARIANT> pValue,
+                )
+              >
+            >
+          >()
           .value
           .asFunction<
-              int Function(Pointer, Pointer<PROPERTYKEY> pKey,
-                  Pointer<PROPVARIANT> pValue)>()(ptr.ref.lpVtbl, pKey, pValue);
+            int Function(
+              Pointer,
+              Pointer<PROPERTYKEY> pKey,
+              Pointer<PROPVARIANT> pValue,
+            )
+          >()(ptr.ref.lpVtbl, pKey, pValue);
 
   int getSensorValues(
-          Pointer<COMObject> pKeys, Pointer<Pointer<COMObject>> ppValues) =>
-      (ptr.ref.vtable + 5)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<COMObject> pKeys,
-                              Pointer<Pointer<COMObject>> ppValues)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<COMObject> pKeys,
-                      Pointer<Pointer<COMObject>> ppValues)>()(
-          ptr.ref.lpVtbl, pKeys, ppValues);
+    Pointer<COMObject> pKeys,
+    Pointer<Pointer<COMObject>> ppValues,
+  ) => (ptr.ref.vtable + 5)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<COMObject> pKeys,
+              Pointer<Pointer<COMObject>> ppValues,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<COMObject> pKeys,
+          Pointer<Pointer<COMObject>> ppValues,
+        )
+      >()(ptr.ref.lpVtbl, pKeys, ppValues);
 }
 
 /// @nodoc
@@ -83,5 +107,6 @@ class SensorDataReport extends ISensorDataReport {
   SensorDataReport(super.ptr);
 
   factory SensorDataReport.createInstance() => SensorDataReport(
-      COMObject.createFromID(CLSID_SensorDataReport, IID_ISensorDataReport));
+    COMObject.createFromID(CLSID_SensorDataReport, IID_ISensorDataReport),
+  );
 }

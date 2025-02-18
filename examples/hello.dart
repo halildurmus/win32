@@ -19,13 +19,14 @@ int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
 
       GetClientRect(hWnd, rect);
       DrawText(
-          hdc,
-          msg,
-          -1,
-          rect,
-          DRAW_TEXT_FORMAT.DT_CENTER |
-              DRAW_TEXT_FORMAT.DT_VCENTER |
-              DRAW_TEXT_FORMAT.DT_SINGLELINE);
+        hdc,
+        msg,
+        -1,
+        rect,
+        DRAW_TEXT_FORMAT.DT_CENTER |
+            DRAW_TEXT_FORMAT.DT_VCENTER |
+            DRAW_TEXT_FORMAT.DT_SINGLELINE,
+      );
       EndPaint(hWnd, ps);
 
       free(ps);
@@ -51,33 +52,35 @@ void winMain(int hInstance, List<String> args, int nShowCmd) {
     exceptionalReturn: 0,
   );
 
-  final wc = calloc<WNDCLASS>()
-    ..ref.style = WNDCLASS_STYLES.CS_HREDRAW | WNDCLASS_STYLES.CS_VREDRAW
-    ..ref.lpfnWndProc = lpfnWndProc.nativeFunction
-    ..ref.hInstance = hInstance
-    ..ref.lpszClassName = className
-    ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
-    ..ref.hbrBackground = GetStockObject(GET_STOCK_OBJECT_FLAGS.WHITE_BRUSH);
+  final wc =
+      calloc<WNDCLASS>()
+        ..ref.style = WNDCLASS_STYLES.CS_HREDRAW | WNDCLASS_STYLES.CS_VREDRAW
+        ..ref.lpfnWndProc = lpfnWndProc.nativeFunction
+        ..ref.hInstance = hInstance
+        ..ref.lpszClassName = className
+        ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
+        ..ref.hbrBackground = GetStockObject(
+          GET_STOCK_OBJECT_FLAGS.WHITE_BRUSH,
+        );
   RegisterClass(wc);
 
   // Create the window.
   final windowCaption = TEXT('Dart Native Win32 window');
   final hWnd = CreateWindowEx(
-      0, // Optional window styles.
-      className, // Window class
-      windowCaption, // Window caption
-      WINDOW_STYLE.WS_OVERLAPPEDWINDOW, // Window style
-
-      // Size and position
-      CW_USEDEFAULT,
-      CW_USEDEFAULT,
-      CW_USEDEFAULT,
-      CW_USEDEFAULT,
-      NULL, // Parent window
-      NULL, // Menu
-      hInstance, // Instance handle
-      nullptr // Additional application data
-      );
+    0, // Optional window styles.
+    className, // Window class
+    windowCaption, // Window caption
+    WINDOW_STYLE.WS_OVERLAPPEDWINDOW, // Window style
+    // Size and position
+    CW_USEDEFAULT,
+    CW_USEDEFAULT,
+    CW_USEDEFAULT,
+    CW_USEDEFAULT,
+    NULL, // Parent window
+    NULL, // Menu
+    hInstance, // Instance handle
+    nullptr, // Additional application data
+  );
   free(windowCaption);
   free(className);
 

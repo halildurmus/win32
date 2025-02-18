@@ -17,7 +17,11 @@ Size getMonitorSizeInMM() {
   final guidptr = GUIDFromString(GUID_CLASS_MONITOR);
   // Get the handle for the first monitor.
   final ptr = SetupDiGetClassDevs(
-      guidptr, nullptr, 0, SETUP_DI_GET_CLASS_DEVS_FLAGS.DIGCF_PRESENT);
+    guidptr,
+    nullptr,
+    0,
+    SETUP_DI_GET_CLASS_DEVS_FLAGS.DIGCF_PRESENT,
+  );
   var width = 0;
   var height = 0;
 
@@ -28,12 +32,13 @@ Size getMonitorSizeInMM() {
   if (ret == TRUE) {
     // Get the registry key for the first member of the first monitor
     final hDevRegKey = SetupDiOpenDevRegKey(
-        ptr,
-        data,
-        SETUP_DI_PROPERTY_CHANGE_SCOPE.DICS_FLAG_GLOBAL,
-        0,
-        DIREG_DEV,
-        REG_SAM_FLAGS.KEY_READ);
+      ptr,
+      data,
+      SETUP_DI_PROPERTY_CHANGE_SCOPE.DICS_FLAG_GLOBAL,
+      0,
+      DIREG_DEV,
+      REG_SAM_FLAGS.KEY_READ,
+    );
 
     const nameSize = 128;
     final lpValueName = wsalloc(nameSize);
@@ -44,8 +49,16 @@ Size getMonitorSizeInMM() {
     final lpcbData = calloc<DWORD>()..value = edidDataSize;
 
     // Get the first value of the registry key for the first member of the first monitor
-    final retValue = RegEnumValue(hDevRegKey, 0, lpValueName, lpcchValueName,
-        nullptr, nullptr, lpData, lpcbData);
+    final retValue = RegEnumValue(
+      hDevRegKey,
+      0,
+      lpValueName,
+      lpcchValueName,
+      nullptr,
+      nullptr,
+      lpData,
+      lpcbData,
+    );
 
     // https://en.wikipedia.org/wiki/Extended_Display_Identification_Data
     // Extended Display Identification Data (EDID) of the first monitor
@@ -88,9 +101,13 @@ Size getMonitorSizeInMMBackup() {
 
 void main() {
   final size = getMonitorSizeInMM();
-  print('Physical Size of Monitor: '
-      'Width: ${size.width}mm Height: ${size.height}mm');
+  print(
+    'Physical Size of Monitor: '
+    'Width: ${size.width}mm Height: ${size.height}mm',
+  );
   final sizeBackup = getMonitorSizeInMMBackup();
-  print('Physical Size of Monitor Backup: '
-      'Width: ${sizeBackup.width}mm Height: ${sizeBackup.height}mm');
+  print(
+    'Physical Size of Monitor Backup: '
+    'Width: ${sizeBackup.width}mm Height: ${sizeBackup.height}mm',
+  );
 }

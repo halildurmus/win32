@@ -12,13 +12,14 @@ bool GetDriveGeometry(Pointer<Utf16> wszPath, Pointer<DISK_GEOMETRY> pdg) {
 
   try {
     final hDevice = CreateFile(
-        wszPath, // drive to open
-        0, // no access to the drive
-        FILE_SHARE_MODE.FILE_SHARE_READ | FILE_SHARE_MODE.FILE_SHARE_WRITE,
-        nullptr, // default security attributes
-        FILE_CREATION_DISPOSITION.OPEN_EXISTING,
-        0, // file attributes
-        NULL); // do not copy file attributes
+      wszPath, // drive to open
+      0, // no access to the drive
+      FILE_SHARE_MODE.FILE_SHARE_READ | FILE_SHARE_MODE.FILE_SHARE_WRITE,
+      nullptr, // default security attributes
+      FILE_CREATION_DISPOSITION.OPEN_EXISTING,
+      0, // file attributes
+      NULL,
+    ); // do not copy file attributes
 
     if (hDevice == INVALID_HANDLE_VALUE) // cannot open the drive
     {
@@ -26,14 +27,15 @@ bool GetDriveGeometry(Pointer<Utf16> wszPath, Pointer<DISK_GEOMETRY> pdg) {
     }
 
     final bResult = DeviceIoControl(
-        hDevice, // device to be queried
-        IOCTL_DISK_GET_DRIVE_GEOMETRY, // operation to perform
-        nullptr,
-        0, // no input buffer
-        pdg,
-        sizeOf<DISK_GEOMETRY>(), // output buffer
-        bytesReturned, // # bytes returned
-        nullptr); // synchronous I/O
+      hDevice, // device to be queried
+      IOCTL_DISK_GET_DRIVE_GEOMETRY, // operation to perform
+      nullptr,
+      0, // no input buffer
+      pdg,
+      sizeOf<DISK_GEOMETRY>(), // output buffer
+      bytesReturned, // # bytes returned
+      nullptr,
+    ); // synchronous I/O
 
     CloseHandle(hDevice);
 
@@ -57,12 +59,15 @@ void main() {
       print('Sectors/track   = ${pdg.ref.SectorsPerTrack}');
       print('Bytes/sector    = ${pdg.ref.BytesPerSector}');
 
-      final DiskSize = pdg.ref.Cylinders *
+      final DiskSize =
+          pdg.ref.Cylinders *
           pdg.ref.TracksPerCylinder *
           pdg.ref.SectorsPerTrack *
           pdg.ref.BytesPerSector;
-      print('Disk size       = $DiskSize (Bytes)\n'
-          '                = ${DiskSize / (1024 * 1024 * 1024).toInt()} (Gb)');
+      print(
+        'Disk size       = $DiskSize (Bytes)\n'
+        '                = ${DiskSize / (1024 * 1024 * 1024).toInt()} (Gb)',
+      );
     } else {
       print('GetDriveGeometry failed.');
     }

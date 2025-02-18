@@ -16,8 +16,12 @@ class TypeTuple {
   /// The type, as represented in a method declaration prior to conversion (e.g. `DateTime`)
   final String? methodParamType;
 
-  const TypeTuple(this.nativeType, this.dartType,
-      {this.attribute, this.methodParamType});
+  const TypeTuple(
+    this.nativeType,
+    this.dartType, {
+    this.attribute,
+    this.methodParamType,
+  });
 }
 
 const Map<BaseType, TypeTuple> baseNativeMapping = {
@@ -39,10 +43,14 @@ const Map<BaseType, TypeTuple> baseNativeMapping = {
 };
 
 const Map<String, TypeTuple> specialTypes = {
-  'Windows.Win32.Foundation.BSTR':
-      TypeTuple('Pointer<Utf16>', 'Pointer<Utf16>'),
-  'Windows.Win32.Foundation.PWSTR':
-      TypeTuple('Pointer<Utf16>', 'Pointer<Utf16>'),
+  'Windows.Win32.Foundation.BSTR': TypeTuple(
+    'Pointer<Utf16>',
+    'Pointer<Utf16>',
+  ),
+  'Windows.Win32.Foundation.PWSTR': TypeTuple(
+    'Pointer<Utf16>',
+    'Pointer<Utf16>',
+  ),
   'Windows.Win32.Foundation.PSTR': TypeTuple('Pointer<Utf8>', 'Pointer<Utf8>'),
   'System.Guid': TypeTuple('GUID', 'GUID'),
 };
@@ -135,14 +143,17 @@ class TypeProjection {
     final wrappedType = typeIdentifier.type;
     if (wrappedType == null) {
       throw Exception(
-          'Wrapped type TypeIdentifier missing for $typeIdentifier.');
+        'Wrapped type TypeIdentifier missing for $typeIdentifier.',
+      );
     }
 
     // A type like HWND
     if (wrappedType.existsAttribute(
-            'Windows.Win32.Foundation.Metadata.NativeTypedefAttribute') ||
+          'Windows.Win32.Foundation.Metadata.NativeTypedefAttribute',
+        ) ||
         wrappedType.existsAttribute(
-            'Windows.Win32.Foundation.Metadata.MetadataTypedefAttribute')) {
+          'Windows.Win32.Foundation.Metadata.MetadataTypedefAttribute',
+        )) {
       final typeIdentifier = wrappedType.fields.first.typeIdentifier;
       return TypeProjection(typeIdentifier).projection;
     }
@@ -166,9 +177,10 @@ class TypeProjection {
 
     // Strip leading underscores (unless the type is nested, in which
     // case leave one behind).
-    final typeArgNativeType = typeIdentifier.typeArg?.type?.isNested ?? false
-        ? '_${stripLeadingUnderscores(typeArg.projection.nativeType)}'
-        : stripLeadingUnderscores(typeArg.projection.nativeType);
+    final typeArgNativeType =
+        typeIdentifier.typeArg?.type?.isNested ?? false
+            ? '_${stripLeadingUnderscores(typeArg.projection.nativeType)}'
+            : stripLeadingUnderscores(typeArg.projection.nativeType);
 
     // Pointer<Void> in Dart is unnecessarily restrictive, versus the
     // Win32 meaning, which is more like "undefined type". We can
@@ -194,9 +206,10 @@ class TypeProjection {
 
     // Arrays of nested types have a private _ prefix. This is not a very
     // expensive operation.
-    final typeArgNativeType = typeIdentifier.typeArg?.type?.isNested ?? false
-        ? typeArg.nativeType
-        : stripLeadingUnderscores(typeArg.nativeType);
+    final typeArgNativeType =
+        typeIdentifier.typeArg?.type?.isNested ?? false
+            ? typeArg.nativeType
+            : stripLeadingUnderscores(typeArg.nativeType);
 
     final nativeType = 'Array<$typeArgNativeType>';
     final dartType = 'Array<$typeArgNativeType>';
@@ -212,8 +225,9 @@ class TypeProjection {
       'NEARPROC': 'Pointer',
     };
 
-    final callbackType =
-        stripLeadingUnderscores(lastComponent(typeIdentifier.name));
+    final callbackType = stripLeadingUnderscores(
+      lastComponent(typeIdentifier.name),
+    );
 
     if (voidCallbackTypes.keys.contains(callbackType)) {
       final mappedType = voidCallbackTypes[callbackType]!;

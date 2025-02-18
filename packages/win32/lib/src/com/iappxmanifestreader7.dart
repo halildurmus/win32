@@ -37,52 +37,62 @@ class IAppxManifestReader7 extends IUnknown {
   factory IAppxManifestReader7.from(IUnknown interface) =>
       IAppxManifestReader7(interface.toInterface(IID_IAppxManifestReader7));
 
-  int
-      getDriverDependencies(
-              Pointer<Pointer<COMObject>> driverDependencies) =>
-          (ptr.ref.vtable + 3)
-                  .cast<
-                      Pointer<
-                          NativeFunction<
-                              Int32 Function(
-                                  Pointer,
-                                  Pointer<Pointer<COMObject>>
-                                      driverDependencies)>>>()
-                  .value
-                  .asFunction<
-                      int Function(Pointer,
-                          Pointer<Pointer<COMObject>> driverDependencies)>()(
-              ptr.ref.lpVtbl, driverDependencies);
+  int getDriverDependencies(Pointer<Pointer<COMObject>> driverDependencies) =>
+      (ptr.ref.vtable + 3)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<Pointer<COMObject>> driverDependencies,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
+              Pointer,
+              Pointer<Pointer<COMObject>> driverDependencies,
+            )
+          >()(ptr.ref.lpVtbl, driverDependencies);
 
   int getOSPackageDependencies(
-          Pointer<Pointer<COMObject>> osPackageDependencies) =>
-      (ptr.ref.vtable + 4)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<Pointer<COMObject>>
-                                  osPackageDependencies)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer,
-                      Pointer<Pointer<COMObject>> osPackageDependencies)>()(
-          ptr.ref.lpVtbl, osPackageDependencies);
+    Pointer<Pointer<COMObject>> osPackageDependencies,
+  ) => (ptr.ref.vtable + 4)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<Pointer<COMObject>> osPackageDependencies,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(Pointer, Pointer<Pointer<COMObject>> osPackageDependencies)
+      >()(ptr.ref.lpVtbl, osPackageDependencies);
 
   int getHostRuntimeDependencies(
-          Pointer<Pointer<COMObject>> hostRuntimeDependencies) =>
-      (ptr.ref.vtable + 5)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<Pointer<COMObject>>
-                                  hostRuntimeDependencies)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer,
-                      Pointer<Pointer<COMObject>> hostRuntimeDependencies)>()(
-          ptr.ref.lpVtbl, hostRuntimeDependencies);
+    Pointer<Pointer<COMObject>> hostRuntimeDependencies,
+  ) => (ptr.ref.vtable + 5)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<Pointer<COMObject>> hostRuntimeDependencies,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<Pointer<COMObject>> hostRuntimeDependencies,
+        )
+      >()(ptr.ref.lpVtbl, hostRuntimeDependencies);
 }

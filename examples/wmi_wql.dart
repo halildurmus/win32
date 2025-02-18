@@ -13,16 +13,16 @@ void main() {
 
   // Initialize security model
   hr = CoInitializeSecurity(
-      nullptr,
-      -1, // COM negotiates service
-      nullptr, // Authentication services
-      nullptr, // Reserved
-      RPC_C_AUTHN_LEVEL.RPC_C_AUTHN_LEVEL_DEFAULT, // authentication
-      RPC_C_IMP_LEVEL.RPC_C_IMP_LEVEL_IMPERSONATE, // Impersonation
-      nullptr, // Authentication info
-      EOLE_AUTHENTICATION_CAPABILITIES.EOAC_NONE, // Additional capabilities
-      nullptr // Reserved
-      );
+    nullptr,
+    -1, // COM negotiates service
+    nullptr, // Authentication services
+    nullptr, // Reserved
+    RPC_C_AUTHN_LEVEL.RPC_C_AUTHN_LEVEL_DEFAULT, // authentication
+    RPC_C_IMP_LEVEL.RPC_C_IMP_LEVEL_IMPERSONATE, // Impersonation
+    nullptr, // Authentication info
+    EOLE_AUTHENTICATION_CAPABILITIES.EOAC_NONE, // Additional capabilities
+    nullptr, // Reserved
+  );
 
   if (FAILED(hr)) {
     final exception = WindowsException(hr);
@@ -40,7 +40,12 @@ void main() {
   final iid = calloc<GUID>()..ref.setGUID(IID_IWbemLocator);
 
   hr = CoCreateInstance(
-      clsid, nullptr, CLSCTX.CLSCTX_INPROC_SERVER, iid, pLoc.ptr.cast());
+    clsid,
+    nullptr,
+    CLSCTX.CLSCTX_INPROC_SERVER,
+    iid,
+    pLoc.ptr.cast(),
+  );
 
   if (FAILED(hr)) {
     final exception = WindowsException(hr);
@@ -57,15 +62,15 @@ void main() {
   // to make IWbemServices calls.
 
   hr = pLoc.connectServer(
-      TEXT('ROOT\\CIMV2'), // WMI namespace
-      nullptr, // User name
-      nullptr, // User password
-      nullptr, // Locale
-      NULL, // Security flags
-      nullptr, // Authority
-      nullptr, // Context object
-      proxy // IWbemServices proxy
-      );
+    TEXT('ROOT\\CIMV2'), // WMI namespace
+    nullptr, // User name
+    nullptr, // User password
+    nullptr, // Locale
+    NULL, // Security flags
+    nullptr, // Authority
+    nullptr, // Context object
+    proxy, // IWbemServices proxy
+  );
 
   if (FAILED(hr)) {
     final exception = WindowsException(hr);
@@ -82,15 +87,15 @@ void main() {
   // Set the IWbemServices proxy so that impersonation
   // of the user (client) occurs.
   hr = CoSetProxyBlanket(
-      proxy.value, // the proxy to set
-      RPC_C_AUTHN_WINNT, // authentication service
-      RPC_C_AUTHZ_NONE, // authorization service
-      nullptr, // Server principal name
-      RPC_C_AUTHN_LEVEL.RPC_C_AUTHN_LEVEL_CALL, // authentication level
-      RPC_C_IMP_LEVEL.RPC_C_IMP_LEVEL_IMPERSONATE, // impersonation level
-      nullptr, // client identity
-      EOLE_AUTHENTICATION_CAPABILITIES.EOAC_NONE // proxy capabilities
-      );
+    proxy.value, // the proxy to set
+    RPC_C_AUTHN_WINNT, // authentication service
+    RPC_C_AUTHZ_NONE, // authorization service
+    nullptr, // Server principal name
+    RPC_C_AUTHN_LEVEL.RPC_C_AUTHN_LEVEL_CALL, // authentication level
+    RPC_C_IMP_LEVEL.RPC_C_IMP_LEVEL_IMPERSONATE, // impersonation level
+    nullptr, // client identity
+    EOLE_AUTHENTICATION_CAPABILITIES.EOAC_NONE, // proxy capabilities
+  );
 
   if (FAILED(hr)) {
     final exception = WindowsException(hr);
@@ -106,12 +111,13 @@ void main() {
 
   // For example, query for all the running processes
   hr = pSvc.execQuery(
-      TEXT('WQL'),
-      TEXT('SELECT * FROM Win32_Process'),
-      WBEM_GENERIC_FLAG_TYPE.WBEM_FLAG_FORWARD_ONLY |
-          WBEM_GENERIC_FLAG_TYPE.WBEM_FLAG_RETURN_IMMEDIATELY,
-      nullptr,
-      pEnumerator);
+    TEXT('WQL'),
+    TEXT('SELECT * FROM Win32_Process'),
+    WBEM_GENERIC_FLAG_TYPE.WBEM_FLAG_FORWARD_ONLY |
+        WBEM_GENERIC_FLAG_TYPE.WBEM_FLAG_RETURN_IMMEDIATELY,
+    nullptr,
+    pEnumerator,
+  );
 
   if (FAILED(hr)) {
     final exception = WindowsException(hr);

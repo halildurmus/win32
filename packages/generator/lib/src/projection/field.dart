@@ -60,8 +60,9 @@ class FieldProjection {
     // do the extra work necessary to test whether they're safe or not.
     //
     // Otherwise strip it so that it's accessible from outside the library.
-    var dartType =
-        safeTypenameForString(stripLeadingUnderscores(typeProjection.dartType));
+    var dartType = safeTypenameForString(
+      stripLeadingUnderscores(typeProjection.dartType),
+    );
 
     if (field.typeIdentifier.type?.isNested ?? false) {
       dartType = '_${stripLeadingUnderscores(typeProjection.dartType)}';

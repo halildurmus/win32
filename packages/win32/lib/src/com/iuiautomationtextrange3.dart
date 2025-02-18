@@ -37,55 +37,81 @@ class IUIAutomationTextRange3 extends IUIAutomationTextRange2 {
 
   factory IUIAutomationTextRange3.from(IUnknown interface) =>
       IUIAutomationTextRange3(
-          interface.toInterface(IID_IUIAutomationTextRange3));
+        interface.toInterface(IID_IUIAutomationTextRange3),
+      );
 
-  int getEnclosingElementBuildCache(Pointer<COMObject> cacheRequest,
-          Pointer<Pointer<COMObject>> enclosingElement) =>
-      (ptr.ref.vtable + 22)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<COMObject> cacheRequest,
-                              Pointer<Pointer<COMObject>> enclosingElement)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<COMObject> cacheRequest,
-                      Pointer<Pointer<COMObject>> enclosingElement)>()(
-          ptr.ref.lpVtbl, cacheRequest, enclosingElement);
+  int getEnclosingElementBuildCache(
+    Pointer<COMObject> cacheRequest,
+    Pointer<Pointer<COMObject>> enclosingElement,
+  ) => (ptr.ref.vtable + 22)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<COMObject> cacheRequest,
+              Pointer<Pointer<COMObject>> enclosingElement,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<COMObject> cacheRequest,
+          Pointer<Pointer<COMObject>> enclosingElement,
+        )
+      >()(ptr.ref.lpVtbl, cacheRequest, enclosingElement);
 
-  int getChildrenBuildCache(Pointer<COMObject> cacheRequest,
-          Pointer<Pointer<COMObject>> children) =>
-      (ptr.ref.vtable + 23)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Pointer<COMObject> cacheRequest,
-                          Pointer<Pointer<COMObject>> children)>>>()
-          .value
-          .asFunction<
-              int Function(
-                  Pointer,
-                  Pointer<COMObject> cacheRequest,
-                  Pointer<Pointer<COMObject>>
-                      children)>()(ptr.ref.lpVtbl, cacheRequest, children);
+  int getChildrenBuildCache(
+    Pointer<COMObject> cacheRequest,
+    Pointer<Pointer<COMObject>> children,
+  ) => (ptr.ref.vtable + 23)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<COMObject> cacheRequest,
+              Pointer<Pointer<COMObject>> children,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<COMObject> cacheRequest,
+          Pointer<Pointer<COMObject>> children,
+        )
+      >()(ptr.ref.lpVtbl, cacheRequest, children);
 
-  int getAttributeValues(Pointer<Uint32> attributeIds, int attributeIdCount,
-          Pointer<Pointer<SAFEARRAY>> attributeValues) =>
-      (ptr.ref.vtable + 24)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<Uint32> attributeIds,
-                              Int32 attributeIdCount,
-                              Pointer<Pointer<SAFEARRAY>> attributeValues)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      Pointer<Uint32> attributeIds,
-                      int attributeIdCount,
-                      Pointer<Pointer<SAFEARRAY>> attributeValues)>()(
-          ptr.ref.lpVtbl, attributeIds, attributeIdCount, attributeValues);
+  int getAttributeValues(
+    Pointer<Uint32> attributeIds,
+    int attributeIdCount,
+    Pointer<Pointer<SAFEARRAY>> attributeValues,
+  ) => (ptr.ref.vtable + 24)
+      .cast<
+        Pointer<
+          NativeFunction<
+            Int32 Function(
+              Pointer,
+              Pointer<Uint32> attributeIds,
+              Int32 attributeIdCount,
+              Pointer<Pointer<SAFEARRAY>> attributeValues,
+            )
+          >
+        >
+      >()
+      .value
+      .asFunction<
+        int Function(
+          Pointer,
+          Pointer<Uint32> attributeIds,
+          int attributeIdCount,
+          Pointer<Pointer<SAFEARRAY>> attributeValues,
+        )
+      >()(ptr.ref.lpVtbl, attributeIds, attributeIdCount, attributeValues);
 }

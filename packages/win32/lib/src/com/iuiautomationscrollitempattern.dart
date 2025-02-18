@@ -37,7 +37,8 @@ class IUIAutomationScrollItemPattern extends IUnknown {
 
   factory IUIAutomationScrollItemPattern.from(IUnknown interface) =>
       IUIAutomationScrollItemPattern(
-          interface.toInterface(IID_IUIAutomationScrollItemPattern));
+        interface.toInterface(IID_IUIAutomationScrollItemPattern),
+      );
 
   int scrollIntoView() => (ptr.ref.vtable + 3)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()

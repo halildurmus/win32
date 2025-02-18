@@ -26,7 +26,8 @@ class NotepadFind {
   int showFindDialog(int hwnd) {
     find.ref.lStructSize = sizeOf<FINDREPLACE>();
     find.ref.hwndOwner = hwnd;
-    find.ref.Flags = FINDREPLACE_FLAGS.FR_HIDEUPDOWN |
+    find.ref.Flags =
+        FINDREPLACE_FLAGS.FR_HIDEUPDOWN |
         FINDREPLACE_FLAGS.FR_HIDEMATCHCASE |
         FINDREPLACE_FLAGS.FR_HIDEWHOLEWORD;
     find.ref.lpstrFindWhat = szFindText;
@@ -38,7 +39,8 @@ class NotepadFind {
   int showReplaceDialog(int hwnd) {
     find.ref.lStructSize = sizeOf<FINDREPLACE>();
     find.ref.hwndOwner = hwnd;
-    find.ref.Flags = FINDREPLACE_FLAGS.FR_HIDEUPDOWN |
+    find.ref.Flags =
+        FINDREPLACE_FLAGS.FR_HIDEUPDOWN |
         FINDREPLACE_FLAGS.FR_HIDEMATCHCASE |
         FINDREPLACE_FLAGS.FR_HIDEWHOLEWORD;
     find.ref.lpstrFindWhat = szFindText;
@@ -50,7 +52,10 @@ class NotepadFind {
   }
 
   bool findTextInEditWindow(
-      int hwndEdit, Pointer<Uint32> piSearchOffset, Pointer<FINDREPLACE> pfr) {
+    int hwndEdit,
+    Pointer<Uint32> piSearchOffset,
+    Pointer<FINDREPLACE> pfr,
+  ) {
     int iLength;
 
     // Read in the edit document
@@ -83,7 +88,10 @@ class NotepadFind {
   }
 
   bool replaceTextInEditWindow(
-      int hwndEdit, Pointer<Uint32> piSearchOffset, Pointer<FINDREPLACE> fr) {
+    int hwndEdit,
+    Pointer<Uint32> piSearchOffset,
+    Pointer<FINDREPLACE> fr,
+  ) {
     if (!findTextInEditWindow(hwndEdit, piSearchOffset, fr)) {
       return false;
     }

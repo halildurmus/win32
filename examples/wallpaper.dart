@@ -17,11 +17,14 @@ void printWallpaper() {
       case S_OK:
         final path = pathPtr.value.toDartString();
         print(
-            path.isEmpty ? 'No wallpaper is set.' : 'Wallpaper path is: $path');
+          path.isEmpty ? 'No wallpaper is set.' : 'Wallpaper path is: $path',
+        );
 
       case S_FALSE:
-        print('Different monitors are displaying different wallpapers, or a '
-            'slideshow is running.');
+        print(
+          'Different monitors are displaying different wallpapers, or a '
+          'slideshow is running.',
+        );
 
       default:
         throw WindowsException(hr);
@@ -39,8 +42,10 @@ void printBackgroundColor() {
 
     if (SUCCEEDED(hr)) {
       final color = colorPtr.value;
-      print('Background color is: RGB(${GetRValue(color)}, '
-          '${GetGValue(color)}, ${GetBValue(color)})');
+      print(
+        'Background color is: RGB(${GetRValue(color)}, '
+        '${GetGValue(color)}, ${GetBValue(color)})',
+      );
     } else {
       throw WindowsException(hr);
     }
@@ -51,7 +56,9 @@ void printBackgroundColor() {
 
 void main() {
   final hr = CoInitializeEx(
-      nullptr, COINIT.COINIT_APARTMENTTHREADED | COINIT.COINIT_DISABLE_OLE1DDE);
+    nullptr,
+    COINIT.COINIT_APARTMENTTHREADED | COINIT.COINIT_DISABLE_OLE1DDE,
+  );
   if (FAILED(hr)) throw WindowsException(hr);
 
   wallpaper = DesktopWallpaper.createInstance();

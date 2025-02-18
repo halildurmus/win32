@@ -7,7 +7,9 @@ import 'package:win32/win32.dart';
 
 void main() {
   var hr = CoInitializeEx(
-      nullptr, COINIT.COINIT_APARTMENTTHREADED | COINIT.COINIT_DISABLE_OLE1DDE);
+    nullptr,
+    COINIT.COINIT_APARTMENTTHREADED | COINIT.COINIT_DISABLE_OLE1DDE,
+  );
 
   if (SUCCEEDED(hr)) {
     final fileDialog = FileOpenDialog.createInstance();

@@ -27,8 +27,10 @@ void main() {
       for (var i = 0; i < testRuns; i++) {
         final stringPtr = TEXT(testString);
 
-        expect(stringPtr.toDartString(length: 5),
-            equals(testString.substring(0, 5)));
+        expect(
+          stringPtr.toDartString(length: 5),
+          equals(testString.substring(0, 5)),
+        );
         free(stringPtr);
       }
     });
