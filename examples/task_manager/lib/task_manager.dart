@@ -74,7 +74,6 @@ abstract class TaskManager {
                 ) >
                 0) {
               final name = moduleName.toDartString();
-
               final filePath = arena<WCHAR>(MAX_PATH).cast<Utf16>();
               final result = GetModuleFileNameEx(
                 hProcess,
@@ -83,15 +82,14 @@ abstract class TaskManager {
                 MAX_PATH,
               );
               final path = result != 0 ? filePath.toDartString() : null;
-
               final description =
                   path != null ? (_getFileDescription(path) ?? name) : name;
-
+              final iconAsBytes =
+                  path != null
+                      ? (_extractIcon(path) ?? Uint8List(0))
+                      : Uint8List(0);
               final task = Task(
-                iconAsBytes:
-                    path != null
-                        ? (_extractIcon(path) ?? Uint8List(0))
-                        : Uint8List(0),
+                iconAsBytes: iconAsBytes,
                 name: name,
                 pid: pid,
                 description: description,
@@ -169,7 +167,9 @@ abstract class TaskManager {
       final hIcon = ExtractAssociatedIcon(instance, filePath, iconID);
       if (hIcon == NULL) return null;
 
-      return _getIconData(hIcon);
+      final iconData = _getIconData(hIcon);
+      DestroyIcon(hIcon);
+      return iconData;
     });
   }
 
