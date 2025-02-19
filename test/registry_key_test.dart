@@ -23,7 +23,7 @@ void main() {
         check(iconFont).isNotNull();
         final type = iconFont!.type;
         check(type).equals(RegistryValueType.binary);
-        check(type.value).equals(REG_VALUE_TYPE.REG_BINARY);
+        check(type.value).equals(REG_BINARY);
         check(type.toString()).equals('REG_BINARY');
         check(windowMetrics.getBinaryValue('IconFont')).isNotNull();
         windowMetrics.close();
@@ -38,7 +38,7 @@ void main() {
         check(fullScreen).isNotNull();
         final type = fullScreen!.type;
         check(type).equals(RegistryValueType.int32);
-        check(type.value).equals(REG_VALUE_TYPE.REG_DWORD);
+        check(type.value).equals(REG_DWORD);
         check(type.toString()).equals('REG_DWORD');
         check(console.getIntValue('FullScreen')).isNotNull();
         console.close();
@@ -54,7 +54,7 @@ void main() {
         check(installTime).isNotNull();
         final type = installTime!.type;
         check(type).equals(RegistryValueType.int64);
-        check(type.value).equals(REG_VALUE_TYPE.REG_QWORD);
+        check(type.value).equals(REG_QWORD);
         check(type.toString()).equals('REG_QWORD');
         check(ntCurrentVersion.getIntValue('InstallTime')).isNotNull();
         ntCurrentVersion.close();
@@ -70,7 +70,7 @@ void main() {
         check(programFilesDir).isNotNull();
         final type = programFilesDir!.type;
         check(type).equals(RegistryValueType.string);
-        check(type.value).equals(REG_VALUE_TYPE.REG_SZ);
+        check(type.value).equals(REG_SZ);
         check(type.toString()).equals('REG_SZ');
         check(currentVersion.getStringValue('ProgramFilesDir')).isNotNull();
         currentVersion.close();
@@ -85,7 +85,7 @@ void main() {
         check(path).isNotNull();
         final type = path!.type;
         check(type).equals(RegistryValueType.unexpandedString);
-        check(type.value).equals(REG_VALUE_TYPE.REG_EXPAND_SZ);
+        check(type.value).equals(REG_EXPAND_SZ);
         check(type.toString()).equals('REG_EXPAND_SZ');
         check(env.getStringValue('Path')).isNotNull();
         env.close();

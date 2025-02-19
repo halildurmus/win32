@@ -29,7 +29,7 @@ final class RegistryKey {
     final phkResult = calloc<HKEY>();
     try {
       final retcode = RegCreateKey(hkey, lpSubKey, phkResult);
-      if (retcode == WIN32_ERROR.ERROR_SUCCESS) {
+      if (retcode == ERROR_SUCCESS) {
         return RegistryKey(phkResult.value);
       }
       throw WindowsException(HRESULT_FROM_WIN32(retcode));
@@ -48,7 +48,7 @@ final class RegistryKey {
     final lpSubKey = keyName.toNativeUtf16();
     try {
       final retcode = RegDeleteKey(hkey, lpSubKey);
-      if (retcode != WIN32_ERROR.ERROR_SUCCESS) {
+      if (retcode != ERROR_SUCCESS) {
         if (!recursive) throw WindowsException(HRESULT_FROM_WIN32(retcode));
 
         final key = createKey(keyName);
@@ -80,7 +80,7 @@ final class RegistryKey {
         lpWin32Data.data,
         lpWin32Data.lengthInBytes,
       );
-      if (retcode != WIN32_ERROR.ERROR_SUCCESS) {
+      if (retcode != ERROR_SUCCESS) {
         throw WindowsException(HRESULT_FROM_WIN32(retcode));
       }
     } finally {
@@ -108,10 +108,7 @@ final class RegistryKey {
     final pdwType = arena<DWORD>();
     final pcbData = arena<DWORD>();
 
-    final flags =
-        expandPaths
-            ? REG_ROUTINE_FLAGS.RRF_RT_ANY
-            : REG_ROUTINE_FLAGS.RRF_RT_ANY | REG_ROUTINE_FLAGS.RRF_NOEXPAND;
+    final flags = expandPaths ? RRF_RT_ANY : RRF_RT_ANY | RRF_NOEXPAND;
 
     // Call first time to find out how much memory we need to allocate
     var retcode = RegGetValue(
@@ -123,7 +120,7 @@ final class RegistryKey {
       nullptr,
       pcbData,
     );
-    if (retcode == WIN32_ERROR.ERROR_FILE_NOT_FOUND) return null;
+    if (retcode == ERROR_FILE_NOT_FOUND) return null;
 
     // Now call for real to get the data we need.
     final pvData = arena<BYTE>(pcbData.value);
@@ -199,7 +196,7 @@ final class RegistryKey {
     final lpValueName = valueName.toNativeUtf16();
     try {
       final retcode = RegDeleteValue(hkey, lpValueName);
-      if (retcode != WIN32_ERROR.ERROR_SUCCESS) {
+      if (retcode != ERROR_SUCCESS) {
         throw WindowsException(HRESULT_FROM_WIN32(retcode));
       }
     } finally {
@@ -213,7 +210,7 @@ final class RegistryKey {
     final lpNewKeyName = newName.toNativeUtf16();
     try {
       final retcode = RegRenameKey(hkey, lpSubKeyName, lpNewKeyName);
-      if (retcode != WIN32_ERROR.ERROR_SUCCESS) {
+      if (retcode != ERROR_SUCCESS) {
         throw WindowsException(HRESULT_FROM_WIN32(retcode));
       }
     } finally {
@@ -308,14 +305,14 @@ final class RegistryKey {
         final result = RegNotifyChangeKeyValue(
           hkey,
           includeSubkeys ? TRUE : FALSE,
-          REG_NOTIFY_FILTER.REG_NOTIFY_CHANGE_NAME |
-              REG_NOTIFY_FILTER.REG_NOTIFY_CHANGE_ATTRIBUTES |
-              REG_NOTIFY_FILTER.REG_NOTIFY_CHANGE_LAST_SET |
-              REG_NOTIFY_FILTER.REG_NOTIFY_CHANGE_SECURITY,
+          REG_NOTIFY_CHANGE_NAME |
+              REG_NOTIFY_CHANGE_ATTRIBUTES |
+              REG_NOTIFY_CHANGE_LAST_SET |
+              REG_NOTIFY_CHANGE_SECURITY,
           hEvent,
           TRUE,
         );
-        if (result != WIN32_ERROR.ERROR_SUCCESS) {
+        if (result != ERROR_SUCCESS) {
           mainSendPort.send(WindowsException(HRESULT_FROM_WIN32(result)));
           break;
         }
@@ -323,11 +320,11 @@ final class RegistryKey {
         // Polling with 10ms timeout to allow periodic check for stop signal.
         while (true) {
           final result = WaitForSingleObject(hEvent, 10);
-          if (result == WAIT_EVENT.WAIT_OBJECT_0) {
+          if (result == WAIT_OBJECT_0) {
             mainSendPort.send(null); // Notify listeners of the change.
             ResetEvent(hEvent); // Reset the event for future notifications.
             break;
-          } else if (result == WAIT_EVENT.WAIT_TIMEOUT) {
+          } else if (result == WAIT_TIMEOUT) {
             // Yield control to the Dart event loop to allow for the stop
             // signal to be processed.
             await Future.delayed(Duration.zero);
@@ -375,7 +372,7 @@ final class RegistryKey {
       lpftLastWriteTime,
     );
 
-    if (retcode != WIN32_ERROR.ERROR_SUCCESS) {
+    if (retcode != ERROR_SUCCESS) {
       throw WindowsException(HRESULT_FROM_WIN32(retcode));
     }
 
@@ -423,7 +420,7 @@ final class RegistryKey {
           lpData,
           lpcchData,
         );
-        if (retcode == WIN32_ERROR.ERROR_SUCCESS) {
+        if (retcode == ERROR_SUCCESS) {
           final valueType = RegistryValueType.fromWin32(lpType.value);
           yield valueType.toRegistryValue(
             lpName.toDartString(),
@@ -467,7 +464,7 @@ final class RegistryKey {
           nullptr,
           nullptr,
         );
-        if (retcode == WIN32_ERROR.ERROR_SUCCESS) yield lpName.toDartString();
+        if (retcode == ERROR_SUCCESS) yield lpName.toDartString();
       }
     } finally {
       free(lpName);

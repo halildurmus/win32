@@ -27,7 +27,7 @@ void main() {
             )
             .throws<WindowsException>()
             .has((e) => e.hr, 'hr')
-            .equals(HRESULT_FROM_WIN32(WIN32_ERROR.ERROR_FILE_NOT_FOUND));
+            .equals(HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND));
       });
     });
 

@@ -53,7 +53,7 @@ abstract final class Registry {
         desiredAccessRights.value,
         phKey,
       );
-      if (lStatus == WIN32_ERROR.ERROR_SUCCESS) return RegistryKey(phKey.value);
+      if (lStatus == ERROR_SUCCESS) return RegistryKey(phKey.value);
       throw WindowsException(HRESULT_FROM_WIN32(lStatus));
     } finally {
       free(phKey);
@@ -78,8 +78,8 @@ abstract final class Registry {
   static RegistryKey get currentUser {
     final phKey = calloc<HKEY>();
     try {
-      final lStatus = RegOpenCurrentUser(REG_SAM_FLAGS.KEY_ALL_ACCESS, phKey);
-      if (lStatus == WIN32_ERROR.ERROR_SUCCESS) return RegistryKey(phKey.value);
+      final lStatus = RegOpenCurrentUser(KEY_ALL_ACCESS, phKey);
+      if (lStatus == ERROR_SUCCESS) return RegistryKey(phKey.value);
       throw WindowsException(HRESULT_FROM_WIN32(lStatus));
     } finally {
       free(phKey);

@@ -5,18 +5,18 @@ enum AccessRights {
   /// Grants read-only access to a registry key.
   ///
   /// Use this option to read the contents of the key and its values.
-  readOnly(REG_SAM_FLAGS.KEY_READ),
+  readOnly(KEY_READ),
 
   /// Grants write-only access to a registry key.
   ///
   /// Use this option to modify the contents of the key or create subkeys.
-  writeOnly(REG_SAM_FLAGS.KEY_WRITE),
+  writeOnly(KEY_WRITE),
 
   /// Grants full access to a registry key.
   ///
   /// Use this option to perform any operation on the key, including reading,
   /// writing, and changing permissions.
-  allAccess(REG_SAM_FLAGS.KEY_ALL_ACCESS);
+  allAccess(KEY_ALL_ACCESS);
 
   /// Creates an [AccessRights] enum instance with the specified access flag.
   ///
