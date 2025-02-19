@@ -28,8 +28,6 @@ void main(List<String> args) {
       '--tag',
       'v$version',
       '--include-path',
-      'examples/**/*',
-      '--include-path',
       'packages/win32/**/*',
       '--include-path',
       'website/docs/**/*',
