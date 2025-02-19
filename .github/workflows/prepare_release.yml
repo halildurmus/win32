@@ -7,7 +7,7 @@ jobs:
   prepare-release:
     uses: halildurmus/workflows/.github/workflows/prepare_release.yml@main
     with:
-      update_changelog_args: '--include-path "examples/**/*" --include-path "packages/win32/**/*" --include-path "website/docs/**/*" --repository "../../"'
+      update_changelog_args: '--include-path "packages/win32/**/*" --include-path "website/docs/**/*" --repository "../../"'
       working_directory: packages/win32
     secrets:
       token: ${{ secrets.PAT }}

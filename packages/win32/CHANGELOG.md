@@ -2,17 +2,30 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.11.0] - 2025-02-19
+
+### 🚀 Features
+
+- Revert deprecation of top-level constants of enums by @halildurmus in [#960](https://github.com/halildurmus/win32/pull/960)
+- Improve projection of flexible array members by @halildurmus in [#959](https://github.com/halildurmus/win32/pull/959)
+
+### 🎨 Styling
+
+- Format with tall-style by @halildurmus in [#957](https://github.com/halildurmus/win32/pull/957)
+
+[5.11.0]: https://github.com/halildurmus/win32/compare/v5.10.1..v5.11.0
+
 ## [5.10.1] - 2025-01-27
 
 ### 🐛 Bug Fixes
 
-- fix: fix `PRINTER_ENUM_*` constants by [@halildurmus](https://github.com/halildurmus) in [#954](https://github.com/halildurmus/win32/pull/954)
-- fix: `nodoc` deprecation fix by [@weasdown](https://github.com/weasdown) in [#949](https://github.com/halildurmus/win32/pull/949)
+- Fix `PRINTER_ENUM_*` constants by [@halildurmus](https://github.com/halildurmus) in [#954](https://github.com/halildurmus/win32/pull/954)
+- `nodoc` deprecation fix by [@weasdown](https://github.com/weasdown) in [#949](https://github.com/halildurmus/win32/pull/949)
 
 ### ⚙️ Miscellaneous Tasks
 
-- add `.gitattributes` to normalize line endings by [@halildurmus](https://github.com/halildurmus)
-- tweak git-cliff configuration by [@halildurmus](https://github.com/halildurmus)
+- Add `.gitattributes` to normalize line endings by [@halildurmus](https://github.com/halildurmus)
+- Tweak git-cliff configuration by [@halildurmus](https://github.com/halildurmus)
 
 ## New Contributors ❤️
 
