@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.1.0] - 2025-02-19
+
+### 📦 Dependencies
+
+- Bump `win32` from 5.8.0 to 5.11.0 by @halildurmus in [#30](https://github.com/halildurmus/win32_registry/pull/30)
+
+### 🎨 Styling
+
+- Format with tall-style by @halildurmus in [#29](https://github.com/halildurmus/win32_registry/pull/29)
+
+[2.1.0]: https://github.com/halildurmus/win32_registry/compare/v2.0.1..v2.1.0
+
 ## [2.0.1] - 2024-12-10
 
 ### 🐛 Bug Fixes
