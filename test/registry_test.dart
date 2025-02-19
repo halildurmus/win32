@@ -20,11 +20,11 @@ void main() {
 
       test('throws due to missing key', () {
         check(
-          () => Registry.openPath(
-            RegistryHive.localMachine,
-            path: r'SOFTWARE\Dart\Missing\Key',
-          ),
-        )
+              () => Registry.openPath(
+                RegistryHive.localMachine,
+                path: r'SOFTWARE\Dart\Missing\Key',
+              ),
+            )
             .throws<WindowsException>()
             .has((e) => e.hr, 'hr')
             .equals(HRESULT_FROM_WIN32(WIN32_ERROR.ERROR_FILE_NOT_FOUND));

@@ -29,8 +29,8 @@ enum AccessRights {
 
   @override
   String toString() => switch (this) {
-        readOnly => 'KEY_READ',
-        writeOnly => 'KEY_WRITE',
-        allAccess => 'KEY_ALL_ACCESS'
-      };
+    readOnly => 'KEY_READ',
+    writeOnly => 'KEY_WRITE',
+    allAccess => 'KEY_ALL_ACCESS',
+  };
 }

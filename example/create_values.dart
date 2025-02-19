@@ -19,10 +19,11 @@ void main() {
   );
   subkey.createValue(string);
 
-  const stringArray = RegistryValue.stringArray(
-    'TestStringArray',
-    ['One', 'Two', 'Three'],
-  );
+  const stringArray = RegistryValue.stringArray('TestStringArray', [
+    'One',
+    'Two',
+    'Three',
+  ]);
   subkey.createValue(stringArray);
 
   const unexpandedString = RegistryValue.unexpandedString(

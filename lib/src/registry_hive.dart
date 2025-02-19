@@ -52,29 +52,30 @@ enum RegistryHive {
   /// Throws an [ArgumentError] if the provided handle does not match any
   /// predefined registry hive.
   factory RegistryHive.fromWin32(int value) => switch (value) {
-        HKEY_CLASSES_ROOT => classesRoot,
-        HKEY_CURRENT_USER => currentUser,
-        HKEY_LOCAL_MACHINE => localMachine,
-        HKEY_USERS => allUsers,
-        HKEY_PERFORMANCE_DATA => performanceData,
-        HKEY_CURRENT_CONFIG => currentConfig,
-        _ => throw ArgumentError.value(
-            value,
-            'value',
-            'Unknown registry hive: $value',
-          ),
-      };
+    HKEY_CLASSES_ROOT => classesRoot,
+    HKEY_CURRENT_USER => currentUser,
+    HKEY_LOCAL_MACHINE => localMachine,
+    HKEY_USERS => allUsers,
+    HKEY_PERFORMANCE_DATA => performanceData,
+    HKEY_CURRENT_CONFIG => currentConfig,
+    _ =>
+      throw ArgumentError.value(
+        value,
+        'value',
+        'Unknown registry hive: $value',
+      ),
+  };
 
   /// The handle representing a predefined registry key.
   final int value;
 
   @override
   String toString() => switch (this) {
-        classesRoot => 'HKEY_CLASSES_ROOT',
-        currentUser => 'HKEY_CURRENT_USER',
-        localMachine => 'HKEY_LOCAL_MACHINE',
-        allUsers => 'HKEY_USERS',
-        performanceData => 'HKEY_PERFORMANCE_DATA',
-        currentConfig => 'HKEY_CURRENT_CONFIG',
-      };
+    classesRoot => 'HKEY_CLASSES_ROOT',
+    currentUser => 'HKEY_CURRENT_USER',
+    localMachine => 'HKEY_LOCAL_MACHINE',
+    allUsers => 'HKEY_USERS',
+    performanceData => 'HKEY_PERFORMANCE_DATA',
+    currentConfig => 'HKEY_CURRENT_CONFIG',
+  };
 }

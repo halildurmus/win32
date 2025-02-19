@@ -15,8 +15,10 @@ void main() {
     group('getValue', () {
       test('binary', () {
         const keyPath = r'Control Panel\Desktop\WindowMetrics';
-        final windowMetrics =
-            Registry.openPath(RegistryHive.currentUser, path: keyPath);
+        final windowMetrics = Registry.openPath(
+          RegistryHive.currentUser,
+          path: keyPath,
+        );
         final iconFont = windowMetrics.getValue('IconFont');
         check(iconFont).isNotNull();
         final type = iconFont!.type;
@@ -28,8 +30,10 @@ void main() {
       });
 
       test('int32', () {
-        final console =
-            Registry.openPath(RegistryHive.currentUser, path: 'Console');
+        final console = Registry.openPath(
+          RegistryHive.currentUser,
+          path: 'Console',
+        );
         final fullScreen = console.getValue('FullScreen');
         check(fullScreen).isNotNull();
         final type = fullScreen!.type;
@@ -42,8 +46,10 @@ void main() {
 
       test('int64', () {
         const keyPath = r'SOFTWARE\Microsoft\Windows NT\CurrentVersion';
-        final ntCurrentVersion =
-            Registry.openPath(RegistryHive.localMachine, path: keyPath);
+        final ntCurrentVersion = Registry.openPath(
+          RegistryHive.localMachine,
+          path: keyPath,
+        );
         final installTime = ntCurrentVersion.getValue('InstallTime');
         check(installTime).isNotNull();
         final type = installTime!.type;
@@ -56,8 +62,10 @@ void main() {
 
       test('string', () {
         const keyPath = r'SOFTWARE\Microsoft\Windows\CurrentVersion';
-        final currentVersion =
-            Registry.openPath(RegistryHive.localMachine, path: keyPath);
+        final currentVersion = Registry.openPath(
+          RegistryHive.localMachine,
+          path: keyPath,
+        );
         final programFilesDir = currentVersion.getValue('ProgramFilesDir');
         check(programFilesDir).isNotNull();
         final type = programFilesDir!.type;
@@ -69,8 +77,10 @@ void main() {
       });
 
       test('unexpanded string', () {
-        final env =
-            Registry.openPath(RegistryHive.currentUser, path: 'Environment');
+        final env = Registry.openPath(
+          RegistryHive.currentUser,
+          path: 'Environment',
+        );
         final path = env.getValue('Path');
         check(path).isNotNull();
         final type = path!.type;
@@ -83,8 +93,10 @@ void main() {
 
       test('missing value returns null', () {
         const keyPath = r'SOFTWARE\Microsoft\Windows NT\CurrentVersion';
-        final currentVersion =
-            Registry.openPath(RegistryHive.localMachine, path: keyPath);
+        final currentVersion = Registry.openPath(
+          RegistryHive.localMachine,
+          path: keyPath,
+        );
         check(currentVersion.getValue('NotepadPlusPlus')).isNull();
         currentVersion.close();
       });
@@ -130,7 +142,9 @@ void main() {
       const subkeyName = 'Win32RegistryTestKey';
       final subkey = hkcu.createKey(subkeyName);
       final registryValue = RegistryValue.binary(
-          'TestValue', Uint8List.fromList([0xFF, 0x33, 0x77, 0xAA]));
+        'TestValue',
+        Uint8List.fromList([0xFF, 0x33, 0x77, 0xAA]),
+      );
       subkey.createValue(registryValue);
       final retrievedValue = subkey.getValue('TestValue');
       check(retrievedValue).isNotNull();
@@ -155,8 +169,9 @@ void main() {
       final subkey = hkcu.createKey(subkeyName);
       const value = RegistryValue.int32('TestValue', 1234);
       subkey.createValue(value);
-      check(subkey.values.where((v) => v.name == 'TestValue').first)
-          .equals(value);
+      check(
+        subkey.values.where((v) => v.name == 'TestValue').first,
+      ).equals(value);
       check(subkey.getIntValue('TestValue')).equals(1234);
       subkey.deleteValue('TestValue');
       check(subkey.values.where((e) => e.name == 'TestValue')).isEmpty();
@@ -170,8 +185,10 @@ void main() {
       final hkcu = Registry.openPath(RegistryHive.currentUser);
       const subkeyName = 'Win32RegistryTestKey';
       final subkey = hkcu.createKey(subkeyName);
-      const registryValue =
-          RegistryValue.int64('TestValue', 0xFEEDFACECAFEBEEF);
+      const registryValue = RegistryValue.int64(
+        'TestValue',
+        0xFEEDFACECAFEBEEF,
+      );
       subkey.createValue(registryValue);
       final retrievedValue = subkey.getValue('TestValue');
       check(retrievedValue).isNotNull();
@@ -235,8 +252,10 @@ void main() {
       final hkcu = Registry.openPath(RegistryHive.currentUser);
       const subkeyName = 'Win32RegistryTestKey';
       final subkey = hkcu.createKey(subkeyName);
-      const registryValue =
-          RegistryValue.string('TestValue', 'Some text here.');
+      const registryValue = RegistryValue.string(
+        'TestValue',
+        'Some text here.',
+      );
       final pointerData = registryValue.toWin32();
       check(pointerData.lengthInBytes).equals(sizeOf<Uint16>() * 16);
       free(pointerData.data);
@@ -261,8 +280,11 @@ void main() {
       final hkcu = Registry.openPath(RegistryHive.currentUser);
       const subkeyName = 'Win32RegistryTestKey';
       final subkey = hkcu.createKey(subkeyName);
-      const registryValue =
-          RegistryValue.stringArray('TestValue', ['One', 'Two', 'Three']);
+      const registryValue = RegistryValue.stringArray('TestValue', [
+        'One',
+        'Two',
+        'Three',
+      ]);
       final pointerData = registryValue.toWin32();
       check(pointerData.lengthInBytes).equals(sizeOf<Uint16>() * 15);
       free(pointerData.data);
@@ -302,14 +324,17 @@ void main() {
       check(retrievedValue!.type).equals(RegistryValueType.unexpandedString);
 
       // Unexpanded should be as stored.
-      check(subkey.getStringValue('TestValue'))
-          .equals(r'%LOCALAPPDATA%\win32_registry\win32_registry.dart');
+      check(
+        subkey.getStringValue('TestValue'),
+      ).equals(r'%LOCALAPPDATA%\win32_registry\win32_registry.dart');
 
       // Expanded should replace %LOCALAPPDATA% with an actual system path.
-      check(subkey.getStringValue('TestValue', expandPaths: true)!)
-          .which((it) => it
-            ..not((it) => it.contains('%LOCALAPPDATA%'))
-            ..endsWith(r'\win32_registry\win32_registry.dart'));
+      check(subkey.getStringValue('TestValue', expandPaths: true)!).which(
+        (it) =>
+            it
+              ..not((it) => it.contains('%LOCALAPPDATA%'))
+              ..endsWith(r'\win32_registry\win32_registry.dart'),
+      );
 
       subkey.deleteValue('TestValue');
       check(subkey.values.where((e) => e.name == 'TestValue')).isEmpty();
@@ -378,8 +403,9 @@ void main() {
       final subkey = key.createKey(subkeyName);
 
       var numberOfEvents = 0;
-      final subscription =
-          key.onChanged(includeSubkeys: true).listen((_) => numberOfEvents++);
+      final subscription = key
+          .onChanged(includeSubkeys: true)
+          .listen((_) => numberOfEvents++);
 
       // Allow time for the subscription to be set up.
       await Future.delayed(const Duration(milliseconds: 50));

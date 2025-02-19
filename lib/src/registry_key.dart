@@ -102,63 +102,63 @@ final class RegistryKey {
     String valueName, {
     String path = '',
     bool expandPaths = false,
-  }) =>
-      using((arena) {
-        final lpSubKey = path.toNativeUtf16(allocator: arena);
-        final lpValue = valueName.toNativeUtf16(allocator: arena);
-        final pdwType = arena<DWORD>();
-        final pcbData = arena<DWORD>();
+  }) => using((arena) {
+    final lpSubKey = path.toNativeUtf16(allocator: arena);
+    final lpValue = valueName.toNativeUtf16(allocator: arena);
+    final pdwType = arena<DWORD>();
+    final pcbData = arena<DWORD>();
 
-        final flags = expandPaths
+    final flags =
+        expandPaths
             ? REG_ROUTINE_FLAGS.RRF_RT_ANY
             : REG_ROUTINE_FLAGS.RRF_RT_ANY | REG_ROUTINE_FLAGS.RRF_NOEXPAND;
 
-        // Call first time to find out how much memory we need to allocate
-        var retcode = RegGetValue(
-          hkey,
-          lpSubKey,
-          lpValue,
-          flags,
-          pdwType,
-          nullptr,
-          pcbData,
-        );
-        if (retcode == WIN32_ERROR.ERROR_FILE_NOT_FOUND) return null;
+    // Call first time to find out how much memory we need to allocate
+    var retcode = RegGetValue(
+      hkey,
+      lpSubKey,
+      lpValue,
+      flags,
+      pdwType,
+      nullptr,
+      pcbData,
+    );
+    if (retcode == WIN32_ERROR.ERROR_FILE_NOT_FOUND) return null;
 
-        // Now call for real to get the data we need.
-        final pvData = arena<BYTE>(pcbData.value);
-        retcode = RegGetValue(
-          hkey,
-          lpSubKey,
-          lpValue,
-          flags,
-          pdwType,
-          pvData,
-          pcbData,
-        );
-        final valueType = RegistryValueType.fromWin32(pdwType.value);
-        return valueType.toRegistryValue(
-          lpValue.toDartString(),
-          pvData,
-          pcbData.value,
-        );
-      });
+    // Now call for real to get the data we need.
+    final pvData = arena<BYTE>(pcbData.value);
+    retcode = RegGetValue(
+      hkey,
+      lpSubKey,
+      lpValue,
+      flags,
+      pdwType,
+      pvData,
+      pcbData,
+    );
+    final valueType = RegistryValueType.fromWin32(pdwType.value);
+    return valueType.toRegistryValue(
+      lpValue.toDartString(),
+      pvData,
+      pcbData.value,
+    );
+  });
 
   /// Retrieves a binary value identified by [valueName].
   ///
   /// Returns `null` if the value does not exist or is not a binary value.
   Uint8List? getBinaryValue(String valueName) => switch (getValue(valueName)) {
-        BinaryValue(:final value) => value,
-        _ => null
-      };
+    BinaryValue(:final value) => value,
+    _ => null,
+  };
 
   /// Retrieves an integer value identified by [valueName].
   ///
   /// Returns `null` if the value does not exist or is not an integer.
   int? getIntValue(String valueName) => switch (getValue(valueName)) {
-        Int32Value(:final value) || Int64Value(:final value) => value,
-        _ => null
-      };
+    Int32Value(:final value) || Int64Value(:final value) => value,
+    _ => null,
+  };
 
   /// Retrieves a string value identified by [valueName], with optional path
   /// expansion.
@@ -171,19 +171,19 @@ final class RegistryKey {
       switch (getValue(valueName, expandPaths: expandPaths)) {
         LinkValue(:final value) ||
         StringValue(:final value) ||
-        UnexpandedStringValue(:final value) =>
-          value,
-        _ => null
+        UnexpandedStringValue(:final value) => value,
+        _ => null,
       };
 
   /// Retrieves a string array value identified by [valueName].
   ///
   /// Returns `null` if the value does not exist or is not a string array.
-  List<String>? getStringArrayValue(String valueName) =>
-      switch (getValue(valueName)) {
-        StringArrayValue(:final value) => value,
-        _ => null
-      };
+  List<String>? getStringArrayValue(String valueName) => switch (getValue(
+    valueName,
+  )) {
+    StringArrayValue(:final value) => value,
+    _ => null,
+  };
 
   @Deprecated('Use getIntValue instead')
   int? getValueAsInt(String valueName) => getIntValue(valueName);
@@ -238,10 +238,10 @@ final class RegistryKey {
         receivePort = ReceivePort();
 
         // Start the isolate and pass the message port.
-        await Isolate.spawn(
-          _startListening,
-          (receivePort!.sendPort, includeSubkeys),
-        );
+        await Isolate.spawn(_startListening, (
+          receivePort!.sendPort,
+          includeSubkeys,
+        ));
 
         // Listen for messages from the isolate.
         receivePortSubscription = receivePort!.listen((message) {
@@ -349,49 +349,49 @@ final class RegistryKey {
 
   /// Retrieves details about the current registry key.
   RegistryKeyInfo queryInfo() => using((arena) {
-        final lpClass = arena<Uint16>(256).cast<Utf16>();
-        final lpcchClass = arena<DWORD>()..value = 256;
-        final lpcSubKeys = arena<DWORD>();
-        final lpcbMaxSubKeyLen = arena<DWORD>();
-        final lpcbMaxClassLen = arena<DWORD>();
-        final lpcValues = arena<DWORD>();
-        final lpcbMaxValueNameLen = arena<DWORD>();
-        final lpcbMaxValueLen = arena<DWORD>();
-        final lpcbSecurityDescriptor = arena<DWORD>();
-        final lpftLastWriteTime = arena<FILETIME>();
+    final lpClass = arena<Uint16>(256).cast<Utf16>();
+    final lpcchClass = arena<DWORD>()..value = 256;
+    final lpcSubKeys = arena<DWORD>();
+    final lpcbMaxSubKeyLen = arena<DWORD>();
+    final lpcbMaxClassLen = arena<DWORD>();
+    final lpcValues = arena<DWORD>();
+    final lpcbMaxValueNameLen = arena<DWORD>();
+    final lpcbMaxValueLen = arena<DWORD>();
+    final lpcbSecurityDescriptor = arena<DWORD>();
+    final lpftLastWriteTime = arena<FILETIME>();
 
-        final retcode = RegQueryInfoKey(
-          hkey,
-          lpClass,
-          lpcchClass,
-          nullptr,
-          lpcSubKeys,
-          lpcbMaxSubKeyLen,
-          lpcbMaxClassLen,
-          lpcValues,
-          lpcbMaxValueNameLen,
-          lpcbMaxValueLen,
-          lpcbSecurityDescriptor,
-          lpftLastWriteTime,
-        );
+    final retcode = RegQueryInfoKey(
+      hkey,
+      lpClass,
+      lpcchClass,
+      nullptr,
+      lpcSubKeys,
+      lpcbMaxSubKeyLen,
+      lpcbMaxClassLen,
+      lpcValues,
+      lpcbMaxValueNameLen,
+      lpcbMaxValueLen,
+      lpcbSecurityDescriptor,
+      lpftLastWriteTime,
+    );
 
-        if (retcode != WIN32_ERROR.ERROR_SUCCESS) {
-          throw WindowsException(HRESULT_FROM_WIN32(retcode));
-        }
+    if (retcode != WIN32_ERROR.ERROR_SUCCESS) {
+      throw WindowsException(HRESULT_FROM_WIN32(retcode));
+    }
 
-        final lastWriteTime = lpftLastWriteTime.toDateTime();
-        return RegistryKeyInfo(
-          lpClass.toDartString(),
-          lpcSubKeys.value,
-          lpcbMaxSubKeyLen.value,
-          lpcbMaxClassLen.value,
-          lpcValues.value,
-          lpcbMaxValueNameLen.value,
-          lpcbMaxValueLen.value,
-          lpcbSecurityDescriptor.value,
-          lastWriteTime,
-        );
-      });
+    final lastWriteTime = lpftLastWriteTime.toDateTime();
+    return RegistryKeyInfo(
+      lpClass.toDartString(),
+      lpcSubKeys.value,
+      lpcbMaxSubKeyLen.value,
+      lpcbMaxClassLen.value,
+      lpcValues.value,
+      lpcbMaxValueNameLen.value,
+      lpcbMaxValueLen.value,
+      lpcbSecurityDescriptor.value,
+      lastWriteTime,
+    );
+  });
 
   /// Enumerates the names of all subkeys within the current registry key.
   Iterable<RegistryValue> get values sync* {

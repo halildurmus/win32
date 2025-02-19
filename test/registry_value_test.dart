@@ -13,8 +13,9 @@ void main() {
       );
       check(value1.name).equals('Test');
       check(value1.type).equals(RegistryValueType.binary);
-      check(value1.value)
-          .deepEquals(Uint8List.fromList([0xFF, 0x33, 0x77, 0xAA]));
+      check(
+        value1.value,
+      ).deepEquals(Uint8List.fromList([0xFF, 0x33, 0x77, 0xAA]));
       check(value1.toString()).equals('BinaryValue(Test, [255, 51, 119, 170])');
       final value2 = BinaryValue(
         'Test',
@@ -104,8 +105,9 @@ void main() {
       check(value1.name).equals('Test');
       check(value1.type).equals(RegistryValueType.unexpandedString);
       check(value1.value).equals(r'%SystemRoot%\System32');
-      check(value1.toString())
-          .equals(r'UnexpandedStringValue(Test, %SystemRoot%\System32)');
+      check(
+        value1.toString(),
+      ).equals(r'UnexpandedStringValue(Test, %SystemRoot%\System32)');
       const value2 = UnexpandedStringValue('Test', r'%SystemRoot%\System32');
       check(value1).equals(value2);
       const value3 = UnexpandedStringValue('Test', r'%SystemRoot%\System31');

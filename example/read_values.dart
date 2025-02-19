@@ -13,8 +13,8 @@ void main() {
       case Int32Value(:final value) || Int64Value(:final value):
         print(' - $name ($type): $value');
       case LinkValue(:final value) ||
-            StringValue(:final value) ||
-            UnexpandedStringValue(:final value):
+          StringValue(:final value) ||
+          UnexpandedStringValue(:final value):
         print(' - $name ($type): $value');
       case StringArrayValue(:final value):
         print(' - $name ($type): $value');

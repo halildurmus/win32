@@ -65,30 +65,35 @@ extension RegistryValueExtension on RegistryValue {
   /// pointer to the data and its length in bytes.
   @internal
   PointerData toWin32() => switch (this) {
-        BinaryValue(:final value) =>
-          PointerData(value.allocatePointer(), value.length),
-        Int32Value(:final value) => PointerData(
-            (calloc<DWORD>()..value = value).cast<Uint8>(), sizeOf<DWORD>()),
-        Int64Value(:final value) => PointerData(
-            (calloc<QWORD>()..value = value).cast<Uint8>(), sizeOf<QWORD>()),
-        NoneValue() => PointerData(nullptr, 0),
-        LinkValue(:final value) ||
-        StringValue(:final value) ||
-        UnexpandedStringValue(:final value) =>
-          PointerData(
-            value.toNativeUtf16().cast<Uint8>(),
-            // Reserve 2 bytes per character (UTF-16 encoding) and 2 extra bytes
-            // for the null terminator.
-            value.length * 2 + 2,
-          ),
-        StringArrayValue(:final value) => PointerData(
-            value.toWideCharArray().cast<Uint8>(),
-            value.fold(
-              2, // 2 bytes for the null terminator at the end of the array.
-              (prev, element) => prev + element.length * 2 + 2,
-            ),
-          ),
-      };
+    BinaryValue(:final value) => PointerData(
+      value.allocatePointer(),
+      value.length,
+    ),
+    Int32Value(:final value) => PointerData(
+      (calloc<DWORD>()..value = value).cast<Uint8>(),
+      sizeOf<DWORD>(),
+    ),
+    Int64Value(:final value) => PointerData(
+      (calloc<QWORD>()..value = value).cast<Uint8>(),
+      sizeOf<QWORD>(),
+    ),
+    NoneValue() => PointerData(nullptr, 0),
+    LinkValue(:final value) ||
+    StringValue(:final value) ||
+    UnexpandedStringValue(:final value) => PointerData(
+      value.toNativeUtf16().cast<Uint8>(),
+      // Reserve 2 bytes per character (UTF-16 encoding) and 2 extra bytes
+      // for the null terminator.
+      value.length * 2 + 2,
+    ),
+    StringArrayValue(:final value) => PointerData(
+      value.toWideCharArray().cast<Uint8>(),
+      value.fold(
+        2, // 2 bytes for the null terminator at the end of the array.
+        (prev, element) => prev + element.length * 2 + 2,
+      ),
+    ),
+  };
 }
 
 @internal
@@ -106,26 +111,31 @@ extension RegistryValueTypeExtension on RegistryValueType {
     String name,
     Pointer<Uint8> data,
     int dataLength,
-  ) =>
-      switch (this) {
-        RegistryValueType.none => NoneValue(name),
-        RegistryValueType.string =>
-          StringValue(name, data.cast<Utf16>().toDartString()),
-        RegistryValueType.unexpandedString =>
-          UnexpandedStringValue(name, data.cast<Utf16>().toDartString()),
-        RegistryValueType.binary => BinaryValue(
-            name,
-            // Copy the data to a new Uint8List as the original pointer will be
-            // freed when the function exits.
-            Uint8List.fromList(data.asTypedList(dataLength)),
-          ),
-        RegistryValueType.int32 => Int32Value(name, data.cast<DWORD>().value),
-        RegistryValueType.stringArray => StringArrayValue(
-            name,
-            data.cast<Utf16>().unpackStringArray((dataLength - 2) ~/ 2),
-          ),
-        RegistryValueType.link =>
-          LinkValue(name, data.cast<Utf16>().toDartString()),
-        RegistryValueType.int64 => Int64Value(name, data.cast<QWORD>().value),
-      };
+  ) => switch (this) {
+    RegistryValueType.none => NoneValue(name),
+    RegistryValueType.string => StringValue(
+      name,
+      data.cast<Utf16>().toDartString(),
+    ),
+    RegistryValueType.unexpandedString => UnexpandedStringValue(
+      name,
+      data.cast<Utf16>().toDartString(),
+    ),
+    RegistryValueType.binary => BinaryValue(
+      name,
+      // Copy the data to a new Uint8List as the original pointer will be
+      // freed when the function exits.
+      Uint8List.fromList(data.asTypedList(dataLength)),
+    ),
+    RegistryValueType.int32 => Int32Value(name, data.cast<DWORD>().value),
+    RegistryValueType.stringArray => StringArrayValue(
+      name,
+      data.cast<Utf16>().unpackStringArray((dataLength - 2) ~/ 2),
+    ),
+    RegistryValueType.link => LinkValue(
+      name,
+      data.cast<Utf16>().toDartString(),
+    ),
+    RegistryValueType.int64 => Int64Value(name, data.cast<QWORD>().value),
+  };
 }

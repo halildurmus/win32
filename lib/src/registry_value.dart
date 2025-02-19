@@ -59,7 +59,7 @@ sealed class RegistryValue {
 final class BinaryValue extends RegistryValue {
   /// Constructs a [BinaryValue] with the specified [name] and [value].
   const BinaryValue(String name, this.value)
-      : super._(name, RegistryValueType.binary);
+    : super._(name, RegistryValueType.binary);
 
   /// The binary data value represented as a [Uint8List].
   final Uint8List value;
@@ -86,7 +86,7 @@ final class BinaryValue extends RegistryValue {
 final class Int32Value extends RegistryValue {
   /// Constructs a [Int32Value] with the specified [name] and [value].
   const Int32Value(String name, this.value)
-      : super._(name, RegistryValueType.int32);
+    : super._(name, RegistryValueType.int32);
 
   /// The 32-bit integer value.
   final int value;
@@ -108,7 +108,7 @@ final class Int32Value extends RegistryValue {
 final class Int64Value extends RegistryValue {
   /// Constructs a [Int64Value] with the specified [name] and [value].
   const Int64Value(String name, this.value)
-      : super._(name, RegistryValueType.int64);
+    : super._(name, RegistryValueType.int64);
 
   /// The 64-bit integer value.
   final int value;
@@ -130,7 +130,7 @@ final class Int64Value extends RegistryValue {
 final class LinkValue extends RegistryValue {
   /// Constructs a [LinkValue] with the specified [name] and [value].
   const LinkValue(String name, this.value)
-      : super._(name, RegistryValueType.link);
+    : super._(name, RegistryValueType.link);
 
   /// The symbolic link value as a string.
   final String value;
@@ -169,7 +169,7 @@ final class NoneValue extends RegistryValue {
 final class StringValue extends RegistryValue {
   /// Constructs a [StringValue] with the specified [name] and [value].
   const StringValue(String name, this.value)
-      : super._(name, RegistryValueType.string);
+    : super._(name, RegistryValueType.string);
 
   /// The string value.
   final String value;
@@ -191,7 +191,7 @@ final class StringValue extends RegistryValue {
 final class StringArrayValue extends RegistryValue {
   /// Constructs a [StringArrayValue] with the specified [name] and [value].
   const StringArrayValue(String name, this.value)
-      : super._(name, RegistryValueType.stringArray);
+    : super._(name, RegistryValueType.stringArray);
 
   /// The list of string values.
   final List<String> value;
@@ -219,7 +219,7 @@ final class UnexpandedStringValue extends RegistryValue {
   /// Constructs a [UnexpandedStringValue] with the specified [name] and
   /// [value].
   const UnexpandedStringValue(String name, this.value)
-      : super._(name, RegistryValueType.unexpandedString);
+    : super._(name, RegistryValueType.unexpandedString);
 
   /// The unexpanded string value.
   final String value;

@@ -42,17 +42,22 @@ void main() {
     });
 
     test('fromWin32', () {
-      check(RegistryHive.fromWin32(HKEY_CLASSES_ROOT))
-          .equals(RegistryHive.classesRoot);
-      check(RegistryHive.fromWin32(HKEY_CURRENT_USER))
-          .equals(RegistryHive.currentUser);
-      check(RegistryHive.fromWin32(HKEY_LOCAL_MACHINE))
-          .equals(RegistryHive.localMachine);
+      check(
+        RegistryHive.fromWin32(HKEY_CLASSES_ROOT),
+      ).equals(RegistryHive.classesRoot);
+      check(
+        RegistryHive.fromWin32(HKEY_CURRENT_USER),
+      ).equals(RegistryHive.currentUser);
+      check(
+        RegistryHive.fromWin32(HKEY_LOCAL_MACHINE),
+      ).equals(RegistryHive.localMachine);
       check(RegistryHive.fromWin32(HKEY_USERS)).equals(RegistryHive.allUsers);
-      check(RegistryHive.fromWin32(HKEY_PERFORMANCE_DATA))
-          .equals(RegistryHive.performanceData);
-      check(RegistryHive.fromWin32(HKEY_CURRENT_CONFIG))
-          .equals(RegistryHive.currentConfig);
+      check(
+        RegistryHive.fromWin32(HKEY_PERFORMANCE_DATA),
+      ).equals(RegistryHive.performanceData);
+      check(
+        RegistryHive.fromWin32(HKEY_CURRENT_CONFIG),
+      ).equals(RegistryHive.currentConfig);
       check(() => RegistryHive.fromWin32(0))
           .throws<ArgumentError>()
           .has((e) => e.message, 'message')

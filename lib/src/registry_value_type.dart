@@ -45,33 +45,34 @@ enum RegistryValueType {
 
   /// Creates a [RegistryValueType] from a Win32 registry data type value.
   factory RegistryValueType.fromWin32(int value) => switch (value) {
-        REG_VALUE_TYPE.REG_NONE => none,
-        REG_VALUE_TYPE.REG_SZ => string,
-        REG_VALUE_TYPE.REG_EXPAND_SZ => unexpandedString,
-        REG_VALUE_TYPE.REG_BINARY => binary,
-        REG_VALUE_TYPE.REG_DWORD => int32,
-        REG_VALUE_TYPE.REG_LINK => link,
-        REG_VALUE_TYPE.REG_MULTI_SZ => stringArray,
-        REG_VALUE_TYPE.REG_QWORD => int64,
-        _ => throw ArgumentError.value(
-            value,
-            'value',
-            'Unknown registry value type: $value',
-          ),
-      };
+    REG_VALUE_TYPE.REG_NONE => none,
+    REG_VALUE_TYPE.REG_SZ => string,
+    REG_VALUE_TYPE.REG_EXPAND_SZ => unexpandedString,
+    REG_VALUE_TYPE.REG_BINARY => binary,
+    REG_VALUE_TYPE.REG_DWORD => int32,
+    REG_VALUE_TYPE.REG_LINK => link,
+    REG_VALUE_TYPE.REG_MULTI_SZ => stringArray,
+    REG_VALUE_TYPE.REG_QWORD => int64,
+    _ =>
+      throw ArgumentError.value(
+        value,
+        'value',
+        'Unknown registry value type: $value',
+      ),
+  };
 
   /// The integer value representing the underlying Win32 registry type.
   final int value;
 
   @override
   String toString() => switch (this) {
-        none => 'REG_NONE',
-        string => 'REG_SZ',
-        unexpandedString => 'REG_EXPAND_SZ',
-        binary => 'REG_BINARY',
-        int32 => 'REG_DWORD',
-        link => 'REG_LINK',
-        stringArray => 'REG_MULTI_SZ',
-        int64 => 'REG_QWORD',
-      };
+    none => 'REG_NONE',
+    string => 'REG_SZ',
+    unexpandedString => 'REG_EXPAND_SZ',
+    binary => 'REG_BINARY',
+    int32 => 'REG_DWORD',
+    link => 'REG_LINK',
+    stringArray => 'REG_MULTI_SZ',
+    int64 => 'REG_QWORD',
+  };
 }

@@ -12,9 +12,10 @@ void main() async {
   subkey.createValue(string);
 
   // Subscribe to the onChanged stream to monitor changes to the subkey.
-  final subscription = subkey
-      .onChanged()
-      .listen((_) => print('Subkey changed.'), cancelOnError: true);
+  final subscription = subkey.onChanged().listen(
+    (_) => print('Subkey changed.'),
+    cancelOnError: true,
+  );
 
   print('Monitoring registry key changes for 30 seconds...');
   // Now, make a change to the subkey in RegEdit to trigger the onChanged event.

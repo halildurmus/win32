@@ -54,22 +54,30 @@ void main() {
     });
 
     test('fromWin32', () {
-      check(RegistryValueType.fromWin32(REG_VALUE_TYPE.REG_NONE))
-          .equals(RegistryValueType.none);
-      check(RegistryValueType.fromWin32(REG_VALUE_TYPE.REG_SZ))
-          .equals(RegistryValueType.string);
-      check(RegistryValueType.fromWin32(REG_VALUE_TYPE.REG_EXPAND_SZ))
-          .equals(RegistryValueType.unexpandedString);
-      check(RegistryValueType.fromWin32(REG_VALUE_TYPE.REG_BINARY))
-          .equals(RegistryValueType.binary);
-      check(RegistryValueType.fromWin32(REG_VALUE_TYPE.REG_DWORD))
-          .equals(RegistryValueType.int32);
-      check(RegistryValueType.fromWin32(REG_VALUE_TYPE.REG_LINK))
-          .equals(RegistryValueType.link);
-      check(RegistryValueType.fromWin32(REG_VALUE_TYPE.REG_MULTI_SZ))
-          .equals(RegistryValueType.stringArray);
-      check(RegistryValueType.fromWin32(REG_VALUE_TYPE.REG_QWORD))
-          .equals(RegistryValueType.int64);
+      check(
+        RegistryValueType.fromWin32(REG_VALUE_TYPE.REG_NONE),
+      ).equals(RegistryValueType.none);
+      check(
+        RegistryValueType.fromWin32(REG_VALUE_TYPE.REG_SZ),
+      ).equals(RegistryValueType.string);
+      check(
+        RegistryValueType.fromWin32(REG_VALUE_TYPE.REG_EXPAND_SZ),
+      ).equals(RegistryValueType.unexpandedString);
+      check(
+        RegistryValueType.fromWin32(REG_VALUE_TYPE.REG_BINARY),
+      ).equals(RegistryValueType.binary);
+      check(
+        RegistryValueType.fromWin32(REG_VALUE_TYPE.REG_DWORD),
+      ).equals(RegistryValueType.int32);
+      check(
+        RegistryValueType.fromWin32(REG_VALUE_TYPE.REG_LINK),
+      ).equals(RegistryValueType.link);
+      check(
+        RegistryValueType.fromWin32(REG_VALUE_TYPE.REG_MULTI_SZ),
+      ).equals(RegistryValueType.stringArray);
+      check(
+        RegistryValueType.fromWin32(REG_VALUE_TYPE.REG_QWORD),
+      ).equals(RegistryValueType.int64);
       check(() => RegistryValueType.fromWin32(-1))
           .throws<ArgumentError>()
           .has((e) => e.message, 'message')
