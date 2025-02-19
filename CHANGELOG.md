@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.3.0] - 2025-02-19
+
+### 📦 Dependencies
+
+- Bump `win32` from 5.10.0 to 5.11.0 by @halildurmus in [#106](https://github.com/halildurmus/winmd/pull/106)
+
+### 🎨 Styling
+
+- Format with tall-style by @halildurmus in [#106](https://github.com/halildurmus/winmd/pull/106)
+
+[5.3.0]: https://github.com/halildurmus/winmd/compare/v5.2.0..v5.3.0
+
 ## [5.2.0] - 2024-11-26
 
 ### 🚀 Features
