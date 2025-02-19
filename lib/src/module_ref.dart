@@ -1,7 +1,7 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart';
+import 'package:win32/win32.dart' hide TokenType;
 
 import 'mixins/custom_attributes_mixin.dart';
 import 'models/models.dart';
@@ -24,8 +24,12 @@ class ModuleRef extends TokenObject with CustomAttributesMixin {
       final pchName = arena<ULONG>();
 
       final reader = scope.reader;
-      final hr =
-          reader.getModuleRefProps(token, szName, stringBufferSize, pchName);
+      final hr = reader.getModuleRefProps(
+        token,
+        szName,
+        stringBufferSize,
+        pchName,
+      );
       if (FAILED(hr)) throw WindowsException(hr);
       return ModuleRef(scope, token, szName.toDartString());
     });

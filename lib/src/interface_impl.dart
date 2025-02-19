@@ -1,7 +1,7 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart';
+import 'package:win32/win32.dart' hide TokenType;
 
 import 'mixins/mixins.dart';
 import 'models/models.dart';
@@ -13,8 +13,11 @@ import 'type_def.dart';
 /// Records the interfaces a type implements explicitly.
 class InterfaceImpl extends TokenObject with CustomAttributesMixin {
   InterfaceImpl(super.scope, super.token)
-      : _classInterfacePair =
-            processInterfaceImplToken(scope.reader, scope, token);
+    : _classInterfacePair = processInterfaceImplToken(
+        scope.reader,
+        scope,
+        token,
+      );
 
   final ({TypeDef class_, TypeDef interface}) _classInterfacePair;
 
@@ -49,7 +52,7 @@ class InterfaceImpl extends TokenObject with CustomAttributesMixin {
       final interfaceToken = ptkIface.value;
       return (
         class_: TypeDef.fromToken(scope, classToken),
-        interface: TypeDef.fromToken(scope, interfaceToken)
+        interface: TypeDef.fromToken(scope, interfaceToken),
       );
     });
   }

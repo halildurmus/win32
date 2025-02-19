@@ -1,7 +1,7 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart';
+import 'package:win32/win32.dart' hide TokenType;
 
 import 'method.dart';
 import 'mixins/custom_attributes_mixin.dart';
@@ -94,32 +94,32 @@ class Event extends TokenObject with CustomAttributesMixin {
   final int _removeOnToken;
 
   /// Returns the add method for the event.
-  Method? get addMethod => reader.isValidToken(_addOnToken) == TRUE
-      ? Method.fromToken(scope, _addOnToken)
-      : null;
+  Method? get addMethod =>
+      reader.isValidToken(_addOnToken) == TRUE
+          ? Method.fromToken(scope, _addOnToken)
+          : null;
 
   /// Returns the remove method for the event.
-  Method? get removeMethod => reader.isValidToken(_removeOnToken) == TRUE
-      ? Method.fromToken(scope, _removeOnToken)
-      : null;
+  Method? get removeMethod =>
+      reader.isValidToken(_removeOnToken) == TRUE
+          ? Method.fromToken(scope, _removeOnToken)
+          : null;
 
   /// Returns the raise method for the event.
-  Method? get raiseMethod => reader.isValidToken(_fireToken) == TRUE
-      ? Method.fromToken(scope, _fireToken)
-      : null;
+  Method? get raiseMethod =>
+      reader.isValidToken(_fireToken) == TRUE
+          ? Method.fromToken(scope, _fireToken)
+          : null;
 
   /// Returns the [TypeDef] representing the class that declares the event.
   TypeDef get parent => scope.findTypeDefByToken(_parentToken)!;
 
   /// Returns true if the event is special; its name describes how.
-  bool get isSpecialName =>
-      _attributes & CorEventAttr.evSpecialName == CorEventAttr.evSpecialName;
+  bool get isSpecialName => _attributes & evSpecialName == evSpecialName;
 
   /// Returns true if the common language runtime should check the encoding of
   /// the event name.
-  bool get isRTSpecialName =>
-      _attributes & CorEventAttr.evRTSpecialName ==
-      CorEventAttr.evRTSpecialName;
+  bool get isRTSpecialName => _attributes & evRTSpecialName == evRTSpecialName;
 
   @override
   String toString() => name;

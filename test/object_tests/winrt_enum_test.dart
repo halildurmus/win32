@@ -57,8 +57,9 @@ void main() {
     check(list.isStatic).isTrue();
     check(list.name).equals('List');
     check(list.typeIdentifier.baseType).equals(BaseType.valueTypeModifier);
-    check(list.typeIdentifier.name)
-        .equals('Windows.Storage.Pickers.PickerViewMode');
+    check(
+      list.typeIdentifier.name,
+    ).equals('Windows.Storage.Pickers.PickerViewMode');
     check(list.value).isA<int>();
     check(list.value).equals(0);
 
@@ -68,8 +69,9 @@ void main() {
     check(thumbnail.isStatic).isTrue();
     check(thumbnail.name).equals('Thumbnail');
     check(thumbnail.typeIdentifier.baseType).equals(BaseType.valueTypeModifier);
-    check(thumbnail.typeIdentifier.name)
-        .equals('Windows.Storage.Pickers.PickerViewMode');
+    check(
+      thumbnail.typeIdentifier.name,
+    ).equals('Windows.Storage.Pickers.PickerViewMode');
     check(list.value).isA<int>();
     check(thumbnail.value).equals(1);
   });

@@ -56,7 +56,8 @@ void main() {
     check(typeDef.stringFormat).equals(StringFormat.auto);
 
     final unmanagedFunctionPointerAttr = typeDef.findAttribute(
-        'System.Runtime.InteropServices.UnmanagedFunctionPointerAttribute');
+      'System.Runtime.InteropServices.UnmanagedFunctionPointerAttribute',
+    );
     check(unmanagedFunctionPointerAttr).isNotNull();
     check(unmanagedFunctionPointerAttr!.signatureBlob.toList()).deepEquals([
       0x01, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, //
@@ -72,20 +73,23 @@ void main() {
     check(firstMethod.isSpecialName).isTrue();
     check(firstMethod.memberAccess).equals(MemberAccess.public);
     check(firstMethod.name).equals('.ctor');
-    check(firstMethod.returnType.typeIdentifier.baseType)
-        .equals(BaseType.voidType);
+    check(
+      firstMethod.returnType.typeIdentifier.baseType,
+    ).equals(BaseType.voidType);
 
     check(firstMethod.parameters.length).equals(2);
     final [firstMethodFirstParam, firstMethodSecondParam] =
         firstMethod.parameters;
 
     check(firstMethodFirstParam.name).equals('object');
-    check(firstMethodFirstParam.typeIdentifier.baseType)
-        .equals(BaseType.objectType);
+    check(
+      firstMethodFirstParam.typeIdentifier.baseType,
+    ).equals(BaseType.objectType);
 
     check(firstMethodSecondParam.name).equals('method');
-    check(firstMethodSecondParam.typeIdentifier.baseType)
-        .equals(BaseType.intPtrType);
+    check(
+      firstMethodSecondParam.typeIdentifier.baseType,
+    ).equals(BaseType.intPtrType);
 
     check(secondMethod.implFeatures.codeType).equals(CodeType.runtime);
     check(secondMethod.implFeatures.isManaged).isTrue();
@@ -93,8 +97,9 @@ void main() {
     check(secondMethod.isVirtual).isTrue();
     check(secondMethod.memberAccess).equals(MemberAccess.public);
     check(secondMethod.name).equals('Invoke');
-    check(secondMethod.returnType.typeIdentifier.name)
-        .equals('Windows.Win32.Foundation.LRESULT');
+    check(
+      secondMethod.returnType.typeIdentifier.name,
+    ).equals('Windows.Win32.Foundation.LRESULT');
     check(secondMethod.vTableLayout).equals(VtableLayout.newSlot);
 
     check(secondMethod.parameters.length).equals(4);
@@ -102,34 +107,41 @@ void main() {
       secondMethodFirstParam,
       secondMethodSecondParam,
       secondMethodThirdParam,
-      secondMethodFourthParam
+      secondMethodFourthParam,
     ] = secondMethod.parameters;
 
     check(secondMethodFirstParam.isInParam).isTrue();
     check(secondMethodFirstParam.name).equals('param0');
-    check(secondMethodFirstParam.typeIdentifier.baseType)
-        .equals(BaseType.valueTypeModifier);
-    check(secondMethodFirstParam.typeIdentifier.name)
-        .equals('Windows.Win32.Foundation.HWND');
+    check(
+      secondMethodFirstParam.typeIdentifier.baseType,
+    ).equals(BaseType.valueTypeModifier);
+    check(
+      secondMethodFirstParam.typeIdentifier.name,
+    ).equals('Windows.Win32.Foundation.HWND');
 
     check(secondMethodSecondParam.isInParam).isTrue();
     check(secondMethodSecondParam.name).equals('param1');
-    check(secondMethodSecondParam.typeIdentifier.baseType)
-        .equals(BaseType.uint32Type);
+    check(
+      secondMethodSecondParam.typeIdentifier.baseType,
+    ).equals(BaseType.uint32Type);
 
     check(secondMethodThirdParam.isInParam).isTrue();
     check(secondMethodThirdParam.name).equals('param2');
-    check(secondMethodThirdParam.typeIdentifier.baseType)
-        .equals(BaseType.valueTypeModifier);
-    check(secondMethodThirdParam.typeIdentifier.name)
-        .equals('Windows.Win32.Foundation.WPARAM');
+    check(
+      secondMethodThirdParam.typeIdentifier.baseType,
+    ).equals(BaseType.valueTypeModifier);
+    check(
+      secondMethodThirdParam.typeIdentifier.name,
+    ).equals('Windows.Win32.Foundation.WPARAM');
 
     check(secondMethodFourthParam.isInParam).isTrue();
     check(secondMethodFourthParam.name).equals('param3');
-    check(secondMethodFourthParam.typeIdentifier.baseType)
-        .equals(BaseType.valueTypeModifier);
-    check(secondMethodFourthParam.typeIdentifier.name)
-        .equals('Windows.Win32.Foundation.LPARAM');
+    check(
+      secondMethodFourthParam.typeIdentifier.baseType,
+    ).equals(BaseType.valueTypeModifier);
+    check(
+      secondMethodFourthParam.typeIdentifier.name,
+    ).equals('Windows.Win32.Foundation.LPARAM');
   });
 
   tearDownAll(MetadataStore.close);

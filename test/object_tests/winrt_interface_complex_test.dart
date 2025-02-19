@@ -77,27 +77,32 @@ void main() {
     check(typeDef.isAbstract).isTrue();
     check(typeDef.isInterface).isTrue();
     check(typeDef.isWindowsRuntime).isTrue();
-    check(typeDef.name)
-        .equals('Windows.Foundation.IAsyncOperationWithProgress`2');
+    check(
+      typeDef.name,
+    ).equals('Windows.Foundation.IAsyncOperationWithProgress`2');
     check(typeDef.stringFormat).equals(StringFormat.ansi);
     check(typeDef.typeLayout).equals(TypeLayout.auto);
     check(typeDef.typeVisibility).equals(TypeVisibility.public);
 
-    final contractVerAttr = typeDef
-        .findAttribute('Windows.Foundation.Metadata.ContractVersionAttribute');
+    final contractVerAttr = typeDef.findAttribute(
+      'Windows.Foundation.Metadata.ContractVersionAttribute',
+    );
     check(contractVerAttr).isNotNull();
     check(contractVerAttr!.parameters.length).equals(2);
     final [contractVerFirstParam, contractVerSecondParam] =
         contractVerAttr.parameters;
-    check(contractVerFirstParam.type.baseType)
-        .equals(BaseType.classTypeModifier);
-    check(contractVerFirstParam.value)
-        .equals('Windows.Foundation.FoundationContract');
+    check(
+      contractVerFirstParam.type.baseType,
+    ).equals(BaseType.classTypeModifier);
+    check(
+      contractVerFirstParam.value,
+    ).equals('Windows.Foundation.FoundationContract');
     check(contractVerSecondParam.type.baseType).equals(BaseType.uint32Type);
     check(contractVerSecondParam.value).equals(65536);
 
-    final guidAttribute =
-        typeDef.findAttribute('Windows.Foundation.Metadata.GuidAttribute');
+    final guidAttribute = typeDef.findAttribute(
+      'Windows.Foundation.Metadata.GuidAttribute',
+    );
     check(guidAttribute).isNotNull();
     check(typeDef.guid).equals('{b5d036d7-e297-498f-ba60-0289e76e23dd}');
 
@@ -122,22 +127,27 @@ void main() {
     check(putProgress.isVirtual).isTrue();
     check(putProgress.memberAccess).equals(MemberAccess.public);
     check(putProgress.name).equals('put_Progress');
-    check(putProgress.returnType.typeIdentifier.baseType)
-        .equals(BaseType.voidType);
+    check(
+      putProgress.returnType.typeIdentifier.baseType,
+    ).equals(BaseType.voidType);
     check(putProgress.vTableLayout).equals(VtableLayout.newSlot);
 
     check(putProgress.parameters.length).equals(1);
     final [putProgressParam] = putProgress.parameters;
     check(putProgressParam.name).equals('handler');
-    check(putProgressParam.typeIdentifier.name)
-        .equals('Windows.Foundation.AsyncOperationProgressHandler`2');
-    check(putProgressParam.typeIdentifier.type?.name)
-        .equals('Windows.Foundation.AsyncOperationProgressHandler`2');
+    check(
+      putProgressParam.typeIdentifier.name,
+    ).equals('Windows.Foundation.AsyncOperationProgressHandler`2');
+    check(
+      putProgressParam.typeIdentifier.type?.name,
+    ).equals('Windows.Foundation.AsyncOperationProgressHandler`2');
     check(putProgressParam.typeIdentifier.type?.genericParams.length).equals(2);
-    check(putProgressParam.typeIdentifier.type?.genericParams.first.name)
-        .equals('TResult');
-    check(putProgressParam.typeIdentifier.type?.genericParams.last.name)
-        .equals('TProgress');
+    check(
+      putProgressParam.typeIdentifier.type?.genericParams.first.name,
+    ).equals('TResult');
+    check(
+      putProgressParam.typeIdentifier.type?.genericParams.last.name,
+    ).equals('TProgress');
 
     final getProgress = typeDef.methods[1];
     check(getProgress.implFeatures.codeType).equals(CodeType.runtime);
@@ -150,16 +160,21 @@ void main() {
     check(getProgress.memberAccess).equals(MemberAccess.public);
     check(getProgress.name).equals('get_Progress');
     check(getProgress.parameters.length).equals(0);
-    check(getProgress.returnType.typeIdentifier.name)
-        .equals('Windows.Foundation.AsyncOperationProgressHandler`2');
-    check(getProgress.returnType.typeIdentifier.type?.name)
-        .equals('Windows.Foundation.AsyncOperationProgressHandler`2');
-    check(getProgress.returnType.typeIdentifier.type?.genericParams.length)
-        .equals(2);
-    check(getProgress.returnType.typeIdentifier.type?.genericParams.first.name)
-        .equals('TResult');
-    check(getProgress.returnType.typeIdentifier.type?.genericParams.last.name)
-        .equals('TProgress');
+    check(
+      getProgress.returnType.typeIdentifier.name,
+    ).equals('Windows.Foundation.AsyncOperationProgressHandler`2');
+    check(
+      getProgress.returnType.typeIdentifier.type?.name,
+    ).equals('Windows.Foundation.AsyncOperationProgressHandler`2');
+    check(
+      getProgress.returnType.typeIdentifier.type?.genericParams.length,
+    ).equals(2);
+    check(
+      getProgress.returnType.typeIdentifier.type?.genericParams.first.name,
+    ).equals('TResult');
+    check(
+      getProgress.returnType.typeIdentifier.type?.genericParams.last.name,
+    ).equals('TProgress');
     check(getProgress.vTableLayout).equals(VtableLayout.newSlot);
 
     final putCompleted = typeDef.methods[2];
@@ -176,18 +191,24 @@ void main() {
     check(putCompleted.parameters.length).equals(1);
     final [putCompletedParam] = putCompleted.parameters;
     check(putCompletedParam.name).equals('handler');
-    check(putCompleted.returnType.typeIdentifier.baseType)
-        .equals(BaseType.voidType);
-    check(putCompletedParam.typeIdentifier.name).equals(
-        'Windows.Foundation.AsyncOperationWithProgressCompletedHandler`2');
-    check(putCompletedParam.typeIdentifier.type?.name).equals(
-        'Windows.Foundation.AsyncOperationWithProgressCompletedHandler`2');
-    check(putCompletedParam.typeIdentifier.type?.genericParams.length)
-        .equals(2);
-    check(putCompletedParam.typeIdentifier.type?.genericParams.first.name)
-        .equals('TResult');
-    check(putCompletedParam.typeIdentifier.type?.genericParams.last.name)
-        .equals('TProgress');
+    check(
+      putCompleted.returnType.typeIdentifier.baseType,
+    ).equals(BaseType.voidType);
+    check(
+      putCompletedParam.typeIdentifier.name,
+    ).equals('Windows.Foundation.AsyncOperationWithProgressCompletedHandler`2');
+    check(
+      putCompletedParam.typeIdentifier.type?.name,
+    ).equals('Windows.Foundation.AsyncOperationWithProgressCompletedHandler`2');
+    check(
+      putCompletedParam.typeIdentifier.type?.genericParams.length,
+    ).equals(2);
+    check(
+      putCompletedParam.typeIdentifier.type?.genericParams.first.name,
+    ).equals('TResult');
+    check(
+      putCompletedParam.typeIdentifier.type?.genericParams.last.name,
+    ).equals('TProgress');
     check(putCompleted.vTableLayout).equals(VtableLayout.newSlot);
 
     final getCompleted = typeDef.methods[3];
@@ -201,16 +222,21 @@ void main() {
     check(getCompleted.memberAccess).equals(MemberAccess.public);
     check(getCompleted.name).equals('get_Completed');
     check(getCompleted.parameters.length).equals(0);
-    check(getCompleted.returnType.typeIdentifier.name).equals(
-        'Windows.Foundation.AsyncOperationWithProgressCompletedHandler`2');
-    check(getCompleted.returnType.typeIdentifier.type?.name).equals(
-        'Windows.Foundation.AsyncOperationWithProgressCompletedHandler`2');
-    check(getCompleted.returnType.typeIdentifier.type?.genericParams.length)
-        .equals(2);
-    check(getCompleted.returnType.typeIdentifier.type?.genericParams.first.name)
-        .equals('TResult');
-    check(getCompleted.returnType.typeIdentifier.type?.genericParams.last.name)
-        .equals('TProgress');
+    check(
+      getCompleted.returnType.typeIdentifier.name,
+    ).equals('Windows.Foundation.AsyncOperationWithProgressCompletedHandler`2');
+    check(
+      getCompleted.returnType.typeIdentifier.type?.name,
+    ).equals('Windows.Foundation.AsyncOperationWithProgressCompletedHandler`2');
+    check(
+      getCompleted.returnType.typeIdentifier.type?.genericParams.length,
+    ).equals(2);
+    check(
+      getCompleted.returnType.typeIdentifier.type?.genericParams.first.name,
+    ).equals('TResult');
+    check(
+      getCompleted.returnType.typeIdentifier.type?.genericParams.last.name,
+    ).equals('TProgress');
     check(getCompleted.vTableLayout).equals(VtableLayout.newSlot);
 
     final getResults = typeDef.methods[4];
@@ -226,10 +252,12 @@ void main() {
     check(getResults.memberAccess).equals(MemberAccess.public);
     check(getResults.name).equals('GetResults');
     check(getResults.parameters.length).equals(0);
-    check(getResults.returnType.typeIdentifier.baseType)
-        .equals(BaseType.classVariableTypeModifier);
-    check(getResults.returnType.typeIdentifier.genericParameterSequence)
-        .equals(0); // TResult
+    check(
+      getResults.returnType.typeIdentifier.baseType,
+    ).equals(BaseType.classVariableTypeModifier);
+    check(
+      getResults.returnType.typeIdentifier.genericParameterSequence,
+    ).equals(0); // TResult
     check(getResults.vTableLayout).equals(VtableLayout.newSlot);
 
     check(typeDef.properties.length).equals(2);
@@ -244,15 +272,19 @@ void main() {
     check(progress.setterMethod).isNotNull();
     check(progress.setterMethod!.name).equals('put_Progress');
     check(progress.setterMethod!.token).equals(putProgress.token);
-    check(progress.typeIdentifier.baseType)
-        .equals(BaseType.genericTypeModifier);
-    check(progress.typeIdentifier.name)
-        .equals('Windows.Foundation.AsyncOperationProgressHandler`2');
+    check(
+      progress.typeIdentifier.baseType,
+    ).equals(BaseType.genericTypeModifier);
+    check(
+      progress.typeIdentifier.name,
+    ).equals('Windows.Foundation.AsyncOperationProgressHandler`2');
     check(progress.typeIdentifier.type?.genericParams.length).equals(2);
-    check(progress.typeIdentifier.type?.genericParams.first.name)
-        .equals('TResult');
-    check(progress.typeIdentifier.type?.genericParams.last.name)
-        .equals('TProgress');
+    check(
+      progress.typeIdentifier.type?.genericParams.first.name,
+    ).equals('TResult');
+    check(
+      progress.typeIdentifier.type?.genericParams.last.name,
+    ).equals('TProgress');
 
     final completed = typeDef.properties[1];
     check(completed.getterMethod?.name).equals('get_Completed');
@@ -262,15 +294,19 @@ void main() {
     check(completed.name).equals('Completed');
     check(completed.setterMethod?.name).equals('put_Completed');
     check(completed.setterMethod?.token).equals(putCompleted.token);
-    check(completed.typeIdentifier.name).equals(
-        'Windows.Foundation.AsyncOperationWithProgressCompletedHandler`2');
-    check(completed.typeIdentifier.baseType)
-        .equals(BaseType.genericTypeModifier);
+    check(
+      completed.typeIdentifier.name,
+    ).equals('Windows.Foundation.AsyncOperationWithProgressCompletedHandler`2');
+    check(
+      completed.typeIdentifier.baseType,
+    ).equals(BaseType.genericTypeModifier);
     check(completed.typeIdentifier.type?.genericParams.length).equals(2);
-    check(completed.typeIdentifier.type?.genericParams.first.name)
-        .equals('TResult');
-    check(completed.typeIdentifier.type?.genericParams.last.name)
-        .equals('TProgress');
+    check(
+      completed.typeIdentifier.type?.genericParams.first.name,
+    ).equals('TResult');
+    check(
+      completed.typeIdentifier.type?.genericParams.last.name,
+    ).equals('TProgress');
   });
 
   tearDownAll(MetadataStore.close);

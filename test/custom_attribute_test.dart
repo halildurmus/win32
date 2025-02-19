@@ -10,10 +10,11 @@ void main() {
   late Scope winrtScope;
 
   setUpAll(() async {
-    (win32Scope, winrtScope) = await (
-      MetadataStore.loadWin32Metadata(),
-      MetadataStore.loadWinrtMetadata()
-    ).wait;
+    (win32Scope, winrtScope) =
+        await (
+          MetadataStore.loadWin32Metadata(),
+          MetadataStore.loadWinrtMetadata(),
+        ).wait;
   });
 
   test('Custom attribute has a name', () {
@@ -22,20 +23,23 @@ void main() {
     check(typeDef!.customAttributes.length).equals(5);
 
     final attributes = typeDef.customAttributes.map((a) => a.toString());
-    check(attributes)
-        .contains('Windows.Foundation.Metadata.DeprecatedAttribute');
+    check(
+      attributes,
+    ).contains('Windows.Foundation.Metadata.DeprecatedAttribute');
   });
 
   test('Custom attribute in WinRT is correctly specified', () {
     final typeDef = winrtScope.findTypeDef('Windows.Media.MediaControl');
     check(typeDef).isNotNull();
 
-    final deprecatedAttr = typeDef!.customAttributes
-        .where((a) => a.name.endsWith('DeprecatedAttribute'))
-        .firstOrNull;
+    final deprecatedAttr =
+        typeDef!.customAttributes
+            .where((a) => a.name.endsWith('DeprecatedAttribute'))
+            .firstOrNull;
     check(deprecatedAttr).isNotNull();
-    check(deprecatedAttr!.signatureBlob.sublist(0, 2).toList())
-        .deepEquals([0x01, 0x00]); // prolog
+    check(
+      deprecatedAttr!.signatureBlob.sublist(0, 2).toList(),
+    ).deepEquals([0x01, 0x00]); // prolog
 
     // final ref = MemberRef.fromToken(deprecated.scope, 0x0A000015);
     // check(ref.signatureBlob.length).equals(9);
@@ -51,9 +55,10 @@ void main() {
 
     check(firstParam.type.baseType).equals(BaseType.stringType);
     check(firstParam.value).isA<String>();
-    check(firstParam.value)
-        .equals('MediaControl may be altered or unavailable for releases after '
-            'Windows 8.1. Instead, use SystemMediaTransportControls.');
+    check(firstParam.value).equals(
+      'MediaControl may be altered or unavailable for releases after '
+      'Windows 8.1. Instead, use SystemMediaTransportControls.',
+    );
 
     check(secondParam.type.baseType).equals(BaseType.valueTypeModifier);
     check(secondParam.value).isA<int>();
@@ -69,27 +74,32 @@ void main() {
   });
 
   test('Custom attribute in Win32 is correctly specified', () {
-    final typeDef =
-        win32Scope.findTypeDef('Windows.Win32.UI.Shell.SHELLEXECUTEINFOW');
+    final typeDef = win32Scope.findTypeDef(
+      'Windows.Win32.UI.Shell.SHELLEXECUTEINFOW',
+    );
     check(typeDef).isNotNull();
 
-    final archAttr = typeDef!.customAttributes
-        .where((a) => a.name.endsWith('SupportedArchitectureAttribute'))
-        .firstOrNull;
+    final archAttr =
+        typeDef!.customAttributes
+            .where((a) => a.name.endsWith('SupportedArchitectureAttribute'))
+            .firstOrNull;
     check(archAttr).isNotNull();
 
-    check(archAttr!.signatureBlob.sublist(0, 2).toList())
-        .deepEquals([0x01, 0x00]); // prolog
+    check(
+      archAttr!.signatureBlob.sublist(0, 2).toList(),
+    ).deepEquals([0x01, 0x00]); // prolog
 
     check(archAttr.parameters.length).equals(1);
     final [archAttrParam] = archAttr.parameters;
     check(archAttrParam.type.baseType).equals(BaseType.valueTypeModifier);
-    check(archAttrParam.type.name)
-        .equals('Windows.Win32.Foundation.Metadata.Architecture');
+    check(
+      archAttrParam.type.name,
+    ).equals('Windows.Win32.Foundation.Metadata.Architecture');
     check(archAttrParam.value).isA<int>();
     // Depending on which one we get first, we'll either get ARM or X86/X64
-    check(archAttrParam.value)
-        .anyOf([(it) => it.equals(0x01), (it) => it.equals(0x06)]);
+    check(
+      archAttrParam.value,
+    ).anyOf([(it) => it.equals(0x01), (it) => it.equals(0x06)]);
   });
 
   test('Multiple custom attributes with same name', () {
@@ -99,40 +109,48 @@ void main() {
     check(typeDef!.customAttributes.length).equals(3);
 
     final invalidHandleValues = typeDef.customAttributes.where(
-        (element) => element.name.endsWith('InvalidHandleValueAttribute'));
+      (element) => element.name.endsWith('InvalidHandleValueAttribute'),
+    );
     check(invalidHandleValues.length).equals(2);
 
     final [firstAttr, secondAttr] = invalidHandleValues.toList();
     check(firstAttr.parameters.first.type.baseType).equals(BaseType.int64Type);
-    check(firstAttr.parameters.first.value)
-        .anyOf([(it) => it.equals(-1), (it) => it.equals(0)]);
+    check(
+      firstAttr.parameters.first.value,
+    ).anyOf([(it) => it.equals(-1), (it) => it.equals(0)]);
 
     check(secondAttr.parameters.first.type.baseType).equals(BaseType.int64Type);
-    check(secondAttr.parameters.first.value)
-        .anyOf([(it) => it.equals(-1), (it) => it.equals(0)]);
+    check(
+      secondAttr.parameters.first.value,
+    ).anyOf([(it) => it.equals(-1), (it) => it.equals(0)]);
   });
 
   test('Find a matching attribute', () {
     final typeDef = win32Scope.findTypeDef('Windows.Win32.Foundation.HWND');
     check(typeDef).isNotNull();
-    check(typeDef!.existsAttribute(
-            'Windows.Win32.Foundation.Metadata.NativeTypedefAttribute'))
-        .isTrue();
+    check(
+      typeDef!.existsAttribute(
+        'Windows.Win32.Foundation.Metadata.NativeTypedefAttribute',
+      ),
+    ).isTrue();
   });
 
   test('Missing attributes are not found', () {
     final typeDef = win32Scope.findTypeDef('Windows.Win32.Foundation.HWND');
     check(typeDef).isNotNull();
-    check(typeDef!.existsAttribute('Windows.SparklesTheCatAttribute'))
-        .isFalse();
+    check(
+      typeDef!.existsAttribute('Windows.SparklesTheCatAttribute'),
+    ).isFalse();
   });
 
   test('Uint16 and Uint8', () {
-    final typeDef =
-        winrtScope.findTypeDef('Windows.UI.Notifications.IToastNotification');
+    final typeDef = winrtScope.findTypeDef(
+      'Windows.UI.Notifications.IToastNotification',
+    );
     check(typeDef).isNotNull();
-    final guidAttr =
-        typeDef!.findAttribute('Windows.Foundation.Metadata.GuidAttribute');
+    final guidAttr = typeDef!.findAttribute(
+      'Windows.Foundation.Metadata.GuidAttribute',
+    );
     check(guidAttr!.parameters.length).equals(11);
     check(guidAttr.parameters[0].value).equals(0x997e2675);
     check(guidAttr.parameters[1].value).equals(0x059e);
@@ -143,13 +161,15 @@ void main() {
   });
 
   test('MemorySizeAttribute', () {
-    final typeDef =
-        win32Scope.findTypeDef('Windows.Win32.Security.Cryptography.Apis');
+    final typeDef = win32Scope.findTypeDef(
+      'Windows.Win32.Security.Cryptography.Apis',
+    );
     check(typeDef).isNotNull();
     final method = typeDef!.findMethod('BCryptGetProperty');
     check(method).isNotNull();
-    final attr = method!.parameters[2]
-        .findAttribute('Windows.Win32.Foundation.Metadata.MemorySizeAttribute');
+    final attr = method!.parameters[2].findAttribute(
+      'Windows.Win32.Foundation.Metadata.MemorySizeAttribute',
+    );
     check(attr).isNotNull();
     check(attr!.parameters.length).equals(1);
     final param = attr.parameters[0];
@@ -160,12 +180,14 @@ void main() {
 
   test('NativeArrayInfoAttribute(CountFieldName)', () {
     final typeDef = win32Scope.findTypeDef(
-        'Windows.Win32.Graphics.Direct3D12.D3D12_STREAM_OUTPUT_DESC');
+      'Windows.Win32.Graphics.Direct3D12.D3D12_STREAM_OUTPUT_DESC',
+    );
     check(typeDef).isNotNull();
     final field = typeDef!.fields[0];
     check(field).isNotNull();
     final attr = field.findAttribute(
-        'Windows.Win32.Foundation.Metadata.NativeArrayInfoAttribute');
+      'Windows.Win32.Foundation.Metadata.NativeArrayInfoAttribute',
+    );
     check(attr).isNotNull();
     check(attr!.parameters.length).equals(1);
     final param = attr.parameters[0];
@@ -175,13 +197,15 @@ void main() {
   });
 
   test('NativeArrayInfoAttribute(CountParamIndex)', () {
-    final typeDef =
-        win32Scope.findTypeDef('Windows.Win32.System.Com.IDispatch');
+    final typeDef = win32Scope.findTypeDef(
+      'Windows.Win32.System.Com.IDispatch',
+    );
     check(typeDef).isNotNull();
     final method = typeDef!.findMethod('GetIDsOfNames');
     check(method).isNotNull();
     final attr = method!.parameters.last.findAttribute(
-        'Windows.Win32.Foundation.Metadata.NativeArrayInfoAttribute');
+      'Windows.Win32.Foundation.Metadata.NativeArrayInfoAttribute',
+    );
     check(attr).isNotNull();
     check(attr!.parameters.length).equals(1);
     final param = attr.parameters[0];
@@ -191,13 +215,15 @@ void main() {
   });
 
   test('Minimum Windows version', () {
-    final typeDef =
-        win32Scope.findTypeDef('Windows.Win32.Devices.Communication.Apis');
+    final typeDef = win32Scope.findTypeDef(
+      'Windows.Win32.Devices.Communication.Apis',
+    );
     check(typeDef).isNotNull();
     final getCommPorts = typeDef!.findMethod('GetCommPorts');
     check(getCommPorts).isNotNull();
     final minVersion = getCommPorts!.findAttribute(
-        'Windows.Win32.Foundation.Metadata.SupportedOSPlatformAttribute');
+      'Windows.Win32.Foundation.Metadata.SupportedOSPlatformAttribute',
+    );
     check(minVersion).isNotNull();
     check(minVersion!.parameters.length).equals(1);
     check(minVersion.parameters.first.value).equals('windows10.0.17134');

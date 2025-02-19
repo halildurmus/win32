@@ -78,19 +78,22 @@ void main() {
     check(typeDef.typeLayout).equals(TypeLayout.auto);
     check(typeDef.typeVisibility).equals(TypeVisibility.public);
 
-    final contractVersionAttribute = typeDef
-        .findAttribute('Windows.Foundation.Metadata.ContractVersionAttribute');
+    final contractVersionAttribute = typeDef.findAttribute(
+      'Windows.Foundation.Metadata.ContractVersionAttribute',
+    );
     check(contractVersionAttribute).isNotNull();
-    check(contractVersionAttribute!.signatureBlob.toList())
-        .containsInOrder([0x01, 0x00, 0x25, 0x57, 0x69, 0x6e, 0x64, 0x6f]);
+    check(
+      contractVersionAttribute!.signatureBlob.toList(),
+    ).containsInOrder([0x01, 0x00, 0x25, 0x57, 0x69, 0x6e, 0x64, 0x6f]);
 
-    final guidAttribute =
-        typeDef.findAttribute('Windows.Foundation.Metadata.GuidAttribute');
+    final guidAttribute = typeDef.findAttribute(
+      'Windows.Foundation.Metadata.GuidAttribute',
+    );
     check(guidAttribute).isNotNull();
     check(guidAttribute!.signatureBlob.toList()).deepEquals([
       0x01, 0x00, 0x36, 0x00, 0x00, 0x00, 0x00, 0x00, //
       0x00, 0x00, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, //
-      0x00, 0x46, 0x00, 0x00
+      0x00, 0x46, 0x00, 0x00,
     ]);
 
     check(typeDef.methods.length).equals(5);
@@ -103,8 +106,9 @@ void main() {
     check(firstMethod.isVirtual).isTrue();
     check(firstMethod.memberAccess).equals(MemberAccess.public);
     check(firstMethod.name).equals('get_Id');
-    check(firstMethod.returnType.typeIdentifier.baseType)
-        .equals(BaseType.uint32Type);
+    check(
+      firstMethod.returnType.typeIdentifier.baseType,
+    ).equals(BaseType.uint32Type);
     check(firstMethod.vTableLayout).equals(VtableLayout.newSlot);
 
     check(typeDef.properties.length).equals(3);
@@ -113,10 +117,12 @@ void main() {
     check(firstProperty.hasGetter).isTrue();
     check(firstProperty.hasSetter).isFalse();
     check(firstProperty.name).equals('ErrorCode');
-    check(firstProperty.typeIdentifier.name)
-        .equals('Windows.Foundation.HResult');
-    check(firstProperty.typeIdentifier.baseType)
-        .equals(BaseType.valueTypeModifier);
+    check(
+      firstProperty.typeIdentifier.name,
+    ).equals('Windows.Foundation.HResult');
+    check(
+      firstProperty.typeIdentifier.baseType,
+    ).equals(BaseType.valueTypeModifier);
   });
 
   tearDownAll(MetadataStore.close);

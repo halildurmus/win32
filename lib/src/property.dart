@@ -2,7 +2,7 @@ import 'dart:ffi';
 import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart';
+import 'package:win32/win32.dart' hide TokenType;
 
 import 'method.dart';
 import 'mixins/custom_attributes_mixin.dart';
@@ -54,22 +54,23 @@ class Property extends TokenObject with CustomAttributesMixin {
 
       final reader = scope.reader;
       final hr = reader.getPropertyProps(
-          token,
-          ptkTypeDef,
-          szProperty,
-          stringBufferSize,
-          pchProperty,
-          pdwPropFlags,
-          ppvSigBlob,
-          pcbSigBlob,
-          pdwCPlusTypeFlag,
-          ppDefaultValue,
-          pcchDefaultValue,
-          ptkSetter,
-          ptkGetter,
-          rgOtherMethod,
-          256,
-          pcOtherMethod);
+        token,
+        ptkTypeDef,
+        szProperty,
+        stringBufferSize,
+        pchProperty,
+        pdwPropFlags,
+        ppvSigBlob,
+        pcbSigBlob,
+        pdwCPlusTypeFlag,
+        ppDefaultValue,
+        pcchDefaultValue,
+        ptkSetter,
+        ptkGetter,
+        rgOtherMethod,
+        256,
+        pcOtherMethod,
+      );
       if (FAILED(hr)) throw WindowsException(hr);
 
       final propName = szProperty.toDartString();
@@ -77,8 +78,9 @@ class Property extends TokenObject with CustomAttributesMixin {
       // PropertySig is defined in §II.23.2.5 of ECMA-335.
       final signature = ppvSigBlob.value.asTypedList(pcbSigBlob.value);
       final typeTuple = TypeTuple.fromSignature(signature.sublist(2), scope);
-      final defaultValue =
-          ppDefaultValue.value.asTypedList(pcchDefaultValue.value);
+      final defaultValue = ppDefaultValue.value.asTypedList(
+        pcchDefaultValue.value,
+      );
       final otherMethodTokens = rgOtherMethod.asTypedList(pcOtherMethod.value);
 
       return Property(
@@ -111,27 +113,25 @@ class Property extends TokenObject with CustomAttributesMixin {
   final int _setterToken;
 
   /// Returns the get accessor method for the property.
-  Method? get getterMethod => reader.isValidToken(_getterToken) == TRUE
-      ? Method.fromToken(scope, _getterToken)
-      : null;
+  Method? get getterMethod =>
+      reader.isValidToken(_getterToken) == TRUE
+          ? Method.fromToken(scope, _getterToken)
+          : null;
 
   /// Returns the set accessor method for the property.
-  Method? get setterMethod => reader.isValidToken(_setterToken) == TRUE
-      ? Method.fromToken(scope, _setterToken)
-      : null;
+  Method? get setterMethod =>
+      reader.isValidToken(_setterToken) == TRUE
+          ? Method.fromToken(scope, _setterToken)
+          : null;
 
   /// Returns the [TypeDef] representing the type that implements the property.
   TypeDef get parent => scope.findTypeDefByToken(_parentToken)!;
 
   /// Returns true if the property is special; the name describes how.
-  bool get isSpecialName =>
-      _attributes & CorPropertyAttr.prSpecialName ==
-      CorPropertyAttr.prSpecialName;
+  bool get isSpecialName => _attributes & prSpecialName == prSpecialName;
 
   /// Returns true if the property has a default value.
-  bool get hasDefault =>
-      _attributes & CorPropertyAttr.prHasDefault ==
-      CorPropertyAttr.prHasDefault;
+  bool get hasDefault => _attributes & prHasDefault == prHasDefault;
 
   /// Returns true if the property has a getter. If false, the property is
   /// write-only.
@@ -143,9 +143,7 @@ class Property extends TokenObject with CustomAttributesMixin {
 
   /// Returns true if the common language runtime metadata internal APIs should
   /// check the encoding of the property name.
-  bool get isRTSpecialName =>
-      _attributes & CorPropertyAttr.prRTSpecialName ==
-      CorPropertyAttr.prRTSpecialName;
+  bool get isRTSpecialName => _attributes & prRTSpecialName == prRTSpecialName;
 
   @override
   String toString() => name;

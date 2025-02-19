@@ -15,14 +15,20 @@ All notable changes to this project will be documented in this file.\n
 # https://keats.github.io/tera/docs/#introduction
 body = """
 {% macro print_commit(commit) -%}
-    - {% if commit.scope %}*({{ commit.scope }})* {% endif %}\
-        {% if commit.breaking %}[**breaking**] {% endif %}\
-        {{ commit.message | upper_first }} - \
-        ([{{ commit.id | truncate(length=7, end="") }}](<REPO>/commit/{{ commit.id }}))\
+  - {% if commit.scope %}*({{ commit.scope }})* {% endif %}\
+    {% if commit.breaking %}[**breaking**] {% endif %}\
+    {{ commit.message | split(pat="\n") | first | upper_first | trim }}\
+    {% if commit.remote.username %} by @{{ commit.remote.username }}{%- endif -%}
+    {% if commit.remote.pr_number %} in \
+      [#{{ commit.remote.pr_number }}](<REPO>/pull/{{ commit.remote.pr_number }}) \
+    {%- endif -%}
 {% endmacro -%}
 
-{% macro print_username(username) -%}
-    [@{{ username }}](<GITHUB>/{{ username }})
+{% macro print_contributor(contributor) -%}
+  - @{{ contributor.username }} made their first contribution
+    {%- if contributor.pr_number %} in \
+      [#{{ contributor.pr_number }}](<REPO>/pull/{{ contributor.pr_number }}) \
+    {%- endif %}
 {% endmacro -%}
 
 {% if version %}\
@@ -49,12 +55,8 @@ body = """
   ## New Contributors ❤️
 {% endif %}\
 {% for contributor in github.contributors | filter(attribute="is_first_time", value=true) %}
-  * {{ self::print_username(username=contributor.username) }} \
-      made their first contribution
-    {%- if contributor.pr_number %} in \
-      [#{{ contributor.pr_number }}](<REPO>/pull/{{ contributor.pr_number }}) \
-    {%- endif %}
-{%- endfor -%}
+    {{ self::print_contributor(contributor=contributor) }}
+{%- endfor %}\n
 {%- endif %}\n
 """
 # template for the changelog footer
@@ -68,7 +70,8 @@ footer = """
     {% else -%}
         [unreleased]: <REPO>/compare/{{ release.previous.version }}..HEAD
     {% endif -%}
-{% endfor %}"""
+{% endfor %}
+"""
 # remove the leading and trailing s
 trim = true
 # postprocessors
@@ -88,8 +91,8 @@ filter_unconventional = true
 split_commits = false
 # regex for preprocessing the commit messages
 commit_preprocessors = [
-    # Replace issue numbers
-    { pattern = '\((\w+\s)?#([0-9]+)\)', replace = "([#${2}](<REPO>/issues/${2}))" },
+    # remove issue numbers from commits
+    { pattern = '\((\w+\s)?#([0-9]+)\)', replace = "" },
 ]
 # regex for parsing and grouping commits
 commit_parsers = [

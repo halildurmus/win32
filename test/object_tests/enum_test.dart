@@ -29,8 +29,9 @@ void main() {
         scope.findTypeDef('Windows.Win32.UI.WindowsAndMessaging.HANDEDNESS')!;
     check(typeDef.isEnum).isTrue();
     check(typeDef.isSealed).isTrue();
-    check(typeDef.name)
-        .equals('Windows.Win32.UI.WindowsAndMessaging.HANDEDNESS');
+    check(
+      typeDef.name,
+    ).equals('Windows.Win32.UI.WindowsAndMessaging.HANDEDNESS');
     check(typeDef.parent?.name).equals('System.Enum');
     check(typeDef.stringFormat).equals(StringFormat.ansi);
     check(typeDef.typeLayout).equals(TypeLayout.auto);
@@ -52,8 +53,9 @@ void main() {
     check(left.isLiteral).isTrue();
     check(left.name).equals('HANDEDNESS_LEFT');
     check(left.typeIdentifier.baseType).equals(BaseType.valueTypeModifier);
-    check(left.typeIdentifier.name)
-        .equals('Windows.Win32.UI.WindowsAndMessaging.HANDEDNESS');
+    check(
+      left.typeIdentifier.name,
+    ).equals('Windows.Win32.UI.WindowsAndMessaging.HANDEDNESS');
     check(left.value).isA<int>();
     check(left.value).equals(0);
 
@@ -63,8 +65,9 @@ void main() {
     check(right.isStatic).isTrue();
     check(right.name).equals('HANDEDNESS_RIGHT');
     check(right.typeIdentifier.baseType).equals(BaseType.valueTypeModifier);
-    check(right.typeIdentifier.name)
-        .equals('Windows.Win32.UI.WindowsAndMessaging.HANDEDNESS');
+    check(
+      right.typeIdentifier.name,
+    ).equals('Windows.Win32.UI.WindowsAndMessaging.HANDEDNESS');
     check(right.value).isA<int>();
     check(right.value).equals(1);
   });

@@ -30,7 +30,8 @@ abstract final class MdMerge {
 
     if (installationFolder == null || productVersion == null) {
       throw const WinmdException(
-          'Failed to get information of the installed Windows SDK.');
+        'Failed to get information of the installed Windows SDK.',
+      );
     }
 
     final arch = switch (Platform.environment['PROCESSOR_ARCHITECTURE']) {
@@ -46,10 +47,13 @@ abstract final class MdMerge {
   static void mergeMetadata(String metadataPath, String outputPath) {
     const namespaceDepth = 1;
     print('Merging WinRT Metadata files into single file...');
-    Process.runSync(
-      executablePath,
-      ['-o', outputPath, '-i', '.', '-n', '$namespaceDepth'],
-      workingDirectory: metadataPath,
-    );
+    Process.runSync(executablePath, [
+      '-o',
+      outputPath,
+      '-i',
+      '.',
+      '-n',
+      '$namespaceDepth',
+    ], workingDirectory: metadataPath);
   }
 }

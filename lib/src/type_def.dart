@@ -1,7 +1,7 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart';
+import 'package:win32/win32.dart' hide TokenType;
 
 import 'assembly_ref.dart';
 import 'class_layout.dart';
@@ -93,16 +93,18 @@ class TypeDef extends TokenObject
       // types, since they are intrinsics like System.ValueType. They're also
       // not loadable with getScopeForType, but that's moot.
       if (TokenType.fromToken(resolutionScopeToken) == TokenType.assemblyRef) {
-        final AssemblyRef(:name) =
-            AssemblyRef.fromToken(scope, resolutionScopeToken);
+        final AssemblyRef(:name) = AssemblyRef.fromToken(
+          scope,
+          resolutionScopeToken,
+        );
         if (name != 'netstandard' && /* .NET */
-                name != 'mscorlib' /* .NET Framework */
-            ) {
+            name != 'mscorlib' /* .NET Framework */ ) {
           final newScope = MetadataStore.getScopeForType(typeName);
           final typeDef = newScope.findTypeDef(typeName);
           if (typeDef == null) {
             throw WinmdException(
-                "Can't find type $typeName in the ${newScope.name} scope.");
+              "Can't find type $typeName in the ${newScope.name} scope.",
+            );
           }
 
           return typeDef;
@@ -115,13 +117,15 @@ class TypeDef extends TokenObject
   }
 
   /// Creates a typedef object from a provided token.
-  factory TypeDef.fromToken(Scope scope, int token) =>
-      switch (TokenType.fromToken(token)) {
-        TokenType.typeRef => TypeDef.fromTypeRefToken(scope, token),
-        TokenType.typeDef => TypeDef.fromTypeDefToken(scope, token),
-        TokenType.typeSpec => TypeDef.fromTypeSpecToken(scope, token),
-        _ => throw WinmdException('Unrecognized token ${token.toHexString(32)}')
-      };
+  factory TypeDef.fromToken(
+    Scope scope,
+    int token,
+  ) => switch (TokenType.fromToken(token)) {
+    TokenType.typeRef => TypeDef.fromTypeRefToken(scope, token),
+    TokenType.typeDef => TypeDef.fromTypeDefToken(scope, token),
+    TokenType.typeSpec => TypeDef.fromTypeSpecToken(scope, token),
+    _ => throw WinmdException('Unrecognized token ${token.toHexString(32)}'),
+  };
 
   /// Instantiate a typedef from a TypeDef token.
   factory TypeDef.fromTypeDefToken(Scope scope, int typeDefToken) {
@@ -193,14 +197,15 @@ class TypeDef extends TokenObject
   /// one.
   ///
   /// Returns `null` if there is no nested parent.
-  late final _enclosingClassToken = isNested
-      ? using((arena) {
-          final ptdEnclosingClass = arena<mdTypeDef>();
-          final hr = reader.getNestedClassProps(token, ptdEnclosingClass);
-          if (FAILED(hr)) throw WindowsException(hr);
-          return ptdEnclosingClass.value;
-        })
-      : null;
+  late final _enclosingClassToken =
+      isNested
+          ? using((arena) {
+            final ptdEnclosingClass = arena<mdTypeDef>();
+            final hr = reader.getNestedClassProps(token, ptdEnclosingClass);
+            if (FAILED(hr)) throw WindowsException(hr);
+            return ptdEnclosingClass.value;
+          })
+          : null;
 
   static String _resolveTypeNameForTypeRef(Scope scope, int typeRefToken) {
     assert(
@@ -213,7 +218,12 @@ class TypeDef extends TokenObject
       final szName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
       final pchName = arena<ULONG>();
       final hr = scope.reader.getTypeRefProps(
-          typeRefToken, ptkResolutionScope, szName, stringBufferSize, pchName);
+        typeRefToken,
+        ptkResolutionScope,
+        szName,
+        stringBufferSize,
+        pchName,
+      );
       if (FAILED(hr)) throw WindowsException(hr);
       return szName.toDartString();
     });
@@ -228,25 +238,37 @@ class TypeDef extends TokenObject
   /// to be part of such parent types.
   ///
   /// Throws a [WinmdException] if the matching nested type cannot be found.
-  static TypeDef _resolveNestedTypeThroughIteration(Scope scope,
-      int resolutionScopeToken, int typeRefToken, String typeName) {
+  static TypeDef _resolveNestedTypeThroughIteration(
+    Scope scope,
+    int resolutionScopeToken,
+    int typeRefToken,
+    String typeName,
+  ) {
     assert(
       TokenType.fromToken(typeRefToken) == TokenType.typeRef,
       'Token $typeRefToken is not a typeRef token',
     );
     return using((arena) {
       // Resolve the parent type's name.
-      final parentTypeName =
-          _resolveTypeNameForTypeRef(scope, resolutionScopeToken);
+      final parentTypeName = _resolveTypeNameForTypeRef(
+        scope,
+        resolutionScopeToken,
+      );
 
       // Find the nested type that matches the given name and is enclosed in
       // the parent's token.
-      final matchingType = scope.typeDefs
-          .where((t) =>
-              t.name == parentTypeName &&
-              scope.typeDefs.any((e) =>
-                  e.name == typeName && e._enclosingClassToken == t.token))
-          .firstOrNull;
+      final matchingType =
+          scope.typeDefs
+              .where(
+                (t) =>
+                    t.name == parentTypeName &&
+                    scope.typeDefs.any(
+                      (e) =>
+                          e.name == typeName &&
+                          e._enclosingClassToken == t.token,
+                    ),
+              )
+              .firstOrNull;
 
       // Return the matching type if found.
       if (matchingType != null) return matchingType;
@@ -259,8 +281,12 @@ class TypeDef extends TokenObject
   /// Attempt to find a nested type using FindTypeDefByName.
   ///
   /// If this doesn't work, we then have to try a more labor-intensive approach.
-  static TypeDef _resolveNestedType(Scope scope, int resolutionScopeToken,
-      int typeRefToken, String typeName) {
+  static TypeDef _resolveNestedType(
+    Scope scope,
+    int resolutionScopeToken,
+    int typeRefToken,
+    String typeName,
+  ) {
     assert(
       TokenType.fromToken(typeRefToken) == TokenType.typeRef,
       'Token $typeRefToken is not a typeRef token',
@@ -269,8 +295,11 @@ class TypeDef extends TokenObject
     return using((arena) {
       final szTypeDef = typeName.toNativeUtf16(allocator: arena);
       final ptd = arena<mdTypeDef>();
-      final hr =
-          scope.reader.findTypeDefByName(szTypeDef, resolutionScopeToken, ptd);
+      final hr = scope.reader.findTypeDefByName(
+        szTypeDef,
+        resolutionScopeToken,
+        ptd,
+      );
       if (FAILED(hr)) {
         if (hr == CLDB_E_RECORD_NOTFOUND) {
           return _resolveNestedTypeThroughIteration(
@@ -289,15 +318,15 @@ class TypeDef extends TokenObject
   }
 
   TypeVisibility get typeVisibility =>
-      TypeVisibility.values[_attributes & CorTypeAttr.tdVisibilityMask];
+      TypeVisibility.values[_attributes & tdVisibilityMask];
 
-  TypeLayout get typeLayout => switch (_attributes & CorTypeAttr.tdLayoutMask) {
-        CorTypeAttr.tdAutoLayout => TypeLayout.auto,
-        CorTypeAttr.tdSequentialLayout => TypeLayout.sequential,
-        CorTypeAttr.tdExplicitLayout => TypeLayout.explicit,
-        _ => throw const WinmdException(
-            'Attribute missing type layout information')
-      };
+  TypeLayout get typeLayout => switch (_attributes & tdLayoutMask) {
+    tdAutoLayout => TypeLayout.auto,
+    tdSequentialLayout => TypeLayout.sequential,
+    tdExplicitLayout => TypeLayout.explicit,
+    _ =>
+      throw const WinmdException('Attribute missing type layout information'),
+  };
 
   /// Returns true if the metadata for the object is represented as a class
   /// type.
@@ -305,63 +334,51 @@ class TypeDef extends TokenObject
   /// Note that structs, enums and delegates are also represented as classes in
   /// metadata. Use the [isClass], [isStruct] or [isDelegate] property to
   /// validate the kind of class.
-  bool get representsAsClass =>
-      _attributes & CorTypeAttr.tdClassSemanticsMask == CorTypeAttr.tdClass;
+  bool get representsAsClass => _attributes & tdClassSemanticsMask == tdClass;
 
   /// Returns trus if the type is an interface.
-  bool get isInterface =>
-      _attributes & CorTypeAttr.tdClassSemanticsMask == CorTypeAttr.tdInterface;
+  bool get isInterface => _attributes & tdClassSemanticsMask == tdInterface;
 
   /// Returns true if this type may not be directly instantiated.
-  bool get isAbstract =>
-      _attributes & CorTypeAttr.tdAbstract == CorTypeAttr.tdAbstract;
+  bool get isAbstract => _attributes & tdAbstract == tdAbstract;
 
   /// Returns true if this type may not have derived types.
-  bool get isSealed =>
-      _attributes & CorTypeAttr.tdSealed == CorTypeAttr.tdSealed;
+  bool get isSealed => _attributes & tdSealed == tdSealed;
 
   /// Returns true if the name of the item may have special significance to
   /// tools other than the CLI.
-  bool get isSpecialName =>
-      _attributes & CorTypeAttr.tdSpecialName == CorTypeAttr.tdSpecialName;
+  bool get isSpecialName => _attributes & tdSpecialName == tdSpecialName;
 
   /// Returns true if the type is imported.
-  bool get isImported =>
-      _attributes & CorTypeAttr.tdImport == CorTypeAttr.tdImport;
+  bool get isImported => _attributes & tdImport == tdImport;
 
   /// Returns true if the fields of the type are to be serialized into a data
   /// stream.
-  bool get isSerializable =>
-      _attributes & CorTypeAttr.tdSerializable == CorTypeAttr.tdSerializable;
+  bool get isSerializable => _attributes & tdSerializable == tdSerializable;
 
   /// Returns true if the type is a Windows Runtime type.
   bool get isWindowsRuntime =>
-      _attributes & CorTypeAttr.tdWindowsRuntime ==
-      CorTypeAttr.tdWindowsRuntime;
+      _attributes & tdWindowsRuntime == tdWindowsRuntime;
 
   /// Returns true if the name of the item has special significance to the CLI.
-  bool get isRTSpecialName =>
-      _attributes & CorTypeAttr.tdRTSpecialName == CorTypeAttr.tdRTSpecialName;
+  bool get isRTSpecialName => _attributes & tdRTSpecialName == tdRTSpecialName;
 
-  StringFormat get stringFormat =>
-      switch (_attributes & CorTypeAttr.tdStringFormatMask) {
-        CorTypeAttr.tdAnsiClass => StringFormat.ansi,
-        CorTypeAttr.tdUnicodeClass => StringFormat.unicode,
-        CorTypeAttr.tdAutoClass => StringFormat.auto,
-        CorTypeAttr.tdCustomFormatClass => StringFormat.custom,
-        _ => throw const WinmdException(
-            'Attribute missing string format information')
-      };
+  StringFormat get stringFormat => switch (_attributes & tdStringFormatMask) {
+    tdAnsiClass => StringFormat.ansi,
+    tdUnicodeClass => StringFormat.unicode,
+    tdAutoClass => StringFormat.auto,
+    tdCustomFormatClass => StringFormat.custom,
+    _ =>
+      throw const WinmdException('Attribute missing string format information'),
+  };
 
   /// Returns true if the CLI need not initialize the type before a static
   /// method is called.
   bool get isBeforeFieldInit =>
-      _attributes & CorTypeAttr.tdBeforeFieldInit ==
-      CorTypeAttr.tdBeforeFieldInit;
+      _attributes & tdBeforeFieldInit == tdBeforeFieldInit;
 
   /// Returns true if the type is exported, and a type forwarder.
-  bool get isForwarder =>
-      _attributes & CorTypeAttr.tdForwarder == CorTypeAttr.tdForwarder;
+  bool get isForwarder => _attributes & tdForwarder == tdForwarder;
 
   /// Returns true if the type is a delegate.
   bool get isDelegate =>
@@ -565,8 +582,13 @@ class TypeDef extends TokenObject
       final rgProperties = arena<mdProperty>();
       final pcProperties = arena<ULONG>();
 
-      var hr =
-          reader.enumProperties(phEnum, token, rgProperties, 1, pcProperties);
+      var hr = reader.enumProperties(
+        phEnum,
+        token,
+        rgProperties,
+        1,
+        pcProperties,
+      );
       while (hr == S_OK) {
         final propertyToken = rgProperties.value;
         final property = Property.fromToken(scope, propertyToken);
@@ -634,9 +656,10 @@ class TypeDef extends TokenObject
   ///
   /// For nested types, the [enclosingClass] property may be of interest, which
   /// is the type in which the current type is embedded.
-  TypeDef? get parent => (token == 0 || baseTypeToken == 0)
-      ? null
-      : TypeDef.fromToken(scope, baseTypeToken);
+  TypeDef? get parent =>
+      (token == 0 || baseTypeToken == 0)
+          ? null
+          : TypeDef.fromToken(scope, baseTypeToken);
 
   /// Returns true if the type is nested in an enclosing class (e.g. a struct
   /// within a struct).
@@ -654,30 +677,34 @@ class TypeDef extends TokenObject
   /// determine whether the type is nested. Alternatively, use the
   /// [typeVisibility] property to determine the visibility of the type,
   /// including whether it is nested.
-  late final enclosingClass = _enclosingClassToken != null
-      ? TypeDef.fromToken(scope, _enclosingClassToken)
-      : null;
+  late final enclosingClass =
+      _enclosingClassToken != null
+          ? TypeDef.fromToken(scope, _enclosingClassToken)
+          : null;
 
   /// Gets a named custom attribute that is stored as a GUID.
   String? getCustomGUIDAttribute(String guidAttributeName) => using((arena) {
-        final ptrAttributeName =
-            guidAttributeName.toNativeUtf16(allocator: arena);
-        final ppData = arena<Pointer<BYTE>>();
-        final pcbData = arena<ULONG>();
+    final ptrAttributeName = guidAttributeName.toNativeUtf16(allocator: arena);
+    final ppData = arena<Pointer<BYTE>>();
+    final pcbData = arena<ULONG>();
 
-        final hr = reader.getCustomAttributeByName(
-            token, ptrAttributeName, ppData, pcbData);
-        if (SUCCEEDED(hr)) {
-          final blob = ppData.value;
-          if (pcbData.value > 0) {
-            final returnValue = (blob + 2).cast<GUID>();
-            return returnValue.ref.toString();
-          }
-        }
+    final hr = reader.getCustomAttributeByName(
+      token,
+      ptrAttributeName,
+      ppData,
+      pcbData,
+    );
+    if (SUCCEEDED(hr)) {
+      final blob = ppData.value;
+      if (pcbData.value > 0) {
+        final returnValue = (blob + 2).cast<GUID>();
+        return returnValue.ref.toString();
+      }
+    }
 
-        // If this fails or no data is returned, return a null value.
-        return null;
-      });
+    // If this fails or no data is returned, return a null value.
+    return null;
+  });
 
   /// Get the GUID for this type.
   ///

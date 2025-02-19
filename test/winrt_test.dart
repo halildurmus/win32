@@ -10,10 +10,11 @@ void main() {
   late Scope winrtScope;
 
   setUpAll(() async {
-    (win32Scope, winrtScope) = await (
-      MetadataStore.loadWin32Metadata(),
-      MetadataStore.loadWinrtMetadata()
-    ).wait;
+    (win32Scope, winrtScope) =
+        await (
+          MetadataStore.loadWin32Metadata(),
+          MetadataStore.loadWinrtMetadata(),
+        ).wait;
   });
 
   test('List all tokens in a file', () {
@@ -71,70 +72,87 @@ void main() {
     check(interfaces.first.name).equals('Windows.Foundation.IAsyncInfo');
   });
 
-  test('Class that implements multiple interfaces correctly identifies them',
-      () {
-    final typeDef = winrtScope.findTypeDef('Windows.UI.Xaml.Controls.Button');
-    check(typeDef).isNotNull();
-    final interfaces = typeDef!.interfaces;
-    check(interfaces.map((e) => e.name)).which((it) => it
-      ..length.equals(2)
-      ..contains('Windows.UI.Xaml.Controls.IButton')
-      ..contains('Windows.UI.Xaml.Controls.IButtonWithFlyout'));
-  });
+  test(
+    'Class that implements multiple interfaces correctly identifies them',
+    () {
+      final typeDef = winrtScope.findTypeDef('Windows.UI.Xaml.Controls.Button');
+      check(typeDef).isNotNull();
+      final interfaces = typeDef!.interfaces;
+      check(interfaces.map((e) => e.name)).which(
+        (it) =>
+            it
+              ..length.equals(2)
+              ..contains('Windows.UI.Xaml.Controls.IButton')
+              ..contains('Windows.UI.Xaml.Controls.IButtonWithFlyout'),
+      );
+    },
+  );
 
   test('Class that extends a parent correctly reports it', () {
     final typeDef = winrtScope.findTypeDef('Windows.UI.Xaml.Controls.Button');
     check(typeDef).isNotNull();
     final parent = typeDef!.parent;
     check(parent).isNotNull();
-    check(parent!.name)
-        .equals('Windows.UI.Xaml.Controls.Primitives.ButtonBase');
+    check(
+      parent!.name,
+    ).equals('Windows.UI.Xaml.Controls.Primitives.ButtonBase');
   });
 
   test('Generic return type <T> can be parsed', () {
-    final typeDef =
-        winrtScope.findTypeDef('Windows.Foundation.Collections.IVectorView`1');
+    final typeDef = winrtScope.findTypeDef(
+      'Windows.Foundation.Collections.IVectorView`1',
+    );
     check(typeDef).isNotNull();
     final method = typeDef!.methods.first;
-    check(method.returnType.typeIdentifier.baseType)
-        .equals(BaseType.classVariableTypeModifier);
+    check(
+      method.returnType.typeIdentifier.baseType,
+    ).equals(BaseType.classVariableTypeModifier);
   });
 
   test('Generic class can be parsed', () {
-    final typeDef =
-        winrtScope.findTypeDef('Windows.Foundation.Collections.IVectorView`1');
+    final typeDef = winrtScope.findTypeDef(
+      'Windows.Foundation.Collections.IVectorView`1',
+    );
     check(typeDef).isNotNull();
     check(typeDef!.methods.length).isGreaterOrEqual(4);
   });
 
-  test('Find interfaces returns sane results with IDictionary<string, object>',
-      () {
-    final typeDef =
-        winrtScope.findTypeDef('Windows.Foundation.Collections.IPropertySet');
-    check(typeDef).isNotNull();
-    final interfaces = typeDef!.interfaces;
-    check(interfaces.length).equals(3);
+  test(
+    'Find interfaces returns sane results with IDictionary<string, object>',
+    () {
+      final typeDef = winrtScope.findTypeDef(
+        'Windows.Foundation.Collections.IPropertySet',
+      );
+      check(typeDef).isNotNull();
+      final interfaces = typeDef!.interfaces;
+      check(interfaces.length).equals(3);
 
-    final imap = interfaces[1];
-    check(imap.tokenType).equals(TokenType.typeSpec);
-    check(imap.typeSpec?.baseType).equals(BaseType.genericTypeModifier);
-    check(imap.typeSpec!.name).equals('Windows.Foundation.Collections.IMap`2');
-    check(imap.typeSpec?.typeArg).isNotNull();
-    check(imap.typeSpec?.typeArg?.baseType).equals(BaseType.stringType);
-    check(imap.typeSpec?.typeArg?.typeArg).isNotNull();
-    check(imap.typeSpec?.typeArg?.typeArg?.baseType)
-        .equals(BaseType.objectType);
-  });
+      final imap = interfaces[1];
+      check(imap.tokenType).equals(TokenType.typeSpec);
+      check(imap.typeSpec?.baseType).equals(BaseType.genericTypeModifier);
+      check(
+        imap.typeSpec!.name,
+      ).equals('Windows.Foundation.Collections.IMap`2');
+      check(imap.typeSpec?.typeArg).isNotNull();
+      check(imap.typeSpec?.typeArg?.baseType).equals(BaseType.stringType);
+      check(imap.typeSpec?.typeArg?.typeArg).isNotNull();
+      check(
+        imap.typeSpec?.typeArg?.typeArg?.baseType,
+      ).equals(BaseType.objectType);
+    },
+  );
 
   test('Find interfaces returns sane results with IEnumerable<class>', () {
-    final typeDef = winrtScope
-        .findTypeDef('Windows.Media.Playback.PlaybackMediaMarkerSequence');
+    final typeDef = winrtScope.findTypeDef(
+      'Windows.Media.Playback.PlaybackMediaMarkerSequence',
+    );
     check(typeDef).isNotNull();
     final interfaces = typeDef!.interfaces;
     check(interfaces.length).equals(2);
     check(interfaces.first.name).endsWith('IPlaybackMediaMarkerSequence');
-    check(interfaces.last.typeSpec!.typeArg!.name)
-        .endsWith('PlaybackMediaMarker');
+    check(
+      interfaces.last.typeSpec!.typeArg!.name,
+    ).endsWith('PlaybackMediaMarker');
   });
 
   test('Interface GUID is correct', () {
@@ -168,8 +186,9 @@ void main() {
     check(method).isNotNull();
     check(method!.isProperty).isFalse();
     check(method.parameters.length).equals(1);
-    check(method.parameters.first.typeIdentifier.baseType)
-        .equals(BaseType.int32Type);
+    check(
+      method.parameters.first.typeIdentifier.baseType,
+    ).equals(BaseType.int32Type);
     check(method.parameters.first.name).equals('days');
     check(method.returnType.typeIdentifier.baseType).equals(BaseType.voidType);
   });
@@ -180,8 +199,9 @@ void main() {
     final method = typeDef!.findMethod('YearAsString');
     check(method).isNotNull();
     check(method!.isProperty).isFalse();
-    check(method.returnType.typeIdentifier.baseType)
-        .equals(BaseType.stringType);
+    check(
+      method.returnType.typeIdentifier.baseType,
+    ).equals(BaseType.stringType);
     check(method.parameters.length).equals(0);
   });
 
@@ -191,11 +211,13 @@ void main() {
     final method = typeDef!.findMethod('MonthAsPaddedNumericString');
     check(method).isNotNull();
     check(method!.isProperty).isFalse();
-    check(method.returnType.typeIdentifier.baseType)
-        .equals(BaseType.stringType);
+    check(
+      method.returnType.typeIdentifier.baseType,
+    ).equals(BaseType.stringType);
     check(method.parameters.length).equals(1);
-    check(method.parameters.first.typeIdentifier.baseType)
-        .equals(BaseType.int32Type);
+    check(
+      method.parameters.first.typeIdentifier.baseType,
+    ).equals(BaseType.int32Type);
     check(method.parameters.first.name).equals('minDigits');
   });
 
@@ -215,8 +237,9 @@ void main() {
     final method = typeDef!.findMethod('GetDateTime');
     check(method).isNotNull();
     check(method!.isProperty).isFalse();
-    check(method.returnType.typeIdentifier.baseType)
-        .equals(BaseType.valueTypeModifier);
+    check(
+      method.returnType.typeIdentifier.baseType,
+    ).equals(BaseType.valueTypeModifier);
     check(method.returnType.typeIdentifier.name).endsWith('DateTime');
     check(method.parameters.length).equals(0);
   });
@@ -252,8 +275,9 @@ void main() {
     check(method.isSetProperty).isTrue();
     check(method.isSpecialName).isTrue();
     check(method.parameters.length).equals(1);
-    check(method.parameters.first.typeIdentifier.baseType)
-        .equals(BaseType.int32Type);
+    check(
+      method.parameters.first.typeIdentifier.baseType,
+    ).equals(BaseType.int32Type);
     check(method.returnType.typeIdentifier.baseType).equals(BaseType.voidType);
   });
 
@@ -266,17 +290,20 @@ void main() {
     check(method.isProperty).isTrue();
     check(method.isSetProperty).isFalse();
     check(method.parameters.length).equals(0);
-    check(method.returnType.typeIdentifier.baseType)
-        .equals(BaseType.genericTypeModifier);
-    check(method.returnType.typeIdentifier.type?.name)
-        .equals('Windows.Foundation.Collections.IVectorView`1');
+    check(
+      method.returnType.typeIdentifier.baseType,
+    ).equals(BaseType.genericTypeModifier);
+    check(
+      method.returnType.typeIdentifier.type?.name,
+    ).equals('Windows.Foundation.Collections.IVectorView`1');
     check(method.returnType.typeIdentifier.type!.representsAsClass).isFalse();
     check(method.returnType.typeIdentifier.type!.isInterface).isTrue();
   });
 
   test('Property setter for a class type is correct', () {
-    final typeDef =
-        winrtScope.findTypeDef('Windows.Storage.Pickers.IFileOpenPicker');
+    final typeDef = winrtScope.findTypeDef(
+      'Windows.Storage.Pickers.IFileOpenPicker',
+    );
     check(typeDef).isNotNull();
     final method = typeDef!.findMethod('put_ViewMode');
     check(method).isNotNull();
@@ -285,23 +312,28 @@ void main() {
     check(method.isSetProperty).isTrue();
     check(method.isSpecialName).isTrue();
     check(method.parameters.length).equals(1);
-    check(method.parameters.first.typeIdentifier.baseType)
-        .equals(BaseType.valueTypeModifier);
-    check(method.parameters.first.typeIdentifier.name)
-        .equals('Windows.Storage.Pickers.PickerViewMode');
+    check(
+      method.parameters.first.typeIdentifier.baseType,
+    ).equals(BaseType.valueTypeModifier);
+    check(
+      method.parameters.first.typeIdentifier.name,
+    ).equals('Windows.Storage.Pickers.PickerViewMode');
     check(method.returnType.typeIdentifier.baseType).equals(BaseType.voidType);
   });
 
   test('Property getter returns appropriate results for interface.', () {
-    final typeDef =
-        winrtScope.findTypeDef('Windows.Media.Playback.MediaPlayer');
+    final typeDef = winrtScope.findTypeDef(
+      'Windows.Media.Playback.MediaPlayer',
+    );
     check(typeDef).isNotNull();
     final method = typeDef!.findMethod('get_Source');
     check(method).isNotNull();
-    check(method!.returnType.typeIdentifier.baseType)
-        .equals(BaseType.classTypeModifier);
-    check(method.returnType.typeIdentifier.name)
-        .endsWith('IMediaPlaybackSource');
+    check(
+      method!.returnType.typeIdentifier.baseType,
+    ).equals(BaseType.classTypeModifier);
+    check(
+      method.returnType.typeIdentifier.name,
+    ).endsWith('IMediaPlaybackSource');
   });
 
   test('Property getter returns appropriate results for delegate.', () {
@@ -311,8 +343,9 @@ void main() {
     check(method).isNotNull();
     check(method!.isGetProperty).isTrue();
     check(method.returnType.name).equals('handler');
-    check(method.returnType.typeIdentifier.name)
-        .endsWith('AsyncActionCompletedHandler');
+    check(
+      method.returnType.typeIdentifier.name,
+    ).endsWith('AsyncActionCompletedHandler');
   });
 
   test('Property setter returns appropriate results for delegate.', () {
@@ -322,8 +355,9 @@ void main() {
     check(method).isNotNull();
     check(method!.isSetProperty).isTrue();
     check(method.parameters.first.name).equals('handler');
-    check(method.parameters.first.typeIdentifier.name)
-        .endsWith('AsyncActionCompletedHandler');
+    check(
+      method.parameters.first.typeIdentifier.name,
+    ).endsWith('AsyncActionCompletedHandler');
   });
 
   test('String parameters are accurately represented', () {
@@ -335,8 +369,9 @@ void main() {
     check(method.isProperty).isFalse();
     check(method.isSetProperty).isFalse();
     check(method.isSpecialName).isFalse();
-    check(method.parameters.first.typeIdentifier.baseType)
-        .equals(BaseType.stringType);
+    check(
+      method.parameters.first.typeIdentifier.baseType,
+    ).equals(BaseType.stringType);
   });
 
   test('Calendar.Clone return value is correct', () {
@@ -345,10 +380,12 @@ void main() {
     final method = typeDef!.findMethod('Clone');
     check(method).isNotNull();
     check(method!.parameters.length).equals(0);
-    check(method.returnType.typeIdentifier.baseType)
-        .equals(BaseType.classTypeModifier);
-    check(method.returnType.typeIdentifier.name)
-        .equals('Windows.Globalization.Calendar');
+    check(
+      method.returnType.typeIdentifier.baseType,
+    ).equals(BaseType.classTypeModifier);
+    check(
+      method.returnType.typeIdentifier.name,
+    ).equals('Windows.Globalization.Calendar');
   });
 
   test('String array property return type is correct', () {
@@ -357,13 +394,16 @@ void main() {
     final method = typeDef!.findMethod('get_Languages');
     check(method).isNotNull();
     check(method!.parameters.length).equals(0);
-    check(method.returnType.typeIdentifier.baseType)
-        .equals(BaseType.genericTypeModifier);
-    check(method.returnType.typeIdentifier.name)
-        .equals('Windows.Foundation.Collections.IVectorView`1');
+    check(
+      method.returnType.typeIdentifier.baseType,
+    ).equals(BaseType.genericTypeModifier);
+    check(
+      method.returnType.typeIdentifier.name,
+    ).equals('Windows.Foundation.Collections.IVectorView`1');
     check(method.returnType.typeIdentifier.typeArg).isNotNull();
-    check(method.returnType.typeIdentifier.typeArg?.baseType)
-        .equals(BaseType.stringType);
+    check(
+      method.returnType.typeIdentifier.typeArg?.baseType,
+    ).equals(BaseType.stringType);
   });
 
   test('Calendar.PeriodAsFullString overload is correctly represented', () {
@@ -373,11 +413,12 @@ void main() {
     check(methods.length).equals(2);
 
     for (final method in methods) {
-      final overloadName = method
-          .attributeAsString('Windows.Foundation.Metadata.OverloadAttribute');
+      final overloadName = method.attributeAsString(
+        'Windows.Foundation.Metadata.OverloadAttribute',
+      );
       check(overloadName).anyOf([
         (it) => it.equals('PeriodAsFullString'),
-        (it) => it.equals('PeriodAsString')
+        (it) => it.equals('PeriodAsString'),
       ]);
     }
   });
@@ -389,120 +430,148 @@ void main() {
     check(method).isNotNull();
     check(method!.isProperty).isFalse();
     check(method.isSpecialName).isFalse();
-    check(method.returnType.typeIdentifier.baseType)
-        .equals(BaseType.stringType);
+    check(
+      method.returnType.typeIdentifier.baseType,
+    ).equals(BaseType.stringType);
     check(method.parameters.length).equals(1);
     check(method.parameters.first.name).equals('remainingDigits');
-    check(method.parameters.first.typeIdentifier.baseType)
-        .equals(BaseType.int32Type);
+    check(
+      method.parameters.first.typeIdentifier.baseType,
+    ).equals(BaseType.int32Type);
   });
 
   test('Method with one parameter and return value is correct', () {
     final typeDef = winrtScope.findTypeDef('Windows.Globalization.Calendar');
     check(typeDef).isNotNull();
-    final method =
-        typeDef!.methods.where((m) => m.name == 'MonthAsString').firstWhere(
-              (m) =>
-                  m.attributeAsString(
-                      'Windows.Foundation.Metadata.OverloadAttribute') ==
-                  'MonthAsString',
-            );
+    final method = typeDef!.methods
+        .where((m) => m.name == 'MonthAsString')
+        .firstWhere(
+          (m) =>
+              m.attributeAsString(
+                'Windows.Foundation.Metadata.OverloadAttribute',
+              ) ==
+              'MonthAsString',
+        );
     check(method.isProperty).isFalse();
     check(method.isSpecialName).isFalse();
     check(method.parameters.length).equals(1);
     check(method.parameters.first.name).equals('idealLength');
-    check(method.parameters.first.typeIdentifier.baseType)
-        .equals(BaseType.int32Type);
-    check(method.returnType.typeIdentifier.baseType)
-        .equals(BaseType.stringType);
+    check(
+      method.parameters.first.typeIdentifier.baseType,
+    ).equals(BaseType.int32Type);
+    check(
+      method.returnType.typeIdentifier.baseType,
+    ).equals(BaseType.stringType);
   });
 
   test('Method with multiple parameters and no return value is correct', () {
-    final typeDef =
-        winrtScope.findTypeDef('Windows.Storage.Provider.CachedFileUpdater');
+    final typeDef = winrtScope.findTypeDef(
+      'Windows.Storage.Provider.CachedFileUpdater',
+    );
     check(typeDef).isNotNull();
     final method = typeDef!.findMethod('SetUpdateInformation');
     check(method).isNotNull();
     check(method!.isProperty).isFalse();
     check(method.returnType.typeIdentifier.baseType).equals(BaseType.voidType);
     check(method.parameters.length).equals(5);
-    check(method.parameters[0].typeIdentifier.name)
-        .equals('Windows.Storage.IStorageFile');
+    check(
+      method.parameters[0].typeIdentifier.name,
+    ).equals('Windows.Storage.IStorageFile');
     check(method.parameters[0].name).equals('file');
-    check(method.parameters[1].typeIdentifier.baseType)
-        .equals(BaseType.stringType);
+    check(
+      method.parameters[1].typeIdentifier.baseType,
+    ).equals(BaseType.stringType);
     check(method.parameters[1].name).equals('contentId');
-    check(method.parameters[2].typeIdentifier.name)
-        .equals('Windows.Storage.Provider.ReadActivationMode');
+    check(
+      method.parameters[2].typeIdentifier.name,
+    ).equals('Windows.Storage.Provider.ReadActivationMode');
     check(method.parameters[2].name).equals('readMode');
-    check(method.parameters[3].typeIdentifier.name)
-        .equals('Windows.Storage.Provider.WriteActivationMode');
+    check(
+      method.parameters[3].typeIdentifier.name,
+    ).equals('Windows.Storage.Provider.WriteActivationMode');
     check(method.parameters[3].name).equals('writeMode');
-    check(method.parameters[4].typeIdentifier.name)
-        .equals('Windows.Storage.Provider.CachedFileOptions');
+    check(
+      method.parameters[4].typeIdentifier.name,
+    ).equals('Windows.Storage.Provider.CachedFileOptions');
     check(method.parameters[4].name).equals('options');
   });
 
   test('Method with const reference parameters is correct', () {
-    final typeDef =
-        winrtScope.findTypeDef('Windows.Foundation.IGuidHelperStatics');
+    final typeDef = winrtScope.findTypeDef(
+      'Windows.Foundation.IGuidHelperStatics',
+    );
     check(typeDef).isNotNull();
     final method = typeDef!.findMethod('Equals');
     check(method).isNotNull();
     check(method!.isProperty).isFalse();
     check(method.parameters.length).equals(2);
-    check(method.returnType.typeIdentifier.baseType)
-        .equals(BaseType.booleanType);
+    check(
+      method.returnType.typeIdentifier.baseType,
+    ).equals(BaseType.booleanType);
 
     final [targetParam, valueParam] = method.parameters;
 
     check(targetParam.isInParam).isTrue();
     check(targetParam.name).equals('target');
-    check(targetParam.typeIdentifier.baseType)
-        .equals(BaseType.cLanguageOptionalModifier);
-    check(targetParam.typeIdentifier.name)
-        .equals('System.Runtime.CompilerServices.IsConst');
+    check(
+      targetParam.typeIdentifier.baseType,
+    ).equals(BaseType.cLanguageOptionalModifier);
+    check(
+      targetParam.typeIdentifier.name,
+    ).equals('System.Runtime.CompilerServices.IsConst');
     check(targetParam.typeIdentifier.type).isNotNull();
-    check(targetParam.typeIdentifier.type!.name)
-        .equals('System.Runtime.CompilerServices.IsConst');
+    check(
+      targetParam.typeIdentifier.type!.name,
+    ).equals('System.Runtime.CompilerServices.IsConst');
     check(targetParam.typeIdentifier.typeArg).isNotNull();
-    check(targetParam.typeIdentifier.typeArg!.baseType)
-        .equals(BaseType.referenceTypeModifier);
+    check(
+      targetParam.typeIdentifier.typeArg!.baseType,
+    ).equals(BaseType.referenceTypeModifier);
     check(targetParam.typeIdentifier.typeArg!.typeArg).isNotNull();
-    check(targetParam.typeIdentifier.typeArg!.typeArg!.baseType)
-        .equals(BaseType.valueTypeModifier);
-    check(targetParam.typeIdentifier.typeArg!.typeArg!.name)
-        .equals('System.Guid');
+    check(
+      targetParam.typeIdentifier.typeArg!.typeArg!.baseType,
+    ).equals(BaseType.valueTypeModifier);
+    check(
+      targetParam.typeIdentifier.typeArg!.typeArg!.name,
+    ).equals('System.Guid');
 
     check(valueParam.isInParam).isTrue();
     check(valueParam.name).equals('value');
-    check(valueParam.typeIdentifier.baseType)
-        .equals(BaseType.cLanguageOptionalModifier);
-    check(valueParam.typeIdentifier.name)
-        .equals('System.Runtime.CompilerServices.IsConst');
+    check(
+      valueParam.typeIdentifier.baseType,
+    ).equals(BaseType.cLanguageOptionalModifier);
+    check(
+      valueParam.typeIdentifier.name,
+    ).equals('System.Runtime.CompilerServices.IsConst');
     check(valueParam.typeIdentifier.type).isNotNull();
-    check(valueParam.typeIdentifier.type!.name)
-        .equals('System.Runtime.CompilerServices.IsConst');
+    check(
+      valueParam.typeIdentifier.type!.name,
+    ).equals('System.Runtime.CompilerServices.IsConst');
     check(valueParam.typeIdentifier.typeArg).isNotNull();
-    check(valueParam.typeIdentifier.typeArg!.baseType)
-        .equals(BaseType.referenceTypeModifier);
+    check(
+      valueParam.typeIdentifier.typeArg!.baseType,
+    ).equals(BaseType.referenceTypeModifier);
     check(valueParam.typeIdentifier.typeArg!.typeArg).isNotNull();
-    check(valueParam.typeIdentifier.typeArg!.typeArg!.baseType)
-        .equals(BaseType.valueTypeModifier);
-    check(valueParam.typeIdentifier.typeArg!.typeArg!.name)
-        .equals('System.Guid');
+    check(
+      valueParam.typeIdentifier.typeArg!.typeArg!.baseType,
+    ).equals(BaseType.valueTypeModifier);
+    check(
+      valueParam.typeIdentifier.typeArg!.typeArg!.name,
+    ).equals('System.Guid');
   });
 
   test('Method with simple array parameters is correct 1', () {
-    final typeDef = winrtScope
-        .findTypeDef('Windows.AI.MachineLearning.ITensorBooleanStatics2');
+    final typeDef = winrtScope.findTypeDef(
+      'Windows.AI.MachineLearning.ITensorBooleanStatics2',
+    );
     check(typeDef).isNotNull();
     final method = typeDef!.findMethod('CreateFromShapeArrayAndDataArray');
     check(method).isNotNull();
     check(method!.isProperty).isFalse();
     check(method.parameters.length).equals(4);
-    check(method.returnType.typeIdentifier.baseType)
-        .equals(BaseType.classTypeModifier);
+    check(
+      method.returnType.typeIdentifier.baseType,
+    ).equals(BaseType.classTypeModifier);
 
     final [shapeSizeParam, shapeParam, dataSizeParam, dataParam] =
         method.parameters;
@@ -529,15 +598,17 @@ void main() {
   });
 
   test('Method with simple array parameters is correct 2', () {
-    final typeDef =
-        winrtScope.findTypeDef('Windows.Storage.Pickers.FileExtensionVector');
+    final typeDef = winrtScope.findTypeDef(
+      'Windows.Storage.Pickers.FileExtensionVector',
+    );
     check(typeDef).isNotNull();
     final method = typeDef!.findMethod('GetMany');
     check(method).isNotNull();
     check(method!.isProperty).isFalse();
     check(method.parameters.length).equals(3);
-    check(method.returnType.typeIdentifier.baseType)
-        .equals(BaseType.uint32Type);
+    check(
+      method.returnType.typeIdentifier.baseType,
+    ).equals(BaseType.uint32Type);
 
     final [startIndexParam, itemsSizeParam, itemsParam] = method.parameters;
 
@@ -557,7 +628,8 @@ void main() {
 
   test('Reference parameter is correct', () {
     final typeDef = winrtScope.findTypeDef(
-        'Windows.Globalization.PhoneNumberFormatting.PhoneNumberFormatter');
+      'Windows.Globalization.PhoneNumberFormatting.PhoneNumberFormatter',
+    );
     check(typeDef).isNotNull();
     final method = typeDef!.findMethod('TryCreate');
     check(method).isNotNull();
@@ -565,31 +637,37 @@ void main() {
     final phoneNumberParam = method!.parameters.last;
     // [out] class [Windows.Globalization.winmd]Windows.Globalization.PhoneNumberFormatting.PhoneNumberFormatter& phoneNumber
     check(phoneNumberParam.name).equals('phoneNumber');
-    check(phoneNumberParam.typeIdentifier.baseType)
-        .equals(BaseType.referenceTypeModifier);
+    check(
+      phoneNumberParam.typeIdentifier.baseType,
+    ).equals(BaseType.referenceTypeModifier);
 
     final refType = phoneNumberParam.typeIdentifier.typeArg;
     check(refType).isNotNull();
     check(refType!.name).equals(
-        'Windows.Globalization.PhoneNumberFormatting.PhoneNumberFormatter');
+      'Windows.Globalization.PhoneNumberFormatting.PhoneNumberFormatter',
+    );
     check(refType.type).equals(typeDef);
   });
 
   test('Method with generic return value is correct', () {
-    final typeDef = winrtScope
-        .findTypeDef('Windows.Globalization.JapanesePhoneticAnalyzer');
+    final typeDef = winrtScope.findTypeDef(
+      'Windows.Globalization.JapanesePhoneticAnalyzer',
+    );
     check(typeDef).isNotNull();
     final method = typeDef!.findMethod('GetWords');
     check(method).isNotNull();
     check(method!.parameters.length).equals(2);
-    check(method.returnType.typeIdentifier.name)
-        .equals('Windows.Foundation.Collections.IVectorView`1');
+    check(
+      method.returnType.typeIdentifier.name,
+    ).equals('Windows.Foundation.Collections.IVectorView`1');
     check(method.returnType.typeIdentifier.typeArg).isNotNull();
-    check(method.returnType.typeIdentifier.typeArg?.name)
-        .equals('Windows.Globalization.JapanesePhoneme');
+    check(
+      method.returnType.typeIdentifier.typeArg?.name,
+    ).equals('Windows.Globalization.JapanesePhoneme');
     check(method.parameters.first.name).equals('input');
-    check(method.parameters.first.typeIdentifier.baseType)
-        .equals(BaseType.stringType);
+    check(
+      method.parameters.first.typeIdentifier.baseType,
+    ).equals(BaseType.stringType);
   });
 
   test('Calendar.Clone method is correct', () {
@@ -600,8 +678,9 @@ void main() {
     check(method!.isProperty).isFalse();
     check(method.isSpecialName).isFalse();
     check(method.parameters.length).equals(0);
-    check(method.returnType.typeIdentifier.baseType)
-        .equals(BaseType.classTypeModifier);
+    check(
+      method.returnType.typeIdentifier.baseType,
+    ).equals(BaseType.classTypeModifier);
     check(method.returnType.name).equals('value');
   });
 
@@ -615,10 +694,12 @@ void main() {
     check(method.isSetProperty).isFalse();
     check(method.isSpecialName).isTrue();
     check(method.parameters.length).equals(0);
-    check(method.returnType.typeIdentifier.baseType)
-        .equals(BaseType.valueTypeModifier);
-    check(method.returnType.typeIdentifier.name)
-        .equals('Windows.Foundation.AsyncStatus');
+    check(
+      method.returnType.typeIdentifier.baseType,
+    ).equals(BaseType.valueTypeModifier);
+    check(
+      method.returnType.typeIdentifier.name,
+    ).equals('Windows.Foundation.AsyncStatus');
   });
 
   test('findMethod() fails gracefully', () {
@@ -660,28 +741,34 @@ void main() {
     check(valueSizeParam.isInParam).isFalse();
     check(valueSizeParam.isOutParam).isTrue();
     check(valueSizeParam.name).equals('__valueSize');
-    check(valueSizeParam.typeIdentifier.baseType)
-        .equals(BaseType.pointerTypeModifier);
+    check(
+      valueSizeParam.typeIdentifier.baseType,
+    ).equals(BaseType.pointerTypeModifier);
     check(valueSizeParam.typeIdentifier.typeArg).isNotNull();
-    check(valueSizeParam.typeIdentifier.typeArg?.baseType)
-        .equals(BaseType.uint32Type);
+    check(
+      valueSizeParam.typeIdentifier.typeArg?.baseType,
+    ).equals(BaseType.uint32Type);
 
     check(valueSizeParam.isInParam).isFalse();
     check(valueSizeParam.isOutParam).isTrue();
     check(valueParam.name).equals('value');
-    check(valueParam.typeIdentifier.baseType)
-        .equals(BaseType.referenceTypeModifier);
+    check(
+      valueParam.typeIdentifier.baseType,
+    ).equals(BaseType.referenceTypeModifier);
     check(valueParam.typeIdentifier.typeArg).isNotNull();
-    check(valueParam.typeIdentifier.typeArg!.baseType)
-        .equals(BaseType.simpleArrayType);
+    check(
+      valueParam.typeIdentifier.typeArg!.baseType,
+    ).equals(BaseType.simpleArrayType);
     check(valueParam.typeIdentifier.typeArg!.typeArg).isNotNull();
-    check(valueParam.typeIdentifier.typeArg!.typeArg!.baseType)
-        .equals(BaseType.uint8Type);
+    check(
+      valueParam.typeIdentifier.typeArg!.typeArg!.baseType,
+    ).equals(BaseType.uint8Type);
   });
 
   test('IPropertyValueStatics array type', () {
-    final typeDef =
-        winrtScope.findTypeDef('Windows.Foundation.IPropertyValueStatics');
+    final typeDef = winrtScope.findTypeDef(
+      'Windows.Foundation.IPropertyValueStatics',
+    );
     check(typeDef).isNotNull();
     final method = typeDef!.findMethod('CreateUInt8Array');
     check(method).isNotNull();
@@ -700,27 +787,31 @@ void main() {
     check(valueParam.name).equals('value');
     check(valueParam.typeIdentifier.baseType).equals(BaseType.simpleArrayType);
     check(valueParam.typeIdentifier.typeArg).isNotNull();
-    check(valueParam.typeIdentifier.typeArg!.baseType)
-        .equals(BaseType.uint8Type);
+    check(
+      valueParam.typeIdentifier.typeArg!.baseType,
+    ).equals(BaseType.uint8Type);
   });
 
   test('Can find generic types', () {
-    final typeDef =
-        winrtScope.findTypeDef('Windows.Foundation.IAsyncOperation`1');
+    final typeDef = winrtScope.findTypeDef(
+      'Windows.Foundation.IAsyncOperation`1',
+    );
     check(typeDef).isNotNull();
   });
 
   test('Can find type information for generic types', () {
-    final typeDef =
-        winrtScope.findTypeDef('Windows.Foundation.IAsyncOperation`1');
+    final typeDef = winrtScope.findTypeDef(
+      'Windows.Foundation.IAsyncOperation`1',
+    );
     check(typeDef).isNotNull();
     final genericParams = typeDef!.genericParams;
     check(genericParams.length).equals(1);
     check(genericParams.first.name).endsWith('TResult');
   });
   test('Can find type information for generic types 2', () {
-    final typeDef = winrtScope
-        .findTypeDef('Windows.Foundation.IAsyncOperationWithProgress`2');
+    final typeDef = winrtScope.findTypeDef(
+      'Windows.Foundation.IAsyncOperationWithProgress`2',
+    );
     check(typeDef).isNotNull();
     final genericParams = typeDef!.genericParams;
     check(genericParams.length).equals(2);
@@ -729,47 +820,57 @@ void main() {
   });
 
   test('Generic method returns the right type', () {
-    final typeDef =
-        winrtScope.findTypeDef('Windows.Foundation.IAsyncOperation`1');
+    final typeDef = winrtScope.findTypeDef(
+      'Windows.Foundation.IAsyncOperation`1',
+    );
     check(typeDef).isNotNull();
     final getResults = typeDef!.findMethod('GetResults');
     check(getResults).isNotNull();
     check(getResults!.parameters).isEmpty();
-    check(getResults.returnType.typeIdentifier.baseType)
-        .equals(BaseType.classVariableTypeModifier);
-    check(getResults.returnType.typeIdentifier.genericParameterSequence)
-        .equals(0);
+    check(
+      getResults.returnType.typeIdentifier.baseType,
+    ).equals(BaseType.classVariableTypeModifier);
+    check(
+      getResults.returnType.typeIdentifier.genericParameterSequence,
+    ).equals(0);
   });
 
   test('Generic put parameter contains the right type', () {
-    final typeDef =
-        winrtScope.findTypeDef('Windows.Foundation.IAsyncOperation`1');
+    final typeDef = winrtScope.findTypeDef(
+      'Windows.Foundation.IAsyncOperation`1',
+    );
     check(typeDef).isNotNull();
     final putCompleted = typeDef!.findMethod('put_Completed');
     check(putCompleted).isNotNull();
     check(putCompleted!.parameters.length).equals(1);
     check(putCompleted.parameters.first.name).equals('handler');
-    check(putCompleted.parameters.first.typeIdentifier.baseType)
-        .equals(BaseType.genericTypeModifier);
-    check(putCompleted.parameters.first.typeIdentifier.name)
-        .endsWith('AsyncOperationCompletedHandler`1');
+    check(
+      putCompleted.parameters.first.typeIdentifier.baseType,
+    ).equals(BaseType.genericTypeModifier);
+    check(
+      putCompleted.parameters.first.typeIdentifier.name,
+    ).endsWith('AsyncOperationCompletedHandler`1');
   });
 
   test('Generic get parameter contains the right type name', () {
-    final typeDef =
-        winrtScope.findTypeDef('Windows.Foundation.IAsyncOperation`1');
+    final typeDef = winrtScope.findTypeDef(
+      'Windows.Foundation.IAsyncOperation`1',
+    );
     check(typeDef).isNotNull();
     final getCompleted = typeDef!.findMethod('get_Completed');
     check(getCompleted).isNotNull();
-    check(getCompleted!.returnType.typeIdentifier.baseType)
-        .equals(BaseType.genericTypeModifier);
-    check(getCompleted.returnType.typeIdentifier.name)
-        .endsWith('AsyncOperationCompletedHandler`1');
+    check(
+      getCompleted!.returnType.typeIdentifier.baseType,
+    ).equals(BaseType.genericTypeModifier);
+    check(
+      getCompleted.returnType.typeIdentifier.name,
+    ).endsWith('AsyncOperationCompletedHandler`1');
   });
 
   test('Events can be found', () {
-    final typeDef =
-        winrtScope.findTypeDef('Windows.Foundation.Collections.PropertySet');
+    final typeDef = winrtScope.findTypeDef(
+      'Windows.Foundation.Collections.PropertySet',
+    );
     check(typeDef).isNotNull();
     final events = typeDef!.events;
     check(events.length).equals(1);
@@ -778,8 +879,9 @@ void main() {
   });
 
   test('Event contains the correct methods and properties', () {
-    final typeDef =
-        winrtScope.findTypeDef('Windows.Foundation.Collections.PropertySet');
+    final typeDef = winrtScope.findTypeDef(
+      'Windows.Foundation.Collections.PropertySet',
+    );
     check(typeDef).isNotNull();
     final mapChanged = typeDef!.events.first;
     check(mapChanged.addMethod).isNotNull();
@@ -791,8 +893,9 @@ void main() {
   });
 
   test('Event names are correct', () {
-    final typeDef =
-        winrtScope.findTypeDef('Windows.Foundation.Collections.PropertySet');
+    final typeDef = winrtScope.findTypeDef(
+      'Windows.Foundation.Collections.PropertySet',
+    );
     check(typeDef).isNotNull();
     final mapChanged = typeDef!.events.first;
     final addMethod = mapChanged.addMethod;
@@ -804,8 +907,9 @@ void main() {
   });
 
   test('Generic constraints', () {
-    final typeDef =
-        winrtScope.findTypeDef('Windows.Foundation.IAsyncActionWithProgress`1');
+    final typeDef = winrtScope.findTypeDef(
+      'Windows.Foundation.IAsyncActionWithProgress`1',
+    );
     check(typeDef).isNotNull();
     final putProgress = typeDef!.methods.first;
     check(putProgress.hasGenericParameters).isFalse();
@@ -813,8 +917,9 @@ void main() {
     final handler = putProgress.parameters.first;
     check(handler.name).equals('handler');
     check(handler.typeIdentifier.type).isNotNull();
-    check(handler.typeIdentifier.type!.name)
-        .endsWith('AsyncActionProgressHandler`1');
+    check(
+      handler.typeIdentifier.type!.name,
+    ).endsWith('AsyncActionProgressHandler`1');
     check(handler.typeIdentifier.typeArg!.genericParameterSequence).equals(0);
 
     final aaph = handler.typeIdentifier.type!;
@@ -822,8 +927,9 @@ void main() {
   });
 
   test('Generic parameter type like Foo<Bar<T>, Baz> can be parsed', () {
-    final typeDef =
-        winrtScope.findTypeDef('Windows.Devices.Sms.GetSmsMessagesOperation');
+    final typeDef = winrtScope.findTypeDef(
+      'Windows.Devices.Sms.GetSmsMessagesOperation',
+    );
     check(typeDef).isNotNull();
     final putProgress = typeDef!.findMethod('put_Progress');
     check(putProgress).isNotNull();
@@ -832,14 +938,17 @@ void main() {
     final handler = putProgress.parameters.first;
     check(handler.name).equals('handler');
     check(handler.typeIdentifier.type).isNotNull();
-    check(handler.typeIdentifier.type!.name)
-        .endsWith('AsyncOperationProgressHandler`2');
+    check(
+      handler.typeIdentifier.type!.name,
+    ).endsWith('AsyncOperationProgressHandler`2');
     check(handler.typeIdentifier.typeArg!.type).isNotNull();
     check(handler.typeIdentifier.typeArg!.type!.name).endsWith('IVectorView`1');
-    check(handler.typeIdentifier.typeArg!.typeArg!.name)
-        .endsWith('ISmsMessage');
-    check(handler.typeIdentifier.typeArg!.typeArg!.typeArg!.baseType)
-        .equals(BaseType.int32Type);
+    check(
+      handler.typeIdentifier.typeArg!.typeArg!.name,
+    ).endsWith('ISmsMessage');
+    check(
+      handler.typeIdentifier.typeArg!.typeArg!.typeArg!.baseType,
+    ).equals(BaseType.int32Type);
 
     final aoph = handler.typeIdentifier.type!;
     check(aoph.genericParams.length).equals(2);

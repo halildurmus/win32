@@ -21,8 +21,14 @@ class ClassLayout extends TokenObject {
 
       // An assumption is made here that there are no more than 256 fields in a
       // struct. If that's not the case, this will fail and throw an exception.
-      final hr = reader.getClassLayout(classToken, pdwPackSize, rgFieldOffset,
-          256, pcFieldOffset, pulClassSize);
+      final hr = reader.getClassLayout(
+        classToken,
+        pdwPackSize,
+        rgFieldOffset,
+        256,
+        pcFieldOffset,
+        pulClassSize,
+      );
       if (FAILED(hr)) {
         // No class layout record, so leave the fields null
         if (hr == CLDB_E_RECORD_NOTFOUND) return;
@@ -36,8 +42,11 @@ class ClassLayout extends TokenObject {
       final offsetCount = pcFieldOffset.value;
       for (var i = 0; i < offsetCount; i++) {
         final offset = (rgFieldOffset + i).ref;
-        final fieldOffset =
-            FieldOffset(scope, offset.ridOfField, offset.ulOffset);
+        final fieldOffset = FieldOffset(
+          scope,
+          offset.ridOfField,
+          offset.ulOffset,
+        );
         fieldOffsets.add(fieldOffset);
       }
     });

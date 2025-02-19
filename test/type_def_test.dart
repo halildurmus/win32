@@ -10,10 +10,11 @@ void main() {
   late Scope winrtScope;
 
   setUpAll(() async {
-    (win32Scope, winrtScope) = await (
-      MetadataStore.loadWin32Metadata(),
-      MetadataStore.loadWinrtMetadata()
-    ).wait;
+    (win32Scope, winrtScope) =
+        await (
+          MetadataStore.loadWin32Metadata(),
+          MetadataStore.loadWinrtMetadata(),
+        ).wait;
   });
 
   test('Find an unknown field', () {
@@ -39,107 +40,119 @@ void main() {
     check(parent.parent).isNull();
   });
 
-  test('Distinguish Win32 structs, delegates, classes, enums, and interfaces',
-      () {
-    final class_ =
-        win32Scope.findTypeDef('Windows.Win32.UI.Shell.FileOpenDialog');
-    check(class_).isNotNull();
-    check(class_!.isClass).isTrue();
-    check(class_.isDelegate).isFalse();
-    check(class_.isEnum).isFalse();
-    check(class_.isInterface).isFalse();
-    check(class_.isStruct).isFalse();
-    check(class_.isWindowsRuntime).isFalse();
+  test(
+    'Distinguish Win32 structs, delegates, classes, enums, and interfaces',
+    () {
+      final class_ = win32Scope.findTypeDef(
+        'Windows.Win32.UI.Shell.FileOpenDialog',
+      );
+      check(class_).isNotNull();
+      check(class_!.isClass).isTrue();
+      check(class_.isDelegate).isFalse();
+      check(class_.isEnum).isFalse();
+      check(class_.isInterface).isFalse();
+      check(class_.isStruct).isFalse();
+      check(class_.isWindowsRuntime).isFalse();
 
-    final delegate =
-        win32Scope.findTypeDef('Windows.Win32.UI.Shell.APPLET_PROC');
-    check(delegate).isNotNull();
-    check(delegate!.isDelegate).isTrue();
-    check(delegate.isClass).isFalse();
-    check(delegate.isEnum).isFalse();
-    check(delegate.isInterface).isFalse();
-    check(delegate.isStruct).isFalse();
-    check(delegate.isWindowsRuntime).isFalse();
+      final delegate = win32Scope.findTypeDef(
+        'Windows.Win32.UI.Shell.APPLET_PROC',
+      );
+      check(delegate).isNotNull();
+      check(delegate!.isDelegate).isTrue();
+      check(delegate.isClass).isFalse();
+      check(delegate.isEnum).isFalse();
+      check(delegate.isInterface).isFalse();
+      check(delegate.isStruct).isFalse();
+      check(delegate.isWindowsRuntime).isFalse();
 
-    final enum_ =
-        win32Scope.findTypeDef('Windows.Win32.Graphics.Gdi.BACKGROUND_MODE');
-    check(enum_).isNotNull();
-    check(enum_!.isEnum).isTrue();
-    check(enum_.isClass).isFalse();
-    check(enum_.isDelegate).isFalse();
-    check(enum_.isInterface).isFalse();
-    check(enum_.isStruct).isFalse();
-    check(enum_.isWindowsRuntime).isFalse();
+      final enum_ = win32Scope.findTypeDef(
+        'Windows.Win32.Graphics.Gdi.BACKGROUND_MODE',
+      );
+      check(enum_).isNotNull();
+      check(enum_!.isEnum).isTrue();
+      check(enum_.isClass).isFalse();
+      check(enum_.isDelegate).isFalse();
+      check(enum_.isInterface).isFalse();
+      check(enum_.isStruct).isFalse();
+      check(enum_.isWindowsRuntime).isFalse();
 
-    final interface =
-        win32Scope.findTypeDef('Windows.Win32.UI.Shell.IFileOpenDialog');
-    check(interface).isNotNull();
-    check(interface!.isInterface).isTrue();
-    check(interface.isClass).isFalse();
-    check(interface.isDelegate).isFalse();
-    check(interface.isEnum).isFalse();
-    check(interface.isStruct).isFalse();
-    check(interface.isWindowsRuntime).isFalse();
+      final interface = win32Scope.findTypeDef(
+        'Windows.Win32.UI.Shell.IFileOpenDialog',
+      );
+      check(interface).isNotNull();
+      check(interface!.isInterface).isTrue();
+      check(interface.isClass).isFalse();
+      check(interface.isDelegate).isFalse();
+      check(interface.isEnum).isFalse();
+      check(interface.isStruct).isFalse();
+      check(interface.isWindowsRuntime).isFalse();
 
-    final struct =
-        win32Scope.findTypeDef('Windows.Win32.Graphics.Gdi.MONITORINFOEXW');
-    check(struct).isNotNull();
-    check(struct!.isStruct).isTrue();
-    check(struct.isClass).isFalse();
-    check(struct.isDelegate).isFalse();
-    check(struct.isEnum).isFalse();
-    check(struct.isInterface).isFalse();
-    check(struct.isWindowsRuntime).isFalse();
-  });
+      final struct = win32Scope.findTypeDef(
+        'Windows.Win32.Graphics.Gdi.MONITORINFOEXW',
+      );
+      check(struct).isNotNull();
+      check(struct!.isStruct).isTrue();
+      check(struct.isClass).isFalse();
+      check(struct.isDelegate).isFalse();
+      check(struct.isEnum).isFalse();
+      check(struct.isInterface).isFalse();
+      check(struct.isWindowsRuntime).isFalse();
+    },
+  );
 
-  test('Distinguish WinRT structs, delegates, classes, enums, and interfaces',
-      () {
-    final class_ = winrtScope.findTypeDef('Windows.Globalization.Calendar');
-    check(class_).isNotNull();
-    check(class_!.isClass).isTrue();
-    check(class_.isDelegate).isFalse();
-    check(class_.isEnum).isFalse();
-    check(class_.isInterface).isFalse();
-    check(class_.isStruct).isFalse();
-    check(class_.isWindowsRuntime).isTrue();
+  test(
+    'Distinguish WinRT structs, delegates, classes, enums, and interfaces',
+    () {
+      final class_ = winrtScope.findTypeDef('Windows.Globalization.Calendar');
+      check(class_).isNotNull();
+      check(class_!.isClass).isTrue();
+      check(class_.isDelegate).isFalse();
+      check(class_.isEnum).isFalse();
+      check(class_.isInterface).isFalse();
+      check(class_.isStruct).isFalse();
+      check(class_.isWindowsRuntime).isTrue();
 
-    final delegate = winrtScope.findTypeDef(
-        'Windows.Gaming.Preview.GamesEnumeration.GameListChangedEventHandler');
-    check(delegate).isNotNull();
-    check(delegate!.isDelegate).isTrue();
-    check(delegate.isClass).isFalse();
-    check(delegate.isEnum).isFalse();
-    check(delegate.isInterface).isFalse();
-    check(delegate.isStruct).isFalse();
-    check(delegate.isWindowsRuntime).isTrue();
+      final delegate = winrtScope.findTypeDef(
+        'Windows.Gaming.Preview.GamesEnumeration.GameListChangedEventHandler',
+      );
+      check(delegate).isNotNull();
+      check(delegate!.isDelegate).isTrue();
+      check(delegate.isClass).isFalse();
+      check(delegate.isEnum).isFalse();
+      check(delegate.isInterface).isFalse();
+      check(delegate.isStruct).isFalse();
+      check(delegate.isWindowsRuntime).isTrue();
 
-    final enum_ = winrtScope.findTypeDef('Windows.Globalization.DayOfWeek');
-    check(enum_).isNotNull();
-    check(enum_!.isEnum).isTrue();
-    check(enum_.isClass).isFalse();
-    check(enum_.isDelegate).isFalse();
-    check(enum_.isInterface).isFalse();
-    check(enum_.isStruct).isFalse();
-    check(enum_.isWindowsRuntime).isTrue();
+      final enum_ = winrtScope.findTypeDef('Windows.Globalization.DayOfWeek');
+      check(enum_).isNotNull();
+      check(enum_!.isEnum).isTrue();
+      check(enum_.isClass).isFalse();
+      check(enum_.isDelegate).isFalse();
+      check(enum_.isInterface).isFalse();
+      check(enum_.isStruct).isFalse();
+      check(enum_.isWindowsRuntime).isTrue();
 
-    final interface = winrtScope.findTypeDef('Windows.Globalization.ICalendar');
-    check(interface).isNotNull();
-    check(interface!.isInterface).isTrue();
-    check(interface.isClass).isFalse();
-    check(interface.isDelegate).isFalse();
-    check(interface.isEnum).isFalse();
-    check(interface.isStruct).isFalse();
-    check(interface.isWindowsRuntime).isTrue();
+      final interface = winrtScope.findTypeDef(
+        'Windows.Globalization.ICalendar',
+      );
+      check(interface).isNotNull();
+      check(interface!.isInterface).isTrue();
+      check(interface.isClass).isFalse();
+      check(interface.isDelegate).isFalse();
+      check(interface.isEnum).isFalse();
+      check(interface.isStruct).isFalse();
+      check(interface.isWindowsRuntime).isTrue();
 
-    final struct = winrtScope.findTypeDef('Windows.Foundation.Point');
-    check(struct).isNotNull();
-    check(struct!.isStruct).isTrue();
-    check(struct.isClass).isFalse();
-    check(struct.isDelegate).isFalse();
-    check(struct.isEnum).isFalse();
-    check(struct.isInterface).isFalse();
-    check(struct.isWindowsRuntime).isTrue();
-  });
+      final struct = winrtScope.findTypeDef('Windows.Foundation.Point');
+      check(struct).isNotNull();
+      check(struct!.isStruct).isTrue();
+      check(struct.isClass).isFalse();
+      check(struct.isDelegate).isFalse();
+      check(struct.isEnum).isFalse();
+      check(struct.isInterface).isFalse();
+      check(struct.isWindowsRuntime).isTrue();
+    },
+  );
 
   group('defaultInterface', () {
     test('throws an AssertionError if the TypeDef is not a runtime class', () {

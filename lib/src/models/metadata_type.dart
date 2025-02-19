@@ -27,11 +27,13 @@ enum MetadataType {
   factory MetadataType.fromPackageName(String packageName) =>
       MetadataType.values.firstWhere(
         (type) => type.packageName == packageName,
-        orElse: () => throw ArgumentError.value(
-          packageName,
-          'packageName',
-          'Invalid package name.',
-        ),
+        orElse:
+            () =>
+                throw ArgumentError.value(
+                  packageName,
+                  'packageName',
+                  'Invalid package name.',
+                ),
       );
 
   /// The name of the metadata asset (e.g., `Windows.Win32.winmd`).

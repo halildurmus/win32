@@ -15,8 +15,8 @@ void main() async {
       scope.findTypeDef('Windows.Wdk.System.SystemInformation.Apis')!;
 
   // Sort the functions alphabetically
-  final sortedMethods = namespace.methods
-    ..sort((a, b) => a.name.compareTo(b.name));
+  final sortedMethods =
+      namespace.methods..sort((a, b) => a.name.compareTo(b.name));
 
   // Find a specific function
   const funcName = 'NtQuerySystemInformation';
@@ -27,8 +27,9 @@ void main() async {
 
   // Retrieve its parameters and project them into Dart FFI types
   final params = method.parameters
-      .map((param) =>
-          '${param.typeIdentifier.name.split('.').last} ${param.name}')
+      .map(
+        (param) => '${param.typeIdentifier.name.split('.').last} ${param.name}',
+      )
       .join(', ');
   print('The parameters are:\n  $params');
 

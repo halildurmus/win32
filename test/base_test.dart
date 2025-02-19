@@ -37,112 +37,150 @@ void main() {
 
   test('Unknown token ClassLayout', () {
     const invalidClassLayoutToken = 0x02FEDCBA;
-    check(() => ClassLayout(win32Scope, invalidClassLayoutToken))
-        .throws<WindowsException>()
+    check(
+        () => ClassLayout(win32Scope, invalidClassLayoutToken),
+      ).throws<WindowsException>()
       ..has((exc) => exc.hr, 'hr').equals(CLDB_E_INDEX_NOTFOUND)
-      ..has((exc) => exc.toString(), 'toString()')
-          .startsWith('Error 0x80131124');
+      ..has(
+        (exc) => exc.toString(),
+        'toString()',
+      ).startsWith('Error 0x80131124');
   });
 
   test('Unknown token CustomAttribute', () {
     const invalidCustomAttributeToken = 0x0CFEDCBA;
-    check(() =>
-            CustomAttribute.fromToken(win32Scope, invalidCustomAttributeToken))
-        .throws<WindowsException>()
+    check(
+        () =>
+            CustomAttribute.fromToken(win32Scope, invalidCustomAttributeToken),
+      ).throws<WindowsException>()
       ..has((exc) => exc.hr, 'hr').equals(CLDB_E_INDEX_NOTFOUND)
-      ..has((exc) => exc.toString(), 'toString()')
-          .startsWith('Error 0x80131124');
+      ..has(
+        (exc) => exc.toString(),
+        'toString()',
+      ).startsWith('Error 0x80131124');
   });
 
   test('Unknown token Event', () {
     const invalidEventToken = 0x14FEDCBA;
-    check(() => Event.fromToken(win32Scope, invalidEventToken))
-        .throws<WindowsException>()
+    check(
+        () => Event.fromToken(win32Scope, invalidEventToken),
+      ).throws<WindowsException>()
       ..has((exc) => exc.hr, 'hr').equals(CLDB_E_INDEX_NOTFOUND)
-      ..has((exc) => exc.toString(), 'toString()')
-          .startsWith('Error 0x80131124');
+      ..has(
+        (exc) => exc.toString(),
+        'toString()',
+      ).startsWith('Error 0x80131124');
   });
 
   test('Unknown token Field', () {
     const invalidFieldToken = 0x04FEDCBA;
-    check(() => Field.fromToken(win32Scope, invalidFieldToken))
-        .throws<WindowsException>()
+    check(
+        () => Field.fromToken(win32Scope, invalidFieldToken),
+      ).throws<WindowsException>()
       ..has((exc) => exc.hr, 'hr').equals(CLDB_E_INDEX_NOTFOUND)
-      ..has((exc) => exc.toString(), 'toString()')
-          .startsWith('Error 0x80131124');
+      ..has(
+        (exc) => exc.toString(),
+        'toString()',
+      ).startsWith('Error 0x80131124');
   });
 
   test('Unknown token GenericParam', () {
     const invalidGenericParamToken = 0x2AFEDCBA;
-    check(() => GenericParam.fromToken(win32Scope, invalidGenericParamToken))
-        .throws<WindowsException>()
+    check(
+        () => GenericParam.fromToken(win32Scope, invalidGenericParamToken),
+      ).throws<WindowsException>()
       ..has((exc) => exc.hr, 'hr').equals(CLDB_E_INDEX_NOTFOUND)
-      ..has((exc) => exc.toString(), 'toString()')
-          .startsWith('Error 0x80131124');
+      ..has(
+        (exc) => exc.toString(),
+        'toString()',
+      ).startsWith('Error 0x80131124');
   });
 
   test('Unknown token GenericParamConstraint', () {
     const invalidGenericParamConstraintToken = 0x2CFEDCBA;
-    check(() => GenericParamConstraint.fromToken(
-            win32Scope, invalidGenericParamConstraintToken))
-        .throws<WindowsException>()
+    check(
+        () => GenericParamConstraint.fromToken(
+          win32Scope,
+          invalidGenericParamConstraintToken,
+        ),
+      ).throws<WindowsException>()
       ..has((exc) => exc.hr, 'hr').equals(CLDB_E_INDEX_NOTFOUND)
-      ..has((exc) => exc.toString(), 'toString()')
-          .startsWith('Error 0x80131124');
+      ..has(
+        (exc) => exc.toString(),
+        'toString()',
+      ).startsWith('Error 0x80131124');
   });
 
   test('Unknown token MemberRef', () {
     const invalidMemberRefToken = 0x0AFEDCBA;
-    check(() => MemberRef.fromToken(win32Scope, invalidMemberRefToken))
-        .throws<WindowsException>()
+    check(
+        () => MemberRef.fromToken(win32Scope, invalidMemberRefToken),
+      ).throws<WindowsException>()
       ..has((exc) => exc.hr, 'hr').equals(CLDB_E_INDEX_NOTFOUND)
-      ..has((exc) => exc.toString(), 'toString()')
-          .startsWith('Error 0x80131124');
+      ..has(
+        (exc) => exc.toString(),
+        'toString()',
+      ).startsWith('Error 0x80131124');
   });
 
   test('Unknown token Method', () {
     const invalidMethodToken = 0x06FEDCBA;
-    check(() => Method.fromToken(win32Scope, invalidMethodToken))
-        .throws<WindowsException>()
+    check(
+        () => Method.fromToken(win32Scope, invalidMethodToken),
+      ).throws<WindowsException>()
       ..has((exc) => exc.hr, 'hr').equals(CLDB_E_INDEX_NOTFOUND)
-      ..has((exc) => exc.toString(), 'toString()')
-          .startsWith('Error 0x80131124');
+      ..has(
+        (exc) => exc.toString(),
+        'toString()',
+      ).startsWith('Error 0x80131124');
   });
 
   test('Unknown token ModuleRef', () {
     const invalidModuleRefToken = 0x1AFEDCBA;
-    check(() => ModuleRef.fromToken(win32Scope, invalidModuleRefToken))
-        .throws<WindowsException>()
+    check(
+        () => ModuleRef.fromToken(win32Scope, invalidModuleRefToken),
+      ).throws<WindowsException>()
       ..has((exc) => exc.hr, 'hr').equals(CLDB_E_INDEX_NOTFOUND)
-      ..has((exc) => exc.toString(), 'toString()')
-          .startsWith('Error 0x80131124');
+      ..has(
+        (exc) => exc.toString(),
+        'toString()',
+      ).startsWith('Error 0x80131124');
   });
 
   test('Unknown token Parameter', () {
     const invalidParameterToken = 0x08FEDCBA;
-    check(() => Parameter.fromToken(win32Scope, invalidParameterToken))
-        .throws<WindowsException>()
+    check(
+        () => Parameter.fromToken(win32Scope, invalidParameterToken),
+      ).throws<WindowsException>()
       ..has((exc) => exc.hr, 'hr').equals(CLDB_E_INDEX_NOTFOUND)
-      ..has((exc) => exc.toString(), 'toString()')
-          .startsWith('Error 0x80131124');
+      ..has(
+        (exc) => exc.toString(),
+        'toString()',
+      ).startsWith('Error 0x80131124');
   });
 
   test('Unknown token PinvokeMap', () {
     const invalidPinvokeMapToken = 0x06FEDCBA;
-    check(() => PinvokeMap.fromToken(win32Scope, invalidPinvokeMapToken))
-        .throws<WindowsException>()
+    check(
+        () => PinvokeMap.fromToken(win32Scope, invalidPinvokeMapToken),
+      ).throws<WindowsException>()
       ..has((exc) => exc.hr, 'hr').equals(CLDB_E_RECORD_NOTFOUND)
-      ..has((exc) => exc.toString(), 'toString()')
-          .startsWith('Error 0x80131130');
+      ..has(
+        (exc) => exc.toString(),
+        'toString()',
+      ).startsWith('Error 0x80131130');
   });
 
   test('Unknown token Property', () {
     const invalidPropertyToken = 0x17FEDCBA;
-    check(() => Property.fromToken(win32Scope, invalidPropertyToken))
-        .throws<WindowsException>()
+    check(
+        () => Property.fromToken(win32Scope, invalidPropertyToken),
+      ).throws<WindowsException>()
       ..has((exc) => exc.hr, 'hr').equals(CLDB_E_INDEX_NOTFOUND)
-      ..has((exc) => exc.toString(), 'toString()')
-          .startsWith('Error 0x80131124');
+      ..has(
+        (exc) => exc.toString(),
+        'toString()',
+      ).startsWith('Error 0x80131124');
   });
 
   test('Unknown token TypeDef 1', () {
@@ -166,8 +204,10 @@ void main() {
     check(() => TypeDef.fromToken(win32Scope, missingTypeDefToken))
         .throws<WindowsException>() // typeDef missing type
       ..has((exc) => exc.hr, 'hr').equals(CLDB_E_INDEX_NOTFOUND)
-      ..has((exc) => exc.toString(), 'toString()')
-          .startsWith('Error 0x80131124');
+      ..has(
+        (exc) => exc.toString(),
+        'toString()',
+      ).startsWith('Error 0x80131124');
   });
 
   test('WinmdException', () {

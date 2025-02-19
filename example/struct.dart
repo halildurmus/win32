@@ -6,8 +6,10 @@ void main() async {
   final scope = await MetadataStore.loadWin32Metadata();
 
   // Find a namesapce
-  final struct = scope
-      .findTypeDef('Windows.Win32.NetworkManagement.WiFi.WLAN_RAW_DATA_LIST')!;
+  final struct =
+      scope.findTypeDef(
+        'Windows.Win32.NetworkManagement.WiFi.WLAN_RAW_DATA_LIST',
+      )!;
   final unionField = struct.fields.last; // union
   final unionFieldType = unionField.typeIdentifier.typeArg?.type;
   print('unionField: $unionFieldType | isNested: ${unionFieldType?.isNested}');

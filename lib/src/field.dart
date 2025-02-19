@@ -3,7 +3,7 @@ import 'dart:ffi';
 import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart';
+import 'package:win32/win32.dart' hide TokenType;
 
 import 'mixins/custom_attributes_mixin.dart';
 import 'models/models.dart';
@@ -81,10 +81,10 @@ class Field extends TokenObject with CustomAttributesMixin {
           BaseType.uint32Type => pValue.cast<Uint32>().value,
           BaseType.uint64Type => pValue.cast<Uint64>().value,
           BaseType.stringType => _decodeString(
-              pValue,
-              isAnsi: _fieldIsAnsiString(scope, token),
-              length: pcchValue.value,
-            ),
+            pValue,
+            isAnsi: _fieldIsAnsiString(scope, token),
+            length: pcchValue.value,
+          ),
           _ => null,
         };
       }
@@ -122,49 +122,38 @@ class Field extends TokenObject with CustomAttributesMixin {
 
   /// Returns the visibility of the field (public, private, etc.)
   FieldAccess get fieldAccess =>
-      FieldAccess.values[_attribs & CorFieldAttr.fdFieldAccessMask];
+      FieldAccess.values[_attribs & fdFieldAccessMask];
 
   /// Returns true if the field is a member of its type rather than an instance member.
-  bool get isStatic =>
-      _attribs & CorFieldAttr.fdStatic == CorFieldAttr.fdStatic;
+  bool get isStatic => _attribs & fdStatic == fdStatic;
 
   /// Returns true if the field cannot be changed after it is initialized.
-  bool get isInitOnly =>
-      _attribs & CorFieldAttr.fdInitOnly == CorFieldAttr.fdInitOnly;
+  bool get isInitOnly => _attribs & fdInitOnly == fdInitOnly;
 
   /// Returns true if the field value is a compile-time constant.
-  bool get isLiteral =>
-      _attribs & CorFieldAttr.fdLiteral == CorFieldAttr.fdLiteral;
+  bool get isLiteral => _attribs & fdLiteral == fdLiteral;
 
   /// Returns true if the field is not serialized when its type is remoted.
-  bool get isNotSerialized =>
-      _attribs & CorFieldAttr.fdNotSerialized == CorFieldAttr.fdNotSerialized;
+  bool get isNotSerialized => _attribs & fdNotSerialized == fdNotSerialized;
 
   /// Returns true if the field is special; its name describes how.
-  bool get isSpecialName =>
-      _attribs & CorFieldAttr.fdSpecialName == CorFieldAttr.fdSpecialName;
+  bool get isSpecialName => _attribs & fdSpecialName == fdSpecialName;
 
   /// Returns true if the field implementation is forwarded through PInvoke.
-  bool get isPinvokeImpl =>
-      _attribs & CorFieldAttr.fdPinvokeImpl == CorFieldAttr.fdPinvokeImpl;
+  bool get isPinvokeImpl => _attribs & fdPinvokeImpl == fdPinvokeImpl;
 
   /// Returns true if the common language runtime metadata internal APIs should
   /// check the encoding of the name.
-  bool get isRTSpecialName =>
-      _attribs & CorFieldAttr.fdRTSpecialName == CorFieldAttr.fdRTSpecialName;
+  bool get isRTSpecialName => _attribs & fdRTSpecialName == fdRTSpecialName;
 
   /// Returns true if the field contains marshaling information.
-  bool get hasFieldMarshal =>
-      _attribs & CorFieldAttr.fdHasFieldMarshal ==
-      CorFieldAttr.fdHasFieldMarshal;
+  bool get hasFieldMarshal => _attribs & fdHasFieldMarshal == fdHasFieldMarshal;
 
   /// Returns true if the field has a default value.
-  bool get hasDefault =>
-      _attribs & CorFieldAttr.fdHasDefault == CorFieldAttr.fdHasDefault;
+  bool get hasDefault => _attribs & fdHasDefault == fdHasDefault;
 
   /// Returns true if the field has a relative virtual address.
-  bool get hasFieldRVA =>
-      _attribs & CorFieldAttr.fdHasFieldRVA == CorFieldAttr.fdHasFieldRVA;
+  bool get hasFieldRVA => _attribs & fdHasFieldRVA == fdHasFieldRVA;
 
   /// Returns the P/Invoke mapping representation for the field.
   PinvokeMap get pinvokeMap => PinvokeMap.fromToken(scope, token);
@@ -180,7 +169,7 @@ class Field extends TokenObject with CustomAttributesMixin {
     // For some reason, ANSI strings are encoded as UTF-16, so we need to decode
     // them as such.
     final codeUnits = [
-      for (var idx = 0; idx < length; idx++) ptr.cast<Uint16>()[idx]
+      for (var idx = 0; idx < length; idx++) ptr.cast<Uint16>()[idx],
     ];
 
     return isAnsi ? utf8.decode(codeUnits) : String.fromCharCodes(codeUnits);

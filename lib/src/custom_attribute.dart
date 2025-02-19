@@ -5,7 +5,7 @@ import 'dart:ffi';
 import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart';
+import 'package:win32/win32.dart' hide TokenType;
 
 import 'member_ref.dart';
 import 'models/models.dart';
@@ -42,12 +42,19 @@ class CustomAttribute extends TokenObject {
 
       final reader = scope.reader;
       final hr = reader.getCustomAttributeProps(
-          token, ptkObj, ptkType, ppBlob, pcbBlob);
+        token,
+        ptkObj,
+        ptkType,
+        ppBlob,
+        pcbBlob,
+      );
       if (FAILED(hr)) throw WindowsException(hr);
 
       final memberRef = MemberRef.fromToken(scope, ptkType.value);
-      final constructorTypeDef =
-          TypeDef.fromToken(scope, memberRef.referencedToken);
+      final constructorTypeDef = TypeDef.fromToken(
+        scope,
+        memberRef.referencedToken,
+      );
       return CustomAttribute(
         scope,
         token,
@@ -91,12 +98,14 @@ class CustomAttribute extends TokenObject {
     final fixedArgCount = methodRefSig.elementAt(methodRefSigOffset++);
 
     final retType = methodRefSig.elementAt(methodRefSigOffset++);
-    assert(retType == CorElementType.ELEMENT_TYPE_VOID);
+    assert(retType == ELEMENT_TYPE_VOID);
 
     // Process fixed args.
     for (var i = 0; i < fixedArgCount; i++) {
       final runtimeType = TypeTuple.fromSignature(
-          methodRefSig.sublist(methodRefSigOffset), scope);
+        methodRefSig.sublist(methodRefSigOffset),
+        scope,
+      );
       methodRefSigOffset += runtimeType.offsetLength;
       final type = runtimeType.typeIdentifier;
       final baseType = _resolveBaseType(type);
@@ -129,8 +138,9 @@ class CustomAttribute extends TokenObject {
       // Read the value of the named argument (FixedArg).
       final (value, valueOffset) = _decodeValue(data, baseType, dataOffset);
       dataOffset += valueOffset;
-      parameters
-          .add(CustomAttributeParameter(type.copyWith(name: name), value));
+      parameters.add(
+        CustomAttributeParameter(type.copyWith(name: name), value),
+      );
     }
 
     return parameters;
@@ -146,15 +156,10 @@ class CustomAttribute extends TokenObject {
   }
 
   /// Decodes a value from the byte [data] based on the [baseType].
-  (Object, int) _decodeValue(
-    ByteData data,
-    BaseType baseType,
-    int offset,
-  ) =>
+  (Object, int) _decodeValue(ByteData data, BaseType baseType, int offset) =>
       switch (baseType) {
         BaseType.stringType ||
-        BaseType.classTypeModifier =>
-          _readString(data, offset),
+        BaseType.classTypeModifier => _readString(data, offset),
         BaseType.booleanType => (data.getUint8(offset) == 1, 1),
         BaseType.charType => (String.fromCharCode(data.getUint16(offset)), 2),
         BaseType.floatType => (data.getFloat32(offset, Endian.little), 4),
@@ -167,20 +172,23 @@ class CustomAttribute extends TokenObject {
         BaseType.uint16Type => (data.getUint16(offset, Endian.little), 2),
         BaseType.uint32Type => (data.getUint32(offset, Endian.little), 4),
         BaseType.uint64Type => (data.getUint64(offset, Endian.little), 8),
-        _ => throw WinmdException(
+        _ =>
+          throw WinmdException(
             'Unexpected parameter type in signature blob: $baseType',
-          )
+          ),
       };
 
   /// Reads a UTF-8 encoded string from the byte [data].
   (String, int) _readString(ByteData data, int offset) {
-    final packedLen =
-        UncompressedData.fromBlob(data.buffer.asUint8List(offset, 4));
+    final packedLen = UncompressedData.fromBlob(
+      data.buffer.asUint8List(offset, 4),
+    );
     final stringLength = packedLen.data;
     final stringOffset = offset + packedLen.dataLength;
 
-    final decodedString = const Utf8Decoder()
-        .convert(data.buffer.asUint8List(stringOffset, stringLength));
+    final decodedString = const Utf8Decoder().convert(
+      data.buffer.asUint8List(stringOffset, stringLength),
+    );
     return (decodedString, packedLen.dataLength + stringLength);
   }
 

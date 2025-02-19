@@ -10,16 +10,18 @@ void main() {
   late Scope winrtScope;
 
   setUpAll(() async {
-    (win32Scope, winrtScope) = await (
-      MetadataStore.loadWin32Metadata(),
-      MetadataStore.loadWinrtMetadata()
-    ).wait;
+    (win32Scope, winrtScope) =
+        await (
+          MetadataStore.loadWin32Metadata(),
+          MetadataStore.loadWinrtMetadata(),
+        ).wait;
   });
 
   group('Test Win32 field properties', () {
     test('AUDIO_MIN_FRAMERATE', () {
-      final typeDef =
-          win32Scope.findTypeDef('Windows.Win32.Media.Audio.Apo.Apis');
+      final typeDef = win32Scope.findTypeDef(
+        'Windows.Win32.Media.Audio.Apo.Apis',
+      );
       check(typeDef).isNotNull();
       final field = typeDef!.findField('AUDIO_MIN_FRAMERATE');
       check(field).isNotNull();
@@ -41,8 +43,9 @@ void main() {
     });
 
     test('CRYPT_OID_REGPATH', () {
-      final typeDef =
-          win32Scope.findTypeDef('Windows.Win32.Security.Cryptography.Apis');
+      final typeDef = win32Scope.findTypeDef(
+        'Windows.Win32.Security.Cryptography.Apis',
+      );
       check(typeDef).isNotNull();
       final field = typeDef!.findField('CRYPT_OID_REGPATH');
       check(field).isNotNull();
@@ -64,8 +67,9 @@ void main() {
     });
 
     test('D3D11_MIP_LOD_BIAS_MIN', () {
-      final typeDef =
-          win32Scope.findTypeDef('Windows.Win32.Graphics.Direct3D11.Apis');
+      final typeDef = win32Scope.findTypeDef(
+        'Windows.Win32.Graphics.Direct3D11.Apis',
+      );
       check(typeDef).isNotNull();
       final field = typeDef!.findField('D3D11_MIP_LOD_BIAS_MIN');
       check(field).isNotNull();
@@ -87,8 +91,9 @@ void main() {
     });
 
     test('DSFXCHORUS_FEEDBACK_MIN', () {
-      final typeDef =
-          win32Scope.findTypeDef('Windows.Win32.Media.Audio.DirectSound.Apis');
+      final typeDef = win32Scope.findTypeDef(
+        'Windows.Win32.Media.Audio.DirectSound.Apis',
+      );
       check(typeDef).isNotNull();
       final field = typeDef!.findField('DSFXCHORUS_FEEDBACK_MIN');
       check(field).isNotNull();
@@ -131,8 +136,9 @@ void main() {
     });
 
     test('FXEQ_MAX_GAIN', () {
-      final typeDef =
-          win32Scope.findTypeDef('Windows.Win32.Media.Audio.XAudio2.Apis');
+      final typeDef = win32Scope.findTypeDef(
+        'Windows.Win32.Media.Audio.XAudio2.Apis',
+      );
       check(typeDef).isNotNull();
       final field = typeDef!.findField('FXEQ_MAX_GAIN');
       check(field).isNotNull();
@@ -154,8 +160,9 @@ void main() {
     });
 
     test('IMAGE_ARCHIVE_END', () {
-      final typeDef =
-          win32Scope.findTypeDef('Windows.Win32.System.SystemServices.Apis');
+      final typeDef = win32Scope.findTypeDef(
+        'Windows.Win32.System.SystemServices.Apis',
+      );
       check(typeDef).isNotNull();
       final field = typeDef!.findField('IMAGE_ARCHIVE_END');
       check(field).isNotNull();
@@ -199,8 +206,9 @@ void main() {
     });
 
     test('NAME_PNGImage', () {
-      final typeDef =
-          win32Scope.findTypeDef('Windows.Win32.Devices.PortableDevices.Apis');
+      final typeDef = win32Scope.findTypeDef(
+        'Windows.Win32.Devices.PortableDevices.Apis',
+      );
       check(typeDef).isNotNull();
       final field = typeDef!.findField('NAME_PNGImage');
       check(field).isNotNull();
@@ -222,8 +230,9 @@ void main() {
     });
 
     test('SCARD_ALL_READERS', () {
-      final typeDef =
-          win32Scope.findTypeDef('Windows.Win32.Security.Credentials.Apis');
+      final typeDef = win32Scope.findTypeDef(
+        'Windows.Win32.Security.Credentials.Apis',
+      );
       check(typeDef).isNotNull();
       final field = typeDef!.findField('SCARD_ALL_READERS');
       check(field).isNotNull();
@@ -267,8 +276,9 @@ void main() {
     });
 
     test('U8_LEAD3_T1_BITS', () {
-      final typeDef =
-          win32Scope.findTypeDef('Windows.Win32.Globalization.Apis');
+      final typeDef = win32Scope.findTypeDef(
+        'Windows.Win32.Globalization.Apis',
+      );
       check(typeDef).isNotNull();
       final field = typeDef!.findField('U8_LEAD3_T1_BITS');
       check(field).isNotNull();
@@ -290,8 +300,9 @@ void main() {
     });
 
     test('U8_LEAD4_T1_BITS', () {
-      final typeDef =
-          win32Scope.findTypeDef('Windows.Win32.Globalization.Apis');
+      final typeDef = win32Scope.findTypeDef(
+        'Windows.Win32.Globalization.Apis',
+      );
       check(typeDef).isNotNull();
       final field = typeDef!.findField('U8_LEAD4_T1_BITS');
       check(field).isNotNull();
@@ -315,8 +326,9 @@ void main() {
     });
 
     test('wszGRAVE', () {
-      final typeDef = win32Scope
-          .findTypeDef('Windows.Win32.UI.Input.KeyboardAndMouse.Apis');
+      final typeDef = win32Scope.findTypeDef(
+        'Windows.Win32.UI.Input.KeyboardAndMouse.Apis',
+      );
       check(typeDef).isNotNull();
       final field = typeDef!.findField('wszGRAVE');
       check(field).isNotNull();
@@ -338,8 +350,9 @@ void main() {
     });
 
     test('wszzDEFAULTSIGNEDATTRIBUTES', () {
-      final typeDef = win32Scope
-          .findTypeDef('Windows.Win32.Security.Cryptography.Certificates.Apis');
+      final typeDef = win32Scope.findTypeDef(
+        'Windows.Win32.Security.Cryptography.Certificates.Apis',
+      );
       check(typeDef).isNotNull();
       final field = typeDef!.findField('wszzDEFAULTSIGNEDATTRIBUTES');
       check(field).isNotNull();

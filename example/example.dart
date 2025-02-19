@@ -15,8 +15,10 @@ void listTokens([String type = 'Windows.Devices.Bluetooth.BluetoothAdapter']) {
   final typeDefs = scope.typeDefs.take(10);
 
   for (final type in typeDefs) {
-    print('[${type.token.toHexString(32)}] ${type.name} '
-        '(baseType: ${type.baseTypeToken.toHexString(32)})');
+    print(
+      '[${type.token.toHexString(32)}] ${type.name} '
+      '(baseType: ${type.baseTypeToken.toHexString(32)})',
+    );
   }
 }
 
@@ -24,8 +26,9 @@ void listEnums([String namespace = 'Windows.Globalization']) {
   printHeading('Enums implemented by $namespace');
 
   final scope = MetadataStore.getScopeForType(namespace);
-  final enums =
-      scope.enums.where((typeDef) => typeDef.name.startsWith(namespace));
+  final enums = scope.enums.where(
+    (typeDef) => typeDef.name.startsWith(namespace),
+  );
 
   for (final enumEntry in enums) {
     print('${enumEntry.name} has ${enumEntry.fields.length} fields.');
@@ -36,16 +39,18 @@ void listStructs([String namespace = 'Windows.Foundation']) {
   printHeading('Structs implemented by $namespace');
 
   final scope = MetadataStore.getScopeForType(namespace);
-  final structs =
-      scope.structs.where((typeDef) => typeDef.name.startsWith(namespace));
+  final structs = scope.structs.where(
+    (typeDef) => typeDef.name.startsWith(namespace),
+  );
 
   for (final structEntry in structs) {
     print('${structEntry.name} has ${structEntry.fields.length} fields.');
   }
 }
 
-void listMethods(
-    [String type = 'Windows.Networking.Connectivity.NetworkInformation']) {
+void listMethods([
+  String type = 'Windows.Networking.Connectivity.NetworkInformation',
+]) {
   printHeading('First ten methods of $type');
 
   final typeDef = MetadataStore.getMetadataForType(type)!;
@@ -54,22 +59,27 @@ void listMethods(
   print(methods.map(methodSignature).join('\n'));
 }
 
-void listParameters(
-    [String type = 'Windows.Globalization.Calendar',
-    String methodName = 'CompareDateTime']) {
+void listParameters([
+  String type = 'Windows.Globalization.Calendar',
+  String methodName = 'CompareDateTime',
+]) {
   printHeading('Parameters of $methodName in $type');
 
   final typeDef = MetadataStore.getMetadataForType(type)!;
   final method = typeDef.findMethod(methodName)!;
 
-  print('${method.name} has '
-      '${method.parameters.length} parameter(s).');
+  print(
+    '${method.name} has '
+    '${method.parameters.length} parameter(s).',
+  );
 
   // the zeroth parameter is the return type
   for (var i = 0; i < method.parameters.length; i++) {
-    print('[${method.parameters[i].sequence}] '
-        '${method.parameters[i].typeIdentifier.name} '
-        '${method.parameters[i].name}');
+    print(
+      '[${method.parameters[i].sequence}] '
+      '${method.parameters[i].typeIdentifier.name} '
+      '${method.parameters[i].name}',
+    );
   }
 
   final returnType = method.returnType;
@@ -96,31 +106,33 @@ void listGUID([String type = 'Windows.UI.Shell.IAdaptiveCard']) {
   print(typeDef.guid);
 }
 
-String parseType(Method method, TypeIdentifier typeIdentifier) =>
-    switch (typeIdentifier.baseType) {
-      BaseType.booleanType => 'bool',
-      BaseType.cLanguageOptionalModifier ||
-      BaseType.cLanguageRequiredModifier =>
-        parseType(method, typeIdentifier.typeArg!),
-      BaseType.classVariableTypeModifier => method.parent
-          .genericParams[typeIdentifier.genericParameterSequence ?? 0].name,
-      BaseType.int8Type ||
-      BaseType.int16Type ||
-      BaseType.int32Type ||
-      BaseType.int64Type ||
-      BaseType.uint8Type ||
-      BaseType.uint16Type ||
-      BaseType.uint32Type ||
-      BaseType.uint64Type =>
-        typeIdentifier.baseType.name.replaceFirst('Type', ''),
-      BaseType.referenceTypeModifier =>
-        'ref ${parseType(method, typeIdentifier.typeArg!)}',
-      BaseType.simpleArrayType =>
-        '${parseType(method, typeIdentifier.typeArg!)}[]',
-      BaseType.charType || BaseType.stringType => 'String',
-      BaseType.voidType => 'void',
-      _ => typeIdentifier.name
-    };
+String parseType(
+  Method method,
+  TypeIdentifier typeIdentifier,
+) => switch (typeIdentifier.baseType) {
+  BaseType.booleanType => 'bool',
+  BaseType.cLanguageOptionalModifier || BaseType.cLanguageRequiredModifier =>
+    parseType(method, typeIdentifier.typeArg!),
+  BaseType.classVariableTypeModifier =>
+    method
+        .parent
+        .genericParams[typeIdentifier.genericParameterSequence ?? 0]
+        .name,
+  BaseType.int8Type ||
+  BaseType.int16Type ||
+  BaseType.int32Type ||
+  BaseType.int64Type ||
+  BaseType.uint8Type ||
+  BaseType.uint16Type ||
+  BaseType.uint32Type ||
+  BaseType.uint64Type => typeIdentifier.baseType.name.replaceFirst('Type', ''),
+  BaseType.referenceTypeModifier =>
+    'ref ${parseType(method, typeIdentifier.typeArg!)}',
+  BaseType.simpleArrayType => '${parseType(method, typeIdentifier.typeArg!)}[]',
+  BaseType.charType || BaseType.stringType => 'String',
+  BaseType.voidType => 'void',
+  _ => typeIdentifier.name,
+};
 
 String methodSignature(Method method) =>
     '   ${method.isStatic ? 'static ' : ''}'
@@ -137,18 +149,21 @@ String typeParams(Method method) {
   final parameters = method.parameters;
   if (parameters.isEmpty) return '()';
 
-  final params = parameters.map((param) {
-    final Parameter(:isInParam, :isOutParam) = param;
-    return '${isInParam ? '[in] ' : ''}'
-        '${isOutParam ? '[out] ' : ''}'
-        '${parseType(method, param.typeIdentifier)} ${param.name}';
-  }).join(', ');
+  final params = parameters
+      .map((param) {
+        final Parameter(:isInParam, :isOutParam) = param;
+        return '${isInParam ? '[in] ' : ''}'
+            '${isOutParam ? '[out] ' : ''}'
+            '${parseType(method, param.typeIdentifier)} ${param.name}';
+      })
+      .join(', ');
 
   return '($params)';
 }
 
-String convertTypeToProjection(
-    [String type = 'Windows.Foundation.IAsyncInfo']) {
+String convertTypeToProjection([
+  String type = 'Windows.Foundation.IAsyncInfo',
+]) {
   printHeading('A pseudo-code representation of the $type type');
 
   final idlProjection = StringBuffer();
@@ -157,7 +172,7 @@ String convertTypeToProjection(
   final vTableStart = switch (typeDef.parent?.name) {
     'IUnknown' || 'System.MulticastDelegate' => 3,
     'IInspectable' => 6,
-    _ => 'UNKNOWN'
+    _ => 'UNKNOWN',
   };
 
   idlProjection

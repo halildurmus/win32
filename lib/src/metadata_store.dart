@@ -29,13 +29,17 @@ abstract final class MetadataStore {
   static void initialize() {
     // This must have the same object lifetime as MetadataStore itself.
     final dispenserObject = calloc<COMObject>();
-    final clsidCorMetaDataDispenser =
-        convertToCLSID(CLSID_CorMetaDataDispenser);
+    final clsidCorMetaDataDispenser = convertToCLSID(
+      CLSID_CorMetaDataDispenser,
+    );
     final iidIMetaDataDispenser = convertToIID(IID_IMetaDataDispenser);
 
     try {
-      final hr = MetaDataGetDispenser(clsidCorMetaDataDispenser,
-          iidIMetaDataDispenser, dispenserObject.cast());
+      final hr = MetaDataGetDispenser(
+        clsidCorMetaDataDispenser,
+        iidIMetaDataDispenser,
+        dispenserObject.cast(),
+      );
       if (FAILED(hr)) {
         free(dispenserObject);
         throw WindowsException(hr);
@@ -81,7 +85,10 @@ abstract final class MetadataStore {
 
     if (!typeName.startsWith('Windows')) {
       throw ArgumentError.value(
-          typeName, 'typeName', 'Must start with `Windows`.');
+        typeName,
+        'typeName',
+        'Must start with `Windows`.',
+      );
     }
 
     if (!_isInitialized) initialize();
@@ -143,20 +150,29 @@ abstract final class MetadataStore {
     final pReader = calloc<COMObject>();
     final iidIMetaDataImport2 = convertToIID(IID_IMetaDataImport2);
     final pAssemblyImport = calloc<COMObject>();
-    final iidIMetaDataAssemblyImport =
-        convertToIID(IID_IMetaDataAssemblyImport);
+    final iidIMetaDataAssemblyImport = convertToIID(
+      IID_IMetaDataAssemblyImport,
+    );
 
     try {
       var hr = _dispenser!.openScope(
-          szFile, CorOpenFlags.ofRead, iidIMetaDataImport2, pReader.cast());
+        szFile,
+        ofRead,
+        iidIMetaDataImport2,
+        pReader.cast(),
+      );
       if (FAILED(hr)) {
         free(pAssemblyImport);
         free(pReader);
         throw WindowsException(hr);
       }
 
-      hr = _dispenser!.openScope(szFile, CorOpenFlags.ofRead,
-          iidIMetaDataAssemblyImport, pAssemblyImport.cast());
+      hr = _dispenser!.openScope(
+        szFile,
+        ofRead,
+        iidIMetaDataAssemblyImport,
+        pAssemblyImport.cast(),
+      );
       if (FAILED(hr)) {
         free(pAssemblyImport);
         free(pReader);
@@ -164,7 +180,9 @@ abstract final class MetadataStore {
       }
 
       final scope = Scope(
-          IMetaDataImport2(pReader), IMetaDataAssemblyImport(pAssemblyImport));
+        IMetaDataImport2(pReader),
+        IMetaDataAssemblyImport(pAssemblyImport),
+      );
       final fileName = file.uri.pathSegments.last;
       scopeCache[fileName] = scope;
 
@@ -201,7 +219,9 @@ abstract final class MetadataStore {
   ///
   /// Throws an exception if the download or unpacking fails.
   static Future<String> _unpackPackage(
-      String packageName, String version) async {
+    String packageName,
+    String version,
+  ) async {
     final path = '${LocalStorage.path}\\$packageName@$version';
     final packageDir = Directory(path);
     final MetadataType(:assetName) = MetadataType.fromPackageName(packageName);
@@ -217,7 +237,9 @@ abstract final class MetadataStore {
   }
 
   static Scope? _tryToLoadMetadataFromFile(
-      MetadataType metadataType, String version) {
+    MetadataType metadataType,
+    String version,
+  ) {
     final MetadataType(:assetName, :packageName) = metadataType;
     final package = LocalStorage.getPackage(packageName, version: version);
     if (package != null) {
@@ -260,9 +282,12 @@ abstract final class MetadataStore {
       if (scope != null) return scope;
     }
 
-    final downloadVersion = version ??
-        await _nugetClient!
-            .getLatestPackageVersion(packageName, includePrerelease: true);
+    final downloadVersion =
+        version ??
+        await _nugetClient!.getLatestPackageVersion(
+          packageName,
+          includePrerelease: true,
+        );
 
     // If the metadata is already downloaded, load it.
     final scope = _tryToLoadMetadataFromFile(MetadataType.wdk, downloadVersion);
@@ -301,13 +326,18 @@ abstract final class MetadataStore {
       if (scope != null) return scope;
     }
 
-    final downloadVersion = version ??
-        await _nugetClient!
-            .getLatestPackageVersion(packageName, includePrerelease: true);
+    final downloadVersion =
+        version ??
+        await _nugetClient!.getLatestPackageVersion(
+          packageName,
+          includePrerelease: true,
+        );
 
     // If the metadata is already downloaded, load it.
-    final scope =
-        _tryToLoadMetadataFromFile(MetadataType.win32, downloadVersion);
+    final scope = _tryToLoadMetadataFromFile(
+      MetadataType.win32,
+      downloadVersion,
+    );
     if (scope != null) return scope;
 
     return _loadWin32Metadata(version: downloadVersion);
@@ -367,8 +397,10 @@ abstract final class MetadataStore {
         version ?? await _nugetClient!.getLatestPackageVersion(packageName);
 
     // If the metadata is already downloaded, load it.
-    final scope =
-        _tryToLoadMetadataFromFile(MetadataType.winrt, downloadVersion);
+    final scope = _tryToLoadMetadataFromFile(
+      MetadataType.winrt,
+      downloadVersion,
+    );
     if (scope != null) return scope;
 
     return _loadWinrtMetadata(version: downloadVersion);

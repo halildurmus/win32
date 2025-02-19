@@ -11,10 +11,11 @@ void main() {
   late Scope winrtScope;
 
   setUpAll(() async {
-    (win32Scope, winrtScope) = await (
-      MetadataStore.loadWin32Metadata(),
-      MetadataStore.loadWinrtMetadata()
-    ).wait;
+    (win32Scope, winrtScope) =
+        await (
+          MetadataStore.loadWin32Metadata(),
+          MetadataStore.loadWinrtMetadata(),
+        ).wait;
   });
 
   test('0 is not a valid token', () {
@@ -27,8 +28,9 @@ void main() {
   });
 
   test('ValueType', () {
-    final typeDef =
-        win32Scope.findTypeDef('Windows.Win32.UI.WindowsAndMessaging.ACCEL');
+    final typeDef = win32Scope.findTypeDef(
+      'Windows.Win32.UI.WindowsAndMessaging.ACCEL',
+    );
     check(typeDef).isNotNull();
     check(typeDef!.isResolvedToken).isTrue();
     final parent = typeDef.parent;
@@ -38,8 +40,9 @@ void main() {
   });
 
   test('IInspectable works', () {
-    final typeDef =
-        winrtScope.findTypeDef('Windows.Foundation.Collections.IPropertySet');
+    final typeDef = winrtScope.findTypeDef(
+      'Windows.Foundation.Collections.IPropertySet',
+    );
     check(typeDef).isNotNull();
     final parent = typeDef!.parent;
     check(parent).isNotNull();

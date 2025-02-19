@@ -42,10 +42,12 @@ void main() {
 
     check(firstField.fieldAccess).equals(FieldAccess.public);
     check(firstField.name).equals('fVirt');
-    check(firstField.typeIdentifier.baseType)
-        .equals(BaseType.valueTypeModifier);
-    check(firstField.typeIdentifier.type?.name)
-        .equals('Windows.Win32.UI.WindowsAndMessaging.ACCEL_VIRT_FLAGS');
+    check(
+      firstField.typeIdentifier.baseType,
+    ).equals(BaseType.valueTypeModifier);
+    check(
+      firstField.typeIdentifier.type?.name,
+    ).equals('Windows.Win32.UI.WindowsAndMessaging.ACCEL_VIRT_FLAGS');
 
     check(secondField.fieldAccess).equals(FieldAccess.public);
     check(secondField.name).equals('key');

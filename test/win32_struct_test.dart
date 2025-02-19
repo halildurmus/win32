@@ -27,56 +27,67 @@ void main() {
   });
 
   test('Struct valuetype field has expected name and type', () {
-    final struct = win32Scope
-        .findTypeDef('Windows.Win32.System.Threading.PROCESS_INFORMATION');
+    final struct = win32Scope.findTypeDef(
+      'Windows.Win32.System.Threading.PROCESS_INFORMATION',
+    );
     check(struct).isNotNull();
     final fields = struct!.fields;
     check(fields.first.name).equals('hProcess');
-    check(fields.first.typeIdentifier.baseType)
-        .equals(BaseType.valueTypeModifier);
+    check(
+      fields.first.typeIdentifier.baseType,
+    ).equals(BaseType.valueTypeModifier);
     check(fields.first.typeIdentifier.name).endsWith('HANDLE');
   });
 
   test('Struct array field has expected name and type', () {
-    final struct =
-        win32Scope.findTypeDef('Windows.Win32.Graphics.Gdi.BITMAPINFO');
+    final struct = win32Scope.findTypeDef(
+      'Windows.Win32.Graphics.Gdi.BITMAPINFO',
+    );
     check(struct).isNotNull();
     final fields = struct!.fields;
     check(fields.last.name).equals('bmiColors');
-    check(fields.last.typeIdentifier.baseType)
-        .equals(BaseType.arrayTypeModifier);
+    check(
+      fields.last.typeIdentifier.baseType,
+    ).equals(BaseType.arrayTypeModifier);
     check(fields.last.typeIdentifier.typeArg!.name).endsWith('RGBQUAD');
   });
 
   test('Struct array field has expected name and type 2', () {
-    final struct =
-        win32Scope.findTypeDef('Windows.Win32.Graphics.Gdi.DESIGNVECTOR');
+    final struct = win32Scope.findTypeDef(
+      'Windows.Win32.Graphics.Gdi.DESIGNVECTOR',
+    );
     check(struct).isNotNull();
     final fields = struct!.fields;
     check(fields.last.name).equals('dvValues');
-    check(fields.last.typeIdentifier.baseType)
-        .equals(BaseType.arrayTypeModifier);
-    check(fields.last.typeIdentifier.typeArg?.baseType)
-        .equals(BaseType.int32Type);
+    check(
+      fields.last.typeIdentifier.baseType,
+    ).equals(BaseType.arrayTypeModifier);
+    check(
+      fields.last.typeIdentifier.typeArg?.baseType,
+    ).equals(BaseType.int32Type);
     check(fields.last.typeIdentifier.arrayDimensions).isNotNull();
     check(fields.last.typeIdentifier.arrayDimensions!.length).equals(1);
     check(fields.last.typeIdentifier.arrayDimensions!.first).equals(16);
   });
 
   test('Struct PHYSICAL_MONITOR contains an array of chars', () {
-    final struct = win32Scope
-        .findTypeDef('Windows.Win32.Devices.Display.PHYSICAL_MONITOR');
+    final struct = win32Scope.findTypeDef(
+      'Windows.Win32.Devices.Display.PHYSICAL_MONITOR',
+    );
     check(struct).isNotNull();
     final szPhysicalMonitorDescription = struct!.fields[1];
-    check(szPhysicalMonitorDescription.typeIdentifier.baseType)
-        .equals(BaseType.arrayTypeModifier);
-    check(szPhysicalMonitorDescription.typeIdentifier.typeArg?.baseType)
-        .equals(BaseType.charType);
+    check(
+      szPhysicalMonitorDescription.typeIdentifier.baseType,
+    ).equals(BaseType.arrayTypeModifier);
+    check(
+      szPhysicalMonitorDescription.typeIdentifier.typeArg?.baseType,
+    ).equals(BaseType.charType);
   });
 
   test('Small struct array fields have the correct dimensions', () {
-    final struct = win32Scope
-        .findTypeDef('Windows.Win32.Storage.FileSystem.WIN32_FIND_DATAW');
+    final struct = win32Scope.findTypeDef(
+      'Windows.Win32.Storage.FileSystem.WIN32_FIND_DATAW',
+    );
     check(struct).isNotNull();
     final cAlternateFileName = struct!.fields[9];
     check(cAlternateFileName.name).equals('cAlternateFileName');
@@ -84,8 +95,9 @@ void main() {
   });
 
   test('Large struct array fields have the correct dimensions', () {
-    final struct = win32Scope
-        .findTypeDef('Windows.Win32.Storage.FileSystem.WIN32_FIND_DATAW');
+    final struct = win32Scope.findTypeDef(
+      'Windows.Win32.Storage.FileSystem.WIN32_FIND_DATAW',
+    );
     check(struct).isNotNull();
     final cFileName = struct!.fields[8];
     check(cFileName.name).equals('cFileName');
@@ -99,8 +111,9 @@ void main() {
   });
 
   test('Nested types are identified correctly', () {
-    final struct =
-        win32Scope.findTypeDef('Windows.Win32.UI.Input.KeyboardAndMouse.INPUT');
+    final struct = win32Scope.findTypeDef(
+      'Windows.Win32.UI.Input.KeyboardAndMouse.INPUT',
+    );
     check(struct).isNotNull();
     final lastFieldType = struct!.fields.last.typeIdentifier.type;
     check(lastFieldType).isNotNull();
@@ -109,8 +122,9 @@ void main() {
   });
 
   test('Union structs are identified correctly', () {
-    final struct =
-        win32Scope.findTypeDef('Windows.Win32.UI.Input.KeyboardAndMouse.INPUT');
+    final struct = win32Scope.findTypeDef(
+      'Windows.Win32.UI.Input.KeyboardAndMouse.INPUT',
+    );
     check(struct).isNotNull();
     // INPUT is not itself a union, but it contains a union.
     check(struct!.isUnion).isFalse();
@@ -120,8 +134,9 @@ void main() {
   });
 
   test('Union structs have correct parent', () {
-    final struct =
-        win32Scope.findTypeDef('Windows.Win32.UI.Input.KeyboardAndMouse.INPUT');
+    final struct = win32Scope.findTypeDef(
+      'Windows.Win32.UI.Input.KeyboardAndMouse.INPUT',
+    );
     check(struct).isNotNull();
     // INPUT is not itself a union, but it contains a union.
     check(struct!.isUnion).isFalse();
@@ -132,7 +147,8 @@ void main() {
 
   test('Can identify platform architecture', () {
     final structs = win32Scope.typeDefs.where(
-        (type) => type.name == 'Windows.Win32.UI.Shell.SHELLEXECUTEINFOW');
+      (type) => type.name == 'Windows.Win32.UI.Shell.SHELLEXECUTEINFOW',
+    );
     check(structs.length).equals(2);
 
     for (final struct in structs) {
@@ -144,25 +160,30 @@ void main() {
       check(supportedArchAttribute).isNotNull();
 
       // One structure for 64-bit, one structure for 32-bit
-      check((struct.supportedArchitectures.x64 &&
-                  struct.supportedArchitectures.arm64 &&
-                  !struct.supportedArchitectures.x86) ||
-              struct.supportedArchitectures.x86)
-          .isTrue();
+      check(
+        (struct.supportedArchitectures.x64 &&
+                struct.supportedArchitectures.arm64 &&
+                !struct.supportedArchitectures.x86) ||
+            struct.supportedArchitectures.x86,
+      ).isTrue();
     }
   });
 
-  test('Can access nested type even if resolution scope token does not match',
-      () {
-    final struct =
-        win32Scope.findTypeDef('Windows.Win32.System.Kernel.SLIST_HEADER');
-    check(struct).isNotNull();
-    check(struct!.fields.last.name).equals('HeaderX64');
-  });
+  test(
+    'Can access nested type even if resolution scope token does not match',
+    () {
+      final struct = win32Scope.findTypeDef(
+        'Windows.Win32.System.Kernel.SLIST_HEADER',
+      );
+      check(struct).isNotNull();
+      check(struct!.fields.last.name).equals('HeaderX64');
+    },
+  );
 
   test('Can distinguish global tokens', () {
-    final struct =
-        win32Scope.findTypeDef('Windows.Win32.System.Kernel.SLIST_HEADER');
+    final struct = win32Scope.findTypeDef(
+      'Windows.Win32.System.Kernel.SLIST_HEADER',
+    );
     check(struct).isNotNull();
     check(struct!.isGlobal).isFalse();
 

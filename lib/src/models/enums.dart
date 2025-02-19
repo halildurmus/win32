@@ -103,41 +103,41 @@ enum BaseType {
 
   factory BaseType.fromCorElementType(int corElementTypeValue) =>
       switch (corElementTypeValue) {
-        CorElementType.ELEMENT_TYPE_VOID => BaseType.voidType,
-        CorElementType.ELEMENT_TYPE_BOOLEAN => BaseType.booleanType,
-        CorElementType.ELEMENT_TYPE_CHAR => BaseType.charType,
-        CorElementType.ELEMENT_TYPE_I1 => BaseType.int8Type,
-        CorElementType.ELEMENT_TYPE_U1 => BaseType.uint8Type,
-        CorElementType.ELEMENT_TYPE_I2 => BaseType.int16Type,
-        CorElementType.ELEMENT_TYPE_U2 => BaseType.uint16Type,
-        CorElementType.ELEMENT_TYPE_I4 => BaseType.int32Type,
-        CorElementType.ELEMENT_TYPE_U4 => BaseType.uint32Type,
-        CorElementType.ELEMENT_TYPE_I8 => BaseType.int64Type,
-        CorElementType.ELEMENT_TYPE_U8 => BaseType.uint64Type,
-        CorElementType.ELEMENT_TYPE_R4 => BaseType.floatType,
-        CorElementType.ELEMENT_TYPE_R8 => BaseType.doubleType,
-        CorElementType.ELEMENT_TYPE_STRING => BaseType.stringType,
-        CorElementType.ELEMENT_TYPE_PTR => BaseType.pointerTypeModifier,
-        CorElementType.ELEMENT_TYPE_BYREF => BaseType.referenceTypeModifier,
-        CorElementType.ELEMENT_TYPE_VALUETYPE => BaseType.valueTypeModifier,
-        CorElementType.ELEMENT_TYPE_CLASS => BaseType.classTypeModifier,
-        CorElementType.ELEMENT_TYPE_VAR => BaseType.classVariableTypeModifier,
-        CorElementType.ELEMENT_TYPE_ARRAY => BaseType.arrayTypeModifier,
-        CorElementType.ELEMENT_TYPE_GENERICINST => BaseType.genericTypeModifier,
-        CorElementType.ELEMENT_TYPE_TYPEDBYREF => BaseType.typedReference,
-        CorElementType.ELEMENT_TYPE_I => BaseType.intPtrType,
-        CorElementType.ELEMENT_TYPE_U => BaseType.uintPtrType,
-        CorElementType.ELEMENT_TYPE_FNPTR => BaseType.functionPointerType,
-        CorElementType.ELEMENT_TYPE_OBJECT => BaseType.objectType,
-        CorElementType.ELEMENT_TYPE_SZARRAY => BaseType.simpleArrayType,
-        CorElementType.ELEMENT_TYPE_MVAR => BaseType.methodVariableTypeModifier,
-        CorElementType.ELEMENT_TYPE_CMOD_REQD =>
-          BaseType.cLanguageRequiredModifier,
-        CorElementType.ELEMENT_TYPE_CMOD_OPT =>
-          BaseType.cLanguageOptionalModifier,
-        CorElementType.ELEMENT_TYPE_SENTINEL => BaseType.sentinelTypeModifier,
-        _ => throw WinmdException(
-            'Unrecognized or internal type $corElementTypeValue')
+        ELEMENT_TYPE_VOID => BaseType.voidType,
+        ELEMENT_TYPE_BOOLEAN => BaseType.booleanType,
+        ELEMENT_TYPE_CHAR => BaseType.charType,
+        ELEMENT_TYPE_I1 => BaseType.int8Type,
+        ELEMENT_TYPE_U1 => BaseType.uint8Type,
+        ELEMENT_TYPE_I2 => BaseType.int16Type,
+        ELEMENT_TYPE_U2 => BaseType.uint16Type,
+        ELEMENT_TYPE_I4 => BaseType.int32Type,
+        ELEMENT_TYPE_U4 => BaseType.uint32Type,
+        ELEMENT_TYPE_I8 => BaseType.int64Type,
+        ELEMENT_TYPE_U8 => BaseType.uint64Type,
+        ELEMENT_TYPE_R4 => BaseType.floatType,
+        ELEMENT_TYPE_R8 => BaseType.doubleType,
+        ELEMENT_TYPE_STRING => BaseType.stringType,
+        ELEMENT_TYPE_PTR => BaseType.pointerTypeModifier,
+        ELEMENT_TYPE_BYREF => BaseType.referenceTypeModifier,
+        ELEMENT_TYPE_VALUETYPE => BaseType.valueTypeModifier,
+        ELEMENT_TYPE_CLASS => BaseType.classTypeModifier,
+        ELEMENT_TYPE_VAR => BaseType.classVariableTypeModifier,
+        ELEMENT_TYPE_ARRAY => BaseType.arrayTypeModifier,
+        ELEMENT_TYPE_GENERICINST => BaseType.genericTypeModifier,
+        ELEMENT_TYPE_TYPEDBYREF => BaseType.typedReference,
+        ELEMENT_TYPE_I => BaseType.intPtrType,
+        ELEMENT_TYPE_U => BaseType.uintPtrType,
+        ELEMENT_TYPE_FNPTR => BaseType.functionPointerType,
+        ELEMENT_TYPE_OBJECT => BaseType.objectType,
+        ELEMENT_TYPE_SZARRAY => BaseType.simpleArrayType,
+        ELEMENT_TYPE_MVAR => BaseType.methodVariableTypeModifier,
+        ELEMENT_TYPE_CMOD_REQD => BaseType.cLanguageRequiredModifier,
+        ELEMENT_TYPE_CMOD_OPT => BaseType.cLanguageOptionalModifier,
+        ELEMENT_TYPE_SENTINEL => BaseType.sentinelTypeModifier,
+        _ =>
+          throw WinmdException(
+            'Unrecognized or internal type $corElementTypeValue',
+          ),
       };
 }
 
@@ -152,7 +152,7 @@ enum BestFit {
 
   /// Do not perform best-fit mapping of Unicode characters. In this case, all
   /// unmappable characters will be replaced by a ‘?’.
-  disabled
+  disabled,
 }
 
 /// Platform calling convention.
@@ -178,7 +178,7 @@ enum CallingConvention {
   thiscall,
 
   /// Reserved.
-  fastcall
+  fastcall,
 }
 
 /// Code type of contained code.
@@ -195,7 +195,7 @@ enum CodeType {
 
   /// Specifies that the method implementation is provided by the common
   /// language runtime.
-  runtime
+  runtime,
 }
 
 /// Field accessibility information.
@@ -222,7 +222,7 @@ enum FieldAccess {
 
   /// Specifies that the field is accessible by all types with visibility of
   /// this scope.
-  public
+  public,
 }
 
 /// The platform architecture targeted by an executable.
@@ -234,7 +234,7 @@ enum ImageType {
   ia64,
 
   /// x64
-  amd64
+  amd64,
 }
 
 /// Specifies member access.
@@ -260,7 +260,7 @@ enum MemberAccess {
 
   /// Specifies that the member is accessible by all types with access to the
   /// scope.
-  public
+  public,
 }
 
 /// Indicates the preferred architecture for a requested `typeDef`.
@@ -272,7 +272,7 @@ enum PreferredArchitecture {
   x64,
 
   // Prefer ARM 64-bit architecture.
-  arm64
+  arm64,
 }
 
 /// Specifies how string types are interpreted.
@@ -288,7 +288,7 @@ enum StringFormat {
 
   /// Specifies that the type has a non-standard encoding, as specified by
   /// CustomFormatMask.
-  custom
+  custom,
 }
 
 /// Convention for marshalling P/Invoke function strings.
@@ -306,7 +306,7 @@ enum StringMarshalConvention {
   /// system. The default is Unicode on Windows NT, Windows 2000, Windows XP,
   /// and the Windows Server 2003 family; the default is ANSI on Windows 98 and
   /// Windows Me.
-  auto
+  auto,
 }
 
 /// Convention for how the interop marshaler should respond to an unmappable
@@ -321,7 +321,7 @@ enum ThrowOnUnmappableChar {
 
   /// Do not throw an exception when the interop marshaler encounters an
   /// unmappable character.
-  disabled
+  disabled,
 }
 
 /// The type of object represented by a given token.
@@ -439,36 +439,37 @@ enum TokenType {
 
   /// Returns the type of the token.
   factory TokenType.fromToken(int token) => switch (token & 0xFF000000) {
-        CorTokenType.mdtModule => TokenType.module,
-        CorTokenType.mdtTypeRef => TokenType.typeRef,
-        CorTokenType.mdtTypeDef => TokenType.typeDef,
-        CorTokenType.mdtFieldDef => TokenType.fieldDef,
-        CorTokenType.mdtMethodDef => TokenType.methodDef,
-        CorTokenType.mdtParamDef => TokenType.paramDef,
-        CorTokenType.mdtInterfaceImpl => TokenType.interfaceImpl,
-        CorTokenType.mdtMemberRef => TokenType.memberRef,
-        CorTokenType.mdtCustomAttribute => TokenType.customAttribute,
-        CorTokenType.mdtPermission => TokenType.permission,
-        CorTokenType.mdtSignature => TokenType.signature,
-        CorTokenType.mdtEvent => TokenType.event,
-        CorTokenType.mdtProperty => TokenType.property,
-        CorTokenType.mdtModuleRef => TokenType.moduleRef,
-        CorTokenType.mdtTypeSpec => TokenType.typeSpec,
-        CorTokenType.mdtAssembly => TokenType.assembly,
-        CorTokenType.mdtAssemblyRef => TokenType.assemblyRef,
-        CorTokenType.mdtFile => TokenType.file,
-        CorTokenType.mdtExportedType => TokenType.exportedType,
-        CorTokenType.mdtManifestResource => TokenType.manifestResource,
-        CorTokenType.mdtGenericParam => TokenType.genericParam,
-        CorTokenType.mdtMethodSpec => TokenType.methodSpec,
-        CorTokenType.mdtGenericParamConstraint =>
-          TokenType.genericParamConstraint,
-        CorTokenType.mdtString => TokenType.string,
-        CorTokenType.mdtName => TokenType.name,
-        CorTokenType.mdtBaseType => TokenType.baseType,
-        _ => throw WinmdException(
-            'Unrecognized token type ${((token & 0xFF000000) >> 24).toHexString(8)}')
-      };
+    mdtModule => TokenType.module,
+    mdtTypeRef => TokenType.typeRef,
+    mdtTypeDef => TokenType.typeDef,
+    mdtFieldDef => TokenType.fieldDef,
+    mdtMethodDef => TokenType.methodDef,
+    mdtParamDef => TokenType.paramDef,
+    mdtInterfaceImpl => TokenType.interfaceImpl,
+    mdtMemberRef => TokenType.memberRef,
+    mdtCustomAttribute => TokenType.customAttribute,
+    mdtPermission => TokenType.permission,
+    mdtSignature => TokenType.signature,
+    mdtEvent => TokenType.event,
+    mdtProperty => TokenType.property,
+    mdtModuleRef => TokenType.moduleRef,
+    mdtTypeSpec => TokenType.typeSpec,
+    mdtAssembly => TokenType.assembly,
+    mdtAssemblyRef => TokenType.assemblyRef,
+    mdtFile => TokenType.file,
+    mdtExportedType => TokenType.exportedType,
+    mdtManifestResource => TokenType.manifestResource,
+    mdtGenericParam => TokenType.genericParam,
+    mdtMethodSpec => TokenType.methodSpec,
+    mdtGenericParamConstraint => TokenType.genericParamConstraint,
+    mdtString => TokenType.string,
+    mdtName => TokenType.name,
+    mdtBaseType => TokenType.baseType,
+    _ =>
+      throw WinmdException(
+        'Unrecognized token type ${((token & 0xFF000000) >> 24).toHexString(8)}',
+      ),
+  };
 }
 
 /// Specifies how fields are laid out in the type.
@@ -480,7 +481,7 @@ enum TypeLayout {
   sequential,
 
   /// Specifies that field layout is supplied explicitly.
-  explicit
+  explicit,
 }
 
 /// Specifies visibility of a type to other types.
@@ -507,7 +508,7 @@ enum TypeVisibility {
   nestedFamilyAndAssembly,
 
   /// Specifies that the type is nested with family or assembly visibility.
-  nestedFamilyOrAssembly
+  nestedFamilyOrAssembly,
 }
 
 /// Indicates the kind of variance for a delegate / interface generic parameter.
@@ -519,7 +520,7 @@ enum Variance {
   covariant,
 
   /// Indicates contravariance.
-  contravariant
+  contravariant,
 }
 
 /// Specifies virtual table layout.
@@ -529,5 +530,5 @@ enum VtableLayout {
   reuseSlot,
 
   /// Specifies that the method always gets a new slot in the virtual table.
-  newSlot
+  newSlot,
 }

@@ -19,13 +19,23 @@ mixin GenericParamsMixin on TokenObject {
       final pcGenericParams = arena<ULONG>();
 
       var hr = reader.enumGenericParams(
-          phEnum, token, rGenericParams, 1, pcGenericParams);
+        phEnum,
+        token,
+        rGenericParams,
+        1,
+        pcGenericParams,
+      );
       while (hr == S_OK) {
         final genericParamToken = rGenericParams.value;
 
         params.add(GenericParam.fromToken(scope, genericParamToken));
         hr = reader.enumGenericParams(
-            phEnum, token, rGenericParams, 1, pcGenericParams);
+          phEnum,
+          token,
+          rGenericParams,
+          1,
+          pcGenericParams,
+        );
       }
       reader.closeEnum(phEnum.value);
     });

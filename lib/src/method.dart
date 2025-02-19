@@ -2,7 +2,7 @@ import 'dart:ffi';
 import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart';
+import 'package:win32/win32.dart' hide TokenType;
 
 import 'mixins/mixins.dart';
 import 'models/models.dart';
@@ -22,14 +22,15 @@ class Method extends TokenObject
         GenericParamsMixin,
         SupportedArchitecturesMixin {
   Method(
-      super.scope,
-      super.token,
-      this._parentToken,
-      this.name,
-      this._attributes,
-      this.signatureBlob,
-      this.relativeVirtualAddress,
-      this.implFlags) {
+    super.scope,
+    super.token,
+    this._parentToken,
+    this.name,
+    this._attributes,
+    this.signatureBlob,
+    this.relativeVirtualAddress,
+    this.implFlags,
+  ) {
     _parseParameterNames();
     _parseSignatureBlob();
   }
@@ -53,21 +54,30 @@ class Method extends TokenObject
 
       final reader = scope.reader;
       final hr = reader.getMethodProps(
-          token,
-          ptkClass,
-          szMethod,
-          stringBufferSize,
-          pchMethod,
-          pdwAttr,
-          ppvSigBlob,
-          pcbSigBlob,
-          pulCodeRVA,
-          pdwImplFlags);
+        token,
+        ptkClass,
+        szMethod,
+        stringBufferSize,
+        pchMethod,
+        pdwAttr,
+        ppvSigBlob,
+        pcbSigBlob,
+        pulCodeRVA,
+        pdwImplFlags,
+      );
       if (FAILED(hr)) throw WindowsException(hr);
 
       final signature = ppvSigBlob.value.asTypedList(pcbSigBlob.value);
-      return Method(scope, token, ptkClass.value, szMethod.toDartString(),
-          pdwAttr.value, signature, pulCodeRVA.value, pdwImplFlags.value);
+      return Method(
+        scope,
+        token,
+        ptkClass.value,
+        szMethod.toDartString(),
+        pdwAttr.value,
+        signature,
+        pulCodeRVA.value,
+        pdwImplFlags.value,
+      );
     });
   }
 
@@ -98,64 +108,53 @@ class Method extends TokenObject
   /// Returns information about the method's visibility / accessibility to other
   /// types.
   MemberAccess get memberAccess =>
-      MemberAccess.values[_attributes & CorMethodAttr.mdMemberAccessMask];
+      MemberAccess.values[_attributes & mdMemberAccessMask];
 
   /// Returns true if the member is defined as part of the type rather than as a
   /// member of an instance.
-  bool get isStatic =>
-      _attributes & CorMethodAttr.mdStatic == CorMethodAttr.mdStatic;
+  bool get isStatic => _attributes & mdStatic == mdStatic;
 
   /// Returns true if the method cannot be overridden.
-  bool get isFinal =>
-      _attributes & CorMethodAttr.mdFinal == CorMethodAttr.mdFinal;
+  bool get isFinal => _attributes & mdFinal == mdFinal;
 
   /// Returns true if the method can be overridden.
-  bool get isVirtual =>
-      _attributes & CorMethodAttr.mdVirtual == CorMethodAttr.mdVirtual;
+  bool get isVirtual => _attributes & mdVirtual == mdVirtual;
 
   /// Returns true if the method hides by name and signature, rather than just
   /// by name.
-  bool get isHideBySig =>
-      _attributes & CorMethodAttr.mdHideBySig == CorMethodAttr.mdHideBySig;
+  bool get isHideBySig => _attributes & mdHideBySig == mdHideBySig;
 
   /// Returns information about the vtable layout of this method.
   ///
   /// If `ReuseSlot`, the slot used for this method in the virtual table be
   /// reused. This is the default. If `NewSlot`, the method always gets a new
   /// slot in the virtual table.
-  VtableLayout get vTableLayout =>
-      switch (_attributes & CorMethodAttr.mdVtableLayoutMask) {
-        CorMethodAttr.mdNewSlot => VtableLayout.newSlot,
-        _ => VtableLayout.reuseSlot
-      };
+  VtableLayout get vTableLayout => switch (_attributes & mdVtableLayoutMask) {
+    mdNewSlot => VtableLayout.newSlot,
+    _ => VtableLayout.reuseSlot,
+  };
 
   /// Returns true if the method can be overridden by the same types to which it
   /// is visible.
   bool get isCheckAccessOnOverride =>
-      _attributes & CorMethodAttr.mdCheckAccessOnOverride ==
-      CorMethodAttr.mdCheckAccessOnOverride;
+      _attributes & mdCheckAccessOnOverride == mdCheckAccessOnOverride;
 
   /// Returns true if the method is not implemented.
-  bool get isAbstract =>
-      _attributes & CorMethodAttr.mdAbstract == CorMethodAttr.mdAbstract;
+  bool get isAbstract => _attributes & mdAbstract == mdAbstract;
 
   /// Returns true if the method is special; its name describes how.
-  bool get isSpecialName =>
-      _attributes & CorMethodAttr.mdSpecialName == CorMethodAttr.mdSpecialName;
+  bool get isSpecialName => _attributes & mdSpecialName == mdSpecialName;
 
   /// Returns true if the method implementation is forwarded using PInvoke.
-  bool get isPinvokeImpl =>
-      _attributes & CorMethodAttr.mdPinvokeImpl == CorMethodAttr.mdPinvokeImpl;
+  bool get isPinvokeImpl => _attributes & mdPinvokeImpl == mdPinvokeImpl;
 
   /// Returns true if the method is a managed method exported to unmanaged code.
   bool get isUnmanagedExport =>
-      _attributes & CorMethodAttr.mdUnmanagedExport ==
-      CorMethodAttr.mdUnmanagedExport;
+      _attributes & mdUnmanagedExport == mdUnmanagedExport;
 
   /// Returns true if the common language runtime should check the encoding of
   /// the method name.
-  bool get isRTSpecialName =>
-      _attributes & CorMethodAttr.mdSpecialName == CorMethodAttr.mdSpecialName;
+  bool get isRTSpecialName => _attributes & mdSpecialName == mdSpecialName;
 
   /// Returns the P/Invoke mapping representation for this object.
   PinvokeMap get pinvokeMap => PinvokeMap.fromToken(scope, token);
@@ -175,16 +174,22 @@ class Method extends TokenObject
 
   /// Returns the module that contains the method.
   ModuleRef get module => using((arena) {
-        final pdwMappingFlags = arena<DWORD>();
-        final szImportName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
-        final pchImportName = arena<ULONG>();
-        final ptkImportDLL = arena<mdModuleRef>();
+    final pdwMappingFlags = arena<DWORD>();
+    final szImportName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
+    final pchImportName = arena<ULONG>();
+    final ptkImportDLL = arena<mdModuleRef>();
 
-        final hr = reader.getPinvokeMap(token, pdwMappingFlags, szImportName,
-            stringBufferSize, pchImportName, ptkImportDLL);
-        if (FAILED(hr)) throw COMException(hr);
-        return ModuleRef.fromToken(scope, ptkImportDLL.value);
-      });
+    final hr = reader.getPinvokeMap(
+      token,
+      pdwMappingFlags,
+      szImportName,
+      stringBufferSize,
+      pchImportName,
+      ptkImportDLL,
+    );
+    if (FAILED(hr)) throw COMException(hr);
+    return ModuleRef.fromToken(scope, ptkImportDLL.value);
+  });
 
   /// Returns true if the method contains generic parameters.
   bool get hasGenericParameters => signatureBlob[0] & 0x10 == 0x10;
@@ -247,17 +252,24 @@ class Method extends TokenObject
       // Parse return type
       returnType = parameters.first;
       parameters = parameters.sublist(1);
-      final returnTypeTuple =
-          TypeTuple.fromSignature(signatureBlob.sublist(blobPtr), scope);
+      final returnTypeTuple = TypeTuple.fromSignature(
+        signatureBlob.sublist(blobPtr),
+        scope,
+      );
       returnType.typeIdentifier = returnTypeTuple.typeIdentifier;
       blobPtr += returnTypeTuple.offsetLength;
     } else {
       // In Win32 metadata, EnumParams does not return a zero-th parameter even
       // if there is a return type. So we create a new returnType for it.
-      final returnTypeTuple =
-          TypeTuple.fromSignature(signatureBlob.sublist(blobPtr), scope);
+      final returnTypeTuple = TypeTuple.fromSignature(
+        signatureBlob.sublist(blobPtr),
+        scope,
+      );
       returnType = Parameter.fromTypeIdentifier(
-          scope, token, returnTypeTuple.typeIdentifier);
+        scope,
+        token,
+        returnTypeTuple.typeIdentifier,
+      );
       blobPtr += returnTypeTuple.offsetLength;
     }
 
@@ -291,45 +303,52 @@ class Method extends TokenObject
   }
 
   void _parseParameterNames() => using((arena) {
-        final phEnum = arena<HCORENUM>();
-        final rParams = arena<mdParamDef>();
-        final pcTokens = arena<ULONG>();
+    final phEnum = arena<HCORENUM>();
+    final rParams = arena<mdParamDef>();
+    final pcTokens = arena<ULONG>();
 
-        var hr = reader.enumParams(phEnum, token, rParams, 1, pcTokens);
-        while (hr == S_OK) {
-          final parameterToken = rParams.value;
-          final parameter = Parameter.fromToken(scope, parameterToken);
-          parameters.add(parameter);
-          hr = reader.enumParams(phEnum, token, rParams, 1, pcTokens);
-        }
-        reader.closeEnum(phEnum.value);
-      });
+    var hr = reader.enumParams(phEnum, token, rParams, 1, pcTokens);
+    while (hr == S_OK) {
+      final parameterToken = rParams.value;
+      final parameter = Parameter.fromToken(scope, parameterToken);
+      parameters.add(parameter);
+      hr = reader.enumParams(phEnum, token, rParams, 1, pcTokens);
+    }
+    reader.closeEnum(phEnum.value);
+  });
 
   // Various projections do smart things to mask this into a single array
   // value. We're not that clever yet, so we project it in its raw state, which
   // means a little work here to ensure that it comes out right.
-  void _parseSimpleArray(TypeTuple typeTuple, int paramsIndex,
-      _ArrayPassingStyle arrayPassingStyle) {
+  void _parseSimpleArray(
+    TypeTuple typeTuple,
+    int paramsIndex,
+    _ArrayPassingStyle arrayPassingStyle,
+  ) {
     final Parameter(:name, :attributes) = parameters[paramsIndex];
     parameters[paramsIndex].name = '__${name}Size';
 
     if (arrayPassingStyle == _ArrayPassingStyle.receive) {
-      parameters[paramsIndex].typeIdentifier =
-          parameters[paramsIndex].typeIdentifier.copyWith(
-                baseType: BaseType.pointerTypeModifier,
-                typeArg: const TypeIdentifier(BaseType.uint32Type),
-              );
+      parameters[paramsIndex].typeIdentifier = parameters[paramsIndex]
+          .typeIdentifier
+          .copyWith(
+            baseType: BaseType.pointerTypeModifier,
+            typeArg: const TypeIdentifier(BaseType.uint32Type),
+          );
     } else {
-      parameters[paramsIndex].typeIdentifier =
-          const TypeIdentifier(BaseType.uint32Type);
+      parameters[paramsIndex].typeIdentifier = const TypeIdentifier(
+        BaseType.uint32Type,
+      );
       if (arrayPassingStyle == _ArrayPassingStyle.fill) {
         // In FillArray style, the arraySize parameter must be an [in] parameter
-        parameters[paramsIndex].attributes = CorParamAttr.pdIn;
+        parameters[paramsIndex].attributes = pdIn;
       }
     }
 
-    parameters.insert(paramsIndex + 1,
-        Parameter.fromVoid(scope, token)..attributes = attributes);
+    parameters.insert(
+      paramsIndex + 1,
+      Parameter.fromVoid(scope, token)..attributes = attributes,
+    );
     parameters[paramsIndex + 1].name = name;
     parameters[paramsIndex + 1].typeIdentifier = typeTuple.typeIdentifier;
   }
@@ -350,40 +369,32 @@ class MethodImplementationFeatures {
   final int _implFlags;
 
   /// Returns information about the code type used in implementing the method.
-  CodeType get codeType =>
-      CodeType.values[_implFlags & CorMethodImpl.miCodeTypeMask];
+  CodeType get codeType => CodeType.values[_implFlags & miCodeTypeMask];
 
   /// Returns true if the method implementation is managed.
-  bool get isManaged =>
-      _implFlags & CorMethodImpl.miManagedMask == CorMethodImpl.miManaged;
+  bool get isManaged => _implFlags & miManagedMask == miManaged;
 
   /// Returns true if the method is defined. This flag is used primarily in
   /// merge scenarios.
-  bool get isForwardRef =>
-      _implFlags & CorMethodImpl.miForwardRef == CorMethodImpl.miForwardRef;
+  bool get isForwardRef => _implFlags & miForwardRef == miForwardRef;
 
   /// Returns true if the method signature cannot be mangled for an HRESULT
   /// conversion.
-  bool get isPreserveSig =>
-      _implFlags & CorMethodImpl.miPreserveSig == CorMethodImpl.miPreserveSig;
+  bool get isPreserveSig => _implFlags & miPreserveSig == miPreserveSig;
 
   /// Returns true if the method is single-threaded through its body.
-  bool get isSynchronized =>
-      _implFlags & CorMethodImpl.miSynchronized == CorMethodImpl.miSynchronized;
+  bool get isSynchronized => _implFlags & miSynchronized == miSynchronized;
 
   /// Returns true if the method cannot be inlined.
-  bool get isNoInlining =>
-      _implFlags & CorMethodImpl.miNoInlining == CorMethodImpl.miNoInlining;
+  bool get isNoInlining => _implFlags & miNoInlining == miNoInlining;
 
   /// Returns true if the method should be inlined if possible.
   bool get isAggressiveInlining =>
-      _implFlags & CorMethodImpl.miAggressiveInlining ==
-      CorMethodImpl.miAggressiveInlining;
+      _implFlags & miAggressiveInlining == miAggressiveInlining;
 
   /// Returns true if the method should not be optimized.
   bool get isNoOptimization =>
-      _implFlags & CorMethodImpl.miNoOptimization ==
-      CorMethodImpl.miNoOptimization;
+      _implFlags & miNoOptimization == miNoOptimization;
 }
 
 /// Represents the various array-passing styles in WinRT.
@@ -409,5 +420,5 @@ enum _ArrayPassingStyle {
   /// In this style, the array size parameter and the array parameter are both
   /// `out` parameters. Additionally, the array parameter is passed by
   /// reference (that is, `ArrayType**`, rather than `ArrayType*`).
-  receive
+  receive,
 }

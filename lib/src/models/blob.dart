@@ -19,7 +19,6 @@ class UncompressedData {
       const length = 1;
       return UncompressedData(value, length);
     }
-
     // Medium -- two bytes
     else if ((rawBytes[0] & 0xC0) == 0x80) // 10?? ????
     {
@@ -29,13 +28,13 @@ class UncompressedData {
       const length = 2;
       return UncompressedData(value, length);
     }
-
     // Large -- four bytes
     else if ((rawBytes[0] & 0xE0) == 0xC0) // 110? ????
     {
       if (rawBytes.length < 4) throw WinmdException('Bad signature: $rawBytes');
 
-      final value = (rawBytes[0] & 0x1f) << 24 |
+      final value =
+          (rawBytes[0] & 0x1f) << 24 |
           (rawBytes[1]) << 16 |
           (rawBytes[2]) << 8 |
           (rawBytes[3]);

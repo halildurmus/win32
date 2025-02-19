@@ -39,8 +39,10 @@ void main() {
       const version = '54.0.44-preview';
       await MetadataStore.loadWin32Metadata(version: version);
 
-      final package = LocalStorage.getPackage(MetadataType.win32.packageName,
-          version: version);
+      final package = LocalStorage.getPackage(
+        MetadataType.win32.packageName,
+        version: version,
+      );
       check(package).isNotNull();
       check(package!.name).equals('Microsoft.Windows.SDK.Win32Metadata');
       check(package.version).equals(version);
@@ -56,38 +58,44 @@ void main() {
       final packages = LocalStorage.packages;
       check(packages).isNotEmpty();
 
-      final wdkPackage = packages
-          .where((p) => p.name == MetadataType.wdk.packageName)
-          .lastOrNull;
+      final wdkPackage =
+          packages
+              .where((p) => p.name == MetadataType.wdk.packageName)
+              .lastOrNull;
       check(wdkPackage).isNotNull();
       check(wdkPackage!.name).equals('Microsoft.Windows.WDK.Win32Metadata');
       check(wdkPackage.version).isNotEmpty();
-      check(wdkPackage.path)
-          .contains(r'winmd\Microsoft.Windows.WDK.Win32Metadata');
+      check(
+        wdkPackage.path,
+      ).contains(r'winmd\Microsoft.Windows.WDK.Win32Metadata');
       check(wdkPackage.toString()).equals(
         'Microsoft.Windows.WDK.Win32Metadata@${wdkPackage.version} (${wdkPackage.path})',
       );
 
-      final win32Package = packages
-          .where((p) => p.name == MetadataType.win32.packageName)
-          .lastOrNull;
+      final win32Package =
+          packages
+              .where((p) => p.name == MetadataType.win32.packageName)
+              .lastOrNull;
       check(win32Package).isNotNull();
       check(win32Package!.name).equals('Microsoft.Windows.SDK.Win32Metadata');
       check(win32Package.version).isNotEmpty();
-      check(win32Package.path)
-          .contains(r'winmd\Microsoft.Windows.SDK.Win32Metadata');
+      check(
+        win32Package.path,
+      ).contains(r'winmd\Microsoft.Windows.SDK.Win32Metadata');
       check(win32Package.toString()).equals(
         'Microsoft.Windows.SDK.Win32Metadata@${win32Package.version} (${win32Package.path})',
       );
 
-      final winrtPackage = packages
-          .where((p) => p.name == MetadataType.winrt.packageName)
-          .lastOrNull;
+      final winrtPackage =
+          packages
+              .where((p) => p.name == MetadataType.winrt.packageName)
+              .lastOrNull;
       check(winrtPackage).isNotNull();
       check(winrtPackage!.name).equals('Microsoft.Windows.SDK.Contracts');
       check(winrtPackage.version).isNotEmpty();
-      check(winrtPackage.path)
-          .contains(r'winmd\Microsoft.Windows.SDK.Contracts');
+      check(
+        winrtPackage.path,
+      ).contains(r'winmd\Microsoft.Windows.SDK.Contracts');
       check(winrtPackage.toString()).equals(
         'Microsoft.Windows.SDK.Contracts@${winrtPackage.version} (${winrtPackage.path})',
       );

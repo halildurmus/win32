@@ -26,8 +26,13 @@ abstract final class LocalStorage {
     final szPath = wsalloc(MAX_PATH);
 
     try {
-      final result =
-          SHGetFolderPath(NULL, CSIDL_LOCAL_APPDATA, NULL, 0, szPath);
+      final result = SHGetFolderPath(
+        NULL,
+        CSIDL_LOCAL_APPDATA,
+        NULL,
+        0,
+        szPath,
+      );
       if (result != S_OK) {
         throw const WinmdException('Failed to retrieve a valid directory.');
       }
@@ -48,10 +53,7 @@ abstract final class LocalStorage {
   ///
   /// If [version] is not specified, the package with the latest version is
   /// returned.
-  static NuGetPackage? getPackage(
-    String packageName, {
-    String? version,
-  }) {
+  static NuGetPackage? getPackage(String packageName, {String? version}) {
     if (version != null) {
       return packages
           .where((p) => p.name == packageName && p.version == version)

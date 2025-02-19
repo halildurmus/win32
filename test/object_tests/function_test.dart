@@ -46,15 +46,17 @@ void main() {
     check(method.isStatic).isTrue();
     check(method.memberAccess).equals(MemberAccess.public);
     check(method.name).equals('AdjustWindowRect');
-    check(method.returnType.typeIdentifier.name)
-        .equals('Windows.Win32.Foundation.BOOL');
+    check(
+      method.returnType.typeIdentifier.name,
+    ).equals('Windows.Win32.Foundation.BOOL');
 
     final supportedOSPlatformAttr = method.findAttribute(
-        'Windows.Win32.Foundation.Metadata.SupportedOSPlatformAttribute');
+      'Windows.Win32.Foundation.Metadata.SupportedOSPlatformAttribute',
+    );
     check(supportedOSPlatformAttr).isNotNull();
     check(supportedOSPlatformAttr!.signatureBlob.toList()).deepEquals([
       0x01, 0x00, 0x0a, 0x77, 0x69, 0x6e, 0x64, 0x6f, //
-      0x77, 0x73, 0x35, 0x2e, 0x30, 0x00, 0x00
+      0x77, 0x73, 0x35, 0x2e, 0x30, 0x00, 0x00,
     ]);
 
     final pinvokeMap = method.pinvokeMap;
@@ -69,25 +71,31 @@ void main() {
     check(firstParam.isInParam).isTrue();
     check(firstParam.isOutParam).isTrue();
     check(firstParam.name).equals('lpRect');
-    check(firstParam.typeIdentifier.baseType)
-        .equals(BaseType.pointerTypeModifier);
+    check(
+      firstParam.typeIdentifier.baseType,
+    ).equals(BaseType.pointerTypeModifier);
     check(firstParam.typeIdentifier.typeArg).isNotNull();
-    check(firstParam.typeIdentifier.typeArg?.name)
-        .equals('Windows.Win32.Foundation.RECT');
+    check(
+      firstParam.typeIdentifier.typeArg?.name,
+    ).equals('Windows.Win32.Foundation.RECT');
 
     check(secondParam.isInParam).isTrue();
     check(secondParam.name).equals('dwStyle');
-    check(secondParam.typeIdentifier.baseType)
-        .equals(BaseType.valueTypeModifier);
-    check(secondParam.typeIdentifier.name)
-        .equals('Windows.Win32.UI.WindowsAndMessaging.WINDOW_STYLE');
+    check(
+      secondParam.typeIdentifier.baseType,
+    ).equals(BaseType.valueTypeModifier);
+    check(
+      secondParam.typeIdentifier.name,
+    ).equals('Windows.Win32.UI.WindowsAndMessaging.WINDOW_STYLE');
 
     check(thirdParam.isInParam).isTrue();
     check(thirdParam.name).equals('bMenu');
-    check(thirdParam.typeIdentifier.baseType)
-        .equals(BaseType.valueTypeModifier);
-    check(thirdParam.typeIdentifier.name)
-        .equals('Windows.Win32.Foundation.BOOL');
+    check(
+      thirdParam.typeIdentifier.baseType,
+    ).equals(BaseType.valueTypeModifier);
+    check(
+      thirdParam.typeIdentifier.name,
+    ).equals('Windows.Win32.Foundation.BOOL');
   });
 
   tearDownAll(MetadataStore.close);

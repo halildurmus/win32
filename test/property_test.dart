@@ -13,8 +13,9 @@ void main() {
   });
 
   test('Base property test', () {
-    final typeDef =
-        winrtScope.findTypeDef('Windows.Devices.LowLevelDevicesController');
+    final typeDef = winrtScope.findTypeDef(
+      'Windows.Devices.LowLevelDevicesController',
+    );
     check(typeDef).isNotNull();
     check(typeDef!.properties.length).equals(1);
     final [property] = typeDef.properties;

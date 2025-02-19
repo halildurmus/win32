@@ -1,7 +1,7 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart';
+import 'package:win32/win32.dart' hide TokenType;
 
 import 'models/models.dart';
 import 'scope.dart';
@@ -34,25 +34,27 @@ class AssemblyRef extends TokenObject {
       final pdwAssemblyRefFlags = arena<DWORD>();
 
       final hr = scope.assemblyImport.getAssemblyRefProps(
-          token,
-          ppbPublicKeyOrToken,
-          pcbPublicKeyOrToken,
-          szName,
-          stringBufferSize,
-          pchName,
-          pMetaData,
-          ppbHashValue,
-          pcbHashValue,
-          pdwAssemblyRefFlags);
+        token,
+        ppbPublicKeyOrToken,
+        pcbPublicKeyOrToken,
+        szName,
+        stringBufferSize,
+        pchName,
+        pMetaData,
+        ppbHashValue,
+        pcbHashValue,
+        pdwAssemblyRefFlags,
+      );
       if (FAILED(hr)) throw WindowsException(hr);
 
       final ASSEMBLYMETADATA(
         :usMajorVersion,
         :usMinorVersion,
         :usBuildNumber,
-        :usRevisionNumber
+        :usRevisionNumber,
       ) = pMetaData.ref;
-      final versionString = '$usMajorVersion.'
+      final versionString =
+          '$usMajorVersion.'
           '$usMinorVersion.'
           '$usBuildNumber.'
           '$usRevisionNumber';

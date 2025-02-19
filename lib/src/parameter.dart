@@ -2,7 +2,7 @@ import 'dart:ffi';
 import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart';
+import 'package:win32/win32.dart' hide TokenType;
 
 import 'method.dart';
 import 'mixins/custom_attributes_mixin.dart';
@@ -44,16 +44,17 @@ class Parameter extends TokenObject with CustomAttributesMixin {
 
       final reader = scope.reader;
       final hr = reader.getParamProps(
-          token,
-          ptkMethodDef,
-          pulSequence,
-          szName,
-          stringBufferSize,
-          pchName,
-          pdwAttr,
-          pdwCPlusTypeFlag,
-          ppValue,
-          pcchValue);
+        token,
+        ptkMethodDef,
+        pulSequence,
+        szName,
+        stringBufferSize,
+        pchName,
+        pdwAttr,
+        pdwCPlusTypeFlag,
+        ppValue,
+        pcchValue,
+      );
       if (FAILED(hr)) throw WindowsException(hr);
 
       final baseType = BaseType.fromCorElementType(pdwCPlusTypeFlag.value);
@@ -76,29 +77,28 @@ class Parameter extends TokenObject with CustomAttributesMixin {
     int methodToken,
     TypeIdentifier runtimeType, {
     int attributes = 0,
-  }) =>
-      Parameter(
-        scope,
-        0,
-        methodToken,
-        0,
-        attributes,
-        runtimeType,
-        '',
-        Uint8List(0),
-      );
+  }) => Parameter(
+    scope,
+    0,
+    methodToken,
+    0,
+    attributes,
+    runtimeType,
+    '',
+    Uint8List(0),
+  );
 
   /// Creates a void parameter object.
   factory Parameter.fromVoid(Scope scope, int methodToken) => Parameter(
-        scope,
-        0,
-        methodToken,
-        0,
-        0,
-        const TypeIdentifier(BaseType.voidType),
-        '',
-        Uint8List(0),
-      );
+    scope,
+    0,
+    methodToken,
+    0,
+    0,
+    const TypeIdentifier(BaseType.voidType),
+    '',
+    Uint8List(0),
+  );
 
   String name;
   final int sequence;
@@ -112,23 +112,20 @@ class Parameter extends TokenObject with CustomAttributesMixin {
   Method get parent => Method.fromToken(scope, _methodToken);
 
   /// Returns true if the parameter is passed into the method call.
-  bool get isInParam => attributes & CorParamAttr.pdIn == CorParamAttr.pdIn;
+  bool get isInParam => attributes & pdIn == pdIn;
 
   /// Returns true if the parameter is passed from the method return.
-  bool get isOutParam => attributes & CorParamAttr.pdOut == CorParamAttr.pdOut;
+  bool get isOutParam => attributes & pdOut == pdOut;
 
   /// Returns true if the parameter is optional.
-  bool get isOptional =>
-      attributes & CorParamAttr.pdOptional == CorParamAttr.pdOptional;
+  bool get isOptional => attributes & pdOptional == pdOptional;
 
   /// Returns true if the parameter has a default value.
-  bool get hasDefault =>
-      attributes & CorParamAttr.pdHasDefault == CorParamAttr.pdHasDefault;
+  bool get hasDefault => attributes & pdHasDefault == pdHasDefault;
 
   /// Returns true if the parameter has marshaling information.
   bool get hasFieldMarshal =>
-      attributes & CorParamAttr.pdHasFieldMarshal ==
-      CorParamAttr.pdHasFieldMarshal;
+      attributes & pdHasFieldMarshal == pdHasFieldMarshal;
 
   @override
   String toString() => name;

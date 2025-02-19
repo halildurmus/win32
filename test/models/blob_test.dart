@@ -67,22 +67,25 @@ void main() {
     test('Conversion fail test 1', () {
       const compressed = [0x9F];
       // Medium, should be two bytes long
-      check(() => UncompressedData.fromBlob(compressed))
-          .throws<WinmdException>();
+      check(
+        () => UncompressedData.fromBlob(compressed),
+      ).throws<WinmdException>();
     });
 
     test('Conversion fail test 2', () {
       const compressed = [0xDF, 0x3F, 0x00];
       // Large, should be four bytes long
-      check(() => UncompressedData.fromBlob(compressed))
-          .throws<WinmdException>();
+      check(
+        () => UncompressedData.fromBlob(compressed),
+      ).throws<WinmdException>();
     });
 
     test('Conversion fail test 3', () {
       const compressed = [0xF3];
       // Invalid (should be 110? ????)
-      check(() => UncompressedData.fromBlob(compressed))
-          .throws<WinmdException>();
+      check(
+        () => UncompressedData.fromBlob(compressed),
+      ).throws<WinmdException>();
     });
   });
 }

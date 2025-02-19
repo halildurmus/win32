@@ -18,8 +18,10 @@ mixin CustomAttributesMixin on TokenObject {
   /// string.
   String attributeAsString(String attrName) {
     final attribute = findAttribute(attrName);
-    if (attribute?.parameters case [final param, ...]
-        when param.type.baseType == BaseType.stringType) {
+    if (attribute?.parameters case [
+      final param,
+      ...,
+    ] when param.type.baseType == BaseType.stringType) {
       return param.value as String;
     }
 
@@ -48,8 +50,14 @@ mixin CustomAttributesMixin on TokenObject {
       // attributes on all objects in the scope.
       if (!isResolvedToken) return <CustomAttribute>[];
 
-      var hr =
-          reader.enumCustomAttributes(phEnum, token, 0, rAttrs, 1, pcAttrs);
+      var hr = reader.enumCustomAttributes(
+        phEnum,
+        token,
+        0,
+        rAttrs,
+        1,
+        pcAttrs,
+      );
       while (hr == S_OK) {
         final attrToken = rAttrs.value;
         final customAttribute = CustomAttribute.fromToken(scope, attrToken);

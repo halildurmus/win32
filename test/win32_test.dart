@@ -11,10 +11,11 @@ void main() {
   late Scope win32Scope;
 
   setUpAll(() async {
-    (win32Scope, _) = await (
-      MetadataStore.loadWin32Metadata(),
-      MetadataStore.loadWinrtMetadata()
-    ).wait;
+    (win32Scope, _) =
+        await (
+          MetadataStore.loadWin32Metadata(),
+          MetadataStore.loadWinrtMetadata(),
+        ).wait;
   });
 
   test('Scope assemblies contain expected assemblies', () {
@@ -43,8 +44,9 @@ void main() {
   });
 
   test('Can successfully load a typeDef from the Win32 metadata 2', () {
-    final typeDef =
-        win32Scope.findTypeDef('Windows.Win32.System.WinRT.Metadata.Apis');
+    final typeDef = win32Scope.findTypeDef(
+      'Windows.Win32.System.WinRT.Metadata.Apis',
+    );
     check(typeDef).isNotNull();
     check(typeDef!.methods).isNotEmpty();
   });
@@ -141,8 +143,9 @@ void main() {
     check(typeDef).isNotNull();
     final api = typeDef!.findMethod('AddFontResourceW');
     check(api).isNotNull();
-    check(api!.signatureBlob.sublist(0, 4))
-        .deepEquals(Uint8List.fromList([0x00, 0x01, 0x08, 0x11]));
+    check(
+      api!.signatureBlob.sublist(0, 4),
+    ).deepEquals(Uint8List.fromList([0x00, 0x01, 0x08, 0x11]));
   });
 
   test('Unicode string params are correctly marked', () {
@@ -175,16 +178,19 @@ void main() {
     check(api!.parameters.length).equals(3);
 
     check(api.parameters[0].name).equals('lprcDst');
-    check(api.parameters[0].typeIdentifier.baseType)
-        .equals(BaseType.pointerTypeModifier);
+    check(
+      api.parameters[0].typeIdentifier.baseType,
+    ).equals(BaseType.pointerTypeModifier);
 
     check(api.parameters[1].name).equals('lprcSrc1');
-    check(api.parameters[1].typeIdentifier.baseType)
-        .equals(BaseType.pointerTypeModifier);
+    check(
+      api.parameters[1].typeIdentifier.baseType,
+    ).equals(BaseType.pointerTypeModifier);
 
     check(api.parameters[2].name).equals('lprcSrc2');
-    check(api.parameters[2].typeIdentifier.baseType)
-        .equals(BaseType.pointerTypeModifier);
+    check(
+      api.parameters[2].typeIdentifier.baseType,
+    ).equals(BaseType.pointerTypeModifier);
   });
 
   test('Structs like RECT have the correct type args', () {
@@ -193,8 +199,9 @@ void main() {
     final api = typeDef!.findMethod('UnionRect');
     check(api).isNotNull();
     check(api!.parameters.first.name).equals('lprcDst');
-    check(api.parameters.first.typeIdentifier.baseType)
-        .equals(BaseType.pointerTypeModifier);
+    check(
+      api.parameters.first.typeIdentifier.baseType,
+    ).equals(BaseType.pointerTypeModifier);
     check(api.parameters.first.typeIdentifier.typeArg).isNotNull();
     check(api.parameters.first.typeIdentifier.typeArg!.name).endsWith('RECT');
   });
@@ -206,12 +213,15 @@ void main() {
     check(api).isNotNull();
     final colorParam = api!.parameters.last;
     check(colorParam.name).equals('color');
-    check(colorParam.typeIdentifier.baseType)
-        .equals(BaseType.valueTypeModifier);
-    check(colorParam.typeIdentifier.type?.name)
-        .equals('Windows.Win32.Foundation.COLORREF');
-    check(colorParam.typeIdentifier.type?.fields[0].typeIdentifier.baseType)
-        .equals(BaseType.uint32Type);
+    check(
+      colorParam.typeIdentifier.baseType,
+    ).equals(BaseType.valueTypeModifier);
+    check(
+      colorParam.typeIdentifier.type?.name,
+    ).equals('Windows.Win32.Foundation.COLORREF');
+    check(
+      colorParam.typeIdentifier.type?.fields[0].typeIdentifier.baseType,
+    ).equals(BaseType.uint32Type);
   });
 
   test('DWORD typedefs like COLORREF have the correct return type', () {
@@ -220,17 +230,21 @@ void main() {
     final api = typeDef!.findMethod('SetBkColor');
     check(api).isNotNull();
     final returnType = api!.returnType;
-    check(returnType.typeIdentifier.baseType)
-        .equals(BaseType.valueTypeModifier);
-    check(returnType.typeIdentifier.type?.name)
-        .equals('Windows.Win32.Foundation.COLORREF');
-    check(returnType.typeIdentifier.type?.fields[0].typeIdentifier.baseType)
-        .equals(BaseType.uint32Type);
+    check(
+      returnType.typeIdentifier.baseType,
+    ).equals(BaseType.valueTypeModifier);
+    check(
+      returnType.typeIdentifier.type?.name,
+    ).equals('Windows.Win32.Foundation.COLORREF');
+    check(
+      returnType.typeIdentifier.type?.fields[0].typeIdentifier.baseType,
+    ).equals(BaseType.uint32Type);
   });
 
   test('HANDLE-style parameters have the correct type', () {
-    final typeDef =
-        win32Scope.findTypeDef('Windows.Win32.UI.Input.KeyboardAndMouse.Apis');
+    final typeDef = win32Scope.findTypeDef(
+      'Windows.Win32.UI.Input.KeyboardAndMouse.Apis',
+    );
     check(typeDef).isNotNull();
     final api = typeDef!.findMethod('UnregisterHotKey');
     check(api).isNotNull();
@@ -242,8 +256,9 @@ void main() {
   });
 
   test('LPHANDLE-style parameters have the correct type', () {
-    final typeDef =
-        win32Scope.findTypeDef('Windows.Win32.UI.WindowsAndMessaging.Apis');
+    final typeDef = win32Scope.findTypeDef(
+      'Windows.Win32.UI.WindowsAndMessaging.Apis',
+    );
     check(typeDef).isNotNull();
     final api = typeDef!.findMethod('CascadeWindows');
     check(api).isNotNull();
@@ -288,13 +303,15 @@ void main() {
     check(param.name).equals('rclsid');
     check(param.typeIdentifier.baseType).equals(BaseType.pointerTypeModifier);
     check(param.typeIdentifier.typeArg!.name).endsWith('System.Guid');
-    check(param.typeIdentifier.typeArg?.baseType)
-        .equals(BaseType.valueTypeModifier);
+    check(
+      param.typeIdentifier.typeArg?.baseType,
+    ).equals(BaseType.valueTypeModifier);
   });
 
   test('APIs with empty parameters have an accurate return type', () {
-    final typeDef =
-        win32Scope.findTypeDef('Windows.Win32.System.DataExchange.Apis');
+    final typeDef = win32Scope.findTypeDef(
+      'Windows.Win32.System.DataExchange.Apis',
+    );
     check(typeDef).isNotNull();
     final api = typeDef!.findMethod('CountClipboardFormats');
     check(api).isNotNull();
@@ -303,28 +320,32 @@ void main() {
   });
 
   test('Double pointer is interpreted correctly', () {
-    final typeDef =
-        win32Scope.findTypeDef('Windows.Win32.Security.Credentials.Apis');
+    final typeDef = win32Scope.findTypeDef(
+      'Windows.Win32.Security.Credentials.Apis',
+    );
     check(typeDef).isNotNull();
     final api = typeDef!.findMethod('CredReadW');
     check(api).isNotNull();
     final param = api!.parameters.last;
     check(param.typeIdentifier.baseType).equals(BaseType.pointerTypeModifier);
     check(param.typeIdentifier.typeArg).isNotNull();
-    check(param.typeIdentifier.typeArg?.baseType)
-        .equals(BaseType.pointerTypeModifier);
+    check(
+      param.typeIdentifier.typeArg?.baseType,
+    ).equals(BaseType.pointerTypeModifier);
     check(param.typeIdentifier.typeArg!.typeArg!.name).endsWith('CREDENTIALW');
   });
 
   test('HRESULT return values are generated correctly', () {
-    final typeDef =
-        win32Scope.findTypeDef('Windows.Win32.System.SystemInformation.Apis');
+    final typeDef = win32Scope.findTypeDef(
+      'Windows.Win32.System.SystemInformation.Apis',
+    );
     check(typeDef).isNotNull();
     final api = typeDef!.findMethod('GetIntegratedDisplaySize');
     check(api).isNotNull();
     final returnType = api!.returnType;
-    check(returnType.typeIdentifier.baseType)
-        .equals(BaseType.valueTypeModifier);
+    check(
+      returnType.typeIdentifier.baseType,
+    ).equals(BaseType.valueTypeModifier);
     check(returnType.typeIdentifier.name).endsWith('HRESULT');
   });
 
@@ -351,29 +372,33 @@ void main() {
   });
 
   test('Callback functions are generated correctly 2', () {
-    final typeDef =
-        win32Scope.findTypeDef('Windows.Win32.System.Diagnostics.Debug.Apis');
+    final typeDef = win32Scope.findTypeDef(
+      'Windows.Win32.System.Diagnostics.Debug.Apis',
+    );
     check(typeDef).isNotNull();
     final api = typeDef!.findMethod('SymEnumSymbolsW');
     check(api).isNotNull();
     final param = api!.parameters[3]; // PSYM_ENUMERATESYMBOLS_CALLBACKW
     check(param.name).equals('EnumSymbolsCallback');
     check(param.typeIdentifier.baseType).equals(BaseType.classTypeModifier);
-    check(param.typeIdentifier.name)
-        .endsWith('PSYM_ENUMERATESYMBOLS_CALLBACKW');
+    check(
+      param.typeIdentifier.name,
+    ).endsWith('PSYM_ENUMERATESYMBOLS_CALLBACKW');
     check(param.typeIdentifier.typeArg).isNull();
   });
 
   test('Constants are accessible from metadata', () {
-    final typeDef =
-        win32Scope.findTypeDef('Windows.Win32.UI.WindowsAndMessaging.Apis');
+    final typeDef = win32Scope.findTypeDef(
+      'Windows.Win32.UI.WindowsAndMessaging.Apis',
+    );
     check(typeDef).isNotNull();
     check(typeDef!.fields.length).isGreaterThan(100);
   });
 
   test('A given literal constant can be read', () {
-    final typeDef =
-        win32Scope.findTypeDef('Windows.Win32.UI.WindowsAndMessaging.Apis');
+    final typeDef = win32Scope.findTypeDef(
+      'Windows.Win32.UI.WindowsAndMessaging.Apis',
+    );
     check(typeDef).isNotNull();
     final wmPaint = typeDef!.findField('WM_PAINT');
     check(wmPaint).isNotNull();
@@ -382,8 +407,9 @@ void main() {
   });
 
   test('Naked structs are generated correctly', () {
-    final typeDef =
-        win32Scope.findTypeDef('Windows.Win32.System.Threading.Apis');
+    final typeDef = win32Scope.findTypeDef(
+      'Windows.Win32.System.Threading.Apis',
+    );
     check(typeDef).isNotNull();
     final api = typeDef!.findMethod('InitializeProcThreadAttributeList');
     check(api).isNotNull();
@@ -399,14 +425,16 @@ void main() {
   });
 
   test('Enumerations contain correct entries', () {
-    final ropCode =
-        win32Scope.enums.firstWhere((en) => en.name.endsWith('ROP_CODE'));
+    final ropCode = win32Scope.enums.firstWhere(
+      (en) => en.name.endsWith('ROP_CODE'),
+    );
     check(ropCode.fields.length).equals(18);
   });
 
   test('A specific enumeration contains expected constants', () {
-    final ropCode =
-        win32Scope.enums.firstWhere((en) => en.name.endsWith('ROP_CODE'));
+    final ropCode = win32Scope.enums.firstWhere(
+      (en) => en.name.endsWith('ROP_CODE'),
+    );
     final srccopy = ropCode.findField('SRCCOPY');
     check(srccopy).isNotNull();
     check(srccopy!.value).isA<int>();
@@ -430,15 +458,18 @@ void main() {
     check(api).isNotNull();
     final param = api!.parameters[1];
     check(param.name).equals('lpFlags');
-    check(param.typeIdentifier.typeArg?.baseType)
-        .equals(BaseType.valueTypeModifier);
-    check(param.typeIdentifier.typeArg?.type?.parent?.name)
-        .equals('System.Enum');
+    check(
+      param.typeIdentifier.typeArg?.baseType,
+    ).equals(BaseType.valueTypeModifier);
+    check(
+      param.typeIdentifier.typeArg?.type?.parent?.name,
+    ).equals('System.Enum');
   });
 
   test('Get properties are appropriately marked', () {
-    final typeDef = win32Scope
-        .findTypeDef('Windows.Win32.Networking.NetworkListManager.INetwork');
+    final typeDef = win32Scope.findTypeDef(
+      'Windows.Win32.Networking.NetworkListManager.INetwork',
+    );
     check(typeDef).isNotNull();
     final api = typeDef!.findMethod('get_IsConnectedToInternet');
     check(api).isNotNull();
@@ -446,22 +477,25 @@ void main() {
   });
 
   test('Delegates are appropriately marked', () {
-    final delegate =
-        win32Scope.findTypeDef('Windows.Win32.Graphics.Gdi.MFENUMPROC');
+    final delegate = win32Scope.findTypeDef(
+      'Windows.Win32.Graphics.Gdi.MFENUMPROC',
+    );
     check(delegate).isNotNull();
     check(delegate!.isDelegate).isTrue();
   });
 
   test('Non-delegates are appropriately marked', () {
-    final notADelegate =
-        win32Scope.findTypeDef('Windows.Win32.System.SystemServices.Apis');
+    final notADelegate = win32Scope.findTypeDef(
+      'Windows.Win32.System.SystemServices.Apis',
+    );
     check(notADelegate).isNotNull();
     check(notADelegate!.isDelegate).isFalse();
   });
 
   test('Delegates are appropriately exposed', () {
-    final delegate =
-        win32Scope.findTypeDef('Windows.Win32.Graphics.Gdi.MFENUMPROC');
+    final delegate = win32Scope.findTypeDef(
+      'Windows.Win32.Graphics.Gdi.MFENUMPROC',
+    );
     check(delegate).isNotNull();
     final api = delegate!.findMethod('Invoke');
     check(api).isNotNull();
@@ -474,46 +508,53 @@ void main() {
   });
 
   test('Packing instructions are available', () {
-    final packedStruct =
-        win32Scope.findTypeDef('Windows.Win32.Graphics.Gdi.BITMAPFILEHEADER');
+    final packedStruct = win32Scope.findTypeDef(
+      'Windows.Win32.Graphics.Gdi.BITMAPFILEHEADER',
+    );
     check(packedStruct).isNotNull();
     check(packedStruct!.classLayout.packingAlignment).equals(2);
     check(packedStruct.classLayout.minimumSize).equals(0);
   });
   test('Packing instructions are available 2', () {
-    final packedStruct = win32Scope
-        .findTypeDef('Windows.Win32.Devices.Bluetooth.BTH_QUERY_SERVICE');
+    final packedStruct = win32Scope.findTypeDef(
+      'Windows.Win32.Devices.Bluetooth.BTH_QUERY_SERVICE',
+    );
     check(packedStruct).isNotNull();
     check(packedStruct!.classLayout.packingAlignment).equals(1);
     check(packedStruct.classLayout.minimumSize).equals(0);
   });
 
   test('Packing instructions are unavailable for an unpacked class', () {
-    final packedStruct = win32Scope
-        .findTypeDef('Windows.Win32.Devices.Bluetooth.BTH_RADIO_IN_RANGE');
+    final packedStruct = win32Scope.findTypeDef(
+      'Windows.Win32.Devices.Bluetooth.BTH_RADIO_IN_RANGE',
+    );
     check(packedStruct).isNotNull();
     check(packedStruct!.classLayout.packingAlignment).isNull();
     check(packedStruct.classLayout.minimumSize).isNull();
   });
 
   test('No crash when calling GetClassLayout on an enum', () {
-    final packedStruct =
-        win32Scope.findTypeDef('Windows.Win32.UI.Shell.KNOWN_FOLDER_FLAG');
+    final packedStruct = win32Scope.findTypeDef(
+      'Windows.Win32.UI.Shell.KNOWN_FOLDER_FLAG',
+    );
     check(packedStruct).isNotNull();
     check(packedStruct!.classLayout.packingAlignment).isNull();
     check(packedStruct.classLayout.minimumSize).isNull();
   });
 
   test('Attributes for an interface', () {
-    final interface =
-        win32Scope.findTypeDef('Windows.Win32.System.WinRT.IActivationFactory');
+    final interface = win32Scope.findTypeDef(
+      'Windows.Win32.System.WinRT.IActivationFactory',
+    );
     check(interface).isNotNull();
     check(interface!.customAttributes.length).isGreaterOrEqual(2);
     check(interface.customAttributes.map((attr) => attr.name)).contains(
-        'Windows.Win32.Foundation.Metadata.SupportedOSPlatformAttribute');
+      'Windows.Win32.Foundation.Metadata.SupportedOSPlatformAttribute',
+    );
 
     final supportedOS = interface.attributeAsString(
-        'Windows.Win32.Foundation.Metadata.SupportedOSPlatformAttribute');
+      'Windows.Win32.Foundation.Metadata.SupportedOSPlatformAttribute',
+    );
     check(supportedOS).equals('windows8.0');
   });
 

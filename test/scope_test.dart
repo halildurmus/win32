@@ -12,11 +12,12 @@ void main() {
     late Scope winrtScope;
 
     setUpAll(() async {
-      (wdkScope, win32Scope, winrtScope) = await (
-        MetadataStore.loadWdkMetadata(),
-        MetadataStore.loadWin32Metadata(),
-        MetadataStore.loadWinrtMetadata()
-      ).wait;
+      (wdkScope, win32Scope, winrtScope) =
+          await (
+            MetadataStore.loadWdkMetadata(),
+            MetadataStore.loadWin32Metadata(),
+            MetadataStore.loadWinrtMetadata(),
+          ).wait;
     });
 
     test('name is as expected', () {
@@ -69,96 +70,112 @@ void main() {
 
     test('typeDefs ', () {
       check(win32Scope.typeDefs.length).isGreaterOrEqual(30000);
-      final iunknown = win32Scope.typeDefs
-          .where((t) => t.name == 'Windows.Win32.System.Com.IUnknown')
-          .firstOrNull;
+      final iunknown =
+          win32Scope.typeDefs
+              .where((t) => t.name == 'Windows.Win32.System.Com.IUnknown')
+              .firstOrNull;
       check(iunknown).isNotNull();
 
       check(winrtScope.typeDefs.length).isGreaterOrEqual(10000);
-      final asyncInfo = winrtScope.typeDefs
-          .where((t) => t.name == 'Windows.Foundation.IAsyncInfo')
-          .firstOrNull;
+      final asyncInfo =
+          winrtScope.typeDefs
+              .where((t) => t.name == 'Windows.Foundation.IAsyncInfo')
+              .firstOrNull;
       check(asyncInfo).isNotNull();
     });
 
     test('classes ', () {
       check(win32Scope.classes.length).isGreaterOrEqual(2000);
-      final spVoice = win32Scope.classes
-          .where((t) => t.name == 'Windows.Win32.Media.Speech.SpVoice')
-          .firstOrNull;
+      final spVoice =
+          win32Scope.classes
+              .where((t) => t.name == 'Windows.Win32.Media.Speech.SpVoice')
+              .firstOrNull;
       check(spVoice).isNotNull();
       check(win32Scope.classes.every((t) => t.isClass)).isTrue();
 
       check(winrtScope.classes.length).isGreaterOrEqual(3000);
-      final propertyValue = winrtScope.classes
-          .where((t) => t.name == 'Windows.Foundation.PropertyValue')
-          .firstOrNull;
+      final propertyValue =
+          winrtScope.classes
+              .where((t) => t.name == 'Windows.Foundation.PropertyValue')
+              .firstOrNull;
       check(propertyValue).isNotNull();
       check(winrtScope.classes.every((t) => t.isClass)).isTrue();
     });
 
     test('delegates ', () {
       check(win32Scope.delegates.length).isGreaterOrEqual(2000);
-      final asyncCallback = win32Scope.delegates
-          .where((t) => t.name == 'Windows.Win32.Foundation.PROC')
-          .firstOrNull;
+      final asyncCallback =
+          win32Scope.delegates
+              .where((t) => t.name == 'Windows.Win32.Foundation.PROC')
+              .firstOrNull;
       check(asyncCallback).isNotNull();
       check(win32Scope.delegates.every((t) => t.isDelegate)).isTrue();
 
       check(winrtScope.delegates.length).isGreaterOrEqual(100);
-      final asyncActionCompletedHandler = winrtScope.delegates
-          .where(
-              (t) => t.name == 'Windows.Foundation.AsyncActionCompletedHandler')
-          .firstOrNull;
+      final asyncActionCompletedHandler =
+          winrtScope.delegates
+              .where(
+                (t) =>
+                    t.name == 'Windows.Foundation.AsyncActionCompletedHandler',
+              )
+              .firstOrNull;
       check(asyncActionCompletedHandler).isNotNull();
       check(winrtScope.delegates.every((t) => t.isDelegate)).isTrue();
     });
 
     test('enums ', () {
       check(win32Scope.enums.length).isGreaterOrEqual(6000);
-      final apttype = win32Scope.enums
-          .where((t) => t.name == 'Windows.Win32.System.Com.APTTYPE')
-          .firstOrNull;
+      final apttype =
+          win32Scope.enums
+              .where((t) => t.name == 'Windows.Win32.System.Com.APTTYPE')
+              .firstOrNull;
       check(apttype).isNotNull();
       check(win32Scope.enums.every((t) => t.isEnum)).isTrue();
 
       check(winrtScope.enums.length).isGreaterOrEqual(1000);
-      final asyncStatus = winrtScope.enums
-          .where((t) => t.name == 'Windows.Foundation.AsyncStatus')
-          .firstOrNull;
+      final asyncStatus =
+          winrtScope.enums
+              .where((t) => t.name == 'Windows.Foundation.AsyncStatus')
+              .firstOrNull;
       check(asyncStatus).isNotNull();
       check(winrtScope.enums.every((t) => t.isEnum)).isTrue();
     });
 
     test('interfaces ', () {
       check(win32Scope.interfaces.length).isGreaterOrEqual(6000);
-      final iunknown = win32Scope.interfaces
-          .where((t) => t.name == 'Windows.Win32.System.Com.IUnknown')
-          .firstOrNull;
+      final iunknown =
+          win32Scope.interfaces
+              .where((t) => t.name == 'Windows.Win32.System.Com.IUnknown')
+              .firstOrNull;
       check(iunknown).isNotNull();
       check(win32Scope.interfaces.every((t) => t.isInterface)).isTrue();
 
       check(winrtScope.interfaces.length).isGreaterOrEqual(6000);
-      final asyncActionWithProgress = winrtScope.interfaces
-          .where(
-              (t) => t.name == 'Windows.Foundation.IAsyncActionWithProgress`1')
-          .firstOrNull;
+      final asyncActionWithProgress =
+          winrtScope.interfaces
+              .where(
+                (t) =>
+                    t.name == 'Windows.Foundation.IAsyncActionWithProgress`1',
+              )
+              .firstOrNull;
       check(asyncActionWithProgress).isNotNull();
       check(winrtScope.interfaces.every((t) => t.isInterface)).isTrue();
     });
 
     test('structs ', () {
       check(win32Scope.structs.length).isGreaterOrEqual(10000);
-      final hwnd = win32Scope.structs
-          .where((t) => t.name == 'Windows.Win32.Foundation.HWND')
-          .firstOrNull;
+      final hwnd =
+          win32Scope.structs
+              .where((t) => t.name == 'Windows.Win32.Foundation.HWND')
+              .firstOrNull;
       check(hwnd).isNotNull();
       check(win32Scope.structs.every((t) => t.isStruct)).isTrue();
 
       check(winrtScope.structs.length).isGreaterOrEqual(90);
-      final point = winrtScope.structs
-          .where((t) => t.name == 'Windows.Foundation.Point')
-          .firstOrNull;
+      final point =
+          winrtScope.structs
+              .where((t) => t.name == 'Windows.Foundation.Point')
+              .firstOrNull;
       check(point).isNotNull();
       check(winrtScope.structs.every((t) => t.isStruct)).isTrue();
     });

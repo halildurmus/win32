@@ -10,15 +10,17 @@ void main() {
   late Scope winrtScope;
 
   setUpAll(() async {
-    (win32Scope, winrtScope) = await (
-      MetadataStore.loadWin32Metadata(),
-      MetadataStore.loadWinrtMetadata()
-    ).wait;
+    (win32Scope, winrtScope) =
+        await (
+          MetadataStore.loadWin32Metadata(),
+          MetadataStore.loadWinrtMetadata(),
+        ).wait;
   });
 
   test('Method properties 1', () {
-    final typeDef = winrtScope
-        .findTypeDef('Windows.Foundation.Diagnostics.AsyncCausalityTracer');
+    final typeDef = winrtScope.findTypeDef(
+      'Windows.Foundation.Diagnostics.AsyncCausalityTracer',
+    );
     check(typeDef).isNotNull();
     final method = typeDef!.findMethod('TraceSynchronousWorkCompletion');
     check(method).isNotNull();
@@ -27,15 +29,18 @@ void main() {
     check(method.isStatic).isTrue();
     check(method.isVirtual).isFalse();
     check(method.parent).equals(typeDef);
-    check(method.toString()).equals('[voidType] '
-        'TraceSynchronousWorkCompletion(CausalityTraceLevel traceLevel, '
-        'CausalitySource source, CausalitySynchronousWork work)');
+    check(method.toString()).equals(
+      '[voidType] '
+      'TraceSynchronousWorkCompletion(CausalityTraceLevel traceLevel, '
+      'CausalitySource source, CausalitySynchronousWork work)',
+    );
     check(method.vTableLayout).equals(VtableLayout.reuseSlot);
   });
 
   test('Method properties 2', () {
     final typeDef = winrtScope.findTypeDef(
-        'Windows.Foundation.Diagnostics.IAsyncCausalityTracerStatics');
+      'Windows.Foundation.Diagnostics.IAsyncCausalityTracerStatics',
+    );
     check(typeDef).isNotNull();
     final method = typeDef!.findMethod('TraceSynchronousWorkCompletion');
     check(method).isNotNull();
@@ -85,22 +90,26 @@ void main() {
     check(method.pinvokeMap.bestFitConvention).equals(BestFit.useAssem);
     check(method.pinvokeMap.importName).equals(methodName);
     check(method.pinvokeMap.isNoMangle).isTrue();
-    check(method.pinvokeMap.stringMarshalConvention)
-        .equals(StringMarshalConvention.notSpecified);
-    check(method.pinvokeMap.throwOnUnmappableCharConvention)
-        .equals(ThrowOnUnmappableChar.useAssem);
+    check(
+      method.pinvokeMap.stringMarshalConvention,
+    ).equals(StringMarshalConvention.notSpecified);
+    check(
+      method.pinvokeMap.throwOnUnmappableCharConvention,
+    ).equals(ThrowOnUnmappableChar.useAssem);
   });
 
   test('Methods with arrays have correct parameters', () {
-    final typeDef =
-        winrtScope.findTypeDef('Windows.Foundation.Diagnostics.ILoggingFields');
+    final typeDef = winrtScope.findTypeDef(
+      'Windows.Foundation.Diagnostics.ILoggingFields',
+    );
     check(typeDef).isNotNull();
     final method = typeDef!.findMethod('AddInt32Array');
     check(method).isNotNull();
     check(method!.parameters.length).equals(5);
     check(method.parameters.last.name).equals('tags');
-    check(method.parameters.last.typeIdentifier.baseType)
-        .equals(BaseType.int32Type);
+    check(
+      method.parameters.last.typeIdentifier.baseType,
+    ).equals(BaseType.int32Type);
   });
 
   tearDownAll(MetadataStore.close);

@@ -118,13 +118,13 @@ class Scope {
   }
 
   int get moduleToken => using((arena) {
-        final pmd = arena<mdModule>();
-        final hr = reader.getModuleFromScope(pmd);
-        if (FAILED(hr)) {
-          throw const WinmdException('Unable to find module token.');
-        }
-        return pmd.value;
-      });
+    final pmd = arena<mdModule>();
+    final hr = reader.getModuleFromScope(pmd);
+    if (FAILED(hr)) {
+      throw const WinmdException('Unable to find module token.');
+    }
+    return pmd.value;
+  });
 
   /// Get an enumerated list of modules in this scope.
   Iterable<ModuleRef> _getModuleRefs() {
@@ -156,13 +156,21 @@ class Scope {
       final rAssemblyRefs = arena<mdModuleRef>();
       final pcTokens = arena<ULONG>();
 
-      var hr =
-          assemblyImport.enumAssemblyRefs(phEnum, rAssemblyRefs, 1, pcTokens);
+      var hr = assemblyImport.enumAssemblyRefs(
+        phEnum,
+        rAssemblyRefs,
+        1,
+        pcTokens,
+      );
       while (hr == S_OK) {
         final assemblyToken = rAssemblyRefs.value;
         assemblies.add(AssemblyRef.fromToken(this, assemblyToken));
-        hr =
-            assemblyImport.enumAssemblyRefs(phEnum, rAssemblyRefs, 1, pcTokens);
+        hr = assemblyImport.enumAssemblyRefs(
+          phEnum,
+          rAssemblyRefs,
+          1,
+          pcTokens,
+        );
       }
       assemblyImport.closeEnum(phEnum.value);
     });
@@ -185,7 +193,11 @@ class Scope {
       while (hr == S_OK) {
         final stringToken = rgStrings.value;
         hr = reader.getUserString(
-            stringToken, szString, stringBufferSize, pchString);
+          stringToken,
+          szString,
+          stringBufferSize,
+          pchString,
+        );
         if (hr == S_OK) {
           userStrings.add(szString.toDartString());
         }
@@ -219,10 +231,9 @@ class Scope {
   PEKind get executableKind => PEKind(reader);
 
   String get version => using((arena) {
-        final pwzBuf = arena<WCHAR>(stringBufferSize).cast<Utf16>();
-        final pccBufSize = arena<DWORD>();
-        final hr =
-            reader.getVersionString(pwzBuf, stringBufferSize, pccBufSize);
-        return SUCCEEDED(hr) ? pwzBuf.toDartString() : '';
-      });
+    final pwzBuf = arena<WCHAR>(stringBufferSize).cast<Utf16>();
+    final pccBufSize = arena<DWORD>();
+    final hr = reader.getVersionString(pwzBuf, stringBufferSize, pccBufSize);
+    return SUCCEEDED(hr) ? pwzBuf.toDartString() : '';
+  });
 }

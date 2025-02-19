@@ -2,7 +2,7 @@ import 'dart:ffi';
 import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart';
+import 'package:win32/win32.dart' hide TokenType;
 
 import 'models/models.dart';
 import 'scope.dart';
@@ -38,12 +38,24 @@ class MemberRef extends TokenObject {
       final pcbSigBlob = arena<ULONG>();
 
       final reader = scope.reader;
-      final hr = reader.getMemberRefProps(token, ptk, szMember,
-          stringBufferSize, pchMember, ppvSigBlob, pcbSigBlob);
+      final hr = reader.getMemberRefProps(
+        token,
+        ptk,
+        szMember,
+        stringBufferSize,
+        pchMember,
+        ppvSigBlob,
+        pcbSigBlob,
+      );
       if (FAILED(hr)) throw WindowsException(hr);
 
-      return MemberRef(scope, token, ptk.value, szMember.toDartString(),
-          ppvSigBlob.value.asTypedList(pcbSigBlob.value));
+      return MemberRef(
+        scope,
+        token,
+        ptk.value,
+        szMember.toDartString(),
+        ppvSigBlob.value.asTypedList(pcbSigBlob.value),
+      );
     });
   }
 
