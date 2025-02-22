@@ -10,44 +10,57 @@ import 'exception.dart';
 /// See https://learn.microsoft.com/windows/win32/midl/mdmerge-and-metadata-files
 abstract final class MdMerge {
   /// Path to the `mdmerge.exe` executable.
-  static final executablePath = _getExecutablePath();
+  static final executablePath = _resolveExecutablePath();
 
   /// Retrieves the path to the `mdmerge.exe` executable.
   ///
-  /// This method attempts to locate the `mdmerge.exe` executable on the local
-  /// machine by inspecting the Windows SDK installation registry keys. It
-  /// determines the appropriate architecture based on the system's processor
+  /// Attempts to locate the `mdmerge.exe` executable by inspecting the Windows
+  /// SDK installation registry keys and determining the appropriate
   /// architecture.
   ///
-  /// Throws a [WinmdException] if it fails to retrieve the necessary
-  /// information about the installed Windows SDK.
-  static String _getExecutablePath() {
-    const path = r'SOFTWARE\WOW6432Node\Microsoft\Microsoft SDKs\Windows\v10.0';
-    final key = Registry.openPath(RegistryHive.localMachine, path: path);
-    final installationFolder = key.getStringValue('InstallationFolder');
-    final productVersion = key.getStringValue('ProductVersion');
-    key.close();
+  /// Throws a [WinmdException] if the necessary SDK information is not found.
+  static String _resolveExecutablePath() {
+    const registryPath =
+        r'SOFTWARE\WOW6432Node\Microsoft\Microsoft SDKs\Windows\v10.0';
+    final key = Registry.openPath(
+      RegistryHive.localMachine,
+      path: registryPath,
+    );
+    try {
+      final installationFolder = key.getStringValue('InstallationFolder');
+      final productVersion = key.getStringValue('ProductVersion');
+      if (installationFolder == null || productVersion == null) {
+        throw const WinmdException(
+          'Failed to retrieve Windows SDK installation information.',
+        );
+      }
 
-    if (installationFolder == null || productVersion == null) {
-      throw const WinmdException(
-        'Failed to get information of the installed Windows SDK.',
-      );
+      // Determine processor architecture.
+      final arch = switch (Platform.environment['PROCESSOR_ARCHITECTURE']) {
+        'ARM64' => 'arm64',
+        _ => 'x64',
+      };
+
+      final mdmergeExePath =
+          '$installationFolder\\bin\\$productVersion.0\\$arch\\mdmerge.exe';
+      if (!File(mdmergeExePath).existsSync()) {
+        throw WinmdException('mdmerge.exe not found at $mdmergeExePath');
+      }
+      return mdmergeExePath;
+    } finally {
+      key.close();
     }
-
-    final arch = switch (Platform.environment['PROCESSOR_ARCHITECTURE']) {
-      'ARM64' => 'arm64',
-      _ => 'x64',
-    };
-
-    return '${installationFolder}bin\\$productVersion.0\\$arch\\mdmerge.exe';
   }
 
   /// Merges multiple WinRT metadata (`.winmd`) files located in [metadataPath]
   /// into a single file at [outputPath].
+  ///
+  /// This method synchronously runs the mdmerge process and validates its exit
+  /// code. If mdmerge fails, it throws a [WinmdException] with the process
+  /// output.
   static void mergeMetadata(String metadataPath, String outputPath) {
     const namespaceDepth = 1;
-    print('Merging WinRT Metadata files into single file...');
-    Process.runSync(executablePath, [
+    final result = Process.runSync(executablePath, [
       '-o',
       outputPath,
       '-i',
@@ -55,5 +68,11 @@ abstract final class MdMerge {
       '-n',
       '$namespaceDepth',
     ], workingDirectory: metadataPath);
+    if (result.exitCode != 0) {
+      throw WinmdException(
+        'mdmerge failed with exit code ${result.exitCode}. '
+        'Stdout: ${result.stdout}\nStderr: ${result.stderr}',
+      );
+    }
   }
 }

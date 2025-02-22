@@ -32,77 +32,40 @@
 /// scope through one of the static methods of the `MetadataStore` class, which
 /// caches retrieved scopes.
 ///
-/// To retrieve the latest Win32 metadata scope, you can use the following code:
+/// For example, to retrieve the latest Win32 metadata scope, you can use the
+/// following code:
 ///
 /// ```dart
-/// final scope = await MetadataStore.loadWin32Metadata();
+/// final scope = await MetadataStore.loadWin32Scope();
 /// ```
 ///
-/// By default, the `loadWin32Metadata` method downloads the latest version of
+/// By default, the `loadWin32Scope` method downloads the latest version of
 /// the NuGet package `Microsoft.Windows.SDK.Win32Metadata` and loads the
 /// metadata from it. If you prefer a different version, you can specify the
 /// `version` string as a parameter:
 ///
 /// ```dart
 /// final scope =
-///   await MetadataStore.loadWin32Metadata(version: '52.0.65-preview');
-/// ```
-///
-/// To retrieve the latest WinRT metadata scope, you can use the following code:
-///
-/// ```dart
-/// final scope = await MetadataStore.loadWinrtMetadata();
-/// ```
-///
-/// Similar to the Win32 counterpart, the `loadWinrtMetadata` method downloads
-/// the latest version of the NuGet package `Microsoft.Windows.SDK.Contracts`
-/// and loads the metadata from it. If you prefer a different version, you can
-/// specify the `version` string as a parameter:
-///
-/// ```dart
-/// final scope =
-///   await MetadataStore.loadWinrtMetadata(version: '10.0.22621.755');
-/// ```
-///
-/// To retrieve the latest WDK metadata scope, you can use the following code:
-///
-/// ```dart
-/// // Win32 metadata also needs to be loaded to resolve references from WDK
-/// // metadata
-/// await MetadataStore.loadWin32Metadata();
-///
-/// final scope = await MetadataStore.loadWdkMetadata();
-/// ```
-///
-/// By default, the `loadWdkMetadata` method downloads the latest version of
-/// the NuGet package `Microsoft.Windows.WDK.Win32Metadata` and loads the
-/// metadata from it. If you prefer a different version, you can specify the
-/// `version` string as a parameter:
-///
-/// ```dart
-/// final scope =
-///   await MetadataStore.loadWdkMetadata(version: '0.9.9-experimental');
-/// ```
-///
-/// **Note:** If the metadata you want to load has already been downloaded and
-/// stored locally, `loadWdkMetadata`, `loadWin32Metadata`, or
-/// `loadWinrtMetadata` will load the metadata from the local storage instead of
-/// downloading it again.
-///
-/// You can get the list of downloaded NuGet packages as follows:
-///
-/// ```dart
-/// for (final package in LocalStorage.packages) {
-///   print(package);
-/// }
+///   await MetadataStore.loadWin32Scope(version: '52.0.65-preview');
 /// ```
 ///
 /// Alternatively, a scope can be obtained directly from a
 /// Windows Metadata (.winmd) file, as follows:
 ///
 /// ```dart
-/// final scope =
-///   MetadataStore.loadMetadataFromFile(File('path/to/file.winmd'));
+/// final scope = MetadataStore.loadScopeFromFile(File('path/to/file.winmd'));
+/// ```
+///
+/// **Note:** If the metadata you want to load has already been downloaded and
+/// stored locally, `loadWdkScope`, `loadWin32Scope`, or `loadWinrtScope` will
+/// load the metadata from the local storage instead of downloading it again.
+///
+/// You can get the list of all package directories stored locally as follows:
+///
+/// ```dart
+/// for (final directory in LocalStorageManager.storedPackageDirectories) {
+///   print(directory);
+/// }
 /// ```
 ///
 /// From this point, the `scope` object can be interrogated for its children,

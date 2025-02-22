@@ -19,64 +19,36 @@ include their own metadata.
 
 ## Usage
 
-### Windows Runtime (WinRT)
-
-Load the [MediaPlayer][media_player_link] class and print out its methods.
-
-```dart
-import 'package:winmd/winmd.dart';
-
-void main() async {
-  // Load the WinRT metadata
-  final scope = await MetadataStore.loadWinrtMetadata();
-
-  // A Windows Runtime class
-  const typeToGenerate = 'Windows.Media.Playback.MediaPlayer';
-
-  // Find the TypeDef for this class
-  final typeDef = scope.findTypeDef(typeToGenerate)!;
-
-  // Create a Dart projection
-  print('$typeToGenerate contains the following methods:');
-
-  for (final method in typeDef.methods) {
-    print('  ${method.name}');
-  }
-
-  MetadataStore.close();
-}
-```
-
-### Win32
-
-Load the `MessageBoxW` function and print out its parameters and return type.
+A simple example that loads the `MessageBoxW` function and prints out its
+parameters and return type:
 
 ```dart
 import 'package:winmd/winmd.dart';
 
 void main() async {
-  // Load the Win32 metadata
-  final scope = await MetadataStore.loadWin32Metadata();
+  // Load the Win32 metadata.
+  final scope = await MetadataStore.loadWin32Scope();
 
-  // Find a namespace
+  // Find a namespace.
   final namespace =
       scope.findTypeDef('Windows.Win32.UI.WindowsAndMessaging.Apis')!;
 
-  // Sort the functions alphabetically
-  final sortedMethods = namespace.methods
-    ..sort((a, b) => a.name.compareTo(b.name));
+  // Sort the functions alphabetically.
+  final sortedMethods =
+      namespace.methods..sort((a, b) => a.name.compareTo(b.name));
 
-  // Find a specific function
+  // Find a specific function.
   const funcName = 'MessageBoxW';
   final method = sortedMethods.firstWhere((m) => m.name == funcName);
 
-  // Print out some information about it
+  // Print out some information about it.
   print('Win32 function $funcName [token #${method.token}]');
 
-  // Retrieve its parameters and project them into Dart FFI types
+  // Retrieve its parameters and project them into Dart FFI types.
   final params = method.parameters
-      .map((param) =>
-          '${param.typeIdentifier.name.split('.').last} ${param.name}')
+      .map(
+        (param) => '${param.typeIdentifier.name.split('.').last} ${param.name}',
+      )
       .join(', ');
   print('The parameters are:\n  $params');
 
@@ -87,49 +59,7 @@ void main() async {
 }
 ```
 
-### Windows Driver Kit (WDK)
-
-Load the `NtQuerySystemInformation` function and print out its parameters and
-return type.
-
-```dart
-import 'package:winmd/winmd.dart';
-
-void main() async {
-  // Win32 metadata also needs to be loaded to resolve references from WDK
-  // metadata
-  await MetadataStore.loadWin32Metadata();
-  // Load the WDK metadata
-  final scope = await MetadataStore.loadWdkMetadata();
-
-  // Find a namespace
-  final namespace =
-      scope.findTypeDef('Windows.Wdk.System.SystemInformation.Apis')!;
-
-  // Sort the functions alphabetically
-  final sortedMethods = namespace.methods
-    ..sort((a, b) => a.name.compareTo(b.name));
-
-  // Find a specific function
-  const funcName = 'NtQuerySystemInformation';
-  final method = sortedMethods.firstWhere((m) => m.name == funcName);
-
-  // Print out some information about it
-  print('Win32 function $funcName [token #${method.token}]');
-
-  // Retrieve its parameters and project them into Dart FFI types
-  final params = method.parameters
-      .map((param) =>
-          '${param.typeIdentifier.name.split('.').last} ${param.name}')
-      .join(', ');
-  print('The parameters are:\n  $params');
-
-  final returnType = method.returnType.typeIdentifier.name.split('.').last;
-  print('It returns type: $returnType.');
-
-  MetadataStore.close();
-}
-```
+More examples can be found in the [example] subdirectory.
 
 ## Packages built on winmd
 
@@ -146,12 +76,12 @@ Please file feature requests and bugs at the
 [ci_link]: https://github.com/halildurmus/winmd/actions/workflows/winmd.yml
 [codecov_badge_link]: https://codecov.io/gh/halildurmus/winmd/branch/main/graph/badge.svg?token=1ouz1Jr9nW
 [codecov_link]: https://codecov.io/gh/halildurmus/winmd
+[example]: https://github.com/halildurmus/winmd/tree/main/example
 [issue_tracker_link]: https://github.com/halildurmus/winmd/issues
 [language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
 [language_link]: https://dart.dev
 [license_badge]: https://img.shields.io/github/license/halildurmus/winmd?color=blue
 [license_link]: https://opensource.org/licenses/BSD-3-Clause
-[media_player_link]: https://learn.microsoft.com/uwp/api/windows.media.playback.mediaplayer
 [package_badge]: https://img.shields.io/pub/v/winmd.svg
 [package_link]: https://pub.dev/packages/winmd
 [publisher_badge]: https://img.shields.io/pub/publisher/winmd.svg

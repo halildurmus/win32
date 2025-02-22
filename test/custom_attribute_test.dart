@@ -12,8 +12,8 @@ void main() {
   setUpAll(() async {
     (win32Scope, winrtScope) =
         await (
-          MetadataStore.loadWin32Metadata(),
-          MetadataStore.loadWinrtMetadata(),
+          MetadataStore.loadWin32Scope(),
+          MetadataStore.loadWinrtScope(),
         ).wait;
   });
 
@@ -129,7 +129,7 @@ void main() {
     final typeDef = win32Scope.findTypeDef('Windows.Win32.Foundation.HWND');
     check(typeDef).isNotNull();
     check(
-      typeDef!.existsAttribute(
+      typeDef!.hasAttribute(
         'Windows.Win32.Foundation.Metadata.NativeTypedefAttribute',
       ),
     ).isTrue();
@@ -138,9 +138,7 @@ void main() {
   test('Missing attributes are not found', () {
     final typeDef = win32Scope.findTypeDef('Windows.Win32.Foundation.HWND');
     check(typeDef).isNotNull();
-    check(
-      typeDef!.existsAttribute('Windows.SparklesTheCatAttribute'),
-    ).isFalse();
+    check(typeDef!.hasAttribute('Windows.SparklesTheCatAttribute')).isFalse();
   });
 
   test('Uint16 and Uint8', () {

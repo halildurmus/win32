@@ -14,9 +14,9 @@ void main() {
     setUpAll(() async {
       (wdkScope, win32Scope, winrtScope) =
           await (
-            MetadataStore.loadWdkMetadata(),
-            MetadataStore.loadWin32Metadata(),
-            MetadataStore.loadWinrtMetadata(),
+            MetadataStore.loadWdkScope(),
+            MetadataStore.loadWin32Scope(),
+            MetadataStore.loadWinrtScope(),
           ).wait;
     });
 

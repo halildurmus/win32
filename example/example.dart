@@ -11,7 +11,7 @@ void printHeading(String heading) {
 void listTokens([String type = 'Windows.Devices.Bluetooth.BluetoothAdapter']) {
   printHeading('Typedefs in the metadata file containing $type');
 
-  final scope = MetadataStore.getScopeForType(type);
+  final scope = MetadataStore.findScope(type);
   final typeDefs = scope.typeDefs.take(10);
 
   for (final type in typeDefs) {
@@ -25,7 +25,7 @@ void listTokens([String type = 'Windows.Devices.Bluetooth.BluetoothAdapter']) {
 void listEnums([String namespace = 'Windows.Globalization']) {
   printHeading('Enums implemented by $namespace');
 
-  final scope = MetadataStore.getScopeForType(namespace);
+  final scope = MetadataStore.findScope(namespace);
   final enums = scope.enums.where(
     (typeDef) => typeDef.name.startsWith(namespace),
   );
@@ -38,7 +38,7 @@ void listEnums([String namespace = 'Windows.Globalization']) {
 void listStructs([String namespace = 'Windows.Foundation']) {
   printHeading('Structs implemented by $namespace');
 
-  final scope = MetadataStore.getScopeForType(namespace);
+  final scope = MetadataStore.findScope(namespace);
   final structs = scope.structs.where(
     (typeDef) => typeDef.name.startsWith(namespace),
   );
@@ -53,7 +53,7 @@ void listMethods([
 ]) {
   printHeading('First ten methods of $type');
 
-  final typeDef = MetadataStore.getMetadataForType(type)!;
+  final typeDef = MetadataStore.findTypeDef(type)!;
   final methods = typeDef.methods.take(10);
 
   print(methods.map(methodSignature).join('\n'));
@@ -65,7 +65,7 @@ void listParameters([
 ]) {
   printHeading('Parameters of $methodName in $type');
 
-  final typeDef = MetadataStore.getMetadataForType(type)!;
+  final typeDef = MetadataStore.findTypeDef(type)!;
   final method = typeDef.findMethod(methodName)!;
 
   print(
@@ -89,7 +89,7 @@ void listParameters([
 void listInterfaces([String type = 'Windows.Storage.Pickers.FolderPicker']) {
   printHeading('First 5 interfaces implemented by $type');
 
-  final typeDef = MetadataStore.getMetadataForType(type)!;
+  final typeDef = MetadataStore.findTypeDef(type)!;
   final interfaces = typeDef.interfaces.take(5);
 
   print('$type implements:');
@@ -102,7 +102,7 @@ void listInterfaces([String type = 'Windows.Storage.Pickers.FolderPicker']) {
 void listGUID([String type = 'Windows.UI.Shell.IAdaptiveCard']) {
   printHeading('GUID for $type');
 
-  final typeDef = MetadataStore.getMetadataForType(type)!;
+  final typeDef = MetadataStore.findTypeDef(type)!;
   print(typeDef.guid);
 }
 
@@ -167,7 +167,7 @@ String convertTypeToProjection([
   printHeading('A pseudo-code representation of the $type type');
 
   final idlProjection = StringBuffer();
-  final typeDef = MetadataStore.getMetadataForType(type)!;
+  final typeDef = MetadataStore.findTypeDef(type)!;
 
   final vTableStart = switch (typeDef.parent?.name) {
     'IUnknown' || 'System.MulticastDelegate' => 3,
@@ -187,9 +187,11 @@ String convertTypeToProjection([
 }
 
 void main(List<String> args) async {
-  await MetadataStore.loadWdkMetadata();
-  await MetadataStore.loadWin32Metadata();
-  await MetadataStore.loadWinrtMetadata();
+  await (
+    MetadataStore.loadWdkScope(),
+    MetadataStore.loadWin32Scope(),
+    MetadataStore.loadWinrtScope(),
+  ).wait;
 
   listTokens();
   listInterfaces();

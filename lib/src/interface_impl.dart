@@ -13,7 +13,7 @@ import 'type_def.dart';
 /// Records the interfaces a type implements explicitly.
 class InterfaceImpl extends TokenObject with CustomAttributesMixin {
   InterfaceImpl(super.scope, super.token)
-    : _classInterfacePair = processInterfaceImplToken(
+    : _classInterfacePair = _processInterfaceImplToken(
         scope.reader,
         scope,
         token,
@@ -27,11 +27,11 @@ class InterfaceImpl extends TokenObject with CustomAttributesMixin {
 
   /// Whether the [interface] is the `default` interface for the [class_].
   bool get isDefault =>
-      existsAttribute('Windows.Foundation.Metadata.DefaultAttribute');
+      hasAttribute('Windows.Foundation.Metadata.DefaultAttribute');
 
   /// Converts an interface implementation token (0x09) into a tuple of [class_]
   /// and [interface].
-  static ({TypeDef class_, TypeDef interface}) processInterfaceImplToken(
+  static ({TypeDef class_, TypeDef interface}) _processInterfaceImplToken(
     IMetaDataImport2 reader,
     Scope scope,
     int token,

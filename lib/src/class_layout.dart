@@ -10,7 +10,7 @@ import 'token_object.dart';
 /// Layout information for the class referenced by a specified token.
 class ClassLayout extends TokenObject {
   ClassLayout(Scope scope, int classToken) : super(scope, classToken) {
-    // Check for synthetic type like GUID
+    // Check for synthetic type like GUID.
     if (classToken == 0) return;
 
     using((arena) {

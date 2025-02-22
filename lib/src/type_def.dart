@@ -91,7 +91,7 @@ class TypeDef extends TokenObject
       // Is it an AssemblyRef that is not part of .NET? If so, we need to load
       // the scope that contains it. Note that we are currently ignoring .NET
       // types, since they are intrinsics like System.ValueType. They're also
-      // not loadable with getScopeForType, but that's moot.
+      // not loadable with `MetadataStore.findScope`, but that's moot.
       if (TokenType.fromToken(resolutionScopeToken) == TokenType.assemblyRef) {
         final AssemblyRef(:name) = AssemblyRef.fromToken(
           scope,
@@ -99,11 +99,11 @@ class TypeDef extends TokenObject
         );
         if (name != 'netstandard' && /* .NET */
             name != 'mscorlib' /* .NET Framework */ ) {
-          final newScope = MetadataStore.getScopeForType(typeName);
+          final newScope = MetadataStore.findScope(typeName);
           final typeDef = newScope.findTypeDef(typeName);
           if (typeDef == null) {
             throw WinmdException(
-              "Can't find type $typeName in the ${newScope.name} scope.",
+              "Can't find type `$typeName` in the `${newScope.name}` scope.",
             );
           }
 
@@ -496,15 +496,12 @@ class TypeDef extends TokenObject
   }
 
   /// Find the default interface for this type if it is a runtime class.
-  TypeDef get defaultInterface {
+  TypeDef? get defaultInterface {
     assert(
       TokenType.fromToken(token) == TokenType.typeDef,
       'Token $token is not a typeDef token',
     );
-    assert(
-      isWindowsRuntime && isClass,
-      'Type $name is not a Windows Runtime class',
-    );
+    if (!isWindowsRuntime || !isClass) return null;
 
     return using((arena) {
       final phEnum = arena<HCORENUM>();
@@ -521,7 +518,7 @@ class TypeDef extends TokenObject
         hr = reader.enumInterfaceImpls(phEnum, token, rImpls, 1, pcImpls);
       }
       reader.closeEnum(phEnum.value);
-      throw WinmdException('No default interface found for $name.');
+      return null;
     });
   }
 
@@ -683,7 +680,7 @@ class TypeDef extends TokenObject
           : null;
 
   /// Gets a named custom attribute that is stored as a GUID.
-  String? getCustomGUIDAttribute(String guidAttributeName) => using((arena) {
+  String? _getCustomGuidAttribute(String guidAttributeName) => using((arena) {
     final ptrAttributeName = guidAttributeName.toNativeUtf16(allocator: arena);
     final ppData = arena<Pointer<BYTE>>();
     final pcbData = arena<ULONG>();
@@ -710,8 +707,10 @@ class TypeDef extends TokenObject
   ///
   /// Returns null if a GUID couldn't be found.
   String? get guid =>
-      getCustomGUIDAttribute('Windows.Foundation.Metadata.GuidAttribute') ??
-      getCustomGUIDAttribute('Windows.Win32.Foundation.Metadata.GuidAttribute');
+      _getCustomGuidAttribute('Windows.Foundation.Metadata.GuidAttribute') ??
+      _getCustomGuidAttribute(
+        'Windows.Win32.Foundation.Metadata.GuidAttribute',
+      );
 
   @override
   String toString() => name;

@@ -63,7 +63,10 @@ class AssemblyRef extends TokenObject {
     });
   }
 
+  /// The name of the assembly.
   final String name;
+
+  /// The version of the assembly.
   final String version;
 
   @override

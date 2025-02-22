@@ -35,6 +35,7 @@ class ModuleRef extends TokenObject with CustomAttributesMixin {
     });
   }
 
+  /// The name of the module.
   final String name;
 
   @override

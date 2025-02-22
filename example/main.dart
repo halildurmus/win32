@@ -3,16 +3,16 @@
 import 'package:winmd/winmd.dart';
 
 void main() async {
-  // Load the WinRT metadata
-  final scope = await MetadataStore.loadWinrtMetadata();
+  // Load the WinRT metadata.
+  final scope = await MetadataStore.loadWinrtScope();
 
-  // A Windows Runtime class
+  // A Windows Runtime class.
   const typeToGenerate = 'Windows.Media.Playback.MediaPlayer';
 
-  // Find the TypeDef for this class
+  // Find the TypeDef for this class.
   final typeDef = scope.findTypeDef(typeToGenerate)!;
 
-  // Create a Dart projection
+  // Create a Dart projection.
   print('$typeToGenerate contains the following methods:');
 
   for (final method in typeDef.methods) {

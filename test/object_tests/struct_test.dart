@@ -11,7 +11,7 @@ void main() {
   late Scope scope;
 
   setUpAll(() async {
-    scope = await MetadataStore.loadWin32Metadata();
+    scope = await MetadataStore.loadWin32Scope();
   });
 
   // .class public sequential ansi sealed beforefieldinit Windows.Win32.UI.WindowsAndMessaging.ACCEL

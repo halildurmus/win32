@@ -11,7 +11,7 @@ void main() {
   late Scope scope;
 
   setUpAll(() async {
-    scope = await MetadataStore.loadWin32Metadata();
+    scope = await MetadataStore.loadWin32Scope();
   });
 
   // .method public hidebysig static pinvokeimpl("USER32.dll" nomangle lasterr winapi)

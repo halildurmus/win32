@@ -12,8 +12,8 @@ void main() {
   setUpAll(() async {
     (win32Scope, winrtScope) =
         await (
-          MetadataStore.loadWin32Metadata(),
-          MetadataStore.loadWinrtMetadata(),
+          MetadataStore.loadWin32Scope(),
+          MetadataStore.loadWinrtScope(),
         ).wait;
   });
 
@@ -155,18 +155,20 @@ void main() {
   );
 
   group('defaultInterface', () {
-    test('throws an AssertionError if the TypeDef is not a runtime class', () {
+    test('returns null if the TypeDef is not a runtime class', () {
       final typeDef = winrtScope.findTypeDef('Windows.Networking.IHostName');
       check(typeDef).isNotNull();
       check(typeDef!.name).endsWith('IHostName');
-      check(() => typeDef.defaultInterface).throws<AssertionError>();
+      check(typeDef.defaultInterface).isNull();
     });
 
     test('returns the correct default interface for a runtime class', () {
       final typeDef = winrtScope.findTypeDef('Windows.Networking.HostName');
       check(typeDef).isNotNull();
       check(typeDef!.name).endsWith('HostName');
-      check(typeDef.defaultInterface.name).endsWith('IHostName');
+      check(
+        typeDef.defaultInterface,
+      ).isNotNull().has((it) => it.name, 'name').endsWith('IHostName');
     });
   });
 

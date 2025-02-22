@@ -11,7 +11,7 @@ void main() {
   late Scope scope;
 
   setUpAll(() async {
-    scope = await MetadataStore.loadWinrtMetadata();
+    scope = await MetadataStore.loadWinrtScope();
   });
 
   // .class interface public auto ansi abstract import windowsruntime Windows.Foundation.IAsyncInfo

@@ -7,7 +7,7 @@ import 'package:winmd/winmd.dart';
 
 void main() {
   test('Generic parameter has appropriate values', () async {
-    final scope = await MetadataStore.loadWinrtMetadata();
+    final scope = await MetadataStore.loadWinrtScope();
     const interfaceName = 'Windows.Foundation.IAsyncOperationWithProgress`2';
     final typeDef = scope.findTypeDef(interfaceName);
     check(typeDef).isNotNull();

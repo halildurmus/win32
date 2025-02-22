@@ -4,25 +4,25 @@
 import 'package:winmd/winmd.dart';
 
 void main() async {
-  // Load the Win32 metadata
-  final scope = await MetadataStore.loadWin32Metadata();
+  // Load the Win32 metadata.
+  final scope = await MetadataStore.loadWin32Scope();
 
-  // Find a namespace
+  // Find a namespace.
   final namespace =
       scope.findTypeDef('Windows.Win32.UI.WindowsAndMessaging.Apis')!;
 
-  // Sort the functions alphabetically
+  // Sort the functions alphabetically.
   final sortedMethods =
       namespace.methods..sort((a, b) => a.name.compareTo(b.name));
 
-  // Find a specific function
+  // Find a specific function.
   const funcName = 'MessageBoxW';
   final method = sortedMethods.firstWhere((m) => m.name == funcName);
 
-  // Print out some information about it
+  // Print out some information about it.
   print('Win32 function $funcName [token #${method.token}]');
 
-  // Retrieve its parameters and project them into Dart FFI types
+  // Retrieve its parameters and project them into Dart FFI types.
   final params = method.parameters
       .map(
         (param) => '${param.typeIdentifier.name.split('.').last} ${param.name}',

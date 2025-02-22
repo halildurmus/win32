@@ -3,7 +3,7 @@ import 'package:winmd/winmd.dart';
 
 void main() async {
   // Load the Win32 metadata
-  final scope = await MetadataStore.loadWin32Metadata();
+  final scope = await MetadataStore.loadWin32Scope();
 
   // Find a namesapce
   final struct =

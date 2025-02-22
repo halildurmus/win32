@@ -1,10 +1,10 @@
 import 'dart:ffi';
 import 'dart:io';
-import 'dart:typed_data';
 
-import 'package:archive/archive_io.dart';
 import 'package:ffi/ffi.dart';
+import 'package:logging/logging.dart';
 import 'package:nuget/nuget.dart';
+import 'package:path/path.dart' as p;
 import 'package:win32/win32.dart';
 
 import 'models/models.dart';
@@ -18,15 +18,36 @@ import 'type_def.dart';
 /// Use this class to obtain a reference of a scope without creating unnecessary
 /// copies or cycles.
 abstract final class MetadataStore {
-  static final scopeCache = <String, Scope>{};
   static IMetaDataDispenser? _dispenser;
-  static NuGetClient? _nugetClient;
   static bool _isInitialized = false;
+  static LocalStorageManager? _localStorageManager;
+  static NuGetClient? _nugetClient;
+  static final _scopeCache = <String, Scope>{};
 
-  /// Initializes the [MetadataStore] object.
+  /// Returns debugging information about the [scopeCache].
+  static String get cacheInfo => '[${_scopeCache.keys.join(', ')}]';
+
+  /// Returns the cached [Scope]s.
+  static Map<String, Scope> get scopeCache => Map.unmodifiable(_scopeCache);
+
+  /// The [Logger] used for this class.
+  static Logger logger =
+      Logger('')
+        ..level = Level.INFO
+        ..onRecord.listen((record) {
+          print(
+            '[${record.level.name}] ${_formatTimestamp(record.time)}: '
+            '${record.message}',
+          );
+        });
+
+  /// Initializes the [MetadataStore].
   ///
-  /// This is performed automatically by any method that utilizes it.
+  /// Must be called automatically before any metadata operations. Allocates
+  /// native resources and creates the required COM objects.
   static void initialize() {
+    if (_isInitialized) return;
+
     // This must have the same object lifetime as MetadataStore itself.
     final dispenserObject = calloc<COMObject>();
     final clsidCorMetaDataDispenser = convertToCLSID(
@@ -46,39 +67,40 @@ abstract final class MetadataStore {
       }
 
       _dispenser = IMetaDataDispenser(dispenserObject)..detach();
+      _localStorageManager = LocalStorageManager();
       _nugetClient = NuGetClient();
       _isInitialized = true;
+      logger.fine('MetadataStore initialized.');
     } finally {
       free(clsidCorMetaDataDispenser);
       free(iidIMetaDataDispenser);
     }
   }
 
-  /// Returns the metadata for a specific Windows [typeName].
+  /// Disposes of all objects and clears the [scopeCache].
   ///
-  /// Given a [typeName] (e.g., `Windows.Globalization.Calendar`), this
-  /// method retrieves the associated metadata information.
-  ///
-  /// Returns `null` if metadata is not found.
-  ///
-  /// Throws an [ArgumentError] if [typeName] is empty or does not start with
-  /// `Windows`.
-  static TypeDef? getMetadataForType(String typeName) {
-    final scope = getScopeForType(typeName);
-    return scope.findTypeDef(typeName);
+  /// It's a good practice to call this method when you're done using the
+  /// [MetadataStore].
+  static void close() {
+    if (!_isInitialized) return;
+    assert(_dispenser != null, 'Metadata dispenser is not initialized.');
+    assert(_nugetClient != null, 'NuGet client is not initialized.');
+    _scopeCache.clear();
+    _dispenser!.release();
+    free(_dispenser!.ptr);
+    _dispenser = null;
+    _localStorageManager = null;
+    _nugetClient!.close();
+    _nugetClient = null;
+    _isInitialized = false;
+    logger.fine('MetadataStore closed.');
   }
 
-  /// Returns the scope for a specific Windows [typeName].
+  /// Finds and returns the metadata scope for the given fully qualified
+  /// [typeName] (e.g., `Windows.Globalization.Calendar`).
   ///
-  /// Given a [typeName] (e.g., `Windows.Globalization.Calendar`), this method
-  /// retrieves the scope containing the associated metadata.
-  ///
-  /// Throws an [ArgumentError] if [typeName] is empty or does not start with
-  /// `Windows`.
-  ///
-  /// Throws a [WinmdException] if the metadata scope is not found or if it
-  /// requires loading the WDK, Win32, or WinRT metadata first.
-  static Scope getScopeForType(String typeName) {
+  /// Throws a [WinmdException] if the scope is not loaded.
+  static Scope findScope(String typeName) {
     if (typeName.isEmpty) {
       throw ArgumentError.value(typeName, 'typeName', 'Must not be empty.');
     }
@@ -94,51 +116,66 @@ abstract final class MetadataStore {
     if (!_isInitialized) initialize();
 
     if (typeName.startsWith('Windows.Wdk')) {
-      final assetName = MetadataType.wdk.assetName;
-      if (scopeCache.containsKey(assetName)) return scopeCache[assetName]!;
-
+      final assetName = MetadataPackage.wdk.assetName;
+      if (_scopeCache.containsKey(assetName)) {
+        logger.fine('Found cached WDK scope for "$typeName".');
+        return _scopeCache[assetName]!;
+      }
       throw WinmdException(
-        'Metadata scope for `$typeName` could not be found. Please ensure '
-        'that you load the WDK metadata first by calling '
-        '`loadWdkMetadata()`.',
+        'Scope for `$typeName` not found. Please load the WDK scope by '
+        'calling `loadWdkScope()`.',
       );
     }
 
     if (typeName.startsWith('Windows.Win32')) {
-      final assetName = MetadataType.win32.assetName;
-      if (scopeCache.containsKey(assetName)) return scopeCache[assetName]!;
-
+      final assetName = MetadataPackage.win32.assetName;
+      if (_scopeCache.containsKey(assetName)) {
+        logger.fine('Found cached Win32 scope for "$typeName".');
+        return _scopeCache[assetName]!;
+      }
       throw WinmdException(
-        'Metadata scope for `$typeName` could not be found. Please ensure '
-        'that you load the Win32 metadata first by calling '
-        '`loadWin32Metadata()`.',
+        'Scope for `$typeName` not found. Please load the Win32 scope by '
+        'calling `loadWin32Scope()`.',
       );
     }
 
     if (typeName.startsWith('Windows')) {
-      final assetName = MetadataType.winrt.assetName;
-      if (scopeCache.containsKey(assetName)) return scopeCache[assetName]!;
-
+      final assetName = MetadataPackage.winrt.assetName;
+      if (_scopeCache.containsKey(assetName)) {
+        logger.fine('Found cached WinRT scope for "$typeName".');
+        return _scopeCache[assetName]!;
+      }
       throw WinmdException(
-        'Metadata scope for `$typeName` could not be found. Please ensure '
-        'that you load the WinRT metadata first by calling '
-        '`loadWinrtMetadata()`.',
+        'Scope for `$typeName` not found. Please load the WinRT scope by '
+        'calling `loadWinrtScope()`.',
       );
     }
 
-    throw WinmdException('Could not find metadata scope for $typeName.');
+    throw WinmdException('Could not find scope for `$typeName`.');
   }
 
-  /// Loads Windows Metadata from a specified [file].
+  /// Finds and returns the type definition for the fully qualified
+  /// [typeName] (e.g., `Windows.Globalization.Calendar`).
   ///
-  /// Given a [file], this method loads the metadata from the file and returns
-  /// it as a [Scope] object.
+  /// Returns `null` if the type is not found.
+  static TypeDef? findTypeDef(String typeName) {
+    final scope = findScope(typeName);
+    return scope.findTypeDef(typeName);
+  }
+
+  /// Loads a metadata scope from the specified WinMD [file].
   ///
-  /// Throws an [ArgumentError] if the [file] does not exist.
-  ///
-  /// Throws a [WindowsException] if there is an issue opening the metadata
+  /// Throws [WindowsException] if an issue occurs while opening the metadata
   /// file.
-  static Scope loadMetadataFromFile(File file) {
+  static Scope loadScopeFromFile(File file) {
+    if (!file.path.endsWith('.winmd')) {
+      throw ArgumentError.value(
+        file,
+        'file',
+        'File must be a Windows Metadata (.winmd) file.',
+      );
+    }
+
     if (!file.existsSync()) {
       throw ArgumentError.value(file, 'file', 'File does not exist.');
     }
@@ -183,9 +220,9 @@ abstract final class MetadataStore {
         IMetaDataImport2(pReader),
         IMetaDataAssemblyImport(pAssemblyImport),
       );
-      final fileName = file.uri.pathSegments.last;
-      scopeCache[fileName] = scope;
-
+      final fileName = p.basename(file.path);
+      _scopeCache[fileName] = scope;
+      logger.info('Scope loaded and cached from file "${file.path}".');
       return scope;
     } finally {
       free(szFile);
@@ -194,238 +231,134 @@ abstract final class MetadataStore {
     }
   }
 
-  /// Downloads a NuGet package and returns its content as bytes.
+  /// Loads and returns the WDK scope.
   ///
-  /// Given a [packageName] and a [version], this method downloads the NuGet
-  /// package content and returns it as a [Uint8List].
+  /// If [version] is not provided, loads the latest available version.
   ///
-  /// Throws an exception if the download fails.
-  static Future<Uint8List> _downloadPackage(
-    String packageName,
-    String version,
-  ) async {
-    final packageId = packageName.toLowerCase();
-    print('Downloading $packageId.$version.nupkg...');
-    return _nugetClient!.downloadPackageContent(packageId, version: version);
-  }
+  /// If the metadata is already downloaded, loads it from the local cache.
+  static Future<Scope> loadWdkScope({String? version}) =>
+      _loadScope(MetadataPackage.wdk, version, includePrerelease: true);
 
-  /// Unpacks a NuGet package and returns its local path.
+  /// Loads and returns the Win32 scope.
   ///
-  /// Given a [packageName] and a [version], this method downloads the NuGet
-  /// package, unpacks its content to a local directory, and returns the path
-  /// to that directory.
+  /// If [version] is not provided, loads the latest available version.
   ///
-  /// If the package is already unpacked, it returns the path immediately.
+  /// If the metadata is already downloaded, loads it from the local cache.
+  static Future<Scope> loadWin32Scope({String? version}) =>
+      _loadScope(MetadataPackage.win32, version, includePrerelease: true);
+
+  /// Loads and returns the WinRT scope.
   ///
-  /// Throws an exception if the download or unpacking fails.
-  static Future<String> _unpackPackage(
-    String packageName,
-    String version,
-  ) async {
-    final path = '${LocalStorage.path}\\$packageName@$version';
-    final packageDir = Directory(path);
-    final MetadataType(:assetName) = MetadataType.fromPackageName(packageName);
-    final metadataFile = File('$path\\$assetName');
-    if (metadataFile.existsSync()) return path;
+  /// If [version] is not provided, loads the latest stable version.
+  ///
+  /// If the metadata is already downloaded, loads it from the local cache.
+  static Future<Scope> loadWinrtScope({String? version}) =>
+      _loadScope(MetadataPackage.winrt, version);
 
-    packageDir.createSync(recursive: true);
-    final bytes = await _downloadPackage(packageName, version);
-    final archive = ZipDecoder().decodeBytes(bytes);
-    extractArchiveToDiskSync(archive, path);
-
-    return path;
-  }
-
-  static Scope? _tryToLoadMetadataFromFile(
-    MetadataType metadataType,
+  /// Attempts to load a metadata scope from the file system for the given
+  /// [package] and [version].
+  static Scope? _tryLoadingScopeFromFile(
+    MetadataPackage package,
     String version,
   ) {
-    final MetadataType(:assetName, :packageName) = metadataType;
-    final package = LocalStorage.getPackage(packageName, version: version);
-    if (package != null) {
-      final metadataFile = File('${package.path}\\$assetName');
-      if (metadataFile.existsSync()) {
-        return loadMetadataFromFile(metadataFile);
-      }
+    final packageDirectory = _localStorageManager!.findPackageDirectory(
+      package,
+      version,
+    );
+    if (packageDirectory != null) {
+      logger.fine(
+        'Found NuGet package "$package" (version $version) in local storage.',
+      );
+      final metadataFile = File(p.join(packageDirectory, package.assetName));
+      return loadScopeFromFile(metadataFile);
     }
-
+    logger.fine(
+      'NuGet package "$package" (version $version) is not found in local storage.',
+    );
     return null;
   }
 
-  /// Loads WDK metadata.
-  ///
-  /// If the metadata is already downloaded, it loads it from the local cache.
-  ///
-  /// Throws an exception if the download or loading fails.
-  static Future<Scope> _loadWdkMetadata({required String version}) async {
-    final MetadataType(:assetName, :packageName) = MetadataType.wdk;
-    final packagePath = await _unpackPackage(packageName, version);
-    final metadataFile = File('$packagePath\\$assetName');
-    return loadMetadataFromFile(metadataFile);
-  }
-
-  /// Loads WDK metadata.
-  ///
-  /// If [version] is not specified, it loads the latest available version.
-  ///
-  /// If the metadata is already downloaded, it loads it from the local cache.
-  ///
-  /// Throws an exception if the download or loading fails.
-  static Future<Scope> loadWdkMetadata({String? version}) async {
+  static Future<Scope> _loadScope(
+    MetadataPackage package,
+    String? version, {
+    bool includePrerelease = false,
+  }) async {
     if (!_isInitialized) initialize();
 
-    final MetadataType(:packageName) = MetadataType.wdk;
+    logger.fine('Loading scope for "${package.name}"...');
+    final MetadataPackage(:packageId, :assetName) = package;
 
-    // If the metadata is already downloaded, load it.
+    // Try to load from local storage.
     if (version != null) {
-      final scope = _tryToLoadMetadataFromFile(MetadataType.wdk, version);
-      if (scope != null) return scope;
+      final cached = _tryLoadingScopeFromFile(package, version);
+      if (cached != null) {
+        logger.fine('Loaded scope for "${package.name}" from local storage.');
+        return cached;
+      }
     }
 
-    final downloadVersion =
+    // Determine the version to use.
+    final versionToUse =
         version ??
         await _nugetClient!.getLatestPackageVersion(
-          packageName,
-          includePrerelease: true,
+          packageId,
+          includePrerelease: includePrerelease,
         );
+    logger.fine(
+      'The latest version for NuGet package "$packageId" is "$versionToUse".',
+    );
 
-    // If the metadata is already downloaded, load it.
-    final scope = _tryToLoadMetadataFromFile(MetadataType.wdk, downloadVersion);
-    if (scope != null) return scope;
-
-    return _loadWdkMetadata(version: downloadVersion);
-  }
-
-  /// Loads Win32 metadata.
-  ///
-  /// If the metadata is already downloaded, it loads it from the local cache.
-  ///
-  /// Throws an exception if the download or loading fails.
-  static Future<Scope> _loadWin32Metadata({required String version}) async {
-    final MetadataType(:assetName, :packageName) = MetadataType.win32;
-    final packagePath = await _unpackPackage(packageName, version);
-    final metadataFile = File('$packagePath\\$assetName');
-    return loadMetadataFromFile(metadataFile);
-  }
-
-  /// Loads Win32 metadata.
-  ///
-  /// If [version] is not specified, it loads the latest available version.
-  ///
-  /// If the metadata is already downloaded, it loads it from the local cache.
-  ///
-  /// Throws an exception if the download or loading fails.
-  static Future<Scope> loadWin32Metadata({String? version}) async {
-    if (!_isInitialized) initialize();
-
-    final MetadataType(:packageName) = MetadataType.win32;
-
-    // If the metadata is already downloaded, load it.
-    if (version != null) {
-      final scope = _tryToLoadMetadataFromFile(MetadataType.win32, version);
-      if (scope != null) return scope;
+    // Try to load from local storage.
+    final cached = _tryLoadingScopeFromFile(package, versionToUse);
+    if (cached != null) {
+      logger.fine('Loaded scope for "${package.name}" from local storage.');
+      return cached;
     }
 
-    final downloadVersion =
-        version ??
-        await _nugetClient!.getLatestPackageVersion(
-          packageName,
-          includePrerelease: true,
+    // Download and load the package.
+    final packageDirectory = await _localStorageManager!.getPackageDirectory(
+      package,
+      versionToUse,
+      () async => _nugetClient!.downloadPackageContent(
+        packageId,
+        version: versionToUse,
+      ),
+      logger: logger,
+    );
+    final metadataFile = File(p.join(packageDirectory, assetName));
+
+    // For WinRT, merge metadata if necessary.
+    if (package == MetadataPackage.winrt) {
+      if (!metadataFile.existsSync()) {
+        final metadataPath = p.join(packageDirectory, 'ref', 'netstandard2.0');
+        logger.info('Merging WinRT metadata files into a single file...');
+        final startTime = DateTime.now();
+        MdMerge.mergeMetadata(metadataPath, packageDirectory);
+        final duration = DateTime.now().difference(startTime);
+        final seconds = (duration.inMilliseconds / 1000.0).toStringAsFixed(1);
+        logger.info('Merge took ${seconds}s.');
+      } else {
+        logger.fine(
+          'WinRT metadata file already exists at "${metadataFile.path}". '
+          'Skipping merge.',
         );
-
-    // If the metadata is already downloaded, load it.
-    final scope = _tryToLoadMetadataFromFile(
-      MetadataType.win32,
-      downloadVersion,
-    );
-    if (scope != null) return scope;
-
-    return _loadWin32Metadata(version: downloadVersion);
-  }
-
-  /// Loads WinRT metadata.
-  ///
-  /// If the metadata is already downloaded, it loads it from the local cache.
-  ///
-  /// If the metadata file is not found, it merges individual WinMD files into a
-  /// single file before loading.
-  ///
-  /// Throws an exception if the download or loading fails.
-  static Future<Scope> _loadWinrtMetadata({required String version}) async {
-    final MetadataType(:assetName, :packageName) = MetadataType.winrt;
-    final packagePath = await _unpackPackage(packageName, version);
-
-    final metadataFile = File('$packagePath\\$assetName');
-    if (!metadataFile.existsSync()) {
-      // Merge the Windows Metadata (.winmd) files into a single file.
-      MdMerge.mergeMetadata('$packagePath\\ref\\netstandard2.0', packagePath);
+      }
     }
 
-    return loadMetadataFromFile(metadataFile);
-  }
-
-  /// Loads WinRT metadata
-  ///
-  /// If [version] is not specified, it loads the latest stable version.
-  ///
-  /// If the metadata is already downloaded, it loads it from the local cache.
-  ///
-  /// Throws an exception if the download or loading fails.
-  @Deprecated('Use loadWinrtMetadata instead.')
-  static Future<Scope> loadWinRTMetadata({String? version}) async =>
-      loadWinrtMetadata(version: version);
-
-  /// Loads WinRT metadata
-  ///
-  /// If [version] is not specified, it loads the latest stable version.
-  ///
-  /// If the metadata is already downloaded, it loads it from the local cache.
-  ///
-  /// Throws an exception if the download or loading fails.
-  static Future<Scope> loadWinrtMetadata({String? version}) async {
-    if (!_isInitialized) initialize();
-
-    final MetadataType(:packageName) = MetadataType.winrt;
-
-    // If the metadata is already downloaded, load it.
-    if (version != null) {
-      final scope = _tryToLoadMetadataFromFile(MetadataType.winrt, version);
-      if (scope != null) return scope;
-    }
-
-    final downloadVersion =
-        version ?? await _nugetClient!.getLatestPackageVersion(packageName);
-
-    // If the metadata is already downloaded, load it.
-    final scope = _tryToLoadMetadataFromFile(
-      MetadataType.winrt,
-      downloadVersion,
+    logger.fine(
+      'Loading scope for "${package.name}" from metadata file "${metadataFile.path}".',
     );
-    if (scope != null) return scope;
-
-    return _loadWinrtMetadata(version: downloadVersion);
+    return loadScopeFromFile(metadataFile);
   }
 
-  /// Disposes of all objects and clears the [scopeCache].
-  ///
-  /// This method releases resources associated with the `MetadataStore` and
-  /// clears the cache of loaded scopes.
-  ///
-  /// It's a good practice to call this method when you're done using the
-  /// `MetadataStore`.
-  static void close() {
-    if (!_isInitialized) return;
-    assert(_dispenser != null, 'Metadata dispenser is not initialized.');
-    assert(_nugetClient != null, 'NuGet client is not initialized.');
-    scopeCache.clear();
-    _dispenser!.release();
-    free(_dispenser!.ptr);
-    _dispenser = null;
-    _nugetClient!.close();
-    _nugetClient = null;
-    _isInitialized = false;
+  /// Formats a [DateTime] as "yyyy-MM-dd HH:mm:ss".
+  static String _formatTimestamp(DateTime time) {
+    final year = time.year.toString().padLeft(4, '0');
+    final month = time.month.toString().padLeft(2, '0');
+    final day = time.day.toString().padLeft(2, '0');
+    final hour = time.hour.toString().padLeft(2, '0');
+    final minute = time.minute.toString().padLeft(2, '0');
+    final second = time.second.toString().padLeft(2, '0');
+    return '$year-$month-$day $hour:$minute:$second';
   }
-
-  /// Prints information about the [scopeCache] for debugging purposes.
-  static String get cacheInfo => '[${scopeCache.keys.join(', ')}]';
 }

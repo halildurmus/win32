@@ -10,14 +10,15 @@ import '../type_aliases.dart';
 
 /// Represents an object that has custom (named) attributes associated with it.
 mixin CustomAttributesMixin on TokenObject {
+  /// Enumerates all attributes that this object has.
   late final customAttributes = _getCustomAttributes();
 
   /// Retrieve the string associated with a specific attribute name.
   ///
   /// If the attribute's first parameter is not a string, then return an empty
   /// string.
-  String attributeAsString(String attrName) {
-    final attribute = findAttribute(attrName);
+  String attributeAsString(String attributeName) {
+    final attribute = findAttribute(attributeName);
     if (attribute?.parameters case [
       final param,
       ...,
@@ -29,13 +30,13 @@ mixin CustomAttributesMixin on TokenObject {
   }
 
   /// Returns the first attribute matching the given name.
-  CustomAttribute? findAttribute(String attrName) =>
-      customAttributes.where((attr) => attr.name == attrName).firstOrNull;
+  CustomAttribute? findAttribute(String attributeName) =>
+      customAttributes.where((attr) => attr.name == attributeName).firstOrNull;
 
   /// Whether this object has an attribute matching the given name.
-  bool existsAttribute(String attrName) => findAttribute(attrName) != null;
+  bool hasAttribute(String attributeName) =>
+      findAttribute(attributeName) != null;
 
-  /// Enumerate all attributes that this object has.
   Iterable<CustomAttribute> _getCustomAttributes() {
     final customAttributes = <CustomAttribute>[];
 

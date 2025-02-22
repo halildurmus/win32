@@ -9,7 +9,7 @@ void main() {
   late Scope win32Scope;
 
   setUpAll(() async {
-    win32Scope = await MetadataStore.loadWin32Metadata();
+    win32Scope = await MetadataStore.loadWin32Scope();
   });
 
   test('Win32 scope contains appropriate assembly references', () {

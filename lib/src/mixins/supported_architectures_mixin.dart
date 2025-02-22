@@ -8,19 +8,20 @@ class Architecture {
   /// Returns an [Architecture] object that represents all supported
   /// architectures.
   factory Architecture.all() => const Architecture(_arm64 | _x64 | _x86);
+
+  final int _value;
+
   static const _x86 = 0x01;
   static const _x64 = 0x02;
   static const _arm64 = 0x04;
 
-  final int _value;
-
-  /// Returns true if this object is supported on Intel 32-bit architectures
+  /// Whether the object is supported on Intel 32-bit architectures.
   bool get x86 => _value & _x86 == _x86;
 
-  /// Returns true if this object is supported on Intel 64-bit architectures
+  /// Whether the object is supported on Intel 64-bit architectures.
   bool get x64 => _value & _x64 == _x64;
 
-  /// Returns true if this object is supported on ARM 64-bit architectures
+  /// Whether the object is supported on ARM 64-bit architectures.
   bool get arm64 => _value & _arm64 == _arm64;
 }
 
@@ -36,14 +37,14 @@ mixin SupportedArchitecturesMixin on CustomAttributesMixin {
       _supportedArchitectures ??= _calculateSupportedArchitectures();
 
   Architecture _calculateSupportedArchitectures() {
-    final supportedArchAttr = findAttribute(
+    final supportedArchAttribute = findAttribute(
       'Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute',
     );
 
     // By default, this attribute is missing and it is assumed that types
     // support all valid platform architectures.
-    return supportedArchAttr == null
+    return supportedArchAttribute == null
         ? Architecture.all()
-        : Architecture(supportedArchAttr.parameters.first.value as int);
+        : Architecture(supportedArchAttribute.parameters.first.value as int);
   }
 }

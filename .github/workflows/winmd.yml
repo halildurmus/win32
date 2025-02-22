@@ -43,6 +43,7 @@ jobs:
       format_directories: lib test
       randomize_execution_order_of_tests: true
       runs_on: ${{ matrix.os }}
+      run_tests: ${{ matrix.os != 'ubuntu-latest' }}
     secrets:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
