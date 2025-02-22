@@ -5,7 +5,7 @@ import 'package:winmd/winmd.dart';
 void printCallback([
   String type = 'Windows.Win32.System.StationsAndDesktops.DESKTOPENUMPROCW',
 ]) {
-  final typeDef = MetadataStore.getMetadataForType(type);
+  final typeDef = MetadataStore.findTypeDef(type);
   if (typeDef != null && typeDef.isDelegate) {
     final callbackProjection = CallbackProjection(typeDef);
     print(callbackProjection.format());
@@ -28,7 +28,7 @@ void printFunction([String name = 'BroadcastSystemMessageW']) {
 void printStruct([
   String type = 'Windows.Win32.Graphics.Gdi.BITMAPFILEHEADER',
 ]) {
-  final typeDef = MetadataStore.getMetadataForType(type);
+  final typeDef = MetadataStore.findTypeDef(type);
   if (typeDef != null && typeDef.isStruct) {
     final structProjection = StructProjection(typeDef, lastComponent(type));
     print(structProjection.format());
@@ -38,7 +38,7 @@ void printStruct([
 void printComInterface([
   String type = 'Windows.Win32.UI.Shell.IFileOpenDialog',
 ]) {
-  final typeDef = MetadataStore.getMetadataForType(type);
+  final typeDef = MetadataStore.findTypeDef(type);
   if (typeDef != null && typeDef.isInterface) {
     final interfaceProjection = ComInterfaceProjection(typeDef);
     print(interfaceProjection.format());
@@ -46,7 +46,7 @@ void printComInterface([
 }
 
 void printComMethod(String interface, String methodName) {
-  final typeDef = MetadataStore.getMetadataForType(interface);
+  final typeDef = MetadataStore.findTypeDef(interface);
   final method = typeDef?.findMethod(methodName);
   if (method != null) {
     final methodProjection = ComMethodProjection(method, 3);
@@ -55,7 +55,7 @@ void printComMethod(String interface, String methodName) {
 }
 
 void printComGetProperty(String interface, String propertyName) {
-  final typeDef = MetadataStore.getMetadataForType(interface);
+  final typeDef = MetadataStore.findTypeDef(interface);
   final method = typeDef?.findMethod(propertyName);
   if (method != null) {
     final methodProjection = ComGetPropertyProjection(method, 3);
@@ -64,7 +64,7 @@ void printComGetProperty(String interface, String propertyName) {
 }
 
 void printComSetProperty(String interface, String propertyName) {
-  final typeDef = MetadataStore.getMetadataForType(interface);
+  final typeDef = MetadataStore.findTypeDef(interface);
   final method = typeDef?.findMethod(propertyName);
   if (method != null) {
     final methodProjection = ComSetPropertyProjection(method, 3);
@@ -80,9 +80,11 @@ extension on Object {
 }
 
 void main() async {
-  await MetadataStore.loadWdkMetadata(version: wdkMetadataVersion);
-  await MetadataStore.loadWin32Metadata(version: win32MetadataVersion);
-  await MetadataStore.loadWinrtMetadata(version: winrtMetadataVersion);
+  await (
+    MetadataStore.loadWdkScope(version: wdkMetadataVersion),
+    MetadataStore.loadWin32Scope(version: win32MetadataVersion),
+    MetadataStore.loadWinrtScope(version: winrtMetadataVersion),
+  ).wait;
   printStruct();
   MetadataStore.close();
 }

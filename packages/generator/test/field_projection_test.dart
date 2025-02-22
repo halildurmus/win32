@@ -1,17 +1,15 @@
 @TestOn('windows')
 library;
 
-import 'package:test/test.dart';
 import 'package:generator/generator.dart';
+import 'package:test/test.dart';
 import 'package:winmd/winmd.dart';
 
 void main() {
   late Scope scope;
 
   setUpAll(() async {
-    scope = await MetadataStore.loadWin32Metadata(
-      version: win32MetadataVersion,
-    );
+    scope = await MetadataStore.loadWin32Scope(version: win32MetadataVersion);
   });
 
   test('BOOL types are projected to int', () {

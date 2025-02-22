@@ -1,8 +1,8 @@
 @TestOn('windows')
 library;
 
-import 'package:test/test.dart';
 import 'package:generator/generator.dart';
+import 'package:test/test.dart';
 import 'package:winmd/winmd.dart';
 
 void main() {
@@ -11,7 +11,7 @@ void main() {
     () async {
       final functionsToGenerate = loadFunctionsFromJson();
 
-      final scope = await MetadataStore.loadWin32Metadata(
+      final scope = await MetadataStore.loadWin32Scope(
         version: win32MetadataVersion,
       );
       final apis = scope.typeDefs.where(

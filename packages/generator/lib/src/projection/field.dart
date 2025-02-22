@@ -41,7 +41,7 @@ class FieldProjection {
 
   bool get _isFlexibleArray =>
       field.typeIdentifier.baseType == BaseType.arrayTypeModifier &&
-      field.existsAttribute(
+      field.hasAttribute(
         'Windows.Win32.Foundation.Metadata.FlexibleArrayAttribute',
       );
 

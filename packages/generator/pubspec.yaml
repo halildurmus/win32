@@ -17,7 +17,7 @@ dependencies:
   ffi: ^2.1.3
 
   # Windows metadata for automatically generating API signatures.
-  winmd: ^5.2.0
+  winmd: ^6.0.0
 
   # Win32 itself.
   win32: ^5.10.1
