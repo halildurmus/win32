@@ -11,12 +11,12 @@ import 'package:winmd/winmd.dart';
 void main() {
   group('Golden testing', () {
     setUpAll(() async {
-      await MetadataStore.loadWin32Metadata(version: win32MetadataVersion);
+      await MetadataStore.loadWin32Scope(version: win32MetadataVersion);
     });
 
     test('IFileOpenDialog', () {
       const type = 'Windows.Win32.UI.Shell.IFileOpenDialog';
-      final typeDef = MetadataStore.getMetadataForType(type)!;
+      final typeDef = MetadataStore.findTypeDef(type)!;
       final comTypesToGenerate = loadMap('com_types.json');
       final projection = ComClassProjection.fromInterface(
         typeDef,
@@ -27,7 +27,7 @@ void main() {
 
     test('INetwork', () async {
       const type = 'Windows.Win32.Networking.NetworkListManager.INetwork';
-      final typeDef = MetadataStore.getMetadataForType(type)!;
+      final typeDef = MetadataStore.findTypeDef(type)!;
       final comTypesToGenerate = loadMap('com_types.json');
       final projection = ComInterfaceProjection(
         typeDef,

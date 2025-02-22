@@ -5,8 +5,8 @@
 @TestOn('windows')
 library;
 
-import 'package:test/test.dart';
 import 'package:generator/generator.dart';
+import 'package:test/test.dart';
 import 'package:winmd/winmd.dart';
 
 void main() {
@@ -62,7 +62,7 @@ void main() {
       'Windows.Win32.UI.Shell.IShellItemFilter': 3,
     };
 
-    final scope = await MetadataStore.loadWin32Metadata(
+    final scope = await MetadataStore.loadWin32Scope(
       version: win32MetadataVersion,
     );
 

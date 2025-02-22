@@ -260,37 +260,35 @@ void main() async {
   final stopwatch = Stopwatch()..start();
 
   print('[${stopwatch.elapsed}] Loading Windows metadata...');
-  final wdkScope = await MetadataStore.loadWdkMetadata(
-    version: wdkMetadataVersion,
-  );
-  final win32Scope = await MetadataStore.loadWin32Metadata(
-    version: win32MetadataVersion,
-  );
-  // Additionally, load WinRT metadata to ensure the correct resolution of
-  // references from Win32 metadata.
-  await MetadataStore.loadWinrtMetadata();
-
-  print('[${stopwatch.elapsed}] Loading and sorting functions...');
-  final functionsToGenerate = loadFunctionsFromJson();
-  saveFunctionsToJson(functionsToGenerate);
+  final (wdkScope, win32Scope, _) =
+      await (
+        MetadataStore.loadWdkScope(version: wdkMetadataVersion),
+        MetadataStore.loadWin32Scope(version: win32MetadataVersion),
+        // Additionally, load WinRT metadata to ensure the correct resolution of
+        // references from Win32 metadata.
+        MetadataStore.loadWinrtScope(),
+      ).wait;
 
   print('[${stopwatch.elapsed}] Generating structs...');
   final structsToGenerate = loadMap('win32_structs.json');
   saveMap(structsToGenerate, 'win32_structs.json');
   generateStructs([wdkScope, win32Scope], structsToGenerate);
 
-  print('[${stopwatch.elapsed}] Validating callbacks...');
-  final callbacks = loadMap('win32_callbacks.json');
-  saveMap(callbacks, 'win32_callbacks.json');
-  // Win32 callbacks are manually created
-
-  print('[${stopwatch.elapsed}] Generating FFI function bindings...');
+  print('[${stopwatch.elapsed}] Loading and sorting functions...');
+  final functionsToGenerate = loadFunctionsFromJson();
+  saveFunctionsToJson(functionsToGenerate);
+  print('[${stopwatch.elapsed}] Generating function bindings...');
   generateFunctions([wdkScope, win32Scope], functionsToGenerate);
 
   print('[${stopwatch.elapsed}] Generating COM interfaces...');
   final comTypesToGenerate = loadMap('com_types.json');
   saveMap(comTypesToGenerate, 'com_types.json');
   generateComApis(win32Scope, comTypesToGenerate);
+
+  // Win32 callbacks are manually created.
+  print('[${stopwatch.elapsed}] Validating callbacks...');
+  final callbacks = loadMap('win32_callbacks.json');
+  saveMap(callbacks, 'win32_callbacks.json');
 
   MetadataStore.close();
   stopwatch.stop();
