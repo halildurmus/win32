@@ -89,7 +89,8 @@ export 'src/member_ref.dart';
 export 'src/metadata_store.dart';
 export 'src/method.dart';
 export 'src/mixins/mixins.dart';
-export 'src/models/models.dart';
+export 'src/models/models.dart'
+    hide LocalStorageManager, MdMerge, MetadataPackage;
 export 'src/module_ref.dart';
 export 'src/parameter.dart';
 export 'src/pekind.dart';

@@ -3,7 +3,7 @@ library;
 
 import 'package:checks/checks.dart';
 import 'package:test/scaffolding.dart';
-import 'package:winmd/winmd.dart';
+import 'package:winmd/src/models/mdmerge.dart';
 
 void main() {
   test('Can find mdmerge.exe', () {

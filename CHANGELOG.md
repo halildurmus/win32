@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.0.0] - 2025-02-22
+
+### 🚀 Features
+
+- Added a public `logger` field to the `MetadataStore` class. Users can now
+  provide their own `Logger` instance to customize logging behavior.
+
+### 🧹 Refactor
+
+#### `CustomAttributesMixin`
+
+- [**breaking**] Renamed `existsAttribute` method to `hasAttribute`
+
+#### `MetadataStore`
+
+- [**breaking**] Renamed `getMetadataForType` method to `findTypeDef`
+- [**breaking**] Renamed `getScopeForType` method to `findScope`
+- [**breaking**] Renamed `loadMetadataFromFile` method to `loadScopeFromFile`
+- [**breaking**] Renamed `loadWdkMetadata` method to `loadWdkScope`
+- [**breaking**] Renamed `loadWin32Metadata` method to `loadWin32Scope`
+- [**breaking**] Renamed `loadWinrtMetadata` method to `loadWinrtScope`
+- [**breaking**] Removed the deprecated `loadWinRTMetadata` method
+
+#### `TypeDef`
+
+- [**breaking**] Updated `defaultInterface` getter to return `TypeDef?`
+  instead of `TypeDef`.
+
+[6.0.0]: https://github.com/halildurmus/winmd/compare/v5.3.0..v6.0.0
+
 ## [5.3.0] - 2025-02-19
 
 ### 📦 Dependencies

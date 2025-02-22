@@ -9,7 +9,8 @@ import 'package:archive/archive_io.dart';
 import 'package:checks/checks.dart';
 import 'package:path/path.dart' as p;
 import 'package:test/scaffolding.dart';
-import 'package:winmd/winmd.dart';
+import 'package:winmd/src/models/local_storage_manager.dart';
+import 'package:winmd/src/models/metadata_package.dart';
 
 void main() {
   group('LocalStorageManager', () {
