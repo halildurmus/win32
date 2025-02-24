@@ -1,4 +1,3 @@
-import 'package:win32/win32.dart';
 import 'package:winmd/winmd.dart';
 
 void main() async {
@@ -13,7 +12,7 @@ void main() async {
   final unionField = struct.fields.last; // union
   final unionFieldType = unionField.typeIdentifier.typeArg?.type;
   print('unionField: $unionFieldType | isNested: ${unionFieldType?.isNested}');
-  print('Field: ${unionField.token.toHexString(32)}');
+  print('Field token: 0x${unionField.token.toRadixString(16)}');
 
   MetadataStore.close();
 }

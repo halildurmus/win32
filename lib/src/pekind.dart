@@ -1,9 +1,9 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart';
 
 import 'models/models.dart';
+import 'win32/win32.dart';
 
 /// A representation of the assembly file's portable executable format.
 class PEKind {
@@ -11,12 +11,11 @@ class PEKind {
     using((arena) {
       final pdwPEKind = arena<DWORD>();
       final pdwMachine = arena<DWORD>();
-
-      final hr = reader.getPEKind(pdwPEKind, pdwMachine);
-      if (SUCCEEDED(hr)) {
+      try {
+        reader.getPEKind(pdwPEKind, pdwMachine);
         _peKind = pdwPEKind.value;
         _machine = pdwMachine.value;
-      } else {
+      } on WindowsException {
         _peKind = 0;
         _machine = 0;
       }

@@ -2,12 +2,12 @@ import 'dart:ffi';
 import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart' hide TokenType;
 
 import 'models/models.dart';
 import 'scope.dart';
 import 'token_object.dart';
 import 'type_aliases.dart';
+import 'win32/win32.dart';
 
 /// A member reference.
 ///
@@ -37,8 +37,7 @@ class MemberRef extends TokenObject {
       final ppvSigBlob = arena<PCCOR_SIGNATURE>();
       final pcbSigBlob = arena<ULONG>();
 
-      final reader = scope.reader;
-      final hr = reader.getMemberRefProps(
+      scope.reader.getMemberRefProps(
         token,
         ptk,
         szMember,
@@ -47,7 +46,6 @@ class MemberRef extends TokenObject {
         ppvSigBlob,
         pcbSigBlob,
       );
-      if (FAILED(hr)) throw WindowsException(hr);
 
       return MemberRef(
         scope,

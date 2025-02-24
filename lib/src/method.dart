@@ -2,7 +2,6 @@ import 'dart:ffi';
 import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart' hide TokenType;
 
 import 'mixins/mixins.dart';
 import 'models/models.dart';
@@ -14,6 +13,7 @@ import 'token_object.dart';
 import 'type_aliases.dart';
 import 'type_def.dart';
 import 'type_identifier.dart';
+import 'win32/win32.dart';
 
 /// A method.
 class Method extends TokenObject
@@ -52,8 +52,7 @@ class Method extends TokenObject
       final pulCodeRVA = arena<ULONG>();
       final pdwImplFlags = arena<DWORD>();
 
-      final reader = scope.reader;
-      final hr = reader.getMethodProps(
+      scope.reader.getMethodProps(
         token,
         ptkClass,
         szMethod,
@@ -65,7 +64,6 @@ class Method extends TokenObject
         pulCodeRVA,
         pdwImplFlags,
       );
-      if (FAILED(hr)) throw WindowsException(hr);
 
       final signature = ppvSigBlob.value.asTypedList(pcbSigBlob.value);
       return Method(
@@ -178,8 +176,7 @@ class Method extends TokenObject
     final szImportName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
     final pchImportName = arena<ULONG>();
     final ptkImportDLL = arena<mdModuleRef>();
-
-    final hr = reader.getPinvokeMap(
+    reader.getPinvokeMap(
       token,
       pdwMappingFlags,
       szImportName,
@@ -187,7 +184,6 @@ class Method extends TokenObject
       pchImportName,
       ptkImportDLL,
     );
-    if (FAILED(hr)) throw COMException(hr);
     return ModuleRef.fromToken(scope, ptkImportDLL.value);
   });
 
@@ -306,14 +302,18 @@ class Method extends TokenObject
     final phEnum = arena<HCORENUM>();
     final rParams = arena<mdParamDef>();
     final pcTokens = arena<ULONG>();
-
-    var hr = reader.enumParams(phEnum, token, rParams, 1, pcTokens);
-    while (hr == S_OK) {
-      final parameterToken = rParams.value;
-      final parameter = Parameter.fromToken(scope, parameterToken);
-      parameters.add(parameter);
-      hr = reader.enumParams(phEnum, token, rParams, 1, pcTokens);
+    while (true) {
+      try {
+        reader.enumParams(phEnum, token, rParams, 1, pcTokens);
+        if (pcTokens.value == 0) break;
+        final parameterToken = rParams.value;
+        final parameter = Parameter.fromToken(scope, parameterToken);
+        parameters.add(parameter);
+      } on WindowsException {
+        break;
+      }
     }
+
     reader.closeEnum(phEnum.value);
   });
 

@@ -5,7 +5,6 @@ import 'dart:ffi';
 import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart' hide TokenType;
 
 import 'member_ref.dart';
 import 'models/models.dart';
@@ -14,6 +13,7 @@ import 'token_object.dart';
 import 'type_aliases.dart';
 import 'type_def.dart';
 import 'type_identifier.dart';
+import 'win32/win32.dart';
 
 /// A custom (named) attribute.
 class CustomAttribute extends TokenObject {
@@ -40,15 +40,13 @@ class CustomAttribute extends TokenObject {
       final ppBlob = arena<UVCP_CONSTANT>();
       final pcbBlob = arena<ULONG>();
 
-      final reader = scope.reader;
-      final hr = reader.getCustomAttributeProps(
+      scope.reader.getCustomAttributeProps(
         token,
         ptkObj,
         ptkType,
         ppBlob,
         pcbBlob,
       );
-      if (FAILED(hr)) throw WindowsException(hr);
 
       final memberRef = MemberRef.fromToken(scope, ptkType.value);
       final constructorTypeDef = TypeDef.fromToken(

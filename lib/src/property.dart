@@ -2,7 +2,6 @@ import 'dart:ffi';
 import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart' hide TokenType;
 
 import 'method.dart';
 import 'mixins/custom_attributes_mixin.dart';
@@ -12,6 +11,7 @@ import 'token_object.dart';
 import 'type_aliases.dart';
 import 'type_def.dart';
 import 'type_identifier.dart';
+import 'win32/win32.dart';
 
 /// A property object.
 class Property extends TokenObject with CustomAttributesMixin {
@@ -52,8 +52,7 @@ class Property extends TokenObject with CustomAttributesMixin {
       final rgOtherMethod = arena<mdMethodDef>(256);
       final pcOtherMethod = arena<ULONG>();
 
-      final reader = scope.reader;
-      final hr = reader.getPropertyProps(
+      scope.reader.getPropertyProps(
         token,
         ptkTypeDef,
         szProperty,
@@ -71,7 +70,6 @@ class Property extends TokenObject with CustomAttributesMixin {
         256,
         pcOtherMethod,
       );
-      if (FAILED(hr)) throw WindowsException(hr);
 
       final propName = szProperty.toDartString();
 
@@ -114,13 +112,13 @@ class Property extends TokenObject with CustomAttributesMixin {
 
   /// Returns the get accessor method for the property.
   Method? get getterMethod =>
-      reader.isValidToken(_getterToken) == TRUE
+      reader.isValidToken(_getterToken)
           ? Method.fromToken(scope, _getterToken)
           : null;
 
   /// Returns the set accessor method for the property.
   Method? get setterMethod =>
-      reader.isValidToken(_setterToken) == TRUE
+      reader.isValidToken(_setterToken)
           ? Method.fromToken(scope, _setterToken)
           : null;
 
@@ -135,11 +133,11 @@ class Property extends TokenObject with CustomAttributesMixin {
 
   /// Returns true if the property has a getter. If false, the property is
   /// write-only.
-  bool get hasGetter => reader.isValidToken(_getterToken) == TRUE;
+  bool get hasGetter => reader.isValidToken(_getterToken);
 
   /// Returns true if the property has a setter. If false, the property is
   /// read-only.
-  bool get hasSetter => reader.isValidToken(_setterToken) == TRUE;
+  bool get hasSetter => reader.isValidToken(_setterToken);
 
   /// Returns true if the common language runtime metadata internal APIs should
   /// check the encoding of the property name.

@@ -1,7 +1,6 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart' hide TokenType;
 
 import 'mixins/mixins.dart';
 import 'models/models.dart';
@@ -9,6 +8,7 @@ import 'scope.dart';
 import 'token_object.dart';
 import 'type_aliases.dart';
 import 'type_def.dart';
+import 'win32/win32.dart';
 
 /// Records the interfaces a type implements explicitly.
 class InterfaceImpl extends TokenObject with CustomAttributesMixin {
@@ -45,8 +45,7 @@ class InterfaceImpl extends TokenObject with CustomAttributesMixin {
       final ptkClass = arena<mdTypeDef>();
       final ptkIface = arena<mdToken>();
 
-      final hr = reader.getInterfaceImplProps(token, ptkClass, ptkIface);
-      if (FAILED(hr)) throw WindowsException(hr);
+      reader.getInterfaceImplProps(token, ptkClass, ptkIface);
 
       final classToken = ptkClass.value;
       final interfaceToken = ptkIface.value;

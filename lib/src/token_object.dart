@@ -1,10 +1,10 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart' hide TokenType;
 
 import 'models/models.dart';
 import 'scope.dart';
+import 'win32/win32.dart';
 
 /// Size used for Win32 string allocations.
 ///
@@ -36,8 +36,7 @@ abstract class TokenObject {
 
     return using((arena) {
       final pIsGlobal = arena<Int32>();
-      final hr = reader.isGlobal(token, pIsGlobal);
-      if (FAILED(hr)) throw WindowsException(hr);
+      reader.isGlobal(token, pIsGlobal);
       return pIsGlobal.value == 1;
     });
   }
@@ -49,7 +48,7 @@ abstract class TokenObject {
   /// some types are markers that should never be resolved. For example, WinRT
   /// uses the CLR `System.Guid` type as a marker, but it should not be resolved
   /// to the .NET type system.
-  bool get isResolvedToken => reader.isValidToken(token) == TRUE;
+  bool get isResolvedToken => reader.isValidToken(token);
 
   IMetaDataImport2 get reader => scope.reader;
 

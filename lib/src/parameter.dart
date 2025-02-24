@@ -2,7 +2,6 @@ import 'dart:ffi';
 import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart' hide TokenType;
 
 import 'method.dart';
 import 'mixins/custom_attributes_mixin.dart';
@@ -11,6 +10,7 @@ import 'scope.dart';
 import 'token_object.dart';
 import 'type_aliases.dart';
 import 'type_identifier.dart';
+import 'win32/win32.dart';
 
 /// A parameter or return type.
 class Parameter extends TokenObject with CustomAttributesMixin {
@@ -42,8 +42,7 @@ class Parameter extends TokenObject with CustomAttributesMixin {
       final ppValue = arena<UVCP_CONSTANT>();
       final pcchValue = arena<ULONG>();
 
-      final reader = scope.reader;
-      final hr = reader.getParamProps(
+      scope.reader.getParamProps(
         token,
         ptkMethodDef,
         pulSequence,
@@ -55,7 +54,6 @@ class Parameter extends TokenObject with CustomAttributesMixin {
         ppValue,
         pcchValue,
       );
-      if (FAILED(hr)) throw WindowsException(hr);
 
       final baseType = BaseType.fromCorElementType(pdwCPlusTypeFlag.value);
       return Parameter(

@@ -1,7 +1,6 @@
 // Enumerations used for returning or storing data.
 
-import 'package:win32/win32.dart';
-
+import '../win32/win32.dart';
 import 'exception.dart';
 
 /// Specifies a common language runtime Type, a type modifier, or information
@@ -467,7 +466,7 @@ enum TokenType {
     mdtBaseType => TokenType.baseType,
     _ =>
       throw WinmdException(
-        'Unrecognized token type ${((token & 0xFF000000) >> 24).toHexString(8)}',
+        'Unrecognized token type 0x${((token & 0xFF000000) >> 24).toRadixString(16)}',
       ),
   };
 }

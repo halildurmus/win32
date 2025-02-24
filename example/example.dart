@@ -1,4 +1,3 @@
-import 'package:win32/win32.dart';
 import 'package:winmd/winmd.dart';
 
 void printHeading(String heading) {
@@ -16,8 +15,8 @@ void listTokens([String type = 'Windows.Devices.Bluetooth.BluetoothAdapter']) {
 
   for (final type in typeDefs) {
     print(
-      '[${type.token.toHexString(32)}] ${type.name} '
-      '(baseType: ${type.baseTypeToken.toHexString(32)})',
+      '[0x${type.token.toRadixString(16)}] ${type.name} '
+      '(baseType: 0x${type.baseTypeToken.toRadixString(16)})',
     );
   }
 }

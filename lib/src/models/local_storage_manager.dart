@@ -7,8 +7,8 @@ import 'package:archive/archive_io.dart';
 import 'package:ffi/ffi.dart';
 import 'package:logging/logging.dart';
 import 'package:path/path.dart' as p;
-import 'package:win32/win32.dart';
 
+import '../win32/win32.dart';
 import 'exception.dart';
 import 'metadata_package.dart';
 
@@ -41,28 +41,25 @@ final class LocalStorageManager {
   ///
   /// Throws a [WinmdException] if the directory cannot be created.
   static String _resolveStorageDirectory(String directoryName) {
-    final pszPath = calloc<PWSTR>();
-    final rfid = GUIDFromString(FOLDERID_LocalAppData);
-    try {
-      final result = SHGetKnownFolderPath(rfid, KF_FLAG_DEFAULT, 0, pszPath);
-      if (result != S_OK || pszPath.value == nullptr) {
-        throw const WinmdException(
-          'Failed to retrieve the path to the local AppData folder.',
-        );
-      }
-
-      final appDataPath = pszPath.value.toDartString();
-      free(pszPath.value);
-      final directoryPath = p.join(appDataPath, directoryName);
-      final directory = Directory(directoryPath);
-      if (!directory.existsSync()) {
-        directory.createSync(recursive: true);
-      }
-      return directory.path;
-    } finally {
-      free(pszPath);
-      free(rfid);
+    final pszPath = SHGetKnownFolderPath(
+      FOLDERID_LocalAppData.ptr,
+      KF_FLAG_DEFAULT,
+      0,
+    );
+    if (pszPath == nullptr) {
+      throw const WinmdException(
+        'Failed to retrieve the path to the local AppData folder.',
+      );
     }
+
+    final appDataPath = pszPath.toDartString();
+    free(pszPath);
+    final directoryPath = p.join(appDataPath, directoryName);
+    final directory = Directory(directoryPath);
+    if (!directory.existsSync()) {
+      directory.createSync(recursive: true);
+    }
+    return directory.path;
   }
 
   /// Returns a [Directory] instance representing the local storage directory.

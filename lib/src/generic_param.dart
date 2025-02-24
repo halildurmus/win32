@@ -1,7 +1,6 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart' hide TokenType;
 
 import 'method.dart';
 import 'mixins/custom_attributes_mixin.dart';
@@ -10,6 +9,7 @@ import 'scope.dart';
 import 'token_object.dart';
 import 'type_aliases.dart';
 import 'type_def.dart';
+import 'win32/win32.dart';
 
 /// A generic parameter.
 ///
@@ -40,8 +40,7 @@ class GenericParam extends TokenObject with CustomAttributesMixin {
       final wzName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
       final pchName = arena<ULONG>();
 
-      final reader = scope.reader;
-      final hr = reader.getGenericParamProps(
+      scope.reader.getGenericParamProps(
         token,
         pulParamSeq,
         pdwParamFlags,
@@ -51,7 +50,6 @@ class GenericParam extends TokenObject with CustomAttributesMixin {
         stringBufferSize,
         pchName,
       );
-      if (FAILED(hr)) throw WindowsException(hr);
 
       return GenericParam(
         scope,
@@ -98,26 +96,24 @@ class GenericParam extends TokenObject with CustomAttributesMixin {
       final phEnum = arena<HCORENUM>();
       final rGenericParamConstraints = arena<mdGenericParam>();
       final pcGenericParamConstraints = arena<ULONG>();
-
-      var hr = reader.enumGenericParamConstraints(
-        phEnum,
-        token,
-        rGenericParamConstraints,
-        1,
-        pcGenericParamConstraints,
-      );
-      while (hr == S_OK) {
-        final gpcToken = rGenericParamConstraints.value;
-        final constraint = GenericParamConstraint.fromToken(scope, gpcToken);
-        _constraints.add(constraint);
-        hr = reader.enumGenericParamConstraints(
-          phEnum,
-          token,
-          rGenericParamConstraints,
-          1,
-          pcGenericParamConstraints,
-        );
+      while (true) {
+        try {
+          reader.enumGenericParamConstraints(
+            phEnum,
+            token,
+            rGenericParamConstraints,
+            1,
+            pcGenericParamConstraints,
+          );
+          if (pcGenericParamConstraints.value == 0) break;
+          final gpcToken = rGenericParamConstraints.value;
+          final constraint = GenericParamConstraint.fromToken(scope, gpcToken);
+          _constraints.add(constraint);
+        } on WindowsException {
+          break;
+        }
       }
+
       reader.closeEnum(phEnum.value);
     });
 
@@ -157,13 +153,11 @@ class GenericParamConstraint extends TokenObject with CustomAttributesMixin {
       final ptGenericParam = arena<mdGenericParam>();
       final ptkConstraintType = arena<mdToken>();
 
-      final reader = scope.reader;
-      final hr = reader.getGenericParamConstraintProps(
+      scope.reader.getGenericParamConstraintProps(
         token,
         ptGenericParam,
         ptkConstraintType,
       );
-      if (FAILED(hr)) throw WindowsException(hr);
 
       return GenericParamConstraint(
         scope,

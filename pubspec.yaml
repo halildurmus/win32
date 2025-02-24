@@ -21,8 +21,6 @@ dependencies:
   logging: ^1.3.0
   nuget: ^0.2.0
   path: ^1.9.1
-  win32: ^5.11.0
-  win32_registry: ^2.1.0
 
 dev_dependencies:
   checks: ^0.3.0

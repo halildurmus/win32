@@ -1,7 +1,6 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart';
 
 import 'assembly_ref.dart';
 import 'metadata_store.dart';
@@ -12,6 +11,7 @@ import 'pekind.dart';
 import 'token_object.dart';
 import 'type_aliases.dart';
 import 'type_def.dart';
+import 'win32/win32.dart';
 
 /// A metadata scope, which typically matches an on-disk file.
 ///
@@ -23,10 +23,7 @@ class Scope {
       final szName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
       final pchName = arena<ULONG>();
       final pmvid = arena<GUID>();
-
-      final hr = reader.getScopeProps(szName, stringBufferSize, pchName, pmvid);
-      if (FAILED(hr)) throw COMException(hr);
-
+      reader.getScopeProps(szName, stringBufferSize, pchName, pmvid);
       name = szName.toDartString();
       guid = pmvid.ref.toString();
     });
@@ -101,13 +98,15 @@ class Scope {
       final phEnum = arena<HCORENUM>();
       final rgTypeDefs = arena<mdTypeDef>();
       final pcTypeDefs = arena<ULONG>();
-
-      var hr = reader.enumTypeDefs(phEnum, rgTypeDefs, 1, pcTypeDefs);
-      while (hr == S_OK) {
-        final typeDefToken = rgTypeDefs.value;
-
-        _typedefs[typeDefToken] = TypeDef.fromToken(this, typeDefToken);
-        hr = reader.enumTypeDefs(phEnum, rgTypeDefs, 1, pcTypeDefs);
+      while (true) {
+        try {
+          reader.enumTypeDefs(phEnum, rgTypeDefs, 1, pcTypeDefs);
+          if (pcTypeDefs.value == 0) break;
+          final typeDefToken = rgTypeDefs.value;
+          _typedefs[typeDefToken] = TypeDef.fromToken(this, typeDefToken);
+        } on WindowsException {
+          break;
+        }
       }
       reader.closeEnum(phEnum.value);
     });
@@ -119,10 +118,7 @@ class Scope {
 
   int get moduleToken => using((arena) {
     final pmd = arena<mdModule>();
-    final hr = reader.getModuleFromScope(pmd);
-    if (FAILED(hr)) {
-      throw const WinmdException('Unable to find module token.');
-    }
+    reader.getModuleFromScope(pmd);
     return pmd.value;
   });
 
@@ -134,12 +130,15 @@ class Scope {
       final phEnum = arena<HCORENUM>();
       final rgModuleRefs = arena<mdModuleRef>();
       final pcModuleRefs = arena<ULONG>();
-
-      var hr = reader.enumModuleRefs(phEnum, rgModuleRefs, 1, pcModuleRefs);
-      while (hr == S_OK) {
-        final moduleToken = rgModuleRefs.value;
-        modules.add(ModuleRef.fromToken(this, moduleToken));
-        hr = reader.enumModuleRefs(phEnum, rgModuleRefs, 1, pcModuleRefs);
+      while (true) {
+        try {
+          reader.enumModuleRefs(phEnum, rgModuleRefs, 1, pcModuleRefs);
+          if (pcModuleRefs.value == 0) break;
+          final moduleToken = rgModuleRefs.value;
+          modules.add(ModuleRef.fromToken(this, moduleToken));
+        } on WindowsException {
+          break;
+        }
       }
       reader.closeEnum(phEnum.value);
     });
@@ -155,22 +154,15 @@ class Scope {
       final phEnum = arena<HCORENUM>();
       final rAssemblyRefs = arena<mdModuleRef>();
       final pcTokens = arena<ULONG>();
-
-      var hr = assemblyImport.enumAssemblyRefs(
-        phEnum,
-        rAssemblyRefs,
-        1,
-        pcTokens,
-      );
-      while (hr == S_OK) {
-        final assemblyToken = rAssemblyRefs.value;
-        assemblies.add(AssemblyRef.fromToken(this, assemblyToken));
-        hr = assemblyImport.enumAssemblyRefs(
-          phEnum,
-          rAssemblyRefs,
-          1,
-          pcTokens,
-        );
+      while (true) {
+        try {
+          assemblyImport.enumAssemblyRefs(phEnum, rAssemblyRefs, 1, pcTokens);
+          if (pcTokens.value == 0) break;
+          final assemblyToken = rAssemblyRefs.value;
+          assemblies.add(AssemblyRef.fromToken(this, assemblyToken));
+        } on WindowsException {
+          break;
+        }
       }
       assemblyImport.closeEnum(phEnum.value);
     });
@@ -188,20 +180,21 @@ class Scope {
       final pcStrings = arena<ULONG>();
       final szString = arena<WCHAR>(stringBufferSize).cast<Utf16>();
       final pchString = arena<ULONG>();
-
-      var hr = reader.enumUserStrings(phEnum, rgStrings, 1, pcStrings);
-      while (hr == S_OK) {
-        final stringToken = rgStrings.value;
-        hr = reader.getUserString(
-          stringToken,
-          szString,
-          stringBufferSize,
-          pchString,
-        );
-        if (hr == S_OK) {
+      while (true) {
+        try {
+          reader.enumUserStrings(phEnum, rgStrings, 1, pcStrings);
+          if (pcStrings.value == 0) break;
+          final stringToken = rgStrings.value;
+          reader.getUserString(
+            stringToken,
+            szString,
+            stringBufferSize,
+            pchString,
+          );
           userStrings.add(szString.toDartString());
+        } on WindowsException {
+          break;
         }
-        hr = reader.enumUserStrings(phEnum, rgStrings, 1, pcStrings);
       }
       reader.closeEnum(phEnum.value);
     });
@@ -233,7 +226,11 @@ class Scope {
   String get version => using((arena) {
     final pwzBuf = arena<WCHAR>(stringBufferSize).cast<Utf16>();
     final pccBufSize = arena<DWORD>();
-    final hr = reader.getVersionString(pwzBuf, stringBufferSize, pccBufSize);
-    return SUCCEEDED(hr) ? pwzBuf.toDartString() : '';
+    try {
+      reader.getVersionString(pwzBuf, stringBufferSize, pccBufSize);
+      return pwzBuf.toDartString();
+    } on WindowsException {
+      return '';
+    }
   });
 }

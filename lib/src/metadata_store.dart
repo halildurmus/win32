@@ -5,11 +5,11 @@ import 'package:ffi/ffi.dart';
 import 'package:logging/logging.dart';
 import 'package:nuget/nuget.dart';
 import 'package:path/path.dart' as p;
-import 'package:win32/win32.dart';
 
 import 'models/models.dart';
 import 'scope.dart';
 import 'type_def.dart';
+import 'win32/win32.dart';
 
 /// A class that manages the caching and retrieval of Windows Metadata (.winmd)
 /// files and provides methods to obtain metadata scopes for WDK, Win32, and
@@ -48,33 +48,18 @@ abstract final class MetadataStore {
   static void initialize() {
     if (_isInitialized) return;
 
-    // This must have the same object lifetime as MetadataStore itself.
-    final dispenserObject = calloc<COMObject>();
-    final clsidCorMetaDataDispenser = convertToCLSID(
-      CLSID_CorMetaDataDispenser,
+    final dispenserObject = calloc<VTablePointer>();
+    MetaDataGetDispenser(
+      CLSID_CorMetaDataDispenser.ptr,
+      IID_IMetaDataDispenser.ptr,
+      dispenserObject.cast(),
     );
-    final iidIMetaDataDispenser = convertToIID(IID_IMetaDataDispenser);
-
-    try {
-      final hr = MetaDataGetDispenser(
-        clsidCorMetaDataDispenser,
-        iidIMetaDataDispenser,
-        dispenserObject.cast(),
-      );
-      if (FAILED(hr)) {
-        free(dispenserObject);
-        throw WindowsException(hr);
-      }
-
-      _dispenser = IMetaDataDispenser(dispenserObject)..detach();
-      _localStorageManager = LocalStorageManager();
-      _nugetClient = NuGetClient();
-      _isInitialized = true;
-      logger.fine('MetadataStore initialized.');
-    } finally {
-      free(clsidCorMetaDataDispenser);
-      free(iidIMetaDataDispenser);
-    }
+    _dispenser = IMetaDataDispenser(dispenserObject.value);
+    free(dispenserObject);
+    _localStorageManager = LocalStorageManager();
+    _nugetClient = NuGetClient();
+    _isInitialized = true;
+    logger.fine('MetadataStore initialized.');
   }
 
   /// Disposes of all objects and clears the [scopeCache].
@@ -87,7 +72,6 @@ abstract final class MetadataStore {
     assert(_nugetClient != null, 'NuGet client is not initialized.');
     _scopeCache.clear();
     _dispenser!.release();
-    free(_dispenser!.ptr);
     _dispenser = null;
     _localStorageManager = null;
     _nugetClient!.close();
@@ -184,41 +168,29 @@ abstract final class MetadataStore {
     assert(_dispenser != null, 'Metadata dispenser is not initialized.');
 
     final szFile = file.path.toNativeUtf16();
-    final pReader = calloc<COMObject>();
-    final iidIMetaDataImport2 = convertToIID(IID_IMetaDataImport2);
-    final pAssemblyImport = calloc<COMObject>();
-    final iidIMetaDataAssemblyImport = convertToIID(
-      IID_IMetaDataAssemblyImport,
-    );
 
     try {
-      var hr = _dispenser!.openScope(
+      final reader = _dispenser!.openScope(
         szFile,
         ofRead,
-        iidIMetaDataImport2,
-        pReader.cast(),
+        IID_IMetaDataImport2.ptr,
       );
-      if (FAILED(hr)) {
-        free(pAssemblyImport);
-        free(pReader);
-        throw WindowsException(hr);
+      if (reader == null) {
+        throw WinmdException('Failed to load scope for file "${file.path}".');
       }
 
-      hr = _dispenser!.openScope(
+      final assemblyImport = _dispenser!.openScope(
         szFile,
         ofRead,
-        iidIMetaDataAssemblyImport,
-        pAssemblyImport.cast(),
+        IID_IMetaDataAssemblyImport.ptr,
       );
-      if (FAILED(hr)) {
-        free(pAssemblyImport);
-        free(pReader);
-        throw WindowsException(hr);
+      if (assemblyImport == null) {
+        throw WinmdException('Failed to load scope for file "${file.path}".');
       }
 
       final scope = Scope(
-        IMetaDataImport2(pReader),
-        IMetaDataAssemblyImport(pAssemblyImport),
+        IMetaDataImport2(reader.ptr),
+        IMetaDataAssemblyImport(assemblyImport.ptr),
       );
       final fileName = p.basename(file.path);
       _scopeCache[fileName] = scope;
@@ -226,8 +198,6 @@ abstract final class MetadataStore {
       return scope;
     } finally {
       free(szFile);
-      free(iidIMetaDataImport2);
-      free(iidIMetaDataAssemblyImport);
     }
   }
 
@@ -350,15 +320,15 @@ abstract final class MetadataStore {
     );
     return loadScopeFromFile(metadataFile);
   }
+}
 
-  /// Formats a [DateTime] as "yyyy-MM-dd HH:mm:ss".
-  static String _formatTimestamp(DateTime time) {
-    final year = time.year.toString().padLeft(4, '0');
-    final month = time.month.toString().padLeft(2, '0');
-    final day = time.day.toString().padLeft(2, '0');
-    final hour = time.hour.toString().padLeft(2, '0');
-    final minute = time.minute.toString().padLeft(2, '0');
-    final second = time.second.toString().padLeft(2, '0');
-    return '$year-$month-$day $hour:$minute:$second';
-  }
+/// Formats a [DateTime] as "yyyy-MM-dd HH:mm:ss".
+String _formatTimestamp(DateTime time) {
+  final year = time.year.toString().padLeft(4, '0');
+  final month = time.month.toString().padLeft(2, '0');
+  final day = time.day.toString().padLeft(2, '0');
+  final hour = time.hour.toString().padLeft(2, '0');
+  final minute = time.minute.toString().padLeft(2, '0');
+  final second = time.second.toString().padLeft(2, '0');
+  return '$year-$month-$day $hour:$minute:$second';
 }

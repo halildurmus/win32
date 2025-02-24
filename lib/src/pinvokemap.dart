@@ -1,12 +1,12 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart' hide TokenType;
 
 import 'models/models.dart';
 import 'scope.dart';
 import 'token_object.dart';
 import 'type_aliases.dart';
+import 'win32/win32.dart';
 
 /// A P/Invoke method representation.
 class PinvokeMap extends TokenObject {
@@ -37,8 +37,7 @@ class PinvokeMap extends TokenObject {
       final szModuleName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
       final pchModuleName = arena<ULONG>();
 
-      final reader = scope.reader;
-      var hr = reader.getPinvokeMap(
+      scope.reader.getPinvokeMap(
         token,
         pdwMappingFlags,
         szImportName,
@@ -46,16 +45,19 @@ class PinvokeMap extends TokenObject {
         pchImportName,
         ptkImportDLL,
       );
-      if (FAILED(hr)) throw WindowsException(hr);
 
-      hr = reader.getModuleRefProps(
-        ptkImportDLL.value,
-        szModuleName,
-        stringBufferSize,
-        pchModuleName,
-      );
-
-      final moduleName = SUCCEEDED(hr) ? szModuleName.toDartString() : '';
+      String moduleName;
+      try {
+        scope.reader.getModuleRefProps(
+          ptkImportDLL.value,
+          szModuleName,
+          stringBufferSize,
+          pchModuleName,
+        );
+        moduleName = szModuleName.toDartString();
+      } on WindowsException {
+        moduleName = '';
+      }
 
       return PinvokeMap(
         scope,

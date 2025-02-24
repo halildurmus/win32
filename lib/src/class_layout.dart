@@ -1,11 +1,11 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart';
 
 import 'constants.dart';
 import 'scope.dart';
 import 'token_object.dart';
+import 'win32/win32.dart';
 
 /// Layout information for the class referenced by a specified token.
 class ClassLayout extends TokenObject {
@@ -21,19 +21,21 @@ class ClassLayout extends TokenObject {
 
       // An assumption is made here that there are no more than 256 fields in a
       // struct. If that's not the case, this will fail and throw an exception.
-      final hr = reader.getClassLayout(
-        classToken,
-        pdwPackSize,
-        rgFieldOffset,
-        256,
-        pcFieldOffset,
-        pulClassSize,
-      );
-      if (FAILED(hr)) {
-        // No class layout record, so leave the fields null
-        if (hr == CLDB_E_RECORD_NOTFOUND) return;
-        // Some other failure
-        throw WindowsException(hr);
+      try {
+        reader.getClassLayout(
+          classToken,
+          pdwPackSize,
+          rgFieldOffset,
+          256,
+          pcFieldOffset,
+          pulClassSize,
+        );
+      } on WindowsException catch (e) {
+        if (e.hr == CLDB_E_RECORD_NOTFOUND) {
+          // No class layout record, so leave the fields null
+          return;
+        }
+        rethrow;
       }
 
       packingAlignment = pdwPackSize.value;

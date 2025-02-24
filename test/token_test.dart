@@ -3,7 +3,6 @@ library;
 
 import 'package:checks/checks.dart';
 import 'package:test/scaffolding.dart';
-import 'package:win32/win32.dart';
 import 'package:winmd/winmd.dart';
 
 void main() {
@@ -19,12 +18,12 @@ void main() {
   });
 
   test('0 is not a valid token', () {
-    check(win32Scope.reader.isValidToken(0)).equals(FALSE);
+    check(win32Scope.reader.isValidToken(0)).isFalse();
   });
 
   test('0x00000001 is a valid token', () {
     // This should be the module identifier in all normal circumstances
-    check(win32Scope.reader.isValidToken(0x00000001)).equals(TRUE);
+    check(win32Scope.reader.isValidToken(0x00000001)).isTrue();
   });
 
   test('ValueType', () {

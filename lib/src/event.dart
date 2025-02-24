@@ -1,7 +1,6 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart' hide TokenType;
 
 import 'method.dart';
 import 'mixins/custom_attributes_mixin.dart';
@@ -10,6 +9,7 @@ import 'scope.dart';
 import 'token_object.dart';
 import 'type_aliases.dart';
 import 'type_def.dart';
+import 'win32/win32.dart';
 
 /// An event.
 ///
@@ -50,8 +50,7 @@ class Event extends TokenObject with CustomAttributesMixin {
       final rgOtherMethod = arena<mdMethodDef>(16);
       final pcOtherMethod = arena<ULONG>();
 
-      final reader = scope.reader;
-      final hr = reader.getEventProps(
+      scope.reader.getEventProps(
         token,
         ptkClass,
         szEvent,
@@ -66,7 +65,6 @@ class Event extends TokenObject with CustomAttributesMixin {
         16,
         pcOtherMethod,
       );
-      if (FAILED(hr)) throw WindowsException(hr);
 
       return Event(
         scope,
@@ -95,19 +93,19 @@ class Event extends TokenObject with CustomAttributesMixin {
 
   /// Returns the add method for the event.
   Method? get addMethod =>
-      reader.isValidToken(_addOnToken) == TRUE
+      reader.isValidToken(_addOnToken)
           ? Method.fromToken(scope, _addOnToken)
           : null;
 
   /// Returns the remove method for the event.
   Method? get removeMethod =>
-      reader.isValidToken(_removeOnToken) == TRUE
+      reader.isValidToken(_removeOnToken)
           ? Method.fromToken(scope, _removeOnToken)
           : null;
 
   /// Returns the raise method for the event.
   Method? get raiseMethod =>
-      reader.isValidToken(_fireToken) == TRUE
+      reader.isValidToken(_fireToken)
           ? Method.fromToken(scope, _fireToken)
           : null;
 

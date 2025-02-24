@@ -1,10 +1,9 @@
 import 'dart:typed_data';
 
-import 'package:win32/win32.dart';
-
 import '../scope.dart';
 import '../type_def.dart';
 import '../type_identifier.dart';
+import '../win32/win32.dart';
 import 'models.dart';
 
 /// An intermediate representation of a segment of a signature.

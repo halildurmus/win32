@@ -1,12 +1,12 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart';
 
 import '../custom_attribute.dart';
 import '../models/models.dart';
 import '../token_object.dart';
 import '../type_aliases.dart';
+import '../win32/win32.dart';
 
 /// Represents an object that has custom (named) attributes associated with it.
 mixin CustomAttributesMixin on TokenObject {
@@ -51,19 +51,16 @@ mixin CustomAttributesMixin on TokenObject {
       // attributes on all objects in the scope.
       if (!isResolvedToken) return <CustomAttribute>[];
 
-      var hr = reader.enumCustomAttributes(
-        phEnum,
-        token,
-        0,
-        rAttrs,
-        1,
-        pcAttrs,
-      );
-      while (hr == S_OK) {
-        final attrToken = rAttrs.value;
-        final customAttribute = CustomAttribute.fromToken(scope, attrToken);
-        customAttributes.add(customAttribute);
-        hr = reader.enumCustomAttributes(phEnum, token, 0, rAttrs, 1, pcAttrs);
+      while (true) {
+        try {
+          reader.enumCustomAttributes(phEnum, token, 0, rAttrs, 1, pcAttrs);
+          if (pcAttrs.value == 0) break;
+          final attrToken = rAttrs.value;
+          final customAttribute = CustomAttribute.fromToken(scope, attrToken);
+          customAttributes.add(customAttribute);
+        } on WindowsException {
+          break;
+        }
       }
       reader.closeEnum(phEnum.value);
     });
