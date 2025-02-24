@@ -91,8 +91,7 @@ class GenericParam extends TokenObject with CustomAttributesMixin {
   /// Returns a list of the constraints on the generic parameter.
   List<GenericParamConstraint> get constraints {
     if (_constraints.isNotEmpty) return _constraints;
-
-    using((arena) {
+    return using((arena) {
       final phEnum = arena<HCORENUM>();
       final rGenericParamConstraints = arena<mdGenericParam>();
       final pcGenericParamConstraints = arena<ULONG>();
@@ -113,11 +112,9 @@ class GenericParam extends TokenObject with CustomAttributesMixin {
           break;
         }
       }
-
       reader.closeEnum(phEnum.value);
+      return _constraints;
     });
-
-    return _constraints;
   }
 
   /// Returns special constraints that exist on a generic parameter.

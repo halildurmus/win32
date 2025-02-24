@@ -12,8 +12,7 @@ mixin GenericParamsMixin on TokenObject {
   /// Returns a list of generic parameters on this object.
   List<GenericParam> get genericParams {
     final params = <GenericParam>[];
-
-    using((arena) {
+    return using((arena) {
       final phEnum = arena<HCORENUM>();
       final rGenericParams = arena<ULONG>();
       final pcGenericParams = arena<ULONG>();
@@ -34,8 +33,7 @@ mixin GenericParamsMixin on TokenObject {
         }
       }
       reader.closeEnum(phEnum.value);
+      return params;
     });
-
-    return params;
   }
 }

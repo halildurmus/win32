@@ -12,18 +12,15 @@ import 'win32/win32.dart';
 
 /// Records the interfaces a type implements explicitly.
 class InterfaceImpl extends TokenObject with CustomAttributesMixin {
-  InterfaceImpl(super.scope, super.token)
-    : _classInterfacePair = _processInterfaceImplToken(
-        scope.reader,
-        scope,
-        token,
-      );
+  InterfaceImpl(super.scope, super.token);
 
-  final ({TypeDef class_, TypeDef interface}) _classInterfacePair;
+  TypeDef? _class;
+  TypeDef? _interface;
 
-  TypeDef get class_ => _classInterfacePair.class_;
-
-  TypeDef get interface => _classInterfacePair.interface;
+  late final class_ =
+      _class ??= _processInterfaceImplToken(reader, scope, token).class_;
+  late final interface =
+      _interface ??= _processInterfaceImplToken(reader, scope, token).interface;
 
   /// Whether the [interface] is the `default` interface for the [class_].
   bool get isDefault =>
@@ -31,7 +28,7 @@ class InterfaceImpl extends TokenObject with CustomAttributesMixin {
 
   /// Converts an interface implementation token (0x09) into a tuple of [class_]
   /// and [interface].
-  static ({TypeDef class_, TypeDef interface}) _processInterfaceImplToken(
+  ({TypeDef class_, TypeDef interface}) _processInterfaceImplToken(
     IMetaDataImport2 reader,
     Scope scope,
     int token,
@@ -49,10 +46,11 @@ class InterfaceImpl extends TokenObject with CustomAttributesMixin {
 
       final classToken = ptkClass.value;
       final interfaceToken = ptkIface.value;
-      return (
-        class_: TypeDef.fromToken(scope, classToken),
-        interface: TypeDef.fromToken(scope, interfaceToken),
-      );
+      final class_ = TypeDef.fromToken(scope, classToken);
+      final interface = TypeDef.fromToken(scope, interfaceToken);
+      _class = class_;
+      _interface = interface;
+      return (class_: class_, interface: interface);
     });
   }
 }

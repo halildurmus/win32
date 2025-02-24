@@ -313,7 +313,6 @@ class Method extends TokenObject
         break;
       }
     }
-
     reader.closeEnum(phEnum.value);
   });
 

@@ -2,7 +2,6 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import 'constants.dart';
 import 'scope.dart';
 import 'token_object.dart';
 import 'win32/win32.dart';
@@ -55,7 +54,7 @@ class ClassLayout extends TokenObject {
   }
 
   /// The array of field offsets, for manually-aligned structs.
-  final List<FieldOffset> fieldOffsets = [];
+  final fieldOffsets = <FieldOffset>[];
 
   /// The size in bytes of the class represented.
   int? minimumSize;

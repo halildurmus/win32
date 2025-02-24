@@ -79,7 +79,6 @@
 library;
 
 export 'src/class_layout.dart';
-export 'src/constants.dart';
 export 'src/custom_attribute.dart';
 export 'src/event.dart';
 export 'src/field.dart';

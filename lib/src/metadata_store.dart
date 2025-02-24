@@ -64,6 +64,10 @@ abstract final class MetadataStore {
     if (!_isInitialized) return;
     assert(_dispenser != null, 'Metadata dispenser is not initialized.');
     assert(_nugetClient != null, 'NuGet client is not initialized.');
+    for (final scope in scopeCache.values) {
+      scope.reader.release();
+      scope.assemblyImport.release();
+    }
     _scopeCache.clear();
     _dispenser!.release();
     _dispenser = null;

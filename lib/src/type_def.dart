@@ -4,7 +4,6 @@ import 'package:ffi/ffi.dart';
 
 import 'assembly_ref.dart';
 import 'class_layout.dart';
-import 'constants.dart';
 import 'event.dart';
 import 'field.dart';
 import 'interface_impl.dart';
@@ -177,14 +176,22 @@ class TypeDef extends TokenObject
   final int baseTypeToken;
   final String name;
   final TypeIdentifier? typeSpec;
-
   final int _attributes;
 
-  late final List<Event> events = _getEvents();
-  late final List<Field> fields = _getFields();
-  late final List<TypeDef> interfaces = _getInterfaces();
-  late final List<Method> methods = _getMethods();
-  late final List<Property> properties = _getProperties();
+  /// Enumerate all events contained within this type.
+  late final events = _getEvents();
+
+  /// Enumerate all fields contained within this type.
+  late final fields = _getFields();
+
+  /// Enumerate all interfaces that this type implements.
+  late final interfaces = _getInterfaces();
+
+  /// Enumerate all methods contained within this type.
+  late final methods = _getMethods();
+
+  /// Enumerate all properties contained within this type.
+  late final properties = _getProperties();
 
   /// The token for the class within which this typedef is nested, if there is
   /// one.
@@ -399,7 +406,6 @@ class TypeDef extends TokenObject
   /// layout (e.g. for sparsely or overlapping structs).
   ClassLayout get classLayout => ClassLayout(scope, token);
 
-  /// Enumerate all events contained within this type.
   List<Event> _getEvents() {
     if (TokenType.fromToken(token) == TokenType.typeSpec) return [];
     assert(
@@ -408,7 +414,7 @@ class TypeDef extends TokenObject
     );
 
     final events = <Event>[];
-    using((arena) {
+    return using((arena) {
       final phEnum = arena<HCORENUM>();
       final rgEvents = arena<mdEvent>();
       final pcEvents = arena<ULONG>();
@@ -424,12 +430,10 @@ class TypeDef extends TokenObject
         }
       }
       reader.closeEnum(phEnum.value);
+      return events;
     });
-
-    return events;
   }
 
-  /// Enumerate all fields contained within this type.
   List<Field> _getFields() {
     if (TokenType.fromToken(token) == TokenType.typeSpec) return [];
     assert(
@@ -438,7 +442,7 @@ class TypeDef extends TokenObject
     );
 
     final fields = <Field>[];
-    using((arena) {
+    return using((arena) {
       final phEnum = arena<HCORENUM>();
       final rgFields = arena<mdFieldDef>();
       final pcTokens = arena<ULONG>();
@@ -454,12 +458,10 @@ class TypeDef extends TokenObject
         }
       }
       reader.closeEnum(phEnum.value);
+      return fields;
     });
-
-    return fields;
   }
 
-  /// Enumerate all interfaces that this type implements.
   List<TypeDef> _getInterfaces() {
     if (TokenType.fromToken(token) == TokenType.typeSpec) return [];
     assert(
@@ -468,11 +470,10 @@ class TypeDef extends TokenObject
     );
 
     final interfaces = <TypeDef>[];
-    using((arena) {
+    return using((arena) {
       final phEnum = arena<HCORENUM>();
       final rImpls = arena<mdInterfaceImpl>();
       final pcImpls = arena<ULONG>();
-
       // The enumeration returns a collection of mdInterfaceImpl tokens for each
       // interface implemented by the specified TypeDef.
       while (true) {
@@ -487,9 +488,8 @@ class TypeDef extends TokenObject
         }
       }
       reader.closeEnum(phEnum.value);
+      return interfaces;
     });
-
-    return interfaces;
   }
 
   /// Find the default interface for this type if it is a runtime class.
@@ -504,7 +504,6 @@ class TypeDef extends TokenObject
       final phEnum = arena<HCORENUM>();
       final rImpls = arena<mdInterfaceImpl>();
       final pcImpls = arena<ULONG>();
-
       // The enumeration returns a collection of mdInterfaceImpl tokens for each
       // interface implemented by the specified TypeDef.
       while (true) {
@@ -523,7 +522,6 @@ class TypeDef extends TokenObject
     });
   }
 
-  /// Enumerate all methods contained within this type.
   List<Method> _getMethods() {
     if (TokenType.fromToken(token) == TokenType.typeSpec) return [];
     assert(
@@ -532,8 +530,7 @@ class TypeDef extends TokenObject
     );
 
     final methods = <Method>[];
-
-    using((arena) {
+    return using((arena) {
       final phEnum = arena<HCORENUM>();
       final rgMethods = arena<mdMethodDef>();
       final pcTokens = arena<ULONG>();
@@ -562,12 +559,10 @@ class TypeDef extends TokenObject
         }
       }
       reader.closeEnum(phEnum.value);
+      return methods;
     });
-
-    return methods;
   }
 
-  /// Enumerate all properties contained within this type.
   List<Property> _getProperties() {
     if (TokenType.fromToken(token) == TokenType.typeSpec) return [];
     assert(
@@ -576,7 +571,7 @@ class TypeDef extends TokenObject
     );
 
     final properties = <Property>[];
-    using((arena) {
+    return using((arena) {
       final phEnum = arena<HCORENUM>();
       final rgProperties = arena<mdProperty>();
       final pcProperties = arena<ULONG>();
@@ -592,9 +587,8 @@ class TypeDef extends TokenObject
         }
       }
       reader.closeEnum(phEnum.value);
+      return properties;
     });
-
-    return properties;
   }
 
   /// Get a field matching the name, if one exists.
@@ -674,6 +668,18 @@ class TypeDef extends TokenObject
           ? TypeDef.fromToken(scope, _enclosingClassToken)
           : null;
 
+  /// Get the GUID for this type.
+  ///
+  /// Returns null if a GUID couldn't be found.
+  String? get guid =>
+      _getCustomGuidAttribute('Windows.Foundation.Metadata.GuidAttribute') ??
+      _getCustomGuidAttribute(
+        'Windows.Win32.Foundation.Metadata.GuidAttribute',
+      );
+
+  @override
+  String toString() => name;
+
   /// Gets a named custom attribute that is stored as a GUID.
   String? _getCustomGuidAttribute(String guidAttributeName) => using((arena) {
     final ptrAttributeName = guidAttributeName.toNativeUtf16(allocator: arena);
@@ -694,16 +700,4 @@ class TypeDef extends TokenObject
     // If this fails or no data is returned, return a null value.
     return null;
   });
-
-  /// Get the GUID for this type.
-  ///
-  /// Returns null if a GUID couldn't be found.
-  String? get guid =>
-      _getCustomGuidAttribute('Windows.Foundation.Metadata.GuidAttribute') ??
-      _getCustomGuidAttribute(
-        'Windows.Win32.Foundation.Metadata.GuidAttribute',
-      );
-
-  @override
-  String toString() => name;
 }

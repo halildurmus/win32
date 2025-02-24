@@ -71,12 +71,12 @@ class CustomAttribute extends TokenObject {
   final MemberRef memberRef;
   final TypeDef constructor;
 
-  late final List<CustomAttributeParameter> parameters = _getParameters();
-
   /// The name of the attribute.
-  String get name => constructor.name;
+  late final name = constructor.name;
 
-  /// Parameters for the custom attribute.
+  /// The parameters of the custom attribute.
+  late final parameters = _getParameters();
+
   List<CustomAttributeParameter> _getParameters() {
     final parameters = <CustomAttributeParameter>[];
 

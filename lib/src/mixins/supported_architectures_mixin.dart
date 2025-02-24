@@ -34,9 +34,9 @@ mixin SupportedArchitecturesMixin on CustomAttributesMixin {
   ///
   /// This property currently only supports Win32 metadata.
   Architecture get supportedArchitectures =>
-      _supportedArchitectures ??= _calculateSupportedArchitectures();
+      _supportedArchitectures ??= _getSupportedArchitectures();
 
-  Architecture _calculateSupportedArchitectures() {
+  Architecture _getSupportedArchitectures() {
     final supportedArchAttribute = findAttribute(
       'Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute',
     );
@@ -45,6 +45,6 @@ mixin SupportedArchitecturesMixin on CustomAttributesMixin {
     // support all valid platform architectures.
     return supportedArchAttribute == null
         ? Architecture.all()
-        : Architecture(supportedArchAttribute.parameters.first.value as int);
+        : Architecture(supportedArchAttribute.parameters[0].value as int);
   }
 }

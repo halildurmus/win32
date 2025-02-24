@@ -68,6 +68,36 @@ void main() {
       check(peKind.isPlatformNeutral).isFalse();
     });
 
+    test('findTypeDef finds a type definition', () {
+      final typeDef = win32Scope.findTypeDef(
+        'Windows.Win32.System.Com.IUnknown',
+      );
+      check(typeDef).isNotNull();
+      check(typeDef!.name).equals('Windows.Win32.System.Com.IUnknown');
+    });
+
+    test('findTypeDef finds a type definition for arm64 architecture', () {
+      final typeDef = win32Scope.findTypeDef(
+        'Windows.Win32.UI.Shell.NOTIFYICONDATAW',
+        preferredArchitecture: PreferredArchitecture.arm64,
+      );
+      check(typeDef).isNotNull();
+      check(typeDef!.name).equals('Windows.Win32.UI.Shell.NOTIFYICONDATAW');
+      check(typeDef.typeLayout).equals(TypeLayout.sequential);
+      check(typeDef.classLayout.packingAlignment).isNull();
+    });
+
+    test('findTypeDef finds a type definition for x86 architecture', () {
+      final typeDef = win32Scope.findTypeDef(
+        'Windows.Win32.UI.Shell.NOTIFYICONDATAW',
+        preferredArchitecture: PreferredArchitecture.x86,
+      );
+      check(typeDef).isNotNull();
+      check(typeDef!.name).equals('Windows.Win32.UI.Shell.NOTIFYICONDATAW');
+      check(typeDef.typeLayout).equals(TypeLayout.sequential);
+      check(typeDef.classLayout.packingAlignment).isNotNull().equals(1);
+    });
+
     test('typeDefs ', () {
       check(win32Scope.typeDefs.length).isGreaterOrEqual(30000);
       final iunknown =

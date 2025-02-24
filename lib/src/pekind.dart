@@ -51,6 +51,6 @@ class PEKind {
     IMAGE_FILE_MACHINE_I386 => ImageType.i386,
     IMAGE_FILE_MACHINE_IA64 => ImageType.ia64,
     IMAGE_FILE_MACHINE_AMD64 => ImageType.amd64,
-    _ => throw const WinmdException('Unrecognized image type.'),
+    _ => throw WinmdException('Unrecognized image type: $_machine'),
   };
 }
