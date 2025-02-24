@@ -85,6 +85,7 @@ export 'src/event.dart';
 export 'src/field.dart';
 export 'src/generic_param.dart';
 export 'src/interface_impl.dart';
+export 'src/logger.dart';
 export 'src/member_ref.dart';
 export 'src/metadata_store.dart';
 export 'src/method.dart';

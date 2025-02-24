@@ -8,6 +8,7 @@ import 'constants.dart';
 import 'event.dart';
 import 'field.dart';
 import 'interface_impl.dart';
+import 'logger.dart';
 import 'metadata_store.dart';
 import 'method.dart';
 import 'mixins/mixins.dart';
@@ -548,9 +549,9 @@ class TypeDef extends TokenObject
             if (e.hr == RO_E_METADATA_NAME_NOT_FOUND) {
               // If the method cannot be parsed due to missing references,
               // rather than abruptly exiting, proceed to the next one.
-              print(
-                'Could not parse the method with token $methodToken from '
-                '$name:\n$e',
+              winmdLogger.severe(
+                'Could not parse the method with token '
+                '0x${methodToken.toRadixString(16)} from $name:\n$e',
               );
             } else {
               rethrow;

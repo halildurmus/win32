@@ -6,6 +6,7 @@ import 'package:logging/logging.dart';
 import 'package:nuget/nuget.dart';
 import 'package:path/path.dart' as p;
 
+import 'logger.dart';
 import 'models/models.dart';
 import 'scope.dart';
 import 'type_def.dart';
@@ -30,16 +31,9 @@ abstract final class MetadataStore {
   /// Returns the cached [Scope]s.
   static Map<String, Scope> get scopeCache => Map.unmodifiable(_scopeCache);
 
+  @Deprecated('Use the `winmdLogger` instead.')
   /// The [Logger] used for this class.
-  static Logger logger =
-      Logger('')
-        ..level = Level.INFO
-        ..onRecord.listen((record) {
-          print(
-            '[${record.level.name}] ${_formatTimestamp(record.time)}: '
-            '${record.message}',
-          );
-        });
+  static Logger logger = winmdLogger;
 
   /// Initializes the [MetadataStore].
   ///
@@ -59,7 +53,7 @@ abstract final class MetadataStore {
     _localStorageManager = LocalStorageManager();
     _nugetClient = NuGetClient();
     _isInitialized = true;
-    logger.fine('MetadataStore initialized.');
+    winmdLogger.fine('MetadataStore initialized.');
   }
 
   /// Disposes of all objects and clears the [scopeCache].
@@ -77,7 +71,7 @@ abstract final class MetadataStore {
     _nugetClient!.close();
     _nugetClient = null;
     _isInitialized = false;
-    logger.fine('MetadataStore closed.');
+    winmdLogger.fine('MetadataStore closed.');
   }
 
   /// Finds and returns the metadata scope for the given fully qualified
@@ -102,7 +96,7 @@ abstract final class MetadataStore {
     if (typeName.startsWith('Windows.Wdk')) {
       final assetName = MetadataPackage.wdk.assetName;
       if (_scopeCache.containsKey(assetName)) {
-        logger.fine('Found cached WDK scope for "$typeName".');
+        winmdLogger.fine('Found cached WDK scope for "$typeName".');
         return _scopeCache[assetName]!;
       }
       throw WinmdException(
@@ -114,7 +108,7 @@ abstract final class MetadataStore {
     if (typeName.startsWith('Windows.Win32')) {
       final assetName = MetadataPackage.win32.assetName;
       if (_scopeCache.containsKey(assetName)) {
-        logger.fine('Found cached Win32 scope for "$typeName".');
+        winmdLogger.fine('Found cached Win32 scope for "$typeName".');
         return _scopeCache[assetName]!;
       }
       throw WinmdException(
@@ -126,7 +120,7 @@ abstract final class MetadataStore {
     if (typeName.startsWith('Windows')) {
       final assetName = MetadataPackage.winrt.assetName;
       if (_scopeCache.containsKey(assetName)) {
-        logger.fine('Found cached WinRT scope for "$typeName".');
+        winmdLogger.fine('Found cached WinRT scope for "$typeName".');
         return _scopeCache[assetName]!;
       }
       throw WinmdException(
@@ -194,7 +188,7 @@ abstract final class MetadataStore {
       );
       final fileName = p.basename(file.path);
       _scopeCache[fileName] = scope;
-      logger.info('Scope loaded and cached from file "${file.path}".');
+      winmdLogger.info('Scope loaded and cached from file "${file.path}".');
       return scope;
     } finally {
       free(szFile);
@@ -236,13 +230,13 @@ abstract final class MetadataStore {
       version,
     );
     if (packageDirectory != null) {
-      logger.fine(
+      winmdLogger.fine(
         'Found NuGet package "$package" (version $version) in local storage.',
       );
       final metadataFile = File(p.join(packageDirectory, package.assetName));
       return loadScopeFromFile(metadataFile);
     }
-    logger.fine(
+    winmdLogger.fine(
       'NuGet package "$package" (version $version) is not found in local storage.',
     );
     return null;
@@ -255,14 +249,16 @@ abstract final class MetadataStore {
   }) async {
     if (!_isInitialized) initialize();
 
-    logger.fine('Loading scope for "${package.name}"...');
+    winmdLogger.fine('Loading scope for "${package.name}"...');
     final MetadataPackage(:packageId, :assetName) = package;
 
     // Try to load from local storage.
     if (version != null) {
       final cached = _tryLoadingScopeFromFile(package, version);
       if (cached != null) {
-        logger.fine('Loaded scope for "${package.name}" from local storage.');
+        winmdLogger.fine(
+          'Loaded scope for "${package.name}" from local storage.',
+        );
         return cached;
       }
     }
@@ -274,14 +270,16 @@ abstract final class MetadataStore {
           packageId,
           includePrerelease: includePrerelease,
         );
-    logger.fine(
+    winmdLogger.fine(
       'The latest version for NuGet package "$packageId" is "$versionToUse".',
     );
 
     // Try to load from local storage.
     final cached = _tryLoadingScopeFromFile(package, versionToUse);
     if (cached != null) {
-      logger.fine('Loaded scope for "${package.name}" from local storage.');
+      winmdLogger.fine(
+        'Loaded scope for "${package.name}" from local storage.',
+      );
       return cached;
     }
 
@@ -293,7 +291,7 @@ abstract final class MetadataStore {
         packageId,
         version: versionToUse,
       ),
-      logger: logger,
+      logger: winmdLogger,
     );
     final metadataFile = File(p.join(packageDirectory, assetName));
 
@@ -301,34 +299,23 @@ abstract final class MetadataStore {
     if (package == MetadataPackage.winrt) {
       if (!metadataFile.existsSync()) {
         final metadataPath = p.join(packageDirectory, 'ref', 'netstandard2.0');
-        logger.info('Merging WinRT metadata files into a single file...');
+        winmdLogger.info('Merging WinRT metadata files into a single file...');
         final startTime = DateTime.now();
         MdMerge.mergeMetadata(metadataPath, packageDirectory);
         final duration = DateTime.now().difference(startTime);
         final seconds = (duration.inMilliseconds / 1000.0).toStringAsFixed(1);
-        logger.info('Merge took ${seconds}s.');
+        winmdLogger.info('Merge took ${seconds}s.');
       } else {
-        logger.fine(
+        winmdLogger.fine(
           'WinRT metadata file already exists at "${metadataFile.path}". '
           'Skipping merge.',
         );
       }
     }
 
-    logger.fine(
+    winmdLogger.fine(
       'Loading scope for "${package.name}" from metadata file "${metadataFile.path}".',
     );
     return loadScopeFromFile(metadataFile);
   }
-}
-
-/// Formats a [DateTime] as "yyyy-MM-dd HH:mm:ss".
-String _formatTimestamp(DateTime time) {
-  final year = time.year.toString().padLeft(4, '0');
-  final month = time.month.toString().padLeft(2, '0');
-  final day = time.day.toString().padLeft(2, '0');
-  final hour = time.hour.toString().padLeft(2, '0');
-  final minute = time.minute.toString().padLeft(2, '0');
-  final second = time.second.toString().padLeft(2, '0');
-  return '$year-$month-$day $hour:$minute:$second';
 }
