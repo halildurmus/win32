@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.1.0] - 2025-02-24
+
+### 🚀 Features
+
+- Add `winmdLogger` to control package-wide logging by @halildurmus
+
+### ⚡ Performance
+
+- Populate TypeDefs lazily by @halildurmus
+
+### 🧹 Refactor
+
+- Remove the dependencies on win32 and win32_registry by @halildurmus in [#110](https://github.com/halildurmus/winmd/pull/110)
+
+[6.1.0]: https://github.com/halildurmus/winmd/compare/v6.0.0..v6.1.0
+
 ## [6.0.0] - 2025-02-22
 
 ### 🚀 Features
