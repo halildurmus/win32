@@ -359,8 +359,24 @@ class TypeDef extends TokenObject
       throw const WinmdException('Attribute missing string format information'),
   };
 
-  /// Whether the CLI need not initialize the type before a static method is
-  /// called.
+  TypeDefKind? _kind;
+
+  /// The kind of type this typedef represents.
+  TypeDefKind get kind => _kind ??= _computeKind();
+
+  TypeDefKind _computeKind() {
+    if (isInterface) return TypeDefKind.interface;
+    return switch (parent?.name) {
+      'System.Attribute' => TypeDefKind.attribute,
+      'System.Enum' => TypeDefKind.enum$,
+      'System.MulticastDelegate' => TypeDefKind.delegate,
+      'System.ValueType' => TypeDefKind.struct,
+      _ => TypeDefKind.class$,
+    };
+  }
+
+  /// Whether the CLI need not initialize the type before a static
+  /// method is called.
   bool get isBeforeFieldInit =>
       _attributes & tdBeforeFieldInit == tdBeforeFieldInit;
 
@@ -712,3 +728,5 @@ class TypeDef extends TokenObject
     return null;
   });
 }
+
+enum TypeDefKind { attribute, class$, delegate, enum$, interface, struct }

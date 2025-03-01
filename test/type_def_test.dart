@@ -24,7 +24,8 @@ void main() {
           'Windows.Win32.Foundation.Metadata.NativeEncodingAttribute',
         );
         check(typeDef).isNotNull();
-        check(typeDef!.isAttribute).isTrue();
+        check(typeDef!.kind).equals(TypeDefKind.attribute);
+        check(typeDef.isAttribute).isTrue();
         check(typeDef.isClass).isFalse();
         check(typeDef.isDelegate).isFalse();
         check(typeDef.isEnum).isFalse();
@@ -36,7 +37,8 @@ void main() {
       test('class', () {
         final typeDef = win32Scope.findTypeDef('Windows.Win32.Foundation.Apis');
         check(typeDef).isNotNull();
-        check(typeDef!.isClass).isTrue();
+        check(typeDef!.kind).equals(TypeDefKind.class$);
+        check(typeDef.isClass).isTrue();
         check(typeDef.isDelegate).isFalse();
         check(typeDef.isEnum).isFalse();
         check(typeDef.isInterface).isFalse();
@@ -49,7 +51,8 @@ void main() {
           'Windows.Win32.UI.Shell.APPLET_PROC',
         );
         check(typeDef).isNotNull();
-        check(typeDef!.isDelegate).isTrue();
+        check(typeDef!.kind).equals(TypeDefKind.delegate);
+        check(typeDef.isDelegate).isTrue();
         check(typeDef.isClass).isFalse();
         check(typeDef.isEnum).isFalse();
         check(typeDef.isInterface).isFalse();
@@ -62,7 +65,8 @@ void main() {
           'Windows.Win32.Graphics.Gdi.BACKGROUND_MODE',
         );
         check(typeDef).isNotNull();
-        check(typeDef!.isEnum).isTrue();
+        check(typeDef!.kind).equals(TypeDefKind.enum$);
+        check(typeDef.isEnum).isTrue();
         check(typeDef.isClass).isFalse();
         check(typeDef.isDelegate).isFalse();
         check(typeDef.isInterface).isFalse();
@@ -75,7 +79,8 @@ void main() {
           'Windows.Win32.UI.Shell.IFileOpenDialog',
         );
         check(typeDef).isNotNull();
-        check(typeDef!.isInterface).isTrue();
+        check(typeDef!.kind).equals(TypeDefKind.interface);
+        check(typeDef.isInterface).isTrue();
         check(typeDef.isClass).isFalse();
         check(typeDef.isDelegate).isFalse();
         check(typeDef.isEnum).isFalse();
@@ -88,7 +93,8 @@ void main() {
           'Windows.Win32.Graphics.Gdi.MONITORINFOEXW',
         );
         check(typeDef).isNotNull();
-        check(typeDef!.isStruct).isTrue();
+        check(typeDef!.kind).equals(TypeDefKind.struct);
+        check(typeDef.isStruct).isTrue();
         check(typeDef.isClass).isFalse();
         check(typeDef.isDelegate).isFalse();
         check(typeDef.isEnum).isFalse();
@@ -103,7 +109,8 @@ void main() {
           'Windows.Foundation.Metadata.DefaultAttribute',
         );
         check(typeDef).isNotNull();
-        check(typeDef!.isAttribute).isTrue();
+        check(typeDef!.kind).equals(TypeDefKind.attribute);
+        check(typeDef.isAttribute).isTrue();
         check(typeDef.isClass).isFalse();
         check(typeDef.isDelegate).isFalse();
         check(typeDef.isEnum).isFalse();
@@ -117,7 +124,8 @@ void main() {
           'Windows.Globalization.Calendar',
         );
         check(typeDef).isNotNull();
-        check(typeDef!.isClass).isTrue();
+        check(typeDef!.kind).equals(TypeDefKind.class$);
+        check(typeDef.isClass).isTrue();
         check(typeDef.isDelegate).isFalse();
         check(typeDef.isEnum).isFalse();
         check(typeDef.isInterface).isFalse();
@@ -130,7 +138,8 @@ void main() {
           'Windows.Gaming.Preview.GamesEnumeration.GameListChangedEventHandler',
         );
         check(typeDef).isNotNull();
-        check(typeDef!.isDelegate).isTrue();
+        check(typeDef!.kind).equals(TypeDefKind.delegate);
+        check(typeDef.isDelegate).isTrue();
         check(typeDef.isClass).isFalse();
         check(typeDef.isEnum).isFalse();
         check(typeDef.isInterface).isFalse();
@@ -143,7 +152,8 @@ void main() {
           'Windows.Globalization.DayOfWeek',
         );
         check(typeDef).isNotNull();
-        check(typeDef!.isEnum).isTrue();
+        check(typeDef!.kind).equals(TypeDefKind.enum$);
+        check(typeDef.isEnum).isTrue();
         check(typeDef.isClass).isFalse();
         check(typeDef.isDelegate).isFalse();
         check(typeDef.isInterface).isFalse();
@@ -156,7 +166,8 @@ void main() {
           'Windows.Globalization.ICalendar',
         );
         check(typeDef).isNotNull();
-        check(typeDef!.isInterface).isTrue();
+        check(typeDef!.kind).equals(TypeDefKind.interface);
+        check(typeDef.isInterface).isTrue();
         check(typeDef.isClass).isFalse();
         check(typeDef.isDelegate).isFalse();
         check(typeDef.isEnum).isFalse();
@@ -167,7 +178,8 @@ void main() {
       test('struct', () {
         final typeDef = winrtScope.findTypeDef('Windows.Foundation.Point');
         check(typeDef).isNotNull();
-        check(typeDef!.isStruct).isTrue();
+        check(typeDef!.kind).equals(TypeDefKind.struct);
+        check(typeDef.isStruct).isTrue();
         check(typeDef.isClass).isFalse();
         check(typeDef.isDelegate).isFalse();
         check(typeDef.isEnum).isFalse();
