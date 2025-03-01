@@ -322,39 +322,39 @@ class TypeDef extends TokenObject
       throw const WinmdException('Attribute missing type layout information'),
   };
 
-  /// Returns true if the metadata for the object is represented as a class
+  /// Whether the metadata for the object is represented as a class
   /// type.
   ///
   /// Note that structs, enums and delegates are also represented as classes in
-  /// metadata. Use the [isClass], [isStruct] or [isDelegate] property to
+  /// metadata. Use the [isClass], [isDelegate] or [isStruct] property to
   /// validate the kind of class.
   bool get representsAsClass => _attributes & tdClassSemanticsMask == tdClass;
 
   /// Returns trus if the type is an interface.
   bool get isInterface => _attributes & tdClassSemanticsMask == tdInterface;
 
-  /// Returns true if this type may not be directly instantiated.
+  /// Whether this type may not be directly instantiated.
   bool get isAbstract => _attributes & tdAbstract == tdAbstract;
 
-  /// Returns true if this type may not have derived types.
+  /// Whether this type may not have derived types.
   bool get isSealed => _attributes & tdSealed == tdSealed;
 
-  /// Returns true if the name of the item may have special significance to
+  /// Whether the name of the item may have special significance to
   /// tools other than the CLI.
   bool get isSpecialName => _attributes & tdSpecialName == tdSpecialName;
 
-  /// Returns true if the type is imported.
+  /// Whether the type is imported.
   bool get isImported => _attributes & tdImport == tdImport;
 
-  /// Returns true if the fields of the type are to be serialized into a data
+  /// Whether the fields of the type are to be serialized into a data
   /// stream.
   bool get isSerializable => _attributes & tdSerializable == tdSerializable;
 
-  /// Returns true if the type is a Windows Runtime type.
+  /// Whether the type is a Windows Runtime type.
   bool get isWindowsRuntime =>
       _attributes & tdWindowsRuntime == tdWindowsRuntime;
 
-  /// Returns true if the name of the item has special significance to the CLI.
+  /// Whether the name of the item has special significance to the CLI.
   bool get isRTSpecialName => _attributes & tdRTSpecialName == tdRTSpecialName;
 
   StringFormat get stringFormat => switch (_attributes & tdStringFormatMask) {
@@ -366,31 +366,36 @@ class TypeDef extends TokenObject
       throw const WinmdException('Attribute missing string format information'),
   };
 
-  /// Returns true if the CLI need not initialize the type before a static
-  /// method is called.
+  /// Whether the CLI need not initialize the type before a static method is
+  /// called.
   bool get isBeforeFieldInit =>
       _attributes & tdBeforeFieldInit == tdBeforeFieldInit;
 
-  /// Returns true if the type is exported, and a type forwarder.
+  /// Whether the type is exported, and a type forwarder.
   bool get isForwarder => _attributes & tdForwarder == tdForwarder;
 
-  /// Returns true if the type is a delegate.
+  /// Whether the type is an attribute.
+  bool get isAttribute =>
+      representsAsClass && parent?.name == 'System.Attribute';
+
+  /// Whether the type is a class.
+  bool get isClass =>
+      representsAsClass && !isAttribute && !isDelegate && !isEnum && !isStruct;
+
+  /// Whether the type is a delegate.
   bool get isDelegate =>
       representsAsClass && parent?.name == 'System.MulticastDelegate';
 
-  /// Returns true if the type is a class.
-  bool get isClass => representsAsClass && !isDelegate && !isStruct && !isEnum;
-
-  /// Returns true if the type is an enumeration.
+  /// Whether the type is an enumeration.
   bool get isEnum => representsAsClass && parent?.name == 'System.Enum';
 
-  /// Returns true if the type is a struct.
+  /// Whether the type is a struct.
   bool get isStruct =>
       representsAsClass &&
       fields.isNotEmpty &&
       parent?.name == 'System.ValueType';
 
-  /// Returns true if the type is a union.
+  /// Whether the type is a union.
   ///
   /// A union is a struct where every field begins at the zeroth offset; it is
   /// sized to the largest field. An example is the Win32 `INPUT` union, which

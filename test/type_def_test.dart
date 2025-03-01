@@ -17,158 +17,208 @@ void main() {
         ).wait;
   });
 
-  test('Find an unknown field', () {
-    final typeDef = win32Scope.findTypeDef('Windows.Win32.Media.Audio.Apis');
-    check(typeDef).isNotNull();
-    final field = typeDef!.findField('THIS_ONE_GOES_TO_11');
-    check(field).isNull();
-  });
+  group('TypeDef', () {
+    group('Win32', () {
+      test('attribute', () {
+        final typeDef = win32Scope.findTypeDef(
+          'Windows.Win32.Foundation.Metadata.NativeEncodingAttribute',
+        );
+        check(typeDef).isNotNull();
+        check(typeDef!.isAttribute).isTrue();
+        check(typeDef.isClass).isFalse();
+        check(typeDef.isDelegate).isFalse();
+        check(typeDef.isEnum).isFalse();
+        check(typeDef.isInterface).isFalse();
+        check(typeDef.isStruct).isFalse();
+        check(typeDef.isWindowsRuntime).isFalse();
+      });
 
-  test('Test for unknown field', () {
-    final typeDef = win32Scope.findTypeDef('Windows.Win32.Media.Audio.Apis');
-    check(typeDef).isNotNull();
-    final method = typeDef!.findMethod('PlaySoundVeryLoudly');
-    check(method).isNull();
-  });
+      test('class', () {
+        final typeDef = win32Scope.findTypeDef(
+          'Windows.Win32.UI.Shell.FileOpenDialog',
+        );
+        check(typeDef).isNotNull();
+        check(typeDef!.isClass).isTrue();
+        check(typeDef.isDelegate).isFalse();
+        check(typeDef.isEnum).isFalse();
+        check(typeDef.isInterface).isFalse();
+        check(typeDef.isStruct).isFalse();
+        check(typeDef.isWindowsRuntime).isFalse();
+      });
 
-  test('Test for parent field', () {
-    final typeDef = winrtScope.findTypeDef('Windows.Data.Xml.Dom.IXmlNodeList');
-    check(typeDef).isNotNull();
-    final parent = typeDef!.parent;
-    check(parent).isNotNull();
-    check(parent!.name).endsWith('IInspectable');
-    check(parent.parent).isNull();
-  });
+      test('delegate', () {
+        final typeDef = win32Scope.findTypeDef(
+          'Windows.Win32.UI.Shell.APPLET_PROC',
+        );
+        check(typeDef).isNotNull();
+        check(typeDef!.isDelegate).isTrue();
+        check(typeDef.isClass).isFalse();
+        check(typeDef.isEnum).isFalse();
+        check(typeDef.isInterface).isFalse();
+        check(typeDef.isStruct).isFalse();
+        check(typeDef.isWindowsRuntime).isFalse();
+      });
 
-  test(
-    'Distinguish Win32 structs, delegates, classes, enums, and interfaces',
-    () {
-      final class_ = win32Scope.findTypeDef(
-        'Windows.Win32.UI.Shell.FileOpenDialog',
-      );
-      check(class_).isNotNull();
-      check(class_!.isClass).isTrue();
-      check(class_.isDelegate).isFalse();
-      check(class_.isEnum).isFalse();
-      check(class_.isInterface).isFalse();
-      check(class_.isStruct).isFalse();
-      check(class_.isWindowsRuntime).isFalse();
+      test('enum', () {
+        final typeDef = win32Scope.findTypeDef(
+          'Windows.Win32.Graphics.Gdi.BACKGROUND_MODE',
+        );
+        check(typeDef).isNotNull();
+        check(typeDef!.isEnum).isTrue();
+        check(typeDef.isClass).isFalse();
+        check(typeDef.isDelegate).isFalse();
+        check(typeDef.isInterface).isFalse();
+        check(typeDef.isStruct).isFalse();
+        check(typeDef.isWindowsRuntime).isFalse();
+      });
 
-      final delegate = win32Scope.findTypeDef(
-        'Windows.Win32.UI.Shell.APPLET_PROC',
-      );
-      check(delegate).isNotNull();
-      check(delegate!.isDelegate).isTrue();
-      check(delegate.isClass).isFalse();
-      check(delegate.isEnum).isFalse();
-      check(delegate.isInterface).isFalse();
-      check(delegate.isStruct).isFalse();
-      check(delegate.isWindowsRuntime).isFalse();
+      test('interface', () {
+        final typeDef = win32Scope.findTypeDef(
+          'Windows.Win32.UI.Shell.IFileOpenDialog',
+        );
+        check(typeDef).isNotNull();
+        check(typeDef!.isInterface).isTrue();
+        check(typeDef.isClass).isFalse();
+        check(typeDef.isDelegate).isFalse();
+        check(typeDef.isEnum).isFalse();
+        check(typeDef.isStruct).isFalse();
+        check(typeDef.isWindowsRuntime).isFalse();
+      });
 
-      final enum_ = win32Scope.findTypeDef(
-        'Windows.Win32.Graphics.Gdi.BACKGROUND_MODE',
-      );
-      check(enum_).isNotNull();
-      check(enum_!.isEnum).isTrue();
-      check(enum_.isClass).isFalse();
-      check(enum_.isDelegate).isFalse();
-      check(enum_.isInterface).isFalse();
-      check(enum_.isStruct).isFalse();
-      check(enum_.isWindowsRuntime).isFalse();
-
-      final interface = win32Scope.findTypeDef(
-        'Windows.Win32.UI.Shell.IFileOpenDialog',
-      );
-      check(interface).isNotNull();
-      check(interface!.isInterface).isTrue();
-      check(interface.isClass).isFalse();
-      check(interface.isDelegate).isFalse();
-      check(interface.isEnum).isFalse();
-      check(interface.isStruct).isFalse();
-      check(interface.isWindowsRuntime).isFalse();
-
-      final struct = win32Scope.findTypeDef(
-        'Windows.Win32.Graphics.Gdi.MONITORINFOEXW',
-      );
-      check(struct).isNotNull();
-      check(struct!.isStruct).isTrue();
-      check(struct.isClass).isFalse();
-      check(struct.isDelegate).isFalse();
-      check(struct.isEnum).isFalse();
-      check(struct.isInterface).isFalse();
-      check(struct.isWindowsRuntime).isFalse();
-    },
-  );
-
-  test(
-    'Distinguish WinRT structs, delegates, classes, enums, and interfaces',
-    () {
-      final class_ = winrtScope.findTypeDef('Windows.Globalization.Calendar');
-      check(class_).isNotNull();
-      check(class_!.isClass).isTrue();
-      check(class_.isDelegate).isFalse();
-      check(class_.isEnum).isFalse();
-      check(class_.isInterface).isFalse();
-      check(class_.isStruct).isFalse();
-      check(class_.isWindowsRuntime).isTrue();
-
-      final delegate = winrtScope.findTypeDef(
-        'Windows.Gaming.Preview.GamesEnumeration.GameListChangedEventHandler',
-      );
-      check(delegate).isNotNull();
-      check(delegate!.isDelegate).isTrue();
-      check(delegate.isClass).isFalse();
-      check(delegate.isEnum).isFalse();
-      check(delegate.isInterface).isFalse();
-      check(delegate.isStruct).isFalse();
-      check(delegate.isWindowsRuntime).isTrue();
-
-      final enum_ = winrtScope.findTypeDef('Windows.Globalization.DayOfWeek');
-      check(enum_).isNotNull();
-      check(enum_!.isEnum).isTrue();
-      check(enum_.isClass).isFalse();
-      check(enum_.isDelegate).isFalse();
-      check(enum_.isInterface).isFalse();
-      check(enum_.isStruct).isFalse();
-      check(enum_.isWindowsRuntime).isTrue();
-
-      final interface = winrtScope.findTypeDef(
-        'Windows.Globalization.ICalendar',
-      );
-      check(interface).isNotNull();
-      check(interface!.isInterface).isTrue();
-      check(interface.isClass).isFalse();
-      check(interface.isDelegate).isFalse();
-      check(interface.isEnum).isFalse();
-      check(interface.isStruct).isFalse();
-      check(interface.isWindowsRuntime).isTrue();
-
-      final struct = winrtScope.findTypeDef('Windows.Foundation.Point');
-      check(struct).isNotNull();
-      check(struct!.isStruct).isTrue();
-      check(struct.isClass).isFalse();
-      check(struct.isDelegate).isFalse();
-      check(struct.isEnum).isFalse();
-      check(struct.isInterface).isFalse();
-      check(struct.isWindowsRuntime).isTrue();
-    },
-  );
-
-  group('defaultInterface', () {
-    test('returns null if the TypeDef is not a runtime class', () {
-      final typeDef = winrtScope.findTypeDef('Windows.Networking.IHostName');
-      check(typeDef).isNotNull();
-      check(typeDef!.name).endsWith('IHostName');
-      check(typeDef.defaultInterface).isNull();
+      test('struct', () {
+        final typeDef = win32Scope.findTypeDef(
+          'Windows.Win32.Graphics.Gdi.MONITORINFOEXW',
+        );
+        check(typeDef).isNotNull();
+        check(typeDef!.isStruct).isTrue();
+        check(typeDef.isClass).isFalse();
+        check(typeDef.isDelegate).isFalse();
+        check(typeDef.isEnum).isFalse();
+        check(typeDef.isInterface).isFalse();
+        check(typeDef.isWindowsRuntime).isFalse();
+      });
     });
 
-    test('returns the correct default interface for a runtime class', () {
-      final typeDef = winrtScope.findTypeDef('Windows.Networking.HostName');
+    group('WinRT', () {
+      test('attribute', () {
+        final typeDef = winrtScope.findTypeDef(
+          'Windows.Foundation.Metadata.DefaultAttribute',
+        );
+        check(typeDef).isNotNull();
+        check(typeDef!.isAttribute).isTrue();
+        check(typeDef.isClass).isFalse();
+        check(typeDef.isDelegate).isFalse();
+        check(typeDef.isEnum).isFalse();
+        check(typeDef.isInterface).isFalse();
+        check(typeDef.isStruct).isFalse();
+        check(typeDef.isWindowsRuntime).isTrue();
+      });
+
+      test('class', () {
+        final typeDef = winrtScope.findTypeDef(
+          'Windows.Globalization.Calendar',
+        );
+        check(typeDef).isNotNull();
+        check(typeDef!.isClass).isTrue();
+        check(typeDef.isDelegate).isFalse();
+        check(typeDef.isEnum).isFalse();
+        check(typeDef.isInterface).isFalse();
+        check(typeDef.isStruct).isFalse();
+        check(typeDef.isWindowsRuntime).isTrue();
+      });
+
+      test('delegate', () {
+        final typeDef = winrtScope.findTypeDef(
+          'Windows.Gaming.Preview.GamesEnumeration.GameListChangedEventHandler',
+        );
+        check(typeDef).isNotNull();
+        check(typeDef!.isDelegate).isTrue();
+        check(typeDef.isClass).isFalse();
+        check(typeDef.isEnum).isFalse();
+        check(typeDef.isInterface).isFalse();
+        check(typeDef.isStruct).isFalse();
+        check(typeDef.isWindowsRuntime).isTrue();
+      });
+
+      test('enum', () {
+        final typeDef = winrtScope.findTypeDef(
+          'Windows.Globalization.DayOfWeek',
+        );
+        check(typeDef).isNotNull();
+        check(typeDef!.isEnum).isTrue();
+        check(typeDef.isClass).isFalse();
+        check(typeDef.isDelegate).isFalse();
+        check(typeDef.isInterface).isFalse();
+        check(typeDef.isStruct).isFalse();
+        check(typeDef.isWindowsRuntime).isTrue();
+      });
+
+      test('interface', () {
+        final typeDef = winrtScope.findTypeDef(
+          'Windows.Globalization.ICalendar',
+        );
+        check(typeDef).isNotNull();
+        check(typeDef!.isInterface).isTrue();
+        check(typeDef.isClass).isFalse();
+        check(typeDef.isDelegate).isFalse();
+        check(typeDef.isEnum).isFalse();
+        check(typeDef.isStruct).isFalse();
+        check(typeDef.isWindowsRuntime).isTrue();
+      });
+
+      test('struct', () {
+        final typeDef = winrtScope.findTypeDef('Windows.Foundation.Point');
+        check(typeDef).isNotNull();
+        check(typeDef!.isStruct).isTrue();
+        check(typeDef.isClass).isFalse();
+        check(typeDef.isDelegate).isFalse();
+        check(typeDef.isEnum).isFalse();
+        check(typeDef.isInterface).isFalse();
+        check(typeDef.isWindowsRuntime).isTrue();
+      });
+    });
+
+    group('defaultInterface', () {
+      test('returns null if the TypeDef is not a runtime class', () {
+        final typeDef = winrtScope.findTypeDef('Windows.Networking.IHostName');
+        check(typeDef).isNotNull();
+        check(typeDef!.name).endsWith('IHostName');
+        check(typeDef.defaultInterface).isNull();
+      });
+
+      test('returns the correct default interface for a runtime class', () {
+        final typeDef = winrtScope.findTypeDef('Windows.Networking.HostName');
+        check(typeDef).isNotNull();
+        check(typeDef!.name).endsWith('HostName');
+        check(
+          typeDef.defaultInterface,
+        ).isNotNull().has((it) => it.name, 'name').endsWith('IHostName');
+      });
+    });
+
+    test('findField', () {
+      final typeDef = win32Scope.findTypeDef('Windows.Win32.Media.Audio.Apis');
       check(typeDef).isNotNull();
-      check(typeDef!.name).endsWith('HostName');
-      check(
-        typeDef.defaultInterface,
-      ).isNotNull().has((it) => it.name, 'name').endsWith('IHostName');
+      final field = typeDef!.findField('THIS_ONE_GOES_TO_11');
+      check(field).isNull();
+    });
+
+    test('findMethod', () {
+      final typeDef = win32Scope.findTypeDef('Windows.Win32.Media.Audio.Apis');
+      check(typeDef).isNotNull();
+      final method = typeDef!.findMethod('PlaySoundVeryLoudly');
+      check(method).isNull();
+    });
+
+    test('parent', () {
+      final typeDef = winrtScope.findTypeDef(
+        'Windows.Data.Xml.Dom.IXmlNodeList',
+      );
+      check(typeDef).isNotNull();
+      final parent = typeDef!.parent;
+      check(parent).isNotNull();
+      check(parent!.name).endsWith('IInspectable');
+      check(parent.parent).isNull();
     });
   });
 
