@@ -98,7 +98,7 @@ void main() {
       check(typeDef.classLayout.packingAlignment).isNotNull().equals(1);
     });
 
-    test('typeDefs ', () {
+    test('typeDefs', () {
       check(win32Scope.typeDefs.length).isGreaterOrEqual(30000);
       final iunknown =
           win32Scope.typeDefs
@@ -114,13 +114,13 @@ void main() {
       check(asyncInfo).isNotNull();
     });
 
-    test('classes ', () {
-      check(win32Scope.classes.length).isGreaterOrEqual(2000);
-      final spVoice =
+    test('classes', () {
+      check(win32Scope.classes.length).isGreaterOrEqual(300);
+      final foundationApis =
           win32Scope.classes
-              .where((t) => t.name == 'Windows.Win32.Media.Speech.SpVoice')
+              .where((t) => t.name == 'Windows.Win32.Foundation.Apis')
               .firstOrNull;
-      check(spVoice).isNotNull();
+      check(foundationApis).isNotNull();
       check(win32Scope.classes.every((t) => t.isClass)).isTrue();
 
       check(winrtScope.classes.length).isGreaterOrEqual(3000);
@@ -132,7 +132,7 @@ void main() {
       check(winrtScope.classes.every((t) => t.isClass)).isTrue();
     });
 
-    test('delegates ', () {
+    test('delegates', () {
       check(win32Scope.delegates.length).isGreaterOrEqual(2000);
       final asyncCallback =
           win32Scope.delegates
@@ -153,7 +153,7 @@ void main() {
       check(winrtScope.delegates.every((t) => t.isDelegate)).isTrue();
     });
 
-    test('enums ', () {
+    test('enums', () {
       check(win32Scope.enums.length).isGreaterOrEqual(6000);
       final apttype =
           win32Scope.enums
@@ -171,7 +171,7 @@ void main() {
       check(winrtScope.enums.every((t) => t.isEnum)).isTrue();
     });
 
-    test('interfaces ', () {
+    test('interfaces', () {
       check(win32Scope.interfaces.length).isGreaterOrEqual(6000);
       final iunknown =
           win32Scope.interfaces
@@ -192,7 +192,7 @@ void main() {
       check(winrtScope.interfaces.every((t) => t.isInterface)).isTrue();
     });
 
-    test('structs ', () {
+    test('structs', () {
       check(win32Scope.structs.length).isGreaterOrEqual(10000);
       final hwnd =
           win32Scope.structs

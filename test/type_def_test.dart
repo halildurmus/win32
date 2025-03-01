@@ -34,9 +34,7 @@ void main() {
       });
 
       test('class', () {
-        final typeDef = win32Scope.findTypeDef(
-          'Windows.Win32.UI.Shell.FileOpenDialog',
-        );
+        final typeDef = win32Scope.findTypeDef('Windows.Win32.Foundation.Apis');
         check(typeDef).isNotNull();
         check(typeDef!.isClass).isTrue();
         check(typeDef.isDelegate).isFalse();

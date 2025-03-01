@@ -390,10 +390,7 @@ class TypeDef extends TokenObject
   bool get isEnum => representsAsClass && parent?.name == 'System.Enum';
 
   /// Whether the type is a struct.
-  bool get isStruct =>
-      representsAsClass &&
-      fields.isNotEmpty &&
-      parent?.name == 'System.ValueType';
+  bool get isStruct => representsAsClass && parent?.name == 'System.ValueType';
 
   /// Whether the type is a union.
   ///
