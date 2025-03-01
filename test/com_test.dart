@@ -39,12 +39,25 @@ void main() {
       check(typeDef.isResolvedToken).isTrue();
     });
 
-    test('INetwork inherits from IDispatch', () {
+    test('parent is IUnknown', () {
       final typeDef = win32Scope.findTypeDef(
         'Windows.Win32.Networking.NetworkListManager.INetwork',
       );
       check(typeDef).isNotNull();
-      check(typeDef!.interfaces.first.name).endsWith('IDispatch');
+      check(typeDef!.parent).isNotNull();
+      check(typeDef.parent!.name).equals('IUnknown');
+      check(typeDef.parent!.parent).isNull();
+    });
+
+    test('implements IDispatch', () {
+      final typeDef = win32Scope.findTypeDef(
+        'Windows.Win32.Networking.NetworkListManager.INetwork',
+      );
+      check(typeDef).isNotNull();
+      final idispatch = typeDef!.interfaces[0];
+      check(idispatch.name).endsWith('IDispatch');
+      check(idispatch.parent!.name).equals('IUnknown');
+      check(idispatch.parent!.parent).isNull();
     });
 
     test('Interface has expected number of methods', () {

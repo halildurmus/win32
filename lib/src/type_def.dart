@@ -38,89 +38,13 @@ class TypeDef extends TokenObject
     this.typeSpec,
   ]);
 
-  /// Instantiate a typedef from a TypeRef token.
-  ///
-  /// Unless the TypeRef token is `IInspectable`, the COM parent interface for
-  /// Windows Runtime classes, the TypeRef is used to obtain the host scope
-  /// metadata file, from which the TypeDef can be found and returned.
-  factory TypeDef.fromTypeRefToken(Scope scope, int typeRefToken) {
-    assert(
-      TokenType.fromToken(typeRefToken) == TokenType.typeRef,
-      'Token $typeRefToken is not a typeRef token',
-    );
-
-    return using((arena) {
-      final ptkResolutionScope = arena<mdToken>();
-      final szName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
-      final pchName = arena<ULONG>();
-
-      scope.reader.getTypeRefProps(
-        typeRefToken,
-        ptkResolutionScope,
-        szName,
-        stringBufferSize,
-        pchName,
-      );
-
-      final typeName = szName.toDartString();
-      final resolutionScopeToken = ptkResolutionScope.value;
-
-      // Special case for WinRT base type
-      if (resolutionScopeToken == 0x00 && typeRefToken == 0x01000000) {
-        return TypeDef(scope, 0, 'IInspectable');
-      }
-
-      // If it's the same scope, just look it up based on the returned name.
-      if (resolutionScopeToken == scope.moduleToken) {
-        return scope.findTypeDef(typeName) ?? TypeDef(scope, 0, typeName);
-      }
-
-      // Is it a nested type? If so, we find a type in the parent type that
-      // matches its name, if one exists (which it presumably should).
-      if (TokenType.fromToken(resolutionScopeToken) == TokenType.typeRef) {
-        return _resolveNestedType(
-          scope,
-          resolutionScopeToken,
-          typeRefToken,
-          typeName,
-        );
-      }
-
-      // Is it an AssemblyRef that is not part of .NET? If so, we need to load
-      // the scope that contains it. Note that we are currently ignoring .NET
-      // types, since they are intrinsics like System.ValueType. They're also
-      // not loadable with `MetadataStore.findScope`, but that's moot.
-      if (TokenType.fromToken(resolutionScopeToken) == TokenType.assemblyRef) {
-        final AssemblyRef(:name) = AssemblyRef.fromToken(
-          scope,
-          resolutionScopeToken,
-        );
-        if (name != 'netstandard' && /* .NET */
-            name != 'mscorlib' /* .NET Framework */ ) {
-          final newScope = MetadataStore.findScope(typeName);
-          final typeDef = newScope.findTypeDef(typeName);
-          if (typeDef == null) {
-            throw WinmdException(
-              "Can't find type `$typeName` in the `${newScope.name}` scope.",
-            );
-          }
-
-          return typeDef;
-        }
-      }
-
-      // It might be a ModuleRef, so we'll just return the type name.
-      return TypeDef(scope, 0, typeName);
-    });
-  }
-
   /// Creates a typedef object from a provided token.
   factory TypeDef.fromToken(
     Scope scope,
     int token,
   ) => switch (TokenType.fromToken(token)) {
-    TokenType.typeRef => TypeDef.fromTypeRefToken(scope, token),
     TokenType.typeDef => TypeDef.fromTypeDefToken(scope, token),
+    TokenType.typeRef => TypeDef.fromTypeRefToken(scope, token),
     TokenType.typeSpec => TypeDef.fromTypeSpecToken(scope, token),
     _ =>
       throw WinmdException('Unrecognized token 0x${token.toRadixString(16)}'),
@@ -132,7 +56,6 @@ class TypeDef extends TokenObject
       TokenType.fromToken(typeDefToken) == TokenType.typeDef,
       'Token $typeDefToken is not a typeDef token',
     );
-
     return using((arena) {
       final szTypeDef = arena<WCHAR>(stringBufferSize).cast<Utf16>();
       final pchTypeDef = arena<ULONG>();
@@ -156,13 +79,83 @@ class TypeDef extends TokenObject
     });
   }
 
+  /// Instantiate a typedef from a [typeRefToken].
+  factory TypeDef.fromTypeRefToken(Scope scope, int typeRefToken) {
+    assert(
+      TokenType.fromToken(typeRefToken) == TokenType.typeRef,
+      'Token $typeRefToken is not a typeRef token',
+    );
+    return using((arena) {
+      final ptkResolutionScope = arena<mdToken>();
+      final szName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
+      final pchName = arena<ULONG>();
+      scope.reader.getTypeRefProps(
+        typeRefToken,
+        ptkResolutionScope,
+        szName,
+        stringBufferSize,
+        pchName,
+      );
+      final typeName = szName.toDartString();
+      final resolutionScopeToken = ptkResolutionScope.value;
+
+      // Special case for WinRT base type.
+      if (resolutionScopeToken == 0 && typeRefToken == 0x1_000_000) {
+        return TypeDef(scope, 0, 'IInspectable');
+      }
+
+      // If it's the same scope, just look it up based on the returned name.
+      if (resolutionScopeToken == scope.moduleToken) {
+        return scope.findTypeDef(typeName) ?? TypeDef(scope, 0, typeName);
+      }
+
+      final tokenType = TokenType.fromToken(resolutionScopeToken);
+
+      // Is it a nested type? If so, we find a type in the parent type that
+      // matches its name, if one exists (which it presumably should).
+      if (tokenType == TokenType.typeRef) {
+        return _resolveNestedType(
+          scope,
+          resolutionScopeToken,
+          typeRefToken,
+          typeName,
+        );
+      }
+
+      // Is it an AssemblyRef that is not part of .NET? If so, we need to load
+      // the scope that contains it. Note that we are currently ignoring .NET
+      // types, since they are intrinsics like System.ValueType. They're also
+      // not loadable with `MetadataStore.findScope`, but that's moot.
+      if (tokenType == TokenType.assemblyRef) {
+        final AssemblyRef(:name) = AssemblyRef.fromToken(
+          scope,
+          resolutionScopeToken,
+        );
+        if (name != 'netstandard' && /* .NET */
+            name != 'mscorlib' /* .NET Framework */ ) {
+          final newScope = MetadataStore.findScope(typeName);
+          final typeDef = newScope.findTypeDef(typeName);
+          if (typeDef == null) {
+            throw WinmdException(
+              'Can\'t find type "$typeName" in the "${newScope.name}" scope.',
+            );
+          }
+
+          return typeDef;
+        }
+      }
+
+      // It might be a ModuleRef, so we'll just return the type name.
+      return TypeDef(scope, 0, typeName);
+    });
+  }
+
   /// Instantiate a typedef from a TypeSpec token.
   factory TypeDef.fromTypeSpecToken(Scope scope, int typeSpecToken) {
     assert(
       TokenType.fromToken(typeSpecToken) == TokenType.typeSpec,
       'Token $typeSpecToken is not a typeSpec token',
     );
-
     return using((arena) {
       final ppvSig = arena<PCCOR_SIGNATURE>();
       final pcbSig = arena<ULONG>();
@@ -639,17 +632,33 @@ class TypeDef extends TokenObject
     });
   }
 
+  TypeDef? _parent;
+
   /// Gets the type referencing this type's superclass (the class this type
   /// inherits from).
   ///
   /// For nested types, the [enclosingClass] property may be of interest, which
   /// is the type in which the current type is embedded.
-  TypeDef? get parent =>
-      (token == 0 || baseTypeToken == 0)
-          ? null
-          : TypeDef.fromToken(scope, baseTypeToken);
+  TypeDef? get parent => _parent ??= _getParent();
 
-  /// Returns true if the type is nested in an enclosing class (e.g. a struct
+  TypeDef? _getParent() {
+    if (token == 0 || baseTypeToken == 0) return null;
+
+    final tokenType = TokenType.fromToken(baseTypeToken);
+
+    // Special case: COM/WinRT interfaces.
+    if (tokenType == TokenType.typeRef && baseTypeToken == 0x1_000_000) {
+      if (name.endsWith('IInspectable') || name.endsWith('IUnknown')) {
+        return null;
+      }
+
+      return TypeDef(scope, 0, isWindowsRuntime ? 'IInspectable' : 'IUnknown');
+    }
+
+    return TypeDef.fromToken(scope, baseTypeToken);
+  }
+
+  /// Whether the type is nested in an enclosing class (e.g. a struct
   /// within a struct).
   bool get isNested =>
       typeVisibility == TypeVisibility.nestedPublic ||

@@ -179,6 +179,19 @@ void main() {
     check(typeDef.representsAsClass).isTrue();
   });
 
+  test('Delegate is correctly identified', () {
+    final typeDef = winrtScope.findTypeDef(
+      'Windows.Foundation.AsyncActionCompletedHandler',
+    );
+    check(typeDef).isNotNull();
+    check(typeDef!.isDelegate).isTrue();
+    check(typeDef.isInterface).isFalse();
+    check(typeDef.representsAsClass).isTrue();
+    check(typeDef.parent).isNotNull();
+    check(typeDef.parent!.name).equals('System.MulticastDelegate');
+    check(typeDef.parent!.parent).isNull();
+  });
+
   test('Calendar.AddDays() method is correct', () {
     final typeDef = winrtScope.findTypeDef('Windows.Globalization.ICalendar');
     check(typeDef).isNotNull();

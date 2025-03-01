@@ -69,6 +69,9 @@ void main() {
 
   test('Windows.Foundation.IAsyncInfo', () {
     final typeDef = scope.findTypeDef('Windows.Foundation.IAsyncInfo')!;
+    check(typeDef.parent).isNotNull();
+    check(typeDef.parent!.name).equals('IInspectable');
+    check(typeDef.parent!.parent).isNull();
     check(typeDef.customAttributes.length).equals(2);
     check(typeDef.isAbstract).isTrue();
     check(typeDef.isInterface).isTrue();
