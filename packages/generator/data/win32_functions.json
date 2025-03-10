@@ -3746,6 +3746,10 @@
         "prototype": "BOOL MoveFileW(\n  LPCWSTR lpExistingFileName,\n  LPCWSTR lpNewFileName\n);",
         "comment": "Moves an existing file or a directory, including its children."
     },
+    "MoveFileEx": {
+        "prototype": "BOOL MoveFileExW(\n  LPCWSTR lpExistingFileName,\n  LPCWSTR lpNewFileName,\n  DWORD  dwFlags\n);",
+        "comment": "Moves an existing file or directory, including its children, with various move options."
+    },
     "MoveToEx": {
         "prototype": "BOOL MoveToEx(\n  HDC     hdc,\n  int     x,\n  int     y,\n  LPPOINT lppt\n);",
         "comment": "The MoveToEx function updates the current position to the specified point and optionally returns the previous position."
