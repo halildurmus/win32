@@ -5258,6 +5258,22 @@ void main() {
       >('MoveFileW');
       expect(MoveFile, isA<Function>());
     });
+    test('Can instantiate MoveFileEx', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final MoveFileEx = kernel32.lookupFunction<
+        Int32 Function(
+          Pointer<Utf16> lpExistingFileName,
+          Pointer<Utf16> lpNewFileName,
+          Uint32 dwFlags,
+        ),
+        int Function(
+          Pointer<Utf16> lpExistingFileName,
+          Pointer<Utf16> lpNewFileName,
+          int dwFlags,
+        )
+      >('MoveFileExW');
+      expect(MoveFileEx, isA<Function>());
+    });
     test('Can instantiate OpenEvent', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final OpenEvent = kernel32.lookupFunction<

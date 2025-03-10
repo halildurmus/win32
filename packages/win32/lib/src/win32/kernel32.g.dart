@@ -5997,6 +5997,36 @@ final _MoveFile = _kernel32.lookupFunction<
   int Function(Pointer<Utf16> lpExistingFileName, Pointer<Utf16> lpNewFileName)
 >('MoveFileW');
 
+/// Moves an existing file or directory, including its children, with
+/// various move options.
+///
+/// ```c
+/// BOOL MoveFileExW(
+///   LPCWSTR lpExistingFileName,
+///   LPCWSTR lpNewFileName,
+///   DWORD  dwFlags
+/// );
+/// ```
+/// {@category kernel32}
+int MoveFileEx(
+  Pointer<Utf16> lpExistingFileName,
+  Pointer<Utf16> lpNewFileName,
+  int dwFlags,
+) => _MoveFileEx(lpExistingFileName, lpNewFileName, dwFlags);
+
+final _MoveFileEx = _kernel32.lookupFunction<
+  Int32 Function(
+    Pointer<Utf16> lpExistingFileName,
+    Pointer<Utf16> lpNewFileName,
+    Uint32 dwFlags,
+  ),
+  int Function(
+    Pointer<Utf16> lpExistingFileName,
+    Pointer<Utf16> lpNewFileName,
+    int dwFlags,
+  )
+>('MoveFileExW');
+
 /// Opens an existing named event object.
 ///
 /// ```c
