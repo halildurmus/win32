@@ -5,6 +5,16 @@
 // ignore_for_file: camel_case_types, constant_identifier_names
 
 /// {@category enum}
+extension type const MOVE_FILE_FLAGS(int _) implements int {}
+
+const MOVEFILE_COPY_ALLOWED = 0x2;
+const MOVEFILE_CREATE_HARDLINK = 0x10;
+const MOVEFILE_DELAY_UNTIL_REBOOT = 0x4;
+const MOVEFILE_REPLACE_EXISTING = 0x1;
+const MOVEFILE_WRITE_THROUGH = 0x8;
+const MOVEFILE_FAIL_IF_NOT_TRACKABLE = 0x20;
+
+/// {@category enum}
 extension type const ACCEL_VIRT_FLAGS(int _) implements int {
   @Deprecated('Use FVIRTKEY instead')
   static const FVIRTKEY = 1;
