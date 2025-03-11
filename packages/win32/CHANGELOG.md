@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.12.0] - 2025-03-11
+
+### 🚀 Features
+
+- Add more Kernel32 APIs by @halildurmus in [#969](https://github.com/halildurmus/win32/pull/969)
+- Add `MOVE_FILE_FLAGS` enum by @halildurmus in [#967](https://github.com/halildurmus/win32/pull/967)
+- Add support for MoveFileEx by @brianquinlan in [#966](https://github.com/halildurmus/win32/pull/966)
+
+### New Contributors ❤️
+
+- @brianquinlan made their first contribution in [#966](https://github.com/halildurmus/win32/pull/966)
+
+[5.12.0]: https://github.com/halildurmus/win32/compare/v5.11.0..v5.12.0
+
 ## [5.11.0] - 2025-02-19
 
 ### 🚀 Features
