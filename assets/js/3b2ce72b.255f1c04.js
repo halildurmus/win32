@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwebsite=self.webpackChunkwebsite||[]).push([[545],{3625:e=>{e.exports=JSON.parse('{"permalink":"/blog/tags/win-32","page":1,"postsPerPage":12,"totalPages":1,"totalCount":3,"blogDescription":"A resource for win32, Flutter and Dart ecosystem, and Windows development.","blogTitle":"win32 Blog"}')}}]);
