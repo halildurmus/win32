@@ -697,6 +697,14 @@
         "prototype": "int CopyAcceleratorTableW(\n  HACCEL  hAccelSrc,\n  LPACCEL lpAccelDst,\n  int     cAccelEntries\n);",
         "comment": "Copies the specified accelerator table. This function is used to obtain the accelerator-table data that corresponds to an accelerator-table handle, or to determine the size of the accelerator-table data."
     },
+    "CopyFile": {
+        "prototype": "BOOL CopyFileW(\n  LPCTSTR lpExistingFileName,\n  LPCTSTR lpNewFileName,\n  BOOL    bFailIfExists\n);",
+        "comment": "Copies an existing file to a new file."
+    },
+    "CopyFileEx": {
+        "prototype": "BOOL CopyFileExW(\n  LPCWSTR lpExistingFileName,\n  LPCWSTR lpNewFileName,\n  LPPROGRESS_ROUTINE lpProgressRoutine,\n  LPVOID lpData,\n  LPBOOL pbCancel,\n  DWORD dwCopyFlags\n);",
+        "comment": "Copies an existing file to a new file, notifying the application of its progress through a callback function."
+    },
     "CopyIcon": {
         "prototype": "HICON CopyIcon(\n  HICON hIcon\n);",
         "comment": "Copies the specified icon from another module to the current module."
@@ -920,6 +928,10 @@
     "CreateStreamOnHGlobal": {
         "prototype": "HRESULT CreateStreamOnHGlobal(\n  [in]  HGLOBAL  hGlobal,\n  [in]  BOOL     fDeleteOnRelease,\n  [out] LPSTREAM *ppstm\n);",
         "comment": "The CreateStreamOnHGlobal function creates a stream object that uses an HGLOBAL memory handle to store the stream contents. This object is the OLE-provided implementation of the IStream interface."
+    },
+    "CreateSymbolicLink": {
+        "prototype": "BOOLEAN CreateSymbolicLinkW(\n  LPCWSTR lpSymlinkFileName,\n  LPCWSTR lpTargetFileName,\n  DWORD   dwFlags\n);",
+        "comment": "Creates a symbolic link."
     },
     "CreateThread": {
         "prototype": "HANDLE CreateThread(\n  LPSECURITY_ATTRIBUTES lpThreadAttributes,\n  SIZE_T dwStackSize,\n  LPTHREAD_START_ROUTINE lpStartAddress,\n  LPVOID lpParameter,\n  DWORD dwCreationFlags,\n  LPDWORD lpThreadId\n);",
@@ -1618,6 +1630,10 @@
     "FlushConsoleInputBuffer": {
         "prototype": "BOOL FlushConsoleInputBuffer(\n  _In_ HANDLE hConsoleInput\n);",
         "comment": "Flushes the console input buffer. All input records currently in the input buffer are discarded."
+    },
+    "FlushFileBuffers": {
+        "prototype": "BOOL FlushFileBuffers(\n  HANDLE hFile\n);",
+        "comment": "Flushes the buffers of a specified file and causes all buffered data to be written to a file."
     },
     "FlushPrinter": {
         "prototype": "BOOL FlushPrinter(\n  _In_  HANDLE  hPrinter,\n  _In_  LPVOID  pBuf,\n  _In_  DWORD   cbBuf,\n  _Out_ LPDWORD pcWritten,\n  _In_  DWORD   cSleep\n);",
@@ -5061,6 +5077,10 @@
         "prototype": "BOOL SetFileShortNameW(\n  HANDLE  hFile,\n  LPCWSTR lpShortName);",
         "comment": "Sets the short name for the specified file. The file must be on an NTFS file system volume."
     },
+    "SetFileTime": {
+        "prototype": "BOOL SetFileTime(\n  HANDLE       hFile,\n  const FILETIME *lpCreationTime,\n  const FILETIME *lpLastAccessTime,\n  const FILETIME *lpLastWriteTime\n);",
+        "comment": "Sets the date and time that the specified file or directory was created, last accessed, or last modified."
+    },
     "SetFileValidData": {
         "prototype": "BOOL SetFileValidData(\n  [in] HANDLE   hFile,\n  [in] LONGLONG ValidDataLength\n);",
         "comment": "Sets the valid data length of the specified file. This function is useful in very limited scenarios."
@@ -5932,6 +5952,14 @@
     "VirtualLock": {
         "prototype": "BOOL VirtualLock(\n  LPVOID lpAddress,\n  SIZE_T dwSize\n);",
         "comment": "Locks the specified region of the process's virtual address space into physical memory, ensuring that subsequent access to the region will not incur a page fault."
+    },
+    "VirtualProtect": {
+        "prototype": "BOOL VirtualProtect(\n  LPVOID lpAddress,\n  SIZE_T dwSize,\n  DWORD  flNewProtect,\n  PDWORD lpflOldProtect\n);",
+        "comment": "Changes the protection on a region of committed pages in the virtual address space of the calling process."
+    },
+    "VirtualProtectEx": {
+        "prototype": "BOOL VirtualProtectEx(\n  HANDLE hProcess,\n  LPVOID lpAddress,\n  SIZE_T dwSize,\n  DWORD  flNewProtect,\n  PDWORD lpflOldProtect\n);",
+        "comment": "Changes the protection on a region of committed pages in the virtual address space of a specified process."
     },
     "VirtualQuery": {
         "prototype": "SIZE_T VirtualQuery(\n  LPCVOID lpAddress,\n  PMEMORY_BASIC_INFORMATION lpBuffer,\n  SIZE_T dwLength\n);",

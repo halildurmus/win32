@@ -2505,6 +2505,44 @@ void main() {
       >('ContinueDebugEvent');
       expect(ContinueDebugEvent, isA<Function>());
     });
+    test('Can instantiate CopyFile', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final CopyFile = kernel32.lookupFunction<
+        Int32 Function(
+          Pointer<Utf16> lpExistingFileName,
+          Pointer<Utf16> lpNewFileName,
+          Int32 bFailIfExists,
+        ),
+        int Function(
+          Pointer<Utf16> lpExistingFileName,
+          Pointer<Utf16> lpNewFileName,
+          int bFailIfExists,
+        )
+      >('CopyFileW');
+      expect(CopyFile, isA<Function>());
+    });
+    test('Can instantiate CopyFileEx', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final CopyFileEx = kernel32.lookupFunction<
+        Int32 Function(
+          Pointer<Utf16> lpExistingFileName,
+          Pointer<Utf16> lpNewFileName,
+          Pointer<NativeFunction<LPPROGRESS_ROUTINE>> lpProgressRoutine,
+          Pointer lpData,
+          Pointer<Int32> pbCancel,
+          Uint32 dwCopyFlags,
+        ),
+        int Function(
+          Pointer<Utf16> lpExistingFileName,
+          Pointer<Utf16> lpNewFileName,
+          Pointer<NativeFunction<LPPROGRESS_ROUTINE>> lpProgressRoutine,
+          Pointer lpData,
+          Pointer<Int32> pbCancel,
+          int dwCopyFlags,
+        )
+      >('CopyFileExW');
+      expect(CopyFileEx, isA<Function>());
+    });
     test('Can instantiate CreateActCtx', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final CreateActCtx = kernel32.lookupFunction<
@@ -2806,6 +2844,22 @@ void main() {
         )
       >('CreateRemoteThreadEx');
       expect(CreateRemoteThreadEx, isA<Function>());
+    });
+    test('Can instantiate CreateSymbolicLink', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final CreateSymbolicLink = kernel32.lookupFunction<
+        Uint8 Function(
+          Pointer<Utf16> lpSymlinkFileName,
+          Pointer<Utf16> lpTargetFileName,
+          Uint32 dwFlags,
+        ),
+        int Function(
+          Pointer<Utf16> lpSymlinkFileName,
+          Pointer<Utf16> lpTargetFileName,
+          int dwFlags,
+        )
+      >('CreateSymbolicLinkW');
+      expect(CreateSymbolicLink, isA<Function>());
     });
     test('Can instantiate CreateThread', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -3493,6 +3547,14 @@ void main() {
         int Function(int hConsoleInput)
       >('FlushConsoleInputBuffer');
       expect(FlushConsoleInputBuffer, isA<Function>());
+    });
+    test('Can instantiate FlushFileBuffers', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final FlushFileBuffers = kernel32.lookupFunction<
+        Int32 Function(IntPtr hFile),
+        int Function(int hFile)
+      >('FlushFileBuffers');
+      expect(FlushFileBuffers, isA<Function>());
     });
     test('Can instantiate FormatMessage', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -5992,6 +6054,24 @@ void main() {
       >('SetFileShortNameW');
       expect(SetFileShortName, isA<Function>());
     });
+    test('Can instantiate SetFileTime', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final SetFileTime = kernel32.lookupFunction<
+        Int32 Function(
+          IntPtr hFile,
+          Pointer<FILETIME> lpCreationTime,
+          Pointer<FILETIME> lpLastAccessTime,
+          Pointer<FILETIME> lpLastWriteTime,
+        ),
+        int Function(
+          int hFile,
+          Pointer<FILETIME> lpCreationTime,
+          Pointer<FILETIME> lpLastAccessTime,
+          Pointer<FILETIME> lpLastWriteTime,
+        )
+      >('SetFileTime');
+      expect(SetFileTime, isA<Function>());
+    });
     test('Can instantiate SetFileValidData', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final SetFileValidData = kernel32.lookupFunction<
@@ -6472,6 +6552,44 @@ void main() {
         int Function(Pointer lpAddress, int dwSize)
       >('VirtualLock');
       expect(VirtualLock, isA<Function>());
+    });
+    test('Can instantiate VirtualProtect', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final VirtualProtect = kernel32.lookupFunction<
+        Int32 Function(
+          Pointer lpAddress,
+          IntPtr dwSize,
+          Uint32 flNewProtect,
+          Pointer<Uint32> lpflOldProtect,
+        ),
+        int Function(
+          Pointer lpAddress,
+          int dwSize,
+          int flNewProtect,
+          Pointer<Uint32> lpflOldProtect,
+        )
+      >('VirtualProtect');
+      expect(VirtualProtect, isA<Function>());
+    });
+    test('Can instantiate VirtualProtectEx', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final VirtualProtectEx = kernel32.lookupFunction<
+        Int32 Function(
+          IntPtr hProcess,
+          Pointer lpAddress,
+          IntPtr dwSize,
+          Uint32 flNewProtect,
+          Pointer<Uint32> lpflOldProtect,
+        ),
+        int Function(
+          int hProcess,
+          Pointer lpAddress,
+          int dwSize,
+          int flNewProtect,
+          Pointer<Uint32> lpflOldProtect,
+        )
+      >('VirtualProtectEx');
+      expect(VirtualProtectEx, isA<Function>());
     });
     test('Can instantiate VirtualQuery', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
