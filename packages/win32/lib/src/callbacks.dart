@@ -9,6 +9,21 @@ import 'package:ffi/ffi.dart';
 import 'structs.g.dart';
 import 'types.dart';
 
+/// An application-defined callback function used with the
+/// `CopyFileEx`, `MoveFileTransacted`, and `MoveFileWithProgress` functions.
+typedef LPPROGRESS_ROUTINE =
+    Uint32 Function(
+      LONG TotalFileSize,
+      LONG TotalBytesTransferred,
+      LONG StreamSize,
+      LONG StreamBytesTransferred,
+      UINT dwStreamNumber,
+      UINT dwCallbackReason,
+      HANDLE hSourceFile,
+      HANDLE hDestinationFile,
+      PVOID lpData,
+    );
+
 @Deprecated('Use HOOKPROC instead')
 typedef CallWndProc = HOOKPROC;
 

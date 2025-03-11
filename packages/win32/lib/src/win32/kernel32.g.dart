@@ -478,6 +478,84 @@ final _ContinueDebugEvent = _kernel32.lookupFunction<
   int Function(int dwProcessId, int dwThreadId, int dwContinueStatus)
 >('ContinueDebugEvent');
 
+/// Copies an existing file to a new file.
+///
+/// ```c
+/// BOOL CopyFileW(
+///   LPCTSTR lpExistingFileName,
+///   LPCTSTR lpNewFileName,
+///   BOOL    bFailIfExists
+/// );
+/// ```
+/// {@category kernel32}
+int CopyFile(
+  Pointer<Utf16> lpExistingFileName,
+  Pointer<Utf16> lpNewFileName,
+  int bFailIfExists,
+) => _CopyFile(lpExistingFileName, lpNewFileName, bFailIfExists);
+
+final _CopyFile = _kernel32.lookupFunction<
+  Int32 Function(
+    Pointer<Utf16> lpExistingFileName,
+    Pointer<Utf16> lpNewFileName,
+    Int32 bFailIfExists,
+  ),
+  int Function(
+    Pointer<Utf16> lpExistingFileName,
+    Pointer<Utf16> lpNewFileName,
+    int bFailIfExists,
+  )
+>('CopyFileW');
+
+/// Copies an existing file to a new file, notifying the application of its
+/// progress through a callback function.
+///
+/// ```c
+/// BOOL CopyFileExW(
+///   LPCWSTR lpExistingFileName,
+///   LPCWSTR lpNewFileName,
+///   LPPROGRESS_ROUTINE lpProgressRoutine,
+///   LPVOID lpData,
+///   LPBOOL pbCancel,
+///   DWORD dwCopyFlags
+/// );
+/// ```
+/// {@category kernel32}
+int CopyFileEx(
+  Pointer<Utf16> lpExistingFileName,
+  Pointer<Utf16> lpNewFileName,
+  Pointer<NativeFunction<LPPROGRESS_ROUTINE>> lpProgressRoutine,
+  Pointer lpData,
+  Pointer<Int32> pbCancel,
+  int dwCopyFlags,
+) => _CopyFileEx(
+  lpExistingFileName,
+  lpNewFileName,
+  lpProgressRoutine,
+  lpData,
+  pbCancel,
+  dwCopyFlags,
+);
+
+final _CopyFileEx = _kernel32.lookupFunction<
+  Int32 Function(
+    Pointer<Utf16> lpExistingFileName,
+    Pointer<Utf16> lpNewFileName,
+    Pointer<NativeFunction<LPPROGRESS_ROUTINE>> lpProgressRoutine,
+    Pointer lpData,
+    Pointer<Int32> pbCancel,
+    Uint32 dwCopyFlags,
+  ),
+  int Function(
+    Pointer<Utf16> lpExistingFileName,
+    Pointer<Utf16> lpNewFileName,
+    Pointer<NativeFunction<LPPROGRESS_ROUTINE>> lpProgressRoutine,
+    Pointer lpData,
+    Pointer<Int32> pbCancel,
+    int dwCopyFlags,
+  )
+>('CopyFileExW');
+
 /// The CreateActCtx function creates an activation context.
 ///
 /// ```c
@@ -1116,6 +1194,35 @@ final _CreateRemoteThreadEx = _kernel32.lookupFunction<
     Pointer<Uint32> lpThreadId,
   )
 >('CreateRemoteThreadEx');
+
+/// Creates a symbolic link.
+///
+/// ```c
+/// BOOLEAN CreateSymbolicLinkW(
+///   LPCWSTR lpSymlinkFileName,
+///   LPCWSTR lpTargetFileName,
+///   DWORD   dwFlags
+/// );
+/// ```
+/// {@category kernel32}
+int CreateSymbolicLink(
+  Pointer<Utf16> lpSymlinkFileName,
+  Pointer<Utf16> lpTargetFileName,
+  int dwFlags,
+) => _CreateSymbolicLink(lpSymlinkFileName, lpTargetFileName, dwFlags);
+
+final _CreateSymbolicLink = _kernel32.lookupFunction<
+  Uint8 Function(
+    Pointer<Utf16> lpSymlinkFileName,
+    Pointer<Utf16> lpTargetFileName,
+    Uint32 dwFlags,
+  ),
+  int Function(
+    Pointer<Utf16> lpSymlinkFileName,
+    Pointer<Utf16> lpTargetFileName,
+    int dwFlags,
+  )
+>('CreateSymbolicLinkW');
 
 /// Creates a thread to execute within the virtual address space of the
 /// calling process.
@@ -2490,6 +2597,22 @@ final _FlushConsoleInputBuffer = _kernel32.lookupFunction<
   Int32 Function(IntPtr hConsoleInput),
   int Function(int hConsoleInput)
 >('FlushConsoleInputBuffer');
+
+/// Flushes the buffers of a specified file and causes all buffered data to
+/// be written to a file.
+///
+/// ```c
+/// BOOL FlushFileBuffers(
+///   HANDLE hFile
+/// );
+/// ```
+/// {@category kernel32}
+int FlushFileBuffers(int hFile) => _FlushFileBuffers(hFile);
+
+final _FlushFileBuffers = _kernel32
+    .lookupFunction<Int32 Function(IntPtr hFile), int Function(int hFile)>(
+      'FlushFileBuffers',
+    );
 
 /// Formats a message string. The function requires a message definition as
 /// input. The message definition can come from a buffer passed into the
@@ -7463,6 +7586,40 @@ final _SetFileShortName = _kernel32.lookupFunction<
   int Function(int hFile, Pointer<Utf16> lpShortName)
 >('SetFileShortNameW');
 
+/// Sets the date and time that the specified file or directory was created,
+/// last accessed, or last modified.
+///
+/// ```c
+/// BOOL SetFileTime(
+///   HANDLE       hFile,
+///   const FILETIME *lpCreationTime,
+///   const FILETIME *lpLastAccessTime,
+///   const FILETIME *lpLastWriteTime
+/// );
+/// ```
+/// {@category kernel32}
+int SetFileTime(
+  int hFile,
+  Pointer<FILETIME> lpCreationTime,
+  Pointer<FILETIME> lpLastAccessTime,
+  Pointer<FILETIME> lpLastWriteTime,
+) => _SetFileTime(hFile, lpCreationTime, lpLastAccessTime, lpLastWriteTime);
+
+final _SetFileTime = _kernel32.lookupFunction<
+  Int32 Function(
+    IntPtr hFile,
+    Pointer<FILETIME> lpCreationTime,
+    Pointer<FILETIME> lpLastAccessTime,
+    Pointer<FILETIME> lpLastWriteTime,
+  ),
+  int Function(
+    int hFile,
+    Pointer<FILETIME> lpCreationTime,
+    Pointer<FILETIME> lpLastAccessTime,
+    Pointer<FILETIME> lpLastWriteTime,
+  )
+>('SetFileTime');
+
 /// Sets the valid data length of the specified file. This function is
 /// useful in very limited scenarios.
 ///
@@ -8463,6 +8620,84 @@ final _VirtualLock = _kernel32.lookupFunction<
   Int32 Function(Pointer lpAddress, IntPtr dwSize),
   int Function(Pointer lpAddress, int dwSize)
 >('VirtualLock');
+
+/// Changes the protection on a region of committed pages in the virtual
+/// address space of the calling process.
+///
+/// ```c
+/// BOOL VirtualProtect(
+///   LPVOID lpAddress,
+///   SIZE_T dwSize,
+///   DWORD  flNewProtect,
+///   PDWORD lpflOldProtect
+/// );
+/// ```
+/// {@category kernel32}
+int VirtualProtect(
+  Pointer lpAddress,
+  int dwSize,
+  int flNewProtect,
+  Pointer<Uint32> lpflOldProtect,
+) => _VirtualProtect(lpAddress, dwSize, flNewProtect, lpflOldProtect);
+
+final _VirtualProtect = _kernel32.lookupFunction<
+  Int32 Function(
+    Pointer lpAddress,
+    IntPtr dwSize,
+    Uint32 flNewProtect,
+    Pointer<Uint32> lpflOldProtect,
+  ),
+  int Function(
+    Pointer lpAddress,
+    int dwSize,
+    int flNewProtect,
+    Pointer<Uint32> lpflOldProtect,
+  )
+>('VirtualProtect');
+
+/// Changes the protection on a region of committed pages in the virtual
+/// address space of a specified process.
+///
+/// ```c
+/// BOOL VirtualProtectEx(
+///   HANDLE hProcess,
+///   LPVOID lpAddress,
+///   SIZE_T dwSize,
+///   DWORD  flNewProtect,
+///   PDWORD lpflOldProtect
+/// );
+/// ```
+/// {@category kernel32}
+int VirtualProtectEx(
+  int hProcess,
+  Pointer lpAddress,
+  int dwSize,
+  int flNewProtect,
+  Pointer<Uint32> lpflOldProtect,
+) => _VirtualProtectEx(
+  hProcess,
+  lpAddress,
+  dwSize,
+  flNewProtect,
+  lpflOldProtect,
+);
+
+final _VirtualProtectEx = _kernel32.lookupFunction<
+  Int32 Function(
+    IntPtr hProcess,
+    Pointer lpAddress,
+    IntPtr dwSize,
+    Uint32 flNewProtect,
+    Pointer<Uint32> lpflOldProtect,
+  ),
+  int Function(
+    int hProcess,
+    Pointer lpAddress,
+    int dwSize,
+    int flNewProtect,
+    Pointer<Uint32> lpflOldProtect,
+  )
+>('VirtualProtectEx');
 
 /// Retrieves information about a range of pages in the virtual address
 /// space of the calling process.
