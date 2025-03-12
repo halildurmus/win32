@@ -13350,3 +13350,27 @@ const SVSFVoiceMask = 511;
 
 /// This mask has every unused bit set.
 const SVSFUnusedFlags = -512;
+
+// -----------------------------------------------------------------------------
+// MOVEFILE constants
+// -----------------------------------------------------------------------------
+
+/// If the file is to be moved to a different volume, the function simulates
+/// the move by using the CopyFile and DeleteFile functions.
+const MOVEFILE_COPY_ALLOWED = 2;
+
+/// Reserved for future use.
+const MOVEFILE_CREATE_HARDLINK = 16
+
+/// The system does not move the file until the operating system is restarted.
+const MOVEFILE_DELAY_UNTIL_REBOOT = 4;
+
+/// The function fails if the source file is a link source, but the file cannot
+/// be tracked after the move.
+const MOVEFILE_FAIL_IF_NOT_TRACKABLE = 32;
+
+/// Replace the destination file if it already exists.
+const MOVEFILE_REPLACE_EXISTING = 1;
+
+/// The function does not return until the file is actually moved on the disk.
+const MOVEFILE_WRITE_THROUGH = 8;
