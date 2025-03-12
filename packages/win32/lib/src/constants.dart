@@ -13367,6 +13367,3 @@ const FILE_TYPE_PIPE = 0x3;
 
 /// Unused.
 const FILE_TYPE_REMOTE = 0x8000;
-
-/// Either the type of the specified file is unknown, or the function failed.
-const FILE_TYPE_UNKNOWN = 0x0;
