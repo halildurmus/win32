@@ -13360,7 +13360,7 @@ const SVSFUnusedFlags = -512;
 const MOVEFILE_COPY_ALLOWED = 2;
 
 /// Reserved for future use.
-const MOVEFILE_CREATE_HARDLINK = 16
+const MOVEFILE_CREATE_HARDLINK = 16;
 
 /// The system does not move the file until the operating system is restarted.
 const MOVEFILE_DELAY_UNTIL_REBOOT = 4;
