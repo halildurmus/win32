@@ -13350,3 +13350,23 @@ const SVSFVoiceMask = 511;
 
 /// This mask has every unused bit set.
 const SVSFUnusedFlags = -512;
+
+// -----------------------------------------------------------------------------
+// FILE_TYPE constants
+// -----------------------------------------------------------------------------
+
+/// The specified file is a character file, typically an LPT device or a
+/// console.
+const FILE_TYPE_CHAR = 0x2;
+
+/// The specified file is a disk file.
+const FILE_TYPE_DISK = 0x1;
+
+/// The specified file is a socket, a named pipe, or an anonymous pipe.
+const FILE_TYPE_PIPE = 0x3;
+
+/// Unused.
+const FILE_TYPE_REMOTE = 0x8000;
+
+/// Either the type of the specified file is unknown, or the function failed.
+const FILE_TYPE_UNKNOWN = 0x0;
