@@ -10287,6 +10287,27 @@ base class WAVEOUTCAPS extends Struct {
   external int dwSupport;
 }
 
+/// Contains attribute information for a file or directory. The
+/// GetFileAttributesEx function uses this structure.
+///
+/// {@category struct}
+base class WIN32_FILE_ATTRIBUTE_DATA extends Struct {
+  @Uint32()
+  external int dwFileAttributes;
+
+  external FILETIME ftCreationTime;
+
+  external FILETIME ftLastAccessTime;
+
+  external FILETIME ftLastWriteTime;
+
+  @Uint32()
+  external int nFileSizeHigh;
+
+  @Uint32()
+  external int nFileSizeLow;
+}
+
 /// Contains information about the file that is found by the FindFirstFile,
 /// FindFirstFileEx, or FindNextFile function.
 ///

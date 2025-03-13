@@ -229,6 +229,7 @@
     "Windows.Win32.Storage.FileSystem.CREATEFILE2_EXTENDED_PARAMETERS": "Contains optional extended parameters for CreateFile2.",
     "Windows.Win32.Storage.FileSystem.FILE_SEGMENT_ELEMENT": "Union that contains a 64-bit value that points to a page of data.",
     "Windows.Win32.Storage.FileSystem.VS_FIXEDFILEINFO": "Contains version information for a file. This information is language and code page independent.",
+    "Windows.Win32.Storage.FileSystem.WIN32_FILE_ATTRIBUTE_DATA": "Contains attribute information for a file or directory. The GetFileAttributesEx function uses this structure.",
     "Windows.Win32.Storage.FileSystem.WIN32_FIND_DATAW": "Contains information about the file that is found by the FindFirstFile, FindFirstFileEx, or FindNextFile function.",
     "Windows.Win32.Storage.Packaging.Appx.APPX_PACKAGE_SETTINGS": "Represents package settings used to create a package.",
     "Windows.Win32.System.ApplicationInstallationAndServicing.ACTCTXW": "The ACTCTX structure is used by the CreateActCtx function to create the activation context.",
