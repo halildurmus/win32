@@ -7796,6 +7796,21 @@ final _SetIoRateControlInformationJobObject = _kernel32.lookupFunction<
   )
 >('SetIoRateControlInformationJobObject');
 
+/// Sets the last-error code for the calling thread.
+///
+/// ```c
+/// void SetLastError(
+///   DWORD dwErrCode
+/// );
+/// ```
+/// {@category kernel32}
+void SetLastError(int dwErrCode) => _SetLastError(dwErrCode);
+
+final _SetLastError = _kernel32.lookupFunction<
+  Void Function(Uint32 dwErrCode),
+  void Function(int dwErrCode)
+>('SetLastError');
+
 /// Sets the read mode and the blocking mode of the specified named pipe. If
 /// the specified handle is to the client end of a named pipe and if the
 /// named pipe server process is on a remote computer, the function can also
