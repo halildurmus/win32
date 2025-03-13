@@ -19,25 +19,27 @@ visit [pub.dev] to explore packages that depend on it.
 
 ## Windows system APIs (kernel32)
 
-| Example               | Description                                             |
-| --------------------- | ------------------------------------------------------- |
-| [manifest]            | Demonstrates the use of app manifests for compiled apps |
-| [service_manager_cli] | Demonstrates managing Windows services                  |
-| [credentials.dart]    | Adds a credential to the store and retrieves it         |
-| [dump.dart]           | Use debugger libraries to print DLL exported functions  |
-| [dynamic_load.dart]   | Demonstrate loading a DLL and calling it at runtime     |
-| [filever.dart]        | Getting file version information from the file resource |
-| [modules.dart]        | Enumerates all loaded modules on the current system     |
-| [pipe.dart]           | Shows use of named pipes for interprocess communication |
-| [registry.dart]       | Demonstrates querying the registry for values           |
-| [vt.dart]             | Shows virtual terminal sequences                        |
-| [wsl.dart]            | Retrieve information from a WSL instance through APIs   |
+| Example               | Description                                                   |
+| --------------------- | ------------------------------------------------------------- |
+| [manifest]            | Demonstrates the use of app manifests for compiled apps       |
+| [service_manager_cli] | Demonstrates managing Windows services                        |
+| [credentials.dart]    | Adds a credential to the store and retrieves it               |
+| [dump.dart]           | Use debugger libraries to print DLL exported functions        |
+| [dynamic_load.dart]   | Demonstrate loading a DLL and calling it at runtime           |
+| [fileinfo.dart]       | Shows how to get file information using `GetFileAttributesEx` |
+| [filever.dart]        | Getting file version information from the file resource       |
+| [modules.dart]        | Enumerates all loaded modules on the current system           |
+| [pipe.dart]           | Shows use of named pipes for interprocess communication       |
+| [registry.dart]       | Demonstrates querying the registry for values                 |
+| [vt.dart]             | Shows virtual terminal sequences                              |
+| [wsl.dart]            | Retrieve information from a WSL instance through APIs         |
 
 [manifest]: https://github.com/halildurmus/win32/blob/main/examples/manifest
 [service_manager_cli]: https://github.com/halildurmus/win32/blob/main/examples/service_manager_cli
 [credentials.dart]: https://github.com/halildurmus/win32/blob/main/examples/credentials.dart
 [dump.dart]: https://github.com/halildurmus/win32/blob/main/examples/dump.dart
 [dynamic_load.dart]: https://github.com/halildurmus/win32/blob/main/examples/dynamic_load.dart
+[fileinfo.dart]: https://github.com/halildurmus/win32/blob/main/examples/fileinfo.dart
 [filever.dart]: https://github.com/halildurmus/win32/blob/main/examples/filever.dart
 [modules.dart]: https://github.com/halildurmus/win32/blob/main/examples/modules.dart
 [pipe.dart]: https://github.com/halildurmus/win32/blob/main/examples/pipe.dart
