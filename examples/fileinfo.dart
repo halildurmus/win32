@@ -23,6 +23,7 @@ void main() {
         ) ==
         FALSE) {
       print('Failed to get file information');
+      return;
     }
     print('dwFileAttributes: ${info.ref.dwFileAttributes}');
     print('ftCreationTime: ${fileTimeToSeconds(info.ref.ftCreationTime)}');
