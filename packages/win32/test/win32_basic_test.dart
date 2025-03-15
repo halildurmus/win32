@@ -49,4 +49,17 @@ void main() {
 
     expect(hProcess, equals(-1));
   });
+
+  test('Successful GetLastError and SetLastError', () {
+    // Calling `GetLastError` for the first time resets the error code, so call
+    // it once before `SetLastError` to ensure we get correct results. This is
+    // probably related to https://github.com/dart-lang/sdk/issues/38832.
+    GetLastError();
+
+    SetLastError(ERROR_FILE_NOT_FOUND);
+    expect(GetLastError(), equals(ERROR_FILE_NOT_FOUND));
+
+    SetLastError(ERROR_SUCCESS);
+    expect(GetLastError(), equals(ERROR_SUCCESS));
+  });
 }

@@ -5130,6 +5130,10 @@
         "prototype": "BOOL SetKeyboardState(\n  LPBYTE lpKeyState\n);",
         "comment": "Copies an array of keyboard key states into the calling thread's keyboard input-state table. This is the same table accessed by the GetKeyboardState and GetKeyState functions. Changes made to this table do not affect keyboard input to any other thread."
     },
+    "SetLastError": {
+        "prototype": "void SetLastError(\n  DWORD dwErrCode\n);",
+        "comment": "Sets the last-error code for the calling thread."
+    },
     "SetLayeredWindowAttributes": {
         "prototype": "BOOL SetLayeredWindowAttributes(\n  HWND     hwnd,\n  COLORREF crKey,\n  BYTE     bAlpha,\n  DWORD    dwFlags\n);",
         "comment": "Sets the opacity and transparency color key of a layered window."

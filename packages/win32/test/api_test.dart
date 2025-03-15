@@ -6160,6 +6160,14 @@ void main() {
       >('SetIoRateControlInformationJobObject');
       expect(SetIoRateControlInformationJobObject, isA<Function>());
     });
+    test('Can instantiate SetLastError', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final SetLastError = kernel32.lookupFunction<
+        Void Function(Uint32 dwErrCode),
+        void Function(int dwErrCode)
+      >('SetLastError');
+      expect(SetLastError, isA<Function>());
+    });
     test('Can instantiate SetNamedPipeHandleState', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final SetNamedPipeHandleState = kernel32.lookupFunction<
