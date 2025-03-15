@@ -6,15 +6,6 @@ import 'dart:io';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-extension on FILETIME {
-  DateTime toDateTime() {
-    final microseconds = combineHighLow(dwHighDateTime, dwLowDateTime) ~/ 10;
-    return DateTime.utc(1601, 1, 1).add(Duration(microseconds: microseconds));
-  }
-}
-
-int combineHighLow(int high, int low) => (high << 32) | low;
-
 /// Converts file attributes to a human-readable string.
 String getAttributesString(int attributes) {
   final result = <String>[];
@@ -53,7 +44,7 @@ void main() {
     print('Last Access Time: ${info.ftLastAccessTime.toDateTime()}');
     print('Last Write Time: ${info.ftLastWriteTime.toDateTime()}');
     if (!isDirectory) {
-      final sizeInBytes = combineHighLow(info.nFileSizeHigh, info.nFileSizeLow);
+      final sizeInBytes = (info.nFileSizeHigh << 32) | info.nFileSizeLow;
       print('Size: $sizeInBytes bytes');
     }
   });
