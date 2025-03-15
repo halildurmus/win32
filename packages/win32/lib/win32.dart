@@ -56,6 +56,7 @@ export 'src/winrt_helpers.dart';
 
 // Useful extension methods
 export 'src/extensions/dialogs.dart';
+export 'src/extensions/filetime.dart';
 export 'src/extensions/int_to_hexstring.dart';
 export 'src/extensions/list_to_blob.dart';
 export 'src/extensions/set_ansi.dart';
