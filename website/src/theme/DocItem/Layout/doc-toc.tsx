@@ -1,5 +1,5 @@
+import { useDoc } from '@docusaurus/plugin-content-docs/client';
 import { useLocation } from '@docusaurus/router';
-import { useDoc } from '@docusaurus/theme-common/internal';
 import clsx from 'clsx';
 import React from 'react';
 

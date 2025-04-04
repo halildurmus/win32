@@ -175,13 +175,10 @@ const mapLabel = (label) => {
   let newLabel = `${label.replace(/-/g, ' ')}`;
 
   const replace = [
-    ['typescript', 'TypeScript'],
-    ['javascript', 'JavaScript'],
-    ['chakra ui', 'Chakra UI'],
-    ['material ui', 'Material UI'],
-    ['nextjs', 'Next.js'],
-    ['nestjs', 'NestJS'],
-    ['css', 'CSS'],
+    ['com', 'COM'],
+    ['dart', 'Dart'],
+    ['flutter', 'Flutter'],
+    ['win32', 'Win32'],
   ];
 
   replace.forEach((element) => {

@@ -1,8 +1,8 @@
+import { DocsPreferredVersionContextProvider } from '@docusaurus/plugin-content-docs/client';
 import { composeProviders } from '@docusaurus/theme-common';
 import {
   AnnouncementBarProvider,
   ColorModeProvider,
-  DocsPreferredVersionContextProvider,
   NavbarProvider,
   PluginHtmlClassNameProvider,
   ScrollControllerProvider,

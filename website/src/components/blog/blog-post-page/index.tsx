@@ -1,5 +1,5 @@
 import Link from '@docusaurus/Link';
-import { useBlogPost } from '@docusaurus/theme-common/internal';
+import { useBlogPost } from '@docusaurus/plugin-content-blog/client';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { blogPostContainerID } from '@docusaurus/utils-common';
 import { DateTime, ReadingTime } from '@site/src/components/blog/common';
@@ -119,7 +119,7 @@ export const BlogPostPageView = ({ children }) => {
             {authors.map((author, idx) => (
               <div key={idx} className="col col--6 padding-vert--sm">
                 <div className="flex items-center">
-                  <Link to={`/blog/author/${author?.key}`} itemProp="url">
+                  <Link to={`/blog/authors/${author?.key}`} itemProp="url">
                     <img
                       src={author?.imageURL}
                       alt={`${author?.name} avatar`}
@@ -169,11 +169,7 @@ export const BlogPostPageView = ({ children }) => {
             </Link>
           )}
         </h1>
-        <div
-          id={blogPostContainerID}
-          className="markdown"
-          itemProp="articleBody"
-        >
+        <div id={blogPostContainerID} className="markdown">
           <MDXContent>{children}</MDXContent>
         </div>
       </div>

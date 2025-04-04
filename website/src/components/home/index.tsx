@@ -1,31 +1,19 @@
 import Head from '@docusaurus/Head';
-import type {
-  BlogPostFrontMatter,
-  BlogPostMetadata,
-} from '@docusaurus/plugin-content-blog';
+
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { CommonFooter } from '@site/src/win32-theme/common-footer';
 import { CommonHeader } from '@site/src/win32-theme/common-header';
 import { CommonLayout } from '@site/src/win32-theme/common-layout';
-import { LandingBlogPosts } from '@site/src/win32-theme/landing-blog-posts';
+import {
+  BlogPostProps,
+  LandingBlogPosts,
+} from '@site/src/win32-theme/landing-blog-posts';
 import { LandingFeatures } from '@site/src/win32-theme/landing-features';
 import { LandingHeroSection } from '@site/src/win32-theme/landing-hero-section';
 import { LandingPackages } from '@site/src/win32-theme/landing-packages';
 import { LandingTryItSection } from '@site/src/win32-theme/landing-try-it-section';
 import clsx from 'clsx';
-
-export type BlogPostProps = {
-  metadata: {
-    title: string;
-    description: string;
-    frontMatter: BlogPostFrontMatter & Record<string, unknown>;
-    image: string;
-    tags: { label: string; permalink: string }[];
-  };
-  Preview: {
-    metadata: BlogPostMetadata;
-  };
-};
+import { ReactNode } from 'react';
 
 export type HomePageProps = {
   homePageBlogMetadata: {
@@ -44,7 +32,7 @@ export default function Home({
   homePageBlogMetadata,
   featuredPosts,
   recentPosts,
-}: HomePageProps): JSX.Element {
+}: HomePageProps): ReactNode {
   const {
     siteConfig: { customFields, title, tagline },
   } = useDocusaurusContext();

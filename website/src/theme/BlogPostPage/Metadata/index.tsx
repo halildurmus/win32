@@ -1,5 +1,5 @@
+import { useBlogPost } from '@docusaurus/plugin-content-blog/client';
 import { PageMetadata } from '@docusaurus/theme-common';
-import { useBlogPost } from '@docusaurus/theme-common/internal';
 
 export default function BlogPostPageMetadata() {
   const { assets, metadata } = useBlogPost();

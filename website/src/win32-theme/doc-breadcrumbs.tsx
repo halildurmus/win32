@@ -1,9 +1,7 @@
 import Link from '@docusaurus/Link';
 import { translate } from '@docusaurus/Translate';
-import {
-  useHomePageRoute,
-  useSidebarBreadcrumbs,
-} from '@docusaurus/theme-common/internal';
+import { useSidebarBreadcrumbs } from '@docusaurus/plugin-content-docs/client';
+import { useHomePageRoute } from '@docusaurus/theme-common/internal';
 import clsx from 'clsx';
 import React, { useMemo } from 'react';
 import { HiOutlineHome } from 'react-icons/hi2';

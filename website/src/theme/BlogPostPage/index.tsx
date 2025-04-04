@@ -1,12 +1,12 @@
 import {
+  BlogPostProvider,
+  useBlogPost,
+} from '@docusaurus/plugin-content-blog/client';
+import {
   HtmlClassNameProvider,
   ThemeClassNames,
 } from '@docusaurus/theme-common';
-import {
-  BlogPostProvider,
-  useBlogPost,
-} from '@docusaurus/theme-common/internal';
-import { BlogPostPageView, PostPaginator } from '@site/src/components/blog';
+import { BlogPostPageView } from '@site/src/components/blog';
 import BlogLayout from '@site/src/theme/BlogLayout';
 import BlogPostPageMetadata from '@theme/BlogPostPage/Metadata';
 import clsx from 'clsx';
@@ -14,14 +14,14 @@ import { BlogTOC } from './blog-toc';
 
 function BlogPostPageContent({ children }) {
   const { metadata, toc } = useBlogPost();
-  const { relatedPosts } = metadata;
+  // const { relatedPosts } = metadata;
 
   return (
     <BlogLayout showSidebarBanner toc={<BlogTOC toc={toc} />}>
       <BlogPostPageView>{children}</BlogPostPageView>
-      {relatedPosts && (
+      {/* {relatedPosts && (
         <PostPaginator title="Related Posts" posts={relatedPosts} />
-      )}
+      )} */}
     </BlogLayout>
   );
 }

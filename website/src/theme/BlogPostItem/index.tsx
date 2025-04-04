@@ -1,5 +1,5 @@
 import Link from '@docusaurus/Link';
-import { useBlogPost } from '@docusaurus/theme-common/internal';
+import { useBlogPost } from '@docusaurus/plugin-content-blog/client';
 import { DateTime } from '@site/src/components/blog/common';
 import BlogPostItemContainer from '@theme/BlogPostItem/Container';
 import clsx from 'clsx';
@@ -90,7 +90,7 @@ export default function BlogPostItem({ className }: { className?: string }) {
         </div>
 
         <div className="flex items-center">
-          <Link to={`/blog/author/${author?.key}`} itemProp="url">
+          <Link to={`/blog/authors/${author?.key}`} itemProp="url">
             <img
               src={author?.imageURL}
               alt={`${author?.name} avatar`}

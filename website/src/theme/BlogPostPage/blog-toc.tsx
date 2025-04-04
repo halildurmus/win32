@@ -1,5 +1,5 @@
+import { useBlogPost } from '@docusaurus/plugin-content-blog/client';
 import { useLocation } from '@docusaurus/router';
-import { useBlogPost } from '@docusaurus/theme-common/internal';
 import { Tags } from '@site/src/components/blog';
 import clsx from 'clsx';
 import React from 'react';

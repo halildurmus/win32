@@ -1,4 +1,4 @@
-import { useBlogPost } from '@docusaurus/theme-common/internal';
+import { useBlogPost } from '@docusaurus/plugin-content-blog/client';
 import ChangelogItemHeaderAuthor from '@site/src/components/changelog/ChangelogItem/Header/Author';
 import type { Props } from '@theme/BlogPostItem/Header/Authors';
 import clsx from 'clsx';
@@ -53,7 +53,7 @@ export default function BlogPostAuthors({
           className={clsx(
             'flex items-center justify-center',
             'px-6',
-            isBlogPostPage? 'size-14' : 'size-12',
+            isBlogPostPage ? 'size-14' : 'size-12',
             'rounded-full',
             isExpanded ? 'text-xs' : 'text-sm',
             'leading-none font-medium',

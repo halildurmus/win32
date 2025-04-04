@@ -1,4 +1,4 @@
-import { BlogPostProvider } from '@docusaurus/theme-common/internal';
+import { BlogPostProvider } from '@docusaurus/plugin-content-blog/client';
 import TagsList from '@site/src/components/blog/tags-list';
 import BlogPostItem from '@theme/BlogPostItem';
 import clsx from 'clsx';
@@ -32,7 +32,7 @@ export default function BlogPostItems({
           'not-prose'
         )}
       >
-        {tags && !isAuthorPage && !isTagsPage && (
+        {!isAuthorPage && !isTagsPage && (
           <>
             <div
               className={clsx(
@@ -56,7 +56,7 @@ export default function BlogPostItems({
               >
                 All Posts
               </h2>
-              <TagsList tags={tags} />
+              {tags && <TagsList tags={tags} />}
             </div>
           </>
         )}
