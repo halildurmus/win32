@@ -1,11 +1,11 @@
 import {
+  DocsSidebarProvider,
+  useDocRootMetadata,
+} from '@docusaurus/plugin-content-docs/client';
+import {
   HtmlClassNameProvider,
   ThemeClassNames,
 } from '@docusaurus/theme-common';
-import {
-  DocsSidebarProvider,
-  useDocRootMetadata,
-} from '@docusaurus/theme-common/internal';
 import type { Props } from '@theme/DocRoot';
 import DocRootLayout from '@theme/DocRoot/Layout';
 import NotFoundContent from '@theme/NotFound/Content';

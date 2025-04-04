@@ -1,4 +1,4 @@
-import { useBlogPost } from '@docusaurus/theme-common/internal';
+import { useBlogPost } from '@docusaurus/plugin-content-blog/client';
 import ReadMoreLink from '@theme/BlogPostItem/Footer/ReadMoreLink';
 import EditThisPage from '@theme/EditThisPage';
 import TagsListInline from '@theme/TagsListInline';

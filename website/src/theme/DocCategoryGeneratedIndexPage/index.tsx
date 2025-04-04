@@ -2,7 +2,7 @@ import {
   PageMetadata,
   useCurrentSidebarCategory,
 } from '@docusaurus/theme-common';
-import { useDocsVersion } from '@docusaurus/theme-common/internal';
+import { useDocsVersion } from '@docusaurus/plugin-content-docs/client';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import { DocBreadcrumbs } from '@site/src/win32-theme/doc-breadcrumbs';
 import DocCardList from '@theme/DocCardList';

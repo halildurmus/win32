@@ -6,12 +6,13 @@ import {
   ThemeClassNames,
   usePluralForm,
 } from '@docusaurus/theme-common';
-import TagsList from '@site/src/components/blog/tags-list';
 import BlogListPaginator from '@site/src/theme/BlogListPaginator';
 import BlogPostItems from '@site/src/theme/BlogPostItems';
 import BlogLayout from '@theme/BlogLayout';
+import type { Props } from '@theme/BlogTagsPostsPage';
 import SearchMetadata from '@theme/SearchMetadata';
 import clsx from 'clsx';
+import { ReactNode } from 'react';
 import { TbCircleChevronLeft } from 'react-icons/tb';
 
 // Very simple pluralization: probably good enough for now
@@ -44,17 +45,22 @@ function useBlogTagsPostsPageTitle(tag) {
   );
 }
 
-function BlogTagsPostsPageMetadata({ tag }) {
+function BlogTagsPostsPageMetadata({ tag }: Props): ReactNode {
   const title = useBlogTagsPostsPageTitle(tag);
   return (
     <>
-      <PageMetadata title={title} />
+      <PageMetadata title={title} description={tag.description} />
       <SearchMetadata tag="blog_tags_posts" />
     </>
   );
 }
 
-function BlogTagsPostsPageContent({ tags, tag, items, sidebar, listMetadata }) {
+function BlogTagsPostsPageContent({
+  tag,
+  items,
+  sidebar,
+  listMetadata,
+}: Props): ReactNode {
   return (
     <BlogLayout sidebar={sidebar}>
       <div className={clsx('py-8', 'blog-md:py-16', 'w-full', 'mx-auto')}>
@@ -85,11 +91,21 @@ function BlogTagsPostsPageContent({ tags, tag, items, sidebar, listMetadata }) {
           >
             <TbCircleChevronLeft className="w-6 h-6" /> Back to blog
           </Link>
-          <TagsList tags={tags} />
+          <Link
+            to={tag.allTagsPath}
+            className={clsx(
+              'text-md no-underline',
+              'text-win32-react-5 dark:text-win32-react-4',
+              'hover:text-gray-800 dark:hover:text-gray-300'
+            )}
+          >
+            View All Tags
+          </Link>
+          {/* {tags && <TagsList tags={tags} />} */}
         </div>
         <div className={clsx('pt-8 blog-md:pt-16', 'px-4')}>
           <div className="text-gray-500 dark:text-gray-400">
-            Posts tagged with
+            {tag.count} Posts tagged with
           </div>
           <h1 className="!mb-0">{tag.label}</h1>
         </div>

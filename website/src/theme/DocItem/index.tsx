@@ -1,5 +1,5 @@
+import { DocProvider } from '@docusaurus/plugin-content-docs/client';
 import { HtmlClassNameProvider } from '@docusaurus/theme-common';
-import { DocProvider } from '@docusaurus/theme-common/internal';
 import type { Props } from '@theme/DocItem';
 import DocItemLayout from '@theme/DocItem/Layout';
 import DocItemMetadata from '@theme/DocItem/Metadata';

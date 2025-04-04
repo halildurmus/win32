@@ -15,6 +15,10 @@ const config: Config = {
   organizationName: 'halildurmus',
   projectName: 'win32',
 
+  future: {
+    experimental_faster: true,
+  },
+
   headTags: [
     {
       tagName: 'script',
@@ -50,7 +54,7 @@ const config: Config = {
         type: 'image/svg+xml',
         href: '/img/favicon.svg',
       },
-    }
+    },
   ],
 
   // Even if you don't use internationalization, you can use this field to set
@@ -83,6 +87,7 @@ const config: Config = {
     [
       './plugins/blog.js',
       {
+        path: 'blog',
         routeBasePath: '/blog',
         blogTitle: 'win32 Blog',
         blogDescription:
@@ -133,7 +138,7 @@ const config: Config = {
       {
         blog: false,
         docs: {
-          path: './docs',
+          path: 'docs',
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl: `${githubRepoUrl}/tree/main/website`,
           showLastUpdateAuthor: true,

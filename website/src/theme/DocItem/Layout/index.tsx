@@ -1,4 +1,4 @@
-import { useDoc } from '@docusaurus/theme-common/internal';
+import { useDoc } from '@docusaurus/plugin-content-docs/client';
 import { FULL_WIDTH_TABLE_VARIABLE_NAME } from '@site/src/win32-theme/common-table';
 import { DocBreadcrumbs } from '@site/src/win32-theme/doc-breadcrumbs';
 import DocItemContent from '@theme/DocItem/Content';

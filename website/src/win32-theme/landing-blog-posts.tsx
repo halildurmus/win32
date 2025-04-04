@@ -1,6 +1,9 @@
 import Link from '@docusaurus/Link';
+import type {
+  BlogPostFrontMatter,
+  BlogPostMetadata,
+} from '@docusaurus/plugin-content-blog';
 import { DateTime } from '@site/src/components/blog/common';
-import { BlogPostProps, HomePageProps } from '@site/src/components/home';
 import { LandingSectionCtaButtonAlt } from '@site/src/win32-theme/landing-section-cta-button';
 import clsx from 'clsx';
 import { FC } from 'react';
@@ -167,7 +170,7 @@ function Post({
             )}
           >
             <div className="flex items-center">
-              <Link to={`/blog/author/${author?.key}`} itemProp="url">
+              <Link to={`/blog/authors/${author?.key}`} itemProp="url">
                 <img
                   src={author?.imageURL}
                   alt={`${author?.name} avatar`}
@@ -229,8 +232,31 @@ function Post({
   );
 }
 
-type Props = HomePageProps & {
+export type BlogPostProps = {
+  metadata: {
+    title: string;
+    description: string;
+    frontMatter: BlogPostFrontMatter & Record<string, unknown>;
+    image: string;
+    tags: { label: string; permalink: string }[];
+  };
+  Preview: {
+    metadata: BlogPostMetadata;
+  };
+};
+
+type Props = {
   className?: string;
+  homePageBlogMetadata: {
+    blogBasePath: string;
+    blogTitle: string;
+    blogDescription: string;
+    totalPosts: number;
+    totalFeaturedPosts: number;
+    totalRecentPosts: number;
+  };
+  featuredPosts?: BlogPostProps[];
+  recentPosts?: BlogPostProps[];
 };
 
 export const LandingBlogPosts: FC<Props> = ({
@@ -239,7 +265,6 @@ export const LandingBlogPosts: FC<Props> = ({
   featuredPosts,
   recentPosts,
 }): JSX.Element => {
-  const { blogBasePath } = homePageBlogMetadata;
   return (
     <div className={clsx('w-full', className)}>
       <div className={clsx('not-prose', 'w-full', 'px-4 landing-md:px-10')}>
@@ -302,7 +327,7 @@ export const LandingBlogPosts: FC<Props> = ({
         </div>
       </div>
 
-      <LandingSectionCtaButtonAlt to={blogBasePath}>
+      <LandingSectionCtaButtonAlt to={homePageBlogMetadata.blogBasePath}>
         All posts
       </LandingSectionCtaButtonAlt>
     </div>
