@@ -1,4 +1,4 @@
-@TestOn('windows')
+@TestOn('linux')
 library;
 
 import 'dart:io';
