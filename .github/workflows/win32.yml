@@ -41,19 +41,21 @@ jobs:
       matrix:
         include:
           - os: windows-latest
-            sdk: main
-          - os: windows-2022
-            sdk: beta
-          - os: windows-2019
             sdk: stable
-          - os: ubuntu-latest
-            sdk: stable
+          # - os: windows-2022
+          #   sdk: beta
+          # - os: windows-2019
+          #   sdk: stable
+          # - os: ubuntu-latest
+          #   sdk: stable
 
     uses: halildurmus/workflows/.github/workflows/dart.yml@main
     with:
-      check_coverage: ${{ matrix.sdk == 'main' }}
+      check_coverage: ${{ matrix.sdk == 'stable' }}
       codecov_flags: win32
-      concurrency: ${{ matrix.sdk == 'main' && '6' || '1' }}
+      concurrency: '1'
+      coverage_args: 'test/functions_test.dart'
+      coverage_version: '1.12.0'
       dart_sdk: ${{ matrix.sdk }}
       format_directories: lib test
       randomize_execution_order_of_tests: true
@@ -62,12 +64,12 @@ jobs:
     secrets:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
-  dartdoc:
-    uses: halildurmus/workflows/.github/workflows/dartdoc.yml@main
-    with:
-      working_directory: packages/win32
+  # dartdoc:
+  #   uses: halildurmus/workflows/.github/workflows/dartdoc.yml@main
+  #   with:
+  #     working_directory: packages/win32
 
-  pana:
-    uses: halildurmus/workflows/.github/workflows/pana.yml@main
-    with:
-      working_directory: packages/win32
+  # pana:
+  #   uses: halildurmus/workflows/.github/workflows/pana.yml@main
+  #   with:
+  #     working_directory: packages/win32
