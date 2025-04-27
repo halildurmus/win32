@@ -13,10 +13,6 @@ It can be used to query Windows developer APIs, encompassing both unmanaged
 APIs like Win32 or COM, as well as modern APIs like Windows Runtime (WinRT) that
 include their own metadata.
 
-## Architecture
-
-![Architecture diagram][architecture_diagram_link]
-
 ## Usage
 
 A simple example that loads the `MessageBoxW` function and prints out its
@@ -71,7 +67,6 @@ More examples can be found in the [example] subdirectory.
 Please file feature requests and bugs at the
 [issue tracker][issue_tracker_link].
 
-[architecture_diagram_link]: https://github.com/halildurmus/winmd/blob/main/metadata.drawio.svg?raw=true
 [ci_badge]: https://github.com/halildurmus/winmd/actions/workflows/winmd.yml/badge.svg
 [ci_link]: https://github.com/halildurmus/winmd/actions/workflows/winmd.yml
 [codecov_badge_link]: https://codecov.io/gh/halildurmus/winmd/branch/main/graph/badge.svg?token=1ouz1Jr9nW
