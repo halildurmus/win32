@@ -2,8 +2,8 @@ import '../../attributes.dart';
 import '../codes.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
+import '../metadata_table.dart';
 import '../row.dart';
-import '../table_index.dart';
 import 'constant.dart';
 import 'field_layout.dart';
 import 'type_def.dart';
@@ -21,10 +21,10 @@ import 'type_def.dart';
 final class Field extends Row with HasCustomAttributes {
   Field(super.metadataIndex, super.readerIndex, super.position);
 
-  static const tableIndex = TableIndex.field;
+  static const metadataTable = MetadataTable.field;
 
   @override
-  TableIndex get table => tableIndex;
+  MetadataTable get table => metadataTable;
 
   late final flags = FieldAttributes(readUint(0));
 
@@ -63,5 +63,5 @@ final class FieldCompanion extends RowCompanion<Field> {
   Field Function(MetadataIndex, int, int) get constructor => Field.new;
 
   @override
-  TableIndex get table => Field.tableIndex;
+  MetadataTable get table => Field.metadataTable;
 }

@@ -1,8 +1,8 @@
 import '../codes.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
+import '../metadata_table.dart';
 import '../row.dart';
-import '../table_index.dart';
 import 'generic_param.dart';
 
 /// A constraint on a generic parameter.
@@ -19,10 +19,10 @@ final class GenericParamConstraint extends Row with HasCustomAttributes {
     super.position,
   );
 
-  static const tableIndex = TableIndex.genericParamConstraint;
+  static const metadataTable = MetadataTable.genericParamConstraint;
 
   @override
-  TableIndex get table => tableIndex;
+  MetadataTable get table => metadataTable;
 
   late final owner = readRow<GenericParam>(0);
 
@@ -41,5 +41,5 @@ final class GenericParamConstraintCompanion
       GenericParamConstraint.new;
 
   @override
-  TableIndex get table => GenericParamConstraint.tableIndex;
+  MetadataTable get table => GenericParamConstraint.metadataTable;
 }

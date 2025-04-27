@@ -2,8 +2,8 @@ import '../../metadata_type.dart';
 import '../codes.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
+import '../metadata_table.dart';
 import '../row.dart';
-import '../table_index.dart';
 import 'type_def.dart';
 
 /// Records the interfaces a type implements explicitly.
@@ -16,10 +16,10 @@ import 'type_def.dart';
 final class InterfaceImpl extends Row with HasCustomAttributes {
   InterfaceImpl(super.metadataIndex, super.readerIndex, super.position);
 
-  static const tableIndex = TableIndex.interfaceImpl;
+  static const metadataTable = MetadataTable.interfaceImpl;
 
   @override
-  TableIndex get table => tableIndex;
+  MetadataTable get table => metadataTable;
 
   late final class$ = readRow<TypeDef>(0);
 
@@ -39,5 +39,5 @@ final class InterfaceImplCompanion extends RowCompanion<InterfaceImpl> {
       InterfaceImpl.new;
 
   @override
-  TableIndex get table => InterfaceImpl.tableIndex;
+  MetadataTable get table => InterfaceImpl.metadataTable;
 }

@@ -5,8 +5,8 @@ import '../../method_signature.dart';
 import '../codes.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
+import '../metadata_table.dart';
 import '../row.dart';
-import '../table_index.dart';
 import 'impl_map.dart';
 import 'param.dart';
 
@@ -24,10 +24,10 @@ import 'param.dart';
 final class MethodDef extends Row with HasCustomAttributes {
   MethodDef(super.metadataIndex, super.readerIndex, super.position);
 
-  static const tableIndex = TableIndex.methodDef;
+  static const metadataTable = MetadataTable.methodDef;
 
   @override
-  TableIndex get table => tableIndex;
+  MetadataTable get table => metadataTable;
 
   late final rva = readUint(0);
 
@@ -79,5 +79,5 @@ final class MethodDefCompanion extends RowCompanion<MethodDef> {
   MethodDef Function(MetadataIndex, int, int) get constructor => MethodDef.new;
 
   @override
-  TableIndex get table => MethodDef.tableIndex;
+  MetadataTable get table => MethodDef.metadataTable;
 }

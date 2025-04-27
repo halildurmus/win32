@@ -1,25 +1,30 @@
 import 'dart:collection';
 
 import 'metadata_reader.dart';
-import 'table_index.dart';
+import 'metadata_table.dart';
 
+/// Provides access to a fixed set of metadata tables within a metadata stream.
+///
+/// Each table contains structured records used to describe types, methods,
+/// fields, and other program elements.
 final class TableStream {
-  const TableStream(this.tables);
-
-  TableStream.create()
+  /// Creates an empty [TableStream].
+  ///
+  /// Initializes all tables up front to ensure a consistent, non-growable list
+  /// of known tables.
+  TableStream()
     : tables = UnmodifiableListView(
         List.generate(
-          _totalTablesCount,
+          MetadataTable.values.length,
           (_) => TableData.empty(),
           growable: false,
         ),
       );
 
+  /// The list of tables contained within this stream.
   final List<TableData> tables;
 
-  /// The total number of tables exposed.
-  static const _totalTablesCount = 19;
-
+  /// Returns the [TableData] associated with the given [MetadataTable].
   @pragma('vm:prefer-inline')
-  TableData operator [](TableIndex index) => tables[index];
+  TableData operator [](MetadataTable table) => tables[table.index];
 }

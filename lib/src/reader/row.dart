@@ -3,6 +3,7 @@ import 'blob.dart';
 import 'codes.dart';
 import 'metadata_index.dart';
 import 'metadata_reader.dart';
+import 'metadata_table.dart';
 import 'table/assembly_ref.dart';
 import 'table/class_layout.dart';
 import 'table/constant.dart';
@@ -22,7 +23,6 @@ import 'table/param.dart';
 import 'table/type_def.dart';
 import 'table/type_ref.dart';
 import 'table/type_spec.dart';
-import 'table_index.dart';
 
 abstract base class Row {
   const Row(this.metadataIndex, this.readerIndex, this.position);
@@ -33,7 +33,7 @@ abstract base class Row {
 
   final int position;
 
-  TableIndex get table;
+  MetadataTable get table;
 
   static RowCompanion<T> companion<T extends Row>() {
     final companion = _companions[T];
@@ -140,7 +140,7 @@ abstract class RowCompanion<T extends Row> {
   T Function(MetadataIndex metadataIndex, int readerIndex, int position)
   get constructor;
 
-  TableIndex get table;
+  MetadataTable get table;
 }
 
 const _companions = <Type, RowCompanion>{

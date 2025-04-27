@@ -3,8 +3,8 @@ import '../../method_signature.dart';
 import '../codes.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
+import '../metadata_table.dart';
 import '../row.dart';
-import '../table_index.dart';
 
 /// The MemberRef table contains a reference to a member (field or method) of a
 /// type.
@@ -20,10 +20,10 @@ import '../table_index.dart';
 final class MemberRef extends Row with HasCustomAttributes {
   MemberRef(super.metadataIndex, super.readerIndex, super.position);
 
-  static const tableIndex = TableIndex.memberRef;
+  static const metadataTable = MetadataTable.memberRef;
 
   @override
-  TableIndex get table => tableIndex;
+  MetadataTable get table => metadataTable;
 
   late final parent = decode<MemberRefParent>(0);
 
@@ -43,5 +43,5 @@ final class MemberRefCompanion extends RowCompanion<MemberRef> {
   MemberRef Function(MetadataIndex, int, int) get constructor => MemberRef.new;
 
   @override
-  TableIndex get table => MemberRef.tableIndex;
+  MetadataTable get table => MemberRef.metadataTable;
 }

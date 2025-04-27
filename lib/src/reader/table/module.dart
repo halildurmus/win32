@@ -1,6 +1,6 @@
 import '../metadata_index.dart';
+import '../metadata_table.dart';
 import '../row.dart';
-import '../table_index.dart';
 
 /// Contains a list of modules that are part of the assembly.
 ///
@@ -15,10 +15,10 @@ import '../table_index.dart';
 final class Module extends Row {
   Module(super.metadataIndex, super.readerIndex, super.position);
 
-  static const tableIndex = TableIndex.module;
+  static const metadataTable = MetadataTable.module;
 
   @override
-  TableIndex get table => tableIndex;
+  MetadataTable get table => metadataTable;
 
   late final name = readString(1);
 
@@ -35,5 +35,5 @@ final class ModuleCompanion extends RowCompanion<Module> {
   Module Function(MetadataIndex, int, int) get constructor => Module.new;
 
   @override
-  TableIndex get table => Module.tableIndex;
+  MetadataTable get table => Module.metadataTable;
 }

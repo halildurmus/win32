@@ -4,8 +4,8 @@ import '../../metadata_type.dart';
 import '../../metadata_value.dart';
 import '../codes.dart';
 import '../metadata_index.dart';
+import '../metadata_table.dart';
 import '../row.dart';
-import '../table_index.dart';
 
 /// Contains compile-time, constant values for fields, parameters, and
 /// properties.
@@ -19,10 +19,10 @@ import '../table_index.dart';
 final class Constant extends Row {
   Constant(super.metadataIndex, super.readerIndex, super.position);
 
-  static const tableIndex = TableIndex.constant;
+  static const metadataTable = MetadataTable.constant;
 
   @override
-  TableIndex get table => tableIndex;
+  MetadataTable get table => metadataTable;
 
   late final type = () {
     final type = readUint(0);
@@ -108,5 +108,5 @@ final class ConstantCompanion extends RowCompanion<Constant> {
   Constant Function(MetadataIndex, int, int) get constructor => Constant.new;
 
   @override
-  TableIndex get table => Constant.tableIndex;
+  MetadataTable get table => Constant.metadataTable;
 }

@@ -7,8 +7,8 @@ import '../../metadata_value.dart';
 import '../blob.dart';
 import '../codes.dart';
 import '../metadata_index.dart';
+import '../metadata_table.dart';
 import '../row.dart';
-import '../table_index.dart';
 
 /// Contains custom attributes for types, methods, fields, and properties.
 ///
@@ -21,10 +21,10 @@ import '../table_index.dart';
 final class CustomAttribute extends Row {
   CustomAttribute(super.metadataIndex, super.readerIndex, super.position);
 
-  static const tableIndex = TableIndex.customAttribute;
+  static const metadataTable = MetadataTable.customAttribute;
 
   @override
-  TableIndex get table => tableIndex;
+  MetadataTable get table => metadataTable;
 
   late final parent = decode<HasCustomAttribute>(0);
 
@@ -123,5 +123,5 @@ final class CustomAttributeCompanion extends RowCompanion<CustomAttribute> {
       CustomAttribute.new;
 
   @override
-  TableIndex get table => CustomAttribute.tableIndex;
+  MetadataTable get table => CustomAttribute.metadataTable;
 }

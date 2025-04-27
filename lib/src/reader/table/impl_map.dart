@@ -2,8 +2,8 @@ import '../../attributes.dart';
 import '../../exception.dart';
 import '../codes.dart';
 import '../metadata_index.dart';
+import '../metadata_table.dart';
 import '../row.dart';
-import '../table_index.dart';
 import 'module_ref.dart';
 
 /// Used to define the mapping between a managed member and an unmanaged
@@ -22,10 +22,10 @@ import 'module_ref.dart';
 final class ImplMap extends Row {
   ImplMap(super.metadataIndex, super.readerIndex, super.position);
 
-  static const tableIndex = TableIndex.implMap;
+  static const metadataTable = MetadataTable.implMap;
 
   @override
-  TableIndex get table => tableIndex;
+  MetadataTable get table => metadataTable;
 
   late final flags = PInvokeAttributes(readUint(0));
 
@@ -65,5 +65,5 @@ final class ImplMapCompanion extends RowCompanion<ImplMap> {
   ImplMap Function(MetadataIndex, int, int) get constructor => ImplMap.new;
 
   @override
-  TableIndex get table => ImplMap.tableIndex;
+  MetadataTable get table => ImplMap.metadataTable;
 }

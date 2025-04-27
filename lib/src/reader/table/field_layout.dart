@@ -1,6 +1,6 @@
 import '../metadata_index.dart';
+import '../metadata_table.dart';
 import '../row.dart';
-import '../table_index.dart';
 import 'field.dart';
 
 /// Contains the layout information for fields.
@@ -13,10 +13,10 @@ import 'field.dart';
 final class FieldLayout extends Row {
   FieldLayout(super.metadataIndex, super.readerIndex, super.position);
 
-  static const tableIndex = TableIndex.fieldLayout;
+  static const metadataTable = MetadataTable.fieldLayout;
 
   @override
-  TableIndex get table => tableIndex;
+  MetadataTable get table => metadataTable;
 
   late final offset = readUint(0);
 
@@ -34,5 +34,5 @@ final class FieldLayoutCompanion extends RowCompanion<FieldLayout> {
       FieldLayout.new;
 
   @override
-  TableIndex get table => FieldLayout.tableIndex;
+  MetadataTable get table => FieldLayout.metadataTable;
 }

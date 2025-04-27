@@ -17,18 +17,18 @@ final class MetadataIndex {
     final types =
         HashMap<String, HashMap<String, List<_ReaderAndTypeDefIndex>>>();
     final nested = HashMap<_ReaderAndTypeDefIndex, List<int>>();
-    const typeDefTableIndex = TypeDef.tableIndex;
+    const typeDefTable = TypeDef.metadataTable;
 
     for (var readerIndex = 0; readerIndex < readers.length; readerIndex++) {
       final reader = readers[readerIndex];
 
       for (final typeDefIndex in reader.typeDefs) {
-        final namespace = reader.readString(typeDefIndex, typeDefTableIndex, 2);
+        final namespace = reader.readString(typeDefIndex, typeDefTable, 2);
 
         // Skips `<Module>` as well as nested types.
         if (namespace.isEmpty) continue;
 
-        final name = reader.readString(typeDefIndex, typeDefTableIndex, 1);
+        final name = reader.readString(typeDefIndex, typeDefTable, 1);
         final trimmedName = trimTick(name);
         types
             .putIfAbsent(
@@ -40,8 +40,8 @@ final class MetadataIndex {
       }
 
       for (final nestedClass in reader.nestedClasses) {
-        final inner = reader.readUint(nestedClass, typeDefTableIndex, 0);
-        final outer = reader.readUint(nestedClass, typeDefTableIndex, 1);
+        final inner = reader.readUint(nestedClass, typeDefTable, 0);
+        final outer = reader.readUint(nestedClass, typeDefTable, 1);
         nested
             .putIfAbsent(_ReaderAndTypeDefIndex(readerIndex, outer), () => [])
             .add(inner);

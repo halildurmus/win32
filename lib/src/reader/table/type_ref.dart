@@ -1,8 +1,8 @@
 import '../codes.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
+import '../metadata_table.dart';
 import '../row.dart';
-import '../table_index.dart';
 
 /// Contains the definitions of all types referenced in the assembly.
 ///
@@ -15,10 +15,10 @@ import '../table_index.dart';
 final class TypeRef extends Row with HasCustomAttributes {
   TypeRef(super.metadataIndex, super.readerIndex, super.position);
 
-  static const tableIndex = TableIndex.typeRef;
+  static const metadataTable = MetadataTable.typeRef;
 
   @override
-  TableIndex get table => tableIndex;
+  MetadataTable get table => metadataTable;
 
   late final scope = decode<ResolutionScope>(0);
 
@@ -38,5 +38,5 @@ final class TypeRefCompanion extends RowCompanion<TypeRef> {
   TypeRef Function(MetadataIndex, int, int) get constructor => TypeRef.new;
 
   @override
-  TableIndex get table => TypeRef.tableIndex;
+  MetadataTable get table => TypeRef.metadataTable;
 }

@@ -1,6 +1,6 @@
 import '../metadata_index.dart';
+import '../metadata_table.dart';
 import '../row.dart';
-import '../table_index.dart';
 
 /// The `ModuleRef` table contains a list of modules referenced by the assembly.
 ///
@@ -14,10 +14,10 @@ import '../table_index.dart';
 final class ModuleRef extends Row {
   ModuleRef(super.metadataIndex, super.readerIndex, super.position);
 
-  static const tableIndex = TableIndex.moduleRef;
+  static const metadataTable = MetadataTable.moduleRef;
 
   @override
-  TableIndex get table => tableIndex;
+  MetadataTable get table => metadataTable;
 
   late final name = readString(0);
 
@@ -32,5 +32,5 @@ final class ModuleRefCompanion extends RowCompanion<ModuleRef> {
   ModuleRef Function(MetadataIndex, int, int) get constructor => ModuleRef.new;
 
   @override
-  TableIndex get table => ModuleRef.tableIndex;
+  MetadataTable get table => ModuleRef.metadataTable;
 }

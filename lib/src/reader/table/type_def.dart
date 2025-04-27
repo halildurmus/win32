@@ -3,8 +3,8 @@ import '../../exception.dart';
 import '../codes.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
+import '../metadata_table.dart';
 import '../row.dart';
-import '../table_index.dart';
 import '../type_category.dart';
 import 'class_layout.dart';
 import 'field.dart';
@@ -27,10 +27,10 @@ import 'nested_class.dart';
 final class TypeDef extends Row with HasCustomAttributes {
   TypeDef(super.metadataIndex, super.readerIndex, super.position);
 
-  static const tableIndex = TableIndex.typeDef;
+  static const metadataTable = MetadataTable.typeDef;
 
   @override
-  TableIndex get table => tableIndex;
+  MetadataTable get table => metadataTable;
 
   late final flags = TypeAttributes(readUint(0));
 
@@ -124,5 +124,5 @@ final class TypeDefCompanion extends RowCompanion<TypeDef> {
   TypeDef Function(MetadataIndex, int, int) get constructor => TypeDef.new;
 
   @override
-  TableIndex get table => TypeDef.tableIndex;
+  MetadataTable get table => TypeDef.metadataTable;
 }

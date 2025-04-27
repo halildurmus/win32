@@ -1,6 +1,6 @@
 import '../metadata_index.dart';
+import '../metadata_table.dart';
 import '../row.dart';
-import '../table_index.dart';
 import 'type_def.dart';
 
 /// Records which Type definitions are nested within which other Type
@@ -14,10 +14,10 @@ import 'type_def.dart';
 final class NestedClass extends Row {
   NestedClass(super.metadataIndex, super.readerIndex, super.position);
 
-  static const tableIndex = TableIndex.nestedClass;
+  static const metadataTable = MetadataTable.nestedClass;
 
   @override
-  TableIndex get table => tableIndex;
+  MetadataTable get table => metadataTable;
 
   late final inner = readRow<TypeDef>(0);
 
@@ -35,5 +35,5 @@ final class NestedClassCompanion extends RowCompanion<NestedClass> {
       NestedClass.new;
 
   @override
-  TableIndex get table => NestedClass.tableIndex;
+  MetadataTable get table => NestedClass.metadataTable;
 }

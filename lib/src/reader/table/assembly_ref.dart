@@ -1,8 +1,8 @@
 import '../../attributes.dart';
 import '../../culture.dart';
 import '../metadata_index.dart';
+import '../metadata_table.dart';
 import '../row.dart';
-import '../table_index.dart';
 
 /// Contains references to assemblies that are used by the current assembly.
 ///
@@ -26,10 +26,10 @@ import '../table_index.dart';
 final class AssemblyRef extends Row {
   AssemblyRef(super.metadataIndex, super.readerIndex, super.position);
 
-  static const tableIndex = TableIndex.assemblyRef;
+  static const metadataTable = MetadataTable.assemblyRef;
 
   @override
-  TableIndex get table => tableIndex;
+  MetadataTable get table => metadataTable;
 
   /// The major version of the assembly.
   late final majorVersion = readUint16(0);
@@ -84,5 +84,5 @@ final class AssemblyRefCompanion extends RowCompanion<AssemblyRef> {
       AssemblyRef.new;
 
   @override
-  TableIndex get table => AssemblyRef.tableIndex;
+  MetadataTable get table => AssemblyRef.metadataTable;
 }

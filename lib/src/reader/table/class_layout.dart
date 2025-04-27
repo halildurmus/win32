@@ -1,6 +1,6 @@
 import '../metadata_index.dart';
+import '../metadata_table.dart';
 import '../row.dart';
-import '../table_index.dart';
 import 'type_def.dart';
 
 /// Contains the layout information for a class.
@@ -14,10 +14,10 @@ import 'type_def.dart';
 final class ClassLayout extends Row {
   ClassLayout(super.metadataIndex, super.readerIndex, super.position);
 
-  static const tableIndex = TableIndex.classLayout;
+  static const metadataTable = MetadataTable.classLayout;
 
   @override
-  TableIndex get table => tableIndex;
+  MetadataTable get table => metadataTable;
 
   /// The pack size of the class.
   ///
@@ -45,5 +45,5 @@ final class ClassLayoutCompanion extends RowCompanion<ClassLayout> {
       ClassLayout.new;
 
   @override
-  TableIndex get table => ClassLayout.tableIndex;
+  MetadataTable get table => ClassLayout.metadataTable;
 }

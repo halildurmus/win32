@@ -2,8 +2,8 @@ import '../../attributes.dart';
 import '../codes.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
+import '../metadata_table.dart';
 import '../row.dart';
-import '../table_index.dart';
 import 'constant.dart';
 
 /// Records the parameters of a method or property.
@@ -17,10 +17,10 @@ import 'constant.dart';
 final class Param extends Row with HasCustomAttributes {
   Param(super.metadataIndex, super.readerIndex, super.position);
 
-  static const tableIndex = TableIndex.param;
+  static const metadataTable = MetadataTable.param;
 
   @override
-  TableIndex get table => tableIndex;
+  MetadataTable get table => metadataTable;
 
   late final flags = ParamAttributes(readUint(0));
 
@@ -44,5 +44,5 @@ final class ParamCompanion extends RowCompanion<Param> {
   Param Function(MetadataIndex, int, int) get constructor => Param.new;
 
   @override
-  TableIndex get table => Param.tableIndex;
+  MetadataTable get table => Param.metadataTable;
 }

@@ -1,8 +1,8 @@
 import '../../metadata_type.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
+import '../metadata_table.dart';
 import '../row.dart';
-import '../table_index.dart';
 
 /// Contains the definitions of all types in the assembly.
 ///
@@ -13,10 +13,10 @@ import '../table_index.dart';
 final class TypeSpec extends Row with HasCustomAttributes {
   TypeSpec(super.metadataIndex, super.readerIndex, super.position);
 
-  static const tableIndex = TableIndex.typeSpec;
+  static const metadataTable = MetadataTable.typeSpec;
 
   @override
-  TableIndex get table => tableIndex;
+  MetadataTable get table => metadataTable;
 
   MetadataType type([List<MetadataType> generics = const []]) =>
       readBlob(0).readTypeCode(generics);
@@ -33,5 +33,5 @@ final class TypeSpecCompanion extends RowCompanion<TypeSpec> {
   TypeSpec Function(MetadataIndex, int, int) get constructor => TypeSpec.new;
 
   @override
-  TableIndex get table => TypeSpec.tableIndex;
+  MetadataTable get table => TypeSpec.metadataTable;
 }
