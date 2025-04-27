@@ -128,7 +128,6 @@ export 'src/metadata_value.dart';
 export 'src/method_signature.dart';
 export 'src/reader/blob.dart';
 export 'src/reader/codes.dart';
-export 'src/reader/extensions.dart';
 export 'src/reader/has_custom_attributes.dart';
 export 'src/reader/heap/blob.dart';
 export 'src/reader/heap/guid.dart';
