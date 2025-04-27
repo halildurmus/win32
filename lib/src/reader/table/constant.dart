@@ -1,0 +1,112 @@
+import '../../bindings.dart';
+import '../../exception.dart';
+import '../../metadata_type.dart';
+import '../../metadata_value.dart';
+import '../codes.dart';
+import '../metadata_index.dart';
+import '../row.dart';
+import '../table_index.dart';
+
+/// Contains compile-time, constant values for fields, parameters, and
+/// properties.
+///
+/// The table has the following columns:
+///  - Type (1-byte, 1-byte padding zero)
+///  - Parent (HasConstant Coded Index)
+///  - Value (Blob Heap Index)
+///
+/// The table is defined in the section `§II.22.9` of the ECMA-335 standard.
+final class Constant extends Row {
+  Constant(super.metadataIndex, super.readerIndex, super.position);
+
+  static const tableIndex = TableIndex.constant;
+
+  @override
+  TableIndex get table => tableIndex;
+
+  late final type = () {
+    final type = readUint(0);
+    return switch (type) {
+      ELEMENT_TYPE_BOOLEAN => const BoolType(),
+      ELEMENT_TYPE_CHAR => const CharType(),
+      ELEMENT_TYPE_I1 => const Int8Type(),
+      ELEMENT_TYPE_U1 => const Uint8Type(),
+      ELEMENT_TYPE_I2 => const Int16Type(),
+      ELEMENT_TYPE_U2 => const Uint16Type(),
+      ELEMENT_TYPE_I4 => const Int32Type(),
+      ELEMENT_TYPE_U4 => const Uint32Type(),
+      ELEMENT_TYPE_I8 => const Int64Type(),
+      ELEMENT_TYPE_U8 => const Uint64Type(),
+      ELEMENT_TYPE_R4 => const Float32Type(),
+      ELEMENT_TYPE_R8 => const Float64Type(),
+      ELEMENT_TYPE_STRING => const StringType(),
+      ELEMENT_TYPE_CLASS => const NullReferenceType(),
+      _ => throw WinmdException('Unknown type: $type'),
+    };
+  }();
+
+  late final parent = decode<HasConstant>(1);
+
+  late final value = () {
+    final blob = readBlob(2);
+    return switch (type) {
+      BoolType() => BoolValue(blob.readBool()),
+      CharType() => CharValue(blob.readUint16()),
+      Int8Type() => Int8Value(blob.readInt8()),
+      Uint8Type() => Uint8Value(blob.readUint8()),
+      Int16Type() => Int16Value(blob.readInt16()),
+      Uint16Type() => Uint16Value(blob.readUint16()),
+      Int32Type() => Int32Value(blob.readInt32()),
+      Uint32Type() => Uint32Value(blob.readUint32()),
+      Int64Type() => Int64Value(blob.readInt64()),
+      Uint64Type() => Uint64Value(blob.readUint64()),
+      Float32Type() => Float32Value(blob.readFloat32()),
+      Float64Type() => Float64Value(blob.readFloat64()),
+      StringType() => Utf16StringValue(blob.readUtf16()),
+      NullReferenceType() => null,
+      final MetadataType type => throw WinmdException(
+        'Unknown value type: $type',
+      ),
+    };
+  }();
+
+  late final boolValue = switch (value) {
+    BoolValue(:final value) => value,
+    _ => null,
+  };
+
+  late final doubleValue = switch (value) {
+    Float32Value(:final value) || Float64Value(:final value) => value,
+    _ => null,
+  };
+
+  late final intValue = switch (value) {
+    Int8Value(:final value) ||
+    Uint8Value(:final value) ||
+    Int16Value(:final value) ||
+    Uint16Value(:final value) ||
+    Int32Value(:final value) ||
+    Uint32Value(:final value) ||
+    Int64Value(:final value) ||
+    Uint64Value(:final value) => value,
+    _ => null,
+  };
+
+  late final stringValue = switch (value) {
+    Utf8StringValue(:final value) || Utf16StringValue(:final value) => value,
+    _ => null,
+  };
+
+  @override
+  String toString() => 'Constant(value: $value)';
+}
+
+final class ConstantCompanion extends RowCompanion<Constant> {
+  const ConstantCompanion();
+
+  @override
+  Constant Function(MetadataIndex, int, int) get constructor => Constant.new;
+
+  @override
+  TableIndex get table => Constant.tableIndex;
+}
