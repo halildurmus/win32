@@ -6,27 +6,32 @@ import '../metadata_index.dart';
 import '../metadata_table.dart';
 import '../row.dart';
 
-/// The MemberRef table contains a reference to a member (field or method) of a
-/// type.
+/// Represents a row in the `MemberRef` metadata table, describing a reference
+/// to a field or method of a type.
 ///
-/// It is used to resolve references to members in the metadata.
+/// The fields are populated by interpreting the binary metadata as specified in
+/// ECMA-335 `§II.22.25`.
 ///
-/// The table has the following columns:
-///  - Class (MemberRefParent Coded Index)
-///  - Name (String Heap Index)
-///  - Signature (Blob Heap Index)
-///
-/// The table is defined in ECMA-335 `§II.22.25`.
+/// The `MemberRef` table has the following columns:
+///  - **Class** (MemberRefParent Coded Index)
+///  - **Name** (String Heap Index)
+///  - **Signature** (Blob Heap Index)
 final class MemberRef extends Row with HasCustomAttributes {
   MemberRef(super.metadataIndex, super.readerIndex, super.position);
 
   @override
   MetadataTable get table => MetadataTable.memberRef;
 
+  /// The type that contains the referenced member.
   late final parent = decode<MemberRefParent>(0);
 
+  /// The name of the referenced member.
   late final name = readString(1);
 
+  /// The method signature for the referenced member, if it is a method.
+  ///
+  /// Optionally, [generics] can be passed to substitute any generic parameters
+  /// in the method signature.
   MethodSignature signature([List<MetadataType> generics = const []]) =>
       readBlob(2).readMethodSignature(generics);
 
