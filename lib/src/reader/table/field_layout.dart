@@ -3,21 +3,28 @@ import '../metadata_table.dart';
 import '../row.dart';
 import 'field.dart';
 
-/// Contains the layout information for fields.
+/// Represents a row in the `FieldLayout` metadata table, describing the
+/// physical layout information of a [Field] within a type.
 ///
-/// The table has the following columns:
-///  - Offset (4-byte constant)
-///  - Field (Field Index)
+/// The fields are populated by interpreting the binary metadata as specified in
+/// ECMA-335 `§II.22.16`.
 ///
-/// The table is defined in ECMA-335 `§II.22.16`.
+/// The `FieldLayout` table has the following columns:
+///  - **Offset** (4-byte constant)
+///  - **Field** (Field Index)
 final class FieldLayout extends Row {
   FieldLayout(super.metadataIndex, super.readerIndex, super.position);
 
   @override
   MetadataTable get table => MetadataTable.fieldLayout;
 
+  /// The byte offset of the field within its containing type.
+  ///
+  /// This value specifies how many bytes from the start of the type's instance
+  /// data the field's storage begins.
   late final offset = readUint(0);
 
+  /// The [Field] to which this layout information applies.
   late final field = readRow<Field>(1);
 
   @override
