@@ -1,4 +1,7 @@
-/// Represents the semantic classification of a `TypeDef`.
+/// @docImport 'table/type_def.dart';
+library;
+
+/// Represents the semantic classification of a [TypeDef].
 enum TypeCategory {
   /// A type that derives from `System.Attribute`, used to annotate program
   /// elements with declarative information.

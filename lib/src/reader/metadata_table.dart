@@ -1,4 +1,5 @@
-import 'table_stream.dart';
+/// @docImport 'table_stream.dart';
+library;
 
 /// Represents a table in a [TableStream].
 ///
