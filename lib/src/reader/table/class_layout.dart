@@ -3,31 +3,33 @@ import '../metadata_table.dart';
 import '../row.dart';
 import 'type_def.dart';
 
-/// Contains the layout information for a class.
+/// Represents a row in the `ClassLayout` metadata table, describing layout
+/// constraints for a class type.
 ///
-/// The table has the following columns:
-///  - PackingSize (2-byte constant)
-///  - ClassSize (4-byte constant)
-///  - Parent (TypeDef Index)
+/// This class models a single row in the `ClassLayout` table. The fields are
+/// populated by interpreting the binary metadata as specified in ECMA-335
+/// `§II.22.8`.
 ///
-/// The table is defined in ECMA-335 `§II.22.8`.
+/// The `ClassLayout` table has the following columns:
+///  - **PackingSize** (2-byte constant)
+///  - **ClassSize** (4-byte constant)
+///  - **Parent** (TypeDef Index)
 final class ClassLayout extends Row {
   ClassLayout(super.metadataIndex, super.readerIndex, super.position);
 
   @override
   MetadataTable get table => MetadataTable.classLayout;
 
-  /// The pack size of the class.
+  /// The packing size (byte alignment) for the class fields.
   ///
-  /// If specified, this contains one of the values 1, 2, 4, 8, or 16,
-  /// representing the packing alignment of the class. If null, no packing
-  /// alignment is specified.
+  /// Common values are 1, 2, 4, 8, or 16 bytes. This influences how fields are
+  /// laid out in memory. If not specified, a platform default is assumed.
   late final packingSize = readUint(0);
 
-  /// The size in bytes of the class represented.
+  /// The total size, in bytes, of an instance of the class.
   late final classSize = readUint(1);
 
-  /// The parent TypeDef of this layout.
+  /// The [TypeDef] representing the class whose layout is specified.
   late final parent = readRow<TypeDef>(2);
 
   @override
