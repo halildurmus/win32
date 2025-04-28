@@ -10,24 +10,32 @@ import '../metadata_index.dart';
 import '../metadata_table.dart';
 import '../row.dart';
 
-/// Contains custom attributes for types, methods, fields, and properties.
+/// Represents a custom attribute applied to types, methods, fields, or
+/// properties.
 ///
-/// The table has the following columns:
-///  - Parent (HasCustomAttribute Coded Index)
-///  - Type (CustomAttributeType Coded Index)
-///  - Value (Blob Heap Index)
+/// This class models a single row in the `CustomAttribute` table. The fields
+/// are populated by interpreting the binary metadata as specified in ECMA-335
+/// `§II.22.10`.
 ///
-/// The table is defined in ECMA-335 `§II.22.10`.
+/// The `CustomAttribute` table has the following columns:
+///  - **Parent** (HasCustomAttribute Coded Index)
+///  - **Type** (CustomAttributeType Coded Index)
+///  - **Value** (Blob Heap Index)
 final class CustomAttribute extends Row {
   CustomAttribute(super.metadataIndex, super.readerIndex, super.position);
 
   @override
   MetadataTable get table => MetadataTable.customAttribute;
 
+  /// The entity to which this attribute is applied.
   late final parent = decode<HasCustomAttribute>(0);
 
+  /// The constructor method used to instantiate the attribute.
   late final type = decode<CustomAttributeType>(1);
 
+  /// The parameters passed to the attribute constructor.
+  ///
+  /// This includes both positional and named parameters.
   late final parameters = () {
     final signature = type.signature();
     assert(
@@ -92,6 +100,7 @@ final class CustomAttribute extends Row {
   String toString() => 'CustomAttribute(name: $name, parameters: $parameters)';
 }
 
+/// Decodes a value from the blob according to the specified [type].
 MetadataValue _readValue(Blob blob, MetadataType type) => switch (type) {
   BoolType() => BoolValue(blob.readBool()),
   CharType() => CharValue(blob.readUint16()),
