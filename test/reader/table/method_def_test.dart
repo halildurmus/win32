@@ -4,11 +4,13 @@ import 'package:winmd/windows_metadata.dart';
 import 'package:winmd/winmd.dart';
 
 void main() async {
-  final index = EntityIndex(await WindowsMetadataLoader.loadAllMetadata());
+  final metadata = MetadataLookup(
+    await WindowsMetadataLoader.loadAllMetadata(),
+  );
 
   group('MethodDef', () {
     test('AsyncCausalityTracer.TraceSynchronousWorkCompletion', () {
-      final typeDef = index.findSingleType(
+      final typeDef = metadata.findSingleType(
         'Windows.Foundation.Diagnostics',
         'AsyncCausalityTracer',
       );
@@ -61,7 +63,7 @@ void main() async {
     });
 
     test('IAsyncCausalityTracerStatics.TraceSynchronousWorkCompletion', () {
-      final typeDef = index.findSingleType(
+      final typeDef = metadata.findSingleType(
         'Windows.Foundation.Diagnostics',
         'IAsyncCausalityTracerStatics',
       );
@@ -115,7 +117,7 @@ void main() async {
     });
 
     test('DoDragDrop', () {
-      final method = index.findFunction(
+      final method = metadata.findFunction(
         'Windows.Win32.System.Ole',
         'DoDragDrop',
       );
@@ -182,7 +184,7 @@ void main() async {
     });
 
     test('GetAltMonthNames', () {
-      final method = index.findFunction(
+      final method = metadata.findFunction(
         'Windows.Win32.System.Ole',
         'GetAltMonthNames',
       );

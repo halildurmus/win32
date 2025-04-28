@@ -4,11 +4,13 @@ import 'package:winmd/windows_metadata.dart';
 import 'package:winmd/winmd.dart';
 
 void main() async {
-  final index = EntityIndex(await WindowsMetadataLoader.loadAllMetadata());
+  final metadata = MetadataLookup(
+    await WindowsMetadataLoader.loadAllMetadata(),
+  );
 
   group('Param', () {
     test('CoCreateGuid([out] GUID *pguid)', () {
-      final method = index.findFunction(
+      final method = metadata.findFunction(
         'Windows.Win32.System.Com',
         'CoCreateGuid',
       );
@@ -26,7 +28,7 @@ void main() async {
 
     test('ICalendarFactory.CreateCalendar([in] IIterable<string> languages, '
         '[in] string calendar, [in] string clock)', () {
-      final typeDef = index.findSingleType(
+      final typeDef = metadata.findSingleType(
         'Windows.Globalization',
         'ICalendarFactory',
       );
@@ -53,7 +55,7 @@ void main() async {
 
     test('ITensorBooleanStatics.CreateFromArray([in] IIterablle<long> shape, '
         '[in] bool[] data)', () {
-      final typeDef = index.findSingleType(
+      final typeDef = metadata.findSingleType(
         'Windows.AI.MachineLearning',
         'ITensorBooleanStatics',
       );

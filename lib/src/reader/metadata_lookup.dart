@@ -8,11 +8,11 @@ import 'table/method_def.dart';
 import 'table/type_def.dart';
 import 'type_category.dart';
 
-/// An index over a [MetadataIndex] that allows for efficient lookups of
-/// [constants], [functions], and [types] by their namespace and name.
-final class EntityIndex {
-  /// Creates a new [EntityIndex] from a [MetadataIndex].
-  factory EntityIndex(MetadataIndex index) {
+/// Provides fast, structured access to [constants], [functions], and [types]
+/// within a [MetadataIndex], enabling efficient lookup by namespace and name.
+final class MetadataLookup {
+  /// Creates a new [MetadataLookup] from a [MetadataIndex].
+  factory MetadataLookup(MetadataIndex index) {
     final constants = HashMap<String, HashMap<String, Field>>();
     final functions = HashMap<String, HashMap<String, MethodDef>>();
     final types = HashMap<String, HashMap<String, List<TypeDef>>>();
@@ -52,10 +52,15 @@ final class EntityIndex {
       }
     }
 
-    return EntityIndex._(index, constants, functions, types);
+    return MetadataLookup._(index, constants, functions, types);
   }
 
-  const EntityIndex._(this.index, this.constants, this.functions, this.types);
+  const MetadataLookup._(
+    this.index,
+    this.constants,
+    this.functions,
+    this.types,
+  );
 
   /// The [MetadataIndex] that this index is built from.
   final MetadataIndex index;

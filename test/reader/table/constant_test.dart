@@ -4,11 +4,13 @@ import 'package:winmd/windows_metadata.dart';
 import 'package:winmd/winmd.dart';
 
 void main() async {
-  final index = EntityIndex(await WindowsMetadataLoader.loadWin32Metadata());
+  final metadata = MetadataLookup(
+    await WindowsMetadataLoader.loadWin32Metadata(),
+  );
 
   group('Constant', () {
     test('Int8', () {
-      final field = index.findConstant(
+      final field = metadata.findConstant(
         'Windows.Win32.Graphics.OpenGL',
         'PFD_UNDERLAY_PLANE',
       );
@@ -20,7 +22,7 @@ void main() async {
     });
 
     test('Uint8', () {
-      final field = index.findConstant(
+      final field = metadata.findConstant(
         'Windows.Win32.System.WinRT.Metadata',
         'ELEMENT_TYPE_STRING',
       );
@@ -32,7 +34,7 @@ void main() async {
     });
 
     test('Int16', () {
-      final field = index.findConstant(
+      final field = metadata.findConstant(
         'Windows.Win32.Foundation',
         'VARIANT_TRUE',
       );
@@ -44,7 +46,7 @@ void main() async {
     });
 
     test('Uint16', () {
-      final field = index.findConstant(
+      final field = metadata.findConstant(
         'Windows.Win32.System.Variant',
         'VT_VARIANT',
       );
@@ -56,7 +58,7 @@ void main() async {
     });
 
     test('Int32', () {
-      final field = index.findConstant(
+      final field = metadata.findConstant(
         'Windows.Win32.Foundation',
         'STATUS_ACCESS_DENIED',
       );
@@ -68,7 +70,7 @@ void main() async {
     });
 
     test('Uint32', () {
-      final field = index.findConstant(
+      final field = metadata.findConstant(
         'Windows.Win32.Media.Audio',
         'MIXERCONTROL_CONTROLTYPE_DECIBELS',
       );
@@ -80,7 +82,7 @@ void main() async {
     });
 
     test('Int64', () {
-      final field = index.findConstant(
+      final field = metadata.findConstant(
         'Windows.Win32.System.WinRT.Metadata',
         'sdExecute',
       );
@@ -92,7 +94,7 @@ void main() async {
     });
 
     test('Uint64', () {
-      final field = index.findConstant('Windows.Win32.System.Com', 'MAXLSN');
+      final field = metadata.findConstant('Windows.Win32.System.Com', 'MAXLSN');
       final constant = field.constant;
       check(constant).isNotNull();
       check(constant!.type).isA<Uint64Type>();
@@ -101,7 +103,7 @@ void main() async {
     });
 
     test('Float32', () {
-      final field = index.findConstant(
+      final field = metadata.findConstant(
         'Windows.Win32.Graphics.Direct3D11',
         'D3D11_MIP_LOD_BIAS_MIN',
       );
@@ -113,7 +115,7 @@ void main() async {
     });
 
     test('Float64', () {
-      final field = index.findConstant(
+      final field = metadata.findConstant(
         'Windows.Win32.Media.Audio.Apo',
         'AUDIO_MIN_FRAMERATE',
       );
@@ -125,7 +127,7 @@ void main() async {
     });
 
     test('Utf16String', () {
-      final field = index.findConstant(
+      final field = metadata.findConstant(
         'Windows.Win32.Security.Cryptography',
         'CRYPT_OID_REGPATH',
       );

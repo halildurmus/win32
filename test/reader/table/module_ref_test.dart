@@ -4,11 +4,13 @@ import 'package:winmd/windows_metadata.dart';
 import 'package:winmd/winmd.dart';
 
 void main() async {
-  final index = EntityIndex(await WindowsMetadataLoader.loadWin32Metadata());
+  final metadata = MetadataLookup(
+    await WindowsMetadataLoader.loadWin32Metadata(),
+  );
 
   group('ModuleRef', () {
     test('kernel32.dll', () {
-      final function = index.findFunction(
+      final function = metadata.findFunction(
         'Windows.Win32.Foundation',
         'SetLastError',
       );

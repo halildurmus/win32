@@ -4,11 +4,13 @@ import 'package:winmd/windows_metadata.dart';
 import 'package:winmd/winmd.dart';
 
 void main() async {
-  final index = EntityIndex(await WindowsMetadataLoader.loadWin32Metadata());
+  final metadata = MetadataLookup(
+    await WindowsMetadataLoader.loadWin32Metadata(),
+  );
 
   group('Field', () {
     test('FOLDERID_AccountPictures', () {
-      final field = index.findConstant(
+      final field = metadata.findConstant(
         'Windows.Win32.UI.Shell',
         'FOLDERID_AccountPictures',
       );
@@ -25,7 +27,7 @@ void main() async {
     });
 
     test('PFD_LAYER_TYPE.PFD_UNDERLAY_PLANE', () {
-      final typeDef = index.index.findSingleType(
+      final typeDef = metadata.index.findSingleType(
         'Windows.Win32.Graphics.OpenGL',
         'PFD_LAYER_TYPE',
       );
@@ -52,7 +54,7 @@ void main() async {
     });
 
     test('STATUS_ACCESS_DENIED', () {
-      final field = index.findConstant(
+      final field = metadata.findConstant(
         'Windows.Win32.Foundation',
         'STATUS_ACCESS_DENIED',
       );
@@ -75,7 +77,7 @@ void main() async {
     });
 
     test('VARIANT_TRUE', () {
-      final field = index.findConstant(
+      final field = metadata.findConstant(
         'Windows.Win32.Foundation',
         'VARIANT_TRUE',
       );
@@ -98,7 +100,7 @@ void main() async {
     });
 
     test('WHV_PARTITION_PROPERTY.ProcessorCount', () {
-      final typeDef = index.findSingleType(
+      final typeDef = metadata.findSingleType(
         'Windows.Win32.System.Hypervisor',
         'WHV_PARTITION_PROPERTY',
       );
