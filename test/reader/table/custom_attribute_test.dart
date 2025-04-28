@@ -12,10 +12,8 @@ void main() async {
         'Windows.Win32.UI.Shell',
         'FOLDERID_AccountPictures',
       );
-      check(field).isNotNull();
-      final attribute = field!.findAttribute('GuidAttribute');
-      check(attribute).isNotNull();
-      check(attribute!.parent).isA<HasCustomAttributeField>();
+      final attribute = field.findAttribute('GuidAttribute');
+      check(attribute.parent).isA<HasCustomAttributeField>();
       final parent = attribute.parent as HasCustomAttributeField;
       check(parent.value.name).equals('FOLDERID_AccountPictures');
       check(attribute.type).isA<CustomAttributeTypeMemberRef>();
@@ -54,8 +52,7 @@ void main() async {
       );
       final field = typeDef.fields.first;
       final attribute = field.findAttribute('NativeArrayInfoAttribute');
-      check(attribute).isNotNull();
-      check(attribute!.parent).isA<HasCustomAttributeField>();
+      check(attribute.parent).isA<HasCustomAttributeField>();
       final parent = attribute.parent as HasCustomAttributeField;
       check(parent.value.name).equals('pSODeclaration');
       check(attribute.type).isA<CustomAttributeTypeMemberRef>();

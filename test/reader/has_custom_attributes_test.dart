@@ -1,6 +1,7 @@
 import 'package:checks/checks.dart';
 import 'package:test/scaffolding.dart';
 import 'package:winmd/windows_metadata.dart';
+import 'package:winmd/winmd.dart';
 
 void main() async {
   final index = await WindowsMetadataLoader.loadWin32Metadata();
@@ -72,12 +73,14 @@ void main() async {
     });
 
     group('findAttribute', () {
-      test('returns null if the attribute does not exist', () {
+      test('throws if the attribute does not exist', () {
         final typeDef = index.findSingleType(
           'Windows.Win32.Foundation',
           'HRESULT',
         );
-        check(typeDef.findAttribute('NonExistentAttribute')).isNull();
+        check(
+          () => typeDef.findAttribute('NonExistentAttribute'),
+        ).throws<WinmdException>();
       });
 
       test('returns the attribute if it exists', () {
@@ -85,7 +88,9 @@ void main() async {
           'Windows.Win32.Foundation',
           'HRESULT',
         );
-        check(typeDef.findAttribute('DocumentationAttribute')).isNotNull();
+        check(
+          () => typeDef.findAttribute('DocumentationAttribute'),
+        ).returnsNormally();
       });
     });
 

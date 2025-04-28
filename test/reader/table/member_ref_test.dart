@@ -15,8 +15,7 @@ void main() async {
           )
           .first;
       final attribute = typeDef.findAttribute('SupportedArchitectureAttribute');
-      check(attribute).isNotNull();
-      check(attribute!.type).isA<CustomAttributeTypeMemberRef>();
+      check(attribute.type).isA<CustomAttributeTypeMemberRef>();
       final memberRef = (attribute.type as CustomAttributeTypeMemberRef).value;
       check(memberRef.parent.name).equals('SupportedArchitectureAttribute');
       check(memberRef.name).equals('.ctor');
