@@ -4,16 +4,15 @@ import 'package:winmd/windows_metadata.dart';
 import 'package:winmd/winmd.dart';
 
 void main() async {
-  final index = ItemIndex(await WindowsMetadataLoader.loadWin32Metadata());
+  final index = EntityIndex(await WindowsMetadataLoader.loadWin32Metadata());
 
   group('Constant', () {
     test('Int8', () {
-      final field = index.getConstant(
+      final field = index.findConstant(
         'Windows.Win32.Graphics.OpenGL',
         'PFD_UNDERLAY_PLANE',
       );
-      check(field).isNotNull();
-      final constant = field!.constant;
+      final constant = field.constant;
       check(constant).isNotNull();
       check(constant!.type).isA<Int8Type>();
       check(constant.parent.name).equals('PFD_UNDERLAY_PLANE');
@@ -21,12 +20,11 @@ void main() async {
     });
 
     test('Uint8', () {
-      final field = index.getConstant(
+      final field = index.findConstant(
         'Windows.Win32.System.WinRT.Metadata',
         'ELEMENT_TYPE_STRING',
       );
-      check(field).isNotNull();
-      final constant = field!.constant;
+      final constant = field.constant;
       check(constant).isNotNull();
       check(constant!.type).isA<Uint8Type>();
       check(constant.parent.name).equals('ELEMENT_TYPE_STRING');
@@ -34,12 +32,11 @@ void main() async {
     });
 
     test('Int16', () {
-      final field = index.getConstant(
+      final field = index.findConstant(
         'Windows.Win32.Foundation',
         'VARIANT_TRUE',
       );
-      check(field).isNotNull();
-      final constant = field!.constant;
+      final constant = field.constant;
       check(constant).isNotNull();
       check(constant!.type).isA<Int16Type>();
       check(constant.parent.name).equals('VARIANT_TRUE');
@@ -47,12 +44,11 @@ void main() async {
     });
 
     test('Uint16', () {
-      final field = index.getConstant(
+      final field = index.findConstant(
         'Windows.Win32.System.Variant',
         'VT_VARIANT',
       );
-      check(field).isNotNull();
-      final constant = field!.constant;
+      final constant = field.constant;
       check(constant).isNotNull();
       check(constant!.type).isA<Uint16Type>();
       check(constant.parent.name).equals('VT_VARIANT');
@@ -60,12 +56,11 @@ void main() async {
     });
 
     test('Int32', () {
-      final field = index.getConstant(
+      final field = index.findConstant(
         'Windows.Win32.Foundation',
         'STATUS_ACCESS_DENIED',
       );
-      check(field).isNotNull();
-      final constant = field!.constant;
+      final constant = field.constant;
       check(constant).isNotNull();
       check(constant!.type).isA<Int32Type>();
       check(constant.parent.name).equals('STATUS_ACCESS_DENIED');
@@ -73,12 +68,11 @@ void main() async {
     });
 
     test('Uint32', () {
-      final field = index.getConstant(
+      final field = index.findConstant(
         'Windows.Win32.Media.Audio',
         'MIXERCONTROL_CONTROLTYPE_DECIBELS',
       );
-      check(field).isNotNull();
-      final constant = field!.constant;
+      final constant = field.constant;
       check(constant).isNotNull();
       check(constant!.type).isA<Uint32Type>();
       check(constant.parent.name).equals('MIXERCONTROL_CONTROLTYPE_DECIBELS');
@@ -86,12 +80,11 @@ void main() async {
     });
 
     test('Int64', () {
-      final field = index.getConstant(
+      final field = index.findConstant(
         'Windows.Win32.System.WinRT.Metadata',
         'sdExecute',
       );
-      check(field).isNotNull();
-      final constant = field!.constant;
+      final constant = field.constant;
       check(constant).isNotNull();
       check(constant!.type).isA<Int64Type>();
       check(constant.parent.name).equals('sdExecute');
@@ -99,9 +92,8 @@ void main() async {
     });
 
     test('Uint64', () {
-      final field = index.getConstant('Windows.Win32.System.Com', 'MAXLSN');
-      check(field).isNotNull();
-      final constant = field!.constant;
+      final field = index.findConstant('Windows.Win32.System.Com', 'MAXLSN');
+      final constant = field.constant;
       check(constant).isNotNull();
       check(constant!.type).isA<Uint64Type>();
       check(constant.parent.name).equals('MAXLSN');
@@ -109,12 +101,11 @@ void main() async {
     });
 
     test('Float32', () {
-      final field = index.getConstant(
+      final field = index.findConstant(
         'Windows.Win32.Graphics.Direct3D11',
         'D3D11_MIP_LOD_BIAS_MIN',
       );
-      check(field).isNotNull();
-      final constant = field!.constant;
+      final constant = field.constant;
       check(constant).isNotNull();
       check(constant!.type).isA<Float32Type>();
       check(constant.parent.name).equals('D3D11_MIP_LOD_BIAS_MIN');
@@ -122,12 +113,11 @@ void main() async {
     });
 
     test('Float64', () {
-      final field = index.getConstant(
+      final field = index.findConstant(
         'Windows.Win32.Media.Audio.Apo',
         'AUDIO_MIN_FRAMERATE',
       );
-      check(field).isNotNull();
-      final constant = field!.constant;
+      final constant = field.constant;
       check(constant).isNotNull();
       check(constant!.type).isA<Float64Type>();
       check(constant.parent.name).equals('AUDIO_MIN_FRAMERATE');
@@ -135,12 +125,11 @@ void main() async {
     });
 
     test('Utf16String', () {
-      final field = index.getConstant(
+      final field = index.findConstant(
         'Windows.Win32.Security.Cryptography',
         'CRYPT_OID_REGPATH',
       );
-      check(field).isNotNull();
-      final constant = field!.constant;
+      final constant = field.constant;
       check(constant).isNotNull();
       check(constant!.type).isA<StringType>();
       check(constant.parent.name).equals('CRYPT_OID_REGPATH');

@@ -4,11 +4,11 @@ import 'package:winmd/windows_metadata.dart';
 import 'package:winmd/winmd.dart';
 
 void main() async {
-  final index = ItemIndex(await WindowsMetadataLoader.loadAllMetadata());
+  final index = EntityIndex(await WindowsMetadataLoader.loadAllMetadata());
 
   group('MethodDef', () {
     test('AsyncCausalityTracer.TraceSynchronousWorkCompletion', () {
-      final typeDef = index.getSingleType(
+      final typeDef = index.findSingleType(
         'Windows.Foundation.Diagnostics',
         'AsyncCausalityTracer',
       );
@@ -62,7 +62,7 @@ void main() async {
     });
 
     test('IAsyncCausalityTracerStatics.TraceSynchronousWorkCompletion', () {
-      final typeDef = index.getSingleType(
+      final typeDef = index.findSingleType(
         'Windows.Foundation.Diagnostics',
         'IAsyncCausalityTracerStatics',
       );
@@ -117,12 +117,11 @@ void main() async {
     });
 
     test('DoDragDrop', () {
-      final method = index.getFunction(
+      final method = index.findFunction(
         'Windows.Win32.System.Ole',
         'DoDragDrop',
       );
-      check(method).isNotNull();
-      check(method!.rva).equals(0);
+      check(method.rva).equals(0);
       check(method.implFlags).equals(MethodImplAttributes.il);
       check(method.codeType).equals(CodeType.msil);
       check(method.isManaged).isTrue();
@@ -185,12 +184,11 @@ void main() async {
     });
 
     test('GetAltMonthNames', () {
-      final method = index.getFunction(
+      final method = index.findFunction(
         'Windows.Win32.System.Ole',
         'GetAltMonthNames',
       );
-      check(method).isNotNull();
-      check(method!.rva).equals(0);
+      check(method.rva).equals(0);
       check(method.implFlags).equals(MethodImplAttributes.il);
       check(method.codeType).equals(CodeType.msil);
       check(method.isManaged).isTrue();

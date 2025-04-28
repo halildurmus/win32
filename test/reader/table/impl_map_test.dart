@@ -4,16 +4,15 @@ import 'package:winmd/windows_metadata.dart';
 import 'package:winmd/winmd.dart';
 
 void main() async {
-  final index = ItemIndex(await WindowsMetadataLoader.loadWin32Metadata());
+  final index = EntityIndex(await WindowsMetadataLoader.loadWin32Metadata());
 
   group('ImplMap', () {
     test('CreateWindowExW', () {
-      final function = index.getFunction(
+      final function = index.findFunction(
         'Windows.Win32.UI.WindowsAndMessaging',
         'CreateWindowExW',
       );
-      check(function).isNotNull();
-      final implMap = function!.implMap;
+      final implMap = function.implMap;
       check(implMap).isNotNull();
       check(implMap!.flags).equals(
         PInvokeAttributes.noMangle |

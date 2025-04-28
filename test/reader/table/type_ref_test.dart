@@ -4,11 +4,11 @@ import 'package:winmd/windows_metadata.dart';
 import 'package:winmd/winmd.dart';
 
 void main() async {
-  final index = ItemIndex(await WindowsMetadataLoader.loadAllMetadata());
+  final index = EntityIndex(await WindowsMetadataLoader.loadAllMetadata());
 
   group('TypeRef', () {
     test('System.Attribute', () {
-      final typeDef = index.getSingleType(
+      final typeDef = index.findSingleType(
         'Windows.Foundation.Metadata',
         'ActivatableAttribute',
       );
@@ -22,7 +22,10 @@ void main() async {
     });
 
     test('System.Enum', () {
-      final typeDef = index.getSingleType('Windows.Globalization', 'DayOfWeek');
+      final typeDef = index.findSingleType(
+        'Windows.Globalization',
+        'DayOfWeek',
+      );
       check(typeDef.extends$).isNotNull().isA<TypeDefOrRefTypeRef>();
       final extends$ = (typeDef.extends$! as TypeDefOrRefTypeRef).value;
       check(extends$.scope).isA<ResolutionScopeAssemblyRef>();
@@ -33,7 +36,7 @@ void main() async {
     });
 
     test('System.MulticastDelegate', () {
-      final typeDef = index.getSingleType(
+      final typeDef = index.findSingleType(
         'Windows.Foundation',
         'AsyncActionCompletedHandler',
       );
@@ -47,7 +50,7 @@ void main() async {
     });
 
     test('System.Object', () {
-      final typeDef = index.getSingleType('Windows.Globalization', 'Calendar');
+      final typeDef = index.findSingleType('Windows.Globalization', 'Calendar');
       check(typeDef.extends$).isNotNull().isA<TypeDefOrRefTypeRef>();
       final extends$ = (typeDef.extends$! as TypeDefOrRefTypeRef).value;
       check(extends$.scope).isA<ResolutionScopeAssemblyRef>();
@@ -58,7 +61,7 @@ void main() async {
     });
 
     test('System.ValueType', () {
-      final typeDef = index.getSingleType('Windows.Foundation', 'Point');
+      final typeDef = index.findSingleType('Windows.Foundation', 'Point');
       check(typeDef.extends$).isNotNull().isA<TypeDefOrRefTypeRef>();
       final extends$ = (typeDef.extends$! as TypeDefOrRefTypeRef).value;
       check(extends$.scope).isA<ResolutionScopeAssemblyRef>();

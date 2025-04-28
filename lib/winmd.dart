@@ -138,13 +138,13 @@ export 'src/reader/codes.dart'
         ResolutionScopeCompanion,
         TypeDefOrRefCompanion,
         TypeOrMethodDefCompanion;
+export 'src/reader/entity_index.dart';
 export 'src/reader/has_custom_attributes.dart';
 export 'src/reader/heap/blob.dart';
 export 'src/reader/heap/guid.dart';
 export 'src/reader/heap/metadata_heap.dart';
 export 'src/reader/heap/string.dart';
 export 'src/reader/heap/user_string.dart';
-export 'src/reader/item_index.dart';
 export 'src/reader/metadata_index.dart';
 export 'src/reader/metadata_reader.dart';
 export 'src/reader/metadata_table.dart';

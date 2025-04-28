@@ -4,11 +4,11 @@ import 'package:winmd/windows_metadata.dart';
 import 'package:winmd/winmd.dart';
 
 void main() async {
-  final index = ItemIndex(await WindowsMetadataLoader.loadWin32Metadata());
+  final index = EntityIndex(await WindowsMetadataLoader.loadWin32Metadata());
 
   group('CustomAttribute', () {
     test('GuidAttribute', () {
-      final field = index.getConstant(
+      final field = index.findConstant(
         'Windows.Win32.UI.Shell',
         'FOLDERID_AccountPictures',
       );
@@ -48,7 +48,7 @@ void main() async {
     });
 
     test('NativeArrayInfoAttribute', () {
-      final typeDef = index.getSingleType(
+      final typeDef = index.findSingleType(
         'Windows.Win32.Graphics.Direct3D12',
         'D3D12_STREAM_OUTPUT_DESC',
       );

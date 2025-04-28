@@ -4,11 +4,11 @@ import 'package:winmd/windows_metadata.dart';
 import 'package:winmd/winmd.dart';
 
 void main() async {
-  final index = ItemIndex(await WindowsMetadataLoader.loadAllMetadata());
+  final index = EntityIndex(await WindowsMetadataLoader.loadAllMetadata());
 
   group('TypeDef', () {
     test('Windows.Globalization.Calendar', () {
-      final typeDef = index.getSingleType('Windows.Globalization', 'Calendar');
+      final typeDef = index.findSingleType('Windows.Globalization', 'Calendar');
       check(typeDef.flags).equals(
         TypeAttributes.public |
             TypeAttributes.autoLayout |
@@ -54,7 +54,7 @@ void main() async {
     });
 
     test('Windows.Win32.Foundation.SYSTEMTIME', () {
-      final typeDef = index.getSingleType(
+      final typeDef = index.findSingleType(
         'Windows.Win32.Foundation',
         'SYSTEMTIME',
       );
@@ -88,7 +88,7 @@ void main() async {
     });
 
     test('Windows.Win32.Foundation.Metadata.GuidAttribute', () {
-      final typeDef = index.getSingleType(
+      final typeDef = index.findSingleType(
         'Windows.Win32.Foundation.Metadata',
         'GuidAttribute',
       );
@@ -122,7 +122,7 @@ void main() async {
     });
 
     test('Windows.Win32.System.WinRT.IInspectable', () {
-      final typeDef = index.getSingleType(
+      final typeDef = index.findSingleType(
         'Windows.Win32.System.WinRT',
         'IInspectable',
       );
@@ -201,7 +201,7 @@ void main() async {
     });
 
     test('Windows.Win32.UI.WindowsAndMessaging.WNDPROC', () {
-      final typeDef = index.getSingleType(
+      final typeDef = index.findSingleType(
         'Windows.Win32.UI.WindowsAndMessaging',
         'WNDPROC',
       );

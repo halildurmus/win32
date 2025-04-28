@@ -4,17 +4,16 @@ import 'package:winmd/windows_metadata.dart';
 import 'package:winmd/winmd.dart';
 
 void main() async {
-  final index = ItemIndex(await WindowsMetadataLoader.loadWin32Metadata());
+  final index = EntityIndex(await WindowsMetadataLoader.loadWin32Metadata());
 
   group('Field', () {
     test('FOLDERID_AccountPictures', () {
-      final field = index.getConstant(
+      final field = index.findConstant(
         'Windows.Win32.UI.Shell',
         'FOLDERID_AccountPictures',
       );
-      check(field).isNotNull();
       check(
-        field!.flags,
+        field.flags,
       ).equals(FieldAttributes.public | FieldAttributes.static);
       check(field.fieldAccess).equals(FieldAccess.public);
       check(field.name).equals('FOLDERID_AccountPictures');
@@ -54,12 +53,11 @@ void main() async {
     });
 
     test('STATUS_ACCESS_DENIED', () {
-      final field = index.getConstant(
+      final field = index.findConstant(
         'Windows.Win32.Foundation',
         'STATUS_ACCESS_DENIED',
       );
-      check(field).isNotNull();
-      check(field!.flags).equals(
+      check(field.flags).equals(
         FieldAttributes.public |
             FieldAttributes.static |
             FieldAttributes.literal |
@@ -78,12 +76,11 @@ void main() async {
     });
 
     test('VARIANT_TRUE', () {
-      final field = index.getConstant(
+      final field = index.findConstant(
         'Windows.Win32.Foundation',
         'VARIANT_TRUE',
       );
-      check(field).isNotNull();
-      check(field!.flags).equals(
+      check(field.flags).equals(
         FieldAttributes.public |
             FieldAttributes.static |
             FieldAttributes.literal |
@@ -102,7 +99,7 @@ void main() async {
     });
 
     test('WHV_PARTITION_PROPERTY.ProcessorCount', () {
-      final typeDef = index.getSingleType(
+      final typeDef = index.findSingleType(
         'Windows.Win32.System.Hypervisor',
         'WHV_PARTITION_PROPERTY',
       );
