@@ -7,21 +7,24 @@ import '../metadata_index.dart';
 import '../metadata_table.dart';
 import '../row.dart';
 
-/// Contains compile-time, constant values for fields, parameters, and
-/// properties.
+/// Represents a compile-time constant value associated with a field, parameter,
+/// or property.
 ///
-/// The table has the following columns:
-///  - Type (1-byte, 1-byte padding zero)
-///  - Parent (HasConstant Coded Index)
-///  - Value (Blob Heap Index)
+/// This class models a single row in the `Constant` table. The fields are
+/// populated by interpreting the binary metadata as specified in ECMA-335
+/// `§II.22.9`.
 ///
-/// The table is defined in ECMA-335 `§II.22.9`.
+/// The `Constant` table has the following columns:
+///  - **Type** (1-byte, 1-byte padding zero)
+///  - **Parent** (HasConstant Coded Index)
+///  - **Value** (Blob Heap Index)
 final class Constant extends Row {
   Constant(super.metadataIndex, super.readerIndex, super.position);
 
   @override
   MetadataTable get table => MetadataTable.constant;
 
+  /// The metadata type that describes how to interpret the constant value.
   late final type = () {
     final type = readUint(0);
     return switch (type) {
@@ -43,8 +46,10 @@ final class Constant extends Row {
     };
   }();
 
+  /// The entity that this constant value belongs to.
   late final parent = decode<HasConstant>(1);
 
+  /// The constant value, interpreted according to [type].
   late final value = () {
     final blob = readBlob(2);
     return switch (type) {
@@ -68,17 +73,20 @@ final class Constant extends Row {
     };
   }();
 
-  late final boolValue = switch (value) {
+  /// Returns the value as a [bool] if possible, otherwise `null`.
+  late final valueAsBool = switch (value) {
     BoolValue(:final value) => value,
     _ => null,
   };
 
-  late final doubleValue = switch (value) {
+  /// Returns the value as a [double] if possible, otherwise `null`.
+  late final valueAsDouble = switch (value) {
     Float32Value(:final value) || Float64Value(:final value) => value,
     _ => null,
   };
 
-  late final intValue = switch (value) {
+  /// Returns the value as an [int] if possible, otherwise `null`.
+  late final valueAsInt = switch (value) {
     Int8Value(:final value) ||
     Uint8Value(:final value) ||
     Int16Value(:final value) ||
@@ -90,7 +98,8 @@ final class Constant extends Row {
     _ => null,
   };
 
-  late final stringValue = switch (value) {
+  /// Returns the value as a [String] if possible, otherwise `null`.
+  late final valueAsString = switch (value) {
     Utf8StringValue(:final value) || Utf16StringValue(:final value) => value,
     _ => null,
   };
