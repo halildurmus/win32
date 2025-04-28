@@ -12,14 +12,12 @@ import 'type_def.dart';
 ///  - Class (TypeDef Index)
 ///  - Interface (TypeDefOrRef Coded Index)
 ///
-/// The table is defined in the section `§II.22.23` of the ECMA-335 standard.
+/// The table is defined in ECMA-335 `§II.22.23`.
 final class InterfaceImpl extends Row with HasCustomAttributes {
   InterfaceImpl(super.metadataIndex, super.readerIndex, super.position);
 
-  static const metadataTable = MetadataTable.interfaceImpl;
-
   @override
-  MetadataTable get table => metadataTable;
+  MetadataTable get table => MetadataTable.interfaceImpl;
 
   late final class$ = readRow<TypeDef>(0);
 
@@ -39,5 +37,5 @@ final class InterfaceImplCompanion extends RowCompanion<InterfaceImpl> {
       InterfaceImpl.new;
 
   @override
-  MetadataTable get table => InterfaceImpl.metadataTable;
+  MetadataTable get table => MetadataTable.interfaceImpl;
 }

@@ -18,14 +18,12 @@ import 'module_ref.dart';
 ///  - ImportName (String Heap Index)
 ///  - ImportScope (ModuleRef Index)
 ///
-/// The table is defined in the section `§II.22.22` of the ECMA-335 standard.
+/// The table is defined in ECMA-335 `§II.22.22`.
 final class ImplMap extends Row {
   ImplMap(super.metadataIndex, super.readerIndex, super.position);
 
-  static const metadataTable = MetadataTable.implMap;
-
   @override
-  MetadataTable get table => metadataTable;
+  MetadataTable get table => MetadataTable.genericParam;
 
   late final flags = PInvokeAttributes(readUint(0));
 
@@ -65,5 +63,5 @@ final class ImplMapCompanion extends RowCompanion<ImplMap> {
   ImplMap Function(MetadataIndex, int, int) get constructor => ImplMap.new;
 
   @override
-  MetadataTable get table => ImplMap.metadataTable;
+  MetadataTable get table => MetadataTable.genericParam;
 }

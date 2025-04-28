@@ -22,14 +22,12 @@ import '../row.dart';
 ///  - Culture (String Heap Index)
 ///  - HashValue (Blob Heap Index)
 ///
-/// The table is defined in the section `§II.22.5` of the ECMA-335 standard.
+/// The table is defined in ECMA-335 `§II.22.5`.
 final class AssemblyRef extends Row {
   AssemblyRef(super.metadataIndex, super.readerIndex, super.position);
 
-  static const metadataTable = MetadataTable.assemblyRef;
-
   @override
-  MetadataTable get table => metadataTable;
+  MetadataTable get table => MetadataTable.assemblyRef;
 
   /// The major version of the assembly.
   late final majorVersion = readUint16(0);
@@ -84,5 +82,5 @@ final class AssemblyRefCompanion extends RowCompanion<AssemblyRef> {
       AssemblyRef.new;
 
   @override
-  MetadataTable get table => AssemblyRef.metadataTable;
+  MetadataTable get table => MetadataTable.assemblyRef;
 }

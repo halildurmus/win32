@@ -14,14 +14,12 @@ import 'generic_param_constraint.dart';
 ///  - Owner (TypeOrMethodDef Coded Index)
 ///  - Name (String Heap Index)
 ///
-/// The table is defined in the section `§II.22.20` of the ECMA-335 standard.
+/// The table is defined in ECMA-335 `§II.22.20`.
 final class GenericParam extends Row with HasCustomAttributes {
   GenericParam(super.metadataIndex, super.readerIndex, super.position);
 
-  static const metadataTable = MetadataTable.genericParam;
-
   @override
-  MetadataTable get table => metadataTable;
+  MetadataTable get table => MetadataTable.genericParam;
 
   /// The index of the generic parameter, numbered left-to-right, from zero.
   late final sequence = readUint(0);
@@ -65,5 +63,5 @@ final class GenericParamCompanion extends RowCompanion<GenericParam> {
       GenericParam.new;
 
   @override
-  MetadataTable get table => GenericParam.metadataTable;
+  MetadataTable get table => MetadataTable.genericParam;
 }

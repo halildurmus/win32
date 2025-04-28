@@ -20,14 +20,12 @@ import 'param.dart';
 ///  - Signature (Blob Heap Index)
 ///  - ParamList (Param Index)
 ///
-/// The table is defined in the section `§II.22.26` of the ECMA-335 standard.
+/// The table is defined in ECMA-335 `§II.22.26`.
 final class MethodDef extends Row with HasCustomAttributes {
   MethodDef(super.metadataIndex, super.readerIndex, super.position);
 
-  static const metadataTable = MetadataTable.methodDef;
-
   @override
-  MetadataTable get table => metadataTable;
+  MetadataTable get table => MetadataTable.methodDef;
 
   late final rva = readUint(0);
 
@@ -79,5 +77,5 @@ final class MethodDefCompanion extends RowCompanion<MethodDef> {
   MethodDef Function(MetadataIndex, int, int) get constructor => MethodDef.new;
 
   @override
-  MetadataTable get table => MethodDef.metadataTable;
+  MetadataTable get table => MetadataTable.methodDef;
 }

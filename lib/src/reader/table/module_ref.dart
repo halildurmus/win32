@@ -10,14 +10,12 @@ import '../row.dart';
 /// The table has the following columns:
 ///   Name (String Heap Index)
 ///
-/// The table is defined in the section `§II.22.31` of the ECMA-335 standard.
+/// The table is defined in ECMA-335 `§II.22.31`.
 final class ModuleRef extends Row {
   ModuleRef(super.metadataIndex, super.readerIndex, super.position);
 
-  static const metadataTable = MetadataTable.moduleRef;
-
   @override
-  MetadataTable get table => metadataTable;
+  MetadataTable get table => MetadataTable.moduleRef;
 
   late final name = readString(0);
 
@@ -32,5 +30,5 @@ final class ModuleRefCompanion extends RowCompanion<ModuleRef> {
   ModuleRef Function(MetadataIndex, int, int) get constructor => ModuleRef.new;
 
   @override
-  MetadataTable get table => ModuleRef.metadataTable;
+  MetadataTable get table => MetadataTable.moduleRef;
 }

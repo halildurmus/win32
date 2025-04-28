@@ -10,14 +10,12 @@ import 'type_def.dart';
 ///  - ClassSize (4-byte constant)
 ///  - Parent (TypeDef Index)
 ///
-/// The table is defined in the section `§II.22.8` of the ECMA-335 standard.
+/// The table is defined in ECMA-335 `§II.22.8`.
 final class ClassLayout extends Row {
   ClassLayout(super.metadataIndex, super.readerIndex, super.position);
 
-  static const metadataTable = MetadataTable.classLayout;
-
   @override
-  MetadataTable get table => metadataTable;
+  MetadataTable get table => MetadataTable.classLayout;
 
   /// The pack size of the class.
   ///
@@ -45,5 +43,5 @@ final class ClassLayoutCompanion extends RowCompanion<ClassLayout> {
       ClassLayout.new;
 
   @override
-  MetadataTable get table => ClassLayout.metadataTable;
+  MetadataTable get table => MetadataTable.classLayout;
 }

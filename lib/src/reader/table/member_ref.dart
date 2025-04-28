@@ -16,14 +16,12 @@ import '../row.dart';
 ///  - Name (String Heap Index)
 ///  - Signature (Blob Heap Index)
 ///
-/// The table is defined in the section `§II.22.25` of the ECMA-335 standard.
+/// The table is defined in ECMA-335 `§II.22.25`.
 final class MemberRef extends Row with HasCustomAttributes {
   MemberRef(super.metadataIndex, super.readerIndex, super.position);
 
-  static const metadataTable = MetadataTable.memberRef;
-
   @override
-  MetadataTable get table => metadataTable;
+  MetadataTable get table => MetadataTable.memberRef;
 
   late final parent = decode<MemberRefParent>(0);
 
@@ -43,5 +41,5 @@ final class MemberRefCompanion extends RowCompanion<MemberRef> {
   MemberRef Function(MetadataIndex, int, int) get constructor => MemberRef.new;
 
   @override
-  MetadataTable get table => MemberRef.metadataTable;
+  MetadataTable get table => MetadataTable.memberRef;
 }

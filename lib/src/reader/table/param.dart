@@ -13,14 +13,12 @@ import 'constant.dart';
 ///  - Sequence (2-byte constant)
 ///  - Name (String Heap Index)
 ///
-/// The table is defined in the section `§II.22.33` of the ECMA-335 standard.
+/// The table is defined in ECMA-335 `§II.22.33`.
 final class Param extends Row with HasCustomAttributes {
   Param(super.metadataIndex, super.readerIndex, super.position);
 
-  static const metadataTable = MetadataTable.param;
-
   @override
-  MetadataTable get table => metadataTable;
+  MetadataTable get table => MetadataTable.param;
 
   late final flags = ParamAttributes(readUint(0));
 
@@ -44,5 +42,5 @@ final class ParamCompanion extends RowCompanion<Param> {
   Param Function(MetadataIndex, int, int) get constructor => Param.new;
 
   @override
-  MetadataTable get table => Param.metadataTable;
+  MetadataTable get table => MetadataTable.param;
 }

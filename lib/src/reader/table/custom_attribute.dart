@@ -17,14 +17,12 @@ import '../row.dart';
 ///  - Type (CustomAttributeType Coded Index)
 ///  - Value (Blob Heap Index)
 ///
-/// The table is defined in the section `§II.22.10` of the ECMA-335 standard.
+/// The table is defined in ECMA-335 `§II.22.10`.
 final class CustomAttribute extends Row {
   CustomAttribute(super.metadataIndex, super.readerIndex, super.position);
 
-  static const metadataTable = MetadataTable.customAttribute;
-
   @override
-  MetadataTable get table => metadataTable;
+  MetadataTable get table => MetadataTable.customAttribute;
 
   late final parent = decode<HasCustomAttribute>(0);
 
@@ -123,5 +121,5 @@ final class CustomAttributeCompanion extends RowCompanion<CustomAttribute> {
       CustomAttribute.new;
 
   @override
-  MetadataTable get table => CustomAttribute.metadataTable;
+  MetadataTable get table => MetadataTable.customAttribute;
 }

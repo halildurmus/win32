@@ -3,6 +3,7 @@ import 'dart:collection';
 import '../common.dart';
 import '../exception.dart';
 import 'metadata_reader.dart';
+import 'metadata_table.dart';
 import 'table/assembly_ref.dart';
 import 'table/field.dart';
 import 'table/method_def.dart';
@@ -17,7 +18,7 @@ final class MetadataIndex {
     final types =
         HashMap<String, HashMap<String, List<_ReaderAndTypeDefIndex>>>();
     final nested = HashMap<_ReaderAndTypeDefIndex, List<int>>();
-    const typeDefTable = TypeDef.metadataTable;
+    const typeDefTable = MetadataTable.typeDef;
 
     for (var readerIndex = 0; readerIndex < readers.length; readerIndex++) {
       final reader = readers[readerIndex];

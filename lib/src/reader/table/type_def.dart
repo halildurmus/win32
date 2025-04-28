@@ -23,14 +23,12 @@ import 'nested_class.dart';
 ///  - FieldList (Field Index)
 ///  - MethodList (MethodDef Index)
 ///
-/// The table is defined in the section `§II.22.37` of the ECMA-335 standard.
+/// The table is defined in ECMA-335 `§II.22.37`.
 final class TypeDef extends Row with HasCustomAttributes {
   TypeDef(super.metadataIndex, super.readerIndex, super.position);
 
-  static const metadataTable = MetadataTable.typeDef;
-
   @override
-  MetadataTable get table => metadataTable;
+  MetadataTable get table => MetadataTable.typeDef;
 
   late final flags = TypeAttributes(readUint(0));
 
@@ -124,5 +122,5 @@ final class TypeDefCompanion extends RowCompanion<TypeDef> {
   TypeDef Function(MetadataIndex, int, int) get constructor => TypeDef.new;
 
   @override
-  MetadataTable get table => TypeDef.metadataTable;
+  MetadataTable get table => MetadataTable.typeDef;
 }

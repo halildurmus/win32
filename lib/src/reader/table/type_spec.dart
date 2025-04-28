@@ -9,14 +9,12 @@ import '../row.dart';
 /// The table has the following columns:
 ///  - Signature (Blob Heap Index)
 ///
-/// The table is defined in the section `§II.22.39` of the ECMA-335 standard.
+/// The table is defined in ECMA-335 `§II.22.39`.
 final class TypeSpec extends Row with HasCustomAttributes {
   TypeSpec(super.metadataIndex, super.readerIndex, super.position);
 
-  static const metadataTable = MetadataTable.typeSpec;
-
   @override
-  MetadataTable get table => metadataTable;
+  MetadataTable get table => MetadataTable.typeSpec;
 
   MetadataType type([List<MetadataType> generics = const []]) =>
       readBlob(0).readTypeCode(generics);
@@ -33,5 +31,5 @@ final class TypeSpecCompanion extends RowCompanion<TypeSpec> {
   TypeSpec Function(MetadataIndex, int, int) get constructor => TypeSpec.new;
 
   @override
-  MetadataTable get table => TypeSpec.metadataTable;
+  MetadataTable get table => MetadataTable.typeSpec;
 }

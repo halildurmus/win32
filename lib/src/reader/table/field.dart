@@ -17,14 +17,12 @@ import 'type_def.dart';
 ///  - Name (String Heap Index)
 ///  - Signature (Blob Heap Index)
 ///
-/// The table is defined in the section `§II.22.15` of the ECMA-335 standard.
+/// The table is defined in ECMA-335 `§II.22.15`.
 final class Field extends Row with HasCustomAttributes {
   Field(super.metadataIndex, super.readerIndex, super.position);
 
-  static const metadataTable = MetadataTable.field;
-
   @override
-  MetadataTable get table => metadataTable;
+  MetadataTable get table => MetadataTable.field;
 
   late final flags = FieldAttributes(readUint(0));
 
@@ -63,5 +61,5 @@ final class FieldCompanion extends RowCompanion<Field> {
   Field Function(MetadataIndex, int, int) get constructor => Field.new;
 
   @override
-  MetadataTable get table => Field.metadataTable;
+  MetadataTable get table => MetadataTable.field;
 }

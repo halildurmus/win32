@@ -11,14 +11,12 @@ import '../row.dart';
 ///  - TypeName (String Heap Index)
 ///  - TypeNamespace (String Heap Index)
 ///
-/// The table is defined in the section `§II.22.38` of the ECMA-335 standard.
+/// The table is defined in ECMA-335 `§II.22.38`.
 final class TypeRef extends Row with HasCustomAttributes {
   TypeRef(super.metadataIndex, super.readerIndex, super.position);
 
-  static const metadataTable = MetadataTable.typeRef;
-
   @override
-  MetadataTable get table => metadataTable;
+  MetadataTable get table => MetadataTable.typeRef;
 
   late final scope = decode<ResolutionScope>(0);
 
@@ -38,5 +36,5 @@ final class TypeRefCompanion extends RowCompanion<TypeRef> {
   TypeRef Function(MetadataIndex, int, int) get constructor => TypeRef.new;
 
   @override
-  MetadataTable get table => TypeRef.metadataTable;
+  MetadataTable get table => MetadataTable.typeRef;
 }

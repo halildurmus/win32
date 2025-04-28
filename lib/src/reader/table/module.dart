@@ -11,14 +11,12 @@ import '../row.dart';
 ///  - EncId (GUID Heap Index, reserved, MBZ)
 ///  - EncBaseId (GUID Heap Index, reserved, MBZ)
 ///
-/// The table is defined in the section `§II.22.30` of the ECMA-335 standard.
+/// The table is defined in ECMA-335 `§II.22.30`.
 final class Module extends Row {
   Module(super.metadataIndex, super.readerIndex, super.position);
 
-  static const metadataTable = MetadataTable.module;
-
   @override
-  MetadataTable get table => metadataTable;
+  MetadataTable get table => MetadataTable.module;
 
   late final name = readString(1);
 
@@ -35,5 +33,5 @@ final class ModuleCompanion extends RowCompanion<Module> {
   Module Function(MetadataIndex, int, int) get constructor => Module.new;
 
   @override
-  MetadataTable get table => Module.metadataTable;
+  MetadataTable get table => MetadataTable.module;
 }

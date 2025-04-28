@@ -9,14 +9,12 @@ import 'field.dart';
 ///  - Offset (4-byte constant)
 ///  - Field (Field Index)
 ///
-/// The table is defined in the section `§II.22.16` of the ECMA-335 standard.
+/// The table is defined in ECMA-335 `§II.22.16`.
 final class FieldLayout extends Row {
   FieldLayout(super.metadataIndex, super.readerIndex, super.position);
 
-  static const metadataTable = MetadataTable.fieldLayout;
-
   @override
-  MetadataTable get table => metadataTable;
+  MetadataTable get table => MetadataTable.fieldLayout;
 
   late final offset = readUint(0);
 
@@ -34,5 +32,5 @@ final class FieldLayoutCompanion extends RowCompanion<FieldLayout> {
       FieldLayout.new;
 
   @override
-  MetadataTable get table => FieldLayout.metadataTable;
+  MetadataTable get table => MetadataTable.fieldLayout;
 }

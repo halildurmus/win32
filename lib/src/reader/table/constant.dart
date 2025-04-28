@@ -15,14 +15,12 @@ import '../row.dart';
 ///  - Parent (HasConstant Coded Index)
 ///  - Value (Blob Heap Index)
 ///
-/// The table is defined in the section `§II.22.9` of the ECMA-335 standard.
+/// The table is defined in ECMA-335 `§II.22.9`.
 final class Constant extends Row {
   Constant(super.metadataIndex, super.readerIndex, super.position);
 
-  static const metadataTable = MetadataTable.constant;
-
   @override
-  MetadataTable get table => metadataTable;
+  MetadataTable get table => MetadataTable.constant;
 
   late final type = () {
     final type = readUint(0);
@@ -108,5 +106,5 @@ final class ConstantCompanion extends RowCompanion<Constant> {
   Constant Function(MetadataIndex, int, int) get constructor => Constant.new;
 
   @override
-  MetadataTable get table => Constant.metadataTable;
+  MetadataTable get table => MetadataTable.constant;
 }

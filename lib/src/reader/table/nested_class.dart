@@ -10,14 +10,12 @@ import 'type_def.dart';
 ///  - NestedClass (TypeDef Index)
 ///  - EnclosingClass (TypeDef Index)
 ///
-/// The table is defined in the section `§II.22.32` of the ECMA-335 standard.
+/// The table is defined in ECMA-335 `§II.22.32`.
 final class NestedClass extends Row {
   NestedClass(super.metadataIndex, super.readerIndex, super.position);
 
-  static const metadataTable = MetadataTable.nestedClass;
-
   @override
-  MetadataTable get table => metadataTable;
+  MetadataTable get table => MetadataTable.nestedClass;
 
   late final inner = readRow<TypeDef>(0);
 
@@ -35,5 +33,5 @@ final class NestedClassCompanion extends RowCompanion<NestedClass> {
       NestedClass.new;
 
   @override
-  MetadataTable get table => NestedClass.metadataTable;
+  MetadataTable get table => MetadataTable.nestedClass;
 }
