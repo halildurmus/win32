@@ -22,7 +22,7 @@ final class ImplMap extends Row {
   ImplMap(super.metadataIndex, super.readerIndex, super.position);
 
   @override
-  MetadataTable get table => MetadataTable.genericParam;
+  MetadataTable get table => MetadataTable.implMap;
 
   /// The flags describing how the unmanaged call should be performed.
   late final flags = PInvokeAttributes(readUint(0));
@@ -68,5 +68,5 @@ final class ImplMapCompanion extends RowCompanion<ImplMap> {
   ImplMap Function(MetadataIndex, int, int) get constructor => ImplMap.new;
 
   @override
-  MetadataTable get table => MetadataTable.genericParam;
+  MetadataTable get table => MetadataTable.implMap;
 }
