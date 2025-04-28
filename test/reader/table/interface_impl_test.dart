@@ -8,7 +8,7 @@ void main() async {
 
   group('InterfaceImpl', () {
     test('IFileDialog', () {
-      final typeDef = index.getSingleType(
+      final typeDef = index.findSingleType(
         'Windows.Win32.UI.Shell',
         'IFileDialog',
       );

@@ -160,7 +160,7 @@ void main() async {
     });
 
     test('Windows.Win32.System.WinRT.RO_INIT_TYPE', () {
-      final typeDef = index.index.getSingleType(
+      final typeDef = index.index.findSingleType(
         'Windows.Win32.System.WinRT',
         'RO_INIT_TYPE',
       );

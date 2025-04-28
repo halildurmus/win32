@@ -8,7 +8,7 @@ void main() async {
 
   group('FieldLayout', () {
     test('WHV_PARTITION_PROPERTY.ProcessorCount', () {
-      final typeDef = index.getSingleType(
+      final typeDef = index.findSingleType(
         'Windows.Win32.System.Hypervisor',
         'WHV_PARTITION_PROPERTY',
       );

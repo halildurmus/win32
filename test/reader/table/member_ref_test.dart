@@ -9,7 +9,7 @@ void main() async {
   group('MemberRef', () {
     test('SupportedArchitectureAttribute', () {
       final typeDef = index
-          .getType(
+          .findTypes(
             'Windows.Win32.Devices.DeviceAndDriverInstallation',
             'SP_DEVICE_INTERFACE_DATA',
           )

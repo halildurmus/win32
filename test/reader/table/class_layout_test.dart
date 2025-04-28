@@ -7,7 +7,7 @@ void main() async {
 
   group('ClassLayout', () {
     test('BITMAPFILEHEADER', () {
-      final typeDef = index.getSingleType(
+      final typeDef = index.findSingleType(
         'Windows.Win32.Graphics.Gdi',
         'BITMAPFILEHEADER',
       );

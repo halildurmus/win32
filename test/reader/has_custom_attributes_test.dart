@@ -8,7 +8,7 @@ void main() async {
   group('HasCustomAttributes', () {
     group('attributes', () {
       test('returns empty list if the type does not have any attributes', () {
-        final typeDef = index.getSingleType(
+        final typeDef = index.findSingleType(
           'Windows.Win32.Foundation',
           'FLOAT128',
         );
@@ -16,7 +16,7 @@ void main() async {
       });
 
       test('returns a list of attributes if the type has attributes', () {
-        final typeDef = index.getSingleType(
+        final typeDef = index.findSingleType(
           'Windows.Win32.Foundation',
           'HMODULE',
         );
@@ -42,7 +42,7 @@ void main() async {
 
     group('attributeAsString', () {
       test('returns null if the attribute does not exist', () {
-        final typeDef = index.getSingleType(
+        final typeDef = index.findSingleType(
           'Windows.Win32.Foundation',
           'HRESULT',
         );
@@ -51,7 +51,7 @@ void main() async {
 
       test('returns null if the attribute does not have a parameter with '
           'string type', () {
-        final typeDef = index.getSingleType(
+        final typeDef = index.findSingleType(
           'Windows.Win32.Foundation',
           'HMODULE',
         );
@@ -61,7 +61,7 @@ void main() async {
       });
 
       test('returns the string value of the attribute', () {
-        final typeDef = index.getSingleType(
+        final typeDef = index.findSingleType(
           'Windows.Win32.Foundation',
           'HRESULT',
         );
@@ -73,7 +73,7 @@ void main() async {
 
     group('findAttribute', () {
       test('returns null if the attribute does not exist', () {
-        final typeDef = index.getSingleType(
+        final typeDef = index.findSingleType(
           'Windows.Win32.Foundation',
           'HRESULT',
         );
@@ -81,7 +81,7 @@ void main() async {
       });
 
       test('returns the attribute if it exists', () {
-        final typeDef = index.getSingleType(
+        final typeDef = index.findSingleType(
           'Windows.Win32.Foundation',
           'HRESULT',
         );
@@ -91,7 +91,7 @@ void main() async {
 
     group('hasAttribute', () {
       test('returns true if the attribute exists', () {
-        final typeDef = index.getSingleType(
+        final typeDef = index.findSingleType(
           'Windows.Win32.Foundation',
           'HRESULT',
         );
@@ -99,7 +99,7 @@ void main() async {
       });
 
       test('returns false if the attribute does not exist', () {
-        final typeDef = index.getSingleType(
+        final typeDef = index.findSingleType(
           'Windows.Win32.Foundation',
           'HRESULT',
         );

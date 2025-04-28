@@ -8,7 +8,7 @@ void main() async {
 
   group('NestedClass', () {
     test('BLUETOOTH_ADDRESS', () {
-      final typeDef = index.getSingleType(
+      final typeDef = index.findSingleType(
         'Windows.Win32.Devices.Bluetooth',
         'BLUETOOTH_ADDRESS',
       );
@@ -21,7 +21,7 @@ void main() async {
     });
 
     test('VARIANT', () {
-      final typeDef = index.getSingleType(
+      final typeDef = index.findSingleType(
         'Windows.Win32.System.Variant',
         'VARIANT',
       );

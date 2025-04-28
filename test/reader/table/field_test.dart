@@ -26,7 +26,7 @@ void main() async {
     });
 
     test('PFD_LAYER_TYPE.PFD_UNDERLAY_PLANE', () {
-      final typeDef = index.index.getSingleType(
+      final typeDef = index.index.findSingleType(
         'Windows.Win32.Graphics.OpenGL',
         'PFD_LAYER_TYPE',
       );

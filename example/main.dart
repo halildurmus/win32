@@ -23,7 +23,7 @@ void main() async {
   );
   print('Loaded Windows metadata in ${stopwatch.elapsedMilliseconds}ms');
 
-  final td = index.getSingleType('Windows.Win32.UI.Shell', 'IFileDialog2');
+  final td = index.findSingleType('Windows.Win32.UI.Shell', 'IFileDialog2');
   print('category: ${td.category}');
   print('extend: ${td.extends$}');
   print('methods: ${td.methods}');

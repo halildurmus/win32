@@ -19,7 +19,7 @@ void mdmerge({required List<String> inputPaths, required String outputPath}) {
   final index = MetadataIndex.fromReaders(readers);
   final name = p.basename(outputPath);
   final writer = MetadataWriter(name);
-  for (final typeDef in index.types) {
+  for (final typeDef in index.allTypes) {
     _writeType(writer, index, typeDef, null);
   }
   output.writeAsBytesSync(writer.toBytes());
@@ -146,7 +146,7 @@ void _writeType(
     writer.addClassLayout(typeDef, layout.packingSize, layout.classSize);
   }
 
-  for (final nestedDef in index.nested(def)) {
+  for (final nestedDef in index.nestedTypes(def)) {
     assert(
       nestedDef.namespace.isEmpty && nestedDef.flags.isNested,
       'Nested type must have empty namespace and be nested.',

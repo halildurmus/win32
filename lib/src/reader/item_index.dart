@@ -51,7 +51,7 @@ final class ItemIndex {
   factory ItemIndex(MetadataIndex index) {
     final items = HashMap<String, HashMap<String, List<Item>>>();
 
-    for (final (namespace, name, type) in index.iter) {
+    for (final (namespace, name, type) in index.namespaceTypeEntries) {
       _insert(items, namespace, name, Item.type(type));
 
       if (!type.flags.has(TypeAttributes.windowsRuntime)) {

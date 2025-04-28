@@ -8,7 +8,7 @@ void main() async {
 
   group('GenericParam', () {
     test('IAsyncOperationWithProgress<TResult,TProgress>', () {
-      final typeDef = index.getSingleType(
+      final typeDef = index.findSingleType(
         'Windows.Foundation',
         'IAsyncOperationWithProgress',
       );
