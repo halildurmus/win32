@@ -6,29 +6,36 @@ import '../metadata_table.dart';
 import '../row.dart';
 import 'generic_param_constraint.dart';
 
-/// A generic parameter.
+/// Represents a row in the `GenericParam` metadata table, describing a generic
+/// type or method parameter.
 ///
-/// The table has the following columns:
-///  - Number (2-byte index)
-///  - Flags (2-byte bitmask of GenericParamAttributes)
-///  - Owner (TypeOrMethodDef Coded Index)
-///  - Name (String Heap Index)
+/// The fields are populated by interpreting the binary metadata as specified in
+/// ECMA-335 `§II.22.20`.
 ///
-/// The table is defined in ECMA-335 `§II.22.20`.
+/// The `GenericParam` table has the following columns:
+///  - **Number** (2-byte index)
+///  - **Flags** (2-byte bitmask of GenericParamAttributes)
+///  - **Owner** (TypeOrMethodDef Coded Index)
+///  - **Name** (String Heap Index)
 final class GenericParam extends Row with HasCustomAttributes {
   GenericParam(super.metadataIndex, super.readerIndex, super.position);
 
   @override
   MetadataTable get table => MetadataTable.genericParam;
 
-  /// The index of the generic parameter, numbered left-to-right, from zero.
+  /// The position of the generic parameter in the parameter list.
+  ///
+  /// Parameters are numbered sequentially from left to right, starting at zero.
   late final sequence = readUint(0);
 
+  /// The attribute flags describing characteristics of the parameter.
   late final flags = GenericParamAttributes(readUint(1));
 
+  /// The declared variance of the generic parameter.
   late final variance =
       Variance.values[flags & GenericParamAttributes.varianceMask];
 
+  /// Special constraints applied to the generic parameter.
   late final specialConstraint = switch (flags &
       GenericParamAttributes.specialConstraintMask) {
     GenericParamAttributes.referenceTypeConstraint =>
@@ -40,10 +47,13 @@ final class GenericParam extends Row with HasCustomAttributes {
     _ => SpecialConstraint.none,
   };
 
+  /// The owner that declares this generic parameter.
   late final owner = decode<TypeOrMethodDef>(2);
 
+  /// The name of the generic parameter.
   late final name = readString(3);
 
+  /// The additional constraints placed on the generic parameter, if any.
   late final constraints = getEqualRange<GenericParamConstraint>(
     0,
     position + 1,
