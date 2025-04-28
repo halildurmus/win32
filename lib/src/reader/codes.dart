@@ -1,3 +1,5 @@
+import 'package:meta/meta.dart';
+
 import '../exception.dart';
 import '../metadata_type.dart' as t;
 import '../method_signature.dart';
@@ -19,6 +21,7 @@ import 'table/type_spec.dart';
 abstract final class CodedIndex {
   const CodedIndex();
 
+  @internal
   static CodedIndexCompanion<T> companion<T extends CodedIndex>() {
     final companion = _companions[T];
     if (companion == null) throw StateError('No companion found for $T.');
@@ -29,6 +32,7 @@ abstract final class CodedIndex {
   int encode();
 }
 
+@internal
 abstract final class CodedIndexCompanion<T extends CodedIndex> {
   const CodedIndexCompanion();
 
@@ -130,6 +134,7 @@ final class CustomAttributeTypeMemberRef extends CustomAttributeType {
   String toString() => 'CustomAttributeTypeMemberRef($value)';
 }
 
+@internal
 final class CustomAttributeTypeCompanion
     extends CodedIndexCompanion<CustomAttributeType> {
   const CustomAttributeTypeCompanion();
@@ -376,6 +381,7 @@ final class HasCustomAttributeGenericParam extends HasCustomAttribute {
   String toString() => 'HasCustomAttributeGenericParam($value)';
 }
 
+@internal
 final class HasCustomAttributeCompanion
     extends CodedIndexCompanion<HasCustomAttribute> {
   const HasCustomAttributeCompanion();
@@ -446,6 +452,7 @@ final class HasConstantParam extends HasConstant {
   String toString() => 'HasConstantParam($value)';
 }
 
+@internal
 final class HasConstantCompanion extends CodedIndexCompanion<HasConstant> {
   const HasConstantCompanion();
 
@@ -516,6 +523,7 @@ final class MemberForwardedMethodDef extends MemberForwarded {
   String toString() => 'MemberForwardedMethodDef($value)';
 }
 
+@internal
 final class MemberForwardedCompanion
     extends CodedIndexCompanion<MemberForwarded> {
   const MemberForwardedCompanion();
@@ -594,6 +602,7 @@ final class MemberRefParentTypeRef extends MemberRefParent {
   String toString() => 'MemberRefParentTypeRef($value)';
 }
 
+@internal
 final class MemberRefParentCompanion
     extends CodedIndexCompanion<MemberRefParent> {
   const MemberRefParentCompanion();
@@ -691,6 +700,7 @@ final class ResolutionScopeTypeRef extends ResolutionScope {
   String toString() => 'ResolutionScopeTypeRef($value)';
 }
 
+@internal
 final class ResolutionScopeCompanion
     extends CodedIndexCompanion<ResolutionScope> {
   const ResolutionScopeCompanion();
@@ -805,6 +815,7 @@ final class TypeDefOrRefTypeSpec extends TypeDefOrRef {
   String toString() => 'TypeDefOrRefTypeSpec($value)';
 }
 
+@internal
 final class TypeDefOrRefCompanion extends CodedIndexCompanion<TypeDefOrRef> {
   const TypeDefOrRefCompanion();
 
@@ -874,6 +885,7 @@ final class TypeOrMethodDefMethodDef extends TypeOrMethodDef {
   String toString() => 'TypeOrMethodDefMethodDef($value)';
 }
 
+@internal
 final class TypeOrMethodDefCompanion
     extends CodedIndexCompanion<TypeOrMethodDef> {
   const TypeOrMethodDefCompanion();
