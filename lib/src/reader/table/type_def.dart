@@ -130,10 +130,30 @@ final class TypeDef extends Row with HasCustomAttributes {
 }
 
 extension TypeDefExtension on TypeDef {
-  Field? findField(String name) =>
+  /// Finds a field by its [name].
+  ///
+  /// Throws a [WinmdException] if the field is not found.
+  Field findField(String name) =>
+      fields.where((f) => f.name == name).firstOrNull ??
+      (throw WinmdException('Field "$name" not found in $this'));
+
+  /// Attempts to find a field by its [name].
+  ///
+  /// Returns `null` if the field is not found.
+  Field? tryFindField(String name) =>
       fields.where((f) => f.name == name).firstOrNull;
 
-  MethodDef? findMethod(String name) =>
+  /// Finds a method by its [name].
+  ///
+  /// Throws a [WinmdException] if the method is not found.
+  MethodDef findMethod(String name) =>
+      methods.where((m) => m.name == name).firstOrNull ??
+      (throw WinmdException('Method "$name" not found in $this'));
+
+  /// Attempts to find a method by its [name].
+  ///
+  /// Returns `null` if the method is not found.
+  MethodDef? tryFindMethod(String name) =>
       methods.where((m) => m.name == name).firstOrNull;
 }
 

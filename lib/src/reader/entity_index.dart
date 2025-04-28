@@ -69,7 +69,7 @@ final class EntityIndex {
   /// A map of [TypeDef]s indexed by their namespace and name.
   final HashMap<String, HashMap<String, List<TypeDef>>> types;
 
-  // Finds a constant by its [namespace] and [name].
+  /// Finds a constant by its [namespace] and [name].
   ///
   /// Throws a [WinmdException] if the constant is not found.
   Field findConstant(String namespace, String name) =>

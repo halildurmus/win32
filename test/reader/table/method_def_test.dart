@@ -13,8 +13,7 @@ void main() async {
         'AsyncCausalityTracer',
       );
       final method = typeDef.findMethod('TraceSynchronousWorkCompletion');
-      check(method).isNotNull();
-      check(method!.rva).equals(0);
+      check(method.rva).equals(0);
       check(method.implFlags).equals(MethodImplAttributes.runtime);
       check(method.codeType).equals(CodeType.runtime);
       check(method.isManaged).isTrue();
@@ -67,8 +66,7 @@ void main() async {
         'IAsyncCausalityTracerStatics',
       );
       final method = typeDef.findMethod('TraceSynchronousWorkCompletion');
-      check(method).isNotNull();
-      check(method!.rva).equals(0);
+      check(method.rva).equals(0);
       check(method.implFlags).equals(MethodImplAttributes.il);
       check(method.codeType).equals(CodeType.msil);
       check(method.isManaged).isTrue();

@@ -13,8 +13,7 @@ void main() async {
         'WHV_PARTITION_PROPERTY',
       );
       final field = typeDef.findField('ProcessorCount');
-      check(field).isNotNull();
-      final layout = field!.layout;
+      final layout = field.layout;
       check(layout).isNotNull();
       check(layout!.offset).equals(0);
       check(layout.field.name).equals('ProcessorCount');

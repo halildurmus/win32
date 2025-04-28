@@ -31,8 +31,7 @@ void main() async {
         'ICalendarFactory',
       );
       final method = typeDef.findMethod('CreateCalendar');
-      check(method).isNotNull();
-      final params = method!.params.toList();
+      final params = method.params.toList();
       check(params.length).equals(4);
       check(params[0].flags).equals(const ParamAttributes(0));
       check(params[0].sequence).equals(0);
@@ -59,8 +58,7 @@ void main() async {
         'ITensorBooleanStatics',
       );
       final method = typeDef.findMethod('CreateFromArray');
-      check(method).isNotNull();
-      final params = method!.params.toList();
+      final params = method.params.toList();
       check(params.length).equals(3);
       check(params[0].flags).equals(const ParamAttributes(0));
       check(params[0].sequence).equals(0);

@@ -30,8 +30,7 @@ void main() async {
         'PFD_LAYER_TYPE',
       );
       final field = typeDef.findField('PFD_UNDERLAY_PLANE');
-      check(field).isNotNull();
-      check(field!.flags).equals(
+      check(field.flags).equals(
         FieldAttributes.public |
             FieldAttributes.static |
             FieldAttributes.literal |
@@ -104,8 +103,7 @@ void main() async {
         'WHV_PARTITION_PROPERTY',
       );
       final field = typeDef.findField('ProcessorCount');
-      check(field).isNotNull();
-      check(field!.flags).equals(FieldAttributes.public);
+      check(field.flags).equals(FieldAttributes.public);
       check(field.fieldAccess).equals(FieldAccess.public);
       check(field.name).equals('ProcessorCount');
       check(field.type).isA<Uint32Type>();
