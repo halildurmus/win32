@@ -3,22 +3,25 @@ import '../metadata_table.dart';
 import '../row.dart';
 import 'type_def.dart';
 
-/// Records which Type definitions are nested within which other Type
-/// definition.
+/// Represents a row in the `NestedClass` metadata table, describing a nested
+/// type definition.
 ///
-/// The table has the following columns:
-///  - NestedClass (TypeDef Index)
-///  - EnclosingClass (TypeDef Index)
+/// The fields are populated by interpreting the binary metadata as specified in
+/// ECMA-335 `§II.22.32`.
 ///
-/// The table is defined in ECMA-335 `§II.22.32`.
+/// The `NestedClass` table has the following columns:
+///  - **NestedClass** (TypeDef Index)
+///  - **EnclosingClass** (TypeDef Index)
 final class NestedClass extends Row {
   NestedClass(super.metadataIndex, super.readerIndex, super.position);
 
   @override
   MetadataTable get table => MetadataTable.nestedClass;
 
+  /// The [TypeDef] that is contained.
   late final inner = readRow<TypeDef>(0);
 
+  /// The [TypeDef] that contains the nested type.
   late final outer = readRow<TypeDef>(1);
 
   @override
