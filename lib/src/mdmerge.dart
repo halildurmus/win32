@@ -13,6 +13,19 @@ import 'writer/codes.dart';
 import 'writer/id.dart' as id show TypeDef;
 import 'writer/metadata_writer.dart';
 
+/// Merges multiple Windows Metadata (.winmd) files into a single output file.
+///
+/// This function reads one or more `.winmd` files or directories containing
+/// `.winmd` files, expands and parses them into an in-memory metadata index,
+/// and writes a merged output `.winmd` file at the specified [outputPath].
+///
+/// Example:
+/// ```dart
+/// mdmerge(
+///   inputPaths: ['path/to/directory', 'path/to/file.winmd'],
+///   outputPath: 'path/to/output/merged.winmd',
+/// );
+/// ```
 void mdmerge({required List<String> inputPaths, required String outputPath}) {
   final output = File(outputPath);
   final readers = _expandInput(inputPaths);
