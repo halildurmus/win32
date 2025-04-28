@@ -6,9 +6,8 @@ import 'type_def.dart';
 /// Represents a row in the `ClassLayout` metadata table, describing layout
 /// constraints for a class type.
 ///
-/// This class models a single row in the `ClassLayout` table. The fields are
-/// populated by interpreting the binary metadata as specified in ECMA-335
-/// `§II.22.8`.
+/// The fields are populated by interpreting the binary metadata as specified in
+/// ECMA-335 `§II.22.8`.
 ///
 /// The `ClassLayout` table has the following columns:
 ///  - **PackingSize** (2-byte constant)

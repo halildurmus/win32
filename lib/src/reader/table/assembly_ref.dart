@@ -4,12 +4,11 @@ import '../metadata_index.dart';
 import '../metadata_table.dart';
 import '../row.dart';
 
-/// Represents an `AssemblyRef` metadata table entry, describing a reference to
-/// an external assembly.
+/// Represents a row in the `AssemblyRef` metadata table, describing a reference
+/// to an external assembly.
 ///
-/// This class models a single row in the `AssemblyRef` table. The fields are
-/// populated by interpreting the binary metadata as specified in ECMA-335
-/// `§II.22.5`.
+/// The fields are populated by interpreting the binary metadata as specified in
+/// ECMA-335 `§II.22.5`.
 ///
 /// The `AssemblyRef` table has the following columns:
 ///  - **MajorVersion** (2-byte value)

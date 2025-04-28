@@ -10,12 +10,11 @@ import '../metadata_index.dart';
 import '../metadata_table.dart';
 import '../row.dart';
 
-/// Represents a custom attribute applied to types, methods, fields, or
-/// properties.
+/// Represents a row in the `CustomAttribute` metadata table, describing a
+/// custom attribute applied to a type.
 ///
-/// This class models a single row in the `CustomAttribute` table. The fields
-/// are populated by interpreting the binary metadata as specified in ECMA-335
-/// `§II.22.10`.
+/// The fields are populated by interpreting the binary metadata as specified in
+/// ECMA-335 `§II.22.10`.
 ///
 /// The `CustomAttribute` table has the following columns:
 ///  - **Parent** (HasCustomAttribute Coded Index)
