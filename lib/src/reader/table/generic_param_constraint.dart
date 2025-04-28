@@ -1,3 +1,5 @@
+import 'package:meta/meta.dart';
+
 import '../codes.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
@@ -34,6 +36,7 @@ final class GenericParamConstraint extends Row with HasCustomAttributes {
   String toString() => 'GenericParamConstraint(constraint: $constraint)';
 }
 
+@internal
 final class GenericParamConstraintCompanion
     extends RowCompanion<GenericParamConstraint> {
   const GenericParamConstraintCompanion();

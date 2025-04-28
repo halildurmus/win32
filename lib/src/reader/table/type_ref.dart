@@ -1,3 +1,5 @@
+import 'package:meta/meta.dart';
+
 import '../codes.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
@@ -35,6 +37,7 @@ final class TypeRef extends Row with HasCustomAttributes {
       namespace.isEmpty ? 'TypeRef($name)' : 'TypeRef($namespace.$name)';
 }
 
+@internal
 final class TypeRefCompanion extends RowCompanion<TypeRef> {
   const TypeRefCompanion();
 

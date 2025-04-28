@@ -1,3 +1,5 @@
+import 'package:meta/meta.dart';
+
 import '../../attributes.dart';
 import '../../exception.dart';
 import '../codes.dart';
@@ -61,6 +63,7 @@ final class ImplMap extends Row {
   String toString() => 'ImplMap(importName: $importName)';
 }
 
+@internal
 final class ImplMapCompanion extends RowCompanion<ImplMap> {
   const ImplMapCompanion();
 

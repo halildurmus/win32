@@ -1,3 +1,5 @@
+import 'package:meta/meta.dart';
+
 import '../../metadata_type.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
@@ -30,6 +32,7 @@ final class TypeSpec extends Row with HasCustomAttributes {
       'TypeSpec(file: $readerIndex, pos: $position, table: $table)';
 }
 
+@internal
 final class TypeSpecCompanion extends RowCompanion<TypeSpec> {
   const TypeSpecCompanion();
 

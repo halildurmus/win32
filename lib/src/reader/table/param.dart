@@ -1,3 +1,5 @@
+import 'package:meta/meta.dart';
+
 import '../../attributes.dart';
 import '../codes.dart';
 import '../has_custom_attributes.dart';
@@ -43,6 +45,7 @@ final class Param extends Row with HasCustomAttributes {
   String toString() => 'Param(name: $name)';
 }
 
+@internal
 final class ParamCompanion extends RowCompanion<Param> {
   const ParamCompanion();
 

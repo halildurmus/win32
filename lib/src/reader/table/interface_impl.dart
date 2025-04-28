@@ -1,3 +1,5 @@
+import 'package:meta/meta.dart';
+
 import '../../metadata_type.dart';
 import '../codes.dart';
 import '../has_custom_attributes.dart';
@@ -35,6 +37,7 @@ final class InterfaceImpl extends Row with HasCustomAttributes {
       'InterfaceImpl(class\$: ${class$}, interface: ${interface()})';
 }
 
+@internal
 final class InterfaceImplCompanion extends RowCompanion<InterfaceImpl> {
   const InterfaceImplCompanion();
 

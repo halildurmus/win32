@@ -1,3 +1,5 @@
+import 'package:meta/meta.dart';
+
 import '../metadata_index.dart';
 import '../metadata_table.dart';
 import '../row.dart';
@@ -36,6 +38,7 @@ final class ClassLayout extends Row {
       'ClassLayout(packingSize: $packingSize, classSize: $classSize)';
 }
 
+@internal
 final class ClassLayoutCompanion extends RowCompanion<ClassLayout> {
   const ClassLayoutCompanion();
 

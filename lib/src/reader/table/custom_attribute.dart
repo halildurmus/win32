@@ -1,3 +1,5 @@
+import 'package:meta/meta.dart';
+
 import '../../attributes.dart';
 import '../../bindings.dart';
 import '../../custom_attribute_parameter.dart';
@@ -121,6 +123,7 @@ MetadataValue _readValue(Blob blob, MetadataType type) => switch (type) {
   _ => throw WinmdException('Unexpected type: $type'),
 };
 
+@internal
 final class CustomAttributeCompanion extends RowCompanion<CustomAttribute> {
   const CustomAttributeCompanion();
 

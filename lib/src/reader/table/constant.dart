@@ -1,3 +1,5 @@
+import 'package:meta/meta.dart';
+
 import '../../bindings.dart';
 import '../../exception.dart';
 import '../../metadata_type.dart';
@@ -107,6 +109,7 @@ final class Constant extends Row {
   String toString() => 'Constant(value: $value)';
 }
 
+@internal
 final class ConstantCompanion extends RowCompanion<Constant> {
   const ConstantCompanion();
 

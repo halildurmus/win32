@@ -1,3 +1,5 @@
+import 'package:meta/meta.dart';
+
 import '../../metadata_type.dart';
 import '../../method_signature.dart';
 import '../codes.dart';
@@ -39,6 +41,7 @@ final class MemberRef extends Row with HasCustomAttributes {
   String toString() => 'MemberRef(name: $name)';
 }
 
+@internal
 final class MemberRefCompanion extends RowCompanion<MemberRef> {
   const MemberRefCompanion();
 

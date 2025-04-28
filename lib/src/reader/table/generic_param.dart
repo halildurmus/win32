@@ -1,3 +1,5 @@
+import 'package:meta/meta.dart';
+
 import '../../attributes.dart';
 import '../codes.dart';
 import '../has_custom_attributes.dart';
@@ -65,6 +67,7 @@ final class GenericParam extends Row with HasCustomAttributes {
       : 'GenericParam(name: $name, constraints: $constraints)';
 }
 
+@internal
 final class GenericParamCompanion extends RowCompanion<GenericParam> {
   const GenericParamCompanion();
 

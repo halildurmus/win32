@@ -1,3 +1,5 @@
+import 'package:meta/meta.dart';
+
 import '../metadata_index.dart';
 import '../metadata_table.dart';
 import '../row.dart';
@@ -28,6 +30,7 @@ final class NestedClass extends Row {
   String toString() => 'NestedClass(inner: $inner, outer: $outer)';
 }
 
+@internal
 final class NestedClassCompanion extends RowCompanion<NestedClass> {
   const NestedClassCompanion();
 

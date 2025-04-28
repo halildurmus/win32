@@ -1,3 +1,5 @@
+import 'package:meta/meta.dart';
+
 import '../metadata_index.dart';
 import '../metadata_table.dart';
 import '../row.dart';
@@ -31,6 +33,7 @@ final class Module extends Row {
   String toString() => 'Module(name: $name, mvid: $mvid)';
 }
 
+@internal
 final class ModuleCompanion extends RowCompanion<Module> {
   const ModuleCompanion();
 

@@ -1,3 +1,5 @@
+import 'package:meta/meta.dart';
+
 import '../../attributes.dart';
 import '../../exception.dart';
 import '../codes.dart';
@@ -135,6 +137,7 @@ extension TypeDefExtension on TypeDef {
       methods.where((m) => m.name == name).firstOrNull;
 }
 
+@internal
 final class TypeDefCompanion extends RowCompanion<TypeDef> {
   const TypeDefCompanion();
 

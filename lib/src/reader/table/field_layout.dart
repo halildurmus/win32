@@ -1,3 +1,5 @@
+import 'package:meta/meta.dart';
+
 import '../metadata_index.dart';
 import '../metadata_table.dart';
 import '../row.dart';
@@ -31,6 +33,7 @@ final class FieldLayout extends Row {
   String toString() => 'FieldLayout(offset: $offset, field: $field)';
 }
 
+@internal
 final class FieldLayoutCompanion extends RowCompanion<FieldLayout> {
   const FieldLayoutCompanion();
 

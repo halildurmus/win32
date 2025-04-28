@@ -1,3 +1,5 @@
+import 'package:meta/meta.dart';
+
 import '../../attributes.dart';
 import '../codes.dart';
 import '../has_custom_attributes.dart';
@@ -53,7 +55,7 @@ final class Field extends Row with HasCustomAttributes {
   late final layout = getEqualRange<FieldLayout>(1, position + 1).firstOrNull;
 
   /// The [TypeDef] that owns this field.
-  late final parent = parentRow<TypeDef>(4);
+  late final parent = getParentRow<TypeDef>(4);
 
   @override
   String toString() =>
@@ -61,6 +63,7 @@ final class Field extends Row with HasCustomAttributes {
       '${constant != null ? ', constant: $constant' : ''})';
 }
 
+@internal
 final class FieldCompanion extends RowCompanion<Field> {
   const FieldCompanion();
 

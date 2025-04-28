@@ -1,3 +1,5 @@
+import 'package:meta/meta.dart';
+
 import '../../attributes.dart';
 import '../../exception.dart';
 import '../../metadata_type.dart';
@@ -78,7 +80,7 @@ final class MethodDef extends Row with HasCustomAttributes {
   late final params = getList<Param>(5);
 
   /// The type that owns this method.
-  late final parent = MemberRefParent.typeDef(parentRow(5));
+  late final parent = MemberRefParent.typeDef(getParentRow(5));
 
   /// The implementation map for the method, if it exists.
   late final implMap = getEqualRange<ImplMap>(
@@ -90,6 +92,7 @@ final class MethodDef extends Row with HasCustomAttributes {
   String toString() => 'MethodDef(name: $name, params: $params)';
 }
 
+@internal
 final class MethodDefCompanion extends RowCompanion<MethodDef> {
   const MethodDefCompanion();
 

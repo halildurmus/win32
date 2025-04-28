@@ -1,3 +1,5 @@
+import 'package:meta/meta.dart';
+
 import '../../attributes.dart';
 import '../../culture.dart';
 import '../metadata_index.dart';
@@ -74,6 +76,7 @@ final class AssemblyRef extends Row {
   String toString() => 'AssemblyRef(name: $name, version: $version)';
 }
 
+@internal
 final class AssemblyRefCompanion extends RowCompanion<AssemblyRef> {
   const AssemblyRefCompanion();
 
