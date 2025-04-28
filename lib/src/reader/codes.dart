@@ -1,7 +1,7 @@
 import 'package:meta/meta.dart';
 
 import '../exception.dart';
-import '../metadata_type.dart' as t;
+import '../metadata_type.dart';
 import '../method_signature.dart';
 import 'metadata_index.dart';
 import 'row.dart';
@@ -18,9 +18,14 @@ import 'table/type_def.dart';
 import 'table/type_ref.dart';
 import 'table/type_spec.dart';
 
+/// Base class for all coded indices used in metadata tables.
+///
+/// A coded index is a compressed reference that combines multiple possible
+/// table types into a single value, using a tag to distinguish them.
 abstract final class CodedIndex {
   const CodedIndex();
 
+  /// Retrieves the [CodedIndexCompanion] associated with the specified [T].
   @internal
   static CodedIndexCompanion<T> companion<T extends CodedIndex>() {
     final companion = _companions[T];
@@ -28,7 +33,7 @@ abstract final class CodedIndex {
     return companion as CodedIndexCompanion<T>;
   }
 
-  /// Encodes the attribute back to an integer.
+  /// Encodes the coded index into its compressed integer representation.
   int encode();
 }
 
@@ -50,21 +55,26 @@ const _companions = <Type, CodedIndexCompanion>{
   TypeOrMethodDef: TypeOrMethodDefCompanion(),
 };
 
+/// Represents a coded index into either a [MethodDef] or a [MemberRef].
 sealed class CustomAttributeType implements CodedIndex {
+  /// Creates a [CustomAttributeType] from a given [Row] instance.
   factory CustomAttributeType(Row value) => switch (value) {
     MethodDef() => CustomAttributeTypeMethodDef(value),
     MemberRef() => CustomAttributeTypeMemberRef(value),
     _ => throw WinmdException('Unsupported value: $value'),
   };
 
+  /// Constructs a [CustomAttributeType] referencing a [MethodDef].
   const factory CustomAttributeType.methodDef(MethodDef value) =
       CustomAttributeTypeMethodDef;
 
+  /// Constructs a [CustomAttributeType] referencing a [MemberRef].
   const factory CustomAttributeType.memberRef(MemberRef value) =
       CustomAttributeTypeMemberRef;
 
   const CustomAttributeType._();
 
+  /// Decodes a [CustomAttributeType] from a raw coded index.
   static CustomAttributeType decode(
     MetadataIndex metadataIndex,
     int readerIndex,
@@ -83,16 +93,23 @@ sealed class CustomAttributeType implements CodedIndex {
     };
   }
 
+  /// The parent container of this attribute type.
   MemberRefParent get parent;
 
-  MethodSignature signature([List<t.MetadataType> generics = const []]);
+  /// The method signature associated with this attribute type.
+  ///
+  /// Optionally, [generics] can be passed to substitute any generic parameters.
+  MethodSignature signature([List<MetadataType> generics = const []]);
 
+  /// The name of the method or member referenced by this attribute type.
   String get name;
 }
 
+/// A [CustomAttributeType] representing a [MethodDef].
 final class CustomAttributeTypeMethodDef extends CustomAttributeType {
   const CustomAttributeTypeMethodDef(this.value) : super._();
 
+  /// The underlying method definition.
   final MethodDef value;
 
   @override
@@ -102,7 +119,7 @@ final class CustomAttributeTypeMethodDef extends CustomAttributeType {
   MemberRefParent get parent => value.parent;
 
   @override
-  MethodSignature signature([List<t.MetadataType> generics = const []]) =>
+  MethodSignature signature([List<MetadataType> generics = const []]) =>
       value.signature(generics);
 
   @override
@@ -112,9 +129,11 @@ final class CustomAttributeTypeMethodDef extends CustomAttributeType {
   String toString() => 'CustomAttributeTypeMethodDef($value)';
 }
 
+/// A [CustomAttributeType] representing a [MemberRef].
 final class CustomAttributeTypeMemberRef extends CustomAttributeType {
   const CustomAttributeTypeMemberRef(this.value) : super._();
 
+  /// The underlying member reference.
   final MemberRef value;
 
   @override
@@ -124,7 +143,7 @@ final class CustomAttributeTypeMemberRef extends CustomAttributeType {
   MemberRefParent get parent => value.parent;
 
   @override
-  MethodSignature signature([List<t.MetadataType> generics = const []]) =>
+  MethodSignature signature([List<MetadataType> generics = const []]) =>
       value.signature(generics);
 
   @override
@@ -144,7 +163,9 @@ final class CustomAttributeTypeCompanion
       CustomAttributeType.decode;
 }
 
+/// Represents a coded index for entities that can have custom attributes.
 sealed class HasCustomAttribute implements CodedIndex {
+  /// Creates a [HasCustomAttribute] instance from a [Row].
   factory HasCustomAttribute(Row value) => switch (value) {
     MethodDef() => HasCustomAttributeMethodDef(value),
     Field() => HasCustomAttributeField(value),
@@ -161,43 +182,55 @@ sealed class HasCustomAttribute implements CodedIndex {
     _ => throw WinmdException('Unsupported value: $value'),
   };
 
+  /// Constructs a [HasCustomAttribute] referencing a [MethodDef].
   const factory HasCustomAttribute.methodDef(MethodDef value) =
       HasCustomAttributeMethodDef;
 
+  /// Constructs a [HasCustomAttribute] referencing a [Field].
   const factory HasCustomAttribute.field(Field value) = HasCustomAttributeField;
 
+  /// Constructs a [HasCustomAttribute] referencing a [TypeRef].
   const factory HasCustomAttribute.typeRef(TypeRef value) =
       HasCustomAttributeTypeRef;
 
+  /// Constructs a [HasCustomAttribute] referencing a [TypeDef].
   const factory HasCustomAttribute.typeDef(TypeDef value) =
       HasCustomAttributeTypeDef;
 
+  /// Constructs a [HasCustomAttribute] referencing a [Param].
   const factory HasCustomAttribute.param(Param value) = HasCustomAttributeParam;
 
+  /// Constructs a [HasCustomAttribute] referencing an [InterfaceImpl].
   const factory HasCustomAttribute.interfaceImpl(InterfaceImpl value) =
       HasCustomAttributeInterfaceImpl;
 
+  /// Constructs a [HasCustomAttribute] referencing a [MemberRef].
   const factory HasCustomAttribute.memberRef(MemberRef value) =
       HasCustomAttributeMemberRef;
 
+  /// Constructs a [HasCustomAttribute] referencing a [Module].
   const factory HasCustomAttribute.module(Module value) =
       HasCustomAttributeModule;
 
+  /// Constructs a [HasCustomAttribute] referencing a [ModuleRef].
   const factory HasCustomAttribute.moduleRef(ModuleRef value) =
       HasCustomAttributeModuleRef;
 
+  /// Constructs a [HasCustomAttribute] referencing a [TypeSpec].
   const factory HasCustomAttribute.typeSpec(TypeSpec value) =
       HasCustomAttributeTypeSpec;
 
+  /// Constructs a [HasCustomAttribute] referencing an [AssemblyRef].
   const factory HasCustomAttribute.assemblyRef(AssemblyRef value) =
       HasCustomAttributeAssemblyRef;
 
+  /// Constructs a [HasCustomAttribute] referencing a [GenericParam].
   const factory HasCustomAttribute.genericParam(GenericParam value) =
       HasCustomAttributeGenericParam;
 
   const HasCustomAttribute._();
 
-  /// Decodes a value from the provided code.
+  /// Decodes a [HasCustomAttribute] from a raw coded index.
   factory HasCustomAttribute.decode(
     MetadataIndex metadataIndex,
     int readerIndex,
@@ -237,9 +270,11 @@ sealed class HasCustomAttribute implements CodedIndex {
   }
 }
 
+/// A [HasCustomAttribute] representing a [MethodDef].
 final class HasCustomAttributeMethodDef extends HasCustomAttribute {
   const HasCustomAttributeMethodDef(this.value) : super._();
 
+  /// The underlying method definition.
   final MethodDef value;
 
   @override
@@ -249,9 +284,11 @@ final class HasCustomAttributeMethodDef extends HasCustomAttribute {
   String toString() => 'HasCustomAttributeMethodDef($value)';
 }
 
+/// A [HasCustomAttribute] representing a [Field].
 final class HasCustomAttributeField extends HasCustomAttribute {
   const HasCustomAttributeField(this.value) : super._();
 
+  /// The underlying field definition.
   final Field value;
 
   @override
@@ -261,9 +298,11 @@ final class HasCustomAttributeField extends HasCustomAttribute {
   String toString() => 'HasCustomAttributeField($value)';
 }
 
+/// A [HasCustomAttribute] representing a [TypeRef].
 final class HasCustomAttributeTypeRef extends HasCustomAttribute {
   const HasCustomAttributeTypeRef(this.value) : super._();
 
+  /// The underlying type reference.
   final TypeRef value;
 
   @override
@@ -273,9 +312,11 @@ final class HasCustomAttributeTypeRef extends HasCustomAttribute {
   String toString() => 'HasCustomAttributeTypeRef($value)';
 }
 
+/// A [HasCustomAttribute] representing a [TypeDef].
 final class HasCustomAttributeTypeDef extends HasCustomAttribute {
   const HasCustomAttributeTypeDef(this.value) : super._();
 
+  /// The underlying type definition.
   final TypeDef value;
 
   @override
@@ -285,9 +326,11 @@ final class HasCustomAttributeTypeDef extends HasCustomAttribute {
   String toString() => 'HasCustomAttributeTypeDef($value)';
 }
 
+/// A [HasCustomAttribute] representing a [Param].
 final class HasCustomAttributeParam extends HasCustomAttribute {
   const HasCustomAttributeParam(this.value) : super._();
 
+  /// The underlying parameter definition.
   final Param value;
 
   @override
@@ -297,9 +340,11 @@ final class HasCustomAttributeParam extends HasCustomAttribute {
   String toString() => 'HasCustomAttributeParam($value)';
 }
 
+/// A [HasCustomAttribute] representing an [InterfaceImpl].
 final class HasCustomAttributeInterfaceImpl extends HasCustomAttribute {
   const HasCustomAttributeInterfaceImpl(this.value) : super._();
 
+  /// The underlying interface implementation.
   final InterfaceImpl value;
 
   @override
@@ -309,9 +354,11 @@ final class HasCustomAttributeInterfaceImpl extends HasCustomAttribute {
   String toString() => 'HasCustomAttributeInterfaceImpl($value)';
 }
 
+/// A [HasCustomAttribute] representing a [MemberRef].
 final class HasCustomAttributeMemberRef extends HasCustomAttribute {
   const HasCustomAttributeMemberRef(this.value) : super._();
 
+  /// The underlying member reference.
   final MemberRef value;
 
   @override
@@ -321,9 +368,11 @@ final class HasCustomAttributeMemberRef extends HasCustomAttribute {
   String toString() => 'HasCustomAttributeMemberRef($value)';
 }
 
+/// A [HasCustomAttribute] representing a [Module].
 final class HasCustomAttributeModule extends HasCustomAttribute {
   const HasCustomAttributeModule(this.value) : super._();
 
+  /// The underlying module.
   final Module value;
 
   @override
@@ -333,9 +382,11 @@ final class HasCustomAttributeModule extends HasCustomAttribute {
   String toString() => 'HasCustomAttributeModule($value)';
 }
 
+/// A [HasCustomAttribute] representing a [ModuleRef].
 final class HasCustomAttributeModuleRef extends HasCustomAttribute {
   const HasCustomAttributeModuleRef(this.value) : super._();
 
+  /// The underlying module reference.
   final ModuleRef value;
 
   @override
@@ -345,9 +396,11 @@ final class HasCustomAttributeModuleRef extends HasCustomAttribute {
   String toString() => 'HasCustomAttributeModuleRef($value)';
 }
 
+/// A [HasCustomAttribute] representing a [TypeSpec].
 final class HasCustomAttributeTypeSpec extends HasCustomAttribute {
   const HasCustomAttributeTypeSpec(this.value) : super._();
 
+  /// The underlying type specification.
   final TypeSpec value;
 
   @override
@@ -357,9 +410,11 @@ final class HasCustomAttributeTypeSpec extends HasCustomAttribute {
   String toString() => 'HasCustomAttributeTypeSpec($value)';
 }
 
+/// A [HasCustomAttribute] representing an [AssemblyRef].
 final class HasCustomAttributeAssemblyRef extends HasCustomAttribute {
   const HasCustomAttributeAssemblyRef(this.value) : super._();
 
+  /// The underlying assembly reference.
   final AssemblyRef value;
 
   @override
@@ -369,9 +424,11 @@ final class HasCustomAttributeAssemblyRef extends HasCustomAttribute {
   String toString() => 'HasCustomAttributeAssemblyRef($value)';
 }
 
+/// A [HasCustomAttribute] representing a [GenericParam].
 final class HasCustomAttributeGenericParam extends HasCustomAttribute {
   const HasCustomAttributeGenericParam(this.value) : super._();
 
+  /// The underlying generic parameter.
   final GenericParam value;
 
   @override
@@ -391,20 +448,24 @@ final class HasCustomAttributeCompanion
       HasCustomAttribute.decode;
 }
 
+/// Represents a coded index for entities that can have constant values.
 sealed class HasConstant implements CodedIndex {
+  /// Creates a [HasCustomAttribute] instance from a [Row].
   factory HasConstant(Row value) => switch (value) {
     Field() => HasConstantField(value),
     Param() => HasConstantParam(value),
     _ => throw WinmdException('Unsupported value: $value'),
   };
 
+  /// Constructs a [HasConstant] referencing a [Field].
   const factory HasConstant.field(Field value) = HasConstantField;
 
+  /// Constructs a [HasConstant] referencing a [Param].
   const factory HasConstant.param(Param value) = HasConstantParam;
 
   const HasConstant._();
 
-  /// Decodes a value from the provided code.
+  /// Decodes a [HasConstant] from a raw coded index.
   static HasConstant decode(
     MetadataIndex metadataIndex,
     int readerIndex,
@@ -419,12 +480,15 @@ sealed class HasConstant implements CodedIndex {
     };
   }
 
+  /// The name of the underlying field or parameter.
   String get name;
 }
 
+/// A [HasConstant] representing a [Field].
 final class HasConstantField extends HasConstant {
   const HasConstantField(this.value) : super._();
 
+  /// The underlying field definition.
   final Field value;
 
   @override
@@ -437,9 +501,11 @@ final class HasConstantField extends HasConstant {
   String toString() => 'HasConstantField($value)';
 }
 
+/// A [HasConstant] representing a [Param].
 final class HasConstantParam extends HasConstant {
   const HasConstantParam(this.value) : super._();
 
+  /// The underlying parameter definition.
   final Param value;
 
   @override
@@ -461,21 +527,25 @@ final class HasConstantCompanion extends CodedIndexCompanion<HasConstant> {
       HasConstant.decode;
 }
 
+/// Represents a coded index for members that can be forwarded.
 sealed class MemberForwarded implements CodedIndex {
+  /// Creates a [MemberForwarded] instance from a [Row].
   factory MemberForwarded(Row value) => switch (value) {
     Field() => MemberForwardedField(value),
     MethodDef() => MemberForwardedMethodDef(value),
     _ => throw WinmdException('Unsupported value: $value'),
   };
 
+  /// Constructs a [MemberForwarded] referencing a [Field].
   const factory MemberForwarded.field(Field value) = MemberForwardedField;
 
+  /// Constructs a [MemberForwarded] referencing a [MethodDef].
   const factory MemberForwarded.methodDef(MethodDef value) =
       MemberForwardedMethodDef;
 
   const MemberForwarded._();
 
-  /// Decodes a value from the provided code.
+  /// Decodes a [MemberForwarded] from a raw coded index.
   static MemberForwarded decode(
     MetadataIndex metadataIndex,
     int readerIndex,
@@ -490,12 +560,15 @@ sealed class MemberForwarded implements CodedIndex {
     };
   }
 
+  /// The name of the underlying field or method.
   String get name;
 }
 
+/// A [MemberForwarded] representing a [Field].
 final class MemberForwardedField extends MemberForwarded {
   const MemberForwardedField(this.value) : super._();
 
+  /// The underlying field definition.
   final Field value;
 
   @override
@@ -508,9 +581,11 @@ final class MemberForwardedField extends MemberForwarded {
   String toString() => 'MemberForwardedField($value)';
 }
 
+/// A [MemberForwarded] representing a [MethodDef].
 final class MemberForwardedMethodDef extends MemberForwarded {
   const MemberForwardedMethodDef(this.value) : super._();
 
+  /// The underlying method definition.
   final MethodDef value;
 
   @override
@@ -533,20 +608,24 @@ final class MemberForwardedCompanion
       MemberForwarded.decode;
 }
 
+/// Represents a coded index for either a [TypeDef] or a [TypeRef].
 sealed class MemberRefParent implements CodedIndex {
+  /// Creates a [MemberRefParent] instance from a [Row].
   factory MemberRefParent(Row value) => switch (value) {
     TypeDef() => MemberRefParentTypeDef(value),
     TypeRef() => MemberRefParentTypeRef(value),
     _ => throw WinmdException('Unsupported value: $value'),
   };
 
+  /// Constructs a [MemberRefParent] referencing a [TypeDef].
   const factory MemberRefParent.typeDef(TypeDef value) = MemberRefParentTypeDef;
 
+  /// Constructs a [MemberRefParent] referencing a [TypeRef].
   const factory MemberRefParent.typeRef(TypeRef value) = MemberRefParentTypeRef;
 
   const MemberRefParent._();
 
-  /// Decodes a value from the provided code.
+  /// Decodes a [MemberRefParent] from a raw coded index.
   static MemberRefParent decode(
     MetadataIndex metadataIndex,
     int readerIndex,
@@ -561,14 +640,18 @@ sealed class MemberRefParent implements CodedIndex {
     };
   }
 
+  /// The namespace of the underlying type.
   String get namespace;
 
+  /// The name of the underlying type.
   String get name;
 }
 
+/// A [MemberRefParent] representing a [TypeDef].
 final class MemberRefParentTypeDef extends MemberRefParent {
   const MemberRefParentTypeDef(this.value) : super._();
 
+  /// The underlying type definition.
   final TypeDef value;
 
   @override
@@ -584,9 +667,11 @@ final class MemberRefParentTypeDef extends MemberRefParent {
   String toString() => 'MemberRefParentTypeDef($value)';
 }
 
+/// A [MemberRefParent] representing a [TypeRef].
 final class MemberRefParentTypeRef extends MemberRefParent {
   const MemberRefParentTypeRef(this.value) : super._();
 
+  /// The underlying type reference.
   final TypeRef value;
 
   @override
@@ -612,7 +697,10 @@ final class MemberRefParentCompanion
       MemberRefParent.decode;
 }
 
+/// Represents a coded index for a [Module], [ModuleRef], [AssemblyRef], or
+/// [TypeRef].
 sealed class ResolutionScope implements CodedIndex {
+  /// Creates a [ResolutionScope] instance from a [Row].
   factory ResolutionScope(Row value) => switch (value) {
     Module() => ResolutionScopeModule(value),
     ModuleRef() => ResolutionScopeModuleRef(value),
@@ -621,18 +709,23 @@ sealed class ResolutionScope implements CodedIndex {
     _ => throw WinmdException('Unsupported value: $value'),
   };
 
+  /// Constructs a [ResolutionScope] referencing a [Module].
   const factory ResolutionScope.module(Module value) = ResolutionScopeModule;
 
+  /// Constructs a [ResolutionScope] referencing a [ModuleRef].
   const factory ResolutionScope.moduleRef(ModuleRef value) =
       ResolutionScopeModuleRef;
 
+  /// Constructs a [ResolutionScope] referencing an [AssemblyRef].
   const factory ResolutionScope.assemblyRef(AssemblyRef value) =
       ResolutionScopeAssemblyRef;
 
+  /// Constructs a [ResolutionScope] referencing a [TypeRef].
   const factory ResolutionScope.typeRef(TypeRef value) = ResolutionScopeTypeRef;
 
   const ResolutionScope._();
 
+  /// Decodes a [ResolutionScope] from a raw coded index.
   static ResolutionScope decode(
     MetadataIndex metadataIndex,
     int readerIndex,
@@ -652,9 +745,11 @@ sealed class ResolutionScope implements CodedIndex {
   }
 }
 
+/// A [ResolutionScope] representing a [Module].
 final class ResolutionScopeModule extends ResolutionScope {
   const ResolutionScopeModule(this.value) : super._();
 
+  /// The underlying module.
   final Module value;
 
   @override
@@ -664,9 +759,11 @@ final class ResolutionScopeModule extends ResolutionScope {
   String toString() => 'ResolutionScopeModule($value)';
 }
 
+/// A [ResolutionScope] representing a [ModuleRef].
 final class ResolutionScopeModuleRef extends ResolutionScope {
   const ResolutionScopeModuleRef(this.value) : super._();
 
+  /// The underlying module reference.
   final ModuleRef value;
 
   @override
@@ -676,9 +773,11 @@ final class ResolutionScopeModuleRef extends ResolutionScope {
   String toString() => 'ResolutionScopeModuleRef($value)';
 }
 
+/// A [ResolutionScope] representing an [AssemblyRef].
 final class ResolutionScopeAssemblyRef extends ResolutionScope {
   const ResolutionScopeAssemblyRef(this.value) : super._();
 
+  /// The underlying assembly reference.
   final AssemblyRef value;
 
   @override
@@ -688,9 +787,11 @@ final class ResolutionScopeAssemblyRef extends ResolutionScope {
   String toString() => 'ResolutionScopeAssemblyRef($value)';
 }
 
+/// A [ResolutionScope] representing a [TypeRef].
 final class ResolutionScopeTypeRef extends ResolutionScope {
   const ResolutionScopeTypeRef(this.value) : super._();
 
+  /// The underlying type reference.
   final TypeRef value;
 
   @override
@@ -710,7 +811,9 @@ final class ResolutionScopeCompanion
       ResolutionScope.decode;
 }
 
+/// Represents a coded index for either a [TypeDef], [TypeRef], or [TypeSpec].
 sealed class TypeDefOrRef implements CodedIndex {
+  /// Creates a [TypeDefOrRef] instance from a [Row].
   factory TypeDefOrRef(Row value) => switch (value) {
     TypeDef() => TypeDefOrRefTypeDef(value),
     TypeRef() => TypeDefOrRefTypeRef(value),
@@ -718,14 +821,18 @@ sealed class TypeDefOrRef implements CodedIndex {
     _ => throw WinmdException('Unsupported value: $value'),
   };
 
+  /// Constructs a [TypeDefOrRef] referencing a [TypeDef].
   const factory TypeDefOrRef.typeDef(TypeDef value) = TypeDefOrRefTypeDef;
 
+  /// Constructs a [TypeDefOrRef] referencing a [TypeRef].
   const factory TypeDefOrRef.typeRef(TypeRef value) = TypeDefOrRefTypeRef;
 
+  /// Constructs a [TypeDefOrRef] referencing a [TypeSpec].
   const factory TypeDefOrRef.typeSpec(TypeSpec value) = TypeDefOrRefTypeSpec;
 
   const TypeDefOrRef._();
 
+  /// Decodes a [TypeDefOrRef] from a raw coded index.
   static TypeDefOrRef decode(
     MetadataIndex metadataIndex,
     int readerIndex,
@@ -741,16 +848,23 @@ sealed class TypeDefOrRef implements CodedIndex {
     };
   }
 
+  /// The namespace of the underlying type.
   String get namespace;
 
+  /// The name of the underlying type.
   String get name;
 
-  t.MetadataType type([List<t.MetadataType> generics = const []]);
+  /// The metadata type that corresponds to the underlying type.
+  ///
+  /// Optionally, [generics] can be passed to substitute any generic parameters.
+  MetadataType type([List<MetadataType> generics = const []]);
 }
 
+/// A [TypeDefOrRef] representing a [TypeDef].
 final class TypeDefOrRefTypeDef extends TypeDefOrRef {
   const TypeDefOrRefTypeDef(this.value) : super._();
 
+  /// The underlying type definition.
   final TypeDef value;
 
   @override
@@ -763,16 +877,18 @@ final class TypeDefOrRefTypeDef extends TypeDefOrRef {
   String get name => value.name;
 
   @override
-  t.MetadataType type([List<t.MetadataType> generics = const []]) =>
-      t.MetadataType.named(namespace, name);
+  MetadataType type([List<MetadataType> generics = const []]) =>
+      MetadataType.named(namespace, name);
 
   @override
   String toString() => 'TypeDefOrRefTypeDef($value)';
 }
 
+/// A [TypeDefOrRef] representing a [TypeRef].
 final class TypeDefOrRefTypeRef extends TypeDefOrRef {
   const TypeDefOrRefTypeRef(this.value) : super._();
 
+  /// The underlying type reference.
   final TypeRef value;
 
   @override
@@ -785,16 +901,18 @@ final class TypeDefOrRefTypeRef extends TypeDefOrRef {
   String get name => value.name;
 
   @override
-  t.MetadataType type([List<t.MetadataType> generics = const []]) =>
-      t.MetadataType.named(namespace, name);
+  MetadataType type([List<MetadataType> generics = const []]) =>
+      MetadataType.named(namespace, name);
 
   @override
   String toString() => 'TypeDefOrRefTypeRef($value)';
 }
 
+/// A [TypeDefOrRef] representing a [TypeSpec].
 final class TypeDefOrRefTypeSpec extends TypeDefOrRef {
   const TypeDefOrRefTypeSpec(this.value) : super._();
 
+  /// The underlying type specification.
   final TypeSpec value;
 
   @override
@@ -808,7 +926,7 @@ final class TypeDefOrRefTypeSpec extends TypeDefOrRef {
   String get name => throw UnsupportedError('TypeSpec does not have a name.');
 
   @override
-  t.MetadataType type([List<t.MetadataType> generics = const []]) =>
+  MetadataType type([List<MetadataType> generics = const []]) =>
       value.type(generics);
 
   @override
@@ -824,20 +942,25 @@ final class TypeDefOrRefCompanion extends CodedIndexCompanion<TypeDefOrRef> {
       TypeDefOrRef.decode;
 }
 
+/// Represents a coded index for either a [TypeDef] or a [MethodDef].
 sealed class TypeOrMethodDef implements CodedIndex {
+  /// Creates a [TypeOrMethodDef] instance from a [Row].
   factory TypeOrMethodDef(Row value) => switch (value) {
     TypeDef() => TypeOrMethodDefTypeDef(value),
     MethodDef() => TypeOrMethodDefMethodDef(value),
     _ => throw WinmdException('Unsupported value: $value'),
   };
 
+  /// Constructs a [TypeOrMethodDef] referencing a [TypeDef].
   const factory TypeOrMethodDef.typeDef(TypeDef value) = TypeOrMethodDefTypeDef;
 
+  /// Constructs a [TypeOrMethodDef] referencing a [MethodDef].
   const factory TypeOrMethodDef.methodDef(MethodDef value) =
       TypeOrMethodDefMethodDef;
 
   const TypeOrMethodDef._();
 
+  /// Decodes a [TypeOrMethodDef] from a raw coded index.
   static TypeOrMethodDef decode(
     MetadataIndex metadataIndex,
     int readerIndex,
@@ -852,12 +975,15 @@ sealed class TypeOrMethodDef implements CodedIndex {
     };
   }
 
+  /// The name of the underlying type or method definition.
   String get name;
 }
 
+/// A [TypeOrMethodDef] representing a [TypeDef].
 final class TypeOrMethodDefTypeDef extends TypeOrMethodDef {
   const TypeOrMethodDefTypeDef(this.value) : super._();
 
+  /// The underlying type definition.
   final TypeDef value;
 
   @override
@@ -870,9 +996,11 @@ final class TypeOrMethodDefTypeDef extends TypeOrMethodDef {
   String toString() => 'TypeOrMethodDefTypeDef($value)';
 }
 
+/// A [TypeOrMethodDef] representing a [MethodDef].
 final class TypeOrMethodDefMethodDef extends TypeOrMethodDef {
   const TypeOrMethodDefMethodDef(this.value) : super._();
 
+  /// The underlying method definition.
   final MethodDef value;
 
   @override
