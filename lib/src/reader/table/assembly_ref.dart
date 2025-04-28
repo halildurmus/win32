@@ -4,45 +4,45 @@ import '../metadata_index.dart';
 import '../metadata_table.dart';
 import '../row.dart';
 
-/// Contains references to assemblies that are used by the current assembly.
+/// Represents an `AssemblyRef` metadata table entry, describing a reference to
+/// an external assembly.
 ///
-/// This class is used to declare a reference to an external assembly. For
-/// example, the `Windows.Globalization` assembly may contain references to
-/// objects in the `Windows.Foundation` assembly. The linkage is established
-/// through an AssemblyRef entry.
+/// This class models a single row in the `AssemblyRef` table. The fields are
+/// populated by interpreting the binary metadata as specified in ECMA-335
+/// `§II.22.5`.
 ///
-/// The table has the following columns:
-///  - MajorVersion (2-byte value)
-///  - MinorVersion (2-byte value)
-///  - BuildNumber (2-byte value)
-///  - RevisionNumber (2-byte value)
-///  - Flags (4-byte value, AssemblyFlags)
-///  - PublicKeyOrToken (Blob Heap Index)
-///  - Name (String Heap Index)
-///  - Culture (String Heap Index)
-///  - HashValue (Blob Heap Index)
-///
-/// The table is defined in ECMA-335 `§II.22.5`.
+/// The `AssemblyRef` table has the following columns:
+///  - **MajorVersion** (2-byte value)
+///  - **MinorVersion** (2-byte value)
+///  - **BuildNumber** (2-byte value)
+///  - **RevisionNumber** (2-byte value)
+///  - **Flags** (4-byte value, AssemblyFlags)
+///  - **PublicKeyOrToken** (Blob Heap Index)
+///  - **Name** (String Heap Index)
+///  - **Culture** (String Heap Index)
+///  - **HashValue** (Blob Heap Index)
 final class AssemblyRef extends Row {
   AssemblyRef(super.metadataIndex, super.readerIndex, super.position);
 
   @override
   MetadataTable get table => MetadataTable.assemblyRef;
 
-  /// The major version of the assembly.
+  /// The major version of the referenced assembly.
   late final majorVersion = readUint16(0);
 
-  /// The minor version of the assembly.
+  /// The minor version of the referenced assembly.
   late final minorVersion = readUint16(0, 2);
 
-  /// The build number of the assembly.
+  /// The build number of the referenced assembly.
   late final buildNumber = readUint16(0, 4);
 
-  /// The revision number of the assembly.
+  /// The revision number of the referenced assembly.
   late final revisionNumber = readUint16(0, 6);
 
+  /// The flags associated with the referenced assembly.
   late final flags = AssemblyFlags(readUint(1));
 
+  /// The public key or token identifying the referenced assembly, if available.
   late final publicKeyOrToken = () {
     final blob = readBlob(2);
     if (blob.isEmpty) return null;
@@ -52,21 +52,22 @@ final class AssemblyRef extends Row {
   /// The name of the assembly.
   late final name = readString(3);
 
-  /// The culture of the assembly.
+  /// The culture supported by the referenced assembly, if specified.
   late final culture = () {
     final culture = readString(4);
     if (culture.isEmpty) return null;
     return Culture(culture);
   }();
 
-  /// The hash value of the assembly.
+  /// The hash value of the referenced assembly, if available.
   late final hashValue = () {
     final blob = readBlob(5);
     if (blob.isEmpty) return null;
     return blob;
   }();
 
-  /// The version of the assembly.
+  /// The version of the referenced assembly in `Major.Minor.Build.Revision`
+  /// format (e.g., `4.0.0.0`).
   late final version =
       '$majorVersion.$minorVersion.$buildNumber.$revisionNumber';
 
