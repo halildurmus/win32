@@ -26,7 +26,7 @@ final class InterfaceImpl extends Row with HasCustomAttributes {
 
   /// Returns the interface type implemented by [class$].
   ///
-  /// Optionally, [generics] can be passed to substitute any generic parameters..
+  /// Optionally, [generics] can be passed to substitute any generic parameters.
   MetadataType interface([List<MetadataType> generics = const []]) =>
       decode<TypeDefOrRef>(1).type(generics);
 
