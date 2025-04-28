@@ -13,28 +13,34 @@ import 'interface_impl.dart';
 import 'method_def.dart';
 import 'nested_class.dart';
 
-/// Contains the definitions of all types in the assembly.
+/// Represents a row in the `TypeDef` metadata table, describing a type defined
+/// in the assembly.
 ///
-/// The table has the following columns:
-///  - Flags (4-byte bitmask of TypeAttributes)
-///  - TypeName (String Heap Index)
-///  - TypeNamespace (String Heap Index)
-///  - Extends (TypeDefOrRef Coded Index)
-///  - FieldList (Field Index)
-///  - MethodList (MethodDef Index)
+/// The fields are populated by interpreting the binary metadata as specified in
+/// ECMA-335 `§II.22.37`.
 ///
-/// The table is defined in ECMA-335 `§II.22.37`.
+/// The `TypeDef` table has the following columns:
+///  - **Flags** (4-byte bitmask of TypeAttributes)
+///  - **TypeName** (String Heap Index)
+///  - **TypeNamespace** (String Heap Index)
+///  - **Extends** (TypeDefOrRef Coded Index)
+///  - **FieldList** (Field Index)
+///  - **MethodList** (MethodDef Index)
 final class TypeDef extends Row with HasCustomAttributes {
   TypeDef(super.metadataIndex, super.readerIndex, super.position);
 
   @override
   MetadataTable get table => MetadataTable.typeDef;
 
+  /// Type attributes that represents various attributes of the type, such as
+  /// visibility, layout, and semantics.
   late final flags = TypeAttributes(readUint(0));
 
+  /// The visibility of the type.
   late final typeVisibility =
       TypeVisibility.values[flags & TypeAttributes.visibilityMask];
 
+  /// The layout of the type.
   late final typeLayout = switch (flags & TypeAttributes.layoutMask) {
     TypeAttributes.autoLayout => TypeLayout.auto,
     TypeAttributes.sequentialLayout => TypeLayout.sequential,
@@ -44,6 +50,7 @@ final class TypeDef extends Row with HasCustomAttributes {
     ),
   };
 
+  /// The semantics of the type.
   late final typeSemantics = switch (flags &
       TypeAttributes.classSemanticsMask) {
     TypeAttributes.class$ => TypeSemantics.class$,
@@ -53,6 +60,7 @@ final class TypeDef extends Row with HasCustomAttributes {
     ),
   };
 
+  /// The string format used by the type.
   late final stringFormat = switch (flags & TypeAttributes.stringFormatMask) {
     TypeAttributes.ansiClass => StringFormat.ansi,
     TypeAttributes.unicodeClass => StringFormat.unicode,
@@ -63,33 +71,45 @@ final class TypeDef extends Row with HasCustomAttributes {
     ),
   };
 
+  /// The name of the type.
   late final name = readString(1);
 
+  /// The namespace of the type.
   late final namespace = readString(2);
 
+  /// The type that the current type extends, or `null` if there is no base
+  /// type.
   late final extends$ = () {
     if (readUint(3) == 0) return null;
     return decode<TypeDefOrRef>(3);
   }();
 
+  /// The list of fields defined in the type, if any.
   late final fields = getList<Field>(4);
 
+  /// The list of methods defined in the type, if any.
   late final methods = getList<MethodDef>(5);
 
+  /// The list of generic parameters defined for the type, if any.
   late final generics = getEqualRange<GenericParam>(
     2,
     TypeOrMethodDef.typeDef(this).encode(),
   );
 
+  /// The list of interfaces implemented by the type, if any.
   late final interfaceImpls = getEqualRange<InterfaceImpl>(0, position + 1);
 
+  /// The class layout associated with the type, if any.
   late final classLayout = getEqualRange<ClassLayout>(
     2,
     position + 1,
   ).firstOrNull;
 
+  /// The nested class associated with the type, if any.
   late final nested = getEqualRange<NestedClass>(1, position + 1).firstOrNull;
 
+  /// The category of the type, which could be a class, interface, enum, struct,
+  /// delegate, or attribute.
   late final category = () {
     final extends$ = this.extends$;
     if (extends$ == null) return TypeCategory.interface;
