@@ -6,27 +6,28 @@ import '../metadata_table.dart';
 import '../row.dart';
 import 'module_ref.dart';
 
-/// Used to define the mapping between a managed member and an unmanaged
-/// function.
+/// Represents a row in the `ImplMap` metadata table, describing a mapping
+/// between a managed method and an unmanaged function implementation, typically
+/// used in P/Invoke scenarios.
 ///
-/// This is particularly useful for P/Invoke scenarios where a managed function
-/// needs to call an unmanaged function.
+/// The fields are populated by interpreting the binary metadata as specified in
+/// ECMA-335 `§II.22.22`.
 ///
-/// The table has the following columns:
-///  - MappingFlags (2-byte bitmask of PInvokeAttributes)
-///  - MemberForwarded (MemberForwarded Coded Index)
-///  - ImportName (String Heap Index)
-///  - ImportScope (ModuleRef Index)
-///
-/// The table is defined in ECMA-335 `§II.22.22`.
+/// The `ImplMap` table has the following columns:
+///  - **MappingFlags** (2-byte bitmask of PInvokeAttributes)
+///  - **MemberForwarded** (MemberForwarded Coded Index)
+///  - **ImportName** (String Heap Index)
+///  - **ImportScope** (ModuleRef Index)
 final class ImplMap extends Row {
   ImplMap(super.metadataIndex, super.readerIndex, super.position);
 
   @override
   MetadataTable get table => MetadataTable.genericParam;
 
+  /// The flags describing how the unmanaged call should be performed.
   late final flags = PInvokeAttributes(readUint(0));
 
+  /// The character set used when marshaling strings for the unmanaged call.
   late final charSet = switch (flags & PInvokeAttributes.charSetMask) {
     PInvokeAttributes.charSetAnsi => CharSet.ansi,
     PInvokeAttributes.charSetUnicode => CharSet.unicode,
@@ -34,6 +35,7 @@ final class ImplMap extends Row {
     _ => CharSet.notSpecified,
   };
 
+  /// The calling convention used by the unmanaged function.
   late final callingConvention = switch (flags &
       PInvokeAttributes.callConvMask) {
     PInvokeAttributes.callConvPlatformApi => CallingConvention.platformApi,
@@ -46,10 +48,13 @@ final class ImplMap extends Row {
     ),
   };
 
+  /// The managed member that is forwarded to an unmanaged implementation.
   late final memberForwarded = decode<MemberForwarded>(1);
 
+  /// The name of the unmanaged function being imported.
   late final importName = readString(2);
 
+  /// The external module that contains the unmanaged function.
   late final importScope = readRow<ModuleRef>(3);
 
   @override
