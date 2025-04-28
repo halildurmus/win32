@@ -16,7 +16,15 @@ import 'heap/user_string.dart';
 import 'metadata_table.dart';
 import 'table_stream.dart';
 
+/// Provides functionality to read and decode .NET metadata tables.
+///
+/// A [MetadataReader] is responsible for interpreting the raw binary data
+/// of metadata streams, enabling retrieval of strings, GUIDs, blobs, and
+/// various table records in a structured manner.
+///
+/// Use [MetadataReader.read] to parse metadata from a [Uint8List].
 final class MetadataReader {
+  /// Parses metadata from the given [data].
   factory MetadataReader.read(Uint8List data) {
     final dos = Struct.create<IMAGE_DOS_HEADER>(data);
 
@@ -618,7 +626,7 @@ final class MetadataReader {
   }
 
   const MetadataReader._(
-    this._data,
+    this.data,
     this.blobHeap,
     this.guidHeap,
     this.stringHeap,
@@ -626,62 +634,91 @@ final class MetadataReader {
     this.userStringHeap,
   );
 
-  final Uint8List _data;
+  /// The raw metadata binary data.
+  final Uint8List data;
+
+  /// The heap containing blobs.
   final BlobHeap blobHeap;
+
+  /// The heap containing [Guid]s.
   final GuidHeap guidHeap;
+
+  /// The heap containing strings.
   final StringHeap stringHeap;
+
+  /// The metadata table stream containing structured metadata tables.
   final TableStream tableStream;
+
+  /// The heap containing user-defined strings.
   final UserStringHeap userStringHeap;
 
+  /// The module's name.
   String get name => readString(0, MetadataTable.module, 1);
 
+  /// The Module Version ID (MVID), a GUID that uniquely identifies the version
+  /// of the module.
   Guid get mvid => readGuid(0, MetadataTable.module, 2);
 
+  /// Reads a blob from the specified [row] and [column] of [table].
   @pragma('vm:prefer-inline')
   Uint8List readBlob(int row, MetadataTable table, int column) =>
       blobHeap[readUint(row, table, column)];
 
+  /// Reads a [Guid] from the specified [row] and [column] of [table].
   @pragma('vm:prefer-inline')
   Guid readGuid(int row, MetadataTable table, int column) =>
       guidHeap[readUint(row, table, column) - 1];
 
+  /// Reads a string from the specified [row] and [column] of [table].
   @pragma('vm:prefer-inline')
   String readString(int row, MetadataTable table, int column) =>
       stringHeap[readUint(row, table, column)];
 
+  /// Reads a user-defined string from the specified [row] and [column] of
+  /// [table].
   @pragma('vm:prefer-inline')
   String readUserString(int row, MetadataTable table, int column) =>
       userStringHeap[readUint(row, table, column)];
 
+  /// Reads an unsigned integer from the specified [row] and [column] of [table].
   int readUint(int row, MetadataTable table, int column) {
     final table$ = tableStream[table];
     final column$ = table$.columns[column];
     final offset = table$.offset + row * table$.width + column$.offset;
     return switch (column$.width) {
-      1 => _data.readUint8(offset),
-      2 => _data.readUint16(offset),
-      4 => _data.readUint32(offset),
-      8 => _data.readUint64(offset),
+      1 => data.readUint8(offset),
+      2 => data.readUint16(offset),
+      4 => data.readUint32(offset),
+      8 => data.readUint64(offset),
       _ => throw WinmdException('Invalid column width: ${column$.width}'),
     };
   }
 
+  /// Reads an unsigned 8-bit integer from the specified [row] and [column] of
+  /// [table], with an optional [offset].
   @pragma('vm:prefer-inline')
   int readUint8(int row, MetadataTable table, int column, int offset) =>
-      _data.readUint8(_calculateOffset(row, table, column) + offset);
+      data.readUint8(_calculateOffset(row, table, column) + offset);
 
+  /// Reads an unsigned 16-bit integer from the specified [row] and [column] of
+  /// [table], with an optional [offset].
   @pragma('vm:prefer-inline')
   int readUint16(int row, MetadataTable table, int column, int offset) =>
-      _data.readUint16(_calculateOffset(row, table, column) + offset);
+      data.readUint16(_calculateOffset(row, table, column) + offset);
 
+  /// Reads an unsigned 32-bit integer from the specified [row] and [column] of
+  /// [table], with an optional [offset].
   @pragma('vm:prefer-inline')
   int readUint32(int row, MetadataTable table, int column, int offset) =>
-      _data.readUint32(_calculateOffset(row, table, column) + offset);
+      data.readUint32(_calculateOffset(row, table, column) + offset);
 
+  /// Reads an unsigned 64-bit integer from the specified [row] and [column] of
+  /// [table], with an optional [offset].
   @pragma('vm:prefer-inline')
   int readUint64(int row, MetadataTable table, int column, int offset) =>
-      _data.readUint64(_calculateOffset(row, table, column) + offset);
+      data.readUint64(_calculateOffset(row, table, column) + offset);
 
+  /// Calculates the byte offset for the specified [row], [table], and [column].
   @pragma('vm:prefer-inline')
   int _calculateOffset(int row, MetadataTable table, int column) {
     final table$ = tableStream[table];
@@ -689,6 +726,7 @@ final class MetadataReader {
     return table$.offset + row * table$.width + column$.offset;
   }
 
+  /// Returns an iterable of row indices between two related tables.
   Iterable<int> getList(
     int row,
     MetadataTable table,
@@ -704,6 +742,7 @@ final class MetadataReader {
     return Iterable.generate(last - first, (i) => first + i);
   }
 
+  /// Returns an iterable of rows where the specified [column] matches [value].
   Iterable<int> getEqualRange(MetadataTable table, int column, int value) {
     var first = 0;
     var last = tableStream[table].rows;
@@ -727,9 +766,11 @@ final class MetadataReader {
     return const Iterable.empty();
   }
 
+  /// Returns the parent row index for the specified [row] within a [table].
   int getParentRow(int row, MetadataTable table, int column) =>
       _upperBound(table, 0, tableStream[table].rows, column, row + 1) - 1;
 
+  /// Performs a lower bound binary search.
   int _lowerBound(
     MetadataTable table,
     int first,
@@ -750,6 +791,7 @@ final class MetadataReader {
     return low;
   }
 
+  /// Performs an upper bound binary search.
   int _upperBound(
     MetadataTable table,
     int first,
@@ -770,60 +812,79 @@ final class MetadataReader {
     return low;
   }
 
+  /// Enumerates all `AssemblyRef` rows.
   Iterable<int> get assemblyRefs =>
       Iterable.generate(tableStream[MetadataTable.assemblyRef].rows);
 
+  /// Enumerates all `ClassLayout` rows.
   Iterable<int> get classLayouts =>
       Iterable.generate(tableStream[MetadataTable.classLayout].rows);
 
+  /// Enumerates all `Constant` rows.
   Iterable<int> get constants =>
       Iterable.generate(tableStream[MetadataTable.constant].rows);
 
+  /// Enumerates all `CustomAttribute` rows.
   Iterable<int> get customAttributes =>
       Iterable.generate(tableStream[MetadataTable.customAttribute].rows);
 
+  /// Enumerates all `Field` rows.
   Iterable<int> get fields =>
       Iterable.generate(tableStream[MetadataTable.field].rows);
 
+  /// Enumerates all `FieldLayout` rows.
   Iterable<int> get fieldLayouts =>
       Iterable.generate(tableStream[MetadataTable.fieldLayout].rows);
 
+  /// Enumerates all `GenericParam` rows.
   Iterable<int> get genericParams =>
       Iterable.generate(tableStream[MetadataTable.genericParam].rows);
 
+  /// Enumerates all `GenericParamConstraint` rows.
   Iterable<int> get genericParamConstraints =>
       Iterable.generate(tableStream[MetadataTable.genericParamConstraint].rows);
 
+  /// Enumerates all `ImplMap` rows.
   Iterable<int> get implMaps =>
       Iterable.generate(tableStream[MetadataTable.implMap].rows);
 
+  /// Enumerates all `InterfaceImpl` rows.
   Iterable<int> get interfaceImpls =>
       Iterable.generate(tableStream[MetadataTable.interfaceImpl].rows);
 
+  /// Enumerates all `MemberRef` rows.
   Iterable<int> get memberRefs =>
       Iterable.generate(tableStream[MetadataTable.memberRef].rows);
 
+  /// Enumerates all `MethodDef` rows.
   Iterable<int> get methodDefs =>
       Iterable.generate(tableStream[MetadataTable.methodDef].rows);
 
+  /// Enumerates all `Module` rows.
   Iterable<int> get modules =>
       Iterable.generate(tableStream[MetadataTable.module].rows);
 
+  /// Enumerates all `ModuleRef` rows.
   Iterable<int> get moduleRefs =>
       Iterable.generate(tableStream[MetadataTable.moduleRef].rows);
 
+  /// Enumerates all `NestedClass` rows.
   Iterable<int> get nestedClasses =>
       Iterable.generate(tableStream[MetadataTable.nestedClass].rows);
 
+  /// Enumerates all `Param` rows.
   Iterable<int> get params =>
       Iterable.generate(tableStream[MetadataTable.param].rows);
 
+  /// Enumerates all `TypeDef` rows.
   Iterable<int> get typeDefs =>
       Iterable.generate(tableStream[MetadataTable.typeDef].rows);
 
+  /// Enumerates all `TypeRef` rows.
   Iterable<int> get typeRefs =>
       Iterable.generate(tableStream[MetadataTable.typeRef].rows);
 
+  /// Enumerates all `TypeSpec` rows.
   Iterable<int> get typeSpecs =>
       Iterable.generate(tableStream[MetadataTable.typeSpec].rows);
 
@@ -831,7 +892,9 @@ final class MetadataReader {
   String toString() => 'MetadataReader(name: $name, mvid: $mvid)';
 }
 
+/// Represents a single metadata table, including layout and column data.
 final class TableData {
+  /// Creates a [TableData] instance with the specified layout.
   TableData({
     required this.offset,
     required this.rows,
@@ -839,6 +902,7 @@ final class TableData {
     required this.columns,
   });
 
+  /// Creates an empty [TableData] with no rows and default column layouts.
   factory TableData.empty() => TableData(
     offset: 0,
     rows: 0,
@@ -850,13 +914,13 @@ final class TableData {
     ),
   );
 
-  /// The offset of the table in the metadata stream.
+  /// Byte offset of the table within the metadata stream.
   int offset;
 
-  /// The number of rows in the table.
+  /// Total number of rows in the table.
   int rows;
 
-  /// The width of the table in bytes.
+  /// Total width (in bytes) of each row.
   int width;
 
   /// The columns of the table.
@@ -868,6 +932,7 @@ final class TableData {
     return 4;
   }
 
+  /// Sets the layout for columns based on provided widths.
   void _setColumns(
     int a, [
     int b = 0,
@@ -907,6 +972,7 @@ final class TableData {
     }
   }
 
+  /// Sets the table offset, returning the next available offset.
   int _setOffset(int offset) {
     if (rows == 0) return offset;
     final next = offset + rows * width;
@@ -920,11 +986,12 @@ final class TableData {
       'columns: $columns)';
 }
 
-/// A table column.
+/// Describes a single column in a metadata table.
 final class TableColumn {
+  /// Creates a [TableColumn] with the specified [offset] and [width].
   TableColumn({required this.offset, required this.width});
 
-  /// The offset of the column in the table.
+  /// The offset of the column relative to the start of a row.
   int offset;
 
   /// The width of the column in bytes.
