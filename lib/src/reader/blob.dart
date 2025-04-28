@@ -12,22 +12,38 @@ import '../type_name.dart';
 import 'codes.dart';
 import 'metadata_index.dart';
 
+/// Represents a raw data block (blob) that can be read sequentially.
+///
+/// This class provides functionality to read a byte slice ([slice])
+/// sequentially, decode values, and process metadata related to the blob's
+/// contents. It includes utilities for reading various data types from the
+/// byte slice and tracking the current reading position.
 final class Blob {
+  /// Constructs a [Blob] with the specified [metadataIndex], [readerIndex],
+  /// and byte [slice].
   Blob(this.metadataIndex, this.readerIndex, this.slice);
 
+  /// The metadata index that provides contextual information for interpreting
+  /// the blob.
   final MetadataIndex metadataIndex;
+
+  /// The reader index that tracks the position in the metadata index.
   final int readerIndex;
+
+  /// The slice of raw byte data that represents the contents of the blob.
   Uint8List slice;
 
-  /// When the slice is empty, it indicates that the blob has been fully read.
+  /// Whether the blob is fully read (i.e., the [slice] is empty).
   @pragma('vm:prefer-inline')
   bool get isEmpty => slice.isEmpty;
 
-  /// Returns the current length of the byte slice.
+  /// The current length of the [slice], i.e., the number of remaining bytes to
+  /// read.
   @pragma('vm:prefer-inline')
   int get length => slice.length;
 
-  /// Allows Blob to be indexed like a list.
+  /// Allows direct access to the elements in the [slice] by index, similar to
+  /// a list.
   @pragma('vm:prefer-inline')
   int operator [](int index) => slice[index];
 
@@ -38,9 +54,11 @@ final class Blob {
     return companion.decode(metadataIndex, readerIndex, code);
   }
 
-  /// Attempts to read an expected value.
+  /// Attempts to read an expected value from the blob.
   ///
-  /// If it matches, advances the slice.
+  /// If the [expected] value matches, it advances the [slice] and returns
+  /// `true`.
+  /// Otherwise, it returns `false` and leaves the [slice] unchanged.
   bool tryRead(int expected) {
     final CompressedInteger(:value, :bytesRead) = CompressedInteger.decode(
       slice,
@@ -52,7 +70,10 @@ final class Blob {
     return false;
   }
 
-  /// Reads a method signature from the blob.
+  /// Reads and decodes a method signature from the blob.
+  ///
+  /// Returns a [MethodSignature] containing the flags, return type, and
+  /// parameter types.
   MethodSignature readMethodSignature([
     List<MetadataType> generics = const [],
   ]) {
@@ -159,6 +180,8 @@ final class Blob {
   }
 
   /// Reads a field or method type signature.
+  ///
+  /// Optionally, [generics] can be passed to substitute any generic parameters.
   MetadataType readTypeSignature([List<MetadataType> generics = const []]) {
     final isConst = readModifiers().any(
       (def) =>
@@ -194,7 +217,7 @@ final class Blob {
     return value;
   }
 
-  /// Reads a boolean value (0 = false, 1 = true).
+  /// Reads a boolean value (0 = `false`, 1 = `true`).
   bool readBool() => switch (readUint8()) {
     0 => false,
     1 => true,
@@ -296,8 +319,6 @@ final class Blob {
   }
 
   /// Reads a UTF-8 encoded string.
-  ///
-  /// The first value indicates the length.
   String readUtf8() {
     final length = readCompressed();
     final stringBytes = Uint8List.sublistView(slice, 0, length);
@@ -309,9 +330,7 @@ final class Blob {
   /// Reads a UTF-16 encoded string.
   String readUtf16() {
     final stringLength = length ~/ 2;
-
     final Uint16List stringBytes;
-
     if (slice.offsetInBytes.isEven) {
       // If aligned, directly use asUint16List for efficiency.
       stringBytes = slice.buffer.asUint16List(
@@ -327,7 +346,6 @@ final class Blob {
         stringBytes[i] = low | (high << 8);
       }
     }
-
     _offset(length);
     return String.fromCharCodes(stringBytes);
   }
