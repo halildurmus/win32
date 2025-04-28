@@ -5,13 +5,15 @@ import '../metadata_table.dart';
 import '../row.dart';
 import 'generic_param.dart';
 
-/// A constraint on a generic parameter.
+/// Represents a row in the `GenericParamConstraint` metadata table, describing
+/// a constraint on a generic parameter.
 ///
-/// The table has the following columns:
-///  - Owner (GenericParam Index)
-///  - Constraint (TypeDefOrRef Coded Index)
+/// The fields are populated by interpreting the binary metadata as specified in
+/// ECMA-335 `§II.22.21`.
 ///
-/// The table is defined in ECMA-335 `§II.22.21`.
+/// The `GenericParamConstraint` table has the following columns:
+///  - **Owner** (GenericParam Index)
+///  - **Constraint** (TypeDefOrRef Coded Index)
 final class GenericParamConstraint extends Row with HasCustomAttributes {
   GenericParamConstraint(
     super.metadataIndex,
@@ -22,8 +24,10 @@ final class GenericParamConstraint extends Row with HasCustomAttributes {
   @override
   MetadataTable get table => MetadataTable.genericParamConstraint;
 
+  /// The generic parameter to which this constraint applies.
   late final owner = readRow<GenericParam>(0);
 
+  /// The type that constrains the generic parameter.
   late final constraint = decode<TypeDefOrRef>(1);
 
   @override
