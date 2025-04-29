@@ -80,24 +80,24 @@ final class TableStream {
     final memberForwarded = codedIndexSize([field.length, methodDef.length]);
 
     const validTables =
-        (1 << Table.module) |
-        (1 << Table.typeRef) |
-        (1 << Table.typeDef) |
-        (1 << Table.field) |
-        (1 << Table.methodDef) |
-        (1 << Table.param) |
-        (1 << Table.interfaceImpl) |
-        (1 << Table.memberRef) |
-        (1 << Table.constant) |
-        (1 << Table.customAttribute) |
-        (1 << Table.classLayout) |
-        (1 << Table.moduleRef) |
-        (1 << Table.typeSpec) |
-        (1 << Table.implMap) |
-        (1 << Table.assembly) |
-        (1 << Table.assemblyRef) |
-        (1 << Table.nestedClass) |
-        (1 << Table.genericParam);
+        (1 << MetadataTableId.module) |
+        (1 << MetadataTableId.typeRef) |
+        (1 << MetadataTableId.typeDef) |
+        (1 << MetadataTableId.field) |
+        (1 << MetadataTableId.methodDef) |
+        (1 << MetadataTableId.param) |
+        (1 << MetadataTableId.interfaceImpl) |
+        (1 << MetadataTableId.memberRef) |
+        (1 << MetadataTableId.constant) |
+        (1 << MetadataTableId.customAttribute) |
+        (1 << MetadataTableId.classLayout) |
+        (1 << MetadataTableId.moduleRef) |
+        (1 << MetadataTableId.typeSpec) |
+        (1 << MetadataTableId.implMap) |
+        (1 << MetadataTableId.assembly) |
+        (1 << MetadataTableId.assemblyRef) |
+        (1 << MetadataTableId.nestedClass) |
+        (1 << MetadataTableId.genericParam);
 
     // The table stream header...
 

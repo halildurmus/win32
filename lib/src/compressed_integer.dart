@@ -5,10 +5,9 @@ import 'exception.dart';
 /// Represents a compressed unsigned integer as defined in ECMA-335 `§II.23.2`.
 ///
 /// This format encodes 29-bit unsigned integers into 1, 2, or 4 bytes:
-///
-/// - 1 byte for values < 0x80
-/// - 2 bytes for values < 0x4000
-/// - 4 bytes for values ≤ 0x1FFFFFFF
+/// - 1 byte for values `< 0x80`
+/// - 2 bytes for values `< 0x4000`
+/// - 4 bytes for values `≤ 0x1FFFFFFF`
 ///
 /// This encoding is used in metadata signatures, blob heap lengths, etc.
 final class CompressedInteger {
