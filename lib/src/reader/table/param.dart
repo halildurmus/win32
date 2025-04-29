@@ -42,7 +42,9 @@ final class Param extends Row with HasCustomAttributes {
   ).firstOrNull;
 
   @override
-  String toString() => 'Param(name: $name)';
+  String toString() => name.isEmpty
+      ? 'Param(sequence: $sequence)'
+      : 'Param(sequence: $sequence, name: $name)';
 }
 
 @internal
