@@ -1,81 +1,35 @@
-/// A Dart library for working with Windows Metadata (.winmd) files.
+/// A [WinMD] parser based on the [ECMA-335] standard.
 ///
-/// This library can be used to query Windows developer APIs, encompassing both
-/// unmanaged APIs like Win32 or COM, as well as modern APIs like
-/// Windows Runtime (WinRT) that include their own metadata.
+/// This library enables low-level introspection of `.winmd` files, which
+/// describe Windows APIs in a language-independent format. Originally designed
+/// for the Windows Runtime (WinRT), the format is now also used for metadata
+/// associated with:
+/// - **Win32 APIs** (via [win32metadata])
+/// - **Windows Driver Kit (WDK)** APIs (via [wdkmetadata])
 ///
-/// The library consumes metadata in the
-/// [ECMA-335](https://ecma-international.org/wp-content/uploads/ECMA-335_6th_edition_june_2012.pdf)
-/// format, originally part of the Common Language Infrastructure (CLI) - a
-/// standardized interface offered by .NET libraries. Since its creation,
-/// Windows Metadata has served as a
-/// [language-neutral specification of the Windows Runtime APIs](https://learn.microsoft.com/uwp/winrt-cref/winmd-files).
-/// More recently, the same format has been utilized to provide machine-readable
-/// metadata for the
-/// [traditional Win32 and COM APIs](https://github.com/microsoft/win32metadata)
-/// and [Win32 APIs in the Windows Driver Kit (WDK)](
-/// https://github.com/microsoft/wdkmetadata) that have been available in
-/// Windows for many years.
+/// The primary use case for this library is to build Dart projections of native
+/// Windows APIs, such as the [win32] package.
 ///
-/// While the ability to interpret this format from Dart is valuable for various
-/// reasons, the original motivation behind creating this package was to
-/// facilitate a
-/// [Dart language projection of the Win32 API](https://pub.dev/packages/win32).
-/// Utilizing Windows Metadata allows the generation of a Win32 API projection
-/// programmatically, offering resilience against errors or changes over time.
+/// See also:
+/// - [MetadataReader]
+/// - [MetadataIndex]
+/// - [MetadataLookup]
+/// - [MetadataWriter]
+/// - [WindowsMetadataLoader]
+/// - [mdmerge]
 ///
-/// Beyond these specific use cases, this package can be valuable for creating
-/// Windows utilities using Dart or Flutter.
+/// [ECMA-335]: https://ecma-international.org/wp-content/uploads/ECMA-335_6th_edition_june_2012.pdf
+/// [wdkmetadata]: https://github.com/microsoft/wdkmetadata
+/// [win32]: https://pub.dev/packages/win32
+/// [win32metadata]: https://github.com/microsoft/win32metadata
+/// [WinMD]: https://learn.microsoft.com/en-us/uwp/winrt-cref/winmd-files
 ///
-/// To start using this library, obtaining a `Scope` is necessary. A `Scope`
-/// contains a named set of metadata. For most scenarios, you should retrieve a
-/// scope through one of the static methods of the `MetadataStore` class, which
-/// caches retrieved scopes.
-///
-/// For example, to retrieve the latest Win32 metadata scope, you can use the
-/// following code:
-///
-/// ```dart
-/// final scope = await MetadataStore.loadWin32Scope();
-/// ```
-///
-/// By default, the `loadWin32Scope` method downloads the latest version of
-/// the NuGet package `Microsoft.Windows.SDK.Win32Metadata` and loads the
-/// metadata from it. If you prefer a different version, you can specify the
-/// `version` string as a parameter:
-///
-/// ```dart
-/// final scope =
-///   await MetadataStore.loadWin32Scope(version: '52.0.65-preview');
-/// ```
-///
-/// Alternatively, a scope can be obtained directly from a
-/// Windows Metadata (.winmd) file, as follows:
-///
-/// ```dart
-/// final scope = MetadataStore.loadScopeFromFile(File('path/to/file.winmd'));
-/// ```
-///
-/// **Note:** If the metadata you want to load has already been downloaded and
-/// stored locally, `loadWdkScope`, `loadWin32Scope`, or `loadWinrtScope` will
-/// load the metadata from the local storage instead of downloading it again.
-///
-/// You can get the list of all package directories stored locally as follows:
-///
-/// ```dart
-/// for (final directory in LocalStorageManager.storedPackageDirectories) {
-///   print(directory);
-/// }
-/// ```
-///
-/// From this point, the `scope` object can be interrogated for its children,
-/// particularly the collection of `typeDef` objects, which in turn contain
-/// `Method`, `Field`, `Event`, and `Property` members.
-///
-/// In general, the model presented by this package aligns with the APIs exposed
-/// by the
-/// [IMetaDataImport2](https://learn.microsoft.com/windows/win32/api/rometadataapi/nn-rometadataapi-imetadataimport2)
-/// COM interface exposed by `rometadata.dll`.
+/// @docImport 'mdmerge.dart';
+/// @docImport 'src/reader/metadata_index.dart';
+/// @docImport 'src/reader/metadata_lookup.dart';
+/// @docImport 'src/reader/metadata_reader.dart';
+/// @docImport 'windows_metadata.dart';
+/// @docImport 'writer.dart';
 library;
 
 export 'src/attributes.dart';
@@ -138,7 +92,6 @@ export 'src/reader/codes.dart'
         ResolutionScopeCompanion,
         TypeDefOrRefCompanion,
         TypeOrMethodDefCompanion;
-export 'src/reader/entity_index.dart';
 export 'src/reader/has_custom_attributes.dart';
 export 'src/reader/heap/blob.dart';
 export 'src/reader/heap/guid.dart';
@@ -146,6 +99,7 @@ export 'src/reader/heap/metadata_heap.dart';
 export 'src/reader/heap/string.dart';
 export 'src/reader/heap/user_string.dart';
 export 'src/reader/metadata_index.dart';
+export 'src/reader/metadata_lookup.dart';
 export 'src/reader/metadata_reader.dart';
 export 'src/reader/metadata_table.dart';
 export 'src/reader/row.dart' hide RowCompanion;

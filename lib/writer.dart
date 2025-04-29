@@ -1,6 +1,10 @@
-/// Support for doing something awesome.
+/// A basic [WinMD] writer based on the [ECMA-335] standard.
 ///
-/// More dartdocs go here.
+/// For usage, refer to the [MetadataWriter] class.
+///
+/// [WinMD]: https://learn.microsoft.com/en-us/uwp/winrt-cref/winmd-files
+///
+/// @docImport 'src/writer/metadata_writer.dart';
 library;
 
 export 'src/attributes.dart';

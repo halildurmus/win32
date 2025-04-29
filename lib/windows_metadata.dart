@@ -1,6 +1,9 @@
-/// Support for doing something awesome.
+/// Provides high-level APIs for discovering, downloading, caching, and loading
+/// Windows metadata (`.winmd`) files for use in Dart-based tooling.
 ///
-/// More dartdocs go here.
+/// For usage, refer to the [WindowsMetadataLoader] class.
+///
+/// @docImport 'src/windows_metadata/loader.dart';
 library;
 
 export 'src/windows_metadata/loader.dart';

@@ -10,16 +10,16 @@ import '../reader/metadata_reader.dart';
 import 'local_storage_manager.dart';
 import 'package.dart';
 
-/// A utility for resolving, downloading, caching, and loading Windows metadata
-/// files (`.winmd`) into a [MetadataIndex].
+/// Loads Windows metadata (`.winmd`) files into a [MetadataIndex] for
+/// consumption.
 ///
-/// This loader ensures that metadata is locally cached to avoid redundant
-/// downloads and supports automatic version resolution. Version resolution
-/// behavior depends on the metadata packages:
+/// This class simplifies working with Windows metadata by abstracting over
+/// NuGet interactions, local caching, and metadata merging.
 ///
-/// - [WindowsMetadataPackage.winrt]: latest **stable** version
-/// - [WindowsMetadataPackage.wdk] and [WindowsMetadataPackage.win32]: latest
-///   version including **pre-releases**
+/// Supports loading Windows metadata from all major sources:
+/// - **Win32** – Classic Windows APIs
+/// - **WDK** – Windows Driver Kit APIs
+/// - **WinRT** – Windows Runtime APIs
 final class WindowsMetadataLoader {
   static final _localStorageManager = LocalStorageManager();
 
