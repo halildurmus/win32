@@ -35,128 +35,127 @@ Pointer<GUID> get FOLDERID_LocalAppData {
 
 /// Specifies a common language runtime Type, a type modifier, or information
 /// about a type in a metadata type signature.
-extension type const CorElementType(int _) implements int {
-  CorElementType operator |(CorElementType other) =>
-      CorElementType(_ | other._);
+extension type const ElementType(int _) implements int {
+  ElementType operator |(ElementType other) => ElementType(_ | other._);
 }
 
 ///	Used internally.
-const ELEMENT_TYPE_END = CorElementType(0);
+const ELEMENT_TYPE_END = ElementType(0);
 
 /// A void type.
-const ELEMENT_TYPE_VOID = CorElementType(1);
+const ELEMENT_TYPE_VOID = ElementType(1);
 
 /// A boolean type.
-const ELEMENT_TYPE_BOOLEAN = CorElementType(2);
+const ELEMENT_TYPE_BOOLEAN = ElementType(2);
 
 /// A character type.
-const ELEMENT_TYPE_CHAR = CorElementType(3);
+const ELEMENT_TYPE_CHAR = ElementType(3);
 
 /// A signed 1-byte integer.
-const ELEMENT_TYPE_I1 = CorElementType(4);
+const ELEMENT_TYPE_I1 = ElementType(4);
 
 /// An unsigned 1-byte integer.
-const ELEMENT_TYPE_U1 = CorElementType(5);
+const ELEMENT_TYPE_U1 = ElementType(5);
 
 /// A signed 2-byte integer.
-const ELEMENT_TYPE_I2 = CorElementType(6);
+const ELEMENT_TYPE_I2 = ElementType(6);
 
 /// An unsigned 2-byte integer.
-const ELEMENT_TYPE_U2 = CorElementType(7);
+const ELEMENT_TYPE_U2 = ElementType(7);
 
 /// A signed 4-byte integer.
-const ELEMENT_TYPE_I4 = CorElementType(8);
+const ELEMENT_TYPE_I4 = ElementType(8);
 
 /// An unsigned 4-byte integer.
-const ELEMENT_TYPE_U4 = CorElementType(9);
+const ELEMENT_TYPE_U4 = ElementType(9);
 
 /// A signed 8-byte integer.
-const ELEMENT_TYPE_I8 = CorElementType(10);
+const ELEMENT_TYPE_I8 = ElementType(10);
 
 /// An unsigned 8-byte integer.
-const ELEMENT_TYPE_U8 = CorElementType(11);
+const ELEMENT_TYPE_U8 = ElementType(11);
 
 /// A 4-byte floating point.
-const ELEMENT_TYPE_R4 = CorElementType(12);
+const ELEMENT_TYPE_R4 = ElementType(12);
 
 /// An 8-byte floating point.
-const ELEMENT_TYPE_R8 = CorElementType(13);
+const ELEMENT_TYPE_R8 = ElementType(13);
 
 /// A System.String type.
-const ELEMENT_TYPE_STRING = CorElementType(14);
+const ELEMENT_TYPE_STRING = ElementType(14);
 
 /// A pointer type modifier.
-const ELEMENT_TYPE_PTR = CorElementType(15);
+const ELEMENT_TYPE_PTR = ElementType(15);
 
 /// A reference type modifier.
-const ELEMENT_TYPE_BYREF = CorElementType(16);
+const ELEMENT_TYPE_BYREF = ElementType(16);
 
 /// A value type modifier.
-const ELEMENT_TYPE_VALUETYPE = CorElementType(17);
+const ELEMENT_TYPE_VALUETYPE = ElementType(17);
 
 /// A class type modifier.
-const ELEMENT_TYPE_CLASS = CorElementType(18);
+const ELEMENT_TYPE_CLASS = ElementType(18);
 
 /// A class variable type modifier.
-const ELEMENT_TYPE_VAR = CorElementType(19);
+const ELEMENT_TYPE_VAR = ElementType(19);
 
 /// A multi-dimensional array type modifier.
-const ELEMENT_TYPE_ARRAY = CorElementType(20);
+const ELEMENT_TYPE_ARRAY = ElementType(20);
 
 /// A type modifier for generic types.
-const ELEMENT_TYPE_GENERICINST = CorElementType(21);
+const ELEMENT_TYPE_GENERICINST = ElementType(21);
 
 /// A typed reference.
-const ELEMENT_TYPE_TYPEDBYREF = CorElementType(22);
+const ELEMENT_TYPE_TYPEDBYREF = ElementType(22);
 
 /// Size of a native integer.
-const ELEMENT_TYPE_I = CorElementType(24);
+const ELEMENT_TYPE_I = ElementType(24);
 
 /// Size of an unsigned native integer.
-const ELEMENT_TYPE_U = CorElementType(25);
+const ELEMENT_TYPE_U = ElementType(25);
 
 /// A pointer to a function.
-const ELEMENT_TYPE_FNPTR = CorElementType(27);
+const ELEMENT_TYPE_FNPTR = ElementType(27);
 
 /// A System.Object type.
-const ELEMENT_TYPE_OBJECT = CorElementType(28);
+const ELEMENT_TYPE_OBJECT = ElementType(28);
 
 /// A single-dimensional, zero lower-bound array type modifier.
-const ELEMENT_TYPE_SZARRAY = CorElementType(29);
+const ELEMENT_TYPE_SZARRAY = ElementType(29);
 
 /// A method variable type modifier.
-const ELEMENT_TYPE_MVAR = CorElementType(30);
+const ELEMENT_TYPE_MVAR = ElementType(30);
 
 /// A C language required modifier.
-const ELEMENT_TYPE_CMOD_REQD = CorElementType(31);
+const ELEMENT_TYPE_CMOD_REQD = ElementType(31);
 
 /// A C language optional modifier.
-const ELEMENT_TYPE_CMOD_OPT = CorElementType(32);
+const ELEMENT_TYPE_CMOD_OPT = ElementType(32);
 
 /// Used internally.
-const ELEMENT_TYPE_INTERNAL = CorElementType(33);
+const ELEMENT_TYPE_INTERNAL = ElementType(33);
 
 /// An invalid type.
-const ELEMENT_TYPE_MAX = CorElementType(34);
+const ELEMENT_TYPE_MAX = ElementType(34);
 
 /// Used internally.
-const ELEMENT_TYPE_MODIFIER = CorElementType(64);
+const ELEMENT_TYPE_MODIFIER = ElementType(64);
 
 /// A type modifier that is a sentinel for a list of a variable number of
 /// parameters.
-const ELEMENT_TYPE_SENTINEL = CorElementType(65);
+const ELEMENT_TYPE_SENTINEL = ElementType(65);
 
 /// Used internally.
-const ELEMENT_TYPE_PINNED = CorElementType(69);
+const ELEMENT_TYPE_PINNED = ElementType(69);
 
 /// Used in custom attributes to indicate a field.
-const ELEMENT_TYPE_FIELD = CorElementType(0x53);
+const ELEMENT_TYPE_FIELD = ElementType(0x53);
 
 /// Used in custom attributes to indicate a property.
-const ELEMENT_TYPE_PROPERTY = CorElementType(0x54);
+const ELEMENT_TYPE_PROPERTY = ElementType(0x54);
 
 /// Used in custom attributes to specify an enum.
-const ELEMENT_TYPE_ENUM = CorElementType(0x55);
+const ELEMENT_TYPE_ENUM = ElementType(0x55);
 
 extension type const IMAGE_DIRECTORY_ENTRY(int _) implements int {}
 

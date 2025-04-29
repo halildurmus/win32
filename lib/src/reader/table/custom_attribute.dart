@@ -64,7 +64,7 @@ final class CustomAttribute extends Row {
     final namedArgCount = blob.readUint16();
 
     for (var i = 0; i < namedArgCount; i++) {
-      final id = CorElementType(blob.readUint8());
+      final id = ElementType(blob.readUint8());
       assert(
         id == ELEMENT_TYPE_FIELD || id == ELEMENT_TYPE_PROPERTY,
         'Expected ELEMENT_TYPE_FIELD (0x53) or ELEMENT_TYPE_PROPERTY (0x54), '

@@ -13,11 +13,11 @@ sealed class MetadataType {
   factory MetadataType.named(String namespace, String name) =>
       NamedType(TypeName(namespace, name));
 
-  /// The [CorElementType] code corresponding to this metadata type.
+  /// The [ElementType] code corresponding to this metadata type.
   ///
   /// Throws an [UnsupportedError], if the type does not have a direct
   /// encoding (e.g., const reference).
-  CorElementType get code =>
+  ElementType get code =>
       throw UnsupportedError('Unsupported type: $runtimeType');
 
   @override
@@ -30,7 +30,7 @@ final class VoidType extends MetadataType {
   const VoidType();
 
   @override
-  CorElementType get code => ELEMENT_TYPE_VOID;
+  ElementType get code => ELEMENT_TYPE_VOID;
 }
 
 /// Represents a boolean type.
@@ -38,7 +38,7 @@ final class BoolType extends MetadataType {
   const BoolType();
 
   @override
-  CorElementType get code => ELEMENT_TYPE_BOOLEAN;
+  ElementType get code => ELEMENT_TYPE_BOOLEAN;
 }
 
 /// Represents a character type.
@@ -46,7 +46,7 @@ final class CharType extends MetadataType {
   const CharType();
 
   @override
-  CorElementType get code => ELEMENT_TYPE_CHAR;
+  ElementType get code => ELEMENT_TYPE_CHAR;
 }
 
 /// Represents a signed 1-byte integer type.
@@ -54,7 +54,7 @@ final class Int8Type extends MetadataType {
   const Int8Type();
 
   @override
-  CorElementType get code => ELEMENT_TYPE_I1;
+  ElementType get code => ELEMENT_TYPE_I1;
 }
 
 /// Represents an unsigned 1-byte integer type.
@@ -62,7 +62,7 @@ final class Uint8Type extends MetadataType {
   const Uint8Type();
 
   @override
-  CorElementType get code => ELEMENT_TYPE_U1;
+  ElementType get code => ELEMENT_TYPE_U1;
 }
 
 /// Represents a signed 2-byte integer type.
@@ -70,7 +70,7 @@ final class Int16Type extends MetadataType {
   const Int16Type();
 
   @override
-  CorElementType get code => ELEMENT_TYPE_I2;
+  ElementType get code => ELEMENT_TYPE_I2;
 }
 
 /// Represents an unsigned 2-byte integer type.
@@ -78,7 +78,7 @@ final class Uint16Type extends MetadataType {
   const Uint16Type();
 
   @override
-  CorElementType get code => ELEMENT_TYPE_U2;
+  ElementType get code => ELEMENT_TYPE_U2;
 }
 
 /// Represents a signed 4-byte integer type.
@@ -86,7 +86,7 @@ final class Int32Type extends MetadataType {
   const Int32Type();
 
   @override
-  CorElementType get code => ELEMENT_TYPE_I4;
+  ElementType get code => ELEMENT_TYPE_I4;
 }
 
 /// Represents an unsigned 4-byte integer type.
@@ -94,7 +94,7 @@ final class Uint32Type extends MetadataType {
   const Uint32Type();
 
   @override
-  CorElementType get code => ELEMENT_TYPE_U4;
+  ElementType get code => ELEMENT_TYPE_U4;
 }
 
 /// Represents a signed 8-byte integer type.
@@ -102,7 +102,7 @@ final class Int64Type extends MetadataType {
   const Int64Type();
 
   @override
-  CorElementType get code => ELEMENT_TYPE_I8;
+  ElementType get code => ELEMENT_TYPE_I8;
 }
 
 /// Represents an unsigned 8-byte integer type.
@@ -110,7 +110,7 @@ final class Uint64Type extends MetadataType {
   const Uint64Type();
 
   @override
-  CorElementType get code => ELEMENT_TYPE_U8;
+  ElementType get code => ELEMENT_TYPE_U8;
 }
 
 /// Represents a 4-byte floating point type.
@@ -118,7 +118,7 @@ final class Float32Type extends MetadataType {
   const Float32Type();
 
   @override
-  CorElementType get code => ELEMENT_TYPE_R4;
+  ElementType get code => ELEMENT_TYPE_R4;
 }
 
 /// Represents an 8-byte floating point type.
@@ -126,7 +126,7 @@ final class Float64Type extends MetadataType {
   const Float64Type();
 
   @override
-  CorElementType get code => ELEMENT_TYPE_R8;
+  ElementType get code => ELEMENT_TYPE_R8;
 }
 
 /// Represents a platform-specific signed integer type.
@@ -134,7 +134,7 @@ final class IntPtrType extends MetadataType {
   const IntPtrType();
 
   @override
-  CorElementType get code => ELEMENT_TYPE_I;
+  ElementType get code => ELEMENT_TYPE_I;
 }
 
 /// Represents a platform-specific unsigned integer type.
@@ -142,7 +142,7 @@ final class UintPtrType extends MetadataType {
   const UintPtrType();
 
   @override
-  CorElementType get code => ELEMENT_TYPE_U;
+  ElementType get code => ELEMENT_TYPE_U;
 }
 
 /// Represents a user-defined named type (class, enum, struct, etc.).
@@ -169,7 +169,7 @@ final class ObjectType extends MetadataType {
   const ObjectType();
 
   @override
-  CorElementType get code => ELEMENT_TYPE_OBJECT;
+  ElementType get code => ELEMENT_TYPE_OBJECT;
 }
 
 /// Represents a System.String type.
@@ -177,7 +177,7 @@ final class StringType extends MetadataType {
   const StringType();
 
   @override
-  CorElementType get code => ELEMENT_TYPE_STRING;
+  ElementType get code => ELEMENT_TYPE_STRING;
 }
 
 /// Represents a _null_ reference type in constants.
@@ -185,7 +185,7 @@ final class NullReferenceType extends MetadataType {
   const NullReferenceType();
 
   @override
-  CorElementType get code => ELEMENT_TYPE_CLASS;
+  ElementType get code => ELEMENT_TYPE_CLASS;
 }
 
 /// Represents an enum type in custom attributes.
@@ -193,7 +193,7 @@ final class AttributeEnumType extends MetadataType {
   const AttributeEnumType();
 
   @override
-  CorElementType get code => ELEMENT_TYPE_ENUM;
+  ElementType get code => ELEMENT_TYPE_ENUM;
 }
 
 /// Represents an array type.
@@ -204,7 +204,7 @@ final class ArrayType extends MetadataType {
   final MetadataType element;
 
   @override
-  CorElementType get code => ELEMENT_TYPE_SZARRAY;
+  ElementType get code => ELEMENT_TYPE_SZARRAY;
 
   @override
   bool operator ==(Object other) =>
@@ -228,7 +228,7 @@ final class FixedArrayType extends MetadataType {
   final int length;
 
   @override
-  CorElementType get code => ELEMENT_TYPE_ARRAY;
+  ElementType get code => ELEMENT_TYPE_ARRAY;
 
   @override
   bool operator ==(Object other) =>
@@ -290,7 +290,7 @@ final class GenericParameterType extends MetadataType {
   final int parameterIndex;
 
   @override
-  CorElementType get code => ELEMENT_TYPE_VAR;
+  ElementType get code => ELEMENT_TYPE_VAR;
 
   @override
   bool operator ==(Object other) =>

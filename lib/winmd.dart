@@ -35,7 +35,6 @@ library;
 export 'src/attributes.dart';
 export 'src/bindings.dart'
     show
-        CorElementType,
         ELEMENT_TYPE_ARRAY,
         ELEMENT_TYPE_BOOLEAN,
         ELEMENT_TYPE_BYREF,
@@ -70,7 +69,8 @@ export 'src/bindings.dart'
         ELEMENT_TYPE_U8,
         ELEMENT_TYPE_VALUETYPE,
         ELEMENT_TYPE_VAR,
-        ELEMENT_TYPE_VOID;
+        ELEMENT_TYPE_VOID,
+        ElementType;
 export 'src/compressed_integer.dart';
 export 'src/culture.dart';
 export 'src/custom_attribute_parameter.dart';
