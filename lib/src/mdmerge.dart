@@ -44,10 +44,18 @@ List<MetadataReader> _expandInput(List<String> inputPaths) {
   for (final path in inputPaths) {
     final dir = Directory(path);
     if (dir.existsSync()) {
-      final files = dir.listSync().whereType<File>();
-      final winmdFiles = files.where(
-        (f) => p.extension(f.path).toLowerCase() == '.winmd',
-      );
+      final winmdFiles =
+          [
+            for (final entity in dir.listSync())
+              if (entity is File &&
+                  p.extension(entity.path).toLowerCase() == '.winmd')
+                entity,
+          ]..sort(
+            (a, b) => p
+                .basename(a.path)
+                .toLowerCase()
+                .compareTo(p.basename(b.path).toLowerCase()),
+          );
 
       if (winmdFiles.isEmpty) {
         throw FileSystemException('No .winmd files found in "$path".');

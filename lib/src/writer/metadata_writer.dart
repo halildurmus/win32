@@ -184,11 +184,7 @@ final class MetadataWriter {
 
   /// Adds a `TypeRef` row to the file, returning the row offset.
   TypeRef addTypeRef(String namespace, String name) {
-    if (_typeRefs[namespace] case final typeRef?) {
-      if (typeRef[name] case final typeRef?) {
-        return typeRef;
-      }
-    }
+    if (_typeRefs[namespace]?[name] case final typeRef?) return typeRef;
 
     final position = TypeRef(tableStream.typeRef.length);
     final scope = ResolutionScope.assemblyRef(addAssemblyRef(namespace));
@@ -215,19 +211,15 @@ final class MetadataWriter {
       generics.isNotEmpty,
       'Expected generics to be non-empty, got $generics.',
     );
-
     final typeRef = addTypeRef(namespace, name);
-
     final buffer = BytesBuilder()
       ..addByte(ELEMENT_TYPE_GENERICINST)
       ..addByte(ELEMENT_TYPE_CLASS)
       ..add(CompressedInteger.encode(TypeDefOrRef.typeRef(typeRef).encode()))
       ..add(CompressedInteger.encode(generics.length));
-
     for (final type in generics) {
       _encodeType(type, buffer);
     }
-
     final position = TypeSpec(tableStream.typeSpec.length);
     tableStream.typeSpec.add(
       TypeSpecRecord(signature: blobHeap.insert(buffer.takeBytes())),
@@ -376,13 +368,11 @@ final class MetadataWriter {
   InterfaceImpl addInterfaceImpl(TypeDef class$, MetadataType interface) {
     if (interface is! NamedType) throw ArgumentError('Invalid interface type');
     final typeName = interface.typeName;
-
     final interfaceType = typeName.generics.isEmpty
         ? TypeDefOrRef.typeRef(addTypeRef(typeName.namespace, typeName.name))
         : TypeDefOrRef.typeSpec(
             addTypeSpec(typeName.namespace, typeName.name, typeName.generics),
           );
-
     final position = InterfaceImpl(tableStream.interfaceImpl.length);
     tableStream.interfaceImpl.add(
       InterfaceImplRecord(class$: class$, interface: interfaceType),

@@ -43,6 +43,7 @@ final class MetadataIndex {
     final namespaceToTypeMap =
         HashMap<String, HashMap<String, List<_ReaderAndTypeDefIndex>>>();
     final nestedTypeMap = HashMap<_ReaderAndTypeDefIndex, List<int>>();
+    const nestedClassTable = MetadataTable.nestedClass;
     const typeDefTable = MetadataTable.typeDef;
 
     for (var readerIndex = 0; readerIndex < readers.length; readerIndex++) {
@@ -66,8 +67,8 @@ final class MetadataIndex {
       }
 
       for (final nestedClass in reader.nestedClasses) {
-        final inner = reader.readUint(nestedClass, typeDefTable, 0);
-        final outer = reader.readUint(nestedClass, typeDefTable, 1);
+        final inner = reader.readUint(nestedClass, nestedClassTable, 0) - 1;
+        final outer = reader.readUint(nestedClass, nestedClassTable, 1) - 1;
         nestedTypeMap
             .putIfAbsent(_ReaderAndTypeDefIndex(readerIndex, outer), () => [])
             .add(inner);

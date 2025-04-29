@@ -33,8 +33,7 @@ final class InterfaceImpl extends Row with HasCustomAttributes {
       decode<TypeDefOrRef>(1).type(generics);
 
   @override
-  String toString() =>
-      'InterfaceImpl(class\$: ${class$}, interface: ${interface()})';
+  String toString() => 'InterfaceImpl(class\$: ${class$})';
 }
 
 @internal
