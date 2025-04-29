@@ -269,8 +269,7 @@ final class MetadataIndex {
   @override
   String toString() =>
       'MetadataIndex(readers: ${readers.length}, '
-      'namespaces: ${_namespaceToTypeMap.length}, '
-      'nested types: ${_nestedTypeMap.length})';
+      'namespaces: ${_namespaceToTypeMap.length})';
 }
 
 final class _ReaderAndTypeDefIndex {
