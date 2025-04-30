@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:checks/checks.dart';
 import 'package:test/scaffolding.dart';
 import 'package:winmd/windows_metadata.dart';
@@ -18,7 +20,11 @@ void main() async {
       check(assemblyRef.publicKeyOrToken)
           .isNotNull()
           .has((it) => it.slice, 'slice')
-          .deepEquals([0xCC, 0x7B, 0x13, 0xFF, 0xCD, 0x2D, 0xDD, 0x51]);
+          .deepEquals(
+            Uint8List.fromList([
+              0xCC, 0x7B, 0x13, 0xFF, 0xCD, 0x2D, 0xDD, 0x51, //
+            ]),
+          );
       check(assemblyRef.name).equals('netstandard');
       check(assemblyRef.culture).isNull();
       check(assemblyRef.hashValue).isNull();

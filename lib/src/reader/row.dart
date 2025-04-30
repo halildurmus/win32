@@ -43,7 +43,7 @@ abstract base class Row {
   /// The reader index used to access a specific metadata reader.
   final int readerIndex;
 
-  /// The position of the row within the metadata table.
+  /// The position of the row within the metadata table, starting from zero.
   final int position;
 
   /// The metadata table associated with this row.
@@ -97,14 +97,6 @@ abstract base class Row {
   /// stored.
   @pragma('vm:prefer-inline')
   String readString(int column) => _reader.readString(position, table, column);
-
-  /// Reads a user-defined string from the specified [column].
-  ///
-  /// The column represents the position in the table where the user string is
-  /// stored.
-  @pragma('vm:prefer-inline')
-  String readUserString(int column) =>
-      _reader.readUserString(position, table, column);
 
   /// Reads an unsigned integer from the specified [column].
   ///
@@ -162,19 +154,19 @@ abstract base class Row {
     return companion.decode(metadataIndex, readerIndex, readUint(column));
   }
 
-  /// Retrieves rows of [R] from the specified [column].
-  Iterable<R> getList<R extends Row>(int column) {
-    final companion = Row.companion<R>();
-    final rows = _reader.getList(position, table, column, companion.table);
+  /// Retrieves rows of [L] with a matching [value] in the specified [column].
+  Iterable<L> getEqualRange<L extends Row>(int column, int value) {
+    final companion = Row.companion<L>();
+    final rows = _reader.getEqualRange(companion.table, column, value);
     return rows.map(
       (position) => companion.constructor(metadataIndex, readerIndex, position),
     );
   }
 
-  /// Retrieves rows of [L] with a matching [value] in the specified [column].
-  Iterable<L> getEqualRange<L extends Row>(int column, int value) {
-    final companion = Row.companion<L>();
-    final rows = _reader.getEqualRange(companion.table, column, value);
+  /// Retrieves rows of [R] from the specified [column].
+  Iterable<R> getList<R extends Row>(int column) {
+    final companion = Row.companion<R>();
+    final rows = _reader.getList(position, table, column, companion.table);
     return rows.map(
       (position) => companion.constructor(metadataIndex, readerIndex, position),
     );

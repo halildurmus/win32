@@ -653,11 +653,11 @@ final class MetadataReader {
   final UserStringHeap userStringHeap;
 
   /// The module's name.
-  String get name => readString(0, MetadataTable.module, 1);
+  String get moduleName => readString(0, MetadataTable.module, 1);
 
   /// The Module Version ID (MVID), a GUID that uniquely identifies the version
   /// of the module.
-  Guid get mvid => readGuid(0, MetadataTable.module, 2);
+  Guid get moduleMvid => readGuid(0, MetadataTable.module, 2);
 
   /// Reads a blob from the specified [row] and [column] of [table].
   @pragma('vm:prefer-inline')
@@ -673,12 +673,6 @@ final class MetadataReader {
   @pragma('vm:prefer-inline')
   String readString(int row, MetadataTable table, int column) =>
       stringHeap[readUint(row, table, column)];
-
-  /// Reads a user-defined string from the specified [row] and [column] of
-  /// [table].
-  @pragma('vm:prefer-inline')
-  String readUserString(int row, MetadataTable table, int column) =>
-      userStringHeap[readUint(row, table, column)];
 
   /// Reads an unsigned integer from the specified [row] and [column] of [table].
   int readUint(int row, MetadataTable table, int column) {
@@ -697,25 +691,25 @@ final class MetadataReader {
   /// Reads an unsigned 8-bit integer from the specified [row] and [column] of
   /// [table], with an optional [offset].
   @pragma('vm:prefer-inline')
-  int readUint8(int row, MetadataTable table, int column, int offset) =>
+  int readUint8(int row, MetadataTable table, int column, [int offset = 0]) =>
       data.readUint8(_calculateOffset(row, table, column) + offset);
 
   /// Reads an unsigned 16-bit integer from the specified [row] and [column] of
   /// [table], with an optional [offset].
   @pragma('vm:prefer-inline')
-  int readUint16(int row, MetadataTable table, int column, int offset) =>
+  int readUint16(int row, MetadataTable table, int column, [int offset = 0]) =>
       data.readUint16(_calculateOffset(row, table, column) + offset);
 
   /// Reads an unsigned 32-bit integer from the specified [row] and [column] of
   /// [table], with an optional [offset].
   @pragma('vm:prefer-inline')
-  int readUint32(int row, MetadataTable table, int column, int offset) =>
+  int readUint32(int row, MetadataTable table, int column, [int offset = 0]) =>
       data.readUint32(_calculateOffset(row, table, column) + offset);
 
   /// Reads an unsigned 64-bit integer from the specified [row] and [column] of
   /// [table], with an optional [offset].
   @pragma('vm:prefer-inline')
-  int readUint64(int row, MetadataTable table, int column, int offset) =>
+  int readUint64(int row, MetadataTable table, int column, [int offset = 0]) =>
       data.readUint64(_calculateOffset(row, table, column) + offset);
 
   /// Calculates the byte offset for the specified [row], [table], and [column].
@@ -724,22 +718,6 @@ final class MetadataReader {
     final table$ = tableStream[table];
     final column$ = table$.columns[column];
     return table$.offset + row * table$.width + column$.offset;
-  }
-
-  /// Returns an iterable of row indices between two related tables.
-  Iterable<int> getList(
-    int row,
-    MetadataTable table,
-    int column,
-    MetadataTable otherTable,
-  ) {
-    final first = readUint(row, table, column) - 1;
-    final next = row + 1;
-    final last = next < tableStream[table].rows
-        ? readUint(next, table, column) - 1
-        : tableStream[otherTable].rows;
-    if (last <= first) return const Iterable.empty();
-    return Iterable.generate(last - first, (i) => first + i);
   }
 
   /// Returns an iterable of rows where the specified [column] matches [value].
@@ -764,6 +742,22 @@ final class MetadataReader {
     }
 
     return const Iterable.empty();
+  }
+
+  /// Returns an iterable of row indices between two related tables.
+  Iterable<int> getList(
+    int row,
+    MetadataTable table,
+    int column,
+    MetadataTable otherTable,
+  ) {
+    final first = readUint(row, table, column) - 1;
+    final next = row + 1;
+    final last = next < tableStream[table].rows
+        ? readUint(next, table, column) - 1
+        : tableStream[otherTable].rows;
+    if (last <= first) return const Iterable.empty();
+    return Iterable.generate(last - first, (i) => first + i);
   }
 
   /// Returns the parent row index for the specified [row] within a [table].
@@ -813,7 +807,8 @@ final class MetadataReader {
   }
 
   @override
-  String toString() => 'MetadataReader(name: $name, mvid: $mvid)';
+  String toString() =>
+      'MetadataReader(moduleName: $moduleName, moduleMvid: $moduleMvid)';
 }
 
 /// Represents a single metadata table, including layout and column data.

@@ -15,9 +15,9 @@ void main() async {
     test('readers', () {
       check(win32Index.readers.length).equals(1);
       final reader = win32Index.readers[0];
-      check(reader.name).equals('Windows.Win32.winmd');
+      check(reader.moduleName).equals('Windows.Win32.winmd');
       check(
-        reader.mvid.toString(),
+        reader.moduleMvid.toString(),
       ).equals('4a520299-e458-4675-befb-318972b60e6a');
     });
 
