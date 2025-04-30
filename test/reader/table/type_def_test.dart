@@ -241,4 +241,81 @@ void main() async {
       check(typeDef.category).equals(TypeCategory.delegate);
     });
   });
+
+  group('TypeDefExtension', () {
+    group('findField', () {
+      final typeDef = metadata.index.findSingleType(
+        'Windows.Win32.System.WinRT',
+        'RO_INIT_TYPE',
+      );
+
+      test('returns matching field if found', () {
+        final field = typeDef.findField('RO_INIT_MULTITHREADED');
+        check(field.name).equals('RO_INIT_MULTITHREADED');
+      });
+
+      test('throws if field not found', () {
+        check(() => typeDef.findField('NonexistentField'))
+            .throws<WinmdException>()
+            .has((it) => it.message, 'message')
+            .equals(
+              'Field "NonexistentField" not found in TypeDef(Windows.Win32.System.WinRT.RO_INIT_TYPE)',
+            );
+      });
+    });
+
+    group('tryFindField', () {
+      final typeDef = metadata.index.findSingleType(
+        'Windows.Win32.System.WinRT',
+        'RO_INIT_TYPE',
+      );
+
+      test('returns matching field if found', () {
+        final field = typeDef.tryFindField('RO_INIT_SINGLETHREADED');
+        check(field).isNotNull();
+        check(field!.name).equals('RO_INIT_SINGLETHREADED');
+      });
+
+      test('returns null if field not found', () {
+        final field = typeDef.tryFindField('DoesNotExist');
+        check(field).isNull();
+      });
+    });
+
+    group('findMethod', () {
+      final typeDef = metadata.findSingleType(
+        'Windows.Win32.System.WinRT',
+        'IInspectable',
+      );
+
+      test('returns matching method if found', () {
+        final method = typeDef.findMethod('GetIids');
+        check(method.name).equals('GetIids');
+      });
+
+      test('throws if method not found', () {
+        check(
+          () => typeDef.findMethod('MissingMethod'),
+        ).throws<WinmdException>();
+      });
+    });
+
+    group('tryFindMethod', () {
+      final typeDef = metadata.findSingleType(
+        'Windows.Win32.System.WinRT',
+        'IInspectable',
+      );
+
+      test('returns matching method if found', () {
+        final method = typeDef.tryFindMethod('GetTrustLevel');
+        check(method).isNotNull();
+        check(method!.name).equals('GetTrustLevel');
+      });
+
+      test('returns null if method not found', () {
+        final method = typeDef.tryFindMethod('NoSuchMethod');
+        check(method).isNull();
+      });
+    });
+  });
 }
