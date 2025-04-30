@@ -5,12 +5,14 @@ import 'package:test/scaffolding.dart';
 import 'package:winmd/windows_metadata.dart';
 import 'package:winmd/winmd.dart';
 
+import '../versions.dart';
+
 void main() async {
   final index = await WindowsMetadataLoader.loadMultipleMetadata(
     packages: [WindowsMetadataPackage.win32, WindowsMetadataPackage.winrt],
     versions: const WindowsMetadataVersions(
-      win32: '63.0.31-preview',
-      winrt: '10.0.26100.1742',
+      win32: win32MetadataVersion,
+      winrt: winrtMetadataVersion,
     ),
   );
 

@@ -3,9 +3,13 @@ import 'package:test/scaffolding.dart';
 import 'package:winmd/windows_metadata.dart';
 import 'package:winmd/winmd.dart';
 
+import '../versions.dart';
+
 void main() async {
   final metadata = MetadataLookup(
-    await WindowsMetadataLoader.loadWin32Metadata(version: '63.0.31-preview'),
+    await WindowsMetadataLoader.loadWin32Metadata(
+      version: win32MetadataVersion,
+    ),
   );
 
   group('MetadataLookup', () {

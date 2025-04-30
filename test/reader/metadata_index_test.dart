@@ -3,12 +3,14 @@ import 'package:test/scaffolding.dart';
 import 'package:winmd/windows_metadata.dart';
 import 'package:winmd/winmd.dart';
 
+import '../versions.dart';
+
 void main() async {
   final win32Index = await WindowsMetadataLoader.loadWin32Metadata(
-    version: '63.0.31-preview',
+    version: win32MetadataVersion,
   );
   final winrtIndex = await WindowsMetadataLoader.loadWinrtMetadata(
-    version: '10.0.26100.1742',
+    version: winrtMetadataVersion,
   );
 
   group('MetadataIndex', () {
