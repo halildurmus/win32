@@ -9,7 +9,8 @@ void main() async {
     print('${record.level.name}: ${record.message}');
   });
   final stopwatch = Stopwatch()..start();
-  final index = await WindowsMetadataLoader.loadMultipleMetadata(
+  final metadataLoader = WindowsMetadataLoader();
+  final index = await metadataLoader.loadMultipleMetadata(
     packages: [
       WindowsMetadataPackage.wdk,
       WindowsMetadataPackage.win32,
@@ -29,12 +30,4 @@ void main() async {
   print('methods: ${td.methods}');
   print('interface impl: ${td.interfaceImpls}');
   print('attribute: ${{td.attributes}}');
-
-  for (final ref in index.assemblyRefs) {
-    print(ref);
-  }
-
-  for (final module in index.modules) {
-    print(module);
-  }
 }

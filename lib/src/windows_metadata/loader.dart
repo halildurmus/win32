@@ -21,50 +21,53 @@ import 'package.dart';
 /// - **WDK** – Windows Driver Kit APIs
 /// - **WinRT** – Windows Runtime APIs
 final class WindowsMetadataLoader {
-  static final _localStorageManager = LocalStorageManager();
+  WindowsMetadataLoader({LocalStorageManager? localStorageManager})
+    : _localStorageManager = localStorageManager ?? LocalStorageManager();
+
+  final LocalStorageManager _localStorageManager;
 
   /// Loads the Windows Driver Kit (WDK) metadata into a [MetadataIndex].
   ///
   /// [version] specifies the exact version to load. If omitted,
   /// the latest available version (including **pre-releases**) is used.
-  static Future<MetadataIndex> loadWdkMetadata({String? version}) =>
+  Future<MetadataIndex> loadWdkMetadata({String? version}) =>
       _loadSingleMetadata(WindowsMetadataPackage.wdk, version: version);
 
   /// Loads the Win32 metadata into a [MetadataIndex].
   ///
   /// [version] specifies the exact version to load. If omitted,
   /// the latest available version (including **pre-releases**) is used.
-  static Future<MetadataIndex> loadWin32Metadata({String? version}) =>
+  Future<MetadataIndex> loadWin32Metadata({String? version}) =>
       _loadSingleMetadata(WindowsMetadataPackage.win32, version: version);
 
   /// Loads the Windows Runtime (WinRT) metadata into a [MetadataIndex].
   ///
   /// [version] specifies the exact version to load. If omitted,
   /// the latest available **stable** version is used.
-  static Future<MetadataIndex> loadWinrtMetadata({String? version}) =>
+  Future<MetadataIndex> loadWinrtMetadata({String? version}) =>
       _loadSingleMetadata(WindowsMetadataPackage.winrt, version: version);
 
   /// Loads WDK, Win32, and WinRT metadata into a [MetadataIndex].
   ///
   /// Versions can be specified individually through [versions].
   /// If omitted, the latest versions will be automatically resolved.
-  static Future<MetadataIndex> loadAllMetadata({
-    WindowsMetadataVersions? versions,
-  }) => loadMultipleMetadata(
-    packages: WindowsMetadataPackage.values,
-    versions: versions,
-  );
+  Future<MetadataIndex> loadAllMetadata({WindowsMetadataVersions? versions}) =>
+      loadMultipleMetadata(
+        packages: WindowsMetadataPackage.values,
+        versions: versions,
+      );
 
   /// Loads multiple Windows metadata packages into a [MetadataIndex].
   ///
   /// Example:
   /// ```dart
-  /// final index = await WindowsMetadataLoader.loadMultipleMetadata(
+  /// final metadataLoader = WindowsMetadataLoader();
+  /// final index = await metadataLoader.loadMultipleMetadata(
   ///   packages: [WindowsMetadataPackage.wdk, WindowsMetadataPackage.win32],
   ///   versions: WindowsMetadataVersions(wdk: '0.13.25-experimental'),
   /// );
   /// ```
-  static Future<MetadataIndex> loadMultipleMetadata({
+  Future<MetadataIndex> loadMultipleMetadata({
     required List<WindowsMetadataPackage> packages,
     WindowsMetadataVersions? versions,
   }) async {
@@ -88,7 +91,7 @@ final class WindowsMetadataLoader {
     return MetadataIndex.fromReaders(readers);
   }
 
-  static Future<MetadataIndex> _loadSingleMetadata(
+  Future<MetadataIndex> _loadSingleMetadata(
     WindowsMetadataPackage package, {
     String? version,
   }) async {
@@ -98,7 +101,7 @@ final class WindowsMetadataLoader {
     return MetadataIndex.fromReader(reader);
   }
 
-  static Future<String> _resolveMetadataPath(
+  Future<String> _resolveMetadataPath(
     WindowsMetadataPackage package,
     String? version,
   ) async {
@@ -173,7 +176,7 @@ final class WindowsMetadataLoader {
     }
   }
 
-  static String? _tryFindCachedMetadataPath(
+  String? _tryFindCachedMetadataPath(
     WindowsMetadataPackage package,
     String version,
   ) {

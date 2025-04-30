@@ -5,7 +5,7 @@ import 'package:winmd/winmd.dart';
 
 void main() async {
   final metadata = MetadataLookup(
-    await WindowsMetadataLoader.loadAllMetadata(),
+    await WindowsMetadataLoader().loadAllMetadata(),
   );
 
   group('TypeRef', () {

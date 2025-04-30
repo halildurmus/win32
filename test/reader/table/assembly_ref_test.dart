@@ -8,7 +8,7 @@ import 'package:winmd/winmd.dart';
 import '../../versions.dart';
 
 void main() async {
-  final index = await WindowsMetadataLoader.loadWin32Metadata(
+  final index = await WindowsMetadataLoader().loadWin32Metadata(
     version: win32MetadataVersion,
   );
 

@@ -6,10 +6,11 @@ import 'package:winmd/winmd.dart';
 import '../versions.dart';
 
 void main() async {
-  final win32Index = await WindowsMetadataLoader.loadWin32Metadata(
+  final metadataLoader = WindowsMetadataLoader();
+  final win32Index = await metadataLoader.loadWin32Metadata(
     version: win32MetadataVersion,
   );
-  final winrtIndex = await WindowsMetadataLoader.loadWinrtMetadata(
+  final winrtIndex = await metadataLoader.loadWinrtMetadata(
     version: winrtMetadataVersion,
   );
 
