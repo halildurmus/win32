@@ -27,6 +27,13 @@ import 'writer/metadata_writer.dart';
 /// );
 /// ```
 void mdmerge({required List<String> inputPaths, required String outputPath}) {
+  if (inputPaths.isEmpty) {
+    throw ArgumentError.value(
+      inputPaths,
+      'inputPaths',
+      'At least one input path must be provided.',
+    );
+  }
   final output = File(outputPath);
   final readers = _expandInput(inputPaths);
   final index = MetadataIndex.fromReaders(readers);
