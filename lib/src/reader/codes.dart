@@ -57,13 +57,6 @@ const _companions = <Type, CodedIndexCompanion>{
 
 /// Represents a coded index into either a [MethodDef] or a [MemberRef].
 sealed class CustomAttributeType implements CodedIndex {
-  /// Creates a [CustomAttributeType] from a given [Row] instance.
-  factory CustomAttributeType(Row value) => switch (value) {
-    MethodDef() => CustomAttributeTypeMethodDef(value),
-    MemberRef() => CustomAttributeTypeMemberRef(value),
-    _ => throw WinmdException('Unsupported value: $value'),
-  };
-
   /// Constructs a [CustomAttributeType] referencing a [MethodDef].
   const factory CustomAttributeType.methodDef(MethodDef value) =
       CustomAttributeTypeMethodDef;
@@ -113,7 +106,7 @@ final class CustomAttributeTypeMethodDef extends CustomAttributeType {
   final MethodDef value;
 
   @override
-  int encode() => ((value.position + 1) << 3) | 2;
+  int encode() => ((value.index + 1) << 3) | 2;
 
   @override
   MemberRefParent get parent => value.parent;
@@ -137,7 +130,7 @@ final class CustomAttributeTypeMemberRef extends CustomAttributeType {
   final MemberRef value;
 
   @override
-  int encode() => ((value.position + 1) << 3) | 3;
+  int encode() => ((value.index + 1) << 3) | 3;
 
   @override
   MemberRefParent get parent => value.parent;
@@ -161,6 +154,78 @@ final class CustomAttributeTypeCompanion
   @override
   CustomAttributeType Function(MetadataIndex, int, int) get decode =>
       CustomAttributeType.decode;
+}
+
+/// Represents a coded index for entities that can have constant values.
+sealed class HasConstant implements CodedIndex {
+  /// Constructs a [HasConstant] referencing a [Field].
+  const factory HasConstant.field(Field value) = HasConstantField;
+
+  /// Constructs a [HasConstant] referencing a [Param].
+  const factory HasConstant.param(Param value) = HasConstantParam;
+
+  const HasConstant._();
+
+  /// Decodes a [HasConstant] from a raw coded index.
+  static HasConstant decode(
+    MetadataIndex metadataIndex,
+    int readerIndex,
+    int code,
+  ) {
+    final kind = code & ((1 << 2) - 1);
+    final row = (code >> 2) - 1;
+    return switch (kind) {
+      0 => HasConstantField(Field(metadataIndex, readerIndex, row)),
+      1 => HasConstantParam(Param(metadataIndex, readerIndex, row)),
+      _ => throw WinmdException('Unknown kind: $kind'),
+    };
+  }
+
+  /// The name of the underlying field or parameter.
+  String get name;
+}
+
+/// A [HasConstant] representing a [Field].
+final class HasConstantField extends HasConstant {
+  const HasConstantField(this.value) : super._();
+
+  /// The underlying field definition.
+  final Field value;
+
+  @override
+  int encode() => ((value.index + 1) << 2) | 0;
+
+  @override
+  String get name => value.name;
+
+  @override
+  String toString() => 'HasConstantField($value)';
+}
+
+/// A [HasConstant] representing a [Param].
+final class HasConstantParam extends HasConstant {
+  const HasConstantParam(this.value) : super._();
+
+  /// The underlying parameter definition.
+  final Param value;
+
+  @override
+  int encode() => ((value.index + 1) << 2) | 1;
+
+  @override
+  String get name => value.name;
+
+  @override
+  String toString() => 'HasConstantParam($value)';
+}
+
+@internal
+final class HasConstantCompanion extends CodedIndexCompanion<HasConstant> {
+  const HasConstantCompanion();
+
+  @override
+  HasConstant Function(MetadataIndex, int, int) get decode =>
+      HasConstant.decode;
 }
 
 /// Represents a coded index for entities that can have custom attributes.
@@ -278,7 +343,7 @@ final class HasCustomAttributeMethodDef extends HasCustomAttribute {
   final MethodDef value;
 
   @override
-  int encode() => ((value.position + 1) << 5) | 0;
+  int encode() => ((value.index + 1) << 5) | 0;
 
   @override
   String toString() => 'HasCustomAttributeMethodDef($value)';
@@ -292,7 +357,7 @@ final class HasCustomAttributeField extends HasCustomAttribute {
   final Field value;
 
   @override
-  int encode() => ((value.position + 1) << 5) | 1;
+  int encode() => ((value.index + 1) << 5) | 1;
 
   @override
   String toString() => 'HasCustomAttributeField($value)';
@@ -306,7 +371,7 @@ final class HasCustomAttributeTypeRef extends HasCustomAttribute {
   final TypeRef value;
 
   @override
-  int encode() => ((value.position + 1) << 5) | 2;
+  int encode() => ((value.index + 1) << 5) | 2;
 
   @override
   String toString() => 'HasCustomAttributeTypeRef($value)';
@@ -320,7 +385,7 @@ final class HasCustomAttributeTypeDef extends HasCustomAttribute {
   final TypeDef value;
 
   @override
-  int encode() => ((value.position + 1) << 5) | 3;
+  int encode() => ((value.index + 1) << 5) | 3;
 
   @override
   String toString() => 'HasCustomAttributeTypeDef($value)';
@@ -334,7 +399,7 @@ final class HasCustomAttributeParam extends HasCustomAttribute {
   final Param value;
 
   @override
-  int encode() => ((value.position + 1) << 5) | 4;
+  int encode() => ((value.index + 1) << 5) | 4;
 
   @override
   String toString() => 'HasCustomAttributeParam($value)';
@@ -348,7 +413,7 @@ final class HasCustomAttributeInterfaceImpl extends HasCustomAttribute {
   final InterfaceImpl value;
 
   @override
-  int encode() => ((value.position + 1) << 5) | 5;
+  int encode() => ((value.index + 1) << 5) | 5;
 
   @override
   String toString() => 'HasCustomAttributeInterfaceImpl($value)';
@@ -362,7 +427,7 @@ final class HasCustomAttributeMemberRef extends HasCustomAttribute {
   final MemberRef value;
 
   @override
-  int encode() => ((value.position + 1) << 5) | 6;
+  int encode() => ((value.index + 1) << 5) | 6;
 
   @override
   String toString() => 'HasCustomAttributeMemberRef($value)';
@@ -376,7 +441,7 @@ final class HasCustomAttributeModule extends HasCustomAttribute {
   final Module value;
 
   @override
-  int encode() => ((value.position + 1) << 5) | 7;
+  int encode() => ((value.index + 1) << 5) | 7;
 
   @override
   String toString() => 'HasCustomAttributeModule($value)';
@@ -390,7 +455,7 @@ final class HasCustomAttributeModuleRef extends HasCustomAttribute {
   final ModuleRef value;
 
   @override
-  int encode() => ((value.position + 1) << 5) | 12;
+  int encode() => ((value.index + 1) << 5) | 12;
 
   @override
   String toString() => 'HasCustomAttributeModuleRef($value)';
@@ -404,7 +469,7 @@ final class HasCustomAttributeTypeSpec extends HasCustomAttribute {
   final TypeSpec value;
 
   @override
-  int encode() => ((value.position + 1) << 5) | 13;
+  int encode() => ((value.index + 1) << 5) | 13;
 
   @override
   String toString() => 'HasCustomAttributeTypeSpec($value)';
@@ -418,7 +483,7 @@ final class HasCustomAttributeAssemblyRef extends HasCustomAttribute {
   final AssemblyRef value;
 
   @override
-  int encode() => ((value.position + 1) << 5) | 15;
+  int encode() => ((value.index + 1) << 5) | 15;
 
   @override
   String toString() => 'HasCustomAttributeAssemblyRef($value)';
@@ -432,7 +497,7 @@ final class HasCustomAttributeGenericParam extends HasCustomAttribute {
   final GenericParam value;
 
   @override
-  int encode() => ((value.position + 1) << 5) | 19;
+  int encode() => ((value.index + 1) << 5) | 19;
 
   @override
   String toString() => 'HasCustomAttributeGenericParam($value)';
@@ -448,94 +513,8 @@ final class HasCustomAttributeCompanion
       HasCustomAttribute.decode;
 }
 
-/// Represents a coded index for entities that can have constant values.
-sealed class HasConstant implements CodedIndex {
-  /// Creates a [HasCustomAttribute] instance from a [Row].
-  factory HasConstant(Row value) => switch (value) {
-    Field() => HasConstantField(value),
-    Param() => HasConstantParam(value),
-    _ => throw WinmdException('Unsupported value: $value'),
-  };
-
-  /// Constructs a [HasConstant] referencing a [Field].
-  const factory HasConstant.field(Field value) = HasConstantField;
-
-  /// Constructs a [HasConstant] referencing a [Param].
-  const factory HasConstant.param(Param value) = HasConstantParam;
-
-  const HasConstant._();
-
-  /// Decodes a [HasConstant] from a raw coded index.
-  static HasConstant decode(
-    MetadataIndex metadataIndex,
-    int readerIndex,
-    int code,
-  ) {
-    final kind = code & ((1 << 2) - 1);
-    final row = (code >> 2) - 1;
-    return switch (kind) {
-      0 => HasConstantField(Field(metadataIndex, readerIndex, row)),
-      1 => HasConstantParam(Param(metadataIndex, readerIndex, row)),
-      _ => throw WinmdException('Unknown kind: $kind'),
-    };
-  }
-
-  /// The name of the underlying field or parameter.
-  String get name;
-}
-
-/// A [HasConstant] representing a [Field].
-final class HasConstantField extends HasConstant {
-  const HasConstantField(this.value) : super._();
-
-  /// The underlying field definition.
-  final Field value;
-
-  @override
-  int encode() => ((value.position + 1) << 2) | 0;
-
-  @override
-  String get name => value.name;
-
-  @override
-  String toString() => 'HasConstantField($value)';
-}
-
-/// A [HasConstant] representing a [Param].
-final class HasConstantParam extends HasConstant {
-  const HasConstantParam(this.value) : super._();
-
-  /// The underlying parameter definition.
-  final Param value;
-
-  @override
-  int encode() => ((value.position + 1) << 2) | 1;
-
-  @override
-  String get name => value.name;
-
-  @override
-  String toString() => 'HasConstantParam($value)';
-}
-
-@internal
-final class HasConstantCompanion extends CodedIndexCompanion<HasConstant> {
-  const HasConstantCompanion();
-
-  @override
-  HasConstant Function(MetadataIndex, int, int) get decode =>
-      HasConstant.decode;
-}
-
 /// Represents a coded index for members that can be forwarded.
 sealed class MemberForwarded implements CodedIndex {
-  /// Creates a [MemberForwarded] instance from a [Row].
-  factory MemberForwarded(Row value) => switch (value) {
-    Field() => MemberForwardedField(value),
-    MethodDef() => MemberForwardedMethodDef(value),
-    _ => throw WinmdException('Unsupported value: $value'),
-  };
-
   /// Constructs a [MemberForwarded] referencing a [Field].
   const factory MemberForwarded.field(Field value) = MemberForwardedField;
 
@@ -572,7 +551,7 @@ final class MemberForwardedField extends MemberForwarded {
   final Field value;
 
   @override
-  int encode() => ((value.position + 1) << 1) | 0;
+  int encode() => ((value.index + 1) << 1) | 0;
 
   @override
   String get name => value.name;
@@ -589,7 +568,7 @@ final class MemberForwardedMethodDef extends MemberForwarded {
   final MethodDef value;
 
   @override
-  int encode() => ((value.position + 1) << 1) | 1;
+  int encode() => ((value.index + 1) << 1) | 1;
 
   @override
   String get name => value.name;
@@ -610,13 +589,6 @@ final class MemberForwardedCompanion
 
 /// Represents a coded index for either a [TypeDef] or a [TypeRef].
 sealed class MemberRefParent implements CodedIndex {
-  /// Creates a [MemberRefParent] instance from a [Row].
-  factory MemberRefParent(Row value) => switch (value) {
-    TypeDef() => MemberRefParentTypeDef(value),
-    TypeRef() => MemberRefParentTypeRef(value),
-    _ => throw WinmdException('Unsupported value: $value'),
-  };
-
   /// Constructs a [MemberRefParent] referencing a [TypeDef].
   const factory MemberRefParent.typeDef(TypeDef value) = MemberRefParentTypeDef;
 
@@ -655,7 +627,7 @@ final class MemberRefParentTypeDef extends MemberRefParent {
   final TypeDef value;
 
   @override
-  int encode() => ((value.position + 1) << 3) | 0;
+  int encode() => ((value.index + 1) << 3) | 0;
 
   @override
   String get namespace => value.namespace;
@@ -675,7 +647,7 @@ final class MemberRefParentTypeRef extends MemberRefParent {
   final TypeRef value;
 
   @override
-  int encode() => ((value.position + 1) << 3) | 1;
+  int encode() => ((value.index + 1) << 3) | 1;
 
   @override
   String get namespace => value.namespace;
@@ -700,15 +672,6 @@ final class MemberRefParentCompanion
 /// Represents a coded index for a [Module], [ModuleRef], [AssemblyRef], or
 /// [TypeRef].
 sealed class ResolutionScope implements CodedIndex {
-  /// Creates a [ResolutionScope] instance from a [Row].
-  factory ResolutionScope(Row value) => switch (value) {
-    Module() => ResolutionScopeModule(value),
-    ModuleRef() => ResolutionScopeModuleRef(value),
-    AssemblyRef() => ResolutionScopeAssemblyRef(value),
-    TypeRef() => ResolutionScopeTypeRef(value),
-    _ => throw WinmdException('Unsupported value: $value'),
-  };
-
   /// Constructs a [ResolutionScope] referencing a [Module].
   const factory ResolutionScope.module(Module value) = ResolutionScopeModule;
 
@@ -753,7 +716,7 @@ final class ResolutionScopeModule extends ResolutionScope {
   final Module value;
 
   @override
-  int encode() => ((value.position + 1) << 2) | 0;
+  int encode() => ((value.index + 1) << 2) | 0;
 
   @override
   String toString() => 'ResolutionScopeModule($value)';
@@ -767,7 +730,7 @@ final class ResolutionScopeModuleRef extends ResolutionScope {
   final ModuleRef value;
 
   @override
-  int encode() => ((value.position + 1) << 2) | 1;
+  int encode() => ((value.index + 1) << 2) | 1;
 
   @override
   String toString() => 'ResolutionScopeModuleRef($value)';
@@ -781,7 +744,7 @@ final class ResolutionScopeAssemblyRef extends ResolutionScope {
   final AssemblyRef value;
 
   @override
-  int encode() => ((value.position + 1) << 2) | 2;
+  int encode() => ((value.index + 1) << 2) | 2;
 
   @override
   String toString() => 'ResolutionScopeAssemblyRef($value)';
@@ -795,7 +758,7 @@ final class ResolutionScopeTypeRef extends ResolutionScope {
   final TypeRef value;
 
   @override
-  int encode() => ((value.position + 1) << 2) | 3;
+  int encode() => ((value.index + 1) << 2) | 3;
 
   @override
   String toString() => 'ResolutionScopeTypeRef($value)';
@@ -813,14 +776,6 @@ final class ResolutionScopeCompanion
 
 /// Represents a coded index for either a [TypeDef], [TypeRef], or [TypeSpec].
 sealed class TypeDefOrRef implements CodedIndex {
-  /// Creates a [TypeDefOrRef] instance from a [Row].
-  factory TypeDefOrRef(Row value) => switch (value) {
-    TypeDef() => TypeDefOrRefTypeDef(value),
-    TypeRef() => TypeDefOrRefTypeRef(value),
-    TypeSpec() => TypeDefOrRefTypeSpec(value),
-    _ => throw WinmdException('Unsupported value: $value'),
-  };
-
   /// Constructs a [TypeDefOrRef] referencing a [TypeDef].
   const factory TypeDefOrRef.typeDef(TypeDef value) = TypeDefOrRefTypeDef;
 
@@ -868,7 +823,7 @@ final class TypeDefOrRefTypeDef extends TypeDefOrRef {
   final TypeDef value;
 
   @override
-  int encode() => ((value.position + 1) << 2) | 0;
+  int encode() => ((value.index + 1) << 2) | 0;
 
   @override
   String get namespace => value.namespace;
@@ -892,7 +847,7 @@ final class TypeDefOrRefTypeRef extends TypeDefOrRef {
   final TypeRef value;
 
   @override
-  int encode() => ((value.position + 1) << 2) | 1;
+  int encode() => ((value.index + 1) << 2) | 1;
 
   @override
   String get namespace => value.namespace;
@@ -916,7 +871,7 @@ final class TypeDefOrRefTypeSpec extends TypeDefOrRef {
   final TypeSpec value;
 
   @override
-  int encode() => ((value.position + 1) << 2) | 2;
+  int encode() => ((value.index + 1) << 2) | 2;
 
   @override
   String get namespace =>
@@ -944,13 +899,6 @@ final class TypeDefOrRefCompanion extends CodedIndexCompanion<TypeDefOrRef> {
 
 /// Represents a coded index for either a [TypeDef] or a [MethodDef].
 sealed class TypeOrMethodDef implements CodedIndex {
-  /// Creates a [TypeOrMethodDef] instance from a [Row].
-  factory TypeOrMethodDef(Row value) => switch (value) {
-    TypeDef() => TypeOrMethodDefTypeDef(value),
-    MethodDef() => TypeOrMethodDefMethodDef(value),
-    _ => throw WinmdException('Unsupported value: $value'),
-  };
-
   /// Constructs a [TypeOrMethodDef] referencing a [TypeDef].
   const factory TypeOrMethodDef.typeDef(TypeDef value) = TypeOrMethodDefTypeDef;
 
@@ -987,7 +935,7 @@ final class TypeOrMethodDefTypeDef extends TypeOrMethodDef {
   final TypeDef value;
 
   @override
-  int encode() => ((value.position + 1) << 1) | 0;
+  int encode() => ((value.index + 1) << 1) | 0;
 
   @override
   String get name => value.name;
@@ -1004,7 +952,7 @@ final class TypeOrMethodDefMethodDef extends TypeOrMethodDef {
   final MethodDef value;
 
   @override
-  int encode() => ((value.position + 1) << 1) | 1;
+  int encode() => ((value.index + 1) << 1) | 1;
 
   @override
   String get name => value.name;

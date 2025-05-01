@@ -17,7 +17,7 @@ import '../row.dart';
 ///  - **EncId** (GUID Heap Index, reserved, MBZ)
 ///  - **EncBaseId** (GUID Heap Index, reserved, MBZ)
 final class Module extends Row {
-  Module(super.metadataIndex, super.readerIndex, super.position);
+  Module(super.metadataIndex, super.readerIndex, super.index);
 
   @override
   MetadataTable get table => MetadataTable.module;

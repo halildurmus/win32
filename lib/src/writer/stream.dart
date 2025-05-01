@@ -1,7 +1,9 @@
 import 'dart:ffi';
 
+/// See ECMA-335 `§II.25.2.3.2`.
 const sectionAlignment = 4096;
 
+/// See ECMA-335 `§II.24.2.2`.
 final class BlobStreamHeader extends Struct {
   @Uint32()
   external int offset;
@@ -15,6 +17,7 @@ final class BlobStreamHeader extends Struct {
   int get nextOffset => offset + size;
 }
 
+/// See ECMA-335 `§II.24.2.2`.
 final class GuidStreamHeader extends Struct {
   @Uint32()
   external int offset;
@@ -28,6 +31,7 @@ final class GuidStreamHeader extends Struct {
   int get nextOffset => offset + size;
 }
 
+/// See ECMA-335 `§II.24.2.2`.
 final class StringStreamHeader extends Struct {
   @Uint32()
   external int offset;
@@ -41,6 +45,7 @@ final class StringStreamHeader extends Struct {
   int get nextOffset => offset + size;
 }
 
+/// See ECMA-335 `§II.24.2.2`.
 final class TableStreamHeader extends Struct {
   @Uint32()
   external int offset;
@@ -54,6 +59,7 @@ final class TableStreamHeader extends Struct {
   int get nextOffset => offset + size;
 }
 
+/// See ECMA-335 `§II.24.2.2`.
 final class UserStringStreamHeader extends Struct {
   @Uint32()
   external int offset;

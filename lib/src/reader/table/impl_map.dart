@@ -21,7 +21,7 @@ import 'module_ref.dart';
 ///  - **ImportName** (String Heap Index)
 ///  - **ImportScope** (ModuleRef Index)
 final class ImplMap extends Row {
-  ImplMap(super.metadataIndex, super.readerIndex, super.position);
+  ImplMap(super.metadataIndex, super.readerIndex, super.index);
 
   @override
   MetadataTable get table => MetadataTable.implMap;

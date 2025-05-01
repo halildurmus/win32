@@ -19,7 +19,7 @@ import 'constant.dart';
 ///  - **Sequence** (2-byte constant)
 ///  - **Name** (String Heap Index)
 final class Param extends Row with HasCustomAttributes {
-  Param(super.metadataIndex, super.readerIndex, super.position);
+  Param(super.metadataIndex, super.readerIndex, super.index);
 
   @override
   MetadataTable get table => MetadataTable.param;

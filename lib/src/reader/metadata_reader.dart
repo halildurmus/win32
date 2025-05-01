@@ -846,10 +846,7 @@ final class TableData {
   final List<TableColumn> columns;
 
   @pragma('vm:prefer-inline')
-  int get _indexWidth {
-    if (rows < (1 << 16)) return 2;
-    return 4;
-  }
+  int get _indexWidth => rows < 0x10000 ? 2 : 4;
 
   /// Sets the layout for columns based on provided widths.
   void _setColumns(

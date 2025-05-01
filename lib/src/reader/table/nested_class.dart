@@ -15,7 +15,7 @@ import 'type_def.dart';
 ///  - **NestedClass** (TypeDef Index)
 ///  - **EnclosingClass** (TypeDef Index)
 final class NestedClass extends Row {
-  NestedClass(super.metadataIndex, super.readerIndex, super.position);
+  NestedClass(super.metadataIndex, super.readerIndex, super.index);
 
   @override
   MetadataTable get table => MetadataTable.nestedClass;

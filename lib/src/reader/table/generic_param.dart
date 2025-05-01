@@ -20,12 +20,12 @@ import 'generic_param_constraint.dart';
 ///  - **Owner** (TypeOrMethodDef Coded Index)
 ///  - **Name** (String Heap Index)
 final class GenericParam extends Row with HasCustomAttributes {
-  GenericParam(super.metadataIndex, super.readerIndex, super.position);
+  GenericParam(super.metadataIndex, super.readerIndex, super.index);
 
   @override
   MetadataTable get table => MetadataTable.genericParam;
 
-  /// The position of the generic parameter in the parameter list.
+  /// The index of the generic parameter in the parameter list.
   ///
   /// Parameters are numbered sequentially from left to right, starting at zero.
   late final sequence = readUint(0);
@@ -56,10 +56,7 @@ final class GenericParam extends Row with HasCustomAttributes {
   late final name = readString(3);
 
   /// The additional constraints placed on the generic parameter, if any.
-  late final constraints = getEqualRange<GenericParamConstraint>(
-    0,
-    position + 1,
-  );
+  late final constraints = getEqualRange<GenericParamConstraint>(0, index + 1);
 
   @override
   String toString() => constraints.isEmpty

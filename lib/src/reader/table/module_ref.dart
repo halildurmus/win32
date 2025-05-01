@@ -13,7 +13,7 @@ import '../row.dart';
 /// The `ModuleRef` table has the following columns:
 ///  - **Name** (String Heap Index)
 final class ModuleRef extends Row {
-  ModuleRef(super.metadataIndex, super.readerIndex, super.position);
+  ModuleRef(super.metadataIndex, super.readerIndex, super.index);
 
   @override
   MetadataTable get table => MetadataTable.moduleRef;

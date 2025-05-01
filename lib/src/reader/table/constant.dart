@@ -20,7 +20,7 @@ import '../row.dart';
 ///  - **Parent** (HasConstant Coded Index)
 ///  - **Value** (Blob Heap Index)
 final class Constant extends Row {
-  Constant(super.metadataIndex, super.readerIndex, super.position);
+  Constant(super.metadataIndex, super.readerIndex, super.index);
 
   @override
   MetadataTable get table => MetadataTable.constant;

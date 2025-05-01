@@ -17,11 +17,7 @@ import 'generic_param.dart';
 ///  - **Owner** (GenericParam Index)
 ///  - **Constraint** (TypeDefOrRef Coded Index)
 final class GenericParamConstraint extends Row with HasCustomAttributes {
-  GenericParamConstraint(
-    super.metadataIndex,
-    super.readerIndex,
-    super.position,
-  );
+  GenericParamConstraint(super.metadataIndex, super.readerIndex, super.index);
 
   @override
   MetadataTable get table => MetadataTable.genericParamConstraint;

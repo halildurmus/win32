@@ -15,7 +15,7 @@ import 'field.dart';
 ///  - **Offset** (4-byte constant)
 ///  - **Field** (Field Index)
 final class FieldLayout extends Row {
-  FieldLayout(super.metadataIndex, super.readerIndex, super.position);
+  FieldLayout(super.metadataIndex, super.readerIndex, super.index);
 
   @override
   MetadataTable get table => MetadataTable.fieldLayout;

@@ -15,7 +15,7 @@ import '../row.dart';
 /// The `TypeSpec` table has the following columns:
 ///  - **Signature** (Blob Heap Index)
 final class TypeSpec extends Row with HasCustomAttributes {
-  TypeSpec(super.metadataIndex, super.readerIndex, super.position);
+  TypeSpec(super.metadataIndex, super.readerIndex, super.index);
 
   @override
   MetadataTable get table => MetadataTable.typeSpec;
@@ -29,7 +29,7 @@ final class TypeSpec extends Row with HasCustomAttributes {
 
   @override
   String toString() =>
-      'TypeSpec(file: $readerIndex, pos: $position, table: $table)';
+      'TypeSpec(readerIndex: $readerIndex, index: $index, table: $table)';
 }
 
 @internal

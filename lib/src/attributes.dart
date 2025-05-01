@@ -1,3 +1,15 @@
+/// Provides information about an Assembly hash algorithm.
+extension type const AssemblyHashAlgorithm(int _) implements int {
+  /// The assembly hash algorithm is not specified.
+  static const none = AssemblyHashAlgorithm(0);
+
+  /// The assembly hash algorithm is MD5.
+  static const md5 = AssemblyHashAlgorithm(0x8003);
+
+  /// The assembly hash algorithm is SHA-1.
+  static const sha1 = AssemblyHashAlgorithm(0x8004);
+}
+
 /// Provides information about an Assembly reference.
 extension type const AssemblyFlags(int _) implements int {
   /// The assembly reference holds the full (unhashed) public key.

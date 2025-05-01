@@ -23,7 +23,7 @@ import '../row.dart';
 ///  - **Culture** (String Heap Index)
 ///  - **HashValue** (Blob Heap Index)
 final class AssemblyRef extends Row {
-  AssemblyRef(super.metadataIndex, super.readerIndex, super.position);
+  AssemblyRef(super.metadataIndex, super.readerIndex, super.index);
 
   @override
   MetadataTable get table => MetadataTable.assemblyRef;

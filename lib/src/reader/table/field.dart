@@ -21,7 +21,7 @@ import 'type_def.dart';
 ///  - **Name** (String Heap Index)
 ///  - **Signature** (Blob Heap Index)
 final class Field extends Row with HasCustomAttributes {
-  Field(super.metadataIndex, super.readerIndex, super.position);
+  Field(super.metadataIndex, super.readerIndex, super.index);
 
   @override
   MetadataTable get table => MetadataTable.field;
@@ -52,7 +52,7 @@ final class Field extends Row with HasCustomAttributes {
   ).firstOrNull;
 
   /// The layout information for the field, if any.
-  late final layout = getEqualRange<FieldLayout>(1, position + 1).firstOrNull;
+  late final layout = getEqualRange<FieldLayout>(1, index + 1).firstOrNull;
 
   /// The [TypeDef] that owns this field.
   late final parent = getParentRow<TypeDef>(4);

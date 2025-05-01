@@ -26,7 +26,7 @@ import 'param.dart';
 ///  - **Signature** (Blob Heap Index)
 ///  - **ParamList** (Param Index)
 final class MethodDef extends Row with HasCustomAttributes {
-  MethodDef(super.metadataIndex, super.readerIndex, super.position);
+  MethodDef(super.metadataIndex, super.readerIndex, super.index);
 
   @override
   MetadataTable get table => MetadataTable.methodDef;

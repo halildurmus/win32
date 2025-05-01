@@ -96,7 +96,7 @@ void main() async {
           .getEqualRange(
             MetadataTable.implMap,
             1,
-            ((0 /* position */ + 1) << 1) | 1,
+            ((0 /* index */ + 1) << 1) | 1,
           )
           .toList();
       check(range.length).equals(1);

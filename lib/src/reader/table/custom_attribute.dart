@@ -25,7 +25,7 @@ import '../row.dart';
 ///  - **Type** (CustomAttributeType Coded Index)
 ///  - **Value** (Blob Heap Index)
 final class CustomAttribute extends Row {
-  CustomAttribute(super.metadataIndex, super.readerIndex, super.position) {
+  CustomAttribute(super.metadataIndex, super.readerIndex, super.index) {
     final signature = type.signature();
     assert(
       signature.flags == MethodCallFlags.hasThis,

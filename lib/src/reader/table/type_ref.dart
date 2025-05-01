@@ -17,7 +17,7 @@ import '../row.dart';
 ///  - **TypeName** (String Heap Index)
 ///  - **TypeNamespace** (String Heap Index)
 final class TypeRef extends Row with HasCustomAttributes {
-  TypeRef(super.metadataIndex, super.readerIndex, super.position);
+  TypeRef(super.metadataIndex, super.readerIndex, super.index);
 
   @override
   MetadataTable get table => MetadataTable.typeRef;

@@ -2,32 +2,47 @@ import 'dart:collection';
 import 'dart:typed_data';
 
 import '../../compressed_integer.dart';
-import '../id.dart';
-import 'heap.dart';
+import '../index.dart';
+import 'metadata_heap.dart';
 
-final class UserStringHeap extends Heap<String, UserStringId> {
+/// A metadata heap for user-defined strings, stored as UTF-16LE encoded blobs
+/// with a compressed length prefix and an optional trailing byte.
+///
+/// Each string is inserted only once and assigned a one-based index (offset).
+/// The format is:
+/// - A compressed length prefix (including the trailing byte),
+/// - UTF-16LE encoded string content,
+/// - A trailing byte, set to 1 if the string contains non-ASCII characters,
+///   or 0 otherwise.
+final class UserStringHeap extends MetadataHeap<String, UserStringIndex> {
+  /// Creates a [UserStringHeap] with the given [map] and [buffer].
   const UserStringHeap(super.map, super.buffer);
 
+  /// Creates an empty [UserStringHeap] with a pre-inserted empty string at
+  /// offset 0.
+  ///
+  /// This ensures that references to the empty string in metadata always
+  /// resolve to a valid offset, as required by the metadata format.
   UserStringHeap.empty() : super(HashMap(), BytesBuilder()) {
     buffer.addByte(0x00); // Add an empty blob.
   }
 
   @override
-  UserStringId insert(String value) {
-    if (value.isEmpty) return const UserStringId(0);
-    if (map[value] case final value?) return value;
-    final utf16Bytes = _utf16Encode(value);
-    final trailingByte = _needsSpecialHandling(value) ? 1 : 0;
+  UserStringIndex insert(String key) {
+    if (key.isEmpty) return const UserStringIndex(0);
+    if (map[key] case final existing?) return existing;
+    final index = UserStringIndex(buffer.length);
+    final utf16Bytes = _utf16Encode(key);
+    final trailingByte = _needsSpecialHandling(key) ? 1 : 0;
     final blobContent = Uint8List(utf16Bytes.length + 1)
       ..setAll(0, utf16Bytes)
       ..[utf16Bytes.length] = trailingByte;
-    final blobLength = CompressedInteger.encode(blobContent.length);
-    final position = UserStringId(buffer.length);
-    map[value] = position;
+    final header = CompressedInteger.encode(blobContent.length);
+    map[key] = index;
     buffer
-      ..add(blobLength)
+      ..add(header)
       ..add(blobContent);
-    return position;
+    return index;
   }
 
   /// Whether the string contains Unicode characters that require handling

@@ -16,7 +16,7 @@ import 'type_def.dart';
 ///  - **ClassSize** (4-byte constant)
 ///  - **Parent** (TypeDef Index)
 final class ClassLayout extends Row {
-  ClassLayout(super.metadataIndex, super.readerIndex, super.position);
+  ClassLayout(super.metadataIndex, super.readerIndex, super.index);
 
   @override
   MetadataTable get table => MetadataTable.classLayout;

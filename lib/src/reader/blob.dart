@@ -17,7 +17,7 @@ import 'metadata_index.dart';
 /// This class provides functionality to read a byte slice ([slice])
 /// sequentially, decode values, and process metadata related to the blob's
 /// contents. It includes utilities for reading various data types from the
-/// byte slice and tracking the current reading position.
+/// byte slice and tracking the current reading index.
 final class Blob {
   /// Constructs a [Blob] with the specified [metadataIndex], [readerIndex],
   /// and byte [slice].
@@ -27,7 +27,7 @@ final class Blob {
   /// the blob.
   final MetadataIndex metadataIndex;
 
-  /// The reader index that tracks the position in the metadata index.
+  /// The index of the reader in the [metadataIndex].
   final int readerIndex;
 
   /// The slice of raw byte data that represents the contents of the blob.

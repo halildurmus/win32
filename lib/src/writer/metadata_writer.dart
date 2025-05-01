@@ -18,8 +18,27 @@ import 'heap/guid.dart';
 import 'heap/string.dart';
 import 'heap/user_string.dart';
 import 'helpers.dart';
-import 'id.dart';
+import 'index.dart';
 import 'stream.dart';
+import 'table/assembly.dart';
+import 'table/assembly_ref.dart';
+import 'table/class_layout.dart';
+import 'table/constant.dart';
+import 'table/custom_attribute.dart';
+import 'table/field.dart';
+import 'table/field_layout.dart';
+import 'table/generic_param.dart';
+import 'table/impl_map.dart';
+import 'table/interface_impl.dart';
+import 'table/member_ref.dart';
+import 'table/method_def.dart';
+import 'table/module.dart';
+import 'table/module_ref.dart';
+import 'table/nested_class.dart';
+import 'table/param.dart';
+import 'table/type_def.dart';
+import 'table/type_ref.dart';
+import 'table/type_spec.dart';
 import 'table_stream.dart';
 
 final class MetadataWriter {
@@ -31,187 +50,357 @@ final class MetadataWriter {
     int buildNumber = 0xFF,
     int revisionNumber = 0xFF,
     AssemblyFlags flags = AssemblyFlags.windowsRuntime,
+    Guid? mvid,
   }) {
     final writer = MetadataWriter._();
 
     // This assembly.
-    writer.tableStream.assembly.add(
-      AssemblyRecord(
-        name: writer.stringHeap.insert(name),
-        hashAlgId: 0x00008004,
+    writer._tableStream.assembly.add(
+      Assembly(
+        hashAlgId: AssemblyHashAlgorithm.sha1,
         majorVersion: majorVersion,
         minorVersion: minorVersion,
         buildNumber: buildNumber,
         revisionNumber: revisionNumber,
         flags: flags,
+        name: writer._stringHeap.insert(name),
       ),
     );
 
     // This module.
-    writer.tableStream.module.add(
-      ModuleRecord(name: writer.stringHeap.insert(name), mvid: 1),
+    writer._tableStream.module.add(
+      ModuleRecord(
+        name: writer._stringHeap.insert(name),
+        mvid: writer._guidHeap.insert(mvid ?? Guid.generate()),
+      ),
     );
 
     writer
       // Some parsers will fail to read without a "mscorlib" reference implied
       // by "System" types.
-      ..addAssemblyRef('System')
+      ..writeAssemblyRef(namespace: 'System')
       // The parent type of "globals" expected by most parsers.
-      ..addTypeDef('', '<Module>', null, const TypeAttributes(0));
+      ..writeTypeDef(namespace: '', name: '<Module>');
 
     return writer;
   }
 
   MetadataWriter._()
-    : blobHeap = BlobHeap.empty(),
-      guidHeap = GuidHeap.empty()..insert(Guid.generate()),
-      stringHeap = StringHeap.empty(),
-      tableStream = TableStream(),
-      userStringHeap = UserStringHeap.empty(),
-      _typeRefs = HashMap<String, HashMap<String, TypeRef>>(),
-      _assemblyRefs = HashMap<String, AssemblyRef>(),
-      _moduleRefs = HashMap<String, ModuleRef>(),
-      _memberRefs = HashMap<MemberRefRecord, MemberRef>(),
-      _constants = SplayTreeMap<HasConstant, ConstantRecord>(
+    : _blobHeap = BlobHeap.empty(),
+      _guidHeap = GuidHeap.empty(),
+      _stringHeap = StringHeap.empty(),
+      _tableStream = TableStream(),
+      _userStringHeap = UserStringHeap.empty(),
+      _typeRefs = HashMap(),
+      _assemblyRefs = HashMap(),
+      _moduleRefs = HashMap(),
+      _memberRefs = HashMap(),
+      _constants = SplayTreeMap((a, b) => a.encode().compareTo(b.encode())),
+      _customAttributes = SplayTreeMap(
         (a, b) => a.encode().compareTo(b.encode()),
       ),
-      _attributes =
-          SplayTreeMap<HasCustomAttribute, List<CustomAttributeRecord>>(
-            (a, b) => a.encode().compareTo(b.encode()),
-          ),
-      _genericParams = SplayTreeMap<TypeOrMethodDef, List<GenericParamRecord>>(
-        (a, b) => a.encode().compareTo(b.encode()),
-      );
+      _fieldLayouts = SplayTreeMap((a, b) => a.index.compareTo(b.index)),
+      _genericParams = SplayTreeMap((a, b) => a.encode().compareTo(b.encode())),
+      _levelTwoNamespaces = HashSet();
 
-  final BlobHeap blobHeap;
-  final GuidHeap guidHeap;
-  final StringHeap stringHeap;
-  final TableStream tableStream;
-  final UserStringHeap userStringHeap;
+  final BlobHeap _blobHeap;
+  final GuidHeap _guidHeap;
+  final StringHeap _stringHeap;
+  final TableStream _tableStream;
+  final UserStringHeap _userStringHeap;
 
   // Indexes for fast lookup of preexisting rows.
-  final HashMap<String, HashMap<String, TypeRef>> _typeRefs;
-  final HashMap<String, AssemblyRef> _assemblyRefs;
-  final HashMap<String, ModuleRef> _moduleRefs;
-  final HashMap<MemberRefRecord, MemberRef> _memberRefs;
+  final HashMap<String, AssemblyRefIndex> _assemblyRefs;
+  final HashMap<MemberRef, MemberRefIndex> _memberRefs;
+  final HashMap<String, ModuleRefIndex> _moduleRefs;
+  final HashMap<String, HashMap<String, TypeRefIndex>> _typeRefs;
 
-  // Staging for sorted rows before these records can be written.
-  final SplayTreeMap<HasConstant, ConstantRecord> _constants;
-  final SplayTreeMap<HasCustomAttribute, List<CustomAttributeRecord>>
-  _attributes;
-  final SplayTreeMap<TypeOrMethodDef, List<GenericParamRecord>> _genericParams;
+  // Staging for sorted rows before these can be written.
+  final SplayTreeMap<HasConstant, Constant> _constants;
+  final SplayTreeMap<HasCustomAttribute, List<CustomAttribute>>
+  _customAttributes;
+  final SplayTreeMap<FieldIndex, FieldLayout> _fieldLayouts;
+  final SplayTreeMap<TypeOrMethodDef, List<GenericParam>> _genericParams;
 
-  ModuleRef addModuleRef(String name) {
-    if (_moduleRefs[name] case final moduleRef?) return moduleRef;
-    final position = ModuleRef(tableStream.moduleRef.length);
-    tableStream.moduleRef.add(ModuleRefRecord(stringHeap.insert(name)));
-    _moduleRefs[name] = position;
-    return position;
-  }
-
-  void addImplMap(
-    MethodDef method,
-    PInvokeAttributes flags,
-    String importName,
-    String importScope,
-  ) {
-    final scope = addModuleRef(importScope);
-    tableStream.implMap.add(
-      ImplMapRecord(
-        mappingFlags: flags,
-        memberForwarded: MemberForwarded.methodDef(method),
-        importName: stringHeap.insert(importName),
-        importScope: scope,
-      ),
-    );
-  }
+  final HashSet<String> _levelTwoNamespaces;
 
   /// Adds an `AssemblyRef` row representing the given namespace to the file,
   /// returning the row offset.
-  AssemblyRef addAssemblyRef(String namespace) {
-    // This generates a synthetic `AssemblyRef` for every root namespace, but
+  AssemblyRefIndex writeAssemblyRef({required String namespace}) {
+    // This generates a synthetic `AssemblyRef` for every 2 level namespace, but
     // the alternative requires a lot more contextual information.
-    final rootNamespace = namespace.split('.')[0];
-
-    if (_assemblyRefs[rootNamespace] case final assemblyRef?) {
-      return assemblyRef;
+    final rootNamespace = namespace.split('.').take(2).join('.');
+    if (_assemblyRefs.isNotEmpty && rootNamespace.startsWith('System')) {
+      return _assemblyRefs['System']!;
     }
-
-    final position = AssemblyRef(tableStream.assemblyRef.length);
-    final assemblyRef = rootNamespace == 'System'
-        ? AssemblyRefRecord(
-            name: stringHeap.insert('mscorlib'),
+    if (_assemblyRefs[rootNamespace] case final existing?) return existing;
+    final index = AssemblyRefIndex(_tableStream.assemblyRef.length);
+    final assemblyRef = rootNamespace.startsWith('System')
+        ? AssemblyRef(
+            name: _stringHeap.insert('mscorlib'),
             majorVersion: 4,
-            publicKeyOrToken: blobHeap.insert(
+            publicKeyOrToken: _blobHeap.insert(
               Uint8List.fromList([
                 0xB7, 0x7A, 0x5C, 0x56, 0x19, 0x34, 0xE0, 0x89, //
               ]),
             ),
           )
-        : AssemblyRefRecord(
-            name: stringHeap.insert(namespace),
+        : AssemblyRef(
+            name: _stringHeap.insert(rootNamespace),
             majorVersion: 0xFF,
             minorVersion: 0xFF,
             buildNumber: 0xFF,
             revisionNumber: 0xFF,
             flags: AssemblyFlags.windowsRuntime,
           );
-    tableStream.assemblyRef.add(assemblyRef);
-    _assemblyRefs[namespace] = position;
-    return position;
+    _tableStream.assemblyRef.add(assemblyRef);
+    if (rootNamespace.startsWith('System')) {
+      _assemblyRefs['System'] = index;
+    } else {
+      _assemblyRefs[rootNamespace] = index;
+    }
+    return index;
+  }
+
+  void writeClassLayout({
+    required TypeDefIndex parent,
+    int packingSize = 0,
+    int classSize = 0,
+  }) {
+    _tableStream.classLayout.add(
+      ClassLayout(
+        packingSize: packingSize,
+        classSize: classSize,
+        parent: parent,
+      ),
+    );
+  }
+
+  /// Adds a `CustomAttribute` row to the file.
+  ///
+  /// This is a sorted table so the row offset is not yet available.
+  void writeCustomAttribute({
+    required HasCustomAttribute parent,
+    required CustomAttributeType type,
+    List<FixedArg> fixedArgs = const [],
+    List<NamedArg> namedArgs = const [],
+  }) {
+    final value = _writeAttributeValue(fixedArgs, namedArgs);
+    _customAttributes
+        .putIfAbsent(parent, () => [])
+        .add(CustomAttribute(parent: parent, type: type, value: value));
+  }
+
+  /// Adds a `Field` row to the file, returning the row offset.
+  FieldIndex writeField({
+    required String name,
+    required MetadataType type,
+    FieldAttributes flags = const FieldAttributes(0),
+    MetadataValue? defaultValue,
+    int? offset,
+  }) {
+    final signature = _writeFieldSig(type);
+    final index = FieldIndex(_tableStream.field.length);
+    _tableStream.field.add(
+      Field(flags: flags, name: _stringHeap.insert(name), signature: signature),
+    );
+    if (defaultValue != null) {
+      _writeConstant(parent: HasConstant.field(index), value: defaultValue);
+    }
+    if (offset != null) {
+      _fieldLayouts[index] = FieldLayout(offset: offset, field: index);
+    }
+    return index;
+  }
+
+  void writeGenericParam({
+    required int number,
+    required TypeOrMethodDef owner,
+    required String name,
+    GenericParamAttributes flags = const GenericParamAttributes(0),
+  }) {
+    _genericParams
+        .putIfAbsent(owner, () => [])
+        .add(
+          GenericParam(
+            number: number,
+            flags: flags,
+            owner: owner,
+            name: _stringHeap.insert(name),
+          ),
+        );
+  }
+
+  void writeImplMap({
+    required MethodDefIndex method,
+    required String importName,
+    required String importScope,
+    PInvokeAttributes flags = const PInvokeAttributes(0),
+  }) {
+    final scope = writeModuleRef(name: importScope);
+    _tableStream.implMap.add(
+      ImplMap(
+        mappingFlags: flags,
+        memberForwarded: MemberForwarded.methodDef(method),
+        importName: _stringHeap.insert(importName),
+        importScope: scope,
+      ),
+    );
+  }
+
+  InterfaceImplIndex writeInterfaceImpl({
+    required TypeDefIndex class$,
+    required MetadataType interface,
+  }) {
+    if (interface is! NamedType) throw ArgumentError('Invalid interface type');
+    final typeName = interface.typeName;
+    final interfaceType = typeName.generics.isEmpty
+        ? TypeDefOrRef.typeRef(
+            writeTypeRef(namespace: typeName.namespace, name: typeName.name),
+          )
+        : TypeDefOrRef.typeSpec(
+            writeTypeSpec(
+              namespace: typeName.namespace,
+              name: typeName.name,
+              generics: typeName.generics,
+            ),
+          );
+    final index = InterfaceImplIndex(_tableStream.interfaceImpl.length);
+    _tableStream.interfaceImpl.add(
+      InterfaceImpl(class$: class$, interface: interfaceType),
+    );
+    return index;
+  }
+
+  MemberRefIndex writeMemberRef({
+    required MemberRefParent parent,
+    required String name,
+    MethodSignature signature = const MethodSignature(),
+  }) {
+    final methodDefSig = _writeMethodDefSig(signature);
+    final record = MemberRef(
+      parent: parent,
+      name: _stringHeap.insert(name),
+      signature: methodDefSig,
+    );
+    if (_memberRefs[record] case final memberRef?) return memberRef;
+    final index = MemberRefIndex(_tableStream.memberRef.length);
+    _tableStream.memberRef.add(record);
+    _memberRefs[record] = index;
+    return index;
+  }
+
+  /// Adds a `MethodDef` row to the file, returning the row offset.
+  MethodDefIndex writeMethodDef({
+    required String name,
+    MethodSignature signature = const MethodSignature(),
+    MethodAttributes flags = const MethodAttributes(0),
+    MethodImplAttributes implFlags = const MethodImplAttributes(0),
+  }) {
+    final methodDefSig = _writeMethodDefSig(signature);
+    final index = MethodDefIndex(_tableStream.methodDef.length);
+    _tableStream.methodDef.add(
+      MethodDef(
+        rva: 0,
+        implFlags: implFlags,
+        flags: flags,
+        name: _stringHeap.insert(name),
+        signature: methodDefSig,
+        paramList: ParamIndex(_tableStream.param.length),
+      ),
+    );
+    return index;
+  }
+
+  ModuleRefIndex writeModuleRef({required String name}) {
+    if (_moduleRefs[name] case final moduleRef?) return moduleRef;
+    final index = ModuleRefIndex(_tableStream.moduleRef.length);
+    _tableStream.moduleRef.add(ModuleRef(_stringHeap.insert(name)));
+    _moduleRefs[name] = index;
+    return index;
+  }
+
+  void writeNestedClass({
+    required TypeDefIndex inner,
+    required TypeDefIndex outer,
+  }) {
+    assert(
+      inner.index > outer.index,
+      'Expected inner class index "${inner.index}" to be greater than outer '
+      'class index "${outer.index}".',
+    );
+    _tableStream.nestedClass.add(
+      NestedClass(nestedClass: inner, enclosingClass: outer),
+    );
+  }
+
+  /// Adds a `Param` row to the file, returning the row offset.
+  ParamIndex writeParam({
+    required int sequence,
+    required String name,
+    ParamAttributes flags = const ParamAttributes(0),
+  }) {
+    final index = ParamIndex(_tableStream.param.length);
+    _tableStream.param.add(
+      Param(flags: flags, sequence: sequence, name: _stringHeap.insert(name)),
+    );
+    return index;
   }
 
   /// Adds a `TypeDef` row to the file, returning the row offset.
-  TypeDef addTypeDef(
-    String namespace,
-    String name,
-    TypeDefOrRef? extend,
-    TypeAttributes flags,
-  ) {
-    final position = TypeDef(tableStream.typeDef.length);
-    tableStream.typeDef.add(
-      TypeDefRecord(
-        name: stringHeap.insert(name),
-        namespace: stringHeap.insert(namespace),
+  TypeDefIndex writeTypeDef({
+    required String namespace,
+    required String name,
+    TypeAttributes flags = const TypeAttributes(0),
+    TypeDefOrRef extends$ = TypeDefOrRef.none,
+  }) {
+    if (namespace.contains('.')) {
+      _levelTwoNamespaces.add(namespace.split('.').take(2).join('.'));
+    }
+    final index = TypeDefIndex(_tableStream.typeDef.length);
+    _tableStream.typeDef.add(
+      TypeDef(
         flags: flags,
-        extend: extend ?? TypeDefOrRef.none,
-        fieldList: tableStream.field.length,
-        methodList: tableStream.methodDef.length,
+        name: _stringHeap.insert(name),
+        namespace: _stringHeap.insert(namespace),
+        extends$: extends$,
+        fieldList: FieldIndex(_tableStream.field.length),
+        methodList: MethodDefIndex(_tableStream.methodDef.length),
       ),
     );
-    return position;
+    return index;
   }
 
   /// Adds a `TypeRef` row to the file, returning the row offset.
-  TypeRef addTypeRef(String namespace, String name) {
+  TypeRefIndex writeTypeRef({required String name, String namespace = ''}) {
     if (_typeRefs[namespace]?[name] case final typeRef?) return typeRef;
-
-    final position = TypeRef(tableStream.typeRef.length);
-    final scope = ResolutionScope.assemblyRef(addAssemblyRef(namespace));
-    tableStream.typeRef.add(
-      TypeRefRecord(
-        name: stringHeap.insert(name),
-        namespace: stringHeap.insert(namespace),
+    final index = TypeRefIndex(_tableStream.typeRef.length);
+    final scope = ResolutionScope.assemblyRef(
+      writeAssemblyRef(namespace: namespace),
+    );
+    _tableStream.typeRef.add(
+      TypeRef(
         resolutionScope: scope,
+        name: _stringHeap.insert(name),
+        namespace: _stringHeap.insert(namespace),
       ),
     );
     _typeRefs
         .putIfAbsent(namespace, HashMap.new)
-        .putIfAbsent(name, () => position);
-
-    return position;
+        .putIfAbsent(name, () => index);
+    return index;
   }
 
-  TypeSpec addTypeSpec(
-    String namespace,
-    String name,
-    List<MetadataType> generics,
-  ) {
+  TypeSpecIndex writeTypeSpec({
+    required String name,
+    String namespace = '',
+    List<MetadataType> generics = const [],
+  }) {
     assert(
       generics.isNotEmpty,
       'Expected generics to be non-empty, got $generics.',
     );
-    final typeRef = addTypeRef(namespace, name);
+    final typeRef = writeTypeRef(namespace: namespace, name: name);
     final buffer = BytesBuilder()
       ..addByte(ELEMENT_TYPE_GENERICINST)
       ..addByte(ELEMENT_TYPE_CLASS)
@@ -220,165 +409,11 @@ final class MetadataWriter {
     for (final type in generics) {
       _encodeType(type, buffer);
     }
-    final position = TypeSpec(tableStream.typeSpec.length);
-    tableStream.typeSpec.add(
-      TypeSpecRecord(signature: blobHeap.insert(buffer.takeBytes())),
+    final index = TypeSpecIndex(_tableStream.typeSpec.length);
+    _tableStream.typeSpec.add(
+      TypeSpec(signature: _blobHeap.insert(buffer.takeBytes())),
     );
-    return position;
-  }
-
-  /// Adds a `Field` row to the file, returning the row offset.
-  Field addField(String name, MetadataType type, FieldAttributes flags) {
-    final signature = _writeFieldSig(type);
-    final position = Field(tableStream.field.length);
-    tableStream.field.add(
-      FieldRecord(
-        name: stringHeap.insert(name),
-        flags: flags,
-        signature: signature,
-      ),
-    );
-    return position;
-  }
-
-  /// Adds a `MethodDef` row to the file, returning the row offset.
-  MethodDef addMethodDef(
-    String name,
-    MethodSignature signature,
-    MethodAttributes flags,
-    MethodImplAttributes implFlags,
-  ) {
-    final methodDefSig = _writeMethodDefSig(signature);
-    final position = MethodDef(tableStream.methodDef.length);
-    tableStream.methodDef.add(
-      MethodDefRecord(
-        rva: 0,
-        implFlags: implFlags,
-        flags: flags,
-        name: stringHeap.insert(name),
-        signature: methodDefSig,
-        paramList: tableStream.param.length,
-      ),
-    );
-    return position;
-  }
-
-  MemberRef addMemberRef(
-    String name,
-    MethodSignature signature,
-    MemberRefParent parent,
-  ) {
-    final methodDefSig = _writeMethodDefSig(signature);
-    final record = MemberRefRecord(
-      name: stringHeap.insert(name),
-      signature: methodDefSig,
-      parent: parent,
-    );
-
-    if (_memberRefs[record] case final memberRef?) return memberRef;
-
-    final position = MemberRef(tableStream.memberRef.length);
-    tableStream.memberRef.add(record);
-    _memberRefs[record] = position;
-    return position;
-  }
-
-  /// Adds a `Param` row to the file, returning the row offset.
-  Param addParam(String name, int sequence, ParamAttributes flags) {
-    final position = Param(tableStream.param.length);
-    tableStream.param.add(
-      ParamRecord(
-        flags: flags,
-        sequence: sequence,
-        name: stringHeap.insert(name),
-      ),
-    );
-    return position;
-  }
-
-  /// Adds a `CustomAttribute` row to the file.
-  ///
-  /// This is a sorted table so the row offset is not yet available.
-  void addCustomAttribute(
-    HasCustomAttribute parent,
-    CustomAttributeType type,
-    List<FixedArg> fixedArgs,
-    List<NamedArg> namedArgs,
-  ) {
-    final attributeValue = _writeAttributeValue(fixedArgs, namedArgs);
-    _attributes
-        .putIfAbsent(parent, () => [])
-        .add(
-          CustomAttributeRecord(
-            parent: parent,
-            type: type,
-            value: attributeValue,
-          ),
-        );
-  }
-
-  void addConstant(HasConstant parent, MetadataValue value) {
-    final type = value.type.code;
-    final constantValue = _writeConstantValue(value);
-    _constants[parent] = ConstantRecord(
-      parent: parent,
-      type: type,
-      value: constantValue,
-    );
-  }
-
-  void addGenericParam(
-    String name,
-    TypeOrMethodDef owner,
-    int number,
-    GenericParamAttributes flags,
-  ) {
-    _genericParams
-        .putIfAbsent(owner, () => [])
-        .add(
-          GenericParamRecord(
-            name: stringHeap.insert(name),
-            number: number,
-            owner: owner,
-            flags: flags,
-          ),
-        );
-  }
-
-  void addClassLayout(TypeDef parent, int packingSize, int classSize) {
-    tableStream.classLayout.add(
-      ClassLayoutRecord(
-        packingSize: packingSize,
-        classSize: classSize,
-        parent: parent.value,
-      ),
-    );
-  }
-
-  void addNestedClass(TypeDef inner, TypeDef outer) {
-    assert(
-      inner.value > outer.value,
-      'Expected inner class ${inner.value} to be greater than outer '
-      'class ${outer.value}.',
-    );
-    tableStream.nestedClass.add(
-      NestedClassRecord(nestedClass: inner.value, enclosingClass: outer.value),
-    );
-  }
-
-  InterfaceImpl addInterfaceImpl(TypeDef class$, MetadataType interface) {
-    if (interface is! NamedType) throw ArgumentError('Invalid interface type');
-    final typeName = interface.typeName;
-    final interfaceType = typeName.generics.isEmpty
-        ? TypeDefOrRef.typeRef(addTypeRef(typeName.namespace, typeName.name))
-        : TypeDefOrRef.typeSpec(
-            addTypeSpec(typeName.namespace, typeName.name, typeName.generics),
-          );
-    final position = InterfaceImpl(tableStream.interfaceImpl.length);
-    tableStream.interfaceImpl.add(
-      InterfaceImplRecord(class$: class$, interface: interfaceType),
-    );
-    return position;
+    return index;
   }
 
   /// Encodes the `Type` in the buffer.
@@ -449,12 +484,12 @@ final class MetadataWriter {
         _encodeType(element, buffer);
       case ConstReferenceType(:final element):
         buffer.add(CompressedInteger.encode(ELEMENT_TYPE_CMOD_REQD));
-        final position = addTypeRef(
-          'System.Runtime.CompilerServices',
-          'IsConst',
+        final index = writeTypeRef(
+          namespace: 'System.Runtime.CompilerServices',
+          name: 'IsConst',
         );
         buffer.add(
-          CompressedInteger.encode(TypeDefOrRef.typeRef(position).encode()),
+          CompressedInteger.encode(TypeDefOrRef.typeRef(index).encode()),
         );
         _encodeType(element, buffer);
       case GenericParameterType(:final code, :final parameterIndex):
@@ -467,12 +502,12 @@ final class MetadataWriter {
         _encodeType(pointee, buffer);
       case ConstPointerType(:final pointee, :final depth):
         buffer.add(CompressedInteger.encode(ELEMENT_TYPE_CMOD_REQD));
-        final position = addTypeRef(
-          'System.Runtime.CompilerServices',
-          'IsConst',
+        final index = writeTypeRef(
+          namespace: 'System.Runtime.CompilerServices',
+          name: 'IsConst',
         );
         buffer.add(
-          CompressedInteger.encode(TypeDefOrRef.typeRef(position).encode()),
+          CompressedInteger.encode(TypeDefOrRef.typeRef(index).encode()),
         );
         for (var i = 0; i < depth; i++) {
           buffer.add(CompressedInteger.encode(ELEMENT_TYPE_PTR));
@@ -481,58 +516,7 @@ final class MetadataWriter {
     }
   }
 
-  void _writeTypeName(
-    String namespace,
-    String name,
-    List<MetadataType> generics,
-    BytesBuilder buffer,
-  ) {
-    if (generics.isNotEmpty) {
-      buffer.addByte(ELEMENT_TYPE_GENERICINST);
-    }
-
-    final position = addTypeRef(namespace, name);
-    // Technically this should be ELEMENT_TYPE_CLASS if the type is not a value
-    // type but that requires more contextual information.
-    buffer
-      ..addByte(ELEMENT_TYPE_VALUETYPE)
-      ..add(CompressedInteger.encode(TypeDefOrRef.typeRef(position).encode()));
-
-    if (generics.isNotEmpty) {
-      buffer.add(CompressedInteger.encode(generics.length));
-      for (final type in generics) {
-        _encodeType(type, buffer);
-      }
-    }
-  }
-
-  /// Writes the `Type` into a `FileSig` buffer and stores it in the file,
-  /// returning the blob offset.
-  BlobId _writeFieldSig(MetadataType type) {
-    final buffer = BytesBuilder()..addByte(0x6); // FIELD
-    _encodeType(type, buffer);
-    return blobHeap.insert(buffer.takeBytes());
-  }
-
-  /// Writes the method signature into a `MethodDefSig` buffer and stores it in
-  /// the file, returning the blob offset.
-  BlobId _writeMethodDefSig(MethodSignature signature) {
-    final buffer = BytesBuilder()
-      ..addByte(signature.flags)
-      ..add(CompressedInteger.encode(signature.types.length));
-    _encodeType(signature.returnType, buffer);
-    for (final type in signature.types) {
-      _encodeType(type, buffer);
-    }
-    return blobHeap.insert(buffer.takeBytes());
-  }
-
-  BlobId _writeConstantValue(MetadataValue value) {
-    final buffer = BytesBuilder()..writeValue(value);
-    return blobHeap.insert(buffer.takeBytes());
-  }
-
-  BlobId _writeAttributeValue(
+  BlobIndex _writeAttributeValue(
     List<FixedArg> fixedArgs,
     List<NamedArg> namedArgs,
   ) {
@@ -561,47 +545,143 @@ final class MetadataWriter {
         ..writeValue(value);
     }
 
-    return blobHeap.insert(buffer.takeBytes());
+    return _blobHeap.insert(buffer.takeBytes());
+  }
+
+  void _writeConstant({
+    required HasConstant parent,
+    required MetadataValue value,
+  }) {
+    final type = value.type.code;
+    final constantValue = _writeConstantValue(value);
+    _constants[parent] = Constant(
+      type: type,
+      parent: parent,
+      value: constantValue,
+    );
+  }
+
+  BlobIndex _writeConstantValue(MetadataValue value) {
+    final buffer = BytesBuilder()..writeValue(value);
+    return _blobHeap.insert(buffer.takeBytes());
+  }
+
+  /// Writes the [type] into a `FieldSig` and stores it in the blob heap,
+  /// returning the blob index.
+  BlobIndex _writeFieldSig(MetadataType type) {
+    final buffer = BytesBuilder()..addByte(0x6); // FIELD
+    _encodeType(type, buffer);
+    return _blobHeap.insert(buffer.takeBytes());
+  }
+
+  /// Writes the method [signature] into a `MethodDefSig` and stores it in the
+  /// blob heap, returning the blob index.
+  BlobIndex _writeMethodDefSig(MethodSignature signature) {
+    final buffer = BytesBuilder()
+      ..addByte(signature.flags)
+      ..add(CompressedInteger.encode(signature.types.length));
+    _encodeType(signature.returnType, buffer);
+    for (final type in signature.types) {
+      _encodeType(type, buffer);
+    }
+    return _blobHeap.insert(buffer.takeBytes());
+  }
+
+  void _writeTypeName(
+    String namespace,
+    String name,
+    List<MetadataType> generics,
+    BytesBuilder buffer,
+  ) {
+    if (generics.isNotEmpty) {
+      buffer.addByte(ELEMENT_TYPE_GENERICINST);
+    }
+
+    final index = writeTypeRef(namespace: namespace, name: name);
+    // Technically this should be ELEMENT_TYPE_CLASS if the type is not a value
+    // type but that requires more contextual information.
+    buffer
+      ..addByte(ELEMENT_TYPE_VALUETYPE)
+      ..add(CompressedInteger.encode(TypeDefOrRef.typeRef(index).encode()));
+
+    if (generics.isNotEmpty) {
+      buffer.add(CompressedInteger.encode(generics.length));
+      for (final type in generics) {
+        _encodeType(type, buffer);
+      }
+    }
   }
 
   Uint8List toBytes() {
-    // Flatten sorted records...
-    tableStream.constant.addAll(_constants.values);
-    tableStream.customAttribute.addAll(_attributes.values.expand((e) => e));
-    tableStream.genericParam.addAll(_genericParams.values.expand((e) => e));
+    // Remove redundant assembly references.
+    final indexesToRemove = <int>[];
+    var removedAssemblyRefs = 0;
+    for (final MapEntry(key: assemblyRefName, value: AssemblyRefIndex(:index))
+        in _assemblyRefs.entries) {
+      if (index == 0) continue; // Skip the `mscorlib` assembly reference.
+      if (_levelTwoNamespaces.contains(assemblyRefName)) {
+        indexesToRemove.add(index);
+      }
+    }
+    indexesToRemove.sort();
+    for (final index in indexesToRemove) {
+      _tableStream.assemblyRef.rows.removeAt(index - removedAssemblyRefs);
+      removedAssemblyRefs++;
+    }
+
+    // Flatten sorted rows...
+    _tableStream.constant.addAll(_constants.values);
+    _tableStream.customAttribute.addAll(
+      _customAttributes.values.expand((e) => e),
+    );
+    _tableStream.fieldLayout.addAll(_fieldLayouts.values);
+    _tableStream.genericParam.addAll(_genericParams.values.expand((e) => e));
 
     // Test sorted order...
     assert(
-      _isSorted(tableStream.classLayout.map((r) => r.parent)),
+      _isSorted(_tableStream.classLayout.rows.map((r) => r.parent.index)),
       'ClassLayout.parent is not sorted',
     );
     assert(
-      _isSorted(tableStream.constant.map((r) => r.parent.encode())),
+      _isSorted(_tableStream.constant.rows.map((r) => r.parent.encode())),
       'Constant.parent is not sorted',
     );
     assert(
-      _isSorted(tableStream.customAttribute.map((r) => r.parent.encode())),
+      _isSorted(
+        _tableStream.customAttribute.rows.map((r) => r.parent.encode()),
+      ),
       'CustomAttribute.parent is not sorted',
     );
     assert(
-      _isSorted(tableStream.genericParam.map((r) => r.owner.encode())),
+      _isSorted(_tableStream.fieldLayout.rows.map((r) => r.field.index)),
+      'FieldLayout.field is not sorted',
+    );
+    assert(
+      _isSorted(_tableStream.genericParam.rows.map((r) => r.owner.encode())),
       'GenericParam.owner is not sorted',
     );
     assert(
-      _isSorted(tableStream.implMap.map((r) => r.memberForwarded.encode())),
+      _isSorted(
+        _tableStream.implMap.rows.map((r) => r.memberForwarded.encode()),
+      ),
       'ImplMap.memberForwarded is not sorted',
     );
     assert(
-      _isSorted(tableStream.nestedClass.map((r) => r.nestedClass)),
+      _isSorted(_tableStream.nestedClass.rows.map((r) => r.nestedClass.index)),
       'NestedClass.nestedClass is not sorted',
     );
 
     // Serialize...
-    final blobHeapBytes = blobHeap.toBytes();
-    final guidHeapBytes = guidHeap.toBytes();
-    final stringHeapBytes = stringHeap.toBytes();
-    final tableStreamBytes = tableStream.toBytes();
-    final userStringHeapBytes = userStringHeap.toBytes();
+    final blobHeapBytes = _blobHeap.toBytes();
+    final guidHeapBytes = _guidHeap.toBytes();
+    final stringHeapBytes = _stringHeap.toBytes();
+    _tableStream.setHeapSizes(
+      blobHeapSize: blobHeapBytes.length,
+      guidHeapSize: guidHeapBytes.length,
+      stringHeapSize: blobHeapBytes.length,
+    );
+    final tableStreamBytes = _tableStream.toBytes();
+    final userStringHeapBytes = _userStringHeap.toBytes();
 
     if ([
       blobHeapBytes.length,
@@ -695,9 +775,9 @@ final class MetadataWriter {
         sizeOfStreamHeaders +
         sizeOfStreams;
 
-    optional.SizeOfImage = round(sizeOfImage, optional.SectionAlignment);
+    optional.SizeOfImage = alignTo(sizeOfImage, optional.SectionAlignment);
     section.Misc.VirtualSize = sizeOfImage - optional.FileAlignment;
-    section.SizeOfRawData = round(
+    section.SizeOfRawData = alignTo(
       section.Misc.VirtualSize,
       optional.FileAlignment,
     );

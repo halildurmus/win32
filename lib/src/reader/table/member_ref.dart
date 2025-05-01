@@ -19,7 +19,7 @@ import '../row.dart';
 ///  - **Name** (String Heap Index)
 ///  - **Signature** (Blob Heap Index)
 final class MemberRef extends Row with HasCustomAttributes {
-  MemberRef(super.metadataIndex, super.readerIndex, super.position);
+  MemberRef(super.metadataIndex, super.readerIndex, super.index);
 
   @override
   MetadataTable get table => MetadataTable.memberRef;

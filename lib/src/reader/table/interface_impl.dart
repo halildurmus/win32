@@ -18,7 +18,7 @@ import 'type_def.dart';
 ///  - **Class** (TypeDef Index)
 ///  - **Interface** (TypeDefOrRef Coded Index)
 final class InterfaceImpl extends Row with HasCustomAttributes {
-  InterfaceImpl(super.metadataIndex, super.readerIndex, super.position);
+  InterfaceImpl(super.metadataIndex, super.readerIndex, super.index);
 
   @override
   MetadataTable get table => MetadataTable.interfaceImpl;

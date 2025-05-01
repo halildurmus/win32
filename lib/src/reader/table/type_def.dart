@@ -29,7 +29,7 @@ import 'nested_class.dart';
 ///  - **FieldList** (Field Index)
 ///  - **MethodList** (MethodDef Index)
 final class TypeDef extends Row with HasCustomAttributes {
-  TypeDef(super.metadataIndex, super.readerIndex, super.position);
+  TypeDef(super.metadataIndex, super.readerIndex, super.index);
 
   @override
   MetadataTable get table => MetadataTable.typeDef;
@@ -99,16 +99,13 @@ final class TypeDef extends Row with HasCustomAttributes {
   );
 
   /// The list of interfaces implemented by the type, if any.
-  late final interfaceImpls = getEqualRange<InterfaceImpl>(0, position + 1);
+  late final interfaceImpls = getEqualRange<InterfaceImpl>(0, index + 1);
 
   /// The class layout associated with the type, if any.
-  late final classLayout = getEqualRange<ClassLayout>(
-    2,
-    position + 1,
-  ).firstOrNull;
+  late final classLayout = getEqualRange<ClassLayout>(2, index + 1).firstOrNull;
 
   /// The nested class associated with the type, if any.
-  late final nested = getEqualRange<NestedClass>(1, position + 1).firstOrNull;
+  late final nested = getEqualRange<NestedClass>(1, index + 1).firstOrNull;
 
   /// The category of the type, which could be a class, interface, enum, struct,
   /// delegate, or attribute.

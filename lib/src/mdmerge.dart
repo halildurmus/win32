@@ -10,7 +10,7 @@ import 'reader/metadata_reader.dart';
 import 'reader/table/type_def.dart';
 import 'reader/type_category.dart';
 import 'writer/codes.dart';
-import 'writer/id.dart' as id show TypeDef;
+import 'writer/index.dart';
 import 'writer/metadata_writer.dart';
 
 /// Merges multiple Windows Metadata (.winmd) files into a single output file.
@@ -87,12 +87,12 @@ void _writeType(
   MetadataWriter writer,
   MetadataIndex index,
   TypeDef def,
-  id.TypeDef? outer,
+  TypeDefIndex? outer,
 ) {
   final TypeDefOrRef extends$;
   if (def.extends$ case final extends_?) {
     extends$ = TypeDefOrRef.typeRef(
-      writer.addTypeRef(extends_.namespace, extends_.name),
+      writer.writeTypeRef(namespace: extends_.namespace, name: extends_.name),
     );
   } else {
     extends$ = TypeDefOrRef.none;
@@ -103,22 +103,25 @@ void _writeType(
     'Namespace must be empty for nested types.',
   );
 
-  final typeDef = writer.addTypeDef(
-    def.namespace,
-    def.name,
-    extends$,
-    def.flags,
+  final typeDef = writer.writeTypeDef(
+    namespace: def.namespace,
+    name: def.name,
+    flags: def.flags,
+    extends$: extends$,
   );
 
   if (outer != null) {
-    writer.addNestedClass(typeDef, outer);
+    writer.writeNestedClass(inner: typeDef, outer: outer);
   }
 
   for (final field in def.fields) {
-    final fieldRef = writer.addField(field.name, field.type, field.flags);
-    if (field.constant case final constant?) {
-      writer.addConstant(HasConstant.field(fieldRef), constant.value!);
-    }
+    final fieldRef = writer.writeField(
+      flags: field.flags,
+      name: field.name,
+      type: field.type,
+      defaultValue: field.constant?.value,
+      offset: field.layout?.offset,
+    );
     _writeAttributes(writer, HasCustomAttribute.field(fieldRef), field);
   }
 
@@ -128,16 +131,19 @@ void _writeType(
       .map((param) => GenericParameterType(param.sequence))
       .toList();
   for (final impl in def.interfaceImpls) {
-    final implRef = writer.addInterfaceImpl(typeDef, impl.interface(generics));
+    final implRef = writer.writeInterfaceImpl(
+      class$: typeDef,
+      interface: impl.interface(generics),
+    );
     _writeAttributes(writer, HasCustomAttribute.interfaceImpl(implRef), impl);
   }
 
   for (final generic in def.generics) {
-    writer.addGenericParam(
-      generic.name,
-      TypeOrMethodDef.typeDef(typeDef),
-      generic.sequence,
-      generic.flags,
+    writer.writeGenericParam(
+      number: generic.sequence,
+      flags: generic.flags,
+      owner: TypeOrMethodDef.typeDef(typeDef),
+      name: generic.name,
     );
   }
 
@@ -146,32 +152,40 @@ void _writeType(
       def.flags.has(TypeAttributes.windowsRuntime);
 
   for (final method in def.methods) {
-    final methodRef = writer.addMethodDef(
-      method.name,
-      method.signature(generics),
-      method.flags,
-      method.implFlags,
+    final methodRef = writer.writeMethodDef(
+      implFlags: method.implFlags,
+      flags: method.flags,
+      name: method.name,
+      signature: method.signature(generics),
     );
 
     for (final param in method.params) {
-      final paramRef = writer.addParam(param.name, param.sequence, param.flags);
+      final paramRef = writer.writeParam(
+        flags: param.flags,
+        sequence: param.sequence,
+        name: param.name,
+      );
       _writeAttributes(writer, HasCustomAttribute.param(paramRef), param);
     }
 
     _writeAttributes(writer, HasCustomAttribute.methodDef(methodRef), method);
 
     if (method.implMap case final implMap? when !isWinRTClass) {
-      writer.addImplMap(
-        methodRef,
-        implMap.flags,
-        implMap.importName,
-        implMap.importScope.name,
+      writer.writeImplMap(
+        method: methodRef,
+        flags: implMap.flags,
+        importName: implMap.importName,
+        importScope: implMap.importScope.name,
       );
     }
   }
 
   if (def.classLayout case final layout?) {
-    writer.addClassLayout(typeDef, layout.packingSize, layout.classSize);
+    writer.writeClassLayout(
+      packingSize: layout.packingSize,
+      classSize: layout.classSize,
+      parent: typeDef,
+    );
   }
 
   for (final nestedDef in index.nestedTypes(def)) {
@@ -192,18 +206,18 @@ void _writeAttributes<R extends HasCustomAttributes>(
     final ctor = attr.type;
     final type = ctor.parent;
     final attributeRef = MemberRefParent.typeRef(
-      writer.addTypeRef(type.namespace, type.name),
+      writer.writeTypeRef(namespace: type.namespace, name: type.name),
     );
-    final ctorRef = writer.addMemberRef(
-      '.ctor',
-      ctor.signature(),
-      attributeRef,
+    final ctorRef = writer.writeMemberRef(
+      parent: attributeRef,
+      name: '.ctor',
+      signature: ctor.signature(),
     );
-    writer.addCustomAttribute(
-      parent,
-      CustomAttributeType.memberRef(ctorRef),
-      attr.fixedArgs,
-      attr.namedArgs,
+    writer.writeCustomAttribute(
+      parent: parent,
+      type: CustomAttributeType.memberRef(ctorRef),
+      fixedArgs: attr.fixedArgs,
+      namedArgs: attr.namedArgs,
     );
   }
 }
