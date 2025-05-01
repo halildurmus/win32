@@ -74,37 +74,6 @@ final class Constant extends Row {
     };
   }();
 
-  /// Returns the value as a [bool] if possible, otherwise `null`.
-  late final valueAsBool = switch (value) {
-    BoolValue(:final value) => value,
-    _ => null,
-  };
-
-  /// Returns the value as a [double] if possible, otherwise `null`.
-  late final valueAsDouble = switch (value) {
-    Float32Value(:final value) || Float64Value(:final value) => value,
-    _ => null,
-  };
-
-  /// Returns the value as an [int] if possible, otherwise `null`.
-  late final valueAsInt = switch (value) {
-    Int8Value(:final value) ||
-    Uint8Value(:final value) ||
-    Int16Value(:final value) ||
-    Uint16Value(:final value) ||
-    Int32Value(:final value) ||
-    Uint32Value(:final value) ||
-    Int64Value(:final value) ||
-    Uint64Value(:final value) => value,
-    _ => null,
-  };
-
-  /// Returns the value as a [String] if possible, otherwise `null`.
-  late final valueAsString = switch (value) {
-    Utf8StringValue(:final value) || Utf16StringValue(:final value) => value,
-    _ => null,
-  };
-
   @override
   String toString() => 'Constant(value: $value)';
 }
@@ -118,4 +87,37 @@ final class ConstantCompanion extends RowCompanion<Constant> {
 
   @override
   MetadataTable get table => MetadataTable.constant;
+}
+
+extension ConstantExtension on Constant {
+  /// Returns the value as a [bool] if possible, otherwise `null`.
+  bool? get valueAsBool => switch (value) {
+    BoolValue(:final value) => value,
+    _ => null,
+  };
+
+  /// Returns the value as a [double] if possible, otherwise `null`.
+  double? get valueAsDouble => switch (value) {
+    Float32Value(:final value) || Float64Value(:final value) => value,
+    _ => null,
+  };
+
+  /// Returns the value as an [int] if possible, otherwise `null`.
+  int? get valueAsInt => switch (value) {
+    Int8Value(:final value) ||
+    Uint8Value(:final value) ||
+    Int16Value(:final value) ||
+    Uint16Value(:final value) ||
+    Int32Value(:final value) ||
+    Uint32Value(:final value) ||
+    Int64Value(:final value) ||
+    Uint64Value(:final value) => value,
+    _ => null,
+  };
+
+  /// Returns the value as a [String] if possible, otherwise `null`.
+  String? get valueAsString => switch (value) {
+    Utf8StringValue(:final value) || Utf16StringValue(:final value) => value,
+    _ => null,
+  };
 }

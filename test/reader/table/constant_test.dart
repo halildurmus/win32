@@ -23,6 +23,7 @@ void main() async {
       check(constant!.type).isA<Int8Type>();
       check(constant.parent.name).equals('PFD_UNDERLAY_PLANE');
       check(constant.value).equals(const Int8Value(-1));
+      check(constant.valueAsInt).isNotNull().equals(-1);
     });
 
     test('Uint8', () {
@@ -35,6 +36,7 @@ void main() async {
       check(constant!.type).isA<Uint8Type>();
       check(constant.parent.name).equals('ELEMENT_TYPE_STRING');
       check(constant.value).equals(const Uint8Value(14));
+      check(constant.valueAsInt).isNotNull().equals(14);
     });
 
     test('Int16', () {
@@ -47,6 +49,7 @@ void main() async {
       check(constant!.type).isA<Int16Type>();
       check(constant.parent.name).equals('VARIANT_TRUE');
       check(constant.value).equals(const Int16Value(-1));
+      check(constant.valueAsInt).isNotNull().equals(-1);
     });
 
     test('Uint16', () {
@@ -59,6 +62,7 @@ void main() async {
       check(constant!.type).isA<Uint16Type>();
       check(constant.parent.name).equals('VT_VARIANT');
       check(constant.value).equals(const Uint16Value(12));
+      check(constant.valueAsInt).isNotNull().equals(12);
     });
 
     test('Int32', () {
@@ -71,6 +75,7 @@ void main() async {
       check(constant!.type).isA<Int32Type>();
       check(constant.parent.name).equals('STATUS_ACCESS_DENIED');
       check(constant.value).equals(const Int32Value(-1073741790));
+      check(constant.valueAsInt).isNotNull().equals(-1073741790);
     });
 
     test('Uint32', () {
@@ -83,6 +88,7 @@ void main() async {
       check(constant!.type).isA<Uint32Type>();
       check(constant.parent.name).equals('MIXERCONTROL_CONTROLTYPE_DECIBELS');
       check(constant.value).equals(const Uint32Value(805568512));
+      check(constant.valueAsInt).isNotNull().equals(805568512);
     });
 
     test('Int64', () {
@@ -95,6 +101,7 @@ void main() async {
       check(constant!.type).isA<Int64Type>();
       check(constant.parent.name).equals('sdExecute');
       check(constant.value).equals(const Int64Value(1610612768));
+      check(constant.valueAsInt).isNotNull().equals(1610612768);
     });
 
     test('Uint64', () {
@@ -104,6 +111,7 @@ void main() async {
       check(constant!.type).isA<Uint64Type>();
       check(constant.parent.name).equals('MAXLSN');
       check(constant.value).equals(const Uint64Value(9223372036854775807));
+      check(constant.valueAsInt).isNotNull().equals(9223372036854775807);
     });
 
     test('Float32', () {
@@ -116,6 +124,7 @@ void main() async {
       check(constant!.type).isA<Float32Type>();
       check(constant.parent.name).equals('D3D11_MIP_LOD_BIAS_MIN');
       check(constant.value).equals(const Float32Value(-16));
+      check(constant.valueAsDouble).isNotNull().equals(-16);
     });
 
     test('Float64', () {
@@ -128,6 +137,7 @@ void main() async {
       check(constant!.type).isA<Float64Type>();
       check(constant.parent.name).equals('AUDIO_MIN_FRAMERATE');
       check(constant.value).equals(const Float64Value(10));
+      check(constant.valueAsDouble).isNotNull().equals(10);
     });
 
     test('Utf16String', () {
@@ -142,6 +152,9 @@ void main() async {
       check(
         constant.value,
       ).equals(const Utf16StringValue(r'Software\Microsoft\Cryptography\OID'));
+      check(
+        constant.valueAsString,
+      ).isNotNull().equals(r'Software\Microsoft\Cryptography\OID');
     });
   });
 }

@@ -32,6 +32,7 @@
 /// @docImport 'writer.dart';
 library;
 
+export 'src/attribute_arg.dart';
 export 'src/attributes.dart';
 export 'src/bindings.dart'
     show
@@ -73,7 +74,6 @@ export 'src/bindings.dart'
         ElementType;
 export 'src/compressed_integer.dart';
 export 'src/culture.dart';
-export 'src/custom_attribute_parameter.dart';
 export 'src/exception.dart';
 export 'src/guid.dart';
 export 'src/logger.dart';

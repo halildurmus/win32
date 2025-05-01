@@ -92,7 +92,7 @@ void main() async {
         check(
           types[0]
               .findAttribute('SupportedArchitectureAttribute')
-              .parameters[0]
+              .fixedArgs[0]
               .value,
         ).equals(const Int32Value(4)); // Architecture.Arm64
 
@@ -101,7 +101,7 @@ void main() async {
         check(
           types[1]
               .findAttribute('SupportedArchitectureAttribute')
-              .parameters[0]
+              .fixedArgs[0]
               .value,
         ).equals(const Int32Value(2)); // Architecture.X64
 
@@ -110,7 +110,7 @@ void main() async {
         check(
           types[2]
               .findAttribute('SupportedArchitectureAttribute')
-              .parameters[0]
+              .fixedArgs[0]
               .value,
         ).equals(const Int32Value(1)); // Architecture.X86
       });

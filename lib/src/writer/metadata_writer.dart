@@ -2,11 +2,11 @@ import 'dart:collection';
 import 'dart:ffi';
 import 'dart:typed_data';
 
+import '../attribute_arg.dart';
 import '../attributes.dart';
 import '../bindings.dart';
 import '../common.dart';
 import '../compressed_integer.dart';
-import '../custom_attribute_parameter.dart';
 import '../exception.dart';
 import '../guid.dart';
 import '../metadata_type.dart';
@@ -302,9 +302,10 @@ final class MetadataWriter {
   void addCustomAttribute(
     HasCustomAttribute parent,
     CustomAttributeType type,
-    List<CustomAttributeParameter> value,
+    List<FixedArg> fixedArgs,
+    List<NamedArg> namedArgs,
   ) {
-    final attributeValue = _writeAttributeValue(value);
+    final attributeValue = _writeAttributeValue(fixedArgs, namedArgs);
     _attributes
         .putIfAbsent(parent, () => [])
         .add(
@@ -531,22 +532,19 @@ final class MetadataWriter {
     return blobHeap.insert(buffer.takeBytes());
   }
 
-  BlobId _writeAttributeValue(List<CustomAttributeParameter> values) {
+  BlobId _writeAttributeValue(
+    List<FixedArg> fixedArgs,
+    List<NamedArg> namedArgs,
+  ) {
     final buffer = BytesBuilder()..writeUint16(1); // prolog
-    var count = 0;
 
-    final positionalArgs = values
-        .whereType<PositionalCustomAttributeParameter>();
-    for (final CustomAttributeParameter(:value) in positionalArgs) {
-      count++;
-      buffer.writeValue(value);
+    for (final fixedArg in fixedArgs) {
+      buffer.writeValue(fixedArg.value);
     }
 
-    buffer.writeUint16(values.length - count);
+    buffer.writeUint16(namedArgs.length);
 
-    for (var i = count; i < values.length; i++) {
-      final NamedCustomAttributeParameter(:name, :value) = values.cast()[i];
-
+    for (final NamedArg(:name, :value) in namedArgs) {
       buffer
         ..addByte(ELEMENT_TYPE_FIELD)
         ..addByte(value.type.code);

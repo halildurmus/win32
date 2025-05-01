@@ -30,18 +30,20 @@ void main() async {
         final [raiiFree, alsoUsableFor, invalidHandleValue, nativeTypedef] =
             attributes;
         check(raiiFree.name).equals('RAIIFreeAttribute');
-        check(raiiFree.parameters.length).equals(1);
-        check(raiiFree.parameters[0].valueAsString).equals('FreeLibrary');
+        check(raiiFree.fixedArgs.length).equals(1);
+        check(raiiFree.fixedArgs[0].valueAsString).equals('FreeLibrary');
+        check(raiiFree.namedArgs).isEmpty();
         check(alsoUsableFor.name).equals('AlsoUsableForAttribute');
-        check(alsoUsableFor.parameters.length).equals(1);
-        check(alsoUsableFor.parameters[0].valueAsString).equals('HINSTANCE');
+        check(alsoUsableFor.fixedArgs.length).equals(1);
+        check(alsoUsableFor.fixedArgs[0].valueAsString).equals('HINSTANCE');
+        check(alsoUsableFor.namedArgs).isEmpty();
         check(invalidHandleValue.name).equals('InvalidHandleValueAttribute');
-        check(invalidHandleValue.parameters.length).equals(1);
-        check(
-          invalidHandleValue.parameters[0].valueAsInt,
-        ).isNotNull().equals(0);
+        check(invalidHandleValue.fixedArgs.length).equals(1);
+        check(invalidHandleValue.fixedArgs[0].valueAsInt).isNotNull().equals(0);
+        check(invalidHandleValue.namedArgs).isEmpty();
         check(nativeTypedef.name).equals('NativeTypedefAttribute');
-        check(nativeTypedef.parameters).isEmpty();
+        check(nativeTypedef.fixedArgs).isEmpty();
+        check(nativeTypedef.namedArgs).isEmpty();
       });
     });
 

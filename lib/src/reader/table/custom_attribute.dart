@@ -1,8 +1,10 @@
+import 'dart:collection';
+
 import 'package:meta/meta.dart';
 
+import '../../attribute_arg.dart';
 import '../../attributes.dart';
 import '../../bindings.dart';
-import '../../custom_attribute_parameter.dart';
 import '../../exception.dart';
 import '../../metadata_type.dart';
 import '../../metadata_value.dart';
@@ -23,21 +25,7 @@ import '../row.dart';
 ///  - **Type** (CustomAttributeType Coded Index)
 ///  - **Value** (Blob Heap Index)
 final class CustomAttribute extends Row {
-  CustomAttribute(super.metadataIndex, super.readerIndex, super.position);
-
-  @override
-  MetadataTable get table => MetadataTable.customAttribute;
-
-  /// The entity to which this attribute is applied.
-  late final parent = decode<HasCustomAttribute>(0);
-
-  /// The constructor method used to instantiate the attribute.
-  late final type = decode<CustomAttributeType>(1);
-
-  /// The parameters passed to the attribute constructor.
-  ///
-  /// This includes both positional and named parameters.
-  late final parameters = () {
+  CustomAttribute(super.metadataIndex, super.readerIndex, super.position) {
     final signature = type.signature();
     assert(
       signature.flags == MethodCallFlags.hasThis,
@@ -47,58 +35,75 @@ final class CustomAttribute extends Row {
       signature.returnType is VoidType,
       'Expected void return type, got ${signature.returnType}.',
     );
-
     final blob = readBlob(2);
-    if (blob.isEmpty) return const <CustomAttributeParameter>[];
+    if (blob.isEmpty) {
+      fixedArgs = const [];
+      namedArgs = const [];
+    } else {
+      final prolog = blob.readUint16();
+      assert(prolog == 1, 'Expected prolog 1, got $prolog.');
 
-    final parameters = <CustomAttributeParameter>[];
+      // Parse fixed args.
+      fixedArgs = UnmodifiableListView([
+        for (final type in signature.types) FixedArg(_readValue(blob, type)),
+      ]);
 
-    final prolog = blob.readUint16();
-    assert(prolog == 1, 'Expected prolog 1, got $prolog.');
-
-    for (final type in signature.types) {
-      final value = _readValue(blob, type);
-      parameters.add(CustomAttributeParameter.positional(value));
-    }
-
-    final namedArgCount = blob.readUint16();
-
-    for (var i = 0; i < namedArgCount; i++) {
-      final id = ElementType(blob.readUint8());
-      assert(
-        id == ELEMENT_TYPE_FIELD || id == ELEMENT_TYPE_PROPERTY,
-        'Expected ELEMENT_TYPE_FIELD (0x53) or ELEMENT_TYPE_PROPERTY (0x54), '
-        'got $id.',
-      );
-      final type = blob.readTypeCode();
-      final name = blob.readUtf8();
-      if (type is AttributeEnumType) {
-        final enumName = blob.readUtf8();
-        final enumValue = blob.readInt32();
-        final value = AttributeEnumValue(name, enumValue);
-        parameters.add(
-          CustomAttributeParameter.named(name: enumName, value: value),
-        );
+      // Parse named args.
+      final namedArgCount = blob.readUint16();
+      if (namedArgCount == 0) {
+        namedArgs = const [];
       } else {
-        final value = _readValue(blob, type);
-        parameters.add(
-          CustomAttributeParameter.named(name: name, value: value),
-        );
+        final args = <NamedArg>[];
+        for (var i = 0; i < namedArgCount; i++) {
+          final id = ElementType(blob.readUint8());
+          assert(
+            id == ELEMENT_TYPE_FIELD || id == ELEMENT_TYPE_PROPERTY,
+            'NamedArg must be either ELEMENT_TYPE_FIELD (0x53) or ELEMENT_TYPE_PROPERTY (0x54)',
+          );
+          final type = blob.readTypeCode();
+          final name = blob.readUtf8();
+          if (type is AttributeEnumType) {
+            final enumName = blob.readUtf8();
+            final enumValue = blob.readInt32();
+            final value = AttributeEnumValue(name, enumValue);
+            args.add(NamedArg(name: enumName, value: value));
+          } else {
+            final value = _readValue(blob, type);
+            args.add(NamedArg(name: name, value: value));
+          }
+        }
+        namedArgs = UnmodifiableListView(args);
       }
-    }
 
-    assert(
-      blob.isEmpty,
-      'Expected blob to be empty, but got ${blob.length} bytes left.',
-    );
-    return parameters;
-  }();
+      assert(
+        blob.isEmpty,
+        'Expected blob to be empty, but got ${blob.length} bytes left.',
+      );
+    }
+  }
+
+  @override
+  MetadataTable get table => MetadataTable.customAttribute;
+
+  /// The fixed arguments passed to the attribute constructor, if any.
+  late final List<FixedArg> fixedArgs;
+
+  /// The named arguments passed to the attribute constructor, if any.
+  late final List<NamedArg> namedArgs;
+
+  /// The entity to which this attribute is applied.
+  late final parent = decode<HasCustomAttribute>(0);
+
+  /// The constructor method used to instantiate the attribute.
+  late final type = decode<CustomAttributeType>(1);
 
   /// The name of the attribute.
   late final name = type.parent.name;
 
   @override
-  String toString() => 'CustomAttribute(name: $name, parameters: $parameters)';
+  String toString() =>
+      'CustomAttribute(name: $name, fixedArgs: $fixedArgs, '
+      'namedArgs: $namedArgs)';
 }
 
 /// Decodes a value from the blob according to the specified [type].

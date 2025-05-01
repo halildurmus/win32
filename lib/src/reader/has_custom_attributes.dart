@@ -1,3 +1,4 @@
+import '../attribute_arg.dart';
 import '../exception.dart';
 import 'codes.dart';
 import 'row.dart';
@@ -12,14 +13,19 @@ base mixin HasCustomAttributes on Row {
     HasCustomAttribute(this).encode(),
   );
 
-  /// Retrieves the first parameter value of the custom attribute with the given
+  /// Retrieves the first argument of the custom attribute with the given
   /// [attributeName], if it is a string.
   ///
   /// Returns the string value if the attribute exists and has a single string
-  /// parameter. Otherwise, returns `null`.
+  /// argument. Otherwise, returns `null`.
   String? attributeAsString(String attributeName) {
     final attr = tryFindAttribute(attributeName);
-    if (attr?.parameters case [final param]) return param.valueAsString;
+    if (attr?.fixedArgs case [final arg]) return arg.valueAsString;
+    if (attr?.namedArgs case [
+      final arg,
+    ] when attr?.fixedArgs.isEmpty ?? false) {
+      return arg.valueAsString;
+    }
     return null;
   }
 

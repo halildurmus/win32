@@ -7,8 +7,8 @@
 /// @docImport 'src/writer/metadata_writer.dart';
 library;
 
+export 'src/attribute_arg.dart';
 export 'src/attributes.dart';
-export 'src/custom_attribute_parameter.dart';
 export 'src/guid.dart';
 export 'src/metadata_type.dart';
 export 'src/metadata_value.dart';

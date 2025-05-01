@@ -202,7 +202,8 @@ void _writeAttributes<R extends HasCustomAttributes>(
     writer.addCustomAttribute(
       parent,
       CustomAttributeType.memberRef(ctorRef),
-      attr.parameters,
+      attr.fixedArgs,
+      attr.namedArgs,
     );
   }
 }
