@@ -54,7 +54,6 @@ jobs:
       check_coverage: ${{ matrix.sdk == 'main' }}
       codecov_flags: win32
       concurrency: '1'
-      coverage_version: '1.11.1'
       dart_sdk: ${{ matrix.sdk }}
       format_directories: lib test
       randomize_execution_order_of_tests: true
