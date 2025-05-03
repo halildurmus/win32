@@ -8,8 +8,7 @@ import '../metadata_index.dart';
 import '../metadata_table.dart';
 import '../row.dart';
 
-/// Represents a row in the `MemberRef` metadata table, describing a reference
-/// to a field or method of a type.
+/// Represents a row in the `MemberRef` metadata table.
 ///
 /// The fields are populated by interpreting the binary metadata as specified in
 /// ECMA-335 `§II.22.25`.

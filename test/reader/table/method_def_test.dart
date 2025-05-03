@@ -60,6 +60,7 @@ void main() async {
       check(params[2].sequence).equals(3);
       check(params[2].name).equals('work');
       check(method.parent.name).equals('AsyncCausalityTracer');
+      check(method.generics).isEmpty();
       check(method.implMap).isNull();
       check(method.hasAttribute('DocumentationAttribute')).isFalse();
     });
@@ -114,6 +115,7 @@ void main() async {
       check(params[2].sequence).equals(3);
       check(params[2].name).equals('work');
       check(method.parent.name).equals('IAsyncCausalityTracerStatics');
+      check(method.generics).isEmpty();
       check(method.implMap).isNull();
       check(method.hasAttribute('DocumentationAttribute')).isFalse();
     });
@@ -172,6 +174,7 @@ void main() async {
       check(params[4].name).equals('pdwEffect');
       check(method.parent.namespace).equals('Windows.Win32.System.Ole');
       check(method.parent.name).equals('Apis');
+      check(method.generics).isEmpty();
       final implMap = method.implMap;
       check(implMap).isNotNull();
       check(implMap!.flags).equals(
@@ -231,6 +234,7 @@ void main() async {
       check(params[2].name).equals('prgp');
       check(method.parent.namespace).equals('Windows.Win32.System.Ole');
       check(method.parent.name).equals('Apis');
+      check(method.generics).isEmpty();
       final implMap = method.implMap;
       check(implMap).isNotNull();
       check(implMap!.flags).equals(

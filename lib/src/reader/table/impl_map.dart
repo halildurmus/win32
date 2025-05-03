@@ -8,9 +8,7 @@ import '../metadata_table.dart';
 import '../row.dart';
 import 'module_ref.dart';
 
-/// Represents a row in the `ImplMap` metadata table, describing a mapping
-/// between a managed method and an unmanaged function implementation, typically
-/// used in P/Invoke scenarios.
+/// Represents a row in the `ImplMap` metadata table.
 ///
 /// The fields are populated by interpreting the binary metadata as specified in
 /// ECMA-335 `§II.22.22`.
@@ -19,7 +17,7 @@ import 'module_ref.dart';
 ///  - **MappingFlags** (2-byte bitmask of PInvokeAttributes)
 ///  - **MemberForwarded** (MemberForwarded Coded Index)
 ///  - **ImportName** (String Heap Index)
-///  - **ImportScope** (ModuleRef Index)
+///  - **ImportScope** (ModuleRef Table Index)
 final class ImplMap extends Row {
   ImplMap(super.metadataIndex, super.readerIndex, super.index);
 
@@ -27,7 +25,7 @@ final class ImplMap extends Row {
   MetadataTable get table => MetadataTable.implMap;
 
   /// The flags describing how the unmanaged call should be performed.
-  late final flags = PInvokeAttributes(readUint(0));
+  late final flags = PInvokeAttributes(readUint16(0));
 
   /// The character set used when marshaling strings for the unmanaged call.
   late final charSet = switch (flags & PInvokeAttributes.charSetMask) {

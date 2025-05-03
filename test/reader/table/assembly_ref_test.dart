@@ -14,8 +14,8 @@ void main() async {
 
   group('AssemblyRef', () {
     test('netstandard', () {
-      check(index.assemblyRefs.length).isGreaterOrEqual(4);
-      final assemblyRef = index.assemblyRefs.first;
+      check(index.assemblyRef.length).isGreaterOrEqual(4);
+      final assemblyRef = index.assemblyRef.first;
       check(assemblyRef.majorVersion).equals(2);
       check(assemblyRef.minorVersion).equals(1);
       check(assemblyRef.buildNumber).equals(0);

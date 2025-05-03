@@ -8,10 +8,10 @@ import '../metadata_table.dart';
 import '../row.dart';
 import 'constant.dart';
 import 'field_layout.dart';
+import 'field_marshal.dart';
 import 'type_def.dart';
 
-/// Represents a row in the `Field` metadata table, describing a field within a
-/// type.
+/// Represents a row in the `Field` metadata table.
 ///
 /// The fields are populated by interpreting the binary metadata as specified in
 /// ECMA-335 `§II.22.15`.
@@ -28,7 +28,7 @@ final class Field extends Row with HasCustomAttributes {
 
   /// Field attributes describing visibility, special semantics, and other
   /// modifiers.
-  late final flags = FieldAttributes(readUint(0));
+  late final flags = FieldAttributes(readUint16(0));
 
   /// The access level (visibility) of the field.
   late final fieldAccess =
@@ -48,7 +48,13 @@ final class Field extends Row with HasCustomAttributes {
   /// The constant value associated with the field, if any.
   late final constant = getEqualRange<Constant>(
     1,
-    HasConstantField(this).encode(),
+    HasConstant.field(this).encode(),
+  ).firstOrNull;
+
+  /// The marshal information for the field, if any.
+  late final fieldMarshal = getEqualRange<FieldMarshal>(
+    0,
+    HasFieldMarshal.field(this).encode(),
   ).firstOrNull;
 
   /// The layout information for the field, if any.

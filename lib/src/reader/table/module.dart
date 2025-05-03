@@ -1,11 +1,11 @@
 import 'package:meta/meta.dart';
 
+import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
 import '../metadata_table.dart';
 import '../row.dart';
 
-/// Represents a row in the `Module` metadata table, describing a module
-/// associated with the assembly.
+/// Represents a row in the `Module` metadata table.
 ///
 /// The fields are populated by interpreting the binary metadata as specified in
 /// ECMA-335 `§II.22.30`.
@@ -16,7 +16,7 @@ import '../row.dart';
 ///  - **Mvid** (Module Version ID) (GUID Heap Index)
 ///  - **EncId** (GUID Heap Index, reserved, MBZ)
 ///  - **EncBaseId** (GUID Heap Index, reserved, MBZ)
-final class Module extends Row {
+final class Module extends Row with HasCustomAttributes {
   Module(super.metadataIndex, super.readerIndex, super.index);
 
   @override

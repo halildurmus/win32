@@ -7,9 +7,9 @@ import '../metadata_index.dart';
 import '../metadata_table.dart';
 import '../row.dart';
 import 'constant.dart';
+import 'field_marshal.dart';
 
-/// Represents a row in the `Param` metadata table, describing a parameter of a
-/// method or property.
+/// Represents a row in the `Param` metadata table.
 ///
 /// The fields are populated by interpreting the binary metadata as specified in
 /// ECMA-335 `§II.22.33`.
@@ -26,11 +26,11 @@ final class Param extends Row with HasCustomAttributes {
 
   /// Param attributes that indicates various attributes of the parameter,
   /// such as whether it is optional, has a default value, etc.
-  late final flags = ParamAttributes(readUint(0));
+  late final flags = ParamAttributes(readUint16(0));
 
   /// The zero-based index (sequence number) of the parameter in the method or
   /// property.
-  late final sequence = readUint(1);
+  late final sequence = readUint16(1);
 
   /// The name of the parameter.
   late final name = readString(2);
@@ -38,7 +38,13 @@ final class Param extends Row with HasCustomAttributes {
   /// The constant associated with the parameter, if any.
   late final constant = getEqualRange<Constant>(
     1,
-    HasConstantParam(this).encode(),
+    HasConstant.param(this).encode(),
+  ).firstOrNull;
+
+  /// The marshal information for the param, if any.
+  late final fieldMarshal = getEqualRange<FieldMarshal>(
+    0,
+    HasFieldMarshal.param(this).encode(),
   ).firstOrNull;
 
   @override

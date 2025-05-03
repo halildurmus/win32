@@ -8,14 +8,13 @@ import '../metadata_table.dart';
 import '../row.dart';
 import 'type_def.dart';
 
-/// Represents a row in the `InterfaceImpl` metadata table, describing an
-/// interface that a type explicitly implements.
+/// Represents a row in the `InterfaceImpl` metadata table.
 ///
 /// The fields are populated by interpreting the binary metadata as specified in
 /// ECMA-335 `§II.22.23`.
 ///
 /// The `InterfaceImpl` table has the following columns:
-///  - **Class** (TypeDef Index)
+///  - **Class** (TypeDef Table Index)
 ///  - **Interface** (TypeDefOrRef Coded Index)
 final class InterfaceImpl extends Row with HasCustomAttributes {
   InterfaceImpl(super.metadataIndex, super.readerIndex, super.index);

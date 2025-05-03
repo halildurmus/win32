@@ -27,7 +27,10 @@ void main() async {
       check(field.hasAttribute('GuidAttribute')).isTrue();
       final constant = field.constant;
       check(constant).isNull();
+      check(field.fieldMarshal).isNull();
       check(field.layout).isNull();
+      check(field.parent.namespace).equals('Windows.Win32.UI.Shell');
+      check(field.parent.name).equals('Apis');
     });
 
     test('PFD_LAYER_TYPE.PFD_UNDERLAY_PLANE', () {
@@ -53,8 +56,11 @@ void main() async {
       check(constant).isNotNull();
       check(constant!.type).isA<Int8Type>();
       check(constant.value).equals(const Int8Value(-1));
+      check(field.fieldMarshal).isNull();
       final layout = field.layout;
       check(layout).isNull();
+      check(field.parent.namespace).equals('Windows.Win32.Graphics.OpenGL');
+      check(field.parent.name).equals('PFD_LAYER_TYPE');
     });
 
     test('STATUS_ACCESS_DENIED', () {
@@ -77,7 +83,10 @@ void main() async {
       check(constant).isNotNull();
       check(constant!.type).isA<Int32Type>();
       check(constant.value).equals(const Int32Value(-1073741790));
+      check(field.fieldMarshal).isNull();
       check(field.layout).isNull();
+      check(field.parent.namespace).equals('Windows.Win32.Foundation');
+      check(field.parent.name).equals('Apis');
     });
 
     test('VARIANT_TRUE', () {
@@ -100,7 +109,10 @@ void main() async {
       check(constant).isNotNull();
       check(constant!.type).isA<Int16Type>();
       check(constant.value).equals(const Int16Value(-1));
+      check(field.fieldMarshal).isNull();
       check(field.layout).isNull();
+      check(field.parent.namespace).equals('Windows.Win32.Foundation');
+      check(field.parent.name).equals('Apis');
     });
 
     test('WHV_PARTITION_PROPERTY.ProcessorCount', () {
@@ -114,10 +126,12 @@ void main() async {
       check(field.name).equals('ProcessorCount');
       check(field.type).isA<Uint32Type>();
       check(field.constant).isNull();
+      check(field.fieldMarshal).isNull();
       final layout = field.layout;
       check(layout).isNotNull();
       check(layout!.offset).equals(0);
-      check(layout.field.name).equals('ProcessorCount');
+      check(field.parent.namespace).equals('Windows.Win32.System.Hypervisor');
+      check(field.parent.name).equals('WHV_PARTITION_PROPERTY');
     });
   });
 }

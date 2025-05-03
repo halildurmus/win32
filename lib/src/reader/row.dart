@@ -6,22 +6,41 @@ import 'codes.dart';
 import 'metadata_index.dart';
 import 'metadata_reader.dart';
 import 'metadata_table.dart';
+import 'table/assembly.dart';
+import 'table/assembly_os.dart';
+import 'table/assembly_processor.dart';
 import 'table/assembly_ref.dart';
+import 'table/assembly_ref_os.dart';
+import 'table/assembly_ref_processor.dart';
 import 'table/class_layout.dart';
 import 'table/constant.dart';
 import 'table/custom_attribute.dart';
+import 'table/decl_security.dart';
+import 'table/event.dart';
+import 'table/event_map.dart';
+import 'table/exported_type.dart';
 import 'table/field.dart';
 import 'table/field_layout.dart';
+import 'table/field_marshal.dart';
+import 'table/field_rva.dart';
+import 'table/file.dart';
 import 'table/generic_param.dart';
 import 'table/generic_param_constraint.dart';
 import 'table/impl_map.dart';
 import 'table/interface_impl.dart';
+import 'table/manifest_resource.dart';
 import 'table/member_ref.dart';
 import 'table/method_def.dart';
+import 'table/method_impl.dart';
+import 'table/method_semantics.dart';
+import 'table/method_spec.dart';
 import 'table/module.dart';
 import 'table/module_ref.dart';
 import 'table/nested_class.dart';
 import 'table/param.dart';
+import 'table/property.dart';
+import 'table/property_map.dart';
+import 'table/stand_alone_sig.dart';
 import 'table/type_def.dart';
 import 'table/type_ref.dart';
 import 'table/type_spec.dart';
@@ -59,7 +78,7 @@ abstract base class Row {
   /// Retrieves the [MetadataReader] for the current row based on the
   /// [readerIndex].
   @pragma('vm:prefer-inline')
-  MetadataReader get _reader => metadataIndex.readers[readerIndex];
+  MetadataReader get reader => metadataIndex.readers[readerIndex];
 
   /// Reads a [Blob] from the specified [column].
   ///
@@ -67,13 +86,13 @@ abstract base class Row {
   /// stored.
   @pragma('vm:prefer-inline')
   Blob readBlob(int column) =>
-      Blob(metadataIndex, readerIndex, _reader.readBlob(index, table, column));
+      Blob(metadataIndex, readerIndex, reader.readBlob(index, table, column));
 
   /// Reads a [Guid] from the specified [column].
   ///
   /// The column represents the index in the table where the Guid is stored.
   @pragma('vm:prefer-inline')
-  Guid readGuid(int column) => _reader.readGuid(index, table, column);
+  Guid readGuid(int column) => reader.readGuid(index, table, column);
 
   /// Reads a related row of type [R] from the specified [column].
   ///
@@ -91,14 +110,14 @@ abstract base class Row {
   ///
   /// The column represents the index in the table where the string is stored.
   @pragma('vm:prefer-inline')
-  String readString(int column) => _reader.readString(index, table, column);
+  String readString(int column) => reader.readString(index, table, column);
 
   /// Reads an unsigned integer from the specified [column].
   ///
   /// The column represents the index in the table where the integer data is
   /// stored.
   @pragma('vm:prefer-inline')
-  int readUint(int column) => _reader.readUint(index, table, column);
+  int readUint(int column) => reader.readUint(index, table, column);
 
   /// Reads an unsigned 8-bit integer from the specified [column], with an
   /// optional [offset].
@@ -108,7 +127,7 @@ abstract base class Row {
   /// reading the integer starting from a different index.
   @pragma('vm:prefer-inline')
   int readUint8(int column, [int offset = 0]) =>
-      _reader.readUint8(index, table, column, offset);
+      reader.readUint8(index, table, column, offset);
 
   /// Reads an unsigned 16-bit integer from the specified [column], with an
   /// optional [offset].
@@ -118,7 +137,7 @@ abstract base class Row {
   /// reading the integer starting from a different index.
   @pragma('vm:prefer-inline')
   int readUint16(int column, [int offset = 0]) =>
-      _reader.readUint16(index, table, column, offset);
+      reader.readUint16(index, table, column, offset);
 
   /// Reads an unsigned 32-bit integer from the specified [column], with an
   /// optional [offset].
@@ -128,7 +147,7 @@ abstract base class Row {
   /// reading the integer starting from a different index.
   @pragma('vm:prefer-inline')
   int readUint32(int column, [int offset = 0]) =>
-      _reader.readUint32(index, table, column, offset);
+      reader.readUint32(index, table, column, offset);
 
   /// Reads an unsigned 64-bit integer from the specified [column], with an
   /// optional [offset].
@@ -138,7 +157,7 @@ abstract base class Row {
   /// reading the integer starting from a different index.
   @pragma('vm:prefer-inline')
   int readUint64(int column, [int offset = 0]) =>
-      _reader.readUint64(index, table, column, offset);
+      reader.readUint64(index, table, column, offset);
 
   /// Decodes a [CodedIndex] from the specified [column].
   ///
@@ -152,7 +171,7 @@ abstract base class Row {
   /// Retrieves rows of [L] with a matching [value] in the specified [column].
   Iterable<L> getEqualRange<L extends Row>(int column, int value) {
     final companion = Row.companion<L>();
-    final rows = _reader.getEqualRange(companion.table, column, value);
+    final rows = reader.getEqualRange(companion.table, column, value);
     return rows.map(
       (index) => companion.constructor(metadataIndex, readerIndex, index),
     );
@@ -161,7 +180,7 @@ abstract base class Row {
   /// Retrieves rows of [R] from the specified [column].
   Iterable<R> getList<R extends Row>(int column) {
     final companion = Row.companion<R>();
-    final rows = _reader.getList(index, table, column, companion.table);
+    final rows = reader.getList(index, table, column, companion.table);
     return rows.map(
       (index) => companion.constructor(metadataIndex, readerIndex, index),
     );
@@ -174,7 +193,7 @@ abstract base class Row {
     return companion.constructor(
       metadataIndex,
       readerIndex,
-      _reader.getParentRow(index, companion.table, column),
+      reader.getParentRow(index, companion.table, column),
     );
   }
 
@@ -203,22 +222,41 @@ abstract class RowCompanion<T extends Row> {
 }
 
 const _companions = <Type, RowCompanion>{
+  Assembly: AssemblyCompanion(),
+  AssemblyOS: AssemblyOSCompanion(),
+  AssemblyProcessor: AssemblyProcessorCompanion(),
   AssemblyRef: AssemblyRefCompanion(),
+  AssemblyRefOS: AssemblyRefOSCompanion(),
+  AssemblyRefProcessor: AssemblyRefProcessorCompanion(),
   ClassLayout: ClassLayoutCompanion(),
   Constant: ConstantCompanion(),
   CustomAttribute: CustomAttributeCompanion(),
+  DeclSecurity: DeclSecurityCompanion(),
+  Event: EventCompanion(),
+  EventMap: EventMapCompanion(),
+  ExportedType: ExportedTypeCompanion(),
   Field: FieldCompanion(),
   FieldLayout: FieldLayoutCompanion(),
+  FieldMarshal: FieldMarshalCompanion(),
+  FieldRVA: FieldRVACompanion(),
+  File: FileCompanion(),
   GenericParam: GenericParamCompanion(),
   GenericParamConstraint: GenericParamConstraintCompanion(),
   ImplMap: ImplMapCompanion(),
   InterfaceImpl: InterfaceImplCompanion(),
+  ManifestResource: ManifestResourceCompanion(),
   MemberRef: MemberRefCompanion(),
   MethodDef: MethodDefCompanion(),
+  MethodImpl: MethodImplCompanion(),
+  MethodSemantics: MethodSemanticsCompanion(),
+  MethodSpec: MethodSpecCompanion(),
   Module: ModuleCompanion(),
   ModuleRef: ModuleRefCompanion(),
   NestedClass: NestedClassCompanion(),
   Param: ParamCompanion(),
+  Property: PropertyCompanion(),
+  PropertyMap: PropertyMapCompanion(),
+  StandAloneSig: StandAloneSigCompanion(),
   TypeDef: TypeDefCompanion(),
   TypeRef: TypeRefCompanion(),
   TypeSpec: TypeSpecCompanion(),

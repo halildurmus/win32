@@ -266,12 +266,14 @@ void main() async {
       });
 
       test('ELEMENT_TYPE_GENERICINST', () {
+        final iMap = index.findSingleType(
+          'Windows.Foundation.Collections',
+          'IMap',
+        );
         final blob = createBlob(readerIndex: 1, [
           ELEMENT_TYPE_GENERICINST,
           ELEMENT_TYPE_CLASS,
-          ...CompressedInteger.encode(
-            TypeDefOrRef.typeDef(TypeDef(index, 1, 10001)).encode(),
-          ),
+          ...CompressedInteger.encode(TypeDefOrRef.typeDef(iMap).encode()),
           2, // GenArgCount
           ELEMENT_TYPE_STRING,
           ELEMENT_TYPE_I4,
@@ -332,18 +334,20 @@ void main() async {
       });
 
       test('ConstReferenceType', () {
+        final guid = index.typeRef.lastWhere(
+          (e) => e.namespace == 'System' && e.name == 'Guid',
+        );
+        final isConst = index.typeRef.lastWhere(
+          (e) =>
+              e.namespace == 'System.Runtime.CompilerServices' &&
+              e.name == 'IsConst',
+        );
         final blob = createBlob(readerIndex: 1, [
           ELEMENT_TYPE_CMOD_OPT,
-          ...CompressedInteger.encode(
-            // System.Runtime.CompilerServices.IsConst
-            TypeDefOrRef.typeRef(TypeRef(index, 1, 8437)).encode(),
-          ),
+          ...CompressedInteger.encode(TypeDefOrRef.typeRef(isConst).encode()),
           ELEMENT_TYPE_BYREF,
           ELEMENT_TYPE_CLASS,
-          ...CompressedInteger.encode(
-            // System.Guid
-            TypeDefOrRef.typeRef(TypeRef(index, 1, 527)).encode(),
-          ),
+          ...CompressedInteger.encode(TypeDefOrRef.typeRef(guid).encode()),
         ]);
         check(blob.readTypeSignature()).equals(
           const ConstReferenceType(NamedType(TypeName('System', 'Guid'))),

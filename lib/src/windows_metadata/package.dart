@@ -22,7 +22,7 @@ enum WindowsMetadataPackage {
   const WindowsMetadataPackage._(this.packageId, this.assetName);
 
   /// Retrieves a [WindowsMetadataPackage] based on the given NuGet [packageId].
-  static WindowsMetadataPackage fromPackageId(String packageId) =>
+  factory WindowsMetadataPackage.fromPackageId(String packageId) =>
       switch (packageId) {
         'microsoft.windows.wdk.win32metadata' => wdk,
         'microsoft.windows.sdk.win32metadata' => win32,

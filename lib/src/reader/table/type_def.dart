@@ -9,14 +9,16 @@ import '../metadata_table.dart';
 import '../row.dart';
 import '../type_category.dart';
 import 'class_layout.dart';
+import 'event.dart';
 import 'field.dart';
 import 'generic_param.dart';
 import 'interface_impl.dart';
 import 'method_def.dart';
+import 'method_impl.dart';
 import 'nested_class.dart';
+import 'property.dart';
 
-/// Represents a row in the `TypeDef` metadata table, describing a type defined
-/// in the assembly.
+/// Represents a row in the `TypeDef` metadata table.
 ///
 /// The fields are populated by interpreting the binary metadata as specified in
 /// ECMA-335 `§II.22.37`.
@@ -26,8 +28,8 @@ import 'nested_class.dart';
 ///  - **TypeName** (String Heap Index)
 ///  - **TypeNamespace** (String Heap Index)
 ///  - **Extends** (TypeDefOrRef Coded Index)
-///  - **FieldList** (Field Index)
-///  - **MethodList** (MethodDef Index)
+///  - **FieldList** (Field Table Index)
+///  - **MethodList** (MethodDef Table Index)
 final class TypeDef extends Row with HasCustomAttributes {
   TypeDef(super.metadataIndex, super.readerIndex, super.index);
 
@@ -36,7 +38,7 @@ final class TypeDef extends Row with HasCustomAttributes {
 
   /// Type attributes that represents various attributes of the type, such as
   /// visibility, layout, and semantics.
-  late final flags = TypeAttributes(readUint(0));
+  late final flags = TypeAttributes(readUint32(0));
 
   /// The visibility of the type.
   late final typeVisibility =
@@ -92,21 +94,6 @@ final class TypeDef extends Row with HasCustomAttributes {
   /// The list of methods defined in the type, if any.
   late final methods = getList<MethodDef>(5);
 
-  /// The list of generic parameters defined for the type, if any.
-  late final generics = getEqualRange<GenericParam>(
-    2,
-    TypeOrMethodDef.typeDef(this).encode(),
-  );
-
-  /// The list of interfaces implemented by the type, if any.
-  late final interfaceImpls = getEqualRange<InterfaceImpl>(0, index + 1);
-
-  /// The class layout associated with the type, if any.
-  late final classLayout = getEqualRange<ClassLayout>(2, index + 1).firstOrNull;
-
-  /// The nested class associated with the type, if any.
-  late final nested = getEqualRange<NestedClass>(1, index + 1).firstOrNull;
-
   /// The category of the type, which could be a class, interface, enum, struct,
   /// delegate, or attribute.
   late final category = () {
@@ -120,6 +107,69 @@ final class TypeDef extends Row with HasCustomAttributes {
       'Attribute' => TypeCategory.attribute,
       _ => TypeCategory.class$,
     };
+  }();
+
+  /// The class layout associated with the type, if any.
+  late final classLayout = getEqualRange<ClassLayout>(2, index + 1).firstOrNull;
+
+  /// The list of events defined in the type, if any.
+  late final events = () {
+    final eventIndex = index + 1;
+    final eventMapRow = reader.tableStream.eventMap
+        .where(
+          (row) =>
+              reader.readUint(row, MetadataTable.eventMap, 0) == eventIndex,
+        )
+        .firstOrNull;
+    if (eventMapRow == null) return const Iterable<Event>.empty();
+    final companion = Row.companion<Event>();
+    final rows = reader.getList(
+      eventMapRow,
+      MetadataTable.eventMap,
+      1,
+      MetadataTable.event,
+    );
+    return rows.map(
+      (index) => companion.constructor(metadataIndex, readerIndex, index),
+    );
+  }();
+
+  /// The list of generic parameters defined for the type, if any.
+  late final generics = getEqualRange<GenericParam>(
+    2,
+    TypeOrMethodDef.typeDef(this).encode(),
+  );
+
+  /// The list of interfaces implemented by the type, if any.
+  late final interfaceImpls = getEqualRange<InterfaceImpl>(0, index + 1);
+
+  /// The list of method implementations defined for the type, if any.
+  late final methodImpls = getEqualRange<MethodImpl>(0, index + 1);
+
+  /// The nested class associated with the type, if any.
+  late final nested = getEqualRange<NestedClass>(1, index + 1).firstOrNull;
+
+  /// The list of properties defined in the type, if any.
+  late final properties = () {
+    final propertyIndex = index + 1;
+    final propertyMapRow = reader.tableStream.propertyMap
+        .where(
+          (row) =>
+              reader.readUint(row, MetadataTable.propertyMap, 0) ==
+              propertyIndex,
+        )
+        .firstOrNull;
+    if (propertyMapRow == null) return const Iterable<Property>.empty();
+    final companion = Row.companion<Property>();
+    final rows = reader.getList(
+      propertyMapRow,
+      MetadataTable.propertyMap,
+      1,
+      MetadataTable.property,
+    );
+    return rows.map(
+      (index) => companion.constructor(metadataIndex, readerIndex, index),
+    );
   }();
 
   @override

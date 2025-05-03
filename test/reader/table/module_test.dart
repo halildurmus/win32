@@ -11,8 +11,8 @@ void main() async {
 
   group('Module', () {
     test('Windows.Win32.winmd', () {
-      check(index.modules.length).equals(1);
-      final module = index.modules.first;
+      check(index.module.length).equals(1);
+      final module = index.module.first;
       check(module.name).equals('Windows.Win32.winmd');
       check(
         module.mvid.toString(),

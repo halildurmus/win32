@@ -9,8 +9,7 @@ import '../metadata_index.dart';
 import '../metadata_table.dart';
 import '../row.dart';
 
-/// Represents a row in the `Constant` metadata table, describing a compile-time
-/// constant value associated with a field, parameter, or property.
+/// Represents a row in the `Constant` metadata table.
 ///
 /// The fields are populated by interpreting the binary metadata as specified in
 /// ECMA-335 `§II.22.9`.
@@ -27,7 +26,7 @@ final class Constant extends Row {
 
   /// The metadata type that describes how to interpret the constant value.
   late final type = () {
-    final type = readUint(0);
+    final type = readUint8(0);
     return switch (type) {
       ELEMENT_TYPE_BOOLEAN => const BoolType(),
       ELEMENT_TYPE_CHAR => const CharType(),

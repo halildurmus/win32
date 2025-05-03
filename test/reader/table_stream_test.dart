@@ -6,7 +6,7 @@ void main() {
   group('TableStream', () {
     test('has correct number of tables', () {
       final stream = TableStream();
-      check(stream.tables.length).equals(19);
+      check(stream.tables.length).equals(38);
     });
 
     test('table has correct initial data', () {

@@ -2,12 +2,13 @@ import 'package:meta/meta.dart';
 
 import '../../attributes.dart';
 import '../../culture.dart';
+import '../blob.dart';
+import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
 import '../metadata_table.dart';
 import '../row.dart';
 
-/// Represents a row in the `AssemblyRef` metadata table, describing a reference
-/// to an external assembly.
+/// Represents a row in the `AssemblyRef` metadata table.
 ///
 /// The fields are populated by interpreting the binary metadata as specified in
 /// ECMA-335 `§II.22.5`.
@@ -22,7 +23,7 @@ import '../row.dart';
 ///  - **Name** (String Heap Index)
 ///  - **Culture** (String Heap Index)
 ///  - **HashValue** (Blob Heap Index)
-final class AssemblyRef extends Row {
+final class AssemblyRef extends Row with HasCustomAttributes {
   AssemblyRef(super.metadataIndex, super.readerIndex, super.index);
 
   @override
@@ -41,14 +42,14 @@ final class AssemblyRef extends Row {
   late final revisionNumber = readUint16(0, 6);
 
   /// The flags associated with the referenced assembly.
-  late final flags = AssemblyFlags(readUint(1));
+  late final flags = AssemblyFlags(readUint32(1));
 
   /// The public key or token identifying the referenced assembly, if available.
-  late final publicKeyOrToken = () {
+  Blob? get publicKeyOrToken {
     final blob = readBlob(2);
     if (blob.isEmpty) return null;
     return blob;
-  }();
+  }
 
   /// The name of the assembly.
   late final name = readString(3);
@@ -61,11 +62,11 @@ final class AssemblyRef extends Row {
   }();
 
   /// The hash value of the referenced assembly, if available.
-  late final hashValue = () {
+  Blob? get hashValue {
     final blob = readBlob(5);
     if (blob.isEmpty) return null;
     return blob;
-  }();
+  }
 
   /// The version of the referenced assembly in `Major.Minor.Build.Revision`
   /// format (e.g., `4.0.0.0`).

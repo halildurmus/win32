@@ -40,6 +40,15 @@ extension type const AssemblyFlags(int _) implements int {
   AssemblyFlags operator &(AssemblyFlags other) => AssemblyFlags(_ & other._);
 }
 
+/// Provides information about an event.
+extension type const EventAttributes(int _) implements int {
+  /// The event is special.
+  static const specialName = FieldAttributes(0x0200);
+
+  /// CLI provides 'special' behavior, depending upon the name of the event.
+  static const rtSpecialName = FieldAttributes(0x0400);
+}
+
 /// Provides information about a field.
 extension type const FieldAttributes(int _) implements int {
   /// Specifies the access level of a given field.
@@ -137,6 +146,15 @@ enum FieldAccess {
   public,
 }
 
+/// Provides information about a file.
+extension type const FileAttributes(int _) implements int {
+  /// The file is not a resource file.
+  static const containsMetadata = FileAttributes(0x0000);
+
+  /// The file is a resource file or other non-metadata-containing file.
+  static const containsNoMetadata = FileAttributes(0x0001);
+}
+
 /// Provides information about a generic type parameter of a generic type or
 /// method.
 extension type const GenericParamAttributes(int _) implements int {
@@ -202,6 +220,27 @@ enum SpecialConstraint {
 
   /// Indicates that the generic parameter must have a default constructor.
   defaultConstructor,
+}
+
+/// Provides information about a manifest resource.
+extension type const ManifestResourceAttributes(int _) implements int {
+  /// Specifies type visibility information.
+  static const visibilityMask = TypeAttributes(0x0007);
+
+  /// The resource is exported from the Assembly.
+  static const public = TypeAttributes(0x0001);
+
+  /// The resource is private to the Assembly.
+  static const private = TypeAttributes(0x0002);
+}
+
+/// Represents the visibility of a manifest resource.
+enum ManifestResourceVisibility {
+  /// Specifies that the resource is exported from the assembly.
+  public,
+
+  /// Specifies that the resource is private to the assembly.
+  private,
 }
 
 /// Provides information about a method.
@@ -435,6 +474,33 @@ enum CodeType {
   runtime,
 }
 
+/// Provides information about a method's semantics.
+extension type const MethodSemanticsAttributes(int _) implements int {
+  /// Setter for property.
+  static const setter = MethodSemanticsAttributes(0x0001);
+
+  /// Getter for property.
+  static const getter = MethodSemanticsAttributes(0x0002);
+
+  /// Other method for property or event.
+  static const other = MethodSemanticsAttributes(0x0004);
+
+  /// AddOn method for event.
+  ///
+  /// This refers to the required `add_` method for events.
+  static const addOn = MethodSemanticsAttributes(0x0008);
+
+  /// RemoveOn method for event.
+  ///
+  /// This refers to the required `remove_` method for events.
+  static const removeOn = MethodSemanticsAttributes(0x0010);
+
+  /// Fire method for event.
+  ///
+  /// This refers to the optional `raise_` method for events.
+  static const fire = MethodSemanticsAttributes(0x0020);
+}
+
 /// Provides information about a parameter.
 extension type const ParamAttributes(int _) implements int {
   /// The parameter is an input parameter.
@@ -575,6 +641,92 @@ enum CallingConvention {
 
   /// Reserved.
   fastcall,
+}
+
+/// Specifies the security actions that can be performed using declarative
+/// security.
+enum SecurityAction {
+  /// All callers higher in the call stack are required to have been granted the
+  /// permission specified by the current permission object.
+  demand._(2),
+
+  /// The calling code can access the resource identified by the current
+  /// permission object, even if callers higher in the stack have not been
+  /// granted permission to access the resource.
+  assert$._(3),
+
+  /// The ability to access the resource specified by the current permission
+  /// object is denied to callers, even if they have been granted permission t
+  /// access it.
+  deny._(4),
+
+  /// Only the resources specified by this permission object can be accessed,
+  /// even if the code has been granted permission to access other resources.
+  permitOnly._(5),
+
+  /// The immediate caller is required to have been granted the specified
+  /// permission.
+  linkDemand._(6),
+
+  /// The derived class inheriting the class or overriding a method is required
+  /// to have been granted the specified permission.
+  inheritanceDemand._(7),
+
+  /// The request for the minimum permissions required for code to run.
+  ///
+  /// This action can only be used within the scope of the assembly.
+  requestMinimum._(8),
+
+  /// The request for additional permissions that are optional (not required to
+  /// run).
+  ///
+  /// This request implicitly refuses all other permissions not specifically
+  /// requested.
+  ///
+  /// This action can only be used within the scope of the assembly.
+  requestOptional._(9),
+
+  /// The request that permissions that might be misused will not be granted to
+  /// the calling code.
+  ///
+  /// This action can only be used within the scope of the assembly.
+  requestRefused._(10);
+
+  const SecurityAction._(this.value);
+
+  /// Creates a [SecurityAction] from the given [value].
+  factory SecurityAction.fromValue(int value) => switch (value) {
+    2 => demand,
+    3 => assert$,
+    4 => deny,
+    5 => permitOnly,
+    6 => linkDemand,
+    7 => inheritanceDemand,
+    8 => requestMinimum,
+    9 => requestOptional,
+    10 => requestRefused,
+    _ => throw ArgumentError.value(value, 'value', 'Unknown value'),
+  };
+
+  /// The value of the security action.
+  final int value;
+}
+
+/// Provides information about a property.
+extension type const PropertyAttributes(int _) implements int {
+  /// The property is special.
+  static const specialName = PropertyAttributes(0x0200);
+
+  /// CLI provides 'special' behavior, depending upon the name of the property.
+  static const rtSpecialName = PropertyAttributes(0x0400);
+
+  /// The property has a default value.
+  static const hasDefault = PropertyAttributes(0x1000);
+
+  /// Reserved.
+  ///
+  /// The property is unused.
+  static const unused = PropertyAttributes(0xE9FF);
 }
 
 /// Provides information about a type.

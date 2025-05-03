@@ -36,7 +36,7 @@ final class CustomAttributeTypeMethodDef extends CustomAttributeType {
   int encode() => ((value.index + 1) << 3) | 2;
 
   @override
-  String toString() => 'CustomAttributeTypeMethodDef($value)';
+  String toString() => value.toString();
 }
 
 /// A [CustomAttributeType] representing a `MemberRef`.
@@ -50,7 +50,7 @@ final class CustomAttributeTypeMemberRef extends CustomAttributeType {
   int encode() => ((value.index + 1) << 3) | 3;
 
   @override
-  String toString() => 'CustomAttributeTypeMemberRef($value)';
+  String toString() => value.toString();
 }
 
 /// Represents a coded index for entities that can have constant values.
@@ -75,7 +75,7 @@ final class HasConstantField extends HasConstant {
   int encode() => ((value.index + 1) << 2) | 0;
 
   @override
-  String toString() => 'HasConstantField($value)';
+  String toString() => value.toString();
 }
 
 /// A [HasConstant] representing a `Param`.
@@ -89,7 +89,7 @@ final class HasConstantParam extends HasConstant {
   int encode() => ((value.index + 1) << 2) | 1;
 
   @override
-  String toString() => 'HasConstantParam($value)';
+  String toString() => value.toString();
 }
 
 /// Represents a coded index for entities that can have custom attributes.
@@ -156,7 +156,7 @@ final class HasCustomAttributeMethodDef extends HasCustomAttribute {
   int encode() => ((value.index + 1) << 5) | 0;
 
   @override
-  String toString() => 'HasCustomAttributeMethodDef($value)';
+  String toString() => value.toString();
 }
 
 /// A [HasCustomAttribute] representing a `Field`.
@@ -170,7 +170,7 @@ final class HasCustomAttributeField extends HasCustomAttribute {
   int encode() => ((value.index + 1) << 5) | 1;
 
   @override
-  String toString() => 'HasCustomAttributeField($value)';
+  String toString() => value.toString();
 }
 
 /// A [HasCustomAttribute] representing a `TypeRef`.
@@ -184,7 +184,7 @@ final class HasCustomAttributeTypeRef extends HasCustomAttribute {
   int encode() => ((value.index + 1) << 5) | 2;
 
   @override
-  String toString() => 'HasCustomAttributeTypeRef($value)';
+  String toString() => value.toString();
 }
 
 /// A [HasCustomAttribute] representing a `TypeDef`.
@@ -198,7 +198,7 @@ final class HasCustomAttributeTypeDef extends HasCustomAttribute {
   int encode() => ((value.index + 1) << 5) | 3;
 
   @override
-  String toString() => 'HasCustomAttributeTypeDef($value)';
+  String toString() => value.toString();
 }
 
 /// A [HasCustomAttribute] representing a `Param`.
@@ -212,7 +212,7 @@ final class HasCustomAttributeParam extends HasCustomAttribute {
   int encode() => ((value.index + 1) << 5) | 4;
 
   @override
-  String toString() => 'HasCustomAttributeParam($value)';
+  String toString() => value.toString();
 }
 
 /// A [HasCustomAttribute] representing an `InterfaceImpl`.
@@ -226,7 +226,7 @@ final class HasCustomAttributeInterfaceImpl extends HasCustomAttribute {
   int encode() => ((value.index + 1) << 5) | 5;
 
   @override
-  String toString() => 'HasCustomAttributeInterfaceImpl($value)';
+  String toString() => value.toString();
 }
 
 /// A [HasCustomAttribute] representing a `MemberRef`.
@@ -240,7 +240,7 @@ final class HasCustomAttributeMemberRef extends HasCustomAttribute {
   int encode() => ((value.index + 1) << 5) | 6;
 
   @override
-  String toString() => 'HasCustomAttributeMemberRef($value)';
+  String toString() => value.toString();
 }
 
 /// A [HasCustomAttribute] representing a `Module`.
@@ -254,7 +254,7 @@ final class HasCustomAttributeModule extends HasCustomAttribute {
   int encode() => ((value.index + 1) << 5) | 7;
 
   @override
-  String toString() => 'HasCustomAttributeModule($value)';
+  String toString() => value.toString();
 }
 
 /// A [HasCustomAttribute] representing a `ModuleRef`.
@@ -268,7 +268,7 @@ final class HasCustomAttributeModuleRef extends HasCustomAttribute {
   int encode() => ((value.index + 1) << 5) | 12;
 
   @override
-  String toString() => 'HasCustomAttributeModuleRef($value)';
+  String toString() => value.toString();
 }
 
 /// A [HasCustomAttribute] representing a `TypeSpec`.
@@ -282,7 +282,7 @@ final class HasCustomAttributeTypeSpec extends HasCustomAttribute {
   int encode() => ((value.index + 1) << 5) | 13;
 
   @override
-  String toString() => 'HasCustomAttributeTypeSpec($value)';
+  String toString() => value.toString();
 }
 
 /// A [HasCustomAttribute] representing an `AssemblyRef`.
@@ -296,7 +296,7 @@ final class HasCustomAttributeAssemblyRef extends HasCustomAttribute {
   int encode() => ((value.index + 1) << 5) | 15;
 
   @override
-  String toString() => 'HasCustomAttributeAssemblyRef($value)';
+  String toString() => value.toString();
 }
 
 /// A [HasCustomAttribute] representing a `GenericParam`.
@@ -310,7 +310,7 @@ final class HasCustomAttributeGenericParam extends HasCustomAttribute {
   int encode() => ((value.index + 1) << 5) | 19;
 
   @override
-  String toString() => 'HasCustomAttributeGenericParam($value)';
+  String toString() => value.toString();
 }
 
 /// Represents a coded index for members that can be forwarded.
@@ -336,7 +336,7 @@ final class MemberForwardedField extends MemberForwarded {
   int encode() => ((value.index + 1) << 1) | 0;
 
   @override
-  String toString() => 'MemberForwardedField($value)';
+  String toString() => value.toString();
 }
 
 /// A [MemberForwarded] representing a `MethodDef`.
@@ -350,7 +350,7 @@ final class MemberForwardedMethodDef extends MemberForwarded {
   int encode() => ((value.index + 1) << 1) | 1;
 
   @override
-  String toString() => 'MemberForwardedMethodDef($value)';
+  String toString() => value.toString();
 }
 
 /// Represents a coded index for either a `TypeDef` or a `TypeRef`.
@@ -377,7 +377,7 @@ final class MemberRefParentTypeDef extends MemberRefParent {
   int encode() => ((value.index + 1) << 3) | 0;
 
   @override
-  String toString() => 'MemberRefParentTypeDef($value)';
+  String toString() => value.toString();
 }
 
 /// A [MemberRefParent] representing a `TypeRef`.
@@ -391,7 +391,7 @@ final class MemberRefParentTypeRef extends MemberRefParent {
   int encode() => ((value.index + 1) << 3) | 1;
 
   @override
-  String toString() => 'MemberRefParentTypeRef($value)';
+  String toString() => value.toString();
 }
 
 /// Represents a coded index for a `Module`, `ModuleRef`, `AssemblyRef`, or
@@ -427,7 +427,7 @@ final class ResolutionScopeModule extends ResolutionScope {
   int encode() => ((value.index + 1) << 2) | 0;
 
   @override
-  String toString() => 'ResolutionScopeModule($value)';
+  String toString() => value.toString();
 }
 
 /// A [ResolutionScope] representing a `ModuleRef`.
@@ -441,7 +441,7 @@ final class ResolutionScopeModuleRef extends ResolutionScope {
   int encode() => ((value.index + 1) << 2) | 1;
 
   @override
-  String toString() => 'ResolutionScopeModuleRef($value)';
+  String toString() => value.toString();
 }
 
 /// A [ResolutionScope] representing an `AssemblyRef`.
@@ -455,7 +455,7 @@ final class ResolutionScopeAssemblyRef extends ResolutionScope {
   int encode() => ((value.index + 1) << 2) | 2;
 
   @override
-  String toString() => 'ResolutionScopeAssemblyRef($value)';
+  String toString() => value.toString();
 }
 
 /// A [ResolutionScope] representing a `TypeRef`.
@@ -469,7 +469,7 @@ final class ResolutionScopeTypeRef extends ResolutionScope {
   int encode() => ((value.index + 1) << 2) | 3;
 
   @override
-  String toString() => 'ResolutionScopeTypeRef($value)';
+  String toString() => value.toString();
 }
 
 /// Represents a coded index for either a `TypeDef`, `TypeRef`, or `TypeSpec`.
@@ -501,7 +501,7 @@ final class TypeDefOrRefTypeDef extends TypeDefOrRef {
   int encode() => ((value.index + 1) << 2) | 0;
 
   @override
-  String toString() => 'TypeDefOrRefTypeDef($value)';
+  String toString() => value.toString();
 }
 
 /// A [TypeDefOrRef] representing a `TypeRef`.
@@ -515,7 +515,7 @@ final class TypeDefOrRefTypeRef extends TypeDefOrRef {
   int encode() => ((value.index + 1) << 2) | 1;
 
   @override
-  String toString() => 'TypeDefOrRefTypeRef($value)';
+  String toString() => value.toString();
 }
 
 /// A [TypeDefOrRef] representing a `TypeSpec`.
@@ -529,7 +529,7 @@ final class TypeDefOrRefTypeSpec extends TypeDefOrRef {
   int encode() => ((value.index + 1) << 2) | 2;
 
   @override
-  String toString() => 'TypeDefOrRefTypeSpec($value)';
+  String toString() => value.toString();
 }
 
 /// Represents a coded index for either a `TypeDef` or a `MethodDef`.
@@ -556,7 +556,7 @@ final class TypeOrMethodDefTypeDef extends TypeOrMethodDef {
   int encode() => ((value.index + 1) << 1) | 0;
 
   @override
-  String toString() => 'TypeOrMethodDefTypeDef($value)';
+  String toString() => value.toString();
 }
 
 /// A [TypeOrMethodDef] representing a `MethodDef`.
@@ -570,5 +570,5 @@ final class TypeOrMethodDefMethodDef extends TypeOrMethodDef {
   int encode() => ((value.index + 1) << 1) | 1;
 
   @override
-  String toString() => 'TypeOrMethodDefMethodDef($value)';
+  String toString() => value.toString();
 }

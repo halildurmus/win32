@@ -14,13 +14,13 @@ import 'type_category.dart';
 final class MetadataLookup {
   /// Creates a new [MetadataLookup] from a [MetadataIndex].
   factory MetadataLookup(MetadataIndex index) {
-    final constants = HashMap<String, HashMap<String, Field>>();
-    final functions = HashMap<String, HashMap<String, MethodDef>>();
-    final types = HashMap<String, HashMap<String, List<TypeDef>>>();
+    final constants = <String, Map<String, Field>>{};
+    final functions = <String, Map<String, MethodDef>>{};
+    final types = <String, Map<String, List<TypeDef>>>{};
 
     for (final (namespace, name, type) in index.namespaceTypeEntries) {
       types
-          .putIfAbsent(namespace, HashMap<String, List<TypeDef>>.new)
+          .putIfAbsent(namespace, () => {})
           .putIfAbsent(name, () => [])
           .add(type);
 
@@ -29,12 +29,12 @@ final class MetadataLookup {
           case TypeCategory.class$ when name == 'Apis':
             for (final method in type.methods) {
               functions
-                  .putIfAbsent(namespace, HashMap<String, MethodDef>.new)
+                  .putIfAbsent(namespace, () => {})
                   .putIfAbsent(method.name, () => method);
             }
             for (final field in type.fields) {
               constants
-                  .putIfAbsent(namespace, HashMap<String, Field>.new)
+                  .putIfAbsent(namespace, () => {})
                   .putIfAbsent(field.name, () => field);
             }
 
@@ -43,7 +43,7 @@ final class MetadataLookup {
             for (final field in type.fields) {
               if (field.flags.has(FieldAttributes.literal)) {
                 constants
-                    .putIfAbsent(namespace, HashMap<String, Field>.new)
+                    .putIfAbsent(namespace, () => {})
                     .putIfAbsent(field.name, () => field);
               }
             }
@@ -67,13 +67,13 @@ final class MetadataLookup {
   final MetadataIndex index;
 
   /// A map of [Field]s indexed by their namespace and name.
-  final HashMap<String, HashMap<String, Field>> constantIndex;
+  final Map<String, Map<String, Field>> constantIndex;
 
   /// A map of [MethodDef]s indexed by their namespace and name.
-  final HashMap<String, HashMap<String, MethodDef>> functionIndex;
+  final Map<String, Map<String, MethodDef>> functionIndex;
 
   /// A map of [TypeDef]s indexed by their namespace and name.
-  final HashMap<String, HashMap<String, List<TypeDef>>> typeIndex;
+  final Map<String, Map<String, List<TypeDef>>> typeIndex;
 
   /// Finds a constant by its [namespace] and [name].
   ///

@@ -80,6 +80,7 @@ export 'src/logger.dart';
 export 'src/metadata_type.dart';
 export 'src/metadata_value.dart';
 export 'src/method_signature.dart';
+export 'src/property_signature.dart';
 export 'src/reader/blob.dart';
 export 'src/reader/codes.dart'
     hide
@@ -87,8 +88,13 @@ export 'src/reader/codes.dart'
         CustomAttributeTypeCompanion,
         HasConstantCompanion,
         HasCustomAttributeCompanion,
+        HasDeclSecurityCompanion,
+        HasFieldMarshalCompanion,
+        HasSemanticsCompanion,
+        ImplementationCompanion,
         MemberForwardedCompanion,
         MemberRefParentCompanion,
+        MethodDefOrRefCompanion,
         ResolutionScopeCompanion,
         TypeDefOrRefCompanion,
         TypeOrMethodDefCompanion;

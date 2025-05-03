@@ -5,15 +5,14 @@ import '../metadata_table.dart';
 import '../row.dart';
 import 'field.dart';
 
-/// Represents a row in the `FieldLayout` metadata table, describing the
-/// physical layout information of a [Field] within a type.
+/// Represents a row in the `FieldLayout` metadata table.
 ///
 /// The fields are populated by interpreting the binary metadata as specified in
 /// ECMA-335 `§II.22.16`.
 ///
 /// The `FieldLayout` table has the following columns:
 ///  - **Offset** (4-byte constant)
-///  - **Field** (Field Index)
+///  - **Field** (Field Table Index)
 final class FieldLayout extends Row {
   FieldLayout(super.metadataIndex, super.readerIndex, super.index);
 
@@ -24,7 +23,7 @@ final class FieldLayout extends Row {
   ///
   /// This value specifies how many bytes from the start of the type's instance
   /// data the field's storage begins.
-  late final offset = readUint(0);
+  late final offset = readUint32(0);
 
   /// The [Field] to which this layout information applies.
   late final field = readRow<Field>(1);

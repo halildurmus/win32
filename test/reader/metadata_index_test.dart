@@ -29,10 +29,10 @@ void main() async {
       check(allTypes.length).equals(34396);
       check(
         allTypes[0].namespace,
-      ).equals('Windows.Win32.System.PasswordManagement');
-      check(allTypes[0].name).equals('ENCRYPTED_LM_OWF_PASSWORD');
-      check(allTypes.last.namespace).equals('Windows.Win32.UI.TabletPC');
-      check(allTypes.last.name).equals('IInkRecognizer2');
+      ).equals('Windows.Win32.System.ApplicationInstallationAndServicing');
+      check(allTypes[0].name).equals('Apis');
+      check(allTypes.last.namespace).equals('Windows.Win32.System.Mailslots');
+      check(allTypes.last.name).equals('Apis');
     });
 
     test('namespaceTypeEntries', () {
@@ -40,14 +40,14 @@ void main() async {
       check(namespaceTypeEntries.length).equals(34396);
       check(
         namespaceTypeEntries[0].$1,
-      ).equals('Windows.Win32.System.PasswordManagement');
-      check(namespaceTypeEntries[0].$2).equals('ENCRYPTED_LM_OWF_PASSWORD');
+      ).equals('Windows.Win32.System.ApplicationInstallationAndServicing');
+      check(namespaceTypeEntries[0].$2).equals('Apis');
+      check(namespaceTypeEntries[0].$3.name).equals('Apis');
       check(
-        namespaceTypeEntries[0].$3.name,
-      ).equals('ENCRYPTED_LM_OWF_PASSWORD');
-      check(namespaceTypeEntries.last.$1).equals('Windows.Win32.UI.TabletPC');
-      check(namespaceTypeEntries.last.$2).equals('IInkRecognizer2');
-      check(namespaceTypeEntries.last.$3.name).equals('IInkRecognizer2');
+        namespaceTypeEntries.last.$1,
+      ).equals('Windows.Win32.System.Mailslots');
+      check(namespaceTypeEntries.last.$2).equals('Apis');
+      check(namespaceTypeEntries.last.$3.name).equals('Apis');
     });
 
     group('nestedTypes', () {
@@ -174,8 +174,23 @@ void main() async {
       });
     });
 
-    test('assemblyRefs', () {
-      final assemblyRefs = win32Index.assemblyRefs.toList();
+    test('assembly', () {
+      final assemblies = win32Index.assembly.toList();
+      check(assemblies.length).equals(1);
+      check(assemblies[0].name).equals('Windows.Win32.winmd');
+      check(assemblies[0].version).equals('0.0.0.0');
+    });
+
+    test('assemblyOS', () {
+      check(win32Index.assemblyOS).isEmpty();
+    });
+
+    test('assemblyProcessor', () {
+      check(win32Index.assemblyProcessor).isEmpty();
+    });
+
+    test('assemblyRef', () {
+      final assemblyRefs = win32Index.assemblyRef.toList();
       check(assemblyRefs.length).equals(5);
       check(assemblyRefs[0].name).equals('netstandard');
       check(assemblyRefs[0].version).equals('2.1.0.0');
@@ -185,36 +200,64 @@ void main() async {
       check(assemblyRefs.last.version).equals('15.0.0.0');
     });
 
-    test('classLayouts', () {
-      final classLayouts = win32Index.classLayouts.toList();
+    test('assemblyRefOS', () {
+      check(win32Index.assemblyRefOS).isEmpty();
+    });
+
+    test('assemblyRefProcessor', () {
+      check(win32Index.assemblyRefProcessor).isEmpty();
+    });
+
+    test('classLayout', () {
+      final classLayouts = win32Index.classLayout.toList();
       check(classLayouts.length).equals(1231);
       check(classLayouts[0].packingSize).equals(4);
       check(classLayouts.last.packingSize).equals(1);
     });
 
-    test('constants', () {
-      final constants = win32Index.constants.toList();
+    test('constant', () {
+      final constants = win32Index.constant.toList();
       check(constants.length).equals(151696);
       check(constants[0].value).isNotNull().equals(const Int32Value(0));
       check(constants.last.value).isNotNull().equals(const Int32Value(1));
     });
 
-    test('customAttributes', () {
-      final customAttributes = win32Index.customAttributes.toList();
+    test('customAttribute', () {
+      final customAttributes = win32Index.customAttribute.toList();
       check(customAttributes.length).equals(150223);
       check(customAttributes[0].name).equals('SupportedOSPlatformAttribute');
       check(customAttributes.last.name).equals('FlexibleArrayAttribute');
     });
 
-    test('fields', () {
-      final fields = win32Index.fields.toList();
+    test('declSecurity', () {
+      check(win32Index.declSecurity).isEmpty();
+    });
+
+    test('event', () {
+      check(win32Index.event).isEmpty();
+      // final events = winrtIndex.event.toList();
+      // check(events.length).equals(1);
+    });
+
+    test('eventMap', () {
+      check(win32Index.eventMap).isEmpty();
+      // final eventMaps = winrtIndex.eventMap.toList();
+      // check(eventMaps.length).equals(1);
+    });
+
+    test('exportedType', () {
+      check(win32Index.exportedType).isEmpty();
+    });
+
+    test('field', () {
+      final fields = win32Index.field.toList();
       check(fields.length).equals(239888);
       check(fields[0].name).equals('MSIDBOPEN_READONLY');
       check(fields.last.name).equals('FallbackIndexMax');
     });
 
-    test('fieldLayouts', () {
-      final fieldLayouts = win32Index.fieldLayouts.toList();
+    test('fieldLayout', () {
+      final fieldLayouts = win32Index.fieldLayout.toList();
       check(fieldLayouts.length).equals(4382);
       check(fieldLayouts[0].field.name).equals('Anonymous');
       check(fieldLayouts[0].offset).equals(0);
@@ -222,47 +265,75 @@ void main() async {
       check(fieldLayouts.last.offset).equals(0);
     });
 
-    test('genericParams', () {
-      final genericParams = winrtIndex.genericParams.toList();
+    test('fieldMarshal', () {
+      check(win32Index.fieldMarshal).isEmpty();
+    });
+
+    test('fieldRVA', () {
+      check(win32Index.fieldRVA).isEmpty();
+    });
+
+    test('file', () {
+      check(win32Index.file).isEmpty();
+    });
+
+    test('genericParam', () {
+      final genericParams = winrtIndex.genericParam.toList();
       check(genericParams.length).equals(33);
-      check(genericParams[0].name).equals('K');
-      check(genericParams.last.name).equals('TProgress');
+      check(genericParams[0].name).equals('TProgress');
+      check(genericParams.last.name).equals('T');
     });
 
-    test('genericParamConstraints', () {
-      check(winrtIndex.genericParamConstraints).isEmpty();
+    test('genericParamConstraint', () {
+      check(winrtIndex.genericParamConstraint).isEmpty();
     });
 
-    test('implMaps', () {
-      final implMaps = win32Index.implMaps.toList();
+    test('implMap', () {
+      final implMaps = win32Index.implMap.toList();
       check(implMaps.length).equals(18128);
       check(implMaps[0].importName).equals('MsiCloseHandle');
       check(implMaps.last.importName).equals('ReadThreadProfilingData');
     });
 
-    test('interfaceImpls', () {
-      final interfaceImpls = win32Index.interfaceImpls.toList();
+    test('interfaceImpl', () {
+      final interfaceImpls = win32Index.interfaceImpl.toList();
       check(interfaceImpls.length).equals(7812);
       check(interfaceImpls[0].class$.name).equals('IVdsProviderPrivate');
       check(interfaceImpls.last.class$.name).equals('IMetaDataWinMDImport');
     });
 
-    test('memberRefs', () {
-      final memberRefs = win32Index.memberRefs.toList();
+    test('manifestResource', () {
+      check(win32Index.manifestResource).isEmpty();
+    });
+
+    test('memberRef', () {
+      final memberRefs = win32Index.memberRef.toList();
       check(memberRefs.length).equals(41);
       check(memberRefs[0].name).equals('.ctor');
       check(memberRefs.last.name).equals('.ctor');
     });
 
-    test('methodDefs', () {
-      final methodDefs = win32Index.methodDefs.toList();
+    test('methodDef', () {
+      final methodDefs = win32Index.methodDef.toList();
       check(methodDefs.length).equals(69936);
       check(methodDefs[0].name).equals('MsiCloseHandle');
       check(methodDefs.last.name).equals('Invoke');
     });
 
-    test('modules', () {
-      final modules = win32Index.modules.toList();
+    test('methodImpl', () {
+      check(win32Index.methodImpl).isEmpty();
+    });
+
+    test('methodSemantics', () {
+      check(win32Index.methodSemantics).isEmpty();
+    });
+
+    test('methodSpec', () {
+      check(win32Index.methodSpec).isEmpty();
+    });
+
+    test('module', () {
+      final modules = win32Index.module.toList();
       check(modules.length).equals(1);
       check(modules[0].name).equals('Windows.Win32.winmd');
       check(
@@ -270,15 +341,15 @@ void main() async {
       ).equals('4a520299-e458-4675-befb-318972b60e6a');
     });
 
-    test('moduleRefs', () {
-      final moduleRefs = win32Index.moduleRefs.toList();
+    test('moduleRef', () {
+      final moduleRefs = win32Index.moduleRef.toList();
       check(moduleRefs.length).equals(370);
       check(moduleRefs[0].name).equals('msi.dll');
       check(moduleRefs.last.name).equals('XmlLite.dll');
     });
 
-    test('nestedClasses', () {
-      final nestedClasses = win32Index.nestedClasses.toList();
+    test('nestedClasse', () {
+      final nestedClasses = win32Index.nestedClass.toList();
       check(nestedClasses.length).equals(2075);
       check(nestedClasses[0].inner.name).equals('_Anonymous_e__Struct');
       check(nestedClasses[0].outer.name).equals('SLIST_HEADER');
@@ -286,29 +357,45 @@ void main() async {
       check(nestedClasses.last.outer.name).equals('NPI_MODULEID');
     });
 
-    test('params', () {
-      final params = win32Index.params.toList();
+    test('param', () {
+      final params = win32Index.param.toList();
       check(params.length).equals(216953);
       check(params[0].name).equals('hAny');
       check(params.last.name).equals('dwNumberOfEntries');
     });
 
-    test('typeDefs', () {
-      final typeDefs = win32Index.typeDefs.toList();
+    test('property', () {
+      check(win32Index.property).isEmpty();
+      // final properties = winrtIndex.property.toList();
+      // check(properties.length).equals(1);
+    });
+
+    test('propertyMap', () {
+      check(win32Index.propertyMap).isEmpty();
+      // final propertyMaps = winrtIndex.propertyMap.toList();
+      // check(propertyMaps.length).equals(1);
+    });
+
+    test('standAloneSig', () {
+      check(win32Index.standAloneSig).isEmpty();
+    });
+
+    test('typeDef', () {
+      final typeDefs = win32Index.typeDef.toList();
       check(typeDefs.length).equals(36472);
       check(typeDefs[0].name).equals('<Module>');
       check(typeDefs.last.name).equals('FALLBACK_INDEX');
     });
 
-    test('typeRefs', () {
-      final typeRefs = win32Index.typeRefs.toList();
+    test('typeRef', () {
+      final typeRefs = win32Index.typeRef.toList();
       check(typeRefs.length).equals(16166);
       check(typeRefs[0].name).equals('PWSTR');
       check(typeRefs.last.name).equals('FALLBACK_INDEX');
     });
 
-    test('typeSpecs', () {
-      final typeSpecs = winrtIndex.typeSpecs.toList();
+    test('typeSpec', () {
+      final typeSpecs = winrtIndex.typeSpec.toList();
       check(typeSpecs.length).equals(254);
       check(typeSpecs[0].type()).equals(
         const NamedType(
@@ -322,16 +409,9 @@ void main() async {
       check(typeSpecs.last.type()).equals(
         const NamedType(
           TypeName(
-            'Windows.Foundation',
-            'IAsyncOperation`1',
-            generics: [
-              NamedType(
-                TypeName(
-                  'Windows.Security.Authentication.OnlineId',
-                  'UserIdentity',
-                ),
-              ),
-            ],
+            'Windows.Foundation.Collections',
+            'IIterable`1',
+            generics: [NamedType(TypeName('Windows.Web.Http', 'IHttpContent'))],
           ),
         ),
       );

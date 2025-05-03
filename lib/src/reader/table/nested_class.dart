@@ -5,15 +5,14 @@ import '../metadata_table.dart';
 import '../row.dart';
 import 'type_def.dart';
 
-/// Represents a row in the `NestedClass` metadata table, describing a nested
-/// type definition.
+/// Represents a row in the `NestedClass` metadata table.
 ///
 /// The fields are populated by interpreting the binary metadata as specified in
 /// ECMA-335 `§II.22.32`.
 ///
 /// The `NestedClass` table has the following columns:
-///  - **NestedClass** (TypeDef Index)
-///  - **EnclosingClass** (TypeDef Index)
+///  - **NestedClass** (TypeDef Table Index)
+///  - **EnclosingClass** (TypeDef Table Index)
 final class NestedClass extends Row {
   NestedClass(super.metadataIndex, super.readerIndex, super.index);
 

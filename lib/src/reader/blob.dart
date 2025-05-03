@@ -8,6 +8,7 @@ import '../compressed_integer.dart';
 import '../exception.dart';
 import '../metadata_type.dart';
 import '../method_signature.dart';
+import '../property_signature.dart';
 import '../type_name.dart';
 import 'codes.dart';
 import 'metadata_index.dart';
@@ -74,6 +75,8 @@ final class Blob {
   ///
   /// Returns a [MethodSignature] containing the flags, return type, and
   /// parameter types.
+  ///
+  /// See ECMA-335 `§II.23.2.1 MethodDefSig`.
   MethodSignature readMethodSignature([
     List<MetadataType> generics = const [],
   ]) {
@@ -106,6 +109,29 @@ final class Blob {
     return UnmodifiableListView(mods);
   }
 
+  /// Reads and decodes a property signature from the blob.
+  ///
+  /// Returns a [PropertySignature] containing the flags, return type, and
+  /// parameter types.
+  ///
+  /// See ECMA-335 `§II.23.2.5 PropertySig`.
+  PropertySignature readPropertySignature([
+    List<MetadataType> generics = const [],
+  ]) {
+    final flags = readUint8();
+    assert(
+      flags == 0x8 || flags == 0x28,
+      'Invalid first byte for PropertySig: $flags. Expected 0x8 or 0x28.',
+    );
+    final paramCount = readCompressed();
+    final returnType = readTypeSignature(generics);
+    final types = <MetadataType>[];
+    for (var i = 0; i < paramCount; i++) {
+      types.add(readTypeSignature(generics));
+    }
+    return PropertySignature(returnType: returnType, types: types);
+  }
+
   /// Reads a type code and returns a corresponding [MetadataType].
   MetadataType readTypeCode([List<MetadataType> generics = const []]) {
     final typeCode = readUint8();
@@ -129,7 +155,10 @@ final class Blob {
       ELEMENT_TYPE_OBJECT => const ObjectType(),
       ELEMENT_TYPE_CLASS ||
       ELEMENT_TYPE_VALUETYPE => decode<TypeDefOrRef>().type(generics),
-      ELEMENT_TYPE_VAR => generics[readCompressed()],
+      ELEMENT_TYPE_VAR =>
+        generics.isEmpty
+            ? GenericParameterType(readCompressed())
+            : generics[readCompressed()],
       ELEMENT_TYPE_ARRAY => _readArray(generics),
       ELEMENT_TYPE_GENERICINST => _readGenericInst(generics),
       ELEMENT_TYPE_ENUM => const AttributeEnumType(),

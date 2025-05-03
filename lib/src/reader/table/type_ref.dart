@@ -6,8 +6,7 @@ import '../metadata_index.dart';
 import '../metadata_table.dart';
 import '../row.dart';
 
-/// Represents a row in the `TypeRef` metadata table, describing a reference to
-/// a type.
+/// Represents a row in the `TypeRef` metadata table.
 ///
 /// The fields are populated by interpreting the binary metadata as specified in
 /// ECMA-335 `§II.22.38`.

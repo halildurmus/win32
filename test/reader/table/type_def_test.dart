@@ -41,6 +41,7 @@ void main() async {
       check(methods[50].name).equals('get_Day');
       check(methods[51].name).equals('put_Day');
       check(methods[105].name).equals('TimeZoneAsString');
+      check(typeDef.category).equals(TypeCategory.class$);
       check(typeDef.generics).isEmpty();
       final interfaceImpls = typeDef.interfaceImpls.toList();
       check(interfaceImpls.length).equals(2);
@@ -56,8 +57,10 @@ void main() async {
         ),
       );
       check(typeDef.classLayout).isNull();
+      check(typeDef.events).isEmpty();
+      check(typeDef.methodImpls).isEmpty();
       check(typeDef.nested).isNull();
-      check(typeDef.category).equals(TypeCategory.class$);
+      check(typeDef.properties).isEmpty();
     });
 
     test('Windows.Win32.Foundation.SYSTEMTIME', () {
@@ -87,11 +90,14 @@ void main() async {
       check(fields[0].name).equals('wYear');
       check(fields[7].name).equals('wMilliseconds');
       check(typeDef.methods).isEmpty();
+      check(typeDef.category).equals(TypeCategory.struct);
       check(typeDef.generics).isEmpty();
       check(typeDef.interfaceImpls).isEmpty();
       check(typeDef.classLayout).isNull();
+      check(typeDef.events).isEmpty();
+      check(typeDef.methodImpls).isEmpty();
       check(typeDef.nested).isNull();
-      check(typeDef.category).equals(TypeCategory.struct);
+      check(typeDef.properties).isEmpty();
     });
 
     test('Windows.Win32.Foundation.Metadata.GuidAttribute', () {
@@ -121,11 +127,14 @@ void main() async {
       check(methods.length).equals(1);
       check(methods[0].name).equals('.ctor');
       check(methods[0].params.length).equals(11);
+      check(typeDef.category).equals(TypeCategory.attribute);
       check(typeDef.generics).isEmpty();
       check(typeDef.interfaceImpls).isEmpty();
       check(typeDef.classLayout).isNull();
+      check(typeDef.events).isEmpty();
+      check(typeDef.methodImpls).isEmpty();
       check(typeDef.nested).isNull();
-      check(typeDef.category).equals(TypeCategory.attribute);
+      check(typeDef.properties).isEmpty();
     });
 
     test('Windows.Win32.System.WinRT.IInspectable', () {
@@ -153,6 +162,7 @@ void main() async {
       check(methods[0].name).equals('GetIids');
       check(methods[1].name).equals('GetRuntimeClassName');
       check(methods[2].name).equals('GetTrustLevel');
+      check(typeDef.category).equals(TypeCategory.interface);
       check(typeDef.generics).isEmpty();
       final interfaceImpls = typeDef.interfaceImpls.toList();
       check(interfaceImpls.length).equals(1);
@@ -162,8 +172,10 @@ void main() async {
         const NamedType(TypeName('Windows.Win32.System.Com', 'IUnknown')),
       );
       check(typeDef.classLayout).isNull();
+      check(typeDef.events).isEmpty();
+      check(typeDef.methodImpls).isEmpty();
       check(typeDef.nested).isNull();
-      check(typeDef.category).equals(TypeCategory.interface);
+      check(typeDef.properties).isEmpty();
     });
 
     test('Windows.Win32.System.WinRT.RO_INIT_TYPE', () {
@@ -200,11 +212,14 @@ void main() async {
         fields[2].constant,
       ).isNotNull().has((it) => it.value, 'value').equals(const Int32Value(1));
       check(typeDef.methods).isEmpty();
+      check(typeDef.category).equals(TypeCategory.enum$);
       check(typeDef.generics).isEmpty();
       check(typeDef.interfaceImpls).isEmpty();
       check(typeDef.classLayout).isNull();
+      check(typeDef.events).isEmpty();
+      check(typeDef.methodImpls).isEmpty();
       check(typeDef.nested).isNull();
-      check(typeDef.category).equals(TypeCategory.enum$);
+      check(typeDef.properties).isEmpty();
     });
 
     test('Windows.Win32.UI.WindowsAndMessaging.WNDPROC', () {
@@ -236,11 +251,14 @@ void main() async {
       check(methods[0].params.length).equals(2);
       check(methods[1].name).equals('Invoke');
       check(methods[1].params.length).equals(5);
+      check(typeDef.category).equals(TypeCategory.delegate);
       check(typeDef.generics).isEmpty();
       check(typeDef.interfaceImpls).isEmpty();
       check(typeDef.classLayout).isNull();
+      check(typeDef.events).isEmpty();
+      check(typeDef.methodImpls).isEmpty();
       check(typeDef.nested).isNull();
-      check(typeDef.category).equals(TypeCategory.delegate);
+      check(typeDef.properties).isEmpty();
     });
   });
 

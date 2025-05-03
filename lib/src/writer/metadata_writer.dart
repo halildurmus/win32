@@ -710,6 +710,7 @@ final class MetadataWriter {
     Struct.create<IMAGE_FILE_HEADER>(fileByteData)
       ..Machine = IMAGE_FILE_MACHINE_I386
       ..NumberOfSections = 1
+      ..TimeDateStamp = DateTime.now().millisecondsSinceEpoch ~/ 1000
       ..SizeOfOptionalHeader = sizeOf<IMAGE_OPTIONAL_HEADER32>()
       ..Characteristics =
           IMAGE_FILE_DLL |

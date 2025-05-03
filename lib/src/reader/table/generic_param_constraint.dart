@@ -7,14 +7,13 @@ import '../metadata_table.dart';
 import '../row.dart';
 import 'generic_param.dart';
 
-/// Represents a row in the `GenericParamConstraint` metadata table, describing
-/// a constraint on a generic parameter.
+/// Represents a row in the `GenericParamConstraint` metadata table.
 ///
 /// The fields are populated by interpreting the binary metadata as specified in
 /// ECMA-335 `§II.22.21`.
 ///
 /// The `GenericParamConstraint` table has the following columns:
-///  - **Owner** (GenericParam Index)
+///  - **Owner** (GenericParam Table Index)
 ///  - **Constraint** (TypeDefOrRef Coded Index)
 final class GenericParamConstraint extends Row with HasCustomAttributes {
   GenericParamConstraint(super.metadataIndex, super.readerIndex, super.index);

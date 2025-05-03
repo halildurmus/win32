@@ -8,8 +8,7 @@ import '../metadata_table.dart';
 import '../row.dart';
 import 'generic_param_constraint.dart';
 
-/// Represents a row in the `GenericParam` metadata table, describing a generic
-/// type or method parameter.
+/// Represents a row in the `GenericParam` metadata table.
 ///
 /// The fields are populated by interpreting the binary metadata as specified in
 /// ECMA-335 `§II.22.20`.
@@ -28,10 +27,10 @@ final class GenericParam extends Row with HasCustomAttributes {
   /// The index of the generic parameter in the parameter list.
   ///
   /// Parameters are numbered sequentially from left to right, starting at zero.
-  late final sequence = readUint(0);
+  late final sequence = readUint16(0);
 
   /// The attribute flags describing characteristics of the parameter.
-  late final flags = GenericParamAttributes(readUint(1));
+  late final flags = GenericParamAttributes(readUint16(1));
 
   /// The declared variance of the generic parameter.
   late final variance =

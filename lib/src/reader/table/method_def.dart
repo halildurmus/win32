@@ -9,11 +9,12 @@ import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
 import '../metadata_table.dart';
 import '../row.dart';
+import 'generic_param.dart';
 import 'impl_map.dart';
 import 'param.dart';
+import 'type_def.dart';
 
-/// Represents a row in the `MethodDef` metadata table, describing a method
-/// defined in a type.
+/// Represents a row in the `MethodDef` metadata table.
 ///
 /// The fields are populated by interpreting the binary metadata as specified in
 /// ECMA-335 `§II.22.26`.
@@ -24,7 +25,7 @@ import 'param.dart';
 ///  - **Flags** (2-byte bitmask of MethodAttributes)
 ///  - **Name** (String Heap Index)
 ///  - **Signature** (Blob Heap Index)
-///  - **ParamList** (Param Index)
+///  - **ParamList** (Param Table Index)
 final class MethodDef extends Row with HasCustomAttributes {
   MethodDef(super.metadataIndex, super.readerIndex, super.index);
 
@@ -32,11 +33,11 @@ final class MethodDef extends Row with HasCustomAttributes {
   MetadataTable get table => MetadataTable.methodDef;
 
   /// The relative virtual address (RVA) of the method's implementation.
-  late final rva = readUint(0);
+  late final rva = readUint32(0);
 
   /// Implementation flags that provide details about the method's
   /// implementation.
-  late final implFlags = MethodImplAttributes(readUint(1));
+  late final implFlags = MethodImplAttributes(readUint16(1));
 
   /// The code type associated with the method.
   late final codeType =
@@ -50,7 +51,7 @@ final class MethodDef extends Row with HasCustomAttributes {
 
   /// The method's attributes, describing its access level, static state, and
   /// other characteristics.
-  late final flags = MethodAttributes(readUint(2));
+  late final flags = MethodAttributes(readUint16(2));
 
   /// The access level of the method (e.g., public, private, etc.).
   late final memberAccess =
@@ -68,8 +69,8 @@ final class MethodDef extends Row with HasCustomAttributes {
   /// The name of the method.
   late final name = readString(3);
 
-  /// The method's signature, which defines the method's return type and
-  /// parameters.
+  /// The signature of the method, which defines the return type and parameters
+  /// of the method.
   ///
   /// Optionally, [generics] can be provided to substitute any generic
   /// parameters in the method signature.
@@ -79,14 +80,20 @@ final class MethodDef extends Row with HasCustomAttributes {
   /// The list of parameters for the method.
   late final params = getList<Param>(5);
 
-  /// The type that owns this method.
-  late final parent = MemberRefParent.typeDef(getParentRow(5));
+  /// The list of generic parameters defined for the method, if any.
+  late final generics = getEqualRange<GenericParam>(
+    2,
+    TypeOrMethodDef.methodDef(this).encode(),
+  );
 
   /// The implementation map for the method, if it exists.
   late final implMap = getEqualRange<ImplMap>(
     1,
     MemberForwarded.methodDef(this).encode(),
   ).firstOrNull;
+
+  /// The type that owns this method.
+  late final parent = getParentRow<TypeDef>(5);
 
   @override
   String toString() => 'MethodDef(name: $name, params: $params)';
