@@ -29,10 +29,10 @@ void main() async {
       check(allTypes.length).equals(34396);
       check(
         allTypes[0].namespace,
-      ).equals('Windows.Win32.System.ApplicationInstallationAndServicing');
-      check(allTypes[0].name).equals('Apis');
-      check(allTypes.last.namespace).equals('Windows.Win32.System.Mailslots');
-      check(allTypes.last.name).equals('Apis');
+      ).equals('Windows.Win32.System.PasswordManagement');
+      check(allTypes[0].name).equals('ENCRYPTED_LM_OWF_PASSWORD');
+      check(allTypes.last.namespace).equals('Windows.Win32.UI.TabletPC');
+      check(allTypes.last.name).equals('IInkRecognizer2');
     });
 
     test('namespaceTypeEntries', () {
@@ -40,14 +40,14 @@ void main() async {
       check(namespaceTypeEntries.length).equals(34396);
       check(
         namespaceTypeEntries[0].$1,
-      ).equals('Windows.Win32.System.ApplicationInstallationAndServicing');
-      check(namespaceTypeEntries[0].$2).equals('Apis');
-      check(namespaceTypeEntries[0].$3.name).equals('Apis');
+      ).equals('Windows.Win32.System.PasswordManagement');
+      check(namespaceTypeEntries[0].$2).equals('ENCRYPTED_LM_OWF_PASSWORD');
       check(
-        namespaceTypeEntries.last.$1,
-      ).equals('Windows.Win32.System.Mailslots');
-      check(namespaceTypeEntries.last.$2).equals('Apis');
-      check(namespaceTypeEntries.last.$3.name).equals('Apis');
+        namespaceTypeEntries[0].$3.name,
+      ).equals('ENCRYPTED_LM_OWF_PASSWORD');
+      check(namespaceTypeEntries.last.$1).equals('Windows.Win32.UI.TabletPC');
+      check(namespaceTypeEntries.last.$2).equals('IInkRecognizer2');
+      check(namespaceTypeEntries.last.$3.name).equals('IInkRecognizer2');
     });
 
     group('nestedTypes', () {
@@ -237,18 +237,18 @@ void main() async {
       check(win32Index.event).isEmpty();
       final events = winrtIndex.event.toList();
       check(events.length).equals(2833);
-      check(events[0].name).equals('Dismissed');
-      check(events.last.name).equals('ResponseReceived');
+      check(events[0].name).equals('PackageInstalling');
+      check(events.last.name).equals('ProcessExited');
     });
 
     test('eventMap', () {
       check(win32Index.eventMap).isEmpty();
       final eventMaps = winrtIndex.eventMap.toList();
       check(eventMaps.length).equals(1195);
-      check(eventMaps[0].parent.name).equals('ISplashScreen');
-      check(eventMaps[0].events.length).equals(1);
-      check(eventMaps.last.parent.name).equals('IHttpDiagnosticProvider');
-      check(eventMaps.last.events.length).equals(3);
+      check(eventMaps[0].parent.name).equals('IPackageCatalog');
+      check(eventMaps[0].events.length).equals(5);
+      check(eventMaps.last.parent.name).equals('WebViewControlProcess');
+      check(eventMaps.last.events.length).equals(1);
     });
 
     test('exportedType', () {
@@ -334,8 +334,8 @@ void main() async {
       check(win32Index.methodSemantics).isEmpty();
       final methodSemantics = winrtIndex.methodSemantics.toList();
       check(methodSemantics.length).equals(51205);
-      check(methodSemantics[0].method.name).equals('add_Dismissed');
-      check(methodSemantics.last.method.name).equals('get_SourceUri');
+      check(methodSemantics[0].method.name).equals('add_PackageInstalling');
+      check(methodSemantics.last.method.name).equals('put_EnterpriseId');
     });
 
     test('methodSpec', () {
@@ -379,7 +379,7 @@ void main() async {
       final properties = winrtIndex.property.toList();
       check(properties.length).equals(35324);
       check(properties[0].name).equals('BitmapAlphaMode');
-      check(properties.last.name).equals('SourceUri');
+      check(properties.last.name).equals('EnterpriseId');
     });
 
     test('propertyMap', () {
@@ -390,8 +390,8 @@ void main() async {
       check(propertyMaps[0].properties.length).equals(4);
       check(
         propertyMaps.last.parent.name,
-      ).equals('IHttpDiagnosticSourceLocation');
-      check(propertyMaps.last.properties.length).equals(3);
+      ).equals('WebViewControlProcessOptions');
+      check(propertyMaps.last.properties.length).equals(2);
     });
 
     test('standAloneSig', () {
@@ -414,9 +414,9 @@ void main() async {
 
     test('typeSpec', () {
       final typeSpecs = winrtIndex.typeSpec.toList();
-      check(typeSpecs.length).equals(2778);
+      check(typeSpecs.length).equals(2783);
       check(typeSpecs[0].type()).equals(
-        const NamedType(
+        const NamedClassType(
           TypeName(
             'Windows.Foundation.Collections',
             'IMapView`2',
@@ -425,23 +425,15 @@ void main() async {
         ),
       );
       check(typeSpecs.last.type()).equals(
-        const NamedType(
+        const NamedClassType(
           TypeName(
             'Windows.Foundation',
             'TypedEventHandler`2',
             generics: [
-              NamedType(
-                TypeName(
-                  'Windows.Web.Http.Diagnostics',
-                  'HttpDiagnosticProvider',
-                ),
+              NamedClassType(
+                TypeName('Windows.Web.UI.Interop', 'WebViewControlProcess'),
               ),
-              NamedType(
-                TypeName(
-                  'Windows.Web.Http.Diagnostics',
-                  'HttpDiagnosticProviderResponseReceivedEventArgs',
-                ),
-              ),
+              ObjectType(),
             ],
           ),
         ),

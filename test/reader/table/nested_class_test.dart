@@ -1,6 +1,5 @@
 import 'package:checks/checks.dart';
 import 'package:test/scaffolding.dart';
-import 'package:test/test.dart';
 import 'package:winmd/windows_metadata.dart';
 
 import '../../versions.dart';

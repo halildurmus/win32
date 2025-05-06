@@ -2,6 +2,7 @@ import 'package:meta/meta.dart';
 
 import '../../attributes.dart';
 import '../../metadata_type.dart';
+import '../../type_name.dart';
 import '../codes.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
@@ -41,10 +42,17 @@ final class Event extends Row with HasCustomAttributes {
   /// The metadata type that corresponds to the underlying event type, if any.
   ///
   /// Optionally, [generics] can be passed to substitute any generic parameters.
-  MetadataType? type([List<MetadataType> generics = const []]) {
-    if (eventType case final eventType?) return eventType.type(generics);
-    return null;
-  }
+  MetadataType? type({List<MetadataType> generics = const []}) =>
+      switch (eventType) {
+        TypeDefOrRefTypeDef(:final value) => NamedClassType(
+          TypeName(value.namespace, value.name, generics: generics),
+        ),
+        TypeDefOrRefTypeRef(:final value) => NamedClassType(
+          TypeName(value.namespace, value.name, generics: generics),
+        ),
+        TypeDefOrRefTypeSpec(:final value) => value.type(generics: generics),
+        _ => null,
+      };
 
   /// The method semantics associated with the event.
   late final methodSemantics = getEqualRange<MethodSemantics>(

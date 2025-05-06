@@ -2,13 +2,13 @@ import 'dart:typed_data';
 
 import 'package:checks/checks.dart';
 import 'package:test/scaffolding.dart';
-import 'package:winmd/winmd.dart' show MetadataIndex, MetadataReader;
+import 'package:winmd/winmd.dart' show MetadataIndex, MetadataReader, TypeName;
 import 'package:winmd/writer.dart';
 
 void main() {
   group('MetadataWriter', () {
     test('empty', () {
-      final writer = MetadataWriter('MyMetadata');
+      final writer = MetadataWriter(name: 'MyMetadata');
       final bytes = writer.toBytes();
       final reader = MetadataReader.read(bytes);
       check(reader.moduleName).equals('MyMetadata');
@@ -63,7 +63,7 @@ void main() {
     });
 
     test('Attribute', () {
-      final writer = MetadataWriter('MyMetadata');
+      final writer = MetadataWriter(name: 'MyMetadata');
 
       final typeDef = writer.writeTypeDef(
         namespace: 'Namespace',
@@ -138,7 +138,7 @@ void main() {
     });
 
     test('Class', () {
-      final writer = MetadataWriter('MyMetadata');
+      final writer = MetadataWriter(name: 'MyMetadata');
 
       final interfaceTypeDef = writer.writeTypeDef(
         namespace: 'Namespace',
@@ -209,7 +209,7 @@ void main() {
 
       final interfaceImpl = writer.writeInterfaceImpl(
         class$: classTypeDef,
-        interface: MetadataType.named('Namespace', 'IName'),
+        interface: const NamedClassType(TypeName('Namespace', 'IName')),
       );
 
       final defaultAttribute = MemberRefParent.typeRef(
@@ -241,7 +241,7 @@ void main() {
     });
 
     test('Interface', () {
-      final writer = MetadataWriter('MyMetadata')
+      final writer = MetadataWriter(name: 'MyMetadata')
         ..writeTypeDef(
           namespace: 'Namespace',
           name: 'Name',
@@ -295,7 +295,7 @@ void main() {
     });
 
     test('Struct', () {
-      final writer = MetadataWriter('MyMetadata');
+      final writer = MetadataWriter(name: 'MyMetadata');
 
       final valueType = writer.writeTypeRef(
         namespace: 'System',
@@ -315,7 +315,7 @@ void main() {
         ..writeField(
           flags: FieldAttributes.public,
           name: 'SomeGuid',
-          type: MetadataType.named('System', 'Guid'),
+          type: const NamedValueType(TypeName('System', 'Guid')),
           offset: 0,
         )
         ..writeField(
@@ -334,7 +334,9 @@ void main() {
       check(fields.length).equals(2);
 
       check(fields[0].name).equals('SomeGuid');
-      check(fields[0].type).equals(MetadataType.named('System', 'Guid'));
+      check(
+        fields[0].type,
+      ).equals(const NamedValueType(TypeName('System', 'Guid')));
       check(
         fields[0].layout,
       ).isNotNull().has((it) => it.offset, 'offset').equals(0);

@@ -785,7 +785,7 @@ final class HasDeclSecurityAssembly extends HasDeclSecurity {
   String toString() => value.toString();
 }
 
-/// Represents a coded index for either a `Field` or a `Param`.
+/// Represents a coded index for a `Field` or a `Param`.
 sealed class HasFieldMarshal implements CodedIndex {
   /// Constructs a [HasFieldMarshal] referencing a `Field`.
   const factory HasFieldMarshal.field(FieldIndex value) = HasFieldMarshalField;
@@ -840,7 +840,7 @@ final class HasFieldMarshalParam extends HasFieldMarshal {
   String toString() => value.toString();
 }
 
-/// Represents a coded index for either an `Event` or a `Property`.
+/// Represents a coded index for an `Event` or a `Property`.
 sealed class HasSemantics implements CodedIndex {
   /// Constructs a [HasSemantics] referencing an `Event`.
   const factory HasSemantics.event(EventIndex value) = HasSemanticsEvent;
@@ -896,8 +896,7 @@ final class HasSemanticsProperty extends HasSemantics {
   String toString() => value.toString();
 }
 
-/// Represents a coded index for either a `File`, `AssemblyRef`, or
-/// `ExportedType`.
+/// Represents a coded index for a `File`, `AssemblyRef`, or `ExportedType`.
 sealed class Implementation implements CodedIndex {
   /// Constructs an [Implementation] referencing a `File`.
   const factory Implementation.file(FileIndex value) = ImplementationFile;
@@ -1035,7 +1034,8 @@ final class MemberForwardedMethodDef extends MemberForwarded {
   String toString() => value.toString();
 }
 
-/// Represents a coded index for either a `TypeDef` or a `TypeRef`.
+/// Represents a coded index for a `TypeDef`, `TypeRef`, `ModuleRef`,
+/// `MethodDef`, or `TypeSpec`.
 sealed class MemberRefParent implements CodedIndex {
   /// Constructs a [MemberRefParent] referencing a `TypeDef`.
   const factory MemberRefParent.typeDef(TypeDefIndex value) =
@@ -1170,7 +1170,7 @@ final class MemberRefParentTypeSpec extends MemberRefParent {
   String toString() => value.toString();
 }
 
-/// Represents a coded index for either a `MethodDef` or a `MemberRef`.
+/// Represents a coded index for a `MethodDef` or `MemberRef`.
 sealed class MethodDefOrRef implements CodedIndex {
   /// Constructs a [MethodDefOrRef] referencing a `MethodDef`.
   const factory MethodDefOrRef.methodDef(MethodDefIndex value) =
@@ -1337,7 +1337,7 @@ final class ResolutionScopeTypeRef extends ResolutionScope {
   String toString() => value.toString();
 }
 
-/// Represents a coded index for either a `TypeDef`, `TypeRef`, or `TypeSpec`.
+/// Represents a coded index for a `TypeDef`, `TypeRef`, or `TypeSpec`.
 sealed class TypeDefOrRef implements CodedIndex {
   /// Constructs a [TypeDefOrRef] referencing a `TypeDef`.
   const factory TypeDefOrRef.typeDef(TypeDefIndex value) = TypeDefOrRefTypeDef;
@@ -1351,8 +1351,8 @@ sealed class TypeDefOrRef implements CodedIndex {
 
   const TypeDefOrRef._();
 
-  // This results in an encoded value of zero.
-  static const none = TypeDefOrRef.typeDef(TypeDefIndex(4_294_967_295));
+  /// This results in an encoded value of zero.
+  static const none = TypeDefOrRef.typeDef(TypeDefIndex(0xFFFFFFFF));
 }
 
 /// A [TypeDefOrRef] representing a `TypeDef`.
@@ -1421,7 +1421,7 @@ final class TypeDefOrRefTypeSpec extends TypeDefOrRef {
   String toString() => value.toString();
 }
 
-/// Represents a coded index for either a `TypeDef` or a `MethodDef`.
+/// Represents a coded index for a `TypeDef` or `MethodDef`.
 sealed class TypeOrMethodDef implements CodedIndex {
   /// Constructs a [TypeOrMethodDef] referencing a `TypeDef`.
   const factory TypeOrMethodDef.typeDef(TypeDefIndex value) =

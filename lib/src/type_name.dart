@@ -28,7 +28,7 @@ final class TypeName {
       other is TypeName &&
           namespace == other.namespace &&
           name == other.name &&
-          listsEqual(_generics, other._generics);
+          listEqual(_generics, other._generics);
 
   @override
   int get hashCode => Object.hash(namespace, name, _generics);

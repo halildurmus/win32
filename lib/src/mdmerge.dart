@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:path/path.dart' as p;
 
 import 'attributes.dart';
+import 'exception.dart';
 import 'metadata_type.dart';
+import 'reader/codes.dart' as reader;
 import 'reader/has_custom_attributes.dart';
 import 'reader/metadata_index.dart';
 import 'reader/metadata_reader.dart';
@@ -37,11 +39,19 @@ void mdmerge({required List<String> inputPaths, required String outputPath}) {
   final output = File(outputPath);
   final readers = _expandInput(inputPaths);
   final index = MetadataIndex.fromReaders(readers);
-  final name = p.basename(outputPath);
-  final writer = MetadataWriter(name);
-  for (final typeDef in index.allTypes) {
+  final writer = MetadataWriter(name: p.basename(outputPath));
+
+  // Sort the types by namespace and name for consistent ordering.
+  final types = index.allTypes.toList(growable: false)
+    ..sort((a, b) {
+      final nsCompare = a.namespace.compareTo(b.namespace);
+      return nsCompare != 0 ? nsCompare : a.name.compareTo(b.name);
+    });
+
+  for (final typeDef in types) {
     _writeType(writer, index, typeDef, null);
   }
+
   output.writeAsBytesSync(writer.toBytes());
 }
 
@@ -130,10 +140,11 @@ void _writeType(
   final generics = def.generics
       .map((param) => GenericParameterType(param.sequence))
       .toList();
+
   for (final impl in def.interfaceImpls) {
     final implRef = writer.writeInterfaceImpl(
       class$: typeDef,
-      interface: impl.interface(generics),
+      interface: impl.interface(generics: generics),
     );
     _writeAttributes(writer, HasCustomAttribute.interfaceImpl(implRef), impl);
   }
@@ -278,8 +289,19 @@ void _writeAttributes<R extends HasCustomAttributes>(
   for (final attr in row.attributes) {
     final ctor = attr.type;
     final type = ctor.parent;
+    final (namespace, name) = switch (type) {
+      reader.MemberRefParentTypeDef(:final value) => (
+        value.namespace,
+        value.name,
+      ),
+      reader.MemberRefParentTypeRef(:final value) => (
+        value.namespace,
+        value.name,
+      ),
+      _ => throw WinmdException('Unsupported MemberRefParent type: $type'),
+    };
     final attrParent = MemberRefParent.typeRef(
-      writer.writeTypeRef(namespace: type.namespace, name: type.name),
+      writer.writeTypeRef(namespace: namespace, name: name),
     );
     final ctorRef = writer.writeMemberRef(
       parent: attrParent,

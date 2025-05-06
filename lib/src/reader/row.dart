@@ -198,14 +198,6 @@ abstract base class Row {
   }
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is Row && readerIndex == other.readerIndex && index == other.index;
-
-  @override
-  int get hashCode => Object.hash(readerIndex, index);
-
-  @override
   String toString() =>
       '$runtimeType(readerIndex: $readerIndex, index: $index, table: $table, '
       'metadataIndex: $metadataIndex)';

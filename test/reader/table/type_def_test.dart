@@ -47,7 +47,7 @@ void main() async {
       final [iMap, iIterable, iObservableMap] = interfaceImpls;
       check(iMap.class$.name).equals('StringMap');
       check(iMap.interface()).equals(
-        const NamedType(
+        const NamedClassType(
           TypeName(
             'Windows.Foundation.Collections',
             'IMap`2',
@@ -57,12 +57,12 @@ void main() async {
       );
       check(iIterable.class$.name).equals('StringMap');
       check(iIterable.interface()).equals(
-        const NamedType(
+        const NamedClassType(
           TypeName(
             'Windows.Foundation.Collections',
             'IIterable`1',
             generics: [
-              NamedType(
+              NamedClassType(
                 TypeName(
                   'Windows.Foundation.Collections',
                   'IKeyValuePair`2',
@@ -75,7 +75,7 @@ void main() async {
       );
       check(iObservableMap.class$.name).equals('StringMap');
       check(iObservableMap.interface()).equals(
-        const NamedType(
+        const NamedClassType(
           TypeName(
             'Windows.Foundation.Collections',
             'IObservableMap`2',
@@ -130,12 +130,12 @@ void main() async {
       check(interfaceImpls.length).equals(2);
       final [iCalendar, iTimeZoneOnCalendar] = interfaceImpls;
       check(iCalendar.class$.name).equals('Calendar');
-      check(
-        iCalendar.interface(),
-      ).equals(const NamedType(TypeName('Windows.Globalization', 'ICalendar')));
+      check(iCalendar.interface()).equals(
+        const NamedClassType(TypeName('Windows.Globalization', 'ICalendar')),
+      );
       check(iTimeZoneOnCalendar.class$.name).equals('Calendar');
       check(iTimeZoneOnCalendar.interface()).equals(
-        const NamedType(
+        const NamedClassType(
           TypeName('Windows.Globalization', 'ITimeZoneOnCalendar'),
         ),
       );
@@ -255,7 +255,7 @@ void main() async {
       final [iUnknown] = interfaceImpls;
       check(iUnknown.class$.name).equals('IInspectable');
       check(iUnknown.interface()).equals(
-        const NamedType(TypeName('Windows.Win32.System.Com', 'IUnknown')),
+        const NamedClassType(TypeName('Windows.Win32.System.Com', 'IUnknown')),
       );
       check(typeDef.classLayout).isNull();
       check(typeDef.events).isEmpty();

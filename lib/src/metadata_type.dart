@@ -9,10 +9,6 @@ import 'type_name.dart';
 sealed class MetadataType {
   const MetadataType();
 
-  /// Creates a [NamedType] with a [namespace] and [name].
-  factory MetadataType.named(String namespace, String name) =>
-      NamedType(TypeName(namespace, name));
-
   /// The [ElementType] code corresponding to this metadata type.
   ///
   /// Throws an [UnsupportedError], if the type does not have a direct
@@ -145,23 +141,55 @@ final class UintPtrType extends MetadataType {
   ElementType get code => ELEMENT_TYPE_U;
 }
 
-/// Represents a user-defined named type (class, enum, struct, etc.).
-final class NamedType extends MetadataType {
+/// Represents a user-defined named type within metadata, such as a class,
+/// struct, or enum.
+sealed class NamedType extends MetadataType {
   const NamedType(this.typeName);
 
-  /// The full name of the type, including namespace.
+  /// The full type name including namespace and generic arguments.
   final TypeName typeName;
+}
+
+/// Represents a user-defined class type (i.e., a reference type).
+///
+/// This includes any user-defined class or interface that is not a value type.
+final class NamedClassType extends NamedType {
+  /// Constructs a [NamedClassType] from the given [typeName].
+  const NamedClassType(super.typeName);
+
+  @override
+  ElementType get code => ELEMENT_TYPE_CLASS;
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is NamedType && typeName == other.typeName;
+      other is NamedClassType && typeName == other.typeName;
 
   @override
   int get hashCode => typeName.hashCode;
 
   @override
-  String toString() => 'NamedType($typeName)';
+  String toString() => 'NamedClassType($typeName)';
+}
+
+/// Represents a user-defined value type (i.e., a struct or enum).
+final class NamedValueType extends NamedType {
+  /// Constructs a [NamedValueType] from the given [typeName].
+  const NamedValueType(super.typeName);
+
+  @override
+  ElementType get code => ELEMENT_TYPE_VALUETYPE;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is NamedValueType && typeName == other.typeName;
+
+  @override
+  int get hashCode => typeName.hashCode;
+
+  @override
+  String toString() => 'NamedValueType($typeName)';
 }
 
 /// Represents a System.Object type.

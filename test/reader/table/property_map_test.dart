@@ -24,15 +24,12 @@ void main() async {
 
     test('IImageFeatureDescriptor', () {
       final propertyMap = index.propertyMap.last;
-      check(
-        propertyMap.parent.namespace,
-      ).equals('Windows.Web.Http.Diagnostics');
-      check(propertyMap.parent.name).equals('IHttpDiagnosticSourceLocation');
+      check(propertyMap.parent.namespace).equals('Windows.Web.UI.Interop');
+      check(propertyMap.parent.name).equals('WebViewControlProcessOptions');
       final properties = propertyMap.properties.toList();
-      check(properties.length).equals(3);
-      check(properties[0].name).equals('ColumnNumber');
-      check(properties[1].name).equals('LineNumber');
-      check(properties[2].name).equals('SourceUri');
+      check(properties.length).equals(2);
+      check(properties[0].name).equals('PrivateNetworkClientServerCapability');
+      check(properties[1].name).equals('EnterpriseId');
     });
   });
 }

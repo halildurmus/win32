@@ -22,11 +22,11 @@ void main() async {
       check(mapChanged.add.name).equals('add_MapChanged');
       check(mapChanged.add.signature()).equals(
         const MethodSignature(
-          returnType: NamedType(
+          returnType: NamedValueType(
             TypeName('Windows.Foundation', 'EventRegistrationToken'),
           ),
           types: [
-            NamedType(
+            NamedClassType(
               TypeName(
                 'Windows.Foundation.Collections',
                 'MapChangedEventHandler`2',
@@ -40,7 +40,9 @@ void main() async {
       check(mapChanged.remove.signature()).equals(
         const MethodSignature(
           types: [
-            NamedType(TypeName('Windows.Foundation', 'EventRegistrationToken')),
+            NamedValueType(
+              TypeName('Windows.Foundation', 'EventRegistrationToken'),
+            ),
           ],
         ),
       );

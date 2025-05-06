@@ -38,7 +38,7 @@ final class MethodSignature {
       other is MethodSignature &&
           flags == other.flags &&
           returnType == other.returnType &&
-          listsEqual(types, other.types);
+          listEqual(types, other.types);
 
   @override
   int get hashCode => Object.hash(flags, returnType, types);

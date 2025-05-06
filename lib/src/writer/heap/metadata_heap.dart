@@ -4,7 +4,7 @@ import '../helpers.dart';
 
 /// Represents a contiguous region of memory used to store structured binary
 /// data, such as strings, blobs, or GUIDs in a metadata file.
-abstract base class MetadataHeap<K, V> {
+abstract base class MetadataHeap<K, V extends HeapIndex> {
   /// Creates a new metadata heap from the given [map] and [buffer].
   const MetadataHeap(this.map, this.buffer);
 

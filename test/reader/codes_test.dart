@@ -30,7 +30,10 @@ void main() async {
           0,
           codedIndex.encode(),
         );
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(10);
+        check(decoded.parent).isA<MemberRefParentTypeDef>();
+        check(decoded.signature).returnsNormally();
+        check(decoded.name).equals('MsiCloseHandle');
       });
 
       test('MemberRef', () {
@@ -44,7 +47,17 @@ void main() async {
           0,
           codedIndex.encode(),
         );
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(11);
+        check(decoded.parent).isA<MemberRefParentTypeRef>();
+        check(decoded.signature).returnsNormally();
+        check(decoded.name).equals('.ctor');
+      });
+
+      test('decode throws on invalid code', () {
+        check(() => CustomAttributeType.decode(index, 0, 12))
+            .throws<WinmdException>()
+            .has((it) => it.message, 'message')
+            .equals('Unknown kind: 4');
       });
     });
 
@@ -54,11 +67,12 @@ void main() async {
         check(codedIndex.encode()).equals(4);
         check(codedIndex.toString()).equals(
           'Field(name: MSIDBOPEN_READONLY, type: '
-          'NamedType(TypeName(Windows.Win32.Foundation.PWSTR)), '
+          'NamedValueType(TypeName(Windows.Win32.Foundation.PWSTR)), '
           'constant: Constant(value: Int32Value(0)))',
         );
         final decoded = HasConstant.decode(index, 0, codedIndex.encode());
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(4);
+        check(decoded.name).equals('MSIDBOPEN_READONLY');
       });
 
       test('Param', () {
@@ -66,17 +80,24 @@ void main() async {
         check(codedIndex.encode()).equals(5);
         check(codedIndex.toString()).equals('Param(sequence: 1, name: hAny)');
         final decoded = HasConstant.decode(index, 0, codedIndex.encode());
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(5);
+        check(decoded.name).equals('hAny');
       });
 
       test('Property', () {
-        final codedIndex = HasConstant.property(Property(index, 0, 0));
+        final codedIndex = HasConstant.property(Property(index, 1, 0));
         check(codedIndex.encode()).equals(6);
-        check(
-          codedIndex.toString(),
-        ).equals('Property(name: EVENT_OPCODE_RESERVED_244)');
-        final decoded = HasConstant.decode(index, 0, codedIndex.encode());
-        check(decoded).equals(codedIndex);
+        check(codedIndex.toString()).equals('Property(name: BitmapAlphaMode)');
+        final decoded = HasConstant.decode(index, 1, codedIndex.encode());
+        check(decoded.encode()).equals(6);
+        check(decoded.name).equals('BitmapAlphaMode');
+      });
+
+      test('decode throws on invalid code', () {
+        check(() => HasConstant.decode(index, 0, 7))
+            .throws<WinmdException>()
+            .has((it) => it.message, 'message')
+            .equals('Unknown kind: 3');
       });
     });
 
@@ -93,7 +114,10 @@ void main() async {
           0,
           codedIndex.encode(),
         );
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(32);
+        check(
+          () => HasCustomAttribute(MethodDef(index, 0, 1)),
+        ).returnsNormally();
       });
 
       test('Field', () {
@@ -101,7 +125,7 @@ void main() async {
         check(codedIndex.encode()).equals(33);
         check(codedIndex.toString()).equals(
           'Field(name: MSIDBOPEN_READONLY, type: '
-          'NamedType(TypeName(Windows.Win32.Foundation.PWSTR)), '
+          'NamedValueType(TypeName(Windows.Win32.Foundation.PWSTR)), '
           'constant: Constant(value: Int32Value(0)))',
         );
         final decoded = HasCustomAttribute.decode(
@@ -109,7 +133,8 @@ void main() async {
           0,
           codedIndex.encode(),
         );
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(33);
+        check(() => HasCustomAttribute(Field(index, 0, 1))).returnsNormally();
       });
 
       test('TypeRef', () {
@@ -123,7 +148,8 @@ void main() async {
           0,
           codedIndex.encode(),
         );
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(34);
+        check(() => HasCustomAttribute(TypeRef(index, 0, 1))).returnsNormally();
       });
 
       test('TypeDef', () {
@@ -135,7 +161,8 @@ void main() async {
           0,
           codedIndex.encode(),
         );
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(35);
+        check(() => HasCustomAttribute(TypeDef(index, 0, 1))).returnsNormally();
       });
 
       test('Param', () {
@@ -147,7 +174,8 @@ void main() async {
           0,
           codedIndex.encode(),
         );
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(36);
+        check(() => HasCustomAttribute(Param(index, 0, 1))).returnsNormally();
       });
 
       test('InterfaceImpl', () {
@@ -164,7 +192,10 @@ void main() async {
           0,
           codedIndex.encode(),
         );
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(37);
+        check(
+          () => HasCustomAttribute(InterfaceImpl(index, 0, 1)),
+        ).returnsNormally();
       });
 
       test('MemberRef', () {
@@ -176,7 +207,10 @@ void main() async {
           0,
           codedIndex.encode(),
         );
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(38);
+        check(
+          () => HasCustomAttribute(MemberRef(index, 0, 1)),
+        ).returnsNormally();
       });
 
       test('Module', () {
@@ -191,7 +225,8 @@ void main() async {
           0,
           codedIndex.encode(),
         );
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(39);
+        check(() => HasCustomAttribute(Module(index, 0, 1))).returnsNormally();
       });
 
       test('Property', () {
@@ -203,19 +238,23 @@ void main() async {
           1,
           codedIndex.encode(),
         );
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(41);
+        check(
+          () => HasCustomAttribute(Property(index, 1, 1)),
+        ).returnsNormally();
       });
 
       test('Event', () {
         final codedIndex = HasCustomAttribute.event(Event(index, 1, 0));
         check(codedIndex.encode()).equals(42);
-        check(codedIndex.toString()).equals('Event(name: Dismissed)');
+        check(codedIndex.toString()).equals('Event(name: PackageInstalling)');
         final decoded = HasCustomAttribute.decode(
           index,
           1,
           codedIndex.encode(),
         );
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(42);
+        check(() => HasCustomAttribute(Event(index, 1, 1))).returnsNormally();
       });
 
       test('StandAloneSig', () {
@@ -233,7 +272,10 @@ void main() async {
           0,
           codedIndex.encode(),
         );
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(43);
+        check(
+          () => HasCustomAttribute(StandAloneSig(index, 0, 1)),
+        ).returnsNormally();
       });
 
       test('ModuleRef', () {
@@ -245,7 +287,10 @@ void main() async {
           0,
           codedIndex.encode(),
         );
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(44);
+        check(
+          () => HasCustomAttribute(ModuleRef(index, 0, 1)),
+        ).returnsNormally();
       });
 
       test('TypeSpec', () {
@@ -261,11 +306,14 @@ void main() async {
           0,
           codedIndex.encode(),
         );
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(45);
+        check(
+          () => HasCustomAttribute(TypeSpec(index, 0, 1)),
+        ).returnsNormally();
       });
 
       test('Assembly', () {
-        final codedIndex = HasCustomAttribute.assembly(Assembly(index, 0, 0));
+        final codedIndex = HasCustomAttribute(Assembly(index, 0, 0));
         check(codedIndex.encode()).equals(46);
         check(codedIndex.toString()).equals(
           'Assembly(name: Windows.Win32.winmd, version: 0.0.0.0, hashAlgId: 0)',
@@ -275,7 +323,10 @@ void main() async {
           0,
           codedIndex.encode(),
         );
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(46);
+        check(
+          () => HasCustomAttribute.assembly(Assembly(index, 0, 1)),
+        ).returnsNormally();
       });
 
       test('AssemblyRef', () {
@@ -291,7 +342,10 @@ void main() async {
           0,
           codedIndex.encode(),
         );
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(47);
+        check(
+          () => HasCustomAttribute(AssemblyRef(index, 0, 1)),
+        ).returnsNormally();
       });
 
       test('File', () {
@@ -306,7 +360,8 @@ void main() async {
           0,
           codedIndex.encode(),
         );
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(48);
+        check(() => HasCustomAttribute(File(index, 0, 1))).returnsNormally();
       });
 
       test('ExportedType', () {
@@ -324,7 +379,10 @@ void main() async {
           0,
           codedIndex.encode(),
         );
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(49);
+        check(
+          () => HasCustomAttribute(ExportedType(index, 0, 1)),
+        ).returnsNormally();
       });
 
       test('ManifestResource', () {
@@ -342,7 +400,10 @@ void main() async {
           0,
           codedIndex.encode(),
         );
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(50);
+        check(
+          () => HasCustomAttribute(ManifestResource(index, 0, 1)),
+        ).returnsNormally();
       });
 
       test('GenericParam', () {
@@ -356,7 +417,10 @@ void main() async {
           1,
           codedIndex.encode(),
         );
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(51);
+        check(
+          () => HasCustomAttribute(GenericParam(index, 1, 1)),
+        ).returnsNormally();
       });
 
       test('GenericParamConstraint', () {
@@ -374,7 +438,10 @@ void main() async {
           0,
           codedIndex.encode(),
         );
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(52);
+        check(
+          () => HasCustomAttribute(GenericParamConstraint(index, 0, 1)),
+        ).returnsNormally();
       });
 
       test('MethodSpec', () {
@@ -392,7 +459,10 @@ void main() async {
           0,
           codedIndex.encode(),
         );
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(53);
+        check(
+          () => HasCustomAttribute(MethodSpec(index, 0, 1)),
+        ).returnsNormally();
       });
     });
 
@@ -402,7 +472,7 @@ void main() async {
         check(codedIndex.encode()).equals(4);
         check(codedIndex.toString()).equals('TypeDef(<Module>)');
         final decoded = HasDeclSecurity.decode(index, 0, codedIndex.encode());
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(4);
       });
 
       test('MethodDef', () {
@@ -413,7 +483,7 @@ void main() async {
           'params: (Param(sequence: 1, name: hAny)))',
         );
         final decoded = HasDeclSecurity.decode(index, 0, codedIndex.encode());
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(5);
       });
 
       test('Assemby', () {
@@ -423,7 +493,14 @@ void main() async {
           'Assembly(name: Windows.Win32.winmd, version: 0.0.0.0, hashAlgId: 0)',
         );
         final decoded = HasDeclSecurity.decode(index, 0, codedIndex.encode());
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(6);
+      });
+
+      test('decode throws on invalid code', () {
+        check(() => HasDeclSecurity.decode(index, 0, 7))
+            .throws<WinmdException>()
+            .has((it) => it.message, 'message')
+            .equals('Unknown kind: 3');
       });
     });
 
@@ -433,11 +510,11 @@ void main() async {
         check(codedIndex.encode()).equals(2);
         check(codedIndex.toString()).equals(
           'Field(name: MSIDBOPEN_READONLY, '
-          'type: NamedType(TypeName(Windows.Win32.Foundation.PWSTR)), '
+          'type: NamedValueType(TypeName(Windows.Win32.Foundation.PWSTR)), '
           'constant: Constant(value: Int32Value(0)))',
         );
         final decoded = HasFieldMarshal.decode(index, 0, codedIndex.encode());
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(2);
       });
 
       test('Param', () {
@@ -445,7 +522,7 @@ void main() async {
         check(codedIndex.encode()).equals(3);
         check(codedIndex.toString()).equals('Param(sequence: 1, name: hAny)');
         final decoded = HasFieldMarshal.decode(index, 0, codedIndex.encode());
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(3);
       });
     });
 
@@ -453,9 +530,9 @@ void main() async {
       test('Event', () {
         final codedIndex = HasSemantics.event(Event(index, 1, 0));
         check(codedIndex.encode()).equals(2);
-        check(codedIndex.toString()).equals('Event(name: Dismissed)');
+        check(codedIndex.toString()).equals('Event(name: PackageInstalling)');
         final decoded = HasSemantics.decode(index, 1, codedIndex.encode());
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(2);
       });
 
       test('Property', () {
@@ -463,7 +540,7 @@ void main() async {
         check(codedIndex.encode()).equals(3);
         check(codedIndex.toString()).equals('Property(name: BitmapAlphaMode)');
         final decoded = HasSemantics.decode(index, 1, codedIndex.encode());
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(3);
       });
     });
 
@@ -476,7 +553,7 @@ void main() async {
           'metadataIndex: MetadataIndex(readers: 2, namespaces: 671))',
         );
         final decoded = Implementation.decode(index, 0, codedIndex.encode());
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(4);
       });
 
       test('AssemblyRef', () {
@@ -486,7 +563,7 @@ void main() async {
           codedIndex.toString(),
         ).equals('AssemblyRef(name: netstandard, version: 2.1.0.0)');
         final decoded = Implementation.decode(index, 0, codedIndex.encode());
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(5);
       });
 
       test('ExportedType', () {
@@ -500,7 +577,14 @@ void main() async {
           'MetadataIndex(readers: 2, namespaces: 671))',
         );
         final decoded = Implementation.decode(index, 0, codedIndex.encode());
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(6);
+      });
+
+      test('decode throws on invalid code', () {
+        check(() => Implementation.decode(index, 0, 7))
+            .throws<WinmdException>()
+            .has((it) => it.message, 'message')
+            .equals('Unknown kind: 3');
       });
     });
 
@@ -510,11 +594,12 @@ void main() async {
         check(codedIndex.encode()).equals(2);
         check(codedIndex.toString()).equals(
           'Field(name: MSIDBOPEN_READONLY, '
-          'type: NamedType(TypeName(Windows.Win32.Foundation.PWSTR)), '
+          'type: NamedValueType(TypeName(Windows.Win32.Foundation.PWSTR)), '
           'constant: Constant(value: Int32Value(0)))',
         );
         final decoded = MemberForwarded.decode(index, 0, codedIndex.encode());
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(2);
+        check(decoded.name).equals('MSIDBOPEN_READONLY');
       });
 
       test('MethodDef', () {
@@ -525,7 +610,8 @@ void main() async {
           'params: (Param(sequence: 1, name: hAny)))',
         );
         final decoded = MemberForwarded.decode(index, 0, codedIndex.encode());
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(3);
+        check(decoded.name).equals('MsiCloseHandle');
       });
     });
 
@@ -535,7 +621,7 @@ void main() async {
         check(codedIndex.encode()).equals(8);
         check(codedIndex.toString()).equals('TypeDef(<Module>)');
         final decoded = MemberRefParent.decode(index, 0, codedIndex.encode());
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(8);
       });
 
       test('TypeRef', () {
@@ -545,7 +631,7 @@ void main() async {
           codedIndex.toString(),
         ).equals('TypeRef(Windows.Win32.Foundation.PWSTR)');
         final decoded = MemberRefParent.decode(index, 0, codedIndex.encode());
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(9);
       });
 
       test('ModuleRef', () {
@@ -553,7 +639,7 @@ void main() async {
         check(codedIndex.encode()).equals(10);
         check(codedIndex.toString()).equals('ModuleRef(name: msi.dll)');
         final decoded = MemberRefParent.decode(index, 0, codedIndex.encode());
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(10);
       });
 
       test('MethodDef', () {
@@ -564,7 +650,7 @@ void main() async {
           'params: (Param(sequence: 1, name: hAny)))',
         );
         final decoded = MemberRefParent.decode(index, 0, codedIndex.encode());
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(11);
       });
 
       test('TypeSpec', () {
@@ -575,7 +661,14 @@ void main() async {
           'metadataIndex: MetadataIndex(readers: 2, namespaces: 671))',
         );
         final decoded = MemberRefParent.decode(index, 0, codedIndex.encode());
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(12);
+      });
+
+      test('decode throws on invalid code', () {
+        check(() => MemberRefParent.decode(index, 0, 13))
+            .throws<WinmdException>()
+            .has((it) => it.message, 'message')
+            .equals('Unknown kind: 5');
       });
     });
 
@@ -588,7 +681,7 @@ void main() async {
           'params: (Param(sequence: 1, name: hAny)))',
         );
         final decoded = MethodDefOrRef.decode(index, 0, codedIndex.encode());
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(2);
       });
 
       test('MemberRef', () {
@@ -596,7 +689,7 @@ void main() async {
         check(codedIndex.encode()).equals(3);
         check(codedIndex.toString()).equals('MemberRef(name: .ctor)');
         final decoded = MethodDefOrRef.decode(index, 0, codedIndex.encode());
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(3);
       });
     });
 
@@ -609,7 +702,7 @@ void main() async {
           'mvid: 4a520299-e458-4675-befb-318972b60e6a)',
         );
         final decoded = ResolutionScope.decode(index, 0, codedIndex.encode());
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(4);
       });
 
       test('ModuleRef', () {
@@ -617,7 +710,7 @@ void main() async {
         check(codedIndex.encode()).equals(5);
         check(codedIndex.toString()).equals('ModuleRef(name: msi.dll)');
         final decoded = ResolutionScope.decode(index, 0, codedIndex.encode());
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(5);
       });
 
       test('AssemblyRef', () {
@@ -629,7 +722,7 @@ void main() async {
           codedIndex.toString(),
         ).equals('AssemblyRef(name: netstandard, version: 2.1.0.0)');
         final decoded = ResolutionScope.decode(index, 0, codedIndex.encode());
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(6);
       });
 
       test('TypeRef', () {
@@ -639,7 +732,7 @@ void main() async {
           codedIndex.toString(),
         ).equals('TypeRef(Windows.Win32.Foundation.PWSTR)');
         final decoded = ResolutionScope.decode(index, 0, codedIndex.encode());
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(7);
       });
     });
 
@@ -649,7 +742,9 @@ void main() async {
         check(codedIndex.encode()).equals(4);
         check(codedIndex.toString()).equals('TypeDef(<Module>)');
         final decoded = TypeDefOrRef.decode(index, 0, codedIndex.encode());
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(4);
+        check(decoded.namespace).isEmpty();
+        check(decoded.name).equals('<Module>');
       });
 
       test('TypeRef', () {
@@ -659,7 +754,9 @@ void main() async {
           codedIndex.toString(),
         ).equals('TypeRef(Windows.Win32.Foundation.PWSTR)');
         final decoded = TypeDefOrRef.decode(index, 0, codedIndex.encode());
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(5);
+        check(decoded.namespace).equals('Windows.Win32.Foundation');
+        check(decoded.name).equals('PWSTR');
       });
 
       test('TypeSpec', () {
@@ -670,7 +767,22 @@ void main() async {
           'metadataIndex: MetadataIndex(readers: 2, namespaces: 671))',
         );
         final decoded = TypeDefOrRef.decode(index, 0, codedIndex.encode());
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(6);
+        check(() => decoded.namespace)
+            .throws<UnsupportedError>()
+            .has((it) => it.message, 'message')
+            .equals('TypeSpec does not have a namespace.');
+        check(() => decoded.name)
+            .throws<UnsupportedError>()
+            .has((it) => it.message, 'message')
+            .equals('TypeSpec does not have a name.');
+      });
+
+      test('decode throws on invalid code', () {
+        check(() => TypeDefOrRef.decode(index, 0, 7))
+            .throws<WinmdException>()
+            .has((it) => it.message, 'message')
+            .equals('Unknown kind: 3');
       });
     });
 
@@ -680,7 +792,8 @@ void main() async {
         check(codedIndex.encode()).equals(2);
         check(codedIndex.toString()).equals('TypeDef(<Module>)');
         final decoded = TypeOrMethodDef.decode(index, 0, codedIndex.encode());
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(2);
+        check(decoded.name).equals('<Module>');
       });
 
       test('MethodDef', () {
@@ -691,7 +804,8 @@ void main() async {
           'params: (Param(sequence: 1, name: hAny)))',
         );
         final decoded = TypeOrMethodDef.decode(index, 0, codedIndex.encode());
-        check(decoded).equals(codedIndex);
+        check(decoded.encode()).equals(3);
+        check(decoded.name).equals('MsiCloseHandle');
       });
     });
   });

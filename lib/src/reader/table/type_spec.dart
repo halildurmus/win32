@@ -23,8 +23,8 @@ final class TypeSpec extends Row with HasCustomAttributes {
   ///  `Signature` blob.
   ///
   /// Optionally, [generics] can be passed to substitute any generic parameters.
-  MetadataType type([List<MetadataType> generics = const []]) =>
-      readBlob(0).readTypeCode(generics);
+  MetadataType type({List<MetadataType> generics = const []}) =>
+      readBlob(0).readTypeCode(generics: generics);
 }
 
 @internal

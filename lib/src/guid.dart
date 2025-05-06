@@ -213,7 +213,7 @@ final class Guid {
           data1 == other.data1 &&
           data2 == other.data2 &&
           data3 == other.data3 &&
-          listsEqual(data4, other.data4);
+          listEqual(data4, other.data4);
 
   @override
   int get hashCode => Object.hash(data1, data2, data3, data4);

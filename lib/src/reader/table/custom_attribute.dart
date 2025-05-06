@@ -8,6 +8,7 @@ import '../../bindings.dart';
 import '../../exception.dart';
 import '../../metadata_type.dart';
 import '../../metadata_value.dart';
+import '../../type_name.dart';
 import '../blob.dart';
 import '../codes.dart';
 import '../metadata_index.dart';
@@ -97,7 +98,13 @@ final class CustomAttribute extends Row {
   late final type = decode<CustomAttributeType>(1);
 
   /// The name of the attribute.
-  late final name = type.parent.name;
+  late final name = switch (type.parent) {
+    MemberRefParentTypeDef(:final value) => value.name,
+    MemberRefParentTypeRef(:final value) => value.name,
+    MemberRefParentMethodDef(:final value) => value.name,
+    MemberRefParentModuleRef() || MemberRefParentTypeSpec() =>
+      throw WinmdException('Unexpected attribute parent: ${type.parent}'),
+  };
 
   @override
   String toString() =>
@@ -120,8 +127,7 @@ MetadataValue _readValue(Blob blob, MetadataType type) => switch (type) {
   Float32Type() => Float32Value(blob.readFloat32()),
   Float64Type() => Float64Value(blob.readFloat64()),
   StringType() => Utf8StringValue(blob.readUtf8()),
-  NamedType(:final typeName)
-      when typeName.namespace == 'System' && typeName.name == 'Type' =>
+  NamedType(typeName: TypeName(namespace: 'System', name: 'Type')) =>
     Utf8StringValue(blob.readUtf8()),
   NamedType() => Int32Value(blob.readInt32()),
   _ => throw WinmdException('Unexpected type: $type'),

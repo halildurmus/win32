@@ -12,24 +12,24 @@ void main() async {
   group('EventMap', () {
     test('ISplashScreen', () {
       final eventMap = index.eventMap.first;
-      check(
-        eventMap.parent.namespace,
-      ).equals('Windows.ApplicationModel.Activation');
-      check(eventMap.parent.name).equals('ISplashScreen');
+      check(eventMap.parent.namespace).equals('Windows.ApplicationModel');
+      check(eventMap.parent.name).equals('IPackageCatalog');
       final events = eventMap.events.toList();
-      check(events.length).equals(1);
-      check(events[0].name).equals('Dismissed');
+      check(events.length).equals(5);
+      check(events[0].name).equals('PackageInstalling');
+      check(events[1].name).equals('PackageStaging');
+      check(events[2].name).equals('PackageStatusChanged');
+      check(events[3].name).equals('PackageUninstalling');
+      check(events[4].name).equals('PackageUpdating');
     });
 
     test('IHttpDiagnosticProvider', () {
       final eventMap = index.eventMap.last;
-      check(eventMap.parent.namespace).equals('Windows.Web.Http.Diagnostics');
-      check(eventMap.parent.name).equals('IHttpDiagnosticProvider');
+      check(eventMap.parent.namespace).equals('Windows.Web.UI.Interop');
+      check(eventMap.parent.name).equals('WebViewControlProcess');
       final events = eventMap.events.toList();
-      check(events.length).equals(3);
-      check(events[0].name).equals('RequestResponseCompleted');
-      check(events[1].name).equals('RequestSent');
-      check(events[2].name).equals('ResponseReceived');
+      check(events.length).equals(1);
+      check(events[0].name).equals('ProcessExited');
     });
   });
 }

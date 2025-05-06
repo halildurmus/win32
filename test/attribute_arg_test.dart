@@ -1,5 +1,5 @@
 import 'package:checks/checks.dart';
-import 'package:test/test.dart';
+import 'package:test/scaffolding.dart';
 import 'package:winmd/winmd.dart';
 
 void main() {

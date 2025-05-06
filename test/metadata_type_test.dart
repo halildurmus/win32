@@ -4,14 +4,6 @@ import 'package:winmd/winmd.dart';
 
 void main() {
   group('MetadataType', () {
-    test('named', () {
-      final type = MetadataType.named('System', 'Guid');
-      check(type).isA<NamedType>();
-      check(
-        (type as NamedType).typeName,
-      ).equals(const TypeName('System', 'Guid'));
-    });
-
     test('VoidType', () {
       check(const VoidType().code).equals(ELEMENT_TYPE_VOID);
     });
@@ -72,11 +64,26 @@ void main() {
       check(const UintPtrType().code).equals(ELEMENT_TYPE_U);
     });
 
-    test('NamedType', () {
-      const type1 = NamedType(TypeName('System', 'Object'));
-      const type2 = NamedType(TypeName('System', 'Object'));
-      const type3 = NamedType(TypeName('System', 'Guid'));
-      check(() => type1.code).throws<UnsupportedError>();
+    test('NamedClassType', () {
+      const type1 = NamedClassType(
+        TypeName('Windows.Globalization', 'Calendar'),
+      );
+      const type2 = NamedClassType(
+        TypeName('Windows.Globalization', 'Calendar'),
+      );
+      const type3 = NamedClassType(
+        TypeName('Windows.Globalization', 'ICalendar'),
+      );
+      check(type1.code).equals(ELEMENT_TYPE_CLASS);
+      check(type1).equals(type2);
+      check(type1).not((it) => it.equals(type3));
+    });
+
+    test('NamedValueType', () {
+      const type1 = NamedValueType(TypeName('System', 'Object'));
+      const type2 = NamedValueType(TypeName('System', 'Object'));
+      const type3 = NamedValueType(TypeName('System', 'Guid'));
+      check(type1.code).equals(ELEMENT_TYPE_VALUETYPE);
       check(type1).equals(type2);
       check(type1).not((it) => it.equals(type3));
     });

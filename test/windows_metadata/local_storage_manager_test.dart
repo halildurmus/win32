@@ -20,6 +20,11 @@ void main() {
       storageManager = LocalStorageManager(storagePath: tempDir.path);
     });
 
+    tearDown(() {
+      storageManager.clear();
+      tempDir.deleteSync();
+    });
+
     test(
       'getOrDownloadPackage downloads and extracts package if missing',
       () async {
@@ -92,10 +97,6 @@ void main() {
 
       // After clearing, there should be no package directories.
       check(storageManager.storedPackageDirectories).isEmpty();
-    });
-
-    tearDown(() {
-      tempDir.deleteSync(recursive: true);
     });
   });
 }

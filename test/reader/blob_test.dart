@@ -73,7 +73,7 @@ void main() async {
         final blob = createBlob([
           MethodCallFlags.hasThis,
           3, // param count
-          ELEMENT_TYPE_CLASS,
+          ELEMENT_TYPE_VALUETYPE,
           ...CompressedInteger.encode(
             TypeDefOrRef.typeRef(TypeRef(index, 0, 29)).encode(),
           ),
@@ -84,7 +84,7 @@ void main() async {
         final sig = blob.readMethodSignature();
         check(sig.flags).equals(MethodCallFlags.hasThis);
         check(sig.returnType).equals(
-          const NamedType(TypeName('Windows.Win32.Foundation', 'HRESULT')),
+          const NamedValueType(TypeName('Windows.Win32.Foundation', 'HRESULT')),
         );
         check(sig.types.length).equals(3);
         check(sig.types[0]).equals(const Uint8Type());
@@ -151,7 +151,7 @@ void main() async {
         final blob = createBlob([
           0x8 | MethodCallFlags.hasThis, // PROPERTY | HASTHIS
           3, // param count
-          ELEMENT_TYPE_CLASS,
+          ELEMENT_TYPE_VALUETYPE,
           ...CompressedInteger.encode(
             TypeDefOrRef.typeRef(TypeRef(index, 0, 29)).encode(),
           ),
@@ -162,7 +162,7 @@ void main() async {
         final sig = blob.readPropertySignature();
         check(sig.flags).equals(MethodCallFlags.hasThis);
         check(sig.returnType).equals(
-          const NamedType(TypeName('Windows.Win32.Foundation', 'HRESULT')),
+          const NamedValueType(TypeName('Windows.Win32.Foundation', 'HRESULT')),
         );
         check(sig.types.length).equals(3);
         check(sig.types[0]).equals(const Uint8Type());
@@ -263,7 +263,7 @@ void main() async {
           ),
         ]);
         check(blob.readTypeCode()).equals(
-          const NamedType(
+          const NamedClassType(
             TypeName('Windows.Win32.Foundation.Metadata', 'GuidAttribute'),
           ),
         );
@@ -277,13 +277,15 @@ void main() async {
         ]);
         check(
           blob.readTypeCode(),
-        ).equals(const NamedType(TypeName('System', 'Guid')));
+        ).equals(const NamedValueType(TypeName('System', 'Guid')));
         check(blob.isEmpty).isTrue();
       });
 
       test('ELEMENT_TYPE_VAR', () {
         final blob = createBlob([ELEMENT_TYPE_VAR, 0]);
-        check(blob.readTypeCode(const [Int32Type()])).equals(const Int32Type());
+        check(
+          blob.readTypeCode(generics: const [Int32Type()]),
+        ).equals(const Int32Type());
         check(blob.isEmpty).isTrue();
       });
 
@@ -316,7 +318,7 @@ void main() async {
           ELEMENT_TYPE_I4,
         ]);
         check(blob.readTypeCode()).equals(
-          const NamedType(
+          const NamedClassType(
             TypeName(
               'Windows.Foundation.Collections',
               'IMap`2',
@@ -383,11 +385,11 @@ void main() async {
           ELEMENT_TYPE_CMOD_OPT,
           ...CompressedInteger.encode(TypeDefOrRef.typeRef(isConst).encode()),
           ELEMENT_TYPE_BYREF,
-          ELEMENT_TYPE_CLASS,
+          ELEMENT_TYPE_VALUETYPE,
           ...CompressedInteger.encode(TypeDefOrRef.typeRef(guid).encode()),
         ]);
         check(blob.readTypeSignature()).equals(
-          const ConstReferenceType(NamedType(TypeName('System', 'Guid'))),
+          const ConstReferenceType(NamedValueType(TypeName('System', 'Guid'))),
         );
         check(blob.isEmpty).isTrue();
       });

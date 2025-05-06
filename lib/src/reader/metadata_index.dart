@@ -60,8 +60,8 @@ final class MetadataIndex {
   /// they are indexed by order of appearance.
   factory MetadataIndex.fromReaders(List<MetadataReader> readers) {
     final namespaceToTypeMap =
-        <String, Map<String, List<_ReaderAndTypeDefIndex>>>{};
-    final nestedTypeMap = <_ReaderAndTypeDefIndex, List<int>>{};
+        HashMap<String, HashMap<String, List<_ReaderAndTypeDefIndex>>>();
+    final nestedTypeMap = HashMap<_ReaderAndTypeDefIndex, List<int>>();
     const nestedClassTable = MetadataTable.nestedClass;
     const typeDefTable = MetadataTable.typeDef;
 
@@ -78,7 +78,7 @@ final class MetadataIndex {
         final name = reader.readString(typeDefIndex, typeDefTable, 1);
         final trimmedName = trimTick(name);
         namespaceToTypeMap
-            .putIfAbsent(namespace, () => {})
+            .putIfAbsent(namespace, HashMap.new)
             .putIfAbsent(trimmedName, () => [])
             .add(_ReaderAndTypeDefIndex(readerIndex, typeDefIndex));
       }
@@ -108,9 +108,9 @@ final class MetadataIndex {
   /// The list of metadata readers contributing to this index.
   final List<MetadataReader> readers;
 
-  final Map<String, Map<String, List<_ReaderAndTypeDefIndex>>>
+  final HashMap<String, HashMap<String, List<_ReaderAndTypeDefIndex>>>
   _namespaceToTypeMap;
-  final Map<_ReaderAndTypeDefIndex, List<int>> _nestedTypeMap;
+  final HashMap<_ReaderAndTypeDefIndex, List<int>> _nestedTypeMap;
 
   /// Enumerates all [TypeDef]s available in this index.
   Iterable<TypeDef> get allTypes => _namespaceToTypeMap.values.expand(
@@ -134,7 +134,7 @@ final class MetadataIndex {
     });
   });
 
-  /// Enumerates the nested types defined under the given [parent] [TypeDef].
+  /// Enumerates the nested types defined under the given [parent] type.
   Iterable<TypeDef> nestedTypes(TypeDef parent) =>
       _nestedTypeMap[_ReaderAndTypeDefIndex(parent.readerIndex, parent.index)]
           ?.map((index) => TypeDef(this, parent.readerIndex, index)) ??

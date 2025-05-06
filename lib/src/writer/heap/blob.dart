@@ -20,7 +20,7 @@ final class BlobHeap extends MetadataHeap<Uint8List, BlobIndex> {
   /// Creates an empty [BlobHeap] with a single `0x00` entry at offset 0.
   BlobHeap.empty()
     : super(
-        HashMap(equals: listsEqual, hashCode: Object.hashAll),
+        HashMap(equals: listEqual, hashCode: Object.hashAll),
         BytesBuilder(),
       ) {
     buffer.addByte(0x00); // Add an empty blob.

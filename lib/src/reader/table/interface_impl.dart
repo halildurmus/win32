@@ -1,6 +1,7 @@
 import 'package:meta/meta.dart';
 
 import '../../metadata_type.dart';
+import '../../type_name.dart';
 import '../codes.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
@@ -28,8 +29,16 @@ final class InterfaceImpl extends Row with HasCustomAttributes {
   /// Returns the interface type implemented by [class$].
   ///
   /// Optionally, [generics] can be passed to substitute any generic parameters.
-  MetadataType interface([List<MetadataType> generics = const []]) =>
-      decode<TypeDefOrRef>(1).type(generics);
+  MetadataType interface({List<MetadataType> generics = const []}) =>
+      switch (decode<TypeDefOrRef>(1)) {
+        TypeDefOrRefTypeDef(:final value) => NamedClassType(
+          TypeName(value.namespace, value.name, generics: generics),
+        ),
+        TypeDefOrRefTypeRef(:final value) => NamedClassType(
+          TypeName(value.namespace, value.name, generics: generics),
+        ),
+        TypeDefOrRefTypeSpec(:final value) => value.type(generics: generics),
+      };
 
   @override
   String toString() => 'InterfaceImpl(class\$: ${class$})';

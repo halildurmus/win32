@@ -33,13 +33,13 @@ void main() async {
         const MethodSignature(
           flags: MethodCallFlags.default$,
           types: [
-            NamedType(
+            NamedValueType(
               TypeName('Windows.Foundation.Diagnostics', 'CausalityTraceLevel'),
             ),
-            NamedType(
+            NamedValueType(
               TypeName('Windows.Foundation.Diagnostics', 'CausalitySource'),
             ),
-            NamedType(
+            NamedValueType(
               TypeName(
                 'Windows.Foundation.Diagnostics',
                 'CausalitySynchronousWork',
@@ -88,13 +88,13 @@ void main() async {
       check(method.signature()).equals(
         const MethodSignature(
           types: [
-            NamedType(
+            NamedValueType(
               TypeName('Windows.Foundation.Diagnostics', 'CausalityTraceLevel'),
             ),
-            NamedType(
+            NamedValueType(
               TypeName('Windows.Foundation.Diagnostics', 'CausalitySource'),
             ),
-            NamedType(
+            NamedValueType(
               TypeName(
                 'Windows.Foundation.Diagnostics',
                 'CausalitySynchronousWork',
@@ -141,15 +141,17 @@ void main() async {
       check(method.signature()).equals(
         const MethodSignature(
           flags: MethodCallFlags.default$,
-          returnType: NamedType(
+          returnType: NamedValueType(
             TypeName('Windows.Win32.Foundation', 'HRESULT'),
           ),
           types: [
-            NamedType(TypeName('Windows.Win32.System.Com', 'IDataObject')),
-            NamedType(TypeName('Windows.Win32.System.Ole', 'IDropSource')),
-            NamedType(TypeName('Windows.Win32.System.Ole', 'DROPEFFECT')),
+            NamedClassType(TypeName('Windows.Win32.System.Com', 'IDataObject')),
+            NamedClassType(TypeName('Windows.Win32.System.Ole', 'IDropSource')),
+            NamedValueType(TypeName('Windows.Win32.System.Ole', 'DROPEFFECT')),
             MutablePointerType(
-              NamedType(TypeName('Windows.Win32.System.Ole', 'DROPEFFECT')),
+              NamedValueType(
+                TypeName('Windows.Win32.System.Ole', 'DROPEFFECT'),
+              ),
               1,
             ),
           ],
@@ -209,13 +211,13 @@ void main() async {
       check(method.signature()).equals(
         const MethodSignature(
           flags: MethodCallFlags.default$,
-          returnType: NamedType(
+          returnType: NamedValueType(
             TypeName('Windows.Win32.Foundation', 'HRESULT'),
           ),
           types: [
             Uint32Type(),
             MutablePointerType(
-              NamedType(TypeName('Windows.Win32.Foundation', 'PWSTR')),
+              NamedValueType(TypeName('Windows.Win32.Foundation', 'PWSTR')),
               2,
             ),
           ],

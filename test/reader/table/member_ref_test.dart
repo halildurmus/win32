@@ -21,12 +21,15 @@ void main() async {
       final attribute = typeDef.findAttribute('SupportedArchitectureAttribute');
       check(attribute.type).isA<CustomAttributeTypeMemberRef>();
       final memberRef = (attribute.type as CustomAttributeTypeMemberRef).value;
-      check(memberRef.parent.name).equals('SupportedArchitectureAttribute');
+      check(memberRef.parent).isA<MemberRefParentTypeRef>();
+      check(
+        (memberRef.parent as MemberRefParentTypeRef).value.name,
+      ).equals('SupportedArchitectureAttribute');
       check(memberRef.name).equals('.ctor');
       check(memberRef.signature()).equals(
         const MethodSignature(
           types: [
-            NamedType(
+            NamedValueType(
               TypeName('Windows.Win32.Foundation.Metadata', 'Architecture'),
             ),
           ],

@@ -23,7 +23,9 @@ void main() async {
       ).equals(FieldAttributes.public | FieldAttributes.static);
       check(field.fieldAccess).equals(FieldAccess.public);
       check(field.name).equals('FOLDERID_AccountPictures');
-      check(field.type).equals(const NamedType(TypeName('System', 'Guid')));
+      check(
+        field.type,
+      ).equals(const NamedValueType(TypeName('System', 'Guid')));
       check(field.hasAttribute('GuidAttribute')).isTrue();
       final constant = field.constant;
       check(constant).isNull();
@@ -48,7 +50,7 @@ void main() async {
       check(field.fieldAccess).equals(FieldAccess.public);
       check(field.name).equals('PFD_UNDERLAY_PLANE');
       check(field.type).equals(
-        const NamedType(
+        const NamedValueType(
           TypeName('Windows.Win32.Graphics.OpenGL', 'PFD_LAYER_TYPE'),
         ),
       );
@@ -77,7 +79,7 @@ void main() async {
       check(field.fieldAccess).equals(FieldAccess.public);
       check(field.name).equals('STATUS_ACCESS_DENIED');
       check(field.type).equals(
-        const NamedType(TypeName('Windows.Win32.Foundation', 'NTSTATUS')),
+        const NamedValueType(TypeName('Windows.Win32.Foundation', 'NTSTATUS')),
       );
       final constant = field.constant;
       check(constant).isNotNull();
@@ -103,7 +105,9 @@ void main() async {
       check(field.fieldAccess).equals(FieldAccess.public);
       check(field.name).equals('VARIANT_TRUE');
       check(field.type).equals(
-        const NamedType(TypeName('Windows.Win32.Foundation', 'VARIANT_BOOL')),
+        const NamedValueType(
+          TypeName('Windows.Win32.Foundation', 'VARIANT_BOOL'),
+        ),
       );
       final constant = field.constant;
       check(constant).isNotNull();
