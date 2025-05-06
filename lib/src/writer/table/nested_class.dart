@@ -1,19 +1,21 @@
 import 'dart:typed_data';
 
-import '../helpers.dart';
-import '../index.dart';
-import '../table.dart';
-import '../table_stream.dart';
+import 'package:meta/meta.dart';
 
-/// Represents a row in the `NestedClass` metadata table, describing a nested
-/// type definition.
+import '../../common.dart';
+import '../helpers.dart';
+import '../row.dart';
+import '../table_stream.dart';
+import 'index.dart';
+
+/// Represents a row in the `NestedClass` metadata table.
 ///
 /// The fields are populated by interpreting the binary metadata as specified in
 /// ECMA-335 `§II.22.32`.
 ///
 /// The `NestedClass` table has the following columns:
-///  - **NestedClass** (TypeDef Index)
-///  - **EnclosingClass** (TypeDef Index)
+///  - **NestedClass** (TypeDef Table Index)
+///  - **EnclosingClass** (TypeDef Table Index)
 final class NestedClass implements Row {
   const NestedClass({required this.nestedClass, required this.enclosingClass});
 
@@ -21,9 +23,17 @@ final class NestedClass implements Row {
   final TypeDefIndex enclosingClass;
 
   @override
-  void serialize(BytesBuilder buffer, TableStream context) {
+  void serialize(BytesBuilder buffer, TableStream stream) {
     buffer
-      ..writeTableIndex(nestedClass.index, context.typeDef.length)
-      ..writeTableIndex(enclosingClass.index, context.typeDef.length);
+      ..writeTableIndex(nestedClass, stream)
+      ..writeTableIndex(enclosingClass, stream);
   }
+}
+
+@internal
+final class NestedClassCompanion extends RowCompanion<NestedClass> {
+  const NestedClassCompanion();
+
+  @override
+  MetadataTableId get tableId => MetadataTableId.nestedClass;
 }

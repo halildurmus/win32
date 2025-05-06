@@ -1,13 +1,15 @@
 import 'dart:typed_data';
 
+import 'package:meta/meta.dart';
+
 import '../../attributes.dart';
+import '../../common.dart';
+import '../heap/metadata_heap.dart';
 import '../helpers.dart';
-import '../index.dart';
-import '../table.dart';
+import '../row.dart';
 import '../table_stream.dart';
 
-/// Represents a row in the `Field` metadata table, describing a field within a
-/// type.
+/// Represents a row in the `Field` metadata table.
 ///
 /// The fields are populated by interpreting the binary metadata as specified in
 /// ECMA-335 `§II.22.15`.
@@ -28,10 +30,18 @@ final class Field implements Row {
   final BlobIndex signature;
 
   @override
-  void serialize(BytesBuilder buffer, TableStream context) {
+  void serialize(BytesBuilder buffer, TableStream stream) {
     buffer
       ..writeUint16(flags)
-      ..writeHeapIndex(name.index, context.stringHeapSize)
-      ..writeHeapIndex(signature.index, context.blobHeapSize);
+      ..writeHeapIndex(name, stream)
+      ..writeHeapIndex(signature, stream);
   }
+}
+
+@internal
+final class FieldCompanion extends RowCompanion<Field> {
+  const FieldCompanion();
+
+  @override
+  MetadataTableId get tableId => MetadataTableId.field;
 }

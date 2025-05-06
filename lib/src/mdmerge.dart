@@ -10,8 +10,8 @@ import 'reader/metadata_reader.dart';
 import 'reader/table/type_def.dart';
 import 'reader/type_category.dart';
 import 'writer/codes.dart';
-import 'writer/index.dart';
 import 'writer/metadata_writer.dart';
+import 'writer/table/index.dart';
 
 /// Merges multiple Windows Metadata (.winmd) files into a single output file.
 ///
@@ -151,31 +151,104 @@ void _writeType(
       def.category == TypeCategory.class$ &&
       def.flags.has(TypeAttributes.windowsRuntime);
 
+  final specialMethods = <String, MethodDefIndex?>{};
+
   for (final method in def.methods) {
-    final methodRef = writer.writeMethodDef(
+    final methodIndex = writer.writeMethodDef(
       implFlags: method.implFlags,
       flags: method.flags,
       name: method.name,
       signature: method.signature(generics),
     );
 
+    if (method.flags.has(MethodAttributes.specialName)) {
+      final name = method.name;
+      specialMethods[name] = methodIndex;
+    }
+
     for (final param in method.params) {
-      final paramRef = writer.writeParam(
+      final paramIndex = writer.writeParam(
         flags: param.flags,
         sequence: param.sequence,
         name: param.name,
       );
-      _writeAttributes(writer, HasCustomAttribute.param(paramRef), param);
+      _writeAttributes(writer, HasCustomAttribute.param(paramIndex), param);
     }
 
-    _writeAttributes(writer, HasCustomAttribute.methodDef(methodRef), method);
+    _writeAttributes(writer, HasCustomAttribute.methodDef(methodIndex), method);
 
     if (method.implMap case final implMap? when !isWinRTClass) {
       writer.writeImplMap(
-        method: methodRef,
+        method: methodIndex,
         flags: implMap.flags,
         importName: implMap.importName,
         importScope: implMap.importScope.name,
+      );
+    }
+  }
+
+  if (def.events.isNotEmpty) {
+    writer.writeEventMap(parent: typeDef);
+    for (final event in def.events) {
+      final eventIndex = writer.writeEvent(
+        flags: event.eventFlags,
+        name: event.name,
+        type: event.type(),
+      );
+
+      writer
+        ..writeMethodSemantics(
+          semantics: MethodSemanticsAttributes.addOn,
+          method: specialMethods[event.add.name]!,
+          association: HasSemantics.event(eventIndex),
+        )
+        ..writeMethodSemantics(
+          semantics: MethodSemanticsAttributes.removeOn,
+          method: specialMethods[event.remove.name]!,
+          association: HasSemantics.event(eventIndex),
+        );
+
+      if (event.raise != null) {
+        writer.writeMethodSemantics(
+          semantics: MethodSemanticsAttributes.fire,
+          method: specialMethods[event.raise!.name]!,
+          association: HasSemantics.event(eventIndex),
+        );
+      }
+
+      _writeAttributes(writer, HasCustomAttribute.event(eventIndex), event);
+    }
+  }
+
+  if (def.properties.isNotEmpty) {
+    writer.writePropertyMap(parent: typeDef);
+    for (final property in def.properties) {
+      final propertyIndex = writer.writeProperty(
+        flags: property.flags,
+        name: property.name,
+        signature: property.signature(),
+      );
+
+      if (property.getter case final getter?) {
+        writer.writeMethodSemantics(
+          semantics: MethodSemanticsAttributes.getter,
+          method: specialMethods[getter.name]!,
+          association: HasSemantics.property(propertyIndex),
+        );
+      }
+
+      if (property.setter case final setter?) {
+        writer.writeMethodSemantics(
+          semantics: MethodSemanticsAttributes.setter,
+          method: specialMethods[setter.name]!,
+          association: HasSemantics.property(propertyIndex),
+        );
+      }
+
+      _writeAttributes(
+        writer,
+        HasCustomAttribute.property(propertyIndex),
+        property,
       );
     }
   }
@@ -205,11 +278,11 @@ void _writeAttributes<R extends HasCustomAttributes>(
   for (final attr in row.attributes) {
     final ctor = attr.type;
     final type = ctor.parent;
-    final attributeRef = MemberRefParent.typeRef(
+    final attrParent = MemberRefParent.typeRef(
       writer.writeTypeRef(namespace: type.namespace, name: type.name),
     );
     final ctorRef = writer.writeMemberRef(
-      parent: attributeRef,
+      parent: attrParent,
       name: '.ctor',
       signature: ctor.signature(),
     );

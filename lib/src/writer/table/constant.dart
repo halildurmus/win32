@@ -1,14 +1,16 @@
 import 'dart:typed_data';
 
+import 'package:meta/meta.dart';
+
 import '../../bindings.dart';
+import '../../common.dart';
 import '../codes.dart';
+import '../heap/metadata_heap.dart';
 import '../helpers.dart';
-import '../index.dart';
-import '../table.dart';
+import '../row.dart';
 import '../table_stream.dart';
 
-/// Represents a row in the `Constant` metadata table, describing a compile-time
-/// constant value associated with a field, parameter, or property.
+/// Represents a row in the `Constant` metadata table.
 ///
 /// The fields are populated by interpreting the binary metadata as specified in
 /// ECMA-335 `§II.22.9`.
@@ -29,11 +31,19 @@ final class Constant implements Row {
   final BlobIndex value;
 
   @override
-  void serialize(BytesBuilder buffer, TableStream context) {
+  void serialize(BytesBuilder buffer, TableStream stream) {
     buffer
       ..addByte(type)
       ..addByte(0)
-      ..writeCodedIndex(parent.encode(), context.hasConstant)
-      ..writeHeapIndex(value.index, context.blobHeapSize);
+      ..writeCodedIndex(parent, stream)
+      ..writeHeapIndex(value, stream);
   }
+}
+
+@internal
+final class ConstantCompanion extends RowCompanion<Constant> {
+  const ConstantCompanion();
+
+  @override
+  MetadataTableId get tableId => MetadataTableId.constant;
 }

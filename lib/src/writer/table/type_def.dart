@@ -1,14 +1,17 @@
 import 'dart:typed_data';
 
-import '../../attributes.dart';
-import '../codes.dart';
-import '../helpers.dart';
-import '../index.dart';
-import '../table.dart';
-import '../table_stream.dart';
+import 'package:meta/meta.dart';
 
-/// Represents a row in the `TypeDef` metadata table, describing a type defined
-/// in the assembly.
+import '../../attributes.dart';
+import '../../common.dart';
+import '../codes.dart';
+import '../heap/metadata_heap.dart';
+import '../helpers.dart';
+import '../row.dart';
+import '../table_stream.dart';
+import 'index.dart';
+
+/// Represents a row in the `TypeDef` metadata table.
 ///
 /// The fields are populated by interpreting the binary metadata as specified in
 /// ECMA-335 `§II.22.37`.
@@ -18,8 +21,8 @@ import '../table_stream.dart';
 ///  - **TypeName** (String Heap Index)
 ///  - **TypeNamespace** (String Heap Index)
 ///  - **Extends** (TypeDefOrRef Coded Index)
-///  - **FieldList** (Field Index)
-///  - **MethodList** (MethodDef Index)
+///  - **FieldList** (Field Table Index)
+///  - **MethodList** (MethodDef Table Index)
 final class TypeDef implements Row {
   const TypeDef({
     required this.flags,
@@ -38,13 +41,21 @@ final class TypeDef implements Row {
   final MethodDefIndex methodList;
 
   @override
-  void serialize(BytesBuilder buffer, TableStream context) {
+  void serialize(BytesBuilder buffer, TableStream stream) {
     buffer
       ..writeUint32(flags)
-      ..writeHeapIndex(name.index, context.stringHeapSize)
-      ..writeHeapIndex(namespace.index, context.stringHeapSize)
-      ..writeCodedIndex(extends$.encode(), context.typeDefOrRef)
-      ..writeTableIndex(fieldList.index, context.field.length)
-      ..writeTableIndex(methodList.index, context.methodDef.length);
+      ..writeHeapIndex(name, stream)
+      ..writeHeapIndex(namespace, stream)
+      ..writeCodedIndex(extends$, stream)
+      ..writeTableIndex(fieldList, stream)
+      ..writeTableIndex(methodList, stream);
   }
+}
+
+@internal
+final class TypeDefCompanion extends RowCompanion<TypeDef> {
+  const TypeDefCompanion();
+
+  @override
+  MetadataTableId get tableId => MetadataTableId.typeDef;
 }

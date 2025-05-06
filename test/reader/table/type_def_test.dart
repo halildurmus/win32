@@ -11,6 +11,89 @@ void main() async {
   );
 
   group('TypeDef', () {
+    test('Windows.Foundation.Collections.StringMap', () {
+      final typeDef = metadata.findSingleType(
+        'Windows.Foundation.Collections',
+        'StringMap',
+      );
+      check(typeDef.flags).equals(
+        TypeAttributes.public |
+            TypeAttributes.autoLayout |
+            TypeAttributes.ansiClass |
+            TypeAttributes.sealed |
+            TypeAttributes.windowsRuntime,
+      );
+      check(typeDef.typeVisibility).equals(TypeVisibility.public);
+      check(typeDef.typeLayout).equals(TypeLayout.auto);
+      check(typeDef.typeSemantics).equals(TypeSemantics.class$);
+      check(typeDef.stringFormat).equals(StringFormat.ansi);
+      check(typeDef.name).equals('StringMap');
+      check(typeDef.namespace).equals('Windows.Foundation.Collections');
+      final extends$ = typeDef.extends$;
+      check(extends$).isNotNull();
+      check(extends$!.namespace).equals('System');
+      check(extends$.name).equals('Object');
+      check(typeDef.fields).isEmpty();
+      final methods = typeDef.methods.toList();
+      check(methods.length).equals(11);
+      check(methods[0].name).equals('.ctor');
+      check(methods[4].name).equals('GetView');
+      check(methods[9].name).equals('add_MapChanged');
+      check(methods[10].name).equals('remove_MapChanged');
+      check(typeDef.category).equals(TypeCategory.class$);
+      check(typeDef.generics).isEmpty();
+      final interfaceImpls = typeDef.interfaceImpls.toList();
+      check(interfaceImpls.length).equals(3);
+      final [iMap, iIterable, iObservableMap] = interfaceImpls;
+      check(iMap.class$.name).equals('StringMap');
+      check(iMap.interface()).equals(
+        const NamedType(
+          TypeName(
+            'Windows.Foundation.Collections',
+            'IMap`2',
+            generics: [StringType(), StringType()],
+          ),
+        ),
+      );
+      check(iIterable.class$.name).equals('StringMap');
+      check(iIterable.interface()).equals(
+        const NamedType(
+          TypeName(
+            'Windows.Foundation.Collections',
+            'IIterable`1',
+            generics: [
+              NamedType(
+                TypeName(
+                  'Windows.Foundation.Collections',
+                  'IKeyValuePair`2',
+                  generics: [StringType(), StringType()],
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+      check(iObservableMap.class$.name).equals('StringMap');
+      check(iObservableMap.interface()).equals(
+        const NamedType(
+          TypeName(
+            'Windows.Foundation.Collections',
+            'IObservableMap`2',
+            generics: [StringType(), StringType()],
+          ),
+        ),
+      );
+      check(typeDef.classLayout).isNull();
+      final events = typeDef.events.toList();
+      check(events.length).equals(1);
+      check(events[0].name).equals('MapChanged');
+      check(typeDef.methodImpls).isEmpty();
+      check(typeDef.nested).isNull();
+      final properties = typeDef.properties.toList();
+      check(properties.length).equals(1);
+      check(properties[0].name).equals('Size');
+    });
+
     test('Windows.Globalization.Calendar', () {
       final typeDef = metadata.findSingleType(
         'Windows.Globalization',
@@ -60,7 +143,10 @@ void main() async {
       check(typeDef.events).isEmpty();
       check(typeDef.methodImpls).isEmpty();
       check(typeDef.nested).isNull();
-      check(typeDef.properties).isEmpty();
+      final properties = typeDef.properties.toList();
+      check(properties.length).equals(38);
+      check(properties[0].name).equals('Year');
+      check(properties[37].name).equals('FirstPeriodInThisDay');
     });
 
     test('Windows.Win32.Foundation.SYSTEMTIME', () {
@@ -263,6 +349,42 @@ void main() async {
   });
 
   group('TypeDefExtension', () {
+    group('findEvent', () {
+      final typeDef = metadata.findSingleType(
+        'Windows.Foundation.Collections',
+        'StringMap',
+      );
+
+      test('returns matching event if found', () {
+        final event = typeDef.findEvent('MapChanged');
+        check(event.name).equals('MapChanged');
+      });
+
+      test('throws if event not found', () {
+        check(
+          () => typeDef.findEvent('NonexistentEvent'),
+        ).throws<WinmdException>();
+      });
+    });
+
+    group('tryFindEvent', () {
+      final typeDef = metadata.findSingleType(
+        'Windows.Foundation.Collections',
+        'StringMap',
+      );
+
+      test('returns matching event if found', () {
+        final event = typeDef.tryFindEvent('MapChanged');
+        check(event).isNotNull();
+        check(event!.name).equals('MapChanged');
+      });
+
+      test('returns null if event not found', () {
+        final event = typeDef.tryFindEvent('DoesNotExist');
+        check(event).isNull();
+      });
+    });
+
     group('findField', () {
       final typeDef = metadata.index.findSingleType(
         'Windows.Win32.System.WinRT',
@@ -335,6 +457,42 @@ void main() async {
       test('returns null if method not found', () {
         final method = typeDef.tryFindMethod('NoSuchMethod');
         check(method).isNull();
+      });
+    });
+
+    group('findProperty', () {
+      final typeDef = metadata.findSingleType(
+        'Windows.Foundation.Collections',
+        'StringMap',
+      );
+
+      test('returns matching property if found', () {
+        final property = typeDef.findProperty('Size');
+        check(property.name).equals('Size');
+      });
+
+      test('throws if property not found', () {
+        check(
+          () => typeDef.findProperty('NonexistentProperty'),
+        ).throws<WinmdException>();
+      });
+    });
+
+    group('tryFindProperty', () {
+      final typeDef = metadata.findSingleType(
+        'Windows.Foundation.Collections',
+        'StringMap',
+      );
+
+      test('returns matching property if found', () {
+        final property = typeDef.tryFindProperty('Size');
+        check(property).isNotNull();
+        check(property!.name).equals('Size');
+      });
+
+      test('returns null if property not found', () {
+        final property = typeDef.tryFindProperty('DoesNotExist');
+        check(property).isNull();
       });
     });
   });

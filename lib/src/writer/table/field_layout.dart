@@ -1,20 +1,21 @@
 import 'dart:typed_data';
 
-import '../helpers.dart';
-import '../index.dart';
-import '../table.dart';
-import '../table_stream.dart';
-import 'field.dart';
+import 'package:meta/meta.dart';
 
-/// Represents a row in the `FieldLayout` metadata table, describing the
-/// physical layout information of a [Field] within a type.
+import '../../common.dart';
+import '../helpers.dart';
+import '../row.dart';
+import '../table_stream.dart';
+import 'index.dart';
+
+/// Represents a row in the `FieldLayout` metadata table.
 ///
 /// The fields are populated by interpreting the binary metadata as specified in
 /// ECMA-335 `§II.22.16`.
 ///
 /// The `FieldLayout` table has the following columns:
 ///  - **Offset** (4-byte constant)
-///  - **Field** (Field Index)
+///  - **Field** (Field Table Index)
 final class FieldLayout implements Row {
   const FieldLayout({required this.offset, required this.field});
 
@@ -22,9 +23,17 @@ final class FieldLayout implements Row {
   final FieldIndex field;
 
   @override
-  void serialize(BytesBuilder buffer, TableStream context) {
+  void serialize(BytesBuilder buffer, TableStream stream) {
     buffer
       ..writeUint32(offset)
-      ..writeTableIndex(field.index, context.fieldLayout.length);
+      ..writeTableIndex(field, stream);
   }
+}
+
+@internal
+final class FieldLayoutCompanion extends RowCompanion<FieldLayout> {
+  const FieldLayoutCompanion();
+
+  @override
+  MetadataTableId get tableId => MetadataTableId.fieldLayout;
 }

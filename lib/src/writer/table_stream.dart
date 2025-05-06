@@ -1,156 +1,113 @@
+import 'dart:collection';
 import 'dart:typed_data';
 
 import '../common.dart';
 import 'helpers.dart';
+import 'row.dart';
 import 'table.dart';
 import 'table/assembly.dart';
+import 'table/assembly_os.dart';
+import 'table/assembly_processor.dart';
 import 'table/assembly_ref.dart';
+import 'table/assembly_ref_os.dart';
+import 'table/assembly_ref_processor.dart';
 import 'table/class_layout.dart';
 import 'table/constant.dart';
 import 'table/custom_attribute.dart';
+import 'table/decl_security.dart';
+import 'table/event.dart';
+import 'table/event_map.dart';
+import 'table/exported_type.dart';
 import 'table/field.dart';
 import 'table/field_layout.dart';
+import 'table/field_marshal.dart';
+import 'table/field_rva.dart';
+import 'table/file.dart';
 import 'table/generic_param.dart';
+import 'table/generic_param_constraint.dart';
 import 'table/impl_map.dart';
 import 'table/interface_impl.dart';
+import 'table/manifest_resource.dart';
 import 'table/member_ref.dart';
 import 'table/method_def.dart';
+import 'table/method_impl.dart';
+import 'table/method_semantics.dart';
+import 'table/method_spec.dart';
 import 'table/module.dart';
 import 'table/module_ref.dart';
 import 'table/nested_class.dart';
 import 'table/param.dart';
+import 'table/property.dart';
+import 'table/property_map.dart';
+import 'table/stand_alone_sig.dart';
 import 'table/type_def.dart';
 import 'table/type_ref.dart';
 import 'table/type_spec.dart';
 
 /// Represents the `#~` metadata stream as specified in ECMA-335 `§II.24.2.6`.
 final class TableStream {
-  /// The `Assembly` table.
-  final assembly = Table<Assembly>();
+  /// Creates an empty [TableStream].
+  ///
+  /// Initializes all tables up front to ensure a consistent, non-growable map
+  /// of known tables.
+  TableStream()
+    : tables = UnmodifiableMapView({
+        MetadataTableId.module: Table<Module>(),
+        MetadataTableId.typeRef: Table<TypeRef>(),
+        MetadataTableId.typeDef: Table<TypeDef>(),
+        MetadataTableId.field: Table<Field>(),
+        MetadataTableId.methodDef: Table<MethodDef>(),
+        MetadataTableId.param: Table<Param>(),
+        MetadataTableId.interfaceImpl: Table<InterfaceImpl>(),
+        MetadataTableId.memberRef: Table<MemberRef>(),
+        MetadataTableId.constant: Table<Constant>(),
+        MetadataTableId.customAttribute: Table<CustomAttribute>(),
+        MetadataTableId.fieldMarshal: Table<FieldMarshal>(),
+        MetadataTableId.declSecurity: Table<DeclSecurity>(),
+        MetadataTableId.classLayout: Table<ClassLayout>(),
+        MetadataTableId.fieldLayout: Table<FieldLayout>(),
+        MetadataTableId.standAloneSig: Table<StandAloneSig>(),
+        MetadataTableId.eventMap: Table<EventMap>(),
+        MetadataTableId.event: Table<Event>(),
+        MetadataTableId.propertyMap: Table<PropertyMap>(),
+        MetadataTableId.property: Table<Property>(),
+        MetadataTableId.methodSemantics: Table<MethodSemantics>(),
+        MetadataTableId.methodImpl: Table<MethodImpl>(),
+        MetadataTableId.moduleRef: Table<ModuleRef>(),
+        MetadataTableId.typeSpec: Table<TypeSpec>(),
+        MetadataTableId.implMap: Table<ImplMap>(),
+        MetadataTableId.fieldRVA: Table<FieldRVA>(),
+        MetadataTableId.assembly: Table<Assembly>(),
+        MetadataTableId.assemblyProcessor: Table<AssemblyProcessor>(),
+        MetadataTableId.assemblyOS: Table<AssemblyOS>(),
+        MetadataTableId.assemblyRef: Table<AssemblyRef>(),
+        MetadataTableId.assemblyRefProcessor: Table<AssemblyRefProcessor>(),
+        MetadataTableId.assemblyRefOS: Table<AssemblyRefOS>(),
+        MetadataTableId.file: Table<File>(),
+        MetadataTableId.exportedType: Table<ExportedType>(),
+        MetadataTableId.manifestResource: Table<ManifestResource>(),
+        MetadataTableId.nestedClass: Table<NestedClass>(),
+        MetadataTableId.genericParam: Table<GenericParam>(),
+        MetadataTableId.methodSpec: Table<MethodSpec>(),
+        MetadataTableId.genericParamConstraint: Table<GenericParamConstraint>(),
+      });
 
-  /// The `AssemblyRef` table.
-  final assemblyRef = Table<AssemblyRef>();
+  /// The tables contained within this stream.
+  final Map<MetadataTableId, Table> tables;
 
-  /// The `CustomAttribute` table.
-  final customAttribute = Table<CustomAttribute>();
+  /// Returns the [Table] associated with the given [MetadataTableId].
+  @pragma('vm:prefer-inline')
+  Table operator [](MetadataTableId table) => tables[table]!;
 
-  /// The `ClassLayout` table.
-  final classLayout = Table<ClassLayout>();
+  /// Returns the [Table] associated with the type specified by [T].
+  @pragma('vm:prefer-inline')
+  Table<T> get<T extends Row>() {
+    final companion = Row.companion<T>();
+    return tables[companion.tableId]! as Table<T>;
+  }
 
-  /// The `Constant` table.
-  final constant = Table<Constant>();
-
-  /// The `Field` table.
-  final field = Table<Field>();
-
-  /// The `FieldLayout` table.
-  final fieldLayout = Table<FieldLayout>();
-
-  /// The `GenericParam` table.
-  final genericParam = Table<GenericParam>();
-
-  /// The `ImplMap` table.
-  final implMap = Table<ImplMap>();
-
-  /// The `InterfaceImpl` table.
-  final interfaceImpl = Table<InterfaceImpl>();
-
-  /// The `MemberRef` table.
-  final memberRef = Table<MemberRef>();
-
-  /// The `MethodDef` table.
-  final methodDef = Table<MethodDef>();
-
-  /// The `Module` table.
-  final module = Table<ModuleRecord>();
-
-  /// The `ModuleRef` table.
-  final moduleRef = Table<ModuleRef>();
-
-  /// The `NestedClass` table.
-  final nestedClass = Table<NestedClass>();
-
-  /// The `Param` table.
-  final param = Table<Param>();
-
-  /// The `TypeDef` table.
-  final typeDef = Table<TypeDef>();
-
-  /// The `TypeRef` table.
-  final typeRef = Table<TypeRef>();
-
-  /// The `TypeSpec` table.
-  final typeSpec = Table<TypeSpec>();
-
-  /// Size of each coded index for the `ResolutionScope`.
-  late final resolutionScope = codedIndexSize([
-    module.length,
-    moduleRef.length,
-    assemblyRef.length,
-    typeRef.length,
-  ]);
-
-  /// Size of each coded index for the `TypeDefOrRef`.
-  late final typeDefOrRef = codedIndexSize([
-    typeDef.length,
-    typeRef.length,
-    typeSpec.length,
-  ]);
-
-  /// Size of each coded index for the `HasConstant`.
-  late final hasConstant = codedIndexSize([field.length, param.length, 0]);
-
-  /// Size of each coded index for the `TypeOrMethodDef`.
-  late final typeOrMethodDef = codedIndexSize([
-    typeDef.length,
-    methodDef.length,
-  ]);
-
-  /// Size of each coded index for the `MemberRefParent`.
-  late final memberRefParent = codedIndexSize([
-    typeDef.length,
-    typeRef.length,
-    moduleRef.length,
-    methodDef.length,
-    typeSpec.length,
-  ]);
-
-  /// Size of each coded index for the `CustomAttributeType`.
-  late final customAttributeType = codedIndexSize([
-    methodDef.length,
-    memberRef.length,
-    0,
-    0,
-    0,
-  ]);
-
-  /// Size of each coded index for the `HasCustomAttribute`.
-  late final hasCustomAttribute = codedIndexSize([
-    methodDef.length,
-    field.length,
-    typeRef.length,
-    typeDef.length,
-    param.length,
-    interfaceImpl.length,
-    memberRef.length,
-    module.length,
-    0,
-    0,
-    0,
-    moduleRef.length,
-    typeSpec.length,
-    0,
-    assemblyRef.length,
-    0,
-    0,
-    0,
-    genericParam.length,
-    0,
-    0,
-  ]);
-
-  /// Size of each coded index for the `MemberForwarded`.
-  late final memberForwarded = codedIndexSize([field.length, methodDef.length]);
+  /// The sizes of the coded indexes used in this stream.
+  late final codedIndexSizes = CodedIndexSizes(this);
 
   /// Size of the `#Blob` heap in bytes.
   late final int blobHeapSize;
@@ -161,108 +118,213 @@ final class TableStream {
   /// Size of the `#Strings` heap in bytes.
   late final int stringHeapSize;
 
+  /// Size of the `#US` heap in bytes.
+  late final int userStringHeapSize;
+
   /// Sets the sizes of the heaps used for index calculation.
   ///
-  /// These values determine whether 2- or 4-byte indexes are used for each heap.
+  /// These values determine whether 2- or 4-byte indexes are used for each
+  /// heap.
   void setHeapSizes({
     required int blobHeapSize,
     required int guidHeapSize,
     required int stringHeapSize,
+    required int userStringHeapSize,
   }) {
     this.blobHeapSize = blobHeapSize;
     this.guidHeapSize = guidHeapSize;
     this.stringHeapSize = stringHeapSize;
+    this.userStringHeapSize = userStringHeapSize;
   }
-
-  /// Bitmask indicating the heap sizes.
-  int get _heapSizesBitmask =>
-      (stringHeapSize < 0x10000 ? 0 : 1) |
-      (guidHeapSize < 0x10000 ? 0 : 2) |
-      (blobHeapSize < 0x10000 ? 0 : 4);
 
   /// Serializes the metadata tables to a `#~` stream.
   Uint8List toBytes() {
+    // Determine the tables with non-empty rows for serialization.
+    final presentTables = tables.entries.where((e) => e.value.isNotEmpty);
+
+    int calculateHeapSizesBitmask() =>
+        (stringHeapSize < 0x10000 ? 0 : 1) |
+        (guidHeapSize < 0x10000 ? 0 : 2) |
+        (blobHeapSize < 0x10000 ? 0 : 4);
+
+    int calculateValidTablesBitmask() {
+      var bitmask = 0;
+      for (final MapEntry(key: tableId) in presentTables) {
+        bitmask |= 1 << tableId;
+      }
+      return bitmask;
+    }
+
+    int calculateSortedTablesBitmask() {
+      var bitmask = 0;
+      for (final MapEntry(key: tableId) in presentTables) {
+        if (_tablesNeedsSorting.contains(tableId)) {
+          bitmask |= 1 << tableId;
+        }
+      }
+      return bitmask;
+    }
+
     final buffer = BytesBuilder()
       // Write the header.
       ..writeUint32(0) // Reserved, always 0
       ..addByte(2) // MajorVersion, shall be 2
       ..addByte(0) // MinorVersion, shall be 0
-      ..addByte(_heapSizesBitmask) // HeapSizes
+      ..addByte(calculateHeapSizesBitmask()) // HeapSizes
       ..addByte(1) // Reserved, always 1
-      ..writeUint64(_validTablesBitmask) // Valid
-      ..writeUint64(_sortedTablesBitmask) // Sorted
-      // Write row counts (in table order).
-      ..writeUint32(module.length)
-      ..writeUint32(typeRef.length)
-      ..writeUint32(typeDef.length)
-      ..writeUint32(field.length)
-      ..writeUint32(methodDef.length)
-      ..writeUint32(param.length)
-      ..writeUint32(interfaceImpl.length)
-      ..writeUint32(memberRef.length)
-      ..writeUint32(constant.length)
-      ..writeUint32(customAttribute.length)
-      ..writeUint32(classLayout.length)
-      ..writeUint32(fieldLayout.length)
-      ..writeUint32(moduleRef.length)
-      ..writeUint32(typeSpec.length)
-      ..writeUint32(implMap.length)
-      ..writeUint32(assembly.length)
-      ..writeUint32(assemblyRef.length)
-      ..writeUint32(nestedClass.length)
-      ..writeUint32(genericParam.length);
-    // Write each table’s rows (in the same order as the row counts).
-    module.serialize(buffer, this);
-    typeRef.serialize(buffer, this);
-    typeDef.serialize(buffer, this);
-    field.serialize(buffer, this);
-    methodDef.serialize(buffer, this);
-    param.serialize(buffer, this);
-    interfaceImpl.serialize(buffer, this);
-    memberRef.serialize(buffer, this);
-    constant.serialize(buffer, this);
-    customAttribute.serialize(buffer, this);
-    classLayout.serialize(buffer, this);
-    fieldLayout.serialize(buffer, this);
-    moduleRef.serialize(buffer, this);
-    typeSpec.serialize(buffer, this);
-    implMap.serialize(buffer, this);
-    assembly.serialize(buffer, this);
-    assemblyRef.serialize(buffer, this);
-    nestedClass.serialize(buffer, this);
-    genericParam.serialize(buffer, this);
+      ..writeUint64(calculateValidTablesBitmask()) // Valid
+      ..writeUint64(calculateSortedTablesBitmask()); // Sorted
+
+    // Write row counts.
+    for (final MapEntry(value: table) in presentTables) {
+      buffer.writeUint32(table.length);
+    }
+
+    // Write rows.
+    for (final MapEntry(value: table) in presentTables) {
+      table.serialize(buffer, this);
+    }
+
     return buffer.takeBytes().toBytesPadded();
   }
 
-  /// Bitmask indicating which metadata tables are present.
-  static const _validTablesBitmask =
-      (1 << MetadataTableId.module) |
-      (1 << MetadataTableId.typeRef) |
-      (1 << MetadataTableId.typeDef) |
-      (1 << MetadataTableId.field) |
-      (1 << MetadataTableId.methodDef) |
-      (1 << MetadataTableId.param) |
-      (1 << MetadataTableId.interfaceImpl) |
-      (1 << MetadataTableId.memberRef) |
-      (1 << MetadataTableId.constant) |
-      (1 << MetadataTableId.customAttribute) |
-      (1 << MetadataTableId.classLayout) |
-      (1 << MetadataTableId.fieldLayout) |
-      (1 << MetadataTableId.moduleRef) |
-      (1 << MetadataTableId.typeSpec) |
-      (1 << MetadataTableId.implMap) |
-      (1 << MetadataTableId.assembly) |
-      (1 << MetadataTableId.assemblyRef) |
-      (1 << MetadataTableId.nestedClass) |
-      (1 << MetadataTableId.genericParam);
+  static const _tablesNeedsSorting = {
+    MetadataTableId.classLayout,
+    MetadataTableId.constant,
+    MetadataTableId.customAttribute,
+    MetadataTableId.fieldLayout,
+    MetadataTableId.genericParam,
+    MetadataTableId.implMap,
+    MetadataTableId.methodImpl,
+    MetadataTableId.methodSemantics,
+    MetadataTableId.nestedClass,
+  };
+}
 
-  /// Bitmask indicating which metadata tables are sorted.
-  static const _sortedTablesBitmask =
-      (1 << MetadataTableId.classLayout) |
-      (1 << MetadataTableId.constant) |
-      (1 << MetadataTableId.customAttribute) |
-      (1 << MetadataTableId.fieldLayout) |
-      (1 << MetadataTableId.genericParam) |
-      (1 << MetadataTableId.implMap) |
-      (1 << MetadataTableId.nestedClass);
+/// Computes coded index sizes for metadata tables as per ECMA-335 `§II.24.2.6`.
+final class CodedIndexSizes {
+  /// Creates a new [CodedIndexSizes] instance for the given [tableStream].
+  CodedIndexSizes(TableStream tableStream)
+    : customAttributeType = codedIndexSize([
+        0,
+        tableStream[MetadataTableId.methodDef].length,
+        tableStream[MetadataTableId.memberRef].length,
+        0,
+        0,
+      ]),
+      hasConstant = codedIndexSize([
+        tableStream[MetadataTableId.field].length,
+        tableStream[MetadataTableId.param].length,
+        tableStream[MetadataTableId.property].length,
+      ]),
+      hasCustomAttribute = codedIndexSize([
+        tableStream[MetadataTableId.methodDef].length,
+        tableStream[MetadataTableId.field].length,
+        tableStream[MetadataTableId.typeRef].length,
+        tableStream[MetadataTableId.typeDef].length,
+        tableStream[MetadataTableId.param].length,
+        tableStream[MetadataTableId.interfaceImpl].length,
+        tableStream[MetadataTableId.memberRef].length,
+        tableStream[MetadataTableId.module].length,
+        tableStream[MetadataTableId.property].length,
+        tableStream[MetadataTableId.event].length,
+        tableStream[MetadataTableId.standAloneSig].length,
+        tableStream[MetadataTableId.moduleRef].length,
+        tableStream[MetadataTableId.typeSpec].length,
+        tableStream[MetadataTableId.assembly].length,
+        tableStream[MetadataTableId.assemblyRef].length,
+        tableStream[MetadataTableId.file].length,
+        tableStream[MetadataTableId.exportedType].length,
+        tableStream[MetadataTableId.manifestResource].length,
+        tableStream[MetadataTableId.genericParam].length,
+        tableStream[MetadataTableId.genericParamConstraint].length,
+        tableStream[MetadataTableId.methodSpec].length,
+      ]),
+      hasDeclSecurity = codedIndexSize([
+        tableStream[MetadataTableId.typeDef].length,
+        tableStream[MetadataTableId.methodDef].length,
+        tableStream[MetadataTableId.assembly].length,
+      ]),
+      hasFieldMarshal = codedIndexSize([
+        tableStream[MetadataTableId.field].length,
+        tableStream[MetadataTableId.param].length,
+      ]),
+      hasSemantics = codedIndexSize([
+        tableStream[MetadataTableId.event].length,
+        tableStream[MetadataTableId.property].length,
+      ]),
+      implementation = codedIndexSize([
+        tableStream[MetadataTableId.file].length,
+        tableStream[MetadataTableId.assemblyRef].length,
+        tableStream[MetadataTableId.exportedType].length,
+      ]),
+      memberForwarded = codedIndexSize([
+        tableStream[MetadataTableId.field].length,
+        tableStream[MetadataTableId.methodDef].length,
+      ]),
+      memberRefParent = codedIndexSize([
+        tableStream[MetadataTableId.typeDef].length,
+        tableStream[MetadataTableId.typeRef].length,
+        tableStream[MetadataTableId.moduleRef].length,
+        tableStream[MetadataTableId.methodDef].length,
+        tableStream[MetadataTableId.typeSpec].length,
+      ]),
+      methodDefOrRef = codedIndexSize([
+        tableStream[MetadataTableId.methodDef].length,
+        tableStream[MetadataTableId.memberRef].length,
+      ]),
+      resolutionScope = codedIndexSize([
+        tableStream[MetadataTableId.module].length,
+        tableStream[MetadataTableId.moduleRef].length,
+        tableStream[MetadataTableId.assemblyRef].length,
+        tableStream[MetadataTableId.typeRef].length,
+      ]),
+      typeDefOrRef = codedIndexSize([
+        tableStream[MetadataTableId.typeDef].length,
+        tableStream[MetadataTableId.typeRef].length,
+        tableStream[MetadataTableId.typeSpec].length,
+      ]),
+      typeOrMethodDef = codedIndexSize([
+        tableStream[MetadataTableId.typeDef].length,
+        tableStream[MetadataTableId.methodDef].length,
+      ]);
+
+  /// The size of the `CustomAttributeType` coded index.
+  final int customAttributeType;
+
+  /// The size of the `HasConstant` coded index.
+  final int hasConstant;
+
+  /// The size of the `HasCustomAttribute` coded index.
+  final int hasCustomAttribute;
+
+  /// The size of the `HasDeclSecurity` coded index.
+  final int hasDeclSecurity;
+
+  /// The size of the `HasFieldMarshal` coded index.
+  final int hasFieldMarshal;
+
+  /// The size of the `HasSemantics` coded index.
+  final int hasSemantics;
+
+  /// The size of the `Implementation` coded index.
+  final int implementation;
+
+  /// The size of the `MemberForwarded` coded index.
+  final int memberForwarded;
+
+  /// The size of the `MemberRefParent` coded index.
+  final int memberRefParent;
+
+  /// The size of the `MethodDefOrRef` coded index.
+  final int methodDefOrRef;
+
+  /// The size of the `ResolutionScope` coded index.
+  final int resolutionScope;
+
+  /// The size of the `TypeDefOrRef` coded index.
+  final int typeDefOrRef;
+
+  /// The size of the `TypeOrMethodDef` coded index.
+  final int typeOrMethodDef;
 }

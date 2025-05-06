@@ -8,7 +8,6 @@ import '../compressed_integer.dart';
 import '../exception.dart';
 import '../metadata_type.dart';
 import '../method_signature.dart';
-import '../property_signature.dart';
 import '../type_name.dart';
 import 'codes.dart';
 import 'metadata_index.dart';
@@ -111,25 +110,27 @@ final class Blob {
 
   /// Reads and decodes a property signature from the blob.
   ///
-  /// Returns a [PropertySignature] containing the flags, return type, and
+  /// Returns a [MethodSignature] containing the flags, return type, and
   /// parameter types.
   ///
   /// See ECMA-335 `§II.23.2.5 PropertySig`.
-  PropertySignature readPropertySignature([
+  MethodSignature readPropertySignature([
     List<MetadataType> generics = const [],
   ]) {
-    final flags = readUint8();
-    assert(
-      flags == 0x8 || flags == 0x28,
-      'Invalid first byte for PropertySig: $flags. Expected 0x8 or 0x28.',
-    );
+    final firstByte = readUint8();
+    assert(firstByte & 0x08 != 0, 'Signature is not a PropertySig');
+    final hasThis = firstByte & 0x20 != 0;
     final paramCount = readCompressed();
     final returnType = readTypeSignature(generics);
     final types = <MetadataType>[];
     for (var i = 0; i < paramCount; i++) {
       types.add(readTypeSignature(generics));
     }
-    return PropertySignature(returnType: returnType, types: types);
+    return MethodSignature(
+      flags: hasThis ? MethodCallFlags.hasThis : MethodCallFlags.default$,
+      returnType: returnType,
+      types: types,
+    );
   }
 
   /// Reads a type code and returns a corresponding [MetadataType].

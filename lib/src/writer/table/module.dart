@@ -1,12 +1,14 @@
 import 'dart:typed_data';
 
+import 'package:meta/meta.dart';
+
+import '../../common.dart';
+import '../heap/metadata_heap.dart';
 import '../helpers.dart';
-import '../index.dart';
-import '../table.dart';
+import '../row.dart';
 import '../table_stream.dart';
 
-/// Represents a row in the `Module` metadata table, describing a module
-/// associated with the assembly.
+/// Represents a row in the `Module` metadata table.
 ///
 /// The fields are populated by interpreting the binary metadata as specified in
 /// ECMA-335 `§II.22.30`.
@@ -17,8 +19,8 @@ import '../table_stream.dart';
 ///  - **Mvid** (Module Version ID) (GUID Heap Index)
 ///  - **EncId** (GUID Heap Index, reserved, MBZ)
 ///  - **EncBaseId** (GUID Heap Index, reserved, MBZ)
-final class ModuleRecord implements Row {
-  const ModuleRecord({
+final class Module implements Row {
+  const Module({
     this.name = const StringIndex(0),
     this.mvid = const GuidIndex(0),
   }) : generation = 0,
@@ -32,12 +34,20 @@ final class ModuleRecord implements Row {
   final GuidIndex encBaseId;
 
   @override
-  void serialize(BytesBuilder buffer, TableStream context) {
+  void serialize(BytesBuilder buffer, TableStream stream) {
     buffer
       ..writeUint16(generation)
-      ..writeHeapIndex(name.index, context.stringHeapSize)
-      ..writeHeapIndex(mvid.index, context.guidHeapSize)
-      ..writeHeapIndex(encId.index, context.guidHeapSize)
-      ..writeHeapIndex(encBaseId.index, context.guidHeapSize);
+      ..writeHeapIndex(name, stream)
+      ..writeHeapIndex(mvid, stream)
+      ..writeHeapIndex(encId, stream)
+      ..writeHeapIndex(encBaseId, stream);
   }
+}
+
+@internal
+final class ModuleCompanion extends RowCompanion<Module> {
+  const ModuleCompanion();
+
+  @override
+  MetadataTableId get tableId => MetadataTableId.module;
 }

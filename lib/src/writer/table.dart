@@ -1,14 +1,7 @@
 import 'dart:typed_data';
 
+import 'row.dart';
 import 'table_stream.dart';
-
-/// An abstract interface representing a serializable row in a metadata table.
-// ignore: one_member_abstracts
-abstract interface class Row {
-  /// Serializes this row into the provided [buffer], using the given [context]
-  /// to resolve table-specific serialization behavior.
-  void serialize(BytesBuilder buffer, TableStream context);
-}
 
 /// A strongly-typed table of rows used for metadata serialization.
 ///
@@ -27,11 +20,17 @@ final class Table<T extends Row> {
   /// The number of rows currently in the table.
   int get length => rows.length;
 
+  /// Whether the [rows] has no rows.
+  bool get isEmpty => rows.isEmpty;
+
+  /// Whether the [rows] has at least one row.
+  bool get isNotEmpty => rows.isNotEmpty;
+
   /// Serializes all rows in the table into the provided [buffer], using the
-  /// given [context] for row-specific serialization logic.
-  void serialize(BytesBuilder buffer, TableStream context) {
+  /// given [stream] for row-specific serialization logic.
+  void serialize(BytesBuilder buffer, TableStream stream) {
     for (final row in rows) {
-      row.serialize(buffer, context);
+      row.serialize(buffer, stream);
     }
   }
 }

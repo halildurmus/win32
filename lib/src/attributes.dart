@@ -43,10 +43,10 @@ extension type const AssemblyFlags(int _) implements int {
 /// Provides information about an event.
 extension type const EventAttributes(int _) implements int {
   /// The event is special.
-  static const specialName = FieldAttributes(0x0200);
+  static const specialName = EventAttributes(0x0200);
 
   /// CLI provides 'special' behavior, depending upon the name of the event.
-  static const rtSpecialName = FieldAttributes(0x0400);
+  static const rtSpecialName = EventAttributes(0x0400);
 }
 
 /// Provides information about a field.
@@ -225,13 +225,13 @@ enum SpecialConstraint {
 /// Provides information about a manifest resource.
 extension type const ManifestResourceAttributes(int _) implements int {
   /// Specifies type visibility information.
-  static const visibilityMask = TypeAttributes(0x0007);
+  static const visibilityMask = ManifestResourceAttributes(0x0007);
 
   /// The resource is exported from the Assembly.
-  static const public = TypeAttributes(0x0001);
+  static const public = ManifestResourceAttributes(0x0001);
 
   /// The resource is private to the Assembly.
-  static const private = TypeAttributes(0x0002);
+  static const private = ManifestResourceAttributes(0x0002);
 }
 
 /// Represents the visibility of a manifest resource.

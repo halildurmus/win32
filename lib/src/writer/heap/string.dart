@@ -1,8 +1,6 @@
-import 'dart:collection';
 import 'dart:convert';
 import 'dart:typed_data';
 
-import '../index.dart';
 import 'metadata_heap.dart';
 
 /// A metadata heap that stores strings as UTF-8 encoded, null-terminated byte
@@ -23,7 +21,7 @@ final class StringHeap extends MetadataHeap<String, StringIndex> {
   ///
   /// This ensures that references to the empty string in metadata always
   /// resolve to a valid offset, as required by the metadata format.
-  StringHeap.empty() : super(HashMap(), BytesBuilder()) {
+  StringHeap.empty() : super({}, BytesBuilder()) {
     buffer.addByte(0x00); // Add an empty string.
   }
 

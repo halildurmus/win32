@@ -134,6 +134,43 @@ void main() async {
       });
     });
 
+    group('readPropertySignature', () {
+      test('property with no parameters and Uint32 return', () {
+        final blob = createBlob([
+          0x8, // PROPERTY
+          0, // param count
+          ELEMENT_TYPE_U4, // return type
+        ]);
+        final sig = blob.readPropertySignature();
+        check(sig.flags).equals(MethodCallFlags.default$);
+        check(sig.returnType).isA<Uint32Type>();
+        check(sig.types).isEmpty();
+      });
+
+      test('property with multiple parameters and HRESULT return', () {
+        final blob = createBlob([
+          0x8 | MethodCallFlags.hasThis, // PROPERTY | HASTHIS
+          3, // param count
+          ELEMENT_TYPE_CLASS,
+          ...CompressedInteger.encode(
+            TypeDefOrRef.typeRef(TypeRef(index, 0, 29)).encode(),
+          ),
+          ELEMENT_TYPE_U1,
+          ELEMENT_TYPE_BOOLEAN,
+          ELEMENT_TYPE_STRING,
+        ]);
+        final sig = blob.readPropertySignature();
+        check(sig.flags).equals(MethodCallFlags.hasThis);
+        check(sig.returnType).equals(
+          const NamedType(TypeName('Windows.Win32.Foundation', 'HRESULT')),
+        );
+        check(sig.types.length).equals(3);
+        check(sig.types[0]).equals(const Uint8Type());
+        check(sig.types[1]).equals(const BoolType());
+        check(sig.types[2]).equals(const StringType());
+      });
+    });
+
     group('readTypeCode', () {
       test('ELEMENT_TYPE_VOID', () {
         final blob = createBlob([ELEMENT_TYPE_VOID]);

@@ -14,5 +14,5 @@ export 'src/metadata_type.dart';
 export 'src/metadata_value.dart';
 export 'src/method_signature.dart';
 export 'src/writer/codes.dart';
-export 'src/writer/index.dart';
 export 'src/writer/metadata_writer.dart';
+export 'src/writer/table/index.dart';

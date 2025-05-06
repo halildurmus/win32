@@ -235,14 +235,20 @@ void main() async {
 
     test('event', () {
       check(win32Index.event).isEmpty();
-      // final events = winrtIndex.event.toList();
-      // check(events.length).equals(1);
+      final events = winrtIndex.event.toList();
+      check(events.length).equals(2833);
+      check(events[0].name).equals('Dismissed');
+      check(events.last.name).equals('ResponseReceived');
     });
 
     test('eventMap', () {
       check(win32Index.eventMap).isEmpty();
-      // final eventMaps = winrtIndex.eventMap.toList();
-      // check(eventMaps.length).equals(1);
+      final eventMaps = winrtIndex.eventMap.toList();
+      check(eventMaps.length).equals(1195);
+      check(eventMaps[0].parent.name).equals('ISplashScreen');
+      check(eventMaps[0].events.length).equals(1);
+      check(eventMaps.last.parent.name).equals('IHttpDiagnosticProvider');
+      check(eventMaps.last.events.length).equals(3);
     });
 
     test('exportedType', () {
@@ -326,6 +332,10 @@ void main() async {
 
     test('methodSemantics', () {
       check(win32Index.methodSemantics).isEmpty();
+      final methodSemantics = winrtIndex.methodSemantics.toList();
+      check(methodSemantics.length).equals(51205);
+      check(methodSemantics[0].method.name).equals('add_Dismissed');
+      check(methodSemantics.last.method.name).equals('get_SourceUri');
     });
 
     test('methodSpec', () {
@@ -366,14 +376,22 @@ void main() async {
 
     test('property', () {
       check(win32Index.property).isEmpty();
-      // final properties = winrtIndex.property.toList();
-      // check(properties.length).equals(1);
+      final properties = winrtIndex.property.toList();
+      check(properties.length).equals(35324);
+      check(properties[0].name).equals('BitmapAlphaMode');
+      check(properties.last.name).equals('SourceUri');
     });
 
     test('propertyMap', () {
       check(win32Index.propertyMap).isEmpty();
-      // final propertyMaps = winrtIndex.propertyMap.toList();
-      // check(propertyMaps.length).equals(1);
+      final propertyMaps = winrtIndex.propertyMap.toList();
+      check(propertyMaps.length).equals(8807);
+      check(propertyMaps[0].parent.name).equals('IImageFeatureDescriptor');
+      check(propertyMaps[0].properties.length).equals(4);
+      check(
+        propertyMaps.last.parent.name,
+      ).equals('IHttpDiagnosticSourceLocation');
+      check(propertyMaps.last.properties.length).equals(3);
     });
 
     test('standAloneSig', () {
@@ -396,7 +414,7 @@ void main() async {
 
     test('typeSpec', () {
       final typeSpecs = winrtIndex.typeSpec.toList();
-      check(typeSpecs.length).equals(254);
+      check(typeSpecs.length).equals(2778);
       check(typeSpecs[0].type()).equals(
         const NamedType(
           TypeName(
@@ -409,9 +427,22 @@ void main() async {
       check(typeSpecs.last.type()).equals(
         const NamedType(
           TypeName(
-            'Windows.Foundation.Collections',
-            'IIterable`1',
-            generics: [NamedType(TypeName('Windows.Web.Http', 'IHttpContent'))],
+            'Windows.Foundation',
+            'TypedEventHandler`2',
+            generics: [
+              NamedType(
+                TypeName(
+                  'Windows.Web.Http.Diagnostics',
+                  'HttpDiagnosticProvider',
+                ),
+              ),
+              NamedType(
+                TypeName(
+                  'Windows.Web.Http.Diagnostics',
+                  'HttpDiagnosticProviderResponseReceivedEventArgs',
+                ),
+              ),
+            ],
           ),
         ),
       );

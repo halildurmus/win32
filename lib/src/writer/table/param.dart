@@ -1,13 +1,15 @@
 import 'dart:typed_data';
 
+import 'package:meta/meta.dart';
+
 import '../../attributes.dart';
+import '../../common.dart';
+import '../heap/metadata_heap.dart';
 import '../helpers.dart';
-import '../index.dart';
-import '../table.dart';
+import '../row.dart';
 import '../table_stream.dart';
 
-/// Represents a row in the `Param` metadata table, describing a parameter of a
-/// method or property.
+/// Represents a row in the `Param` metadata table.
 ///
 /// The fields are populated by interpreting the binary metadata as specified in
 /// ECMA-335 `§II.22.33`.
@@ -28,10 +30,18 @@ final class Param implements Row {
   final StringIndex name;
 
   @override
-  void serialize(BytesBuilder buffer, TableStream context) {
+  void serialize(BytesBuilder buffer, TableStream stream) {
     buffer
       ..writeUint16(flags)
       ..writeUint16(sequence)
-      ..writeHeapIndex(name.index, context.stringHeapSize);
+      ..writeHeapIndex(name, stream);
   }
+}
+
+@internal
+final class ParamCompanion extends RowCompanion<Param> {
+  const ParamCompanion();
+
+  @override
+  MetadataTableId get tableId => MetadataTableId.param;
 }

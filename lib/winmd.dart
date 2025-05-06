@@ -80,7 +80,6 @@ export 'src/logger.dart';
 export 'src/metadata_type.dart';
 export 'src/metadata_value.dart';
 export 'src/method_signature.dart';
-export 'src/property_signature.dart';
 export 'src/reader/blob.dart';
 export 'src/reader/codes.dart'
     hide
@@ -109,23 +108,44 @@ export 'src/reader/metadata_lookup.dart';
 export 'src/reader/metadata_reader.dart';
 export 'src/reader/metadata_table.dart';
 export 'src/reader/row.dart' hide RowCompanion;
+export 'src/reader/table/assembly.dart' hide AssemblyCompanion;
+export 'src/reader/table/assembly_os.dart' hide AssemblyOSCompanion;
+export 'src/reader/table/assembly_processor.dart'
+    hide AssemblyProcessorCompanion;
 export 'src/reader/table/assembly_ref.dart' hide AssemblyRefCompanion;
+export 'src/reader/table/assembly_ref_os.dart' hide AssemblyRefOSCompanion;
+export 'src/reader/table/assembly_ref_processor.dart'
+    hide AssemblyRefProcessorCompanion;
 export 'src/reader/table/class_layout.dart' hide ClassLayoutCompanion;
 export 'src/reader/table/constant.dart' hide ConstantCompanion;
 export 'src/reader/table/custom_attribute.dart' hide CustomAttributeCompanion;
+export 'src/reader/table/decl_security.dart' hide DeclSecurityCompanion;
+export 'src/reader/table/event.dart' hide EventCompanion;
+export 'src/reader/table/event_map.dart' hide EventMapCompanion;
+export 'src/reader/table/exported_type.dart' hide ExportedTypeCompanion;
 export 'src/reader/table/field.dart' hide FieldCompanion;
 export 'src/reader/table/field_layout.dart' hide FieldLayoutCompanion;
+export 'src/reader/table/field_marshal.dart' hide FieldMarshalCompanion;
+export 'src/reader/table/field_rva.dart' hide FieldRVACompanion;
+export 'src/reader/table/file.dart' hide FileCompanion;
 export 'src/reader/table/generic_param.dart' hide GenericParamCompanion;
 export 'src/reader/table/generic_param_constraint.dart'
     hide GenericParamConstraintCompanion;
 export 'src/reader/table/impl_map.dart' hide ImplMapCompanion;
 export 'src/reader/table/interface_impl.dart' hide InterfaceImplCompanion;
+export 'src/reader/table/manifest_resource.dart' hide ManifestResourceCompanion;
 export 'src/reader/table/member_ref.dart' hide MemberRefCompanion;
 export 'src/reader/table/method_def.dart' hide MethodDefCompanion;
+export 'src/reader/table/method_impl.dart' hide MethodImplCompanion;
+export 'src/reader/table/method_semantics.dart' hide MethodSemanticsCompanion;
+export 'src/reader/table/method_spec.dart' hide MethodSpecCompanion;
 export 'src/reader/table/module.dart' hide ModuleCompanion;
 export 'src/reader/table/module_ref.dart' hide ModuleRefCompanion;
 export 'src/reader/table/nested_class.dart' hide NestedClassCompanion;
 export 'src/reader/table/param.dart' hide ParamCompanion;
+export 'src/reader/table/property.dart' hide PropertyCompanion;
+export 'src/reader/table/property_map.dart' hide PropertyMapCompanion;
+export 'src/reader/table/stand_alone_sig.dart' hide StandAloneSigCompanion;
 export 'src/reader/table/type_def.dart' hide TypeDefCompanion;
 export 'src/reader/table/type_ref.dart' hide TypeRefCompanion;
 export 'src/reader/table/type_spec.dart' hide TypeSpecCompanion;

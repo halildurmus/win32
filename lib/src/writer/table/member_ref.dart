@@ -1,13 +1,15 @@
 import 'dart:typed_data';
 
+import 'package:meta/meta.dart';
+
+import '../../common.dart';
 import '../codes.dart';
+import '../heap/metadata_heap.dart';
 import '../helpers.dart';
-import '../index.dart';
-import '../table.dart';
+import '../row.dart';
 import '../table_stream.dart';
 
-/// Represents a row in the `MemberRef` metadata table, describing a reference
-/// to a field or method of a type.
+/// Represents a row in the `MemberRef` metadata table.
 ///
 /// The fields are populated by interpreting the binary metadata as specified in
 /// ECMA-335 `§II.22.25`.
@@ -28,11 +30,11 @@ final class MemberRef implements Row {
   final BlobIndex signature;
 
   @override
-  void serialize(BytesBuilder buffer, TableStream context) {
+  void serialize(BytesBuilder buffer, TableStream stream) {
     buffer
-      ..writeCodedIndex(parent.encode(), context.memberRefParent)
-      ..writeHeapIndex(name.index, context.stringHeapSize)
-      ..writeHeapIndex(signature.index, context.blobHeapSize);
+      ..writeCodedIndex(parent, stream)
+      ..writeHeapIndex(name, stream)
+      ..writeHeapIndex(signature, stream);
   }
 
   @override
@@ -45,4 +47,12 @@ final class MemberRef implements Row {
 
   @override
   int get hashCode => Object.hash(parent, name, signature);
+}
+
+@internal
+final class MemberRefCompanion extends RowCompanion<MemberRef> {
+  const MemberRefCompanion();
+
+  @override
+  MetadataTableId get tableId => MetadataTableId.memberRef;
 }

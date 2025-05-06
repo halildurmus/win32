@@ -1,4 +1,3 @@
-import 'dart:collection';
 import 'dart:typed_data';
 
 import '../helpers.dart';
@@ -12,7 +11,7 @@ abstract base class MetadataHeap<K, V> {
   /// A map from inserted values to their assigned indexes within the heap.
   ///
   /// Used to ensure that duplicate values are not inserted multiple times.
-  final HashMap<K, V> map;
+  final Map<K, V> map;
 
   /// A buffer that holds the serialized binary contents of the heap.
   final BytesBuilder buffer;
@@ -22,4 +21,36 @@ abstract base class MetadataHeap<K, V> {
 
   /// Returns a padded byte representation of the heap.
   Uint8List toBytes() => buffer.takeBytes().toBytesPadded();
+}
+
+/// Represents an index into a heap.
+sealed class HeapIndex {
+  const HeapIndex(this.index);
+
+  /// The index into the heap.
+  final int index;
+
+  @override
+  // ignore: no_runtimetype_tostring
+  String toString() => '$runtimeType($index)';
+}
+
+/// Represents an index into the `#Blob` heap.
+final class BlobIndex extends HeapIndex {
+  const BlobIndex(super.index);
+}
+
+/// Represents an index into the `#GUID` heap.
+final class GuidIndex extends HeapIndex {
+  const GuidIndex(super.index);
+}
+
+/// Represents an index into the `#Strings` heap.
+final class StringIndex extends HeapIndex {
+  const StringIndex(super.index);
+}
+
+/// Represents an index into the `#US` heap.
+final class UserStringIndex extends HeapIndex {
+  const UserStringIndex(super.index);
 }

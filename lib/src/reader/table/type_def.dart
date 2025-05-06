@@ -177,6 +177,19 @@ final class TypeDef extends Row with HasCustomAttributes {
 }
 
 extension TypeDefExtension on TypeDef {
+  /// Finds an event by its [name].
+  ///
+  /// Throws a [WinmdException] if the event is not found.
+  Event findEvent(String name) =>
+      events.where((e) => e.name == name).firstOrNull ??
+      (throw WinmdException('Event "$name" not found in $this'));
+
+  /// Attempts to find an event by its [name].
+  ///
+  /// Returns `null` if the event is not found.
+  Event? tryFindEvent(String name) =>
+      events.where((e) => e.name == name).firstOrNull;
+
   /// Finds a field by its [name].
   ///
   /// Throws a [WinmdException] if the field is not found.
@@ -202,6 +215,19 @@ extension TypeDefExtension on TypeDef {
   /// Returns `null` if the method is not found.
   MethodDef? tryFindMethod(String name) =>
       methods.where((m) => m.name == name).firstOrNull;
+
+  /// Finds a property by its [name].
+  ///
+  /// Throws a [WinmdException] if the property is not found.
+  Property findProperty(String name) =>
+      properties.where((p) => p.name == name).firstOrNull ??
+      (throw WinmdException('Property "$name" not found in $this'));
+
+  /// Attempts to find a property by its [name].
+  ///
+  /// Returns `null` if the property is not found.
+  Property? tryFindProperty(String name) =>
+      properties.where((p) => p.name == name).firstOrNull;
 }
 
 @internal

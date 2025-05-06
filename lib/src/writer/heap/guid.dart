@@ -1,8 +1,6 @@
-import 'dart:collection';
 import 'dart:typed_data';
 
 import '../../guid.dart';
-import '../index.dart';
 import 'metadata_heap.dart';
 
 /// A metadata heap that stores GUIDs (Globally Unique Identifiers) in 16-byte
@@ -22,7 +20,7 @@ final class GuidHeap extends MetadataHeap<Guid, GuidIndex> {
   /// GUIDs inserted into the heap are stored consecutively in 16-byte blocks.
   /// The index of each GUID is determined by its index in the heap, with the
   /// first GUID assigned index 1.
-  GuidHeap.empty() : super(HashMap(), BytesBuilder());
+  GuidHeap.empty() : super({}, BytesBuilder());
 
   @override
   GuidIndex insert(Guid key) {

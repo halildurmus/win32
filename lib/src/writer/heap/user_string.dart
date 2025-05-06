@@ -1,8 +1,6 @@
-import 'dart:collection';
 import 'dart:typed_data';
 
 import '../../compressed_integer.dart';
-import '../index.dart';
 import 'metadata_heap.dart';
 
 /// A metadata heap for user-defined strings, stored as UTF-16LE encoded blobs
@@ -23,7 +21,7 @@ final class UserStringHeap extends MetadataHeap<String, UserStringIndex> {
   ///
   /// This ensures that references to the empty string in metadata always
   /// resolve to a valid offset, as required by the metadata format.
-  UserStringHeap.empty() : super(HashMap(), BytesBuilder()) {
+  UserStringHeap.empty() : super({}, BytesBuilder()) {
     buffer.addByte(0x00); // Add an empty blob.
   }
 

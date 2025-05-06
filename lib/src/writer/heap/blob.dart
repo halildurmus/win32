@@ -3,7 +3,6 @@ import 'dart:typed_data';
 
 import '../../common.dart';
 import '../../compressed_integer.dart';
-import '../index.dart';
 import 'metadata_heap.dart';
 
 /// A metadata heap that stores binary blobs with compressed length prefixes.
