@@ -49,9 +49,6 @@ final class ManifestResource extends Row with HasCustomAttributes {
     if (readUint(3) == 0) return null;
     return decode<Implementation>(3);
   }();
-
-  @override
-  String toString() => 'ManifestResource(name: $name, offset: $offset)';
 }
 
 @internal

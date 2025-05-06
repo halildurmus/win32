@@ -30,9 +30,6 @@ final class File extends Row with HasCustomAttributes {
 
   /// The hash value of the file.
   Blob get hashValue => readBlob(2);
-
-  @override
-  String toString() => 'File(name: $name)';
 }
 
 @internal

@@ -21,9 +21,6 @@ final class StandAloneSig extends Row with HasCustomAttributes {
 
   /// The signature data.
   Blob get signature => readBlob(0);
-
-  @override
-  String toString() => 'StandAloneSig(signature: $signature)';
 }
 
 @internal

@@ -31,9 +31,6 @@ final class DeclSecurity extends Row {
   /// A blob representing the serialized permission set to be applied for the
   /// given security action.
   Blob get permissionSet => readBlob(2);
-
-  @override
-  String toString() => 'DeclSecurity(action: $action, parent: $parent)';
 }
 
 @internal

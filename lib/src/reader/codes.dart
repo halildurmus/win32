@@ -32,8 +32,6 @@ import 'table/type_spec.dart';
 /// A coded index is a compressed reference that combines multiple possible
 /// table types into a single value, using a tag to distinguish them.
 sealed class CodedIndex {
-  const CodedIndex();
-
   /// Retrieves the [CodedIndexCompanion] associated with the specified [T].
   @internal
   static CodedIndexCompanion<T> companion<T extends CodedIndex>() {
@@ -133,6 +131,14 @@ final class CustomAttributeTypeMethodDef extends CustomAttributeType {
   String get name => value.name;
 
   @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is CustomAttributeTypeMethodDef && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
+
+  @override
   String toString() => value.toString();
 }
 
@@ -155,6 +161,14 @@ final class CustomAttributeTypeMemberRef extends CustomAttributeType {
 
   @override
   String get name => value.name;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is CustomAttributeTypeMemberRef && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
 
   @override
   String toString() => value.toString();
@@ -217,6 +231,14 @@ final class HasConstantField extends HasConstant {
   String get name => value.name;
 
   @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is HasConstantField && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
+
+  @override
   String toString() => value.toString();
 }
 
@@ -234,6 +256,14 @@ final class HasConstantParam extends HasConstant {
   String get name => value.name;
 
   @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is HasConstantParam && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
+
+  @override
   String toString() => value.toString();
 }
 
@@ -249,6 +279,14 @@ final class HasConstantProperty extends HasConstant {
 
   @override
   String get name => value.name;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is HasConstantProperty && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
 
   @override
   String toString() => value.toString();
@@ -448,6 +486,14 @@ final class HasCustomAttributeMethodDef extends HasCustomAttribute {
   int encode() => ((value.index + 1) << 5) | 0;
 
   @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is HasCustomAttributeMethodDef && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
+
+  @override
   String toString() => value.toString();
 }
 
@@ -460,6 +506,14 @@ final class HasCustomAttributeField extends HasCustomAttribute {
 
   @override
   int encode() => ((value.index + 1) << 5) | 1;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is HasCustomAttributeField && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
 
   @override
   String toString() => value.toString();
@@ -476,6 +530,14 @@ final class HasCustomAttributeTypeRef extends HasCustomAttribute {
   int encode() => ((value.index + 1) << 5) | 2;
 
   @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is HasCustomAttributeTypeRef && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
+
+  @override
   String toString() => value.toString();
 }
 
@@ -488,6 +550,14 @@ final class HasCustomAttributeTypeDef extends HasCustomAttribute {
 
   @override
   int encode() => ((value.index + 1) << 5) | 3;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is HasCustomAttributeTypeDef && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
 
   @override
   String toString() => value.toString();
@@ -504,6 +574,14 @@ final class HasCustomAttributeParam extends HasCustomAttribute {
   int encode() => ((value.index + 1) << 5) | 4;
 
   @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is HasCustomAttributeParam && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
+
+  @override
   String toString() => value.toString();
 }
 
@@ -516,6 +594,14 @@ final class HasCustomAttributeInterfaceImpl extends HasCustomAttribute {
 
   @override
   int encode() => ((value.index + 1) << 5) | 5;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is HasCustomAttributeInterfaceImpl && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
 
   @override
   String toString() => value.toString();
@@ -532,6 +618,14 @@ final class HasCustomAttributeMemberRef extends HasCustomAttribute {
   int encode() => ((value.index + 1) << 5) | 6;
 
   @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is HasCustomAttributeMemberRef && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
+
+  @override
   String toString() => value.toString();
 }
 
@@ -544,6 +638,14 @@ final class HasCustomAttributeModule extends HasCustomAttribute {
 
   @override
   int encode() => ((value.index + 1) << 5) | 7;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is HasCustomAttributeModule && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
 
   @override
   String toString() => value.toString();
@@ -560,6 +662,14 @@ final class HasCustomAttributeProperty extends HasCustomAttribute {
   int encode() => ((value.index + 1) << 5) | 9;
 
   @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is HasCustomAttributeProperty && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
+
+  @override
   String toString() => value.toString();
 }
 
@@ -572,6 +682,14 @@ final class HasCustomAttributeEvent extends HasCustomAttribute {
 
   @override
   int encode() => ((value.index + 1) << 5) | 10;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is HasCustomAttributeEvent && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
 
   @override
   String toString() => value.toString();
@@ -588,6 +706,14 @@ final class HasCustomAttributeStandaloneSig extends HasCustomAttribute {
   int encode() => ((value.index + 1) << 5) | 11;
 
   @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is HasCustomAttributeStandaloneSig && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
+
+  @override
   String toString() => value.toString();
 }
 
@@ -600,6 +726,14 @@ final class HasCustomAttributeModuleRef extends HasCustomAttribute {
 
   @override
   int encode() => ((value.index + 1) << 5) | 12;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is HasCustomAttributeModuleRef && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
 
   @override
   String toString() => value.toString();
@@ -616,6 +750,14 @@ final class HasCustomAttributeTypeSpec extends HasCustomAttribute {
   int encode() => ((value.index + 1) << 5) | 13;
 
   @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is HasCustomAttributeTypeSpec && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
+
+  @override
   String toString() => value.toString();
 }
 
@@ -628,6 +770,14 @@ final class HasCustomAttributeAssembly extends HasCustomAttribute {
 
   @override
   int encode() => ((value.index + 1) << 5) | 14;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is HasCustomAttributeAssembly && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
 
   @override
   String toString() => value.toString();
@@ -644,6 +794,14 @@ final class HasCustomAttributeAssemblyRef extends HasCustomAttribute {
   int encode() => ((value.index + 1) << 5) | 15;
 
   @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is HasCustomAttributeAssemblyRef && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
+
+  @override
   String toString() => value.toString();
 }
 
@@ -656,6 +814,14 @@ final class HasCustomAttributeFile extends HasCustomAttribute {
 
   @override
   int encode() => ((value.index + 1) << 5) | 16;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is HasCustomAttributeFile && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
 
   @override
   String toString() => value.toString();
@@ -672,6 +838,14 @@ final class HasCustomAttributeExportedType extends HasCustomAttribute {
   int encode() => ((value.index + 1) << 5) | 17;
 
   @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is HasCustomAttributeExportedType && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
+
+  @override
   String toString() => value.toString();
 }
 
@@ -686,6 +860,14 @@ final class HasCustomAttributeManifestResource extends HasCustomAttribute {
   int encode() => ((value.index + 1) << 5) | 18;
 
   @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is HasCustomAttributeManifestResource && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
+
+  @override
   String toString() => value.toString();
 }
 
@@ -698,6 +880,14 @@ final class HasCustomAttributeGenericParam extends HasCustomAttribute {
 
   @override
   int encode() => ((value.index + 1) << 5) | 19;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is HasCustomAttributeGenericParam && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
 
   @override
   String toString() => value.toString();
@@ -715,6 +905,14 @@ final class HasCustomAttributeGenericParamConstraint
   int encode() => ((value.index + 1) << 5) | 20;
 
   @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is HasCustomAttributeGenericParamConstraint && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
+
+  @override
   String toString() => value.toString();
 }
 
@@ -727,6 +925,14 @@ final class HasCustomAttributeMethodSpec extends HasCustomAttribute {
 
   @override
   int encode() => ((value.index + 1) << 5) | 21;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is HasCustomAttributeMethodSpec && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
 
   @override
   String toString() => value.toString();
@@ -786,6 +992,14 @@ final class HasDeclSecurityTypeDef extends HasDeclSecurity {
   int encode() => ((value.index + 1) << 2) | 0;
 
   @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is HasDeclSecurityTypeDef && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
+
+  @override
   String toString() => value.toString();
 }
 
@@ -800,6 +1014,14 @@ final class HasDeclSecurityMethodDef extends HasDeclSecurity {
   int encode() => ((value.index + 1) << 2) | 1;
 
   @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is HasDeclSecurityMethodDef && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
+
+  @override
   String toString() => value.toString();
 }
 
@@ -812,6 +1034,14 @@ final class HasDeclSecurityAssembly extends HasDeclSecurity {
 
   @override
   int encode() => ((value.index + 1) << 2) | 2;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is HasDeclSecurityAssembly && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
 
   @override
   String toString() => value.toString();
@@ -864,6 +1094,14 @@ final class HasFieldMarshalField extends HasFieldMarshal {
   int encode() => ((value.index + 1) << 1) | 0;
 
   @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is HasFieldMarshalField && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
+
+  @override
   String toString() => value.toString();
 }
 
@@ -876,6 +1114,14 @@ final class HasFieldMarshalParam extends HasFieldMarshal {
 
   @override
   int encode() => ((value.index + 1) << 1) | 1;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is HasFieldMarshalParam && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
 
   @override
   String toString() => value.toString();
@@ -928,6 +1174,14 @@ final class HasSemanticsEvent extends HasSemantics {
   int encode() => ((value.index + 1) << 1) | 0;
 
   @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is HasSemanticsEvent && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
+
+  @override
   String toString() => value.toString();
 }
 
@@ -940,6 +1194,14 @@ final class HasSemanticsProperty extends HasSemantics {
 
   @override
   int encode() => ((value.index + 1) << 1) | 1;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is HasSemanticsProperty && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
 
   @override
   String toString() => value.toString();
@@ -1002,6 +1264,14 @@ final class ImplementationFile extends Implementation {
   int encode() => ((value.index + 1) << 2) | 0;
 
   @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ImplementationFile && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
+
+  @override
   String toString() => value.toString();
 }
 
@@ -1016,6 +1286,14 @@ final class ImplementationAssemblyRef extends Implementation {
   int encode() => ((value.index + 1) << 2) | 1;
 
   @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ImplementationAssemblyRef && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
+
+  @override
   String toString() => value.toString();
 }
 
@@ -1028,6 +1306,14 @@ final class ImplementationExportedType extends Implementation {
 
   @override
   int encode() => ((value.index + 1) << 2) | 2;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ImplementationExportedType && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
 
   @override
   String toString() => value.toString();
@@ -1087,6 +1373,14 @@ final class MemberForwardedField extends MemberForwarded {
   String get name => value.name;
 
   @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is MemberForwardedField && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
+
+  @override
   String toString() => value.toString();
 }
 
@@ -1102,6 +1396,14 @@ final class MemberForwardedMethodDef extends MemberForwarded {
 
   @override
   String get name => value.name;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is MemberForwardedMethodDef && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
 
   @override
   String toString() => value.toString();
@@ -1181,6 +1483,14 @@ final class MemberRefParentTypeDef extends MemberRefParent {
   String get name => value.name;
 
   @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is MemberRefParentTypeDef && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
+
+  @override
   String toString() => value.toString();
 }
 
@@ -1199,6 +1509,14 @@ final class MemberRefParentTypeRef extends MemberRefParent {
 
   @override
   String get name => value.name;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is MemberRefParentTypeRef && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
 
   @override
   String toString() => value.toString();
@@ -1222,6 +1540,14 @@ final class MemberRefParentModuleRef extends MemberRefParent {
   String get name => value.name;
 
   @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is MemberRefParentModuleRef && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
+
+  @override
   String toString() => value.toString();
 }
 
@@ -1243,6 +1569,14 @@ final class MemberRefParentMethodDef extends MemberRefParent {
   String get name => value.name;
 
   @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is MemberRefParentMethodDef && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
+
+  @override
   String toString() => value.toString();
 }
 
@@ -1262,6 +1596,14 @@ final class MemberRefParentTypeSpec extends MemberRefParent {
 
   @override
   String get name => throw UnsupportedError('TypeSpec does not have a name.');
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is MemberRefParentTypeSpec && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
 
   @override
   String toString() => value.toString();
@@ -1316,6 +1658,14 @@ final class MethodDefOrRefMethodDef extends MethodDefOrRef {
   int encode() => ((value.index + 1) << 1) | 0;
 
   @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is MethodDefOrRefMethodDef && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
+
+  @override
   String toString() => value.toString();
 }
 
@@ -1328,6 +1678,14 @@ final class MethodDefOrRefMemberRef extends MethodDefOrRef {
 
   @override
   int encode() => ((value.index + 1) << 1) | 1;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is MethodDefOrRefMemberRef && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
 
   @override
   String toString() => value.toString();
@@ -1393,6 +1751,14 @@ final class ResolutionScopeModule extends ResolutionScope {
   int encode() => ((value.index + 1) << 2) | 0;
 
   @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ResolutionScopeModule && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
+
+  @override
   String toString() => value.toString();
 }
 
@@ -1405,6 +1771,14 @@ final class ResolutionScopeModuleRef extends ResolutionScope {
 
   @override
   int encode() => ((value.index + 1) << 2) | 1;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ResolutionScopeModuleRef && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
 
   @override
   String toString() => value.toString();
@@ -1421,6 +1795,14 @@ final class ResolutionScopeAssemblyRef extends ResolutionScope {
   int encode() => ((value.index + 1) << 2) | 2;
 
   @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ResolutionScopeAssemblyRef && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
+
+  @override
   String toString() => value.toString();
 }
 
@@ -1433,6 +1815,14 @@ final class ResolutionScopeTypeRef extends ResolutionScope {
 
   @override
   int encode() => ((value.index + 1) << 2) | 3;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ResolutionScopeTypeRef && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
 
   @override
   String toString() => value.toString();
@@ -1510,6 +1900,14 @@ final class TypeDefOrRefTypeDef extends TypeDefOrRef {
       MetadataType.named(namespace, name);
 
   @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is TypeDefOrRefTypeDef && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
+
+  @override
   String toString() => value.toString();
 }
 
@@ -1532,6 +1930,14 @@ final class TypeDefOrRefTypeRef extends TypeDefOrRef {
   @override
   MetadataType type([List<MetadataType> generics = const []]) =>
       MetadataType.named(namespace, name);
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is TypeDefOrRefTypeRef && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
 
   @override
   String toString() => value.toString();
@@ -1557,6 +1963,14 @@ final class TypeDefOrRefTypeSpec extends TypeDefOrRef {
   @override
   MetadataType type([List<MetadataType> generics = const []]) =>
       value.type(generics);
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is TypeDefOrRefTypeSpec && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
 
   @override
   String toString() => value.toString();
@@ -1615,6 +2029,14 @@ final class TypeOrMethodDefTypeDef extends TypeOrMethodDef {
   String get name => value.name;
 
   @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is TypeOrMethodDefTypeDef && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
+
+  @override
   String toString() => value.toString();
 }
 
@@ -1630,6 +2052,14 @@ final class TypeOrMethodDefMethodDef extends TypeOrMethodDef {
 
   @override
   String get name => value.name;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is TypeOrMethodDefMethodDef && value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
 
   @override
   String toString() => value.toString();

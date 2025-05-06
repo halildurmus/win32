@@ -42,9 +42,6 @@ final class ExportedType extends Row with HasCustomAttributes {
 
   /// The source of the exported type.
   late final implementation = decode<Implementation>(4);
-
-  @override
-  String toString() => 'ExportedType($namespace.$name)';
 }
 
 @internal

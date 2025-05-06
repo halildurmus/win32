@@ -80,129 +80,229 @@ void main() {
       });
 
       test('TypeRef', () {
-        const codedIndex = HasCustomAttribute.typeRef(TypeRefIndex(0));
-        check(codedIndex.encode()).equals(34);
-        check(codedIndex.toString()).equals('TypeRefIndex(0)');
+        const codedIndex1 = HasCustomAttribute.typeRef(TypeRefIndex(0));
+        check(codedIndex1.encode()).equals(34);
+        check(codedIndex1.toString()).equals('TypeRefIndex(0)');
+        const codedIndex2 = HasCustomAttribute.typeRef(TypeRefIndex(0));
+        check(codedIndex2).equals(codedIndex1);
+        const codedIndex3 = HasCustomAttribute.typeRef(TypeRefIndex(1));
+        check(codedIndex3).not((it) => it.equals(codedIndex1));
       });
 
       test('TypeDef', () {
-        const codedIndex = HasCustomAttribute.typeDef(TypeDefIndex(0));
-        check(codedIndex.encode()).equals(35);
-        check(codedIndex.toString()).equals('TypeDefIndex(0)');
+        const codedIndex1 = HasCustomAttribute.typeDef(TypeDefIndex(0));
+        check(codedIndex1.encode()).equals(35);
+        check(codedIndex1.toString()).equals('TypeDefIndex(0)');
+        const codedIndex2 = HasCustomAttribute.typeDef(TypeDefIndex(0));
+        check(codedIndex2).equals(codedIndex1);
+        const codedIndex3 = HasCustomAttribute.typeDef(TypeDefIndex(1));
+        check(codedIndex3).not((it) => it.equals(codedIndex1));
       });
 
       test('Param', () {
-        const codedIndex = HasCustomAttribute.param(ParamIndex(0));
-        check(codedIndex.encode()).equals(36);
-        check(codedIndex.toString()).equals('ParamIndex(0)');
+        const codedIndex1 = HasCustomAttribute.param(ParamIndex(0));
+        check(codedIndex1.encode()).equals(36);
+        check(codedIndex1.toString()).equals('ParamIndex(0)');
+        const codedIndex2 = HasCustomAttribute.param(ParamIndex(0));
+        check(codedIndex2).equals(codedIndex1);
+        const codedIndex3 = HasCustomAttribute.param(ParamIndex(1));
+        check(codedIndex3).not((it) => it.equals(codedIndex1));
       });
 
       test('InterfaceImpl', () {
-        const codedIndex = HasCustomAttribute.interfaceImpl(
+        const codedIndex1 = HasCustomAttribute.interfaceImpl(
           InterfaceImplIndex(0),
         );
-        check(codedIndex.encode()).equals(37);
-        check(codedIndex.toString()).equals('InterfaceImplIndex(0)');
+        check(codedIndex1.encode()).equals(37);
+        check(codedIndex1.toString()).equals('InterfaceImplIndex(0)');
+        const codedIndex2 = HasCustomAttribute.interfaceImpl(
+          InterfaceImplIndex(0),
+        );
+        check(codedIndex2).equals(codedIndex1);
+        const codedIndex3 = HasCustomAttribute.interfaceImpl(
+          InterfaceImplIndex(1),
+        );
+        check(codedIndex3).not((it) => it.equals(codedIndex1));
       });
 
       test('MemberRef', () {
-        const codedIndex = HasCustomAttribute.memberRef(MemberRefIndex(0));
-        check(codedIndex.encode()).equals(38);
-        check(codedIndex.toString()).equals('MemberRefIndex(0)');
+        const codedIndex1 = HasCustomAttribute.memberRef(MemberRefIndex(0));
+        check(codedIndex1.encode()).equals(38);
+        check(codedIndex1.toString()).equals('MemberRefIndex(0)');
+        const codedIndex2 = HasCustomAttribute.memberRef(MemberRefIndex(0));
+        check(codedIndex2).equals(codedIndex1);
+        const codedIndex3 = HasCustomAttribute.memberRef(MemberRefIndex(1));
+        check(codedIndex3).not((it) => it.equals(codedIndex1));
       });
 
       test('Module', () {
-        const codedIndex = HasCustomAttribute.module(ModuleIndex(0));
-        check(codedIndex.encode()).equals(39);
-        check(codedIndex.toString()).equals('ModuleIndex(0)');
+        const codedIndex1 = HasCustomAttribute.module(ModuleIndex(0));
+        check(codedIndex1.encode()).equals(39);
+        check(codedIndex1.toString()).equals('ModuleIndex(0)');
+        const codedIndex2 = HasCustomAttribute.module(ModuleIndex(0));
+        check(codedIndex2).equals(codedIndex1);
+        const codedIndex3 = HasCustomAttribute.module(ModuleIndex(1));
+        check(codedIndex3).not((it) => it.equals(codedIndex1));
       });
 
       test('Property', () {
-        const codedIndex = HasCustomAttribute.property(PropertyIndex(0));
-        check(codedIndex.encode()).equals(41);
-        check(codedIndex.toString()).equals('PropertyIndex(0)');
+        const codedIndex1 = HasCustomAttribute.property(PropertyIndex(0));
+        check(codedIndex1.encode()).equals(41);
+        check(codedIndex1.toString()).equals('PropertyIndex(0)');
+        const codedIndex2 = HasCustomAttribute.property(PropertyIndex(0));
+        check(codedIndex2).equals(codedIndex1);
+        const codedIndex3 = HasCustomAttribute.property(PropertyIndex(1));
+        check(codedIndex3).not((it) => it.equals(codedIndex1));
       });
 
       test('Event', () {
-        const codedIndex = HasCustomAttribute.event(EventIndex(0));
-        check(codedIndex.encode()).equals(42);
-        check(codedIndex.toString()).equals('EventIndex(0)');
+        const codedIndex1 = HasCustomAttribute.event(EventIndex(0));
+        check(codedIndex1.encode()).equals(42);
+        check(codedIndex1.toString()).equals('EventIndex(0)');
+        const codedIndex2 = HasCustomAttribute.event(EventIndex(0));
+        check(codedIndex2).equals(codedIndex1);
+        const codedIndex3 = HasCustomAttribute.event(EventIndex(1));
+        check(codedIndex3).not((it) => it.equals(codedIndex1));
       });
 
       test('StandAloneSig', () {
-        const codedIndex = HasCustomAttribute.standAloneSig(
+        const codedIndex1 = HasCustomAttribute.standAloneSig(
           StandAloneSigIndex(0),
         );
-        check(codedIndex.encode()).equals(43);
-        check(codedIndex.toString()).equals('StandAloneSigIndex(0)');
+        check(codedIndex1.encode()).equals(43);
+        check(codedIndex1.toString()).equals('StandAloneSigIndex(0)');
+        const codedIndex2 = HasCustomAttribute.standAloneSig(
+          StandAloneSigIndex(0),
+        );
+        check(codedIndex2).equals(codedIndex1);
+        const codedIndex3 = HasCustomAttribute.standAloneSig(
+          StandAloneSigIndex(1),
+        );
+        check(codedIndex3).not((it) => it.equals(codedIndex1));
       });
 
       test('ModuleRef', () {
-        const codedIndex = HasCustomAttribute.moduleRef(ModuleRefIndex(0));
-        check(codedIndex.encode()).equals(44);
-        check(codedIndex.toString()).equals('ModuleRefIndex(0)');
+        const codedIndex1 = HasCustomAttribute.moduleRef(ModuleRefIndex(0));
+        check(codedIndex1.encode()).equals(44);
+        check(codedIndex1.toString()).equals('ModuleRefIndex(0)');
+        const codedIndex2 = HasCustomAttribute.moduleRef(ModuleRefIndex(0));
+        check(codedIndex2).equals(codedIndex1);
+        const codedIndex3 = HasCustomAttribute.moduleRef(ModuleRefIndex(1));
+        check(codedIndex3).not((it) => it.equals(codedIndex1));
       });
 
       test('TypeSpec', () {
-        const codedIndex = HasCustomAttribute.typeSpec(TypeSpecIndex(0));
-        check(codedIndex.encode()).equals(45);
-        check(codedIndex.toString()).equals('TypeSpecIndex(0)');
+        const codedIndex1 = HasCustomAttribute.typeSpec(TypeSpecIndex(0));
+        check(codedIndex1.encode()).equals(45);
+        check(codedIndex1.toString()).equals('TypeSpecIndex(0)');
+        const codedIndex2 = HasCustomAttribute.typeSpec(TypeSpecIndex(0));
+        check(codedIndex2).equals(codedIndex1);
+        const codedIndex3 = HasCustomAttribute.typeSpec(TypeSpecIndex(1));
+        check(codedIndex3).not((it) => it.equals(codedIndex1));
       });
 
       test('Assembly', () {
-        const codedIndex = HasCustomAttribute.assembly(AssemblyIndex(0));
-        check(codedIndex.encode()).equals(46);
-        check(codedIndex.toString()).equals('AssemblyIndex(0)');
+        const codedIndex1 = HasCustomAttribute.assembly(AssemblyIndex(0));
+        check(codedIndex1.encode()).equals(46);
+        check(codedIndex1.toString()).equals('AssemblyIndex(0)');
+        const codedIndex2 = HasCustomAttribute.assembly(AssemblyIndex(0));
+        check(codedIndex2).equals(codedIndex1);
+        const codedIndex3 = HasCustomAttribute.assembly(AssemblyIndex(1));
+        check(codedIndex3).not((it) => it.equals(codedIndex1));
       });
 
       test('AssemblyRef', () {
-        const codedIndex = HasCustomAttribute.assemblyRef(AssemblyRefIndex(0));
-        check(codedIndex.encode()).equals(47);
-        check(codedIndex.toString()).equals('AssemblyRefIndex(0)');
+        const codedIndex1 = HasCustomAttribute.assemblyRef(AssemblyRefIndex(0));
+        check(codedIndex1.encode()).equals(47);
+        check(codedIndex1.toString()).equals('AssemblyRefIndex(0)');
+        const codedIndex2 = HasCustomAttribute.assemblyRef(AssemblyRefIndex(0));
+        check(codedIndex2).equals(codedIndex1);
+        const codedIndex3 = HasCustomAttribute.assemblyRef(AssemblyRefIndex(1));
+        check(codedIndex3).not((it) => it.equals(codedIndex1));
       });
 
       test('File', () {
-        const codedIndex = HasCustomAttribute.file(FileIndex(0));
-        check(codedIndex.encode()).equals(48);
-        check(codedIndex.toString()).equals('FileIndex(0)');
+        const codedIndex1 = HasCustomAttribute.file(FileIndex(0));
+        check(codedIndex1.encode()).equals(48);
+        check(codedIndex1.toString()).equals('FileIndex(0)');
+        const codedIndex2 = HasCustomAttribute.file(FileIndex(0));
+        check(codedIndex2).equals(codedIndex1);
+        const codedIndex3 = HasCustomAttribute.file(FileIndex(1));
+        check(codedIndex3).not((it) => it.equals(codedIndex1));
       });
 
       test('ExportedType', () {
-        const codedIndex = HasCustomAttribute.exportedType(
+        const codedIndex1 = HasCustomAttribute.exportedType(
           ExportedTypeIndex(0),
         );
-        check(codedIndex.encode()).equals(49);
-        check(codedIndex.toString()).equals('ExportedTypeIndex(0)');
+        check(codedIndex1.encode()).equals(49);
+        check(codedIndex1.toString()).equals('ExportedTypeIndex(0)');
+        const codedIndex2 = HasCustomAttribute.exportedType(
+          ExportedTypeIndex(0),
+        );
+        check(codedIndex2).equals(codedIndex1);
+        const codedIndex3 = HasCustomAttribute.exportedType(
+          ExportedTypeIndex(1),
+        );
+        check(codedIndex3).not((it) => it.equals(codedIndex1));
       });
 
       test('ManifestResource', () {
-        const codedIndex = HasCustomAttribute.manifestResource(
+        const codedIndex1 = HasCustomAttribute.manifestResource(
           ManifestResourceIndex(0),
         );
-        check(codedIndex.encode()).equals(50);
-        check(codedIndex.toString()).equals('ManifestResourceIndex(0)');
+        check(codedIndex1.encode()).equals(50);
+        check(codedIndex1.toString()).equals('ManifestResourceIndex(0)');
+        const codedIndex2 = HasCustomAttribute.manifestResource(
+          ManifestResourceIndex(0),
+        );
+        check(codedIndex2).equals(codedIndex1);
+        const codedIndex3 = HasCustomAttribute.manifestResource(
+          ManifestResourceIndex(1),
+        );
+        check(codedIndex3).not((it) => it.equals(codedIndex1));
       });
 
       test('GenericParam', () {
-        const codedIndex = HasCustomAttribute.genericParam(
+        const codedIndex1 = HasCustomAttribute.genericParam(
           GenericParamIndex(0),
         );
-        check(codedIndex.encode()).equals(51);
-        check(codedIndex.toString()).equals('GenericParamIndex(0)');
+        check(codedIndex1.encode()).equals(51);
+        check(codedIndex1.toString()).equals('GenericParamIndex(0)');
+        const codedIndex2 = HasCustomAttribute.genericParam(
+          GenericParamIndex(0),
+        );
+        check(codedIndex2).equals(codedIndex1);
+        const codedIndex3 = HasCustomAttribute.genericParam(
+          GenericParamIndex(1),
+        );
+        check(codedIndex3).not((it) => it.equals(codedIndex1));
       });
 
       test('GenericParamConstraint', () {
-        const codedIndex = HasCustomAttribute.genericParamConstraint(
+        const codedIndex1 = HasCustomAttribute.genericParamConstraint(
           GenericParamConstraintIndex(0),
         );
-        check(codedIndex.encode()).equals(52);
-        check(codedIndex.toString()).equals('GenericParamConstraintIndex(0)');
+        check(codedIndex1.encode()).equals(52);
+        check(codedIndex1.toString()).equals('GenericParamConstraintIndex(0)');
+        const codedIndex2 = HasCustomAttribute.genericParamConstraint(
+          GenericParamConstraintIndex(0),
+        );
+        check(codedIndex2).equals(codedIndex1);
+        const codedIndex3 = HasCustomAttribute.genericParamConstraint(
+          GenericParamConstraintIndex(1),
+        );
+        check(codedIndex3).not((it) => it.equals(codedIndex1));
       });
 
       test('MethodSpec', () {
-        const codedIndex = HasCustomAttribute.methodSpec(MethodSpecIndex(0));
-        check(codedIndex.encode()).equals(53);
-        check(codedIndex.toString()).equals('MethodSpecIndex(0)');
+        const codedIndex1 = HasCustomAttribute.methodSpec(MethodSpecIndex(0));
+        check(codedIndex1.encode()).equals(53);
+        check(codedIndex1.toString()).equals('MethodSpecIndex(0)');
+        const codedIndex2 = HasCustomAttribute.methodSpec(MethodSpecIndex(0));
+        check(codedIndex2).equals(codedIndex1);
+        const codedIndex3 = HasCustomAttribute.methodSpec(MethodSpecIndex(1));
+        check(codedIndex3).not((it) => it.equals(codedIndex1));
       });
     });
 
@@ -320,10 +420,8 @@ void main() {
         check(codedIndex1.encode()).equals(2);
         check(codedIndex1.toString()).equals('FieldIndex(0)');
         const codedIndex2 = MemberForwarded.field(FieldIndex(0));
-        check(codedIndex2.toString()).equals('FieldIndex(0)');
         check(codedIndex1).equals(codedIndex2);
         const codedIndex3 = MemberForwarded.field(FieldIndex(1));
-        check(codedIndex3.toString()).equals('FieldIndex(1)');
         check(codedIndex1).not((it) => it.equals(codedIndex3));
       });
 
@@ -332,10 +430,8 @@ void main() {
         check(codedIndex1.encode()).equals(3);
         check(codedIndex1.toString()).equals('MethodDefIndex(0)');
         const codedIndex2 = MemberForwarded.methodDef(MethodDefIndex(0));
-        check(codedIndex2.toString()).equals('MethodDefIndex(0)');
         check(codedIndex1).equals(codedIndex2);
         const codedIndex3 = MemberForwarded.methodDef(MethodDefIndex(1));
-        check(codedIndex3.toString()).equals('MethodDefIndex(1)');
         check(codedIndex1).not((it) => it.equals(codedIndex3));
       });
     });
@@ -346,10 +442,8 @@ void main() {
         check(codedIndex1.encode()).equals(2);
         check(codedIndex1.toString()).equals('MethodDefIndex(0)');
         const codedIndex2 = MethodDefOrRef.methodDef(MethodDefIndex(0));
-        check(codedIndex2.toString()).equals('MethodDefIndex(0)');
         check(codedIndex1).equals(codedIndex2);
         const codedIndex3 = MethodDefOrRef.methodDef(MethodDefIndex(1));
-        check(codedIndex3.toString()).equals('MethodDefIndex(1)');
         check(codedIndex1).not((it) => it.equals(codedIndex3));
       });
 
@@ -358,10 +452,60 @@ void main() {
         check(codedIndex1.encode()).equals(3);
         check(codedIndex1.toString()).equals('MemberRefIndex(0)');
         const codedIndex2 = MethodDefOrRef.memberRef(MemberRefIndex(0));
-        check(codedIndex2.toString()).equals('MemberRefIndex(0)');
         check(codedIndex1).equals(codedIndex2);
         const codedIndex3 = MethodDefOrRef.memberRef(MemberRefIndex(1));
-        check(codedIndex3.toString()).equals('MemberRefIndex(1)');
+        check(codedIndex1).not((it) => it.equals(codedIndex3));
+      });
+    });
+
+    group('MemberRefParent', () {
+      test('TypeDef', () {
+        const codedIndex1 = MemberRefParent.typeDef(TypeDefIndex(0));
+        check(codedIndex1.encode()).equals(8);
+        check(codedIndex1.toString()).equals('TypeDefIndex(0)');
+        const codedIndex2 = MemberRefParent.typeDef(TypeDefIndex(0));
+        check(codedIndex1).equals(codedIndex2);
+        const codedIndex3 = MemberRefParent.typeDef(TypeDefIndex(1));
+        check(codedIndex1).not((it) => it.equals(codedIndex3));
+      });
+
+      test('TypeRef', () {
+        const codedIndex1 = MemberRefParent.typeRef(TypeRefIndex(0));
+        check(codedIndex1.encode()).equals(9);
+        check(codedIndex1.toString()).equals('TypeRefIndex(0)');
+        const codedIndex2 = MemberRefParent.typeRef(TypeRefIndex(0));
+        check(codedIndex1).equals(codedIndex2);
+        const codedIndex3 = MemberRefParent.typeRef(TypeRefIndex(1));
+        check(codedIndex1).not((it) => it.equals(codedIndex3));
+      });
+
+      test('ModuleRef', () {
+        const codedIndex1 = MemberRefParent.moduleRef(ModuleRefIndex(0));
+        check(codedIndex1.encode()).equals(10);
+        check(codedIndex1.toString()).equals('ModuleRefIndex(0)');
+        const codedIndex2 = MemberRefParent.moduleRef(ModuleRefIndex(0));
+        check(codedIndex1).equals(codedIndex2);
+        const codedIndex3 = MemberRefParent.moduleRef(ModuleRefIndex(1));
+        check(codedIndex1).not((it) => it.equals(codedIndex3));
+      });
+
+      test('MethodDef', () {
+        const codedIndex1 = MemberRefParent.methodDef(MethodDefIndex(0));
+        check(codedIndex1.encode()).equals(11);
+        check(codedIndex1.toString()).equals('MethodDefIndex(0)');
+        const codedIndex2 = MemberRefParent.methodDef(MethodDefIndex(0));
+        check(codedIndex1).equals(codedIndex2);
+        const codedIndex3 = MemberRefParent.methodDef(MethodDefIndex(1));
+        check(codedIndex1).not((it) => it.equals(codedIndex3));
+      });
+
+      test('TypeSpec', () {
+        const codedIndex1 = MemberRefParent.typeSpec(TypeSpecIndex(0));
+        check(codedIndex1.encode()).equals(12);
+        check(codedIndex1.toString()).equals('TypeSpecIndex(0)');
+        const codedIndex2 = MemberRefParent.typeSpec(TypeSpecIndex(0));
+        check(codedIndex1).equals(codedIndex2);
+        const codedIndex3 = MemberRefParent.typeSpec(TypeSpecIndex(1));
         check(codedIndex1).not((it) => it.equals(codedIndex3));
       });
     });
@@ -372,10 +516,8 @@ void main() {
         check(codedIndex1.encode()).equals(4);
         check(codedIndex1.toString()).equals('ModuleIndex(0)');
         const codedIndex2 = ResolutionScope.module(ModuleIndex(0));
-        check(codedIndex2.toString()).equals('ModuleIndex(0)');
         check(codedIndex1).equals(codedIndex2);
         const codedIndex3 = ResolutionScope.module(ModuleIndex(1));
-        check(codedIndex3.toString()).equals('ModuleIndex(1)');
         check(codedIndex1).not((it) => it.equals(codedIndex3));
       });
 
@@ -384,10 +526,8 @@ void main() {
         check(codedIndex1.encode()).equals(5);
         check(codedIndex1.toString()).equals('ModuleRefIndex(0)');
         const codedIndex2 = ResolutionScope.moduleRef(ModuleRefIndex(0));
-        check(codedIndex2.toString()).equals('ModuleRefIndex(0)');
         check(codedIndex1).equals(codedIndex2);
         const codedIndex3 = ResolutionScope.moduleRef(ModuleRefIndex(1));
-        check(codedIndex3.toString()).equals('ModuleRefIndex(1)');
         check(codedIndex1).not((it) => it.equals(codedIndex3));
       });
 
@@ -396,10 +536,8 @@ void main() {
         check(codedIndex1.encode()).equals(6);
         check(codedIndex1.toString()).equals('AssemblyRefIndex(0)');
         const codedIndex2 = ResolutionScope.assemblyRef(AssemblyRefIndex(0));
-        check(codedIndex2.toString()).equals('AssemblyRefIndex(0)');
         check(codedIndex1).equals(codedIndex2);
         const codedIndex3 = ResolutionScope.assemblyRef(AssemblyRefIndex(1));
-        check(codedIndex3.toString()).equals('AssemblyRefIndex(1)');
         check(codedIndex1).not((it) => it.equals(codedIndex3));
       });
 
@@ -408,10 +546,8 @@ void main() {
         check(codedIndex1.encode()).equals(7);
         check(codedIndex1.toString()).equals('TypeRefIndex(0)');
         const codedIndex2 = ResolutionScope.typeRef(TypeRefIndex(0));
-        check(codedIndex2.toString()).equals('TypeRefIndex(0)');
         check(codedIndex1).equals(codedIndex2);
         const codedIndex3 = ResolutionScope.typeRef(TypeRefIndex(1));
-        check(codedIndex3.toString()).equals('TypeRefIndex(1)');
         check(codedIndex1).not((it) => it.equals(codedIndex3));
       });
     });
@@ -422,10 +558,8 @@ void main() {
         check(codedIndex1.encode()).equals(4);
         check(codedIndex1.toString()).equals('TypeDefIndex(0)');
         const codedIndex2 = TypeDefOrRef.typeDef(TypeDefIndex(0));
-        check(codedIndex2.toString()).equals('TypeDefIndex(0)');
         check(codedIndex1).equals(codedIndex2);
         const codedIndex3 = TypeDefOrRef.typeDef(TypeDefIndex(1));
-        check(codedIndex3.toString()).equals('TypeDefIndex(1)');
         check(codedIndex1).not((it) => it.equals(codedIndex3));
       });
 
@@ -434,10 +568,8 @@ void main() {
         check(codedIndex1.encode()).equals(5);
         check(codedIndex1.toString()).equals('TypeRefIndex(0)');
         const codedIndex2 = TypeDefOrRef.typeRef(TypeRefIndex(0));
-        check(codedIndex2.toString()).equals('TypeRefIndex(0)');
         check(codedIndex1).equals(codedIndex2);
         const codedIndex3 = TypeDefOrRef.typeRef(TypeRefIndex(1));
-        check(codedIndex3.toString()).equals('TypeRefIndex(1)');
         check(codedIndex1).not((it) => it.equals(codedIndex3));
       });
 
@@ -446,10 +578,8 @@ void main() {
         check(codedIndex1.encode()).equals(6);
         check(codedIndex1.toString()).equals('TypeSpecIndex(0)');
         const codedIndex2 = TypeDefOrRef.typeSpec(TypeSpecIndex(0));
-        check(codedIndex2.toString()).equals('TypeSpecIndex(0)');
         check(codedIndex1).equals(codedIndex2);
         const codedIndex3 = TypeDefOrRef.typeSpec(TypeSpecIndex(1));
-        check(codedIndex3.toString()).equals('TypeSpecIndex(1)');
         check(codedIndex1).not((it) => it.equals(codedIndex3));
       });
     });
@@ -460,10 +590,8 @@ void main() {
         check(codedIndex1.encode()).equals(2);
         check(codedIndex1.toString()).equals('TypeDefIndex(0)');
         const codedIndex2 = TypeOrMethodDef.typeDef(TypeDefIndex(0));
-        check(codedIndex2.toString()).equals('TypeDefIndex(0)');
         check(codedIndex1).equals(codedIndex2);
         const codedIndex3 = TypeOrMethodDef.typeDef(TypeDefIndex(1));
-        check(codedIndex3.toString()).equals('TypeDefIndex(1)');
         check(codedIndex1).not((it) => it.equals(codedIndex3));
       });
 
@@ -472,10 +600,8 @@ void main() {
         check(codedIndex1.encode()).equals(3);
         check(codedIndex1.toString()).equals('MethodDefIndex(0)');
         const codedIndex2 = TypeOrMethodDef.methodDef(MethodDefIndex(0));
-        check(codedIndex2.toString()).equals('MethodDefIndex(0)');
         check(codedIndex1).equals(codedIndex2);
         const codedIndex3 = TypeOrMethodDef.methodDef(MethodDefIndex(1));
-        check(codedIndex3.toString()).equals('MethodDefIndex(1)');
         check(codedIndex1).not((it) => it.equals(codedIndex3));
       });
     });

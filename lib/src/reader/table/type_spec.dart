@@ -25,10 +25,6 @@ final class TypeSpec extends Row with HasCustomAttributes {
   /// Optionally, [generics] can be passed to substitute any generic parameters.
   MetadataType type([List<MetadataType> generics = const []]) =>
       readBlob(0).readTypeCode(generics);
-
-  @override
-  String toString() =>
-      'TypeSpec(readerIndex: $readerIndex, index: $index, table: $table)';
 }
 
 @internal

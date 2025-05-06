@@ -26,9 +26,6 @@ final class GenericParamConstraint extends Row with HasCustomAttributes {
 
   /// The type that constrains the generic parameter.
   late final constraint = decode<TypeDefOrRef>(1);
-
-  @override
-  String toString() => 'GenericParamConstraint(constraint: $constraint)';
 }
 
 @internal

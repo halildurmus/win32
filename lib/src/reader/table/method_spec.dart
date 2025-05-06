@@ -26,9 +26,6 @@ final class MethodSpec extends Row with HasCustomAttributes {
 
   /// The type instantiation data for a generic method.
   Blob get instantiation => readBlob(1);
-
-  @override
-  String toString() => 'MethodSpec(method: $method)';
 }
 
 @internal

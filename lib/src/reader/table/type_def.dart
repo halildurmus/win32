@@ -173,7 +173,8 @@ final class TypeDef extends Row with HasCustomAttributes {
   }();
 
   @override
-  String toString() => 'TypeDef($namespace.$name)';
+  String toString() =>
+      namespace.isEmpty ? 'TypeDef($name)' : 'TypeDef($namespace.$name)';
 }
 
 extension TypeDefExtension on TypeDef {

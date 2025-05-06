@@ -6,8 +6,6 @@ import 'table/index.dart';
 /// table types into a single value, using a tag to distinguish them.
 // ignore: one_member_abstracts
 sealed class CodedIndex {
-  const CodedIndex();
-
   /// Encodes the coded index into its compressed integer representation.
   int encode();
 }
