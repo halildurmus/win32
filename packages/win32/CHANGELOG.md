@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.13.0] - 2025-05-09
+
+### 🚀 Features
+
+- Add support for GetCurrentDirectory by @brianquinlan in [#986](https://github.com/halildurmus/win32/pull/986)
+- Add `SetLastError` function by @halildurmus in [#975](https://github.com/halildurmus/win32/pull/975)
+- Add extension methods to convert `FILETIME` to `DateTime` by @halildurmus in [#974](https://github.com/halildurmus/win32/pull/974)
+- Add the `WIN32_FILE_ATTRIBUTE_DATA` struct by @brianquinlan in [#973](https://github.com/halildurmus/win32/pull/973)
+
+### ⚙️ Miscellaneous Tasks
+
+- Tweak win32 workflow by @halildurmus in [#982](https://github.com/halildurmus/win32/pull/982)
+
+[5.13.0]: https://github.com/halildurmus/win32/compare/v5.12.0..v5.13.0
+
 ## [5.12.0] - 2025-03-11
 
 ### 🚀 Features
