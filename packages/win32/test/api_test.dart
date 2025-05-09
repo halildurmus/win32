@@ -3821,6 +3821,14 @@ void main() {
       >('GetCurrentActCtx');
       expect(GetCurrentActCtx, isA<Function>());
     });
+    test('Can instantiate GetCurrentDirectory', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetCurrentDirectory = kernel32.lookupFunction<
+        Uint32 Function(Uint32 nBufferLength, Pointer<Utf16> lpBuffer),
+        int Function(int nBufferLength, Pointer<Utf16> lpBuffer)
+      >('GetCurrentDirectoryW');
+      expect(GetCurrentDirectory, isA<Function>());
+    });
     test('Can instantiate GetCurrentPackageFullName', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetCurrentPackageFullName = kernel32.lookupFunction<

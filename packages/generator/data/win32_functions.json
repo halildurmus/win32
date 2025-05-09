@@ -1860,6 +1860,10 @@
         "prototype": "BOOL GetCurrentActCtx(\n  HANDLE *lphActCtx\n);",
         "comment": "The GetCurrentActCtx function returns the handle to the active activation context of the calling thread."
     },
+    "GetCurrentDirectory": {
+        "prototype": "DWORD GetCurrentDirectoryW(\n  DWORD nBufferLength,\n  LPTSTR lpBuffer\n);",
+        "comment": "Retrieves the current directory for the current process."
+    },
     "GetCurrentPackageFullName": {
         "prototype": "LONG GetCurrentPackageFullName(\n[in, out]       UINT32 *packageFullNameLength,\n[out, optional] PWSTR  packageFullName\n);",
         "comment": "Gets the package full name for the calling process."

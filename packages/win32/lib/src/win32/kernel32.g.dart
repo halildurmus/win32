@@ -3147,6 +3147,23 @@ final _GetCurrentActCtx = _kernel32.lookupFunction<
   int Function(Pointer<IntPtr> lphActCtx)
 >('GetCurrentActCtx');
 
+/// Retrieves the current directory for the current process.
+///
+/// ```c
+/// DWORD GetCurrentDirectoryW(
+///   DWORD nBufferLength,
+///   LPTSTR lpBuffer
+/// );
+/// ```
+/// {@category kernel32}
+int GetCurrentDirectory(int nBufferLength, Pointer<Utf16> lpBuffer) =>
+    _GetCurrentDirectory(nBufferLength, lpBuffer);
+
+final _GetCurrentDirectory = _kernel32.lookupFunction<
+  Uint32 Function(Uint32 nBufferLength, Pointer<Utf16> lpBuffer),
+  int Function(int nBufferLength, Pointer<Utf16> lpBuffer)
+>('GetCurrentDirectoryW');
+
 /// Gets the package full name for the calling process.
 ///
 /// ```c
