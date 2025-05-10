@@ -21,7 +21,7 @@ void main() async {
       check(mapChanged.name).equals('MapChanged');
       check(mapChanged.add.name).equals('add_MapChanged');
       check(mapChanged.add.signature()).equals(
-        const MethodSignature(
+        const MethodDefSig(
           returnType: NamedValueType(
             TypeName('Windows.Foundation', 'EventRegistrationToken'),
           ),
@@ -38,7 +38,7 @@ void main() async {
       );
       check(mapChanged.remove.name).equals('remove_MapChanged');
       check(mapChanged.remove.signature()).equals(
-        const MethodSignature(
+        const MethodDefSig(
           types: [
             NamedValueType(
               TypeName('Windows.Foundation', 'EventRegistrationToken'),

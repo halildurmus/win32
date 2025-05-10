@@ -31,7 +31,7 @@ final class TypeName {
           listEqual(_generics, other._generics);
 
   @override
-  int get hashCode => Object.hash(namespace, name, _generics);
+  int get hashCode => Object.hash(namespace, name, Object.hashAll(_generics));
 
   @override
   String toString() =>

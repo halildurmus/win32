@@ -30,8 +30,8 @@ void main() async {
       check(method.vTableLayout).equals(VTableLayout.reuseSlot);
       check(method.name).equals('TraceSynchronousWorkCompletion');
       check(method.signature()).equals(
-        const MethodSignature(
-          flags: MethodCallFlags.default$,
+        const MethodDefSig(
+          flags: MethodDefFlags.default$,
           types: [
             NamedValueType(
               TypeName('Windows.Foundation.Diagnostics', 'CausalityTraceLevel'),
@@ -86,7 +86,7 @@ void main() async {
       check(method.vTableLayout).equals(VTableLayout.newSlot);
       check(method.name).equals('TraceSynchronousWorkCompletion');
       check(method.signature()).equals(
-        const MethodSignature(
+        const MethodDefSig(
           types: [
             NamedValueType(
               TypeName('Windows.Foundation.Diagnostics', 'CausalityTraceLevel'),
@@ -139,8 +139,8 @@ void main() async {
       check(method.vTableLayout).equals(VTableLayout.reuseSlot);
       check(method.name).equals('DoDragDrop');
       check(method.signature()).equals(
-        const MethodSignature(
-          flags: MethodCallFlags.default$,
+        const MethodDefSig(
+          flags: MethodDefFlags.default$,
           returnType: NamedValueType(
             TypeName('Windows.Win32.Foundation', 'HRESULT'),
           ),
@@ -209,8 +209,8 @@ void main() async {
       check(method.vTableLayout).equals(VTableLayout.reuseSlot);
       check(method.name).equals('GetAltMonthNames');
       check(method.signature()).equals(
-        const MethodSignature(
-          flags: MethodCallFlags.default$,
+        const MethodDefSig(
+          flags: MethodDefFlags.default$,
           returnType: NamedValueType(
             TypeName('Windows.Win32.Foundation', 'HRESULT'),
           ),

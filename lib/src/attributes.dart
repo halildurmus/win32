@@ -366,34 +366,6 @@ enum VTableLayout {
   newSlot,
 }
 
-/// Provides information about a method call behavior.
-extension type const MethodCallFlags(int _) implements int {
-  /// The method is associated with an instance (i.e., `this` is passed
-  /// implicitly).
-  static const hasThis = MethodCallFlags(0x20);
-
-  /// The method is explicitly defined to expect a `this` pointer.
-  static const explicitThis = MethodCallFlags(0x40);
-
-  /// The default method calling convention (no flags set).
-  static const default$ = MethodCallFlags(0x00);
-
-  /// The method supports a variable number of arguments.
-  static const varArg = MethodCallFlags(0x05);
-
-  /// The method has one or more generic parameters.
-  static const generic = MethodCallFlags(0x10);
-
-  /// Whether this instance has all the bit fields specified in [other].
-  bool has(MethodCallFlags other) => this & other == other;
-
-  MethodCallFlags operator |(MethodCallFlags other) =>
-      MethodCallFlags(_ | other._);
-
-  MethodCallFlags operator &(MethodCallFlags other) =>
-      MethodCallFlags(_ & other._);
-}
-
 /// Provides information about a method implementation.
 extension type const MethodImplAttributes(int _) implements int {
   /// Specifies flags about code type.

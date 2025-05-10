@@ -56,22 +56,22 @@ void main() async {
       });
     });
 
-    group('readMethodSignature', () {
+    group('readMethodDefSig', () {
       test('method with no parameters and void return', () {
         final blob = createBlob([
-          0, // MethodCallFlags (default)
+          MethodDefFlags.default$,
           0, // param count
           ELEMENT_TYPE_VOID, // return type
         ]);
-        final sig = blob.readMethodSignature();
-        check(sig.flags).equals(MethodCallFlags.default$);
+        final sig = blob.readMethodDefSig();
+        check(sig.flags).equals(MethodDefFlags.default$);
         check(sig.returnType).isA<VoidType>();
         check(sig.types).isEmpty();
       });
 
       test('method with multiple parameters and HRESULT return', () {
         final blob = createBlob([
-          MethodCallFlags.hasThis,
+          MethodDefFlags.hasThis,
           3, // param count
           ELEMENT_TYPE_VALUETYPE,
           ...CompressedInteger.encode(
@@ -81,8 +81,8 @@ void main() async {
           ELEMENT_TYPE_BOOLEAN,
           ELEMENT_TYPE_STRING,
         ]);
-        final sig = blob.readMethodSignature();
-        check(sig.flags).equals(MethodCallFlags.hasThis);
+        final sig = blob.readMethodDefSig();
+        check(sig.flags).equals(MethodDefFlags.hasThis);
         check(sig.returnType).equals(
           const NamedValueType(TypeName('Windows.Win32.Foundation', 'HRESULT')),
         );
@@ -134,22 +134,22 @@ void main() async {
       });
     });
 
-    group('readPropertySignature', () {
+    group('readPropertySig', () {
       test('property with no parameters and Uint32 return', () {
         final blob = createBlob([
           0x8, // PROPERTY
           0, // param count
           ELEMENT_TYPE_U4, // return type
         ]);
-        final sig = blob.readPropertySignature();
-        check(sig.flags).equals(MethodCallFlags.default$);
+        final sig = blob.readPropertySig();
+        check(sig.flags).equals(PropertyFlags.default$);
         check(sig.returnType).isA<Uint32Type>();
         check(sig.types).isEmpty();
       });
 
       test('property with multiple parameters and HRESULT return', () {
         final blob = createBlob([
-          0x8 | MethodCallFlags.hasThis, // PROPERTY | HASTHIS
+          0x8 | PropertyFlags.hasThis, // PROPERTY | HASTHIS
           3, // param count
           ELEMENT_TYPE_VALUETYPE,
           ...CompressedInteger.encode(
@@ -159,8 +159,8 @@ void main() async {
           ELEMENT_TYPE_BOOLEAN,
           ELEMENT_TYPE_STRING,
         ]);
-        final sig = blob.readPropertySignature();
-        check(sig.flags).equals(MethodCallFlags.hasThis);
+        final sig = blob.readPropertySig();
+        check(sig.flags).equals(PropertyFlags.hasThis);
         check(sig.returnType).equals(
           const NamedValueType(TypeName('Windows.Win32.Foundation', 'HRESULT')),
         );

@@ -19,11 +19,11 @@ final class AssemblyRefProcessor extends Row {
   @override
   MetadataTable get table => MetadataTable.assemblyRefProcessor;
 
-  /// The processor architecture targeted by the referenced assembly.
-  late final processor = readUint32(0);
+  /// Always returns zero, per ECMA-335 `§II.22.7`.
+  int get processor => 0;
 
-  /// The referenced assembly.
-  late final assemblyRef = readRow<AssemblyRef>(1);
+  /// Always returns null, per ECMA-335 `§II.22.7`.
+  AssemblyRef? get assemblyRef => null;
 
   @override
   String toString() =>

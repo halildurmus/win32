@@ -20,7 +20,7 @@ final class GuidHeap extends MetadataHeap<Guid, GuidIndex> {
   /// GUIDs inserted into the heap are stored consecutively in 16-byte blocks.
   /// The index of each GUID is determined by its index in the heap, with the
   /// first GUID assigned index 1.
-  GuidHeap.empty() : super({}, BytesBuilder());
+  GuidHeap.empty() : super({}, BytesBuilder(copy: false));
 
   @override
   GuidIndex insert(Guid key) {

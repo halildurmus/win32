@@ -19,8 +19,7 @@ final class TypeSpec extends Row with HasCustomAttributes {
   @override
   MetadataTable get table => MetadataTable.typeSpec;
 
-  /// The metadata type that corresponds to the type specified in the
-  ///  `Signature` blob.
+  /// The type of the type specification.
   ///
   /// Optionally, [generics] can be passed to substitute any generic parameters.
   MetadataType type({List<MetadataType> generics = const []}) =>

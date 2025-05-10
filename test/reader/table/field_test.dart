@@ -24,8 +24,8 @@ void main() async {
       check(field.fieldAccess).equals(FieldAccess.public);
       check(field.name).equals('FOLDERID_AccountPictures');
       check(
-        field.type,
-      ).equals(const NamedValueType(TypeName('System', 'Guid')));
+        field.signature,
+      ).equals(const FieldSig(NamedValueType(TypeName('System', 'Guid'))));
       check(field.hasAttribute('GuidAttribute')).isTrue();
       final constant = field.constant;
       check(constant).isNull();
@@ -49,9 +49,11 @@ void main() async {
       );
       check(field.fieldAccess).equals(FieldAccess.public);
       check(field.name).equals('PFD_UNDERLAY_PLANE');
-      check(field.type).equals(
-        const NamedValueType(
-          TypeName('Windows.Win32.Graphics.OpenGL', 'PFD_LAYER_TYPE'),
+      check(field.signature).equals(
+        const FieldSig(
+          NamedValueType(
+            TypeName('Windows.Win32.Graphics.OpenGL', 'PFD_LAYER_TYPE'),
+          ),
         ),
       );
       final constant = field.constant;
@@ -78,8 +80,10 @@ void main() async {
       );
       check(field.fieldAccess).equals(FieldAccess.public);
       check(field.name).equals('STATUS_ACCESS_DENIED');
-      check(field.type).equals(
-        const NamedValueType(TypeName('Windows.Win32.Foundation', 'NTSTATUS')),
+      check(field.signature).equals(
+        const FieldSig(
+          NamedValueType(TypeName('Windows.Win32.Foundation', 'NTSTATUS')),
+        ),
       );
       final constant = field.constant;
       check(constant).isNotNull();
@@ -104,9 +108,9 @@ void main() async {
       );
       check(field.fieldAccess).equals(FieldAccess.public);
       check(field.name).equals('VARIANT_TRUE');
-      check(field.type).equals(
-        const NamedValueType(
-          TypeName('Windows.Win32.Foundation', 'VARIANT_BOOL'),
+      check(field.signature).equals(
+        const FieldSig(
+          NamedValueType(TypeName('Windows.Win32.Foundation', 'VARIANT_BOOL')),
         ),
       );
       final constant = field.constant;
@@ -128,7 +132,7 @@ void main() async {
       check(field.flags).equals(FieldAttributes.public);
       check(field.fieldAccess).equals(FieldAccess.public);
       check(field.name).equals('ProcessorCount');
-      check(field.type).isA<Uint32Type>();
+      check(field.signature).equals(const FieldSig(Uint32Type()));
       check(field.constant).isNull();
       check(field.fieldMarshal).isNull();
       final layout = field.layout;

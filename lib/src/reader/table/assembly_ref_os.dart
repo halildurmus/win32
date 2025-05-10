@@ -21,17 +21,17 @@ final class AssemblyRefOS extends Row {
   @override
   MetadataTable get table => MetadataTable.assemblyRefOS;
 
-  /// The identifier of the target operating system platform.
-  late final osPlatformId = readUint32(0);
+  /// Always returns zero, per ECMA-335 `§II.22.6`.
+  int get osPlatformId => 0;
 
-  /// The major version number of the target operating system.
-  late final osMajorVersion = readUint32(1);
+  /// Always returns zero, per ECMA-335 `§II.22.6`.
+  int get osMajorVersion => 0;
 
-  /// The minor version number of the target operating system.
-  late final osMinorVersion = readUint32(2);
+  /// Always returns zero, per ECMA-335 `§II.22.6`.
+  int get osMinorVersion => 0;
 
-  /// The referenced assembly.
-  late final assemblyRef = readRow<AssemblyRef>(3);
+  /// Always returns null, per ECMA-335 `§II.22.6`.
+  AssemblyRef? get assemblyRef => null;
 
   @override
   String toString() =>

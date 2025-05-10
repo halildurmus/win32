@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import '../bindings.dart';
 import '../common.dart';
 import '../compressed_integer.dart';
 import '../metadata_value.dart';
@@ -22,17 +23,6 @@ bool isSorted(Iterable<int> iterable) {
     if (list[i - 1] > list[i]) return false;
   }
   return true;
-}
-
-/// Extension to pad a [Uint8List] to a multiple of 4 bytes.
-extension Uint8ListExtension on Uint8List {
-  /// Pads the byte list to the next 4-byte boundary using zero bytes.
-  Uint8List toBytesPadded() {
-    final newLength = alignTo(length, 4);
-    if (newLength == length) return this;
-    final padded = Uint8List(newLength)..setRange(0, length, this);
-    return padded;
-  }
 }
 
 /// Extension methods for writing little-endian primitive types to a
@@ -218,5 +208,47 @@ extension BytesBuilderExtension on BytesBuilder {
     final buffer = ByteData(byteCount);
     writer(buffer);
     add(buffer.buffer.asUint8List());
+  }
+}
+
+/// Extension on [NativeType] providing convenience methods for classification.
+extension NativeTypeExtension on NativeType {
+  /// Whether this [NativeType] is considered a native intrinsic type as defined
+  /// in ECMA-335 `§II.23.4`.
+  ///
+  /// Intrinsic types include primitive scalars, platform-native strings,
+  /// and function pointers.
+  ///
+  /// This excludes composite types like [NATIVE_TYPE_ARRAY], and sentinel
+  /// values such as [NATIVE_TYPE_MAX].
+  bool get isIntrinsic => switch (this) {
+    NATIVE_TYPE_BOOLEAN ||
+    NATIVE_TYPE_I1 ||
+    NATIVE_TYPE_U1 ||
+    NATIVE_TYPE_I2 ||
+    NATIVE_TYPE_U2 ||
+    NATIVE_TYPE_I4 ||
+    NATIVE_TYPE_U4 ||
+    NATIVE_TYPE_I8 ||
+    NATIVE_TYPE_U8 ||
+    NATIVE_TYPE_R4 ||
+    NATIVE_TYPE_R8 ||
+    NATIVE_TYPE_LPSTR ||
+    NATIVE_TYPE_LPWSTR ||
+    NATIVE_TYPE_INT ||
+    NATIVE_TYPE_UINT ||
+    NATIVE_TYPE_FUNC => true,
+    _ => false,
+  };
+}
+
+/// Extension to pad a [Uint8List] to a multiple of 4 bytes.
+extension Uint8ListExtension on Uint8List {
+  /// Pads the byte list to the next 4-byte boundary using zero bytes.
+  Uint8List toBytesPadded() {
+    final newLength = alignTo(length, 4);
+    if (newLength == length) return this;
+    final padded = Uint8List(newLength)..setRange(0, length, this);
+    return padded;
   }
 }

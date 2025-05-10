@@ -1,6 +1,5 @@
 import 'package:meta/meta.dart';
 
-import '../blob.dart';
 import '../codes.dart';
 import '../metadata_index.dart';
 import '../metadata_table.dart';
@@ -24,7 +23,7 @@ final class FieldMarshal extends Row {
   late final parent = decode<HasFieldMarshal>(0);
 
   /// The native marshaling rules for the associated [parent].
-  Blob get nativeType => readBlob(1);
+  late final nativeType = readBlob(1).readMarshallingDescriptor();
 
   @override
   String toString() => 'FieldMarshal(parent: $parent)';

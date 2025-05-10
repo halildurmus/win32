@@ -1,7 +1,7 @@
 import 'package:meta/meta.dart';
 
+import '../../member_ref_signature.dart';
 import '../../metadata_type.dart';
-import '../../method_signature.dart';
 import '../codes.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
@@ -29,12 +29,12 @@ final class MemberRef extends Row with HasCustomAttributes {
   /// The name of the referenced member.
   late final name = readString(1);
 
-  /// The method signature for the referenced member, if it is a method.
+  /// The signature for the referenced member.
   ///
   /// Optionally, [generics] can be passed to substitute any generic parameters
-  /// in the method signature.
-  MethodSignature signature([List<MetadataType> generics = const []]) =>
-      readBlob(2).readMethodSignature(generics);
+  /// in the method signature if the member is a method.
+  MemberRefSignature signature({List<MetadataType> generics = const []}) =>
+      readBlob(2).readMemberRefSignature(generics: generics);
 
   @override
   String toString() => 'MemberRef(name: $name)';

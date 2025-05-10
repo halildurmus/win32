@@ -27,7 +27,8 @@ void main() async {
       ).equals('SupportedArchitectureAttribute');
       check(memberRef.name).equals('.ctor');
       check(memberRef.signature()).equals(
-        const MethodSignature(
+        const MethodRefSig(
+          flags: MethodRefFlags.hasThis,
           types: [
             NamedValueType(
               TypeName('Windows.Win32.Foundation.Metadata', 'Architecture'),

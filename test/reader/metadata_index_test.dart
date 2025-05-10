@@ -414,7 +414,7 @@ void main() async {
 
     test('typeSpec', () {
       final typeSpecs = winrtIndex.typeSpec.toList();
-      check(typeSpecs.length).equals(2783);
+      check(typeSpecs.length).equals(1126);
       check(typeSpecs[0].type()).equals(
         const NamedClassType(
           TypeName(
@@ -431,7 +431,7 @@ void main() async {
             'TypedEventHandler`2',
             generics: [
               NamedClassType(
-                TypeName('Windows.Web.UI.Interop', 'WebViewControlProcess'),
+                TypeName('Windows.Web.UI.Interop', 'WebViewControl'),
               ),
               ObjectType(),
             ],

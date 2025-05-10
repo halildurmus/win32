@@ -2,7 +2,7 @@ import 'package:meta/meta.dart';
 
 import '../../attributes.dart';
 import '../../metadata_type.dart';
-import '../../method_signature.dart';
+import '../../property_sig.dart';
 import '../codes.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
@@ -34,12 +34,12 @@ final class Property extends Row with HasCustomAttributes {
   /// The name of the property.
   late final name = readString(1);
 
-  /// The signature of the property, which defines the return type and
-  /// parameters of the property.
+  /// The signature of the property's getter method, which defines its return
+  /// type and parameters.
   ///
   /// Optionally, [generics] can be passed to substitute any generic parameters.
-  MethodSignature signature([List<MetadataType> generics = const []]) =>
-      readBlob(2).readPropertySignature(generics);
+  PropertySig signature({List<MetadataType> generics = const []}) =>
+      readBlob(2).readPropertySig(generics: generics);
 
   /// The constant associated with the parameter, if any.
   late final constant = getEqualRange<Constant>(

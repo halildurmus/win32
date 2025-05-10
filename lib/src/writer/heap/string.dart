@@ -21,7 +21,7 @@ final class StringHeap extends MetadataHeap<String, StringIndex> {
   ///
   /// This ensures that references to the empty string in metadata always
   /// resolve to a valid offset, as required by the metadata format.
-  StringHeap.empty() : super({}, BytesBuilder()) {
+  StringHeap.empty() : super({}, BytesBuilder(copy: false)) {
     buffer.addByte(0x00); // Add an empty string.
   }
 

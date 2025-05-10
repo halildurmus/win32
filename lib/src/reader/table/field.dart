@@ -37,13 +37,8 @@ final class Field extends Row with HasCustomAttributes {
   /// The name of the field.
   late final name = readString(1);
 
-  /// The metadata type of the field.
-  late final type = () {
-    final blob = readBlob(2);
-    final prolog = blob.readUint8();
-    assert(prolog == 0x6, 'Expected prolog 0x6, got $prolog.');
-    return blob.readTypeSignature();
-  }();
+  /// The signature of the field.
+  late final signature = readBlob(2).readFieldSig();
 
   /// The constant value associated with the field, if any.
   late final constant = getEqualRange<Constant>(
@@ -65,7 +60,7 @@ final class Field extends Row with HasCustomAttributes {
 
   @override
   String toString() =>
-      'Field(name: $name, type: $type'
+      'Field(name: $name, signature: $signature'
       '${constant != null ? ', constant: $constant' : ''})';
 }
 

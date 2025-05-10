@@ -64,28 +64,32 @@ void main() {
       check(const UintPtrType().code).equals(ELEMENT_TYPE_U);
     });
 
-    test('NamedClassType', () {
-      const type1 = NamedClassType(
-        TypeName('Windows.Globalization', 'Calendar'),
-      );
-      const type2 = NamedClassType(
-        TypeName('Windows.Globalization', 'Calendar'),
-      );
-      const type3 = NamedClassType(
-        TypeName('Windows.Globalization', 'ICalendar'),
-      );
-      check(type1.code).equals(ELEMENT_TYPE_CLASS);
-      check(type1).equals(type2);
-      check(type1).not((it) => it.equals(type3));
-    });
+    group('NamedType', () {
+      test(r'class$', () {
+        const type1 = NamedType.class$(
+          TypeName('Windows.Globalization', 'Calendar'),
+        );
+        const type2 = NamedType.class$(
+          TypeName('Windows.Globalization', 'Calendar'),
+        );
+        const type3 = NamedType.class$(
+          TypeName('Windows.Globalization', 'ICalendar'),
+        );
+        check(type1).isA<NamedClassType>();
+        check(type1.code).equals(ELEMENT_TYPE_CLASS);
+        check(type1).equals(type2);
+        check(type1).not((it) => it.equals(type3));
+      });
 
-    test('NamedValueType', () {
-      const type1 = NamedValueType(TypeName('System', 'Object'));
-      const type2 = NamedValueType(TypeName('System', 'Object'));
-      const type3 = NamedValueType(TypeName('System', 'Guid'));
-      check(type1.code).equals(ELEMENT_TYPE_VALUETYPE);
-      check(type1).equals(type2);
-      check(type1).not((it) => it.equals(type3));
+      test('value', () {
+        const type1 = NamedType.value(TypeName('System', 'Object'));
+        const type2 = NamedType.value(TypeName('System', 'Object'));
+        const type3 = NamedType.value(TypeName('System', 'Guid'));
+        check(type1).isA<NamedValueType>();
+        check(type1.code).equals(ELEMENT_TYPE_VALUETYPE);
+        check(type1).equals(type2);
+        check(type1).not((it) => it.equals(type3));
+      });
     });
 
     test('ObjectType', () {

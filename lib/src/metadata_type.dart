@@ -146,6 +146,12 @@ final class UintPtrType extends MetadataType {
 sealed class NamedType extends MetadataType {
   const NamedType(this.typeName);
 
+  /// Constructs a [NamedClassType] from the given [typeName].
+  const factory NamedType.class$(TypeName typeName) = NamedClassType;
+
+  /// Constructs a [NamedValueType] from the given [typeName].
+  const factory NamedType.value(TypeName typeName) = NamedValueType;
+
   /// The full type name including namespace and generic arguments.
   final TypeName typeName;
 }

@@ -71,15 +71,37 @@ export 'src/bindings.dart'
         ELEMENT_TYPE_VALUETYPE,
         ELEMENT_TYPE_VAR,
         ELEMENT_TYPE_VOID,
-        ElementType;
+        ElementType,
+        NATIVE_TYPE_ARRAY,
+        NATIVE_TYPE_BOOLEAN,
+        NATIVE_TYPE_FUNC,
+        NATIVE_TYPE_I1,
+        NATIVE_TYPE_I2,
+        NATIVE_TYPE_I4,
+        NATIVE_TYPE_I8,
+        NATIVE_TYPE_INT,
+        NATIVE_TYPE_LPSTR,
+        NATIVE_TYPE_LPWSTR,
+        NATIVE_TYPE_MAX,
+        NATIVE_TYPE_R4,
+        NATIVE_TYPE_R8,
+        NATIVE_TYPE_U1,
+        NATIVE_TYPE_U2,
+        NATIVE_TYPE_U4,
+        NATIVE_TYPE_U8,
+        NATIVE_TYPE_UINT,
+        NativeType;
 export 'src/compressed_integer.dart';
 export 'src/culture.dart';
 export 'src/exception.dart';
 export 'src/guid.dart';
 export 'src/logger.dart';
+export 'src/marshalling_descriptor.dart';
+export 'src/member_ref_signature.dart';
 export 'src/metadata_type.dart';
 export 'src/metadata_value.dart';
-export 'src/method_signature.dart';
+export 'src/method_def_sig.dart';
+export 'src/property_sig.dart';
 export 'src/reader/blob.dart';
 export 'src/reader/codes.dart'
     hide
@@ -151,4 +173,5 @@ export 'src/reader/table/type_ref.dart' hide TypeRefCompanion;
 export 'src/reader/table/type_spec.dart' hide TypeSpecCompanion;
 export 'src/reader/table_stream.dart';
 export 'src/reader/type_category.dart';
+export 'src/stand_alone_signature.dart';
 export 'src/type_name.dart';

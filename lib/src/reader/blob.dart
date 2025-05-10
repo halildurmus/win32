@@ -2,13 +2,17 @@ import 'dart:collection';
 import 'dart:convert';
 import 'dart:typed_data';
 
-import '../attributes.dart';
 import '../bindings.dart';
 import '../compressed_integer.dart';
 import '../exception.dart';
+import '../marshalling_descriptor.dart';
+import '../member_ref_signature.dart';
 import '../metadata_type.dart';
-import '../method_signature.dart';
+import '../method_def_sig.dart';
+import '../property_sig.dart';
+import '../stand_alone_signature.dart';
 import '../type_name.dart';
+import '../writer/helpers.dart';
 import 'codes.dart';
 import 'metadata_index.dart';
 
@@ -70,23 +74,93 @@ final class Blob {
     return false;
   }
 
-  /// Reads and decodes a method signature from the blob.
+  /// Reads a `FieldSig` from the blob as specified in ECMA-335 `§II.23.2.4`.
+  FieldSig readFieldSig() {
+    final firstByte = readUint8();
+    assert(firstByte == 0x6 /* FIELD */, 'Blob is not a FieldSig');
+    final type = readTypeSignature();
+    return FieldSig(type);
+  }
+
+  /// Reads a [MarshallingDescriptor] from the blob as specified in ECMA-335
+  /// `§II.23.4`.
   ///
-  /// Returns a [MethodSignature] containing the flags, return type, and
-  /// parameter types.
-  ///
-  /// See ECMA-335 `§II.23.2.1 MethodDefSig`.
-  MethodSignature readMethodSignature([
-    List<MetadataType> generics = const [],
-  ]) {
-    final flags = MethodCallFlags(readUint8());
+  /// Returns a [SimpleMarshallingDescriptor] for intrinsic types,
+  /// or an [ArrayMarshallingDescriptor] when the native type is
+  /// [NATIVE_TYPE_ARRAY].
+  MarshallingDescriptor readMarshallingDescriptor() {
+    final nativeType = NativeType(readUint8());
+    if (nativeType.isIntrinsic) return SimpleMarshallingDescriptor(nativeType);
+
+    if (nativeType == NATIVE_TYPE_ARRAY) {
+      final arrayElementType = NativeType(readUint8());
+      assert(
+        arrayElementType.isIntrinsic || arrayElementType == NATIVE_TYPE_MAX,
+        'Array element type must be intrinsic or NATIVE_TYPE_MAX.',
+      );
+      if (slice.isEmpty) {
+        // No size info; only element type is specified.
+        return ArrayMarshallingDescriptor(arrayElementType: arrayElementType);
+      }
+
+      final sizeParameterIndex = readCompressed();
+      assert(
+        sizeParameterIndex >= 0,
+        'Array size parameter index must be >= 0.',
+      );
+      if (slice.isEmpty) {
+        return ArrayMarshallingDescriptor(
+          arrayElementType: arrayElementType,
+          sizeParameterIndex: sizeParameterIndex,
+        );
+      }
+
+      final numElements = readCompressed();
+      assert(numElements >= 1, 'Array number of elements must be >= 1.');
+      return ArrayMarshallingDescriptor(
+        arrayElementType: arrayElementType,
+        sizeParameterIndex: sizeParameterIndex,
+        numElements: numElements,
+      );
+    }
+
+    throw WinmdException(
+      'Invalid native type in marshalling descriptor: $nativeType',
+    );
+  }
+
+  /// Reads a `MethodDefSig` from the blob as specified in ECMA-335
+  /// `§II.23.2.1`.
+  MethodDefSig readMethodDefSig({List<MetadataType> generics = const []}) {
+    final flags = MethodDefFlags(readUint8());
     final paramCount = readCompressed();
     final returnType = readTypeSignature(generics: generics);
     final types = <MetadataType>[];
     for (var i = 0; i < paramCount; i++) {
       types.add(readTypeSignature(generics: generics));
     }
-    return MethodSignature(flags: flags, returnType: returnType, types: types);
+    return MethodDefSig(flags: flags, returnType: returnType, types: types);
+  }
+
+  /// Reads a `MethodRefSig` from the blob as specified in ECMA-335
+  /// `§II.23.2.2`.
+  MethodRefSig readMethodRefSig({List<MetadataType> generics = const []}) {
+    final flags = MethodRefFlags(readUint8());
+    final paramCount = readCompressed();
+    final returnType = readTypeSignature(generics: generics);
+    final types = <MetadataType>[];
+    for (var i = 0; i < paramCount; i++) {
+      types.add(readTypeSignature(generics: generics));
+    }
+    return MethodRefSig(flags: flags, returnType: returnType, types: types);
+  }
+
+  /// Reads either a `FieldSig` or a `MethodRefSig` from the blob.
+  MemberRefSignature readMemberRefSignature({
+    List<MetadataType> generics = const [],
+  }) {
+    if (slice[0] == 0x6 /* FIELD */ ) return readFieldSig();
+    return readMethodRefSig(generics: generics);
   }
 
   /// Reads modifier tokens and decodes them into a list of [TypeDefOrRef].
@@ -108,17 +182,10 @@ final class Blob {
     return UnmodifiableListView(mods);
   }
 
-  /// Reads and decodes a property signature from the blob.
-  ///
-  /// Returns a [MethodSignature] containing the flags, return type, and
-  /// parameter types.
-  ///
-  /// See ECMA-335 `§II.23.2.5 PropertySig`.
-  MethodSignature readPropertySignature([
-    List<MetadataType> generics = const [],
-  ]) {
+  /// Reads a `PropertySig` from the blob as specified in ECMA-335 `§II.23.2.5`.
+  PropertySig readPropertySig({List<MetadataType> generics = const []}) {
     final firstByte = readUint8();
-    assert(firstByte & 0x08 != 0, 'Signature is not a PropertySig');
+    assert(firstByte & 0x08 != 0, 'Blob is not a PropertySig');
     final hasThis = firstByte & 0x20 != 0;
     final paramCount = readCompressed();
     final returnType = readTypeSignature(generics: generics);
@@ -126,8 +193,39 @@ final class Blob {
     for (var i = 0; i < paramCount; i++) {
       types.add(readTypeSignature(generics: generics));
     }
-    return MethodSignature(
-      flags: hasThis ? MethodCallFlags.hasThis : MethodCallFlags.default$,
+    return PropertySig(
+      flags: hasThis ? PropertyFlags.hasThis : PropertyFlags.default$,
+      returnType: returnType,
+      types: types,
+    );
+  }
+
+  /// Reads either a `LocalVarSig` or a `StandAloneMethodSig` from the blob.
+  StandAloneSignature readStandAloneSignature({
+    List<MetadataType> generics = const [],
+  }) {
+    if (slice[0] == 0x7 /* LOCAL_SIG */ ) {
+      final locals = <MetadataType>[];
+      while (true) {
+        final CompressedInteger(:value, :bytesRead) = CompressedInteger.decode(
+          slice,
+        );
+        if (value == ELEMENT_TYPE_VOID) break;
+        _offset(bytesRead);
+        locals.add(readTypeCode());
+      }
+      return LocalVarSig(locals);
+    }
+
+    final flags = StandAloneMethodFlags(readUint8());
+    final paramCount = readCompressed();
+    final returnType = readTypeSignature(generics: generics);
+    final types = <MetadataType>[];
+    for (var i = 0; i < paramCount; i++) {
+      types.add(readTypeSignature(generics: generics));
+    }
+    return StandAloneMethodSig(
+      flags: flags,
       returnType: returnType,
       types: types,
     );

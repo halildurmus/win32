@@ -194,6 +194,63 @@ extension type const IMAGE_SUBSYSTEM(int _) implements int {}
 
 const IMAGE_SUBSYSTEM_WINDOWS_CUI = IMAGE_SUBSYSTEM(3);
 
+/// Contains values that describe native unmanaged types.
+extension type const NativeType(int _) implements int {}
+
+/// A 4-byte Boolean value, where TRUE is non-zero and FALSE is zero.
+const NATIVE_TYPE_BOOLEAN = NativeType(0x02);
+
+/// A signed 8-bit integer value.
+const NATIVE_TYPE_I1 = NativeType(0x03);
+
+/// An unsigned 8-bit integer value.
+const NATIVE_TYPE_U1 = NativeType(0x04);
+
+/// A signed 16-bit integer value.
+const NATIVE_TYPE_I2 = NativeType(0x05);
+
+/// An unsigned 16-bit integer value.
+const NATIVE_TYPE_U2 = NativeType(0x06);
+
+/// A signed 32-bit integer value.
+const NATIVE_TYPE_I4 = NativeType(0x07);
+
+/// An unsigned 32-bit integer value.
+const NATIVE_TYPE_U4 = NativeType(0x08);
+
+/// A signed 64-bit integer value.
+const NATIVE_TYPE_I8 = NativeType(0x09);
+
+/// An unsigned 64-bit integer value.
+const NATIVE_TYPE_U8 = NativeType(0x0a);
+
+/// A 4-byte floating-point numeric value.
+const NATIVE_TYPE_R4 = NativeType(0x0b);
+
+/// An 8-byte floating-point numeric value.
+const NATIVE_TYPE_R8 = NativeType(0x0c);
+
+/// An LPSTR string value.
+const NATIVE_TYPE_LPSTR = NativeType(0x14);
+
+/// An LPWSTR string value.
+const NATIVE_TYPE_LPWSTR = NativeType(0x15);
+
+/// A native 16-bit signed integer value.
+const NATIVE_TYPE_INT = NativeType(0x1f);
+
+/// A native 16-bit unsigned integer value.
+const NATIVE_TYPE_UINT = NativeType(0x20);
+
+/// A function pointer.
+const NATIVE_TYPE_FUNC = NativeType(0x26);
+
+/// A reference to an array with members of an unspecified type.
+const NATIVE_TYPE_ARRAY = NativeType(0x2a);
+
+/// An invalid value.
+const NATIVE_TYPE_MAX = NativeType(0x50);
+
 @Packed(4)
 final class GUID extends Struct {
   @Uint32()

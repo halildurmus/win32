@@ -21,7 +21,7 @@ final class UserStringHeap extends MetadataHeap<String, UserStringIndex> {
   ///
   /// This ensures that references to the empty string in metadata always
   /// resolve to a valid offset, as required by the metadata format.
-  UserStringHeap.empty() : super({}, BytesBuilder()) {
+  UserStringHeap.empty() : super({}, BytesBuilder(copy: false)) {
     buffer.addByte(0x00); // Add an empty blob.
   }
 

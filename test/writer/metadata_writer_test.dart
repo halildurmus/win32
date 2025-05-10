@@ -2,7 +2,7 @@ import 'dart:typed_data';
 
 import 'package:checks/checks.dart';
 import 'package:test/scaffolding.dart';
-import 'package:winmd/winmd.dart' show MetadataIndex, MetadataReader, TypeName;
+import 'package:winmd/winmd.dart' as winmd;
 import 'package:winmd/writer.dart';
 
 void main() {
@@ -10,7 +10,7 @@ void main() {
     test('empty', () {
       final writer = MetadataWriter(name: 'MyMetadata');
       final bytes = writer.toBytes();
-      final reader = MetadataReader.read(bytes);
+      final reader = winmd.MetadataReader.read(bytes);
       check(reader.moduleName).equals('MyMetadata');
       check(reader.blobHeap.data).length.equals(12);
       check(reader.blobHeap[1]).deepEquals(
@@ -47,7 +47,7 @@ void main() {
       check(tableStream.typeDef.length).equals(1);
       check(tableStream.typeRef.length).equals(0);
       check(tableStream.typeSpec.length).equals(0);
-      final index = MetadataIndex.fromReader(reader);
+      final index = winmd.MetadataIndex.fromReader(reader);
       final assemblyRef = index.assemblyRef.first;
       check(assemblyRef.name).equals('mscorlib');
       check(assemblyRef.version).equals('4.0.0.0');
@@ -60,6 +60,61 @@ void main() {
       check(typeDef.name).equals('<Module>');
       check(typeDef.extends$).isNull();
       check(typeDef.flags).equals(const TypeAttributes(0));
+    });
+
+    test('FieldMarshal', () {
+      final writer = MetadataWriter(name: 'MyMetadata');
+      final someArray = writer.writeField(
+        flags: FieldAttributes.public,
+        name: 'SomeArray',
+        signature: const winmd.FieldSig(ArrayType(Int32Type())),
+      );
+      writer.writeFieldMarshal(
+        parent: HasFieldMarshal.field(someArray),
+        descriptor: const winmd.MarshallingDescriptor.array(
+          arrayElementType: winmd.NATIVE_TYPE_I4,
+        ),
+      );
+      final someString = writer.writeField(
+        flags: FieldAttributes.public,
+        name: 'SomeString',
+        signature: const winmd.FieldSig(
+          NamedValueType(winmd.TypeName('System', 'String')),
+        ),
+      );
+      writer.writeFieldMarshal(
+        parent: HasFieldMarshal.field(someString),
+        descriptor: const winmd.MarshallingDescriptor.simple(
+          winmd.NATIVE_TYPE_LPWSTR,
+        ),
+      );
+      final bytes = writer.toBytes();
+      final reader = winmd.MetadataReader.read(bytes);
+      final metadata = winmd.MetadataIndex.fromReader(reader);
+
+      final [someArrayField, someStringField] = metadata.field.toList();
+
+      final someArrayMarshal = someArrayField.fieldMarshal;
+      check(someArrayMarshal).isNotNull();
+      check(someArrayMarshal!.parent)
+          .isA<winmd.HasFieldMarshalField>()
+          .has((it) => it.value.name, 'value.name')
+          .equals('SomeArray');
+      check(someArrayMarshal.nativeType).equals(
+        const winmd.MarshallingDescriptor.array(
+          arrayElementType: winmd.NATIVE_TYPE_I4,
+        ),
+      );
+
+      final someStringMarshal = someStringField.fieldMarshal;
+      check(someStringMarshal).isNotNull();
+      check(someStringMarshal!.parent)
+          .isA<winmd.HasFieldMarshalField>()
+          .has((it) => it.value.name, 'value.name')
+          .equals('SomeString');
+      check(someStringMarshal.nativeType).equals(
+        const winmd.MarshallingDescriptor.simple(winmd.NATIVE_TYPE_LPWSTR),
+      );
     });
 
     test('Attribute', () {
@@ -82,7 +137,7 @@ void main() {
         ),
       );
 
-      const guidSignature = MethodSignature(
+      const guidSignature = winmd.MethodRefSig(
         types: [
           Uint32Type(),
           Uint16Type(),
@@ -125,8 +180,8 @@ void main() {
       );
 
       final bytes = writer.toBytes();
-      final reader = MetadataReader.read(bytes);
-      final index = MetadataIndex.fromReader(reader);
+      final reader = winmd.MetadataReader.read(bytes);
+      final index = winmd.MetadataIndex.fromReader(reader);
       final type = index.allTypes
           .where((def) => def.name == 'Name')
           .firstOrNull;
@@ -157,7 +212,7 @@ void main() {
         ),
       );
 
-      const guidSignature = MethodSignature(
+      const guidSignature = winmd.MethodRefSig(
         types: [
           Uint32Type(),
           Uint16Type(),
@@ -209,7 +264,7 @@ void main() {
 
       final interfaceImpl = writer.writeInterfaceImpl(
         class$: classTypeDef,
-        interface: const NamedClassType(TypeName('Namespace', 'IName')),
+        interface: const NamedClassType(winmd.TypeName('Namespace', 'IName')),
       );
 
       final defaultAttribute = MemberRefParent.typeRef(
@@ -222,6 +277,7 @@ void main() {
       final defaultCtor = writer.writeMemberRef(
         parent: defaultAttribute,
         name: '.ctor',
+        signature: const winmd.MethodRefSig(),
       );
 
       writer
@@ -236,8 +292,10 @@ void main() {
         );
 
       final bytes = writer.toBytes();
-      final reader = MetadataReader.read(bytes);
-      MetadataIndex.fromReader(reader).findSingleType('Namespace', 'Name');
+      final reader = winmd.MetadataReader.read(bytes);
+      winmd.MetadataIndex.fromReader(
+        reader,
+      ).findSingleType('Namespace', 'Name');
     });
 
     test('Interface', () {
@@ -259,7 +317,7 @@ void main() {
           MethodAttributes.newSlot |
           MethodAttributes.virtual;
 
-      var signature = const MethodSignature(
+      var signature = const MethodDefSig(
         returnType: Int32Type(),
         types: [Int8Type(), Int16Type()],
       );
@@ -268,12 +326,12 @@ void main() {
         ..writeParam(flags: ParamAttributes.in$, sequence: 1, name: 'i8')
         ..writeParam(flags: ParamAttributes.in$, sequence: 2, name: 'i16');
 
-      signature = const MethodSignature(returnType: StringType());
+      signature = const MethodDefSig(returnType: StringType());
       writer.writeMethodDef(flags: flags, name: 'Two', signature: signature);
 
       final bytes = writer.toBytes();
-      final reader = MetadataReader.read(bytes);
-      final index = MetadataIndex.fromReader(reader);
+      final reader = winmd.MetadataReader.read(bytes);
+      final index = winmd.MetadataIndex.fromReader(reader);
 
       final typeDef = index.findSingleType('Namespace', 'Name');
       final methods = typeDef.methods.toList();
@@ -281,7 +339,7 @@ void main() {
 
       check(methods[0].name).equals('One');
       var sig = methods[0].signature();
-      check(sig.flags).equals(MethodCallFlags.hasThis);
+      check(sig.flags).equals(MethodDefFlags.hasThis);
       check(sig.returnType).isA<Int32Type>();
       check(sig.types.length).equals(2);
       check(sig.types[0]).isA<Int8Type>();
@@ -289,7 +347,7 @@ void main() {
 
       check(methods[1].name).equals('Two');
       sig = methods[1].signature();
-      check(sig.flags).equals(MethodCallFlags.hasThis);
+      check(sig.flags).equals(MethodDefFlags.hasThis);
       check(sig.returnType).isA<StringType>();
       check(sig.types.length).equals(0);
     });
@@ -301,47 +359,51 @@ void main() {
         namespace: 'System',
         name: 'ValueType',
       );
-      writer
-        ..writeTypeDef(
-          namespace: 'Namespace',
-          name: 'Name',
-          extends$: TypeDefOrRef.typeRef(valueType),
-          flags:
-              TypeAttributes.public |
-              TypeAttributes.sequentialLayout |
-              TypeAttributes.sealed |
-              TypeAttributes.windowsRuntime,
-        )
-        ..writeField(
-          flags: FieldAttributes.public,
-          name: 'SomeGuid',
-          type: const NamedValueType(TypeName('System', 'Guid')),
-          offset: 0,
-        )
-        ..writeField(
-          flags: FieldAttributes.public,
-          name: 'SomeNum',
-          type: const Int32Type(),
-          offset: 16,
-        );
+
+      writer.writeTypeDef(
+        namespace: 'Namespace',
+        name: 'Name',
+        extends$: TypeDefOrRef.typeRef(valueType),
+        flags:
+            TypeAttributes.public |
+            TypeAttributes.sequentialLayout |
+            TypeAttributes.sealed |
+            TypeAttributes.windowsRuntime,
+      );
+
+      final someGuid = writer.writeField(
+        flags: FieldAttributes.public,
+        name: 'SomeGuid',
+        signature: const winmd.FieldSig(
+          NamedValueType(winmd.TypeName('System', 'Guid')),
+        ),
+      );
+      writer.writeFieldLayout(offset: 0, field: someGuid);
+
+      final someNum = writer.writeField(
+        flags: FieldAttributes.public,
+        name: 'SomeNum',
+        signature: const winmd.FieldSig(Int32Type()),
+      );
+      writer.writeFieldLayout(offset: 16, field: someNum);
 
       final bytes = writer.toBytes();
-      final reader = MetadataReader.read(bytes);
-      final index = MetadataIndex.fromReader(reader);
+      final reader = winmd.MetadataReader.read(bytes);
+      final index = winmd.MetadataIndex.fromReader(reader);
 
       final typeDef = index.findSingleType('Namespace', 'Name');
       final fields = typeDef.fields.toList();
       check(fields.length).equals(2);
 
       check(fields[0].name).equals('SomeGuid');
-      check(
-        fields[0].type,
-      ).equals(const NamedValueType(TypeName('System', 'Guid')));
+      check(fields[0].signature).equals(
+        const winmd.FieldSig(NamedValueType(winmd.TypeName('System', 'Guid'))),
+      );
       check(
         fields[0].layout,
       ).isNotNull().has((it) => it.offset, 'offset').equals(0);
       check(fields[1].name).equals('SomeNum');
-      check(fields[1].type).equals(const Int32Type());
+      check(fields[1].signature).equals(const winmd.FieldSig(Int32Type()));
       check(
         fields[1].layout,
       ).isNotNull().has((it) => it.offset, 'offset').equals(16);

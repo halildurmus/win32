@@ -19,9 +19,12 @@ void main() async {
       final size = stringMap.findProperty('Size');
       check(size.flags).equals(const PropertyAttributes(0));
       check(size.name).equals('Size');
-      check(
-        size.signature(),
-      ).equals(const MethodSignature(returnType: Uint32Type()));
+      check(size.signature()).equals(
+        const PropertySig(
+          flags: PropertyFlags.hasThis,
+          returnType: Uint32Type(),
+        ),
+      );
       check(size.constant).isNull();
       check(size.methodSemantics.length).equals(1);
       final getter = size.getter;
@@ -29,7 +32,7 @@ void main() async {
       check(getter!.name).equals('get_Size');
       check(
         getter.signature(),
-      ).equals(const MethodSignature(returnType: Uint32Type()));
+      ).equals(const MethodDefSig(returnType: Uint32Type()));
       check(size.setter).isNull();
       check(size.parent.namespace).equals('Windows.Foundation.Collections');
       check(size.parent.name).equals('StringMap');

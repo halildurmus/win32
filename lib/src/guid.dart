@@ -216,7 +216,7 @@ final class Guid {
           listEqual(data4, other.data4);
 
   @override
-  int get hashCode => Object.hash(data1, data2, data3, data4);
+  int get hashCode => Object.hash(data1, data2, data3, Object.hashAll(data4));
 
   /// Converts the GUID into its canonical string representation:
   /// `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`.

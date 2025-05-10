@@ -21,7 +21,7 @@ final class BlobHeap extends MetadataHeap<Uint8List, BlobIndex> {
   BlobHeap.empty()
     : super(
         HashMap(equals: listEqual, hashCode: Object.hashAll),
-        BytesBuilder(),
+        BytesBuilder(copy: false),
       ) {
     buffer.addByte(0x00); // Add an empty blob.
   }

@@ -159,14 +159,14 @@ final class TableStream {
     int calculateSortedTablesBitmask() {
       var bitmask = 0;
       for (final MapEntry(key: tableId) in presentTables) {
-        if (_tablesNeedsSorting.contains(tableId)) {
+        if (_tablesRequiringPrimaryKeySort.contains(tableId)) {
           bitmask |= 1 << tableId;
         }
       }
       return bitmask;
     }
 
-    final buffer = BytesBuilder()
+    final buffer = BytesBuilder(copy: false)
       // Write the header.
       ..writeUint32(0) // Reserved, always 0
       ..addByte(2) // MajorVersion, shall be 2
@@ -189,15 +189,26 @@ final class TableStream {
     return buffer.takeBytes().toBytesPadded();
   }
 
-  static const _tablesNeedsSorting = {
-    MetadataTableId.classLayout,
-    MetadataTableId.constant,
-    MetadataTableId.customAttribute,
-    MetadataTableId.fieldLayout,
-    MetadataTableId.genericParam,
-    MetadataTableId.implMap,
-    MetadataTableId.methodImpl,
-    MetadataTableId.methodSemantics,
-    MetadataTableId.nestedClass,
+  /// The tables that are required to be sorted by a primary key before
+  /// serialization as specified in ECMA-335 `§II.22`.
+  static const _tablesRequiringPrimaryKeySort = {
+    // |---------------------------------------|--------------------|
+    // |                Table                  | Primary Key Column |
+    // |---------------------------------------|--------------------|
+    MetadataTableId.classLayout, //            | Parent             |
+    MetadataTableId.constant, //               | Parent             |
+    MetadataTableId.customAttribute, //        | Parent             |
+    MetadataTableId.declSecurity, //           | Parent             |
+    MetadataTableId.fieldLayout, //            | Field              |
+    MetadataTableId.fieldMarshal, //           | Parent             |
+    MetadataTableId.fieldRVA, //               | Field              |
+    MetadataTableId.genericParam, //           | Owner              |
+    MetadataTableId.genericParamConstraint, // | Owner              |
+    MetadataTableId.implMap, //                | MemberForwarded    |
+    MetadataTableId.interfaceImpl, //          | Class              |
+    MetadataTableId.methodImpl, //             | Class              |
+    MetadataTableId.methodSemantics, //        | Association        |
+    MetadataTableId.nestedClass, //            | NestedClass        |
+    // |---------------------------------------|--------------------|
   };
 }

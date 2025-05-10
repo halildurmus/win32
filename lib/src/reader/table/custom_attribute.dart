@@ -3,9 +3,9 @@ import 'dart:collection';
 import 'package:meta/meta.dart';
 
 import '../../attribute_arg.dart';
-import '../../attributes.dart';
 import '../../bindings.dart';
 import '../../exception.dart';
+import '../../member_ref_signature.dart';
 import '../../metadata_type.dart';
 import '../../metadata_value.dart';
 import '../../type_name.dart';
@@ -26,15 +26,15 @@ import '../row.dart';
 ///  - **Value** (Blob Heap Index)
 final class CustomAttribute extends Row {
   CustomAttribute(super.metadataIndex, super.readerIndex, super.index) {
-    final signature = type.signature();
-    assert(
-      signature.flags == MethodCallFlags.hasThis,
-      'Expected hasThis attribute, got ${signature.flags}.',
-    );
-    assert(
-      signature.returnType is VoidType,
-      'Expected void return type, got ${signature.returnType}.',
-    );
+    final types = switch (type) {
+      CustomAttributeTypeMemberRef(:final value) => switch (value.signature()) {
+        FieldSig() => throw const WinmdException(
+          'Expected MethodRefSig, got FieldSig.',
+        ),
+        final MethodRefSig methodRefSig => methodRefSig.types,
+      },
+      CustomAttributeTypeMethodDef(:final value) => value.signature().types,
+    };
     final blob = readBlob(2);
     if (blob.isEmpty) {
       fixedArgs = const [];
@@ -45,7 +45,7 @@ final class CustomAttribute extends Row {
 
       // Parse fixed args.
       fixedArgs = UnmodifiableListView([
-        for (final type in signature.types) FixedArg(_readValue(blob, type)),
+        for (final type in types) FixedArg(_readValue(blob, type)),
       ]);
 
       // Parse named args.

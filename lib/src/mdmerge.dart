@@ -11,6 +11,7 @@ import 'reader/metadata_index.dart';
 import 'reader/metadata_reader.dart';
 import 'reader/table/type_def.dart';
 import 'reader/type_category.dart';
+import 'type_name.dart';
 import 'writer/codes.dart';
 import 'writer/metadata_writer.dart';
 import 'writer/table/index.dart';
@@ -100,9 +101,9 @@ void _writeType(
   TypeDefIndex? outer,
 ) {
   final TypeDefOrRef extends$;
-  if (def.extends$ case final extends_?) {
+  if (def.extends$ case reader.TypeDefOrRef(:final namespace, :final name)) {
     extends$ = TypeDefOrRef.typeRef(
-      writer.writeTypeRef(namespace: extends_.namespace, name: extends_.name),
+      writer.writeTypeRef(namespace: namespace, name: name),
     );
   } else {
     extends$ = TypeDefOrRef.none;
@@ -125,26 +126,32 @@ void _writeType(
   }
 
   for (final field in def.fields) {
-    final fieldRef = writer.writeField(
+    final fieldIndex = writer.writeField(
       flags: field.flags,
       name: field.name,
-      type: field.type,
-      defaultValue: field.constant?.value,
-      offset: field.layout?.offset,
+      signature: field.signature,
     );
-    _writeAttributes(writer, HasCustomAttribute.field(fieldRef), field);
+
+    if (field.constant?.value case final constantValue?) {
+      writer.writeConstant(
+        parent: HasConstant.field(fieldIndex),
+        value: constantValue,
+      );
+    }
+
+    if (field.layout?.offset case final offset?) {
+      writer.writeFieldLayout(offset: offset, field: fieldIndex);
+    }
+
+    _writeAttributes(writer, HasCustomAttribute.field(fieldIndex), field);
   }
 
   _writeAttributes(writer, HasCustomAttribute.typeDef(typeDef), def);
 
-  final generics = def.generics
-      .map((param) => GenericParameterType(param.sequence))
-      .toList();
-
   for (final impl in def.interfaceImpls) {
     final implRef = writer.writeInterfaceImpl(
       class$: typeDef,
-      interface: impl.interface(generics: generics),
+      interface: impl.interface(),
     );
     _writeAttributes(writer, HasCustomAttribute.interfaceImpl(implRef), impl);
   }
@@ -169,7 +176,7 @@ void _writeType(
       implFlags: method.implFlags,
       flags: method.flags,
       name: method.name,
-      signature: method.signature(generics),
+      signature: method.signature(),
     );
 
     if (method.flags.has(MethodAttributes.specialName)) {
@@ -204,7 +211,16 @@ void _writeType(
       final eventIndex = writer.writeEvent(
         flags: event.eventFlags,
         name: event.name,
-        type: event.type(),
+        eventType: switch (event.eventType) {
+          reader.TypeDefOrRefTypeDef(:final value) => NamedClassType(
+            TypeName(value.namespace, value.name),
+          ),
+          reader.TypeDefOrRefTypeRef(:final value) => NamedClassType(
+            TypeName(value.namespace, value.name),
+          ),
+          reader.TypeDefOrRefTypeSpec(:final value) => value.type(),
+          _ => null,
+        },
       );
 
       writer
@@ -288,6 +304,9 @@ void _writeAttributes<R extends HasCustomAttributes>(
 ) {
   for (final attr in row.attributes) {
     final ctor = attr.type;
+    if (ctor is! reader.CustomAttributeTypeMemberRef) {
+      throw WinmdException('Expected CustomAttributeMemberRef, got: $ctor');
+    }
     final type = ctor.parent;
     final (namespace, name) = switch (type) {
       reader.MemberRefParentTypeDef(:final value) => (
@@ -303,10 +322,11 @@ void _writeAttributes<R extends HasCustomAttributes>(
     final attrParent = MemberRefParent.typeRef(
       writer.writeTypeRef(namespace: namespace, name: name),
     );
+    final signature = ctor.value.signature();
     final ctorRef = writer.writeMemberRef(
       parent: attrParent,
       name: '.ctor',
-      signature: ctor.signature(),
+      signature: signature,
     );
     writer.writeCustomAttribute(
       parent: parent,

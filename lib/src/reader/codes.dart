@@ -1,8 +1,9 @@
 import 'package:meta/meta.dart';
 
 import '../exception.dart';
+import '../member_ref_signature.dart';
 import '../metadata_type.dart';
-import '../method_signature.dart';
+import '../method_def_sig.dart';
 import 'has_custom_attributes.dart';
 import 'metadata_index.dart';
 import 'table/assembly.dart';
@@ -98,11 +99,6 @@ sealed class CustomAttributeType implements CodedIndex {
   /// The parent container of this attribute type.
   MemberRefParent get parent;
 
-  /// The method signature associated with this attribute type.
-  ///
-  /// Optionally, [generics] can be passed to substitute any generic parameters.
-  MethodSignature signature([List<MetadataType> generics = const []]);
-
   /// The name of the method or member referenced by this attribute type.
   String get name;
 }
@@ -121,11 +117,10 @@ final class CustomAttributeTypeMethodDef extends CustomAttributeType {
   MemberRefParent get parent => MemberRefParent.typeDef(value.parent);
 
   @override
-  MethodSignature signature([List<MetadataType> generics = const []]) =>
-      value.signature(generics);
-
-  @override
   String get name => value.name;
+
+  MethodDefSig signature({List<MetadataType> generics = const []}) =>
+      value.signature(generics: generics);
 
   @override
   String toString() => value.toString();
@@ -145,11 +140,10 @@ final class CustomAttributeTypeMemberRef extends CustomAttributeType {
   MemberRefParent get parent => value.parent;
 
   @override
-  MethodSignature signature([List<MetadataType> generics = const []]) =>
-      value.signature(generics);
-
-  @override
   String get name => value.name;
+
+  MemberRefSignature signature({List<MetadataType> generics = const []}) =>
+      value.signature(generics: generics);
 
   @override
   String toString() => value.toString();

@@ -17,8 +17,8 @@ final class AssemblyProcessor extends Row {
   @override
   MetadataTable get table => MetadataTable.assemblyProcessor;
 
-  /// The processor architecture targeted by the assembly.
-  late final processor = readUint32(0);
+  /// Always returns zero, per ECMA-335 `§II.22.4`.
+  int get processor => 0;
 
   @override
   String toString() => 'AssemblyProcessor(processor: $processor)';

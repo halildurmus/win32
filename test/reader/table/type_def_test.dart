@@ -288,7 +288,7 @@ void main() async {
       final fields = typeDef.fields.toList();
       check(fields.length).equals(3);
       check(fields[0].name).equals('value__');
-      check(fields[0].type).equals(const Int32Type());
+      check(fields[0].signature).equals(const FieldSig(Int32Type()));
       check(fields[1].name).equals('RO_INIT_SINGLETHREADED');
       check(
         fields[1].constant,
