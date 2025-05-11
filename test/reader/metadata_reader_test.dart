@@ -24,6 +24,40 @@ void main() async {
       ).equals('4a520299-e458-4675-befb-318972b60e6a');
     });
 
+    test('blobHeap', () {
+      final blobHeap = win32Reader.blobHeap;
+      check(blobHeap.count).equals(159271);
+      check(blobHeap.blobs)
+        ..length.equals(159271)
+        ..first.isEmpty()
+        ..last.deepEquals([0x06, 0x11, 0xC0, 0x00, 0xFC, 0x99]);
+    });
+
+    test('guidHeap', () {
+      final guidHeap = win32Reader.guidHeap;
+      check(guidHeap.count).equals(1);
+      check(guidHeap.guids)
+        ..length.equals(1)
+        ..first.equals(Guid.fromString('4a520299-e458-4675-befb-318972b60e6a'));
+    });
+
+    test('stringHeap', () {
+      final stringHeap = win32Reader.stringHeap;
+      check(stringHeap.count).equals(282690);
+      check(stringHeap.strings)
+        ..length.equals(282690)
+        ..first.isEmpty()
+        ..last.equals('maxz');
+    });
+
+    test('userStringHeap', () {
+      final userStringHeap = win32Reader.userStringHeap;
+      check(userStringHeap.count).equals(1);
+      check(userStringHeap.userStrings)
+        ..length.equals(1)
+        ..first.isEmpty();
+    });
+
     group('readBlob', () {
       test('returns list with correct data', () {
         final blob = win32Reader.readBlob(0, MetadataTable.assemblyRef, 2);

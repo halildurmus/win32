@@ -8,6 +8,18 @@ final class GuidHeap extends MetadataHeap {
   /// Creates a [GuidHeap] from the provided binary [data].
   const GuidHeap(super.data);
 
+  /// The number of GUIDs stored in this heap.
+  int get count => data.length ~/ 16;
+
+  /// Enumerates all GUIDs in the heap.
+  Iterable<Guid> get guids sync* {
+    if (data.length < 16) return;
+
+    for (var i = 0; i < data.length; i += 16) {
+      yield this[i];
+    }
+  }
+
   /// Retrieves the GUID located at the specified [offset].
   Guid operator [](int offset) {
     assert(

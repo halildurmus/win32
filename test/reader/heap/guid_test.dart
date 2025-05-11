@@ -22,6 +22,29 @@ void main() {
         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, //
       ]);
       final heap = GuidHeap(data);
+      check(heap.count).equals(2);
+      check(heap.guids)
+        ..length.equals(2)
+        ..first.equals(
+          Guid(
+            0x00112233,
+            0x4455,
+            0x6677,
+            Uint8List.fromList([
+              0x88, 0x99, 0xaa, 0xbb, 0xcc, 0xdd, 0xee, 0xff, //
+            ]),
+          ),
+        )
+        ..last.equals(
+          Guid(
+            0xffffffff,
+            0xffff,
+            0xffff,
+            Uint8List.fromList([
+              0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, //
+            ]),
+          ),
+        );
       final firstGuid = heap[0];
       final secondGuid = heap[16];
       check(firstGuid.data1).equals(0x00112233);
@@ -44,6 +67,9 @@ void main() {
 
     test('throws RangeError for out-of-bounds access', () {
       final heap = GuidHeap(Uint8List(16));
+      check(heap.guids)
+        ..length.equals(1)
+        ..first.equals(Guid.zero());
       check(() => heap[1]).throws().isA<RangeError>();
     });
   });

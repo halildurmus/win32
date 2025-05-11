@@ -11,6 +11,11 @@ void main() {
       const payload = [0x68, 0x00, 0x69, 0x00]; // "hi"
       final bytes = Uint8List.fromList([0x00, ...header, ...payload, 0x00]);
       final heap = UserStringHeap(bytes);
+      check(heap.count).equals(2);
+      check(heap.userStrings)
+        ..length.equals(2)
+        ..first.isEmpty()
+        ..last.equals('hi');
       check(heap[1]).equals('hi');
     });
 
@@ -19,6 +24,11 @@ void main() {
       final payload = List.generate(258, (i) => i.isOdd ? 0 : 0x41);
       final bytes = Uint8List.fromList([0x00, ...header, ...payload, 0x00]);
       final heap = UserStringHeap(bytes);
+      check(heap.count).equals(2);
+      check(heap.userStrings)
+        ..length.equals(2)
+        ..first.isEmpty()
+        ..last.equals('A' * 129);
       final str = heap[1];
       check(str).equals('A' * 129);
     });
@@ -28,12 +38,21 @@ void main() {
       const payload = [0x41, 0x00, 0x42, 0x00]; // "AB"
       final bytes = Uint8List.fromList([0x00, ...header, ...payload, 0x00]);
       final heap = UserStringHeap(bytes);
+      check(heap.count).equals(2);
+      check(heap.userStrings)
+        ..length.equals(2)
+        ..first.isEmpty()
+        ..last.equals('AB');
       final str = heap[1];
       check(str).equals('AB');
     });
 
     test('returns empty string for size = 0', () {
       final heap = UserStringHeap(Uint8List.fromList([0x00, 0x00]));
+      check(heap.count).equals(1);
+      check(heap.userStrings)
+        ..length.equals(1)
+        ..first.isEmpty();
       check(heap[1]).isEmpty();
     });
 

@@ -8,6 +8,56 @@ final class UserStringHeap extends MetadataHeap {
   /// Creates a [UserStringHeap] from the provided binary [data].
   const UserStringHeap(super.data);
 
+  /// The number of user-defined strings in the heap.
+  int get count {
+    var count = 0;
+    var offset = 0;
+    while (offset < data.length) {
+      try {
+        final CompressedInteger(:value, :bytesRead) = CompressedInteger.decode(
+          data,
+          offset,
+        );
+        final totalBytes = value + bytesRead;
+        if (totalBytes == 0) break; // Prevent infinite loop on malformed input.
+        count++;
+        offset += totalBytes;
+
+        // Skip padded zeroes
+        while (offset < data.length && data[offset] == 0) {
+          offset++;
+        }
+      } catch (_) {
+        break;
+      }
+    }
+    return count;
+  }
+
+  /// Enumerates all user-defined strings in the heap.
+  Iterable<String> get userStrings sync* {
+    var offset = 0;
+    while (offset < data.length) {
+      try {
+        yield this[offset];
+        final CompressedInteger(:value, :bytesRead) = CompressedInteger.decode(
+          data,
+          offset,
+        );
+        final totalBytes = value + bytesRead;
+        if (totalBytes == 0) break; // Prevent infinite loop on malformed input.
+        offset += totalBytes;
+
+        // Skip padded zeroes
+        while (offset < data.length && data[offset] == 0) {
+          offset++;
+        }
+      } catch (_) {
+        break;
+      }
+    }
+  }
+
   /// Retrieves the user-defined string located at the specified [offset].
   String operator [](int offset) {
     assert(

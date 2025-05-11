@@ -11,6 +11,11 @@ void main() {
       const payload = [0xDE, 0xAD, 0xBE];
       final bytes = Uint8List.fromList([0x00, ...header, ...payload]);
       final heap = BlobHeap(bytes);
+      check(heap.count).equals(2);
+      check(heap.blobs)
+        ..length.equals(2)
+        ..first.isEmpty()
+        ..last.deepEquals([0xDE, 0xAD, 0xBE]);
       final blob = heap[1];
       check(blob).deepEquals([0xDE, 0xAD, 0xBE]);
     });
@@ -20,6 +25,11 @@ void main() {
       final payload = List.generate(258, (i) => i & 0xFF);
       final bytes = Uint8List.fromList([0x00, ...header, ...payload]);
       final heap = BlobHeap(bytes);
+      check(heap.count).equals(2);
+      check(heap.blobs)
+        ..length.equals(2)
+        ..first.isEmpty()
+        ..last.deepEquals(payload);
       final blob = heap[1];
       check(blob).deepEquals(payload);
     });
@@ -29,6 +39,11 @@ void main() {
       const payload = [0x01, 0x02, 0x03];
       final bytes = Uint8List.fromList([0x00, ...header, ...payload]);
       final heap = BlobHeap(bytes);
+      check(heap.count).equals(2);
+      check(heap.blobs)
+        ..length.equals(2)
+        ..first.isEmpty()
+        ..last.deepEquals(payload);
       final blob = heap[1];
       check(blob).deepEquals(payload);
     });
