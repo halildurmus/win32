@@ -87,7 +87,9 @@ void main() async {
       final events = typeDef.events.toList();
       check(events.length).equals(1);
       check(events[0].name).equals('MapChanged');
-      check(typeDef.methodImpls).isEmpty();
+      final methodImpls = typeDef.methodImpls.toList();
+      check(methodImpls.length).equals(10);
+      check(methodImpls[0].class$.name).equals('StringMap');
       check(typeDef.nested).isNull();
       final properties = typeDef.properties.toList();
       check(properties.length).equals(1);
@@ -141,7 +143,9 @@ void main() async {
       );
       check(typeDef.classLayout).isNull();
       check(typeDef.events).isEmpty();
-      check(typeDef.methodImpls).isEmpty();
+      final methodImpls = typeDef.methodImpls.toList();
+      check(methodImpls.length).equals(102);
+      check(methodImpls[0].class$.name).equals('Calendar');
       check(typeDef.nested).isNull();
       final properties = typeDef.properties.toList();
       check(properties.length).equals(38);

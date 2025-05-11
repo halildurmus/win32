@@ -261,7 +261,7 @@ final class MetadataWriter {
   EventIndex writeEvent({
     required String name,
     MetadataType? eventType,
-    EventAttributes flags = const EventAttributes(0),
+    EventAttributes eventFlags = const EventAttributes(0),
   }) {
     if (eventType is! NamedType) {
       throw WinmdException('Expected type to be a NamedType, got $eventType.');
@@ -271,7 +271,7 @@ final class MetadataWriter {
     final index = EventIndex(table.length);
     table.add(
       Event(
-        eventFlags: flags,
+        eventFlags: eventFlags,
         name: _stringHeap.insert(name),
         eventType: _toTypeDefOrRef(eventType),
       ),
