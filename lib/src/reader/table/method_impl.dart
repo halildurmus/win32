@@ -33,7 +33,9 @@ final class MethodImpl extends Row {
 
   @override
   String toString() =>
-      'MethodImpl(methodBody: $methodBody, '
+      'MethodImpl('
+      'class\$: ${class$}, '
+      'methodBody: $methodBody, '
       'methodDeclaration: $methodDeclaration)';
 }
 

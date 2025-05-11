@@ -45,6 +45,7 @@ import 'table/index.dart';
 import 'table/interface_impl.dart';
 import 'table/member_ref.dart';
 import 'table/method_def.dart';
+import 'table/method_impl.dart';
 import 'table/method_semantics.dart';
 import 'table/method_spec.dart';
 import 'table/module.dart';
@@ -444,7 +445,20 @@ final class MetadataWriter {
     return index;
   }
 
-  // TODO(halildurmus): writeMethodImpl
+  /// Writes a `MethodImpl` row.
+  void writeMethodImpl({
+    required TypeDefIndex class$,
+    required MethodDefOrRef methodBody,
+    required MethodDefOrRef methodDeclaration,
+  }) {
+    _tableStream[MetadataTableId.methodImpl].add(
+      MethodImpl(
+        class$: class$,
+        methodBody: methodBody,
+        methodDeclaration: methodDeclaration,
+      ),
+    );
+  }
 
   /// Adds a `MethodSemantics` row associating a method with a property or
   /// event.
@@ -611,7 +625,7 @@ final class MetadataWriter {
   ///
   /// If a `TypeRef` with the given [namespace] and [name] already exists, the
   /// cached index is returned.
-  TypeRefIndex writeTypeRef({required String name, String namespace = ''}) {
+  TypeRefIndex writeTypeRef({required String namespace, required String name}) {
     // Return cached reference if it exists.
     if (_typeRefs[namespace]?[name] case final typeRef?) return typeRef;
 

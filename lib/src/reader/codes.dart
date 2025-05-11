@@ -1255,6 +1255,9 @@ sealed class MethodDefOrRef implements CodedIndex {
       _ => throw WinmdException('Unknown kind: $kind'),
     };
   }
+
+  /// The name of the underlying method or member reference.
+  String get name;
 }
 
 /// A [MethodDefOrRef] representing a [MethodDef].
@@ -1266,6 +1269,9 @@ final class MethodDefOrRefMethodDef extends MethodDefOrRef {
 
   @override
   int encode() => ((value.index + 1) << 1) | 0;
+
+  @override
+  String get name => value.name;
 
   @override
   String toString() => value.toString();
@@ -1280,6 +1286,9 @@ final class MethodDefOrRefMemberRef extends MethodDefOrRef {
 
   @override
   int encode() => ((value.index + 1) << 1) | 1;
+
+  @override
+  String get name => value.name;
 
   @override
   String toString() => value.toString();
