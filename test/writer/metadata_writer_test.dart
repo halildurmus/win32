@@ -72,7 +72,7 @@ void main() {
       writer.writeFieldMarshal(
         parent: HasFieldMarshal.field(someArray),
         descriptor: const winmd.MarshallingDescriptor.array(
-          arrayElementType: winmd.NATIVE_TYPE_I4,
+          elementType: winmd.NATIVE_TYPE_I4,
         ),
       );
       final someString = writer.writeField(
@@ -102,7 +102,7 @@ void main() {
           .equals('SomeArray');
       check(someArrayMarshal.nativeType).equals(
         const winmd.MarshallingDescriptor.array(
-          arrayElementType: winmd.NATIVE_TYPE_I4,
+          elementType: winmd.NATIVE_TYPE_I4,
         ),
       );
 

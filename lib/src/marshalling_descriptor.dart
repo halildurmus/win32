@@ -11,7 +11,7 @@ sealed class MarshallingDescriptor {
 
   /// Creates a marshalling descriptor for a native array ([NATIVE_TYPE_ARRAY]).
   ///
-  /// The [arrayElementType] indicates the native type of each element.
+  /// The [elementType] indicates the native type of each element.
   ///
   /// The [sizeParameterIndex] is a 1-based index into the method's parameter
   /// list, specifying the parameter that provides the runtime array size.
@@ -19,7 +19,7 @@ sealed class MarshallingDescriptor {
   /// If [sizeParameterIndex] is `0`, [numElements] must be non-null and `≥ 1`,
   /// representing a fixed-length array encoded directly in metadata.
   const factory MarshallingDescriptor.array({
-    NativeType arrayElementType,
+    NativeType elementType,
     int? sizeParameterIndex,
     int? numElements,
   }) = ArrayMarshallingDescriptor;
@@ -42,7 +42,7 @@ sealed class MarshallingDescriptor {
 final class ArrayMarshallingDescriptor extends MarshallingDescriptor {
   /// Creates a marshalling descriptor for a native array.
   ///
-  /// The [arrayElementType] specifies the type of each element and defaults to
+  /// The [elementType] specifies the type of each element and defaults to
   /// [NATIVE_TYPE_MAX] (unspecified) if not provided.
   ///
   /// - If [sizeParameterIndex] is provided and non-zero, it must be `≥ 1` and
@@ -50,7 +50,7 @@ final class ArrayMarshallingDescriptor extends MarshallingDescriptor {
   /// - If [sizeParameterIndex] is `0`, [numElements] must be non-null and
   ///   `≥ 1`, indicating a fixed-length array.
   const ArrayMarshallingDescriptor({
-    this.arrayElementType = NATIVE_TYPE_MAX,
+    this.elementType = NATIVE_TYPE_MAX,
     this.sizeParameterIndex,
     this.numElements,
   }) : assert(
@@ -70,7 +70,7 @@ final class ArrayMarshallingDescriptor extends MarshallingDescriptor {
   /// The type of each element in the array.
   ///
   /// Defaults to [NATIVE_TYPE_MAX] when unspecified.
-  final NativeType arrayElementType;
+  final NativeType elementType;
 
   /// The 1-based index of a parameter that provides the runtime array size.
   ///
@@ -84,17 +84,13 @@ final class ArrayMarshallingDescriptor extends MarshallingDescriptor {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is ArrayMarshallingDescriptor &&
-          arrayElementType == other.arrayElementType &&
+          elementType == other.elementType &&
           sizeParameterIndex == other.sizeParameterIndex &&
           numElements == other.numElements;
 
   @override
-  int get hashCode => Object.hash(
-    nativeType,
-    arrayElementType,
-    sizeParameterIndex,
-    numElements,
-  );
+  int get hashCode =>
+      Object.hash(nativeType, elementType, sizeParameterIndex, numElements);
 
   @override
   String toString() {
@@ -102,7 +98,7 @@ final class ArrayMarshallingDescriptor extends MarshallingDescriptor {
         ? ''
         : 'sizeParameterIndex: $sizeParameterIndex, ';
     final numElem = numElements == null ? '' : 'numElements: $numElements, ';
-    return 'ArrayMarshallingDescriptor(arrayElementType: $arrayElementType'
+    return 'ArrayMarshallingDescriptor(elementType: $elementType'
         '$sizeParam$numElem)';
   }
 }
@@ -128,5 +124,5 @@ final class SimpleMarshallingDescriptor extends MarshallingDescriptor {
   int get hashCode => nativeType.hashCode;
 
   @override
-  String toString() => 'SimpleMarshallingDescriptor(nativeType: $nativeType)';
+  String toString() => 'SimpleMarshallingDescriptor($nativeType)';
 }

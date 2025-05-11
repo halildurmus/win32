@@ -11,7 +11,7 @@ void main() {
           const descriptor = MarshallingDescriptor.array(sizeParameterIndex: 1);
           check(descriptor).isA<ArrayMarshallingDescriptor>()
             ..has(
-              (it) => it.arrayElementType,
+              (it) => it.elementType,
               'arrayElementType',
             ).equals(NATIVE_TYPE_MAX)
             ..has((it) => it.sizeParameterIndex, 'sizeParameterIndex').equals(1)
@@ -21,13 +21,13 @@ void main() {
 
       test('creates fixed-length marshalling descriptor', () {
         const descriptor = MarshallingDescriptor.array(
-          arrayElementType: NATIVE_TYPE_U2,
+          elementType: NATIVE_TYPE_U2,
           sizeParameterIndex: 0,
           numElements: 10,
         );
         check(descriptor).isA<ArrayMarshallingDescriptor>()
           ..has(
-            (it) => it.arrayElementType,
+            (it) => it.elementType,
             'arrayElementType',
           ).equals(NATIVE_TYPE_U2)
           ..has((it) => it.sizeParameterIndex, 'sizeParameterIndex').equals(0)
@@ -37,7 +37,7 @@ void main() {
       test('throws if sizeParameterIndex is 0 but numElements is missing', () {
         check(
           () => MarshallingDescriptor.array(
-            arrayElementType: NATIVE_TYPE_U1,
+            elementType: NATIVE_TYPE_U1,
             sizeParameterIndex: 0,
           ),
         ).throws<AssertionError>();
@@ -46,7 +46,7 @@ void main() {
       test('throws if numElements is < 1', () {
         check(
           () => MarshallingDescriptor.array(
-            arrayElementType: NATIVE_TYPE_I2,
+            elementType: NATIVE_TYPE_I2,
             sizeParameterIndex: 0,
             numElements: 0,
           ),
@@ -56,7 +56,7 @@ void main() {
       test('throws if sizeParameterIndex is negative', () {
         check(
           () => MarshallingDescriptor.array(
-            arrayElementType: NATIVE_TYPE_I4,
+            elementType: NATIVE_TYPE_I4,
             sizeParameterIndex: -1,
           ),
         ).throws<AssertionError>();

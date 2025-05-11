@@ -856,13 +856,13 @@ final class MetadataWriter {
     switch (descriptor) {
       case ArrayMarshallingDescriptor(
         :final nativeType,
-        :final arrayElementType,
+        :final elementType,
         :final sizeParameterIndex,
         :final numElements,
       ):
         buffer
           ..addByte(nativeType)
-          ..addByte(arrayElementType);
+          ..addByte(elementType);
         if (sizeParameterIndex != null) {
           buffer.add(CompressedInteger.encode(sizeParameterIndex));
         }

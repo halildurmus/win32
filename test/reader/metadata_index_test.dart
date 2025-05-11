@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:checks/checks.dart';
 import 'package:test/scaffolding.dart';
 import 'package:winmd/windows_metadata.dart';
@@ -6,13 +8,31 @@ import 'package:winmd/winmd.dart';
 import '../versions.dart';
 
 void main() async {
-  final metadataLoader = WindowsMetadataLoader();
-  final win32Index = await metadataLoader.loadWin32Metadata(
-    version: win32MetadataVersion,
-  );
-  final winrtIndex = await metadataLoader.loadWinrtMetadata(
-    version: winrtMetadataVersion,
-  );
+  late Directory tempDir;
+  late LocalStorageManager localStorageManager;
+  late WindowsMetadataLoader metadataLoader;
+  late MetadataIndex win32Index;
+  late MetadataIndex winrtIndex;
+
+  setUpAll(() async {
+    tempDir = Directory.systemTemp.createTempSync('winmd_metadata_index_test');
+    localStorageManager = LocalStorageManager(storagePath: tempDir.path);
+    metadataLoader = WindowsMetadataLoader(
+      localStorageManager: localStorageManager,
+    );
+
+    win32Index = await metadataLoader.loadWin32Metadata(
+      version: win32MetadataVersion,
+    );
+    winrtIndex = await metadataLoader.loadWinrtMetadata(
+      version: winrtMetadataVersion,
+    );
+  });
+
+  tearDownAll(() {
+    localStorageManager.clear();
+    tempDir.deleteSync();
+  });
 
   group('MetadataIndex', () {
     test('readers', () {

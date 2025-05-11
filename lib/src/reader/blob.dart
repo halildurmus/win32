@@ -100,7 +100,7 @@ final class Blob {
       );
       if (slice.isEmpty) {
         // No size info; only element type is specified.
-        return ArrayMarshallingDescriptor(arrayElementType: arrayElementType);
+        return ArrayMarshallingDescriptor(elementType: arrayElementType);
       }
 
       final sizeParameterIndex = readCompressed();
@@ -110,7 +110,7 @@ final class Blob {
       );
       if (slice.isEmpty) {
         return ArrayMarshallingDescriptor(
-          arrayElementType: arrayElementType,
+          elementType: arrayElementType,
           sizeParameterIndex: sizeParameterIndex,
         );
       }
@@ -118,7 +118,7 @@ final class Blob {
       final numElements = readCompressed();
       assert(numElements >= 1, 'Array number of elements must be >= 1.');
       return ArrayMarshallingDescriptor(
-        arrayElementType: arrayElementType,
+        elementType: arrayElementType,
         sizeParameterIndex: sizeParameterIndex,
         numElements: numElements,
       );
@@ -205,14 +205,12 @@ final class Blob {
     List<MetadataType> generics = const [],
   }) {
     if (slice[0] == 0x7 /* LOCAL_SIG */ ) {
+      final prolog = readUint8();
+      assert(prolog == 0x7, 'Blob is not a LocalVarSig');
+      final count = readCompressed();
       final locals = <MetadataType>[];
-      while (true) {
-        final CompressedInteger(:value, :bytesRead) = CompressedInteger.decode(
-          slice,
-        );
-        if (value == ELEMENT_TYPE_VOID) break;
-        _offset(bytesRead);
-        locals.add(readTypeCode());
+      for (var i = 0; i < count; i++) {
+        locals.add(readTypeSignature(generics: generics));
       }
       return LocalVarSig(locals);
     }

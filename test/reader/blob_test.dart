@@ -56,30 +56,136 @@ void main() async {
       });
     });
 
+    test('readFieldSig', () {
+      final blob = createBlob([
+        0x6, // FIELD
+        ELEMENT_TYPE_I4, // Type
+      ]);
+      final sig = blob.readFieldSig();
+      check(sig.type).isA<Int32Type>();
+      check(blob.isEmpty).isTrue();
+    });
+
+    group('readMarshallingDescriptor', () {
+      test('reads a simple marshalling descriptor', () {
+        final blob = createBlob([NATIVE_TYPE_I4]);
+        final descriptor = blob.readMarshallingDescriptor();
+        check(descriptor).isA<SimpleMarshallingDescriptor>().equals(
+          const SimpleMarshallingDescriptor(NATIVE_TYPE_I4),
+        );
+        check(blob.isEmpty).isTrue();
+      });
+
+      test('reads an array marshalling descriptor (1)', () {
+        final blob = createBlob([NATIVE_TYPE_ARRAY, NATIVE_TYPE_MAX]);
+        final descriptor = blob.readMarshallingDescriptor();
+        check(descriptor).isA<ArrayMarshallingDescriptor>().equals(
+          const ArrayMarshallingDescriptor(),
+        );
+        check(blob.isEmpty).isTrue();
+      });
+
+      test('reads an array marshalling descriptor (2)', () {
+        final blob = createBlob([
+          NATIVE_TYPE_ARRAY,
+          NATIVE_TYPE_U1,
+          2, // ParamNum
+        ]);
+        final descriptor = blob.readMarshallingDescriptor();
+        check(descriptor).isA<ArrayMarshallingDescriptor>().equals(
+          const ArrayMarshallingDescriptor(
+            elementType: NATIVE_TYPE_U1,
+            sizeParameterIndex: 2,
+          ),
+        );
+        check(blob.isEmpty).isTrue();
+      });
+
+      test('reads an array marshalling descriptor (3)', () {
+        final blob = createBlob([
+          NATIVE_TYPE_ARRAY,
+          NATIVE_TYPE_I4,
+          2, // ParamNum
+          3, // NumElements
+        ]);
+        final descriptor = blob.readMarshallingDescriptor();
+        check(descriptor).isA<ArrayMarshallingDescriptor>().equals(
+          const ArrayMarshallingDescriptor(
+            elementType: NATIVE_TYPE_I4,
+            sizeParameterIndex: 2,
+            numElements: 3,
+          ),
+        );
+        check(blob.isEmpty).isTrue();
+      });
+    });
+
+    group('readMemberRefSignature', () {
+      test('reads a FieldSig', () {
+        final blob = createBlob([
+          0x6, // FIELD
+          ELEMENT_TYPE_BOOLEAN, // Type
+        ]);
+        final sig = blob.readFieldSig();
+        check(sig.type).isA<BoolType>();
+        check(blob.isEmpty).isTrue();
+      });
+
+      test('reads a MethodRefSig', () {
+        final blob = createBlob([
+          MethodDefFlags.hasThis,
+          ...CompressedInteger.encode(3), // ParamCount
+          // RetType
+          ELEMENT_TYPE_VALUETYPE,
+          ...CompressedInteger.encode(
+            TypeDefOrRef.typeRef(TypeRef(index, 0, 29)).encode(),
+          ),
+          //
+          ELEMENT_TYPE_U1, // Param
+          ELEMENT_TYPE_BOOLEAN, // Param
+          ELEMENT_TYPE_STRING, // Param
+        ]);
+        final sig = blob.readMemberRefSignature();
+        check(sig).isA<MethodRefSig>().equals(
+          const MethodRefSig(
+            flags: MethodRefFlags.hasThis,
+            returnType: NamedValueType(
+              TypeName('Windows.Win32.Foundation', 'HRESULT'),
+            ),
+            types: [Uint8Type(), BoolType(), StringType()],
+          ),
+        );
+        check(blob.isEmpty).isTrue();
+      });
+    });
+
     group('readMethodDefSig', () {
       test('method with no parameters and void return', () {
         final blob = createBlob([
           MethodDefFlags.default$,
-          0, // param count
-          ELEMENT_TYPE_VOID, // return type
+          ...CompressedInteger.encode(0), // ParamCount
+          ELEMENT_TYPE_VOID, // RetType
         ]);
         final sig = blob.readMethodDefSig();
         check(sig.flags).equals(MethodDefFlags.default$);
         check(sig.returnType).isA<VoidType>();
         check(sig.types).isEmpty();
+        check(blob.isEmpty).isTrue();
       });
 
       test('method with multiple parameters and HRESULT return', () {
         final blob = createBlob([
           MethodDefFlags.hasThis,
-          3, // param count
+          ...CompressedInteger.encode(3), // ParamCount
+          // RetType
           ELEMENT_TYPE_VALUETYPE,
           ...CompressedInteger.encode(
             TypeDefOrRef.typeRef(TypeRef(index, 0, 29)).encode(),
           ),
-          ELEMENT_TYPE_U1,
-          ELEMENT_TYPE_BOOLEAN,
-          ELEMENT_TYPE_STRING,
+          //
+          ELEMENT_TYPE_U1, // Param
+          ELEMENT_TYPE_BOOLEAN, // Param
+          ELEMENT_TYPE_STRING, // Param
         ]);
         final sig = blob.readMethodDefSig();
         check(sig.flags).equals(MethodDefFlags.hasThis);
@@ -90,6 +196,7 @@ void main() async {
         check(sig.types[0]).equals(const Uint8Type());
         check(sig.types[1]).equals(const BoolType());
         check(sig.types[2]).equals(const StringType());
+        check(blob.isEmpty).isTrue();
       });
     });
 
@@ -138,26 +245,29 @@ void main() async {
       test('property with no parameters and Uint32 return', () {
         final blob = createBlob([
           0x8, // PROPERTY
-          0, // param count
-          ELEMENT_TYPE_U4, // return type
+          ...CompressedInteger.encode(0), // ParamCount
+          ELEMENT_TYPE_U4, // RetType
         ]);
         final sig = blob.readPropertySig();
         check(sig.flags).equals(PropertyFlags.default$);
         check(sig.returnType).isA<Uint32Type>();
         check(sig.types).isEmpty();
+        check(blob.isEmpty).isTrue();
       });
 
       test('property with multiple parameters and HRESULT return', () {
         final blob = createBlob([
           0x8 | PropertyFlags.hasThis, // PROPERTY | HASTHIS
-          3, // param count
+          ...CompressedInteger.encode(3), // ParamCount
+          // RetType
           ELEMENT_TYPE_VALUETYPE,
           ...CompressedInteger.encode(
             TypeDefOrRef.typeRef(TypeRef(index, 0, 29)).encode(),
           ),
-          ELEMENT_TYPE_U1,
-          ELEMENT_TYPE_BOOLEAN,
-          ELEMENT_TYPE_STRING,
+          //
+          ELEMENT_TYPE_U1, // Param
+          ELEMENT_TYPE_BOOLEAN, // Param
+          ELEMENT_TYPE_STRING, // Param
         ]);
         final sig = blob.readPropertySig();
         check(sig.flags).equals(PropertyFlags.hasThis);
@@ -168,6 +278,42 @@ void main() async {
         check(sig.types[0]).equals(const Uint8Type());
         check(sig.types[1]).equals(const BoolType());
         check(sig.types[2]).equals(const StringType());
+        check(blob.isEmpty).isTrue();
+      });
+    });
+
+    group('readStandAloneSignature', () {
+      test('reads a LocalVarSig', () {
+        final blob = createBlob([
+          0x7, // LOCAL_SIG
+          ...CompressedInteger.encode(2), // Count
+          ELEMENT_TYPE_BOOLEAN, // Type
+          ELEMENT_TYPE_I4, // Type
+        ]);
+        final sig = blob.readStandAloneSignature();
+        check(sig).isA<LocalVarSig>().equals(
+          const LocalVarSig([BoolType(), Int32Type()]),
+        );
+        check(blob.isEmpty).isTrue();
+      });
+
+      test('reads a StandAloneMethodSig', () {
+        final blob = createBlob([
+          StandAloneMethodFlags.hasThis | StandAloneMethodFlags.c,
+          ...CompressedInteger.encode(2), // ParamCount
+          ELEMENT_TYPE_I4, // RetType
+          ELEMENT_TYPE_BOOLEAN, // Param
+          ELEMENT_TYPE_I4, // Param
+        ]);
+        final sig = blob.readStandAloneSignature();
+        check(sig).isA<StandAloneMethodSig>().equals(
+          StandAloneMethodSig(
+            flags: StandAloneMethodFlags.hasThis | StandAloneMethodFlags.c,
+            returnType: const Int32Type(),
+            types: [const BoolType(), const Int32Type()],
+          ),
+        );
+        check(blob.isEmpty).isTrue();
       });
     });
 
