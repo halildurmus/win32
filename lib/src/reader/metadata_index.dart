@@ -1,6 +1,5 @@
 import 'dart:collection';
 
-import '../common.dart';
 import '../exception.dart';
 import 'metadata_reader.dart';
 import 'metadata_table.dart';
@@ -76,10 +75,9 @@ final class MetadataIndex {
         if (namespace.isEmpty) continue;
 
         final name = reader.readString(typeDefIndex, typeDefTable, 1);
-        final trimmedName = trimTick(name);
         namespaceToTypeMap
             .putIfAbsent(namespace, HashMap.new)
-            .putIfAbsent(trimmedName, () => [])
+            .putIfAbsent(name, () => [])
             .add(_ReaderAndTypeDefIndex(readerIndex, typeDefIndex));
       }
 

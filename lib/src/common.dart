@@ -252,12 +252,3 @@ bool listEqual<T>(List<T> a, List<T> b) {
   }
   return true;
 }
-
-/// Removes a trailing tick and digits from a [name], if present.
-///
-/// For example, a name like "IIterable`1" becomes "IIterable".
-String trimTick(String name) {
-  final indexOfTick = name.indexOf('`');
-  if (indexOfTick == -1) return name;
-  return name.substring(0, name.indexOf('`'));
-}

@@ -11,10 +11,10 @@ void main() async {
   );
 
   group('GenericParam', () {
-    test('IAsyncOperationWithProgress<TResult,TProgress>', () {
+    test('IAsyncOperationWithProgress<TResult, TProgress>', () {
       final typeDef = index.findSingleType(
         'Windows.Foundation',
-        'IAsyncOperationWithProgress',
+        'IAsyncOperationWithProgress`2',
       );
       final generics = typeDef.generics.toList();
       check(generics.length).equals(2);

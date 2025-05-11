@@ -453,7 +453,7 @@ void main() async {
       test('ELEMENT_TYPE_GENERICINST', () {
         final iMap = index.findSingleType(
           'Windows.Foundation.Collections',
-          'IMap',
+          'IMap`2',
         );
         final blob = createBlob(readerIndex: 1, [
           ELEMENT_TYPE_GENERICINST,
