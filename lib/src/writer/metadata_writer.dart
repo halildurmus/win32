@@ -32,12 +32,15 @@ import 'table/assembly_ref.dart';
 import 'table/class_layout.dart';
 import 'table/constant.dart';
 import 'table/custom_attribute.dart';
+import 'table/decl_security.dart';
 import 'table/event.dart';
 import 'table/event_map.dart';
+import 'table/exported_type.dart';
 import 'table/field.dart';
 import 'table/field_layout.dart';
 import 'table/field_marshal.dart';
 import 'table/field_rva.dart';
+import 'table/file.dart';
 import 'table/generic_param.dart';
 import 'table/generic_param_constraint.dart';
 import 'table/impl_map.dart';
@@ -119,6 +122,7 @@ final class MetadataWriter {
       _customAttributes = SplayTreeMap(
         (a, b) => a.encode().compareTo(b.encode()),
       ),
+      _declSecurity = SplayTreeMap((a, b) => a.encode().compareTo(b.encode())),
       _fieldLayouts = SplayTreeMap((a, b) => a.index.compareTo(b.index)),
       _fieldMarshals = SplayTreeMap((a, b) => a.encode().compareTo(b.encode())),
       _fieldRVAs = SplayTreeMap((a, b) => a.index.compareTo(b.index)),
@@ -148,6 +152,7 @@ final class MetadataWriter {
   final SplayTreeMap<HasConstant, Constant> _constants;
   final SplayTreeMap<HasCustomAttribute, List<CustomAttribute>>
   _customAttributes;
+  final SplayTreeMap<HasDeclSecurity, DeclSecurity> _declSecurity;
   final SplayTreeMap<FieldIndex, FieldLayout> _fieldLayouts;
   final SplayTreeMap<HasFieldMarshal, FieldMarshal> _fieldMarshals;
   final SplayTreeMap<FieldIndex, FieldRVA> _fieldRVAs;
@@ -255,7 +260,18 @@ final class MetadataWriter {
         );
   }
 
-  // TODO(halildurmus): writeDeclSecurity
+  /// Writes a `DeclSecurity` row.
+  void writeDeclSecurity({
+    required SecurityAction action,
+    required HasDeclSecurity parent,
+    required Uint8List permissionSet,
+  }) {
+    _declSecurity[parent] = DeclSecurity(
+      action: action,
+      parent: parent,
+      permissionSet: _blobHeap.insert(permissionSet),
+    );
+  }
 
   /// Writes an `Event` row, returning the corresponding index.
   EventIndex writeEvent({
@@ -308,7 +324,29 @@ final class MetadataWriter {
     return index;
   }
 
-  // TODO(halildurmus): writeExportedType
+  /// Writes an `ExportedType` row, returning the corresponding index.
+  ExportedTypeIndex writeExportedType({
+    required TypeDefIndex typeDefId,
+    required String name,
+    required Implementation implementation,
+    String? namespace,
+    TypeAttributes flags = const TypeAttributes(0),
+  }) {
+    final table = _tableStream[MetadataTableId.exportedType];
+    final index = ExportedTypeIndex(table.length);
+    table.add(
+      ExportedType(
+        flags: flags,
+        typeDefId: typeDefId,
+        typeName: _stringHeap.insert(name),
+        typeNamespace: namespace == null
+            ? const StringIndex(0)
+            : _stringHeap.insert(namespace),
+        implementation: implementation,
+      ),
+    );
+    return index;
+  }
 
   /// Writes a `FieldLayout` row.
   void writeFieldLayout({required int offset, required FieldIndex field}) {
@@ -332,7 +370,23 @@ final class MetadataWriter {
     _fieldRVAs[field] = FieldRVA(field: field, rva: rva);
   }
 
-  // TODO(halildurmus): writeFile
+  /// Writes a `File` row, returning the corresponding index.
+  FileIndex writeFile({
+    required FileAttributes flags,
+    required String name,
+    required Uint8List hashValue,
+  }) {
+    final table = _tableStream[MetadataTableId.file];
+    final index = FileIndex(table.length);
+    table.add(
+      File(
+        flags: flags,
+        name: _stringHeap.insert(name),
+        hashValue: _blobHeap.insert(hashValue),
+      ),
+    );
+    return index;
+  }
 
   /// Writes a `GenericParam` row.
   void writeGenericParam({
@@ -1075,6 +1129,7 @@ final class MetadataWriter {
     _tableStream.get<CustomAttribute>().addAll(
       _customAttributes.values.expand((e) => e),
     );
+    _tableStream.get<DeclSecurity>().addAll(_declSecurity.values);
     _tableStream.get<FieldLayout>().addAll(_fieldLayouts.values);
     _tableStream.get<FieldMarshal>().addAll(_fieldMarshals.values);
     _tableStream.get<FieldRVA>().addAll(_fieldRVAs.values);
@@ -1101,6 +1156,12 @@ final class MetadataWriter {
         _tableStream.get<CustomAttribute>().rows.map((r) => r.parent.encode()),
       ),
       'CustomAttribute.parent is not sorted',
+    );
+    assert(
+      isSorted(
+        _tableStream.get<DeclSecurity>().rows.map((r) => r.parent.encode()),
+      ),
+      'DeclSecurity.parent is not sorted',
     );
     assert(
       isSorted(_tableStream.get<FieldLayout>().rows.map((r) => r.field.index)),
