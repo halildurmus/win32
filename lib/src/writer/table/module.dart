@@ -20,12 +20,10 @@ import '../table_stream.dart';
 ///  - **EncId** (GUID Heap Index, reserved, MBZ)
 ///  - **EncBaseId** (GUID Heap Index, reserved, MBZ)
 final class Module implements Row {
-  const Module({
-    this.name = const StringIndex(0),
-    this.mvid = const GuidIndex(0),
-  }) : generation = 0,
-       encId = const GuidIndex(0),
-       encBaseId = const GuidIndex(0);
+  const Module({required this.name, required this.mvid})
+    : generation = 0,
+      encId = const GuidIndex(0),
+      encBaseId = const GuidIndex(0);
 
   final int generation;
   final StringIndex name;

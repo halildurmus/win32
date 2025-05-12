@@ -18,10 +18,7 @@ import '../table_stream.dart';
 ///  - **Parent** (HasFieldMarshal Coded Index)
 ///  - **NativeType** (Blob Heap Index)
 final class FieldMarshal implements Row {
-  const FieldMarshal({
-    required this.parent,
-    this.nativeType = const BlobIndex(0),
-  });
+  const FieldMarshal({required this.parent, required this.nativeType});
 
   final HasFieldMarshal parent;
   final BlobIndex nativeType;

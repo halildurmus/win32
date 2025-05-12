@@ -25,9 +25,9 @@ import 'index.dart';
 final class ExportedType implements Row {
   const ExportedType({
     required this.typeDefId,
+    required this.typeName,
     required this.implementation,
     this.flags = const TypeAttributes(0),
-    this.typeName = const StringIndex(0),
     this.typeNamespace = const StringIndex(0),
   });
 

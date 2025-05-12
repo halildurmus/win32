@@ -583,7 +583,7 @@ enum CharSet {
 }
 
 /// Represents the platform calling convention.
-enum CallingConvention {
+enum CallConv {
   /// Use the default platform calling convention.
   ///
   /// For example, on Windows the default is StdCall and on Windows CE .NET it

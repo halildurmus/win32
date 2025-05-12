@@ -23,7 +23,7 @@ final class DeclSecurity implements Row {
   const DeclSecurity({
     required this.action,
     required this.parent,
-    this.permissionSet = const BlobIndex(0),
+    required this.permissionSet,
   });
 
   final SecurityAction action;

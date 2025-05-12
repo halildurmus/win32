@@ -23,10 +23,10 @@ import 'index.dart';
 ///  - **ImportScope** (ModuleRef Table Index)
 final class ImplMap implements Row {
   const ImplMap({
-    required this.mappingFlags,
     required this.memberForwarded,
     required this.importName,
     required this.importScope,
+    this.mappingFlags = const PInvokeAttributes(0),
   });
 
   final PInvokeAttributes mappingFlags;

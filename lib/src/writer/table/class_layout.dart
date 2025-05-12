@@ -19,9 +19,9 @@ import 'index.dart';
 ///  - **Parent** (TypeDef Table Index)
 final class ClassLayout implements Row {
   const ClassLayout({
-    required this.packingSize,
-    required this.classSize,
     required this.parent,
+    this.packingSize = 0,
+    this.classSize = 0,
   });
 
   final int packingSize;

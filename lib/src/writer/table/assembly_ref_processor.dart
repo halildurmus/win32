@@ -17,10 +17,7 @@ import 'index.dart';
 ///  - **Processor** (4-byte value)
 ///  - **AssemblyRef** (AssemblyRef Table Index)
 final class AssemblyRefProcessor implements Row {
-  const AssemblyRefProcessor({
-    required this.processor,
-    required this.assemblyRef,
-  });
+  const AssemblyRefProcessor({required this.assemblyRef, this.processor = 0});
 
   final int processor;
   final AssemblyRefIndex assemblyRef;

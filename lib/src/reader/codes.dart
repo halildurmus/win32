@@ -3,7 +3,7 @@ import 'package:meta/meta.dart';
 import '../exception.dart';
 import '../member_ref_signature.dart';
 import '../metadata_type.dart';
-import '../method_def_sig.dart';
+import '../method_signature.dart';
 import 'has_custom_attributes.dart';
 import 'metadata_index.dart';
 import 'table/assembly.dart';
@@ -119,7 +119,7 @@ final class CustomAttributeTypeMethodDef extends CustomAttributeType {
   @override
   String get name => value.name;
 
-  MethodDefSig signature({List<MetadataType> generics = const []}) =>
+  MethodSignature signature({List<MetadataType> generics = const []}) =>
       value.signature(generics: generics);
 
   @override

@@ -26,6 +26,7 @@ import '../table_stream.dart';
 ///  - **Culture** (String Heap Index)
 final class Assembly implements Row {
   const Assembly({
+    required this.name,
     this.hashAlgId = AssemblyHashAlgorithm.none,
     this.majorVersion = 0,
     this.minorVersion = 0,
@@ -33,7 +34,6 @@ final class Assembly implements Row {
     this.revisionNumber = 0,
     this.flags = const AssemblyFlags(0),
     this.publicKey = const BlobIndex(0),
-    this.name = const StringIndex(0),
     this.culture = const StringIndex(0),
   });
 

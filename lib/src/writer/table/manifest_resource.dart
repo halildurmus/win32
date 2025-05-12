@@ -23,9 +23,9 @@ import '../table_stream.dart';
 final class ManifestResource implements Row {
   const ManifestResource({
     required this.offset,
+    required this.name,
     required this.implementation,
     this.flags = const ManifestResourceAttributes(0),
-    this.name = const StringIndex(0),
   });
 
   final int offset;

@@ -16,7 +16,7 @@ import '../table_stream.dart';
 /// The `StandAloneSig` table has the following columns:
 ///  - **Signature** (Blob Heap Index)
 final class StandAloneSig implements Row {
-  const StandAloneSig({this.signature = const BlobIndex(0)});
+  const StandAloneSig({required this.signature});
 
   final BlobIndex signature;
 

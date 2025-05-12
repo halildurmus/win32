@@ -21,7 +21,8 @@ void main() async {
       check(mapChanged.name).equals('MapChanged');
       check(mapChanged.add.name).equals('add_MapChanged');
       check(mapChanged.add.signature()).equals(
-        const MethodDefSig(
+        const MethodSignature(
+          callingConvention: CallingConvention.HASTHIS,
           returnType: NamedValueType(
             TypeName('Windows.Foundation', 'EventRegistrationToken'),
           ),
@@ -38,7 +39,8 @@ void main() async {
       );
       check(mapChanged.remove.name).equals('remove_MapChanged');
       check(mapChanged.remove.signature()).equals(
-        const MethodDefSig(
+        const MethodSignature(
+          callingConvention: CallingConvention.HASTHIS,
           types: [
             NamedValueType(
               TypeName('Windows.Foundation', 'EventRegistrationToken'),

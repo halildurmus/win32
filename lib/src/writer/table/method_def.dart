@@ -25,11 +25,11 @@ import 'index.dart';
 final class MethodDef implements Row {
   const MethodDef({
     required this.rva,
-    required this.implFlags,
-    required this.flags,
     required this.name,
     required this.signature,
     required this.paramList,
+    this.implFlags = const MethodImplAttributes(0),
+    this.flags = const MethodAttributes(0),
   });
 
   final int rva;

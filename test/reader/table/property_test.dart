@@ -21,7 +21,7 @@ void main() async {
       check(size.name).equals('Size');
       check(size.signature()).equals(
         const PropertySig(
-          flags: PropertyFlags.hasThis,
+          callingConvention: CallingConvention.HASTHIS,
           returnType: Uint32Type(),
         ),
       );
@@ -30,9 +30,12 @@ void main() async {
       final getter = size.getter;
       check(getter).isNotNull();
       check(getter!.name).equals('get_Size');
-      check(
-        getter.signature(),
-      ).equals(const MethodDefSig(returnType: Uint32Type()));
+      check(getter.signature()).equals(
+        const MethodSignature(
+          callingConvention: CallingConvention.HASTHIS,
+          returnType: Uint32Type(),
+        ),
+      );
       check(size.setter).isNull();
       check(size.parent.namespace).equals('Windows.Foundation.Collections');
       check(size.parent.name).equals('StringMap');

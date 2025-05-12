@@ -1,5 +1,7 @@
+import 'bindings.dart';
 import 'common.dart';
 import 'metadata_type.dart';
+import 'method_signature.dart';
 
 /// Represents a signature for a standalone method or local variable within
 /// metadata.
@@ -11,10 +13,10 @@ sealed class StandAloneSignature {
   const factory StandAloneSignature.localVar(List<MetadataType> locals) =
       LocalVarSig;
 
-  /// Creates a [StandAloneMethodSig] with the given [flags], [returnType], and
-  /// [types].
+  /// Creates a [StandAloneMethodSig] with the given [callingConvention],
+  /// [returnType], and [types].
   const factory StandAloneSignature.method({
-    StandAloneMethodFlags flags,
+    CallingConvention callingConvention,
     MetadataType returnType,
     List<MetadataType> types,
   }) = StandAloneMethodSig;
@@ -45,12 +47,13 @@ final class LocalVarSig implements StandAloneSignature {
 }
 
 /// Represents the signature of a standalone method within metadata.
-final class StandAloneMethodSig implements StandAloneSignature {
-  /// Creates a [StandAloneMethodSig] with the given [flags], [returnType], and
-  /// [types].
+final class StandAloneMethodSig extends MethodSignature
+    implements StandAloneSignature {
+  /// Creates a [StandAloneMethodSig] with the given [callingConvention],
+  /// [returnType], and [types].
   ///
-  /// If [flags] is not specified, it defaults to
-  /// [StandAloneMethodFlags.default$], indicating a method with default calling
+  /// If [callingConvention] is not specified, it defaults to
+  /// [CallingConvention.DEFAULT], indicating a method with default calling
   /// convention.
   ///
   /// If [returnType] is not specified, it defaults to [VoidType], representing
@@ -59,72 +62,26 @@ final class StandAloneMethodSig implements StandAloneSignature {
   /// If [types] is not specified, it defaults to an empty list, indicating that
   /// the method has no parameters.
   const StandAloneMethodSig({
-    this.flags = StandAloneMethodFlags.default$,
-    this.returnType = const VoidType(),
-    this.types = const [],
+    super.callingConvention = CallingConvention.DEFAULT,
+    super.returnType = const VoidType(),
+    super.types = const [],
   });
-
-  /// The method's calling convention and characteristics.
-  final StandAloneMethodFlags flags;
-
-  /// The return type of the method.
-  final MetadataType returnType;
-
-  /// The list of parameter types for the method.
-  ///
-  /// Parameters are represented in the order they are declared.
-  final List<MetadataType> types;
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is StandAloneMethodSig &&
-          flags == other.flags &&
+          callingConvention == other.callingConvention &&
           returnType == other.returnType &&
           listEqual(types, other.types);
 
   @override
-  int get hashCode => Object.hash(flags, returnType, Object.hashAll(types));
+  int get hashCode =>
+      Object.hash(callingConvention, returnType, Object.hashAll(types));
 
   @override
   String toString() =>
-      'StandAloneMethodSig(returnType: $returnType, types: $types)';
-}
-
-/// Provides information about the calling convention and characteristics of
-/// a standalone method.
-extension type const StandAloneMethodFlags(int _) implements int {
-  /// The method is associated with an instance (i.e., `this` is passed
-  /// implicitly).
-  static const hasThis = StandAloneMethodFlags(0x20);
-
-  /// The method is explicitly defined to expect a `this` pointer.
-  static const explicitThis = StandAloneMethodFlags(0x40);
-
-  /// The default method calling convention (no flags set).
-  static const default$ = StandAloneMethodFlags(0x00);
-
-  /// The method supports a variable number of arguments.
-  static const varArg = StandAloneMethodFlags(0x05);
-
-  /// The method follows the C calling convention.
-  static const c = StandAloneMethodFlags(0x1);
-
-  /// The method follows the `stdcall` calling convention.
-  static const stdcall = StandAloneMethodFlags(0x2);
-
-  /// The method follows the `thiscall` calling convention.
-  static const thiscall = StandAloneMethodFlags(0x3);
-
-  /// The method follows the `fastcall` calling convention.
-  static const fastcall = StandAloneMethodFlags(0x4);
-
-  /// Whether this instance has all the bit fields specified in [other].
-  bool has(StandAloneMethodFlags other) => this & other == other;
-
-  StandAloneMethodFlags operator |(StandAloneMethodFlags other) =>
-      StandAloneMethodFlags(_ | other._);
-
-  StandAloneMethodFlags operator &(StandAloneMethodFlags other) =>
-      StandAloneMethodFlags(_ & other._);
+      'StandAloneMethodSig('
+      'callingConvention: 0x${callingConvention.toRadixString(16)}, '
+      'returnType: $returnType, types: $types)';
 }

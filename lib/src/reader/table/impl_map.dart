@@ -36,13 +36,12 @@ final class ImplMap extends Row {
   };
 
   /// The calling convention used by the unmanaged function.
-  late final callingConvention = switch (flags &
-      PInvokeAttributes.callConvMask) {
-    PInvokeAttributes.callConvPlatformApi => CallingConvention.platformApi,
-    PInvokeAttributes.callConvCdecl => CallingConvention.cdecl,
-    PInvokeAttributes.callConvStdCall => CallingConvention.stdcall,
-    PInvokeAttributes.callConvThisCall => CallingConvention.thiscall,
-    PInvokeAttributes.callConvFastCall => CallingConvention.fastcall,
+  late final callConv = switch (flags & PInvokeAttributes.callConvMask) {
+    PInvokeAttributes.callConvPlatformApi => CallConv.platformApi,
+    PInvokeAttributes.callConvCdecl => CallConv.cdecl,
+    PInvokeAttributes.callConvStdCall => CallConv.stdcall,
+    PInvokeAttributes.callConvThisCall => CallConv.thiscall,
+    PInvokeAttributes.callConvFastCall => CallConv.fastcall,
     _ => throw WinmdException(
       'Unknown calling convention: ${flags & PInvokeAttributes.callConvMask}',
     ),

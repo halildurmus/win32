@@ -6,7 +6,7 @@ import 'attributes.dart';
 import 'exception.dart';
 import 'member_ref_signature.dart';
 import 'metadata_type.dart';
-import 'method_def_sig.dart';
+import 'method_signature.dart';
 import 'reader/codes.dart' as reader;
 import 'reader/has_custom_attributes.dart';
 import 'reader/metadata_index.dart';
@@ -16,6 +16,8 @@ import 'reader/table/field.dart';
 import 'reader/table/method_def.dart';
 import 'reader/table/method_impl.dart';
 import 'reader/table/type_def.dart';
+import 'reader/table/type_ref.dart';
+import 'reader/table/type_spec.dart';
 import 'type_name.dart';
 import 'writer/codes.dart';
 import 'writer/metadata_writer.dart';
@@ -198,19 +200,31 @@ void _writeType(
 }
 
 @pragma('vm:prefer-inline')
-MemberRefSignature _buildMemberRefSignature(MethodRefSig sig) =>
+MemberRefParent _buildMemberRefParent(
+  MetadataWriter writer,
+  TypeSpec typeSpec,
+) {
+  final type = typeSpec.type();
+  if (type is! NamedType) {
+    throw WinmdException('Expected NamedType, got: $type');
+  }
+
+  return MemberRefParent.typeSpec(
+    writer.writeTypeSpec(
+      namespace: type.typeName.namespace,
+      name: type.typeName.name,
+      generics: type.typeName.generics,
+    ),
+  );
+}
+
+@pragma('vm:prefer-inline')
+MemberRefSignature _buildMemberRefSignature(MethodSignature sig) =>
     MemberRefSignature.method(
-      flags: MethodRefFlags(sig.flags),
+      callingConvention: sig.callingConvention,
       returnType: sig.returnType,
       types: sig.types,
     );
-
-@pragma('vm:prefer-inline')
-MethodRefSig _buildMethodRefSig(MethodDefSig sig) => MethodRefSig(
-  flags: MethodRefFlags(sig.flags),
-  returnType: sig.returnType,
-  types: sig.types,
-);
 
 @pragma('vm:prefer-inline')
 TypeDefOrRef _resolveBaseType(MetadataWriter writer, TypeDef typeDef) =>
@@ -224,12 +238,10 @@ TypeDefOrRef _resolveBaseType(MetadataWriter writer, TypeDef typeDef) =>
 
 @pragma('vm:prefer-inline')
 MetadataType? _resolveEventType(Event event) => switch (event.eventType) {
-  reader.TypeDefOrRefTypeDef(:final value) => NamedClassType(
-    TypeName(value.namespace, value.name),
-  ),
-  reader.TypeDefOrRefTypeRef(:final value) => NamedClassType(
-    TypeName(value.namespace, value.name),
-  ),
+  reader.TypeDefOrRefTypeDef(value: TypeDef(:final namespace, :final name)) =>
+    NamedClassType(TypeName(namespace, name)),
+  reader.TypeDefOrRefTypeRef(value: TypeRef(:final namespace, :final name)) =>
+    NamedClassType(TypeName(namespace, name)),
   reader.TypeDefOrRefTypeSpec(:final value) => value.type(),
   _ => null,
 };
@@ -239,18 +251,21 @@ MemberRefParent _resolveMemberRefParent(
   MetadataWriter writer,
   reader.MemberRefParent parent,
 ) => switch (parent) {
-  reader.MemberRefParentTypeDef(:final value) => MemberRefParent.typeDef(
-    writer.writeTypeDef(namespace: value.namespace, name: value.name),
-  ),
-  reader.MemberRefParentTypeRef(:final value) => MemberRefParent.typeRef(
-    writer.writeTypeRef(namespace: value.namespace, name: value.name),
-  ),
-  reader.MemberRefParentTypeSpec(:final value) => MemberRefParent.typeSpec(
-    writer.writeTypeSpec(
-      namespace: (value.type() as NamedType).typeName.namespace,
-      name: (value.type() as NamedType).typeName.name,
-      generics: (value.type() as NamedType).typeName.generics,
+  reader.MemberRefParentTypeDef(
+    value: TypeDef(:final namespace, :final name),
+  ) =>
+    MemberRefParent.typeDef(
+      writer.writeTypeDef(namespace: namespace, name: name),
     ),
+  reader.MemberRefParentTypeRef(
+    value: TypeRef(:final namespace, :final name),
+  ) =>
+    MemberRefParent.typeRef(
+      writer.writeTypeRef(namespace: namespace, name: name),
+    ),
+  reader.MemberRefParentTypeSpec(:final value) => _buildMemberRefParent(
+    writer,
+    value,
   ),
   _ => throw WinmdException('Unsupported MemberRefParent type: $parent'),
 };
@@ -463,7 +478,7 @@ MemberRefIndex _writeMethodDeclaration(
           name: value.parent.name,
         ),
       ),
-      _buildMemberRefSignature(_buildMethodRefSig(value.signature())),
+      _buildMemberRefSignature(value.signature()),
     ),
   };
 

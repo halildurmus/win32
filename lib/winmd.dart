@@ -36,6 +36,7 @@ export 'src/attribute_arg.dart';
 export 'src/attributes.dart';
 export 'src/bindings.dart'
     show
+        CallingConvention,
         ELEMENT_TYPE_ARRAY,
         ELEMENT_TYPE_BOOLEAN,
         ELEMENT_TYPE_BYREF,
@@ -100,7 +101,7 @@ export 'src/marshalling_descriptor.dart';
 export 'src/member_ref_signature.dart';
 export 'src/metadata_type.dart';
 export 'src/metadata_value.dart';
-export 'src/method_def_sig.dart';
+export 'src/method_signature.dart';
 export 'src/property_sig.dart';
 export 'src/reader/blob.dart';
 export 'src/reader/codes.dart'

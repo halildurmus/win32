@@ -21,9 +21,9 @@ import '../table_stream.dart';
 ///  - **EventType** (TypeDefOrRef Coded Index)
 final class Event implements Row {
   const Event({
-    required this.eventType,
+    required this.name,
     this.eventFlags = const EventAttributes(0),
-    this.name = const StringIndex(0),
+    this.eventType = TypeDefOrRef.none,
   });
 
   final EventAttributes eventFlags;

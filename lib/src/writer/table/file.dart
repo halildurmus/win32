@@ -20,9 +20,9 @@ import '../table_stream.dart';
 ///  - **HashValue** (Blob Heap Index)
 final class File implements Row {
   const File({
+    required this.name,
+    required this.hashValue,
     this.flags = const FileAttributes(0),
-    this.name = const StringIndex(0),
-    this.hashValue = const BlobIndex(0),
   });
 
   final FileAttributes flags;

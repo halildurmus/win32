@@ -15,7 +15,7 @@ import '../marshalling_descriptor.dart';
 import '../member_ref_signature.dart';
 import '../metadata_type.dart';
 import '../metadata_value.dart';
-import '../method_def_sig.dart';
+import '../method_signature.dart';
 import '../property_sig.dart';
 import '../stand_alone_signature.dart';
 import '../type_name.dart';
@@ -63,8 +63,13 @@ import 'table/type_ref.dart';
 import 'table/type_spec.dart';
 import 'table_stream.dart';
 
+/// Provides functionality to write a valid `.winmd` or ECMA-335 metadata file,
+/// including metadata tables, heaps, and system-level assembly references.
 final class MetadataWriter {
-  /// Creates a minimal ECMA-335 file representation.
+  /// Constructs a new [MetadataWriter] instance with the specified assembly
+  /// and module information.
+  ///
+  /// If [mvid] is omitted, a new GUID is generated for the module.
   factory MetadataWriter({
     required String name,
     int majorVersion = 0xFF,
@@ -279,7 +284,7 @@ final class MetadataWriter {
     MetadataType? eventType,
     EventAttributes eventFlags = const EventAttributes(0),
   }) {
-    if (eventType is! NamedType) {
+    if (eventType != null && eventType is! NamedType) {
       throw WinmdException('Expected type to be a NamedType, got $eventType.');
     }
 
@@ -289,7 +294,7 @@ final class MetadataWriter {
       Event(
         eventFlags: eventFlags,
         name: _stringHeap.insert(name),
-        eventType: _toTypeDefOrRef(eventType),
+        eventType: _toTypeDefOrRef(eventType as NamedType?),
       ),
     );
     return index;
@@ -358,10 +363,9 @@ final class MetadataWriter {
     required HasFieldMarshal parent,
     required MarshallingDescriptor descriptor,
   }) {
-    final nativeType = _writeMarshallingDescriptor(descriptor);
     _fieldMarshals[parent] = FieldMarshal(
       parent: parent,
-      nativeType: _blobHeap.insert(nativeType),
+      nativeType: _blobHeap.insert(_writeMarshallingDescriptor(descriptor)),
     );
   }
 
@@ -372,9 +376,9 @@ final class MetadataWriter {
 
   /// Writes a `File` row, returning the corresponding index.
   FileIndex writeFile({
-    required FileAttributes flags,
     required String name,
     required Uint8List hashValue,
+    FileAttributes flags = const FileAttributes(0),
   }) {
     final table = _tableStream[MetadataTableId.file];
     final index = FileIndex(table.length);
@@ -480,15 +484,16 @@ final class MetadataWriter {
   /// Writes a `MethodDef` row, returning the corresponding index.
   MethodDefIndex writeMethodDef({
     required String name,
-    MethodDefSig signature = const MethodDefSig(),
-    MethodAttributes flags = const MethodAttributes(0),
+    int rva = 0,
     MethodImplAttributes implFlags = const MethodImplAttributes(0),
+    MethodAttributes flags = const MethodAttributes(0),
+    MethodSignature signature = const MethodSignature(),
   }) {
     final table = _tableStream[MetadataTableId.methodDef];
     final index = MethodDefIndex(table.length);
     table.add(
       MethodDef(
-        rva: 0,
+        rva: rva,
         implFlags: implFlags,
         flags: flags,
         name: _stringHeap.insert(name),
@@ -543,9 +548,8 @@ final class MetadataWriter {
     );
 
     final buffer = BytesBuilder(copy: false)
-      ..addByte(ELEMENT_TYPE_GENERICINST)
+      ..addByte(CallingConvention.GENERICINST)
       ..add(CompressedInteger.encode(generics.length));
-
     for (final genericType in generics) {
       _encodeType(genericType, buffer);
     }
@@ -909,7 +913,7 @@ final class MetadataWriter {
   /// Encodes the [signature] and stores it in the blob heap, returning the blob
   /// index.
   BlobIndex _writeFieldSig(FieldSig signature) {
-    final buffer = BytesBuilder(copy: false)..addByte(0x6 /* FIELD */);
+    final buffer = BytesBuilder(copy: false)..addByte(CallingConvention.FIELD);
     _encodeType(signature.type, buffer);
     return _blobHeap.insert(buffer.takeBytes());
   }
@@ -952,12 +956,16 @@ final class MetadataWriter {
 
     switch (signature) {
       case FieldSig(:final type):
-        buffer.addByte(0x6 /* FIELD */);
+        buffer.addByte(CallingConvention.FIELD);
         _encodeType(type, buffer);
 
-      case MethodRefSig(:final flags, :final returnType, :final types):
+      case MethodRefSig(
+        :final callingConvention,
+        :final returnType,
+        :final types,
+      ):
         buffer
-          ..addByte(flags)
+          ..addByte(callingConvention)
           ..add(CompressedInteger.encode(types.length));
         _encodeType(returnType, buffer);
         for (final type in types) {
@@ -970,14 +978,21 @@ final class MetadataWriter {
 
   /// Encodes the [signature] and stores it in the blob heap, returning the blob
   /// index.
-  BlobIndex _writeMethodDefSig(MethodDefSig signature) {
-    final buffer = BytesBuilder(copy: false)
-      ..addByte(signature.flags)
-      ..add(CompressedInteger.encode(signature.types.length));
-    _encodeType(signature.returnType, buffer);
-    for (final type in signature.types) {
+  BlobIndex _writeMethodDefSig(MethodSignature signature) {
+    final MethodSignature(:callingConvention, :returnType, :types) = signature;
+    final buffer = BytesBuilder(copy: false)..addByte(callingConvention);
+
+    if (callingConvention.has(CallingConvention.GENERIC)) {
+      final genericCount = types.whereType<GenericParameterType>().length;
+      buffer.add(CompressedInteger.encode(genericCount));
+    }
+
+    buffer.add(CompressedInteger.encode(types.length));
+    _encodeType(returnType, buffer);
+    for (final type in types) {
       _encodeType(type, buffer);
     }
+
     return _blobHeap.insert(buffer.takeBytes());
   }
 
@@ -1009,10 +1024,10 @@ final class MetadataWriter {
   /// index.
   BlobIndex _writePropertySig(PropertySig signature) {
     final buffer = BytesBuilder(copy: false);
-    if (signature.flags == PropertyFlags.default$) {
-      buffer.addByte(0x8 /* PROPERTY */);
-    } else if (signature.flags == PropertyFlags.hasThis) {
-      buffer.addByte(0x8 /* PROPERTY */ | PropertyFlags.hasThis);
+    if (signature.callingConvention == CallingConvention.DEFAULT) {
+      buffer.addByte(CallingConvention.PROPERTY);
+    } else if (signature.callingConvention == CallingConvention.HASTHIS) {
+      buffer.addByte(CallingConvention.PROPERTY | CallingConvention.HASTHIS);
     }
     buffer.add(CompressedInteger.encode(signature.types.length));
     _encodeType(signature.returnType, buffer);
@@ -1030,15 +1045,19 @@ final class MetadataWriter {
     switch (signature) {
       case LocalVarSig(:final locals):
         buffer
-          ..addByte(0x7 /* LOCAL_SIG */)
+          ..addByte(CallingConvention.LOCAL_SIG)
           ..add(CompressedInteger.encode(locals.length));
         for (final type in locals) {
           _encodeType(type, buffer);
         }
 
-      case StandAloneMethodSig(:final flags, :final returnType, :final types):
+      case StandAloneMethodSig(
+        :final callingConvention,
+        :final returnType,
+        :final types,
+      ):
         buffer
-          ..addByte(flags)
+          ..addByte(callingConvention)
           ..add(CompressedInteger.encode(types.length));
         _encodeType(returnType, buffer);
         for (final type in types) {

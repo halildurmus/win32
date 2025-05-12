@@ -28,7 +28,7 @@ void main() async {
       check(memberRef.name).equals('.ctor');
       check(memberRef.signature()).equals(
         const MethodRefSig(
-          flags: MethodRefFlags.hasThis,
+          callingConvention: CallingConvention.HASTHIS,
           types: [
             NamedValueType(
               TypeName('Windows.Win32.Foundation.Metadata', 'Architecture'),

@@ -1,6 +1,5 @@
 import 'package:meta/meta.dart';
 
-import '../blob.dart';
 import '../codes.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
@@ -24,8 +23,8 @@ final class MethodSpec extends Row with HasCustomAttributes {
   /// The method that is being specialized.
   late final method = decode<MethodDefOrRef>(0);
 
-  /// The type instantiation data for a generic method.
-  Blob get instantiation => readBlob(1);
+  /// The list of instantiated types for a generic method.
+  late final instantiation = readBlob(1).readMethodSpecBlob();
 }
 
 @internal

@@ -9,13 +9,12 @@ void main() {
         'creates default marshalling descriptor with unspecified element type',
         () {
           const descriptor = MarshallingDescriptor.array(sizeParameterIndex: 1);
-          check(descriptor).isA<ArrayMarshallingDescriptor>()
-            ..has(
-              (it) => it.elementType,
-              'arrayElementType',
-            ).equals(NATIVE_TYPE_MAX)
-            ..has((it) => it.sizeParameterIndex, 'sizeParameterIndex').equals(1)
-            ..has((it) => it.numElements, 'numElements').isNull();
+          check(
+            descriptor,
+          ).equals(const ArrayMarshallingDescriptor(sizeParameterIndex: 1));
+          check(descriptor.toString()).equals(
+            'ArrayMarshallingDescriptor(elementType: 80, sizeParameterIndex: 1)',
+          );
         },
       );
 
@@ -25,13 +24,17 @@ void main() {
           sizeParameterIndex: 0,
           numElements: 10,
         );
-        check(descriptor).isA<ArrayMarshallingDescriptor>()
-          ..has(
-            (it) => it.elementType,
-            'arrayElementType',
-          ).equals(NATIVE_TYPE_U2)
-          ..has((it) => it.sizeParameterIndex, 'sizeParameterIndex').equals(0)
-          ..has((it) => it.numElements, 'numElements').equals(10);
+        check(descriptor).equals(
+          const ArrayMarshallingDescriptor(
+            elementType: NATIVE_TYPE_U2,
+            sizeParameterIndex: 0,
+            numElements: 10,
+          ),
+        );
+        check(descriptor.toString()).equals(
+          'ArrayMarshallingDescriptor(elementType: 6, sizeParameterIndex: 0, '
+          'numElements: 10)',
+        );
       });
 
       test('throws if sizeParameterIndex is 0 but numElements is missing', () {
@@ -66,8 +69,10 @@ void main() {
     group('simple', () {
       test('creates valid marshalling descriptor', () {
         const descriptor = MarshallingDescriptor.simple(NATIVE_TYPE_I4);
-        check(descriptor).isA<SimpleMarshallingDescriptor>();
-        check(descriptor.nativeType).equals(NATIVE_TYPE_I4);
+        check(
+          descriptor,
+        ).equals(const SimpleMarshallingDescriptor(NATIVE_TYPE_I4));
+        check(descriptor.toString()).equals('SimpleMarshallingDescriptor(7)');
       });
 
       test('throws on NATIVE_TYPE_ARRAY', () {

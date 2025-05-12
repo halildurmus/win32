@@ -317,20 +317,24 @@ void main() {
           MethodAttributes.newSlot |
           MethodAttributes.virtual;
 
-      var signature = const MethodDefSig(
-        returnType: Int32Type(),
-        types: [Int8Type(), Int16Type()],
-      );
       writer
-        ..writeMethodDef(flags: flags, name: 'One', signature: signature)
+        ..writeMethodDef(
+          flags: flags,
+          name: 'One',
+          signature: const MethodSignature(
+            returnType: Int32Type(),
+            types: [Int8Type(), Int16Type()],
+          ),
+        )
         ..writeParam(flags: ParamAttributes.in$, sequence: 1, name: 'i8')
-        ..writeParam(flags: ParamAttributes.in$, sequence: 2, name: 'i16');
+        ..writeParam(flags: ParamAttributes.in$, sequence: 2, name: 'i16')
+        ..writeMethodDef(
+          flags: flags,
+          name: 'Two',
+          signature: const MethodSignature(returnType: StringType()),
+        );
 
-      signature = const MethodDefSig(returnType: StringType());
-      writer.writeMethodDef(flags: flags, name: 'Two', signature: signature);
-
-      final bytes = writer.toBytes();
-      final reader = winmd.MetadataReader.read(bytes);
+      final reader = winmd.MetadataReader.read(writer.toBytes());
       final index = winmd.MetadataIndex.fromReader(reader);
 
       final typeDef = index.findSingleType('Namespace', 'Name');
@@ -338,18 +342,17 @@ void main() {
       check(methods.length).equals(2);
 
       check(methods[0].name).equals('One');
-      var sig = methods[0].signature();
-      check(sig.flags).equals(MethodDefFlags.hasThis);
-      check(sig.returnType).isA<Int32Type>();
-      check(sig.types.length).equals(2);
-      check(sig.types[0]).isA<Int8Type>();
-      check(sig.types[1]).isA<Int16Type>();
+      check(methods[0].signature()).equals(
+        const winmd.MethodSignature(
+          returnType: Int32Type(),
+          types: [Int8Type(), Int16Type()],
+        ),
+      );
 
       check(methods[1].name).equals('Two');
-      sig = methods[1].signature();
-      check(sig.flags).equals(MethodDefFlags.hasThis);
-      check(sig.returnType).isA<StringType>();
-      check(sig.types.length).equals(0);
+      check(
+        methods[1].signature(),
+      ).equals(const winmd.MethodSignature(returnType: StringType()));
     });
 
     test('Struct', () {

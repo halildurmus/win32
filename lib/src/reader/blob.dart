@@ -8,7 +8,7 @@ import '../exception.dart';
 import '../marshalling_descriptor.dart';
 import '../member_ref_signature.dart';
 import '../metadata_type.dart';
-import '../method_def_sig.dart';
+import '../method_signature.dart';
 import '../property_sig.dart';
 import '../stand_alone_signature.dart';
 import '../type_name.dart';
@@ -77,7 +77,7 @@ final class Blob {
   /// Reads a `FieldSig` from the blob as specified in ECMA-335 `§II.23.2.4`.
   FieldSig readFieldSig() {
     final firstByte = readUint8();
-    assert(firstByte == 0x6 /* FIELD */, 'Blob is not a FieldSig');
+    assert(firstByte == CallingConvention.FIELD, 'Blob is not a FieldSig');
     final type = readTypeSignature();
     return FieldSig(type);
   }
@@ -129,38 +129,66 @@ final class Blob {
     );
   }
 
+  /// Reads either a `FieldSig` or a `MethodRefSig` from the blob.
+  MemberRefSignature readMemberRefSignature({
+    List<MetadataType> generics = const [],
+  }) {
+    if (slice[0] == CallingConvention.FIELD) return readFieldSig();
+    return readMethodRefSig(generics: generics);
+  }
+
   /// Reads a `MethodDefSig` from the blob as specified in ECMA-335
   /// `§II.23.2.1`.
-  MethodDefSig readMethodDefSig({List<MetadataType> generics = const []}) {
-    final flags = MethodDefFlags(readUint8());
+  MethodSignature readMethodDefSig({List<MetadataType> generics = const []}) {
+    final callingConvention = CallingConvention(readUint8());
     final paramCount = readCompressed();
     final returnType = readTypeSignature(generics: generics);
     final types = <MetadataType>[];
     for (var i = 0; i < paramCount; i++) {
       types.add(readTypeSignature(generics: generics));
     }
-    return MethodDefSig(flags: flags, returnType: returnType, types: types);
+    return MethodSignature(
+      callingConvention: callingConvention,
+      returnType: returnType,
+      types: types,
+    );
   }
 
   /// Reads a `MethodRefSig` from the blob as specified in ECMA-335
   /// `§II.23.2.2`.
   MethodRefSig readMethodRefSig({List<MetadataType> generics = const []}) {
-    final flags = MethodRefFlags(readUint8());
+    final callingConvention = CallingConvention(readUint8());
     final paramCount = readCompressed();
     final returnType = readTypeSignature(generics: generics);
     final types = <MetadataType>[];
     for (var i = 0; i < paramCount; i++) {
       types.add(readTypeSignature(generics: generics));
     }
-    return MethodRefSig(flags: flags, returnType: returnType, types: types);
+    return MethodRefSig(
+      callingConvention: callingConvention,
+      returnType: returnType,
+      types: types,
+    );
   }
 
-  /// Reads either a `FieldSig` or a `MethodRefSig` from the blob.
-  MemberRefSignature readMemberRefSignature({
-    List<MetadataType> generics = const [],
-  }) {
-    if (slice[0] == 0x6 /* FIELD */ ) return readFieldSig();
-    return readMethodRefSig(generics: generics);
+  /// Reads a `MethodSpecBlob` from the blob as specified in ECMA-335
+  /// `§II.23.2.15`.
+  List<MetadataType> readMethodSpecBlob() {
+    final firstByte = readUint8();
+    assert(
+      firstByte == CallingConvention.GENERICINST,
+      'Blob is not a MethodSpecBlob',
+    );
+    final genArgCount = readCompressed();
+    assert(
+      genArgCount >= 1,
+      'MethodSpecBlob generic argument count must be >= 1.',
+    );
+    final types = <MetadataType>[];
+    for (var i = 0; i < genArgCount; i++) {
+      types.add(readTypeSignature());
+    }
+    return types;
   }
 
   /// Reads modifier tokens and decodes them into a list of [TypeDefOrRef].
@@ -185,8 +213,11 @@ final class Blob {
   /// Reads a `PropertySig` from the blob as specified in ECMA-335 `§II.23.2.5`.
   PropertySig readPropertySig({List<MetadataType> generics = const []}) {
     final firstByte = readUint8();
-    assert(firstByte & 0x08 != 0, 'Blob is not a PropertySig');
-    final hasThis = firstByte & 0x20 != 0;
+    assert(
+      firstByte & CallingConvention.PROPERTY != 0,
+      'Blob is not a PropertySig',
+    );
+    final hasThis = firstByte & CallingConvention.HASTHIS != 0;
     final paramCount = readCompressed();
     final returnType = readTypeSignature(generics: generics);
     final types = <MetadataType>[];
@@ -194,7 +225,9 @@ final class Blob {
       types.add(readTypeSignature(generics: generics));
     }
     return PropertySig(
-      flags: hasThis ? PropertyFlags.hasThis : PropertyFlags.default$,
+      callingConvention: hasThis
+          ? CallingConvention.HASTHIS
+          : CallingConvention.DEFAULT,
       returnType: returnType,
       types: types,
     );
@@ -204,9 +237,12 @@ final class Blob {
   StandAloneSignature readStandAloneSignature({
     List<MetadataType> generics = const [],
   }) {
-    if (slice[0] == 0x7 /* LOCAL_SIG */ ) {
+    if (slice[0] == CallingConvention.LOCAL_SIG) {
       final prolog = readUint8();
-      assert(prolog == 0x7, 'Blob is not a LocalVarSig');
+      assert(
+        prolog == CallingConvention.LOCAL_SIG,
+        'Blob is not a LocalVarSig',
+      );
       final count = readCompressed();
       final locals = <MetadataType>[];
       for (var i = 0; i < count; i++) {
@@ -215,7 +251,7 @@ final class Blob {
       return LocalVarSig(locals);
     }
 
-    final flags = StandAloneMethodFlags(readUint8());
+    final callingConvention = CallingConvention(readUint8());
     final paramCount = readCompressed();
     final returnType = readTypeSignature(generics: generics);
     final types = <MetadataType>[];
@@ -223,7 +259,7 @@ final class Blob {
       types.add(readTypeSignature(generics: generics));
     }
     return StandAloneMethodSig(
-      flags: flags,
+      callingConvention: callingConvention,
       returnType: returnType,
       types: types,
     );

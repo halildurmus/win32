@@ -7,6 +7,7 @@ void main() {
     test('default constructor', () {
       const sig = LocalVarSig([Int32Type(), StringType()]);
       check(sig.locals).deepEquals([const Int32Type(), const StringType()]);
+      check(sig.toString()).equals('LocalVarSig([Int32Type, StringType])');
     });
 
     test('equality: equal for same types', () {
@@ -25,19 +26,23 @@ void main() {
   group('StandAloneMethodSig', () {
     test('default constructor uses expected values', () {
       const sig = StandAloneMethodSig();
-      check(sig.flags).equals(StandAloneMethodFlags.default$);
+      check(sig.callingConvention).equals(CallingConvention.DEFAULT);
       check(sig.returnType).equals(const VoidType());
-      check(sig.types).deepEquals(const []);
+      check(sig.types).isEmpty();
+      check(sig.toString()).equals(
+        'StandAloneMethodSig(callingConvention: 0x0, returnType: VoidType, '
+        'types: [])',
+      );
     });
 
     test('equality: equal for same flags, return type, and types', () {
       const sig1 = StandAloneSignature.method(
-        flags: StandAloneMethodFlags.explicitThis,
+        callingConvention: CallingConvention.EXPLICITTHIS,
         returnType: BoolType(),
         types: [Int32Type()],
       );
       const sig2 = StandAloneSignature.method(
-        flags: StandAloneMethodFlags.explicitThis,
+        callingConvention: CallingConvention.EXPLICITTHIS,
         returnType: BoolType(),
         types: [Int32Type()],
       );
@@ -46,7 +51,9 @@ void main() {
 
     test('equality: instances with different flags are not equal', () {
       const sig1 = StandAloneMethodSig();
-      const sig2 = StandAloneMethodSig(flags: StandAloneMethodFlags.hasThis);
+      const sig2 = StandAloneMethodSig(
+        callingConvention: CallingConvention.HASTHIS,
+      );
       check(sig1).not((it) => it.equals(sig2));
     });
 

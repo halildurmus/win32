@@ -33,11 +33,72 @@ Pointer<GUID> get FOLDERID_LocalAppData {
   return guid;
 }
 
+/// Represents the calling convention used in method signatures, as defined by
+/// ECMA-335.
+///
+/// Calling conventions specify how arguments are passed to methods, how the
+/// return value is retrieved, and how the method invocation is represented in
+/// metadata.
+extension type const CallingConvention(int _) implements int {
+  /// Indicates a default calling convention.
+  static const DEFAULT = CallingConvention(0x00);
+
+  /// Indicates the `C` calling convention.
+  ///
+  /// Parameters are pushed from right to left and the caller cleans the stack.
+  static const C = CallingConvention(0x01);
+
+  /// Indicates the `stdcall` calling convention.
+  ///
+  /// Parameters are pushed from right to left and the callee cleans the stack.
+  static const STDCALL = CallingConvention(0x02);
+
+  /// Indicates the `thiscall` calling convention.
+  ///
+  /// Used for calling C++ instance methods; `this` is passed in ECX.
+  static const THISCALL = CallingConvention(0x03);
+
+  /// Indicates the `fastcall` calling convention.
+  ///
+  /// Arguments are passed via registers when possible.
+  static const FASTCALL = CallingConvention(0x04);
+
+  /// Indicates that the method takes a variable number of parameters.
+  static const VARARG = CallingConvention(0x05);
+
+  /// Indicates that the call is to a field.
+  static const FIELD = CallingConvention(0x06);
+
+  /// Indicates that the call is to a local method.
+  static const LOCAL_SIG = CallingConvention(0x07);
+
+  /// Indicates that the call is to a property.
+  static const PROPERTY = CallingConvention(0x08);
+
+  /// Indicates a generic method instantiation.
+  static const GENERICINST = CallingConvention(0x0a);
+
+  /// Indicates a generic method signature with an explicit number of type
+  /// arguments.
+  static const GENERIC = CallingConvention(0x10);
+
+  /// Indicates that the top bit describes a `this` parameter.
+  static const HASTHIS = CallingConvention(0x20);
+
+  /// Indicates that a `this` parameter is explicitly described in the
+  /// signature.
+  static const EXPLICITTHIS = CallingConvention(0x40);
+
+  /// Whether this instance has all the bit fields specified in [other].
+  bool has(CallingConvention other) => this & other == other;
+
+  CallingConvention operator |(CallingConvention other) =>
+      CallingConvention(_ | other._);
+}
+
 /// Specifies a common language runtime Type, a type modifier, or information
 /// about a type in a metadata type signature.
-extension type const ElementType(int _) implements int {
-  ElementType operator |(ElementType other) => ElementType(_ | other._);
-}
+extension type const ElementType(int _) implements int {}
 
 ///	Used internally.
 const ELEMENT_TYPE_END = ElementType(0);

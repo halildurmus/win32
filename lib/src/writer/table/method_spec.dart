@@ -18,10 +18,7 @@ import '../table_stream.dart';
 ///  - **Method** (MethodDefOrRef Coded Index)
 ///  - **Instantiation** (Blob Heap Index)
 final class MethodSpec implements Row {
-  const MethodSpec({
-    required this.method,
-    this.instantiation = const BlobIndex(0),
-  });
+  const MethodSpec({required this.method, required this.instantiation});
 
   final MethodDefOrRef method;
   final BlobIndex instantiation;

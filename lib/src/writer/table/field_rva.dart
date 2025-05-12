@@ -17,7 +17,7 @@ import 'index.dart';
 ///  - **RVA** (4-byte constant)
 ///  - **Field** (Field Table Index)
 final class FieldRVA implements Row {
-  const FieldRVA({required this.field, this.rva = 0});
+  const FieldRVA({required this.rva, required this.field});
 
   final int rva;
   final FieldIndex field;

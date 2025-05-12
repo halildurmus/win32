@@ -23,9 +23,9 @@ import '../table_stream.dart';
 final class GenericParam implements Row {
   const GenericParam({
     required this.number,
-    required this.flags,
     required this.owner,
     required this.name,
+    this.flags = const GenericParamAttributes(0),
   });
 
   final int number;

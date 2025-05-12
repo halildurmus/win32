@@ -30,8 +30,7 @@ void main() async {
       check(method.vTableLayout).equals(VTableLayout.reuseSlot);
       check(method.name).equals('TraceSynchronousWorkCompletion');
       check(method.signature()).equals(
-        const MethodDefSig(
-          flags: MethodDefFlags.default$,
+        const MethodSignature(
           types: [
             NamedValueType(
               TypeName('Windows.Foundation.Diagnostics', 'CausalityTraceLevel'),
@@ -86,7 +85,8 @@ void main() async {
       check(method.vTableLayout).equals(VTableLayout.newSlot);
       check(method.name).equals('TraceSynchronousWorkCompletion');
       check(method.signature()).equals(
-        const MethodDefSig(
+        const MethodSignature(
+          callingConvention: CallingConvention.HASTHIS,
           types: [
             NamedValueType(
               TypeName('Windows.Foundation.Diagnostics', 'CausalityTraceLevel'),
@@ -139,8 +139,7 @@ void main() async {
       check(method.vTableLayout).equals(VTableLayout.reuseSlot);
       check(method.name).equals('DoDragDrop');
       check(method.signature()).equals(
-        const MethodDefSig(
-          flags: MethodDefFlags.default$,
+        const MethodSignature(
           returnType: NamedValueType(
             TypeName('Windows.Win32.Foundation', 'HRESULT'),
           ),
@@ -183,7 +182,7 @@ void main() async {
         PInvokeAttributes.noMangle | PInvokeAttributes.callConvPlatformApi,
       );
       check(implMap.charSet).equals(CharSet.notSpecified);
-      check(implMap.callingConvention).equals(CallingConvention.platformApi);
+      check(implMap.callConv).equals(CallConv.platformApi);
       check(implMap.memberForwarded.name).equals('DoDragDrop');
       check(implMap.importName).equals('DoDragDrop');
       check(implMap.importScope.name).equals('OLE32.dll');
@@ -209,8 +208,7 @@ void main() async {
       check(method.vTableLayout).equals(VTableLayout.reuseSlot);
       check(method.name).equals('GetAltMonthNames');
       check(method.signature()).equals(
-        const MethodDefSig(
-          flags: MethodDefFlags.default$,
+        const MethodSignature(
           returnType: NamedValueType(
             TypeName('Windows.Win32.Foundation', 'HRESULT'),
           ),
@@ -243,7 +241,7 @@ void main() async {
         PInvokeAttributes.noMangle | PInvokeAttributes.callConvPlatformApi,
       );
       check(implMap.charSet).equals(CharSet.notSpecified);
-      check(implMap.callingConvention).equals(CallingConvention.platformApi);
+      check(implMap.callConv).equals(CallConv.platformApi);
       check(implMap.memberForwarded.name).equals('GetAltMonthNames');
       check(implMap.importName).equals('GetAltMonthNames');
       check(implMap.importScope.name).equals('OLEAUT32.dll');

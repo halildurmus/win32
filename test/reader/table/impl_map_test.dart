@@ -26,7 +26,7 @@ void main() async {
             PInvokeAttributes.callConvPlatformApi,
       );
       check(implMap.charSet).equals(CharSet.notSpecified);
-      check(implMap.callingConvention).equals(CallingConvention.platformApi);
+      check(implMap.callConv).equals(CallConv.platformApi);
       check(implMap.memberForwarded.name).equals('CreateWindowExW');
       check(implMap.importName).equals('CreateWindowExW');
       check(implMap.importScope.name).equals('USER32.dll');

@@ -22,7 +22,7 @@ final class TypeRef implements Row {
   TypeRef({
     required this.resolutionScope,
     required this.name,
-    required this.namespace,
+    this.namespace = const StringIndex(0),
   });
 
   ResolutionScope resolutionScope;

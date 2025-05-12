@@ -20,9 +20,9 @@ import '../table_stream.dart';
 ///  - **Name** (String Heap Index)
 final class Param implements Row {
   const Param({
-    required this.flags,
     required this.sequence,
     required this.name,
+    this.flags = const ParamAttributes(0),
   });
 
   final ParamAttributes flags;

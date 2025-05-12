@@ -26,13 +26,13 @@ import '../table_stream.dart';
 ///  - **HashValue** (Blob Heap Index)
 final class AssemblyRef implements Row {
   const AssemblyRef({
+    required this.name,
     this.majorVersion = 0,
     this.minorVersion = 0,
     this.buildNumber = 0,
     this.revisionNumber = 0,
     this.flags = const AssemblyFlags(0),
     this.publicKeyOrToken = const BlobIndex(0),
-    this.name = const StringIndex(0),
     this.culture = const StringIndex(0),
     this.hashValue = const BlobIndex(0),
   });

@@ -6,19 +6,23 @@ void main() {
   group('PropertySig', () {
     test('default constructor uses expected values', () {
       const sig = PropertySig(returnType: Int32Type());
-      check(sig.flags).equals(PropertyFlags.default$);
+      check(sig.callingConvention).equals(CallingConvention.DEFAULT);
       check(sig.returnType).equals(const Int32Type());
       check(sig.types).deepEquals(const []);
+      check(sig.toString()).equals(
+        'PropertySig(callingConvention: 0x0, returnType: Int32Type, '
+        'types: [])',
+      );
     });
 
     test('equality: equal for same flags, return type, and types', () {
       const sig1 = PropertySig(
-        flags: PropertyFlags.hasThis,
+        callingConvention: CallingConvention.HASTHIS,
         returnType: BoolType(),
         types: [Int32Type()],
       );
       const sig2 = PropertySig(
-        flags: PropertyFlags.hasThis,
+        callingConvention: CallingConvention.HASTHIS,
         returnType: BoolType(),
         types: [Int32Type()],
       );
@@ -29,7 +33,7 @@ void main() {
       const sig1 = PropertySig(returnType: BoolType());
       const sig2 = PropertySig(
         returnType: BoolType(),
-        flags: PropertyFlags.hasThis,
+        callingConvention: CallingConvention.HASTHIS,
       );
       check(sig1).not((it) => it.equals(sig2));
     });

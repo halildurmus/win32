@@ -58,7 +58,7 @@ void main() async {
 
     test('readFieldSig', () {
       final blob = createBlob([
-        0x6, // FIELD
+        CallingConvention.FIELD,
         ELEMENT_TYPE_I4, // Type
       ]);
       final sig = blob.readFieldSig();
@@ -123,7 +123,7 @@ void main() async {
     group('readMemberRefSignature', () {
       test('reads a FieldSig', () {
         final blob = createBlob([
-          0x6, // FIELD
+          CallingConvention.FIELD,
           ELEMENT_TYPE_BOOLEAN, // Type
         ]);
         final sig = blob.readFieldSig();
@@ -133,7 +133,7 @@ void main() async {
 
       test('reads a MethodRefSig', () {
         final blob = createBlob([
-          MethodDefFlags.hasThis,
+          CallingConvention.HASTHIS,
           ...CompressedInteger.encode(3), // ParamCount
           // RetType
           ELEMENT_TYPE_VALUETYPE,
@@ -148,7 +148,7 @@ void main() async {
         final sig = blob.readMemberRefSignature();
         check(sig).isA<MethodRefSig>().equals(
           const MethodRefSig(
-            flags: MethodRefFlags.hasThis,
+            callingConvention: CallingConvention.HASTHIS,
             returnType: NamedValueType(
               TypeName('Windows.Win32.Foundation', 'HRESULT'),
             ),
@@ -162,12 +162,12 @@ void main() async {
     group('readMethodDefSig', () {
       test('method with no parameters and void return', () {
         final blob = createBlob([
-          MethodDefFlags.default$,
+          CallingConvention.DEFAULT,
           ...CompressedInteger.encode(0), // ParamCount
           ELEMENT_TYPE_VOID, // RetType
         ]);
         final sig = blob.readMethodDefSig();
-        check(sig.flags).equals(MethodDefFlags.default$);
+        check(sig.callingConvention).equals(CallingConvention.DEFAULT);
         check(sig.returnType).isA<VoidType>();
         check(sig.types).isEmpty();
         check(blob.isEmpty).isTrue();
@@ -175,7 +175,7 @@ void main() async {
 
       test('method with multiple parameters and HRESULT return', () {
         final blob = createBlob([
-          MethodDefFlags.hasThis,
+          CallingConvention.HASTHIS,
           ...CompressedInteger.encode(3), // ParamCount
           // RetType
           ELEMENT_TYPE_VALUETYPE,
@@ -188,7 +188,7 @@ void main() async {
           ELEMENT_TYPE_STRING, // Param
         ]);
         final sig = blob.readMethodDefSig();
-        check(sig.flags).equals(MethodDefFlags.hasThis);
+        check(sig.callingConvention).equals(CallingConvention.HASTHIS);
         check(sig.returnType).equals(
           const NamedValueType(TypeName('Windows.Win32.Foundation', 'HRESULT')),
         );
@@ -196,6 +196,22 @@ void main() async {
         check(sig.types[0]).equals(const Uint8Type());
         check(sig.types[1]).equals(const BoolType());
         check(sig.types[2]).equals(const StringType());
+        check(blob.isEmpty).isTrue();
+      });
+    });
+
+    group('readMethodSpecBlob', () {
+      test('reads a MethodSpecBlob', () {
+        final blob = createBlob([
+          CallingConvention.GENERICINST,
+          ...CompressedInteger.encode(2), // GenArgCount
+          ELEMENT_TYPE_STRING, // Type
+          ELEMENT_TYPE_I4, // Type
+        ]);
+        final methodSpecBlob = blob.readMethodSpecBlob();
+        check(
+          methodSpecBlob,
+        ).deepEquals([const StringType(), const Int32Type()]);
         check(blob.isEmpty).isTrue();
       });
     });
@@ -244,12 +260,12 @@ void main() async {
     group('readPropertySig', () {
       test('property with no parameters and Uint32 return', () {
         final blob = createBlob([
-          0x8, // PROPERTY
+          CallingConvention.PROPERTY,
           ...CompressedInteger.encode(0), // ParamCount
           ELEMENT_TYPE_U4, // RetType
         ]);
         final sig = blob.readPropertySig();
-        check(sig.flags).equals(PropertyFlags.default$);
+        check(sig.callingConvention).equals(CallingConvention.DEFAULT);
         check(sig.returnType).isA<Uint32Type>();
         check(sig.types).isEmpty();
         check(blob.isEmpty).isTrue();
@@ -257,8 +273,8 @@ void main() async {
 
       test('property with multiple parameters and HRESULT return', () {
         final blob = createBlob([
-          0x8 | PropertyFlags.hasThis, // PROPERTY | HASTHIS
-          ...CompressedInteger.encode(3), // ParamCount
+          CallingConvention.PROPERTY | CallingConvention.HASTHIS,
+          ...CompressedInteger.encode(2), // ParamCount
           // RetType
           ELEMENT_TYPE_VALUETYPE,
           ...CompressedInteger.encode(
@@ -267,17 +283,15 @@ void main() async {
           //
           ELEMENT_TYPE_U1, // Param
           ELEMENT_TYPE_BOOLEAN, // Param
-          ELEMENT_TYPE_STRING, // Param
         ]);
         final sig = blob.readPropertySig();
-        check(sig.flags).equals(PropertyFlags.hasThis);
+        check(sig.callingConvention).equals(CallingConvention.HASTHIS);
         check(sig.returnType).equals(
           const NamedValueType(TypeName('Windows.Win32.Foundation', 'HRESULT')),
         );
-        check(sig.types.length).equals(3);
+        check(sig.types.length).equals(2);
         check(sig.types[0]).equals(const Uint8Type());
         check(sig.types[1]).equals(const BoolType());
-        check(sig.types[2]).equals(const StringType());
         check(blob.isEmpty).isTrue();
       });
     });
@@ -299,7 +313,7 @@ void main() async {
 
       test('reads a StandAloneMethodSig', () {
         final blob = createBlob([
-          StandAloneMethodFlags.hasThis | StandAloneMethodFlags.c,
+          CallingConvention.HASTHIS | CallingConvention.C,
           ...CompressedInteger.encode(2), // ParamCount
           ELEMENT_TYPE_I4, // RetType
           ELEMENT_TYPE_BOOLEAN, // Param
@@ -308,7 +322,7 @@ void main() async {
         final sig = blob.readStandAloneSignature();
         check(sig).isA<StandAloneMethodSig>().equals(
           StandAloneMethodSig(
-            flags: StandAloneMethodFlags.hasThis | StandAloneMethodFlags.c,
+            callingConvention: CallingConvention.HASTHIS | CallingConvention.C,
             returnType: const Int32Type(),
             types: [const BoolType(), const Int32Type()],
           ),

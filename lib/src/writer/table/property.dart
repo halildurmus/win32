@@ -20,9 +20,9 @@ import '../table_stream.dart';
 ///  - **Type** (Blob Heap Index)
 final class Property implements Row {
   const Property({
+    required this.name,
+    required this.type,
     this.flags = const PropertyAttributes(0),
-    this.name = const StringIndex(0),
-    this.type = const BlobIndex(0),
   });
 
   final PropertyAttributes flags;

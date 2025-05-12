@@ -96,8 +96,8 @@ final class ArrayMarshallingDescriptor extends MarshallingDescriptor {
   String toString() {
     final sizeParam = sizeParameterIndex == null
         ? ''
-        : 'sizeParameterIndex: $sizeParameterIndex, ';
-    final numElem = numElements == null ? '' : 'numElements: $numElements, ';
+        : ', sizeParameterIndex: $sizeParameterIndex';
+    final numElem = numElements == null ? '' : ', numElements: $numElements';
     return 'ArrayMarshallingDescriptor(elementType: $elementType'
         '$sizeParam$numElem)';
   }

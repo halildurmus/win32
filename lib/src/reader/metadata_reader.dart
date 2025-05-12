@@ -620,6 +620,10 @@ final class MetadataReader {
     offset = tableStream[MetadataTable.manifestResource]._setOffset(offset);
     offset = tableStream[MetadataTable.nestedClass]._setOffset(offset);
     offset = tableStream[MetadataTable.genericParam]._setOffset(offset);
+    offset = tableStream[MetadataTable.methodSpec]._setOffset(offset);
+    offset = tableStream[MetadataTable.genericParamConstraint]._setOffset(
+      offset,
+    );
 
     return MetadataReader._(
       data.asUnmodifiableView(),

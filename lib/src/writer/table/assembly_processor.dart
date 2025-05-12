@@ -15,7 +15,7 @@ import '../table_stream.dart';
 /// The `AssemblyProcessor` table has the following columns:
 ///  - **Processor** (4-byte value)
 final class AssemblyProcessor implements Row {
-  const AssemblyProcessor({required this.processor});
+  const AssemblyProcessor({this.processor = 0});
 
   final int processor;
 

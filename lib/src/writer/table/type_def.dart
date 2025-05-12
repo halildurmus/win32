@@ -25,12 +25,12 @@ import 'index.dart';
 ///  - **MethodList** (MethodDef Table Index)
 final class TypeDef implements Row {
   const TypeDef({
-    required this.flags,
     required this.name,
-    required this.namespace,
     required this.extends$,
     required this.fieldList,
     required this.methodList,
+    this.flags = const TypeAttributes(0),
+    this.namespace = const StringIndex(0),
   });
 
   final TypeAttributes flags;
