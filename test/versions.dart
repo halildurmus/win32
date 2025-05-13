@@ -1,4 +1,4 @@
-// This file defines the specific versions of Windows metadata packages used
+// This file defines the specific versions of Windows Metadata packages used
 // during testing. These constants ensure consistent and reproducible test
 // results by locking the test environment to known versions of the Windows
 // Driver Kit (WDK), Win32 API, and Windows Runtime (WinRT) metadata.

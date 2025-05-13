@@ -1,4 +1,4 @@
-/// Represents a NuGet package that provides Windows metadata (`.winmd`) files.
+/// Represents a NuGet package that provides Windows Metadata (`.winmd`) files.
 ///
 /// These metadata packages describe APIs exposed by Windows components,
 /// including the Windows Driver Kit (WDK), traditional Win32 APIs, and the

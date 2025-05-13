@@ -16,7 +16,8 @@ import 'heap/user_string.dart';
 import 'metadata_table.dart';
 import 'table_stream.dart';
 
-/// Provides functionality to read and decode .NET metadata tables.
+/// Provides functionality to read a valid `.winmd` or ECMA-335 metadata file,
+/// including metadata tables, heaps, and system-level assembly references.
 ///
 /// A [MetadataReader] is responsible for interpreting the raw binary data
 /// of metadata streams, enabling retrieval of strings, GUIDs, blobs, and

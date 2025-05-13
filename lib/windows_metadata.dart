@@ -1,5 +1,5 @@
 /// Provides high-level APIs for discovering, downloading, caching, and loading
-/// Windows metadata (`.winmd`) files for use in Dart-based tooling.
+/// Windows Metadata (`.winmd`) files for use in Dart-based tooling.
 ///
 /// For usage, refer to the [WindowsMetadataLoader] class.
 ///

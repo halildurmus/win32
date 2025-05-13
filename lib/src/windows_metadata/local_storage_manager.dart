@@ -12,7 +12,7 @@ import '../bindings.dart';
 import '../exception.dart';
 import 'package.dart';
 
-/// Handles caching and local storage of downloaded Windows metadata packages.
+/// Handles caching and local storage of downloaded Windows Metadata packages.
 ///
 /// By default, data is stored in:
 /// - **Windows**: `%LocalAppData%\winmd`

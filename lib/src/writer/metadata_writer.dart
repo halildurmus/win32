@@ -1077,7 +1077,7 @@ final class MetadataWriter {
   }
 
   /// Serializes all metadata structures into a portable executable (PE) format,
-  /// as specified by the Windows metadata (`.winmd`) specification.
+  /// as specified by the Windows Metadata (`.winmd`) specification.
   ///
   /// Returns a [Uint8List] containing the serialized binary representation of
   /// of the metadata, ready for use in creating `.winmd` files.
