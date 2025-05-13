@@ -16,7 +16,7 @@ import '../table_stream.dart';
 /// ECMA-335 `§II.22.20`.
 ///
 /// The `GenericParam` table has the following columns:
-///  - **Number** (2-byte index)
+///  - **Number** (2-byte value)
 ///  - **Flags** (2-byte bitmask of GenericParamAttributes)
 ///  - **Owner** (TypeOrMethodDef Coded Index)
 ///  - **Name** (String Heap Index)
@@ -41,6 +41,18 @@ final class GenericParam implements Row {
       ..writeCodedIndex(owner, stream)
       ..writeHeapIndex(name, stream);
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is GenericParam &&
+          number == other.number &&
+          flags == other.flags &&
+          owner == other.owner &&
+          name == other.name;
+
+  @override
+  int get hashCode => Object.hash(number, flags, owner, name);
 }
 
 @internal

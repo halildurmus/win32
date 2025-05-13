@@ -4,9 +4,9 @@ import 'package:winmd/winmd.dart'
     show MetadataIndex, MetadataReader, MethodSignature;
 import 'package:winmd/writer.dart';
 
-void main() async {
+void main() {
   group('MethodSpec', () {
-    test('Insert(K key, V value)', () {
+    test('IMap<K,V>.Insert(K key, V value)', () {
       final writer = MetadataWriter(name: 'MyMetadata');
       final typeDef = writer.writeTypeDef(
         namespace: 'Namespace',

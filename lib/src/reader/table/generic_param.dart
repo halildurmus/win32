@@ -14,7 +14,7 @@ import 'generic_param_constraint.dart';
 /// ECMA-335 `§II.22.20`.
 ///
 /// The `GenericParam` table has the following columns:
-///  - **Number** (2-byte index)
+///  - **Number** (2-byte value)
 ///  - **Flags** (2-byte bitmask of GenericParamAttributes)
 ///  - **Owner** (TypeOrMethodDef Coded Index)
 ///  - **Name** (String Heap Index)

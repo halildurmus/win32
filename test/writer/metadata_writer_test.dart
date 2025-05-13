@@ -28,22 +28,41 @@ void main() {
         ..length.equals(4)
         ..deepEquals(Uint8List.fromList([0, 0, 0, 0]));
       final tableStream = reader.tableStream;
+      check(tableStream.assembly.length).equals(1);
+      check(tableStream.assemblyOS.length).equals(0);
+      check(tableStream.assemblyProcessor.length).equals(0);
       check(tableStream.assemblyRef.length).equals(1);
+      check(tableStream.assemblyRefOS.length).equals(0);
+      check(tableStream.assemblyRefProcessor.length).equals(0);
       check(tableStream.classLayout.length).equals(0);
       check(tableStream.constant.length).equals(0);
       check(tableStream.customAttribute.length).equals(0);
+      check(tableStream.declSecurity.length).equals(0);
+      check(tableStream.event.length).equals(0);
+      check(tableStream.eventMap.length).equals(0);
+      check(tableStream.exportedType.length).equals(0);
       check(tableStream.field.length).equals(0);
       check(tableStream.fieldLayout.length).equals(0);
+      check(tableStream.fieldMarshal.length).equals(0);
+      check(tableStream.fieldRVA.length).equals(0);
+      check(tableStream.file.length).equals(0);
       check(tableStream.genericParam.length).equals(0);
       check(tableStream.genericParamConstraint.length).equals(0);
       check(tableStream.implMap.length).equals(0);
       check(tableStream.interfaceImpl.length).equals(0);
+      check(tableStream.manifestResource.length).equals(0);
       check(tableStream.memberRef.length).equals(0);
       check(tableStream.methodDef.length).equals(0);
+      check(tableStream.methodImpl.length).equals(0);
+      check(tableStream.methodSemantics.length).equals(0);
+      check(tableStream.methodSpec.length).equals(0);
       check(tableStream.module.length).equals(1);
       check(tableStream.moduleRef.length).equals(0);
       check(tableStream.nestedClass.length).equals(0);
       check(tableStream.param.length).equals(0);
+      check(tableStream.property.length).equals(0);
+      check(tableStream.propertyMap.length).equals(0);
+      check(tableStream.standAloneSig.length).equals(0);
       check(tableStream.typeDef.length).equals(1);
       check(tableStream.typeRef.length).equals(0);
       check(tableStream.typeSpec.length).equals(0);
@@ -60,136 +79,6 @@ void main() {
       check(typeDef.name).equals('<Module>');
       check(typeDef.extends$).isNull();
       check(typeDef.flags).equals(const TypeAttributes(0));
-    });
-
-    test('FieldMarshal', () {
-      final writer = MetadataWriter(name: 'MyMetadata');
-      final someArray = writer.writeField(
-        flags: FieldAttributes.public,
-        name: 'SomeArray',
-        signature: const winmd.FieldSig(ArrayType(Int32Type())),
-      );
-      writer.writeFieldMarshal(
-        parent: HasFieldMarshal.field(someArray),
-        descriptor: const winmd.MarshallingDescriptor.array(
-          elementType: winmd.NATIVE_TYPE_I4,
-        ),
-      );
-      final someString = writer.writeField(
-        flags: FieldAttributes.public,
-        name: 'SomeString',
-        signature: const winmd.FieldSig(
-          NamedValueType(winmd.TypeName('System', 'String')),
-        ),
-      );
-      writer.writeFieldMarshal(
-        parent: HasFieldMarshal.field(someString),
-        descriptor: const winmd.MarshallingDescriptor.simple(
-          winmd.NATIVE_TYPE_LPWSTR,
-        ),
-      );
-      final bytes = writer.toBytes();
-      final reader = winmd.MetadataReader.read(bytes);
-      final metadata = winmd.MetadataIndex.fromReader(reader);
-
-      final [someArrayField, someStringField] = metadata.field.toList();
-
-      final someArrayMarshal = someArrayField.fieldMarshal;
-      check(someArrayMarshal).isNotNull();
-      check(someArrayMarshal!.parent)
-          .isA<winmd.HasFieldMarshalField>()
-          .has((it) => it.value.name, 'value.name')
-          .equals('SomeArray');
-      check(someArrayMarshal.nativeType).equals(
-        const winmd.MarshallingDescriptor.array(
-          elementType: winmd.NATIVE_TYPE_I4,
-        ),
-      );
-
-      final someStringMarshal = someStringField.fieldMarshal;
-      check(someStringMarshal).isNotNull();
-      check(someStringMarshal!.parent)
-          .isA<winmd.HasFieldMarshalField>()
-          .has((it) => it.value.name, 'value.name')
-          .equals('SomeString');
-      check(someStringMarshal.nativeType).equals(
-        const winmd.MarshallingDescriptor.simple(winmd.NATIVE_TYPE_LPWSTR),
-      );
-    });
-
-    test('Attribute', () {
-      final writer = MetadataWriter(name: 'MyMetadata');
-
-      final typeDef = writer.writeTypeDef(
-        namespace: 'Namespace',
-        name: 'Name',
-        flags:
-            TypeAttributes.public |
-            TypeAttributes.interface |
-            TypeAttributes.abstract |
-            TypeAttributes.windowsRuntime,
-      );
-
-      final guidAttribute = MemberRefParent.typeRef(
-        writer.writeTypeRef(
-          namespace: 'Windows.Foundation.Metadata',
-          name: 'GuidAttribute',
-        ),
-      );
-
-      const guidSignature = winmd.MethodRefSig(
-        types: [
-          Uint32Type(),
-          Uint16Type(),
-          Uint16Type(),
-          Uint8Type(),
-          Uint8Type(),
-          Uint8Type(),
-          Uint8Type(),
-          Uint8Type(),
-          Uint8Type(),
-          Uint8Type(),
-          Uint8Type(),
-        ],
-      );
-
-      final guidCtor = writer.writeMemberRef(
-        parent: guidAttribute,
-        name: '.ctor',
-        signature: guidSignature,
-      );
-
-      const guidValue = [
-        FixedArg(Uint32Value(0xd095a8ca)),
-        FixedArg(Uint16Value(0x1103)),
-        FixedArg(Uint16Value(0x4ef5)),
-        FixedArg(Uint8Value(0x99)),
-        FixedArg(Uint8Value(0x8c)),
-        FixedArg(Uint8Value(0x62)),
-        FixedArg(Uint8Value(0x82)),
-        FixedArg(Uint8Value(0x15)),
-        FixedArg(Uint8Value(0x10)),
-        FixedArg(Uint8Value(0xef)),
-        FixedArg(Uint8Value(0x8f)),
-      ];
-
-      writer.writeCustomAttribute(
-        parent: HasCustomAttribute.typeDef(typeDef),
-        type: CustomAttributeType.memberRef(guidCtor),
-        fixedArgs: guidValue,
-      );
-
-      final bytes = writer.toBytes();
-      final reader = winmd.MetadataReader.read(bytes);
-      final index = winmd.MetadataIndex.fromReader(reader);
-      final type = index.allTypes
-          .where((def) => def.name == 'Name')
-          .firstOrNull;
-      check(type).isNotNull();
-      final attributes = type!.attributes.toList();
-      check(attributes.length).equals(1);
-      final attribute = attributes.first;
-      check(attribute.type.name).equals('.ctor');
     });
 
     test('Class', () {
@@ -296,6 +185,136 @@ void main() {
       winmd.MetadataIndex.fromReader(
         reader,
       ).findSingleType('Namespace', 'Name');
+    });
+
+    test('CustomAttribute', () {
+      final writer = MetadataWriter(name: 'MyMetadata');
+
+      final typeDef = writer.writeTypeDef(
+        namespace: 'Namespace',
+        name: 'Name',
+        flags:
+            TypeAttributes.public |
+            TypeAttributes.interface |
+            TypeAttributes.abstract |
+            TypeAttributes.windowsRuntime,
+      );
+
+      final guidAttribute = MemberRefParent.typeRef(
+        writer.writeTypeRef(
+          namespace: 'Windows.Foundation.Metadata',
+          name: 'GuidAttribute',
+        ),
+      );
+
+      const guidSignature = winmd.MethodRefSig(
+        types: [
+          Uint32Type(),
+          Uint16Type(),
+          Uint16Type(),
+          Uint8Type(),
+          Uint8Type(),
+          Uint8Type(),
+          Uint8Type(),
+          Uint8Type(),
+          Uint8Type(),
+          Uint8Type(),
+          Uint8Type(),
+        ],
+      );
+
+      final guidCtor = writer.writeMemberRef(
+        parent: guidAttribute,
+        name: '.ctor',
+        signature: guidSignature,
+      );
+
+      const guidValue = [
+        FixedArg(Uint32Value(0xd095a8ca)),
+        FixedArg(Uint16Value(0x1103)),
+        FixedArg(Uint16Value(0x4ef5)),
+        FixedArg(Uint8Value(0x99)),
+        FixedArg(Uint8Value(0x8c)),
+        FixedArg(Uint8Value(0x62)),
+        FixedArg(Uint8Value(0x82)),
+        FixedArg(Uint8Value(0x15)),
+        FixedArg(Uint8Value(0x10)),
+        FixedArg(Uint8Value(0xef)),
+        FixedArg(Uint8Value(0x8f)),
+      ];
+
+      writer.writeCustomAttribute(
+        parent: HasCustomAttribute.typeDef(typeDef),
+        type: CustomAttributeType.memberRef(guidCtor),
+        fixedArgs: guidValue,
+      );
+
+      final bytes = writer.toBytes();
+      final reader = winmd.MetadataReader.read(bytes);
+      final index = winmd.MetadataIndex.fromReader(reader);
+      final type = index.allTypes
+          .where((def) => def.name == 'Name')
+          .firstOrNull;
+      check(type).isNotNull();
+      final attributes = type!.attributes.toList();
+      check(attributes.length).equals(1);
+      final attribute = attributes.first;
+      check(attribute.type.name).equals('.ctor');
+    });
+
+    test('FieldMarshal', () {
+      final writer = MetadataWriter(name: 'MyMetadata');
+      final someArray = writer.writeField(
+        flags: FieldAttributes.public,
+        name: 'SomeArray',
+        signature: const winmd.FieldSig(ArrayType(Int32Type())),
+      );
+      writer.writeFieldMarshal(
+        parent: HasFieldMarshal.field(someArray),
+        descriptor: const winmd.MarshallingDescriptor.array(
+          elementType: winmd.NATIVE_TYPE_I4,
+        ),
+      );
+      final someString = writer.writeField(
+        flags: FieldAttributes.public,
+        name: 'SomeString',
+        signature: const winmd.FieldSig(
+          NamedValueType(winmd.TypeName('System', 'String')),
+        ),
+      );
+      writer.writeFieldMarshal(
+        parent: HasFieldMarshal.field(someString),
+        descriptor: const winmd.MarshallingDescriptor.simple(
+          winmd.NATIVE_TYPE_LPWSTR,
+        ),
+      );
+      final bytes = writer.toBytes();
+      final reader = winmd.MetadataReader.read(bytes);
+      final metadata = winmd.MetadataIndex.fromReader(reader);
+
+      final [someArrayField, someStringField] = metadata.field.toList();
+
+      final someArrayMarshal = someArrayField.fieldMarshal;
+      check(someArrayMarshal).isNotNull();
+      check(someArrayMarshal!.parent)
+          .isA<winmd.HasFieldMarshalField>()
+          .has((it) => it.value.name, 'value.name')
+          .equals('SomeArray');
+      check(someArrayMarshal.nativeType).equals(
+        const winmd.MarshallingDescriptor.array(
+          elementType: winmd.NATIVE_TYPE_I4,
+        ),
+      );
+
+      final someStringMarshal = someStringField.fieldMarshal;
+      check(someStringMarshal).isNotNull();
+      check(someStringMarshal!.parent)
+          .isA<winmd.HasFieldMarshalField>()
+          .has((it) => it.value.name, 'value.name')
+          .equals('SomeString');
+      check(someStringMarshal.nativeType).equals(
+        const winmd.MarshallingDescriptor.simple(winmd.NATIVE_TYPE_LPWSTR),
+      );
     });
 
     test('Interface', () {

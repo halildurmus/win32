@@ -46,6 +46,7 @@ import 'table/generic_param_constraint.dart';
 import 'table/impl_map.dart';
 import 'table/index.dart';
 import 'table/interface_impl.dart';
+import 'table/manifest_resource.dart';
 import 'table/member_ref.dart';
 import 'table/method_def.dart';
 import 'table/method_impl.dart';
@@ -132,9 +133,7 @@ final class MetadataWriter {
       _fieldMarshals = SplayTreeMap((a, b) => a.encode().compareTo(b.encode())),
       _fieldRVAs = SplayTreeMap((a, b) => a.index.compareTo(b.index)),
       _genericParams = SplayTreeMap((a, b) => a.encode().compareTo(b.encode())),
-      _genericParamConstraints = SplayTreeMap(
-        (a, b) => a.index.compareTo(b.index),
-      ),
+      _genericParamConstraints = HashMap(),
       _methodSemantics = SplayTreeMap(
         (a, b) => a.encode().compareTo(b.encode()),
       ),
@@ -162,8 +161,7 @@ final class MetadataWriter {
   final SplayTreeMap<HasFieldMarshal, FieldMarshal> _fieldMarshals;
   final SplayTreeMap<FieldIndex, FieldRVA> _fieldRVAs;
   final SplayTreeMap<TypeOrMethodDef, List<GenericParam>> _genericParams;
-  final SplayTreeMap<GenericParamIndex, GenericParamConstraint>
-  _genericParamConstraints;
+  final HashMap<GenericParam, TypeDefOrRef> _genericParamConstraints;
   final SplayTreeMap<HasSemantics, List<MethodSemantics>> _methodSemantics;
 
   final HashSet<String> _levelTwoNamespaces;
@@ -398,28 +396,18 @@ final class MetadataWriter {
     required TypeOrMethodDef owner,
     required String name,
     GenericParamAttributes flags = const GenericParamAttributes(0),
+    TypeDefOrRef? constraint,
   }) {
-    _genericParams
-        .putIfAbsent(owner, () => [])
-        .add(
-          GenericParam(
-            number: number,
-            flags: flags,
-            owner: owner,
-            name: _stringHeap.insert(name),
-          ),
-        );
-  }
-
-  /// Writes a `GenericParamConstraint` row.
-  void writeGenericParamConstraint({
-    required GenericParamIndex owner,
-    required TypeDefOrRef constraint,
-  }) {
-    _genericParamConstraints[owner] = GenericParamConstraint(
+    final genericParam = GenericParam(
+      number: number,
+      flags: flags,
       owner: owner,
-      constraint: constraint,
+      name: _stringHeap.insert(name),
     );
+    _genericParams.putIfAbsent(owner, () => []).add(genericParam);
+    if (constraint != null) {
+      _genericParamConstraints[genericParam] = constraint;
+    }
   }
 
   /// Writes an `ImplMap` row.
@@ -455,6 +443,26 @@ final class MetadataWriter {
     final index = InterfaceImplIndex(table.length);
     table.add(
       InterfaceImpl(class$: class$, interface: _toTypeDefOrRef(interface)),
+    );
+    return index;
+  }
+
+  /// Writes a `ManifestResource` row, returning the corresponding index.
+  ManifestResourceIndex writeManifestResource({
+    required int offset,
+    required String name,
+    required Implementation implementation,
+    ManifestResourceAttributes flags = const ManifestResourceAttributes(0),
+  }) {
+    final table = _tableStream[MetadataTableId.manifestResource];
+    final index = ManifestResourceIndex(table.length);
+    table.add(
+      ManifestResource(
+        offset: offset,
+        flags: flags,
+        name: _stringHeap.insert(name),
+        implementation: implementation,
+      ),
     );
     return index;
   }
@@ -1152,12 +1160,23 @@ final class MetadataWriter {
     _tableStream.get<FieldLayout>().addAll(_fieldLayouts.values);
     _tableStream.get<FieldMarshal>().addAll(_fieldMarshals.values);
     _tableStream.get<FieldRVA>().addAll(_fieldRVAs.values);
-    _tableStream.get<GenericParam>().addAll(
-      _genericParams.values.expand((e) => e),
-    );
-    _tableStream.get<GenericParamConstraint>().addAll(
-      _genericParamConstraints.values,
-    );
+
+    final genericParamTable = _tableStream.get<GenericParam>();
+    final genericParamConstraintsTable = _tableStream
+        .get<GenericParamConstraint>();
+
+    for (final (idx, genericParam)
+        in _genericParams.values.expand((e) => e).indexed) {
+      genericParamTable.add(genericParam);
+
+      if (_genericParamConstraints[genericParam] case final constraint?) {
+        final owner = GenericParamIndex(idx);
+        genericParamConstraintsTable.add(
+          GenericParamConstraint(owner: owner, constraint: constraint),
+        );
+      }
+    }
+
     _tableStream.get<MethodSemantics>().addAll(
       _methodSemantics.values.expand((e) => e),
     );

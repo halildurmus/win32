@@ -3,7 +3,7 @@ import 'package:test/scaffolding.dart';
 import 'package:winmd/winmd.dart';
 import 'package:winmd/writer.dart';
 
-void main() async {
+void main() {
   group('StandAloneSig', () {
     test('LocalVarSig', () {
       final writer = MetadataWriter(name: 'MyMetadata')

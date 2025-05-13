@@ -466,7 +466,7 @@ final class MetadataReader {
     );
     tableStream[MetadataTable.exportedType]._setColumns(
       4,
-      4,
+      tableStream[MetadataTable.typeDef]._indexWidth,
       stringIndexSize,
       stringIndexSize,
       implementation,
