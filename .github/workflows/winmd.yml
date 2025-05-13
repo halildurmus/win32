@@ -28,15 +28,15 @@ jobs:
         include:
           - os: windows-2025
             sdk: main
-          - os: macos-latest
-            sdk: main
-          - os: ubuntu-latest
-            sdk: main
           # - os: windows-2022
           #   sdk: beta
+          - os: macos-latest
+            sdk: main # TODO: change to stable
+          - os: ubuntu-latest
+            sdk: main # TODO: change to stable
+          - os: windows-11-arm
+            sdk: main # TODO: change to stable
           # - os: windows-2019
-          #   sdk: stable
-          # - os: ubuntu-latest
           #   sdk: stable
 
     uses: halildurmus/workflows/.github/workflows/dart.yml@main
