@@ -1,53 +1,37 @@
-import 'package:winmd/windows_metadata.dart';
+import 'dart:io' as io;
+
 import 'package:winmd/winmd.dart';
 
-void main() async {
-  // Load Win32 metadata from NuGet unless a local copy is available in the
-  // cache. You can specify a custom cache directory by passing a
-  // [LocalStorageManager] instance to the constructor.
-  final metadataLoader = WindowsMetadataLoader();
-  // By default, the latest version is loaded. You can specify a specific
-  // version by passing it as an argument.
-  final index = await metadataLoader.loadWin32Metadata();
+void main() {
+  // Load WinRT metadata from a local .winmd file.
+  const winmdPath = r'C:\WINDOWS\System32\WinMetadata\Windows.Storage.winmd';
+  final bytes = io.File(winmdPath).readAsBytesSync();
+  final reader = MetadataReader.read(bytes);
+  final index = MetadataIndex.fromReader(reader);
 
-  // Optional: Create a new instance of MetadataLookup with the loaded index to
-  // enable efficient lookup of constants, functions, and types within the
-  // metadata.
+  // Optional: Use MetadataLookup for efficient type resolution by name.
+  // This is especially helpful when the namespace of the target type is
+  // unknown.
   final metadata = MetadataLookup(index);
 
-  // -----------------------------------------------
-  // Lookup a Win32 constant by name (e.g., E_FAIL)
-  // -----------------------------------------------
-  final constant = metadata.findConstantByName('E_FAIL');
-  print('Win32 constant "${constant.name}":');
-  print('  Type: ${constant.signature.type}');
-  print('  Value: ${constant.constant?.value}');
-  print('');
-
-  // -------------------------------------------------------
-  // Lookup a Win32 function by name (e.g., MessageBoxW)
-  // and display its return type and parameters.
-  // -------------------------------------------------------
-  final function = metadata.findFunctionByName('MessageBoxW');
-  print('Win32 function "${function.name}":');
-  final MethodSignature(:returnType, :types) = function.signature();
-  print('  Return type: $returnType');
-  final parameters = function.params.toList();
-  for (final (idx, type) in types.indexed) {
-    final parameter = parameters[idx + 1];
-    print('  Parameter #${idx + 1}:');
-    print('    Type: $type');
-    print('    Name: ${parameter.name}');
+  // Lookup a WinRT class (e.g., StorageFile) and list its public methods.
+  final storageFile = metadata.findSingleTypeByName('StorageFile');
+  print('WinRT class "${storageFile.name}" has the following methods:');
+  for (final method in storageFile.methods) {
+    print('  ${method.name}');
   }
   print('');
 
-  // -------------------------------------------------------
-  // Lookup a COM interface by name (e.g., INetwork)
-  // and list its method names.
-  // -------------------------------------------------------
-  final type = metadata.findSingleTypeByName('INetwork');
-  print('COM interface "${type.name}" has the following methods:');
-  for (final method in type.methods) {
-    print('  ${method.name}');
+  // Lookup a WinRT enum (e.g., FileAttributes) and display its members.
+  final enumType = metadata.findSingleTypeByName('FileAttributes');
+  print('WinRT enum "${enumType.name}" has the following fields:');
+
+  // The first field represents the underlying integral type (e.g., Int32).
+  final underlyingType = enumType.fields.first;
+  print('  ${underlyingType.name} = ${underlyingType.signature.type}');
+
+  // Subsequent fields are named values within the enum.
+  for (final field in enumType.fields.skip(1)) {
+    print('  ${field.name} = ${field.constant?.value}');
   }
 }
