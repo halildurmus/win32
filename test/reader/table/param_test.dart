@@ -23,11 +23,13 @@ void main() async {
       check(params[0].name).isEmpty();
       check(params[0].constant).isNull();
       check(params[0].fieldMarshal).isNull();
+      check(params[0].parent.name).equals('CoCreateGuid');
       check(params[1].flags).equals(ParamAttributes.out);
       check(params[1].sequence).equals(1);
       check(params[1].name).equals('pguid');
       check(params[1].constant).isNull();
       check(params[1].fieldMarshal).isNull();
+      check(params[1].parent.name).equals('CoCreateGuid');
     });
 
     test('ICalendarFactory.CreateCalendar([in] IIterable<string> languages, '
@@ -44,21 +46,25 @@ void main() async {
       check(params[0].name).equals('result');
       check(params[0].constant).isNull();
       check(params[0].fieldMarshal).isNull();
+      check(params[0].parent.name).equals('CreateCalendar');
       check(params[1].flags).equals(ParamAttributes.in$);
       check(params[1].sequence).equals(1);
       check(params[1].name).equals('languages');
       check(params[1].constant).isNull();
       check(params[1].fieldMarshal).isNull();
+      check(params[1].parent.name).equals('CreateCalendar');
       check(params[2].flags).equals(ParamAttributes.in$);
       check(params[2].sequence).equals(2);
       check(params[2].name).equals('calendar');
       check(params[2].constant).isNull();
       check(params[2].fieldMarshal).isNull();
+      check(params[2].parent.name).equals('CreateCalendar');
       check(params[3].flags).equals(ParamAttributes.in$);
       check(params[3].sequence).equals(3);
       check(params[3].name).equals('clock');
       check(params[3].constant).isNull();
       check(params[3].fieldMarshal).isNull();
+      check(params[3].parent.name).equals('CreateCalendar');
     });
 
     test('ITensorBooleanStatics.CreateFromArray([in] IIterablle<long> shape, '
@@ -75,16 +81,19 @@ void main() async {
       check(params[0].name).equals('result');
       check(params[0].constant).isNull();
       check(params[0].fieldMarshal).isNull();
+      check(params[0].parent.name).equals('CreateFromArray');
       check(params[1].flags).equals(ParamAttributes.in$);
       check(params[1].sequence).equals(1);
       check(params[1].name).equals('shape');
       check(params[1].constant).isNull();
       check(params[1].fieldMarshal).isNull();
+      check(params[1].parent.name).equals('CreateFromArray');
       check(params[2].flags).equals(ParamAttributes.in$);
       check(params[2].sequence).equals(2);
       check(params[2].name).equals('data');
       check(params[2].constant).isNull();
       check(params[2].fieldMarshal).isNull();
+      check(params[2].parent.name).equals('CreateFromArray');
     });
   });
 }

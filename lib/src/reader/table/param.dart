@@ -8,6 +8,7 @@ import '../metadata_table.dart';
 import '../row.dart';
 import 'constant.dart';
 import 'field_marshal.dart';
+import 'method_def.dart';
 
 /// Represents a row in the `Param` metadata table.
 ///
@@ -46,6 +47,9 @@ final class Param extends Row with HasCustomAttributes {
     0,
     HasFieldMarshal.param(this).encode(),
   ).firstOrNull;
+
+  /// The [MethodDef] that owns this parameter.
+  late final parent = getParentRow<MethodDef>(5);
 
   @override
   String toString() => name.isEmpty
