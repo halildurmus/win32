@@ -14,7 +14,7 @@ void main() async {
       final eventMap = index.eventMap.first;
       check(eventMap.parent.namespace).equals('Windows.ApplicationModel');
       check(eventMap.parent.name).equals('IPackageCatalog');
-      final events = eventMap.events.toList();
+      final events = eventMap.events;
       check(events.length).equals(5);
       check(events[0].name).equals('PackageInstalling');
       check(events[1].name).equals('PackageStaging');
@@ -27,7 +27,7 @@ void main() async {
       final eventMap = index.eventMap.last;
       check(eventMap.parent.namespace).equals('Windows.Web.UI.Interop');
       check(eventMap.parent.name).equals('WebViewControlProcess');
-      final events = eventMap.events.toList();
+      final events = eventMap.events;
       check(events.length).equals(1);
       check(events[0].name).equals('ProcessExited');
     });

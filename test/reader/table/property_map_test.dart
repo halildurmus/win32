@@ -14,7 +14,7 @@ void main() async {
       final propertyMap = index.propertyMap.first;
       check(propertyMap.parent.namespace).equals('Windows.AI.MachineLearning');
       check(propertyMap.parent.name).equals('IImageFeatureDescriptor');
-      final properties = propertyMap.properties.toList();
+      final properties = propertyMap.properties;
       check(properties.length).equals(4);
       check(properties[0].name).equals('BitmapAlphaMode');
       check(properties[1].name).equals('BitmapPixelFormat');
@@ -26,7 +26,7 @@ void main() async {
       final propertyMap = index.propertyMap.last;
       check(propertyMap.parent.namespace).equals('Windows.Web.UI.Interop');
       check(propertyMap.parent.name).equals('WebViewControlProcessOptions');
-      final properties = propertyMap.properties.toList();
+      final properties = propertyMap.properties;
       check(properties.length).equals(2);
       check(properties[0].name).equals('PrivateNetworkClientServerCapability');
       check(properties[1].name).equals('EnterpriseId');

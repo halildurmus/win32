@@ -24,7 +24,7 @@ final class PropertyMap extends Row {
   late final parent = readRow<TypeDef>(0);
 
   /// A list of [Property]s that belong to the type defined in [parent].
-  late final properties = getList<Property>(1);
+  late final properties = getList<Property>(1).toList(growable: false);
 
   @override
   String toString() => 'PropertyMap(parent: $parent, properties: $properties)';

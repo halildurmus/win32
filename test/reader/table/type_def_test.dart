@@ -34,7 +34,7 @@ void main() async {
       check(extends$!.namespace).equals('System');
       check(extends$.name).equals('Object');
       check(typeDef.fields).isEmpty();
-      final methods = typeDef.methods.toList();
+      final methods = typeDef.methods;
       check(methods.length).equals(11);
       check(methods[0].name).equals('.ctor');
       check(methods[4].name).equals('GetView');
@@ -42,7 +42,7 @@ void main() async {
       check(methods[10].name).equals('remove_MapChanged');
       check(typeDef.category).equals(TypeCategory.class$);
       check(typeDef.generics).isEmpty();
-      final interfaceImpls = typeDef.interfaceImpls.toList();
+      final interfaceImpls = typeDef.interfaceImpls;
       check(interfaceImpls.length).equals(3);
       final [iMap, iIterable, iObservableMap] = interfaceImpls;
       check(iMap.class$.name).equals('StringMap');
@@ -84,14 +84,14 @@ void main() async {
         ),
       );
       check(typeDef.classLayout).isNull();
-      final events = typeDef.events.toList();
+      final events = typeDef.events;
       check(events.length).equals(1);
       check(events[0].name).equals('MapChanged');
-      final methodImpls = typeDef.methodImpls.toList();
+      final methodImpls = typeDef.methodImpls;
       check(methodImpls.length).equals(10);
       check(methodImpls[0].class$.name).equals('StringMap');
       check(typeDef.nested).isNull();
-      final properties = typeDef.properties.toList();
+      final properties = typeDef.properties;
       check(properties.length).equals(1);
       check(properties[0].name).equals('Size');
     });
@@ -119,7 +119,7 @@ void main() async {
       check(extends$!.namespace).equals('System');
       check(extends$.name).equals('Object');
       check(typeDef.fields).isEmpty();
-      final methods = typeDef.methods.toList();
+      final methods = typeDef.methods;
       check(methods.length).equals(106);
       check(methods[0].name).equals('.ctor');
       check(methods[4].name).equals('Clone');
@@ -128,7 +128,7 @@ void main() async {
       check(methods[105].name).equals('TimeZoneAsString');
       check(typeDef.category).equals(TypeCategory.class$);
       check(typeDef.generics).isEmpty();
-      final interfaceImpls = typeDef.interfaceImpls.toList();
+      final interfaceImpls = typeDef.interfaceImpls;
       check(interfaceImpls.length).equals(2);
       final [iCalendar, iTimeZoneOnCalendar] = interfaceImpls;
       check(iCalendar.class$.name).equals('Calendar');
@@ -143,11 +143,11 @@ void main() async {
       );
       check(typeDef.classLayout).isNull();
       check(typeDef.events).isEmpty();
-      final methodImpls = typeDef.methodImpls.toList();
+      final methodImpls = typeDef.methodImpls;
       check(methodImpls.length).equals(102);
       check(methodImpls[0].class$.name).equals('Calendar');
       check(typeDef.nested).isNull();
-      final properties = typeDef.properties.toList();
+      final properties = typeDef.properties;
       check(properties.length).equals(38);
       check(properties[0].name).equals('Year');
       check(properties[37].name).equals('FirstPeriodInThisDay');
@@ -175,7 +175,7 @@ void main() async {
       check(extends$).isNotNull();
       check(extends$!.namespace).equals('System');
       check(extends$.name).equals('ValueType');
-      final fields = typeDef.fields.toList();
+      final fields = typeDef.fields;
       check(fields.length).equals(8);
       check(fields[0].name).equals('wYear');
       check(fields[7].name).equals('wMilliseconds');
@@ -213,7 +213,7 @@ void main() async {
       check(extends$!.namespace).equals('System');
       check(extends$.name).equals('Attribute');
       check(typeDef.fields).isEmpty();
-      final methods = typeDef.methods.toList();
+      final methods = typeDef.methods;
       check(methods.length).equals(1);
       check(methods[0].name).equals('.ctor');
       check(methods[0].params.length).equals(11);
@@ -247,14 +247,14 @@ void main() async {
       check(typeDef.namespace).equals('Windows.Win32.System.WinRT');
       check(typeDef.extends$).isNull();
       check(typeDef.fields).isEmpty();
-      final methods = typeDef.methods.toList();
+      final methods = typeDef.methods;
       check(methods.length).equals(3);
       check(methods[0].name).equals('GetIids');
       check(methods[1].name).equals('GetRuntimeClassName');
       check(methods[2].name).equals('GetTrustLevel');
       check(typeDef.category).equals(TypeCategory.interface);
       check(typeDef.generics).isEmpty();
-      final interfaceImpls = typeDef.interfaceImpls.toList();
+      final interfaceImpls = typeDef.interfaceImpls;
       check(interfaceImpls.length).equals(1);
       final [iUnknown] = interfaceImpls;
       check(iUnknown.class$.name).equals('IInspectable');
@@ -289,7 +289,7 @@ void main() async {
       check(extends$).isNotNull();
       check(extends$!.namespace).equals('System');
       check(extends$.name).equals('Enum');
-      final fields = typeDef.fields.toList();
+      final fields = typeDef.fields;
       check(fields.length).equals(3);
       check(fields[0].name).equals('value__');
       check(fields[0].signature).equals(const FieldSig(Int32Type()));
@@ -335,7 +335,7 @@ void main() async {
       check(extends$!.namespace).equals('System');
       check(extends$.name).equals('MulticastDelegate');
       check(typeDef.fields).isEmpty();
-      final methods = typeDef.methods.toList();
+      final methods = typeDef.methods;
       check(methods.length).equals(2);
       check(methods[0].name).equals('.ctor');
       check(methods[0].params.length).equals(2);

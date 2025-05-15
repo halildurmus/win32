@@ -47,7 +47,7 @@ void main() async {
           ],
         ),
       );
-      final params = method.params.toList();
+      final params = method.params;
       check(params.length).equals(3);
       check(params[0].flags).equals(ParamAttributes.in$);
       check(params[0].sequence).equals(1);
@@ -103,7 +103,7 @@ void main() async {
           ],
         ),
       );
-      final params = method.params.toList();
+      final params = method.params;
       check(params.length).equals(3);
       check(params[0].flags).equals(ParamAttributes.in$);
       check(params[0].sequence).equals(1);
@@ -156,7 +156,7 @@ void main() async {
           ],
         ),
       );
-      final params = method.params.toList();
+      final params = method.params;
       check(params.length).equals(5);
       check(params[0].flags).equals(const ParamAttributes(0));
       check(params[0].sequence).equals(0);
@@ -221,7 +221,7 @@ void main() async {
           ],
         ),
       );
-      final params = method.params.toList();
+      final params = method.params;
       check(params.length).equals(3);
       check(params[0].flags).equals(const ParamAttributes(0));
       check(params[0].sequence).equals(0);

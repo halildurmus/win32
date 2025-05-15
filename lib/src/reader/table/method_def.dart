@@ -78,13 +78,13 @@ final class MethodDef extends Row with HasCustomAttributes {
       readBlob(4).readMethodDefSig(generics: generics);
 
   /// The list of parameters for the method.
-  late final params = getList<Param>(5);
+  late final params = getList<Param>(5).toList(growable: false);
 
   /// The list of generic parameters defined for the method, if any.
   late final generics = getEqualRange<GenericParam>(
     2,
     TypeOrMethodDef.methodDef(this).encode(),
-  );
+  ).toList(growable: false);
 
   /// The implementation map for the method, if it exists.
   late final implMap = getEqualRange<ImplMap>(

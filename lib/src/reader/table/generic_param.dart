@@ -55,7 +55,10 @@ final class GenericParam extends Row with HasCustomAttributes {
   late final name = readString(3);
 
   /// The additional constraints placed on the generic parameter, if any.
-  late final constraints = getEqualRange<GenericParamConstraint>(0, index + 1);
+  late final constraints = getEqualRange<GenericParamConstraint>(
+    0,
+    index + 1,
+  ).toList(growable: false);
 
   @override
   String toString() => constraints.isEmpty

@@ -16,7 +16,7 @@ void main() async {
         'Windows.Foundation',
         'IAsyncOperationWithProgress`2',
       );
-      final generics = typeDef.generics.toList();
+      final generics = typeDef.generics;
       check(generics.length).equals(2);
       final [tResult, tProgress] = generics;
 

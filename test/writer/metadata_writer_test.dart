@@ -256,7 +256,7 @@ void main() {
           .where((def) => def.name == 'Name')
           .firstOrNull;
       check(type).isNotNull();
-      final attributes = type!.attributes.toList();
+      final attributes = type!.attributes;
       check(attributes.length).equals(1);
       final attribute = attributes.first;
       check(attribute.type.name).equals('.ctor');
@@ -357,7 +357,7 @@ void main() {
       final index = winmd.MetadataIndex.fromReader(reader);
 
       final typeDef = index.findSingleType('Namespace', 'Name');
-      final methods = typeDef.methods.toList();
+      final methods = typeDef.methods;
       check(methods.length).equals(2);
 
       check(methods[0].name).equals('One');
@@ -414,7 +414,7 @@ void main() {
       final index = winmd.MetadataIndex.fromReader(reader);
 
       final typeDef = index.findSingleType('Namespace', 'Name');
-      final fields = typeDef.fields.toList();
+      final fields = typeDef.fields;
       check(fields.length).equals(2);
 
       check(fields[0].name).equals('SomeGuid');

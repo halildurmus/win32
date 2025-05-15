@@ -51,7 +51,7 @@ final class Property extends Row with HasCustomAttributes {
   late final methodSemantics = getEqualRange<MethodSemantics>(
     2,
     HasSemantics.property(this).encode(),
-  );
+  ).toList(growable: false);
 
   /// The getter method of the property, if present.
   late final getter = methodSemantics

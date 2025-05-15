@@ -23,7 +23,7 @@ void main() async {
         check(codedIndex.encode()).equals(10);
         check(codedIndex.toString()).equals(
           'MethodDef(name: MsiCloseHandle, '
-          'params: (Param(sequence: 1, name: hAny)))',
+          'params: [Param(sequence: 1, name: hAny)])',
         );
         final decoded = CustomAttributeType.decode(
           index,
@@ -105,7 +105,7 @@ void main() async {
         check(codedIndex.encode()).equals(32);
         check(codedIndex.toString()).equals(
           'MethodDef(name: MsiCloseHandle, '
-          'params: (Param(sequence: 1, name: hAny)))',
+          'params: [Param(sequence: 1, name: hAny)])',
         );
         final decoded = HasCustomAttribute.decode(
           index,
@@ -478,7 +478,7 @@ void main() async {
         check(codedIndex.encode()).equals(5);
         check(codedIndex.toString()).equals(
           'MethodDef(name: MsiCloseHandle, '
-          'params: (Param(sequence: 1, name: hAny)))',
+          'params: [Param(sequence: 1, name: hAny)])',
         );
         final decoded = HasDeclSecurity.decode(index, 0, codedIndex.encode());
         check(decoded.encode()).equals(5);
@@ -605,7 +605,7 @@ void main() async {
         check(codedIndex.encode()).equals(3);
         check(codedIndex.toString()).equals(
           'MethodDef(name: MsiCloseHandle, '
-          'params: (Param(sequence: 1, name: hAny)))',
+          'params: [Param(sequence: 1, name: hAny)])',
         );
         final decoded = MemberForwarded.decode(index, 0, codedIndex.encode());
         check(decoded.encode()).equals(3);
@@ -645,7 +645,7 @@ void main() async {
         check(codedIndex.encode()).equals(11);
         check(codedIndex.toString()).equals(
           'MethodDef(name: MsiCloseHandle, '
-          'params: (Param(sequence: 1, name: hAny)))',
+          'params: [Param(sequence: 1, name: hAny)])',
         );
         final decoded = MemberRefParent.decode(index, 0, codedIndex.encode());
         check(decoded.encode()).equals(11);
@@ -676,7 +676,7 @@ void main() async {
         check(codedIndex.encode()).equals(2);
         check(codedIndex.toString()).equals(
           'MethodDef(name: MsiCloseHandle, '
-          'params: (Param(sequence: 1, name: hAny)))',
+          'params: [Param(sequence: 1, name: hAny)])',
         );
         final decoded = MethodDefOrRef.decode(index, 0, codedIndex.encode());
         check(decoded.encode()).equals(2);
@@ -799,7 +799,7 @@ void main() async {
         check(codedIndex.encode()).equals(3);
         check(codedIndex.toString()).equals(
           'MethodDef(name: MsiCloseHandle, '
-          'params: (Param(sequence: 1, name: hAny)))',
+          'params: [Param(sequence: 1, name: hAny)])',
         );
         final decoded = TypeOrMethodDef.decode(index, 0, codedIndex.encode());
         check(decoded.encode()).equals(3);

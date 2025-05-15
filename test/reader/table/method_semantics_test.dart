@@ -17,7 +17,7 @@ void main() async {
         'StringMap',
       );
       final mapChanged = stringMap.findEvent('MapChanged');
-      final methodSemantics = mapChanged.methodSemantics.toList();
+      final methodSemantics = mapChanged.methodSemantics;
       check(methodSemantics.length).equals(2);
       final [add, remove] = methodSemantics;
       check(add.association).isA<HasSemanticsEvent>();
@@ -34,7 +34,7 @@ void main() async {
         'StringMap',
       );
       final size = stringMap.findProperty('Size');
-      final methodSemantics = size.methodSemantics.toList();
+      final methodSemantics = size.methodSemantics;
       check(methodSemantics.length).equals(1);
       final [get] = methodSemantics;
       check(get.association).isA<HasSemanticsProperty>();

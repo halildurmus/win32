@@ -89,10 +89,10 @@ final class TypeDef extends Row with HasCustomAttributes {
   }();
 
   /// The list of fields defined in the type, if any.
-  late final fields = getList<Field>(4);
+  late final fields = getList<Field>(4).toList(growable: false);
 
   /// The list of methods defined in the type, if any.
-  late final methods = getList<MethodDef>(5);
+  late final methods = getList<MethodDef>(5).toList(growable: false);
 
   /// The category of the type, which could be a class, interface, enum, struct,
   /// delegate, or attribute.
@@ -121,7 +121,8 @@ final class TypeDef extends Row with HasCustomAttributes {
               reader.readUint(row, MetadataTable.eventMap, 0) == eventIndex,
         )
         .firstOrNull;
-    if (eventMapRow == null) return const Iterable<Event>.empty();
+    if (eventMapRow == null) return const <Event>[];
+
     final companion = Row.companion<Event>();
     final rows = reader.getList(
       eventMapRow,
@@ -129,22 +130,30 @@ final class TypeDef extends Row with HasCustomAttributes {
       1,
       MetadataTable.event,
     );
-    return rows.map(
-      (index) => companion.constructor(metadataIndex, readerIndex, index),
-    );
+    return rows
+        .map(
+          (index) => companion.constructor(metadataIndex, readerIndex, index),
+        )
+        .toList(growable: false);
   }();
 
   /// The list of generic parameters defined for the type, if any.
   late final generics = getEqualRange<GenericParam>(
     2,
     TypeOrMethodDef.typeDef(this).encode(),
-  );
+  ).toList(growable: false);
 
   /// The list of interfaces implemented by the type, if any.
-  late final interfaceImpls = getEqualRange<InterfaceImpl>(0, index + 1);
+  late final interfaceImpls = getEqualRange<InterfaceImpl>(
+    0,
+    index + 1,
+  ).toList(growable: false);
 
   /// The list of method implementations defined for the type, if any.
-  late final methodImpls = getEqualRange<MethodImpl>(0, index + 1);
+  late final methodImpls = getEqualRange<MethodImpl>(
+    0,
+    index + 1,
+  ).toList(growable: false);
 
   /// The nested class associated with the type, if any.
   late final nested = getEqualRange<NestedClass>(1, index + 1).firstOrNull;
@@ -159,7 +168,8 @@ final class TypeDef extends Row with HasCustomAttributes {
               propertyIndex,
         )
         .firstOrNull;
-    if (propertyMapRow == null) return const Iterable<Property>.empty();
+    if (propertyMapRow == null) return const <Property>[];
+
     final companion = Row.companion<Property>();
     final rows = reader.getList(
       propertyMapRow,
@@ -167,9 +177,11 @@ final class TypeDef extends Row with HasCustomAttributes {
       1,
       MetadataTable.property,
     );
-    return rows.map(
-      (index) => companion.constructor(metadataIndex, readerIndex, index),
-    );
+    return rows
+        .map(
+          (index) => companion.constructor(metadataIndex, readerIndex, index),
+        )
+        .toList(growable: false);
   }();
 
   @override

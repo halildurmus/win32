@@ -276,8 +276,8 @@ MethodImpl? _resolveMethodImpl(List<MethodImpl> methodImpls, MethodDef method) {
       if (value.name != method.name) continue;
       if (value.signature() != method.signature()) continue;
 
-      final paramsA = value.params.toList();
-      final paramsB = method.params.toList();
+      final paramsA = value.params;
+      final paramsB = method.params;
       if (paramsA.length != paramsB.length) continue;
 
       var matches = true;
@@ -409,7 +409,7 @@ Map<String, MethodDefIndex> _writeMethods(
   TypeDefIndex typeDefIndex,
 ) {
   final specialMethods = <String, MethodDefIndex>{};
-  final methodImpls = typeDef.methodImpls.toList();
+  final methodImpls = typeDef.methodImpls;
 
   for (final method in typeDef.methods) {
     final methodIndex = writer.writeMethodDef(

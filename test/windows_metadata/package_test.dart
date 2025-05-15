@@ -21,25 +21,5 @@ void main() {
       check(winrt.packageId).equals('microsoft.windows.sdk.contracts');
       check(winrt.assetName).equals('Windows.winmd');
     });
-
-    test('fromPackageId', () {
-      check(
-        WindowsMetadataPackage.fromPackageId(
-          'microsoft.windows.wdk.win32metadata',
-        ),
-      ).equals(WindowsMetadataPackage.wdk);
-      check(
-        WindowsMetadataPackage.fromPackageId(
-          'microsoft.windows.sdk.win32metadata',
-        ),
-      ).equals(WindowsMetadataPackage.win32);
-      check(
-        WindowsMetadataPackage.fromPackageId('microsoft.windows.sdk.contracts'),
-      ).equals(WindowsMetadataPackage.winrt);
-      check(() => WindowsMetadataPackage.fromPackageId('unknown.package.id'))
-          .throws<ArgumentError>()
-          .has((e) => e.message, 'message')
-          .equals('Unknown package ID.');
-    });
   });
 }

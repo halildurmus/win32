@@ -11,7 +11,7 @@ base mixin HasCustomAttributes on Row {
   late final attributes = getEqualRange<CustomAttribute>(
     0,
     HasCustomAttribute(this).encode(),
-  );
+  ).toList(growable: false);
 
   /// Retrieves the first argument of the custom attribute with the given
   /// [attributeName], if it is a string.

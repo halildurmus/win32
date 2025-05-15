@@ -25,7 +25,7 @@ void main() async {
           'Windows.Win32.Foundation',
           'HMODULE',
         );
-        final attributes = typeDef.attributes.toList();
+        final attributes = typeDef.attributes;
         check(attributes.length).equals(4);
         final [raiiFree, alsoUsableFor, invalidHandleValue, nativeTypedef] =
             attributes;

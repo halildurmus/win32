@@ -24,7 +24,7 @@ final class EventMap extends Row {
   late final parent = readRow<TypeDef>(0);
 
   /// A list of [Event]s that belong to the type defined in [parent].
-  late final events = getList<Event>(1);
+  late final events = getList<Event>(1).toList(growable: false);
 
   @override
   String toString() => 'EventMap(parent: $parent, events: $events)';

@@ -41,7 +41,7 @@ final class Event extends Row with HasCustomAttributes {
   late final methodSemantics = getEqualRange<MethodSemantics>(
     2,
     HasSemantics.event(this).encode(),
-  );
+  ).toList(growable: false);
 
   /// The `add_` method of the event.
   late final add = methodSemantics

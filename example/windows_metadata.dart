@@ -29,7 +29,7 @@ void main() async {
   final MethodSignature(:returnType, :types) = function.signature();
   print('  Return type: $returnType');
 
-  final parameters = function.params.toList();
+  final parameters = function.params;
   for (final (i, type) in types.indexed) {
     final parameter = parameters[i + 1]; // skip return value
     print('  Parameter #${i + 1}:');

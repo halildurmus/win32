@@ -16,7 +16,7 @@ void main() async {
         'Windows.Win32.System.Com',
         'CoCreateGuid',
       );
-      final params = method.params.toList();
+      final params = method.params;
       check(params.length).equals(2);
       check(params[0].flags).equals(const ParamAttributes(0));
       check(params[0].sequence).equals(0);
@@ -37,7 +37,7 @@ void main() async {
         'ICalendarFactory',
       );
       final method = typeDef.findMethod('CreateCalendar');
-      final params = method.params.toList();
+      final params = method.params;
       check(params.length).equals(4);
       check(params[0].flags).equals(const ParamAttributes(0));
       check(params[0].sequence).equals(0);
@@ -68,7 +68,7 @@ void main() async {
         'ITensorBooleanStatics',
       );
       final method = typeDef.findMethod('CreateFromArray');
-      final params = method.params.toList();
+      final params = method.params;
       check(params.length).equals(3);
       check(params[0].flags).equals(const ParamAttributes(0));
       check(params[0].sequence).equals(0);

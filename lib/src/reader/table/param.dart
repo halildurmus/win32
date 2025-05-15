@@ -41,7 +41,7 @@ final class Param extends Row with HasCustomAttributes {
     HasConstant.param(this).encode(),
   ).firstOrNull;
 
-  /// The marshal information for the param, if any.
+  /// The marshal information for the parameter, if any.
   late final fieldMarshal = getEqualRange<FieldMarshal>(
     0,
     HasFieldMarshal.param(this).encode(),
