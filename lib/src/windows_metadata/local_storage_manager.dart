@@ -16,7 +16,7 @@ import 'package.dart';
 ///
 /// By default, data is stored in:
 /// - **Windows**: `%LocalAppData%\winmd`
-/// - **Other platforms**: `$HOME/.cache/winmd`
+/// - **Linux and macOS**: `$HOME/.cache/winmd`
 final class LocalStorageManager {
   /// Creates a new [LocalStorageManager] instance.
   ///

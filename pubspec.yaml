@@ -14,8 +14,6 @@ environment:
   sdk: ^3.8.0-0
 
 platforms:
-  android:
-  ios:
   linux:
   macos:
   windows:
