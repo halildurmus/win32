@@ -1,6 +1,6 @@
 name: winmd
-description: >
-  Read and write Windows Metadata (.winmd) files based on the ECMA-335 standard.
+description: Inspect and generate Windows Metadata (.winmd) files based on the
+  ECMA-335 standard.
 version: 7.0.0-wip
 repository: https://github.com/halildurmus/winmd
 issue_tracker: https://github.com/halildurmus/winmd/issues
