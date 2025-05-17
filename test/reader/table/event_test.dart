@@ -17,6 +17,7 @@ void main() async {
         'StringMap',
       );
       final mapChanged = stringMap.findEvent('MapChanged');
+      check(mapChanged.token).equals(0x14000296);
       check(mapChanged.eventFlags).equals(const EventAttributes(0));
       check(mapChanged.name).equals('MapChanged');
       check(mapChanged.add.name).equals('add_MapChanged');

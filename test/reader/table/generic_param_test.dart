@@ -20,6 +20,7 @@ void main() async {
       check(generics.length).equals(2);
       final [tResult, tProgress] = generics;
 
+      check(tResult.token).equals(0x2A000009);
       check(tResult.sequence).equals(0);
       check(tResult.flags).equals(GenericParamAttributes.none);
       check(tResult.variance).equals(Variance.none);

@@ -18,6 +18,7 @@ void main() async {
       );
       final params = method.params;
       check(params.length).equals(2);
+      check(params[0].token).equals(0x080009BF);
       check(params[0].flags).equals(const ParamAttributes(0));
       check(params[0].sequence).equals(0);
       check(params[0].name).isEmpty();

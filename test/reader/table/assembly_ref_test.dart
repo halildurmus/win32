@@ -16,6 +16,7 @@ void main() async {
     test('netstandard', () {
       check(index.assemblyRef.length).isGreaterOrEqual(4);
       final assemblyRef = index.assemblyRef.first;
+      check(assemblyRef.token).equals(0x23000000);
       check(assemblyRef.majorVersion).equals(2);
       check(assemblyRef.minorVersion).equals(1);
       check(assemblyRef.buildNumber).equals(0);

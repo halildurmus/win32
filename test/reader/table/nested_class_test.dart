@@ -20,6 +20,7 @@ void main() async {
           .toList();
       check(nestedClasses.length).equals(1);
       final nested = nestedClasses[0];
+      check(nested.token).equals(0x29000028);
       check(nested.inner.namespace).isEmpty();
       check(nested.inner.name).equals('_Anonymous_e__Union');
       check(nested.outer.namespace).equals('Windows.Win32.Devices.Bluetooth');

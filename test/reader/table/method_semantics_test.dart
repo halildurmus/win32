@@ -20,6 +20,7 @@ void main() async {
       final methodSemantics = mapChanged.methodSemantics;
       check(methodSemantics.length).equals(2);
       final [add, remove] = methodSemantics;
+      check(add.token).equals(0x180007DD);
       check(add.association).isA<HasSemanticsEvent>();
       check(add.method.name).equals('add_MapChanged');
       check(add.semantics).equals(MethodSemanticsAttributes.addOn);

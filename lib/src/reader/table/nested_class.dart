@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
 
+import '../../common.dart';
 import '../metadata_index.dart';
 import '../metadata_table.dart';
 import '../row.dart';
@@ -18,6 +19,9 @@ final class NestedClass extends Row {
 
   @override
   MetadataTable get table => MetadataTable.nestedClass;
+
+  @override
+  int get token => (MetadataTableId.nestedClass << 24) | index;
 
   /// The [TypeDef] that is contained.
   late final inner = readRow<TypeDef>(0);

@@ -17,6 +17,7 @@ void main() async {
         'StringMap',
       );
       final size = stringMap.findProperty('Size');
+      check(size.token).equals(0x17002572);
       check(size.flags).equals(const PropertyAttributes(0));
       check(size.name).equals('Size');
       check(size.signature()).equals(

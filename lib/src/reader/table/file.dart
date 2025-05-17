@@ -1,6 +1,7 @@
 import 'package:meta/meta.dart';
 
 import '../../attributes.dart';
+import '../../common.dart';
 import '../blob.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
@@ -21,6 +22,9 @@ final class File extends Row with HasCustomAttributes {
 
   @override
   MetadataTable get table => MetadataTable.file;
+
+  @override
+  int get token => (MetadataTableId.file << 24) | index;
 
   /// The attributes of the file.
   late final flags = FileAttributes(readUint32(0));

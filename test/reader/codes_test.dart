@@ -261,9 +261,10 @@ void main() async {
         );
         check(codedIndex.encode()).equals(43);
         check(codedIndex.toString()).equals(
-          'StandAloneSig(readerIndex: 0, index: 0, table: '
-          'MetadataTable.standAloneSig, metadataIndex: '
-          'MetadataIndex(readers: 2, namespaces: 671))',
+          'StandAloneSig(readerIndex: 0, index: 0, '
+          'table: MetadataTable.standAloneSig, '
+          'token: 0x11000000, '
+          'metadataIndex: MetadataIndex(readers: 2, namespaces: 671))',
         );
         final decoded = HasCustomAttribute.decode(
           index,
@@ -295,8 +296,10 @@ void main() async {
         final codedIndex = HasCustomAttribute.typeSpec(TypeSpec(index, 0, 0));
         check(codedIndex.encode()).equals(45);
         check(codedIndex.toString()).equals(
-          'TypeSpec(readerIndex: 0, index: 0, table: '
-          'MetadataTable.typeSpec, metadataIndex: MetadataIndex(readers: 2, '
+          'TypeSpec(readerIndex: 0, index: 0, '
+          'table: MetadataTable.typeSpec, '
+          'token: 0x1b000000, '
+          'metadataIndex: MetadataIndex(readers: 2, '
           'namespaces: 671))',
         );
         final decoded = HasCustomAttribute.decode(
@@ -351,6 +354,7 @@ void main() async {
         check(codedIndex.encode()).equals(48);
         check(codedIndex.toString()).equals(
           'File(readerIndex: 0, index: 0, table: MetadataTable.file, '
+          'token: 0x26000000, '
           'metadataIndex: MetadataIndex(readers: 2, namespaces: 671))',
         );
         final decoded = HasCustomAttribute.decode(
@@ -368,9 +372,10 @@ void main() async {
         );
         check(codedIndex.encode()).equals(49);
         check(codedIndex.toString()).equals(
-          'ExportedType(readerIndex: 0, index: 0, table: '
-          'MetadataTable.exportedType, metadataIndex: '
-          'MetadataIndex(readers: 2, namespaces: 671))',
+          'ExportedType(readerIndex: 0, index: 0, '
+          'table: MetadataTable.exportedType, '
+          'token: 0x27000000, '
+          'metadataIndex: MetadataIndex(readers: 2, namespaces: 671))',
         );
         final decoded = HasCustomAttribute.decode(
           index,
@@ -389,9 +394,10 @@ void main() async {
         );
         check(codedIndex.encode()).equals(50);
         check(codedIndex.toString()).equals(
-          'ManifestResource(readerIndex: 0, index: 0, table: '
-          'MetadataTable.manifestResource, metadataIndex: '
-          'MetadataIndex(readers: 2, namespaces: 671))',
+          'ManifestResource(readerIndex: 0, index: 0, '
+          'table: MetadataTable.manifestResource, '
+          'token: 0x28000000, '
+          'metadataIndex: MetadataIndex(readers: 2, namespaces: 671))',
         );
         final decoded = HasCustomAttribute.decode(
           index,
@@ -427,9 +433,10 @@ void main() async {
         );
         check(codedIndex.encode()).equals(52);
         check(codedIndex.toString()).equals(
-          'GenericParamConstraint(readerIndex: 0, index: 0, table: '
-          'MetadataTable.genericParamConstraint, metadataIndex: '
-          'MetadataIndex(readers: 2, namespaces: 671))',
+          'GenericParamConstraint(readerIndex: 0, index: 0, '
+          'table: MetadataTable.genericParamConstraint, '
+          'token: 0x2c000000, '
+          'metadataIndex: MetadataIndex(readers: 2, namespaces: 671))',
         );
         final decoded = HasCustomAttribute.decode(
           index,
@@ -448,9 +455,10 @@ void main() async {
         );
         check(codedIndex.encode()).equals(53);
         check(codedIndex.toString()).equals(
-          'MethodSpec(readerIndex: 0, index: 0, table: '
-          'MetadataTable.methodSpec, metadataIndex: '
-          'MetadataIndex(readers: 2, namespaces: 671))',
+          'MethodSpec(readerIndex: 0, index: 0, '
+          'table: MetadataTable.methodSpec, '
+          'token: 0x2b000000, '
+          'metadataIndex: MetadataIndex(readers: 2, namespaces: 671))',
         );
         final decoded = HasCustomAttribute.decode(
           index,
@@ -548,6 +556,7 @@ void main() async {
         check(codedIndex.encode()).equals(4);
         check(codedIndex.toString()).equals(
           'File(readerIndex: 0, index: 0, table: MetadataTable.file, '
+          'token: 0x26000000, '
           'metadataIndex: MetadataIndex(readers: 2, namespaces: 671))',
         );
         final decoded = Implementation.decode(index, 0, codedIndex.encode());
@@ -570,9 +579,10 @@ void main() async {
         );
         check(codedIndex.encode()).equals(6);
         check(codedIndex.toString()).equals(
-          'ExportedType(readerIndex: 0, index: 0, table: '
-          'MetadataTable.exportedType, metadataIndex: '
-          'MetadataIndex(readers: 2, namespaces: 671))',
+          'ExportedType(readerIndex: 0, index: 0, '
+          'table: MetadataTable.exportedType, '
+          'token: 0x27000000, '
+          'metadataIndex: MetadataIndex(readers: 2, namespaces: 671))',
         );
         final decoded = Implementation.decode(index, 0, codedIndex.encode());
         check(decoded.encode()).equals(6);
@@ -656,6 +666,7 @@ void main() async {
         check(codedIndex.encode()).equals(12);
         check(codedIndex.toString()).equals(
           'TypeSpec(readerIndex: 0, index: 0, table: MetadataTable.typeSpec, '
+          'token: 0x1b000000, '
           'metadataIndex: MetadataIndex(readers: 2, namespaces: 671))',
         );
         final decoded = MemberRefParent.decode(index, 0, codedIndex.encode());
@@ -762,6 +773,7 @@ void main() async {
         check(codedIndex.encode()).equals(6);
         check(codedIndex.toString()).equals(
           'TypeSpec(readerIndex: 0, index: 0, table: MetadataTable.typeSpec, '
+          'token: 0x1b000000, '
           'metadataIndex: MetadataIndex(readers: 2, namespaces: 671))',
         );
         final decoded = TypeDefOrRef.decode(index, 0, codedIndex.encode());

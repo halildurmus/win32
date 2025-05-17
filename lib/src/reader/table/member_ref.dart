@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
 
+import '../../common.dart';
 import '../../member_ref_signature.dart';
 import '../../metadata_type.dart';
 import '../codes.dart';
@@ -22,6 +23,9 @@ final class MemberRef extends Row with HasCustomAttributes {
 
   @override
   MetadataTable get table => MetadataTable.memberRef;
+
+  @override
+  int get token => (MetadataTableId.memberRef << 24) | index;
 
   /// The type that contains the referenced member.
   late final parent = decode<MemberRefParent>(0);

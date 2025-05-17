@@ -12,6 +12,7 @@ void main() async {
   group('EventMap', () {
     test('ISplashScreen', () {
       final eventMap = index.eventMap.first;
+      check(eventMap.token).equals(0x12000000);
       check(eventMap.parent.namespace).equals('Windows.ApplicationModel');
       check(eventMap.parent.name).equals('IPackageCatalog');
       final events = eventMap.events;

@@ -12,6 +12,7 @@ void main() async {
 
   test('AssemblyOS', () {
     final assemblyOS = AssemblyOS(index, 0, 0);
+    check(assemblyOS.token).equals(0x22000000);
     check(assemblyOS.osPlatformId).equals(0);
     check(assemblyOS.osMajorVersion).equals(0);
     check(assemblyOS.osMinorVersion).equals(0);

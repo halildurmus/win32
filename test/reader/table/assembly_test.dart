@@ -14,6 +14,7 @@ void main() async {
     test('Windows.Win32.winmd', () {
       check(index.assembly.length).equals(1);
       final assembly = index.assembly.first;
+      check(assembly.token).equals(0x20000000);
       check(assembly.majorVersion).equals(0);
       check(assembly.minorVersion).equals(0);
       check(assembly.buildNumber).equals(0);

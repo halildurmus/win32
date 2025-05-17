@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
 
+import '../../common.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
 import '../metadata_table.dart';
@@ -17,6 +18,9 @@ final class StandAloneSig extends Row with HasCustomAttributes {
 
   @override
   MetadataTable get table => MetadataTable.standAloneSig;
+
+  @override
+  int get token => (MetadataTableId.standAloneSig << 24) | index;
 
   /// The signature of a standalone method or local variable.
   late final signature = readBlob(0).readStandAloneSignature();

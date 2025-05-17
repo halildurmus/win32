@@ -1,6 +1,7 @@
 import 'package:meta/meta.dart';
 
 import '../../attributes.dart';
+import '../../common.dart';
 import '../../exception.dart';
 import '../codes.dart';
 import '../metadata_index.dart';
@@ -23,6 +24,9 @@ final class ImplMap extends Row {
 
   @override
   MetadataTable get table => MetadataTable.implMap;
+
+  @override
+  int get token => (MetadataTableId.implMap << 24) | index;
 
   /// The flags describing how the unmanaged call should be performed.
   late final flags = PInvokeAttributes(readUint16(0));

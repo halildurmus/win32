@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
 
+import '../../common.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
 import '../metadata_table.dart';
@@ -21,6 +22,9 @@ final class Module extends Row with HasCustomAttributes {
 
   @override
   MetadataTable get table => MetadataTable.module;
+
+  @override
+  int get token => (MetadataTableId.module << 24) | index;
 
   /// The name of the module.
   late final name = readString(1);

@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
 
+import '../../common.dart';
 import '../codes.dart';
 import '../metadata_index.dart';
 import '../metadata_table.dart';
@@ -18,6 +19,9 @@ final class FieldMarshal extends Row {
 
   @override
   MetadataTable get table => MetadataTable.fieldMarshal;
+
+  @override
+  int get token => (MetadataTableId.fieldMarshal << 24) | index;
 
   /// The entity being marshaled.
   late final parent = decode<HasFieldMarshal>(0);

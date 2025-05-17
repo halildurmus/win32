@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
 
+import '../../common.dart';
 import '../metadata_index.dart';
 import '../metadata_table.dart';
 import '../row.dart';
@@ -19,6 +20,9 @@ final class ClassLayout extends Row {
 
   @override
   MetadataTable get table => MetadataTable.classLayout;
+
+  @override
+  int get token => (MetadataTableId.classLayout << 24) | index;
 
   /// The packing size (byte alignment) for the class fields.
   ///

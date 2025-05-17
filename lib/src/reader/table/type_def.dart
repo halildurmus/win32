@@ -1,6 +1,7 @@
 import 'package:meta/meta.dart';
 
 import '../../attributes.dart';
+import '../../common.dart';
 import '../../exception.dart';
 import '../codes.dart';
 import '../has_custom_attributes.dart';
@@ -35,6 +36,9 @@ final class TypeDef extends Row with HasCustomAttributes {
 
   @override
   MetadataTable get table => MetadataTable.typeDef;
+
+  @override
+  int get token => (MetadataTableId.typeDef << 24) | index;
 
   /// Type attributes that represents various attributes of the type, such as
   /// visibility, layout, and semantics.

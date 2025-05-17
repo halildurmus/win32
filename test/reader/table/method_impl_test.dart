@@ -17,6 +17,7 @@ void main() async {
         'Calendar',
       );
       final clone = calendar.methodImpls.first;
+      check(clone.token).equals(0x190022EB);
       check(clone.class$.namespace).equals('Windows.Globalization');
       check(clone.class$.name).equals('Calendar');
       check(clone.methodBody)

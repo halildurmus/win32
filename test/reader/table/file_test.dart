@@ -20,6 +20,7 @@ void main() {
     check(files.length).equals(2);
     final [file1, file2] = files;
 
+    check(file1.token).equals(0x26000000);
     check(file1.name).equals('foo.dll');
     check(file1.hashValue.slice).deepEquals([1, 2, 3]);
     check(file1.flags).equals(FileAttributes.containsNoMetadata);

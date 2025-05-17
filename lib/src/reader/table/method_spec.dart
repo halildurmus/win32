@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
 
+import '../../common.dart';
 import '../codes.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
@@ -19,6 +20,9 @@ final class MethodSpec extends Row with HasCustomAttributes {
 
   @override
   MetadataTable get table => MetadataTable.methodSpec;
+
+  @override
+  int get token => (MetadataTableId.methodSpec << 24) | index;
 
   /// The method that is being specialized.
   late final method = decode<MethodDefOrRef>(0);

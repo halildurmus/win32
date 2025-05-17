@@ -12,6 +12,7 @@ void main() async {
   group('PropertyMap', () {
     test('IImageFeatureDescriptor', () {
       final propertyMap = index.propertyMap.first;
+      check(propertyMap.token).equals(0x15000000);
       check(propertyMap.parent.namespace).equals('Windows.AI.MachineLearning');
       check(propertyMap.parent.name).equals('IImageFeatureDescriptor');
       final properties = propertyMap.properties;

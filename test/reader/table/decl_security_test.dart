@@ -34,6 +34,7 @@ void main() {
     final reader = winmd.MetadataReader.read(writer.toBytes());
     final index = winmd.MetadataIndex.fromReader(reader);
     final declSecurity = index.declSecurity.first;
+    check(declSecurity.token).equals(0x0E000000);
     check(declSecurity.action).equals(winmd.SecurityAction.demand);
     check(declSecurity.parent)
         .isA<winmd.HasDeclSecurityTypeDef>()

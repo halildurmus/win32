@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
 
+import '../../common.dart';
 import '../metadata_index.dart';
 import '../metadata_table.dart';
 import '../row.dart';
@@ -19,6 +20,9 @@ final class PropertyMap extends Row {
 
   @override
   MetadataTable get table => MetadataTable.propertyMap;
+
+  @override
+  int get token => (MetadataTableId.propertyMap << 24) | index;
 
   /// The [TypeDef] that owns the [properties].
   late final parent = readRow<TypeDef>(0);

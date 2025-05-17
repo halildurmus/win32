@@ -19,6 +19,7 @@ void main() async {
         'FOLDERID_AccountPictures',
       );
       final attribute = field.findAttribute('GuidAttribute');
+      check(attribute.token).equals(0x0C01714D);
       check(attribute.parent).isA<HasCustomAttributeField>();
       final parent = attribute.parent as HasCustomAttributeField;
       check(parent.value.name).equals('FOLDERID_AccountPictures');

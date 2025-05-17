@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
 
+import '../../common.dart';
 import '../metadata_index.dart';
 import '../metadata_table.dart';
 import '../row.dart';
@@ -16,6 +17,9 @@ final class AssemblyProcessor extends Row {
 
   @override
   MetadataTable get table => MetadataTable.assemblyProcessor;
+
+  @override
+  int get token => (MetadataTableId.assemblyProcessor << 24) | index;
 
   /// Always returns zero, per ECMA-335 `§II.22.4`.
   int get processor => 0;

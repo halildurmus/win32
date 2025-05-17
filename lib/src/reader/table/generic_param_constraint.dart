@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
 
+import '../../common.dart';
 import '../codes.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
@@ -20,6 +21,9 @@ final class GenericParamConstraint extends Row with HasCustomAttributes {
 
   @override
   MetadataTable get table => MetadataTable.genericParamConstraint;
+
+  @override
+  int get token => (MetadataTableId.genericParamConstraint << 24) | index;
 
   /// The generic parameter to which this constraint applies.
   late final owner = readRow<GenericParam>(0);

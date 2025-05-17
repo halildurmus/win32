@@ -20,7 +20,8 @@ void main() async {
       );
       final constant = field.constant;
       check(constant).isNotNull();
-      check(constant!.type).isA<Int8Type>();
+      check(constant!.token).equals(0x0B005E23);
+      check(constant.type).isA<Int8Type>();
       check(constant.parent.name).equals('PFD_UNDERLAY_PLANE');
       check(constant.value).equals(const Int8Value(-1));
       check(constant.valueAsInt).isNotNull().equals(-1);

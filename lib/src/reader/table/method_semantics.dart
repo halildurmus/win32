@@ -1,6 +1,7 @@
 import 'package:meta/meta.dart';
 
 import '../../attributes.dart';
+import '../../common.dart';
 import '../codes.dart';
 import '../metadata_index.dart';
 import '../metadata_table.dart';
@@ -21,6 +22,9 @@ final class MethodSemantics extends Row {
 
   @override
   MetadataTable get table => MetadataTable.methodSemantics;
+
+  @override
+  int get token => (MetadataTableId.methodSemantics << 24) | index;
 
   /// The semantics of the method.
   late final semantics = MethodSemanticsAttributes(readUint16(0));

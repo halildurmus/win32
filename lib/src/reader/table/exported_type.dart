@@ -1,6 +1,7 @@
 import 'package:meta/meta.dart';
 
 import '../../attributes.dart';
+import '../../common.dart';
 import '../codes.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
@@ -24,6 +25,9 @@ final class ExportedType extends Row with HasCustomAttributes {
 
   @override
   MetadataTable get table => MetadataTable.exportedType;
+
+  @override
+  int get token => (MetadataTableId.exportedType << 24) | index;
 
   /// The attributes of the exported type.
   late final flags = TypeAttributes(readUint32(0));

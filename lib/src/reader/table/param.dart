@@ -1,6 +1,7 @@
 import 'package:meta/meta.dart';
 
 import '../../attributes.dart';
+import '../../common.dart';
 import '../codes.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
@@ -24,6 +25,9 @@ final class Param extends Row with HasCustomAttributes {
 
   @override
   MetadataTable get table => MetadataTable.param;
+
+  @override
+  int get token => (MetadataTableId.param << 24) | index;
 
   /// Param attributes that indicates various attributes of the parameter,
   /// such as whether it is optional, has a default value, etc.

@@ -23,6 +23,7 @@ void main() {
     final reader = winmd.MetadataReader.read(writer.toBytes());
     final index = winmd.MetadataIndex.fromReader(reader);
     final exportedType = index.exportedType.first;
+    check(exportedType.token).equals(0x27000000);
     check(exportedType.flags).equals(winmd.TypeAttributes.public);
     check(
       exportedType.typeDefId,

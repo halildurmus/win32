@@ -1,6 +1,7 @@
 import 'package:meta/meta.dart';
 
 import '../../attributes.dart';
+import '../../common.dart';
 import '../codes.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
@@ -23,6 +24,9 @@ final class GenericParam extends Row with HasCustomAttributes {
 
   @override
   MetadataTable get table => MetadataTable.genericParam;
+
+  @override
+  int get token => (MetadataTableId.genericParam << 24) | index;
 
   /// The index of the generic parameter in the parameter list.
   ///

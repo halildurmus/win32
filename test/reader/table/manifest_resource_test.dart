@@ -23,6 +23,7 @@ void main() {
       final reader = winmd.MetadataReader.read(writer.toBytes());
       final index = winmd.MetadataIndex.fromReader(reader);
       final manifestResource = index.manifestResource.first;
+      check(manifestResource.token).equals(0x28000000);
       check(manifestResource.offset).equals(0);
       check(
         manifestResource.flags,

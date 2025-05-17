@@ -16,6 +16,7 @@ void main() {
       final reader = MetadataReader.read(writer.toBytes());
       final index = MetadataIndex.fromReader(reader);
       final localVarSig = index.standAloneSig.first;
+      check(localVarSig.token).equals(0x11000000);
       check(
         localVarSig.signature,
       ).equals(const LocalVarSig([Int32Type(), StringType()]));

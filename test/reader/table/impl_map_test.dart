@@ -20,7 +20,8 @@ void main() async {
       );
       final implMap = function.implMap;
       check(implMap).isNotNull();
-      check(implMap!.flags).equals(
+      check(implMap!.token).equals(0x1C0042E2);
+      check(implMap.flags).equals(
         PInvokeAttributes.noMangle |
             PInvokeAttributes.supportsLastError |
             PInvokeAttributes.callConvPlatformApi,

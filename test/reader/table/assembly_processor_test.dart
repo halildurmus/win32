@@ -12,6 +12,7 @@ void main() async {
 
   test('AssemblyProcessor', () {
     final assemblyProcessor = AssemblyProcessor(index, 0, 0);
+    check(assemblyProcessor.token).equals(0x21000000);
     check(assemblyProcessor.processor).equals(0);
   });
 }

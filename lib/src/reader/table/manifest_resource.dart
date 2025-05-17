@@ -1,6 +1,7 @@
 import 'package:meta/meta.dart';
 
 import '../../attributes.dart';
+import '../../common.dart';
 import '../../exception.dart';
 import '../codes.dart';
 import '../has_custom_attributes.dart';
@@ -23,6 +24,9 @@ final class ManifestResource extends Row with HasCustomAttributes {
 
   @override
   MetadataTable get table => MetadataTable.manifestResource;
+
+  @override
+  int get token => (MetadataTableId.manifestResource << 24) | index;
 
   /// The offset within the manifest stream that points to the resource data.
   late final offset = readUint32(0);

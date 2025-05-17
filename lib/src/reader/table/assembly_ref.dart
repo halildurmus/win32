@@ -1,6 +1,7 @@
 import 'package:meta/meta.dart';
 
 import '../../attributes.dart';
+import '../../common.dart';
 import '../../culture.dart';
 import '../blob.dart';
 import '../has_custom_attributes.dart';
@@ -28,6 +29,9 @@ final class AssemblyRef extends Row with HasCustomAttributes {
 
   @override
   MetadataTable get table => MetadataTable.assemblyRef;
+
+  @override
+  int get token => (MetadataTableId.assemblyRef << 24) | index;
 
   /// The major version of the referenced assembly.
   late final majorVersion = readUint16(0);

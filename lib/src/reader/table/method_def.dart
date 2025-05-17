@@ -1,6 +1,7 @@
 import 'package:meta/meta.dart';
 
 import '../../attributes.dart';
+import '../../common.dart';
 import '../../exception.dart';
 import '../../metadata_type.dart';
 import '../../method_signature.dart';
@@ -31,6 +32,9 @@ final class MethodDef extends Row with HasCustomAttributes {
 
   @override
   MetadataTable get table => MetadataTable.methodDef;
+
+  @override
+  int get token => (MetadataTableId.methodDef << 24) | index;
 
   /// The relative virtual address (RVA) of the method's implementation.
   late final rva = readUint32(0);

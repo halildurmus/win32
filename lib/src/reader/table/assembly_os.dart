@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
 
+import '../../common.dart';
 import '../metadata_index.dart';
 import '../metadata_table.dart';
 import '../row.dart';
@@ -18,6 +19,9 @@ final class AssemblyOS extends Row {
 
   @override
   MetadataTable get table => MetadataTable.assemblyOS;
+
+  @override
+  int get token => (MetadataTableId.assemblyOS << 24) | index;
 
   /// Always returns zero, per ECMA-335 `§II.22.3`.
   int get osPlatformId => 0;

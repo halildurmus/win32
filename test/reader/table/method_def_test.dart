@@ -17,6 +17,7 @@ void main() async {
         'AsyncCausalityTracer',
       );
       final method = typeDef.findMethod('TraceSynchronousWorkCompletion');
+      check(method.token).equals(0x06004B5C);
       check(method.rva).equals(0);
       check(method.implFlags).equals(MethodImplAttributes.runtime);
       check(method.codeType).equals(CodeType.runtime);

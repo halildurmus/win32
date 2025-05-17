@@ -1,6 +1,7 @@
 import 'package:meta/meta.dart';
 
 import '../../attributes.dart';
+import '../../common.dart';
 import '../blob.dart';
 import '../codes.dart';
 import '../metadata_index.dart';
@@ -21,6 +22,9 @@ final class DeclSecurity extends Row {
 
   @override
   MetadataTable get table => MetadataTable.declSecurity;
+
+  @override
+  int get token => (MetadataTableId.declSecurity << 24) | index;
 
   /// The security action (e.g., demand, assert, deny).
   late final action = SecurityAction.fromValue(readUint16(0));

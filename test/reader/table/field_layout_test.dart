@@ -19,7 +19,8 @@ void main() async {
       final field = typeDef.findField('ProcessorCount');
       final layout = field.layout;
       check(layout).isNotNull();
-      check(layout!.offset).equals(0);
+      check(layout!.token).equals(0x100004E9);
+      check(layout.offset).equals(0);
       check(layout.field.name).equals('ProcessorCount');
     });
   });

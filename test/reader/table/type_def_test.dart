@@ -16,6 +16,7 @@ void main() async {
         'Windows.Foundation.Collections',
         'StringMap',
       );
+      check(typeDef.token).equals(0x02000FC9);
       check(typeDef.flags).equals(
         TypeAttributes.public |
             TypeAttributes.autoLayout |

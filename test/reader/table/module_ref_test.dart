@@ -20,7 +20,8 @@ void main() async {
       );
       final moduleRef = function.implMap?.importScope;
       check(moduleRef).isNotNull();
-      check(moduleRef!.name).equals('KERNEL32.dll');
+      check(moduleRef!.token).equals(0x1A000005);
+      check(moduleRef.name).equals('KERNEL32.dll');
     });
   });
 }

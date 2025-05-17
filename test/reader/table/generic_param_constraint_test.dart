@@ -32,6 +32,7 @@ void main() {
       final reader = winmd.MetadataReader.read(writer.toBytes());
       final index = winmd.MetadataIndex.fromReader(reader);
       final genericParamConstraint = index.genericParamConstraint.first;
+      check(genericParamConstraint.token).equals(0x2C000000);
       check(genericParamConstraint.owner.sequence).equals(0);
       check(genericParamConstraint.owner.name).equals('E');
       check(genericParamConstraint.constraint)

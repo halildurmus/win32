@@ -51,6 +51,7 @@ void main() {
       final reader = MetadataReader.read(writer.toBytes());
       final index = MetadataIndex.fromReader(reader);
       final methodSpec = index.methodSpec.first;
+      check(methodSpec.token).equals(0x2B000000);
       check(methodSpec.method.name).equals('Insert');
       check(
         methodSpec.instantiation,

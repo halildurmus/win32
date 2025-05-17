@@ -1,6 +1,7 @@
 import 'package:meta/meta.dart';
 
 import '../../attributes.dart';
+import '../../common.dart';
 import '../../culture.dart';
 import '../blob.dart';
 import '../has_custom_attributes.dart';
@@ -28,6 +29,9 @@ final class Assembly extends Row with HasCustomAttributes {
 
   @override
   MetadataTable get table => MetadataTable.assembly;
+
+  @override
+  int get token => (MetadataTableId.assembly << 24) | index;
 
   /// The hash algorithm used to compute the hash value of the assembly.
   late final hashAlgId = AssemblyHashAlgorithm(readUint32(0));

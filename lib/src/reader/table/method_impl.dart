@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
 
+import '../../common.dart';
 import '../codes.dart';
 import '../metadata_index.dart';
 import '../metadata_table.dart';
@@ -20,6 +21,9 @@ final class MethodImpl extends Row {
 
   @override
   MetadataTable get table => MetadataTable.methodImpl;
+
+  @override
+  int get token => (MetadataTableId.methodImpl << 24) | index;
 
   /// The [TypeDef] that contains the method implementation.
   late final class$ = readRow<TypeDef>(0);

@@ -18,6 +18,7 @@ void main() async {
       );
       check(typeDef.interfaceImpls).isNotEmpty();
       final interfaceImpl = typeDef.interfaceImpls.first;
+      check(interfaceImpl.token).equals(0x09001D29);
       check(interfaceImpl.class$.name).equals('IFileDialog');
       check(interfaceImpl.interface()).equals(
         const NamedClassType(

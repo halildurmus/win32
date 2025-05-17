@@ -13,6 +13,7 @@ void main() async {
     test('Windows.Win32.winmd', () {
       check(index.module.length).equals(1);
       final module = index.module.first;
+      check(module.token).equals(0x00000000);
       check(module.name).equals('Windows.Win32.winmd');
       check(
         module.mvid.toString(),

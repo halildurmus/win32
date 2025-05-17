@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
 
+import '../../common.dart';
 import '../../metadata_type.dart';
 import '../../type_name.dart';
 import '../codes.dart';
@@ -22,6 +23,9 @@ final class InterfaceImpl extends Row with HasCustomAttributes {
 
   @override
   MetadataTable get table => MetadataTable.interfaceImpl;
+
+  @override
+  int get token => (MetadataTableId.interfaceImpl << 24) | index;
 
   /// The type that implements the interface.
   late final class$ = readRow<TypeDef>(0);

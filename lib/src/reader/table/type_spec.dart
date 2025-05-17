@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
 
+import '../../common.dart';
 import '../../metadata_type.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
@@ -18,6 +19,9 @@ final class TypeSpec extends Row with HasCustomAttributes {
 
   @override
   MetadataTable get table => MetadataTable.typeSpec;
+
+  @override
+  int get token => (MetadataTableId.typeSpec << 24) | index;
 
   /// The type of the type specification.
   ///

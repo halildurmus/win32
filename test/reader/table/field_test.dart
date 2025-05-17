@@ -18,6 +18,7 @@ void main() async {
         'Windows.Win32.UI.Shell',
         'FOLDERID_AccountPictures',
       );
+      check(field.token).equals(0x0400BA08);
       check(
         field.flags,
       ).equals(FieldAttributes.public | FieldAttributes.static);

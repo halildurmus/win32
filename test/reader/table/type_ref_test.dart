@@ -18,6 +18,7 @@ void main() async {
       );
       check(typeDef.extends$).isNotNull().isA<TypeDefOrRefTypeRef>();
       final extends$ = (typeDef.extends$! as TypeDefOrRefTypeRef).value;
+      check(extends$.token).equals(0x01001071);
       check(extends$.scope).isA<ResolutionScopeAssemblyRef>();
       final scope = (extends$.scope as ResolutionScopeAssemblyRef).value;
       check(scope.name).equals('mscorlib');

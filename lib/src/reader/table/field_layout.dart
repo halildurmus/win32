@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
 
+import '../../common.dart';
 import '../metadata_index.dart';
 import '../metadata_table.dart';
 import '../row.dart';
@@ -18,6 +19,9 @@ final class FieldLayout extends Row {
 
   @override
   MetadataTable get table => MetadataTable.fieldLayout;
+
+  @override
+  int get token => (MetadataTableId.fieldLayout << 24) | index;
 
   /// The byte offset of the field within its containing type.
   ///

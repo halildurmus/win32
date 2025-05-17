@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
 
+import '../../common.dart';
 import '../metadata_index.dart';
 import '../metadata_table.dart';
 import '../row.dart';
@@ -18,6 +19,9 @@ final class FieldRVA extends Row {
 
   @override
   MetadataTable get table => MetadataTable.fieldRVA;
+
+  @override
+  int get token => (MetadataTableId.fieldRVA << 24) | index;
 
   /// The relative virtual address (RVA) within the image file where the field's
   /// data is stored.

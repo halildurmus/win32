@@ -12,6 +12,7 @@ void main() async {
 
   test('AssemblyRefProcessor', () {
     final assemblyRefProcessor = AssemblyRefProcessor(index, 0, 0);
+    check(assemblyRefProcessor.token).equals(0x24000000);
     check(assemblyRefProcessor.processor).equals(0);
     check(assemblyRefProcessor.assemblyRef).isNull();
   });

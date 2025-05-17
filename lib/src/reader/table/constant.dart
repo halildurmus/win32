@@ -1,6 +1,7 @@
 import 'package:meta/meta.dart';
 
 import '../../bindings.dart';
+import '../../common.dart';
 import '../../exception.dart';
 import '../../metadata_type.dart';
 import '../../metadata_value.dart';
@@ -23,6 +24,9 @@ final class Constant extends Row {
 
   @override
   MetadataTable get table => MetadataTable.constant;
+
+  @override
+  int get token => (MetadataTableId.constant << 24) | index;
 
   /// The metadata type that describes how to interpret the constant value.
   late final type = () {

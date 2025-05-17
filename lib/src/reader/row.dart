@@ -67,6 +67,10 @@ abstract base class Row {
   /// The metadata table associated with this row.
   MetadataTable get table;
 
+  /// The metadata token for this row, which is a unique identifier for the row
+  /// within the metadata table.
+  int get token;
+
   /// Retrieves the [RowCompanion] associated with the specified [T].
   @internal
   static RowCompanion<T> companion<T extends Row>() {
@@ -199,7 +203,9 @@ abstract base class Row {
 
   @override
   String toString() =>
-      '$runtimeType(readerIndex: $readerIndex, index: $index, table: $table, '
+      '$runtimeType('
+      'readerIndex: $readerIndex, index: $index, table: $table, '
+      'token: 0x${token.toRadixString(16).padLeft(8, '0')}, '
       'metadataIndex: $metadataIndex)';
 }
 

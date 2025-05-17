@@ -20,6 +20,7 @@ void main() async {
       final interface = iMap.decode<TypeDefOrRef>(1);
       check(interface).isA<TypeDefOrRefTypeSpec>();
       final typeSpec = (interface as TypeDefOrRefTypeSpec).value;
+      check(typeSpec.token).equals(0x1B000073);
       check(typeSpec.attributes).isEmpty();
       check(typeSpec.type()).equals(
         const NamedClassType(

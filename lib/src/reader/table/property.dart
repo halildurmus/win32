@@ -1,6 +1,7 @@
 import 'package:meta/meta.dart';
 
 import '../../attributes.dart';
+import '../../common.dart';
 import '../../metadata_type.dart';
 import '../../property_sig.dart';
 import '../codes.dart';
@@ -27,6 +28,9 @@ final class Property extends Row with HasCustomAttributes {
 
   @override
   MetadataTable get table => MetadataTable.property;
+
+  @override
+  int get token => (MetadataTableId.property << 24) | index;
 
   /// The attributes of the property.
   late final flags = PropertyAttributes(readUint16(0));

@@ -17,7 +17,8 @@ void main() async {
       );
       final classLayout = typeDef.classLayout;
       check(classLayout).isNotNull();
-      check(classLayout!.packingSize).equals(2);
+      check(classLayout!.token).equals(0x0F0000B6);
+      check(classLayout.packingSize).equals(2);
       check(classLayout.classSize).equals(0);
       check(classLayout.parent.name).equals('BITMAPFILEHEADER');
     });

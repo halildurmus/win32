@@ -4,6 +4,7 @@ import 'package:meta/meta.dart';
 
 import '../../attribute_arg.dart';
 import '../../bindings.dart';
+import '../../common.dart';
 import '../../exception.dart';
 import '../../member_ref_signature.dart';
 import '../../metadata_type.dart';
@@ -84,6 +85,9 @@ final class CustomAttribute extends Row {
 
   @override
   MetadataTable get table => MetadataTable.customAttribute;
+
+  @override
+  int get token => (MetadataTableId.customAttribute << 24) | index;
 
   /// The fixed arguments passed to the attribute constructor, if any.
   late final List<FixedArg> fixedArgs;

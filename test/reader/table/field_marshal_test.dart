@@ -37,7 +37,8 @@ void main() {
 
     final someArrayFieldMarshal = someArrayField.fieldMarshal;
     check(someArrayFieldMarshal).isNotNull();
-    check(someArrayFieldMarshal!.parent)
+    check(someArrayFieldMarshal!.token).equals(0x0D000000);
+    check(someArrayFieldMarshal.parent)
         .isA<winmd.HasFieldMarshalField>()
         .has((it) => it.value.name, 'value.name')
         .equals('SomeArray');

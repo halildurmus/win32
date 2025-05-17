@@ -1,6 +1,7 @@
 import 'package:meta/meta.dart';
 
 import '../../attributes.dart';
+import '../../common.dart';
 import '../codes.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
@@ -25,6 +26,9 @@ final class Field extends Row with HasCustomAttributes {
 
   @override
   MetadataTable get table => MetadataTable.field;
+
+  @override
+  int get token => (MetadataTableId.field << 24) | index;
 
   /// Field attributes describing visibility, special semantics, and other
   /// modifiers.

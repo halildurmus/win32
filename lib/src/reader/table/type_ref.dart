@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
 
+import '../../common.dart';
 import '../codes.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
@@ -20,6 +21,9 @@ final class TypeRef extends Row with HasCustomAttributes {
 
   @override
   MetadataTable get table => MetadataTable.typeRef;
+
+  @override
+  int get token => (MetadataTableId.typeRef << 24) | index;
 
   /// The resolution scope of the referenced type, indicating the context or
   /// scope in which the type is defined.
