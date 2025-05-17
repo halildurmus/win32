@@ -810,8 +810,6 @@ extension type const TypeAttributes(int _) implements int {
   /// Specifies a Windows Runtime type.
   static const windowsRuntime = TypeAttributes(0x00004000);
 
-  bool get isNested => _ & 0x00000006 != 0;
-
   /// Whether this instance has all the bit fields specified in [other].
   bool has(TypeAttributes other) => this & other == other;
 

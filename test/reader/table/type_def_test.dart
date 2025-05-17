@@ -24,6 +24,7 @@ void main() async {
             TypeAttributes.windowsRuntime,
       );
       check(typeDef.typeVisibility).equals(TypeVisibility.public);
+      check(typeDef.isNested).isFalse();
       check(typeDef.typeLayout).equals(TypeLayout.auto);
       check(typeDef.typeSemantics).equals(TypeSemantics.class$);
       check(typeDef.stringFormat).equals(StringFormat.ansi);
@@ -90,7 +91,8 @@ void main() async {
       final methodImpls = typeDef.methodImpls;
       check(methodImpls.length).equals(10);
       check(methodImpls[0].class$.name).equals('StringMap');
-      check(typeDef.nested).isNull();
+      check(typeDef.enclosingClass).isNull();
+      check(typeDef.nestedTypes).isEmpty();
       final properties = typeDef.properties;
       check(properties.length).equals(1);
       check(properties[0].name).equals('Size');
@@ -109,6 +111,7 @@ void main() async {
             TypeAttributes.windowsRuntime,
       );
       check(typeDef.typeVisibility).equals(TypeVisibility.public);
+      check(typeDef.isNested).isFalse();
       check(typeDef.typeLayout).equals(TypeLayout.auto);
       check(typeDef.typeSemantics).equals(TypeSemantics.class$);
       check(typeDef.stringFormat).equals(StringFormat.ansi);
@@ -146,7 +149,8 @@ void main() async {
       final methodImpls = typeDef.methodImpls;
       check(methodImpls.length).equals(102);
       check(methodImpls[0].class$.name).equals('Calendar');
-      check(typeDef.nested).isNull();
+      check(typeDef.enclosingClass).isNull();
+      check(typeDef.nestedTypes).isEmpty();
       final properties = typeDef.properties;
       check(properties.length).equals(38);
       check(properties[0].name).equals('Year');
@@ -166,6 +170,7 @@ void main() async {
             TypeAttributes.beforeFieldInit,
       );
       check(typeDef.typeVisibility).equals(TypeVisibility.public);
+      check(typeDef.isNested).isFalse();
       check(typeDef.typeLayout).equals(TypeLayout.sequential);
       check(typeDef.typeSemantics).equals(TypeSemantics.class$);
       check(typeDef.stringFormat).equals(StringFormat.ansi);
@@ -186,7 +191,8 @@ void main() async {
       check(typeDef.classLayout).isNull();
       check(typeDef.events).isEmpty();
       check(typeDef.methodImpls).isEmpty();
-      check(typeDef.nested).isNull();
+      check(typeDef.enclosingClass).isNull();
+      check(typeDef.nestedTypes).isEmpty();
       check(typeDef.properties).isEmpty();
     });
 
@@ -203,6 +209,7 @@ void main() async {
             TypeAttributes.beforeFieldInit,
       );
       check(typeDef.typeVisibility).equals(TypeVisibility.public);
+      check(typeDef.isNested).isFalse();
       check(typeDef.typeLayout).equals(TypeLayout.auto);
       check(typeDef.typeSemantics).equals(TypeSemantics.class$);
       check(typeDef.stringFormat).equals(StringFormat.auto);
@@ -223,7 +230,71 @@ void main() async {
       check(typeDef.classLayout).isNull();
       check(typeDef.events).isEmpty();
       check(typeDef.methodImpls).isEmpty();
-      check(typeDef.nested).isNull();
+      check(typeDef.enclosingClass).isNull();
+      check(typeDef.nestedTypes).isEmpty();
+      check(typeDef.properties).isEmpty();
+    });
+
+    test('Windows.Win32.Graphics.Gdi.DEVMODEW', () {
+      final typeDef = metadata.findSingleType(
+        'Windows.Win32.Graphics.Gdi',
+        'DEVMODEW',
+      );
+      check(typeDef.flags).equals(
+        TypeAttributes.public |
+            TypeAttributes.sequentialLayout |
+            TypeAttributes.ansiClass |
+            TypeAttributes.sealed |
+            TypeAttributes.beforeFieldInit,
+      );
+      check(typeDef.typeVisibility).equals(TypeVisibility.public);
+      check(typeDef.isNested).isFalse();
+      check(typeDef.typeLayout).equals(TypeLayout.sequential);
+      check(typeDef.typeSemantics).equals(TypeSemantics.class$);
+      check(typeDef.stringFormat).equals(StringFormat.ansi);
+      check(typeDef.name).equals('DEVMODEW');
+      check(typeDef.namespace).equals('Windows.Win32.Graphics.Gdi');
+      final extends$ = typeDef.extends$;
+      check(extends$).isNotNull();
+      check(extends$!.namespace).equals('System');
+      check(extends$.name).equals('ValueType');
+      final fields = typeDef.fields;
+      check(fields.length).equals(27);
+      check(fields[0].name).equals('dmDeviceName');
+      check(fields[26].name).equals('dmPanningHeight');
+      check(typeDef.methods).isEmpty();
+      check(typeDef.category).equals(TypeCategory.struct);
+      check(typeDef.generics).isEmpty();
+      check(typeDef.interfaceImpls).isEmpty();
+      check(typeDef.classLayout).isNull();
+      check(typeDef.events).isEmpty();
+      check(typeDef.methodImpls).isEmpty();
+      check(typeDef.enclosingClass).isNull();
+      final nestedTypes = typeDef.nestedTypes;
+      check(nestedTypes.length).equals(2);
+      final [nestedType1, nestedType2] = nestedTypes;
+      check(nestedType1.typeVisibility).equals(TypeVisibility.nestedPublic);
+      check(nestedType1.isNested).isTrue();
+      check(nestedType1.name).equals('_Anonymous1_e__Union');
+      check(nestedType1.enclosingClass).isNotNull();
+      check(nestedType1.enclosingClass!.name).equals('DEVMODEW');
+      check(nestedType1.nestedTypes.length).equals(2);
+      check(nestedType1.nestedTypes[0].name).equals('_Anonymous1_e__Struct');
+      check(nestedType1.nestedTypes[0].enclosingClass).isNotNull();
+      check(
+        nestedType1.nestedTypes[0].enclosingClass!.name,
+      ).equals('_Anonymous1_e__Union');
+      check(nestedType1.nestedTypes[1].name).equals('_Anonymous2_e__Struct');
+      check(nestedType1.nestedTypes[1].enclosingClass).isNotNull();
+      check(
+        nestedType1.nestedTypes[1].enclosingClass!.name,
+      ).equals('_Anonymous1_e__Union');
+      check(nestedType2.typeVisibility).equals(TypeVisibility.nestedPublic);
+      check(nestedType2.isNested).isTrue();
+      check(nestedType2.name).equals('_Anonymous2_e__Union');
+      check(nestedType2.enclosingClass).isNotNull();
+      check(nestedType2.enclosingClass!.name).equals('DEVMODEW');
+      check(nestedType2.nestedTypes).isEmpty();
       check(typeDef.properties).isEmpty();
     });
 
@@ -240,6 +311,7 @@ void main() async {
             TypeAttributes.abstract,
       );
       check(typeDef.typeVisibility).equals(TypeVisibility.public);
+      check(typeDef.isNested).isFalse();
       check(typeDef.typeLayout).equals(TypeLayout.auto);
       check(typeDef.typeSemantics).equals(TypeSemantics.interface);
       check(typeDef.stringFormat).equals(StringFormat.ansi);
@@ -264,7 +336,8 @@ void main() async {
       check(typeDef.classLayout).isNull();
       check(typeDef.events).isEmpty();
       check(typeDef.methodImpls).isEmpty();
-      check(typeDef.nested).isNull();
+      check(typeDef.enclosingClass).isNull();
+      check(typeDef.nestedTypes).isEmpty();
       check(typeDef.properties).isEmpty();
     });
 
@@ -280,6 +353,7 @@ void main() async {
             TypeAttributes.sealed,
       );
       check(typeDef.typeVisibility).equals(TypeVisibility.public);
+      check(typeDef.isNested).isFalse();
       check(typeDef.typeLayout).equals(TypeLayout.auto);
       check(typeDef.typeSemantics).equals(TypeSemantics.class$);
       check(typeDef.stringFormat).equals(StringFormat.ansi);
@@ -308,7 +382,8 @@ void main() async {
       check(typeDef.classLayout).isNull();
       check(typeDef.events).isEmpty();
       check(typeDef.methodImpls).isEmpty();
-      check(typeDef.nested).isNull();
+      check(typeDef.enclosingClass).isNull();
+      check(typeDef.nestedTypes).isEmpty();
       check(typeDef.properties).isEmpty();
     });
 
@@ -325,6 +400,7 @@ void main() async {
             TypeAttributes.beforeFieldInit,
       );
       check(typeDef.typeVisibility).equals(TypeVisibility.public);
+      check(typeDef.isNested).isFalse();
       check(typeDef.typeLayout).equals(TypeLayout.auto);
       check(typeDef.typeSemantics).equals(TypeSemantics.class$);
       check(typeDef.stringFormat).equals(StringFormat.auto);
@@ -347,7 +423,8 @@ void main() async {
       check(typeDef.classLayout).isNull();
       check(typeDef.events).isEmpty();
       check(typeDef.methodImpls).isEmpty();
-      check(typeDef.nested).isNull();
+      check(typeDef.enclosingClass).isNull();
+      check(typeDef.nestedTypes).isEmpty();
       check(typeDef.properties).isEmpty();
     });
   });

@@ -15,9 +15,12 @@ void main() async {
         'Windows.Win32.Devices.Bluetooth',
         'BLUETOOTH_ADDRESS',
       );
-      final nested = typeDef.nested;
-      check(nested).isNotNull();
-      check(nested!.inner.namespace).isEmpty();
+      final nestedClasses = index.nestedClass
+          .where((nested) => nested.outer.index == typeDef.index)
+          .toList();
+      check(nestedClasses.length).equals(1);
+      final nested = nestedClasses[0];
+      check(nested.inner.namespace).isEmpty();
       check(nested.inner.name).equals('_Anonymous_e__Union');
       check(nested.outer.namespace).equals('Windows.Win32.Devices.Bluetooth');
       check(nested.outer.name).equals('BLUETOOTH_ADDRESS');
@@ -28,36 +31,50 @@ void main() async {
         'Windows.Win32.System.Variant',
         'VARIANT',
       );
-      var nested = typeDef.nested;
-      check(nested).isNotNull();
-      check(nested!.inner.namespace).isEmpty();
+      var nestedClasses = index.nestedClass
+          .where((e) => e.outer.index == typeDef.index)
+          .toList();
+      check(nestedClasses.length).equals(1);
+      var nested = nestedClasses[0];
+      check(nested.inner.namespace).isEmpty();
       check(nested.inner.name).equals('_Anonymous_e__Union');
       check(nested.outer.namespace).equals('Windows.Win32.System.Variant');
       check(nested.outer.name).equals('VARIANT');
 
-      nested = nested.inner.nested;
-      check(nested).isNotNull();
-      check(nested!.inner.namespace).isEmpty();
+      nestedClasses = index.nestedClass
+          .where((e) => e.outer.index == nested.inner.index)
+          .toList();
+      check(nestedClasses.length).equals(1);
+      nested = nestedClasses[0];
+      check(nested.inner.namespace).isEmpty();
       check(nested.inner.name).equals('_Anonymous_e__Struct');
       check(nested.outer.namespace).isEmpty();
       check(nested.outer.name).equals('_Anonymous_e__Union');
 
-      nested = nested.inner.nested;
-      check(nested).isNotNull();
-      check(nested!.inner.namespace).isEmpty();
+      nestedClasses = index.nestedClass
+          .where((e) => e.outer.index == nested.inner.index)
+          .toList();
+      check(nestedClasses.length).equals(1);
+      nested = nestedClasses[0];
+      check(nested.inner.namespace).isEmpty();
       check(nested.inner.name).equals('_Anonymous_e__Union');
       check(nested.outer.namespace).isEmpty();
       check(nested.outer.name).equals('_Anonymous_e__Struct');
 
-      nested = nested.inner.nested;
-      check(nested).isNotNull();
-      check(nested!.inner.namespace).isEmpty();
+      nestedClasses = index.nestedClass
+          .where((e) => e.outer.index == nested.inner.index)
+          .toList();
+      check(nestedClasses.length).equals(1);
+      nested = nestedClasses[0];
+      check(nested.inner.namespace).isEmpty();
       check(nested.inner.name).equals('_Anonymous_e__Struct');
       check(nested.outer.namespace).isEmpty();
       check(nested.outer.name).equals('_Anonymous_e__Union');
 
-      nested = nested.inner.nested;
-      check(nested).isNull();
+      nestedClasses = index.nestedClass
+          .where((e) => e.outer.index == nested.inner.index)
+          .toList();
+      check(nestedClasses).isEmpty();
     });
   });
 }

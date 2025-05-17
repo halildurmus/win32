@@ -35,6 +35,7 @@ final class TypeName {
 
   @override
   String toString() =>
-      'TypeName($namespace.$name'
+      'TypeName('
+      '${namespace.isNotEmpty ? '$namespace.$name' : name}'
       '${_generics.isNotEmpty ? ', generics: $_generics' : ''})';
 }

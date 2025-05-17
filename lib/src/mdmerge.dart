@@ -135,7 +135,8 @@ void _writeType(
   TypeDefIndex? outer,
 ) {
   assert(
-    typeDef.flags.isNested
+    (typeDef.typeVisibility != TypeVisibility.public &&
+            typeDef.typeVisibility != TypeVisibility.notPublic)
         ? typeDef.namespace.isEmpty
         : typeDef.namespace.isNotEmpty,
     'Namespace must be empty for nested types.',
@@ -192,7 +193,9 @@ void _writeType(
 
   for (final nested in index.nestedTypes(typeDef)) {
     assert(
-      nested.namespace.isEmpty && nested.flags.isNested,
+      (nested.typeVisibility != TypeVisibility.public &&
+              nested.typeVisibility != TypeVisibility.notPublic) &&
+          nested.namespace.isEmpty,
       'Nested type must have empty namespace and be nested.',
     );
     _writeType(writer, index, nested, typeDefIndex);

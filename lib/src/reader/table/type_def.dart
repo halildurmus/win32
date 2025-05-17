@@ -44,6 +44,12 @@ final class TypeDef extends Row with HasCustomAttributes {
   late final typeVisibility =
       TypeVisibility.values[flags & TypeAttributes.visibilityMask];
 
+  /// Whether the type is nested, i.e., defined under another type.
+  late final isNested = switch (typeVisibility) {
+    TypeVisibility.notPublic || TypeVisibility.public => false,
+    _ => true,
+  };
+
   /// The layout of the type.
   late final typeLayout = switch (flags & TypeAttributes.layoutMask) {
     TypeAttributes.autoLayout => TypeLayout.auto,
@@ -155,8 +161,16 @@ final class TypeDef extends Row with HasCustomAttributes {
     index + 1,
   ).toList(growable: false);
 
-  /// The nested class associated with the type, if any.
-  late final nested = getEqualRange<NestedClass>(1, index + 1).firstOrNull;
+  /// The type that encloses the current type, if the type is nested.
+  late final enclosingClass = getEqualRange<NestedClass>(
+    0,
+    index + 1,
+  ).firstOrNull?.outer;
+
+  /// The nested types defined under the type, if any.
+  late final nestedTypes = metadataIndex
+      .nestedTypes(this)
+      .toList(growable: false);
 
   /// The list of properties defined in the type, if any.
   late final properties = () {
