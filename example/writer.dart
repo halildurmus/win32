@@ -44,7 +44,7 @@ void main() {
 
   // Display each method with its return type and parameters.
   for (final method in typeDef.methods) {
-    final MethodSignature(:returnType, :types) = method.signature();
+    final MethodSignature(:returnType, :types) = method.signature;
     final params = method.params;
     final paramList = types.indexed
         .map((entry) {

@@ -3,8 +3,6 @@ import 'package:meta/meta.dart';
 import '../../attributes.dart';
 import '../../common.dart';
 import '../../exception.dart';
-import '../../metadata_type.dart';
-import '../../method_signature.dart';
 import '../codes.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
@@ -78,8 +76,7 @@ final class MethodDef extends Row with HasCustomAttributes {
   ///
   /// Optionally, [generics] can be provided to substitute any generic
   /// parameters in the method signature.
-  MethodSignature signature({List<MetadataType> generics = const []}) =>
-      readBlob(4).readMethodDefSig(generics: generics);
+  late final signature = readBlob(4).readMethodDefSig();
 
   /// The list of parameters for the method.
   late final params = getList<Param>(5).toList(growable: false);

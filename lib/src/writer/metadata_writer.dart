@@ -279,20 +279,16 @@ final class MetadataWriter {
   /// Writes an `Event` row, returning the corresponding index.
   EventIndex writeEvent({
     required String name,
-    MetadataType? eventType,
+    NamedClassType? eventType,
     EventAttributes eventFlags = const EventAttributes(0),
   }) {
-    if (eventType != null && eventType is! NamedType) {
-      throw WinmdException('Expected type to be a NamedType, got $eventType.');
-    }
-
     final table = _tableStream[MetadataTableId.event];
     final index = EventIndex(table.length);
     table.add(
       Event(
         eventFlags: eventFlags,
         name: _stringHeap.insert(name),
-        eventType: _toTypeDefOrRef(eventType as NamedType?),
+        eventType: _toTypeDefOrRef(eventType),
       ),
     );
     return index;
@@ -312,7 +308,7 @@ final class MetadataWriter {
   /// Writes a `Field` row, returning the corresponding index.
   FieldIndex writeField({
     required String name,
-    required FieldSig signature,
+    required MetadataType signature,
     FieldAttributes flags = const FieldAttributes(0),
   }) {
     final table = _tableStream[MetadataTableId.field];
@@ -431,14 +427,8 @@ final class MetadataWriter {
   /// Writes an `InterfaceImpl` row, returning the corresponding index.
   InterfaceImplIndex writeInterfaceImpl({
     required TypeDefIndex class$,
-    required MetadataType interface,
+    required NamedClassType interface,
   }) {
-    if (interface is! NamedType) {
-      throw WinmdException(
-        'Expected interface to be a NamedType, got $interface.',
-      );
-    }
-
     final table = _tableStream[MetadataTableId.interfaceImpl];
     final index = InterfaceImplIndex(table.length);
     table.add(
@@ -827,7 +817,7 @@ final class MetadataWriter {
           CompressedInteger.encode(TypeDefOrRef.typeRef(index).encode()),
         );
         _encodeType(element, buffer);
-      case GenericParameterType(:final code, :final parameterIndex):
+      case GenericParameterType(:final code, sequence: final parameterIndex):
         buffer.addByte(code);
         buffer.add(CompressedInteger.encode(parameterIndex));
       case MutablePointerType(:final pointee, :final depth):
@@ -851,7 +841,8 @@ final class MetadataWriter {
     }
   }
 
-  /// Converts a [NamedType] into its corresponding [TypeDefOrRef] encoding.
+  /// Converts a [NamedClassType] into its corresponding [TypeDefOrRef]
+  /// encoding.
   ///
   /// If [type] is `null`, returns [TypeDefOrRef.none].
   ///
@@ -860,15 +851,21 @@ final class MetadataWriter {
   ///
   /// For generic types, returns a [TypeDefOrRef.typeSpec] by emitting a
   /// `TypeSpec`.
-  TypeDefOrRef _toTypeDefOrRef(NamedType? type) {
-    if (type == null) return TypeDefOrRef.none;
-    final TypeName(:namespace, :name, :generics) = type.typeName;
-    return generics.isEmpty
-        ? TypeDefOrRef.typeRef(writeTypeRef(namespace: namespace, name: name))
-        : TypeDefOrRef.typeSpec(
-            writeTypeSpec(namespace: namespace, name: name, generics: generics),
-          );
-  }
+  TypeDefOrRef _toTypeDefOrRef(NamedClassType? type) => switch (type) {
+    NamedClassType(
+      typeName: TypeName(:final namespace, :final name, :final generics),
+    ) =>
+      generics.isEmpty
+          ? TypeDefOrRef.typeRef(writeTypeRef(namespace: namespace, name: name))
+          : TypeDefOrRef.typeSpec(
+              writeTypeSpec(
+                namespace: namespace,
+                name: name,
+                generics: generics,
+              ),
+            ),
+    _ => TypeDefOrRef.none,
+  };
 
   /// Encodes a custom attribute value, consisting of fixed and named arguments,
   /// into a blob, and inserts it into the blob heap, returning the blob index.
@@ -920,9 +917,9 @@ final class MetadataWriter {
 
   /// Encodes the [signature] and stores it in the blob heap, returning the blob
   /// index.
-  BlobIndex _writeFieldSig(FieldSig signature) {
+  BlobIndex _writeFieldSig(MetadataType signature) {
     final buffer = BytesBuilder(copy: false)..addByte(CallingConvention.FIELD);
-    _encodeType(signature.type, buffer);
+    _encodeType(signature, buffer);
     return _blobHeap.insert(buffer.takeBytes());
   }
 

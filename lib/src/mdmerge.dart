@@ -11,14 +11,12 @@ import 'reader/codes.dart' as reader;
 import 'reader/has_custom_attributes.dart';
 import 'reader/metadata_index.dart';
 import 'reader/metadata_reader.dart';
-import 'reader/table/event.dart';
 import 'reader/table/field.dart';
 import 'reader/table/method_def.dart';
 import 'reader/table/method_impl.dart';
 import 'reader/table/type_def.dart';
 import 'reader/table/type_ref.dart';
 import 'reader/table/type_spec.dart';
-import 'type_name.dart';
 import 'writer/codes.dart';
 import 'writer/metadata_writer.dart';
 import 'writer/table/index.dart';
@@ -165,7 +163,7 @@ void _writeType(
   for (final impl in typeDef.interfaceImpls) {
     final implRef = writer.writeInterfaceImpl(
       class$: typeDefIndex,
-      interface: impl.interface(),
+      interface: impl.interface,
     );
     _writeAttributes(writer, HasCustomAttribute.interfaceImpl(implRef), impl);
   }
@@ -207,7 +205,7 @@ MemberRefParent _buildMemberRefParent(
   MetadataWriter writer,
   TypeSpec typeSpec,
 ) {
-  final type = typeSpec.type();
+  final type = typeSpec.signature;
   if (type is! NamedType) {
     throw WinmdException('Expected NamedType, got: $type');
   }
@@ -240,16 +238,6 @@ TypeDefOrRef _resolveBaseType(MetadataWriter writer, TypeDef typeDef) =>
     };
 
 @pragma('vm:prefer-inline')
-MetadataType? _resolveEventType(Event event) => switch (event.eventType) {
-  reader.TypeDefOrRefTypeDef(value: TypeDef(:final namespace, :final name)) =>
-    NamedClassType(TypeName(namespace, name)),
-  reader.TypeDefOrRefTypeRef(value: TypeRef(:final namespace, :final name)) =>
-    NamedClassType(TypeName(namespace, name)),
-  reader.TypeDefOrRefTypeSpec(:final value) => value.type(),
-  _ => null,
-};
-
-@pragma('vm:prefer-inline')
 MemberRefParent _resolveMemberRefParent(
   MetadataWriter writer,
   reader.MemberRefParent parent,
@@ -277,7 +265,7 @@ MethodImpl? _resolveMethodImpl(List<MethodImpl> methodImpls, MethodDef method) {
   for (final impl in methodImpls) {
     if (impl.methodBody case reader.MethodDefOrRefMethodDef(:final value)) {
       if (value.name != method.name) continue;
-      if (value.signature() != method.signature()) continue;
+      if (value.signature != method.signature) continue;
 
       final paramsA = value.params;
       final paramsB = method.params;
@@ -329,7 +317,7 @@ void _writeAttributes<R extends HasCustomAttributes>(
     final attrParent = MemberRefParent.typeRef(
       writer.writeTypeRef(namespace: namespace, name: name),
     );
-    final signature = ctor.value.signature();
+    final signature = ctor.value.signature;
     final ctorRef = writer.writeMemberRef(
       parent: attrParent,
       name: '.ctor',
@@ -376,7 +364,7 @@ void _writeEvents(
     final eventIndex = writer.writeEvent(
       name: event.name,
       eventFlags: event.eventFlags,
-      eventType: _resolveEventType(event),
+      eventType: event.eventType,
     );
 
     final addMethodIndex = specialMethods[event.add.name]!;
@@ -419,7 +407,7 @@ Map<String, MethodDefIndex> _writeMethods(
       implFlags: method.implFlags,
       flags: method.flags,
       name: method.name,
-      signature: method.signature(),
+      signature: method.signature,
     );
 
     if (method.flags.has(MethodAttributes.specialName)) {
@@ -472,7 +460,7 @@ MemberRefIndex _writeMethodDeclaration(
   final (parent, signature) = switch (methodDeclaration) {
     reader.MethodDefOrRefMemberRef(:final value) => (
       _resolveMemberRefParent(writer, value.parent),
-      _buildMemberRefSignature(value.signature() as MethodRefSig),
+      _buildMemberRefSignature(value.signature as MethodRefSig),
     ),
     reader.MethodDefOrRefMethodDef(:final value) => (
       MemberRefParent.typeDef(
@@ -481,7 +469,7 @@ MemberRefIndex _writeMethodDeclaration(
           name: value.parent.name,
         ),
       ),
-      _buildMemberRefSignature(value.signature()),
+      _buildMemberRefSignature(value.signature),
     ),
   };
 
@@ -506,7 +494,7 @@ void _writeProperties(
     final propertyIndex = writer.writeProperty(
       flags: property.flags,
       name: property.name,
-      signature: property.signature(),
+      signature: property.signature,
     );
 
     if (property.getter case final getter?) {

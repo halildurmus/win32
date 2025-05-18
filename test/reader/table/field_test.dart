@@ -26,7 +26,7 @@ void main() async {
       check(field.name).equals('FOLDERID_AccountPictures');
       check(
         field.signature,
-      ).equals(const FieldSig(NamedValueType(TypeName('System', 'Guid'))));
+      ).equals(const NamedValueType(TypeName('System', 'Guid')));
       check(field.hasAttribute('GuidAttribute')).isTrue();
       final constant = field.constant;
       check(constant).isNull();
@@ -51,10 +51,8 @@ void main() async {
       check(field.fieldAccess).equals(FieldAccess.public);
       check(field.name).equals('PFD_UNDERLAY_PLANE');
       check(field.signature).equals(
-        const FieldSig(
-          NamedValueType(
-            TypeName('Windows.Win32.Graphics.OpenGL', 'PFD_LAYER_TYPE'),
-          ),
+        const NamedValueType(
+          TypeName('Windows.Win32.Graphics.OpenGL', 'PFD_LAYER_TYPE'),
         ),
       );
       final constant = field.constant;
@@ -82,9 +80,7 @@ void main() async {
       check(field.fieldAccess).equals(FieldAccess.public);
       check(field.name).equals('STATUS_ACCESS_DENIED');
       check(field.signature).equals(
-        const FieldSig(
-          NamedValueType(TypeName('Windows.Win32.Foundation', 'NTSTATUS')),
-        ),
+        const NamedValueType(TypeName('Windows.Win32.Foundation', 'NTSTATUS')),
       );
       final constant = field.constant;
       check(constant).isNotNull();
@@ -110,8 +106,8 @@ void main() async {
       check(field.fieldAccess).equals(FieldAccess.public);
       check(field.name).equals('VARIANT_TRUE');
       check(field.signature).equals(
-        const FieldSig(
-          NamedValueType(TypeName('Windows.Win32.Foundation', 'VARIANT_BOOL')),
+        const NamedValueType(
+          TypeName('Windows.Win32.Foundation', 'VARIANT_BOOL'),
         ),
       );
       final constant = field.constant;
@@ -133,7 +129,7 @@ void main() async {
       check(field.flags).equals(FieldAttributes.public);
       check(field.fieldAccess).equals(FieldAccess.public);
       check(field.name).equals('ProcessorCount');
-      check(field.signature).equals(const FieldSig(Uint32Type()));
+      check(field.signature).equals(const Uint32Type());
       check(field.constant).isNull();
       check(field.fieldMarshal).isNull();
       final layout = field.layout;

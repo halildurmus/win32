@@ -2,7 +2,6 @@ import 'package:meta/meta.dart';
 
 import '../exception.dart';
 import '../member_ref_signature.dart';
-import '../metadata_type.dart';
 import '../method_signature.dart';
 import 'has_custom_attributes.dart';
 import 'metadata_index.dart';
@@ -119,8 +118,7 @@ final class CustomAttributeTypeMethodDef extends CustomAttributeType {
   @override
   String get name => value.name;
 
-  MethodSignature signature({List<MetadataType> generics = const []}) =>
-      value.signature(generics: generics);
+  MethodSignature get signature => value.signature;
 
   @override
   String toString() => value.toString();
@@ -142,8 +140,7 @@ final class CustomAttributeTypeMemberRef extends CustomAttributeType {
   @override
   String get name => value.name;
 
-  MemberRefSignature signature({List<MetadataType> generics = const []}) =>
-      value.signature(generics: generics);
+  MemberRefSignature get signature => value.signature;
 
   @override
   String toString() => value.toString();

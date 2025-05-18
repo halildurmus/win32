@@ -28,7 +28,7 @@ void main() {
 
   // The first field represents the underlying integral type (e.g., Int32).
   final underlyingType = enumType.fields.first;
-  print('  ${underlyingType.name} = ${underlyingType.signature.type}');
+  print('  ${underlyingType.name} = ${underlyingType.signature}');
 
   // Subsequent fields are named values within the enum.
   for (final field in enumType.fields.skip(1)) {

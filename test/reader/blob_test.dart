@@ -62,7 +62,7 @@ void main() async {
         ELEMENT_TYPE_I4, // Type
       ]);
       final sig = blob.readFieldSig();
-      check(sig.type).isA<Int32Type>();
+      check(sig).isA<Int32Type>();
       check(blob.isEmpty).isTrue();
     });
 
@@ -127,7 +127,7 @@ void main() async {
           ELEMENT_TYPE_BOOLEAN, // Type
         ]);
         final sig = blob.readFieldSig();
-        check(sig.type).isA<BoolType>();
+        check(sig).isA<BoolType>();
         check(blob.isEmpty).isTrue();
       });
 
@@ -443,9 +443,7 @@ void main() async {
 
       test('ELEMENT_TYPE_VAR', () {
         final blob = createBlob([ELEMENT_TYPE_VAR, 0]);
-        check(
-          blob.readTypeCode(generics: const [Int32Type()]),
-        ).equals(const Int32Type());
+        check(blob.readTypeCode()).equals(const GenericParameterType(0));
         check(blob.isEmpty).isTrue();
       });
 

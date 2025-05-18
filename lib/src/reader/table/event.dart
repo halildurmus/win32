@@ -2,6 +2,8 @@ import 'package:meta/meta.dart';
 
 import '../../attributes.dart';
 import '../../common.dart';
+import '../../metadata_type.dart';
+import '../../type_name.dart';
 import '../codes.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
@@ -38,7 +40,15 @@ final class Event extends Row with HasCustomAttributes {
   /// The type of the event, if any.
   late final eventType = () {
     if (readUint(2) == 0) return null;
-    return decode<TypeDefOrRef>(2);
+    return switch (decode<TypeDefOrRef>(2)) {
+      TypeDefOrRefTypeDef(:final value) => NamedClassType(
+        TypeName(value.namespace, value.name),
+      ),
+      TypeDefOrRefTypeRef(:final value) => NamedClassType(
+        TypeName(value.namespace, value.name),
+      ),
+      TypeDefOrRefTypeSpec(:final value) => value.signature as NamedClassType,
+    };
   }();
 
   /// The method semantics associated with the event.

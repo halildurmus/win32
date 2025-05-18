@@ -20,7 +20,7 @@ void main() async {
       check(size.token).equals(0x17002572);
       check(size.flags).equals(const PropertyAttributes(0));
       check(size.name).equals('Size');
-      check(size.signature()).equals(
+      check(size.signature).equals(
         const PropertySig(
           callingConvention: CallingConvention.HASTHIS,
           returnType: Uint32Type(),
@@ -31,7 +31,7 @@ void main() async {
       final getter = size.getter;
       check(getter).isNotNull();
       check(getter!.name).equals('get_Size');
-      check(getter.signature()).equals(
+      check(getter.signature).equals(
         const MethodSignature(
           callingConvention: CallingConvention.HASTHIS,
           returnType: Uint32Type(),

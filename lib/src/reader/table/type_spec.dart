@@ -1,7 +1,6 @@
 import 'package:meta/meta.dart';
 
 import '../../common.dart';
-import '../../metadata_type.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
 import '../metadata_table.dart';
@@ -23,11 +22,8 @@ final class TypeSpec extends Row with HasCustomAttributes {
   @override
   int get token => (MetadataTableId.typeSpec << 24) | index;
 
-  /// The type of the type specification.
-  ///
-  /// Optionally, [generics] can be passed to substitute any generic parameters.
-  MetadataType type({List<MetadataType> generics = const []}) =>
-      readBlob(0).readTypeCode(generics: generics);
+  /// The signature of the type specification.
+  late final signature = readBlob(0).readTypeCode();
 }
 
 @internal

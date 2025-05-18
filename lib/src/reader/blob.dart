@@ -75,11 +75,10 @@ final class Blob {
   }
 
   /// Reads a `FieldSig` from the blob as specified in ECMA-335 `§II.23.2.4`.
-  FieldSig readFieldSig() {
+  MetadataType readFieldSig() {
     final firstByte = readUint8();
     assert(firstByte == CallingConvention.FIELD, 'Blob is not a FieldSig');
-    final type = readTypeSignature();
-    return FieldSig(type);
+    return readTypeSignature();
   }
 
   /// Reads a [MarshallingDescriptor] from the blob as specified in ECMA-335
@@ -130,22 +129,20 @@ final class Blob {
   }
 
   /// Reads either a `FieldSig` or a `MethodRefSig` from the blob.
-  MemberRefSignature readMemberRefSignature({
-    List<MetadataType> generics = const [],
-  }) {
-    if (slice[0] == CallingConvention.FIELD) return readFieldSig();
-    return readMethodRefSig(generics: generics);
+  MemberRefSignature readMemberRefSignature() {
+    if (slice[0] == CallingConvention.FIELD) return FieldSig(readFieldSig());
+    return readMethodRefSig();
   }
 
   /// Reads a `MethodDefSig` from the blob as specified in ECMA-335
   /// `§II.23.2.1`.
-  MethodSignature readMethodDefSig({List<MetadataType> generics = const []}) {
+  MethodSignature readMethodDefSig() {
     final callingConvention = CallingConvention(readUint8());
     final paramCount = readCompressed();
-    final returnType = readTypeSignature(generics: generics);
+    final returnType = readTypeSignature();
     final types = <MetadataType>[];
     for (var i = 0; i < paramCount; i++) {
-      types.add(readTypeSignature(generics: generics));
+      types.add(readTypeSignature());
     }
     return MethodSignature(
       callingConvention: callingConvention,
@@ -156,13 +153,13 @@ final class Blob {
 
   /// Reads a `MethodRefSig` from the blob as specified in ECMA-335
   /// `§II.23.2.2`.
-  MethodRefSig readMethodRefSig({List<MetadataType> generics = const []}) {
+  MethodRefSig readMethodRefSig() {
     final callingConvention = CallingConvention(readUint8());
     final paramCount = readCompressed();
-    final returnType = readTypeSignature(generics: generics);
+    final returnType = readTypeSignature();
     final types = <MetadataType>[];
     for (var i = 0; i < paramCount; i++) {
-      types.add(readTypeSignature(generics: generics));
+      types.add(readTypeSignature());
     }
     return MethodRefSig(
       callingConvention: callingConvention,
@@ -211,7 +208,7 @@ final class Blob {
   }
 
   /// Reads a `PropertySig` from the blob as specified in ECMA-335 `§II.23.2.5`.
-  PropertySig readPropertySig({List<MetadataType> generics = const []}) {
+  PropertySig readPropertySig() {
     final firstByte = readUint8();
     assert(
       firstByte & CallingConvention.PROPERTY != 0,
@@ -219,10 +216,10 @@ final class Blob {
     );
     final hasThis = firstByte & CallingConvention.HASTHIS != 0;
     final paramCount = readCompressed();
-    final returnType = readTypeSignature(generics: generics);
+    final returnType = readTypeSignature();
     final types = <MetadataType>[];
     for (var i = 0; i < paramCount; i++) {
-      types.add(readTypeSignature(generics: generics));
+      types.add(readTypeSignature());
     }
     return PropertySig(
       callingConvention: hasThis
@@ -234,9 +231,7 @@ final class Blob {
   }
 
   /// Reads either a `LocalVarSig` or a `StandAloneMethodSig` from the blob.
-  StandAloneSignature readStandAloneSignature({
-    List<MetadataType> generics = const [],
-  }) {
+  StandAloneSignature readStandAloneSignature() {
     if (slice[0] == CallingConvention.LOCAL_SIG) {
       final prolog = readUint8();
       assert(
@@ -246,17 +241,17 @@ final class Blob {
       final count = readCompressed();
       final locals = <MetadataType>[];
       for (var i = 0; i < count; i++) {
-        locals.add(readTypeSignature(generics: generics));
+        locals.add(readTypeSignature());
       }
       return LocalVarSig(locals);
     }
 
     final callingConvention = CallingConvention(readUint8());
     final paramCount = readCompressed();
-    final returnType = readTypeSignature(generics: generics);
+    final returnType = readTypeSignature();
     final types = <MetadataType>[];
     for (var i = 0; i < paramCount; i++) {
-      types.add(readTypeSignature(generics: generics));
+      types.add(readTypeSignature());
     }
     return StandAloneMethodSig(
       callingConvention: callingConvention,
@@ -266,7 +261,7 @@ final class Blob {
   }
 
   /// Reads a type code and returns a corresponding [MetadataType].
-  MetadataType readTypeCode({List<MetadataType> generics = const []}) {
+  MetadataType readTypeCode() {
     final typeCode = readUint8();
     return switch (typeCode) {
       ELEMENT_TYPE_VOID => const VoidType(),
@@ -288,36 +283,33 @@ final class Blob {
       ELEMENT_TYPE_OBJECT => const ObjectType(),
       ELEMENT_TYPE_CLASS => switch (decode<TypeDefOrRef>()) {
         TypeDefOrRefTypeDef(:final value) => NamedClassType(
-          TypeName(value.namespace, value.name, generics: generics),
+          TypeName(value.namespace, value.name),
         ),
         TypeDefOrRefTypeRef(:final value) => NamedClassType(
-          TypeName(value.namespace, value.name, generics: generics),
+          TypeName(value.namespace, value.name),
         ),
-        TypeDefOrRefTypeSpec(:final value) => value.type(generics: generics),
+        TypeDefOrRefTypeSpec(:final value) => value.signature,
       },
       ELEMENT_TYPE_VALUETYPE => switch (decode<TypeDefOrRef>()) {
         TypeDefOrRefTypeDef(:final value) => NamedValueType(
-          TypeName(value.namespace, value.name, generics: generics),
+          TypeName(value.namespace, value.name),
         ),
         TypeDefOrRefTypeRef(:final value) => NamedValueType(
-          TypeName(value.namespace, value.name, generics: generics),
+          TypeName(value.namespace, value.name),
         ),
-        TypeDefOrRefTypeSpec(:final value) => value.type(generics: generics),
+        TypeDefOrRefTypeSpec(:final value) => value.signature,
       },
-      ELEMENT_TYPE_VAR =>
-        generics.isEmpty
-            ? GenericParameterType(readCompressed())
-            : generics[readCompressed()],
-      ELEMENT_TYPE_ARRAY => _readArray(generics: generics),
-      ELEMENT_TYPE_GENERICINST => _readGenericInst(generics: generics),
+      ELEMENT_TYPE_VAR => GenericParameterType(readCompressed()),
+      ELEMENT_TYPE_ARRAY => _readArray(),
+      ELEMENT_TYPE_GENERICINST => _readGenericInst(),
       ELEMENT_TYPE_ENUM => const AttributeEnumType(),
       _ => throw WinmdException('Unknown type code: $typeCode'),
     };
   }
 
-  MetadataType _readArray({required List<MetadataType> generics}) {
+  MetadataType _readArray() {
     // See §II.23.2.13 ArrayShape
-    final type = readTypeSignature(generics: generics);
+    final type = readTypeSignature();
     final rank = readCompressed();
     assert(rank == 1, 'Array rank must be 1, but got $rank.');
     final numSizes = readCompressed();
@@ -335,18 +327,18 @@ final class Blob {
     return FixedArrayType(type, size);
   }
 
-  MetadataType _readGenericInst({required List<MetadataType> generics}) {
+  MetadataType _readGenericInst() {
     final typeCode = readUint8();
     assert(
       typeCode == ELEMENT_TYPE_CLASS || typeCode == ELEMENT_TYPE_VALUETYPE,
-      'GenericInst type code must be ELEMENT_TYPE_CLASS or '
+      'GENERICINST type must be ELEMENT_TYPE_CLASS or '
       'ELEMENT_TYPE_VALUETYPE, but got $typeCode.',
     );
     final typeDefOrRef = decode<TypeDefOrRef>();
     final typeDefOrRefGenerics = <MetadataType>[];
     final count = readCompressed();
     for (var i = 0; i < count; i++) {
-      typeDefOrRefGenerics.add(readTypeCode(generics: generics));
+      typeDefOrRefGenerics.add(readTypeCode());
     }
 
     if (typeCode == ELEMENT_TYPE_CLASS) {
@@ -369,9 +361,7 @@ final class Blob {
   }
 
   /// Reads a field or method type signature.
-  ///
-  /// Optionally, [generics] can be passed to substitute any generic parameters.
-  MetadataType readTypeSignature({List<MetadataType> generics = const []}) {
+  MetadataType readTypeSignature() {
     final isConst = readModifiers().any(
       (def) =>
           def.namespace == 'System.Runtime.CompilerServices' &&
@@ -388,7 +378,7 @@ final class Blob {
       pointers++;
     }
 
-    final type = readTypeCode(generics: generics);
+    final type = readTypeCode();
 
     if (pointers > 0) return MutablePointerType(type, pointers);
     if (isConst) return ConstReferenceType(type);

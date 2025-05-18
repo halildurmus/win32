@@ -31,18 +31,15 @@ final class InterfaceImpl extends Row with HasCustomAttributes {
   late final class$ = readRow<TypeDef>(0);
 
   /// Returns the interface type implemented by [class$].
-  ///
-  /// Optionally, [generics] can be passed to substitute any generic parameters.
-  MetadataType interface({List<MetadataType> generics = const []}) =>
-      switch (decode<TypeDefOrRef>(1)) {
-        TypeDefOrRefTypeDef(:final value) => NamedClassType(
-          TypeName(value.namespace, value.name, generics: generics),
-        ),
-        TypeDefOrRefTypeRef(:final value) => NamedClassType(
-          TypeName(value.namespace, value.name, generics: generics),
-        ),
-        TypeDefOrRefTypeSpec(:final value) => value.type(generics: generics),
-      };
+  late final interface = switch (decode<TypeDefOrRef>(1)) {
+    TypeDefOrRefTypeDef(:final value) => NamedClassType(
+      TypeName(value.namespace, value.name),
+    ),
+    TypeDefOrRefTypeRef(:final value) => NamedClassType(
+      TypeName(value.namespace, value.name),
+    ),
+    TypeDefOrRefTypeSpec(:final value) => value.signature as NamedClassType,
+  };
 
   @override
   String toString() => 'InterfaceImpl(class\$: ${class$})';

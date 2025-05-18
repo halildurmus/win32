@@ -20,8 +20,17 @@ void main() async {
       check(mapChanged.token).equals(0x14000296);
       check(mapChanged.eventFlags).equals(const EventAttributes(0));
       check(mapChanged.name).equals('MapChanged');
+      check(mapChanged.eventType).equals(
+        const NamedClassType(
+          TypeName(
+            'Windows.Foundation.Collections',
+            'MapChangedEventHandler`2',
+            generics: [StringType(), StringType()],
+          ),
+        ),
+      );
       check(mapChanged.add.name).equals('add_MapChanged');
-      check(mapChanged.add.signature()).equals(
+      check(mapChanged.add.signature).equals(
         const MethodSignature(
           callingConvention: CallingConvention.HASTHIS,
           returnType: NamedValueType(
@@ -39,7 +48,7 @@ void main() async {
         ),
       );
       check(mapChanged.remove.name).equals('remove_MapChanged');
-      check(mapChanged.remove.signature()).equals(
+      check(mapChanged.remove.signature).equals(
         const MethodSignature(
           callingConvention: CallingConvention.HASTHIS,
           types: [

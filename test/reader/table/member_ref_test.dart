@@ -27,7 +27,7 @@ void main() async {
         (memberRef.parent as MemberRefParentTypeRef).value.name,
       ).equals('SupportedArchitectureAttribute');
       check(memberRef.name).equals('.ctor');
-      check(memberRef.signature()).equals(
+      check(memberRef.signature).equals(
         const MethodRefSig(
           callingConvention: CallingConvention.HASTHIS,
           types: [

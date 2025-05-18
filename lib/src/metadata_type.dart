@@ -318,10 +318,10 @@ final class ConstReferenceType extends MetadataType {
 
 /// Represents a generic parameter type.
 final class GenericParameterType extends MetadataType {
-  const GenericParameterType(this.parameterIndex);
+  const GenericParameterType(this.sequence);
 
   /// The zero-based index of the generic parameter.
-  final int parameterIndex;
+  final int sequence;
 
   @override
   ElementType get code => ELEMENT_TYPE_VAR;
@@ -329,13 +329,13 @@ final class GenericParameterType extends MetadataType {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is GenericParameterType && parameterIndex == other.parameterIndex;
+      other is GenericParameterType && sequence == other.sequence;
 
   @override
-  int get hashCode => parameterIndex.hashCode;
+  int get hashCode => sequence.hashCode;
 
   @override
-  String toString() => 'GenericParameterType($parameterIndex)';
+  String toString() => 'GenericParameterType($sequence)';
 }
 
 /// Represents a mutable (non-const) pointer type.

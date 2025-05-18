@@ -22,7 +22,7 @@ void main() async {
       final typeSpec = (interface as TypeDefOrRefTypeSpec).value;
       check(typeSpec.token).equals(0x1B000073);
       check(typeSpec.attributes).isEmpty();
-      check(typeSpec.type()).equals(
+      check(typeSpec.signature).equals(
         const NamedClassType(
           TypeName(
             'Windows.Foundation.Collections',

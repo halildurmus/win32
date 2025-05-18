@@ -435,7 +435,7 @@ void main() async {
     test('typeSpec', () {
       final typeSpecs = winrtIndex.typeSpec.toList();
       check(typeSpecs.length).equals(1126);
-      check(typeSpecs[0].type()).equals(
+      check(typeSpecs[0].signature).equals(
         const NamedClassType(
           TypeName(
             'Windows.Foundation.Collections',
@@ -444,7 +444,7 @@ void main() async {
           ),
         ),
       );
-      check(typeSpecs.last.type()).equals(
+      check(typeSpecs.last.signature).equals(
         const NamedClassType(
           TypeName(
             'Windows.Foundation',

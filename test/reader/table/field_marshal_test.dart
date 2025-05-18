@@ -9,7 +9,7 @@ void main() {
     final someArrayFieldIndex = writer.writeField(
       flags: FieldAttributes.public,
       name: 'SomeArray',
-      signature: const winmd.FieldSig(ArrayType(Int32Type())),
+      signature: const ArrayType(Int32Type()),
     );
     writer.writeFieldMarshal(
       parent: HasFieldMarshal.field(someArrayFieldIndex),
@@ -20,9 +20,7 @@ void main() {
     final someStringFieldIndex = writer.writeField(
       flags: FieldAttributes.public,
       name: 'SomeString',
-      signature: const winmd.FieldSig(
-        NamedValueType(winmd.TypeName('System', 'String')),
-      ),
+      signature: const NamedValueType(winmd.TypeName('System', 'String')),
     );
     writer.writeFieldMarshal(
       parent: HasFieldMarshal.field(someStringFieldIndex),

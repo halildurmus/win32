@@ -2,8 +2,6 @@ import 'package:meta/meta.dart';
 
 import '../../attributes.dart';
 import '../../common.dart';
-import '../../metadata_type.dart';
-import '../../property_sig.dart';
 import '../codes.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
@@ -40,10 +38,7 @@ final class Property extends Row with HasCustomAttributes {
 
   /// The signature of the property's getter method, which defines its return
   /// type and parameters.
-  ///
-  /// Optionally, [generics] can be passed to substitute any generic parameters.
-  PropertySig signature({List<MetadataType> generics = const []}) =>
-      readBlob(2).readPropertySig(generics: generics);
+  late final signature = readBlob(2).readPropertySig();
 
   /// The constant associated with the parameter, if any.
   late final constant = getEqualRange<Constant>(

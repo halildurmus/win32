@@ -20,7 +20,7 @@ void main() async {
       final interfaceImpl = typeDef.interfaceImpls.first;
       check(interfaceImpl.token).equals(0x09001D29);
       check(interfaceImpl.class$.name).equals('IFileDialog');
-      check(interfaceImpl.interface()).equals(
+      check(interfaceImpl.interface).equals(
         const NamedClassType(
           TypeName('Windows.Win32.UI.Shell', 'IModalWindow'),
         ),

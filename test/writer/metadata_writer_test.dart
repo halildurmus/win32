@@ -267,7 +267,7 @@ void main() {
       final someArray = writer.writeField(
         flags: FieldAttributes.public,
         name: 'SomeArray',
-        signature: const winmd.FieldSig(ArrayType(Int32Type())),
+        signature: const ArrayType(Int32Type()),
       );
       writer.writeFieldMarshal(
         parent: HasFieldMarshal.field(someArray),
@@ -278,9 +278,7 @@ void main() {
       final someString = writer.writeField(
         flags: FieldAttributes.public,
         name: 'SomeString',
-        signature: const winmd.FieldSig(
-          NamedValueType(winmd.TypeName('System', 'String')),
-        ),
+        signature: const NamedValueType(winmd.TypeName('System', 'String')),
       );
       writer.writeFieldMarshal(
         parent: HasFieldMarshal.field(someString),
@@ -361,7 +359,7 @@ void main() {
       check(methods.length).equals(2);
 
       check(methods[0].name).equals('One');
-      check(methods[0].signature()).equals(
+      check(methods[0].signature).equals(
         const winmd.MethodSignature(
           returnType: Int32Type(),
           types: [Int8Type(), Int16Type()],
@@ -370,7 +368,7 @@ void main() {
 
       check(methods[1].name).equals('Two');
       check(
-        methods[1].signature(),
+        methods[1].signature,
       ).equals(const winmd.MethodSignature(returnType: StringType()));
     });
 
@@ -396,16 +394,14 @@ void main() {
       final someGuid = writer.writeField(
         flags: FieldAttributes.public,
         name: 'SomeGuid',
-        signature: const winmd.FieldSig(
-          NamedValueType(winmd.TypeName('System', 'Guid')),
-        ),
+        signature: const NamedValueType(winmd.TypeName('System', 'Guid')),
       );
       writer.writeFieldLayout(offset: 0, field: someGuid);
 
       final someNum = writer.writeField(
         flags: FieldAttributes.public,
         name: 'SomeNum',
-        signature: const winmd.FieldSig(Int32Type()),
+        signature: const Int32Type(),
       );
       writer.writeFieldLayout(offset: 16, field: someNum);
 
@@ -418,14 +414,14 @@ void main() {
       check(fields.length).equals(2);
 
       check(fields[0].name).equals('SomeGuid');
-      check(fields[0].signature).equals(
-        const winmd.FieldSig(NamedValueType(winmd.TypeName('System', 'Guid'))),
-      );
+      check(
+        fields[0].signature,
+      ).equals(const NamedValueType(winmd.TypeName('System', 'Guid')));
       check(
         fields[0].layout,
       ).isNotNull().has((it) => it.offset, 'offset').equals(0);
       check(fields[1].name).equals('SomeNum');
-      check(fields[1].signature).equals(const winmd.FieldSig(Int32Type()));
+      check(fields[1].signature).equals(const Int32Type());
       check(
         fields[1].layout,
       ).isNotNull().has((it) => it.offset, 'offset').equals(16);

@@ -30,7 +30,7 @@ void main() async {
       check(method.memberAccess).equals(MemberAccess.public);
       check(method.vTableLayout).equals(VTableLayout.reuseSlot);
       check(method.name).equals('TraceSynchronousWorkCompletion');
-      check(method.signature()).equals(
+      check(method.signature).equals(
         const MethodSignature(
           types: [
             NamedValueType(
@@ -85,7 +85,7 @@ void main() async {
       check(method.memberAccess).equals(MemberAccess.public);
       check(method.vTableLayout).equals(VTableLayout.newSlot);
       check(method.name).equals('TraceSynchronousWorkCompletion');
-      check(method.signature()).equals(
+      check(method.signature).equals(
         const MethodSignature(
           callingConvention: CallingConvention.HASTHIS,
           types: [
@@ -139,7 +139,7 @@ void main() async {
       check(method.memberAccess).equals(MemberAccess.public);
       check(method.vTableLayout).equals(VTableLayout.reuseSlot);
       check(method.name).equals('DoDragDrop');
-      check(method.signature()).equals(
+      check(method.signature).equals(
         const MethodSignature(
           returnType: NamedValueType(
             TypeName('Windows.Win32.Foundation', 'HRESULT'),
@@ -208,7 +208,7 @@ void main() async {
       check(method.memberAccess).equals(MemberAccess.public);
       check(method.vTableLayout).equals(VTableLayout.reuseSlot);
       check(method.name).equals('GetAltMonthNames');
-      check(method.signature()).equals(
+      check(method.signature).equals(
         const MethodSignature(
           returnType: NamedValueType(
             TypeName('Windows.Win32.Foundation', 'HRESULT'),

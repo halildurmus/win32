@@ -19,14 +19,14 @@ void main() async {
   // Lookup a Win32 constant (e.g., E_FAIL) and print its type and value.
   final constant = metadata.findConstantByName('E_FAIL');
   print('Win32 constant "${constant.name}":');
-  print('  Type: ${constant.signature.type}');
+  print('  Type: ${constant.signature}');
   print('  Value: ${constant.constant?.value}');
   print('');
 
   // Lookup a Win32 function (e.g., MessageBoxW) and display its signature.
   final function = metadata.findFunctionByName('MessageBoxW');
   print('Win32 function "${function.name}":');
-  final MethodSignature(:returnType, :types) = function.signature();
+  final MethodSignature(:returnType, :types) = function.signature;
   print('  Return type: $returnType');
 
   final parameters = function.params;

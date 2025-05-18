@@ -28,13 +28,13 @@ import '../row.dart';
 final class CustomAttribute extends Row {
   CustomAttribute(super.metadataIndex, super.readerIndex, super.index) {
     final types = switch (type) {
-      CustomAttributeTypeMemberRef(:final value) => switch (value.signature()) {
+      CustomAttributeTypeMemberRef(:final value) => switch (value.signature) {
         FieldSig() => throw const WinmdException(
           'Expected MethodRefSig, got FieldSig.',
         ),
         final MethodRefSig methodRefSig => methodRefSig.types,
       },
-      CustomAttributeTypeMethodDef(:final value) => value.signature().types,
+      CustomAttributeTypeMethodDef(:final value) => value.signature.types,
     };
     final blob = readBlob(2);
     if (blob.isEmpty) {
@@ -59,7 +59,8 @@ final class CustomAttribute extends Row {
           final id = ElementType(blob.readUint8());
           assert(
             id == ELEMENT_TYPE_FIELD || id == ELEMENT_TYPE_PROPERTY,
-            'NamedArg must be either ELEMENT_TYPE_FIELD (0x53) or ELEMENT_TYPE_PROPERTY (0x54)',
+            'NamedArg must be either ELEMENT_TYPE_FIELD (0x53) or '
+            'ELEMENT_TYPE_PROPERTY (0x54)',
           );
           final type = blob.readTypeCode();
           final name = blob.readUtf8();
@@ -82,6 +83,34 @@ final class CustomAttribute extends Row {
       );
     }
   }
+
+  /// Decodes a value from the blob according to the specified [type].
+  MetadataValue _readValue(Blob blob, MetadataType type) => switch (type) {
+    BoolType() => BoolValue(blob.readBool()),
+    CharType() => CharValue(blob.readUint16()),
+    Int8Type() => Int8Value(blob.readInt8()),
+    Uint8Type() => Uint8Value(blob.readUint8()),
+    Int16Type() => Int16Value(blob.readInt16()),
+    Uint16Type() => Uint16Value(blob.readUint16()),
+    Int32Type() => Int32Value(blob.readInt32()),
+    Uint32Type() => Uint32Value(blob.readUint32()),
+    Int64Type() => Int64Value(blob.readInt64()),
+    Uint64Type() => Uint64Value(blob.readUint64()),
+    Float32Type() => Float32Value(blob.readFloat32()),
+    Float64Type() => Float64Value(blob.readFloat64()),
+    StringType() => Utf8StringValue(blob.readUtf8()),
+    NamedClassType(typeName: TypeName(namespace: 'System', name: 'Type')) =>
+      Utf8StringValue(blob.readUtf8()),
+    NamedValueType(:final typeName) => _readValue(
+      blob,
+      metadataIndex
+              .tryFindSingleType(typeName.namespace, typeName.name)
+              ?.fields[0]
+              .signature ??
+          const Int32Type(),
+    ),
+    _ => throw WinmdException('Unexpected CustomAttribute type: $type'),
+  };
 
   @override
   MetadataTable get table => MetadataTable.customAttribute;
@@ -115,27 +144,6 @@ final class CustomAttribute extends Row {
       'CustomAttribute(name: $name, fixedArgs: $fixedArgs, '
       'namedArgs: $namedArgs)';
 }
-
-/// Decodes a value from the blob according to the specified [type].
-MetadataValue _readValue(Blob blob, MetadataType type) => switch (type) {
-  BoolType() => BoolValue(blob.readBool()),
-  CharType() => CharValue(blob.readUint16()),
-  Int8Type() => Int8Value(blob.readInt8()),
-  Uint8Type() => Uint8Value(blob.readUint8()),
-  Int16Type() => Int16Value(blob.readInt16()),
-  Uint16Type() => Uint16Value(blob.readUint16()),
-  Int32Type() => Int32Value(blob.readInt32()),
-  Uint32Type() => Uint32Value(blob.readUint32()),
-  Int64Type() => Int64Value(blob.readInt64()),
-  Uint64Type() => Uint64Value(blob.readUint64()),
-  Float32Type() => Float32Value(blob.readFloat32()),
-  Float64Type() => Float64Value(blob.readFloat64()),
-  StringType() => Utf8StringValue(blob.readUtf8()),
-  NamedType(typeName: TypeName(namespace: 'System', name: 'Type')) =>
-    Utf8StringValue(blob.readUtf8()),
-  NamedType() => Int32Value(blob.readInt32()),
-  _ => throw WinmdException('Unexpected type: $type'),
-};
 
 @internal
 final class CustomAttributeCompanion extends RowCompanion<CustomAttribute> {

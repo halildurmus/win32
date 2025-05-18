@@ -48,7 +48,7 @@ void main() async {
       check(interfaceImpls.length).equals(3);
       final [iMap, iIterable, iObservableMap] = interfaceImpls;
       check(iMap.class$.name).equals('StringMap');
-      check(iMap.interface()).equals(
+      check(iMap.interface).equals(
         const NamedClassType(
           TypeName(
             'Windows.Foundation.Collections',
@@ -58,7 +58,7 @@ void main() async {
         ),
       );
       check(iIterable.class$.name).equals('StringMap');
-      check(iIterable.interface()).equals(
+      check(iIterable.interface).equals(
         const NamedClassType(
           TypeName(
             'Windows.Foundation.Collections',
@@ -76,7 +76,7 @@ void main() async {
         ),
       );
       check(iObservableMap.class$.name).equals('StringMap');
-      check(iObservableMap.interface()).equals(
+      check(iObservableMap.interface).equals(
         const NamedClassType(
           TypeName(
             'Windows.Foundation.Collections',
@@ -136,11 +136,11 @@ void main() async {
       check(interfaceImpls.length).equals(2);
       final [iCalendar, iTimeZoneOnCalendar] = interfaceImpls;
       check(iCalendar.class$.name).equals('Calendar');
-      check(iCalendar.interface()).equals(
+      check(iCalendar.interface).equals(
         const NamedClassType(TypeName('Windows.Globalization', 'ICalendar')),
       );
       check(iTimeZoneOnCalendar.class$.name).equals('Calendar');
-      check(iTimeZoneOnCalendar.interface()).equals(
+      check(iTimeZoneOnCalendar.interface).equals(
         const NamedClassType(
           TypeName('Windows.Globalization', 'ITimeZoneOnCalendar'),
         ),
@@ -331,7 +331,7 @@ void main() async {
       check(interfaceImpls.length).equals(1);
       final [iUnknown] = interfaceImpls;
       check(iUnknown.class$.name).equals('IInspectable');
-      check(iUnknown.interface()).equals(
+      check(iUnknown.interface).equals(
         const NamedClassType(TypeName('Windows.Win32.System.Com', 'IUnknown')),
       );
       check(typeDef.classLayout).isNull();
@@ -367,7 +367,7 @@ void main() async {
       final fields = typeDef.fields;
       check(fields.length).equals(3);
       check(fields[0].name).equals('value__');
-      check(fields[0].signature).equals(const FieldSig(Int32Type()));
+      check(fields[0].signature).equals(const Int32Type());
       check(fields[1].name).equals('RO_INIT_SINGLETHREADED');
       check(
         fields[1].constant,

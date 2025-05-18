@@ -65,7 +65,7 @@ void main() async {
         check(codedIndex.encode()).equals(4);
         check(codedIndex.toString()).equals(
           'Field(name: MSIDBOPEN_READONLY, signature: '
-          'FieldSig(NamedValueType(TypeName(Windows.Win32.Foundation.PWSTR))), '
+          'NamedValueType(TypeName(Windows.Win32.Foundation.PWSTR)), '
           'constant: Constant(value: Int32Value(0)))',
         );
         final decoded = HasConstant.decode(index, 0, codedIndex.encode());
@@ -123,7 +123,7 @@ void main() async {
         check(codedIndex.encode()).equals(33);
         check(codedIndex.toString()).equals(
           'Field(name: MSIDBOPEN_READONLY, signature: '
-          'FieldSig(NamedValueType(TypeName(Windows.Win32.Foundation.PWSTR))), '
+          'NamedValueType(TypeName(Windows.Win32.Foundation.PWSTR)), '
           'constant: Constant(value: Int32Value(0)))',
         );
         final decoded = HasCustomAttribute.decode(
@@ -516,7 +516,7 @@ void main() async {
         check(codedIndex.encode()).equals(2);
         check(codedIndex.toString()).equals(
           'Field(name: MSIDBOPEN_READONLY, signature: '
-          'FieldSig(NamedValueType(TypeName(Windows.Win32.Foundation.PWSTR))), '
+          'NamedValueType(TypeName(Windows.Win32.Foundation.PWSTR)), '
           'constant: Constant(value: Int32Value(0)))',
         );
         final decoded = HasFieldMarshal.decode(index, 0, codedIndex.encode());
@@ -602,7 +602,7 @@ void main() async {
         check(codedIndex.encode()).equals(2);
         check(codedIndex.toString()).equals(
           'Field(name: MSIDBOPEN_READONLY, signature: '
-          'FieldSig(NamedValueType(TypeName(Windows.Win32.Foundation.PWSTR))), '
+          'NamedValueType(TypeName(Windows.Win32.Foundation.PWSTR)), '
           'constant: Constant(value: Int32Value(0)))',
         );
         final decoded = MemberForwarded.decode(index, 0, codedIndex.encode());
