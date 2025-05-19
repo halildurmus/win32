@@ -154,6 +154,15 @@ sealed class NamedType extends MetadataType {
 
   /// The full type name including namespace and generic arguments.
   final TypeName typeName;
+
+  /// The namespace part of the type name.
+  String get namespace => typeName.namespace;
+
+  /// The simple name of the type.
+  String get name => typeName.name;
+
+  /// The list of generic type arguments for this type, if any.
+  List<MetadataType> get generics => typeName.generics;
 }
 
 /// Represents a user-defined class type (i.e., a reference type).

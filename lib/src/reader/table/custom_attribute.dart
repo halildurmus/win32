@@ -101,12 +101,9 @@ final class CustomAttribute extends Row {
     StringType() => Utf8StringValue(blob.readUtf8()),
     NamedClassType(typeName: TypeName(namespace: 'System', name: 'Type')) =>
       Utf8StringValue(blob.readUtf8()),
-    NamedValueType(:final typeName) => _readValue(
+    NamedValueType(:final namespace, :final name) => _readValue(
       blob,
-      metadataIndex
-              .tryFindSingleType(typeName.namespace, typeName.name)
-              ?.fields[0]
-              .signature ??
+      metadataIndex.tryFindSingleType(namespace, name)?.fields[0].signature ??
           const Int32Type(),
     ),
     _ => throw WinmdException('Unexpected CustomAttribute type: $type'),

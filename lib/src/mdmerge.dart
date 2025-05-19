@@ -212,9 +212,9 @@ MemberRefParent _buildMemberRefParent(
 
   return MemberRefParent.typeSpec(
     writer.writeTypeSpec(
-      namespace: type.typeName.namespace,
-      name: type.typeName.name,
-      generics: type.typeName.generics,
+      namespace: type.namespace,
+      name: type.name,
+      generics: type.generics,
     ),
   );
 }
