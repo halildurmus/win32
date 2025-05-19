@@ -1274,6 +1274,16 @@ final class MetadataWriter {
         tableStream.length +
         userStringHeap.length;
 
+    final sizeOfStreamHeaders =
+        sizeOf<BlobStreamHeader>() +
+        sizeOf<GuidStreamHeader>() +
+        sizeOf<StringStreamHeader>() +
+        sizeOf<TableStreamHeader>() +
+        sizeOf<UserStringStreamHeader>();
+
+    final metadataHeaderSize = sizeOf<MetadataHeader>();
+    final clrHeaderSize = sizeOf<IMAGE_COR20_HEADER>();
+
     final dosByteData = Uint8List(sizeOf<IMAGE_DOS_HEADER>());
     Struct.create<IMAGE_DOS_HEADER>(dosByteData)
       ..e_magic = IMAGE_DOS_SIGNATURE
@@ -1295,15 +1305,14 @@ final class MetadataWriter {
     final optional = Struct.create<IMAGE_OPTIONAL_HEADER32>(optionalByteData)
       ..Magic = IMAGE_NT_OPTIONAL_HDR32_MAGIC
       ..MajorLinkerVersion = 11
-      ..SizeOfInitializedData = 1024
       ..ImageBase = 0x400000
-      ..SectionAlignment = sectionAlignment
-      ..FileAlignment = 512
+      ..SectionAlignment = 0x1000
+      ..FileAlignment = 0x200
       ..MajorOperatingSystemVersion = 6
       ..MinorOperatingSystemVersion = 2
       ..MajorSubsystemVersion = 6
       ..MinorSubsystemVersion = 2
-      ..SizeOfHeaders = 512
+      ..SizeOfHeaders = 0x200
       ..Subsystem = IMAGE_SUBSYSTEM_WINDOWS_CUI
       ..DllCharacteristics =
           IMAGE_DLLCHARACTERISTICS_NX_COMPAT |
@@ -1316,53 +1325,49 @@ final class MetadataWriter {
 
     final sectionByteData = Uint8List(sizeOf<IMAGE_SECTION_HEADER>());
     final section = Struct.create<IMAGE_SECTION_HEADER>(sectionByteData)
-      ..Name.setString('.text\x00\x00\x00')
+      ..Name.setString('.text')
       ..Characteristics = const IMAGE_SECTION_CHARACTERISTICS(0x4000_0020)
-      ..VirtualAddress = sectionAlignment;
+      ..VirtualAddress = optional.SectionAlignment;
 
-    final clrByteData = Uint8List(sizeOf<IMAGE_COR20_HEADER>());
+    final clrByteData = Uint8List(clrHeaderSize);
     final clr = Struct.create<IMAGE_COR20_HEADER>(clrByteData)
-      ..cb = sizeOf<IMAGE_COR20_HEADER>()
+      ..cb = clrHeaderSize
       ..MajorRuntimeVersion = 2
       ..MinorRuntimeVersion = 5
       ..Flags = 1;
 
-    final metadataByteData = Uint8List(sizeOf<MetadataHeader>());
+    final metadataByteData = Uint8List(metadataHeaderSize);
     Struct.create<MetadataHeader>(metadataByteData)
       ..signature = metadataSignature
       ..majorVersion = 1
       ..minorVersion = 1
       ..length = 20
-      ..version.setString('WindowsRuntime 1.4\x00\x00')
+      ..version.setString('WindowsRuntime 1.4')
       ..streams = numberOfStreams;
 
-    final sizeOfStreamHeaders =
-        sizeOf<BlobStreamHeader>() +
-        sizeOf<GuidStreamHeader>() +
-        sizeOf<StringStreamHeader>() +
-        sizeOf<TableStreamHeader>() +
-        sizeOf<UserStringStreamHeader>();
-
-    final sizeOfImage =
-        optional.FileAlignment +
-        sizeOf<IMAGE_COR20_HEADER>() +
-        sizeOf<MetadataHeader>() +
+    final actualSectionSize =
+        metadataHeaderSize +
         sizeOfStreamHeaders +
-        sizeOfStreams;
+        sizeOfStreams +
+        clrHeaderSize;
 
-    optional.SizeOfImage = alignTo(sizeOfImage, optional.SectionAlignment);
-    section.Misc.VirtualSize = sizeOfImage - optional.FileAlignment;
-    section.SizeOfRawData = alignTo(
-      section.Misc.VirtualSize,
-      optional.FileAlignment,
+    section
+      ..Misc.VirtualSize = actualSectionSize
+      ..PointerToRawData = optional.FileAlignment
+      ..SizeOfRawData = alignTo(actualSectionSize, optional.FileAlignment);
+
+    clr.MetaData
+      ..VirtualAddress = section.VirtualAddress + clrHeaderSize
+      ..Size = metadataHeaderSize + sizeOfStreamHeaders + sizeOfStreams;
+
+    optional.DataDirectory.elements[IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR]
+      ..VirtualAddress = section.VirtualAddress
+      ..Size = clrHeaderSize;
+
+    optional.SizeOfImage = alignTo(
+      section.VirtualAddress + section.Misc.VirtualSize,
+      optional.SectionAlignment,
     );
-    optional.DataDirectory.elements[14]
-      ..VirtualAddress = sectionAlignment
-      ..Size = sizeOf<IMAGE_COR20_HEADER>();
-    section.PointerToRawData = optional.FileAlignment;
-    clr.MetaData.VirtualAddress =
-        sectionAlignment + sizeOf<IMAGE_COR20_HEADER>();
-    clr.MetaData.Size = section.Misc.VirtualSize - sizeOf<IMAGE_COR20_HEADER>();
 
     final buffer = BytesBuilder(copy: false)
       ..add(dosByteData)
@@ -1387,28 +1392,28 @@ final class MetadataWriter {
         Struct.create<BlobStreamHeader>(blobStreamHeaderByteData)
           ..offset = streamOffset
           ..size = blobHeap.length
-          ..name.setString('${MetadataStream.blob}\x00\x00\x00');
+          ..name.setString('${MetadataStream.blob}');
 
     final guidStreamHeaderByteData = Uint8List(sizeOf<GuidStreamHeader>());
     final guidStreamHeader =
         Struct.create<GuidStreamHeader>(guidStreamHeaderByteData)
           ..offset = blobStreamHeader.nextOffset
           ..size = guidHeap.length
-          ..name.setString('${MetadataStream.guid}\x00\x00\x00');
+          ..name.setString('${MetadataStream.guid}');
 
     final stringStreamHeaderByteData = Uint8List(sizeOf<StringStreamHeader>());
     final stringStreamHeader =
         Struct.create<StringStreamHeader>(stringStreamHeaderByteData)
           ..offset = guidStreamHeader.nextOffset
           ..size = stringHeap.length
-          ..name.setString('${MetadataStream.string}\x00\x00');
+          ..name.setString('${MetadataStream.string}');
 
     final tableStreamHeaderByteData = Uint8List(sizeOf<TableStreamHeader>());
     final tableStreamHeader =
         Struct.create<TableStreamHeader>(tableStreamHeaderByteData)
           ..offset = stringStreamHeader.nextOffset
           ..size = tableStream.length
-          ..name.setString('${MetadataStream.table}\x00\x00');
+          ..name.setString('${MetadataStream.table}');
 
     final userStringStreamHeaderByteData = Uint8List(
       sizeOf<UserStringStreamHeader>(),
@@ -1416,7 +1421,7 @@ final class MetadataWriter {
     Struct.create<UserStringStreamHeader>(userStringStreamHeaderByteData)
       ..offset = tableStreamHeader.nextOffset
       ..size = userStringHeap.length
-      ..name.setString('${MetadataStream.userString}\x00');
+      ..name.setString('${MetadataStream.userString}');
 
     buffer
       ..add(blobStreamHeaderByteData)
@@ -1430,13 +1435,47 @@ final class MetadataWriter {
       ..add(tableStream)
       ..add(userStringHeap);
 
+    final remainingPadding = section.SizeOfRawData - actualSectionSize;
+    if (remainingPadding > 0) {
+      buffer.add(Uint8List(remainingPadding));
+    }
+
     assert(
-      clr.MetaData.Size == buffer.length - metadataOffset,
-      'Expected ${clr.MetaData.Size}, got ${buffer.length - metadataOffset}.',
+      clr.MetaData.Size ==
+          metadataHeaderSize + sizeOfStreamHeaders + sizeOfStreams,
+      'clr.MetaData.Size should only reflect metadata content, excluding the '
+      'CLR header.',
     );
+
     assert(
-      sizeOfImage == buffer.length,
-      'Expected $sizeOfImage, got ${buffer.length}.',
+      section.Misc.VirtualSize == actualSectionSize,
+      'Section virtual size must match actual section size.',
+    );
+
+    assert(
+      section.SizeOfRawData ==
+          alignTo(section.Misc.VirtualSize, optional.FileAlignment),
+      'Raw data size must be aligned to FileAlignment.',
+    );
+
+    assert(
+      section.PointerToRawData == optional.FileAlignment,
+      'Section must begin immediately after the headers.',
+    );
+
+    assert(
+      optional.SizeOfImage ==
+          alignTo(
+            section.VirtualAddress + section.Misc.VirtualSize,
+            optional.SectionAlignment,
+          ),
+      'SizeOfImage should align the end of section '
+      'VirtualAddress + VirtualSize to SectionAlignment.',
+    );
+
+    assert(
+      buffer.length == section.PointerToRawData + section.SizeOfRawData,
+      'Final buffer size must match PointerToRawData + SizeOfRawData.',
     );
 
     return buffer.takeBytes();

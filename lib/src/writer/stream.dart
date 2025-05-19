@@ -1,8 +1,5 @@
 import 'dart:ffi';
 
-/// See ECMA-335 `§II.25.2.3.2`.
-const sectionAlignment = 4096;
-
 /// See ECMA-335 `§II.24.2.2`.
 final class BlobStreamHeader extends Struct {
   @Uint32()
