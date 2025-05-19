@@ -249,4 +249,44 @@ void main() async {
       check(method.hasAttribute('DocumentationAttribute')).isTrue();
     });
   });
+
+  group('MethodDefExtension', () {
+    group('findParameter', () {
+      final typeDef = metadata.findSingleType(
+        'Windows.Foundation.Collections',
+        'StringMap',
+      );
+      final method = typeDef.findMethod('Insert');
+
+      test('returns matching parameter if found', () {
+        final param = method.findParameter('key');
+        check(param.name).equals('key');
+      });
+
+      test('throws if parameter not found', () {
+        check(
+          () => method.findParameter('NonexistentParameter'),
+        ).throws<WinmdException>();
+      });
+    });
+
+    group('tryFindParameter', () {
+      final typeDef = metadata.findSingleType(
+        'Windows.Foundation.Collections',
+        'StringMap',
+      );
+      final method = typeDef.findMethod('Insert');
+
+      test('returns matching parameter if found', () {
+        final param = method.tryFindParameter('value');
+        check(param).isNotNull();
+        check(param!.name).equals('value');
+      });
+
+      test('returns null if parameter not found', () {
+        final param = method.tryFindParameter('DoesNotExist');
+        check(param).isNull();
+      });
+    });
+  });
 }

@@ -100,6 +100,22 @@ final class MethodDef extends Row with HasCustomAttributes {
   String toString() => 'MethodDef(name: $name, params: $params)';
 }
 
+/// Extension methods for locating parameters within a [MethodDef].
+extension MethodDefExtension on MethodDef {
+  /// Finds a parameter by its [name].
+  ///
+  /// Throws a [WinmdException] if the parameter is not found.
+  Param findParameter(String name) =>
+      params.where((p) => p.name == name).firstOrNull ??
+      (throw WinmdException('Parameter "$name" not found in $this'));
+
+  /// Attempts to find a parameter by its [name].
+  ///
+  /// Returns `null` if the parameter is not found.
+  Param? tryFindParameter(String name) =>
+      params.where((p) => p.name == name).firstOrNull;
+}
+
 @internal
 final class MethodDefCompanion extends RowCompanion<MethodDef> {
   const MethodDefCompanion();
