@@ -207,6 +207,7 @@ final class TypeDef extends Row with HasCustomAttributes {
       namespace.isEmpty ? 'TypeDef($name)' : 'TypeDef($namespace.$name)';
 }
 
+/// Extension methods for querying members of a [TypeDef] by name.
 extension TypeDefExtension on TypeDef {
   /// Finds an event by its [name].
   ///

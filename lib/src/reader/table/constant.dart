@@ -92,6 +92,8 @@ final class ConstantCompanion extends RowCompanion<Constant> {
   MetadataTable get table => MetadataTable.constant;
 }
 
+/// Extension methods for strongly-typed access to the underlying value of a
+/// [Constant].
 extension ConstantExtension on Constant {
   /// Returns the value as a [bool] if possible, otherwise `null`.
   bool? get valueAsBool => switch (value) {

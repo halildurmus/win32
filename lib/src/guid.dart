@@ -248,8 +248,10 @@ final class Guid {
   );
 }
 
+/// Extension on [Guid] to support conversion to binary format.
 extension GuidExtension on Guid {
-  /// Converts the GUID into its 16-byte binary representation.
+  /// Converts the [Guid] into its standard 16-byte little-endian binary
+  /// representation.
   Uint8List toBytes() {
     final bytes = Uint8List(16);
     final byteData = ByteData.view(bytes.buffer)
