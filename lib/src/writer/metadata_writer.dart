@@ -1377,7 +1377,7 @@ final class MetadataWriter {
       ..add(sectionByteData);
     assert(
       buffer.length < optional.FileAlignment,
-      'Expected ${buffer.length} to be smaller than ${optional.FileAlignment}.',
+      'Expected buffer length to be smaller than FileAlignment.',
     );
     buffer
       ..add(Uint8List(optional.FileAlignment - buffer.length))

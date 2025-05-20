@@ -35,24 +35,23 @@ final class MetadataReader {
     }
 
     final fileOffset = dos.e_lfanew + sizeOf<Uint32>();
-    final file = Struct.create<IMAGE_FILE_HEADER>(data, fileOffset);
+    final fileHeader = Struct.create<IMAGE_FILE_HEADER>(data, fileOffset);
 
     final optionalOffset = fileOffset + sizeOf<IMAGE_FILE_HEADER>();
-
     final int comVirtualAddress;
     final List<IMAGE_SECTION_HEADER> sections;
 
     switch (data.readUint16(optionalOffset)) {
       case IMAGE_NT_OPTIONAL_HDR32_MAGIC:
-        final optional = Struct.create<IMAGE_OPTIONAL_HEADER32>(
+        final optionalHeader = Struct.create<IMAGE_OPTIONAL_HEADER32>(
           data,
           optionalOffset,
         );
-        comVirtualAddress = optional
+        comVirtualAddress = optionalHeader
             .DataDirectory[IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR]
             .VirtualAddress;
         sections = List.generate(
-          file.NumberOfSections,
+          fileHeader.NumberOfSections,
           (i) => Struct.create<IMAGE_SECTION_HEADER>(
             data,
             optionalOffset +
@@ -71,7 +70,7 @@ final class MetadataReader {
             .DataDirectory[IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR]
             .VirtualAddress;
         sections = List.generate(
-          file.NumberOfSections,
+          fileHeader.NumberOfSections,
           (i) => Struct.create<IMAGE_SECTION_HEADER>(
             data,
             optionalOffset +
@@ -85,6 +84,9 @@ final class MetadataReader {
         throw const WinmdException('Invalid PE file');
     }
 
+    int offsetFromRva(IMAGE_SECTION_HEADER section, int rva) =>
+        rva - section.VirtualAddress + section.PointerToRawData;
+
     IMAGE_SECTION_HEADER? sectionFromRva(
       List<IMAGE_SECTION_HEADER> sections,
       int rva,
@@ -95,9 +97,6 @@ final class MetadataReader {
               rva < s.VirtualAddress + s.Misc.VirtualSize,
         )
         .firstOrNull;
-
-    int offsetFromRva(IMAGE_SECTION_HEADER section, int rva) =>
-        rva - section.VirtualAddress + section.PointerToRawData;
 
     final clr = Struct.create<IMAGE_COR20_HEADER>(
       data,
@@ -114,19 +113,20 @@ final class MetadataReader {
       sectionFromRva(sections, clr.MetaData.VirtualAddress)!,
       clr.MetaData.VirtualAddress,
     );
-    final metadata = Struct.create<MetadataHeader>(data, metadataOffset);
-    if (metadata.signature != metadataSignature) {
+    final metadataHeader = Struct.create<MetadataHeader>(data, metadataOffset);
+    if (metadataHeader.signature != metadataSignature) {
       throw const WinmdException('Invalid metadata signature');
     }
 
-    // The METADATA_HEADER struct is not a fixed size so have to offset a little
-    // more carefully.
-    var offset = metadataOffset + metadata.length + 20;
-
-    final numStreams = data.readUint16(metadataOffset + metadata.length + 18);
-    if (numStreams > 5) {
-      throw WinmdException('Invalid number of streams: $numStreams');
+    final streams = data.readUint16(
+      metadataOffset + metadataHeader.length + 18,
+    );
+    if (streams > 5) {
+      throw WinmdException('Invalid number of streams: $streams');
     }
+
+    // Start reading the metadata streams.
+    var offset = metadataOffset + metadataHeader.length + 20;
 
     var blobStreamOffset = 0;
     var blobStreamSize = 0;
@@ -138,7 +138,7 @@ final class MetadataReader {
     var userStringStreamOffset = 0;
     var userStringStreamSize = 0;
 
-    for (var i = 0; i < numStreams; i++) {
+    for (var i = 0; i < streams; i++) {
       final streamOffset = data.readUint32(offset);
       final streamSize = data.readUint32(offset + 4);
       final streamName = data.readString(offset + 8);
