@@ -152,7 +152,7 @@ final class MetadataIndex {
   /// - No types are found for the specified namespace and name.
   /// - More than one type is found, indicating ambiguity.
   TypeDef findSingleType(String namespace, String name) {
-    final types = findTypes(namespace, name).toList();
+    final types = findTypes(namespace, name).toList(growable: false);
     if (types.isEmpty) {
       throw WinmdException('Type not found: $namespace.$name');
     } else if (types.length > 1) {
@@ -166,7 +166,7 @@ final class MetadataIndex {
   ///
   /// Returns `null` if no types are found, or more than one type is found.
   TypeDef? tryFindSingleType(String namespace, String name) {
-    final types = findTypes(namespace, name).toList();
+    final types = findTypes(namespace, name).toList(growable: false);
     if (types.isEmpty || types.length > 1) return null;
     return types[0];
   }

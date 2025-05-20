@@ -56,12 +56,14 @@ final class MetadataLookup {
     return MetadataLookup._(index, constants, functions, types);
   }
 
-  const MetadataLookup._(
+  MetadataLookup._(
     this.index,
     this.constantIndex,
     this.functionIndex,
     this.typeIndex,
-  );
+  ) : _cachedConstantsByName = HashMap(),
+      _cachedFunctionsByName = HashMap(),
+      _cachedTypesByName = HashMap();
 
   /// The underlying [MetadataIndex] from which this lookup was created.
   final MetadataIndex index;
@@ -75,6 +77,10 @@ final class MetadataLookup {
   /// A map of [TypeDef]s indexed by their namespace and name.
   final HashMap<String, HashMap<String, List<TypeDef>>> typeIndex;
 
+  final HashMap<String, Field> _cachedConstantsByName;
+  final HashMap<String, MethodDef> _cachedFunctionsByName;
+  final HashMap<String, List<TypeDef>> _cachedTypesByName;
+
   /// Finds a constant by its [namespace] and [name].
   ///
   /// Throws a [WinmdException] if the constant is not found.
@@ -85,12 +91,15 @@ final class MetadataLookup {
   /// Finds a constant by its [name] across all namespaces.
   ///
   /// Throws a [WinmdException] if the constant is not found.
-  Field findConstantByName(String name) => constantIndex.values
-      .expand((namespace) => namespace.values)
-      .firstWhere(
-        (field) => field.name == name,
-        orElse: () => throw WinmdException('Constant not found: $name'),
-      );
+  Field findConstantByName(String name) => _cachedConstantsByName.putIfAbsent(
+    name,
+    () => constantIndex.values
+        .expand((namespace) => namespace.values)
+        .firstWhere(
+          (field) => field.name == name,
+          orElse: () => throw WinmdException('Constant not found: $name'),
+        ),
+  );
 
   /// Attempts to find a constant by its [namespace] and [name].
   ///
@@ -99,10 +108,19 @@ final class MetadataLookup {
       constantIndex[namespace]?[name];
 
   /// Attempts to find a constant by its [name] across all namespaces.
-  Field? tryFindConstantByName(String name) => constantIndex.values
-      .expand((namespace) => namespace.values)
-      .where((field) => field.name == name)
-      .firstOrNull;
+  Field? tryFindConstantByName(String name) {
+    if (_cachedConstantsByName[name] case final constant?) return constant;
+
+    final constant = constantIndex.values
+        .expand((namespace) => namespace.values)
+        .where((field) => field.name == name)
+        .firstOrNull;
+    if (constant != null) {
+      _cachedConstantsByName[name] = constant;
+    }
+
+    return constant;
+  }
 
   /// Finds a function by its [namespace] and [name].
   ///
@@ -112,11 +130,15 @@ final class MetadataLookup {
       (throw WinmdException('Function not found: $namespace.$name'));
 
   /// Finds a function by its [name] across all namespaces.
-  MethodDef findFunctionByName(String name) => functionIndex.values
-      .expand((namespace) => namespace.values)
-      .firstWhere(
-        (method) => method.name == name,
-        orElse: () => throw WinmdException('Function not found: $name'),
+  MethodDef findFunctionByName(String name) =>
+      _cachedFunctionsByName.putIfAbsent(
+        name,
+        () => functionIndex.values
+            .expand((namespace) => namespace.values)
+            .firstWhere(
+              (method) => method.name == name,
+              orElse: () => throw WinmdException('Function not found: $name'),
+            ),
       );
 
   /// Attempts to find a function by its [namespace] and [name].
@@ -126,10 +148,19 @@ final class MetadataLookup {
       functionIndex[namespace]?[name];
 
   /// Attempts to find a function by its [name] across all namespaces.
-  MethodDef? tryFindFunctionByName(String name) => functionIndex.values
-      .expand((namespace) => namespace.values)
-      .where((method) => method.name == name)
-      .firstOrNull;
+  MethodDef? tryFindFunctionByName(String name) {
+    if (_cachedFunctionsByName[name] case final function?) return function;
+
+    final function = functionIndex.values
+        .expand((namespace) => namespace.values)
+        .where((method) => method.name == name)
+        .firstOrNull;
+    if (function != null) {
+      _cachedFunctionsByName[name] = function;
+    }
+
+    return function;
+  }
 
   /// Enumerates all [TypeDef] instances matching the given [namespace] and
   /// [name].
@@ -137,10 +168,15 @@ final class MetadataLookup {
       typeIndex[namespace]?[name] ?? const Iterable.empty();
 
   /// Finds all [TypeDef] instances matching the [name] across all namespaces.
-  Iterable<TypeDef> findTypesByName(String name) => typeIndex.values
-      .expand((namespace) => namespace.values)
-      .expand((typeList) => typeList)
-      .where((type) => type.name == name);
+  Iterable<TypeDef> findTypesByName(String name) =>
+      _cachedTypesByName.putIfAbsent(
+        name,
+        () => typeIndex.values
+            .expand((namespace) => namespace.values)
+            .expand((typeList) => typeList)
+            .where((type) => type.name == name)
+            .toList(growable: false),
+      );
 
   /// Finds a single [TypeDef] matching the given [namespace] and [name].
   ///
@@ -163,7 +199,7 @@ final class MetadataLookup {
   /// - No types are found for the specified name.
   /// - More than one type is found, indicating ambiguity.
   TypeDef findSingleTypeByName(String name) {
-    final types = findTypesByName(name).toList();
+    final types = findTypesByName(name).toList(growable: false);
     if (types.isEmpty) {
       throw WinmdException('Type not found: $name');
     } else if (types.length > 1) {
@@ -177,7 +213,7 @@ final class MetadataLookup {
   ///
   /// Returns `null` if no types are found, or more than one type is found.
   TypeDef? tryFindSingleType(String namespace, String name) {
-    final types = findTypes(namespace, name).toList();
+    final types = findTypes(namespace, name).toList(growable: false);
     if (types.isEmpty || types.length > 1) return null;
     return types[0];
   }
@@ -187,7 +223,7 @@ final class MetadataLookup {
   ///
   /// Returns `null` if no types are found, or more than one type is found.
   TypeDef? tryFindSingleTypeByName(String name) {
-    final types = findTypesByName(name).toList();
+    final types = findTypesByName(name).toList(growable: false);
     if (types.isEmpty || types.length > 1) return null;
     return types[0];
   }
