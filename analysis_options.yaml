@@ -1,10 +1,1 @@
-include: package:lints/dart.yaml
-
-linter:
-  rules:
-    - avoid_futureor_void
-    - omit_obvious_local_variable_types
-    - omit_obvious_property_types
-    - unintended_html_in_doc_comment
-    - unsafe_variance
-    - use_truncating_division
+include: package:halildurmus_lints/dart.yaml

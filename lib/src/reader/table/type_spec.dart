@@ -1,6 +1,7 @@
 import 'package:meta/meta.dart';
 
 import '../../common.dart';
+import '../../metadata_type.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
 import '../metadata_table.dart';
@@ -23,7 +24,7 @@ final class TypeSpec extends Row with HasCustomAttributes {
   int get token => (MetadataTableId.typeSpec << 24) | index;
 
   /// The signature of the type specification.
-  late final signature = readBlob(0).readTypeCode();
+  late final MetadataType signature = readBlob(0).readTypeCode();
 }
 
 @internal

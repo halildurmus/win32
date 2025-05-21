@@ -3,6 +3,7 @@ import 'package:meta/meta.dart';
 import '../../attributes.dart';
 import '../../common.dart';
 import '../../exception.dart';
+import '../../method_signature.dart';
 import '../codes.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
@@ -35,18 +36,19 @@ final class MethodDef extends Row with HasCustomAttributes {
   int get token => (MetadataTableId.methodDef << 24) | index;
 
   /// The relative virtual address (RVA) of the method's implementation.
-  late final rva = readUint32(0);
+  late final int rva = readUint32(0);
 
   /// Implementation flags that provide details about the method's
   /// implementation.
   late final implFlags = MethodImplAttributes(readUint16(1));
 
   /// The code type associated with the method.
-  late final codeType =
+  late final CodeType codeType =
       CodeType.values[implFlags & MethodImplAttributes.codeTypeMask];
 
   /// Indicates whether the method is managed (`true`) or unmanaged (`false`).
-  late final isManaged = switch (implFlags & MethodImplAttributes.managedMask) {
+  late final bool isManaged = switch (implFlags &
+      MethodImplAttributes.managedMask) {
     MethodImplAttributes.unmanaged => false,
     _ => true,
   };
@@ -56,11 +58,12 @@ final class MethodDef extends Row with HasCustomAttributes {
   late final flags = MethodAttributes(readUint16(2));
 
   /// The access level of the method (e.g., public, private, etc.).
-  late final memberAccess =
+  late final MemberAccess memberAccess =
       MemberAccess.values[flags & MethodAttributes.memberAccessMask];
 
   /// The vtable layout of the method.
-  late final vTableLayout = switch (flags & MethodAttributes.vtableLayoutMask) {
+  late final VTableLayout vTableLayout = switch (flags &
+      MethodAttributes.vtableLayoutMask) {
     MethodAttributes.reuseSlot => VTableLayout.reuseSlot,
     MethodAttributes.newSlot => VTableLayout.newSlot,
     _ => throw WinmdException(
@@ -69,32 +72,32 @@ final class MethodDef extends Row with HasCustomAttributes {
   };
 
   /// The name of the method.
-  late final name = readString(3);
+  late final String name = readString(3);
 
   /// The signature of the method, which defines the return type and parameters
   /// of the method.
   ///
   /// Optionally, [generics] can be provided to substitute any generic
   /// parameters in the method signature.
-  late final signature = readBlob(4).readMethodDefSig();
+  late final MethodSignature signature = readBlob(4).readMethodDefSig();
 
   /// The list of parameters for the method.
-  late final params = getList<Param>(5).toList(growable: false);
+  late final List<Param> params = getList<Param>(5).toList(growable: false);
 
   /// The list of generic parameters defined for the method, if any.
-  late final generics = getEqualRange<GenericParam>(
+  late final List<GenericParam> generics = getEqualRange<GenericParam>(
     2,
     TypeOrMethodDef.methodDef(this).encode(),
   ).toList(growable: false);
 
   /// The implementation map for the method, if it exists.
-  late final implMap = getEqualRange<ImplMap>(
+  late final ImplMap? implMap = getEqualRange<ImplMap>(
     1,
     MemberForwarded.methodDef(this).encode(),
   ).firstOrNull;
 
   /// The type that owns this method.
-  late final parent = getParentRow<TypeDef>(5);
+  late final TypeDef parent = getParentRow<TypeDef>(5);
 
   @override
   String toString() => 'MethodDef(name: $name, params: $params)';

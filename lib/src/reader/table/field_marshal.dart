@@ -1,6 +1,7 @@
 import 'package:meta/meta.dart';
 
 import '../../common.dart';
+import '../../marshalling_descriptor.dart';
 import '../codes.dart';
 import '../metadata_index.dart';
 import '../metadata_table.dart';
@@ -24,10 +25,12 @@ final class FieldMarshal extends Row {
   int get token => (MetadataTableId.fieldMarshal << 24) | index;
 
   /// The entity being marshaled.
-  late final parent = decode<HasFieldMarshal>(0);
+  late final HasFieldMarshal parent = decode<HasFieldMarshal>(0);
 
   /// The native marshaling rules for the associated [parent].
-  late final nativeType = readBlob(1).readMarshallingDescriptor();
+  late final MarshallingDescriptor nativeType = readBlob(
+    1,
+  ).readMarshallingDescriptor();
 
   @override
   String toString() => 'FieldMarshal(parent: $parent)';

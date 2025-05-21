@@ -29,7 +29,7 @@ final class Constant extends Row {
   int get token => (MetadataTableId.constant << 24) | index;
 
   /// The metadata type that describes how to interpret the constant value.
-  late final type = () {
+  late final MetadataType type = () {
     final type = readUint8(0);
     return switch (type) {
       ELEMENT_TYPE_BOOLEAN => const BoolType(),
@@ -51,10 +51,10 @@ final class Constant extends Row {
   }();
 
   /// The entity that this constant value belongs to.
-  late final parent = decode<HasConstant>(1);
+  late final HasConstant parent = decode<HasConstant>(1);
 
   /// The constant value, interpreted according to [type].
-  late final value = () {
+  late final MetadataValue? value = () {
     final blob = readBlob(2);
     return switch (type) {
       BoolType() => BoolValue(blob.readBool()),

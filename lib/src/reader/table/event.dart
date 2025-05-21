@@ -10,6 +10,7 @@ import '../metadata_index.dart';
 import '../metadata_table.dart';
 import '../row.dart';
 import 'event_map.dart';
+import 'method_def.dart';
 import 'method_semantics.dart';
 import 'type_def.dart';
 
@@ -35,10 +36,10 @@ final class Event extends Row with HasCustomAttributes {
   late final eventFlags = EventAttributes(readUint16(0));
 
   /// The name of the event.
-  late final name = readString(1);
+  late final String name = readString(1);
 
   /// The type of the event, if any.
-  late final eventType = () {
+  late final NamedClassType? eventType = () {
     if (readUint(2) == 0) return null;
     return switch (decode<TypeDefOrRef>(2)) {
       TypeDefOrRefTypeDef(:final value) => NamedClassType(
@@ -52,20 +53,21 @@ final class Event extends Row with HasCustomAttributes {
   }();
 
   /// The method semantics associated with the event.
-  late final methodSemantics = getEqualRange<MethodSemantics>(
-    2,
-    HasSemantics.event(this).encode(),
-  ).toList(growable: false);
+  late final List<MethodSemantics> methodSemantics =
+      getEqualRange<MethodSemantics>(
+        2,
+        HasSemantics.event(this).encode(),
+      ).toList(growable: false);
 
   /// The `add_` method of the event.
-  late final add = methodSemantics
+  late final MethodDef add = methodSemantics
       .firstWhere(
         (semantics) => semantics.semantics == MethodSemanticsAttributes.addOn,
       )
       .method;
 
   /// The `remove_` method of the event.
-  late final remove = methodSemantics
+  late final MethodDef remove = methodSemantics
       .firstWhere(
         (semantics) =>
             semantics.semantics == MethodSemanticsAttributes.removeOn,
@@ -73,7 +75,7 @@ final class Event extends Row with HasCustomAttributes {
       .method;
 
   /// The `raise_` method of the event, if present.
-  late final raise = methodSemantics
+  late final MethodDef? raise = methodSemantics
       .where(
         (semantics) => semantics.semantics == MethodSemanticsAttributes.fire,
       )
@@ -81,7 +83,7 @@ final class Event extends Row with HasCustomAttributes {
       .firstOrNull;
 
   /// The [TypeDef] that owns this event.
-  late final parent = getParentRow<EventMap>(1).parent;
+  late final TypeDef parent = getParentRow<EventMap>(1).parent;
 
   @override
   String toString() => 'Event(name: $name)';

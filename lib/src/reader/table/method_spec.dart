@@ -1,6 +1,7 @@
 import 'package:meta/meta.dart';
 
 import '../../common.dart';
+import '../../metadata_type.dart';
 import '../codes.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
@@ -25,10 +26,12 @@ final class MethodSpec extends Row with HasCustomAttributes {
   int get token => (MetadataTableId.methodSpec << 24) | index;
 
   /// The method that is being specialized.
-  late final method = decode<MethodDefOrRef>(0);
+  late final MethodDefOrRef method = decode<MethodDefOrRef>(0);
 
   /// The list of instantiated types for a generic method.
-  late final instantiation = readBlob(1).readMethodSpecBlob();
+  late final List<MetadataType> instantiation = readBlob(
+    1,
+  ).readMethodSpecBlob();
 }
 
 @internal

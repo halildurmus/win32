@@ -26,14 +26,14 @@ final class MethodImpl extends Row {
   int get token => (MetadataTableId.methodImpl << 24) | index;
 
   /// The [TypeDef] that contains the method implementation.
-  late final class$ = readRow<TypeDef>(0);
+  late final TypeDef class$ = readRow<TypeDef>(0);
 
   /// The method body, which could either be a method definition or a reference
   /// to a method.
-  late final methodBody = decode<MethodDefOrRef>(1);
+  late final MethodDefOrRef methodBody = decode<MethodDefOrRef>(1);
 
   /// The method declaration, referring to the method's signature and metadata.
-  late final methodDeclaration = decode<MethodDefOrRef>(2);
+  late final MethodDefOrRef methodDeclaration = decode<MethodDefOrRef>(2);
 
   @override
   String toString() =>

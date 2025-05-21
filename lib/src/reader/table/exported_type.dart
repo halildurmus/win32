@@ -33,19 +33,19 @@ final class ExportedType extends Row with HasCustomAttributes {
   late final flags = TypeAttributes(readUint32(0));
 
   /// The exported type.
-  late final typeDefId = () {
+  late final TypeDef? typeDefId = () {
     if (readUint(1) == 0) return null;
     return readRow<TypeDef>(1);
   }();
 
   /// The name of the exported type.
-  late final name = readString(2);
+  late final String name = readString(2);
 
   /// The namespace of the exported type.
-  late final namespace = readString(3);
+  late final String namespace = readString(3);
 
   /// The source of the exported type.
-  late final implementation = decode<Implementation>(4);
+  late final Implementation implementation = decode<Implementation>(4);
 }
 
 @internal

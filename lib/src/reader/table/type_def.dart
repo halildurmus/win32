@@ -45,17 +45,18 @@ final class TypeDef extends Row with HasCustomAttributes {
   late final flags = TypeAttributes(readUint32(0));
 
   /// The visibility of the type.
-  late final typeVisibility =
+  late final TypeVisibility typeVisibility =
       TypeVisibility.values[flags & TypeAttributes.visibilityMask];
 
   /// Whether the type is nested, i.e., defined under another type.
-  late final isNested = switch (typeVisibility) {
+  late final bool isNested = switch (typeVisibility) {
     TypeVisibility.notPublic || TypeVisibility.public => false,
     _ => true,
   };
 
   /// The layout of the type.
-  late final typeLayout = switch (flags & TypeAttributes.layoutMask) {
+  late final TypeLayout typeLayout = switch (flags &
+      TypeAttributes.layoutMask) {
     TypeAttributes.autoLayout => TypeLayout.auto,
     TypeAttributes.sequentialLayout => TypeLayout.sequential,
     TypeAttributes.explicitLayout => TypeLayout.explicit,
@@ -65,7 +66,7 @@ final class TypeDef extends Row with HasCustomAttributes {
   };
 
   /// The semantics of the type.
-  late final typeSemantics = switch (flags &
+  late final TypeSemantics typeSemantics = switch (flags &
       TypeAttributes.classSemanticsMask) {
     TypeAttributes.class$ => TypeSemantics.class$,
     TypeAttributes.interface => TypeSemantics.interface,
@@ -75,7 +76,8 @@ final class TypeDef extends Row with HasCustomAttributes {
   };
 
   /// The string format used by the type.
-  late final stringFormat = switch (flags & TypeAttributes.stringFormatMask) {
+  late final StringFormat stringFormat = switch (flags &
+      TypeAttributes.stringFormatMask) {
     TypeAttributes.ansiClass => StringFormat.ansi,
     TypeAttributes.unicodeClass => StringFormat.unicode,
     TypeAttributes.autoClass => StringFormat.auto,
@@ -86,27 +88,29 @@ final class TypeDef extends Row with HasCustomAttributes {
   };
 
   /// The name of the type.
-  late final name = readString(1);
+  late final String name = readString(1);
 
   /// The namespace of the type.
-  late final namespace = readString(2);
+  late final String namespace = readString(2);
 
   /// The type that the current type extends, or `null` if there is no base
   /// type.
-  late final extends$ = () {
+  late final TypeDefOrRef? extends$ = () {
     if (readUint(3) == 0) return null;
     return decode<TypeDefOrRef>(3);
   }();
 
   /// The list of fields defined in the type, if any.
-  late final fields = getList<Field>(4).toList(growable: false);
+  late final List<Field> fields = getList<Field>(4).toList(growable: false);
 
   /// The list of methods defined in the type, if any.
-  late final methods = getList<MethodDef>(5).toList(growable: false);
+  late final List<MethodDef> methods = getList<MethodDef>(
+    5,
+  ).toList(growable: false);
 
   /// The category of the type, which could be a class, interface, enum, struct,
   /// delegate, or attribute.
-  late final category = () {
+  late final TypeCategory category = () {
     final extends$ = this.extends$;
     if (extends$ == null) return TypeCategory.interface;
     if (extends$.namespace != 'System') return TypeCategory.class$;
@@ -120,10 +124,13 @@ final class TypeDef extends Row with HasCustomAttributes {
   }();
 
   /// The class layout associated with the type, if any.
-  late final classLayout = getEqualRange<ClassLayout>(2, index + 1).firstOrNull;
+  late final ClassLayout? classLayout = getEqualRange<ClassLayout>(
+    2,
+    index + 1,
+  ).firstOrNull;
 
   /// The list of events defined in the type, if any.
-  late final events = () {
+  late final List<Event> events = () {
     final eventIndex = index + 1;
     final eventMapRow = reader.tableStream.eventMap
         .where(
@@ -148,36 +155,36 @@ final class TypeDef extends Row with HasCustomAttributes {
   }();
 
   /// The list of generic parameters defined for the type, if any.
-  late final generics = getEqualRange<GenericParam>(
+  late final List<GenericParam> generics = getEqualRange<GenericParam>(
     2,
     TypeOrMethodDef.typeDef(this).encode(),
   ).toList(growable: false);
 
   /// The list of interfaces implemented by the type, if any.
-  late final interfaceImpls = getEqualRange<InterfaceImpl>(
+  late final List<InterfaceImpl> interfaceImpls = getEqualRange<InterfaceImpl>(
     0,
     index + 1,
   ).toList(growable: false);
 
   /// The list of method implementations defined for the type, if any.
-  late final methodImpls = getEqualRange<MethodImpl>(
+  late final List<MethodImpl> methodImpls = getEqualRange<MethodImpl>(
     0,
     index + 1,
   ).toList(growable: false);
 
   /// The type that encloses the current type, if the type is nested.
-  late final enclosingClass = getEqualRange<NestedClass>(
+  late final TypeDef? enclosingClass = getEqualRange<NestedClass>(
     0,
     index + 1,
   ).firstOrNull?.outer;
 
   /// The nested types defined under the type, if any.
-  late final nestedTypes = metadataIndex
+  late final List<TypeDef> nestedTypes = metadataIndex
       .nestedTypes(this)
       .toList(growable: false);
 
   /// The list of properties defined in the type, if any.
-  late final properties = () {
+  late final List<Property> properties = () {
     final propertyIndex = index + 1;
     final propertyMapRow = reader.tableStream.propertyMap
         .where(

@@ -32,7 +32,7 @@ final class ImplMap extends Row {
   late final flags = PInvokeAttributes(readUint16(0));
 
   /// The character set used when marshaling strings for the unmanaged call.
-  late final charSet = switch (flags & PInvokeAttributes.charSetMask) {
+  late final CharSet charSet = switch (flags & PInvokeAttributes.charSetMask) {
     PInvokeAttributes.charSetAnsi => CharSet.ansi,
     PInvokeAttributes.charSetUnicode => CharSet.unicode,
     PInvokeAttributes.charSetAuto => CharSet.auto,
@@ -40,7 +40,8 @@ final class ImplMap extends Row {
   };
 
   /// The calling convention used by the unmanaged function.
-  late final callConv = switch (flags & PInvokeAttributes.callConvMask) {
+  late final CallConv callConv = switch (flags &
+      PInvokeAttributes.callConvMask) {
     PInvokeAttributes.callConvPlatformApi => CallConv.platformApi,
     PInvokeAttributes.callConvCdecl => CallConv.cdecl,
     PInvokeAttributes.callConvStdCall => CallConv.stdcall,
@@ -52,13 +53,13 @@ final class ImplMap extends Row {
   };
 
   /// The managed member that is forwarded to an unmanaged implementation.
-  late final memberForwarded = decode<MemberForwarded>(1);
+  late final MemberForwarded memberForwarded = decode<MemberForwarded>(1);
 
   /// The name of the unmanaged function being imported.
-  late final importName = readString(2);
+  late final String importName = readString(2);
 
   /// The external module that contains the unmanaged function.
-  late final importScope = readRow<ModuleRef>(3);
+  late final ModuleRef importScope = readRow<ModuleRef>(3);
 
   @override
   String toString() => 'ImplMap(importName: $importName)';

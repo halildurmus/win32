@@ -2,6 +2,7 @@ import 'package:meta/meta.dart';
 
 import '../../attributes.dart';
 import '../../common.dart';
+import '../../metadata_type.dart';
 import '../codes.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
@@ -35,32 +36,35 @@ final class Field extends Row with HasCustomAttributes {
   late final flags = FieldAttributes(readUint16(0));
 
   /// The access level (visibility) of the field.
-  late final fieldAccess =
+  late final FieldAccess fieldAccess =
       FieldAccess.values[flags & FieldAttributes.fieldAccessMask];
 
   /// The name of the field.
-  late final name = readString(1);
+  late final String name = readString(1);
 
   /// The signature of the field.
-  late final signature = readBlob(2).readFieldSig();
+  late final MetadataType signature = readBlob(2).readFieldSig();
 
   /// The constant value associated with the field, if any.
-  late final constant = getEqualRange<Constant>(
+  late final Constant? constant = getEqualRange<Constant>(
     1,
     HasConstant.field(this).encode(),
   ).firstOrNull;
 
   /// The marshal information for the field, if any.
-  late final fieldMarshal = getEqualRange<FieldMarshal>(
+  late final FieldMarshal? fieldMarshal = getEqualRange<FieldMarshal>(
     0,
     HasFieldMarshal.field(this).encode(),
   ).firstOrNull;
 
   /// The layout information for the field, if any.
-  late final layout = getEqualRange<FieldLayout>(1, index + 1).firstOrNull;
+  late final FieldLayout? layout = getEqualRange<FieldLayout>(
+    1,
+    index + 1,
+  ).firstOrNull;
 
   /// The [TypeDef] that owns this field.
-  late final parent = getParentRow<TypeDef>(4);
+  late final TypeDef parent = getParentRow<TypeDef>(4);
 
   @override
   String toString() =>

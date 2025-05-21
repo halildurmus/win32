@@ -171,7 +171,7 @@ extension type const MetadataTableId._(int _) implements int {
   static const genericParamConstraint = MetadataTableId._(0x2C);
 
   /// All known metadata table identifiers, ordered by their ID.
-  static const values = [
+  static const List<MetadataTableId> values = [
     module,
     typeRef,
     typeDef,

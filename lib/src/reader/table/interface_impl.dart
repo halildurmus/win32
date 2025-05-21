@@ -28,10 +28,10 @@ final class InterfaceImpl extends Row with HasCustomAttributes {
   int get token => (MetadataTableId.interfaceImpl << 24) | index;
 
   /// The type that implements the interface.
-  late final class$ = readRow<TypeDef>(0);
+  late final TypeDef class$ = readRow<TypeDef>(0);
 
   /// Returns the interface type implemented by [class$].
-  late final interface = switch (decode<TypeDefOrRef>(1)) {
+  late final NamedClassType interface = switch (decode<TypeDefOrRef>(1)) {
     TypeDefOrRefTypeDef(:final value) => NamedClassType(
       TypeName(value.namespace, value.name),
     ),

@@ -101,7 +101,7 @@ void main() {
   });
 }
 
-const dummyPackage = WindowsMetadataPackage.win32;
+const WindowsMetadataPackage dummyPackage = WindowsMetadataPackage.win32;
 const version = '1.0.0';
 
 /// A helper to create a dummy ZIP archive containing a "Windows.Win32.winmd"

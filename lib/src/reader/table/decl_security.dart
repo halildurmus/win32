@@ -30,7 +30,7 @@ final class DeclSecurity extends Row {
   late final action = SecurityAction.fromValue(readUint16(0));
 
   /// The metadata element to which this security declaration applies.
-  late final parent = decode<HasDeclSecurity>(1);
+  late final HasDeclSecurity parent = decode<HasDeclSecurity>(1);
 
   /// A blob representing the serialized permission set to be applied for the
   /// given security action.

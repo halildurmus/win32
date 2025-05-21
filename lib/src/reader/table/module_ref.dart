@@ -23,7 +23,7 @@ final class ModuleRef extends Row with HasCustomAttributes {
   int get token => (MetadataTableId.moduleRef << 24) | index;
 
   /// The name of the module referenced by the assembly.
-  late final name = readString(0);
+  late final String name = readString(0);
 
   @override
   String toString() => 'ModuleRef(name: $name)';

@@ -8,7 +8,7 @@ import 'table/custom_attribute.dart';
 /// [Row].
 base mixin HasCustomAttributes on Row {
   /// Enumerates all [CustomAttribute]s associated with this row.
-  late final attributes = getEqualRange<CustomAttribute>(
+  late final List<CustomAttribute> attributes = getEqualRange<CustomAttribute>(
     0,
     HasCustomAttribute(this).encode(),
   ).toList(growable: false);

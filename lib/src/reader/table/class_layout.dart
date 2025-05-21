@@ -28,13 +28,13 @@ final class ClassLayout extends Row {
   ///
   /// Common values are 1, 2, 4, 8, or 16 bytes. This influences how fields are
   /// laid out in memory. If not specified, a platform default is assumed.
-  late final packingSize = readUint16(0);
+  late final int packingSize = readUint16(0);
 
   /// The total size, in bytes, of an instance of the class.
-  late final classSize = readUint32(1);
+  late final int classSize = readUint32(1);
 
   /// The [TypeDef] representing the class whose layout is specified.
-  late final parent = readRow<TypeDef>(2);
+  late final TypeDef parent = readRow<TypeDef>(2);
 
   @override
   String toString() =>

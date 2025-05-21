@@ -25,10 +25,10 @@ final class FieldRVA extends Row {
 
   /// The relative virtual address (RVA) within the image file where the field's
   /// data is stored.
-  late final rva = readUint32(0);
+  late final int rva = readUint32(0);
 
   /// The associated field that has an explicit RVA.
-  late final field = readRow<Field>(1);
+  late final Field field = readRow<Field>(1);
 
   @override
   String toString() => 'FieldRVA(rva: $rva, field: $field)';

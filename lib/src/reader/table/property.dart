@@ -2,12 +2,14 @@ import 'package:meta/meta.dart';
 
 import '../../attributes.dart';
 import '../../common.dart';
+import '../../property_sig.dart';
 import '../codes.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
 import '../metadata_table.dart';
 import '../row.dart';
 import 'constant.dart';
+import 'method_def.dart';
 import 'method_semantics.dart';
 import 'property_map.dart';
 import 'type_def.dart';
@@ -34,26 +36,27 @@ final class Property extends Row with HasCustomAttributes {
   late final flags = PropertyAttributes(readUint16(0));
 
   /// The name of the property.
-  late final name = readString(1);
+  late final String name = readString(1);
 
   /// The signature of the property's getter method, which defines its return
   /// type and parameters.
-  late final signature = readBlob(2).readPropertySig();
+  late final PropertySig signature = readBlob(2).readPropertySig();
 
   /// The constant associated with the parameter, if any.
-  late final constant = getEqualRange<Constant>(
+  late final Constant? constant = getEqualRange<Constant>(
     1,
     HasConstant.property(this).encode(),
   ).firstOrNull;
 
   /// The method semantics associated with the property.
-  late final methodSemantics = getEqualRange<MethodSemantics>(
-    2,
-    HasSemantics.property(this).encode(),
-  ).toList(growable: false);
+  late final List<MethodSemantics> methodSemantics =
+      getEqualRange<MethodSemantics>(
+        2,
+        HasSemantics.property(this).encode(),
+      ).toList(growable: false);
 
   /// The getter method of the property, if present.
-  late final getter = methodSemantics
+  late final MethodDef? getter = methodSemantics
       .where(
         (semantics) => semantics.semantics == MethodSemanticsAttributes.getter,
       )
@@ -61,7 +64,7 @@ final class Property extends Row with HasCustomAttributes {
       .firstOrNull;
 
   /// The setter method of the property, if present.
-  late final setter = methodSemantics
+  late final MethodDef? setter = methodSemantics
       .where(
         (semantics) => semantics.semantics == MethodSemanticsAttributes.setter,
       )
@@ -69,7 +72,7 @@ final class Property extends Row with HasCustomAttributes {
       .firstOrNull;
 
   /// The [TypeDef] that owns this property.
-  late final parent = getParentRow<PropertyMap>(1).parent;
+  late final TypeDef parent = getParentRow<PropertyMap>(1).parent;
 
   @override
   String toString() => 'Property(name: $name)';

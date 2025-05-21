@@ -25,10 +25,10 @@ final class EventMap extends Row {
   int get token => (MetadataTableId.eventMap << 24) | index;
 
   /// The [TypeDef] that owns the [events].
-  late final parent = readRow<TypeDef>(0);
+  late final TypeDef parent = readRow<TypeDef>(0);
 
   /// A list of [Event]s that belong to the type defined in [parent].
-  late final events = getList<Event>(1).toList(growable: false);
+  late final List<Event> events = getList<Event>(1).toList(growable: false);
 
   @override
   String toString() => 'EventMap(parent: $parent, events: $events)';

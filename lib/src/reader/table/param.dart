@@ -35,25 +35,25 @@ final class Param extends Row with HasCustomAttributes {
 
   /// The zero-based index (sequence number) of the parameter in the method or
   /// property.
-  late final sequence = readUint16(1);
+  late final int sequence = readUint16(1);
 
   /// The name of the parameter.
-  late final name = readString(2);
+  late final String name = readString(2);
 
   /// The constant associated with the parameter, if any.
-  late final constant = getEqualRange<Constant>(
+  late final Constant? constant = getEqualRange<Constant>(
     1,
     HasConstant.param(this).encode(),
   ).firstOrNull;
 
   /// The marshal information for the parameter, if any.
-  late final fieldMarshal = getEqualRange<FieldMarshal>(
+  late final FieldMarshal? fieldMarshal = getEqualRange<FieldMarshal>(
     0,
     HasFieldMarshal.param(this).encode(),
   ).firstOrNull;
 
   /// The [MethodDef] that owns this parameter.
-  late final parent = getParentRow<MethodDef>(5);
+  late final MethodDef parent = getParentRow<MethodDef>(5);
 
   @override
   String toString() => name.isEmpty

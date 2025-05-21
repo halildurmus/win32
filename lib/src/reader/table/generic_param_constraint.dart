@@ -26,10 +26,10 @@ final class GenericParamConstraint extends Row with HasCustomAttributes {
   int get token => (MetadataTableId.genericParamConstraint << 24) | index;
 
   /// The generic parameter to which this constraint applies.
-  late final owner = readRow<GenericParam>(0);
+  late final GenericParam owner = readRow<GenericParam>(0);
 
   /// The type that constrains the generic parameter.
-  late final constraint = decode<TypeDefOrRef>(1);
+  late final TypeDefOrRef constraint = decode<TypeDefOrRef>(1);
 }
 
 @internal

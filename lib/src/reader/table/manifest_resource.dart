@@ -29,13 +29,13 @@ final class ManifestResource extends Row with HasCustomAttributes {
   int get token => (MetadataTableId.manifestResource << 24) | index;
 
   /// The offset within the manifest stream that points to the resource data.
-  late final offset = readUint32(0);
+  late final int offset = readUint32(0);
 
   /// The attributes of the resource.
   late final flags = ManifestResourceAttributes(readUint32(1));
 
   /// The visibility of the resource.
-  late final resourceVisibility = switch (flags &
+  late final ManifestResourceVisibility resourceVisibility = switch (flags &
       ManifestResourceAttributes.visibilityMask) {
     ManifestResourceAttributes.public => ManifestResourceVisibility.public,
     ManifestResourceAttributes.private => ManifestResourceVisibility.private,
@@ -46,10 +46,10 @@ final class ManifestResource extends Row with HasCustomAttributes {
   };
 
   /// The name of the resource.
-  late final name = readString(2);
+  late final String name = readString(2);
 
   /// The source of the resource.
-  late final implementation = () {
+  late final Implementation? implementation = () {
     if (readUint(3) == 0) return null;
     return decode<Implementation>(3);
   }();

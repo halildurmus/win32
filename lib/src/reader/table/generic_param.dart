@@ -31,17 +31,17 @@ final class GenericParam extends Row with HasCustomAttributes {
   /// The index of the generic parameter in the parameter list.
   ///
   /// Parameters are numbered sequentially from left to right, starting at zero.
-  late final sequence = readUint16(0);
+  late final int sequence = readUint16(0);
 
   /// The attribute flags describing characteristics of the parameter.
   late final flags = GenericParamAttributes(readUint16(1));
 
   /// The declared variance of the generic parameter.
-  late final variance =
+  late final Variance variance =
       Variance.values[flags & GenericParamAttributes.varianceMask];
 
   /// Special constraints applied to the generic parameter.
-  late final specialConstraint = switch (flags &
+  late final SpecialConstraint specialConstraint = switch (flags &
       GenericParamAttributes.specialConstraintMask) {
     GenericParamAttributes.referenceTypeConstraint =>
       SpecialConstraint.referenceType,
@@ -53,16 +53,17 @@ final class GenericParam extends Row with HasCustomAttributes {
   };
 
   /// The owner that declares this generic parameter.
-  late final owner = decode<TypeOrMethodDef>(2);
+  late final TypeOrMethodDef owner = decode<TypeOrMethodDef>(2);
 
   /// The name of the generic parameter.
-  late final name = readString(3);
+  late final String name = readString(3);
 
   /// The additional constraints placed on the generic parameter, if any.
-  late final constraints = getEqualRange<GenericParamConstraint>(
-    0,
-    index + 1,
-  ).toList(growable: false);
+  late final List<GenericParamConstraint> constraints =
+      getEqualRange<GenericParamConstraint>(
+        0,
+        index + 1,
+      ).toList(growable: false);
 
   @override
   String toString() => constraints.isEmpty

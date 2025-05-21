@@ -122,13 +122,13 @@ final class CustomAttribute extends Row {
   late final List<NamedArg> namedArgs;
 
   /// The entity to which this attribute is applied.
-  late final parent = decode<HasCustomAttribute>(0);
+  late final HasCustomAttribute parent = decode<HasCustomAttribute>(0);
 
   /// The constructor method used to instantiate the attribute.
-  late final type = decode<CustomAttributeType>(1);
+  late final CustomAttributeType type = decode<CustomAttributeType>(1);
 
   /// The name of the attribute.
-  late final name = switch (type.parent) {
+  late final String name = switch (type.parent) {
     MemberRefParentTypeDef(:final value) => value.name,
     MemberRefParentTypeRef(:final value) => value.name,
     MemberRefParentMethodDef(:final value) => value.name,

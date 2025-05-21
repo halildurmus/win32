@@ -25,10 +25,12 @@ final class PropertyMap extends Row {
   int get token => (MetadataTableId.propertyMap << 24) | index;
 
   /// The [TypeDef] that owns the [properties].
-  late final parent = readRow<TypeDef>(0);
+  late final TypeDef parent = readRow<TypeDef>(0);
 
   /// A list of [Property]s that belong to the type defined in [parent].
-  late final properties = getList<Property>(1).toList(growable: false);
+  late final List<Property> properties = getList<Property>(
+    1,
+  ).toList(growable: false);
 
   @override
   String toString() => 'PropertyMap(parent: $parent, properties: $properties)';

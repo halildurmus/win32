@@ -34,16 +34,16 @@ final class AssemblyRef extends Row with HasCustomAttributes {
   int get token => (MetadataTableId.assemblyRef << 24) | index;
 
   /// The major version of the referenced assembly.
-  late final majorVersion = readUint16(0);
+  late final int majorVersion = readUint16(0);
 
   /// The minor version of the referenced assembly.
-  late final minorVersion = readUint16(0, 2);
+  late final int minorVersion = readUint16(0, 2);
 
   /// The build number of the referenced assembly.
-  late final buildNumber = readUint16(0, 4);
+  late final int buildNumber = readUint16(0, 4);
 
   /// The revision number of the referenced assembly.
-  late final revisionNumber = readUint16(0, 6);
+  late final int revisionNumber = readUint16(0, 6);
 
   /// The flags associated with the referenced assembly.
   late final flags = AssemblyFlags(readUint32(1));
@@ -56,10 +56,10 @@ final class AssemblyRef extends Row with HasCustomAttributes {
   }
 
   /// The name of the assembly.
-  late final name = readString(3);
+  late final String name = readString(3);
 
   /// The culture supported by the referenced assembly, if specified.
-  late final culture = () {
+  late final Culture? culture = () {
     final culture = readString(4);
     if (culture.isEmpty) return null;
     return Culture(culture);

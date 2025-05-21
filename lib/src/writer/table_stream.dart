@@ -191,7 +191,7 @@ final class TableStream {
 
   /// The tables that are required to be sorted by a primary key before
   /// serialization as specified in ECMA-335 `§II.22`.
-  static const _tablesRequiringPrimaryKeySort = {
+  static const Set<MetadataTableId> _tablesRequiringPrimaryKeySort = {
     // |---------------------------------------|--------------------|
     // |                Table                  | Primary Key Column |
     // |---------------------------------------|--------------------|

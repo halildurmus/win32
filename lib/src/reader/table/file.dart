@@ -30,7 +30,7 @@ final class File extends Row with HasCustomAttributes {
   late final flags = FileAttributes(readUint32(0));
 
   /// The name of the file.
-  late final name = readString(1);
+  late final String name = readString(1);
 
   /// The hash value of the file.
   Blob get hashValue => readBlob(2);

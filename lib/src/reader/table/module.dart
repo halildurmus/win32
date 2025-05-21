@@ -1,6 +1,7 @@
 import 'package:meta/meta.dart';
 
 import '../../common.dart';
+import '../../guid.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
 import '../metadata_table.dart';
@@ -27,11 +28,11 @@ final class Module extends Row with HasCustomAttributes {
   int get token => (MetadataTableId.module << 24) | index;
 
   /// The name of the module.
-  late final name = readString(1);
+  late final String name = readString(1);
 
   /// The Module Version ID (MVID), a GUID that uniquely identifies the version
   /// of the module.
-  late final mvid = readGuid(2);
+  late final Guid mvid = readGuid(2);
 
   @override
   String toString() => 'Module(name: $name, mvid: $mvid)';

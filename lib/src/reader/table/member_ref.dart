@@ -1,6 +1,7 @@
 import 'package:meta/meta.dart';
 
 import '../../common.dart';
+import '../../member_ref_signature.dart';
 import '../codes.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
@@ -26,13 +27,15 @@ final class MemberRef extends Row with HasCustomAttributes {
   int get token => (MetadataTableId.memberRef << 24) | index;
 
   /// The type that contains the referenced member.
-  late final parent = decode<MemberRefParent>(0);
+  late final MemberRefParent parent = decode<MemberRefParent>(0);
 
   /// The name of the referenced member.
-  late final name = readString(1);
+  late final String name = readString(1);
 
   /// The signature for the referenced member.
-  late final signature = readBlob(2).readMemberRefSignature();
+  late final MemberRefSignature signature = readBlob(
+    2,
+  ).readMemberRefSignature();
 
   @override
   String toString() => 'MemberRef(name: $name)';

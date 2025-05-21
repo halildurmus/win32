@@ -24,10 +24,10 @@ final class NestedClass extends Row {
   int get token => (MetadataTableId.nestedClass << 24) | index;
 
   /// The [TypeDef] that is contained.
-  late final inner = readRow<TypeDef>(0);
+  late final TypeDef inner = readRow<TypeDef>(0);
 
   /// The [TypeDef] that contains the nested type.
-  late final outer = readRow<TypeDef>(1);
+  late final TypeDef outer = readRow<TypeDef>(1);
 
   @override
   String toString() => 'NestedClass(inner: $inner, outer: $outer)';

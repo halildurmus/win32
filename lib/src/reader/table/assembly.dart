@@ -37,16 +37,16 @@ final class Assembly extends Row with HasCustomAttributes {
   late final hashAlgId = AssemblyHashAlgorithm(readUint32(0));
 
   /// The major version of the assembly.
-  late final majorVersion = readUint16(1);
+  late final int majorVersion = readUint16(1);
 
   /// The minor version of the assembly.
-  late final minorVersion = readUint16(1, 2);
+  late final int minorVersion = readUint16(1, 2);
 
   /// The build number of the assembly.
-  late final buildNumber = readUint16(1, 4);
+  late final int buildNumber = readUint16(1, 4);
 
   /// The revision number of the assembly.
-  late final revisionNumber = readUint16(1, 6);
+  late final int revisionNumber = readUint16(1, 6);
 
   /// The flags associated with the assembly.
   late final flags = AssemblyFlags(readUint32(2));
@@ -59,10 +59,10 @@ final class Assembly extends Row with HasCustomAttributes {
   }
 
   /// The name of the assembly.
-  late final name = readString(4);
+  late final String name = readString(4);
 
   /// The culture supported by the assembly, if specified.
-  late final culture = () {
+  late final Culture? culture = () {
     final culture = readString(5);
     if (culture.isEmpty) return null;
     return Culture(culture);

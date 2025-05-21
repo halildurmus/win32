@@ -30,10 +30,10 @@ final class MethodSemantics extends Row {
   late final semantics = MethodSemanticsAttributes(readUint16(0));
 
   /// The method definition that is associated with these semantics.
-  late final method = readRow<MethodDef>(1);
+  late final MethodDef method = readRow<MethodDef>(1);
 
   /// The entity that is associated with the method.
-  late final association = decode<HasSemantics>(2);
+  late final HasSemantics association = decode<HasSemantics>(2);
 
   @override
   String toString() => 'MethodSemantics(method: $method)';
