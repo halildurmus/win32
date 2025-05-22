@@ -22,6 +22,5 @@ jobs:
     uses: halildurmus/workflows/.github/workflows/dart.yml@main
     with:
       analyze_directories: example
-      dart_sdk: main # TODO: Remove this when 3.8 is stable
       format_directories: example
       run_tests: false

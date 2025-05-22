@@ -1,7 +1,7 @@
 name: winmd
 description: Inspect and generate Windows Metadata (.winmd) files based on the
   ECMA-335 standard.
-version: 7.0.0-wip
+version: 7.0.0
 repository: https://github.com/halildurmus/winmd
 issue_tracker: https://github.com/halildurmus/winmd/issues
 

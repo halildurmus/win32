@@ -2,6 +2,39 @@
 
 All notable changes to this project will be documented in this file.
 
+## [7.0.0] - 2025-05-22
+
+### 💥 Breaking Changes
+
+- **Complete rewrite of the package to use direct binary parsing instead of COM APIs.**
+  This architectural change enables:
+
+  - **Significantly faster metadata introspection**, thanks to low-level parsing
+    of `.winmd` files.
+  - **Cross-platform support**, allowing use on **Windows, macOS, and Linux**.
+    Previously, the package only supported Windows due to the use of COM APIs.
+
+### 🚀 Major Features
+
+- **Enhanced API for metadata inspection.**
+
+  - Richer introspection of nested types, constants, parameters, and attributes.
+  - New utilities for resolving constants, functions, and types by name.
+  - Exposed detailed structural metadata for heaps and table rows.
+
+- **Expanded metadata coverage.**
+
+  - Full support for reading all standard metadata tables.
+
+- **Support for writing and merging metadata.**
+
+  - Introduced a new `writer` library for generating your own `.winmd` files
+    programmatically.
+  - Introduced a new `mdmerge` library for merging multiple `.winmd` files into
+    a single, unified file.
+
+[7.0.0]: https://github.com/halildurmus/winmd/compare/v6.1.0..v7.0.0
+
 ## [6.1.0] - 2025-02-24
 
 ### 🚀 Features
