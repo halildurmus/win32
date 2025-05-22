@@ -1,54 +1,140 @@
-# Contributing to winmd
+# Contributing
 
-Contributions to this project that improve the fidelity of the object model as
-retrieved from metadata are warmly received. For pull requests, please include
-tests that show the proposed change is working as expected.
+Thank you for your interest in contributing to **winmd**!
 
-## What belongs in the `winmd` package?
+This guide provides everything you need to get started and make your
+contributions effective and rewarding.
 
-This package aims to provide a Dart API to Windows metadata, backed by the
-underlying [IMetaDataImport2][imetadataimport2_link] COM interface provided in
-`rometadata.dll`.
+We strive to maintain a welcoming and inclusive community, so please read our
+[Code of Conduct] before contributing.
 
-It goes beyond a simple projection of the underlying COM API in a number of
-areas, such as:
+## 📝 Good to Know
 
-- Caching retrieved data for performance and processing;
-- Navigating through `TypeRef`s to the true `TypeDef`, even if in a different
-  scope, where possible;
-- Replacing references to the .NET type system (e.g. `System.Guid`) with
-  type-agnostic replacements.
+- **Working on Issues:** If you’d like to work on an existing issue, please
+  comment on the issue page to let others know before you begin.
+- **Proposing New Features:** Have an idea for a new feature? Create an issue to
+  discuss it with the community and maintainers before diving in.
 
-`winmd` does _not_ attempt to provide a Dart mapping. It is intended to focus
-exclusively on interrogating a metadata file and transforming it into a
-high-fidelity object model. It should be essentially agnostic to the underlying
-types and should not assume that a Dart type system is the target.
+## 🙌 How You Can Contribute
 
-In other words, `winmd` would be considered feature-complete if developers could
-use it to build a Dart equivalent of [ILSpy][ilspy_link] or
-[ildasm][ildasm_link].
+- **🌟 Star Us on GitHub**: If you enjoy using this package, a star on [GitHub]
+  helps support our work.
+- **🐛 Report Bugs**: Found a bug? Let us know on our [GitHub Issues] page.
+- **📝 Improve Documentation**: High-quality documentation is crucial. Help us
+  improve it by refining the existing docs or adding new content.
+- **💬 Give Feedback**: Share your experience using **winmd**, what
+  features you’d like, and what works well on [GitHub Discussions].
+- **📢 Share winmd**: Spread the word about this project to reach more
+  users.
+- **💻 Contribute to the Codebase**: Work on new features or tackle
+  [open issues][GitHub Issues] — all contributions are highly appreciated!
 
-## Generating a Dart Projection with `winmd`
+## 🛠️ Setting Up the Environment
 
-- The [win32][win32_package_link] package provides a Dart projection of the
-  Win32 APIs using the `winmd` package.
+### ⚙️ Requirements
 
-  In particular, the [generator][generator_link] package excels at streamlining
-  the process of converting the generated object model into a Dart projection.
-  This transformation is achieved by meticulously parsing Windows metadata and
-  subsequently crafting Dart classes and types that mirror the original APIs.
+- [Dart](https://dart.dev) version `3.8` or higher
+- [git-cliff](https://git-cliff.org) for generating changelogs
+- [Lefthook](https://github.com/evilmartians/lefthook) for managing Git hooks
 
-As a general principle, if there is missing data within the `winmd` that
-prevents `generator` from creating projections, such issues should be resolved
-through a pull request to the `winmd` repository.
+Once your environment is ready, [fork the repository], clone it locally, and
+set up the project.
 
-Conversely, if the data is available in `winmd` but not in the required format
-needed to create a projection, such issues should be resolved through a pull
-request to the [win32][win32_repo_link] repository.
+### 📥 Cloning the Repository
 
-[generator_link]: https://github.com/halildurmus/win32/tree/main/packages/generator
-[ildasm_link]: https://learn.microsoft.com/dotnet/framework/tools/ildasm-exe-il-disassembler
-[ilspy_link]: https://github.com/icsharpcode/ILSpy
-[imetadataimport2_link]: https://learn.microsoft.com/windows/win32/api/rometadataapi/nn-rometadataapi-imetadataimport2
-[win32_repo_link]: https://github.com/halildurmus/win32
-[win32_package_link]: https://pub.dev/packages/win32
+Clone your fork of **winmd** to your local machine:
+
+```cmd
+git clone https://github.com/<your-username>/winmd.git
+```
+
+### 📦 Installing Dependencies
+
+Navigate to the project directory and install dependencies:
+
+```cmd
+dart pub get
+```
+
+## 🧩 Setting Up Git Hooks
+
+This project uses **Lefthook** to manage Git hooks. Install the hooks by running
+the following in the project root:
+
+```cmd
+lefthook install
+```
+
+This will set up checks that automatically ensure code quality and consistency
+before commits.
+
+### ✅ Running Tests
+
+To run tests for **winmd**, use:
+
+```cmd
+dart test -j 1 --test-randomize-ordering-seed=random
+```
+
+_We require tests for each feature or bug fix. If you’re unsure how to write_
+_tests for your changes, feel free to ask on the relevant GitHub issue page._
+
+## 🚀 Committing Your Work and Preparing a Pull Request
+
+To maintain a consistent and clean codebase, we enforce coding standards and use
+tools to ensure high-quality contributions.
+
+### 🎨 Coding Style
+
+Please follow the [Dart style guide] to keep the codebase clean and consistent.
+
+### 📜 Commit Convention
+
+We use [Conventional Commits] to structure our commit messages for clarity and
+uniformity.
+
+Please use the following format for commit messages:
+
+```text
+<type>(optional scope): <description>
+```
+
+Examples:
+
+- `feat: add support for multiple clipboard formats`
+- `fix: resolve an issue with the getText method`
+
+_Commit messages are validated with a GitHub action, so be sure to use the_
+_correct format when making a pull request._
+
+### 🧩 Git Hooks
+
+The following hooks run automatically with Lefthook:
+
+- **Pre-Commit Hooks**:
+  - `analyze`: Checks code for style issues.
+  - `format`: Formats code according to Dart guidelines.
+  - `test`: Runs tests to ensure stability.
+
+- **Commit-msg Hook**:
+  - `check_commit`: Ensures the commit message follows [Conventional Commits].
+
+### 🔄 Creating a Pull Request
+
+After committing your changes, push them to your fork and
+[create a pull request]. When you open a pull request, tests will run
+automatically, and our maintainers will review it.
+
+Please use the pull request template to provide details about your changes,
+ensuring a smoother review process.
+
+Thank you for contributing to **winmd**! 🎉
+
+[Code of Conduct]: https://github.com/halildurmus/winmd/blob/main/CODE_OF_CONDUCT.md
+[Conventional Commits]: https://www.conventionalcommits.org/en/v1.0.0/
+[create a pull request]: https://github.com/halildurmus/winmd/compare
+[Dart style guide]: https://dart.dev/effective-dart/style
+[fork the repository]: https://github.com/halildurmus/winmd/fork
+[GitHub]: https://github.com/halildurmus/winmd
+[GitHub Discussions]: https://github.com/halildurmus/winmd/discussions
+[GitHub Issues]: https://github.com/halildurmus/winmd/issues

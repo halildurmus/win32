@@ -26,24 +26,27 @@ jobs:
       # that tiles the space well.
       matrix:
         include:
-          - os: windows-latest
+          - os: windows-2025
             sdk: main
           - os: windows-2022
             sdk: beta
-          - os: windows-2019
+          - os: macos-latest
             sdk: stable
           - os: ubuntu-latest
+            sdk: stable
+          - os: windows-11-arm
+            sdk: stable
+          - os: windows-2019
             sdk: stable
 
     uses: halildurmus/workflows/.github/workflows/dart.yml@main
     with:
-      check_coverage: ${{ matrix.sdk == 'main' }}
+      check_coverage: ${{ matrix.sdk == 'main' && matrix.os == 'windows-2025' }}
       concurrency: '1'
       dart_sdk: ${{ matrix.sdk }}
       format_directories: lib test
       randomize_execution_order_of_tests: true
       runs_on: ${{ matrix.os }}
-      run_tests: ${{ matrix.os != 'ubuntu-latest' }}
     secrets:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 

@@ -5,77 +5,82 @@
 [![License: BSD-3-Clause][license_badge]][license_link]
 [![codecov][codecov_badge_link]][codecov_link]
 
-A package that provides a Dart language abstraction over
-[Windows Metadata (WinMD) files][windows_metadata_files_link], making it
-possible to load them and build Dart FFI interop libraries from the results.
+A Dart package for parsing, analyzing, and producing
+**[Windows Metadata (.winmd)][WinMD]** files, based on the **[ECMA-335]**
+standard.
 
-It can be used to query Windows developer APIs, encompassing both unmanaged
-APIs like Win32 or COM, as well as modern APIs like Windows Runtime (WinRT) that
-include their own metadata.
+This package offers both low-level primitives and high-level abstractions for
+inspecting and generating Windows Metadata (`.winmd`) files.
+It is a vital component of Dart-based Windows interop tooling — powering
+packages like **[win32][win32]**.
 
-## Architecture
+### Key Features
 
-![Architecture diagram][architecture_diagram_link]
+* Parse `.winmd` files into rich, strongly-typed Dart object models
+* Query type definitions, methods, fields, and more across multiple metadata
+  sources
+* Perform fast, namespace-agnostic symbol resolution
+* Merge multiple `.winmd` files into a single, unified file
+* Generate your own `.winmd` files programmatically
+* Works on Windows, Linux, and macOS
 
 ## Usage
 
-A simple example that loads the `MessageBoxW` function and prints out its
-parameters and return type:
+A basic example demonstrating how to load and inspect WinRT metadata from a
+`.winmd` file:
 
 ```dart
+import 'dart:io' as io;
+
 import 'package:winmd/winmd.dart';
 
-void main() async {
-  // Load the Win32 metadata.
-  final scope = await MetadataStore.loadWin32Scope();
+void main() {
+  // Load WinRT metadata from a local .winmd file.
+  const winmdPath = r'C:\WINDOWS\System32\WinMetadata\Windows.Storage.winmd';
+  final bytes = io.File(winmdPath).readAsBytesSync();
+  final reader = MetadataReader.read(bytes);
+  final index = MetadataIndex.fromReader(reader);
 
-  // Find a namespace.
-  final namespace =
-      scope.findTypeDef('Windows.Win32.UI.WindowsAndMessaging.Apis')!;
+  // Optional: Use MetadataLookup for efficient type resolution by name.
+  // This is especially helpful when the namespace of the target type is
+  // unknown.
+  final metadata = MetadataLookup(index);
 
-  // Sort the functions alphabetically.
-  final sortedMethods =
-      namespace.methods..sort((a, b) => a.name.compareTo(b.name));
+  // Lookup a WinRT class (e.g., StorageFile) and list its public methods.
+  final storageFile = metadata.findSingleTypeByName('StorageFile');
+  print('WinRT class "${storageFile.name}" has the following methods:');
+  for (final method in storageFile.methods) {
+    print('  ${method.name}');
+  }
+  print('');
 
-  // Find a specific function.
-  const funcName = 'MessageBoxW';
-  final method = sortedMethods.firstWhere((m) => m.name == funcName);
+  // Lookup a WinRT enum (e.g., FileAttributes) and display its members.
+  final enumType = metadata.findSingleTypeByName('FileAttributes');
+  print('WinRT enum "${enumType.name}" has the following fields:');
 
-  // Print out some information about it.
-  print('Win32 function $funcName [token #${method.token}]');
+  // The first field represents the underlying integral type (e.g., Int32).
+  final underlyingType = enumType.fields.first;
+  print('  ${underlyingType.name} = ${underlyingType.signature.type}');
 
-  // Retrieve its parameters and project them into Dart FFI types.
-  final params = method.parameters
-      .map(
-        (param) => '${param.typeIdentifier.name.split('.').last} ${param.name}',
-      )
-      .join(', ');
-  print('The parameters are:\n  $params');
-
-  final returnType = method.returnType.typeIdentifier.name.split('.').last;
-  print('It returns type: $returnType.');
-
-  MetadataStore.close();
+  // Subsequent fields are named values within the enum.
+  for (final field in enumType.fields.skip(1)) {
+    print('  ${field.name} = ${field.constant?.value}');
+  }
 }
 ```
 
 More examples can be found in the [example] subdirectory.
-
-## Packages built on winmd
-
-- [win32][win32_package_link]: provides Dart FFI bindings to the Win32 API,
-  allowing you to call unmanaged Windows APIs using Dart types.
 
 ## Feature requests and bugs
 
 Please file feature requests and bugs at the
 [issue tracker][issue_tracker_link].
 
-[architecture_diagram_link]: https://github.com/halildurmus/winmd/blob/main/metadata.drawio.svg?raw=true
 [ci_badge]: https://github.com/halildurmus/winmd/actions/workflows/winmd.yml/badge.svg
 [ci_link]: https://github.com/halildurmus/winmd/actions/workflows/winmd.yml
 [codecov_badge_link]: https://codecov.io/gh/halildurmus/winmd/branch/main/graph/badge.svg?token=1ouz1Jr9nW
 [codecov_link]: https://codecov.io/gh/halildurmus/winmd
+[ECMA-335]: https://ecma-international.org/publications-and-standards/standards/ecma-335/
 [example]: https://github.com/halildurmus/winmd/tree/main/example
 [issue_tracker_link]: https://github.com/halildurmus/winmd/issues
 [language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
@@ -86,5 +91,5 @@ Please file feature requests and bugs at the
 [package_link]: https://pub.dev/packages/winmd
 [publisher_badge]: https://img.shields.io/pub/publisher/winmd.svg
 [publisher_link]: https://pub.dev/publishers/halildurmus.dev
-[win32_package_link]: https://pub.dev/packages/win32
-[windows_metadata_files_link]: https://learn.microsoft.com/uwp/winrt-cref/winmd-files
+[win32]: https://pub.dev/packages/win32
+[WinMD]: https://learn.microsoft.com/uwp/winrt-cref/winmd-files

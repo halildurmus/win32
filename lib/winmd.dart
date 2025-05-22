@@ -1,103 +1,178 @@
-/// A Dart library for working with Windows Metadata (.winmd) files.
+/// A [WinMD] parser based on the [ECMA-335] standard.
 ///
-/// This library can be used to query Windows developer APIs, encompassing both
-/// unmanaged APIs like Win32 or COM, as well as modern APIs like
-/// Windows Runtime (WinRT) that include their own metadata.
+/// This library enables low-level introspection of `.winmd` files, which
+/// describe Windows APIs in a language-independent format. Originally designed
+/// for the Windows Runtime (WinRT), the format is now also used for metadata
+/// associated with:
+/// - **Win32 APIs** (via [win32metadata])
+/// - **Windows Driver Kit (WDK)** APIs (via [wdkmetadata])
 ///
-/// The library consumes metadata in the
-/// [ECMA-335](https://ecma-international.org/wp-content/uploads/ECMA-335_6th_edition_june_2012.pdf)
-/// format, originally part of the Common Language Infrastructure (CLI) - a
-/// standardized interface offered by .NET libraries. Since its creation,
-/// Windows Metadata has served as a
-/// [language-neutral specification of the Windows Runtime APIs](https://learn.microsoft.com/uwp/winrt-cref/winmd-files).
-/// More recently, the same format has been utilized to provide machine-readable
-/// metadata for the
-/// [traditional Win32 and COM APIs](https://github.com/microsoft/win32metadata)
-/// and [Win32 APIs in the Windows Driver Kit (WDK)](
-/// https://github.com/microsoft/wdkmetadata) that have been available in
-/// Windows for many years.
+/// The primary use case for this library is to build Dart projections of native
+/// Windows APIs, such as the [win32] package.
 ///
-/// While the ability to interpret this format from Dart is valuable for various
-/// reasons, the original motivation behind creating this package was to
-/// facilitate a
-/// [Dart language projection of the Win32 API](https://pub.dev/packages/win32).
-/// Utilizing Windows Metadata allows the generation of a Win32 API projection
-/// programmatically, offering resilience against errors or changes over time.
+/// See also:
+/// - [MetadataReader]
+/// - [MetadataIndex]
+/// - [MetadataLookup]
+/// - [MetadataWriter]
+/// - [WindowsMetadataLoader]
+/// - [mdmerge]
 ///
-/// Beyond these specific use cases, this package can be valuable for creating
-/// Windows utilities using Dart or Flutter.
+/// [ECMA-335]: https://ecma-international.org/wp-content/uploads/ECMA-335_6th_edition_june_2012.pdf
+/// [wdkmetadata]: https://github.com/microsoft/wdkmetadata
+/// [win32]: https://pub.dev/packages/win32
+/// [win32metadata]: https://github.com/microsoft/win32metadata
+/// [WinMD]: https://learn.microsoft.com/en-us/uwp/winrt-cref/winmd-files
 ///
-/// To start using this library, obtaining a `Scope` is necessary. A `Scope`
-/// contains a named set of metadata. For most scenarios, you should retrieve a
-/// scope through one of the static methods of the `MetadataStore` class, which
-/// caches retrieved scopes.
-///
-/// For example, to retrieve the latest Win32 metadata scope, you can use the
-/// following code:
-///
-/// ```dart
-/// final scope = await MetadataStore.loadWin32Scope();
-/// ```
-///
-/// By default, the `loadWin32Scope` method downloads the latest version of
-/// the NuGet package `Microsoft.Windows.SDK.Win32Metadata` and loads the
-/// metadata from it. If you prefer a different version, you can specify the
-/// `version` string as a parameter:
-///
-/// ```dart
-/// final scope =
-///   await MetadataStore.loadWin32Scope(version: '52.0.65-preview');
-/// ```
-///
-/// Alternatively, a scope can be obtained directly from a
-/// Windows Metadata (.winmd) file, as follows:
-///
-/// ```dart
-/// final scope = MetadataStore.loadScopeFromFile(File('path/to/file.winmd'));
-/// ```
-///
-/// **Note:** If the metadata you want to load has already been downloaded and
-/// stored locally, `loadWdkScope`, `loadWin32Scope`, or `loadWinrtScope` will
-/// load the metadata from the local storage instead of downloading it again.
-///
-/// You can get the list of all package directories stored locally as follows:
-///
-/// ```dart
-/// for (final directory in LocalStorageManager.storedPackageDirectories) {
-///   print(directory);
-/// }
-/// ```
-///
-/// From this point, the `scope` object can be interrogated for its children,
-/// particularly the collection of `typeDef` objects, which in turn contain
-/// `Method`, `Field`, `Event`, and `Property` members.
-///
-/// In general, the model presented by this package aligns with the APIs exposed
-/// by the
-/// [IMetaDataImport2](https://learn.microsoft.com/windows/win32/api/rometadataapi/nn-rometadataapi-imetadataimport2)
-/// COM interface exposed by `rometadata.dll`.
+/// @docImport 'mdmerge.dart';
+/// @docImport 'src/reader/metadata_index.dart';
+/// @docImport 'src/reader/metadata_lookup.dart';
+/// @docImport 'src/reader/metadata_reader.dart';
+/// @docImport 'windows_metadata.dart';
+/// @docImport 'writer.dart';
 library;
 
-export 'src/class_layout.dart';
-export 'src/custom_attribute.dart';
-export 'src/event.dart';
-export 'src/field.dart';
-export 'src/generic_param.dart';
-export 'src/interface_impl.dart';
+export 'src/attribute_arg.dart';
+export 'src/attributes.dart';
+export 'src/bindings.dart'
+    show
+        CallingConvention,
+        ELEMENT_TYPE_ARRAY,
+        ELEMENT_TYPE_BOOLEAN,
+        ELEMENT_TYPE_BYREF,
+        ELEMENT_TYPE_CHAR,
+        ELEMENT_TYPE_CLASS,
+        ELEMENT_TYPE_CMOD_OPT,
+        ELEMENT_TYPE_CMOD_REQD,
+        ELEMENT_TYPE_ENUM,
+        ELEMENT_TYPE_FIELD,
+        ELEMENT_TYPE_FNPTR,
+        ELEMENT_TYPE_GENERICINST,
+        ELEMENT_TYPE_I,
+        ELEMENT_TYPE_I1,
+        ELEMENT_TYPE_I2,
+        ELEMENT_TYPE_I4,
+        ELEMENT_TYPE_I8,
+        ELEMENT_TYPE_MAX,
+        ELEMENT_TYPE_MVAR,
+        ELEMENT_TYPE_OBJECT,
+        ELEMENT_TYPE_PROPERTY,
+        ELEMENT_TYPE_PTR,
+        ELEMENT_TYPE_R4,
+        ELEMENT_TYPE_R8,
+        ELEMENT_TYPE_SENTINEL,
+        ELEMENT_TYPE_STRING,
+        ELEMENT_TYPE_SZARRAY,
+        ELEMENT_TYPE_TYPEDBYREF,
+        ELEMENT_TYPE_U,
+        ELEMENT_TYPE_U1,
+        ELEMENT_TYPE_U2,
+        ELEMENT_TYPE_U4,
+        ELEMENT_TYPE_U8,
+        ELEMENT_TYPE_VALUETYPE,
+        ELEMENT_TYPE_VAR,
+        ELEMENT_TYPE_VOID,
+        ElementType,
+        NATIVE_TYPE_ARRAY,
+        NATIVE_TYPE_BOOLEAN,
+        NATIVE_TYPE_FUNC,
+        NATIVE_TYPE_I1,
+        NATIVE_TYPE_I2,
+        NATIVE_TYPE_I4,
+        NATIVE_TYPE_I8,
+        NATIVE_TYPE_INT,
+        NATIVE_TYPE_LPSTR,
+        NATIVE_TYPE_LPWSTR,
+        NATIVE_TYPE_MAX,
+        NATIVE_TYPE_R4,
+        NATIVE_TYPE_R8,
+        NATIVE_TYPE_U1,
+        NATIVE_TYPE_U2,
+        NATIVE_TYPE_U4,
+        NATIVE_TYPE_U8,
+        NATIVE_TYPE_UINT,
+        NativeType;
+export 'src/compressed_integer.dart';
+export 'src/culture.dart';
+export 'src/exception.dart';
+export 'src/guid.dart';
 export 'src/logger.dart';
-export 'src/member_ref.dart';
-export 'src/metadata_store.dart';
-export 'src/method.dart';
-export 'src/mixins/mixins.dart';
-export 'src/models/models.dart'
-    hide LocalStorageManager, MdMerge, MetadataPackage;
-export 'src/module_ref.dart';
-export 'src/parameter.dart';
-export 'src/pekind.dart';
-export 'src/pinvokemap.dart';
-export 'src/property.dart';
-export 'src/scope.dart';
-export 'src/token_object.dart';
-export 'src/type_aliases.dart';
-export 'src/type_def.dart';
-export 'src/type_identifier.dart';
+export 'src/marshalling_descriptor.dart';
+export 'src/member_ref_signature.dart';
+export 'src/metadata_type.dart';
+export 'src/metadata_value.dart';
+export 'src/method_signature.dart';
+export 'src/property_sig.dart';
+export 'src/reader/blob.dart';
+export 'src/reader/codes.dart'
+    hide
+        CodedIndexCompanion,
+        CustomAttributeTypeCompanion,
+        HasConstantCompanion,
+        HasCustomAttributeCompanion,
+        HasDeclSecurityCompanion,
+        HasFieldMarshalCompanion,
+        HasSemanticsCompanion,
+        ImplementationCompanion,
+        MemberForwardedCompanion,
+        MemberRefParentCompanion,
+        MethodDefOrRefCompanion,
+        ResolutionScopeCompanion,
+        TypeDefOrRefCompanion,
+        TypeOrMethodDefCompanion;
+export 'src/reader/has_custom_attributes.dart';
+export 'src/reader/heap/blob.dart';
+export 'src/reader/heap/guid.dart';
+export 'src/reader/heap/metadata_heap.dart';
+export 'src/reader/heap/string.dart';
+export 'src/reader/heap/user_string.dart';
+export 'src/reader/metadata_index.dart';
+export 'src/reader/metadata_lookup.dart';
+export 'src/reader/metadata_reader.dart';
+export 'src/reader/metadata_table.dart';
+export 'src/reader/row.dart' hide RowCompanion;
+export 'src/reader/table/assembly.dart' hide AssemblyCompanion;
+export 'src/reader/table/assembly_os.dart' hide AssemblyOSCompanion;
+export 'src/reader/table/assembly_processor.dart'
+    hide AssemblyProcessorCompanion;
+export 'src/reader/table/assembly_ref.dart' hide AssemblyRefCompanion;
+export 'src/reader/table/assembly_ref_os.dart' hide AssemblyRefOSCompanion;
+export 'src/reader/table/assembly_ref_processor.dart'
+    hide AssemblyRefProcessorCompanion;
+export 'src/reader/table/class_layout.dart' hide ClassLayoutCompanion;
+export 'src/reader/table/constant.dart' hide ConstantCompanion;
+export 'src/reader/table/custom_attribute.dart' hide CustomAttributeCompanion;
+export 'src/reader/table/decl_security.dart' hide DeclSecurityCompanion;
+export 'src/reader/table/event.dart' hide EventCompanion;
+export 'src/reader/table/event_map.dart' hide EventMapCompanion;
+export 'src/reader/table/exported_type.dart' hide ExportedTypeCompanion;
+export 'src/reader/table/field.dart' hide FieldCompanion;
+export 'src/reader/table/field_layout.dart' hide FieldLayoutCompanion;
+export 'src/reader/table/field_marshal.dart' hide FieldMarshalCompanion;
+export 'src/reader/table/field_rva.dart' hide FieldRVACompanion;
+export 'src/reader/table/file.dart' hide FileCompanion;
+export 'src/reader/table/generic_param.dart' hide GenericParamCompanion;
+export 'src/reader/table/generic_param_constraint.dart'
+    hide GenericParamConstraintCompanion;
+export 'src/reader/table/impl_map.dart' hide ImplMapCompanion;
+export 'src/reader/table/interface_impl.dart' hide InterfaceImplCompanion;
+export 'src/reader/table/manifest_resource.dart' hide ManifestResourceCompanion;
+export 'src/reader/table/member_ref.dart' hide MemberRefCompanion;
+export 'src/reader/table/method_def.dart' hide MethodDefCompanion;
+export 'src/reader/table/method_impl.dart' hide MethodImplCompanion;
+export 'src/reader/table/method_semantics.dart' hide MethodSemanticsCompanion;
+export 'src/reader/table/method_spec.dart' hide MethodSpecCompanion;
+export 'src/reader/table/module.dart' hide ModuleCompanion;
+export 'src/reader/table/module_ref.dart' hide ModuleRefCompanion;
+export 'src/reader/table/nested_class.dart' hide NestedClassCompanion;
+export 'src/reader/table/param.dart' hide ParamCompanion;
+export 'src/reader/table/property.dart' hide PropertyCompanion;
+export 'src/reader/table/property_map.dart' hide PropertyMapCompanion;
+export 'src/reader/table/stand_alone_sig.dart' hide StandAloneSigCompanion;
+export 'src/reader/table/type_def.dart' hide TypeDefCompanion;
+export 'src/reader/table/type_ref.dart' hide TypeRefCompanion;
+export 'src/reader/table/type_spec.dart' hide TypeSpecCompanion;
+export 'src/reader/table_stream.dart';
+export 'src/reader/type_category.dart';
+export 'src/stand_alone_signature.dart';
+export 'src/type_name.dart';

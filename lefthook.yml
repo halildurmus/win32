@@ -4,19 +4,14 @@ pre-commit:
     analyze:
       glob: '*.{dart}'
       run: dart run hooks:analyze example lib test
-      description: Analyzes the code for potential issues
     format:
       glob: '*.{dart}'
       run: dart run hooks:format {staged_files}
-      description: Formats the code according to the project's style guide
     test:
       glob: '{lib,test}/**/*.dart'
       run: dart run hooks:test -- -j 1 --test-randomize-ordering-seed=random
-      description: Runs the test suite to ensure all tests pass
 
 commit-msg:
   commands:
     check_commit:
       run: dart run hooks:check_commit {1}
-      description: >
-        Checks that the commit message follows the Conventional Commit format
