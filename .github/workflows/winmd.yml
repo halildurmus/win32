@@ -28,16 +28,16 @@ jobs:
         include:
           - os: windows-2025
             sdk: main
-          # - os: windows-2022
-          #   sdk: beta
+          - os: windows-2022
+            sdk: beta
           - os: macos-latest
-            sdk: main # TODO: change to stable
+            sdk: stable
           - os: ubuntu-latest
-            sdk: main # TODO: change to stable
+            sdk: stable
           - os: windows-11-arm
-            sdk: main # TODO: change to stable
-          # - os: windows-2019
-          #   sdk: stable
+            sdk: stable
+          - os: windows-2019
+            sdk: stable
 
     uses: halildurmus/workflows/.github/workflows/dart.yml@main
     with:
@@ -49,9 +49,9 @@ jobs:
       runs_on: ${{ matrix.os }}
     secrets:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-# TODO: Enable these
-# dartdoc:
-#   uses: halildurmus/workflows/.github/workflows/dartdoc.yml@main
 
-# pana:
-#   uses: halildurmus/workflows/.github/workflows/pana.yml@main
+  dartdoc:
+    uses: halildurmus/workflows/.github/workflows/dartdoc.yml@main
+
+  pana:
+    uses: halildurmus/workflows/.github/workflows/pana.yml@main
