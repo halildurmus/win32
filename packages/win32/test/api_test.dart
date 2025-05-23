@@ -17522,6 +17522,47 @@ void main() {
     }
   });
 
+  group('Test api-ms-win-core-path-l1-1-0 functions', () {
+    test('Can instantiate PathAllocCanonicalize', () {
+      final api_ms_win_core_path_l1_1_0 = DynamicLibrary.open(
+        'api-ms-win-core-path-l1-1-0.dll',
+      );
+      final PathAllocCanonicalize = api_ms_win_core_path_l1_1_0.lookupFunction<
+        Int32 Function(
+          Pointer<Utf16> pszPathIn,
+          Uint32 dwFlags,
+          Pointer<Pointer<Utf16>> ppszPathOut,
+        ),
+        int Function(
+          Pointer<Utf16> pszPathIn,
+          int dwFlags,
+          Pointer<Pointer<Utf16>> ppszPathOut,
+        )
+      >('PathAllocCanonicalize');
+      expect(PathAllocCanonicalize, isA<Function>());
+    });
+    test('Can instantiate PathAllocCombine', () {
+      final api_ms_win_core_path_l1_1_0 = DynamicLibrary.open(
+        'api-ms-win-core-path-l1-1-0.dll',
+      );
+      final PathAllocCombine = api_ms_win_core_path_l1_1_0.lookupFunction<
+        Int32 Function(
+          Pointer<Utf16> pszPathIn,
+          Pointer<Utf16> pszMore,
+          Uint32 dwFlags,
+          Pointer<Pointer<Utf16>> ppszPathOut,
+        ),
+        int Function(
+          Pointer<Utf16> pszPathIn,
+          Pointer<Utf16> pszMore,
+          int dwFlags,
+          Pointer<Pointer<Utf16>> ppszPathOut,
+        )
+      >('PathAllocCombine');
+      expect(PathAllocCombine, isA<Function>());
+    });
+  });
+
   group('Test propsys functions', () {
     test('Can instantiate PropVariantToStringWithDefault', () {
       final propsys = DynamicLibrary.open('propsys.dll');

@@ -104,6 +104,7 @@ export 'src/win32/api_ms_win_core_apiquery_l2_1_0.g.dart';
 export 'src/win32/api_ms_win_core_comm_l1_1_1.g.dart';
 export 'src/win32/api_ms_win_core_comm_l1_1_2.g.dart';
 export 'src/win32/api_ms_win_core_handle_l1_1_0.g.dart';
+export 'src/win32/api_ms_win_core_path_l1_1_0.g.dart';
 export 'src/win32/api_ms_win_core_sysinfo_l1_2_3.g.dart';
 export 'src/win32/api_ms_win_core_winrt_l1_1_0.g.dart';
 export 'src/win32/api_ms_win_core_winrt_error_l1_1_0.g.dart';

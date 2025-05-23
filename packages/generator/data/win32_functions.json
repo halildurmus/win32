@@ -3929,6 +3929,14 @@
         "prototype": "BOOL PaintDesktop(\n  HDC hdc\n);",
         "comment": "The PaintDesktop function fills the clipping region in the specified device context with the desktop pattern or wallpaper. The function is provided primarily for shell desktops."
     },
+    "PathAllocCanonicalize": {
+        "prototype": "HRESULT PathAllocCanonicalize(\n  PCWSTR pszPathInm,\n  ULONG dwFlags,  PWSTR *ppszPathOut\n);",
+        "comment": "Converts a path string into a canonical form."
+    },
+    "PathAllocCombine": {
+        "prototype": "HRESULT PathAllocCombine(\n  PCWSTR pszPathIn,\n  PCWSTR pszMore,  ULONG dwFlags,  PWSTR *ppszPathOut\n);",
+        "comment": "Converts a path string into a canonical form."
+    },
     "PeekConsoleInput": {
         "prototype": "BOOL PeekConsoleInputW(\n  HANDLE        hConsoleInput,\n  PINPUT_RECORD lpBuffer,\n  DWORD         nLength,\n  LPDWORD       lpNumberOfEventsRead\n);",
         "comment": "Reads data from the specified console input buffer without removing it from the buffer."

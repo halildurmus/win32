@@ -13350,3 +13350,45 @@ const SVSFVoiceMask = 511;
 
 /// This mask has every unused bit set.
 const SVSFUnusedFlags = -512;
+
+// -----------------------------------------------------------------------------
+// pathcch.h constants
+// -----------------------------------------------------------------------------
+
+/// Do not allow for the construction of \\?\ paths (ie, long paths) longer
+/// than [MAX_PATH].
+const PATHCCH_NONE = 0x0000000;
+
+/// Allow the building of \\?\ paths longer than [MAX_PATH].
+const PATHCCH_ALLOW_LONG_PATHS = 0x00000001;
+
+/// Forces the API to treat the caller as long path enabled, independent of the
+/// process's long name enabled state. This option can be used only when
+/// [PATHCCH_ALLOW_LONG_PATHS] is specified, and cannot be used with
+/// [PATHCCH_FORCE_DISABLE_LONG_NAME_PROCESS].
+const PATHCCH_FORCE_ENABLE_LONG_NAME_PROCESS = 0x00000002;
+
+/// Forces the API to treat the caller as long path disabled, independent of
+/// the process's long name enabled state. This option can be used only when
+/// [PATHCCH_ALLOW_LONG_PATHS] is specified, and cannot be used with
+/// [PATHCCH_FORCE_ENABLE_LONG_NAME_PROCESS].
+const PATHCCH_FORCE_DISABLE_LONG_NAME_PROCESS = 0x00000004;
+
+/// Disables the normalization of path segments that includes removing trailing
+/// dots and spaces. This enables access to paths that win32 path normalization
+/// will block.
+const PATHCCH_DO_NOT_NORMALIZE_SEGMENTS = 0x00000008;
+
+/// Converts the input path into the extended length DOS device path form
+/// (with the \\?\ prefix) if not already in that form. This enables access to
+/// paths that are otherwise not addressable due to Win32 normalization rules
+/// (that can strip trailing dots and spaces) and path length limitations.
+/// This option implies the same behavior of
+/// [PATHCCH_DO_NOT_NORMALIZE_SEGMENTS].
+const PATHCCH_ENSURE_IS_EXTENDED_LENGTH_PATH = 0x00000010;
+
+/// When combining or normalizing a path, ensure there is a trailing backslash.
+const PATHCCH_ENSURE_TRAILING_SLASH = 0x00000020;
+
+/// Convert forward slashes to back slashes and collapse multiple slashes.
+const PATHCCH_CANONICALIZE_SLASHES = 0x00000040;
