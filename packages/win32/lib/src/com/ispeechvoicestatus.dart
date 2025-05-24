@@ -42,19 +42,20 @@ class ISpeechVoiceStatus extends IDispatch {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = (ptr.ref.vtable + 7)
-          .cast<
-            Pointer<
-              NativeFunction<
-                Int32 Function(Pointer, Pointer<Int32> StreamNumber)
-              >
-            >
-          >()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Int32> StreamNumber)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+      final hr =
+          (ptr.ref.vtable + 7)
+              .cast<
+                Pointer<
+                  NativeFunction<
+                    Int32 Function(Pointer, Pointer<Int32> StreamNumber)
+                  >
+                >
+              >()
+              .value
+              .asFunction<int Function(Pointer, Pointer<Int32> StreamNumber)>()(
+            ptr.ref.lpVtbl,
+            retValuePtr,
+          );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -69,19 +70,20 @@ class ISpeechVoiceStatus extends IDispatch {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = (ptr.ref.vtable + 8)
-          .cast<
-            Pointer<
-              NativeFunction<
-                Int32 Function(Pointer, Pointer<Int32> StreamNumber)
-              >
-            >
-          >()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Int32> StreamNumber)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+      final hr =
+          (ptr.ref.vtable + 8)
+              .cast<
+                Pointer<
+                  NativeFunction<
+                    Int32 Function(Pointer, Pointer<Int32> StreamNumber)
+                  >
+                >
+              >()
+              .value
+              .asFunction<int Function(Pointer, Pointer<Int32> StreamNumber)>()(
+            ptr.ref.lpVtbl,
+            retValuePtr,
+          );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -103,10 +105,9 @@ class ISpeechVoiceStatus extends IDispatch {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Int32> HResult)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Int32> HResult)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -121,17 +122,18 @@ class ISpeechVoiceStatus extends IDispatch {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = (ptr.ref.vtable + 10)
-          .cast<
-            Pointer<
-              NativeFunction<Int32 Function(Pointer, Pointer<Int32> State)>
-            >
-          >()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Int32> State)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+      final hr =
+          (ptr.ref.vtable + 10)
+              .cast<
+                Pointer<
+                  NativeFunction<Int32 Function(Pointer, Pointer<Int32> State)>
+                >
+              >()
+              .value
+              .asFunction<int Function(Pointer, Pointer<Int32> State)>()(
+            ptr.ref.lpVtbl,
+            retValuePtr,
+          );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -153,10 +155,9 @@ class ISpeechVoiceStatus extends IDispatch {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Int32> Position)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Int32> Position)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -171,17 +172,18 @@ class ISpeechVoiceStatus extends IDispatch {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = (ptr.ref.vtable + 12)
-          .cast<
-            Pointer<
-              NativeFunction<Int32 Function(Pointer, Pointer<Int32> Length)>
-            >
-          >()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Int32> Length)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+      final hr =
+          (ptr.ref.vtable + 12)
+              .cast<
+                Pointer<
+                  NativeFunction<Int32 Function(Pointer, Pointer<Int32> Length)>
+                >
+              >()
+              .value
+              .asFunction<int Function(Pointer, Pointer<Int32> Length)>()(
+            ptr.ref.lpVtbl,
+            retValuePtr,
+          );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -203,10 +205,9 @@ class ISpeechVoiceStatus extends IDispatch {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Int32> Position)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Int32> Position)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -221,17 +222,18 @@ class ISpeechVoiceStatus extends IDispatch {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = (ptr.ref.vtable + 14)
-          .cast<
-            Pointer<
-              NativeFunction<Int32 Function(Pointer, Pointer<Int32> Length)>
-            >
-          >()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Int32> Length)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+      final hr =
+          (ptr.ref.vtable + 14)
+              .cast<
+                Pointer<
+                  NativeFunction<Int32 Function(Pointer, Pointer<Int32> Length)>
+                >
+              >()
+              .value
+              .asFunction<int Function(Pointer, Pointer<Int32> Length)>()(
+            ptr.ref.lpVtbl,
+            retValuePtr,
+          );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -279,10 +281,9 @@ class ISpeechVoiceStatus extends IDispatch {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Int32> BookmarkId)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Int32> BookmarkId)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -304,10 +305,9 @@ class ISpeechVoiceStatus extends IDispatch {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Int16> PhoneId)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Int16> PhoneId)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -329,10 +329,9 @@ class ISpeechVoiceStatus extends IDispatch {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Int16> VisemeId)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Int16> VisemeId)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 

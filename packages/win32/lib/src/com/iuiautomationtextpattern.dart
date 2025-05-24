@@ -89,25 +89,23 @@ class IUIAutomationTextPattern extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> ranges)>()(
-    ptr.ref.lpVtbl,
-    ranges,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Pointer<COMObject>> ranges)
+      >()(ptr.ref.lpVtbl, ranges);
 
-  int getVisibleRanges(Pointer<Pointer<COMObject>> ranges) => (ptr.ref.vtable +
-          6)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Pointer<Pointer<COMObject>> ranges)
-          >
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> ranges)>()(
-    ptr.ref.lpVtbl,
-    ranges,
-  );
+  int getVisibleRanges(Pointer<Pointer<COMObject>> ranges) =>
+      (ptr.ref.vtable + 6)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<COMObject>> ranges)
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<COMObject>> ranges)
+          >()(ptr.ref.lpVtbl, ranges);
 
   Pointer<COMObject> get documentRange {
     final retValuePtr = calloc<COMObject>();
@@ -119,10 +117,9 @@ class IUIAutomationTextPattern extends IUnknown {
           >
         >()
         .value
-        .asFunction<int Function(Pointer, Pointer<COMObject> range)>()(
-      ptr.ref.lpVtbl,
-      retValuePtr,
-    );
+        .asFunction<
+          int Function(Pointer, Pointer<COMObject> range)
+        >()(ptr.ref.lpVtbl, retValuePtr);
 
     if (FAILED(hr)) {
       free(retValuePtr);

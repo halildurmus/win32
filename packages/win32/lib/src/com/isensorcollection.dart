@@ -64,10 +64,9 @@ class ISensorCollection extends IUnknown {
         Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Uint32> pCount)>>
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Uint32> pCount)>()(
-    ptr.ref.lpVtbl,
-    pCount,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Uint32> pCount)
+      >()(ptr.ref.lpVtbl, pCount);
 
   int add(Pointer<COMObject> pSensor) => (ptr.ref.vtable + 5)
       .cast<
@@ -76,10 +75,9 @@ class ISensorCollection extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<COMObject> pSensor)>()(
-    ptr.ref.lpVtbl,
-    pSensor,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<COMObject> pSensor)
+      >()(ptr.ref.lpVtbl, pSensor);
 
   int remove(Pointer<COMObject> pSensor) => (ptr.ref.vtable + 6)
       .cast<
@@ -88,20 +86,18 @@ class ISensorCollection extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<COMObject> pSensor)>()(
-    ptr.ref.lpVtbl,
-    pSensor,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<COMObject> pSensor)
+      >()(ptr.ref.lpVtbl, pSensor);
 
   int removeByID(Pointer<GUID> sensorID) => (ptr.ref.vtable + 7)
       .cast<
         Pointer<NativeFunction<Int32 Function(Pointer, Pointer<GUID> sensorID)>>
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<GUID> sensorID)>()(
-    ptr.ref.lpVtbl,
-    sensorID,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<GUID> sensorID)
+      >()(ptr.ref.lpVtbl, sensorID);
 
   int clear() => (ptr.ref.vtable + 8)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()

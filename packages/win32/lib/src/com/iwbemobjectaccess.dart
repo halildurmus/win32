@@ -131,24 +131,23 @@ class IWbemObjectAccess extends IWbemClassObject {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, int lHandle, Pointer<Uint32> pdw)>()(
-    ptr.ref.lpVtbl,
-    lHandle,
-    pdw,
-  );
+      .asFunction<
+        int Function(Pointer, int lHandle, Pointer<Uint32> pdw)
+      >()(ptr.ref.lpVtbl, lHandle, pdw);
 
-  int writeDWORD(int lHandle, int dw) => (ptr.ref.vtable + 31)
-      .cast<
-        Pointer<
-          NativeFunction<Int32 Function(Pointer, Int32 lHandle, Uint32 dw)>
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, int lHandle, int dw)>()(
-    ptr.ref.lpVtbl,
-    lHandle,
-    dw,
-  );
+  int writeDWORD(int lHandle, int dw) =>
+      (ptr.ref.vtable + 31)
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Int32 lHandle, Uint32 dw)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, int lHandle, int dw)>()(
+        ptr.ref.lpVtbl,
+        lHandle,
+        dw,
+      );
 
   int readQWORD(int lHandle, Pointer<Uint64> pqw) => (ptr.ref.vtable + 32)
       .cast<
@@ -159,24 +158,23 @@ class IWbemObjectAccess extends IWbemClassObject {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, int lHandle, Pointer<Uint64> pqw)>()(
-    ptr.ref.lpVtbl,
-    lHandle,
-    pqw,
-  );
+      .asFunction<
+        int Function(Pointer, int lHandle, Pointer<Uint64> pqw)
+      >()(ptr.ref.lpVtbl, lHandle, pqw);
 
-  int writeQWORD(int lHandle, int pw) => (ptr.ref.vtable + 33)
-      .cast<
-        Pointer<
-          NativeFunction<Int32 Function(Pointer, Int32 lHandle, Uint64 pw)>
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, int lHandle, int pw)>()(
-    ptr.ref.lpVtbl,
-    lHandle,
-    pw,
-  );
+  int writeQWORD(int lHandle, int pw) =>
+      (ptr.ref.vtable + 33)
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Int32 lHandle, Uint64 pw)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, int lHandle, int pw)>()(
+        ptr.ref.lpVtbl,
+        lHandle,
+        pw,
+      );
 
   int getPropertyInfoByHandle(
     int lHandle,

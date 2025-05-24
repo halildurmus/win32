@@ -44,20 +44,20 @@ class IAppxManifestOSPackageDependency extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> name)>()(
-    ptr.ref.lpVtbl,
-    name,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Pointer<Utf16>> name)
+      >()(ptr.ref.lpVtbl, name);
 
-  int getVersion(Pointer<Uint64> version) => (ptr.ref.vtable + 4)
-      .cast<
-        Pointer<
-          NativeFunction<Int32 Function(Pointer, Pointer<Uint64> version)>
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Uint64> version)>()(
-    ptr.ref.lpVtbl,
-    version,
-  );
+  int getVersion(Pointer<Uint64> version) =>
+      (ptr.ref.vtable + 4)
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Uint64> version)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Uint64> version)>()(
+        ptr.ref.lpVtbl,
+        version,
+      );
 }

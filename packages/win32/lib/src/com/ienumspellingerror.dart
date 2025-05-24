@@ -45,8 +45,7 @@ class IEnumSpellingError extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> value)>()(
-    ptr.ref.lpVtbl,
-    value,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Pointer<COMObject>> value)
+      >()(ptr.ref.lpVtbl, value);
 }

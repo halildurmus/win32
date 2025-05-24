@@ -42,10 +42,9 @@ class IPropertyStore extends IUnknown {
         Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Uint32> cProps)>>
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Uint32> cProps)>()(
-    ptr.ref.lpVtbl,
-    cProps,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Uint32> cProps)
+      >()(ptr.ref.lpVtbl, cProps);
 
   int getAt(int iProp, Pointer<PROPERTYKEY> pkey) => (ptr.ref.vtable + 4)
       .cast<

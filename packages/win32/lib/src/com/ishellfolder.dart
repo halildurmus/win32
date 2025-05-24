@@ -44,42 +44,43 @@ class IShellFolder extends IUnknown {
     Pointer<Uint32> pchEaten,
     Pointer<Pointer<ITEMIDLIST>> ppidl,
     Pointer<Uint32> pdwAttributes,
-  ) => (ptr.ref.vtable + 3)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  ) =>
+      (ptr.ref.vtable + 3)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  IntPtr hwnd,
+                  Pointer<COMObject> pbc,
+                  Pointer<Utf16> pszDisplayName,
+                  Pointer<Uint32> pchEaten,
+                  Pointer<Pointer<ITEMIDLIST>> ppidl,
+                  Pointer<Uint32> pdwAttributes,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
-              IntPtr hwnd,
+              int hwnd,
               Pointer<COMObject> pbc,
               Pointer<Utf16> pszDisplayName,
               Pointer<Uint32> pchEaten,
               Pointer<Pointer<ITEMIDLIST>> ppidl,
               Pointer<Uint32> pdwAttributes,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(
-          Pointer,
-          int hwnd,
-          Pointer<COMObject> pbc,
-          Pointer<Utf16> pszDisplayName,
-          Pointer<Uint32> pchEaten,
-          Pointer<Pointer<ITEMIDLIST>> ppidl,
-          Pointer<Uint32> pdwAttributes,
-        )
-      >()(
-    ptr.ref.lpVtbl,
-    hwnd,
-    pbc,
-    pszDisplayName,
-    pchEaten,
-    ppidl,
-    pdwAttributes,
-  );
+          >()(
+        ptr.ref.lpVtbl,
+        hwnd,
+        pbc,
+        pszDisplayName,
+        pchEaten,
+        ppidl,
+        pdwAttributes,
+      );
 
   int enumObjects(
     int hwnd,

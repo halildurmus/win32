@@ -158,10 +158,9 @@ class IShellItem2 extends IShellItem {
         Pointer<NativeFunction<Int32 Function(Pointer, Pointer<COMObject> pbc)>>
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<COMObject> pbc)>()(
-    ptr.ref.lpVtbl,
-    pbc,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<COMObject> pbc)
+      >()(ptr.ref.lpVtbl, pbc);
 
   int getProperty(Pointer<PROPERTYKEY> key, Pointer<PROPVARIANT> ppropvar) =>
       (ptr.ref.vtable + 13)
@@ -229,19 +228,23 @@ class IShellItem2 extends IShellItem {
             )
           >()(ptr.ref.lpVtbl, key, pft);
 
-  int getInt32(Pointer<PROPERTYKEY> key, Pointer<Int32> pi) => (ptr.ref.vtable +
-          16)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Pointer<PROPERTYKEY> key, Pointer<Int32> pi)
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(Pointer, Pointer<PROPERTYKEY> key, Pointer<Int32> pi)
-      >()(ptr.ref.lpVtbl, key, pi);
+  int getInt32(Pointer<PROPERTYKEY> key, Pointer<Int32> pi) =>
+      (ptr.ref.vtable + 16)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<PROPERTYKEY> key,
+                  Pointer<Int32> pi,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<PROPERTYKEY> key, Pointer<Int32> pi)
+          >()(ptr.ref.lpVtbl, key, pi);
 
   int getString(Pointer<PROPERTYKEY> key, Pointer<Pointer<Utf16>> ppsz) =>
       (ptr.ref.vtable + 17)
@@ -305,17 +308,21 @@ class IShellItem2 extends IShellItem {
             )
           >()(ptr.ref.lpVtbl, key, pull);
 
-  int getBool(Pointer<PROPERTYKEY> key, Pointer<Int32> pf) => (ptr.ref.vtable +
-          20)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Pointer<PROPERTYKEY> key, Pointer<Int32> pf)
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(Pointer, Pointer<PROPERTYKEY> key, Pointer<Int32> pf)
-      >()(ptr.ref.lpVtbl, key, pf);
+  int getBool(Pointer<PROPERTYKEY> key, Pointer<Int32> pf) =>
+      (ptr.ref.vtable + 20)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<PROPERTYKEY> key,
+                  Pointer<Int32> pf,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<PROPERTYKEY> key, Pointer<Int32> pf)
+          >()(ptr.ref.lpVtbl, key, pf);
 }

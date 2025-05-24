@@ -81,34 +81,35 @@ class IAudioClient2 extends IAudioClient {
     int bEventDriven,
     Pointer<Int64> phnsMinBufferDuration,
     Pointer<Int64> phnsMaxBufferDuration,
-  ) => (ptr.ref.vtable + 17)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  ) =>
+      (ptr.ref.vtable + 17)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<WAVEFORMATEX> pFormat,
+                  Int32 bEventDriven,
+                  Pointer<Int64> phnsMinBufferDuration,
+                  Pointer<Int64> phnsMaxBufferDuration,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
               Pointer<WAVEFORMATEX> pFormat,
-              Int32 bEventDriven,
+              int bEventDriven,
               Pointer<Int64> phnsMinBufferDuration,
               Pointer<Int64> phnsMaxBufferDuration,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(
-          Pointer,
-          Pointer<WAVEFORMATEX> pFormat,
-          int bEventDriven,
-          Pointer<Int64> phnsMinBufferDuration,
-          Pointer<Int64> phnsMaxBufferDuration,
-        )
-      >()(
-    ptr.ref.lpVtbl,
-    pFormat,
-    bEventDriven,
-    phnsMinBufferDuration,
-    phnsMaxBufferDuration,
-  );
+          >()(
+        ptr.ref.lpVtbl,
+        pFormat,
+        bEventDriven,
+        phnsMinBufferDuration,
+        phnsMaxBufferDuration,
+      );
 }

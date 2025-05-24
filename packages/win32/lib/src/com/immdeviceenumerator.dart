@@ -113,33 +113,35 @@ class IMMDeviceEnumerator extends IUnknown {
             )
           >()(ptr.ref.lpVtbl, pwstrId, ppDevice);
 
-  int registerEndpointNotificationCallback(
-    Pointer<COMObject> pClient,
-  ) => (ptr.ref.vtable + 6)
-      .cast<
-        Pointer<
-          NativeFunction<Int32 Function(Pointer, Pointer<COMObject> pClient)>
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<COMObject> pClient)>()(
-    ptr.ref.lpVtbl,
-    pClient,
-  );
+  int registerEndpointNotificationCallback(Pointer<COMObject> pClient) =>
+      (ptr.ref.vtable + 6)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<COMObject> pClient)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<COMObject> pClient)>()(
+        ptr.ref.lpVtbl,
+        pClient,
+      );
 
-  int unregisterEndpointNotificationCallback(
-    Pointer<COMObject> pClient,
-  ) => (ptr.ref.vtable + 7)
-      .cast<
-        Pointer<
-          NativeFunction<Int32 Function(Pointer, Pointer<COMObject> pClient)>
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<COMObject> pClient)>()(
-    ptr.ref.lpVtbl,
-    pClient,
-  );
+  int unregisterEndpointNotificationCallback(Pointer<COMObject> pClient) =>
+      (ptr.ref.vtable + 7)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<COMObject> pClient)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<COMObject> pClient)>()(
+        ptr.ref.lpVtbl,
+        pClient,
+      );
 }
 
 /// @nodoc

@@ -37,17 +37,18 @@ class IDispatch extends IUnknown {
   factory IDispatch.from(IUnknown interface) =>
       IDispatch(interface.toInterface(IID_IDispatch));
 
-  int getTypeInfoCount(Pointer<Uint32> pctinfo) => (ptr.ref.vtable + 3)
-      .cast<
-        Pointer<
-          NativeFunction<Int32 Function(Pointer, Pointer<Uint32> pctinfo)>
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Uint32> pctinfo)>()(
-    ptr.ref.lpVtbl,
-    pctinfo,
-  );
+  int getTypeInfoCount(Pointer<Uint32> pctinfo) =>
+      (ptr.ref.vtable + 3)
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Uint32> pctinfo)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Uint32> pctinfo)>()(
+        ptr.ref.lpVtbl,
+        pctinfo,
+      );
 
   int getTypeInfo(int iTInfo, int lcid, Pointer<Pointer<COMObject>> ppTInfo) =>
       (ptr.ref.vtable + 4)
@@ -115,46 +116,47 @@ class IDispatch extends IUnknown {
     Pointer<VARIANT> pVarResult,
     Pointer<EXCEPINFO> pExcepInfo,
     Pointer<Uint32> puArgErr,
-  ) => (ptr.ref.vtable + 6)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  ) =>
+      (ptr.ref.vtable + 6)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Int32 dispIdMember,
+                  Pointer<GUID> riid,
+                  Uint32 lcid,
+                  Uint16 wFlags,
+                  Pointer<DISPPARAMS> pDispParams,
+                  Pointer<VARIANT> pVarResult,
+                  Pointer<EXCEPINFO> pExcepInfo,
+                  Pointer<Uint32> puArgErr,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
-              Int32 dispIdMember,
+              int dispIdMember,
               Pointer<GUID> riid,
-              Uint32 lcid,
-              Uint16 wFlags,
+              int lcid,
+              int wFlags,
               Pointer<DISPPARAMS> pDispParams,
               Pointer<VARIANT> pVarResult,
               Pointer<EXCEPINFO> pExcepInfo,
               Pointer<Uint32> puArgErr,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(
-          Pointer,
-          int dispIdMember,
-          Pointer<GUID> riid,
-          int lcid,
-          int wFlags,
-          Pointer<DISPPARAMS> pDispParams,
-          Pointer<VARIANT> pVarResult,
-          Pointer<EXCEPINFO> pExcepInfo,
-          Pointer<Uint32> puArgErr,
-        )
-      >()(
-    ptr.ref.lpVtbl,
-    dispIdMember,
-    riid,
-    lcid,
-    wFlags,
-    pDispParams,
-    pVarResult,
-    pExcepInfo,
-    puArgErr,
-  );
+          >()(
+        ptr.ref.lpVtbl,
+        dispIdMember,
+        riid,
+        lcid,
+        wFlags,
+        pDispParams,
+        pVarResult,
+        pExcepInfo,
+        puArgErr,
+      );
 }

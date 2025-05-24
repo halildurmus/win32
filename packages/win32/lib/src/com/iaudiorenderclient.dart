@@ -71,9 +71,7 @@ class IAudioRenderClient extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, int NumFramesWritten, int dwFlags)>()(
-    ptr.ref.lpVtbl,
-    NumFramesWritten,
-    dwFlags,
-  );
+      .asFunction<
+        int Function(Pointer, int NumFramesWritten, int dwFlags)
+      >()(ptr.ref.lpVtbl, NumFramesWritten, dwFlags);
 }

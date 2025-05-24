@@ -10,8 +10,8 @@ abstract class ComPropertyProjection extends ComMethodProjection {
   /// Strip off all underscores, even if double underscores
   String get exposedMethodName =>
       method.name.startsWith('get__') | method.name.startsWith('put__')
-          ? safeIdentifierForString(method.name.substring(5)).toCamelCase()
-          : safeIdentifierForString(method.name.substring(4)).toCamelCase();
+      ? safeIdentifierForString(method.name.substring(5)).toCamelCase()
+      : safeIdentifierForString(method.name.substring(4)).toCamelCase();
 
   String ffiCall({
     required String identifier,
@@ -52,10 +52,10 @@ class ComGetPropertyProjection extends ComPropertyProjection {
 
     final valRef =
         returnValue.dartType == 'double' ||
-                returnValue.dartType == 'int' ||
-                returnValue.dartType.startsWith('Pointer')
-            ? 'value'
-            : 'ref';
+            returnValue.dartType == 'int' ||
+            returnValue.dartType.startsWith('Pointer')
+        ? 'value'
+        : 'ref';
     return '''
       ${returnValue.dartType} get $exposedMethodName {
         final retValuePtr = calloc<${returnValue.nativeType}>();
@@ -77,7 +77,8 @@ class ComSetPropertyProjection extends ComPropertyProjection {
   ComSetPropertyProjection(super.method, super.vtableOffset);
 
   @override
-  String toString() => '''
+  String toString() =>
+      '''
     set $exposedMethodName(${parameters.first.type.dartType} value) {
       ${ffiCall(identifier: 'value')}
     }

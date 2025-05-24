@@ -151,10 +151,9 @@ class IShellItemArray extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Uint32> pdwNumItems)>()(
-    ptr.ref.lpVtbl,
-    pdwNumItems,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Uint32> pdwNumItems)
+      >()(ptr.ref.lpVtbl, pdwNumItems);
 
   int getItemAt(int dwIndex, Pointer<Pointer<COMObject>> ppsi) =>
       (ptr.ref.vtable + 8)

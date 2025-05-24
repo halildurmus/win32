@@ -129,11 +129,10 @@ int IsWindowsVersionOrGreater(
     VER_GREATER_EQUAL,
   );
 
-  final osvi =
-      calloc<OSVERSIONINFOEX>()
-        ..ref.dwMajorVersion = wMajorVersion
-        ..ref.dwMinorVersion = wMinorVersion
-        ..ref.wServicePackMajor = wServicePackMajor;
+  final osvi = calloc<OSVERSIONINFOEX>()
+    ..ref.dwMajorVersion = wMajorVersion
+    ..ref.dwMinorVersion = wMinorVersion
+    ..ref.wServicePackMajor = wServicePackMajor;
 
   try {
     return VerifyVersionInfo(
@@ -197,10 +196,9 @@ int IsPropVariantString(Pointer<PROPVARIANT> propvar) =>
 ///
 /// {@category uxtheme}
 int SetWindowThemeNonClientAttributes(int hwnd, int dwMask, int dwAttributes) {
-  final wta =
-      calloc<WTA_OPTIONS>()
-        ..ref.dwFlags = dwAttributes
-        ..ref.dwMask = dwMask;
+  final wta = calloc<WTA_OPTIONS>()
+    ..ref.dwFlags = dwAttributes
+    ..ref.dwMask = dwMask;
   try {
     return SetWindowThemeAttribute(
       hwnd,

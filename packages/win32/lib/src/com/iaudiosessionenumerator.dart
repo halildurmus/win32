@@ -48,10 +48,9 @@ class IAudioSessionEnumerator extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Int32> SessionCount)>()(
-    ptr.ref.lpVtbl,
-    SessionCount,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Int32> SessionCount)
+      >()(ptr.ref.lpVtbl, SessionCount);
 
   int getSession(int SessionCount, Pointer<Pointer<COMObject>> Session) =>
       (ptr.ref.vtable + 4)

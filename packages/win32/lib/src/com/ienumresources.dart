@@ -82,8 +82,7 @@ class IEnumResources extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> ppenumr)>()(
-    ptr.ref.lpVtbl,
-    ppenumr,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Pointer<COMObject>> ppenumr)
+      >()(ptr.ref.lpVtbl, ppenumr);
 }

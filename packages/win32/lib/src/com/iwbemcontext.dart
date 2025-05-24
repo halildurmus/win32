@@ -168,11 +168,9 @@ class IWbemContext extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Utf16> wszName, int lFlags)>()(
-    ptr.ref.lpVtbl,
-    wszName,
-    lFlags,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Utf16> wszName, int lFlags)
+      >()(ptr.ref.lpVtbl, wszName, lFlags);
 
   int deleteAll() => (ptr.ref.vtable + 11)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()

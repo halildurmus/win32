@@ -348,19 +348,20 @@ class IUIAutomationTreeWalker extends IUnknown {
   Pointer<COMObject> get condition {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = (ptr.ref.vtable + 15)
-        .cast<
-          Pointer<
-            NativeFunction<
-              Int32 Function(Pointer, Pointer<COMObject> condition)
-            >
-          >
-        >()
-        .value
-        .asFunction<int Function(Pointer, Pointer<COMObject> condition)>()(
-      ptr.ref.lpVtbl,
-      retValuePtr,
-    );
+    final hr =
+        (ptr.ref.vtable + 15)
+            .cast<
+              Pointer<
+                NativeFunction<
+                  Int32 Function(Pointer, Pointer<COMObject> condition)
+                >
+              >
+            >()
+            .value
+            .asFunction<int Function(Pointer, Pointer<COMObject> condition)>()(
+          ptr.ref.lpVtbl,
+          retValuePtr,
+        );
 
     if (FAILED(hr)) {
       free(retValuePtr);

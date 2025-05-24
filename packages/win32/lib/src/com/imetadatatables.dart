@@ -44,58 +44,61 @@ class IMetaDataTables extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Uint32> pcbStrings)>()(
-    ptr.ref.lpVtbl,
-    pcbStrings,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Uint32> pcbStrings)
+      >()(ptr.ref.lpVtbl, pcbStrings);
 
-  int getBlobHeapSize(Pointer<Uint32> pcbBlobs) => (ptr.ref.vtable + 4)
-      .cast<
-        Pointer<
-          NativeFunction<Int32 Function(Pointer, Pointer<Uint32> pcbBlobs)>
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Uint32> pcbBlobs)>()(
-    ptr.ref.lpVtbl,
-    pcbBlobs,
-  );
+  int getBlobHeapSize(Pointer<Uint32> pcbBlobs) =>
+      (ptr.ref.vtable + 4)
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Uint32> pcbBlobs)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Uint32> pcbBlobs)>()(
+        ptr.ref.lpVtbl,
+        pcbBlobs,
+      );
 
-  int getGuidHeapSize(Pointer<Uint32> pcbGuids) => (ptr.ref.vtable + 5)
-      .cast<
-        Pointer<
-          NativeFunction<Int32 Function(Pointer, Pointer<Uint32> pcbGuids)>
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Uint32> pcbGuids)>()(
-    ptr.ref.lpVtbl,
-    pcbGuids,
-  );
+  int getGuidHeapSize(Pointer<Uint32> pcbGuids) =>
+      (ptr.ref.vtable + 5)
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Uint32> pcbGuids)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Uint32> pcbGuids)>()(
+        ptr.ref.lpVtbl,
+        pcbGuids,
+      );
 
-  int getUserStringHeapSize(Pointer<Uint32> pcbBlobs) => (ptr.ref.vtable + 6)
-      .cast<
-        Pointer<
-          NativeFunction<Int32 Function(Pointer, Pointer<Uint32> pcbBlobs)>
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Uint32> pcbBlobs)>()(
-    ptr.ref.lpVtbl,
-    pcbBlobs,
-  );
+  int getUserStringHeapSize(Pointer<Uint32> pcbBlobs) =>
+      (ptr.ref.vtable + 6)
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Uint32> pcbBlobs)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Uint32> pcbBlobs)>()(
+        ptr.ref.lpVtbl,
+        pcbBlobs,
+      );
 
-  int getNumTables(Pointer<Uint32> pcTables) => (ptr.ref.vtable + 7)
-      .cast<
-        Pointer<
-          NativeFunction<Int32 Function(Pointer, Pointer<Uint32> pcTables)>
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Uint32> pcTables)>()(
-    ptr.ref.lpVtbl,
-    pcTables,
-  );
+  int getNumTables(Pointer<Uint32> pcTables) =>
+      (ptr.ref.vtable + 7)
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Uint32> pcTables)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Uint32> pcTables)>()(
+        ptr.ref.lpVtbl,
+        pcTables,
+      );
 
   int getTableIndex(int token, Pointer<Uint32> pixTbl) => (ptr.ref.vtable + 8)
       .cast<
@@ -106,11 +109,9 @@ class IMetaDataTables extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, int token, Pointer<Uint32> pixTbl)>()(
-    ptr.ref.lpVtbl,
-    token,
-    pixTbl,
-  );
+      .asFunction<
+        int Function(Pointer, int token, Pointer<Uint32> pixTbl)
+      >()(ptr.ref.lpVtbl, token, pixTbl);
 
   int getTableInfo(
     int ixTbl,
@@ -346,21 +347,19 @@ class IMetaDataTables extends IUnknown {
         )
       >()(ptr.ref.lpVtbl, ixUserString, pcbData, ppData);
 
-  int getNextString(int ixString, Pointer<Uint32> pNext) => (ptr.ref.vtable +
-          18)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Uint32 ixString, Pointer<Uint32> pNext)
-          >
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, int ixString, Pointer<Uint32> pNext)>()(
-    ptr.ref.lpVtbl,
-    ixString,
-    pNext,
-  );
+  int getNextString(int ixString, Pointer<Uint32> pNext) =>
+      (ptr.ref.vtable + 18)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Uint32 ixString, Pointer<Uint32> pNext)
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, int ixString, Pointer<Uint32> pNext)
+          >()(ptr.ref.lpVtbl, ixString, pNext);
 
   int getNextBlob(int ixBlob, Pointer<Uint32> pNext) => (ptr.ref.vtable + 19)
       .cast<
@@ -371,11 +370,9 @@ class IMetaDataTables extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, int ixBlob, Pointer<Uint32> pNext)>()(
-    ptr.ref.lpVtbl,
-    ixBlob,
-    pNext,
-  );
+      .asFunction<
+        int Function(Pointer, int ixBlob, Pointer<Uint32> pNext)
+      >()(ptr.ref.lpVtbl, ixBlob, pNext);
 
   int getNextGuid(int ixGuid, Pointer<Uint32> pNext) => (ptr.ref.vtable + 20)
       .cast<
@@ -386,11 +383,9 @@ class IMetaDataTables extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, int ixGuid, Pointer<Uint32> pNext)>()(
-    ptr.ref.lpVtbl,
-    ixGuid,
-    pNext,
-  );
+      .asFunction<
+        int Function(Pointer, int ixGuid, Pointer<Uint32> pNext)
+      >()(ptr.ref.lpVtbl, ixGuid, pNext);
 
   int getNextUserString(int ixUserString, Pointer<Uint32> pNext) =>
       (ptr.ref.vtable + 21)

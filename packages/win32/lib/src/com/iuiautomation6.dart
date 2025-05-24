@@ -186,10 +186,9 @@ class IUIAutomation6 extends IUIAutomation5 {
           >
         >()
         .value
-        .asFunction<int Function(Pointer, int coalesceEventsOptions)>()(
-      ptr.ref.lpVtbl,
-      value,
-    );
+        .asFunction<
+          int Function(Pointer, int coalesceEventsOptions)
+        >()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }

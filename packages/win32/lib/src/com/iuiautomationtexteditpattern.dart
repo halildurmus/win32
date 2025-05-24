@@ -42,35 +42,31 @@ class IUIAutomationTextEditPattern extends IUIAutomationTextPattern {
         interface.toInterface(IID_IUIAutomationTextEditPattern),
       );
 
-  int getActiveComposition(
-    Pointer<Pointer<COMObject>> range,
-  ) => (ptr.ref.vtable + 9)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Pointer<Pointer<COMObject>> range)
-          >
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> range)>()(
-    ptr.ref.lpVtbl,
-    range,
-  );
+  int getActiveComposition(Pointer<Pointer<COMObject>> range) =>
+      (ptr.ref.vtable + 9)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<COMObject>> range)
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<COMObject>> range)
+          >()(ptr.ref.lpVtbl, range);
 
-  int getConversionTarget(
-    Pointer<Pointer<COMObject>> range,
-  ) => (ptr.ref.vtable + 10)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Pointer<Pointer<COMObject>> range)
-          >
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> range)>()(
-    ptr.ref.lpVtbl,
-    range,
-  );
+  int getConversionTarget(Pointer<Pointer<COMObject>> range) =>
+      (ptr.ref.vtable + 10)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<COMObject>> range)
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<COMObject>> range)
+          >()(ptr.ref.lpVtbl, range);
 }

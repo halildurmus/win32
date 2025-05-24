@@ -51,10 +51,9 @@ class ISpellChecker extends IUnknown {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> value)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<Utf16>> value)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -114,20 +113,18 @@ class ISpellChecker extends IUnknown {
         Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Utf16> word)>>
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Utf16> word)>()(
-    ptr.ref.lpVtbl,
-    word,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Utf16> word)
+      >()(ptr.ref.lpVtbl, word);
 
   int ignore(Pointer<Utf16> word) => (ptr.ref.vtable + 7)
       .cast<
         Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Utf16> word)>>
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Utf16> word)>()(
-    ptr.ref.lpVtbl,
-    word,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Utf16> word)
+      >()(ptr.ref.lpVtbl, word);
 
   int autoCorrect(Pointer<Utf16> from, Pointer<Utf16> to) =>
       (ptr.ref.vtable + 8)
@@ -171,10 +168,9 @@ class ISpellChecker extends IUnknown {
           >
         >()
         .value
-        .asFunction<int Function(Pointer, Pointer<COMObject> value)>()(
-      ptr.ref.lpVtbl,
-      retValuePtr,
-    );
+        .asFunction<
+          int Function(Pointer, Pointer<COMObject> value)
+        >()(ptr.ref.lpVtbl, retValuePtr);
 
     if (FAILED(hr)) {
       free(retValuePtr);
@@ -197,10 +193,9 @@ class ISpellChecker extends IUnknown {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> value)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<Utf16>> value)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -224,10 +219,9 @@ class ISpellChecker extends IUnknown {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> value)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<Utf16>> value)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -262,15 +256,16 @@ class ISpellChecker extends IUnknown {
         )
       >()(ptr.ref.lpVtbl, handler, eventCookie);
 
-  int remove_SpellCheckerChanged(int eventCookie) => (ptr.ref.vtable + 14)
-      .cast<
-        Pointer<NativeFunction<Int32 Function(Pointer, Uint32 eventCookie)>>
-      >()
-      .value
-      .asFunction<int Function(Pointer, int eventCookie)>()(
-    ptr.ref.lpVtbl,
-    eventCookie,
-  );
+  int remove_SpellCheckerChanged(int eventCookie) =>
+      (ptr.ref.vtable + 14)
+          .cast<
+            Pointer<NativeFunction<Int32 Function(Pointer, Uint32 eventCookie)>>
+          >()
+          .value
+          .asFunction<int Function(Pointer, int eventCookie)>()(
+        ptr.ref.lpVtbl,
+        eventCookie,
+      );
 
   int getOptionDescription(
     Pointer<Utf16> optionId,

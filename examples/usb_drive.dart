@@ -38,10 +38,9 @@ Future<void> listenForUsbDriveChanges(SendPort mainSendPort) async {
             final driveInfo = getDriveInformation(driveLetter);
             // Send the event information back to the main isolate.
             mainSendPort.send({
-              'event':
-                  wParam == DBT_DEVICEARRIVAL
-                      ? 'USB drive connected'
-                      : 'USB drive disconnected',
+              'event': wParam == DBT_DEVICEARRIVAL
+                  ? 'USB drive connected'
+                  : 'USB drive disconnected',
               'drive': driveLetter,
               'info': driveInfo,
             });

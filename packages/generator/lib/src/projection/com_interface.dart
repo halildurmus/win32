@@ -68,10 +68,9 @@ class ComInterfaceProjection {
     stripLeadingUnderscores(safeIdentifierForTypeDef(typeDef)),
   );
 
-  String get inheritsFrom =>
-      typeDef.interfaces.isNotEmpty
-          ? safeIdentifierForTypeDef(typeDef.interfaces.first)
-          : '';
+  String get inheritsFrom => typeDef.interfaces.isNotEmpty
+      ? safeIdentifierForTypeDef(typeDef.interfaces.first)
+      : '';
 
   String getImportForTypeDef(TypeDef typeDef) {
     if (typeDef.isDelegate) {
@@ -126,7 +125,8 @@ class ComInterfaceProjection {
 
   late final pathToSrc = '../' * (typeDef.name.split('.').length - 3);
 
-  String get header => '''
+  String get header =>
+      '''
     // ${shortName.toLowerCase()}.dart
 
     // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
@@ -141,8 +141,9 @@ class ComInterfaceProjection {
   // COM interfaces can only inherit from one parent
   Set<String> get interfaceImports {
     if (typeDef.interfaces.isNotEmpty) {
-      final interfaceName =
-          lastComponent(typeDef.interfaces.first.name).toLowerCase();
+      final interfaceName = lastComponent(
+        typeDef.interfaces.first.name,
+      ).toLowerCase();
       if (interfaceName.isNotEmpty) {
         return {'$interfaceName.dart', 'iunknown.dart'};
       }
@@ -172,12 +173,14 @@ class ComInterfaceProjection {
     ).join('\n');
   }
 
-  String get guidConstants => '''
+  String get guidConstants =>
+      '''
     /// @nodoc
     const IID_$shortName = '${typeDef.guid}';
   ''';
 
-  String get fromCOMObjectHelper => '''
+  String get fromCOMObjectHelper =>
+      '''
   factory $shortName.from(IUnknown interface) =>
       $shortName(interface.toInterface(IID_$shortName));
   ''';
@@ -196,10 +199,9 @@ class ComInterfaceProjection {
   @override
   String toString() {
     final extendsClause = inheritsFrom.isEmpty ? '' : 'extends $inheritsFrom';
-    final constructor =
-        inheritsFrom.isEmpty
-            ? 'Pointer<COMObject> ptr;\n\n$shortName(this.ptr);'
-            : '$shortName(super.ptr);';
+    final constructor = inheritsFrom.isEmpty
+        ? 'Pointer<COMObject> ptr;\n\n$shortName(this.ptr);'
+        : '$shortName(super.ptr);';
 
     return '''
       $header

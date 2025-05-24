@@ -51,11 +51,10 @@ class BSTR {
   factory BSTR.fromString(String string) {
     // Allocate memory for a BSTR of sufficient length to hold the string,
     // without initializing it.
-    final bstr =
-        SysAllocStringByteLen(
-          nullptr,
-          sizeOf<WCHAR>() * string.length,
-        ).cast<WCHAR>();
+    final bstr = SysAllocStringByteLen(
+      nullptr,
+      sizeOf<WCHAR>() * string.length,
+    ).cast<WCHAR>();
 
     // Copy each character of the string into the BSTR.
     for (var i = 0; i < string.length; i++) {

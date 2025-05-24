@@ -44,14 +44,13 @@ void winMain(int hInstance, List<String> args, int nShowCmd) {
     exceptionalReturn: 0,
   );
 
-  final wc =
-      calloc<WNDCLASS>()
-        ..ref.style = CS_HREDRAW | CS_VREDRAW
-        ..ref.lpfnWndProc = lpfnWndProc.nativeFunction
-        ..ref.hInstance = hInstance
-        ..ref.lpszClassName = className
-        ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
-        ..ref.hbrBackground = GetStockObject(WHITE_BRUSH);
+  final wc = calloc<WNDCLASS>()
+    ..ref.style = CS_HREDRAW | CS_VREDRAW
+    ..ref.lpfnWndProc = lpfnWndProc.nativeFunction
+    ..ref.hInstance = hInstance
+    ..ref.lpszClassName = className
+    ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
+    ..ref.hbrBackground = GetStockObject(WHITE_BRUSH);
   RegisterClass(wc);
 
   // Create the window.

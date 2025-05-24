@@ -47,15 +47,15 @@ enum ServiceStatus {
   /// Throws an [ArgumentError] if the value does not correspond to a valid
   /// value.
   static ServiceStatus fromValue(int value) => switch (value) {
-        SERVICE_STOPPED => ServiceStatus.stopped,
-        SERVICE_START_PENDING => ServiceStatus.startPending,
-        SERVICE_STOP_PENDING => ServiceStatus.stopPending,
-        SERVICE_RUNNING => ServiceStatus.running,
-        SERVICE_CONTINUE_PENDING => ServiceStatus.continuePending,
-        SERVICE_PAUSE_PENDING => ServiceStatus.pausePending,
-        SERVICE_PAUSED => ServiceStatus.paused,
-        _ => throw ArgumentError('Invalid value: $value')
-      };
+    SERVICE_STOPPED => ServiceStatus.stopped,
+    SERVICE_START_PENDING => ServiceStatus.startPending,
+    SERVICE_STOP_PENDING => ServiceStatus.stopPending,
+    SERVICE_RUNNING => ServiceStatus.running,
+    SERVICE_CONTINUE_PENDING => ServiceStatus.continuePending,
+    SERVICE_PAUSE_PENDING => ServiceStatus.pausePending,
+    SERVICE_PAUSED => ServiceStatus.paused,
+    _ => throw ArgumentError('Invalid value: $value'),
+  };
 }
 
 /// The result of an attempt to stop a service.

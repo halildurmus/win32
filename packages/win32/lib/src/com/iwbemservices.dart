@@ -44,51 +44,53 @@ class IWbemServices extends IUnknown {
     Pointer<COMObject> pCtx,
     Pointer<Pointer<COMObject>> ppWorkingNamespace,
     Pointer<Pointer<COMObject>> ppResult,
-  ) => (ptr.ref.vtable + 3)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  ) =>
+      (ptr.ref.vtable + 3)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<Utf16> strNamespace,
+                  Int32 lFlags,
+                  Pointer<COMObject> pCtx,
+                  Pointer<Pointer<COMObject>> ppWorkingNamespace,
+                  Pointer<Pointer<COMObject>> ppResult,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
               Pointer<Utf16> strNamespace,
-              Int32 lFlags,
+              int lFlags,
               Pointer<COMObject> pCtx,
               Pointer<Pointer<COMObject>> ppWorkingNamespace,
               Pointer<Pointer<COMObject>> ppResult,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(
-          Pointer,
-          Pointer<Utf16> strNamespace,
-          int lFlags,
-          Pointer<COMObject> pCtx,
-          Pointer<Pointer<COMObject>> ppWorkingNamespace,
-          Pointer<Pointer<COMObject>> ppResult,
-        )
-      >()(
-    ptr.ref.lpVtbl,
-    strNamespace,
-    lFlags,
-    pCtx,
-    ppWorkingNamespace,
-    ppResult,
-  );
+          >()(
+        ptr.ref.lpVtbl,
+        strNamespace,
+        lFlags,
+        pCtx,
+        ppWorkingNamespace,
+        ppResult,
+      );
 
-  int cancelAsyncCall(Pointer<COMObject> pSink) => (ptr.ref.vtable + 4)
-      .cast<
-        Pointer<
-          NativeFunction<Int32 Function(Pointer, Pointer<COMObject> pSink)>
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<COMObject> pSink)>()(
-    ptr.ref.lpVtbl,
-    pSink,
-  );
+  int cancelAsyncCall(Pointer<COMObject> pSink) =>
+      (ptr.ref.vtable + 4)
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<COMObject> pSink)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<COMObject> pSink)>()(
+        ptr.ref.lpVtbl,
+        pSink,
+      );
 
   int queryObjectSink(
     int lFlags,
@@ -576,39 +578,40 @@ class IWbemServices extends IUnknown {
     int lFlags,
     Pointer<COMObject> pCtx,
     Pointer<COMObject> pResponseHandler,
-  ) => (ptr.ref.vtable + 21)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  ) =>
+      (ptr.ref.vtable + 21)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<Utf16> strQueryLanguage,
+                  Pointer<Utf16> strQuery,
+                  Int32 lFlags,
+                  Pointer<COMObject> pCtx,
+                  Pointer<COMObject> pResponseHandler,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
               Pointer<Utf16> strQueryLanguage,
               Pointer<Utf16> strQuery,
-              Int32 lFlags,
+              int lFlags,
               Pointer<COMObject> pCtx,
               Pointer<COMObject> pResponseHandler,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(
-          Pointer,
-          Pointer<Utf16> strQueryLanguage,
-          Pointer<Utf16> strQuery,
-          int lFlags,
-          Pointer<COMObject> pCtx,
-          Pointer<COMObject> pResponseHandler,
-        )
-      >()(
-    ptr.ref.lpVtbl,
-    strQueryLanguage,
-    strQuery,
-    lFlags,
-    pCtx,
-    pResponseHandler,
-  );
+          >()(
+        ptr.ref.lpVtbl,
+        strQueryLanguage,
+        strQuery,
+        lFlags,
+        pCtx,
+        pResponseHandler,
+      );
 
   int execNotificationQuery(
     Pointer<Utf16> strQueryLanguage,
@@ -649,39 +652,40 @@ class IWbemServices extends IUnknown {
     int lFlags,
     Pointer<COMObject> pCtx,
     Pointer<COMObject> pResponseHandler,
-  ) => (ptr.ref.vtable + 23)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  ) =>
+      (ptr.ref.vtable + 23)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<Utf16> strQueryLanguage,
+                  Pointer<Utf16> strQuery,
+                  Int32 lFlags,
+                  Pointer<COMObject> pCtx,
+                  Pointer<COMObject> pResponseHandler,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
               Pointer<Utf16> strQueryLanguage,
               Pointer<Utf16> strQuery,
-              Int32 lFlags,
+              int lFlags,
               Pointer<COMObject> pCtx,
               Pointer<COMObject> pResponseHandler,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(
-          Pointer,
-          Pointer<Utf16> strQueryLanguage,
-          Pointer<Utf16> strQuery,
-          int lFlags,
-          Pointer<COMObject> pCtx,
-          Pointer<COMObject> pResponseHandler,
-        )
-      >()(
-    ptr.ref.lpVtbl,
-    strQueryLanguage,
-    strQuery,
-    lFlags,
-    pCtx,
-    pResponseHandler,
-  );
+          >()(
+        ptr.ref.lpVtbl,
+        strQueryLanguage,
+        strQuery,
+        lFlags,
+        pCtx,
+        pResponseHandler,
+      );
 
   int execMethod(
     Pointer<Utf16> strObjectPath,
@@ -691,45 +695,46 @@ class IWbemServices extends IUnknown {
     Pointer<COMObject> pInParams,
     Pointer<Pointer<COMObject>> ppOutParams,
     Pointer<Pointer<COMObject>> ppCallResult,
-  ) => (ptr.ref.vtable + 24)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  ) =>
+      (ptr.ref.vtable + 24)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<Utf16> strObjectPath,
+                  Pointer<Utf16> strMethodName,
+                  Int32 lFlags,
+                  Pointer<COMObject> pCtx,
+                  Pointer<COMObject> pInParams,
+                  Pointer<Pointer<COMObject>> ppOutParams,
+                  Pointer<Pointer<COMObject>> ppCallResult,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
               Pointer<Utf16> strObjectPath,
               Pointer<Utf16> strMethodName,
-              Int32 lFlags,
+              int lFlags,
               Pointer<COMObject> pCtx,
               Pointer<COMObject> pInParams,
               Pointer<Pointer<COMObject>> ppOutParams,
               Pointer<Pointer<COMObject>> ppCallResult,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(
-          Pointer,
-          Pointer<Utf16> strObjectPath,
-          Pointer<Utf16> strMethodName,
-          int lFlags,
-          Pointer<COMObject> pCtx,
-          Pointer<COMObject> pInParams,
-          Pointer<Pointer<COMObject>> ppOutParams,
-          Pointer<Pointer<COMObject>> ppCallResult,
-        )
-      >()(
-    ptr.ref.lpVtbl,
-    strObjectPath,
-    strMethodName,
-    lFlags,
-    pCtx,
-    pInParams,
-    ppOutParams,
-    ppCallResult,
-  );
+          >()(
+        ptr.ref.lpVtbl,
+        strObjectPath,
+        strMethodName,
+        lFlags,
+        pCtx,
+        pInParams,
+        ppOutParams,
+        ppCallResult,
+      );
 
   int execMethodAsync(
     Pointer<Utf16> strObjectPath,
@@ -738,40 +743,41 @@ class IWbemServices extends IUnknown {
     Pointer<COMObject> pCtx,
     Pointer<COMObject> pInParams,
     Pointer<COMObject> pResponseHandler,
-  ) => (ptr.ref.vtable + 25)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  ) =>
+      (ptr.ref.vtable + 25)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<Utf16> strObjectPath,
+                  Pointer<Utf16> strMethodName,
+                  Int32 lFlags,
+                  Pointer<COMObject> pCtx,
+                  Pointer<COMObject> pInParams,
+                  Pointer<COMObject> pResponseHandler,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
               Pointer<Utf16> strObjectPath,
               Pointer<Utf16> strMethodName,
-              Int32 lFlags,
+              int lFlags,
               Pointer<COMObject> pCtx,
               Pointer<COMObject> pInParams,
               Pointer<COMObject> pResponseHandler,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(
-          Pointer,
-          Pointer<Utf16> strObjectPath,
-          Pointer<Utf16> strMethodName,
-          int lFlags,
-          Pointer<COMObject> pCtx,
-          Pointer<COMObject> pInParams,
-          Pointer<COMObject> pResponseHandler,
-        )
-      >()(
-    ptr.ref.lpVtbl,
-    strObjectPath,
-    strMethodName,
-    lFlags,
-    pCtx,
-    pInParams,
-    pResponseHandler,
-  );
+          >()(
+        ptr.ref.lpVtbl,
+        strObjectPath,
+        strMethodName,
+        lFlags,
+        pCtx,
+        pInParams,
+        pResponseHandler,
+      );
 }

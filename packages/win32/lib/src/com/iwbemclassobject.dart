@@ -119,10 +119,9 @@ class IWbemClassObject extends IUnknown {
         Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Utf16> wszName)>>
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Utf16> wszName)>()(
-    ptr.ref.lpVtbl,
-    wszName,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Utf16> wszName)
+      >()(ptr.ref.lpVtbl, wszName);
 
   int getNames(
     Pointer<Utf16> wszQualifierName,
@@ -154,15 +153,16 @@ class IWbemClassObject extends IUnknown {
         )
       >()(ptr.ref.lpVtbl, wszQualifierName, lFlags, pQualifierVal, pNames);
 
-  int beginEnumeration(int lEnumFlags) => (ptr.ref.vtable + 8)
-      .cast<
-        Pointer<NativeFunction<Int32 Function(Pointer, Int32 lEnumFlags)>>
-      >()
-      .value
-      .asFunction<int Function(Pointer, int lEnumFlags)>()(
-    ptr.ref.lpVtbl,
-    lEnumFlags,
-  );
+  int beginEnumeration(int lEnumFlags) =>
+      (ptr.ref.vtable + 8)
+          .cast<
+            Pointer<NativeFunction<Int32 Function(Pointer, Int32 lEnumFlags)>>
+          >()
+          .value
+          .asFunction<int Function(Pointer, int lEnumFlags)>()(
+        ptr.ref.lpVtbl,
+        lEnumFlags,
+      );
 
   int next(
     int lFlags,
@@ -235,10 +235,9 @@ class IWbemClassObject extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> ppCopy)>()(
-    ptr.ref.lpVtbl,
-    ppCopy,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Pointer<COMObject>> ppCopy)
+      >()(ptr.ref.lpVtbl, ppCopy);
 
   int getObjectText(int lFlags, Pointer<Pointer<Utf16>> pstrObjectText) =>
       (ptr.ref.vtable + 13)
@@ -306,19 +305,23 @@ class IWbemClassObject extends IUnknown {
             )
           >()(ptr.ref.lpVtbl, lFlags, ppNewInstance);
 
-  int compareTo(int lFlags, Pointer<COMObject> pCompareTo) => (ptr.ref.vtable +
-          16)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Int32 lFlags, Pointer<COMObject> pCompareTo)
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(Pointer, int lFlags, Pointer<COMObject> pCompareTo)
-      >()(ptr.ref.lpVtbl, lFlags, pCompareTo);
+  int compareTo(int lFlags, Pointer<COMObject> pCompareTo) =>
+      (ptr.ref.vtable + 16)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Int32 lFlags,
+                  Pointer<COMObject> pCompareTo,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, int lFlags, Pointer<COMObject> pCompareTo)
+          >()(ptr.ref.lpVtbl, lFlags, pCompareTo);
 
   int getPropertyOrigin(
     Pointer<Utf16> wszName,
@@ -351,10 +354,9 @@ class IWbemClassObject extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Utf16> strAncestor)>()(
-    ptr.ref.lpVtbl,
-    strAncestor,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Utf16> strAncestor)
+      >()(ptr.ref.lpVtbl, strAncestor);
 
   int getMethod(
     Pointer<Utf16> wszName,
@@ -421,20 +423,20 @@ class IWbemClassObject extends IUnknown {
         Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Utf16> wszName)>>
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Utf16> wszName)>()(
-    ptr.ref.lpVtbl,
-    wszName,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Utf16> wszName)
+      >()(ptr.ref.lpVtbl, wszName);
 
-  int beginMethodEnumeration(int lEnumFlags) => (ptr.ref.vtable + 22)
-      .cast<
-        Pointer<NativeFunction<Int32 Function(Pointer, Int32 lEnumFlags)>>
-      >()
-      .value
-      .asFunction<int Function(Pointer, int lEnumFlags)>()(
-    ptr.ref.lpVtbl,
-    lEnumFlags,
-  );
+  int beginMethodEnumeration(int lEnumFlags) =>
+      (ptr.ref.vtable + 22)
+          .cast<
+            Pointer<NativeFunction<Int32 Function(Pointer, Int32 lEnumFlags)>>
+          >()
+          .value
+          .asFunction<int Function(Pointer, int lEnumFlags)>()(
+        ptr.ref.lpVtbl,
+        lEnumFlags,
+      );
 
   int nextMethod(
     int lFlags,

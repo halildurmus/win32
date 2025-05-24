@@ -7,8 +7,8 @@ import 'package:win32/win32.dart';
 
 void main() {
   final devicePaths = using((Arena arena) {
-    final interfaceGuid =
-        arena<GUID>()..ref.setGUID(GUID_BLUETOOTHLE_DEVICE_INTERFACE);
+    final interfaceGuid = arena<GUID>()
+      ..ref.setGUID(GUID_BLUETOOTHLE_DEVICE_INTERFACE);
 
     final hDevInfo = SetupDiGetClassDevs(
       interfaceGuid,
@@ -55,9 +55,8 @@ Iterable<String> devicesByInterface(
   Pointer<GUID> interfaceGuid,
 ) sync* {
   final requiredSizePtr = calloc<DWORD>();
-  final deviceInterfaceDataPtr =
-      calloc<SP_DEVICE_INTERFACE_DATA>()
-        ..ref.cbSize = sizeOf<SP_DEVICE_INTERFACE_DATA>();
+  final deviceInterfaceDataPtr = calloc<SP_DEVICE_INTERFACE_DATA>()
+    ..ref.cbSize = sizeOf<SP_DEVICE_INTERFACE_DATA>();
 
   try {
     for (

@@ -26,8 +26,8 @@ void main() {
       throw Exception('VerQueryValue failed.');
     }
 
-    final fixedFileVersionInfo =
-        lpFixedFileVersionInfo.value.cast<VS_FIXEDFILEINFO>();
+    final fixedFileVersionInfo = lpFixedFileVersionInfo.value
+        .cast<VS_FIXEDFILEINFO>();
 
     print(
       'Version of shell32.dll: '

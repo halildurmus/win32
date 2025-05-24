@@ -82,8 +82,7 @@ class IEnumVARIANT extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> ppEnum)>()(
-    ptr.ref.lpVtbl,
-    ppEnum,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Pointer<COMObject>> ppEnum)
+      >()(ptr.ref.lpVtbl, ppEnum);
 }

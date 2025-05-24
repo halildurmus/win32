@@ -90,16 +90,15 @@ void main() {
 
   final ScreenBufferInfo = calloc<CONSOLE_SCREEN_BUFFER_INFO>();
   GetConsoleScreenBufferInfo(hOut, ScreenBufferInfo);
-  final size =
-      Coord()
-        ..X =
-            ScreenBufferInfo.ref.srWindow.Right -
-            ScreenBufferInfo.ref.srWindow.Left +
-            1
-        ..Y =
-            ScreenBufferInfo.ref.srWindow.Bottom -
-            ScreenBufferInfo.ref.srWindow.Top +
-            1;
+  final size = Coord()
+    ..X =
+        ScreenBufferInfo.ref.srWindow.Right -
+        ScreenBufferInfo.ref.srWindow.Left +
+        1
+    ..Y =
+        ScreenBufferInfo.ref.srWindow.Bottom -
+        ScreenBufferInfo.ref.srWindow.Top +
+        1;
   free(ScreenBufferInfo);
 
   // Enter the alternate buffer

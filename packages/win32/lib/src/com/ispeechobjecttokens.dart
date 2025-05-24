@@ -42,17 +42,18 @@ class ISpeechObjectTokens extends IDispatch {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = (ptr.ref.vtable + 7)
-          .cast<
-            Pointer<
-              NativeFunction<Int32 Function(Pointer, Pointer<Int32> Count)>
-            >
-          >()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Int32> Count)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+      final hr =
+          (ptr.ref.vtable + 7)
+              .cast<
+                Pointer<
+                  NativeFunction<Int32 Function(Pointer, Pointer<Int32> Count)>
+                >
+              >()
+              .value
+              .asFunction<int Function(Pointer, Pointer<Int32> Count)>()(
+            ptr.ref.lpVtbl,
+            retValuePtr,
+          );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -92,10 +93,9 @@ class ISpeechObjectTokens extends IDispatch {
           >
         >()
         .value
-        .asFunction<int Function(Pointer, Pointer<COMObject> ppEnumVARIANT)>()(
-      ptr.ref.lpVtbl,
-      retValuePtr,
-    );
+        .asFunction<
+          int Function(Pointer, Pointer<COMObject> ppEnumVARIANT)
+        >()(ptr.ref.lpVtbl, retValuePtr);
 
     if (FAILED(hr)) {
       free(retValuePtr);

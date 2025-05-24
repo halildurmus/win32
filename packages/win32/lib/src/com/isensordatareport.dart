@@ -38,19 +38,20 @@ class ISensorDataReport extends IUnknown {
   factory ISensorDataReport.from(IUnknown interface) =>
       ISensorDataReport(interface.toInterface(IID_ISensorDataReport));
 
-  int getTimestamp(Pointer<SYSTEMTIME> pTimeStamp) => (ptr.ref.vtable + 3)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Pointer<SYSTEMTIME> pTimeStamp)
-          >
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<SYSTEMTIME> pTimeStamp)>()(
-    ptr.ref.lpVtbl,
-    pTimeStamp,
-  );
+  int getTimestamp(Pointer<SYSTEMTIME> pTimeStamp) =>
+      (ptr.ref.vtable + 3)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<SYSTEMTIME> pTimeStamp)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<SYSTEMTIME> pTimeStamp)>()(
+        ptr.ref.lpVtbl,
+        pTimeStamp,
+      );
 
   int getSensorValue(Pointer<PROPERTYKEY> pKey, Pointer<PROPVARIANT> pValue) =>
       (ptr.ref.vtable + 4)

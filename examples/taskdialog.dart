@@ -28,13 +28,14 @@ void showSimpleTaskDialog() {
     final mainInstruction = 'Please read this important message'.toNativeUtf16(
       allocator: arena,
     );
-    final content = 'Task dialogs are great for sharing a longer string of '
-            'explanatory content, where you need a user to read an instruction '
-            'before making a decision. Of course, you cannot guarantee that '
-            'the user will actually read the text, so it\'s important that you '
-            'also provide an undo function for when the wrong choice is '
-            'selected.'
-        .toNativeUtf16(allocator: arena);
+    final content =
+        'Task dialogs are great for sharing a longer string of '
+                'explanatory content, where you need a user to read an instruction '
+                'before making a decision. Of course, you cannot guarantee that '
+                'the user will actually read the text, so it\'s important that you '
+                'also provide an undo function for when the wrong choice is '
+                'selected.'
+            .toNativeUtf16(allocator: arena);
     final buttonSelected = arena<Int32>();
 
     try {

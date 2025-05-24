@@ -89,10 +89,9 @@ bool isWindowsOnArm(int hProcess) {
 void main() {
   final hProcess = GetCurrentProcess();
 
-  final kernel32 =
-      isWindowsOnArm(hProcess)
-          ? r'c:\windows\SysArm32\kernel32.dll'
-          : r'c:\windows\system32\kernel32.dll';
+  final kernel32 = isWindowsOnArm(hProcess)
+      ? r'c:\windows\SysArm32\kernel32.dll'
+      : r'c:\windows\system32\kernel32.dll';
 
   getExports(
     hProcess,

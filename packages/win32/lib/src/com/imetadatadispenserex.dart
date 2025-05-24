@@ -148,45 +148,46 @@ class IMetaDataDispenserEx extends IMetaDataDispenser {
     Pointer<Utf16> szName,
     int cchName,
     Pointer<Uint32> pcName,
-  ) => (ptr.ref.vtable + 10)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  ) =>
+      (ptr.ref.vtable + 10)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<Utf16> szAppBase,
+                  Pointer<Utf16> szPrivateBin,
+                  Pointer<Utf16> szGlobalBin,
+                  Pointer<Utf16> szAssemblyName,
+                  Pointer<Utf16> szName,
+                  Uint32 cchName,
+                  Pointer<Uint32> pcName,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
               Pointer<Utf16> szAppBase,
               Pointer<Utf16> szPrivateBin,
               Pointer<Utf16> szGlobalBin,
               Pointer<Utf16> szAssemblyName,
               Pointer<Utf16> szName,
-              Uint32 cchName,
+              int cchName,
               Pointer<Uint32> pcName,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(
-          Pointer,
-          Pointer<Utf16> szAppBase,
-          Pointer<Utf16> szPrivateBin,
-          Pointer<Utf16> szGlobalBin,
-          Pointer<Utf16> szAssemblyName,
-          Pointer<Utf16> szName,
-          int cchName,
-          Pointer<Uint32> pcName,
-        )
-      >()(
-    ptr.ref.lpVtbl,
-    szAppBase,
-    szPrivateBin,
-    szGlobalBin,
-    szAssemblyName,
-    szName,
-    cchName,
-    pcName,
-  );
+          >()(
+        ptr.ref.lpVtbl,
+        szAppBase,
+        szPrivateBin,
+        szGlobalBin,
+        szAssemblyName,
+        szName,
+        cchName,
+        pcName,
+      );
 
   int findAssemblyModule(
     Pointer<Utf16> szAppBase,
@@ -197,11 +198,28 @@ class IMetaDataDispenserEx extends IMetaDataDispenser {
     Pointer<Utf16> szName,
     int cchName,
     Pointer<Uint32> pcName,
-  ) => (ptr.ref.vtable + 11)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  ) =>
+      (ptr.ref.vtable + 11)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<Utf16> szAppBase,
+                  Pointer<Utf16> szPrivateBin,
+                  Pointer<Utf16> szGlobalBin,
+                  Pointer<Utf16> szAssemblyName,
+                  Pointer<Utf16> szModuleName,
+                  Pointer<Utf16> szName,
+                  Uint32 cchName,
+                  Pointer<Uint32> pcName,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
               Pointer<Utf16> szAppBase,
               Pointer<Utf16> szPrivateBin,
@@ -209,34 +227,18 @@ class IMetaDataDispenserEx extends IMetaDataDispenser {
               Pointer<Utf16> szAssemblyName,
               Pointer<Utf16> szModuleName,
               Pointer<Utf16> szName,
-              Uint32 cchName,
+              int cchName,
               Pointer<Uint32> pcName,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(
-          Pointer,
-          Pointer<Utf16> szAppBase,
-          Pointer<Utf16> szPrivateBin,
-          Pointer<Utf16> szGlobalBin,
-          Pointer<Utf16> szAssemblyName,
-          Pointer<Utf16> szModuleName,
-          Pointer<Utf16> szName,
-          int cchName,
-          Pointer<Uint32> pcName,
-        )
-      >()(
-    ptr.ref.lpVtbl,
-    szAppBase,
-    szPrivateBin,
-    szGlobalBin,
-    szAssemblyName,
-    szModuleName,
-    szName,
-    cchName,
-    pcName,
-  );
+          >()(
+        ptr.ref.lpVtbl,
+        szAppBase,
+        szPrivateBin,
+        szGlobalBin,
+        szAssemblyName,
+        szModuleName,
+        szName,
+        cchName,
+        pcName,
+      );
 }

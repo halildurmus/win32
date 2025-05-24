@@ -63,10 +63,9 @@ class INetworkConnection extends IDispatch {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Int16> pbIsConnected)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Int16> pbIsConnected)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -90,10 +89,9 @@ class INetworkConnection extends IDispatch {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Int16> pbIsConnected)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Int16> pbIsConnected)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -111,10 +109,9 @@ class INetworkConnection extends IDispatch {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Int32> pConnectivity)>()(
-    ptr.ref.lpVtbl,
-    pConnectivity,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Int32> pConnectivity)
+      >()(ptr.ref.lpVtbl, pConnectivity);
 
   int getConnectionId(Pointer<GUID> pgdConnectionId) => (ptr.ref.vtable + 11)
       .cast<
@@ -123,10 +120,9 @@ class INetworkConnection extends IDispatch {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<GUID> pgdConnectionId)>()(
-    ptr.ref.lpVtbl,
-    pgdConnectionId,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<GUID> pgdConnectionId)
+      >()(ptr.ref.lpVtbl, pgdConnectionId);
 
   int getAdapterId(Pointer<GUID> pgdAdapterId) => (ptr.ref.vtable + 12)
       .cast<
@@ -135,10 +131,9 @@ class INetworkConnection extends IDispatch {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<GUID> pgdAdapterId)>()(
-    ptr.ref.lpVtbl,
-    pgdAdapterId,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<GUID> pgdAdapterId)
+      >()(ptr.ref.lpVtbl, pgdAdapterId);
 
   int getDomainType(Pointer<Int32> pDomainType) => (ptr.ref.vtable + 13)
       .cast<
@@ -147,8 +142,7 @@ class INetworkConnection extends IDispatch {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Int32> pDomainType)>()(
-    ptr.ref.lpVtbl,
-    pDomainType,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Int32> pDomainType)
+      >()(ptr.ref.lpVtbl, pDomainType);
 }

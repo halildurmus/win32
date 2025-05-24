@@ -13,8 +13,9 @@ void main() {
   });
 
   test('BOOL types are projected to int', () {
-    final typeDef =
-        scope.findTypeDef('Windows.Win32.Graphics.Dwm.DWM_BLURBEHIND')!;
+    final typeDef = scope.findTypeDef(
+      'Windows.Win32.Graphics.Dwm.DWM_BLURBEHIND',
+    )!;
 
     // BOOL fEnable;
     final fEnable = typeDef.fields[1];
@@ -25,10 +26,9 @@ void main() {
   });
 
   test('Structs are projected appropriately', () {
-    final typeDef =
-        scope.findTypeDef(
-          'Windows.Win32.Media.Multimedia.YAMAHA_ADPCMWAVEFORMAT',
-        )!;
+    final typeDef = scope.findTypeDef(
+      'Windows.Win32.Media.Multimedia.YAMAHA_ADPCMWAVEFORMAT',
+    )!;
 
     // BOOL fEnable;
     final fEnable = typeDef.fields.first;

@@ -14,9 +14,10 @@ void printCallback([
 
 void printFunction([String name = 'BroadcastSystemMessageW']) {
   final scopes = MetadataStore.scopeCache.values;
-  for (final typeDef in scopes
-      .expand((scope) => scope.typeDefs)
-      .where((typeDef) => typeDef.name.endsWith('Apis'))) {
+  for (final typeDef
+      in scopes
+          .expand((scope) => scope.typeDefs)
+          .where((typeDef) => typeDef.name.endsWith('Apis'))) {
     final method = typeDef.findMethod(name);
     if (method != null) {
       final functionProjection = FunctionProjection(method, 'user32');

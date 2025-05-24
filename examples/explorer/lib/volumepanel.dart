@@ -32,8 +32,8 @@ class VolumePanelState extends State<VolumePanel> {
           Expanded(
             child: ListView.builder(
               itemCount: _volumes.length,
-              itemBuilder:
-                  (context, position) => VolumeCard(volume: _volumes[position]),
+              itemBuilder: (context, position) =>
+                  VolumeCard(volume: _volumes[position]),
             ),
           ),
         ],

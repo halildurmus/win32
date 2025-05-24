@@ -33,13 +33,14 @@ int RoActivateInstance(
   Pointer<Pointer<COMObject>> instance,
 ) => _RoActivateInstance(activatableClassId, instance);
 
-final _RoActivateInstance = _api_ms_win_core_winrt_l1_1_0.lookupFunction<
-  Int32 Function(
-    IntPtr activatableClassId,
-    Pointer<Pointer<COMObject>> instance,
-  ),
-  int Function(int activatableClassId, Pointer<Pointer<COMObject>> instance)
->('RoActivateInstance');
+final _RoActivateInstance = _api_ms_win_core_winrt_l1_1_0
+    .lookupFunction<
+      Int32 Function(
+        IntPtr activatableClassId,
+        Pointer<Pointer<COMObject>> instance,
+      ),
+      int Function(int activatableClassId, Pointer<Pointer<COMObject>> instance)
+    >('RoActivateInstance');
 
 /// Gets the activation factory for the specified runtime class.
 ///
@@ -57,18 +58,19 @@ int RoGetActivationFactory(
   Pointer<Pointer> factory,
 ) => _RoGetActivationFactory(activatableClassId, iid, factory);
 
-final _RoGetActivationFactory = _api_ms_win_core_winrt_l1_1_0.lookupFunction<
-  Int32 Function(
-    IntPtr activatableClassId,
-    Pointer<GUID> iid,
-    Pointer<Pointer> factory,
-  ),
-  int Function(
-    int activatableClassId,
-    Pointer<GUID> iid,
-    Pointer<Pointer> factory,
-  )
->('RoGetActivationFactory');
+final _RoGetActivationFactory = _api_ms_win_core_winrt_l1_1_0
+    .lookupFunction<
+      Int32 Function(
+        IntPtr activatableClassId,
+        Pointer<GUID> iid,
+        Pointer<Pointer> factory,
+      ),
+      int Function(
+        int activatableClassId,
+        Pointer<GUID> iid,
+        Pointer<Pointer> factory,
+      )
+    >('RoGetActivationFactory');
 
 /// Gets a unique identifier for the current apartment.
 ///
@@ -81,10 +83,11 @@ final _RoGetActivationFactory = _api_ms_win_core_winrt_l1_1_0.lookupFunction<
 int RoGetApartmentIdentifier(Pointer<Uint64> apartmentIdentifier) =>
     _RoGetApartmentIdentifier(apartmentIdentifier);
 
-final _RoGetApartmentIdentifier = _api_ms_win_core_winrt_l1_1_0.lookupFunction<
-  Int32 Function(Pointer<Uint64> apartmentIdentifier),
-  int Function(Pointer<Uint64> apartmentIdentifier)
->('RoGetApartmentIdentifier');
+final _RoGetApartmentIdentifier = _api_ms_win_core_winrt_l1_1_0
+    .lookupFunction<
+      Int32 Function(Pointer<Uint64> apartmentIdentifier),
+      int Function(Pointer<Uint64> apartmentIdentifier)
+    >('RoGetApartmentIdentifier');
 
 /// Initializes the Windows Runtime on the current thread with the specified
 /// concurrency model.

@@ -51,10 +51,9 @@ class IUIAutomationProxyFactoryEntry extends IUnknown {
           >
         >()
         .value
-        .asFunction<int Function(Pointer, Pointer<COMObject> factory)>()(
-      ptr.ref.lpVtbl,
-      retValuePtr,
-    );
+        .asFunction<
+          int Function(Pointer, Pointer<COMObject> factory)
+        >()(ptr.ref.lpVtbl, retValuePtr);
 
     if (FAILED(hr)) {
       free(retValuePtr);
@@ -172,19 +171,20 @@ class IUIAutomationProxyFactoryEntry extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = (ptr.ref.vtable + 8)
-          .cast<
-            Pointer<
-              NativeFunction<
-                Int32 Function(Pointer, Pointer<Int32> adviseEvents)
-              >
-            >
-          >()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Int32> adviseEvents)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+      final hr =
+          (ptr.ref.vtable + 8)
+              .cast<
+                Pointer<
+                  NativeFunction<
+                    Int32 Function(Pointer, Pointer<Int32> adviseEvents)
+                  >
+                >
+              >()
+              .value
+              .asFunction<int Function(Pointer, Pointer<Int32> adviseEvents)>()(
+            ptr.ref.lpVtbl,
+            retValuePtr,
+          );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -203,10 +203,9 @@ class IUIAutomationProxyFactoryEntry extends IUnknown {
           >
         >()
         .value
-        .asFunction<int Function(Pointer, Pointer<Utf16> className)>()(
-      ptr.ref.lpVtbl,
-      value,
-    );
+        .asFunction<
+          int Function(Pointer, Pointer<Utf16> className)
+        >()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
@@ -219,10 +218,9 @@ class IUIAutomationProxyFactoryEntry extends IUnknown {
           >
         >()
         .value
-        .asFunction<int Function(Pointer, Pointer<Utf16> imageName)>()(
-      ptr.ref.lpVtbl,
-      value,
-    );
+        .asFunction<
+          int Function(Pointer, Pointer<Utf16> imageName)
+        >()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
@@ -235,26 +233,26 @@ class IUIAutomationProxyFactoryEntry extends IUnknown {
           >
         >()
         .value
-        .asFunction<int Function(Pointer, int allowSubstringMatch)>()(
-      ptr.ref.lpVtbl,
-      value,
-    );
+        .asFunction<
+          int Function(Pointer, int allowSubstringMatch)
+        >()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
   set canCheckBaseClass(int value) {
-    final hr = (ptr.ref.vtable + 12)
-        .cast<
-          Pointer<
-            NativeFunction<Int32 Function(Pointer, Int32 canCheckBaseClass)>
-          >
-        >()
-        .value
-        .asFunction<int Function(Pointer, int canCheckBaseClass)>()(
-      ptr.ref.lpVtbl,
-      value,
-    );
+    final hr =
+        (ptr.ref.vtable + 12)
+            .cast<
+              Pointer<
+                NativeFunction<Int32 Function(Pointer, Int32 canCheckBaseClass)>
+              >
+            >()
+            .value
+            .asFunction<int Function(Pointer, int canCheckBaseClass)>()(
+          ptr.ref.lpVtbl,
+          value,
+        );
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
@@ -265,10 +263,9 @@ class IUIAutomationProxyFactoryEntry extends IUnknown {
           Pointer<NativeFunction<Int32 Function(Pointer, Int32 adviseEvents)>>
         >()
         .value
-        .asFunction<int Function(Pointer, int adviseEvents)>()(
-      ptr.ref.lpVtbl,
-      value,
-    );
+        .asFunction<
+          int Function(Pointer, int adviseEvents)
+        >()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }

@@ -40,10 +40,9 @@ class IFileDialogCustomize extends IUnknown {
   int enableOpenDropDown(int dwIDCtl) => (ptr.ref.vtable + 3)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint32 dwIDCtl)>>>()
       .value
-      .asFunction<int Function(Pointer, int dwIDCtl)>()(
-    ptr.ref.lpVtbl,
-    dwIDCtl,
-  );
+      .asFunction<
+        int Function(Pointer, int dwIDCtl)
+      >()(ptr.ref.lpVtbl, dwIDCtl);
 
   int addMenu(int dwIDCtl, Pointer<Utf16> pszLabel) => (ptr.ref.vtable + 4)
       .cast<
@@ -75,18 +74,16 @@ class IFileDialogCustomize extends IUnknown {
   int addComboBox(int dwIDCtl) => (ptr.ref.vtable + 6)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint32 dwIDCtl)>>>()
       .value
-      .asFunction<int Function(Pointer, int dwIDCtl)>()(
-    ptr.ref.lpVtbl,
-    dwIDCtl,
-  );
+      .asFunction<
+        int Function(Pointer, int dwIDCtl)
+      >()(ptr.ref.lpVtbl, dwIDCtl);
 
   int addRadioButtonList(int dwIDCtl) => (ptr.ref.vtable + 7)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint32 dwIDCtl)>>>()
       .value
-      .asFunction<int Function(Pointer, int dwIDCtl)>()(
-    ptr.ref.lpVtbl,
-    dwIDCtl,
-  );
+      .asFunction<
+        int Function(Pointer, int dwIDCtl)
+      >()(ptr.ref.lpVtbl, dwIDCtl);
 
   int addCheckButton(int dwIDCtl, Pointer<Utf16> pszLabel, int bChecked) =>
       (ptr.ref.vtable + 8)
@@ -121,19 +118,16 @@ class IFileDialogCustomize extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, int dwIDCtl, Pointer<Utf16> pszText)>()(
-    ptr.ref.lpVtbl,
-    dwIDCtl,
-    pszText,
-  );
+      .asFunction<
+        int Function(Pointer, int dwIDCtl, Pointer<Utf16> pszText)
+      >()(ptr.ref.lpVtbl, dwIDCtl, pszText);
 
   int addSeparator(int dwIDCtl) => (ptr.ref.vtable + 10)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint32 dwIDCtl)>>>()
       .value
-      .asFunction<int Function(Pointer, int dwIDCtl)>()(
-    ptr.ref.lpVtbl,
-    dwIDCtl,
-  );
+      .asFunction<
+        int Function(Pointer, int dwIDCtl)
+      >()(ptr.ref.lpVtbl, dwIDCtl);
 
   int addText(int dwIDCtl, Pointer<Utf16> pszText) => (ptr.ref.vtable + 11)
       .cast<
@@ -144,11 +138,9 @@ class IFileDialogCustomize extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, int dwIDCtl, Pointer<Utf16> pszText)>()(
-    ptr.ref.lpVtbl,
-    dwIDCtl,
-    pszText,
-  );
+      .asFunction<
+        int Function(Pointer, int dwIDCtl, Pointer<Utf16> pszText)
+      >()(ptr.ref.lpVtbl, dwIDCtl, pszText);
 
   int setControlLabel(int dwIDCtl, Pointer<Utf16> pszLabel) =>
       (ptr.ref.vtable + 12)
@@ -185,11 +177,9 @@ class IFileDialogCustomize extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, int dwIDCtl, int dwState)>()(
-    ptr.ref.lpVtbl,
-    dwIDCtl,
-    dwState,
-  );
+      .asFunction<
+        int Function(Pointer, int dwIDCtl, int dwState)
+      >()(ptr.ref.lpVtbl, dwIDCtl, dwState);
 
   int getEditBoxText(int dwIDCtl, Pointer<Pointer<Uint16>> ppszText) =>
       (ptr.ref.vtable + 15)
@@ -213,21 +203,19 @@ class IFileDialogCustomize extends IUnknown {
             )
           >()(ptr.ref.lpVtbl, dwIDCtl, ppszText);
 
-  int setEditBoxText(int dwIDCtl, Pointer<Utf16> pszText) => (ptr.ref.vtable +
-          16)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Uint32 dwIDCtl, Pointer<Utf16> pszText)
-          >
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, int dwIDCtl, Pointer<Utf16> pszText)>()(
-    ptr.ref.lpVtbl,
-    dwIDCtl,
-    pszText,
-  );
+  int setEditBoxText(int dwIDCtl, Pointer<Utf16> pszText) =>
+      (ptr.ref.vtable + 16)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Uint32 dwIDCtl, Pointer<Utf16> pszText)
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, int dwIDCtl, Pointer<Utf16> pszText)
+          >()(ptr.ref.lpVtbl, dwIDCtl, pszText);
 
   int getCheckButtonState(int dwIDCtl, Pointer<Int32> pbChecked) =>
       (ptr.ref.vtable + 17)
@@ -247,20 +235,21 @@ class IFileDialogCustomize extends IUnknown {
             int Function(Pointer, int dwIDCtl, Pointer<Int32> pbChecked)
           >()(ptr.ref.lpVtbl, dwIDCtl, pbChecked);
 
-  int setCheckButtonState(int dwIDCtl, int bChecked) => (ptr.ref.vtable + 18)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Uint32 dwIDCtl, Int32 bChecked)
-          >
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, int dwIDCtl, int bChecked)>()(
-    ptr.ref.lpVtbl,
-    dwIDCtl,
-    bChecked,
-  );
+  int setCheckButtonState(int dwIDCtl, int bChecked) =>
+      (ptr.ref.vtable + 18)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Uint32 dwIDCtl, Int32 bChecked)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, int dwIDCtl, int bChecked)>()(
+        ptr.ref.lpVtbl,
+        dwIDCtl,
+        bChecked,
+      );
 
   int addControlItem(int dwIDCtl, int dwIDItem, Pointer<Utf16> pszLabel) =>
       (ptr.ref.vtable + 19)
@@ -286,28 +275,28 @@ class IFileDialogCustomize extends IUnknown {
             )
           >()(ptr.ref.lpVtbl, dwIDCtl, dwIDItem, pszLabel);
 
-  int removeControlItem(int dwIDCtl, int dwIDItem) => (ptr.ref.vtable + 20)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Uint32 dwIDCtl, Uint32 dwIDItem)
-          >
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, int dwIDCtl, int dwIDItem)>()(
-    ptr.ref.lpVtbl,
-    dwIDCtl,
-    dwIDItem,
-  );
+  int removeControlItem(int dwIDCtl, int dwIDItem) =>
+      (ptr.ref.vtable + 20)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Uint32 dwIDCtl, Uint32 dwIDItem)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, int dwIDCtl, int dwIDItem)>()(
+        ptr.ref.lpVtbl,
+        dwIDCtl,
+        dwIDItem,
+      );
 
   int removeAllControlItems(int dwIDCtl) => (ptr.ref.vtable + 21)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint32 dwIDCtl)>>>()
       .value
-      .asFunction<int Function(Pointer, int dwIDCtl)>()(
-    ptr.ref.lpVtbl,
-    dwIDCtl,
-  );
+      .asFunction<
+        int Function(Pointer, int dwIDCtl)
+      >()(ptr.ref.lpVtbl, dwIDCtl);
 
   int getControlItemState(int dwIDCtl, int dwIDItem, Pointer<Int32> pdwState) =>
       (ptr.ref.vtable + 22)
@@ -370,20 +359,21 @@ class IFileDialogCustomize extends IUnknown {
             int Function(Pointer, int dwIDCtl, Pointer<Uint32> pdwIDItem)
           >()(ptr.ref.lpVtbl, dwIDCtl, pdwIDItem);
 
-  int setSelectedControlItem(int dwIDCtl, int dwIDItem) => (ptr.ref.vtable + 25)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Uint32 dwIDCtl, Uint32 dwIDItem)
-          >
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, int dwIDCtl, int dwIDItem)>()(
-    ptr.ref.lpVtbl,
-    dwIDCtl,
-    dwIDItem,
-  );
+  int setSelectedControlItem(int dwIDCtl, int dwIDItem) =>
+      (ptr.ref.vtable + 25)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Uint32 dwIDCtl, Uint32 dwIDItem)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, int dwIDCtl, int dwIDItem)>()(
+        ptr.ref.lpVtbl,
+        dwIDCtl,
+        dwIDItem,
+      );
 
   int startVisualGroup(int dwIDCtl, Pointer<Utf16> pszLabel) =>
       (ptr.ref.vtable + 26)
@@ -407,10 +397,9 @@ class IFileDialogCustomize extends IUnknown {
   int makeProminent(int dwIDCtl) => (ptr.ref.vtable + 28)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint32 dwIDCtl)>>>()
       .value
-      .asFunction<int Function(Pointer, int dwIDCtl)>()(
-    ptr.ref.lpVtbl,
-    dwIDCtl,
-  );
+      .asFunction<
+        int Function(Pointer, int dwIDCtl)
+      >()(ptr.ref.lpVtbl, dwIDCtl);
 
   int setControlItemText(int dwIDCtl, int dwIDItem, Pointer<Utf16> pszLabel) =>
       (ptr.ref.vtable + 29)

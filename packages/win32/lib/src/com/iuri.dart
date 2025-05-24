@@ -190,10 +190,9 @@ class IUri extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> pbstrDomain)>()(
-    ptr.ref.lpVtbl,
-    pbstrDomain,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Pointer<Utf16>> pbstrDomain)
+      >()(ptr.ref.lpVtbl, pbstrDomain);
 
   int getExtension(Pointer<Pointer<Utf16>> pbstrExtension) =>
       (ptr.ref.vtable + 11)
@@ -232,10 +231,9 @@ class IUri extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> pbstrHost)>()(
-    ptr.ref.lpVtbl,
-    pbstrHost,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Pointer<Utf16>> pbstrHost)
+      >()(ptr.ref.lpVtbl, pbstrHost);
 
   int getPassword(Pointer<Pointer<Utf16>> pbstrPassword) =>
       (ptr.ref.vtable + 14)
@@ -260,10 +258,9 @@ class IUri extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> pbstrPath)>()(
-    ptr.ref.lpVtbl,
-    pbstrPath,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Pointer<Utf16>> pbstrPath)
+      >()(ptr.ref.lpVtbl, pbstrPath);
 
   int getPathAndQuery(Pointer<Pointer<Utf16>> pbstrPathAndQuery) =>
       (ptr.ref.vtable + 16)
@@ -291,10 +288,9 @@ class IUri extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> pbstrQuery)>()(
-    ptr.ref.lpVtbl,
-    pbstrQuery,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Pointer<Utf16>> pbstrQuery)
+      >()(ptr.ref.lpVtbl, pbstrQuery);
 
   int getRawUri(Pointer<Pointer<Utf16>> pbstrRawUri) => (ptr.ref.vtable + 18)
       .cast<
@@ -305,10 +301,9 @@ class IUri extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> pbstrRawUri)>()(
-    ptr.ref.lpVtbl,
-    pbstrRawUri,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Pointer<Utf16>> pbstrRawUri)
+      >()(ptr.ref.lpVtbl, pbstrRawUri);
 
   int getSchemeName(Pointer<Pointer<Utf16>> pbstrSchemeName) =>
       (ptr.ref.vtable + 19)
@@ -359,58 +354,61 @@ class IUri extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Uint32> pdwHostType)>()(
-    ptr.ref.lpVtbl,
-    pdwHostType,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Uint32> pdwHostType)
+      >()(ptr.ref.lpVtbl, pdwHostType);
 
-  int getPort(Pointer<Uint32> pdwPort) => (ptr.ref.vtable + 23)
-      .cast<
-        Pointer<
-          NativeFunction<Int32 Function(Pointer, Pointer<Uint32> pdwPort)>
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Uint32> pdwPort)>()(
-    ptr.ref.lpVtbl,
-    pdwPort,
-  );
+  int getPort(Pointer<Uint32> pdwPort) =>
+      (ptr.ref.vtable + 23)
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Uint32> pdwPort)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Uint32> pdwPort)>()(
+        ptr.ref.lpVtbl,
+        pdwPort,
+      );
 
-  int getScheme(Pointer<Uint32> pdwScheme) => (ptr.ref.vtable + 24)
-      .cast<
-        Pointer<
-          NativeFunction<Int32 Function(Pointer, Pointer<Uint32> pdwScheme)>
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Uint32> pdwScheme)>()(
-    ptr.ref.lpVtbl,
-    pdwScheme,
-  );
+  int getScheme(Pointer<Uint32> pdwScheme) =>
+      (ptr.ref.vtable + 24)
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Uint32> pdwScheme)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Uint32> pdwScheme)>()(
+        ptr.ref.lpVtbl,
+        pdwScheme,
+      );
 
-  int getZone(Pointer<Uint32> pdwZone) => (ptr.ref.vtable + 25)
-      .cast<
-        Pointer<
-          NativeFunction<Int32 Function(Pointer, Pointer<Uint32> pdwZone)>
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Uint32> pdwZone)>()(
-    ptr.ref.lpVtbl,
-    pdwZone,
-  );
+  int getZone(Pointer<Uint32> pdwZone) =>
+      (ptr.ref.vtable + 25)
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Uint32> pdwZone)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Uint32> pdwZone)>()(
+        ptr.ref.lpVtbl,
+        pdwZone,
+      );
 
-  int getProperties(Pointer<Uint32> pdwFlags) => (ptr.ref.vtable + 26)
-      .cast<
-        Pointer<
-          NativeFunction<Int32 Function(Pointer, Pointer<Uint32> pdwFlags)>
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Uint32> pdwFlags)>()(
-    ptr.ref.lpVtbl,
-    pdwFlags,
-  );
+  int getProperties(Pointer<Uint32> pdwFlags) =>
+      (ptr.ref.vtable + 26)
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Uint32> pdwFlags)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Uint32> pdwFlags)>()(
+        ptr.ref.lpVtbl,
+        pdwFlags,
+      );
 
   int isEqual(Pointer<COMObject> pUri, Pointer<Int32> pfEqual) =>
       (ptr.ref.vtable + 27)

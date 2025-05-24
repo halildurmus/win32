@@ -64,10 +64,9 @@ class IMMNotificationClient extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Utf16> pwstrDeviceId)>()(
-    ptr.ref.lpVtbl,
-    pwstrDeviceId,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Utf16> pwstrDeviceId)
+      >()(ptr.ref.lpVtbl, pwstrDeviceId);
 
   int onDeviceRemoved(Pointer<Utf16> pwstrDeviceId) => (ptr.ref.vtable + 5)
       .cast<
@@ -76,10 +75,9 @@ class IMMNotificationClient extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Utf16> pwstrDeviceId)>()(
-    ptr.ref.lpVtbl,
-    pwstrDeviceId,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Utf16> pwstrDeviceId)
+      >()(ptr.ref.lpVtbl, pwstrDeviceId);
 
   int onDefaultDeviceChanged(
     int flow,

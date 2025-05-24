@@ -37,20 +37,21 @@ int GetDpiForMonitor(
   Pointer<Uint32> dpiY,
 ) => _GetDpiForMonitor(hmonitor, dpiType, dpiX, dpiY);
 
-final _GetDpiForMonitor = _api_ms_win_shcore_scaling_l1_1_1.lookupFunction<
-  Int32 Function(
-    IntPtr hmonitor,
-    Int32 dpiType,
-    Pointer<Uint32> dpiX,
-    Pointer<Uint32> dpiY,
-  ),
-  int Function(
-    int hmonitor,
-    int dpiType,
-    Pointer<Uint32> dpiX,
-    Pointer<Uint32> dpiY,
-  )
->('GetDpiForMonitor');
+final _GetDpiForMonitor = _api_ms_win_shcore_scaling_l1_1_1
+    .lookupFunction<
+      Int32 Function(
+        IntPtr hmonitor,
+        Int32 dpiType,
+        Pointer<Uint32> dpiX,
+        Pointer<Uint32> dpiY,
+      ),
+      int Function(
+        int hmonitor,
+        int dpiType,
+        Pointer<Uint32> dpiX,
+        Pointer<Uint32> dpiY,
+      )
+    >('GetDpiForMonitor');
 
 /// Retrieves the dots per inch (dpi) awareness of the specified process.
 ///

@@ -39,19 +39,20 @@ class ISpNotifySource extends IUnknown {
   factory ISpNotifySource.from(IUnknown interface) =>
       ISpNotifySource(interface.toInterface(IID_ISpNotifySource));
 
-  int setNotifySink(Pointer<COMObject> pNotifySink) => (ptr.ref.vtable + 3)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Pointer<COMObject> pNotifySink)
-          >
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<COMObject> pNotifySink)>()(
-    ptr.ref.lpVtbl,
-    pNotifySink,
-  );
+  int setNotifySink(Pointer<COMObject> pNotifySink) =>
+      (ptr.ref.vtable + 3)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<COMObject> pNotifySink)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<COMObject> pNotifySink)>()(
+        ptr.ref.lpVtbl,
+        pNotifySink,
+      );
 
   int setNotifyWindowMessage(int hWnd, int Msg, int wParam, int lParam) =>
       (ptr.ref.vtable + 4)
@@ -137,10 +138,9 @@ class ISpNotifySource extends IUnknown {
         Pointer<NativeFunction<Int32 Function(Pointer, Uint32 dwMilliseconds)>>
       >()
       .value
-      .asFunction<int Function(Pointer, int dwMilliseconds)>()(
-    ptr.ref.lpVtbl,
-    dwMilliseconds,
-  );
+      .asFunction<
+        int Function(Pointer, int dwMilliseconds)
+      >()(ptr.ref.lpVtbl, dwMilliseconds);
 
   int getNotifyEventHandle() => (ptr.ref.vtable + 9)
       .cast<Pointer<NativeFunction<IntPtr Function(Pointer)>>>()

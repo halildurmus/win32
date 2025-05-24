@@ -45,10 +45,9 @@ class IErrorInfo extends IUnknown {
         Pointer<NativeFunction<Int32 Function(Pointer, Pointer<GUID> pGUID)>>
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<GUID> pGUID)>()(
-    ptr.ref.lpVtbl,
-    pGUID,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<GUID> pGUID)
+      >()(ptr.ref.lpVtbl, pGUID);
 
   int getSource(Pointer<Pointer<Utf16>> pBstrSource) => (ptr.ref.vtable + 4)
       .cast<
@@ -59,10 +58,9 @@ class IErrorInfo extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> pBstrSource)>()(
-    ptr.ref.lpVtbl,
-    pBstrSource,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Pointer<Utf16>> pBstrSource)
+      >()(ptr.ref.lpVtbl, pBstrSource);
 
   int getDescription(Pointer<Pointer<Utf16>> pBstrDescription) =>
       (ptr.ref.vtable + 5)
@@ -94,17 +92,18 @@ class IErrorInfo extends IUnknown {
         int Function(Pointer, Pointer<Pointer<Utf16>> pBstrHelpFile)
       >()(ptr.ref.lpVtbl, pBstrHelpFile);
 
-  int getHelpContext(Pointer<Uint32> pdwHelpContext) => (ptr.ref.vtable + 7)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Pointer<Uint32> pdwHelpContext)
-          >
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Uint32> pdwHelpContext)>()(
-    ptr.ref.lpVtbl,
-    pdwHelpContext,
-  );
+  int getHelpContext(Pointer<Uint32> pdwHelpContext) =>
+      (ptr.ref.vtable + 7)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Uint32> pdwHelpContext)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Uint32> pdwHelpContext)>()(
+        ptr.ref.lpVtbl,
+        pdwHelpContext,
+      );
 }

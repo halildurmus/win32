@@ -64,10 +64,9 @@ class ISimpleAudioVolume extends IUnknown {
         Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Float> pfLevel)>>
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Float> pfLevel)>()(
-    ptr.ref.lpVtbl,
-    pfLevel,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Float> pfLevel)
+      >()(ptr.ref.lpVtbl, pfLevel);
 
   int setMute(int bMute, Pointer<GUID> EventContext) => (ptr.ref.vtable + 5)
       .cast<
@@ -87,8 +86,7 @@ class ISimpleAudioVolume extends IUnknown {
         Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Int32> pbMute)>>
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Int32> pbMute)>()(
-    ptr.ref.lpVtbl,
-    pbMute,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Int32> pbMute)
+      >()(ptr.ref.lpVtbl, pbMute);
 }

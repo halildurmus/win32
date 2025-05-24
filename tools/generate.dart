@@ -4,9 +4,8 @@ import 'package:args/args.dart';
 import 'package:path/path.dart' as p;
 
 void main(List<String> args) async {
-  final argParser =
-      ArgParser()
-        ..addFlag('test', abbr: 't', help: 'Run tests after code generation.');
+  final argParser = ArgParser()
+    ..addFlag('test', abbr: 't', help: 'Run tests after code generation.');
   final argResults = argParser.parse(args);
   final test = argResults.flag('test');
 

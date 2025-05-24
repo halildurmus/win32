@@ -35,15 +35,16 @@ int GetCommPorts(
   Pointer<Uint32> puPortNumbersFound,
 ) => _GetCommPorts(lpPortNumbers, uPortNumbersCount, puPortNumbersFound);
 
-final _GetCommPorts = _api_ms_win_core_comm_l1_1_2.lookupFunction<
-  Uint32 Function(
-    Pointer<Uint32> lpPortNumbers,
-    Uint32 uPortNumbersCount,
-    Pointer<Uint32> puPortNumbersFound,
-  ),
-  int Function(
-    Pointer<Uint32> lpPortNumbers,
-    int uPortNumbersCount,
-    Pointer<Uint32> puPortNumbersFound,
-  )
->('GetCommPorts');
+final _GetCommPorts = _api_ms_win_core_comm_l1_1_2
+    .lookupFunction<
+      Uint32 Function(
+        Pointer<Uint32> lpPortNumbers,
+        Uint32 uPortNumbersCount,
+        Pointer<Uint32> puPortNumbersFound,
+      ),
+      int Function(
+        Pointer<Uint32> lpPortNumbers,
+        int uPortNumbersCount,
+        Pointer<Uint32> puPortNumbersFound,
+      )
+    >('GetCommPorts');

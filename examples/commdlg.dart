@@ -22,17 +22,16 @@ void main() {
 
   // Allocates memory on the native heap for the struct that will be used to
   // configure the dialog box and return values
-  final cc =
-      calloc<CHOOSECOLOR>()
-        ..ref.lStructSize = sizeOf<CHOOSECOLOR>()
-        // Default color is mid-gray
-        ..ref.rgbResult = RGB(0x80, 0x80, 0x80)
-        // Use custom color palette defined above
-        ..ref.lpCustColors = customColors
-        // Set dialog flags:
-        //   CC_RGBINIT: use rgbResult for the dialog default value
-        //   CC_FULLOPEN: automatically open custom colors section of dialog
-        ..ref.Flags = CC_RGBINIT | CC_FULLOPEN;
+  final cc = calloc<CHOOSECOLOR>()
+    ..ref.lStructSize = sizeOf<CHOOSECOLOR>()
+    // Default color is mid-gray
+    ..ref.rgbResult = RGB(0x80, 0x80, 0x80)
+    // Use custom color palette defined above
+    ..ref.lpCustColors = customColors
+    // Set dialog flags:
+    //   CC_RGBINIT: use rgbResult for the dialog default value
+    //   CC_FULLOPEN: automatically open custom colors section of dialog
+    ..ref.Flags = CC_RGBINIT | CC_FULLOPEN;
 
   // Call the Win32 API to show dialog, passing pointer to the config struct
   ChooseColor(cc);

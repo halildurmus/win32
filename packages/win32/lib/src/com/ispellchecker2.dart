@@ -46,8 +46,7 @@ class ISpellChecker2 extends ISpellChecker {
         Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Utf16> word)>>
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Utf16> word)>()(
-    ptr.ref.lpVtbl,
-    word,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Utf16> word)
+      >()(ptr.ref.lpVtbl, word);
 }

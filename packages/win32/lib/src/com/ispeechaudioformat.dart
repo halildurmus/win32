@@ -39,19 +39,20 @@ class ISpeechAudioFormat extends IDispatch {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = (ptr.ref.vtable + 7)
-          .cast<
-            Pointer<
-              NativeFunction<
-                Int32 Function(Pointer, Pointer<Int32> AudioFormat)
-              >
-            >
-          >()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Int32> AudioFormat)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+      final hr =
+          (ptr.ref.vtable + 7)
+              .cast<
+                Pointer<
+                  NativeFunction<
+                    Int32 Function(Pointer, Pointer<Int32> AudioFormat)
+                  >
+                >
+              >()
+              .value
+              .asFunction<int Function(Pointer, Pointer<Int32> AudioFormat)>()(
+            ptr.ref.lpVtbl,
+            retValuePtr,
+          );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -68,10 +69,9 @@ class ISpeechAudioFormat extends IDispatch {
           Pointer<NativeFunction<Int32 Function(Pointer, Int32 AudioFormat)>>
         >()
         .value
-        .asFunction<int Function(Pointer, int AudioFormat)>()(
-      ptr.ref.lpVtbl,
-      value,
-    );
+        .asFunction<
+          int Function(Pointer, int AudioFormat)
+        >()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
@@ -89,10 +89,9 @@ class ISpeechAudioFormat extends IDispatch {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> Guid)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<Utf16>> Guid)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -109,10 +108,9 @@ class ISpeechAudioFormat extends IDispatch {
           Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Utf16> Guid)>>
         >()
         .value
-        .asFunction<int Function(Pointer, Pointer<Utf16> Guid)>()(
-      ptr.ref.lpVtbl,
-      value,
-    );
+        .asFunction<
+          int Function(Pointer, Pointer<Utf16> Guid)
+        >()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }

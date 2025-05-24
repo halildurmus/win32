@@ -25,10 +25,9 @@ void main() {
 
   if (pGetNativeSystemInfo != nullptr) {
     print('GetNativeSystemInfo() is available on this system.');
-    final funcGetNativeSystemInfo =
-        pGetNativeSystemInfo
-            .cast<NativeFunction<GetNativeSystemInfoNative>>()
-            .asFunction<GetNativeSystemInfoDart>();
+    final funcGetNativeSystemInfo = pGetNativeSystemInfo
+        .cast<NativeFunction<GetNativeSystemInfoNative>>()
+        .asFunction<GetNativeSystemInfoDart>();
 
     funcGetNativeSystemInfo(systemInfo);
   } else {

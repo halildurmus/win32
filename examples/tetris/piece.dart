@@ -82,10 +82,9 @@ class Piece {
     for (var x = 0; x < width; x++) {
       for (var y = 0; y < height; y++) {
         if (isPointExists(x, y)) {
-          final p =
-              Point()
-                ..x = x
-                ..y = y;
+          final p = Point()
+            ..x = x
+            ..y = y;
           points.add(p);
           break;
         }
@@ -100,10 +99,9 @@ class Piece {
     for (var y = 0; y < height; y++) {
       for (var x = 0; x < height; x++) {
         if (isPointExists(x, y)) {
-          final p =
-              Point()
-                ..x = x
-                ..y = y;
+          final p = Point()
+            ..x = x
+            ..y = y;
           points.add(p);
           break;
         }
@@ -118,10 +116,9 @@ class Piece {
     for (var y = 0; y < height; y++) {
       for (var x = width - 1; x >= 0; x--) {
         if (isPointExists(x, y)) {
-          final p =
-              Point()
-                ..x = x
-                ..y = y;
+          final p = Point()
+            ..x = x
+            ..y = y;
           points.add(p);
           break;
         }
@@ -133,12 +130,11 @@ class Piece {
   /// String representation of a piece (for debugging)
   @override
   String toString() {
-    final buffer =
-        StringBuffer()
-          ..write('width = $width | ')
-          ..write('height = $height | ')
-          ..write('nPoints = $pointCount | ')
-          ..writeln('color = ${color.toRadixString(16)}');
+    final buffer = StringBuffer()
+      ..write('width = $width | ')
+      ..write('height = $height | ')
+      ..write('nPoints = $pointCount | ')
+      ..writeln('color = ${color.toRadixString(16)}');
 
     for (var y = height - 1; y >= 0; y--) {
       for (var x = 0; x < width; x++) {

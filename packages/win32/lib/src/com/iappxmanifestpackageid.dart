@@ -43,10 +43,9 @@ class IAppxManifestPackageId extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> name)>()(
-    ptr.ref.lpVtbl,
-    name,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Pointer<Utf16>> name)
+      >()(ptr.ref.lpVtbl, name);
 
   int getArchitecture(Pointer<Int32> architecture) => (ptr.ref.vtable + 4)
       .cast<
@@ -55,10 +54,9 @@ class IAppxManifestPackageId extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Int32> architecture)>()(
-    ptr.ref.lpVtbl,
-    architecture,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Int32> architecture)
+      >()(ptr.ref.lpVtbl, architecture);
 
   int getPublisher(Pointer<Pointer<Utf16>> publisher) => (ptr.ref.vtable + 5)
       .cast<
@@ -69,24 +67,24 @@ class IAppxManifestPackageId extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> publisher)>()(
-    ptr.ref.lpVtbl,
-    publisher,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Pointer<Utf16>> publisher)
+      >()(ptr.ref.lpVtbl, publisher);
 
-  int getVersion(Pointer<Uint64> packageVersion) => (ptr.ref.vtable + 6)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Pointer<Uint64> packageVersion)
-          >
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Uint64> packageVersion)>()(
-    ptr.ref.lpVtbl,
-    packageVersion,
-  );
+  int getVersion(Pointer<Uint64> packageVersion) =>
+      (ptr.ref.vtable + 6)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Uint64> packageVersion)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Uint64> packageVersion)>()(
+        ptr.ref.lpVtbl,
+        packageVersion,
+      );
 
   int getResourceId(Pointer<Pointer<Utf16>> resourceId) => (ptr.ref.vtable + 7)
       .cast<
@@ -97,10 +95,9 @@ class IAppxManifestPackageId extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> resourceId)>()(
-    ptr.ref.lpVtbl,
-    resourceId,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Pointer<Utf16>> resourceId)
+      >()(ptr.ref.lpVtbl, resourceId);
 
   int comparePublisher(Pointer<Utf16> other, Pointer<Int32> isSame) =>
       (ptr.ref.vtable + 8)

@@ -46,8 +46,7 @@ class IProvideClassInfo extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> ppTI)>()(
-    ptr.ref.lpVtbl,
-    ppTI,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Pointer<COMObject>> ppTI)
+      >()(ptr.ref.lpVtbl, ppTI);
 }

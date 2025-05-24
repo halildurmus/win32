@@ -46,19 +46,20 @@ int RoGetMetaDataFile(
   typeDefToken,
 );
 
-final _RoGetMetaDataFile = _api_ms_win_ro_typeresolution_l1_1_0.lookupFunction<
-  Int32 Function(
-    IntPtr name,
-    Pointer<COMObject> metaDataDispenser,
-    Pointer<IntPtr> metaDataFilePath,
-    Pointer<Pointer<COMObject>> metaDataImport,
-    Pointer<Uint32> typeDefToken,
-  ),
-  int Function(
-    int name,
-    Pointer<COMObject> metaDataDispenser,
-    Pointer<IntPtr> metaDataFilePath,
-    Pointer<Pointer<COMObject>> metaDataImport,
-    Pointer<Uint32> typeDefToken,
-  )
->('RoGetMetaDataFile');
+final _RoGetMetaDataFile = _api_ms_win_ro_typeresolution_l1_1_0
+    .lookupFunction<
+      Int32 Function(
+        IntPtr name,
+        Pointer<COMObject> metaDataDispenser,
+        Pointer<IntPtr> metaDataFilePath,
+        Pointer<Pointer<COMObject>> metaDataImport,
+        Pointer<Uint32> typeDefToken,
+      ),
+      int Function(
+        int name,
+        Pointer<COMObject> metaDataDispenser,
+        Pointer<IntPtr> metaDataFilePath,
+        Pointer<Pointer<COMObject>> metaDataImport,
+        Pointer<Uint32> typeDefToken,
+      )
+    >('RoGetMetaDataFile');

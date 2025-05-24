@@ -46,8 +46,7 @@ class INetworkListManagerEvents extends IUnknown {
         Pointer<NativeFunction<Int32 Function(Pointer, Int32 newConnectivity)>>
       >()
       .value
-      .asFunction<int Function(Pointer, int newConnectivity)>()(
-    ptr.ref.lpVtbl,
-    newConnectivity,
-  );
+      .asFunction<
+        int Function(Pointer, int newConnectivity)
+      >()(ptr.ref.lpVtbl, newConnectivity);
 }

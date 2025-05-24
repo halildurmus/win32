@@ -49,51 +49,52 @@ class IMetaDataAssemblyImport extends IUnknown {
     Pointer<Uint32> pchName,
     Pointer<ASSEMBLYMETADATA> pMetaData,
     Pointer<Uint32> pdwAssemblyFlags,
-  ) => (ptr.ref.vtable + 3)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  ) =>
+      (ptr.ref.vtable + 3)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Uint32 mda,
+                  Pointer<Pointer> ppbPublicKey,
+                  Pointer<Uint32> pcbPublicKey,
+                  Pointer<Uint32> pulHashAlgId,
+                  Pointer<Utf16> szName,
+                  Uint32 cchName,
+                  Pointer<Uint32> pchName,
+                  Pointer<ASSEMBLYMETADATA> pMetaData,
+                  Pointer<Uint32> pdwAssemblyFlags,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
-              Uint32 mda,
+              int mda,
               Pointer<Pointer> ppbPublicKey,
               Pointer<Uint32> pcbPublicKey,
               Pointer<Uint32> pulHashAlgId,
               Pointer<Utf16> szName,
-              Uint32 cchName,
+              int cchName,
               Pointer<Uint32> pchName,
               Pointer<ASSEMBLYMETADATA> pMetaData,
               Pointer<Uint32> pdwAssemblyFlags,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(
-          Pointer,
-          int mda,
-          Pointer<Pointer> ppbPublicKey,
-          Pointer<Uint32> pcbPublicKey,
-          Pointer<Uint32> pulHashAlgId,
-          Pointer<Utf16> szName,
-          int cchName,
-          Pointer<Uint32> pchName,
-          Pointer<ASSEMBLYMETADATA> pMetaData,
-          Pointer<Uint32> pdwAssemblyFlags,
-        )
-      >()(
-    ptr.ref.lpVtbl,
-    mda,
-    ppbPublicKey,
-    pcbPublicKey,
-    pulHashAlgId,
-    szName,
-    cchName,
-    pchName,
-    pMetaData,
-    pdwAssemblyFlags,
-  );
+          >()(
+        ptr.ref.lpVtbl,
+        mda,
+        ppbPublicKey,
+        pcbPublicKey,
+        pulHashAlgId,
+        szName,
+        cchName,
+        pchName,
+        pMetaData,
+        pdwAssemblyFlags,
+      );
 
   int getAssemblyRefProps(
     int mdar,
@@ -106,54 +107,55 @@ class IMetaDataAssemblyImport extends IUnknown {
     Pointer<Pointer> ppbHashValue,
     Pointer<Uint32> pcbHashValue,
     Pointer<Uint32> pdwAssemblyRefFlags,
-  ) => (ptr.ref.vtable + 4)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  ) =>
+      (ptr.ref.vtable + 4)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Uint32 mdar,
+                  Pointer<Pointer> ppbPublicKeyOrToken,
+                  Pointer<Uint32> pcbPublicKeyOrToken,
+                  Pointer<Utf16> szName,
+                  Uint32 cchName,
+                  Pointer<Uint32> pchName,
+                  Pointer<ASSEMBLYMETADATA> pMetaData,
+                  Pointer<Pointer> ppbHashValue,
+                  Pointer<Uint32> pcbHashValue,
+                  Pointer<Uint32> pdwAssemblyRefFlags,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
-              Uint32 mdar,
+              int mdar,
               Pointer<Pointer> ppbPublicKeyOrToken,
               Pointer<Uint32> pcbPublicKeyOrToken,
               Pointer<Utf16> szName,
-              Uint32 cchName,
+              int cchName,
               Pointer<Uint32> pchName,
               Pointer<ASSEMBLYMETADATA> pMetaData,
               Pointer<Pointer> ppbHashValue,
               Pointer<Uint32> pcbHashValue,
               Pointer<Uint32> pdwAssemblyRefFlags,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(
-          Pointer,
-          int mdar,
-          Pointer<Pointer> ppbPublicKeyOrToken,
-          Pointer<Uint32> pcbPublicKeyOrToken,
-          Pointer<Utf16> szName,
-          int cchName,
-          Pointer<Uint32> pchName,
-          Pointer<ASSEMBLYMETADATA> pMetaData,
-          Pointer<Pointer> ppbHashValue,
-          Pointer<Uint32> pcbHashValue,
-          Pointer<Uint32> pdwAssemblyRefFlags,
-        )
-      >()(
-    ptr.ref.lpVtbl,
-    mdar,
-    ppbPublicKeyOrToken,
-    pcbPublicKeyOrToken,
-    szName,
-    cchName,
-    pchName,
-    pMetaData,
-    ppbHashValue,
-    pcbHashValue,
-    pdwAssemblyRefFlags,
-  );
+          >()(
+        ptr.ref.lpVtbl,
+        mdar,
+        ppbPublicKeyOrToken,
+        pcbPublicKeyOrToken,
+        szName,
+        cchName,
+        pchName,
+        pMetaData,
+        ppbHashValue,
+        pcbHashValue,
+        pdwAssemblyRefFlags,
+      );
 
   int getFileProps(
     int mdf,
@@ -163,45 +165,46 @@ class IMetaDataAssemblyImport extends IUnknown {
     Pointer<Pointer> ppbHashValue,
     Pointer<Uint32> pcbHashValue,
     Pointer<Uint32> pdwFileFlags,
-  ) => (ptr.ref.vtable + 5)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  ) =>
+      (ptr.ref.vtable + 5)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Uint32 mdf,
+                  Pointer<Utf16> szName,
+                  Uint32 cchName,
+                  Pointer<Uint32> pchName,
+                  Pointer<Pointer> ppbHashValue,
+                  Pointer<Uint32> pcbHashValue,
+                  Pointer<Uint32> pdwFileFlags,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
-              Uint32 mdf,
+              int mdf,
               Pointer<Utf16> szName,
-              Uint32 cchName,
+              int cchName,
               Pointer<Uint32> pchName,
               Pointer<Pointer> ppbHashValue,
               Pointer<Uint32> pcbHashValue,
               Pointer<Uint32> pdwFileFlags,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(
-          Pointer,
-          int mdf,
-          Pointer<Utf16> szName,
-          int cchName,
-          Pointer<Uint32> pchName,
-          Pointer<Pointer> ppbHashValue,
-          Pointer<Uint32> pcbHashValue,
-          Pointer<Uint32> pdwFileFlags,
-        )
-      >()(
-    ptr.ref.lpVtbl,
-    mdf,
-    szName,
-    cchName,
-    pchName,
-    ppbHashValue,
-    pcbHashValue,
-    pdwFileFlags,
-  );
+          >()(
+        ptr.ref.lpVtbl,
+        mdf,
+        szName,
+        cchName,
+        pchName,
+        ppbHashValue,
+        pcbHashValue,
+        pdwFileFlags,
+      );
 
   int getExportedTypeProps(
     int mdct,
@@ -211,45 +214,46 @@ class IMetaDataAssemblyImport extends IUnknown {
     Pointer<Uint32> ptkImplementation,
     Pointer<Uint32> ptkTypeDef,
     Pointer<Uint32> pdwExportedTypeFlags,
-  ) => (ptr.ref.vtable + 6)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  ) =>
+      (ptr.ref.vtable + 6)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Uint32 mdct,
+                  Pointer<Utf16> szName,
+                  Uint32 cchName,
+                  Pointer<Uint32> pchName,
+                  Pointer<Uint32> ptkImplementation,
+                  Pointer<Uint32> ptkTypeDef,
+                  Pointer<Uint32> pdwExportedTypeFlags,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
-              Uint32 mdct,
+              int mdct,
               Pointer<Utf16> szName,
-              Uint32 cchName,
+              int cchName,
               Pointer<Uint32> pchName,
               Pointer<Uint32> ptkImplementation,
               Pointer<Uint32> ptkTypeDef,
               Pointer<Uint32> pdwExportedTypeFlags,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(
-          Pointer,
-          int mdct,
-          Pointer<Utf16> szName,
-          int cchName,
-          Pointer<Uint32> pchName,
-          Pointer<Uint32> ptkImplementation,
-          Pointer<Uint32> ptkTypeDef,
-          Pointer<Uint32> pdwExportedTypeFlags,
-        )
-      >()(
-    ptr.ref.lpVtbl,
-    mdct,
-    szName,
-    cchName,
-    pchName,
-    ptkImplementation,
-    ptkTypeDef,
-    pdwExportedTypeFlags,
-  );
+          >()(
+        ptr.ref.lpVtbl,
+        mdct,
+        szName,
+        cchName,
+        pchName,
+        ptkImplementation,
+        ptkTypeDef,
+        pdwExportedTypeFlags,
+      );
 
   int getManifestResourceProps(
     int mdmr,
@@ -259,45 +263,46 @@ class IMetaDataAssemblyImport extends IUnknown {
     Pointer<Uint32> ptkImplementation,
     Pointer<Uint32> pdwOffset,
     Pointer<Uint32> pdwResourceFlags,
-  ) => (ptr.ref.vtable + 7)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  ) =>
+      (ptr.ref.vtable + 7)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Uint32 mdmr,
+                  Pointer<Utf16> szName,
+                  Uint32 cchName,
+                  Pointer<Uint32> pchName,
+                  Pointer<Uint32> ptkImplementation,
+                  Pointer<Uint32> pdwOffset,
+                  Pointer<Uint32> pdwResourceFlags,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
-              Uint32 mdmr,
+              int mdmr,
               Pointer<Utf16> szName,
-              Uint32 cchName,
+              int cchName,
               Pointer<Uint32> pchName,
               Pointer<Uint32> ptkImplementation,
               Pointer<Uint32> pdwOffset,
               Pointer<Uint32> pdwResourceFlags,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(
-          Pointer,
-          int mdmr,
-          Pointer<Utf16> szName,
-          int cchName,
-          Pointer<Uint32> pchName,
-          Pointer<Uint32> ptkImplementation,
-          Pointer<Uint32> pdwOffset,
-          Pointer<Uint32> pdwResourceFlags,
-        )
-      >()(
-    ptr.ref.lpVtbl,
-    mdmr,
-    szName,
-    cchName,
-    pchName,
-    ptkImplementation,
-    pdwOffset,
-    pdwResourceFlags,
-  );
+          >()(
+        ptr.ref.lpVtbl,
+        mdmr,
+        szName,
+        cchName,
+        pchName,
+        ptkImplementation,
+        pdwOffset,
+        pdwResourceFlags,
+      );
 
   int enumAssemblyRefs(
     Pointer<Pointer> phEnum,
@@ -426,10 +431,9 @@ class IMetaDataAssemblyImport extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Uint32> ptkAssembly)>()(
-    ptr.ref.lpVtbl,
-    ptkAssembly,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Uint32> ptkAssembly)
+      >()(ptr.ref.lpVtbl, ptkAssembly);
 
   int findExportedTypeByName(
     Pointer<Utf16> szName,
@@ -485,10 +489,9 @@ class IMetaDataAssemblyImport extends IUnknown {
   void closeEnum(Pointer hEnum) => (ptr.ref.vtable + 15)
       .cast<Pointer<NativeFunction<Void Function(Pointer, Pointer hEnum)>>>()
       .value
-      .asFunction<void Function(Pointer, Pointer hEnum)>()(
-    ptr.ref.lpVtbl,
-    hEnum,
-  );
+      .asFunction<
+        void Function(Pointer, Pointer hEnum)
+      >()(ptr.ref.lpVtbl, hEnum);
 
   int findAssembliesByName(
     Pointer<Utf16> szAppBase,
@@ -497,40 +500,41 @@ class IMetaDataAssemblyImport extends IUnknown {
     Pointer<Pointer<COMObject>> ppIUnk,
     int cMax,
     Pointer<Uint32> pcAssemblies,
-  ) => (ptr.ref.vtable + 16)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  ) =>
+      (ptr.ref.vtable + 16)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<Utf16> szAppBase,
+                  Pointer<Utf16> szPrivateBin,
+                  Pointer<Utf16> szAssemblyName,
+                  Pointer<Pointer<COMObject>> ppIUnk,
+                  Uint32 cMax,
+                  Pointer<Uint32> pcAssemblies,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
               Pointer<Utf16> szAppBase,
               Pointer<Utf16> szPrivateBin,
               Pointer<Utf16> szAssemblyName,
               Pointer<Pointer<COMObject>> ppIUnk,
-              Uint32 cMax,
+              int cMax,
               Pointer<Uint32> pcAssemblies,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(
-          Pointer,
-          Pointer<Utf16> szAppBase,
-          Pointer<Utf16> szPrivateBin,
-          Pointer<Utf16> szAssemblyName,
-          Pointer<Pointer<COMObject>> ppIUnk,
-          int cMax,
-          Pointer<Uint32> pcAssemblies,
-        )
-      >()(
-    ptr.ref.lpVtbl,
-    szAppBase,
-    szPrivateBin,
-    szAssemblyName,
-    ppIUnk,
-    cMax,
-    pcAssemblies,
-  );
+          >()(
+        ptr.ref.lpVtbl,
+        szAppBase,
+        szPrivateBin,
+        szAssemblyName,
+        ppIUnk,
+        cMax,
+        pcAssemblies,
+      );
 }

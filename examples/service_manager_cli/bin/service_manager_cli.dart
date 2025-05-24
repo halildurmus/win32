@@ -98,7 +98,7 @@ void startService(String serviceName) {
       'Service "$serviceName" is already running.',
     ServiceStartResult.failed => 'Failed to start service "$serviceName".',
     ServiceStartResult.timedOut =>
-      'The attempt to start service "$serviceName" timed out.'
+      'The attempt to start service "$serviceName" timed out.',
   });
 }
 
@@ -121,6 +121,6 @@ void stopService(String serviceName) {
       'Service "$serviceName" is already stopped.',
     ServiceStopResult.failed => 'Failed to stop service "$serviceName".',
     ServiceStopResult.timedOut =>
-      'The attempt to stop service "$serviceName" timed out.'
+      'The attempt to stop service "$serviceName" timed out.',
   });
 }

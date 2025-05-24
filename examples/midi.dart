@@ -11,10 +11,9 @@ void main() {
   // MCI will attempt to choose the MIDI mapper as the output port.
   final deviceType = TEXT('sequencer');
   final elementName = TEXT(r'c:\Windows\Media\flourish.mid');
-  final mciOpenParams =
-      calloc<MCI_OPEN_PARMS>()
-        ..ref.lpstrDeviceType = deviceType
-        ..ref.lpstrElementName = elementName;
+  final mciOpenParams = calloc<MCI_OPEN_PARMS>()
+    ..ref.lpstrDeviceType = deviceType
+    ..ref.lpstrElementName = elementName;
 
   var dwReturn = mciSendCommand(
     NULL,
@@ -33,8 +32,8 @@ void main() {
   final deviceID = mciOpenParams.ref.wDeviceID;
 
   // Check if the output port is the MIDI mapper.
-  final mciStatusParams =
-      calloc<MCI_STATUS_PARMS>()..ref.dwItem = MCI_SEQ_STATUS_PORT;
+  final mciStatusParams = calloc<MCI_STATUS_PARMS>()
+    ..ref.dwItem = MCI_SEQ_STATUS_PORT;
 
   dwReturn = mciSendCommand(
     deviceID,

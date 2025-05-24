@@ -45,22 +45,22 @@ class IKnownFolder extends IUnknown {
         Pointer<NativeFunction<Int32 Function(Pointer, Pointer<GUID> pkfid)>>
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<GUID> pkfid)>()(
-    ptr.ref.lpVtbl,
-    pkfid,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<GUID> pkfid)
+      >()(ptr.ref.lpVtbl, pkfid);
 
-  int getCategory(Pointer<Int32> pCategory) => (ptr.ref.vtable + 4)
-      .cast<
-        Pointer<
-          NativeFunction<Int32 Function(Pointer, Pointer<Int32> pCategory)>
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Int32> pCategory)>()(
-    ptr.ref.lpVtbl,
-    pCategory,
-  );
+  int getCategory(Pointer<Int32> pCategory) =>
+      (ptr.ref.vtable + 4)
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> pCategory)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> pCategory)>()(
+        ptr.ref.lpVtbl,
+        pCategory,
+      );
 
   int getShellItem(int dwFlags, Pointer<GUID> riid, Pointer<Pointer> ppv) =>
       (ptr.ref.vtable + 5)
@@ -113,11 +113,9 @@ class IKnownFolder extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, int dwFlags, Pointer<Utf16> pszPath)>()(
-    ptr.ref.lpVtbl,
-    dwFlags,
-    pszPath,
-  );
+      .asFunction<
+        int Function(Pointer, int dwFlags, Pointer<Utf16> pszPath)
+      >()(ptr.ref.lpVtbl, dwFlags, pszPath);
 
   int getIDList(int dwFlags, Pointer<Pointer<ITEMIDLIST>> ppidl) =>
       (ptr.ref.vtable + 8)
@@ -146,24 +144,24 @@ class IKnownFolder extends IUnknown {
         Pointer<NativeFunction<Int32 Function(Pointer, Pointer<GUID> pftid)>>
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<GUID> pftid)>()(
-    ptr.ref.lpVtbl,
-    pftid,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<GUID> pftid)
+      >()(ptr.ref.lpVtbl, pftid);
 
-  int getRedirectionCapabilities(
-    Pointer<Uint32> pCapabilities,
-  ) => (ptr.ref.vtable + 10)
-      .cast<
-        Pointer<
-          NativeFunction<Int32 Function(Pointer, Pointer<Uint32> pCapabilities)>
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Uint32> pCapabilities)>()(
-    ptr.ref.lpVtbl,
-    pCapabilities,
-  );
+  int getRedirectionCapabilities(Pointer<Uint32> pCapabilities) =>
+      (ptr.ref.vtable + 10)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Uint32> pCapabilities)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Uint32> pCapabilities)>()(
+        ptr.ref.lpVtbl,
+        pCapabilities,
+      );
 
   int getFolderDefinition(Pointer<KNOWNFOLDER_DEFINITION> pKFD) =>
       (ptr.ref.vtable + 11)

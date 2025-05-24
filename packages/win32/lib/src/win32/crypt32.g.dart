@@ -53,26 +53,27 @@ int CryptProtectData(
   pDataOut,
 );
 
-final _CryptProtectData = _crypt32.lookupFunction<
-  Int32 Function(
-    Pointer<CRYPT_INTEGER_BLOB> pDataIn,
-    Pointer<Utf16> szDataDescr,
-    Pointer<CRYPT_INTEGER_BLOB> pOptionalEntropy,
-    Pointer pvReserved,
-    Pointer<CRYPTPROTECT_PROMPTSTRUCT> pPromptStruct,
-    Uint32 dwFlags,
-    Pointer<CRYPT_INTEGER_BLOB> pDataOut,
-  ),
-  int Function(
-    Pointer<CRYPT_INTEGER_BLOB> pDataIn,
-    Pointer<Utf16> szDataDescr,
-    Pointer<CRYPT_INTEGER_BLOB> pOptionalEntropy,
-    Pointer pvReserved,
-    Pointer<CRYPTPROTECT_PROMPTSTRUCT> pPromptStruct,
-    int dwFlags,
-    Pointer<CRYPT_INTEGER_BLOB> pDataOut,
-  )
->('CryptProtectData');
+final _CryptProtectData = _crypt32
+    .lookupFunction<
+      Int32 Function(
+        Pointer<CRYPT_INTEGER_BLOB> pDataIn,
+        Pointer<Utf16> szDataDescr,
+        Pointer<CRYPT_INTEGER_BLOB> pOptionalEntropy,
+        Pointer pvReserved,
+        Pointer<CRYPTPROTECT_PROMPTSTRUCT> pPromptStruct,
+        Uint32 dwFlags,
+        Pointer<CRYPT_INTEGER_BLOB> pDataOut,
+      ),
+      int Function(
+        Pointer<CRYPT_INTEGER_BLOB> pDataIn,
+        Pointer<Utf16> szDataDescr,
+        Pointer<CRYPT_INTEGER_BLOB> pOptionalEntropy,
+        Pointer pvReserved,
+        Pointer<CRYPTPROTECT_PROMPTSTRUCT> pPromptStruct,
+        int dwFlags,
+        Pointer<CRYPT_INTEGER_BLOB> pDataOut,
+      )
+    >('CryptProtectData');
 
 /// The CryptProtectMemory function encrypts memory to prevent others from
 /// viewing sensitive information in your process. For example, use the
@@ -92,10 +93,11 @@ final _CryptProtectData = _crypt32.lookupFunction<
 int CryptProtectMemory(Pointer pDataIn, int cbDataIn, int dwFlags) =>
     _CryptProtectMemory(pDataIn, cbDataIn, dwFlags);
 
-final _CryptProtectMemory = _crypt32.lookupFunction<
-  Int32 Function(Pointer pDataIn, Uint32 cbDataIn, Uint32 dwFlags),
-  int Function(Pointer pDataIn, int cbDataIn, int dwFlags)
->('CryptProtectMemory');
+final _CryptProtectMemory = _crypt32
+    .lookupFunction<
+      Int32 Function(Pointer pDataIn, Uint32 cbDataIn, Uint32 dwFlags),
+      int Function(Pointer pDataIn, int cbDataIn, int dwFlags)
+    >('CryptProtectMemory');
 
 /// The CryptUnprotectData function decrypts and does an integrity check of
 /// the data in a DATA_BLOB structure. Usually, the only user who can
@@ -133,26 +135,27 @@ int CryptUnprotectData(
   pDataOut,
 );
 
-final _CryptUnprotectData = _crypt32.lookupFunction<
-  Int32 Function(
-    Pointer<CRYPT_INTEGER_BLOB> pDataIn,
-    Pointer<Pointer<Utf16>> ppszDataDescr,
-    Pointer<CRYPT_INTEGER_BLOB> pOptionalEntropy,
-    Pointer pvReserved,
-    Pointer<CRYPTPROTECT_PROMPTSTRUCT> pPromptStruct,
-    Uint32 dwFlags,
-    Pointer<CRYPT_INTEGER_BLOB> pDataOut,
-  ),
-  int Function(
-    Pointer<CRYPT_INTEGER_BLOB> pDataIn,
-    Pointer<Pointer<Utf16>> ppszDataDescr,
-    Pointer<CRYPT_INTEGER_BLOB> pOptionalEntropy,
-    Pointer pvReserved,
-    Pointer<CRYPTPROTECT_PROMPTSTRUCT> pPromptStruct,
-    int dwFlags,
-    Pointer<CRYPT_INTEGER_BLOB> pDataOut,
-  )
->('CryptUnprotectData');
+final _CryptUnprotectData = _crypt32
+    .lookupFunction<
+      Int32 Function(
+        Pointer<CRYPT_INTEGER_BLOB> pDataIn,
+        Pointer<Pointer<Utf16>> ppszDataDescr,
+        Pointer<CRYPT_INTEGER_BLOB> pOptionalEntropy,
+        Pointer pvReserved,
+        Pointer<CRYPTPROTECT_PROMPTSTRUCT> pPromptStruct,
+        Uint32 dwFlags,
+        Pointer<CRYPT_INTEGER_BLOB> pDataOut,
+      ),
+      int Function(
+        Pointer<CRYPT_INTEGER_BLOB> pDataIn,
+        Pointer<Pointer<Utf16>> ppszDataDescr,
+        Pointer<CRYPT_INTEGER_BLOB> pOptionalEntropy,
+        Pointer pvReserved,
+        Pointer<CRYPTPROTECT_PROMPTSTRUCT> pPromptStruct,
+        int dwFlags,
+        Pointer<CRYPT_INTEGER_BLOB> pDataOut,
+      )
+    >('CryptUnprotectData');
 
 /// The CryptUnprotectMemory function decrypts memory that was encrypted
 /// using the CryptProtectMemory function.
@@ -168,10 +171,11 @@ final _CryptUnprotectData = _crypt32.lookupFunction<
 int CryptUnprotectMemory(Pointer pDataIn, int cbDataIn, int dwFlags) =>
     _CryptUnprotectMemory(pDataIn, cbDataIn, dwFlags);
 
-final _CryptUnprotectMemory = _crypt32.lookupFunction<
-  Int32 Function(Pointer pDataIn, Uint32 cbDataIn, Uint32 dwFlags),
-  int Function(Pointer pDataIn, int cbDataIn, int dwFlags)
->('CryptUnprotectMemory');
+final _CryptUnprotectMemory = _crypt32
+    .lookupFunction<
+      Int32 Function(Pointer pDataIn, Uint32 cbDataIn, Uint32 dwFlags),
+      int Function(Pointer pDataIn, int cbDataIn, int dwFlags)
+    >('CryptUnprotectMemory');
 
 /// The CryptUpdateProtectedState function migrates the current user's
 /// master keys after the user's security identifier (SID) has changed. This
@@ -202,19 +206,20 @@ int CryptUpdateProtectedState(
   pdwFailureCount,
 );
 
-final _CryptUpdateProtectedState = _crypt32.lookupFunction<
-  Int32 Function(
-    Pointer pOldSid,
-    Pointer<Utf16> pwszOldPassword,
-    Uint32 dwFlags,
-    Pointer<Uint32> pdwSuccessCount,
-    Pointer<Uint32> pdwFailureCount,
-  ),
-  int Function(
-    Pointer pOldSid,
-    Pointer<Utf16> pwszOldPassword,
-    int dwFlags,
-    Pointer<Uint32> pdwSuccessCount,
-    Pointer<Uint32> pdwFailureCount,
-  )
->('CryptUpdateProtectedState');
+final _CryptUpdateProtectedState = _crypt32
+    .lookupFunction<
+      Int32 Function(
+        Pointer pOldSid,
+        Pointer<Utf16> pwszOldPassword,
+        Uint32 dwFlags,
+        Pointer<Uint32> pdwSuccessCount,
+        Pointer<Uint32> pdwFailureCount,
+      ),
+      int Function(
+        Pointer pOldSid,
+        Pointer<Utf16> pwszOldPassword,
+        int dwFlags,
+        Pointer<Uint32> pdwSuccessCount,
+        Pointer<Uint32> pdwFailureCount,
+      )
+    >('CryptUpdateProtectedState');

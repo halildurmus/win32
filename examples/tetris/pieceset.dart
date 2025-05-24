@@ -92,10 +92,9 @@ class PieceSet {
     // X' = -Y
     // Y' = X
     for (var i = 0; i < numPoints; i++) {
-      final pt =
-          Point()
-            ..x = -apt[i].y
-            ..y = apt[i].x;
+      final pt = Point()
+        ..x = -apt[i].y
+        ..y = apt[i].x;
       rotated.add(pt);
     }
     return rotated;

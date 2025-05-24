@@ -125,8 +125,9 @@ void generateFunctions(
   }
 
   // Gather a list of all the affected libraries
-  final dllLibraries =
-      filteredMethods.map((m) => m.module.name.toLowerCase()).toSet();
+  final dllLibraries = filteredMethods
+      .map((m) => m.module.name.toLowerCase())
+      .toSet();
 
   final tests = <String>[];
 
@@ -141,7 +142,8 @@ void generateFunctions(
 }
 
 void writeFunctionTests(Iterable<String> tests) {
-  final testFile = '''
+  final testFile =
+      '''
 $testFunctionsHeader
 
 import 'helpers.dart';
@@ -192,14 +194,17 @@ String generateFunctionTests(
 
     final projection = FunctionProjection(method, libraryDartName);
 
-    final returnFFIType =
-        TypeProjection(method.returnType.typeIdentifier).nativeType;
-    final returnDartType =
-        TypeProjection(method.returnType.typeIdentifier).dartType;
+    final returnFFIType = TypeProjection(
+      method.returnType.typeIdentifier,
+    ).nativeType;
+    final returnDartType = TypeProjection(
+      method.returnType.typeIdentifier,
+    ).dartType;
 
     final methodDartName = stripAnsiUnicodeSuffix(method.name);
 
-    final test = '''
+    final test =
+        '''
       test('Can instantiate $methodDartName', () {
         final $libraryDartName = DynamicLibrary.open('$library');
         final $methodDartName = $libraryDartName.lookupFunction<\n
@@ -234,18 +239,15 @@ void generateComApis(Scope scope, Map<String, String> comTypesToGenerate) {
     final className = ComClassProjection.generateClassName(typeDef);
     final classNameExists = scope.findTypeDef(className) != null;
 
-    final comObject =
-        classNameExists
-            ? ComClassProjection.fromInterface(
-              typeDef,
-              interfaceComment: comment,
-            )
-            : interfaceProjection;
+    final comObject = classNameExists
+        ? ComClassProjection.fromInterface(typeDef, interfaceComment: comment)
+        : interfaceProjection;
 
     // Generate class
     final dartClass = comObject.toString();
-    final classOutputFilename =
-        stripAnsiUnicodeSuffix(lastComponent(interface)).toLowerCase();
+    final classOutputFilename = stripAnsiUnicodeSuffix(
+      lastComponent(interface),
+    ).toLowerCase();
     final classOutputPath = '../win32/lib/src/com/$classOutputFilename.dart';
 
     File(classOutputPath).writeAsStringSync(
@@ -260,14 +262,13 @@ void main() async {
   final stopwatch = Stopwatch()..start();
 
   print('[${stopwatch.elapsed}] Loading Windows metadata...');
-  final (wdkScope, win32Scope, _) =
-      await (
-        MetadataStore.loadWdkScope(version: wdkMetadataVersion),
-        MetadataStore.loadWin32Scope(version: win32MetadataVersion),
-        // Additionally, load WinRT metadata to ensure the correct resolution of
-        // references from Win32 metadata.
-        MetadataStore.loadWinrtScope(),
-      ).wait;
+  final (wdkScope, win32Scope, _) = await (
+    MetadataStore.loadWdkScope(version: wdkMetadataVersion),
+    MetadataStore.loadWin32Scope(version: win32MetadataVersion),
+    // Additionally, load WinRT metadata to ensure the correct resolution of
+    // references from Win32 metadata.
+    MetadataStore.loadWinrtScope(),
+  ).wait;
 
   print('[${stopwatch.elapsed}] Generating structs...');
   final structsToGenerate = loadMap('win32_structs.json');

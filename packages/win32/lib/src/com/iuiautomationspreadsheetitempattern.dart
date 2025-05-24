@@ -53,10 +53,9 @@ class IUIAutomationSpreadsheetItemPattern extends IUnknown {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<Utf16>> retVal)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -67,37 +66,33 @@ class IUIAutomationSpreadsheetItemPattern extends IUnknown {
     }
   }
 
-  int getCurrentAnnotationObjects(
-    Pointer<Pointer<COMObject>> retVal,
-  ) => (ptr.ref.vtable + 4)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Pointer<Pointer<COMObject>> retVal)
-          >
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> retVal)>()(
-    ptr.ref.lpVtbl,
-    retVal,
-  );
+  int getCurrentAnnotationObjects(Pointer<Pointer<COMObject>> retVal) =>
+      (ptr.ref.vtable + 4)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<COMObject>> retVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<COMObject>> retVal)
+          >()(ptr.ref.lpVtbl, retVal);
 
-  int getCurrentAnnotationTypes(
-    Pointer<Pointer<SAFEARRAY>> retVal,
-  ) => (ptr.ref.vtable + 5)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Pointer<Pointer<SAFEARRAY>> retVal)
-          >
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<SAFEARRAY>> retVal)>()(
-    ptr.ref.lpVtbl,
-    retVal,
-  );
+  int getCurrentAnnotationTypes(Pointer<Pointer<SAFEARRAY>> retVal) =>
+      (ptr.ref.vtable + 5)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<SAFEARRAY>> retVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<SAFEARRAY>> retVal)
+          >()(ptr.ref.lpVtbl, retVal);
 
   Pointer<Utf16> get cachedFormula {
     final retValuePtr = calloc<Pointer<Utf16>>();
@@ -112,10 +107,9 @@ class IUIAutomationSpreadsheetItemPattern extends IUnknown {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<Utf16>> retVal)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -126,35 +120,31 @@ class IUIAutomationSpreadsheetItemPattern extends IUnknown {
     }
   }
 
-  int getCachedAnnotationObjects(
-    Pointer<Pointer<COMObject>> retVal,
-  ) => (ptr.ref.vtable + 7)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Pointer<Pointer<COMObject>> retVal)
-          >
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> retVal)>()(
-    ptr.ref.lpVtbl,
-    retVal,
-  );
+  int getCachedAnnotationObjects(Pointer<Pointer<COMObject>> retVal) =>
+      (ptr.ref.vtable + 7)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<COMObject>> retVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<COMObject>> retVal)
+          >()(ptr.ref.lpVtbl, retVal);
 
-  int getCachedAnnotationTypes(
-    Pointer<Pointer<SAFEARRAY>> retVal,
-  ) => (ptr.ref.vtable + 8)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Pointer<Pointer<SAFEARRAY>> retVal)
-          >
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<SAFEARRAY>> retVal)>()(
-    ptr.ref.lpVtbl,
-    retVal,
-  );
+  int getCachedAnnotationTypes(Pointer<Pointer<SAFEARRAY>> retVal) =>
+      (ptr.ref.vtable + 8)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<SAFEARRAY>> retVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<SAFEARRAY>> retVal)
+          >()(ptr.ref.lpVtbl, retVal);
 }

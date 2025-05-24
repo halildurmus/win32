@@ -15,14 +15,13 @@ void write({
   final examplePassword = utf8.encode(password);
   final blob = examplePassword.allocatePointer();
 
-  final credential =
-      calloc<CREDENTIAL>()
-        ..ref.Type = CRED_TYPE_GENERIC
-        ..ref.TargetName = credentialName.toNativeUtf16()
-        ..ref.Persist = CRED_PERSIST_LOCAL_MACHINE
-        ..ref.UserName = userName.toNativeUtf16()
-        ..ref.CredentialBlob = blob
-        ..ref.CredentialBlobSize = examplePassword.length;
+  final credential = calloc<CREDENTIAL>()
+    ..ref.Type = CRED_TYPE_GENERIC
+    ..ref.TargetName = credentialName.toNativeUtf16()
+    ..ref.Persist = CRED_PERSIST_LOCAL_MACHINE
+    ..ref.UserName = userName.toNativeUtf16()
+    ..ref.CredentialBlob = blob
+    ..ref.CredentialBlobSize = examplePassword.length;
 
   final result = CredWrite(credential, 0);
 

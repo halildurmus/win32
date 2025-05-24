@@ -32,7 +32,8 @@ final _api_ms_win_core_handle_l1_1_0 = DynamicLibrary.open(
 int CompareObjectHandles(int hFirstObjectHandle, int hSecondObjectHandle) =>
     _CompareObjectHandles(hFirstObjectHandle, hSecondObjectHandle);
 
-final _CompareObjectHandles = _api_ms_win_core_handle_l1_1_0.lookupFunction<
-  Int32 Function(IntPtr hFirstObjectHandle, IntPtr hSecondObjectHandle),
-  int Function(int hFirstObjectHandle, int hSecondObjectHandle)
->('CompareObjectHandles');
+final _CompareObjectHandles = _api_ms_win_core_handle_l1_1_0
+    .lookupFunction<
+      Int32 Function(IntPtr hFirstObjectHandle, IntPtr hSecondObjectHandle),
+      int Function(int hFirstObjectHandle, int hSecondObjectHandle)
+    >('CompareObjectHandles');

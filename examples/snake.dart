@@ -118,10 +118,9 @@ void collectApple() {
   // play sound
   Beep(750, 100);
   // increase speed and increase snake
-  final newPoint =
-      Point()
-        ..x = snakePoints[snakePoints.length - 1].x
-        ..y = snakePoints[snakePoints.length - 1].y;
+  final newPoint = Point()
+    ..x = snakePoints[snakePoints.length - 1].x
+    ..y = snakePoints[snakePoints.length - 1].y;
   snakePoints.add(newPoint);
 
   KillTimer(hWnd, IDT_TIMER1);
@@ -302,28 +301,24 @@ void resetGame() {
 
   // init snake
   snakePoints.clear();
-  final p1 =
-      Point()
-        ..x = 3
-        ..y = 0;
+  final p1 = Point()
+    ..x = 3
+    ..y = 0;
   snakePoints.add(p1);
 
-  final p2 =
-      Point()
-        ..x = 2
-        ..y = 0;
+  final p2 = Point()
+    ..x = 2
+    ..y = 0;
   snakePoints.add(p2);
 
-  final p3 =
-      Point()
-        ..x = 1
-        ..y = 0;
+  final p3 = Point()
+    ..x = 1
+    ..y = 0;
   snakePoints.add(p3);
 
-  final p4 =
-      Point()
-        ..x = 0
-        ..y = 0;
+  final p4 = Point()
+    ..x = 0
+    ..y = 0;
   snakePoints.add(p4);
 
   for (var i = 0; i < snakePoints.length; i++) {
@@ -553,11 +548,10 @@ void winMain(int hInstance, List<String> args, int nShowCmd) {
     exceptionalReturn: 0,
   );
 
-  final wc =
-      calloc<WNDCLASS>()
-        ..ref.lpfnWndProc = lpfnWndProc.nativeFunction
-        ..ref.hInstance = hInstance
-        ..ref.lpszClassName = className;
+  final wc = calloc<WNDCLASS>()
+    ..ref.lpfnWndProc = lpfnWndProc.nativeFunction
+    ..ref.hInstance = hInstance
+    ..ref.lpszClassName = className;
   if (RegisterClass(wc) != 0) {
     // Create the window.
     hWnd = CreateWindowEx(

@@ -82,21 +82,19 @@ class INetworkListManager extends IDispatch {
             )
           >()(ptr.ref.lpVtbl, gdNetworkId, ppNetwork);
 
-  int getNetworkConnections(
-    Pointer<Pointer<COMObject>> ppEnum,
-  ) => (ptr.ref.vtable + 9)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Pointer<Pointer<COMObject>> ppEnum)
-          >
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> ppEnum)>()(
-    ptr.ref.lpVtbl,
-    ppEnum,
-  );
+  int getNetworkConnections(Pointer<Pointer<COMObject>> ppEnum) =>
+      (ptr.ref.vtable + 9)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<COMObject>> ppEnum)
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<COMObject>> ppEnum)
+          >()(ptr.ref.lpVtbl, ppEnum);
 
   int getNetworkConnection(
     GUID gdNetworkConnectionId,
@@ -135,10 +133,9 @@ class INetworkListManager extends IDispatch {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Int16> pbIsConnected)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Int16> pbIsConnected)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -162,10 +159,9 @@ class INetworkListManager extends IDispatch {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Int16> pbIsConnected)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Int16> pbIsConnected)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -183,10 +179,9 @@ class INetworkListManager extends IDispatch {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Int32> pConnectivity)>()(
-    ptr.ref.lpVtbl,
-    pConnectivity,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Int32> pConnectivity)
+      >()(ptr.ref.lpVtbl, pConnectivity);
 
   int setSimulatedProfileInfo(
     Pointer<NLM_SIMULATED_PROFILE_INFO> pSimulatedInfo,

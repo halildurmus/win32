@@ -4,13 +4,13 @@ import 'dart:io';
 import 'package:args/args.dart';
 
 void main(List<String> args) {
-  final argParser =
-      ArgParser()..addOption(
-        'version',
-        abbr: 'v',
-        help: 'The version number to update the changelog with.',
-        mandatory: true,
-      );
+  final argParser = ArgParser()
+    ..addOption(
+      'version',
+      abbr: 'v',
+      help: 'The version number to update the changelog with.',
+      mandatory: true,
+    );
   final argResults = argParser.parse(args);
   var version = argResults.option('version');
   if (version == null) {

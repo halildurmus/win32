@@ -72,15 +72,16 @@ class IRunningObjectTable extends IUnknown {
         )
       >()(ptr.ref.lpVtbl, grfFlags, punkObject, pmkObjectName, pdwRegister);
 
-  int revoke(int dwRegister) => (ptr.ref.vtable + 4)
-      .cast<
-        Pointer<NativeFunction<Int32 Function(Pointer, Uint32 dwRegister)>>
-      >()
-      .value
-      .asFunction<int Function(Pointer, int dwRegister)>()(
-    ptr.ref.lpVtbl,
-    dwRegister,
-  );
+  int revoke(int dwRegister) =>
+      (ptr.ref.vtable + 4)
+          .cast<
+            Pointer<NativeFunction<Int32 Function(Pointer, Uint32 dwRegister)>>
+          >()
+          .value
+          .asFunction<int Function(Pointer, int dwRegister)>()(
+        ptr.ref.lpVtbl,
+        dwRegister,
+      );
 
   int isRunning(Pointer<COMObject> pmkObjectName) => (ptr.ref.vtable + 5)
       .cast<
@@ -91,10 +92,9 @@ class IRunningObjectTable extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<COMObject> pmkObjectName)>()(
-    ptr.ref.lpVtbl,
-    pmkObjectName,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<COMObject> pmkObjectName)
+      >()(ptr.ref.lpVtbl, pmkObjectName);
 
   int getObject(
     Pointer<COMObject> pmkObjectName,

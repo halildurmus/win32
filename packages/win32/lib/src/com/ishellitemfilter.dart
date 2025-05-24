@@ -42,10 +42,9 @@ class IShellItemFilter extends IUnknown {
         Pointer<NativeFunction<Int32 Function(Pointer, Pointer<COMObject> psi)>>
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<COMObject> psi)>()(
-    ptr.ref.lpVtbl,
-    psi,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<COMObject> psi)
+      >()(ptr.ref.lpVtbl, psi);
 
   int getEnumFlagsForItem(Pointer<COMObject> psi, Pointer<Uint32> pgrfFlags) =>
       (ptr.ref.vtable + 4)

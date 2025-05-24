@@ -49,11 +49,9 @@ class IPersistMemory extends IPersist {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer pMem, int cbSize)>()(
-    ptr.ref.lpVtbl,
-    pMem,
-    cbSize,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer pMem, int cbSize)
+      >()(ptr.ref.lpVtbl, pMem, cbSize);
 
   int save(Pointer pMem, int fClearDirty, int cbSize) => (ptr.ref.vtable + 6)
       .cast<
@@ -73,17 +71,18 @@ class IPersistMemory extends IPersist {
         int Function(Pointer, Pointer pMem, int fClearDirty, int cbSize)
       >()(ptr.ref.lpVtbl, pMem, fClearDirty, cbSize);
 
-  int getSizeMax(Pointer<Uint32> pCbSize) => (ptr.ref.vtable + 7)
-      .cast<
-        Pointer<
-          NativeFunction<Int32 Function(Pointer, Pointer<Uint32> pCbSize)>
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Uint32> pCbSize)>()(
-    ptr.ref.lpVtbl,
-    pCbSize,
-  );
+  int getSizeMax(Pointer<Uint32> pCbSize) =>
+      (ptr.ref.vtable + 7)
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Uint32> pCbSize)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Uint32> pCbSize)>()(
+        ptr.ref.lpVtbl,
+        pCbSize,
+      );
 
   int initNew() => (ptr.ref.vtable + 8)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()

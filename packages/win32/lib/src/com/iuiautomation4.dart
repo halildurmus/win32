@@ -45,42 +45,43 @@ class IUIAutomation4 extends IUIAutomation3 {
     int changesCount,
     Pointer<COMObject> pCacheRequest,
     Pointer<COMObject> handler,
-  ) => (ptr.ref.vtable + 66)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  ) =>
+      (ptr.ref.vtable + 66)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<COMObject> element,
+                  Int32 scope,
+                  Pointer<Int32> changeTypes,
+                  Int32 changesCount,
+                  Pointer<COMObject> pCacheRequest,
+                  Pointer<COMObject> handler,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
               Pointer<COMObject> element,
-              Int32 scope,
+              int scope,
               Pointer<Int32> changeTypes,
-              Int32 changesCount,
+              int changesCount,
               Pointer<COMObject> pCacheRequest,
               Pointer<COMObject> handler,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(
-          Pointer,
-          Pointer<COMObject> element,
-          int scope,
-          Pointer<Int32> changeTypes,
-          int changesCount,
-          Pointer<COMObject> pCacheRequest,
-          Pointer<COMObject> handler,
-        )
-      >()(
-    ptr.ref.lpVtbl,
-    element,
-    scope,
-    changeTypes,
-    changesCount,
-    pCacheRequest,
-    handler,
-  );
+          >()(
+        ptr.ref.lpVtbl,
+        element,
+        scope,
+        changeTypes,
+        changesCount,
+        pCacheRequest,
+        handler,
+      );
 
   int removeChangesEventHandler(
     Pointer<COMObject> element,
