@@ -47,7 +47,7 @@ final _PathAllocCanonicalize = _api_ms_win_core_path_l1_1_0.lookupFunction<
   )
 >('PathAllocCanonicalize');
 
-/// Converts a path string into a canonical form.
+/// Concatenates two path fragments into a single path.
 ///
 /// ```c
 /// HRESULT PathAllocCombine(

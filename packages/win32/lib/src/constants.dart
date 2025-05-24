@@ -13363,27 +13363,31 @@ const PATHCCH_NONE = 0x0000000;
 const PATHCCH_ALLOW_LONG_PATHS = 0x00000001;
 
 /// Forces the API to treat the caller as long path enabled, independent of the
-/// process's long name enabled state. This option can be used only when
-/// [PATHCCH_ALLOW_LONG_PATHS] is specified, and cannot be used with
-/// [PATHCCH_FORCE_DISABLE_LONG_NAME_PROCESS].
+/// process's long name enabled state.
+///
+/// This option can be used only when [PATHCCH_ALLOW_LONG_PATHS] is specified,
+/// and cannot be used with [PATHCCH_FORCE_DISABLE_LONG_NAME_PROCESS].
 const PATHCCH_FORCE_ENABLE_LONG_NAME_PROCESS = 0x00000002;
 
 /// Forces the API to treat the caller as long path disabled, independent of
-/// the process's long name enabled state. This option can be used only when
-/// [PATHCCH_ALLOW_LONG_PATHS] is specified, and cannot be used with
-/// [PATHCCH_FORCE_ENABLE_LONG_NAME_PROCESS].
+/// the process's long name enabled state.
+///
+/// This option can be used only when [PATHCCH_ALLOW_LONG_PATHS] is specified,
+/// and cannot be used with [PATHCCH_FORCE_ENABLE_LONG_NAME_PROCESS].
 const PATHCCH_FORCE_DISABLE_LONG_NAME_PROCESS = 0x00000004;
 
 /// Disables the normalization of path segments that includes removing trailing
-/// dots and spaces. This enables access to paths that win32 path normalization
-/// will block.
+/// dots and spaces.
+///
+/// This enables access to paths that win32 path normalization will block.
 const PATHCCH_DO_NOT_NORMALIZE_SEGMENTS = 0x00000008;
 
 /// Converts the input path into the extended length DOS device path form
-/// (with the \\?\ prefix) if not already in that form. This enables access to
-/// paths that are otherwise not addressable due to Win32 normalization rules
-/// (that can strip trailing dots and spaces) and path length limitations.
-/// This option implies the same behavior of
+/// (with the \\?\ prefix) if not already in that form.
+///
+/// This enables access to paths that are otherwise not addressable due to Win32
+/// normalization rules (that can strip trailing dots and spaces) and path
+/// length limitations. This option implies the same behavior of
 /// [PATHCCH_DO_NOT_NORMALIZE_SEGMENTS].
 const PATHCCH_ENSURE_IS_EXTENDED_LENGTH_PATH = 0x00000010;
 
