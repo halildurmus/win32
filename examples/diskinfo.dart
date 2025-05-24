@@ -46,7 +46,7 @@ bool GetDriveGeometry(Pointer<Utf16> wszPath, Pointer<DISK_GEOMETRY> pdg) {
 }
 
 void main() {
-  final wszDrive = r"\\.\PhysicalDrive0".toNativeUtf16();
+  final wszDrive = r'\\.\PhysicalDrive0'.toNativeUtf16();
   final pdg = calloc<DISK_GEOMETRY>();
 
   try {
@@ -66,7 +66,7 @@ void main() {
           pdg.ref.BytesPerSector;
       print(
         'Disk size       = $DiskSize (Bytes)\n'
-        '                = ${DiskSize / (1024 * 1024 * 1024).toInt()} (Gb)',
+        '                = ${DiskSize / (1024 * 1024 * 1024)} (Gb)',
       );
     } else {
       print('GetDriveGeometry failed.');

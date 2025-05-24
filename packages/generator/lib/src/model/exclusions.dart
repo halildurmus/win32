@@ -23,7 +23,6 @@ const excludedWin32Structs = <String>{
 
 const excludedComInterfaces = <String>{
   // COM Interfaces that are weirdly named or internal artifacts.
-  // TODO: Revisit these.
   'Windows.Win32.System.Mmc._AppEvents',
   'Windows.Win32.System.Mmc._Application',
   'Windows.Win32.System.Mmc.Document',

@@ -26,7 +26,7 @@ void main() {
 
   if (FAILED(hr)) {
     final exception = WindowsException(hr);
-    print(exception.toString());
+    print(exception);
 
     CoUninitialize();
     throw exception; // Program has failed.
@@ -49,7 +49,7 @@ void main() {
 
   if (FAILED(hr)) {
     final exception = WindowsException(hr);
-    print(exception.toString());
+    print(exception);
 
     CoUninitialize();
     throw exception;
@@ -62,7 +62,7 @@ void main() {
   // to make IWbemServices calls.
 
   hr = pLoc.connectServer(
-    TEXT('ROOT\\CIMV2'), // WMI namespace
+    TEXT(r'ROOT\CIMV2'), // WMI namespace
     nullptr, // User name
     nullptr, // User password
     nullptr, // Locale
@@ -74,13 +74,13 @@ void main() {
 
   if (FAILED(hr)) {
     final exception = WindowsException(hr);
-    print(exception.toString());
+    print(exception);
 
     CoUninitialize();
     throw exception; // Program has failed.
   }
 
-  print('Connected to ROOT\\CIMV2 WMI namespace');
+  print(r'Connected to ROOT\CIMV2 WMI namespace');
 
   final pSvc = IWbemServices(proxy.cast());
 
@@ -99,7 +99,7 @@ void main() {
 
   if (FAILED(hr)) {
     final exception = WindowsException(hr);
-    print(exception.toString());
+    print(exception);
     CoUninitialize();
     throw exception; // Program has failed.
   }
@@ -120,7 +120,7 @@ void main() {
 
   if (FAILED(hr)) {
     final exception = WindowsException(hr);
-    print(exception.toString());
+    print(exception);
 
     CoUninitialize();
 

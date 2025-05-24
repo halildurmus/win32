@@ -9,10 +9,9 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 class RawPrinter {
+  RawPrinter(this.printerName, this.alloc);
   final String printerName;
   final Arena alloc;
-
-  RawPrinter(this.printerName, this.alloc);
 
   Pointer<HANDLE> _startRawPrintJob({
     required String printerName,
@@ -52,19 +51,15 @@ class RawPrinter {
     return phPrinter;
   }
 
-  bool _startRawPrintPage(Pointer<HANDLE> phPrinter) {
-    //https://learn.microsoft.com/windows/win32/printdocs/startpageprinter
-    return StartPagePrinter(phPrinter.value) != 0;
-  }
+  //https://learn.microsoft.com/windows/win32/printdocs/startpageprinter
+  bool _startRawPrintPage(Pointer<HANDLE> phPrinter) =>
+      StartPagePrinter(phPrinter.value) != 0;
 
-  bool _endRawPrintPage(Pointer<HANDLE> phPrinter) {
-    return EndPagePrinter(phPrinter.value) != 0;
-  }
+  bool _endRawPrintPage(Pointer<HANDLE> phPrinter) =>
+      EndPagePrinter(phPrinter.value) != 0;
 
-  bool _endRawPrintJob(Pointer<HANDLE> phPrinter) {
-    return EndDocPrinter(phPrinter.value) > 0 &&
-        ClosePrinter(phPrinter.value) != 0;
-  }
+  bool _endRawPrintJob(Pointer<HANDLE> phPrinter) =>
+      EndDocPrinter(phPrinter.value) > 0 && ClosePrinter(phPrinter.value) != 0;
 
   bool _printRawData(Pointer<HANDLE> phPrinter, String dataToPrint) {
     final cWritten = alloc<DWORD>();
@@ -96,7 +91,6 @@ class RawPrinter {
     final printerHandle = _startRawPrintJob(
       printerName: printerName,
       documentTitle: 'My document',
-      dataType: 'RAW',
     );
 
     res = _startRawPrintPage(printerHandle);
@@ -117,7 +111,7 @@ void main() {
   // Example: ESC/POS sequence to open the cash drawer
   const openCashDrawer = '\x1b\x70\x00';
 
-  using((Arena alloc) {
+  using((alloc) {
     // NOTE: You can get the printer name from the printer_list.dart example
     final printer = RawPrinter('EPSON TM-T20II Receipt', alloc);
 

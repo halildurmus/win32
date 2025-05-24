@@ -19,27 +19,25 @@ class VolumePanelState extends State<VolumePanel> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'Storage volumes: ',
-            style: TextStyle(fontWeight: FontWeight.bold),
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.all(16),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Storage volumes: ',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        Expanded(
+          child: ListView.builder(
+            itemCount: _volumes.length,
+            itemBuilder: (context, position) =>
+                VolumeCard(volume: _volumes[position]),
           ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: _volumes.length,
-              itemBuilder: (context, position) =>
-                  VolumeCard(volume: _volumes[position]),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+        ),
+      ],
+    ),
+  );
 }
 
 class VolumeCard extends StatefulWidget {
@@ -61,7 +59,6 @@ class VolumeCardState extends State<VolumeCard> {
           Padding(
             padding: const EdgeInsets.all(8),
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const FaIcon(
                   FontAwesomeIcons.hardDrive,

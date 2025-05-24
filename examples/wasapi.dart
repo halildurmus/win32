@@ -9,15 +9,15 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 const refTimesPerSecond = 5000000;
-const refTimesPerMillisecond = refTimesPerSecond / 1000;
+const double refTimesPerMillisecond = refTimesPerSecond / 1000;
 const frequency = 440; // 440Hz (concert pitch)
-const sampleCount = 96000 * 2;
+const int sampleCount = 96000 * 2;
 
 late Float32List pcmAudio;
 
-int bufferSize = 0;
-int pcmPos = 0;
-int bufferPos = 0;
+var bufferSize = 0;
+var pcmPos = 0;
+var bufferPos = 0;
 
 /// Initialize data values.
 void initData(WAVEFORMATEX waveFormat, int totalFrames) {
@@ -29,8 +29,8 @@ void initData(WAVEFORMATEX waveFormat, int totalFrames) {
     pcmAudio[i] = sampleValue;
   }
   bufferSize = totalFrames * waveFormat.nChannels;
-  print("bufferSize = $bufferSize");
-  print("sampsPerChan = ${totalFrames / waveFormat.nChannels}");
+  print('bufferSize = $bufferSize');
+  print('sampsPerChan = ${totalFrames / waveFormat.nChannels}');
 }
 
 /// Loads data into the memory buffer.
@@ -43,9 +43,9 @@ bool fillMemoryBuffer(
 ) {
   final fData = dataOut.cast<FLOAT>();
   final totalSamples = totalFrames * waveFormat.nChannels;
-  print("Frames to Fill = $totalFrames");
-  print("Samples to Fill = $totalSamples");
-  print("bufferPos = $bufferPos");
+  print('Frames to Fill = $totalFrames');
+  print('Samples to Fill = $totalSamples');
+  print('bufferPos = $bufferPos');
 
   if (pcmPos < sampleCount) {
     for (var i = 0; i < totalSamples; i += waveFormat.nChannels) {
@@ -98,7 +98,7 @@ void main() {
   final pcDevices = calloc<Uint32>();
   check(pDevices.getCount(pcDevices));
   final deviceCount = pcDevices.value;
-  print("$deviceCount audio device(s) detected:");
+  print('$deviceCount audio device(s) detected:');
 
   // Print available audio output devices
   for (var i = 0; i < deviceCount; i++) {
@@ -137,7 +137,7 @@ void main() {
     if (varName.vt != VT_EMPTY) {
       final bstrVal = varName.bstrVal;
       final name = bstrVal.toDartString();
-      print(" ID: $id Name: $name");
+      print(' ID: $id Name: $name');
       SysFreeString(bstrVal);
     } else {
       print(' Unknown device');
@@ -193,7 +193,7 @@ void main() {
 
   // Grab the entire buffer for the initial fill operation.
   final bufferFrameCount = getBufferFrameCount(pAudioClient);
-  print("Buffer Size = $bufferFrameCount frames");
+  print('Buffer Size = $bufferFrameCount frames');
   final pData = calloc<Pointer<BYTE>>();
   check(pAudioRenderClient.getBuffer(bufferFrameCount, pData));
 

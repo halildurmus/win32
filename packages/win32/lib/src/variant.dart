@@ -189,6 +189,7 @@ base class VARIANT extends Struct {
 
   // SCODE -> LONG -> long -> Int32
   int get scode => __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.scode;
+  // ignore: avoid_setters_without_getters
   set lscodeVal(int value) =>
       __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.scode = value;
 

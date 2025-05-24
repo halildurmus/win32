@@ -170,7 +170,7 @@ void main() {
 
   test('Check representation of Dart Guid versus Win32 API', () {
     // IID_IReference_Int16
-    final guid = '{6EC9E41B-6709-5647-9918-A1270110FC4E}';
+    const guid = '{6EC9E41B-6709-5647-9918-A1270110FC4E}';
 
     final pIID = convertToIID(guid);
     final dartGuid = Guid.parse(guid);
@@ -186,7 +186,7 @@ void main() {
 
   test('Check representation of native GUID versus Win32 API', () {
     // IID_IReference_Int16
-    final guid = '{6EC9E41B-6709-5647-9918-A1270110FC4E}';
+    const guid = '{6EC9E41B-6709-5647-9918-A1270110FC4E}';
 
     final pIID = convertToIID(guid); // wraps IIDFromString()
     final pGUID = GUIDFromString(guid);

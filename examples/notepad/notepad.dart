@@ -16,7 +16,7 @@ import 'resources.dart';
 const APP_NAME = 'DartNote'; // DartPad was taken :)
 
 /// Win32 handle to the current window instance
-final hInstance = GetModuleHandle(nullptr);
+final int hInstance = GetModuleHandle(nullptr);
 
 late NotepadEditor editor;
 late NotepadFind find;
@@ -25,10 +25,10 @@ late NotepadFind find;
 late int hwndEdit;
 
 late Pointer<FINDREPLACE> findReplace;
-int messageFindReplace = 0;
+var messageFindReplace = 0;
 int hDlgModeless = NULL;
 
-final iOffset = calloc<Uint32>();
+final Pointer<Uint32> iOffset = calloc<Uint32>();
 
 int mainWindowProc(int hwnd, int message, int wParam, int lParam) {
   switch (message) {

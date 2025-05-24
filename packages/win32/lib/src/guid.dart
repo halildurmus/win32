@@ -28,9 +28,7 @@ import 'win32/ole32.g.dart';
 /// To pass a GUID to a Windows API, use the [toNativeGUID] method to create a
 /// copy in unmanaged memory.
 class Guid {
-  // A GUID is a 128-bit unique value.
-  final Uint8List bytes;
-
+  // ignore: prefer_asserts_with_message
   const Guid(this.bytes) : assert(bytes.length == 16);
 
   /// Creates a Guid from four integer components.
@@ -39,12 +37,15 @@ class Guid {
   /// components should be 16-bit values, and the fourth component should be a
   /// 64-bit value.
   factory Guid.fromComponents(int data1, int data2, int data3, int data4) {
+    // ignore: prefer_asserts_with_message
     assert(data1 <= 0xFFFFFFFF);
+    // ignore: prefer_asserts_with_message
     assert(data2 <= 0xFFFF);
+    // ignore: prefer_asserts_with_message
     assert(data3 <= 0xFFFF);
 
     final guid = Uint8List(16);
-    guid.buffer.asUint32List(0)[0] = data1;
+    guid.buffer.asUint32List()[0] = data1;
     guid.buffer.asUint16List(4)[0] = data2;
     guid.buffer.asUint16List(6)[0] = data3;
     guid.buffer.asUint64List(8)[0] = data4;
@@ -74,6 +75,7 @@ class Guid {
     // This is a debug assert, becuase it's probably computationally expensive,
     // and int.parse will throw a FormatException anyway if it can't parse the
     // values.
+    // ignore: prefer_asserts_with_message
     assert(
       RegExp(
         r'\{[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}}',
@@ -102,6 +104,8 @@ class Guid {
 
     return Guid(Uint8List.fromList(guidAsBytes).asUnmodifiableView());
   }
+  // A GUID is a 128-bit unique value.
+  final Uint8List bytes;
 
   /// Copy the GUID to unmanaged memory and return a pointer to the memory
   /// location.
@@ -133,7 +137,7 @@ class Guid {
       (idx) => bytes[idx].toRadixString(16).padLeft(2, '0'),
     );
 
-    final formattedString = guidAsHexValues.join('');
+    final formattedString = guidAsHexValues.join();
     final part1 = formattedString.substring(0, 8);
     final part2 = formattedString.substring(8, 12);
     final part3 = formattedString.substring(12, 16);
@@ -190,7 +194,7 @@ base class GUID extends Struct {
   /// Create GUID from common {FDD39AD0-238F-46AF-ADB4-6C85480369C7} format
   void setGUID(String guidString) {
     final byteBuffer = Guid.parse(guidString).bytes.buffer;
-    Data1 = byteBuffer.asUint32List(0).first;
+    Data1 = byteBuffer.asUint32List().first;
     Data2 = byteBuffer.asUint16List(4).first;
     Data3 = byteBuffer.asUint16List(6).first;
     Data4 = byteBuffer.asUint64List(8).first;

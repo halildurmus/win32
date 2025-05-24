@@ -6,10 +6,10 @@ import 'dart:io';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-final hInst = GetModuleHandle(nullptr);
+final int hInst = GetModuleHandle(nullptr);
 
-const EVENT_QUIT = WM_APP + 2;
-const EVENT_TRAY_NOTIFY = WM_APP + 1;
+const int EVENT_QUIT = WM_APP + 2;
+const int EVENT_TRAY_NOTIFY = WM_APP + 1;
 
 typedef LocalWndProc =
     bool Function(int hWnd, int uMsg, int wParam, int lParam);

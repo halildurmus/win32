@@ -71,8 +71,6 @@ enum TrustLevel {
   /// The component requires the full privileges of the user.
   fullTrust(2);
 
-  final int value;
-
   const TrustLevel(this.value);
 
   factory TrustLevel.from(int value) => TrustLevel.values.firstWhere(
@@ -83,6 +81,8 @@ enum TrustLevel {
       'No enum value with that value',
     ),
   );
+
+  final int value;
 }
 
 /// {@category enum}

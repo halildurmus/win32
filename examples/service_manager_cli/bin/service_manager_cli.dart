@@ -1,3 +1,5 @@
+// ignore_for_file: parameter_assignments
+
 import 'dart:io';
 
 import 'package:service_manager_cli/service_manager_cli.dart';
@@ -10,7 +12,7 @@ void main(List<String> arguments) {
     return;
   }
 
-  bool verbose = false;
+  var verbose = false;
   if (arguments.contains('-v') || arguments.contains('--verbose')) {
     verbose = true;
     arguments = arguments.where((arg) => arg != '-v').toList();
@@ -24,7 +26,6 @@ void main(List<String> arguments) {
   switch (command) {
     case 'list':
       listServices();
-      break;
 
     case 'start':
       if (serviceName == null) {
@@ -32,7 +33,6 @@ void main(List<String> arguments) {
         exit(1);
       }
       startService(serviceName);
-      break;
 
     case 'status':
       if (serviceName == null) {
@@ -40,7 +40,6 @@ void main(List<String> arguments) {
         exit(1);
       }
       status(serviceName);
-      break;
 
     case 'stop':
       if (serviceName == null) {
@@ -48,7 +47,6 @@ void main(List<String> arguments) {
         exit(1);
       }
       stopService(serviceName);
-      break;
 
     default:
       print('Unknown command: $command');

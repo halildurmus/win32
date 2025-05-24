@@ -6,22 +6,6 @@ import 'package:win32/win32.dart';
 import 'piece.dart';
 
 class Canvas {
-  /// Handle to DC
-  final int hdc;
-
-  /// Handle to window
-  final int hwnd;
-
-  /// Rectangle for drawing. This will last for the lifetime of the app and
-  /// memory will be released at app termination.
-  final rect = calloc<RECT>();
-
-  /// Level width
-  final int width;
-
-  /// Level height
-  final int height;
-
   /// Initiate the drawing canvas
   Canvas(
     this.hdc,
@@ -45,6 +29,22 @@ class Canvas {
     SetBkColor(hdc, RGB(70, 70, 70));
     SetBkMode(hdc, TRANSPARENT);
   }
+
+  /// Handle to DC
+  final int hdc;
+
+  /// Handle to window
+  final int hwnd;
+
+  /// Rectangle for drawing. This will last for the lifetime of the app and
+  /// memory will be released at app termination.
+  final Pointer<RECT> rect = calloc<RECT>();
+
+  /// Level width
+  final int width;
+
+  /// Level height
+  final int height;
 
   void drawBlock(int x, int y, int color) {
     final hBrush = CreateSolidBrush(color);

@@ -10,19 +10,19 @@ import 'package:win32/win32.dart';
 
 // For simplicity, the sample uses a constant magnification factor
 const MAGFACTOR = 2.0;
-const RESTOREDWINDOWSTYLES =
+const int RESTOREDWINDOWSTYLES =
     WS_SIZEBOX | WS_SYSMENU | WS_CLIPCHILDREN | WS_CAPTION | WS_MAXIMIZEBOX;
 
 const timerInterval = 16;
-final windowClassName = TEXT('MagnifierWindow');
-final windowTitle = TEXT('Screen Magnifier Sample');
+final LPWSTR windowClassName = TEXT('MagnifierWindow');
+final LPWSTR windowTitle = TEXT('Screen Magnifier Sample');
 
 // Global variables
-int hwndMag = 0;
-int hwndHost = 0;
-final magWindowRect = calloc<RECT>();
-final hostWindowRect = calloc<RECT>();
-bool isFullScreen = false;
+var hwndMag = 0;
+var hwndHost = 0;
+final Pointer<RECT> magWindowRect = calloc<RECT>();
+final Pointer<RECT> hostWindowRect = calloc<RECT>();
+var isFullScreen = false;
 
 void main() => initApp(winMain);
 

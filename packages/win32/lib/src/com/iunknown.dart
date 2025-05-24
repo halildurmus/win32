@@ -24,14 +24,16 @@ const IID_IUnknown = '{00000000-0000-0000-c000-000000000046}';
 ///
 /// {@category com}
 class IUnknown {
-  // vtable begins at 0, is 3 entries long.
-  Pointer<COMObject> ptr;
-
   IUnknown(this.ptr) {
     if (!ptr.ref.isNull) {
       _finalizer.attach(this, ptr, detach: this);
     }
   }
+
+  factory IUnknown.from(IUnknown interface) =>
+      IUnknown(interface.toInterface(IID_IUnknown));
+  // vtable begins at 0, is 3 entries long.
+  Pointer<COMObject> ptr;
 
   static final _finalizer = Finalizer<Pointer<COMObject>>((ptr) {
     // Decrement the reference count of the object only when COM is initialized,
@@ -45,9 +47,6 @@ class IUnknown {
       .cast<Pointer<NativeFunction<Uint32 Function(VTablePointer lpVtbl)>>>()
       .value
       .asFunction<int Function(VTablePointer lpVtbl)>()(ptr.ref.lpVtbl);
-
-  factory IUnknown.from(IUnknown interface) =>
-      IUnknown(interface.toInterface(IID_IUnknown));
 
   /// Queries a COM object for a pointer to one of its interface; identifying
   /// the interface by a reference to its interface identifier (IID).

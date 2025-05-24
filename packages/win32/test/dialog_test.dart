@@ -126,7 +126,6 @@ void main() {
       cy: 20,
       id: ID_EDITTEXT,
       windowSystemClass: 0x0081, // edit
-      text: '',
     );
 
     expect(idx, equals(dialogGolden.length));

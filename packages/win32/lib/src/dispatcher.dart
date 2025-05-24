@@ -53,7 +53,7 @@ final class Dispatcher {
   factory Dispatcher.fromProgID(String progID) => using((arena) {
     final lpszProgID = progID.toNativeUtf16(allocator: arena);
     final lpclsid = arena<GUID>();
-    var hr = CLSIDFromProgID(lpszProgID, lpclsid);
+    final hr = CLSIDFromProgID(lpszProgID, lpclsid);
     if (FAILED(hr)) throw WindowsException(hr);
     return Dispatcher.fromCLSID(lpclsid.ref.toString());
   });

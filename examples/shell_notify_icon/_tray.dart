@@ -7,8 +7,9 @@ import '_app.dart' as app;
 import '_app.dart';
 import '_menu.dart' as menu;
 
-final _guid = Guid.generate().toNativeGUID();
-final _nid = calloc<NOTIFYICONDATA>()..ref.cbSize = sizeOf<NOTIFYICONDATA>();
+final Pointer<GUID> _guid = Guid.generate().toNativeGUID();
+final Pointer<NOTIFYICONDATA> _nid = calloc<NOTIFYICONDATA>()
+  ..ref.cbSize = sizeOf<NOTIFYICONDATA>();
 
 bool _trayWndProc(int hWnd, int msg, int wParam, int lParam) {
   final hWnd = _nid.ref.hWnd;

@@ -9,15 +9,6 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 class NotepadFile {
-  /// The fully-qualified name of the current working file
-  /// (e.g. `C:\src\myfile.txt`)
-  String path;
-
-  /// The filename and extension of the current working file (e.g. `myfile.txt`)
-  String title;
-
-  late Pointer<OPENFILENAME> ofn;
-
   NotepadFile(int hwnd, this.path, this.title) {
     ofn = calloc<OPENFILENAME>()
       ..ref.lStructSize = sizeOf<OPENFILENAME>()
@@ -29,6 +20,15 @@ class NotepadFile {
       ..ref.nMaxFileTitle = MAX_PATH
       ..ref.lpstrDefExt = TEXT('txt');
   }
+
+  /// The fully-qualified name of the current working file
+  /// (e.g. `C:\src\myfile.txt`)
+  String path;
+
+  /// The filename and extension of the current working file (e.g. `myfile.txt`)
+  String title;
+
+  late Pointer<OPENFILENAME> ofn;
 
   /// Shows open dialog.
   ///

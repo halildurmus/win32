@@ -40,10 +40,10 @@ void main() {
       orderedEquals([
         "import 'dart:async';",
         "import 'dart:ffi';",
-        "",
+        '',
         "import 'package:ffi/ffi.dart';",
         "import 'package:win32/win32.dart';",
-        "",
+        '',
         "import '../../../combase.dart';",
         "import '../../../exceptions.dart';",
         "import '../../../macros.dart';",

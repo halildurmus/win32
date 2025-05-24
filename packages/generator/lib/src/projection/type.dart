@@ -4,6 +4,13 @@ import '../model/load_json.dart';
 import 'utils.dart';
 
 class TypeTuple {
+  const TypeTuple(
+    this.nativeType,
+    this.dartType, {
+    this.attribute,
+    this.methodParamType,
+  });
+
   /// The type, as represented in the native function (e.g. `Uint64`)
   final String nativeType;
 
@@ -15,13 +22,6 @@ class TypeTuple {
 
   /// The type, as represented in a method declaration prior to conversion (e.g. `DateTime`)
   final String? methodParamType;
-
-  const TypeTuple(
-    this.nativeType,
-    this.dartType, {
-    this.attribute,
-    this.methodParamType,
-  });
 }
 
 const Map<BaseType, TypeTuple> baseNativeMapping = {
@@ -42,7 +42,7 @@ const Map<BaseType, TypeTuple> baseNativeMapping = {
   BaseType.charType: TypeTuple('Uint16', 'int', attribute: '@Uint16()'),
 };
 
-const Map<String, TypeTuple> specialTypes = {
+const specialTypes = <String, TypeTuple>{
   'Windows.Win32.Foundation.BSTR': TypeTuple(
     'Pointer<Utf16>',
     'Pointer<Utf16>',
@@ -55,9 +55,10 @@ const Map<String, TypeTuple> specialTypes = {
   'System.Guid': TypeTuple('GUID', 'GUID'),
 };
 
-final callbackTypeMapping = loadMap('win32_callbacks.json');
+final Map<String, String> callbackTypeMapping = loadMap('win32_callbacks.json');
 
 class TypeProjection {
+  TypeProjection(this.typeIdentifier);
   final TypeIdentifier typeIdentifier;
   TypeTuple? _projection;
 
@@ -66,8 +67,6 @@ class TypeProjection {
 
     return _projection!;
   }
-
-  TypeProjection(this.typeIdentifier);
 
   String get attribute => projection.attribute ?? '';
   String get nativeType => projection.nativeType;

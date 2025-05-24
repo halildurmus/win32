@@ -67,6 +67,7 @@ void initApp(Function winMain) {
   GetStartupInfo(lpStartupInfo);
 
   try {
+    // ignore: avoid_dynamic_calls
     winMain(
       hInstance,
       args,

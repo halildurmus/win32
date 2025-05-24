@@ -16,10 +16,10 @@ const LLKHF_INJECTED = 0x00000010;
 const VK_A = 0x41;
 const VK_B = 0x42;
 
-const szTop = "Message        Key          Char       Scan Ext ALT Prev Tran";
-const szUnd = "_______        ___          ____       ____ ___ ___ ____ ____";
-final pszTop = TEXT(szTop);
-final pszUnd = TEXT(szUnd);
+const szTop = 'Message        Key          Char       Scan Ext ALT Prev Tran';
+const szUnd = '_______        ___          ____       ____ ___ ___ ____ ____';
+final LPWSTR pszTop = TEXT(szTop);
+final LPWSTR pszUnd = TEXT(szUnd);
 
 const messages = <String>[
   'WM_KEYDOWN',
@@ -32,30 +32,29 @@ const messages = <String>[
   'WM_SYSDEADCHAR',
 ];
 
-int /* HHOOK */ keyHook = 0;
+var /* HHOOK */ keyHook = 0;
 
 final Pointer<RECT> rectScroll = calloc<RECT>();
-int hdc = 0;
-int cxClient = 0;
-int cyClient = 0;
-int cxClientMax = 0;
-int cyClientMax = 0;
-int cLinesMax = 0;
-int cLines = 0;
-int cxChar = 0;
-int cyChar = 0;
+var hdc = 0;
+var cxClient = 0;
+var cyClient = 0;
+var cxClientMax = 0;
+var cyClientMax = 0;
+var cLinesMax = 0;
+var cLines = 0;
+var cxChar = 0;
+var cyChar = 0;
 
 class Message {
+  const Message(this.uMsg, this.wParam, this.lParam);
   final int uMsg;
   final int wParam;
   final int lParam;
-
-  const Message(this.uMsg, this.wParam, this.lParam);
 }
 
-final List<Message> msgArr = <Message>[];
-final className = TEXT('Keyboard Hook WndClass');
-final windowCaption = TEXT('Keyboard message viewer');
+final msgArr = <Message>[];
+final LPWSTR className = TEXT('Keyboard Hook WndClass');
+final LPWSTR windowCaption = TEXT('Keyboard message viewer');
 
 int lowlevelKeyboardHookProc(int code, int wParam, int lParam) {
   if (code == HC_ACTION) {

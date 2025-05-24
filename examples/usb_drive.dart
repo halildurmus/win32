@@ -204,16 +204,16 @@ Stream<Map<String, Object?>> get onUsbDriveChanged {
       await Isolate.spawn(listenForUsbDriveChanges, receivePort!.sendPort);
 
       // Listen for messages from the isolate.
-      receivePortSubscription = receivePort!.listen((message) {
+      receivePortSubscription = receivePort!.listen((message) async {
         if (message is SendPort) {
           isolateStopPort = message;
         } else if (message is Map<String, Object?>) {
           controller?.add(message);
         } else if (message is Error) {
-          receivePortSubscription?.cancel();
+          await receivePortSubscription?.cancel();
           receivePort?.close();
           controller?.addError(message);
-          controller?.close();
+          await controller?.close();
         }
       });
     },

@@ -145,11 +145,11 @@ class CorElementType {
   /// A type modifier that is a sentinel for a list of a variable number of
   /// parameters.
   @Deprecated('Use ELEMENT_TYPE_SENTINEL instead')
-  static const ELEMENT_TYPE_SENTINEL = 0x01 | ELEMENT_TYPE_MODIFIER;
+  static const int ELEMENT_TYPE_SENTINEL = 0x01 | ELEMENT_TYPE_MODIFIER;
 
   /// Used internally.
   @Deprecated('Use ELEMENT_TYPE_PINNED instead')
-  static const ELEMENT_TYPE_PINNED = 0x05 | ELEMENT_TYPE_MODIFIER;
+  static const int ELEMENT_TYPE_PINNED = 0x05 | ELEMENT_TYPE_MODIFIER;
 }
 
 /// Contains values that describe the metadata of an event.
@@ -1058,10 +1058,10 @@ const ELEMENT_TYPE_MODIFIER = 0x40;
 
 /// A type modifier that is a sentinel for a list of a variable number of
 /// parameters.
-const ELEMENT_TYPE_SENTINEL = 0x01 | ELEMENT_TYPE_MODIFIER;
+const int ELEMENT_TYPE_SENTINEL = 0x01 | ELEMENT_TYPE_MODIFIER;
 
 /// Used internally.
-const ELEMENT_TYPE_PINNED = 0x05 | ELEMENT_TYPE_MODIFIER;
+const int ELEMENT_TYPE_PINNED = 0x05 | ELEMENT_TYPE_MODIFIER;
 
 /// Specifies that the event is special, and that its name describes how.
 const evSpecialName = 0x0200;

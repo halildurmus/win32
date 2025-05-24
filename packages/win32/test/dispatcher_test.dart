@@ -44,7 +44,7 @@ void main() {
           (d) => d.dispose(),
         );
 
-        final newFolderName = BSTR.fromString(r'testfolder456');
+        final newFolderName = BSTR.fromString('testfolder456');
         final newFolderNameParam = arena<VARIANT>();
         VariantInit(newFolderNameParam);
         newFolderNameParam.ref

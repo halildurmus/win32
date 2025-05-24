@@ -1,6 +1,6 @@
 // Explores the Windows Recycle Bin.
 
-// ignore_for_file: constant_identifier_names
+// ignore_for_file: constant_identifier_names, unreachable_from_main
 
 import 'dart:ffi';
 import 'dart:io';
@@ -9,10 +9,10 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 class RecycleBinInfo {
+  const RecycleBinInfo(this.itemCount, this.totalSizeInBytes);
+
   final int itemCount;
   final int totalSizeInBytes;
-
-  const RecycleBinInfo(this.itemCount, this.totalSizeInBytes);
 }
 
 RecycleBinInfo queryRecycleBin(String rootPath) {
@@ -46,7 +46,7 @@ String getTempFileName() {
       0,
       lpTempFileName,
     );
-    if (result == 0) throw 'Unable to create filename';
+    if (result == 0) throw StateError('Unable to create filename');
 
     return lpTempFileName.toDartString();
   } finally {
@@ -76,7 +76,7 @@ bool recycleFile(String file) {
 }
 
 void main(List<String> args) {
-  final info = queryRecycleBin('c:\\');
+  final info = queryRecycleBin(r'c:\');
   print(
     'There are ${info.itemCount} items in the '
     'Recycle Bin on the C: drive.',
@@ -91,7 +91,7 @@ void main(List<String> args) {
   print('Sending temporary file $tempFile to the Recycle Bin.');
   recycleFile(tempFile);
 
-  final newInfo = queryRecycleBin('c:\\');
+  final newInfo = queryRecycleBin(r'c:\');
   print(
     'There now are ${newInfo.itemCount} items in the '
     'Recycle Bin on the C: drive.',

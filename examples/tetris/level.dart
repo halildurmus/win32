@@ -7,20 +7,7 @@ import 'piece.dart';
 import 'pieceset.dart';
 
 class Level {
-  List<List<int>> board = []; // The canvas / drawing board
-  Canvas engine; // Does graphic rendering
-  PieceSet pieceSet = PieceSet(); // Piece generator
-  Piece? current; // Current dropping piece
-  late Piece next; // Next piece
-
-  int width; // Level width (in cells)
-  int height; // Level height
-  late int posX; // X coordinate of dropping piece (Cartesian system)
-  int? posY; // Y coordinate of dropping piece
-  int speed; // Drop a cell every _speed_ millisecs
-  int lastTime; // Last time updated
-  late int currentTime; // Current update time
-  int score; // Player's score
+  // Player's score
 
   // de: used to draw the level
   // width & height: level size in cells
@@ -34,6 +21,20 @@ class Level {
     );
     next = pieceSet.randomPiece;
   }
+  List<List<int>> board = []; // The canvas / drawing board
+  Canvas engine; // Does graphic rendering
+  var pieceSet = PieceSet(); // Piece generator
+  Piece? current; // Current dropping piece
+  late Piece next; // Next piece
+
+  int width; // Level width (in cells)
+  int height; // Level height
+  late int posX; // X coordinate of dropping piece (Cartesian system)
+  int? posY; // Y coordinate of dropping piece
+  int speed; // Drop a cell every _speed_ millisecs
+  int lastTime; // Last time updated
+  late int currentTime; // Current update time
+  int score;
 
   // Draws the level
   void drawBoard() {
@@ -135,7 +136,8 @@ class Level {
 
   void clear(Piece piece) {
     final apt = piece.body;
-    int x, y;
+    int x;
+    int y;
     for (var i = 0; i < 4; i++) {
       x = posX + apt[i].x;
       y = posY! + apt[i].y;
@@ -155,7 +157,8 @@ class Level {
 
   bool isHitBottom() {
     final apt = current!.skirt;
-    int x, y;
+    int x;
+    int y;
     for (var i = 0; i < apt.length; i++) {
       x = posX + apt[i].x;
       y = posY! + apt[i].y;
@@ -168,7 +171,8 @@ class Level {
 
   bool isHitLeft() {
     final apt = current!.leftSide;
-    int x, y;
+    int x;
+    int y;
     for (var i = 0; i < apt.length; i++) {
       x = posX + apt[i].x;
       y = posY! + apt[i].y;
@@ -184,7 +188,8 @@ class Level {
 
   bool isHitRight() {
     final apt = current!.rightSide;
-    int x, y;
+    int x;
+    int y;
     for (var i = 0; i < apt.length; i++) {
       x = posX + apt[i].x;
       y = posY! + apt[i].y;
@@ -200,7 +205,8 @@ class Level {
 
   bool isCovered(Piece piece, int x, int? y) {
     final apt = piece.body;
-    int tmpX, tmpY;
+    int tmpX;
+    int tmpY;
     for (var i = 0; i < 4; i++) {
       tmpX = apt[i].x + x;
       tmpY = apt[i].y + y!;

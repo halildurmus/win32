@@ -40,12 +40,12 @@ export 'src/structs.g.dart'
     hide
         ADDRINFO,
         FD_SET,
-        IN_ADDR,
-        SOCKADDR,
-        TIMEVAL,
         HOSTENT,
+        IN_ADDR,
         PROTOENT,
-        SERVENT;
+        SERVENT,
+        SOCKADDR,
+        TIMEVAL;
 export 'src/types.dart';
 export 'src/utils.dart';
 export 'src/variant.dart';

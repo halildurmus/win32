@@ -1,7 +1,7 @@
 // Demonstrates simple GDI drawing and min/max window sizing
 
 import 'dart:ffi';
-import 'dart:math' show min, max;
+import 'dart:math' show max, min;
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';

@@ -12,16 +12,15 @@ import 'package:win32/win32.dart';
 const MAX_STRING_LEN = 256;
 
 class NotepadFind {
-  late Pointer<FINDREPLACE> find;
-
-  late Pointer<Utf16> szFindText;
-  late Pointer<Utf16> szReplText;
-
   NotepadFind() {
     szFindText = wsalloc(MAX_STRING_LEN);
     szReplText = wsalloc(MAX_STRING_LEN);
     find = calloc<FINDREPLACE>();
   }
+  late Pointer<FINDREPLACE> find;
+
+  late Pointer<Utf16> szFindText;
+  late Pointer<Utf16> szReplText;
 
   int showFindDialog(int hwnd) {
     find.ref.lStructSize = sizeOf<FINDREPLACE>();

@@ -30,6 +30,20 @@ const windowsBuilds = <String, int>{
 
 /// Converts to/from functions.json
 class Win32Function {
+  Win32Function.fromJson(Map<String, dynamic> json)
+    // ignore: prefer_asserts_with_message
+    : assert(json['prototype'] != null),
+      // ignore: prefer_asserts_with_message
+      assert(json['comment'] != null),
+      prototype = json['prototype'] as String,
+      functionSymbol = functionNameFromPrototype(json['prototype'] as String),
+      comment = json['comment'] as String,
+      category = json['category'] != null ? json['category'] as String : '',
+      _isCustomCategorySet = json['category'] != null,
+      minimumWindowsVersion = json['minimumWindowsVersion'] != null
+          ? windowsBuilds[(json['minimumWindowsVersion'] as String)]!
+          : 0,
+      test = json['test'] as bool? ?? true;
   final String prototype;
   final String comment;
   final String functionSymbol;
@@ -56,19 +70,6 @@ class Win32Function {
       ),
     if (!test) 'test': false,
   };
-
-  Win32Function.fromJson(Map<String, dynamic> json)
-    : assert(json['prototype'] != null),
-      assert(json['comment'] != null),
-      prototype = json['prototype'] as String,
-      functionSymbol = functionNameFromPrototype(json['prototype'] as String),
-      comment = json['comment'] as String,
-      category = json['category'] != null ? json['category'] as String : '',
-      _isCustomCategorySet = json['category'] != null,
-      minimumWindowsVersion = json['minimumWindowsVersion'] != null
-          ? windowsBuilds[(json['minimumWindowsVersion'] as String)]!
-          : 0,
-      test = json['test'] as bool? ?? true;
 }
 
 SplayTreeMap<String, Win32Function> loadFunctionsFromJson() {
@@ -89,7 +90,7 @@ SplayTreeMap<String, Win32Function> loadFunctionsFromJson() {
 }
 
 void saveFunctionsToJson(SplayTreeMap<String, Win32Function> functions) {
-  final encoder = const JsonEncoder.withIndent('    ');
+  const encoder = JsonEncoder.withIndent('    ');
   final outputText = encoder.convert(functions).replaceAll(r'\\n', r'\n');
   File('data/win32_functions.json').writeAsStringSync(outputText);
 }

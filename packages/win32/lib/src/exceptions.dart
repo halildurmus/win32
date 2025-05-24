@@ -11,11 +11,10 @@ import 'win32/kernel32.g.dart';
 
 /// Generic COM Exception
 class COMException implements Exception {
+  COMException(this.hr, {this.message});
   int hr;
 
   String? message;
-
-  COMException(this.hr, {this.message});
 }
 
 /// Generalized Windows exception

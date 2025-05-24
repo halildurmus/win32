@@ -7,7 +7,7 @@
 // translation of the C code. Nevertheless, it demonstrates some useful
 // concepts, including pointer arithmetic and use of virtual memory in Win32.
 
-// ignore_for_file: constant_identifier_names
+// ignore_for_file: constant_identifier_names, unreachable_from_main
 
 import 'dart:ffi';
 import 'dart:math' show Random;
@@ -21,36 +21,37 @@ const IDT_TIMER2 = 2;
 
 final rng = Random();
 
-final bitmapInfo = calloc<BITMAPINFO>();
+final Pointer<BITMAPINFO> bitmapInfo = calloc<BITMAPINFO>();
 
 Pointer bitmapMemory = nullptr;
 late int bitmapWidth;
 late int bitmapHeight;
 const bytesPerPixel = 4;
 
-bool isRunning = false;
-int gameOverRow = 0;
-bool wipeDown = true;
+var isRunning = false;
+var gameOverRow = 0;
+var wipeDown = true;
 
-int appleX = 0;
-int appleY = 0;
-int blocksPerWidth = 0;
-int blocksPerHeight = 0;
-int timerAmount = 100;
+var appleX = 0;
+var appleY = 0;
+var blocksPerWidth = 0;
+var blocksPerHeight = 0;
+var timerAmount = 100;
 
-Point direction = Point();
-List<Point> snakePoints = <Point>[];
-List<List<int>> data = [<int>[]];
+var direction = Point();
+var snakePoints = <Point>[];
+var data = <List<int>>[<int>[]];
 
 class Point {
+  Point([this.x = 0, this.y = 0]);
+
+  factory Point.clone(Point orig) => Point(orig.x, orig.y);
+
   int x;
   int y;
 
   @override
   String toString() => '($x, $y)';
-
-  Point([this.x = 0, this.y = 0]);
-  factory Point.clone(Point orig) => Point(orig.x, orig.y);
 }
 
 /// Fill rectangle with supplied 24-bit color in RGB format

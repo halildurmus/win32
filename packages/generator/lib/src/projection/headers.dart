@@ -5,6 +5,7 @@ const functionsFileHeader = '''
 
 // ignore_for_file: unused_import, non_constant_identifier_names
 // ignore_for_file: constant_identifier_names, camel_case_types
+// ignore_for_file: specify_nonobvious_property_types
 
 import 'dart:ffi';
 

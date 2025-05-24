@@ -8,9 +8,9 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 class Size {
+  const Size({required this.width, required this.height});
   final int width;
   final int height;
-  const Size({required this.width, required this.height});
 }
 
 Size getMonitorSizeInMM() {

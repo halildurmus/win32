@@ -37,8 +37,6 @@ const ffiTypes = <String>{
   // from this list.
   //
   // 'Handle',
-
-  // TODO: Add named prefix to use of dart:ffi so that this is a non-issue
 };
 
 /// These types are used in Win32 both as types and identifiers.

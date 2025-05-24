@@ -10,11 +10,10 @@ import 'utils.dart';
 
 /// Represents a Dart projection of a Struct typedef.
 class StructProjection {
+  StructProjection(this.typeDef, this.structName, {this.comment = ''});
   final TypeDef typeDef;
   final String structName;
   final String comment;
-
-  StructProjection(this.typeDef, this.structName, {this.comment = ''});
 
   bool _isNestedType(Field field) =>
       field.typeIdentifier.type?.isNested ?? false;
@@ -99,7 +98,7 @@ class StructProjection {
     for (final field in typeDef.fields) {
       final fieldTypeDef = field.typeIdentifier.type;
       if (fieldTypeDef != null &&
-          !field.isLiteral && // TODO: Can remove this without breaking v3?
+          !field.isLiteral &&
           !TypeProjection(field.typeIdentifier).isDartPrimitive) {
         final fieldPacking = calculatePackingAlignment(fieldTypeDef);
         alignment = min(fieldPacking, alignment);

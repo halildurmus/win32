@@ -1,6 +1,8 @@
 // Prints out information about one of a number of given Windows Subsystem for
 // Linux distributions.
 
+// ignore_for_file: unreachable_from_main
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -8,12 +10,6 @@ import 'package:win32/win32.dart';
 
 /// Represents a configuration of an installed WSL distribution.
 class DistributionConfiguration {
-  final String name;
-  final int wslVersion;
-  final int userID;
-  final int flags;
-  final List<String> environmentVariables;
-
   const DistributionConfiguration(
     this.name,
     this.wslVersion,
@@ -21,6 +17,11 @@ class DistributionConfiguration {
     this.flags,
     this.environmentVariables,
   );
+  final String name;
+  final int wslVersion;
+  final int userID;
+  final int flags;
+  final List<String> environmentVariables;
 }
 
 /// Check whether a distribution exists

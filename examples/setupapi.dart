@@ -7,7 +7,7 @@ import 'package:win32/win32.dart';
 
 void main() {
   // https://learn.microsoft.com/windows-hardware/drivers/install/overview-of-device-setup-classes
-  using((Arena arena) {
+  using((arena) {
     final deviceGuid = arena<GUID>()..ref.setGUID(GUID_DEVCLASS_NET);
 
     final hDevInfo = SetupDiGetClassDevs(
@@ -27,7 +27,7 @@ void main() {
   });
 
   // https://learn.microsoft.com/windows-hardware/drivers/install/overview-of-device-interface-classes
-  using((Arena arena) {
+  using((arena) {
     final interfaceGuid = arena<GUID>()..ref.setGUID(GUID_DEVINTERFACE_HID);
 
     final hDevInfo = SetupDiGetClassDevs(
@@ -99,8 +99,8 @@ Iterable<String> devicePathsByInterface(
         nullptr,
       );
 
-      // TODO: Uncomment when https://github.com/halildurmus/win32/issues/384
-      // is successfully resolved.
+      // TODO(halildurmus): Uncomment when
+      // https://github.com/halildurmus/win32/issues/384 is fixed.
 
       // if (hr != TRUE) {
       //   final error = GetLastError();

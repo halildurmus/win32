@@ -216,6 +216,7 @@ List<String> sortImports(List<String> importLines) {
   final projectRelativeImports = SplayTreeSet<String>();
 
   for (final importLine in importLines) {
+    // ignore: prefer_asserts_with_message
     assert(importLine.startsWith('import ') && importLine.endsWith(';'));
 
     if (importLine.contains('dart:')) {
