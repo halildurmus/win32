@@ -4,8 +4,6 @@ import 'com_interface.dart';
 import 'utils.dart';
 
 class ComClassProjection extends ComInterfaceProjection {
-  final ComInterfaceProjection interface;
-
   ComClassProjection(super.typeDef, this.interface, [super.comment]);
 
   factory ComClassProjection.fromInterface(
@@ -26,6 +24,7 @@ class ComClassProjection extends ComInterfaceProjection {
       comment,
     );
   }
+  final ComInterfaceProjection interface;
 
   /// Represents a mapping from the interface name to the corresponding class
   /// name.
@@ -66,7 +65,7 @@ class ComClassProjection extends ComInterfaceProjection {
   @override
   String toString() =>
       '''
-    ${interface.toString()}
+    $interface
     $guidConstants
 
     $classPreamble

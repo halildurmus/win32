@@ -8,7 +8,7 @@ import 'package:win32/win32.dart';
 void main() {
   for (final display in Displays.all()) {
     if (display.isConnected) {
-      display.saveScreenshot("${display.name}.bmp");
+      display.saveScreenshot('${display.name}.bmp');
     }
   }
 }
@@ -30,9 +30,8 @@ class Displays {
 }
 
 class Display {
-  final String rawName;
-
   Display(this.rawName, this._stateFlags);
+  final String rawName;
 
   void saveScreenshot(String fileName) {
     final hdcScreen = _createDC();
@@ -44,16 +43,14 @@ class Display {
     DeleteObject(hbmScreen);
   }
 
-  int _createDC() {
-    return using(
-      (arena) => CreateDC(
-        nullptr,
-        rawName.toNativeUtf16(allocator: arena),
-        nullptr,
-        nullptr,
-      ),
-    );
-  }
+  int _createDC() => using(
+    (arena) => CreateDC(
+      nullptr,
+      rawName.toNativeUtf16(allocator: arena),
+      nullptr,
+      nullptr,
+    ),
+  );
 
   int _createScreenshot(int hdcScreen) {
     final hdcMemDC = CreateCompatibleDC(hdcScreen);
@@ -71,7 +68,7 @@ class Display {
     }
   }
 
-  String get name => rawName.replaceAll(RegExp(r'[^a-zA-Z\d]'), "");
+  String get name => rawName.replaceAll(RegExp(r'[^a-zA-Z\d]'), '');
 
   final int _stateFlags;
 
@@ -80,10 +77,9 @@ class Display {
 }
 
 class BmpFile {
+  BmpFile(this.hdcScreen, this.hbmScreen);
   final int hdcScreen;
   final int hbmScreen;
-
-  BmpFile(this.hdcScreen, this.hbmScreen);
 
   void save(String fileName) {
     using((arena) {

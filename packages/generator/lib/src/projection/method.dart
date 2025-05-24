@@ -16,6 +16,18 @@ import 'utils.dart';
 ///
 /// Methods have names, a list of parameters, and may return a type.
 abstract class MethodProjection {
+  MethodProjection(this.method, this.vtableOffset)
+    : name = uniquelyNameMethod(method),
+      returnType = TypeProjection(method.returnType.typeIdentifier),
+      parameters = method.parameters
+          .map(
+            (param) => ParameterProjection(
+              param.name,
+              TypeProjection(param.typeIdentifier),
+            ),
+          )
+          .toList();
+
   /// The retrieved Windows metadata for the method or property.
   final Method method;
 
@@ -30,18 +42,6 @@ abstract class MethodProjection {
 
   /// Projection for the return type.
   final TypeProjection returnType;
-
-  MethodProjection(this.method, this.vtableOffset)
-    : name = uniquelyNameMethod(method),
-      returnType = TypeProjection(method.returnType.typeIdentifier),
-      parameters = method.parameters
-          .map(
-            (param) => ParameterProjection(
-              param.name,
-              TypeProjection(param.typeIdentifier),
-            ),
-          )
-          .toList();
 
   /// Uniquely name the method.
   ///

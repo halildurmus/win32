@@ -27,12 +27,12 @@ export 'src/structs.g.dart'
     show
         ADDRINFO,
         FD_SET,
-        IN_ADDR,
-        SOCKADDR,
-        TIMEVAL,
         HOSTENT,
+        IN_ADDR,
         PROTOENT,
-        SERVENT;
+        SERVENT,
+        SOCKADDR,
+        TIMEVAL;
 export 'src/constants_winsock.dart';
 export 'src/enums.g.dart' show ADDRESS_FAMILY, WINSOCK_SOCKET_TYPE;
 

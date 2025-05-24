@@ -38,11 +38,6 @@ import 'win32/oleaut32.g.dart';
 /// for freeing the memory allocated for a `BSTR` when it is no longer used. To
 /// release its memory, you can call an object's [free] method.
 class BSTR {
-  /// A pointer to the start of the string itself.
-  ///
-  /// The string is null terminated with a two-byte value (0x0000).
-  final Pointer<Utf16> ptr;
-
   const BSTR._(this.ptr);
 
   /// Create a BSTR from a given Dart string.
@@ -66,6 +61,11 @@ class BSTR {
 
     return BSTR._(bstr.cast());
   }
+
+  /// A pointer to the start of the string itself.
+  ///
+  /// The string is null terminated with a two-byte value (0x0000).
+  final Pointer<Utf16> ptr;
 
   /// Returns the length in characters.
   int get length => SysStringLen(ptr);

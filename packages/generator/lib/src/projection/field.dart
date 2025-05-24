@@ -8,10 +8,9 @@ import 'utils.dart';
 ///
 /// Fields are a tuple of a type and a name.
 class FieldProjection {
+  FieldProjection(this.field);
   final Field field;
   late final String fieldName = safeIdentifierForString(field.name);
-
-  FieldProjection(this.field);
 
   String _printCharArray(TypeProjection typeProjection) {
     final dimensionsUpperBound = typeProjection.arrayUpperBound;

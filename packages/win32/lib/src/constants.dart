@@ -126,7 +126,7 @@ const CLSCTX_REMOTE_SERVER = 0x10;
 
 /// The combination of `CLSCTX_INPROC_SERVER`, `CLSCTX_INPROC_HANDLER`,
 /// `CLSCTX_LOCAL_SERVER`, and `CLSCTX_REMOTE_SERVER`.
-const CLSCTX_ALL =
+const int CLSCTX_ALL =
     CLSCTX_INPROC_SERVER |
     CLSCTX_INPROC_HANDLER |
     CLSCTX_LOCAL_SERVER |
@@ -559,13 +559,13 @@ const SYNCHRONIZE = 0x00100000;
 const STANDARD_RIGHTS_REQUIRED = 0x000F0000;
 
 /// Currently defined to equal READ_CONTROL.
-const STANDARD_RIGHTS_READ = READ_CONTROL;
+const int STANDARD_RIGHTS_READ = READ_CONTROL;
 
 /// Currently defined to equal READ_CONTROL.
-const STANDARD_RIGHTS_WRITE = READ_CONTROL;
+const int STANDARD_RIGHTS_WRITE = READ_CONTROL;
 
 /// Currently defined to equal READ_CONTROL.
-const STANDARD_RIGHTS_EXECUTE = READ_CONTROL;
+const int STANDARD_RIGHTS_EXECUTE = READ_CONTROL;
 
 /// Combines DELETE, READ_CONTROL, WRITE_DAC, WRITE_OWNER, and SYNCHRONIZE
 /// access.
@@ -642,7 +642,7 @@ const TOKEN_ADJUST_DEFAULT = 0x0080;
 const TOKEN_ADJUST_SESSIONID = 0x0100;
 
 /// Combines all possible access rights for a token.
-const TOKEN_ALL_ACCESS =
+const int TOKEN_ALL_ACCESS =
     STANDARD_RIGHTS_REQUIRED |
     TOKEN_ASSIGN_PRIMARY |
     TOKEN_DUPLICATE |
@@ -655,18 +655,18 @@ const TOKEN_ALL_ACCESS =
     TOKEN_ADJUST_SESSIONID;
 
 /// Combines STANDARD_RIGHTS_READ and TOKEN_QUERY.
-const TOKEN_READ = STANDARD_RIGHTS_READ | TOKEN_QUERY;
+const int TOKEN_READ = STANDARD_RIGHTS_READ | TOKEN_QUERY;
 
 /// Combines STANDARD_RIGHTS_WRITE, TOKEN_ADJUST_PRIVILEGES,
 /// TOKEN_ADJUST_GROUPS, and TOKEN_ADJUST_DEFAULT.
-const TOKEN_WRITE =
+const int TOKEN_WRITE =
     STANDARD_RIGHTS_WRITE |
     TOKEN_ADJUST_PRIVILEGES |
     TOKEN_ADJUST_GROUPS |
     TOKEN_ADJUST_DEFAULT;
 
 /// Same as STANDARD_RIGHTS_EXECUTE.
-const TOKEN_EXECUTE = STANDARD_RIGHTS_EXECUTE;
+const int TOKEN_EXECUTE = STANDARD_RIGHTS_EXECUTE;
 
 // -----------------------------------------------------------------------------
 // Heap allocation flags
@@ -1139,7 +1139,7 @@ const WS_CAPTION = 0x00C00000;
 const WS_CHILD = 0x40000000;
 
 /// Same as the WS_CHILD style.
-const WS_CHILDWINDOW = WS_CHILD;
+const int WS_CHILDWINDOW = WS_CHILD;
 
 /// Excludes the area occupied by child windows when drawing occurs within the
 /// parent window. This style is used when creating the parent window.
@@ -1180,7 +1180,7 @@ const WS_GROUP = 0x00020000;
 const WS_HSCROLL = 0x00100000;
 
 /// The window is initially minimized. Same as the WS_MINIMIZE style.
-const WS_ICONIC = WS_MINIMIZE;
+const int WS_ICONIC = WS_MINIMIZE;
 
 /// The window is initially maximized.
 const WS_MAXIMIZE = 0x01000000;
@@ -1201,7 +1201,7 @@ const WS_MINIMIZEBOX = 0x00020000;
 const WS_OVERLAPPED = 0x00000000;
 
 /// The window is an overlapped window. Same as the WS_TILEDWINDOW style.
-const WS_OVERLAPPEDWINDOW =
+const int WS_OVERLAPPEDWINDOW =
     WS_OVERLAPPED |
     WS_CAPTION |
     WS_SYSMENU |
@@ -1215,10 +1215,10 @@ const WS_POPUP = 0x80000000;
 
 /// The window is a pop-up window. The WS_CAPTION and WS_POPUPWINDOW styles must
 /// be combined to make the window menu visible.
-const WS_POPUPWINDOW = WS_POPUP | WS_BORDER | WS_SYSMENU;
+const int WS_POPUPWINDOW = WS_POPUP | WS_BORDER | WS_SYSMENU;
 
 /// The window has a sizing border. Same as the WS_THICKFRAME style.
-const WS_SIZEBOX = WS_THICKFRAME;
+const int WS_SIZEBOX = WS_THICKFRAME;
 
 /// The window has a window menu on its title bar. The WS_CAPTION style must
 /// also be specified.
@@ -1241,10 +1241,10 @@ const WS_THICKFRAME = 0x00040000;
 
 /// The window is an overlapped window. An overlapped window has a title bar and
 /// a border. Same as the WS_OVERLAPPED style.
-const WS_TILED = WS_OVERLAPPED;
+const int WS_TILED = WS_OVERLAPPED;
 
 /// The window is an overlapped window. Same as the WS_OVERLAPPEDWINDOW style.
-const WS_TILEDWINDOW = WS_OVERLAPPEDWINDOW;
+const int WS_TILEDWINDOW = WS_OVERLAPPEDWINDOW;
 
 /// The window is initially visible.
 ///
@@ -1348,11 +1348,12 @@ const WS_EX_STATICEDGE = 0x00020000;
 const WS_EX_APPWINDOW = 0x00040000;
 
 /// The window is an overlapped window.
-const WS_EX_OVERLAPPEDWINDOW = WS_EX_WINDOWEDGE | WS_EX_CLIENTEDGE;
+const int WS_EX_OVERLAPPEDWINDOW = WS_EX_WINDOWEDGE | WS_EX_CLIENTEDGE;
 
 /// The window is palette window, which is a modeless dialog box that presents
 /// an array of commands.
-const WS_EX_PALETTEWINDOW = WS_EX_WINDOWEDGE | WS_EX_TOOLWINDOW | WS_EX_TOPMOST;
+const int WS_EX_PALETTEWINDOW =
+    WS_EX_WINDOWEDGE | WS_EX_TOOLWINDOW | WS_EX_TOPMOST;
 
 /// The window is a layered window. This style cannot be used if the window has
 /// a class style of either CS_OWNDC or CS_CLASSDC.
@@ -1520,7 +1521,7 @@ const WM_WININICHANGE = 0x001A;
 /// a window.) To send the WM_SETTINGCHANGE message to all top-level windows,
 /// use the SendMessageTimeout function with the hwnd parameter set to
 /// HWND_BROADCAST.
-const WM_SETTINGCHANGE = WM_WININICHANGE;
+const int WM_SETTINGCHANGE = WM_WININICHANGE;
 
 /// The WM_DEVMODECHANGE message is sent to all top-level windows whenever the
 /// user changes device-mode settings.
@@ -2264,67 +2265,67 @@ const HWND_BROADCAST = 0xffff;
 // -----------------------------------------------------------------------------
 
 /// Hardware-dependent cursor resource.
-final RT_CURSOR = MAKEINTRESOURCE(1);
+final Pointer<Utf16> RT_CURSOR = MAKEINTRESOURCE(1);
 
 /// Bitmap resource.
-final RT_BITMAP = MAKEINTRESOURCE(2);
+final Pointer<Utf16> RT_BITMAP = MAKEINTRESOURCE(2);
 
 /// Hardware-dependent icon resource.
-final RT_ICON = MAKEINTRESOURCE(3);
+final Pointer<Utf16> RT_ICON = MAKEINTRESOURCE(3);
 
 /// Menu resource.
-final RT_MENU = MAKEINTRESOURCE(4);
+final Pointer<Utf16> RT_MENU = MAKEINTRESOURCE(4);
 
 /// Dialog box.
-final RT_DIALOG = MAKEINTRESOURCE(5);
+final Pointer<Utf16> RT_DIALOG = MAKEINTRESOURCE(5);
 
 /// String-table entry.
-final RT_STRING = MAKEINTRESOURCE(6);
+final Pointer<Utf16> RT_STRING = MAKEINTRESOURCE(6);
 
 /// Font directory resource.
-final RT_FONTDIR = MAKEINTRESOURCE(7);
+final Pointer<Utf16> RT_FONTDIR = MAKEINTRESOURCE(7);
 
 /// Font resource.
-final RT_FONT = MAKEINTRESOURCE(8);
+final Pointer<Utf16> RT_FONT = MAKEINTRESOURCE(8);
 
 /// Accelerator table.
-final RT_ACCELERATOR = MAKEINTRESOURCE(9);
+final Pointer<Utf16> RT_ACCELERATOR = MAKEINTRESOURCE(9);
 
 /// Application-defined resource (raw data).
-final RT_RCDATA = MAKEINTRESOURCE(10);
+final Pointer<Utf16> RT_RCDATA = MAKEINTRESOURCE(10);
 
 /// Message-table entry.
-final RT_MESSAGETABLE = MAKEINTRESOURCE(11);
+final Pointer<Utf16> RT_MESSAGETABLE = MAKEINTRESOURCE(11);
 
 /// Hardware-independent cursor resource.
-final RT_GROUP_CURSOR = MAKEINTRESOURCE(11 + RT_CURSOR.address);
+final Pointer<Utf16> RT_GROUP_CURSOR = MAKEINTRESOURCE(11 + RT_CURSOR.address);
 
 /// Hardware-independent icon resource.
-final RT_GROUP_ICON = MAKEINTRESOURCE(11 + RT_ICON.address);
+final Pointer<Utf16> RT_GROUP_ICON = MAKEINTRESOURCE(11 + RT_ICON.address);
 
 /// Version resource.
-final RT_VERSION = MAKEINTRESOURCE(16);
+final Pointer<Utf16> RT_VERSION = MAKEINTRESOURCE(16);
 
 /// Allows a resource editing tool to associate a string with an .rc file.
-final RT_DLGINCLUDE = MAKEINTRESOURCE(17);
+final Pointer<Utf16> RT_DLGINCLUDE = MAKEINTRESOURCE(17);
 
 /// Plug and Play resource.
-final RT_PLUGPLAY = MAKEINTRESOURCE(19);
+final Pointer<Utf16> RT_PLUGPLAY = MAKEINTRESOURCE(19);
 
 /// VXD.
-final RT_VXD = MAKEINTRESOURCE(20);
+final Pointer<Utf16> RT_VXD = MAKEINTRESOURCE(20);
 
 /// Animated cursor.
-final RT_ANICURSOR = MAKEINTRESOURCE(21);
+final Pointer<Utf16> RT_ANICURSOR = MAKEINTRESOURCE(21);
 
 /// Animated icon.
-final RT_ANIICON = MAKEINTRESOURCE(22);
+final Pointer<Utf16> RT_ANIICON = MAKEINTRESOURCE(22);
 
 /// HTML resource.
-final RT_HTML = MAKEINTRESOURCE(23);
+final Pointer<Utf16> RT_HTML = MAKEINTRESOURCE(23);
 
 /// Side-by-Side Assembly Manifest.
-final RT_MANIFEST = MAKEINTRESOURCE(24);
+final Pointer<Utf16> RT_MANIFEST = MAKEINTRESOURCE(24);
 
 // -----------------------------------------------------------------------------
 // SendMessageTimeout values
@@ -2466,17 +2467,17 @@ const QS_POINTER = 0x1000;
 
 /// A WM_MOUSEMOVE message or mouse-button message (WM_LBUTTONUP,
 /// WM_RBUTTONDOWN, and so on).
-const QS_MOUSE = QS_MOUSEMOVE | QS_MOUSEBUTTON;
+const int QS_MOUSE = QS_MOUSEMOVE | QS_MOUSEBUTTON;
 
 /// An input message is in the queue.
 const QS_INPUT = 1031;
 
 /// An input, WM_TIMER, WM_PAINT, WM_HOTKEY, or posted message is in the queue.
-const QS_ALLEVENTS =
+const int QS_ALLEVENTS =
     QS_INPUT | QS_POSTMESSAGE | QS_TIMER | QS_PAINT | QS_HOTKEY;
 
 /// Any message is in the queue.
-const QS_ALLINPUT =
+const int QS_ALLINPUT =
     QS_INPUT |
     QS_POSTMESSAGE |
     QS_TIMER |
@@ -2546,16 +2547,16 @@ const WH_KEYBOARD_LL = 13;
 const WH_MOUSE_LL = 14;
 
 /// Test the extended-key flag.
-const LLKHF_EXTENDED = KF_EXTENDED >> 8;
+const int LLKHF_EXTENDED = KF_EXTENDED >> 8;
 
 /// Test the event-injected (from any process) flag.
 const LLKHF_INJECTED = 0x00000010;
 
 /// Test the context code.
-const LLKHF_ALTDOWN = KF_ALTDOWN >> 8;
+const int LLKHF_ALTDOWN = KF_ALTDOWN >> 8;
 
 /// Test the transition-state flag.
-const LLKHF_UP = KF_UP >> 8;
+const int LLKHF_UP = KF_UP >> 8;
 
 /// Test the event-injected (from a process running at lower integrity level)
 /// flag.
@@ -2735,7 +2736,7 @@ const HTSYSMENU = 3;
 const HTGROWBOX = 4;
 
 /// In a size box (same as HTGROWBOX).
-const HTSIZE = HTGROWBOX;
+const int HTSIZE = HTGROWBOX;
 
 /// In a menu.
 const HTMENU = 5;
@@ -2785,10 +2786,10 @@ const HTBOTTOMRIGHT = 17;
 const HTBORDER = 18;
 
 /// In a Minimize button.
-const HTREDUCE = HTMINBUTTON;
+const int HTREDUCE = HTMINBUTTON;
 
 /// In a Maximize button.
-const HTZOOM = HTMAXBUTTON;
+const int HTZOOM = HTMAXBUTTON;
 
 /// In a Close button.
 const HTCLOSE = 20;
@@ -3215,7 +3216,7 @@ const SPI_GETMOUSETRAILS = 0x005E;
 const SPI_SETSCREENSAVERRUNNING = 0x0061;
 
 /// @nodoc
-const SPI_SCREENSAVERRUNNING = SPI_SETSCREENSAVERRUNNING;
+const int SPI_SCREENSAVERRUNNING = SPI_SETSCREENSAVERRUNNING;
 
 /// Retrieves information about the FilterKeys accessibility feature. The
 /// pvParam parameter must point to a FILTERKEYS structure that receives the
@@ -3415,10 +3416,10 @@ const SWP_NOOWNERZORDER = 0x0200;
 const SWP_NOSENDCHANGING = 0x0400;
 
 /// Draws a frame (defined in the window's class description) around the window.
-const SWP_DRAWFRAME = SWP_FRAMECHANGED;
+const int SWP_DRAWFRAME = SWP_FRAMECHANGED;
 
 /// Same as the SWP_NOOWNERZORDER flag.
-const SWP_NOREPOSITION = SWP_NOOWNERZORDER;
+const int SWP_NOREPOSITION = SWP_NOOWNERZORDER;
 
 /// Prevents generation of the WM_SYNCPAINT message.
 const SWP_DEFERERASE = 0x2000;
@@ -3678,22 +3679,22 @@ const SM_CMOUSEBUTTONS = 43;
 /// The thickness of the frame around the perimeter of a window that has a
 /// caption but is not sizable, in pixels. SM_CXFIXEDFRAME is the height of the
 /// horizontal border, and SM_CYFIXEDFRAME is the width of the vertical border.
-const SM_CXFIXEDFRAME = SM_CXDLGFRAME;
+const int SM_CXFIXEDFRAME = SM_CXDLGFRAME;
 
 /// The thickness of the frame around the perimeter of a window that has a
 /// caption but is not sizable, in pixels. SM_CXFIXEDFRAME is the height of the
 /// horizontal border, and SM_CYFIXEDFRAME is the width of the vertical border.
-const SM_CYFIXEDFRAME = SM_CYDLGFRAME;
+const int SM_CYFIXEDFRAME = SM_CYDLGFRAME;
 
 /// The thickness of the sizing border around the perimeter of a window that can
 /// be resized, in pixels. SM_CXSIZEFRAME is the width of the horizontal border,
 /// and SM_CYSIZEFRAME is the height of the vertical border.
-const SM_CXSIZEFRAME = SM_CXFRAME;
+const int SM_CXSIZEFRAME = SM_CXFRAME;
 
 /// The thickness of the sizing border around the perimeter of a window that can
 /// be resized, in pixels. SM_CXSIZEFRAME is the width of the horizontal border,
 /// and SM_CYSIZEFRAME is the height of the vertical border.
-const SM_CYSIZEFRAME = SM_CYFRAME;
+const int SM_CYSIZEFRAME = SM_CYFRAME;
 
 /// This system metric should be ignored; it always returns 0.
 const SM_SECURE = 44;
@@ -4026,39 +4027,39 @@ const PBS_VERTICAL = 0x04;
 
 /// Sets the minimum and maximum values for a progress bar and redraws the bar
 /// to reflect the new range.
-const PBM_SETRANGE = WM_USER + 1;
+const int PBM_SETRANGE = WM_USER + 1;
 
 /// Sets the current position for a progress bar and redraws the bar to reflect
 /// the new position.
-const PBM_SETPOS = WM_USER + 2;
+const int PBM_SETPOS = WM_USER + 2;
 
 /// Advances the current position of a progress bar by a specified increment and
 /// redraws the bar to reflect the new position.
-const PBM_DELTAPOS = WM_USER + 3;
+const int PBM_DELTAPOS = WM_USER + 3;
 
 /// Specifies the step increment for a progress bar. The step increment is the
 /// amount by which the progress bar increases its current position whenever it
 /// receives a PBM_STEPIT message. By default, the step increment is set to 10.
-const PBM_SETSTEP = WM_USER + 4;
+const int PBM_SETSTEP = WM_USER + 4;
 
 /// Advances the current position for a progress bar by the step increment and
 /// redraws the bar to reflect the new position. An application sets the step
 /// increment by sending the PBM_SETSTEP message.
-const PBM_STEPIT = WM_USER + 5;
+const int PBM_STEPIT = WM_USER + 5;
 
 /// Sets the minimum and maximum values for a progress bar to 32-bit values, and
 /// redraws the bar to reflect the new range
-const PBM_SETRANGE32 = WM_USER + 6;
+const int PBM_SETRANGE32 = WM_USER + 6;
 
 /// Retrieves information about the current high and low limits of a given
 /// progress bar control.
-const PBM_GETRANGE = WM_USER + 7;
+const int PBM_GETRANGE = WM_USER + 7;
 
 /// Retrieves the current position of the progress bar.
-const PBM_GETPOS = WM_USER + 8;
+const int PBM_GETPOS = WM_USER + 8;
 
 /// Sets the color of the progress indicator bar in the progress bar control.
-const PBM_SETBARCOLOR = WM_USER + 9;
+const int PBM_SETBARCOLOR = WM_USER + 9;
 
 /// Sets the background color in the progress bar.
 const PBM_SETBKCOLOR = 0x2001;
@@ -4070,7 +4071,7 @@ const PBS_MARQUEE = 0x08;
 
 /// Sets the progress bar to marquee mode. This causes the progress bar to move
 /// like a marquee.
-const PBM_SETMARQUEE = WM_USER + 10;
+const int PBM_SETMARQUEE = WM_USER + 10;
 
 /// Determines the animation behavior that the progress bar should use when
 /// moving backward (from a higher value to a lower value). If this is set, then
@@ -4081,19 +4082,19 @@ const PBS_SMOOTHREVERSE = 0x10;
 /// Retrieves the step increment from a progress bar. The step increment is the
 /// amount by which the progress bar increases its current position whenever it
 /// receives a PBM_STEPIT message. By default, the step increment is set to 10.
-const PBM_GETSTEP = WM_USER + 13;
+const int PBM_GETSTEP = WM_USER + 13;
 
 /// Gets the background color of the progress bar.
-const PBM_GETBKCOLOR = WM_USER + 14;
+const int PBM_GETBKCOLOR = WM_USER + 14;
 
 /// Gets the color of the progress bar.
-const PBM_GETBARCOLOR = WM_USER + 15;
+const int PBM_GETBARCOLOR = WM_USER + 15;
 
 /// Sets the state of the progress bar.
-const PBM_SETSTATE = WM_USER + 16;
+const int PBM_SETSTATE = WM_USER + 16;
 
 /// Gets the state of the progress bar.
-const PBM_GETSTATE = WM_USER + 17;
+const int PBM_GETSTATE = WM_USER + 17;
 
 /// In progress.
 const PBST_NORMAL = 0x0001;
@@ -4549,7 +4550,7 @@ const EM_GETMARGINS = 0x00D4;
 /// The text limit is the maximum amount of text, in TCHARs, that the user can
 /// type into the edit control. You can send this message to either an edit
 /// control or a rich edit control.
-const EM_SETLIMITTEXT = EM_LIMITTEXT;
+const int EM_SETLIMITTEXT = EM_LIMITTEXT;
 
 /// Gets the current text limit for an edit control.
 ///
@@ -4710,7 +4711,7 @@ const BS_FLAT = 0x00008000;
 
 /// Positions a radio button's circle or a check box's square on the right side
 /// of the button rectangle. Same as the BS_LEFTTEXT style.
-const BS_RIGHTBUTTON = BS_LEFTTEXT;
+const int BS_RIGHTBUTTON = BS_LEFTTEXT;
 
 // -----------------------------------------------------------------------------
 // ScrollInfo constants
@@ -4737,7 +4738,7 @@ const SIF_DISABLENOSCROLL = 0x0008;
 const SIF_TRACKPOS = 0x0010;
 
 /// Combines SIF_RANGE,  SIF_PAGE, SIF_POS and SIF_TRACKPOS.
-const SIF_ALL = SIF_RANGE | SIF_PAGE | SIF_POS | SIF_TRACKPOS;
+const int SIF_ALL = SIF_RANGE | SIF_PAGE | SIF_POS | SIF_TRACKPOS;
 
 // -----------------------------------------------------------------------------
 // PeekMessage options
@@ -4993,17 +4994,17 @@ const MB_ICONEXCLAMATION = 0x00000030;
 const MB_ICONASTERISK = 0x00000040;
 
 /// An exclamation-point icon appears in the message box.
-const MB_ICONWARNING = MB_ICONEXCLAMATION;
+const int MB_ICONWARNING = MB_ICONEXCLAMATION;
 
 /// A stop-sign icon appears in the message box.
-const MB_ICONERROR = MB_ICONHAND;
+const int MB_ICONERROR = MB_ICONHAND;
 
 /// An icon consisting of a lowercase letter i in a circle appears in the
 /// message box.
-const MB_ICONINFORMATION = MB_ICONASTERISK;
+const int MB_ICONINFORMATION = MB_ICONASTERISK;
 
 /// A stop-sign icon appears in the message box.
-const MB_ICONSTOP = MB_ICONHAND;
+const int MB_ICONSTOP = MB_ICONHAND;
 
 /// The first button is the default button.
 ///
@@ -5211,7 +5212,7 @@ const DS_CONTEXTHELP = 0x2000;
 /// Indicates that the dialog box should use the system font. The typeface
 /// member of the extended dialog box template must be set to MS Shell Dlg.
 /// Otherwise, this style has no effect.
-const DS_SHELLFONT = DS_SETFONT | DS_FIXEDSYS;
+const int DS_SHELLFONT = DS_SETFONT | DS_FIXEDSYS;
 
 // -----------------------------------------------------------------------------
 // Static control styles
@@ -5484,7 +5485,7 @@ const BS_SOLID = 0;
 const BS_NULL = 1;
 
 /// Hollow brush.
-const BS_HOLLOW = BS_NULL;
+const int BS_HOLLOW = BS_NULL;
 
 /// Hatched brush.
 const BS_HATCHED = 2;
@@ -5552,21 +5553,21 @@ const HALFTONE = 4;
 /// Performs a Boolean AND operation using the color values for the eliminated
 /// and existing pixels. If the bitmap is a monochrome bitmap, this mode
 /// preserves black pixels at the expense of white pixels.
-const STRETCH_ANDSCANS = BLACKONWHITE;
+const int STRETCH_ANDSCANS = BLACKONWHITE;
 
 /// Performs a Boolean OR operation using the color values for the eliminated
 /// and existing pixels. If the bitmap is a monochrome bitmap, this mode
 /// preserves white pixels at the expense of black pixels.
-const STRETCH_ORSCANS = WHITEONBLACK;
+const int STRETCH_ORSCANS = WHITEONBLACK;
 
 /// Deletes the pixels. This mode deletes all eliminated lines of pixels without
 /// trying to preserve their information.
-const STRETCH_DELETESCANS = COLORONCOLOR;
+const int STRETCH_DELETESCANS = COLORONCOLOR;
 
 /// Maps pixels from the source rectangle into blocks of pixels in the
 /// destination rectangle. The average color over the destination block of
 /// pixels approximates the color of the source pixels.
-const STRETCH_HALFTONE = HALFTONE;
+const int STRETCH_HALFTONE = HALFTONE;
 
 // -----------------------------------------------------------------------------
 // Console constants
@@ -5789,43 +5790,43 @@ const S_OK = 0;
 const S_FALSE = 1;
 
 /// Unexpected failure
-final E_UNEXPECTED = 0x8000FFFF.toSigned(32);
+final int E_UNEXPECTED = 0x8000FFFF.toSigned(32);
 
 /// Not implemented
-final E_NOTIMPL = 0x80004001.toSigned(32);
+final int E_NOTIMPL = 0x80004001.toSigned(32);
 
 /// Failed to allocate necessary memory
-final E_OUTOFMEMORY = 0x8007000E.toSigned(32);
+final int E_OUTOFMEMORY = 0x8007000E.toSigned(32);
 
 /// One or more arguments are not valid
-final E_INVALIDARG = 0x80070057.toSigned(32);
+final int E_INVALIDARG = 0x80070057.toSigned(32);
 
 /// No such interface supported
-final E_NOINTERFACE = 0x80004002.toSigned(32);
+final int E_NOINTERFACE = 0x80004002.toSigned(32);
 
 /// Pointer that is not valid
-final E_POINTER = 0x80004003.toSigned(32);
+final int E_POINTER = 0x80004003.toSigned(32);
 
 /// Handle that is not valid
-final E_HANDLE = 0x80070006.toSigned(32);
+final int E_HANDLE = 0x80070006.toSigned(32);
 
 /// Operation aborted
-final E_ABORT = 0x80004004.toSigned(32);
+final int E_ABORT = 0x80004004.toSigned(32);
 
 /// Unspecified failure
-final E_FAIL = 0x80004005.toSigned(32);
+final int E_FAIL = 0x80004005.toSigned(32);
 
 /// General access denied error
-final E_ACCESSDENIED = 0x80070005.toSigned(32);
+final int E_ACCESSDENIED = 0x80070005.toSigned(32);
 
 /// The data necessary to complete this operation is not yet available.
-final E_PENDING = 0x8000000A.toSigned(32);
+final int E_PENDING = 0x8000000A.toSigned(32);
 
 /// typedef short VARIANT_BOOL: -1 == TRUE
-final VARIANT_TRUE = -1;
+const VARIANT_TRUE = -1;
 
 /// typedef short VARIANT_BOOL: 0 == FALSE
-final VARIANT_FALSE = 0;
+const VARIANT_FALSE = 0;
 
 /// Prevents the function from attempting to coerce an object to a fundamental
 /// type by getting the Value property. Applications should set this flag only
@@ -6449,49 +6450,49 @@ const MM_MIXM_CONTROL_CHANGE = 0x3D1;
 /// The MIM_OPEN message is sent to a MIDI input callback function when a MIDI
 /// input device is opened.
 @Deprecated('Use MM_MIM_OPEN')
-const MIM_OPEN = MM_MIM_OPEN;
+const int MIM_OPEN = MM_MIM_OPEN;
 
 /// The MIM_CLOSE message is sent to a MIDI input callback function when a MIDI
 /// input device is closed.
 @Deprecated('Use MM_MIM_CLOSE')
-const MIM_CLOSE = MM_MIM_CLOSE;
+const int MIM_CLOSE = MM_MIM_CLOSE;
 
 /// The MIM_DATA message is sent to a MIDI input callback function when a MIDI
 /// message is received by a MIDI input device.
 @Deprecated('Use MM_MIM_DATA')
-const MIM_DATA = MM_MIM_DATA;
+const int MIM_DATA = MM_MIM_DATA;
 
 /// The MIM_LONGDATA message is sent to a MIDI input callback function when a
 /// system-exclusive buffer has been filled with data and is being returned to
 /// the application.
 @Deprecated('Use MM_MIM_LONGDATA')
-const MIM_LONGDATA = MM_MIM_LONGDATA;
+const int MIM_LONGDATA = MM_MIM_LONGDATA;
 
 /// The MIM_ERROR message is sent to a MIDI input callback function when an
 /// invalid MIDI message is received.
 @Deprecated('Use MM_MIM_ERROR')
-const MIM_ERROR = MM_MIM_ERROR;
+const int MIM_ERROR = MM_MIM_ERROR;
 
 /// The MIM_LONGERROR message is sent to a MIDI input callback function when an
 /// invalid or incomplete MIDI system-exclusive message is received.
 @Deprecated('Use MM_MIM_LONGERROR')
-const MIM_LONGERROR = MM_MIM_LONGERROR;
+const int MIM_LONGERROR = MM_MIM_LONGERROR;
 
 /// The MOM_OPEN message is sent to a MIDI output callback function when a MIDI
 /// output device is opened.
 @Deprecated('Use MM_MOM_OPEN')
-const MOM_OPEN = MM_MOM_OPEN;
+const int MOM_OPEN = MM_MOM_OPEN;
 
 /// The MOM_CLOSE message is sent to a MIDI output callback function when a MIDI
 /// output device is closed.
 @Deprecated('Use MM_MOM_CLOSE')
-const MOM_CLOSE = MM_MOM_CLOSE;
+const int MOM_CLOSE = MM_MOM_CLOSE;
 
 /// The MOM_DONE message is sent to a MIDI output callback function when the
 /// specified system-exclusive or stream buffer has been played and is being
 /// returned to the application.
 @Deprecated('Use MM_MOM_DONE')
-const MOM_DONE = MM_MOM_DONE;
+const int MOM_DONE = MM_MOM_DONE;
 
 /// The MIM_MOREDATA message is sent to a MIDI input callback function when a
 /// MIDI message is received by a MIDI input device but the application is not
@@ -6499,12 +6500,12 @@ const MOM_DONE = MM_MOM_DONE;
 /// driver. The callback function receives this message only when the
 /// application specifies MIDI_IO_STATUS in the call to the midiInOpen function.
 @Deprecated('Use MM_MIM_MOREDATA')
-const MIM_MOREDATA = MM_MIM_MOREDATA;
+const int MIM_MOREDATA = MM_MIM_MOREDATA;
 
 /// The MOM_POSITION message is sent when an MEVT_F_CALLBACK event is reached in
 /// the MIDI output stream.
 @Deprecated('Use MM_MOM_POSITIONCB')
-const MOM_POSITIONCB = MM_MOM_POSITIONCB;
+const int MOM_POSITIONCB = MM_MOM_POSITIONCB;
 
 // -----------------------------------------------------------------------------
 // LoadLibrary constants
@@ -6749,7 +6750,7 @@ const CF_SCREENFONTS = 0x00000001;
 const CF_PRINTERFONTS = 0x00000002;
 
 /// This flag is ignored for font enumeration.
-const CF_BOTH = CF_SCREENFONTS | CF_PRINTERFONTS;
+const int CF_BOTH = CF_SCREENFONTS | CF_PRINTERFONTS;
 
 /// Causes the dialog box to display the Help button. The hwndOwner member must
 /// specify the window to receive the HELPMSGSTRING registered messages that the
@@ -6799,13 +6800,13 @@ const CF_ANSIONLY = 0x00000400;
 
 /// ChooseFont should allow selection of fonts for all non-OEM and Symbol
 /// character sets, as well as the ANSI character set.
-const CF_SCRIPTSONLY = CF_ANSIONLY;
+const int CF_SCRIPTSONLY = CF_ANSIONLY;
 
 /// ChooseFont should not allow vector font selections.
 const CF_NOVECTORFONTS = 0x00000800;
 
 /// Same as the CF_NOVECTORFONTS flag.
-const CF_NOOEMFONTS = CF_NOVECTORFONTS;
+const int CF_NOOEMFONTS = CF_NOVECTORFONTS;
 
 /// ChooseFont should not display or allow selection of font simulations.
 const CF_NOSIMULATIONS = 0x00001000;
@@ -7164,54 +7165,54 @@ const TMT_ICONTITLEFONT = 806;
 // -----------------------------------------------------------------------------
 
 /// The crText member value is valid.
-const DTT_TEXTCOLOR = 1 << 0;
+const int DTT_TEXTCOLOR = 1 << 0;
 
 /// The crBorder member value is valid.
-const DTT_BORDERCOLOR = 1 << 1;
+const int DTT_BORDERCOLOR = 1 << 1;
 
 /// The crShadow member value is valid.
-const DTT_SHADOWCOLOR = 1 << 2;
+const int DTT_SHADOWCOLOR = 1 << 2;
 
 /// The iTextShadowType member value is valid.
-const DTT_SHADOWTYPE = 1 << 3;
+const int DTT_SHADOWTYPE = 1 << 3;
 
 /// The ptShadowOffset member value is valid.
-const DTT_SHADOWOFFSET = 1 << 4;
+const int DTT_SHADOWOFFSET = 1 << 4;
 
 /// The iBorderSize member value is valid.
-const DTT_BORDERSIZE = 1 << 5;
+const int DTT_BORDERSIZE = 1 << 5;
 
 /// The iFontPropId member value is valid.
-const DTT_FONTPROP = 1 << 6;
+const int DTT_FONTPROP = 1 << 6;
 
 /// The iColorPropId member value is valid.
-const DTT_COLORPROP = 1 << 7;
+const int DTT_COLORPROP = 1 << 7;
 
 /// The iStateId member value is valid.
-const DTT_STATEID = 1 << 8;
+const int DTT_STATEID = 1 << 8;
 
 /// The pRect parameter of the DrawThemeTextEx function that uses this structure
 /// will be used as both an in and an out parameter. After the function returns,
 /// the pRect parameter will contain the rectangle that corresponds to the
 /// region calculated to be drawn.
-const DTT_CALCRECT = 1 << 9;
+const int DTT_CALCRECT = 1 << 9;
 
 /// The fApplyOverlay member value is valid.
-const DTT_APPLYOVERLAY = 1 << 10;
+const int DTT_APPLYOVERLAY = 1 << 10;
 
 /// The iGlowSize member value is valid.
-const DTT_GLOWSIZE = 1 << 11;
+const int DTT_GLOWSIZE = 1 << 11;
 
 /// The pfnDrawTextCallback member value is valid.
-const DTT_CALLBACK = 1 << 12;
+const int DTT_CALLBACK = 1 << 12;
 
 /// Draws text with antialiased alpha. Use of this flag requires a top-down DIB
 /// section. This flag works only if the HDC passed to function DrawThemeTextEx
 /// has a top-down DIB section currently selected in it.
-const DTT_COMPOSITED = 1 << 13;
+const int DTT_COMPOSITED = 1 << 13;
 
 /// All valid bits
-const DTT_VALIDBITS =
+const int DTT_VALIDBITS =
     DTT_TEXTCOLOR |
     DTT_BORDERCOLOR |
     DTT_SHADOWCOLOR |
@@ -7438,7 +7439,7 @@ const FOF_NO_CONNECTED_ELEMENTS = 0x2000;
 const FOF_WANTNUKEWARNING = 0x4000;
 
 /// Perform the operation silently, presenting no UI to the user.
-const FOF_NO_UI =
+const int FOF_NO_UI =
     FOF_SILENT | FOF_NOCONFIRMATION | FOF_NOERRORUI | FOF_NOCONFIRMMKDIR;
 
 // -----------------------------------------------------------------------------
@@ -7587,7 +7588,7 @@ const WM_APP = 0x8000;
 /// ENTER key, the Shell now sends the associated application an NIN_SELECT
 /// notification. Earlier versions send WM_RBUTTONDOWN and WM_RBUTTONUP
 /// messages.
-const NIN_SELECT = WM_USER + 0;
+const int NIN_SELECT = WM_USER + 0;
 
 const NINF_KEY = 0x1;
 
@@ -7595,10 +7596,10 @@ const NINF_KEY = 0x1;
 /// the SPACEBAR or ENTER key, the version 5.0 Shell sends the associated
 /// application an NIN_KEYSELECT notification. Earlier versions send
 /// WM_RBUTTONDOWN and WM_RBUTTONUP messages.
-const NIN_KEYSELECT = NIN_SELECT | NINF_KEY;
+const int NIN_KEYSELECT = NIN_SELECT | NINF_KEY;
 
 /// Sent when the balloon is shown (balloons are queued).
-const NIN_BALLOONSHOW = WM_USER + 2;
+const int NIN_BALLOONSHOW = WM_USER + 2;
 
 /// Sent when the balloon disappears. For example, when the icon is deleted.
 /// This message is not sent if the balloon is dismissed because of a timeout or
@@ -7607,21 +7608,21 @@ const NIN_BALLOONSHOW = WM_USER + 2;
 /// the NIIF_RESPECT_QUIET_TIME flag set attempts to display during quiet time
 /// (a user's first hour on a new computer). In that case, the balloon is never
 /// displayed at all.
-const NIN_BALLOONHIDE = WM_USER + 3;
+const int NIN_BALLOONHIDE = WM_USER + 3;
 
 /// Sent when the balloon is dismissed because of a timeout.
-const NIN_BALLOONTIMEOUT = WM_USER + 4;
+const int NIN_BALLOONTIMEOUT = WM_USER + 4;
 
 /// Sent when the balloon is dismissed because the user clicked the mouse.
-const NIN_BALLOONUSERCLICK = WM_USER + 5;
+const int NIN_BALLOONUSERCLICK = WM_USER + 5;
 
 /// Sent when the user hovers the cursor over an icon to indicate that the
 /// richer pop-up UI should be used in place of a standard textual tooltip.
-const NIN_POPUPOPEN = WM_USER + 6;
+const int NIN_POPUPOPEN = WM_USER + 6;
 
 /// Sent when a cursor no longer hovers over an icon to indicate that the rich
 /// pop-up UI should be closed.
-const NIN_POPUPCLOSE = WM_USER + 7;
+const int NIN_POPUPCLOSE = WM_USER + 7;
 
 // -----------------------------------------------------------------------------
 // Power setting constants
@@ -7761,13 +7762,13 @@ final IDI_WINLOGO = Pointer<Utf16>.fromAddress(32517);
 final IDI_SHIELD = Pointer<Utf16>.fromAddress(32518);
 
 /// Exclamation point icon.
-final IDI_WARNING = IDI_EXCLAMATION;
+final Pointer<Utf16> IDI_WARNING = IDI_EXCLAMATION;
 
 /// Hand-shaped icon.
-final IDI_ERROR = IDI_HAND;
+final Pointer<Utf16> IDI_ERROR = IDI_HAND;
 
 /// Asterisk icon.
-final IDI_INFORMATION = IDI_ASTERISK;
+final Pointer<Utf16> IDI_INFORMATION = IDI_ASTERISK;
 
 /// Standard arrow
 final IDC_ARROW = Pointer<Utf16>.fromAddress(32512);
@@ -8108,7 +8109,7 @@ const SCARD_PROTOCOL_RAW = 0x00010000;
 /// Bitwise OR combination of both of the two International Standards
 /// Organization (IS0) transmission protocols SCARD_PROTOCOL_T0 and
 /// SCARD_PROTOCOL_T1.
-const SCARD_PROTOCOL_Tx = SCARD_PROTOCOL_T0 | SCARD_PROTOCOL_T1;
+const int SCARD_PROTOCOL_Tx = SCARD_PROTOCOL_T0 | SCARD_PROTOCOL_T1;
 
 /// Use the implicit protocol of the card with standard parameters.
 const SCARD_PROTOCOL_DEFAULT = 0x80000000;
@@ -8557,7 +8558,7 @@ const KEY_WOW64_64KEY = 0x0100;
 
 /// Combines the STANDARD_RIGHTS_READ, KEY_QUERY_VALUE, KEY_ENUMERATE_SUB_KEYS,
 /// and KEY_NOTIFY values.
-const KEY_READ =
+const int KEY_READ =
     (STANDARD_RIGHTS_READ |
         KEY_QUERY_VALUE |
         KEY_ENUMERATE_SUB_KEYS |
@@ -8566,17 +8567,17 @@ const KEY_READ =
 
 /// Combines the STANDARD_RIGHTS_WRITE, KEY_SET_VALUE, and KEY_CREATE_SUB_KEY
 /// access rights.
-const KEY_WRITE =
+const int KEY_WRITE =
     (STANDARD_RIGHTS_WRITE | KEY_SET_VALUE | KEY_CREATE_SUB_KEY) &
     (~SYNCHRONIZE);
 
 /// Equivalent to KEY_READ.
-const KEY_EXECUTE = KEY_READ & (~SYNCHRONIZE);
+const int KEY_EXECUTE = KEY_READ & (~SYNCHRONIZE);
 
 /// Combines the STANDARD_RIGHTS_REQUIRED, KEY_QUERY_VALUE, KEY_SET_VALUE,
 /// KEY_CREATE_SUB_KEY, KEY_ENUMERATE_SUB_KEYS, KEY_NOTIFY, and KEY_CREATE_LINK
 /// access rights.
-const KEY_ALL_ACCESS =
+const int KEY_ALL_ACCESS =
     (STANDARD_RIGHTS_ALL |
         KEY_QUERY_VALUE |
         KEY_SET_VALUE |
@@ -8631,7 +8632,7 @@ const SDC_TOPOLOGY_SUPPLIED = 0x00000010;
 /// The caller requests a combination of all four SDC_TOPOLOGY_XXX
 /// configurations. This value informs the API to set the last known display
 /// configuration for the current connected monitors.
-const SDC_USE_DATABASE_CURRENT =
+const int SDC_USE_DATABASE_CURRENT =
     SDC_TOPOLOGY_INTERNAL |
     SDC_TOPOLOGY_CLONE |
     SDC_TOPOLOGY_EXTEND |
@@ -9759,58 +9760,58 @@ const WTS_SESSION_CREATE = 0xA;
 const WTS_SESSION_TERMINATE = 0xB;
 
 /// Unknown interface.
-final DISP_E_UNKNOWNINTERFACE = 0x80020001.toSigned(32);
+final int DISP_E_UNKNOWNINTERFACE = 0x80020001.toSigned(32);
 
 /// Member not found.
-final DISP_E_MEMBERNOTFOUND = 0x80020003.toSigned(32);
+final int DISP_E_MEMBERNOTFOUND = 0x80020003.toSigned(32);
 
 /// Parameter not found.
-final DISP_E_PARAMNOTFOUND = 0x80020004.toSigned(32);
+final int DISP_E_PARAMNOTFOUND = 0x80020004.toSigned(32);
 
 /// Type mismatch.
-final DISP_E_TYPEMISMATCH = 0x80020005.toSigned(32);
+final int DISP_E_TYPEMISMATCH = 0x80020005.toSigned(32);
 
 /// Unknown name.
-final DISP_E_UNKNOWNNAME = 0x80020006.toSigned(32);
+final int DISP_E_UNKNOWNNAME = 0x80020006.toSigned(32);
 
 /// No named arguments.
-final DISP_E_NONAMEDARGS = 0x80020007.toSigned(32);
+final int DISP_E_NONAMEDARGS = 0x80020007.toSigned(32);
 
 /// Bad variable type.
-final DISP_E_BADVARTYPE = 0x80020008.toSigned(32);
+final int DISP_E_BADVARTYPE = 0x80020008.toSigned(32);
 
 /// Exception occurred.
-final DISP_E_EXCEPTION = 0x80020009.toSigned(32);
+final int DISP_E_EXCEPTION = 0x80020009.toSigned(32);
 
 /// Out of present range.
-final DISP_E_OVERFLOW = 0x8002000A.toSigned(32);
+final int DISP_E_OVERFLOW = 0x8002000A.toSigned(32);
 
 /// Invalid index.
-final DISP_E_BADINDEX = 0x8002000B.toSigned(32);
+final int DISP_E_BADINDEX = 0x8002000B.toSigned(32);
 
 /// Unknown language.
-final DISP_E_UNKNOWNLCID = 0x8002000C.toSigned(32);
+final int DISP_E_UNKNOWNLCID = 0x8002000C.toSigned(32);
 
 /// Memory is locked.
-final DISP_E_ARRAYISLOCKED = 0x8002000D.toSigned(32);
+final int DISP_E_ARRAYISLOCKED = 0x8002000D.toSigned(32);
 
 /// Invalid number of parameters.
-final DISP_E_BADPARAMCOUNT = 0x8002000E.toSigned(32);
+final int DISP_E_BADPARAMCOUNT = 0x8002000E.toSigned(32);
 
 /// Parameter not optional.
-final DISP_E_PARAMNOTOPTIONAL = 0x8002000F.toSigned(32);
+final int DISP_E_PARAMNOTOPTIONAL = 0x8002000F.toSigned(32);
 
 /// Invalid callee.
-final DISP_E_BADCALLEE = 0x80020010.toSigned(32);
+final int DISP_E_BADCALLEE = 0x80020010.toSigned(32);
 
 /// Does not support a collection.
-final DISP_E_NOTACOLLECTION = 0x80020011.toSigned(32);
+final int DISP_E_NOTACOLLECTION = 0x80020011.toSigned(32);
 
 /// Division by zero.
-final DISP_E_DIVBYZERO = 0x80020012.toSigned(32);
+final int DISP_E_DIVBYZERO = 0x80020012.toSigned(32);
 
 /// Buffer too small.
-final DISP_E_BUFFERTOOSMALL = 0x80020013.toSigned(32);
+final int DISP_E_BUFFERTOOSMALL = 0x80020013.toSigned(32);
 
 /// A value for the `fEnable` member has been specified.
 const DWM_BB_ENABLE = 1;
@@ -10131,7 +10132,7 @@ class MONITOR_DPI_TYPE {
 
   /// The default DPI setting for a monitor is MDT_EFFECTIVE_DPI.
   @Deprecated('Use MDT_DEFAULT instead')
-  static const MDT_DEFAULT = MDT_EFFECTIVE_DPI;
+  static const int MDT_DEFAULT = MDT_EFFECTIVE_DPI;
 }
 
 /// Describes per-monitor DPI scaling behavior overrides for child windows
@@ -12059,7 +12060,7 @@ const MDT_ANGULAR_DPI = 1;
 const MDT_RAW_DPI = 2;
 
 /// The default DPI setting for a monitor is MDT_EFFECTIVE_DPI.
-const MDT_DEFAULT = MDT_EFFECTIVE_DPI;
+const int MDT_DEFAULT = MDT_EFFECTIVE_DPI;
 
 /// The default behavior of the dialog manager. The dialog managed will update
 /// the font, size, and position of the child window on DPI changes.

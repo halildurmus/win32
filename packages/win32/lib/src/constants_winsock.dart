@@ -87,7 +87,7 @@ const SO_LINGER = 0x0080;
 const SO_OOBINLINE = 0x0100;
 
 /// Does not block close waiting for unsent data to be sent.
-const SO_DONTLINGER = ~SO_LINGER;
+const int SO_DONTLINGER = ~SO_LINGER;
 
 /*
  * Additional options.
@@ -239,9 +239,9 @@ const AF_IMPLINK = 3;
 const AF_PUP = 4;
 const AF_CHAOS = 5;
 const AF_NS = 6;
-const AF_IPX = AF_NS;
+const int AF_IPX = AF_NS;
 const AF_ISO = 7;
-const AF_OSI = AF_ISO;
+const int AF_OSI = AF_ISO;
 const AF_ECMA = 8;
 const AF_DATAKIT = 9;
 const AF_CCITT = 10;

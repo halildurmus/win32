@@ -16,7 +16,7 @@ void main() {
     setUp(initializeCOM);
 
     test('toDartString', () {
-      final str = 'Hello, world!';
+      const str = 'Hello, world!';
       final hString = convertToHString(str);
       final pHString = calloc<HSTRING>()..value = hString;
 
@@ -36,7 +36,7 @@ void main() {
         if (getWindowsBuildNumber() >= 18362)
           '{d9a5c5b3-c5dc-5b98-bd80-a8d0ca0584d8}', // IFileOpenPicker3
       ];
-      final className = 'Windows.Storage.Pickers.FileOpenPicker';
+      const className = 'Windows.Storage.Pickers.FileOpenPicker';
       final object = activateClass(className);
       expect(getInterfaces(object), equals(iids));
     });

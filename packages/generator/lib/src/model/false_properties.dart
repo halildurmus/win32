@@ -1,8 +1,7 @@
 class ComProperty {
+  const ComProperty(this.interface, this.property);
   final String interface;
   final String property;
-
-  const ComProperty(this.interface, this.property);
 }
 
 const falseProperties = <ComProperty>[

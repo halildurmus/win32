@@ -7,9 +7,8 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 class PrinterNames {
-  final int _flags;
-
   PrinterNames(this._flags);
+  final int _flags;
 
   Iterable<String> all() sync* {
     try {
@@ -37,7 +36,7 @@ class PrinterNames {
     EnumPrinters(_flags, nullptr, 2, nullptr, 0, _pBuffSize, _bPrinterLen);
 
     if (_pBuffSize.value == 0) {
-      throw 'Read printer buffer size fail';
+      throw StateError('Read printer buffer size fail');
     }
   }
 
@@ -59,7 +58,7 @@ class PrinterNames {
         0;
 
     if (isRawBuffFail) {
-      throw 'Read printer raw buffer fail';
+      throw StateError('Read printer raw buffer fail');
     }
   }
 

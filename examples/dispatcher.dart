@@ -48,7 +48,7 @@ void main() {
 
       try {
         // Rename folder.
-        final newFolderName = BSTR.fromString(r'ExampleFolderRenamed');
+        final newFolderName = BSTR.fromString('ExampleFolderRenamed');
         final newFolderNameParam = arena<VARIANT>();
         VariantInit(newFolderNameParam);
         newFolderNameParam.ref

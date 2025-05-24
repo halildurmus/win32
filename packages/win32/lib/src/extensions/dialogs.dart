@@ -14,12 +14,12 @@ extension DialogTemplateHelper on Pointer<DLGTEMPLATE> {
   /// Returns the number of WORDs written.
   int setDialog({
     required int style,
-    int dwExtendedStyle = 0,
     required int cdit,
-    int x = 0,
-    int y = 0,
     required int cx,
     required int cy,
+    int dwExtendedStyle = 0,
+    int x = 0,
+    int y = 0,
     int windowSystemClass = 0,
     String windowClass = '',
     String title = '',
@@ -105,12 +105,12 @@ extension DialogItemTemplateHelper on Pointer<DLGITEMTEMPLATE> {
   /// Returns the number of WORDs written.
   int setDialogItem({
     required int style,
-    int dwExtendedStyle = 0,
     required int x,
     required int y,
     required int cx,
     required int cy,
     required int id,
+    int dwExtendedStyle = 0,
     int windowSystemClass = 0,
     String windowClass = '',
     String text = '',

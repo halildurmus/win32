@@ -4,9 +4,6 @@ import 'function.dart';
 import 'safenames.dart';
 
 class CallbackProjection {
-  late final String callbackName;
-  late final FunctionProjection functionProjection;
-
   CallbackProjection(TypeDef typeDef) {
     final invokeMethod = typeDef.findMethod('Invoke');
 
@@ -17,6 +14,8 @@ class CallbackProjection {
     callbackName = safeIdentifierForTypeDef(typeDef);
     functionProjection = FunctionProjection(invokeMethod, '');
   }
+  late final String callbackName;
+  late final FunctionProjection functionProjection;
 
   @override
   String toString() =>

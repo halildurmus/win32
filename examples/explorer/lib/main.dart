@@ -14,13 +14,11 @@ void main() {
 
 class ExplorerApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData.light(),
-      darkTheme: ThemeData.dark(),
-      home: const MainPage(),
-    );
-  }
+  Widget build(BuildContext context) => MaterialApp(
+    theme: ThemeData.light(),
+    darkTheme: ThemeData.dark(),
+    home: const MainPage(),
+  );
 }
 
 class MainPage extends StatefulWidget {
@@ -31,7 +29,7 @@ class MainPage extends StatefulWidget {
 }
 
 class MainPageState extends State<MainPage> {
-  bool showRoundedCornerSwitch = false;
+  var showRoundedCornerSwitch = false;
 
   @override
   void initState() {
@@ -40,7 +38,7 @@ class MainPageState extends State<MainPage> {
     super.initState();
   }
 
-  void showDocumentsPath() async {
+  Future<void> showDocumentsPath() async {
     final appDocDir = await getApplicationDocumentsDirectory();
     final hwnd = GetForegroundWindow();
     final pMessage = 'Path: ${appDocDir.path}'.toNativeUtf16();
@@ -53,46 +51,44 @@ class MainPageState extends State<MainPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      // Unsupported on Windows as of Flutter 3. Adding in preparation for later
-      // releases.
-      body: PlatformMenuBar(
-        menus: [
-          PlatformMenu(
-            label: 'Explore',
-            menus: [
-              PlatformMenuItemGroup(
-                members: [
-                  PlatformMenuItem(
-                    label: 'Show Docs Path...',
-                    shortcut: const SingleActivator(
-                      LogicalKeyboardKey.keyP,
-                      control: true,
-                      shift: true,
-                    ),
-                    onSelected: () async => showDocumentsPath(),
+  Widget build(BuildContext context) => Scaffold(
+    // Unsupported on Windows as of Flutter 3. Adding in preparation for later
+    // releases.
+    body: PlatformMenuBar(
+      menus: [
+        PlatformMenu(
+          label: 'Explore',
+          menus: [
+            PlatformMenuItemGroup(
+              members: [
+                PlatformMenuItem(
+                  label: 'Show Docs Path...',
+                  shortcut: const SingleActivator(
+                    LogicalKeyboardKey.keyP,
+                    control: true,
+                    shift: true,
                   ),
-                ],
-              ),
-            ],
-          ),
-        ],
-        child: Column(
-          children: [
-            if (showRoundedCornerSwitch) const WindowRoundingSelector(),
-            Expanded(child: VolumePanel()),
-
-            // TODO(halildurmus): Can be removed when PlatformMenuBar is
-            // supported on Windows.
-            FloatingActionButton(
-              mini: true,
-              child: const Icon(Icons.folder),
-              onPressed: () async => showDocumentsPath(),
+                  onSelected: () async => showDocumentsPath(),
+                ),
+              ],
             ),
           ],
         ),
+      ],
+      child: Column(
+        children: [
+          if (showRoundedCornerSwitch) const WindowRoundingSelector(),
+          Expanded(child: VolumePanel()),
+
+          // TODO(halildurmus): Can be removed when PlatformMenuBar is
+          // supported on Windows.
+          FloatingActionButton(
+            mini: true,
+            child: const Icon(Icons.folder),
+            onPressed: () async => showDocumentsPath(),
+          ),
+        ],
       ),
-    );
-  }
+    ),
+  );
 }

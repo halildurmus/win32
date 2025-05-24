@@ -54,7 +54,7 @@ Future<void> forceGC({int fullGcCycles = 2}) async {
 int getWindowsBuildNumber() => int.parse(
   getRegistryValue(
         HKEY_LOCAL_MACHINE,
-        'SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\',
+        r'SOFTWARE\Microsoft\Windows NT\CurrentVersion\',
         'CurrentBuildNumber',
       )
       as String,

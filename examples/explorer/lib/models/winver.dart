@@ -58,7 +58,7 @@ bool isWindows11() {
   final windowsBuildNumber = int.parse(
     queryRegistryValue(
           HKEY_LOCAL_MACHINE,
-          'SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\',
+          r'SOFTWARE\Microsoft\Windows NT\CurrentVersion\',
           'CurrentBuildNumber',
         )
         as String,

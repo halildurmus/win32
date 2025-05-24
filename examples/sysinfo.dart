@@ -311,7 +311,7 @@ void main() {
   final buildNumber = int.parse(
     getRegistryValue(
           HKEY_LOCAL_MACHINE,
-          'SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\',
+          r'SOFTWARE\Microsoft\Windows NT\CurrentVersion\',
           'CurrentBuildNumber',
         )
         as String,

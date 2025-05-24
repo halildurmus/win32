@@ -30,7 +30,7 @@ int connectWMI(WbemLocator pLoc, Pointer<Pointer<COMObject>> ppNamespace) {
   // Connect to the root\cimv2 namespace with the current user and obtain
   // pointer pSvc to make IWbemServices calls.
   var hr = pLoc.connectServer(
-    TEXT('ROOT\\CIMV2'), // WMI namespace
+    TEXT(r'ROOT\CIMV2'), // WMI namespace
     nullptr, // User name
     nullptr, // User password
     nullptr, // Locale
@@ -61,7 +61,7 @@ void main() {
   // Initialize COM
   initializeCOM();
 
-  using((Arena arena) {
+  using((arena) {
     final pLoc = WbemLocator.createInstance();
     final ppNamespace = calloc<Pointer<COMObject>>();
 

@@ -8,6 +8,7 @@ import 'safenames.dart';
 import 'utils.dart';
 
 class ComInterfaceProjection {
+  ComInterfaceProjection(this.typeDef, [this.comment = '']);
   final TypeDef typeDef;
   final String comment;
 
@@ -18,8 +19,6 @@ class ComInterfaceProjection {
   List<MethodProjection>? _methodProjections;
   List<MethodProjection> get methodProjections =>
       _methodProjections ??= _cacheMethodProjections();
-
-  ComInterfaceProjection(this.typeDef, [this.comment = '']);
 
   int cacheVtableStart(TypeDef? type) {
     if (type == null) return 0;
@@ -63,7 +62,6 @@ class ComInterfaceProjection {
     return projection;
   }
 
-  // TODO: May need to review suffix stripping on v3
   String get shortName => stripAnsiUnicodeSuffix(
     stripLeadingUnderscores(safeIdentifierForTypeDef(typeDef)),
   );
@@ -93,7 +91,6 @@ class ComInterfaceProjection {
     return null;
   }
 
-  // TODO: Find duplicates. This is the "correct" one.
   Set<String> get importsForClass {
     final importList = <String>{};
     final methods = {
@@ -123,7 +120,7 @@ class ComInterfaceProjection {
     return importList;
   }
 
-  late final pathToSrc = '../' * (typeDef.name.split('.').length - 3);
+  late final String pathToSrc = '../' * (typeDef.name.split('.').length - 3);
 
   String get header =>
       '''

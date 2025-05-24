@@ -37,14 +37,13 @@ void main() {
   // Print what kind of section this buffer is in.
   switch (pMBI.ref.Type) {
     case MEM_IMAGE:
-      print("Type: MEM_IMAGE");
+      print('Type: MEM_IMAGE');
     case MEM_MAPPED:
-      print("Type: MEM_MAPPED");
+      print('Type: MEM_MAPPED');
     case MEM_PRIVATE:
-      print("Type: MEM_PRIVATE");
+      print('Type: MEM_PRIVATE');
     default:
-      print("Type not found.");
-      break;
+      print('Type not found.');
   }
 
   // Print what can be done with the buffer's memory region
@@ -59,7 +58,6 @@ void main() {
       print('AllocationProtect flag: READ');
     default:
       print('AllocationProtect not found.');
-      break;
   }
 
   // Print the state of the buffer's region
@@ -72,7 +70,6 @@ void main() {
       print('State of Buffer Region: Reserve');
     default:
       print('State of Buffer Region not found.');
-      break;
   }
 
   // Freeing temporary memory.

@@ -1,3 +1,5 @@
+// ignore_for_file: unreachable_from_main
+
 import 'package:dart_style/dart_style.dart';
 import 'package:generator/generator.dart';
 import 'package:winmd/winmd.dart';

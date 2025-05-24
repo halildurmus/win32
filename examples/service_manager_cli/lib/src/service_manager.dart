@@ -12,7 +12,7 @@ import 'models.dart';
 /// - Retrieving the current status of services
 abstract class ServiceManager {
   /// Whether to log informative messages to the console.
-  static bool log = false;
+  static var log = false;
 
   /// Retrieves a set of all services (sorted by display name).
   static Set<Service> get services {
@@ -443,111 +443,112 @@ abstract class ServiceManager {
   }
 
   /// Stops dependent services of a service defined by [hService].
-  static ServiceStopResult _stopDependentServices(int hService, int scmHandle) {
-    return using((arena) {
-      final bytesNeeded = arena<DWORD>();
-      final servicesReturned = arena<DWORD>();
+  static ServiceStopResult _stopDependentServices(
+    int hService,
+    int scmHandle,
+  ) => using((arena) {
+    final bytesNeeded = arena<DWORD>();
+    final servicesReturned = arena<DWORD>();
 
-      _log('Checking for dependent services...');
+    _log('Checking for dependent services...');
 
-      // Pass a zero-length buffer to get the required buffer size.
+    // Pass a zero-length buffer to get the required buffer size.
+    if (EnumDependentServices(
+          hService,
+          SERVICE_ACTIVE,
+          nullptr,
+          0,
+          bytesNeeded,
+          servicesReturned,
+        ) ==
+        TRUE) {
+      _log('No dependent services found.');
+    } else {
+      // Allocate a buffer for the dependencies.
+      final lpServices = arena<BYTE>(
+        bytesNeeded.value,
+      ).cast<ENUM_SERVICE_STATUS>();
+
+      // Enumerate the dependencies.
       if (EnumDependentServices(
             hService,
             SERVICE_ACTIVE,
-            nullptr,
-            0,
+            lpServices,
+            bytesNeeded.value,
             bytesNeeded,
             servicesReturned,
           ) ==
-          TRUE) {
-        _log('No dependent services found.');
-      } else {
-        // Allocate a buffer for the dependencies.
-        final lpServices = arena<BYTE>(
-          bytesNeeded.value,
-        ).cast<ENUM_SERVICE_STATUS>();
+          FALSE) {
+        return ServiceStopResult.failed;
+      }
 
-        // Enumerate the dependencies.
-        if (EnumDependentServices(
-              hService,
-              SERVICE_ACTIVE,
-              lpServices,
-              bytesNeeded.value,
-              bytesNeeded,
-              servicesReturned,
-            ) ==
-            FALSE) {
-          return ServiceStopResult.failed;
-        }
+      _log('Found ${servicesReturned.value} dependent services:');
+      for (var i = 0; i < servicesReturned.value; i++) {
+        final ess = lpServices[i];
+        _log(
+          ' (${i + 1}/${servicesReturned.value}) Stopping '
+          '${ess.lpServiceName.toDartString()}...',
+        );
 
-        _log('Found ${servicesReturned.value} dependent services:');
-        for (var i = 0; i < servicesReturned.value; i++) {
-          final ess = lpServices[i];
-          _log(
-            ' (${i + 1}/${servicesReturned.value}) Stopping '
-            '${ess.lpServiceName.toDartString()}...',
-          );
+        // Open the service.
+        final hDepService = OpenService(
+          scmHandle,
+          ess.lpServiceName,
+          SERVICE_STOP | SERVICE_QUERY_STATUS,
+        );
+        if (hDepService == NULL) return ServiceStopResult.failed;
 
-          // Open the service.
-          final hDepService = OpenService(
-            scmHandle,
-            ess.lpServiceName,
-            SERVICE_STOP | SERVICE_QUERY_STATUS,
-          );
-          if (hDepService == NULL) return ServiceStopResult.failed;
+        try {
+          final lpServiceStatus = arena<SERVICE_STATUS_PROCESS>();
 
-          try {
-            final lpServiceStatus = arena<SERVICE_STATUS_PROCESS>();
+          // Send a stop code.
+          if (ControlService(
+                hDepService,
+                SERVICE_CONTROL_STOP,
+                lpServiceStatus.cast<SERVICE_STATUS>(),
+              ) ==
+              FALSE) {
+            return ServiceStopResult.failed;
+          }
 
-            // Send a stop code.
-            if (ControlService(
+          final startTime = GetTickCount();
+          const timeout = 30000; // 30-second timeout
+          final ssp = lpServiceStatus.ref;
+
+          // Wait for the service to stop.
+          while (ssp.dwCurrentState != SERVICE_STOPPED) {
+            _log('Sleeping for ${ssp.dwWaitHint} ms...');
+            Sleep(ssp.dwWaitHint);
+
+            if (QueryServiceStatusEx(
                   hDepService,
-                  SERVICE_CONTROL_STOP,
-                  lpServiceStatus.cast<SERVICE_STATUS>(),
+                  SC_STATUS_PROCESS_INFO,
+                  lpServiceStatus.cast(),
+                  sizeOf<SERVICE_STATUS_PROCESS>(),
+                  bytesNeeded,
                 ) ==
                 FALSE) {
               return ServiceStopResult.failed;
             }
 
-            final startTime = GetTickCount();
-            const timeout = 30000; // 30-second timeout
-            final ssp = lpServiceStatus.ref;
-
-            // Wait for the service to stop.
-            while (ssp.dwCurrentState != SERVICE_STOPPED) {
-              _log('Sleeping for ${ssp.dwWaitHint} ms...');
-              Sleep(ssp.dwWaitHint);
-
-              if (QueryServiceStatusEx(
-                    hDepService,
-                    SC_STATUS_PROCESS_INFO,
-                    lpServiceStatus.cast(),
-                    sizeOf<SERVICE_STATUS_PROCESS>(),
-                    bytesNeeded,
-                  ) ==
-                  FALSE) {
-                return ServiceStopResult.failed;
-              }
-
-              if (ssp.dwCurrentState == SERVICE_STOPPED) {
-                break;
-              }
-
-              if (GetTickCount() - startTime > timeout) {
-                return ServiceStopResult.timedOut;
-              }
+            if (ssp.dwCurrentState == SERVICE_STOPPED) {
+              break;
             }
-          } finally {
-            // Always release the service handle.
-            CloseServiceHandle(hDepService);
+
+            if (GetTickCount() - startTime > timeout) {
+              return ServiceStopResult.timedOut;
+            }
           }
+        } finally {
+          // Always release the service handle.
+          CloseServiceHandle(hDepService);
         }
       }
+    }
 
-      _log('Dependent services stopped.');
-      return ServiceStopResult.success;
-    });
-  }
+    _log('Dependent services stopped.');
+    return ServiceStopResult.success;
+  });
 
   /// Logs a message to the console if [log] is `true`.
   static void _log(String message) {

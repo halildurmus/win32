@@ -17,7 +17,7 @@ void main(List<String> args) {
     print('❌ Version number must be provided.');
     exit(1);
   }
-  version = version.replaceFirst(RegExp(r'^v'), '');
+  version = version.replaceFirst(RegExp('^v'), '');
 
   print('🚧 Updating changelog for v$version...');
   final result = Process.runSync(

@@ -20,7 +20,7 @@ String getTemporaryPath() {
       // GetTempPath adds a trailing backslash, but SHGetKnownFolderPath does
       // not. Strip off trailing backslash for consistency with other methods
       // here.
-      if (path.endsWith('\\')) {
+      if (path.endsWith(r'\')) {
         path = path.substring(0, path.length - 1);
       }
       return path;

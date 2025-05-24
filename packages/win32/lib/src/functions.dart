@@ -18,7 +18,8 @@ int GetWindowCompositionAttribute(
   Pointer<WINDOWCOMPOSITIONATTRIBDATA> pwcad,
 ) => _GetWindowCompositionAttribute(hwnd, pwcad);
 
-final _GetWindowCompositionAttribute = _user32
+final int Function(int hwnd, Pointer<WINDOWCOMPOSITIONATTRIBDATA> pwcad)
+_GetWindowCompositionAttribute = _user32
     .lookupFunction<
       Int32 Function(IntPtr hwnd, Pointer<WINDOWCOMPOSITIONATTRIBDATA> pwcad),
       int Function(int hwnd, Pointer<WINDOWCOMPOSITIONATTRIBDATA> pwcad)
@@ -36,7 +37,8 @@ int SetWindowCompositionAttribute(
   Pointer<WINDOWCOMPOSITIONATTRIBDATA> pwcad,
 ) => _SetWindowCompositionAttribute(hwnd, pwcad);
 
-final _SetWindowCompositionAttribute = _user32
+final int Function(int hwnd, Pointer<WINDOWCOMPOSITIONATTRIBDATA> pwcad)
+_SetWindowCompositionAttribute = _user32
     .lookupFunction<
       Int32 Function(IntPtr hwnd, Pointer<WINDOWCOMPOSITIONATTRIBDATA> pwcad),
       int Function(int hwnd, Pointer<WINDOWCOMPOSITIONATTRIBDATA> pwcad)

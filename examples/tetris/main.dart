@@ -15,7 +15,7 @@ const SCREEN_HEIGHT = 20; // Level height in cells
 const GAME_SPEED = 33; // Update the game every GAME_SPEED ms (= 1000/fps)
 const TIMER_ID = 1;
 
-final hInstance = GetModuleHandle(nullptr);
+final int hInstance = GetModuleHandle(nullptr);
 
 late Game game;
 late Canvas canvas;
@@ -83,7 +83,7 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
     case WM_CREATE:
       hdc = GetDC(hwnd);
 
-      canvas = Canvas(hdc, hwnd, PX_PER_BLOCK);
+      canvas = Canvas(hdc, hwnd);
       game = Game(canvas);
       SetTimer(hwnd, TIMER_ID, GAME_SPEED, nullptr);
 

@@ -8,16 +8,15 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 class NotepadFont {
-  final logfont = calloc<LOGFONT>();
-  final int hwndEdit;
-  int hFont = NULL;
-
   NotepadFont(this.hwndEdit) {
     GetThemeSysFont(NULL, TMT_MENUFONT, logfont);
 
     hFont = CreateFontIndirect(logfont);
     SendMessage(hwndEdit, WM_SETFONT, hFont, 0);
   }
+  final Pointer<LOGFONT> logfont = calloc<LOGFONT>();
+  final int hwndEdit;
+  int hFont = NULL;
 
   bool notepadChooseFont(int hwnd) {
     final cf = calloc<CHOOSEFONT>()

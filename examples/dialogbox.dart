@@ -12,7 +12,7 @@ const ID_EDITTEXT = 201;
 const ID_PROGRESS = 202;
 const PROGRESS_CLASS = 'msctls_progress32';
 
-final hInstance = GetModuleHandle(nullptr);
+final int hInstance = GetModuleHandle(nullptr);
 String? textEntered;
 
 void main() {

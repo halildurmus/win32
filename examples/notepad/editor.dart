@@ -12,6 +12,9 @@ import 'notepad.dart';
 import 'resources.dart';
 
 class NotepadEditor {
+  NotepadEditor(this._hwnd, this._hwndEdit)
+    : file = NotepadFile(_hwnd, '', ''),
+      font = NotepadFont(_hwndEdit);
   // Handles to window and edit control. These don't change after the controls
   // are instantiated, so we take a copy here to minimize ceremony while an
   // instance is being used.
@@ -21,16 +24,12 @@ class NotepadEditor {
   final NotepadFile file;
   final NotepadFont font;
 
-  NotepadEditor(this._hwnd, this._hwndEdit)
-    : file = NotepadFile(_hwnd, '', ''),
-      font = NotepadFont(_hwndEdit);
-
   void dispose() {
     font.dispose();
   }
 
   /// Does the current file in memory contain unsaved changes?
-  bool isFileDirty = false;
+  var isFileDirty = false;
 
   bool get isTextSelected {
     bool result;

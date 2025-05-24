@@ -15,7 +15,7 @@ Map<String, String> loadMap(String filename) {
 }
 
 void saveMap(Map<String, String> map, String filename) {
-  final encoder = const JsonEncoder.withIndent('    ');
+  const encoder = JsonEncoder.withIndent('    ');
   final file = encoder.convert(map);
   File('data/$filename').writeAsStringSync(file);
 }

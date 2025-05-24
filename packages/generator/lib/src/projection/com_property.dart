@@ -2,8 +2,6 @@ import 'com_method.dart';
 import 'safenames.dart';
 import 'utils.dart';
 
-// TODO: Deal with fake properties like IUPnPServices.get_Item([In], [Out]).
-
 abstract class ComPropertyProjection extends ComMethodProjection {
   ComPropertyProjection(super.method, super.vtableOffset);
 

@@ -12,16 +12,15 @@ import 'utils.dart';
 /// anonymous nested types, of which there are many in more complex Win32
 /// structs.
 class NestedStructProjection extends StructProjection {
-  final int suffix;
-  final int rootTypePackingAlignment;
-  final TypeDef rootType;
-
   NestedStructProjection(
     super.typeDef,
     super.structName, {
     required this.suffix,
     required this.rootTypePackingAlignment,
   }) : rootType = _getRootTypeDef(typeDef);
+  final int suffix;
+  final int rootTypePackingAlignment;
+  final TypeDef rootType;
 
   /// Finds the topmost [TypeDef] in the nested tree. This is the one that
   /// should be extended.
@@ -73,8 +72,6 @@ class NestedStructProjection extends StructProjection {
               TypeProjection(field.typeIdentifier).dartType,
             );
 
-      // TODO: Need to figure out why this is needed at all. Shouldn't the type
-      // projection figure out the difference here?
       final typeIsString =
           (dartTypeProjection == 'Array<Uint16>') &&
           (field.typeIdentifier.typeArg!.baseType == BaseType.charType);

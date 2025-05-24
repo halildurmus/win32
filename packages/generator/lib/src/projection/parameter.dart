@@ -5,10 +5,9 @@ import 'type.dart';
 ///
 /// Parameters are a tuple of a type and a name.
 class ParameterProjection {
+  const ParameterProjection(this.name, this.type);
   final String name;
   final TypeProjection type;
-
-  const ParameterProjection(this.name, this.type);
 
   @override
   String toString() => '$name (${type.nativeType})';

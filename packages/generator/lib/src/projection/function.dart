@@ -6,12 +6,6 @@ import 'type.dart';
 import 'utils.dart';
 
 class FunctionProjection {
-  final Method method;
-  final String lib;
-  final String nameWithoutEncoding;
-  final TypeProjection returnType;
-  final List<ParameterProjection> parameters;
-
   FunctionProjection(this.method, this.lib)
     : nameWithoutEncoding = stripAnsiUnicodeSuffix(method.name),
       returnType = TypeProjection(method.returnType.typeIdentifier),
@@ -23,9 +17,14 @@ class FunctionProjection {
             ),
           )
           .toList();
+  final Method method;
+  final String lib;
+  final String nameWithoutEncoding;
+  final TypeProjection returnType;
+  final List<ParameterProjection> parameters;
 
-  // TODO: remove when https://github.com/microsoft/win32metadata/issues/229
-  //  is fixed.
+  // TODO(halildurmus): remove when
+  // https://github.com/microsoft/win32metadata/issues/229 is fixed.
   String get k32StrippedName => nameWithoutEncoding.startsWith('K32')
       ? nameWithoutEncoding.substring(3)
       : nameWithoutEncoding;
@@ -47,7 +46,7 @@ class FunctionProjection {
     ${safeTypenameForString(returnType.dartType)} $k32StrippedName($dartParams) =>
       _$nameWithoutEncoding(${parameters.map((param) => param.identifier).join(', ')});
 
-    final _$nameWithoutEncoding = 
+    final _$nameWithoutEncoding =
       _$lib.lookupFunction<$nativePrototype, $dartPrototype>('${method.name}');
 ''';
 }

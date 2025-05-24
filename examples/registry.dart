@@ -13,10 +13,9 @@ const regKey = r'Software\Microsoft\Windows NT\CurrentVersion\Devices';
 const MAX_ITEMLENGTH = 1024;
 
 class RegistryKeyValuePair {
+  const RegistryKeyValuePair(this.key, this.value);
   final String key;
   final String value;
-
-  const RegistryKeyValuePair(this.key, this.value);
 }
 
 int getRegistryKeyHandle(int hive, String key) {

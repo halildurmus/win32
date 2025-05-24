@@ -16,11 +16,12 @@ enum ApartmentType {
   neutral(2),
   mainSingleThreaded(3);
 
-  final int value;
   const ApartmentType(this.value);
 
   factory ApartmentType.fromValue(int value) =>
       ApartmentType.values.firstWhere((elem) => elem.value == value);
+
+  final int value;
 }
 
 enum ApartmentTypeQualifier {
@@ -32,19 +33,19 @@ enum ApartmentTypeQualifier {
   neutralOnMainSTA(5),
   applicationSTA(6);
 
-  final int value;
   const ApartmentTypeQualifier(this.value);
 
   factory ApartmentTypeQualifier.fromValue(int value) =>
       ApartmentTypeQualifier.values.firstWhere((elem) => elem.value == value);
+
+  final int value;
 }
 
 class ThreadContext {
+  const ThreadContext(this.id, this.type, this.qualifier);
   final int id;
   final ApartmentType type;
   final ApartmentTypeQualifier qualifier;
-
-  const ThreadContext(this.id, this.type, this.qualifier);
 
   @override
   String toString() => '#$id: [${type.name}, ${qualifier.name}]';
@@ -116,7 +117,7 @@ Future<void> createIsolates() async {
     await Isolate.spawn(doSomething, p.sendPort);
     final context = await p.first as ThreadContext;
 
-    print(context.toString());
+    print(context);
   }
 }
 
@@ -124,7 +125,7 @@ Future<void> createIsolates() async {
 ///
 /// Example output, showing multiple isolates executing on three separate
 /// Windows threads:
-/// ```
+/// ```text
 /// #1100: [mainSingleThreaded, none]
 /// #4988: [multiThreaded, implicitMTA]
 /// #4988: [multiThreaded, implicitMTA]
@@ -143,7 +144,7 @@ void main() async {
   CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
 
   // Should be mainSingleThreaded
-  print(getThreadContext().toString());
+  print(getThreadContext());
 
   // Now spin up a number of threads
   await createIsolates();

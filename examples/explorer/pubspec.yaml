@@ -19,7 +19,7 @@ dependencies:
     path: ../../packages/win32
 
 dev_dependencies:
-  lints: ^5.1.1
+  halildurmus_lints: ^1.0.1
 
 flutter:
   uses-material-design: true

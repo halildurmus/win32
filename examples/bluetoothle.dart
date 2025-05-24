@@ -6,7 +6,7 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 void main() {
-  final devicePaths = using((Arena arena) {
+  final devicePaths = using((arena) {
     final interfaceGuid = arena<GUID>()
       ..ref.setGUID(GUID_BLUETOOTHLE_DEVICE_INTERFACE);
 
@@ -81,8 +81,8 @@ Iterable<String> devicesByInterface(
         nullptr,
       );
 
-      // TODO: Uncomment when https://github.com/halildurmus/win32/issues/384
-      // is successfully resolved.
+      // TODO(halildurmus): Uncomment when
+      // https://github.com/halildurmus/win32/issues/384 is fixed.
 
       // if (hr != TRUE) {
       //   final error = GetLastError();
@@ -140,7 +140,7 @@ Iterable<String> devicesByInterface(
 
 void printServicesByDevice(int hDevice) {
   int hr;
-  using((Arena arena) {
+  using((arena) {
     final bufferCountPtr = arena<USHORT>();
     hr = BluetoothGATTGetServices(
       hDevice,
@@ -185,7 +185,7 @@ void printCharacteristicsByService(
   Pointer<BTH_LE_GATT_SERVICE> servicePtr,
 ) {
   int hr;
-  using((Arena arena) {
+  using((arena) {
     final bufferCountPtr = arena<USHORT>();
     hr = BluetoothGATTGetCharacteristics(
       hDevice,
@@ -236,7 +236,7 @@ void printDescriptorsByCharacteristic(
   Pointer<BTH_LE_GATT_CHARACTERISTIC> characteristicPtr,
 ) {
   int hr;
-  using((Arena arena) {
+  using((arena) {
     final bufferCountPtr = arena<USHORT>();
     hr = BluetoothGATTGetDescriptors(
       hDevice,
