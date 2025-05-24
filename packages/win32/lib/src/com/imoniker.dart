@@ -193,22 +193,22 @@ class IMoniker extends IPersistStream {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<COMObject> pmkOtherMoniker)>()(
-    ptr.ref.lpVtbl,
-    pmkOtherMoniker,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<COMObject> pmkOtherMoniker)
+      >()(ptr.ref.lpVtbl, pmkOtherMoniker);
 
-  int hash(Pointer<Uint32> pdwHash) => (ptr.ref.vtable + 14)
-      .cast<
-        Pointer<
-          NativeFunction<Int32 Function(Pointer, Pointer<Uint32> pdwHash)>
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Uint32> pdwHash)>()(
-    ptr.ref.lpVtbl,
-    pdwHash,
-  );
+  int hash(Pointer<Uint32> pdwHash) =>
+      (ptr.ref.vtable + 14)
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Uint32> pdwHash)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Uint32> pdwHash)>()(
+        ptr.ref.lpVtbl,
+        pdwHash,
+      );
 
   int isRunning(
     Pointer<COMObject> pbc,
@@ -273,10 +273,9 @@ class IMoniker extends IPersistStream {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> ppmk)>()(
-    ptr.ref.lpVtbl,
-    ppmk,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Pointer<COMObject>> ppmk)
+      >()(ptr.ref.lpVtbl, ppmk);
 
   int commonPrefixWith(
     Pointer<COMObject> pmkOther,
@@ -386,15 +385,16 @@ class IMoniker extends IPersistStream {
         )
       >()(ptr.ref.lpVtbl, pbc, pmkToLeft, pszDisplayName, pchEaten, ppmkOut);
 
-  int isSystemMoniker(Pointer<Uint32> pdwMksys) => (ptr.ref.vtable + 22)
-      .cast<
-        Pointer<
-          NativeFunction<Int32 Function(Pointer, Pointer<Uint32> pdwMksys)>
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Uint32> pdwMksys)>()(
-    ptr.ref.lpVtbl,
-    pdwMksys,
-  );
+  int isSystemMoniker(Pointer<Uint32> pdwMksys) =>
+      (ptr.ref.vtable + 22)
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Uint32> pdwMksys)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Uint32> pdwMksys)>()(
+        ptr.ref.lpVtbl,
+        pdwMksys,
+      );
 }

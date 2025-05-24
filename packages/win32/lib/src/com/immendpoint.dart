@@ -36,15 +36,16 @@ class IMMEndpoint extends IUnknown {
   factory IMMEndpoint.from(IUnknown interface) =>
       IMMEndpoint(interface.toInterface(IID_IMMEndpoint));
 
-  int getDataFlow(Pointer<Int32> pDataFlow) => (ptr.ref.vtable + 3)
-      .cast<
-        Pointer<
-          NativeFunction<Int32 Function(Pointer, Pointer<Int32> pDataFlow)>
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Int32> pDataFlow)>()(
-    ptr.ref.lpVtbl,
-    pDataFlow,
-  );
+  int getDataFlow(Pointer<Int32> pDataFlow) =>
+      (ptr.ref.vtable + 3)
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> pDataFlow)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> pDataFlow)>()(
+        ptr.ref.lpVtbl,
+        pDataFlow,
+      );
 }

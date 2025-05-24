@@ -80,13 +80,12 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       xClient = LOWORD(lParam);
 
       // Set the vertical scrolling range and page size
-      final si =
-          calloc<SCROLLINFO>()
-            ..ref.cbSize = sizeOf<SCROLLINFO>()
-            ..ref.fMask = SIF_RANGE | SIF_PAGE
-            ..ref.nMin = 0
-            ..ref.nMax = abc.length - 1
-            ..ref.nPage = yClient ~/ yChar;
+      final si = calloc<SCROLLINFO>()
+        ..ref.cbSize = sizeOf<SCROLLINFO>()
+        ..ref.fMask = SIF_RANGE | SIF_PAGE
+        ..ref.nMin = 0
+        ..ref.nMax = abc.length - 1
+        ..ref.nPage = yClient ~/ yChar;
       SetScrollInfo(hwnd, SB_VERT, si, TRUE);
 
       // Set the horizontal scrolling range and page size.
@@ -265,14 +264,13 @@ void winMain(int hInstance, List<String> args, int nShowCmd) {
     exceptionalReturn: 0,
   );
 
-  final wc =
-      calloc<WNDCLASS>()
-        ..ref.style = CS_HREDRAW | CS_VREDRAW
-        ..ref.lpfnWndProc = lpfnWndProc.nativeFunction
-        ..ref.hInstance = hInstance
-        ..ref.lpszClassName = className
-        ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
-        ..ref.hbrBackground = GetStockObject(WHITE_BRUSH);
+  final wc = calloc<WNDCLASS>()
+    ..ref.style = CS_HREDRAW | CS_VREDRAW
+    ..ref.lpfnWndProc = lpfnWndProc.nativeFunction
+    ..ref.hInstance = hInstance
+    ..ref.lpszClassName = className
+    ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
+    ..ref.hbrBackground = GetStockObject(WHITE_BRUSH);
   RegisterClass(wc);
 
   // Create the window.

@@ -305,10 +305,15 @@ final _WindowsStringHasEmbeddedNull = _api_ms_win_core_winrt_string_l1_1_0
 int WindowsSubstring(int string, int startIndex, Pointer<IntPtr> newString) =>
     _WindowsSubstring(string, startIndex, newString);
 
-final _WindowsSubstring = _api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
-  Int32 Function(IntPtr string, Uint32 startIndex, Pointer<IntPtr> newString),
-  int Function(int string, int startIndex, Pointer<IntPtr> newString)
->('WindowsSubstring');
+final _WindowsSubstring = _api_ms_win_core_winrt_string_l1_1_0
+    .lookupFunction<
+      Int32 Function(
+        IntPtr string,
+        Uint32 startIndex,
+        Pointer<IntPtr> newString,
+      ),
+      int Function(int string, int startIndex, Pointer<IntPtr> newString)
+    >('WindowsSubstring');
 
 /// Retrieves a substring from the specified string. The substring starts at
 /// a specified character position and has a specified length.

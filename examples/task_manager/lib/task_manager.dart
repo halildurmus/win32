@@ -81,12 +81,12 @@ abstract class TaskManager {
                 MAX_PATH,
               );
               final path = result != 0 ? filePath.toDartString() : null;
-              final description =
-                  path != null ? (_getFileDescription(path) ?? name) : name;
-              final iconAsBytes =
-                  path != null
-                      ? (_extractIcon(path) ?? Uint8List(0))
-                      : Uint8List(0);
+              final description = path != null
+                  ? (_getFileDescription(path) ?? name)
+                  : name;
+              final iconAsBytes = path != null
+                  ? (_extractIcon(path) ?? Uint8List(0))
+                  : Uint8List(0);
               final task = Task(
                 iconAsBytes: iconAsBytes,
                 name: name,

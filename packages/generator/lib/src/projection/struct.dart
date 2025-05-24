@@ -34,10 +34,9 @@ class StructProjection {
   String get classPreamble {
     const structCategoryComment = '/// {@category struct}';
     final classComment = wrapCommentText(comment);
-    final docComment =
-        classComment.isEmpty
-            ? structCategoryComment
-            : '$classComment\n///\n$structCategoryComment';
+    final docComment = classComment.isEmpty
+        ? structCategoryComment
+        : '$classComment\n///\n$structCategoryComment';
 
     if (packingAlignment > 0) {
       return '$docComment\n@Packed($packingAlignment)';
@@ -46,10 +45,9 @@ class StructProjection {
     }
   }
 
-  String get _projectedName =>
-      typeDef.isNested
-          ? '_${safeTypenameForString(mangleName(typeDef))}'
-          : safeTypenameForString(structName);
+  String get _projectedName => typeDef.isNested
+      ? '_${safeTypenameForString(mangleName(typeDef))}'
+      : safeTypenameForString(structName);
 
   String get _fieldsProjection =>
       typeDef.fields.map(FieldProjection.new).join('\n');
@@ -142,7 +140,8 @@ class StructProjection {
   }
 
   @override
-  String toString() => '''
+  String toString() =>
+      '''
         $classPreamble
         base class $_projectedName extends $_baseType {
           $_fieldsProjection

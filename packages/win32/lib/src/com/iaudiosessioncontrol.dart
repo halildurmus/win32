@@ -47,24 +47,24 @@ class IAudioSessionControl extends IUnknown {
         Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Int32> pRetVal)>>
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Int32> pRetVal)>()(
-    ptr.ref.lpVtbl,
-    pRetVal,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Int32> pRetVal)
+      >()(ptr.ref.lpVtbl, pRetVal);
 
-  int getDisplayName(Pointer<Pointer<Utf16>> pRetVal) => (ptr.ref.vtable + 4)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Pointer<Pointer<Utf16>> pRetVal)
-          >
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> pRetVal)>()(
-    ptr.ref.lpVtbl,
-    pRetVal,
-  );
+  int getDisplayName(Pointer<Pointer<Utf16>> pRetVal) =>
+      (ptr.ref.vtable + 4)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<Utf16>> pRetVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> pRetVal)>()(
+        ptr.ref.lpVtbl,
+        pRetVal,
+      );
 
   int setDisplayName(Pointer<Utf16> Value, Pointer<GUID> EventContext) =>
       (ptr.ref.vtable + 5)
@@ -88,19 +88,20 @@ class IAudioSessionControl extends IUnknown {
             )
           >()(ptr.ref.lpVtbl, Value, EventContext);
 
-  int getIconPath(Pointer<Pointer<Utf16>> pRetVal) => (ptr.ref.vtable + 6)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Pointer<Pointer<Utf16>> pRetVal)
-          >
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> pRetVal)>()(
-    ptr.ref.lpVtbl,
-    pRetVal,
-  );
+  int getIconPath(Pointer<Pointer<Utf16>> pRetVal) =>
+      (ptr.ref.vtable + 6)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<Utf16>> pRetVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> pRetVal)>()(
+        ptr.ref.lpVtbl,
+        pRetVal,
+      );
 
   int setIconPath(Pointer<Utf16> Value, Pointer<GUID> EventContext) =>
       (ptr.ref.vtable + 7)
@@ -129,10 +130,9 @@ class IAudioSessionControl extends IUnknown {
         Pointer<NativeFunction<Int32 Function(Pointer, Pointer<GUID> pRetVal)>>
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<GUID> pRetVal)>()(
-    ptr.ref.lpVtbl,
-    pRetVal,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<GUID> pRetVal)
+      >()(ptr.ref.lpVtbl, pRetVal);
 
   int setGroupingParam(Pointer<GUID> Override, Pointer<GUID> EventContext) =>
       (ptr.ref.vtable + 9)
@@ -156,35 +156,31 @@ class IAudioSessionControl extends IUnknown {
             )
           >()(ptr.ref.lpVtbl, Override, EventContext);
 
-  int registerAudioSessionNotification(
-    Pointer<COMObject> NewNotifications,
-  ) => (ptr.ref.vtable + 10)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Pointer<COMObject> NewNotifications)
-          >
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<COMObject> NewNotifications)>()(
-    ptr.ref.lpVtbl,
-    NewNotifications,
-  );
+  int registerAudioSessionNotification(Pointer<COMObject> NewNotifications) =>
+      (ptr.ref.vtable + 10)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<COMObject> NewNotifications)
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<COMObject> NewNotifications)
+          >()(ptr.ref.lpVtbl, NewNotifications);
 
-  int unregisterAudioSessionNotification(
-    Pointer<COMObject> NewNotifications,
-  ) => (ptr.ref.vtable + 11)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Pointer<COMObject> NewNotifications)
-          >
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<COMObject> NewNotifications)>()(
-    ptr.ref.lpVtbl,
-    NewNotifications,
-  );
+  int unregisterAudioSessionNotification(Pointer<COMObject> NewNotifications) =>
+      (ptr.ref.vtable + 11)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<COMObject> NewNotifications)
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<COMObject> NewNotifications)
+          >()(ptr.ref.lpVtbl, NewNotifications);
 }

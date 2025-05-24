@@ -58,27 +58,29 @@ class IInspectable extends IUnknown {
             )
           >()(ptr.ref.lpVtbl, iidCount, iids);
 
-  int getRuntimeClassName(Pointer<IntPtr> className) => (ptr.ref.vtable + 4)
-      .cast<
-        Pointer<
-          NativeFunction<Int32 Function(Pointer, Pointer<IntPtr> className)>
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<IntPtr> className)>()(
-    ptr.ref.lpVtbl,
-    className,
-  );
+  int getRuntimeClassName(Pointer<IntPtr> className) =>
+      (ptr.ref.vtable + 4)
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<IntPtr> className)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<IntPtr> className)>()(
+        ptr.ref.lpVtbl,
+        className,
+      );
 
-  int getTrustLevel(Pointer<Int32> trustLevel) => (ptr.ref.vtable + 5)
-      .cast<
-        Pointer<
-          NativeFunction<Int32 Function(Pointer, Pointer<Int32> trustLevel)>
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Int32> trustLevel)>()(
-    ptr.ref.lpVtbl,
-    trustLevel,
-  );
+  int getTrustLevel(Pointer<Int32> trustLevel) =>
+      (ptr.ref.vtable + 5)
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> trustLevel)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> trustLevel)>()(
+        ptr.ref.lpVtbl,
+        trustLevel,
+      );
 }

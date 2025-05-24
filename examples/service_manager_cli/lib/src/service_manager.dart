@@ -16,12 +16,16 @@ abstract class ServiceManager {
 
   /// Retrieves a set of all services (sorted by display name).
   static Set<Service> get services {
-    final services =
-        SplayTreeSet<Service>((a, b) => a.displayName.compareTo(b.displayName));
+    final services = SplayTreeSet<Service>(
+      (a, b) => a.displayName.compareTo(b.displayName),
+    );
 
     // Get a handle to the SCM database.
-    final scmHandle =
-        OpenSCManager(nullptr, nullptr, SC_MANAGER_ENUMERATE_SERVICE);
+    final scmHandle = OpenSCManager(
+      nullptr,
+      nullptr,
+      SC_MANAGER_ENUMERATE_SERVICE,
+    );
     if (scmHandle == NULL) return services;
 
     return using((arena) {
@@ -154,8 +158,8 @@ abstract class ServiceManager {
         waitTime = waitTime < 1000
             ? 1000
             : waitTime > 10000
-                ? 10000
-                : waitTime;
+            ? 10000
+            : waitTime;
         _log('Sleeping for ${ssp.dwWaitHint} ms...');
         Sleep(waitTime);
 
@@ -220,8 +224,8 @@ abstract class ServiceManager {
         waitTime = waitTime < 1000
             ? 1000
             : waitTime > 10000
-                ? 10000
-                : waitTime;
+            ? 10000
+            : waitTime;
         _log('Sleeping for ${ssp.dwWaitHint} ms...');
         Sleep(waitTime);
 
@@ -358,8 +362,8 @@ abstract class ServiceManager {
           waitTime = waitTime < 1000
               ? 1000
               : waitTime > 10000
-                  ? 10000
-                  : waitTime;
+              ? 10000
+              : waitTime;
           _log('Sleeping for ${ssp.dwWaitHint} ms...');
           Sleep(waitTime);
 
@@ -439,10 +443,7 @@ abstract class ServiceManager {
   }
 
   /// Stops dependent services of a service defined by [hService].
-  static ServiceStopResult _stopDependentServices(
-    int hService,
-    int scmHandle,
-  ) {
+  static ServiceStopResult _stopDependentServices(int hService, int scmHandle) {
     return using((arena) {
       final bytesNeeded = arena<DWORD>();
       final servicesReturned = arena<DWORD>();
@@ -462,8 +463,9 @@ abstract class ServiceManager {
         _log('No dependent services found.');
       } else {
         // Allocate a buffer for the dependencies.
-        final lpServices =
-            arena<BYTE>(bytesNeeded.value).cast<ENUM_SERVICE_STATUS>();
+        final lpServices = arena<BYTE>(
+          bytesNeeded.value,
+        ).cast<ENUM_SERVICE_STATUS>();
 
         // Enumerate the dependencies.
         if (EnumDependentServices(
@@ -481,8 +483,10 @@ abstract class ServiceManager {
         _log('Found ${servicesReturned.value} dependent services:');
         for (var i = 0; i < servicesReturned.value; i++) {
           final ess = lpServices[i];
-          _log(' (${i + 1}/${servicesReturned.value}) Stopping '
-              '${ess.lpServiceName.toDartString()}...');
+          _log(
+            ' (${i + 1}/${servicesReturned.value}) Stopping '
+            '${ess.lpServiceName.toDartString()}...',
+          );
 
           // Open the service.
           final hDepService = OpenService(

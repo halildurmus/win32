@@ -63,16 +63,15 @@ class NestedStructProjection extends StructProjection {
       stripAnsiUnicodeSuffix(lastComponent(rootType.name)),
     );
 
-    final buffer =
-        StringBuffer()..writeln('extension $extensionName on $rootTypeName {');
+    final buffer = StringBuffer()
+      ..writeln('extension $extensionName on $rootTypeName {');
     for (final field in typeDef.fields) {
       final instanceName = _instanceName(field);
-      final dartTypeProjection =
-          field.typeIdentifier.type?.isNested ?? false
-              ? TypeProjection(field.typeIdentifier).dartType
-              : stripLeadingUnderscores(
-                TypeProjection(field.typeIdentifier).dartType,
-              );
+      final dartTypeProjection = field.typeIdentifier.type?.isNested ?? false
+          ? TypeProjection(field.typeIdentifier).dartType
+          : stripLeadingUnderscores(
+              TypeProjection(field.typeIdentifier).dartType,
+            );
 
       // TODO: Need to figure out why this is needed at all. Shouldn't the type
       // projection figure out the difference here?

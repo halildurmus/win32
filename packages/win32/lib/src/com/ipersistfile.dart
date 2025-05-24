@@ -78,10 +78,9 @@ class IPersistFile extends IPersist {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Utf16> pszFileName)>()(
-    ptr.ref.lpVtbl,
-    pszFileName,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Utf16> pszFileName)
+      >()(ptr.ref.lpVtbl, pszFileName);
 
   int getCurFile(Pointer<Pointer<Utf16>> ppszFileName) => (ptr.ref.vtable + 8)
       .cast<

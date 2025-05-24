@@ -66,20 +66,21 @@ void main() {
     final rgnData = scope.findTypeDef('Windows.Win32.Graphics.Gdi.RGNDATA')!;
     expect(typedefIsAnsi(rgnData), isFalse);
 
-    final enumLogFontExA =
-        scope.findTypeDef('Windows.Win32.Graphics.Gdi.ENUMLOGFONTEXA')!;
+    final enumLogFontExA = scope.findTypeDef(
+      'Windows.Win32.Graphics.Gdi.ENUMLOGFONTEXA',
+    )!;
     expect(typedefIsAnsi(enumLogFontExA), isTrue);
 
-    final enumLogFontExW =
-        scope.findTypeDef('Windows.Win32.Graphics.Gdi.ENUMLOGFONTEXW')!;
+    final enumLogFontExW = scope.findTypeDef(
+      'Windows.Win32.Graphics.Gdi.ENUMLOGFONTEXW',
+    )!;
     expect(typedefIsAnsi(enumLogFontExW), isFalse);
   });
 
   test('mangleName', () {
-    final propVariant =
-        scope.findTypeDef(
-          'Windows.Win32.System.Com.StructuredStorage.PROPVARIANT',
-        )!;
+    final propVariant = scope.findTypeDef(
+      'Windows.Win32.System.Com.StructuredStorage.PROPVARIANT',
+    )!;
 
     final union1 = propVariant.fields.first.typeIdentifier.type;
     expect(union1, isNotNull);

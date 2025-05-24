@@ -95,10 +95,9 @@ class IEnumWbemClassObject extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> ppEnum)>()(
-    ptr.ref.lpVtbl,
-    ppEnum,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Pointer<COMObject>> ppEnum)
+      >()(ptr.ref.lpVtbl, ppEnum);
 
   int skip(int lTimeout, int nCount) => (ptr.ref.vtable + 7)
       .cast<
@@ -107,9 +106,7 @@ class IEnumWbemClassObject extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, int lTimeout, int nCount)>()(
-    ptr.ref.lpVtbl,
-    lTimeout,
-    nCount,
-  );
+      .asFunction<
+        int Function(Pointer, int lTimeout, int nCount)
+      >()(ptr.ref.lpVtbl, lTimeout, nCount);
 }

@@ -75,47 +75,47 @@ class IShellLink extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<ITEMIDLIST>> ppidl)>()(
-    ptr.ref.lpVtbl,
-    ppidl,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Pointer<ITEMIDLIST>> ppidl)
+      >()(ptr.ref.lpVtbl, ppidl);
 
-  int setIDList(Pointer<ITEMIDLIST> pidl) => (ptr.ref.vtable + 5)
-      .cast<
-        Pointer<
-          NativeFunction<Int32 Function(Pointer, Pointer<ITEMIDLIST> pidl)>
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<ITEMIDLIST> pidl)>()(
-    ptr.ref.lpVtbl,
-    pidl,
-  );
+  int setIDList(Pointer<ITEMIDLIST> pidl) =>
+      (ptr.ref.vtable + 5)
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<ITEMIDLIST> pidl)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<ITEMIDLIST> pidl)>()(
+        ptr.ref.lpVtbl,
+        pidl,
+      );
 
-  int getDescription(Pointer<Utf16> pszName, int cch) => (ptr.ref.vtable + 6)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Pointer<Utf16> pszName, Int32 cch)
-          >
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Utf16> pszName, int cch)>()(
-    ptr.ref.lpVtbl,
-    pszName,
-    cch,
-  );
+  int getDescription(Pointer<Utf16> pszName, int cch) =>
+      (ptr.ref.vtable + 6)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Utf16> pszName, Int32 cch)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Utf16> pszName, int cch)>()(
+        ptr.ref.lpVtbl,
+        pszName,
+        cch,
+      );
 
   int setDescription(Pointer<Utf16> pszName) => (ptr.ref.vtable + 7)
       .cast<
         Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Utf16> pszName)>>
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Utf16> pszName)>()(
-    ptr.ref.lpVtbl,
-    pszName,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Utf16> pszName)
+      >()(ptr.ref.lpVtbl, pszName);
 
   int getWorkingDirectory(Pointer<Utf16> pszDir, int cch) =>
       (ptr.ref.vtable + 8)
@@ -138,75 +138,74 @@ class IShellLink extends IUnknown {
         Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Utf16> pszDir)>>
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Utf16> pszDir)>()(
-    ptr.ref.lpVtbl,
-    pszDir,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Utf16> pszDir)
+      >()(ptr.ref.lpVtbl, pszDir);
 
-  int getArguments(Pointer<Utf16> pszArgs, int cch) => (ptr.ref.vtable + 10)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Pointer<Utf16> pszArgs, Int32 cch)
-          >
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Utf16> pszArgs, int cch)>()(
-    ptr.ref.lpVtbl,
-    pszArgs,
-    cch,
-  );
+  int getArguments(Pointer<Utf16> pszArgs, int cch) =>
+      (ptr.ref.vtable + 10)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Utf16> pszArgs, Int32 cch)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Utf16> pszArgs, int cch)>()(
+        ptr.ref.lpVtbl,
+        pszArgs,
+        cch,
+      );
 
   int setArguments(Pointer<Utf16> pszArgs) => (ptr.ref.vtable + 11)
       .cast<
         Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Utf16> pszArgs)>>
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Utf16> pszArgs)>()(
-    ptr.ref.lpVtbl,
-    pszArgs,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Utf16> pszArgs)
+      >()(ptr.ref.lpVtbl, pszArgs);
 
-  int getHotkey(Pointer<Uint16> pwHotkey) => (ptr.ref.vtable + 12)
-      .cast<
-        Pointer<
-          NativeFunction<Int32 Function(Pointer, Pointer<Uint16> pwHotkey)>
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Uint16> pwHotkey)>()(
-    ptr.ref.lpVtbl,
-    pwHotkey,
-  );
+  int getHotkey(Pointer<Uint16> pwHotkey) =>
+      (ptr.ref.vtable + 12)
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Uint16> pwHotkey)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Uint16> pwHotkey)>()(
+        ptr.ref.lpVtbl,
+        pwHotkey,
+      );
 
   int setHotkey(int wHotkey) => (ptr.ref.vtable + 13)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint16 wHotkey)>>>()
       .value
-      .asFunction<int Function(Pointer, int wHotkey)>()(
-    ptr.ref.lpVtbl,
-    wHotkey,
-  );
+      .asFunction<
+        int Function(Pointer, int wHotkey)
+      >()(ptr.ref.lpVtbl, wHotkey);
 
-  int getShowCmd(Pointer<Uint32> piShowCmd) => (ptr.ref.vtable + 14)
-      .cast<
-        Pointer<
-          NativeFunction<Int32 Function(Pointer, Pointer<Uint32> piShowCmd)>
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Uint32> piShowCmd)>()(
-    ptr.ref.lpVtbl,
-    piShowCmd,
-  );
+  int getShowCmd(Pointer<Uint32> piShowCmd) =>
+      (ptr.ref.vtable + 14)
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Uint32> piShowCmd)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Uint32> piShowCmd)>()(
+        ptr.ref.lpVtbl,
+        piShowCmd,
+      );
 
   int setShowCmd(int iShowCmd) => (ptr.ref.vtable + 15)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint32 iShowCmd)>>>()
       .value
-      .asFunction<int Function(Pointer, int iShowCmd)>()(
-    ptr.ref.lpVtbl,
-    iShowCmd,
-  );
+      .asFunction<
+        int Function(Pointer, int iShowCmd)
+      >()(ptr.ref.lpVtbl, iShowCmd);
 
   int getIconLocation(
     Pointer<Utf16> pszIconPath,
@@ -274,21 +273,18 @@ class IShellLink extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, int hwnd, int fFlags)>()(
-    ptr.ref.lpVtbl,
-    hwnd,
-    fFlags,
-  );
+      .asFunction<
+        int Function(Pointer, int hwnd, int fFlags)
+      >()(ptr.ref.lpVtbl, hwnd, fFlags);
 
   int setPath(Pointer<Utf16> pszFile) => (ptr.ref.vtable + 20)
       .cast<
         Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Utf16> pszFile)>>
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Utf16> pszFile)>()(
-    ptr.ref.lpVtbl,
-    pszFile,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Utf16> pszFile)
+      >()(ptr.ref.lpVtbl, pszFile);
 }
 
 /// @nodoc

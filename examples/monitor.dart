@@ -145,8 +145,9 @@ void main() {
   // array.
   final physicalMonitorHandle = physicalMonitorArray.cast<IntPtr>().value;
   print('Physical monitor handle: $physicalMonitorHandle');
-  final physicalMonitorDescription =
-      (physicalMonitorArray + sizeOf<IntPtr>()).cast<Utf16>().toDartString();
+  final physicalMonitorDescription = (physicalMonitorArray + sizeOf<IntPtr>())
+      .cast<Utf16>()
+      .toDartString();
   print('Physical monitor description: $physicalMonitorDescription');
 
   final monitorCapabilitiesPtr = calloc<DWORD>();

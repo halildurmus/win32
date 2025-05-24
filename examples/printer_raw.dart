@@ -30,13 +30,11 @@ class RawPrinter {
     }
 
     // https://learn.microsoft.com/windows/win32/printdocs/doc-info-1
-    final pDocInfo =
-        alloc<DOC_INFO_1>()
-          ..ref.pDocName = printerName.toNativeUtf16(allocator: alloc)
-          ..ref.pDatatype = dataType.toNativeUtf16(
-            allocator: alloc,
-          ) // RAW, TEXT or XPS_PASS
-          ..ref.pOutputFile = nullptr;
+    final pDocInfo = alloc<DOC_INFO_1>()
+      ..ref.pDocName = printerName.toNativeUtf16(allocator: alloc)
+      ..ref.pDatatype = dataType
+          .toNativeUtf16(allocator: alloc) // RAW, TEXT or XPS_PASS
+      ..ref.pOutputFile = nullptr;
 
     //https://learn.microsoft.com/windows/win32/printdocs/startdocprinter
     fSuccess = StartDocPrinter(

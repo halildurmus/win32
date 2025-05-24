@@ -41,15 +41,16 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown {
         interface.toInterface(IID_IUIAutomationLegacyIAccessiblePattern),
       );
 
-  int select(int flagsSelect) => (ptr.ref.vtable + 3)
-      .cast<
-        Pointer<NativeFunction<Int32 Function(Pointer, Int32 flagsSelect)>>
-      >()
-      .value
-      .asFunction<int Function(Pointer, int flagsSelect)>()(
-    ptr.ref.lpVtbl,
-    flagsSelect,
-  );
+  int select(int flagsSelect) =>
+      (ptr.ref.vtable + 3)
+          .cast<
+            Pointer<NativeFunction<Int32 Function(Pointer, Int32 flagsSelect)>>
+          >()
+          .value
+          .asFunction<int Function(Pointer, int flagsSelect)>()(
+        ptr.ref.lpVtbl,
+        flagsSelect,
+      );
 
   int doDefaultAction() => (ptr.ref.vtable + 4)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
@@ -61,10 +62,9 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown {
         Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Utf16> szValue)>>
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Utf16> szValue)>()(
-    ptr.ref.lpVtbl,
-    szValue,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Utf16> szValue)
+      >()(ptr.ref.lpVtbl, szValue);
 
   int get currentChildId {
     final retValuePtr = calloc<Int32>();
@@ -77,10 +77,9 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Int32> pRetVal)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Int32> pRetVal)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -104,10 +103,9 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> pszName)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<Utf16>> pszName)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -181,10 +179,9 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Uint32> pdwRole)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Uint32> pdwRole)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -206,10 +203,9 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Uint32> pdwState)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Uint32> pdwState)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -233,10 +229,9 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> pszHelp)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<Utf16>> pszHelp)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -336,10 +331,9 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Int32> pRetVal)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Int32> pRetVal)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -363,10 +357,9 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> pszName)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<Utf16>> pszName)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -440,10 +433,9 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Uint32> pdwRole)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Uint32> pdwRole)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -465,10 +457,9 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Uint32> pdwState)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Uint32> pdwState)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -492,10 +483,9 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> pszHelp)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<Utf16>> pszHelp)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 

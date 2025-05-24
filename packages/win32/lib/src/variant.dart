@@ -183,8 +183,9 @@ base class VARIANT extends Struct {
       __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.boolVal ==
       VARIANT_TRUE;
   set boolVal(bool value) =>
-      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.boolVal =
-          value ? VARIANT_TRUE : VARIANT_FALSE;
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.boolVal = value
+      ? VARIANT_TRUE
+      : VARIANT_FALSE;
 
   // SCODE -> LONG -> long -> Int32
   int get scode => __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.scode;
@@ -393,33 +394,32 @@ base class VARIANT extends Struct {
   set puintVal(Pointer<Uint32> value) =>
       __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.puintVal = value;
 
-  Pointer get pvRecord =>
-      __VARIANT_NAME_1
-          .__VARIANT_NAME_2
-          .__VARIANT_NAME_3
-          .__VARIANT_NAME_4
-          .pvRecord;
+  Pointer get pvRecord => __VARIANT_NAME_1
+      .__VARIANT_NAME_2
+      .__VARIANT_NAME_3
+      .__VARIANT_NAME_4
+      .pvRecord;
   set pvRecord(Pointer value) =>
       __VARIANT_NAME_1
-          .__VARIANT_NAME_2
-          .__VARIANT_NAME_3
-          .__VARIANT_NAME_4
-          .pvRecord = value;
+              .__VARIANT_NAME_2
+              .__VARIANT_NAME_3
+              .__VARIANT_NAME_4
+              .pvRecord =
+          value;
 
-  Pointer<COMObject> get pRecInfo =>
-      calloc<COMObject>()
-        ..ref.lpVtbl =
-            __VARIANT_NAME_1
-                .__VARIANT_NAME_2
-                .__VARIANT_NAME_3
-                .__VARIANT_NAME_4
-                .pRecInfo;
+  Pointer<COMObject> get pRecInfo => calloc<COMObject>()
+    ..ref.lpVtbl = __VARIANT_NAME_1
+        .__VARIANT_NAME_2
+        .__VARIANT_NAME_3
+        .__VARIANT_NAME_4
+        .pRecInfo;
   set pRecInfo(Pointer<COMObject> value) =>
       __VARIANT_NAME_1
-          .__VARIANT_NAME_2
-          .__VARIANT_NAME_3
-          .__VARIANT_NAME_4
-          .pRecInfo = value.ref.lpVtbl;
+              .__VARIANT_NAME_2
+              .__VARIANT_NAME_3
+              .__VARIANT_NAME_4
+              .pRecInfo =
+          value.ref.lpVtbl;
 }
 
 /// Used in the ReadMultiple and WriteMultiple methods of IPropertyStorage to

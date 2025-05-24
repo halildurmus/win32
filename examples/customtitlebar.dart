@@ -22,12 +22,11 @@ int dpiScale(int value, int dpi) => value * dpi ~/ 96;
 
 /// Given a Win32 RECT, duplicates it and returns the duplicate.
 Pointer<RECT> cloneRect(Pointer<RECT> rect) {
-  final clone =
-      calloc<RECT>()
-        ..ref.bottom = rect.ref.bottom
-        ..ref.left = rect.ref.left
-        ..ref.top = rect.ref.top
-        ..ref.right = rect.ref.right;
+  final clone = calloc<RECT>()
+    ..ref.bottom = rect.ref.bottom
+    ..ref.left = rect.ref.left
+    ..ref.top = rect.ref.top
+    ..ref.right = rect.ref.right;
   return clone;
 }
 
@@ -122,8 +121,8 @@ Pointer<RECT> getFakeShadowRect(int hwnd) {
 
 /// Returns true if the window is maximized within the Windows definition.
 bool isWindowMaximized(int hwnd) {
-  final windowPlacement =
-      calloc<WINDOWPLACEMENT>()..ref.length = sizeOf<WINDOWPLACEMENT>();
+  final windowPlacement = calloc<WINDOWPLACEMENT>()
+    ..ref.length = sizeOf<WINDOWPLACEMENT>();
 
   try {
     if (GetWindowPlacement(hwnd, windowPlacement) != FALSE) {
@@ -174,10 +173,9 @@ int paintButtons(
 
   // Paint minimize button
   final minimizeButtonRect = getMinimizeRect(hwnd, titleBarRect);
-  final minimizeIconRect =
-      calloc<RECT>()
-        ..ref.right = iconDimension
-        ..ref.bottom = 1;
+  final minimizeIconRect = calloc<RECT>()
+    ..ref.right = iconDimension
+    ..ref.bottom = 1;
 
   try {
     if (hoveredButton == HoveredButton.minimize) {
@@ -193,10 +191,9 @@ int paintButtons(
 
   // Paint maximize button
   final maximizeButtonRect = getMaximizeRect(hwnd, titleBarRect);
-  final maximizeIconRect =
-      calloc<RECT>()
-        ..ref.right = iconDimension
-        ..ref.bottom = iconDimension;
+  final maximizeIconRect = calloc<RECT>()
+    ..ref.right = iconDimension
+    ..ref.bottom = iconDimension;
 
   try {
     if (hoveredButton == HoveredButton.maximize) {
@@ -220,10 +217,9 @@ int paintButtons(
 
   // Paint close button
   final closeButtonRect = getCloseRect(hwnd, titleBarRect);
-  final closeIconRect =
-      calloc<RECT>()
-        ..ref.right = iconDimension
-        ..ref.bottom = iconDimension;
+  final closeIconRect = calloc<RECT>()
+    ..ref.right = iconDimension
+    ..ref.bottom = iconDimension;
   try {
     int? customPen;
     if (hoveredButton == HoveredButton.close) {
@@ -261,11 +257,10 @@ void drawWindowCaption(
 ) {
   final logicalFont = calloc<LOGFONT>();
   final titleText = wsalloc(256);
-  final drawThemeOptions =
-      calloc<DTTOPTS>()
-        ..ref.dwSize = sizeOf<DTTOPTS>()
-        ..ref.dwFlags = DTT_TEXTCOLOR
-        ..ref.crText = titleBarItemColor;
+  final drawThemeOptions = calloc<DTTOPTS>()
+    ..ref.dwSize = sizeOf<DTTOPTS>()
+    ..ref.dwFlags = DTT_TEXTCOLOR
+    ..ref.crText = titleBarItemColor;
 
   try {
     int? savedFont;
@@ -307,8 +302,9 @@ void paintWindow(int hwnd) {
   final shadowColor = RGB(100, 100, 100);
 
   final hasFocus = GetFocus() != FALSE;
-  final titleBarItemColor =
-      hasFocus ? titleBarFocusedItemColor : titleBarInactiveItemColor;
+  final titleBarItemColor = hasFocus
+      ? titleBarFocusedItemColor
+      : titleBarInactiveItemColor;
 
   final ps = calloc<PAINTSTRUCT>();
   final hdc = BeginPaint(hwnd, ps);
@@ -337,22 +333,20 @@ void paintWindow(int hwnd) {
 
   // Draw window caption
   const textPadding = 10;
-  final titleBarTextRect =
-      cloneRect(titleBarRect)
-        ..ref.left += textPadding
-        ..ref.right = leftButtonExtent - textPadding;
+  final titleBarTextRect = cloneRect(titleBarRect)
+    ..ref.left += textPadding
+    ..ref.right = leftButtonExtent - textPadding;
   drawWindowCaption(hwnd, hdc, titleBarTextRect, titleBarItemColor);
   free(titleBarTextRect);
 
   // Paint fake top shadow.
-  final fakeTopShadowColor =
-      hasFocus
-          ? shadowColor
-          : RGB(
-            (GetRValue(titleBarColor) + GetRValue(shadowColor)) ~/ 2,
-            (GetGValue(titleBarColor) + GetGValue(shadowColor)) ~/ 2,
-            (GetBValue(titleBarColor) + GetBValue(shadowColor)) ~/ 2,
-          );
+  final fakeTopShadowColor = hasFocus
+      ? shadowColor
+      : RGB(
+          (GetRValue(titleBarColor) + GetRValue(shadowColor)) ~/ 2,
+          (GetGValue(titleBarColor) + GetGValue(shadowColor)) ~/ 2,
+          (GetBValue(titleBarColor) + GetBValue(shadowColor)) ~/ 2,
+        );
   final fakeTopShadowBrush = CreateSolidBrush(fakeTopShadowColor);
   final fakeTopShadowRect = getFakeShadowRect(hwnd);
   FillRect(hdc, fakeTopShadowRect, fakeTopShadowBrush);
@@ -385,11 +379,10 @@ int mainWindowProc(int hwnd, int msg, int wParam, int lParam) {
       final padding = GetSystemMetricsForDpi(SM_CXPADDEDBORDER, dpi);
 
       final params = Pointer<NCCALCSIZE_PARAMS>.fromAddress(lParam);
-      final requestedClientRect =
-          params.ref.rgrc[0]
-            ..right -= frameX + padding
-            ..left += frameX + padding
-            ..bottom -= frameY + padding;
+      final requestedClientRect = params.ref.rgrc[0]
+        ..right -= frameX + padding
+        ..left += frameX + padding
+        ..bottom -= frameY + padding;
 
       if (isWindowMaximized(hwnd)) {
         requestedClientRect.top += padding;
@@ -442,10 +435,9 @@ int mainWindowProc(int hwnd, int msg, int wParam, int lParam) {
       final dpi = GetDpiForWindow(hwnd);
       final frameY = GetSystemMetricsForDpi(SM_CYFRAME, dpi);
       final padding = GetSystemMetricsForDpi(SM_CXPADDEDBORDER, dpi);
-      final cursorPoint =
-          calloc<POINT>()
-            ..ref.x = LOWORD(lParam)
-            ..ref.y = HIWORD(lParam);
+      final cursorPoint = calloc<POINT>()
+        ..ref.x = LOWORD(lParam)
+        ..ref.y = HIWORD(lParam);
 
       try {
         ScreenToClient(hwnd, cursorPoint);
@@ -558,13 +550,12 @@ void main() {
     exceptionalReturn: 0,
   );
 
-  final windowClass =
-      calloc<WNDCLASSEX>()
-        ..ref.cbSize = sizeOf<WNDCLASSEX>()
-        ..ref.lpszClassName = windowClassName
-        ..ref.style = CS_HREDRAW | CS_VREDRAW
-        ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
-        ..ref.lpfnWndProc = lpfnWndProc.nativeFunction;
+  final windowClass = calloc<WNDCLASSEX>()
+    ..ref.cbSize = sizeOf<WNDCLASSEX>()
+    ..ref.lpszClassName = windowClassName
+    ..ref.style = CS_HREDRAW | CS_VREDRAW
+    ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
+    ..ref.lpfnWndProc = lpfnWndProc.nativeFunction;
 
   RegisterClassEx(windowClass);
 

@@ -43,22 +43,22 @@ class IShellItemResources extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Uint32> pdwAttributes)>()(
-    ptr.ref.lpVtbl,
-    pdwAttributes,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Uint32> pdwAttributes)
+      >()(ptr.ref.lpVtbl, pdwAttributes);
 
-  int getSize(Pointer<Uint64> pullSize) => (ptr.ref.vtable + 4)
-      .cast<
-        Pointer<
-          NativeFunction<Int32 Function(Pointer, Pointer<Uint64> pullSize)>
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Uint64> pullSize)>()(
-    ptr.ref.lpVtbl,
-    pullSize,
-  );
+  int getSize(Pointer<Uint64> pullSize) =>
+      (ptr.ref.vtable + 4)
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Uint64> pullSize)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Uint64> pullSize)>()(
+        ptr.ref.lpVtbl,
+        pullSize,
+      );
 
   int getTimes(
     Pointer<FILETIME> pftCreation,
@@ -147,25 +147,23 @@ class IShellItemResources extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> ppenumr)>()(
-    ptr.ref.lpVtbl,
-    ppenumr,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Pointer<COMObject>> ppenumr)
+      >()(ptr.ref.lpVtbl, ppenumr);
 
-  int supportsResource(Pointer<SHELL_ITEM_RESOURCE> pcsir) => (ptr.ref.vtable +
-          9)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Pointer<SHELL_ITEM_RESOURCE> pcsir)
-          >
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<SHELL_ITEM_RESOURCE> pcsir)>()(
-    ptr.ref.lpVtbl,
-    pcsir,
-  );
+  int supportsResource(Pointer<SHELL_ITEM_RESOURCE> pcsir) =>
+      (ptr.ref.vtable + 9)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<SHELL_ITEM_RESOURCE> pcsir)
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<SHELL_ITEM_RESOURCE> pcsir)
+          >()(ptr.ref.lpVtbl, pcsir);
 
   int openResource(
     Pointer<SHELL_ITEM_RESOURCE> pcsir,

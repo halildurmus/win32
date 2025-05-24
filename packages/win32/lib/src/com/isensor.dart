@@ -36,15 +36,16 @@ class ISensor extends IUnknown {
   factory ISensor.from(IUnknown interface) =>
       ISensor(interface.toInterface(IID_ISensor));
 
-  int getID(Pointer<GUID> pID) => (ptr.ref.vtable + 3)
-      .cast<
-        Pointer<NativeFunction<Int32 Function(Pointer, Pointer<GUID> pID)>>
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<GUID> pID)>()(
-    ptr.ref.lpVtbl,
-    pID,
-  );
+  int getID(Pointer<GUID> pID) =>
+      (ptr.ref.vtable + 3)
+          .cast<
+            Pointer<NativeFunction<Int32 Function(Pointer, Pointer<GUID> pID)>>
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<GUID> pID)>()(
+        ptr.ref.lpVtbl,
+        pID,
+      );
 
   int getCategory(Pointer<GUID> pSensorCategory) => (ptr.ref.vtable + 4)
       .cast<
@@ -53,22 +54,22 @@ class ISensor extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<GUID> pSensorCategory)>()(
-    ptr.ref.lpVtbl,
-    pSensorCategory,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<GUID> pSensorCategory)
+      >()(ptr.ref.lpVtbl, pSensorCategory);
 
-  int getType(Pointer<GUID> pSensorType) => (ptr.ref.vtable + 5)
-      .cast<
-        Pointer<
-          NativeFunction<Int32 Function(Pointer, Pointer<GUID> pSensorType)>
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<GUID> pSensorType)>()(
-    ptr.ref.lpVtbl,
-    pSensorType,
-  );
+  int getType(Pointer<GUID> pSensorType) =>
+      (ptr.ref.vtable + 5)
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<GUID> pSensorType)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<GUID> pSensorType)>()(
+        ptr.ref.lpVtbl,
+        pSensorType,
+      );
 
   int getFriendlyName(Pointer<Pointer<Utf16>> pFriendlyName) =>
       (ptr.ref.vtable + 6)
@@ -200,10 +201,9 @@ class ISensor extends IUnknown {
         Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Int32> pState)>>
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Int32> pState)>()(
-    ptr.ref.lpVtbl,
-    pState,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Int32> pState)
+      >()(ptr.ref.lpVtbl, pState);
 
   int getData(Pointer<Pointer<COMObject>> ppDataReport) => (ptr.ref.vtable + 13)
       .cast<
@@ -264,21 +264,19 @@ class ISensor extends IUnknown {
         )
       >()(ptr.ref.lpVtbl, ppValues, pCount);
 
-  int setEventInterest(Pointer<GUID> pValues, int count) => (ptr.ref.vtable +
-          16)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Pointer<GUID> pValues, Uint32 count)
-          >
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<GUID> pValues, int count)>()(
-    ptr.ref.lpVtbl,
-    pValues,
-    count,
-  );
+  int setEventInterest(Pointer<GUID> pValues, int count) =>
+      (ptr.ref.vtable + 16)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<GUID> pValues, Uint32 count)
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<GUID> pValues, int count)
+          >()(ptr.ref.lpVtbl, pValues, count);
 
   int setEventSink(Pointer<COMObject> pEvents) => (ptr.ref.vtable + 17)
       .cast<
@@ -287,10 +285,9 @@ class ISensor extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<COMObject> pEvents)>()(
-    ptr.ref.lpVtbl,
-    pEvents,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<COMObject> pEvents)
+      >()(ptr.ref.lpVtbl, pEvents);
 }
 
 /// @nodoc

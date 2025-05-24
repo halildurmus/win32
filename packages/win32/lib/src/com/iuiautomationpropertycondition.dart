@@ -45,19 +45,20 @@ class IUIAutomationPropertyCondition extends IUIAutomationCondition {
     final retValuePtr = calloc<Uint32>();
 
     try {
-      final hr = (ptr.ref.vtable + 3)
-          .cast<
-            Pointer<
-              NativeFunction<
-                Int32 Function(Pointer, Pointer<Uint32> propertyId)
-              >
-            >
-          >()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Uint32> propertyId)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+      final hr =
+          (ptr.ref.vtable + 3)
+              .cast<
+                Pointer<
+                  NativeFunction<
+                    Int32 Function(Pointer, Pointer<Uint32> propertyId)
+                  >
+                >
+              >()
+              .value
+              .asFunction<int Function(Pointer, Pointer<Uint32> propertyId)>()(
+            ptr.ref.lpVtbl,
+            retValuePtr,
+          );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -81,10 +82,9 @@ class IUIAutomationPropertyCondition extends IUIAutomationCondition {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<VARIANT> propertyValue)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<VARIANT> propertyValue)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -99,17 +99,18 @@ class IUIAutomationPropertyCondition extends IUIAutomationCondition {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = (ptr.ref.vtable + 5)
-          .cast<
-            Pointer<
-              NativeFunction<Int32 Function(Pointer, Pointer<Int32> flags)>
-            >
-          >()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Int32> flags)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+      final hr =
+          (ptr.ref.vtable + 5)
+              .cast<
+                Pointer<
+                  NativeFunction<Int32 Function(Pointer, Pointer<Int32> flags)>
+                >
+              >()
+              .value
+              .asFunction<int Function(Pointer, Pointer<Int32> flags)>()(
+            ptr.ref.lpVtbl,
+            retValuePtr,
+          );
 
       if (FAILED(hr)) throw WindowsException(hr);
 

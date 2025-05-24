@@ -19,16 +19,15 @@ class NotepadFile {
   late Pointer<OPENFILENAME> ofn;
 
   NotepadFile(int hwnd, this.path, this.title) {
-    ofn =
-        calloc<OPENFILENAME>()
-          ..ref.lStructSize = sizeOf<OPENFILENAME>()
-          ..ref.hwndOwner = hwnd
-          ..ref.lpstrFilter = TEXT(
-            'Text Files (*.txt)\u{0}*.txt\u{0}All Files (*.*)\u{0}*.*\u{0}\u{0}',
-          )
-          ..ref.nMaxFile = MAX_PATH
-          ..ref.nMaxFileTitle = MAX_PATH
-          ..ref.lpstrDefExt = TEXT('txt');
+    ofn = calloc<OPENFILENAME>()
+      ..ref.lStructSize = sizeOf<OPENFILENAME>()
+      ..ref.hwndOwner = hwnd
+      ..ref.lpstrFilter = TEXT(
+        'Text Files (*.txt)\u{0}*.txt\u{0}All Files (*.*)\u{0}*.*\u{0}\u{0}',
+      )
+      ..ref.nMaxFile = MAX_PATH
+      ..ref.nMaxFileTitle = MAX_PATH
+      ..ref.lpstrDefExt = TEXT('txt');
   }
 
   /// Shows open dialog.
@@ -38,8 +37,9 @@ class NotepadFile {
   bool showOpenDialog(int hwnd) {
     final strFile = path.isNotEmpty ? path.toNativeUtf16() : wsalloc(MAX_PATH);
 
-    final strFileTitle =
-        title.isNotEmpty ? title.toNativeUtf16() : wsalloc(MAX_PATH);
+    final strFileTitle = title.isNotEmpty
+        ? title.toNativeUtf16()
+        : wsalloc(MAX_PATH);
 
     ofn.ref.lpstrFile = strFile;
     ofn.ref.lpstrFileTitle = strFileTitle;
@@ -63,8 +63,9 @@ class NotepadFile {
   bool showSaveDialog(int hwnd) {
     final strFile = path.isNotEmpty ? path.toNativeUtf16() : wsalloc(MAX_PATH);
 
-    final strFileTitle =
-        title.isNotEmpty ? title.toNativeUtf16() : wsalloc(MAX_PATH);
+    final strFileTitle = title.isNotEmpty
+        ? title.toNativeUtf16()
+        : wsalloc(MAX_PATH);
 
     ofn.ref.lpstrFile = strFile;
     ofn.ref.lpstrFileTitle = strFileTitle;

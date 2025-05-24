@@ -65,10 +65,9 @@ class Win32Function {
       comment = json['comment'] as String,
       category = json['category'] != null ? json['category'] as String : '',
       _isCustomCategorySet = json['category'] != null,
-      minimumWindowsVersion =
-          json['minimumWindowsVersion'] != null
-              ? windowsBuilds[(json['minimumWindowsVersion'] as String)]!
-              : 0,
+      minimumWindowsVersion = json['minimumWindowsVersion'] != null
+          ? windowsBuilds[(json['minimumWindowsVersion'] as String)]!
+          : 0,
       test = json['test'] as bool? ?? true;
 }
 

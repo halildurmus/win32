@@ -41,10 +41,8 @@ void main() {
     test('IUnknown BYREF', () {
       final spVoice = SpVoice.createInstance()..detach();
       final variant = calloc<VARIANT>();
-      final ppunkval =
-          calloc<Pointer<COMObject>>()
-            ..value =
-                (calloc<COMObject>()..ref.lpVtbl = spVoice.ptr.ref.lpVtbl);
+      final ppunkval = calloc<Pointer<COMObject>>()
+        ..value = (calloc<COMObject>()..ref.lpVtbl = spVoice.ptr.ref.lpVtbl);
       variant.ref
         ..vt = VT_UNKNOWN | VT_BYREF
         ..ppunkVal = ppunkval;

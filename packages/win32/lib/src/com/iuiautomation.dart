@@ -100,10 +100,9 @@ class IUIAutomation extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> root)>()(
-    ptr.ref.lpVtbl,
-    root,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Pointer<COMObject>> root)
+      >()(ptr.ref.lpVtbl, root);
 
   int elementFromHandle(int hwnd, Pointer<Pointer<COMObject>> element) =>
       (ptr.ref.vtable + 6)
@@ -141,21 +140,19 @@ class IUIAutomation extends IUnknown {
             int Function(Pointer, POINT pt, Pointer<Pointer<COMObject>> element)
           >()(ptr.ref.lpVtbl, pt, element);
 
-  int getFocusedElement(
-    Pointer<Pointer<COMObject>> element,
-  ) => (ptr.ref.vtable + 8)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Pointer<Pointer<COMObject>> element)
-          >
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> element)>()(
-    ptr.ref.lpVtbl,
-    element,
-  );
+  int getFocusedElement(Pointer<Pointer<COMObject>> element) =>
+      (ptr.ref.vtable + 8)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<COMObject>> element)
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<COMObject>> element)
+          >()(ptr.ref.lpVtbl, element);
 
   int getRootElementBuildCache(
     Pointer<COMObject> cacheRequest,
@@ -293,10 +290,9 @@ class IUIAutomation extends IUnknown {
           >
         >()
         .value
-        .asFunction<int Function(Pointer, Pointer<COMObject> walker)>()(
-      ptr.ref.lpVtbl,
-      retValuePtr,
-    );
+        .asFunction<
+          int Function(Pointer, Pointer<COMObject> walker)
+        >()(ptr.ref.lpVtbl, retValuePtr);
 
     if (FAILED(hr)) {
       free(retValuePtr);
@@ -316,10 +312,9 @@ class IUIAutomation extends IUnknown {
           >
         >()
         .value
-        .asFunction<int Function(Pointer, Pointer<COMObject> walker)>()(
-      ptr.ref.lpVtbl,
-      retValuePtr,
-    );
+        .asFunction<
+          int Function(Pointer, Pointer<COMObject> walker)
+        >()(ptr.ref.lpVtbl, retValuePtr);
 
     if (FAILED(hr)) {
       free(retValuePtr);
@@ -339,10 +334,9 @@ class IUIAutomation extends IUnknown {
           >
         >()
         .value
-        .asFunction<int Function(Pointer, Pointer<COMObject> walker)>()(
-      ptr.ref.lpVtbl,
-      retValuePtr,
-    );
+        .asFunction<
+          int Function(Pointer, Pointer<COMObject> walker)
+        >()(ptr.ref.lpVtbl, retValuePtr);
 
     if (FAILED(hr)) {
       free(retValuePtr);
@@ -355,19 +349,20 @@ class IUIAutomation extends IUnknown {
   Pointer<COMObject> get rawViewCondition {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = (ptr.ref.vtable + 17)
-        .cast<
-          Pointer<
-            NativeFunction<
-              Int32 Function(Pointer, Pointer<COMObject> condition)
-            >
-          >
-        >()
-        .value
-        .asFunction<int Function(Pointer, Pointer<COMObject> condition)>()(
-      ptr.ref.lpVtbl,
-      retValuePtr,
-    );
+    final hr =
+        (ptr.ref.vtable + 17)
+            .cast<
+              Pointer<
+                NativeFunction<
+                  Int32 Function(Pointer, Pointer<COMObject> condition)
+                >
+              >
+            >()
+            .value
+            .asFunction<int Function(Pointer, Pointer<COMObject> condition)>()(
+          ptr.ref.lpVtbl,
+          retValuePtr,
+        );
 
     if (FAILED(hr)) {
       free(retValuePtr);
@@ -380,19 +375,20 @@ class IUIAutomation extends IUnknown {
   Pointer<COMObject> get controlViewCondition {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = (ptr.ref.vtable + 18)
-        .cast<
-          Pointer<
-            NativeFunction<
-              Int32 Function(Pointer, Pointer<COMObject> condition)
-            >
-          >
-        >()
-        .value
-        .asFunction<int Function(Pointer, Pointer<COMObject> condition)>()(
-      ptr.ref.lpVtbl,
-      retValuePtr,
-    );
+    final hr =
+        (ptr.ref.vtable + 18)
+            .cast<
+              Pointer<
+                NativeFunction<
+                  Int32 Function(Pointer, Pointer<COMObject> condition)
+                >
+              >
+            >()
+            .value
+            .asFunction<int Function(Pointer, Pointer<COMObject> condition)>()(
+          ptr.ref.lpVtbl,
+          retValuePtr,
+        );
 
     if (FAILED(hr)) {
       free(retValuePtr);
@@ -405,19 +401,20 @@ class IUIAutomation extends IUnknown {
   Pointer<COMObject> get contentViewCondition {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = (ptr.ref.vtable + 19)
-        .cast<
-          Pointer<
-            NativeFunction<
-              Int32 Function(Pointer, Pointer<COMObject> condition)
-            >
-          >
-        >()
-        .value
-        .asFunction<int Function(Pointer, Pointer<COMObject> condition)>()(
-      ptr.ref.lpVtbl,
-      retValuePtr,
-    );
+    final hr =
+        (ptr.ref.vtable + 19)
+            .cast<
+              Pointer<
+                NativeFunction<
+                  Int32 Function(Pointer, Pointer<COMObject> condition)
+                >
+              >
+            >()
+            .value
+            .asFunction<int Function(Pointer, Pointer<COMObject> condition)>()(
+          ptr.ref.lpVtbl,
+          retValuePtr,
+        );
 
     if (FAILED(hr)) {
       free(retValuePtr);
@@ -782,42 +779,43 @@ class IUIAutomation extends IUnknown {
     Pointer<COMObject> handler,
     Pointer<Uint32> propertyArray,
     int propertyCount,
-  ) => (ptr.ref.vtable + 34)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  ) =>
+      (ptr.ref.vtable + 34)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<COMObject> element,
+                  Int32 scope,
+                  Pointer<COMObject> cacheRequest,
+                  Pointer<COMObject> handler,
+                  Pointer<Uint32> propertyArray,
+                  Int32 propertyCount,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
               Pointer<COMObject> element,
-              Int32 scope,
+              int scope,
               Pointer<COMObject> cacheRequest,
               Pointer<COMObject> handler,
               Pointer<Uint32> propertyArray,
-              Int32 propertyCount,
+              int propertyCount,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(
-          Pointer,
-          Pointer<COMObject> element,
-          int scope,
-          Pointer<COMObject> cacheRequest,
-          Pointer<COMObject> handler,
-          Pointer<Uint32> propertyArray,
-          int propertyCount,
-        )
-      >()(
-    ptr.ref.lpVtbl,
-    element,
-    scope,
-    cacheRequest,
-    handler,
-    propertyArray,
-    propertyCount,
-  );
+          >()(
+        ptr.ref.lpVtbl,
+        element,
+        scope,
+        cacheRequest,
+        handler,
+        propertyArray,
+        propertyCount,
+      );
 
   int addPropertyChangedEventHandler(
     Pointer<COMObject> element,
@@ -954,19 +952,20 @@ class IUIAutomation extends IUnknown {
         )
       >()(ptr.ref.lpVtbl, cacheRequest, handler);
 
-  int removeFocusChangedEventHandler(
-    Pointer<COMObject> handler,
-  ) => (ptr.ref.vtable + 40)
-      .cast<
-        Pointer<
-          NativeFunction<Int32 Function(Pointer, Pointer<COMObject> handler)>
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<COMObject> handler)>()(
-    ptr.ref.lpVtbl,
-    handler,
-  );
+  int removeFocusChangedEventHandler(Pointer<COMObject> handler) =>
+      (ptr.ref.vtable + 40)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<COMObject> handler)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<COMObject> handler)>()(
+        ptr.ref.lpVtbl,
+        handler,
+      );
 
   int removeAllEventHandlers() => (ptr.ref.vtable + 41)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
@@ -1027,35 +1026,37 @@ class IUIAutomation extends IUnknown {
         )
       >()(ptr.ref.lpVtbl, intArray, array, arrayCount);
 
-  int rectToVariant(RECT rc, Pointer<VARIANT> var_) => (ptr.ref.vtable + 44)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, RECT rc, Pointer<VARIANT> var_)
-          >
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, RECT rc, Pointer<VARIANT> var_)>()(
-    ptr.ref.lpVtbl,
-    rc,
-    var_,
-  );
+  int rectToVariant(RECT rc, Pointer<VARIANT> var_) =>
+      (ptr.ref.vtable + 44)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, RECT rc, Pointer<VARIANT> var_)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, RECT rc, Pointer<VARIANT> var_)>()(
+        ptr.ref.lpVtbl,
+        rc,
+        var_,
+      );
 
-  int variantToRect(VARIANT var_, Pointer<RECT> rc) => (ptr.ref.vtable + 45)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, VARIANT var_, Pointer<RECT> rc)
-          >
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, VARIANT var_, Pointer<RECT> rc)>()(
-    ptr.ref.lpVtbl,
-    var_,
-    rc,
-  );
+  int variantToRect(VARIANT var_, Pointer<RECT> rc) =>
+      (ptr.ref.vtable + 45)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, VARIANT var_, Pointer<RECT> rc)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, VARIANT var_, Pointer<RECT> rc)>()(
+        ptr.ref.lpVtbl,
+        var_,
+        rc,
+      );
 
   int safeArrayToRectNativeArray(
     Pointer<SAFEARRAY> rects,
@@ -1120,10 +1121,9 @@ class IUIAutomation extends IUnknown {
           >
         >()
         .value
-        .asFunction<int Function(Pointer, Pointer<COMObject> factoryMapping)>()(
-      ptr.ref.lpVtbl,
-      retValuePtr,
-    );
+        .asFunction<
+          int Function(Pointer, Pointer<COMObject> factoryMapping)
+        >()(ptr.ref.lpVtbl, retValuePtr);
 
     if (FAILED(hr)) {
       free(retValuePtr);

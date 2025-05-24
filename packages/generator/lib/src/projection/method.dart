@@ -34,15 +34,14 @@ abstract class MethodProjection {
   MethodProjection(this.method, this.vtableOffset)
     : name = uniquelyNameMethod(method),
       returnType = TypeProjection(method.returnType.typeIdentifier),
-      parameters =
-          method.parameters
-              .map(
-                (param) => ParameterProjection(
-                  param.name,
-                  TypeProjection(param.typeIdentifier),
-                ),
-              )
-              .toList();
+      parameters = method.parameters
+          .map(
+            (param) => ParameterProjection(
+              param.name,
+              TypeProjection(param.typeIdentifier),
+            ),
+          )
+          .toList();
 
   /// Uniquely name the method.
   ///
@@ -59,8 +58,9 @@ abstract class MethodProjection {
     // also need to check up the interface chain, since otherwise overloaded
     // methods may be missed. For example, IDWriteFactory2 contains methods that
     // overload those in IDWriteFactory1.
-    final overloads =
-        method.parent.methods.where((m) => m.name == method.name).toList();
+    final overloads = method.parent.methods
+        .where((m) => m.name == method.name)
+        .toList();
     var interfaceTypeDef = method.parent;
     // perf optimization to save work on the most common case of IUnknown
     while (interfaceTypeDef.interfaces.isNotEmpty &&

@@ -40,37 +40,36 @@ class IUIAutomationSelectionPattern extends IUnknown {
         interface.toInterface(IID_IUIAutomationSelectionPattern),
       );
 
-  int getCurrentSelection(
-    Pointer<Pointer<COMObject>> retVal,
-  ) => (ptr.ref.vtable + 3)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Pointer<Pointer<COMObject>> retVal)
-          >
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> retVal)>()(
-    ptr.ref.lpVtbl,
-    retVal,
-  );
+  int getCurrentSelection(Pointer<Pointer<COMObject>> retVal) =>
+      (ptr.ref.vtable + 3)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<COMObject>> retVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<COMObject>> retVal)
+          >()(ptr.ref.lpVtbl, retVal);
 
   int get currentCanSelectMultiple {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = (ptr.ref.vtable + 4)
-          .cast<
-            Pointer<
-              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
-            >
-          >()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+      final hr =
+          (ptr.ref.vtable + 4)
+              .cast<
+                Pointer<
+                  NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+                >
+              >()
+              .value
+              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+            ptr.ref.lpVtbl,
+            retValuePtr,
+          );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -85,17 +84,18 @@ class IUIAutomationSelectionPattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = (ptr.ref.vtable + 5)
-          .cast<
-            Pointer<
-              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
-            >
-          >()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+      final hr =
+          (ptr.ref.vtable + 5)
+              .cast<
+                Pointer<
+                  NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+                >
+              >()
+              .value
+              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+            ptr.ref.lpVtbl,
+            retValuePtr,
+          );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -106,37 +106,36 @@ class IUIAutomationSelectionPattern extends IUnknown {
     }
   }
 
-  int getCachedSelection(
-    Pointer<Pointer<COMObject>> retVal,
-  ) => (ptr.ref.vtable + 6)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Pointer<Pointer<COMObject>> retVal)
-          >
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> retVal)>()(
-    ptr.ref.lpVtbl,
-    retVal,
-  );
+  int getCachedSelection(Pointer<Pointer<COMObject>> retVal) =>
+      (ptr.ref.vtable + 6)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<COMObject>> retVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<COMObject>> retVal)
+          >()(ptr.ref.lpVtbl, retVal);
 
   int get cachedCanSelectMultiple {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = (ptr.ref.vtable + 7)
-          .cast<
-            Pointer<
-              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
-            >
-          >()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+      final hr =
+          (ptr.ref.vtable + 7)
+              .cast<
+                Pointer<
+                  NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+                >
+              >()
+              .value
+              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+            ptr.ref.lpVtbl,
+            retValuePtr,
+          );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -151,17 +150,18 @@ class IUIAutomationSelectionPattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = (ptr.ref.vtable + 8)
-          .cast<
-            Pointer<
-              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
-            >
-          >()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+      final hr =
+          (ptr.ref.vtable + 8)
+              .cast<
+                Pointer<
+                  NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+                >
+              >()
+              .value
+              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+            ptr.ref.lpVtbl,
+            retValuePtr,
+          );
 
       if (FAILED(hr)) throw WindowsException(hr);
 

@@ -51,8 +51,8 @@ Iterable<int> deviceInstancesByClass(
   int hDevInfo,
   Pointer<GUID> deviceGuid,
 ) sync* {
-  final devInfoDataPtr =
-      calloc<SP_DEVINFO_DATA>()..ref.cbSize = sizeOf<SP_DEVINFO_DATA>();
+  final devInfoDataPtr = calloc<SP_DEVINFO_DATA>()
+    ..ref.cbSize = sizeOf<SP_DEVINFO_DATA>();
   try {
     for (
       var index = 0;
@@ -75,9 +75,8 @@ Iterable<String> devicePathsByInterface(
   Pointer<GUID> interfaceGuid,
 ) sync* {
   final requiredSizePtr = calloc<DWORD>();
-  final deviceInterfaceDataPtr =
-      calloc<SP_DEVICE_INTERFACE_DATA>()
-        ..ref.cbSize = sizeOf<SP_DEVICE_INTERFACE_DATA>();
+  final deviceInterfaceDataPtr = calloc<SP_DEVICE_INTERFACE_DATA>()
+    ..ref.cbSize = sizeOf<SP_DEVICE_INTERFACE_DATA>();
   try {
     for (
       var index = 0;

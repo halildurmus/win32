@@ -44,8 +44,7 @@ class IPersist extends IUnknown {
         Pointer<NativeFunction<Int32 Function(Pointer, Pointer<GUID> pClassID)>>
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<GUID> pClassID)>()(
-    ptr.ref.lpVtbl,
-    pClassID,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<GUID> pClassID)
+      >()(ptr.ref.lpVtbl, pClassID);
 }

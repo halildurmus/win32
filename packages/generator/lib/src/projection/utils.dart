@@ -172,23 +172,21 @@ String private(String identifier) => '_$identifier';
 /// Returns true if the string can be converted to an integer.
 bool characterIsNumeral(String c) => int.tryParse(c) != null;
 
-bool isExcludedGetProperty(Method method) =>
-    falseProperties
-        .where(
-          (p) =>
-              p.interface == safeTypenameForTypeDef(method.parent) &&
-              p.property == method.name,
-        )
-        .isNotEmpty;
+bool isExcludedGetProperty(Method method) => falseProperties
+    .where(
+      (p) =>
+          p.interface == safeTypenameForTypeDef(method.parent) &&
+          p.property == method.name,
+    )
+    .isNotEmpty;
 
-bool isExcludedSetProperty(Method method) =>
-    falseProperties
-        .where(
-          (p) =>
-              p.interface == safeTypenameForTypeDef(method.parent) &&
-              p.property.replaceFirst('get', 'put') == method.name,
-        )
-        .isNotEmpty;
+bool isExcludedSetProperty(Method method) => falseProperties
+    .where(
+      (p) =>
+          p.interface == safeTypenameForTypeDef(method.parent) &&
+          p.property.replaceFirst('get', 'put') == method.name,
+    )
+    .isNotEmpty;
 
 String stripLeadingUnderscores(String name) {
   if (name.startsWith('_')) {

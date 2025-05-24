@@ -31,7 +31,8 @@ final _api_ms_win_core_apiquery_l2_1_0 = DynamicLibrary.open(
 int IsApiSetImplemented(Pointer<Utf8> Contract) =>
     _IsApiSetImplemented(Contract);
 
-final _IsApiSetImplemented = _api_ms_win_core_apiquery_l2_1_0.lookupFunction<
-  Int32 Function(Pointer<Utf8> Contract),
-  int Function(Pointer<Utf8> Contract)
->('IsApiSetImplemented');
+final _IsApiSetImplemented = _api_ms_win_core_apiquery_l2_1_0
+    .lookupFunction<
+      Int32 Function(Pointer<Utf8> Contract),
+      int Function(Pointer<Utf8> Contract)
+    >('IsApiSetImplemented');

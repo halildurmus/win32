@@ -46,11 +46,25 @@ class IAudioCaptureClient extends IUnknown {
     Pointer<Uint32> pdwFlags,
     Pointer<Uint64> pu64DevicePosition,
     Pointer<Uint64> pu64QPCPosition,
-  ) => (ptr.ref.vtable + 3)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  ) =>
+      (ptr.ref.vtable + 3)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<Pointer<Uint8>> ppData,
+                  Pointer<Uint32> pNumFramesToRead,
+                  Pointer<Uint32> pdwFlags,
+                  Pointer<Uint64> pu64DevicePosition,
+                  Pointer<Uint64> pu64QPCPosition,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
               Pointer<Pointer<Uint8>> ppData,
               Pointer<Uint32> pNumFramesToRead,
@@ -58,37 +72,23 @@ class IAudioCaptureClient extends IUnknown {
               Pointer<Uint64> pu64DevicePosition,
               Pointer<Uint64> pu64QPCPosition,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(
-          Pointer,
-          Pointer<Pointer<Uint8>> ppData,
-          Pointer<Uint32> pNumFramesToRead,
-          Pointer<Uint32> pdwFlags,
-          Pointer<Uint64> pu64DevicePosition,
-          Pointer<Uint64> pu64QPCPosition,
-        )
-      >()(
-    ptr.ref.lpVtbl,
-    ppData,
-    pNumFramesToRead,
-    pdwFlags,
-    pu64DevicePosition,
-    pu64QPCPosition,
-  );
+          >()(
+        ptr.ref.lpVtbl,
+        ppData,
+        pNumFramesToRead,
+        pdwFlags,
+        pu64DevicePosition,
+        pu64QPCPosition,
+      );
 
   int releaseBuffer(int NumFramesRead) => (ptr.ref.vtable + 4)
       .cast<
         Pointer<NativeFunction<Int32 Function(Pointer, Uint32 NumFramesRead)>>
       >()
       .value
-      .asFunction<int Function(Pointer, int NumFramesRead)>()(
-    ptr.ref.lpVtbl,
-    NumFramesRead,
-  );
+      .asFunction<
+        int Function(Pointer, int NumFramesRead)
+      >()(ptr.ref.lpVtbl, NumFramesRead);
 
   int getNextPacketSize(Pointer<Uint32> pNumFramesInNextPacket) =>
       (ptr.ref.vtable + 5)

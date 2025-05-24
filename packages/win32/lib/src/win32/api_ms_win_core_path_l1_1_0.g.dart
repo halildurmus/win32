@@ -24,7 +24,8 @@ final _api_ms_win_core_path_l1_1_0 = DynamicLibrary.open(
 /// ```c
 /// HRESULT PathAllocCanonicalize(
 ///   PCWSTR pszPathInm,
-///   ULONG dwFlags,  PWSTR *ppszPathOut
+///   ULONG dwFlags,
+///   PWSTR *ppszPathOut
 /// );
 /// ```
 /// {@category api_ms_win_core_path_l1_1_0}
@@ -34,25 +35,28 @@ int PathAllocCanonicalize(
   Pointer<Pointer<Utf16>> ppszPathOut,
 ) => _PathAllocCanonicalize(pszPathIn, dwFlags, ppszPathOut);
 
-final _PathAllocCanonicalize = _api_ms_win_core_path_l1_1_0.lookupFunction<
-  Int32 Function(
-    Pointer<Utf16> pszPathIn,
-    Uint32 dwFlags,
-    Pointer<Pointer<Utf16>> ppszPathOut,
-  ),
-  int Function(
-    Pointer<Utf16> pszPathIn,
-    int dwFlags,
-    Pointer<Pointer<Utf16>> ppszPathOut,
-  )
->('PathAllocCanonicalize');
+final _PathAllocCanonicalize = _api_ms_win_core_path_l1_1_0
+    .lookupFunction<
+      Int32 Function(
+        Pointer<Utf16> pszPathIn,
+        Uint32 dwFlags,
+        Pointer<Pointer<Utf16>> ppszPathOut,
+      ),
+      int Function(
+        Pointer<Utf16> pszPathIn,
+        int dwFlags,
+        Pointer<Pointer<Utf16>> ppszPathOut,
+      )
+    >('PathAllocCanonicalize');
 
 /// Concatenates two path fragments into a single path.
 ///
 /// ```c
 /// HRESULT PathAllocCombine(
 ///   PCWSTR pszPathIn,
-///   PCWSTR pszMore,  ULONG dwFlags,  PWSTR *ppszPathOut
+///   PCWSTR pszMore,
+///   ULONG dwFlags,
+///   PWSTR *ppszPathOut
 /// );
 /// ```
 /// {@category api_ms_win_core_path_l1_1_0}
@@ -63,17 +67,18 @@ int PathAllocCombine(
   Pointer<Pointer<Utf16>> ppszPathOut,
 ) => _PathAllocCombine(pszPathIn, pszMore, dwFlags, ppszPathOut);
 
-final _PathAllocCombine = _api_ms_win_core_path_l1_1_0.lookupFunction<
-  Int32 Function(
-    Pointer<Utf16> pszPathIn,
-    Pointer<Utf16> pszMore,
-    Uint32 dwFlags,
-    Pointer<Pointer<Utf16>> ppszPathOut,
-  ),
-  int Function(
-    Pointer<Utf16> pszPathIn,
-    Pointer<Utf16> pszMore,
-    int dwFlags,
-    Pointer<Pointer<Utf16>> ppszPathOut,
-  )
->('PathAllocCombine');
+final _PathAllocCombine = _api_ms_win_core_path_l1_1_0
+    .lookupFunction<
+      Int32 Function(
+        Pointer<Utf16> pszPathIn,
+        Pointer<Utf16> pszMore,
+        Uint32 dwFlags,
+        Pointer<Pointer<Utf16>> ppszPathOut,
+      ),
+      int Function(
+        Pointer<Utf16> pszPathIn,
+        Pointer<Utf16> pszMore,
+        int dwFlags,
+        Pointer<Pointer<Utf16>> ppszPathOut,
+      )
+    >('PathAllocCombine');

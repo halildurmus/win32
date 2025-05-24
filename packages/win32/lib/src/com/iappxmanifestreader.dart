@@ -92,10 +92,9 @@ class IAppxManifestReader extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Int32> capabilities)>()(
-    ptr.ref.lpVtbl,
-    capabilities,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Int32> capabilities)
+      >()(ptr.ref.lpVtbl, capabilities);
 
   int getResources(Pointer<Pointer<COMObject>> resources) =>
       (ptr.ref.vtable + 7)
@@ -166,17 +165,20 @@ class IAppxManifestReader extends IUnknown {
             int Function(Pointer, Pointer<Pointer<COMObject>> applications)
           >()(ptr.ref.lpVtbl, applications);
 
-  int getStream(Pointer<Pointer<COMObject>> manifestStream) => (ptr.ref.vtable +
-          11)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Pointer<Pointer<COMObject>> manifestStream)
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(Pointer, Pointer<Pointer<COMObject>> manifestStream)
-      >()(ptr.ref.lpVtbl, manifestStream);
+  int getStream(Pointer<Pointer<COMObject>> manifestStream) =>
+      (ptr.ref.vtable + 11)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<Pointer<COMObject>> manifestStream,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<COMObject>> manifestStream)
+          >()(ptr.ref.lpVtbl, manifestStream);
 }

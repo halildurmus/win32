@@ -103,17 +103,18 @@ class ISpVoice extends ISpEventSource {
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  int setVoice(Pointer<COMObject> pToken) => (ptr.ref.vtable + 18)
-      .cast<
-        Pointer<
-          NativeFunction<Int32 Function(Pointer, Pointer<COMObject> pToken)>
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<COMObject> pToken)>()(
-    ptr.ref.lpVtbl,
-    pToken,
-  );
+  int setVoice(Pointer<COMObject> pToken) =>
+      (ptr.ref.vtable + 18)
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<COMObject> pToken)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<COMObject> pToken)>()(
+        ptr.ref.lpVtbl,
+        pToken,
+      );
 
   int getVoice(Pointer<Pointer<COMObject>> ppToken) => (ptr.ref.vtable + 19)
       .cast<
@@ -124,10 +125,9 @@ class ISpVoice extends ISpEventSource {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> ppToken)>()(
-    ptr.ref.lpVtbl,
-    ppToken,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Pointer<COMObject>> ppToken)
+      >()(ptr.ref.lpVtbl, ppToken);
 
   int speak(
     Pointer<Utf16> pwcs,
@@ -237,52 +237,53 @@ class ISpVoice extends ISpEventSource {
   int setPriority(int ePriority) => (ptr.ref.vtable + 24)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 ePriority)>>>()
       .value
-      .asFunction<int Function(Pointer, int ePriority)>()(
-    ptr.ref.lpVtbl,
-    ePriority,
-  );
+      .asFunction<
+        int Function(Pointer, int ePriority)
+      >()(ptr.ref.lpVtbl, ePriority);
 
-  int getPriority(Pointer<Int32> pePriority) => (ptr.ref.vtable + 25)
-      .cast<
-        Pointer<
-          NativeFunction<Int32 Function(Pointer, Pointer<Int32> pePriority)>
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Int32> pePriority)>()(
-    ptr.ref.lpVtbl,
-    pePriority,
-  );
+  int getPriority(Pointer<Int32> pePriority) =>
+      (ptr.ref.vtable + 25)
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> pePriority)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> pePriority)>()(
+        ptr.ref.lpVtbl,
+        pePriority,
+      );
 
   int setAlertBoundary(int eBoundary) => (ptr.ref.vtable + 26)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 eBoundary)>>>()
       .value
-      .asFunction<int Function(Pointer, int eBoundary)>()(
-    ptr.ref.lpVtbl,
-    eBoundary,
-  );
+      .asFunction<
+        int Function(Pointer, int eBoundary)
+      >()(ptr.ref.lpVtbl, eBoundary);
 
-  int getAlertBoundary(Pointer<Int32> peBoundary) => (ptr.ref.vtable + 27)
-      .cast<
-        Pointer<
-          NativeFunction<Int32 Function(Pointer, Pointer<Int32> peBoundary)>
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Int32> peBoundary)>()(
-    ptr.ref.lpVtbl,
-    peBoundary,
-  );
+  int getAlertBoundary(Pointer<Int32> peBoundary) =>
+      (ptr.ref.vtable + 27)
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Int32> peBoundary)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Int32> peBoundary)>()(
+        ptr.ref.lpVtbl,
+        peBoundary,
+      );
 
-  int setRate(int RateAdjust) => (ptr.ref.vtable + 28)
-      .cast<
-        Pointer<NativeFunction<Int32 Function(Pointer, Int32 RateAdjust)>>
-      >()
-      .value
-      .asFunction<int Function(Pointer, int RateAdjust)>()(
-    ptr.ref.lpVtbl,
-    RateAdjust,
-  );
+  int setRate(int RateAdjust) =>
+      (ptr.ref.vtable + 28)
+          .cast<
+            Pointer<NativeFunction<Int32 Function(Pointer, Int32 RateAdjust)>>
+          >()
+          .value
+          .asFunction<int Function(Pointer, int RateAdjust)>()(
+        ptr.ref.lpVtbl,
+        RateAdjust,
+      );
 
   int getRate(Pointer<Int32> pRateAdjust) => (ptr.ref.vtable + 29)
       .cast<
@@ -291,50 +292,51 @@ class ISpVoice extends ISpEventSource {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Int32> pRateAdjust)>()(
-    ptr.ref.lpVtbl,
-    pRateAdjust,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Int32> pRateAdjust)
+      >()(ptr.ref.lpVtbl, pRateAdjust);
 
   int setVolume(int usVolume) => (ptr.ref.vtable + 30)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint16 usVolume)>>>()
       .value
-      .asFunction<int Function(Pointer, int usVolume)>()(
-    ptr.ref.lpVtbl,
-    usVolume,
-  );
+      .asFunction<
+        int Function(Pointer, int usVolume)
+      >()(ptr.ref.lpVtbl, usVolume);
 
-  int getVolume(Pointer<Uint16> pusVolume) => (ptr.ref.vtable + 31)
-      .cast<
-        Pointer<
-          NativeFunction<Int32 Function(Pointer, Pointer<Uint16> pusVolume)>
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Uint16> pusVolume)>()(
-    ptr.ref.lpVtbl,
-    pusVolume,
-  );
+  int getVolume(Pointer<Uint16> pusVolume) =>
+      (ptr.ref.vtable + 31)
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Uint16> pusVolume)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Uint16> pusVolume)>()(
+        ptr.ref.lpVtbl,
+        pusVolume,
+      );
 
-  int waitUntilDone(int msTimeout) => (ptr.ref.vtable + 32)
-      .cast<
-        Pointer<NativeFunction<Int32 Function(Pointer, Uint32 msTimeout)>>
-      >()
-      .value
-      .asFunction<int Function(Pointer, int msTimeout)>()(
-    ptr.ref.lpVtbl,
-    msTimeout,
-  );
+  int waitUntilDone(int msTimeout) =>
+      (ptr.ref.vtable + 32)
+          .cast<
+            Pointer<NativeFunction<Int32 Function(Pointer, Uint32 msTimeout)>>
+          >()
+          .value
+          .asFunction<int Function(Pointer, int msTimeout)>()(
+        ptr.ref.lpVtbl,
+        msTimeout,
+      );
 
-  int setSyncSpeakTimeout(int msTimeout) => (ptr.ref.vtable + 33)
-      .cast<
-        Pointer<NativeFunction<Int32 Function(Pointer, Uint32 msTimeout)>>
-      >()
-      .value
-      .asFunction<int Function(Pointer, int msTimeout)>()(
-    ptr.ref.lpVtbl,
-    msTimeout,
-  );
+  int setSyncSpeakTimeout(int msTimeout) =>
+      (ptr.ref.vtable + 33)
+          .cast<
+            Pointer<NativeFunction<Int32 Function(Pointer, Uint32 msTimeout)>>
+          >()
+          .value
+          .asFunction<int Function(Pointer, int msTimeout)>()(
+        ptr.ref.lpVtbl,
+        msTimeout,
+      );
 
   int getSyncSpeakTimeout(Pointer<Uint32> pmsTimeout) => (ptr.ref.vtable + 34)
       .cast<
@@ -343,10 +345,9 @@ class ISpVoice extends ISpEventSource {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Uint32> pmsTimeout)>()(
-    ptr.ref.lpVtbl,
-    pmsTimeout,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Uint32> pmsTimeout)
+      >()(ptr.ref.lpVtbl, pmsTimeout);
 
   int speakCompleteEvent() => (ptr.ref.vtable + 35)
       .cast<Pointer<NativeFunction<IntPtr Function(Pointer)>>>()
@@ -389,39 +390,40 @@ class ISpVoice extends ISpEventSource {
     Pointer<Utf16> pszTypeOfUI,
     Pointer pvExtraData,
     int cbExtraData,
-  ) => (ptr.ref.vtable + 37)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  ) =>
+      (ptr.ref.vtable + 37)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  IntPtr hwndParent,
+                  Pointer<Utf16> pszTitle,
+                  Pointer<Utf16> pszTypeOfUI,
+                  Pointer pvExtraData,
+                  Uint32 cbExtraData,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
-              IntPtr hwndParent,
+              int hwndParent,
               Pointer<Utf16> pszTitle,
               Pointer<Utf16> pszTypeOfUI,
               Pointer pvExtraData,
-              Uint32 cbExtraData,
+              int cbExtraData,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(
-          Pointer,
-          int hwndParent,
-          Pointer<Utf16> pszTitle,
-          Pointer<Utf16> pszTypeOfUI,
-          Pointer pvExtraData,
-          int cbExtraData,
-        )
-      >()(
-    ptr.ref.lpVtbl,
-    hwndParent,
-    pszTitle,
-    pszTypeOfUI,
-    pvExtraData,
-    cbExtraData,
-  );
+          >()(
+        ptr.ref.lpVtbl,
+        hwndParent,
+        pszTitle,
+        pszTypeOfUI,
+        pvExtraData,
+        cbExtraData,
+      );
 }
 
 /// @nodoc

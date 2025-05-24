@@ -41,10 +41,9 @@ class IMetaDataImport extends IUnknown {
   void closeEnum(Pointer hEnum) => (ptr.ref.vtable + 3)
       .cast<Pointer<NativeFunction<Void Function(Pointer, Pointer hEnum)>>>()
       .value
-      .asFunction<void Function(Pointer, Pointer hEnum)>()(
-    ptr.ref.lpVtbl,
-    hEnum,
-  );
+      .asFunction<
+        void Function(Pointer, Pointer hEnum)
+      >()(ptr.ref.lpVtbl, hEnum);
 
   int countEnum(Pointer hEnum, Pointer<Uint32> pulCount) => (ptr.ref.vtable + 4)
       .cast<
@@ -66,11 +65,9 @@ class IMetaDataImport extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer hEnum, int ulPos)>()(
-    ptr.ref.lpVtbl,
-    hEnum,
-    ulPos,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer hEnum, int ulPos)
+      >()(ptr.ref.lpVtbl, hEnum, ulPos);
 
   int enumTypeDefs(
     Pointer<Pointer> phEnum,
@@ -227,10 +224,9 @@ class IMetaDataImport extends IUnknown {
         Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Uint32> pmd)>>
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Uint32> pmd)>()(
-    ptr.ref.lpVtbl,
-    pmd,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Uint32> pmd)
+      >()(ptr.ref.lpVtbl, pmd);
 
   int getTypeDefProps(
     int td,
@@ -239,42 +235,43 @@ class IMetaDataImport extends IUnknown {
     Pointer<Uint32> pchTypeDef,
     Pointer<Uint32> pdwTypeDefFlags,
     Pointer<Uint32> ptkExtends,
-  ) => (ptr.ref.vtable + 12)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  ) =>
+      (ptr.ref.vtable + 12)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Uint32 td,
+                  Pointer<Utf16> szTypeDef,
+                  Uint32 cchTypeDef,
+                  Pointer<Uint32> pchTypeDef,
+                  Pointer<Uint32> pdwTypeDefFlags,
+                  Pointer<Uint32> ptkExtends,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
-              Uint32 td,
+              int td,
               Pointer<Utf16> szTypeDef,
-              Uint32 cchTypeDef,
+              int cchTypeDef,
               Pointer<Uint32> pchTypeDef,
               Pointer<Uint32> pdwTypeDefFlags,
               Pointer<Uint32> ptkExtends,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(
-          Pointer,
-          int td,
-          Pointer<Utf16> szTypeDef,
-          int cchTypeDef,
-          Pointer<Uint32> pchTypeDef,
-          Pointer<Uint32> pdwTypeDefFlags,
-          Pointer<Uint32> ptkExtends,
-        )
-      >()(
-    ptr.ref.lpVtbl,
-    td,
-    szTypeDef,
-    cchTypeDef,
-    pchTypeDef,
-    pdwTypeDefFlags,
-    ptkExtends,
-  );
+          >()(
+        ptr.ref.lpVtbl,
+        td,
+        szTypeDef,
+        cchTypeDef,
+        pchTypeDef,
+        pdwTypeDefFlags,
+        ptkExtends,
+      );
 
   int getInterfaceImplProps(
     int iiImpl,
@@ -854,16 +851,35 @@ class IMetaDataImport extends IUnknown {
     Pointer<Uint32> pcbSigBlob,
     Pointer<Uint32> pulCodeRVA,
     Pointer<Uint32> pdwImplFlags,
-  ) => (ptr.ref.vtable + 30)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  ) =>
+      (ptr.ref.vtable + 30)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Uint32 mb,
+                  Pointer<Uint32> pClass,
+                  Pointer<Utf16> szMethod,
+                  Uint32 cchMethod,
+                  Pointer<Uint32> pchMethod,
+                  Pointer<Uint32> pdwAttr,
+                  Pointer<Pointer<Uint8>> ppvSigBlob,
+                  Pointer<Uint32> pcbSigBlob,
+                  Pointer<Uint32> pulCodeRVA,
+                  Pointer<Uint32> pdwImplFlags,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
-              Uint32 mb,
+              int mb,
               Pointer<Uint32> pClass,
               Pointer<Utf16> szMethod,
-              Uint32 cchMethod,
+              int cchMethod,
               Pointer<Uint32> pchMethod,
               Pointer<Uint32> pdwAttr,
               Pointer<Pointer<Uint8>> ppvSigBlob,
@@ -871,37 +887,19 @@ class IMetaDataImport extends IUnknown {
               Pointer<Uint32> pulCodeRVA,
               Pointer<Uint32> pdwImplFlags,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(
-          Pointer,
-          int mb,
-          Pointer<Uint32> pClass,
-          Pointer<Utf16> szMethod,
-          int cchMethod,
-          Pointer<Uint32> pchMethod,
-          Pointer<Uint32> pdwAttr,
-          Pointer<Pointer<Uint8>> ppvSigBlob,
-          Pointer<Uint32> pcbSigBlob,
-          Pointer<Uint32> pulCodeRVA,
-          Pointer<Uint32> pdwImplFlags,
-        )
-      >()(
-    ptr.ref.lpVtbl,
-    mb,
-    pClass,
-    szMethod,
-    cchMethod,
-    pchMethod,
-    pdwAttr,
-    ppvSigBlob,
-    pcbSigBlob,
-    pulCodeRVA,
-    pdwImplFlags,
-  );
+          >()(
+        ptr.ref.lpVtbl,
+        mb,
+        pClass,
+        szMethod,
+        cchMethod,
+        pchMethod,
+        pdwAttr,
+        ppvSigBlob,
+        pcbSigBlob,
+        pulCodeRVA,
+        pdwImplFlags,
+      );
 
   int getMemberRefProps(
     int mr,
@@ -911,45 +909,46 @@ class IMetaDataImport extends IUnknown {
     Pointer<Uint32> pchMember,
     Pointer<Pointer<Uint8>> ppvSigBlob,
     Pointer<Uint32> pbSig,
-  ) => (ptr.ref.vtable + 31)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  ) =>
+      (ptr.ref.vtable + 31)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Uint32 mr,
+                  Pointer<Uint32> ptk,
+                  Pointer<Utf16> szMember,
+                  Uint32 cchMember,
+                  Pointer<Uint32> pchMember,
+                  Pointer<Pointer<Uint8>> ppvSigBlob,
+                  Pointer<Uint32> pbSig,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
-              Uint32 mr,
+              int mr,
               Pointer<Uint32> ptk,
               Pointer<Utf16> szMember,
-              Uint32 cchMember,
+              int cchMember,
               Pointer<Uint32> pchMember,
               Pointer<Pointer<Uint8>> ppvSigBlob,
               Pointer<Uint32> pbSig,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(
-          Pointer,
-          int mr,
-          Pointer<Uint32> ptk,
-          Pointer<Utf16> szMember,
-          int cchMember,
-          Pointer<Uint32> pchMember,
-          Pointer<Pointer<Uint8>> ppvSigBlob,
-          Pointer<Uint32> pbSig,
-        )
-      >()(
-    ptr.ref.lpVtbl,
-    mr,
-    ptk,
-    szMember,
-    cchMember,
-    pchMember,
-    ppvSigBlob,
-    pbSig,
-  );
+          >()(
+        ptr.ref.lpVtbl,
+        mr,
+        ptk,
+        szMember,
+        cchMember,
+        pchMember,
+        ppvSigBlob,
+        pbSig,
+      );
 
   int enumProperties(
     Pointer<Pointer> phEnum,
@@ -1031,16 +1030,38 @@ class IMetaDataImport extends IUnknown {
     Pointer<Uint32> rmdOtherMethod,
     int cMax,
     Pointer<Uint32> pcOtherMethod,
-  ) => (ptr.ref.vtable + 34)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  ) =>
+      (ptr.ref.vtable + 34)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Uint32 ev,
+                  Pointer<Uint32> pClass,
+                  Pointer<Utf16> szEvent,
+                  Uint32 cchEvent,
+                  Pointer<Uint32> pchEvent,
+                  Pointer<Uint32> pdwEventFlags,
+                  Pointer<Uint32> ptkEventType,
+                  Pointer<Uint32> pmdAddOn,
+                  Pointer<Uint32> pmdRemoveOn,
+                  Pointer<Uint32> pmdFire,
+                  Pointer<Uint32> rmdOtherMethod,
+                  Uint32 cMax,
+                  Pointer<Uint32> pcOtherMethod,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
-              Uint32 ev,
+              int ev,
               Pointer<Uint32> pClass,
               Pointer<Utf16> szEvent,
-              Uint32 cchEvent,
+              int cchEvent,
               Pointer<Uint32> pchEvent,
               Pointer<Uint32> pdwEventFlags,
               Pointer<Uint32> ptkEventType,
@@ -1048,46 +1069,25 @@ class IMetaDataImport extends IUnknown {
               Pointer<Uint32> pmdRemoveOn,
               Pointer<Uint32> pmdFire,
               Pointer<Uint32> rmdOtherMethod,
-              Uint32 cMax,
+              int cMax,
               Pointer<Uint32> pcOtherMethod,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(
-          Pointer,
-          int ev,
-          Pointer<Uint32> pClass,
-          Pointer<Utf16> szEvent,
-          int cchEvent,
-          Pointer<Uint32> pchEvent,
-          Pointer<Uint32> pdwEventFlags,
-          Pointer<Uint32> ptkEventType,
-          Pointer<Uint32> pmdAddOn,
-          Pointer<Uint32> pmdRemoveOn,
-          Pointer<Uint32> pmdFire,
-          Pointer<Uint32> rmdOtherMethod,
-          int cMax,
-          Pointer<Uint32> pcOtherMethod,
-        )
-      >()(
-    ptr.ref.lpVtbl,
-    ev,
-    pClass,
-    szEvent,
-    cchEvent,
-    pchEvent,
-    pdwEventFlags,
-    ptkEventType,
-    pmdAddOn,
-    pmdRemoveOn,
-    pmdFire,
-    rmdOtherMethod,
-    cMax,
-    pcOtherMethod,
-  );
+          >()(
+        ptr.ref.lpVtbl,
+        ev,
+        pClass,
+        szEvent,
+        cchEvent,
+        pchEvent,
+        pdwEventFlags,
+        ptkEventType,
+        pmdAddOn,
+        pmdRemoveOn,
+        pmdFire,
+        rmdOtherMethod,
+        cMax,
+        pcOtherMethod,
+      );
 
   int enumMethodSemantics(
     Pointer<Pointer> phEnum,
@@ -1156,42 +1156,43 @@ class IMetaDataImport extends IUnknown {
     int cMax,
     Pointer<Uint32> pcFieldOffset,
     Pointer<Uint32> pulClassSize,
-  ) => (ptr.ref.vtable + 37)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  ) =>
+      (ptr.ref.vtable + 37)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Uint32 td,
+                  Pointer<Uint32> pdwPackSize,
+                  Pointer<COR_FIELD_OFFSET> rFieldOffset,
+                  Uint32 cMax,
+                  Pointer<Uint32> pcFieldOffset,
+                  Pointer<Uint32> pulClassSize,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
-              Uint32 td,
+              int td,
               Pointer<Uint32> pdwPackSize,
               Pointer<COR_FIELD_OFFSET> rFieldOffset,
-              Uint32 cMax,
+              int cMax,
               Pointer<Uint32> pcFieldOffset,
               Pointer<Uint32> pulClassSize,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(
-          Pointer,
-          int td,
-          Pointer<Uint32> pdwPackSize,
-          Pointer<COR_FIELD_OFFSET> rFieldOffset,
-          int cMax,
-          Pointer<Uint32> pcFieldOffset,
-          Pointer<Uint32> pulClassSize,
-        )
-      >()(
-    ptr.ref.lpVtbl,
-    td,
-    pdwPackSize,
-    rFieldOffset,
-    cMax,
-    pcFieldOffset,
-    pulClassSize,
-  );
+          >()(
+        ptr.ref.lpVtbl,
+        td,
+        pdwPackSize,
+        rFieldOffset,
+        cMax,
+        pcFieldOffset,
+        pulClassSize,
+      );
 
   int getFieldMarshal(
     int tk,
@@ -1476,42 +1477,43 @@ class IMetaDataImport extends IUnknown {
     int cchImportName,
     Pointer<Uint32> pchImportName,
     Pointer<Uint32> pmrImportDLL,
-  ) => (ptr.ref.vtable + 48)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  ) =>
+      (ptr.ref.vtable + 48)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Uint32 tk,
+                  Pointer<Uint32> pdwMappingFlags,
+                  Pointer<Utf16> szImportName,
+                  Uint32 cchImportName,
+                  Pointer<Uint32> pchImportName,
+                  Pointer<Uint32> pmrImportDLL,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
-              Uint32 tk,
+              int tk,
               Pointer<Uint32> pdwMappingFlags,
               Pointer<Utf16> szImportName,
-              Uint32 cchImportName,
+              int cchImportName,
               Pointer<Uint32> pchImportName,
               Pointer<Uint32> pmrImportDLL,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(
-          Pointer,
-          int tk,
-          Pointer<Uint32> pdwMappingFlags,
-          Pointer<Utf16> szImportName,
-          int cchImportName,
-          Pointer<Uint32> pchImportName,
-          Pointer<Uint32> pmrImportDLL,
-        )
-      >()(
-    ptr.ref.lpVtbl,
-    tk,
-    pdwMappingFlags,
-    szImportName,
-    cchImportName,
-    pchImportName,
-    pmrImportDLL,
-  );
+          >()(
+        ptr.ref.lpVtbl,
+        tk,
+        pdwMappingFlags,
+        szImportName,
+        cchImportName,
+        pchImportName,
+        pmrImportDLL,
+      );
 
   int enumSignatures(
     Pointer<Pointer> phEnum,
@@ -1629,42 +1631,43 @@ class IMetaDataImport extends IUnknown {
     Pointer<Uint32> rCustomAttributes,
     int cMax,
     Pointer<Uint32> pcCustomAttributes,
-  ) => (ptr.ref.vtable + 53)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  ) =>
+      (ptr.ref.vtable + 53)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<Pointer> phEnum,
+                  Uint32 tk,
+                  Uint32 tkType,
+                  Pointer<Uint32> rCustomAttributes,
+                  Uint32 cMax,
+                  Pointer<Uint32> pcCustomAttributes,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
               Pointer<Pointer> phEnum,
-              Uint32 tk,
-              Uint32 tkType,
+              int tk,
+              int tkType,
               Pointer<Uint32> rCustomAttributes,
-              Uint32 cMax,
+              int cMax,
               Pointer<Uint32> pcCustomAttributes,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(
-          Pointer,
-          Pointer<Pointer> phEnum,
-          int tk,
-          int tkType,
-          Pointer<Uint32> rCustomAttributes,
-          int cMax,
-          Pointer<Uint32> pcCustomAttributes,
-        )
-      >()(
-    ptr.ref.lpVtbl,
-    phEnum,
-    tk,
-    tkType,
-    rCustomAttributes,
-    cMax,
-    pcCustomAttributes,
-  );
+          >()(
+        ptr.ref.lpVtbl,
+        phEnum,
+        tk,
+        tkType,
+        rCustomAttributes,
+        cMax,
+        pcCustomAttributes,
+      );
 
   int getCustomAttributeProps(
     int cv,
@@ -1740,16 +1743,38 @@ class IMetaDataImport extends IUnknown {
     Pointer<Uint32> pdwCPlusTypeFlag,
     Pointer<Pointer> ppValue,
     Pointer<Uint32> pcchValue,
-  ) => (ptr.ref.vtable + 56)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  ) =>
+      (ptr.ref.vtable + 56)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Uint32 mb,
+                  Pointer<Uint32> pClass,
+                  Pointer<Utf16> szMember,
+                  Uint32 cchMember,
+                  Pointer<Uint32> pchMember,
+                  Pointer<Uint32> pdwAttr,
+                  Pointer<Pointer<Uint8>> ppvSigBlob,
+                  Pointer<Uint32> pcbSigBlob,
+                  Pointer<Uint32> pulCodeRVA,
+                  Pointer<Uint32> pdwImplFlags,
+                  Pointer<Uint32> pdwCPlusTypeFlag,
+                  Pointer<Pointer> ppValue,
+                  Pointer<Uint32> pcchValue,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
-              Uint32 mb,
+              int mb,
               Pointer<Uint32> pClass,
               Pointer<Utf16> szMember,
-              Uint32 cchMember,
+              int cchMember,
               Pointer<Uint32> pchMember,
               Pointer<Uint32> pdwAttr,
               Pointer<Pointer<Uint8>> ppvSigBlob,
@@ -1760,43 +1785,22 @@ class IMetaDataImport extends IUnknown {
               Pointer<Pointer> ppValue,
               Pointer<Uint32> pcchValue,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(
-          Pointer,
-          int mb,
-          Pointer<Uint32> pClass,
-          Pointer<Utf16> szMember,
-          int cchMember,
-          Pointer<Uint32> pchMember,
-          Pointer<Uint32> pdwAttr,
-          Pointer<Pointer<Uint8>> ppvSigBlob,
-          Pointer<Uint32> pcbSigBlob,
-          Pointer<Uint32> pulCodeRVA,
-          Pointer<Uint32> pdwImplFlags,
-          Pointer<Uint32> pdwCPlusTypeFlag,
-          Pointer<Pointer> ppValue,
-          Pointer<Uint32> pcchValue,
-        )
-      >()(
-    ptr.ref.lpVtbl,
-    mb,
-    pClass,
-    szMember,
-    cchMember,
-    pchMember,
-    pdwAttr,
-    ppvSigBlob,
-    pcbSigBlob,
-    pulCodeRVA,
-    pdwImplFlags,
-    pdwCPlusTypeFlag,
-    ppValue,
-    pcchValue,
-  );
+          >()(
+        ptr.ref.lpVtbl,
+        mb,
+        pClass,
+        szMember,
+        cchMember,
+        pchMember,
+        pdwAttr,
+        ppvSigBlob,
+        pcbSigBlob,
+        pulCodeRVA,
+        pdwImplFlags,
+        pdwCPlusTypeFlag,
+        ppValue,
+        pcchValue,
+      );
 
   int getFieldProps(
     int mb,
@@ -1810,16 +1814,36 @@ class IMetaDataImport extends IUnknown {
     Pointer<Uint32> pdwCPlusTypeFlag,
     Pointer<Pointer> ppValue,
     Pointer<Uint32> pcchValue,
-  ) => (ptr.ref.vtable + 57)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  ) =>
+      (ptr.ref.vtable + 57)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Uint32 mb,
+                  Pointer<Uint32> pClass,
+                  Pointer<Utf16> szField,
+                  Uint32 cchField,
+                  Pointer<Uint32> pchField,
+                  Pointer<Uint32> pdwAttr,
+                  Pointer<Pointer<Uint8>> ppvSigBlob,
+                  Pointer<Uint32> pcbSigBlob,
+                  Pointer<Uint32> pdwCPlusTypeFlag,
+                  Pointer<Pointer> ppValue,
+                  Pointer<Uint32> pcchValue,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
-              Uint32 mb,
+              int mb,
               Pointer<Uint32> pClass,
               Pointer<Utf16> szField,
-              Uint32 cchField,
+              int cchField,
               Pointer<Uint32> pchField,
               Pointer<Uint32> pdwAttr,
               Pointer<Pointer<Uint8>> ppvSigBlob,
@@ -1828,39 +1852,20 @@ class IMetaDataImport extends IUnknown {
               Pointer<Pointer> ppValue,
               Pointer<Uint32> pcchValue,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(
-          Pointer,
-          int mb,
-          Pointer<Uint32> pClass,
-          Pointer<Utf16> szField,
-          int cchField,
-          Pointer<Uint32> pchField,
-          Pointer<Uint32> pdwAttr,
-          Pointer<Pointer<Uint8>> ppvSigBlob,
-          Pointer<Uint32> pcbSigBlob,
-          Pointer<Uint32> pdwCPlusTypeFlag,
-          Pointer<Pointer> ppValue,
-          Pointer<Uint32> pcchValue,
-        )
-      >()(
-    ptr.ref.lpVtbl,
-    mb,
-    pClass,
-    szField,
-    cchField,
-    pchField,
-    pdwAttr,
-    ppvSigBlob,
-    pcbSigBlob,
-    pdwCPlusTypeFlag,
-    ppValue,
-    pcchValue,
-  );
+          >()(
+        ptr.ref.lpVtbl,
+        mb,
+        pClass,
+        szField,
+        cchField,
+        pchField,
+        pdwAttr,
+        ppvSigBlob,
+        pcbSigBlob,
+        pdwCPlusTypeFlag,
+        ppValue,
+        pcchValue,
+      );
 
   int getPropertyProps(
     int prop,
@@ -1879,16 +1884,41 @@ class IMetaDataImport extends IUnknown {
     Pointer<Uint32> rmdOtherMethod,
     int cMax,
     Pointer<Uint32> pcOtherMethod,
-  ) => (ptr.ref.vtable + 58)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  ) =>
+      (ptr.ref.vtable + 58)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Uint32 prop,
+                  Pointer<Uint32> pClass,
+                  Pointer<Utf16> szProperty,
+                  Uint32 cchProperty,
+                  Pointer<Uint32> pchProperty,
+                  Pointer<Uint32> pdwPropFlags,
+                  Pointer<Pointer<Uint8>> ppvSig,
+                  Pointer<Uint32> pbSig,
+                  Pointer<Uint32> pdwCPlusTypeFlag,
+                  Pointer<Pointer> ppDefaultValue,
+                  Pointer<Uint32> pcchDefaultValue,
+                  Pointer<Uint32> pmdSetter,
+                  Pointer<Uint32> pmdGetter,
+                  Pointer<Uint32> rmdOtherMethod,
+                  Uint32 cMax,
+                  Pointer<Uint32> pcOtherMethod,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
-              Uint32 prop,
+              int prop,
               Pointer<Uint32> pClass,
               Pointer<Utf16> szProperty,
-              Uint32 cchProperty,
+              int cchProperty,
               Pointer<Uint32> pchProperty,
               Pointer<Uint32> pdwPropFlags,
               Pointer<Pointer<Uint8>> ppvSig,
@@ -1899,52 +1929,28 @@ class IMetaDataImport extends IUnknown {
               Pointer<Uint32> pmdSetter,
               Pointer<Uint32> pmdGetter,
               Pointer<Uint32> rmdOtherMethod,
-              Uint32 cMax,
+              int cMax,
               Pointer<Uint32> pcOtherMethod,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(
-          Pointer,
-          int prop,
-          Pointer<Uint32> pClass,
-          Pointer<Utf16> szProperty,
-          int cchProperty,
-          Pointer<Uint32> pchProperty,
-          Pointer<Uint32> pdwPropFlags,
-          Pointer<Pointer<Uint8>> ppvSig,
-          Pointer<Uint32> pbSig,
-          Pointer<Uint32> pdwCPlusTypeFlag,
-          Pointer<Pointer> ppDefaultValue,
-          Pointer<Uint32> pcchDefaultValue,
-          Pointer<Uint32> pmdSetter,
-          Pointer<Uint32> pmdGetter,
-          Pointer<Uint32> rmdOtherMethod,
-          int cMax,
-          Pointer<Uint32> pcOtherMethod,
-        )
-      >()(
-    ptr.ref.lpVtbl,
-    prop,
-    pClass,
-    szProperty,
-    cchProperty,
-    pchProperty,
-    pdwPropFlags,
-    ppvSig,
-    pbSig,
-    pdwCPlusTypeFlag,
-    ppDefaultValue,
-    pcchDefaultValue,
-    pmdSetter,
-    pmdGetter,
-    rmdOtherMethod,
-    cMax,
-    pcOtherMethod,
-  );
+          >()(
+        ptr.ref.lpVtbl,
+        prop,
+        pClass,
+        szProperty,
+        cchProperty,
+        pchProperty,
+        pdwPropFlags,
+        ppvSig,
+        pbSig,
+        pdwCPlusTypeFlag,
+        ppDefaultValue,
+        pcchDefaultValue,
+        pmdSetter,
+        pmdGetter,
+        rmdOtherMethod,
+        cMax,
+        pcOtherMethod,
+      );
 
   int getParamProps(
     int tk,
@@ -1957,54 +1963,55 @@ class IMetaDataImport extends IUnknown {
     Pointer<Uint32> pdwCPlusTypeFlag,
     Pointer<Pointer> ppValue,
     Pointer<Uint32> pcchValue,
-  ) => (ptr.ref.vtable + 59)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  ) =>
+      (ptr.ref.vtable + 59)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Uint32 tk,
+                  Pointer<Uint32> pmd,
+                  Pointer<Uint32> pulSequence,
+                  Pointer<Utf16> szName,
+                  Uint32 cchName,
+                  Pointer<Uint32> pchName,
+                  Pointer<Uint32> pdwAttr,
+                  Pointer<Uint32> pdwCPlusTypeFlag,
+                  Pointer<Pointer> ppValue,
+                  Pointer<Uint32> pcchValue,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
-              Uint32 tk,
+              int tk,
               Pointer<Uint32> pmd,
               Pointer<Uint32> pulSequence,
               Pointer<Utf16> szName,
-              Uint32 cchName,
+              int cchName,
               Pointer<Uint32> pchName,
               Pointer<Uint32> pdwAttr,
               Pointer<Uint32> pdwCPlusTypeFlag,
               Pointer<Pointer> ppValue,
               Pointer<Uint32> pcchValue,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(
-          Pointer,
-          int tk,
-          Pointer<Uint32> pmd,
-          Pointer<Uint32> pulSequence,
-          Pointer<Utf16> szName,
-          int cchName,
-          Pointer<Uint32> pchName,
-          Pointer<Uint32> pdwAttr,
-          Pointer<Uint32> pdwCPlusTypeFlag,
-          Pointer<Pointer> ppValue,
-          Pointer<Uint32> pcchValue,
-        )
-      >()(
-    ptr.ref.lpVtbl,
-    tk,
-    pmd,
-    pulSequence,
-    szName,
-    cchName,
-    pchName,
-    pdwAttr,
-    pdwCPlusTypeFlag,
-    ppValue,
-    pcchValue,
-  );
+          >()(
+        ptr.ref.lpVtbl,
+        tk,
+        pmd,
+        pulSequence,
+        szName,
+        cchName,
+        pchName,
+        pdwAttr,
+        pdwCPlusTypeFlag,
+        ppValue,
+        pcchValue,
+      );
 
   int getCustomAttributeByName(
     int tkObj,
@@ -2092,18 +2099,19 @@ class IMetaDataImport extends IUnknown {
         )
       >()(ptr.ref.lpVtbl, pvSig, cbSig, pCallConv);
 
-  int isGlobal(int pd, Pointer<Int32> pbGlobal) => (ptr.ref.vtable + 64)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Uint32 pd, Pointer<Int32> pbGlobal)
-          >
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, int pd, Pointer<Int32> pbGlobal)>()(
-    ptr.ref.lpVtbl,
-    pd,
-    pbGlobal,
-  );
+  int isGlobal(int pd, Pointer<Int32> pbGlobal) =>
+      (ptr.ref.vtable + 64)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Uint32 pd, Pointer<Int32> pbGlobal)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, int pd, Pointer<Int32> pbGlobal)>()(
+        ptr.ref.lpVtbl,
+        pd,
+        pbGlobal,
+      );
 }

@@ -107,10 +107,9 @@ class IUIAutomationTextRange extends IUnknown {
   int expandToEnclosingUnit(int textUnit) => (ptr.ref.vtable + 6)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 textUnit)>>>()
       .value
-      .asFunction<int Function(Pointer, int textUnit)>()(
-    ptr.ref.lpVtbl,
-    textUnit,
-  );
+      .asFunction<
+        int Function(Pointer, int textUnit)
+      >()(ptr.ref.lpVtbl, textUnit);
 
   int findAttribute(
     int attr,
@@ -172,21 +171,19 @@ class IUIAutomationTextRange extends IUnknown {
         )
       >()(ptr.ref.lpVtbl, text, backward, ignoreCase, found);
 
-  int getAttributeValue(int attr, Pointer<VARIANT> value) => (ptr.ref.vtable +
-          9)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Uint32 attr, Pointer<VARIANT> value)
-          >
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, int attr, Pointer<VARIANT> value)>()(
-    ptr.ref.lpVtbl,
-    attr,
-    value,
-  );
+  int getAttributeValue(int attr, Pointer<VARIANT> value) =>
+      (ptr.ref.vtable + 9)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Uint32 attr, Pointer<VARIANT> value)
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, int attr, Pointer<VARIANT> value)
+          >()(ptr.ref.lpVtbl, attr, value);
 
   int getBoundingRectangles(Pointer<Pointer<SAFEARRAY>> boundingRects) =>
       (ptr.ref.vtable + 10)
@@ -330,15 +327,16 @@ class IUIAutomationTextRange extends IUnknown {
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  int scrollIntoView(int alignToTop) => (ptr.ref.vtable + 19)
-      .cast<
-        Pointer<NativeFunction<Int32 Function(Pointer, Int32 alignToTop)>>
-      >()
-      .value
-      .asFunction<int Function(Pointer, int alignToTop)>()(
-    ptr.ref.lpVtbl,
-    alignToTop,
-  );
+  int scrollIntoView(int alignToTop) =>
+      (ptr.ref.vtable + 19)
+          .cast<
+            Pointer<NativeFunction<Int32 Function(Pointer, Int32 alignToTop)>>
+          >()
+          .value
+          .asFunction<int Function(Pointer, int alignToTop)>()(
+        ptr.ref.lpVtbl,
+        alignToTop,
+      );
 
   int getChildren(Pointer<Pointer<COMObject>> children) => (ptr.ref.vtable + 20)
       .cast<

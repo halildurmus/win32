@@ -19,12 +19,12 @@ class FieldProjection {
       throw Exception('Array $fieldName should have dimensions.');
     }
 
-    final attribute =
-        _isFlexibleArray
-            ? '  @Array.variableWithVariableDimension($dimensionsUpperBound)'
-            : '  @Array($dimensionsUpperBound)';
+    final attribute = _isFlexibleArray
+        ? '  @Array.variableWithVariableDimension($dimensionsUpperBound)'
+        : '  @Array($dimensionsUpperBound)';
 
-    final dartCode = '''
+    final dartCode =
+        '''
       $attribute
       external ${typeProjection.nativeType} _$fieldName;
 
@@ -68,10 +68,9 @@ class FieldProjection {
       dartType = typeProjection.dartType;
     }
 
-    final attribute =
-        _isFlexibleArray
-            ? '@Array.variableWithVariableDimension(${typeProjection.arrayUpperBound})'
-            : typeProjection.attribute;
+    final attribute = _isFlexibleArray
+        ? '@Array.variableWithVariableDimension(${typeProjection.arrayUpperBound})'
+        : typeProjection.attribute;
 
     return '  $attribute\n  external $dartType $fieldName;\n';
   }

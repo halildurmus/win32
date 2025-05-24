@@ -49,20 +49,18 @@ class IFileIsInUse extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> ppszName)>()(
-    ptr.ref.lpVtbl,
-    ppszName,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Pointer<Utf16>> ppszName)
+      >()(ptr.ref.lpVtbl, ppszName);
 
   int getUsage(Pointer<Int32> pfut) => (ptr.ref.vtable + 4)
       .cast<
         Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Int32> pfut)>>
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Int32> pfut)>()(
-    ptr.ref.lpVtbl,
-    pfut,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Int32> pfut)
+      >()(ptr.ref.lpVtbl, pfut);
 
   int getCapabilities(Pointer<Uint32> pdwCapFlags) => (ptr.ref.vtable + 5)
       .cast<
@@ -71,20 +69,18 @@ class IFileIsInUse extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Uint32> pdwCapFlags)>()(
-    ptr.ref.lpVtbl,
-    pdwCapFlags,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Uint32> pdwCapFlags)
+      >()(ptr.ref.lpVtbl, pdwCapFlags);
 
   int getSwitchToHWND(Pointer<IntPtr> phwnd) => (ptr.ref.vtable + 6)
       .cast<
         Pointer<NativeFunction<Int32 Function(Pointer, Pointer<IntPtr> phwnd)>>
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<IntPtr> phwnd)>()(
-    ptr.ref.lpVtbl,
-    phwnd,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<IntPtr> phwnd)
+      >()(ptr.ref.lpVtbl, phwnd);
 
   int closeFile() => (ptr.ref.vtable + 7)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()

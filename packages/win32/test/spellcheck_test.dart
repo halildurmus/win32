@@ -46,8 +46,9 @@ void main() {
       final supportedPtr = calloc<Int32>();
 
       // Dart reports locale as (for example) en_US; Windows expects en-US
-      final languageTagPtr =
-          Platform.localeName.replaceAll('_', '-').toNativeUtf16();
+      final languageTagPtr = Platform.localeName
+          .replaceAll('_', '-')
+          .toNativeUtf16();
 
       final hr = spellCheckerFactory.isSupported(languageTagPtr, supportedPtr);
       expect(hr, equals(S_OK));

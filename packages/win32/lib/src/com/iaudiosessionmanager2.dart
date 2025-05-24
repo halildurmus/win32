@@ -104,19 +104,17 @@ class IAudioSessionManager2 extends IAudioSessionManager {
         )
       >()(ptr.ref.lpVtbl, sessionID, duckNotification);
 
-  int unregisterDuckNotification(
-    Pointer<COMObject> duckNotification,
-  ) => (ptr.ref.vtable + 9)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Pointer<COMObject> duckNotification)
-          >
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<COMObject> duckNotification)>()(
-    ptr.ref.lpVtbl,
-    duckNotification,
-  );
+  int unregisterDuckNotification(Pointer<COMObject> duckNotification) =>
+      (ptr.ref.vtable + 9)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<COMObject> duckNotification)
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<COMObject> duckNotification)
+          >()(ptr.ref.lpVtbl, duckNotification);
 }

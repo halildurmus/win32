@@ -43,19 +43,20 @@ int CallNtPowerInformation(
   OutputBufferLength,
 );
 
-final _CallNtPowerInformation = _powrprof.lookupFunction<
-  Int32 Function(
-    Int32 InformationLevel,
-    Pointer InputBuffer,
-    Uint32 InputBufferLength,
-    Pointer OutputBuffer,
-    Uint32 OutputBufferLength,
-  ),
-  int Function(
-    int InformationLevel,
-    Pointer InputBuffer,
-    int InputBufferLength,
-    Pointer OutputBuffer,
-    int OutputBufferLength,
-  )
->('CallNtPowerInformation');
+final _CallNtPowerInformation = _powrprof
+    .lookupFunction<
+      Int32 Function(
+        Int32 InformationLevel,
+        Pointer InputBuffer,
+        Uint32 InputBufferLength,
+        Pointer OutputBuffer,
+        Uint32 OutputBufferLength,
+      ),
+      int Function(
+        int InformationLevel,
+        Pointer InputBuffer,
+        int InputBufferLength,
+        Pointer OutputBuffer,
+        int OutputBufferLength,
+      )
+    >('CallNtPowerInformation');

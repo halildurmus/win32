@@ -42,39 +42,40 @@ class IUIAutomationTransformPattern2 extends IUIAutomationTransformPattern {
         interface.toInterface(IID_IUIAutomationTransformPattern2),
       );
 
-  int zoom(double zoomValue) => (ptr.ref.vtable + 12)
-      .cast<
-        Pointer<NativeFunction<Int32 Function(Pointer, Double zoomValue)>>
-      >()
-      .value
-      .asFunction<int Function(Pointer, double zoomValue)>()(
-    ptr.ref.lpVtbl,
-    zoomValue,
-  );
+  int zoom(double zoomValue) =>
+      (ptr.ref.vtable + 12)
+          .cast<
+            Pointer<NativeFunction<Int32 Function(Pointer, Double zoomValue)>>
+          >()
+          .value
+          .asFunction<int Function(Pointer, double zoomValue)>()(
+        ptr.ref.lpVtbl,
+        zoomValue,
+      );
 
   int zoomByUnit(int zoomUnit) => (ptr.ref.vtable + 13)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 zoomUnit)>>>()
       .value
-      .asFunction<int Function(Pointer, int zoomUnit)>()(
-    ptr.ref.lpVtbl,
-    zoomUnit,
-  );
+      .asFunction<
+        int Function(Pointer, int zoomUnit)
+      >()(ptr.ref.lpVtbl, zoomUnit);
 
   int get currentCanZoom {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = (ptr.ref.vtable + 14)
-          .cast<
-            Pointer<
-              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
-            >
-          >()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+      final hr =
+          (ptr.ref.vtable + 14)
+              .cast<
+                Pointer<
+                  NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+                >
+              >()
+              .value
+              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+            ptr.ref.lpVtbl,
+            retValuePtr,
+          );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -89,17 +90,18 @@ class IUIAutomationTransformPattern2 extends IUIAutomationTransformPattern {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = (ptr.ref.vtable + 15)
-          .cast<
-            Pointer<
-              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
-            >
-          >()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+      final hr =
+          (ptr.ref.vtable + 15)
+              .cast<
+                Pointer<
+                  NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+                >
+              >()
+              .value
+              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+            ptr.ref.lpVtbl,
+            retValuePtr,
+          );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -121,10 +123,9 @@ class IUIAutomationTransformPattern2 extends IUIAutomationTransformPattern {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Double> retVal)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Double> retVal)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -146,10 +147,9 @@ class IUIAutomationTransformPattern2 extends IUIAutomationTransformPattern {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Double> retVal)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Double> retVal)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -171,10 +171,9 @@ class IUIAutomationTransformPattern2 extends IUIAutomationTransformPattern {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Double> retVal)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Double> retVal)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -196,10 +195,9 @@ class IUIAutomationTransformPattern2 extends IUIAutomationTransformPattern {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Double> retVal)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Double> retVal)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -221,10 +219,9 @@ class IUIAutomationTransformPattern2 extends IUIAutomationTransformPattern {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Double> retVal)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Double> retVal)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -246,10 +243,9 @@ class IUIAutomationTransformPattern2 extends IUIAutomationTransformPattern {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Double> retVal)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Double> retVal)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 

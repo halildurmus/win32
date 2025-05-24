@@ -42,36 +42,37 @@ class IRestrictedErrorInfo extends IUnknown {
     Pointer<Int32> error,
     Pointer<Pointer<Utf16>> restrictedDescription,
     Pointer<Pointer<Utf16>> capabilitySid,
-  ) => (ptr.ref.vtable + 3)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  ) =>
+      (ptr.ref.vtable + 3)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<Pointer<Utf16>> description,
+                  Pointer<Int32> error,
+                  Pointer<Pointer<Utf16>> restrictedDescription,
+                  Pointer<Pointer<Utf16>> capabilitySid,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
               Pointer<Pointer<Utf16>> description,
               Pointer<Int32> error,
               Pointer<Pointer<Utf16>> restrictedDescription,
               Pointer<Pointer<Utf16>> capabilitySid,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(
-          Pointer,
-          Pointer<Pointer<Utf16>> description,
-          Pointer<Int32> error,
-          Pointer<Pointer<Utf16>> restrictedDescription,
-          Pointer<Pointer<Utf16>> capabilitySid,
-        )
-      >()(
-    ptr.ref.lpVtbl,
-    description,
-    error,
-    restrictedDescription,
-    capabilitySid,
-  );
+          >()(
+        ptr.ref.lpVtbl,
+        description,
+        error,
+        restrictedDescription,
+        capabilitySid,
+      );
 
   int getReference(Pointer<Pointer<Utf16>> reference) => (ptr.ref.vtable + 4)
       .cast<
@@ -82,8 +83,7 @@ class IRestrictedErrorInfo extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> reference)>()(
-    ptr.ref.lpVtbl,
-    reference,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Pointer<Utf16>> reference)
+      >()(ptr.ref.lpVtbl, reference);
 }

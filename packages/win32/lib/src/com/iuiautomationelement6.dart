@@ -51,10 +51,9 @@ class IUIAutomationElement6 extends IUIAutomationElement5 {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<Utf16>> retVal)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -78,10 +77,9 @@ class IUIAutomationElement6 extends IUIAutomationElement5 {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<Utf16>> retVal)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 

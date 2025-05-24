@@ -38,13 +38,14 @@ class ISupportErrorInfo extends IUnknown {
   factory ISupportErrorInfo.from(IUnknown interface) =>
       ISupportErrorInfo(interface.toInterface(IID_ISupportErrorInfo));
 
-  int interfaceSupportsErrorInfo(Pointer<GUID> riid) => (ptr.ref.vtable + 3)
-      .cast<
-        Pointer<NativeFunction<Int32 Function(Pointer, Pointer<GUID> riid)>>
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<GUID> riid)>()(
-    ptr.ref.lpVtbl,
-    riid,
-  );
+  int interfaceSupportsErrorInfo(Pointer<GUID> riid) =>
+      (ptr.ref.vtable + 3)
+          .cast<
+            Pointer<NativeFunction<Int32 Function(Pointer, Pointer<GUID> riid)>>
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<GUID> riid)>()(
+        ptr.ref.lpVtbl,
+        riid,
+      );
 }

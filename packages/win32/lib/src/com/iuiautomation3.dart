@@ -44,39 +44,40 @@ class IUIAutomation3 extends IUIAutomation2 {
     int textEditChangeType,
     Pointer<COMObject> cacheRequest,
     Pointer<COMObject> handler,
-  ) => (ptr.ref.vtable + 64)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  ) =>
+      (ptr.ref.vtable + 64)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<COMObject> element,
+                  Int32 scope,
+                  Int32 textEditChangeType,
+                  Pointer<COMObject> cacheRequest,
+                  Pointer<COMObject> handler,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
               Pointer<COMObject> element,
-              Int32 scope,
-              Int32 textEditChangeType,
+              int scope,
+              int textEditChangeType,
               Pointer<COMObject> cacheRequest,
               Pointer<COMObject> handler,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(
-          Pointer,
-          Pointer<COMObject> element,
-          int scope,
-          int textEditChangeType,
-          Pointer<COMObject> cacheRequest,
-          Pointer<COMObject> handler,
-        )
-      >()(
-    ptr.ref.lpVtbl,
-    element,
-    scope,
-    textEditChangeType,
-    cacheRequest,
-    handler,
-  );
+          >()(
+        ptr.ref.lpVtbl,
+        element,
+        scope,
+        textEditChangeType,
+        cacheRequest,
+        handler,
+      );
 
   int removeTextEditTextChangedEventHandler(
     Pointer<COMObject> element,

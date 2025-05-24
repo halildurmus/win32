@@ -66,19 +66,20 @@ const IID_IExampleCom = '{4C2DDA7F-9DC9-46FD-A107-832254B2EEBE}';
 class IExampleCom extends IDispatch {
   IExampleCom(super.ptr);
 
-  int GetMessage(Pointer<Pointer<Utf16>> pRetVal) => (ptr.ref.vtable + 7)
-      .cast<
-        Pointer<
-          NativeFunction<
-            HRESULT Function(Pointer, Pointer<Pointer<Utf16>> pRetVal)
-          >
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> pRetVal)>()(
-    ptr.ref.lpVtbl,
-    pRetVal,
-  );
+  int GetMessage(Pointer<Pointer<Utf16>> pRetVal) =>
+      (ptr.ref.vtable + 7)
+          .cast<
+            Pointer<
+              NativeFunction<
+                HRESULT Function(Pointer, Pointer<Pointer<Utf16>> pRetVal)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> pRetVal)>()(
+        ptr.ref.lpVtbl,
+        pRetVal,
+      );
 
   int GetSum(int a, int b, Pointer<Int32> pRetVal) => (ptr.ref.vtable + 8)
       .cast<

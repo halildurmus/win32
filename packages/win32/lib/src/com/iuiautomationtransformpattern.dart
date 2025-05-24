@@ -39,16 +39,17 @@ class IUIAutomationTransformPattern extends IUnknown {
         interface.toInterface(IID_IUIAutomationTransformPattern),
       );
 
-  int move(double x, double y) => (ptr.ref.vtable + 3)
-      .cast<
-        Pointer<NativeFunction<Int32 Function(Pointer, Double x, Double y)>>
-      >()
-      .value
-      .asFunction<int Function(Pointer, double x, double y)>()(
-    ptr.ref.lpVtbl,
-    x,
-    y,
-  );
+  int move(double x, double y) =>
+      (ptr.ref.vtable + 3)
+          .cast<
+            Pointer<NativeFunction<Int32 Function(Pointer, Double x, Double y)>>
+          >()
+          .value
+          .asFunction<int Function(Pointer, double x, double y)>()(
+        ptr.ref.lpVtbl,
+        x,
+        y,
+      );
 
   int resize(double width, double height) => (ptr.ref.vtable + 4)
       .cast<
@@ -57,35 +58,33 @@ class IUIAutomationTransformPattern extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, double width, double height)>()(
-    ptr.ref.lpVtbl,
-    width,
-    height,
-  );
+      .asFunction<
+        int Function(Pointer, double width, double height)
+      >()(ptr.ref.lpVtbl, width, height);
 
   int rotate(double degrees) => (ptr.ref.vtable + 5)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Double degrees)>>>()
       .value
-      .asFunction<int Function(Pointer, double degrees)>()(
-    ptr.ref.lpVtbl,
-    degrees,
-  );
+      .asFunction<
+        int Function(Pointer, double degrees)
+      >()(ptr.ref.lpVtbl, degrees);
 
   int get currentCanMove {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = (ptr.ref.vtable + 6)
-          .cast<
-            Pointer<
-              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
-            >
-          >()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+      final hr =
+          (ptr.ref.vtable + 6)
+              .cast<
+                Pointer<
+                  NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+                >
+              >()
+              .value
+              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+            ptr.ref.lpVtbl,
+            retValuePtr,
+          );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -100,17 +99,18 @@ class IUIAutomationTransformPattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = (ptr.ref.vtable + 7)
-          .cast<
-            Pointer<
-              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
-            >
-          >()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+      final hr =
+          (ptr.ref.vtable + 7)
+              .cast<
+                Pointer<
+                  NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+                >
+              >()
+              .value
+              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+            ptr.ref.lpVtbl,
+            retValuePtr,
+          );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -125,17 +125,18 @@ class IUIAutomationTransformPattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = (ptr.ref.vtable + 8)
-          .cast<
-            Pointer<
-              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
-            >
-          >()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+      final hr =
+          (ptr.ref.vtable + 8)
+              .cast<
+                Pointer<
+                  NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+                >
+              >()
+              .value
+              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+            ptr.ref.lpVtbl,
+            retValuePtr,
+          );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -150,17 +151,18 @@ class IUIAutomationTransformPattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = (ptr.ref.vtable + 9)
-          .cast<
-            Pointer<
-              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
-            >
-          >()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+      final hr =
+          (ptr.ref.vtable + 9)
+              .cast<
+                Pointer<
+                  NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+                >
+              >()
+              .value
+              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+            ptr.ref.lpVtbl,
+            retValuePtr,
+          );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -175,17 +177,18 @@ class IUIAutomationTransformPattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = (ptr.ref.vtable + 10)
-          .cast<
-            Pointer<
-              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
-            >
-          >()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+      final hr =
+          (ptr.ref.vtable + 10)
+              .cast<
+                Pointer<
+                  NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+                >
+              >()
+              .value
+              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+            ptr.ref.lpVtbl,
+            retValuePtr,
+          );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -200,17 +203,18 @@ class IUIAutomationTransformPattern extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = (ptr.ref.vtable + 11)
-          .cast<
-            Pointer<
-              NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
-            >
-          >()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+      final hr =
+          (ptr.ref.vtable + 11)
+              .cast<
+                Pointer<
+                  NativeFunction<Int32 Function(Pointer, Pointer<Int32> retVal)>
+                >
+              >()
+              .value
+              .asFunction<int Function(Pointer, Pointer<Int32> retVal)>()(
+            ptr.ref.lpVtbl,
+            retValuePtr,
+          );
 
       if (FAILED(hr)) throw WindowsException(hr);
 

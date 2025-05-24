@@ -3,7 +3,7 @@ description: Generates various Win32 API projections using Windows metadata.
 publish_to: none
 
 environment:
-  sdk: ^3.7.0
+  sdk: ^3.8.0
 
 # Declare that this package only works on Windows.
 platforms:
@@ -11,7 +11,7 @@ platforms:
 
 dependencies:
   # For formatting Dart code (APIs for performing dart format).
-  dart_style: ^3.0.1
+  dart_style: ^3.1.0
 
   # Foreign Function Interface extension methods.
   ffi: ^2.1.4

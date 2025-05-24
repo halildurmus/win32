@@ -30,7 +30,8 @@ final _shlwapi = DynamicLibrary.open('shlwapi.dll');
 Pointer<COMObject> SHCreateMemStream(Pointer<Uint8> pInit, int cbInit) =>
     _SHCreateMemStream(pInit, cbInit);
 
-final _SHCreateMemStream = _shlwapi.lookupFunction<
-  Pointer<COMObject> Function(Pointer<Uint8> pInit, Uint32 cbInit),
-  Pointer<COMObject> Function(Pointer<Uint8> pInit, int cbInit)
->('SHCreateMemStream');
+final _SHCreateMemStream = _shlwapi
+    .lookupFunction<
+      Pointer<COMObject> Function(Pointer<Uint8> pInit, Uint32 cbInit),
+      Pointer<COMObject> Function(Pointer<Uint8> pInit, int cbInit)
+    >('SHCreateMemStream');

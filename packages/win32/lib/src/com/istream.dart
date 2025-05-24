@@ -65,15 +65,16 @@ class IStream extends ISequentialStream {
             )
           >()(ptr.ref.lpVtbl, dlibMove, dwOrigin, plibNewPosition);
 
-  int setSize(int libNewSize) => (ptr.ref.vtable + 6)
-      .cast<
-        Pointer<NativeFunction<Int32 Function(Pointer, Uint64 libNewSize)>>
-      >()
-      .value
-      .asFunction<int Function(Pointer, int libNewSize)>()(
-    ptr.ref.lpVtbl,
-    libNewSize,
-  );
+  int setSize(int libNewSize) =>
+      (ptr.ref.vtable + 6)
+          .cast<
+            Pointer<NativeFunction<Int32 Function(Pointer, Uint64 libNewSize)>>
+          >()
+          .value
+          .asFunction<int Function(Pointer, int libNewSize)>()(
+        ptr.ref.lpVtbl,
+        libNewSize,
+      );
 
   int copyTo(
     Pointer<COMObject> pstm,
@@ -110,10 +111,9 @@ class IStream extends ISequentialStream {
         Pointer<NativeFunction<Int32 Function(Pointer, Int32 grfCommitFlags)>>
       >()
       .value
-      .asFunction<int Function(Pointer, int grfCommitFlags)>()(
-    ptr.ref.lpVtbl,
-    grfCommitFlags,
-  );
+      .asFunction<
+        int Function(Pointer, int grfCommitFlags)
+      >()(ptr.ref.lpVtbl, grfCommitFlags);
 
   int revert() => (ptr.ref.vtable + 9)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
@@ -183,8 +183,7 @@ class IStream extends ISequentialStream {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> ppstm)>()(
-    ptr.ref.lpVtbl,
-    ppstm,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Pointer<COMObject>> ppstm)
+      >()(ptr.ref.lpVtbl, ppstm);
 }

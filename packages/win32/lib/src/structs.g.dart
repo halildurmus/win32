@@ -1006,16 +1006,16 @@ sealed class _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ClientCharacteri
 
 extension BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union_Extension_1
     on BTH_LE_GATT_DESCRIPTOR_VALUE {
-  int get IsSubscribeToNotification =>
-      this
-          .Anonymous
-          .ClientCharacteristicConfiguration
-          .IsSubscribeToNotification;
+  int get IsSubscribeToNotification => this
+      .Anonymous
+      .ClientCharacteristicConfiguration
+      .IsSubscribeToNotification;
   set IsSubscribeToNotification(int value) =>
       this
-          .Anonymous
-          .ClientCharacteristicConfiguration
-          .IsSubscribeToNotification = value;
+              .Anonymous
+              .ClientCharacteristicConfiguration
+              .IsSubscribeToNotification =
+          value;
 
   int get IsSubscribeToIndication =>
       this.Anonymous.ClientCharacteristicConfiguration.IsSubscribeToIndication;

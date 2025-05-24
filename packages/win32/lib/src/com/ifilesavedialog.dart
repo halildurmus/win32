@@ -44,22 +44,22 @@ class IFileSaveDialog extends IFileDialog {
         Pointer<NativeFunction<Int32 Function(Pointer, Pointer<COMObject> psi)>>
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<COMObject> psi)>()(
-    ptr.ref.lpVtbl,
-    psi,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<COMObject> psi)
+      >()(ptr.ref.lpVtbl, psi);
 
-  int setProperties(Pointer<COMObject> pStore) => (ptr.ref.vtable + 28)
-      .cast<
-        Pointer<
-          NativeFunction<Int32 Function(Pointer, Pointer<COMObject> pStore)>
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<COMObject> pStore)>()(
-    ptr.ref.lpVtbl,
-    pStore,
-  );
+  int setProperties(Pointer<COMObject> pStore) =>
+      (ptr.ref.vtable + 28)
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<COMObject> pStore)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<COMObject> pStore)>()(
+        ptr.ref.lpVtbl,
+        pStore,
+      );
 
   int setCollectedProperties(Pointer<COMObject> pList, int fAppendDefault) =>
       (ptr.ref.vtable + 29)
@@ -79,20 +79,19 @@ class IFileSaveDialog extends IFileDialog {
             int Function(Pointer, Pointer<COMObject> pList, int fAppendDefault)
           >()(ptr.ref.lpVtbl, pList, fAppendDefault);
 
-  int getProperties(Pointer<Pointer<COMObject>> ppStore) => (ptr.ref.vtable +
-          30)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Pointer<Pointer<COMObject>> ppStore)
-          >
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> ppStore)>()(
-    ptr.ref.lpVtbl,
-    ppStore,
-  );
+  int getProperties(Pointer<Pointer<COMObject>> ppStore) =>
+      (ptr.ref.vtable + 30)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Pointer<COMObject>> ppStore)
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<COMObject>> ppStore)
+          >()(ptr.ref.lpVtbl, ppStore);
 
   int applyProperties(
     Pointer<COMObject> psi,

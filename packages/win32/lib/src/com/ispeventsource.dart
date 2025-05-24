@@ -95,8 +95,7 @@ class ISpEventSource extends ISpNotifySource {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<SPEVENTSOURCEINFO> pInfo)>()(
-    ptr.ref.lpVtbl,
-    pInfo,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<SPEVENTSOURCEINFO> pInfo)
+      >()(ptr.ref.lpVtbl, pInfo);
 }

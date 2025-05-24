@@ -50,10 +50,9 @@ class ISpeechBaseStream extends IDispatch {
           >
         >()
         .value
-        .asFunction<int Function(Pointer, Pointer<COMObject> AudioFormat)>()(
-      ptr.ref.lpVtbl,
-      retValuePtr,
-    );
+        .asFunction<
+          int Function(Pointer, Pointer<COMObject> AudioFormat)
+        >()(ptr.ref.lpVtbl, retValuePtr);
 
     if (FAILED(hr)) {
       free(retValuePtr);
@@ -63,19 +62,20 @@ class ISpeechBaseStream extends IDispatch {
     return retValuePtr;
   }
 
-  int putref_Format(Pointer<COMObject> AudioFormat) => (ptr.ref.vtable + 8)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Pointer<COMObject> AudioFormat)
-          >
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<COMObject> AudioFormat)>()(
-    ptr.ref.lpVtbl,
-    AudioFormat,
-  );
+  int putref_Format(Pointer<COMObject> AudioFormat) =>
+      (ptr.ref.vtable + 8)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<COMObject> AudioFormat)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<COMObject> AudioFormat)>()(
+        ptr.ref.lpVtbl,
+        AudioFormat,
+      );
 
   int read(
     Pointer<VARIANT> Buffer,
@@ -104,19 +104,23 @@ class ISpeechBaseStream extends IDispatch {
         )
       >()(ptr.ref.lpVtbl, Buffer, NumberOfBytes, BytesRead);
 
-  int write(VARIANT Buffer, Pointer<Int32> BytesWritten) => (ptr.ref.vtable +
-          10)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, VARIANT Buffer, Pointer<Int32> BytesWritten)
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(Pointer, VARIANT Buffer, Pointer<Int32> BytesWritten)
-      >()(ptr.ref.lpVtbl, Buffer, BytesWritten);
+  int write(VARIANT Buffer, Pointer<Int32> BytesWritten) =>
+      (ptr.ref.vtable + 10)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  VARIANT Buffer,
+                  Pointer<Int32> BytesWritten,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, VARIANT Buffer, Pointer<Int32> BytesWritten)
+          >()(ptr.ref.lpVtbl, Buffer, BytesWritten);
 
   int seek(VARIANT Position, int Origin, Pointer<VARIANT> NewPosition) =>
       (ptr.ref.vtable + 11)

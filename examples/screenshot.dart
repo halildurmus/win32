@@ -96,14 +96,13 @@ class BmpFile {
     final bmpScreen = arena<BITMAP>();
     GetObject(hbmScreen, sizeOf<BITMAP>(), bmpScreen);
 
-    final bitmapInfoHeader =
-        arena<BITMAPINFOHEADER>()
-          ..ref.biSize = sizeOf<BITMAPINFOHEADER>()
-          ..ref.biWidth = bmpScreen.ref.bmWidth
-          ..ref.biHeight = bmpScreen.ref.bmHeight
-          ..ref.biPlanes = 1
-          ..ref.biBitCount = 32
-          ..ref.biCompression = BI_RGB;
+    final bitmapInfoHeader = arena<BITMAPINFOHEADER>()
+      ..ref.biSize = sizeOf<BITMAPINFOHEADER>()
+      ..ref.biWidth = bmpScreen.ref.bmWidth
+      ..ref.biHeight = bmpScreen.ref.bmHeight
+      ..ref.biPlanes = 1
+      ..ref.biBitCount = 32
+      ..ref.biCompression = BI_RGB;
 
     final dwBmpSize =
         ((bmpScreen.ref.bmWidth * bitmapInfoHeader.ref.biBitCount + 31) /
@@ -171,10 +170,9 @@ class BmpFile {
   }
 }
 
-typedef BmpBinary =
-    (
-      int dwBmpSize,
-      Pointer<BITMAPFILEHEADER> bitmapFileHeader,
-      Pointer<BITMAPINFOHEADER> bitmapInfoHeader,
-      Pointer<Uint8> lpBitmap,
-    );
+typedef BmpBinary = (
+  int dwBmpSize,
+  Pointer<BITMAPFILEHEADER> bitmapFileHeader,
+  Pointer<BITMAPINFOHEADER> bitmapInfoHeader,
+  Pointer<Uint8> lpBitmap,
+);

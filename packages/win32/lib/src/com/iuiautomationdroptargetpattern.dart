@@ -54,10 +54,9 @@ class IUIAutomationDropTargetPattern extends IUnknown {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<Utf16>> retVal)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -81,10 +80,9 @@ class IUIAutomationDropTargetPattern extends IUnknown {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> retVal)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Pointer<Utf16>> retVal)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 

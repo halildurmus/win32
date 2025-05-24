@@ -42,19 +42,20 @@ class IUIAutomation2 extends IUIAutomation {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = (ptr.ref.vtable + 58)
-          .cast<
-            Pointer<
-              NativeFunction<
-                Int32 Function(Pointer, Pointer<Int32> autoSetFocus)
-              >
-            >
-          >()
-          .value
-          .asFunction<int Function(Pointer, Pointer<Int32> autoSetFocus)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+      final hr =
+          (ptr.ref.vtable + 58)
+              .cast<
+                Pointer<
+                  NativeFunction<
+                    Int32 Function(Pointer, Pointer<Int32> autoSetFocus)
+                  >
+                >
+              >()
+              .value
+              .asFunction<int Function(Pointer, Pointer<Int32> autoSetFocus)>()(
+            ptr.ref.lpVtbl,
+            retValuePtr,
+          );
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -71,10 +72,9 @@ class IUIAutomation2 extends IUIAutomation {
           Pointer<NativeFunction<Int32 Function(Pointer, Int32 autoSetFocus)>>
         >()
         .value
-        .asFunction<int Function(Pointer, int autoSetFocus)>()(
-      ptr.ref.lpVtbl,
-      value,
-    );
+        .asFunction<
+          int Function(Pointer, int autoSetFocus)
+        >()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
@@ -90,10 +90,9 @@ class IUIAutomation2 extends IUIAutomation {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Uint32> timeout)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Uint32> timeout)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -105,15 +104,16 @@ class IUIAutomation2 extends IUIAutomation {
   }
 
   set connectionTimeout(int value) {
-    final hr = (ptr.ref.vtable + 61)
-        .cast<
-          Pointer<NativeFunction<Int32 Function(Pointer, Uint32 timeout)>>
-        >()
-        .value
-        .asFunction<int Function(Pointer, int timeout)>()(
-      ptr.ref.lpVtbl,
-      value,
-    );
+    final hr =
+        (ptr.ref.vtable + 61)
+            .cast<
+              Pointer<NativeFunction<Int32 Function(Pointer, Uint32 timeout)>>
+            >()
+            .value
+            .asFunction<int Function(Pointer, int timeout)>()(
+          ptr.ref.lpVtbl,
+          value,
+        );
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
@@ -129,10 +129,9 @@ class IUIAutomation2 extends IUIAutomation {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Uint32> timeout)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Uint32> timeout)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -144,15 +143,16 @@ class IUIAutomation2 extends IUIAutomation {
   }
 
   set transactionTimeout(int value) {
-    final hr = (ptr.ref.vtable + 63)
-        .cast<
-          Pointer<NativeFunction<Int32 Function(Pointer, Uint32 timeout)>>
-        >()
-        .value
-        .asFunction<int Function(Pointer, int timeout)>()(
-      ptr.ref.lpVtbl,
-      value,
-    );
+    final hr =
+        (ptr.ref.vtable + 63)
+            .cast<
+              Pointer<NativeFunction<Int32 Function(Pointer, Uint32 timeout)>>
+            >()
+            .value
+            .asFunction<int Function(Pointer, int timeout)>()(
+          ptr.ref.lpVtbl,
+          value,
+        );
 
     if (FAILED(hr)) throw WindowsException(hr);
   }

@@ -83,8 +83,7 @@ class IEnumMoniker extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> ppenum)>()(
-    ptr.ref.lpVtbl,
-    ppenum,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Pointer<COMObject>> ppenum)
+      >()(ptr.ref.lpVtbl, ppenum);
 }

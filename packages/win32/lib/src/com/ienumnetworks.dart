@@ -42,19 +42,20 @@ class IEnumNetworks extends IDispatch {
   Pointer<COMObject> get newEnum {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = (ptr.ref.vtable + 7)
-        .cast<
-          Pointer<
-            NativeFunction<
-              Int32 Function(Pointer, Pointer<COMObject> ppEnumVar)
-            >
-          >
-        >()
-        .value
-        .asFunction<int Function(Pointer, Pointer<COMObject> ppEnumVar)>()(
-      ptr.ref.lpVtbl,
-      retValuePtr,
-    );
+    final hr =
+        (ptr.ref.vtable + 7)
+            .cast<
+              Pointer<
+                NativeFunction<
+                  Int32 Function(Pointer, Pointer<COMObject> ppEnumVar)
+                >
+              >
+            >()
+            .value
+            .asFunction<int Function(Pointer, Pointer<COMObject> ppEnumVar)>()(
+          ptr.ref.lpVtbl,
+          retValuePtr,
+        );
 
     if (FAILED(hr)) {
       free(retValuePtr);

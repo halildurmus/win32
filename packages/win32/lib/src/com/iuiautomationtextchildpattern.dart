@@ -43,19 +43,20 @@ class IUIAutomationTextChildPattern extends IUnknown {
   Pointer<COMObject> get textContainer {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = (ptr.ref.vtable + 3)
-        .cast<
-          Pointer<
-            NativeFunction<
-              Int32 Function(Pointer, Pointer<COMObject> container)
-            >
-          >
-        >()
-        .value
-        .asFunction<int Function(Pointer, Pointer<COMObject> container)>()(
-      ptr.ref.lpVtbl,
-      retValuePtr,
-    );
+    final hr =
+        (ptr.ref.vtable + 3)
+            .cast<
+              Pointer<
+                NativeFunction<
+                  Int32 Function(Pointer, Pointer<COMObject> container)
+                >
+              >
+            >()
+            .value
+            .asFunction<int Function(Pointer, Pointer<COMObject> container)>()(
+          ptr.ref.lpVtbl,
+          retValuePtr,
+        );
 
     if (FAILED(hr)) {
       free(retValuePtr);
@@ -75,10 +76,9 @@ class IUIAutomationTextChildPattern extends IUnknown {
           >
         >()
         .value
-        .asFunction<int Function(Pointer, Pointer<COMObject> range)>()(
-      ptr.ref.lpVtbl,
-      retValuePtr,
-    );
+        .asFunction<
+          int Function(Pointer, Pointer<COMObject> range)
+        >()(ptr.ref.lpVtbl, retValuePtr);
 
     if (FAILED(hr)) {
       free(retValuePtr);

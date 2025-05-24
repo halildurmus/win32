@@ -77,10 +77,9 @@ class IShellItem extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> ppsi)>()(
-    ptr.ref.lpVtbl,
-    ppsi,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Pointer<COMObject>> ppsi)
+      >()(ptr.ref.lpVtbl, ppsi);
 
   int getDisplayName(int sigdnName, Pointer<Pointer<Utf16>> ppszName) =>
       (ptr.ref.vtable + 5)

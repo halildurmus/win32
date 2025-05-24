@@ -36,20 +36,21 @@ class IKnownFolderManager extends IUnknown {
   factory IKnownFolderManager.from(IUnknown interface) =>
       IKnownFolderManager(interface.toInterface(IID_IKnownFolderManager));
 
-  int folderIdFromCsidl(int nCsidl, Pointer<GUID> pfid) => (ptr.ref.vtable + 3)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Int32 nCsidl, Pointer<GUID> pfid)
-          >
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, int nCsidl, Pointer<GUID> pfid)>()(
-    ptr.ref.lpVtbl,
-    nCsidl,
-    pfid,
-  );
+  int folderIdFromCsidl(int nCsidl, Pointer<GUID> pfid) =>
+      (ptr.ref.vtable + 3)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Int32 nCsidl, Pointer<GUID> pfid)
+              >
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, int nCsidl, Pointer<GUID> pfid)>()(
+        ptr.ref.lpVtbl,
+        nCsidl,
+        pfid,
+      );
 
   int folderIdToCsidl(Pointer<GUID> rfid, Pointer<Int32> pnCsidl) =>
       (ptr.ref.vtable + 4)
@@ -161,15 +162,16 @@ class IKnownFolderManager extends IUnknown {
         )
       >()(ptr.ref.lpVtbl, rfid, pKFD);
 
-  int unregisterFolder(Pointer<GUID> rfid) => (ptr.ref.vtable + 9)
-      .cast<
-        Pointer<NativeFunction<Int32 Function(Pointer, Pointer<GUID> rfid)>>
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<GUID> rfid)>()(
-    ptr.ref.lpVtbl,
-    rfid,
-  );
+  int unregisterFolder(Pointer<GUID> rfid) =>
+      (ptr.ref.vtable + 9)
+          .cast<
+            Pointer<NativeFunction<Int32 Function(Pointer, Pointer<GUID> rfid)>>
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<GUID> rfid)>()(
+        ptr.ref.lpVtbl,
+        rfid,
+      );
 
   int findFolderFromPath(
     Pointer<Utf16> pszPath,
@@ -230,45 +232,46 @@ class IKnownFolderManager extends IUnknown {
     int cFolders,
     Pointer<GUID> pExclusion,
     Pointer<Pointer<Utf16>> ppszError,
-  ) => (ptr.ref.vtable + 12)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  ) =>
+      (ptr.ref.vtable + 12)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<GUID> rfid,
+                  IntPtr hwnd,
+                  Uint32 flags,
+                  Pointer<Utf16> pszTargetPath,
+                  Uint32 cFolders,
+                  Pointer<GUID> pExclusion,
+                  Pointer<Pointer<Utf16>> ppszError,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
               Pointer<GUID> rfid,
-              IntPtr hwnd,
-              Uint32 flags,
+              int hwnd,
+              int flags,
               Pointer<Utf16> pszTargetPath,
-              Uint32 cFolders,
+              int cFolders,
               Pointer<GUID> pExclusion,
               Pointer<Pointer<Utf16>> ppszError,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(
-          Pointer,
-          Pointer<GUID> rfid,
-          int hwnd,
-          int flags,
-          Pointer<Utf16> pszTargetPath,
-          int cFolders,
-          Pointer<GUID> pExclusion,
-          Pointer<Pointer<Utf16>> ppszError,
-        )
-      >()(
-    ptr.ref.lpVtbl,
-    rfid,
-    hwnd,
-    flags,
-    pszTargetPath,
-    cFolders,
-    pExclusion,
-    ppszError,
-  );
+          >()(
+        ptr.ref.lpVtbl,
+        rfid,
+        hwnd,
+        flags,
+        pszTargetPath,
+        cFolders,
+        pExclusion,
+        ppszError,
+      );
 }
 
 /// @nodoc

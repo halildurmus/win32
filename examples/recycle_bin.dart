@@ -17,8 +17,8 @@ class RecycleBinInfo {
 
 RecycleBinInfo queryRecycleBin(String rootPath) {
   final pszRootPath = rootPath.toNativeUtf16();
-  final pSHQueryRBInfo =
-      calloc<SHQUERYRBINFO>()..ref.cbSize = sizeOf<SHQUERYRBINFO>();
+  final pSHQueryRBInfo = calloc<SHQUERYRBINFO>()
+    ..ref.cbSize = sizeOf<SHQUERYRBINFO>();
 
   try {
     final hr = SHQueryRecycleBin(pszRootPath, pSHQueryRBInfo);
@@ -59,13 +59,12 @@ String getTempFileName() {
 bool recycleFile(String file) {
   final hwnd = GetActiveWindow();
   final pFrom = [file].toWideCharArray();
-  final lpFileOp =
-      calloc<SHFILEOPSTRUCT>()
-        ..ref.hwnd = hwnd
-        ..ref.wFunc = FO_DELETE
-        ..ref.pFrom = pFrom
-        ..ref.pTo = nullptr
-        ..ref.fFlags = FOF_ALLOWUNDO;
+  final lpFileOp = calloc<SHFILEOPSTRUCT>()
+    ..ref.hwnd = hwnd
+    ..ref.wFunc = FO_DELETE
+    ..ref.pFrom = pFrom
+    ..ref.pTo = nullptr
+    ..ref.fFlags = FOF_ALLOWUNDO;
 
   try {
     final result = SHFileOperation(lpFileOp);

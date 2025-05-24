@@ -80,48 +80,49 @@ class IMetaDataImport2 extends IMetaDataImport {
     Pointer<Utf16> wzname,
     int cchName,
     Pointer<Uint32> pchName,
-  ) => (ptr.ref.vtable + 66)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  ) =>
+      (ptr.ref.vtable + 66)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Uint32 gp,
+                  Pointer<Uint32> pulParamSeq,
+                  Pointer<Uint32> pdwParamFlags,
+                  Pointer<Uint32> ptOwner,
+                  Pointer<Uint32> reserved,
+                  Pointer<Utf16> wzname,
+                  Uint32 cchName,
+                  Pointer<Uint32> pchName,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
-              Uint32 gp,
+              int gp,
               Pointer<Uint32> pulParamSeq,
               Pointer<Uint32> pdwParamFlags,
               Pointer<Uint32> ptOwner,
               Pointer<Uint32> reserved,
               Pointer<Utf16> wzname,
-              Uint32 cchName,
+              int cchName,
               Pointer<Uint32> pchName,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(
-          Pointer,
-          int gp,
-          Pointer<Uint32> pulParamSeq,
-          Pointer<Uint32> pdwParamFlags,
-          Pointer<Uint32> ptOwner,
-          Pointer<Uint32> reserved,
-          Pointer<Utf16> wzname,
-          int cchName,
-          Pointer<Uint32> pchName,
-        )
-      >()(
-    ptr.ref.lpVtbl,
-    gp,
-    pulParamSeq,
-    pdwParamFlags,
-    ptOwner,
-    reserved,
-    wzname,
-    cchName,
-    pchName,
-  );
+          >()(
+        ptr.ref.lpVtbl,
+        gp,
+        pulParamSeq,
+        pdwParamFlags,
+        ptOwner,
+        reserved,
+        wzname,
+        cchName,
+        pchName,
+      );
 
   int getMethodSpecProps(
     int mi,
@@ -159,39 +160,40 @@ class IMetaDataImport2 extends IMetaDataImport {
     Pointer<Uint32> rGenericParamConstraints,
     int cMax,
     Pointer<Uint32> pcGenericParamConstraints,
-  ) => (ptr.ref.vtable + 68)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  ) =>
+      (ptr.ref.vtable + 68)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<Pointer> phEnum,
+                  Uint32 tk,
+                  Pointer<Uint32> rGenericParamConstraints,
+                  Uint32 cMax,
+                  Pointer<Uint32> pcGenericParamConstraints,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
               Pointer<Pointer> phEnum,
-              Uint32 tk,
+              int tk,
               Pointer<Uint32> rGenericParamConstraints,
-              Uint32 cMax,
+              int cMax,
               Pointer<Uint32> pcGenericParamConstraints,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(
-          Pointer,
-          Pointer<Pointer> phEnum,
-          int tk,
-          Pointer<Uint32> rGenericParamConstraints,
-          int cMax,
-          Pointer<Uint32> pcGenericParamConstraints,
-        )
-      >()(
-    ptr.ref.lpVtbl,
-    phEnum,
-    tk,
-    rGenericParamConstraints,
-    cMax,
-    pcGenericParamConstraints,
-  );
+          >()(
+        ptr.ref.lpVtbl,
+        phEnum,
+        tk,
+        rGenericParamConstraints,
+        cMax,
+        pcGenericParamConstraints,
+      );
 
   int getGenericParamConstraintProps(
     int gpc,

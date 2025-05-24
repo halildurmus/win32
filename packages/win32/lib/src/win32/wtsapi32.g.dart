@@ -29,10 +29,11 @@ final _wtsapi32 = DynamicLibrary.open('wtsapi32.dll');
 int WTSRegisterSessionNotification(int hWnd, int dwFlags) =>
     _WTSRegisterSessionNotification(hWnd, dwFlags);
 
-final _WTSRegisterSessionNotification = _wtsapi32.lookupFunction<
-  Int32 Function(IntPtr hWnd, Uint32 dwFlags),
-  int Function(int hWnd, int dwFlags)
->('WTSRegisterSessionNotification');
+final _WTSRegisterSessionNotification = _wtsapi32
+    .lookupFunction<
+      Int32 Function(IntPtr hWnd, Uint32 dwFlags),
+      int Function(int hWnd, int dwFlags)
+    >('WTSRegisterSessionNotification');
 
 /// Unregisters the specified window so that it receives no further session
 /// change notifications.

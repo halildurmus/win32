@@ -17,9 +17,8 @@ String addressAsString(Array<Uint8> bluetoothAddress) {
 }
 
 List<int> findBluetoothRadios() {
-  final findRadioParams =
-      calloc<BLUETOOTH_FIND_RADIO_PARAMS>()
-        ..ref.dwSize = sizeOf<BLUETOOTH_FIND_RADIO_PARAMS>();
+  final findRadioParams = calloc<BLUETOOTH_FIND_RADIO_PARAMS>()
+    ..ref.dwSize = sizeOf<BLUETOOTH_FIND_RADIO_PARAMS>();
 
   final radioHandles = <int>[];
 
@@ -46,9 +45,8 @@ List<int> findBluetoothRadios() {
 }
 
 void findRadioInfo(int hRadio) {
-  final radioInfo =
-      calloc<BLUETOOTH_RADIO_INFO>()
-        ..ref.dwSize = sizeOf<BLUETOOTH_RADIO_INFO>();
+  final radioInfo = calloc<BLUETOOTH_RADIO_INFO>()
+    ..ref.dwSize = sizeOf<BLUETOOTH_RADIO_INFO>();
 
   try {
     final res = BluetoothGetRadioInfo(hRadio, radioInfo);
@@ -81,18 +79,16 @@ void printBluetoothDeviceInfo(BLUETOOTH_DEVICE_INFO info) {
 }
 
 void findBluetoothDevices() {
-  final params =
-      calloc<BLUETOOTH_DEVICE_SEARCH_PARAMS>()
-        ..ref.dwSize = sizeOf<BLUETOOTH_DEVICE_SEARCH_PARAMS>()
-        ..ref.fReturnConnected = TRUE
-        ..ref.fReturnAuthenticated = TRUE
-        ..ref.fReturnRemembered = TRUE
-        ..ref.fReturnUnknown = TRUE
-        ..ref.fIssueInquiry = TRUE
-        ..ref.cTimeoutMultiplier = 1;
-  final info =
-      calloc<BLUETOOTH_DEVICE_INFO>()
-        ..ref.dwSize = sizeOf<BLUETOOTH_DEVICE_INFO>();
+  final params = calloc<BLUETOOTH_DEVICE_SEARCH_PARAMS>()
+    ..ref.dwSize = sizeOf<BLUETOOTH_DEVICE_SEARCH_PARAMS>()
+    ..ref.fReturnConnected = TRUE
+    ..ref.fReturnAuthenticated = TRUE
+    ..ref.fReturnRemembered = TRUE
+    ..ref.fReturnUnknown = TRUE
+    ..ref.fIssueInquiry = TRUE
+    ..ref.cTimeoutMultiplier = 1;
+  final info = calloc<BLUETOOTH_DEVICE_INFO>()
+    ..ref.dwSize = sizeOf<BLUETOOTH_DEVICE_INFO>();
 
   try {
     final firstDeviceHandle = BluetoothFindFirstDevice(params, info);

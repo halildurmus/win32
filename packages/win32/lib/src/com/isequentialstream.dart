@@ -56,22 +56,27 @@ class ISequentialStream extends IUnknown {
         int Function(Pointer, Pointer pv, int cb, Pointer<Uint32> pcbRead)
       >()(ptr.ref.lpVtbl, pv, cb, pcbRead);
 
-  int write(Pointer pv, int cb, Pointer<Uint32> pcbWritten) => (ptr.ref.vtable +
-          4)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  int write(Pointer pv, int cb, Pointer<Uint32> pcbWritten) =>
+      (ptr.ref.vtable + 4)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer pv,
+                  Uint32 cb,
+                  Pointer<Uint32> pcbWritten,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
               Pointer pv,
-              Uint32 cb,
+              int cb,
               Pointer<Uint32> pcbWritten,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(Pointer, Pointer pv, int cb, Pointer<Uint32> pcbWritten)
-      >()(ptr.ref.lpVtbl, pv, cb, pcbWritten);
+          >()(ptr.ref.lpVtbl, pv, cb, pcbWritten);
 }

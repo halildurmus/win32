@@ -51,10 +51,9 @@ class IUIAutomationBoolCondition extends IUIAutomationCondition {
             >
           >()
           .value
-          .asFunction<int Function(Pointer, Pointer<Int32> boolVal)>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+          .asFunction<
+            int Function(Pointer, Pointer<Int32> boolVal)
+          >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 

@@ -71,10 +71,9 @@ class ISpeechObjectToken extends IDispatch {
           >
         >()
         .value
-        .asFunction<int Function(Pointer, Pointer<COMObject> DataKey)>()(
-      ptr.ref.lpVtbl,
-      retValuePtr,
-    );
+        .asFunction<
+          int Function(Pointer, Pointer<COMObject> DataKey)
+        >()(ptr.ref.lpVtbl, retValuePtr);
 
     if (FAILED(hr)) {
       free(retValuePtr);
@@ -94,10 +93,9 @@ class ISpeechObjectToken extends IDispatch {
           >
         >()
         .value
-        .asFunction<int Function(Pointer, Pointer<COMObject> Category)>()(
-      ptr.ref.lpVtbl,
-      retValuePtr,
-    );
+        .asFunction<
+          int Function(Pointer, Pointer<COMObject> Category)
+        >()(ptr.ref.lpVtbl, retValuePtr);
 
     if (FAILED(hr)) {
       free(retValuePtr);
@@ -216,10 +214,9 @@ class ISpeechObjectToken extends IDispatch {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Utf16> ObjectStorageCLSID)>()(
-    ptr.ref.lpVtbl,
-    ObjectStorageCLSID,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Utf16> ObjectStorageCLSID)
+      >()(ptr.ref.lpVtbl, ObjectStorageCLSID);
 
   int getStorageFileName(
     Pointer<Utf16> ObjectStorageCLSID,
@@ -227,39 +224,40 @@ class ISpeechObjectToken extends IDispatch {
     Pointer<Utf16> FileName,
     int Folder,
     Pointer<Pointer<Utf16>> FilePath,
-  ) => (ptr.ref.vtable + 15)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  ) =>
+      (ptr.ref.vtable + 15)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<Utf16> ObjectStorageCLSID,
+                  Pointer<Utf16> KeyName,
+                  Pointer<Utf16> FileName,
+                  Int32 Folder,
+                  Pointer<Pointer<Utf16>> FilePath,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
               Pointer<Utf16> ObjectStorageCLSID,
               Pointer<Utf16> KeyName,
               Pointer<Utf16> FileName,
-              Int32 Folder,
+              int Folder,
               Pointer<Pointer<Utf16>> FilePath,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(
-          Pointer,
-          Pointer<Utf16> ObjectStorageCLSID,
-          Pointer<Utf16> KeyName,
-          Pointer<Utf16> FileName,
-          int Folder,
-          Pointer<Pointer<Utf16>> FilePath,
-        )
-      >()(
-    ptr.ref.lpVtbl,
-    ObjectStorageCLSID,
-    KeyName,
-    FileName,
-    Folder,
-    FilePath,
-  );
+          >()(
+        ptr.ref.lpVtbl,
+        ObjectStorageCLSID,
+        KeyName,
+        FileName,
+        Folder,
+        FilePath,
+      );
 
   int removeStorageFileName(
     Pointer<Utf16> ObjectStorageCLSID,

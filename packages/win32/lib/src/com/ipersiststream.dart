@@ -43,17 +43,18 @@ class IPersistStream extends IPersist {
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  int load(Pointer<COMObject> pStm) => (ptr.ref.vtable + 5)
-      .cast<
-        Pointer<
-          NativeFunction<Int32 Function(Pointer, Pointer<COMObject> pStm)>
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<COMObject> pStm)>()(
-    ptr.ref.lpVtbl,
-    pStm,
-  );
+  int load(Pointer<COMObject> pStm) =>
+      (ptr.ref.vtable + 5)
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<COMObject> pStm)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<COMObject> pStm)>()(
+        ptr.ref.lpVtbl,
+        pStm,
+      );
 
   int save(Pointer<COMObject> pStm, int fClearDirty) => (ptr.ref.vtable + 6)
       .cast<
@@ -68,15 +69,16 @@ class IPersistStream extends IPersist {
         int Function(Pointer, Pointer<COMObject> pStm, int fClearDirty)
       >()(ptr.ref.lpVtbl, pStm, fClearDirty);
 
-  int getSizeMax(Pointer<Uint64> pcbSize) => (ptr.ref.vtable + 7)
-      .cast<
-        Pointer<
-          NativeFunction<Int32 Function(Pointer, Pointer<Uint64> pcbSize)>
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Uint64> pcbSize)>()(
-    ptr.ref.lpVtbl,
-    pcbSize,
-  );
+  int getSizeMax(Pointer<Uint64> pcbSize) =>
+      (ptr.ref.vtable + 7)
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Uint64> pcbSize)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Uint64> pcbSize)>()(
+        ptr.ref.lpVtbl,
+        pcbSize,
+      );
 }

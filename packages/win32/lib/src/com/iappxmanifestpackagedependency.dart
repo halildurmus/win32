@@ -46,10 +46,9 @@ class IAppxManifestPackageDependency extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> name)>()(
-    ptr.ref.lpVtbl,
-    name,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Pointer<Utf16>> name)
+      >()(ptr.ref.lpVtbl, name);
 
   int getPublisher(Pointer<Pointer<Utf16>> publisher) => (ptr.ref.vtable + 4)
       .cast<
@@ -60,10 +59,9 @@ class IAppxManifestPackageDependency extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> publisher)>()(
-    ptr.ref.lpVtbl,
-    publisher,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Pointer<Utf16>> publisher)
+      >()(ptr.ref.lpVtbl, publisher);
 
   int getMinVersion(Pointer<Uint64> minVersion) => (ptr.ref.vtable + 5)
       .cast<
@@ -72,8 +70,7 @@ class IAppxManifestPackageDependency extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Uint64> minVersion)>()(
-    ptr.ref.lpVtbl,
-    minVersion,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Uint64> minVersion)
+      >()(ptr.ref.lpVtbl, minVersion);
 }

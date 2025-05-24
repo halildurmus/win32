@@ -45,8 +45,7 @@ class IShellService extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<COMObject> punkOwner)>()(
-    ptr.ref.lpVtbl,
-    punkOwner,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<COMObject> punkOwner)
+      >()(ptr.ref.lpVtbl, punkOwner);
 }

@@ -115,15 +115,14 @@ int registerHostWindowClass(
   int hInstance,
   Pointer<NativeFunction<WNDPROC>> lpfnWndProc,
 ) {
-  final wcex =
-      calloc<WNDCLASSEX>()
-        ..ref.cbSize = sizeOf<WNDCLASSEX>()
-        ..ref.style = CS_HREDRAW | CS_VREDRAW
-        ..ref.lpfnWndProc = lpfnWndProc
-        ..ref.hInstance = hInstance
-        ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
-        ..ref.hbrBackground = COLOR_BTNFACE + 1
-        ..ref.lpszClassName = windowClassName;
+  final wcex = calloc<WNDCLASSEX>()
+    ..ref.cbSize = sizeOf<WNDCLASSEX>()
+    ..ref.style = CS_HREDRAW | CS_VREDRAW
+    ..ref.lpfnWndProc = lpfnWndProc
+    ..ref.hInstance = hInstance
+    ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
+    ..ref.hbrBackground = COLOR_BTNFACE + 1
+    ..ref.lpszClassName = windowClassName;
 
   return RegisterClassEx(wcex);
 }

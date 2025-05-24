@@ -46,42 +46,43 @@ class IAudioClient extends IUnknown {
     int hnsPeriodicity,
     Pointer<WAVEFORMATEX> pFormat,
     Pointer<GUID> AudioSessionGuid,
-  ) => (ptr.ref.vtable + 3)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(
+  ) =>
+      (ptr.ref.vtable + 3)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Int32 ShareMode,
+                  Uint32 StreamFlags,
+                  Int64 hnsBufferDuration,
+                  Int64 hnsPeriodicity,
+                  Pointer<WAVEFORMATEX> pFormat,
+                  Pointer<GUID> AudioSessionGuid,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(
               Pointer,
-              Int32 ShareMode,
-              Uint32 StreamFlags,
-              Int64 hnsBufferDuration,
-              Int64 hnsPeriodicity,
+              int ShareMode,
+              int StreamFlags,
+              int hnsBufferDuration,
+              int hnsPeriodicity,
               Pointer<WAVEFORMATEX> pFormat,
               Pointer<GUID> AudioSessionGuid,
             )
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(
-          Pointer,
-          int ShareMode,
-          int StreamFlags,
-          int hnsBufferDuration,
-          int hnsPeriodicity,
-          Pointer<WAVEFORMATEX> pFormat,
-          Pointer<GUID> AudioSessionGuid,
-        )
-      >()(
-    ptr.ref.lpVtbl,
-    ShareMode,
-    StreamFlags,
-    hnsBufferDuration,
-    hnsPeriodicity,
-    pFormat,
-    AudioSessionGuid,
-  );
+          >()(
+        ptr.ref.lpVtbl,
+        ShareMode,
+        StreamFlags,
+        hnsBufferDuration,
+        hnsPeriodicity,
+        pFormat,
+        AudioSessionGuid,
+      );
 
   int getBufferSize(Pointer<Uint32> pNumBufferFrames) => (ptr.ref.vtable + 4)
       .cast<
@@ -92,10 +93,9 @@ class IAudioClient extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Uint32> pNumBufferFrames)>()(
-    ptr.ref.lpVtbl,
-    pNumBufferFrames,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Uint32> pNumBufferFrames)
+      >()(ptr.ref.lpVtbl, pNumBufferFrames);
 
   int getStreamLatency(Pointer<Int64> phnsLatency) => (ptr.ref.vtable + 5)
       .cast<
@@ -104,25 +104,23 @@ class IAudioClient extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<Int64> phnsLatency)>()(
-    ptr.ref.lpVtbl,
-    phnsLatency,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<Int64> phnsLatency)
+      >()(ptr.ref.lpVtbl, phnsLatency);
 
-  int getCurrentPadding(Pointer<Uint32> pNumPaddingFrames) => (ptr.ref.vtable +
-          6)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Pointer<Uint32> pNumPaddingFrames)
-          >
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Uint32> pNumPaddingFrames)>()(
-    ptr.ref.lpVtbl,
-    pNumPaddingFrames,
-  );
+  int getCurrentPadding(Pointer<Uint32> pNumPaddingFrames) =>
+      (ptr.ref.vtable + 6)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(Pointer, Pointer<Uint32> pNumPaddingFrames)
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<Uint32> pNumPaddingFrames)
+          >()(ptr.ref.lpVtbl, pNumPaddingFrames);
 
   int isFormatSupported(
     int ShareMode,
@@ -207,27 +205,32 @@ class IAudioClient extends IUnknown {
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  int setEventHandle(int eventHandle) => (ptr.ref.vtable + 13)
-      .cast<
-        Pointer<NativeFunction<Int32 Function(Pointer, IntPtr eventHandle)>>
-      >()
-      .value
-      .asFunction<int Function(Pointer, int eventHandle)>()(
-    ptr.ref.lpVtbl,
-    eventHandle,
-  );
+  int setEventHandle(int eventHandle) =>
+      (ptr.ref.vtable + 13)
+          .cast<
+            Pointer<NativeFunction<Int32 Function(Pointer, IntPtr eventHandle)>>
+          >()
+          .value
+          .asFunction<int Function(Pointer, int eventHandle)>()(
+        ptr.ref.lpVtbl,
+        eventHandle,
+      );
 
-  int getService(Pointer<GUID> riid, Pointer<Pointer> ppv) => (ptr.ref.vtable +
-          14)
-      .cast<
-        Pointer<
-          NativeFunction<
-            Int32 Function(Pointer, Pointer<GUID> riid, Pointer<Pointer> ppv)
-          >
-        >
-      >()
-      .value
-      .asFunction<
-        int Function(Pointer, Pointer<GUID> riid, Pointer<Pointer> ppv)
-      >()(ptr.ref.lpVtbl, riid, ppv);
+  int getService(Pointer<GUID> riid, Pointer<Pointer> ppv) =>
+      (ptr.ref.vtable + 14)
+          .cast<
+            Pointer<
+              NativeFunction<
+                Int32 Function(
+                  Pointer,
+                  Pointer<GUID> riid,
+                  Pointer<Pointer> ppv,
+                )
+              >
+            >
+          >()
+          .value
+          .asFunction<
+            int Function(Pointer, Pointer<GUID> riid, Pointer<Pointer> ppv)
+          >()(ptr.ref.lpVtbl, riid, ppv);
 }

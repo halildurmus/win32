@@ -3,15 +3,15 @@ description: Service Manager CLI
 publish_to: none
 
 environment:
-  sdk: ^3.4.0
+  sdk: ^3.8.0
 
 dependencies:
-  ffi: ^2.1.2
+  ffi: ^2.1.4
   win32:
     path: ../../packages/win32
 
 dev_dependencies:
-  lints: ^5.0.0
+  lints: ^5.1.1
 
 executables:
   service_manager_cli:

@@ -37,17 +37,18 @@ class IMMDeviceCollection extends IUnknown {
   factory IMMDeviceCollection.from(IUnknown interface) =>
       IMMDeviceCollection(interface.toInterface(IID_IMMDeviceCollection));
 
-  int getCount(Pointer<Uint32> pcDevices) => (ptr.ref.vtable + 3)
-      .cast<
-        Pointer<
-          NativeFunction<Int32 Function(Pointer, Pointer<Uint32> pcDevices)>
-        >
-      >()
-      .value
-      .asFunction<int Function(Pointer, Pointer<Uint32> pcDevices)>()(
-    ptr.ref.lpVtbl,
-    pcDevices,
-  );
+  int getCount(Pointer<Uint32> pcDevices) =>
+      (ptr.ref.vtable + 3)
+          .cast<
+            Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Uint32> pcDevices)>
+            >
+          >()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Uint32> pcDevices)>()(
+        ptr.ref.lpVtbl,
+        pcDevices,
+      );
 
   int item(int nDevice, Pointer<Pointer<COMObject>> ppDevice) =>
       (ptr.ref.vtable + 4)

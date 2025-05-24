@@ -116,10 +116,9 @@ class ISensorManager extends IUnknown {
         >
       >()
       .value
-      .asFunction<int Function(Pointer, Pointer<COMObject> pEvents)>()(
-    ptr.ref.lpVtbl,
-    pEvents,
-  );
+      .asFunction<
+        int Function(Pointer, Pointer<COMObject> pEvents)
+      >()(ptr.ref.lpVtbl, pEvents);
 
   int requestPermissions(
     int hParent,
