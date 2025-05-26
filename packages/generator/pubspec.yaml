@@ -17,7 +17,7 @@ dependencies:
   ffi: ^2.1.4
 
   # Windows metadata for automatically generating API signatures.
-  winmd: ^6.1.0
+  winmd: ^7.0.0
 
 dev_dependencies:
   # Help ensure that the code is well-written.
