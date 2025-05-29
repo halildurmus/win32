@@ -291,6 +291,8 @@
     "Windows.Win32.System.DataExchange.METAFILEPICT": "Defines the metafile picture format used for exchanging metafile data through the clipboard.",
     "Windows.Win32.System.Diagnostics.Debug.MODLOAD_DATA": "Contains module data.",
     "Windows.Win32.System.Diagnostics.Debug.SYMBOL_INFOW": "Contains symbol information.",
+    "Windows.Win32.System.EventLog.EVT_RPC_LOGIN": "Contains the information used to connect to a remote computer.",
+    "Windows.Win32.System.EventLog.EVT_VARIANT": "Contains event data or property values.",
     "Windows.Win32.System.IO.OVERLAPPED": "Contains information used in asynchronous (or overlapped) input and output (I/O).",
     "Windows.Win32.System.IO.OVERLAPPED_ENTRY": "Contains the information returned by a call to the GetQueuedCompletionStatusEx function.",
     "Windows.Win32.System.Ioctl.DISK_EXTENT": "Represents a disk extent.",

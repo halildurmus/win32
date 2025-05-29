@@ -143,6 +143,14 @@ visit [pub.dev] to explore packages that depend on it.
 [usb_drive.dart]: https://github.com/halildurmus/win32/blob/main/examples/usb_drive.dart
 [window.dart]: https://github.com/halildurmus/win32/blob/main/examples/window.dart
 
+## Misc
+
+| Example               | Description                                |
+| --------------------- | ------------------------------------------ |
+| [events.dart]         | Queries for events from a specific channel |
+
+[events.dart]: https://github.com/halildurmus/win32/blob/main/examples/events.dart
+
 ## COM APIs
 
 | Example             | Description                                                              |
