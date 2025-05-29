@@ -13397,3 +13397,211 @@ const PATHCCH_ENSURE_TRAILING_SLASH = 0x00000020;
 
 /// Convert forward slashes to back slashes and collapse multiple slashes.
 const PATHCCH_CANONICALIZE_SLASHES = 0x00000040;
+
+/// Defines the types of connection methods you can use to connect to the remote
+/// computer.
+extension type const EVT_LOGIN_CLASS(int _) implements int {}
+
+/// Use Remote Procedure Call (RPC) login.
+const EvtRpcLogin = EVT_LOGIN_CLASS(1);
+
+/// Defines the relative position in the result set from which to seek.
+extension type const EVT_SEEK_FLAGS(int _) implements int {}
+
+/// Seek to the specified offset from the first entry in the result set.
+///
+/// The offset must be a positive value.
+const EvtSeekRelativeToFirst = EVT_SEEK_FLAGS(1);
+
+/// Seek to the specified offset from the last entry in the result set.
+///
+/// The offset must be a negative value.
+const EvtSeekRelativeToLast = EVT_SEEK_FLAGS(2);
+
+/// Seek to the specified offset from the current entry in the result set.
+///
+/// The offset can be a positive or negative value.
+const EvtSeekRelativeToCurrent = EVT_SEEK_FLAGS(3);
+
+/// Seek to the specified offset from the bookmarked entry in the result set.
+///
+/// The offset can be a positive or negative value.
+const EvtSeekRelativeToBookmark = EVT_SEEK_FLAGS(4);
+
+/// A bitmask that you can use to determine which of the following flags is set:
+/// * EvtSeekRelativeToFirst
+/// * EvtSeekRelativeToLast
+/// * EvtSeekRelativeToBookmark
+const EvtSeekOriginMask = EVT_SEEK_FLAGS(7);
+
+/// Force the function to fail if the event does not exist.
+const EvtSeekStrict = EVT_SEEK_FLAGS(0x10000);
+
+/// Defines the values that specify how to return the query results and whether
+/// you are query against a channel or log file.
+extension type const EVT_QUERY_FLAGS(int _) implements int {}
+
+/// Specifies that the query is against one or more channels.
+///
+/// The `Path` parameter of the `EvtQuery` function must specify the name of a
+/// channel or `NULL`.
+const EvtQueryChannelPath = EVT_QUERY_FLAGS(1);
+
+/// Specifies that the query is against one or more log files.
+///
+/// The `Path` parameter of the `EvtQuery` function must specify the full path
+/// to a log file or `NULL`.
+const EvtQueryFilePath = EVT_QUERY_FLAGS(2);
+
+/// Specifies that the events in the query result are ordered from oldest to
+/// newest.
+///
+/// This is the default.
+const EvtQueryForwardDirection = EVT_QUERY_FLAGS(0x100);
+
+/// Specifies that the events in the query result are ordered from newest to
+/// oldest.
+const EvtQueryReverseDirection = EVT_QUERY_FLAGS(0x200);
+
+/// Specifies that `EvtQuery` should run the query even if the part of the query
+/// generates an error (is not well formed).
+const EvtQueryTolerateQueryErrors = EVT_QUERY_FLAGS(0x1000);
+
+/// Defines the identifiers that identify the query information that you can
+/// retrieve.
+extension type const EVT_QUERY_PROPERTY_ID(int _) implements int {}
+
+/// Identifies the property that contains the list of channel or log file names
+/// that are specified in the query.
+///
+/// The variant type for this property is
+/// `EvtVarTypeString` | `EVT_VARIANT_TYPE_ARRAY`.
+const EvtQueryNames = EVT_QUERY_PROPERTY_ID(0);
+
+/// Identifies the property that contains the list of Win32 error codes that
+/// correspond directly to the list of channel or log file names that the
+/// `EvtQueryNames` property returns.
+///
+/// The error codes indicate the success or failure of the query for the
+/// specific channel or log file. The variant type for this property is
+/// `EvtVarTypeUInt32` | `EVT_VARIANT_TYPE_ARRAY`.
+const EvtQueryStatuses = EVT_QUERY_PROPERTY_ID(1);
+
+/// This enumeration value marks the end of the enumeration values.
+const EvtQueryPropertyIdEND = EVT_QUERY_PROPERTY_ID(2);
+
+/// Defines the values that specify the type of information to access from the
+/// event.
+///
+/// These flags cannot be combined.
+extension type const EVT_RENDER_CONTEXT_FLAGS(int _) implements int {}
+
+/// Render specific properties from the event.
+const EvtRenderContextValues = EVT_RENDER_CONTEXT_FLAGS(0);
+
+/// Render the system properties under the System element.
+///
+/// The properties are returned in the order defined in the
+/// `EVT_SYSTEM_PROPERTY_ID` enumeration.
+const EvtRenderContextSystem = EVT_RENDER_CONTEXT_FLAGS(1);
+
+/// Render all user-defined properties under the `UserData` or `EventData`
+/// element.
+///
+/// If the data template associated with the event contains a `UserData`
+/// section, the `UserData` properties are rendered; otherwise, the
+/// `EventData` properties are rendered.
+const EvtRenderContextUser = EVT_RENDER_CONTEXT_FLAGS(2);
+
+/// Defines the values that specify what to render.
+extension type const EVT_RENDER_FLAGS(int _) implements int {}
+
+/// Render the event properties specified in the rendering context.
+const EvtRenderEventValues = EVT_RENDER_FLAGS(0);
+
+/// Render the event as an XML string.
+const EvtRenderEventXml = EVT_RENDER_FLAGS(1);
+
+/// Render the bookmark as an XML string, so that you can easily persist the
+/// bookmark for use later.
+const EvtRenderBookmark = EVT_RENDER_FLAGS(2);
+
+/// Defines the possible data types of a variant data item.
+extension type const EVT_VARIANT_TYPE(int _) implements int {}
+
+/// Null content that implies that the element that contains the content does
+/// not exist.
+const EvtVarTypeNull = EVT_VARIANT_TYPE(0);
+
+/// A null-terminated Unicode string.
+const EvtVarTypeString = EVT_VARIANT_TYPE(1);
+
+/// A null-terminated ANSI string.
+const EvtVarTypeAnsiString = EVT_VARIANT_TYPE(2);
+
+/// A signed 8-bit integer value.
+const EvtVarTypeSByte = EVT_VARIANT_TYPE(3);
+
+/// An unsigned 8-bit integer value.
+const EvtVarTypeByte = EVT_VARIANT_TYPE(4);
+
+/// A signed 16-bit integer value.
+const EvtVarTypeInt16 = EVT_VARIANT_TYPE(5);
+
+/// An unsigned 16-bit integer value.
+const EvtVarTypeUInt16 = EVT_VARIANT_TYPE(6);
+
+/// A signed 32-bit integer value.
+const EvtVarTypeInt32 = EVT_VARIANT_TYPE(7);
+
+/// An unsigned 32-bit integer value.
+const EvtVarTypeUInt32 = EVT_VARIANT_TYPE(8);
+
+/// A signed 64-bit integer value.
+const EvtVarTypeInt64 = EVT_VARIANT_TYPE(9);
+
+/// An unsigned 64-bit integer value.
+const EvtVarTypeUInt64 = EVT_VARIANT_TYPE(10);
+
+/// A single-precision real value.
+const EvtVarTypeSingle = EVT_VARIANT_TYPE(11);
+
+/// A double-precision real value.
+const EvtVarTypeDouble = EVT_VARIANT_TYPE(12);
+
+/// A Boolean value.
+const EvtVarTypeBoolean = EVT_VARIANT_TYPE(13);
+
+/// A hexadecimal binary value.
+const EvtVarTypeBinary = EVT_VARIANT_TYPE(14);
+
+/// A `GUID` value.
+const EvtVarTypeGuid = EVT_VARIANT_TYPE(15);
+
+/// An unsigned 32-bit or 64-bit integer value that contains a pointer address.
+const EvtVarTypeSizeT = EVT_VARIANT_TYPE(16);
+
+/// A `FILETIME` value.
+const EvtVarTypeFileTime = EVT_VARIANT_TYPE(17);
+
+/// A `SYSTEMTIME` value.
+const EvtVarTypeSysTime = EVT_VARIANT_TYPE(18);
+
+/// A security identifier (SID) structure.
+const EvtVarTypeSid = EVT_VARIANT_TYPE(19);
+
+/// A 32-bit hexadecimal number.
+const EvtVarTypeHexInt32 = EVT_VARIANT_TYPE(20);
+
+/// A 64-bit hexadecimal number.
+const EvtVarTypeHexInt64 = EVT_VARIANT_TYPE(21);
+
+/// An `EVT_HANDLE` value.
+const EvtVarTypeEvtHandle = EVT_VARIANT_TYPE(32);
+
+/// A null-terminated Unicode string that contains XML.
+const EvtVarTypeEvtXml = EVT_VARIANT_TYPE(35);
+
+const EVT_VARIANT_TYPE_ARRAY = 128;
+
+const EVT_VARIANT_TYPE_MASK = 127;

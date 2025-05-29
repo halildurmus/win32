@@ -17645,6 +17645,193 @@ void main() {
     }
   });
 
+  group('Test wevtapi functions', () {
+    test('Can instantiate EvtClose', () {
+      final wevtapi = DynamicLibrary.open('wevtapi.dll');
+      final EvtClose = wevtapi
+          .lookupFunction<
+            Int32 Function(IntPtr Object),
+            int Function(int Object)
+          >('EvtClose');
+      expect(EvtClose, isA<Function>());
+    });
+    test('Can instantiate EvtCreateBookmark', () {
+      final wevtapi = DynamicLibrary.open('wevtapi.dll');
+      final EvtCreateBookmark = wevtapi
+          .lookupFunction<
+            IntPtr Function(Pointer<Utf16> BookmarkXml),
+            int Function(Pointer<Utf16> BookmarkXml)
+          >('EvtCreateBookmark');
+      expect(EvtCreateBookmark, isA<Function>());
+    });
+    test('Can instantiate EvtCreateRenderContext', () {
+      final wevtapi = DynamicLibrary.open('wevtapi.dll');
+      final EvtCreateRenderContext = wevtapi
+          .lookupFunction<
+            IntPtr Function(
+              Uint32 ValuePathsCount,
+              Pointer<Pointer<Utf16>> ValuePaths,
+              Uint32 Flags,
+            ),
+            int Function(
+              int ValuePathsCount,
+              Pointer<Pointer<Utf16>> ValuePaths,
+              int Flags,
+            )
+          >('EvtCreateRenderContext');
+      expect(EvtCreateRenderContext, isA<Function>());
+    });
+    test('Can instantiate EvtGetExtendedStatus', () {
+      final wevtapi = DynamicLibrary.open('wevtapi.dll');
+      final EvtGetExtendedStatus = wevtapi
+          .lookupFunction<
+            Uint32 Function(
+              Uint32 BufferSize,
+              Pointer<Utf16> Buffer,
+              Pointer<Uint32> BufferUsed,
+            ),
+            int Function(
+              int BufferSize,
+              Pointer<Utf16> Buffer,
+              Pointer<Uint32> BufferUsed,
+            )
+          >('EvtGetExtendedStatus');
+      expect(EvtGetExtendedStatus, isA<Function>());
+    });
+    test('Can instantiate EvtGetQueryInfo', () {
+      final wevtapi = DynamicLibrary.open('wevtapi.dll');
+      final EvtGetQueryInfo = wevtapi
+          .lookupFunction<
+            Int32 Function(
+              IntPtr QueryOrSubscription,
+              Int32 PropertyId,
+              Uint32 PropertyValueBufferSize,
+              Pointer<EVT_VARIANT> PropertyValueBuffer,
+              Pointer<Uint32> PropertyValueBufferUsed,
+            ),
+            int Function(
+              int QueryOrSubscription,
+              int PropertyId,
+              int PropertyValueBufferSize,
+              Pointer<EVT_VARIANT> PropertyValueBuffer,
+              Pointer<Uint32> PropertyValueBufferUsed,
+            )
+          >('EvtGetQueryInfo');
+      expect(EvtGetQueryInfo, isA<Function>());
+    });
+    test('Can instantiate EvtNext', () {
+      final wevtapi = DynamicLibrary.open('wevtapi.dll');
+      final EvtNext = wevtapi
+          .lookupFunction<
+            Int32 Function(
+              IntPtr ResultSet,
+              Uint32 EventsSize,
+              Pointer<IntPtr> Events,
+              Uint32 Timeout,
+              Uint32 Flags,
+              Pointer<Uint32> Returned,
+            ),
+            int Function(
+              int ResultSet,
+              int EventsSize,
+              Pointer<IntPtr> Events,
+              int Timeout,
+              int Flags,
+              Pointer<Uint32> Returned,
+            )
+          >('EvtNext');
+      expect(EvtNext, isA<Function>());
+    });
+    test('Can instantiate EvtOpenSession', () {
+      final wevtapi = DynamicLibrary.open('wevtapi.dll');
+      final EvtOpenSession = wevtapi
+          .lookupFunction<
+            IntPtr Function(
+              Int32 LoginClass,
+              Pointer Login,
+              Uint32 Timeout,
+              Uint32 Flags,
+            ),
+            int Function(int LoginClass, Pointer Login, int Timeout, int Flags)
+          >('EvtOpenSession');
+      expect(EvtOpenSession, isA<Function>());
+    });
+    test('Can instantiate EvtQuery', () {
+      final wevtapi = DynamicLibrary.open('wevtapi.dll');
+      final EvtQuery = wevtapi
+          .lookupFunction<
+            IntPtr Function(
+              IntPtr Session,
+              Pointer<Utf16> Path,
+              Pointer<Utf16> Query,
+              Uint32 Flags,
+            ),
+            int Function(
+              int Session,
+              Pointer<Utf16> Path,
+              Pointer<Utf16> Query,
+              int Flags,
+            )
+          >('EvtQuery');
+      expect(EvtQuery, isA<Function>());
+    });
+    test('Can instantiate EvtRender', () {
+      final wevtapi = DynamicLibrary.open('wevtapi.dll');
+      final EvtRender = wevtapi
+          .lookupFunction<
+            Int32 Function(
+              IntPtr Context,
+              IntPtr Fragment,
+              Uint32 Flags,
+              Uint32 BufferSize,
+              Pointer Buffer,
+              Pointer<Uint32> BufferUsed,
+              Pointer<Uint32> PropertyCount,
+            ),
+            int Function(
+              int Context,
+              int Fragment,
+              int Flags,
+              int BufferSize,
+              Pointer Buffer,
+              Pointer<Uint32> BufferUsed,
+              Pointer<Uint32> PropertyCount,
+            )
+          >('EvtRender');
+      expect(EvtRender, isA<Function>());
+    });
+    test('Can instantiate EvtSeek', () {
+      final wevtapi = DynamicLibrary.open('wevtapi.dll');
+      final EvtSeek = wevtapi
+          .lookupFunction<
+            Int32 Function(
+              IntPtr ResultSet,
+              Int64 Position,
+              IntPtr Bookmark,
+              Uint32 Timeout,
+              Uint32 Flags,
+            ),
+            int Function(
+              int ResultSet,
+              int Position,
+              int Bookmark,
+              int Timeout,
+              int Flags,
+            )
+          >('EvtSeek');
+      expect(EvtSeek, isA<Function>());
+    });
+    test('Can instantiate EvtUpdateBookmark', () {
+      final wevtapi = DynamicLibrary.open('wevtapi.dll');
+      final EvtUpdateBookmark = wevtapi
+          .lookupFunction<
+            Int32 Function(IntPtr Bookmark, IntPtr Event),
+            int Function(int Bookmark, int Event)
+          >('EvtUpdateBookmark');
+      expect(EvtUpdateBookmark, isA<Function>());
+    });
+  });
+
   group('Test api-ms-win-core-comm-l1-1-2 functions', () {
     if (windowsBuildNumber >= 17134) {
       test('Can instantiate GetCommPorts', () {

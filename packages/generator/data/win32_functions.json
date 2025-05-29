@@ -1469,6 +1469,50 @@
         "prototype": "BOOL EscapeCommFunction(\n  HANDLE hFile,\n  DWORD  dwFunc\n);",
         "comment": "Directs the specified communications device to perform an extended function."
     },
+    "EvtClose": {
+        "prototype": "BOOL EvtClose(\n  EVT_HANDLE Object\n);",
+        "comment": "Closes an open handle."
+    },
+    "EvtCreateBookmark": {
+        "prototype": "EVT_HANDLE EvtCreateBookmark(\n  [in, optional] LPCWSTR BookmarkXml\n);",
+        "comment": "Creates a bookmark that identifies an event in a channel."
+    },
+    "EvtCreateRenderContext": {
+        "prototype": "EVT_HANDLE EvtCreateRenderContext(\n  DWORD   ValuePathsCount,\n  LPCWSTR *ValuePaths,\n  DWORD   Flags\n);",
+        "comment": "Creates a context that specifies the information in the event that you want to render."
+    },
+    "EvtGetExtendedStatus": {
+        "prototype": "DWORD EvtGetExtendedStatus(\n  [in]  DWORD  BufferSize,\n  [in]  LPWSTR Buffer,\n  [out] PDWORD BufferUsed\n);",
+        "comment": "Retrieves extended error information for the last operation that failed."
+    },
+    "EvtGetQueryInfo": {
+        "prototype": "BOOL EvtGetQueryInfo(\n  [in]  EVT_HANDLE            QueryOrSubscription,\n  [in]  EVT_QUERY_PROPERTY_ID PropertyId,\n  [in]  DWORD                 PropertyValueBufferSize,\n  [in]  PEVT_VARIANT          PropertyValueBuffer,\n  [out] PDWORD                PropertyValueBufferUsed\n);",
+        "comment": "Gets information about a query that you ran that identifies the list of channels or log files that the query attempted to access."
+    },
+    "EvtNext": {
+        "prototype": "BOOL EvtNext(\n  [in]  EVT_HANDLE  ResultSet,\n  [in]  DWORD       EventsSize,\n  [in]  PEVT_HANDLE Events,\n  [in]  DWORD       Timeout,\n  [in]  DWORD       Flags,\n  [out] PDWORD      Returned\n);",
+        "comment": "Gets the next event from the query or subscription results."
+    },
+    "EvtOpenSession": {
+        "prototype": "EVT_HANDLE EvtOpenSession(\n  EVT_LOGIN_CLASS LoginClass,\n  PVOID           Login,\n  DWORD           Timeout,\n  DWORD           Flags\n);",
+        "comment": "Opens a session for event log operations. This session can be used to query events, subscribe to events, and manage event logs."
+    },
+    "EvtQuery": {
+        "prototype": "EVT_HANDLE EvtQuery(\n  EVT_HANDLE Session,\n  LPCWSTR    Path,\n  LPCWSTR    Query,\n  DWORD      Flags\n);",
+        "comment": "Runs a query to retrieve events from a channel or log file that match the specified query criteria."
+    },
+    "EvtRender": {
+        "prototype": "BOOL EvtRender(\n  [in]  EVT_HANDLE Context,\n  [in]  EVT_HANDLE Fragment,\n  [in]  DWORD      Flags,\n  [in]  DWORD      BufferSize,\n  [in]  PVOID      Buffer,\n  [out] PDWORD     BufferUsed,\n  [out] PDWORD     PropertyCount\n);",
+        "comment": "Renders an XML fragment based on the rendering context that you specify."
+    },
+    "EvtSeek": {
+        "prototype": "BOOL EvtSeek(\n  EVT_HANDLE ResultSet,\n  LONGLONG   Position,\n  EVT_HANDLE Bookmark,\n  DWORD      Timeout,\n  DWORD      Flags\n);",
+        "comment": "Seeks to a specific event in a query result set."
+    },
+    "EvtUpdateBookmark": {
+        "prototype": "BOOL EvtUpdateBookmark(\n  EVT_HANDLE Bookmark,\n  EVT_HANDLE Event\n);",
+        "comment": "Updates the bookmark with information that identifies the specified event."
+    },
     "ExcludeUpdateRgn": {
         "prototype": "int ExcludeUpdateRgn(\n  HDC  hDC,\n  HWND hWnd\n);",
         "comment": "The ExcludeUpdateRgn function prevents drawing within invalid areas of a window by excluding an updated region in the window from a clipping region."

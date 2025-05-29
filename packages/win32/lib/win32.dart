@@ -92,6 +92,7 @@ export 'src/win32/shlwapi.g.dart';
 export 'src/win32/user32.g.dart';
 export 'src/win32/uxtheme.g.dart';
 export 'src/win32/version.g.dart';
+export 'src/win32/wevtapi.g.dart';
 export 'src/win32/winmm.g.dart';
 export 'src/win32/winscard.g.dart';
 export 'src/win32/winspool.g.dart';
