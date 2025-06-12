@@ -168,7 +168,7 @@ visit [pub.dev] to explore packages that depend on it.
 [com_context.dart]: https://github.com/halildurmus/win32/blob/main/examples/com_context.dart
 [com_demo.dart]: https://github.com/halildurmus/win32/blob/main/examples/com_demo.dart
 [dispatcher.dart]: https://github.com/halildurmus/win32/blob/main/examples/dispatcher.dart
-[com_interop]: https://github.com/halildurmus/win32/blob/main/examples/dotnet_interop
+[com_interop]: https://github.com/halildurmus/win32/blob/main/examples/com_interop
 [guid.dart]: https://github.com/halildurmus/win32/blob/main/examples/guid.dart
 [uiautomation.dart]: https://github.com/halildurmus/win32/blob/main/examples/uiautomation.dart
 [winhttp.dart]: https://github.com/halildurmus/win32/blob/main/examples/winhttp.dart
