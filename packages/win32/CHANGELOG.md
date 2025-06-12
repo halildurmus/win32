@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.14.0] - 2025-06-12
+
+### 🚀 Features
+
+- Add APIs for querying events by @halildurmus in [#993](https://github.com/halildurmus/win32/pull/993)
+- Add PathAllocCanonicalize/PathAllocCombine by @brianquinlan in [#988](https://github.com/halildurmus/win32/pull/988)
+
+### 📝 Documentation
+
+- *(examples)* Fix link by @halildurmus
+
+### 🎨 Styling
+
+- Migrate to package:halildurmus_lints by @halildurmus in [#990](https://github.com/halildurmus/win32/pull/990)
+- Reformat files by @halildurmus in [#989](https://github.com/halildurmus/win32/pull/989)
+
+[5.14.0]: https://github.com/halildurmus/win32/compare/v5.13.0..v5.14.0
+
 ## [5.13.0] - 2025-05-09
 
 ### 🚀 Features
