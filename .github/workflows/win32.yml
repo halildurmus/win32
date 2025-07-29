@@ -44,7 +44,7 @@ jobs:
             sdk: main
           - os: windows-2022
             sdk: beta
-          - os: windows-2019
+          - os: windows-2022
             sdk: stable
           - os: ubuntu-latest
             sdk: stable
