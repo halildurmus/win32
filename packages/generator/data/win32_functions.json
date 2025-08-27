@@ -4070,6 +4070,10 @@
         "prototype": "UINT PrivateExtractIconsW(\n  [in]            LPCWSTR szFileName,\n  [in]            int     nIconIndex,\n  [in]            int     cxIcon,\n  [in]            int     cyIcon,\n  [out, optional] HICON   *phicon,\n  [out, optional] UINT    *piconid,\n  [in]            UINT    nIcons,\n  [in]            UINT    flags\n);",
         "comment": "Creates an array of handles to icons that are extracted from a specified file."
     },
+    "ProcessIdToSessionId": {
+        "prototype": "BOOL ProcessIdToSessionId(\n  [in]  DWORD dwProcessId,\n  [out] DWORD *pSessionId\n);",
+        "comment": "Retrieves the Remote Desktop Services session associated with a specified process."
+    },
     "ProgIDFromCLSID": {
         "prototype": "HRESULT ProgIDFromCLSID(\n  REFCLSID clsid,\n  LPOLESTR *lplpszProgID\n);",
         "comment": "Retrieves the ProgID for a given CLSID."

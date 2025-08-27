@@ -5969,6 +5969,15 @@ void main() {
           >('PostQueuedCompletionStatus');
       expect(PostQueuedCompletionStatus, isA<Function>());
     });
+    test('Can instantiate ProcessIdToSessionId', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final ProcessIdToSessionId = kernel32
+          .lookupFunction<
+            Int32 Function(Uint32 dwProcessId, Pointer<Uint32> pSessionId),
+            int Function(int dwProcessId, Pointer<Uint32> pSessionId)
+          >('ProcessIdToSessionId');
+      expect(ProcessIdToSessionId, isA<Function>());
+    });
     test('Can instantiate PurgeComm', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final PurgeComm = kernel32
