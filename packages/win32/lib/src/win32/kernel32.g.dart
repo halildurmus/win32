@@ -6720,6 +6720,25 @@ final _PostQueuedCompletionStatus = _kernel32
       )
     >('PostQueuedCompletionStatus');
 
+/// Retrieves the Remote Desktop Services session associated with a
+/// specified process.
+///
+/// ```c
+/// BOOL ProcessIdToSessionId(
+///   [in]  DWORD dwProcessId,
+///   [out] DWORD *pSessionId
+/// );
+/// ```
+/// {@category kernel32}
+int ProcessIdToSessionId(int dwProcessId, Pointer<Uint32> pSessionId) =>
+    _ProcessIdToSessionId(dwProcessId, pSessionId);
+
+final _ProcessIdToSessionId = _kernel32
+    .lookupFunction<
+      Int32 Function(Uint32 dwProcessId, Pointer<Uint32> pSessionId),
+      int Function(int dwProcessId, Pointer<Uint32> pSessionId)
+    >('ProcessIdToSessionId');
+
 /// Discards all characters from the output or input buffer of a specified
 /// communications resource. It can also terminate pending read or write
 /// operations on the resource.
