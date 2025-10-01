@@ -1564,22 +1564,6 @@ const XINPUT_KEYSTROKE_REPEAT = 0x0004;
 const INVALID_HANDLE_VALUE = -1;
 const ATTACH_PARENT_PROCESS = -1;
 
-const FOREGROUND_BLUE = 0x0001;
-
-const FOREGROUND_GREEN = 0x0002;
-
-const FOREGROUND_RED = 0x0004;
-
-const FOREGROUND_INTENSITY = 0x0008;
-
-const BACKGROUND_BLUE = 0x0010;
-
-const BACKGROUND_GREEN = 0x0020;
-
-const BACKGROUND_RED = 0x0040;
-
-const BACKGROUND_INTENSITY = 0x0080;
-
 // -----------------------------------------------------------------------------
 // Monitor APIs
 // -----------------------------------------------------------------------------
