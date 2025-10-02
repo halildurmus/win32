@@ -5703,25 +5703,25 @@ const BACKGROUND_RED = 0x0040;
 const BACKGROUND_INTENSITY = 0x0080;
 
 /// CHAR_INFO structure `Attributes` flag: Leading Byte of DBCS (Double Byte Character Set)
-const COMMON_LVB_LEADING_BYTE    = 0x0100;
+const COMMON_LVB_LEADING_BYTE = 0x0100;
 
 /// CHAR_INFO structure `Attributes` flag: Trailing Byte of DBCS (Double Byte Character Set)
-const COMMON_LVB_TRAILING_BYTE   = 0x0200;
+const COMMON_LVB_TRAILING_BYTE = 0x0200;
 
 /// CHAR_INFO structure `Attributes` flag: DBCS (Double Byte Character Set): Grid attribute: top horizontal.
 const COMMON_LVB_GRID_HORIZONTAL = 0x0400;
 
 /// CHAR_INFO structure `Attributes` flag: DBCS (Double Byte Character Set): Grid attribute: left vertical.
-const COMMON_LVB_GRID_LVERTICAL  = 0x0800;
+const COMMON_LVB_GRID_LVERTICAL = 0x0800;
 
 /// CHAR_INFO structure `Attributes` flag: DBCS (Double Byte Character Set): Grid attribute: right vertical.
-const COMMON_LVB_GRID_RVERTICAL  = 0x1000;
+const COMMON_LVB_GRID_RVERTICAL = 0x1000;
 
 /// CHAR_INFO structure `Attributes` flag: DBCS (Double Byte Character Set): Reverse fore/back ground attribute.
-const COMMON_LVB_REVERSE_VIDEO   = 0x4000;
+const COMMON_LVB_REVERSE_VIDEO = 0x4000;
 
 /// CHAR_INFO structure `Attributes` flag: DBCS (Double Byte Character Set): Underscore.
-const COMMON_LVB_UNDERSCORE      = 0x8000;
+const COMMON_LVB_UNDERSCORE = 0x8000;
 
 /// CHAR_INFO structure `Attributes` flag: SBCS (Single Byte Character Set) or DBCS (Double Byte Character Set) flag.
 const COMMON_LVB_SBCSDBCS = 0x0300;
@@ -5729,19 +5729,19 @@ const COMMON_LVB_SBCSDBCS = 0x0300;
 // CONSOLE_SELECTION_INFO structure `dwFlags` flags
 
 /// CONSOLE_SELECTION_INFO structure `dwFlags` flag: No selection.
-const CONSOLE_NO_SELECTION          = 0x0000;
+const CONSOLE_NO_SELECTION = 0x0000;
 
 /// CONSOLE_SELECTION_INFO structure `dwFlags` flag: Selection has begun.
 const CONSOLE_SELECTION_IN_PROGRESS = 0x0001;
 
 /// CONSOLE_SELECTION_INFO structure `dwFlags` flag: Non-null select rectangle.
-const CONSOLE_SELECTION_NOT_EMPTY   = 0x0002;
+const CONSOLE_SELECTION_NOT_EMPTY = 0x0002;
 
 /// CONSOLE_SELECTION_INFO structure `dwFlags` flag: Selecting with mouse.
-const CONSOLE_MOUSE_SELECTION       = 0x0004;
+const CONSOLE_MOUSE_SELECTION = 0x0004;
 
 /// CONSOLE_SELECTION_INFO structure `dwFlags` flag: Mouse is down.
-const CONSOLE_MOUSE_DOWN            = 0x0008;
+const CONSOLE_MOUSE_DOWN = 0x0008;
 
 // PHANDLER_ROUTINE callback function `dwCtrlType` parameter flags
 
@@ -5761,7 +5761,7 @@ const CTRL_CLOSE_EVENT = 2;
 /// PHANDLER_ROUTINE callback function `dwCtrlType` parameter flag: A signal that the system sends
 /// to all console processes when a user is logging off. This signal does not indicate which user
 /// is logging off, so no assumptions can be made.
-/// 
+///
 /// Note that this signal is received only by services. Interactive applications are terminated at logoff,
 /// so they are not present when the system sends this signal.
 const CTRL_LOGOFF_EVENT = 5;
