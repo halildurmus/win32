@@ -5657,7 +5657,7 @@ const FROM_LEFT_3RD_BUTTON_PRESSED = 0x0008;
 const FROM_LEFT_4TH_BUTTON_PRESSED = 0x0010;
 
 /// MOUSE_EVENT_RECORD structure `dwButtonState` flag: Mouse wheel rolled up or tilted right (`dwEventFlags` member will hold `MOUSE_WHEELED` or `MOUSE_HWHEELED` flag)
-const MOUSED_WHEELED_UP_OR_RIGHT = 0x00800000;
+const MOUSE_WHEELED_UP_OR_RIGHT = 0x00800000;
 
 /// MOUSE_EVENT_RECORD structure `dwButtonState` flag: Mouse wheel rolled down or tilted left (`dwEventFlags` member will hold `MOUSE_WHEELED` or `MOUSE_HWHEELED` flag)
 const MOUSE_WHEELED_DOWN_OR_LEFT = 0xff800000;
