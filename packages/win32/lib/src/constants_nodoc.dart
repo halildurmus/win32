@@ -1564,22 +1564,6 @@ const XINPUT_KEYSTROKE_REPEAT = 0x0004;
 const INVALID_HANDLE_VALUE = -1;
 const ATTACH_PARENT_PROCESS = -1;
 
-const FOREGROUND_BLUE = 0x0001;
-
-const FOREGROUND_GREEN = 0x0002;
-
-const FOREGROUND_RED = 0x0004;
-
-const FOREGROUND_INTENSITY = 0x0008;
-
-const BACKGROUND_BLUE = 0x0010;
-
-const BACKGROUND_GREEN = 0x0020;
-
-const BACKGROUND_RED = 0x0040;
-
-const BACKGROUND_INTENSITY = 0x0080;
-
 // -----------------------------------------------------------------------------
 // Monitor APIs
 // -----------------------------------------------------------------------------
@@ -6908,22 +6892,6 @@ const EV_RXCHAR = 1;
 const EV_RXFLAG = 2;
 
 const EV_TXEMPTY = 4;
-
-const COMMON_LVB_LEADING_BYTE = 256;
-
-const COMMON_LVB_TRAILING_BYTE = 512;
-
-const COMMON_LVB_GRID_HORIZONTAL = 1024;
-
-const COMMON_LVB_GRID_LVERTICAL = 2048;
-
-const COMMON_LVB_GRID_RVERTICAL = 4096;
-
-const COMMON_LVB_REVERSE_VIDEO = 16384;
-
-const COMMON_LVB_UNDERSCORE = 32768;
-
-const COMMON_LVB_SBCSDBCS = 768;
 
 const ENABLE_AUTO_POSITION = 256;
 

@@ -5590,6 +5590,188 @@ const STD_ERROR_HANDLE = 4294967284;
 /// Return only when the object is signaled.
 const INFINITE = 0xFFFFFFFF;
 
+// INPUT_RECORD structure `EventType` flags
+
+/// INPUT_RECORD structure `EventType` flag: Event contains key event record.
+const KEY_EVENT = 0x0001;
+
+/// INPUT_RECORD structure `EventType` flag: Event contains mouse event record.
+const MOUSE_EVENT = 0x0002;
+
+/// INPUT_RECORD structure `EventType` flag: Event contains window change event record.
+const WINDOW_BUFFER_SIZE_EVENT = 0x0004;
+
+/// INPUT_RECORD structure `EventType` flag: Event contains menu event record.
+const MENU_EVENT = 0x0008;
+
+/// INPUT_RECORD structure `EventType` flag: Event contains focus change.
+const FOCUS_EVENT = 0x0010;
+
+// KEY_EVENT_RECORD structure `dwControlKeyState` flags
+
+/// KEY_EVENT_RECORD structure `dwControlKeyState` flag: The right alt key is pressed.
+const RIGHT_ALT_PRESSED = 0x0001;
+
+/// KEY_EVENT_RECORD structure `dwControlKeyState` flag: The left alt key is pressed.
+const LEFT_ALT_PRESSED = 0x0002;
+
+/// KEY_EVENT_RECORD structure `dwControlKeyState` flag: The right ctrl key is pressed.
+const RIGHT_CTRL_PRESSED = 0x0004;
+
+/// KEY_EVENT_RECORD structure `dwControlKeyState` flag: The left ctrl key is pressed.
+const LEFT_CTRL_PRESSED = 0x0008;
+
+/// KEY_EVENT_RECORD structure `dwControlKeyState` flag: The shift key is pressed.
+const SHIFT_PRESSED = 0x0010;
+
+/// KEY_EVENT_RECORD structure `dwControlKeyState` flag: The numlock light is on.
+const NUMLOCK_ON = 0x0020;
+
+/// KEY_EVENT_RECORD structure `dwControlKeyState` flag: The scrolllock light is on.
+const SCROLLLOCK_ON = 0x0040;
+
+/// KEY_EVENT_RECORD structure `dwControlKeyState` flag: The capslock light is on.
+const CAPSLOCK_ON = 0x0080;
+
+/// KEY_EVENT_RECORD structure `dwControlKeyState` flag: The key is enhanced.
+/// Enhanced keys for the IBM® 101- and 102-key keyboards are the INS, DEL, HOME, END,
+/// PAGE UP, PAGE DOWN, and direction keys in the clusters to the left of the keypad;
+/// and the divide (/) and ENTER keys in the keypad.
+const ENHANCED_KEY = 0x0100;
+
+// MOUSE_EVENT_RECORD structure `dwButtonState` flags
+
+/// MOUSE_EVENT_RECORD structure `dwButtonState` flag: First mouse button from left depressed.
+const FROM_LEFT_1ST_BUTTON_PRESSED = 0x0001;
+
+/// MOUSE_EVENT_RECORD structure `dwButtonState` flag: Rightmost mouse button depressed.
+const RIGHTMOST_BUTTON_PRESSED = 0x0002;
+
+/// MOUSE_EVENT_RECORD structure `dwButtonState` flag: Second mouse button from left depressed.
+const FROM_LEFT_2ND_BUTTON_PRESSED = 0x0004;
+
+/// MOUSE_EVENT_RECORD structure `dwButtonState` flag: Third mouse button from left depressed.
+const FROM_LEFT_3RD_BUTTON_PRESSED = 0x0008;
+
+/// MOUSE_EVENT_RECORD structure `dwButtonState` flag: Fourth mouse button from left depressed.
+const FROM_LEFT_4TH_BUTTON_PRESSED = 0x0010;
+
+/// MOUSE_EVENT_RECORD structure `dwButtonState` flag: Mouse wheel rolled up or tilted right (`dwEventFlags` member will hold `MOUSE_WHEELED` or `MOUSE_HWHEELED` flag).
+const MOUSE_WHEELED_UP_OR_RIGHT = 0x00800000;
+
+/// MOUSE_EVENT_RECORD structure `dwButtonState` flag: Mouse wheel rolled down or tilted left (`dwEventFlags` member will hold `MOUSE_WHEELED` or `MOUSE_HWHEELED` flag).
+const MOUSE_WHEELED_DOWN_OR_LEFT = 0xff800000;
+
+// MOUSE_EVENT_RECORD structure `dwEventFlags` flags
+
+/// MOUSE_EVENT_RECORD structure `dwEventFlags` flag: Mouse moved.
+const MOUSE_MOVED = 0x0001;
+
+/// MOUSE_EVENT_RECORD structure `dwEventFlags` flag: Double click.
+const DOUBLE_CLICK = 0x0002;
+
+/// MOUSE_EVENT_RECORD structure `dwEventFlags` flag: Mouse wheel rolled.
+const MOUSE_WHEELED = 0x0004;
+
+/// MOUSE_EVENT_RECORD structure `dwEventFlags` flag: Mouse wheel horizontal tilt.
+const MOUSE_HWHEELED = 0x0008;
+
+// CHAR_INFO structure `Attributes` flags
+
+/// CHAR_INFO structure `Attributes` flag: text color contains blue.
+const FOREGROUND_BLUE = 0x0001;
+
+/// CHAR_INFO structure `Attributes` flag: text color contains green.
+const FOREGROUND_GREEN = 0x0002;
+
+/// CHAR_INFO structure `Attributes` flag: text color contains red.
+const FOREGROUND_RED = 0x0004;
+
+/// CHAR_INFO structure `Attributes` flag: text color is intensified.
+const FOREGROUND_INTENSITY = 0x0008;
+
+/// CHAR_INFO structure `Attributes` flag: background color contains blue.
+const BACKGROUND_BLUE = 0x0010;
+
+/// CHAR_INFO structure `Attributes` flag: background color contains green.
+const BACKGROUND_GREEN = 0x0020;
+
+/// CHAR_INFO structure `Attributes` flag: background color contains red.
+const BACKGROUND_RED = 0x0040;
+
+/// CHAR_INFO structure `Attributes` flag: background color is intensified.
+const BACKGROUND_INTENSITY = 0x0080;
+
+/// CHAR_INFO structure `Attributes` flag: Leading Byte of DBCS (Double Byte Character Set)
+const COMMON_LVB_LEADING_BYTE = 0x0100;
+
+/// CHAR_INFO structure `Attributes` flag: Trailing Byte of DBCS (Double Byte Character Set)
+const COMMON_LVB_TRAILING_BYTE = 0x0200;
+
+/// CHAR_INFO structure `Attributes` flag: DBCS (Double Byte Character Set): Grid attribute: top horizontal.
+const COMMON_LVB_GRID_HORIZONTAL = 0x0400;
+
+/// CHAR_INFO structure `Attributes` flag: DBCS (Double Byte Character Set): Grid attribute: left vertical.
+const COMMON_LVB_GRID_LVERTICAL = 0x0800;
+
+/// CHAR_INFO structure `Attributes` flag: DBCS (Double Byte Character Set): Grid attribute: right vertical.
+const COMMON_LVB_GRID_RVERTICAL = 0x1000;
+
+/// CHAR_INFO structure `Attributes` flag: DBCS (Double Byte Character Set): Reverse fore/back ground attribute.
+const COMMON_LVB_REVERSE_VIDEO = 0x4000;
+
+/// CHAR_INFO structure `Attributes` flag: DBCS (Double Byte Character Set): Underscore.
+const COMMON_LVB_UNDERSCORE = 0x8000;
+
+/// CHAR_INFO structure `Attributes` flag: SBCS (Single Byte Character Set) or DBCS (Double Byte Character Set) flag.
+const COMMON_LVB_SBCSDBCS = 0x0300;
+
+// CONSOLE_SELECTION_INFO structure `dwFlags` flags
+
+/// CONSOLE_SELECTION_INFO structure `dwFlags` flag: No selection.
+const CONSOLE_NO_SELECTION = 0x0000;
+
+/// CONSOLE_SELECTION_INFO structure `dwFlags` flag: Selection has begun.
+const CONSOLE_SELECTION_IN_PROGRESS = 0x0001;
+
+/// CONSOLE_SELECTION_INFO structure `dwFlags` flag: Non-null select rectangle.
+const CONSOLE_SELECTION_NOT_EMPTY = 0x0002;
+
+/// CONSOLE_SELECTION_INFO structure `dwFlags` flag: Selecting with mouse.
+const CONSOLE_MOUSE_SELECTION = 0x0004;
+
+/// CONSOLE_SELECTION_INFO structure `dwFlags` flag: Mouse is down.
+const CONSOLE_MOUSE_DOWN = 0x0008;
+
+// PHANDLER_ROUTINE callback function `dwCtrlType` parameter flags
+
+/// PHANDLER_ROUTINE callback function `dwCtrlType` parameter flag: A CTRL+C signal was received,
+/// either from keyboard input or from a signal generated by the `GenerateConsoleCtrlEvent` function.
+const CTRL_C_EVENT = 0;
+
+/// PHANDLER_ROUTINE callback function `dwCtrlType` parameter flag: A CTRL+BREAK signal was received,
+/// either from keyboard input or from a signal generated by `GenerateConsoleCtrlEvent`.
+const CTRL_BREAK_EVENT = 1;
+
+/// PHANDLER_ROUTINE callback function `dwCtrlType` parameter flag: A signal that the system sends
+/// to all processes attached to a console when the user closes the console (either by clicking Close
+/// on the console window's window menu, or by clicking the End Task button command from Task Manager).
+const CTRL_CLOSE_EVENT = 2;
+
+/// PHANDLER_ROUTINE callback function `dwCtrlType` parameter flag: A signal that the system sends
+/// to all console processes when a user is logging off. This signal does not indicate which user
+/// is logging off, so no assumptions can be made.
+///
+/// Note that this signal is received only by services. Interactive applications are terminated at logoff,
+/// so they are not present when the system sends this signal.
+const CTRL_LOGOFF_EVENT = 5;
+
+/// PHANDLER_ROUTINE callback function `dwCtrlType` parameter flag: A signal that the system sends
+/// when the system is shutting down. Interactive applications are not present by the time the system
+/// sends this signal, therefore it can be received only be services in this situation. Services also have
+/// their own notification mechanism for shutdown events. For more information, see `LphandlerFunction` handler.
+const CTRL_SHUTDOWN_EVENT = 6;
+
 // Input flags
 
 /// Characters read by the ReadFile or ReadConsole function are written to the
