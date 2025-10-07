@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.15.0] - 2025-10-07
+
+### 🚀 Features
+
+- Add missing wincon.h console constants and docs to some existing constants. Fixes #1008 by @timmaffett in [#1009](https://github.com/halildurmus/win32/pull/1009)
+- Add ProcessIdToSessionId function by @kjeremy in [#1002](https://github.com/halildurmus/win32/pull/1002)
+
+### New Contributors ❤️
+
+- @timmaffett made their first contribution in [#1009](https://github.com/halildurmus/win32/pull/1009)
+
+- @kjeremy made their first contribution in [#1002](https://github.com/halildurmus/win32/pull/1002)
+
+[5.15.0]: https://github.com/halildurmus/win32/compare/v5.14.0..v5.15.0
+
 ## [5.14.0] - 2025-06-12
 
 ### 🚀 Features
