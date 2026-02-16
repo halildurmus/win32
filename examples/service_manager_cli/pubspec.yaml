@@ -11,7 +11,7 @@ dependencies:
     path: ../../packages/win32
 
 dev_dependencies:
-  halildurmus_lints: ^1.0.1
+  halildurmus_lints: ^2.0.0
 
 executables:
   service_manager_cli:
