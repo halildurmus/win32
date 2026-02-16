@@ -21,7 +21,7 @@ dependencies:
 
 dev_dependencies:
   # Help ensure that the code is well-written.
-  halildurmus_lints: ^1.0.1
+  halildurmus_lints: ^2.0.0
 
   # Used for running Git hooks.
   hooks:
