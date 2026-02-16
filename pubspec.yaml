@@ -7,7 +7,7 @@ environment:
 dev_dependencies:
   args: ^2.6.0
   ffi: ^2.1.4
-  halildurmus_lints: ^1.0.1
+  halildurmus_lints: ^2.0.0
   hooks:
     git:
       url: https://github.com/halildurmus/workflows.git
