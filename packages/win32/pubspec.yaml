@@ -39,7 +39,7 @@ dev_dependencies:
   args: ^2.6.0
 
   # Help ensure that the code is well-written.
-  halildurmus_lints: ^1.0.1
+  halildurmus_lints: ">=1.0.1 <3.0.0"
 
   # Used for running Git hooks.
   hooks:
