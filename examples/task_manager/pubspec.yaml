@@ -10,8 +10,7 @@ dependencies:
   ffi_leak_tracker: ^0.1.0
   flutter:
     sdk: flutter
-  win32:
-    path: ../../packages/win32 # TODO: update to ^6.0.0 when released
+  win32: ^6.0.0
 
 dev_dependencies:
   halildurmus_lints: ^2.0.0
