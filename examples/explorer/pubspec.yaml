@@ -15,8 +15,7 @@ dependencies:
       url: https://github.com/google/flutter-desktop-embedding.git
       path: plugins/menubar
   path_provider: ^2.1.5
-  win32:
-    path: ../../packages/win32 # TODO: update to ^6.0.0 when released
+  win32: ^6.0.0
 
 dev_dependencies:
   halildurmus_lints: ^2.0.0
