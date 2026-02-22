@@ -1,6 +1,6 @@
-import { communityPackages, packages } from '@site/src/assets/packages';
-import clsx from 'clsx';
-import { useInView } from 'framer-motion';
+import { communityPackages, packages } from "@site/src/assets/packages";
+import clsx from "clsx";
+import { useInView } from "framer-motion";
 import React, {
   DetailedHTMLProps,
   FC,
@@ -8,9 +8,9 @@ import React, {
   useEffect,
   useRef,
   useState,
-} from 'react';
-import { FaCircleCheck } from 'react-icons/fa6';
-import { LandingSectionCtaButtonAlt } from './landing-section-cta-button';
+} from "react";
+import { FaCircleCheck } from "react-icons/fa6";
+import { LandingSectionCtaButtonAlt } from "./landing-section-cta-button";
 
 type Props = {
   className?: string;
@@ -18,34 +18,34 @@ type Props = {
 
 export const LandingPackages: FC<Props> = ({ className }) => {
   return (
-    <div className={clsx(className, 'w-full')}>
-      <div className={clsx('not-prose', 'w-full', 'px-4 landing-md:px-10')}>
+    <div className={clsx(className, "w-full")}>
+      <div className={clsx("not-prose", "w-full", "px-4 landing-md:px-10")}>
         <h2
           className={clsx(
-            'text-2xl landing-sm:text-[32px]',
-            'tracking-tight',
-            'text-start',
-            'p-0',
-            'dark:text-gray-0 text-gray-900'
+            "text-2xl landing-sm:text-[32px]",
+            "tracking-tight",
+            "text-start",
+            "p-0",
+            "dark:text-gray-0 text-gray-900",
           )}
         >
           <span
             className={clsx(
-              'font-semibold',
-              'dark:text-win32-green-alt dark:drop-shadow-[0_0_30px_rgba(71,235,235,0.3)]',
-              'text-win32-blue drop-shadow-[0_0_30px_rgba(0,128,255,0.3)]'
+              "font-semibold",
+              "dark:text-win32-green-alt dark:drop-shadow-[0_0_30px_rgba(71,235,235,0.3)]",
+              "text-win32-blue drop-shadow-[0_0_30px_rgba(0,128,255,0.3)]",
             )}
           >
             Supercharge
-          </span>{' '}
+          </span>{" "}
           your apps.
         </h2>
         <p
           className={clsx(
-            'mt-4 landing-sm:mt-6',
-            'max-w-md',
-            'text-base',
-            'dark:text-gray-400 text-gray-600'
+            "mt-4 landing-sm:mt-6",
+            "max-w-md",
+            "text-base",
+            "dark:text-gray-400 text-gray-600",
           )}
         >
           Enhance your Flutter and Dart apps with top-quality packages from our
@@ -55,18 +55,18 @@ export const LandingPackages: FC<Props> = ({ className }) => {
 
       <div
         className={clsx(
-          'w-full',
-          'relative',
-          'mt-8 landing-sm:mt-12 landing-lg:mt-20',
-          'mb-4 landing-sm:mb-12 landing-md:mb-6',
-          'pb-4 landing-md:pb-10',
-          'dark:bg-landing-packages-dark bg-landing-packages',
-          'dark:bg-gray-800 bg-gray-50',
-          'rounded-2xl landing-sm:rounded-3xl',
-          'overflow-hidden'
+          "w-full",
+          "relative",
+          "mt-8 landing-sm:mt-12 landing-lg:mt-20",
+          "mb-4 landing-sm:mb-12 landing-md:mb-6",
+          "pb-4 landing-md:pb-10",
+          "dark:bg-landing-packages-dark bg-landing-packages",
+          "dark:bg-gray-800 bg-gray-50",
+          "rounded-2xl landing-sm:rounded-3xl",
+          "overflow-hidden",
         )}
       >
-        <div className={clsx('landing-packages-mask', 'pt-4 landing-md:pt-10')}>
+        <div className={clsx("landing-packages-mask", "pt-4 landing-md:pt-10")}>
           <PackagesContainer animDirection="right">
             {[...packages, ...packages].map(
               ({ icon, name, installCommand }, index) => (
@@ -76,7 +76,7 @@ export const LandingPackages: FC<Props> = ({ className }) => {
                   label={name}
                   tooltip={installCommand}
                 />
-              )
+              ),
             )}
           </PackagesContainer>
           <PackagesContainer animDirection="left">
@@ -88,13 +88,13 @@ export const LandingPackages: FC<Props> = ({ className }) => {
                   label={name}
                   tooltip={installCommand}
                 />
-              )
+              ),
             )}
           </PackagesContainer>
         </div>
       </div>
 
-      <LandingSectionCtaButtonAlt to={'/packages'}>
+      <LandingSectionCtaButtonAlt to={"/packages"}>
         All packages
       </LandingSectionCtaButtonAlt>
     </div>
@@ -107,7 +107,7 @@ const PackagesContainer = ({
   animDirection,
   ...props
 }: DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> & {
-  animDirection: 'left' | 'right';
+  animDirection: "left" | "right";
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref);
@@ -116,31 +116,31 @@ const PackagesContainer = ({
     <div
       ref={ref}
       className={clsx(
-        'relative',
-        'flex',
-        'items-center',
-        animDirection === 'left' ? 'justify-start' : 'justify-end'
+        "relative",
+        "flex",
+        "items-center",
+        animDirection === "left" ? "justify-start" : "justify-end",
       )}
     >
       <div
         className={clsx(
           className,
-          'hover:animation-paused',
+          "hover:animation-paused",
           inView
-            ? animDirection === 'left'
-              ? 'animate-landing-packages-left'
-              : 'animate-landing-packages-right'
-            : '',
-          'absolute',
-          'left-0',
-          'top-0',
-          'pr-4',
-          'w-auto',
-          'flex',
-          'items-center',
-          'gap-[18px]',
-          'mt-6',
-          'relative'
+            ? animDirection === "left"
+              ? "animate-landing-packages-left"
+              : "animate-landing-packages-right"
+            : "",
+          "absolute",
+          "left-0",
+          "top-0",
+          "pr-4",
+          "w-auto",
+          "flex",
+          "items-center",
+          "gap-[18px]",
+          "mt-6",
+          "relative",
         )}
         {...props}
       >
@@ -177,35 +177,35 @@ const PackageItem = (props: {
     <div
       onClick={onCopy}
       className={clsx(
-        'group',
-        'relative',
-        'z-10',
-        'flex',
-        'items-center',
-        'justify-center',
-        'gap-3',
-        'pl-4 pt-4 pb-4 pr-6',
-        'dark:bg-gray-900 bg-gray-0',
-        'rounded-full',
-        'cursor-pointer'
+        "group",
+        "relative",
+        "z-10",
+        "flex",
+        "items-center",
+        "justify-center",
+        "gap-3",
+        "pl-4 pt-4 pb-4 pr-6",
+        "dark:bg-gray-900 bg-gray-0",
+        "rounded-full",
+        "cursor-pointer",
       )}
     >
       <div
         className={clsx(
-          isCopied && 'rotate-[360deg]',
-          'transition-all duration-200 ease-in-out'
+          isCopied && "rotate-[360deg]",
+          "transition-all duration-200 ease-in-out",
         )}
       >
         <Icon width={24} height={24} />
       </div>
       <div
         className={clsx(
-          'text-sm',
-          'font-medium',
-          'dark:bg-landing-packages-text-dark bg-landing-packages-text',
-          'bg-clip-text',
-          'text-transparent',
-          'whitespace-nowrap'
+          "text-sm",
+          "font-medium",
+          "dark:bg-landing-packages-text-dark bg-landing-packages-text",
+          "bg-clip-text",
+          "text-transparent",
+          "whitespace-nowrap",
         )}
       >
         {label}
@@ -213,28 +213,28 @@ const PackageItem = (props: {
 
       <div
         className={clsx(
-          'absolute',
-          'z-20',
-          'top-[-48px]',
-          'scale-0',
-          'group-hover:scale-100',
-          'transition-transform',
-          'origin-top'
+          "absolute",
+          "z-20",
+          "top-[-48px]",
+          "scale-0",
+          "group-hover:scale-100",
+          "transition-transform",
+          "origin-top",
         )}
       >
         <div
           className={clsx(
-            'relative',
-            'text-sm',
-            'bg-gray-900 dark:bg-gray-0',
-            'text-gray-300 dark:text-gray-700',
-            'rounded-full',
-            'px-6 py-3',
-            'whitespace-nowrap'
+            "relative",
+            "text-sm",
+            "bg-gray-900 dark:bg-gray-0",
+            "text-gray-300 dark:text-gray-700",
+            "rounded-full",
+            "px-6 py-3",
+            "whitespace-nowrap",
           )}
         >
           {isCopied ? (
-            <div className={clsx('flex gap-2 items-center')}>
+            <div className={clsx("flex gap-2 items-center")}>
               <span>copied to clipboard!</span>
               <FaCircleCheck className="ml-1 size-4" />
             </div>
@@ -249,15 +249,15 @@ const PackageItem = (props: {
           height={15}
           fill="none"
           className={clsx(
-            'absolute',
-            'scale-0',
-            '-bottom-2',
-            'left-1/2',
-            '-translate-x-1/2',
-            'group-hover:scale-100',
-            'transition-transform',
-            'origin-bottom',
-            'dark:text-gray-0 text-gray-900'
+            "absolute",
+            "scale-0",
+            "-bottom-2",
+            "left-1/2",
+            "-translate-x-1/2",
+            "group-hover:scale-100",
+            "transition-transform",
+            "origin-bottom",
+            "dark:text-gray-0 text-gray-900",
           )}
         >
           <path

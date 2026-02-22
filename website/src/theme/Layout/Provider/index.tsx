@@ -1,13 +1,13 @@
-import { DocsPreferredVersionContextProvider } from '@docusaurus/plugin-content-docs/client';
-import { composeProviders } from '@docusaurus/theme-common';
+import { DocsPreferredVersionContextProvider } from "@docusaurus/plugin-content-docs/client";
+import { composeProviders } from "@docusaurus/theme-common";
 import {
   AnnouncementBarProvider,
   ColorModeProvider,
   NavbarProvider,
   PluginHtmlClassNameProvider,
   ScrollControllerProvider,
-} from '@docusaurus/theme-common/internal';
-import type { Props } from '@theme/Layout/Provider';
+} from "@docusaurus/theme-common/internal";
+import type { Props } from "@theme/Layout/Provider";
 
 const Provider = composeProviders([
   ColorModeProvider,

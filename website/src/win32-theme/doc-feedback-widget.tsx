@@ -1,5 +1,5 @@
-import { useLocation } from '@docusaurus/router';
-import { useColorMode } from '@docusaurus/theme-common';
+import { useLocation } from "@docusaurus/router";
+import { useColorMode } from "@docusaurus/theme-common";
 import {
   autoUpdate,
   flip,
@@ -7,16 +7,16 @@ import {
   useDismiss,
   useFloating,
   useInteractions,
-} from '@floating-ui/react';
-import clsx from 'clsx';
-import { AnimatePresence, motion } from 'framer-motion';
-import { CSSProperties, PropsWithChildren, SVGProps, useState } from 'react';
-import { FaThumbsDown, FaThumbsUp } from 'react-icons/fa';
+} from "@floating-ui/react";
+import clsx from "clsx";
+import { AnimatePresence, motion } from "framer-motion";
+import { CSSProperties, PropsWithChildren, SVGProps, useState } from "react";
+import { FaThumbsDown, FaThumbsUp } from "react-icons/fa";
 import {
   SurveyOption,
   SurveyTypeEnum,
   useSurveyAPI,
-} from '../hooks/use-survey-api';
+} from "../hooks/use-survey-api";
 
 type Props = {
   id: string;
@@ -25,7 +25,7 @@ type Props = {
 export default function FeedbackWidget(props: PropsWithChildren<Props>) {
   const location = useLocation();
 
-  const [feedbackText, setFeedbackText] = useState('');
+  const [feedbackText, setFeedbackText] = useState("");
   const [selectedThumb, setSelectedThumb] = useState<SurveyOption | null>(null);
   const [isFeedbackTextIsVisible, setIsFeedbackTextIsVisible] = useState(false);
   const [resultViewVisible, setResultViewVisible] = useState(false);
@@ -81,43 +81,43 @@ export default function FeedbackWidget(props: PropsWithChildren<Props>) {
       {props.children}
       <div
         className={clsx(
-          'relative',
-          'z-popover',
-          'hidden md:flex',
-          'items-center',
-          'gap-3',
-          'w-max h-[40px]',
-          'pt-1 pr-1 pb-1 pl-4',
-          'bg-[#99A1B31A] dark:bg-[#2F333C]',
-          'rounded-[28px]',
-          'transition-all duration-300 ease-in-out',
-          !isPopoverVisible && 'opacity-0',
-          'group-hover:opacity-100'
+          "relative",
+          "z-popover",
+          "hidden md:flex",
+          "items-center",
+          "gap-3",
+          "w-max h-[40px]",
+          "pt-1 pr-1 pb-1 pl-4",
+          "bg-[#99A1B31A] dark:bg-[#2F333C]",
+          "rounded-[28px]",
+          "transition-all duration-300 ease-in-out",
+          !isPopoverVisible && "opacity-0",
+          "group-hover:opacity-100",
         )}
       >
         <div
           className={clsx(
-            'text-xs',
-            'whitespace-nowrap',
-            'text-[#23272F] dark:text-[#E3E4E5]'
+            "text-xs",
+            "whitespace-nowrap",
+            "text-[#23272F] dark:text-[#E3E4E5]",
           )}
         >
           Was this helpful?
         </div>
         <div
-          className={clsx('flex', 'items-center', 'gap-1', 'widget-actions')}
+          className={clsx("flex", "items-center", "gap-1", "widget-actions")}
         >
           <button
             type="button"
             onClick={() => onThumbsUpDownClick(THUMBS_VALUES.UP)}
             className={clsx(
-              'w-8 h-8',
-              'flex items-center justify-center',
-              'rounded-full',
-              'text-gray-500',
-              'hover:text-green-500 hover:bg-green-500/20',
-              'transition-all duration-200 ease-in-out',
-              selectedThumb === 1 && 'text-green-500 bg-green-500/20'
+              "w-8 h-8",
+              "flex items-center justify-center",
+              "rounded-full",
+              "text-gray-500",
+              "hover:text-green-500 hover:bg-green-500/20",
+              "transition-all duration-200 ease-in-out",
+              selectedThumb === 1 && "text-green-500 bg-green-500/20",
             )}
           >
             <FaThumbsUp className="w-3 h-3" />
@@ -126,13 +126,13 @@ export default function FeedbackWidget(props: PropsWithChildren<Props>) {
             type="button"
             onClick={() => onThumbsUpDownClick(THUMBS_VALUES.DOWN)}
             className={clsx(
-              'w-8 h-8',
-              'flex items-center justify-center',
-              'rounded-full',
-              'text-gray-500',
-              'hover:text-red-500 hover:bg-red-500/20',
-              'transition-all duration-200 ease-in-out',
-              selectedThumb === 2 && 'text-red-500 bg-red-500/20'
+              "w-8 h-8",
+              "flex items-center justify-center",
+              "rounded-full",
+              "text-gray-500",
+              "hover:text-red-500 hover:bg-red-500/20",
+              "transition-all duration-200 ease-in-out",
+              selectedThumb === 2 && "text-red-500 bg-red-500/20",
             )}
           >
             <FaThumbsDown className="w-3 h-3" />
@@ -149,12 +149,12 @@ export default function FeedbackWidget(props: PropsWithChildren<Props>) {
             }
           }}
           arrowStyle={{
-            right: selectedThumb === 1 ? '150px' : '115px',
+            right: selectedThumb === 1 ? "150px" : "115px",
           }}
         >
           {!resultViewVisible && (
             <form
-              className={clsx('flex flex-col', 'p-2')}
+              className={clsx("flex flex-col", "p-2")}
               onSubmit={(e) => {
                 e.preventDefault();
                 onFeedbackTextSubmit();
@@ -168,25 +168,25 @@ export default function FeedbackWidget(props: PropsWithChildren<Props>) {
                 onChange={(e) => setFeedbackText(e.target.value)}
                 value={feedbackText}
                 className={clsx(
-                  'w-full',
-                  'bg-white dark:bg-[#343A46]',
-                  'text-[#23272F] dark:text-[#E3E4E5]',
-                  'resize-none',
-                  'rounded-xl',
-                  'text-xs',
-                  'py-2 px-3'
+                  "w-full",
+                  "bg-white dark:bg-[#343A46]",
+                  "text-[#23272F] dark:text-[#E3E4E5]",
+                  "resize-none",
+                  "rounded-xl",
+                  "text-xs",
+                  "py-2 px-3",
                 )}
               />
               <button
                 type="submit"
                 className={clsx(
-                  'w-16 h-6',
-                  'flex items-center justify-center',
-                  'bg-win32-react-light-link dark:bg-win32-react-dark-link',
-                  'text-xs',
-                  'text-white',
-                  'rounded-full',
-                  'mt-2 ml-auto'
+                  "w-16 h-6",
+                  "flex items-center justify-center",
+                  "bg-win32-react-light-link dark:bg-win32-react-dark-link",
+                  "text-xs",
+                  "text-white",
+                  "rounded-full",
+                  "mt-2 ml-auto",
                 )}
               >
                 Send
@@ -196,10 +196,10 @@ export default function FeedbackWidget(props: PropsWithChildren<Props>) {
           {resultViewVisible && (
             <div
               className={clsx(
-                'flex items-center',
-                'p-4',
-                'text-xs',
-                'text-gray-500'
+                "flex items-center",
+                "p-4",
+                "text-xs",
+                "text-gray-500",
               )}
             >
               <span>Thank you for your feedback!</span>
@@ -216,12 +216,12 @@ const FeedbackTextPopover = (
     isOpen: boolean;
     arrowStyle?: CSSProperties;
     onOpenChange?: (isOpen: boolean) => void;
-  }>
+  }>,
 ) => {
   const [flipped, setFlipped] = useState(false);
 
   const { refs, floatingStyles, context } = useFloating({
-    placement: 'bottom-start',
+    placement: "bottom-start",
     open: props.isOpen,
     onOpenChange: props.onOpenChange,
     whileElementsMounted: autoUpdate,
@@ -237,23 +237,23 @@ const FeedbackTextPopover = (
         };
       }),
       flip(({ placement }) => {
-        if (placement.includes('bottom')) {
+        if (placement.includes("bottom")) {
           setFlipped(false);
         }
 
-        if (placement.includes('top')) {
+        if (placement.includes("top")) {
           setFlipped(true);
         }
 
         return {
-          fallbackPlacements: ['top-start'],
+          fallbackPlacements: ["top-start"],
         };
       }),
     ],
   });
   const dismiss = useDismiss(context, {
     outsidePress: (event) =>
-      !(event.target as HTMLElement)?.closest?.('.widget-actions'),
+      !(event.target as HTMLElement)?.closest?.(".widget-actions"),
   });
   const { getReferenceProps, getFloatingProps } = useInteractions([dismiss]);
 
@@ -263,8 +263,8 @@ const FeedbackTextPopover = (
         ref={refs.setReference}
         {...getReferenceProps()}
         style={{
-          position: 'absolute',
-          top: '0',
+          position: "absolute",
+          top: "0",
           left: 0,
         }}
       />
@@ -278,22 +278,22 @@ const FeedbackTextPopover = (
             style={floatingStyles}
             {...getFloatingProps()}
             className={clsx(
-              'w-[320px]',
-              'bg-[#EAEBEF] dark:bg-win32-react-dark-code',
-              'border border-[#E3E4E5] dark:border-[#343A46]',
-              'rounded-[20px]',
-              'relative'
+              "w-[320px]",
+              "bg-[#EAEBEF] dark:bg-win32-react-dark-code",
+              "border border-[#E3E4E5] dark:border-[#343A46]",
+              "rounded-[20px]",
+              "relative",
             )}
           >
             {props.children}
             <PopoverPointer
               style={{
-                position: 'absolute',
-                top: flipped ? 'unset' : '-10px',
-                bottom: flipped ? '-10px' : 'unset',
-                transform: flipped ? 'rotate(180deg)' : 'rotate(0deg)',
-                transition: 'right 0.2s ease-in-out',
-                willChange: 'right',
+                position: "absolute",
+                top: flipped ? "unset" : "-10px",
+                bottom: flipped ? "-10px" : "unset",
+                transform: flipped ? "rotate(180deg)" : "rotate(0deg)",
+                transition: "right 0.2s ease-in-out",
+                willChange: "right",
                 ...props.arrowStyle,
               }}
             />
@@ -306,7 +306,7 @@ const FeedbackTextPopover = (
 
 const PopoverPointer = (props: SVGProps<SVGSVGElement>) => {
   const { colorMode } = useColorMode();
-  const isDarkTheme = colorMode === 'dark';
+  const isDarkTheme = colorMode === "dark";
 
   return (
     <svg
@@ -319,7 +319,7 @@ const PopoverPointer = (props: SVGProps<SVGSVGElement>) => {
     >
       <title>Popover Pointer</title>
       <path
-        fill={isDarkTheme ? '#16181D' : '#EAEBEF'}
+        fill={isDarkTheme ? "#16181D" : "#EAEBEF"}
         stroke="url(#a)"
         d="M18.303 2.077C18.892 1.105 19.9.5 21 .5s2.108.605 2.697 1.577l3.026 4.992c.928 1.532 2.476 2.431 4.11 2.431H41.5v8H.5v-8h10.667c1.634 0 3.182-.899 4.11-2.431l3.026-4.992Z"
       />
@@ -332,10 +332,10 @@ const PopoverPointer = (props: SVGProps<SVGSVGElement>) => {
           y2={16}
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset={0.59} stopColor={isDarkTheme ? '#343A46' : '#E3E4E5'} />
+          <stop offset={0.59} stopColor={isDarkTheme ? "#343A46" : "#E3E4E5"} />
           <stop
             offset={0.602}
-            stopColor={isDarkTheme ? '#343A46' : '#E3E4E5'}
+            stopColor={isDarkTheme ? "#343A46" : "#E3E4E5"}
             stopOpacity={0}
           />
         </linearGradient>
@@ -344,7 +344,7 @@ const PopoverPointer = (props: SVGProps<SVGSVGElement>) => {
   );
 };
 
-const THUMBS_VALUES: Record<'UP' | 'DOWN', SurveyOption> = {
+const THUMBS_VALUES: Record<"UP" | "DOWN", SurveyOption> = {
   UP: 1,
   DOWN: 2,
 };

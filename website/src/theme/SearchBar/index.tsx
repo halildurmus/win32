@@ -1,21 +1,21 @@
-import { useDocSearchKeyboardEvents } from '@docsearch/react';
-import Head from '@docusaurus/Head';
-import Link from '@docusaurus/Link';
-import { useHistory } from '@docusaurus/router';
+import { useDocSearchKeyboardEvents } from "@docsearch/react";
+import Head from "@docusaurus/Head";
+import Link from "@docusaurus/Link";
+import { useHistory } from "@docusaurus/router";
 import {
   isRegexpStringMatch,
   useSearchLinkCreator,
-} from '@docusaurus/theme-common';
+} from "@docusaurus/theme-common";
 import {
   useAlgoliaContextualFacetFilters,
   useSearchResultUrlProcessor,
-} from '@docusaurus/theme-search-algolia/client';
-import Translate from '@docusaurus/Translate';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import { DocSearchButton } from '@site/src/win32-theme/doc-search-button';
-import translations from '@theme/SearchTranslations';
-import { useCallback, useMemo, useRef, useState } from 'react';
-import { createPortal } from 'react-dom';
+} from "@docusaurus/theme-search-algolia/client";
+import Translate from "@docusaurus/Translate";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import { DocSearchButton } from "@site/src/win32-theme/doc-search-button";
+import translations from "@theme/SearchTranslations";
+import { useCallback, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 let DocSearchModal = null;
 
@@ -31,14 +31,14 @@ function ResultsFooter({ state, onClose }) {
         id="theme.SearchBar.seeAll"
         values={{ count: state.context.nbHits }}
       >
-        {'See all {count} results'}
+        {"See all {count} results"}
       </Translate>
     </Link>
   );
 }
 
 function mergeFacetFilters(f1, f2) {
-  const normalize = (f) => (typeof f === 'string' ? [f] : f);
+  const normalize = (f) => (typeof f === "string" ? [f] : f);
   return [...normalize(f1), ...normalize(f2)];
 }
 
@@ -72,19 +72,19 @@ function DocSearch({
       return Promise.resolve();
     }
     return Promise.all([
-      import('@docsearch/react/modal'),
-      import('@docsearch/react/style'),
-      import('./styles.css'),
+      import("@docsearch/react/modal"),
+      import("@docsearch/react/style"),
+      import("./styles.css"),
     ]).then(([{ DocSearchModal: Modal }]) => {
       DocSearchModal = Modal;
     });
   }, []);
   const onOpen = useCallback(() => {
     importDocSearchModalIfNeeded().then(() => {
-      searchContainer.current = document.createElement('div');
+      searchContainer.current = document.createElement("div");
       document.body.insertBefore(
         searchContainer.current,
-        document.body.firstChild
+        document.body.firstChild,
       );
       setIsOpen(true);
     });
@@ -100,7 +100,7 @@ function DocSearch({
         setInitialQuery(event.key);
       });
     },
-    [importDocSearchModalIfNeeded, setIsOpen, setInitialQuery]
+    [importDocSearchModalIfNeeded, setIsOpen, setInitialQuery],
   );
   const navigator = useRef({
     navigate({ itemUrl }) {
@@ -121,24 +121,24 @@ function DocSearch({
         items.map((item) => ({
           ...item,
           url: processSearchResultUrl(item.url),
-        }))
+        })),
   ).current;
   const resultsFooterComponent = useMemo(
     () =>
       function ResultsFooterWrapper(footerProps) {
         return <ResultsFooter {...footerProps} onClose={onClose} />;
       },
-    [onClose]
+    [onClose],
   );
   const transformSearchClient = useCallback(
     (searchClient) => {
       searchClient.addAlgoliaAgent(
-        'docusaurus',
-        siteMetadata.docusaurusVersion
+        "docusaurus",
+        siteMetadata.docusaurusVersion,
       );
       return searchClient;
     },
-    [siteMetadata.docusaurusVersion]
+    [siteMetadata.docusaurusVersion],
   );
   useDocSearchKeyboardEvents({
     isOpen,
@@ -201,7 +201,7 @@ function DocSearch({
             placeholder={translations.placeholder}
             translations={translations.modal}
           />,
-          searchContainer.current
+          searchContainer.current,
         )}
     </>
   );

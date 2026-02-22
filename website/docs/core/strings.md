@@ -248,7 +248,7 @@ The resulting memory layout:
 [BSTR]: https://pub.dev/documentation/win32/latest/win32/BSTR-extension-type.html
 [HSTRING]: https://pub.dev/documentation/win32/latest/win32/HSTRING-extension-type.html
 [HSTRING.toDartString]: https://pub.dev/documentation/win32/latest/win32/HSTRING/toDartString.html
-[SHGetFolderPath]: learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shgetfolderpathw
+[SHGetFolderPath]: https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shgetfolderpathw
 [ArenaExtension.pwstrBuffer]: https://pub.dev/documentation/win32/latest/win32/ArenaExtension/pwstrBuffer.html
 [wsalloc]: https://pub.dev/documentation/win32/latest/win32/wsalloc.html
 [Utf16Pointer.toDartString]: https://pub.dev/documentation/ffi/latest/ffi/Utf16Pointer/toDartString.html

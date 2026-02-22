@@ -1,5 +1,5 @@
-import { useBlogPost } from '@docusaurus/plugin-content-blog/client';
-import { useBaseUrlUtils } from '@docusaurus/useBaseUrl';
+import { useBlogPost } from "@docusaurus/plugin-content-blog/client";
+import { useBaseUrlUtils } from "@docusaurus/useBaseUrl";
 
 export default function BlogPostItemContainer({ children, className }) {
   const {
@@ -22,7 +22,7 @@ export default function BlogPostItemContainer({ children, className }) {
         <link itemProp="image" href={withBaseUrl(image, { absolute: true })} />
       )}
       {keywords.length > 0 && (
-        <meta itemProp="keywords" content={keywords.join(',')} />
+        <meta itemProp="keywords" content={keywords.join(",")} />
       )}
       {children}
     </article>

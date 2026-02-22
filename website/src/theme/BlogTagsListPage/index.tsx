@@ -3,12 +3,12 @@ import {
   PageMetadata,
   ThemeClassNames,
   translateTagsPageTitle,
-} from '@docusaurus/theme-common';
-import BlogLayout from '@theme/BlogLayout';
-import Heading from '@theme/Heading';
-import SearchMetadata from '@theme/SearchMetadata';
-import TagsListByLetter from '@theme/TagsListByLetter';
-import clsx from 'clsx';
+} from "@docusaurus/theme-common";
+import BlogLayout from "@theme/BlogLayout";
+import Heading from "@theme/Heading";
+import SearchMetadata from "@theme/SearchMetadata";
+import TagsListByLetter from "@theme/TagsListByLetter";
+import clsx from "clsx";
 
 export default function BlogTagsListPage({ tags, sidebar }) {
   const title = translateTagsPageTitle();
@@ -16,7 +16,7 @@ export default function BlogTagsListPage({ tags, sidebar }) {
     <HtmlClassNameProvider
       className={clsx(
         ThemeClassNames.wrapper.blogPages,
-        ThemeClassNames.page.blogTagsListPage
+        ThemeClassNames.page.blogTagsListPage,
       )}
     >
       <PageMetadata title={title} />

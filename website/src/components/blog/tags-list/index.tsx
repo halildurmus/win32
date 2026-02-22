@@ -1,19 +1,19 @@
-import { CommonDrawer } from '@site/src/win32-theme/common-drawer';
-import Tag from '@theme/Tag';
-import clsx from 'clsx';
-import React from 'react';
-import { TbCircleChevronDown, TbFilter } from 'react-icons/tb';
-import { titleCase } from 'title-case';
+import { CommonDrawer } from "@site/src/win32-theme/common-drawer";
+import Tag from "@theme/Tag";
+import clsx from "clsx";
+import React from "react";
+import { TbCircleChevronDown, TbFilter } from "react-icons/tb";
+import { titleCase } from "title-case";
 
 export default function TagsList({ tags }) {
   const [collapsed, setCollapsed] = React.useState(true);
   const priorityTags = [
-    'win32',
-    'com',
-    'dart',
-    'flutter',
-    'tutorial',
-    'comparison',
+    "win32",
+    "com",
+    "dart",
+    "flutter",
+    "tutorial",
+    "comparison",
   ];
 
   const sortedTags = (tags ?? []).sort((a, b) => {
@@ -28,10 +28,10 @@ export default function TagsList({ tags }) {
       <Desktop
         collapsed={collapsed}
         tags={sortedTags}
-        className={clsx('hidden blog-lg:flex')}
+        className={clsx("hidden blog-lg:flex")}
         onShowMoreClick={(collapsed) => setCollapsed(collapsed)}
       />
-      <Mobile tags={sortedTags} className={clsx('block blog-lg:hidden')} />
+      <Mobile tags={sortedTags} className={clsx("block blog-lg:hidden")} />
     </>
   );
 }
@@ -50,30 +50,30 @@ const Desktop = ({
   return (
     <div
       className={clsx(
-        'bg-win32-react-1 dark:bg-win32-react-dark-code',
-        'justify-between',
-        'items-start',
-        'p-5',
-        collapsed && 'rounded-full',
-        !collapsed && 'rounded-3xl',
-        'not-prose',
-        className
+        "bg-win32-react-1 dark:bg-win32-react-dark-code",
+        "justify-between",
+        "items-start",
+        "p-5",
+        collapsed && "rounded-full",
+        !collapsed && "rounded-3xl",
+        "not-prose",
+        className,
       )}
     >
       <ul
         className={clsx(
-          'overflow-hidden',
-          'flex-1',
-          !collapsed && 'h-24',
-          collapsed && 'h-8',
-          'm-0 p-0',
-          'mr-16',
-          'transition-all duration-300 ease-in-out'
+          "overflow-hidden",
+          "flex-1",
+          !collapsed && "h-24",
+          collapsed && "h-8",
+          "m-0 p-0",
+          "mr-16",
+          "transition-all duration-300 ease-in-out",
         )}
       >
         {tags.map((tag) => (
           <li
-            className={clsx('inline-flex', 'm-1', 'mr-3')}
+            className={clsx("inline-flex", "m-1", "mr-3")}
             key={tag.permalink}
           >
             <Tag {...tag} label={mapLabel(tag.label)} />
@@ -84,33 +84,33 @@ const Desktop = ({
         type="button"
         onClick={() => onShowMoreClick(!collapsed)}
         className={clsx(
-          'appearance-none',
-          'flex',
-          'items-center',
-          'justify-center',
-          'gap-1',
-          'cursor-pointer',
-          'flex-shrink',
-          'no-underline hover:no-underline',
-          'text-xs',
-          'rounded-full',
-          'py-1',
-          'pl-3',
-          'pr-1',
-          'mt-1',
-          'text-win32-react-8 dark:text-win32-react-3',
-          'bg-win32-react-3 dark:bg-win32-react-7'
+          "appearance-none",
+          "flex",
+          "items-center",
+          "justify-center",
+          "gap-1",
+          "cursor-pointer",
+          "flex-shrink",
+          "no-underline hover:no-underline",
+          "text-xs",
+          "rounded-full",
+          "py-1",
+          "pl-3",
+          "pr-1",
+          "mt-1",
+          "text-win32-react-8 dark:text-win32-react-3",
+          "bg-win32-react-3 dark:bg-win32-react-7",
         )}
       >
-        Show More{' '}
+        Show More{" "}
         <TbCircleChevronDown
           className={clsx(
-            'w-4 h-4',
-            'opacity-30',
-            'transition-transform duration-200 ease-in-out',
+            "w-4 h-4",
+            "opacity-30",
+            "transition-transform duration-200 ease-in-out",
             {
-              'rotate-180 transform': !collapsed,
-            }
+              "rotate-180 transform": !collapsed,
+            },
           )}
         />
       </button>
@@ -128,14 +128,14 @@ const Mobile = ({ tags, className }: { tags: any; className?: string }) => {
           type="button"
           onClick={() => setIsFilterDrawerOpen(true)}
           className={clsx(
-            'flex',
-            'items-center',
-            'justify-center',
-            'gap-2',
-            'rounded-full',
-            'px-6 py-3',
-            'bg-win32-react-3 dark:bg-win32-react-6',
-            'text-win32-react-8 dark:text-white'
+            "flex",
+            "items-center",
+            "justify-center",
+            "gap-2",
+            "rounded-full",
+            "px-6 py-3",
+            "bg-win32-react-3 dark:bg-win32-react-6",
+            "text-win32-react-8 dark:text-white",
           )}
         >
           <TbFilter className="w-5 h-5" />
@@ -149,14 +149,14 @@ const Mobile = ({ tags, className }: { tags: any; className?: string }) => {
         variant="blog"
       >
         <ul
-          className={clsx('overflow-hidden', 'flex', 'flex-col', 'gap-6')}
+          className={clsx("overflow-hidden", "flex", "flex-col", "gap-6")}
           style={{
             margin: 0,
             padding: 0,
           }}
         >
           {tags.map((tag) => (
-            <li className={clsx('flex')} key={tag.permalink}>
+            <li className={clsx("flex")} key={tag.permalink}>
               <Tag
                 {...tag}
                 label={mapLabel(tag.label)}
@@ -172,13 +172,13 @@ const Mobile = ({ tags, className }: { tags: any; className?: string }) => {
 };
 
 const mapLabel = (label) => {
-  let newLabel = `${label.replace(/-/g, ' ')}`;
+  let newLabel = `${label.replace(/-/g, " ")}`;
 
   const replace = [
-    ['com', 'COM'],
-    ['dart', 'Dart'],
-    ['flutter', 'Flutter'],
-    ['win32', 'Win32'],
+    ["com", "COM"],
+    ["dart", "Dart"],
+    ["flutter", "Flutter"],
+    ["win32", "Win32"],
   ];
 
   replace.forEach((element) => {

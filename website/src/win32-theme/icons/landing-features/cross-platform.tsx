@@ -1,5 +1,5 @@
-import clsx from 'clsx';
-import type { SVGProps } from 'react';
+import clsx from "clsx";
+import type { SVGProps } from "react";
 import { PiDevicesLight } from "react-icons/pi";
 
 export const CrossPlatformIcon = (props: SVGProps<SVGSVGElement>) => (
@@ -10,7 +10,7 @@ export const CrossPlatformIcon = (props: SVGProps<SVGSVGElement>) => (
     viewBox="0 0 64 64"
     fill="none"
     {...props}
-    className={clsx(props.className, 'text-win32-red')}
+    className={clsx(props.className, "text-win32-red")}
   >
     <rect
       width={64}

@@ -1,10 +1,10 @@
-import Link, { type Props as LinkProps } from '@docusaurus/Link';
-import type { Props } from '@theme/Blog/Components/Author';
-import AuthorSocials from '@theme/Blog/Components/Author/Socials';
-import Heading from '@theme/Heading';
-import clsx from 'clsx';
-import { type ReactNode } from 'react';
-import styles from './styles.module.css';
+import Link, { type Props as LinkProps } from "@docusaurus/Link";
+import type { Props } from "@theme/Blog/Components/Author";
+import AuthorSocials from "@theme/Blog/Components/Author/Socials";
+import Heading from "@theme/Heading";
+import clsx from "clsx";
+import { type ReactNode } from "react";
+import styles from "./styles.module.css";
 
 function MaybeLink(props: LinkProps): ReactNode {
   if (props.href) {
@@ -17,9 +17,9 @@ function AuthorTitle({ title }: { title: string }) {
   return (
     <div
       className={clsx(
-        'text-xs blog-sm:text-base',
-        'font-medium',
-        'text-gray-600 dark:text-gray-400'
+        "text-xs blog-sm:text-base",
+        "font-medium",
+        "text-gray-600 dark:text-gray-400",
       )}
     >
       {title}
@@ -27,7 +27,7 @@ function AuthorTitle({ title }: { title: string }) {
   );
 }
 
-function AuthorName({ name, as }: { name: string; as: Props['as'] }) {
+function AuthorName({ name, as }: { name: string; as: Props["as"] }) {
   if (!as) {
     return <span className={clsx(styles.authorName)}>{name}</span>;
   } else {
@@ -60,15 +60,15 @@ export default function BlogAuthor({
   return (
     <div
       className={clsx(
-        'avatar margin-bottom--sm',
+        "avatar margin-bottom--sm",
         className,
-        styles[`author-as-${as}`]
+        styles[`author-as-${as}`],
       )}
     >
       {imageURL && (
         <MaybeLink href={link} className="avatar__photo-link">
           <img
-            className={clsx('avatar__photo', styles.authorImage)}
+            className={clsx("avatar__photo", styles.authorImage)}
             src={imageURL}
             alt={name}
           />
@@ -76,7 +76,7 @@ export default function BlogAuthor({
       )}
 
       {(name || title) && (
-        <div className={clsx('avatar__intro', styles.authorDetails)}>
+        <div className={clsx("avatar__intro", styles.authorDetails)}>
           <div className="avatar__name">
             {name && (
               <MaybeLink href={link} className="hover:no-underline">

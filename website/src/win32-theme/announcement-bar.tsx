@@ -1,81 +1,81 @@
-import clsx from 'clsx';
-import { SVGProps } from 'react';
+import clsx from "clsx";
+import { SVGProps } from "react";
 
 export const AnnouncementBar = () => {
   return (
     <div
       className={clsx(
-        'not-prose',
-        'w-full h-12 relative',
-        'bg-announcement-bar',
-        'font-inter',
-        'z-announcement-bar',
+        "not-prose",
+        "w-full h-12 relative",
+        "bg-announcement-bar",
+        "font-inter",
+        "z-announcement-bar",
       )}
     >
       <div
         className={clsx(
-          'hidden lg:flex w-full h-full',
-          'max-w-screen overflow-hidden',
-          'border-b border-solid border-[#47ebeb26]',
-          'announcement-bar-mask',
+          "hidden lg:flex w-full h-full",
+          "max-w-screen overflow-hidden",
+          "border-b border-solid border-[#47ebeb26]",
+          "announcement-bar-mask",
         )}
       >
         <div
           className={clsx(
-            'w-[1280px] h-full',
-            'mx-auto',
-            'flex',
-            'justify-between',
+            "w-[1280px] h-full",
+            "mx-auto",
+            "flex",
+            "justify-between",
           )}
         >
-          <div className={clsx('w-[calc(50%-300px)] h-full', 'relative')}>
+          <div className={clsx("w-[calc(50%-300px)] h-full", "relative")}>
             <GlowSmall
               style={{
-                animationDelay: '1.5s',
+                animationDelay: "1.5s",
               }}
-              className={clsx('absolute', 'top-[2px]', 'right-[220px]')}
-              id={'1'}
+              className={clsx("absolute", "top-[2px]", "right-[220px]")}
+              id={"1"}
             />
             <GlowSmall
               style={{
-                animationDelay: '1s',
+                animationDelay: "1s",
               }}
               className={clsx(
-                'absolute',
-                'rotate-180',
-                'top-[8px] right-[100px]',
+                "absolute",
+                "rotate-180",
+                "top-[8px] right-[100px]",
               )}
-              id={'2'}
+              id={"2"}
             />
-            <GlowBig className={clsx('absolute', 'right-[10px]')} id={'3'} />
+            <GlowBig className={clsx("absolute", "right-[10px]")} id={"3"} />
           </div>
 
-          <div className={clsx('w-[calc(50%-300px)] h-full', 'relative')}>
+          <div className={clsx("w-[calc(50%-300px)] h-full", "relative")}>
             <GlowSmall
               style={{
-                animationDelay: '2s',
+                animationDelay: "2s",
               }}
               className={clsx(
-                'absolute',
-                'rotate-180',
-                'top-[6px] right-[180px]',
+                "absolute",
+                "rotate-180",
+                "top-[6px] right-[180px]",
               )}
-              id={'4'}
+              id={"4"}
             />
             <GlowSmall
               style={{
-                animationDelay: '0.5s',
+                animationDelay: "0.5s",
               }}
               className={clsx(
-                'delay-[1300]',
-                'absolute',
-                'top-[2px]',
-                'right-[40px]',
+                "delay-[1300]",
+                "absolute",
+                "top-[2px]",
+                "right-[40px]",
               )}
-              id={'5'}
+              id={"5"}
             />
 
-            <GlowBig className={clsx('absolute', 'right-[-70px]')} id={'6'} />
+            <GlowBig className={clsx("absolute", "right-[-70px]")} id={"6"} />
           </div>
         </div>
       </div>
@@ -87,31 +87,31 @@ export const AnnouncementBar = () => {
 const Text = () => {
   return (
     <a
-      href={'/changelog/6.0.0'}
+      href={"/changelog/6.0.0"}
       target="_blank"
       rel="noreferrer"
       className={clsx(
-        'not-prose',
-        'relative lg:absolute',
-        'px-4 lg:px-0',
-        'top-0',
-        'left-[50%]',
-        'translate-x-[-50%]',
-        'bg-announcement-bar-text',
-        'h-full w-full lg:w-[780px]',
-        'flex items-center justify-center',
-        'text-white',
-        'text-sm md:text-base',
-        'text-center',
-        'no-underline',
-        'hover:no-underline',
-        'hover:text-white',
+        "not-prose",
+        "relative lg:absolute",
+        "px-4 lg:px-0",
+        "top-0",
+        "left-[50%]",
+        "translate-x-[-50%]",
+        "bg-announcement-bar-text",
+        "h-full w-full lg:w-[780px]",
+        "flex items-center justify-center",
+        "text-white",
+        "text-sm md:text-base",
+        "text-center",
+        "no-underline",
+        "hover:no-underline",
+        "hover:text-white",
       )}
     >
-      <div className={clsx('flex items-center gap-2')}>
+      <div className={clsx("flex items-center gap-2")}>
         <span>🎉</span>
         <span>
-          <span className={clsx('font-semibold')}>win32 v6</span> is out!
+          <span className={clsx("font-semibold")}>win32 v6</span> is out!
         </span>
         {/* <span>⭐️</span>
         <span>
@@ -132,8 +132,8 @@ const GlowSmall = (props: SVGProps<SVGSVGElement>) => (
     fill="none"
     {...props}
     className={clsx(
-      'animate-announcement-bar-glow',
-      'opacity-1',
+      "animate-announcement-bar-glow",
+      "opacity-1",
       props.className,
     )}
   >
@@ -162,8 +162,8 @@ const GlowBig = (props: SVGProps<SVGSVGElement>) => (
     fill="none"
     {...props}
     className={clsx(
-      'animate-announcement-bar-glow',
-      'opacity-1',
+      "animate-announcement-bar-glow",
+      "opacity-1",
       props.className,
     )}
   >

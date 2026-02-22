@@ -1,4 +1,4 @@
-import { visit } from 'unist-util-visit';
+import { visit } from "unist-util-visit";
 
 /*
   This plugin wraps children of each heading with thumbs up-down feedback widget.
@@ -49,7 +49,7 @@ export const transform = (ast) => {
 
   let nodeBefore: NodeHeading | null = null;
 
-  visit(ast, 'heading', (nodeCurrent: NodeHeading) => {
+  visit(ast, "heading", (nodeCurrent: NodeHeading) => {
     const { depth } = nodeCurrent;
     if (depth === 1) return;
 
@@ -89,7 +89,7 @@ export const transform = (ast) => {
     // get nodes between headings
     const nodesBetweenHeadings = ast.children.slice(
       belowHeadingIndex,
-      belowHeadingIndex + itemCountBetweenHeadings
+      belowHeadingIndex + itemCountBetweenHeadings,
     );
 
     // remove nodes between headings
@@ -98,12 +98,12 @@ export const transform = (ast) => {
 
     // create widget with nodes between headings as its children
     ast.children.splice(belowHeadingIndex, 0, {
-      type: 'mdxJsxFlowElement',
-      name: 'FeedbackWidget',
+      type: "mdxJsxFlowElement",
+      name: "FeedbackWidget",
       attributes: [
         {
-          type: 'mdxJsxAttribute',
-          name: 'id',
+          type: "mdxJsxAttribute",
+          name: "id",
           value: data.id,
         },
       ],
@@ -131,12 +131,12 @@ export const transform = (ast) => {
   if (nodeBefore && nodeBefore?.data?.id) {
     const nodeBeforeIndex = ast.children.indexOf(nodeBefore);
     ast.children.push({
-      type: 'mdxJsxFlowElement',
-      name: 'FeedbackWidget',
+      type: "mdxJsxFlowElement",
+      name: "FeedbackWidget",
       attributes: [
         {
-          type: 'mdxJsxAttribute',
-          name: 'id',
+          type: "mdxJsxAttribute",
+          name: "id",
           value: nodeBefore.data.id,
         },
       ],
@@ -145,7 +145,7 @@ export const transform = (ast) => {
 };
 
 type NodeHeading = {
-  type: 'heading';
+  type: "heading";
   depth: 1 | 2 | 3 | 4 | 5 | 6;
   children: any[];
   position: {

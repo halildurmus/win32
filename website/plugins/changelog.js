@@ -1,7 +1,7 @@
-import pluginContentBlog from '@docusaurus/plugin-content-blog';
-import { aliasedSitePath, docuHash, normalizeUrl } from '@docusaurus/utils';
-import fs from 'fs-extra';
-import path from 'path';
+import pluginContentBlog from "@docusaurus/plugin-content-blog";
+import { aliasedSitePath, docuHash, normalizeUrl } from "@docusaurus/utils";
+import fs from "fs-extra";
+import path from "path";
 
 /**
  * Multiple versions may be published on the same day, causing the order to be
@@ -27,13 +27,13 @@ function processSection(section) {
 
   const content = section
     // Remove the header line
-    .replace(/^## .*$/m, '')
+    .replace(/^## .*$/m, "")
     // Remove reference-style link definitions
-    .replace(/^\[[^\]]+\]: .*$/gm, '')
+    .replace(/^\[[^\]]+\]: .*$/gm, "")
     .trim();
 
   const authorMatches = [...content.matchAll(/\bby @([a-zA-Z0-9-]+)\b/g)];
-  let authors = [...new Set(authorMatches.map(m => m[1]))];
+  let authors = [...new Set(authorMatches.map((m) => m[1]))];
   if (authors) {
     authors = authors
       .map((alias) => ({
@@ -59,19 +59,20 @@ function processSection(section) {
     content: `---
 mdx:
  format: md
-date: ${`${date}T${hour}:00`}${authors && authors.length > 0
+date: ${`${date}T${hour}:00`}${
+      authors && authors.length > 0
         ? `
 authors:
-${authors.map((author) => `  - '${author.alias}'`).join('\n')}`
-        : ''
-      }
+${authors.map((author) => `  - '${author.alias}'`).join("\n")}`
+        : ""
+    }
 ---
 
 # ${version}
 
 <!-- truncate -->
 
-${content.replace(/####/g, '##')}`,
+${content.replace(/####/g, "##")}`,
   };
 }
 
@@ -80,23 +81,23 @@ ${content.replace(/####/g, '##')}`,
  * @returns {import('@docusaurus/types').Plugin}
  */
 export default async function ChangelogPlugin(context, options) {
-  const generateDir = path.join(context.siteDir, 'changelog/source');
+  const generateDir = path.join(context.siteDir, "changelog/source");
   const blogPlugin = await pluginContentBlog.default(context, {
     ...options,
     path: generateDir,
-    id: 'changelog',
-    blogListComponent: '@site/src/components/changelog/ChangelogList',
-    blogPostComponent: '@site/src/components/changelog/ChangelogPage',
+    id: "changelog",
+    blogListComponent: "@site/src/components/changelog/ChangelogList",
+    blogPostComponent: "@site/src/components/changelog/ChangelogPage",
   });
   const changelogPath = path.join(
     __dirname,
-    '../../packages/win32/CHANGELOG.md'
+    "../../packages/win32/CHANGELOG.md",
   );
   return {
     ...blogPlugin,
-    name: 'changelog-plugin',
+    name: "changelog-plugin",
     async loadContent() {
-      const fileContent = await fs.readFile(changelogPath, 'utf-8');
+      const fileContent = await fs.readFile(changelogPath, "utf-8");
       const sections = fileContent
         .split(/(?=\n## )/)
         .map(processSection)
@@ -105,11 +106,11 @@ export default async function ChangelogPlugin(context, options) {
         sections.map((section) =>
           fs.outputFile(
             path.join(generateDir, `${section.title}.md`),
-            section.content
-          )
-        )
+            section.content,
+          ),
+        ),
       );
-      const authorsPath = path.join(generateDir, 'authors.json');
+      const authorsPath = path.join(generateDir, "authors.json");
       await fs.outputFile(authorsPath, JSON.stringify(authorsMap, null, 2));
       const content = await blogPlugin.loadContent();
       content.blogPosts.forEach((post, index) => {
@@ -117,7 +118,7 @@ export default async function ChangelogPlugin(context, options) {
         post.metadata.listPageLink = normalizeUrl([
           context.baseUrl,
           options.routeBasePath,
-          pageIndex === 0 ? '/' : `/page/${pageIndex + 1}`,
+          pageIndex === 0 ? "/" : `/page/${pageIndex + 1}`,
         ]);
       });
       return content;
@@ -126,21 +127,21 @@ export default async function ChangelogPlugin(context, options) {
       const config = blogPlugin.configureWebpack(...args);
       const pluginDataDirRoot = path.join(
         context.generatedFilesDir,
-        'changelog-plugin',
-        'default'
+        "changelog-plugin",
+        "default",
       );
       // Redirect the metadata path to our folder
       const mdxLoader = config.module.rules[0].use[0];
       mdxLoader.options.metadataPath = (mdxPath) => {
-        // Note that metadataPath must be the same/in-sync as
-        // the path from createData for each MDX.
+        // Note that metadataPath must be the same/in-sync as the path from
+        // createData for each MDX.
         const aliasedPath = aliasedSitePath(mdxPath, context.siteDir);
         return path.join(pluginDataDirRoot, `${docuHash(aliasedPath)}.json`);
       };
       return config;
     },
     getThemePath() {
-      return './theme';
+      return "./theme";
     },
     getPathsToWatch() {
       // Don't watch the generated dir

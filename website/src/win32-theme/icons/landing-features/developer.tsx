@@ -1,5 +1,5 @@
-import clsx from 'clsx';
-import type { SVGProps } from 'react';
+import clsx from "clsx";
+import type { SVGProps } from "react";
 
 export const DeveloperIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -11,7 +11,7 @@ export const DeveloperIcon = (props: SVGProps<SVGSVGElement>) => (
     {...props}
     className={clsx(
       props.className,
-      'dark:text-win32-yellow text-win32-orange'
+      "dark:text-win32-yellow text-win32-orange",
     )}
   >
     <rect

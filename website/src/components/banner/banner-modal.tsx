@@ -1,18 +1,18 @@
-import Link from '@docusaurus/Link';
-import { useLocation } from '@docusaurus/router';
+import Link from "@docusaurus/Link";
+import { useLocation } from "@docusaurus/router";
 import {
   Dialog,
   DialogPanel,
   Transition,
   TransitionChild,
-} from '@headlessui/react';
-import useLocalStorage from '@site/src/hooks/use-localstorage';
-import useScrollTracker from '@site/src/hooks/use-scroll-tracker';
-import { LandingRainbowButton } from '@site/src/win32-theme/landing-rainbow-button';
-import clsx from 'clsx';
-import { FC, Fragment, useEffect, useRef, useState } from 'react';
-import { FaArrowRightLong } from 'react-icons/fa6';
-import { MdClose } from 'react-icons/md';
+} from "@headlessui/react";
+import useLocalStorage from "@site/src/hooks/use-localstorage";
+import useScrollTracker from "@site/src/hooks/use-scroll-tracker";
+import { LandingRainbowButton } from "@site/src/win32-theme/landing-rainbow-button";
+import clsx from "clsx";
+import { FC, Fragment, useEffect, useRef, useState } from "react";
+import { FaArrowRightLong } from "react-icons/fa6";
+import { MdClose } from "react-icons/md";
 
 const SCROLL_TRESHOLD = 79;
 const SCROLL_MAX = 100;
@@ -20,7 +20,7 @@ const MAX_VISIT_COUNT = 9;
 
 type Props = {
   title?: string;
-  variant?: 'gray' | 'purple';
+  variant?: "gray" | "purple";
   image?: {
     src?: string;
     alt?: string;
@@ -35,27 +35,27 @@ type Props = {
 
 export const BannerModal: FC<Props> = ({
   title = "TODO title",
-  variant = 'purple',
+  variant = "purple",
   image = {
-    src: '/img/social.png',
-    alt: 'win32 app screenshot',
-    href: 'https://win32.pub',
+    src: "/img/social.png",
+    alt: "win32 app screenshot",
+    href: "https://win32.pub",
   },
   button = {
-    text: 'Try online',
-    href: 'https://win32.pub',
+    text: "Try online",
+    href: "https://win32.pub",
     onClick: undefined,
   },
 }) => {
   const { pathname } = useLocation();
   const [isOpen, setIsOpen] = useState(false);
-  const [visitCount, setVisitCount] = useLocalStorage('banner-modal', null);
+  const [visitCount, setVisitCount] = useLocalStorage("banner-modal", null);
   const scrollTresholdExceeded = useRef(false);
 
   const tracker = useScrollTracker();
 
   useEffect(() => {
-    if (pathname === '/blog/' || pathname === '/blog') return;
+    if (pathname === "/blog/" || pathname === "/blog") return;
     if (scrollTresholdExceeded.current || isOpen) return;
 
     if (tracker.scrollY > SCROLL_TRESHOLD && tracker.scrollY < SCROLL_MAX) {
@@ -74,11 +74,11 @@ export const BannerModal: FC<Props> = ({
   useEffect(() => {
     if (
       isOpen &&
-      typeof window !== 'undefined' &&
-      typeof window.gtag !== 'undefined'
+      typeof window !== "undefined" &&
+      typeof window.gtag !== "undefined"
     ) {
-      window.gtag('event', 'view_banner', {
-        banner_name: 'banner-modal',
+      window.gtag("event", "view_banner", {
+        banner_name: "banner-modal",
         banner_text: title,
         banner_image: image.src,
       });
@@ -117,29 +117,29 @@ export const BannerModal: FC<Props> = ({
             >
               <DialogPanel
                 className={clsx(
-                  'w-full min-h-screen',
-                  'flex flex-col justify-center items-center'
+                  "w-full min-h-screen",
+                  "flex flex-col justify-center items-center",
                 )}
               >
                 <div
                   className={clsx(
-                    'relative',
-                    'rounded-3xl',
-                    'max-w-[576px]',
-                    'py-8',
-                    'px-4 md:px-8',
-                    variant === 'gray' && 'bg-banner-examples-modal-gray',
-                    variant === 'purple' && 'bg-banner-examples-modal-purple'
+                    "relative",
+                    "rounded-3xl",
+                    "max-w-[576px]",
+                    "py-8",
+                    "px-4 md:px-8",
+                    variant === "gray" && "bg-banner-examples-modal-gray",
+                    variant === "purple" && "bg-banner-examples-modal-purple",
                   )}
                 >
                   <div
                     className={clsx(
-                      'flex',
-                      'flex-col',
-                      'items-center',
-                      'gap-8',
-                      'text-center',
-                      'not-prose'
+                      "flex",
+                      "flex-col",
+                      "items-center",
+                      "gap-8",
+                      "text-center",
+                      "not-prose",
                     )}
                   >
                     <Link
@@ -147,16 +147,16 @@ export const BannerModal: FC<Props> = ({
                       target="_blank"
                       rel="noopener noreferrer"
                       className={clsx(
-                        'flex',
-                        'h-auto xl:h-[192px]',
-                        'flex-shrink-0',
-                        'rounded-lg',
-                        'overflow-hidden',
-                        'focus:outline-none'
+                        "flex",
+                        "h-auto xl:h-[192px]",
+                        "flex-shrink-0",
+                        "rounded-lg",
+                        "overflow-hidden",
+                        "focus:outline-none",
                       )}
                     >
                       <img
-                        className={clsx('object-contain')}
+                        className={clsx("object-contain")}
                         src={image?.src}
                         alt={image?.alt ?? title}
                         loading="lazy"
@@ -164,19 +164,19 @@ export const BannerModal: FC<Props> = ({
                     </Link>
                     <p
                       className={clsx(
-                        'text-2xl',
-                        'font-semibold',
-                        variant === 'gray' && 'bg-clip-text',
-                        variant === 'gray' && 'text-transparent',
-                        variant === 'gray' && 'bg-banner-examples-text',
-                        variant === 'purple' && 'text-gray-0'
+                        "text-2xl",
+                        "font-semibold",
+                        variant === "gray" && "bg-clip-text",
+                        variant === "gray" && "text-transparent",
+                        variant === "gray" && "bg-banner-examples-text",
+                        variant === "purple" && "text-gray-0",
                       )}
                     >
                       {title}
                     </p>
                     <LandingRainbowButton
-                      className={clsx('w-max')}
-                      buttonClassname={clsx('!px-4', '!py-4')}
+                      className={clsx("w-max")}
+                      buttonClassname={clsx("!px-4", "!py-4")}
                       href={button.href}
                       onClick={button.onClick}
                       target="_blank"
@@ -184,25 +184,25 @@ export const BannerModal: FC<Props> = ({
                     >
                       <div
                         className={clsx(
-                          'text-gray-900',
-                          'text-base',
-                          'font-bold'
+                          "text-gray-900",
+                          "text-base",
+                          "font-bold",
                         )}
                       >
                         {button.text}
                       </div>
-                      <FaArrowRightLong className={clsx('w-4 h-4')} />
+                      <FaArrowRightLong className={clsx("w-4 h-4")} />
                     </LandingRainbowButton>
                   </div>
                   <button
                     className={clsx(
-                      'absolute',
-                      'top-2 right-2',
-                      'w-8 h-8',
-                      'flex items-center justify-center flex-shrink-0',
-                      'text-gray-0',
-                      'rounded-full',
-                      'bg-gray-900/20'
+                      "absolute",
+                      "top-2 right-2",
+                      "w-8 h-8",
+                      "flex items-center justify-center flex-shrink-0",
+                      "text-gray-0",
+                      "rounded-full",
+                      "bg-gray-900/20",
                     )}
                     onClick={() => setIsOpen(false)}
                   >

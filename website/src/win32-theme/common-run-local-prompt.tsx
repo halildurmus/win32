@@ -1,5 +1,5 @@
 import { TbTerminal2 } from "react-icons/tb";
-import { CodeBlock } from '../theme/CodeBlock/base';
+import { CodeBlock } from "../theme/CodeBlock/base";
 
 type Props = {
   path: string;

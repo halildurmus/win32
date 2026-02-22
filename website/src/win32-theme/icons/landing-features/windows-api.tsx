@@ -1,6 +1,6 @@
-import clsx from 'clsx';
-import type { SVGProps } from 'react';
-import { SiWindows11 } from 'react-icons/si';
+import clsx from "clsx";
+import type { SVGProps } from "react";
+import { SiWindows11 } from "react-icons/si";
 
 export const WindowsAPIIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -10,10 +10,7 @@ export const WindowsAPIIcon = (props: SVGProps<SVGSVGElement>) => (
     viewBox="0 0 64 64"
     fill="none"
     {...props}
-    className={clsx(
-      props.className,
-      'dark:text-white text-[#0078d4]'
-    )}
+    className={clsx(props.className, "dark:text-white text-[#0078d4]")}
   >
     <rect
       width={64}

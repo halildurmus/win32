@@ -1,5 +1,5 @@
-import clsx from 'clsx';
-import React from 'react';
+import clsx from "clsx";
+import React from "react";
 
 interface Props extends React.SVGProps<SVGSVGElement> {
   wrapperProps?: React.HTMLAttributes<HTMLDivElement>;
@@ -14,8 +14,8 @@ export const Spinner = ({ className, wrapperProps, ...props }: Props) => {
         height={24}
         viewBox="0 0 100 100"
         className={clsx(
-          'text-gray-200 animate-spin dark:text-gray-600 fill-win32-blue',
-          className
+          "text-gray-200 animate-spin dark:text-gray-600 fill-win32-blue",
+          className,
         )}
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

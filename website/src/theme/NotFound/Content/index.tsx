@@ -1,7 +1,7 @@
-import Translate from '@docusaurus/Translate';
-import { CommonFooter } from '@site/src/win32-theme/common-footer';
-import { CommonHeader } from '@site/src/win32-theme/common-header';
-import type { Props } from '@theme/NotFound/Content';
+import Translate from "@docusaurus/Translate";
+import { CommonFooter } from "@site/src/win32-theme/common-footer";
+import { CommonHeader } from "@site/src/win32-theme/common-header";
+import type { Props } from "@theme/NotFound/Content";
 
 export default function NotFoundContent({ className }: Props): JSX.Element {
   return (

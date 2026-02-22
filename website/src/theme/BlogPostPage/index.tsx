@@ -1,16 +1,16 @@
 import {
   BlogPostProvider,
   useBlogPost,
-} from '@docusaurus/plugin-content-blog/client';
+} from "@docusaurus/plugin-content-blog/client";
 import {
   HtmlClassNameProvider,
   ThemeClassNames,
-} from '@docusaurus/theme-common';
-import { BlogPostPageView } from '@site/src/components/blog';
-import BlogLayout from '@site/src/theme/BlogLayout';
-import BlogPostPageMetadata from '@theme/BlogPostPage/Metadata';
-import clsx from 'clsx';
-import { BlogTOC } from './blog-toc';
+} from "@docusaurus/theme-common";
+import { BlogPostPageView } from "@site/src/components/blog";
+import BlogLayout from "@site/src/theme/BlogLayout";
+import BlogPostPageMetadata from "@theme/BlogPostPage/Metadata";
+import clsx from "clsx";
+import { BlogTOC } from "./blog-toc";
 
 function BlogPostPageContent({ children }) {
   const { metadata, toc } = useBlogPost();
@@ -33,7 +33,7 @@ export default function BlogPostPage(props) {
       <HtmlClassNameProvider
         className={clsx(
           ThemeClassNames.wrapper.blogPages,
-          ThemeClassNames.page.blogPostPage
+          ThemeClassNames.page.blogPostPage,
         )}
       >
         <BlogPostPageMetadata />

@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import clsx from "clsx";
 
 export default function CommonTabItem({ children, hidden, className }) {
   return (

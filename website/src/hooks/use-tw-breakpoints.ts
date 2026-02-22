@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 /**
  * tailwindcss breakpoints
@@ -18,16 +18,16 @@ const breakpoints = {
   tw: [640, 768, 1024, 1280, 1536],
 };
 
-export type TWBreakpoints = Record<'sm' | 'md' | 'lg' | 'xl' | 'xxl', boolean>;
+export type TWBreakpoints = Record<"sm" | "md" | "lg" | "xl" | "xxl", boolean>;
 
 type Props = {
-  variant: 'landing' | 'tw';
+  variant: "landing" | "tw";
 };
 
 export const useTWBreakpoints = (
   props: Props = {
-    variant: 'tw',
-  }
+    variant: "tw",
+  },
 ): TWBreakpoints => {
   const [sm, setSm] = React.useState(true);
   const [md, setMd] = React.useState(true);
@@ -36,7 +36,7 @@ export const useTWBreakpoints = (
   const [xxl, setXxl] = React.useState(false);
 
   React.useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       const [smQuery, mdQuery, lgQuery, xlQuery, xxlQuery] = breakpoints[
         props.variant
       ].map((bp) => window.matchMedia(`(min-width: ${bp}px)`));
@@ -57,11 +57,11 @@ export const useTWBreakpoints = (
         setXxl(e.matches);
       };
 
-      smQuery.addEventListener('change', smHandler);
-      mdQuery.addEventListener('change', mdHandler);
-      lgQuery.addEventListener('change', lgHandler);
-      xlQuery.addEventListener('change', xlHandler);
-      xxlQuery.addEventListener('change', xxlHandler);
+      smQuery.addEventListener("change", smHandler);
+      mdQuery.addEventListener("change", mdHandler);
+      lgQuery.addEventListener("change", lgHandler);
+      xlQuery.addEventListener("change", xlHandler);
+      xxlQuery.addEventListener("change", xxlHandler);
 
       setSm(smQuery.matches);
       setMd(mdQuery.matches);
@@ -70,11 +70,11 @@ export const useTWBreakpoints = (
       setXxl(xxlQuery.matches);
 
       return () => {
-        smQuery.removeEventListener('change', smHandler);
-        mdQuery.removeEventListener('change', mdHandler);
-        lgQuery.removeEventListener('change', lgHandler);
-        xlQuery.removeEventListener('change', xlHandler);
-        xxlQuery.removeEventListener('change', xxlHandler);
+        smQuery.removeEventListener("change", smHandler);
+        mdQuery.removeEventListener("change", mdHandler);
+        lgQuery.removeEventListener("change", lgHandler);
+        xlQuery.removeEventListener("change", xlHandler);
+        xxlQuery.removeEventListener("change", xxlHandler);
       };
     }
   }, []);

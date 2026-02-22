@@ -1,8 +1,8 @@
-import { useBlogPost } from '@docusaurus/plugin-content-blog/client';
-import ChangelogItemHeaderAuthor from '@site/src/components/changelog/ChangelogItem/Header/Author';
-import type { Props } from '@theme/BlogPostItem/Header/Authors';
-import clsx from 'clsx';
-import { useState } from 'react';
+import { useBlogPost } from "@docusaurus/plugin-content-blog/client";
+import ChangelogItemHeaderAuthor from "@site/src/components/changelog/ChangelogItem/Header/Author";
+import type { Props } from "@theme/BlogPostItem/Header/Authors";
+import clsx from "clsx";
+import { useState } from "react";
 
 const numberOfAuthorsToDisplay = 7;
 
@@ -23,18 +23,18 @@ export default function BlogPostAuthors({
   const hiddenAuthorsCount = authorsCount - numberOfAuthorsToDisplay;
   const filteredAuthors = authors.slice(
     0,
-    isExpanded ? authorsCount : numberOfAuthorsToDisplay
+    isExpanded ? authorsCount : numberOfAuthorsToDisplay,
   );
 
   return (
     <div
       className={clsx(
-        'flex',
-        hiddenAuthorsCount > 0 && isExpanded && 'flex-wrap gap-2',
-        !isExpanded && '-space-x-4',
-        'items-center',
-        'my-4',
-        className
+        "flex",
+        hiddenAuthorsCount > 0 && isExpanded && "flex-wrap gap-2",
+        !isExpanded && "-space-x-4",
+        "items-center",
+        "my-4",
+        className,
       )}
     >
       {filteredAuthors.map((author, idx) => (
@@ -51,26 +51,26 @@ export default function BlogPostAuthors({
         <div
           onClick={() => setIsExpanded((v) => !v)}
           className={clsx(
-            'flex items-center justify-center',
-            'px-6',
-            isBlogPostPage ? 'size-14' : 'size-12',
-            'rounded-full',
-            isExpanded ? 'text-xs' : 'text-sm',
-            'leading-none font-medium',
-            'ring-2 ring-white dark:ring-neutral-900',
-            'text-gray-500 dark:text-gray-400',
-            'bg-gray-200 dark:bg-gray-700',
-            'hover:bg-gray-300 dark:hover:bg-gray-600',
-            'hover:no-underline',
-            'cursor-pointer'
+            "flex items-center justify-center",
+            "px-6",
+            isBlogPostPage ? "size-14" : "size-12",
+            "rounded-full",
+            isExpanded ? "text-xs" : "text-sm",
+            "leading-none font-medium",
+            "ring-2 ring-white dark:ring-neutral-900",
+            "text-gray-500 dark:text-gray-400",
+            "bg-gray-200 dark:bg-gray-700",
+            "hover:bg-gray-300 dark:hover:bg-gray-600",
+            "hover:no-underline",
+            "cursor-pointer",
           )}
           title={
             isExpanded
-              ? 'Show less'
-              : `Show ${hiddenAuthorsCount} more ${hiddenAuthorsCount > 1 ? 'authors' : 'author'}`
+              ? "Show less"
+              : `Show ${hiddenAuthorsCount} more ${hiddenAuthorsCount > 1 ? "authors" : "author"}`
           }
         >
-          {isExpanded ? 'Show less' : `+${hiddenAuthorsCount}`}
+          {isExpanded ? "Show less" : `+${hiddenAuthorsCount}`}
         </div>
       )}
     </div>

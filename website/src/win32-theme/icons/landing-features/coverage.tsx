@@ -1,6 +1,6 @@
-import clsx from 'clsx';
-import type { SVGProps } from 'react';
-import { TbBroadcast } from 'react-icons/tb';
+import clsx from "clsx";
+import type { SVGProps } from "react";
+import { TbBroadcast } from "react-icons/tb";
 
 export const CoverageIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -12,7 +12,7 @@ export const CoverageIcon = (props: SVGProps<SVGSVGElement>) => (
     {...props}
     className={clsx(
       props.className,
-      'dark:text-win32-blue-alt text-win32-blue'
+      "dark:text-win32-blue-alt text-win32-blue",
     )}
   >
     <rect

@@ -1,10 +1,10 @@
 import {
   useScrollPositionBlocker,
   useTabs,
-} from '@docusaurus/theme-common/internal';
-import useIsBrowser from '@docusaurus/useIsBrowser';
-import clsx from 'clsx';
-import { cloneElement } from 'react';
+} from "@docusaurus/theme-common/internal";
+import useIsBrowser from "@docusaurus/useIsBrowser";
+import clsx from "clsx";
+import { cloneElement } from "react";
 
 function TabList({
   className,
@@ -30,16 +30,16 @@ function TabList({
   const handleKeydown = (event) => {
     let focusElement = null;
     switch (event.key) {
-      case 'Enter': {
+      case "Enter": {
         handleTabChange(event);
         break;
       }
-      case 'ArrowRight': {
+      case "ArrowRight": {
         const nextTab = tabRefs.indexOf(event.currentTarget) + 1;
         focusElement = tabRefs[nextTab] ?? tabRefs[0];
         break;
       }
-      case 'ArrowLeft': {
+      case "ArrowLeft": {
         const prevTab = tabRefs.indexOf(event.currentTarget) - 1;
         focusElement = tabRefs[prevTab] ?? tabRefs[tabRefs.length - 1];
         break;
@@ -56,16 +56,16 @@ function TabList({
       aria-orientation="horizontal"
       className={clsx(
         className,
-        '!my-0',
-        'flex-wrap',
-        'list-none',
-        'm-0 mb-0 mt-0',
-        'px-4',
-        'flex gap-4',
-        'bg-gray-100 dark:bg-gray-700',
-        'rounded-tl-lg rounded-tr-lg',
-        !wrapContent && 'rounded-bl-lg rounded-br-lg',
-        'items-stretch'
+        "!my-0",
+        "flex-wrap",
+        "list-none",
+        "m-0 mb-0 mt-0",
+        "px-4",
+        "flex gap-4",
+        "bg-gray-100 dark:bg-gray-700",
+        "rounded-tl-lg rounded-tr-lg",
+        !wrapContent && "rounded-bl-lg rounded-br-lg",
+        "items-stretch",
       )}
     >
       {tabValues.map(({ value, label, attributes }) => (
@@ -79,27 +79,27 @@ function TabList({
           onClick={handleTabChange}
           {...attributes}
           className={clsx(
-            '!my-0',
-            'mx-0 mt-0',
-            'px-2 py-3',
-            'flex items-center justify-center',
-            'min-w-[60px]',
-            'cursor-pointer',
-            'transition-all duration-200 ease-in-out',
-            'border-b border-solid',
-            'select-none',
-            smallTabs && '!text-xs',
-            !smallTabs && '!text-base',
-            selectedValue !== value && 'text-gray-800 dark:text-gray-100',
+            "!my-0",
+            "mx-0 mt-0",
+            "px-2 py-3",
+            "flex items-center justify-center",
+            "min-w-[60px]",
+            "cursor-pointer",
+            "transition-all duration-200 ease-in-out",
+            "border-b border-solid",
+            "select-none",
+            smallTabs && "!text-xs",
+            !smallTabs && "!text-base",
+            selectedValue !== value && "text-gray-800 dark:text-gray-100",
             selectedValue === value &&
-              'text-win32-react-light-link dark:text-win32-react-dark-link',
+              "text-win32-react-light-link dark:text-win32-react-dark-link",
             selectedValue !== value &&
-              'hover:text-win32-react-light-link dark:hover:text-win32-react-dark-link',
-            selectedValue !== value && 'border-b-transparent',
+              "hover:text-win32-react-light-link dark:hover:text-win32-react-dark-link",
+            selectedValue !== value && "border-b-transparent",
             selectedValue === value &&
-              'border-b-win32-react-light-link dark:border-b-win32-react-dark-link',
+              "border-b-win32-react-light-link dark:border-b-win32-react-dark-link",
             selectedValue !== value &&
-              'hover:border-b-win32-react-light-link dark:hover:border-b-win32-react-dark-link'
+              "hover:border-b-win32-react-light-link dark:hover:border-b-win32-react-dark-link",
           )}
         >
           {label ?? value}
@@ -111,18 +111,18 @@ function TabList({
 
 function TabContent({ lazy, children, selectedValue, smallTabs }) {
   const childTabs = (Array.isArray(children) ? children : [children]).filter(
-    Boolean
+    Boolean,
   );
   if (lazy) {
     const selectedTabItem = childTabs.find(
-      (tabItem) => tabItem.props.value === selectedValue
+      (tabItem) => tabItem.props.value === selectedValue,
     );
     if (!selectedTabItem) {
       // fail-safe or fail-fast? not sure what's best here
       return null;
     }
     return cloneElement(selectedTabItem, {
-      className: 'margin-top--md win32-tab-content',
+      className: "margin-top--md win32-tab-content",
     });
   }
   return (
@@ -131,8 +131,8 @@ function TabContent({ lazy, children, selectedValue, smallTabs }) {
         cloneElement(tabItem, {
           key: i,
           hidden: tabItem.props.value !== selectedValue,
-          className: clsx(tabItem.props.className ?? [], 'win32-tab-content'),
-        })
+          className: clsx(tabItem.props.className ?? [], "win32-tab-content"),
+        }),
       )}
     </div>
   );
@@ -144,12 +144,12 @@ function TabsComponent(props) {
   return (
     <div
       className={clsx(
-        'tabs-container',
-        'rounded-lg',
-        'border-gray-300 dark:border-gray-700',
-        wrapContent ? 'border' : 'border-0',
-        'mb-6',
-        'win32-wider-container'
+        "tabs-container",
+        "rounded-lg",
+        "border-gray-300 dark:border-gray-700",
+        wrapContent ? "border" : "border-0",
+        "mb-6",
+        "win32-wider-container",
       )}
     >
       <TabList {...props} {...tabs} />

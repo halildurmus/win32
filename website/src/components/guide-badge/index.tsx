@@ -1,5 +1,5 @@
-import React from 'react';
-import { InfoBadge } from '../info-badge';
+import React from "react";
+import { InfoBadge } from "../info-badge";
 
 type Props = {
   id: string;
@@ -9,7 +9,7 @@ type Props = {
 
 export const GuideBadge = ({
   id,
-  description = 'Please check the guide for more information on this topic.',
+  description = "Please check the guide for more information on this topic.",
   text,
 }: Props) => {
   return (
@@ -21,7 +21,7 @@ export const GuideBadge = ({
       description={
         <>
           <div className="text-xs font-semibold mb-1">
-            {text ?? 'Check the guide'}
+            {text ?? "Check the guide"}
           </div>
           <div className="text-xs">{description}</div>
         </>

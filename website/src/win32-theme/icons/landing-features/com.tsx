@@ -1,6 +1,6 @@
-import clsx from 'clsx';
-import type { SVGProps } from 'react';
-import { MdOutlineWidgets } from 'react-icons/md';
+import clsx from "clsx";
+import type { SVGProps } from "react";
+import { MdOutlineWidgets } from "react-icons/md";
 
 export const COMIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -12,7 +12,7 @@ export const COMIcon = (props: SVGProps<SVGSVGElement>) => (
     {...props}
     className={clsx(
       props.className,
-      'dark:text-win32-cyan-alt text-win32-cyan'
+      "dark:text-win32-cyan-alt text-win32-cyan",
     )}
   >
     <rect width={64} height={64} fill="url(#com-a)" fillOpacity={0.4} rx={16} />

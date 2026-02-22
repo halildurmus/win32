@@ -1,7 +1,7 @@
-import { useBlogPost } from '@docusaurus/plugin-content-blog/client';
-import BlogAuthor from '@theme/Blog/Components/Author';
-import clsx from 'clsx';
-import styles from './styles.module.css';
+import { useBlogPost } from "@docusaurus/plugin-content-blog/client";
+import BlogAuthor from "@theme/Blog/Components/Author";
+import clsx from "clsx";
+import styles from "./styles.module.css";
 
 // Component responsible for the authors layout
 export default function BlogPostItemHeaderAuthors({ className }) {
@@ -16,16 +16,16 @@ export default function BlogPostItemHeaderAuthors({ className }) {
   return (
     <div
       className={clsx(
-        'margin-top--md margin-bottom--sm',
-        imageOnly ? styles.imageOnlyAuthorRow : 'row',
-        className
+        "margin-top--md margin-bottom--sm",
+        imageOnly ? styles.imageOnlyAuthorRow : "row",
+        className,
       )}
     >
       {authors.map((author, idx) => (
         <div
           className={clsx(
-            !imageOnly && (singleAuthor ? 'col col--12' : 'col col--6'),
-            imageOnly ? styles.imageOnlyAuthorCol : styles.authorCol
+            !imageOnly && (singleAuthor ? "col col--12" : "col col--6"),
+            imageOnly ? styles.imageOnlyAuthorCol : styles.authorCol,
           )}
           key={idx}
         >

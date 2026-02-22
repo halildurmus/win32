@@ -1,9 +1,9 @@
 import {
   filterDocCardListItems,
   useCurrentSidebarCategory,
-} from '@docusaurus/theme-common';
+} from "@docusaurus/theme-common";
 
-import DocCard from '@theme/DocCard';
+import DocCard from "@theme/DocCard";
 
 function DocCardListForCurrentSidebarCategory({ className }) {
   const category = useCurrentSidebarCategory();

@@ -1,6 +1,6 @@
-const blogPluginExports = require('@docusaurus/plugin-content-blog');
-const utils = require('@docusaurus/utils');
-const path = require('path');
+const blogPluginExports = require("@docusaurus/plugin-content-blog");
+const utils = require("@docusaurus/utils");
+const path = require("path");
 
 const defaultBlogPlugin = blogPluginExports.default;
 
@@ -20,14 +20,14 @@ async function blogPluginExtended(context, options) {
       // Get the last 3 featured blog posts
       const featuredPosts = [
         ...allBlogPosts.filter(
-          (post) => post.metadata.frontMatter.is_featured === true
+          (post) => post.metadata.frontMatter.is_featured === true,
         ),
       ].slice(0, postLimit);
 
       // Get the last 3 blog posts
       const recentPosts = [
         ...allBlogPosts.filter(
-          (post) => post.metadata.frontMatter.is_featured !== true
+          (post) => post.metadata.frontMatter.is_featured !== true,
         ),
       ].slice(0, postLimit);
 
@@ -42,7 +42,7 @@ async function blogPluginExtended(context, options) {
               frontMatter: blogPost.metadata.frontMatter,
               image: blogPost.metadata.frontMatter.image,
               tags: blogPost.metadata.tags,
-            })
+            }),
           ),
 
           // Inject the MDX excerpt as a JSX component prop
@@ -69,7 +69,7 @@ async function blogPluginExtended(context, options) {
               frontMatter: blogPost.metadata.frontMatter,
               image: blogPost.metadata.frontMatter.image,
               tags: blogPost.metadata.tags,
-            })
+            }),
           ),
 
           // Inject the MDX excerpt as a JSX component prop
@@ -87,16 +87,16 @@ async function blogPluginExtended(context, options) {
 
       addRoute({
         // Add route for the home page
-        path: '/',
+        path: "/",
         exact: true,
 
         // The component to use for the "Home" page route
-        component: '@site/src/components/home/index.tsx',
+        component: "@site/src/components/home/index.tsx",
 
         // These are the props that will be passed to our "Home" page component
         modules: {
           homePageBlogMetadata: await actions.createData(
-            'home-page-blog-metadata.json',
+            "home-page-blog-metadata.json",
             JSON.stringify({
               blogBasePath: routeBasePath,
               blogTitle: blogTitle,
@@ -104,13 +104,13 @@ async function blogPluginExtended(context, options) {
               totalPosts: allBlogPosts.length,
               totalFeaturedPosts: featuredPosts.length,
               totalRecentPosts: recentPosts.length,
-            })
+            }),
           ),
           featuredPosts: await Promise.all(
-            featuredPosts.map(createFeaturedPostModule)
+            featuredPosts.map(createFeaturedPostModule),
           ),
           recentPosts: await Promise.all(
-            recentPosts.map(createRecentPostModule)
+            recentPosts.map(createRecentPostModule),
           ),
         },
       });

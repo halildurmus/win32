@@ -1,19 +1,19 @@
-import { Collapsible, useCollapsible } from '@docusaurus/theme-common';
-import useBrokenLinks from '@docusaurus/useBrokenLinks';
-import useIsBrowser from '@docusaurus/useIsBrowser';
-import clsx from 'clsx';
+import { Collapsible, useCollapsible } from "@docusaurus/theme-common";
+import useBrokenLinks from "@docusaurus/useBrokenLinks";
+import useIsBrowser from "@docusaurus/useIsBrowser";
+import clsx from "clsx";
 import React, {
   useRef,
   useState,
   type ComponentProps,
   type ReactElement,
-} from 'react';
-import { TbTriangleInvertedFilled } from 'react-icons/tb';
-import styles from './styles.module.css';
+} from "react";
+import { TbTriangleInvertedFilled } from "react-icons/tb";
+import styles from "./styles.module.css";
 
 function isInSummary(node: HTMLElement | null): boolean {
   if (!node) return false;
-  return node.tagName === 'SUMMARY' || isInSummary(node.parentElement);
+  return node.tagName === "SUMMARY" || isInSummary(node.parentElement);
 }
 
 function hasParent(node: HTMLElement | null, parent: HTMLElement): boolean {
@@ -27,7 +27,7 @@ export type DetailsProps = {
    * `<summary>` tag
    */
   summary?: ReactElement | string;
-} & ComponentProps<'details'>;
+} & ComponentProps<"details">;
 
 /**
  * A mostly un-styled `<details>` element with smooth collapsing. Provides some
@@ -54,21 +54,21 @@ export function Details({
     <summary
       className={clsx(
         summary.props.className,
-        'bg-gray-100 dark:bg-gray-700',
-        '!p-2',
-        'flex items-center',
-        'gap-2',
-        'before:hidden',
-        '-mb-px',
-        'border-b border-b-gray-300 dark:border-b-gray-700'
+        "bg-gray-100 dark:bg-gray-700",
+        "!p-2",
+        "flex items-center",
+        "gap-2",
+        "before:hidden",
+        "-mb-px",
+        "border-b border-b-gray-300 dark:border-b-gray-700",
       )}
     >
-      <div className={clsx('flex items-center justify-center')}>
+      <div className={clsx("flex items-center justify-center")}>
         <TbTriangleInvertedFilled
           className={clsx(
-            'w-2 h-2 ml-2 mr-2',
-            'win32-details-triangle',
-            'text-gray-500'
+            "w-2 h-2 ml-2 mr-2",
+            "win32-details-triangle",
+            "text-gray-500",
           )}
         />
       </div>
@@ -79,26 +79,26 @@ export function Details({
   ) : (
     <summary
       className={clsx(
-        'bg-gray-100 dark:bg-gray-700',
-        '!p-2',
-        'flex items-center',
-        'gap-2',
-        'before:hidden',
-        '-mb-px',
-        'border-b border-b-gray-300 dark:border-b-gray-700'
+        "bg-gray-100 dark:bg-gray-700",
+        "!p-2",
+        "flex items-center",
+        "gap-2",
+        "before:hidden",
+        "-mb-px",
+        "border-b border-b-gray-300 dark:border-b-gray-700",
       )}
     >
-      <div className={clsx('flex items-center justify-center')}>
+      <div className={clsx("flex items-center justify-center")}>
         <TbTriangleInvertedFilled
           className={clsx(
-            'w-2 h-2 ml-2 mr-2',
-            'win32-details-triangle',
-            'text-gray-500'
+            "w-2 h-2 ml-2 mr-2",
+            "win32-details-triangle",
+            "text-gray-500",
           )}
         />
       </div>
       <span className="text-gray-800 dark:text-gray-100 text-base">
-        {summary ?? 'Details'}
+        {summary ?? "Details"}
       </span>
     </summary>
   );
@@ -113,7 +113,7 @@ export function Details({
       className={clsx(
         styles.details,
         isBrowser && styles.isBrowser,
-        props.className
+        props.className,
       )}
       onMouseDown={(e) => {
         const target = e.target as HTMLElement;
