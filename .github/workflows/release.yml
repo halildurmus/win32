@@ -24,14 +24,15 @@ jobs:
       - name: 🔍 Check if There is a Release Commit
         id: check_release
         run: |
-          latest_commit_msg=$(git log -1 --pretty=format:%s)
-          echo "📜 Latest commit: $latest_commit_msg"
+          msg=$(git log -1 --pretty=format:%s)
+          echo "📜 Latest commit: $msg"
 
-          if [[ "$latest_commit_msg" =~ ^chore\(release\):\ v.* ]]; then
-            echo "🎉 Release commit detected. Proceeding with the publish step."
+          if [[ "$msg" =~ chore\(release\):[[:space:]]+.*package:([a-zA-Z0-9_]+).*v ]]; then
+            pkg="${BASH_REMATCH[1]}"
+            echo "🎯 Package: $pkg"
             echo "should_publish=true" >> $GITHUB_OUTPUT
           else
-            echo "❌ No release commit detected. Skipping the publish step."
+            echo "❌ Not a release commit"
             echo "should_publish=false" >> $GITHUB_OUTPUT
           fi
 
