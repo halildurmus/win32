@@ -1,16 +1,15 @@
 import 'package:ffi_leak_tracker/ffi_leak_tracker.dart';
 import 'package:flutter/material.dart';
-import 'package:win32/win32.dart';
 
 import 'models.dart';
 import 'task_service.dart';
 
 void main() {
-  LeakTracker.enable();
+  LeakTracker.enableInDebug();
 
   runApp(const TaskManagerApp());
 
-  reportMemoryLeaks();
+  LeakTracker.verifyNoLeaksInDebug();
 }
 
 class TaskManagerApp extends StatelessWidget {

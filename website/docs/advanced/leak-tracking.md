@@ -2,9 +2,9 @@
 title: Leak Tracking
 ---
 
-[`package:ffi_leak_tracker`][package:ffi_leak_tracker] provides
-helps you find and diagnose native memory leaks in Dart FFI code by tracking
-allocations made through its custom allocators.
+[`package:ffi_leak_tracker`][package:ffi_leak_tracker] helps you find and
+diagnose native memory leaks in Dart FFI code by tracking allocations made
+through its custom allocators.
 
 It is designed to answer one question precisely:
 
