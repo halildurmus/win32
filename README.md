@@ -5,49 +5,55 @@
 [![License: BSD-3-Clause][license_badge]][license_link]
 [![codecov][codecov_badge_link]][codecov_link]
 
-A package that provides a friendly Dart API for accessing the Windows Registry.
+**A modern, type-safe Dart API for accessing and managing the Windows Registry.**
 
-This package builds on top of the Dart [win32][win32_pub_dev_link] package,
-offering a high-level Dart wrapper that avoids the need for users to understand
-FFI or write directly to the Win32 API.
+This package builds on top of the [package:win32][win32_pub_dev_link] and
+provides a high-level abstraction over native registry APIs. It eliminates the
+need to work directly with FFI, raw pointers, or low-level Win32 calls while
+preserving performance and correctness.
 
-## Features
+## ✨ Features
 
-- **Manage Registry Keys**: Create, open, delete, and rename registry keys.
-- **Set and Get Values**: Store and retrieve strings, integers, binary data, and
-  string arrays.
-- **Monitor Changes**: Listen for changes in registry keys.
-- **Query Key Details**: Get information about subkeys and values within a
-  registry key.
+- **Key Management** — Create, open, delete, and rename registry keys.
+- **Typed Values** — Read and write strings, integers, binary data, and
+  multi-string values using strongly typed APIs.
+- **Change Monitoring** — Listen for registry modifications.
+- **Metadata Queries** — Inspect subkeys, values, sizes, and timestamps.
+- **Transaction Support** — Perform registry operations atomically.
 
-To learn more, see the [API Documentation][api_documentation_link].
+## ⚡ Quick Example
 
-## Usage
-
-A simple example that reads the Windows build number from the Windows Registry:
+Reads the Windows build number from the registry:
 
 ```dart
 import 'package:win32_registry/win32_registry.dart';
 
 void main() {
-  const keyPath = r'Software\Microsoft\Windows NT\CurrentVersion';
-  final key = Registry.openPath(RegistryHive.localMachine, path: keyPath);
-
-  final buildNumber = key.getStringValue('CurrentBuild');
-  if (buildNumber != null) print('Windows build number: $buildNumber');
-
+  final key = LOCAL_MACHINE.open(
+    r'Software\Microsoft\Windows NT\CurrentVersion',
+  );
+  final buildNumber = key.getString('CurrentBuild');
+  if (buildNumber != null) {
+    print('Windows build number: $buildNumber');
+  }
   key.close();
 }
 ```
 
-More examples can be found in the [example] subdirectory.
+## 📝 Documentation
 
-## Feature requests and bugs
+Full API reference is available here:
 
-Please file feature requests and bugs at the
-[issue tracker][issue_tracker_link].
+👉 [API Reference][api_reference_link].
 
-[api_documentation_link]: https://pub.dev/documentation/win32_registry/latest/
+Additional usage examples are located in the [example] directory.
+
+## 🐞 Features and Bugs
+
+If you encounter bugs or need additional functionality, please
+[file an issue][issue_tracker_link].
+
+[api_reference_link]: https://pub.dev/documentation/win32_registry/latest/
 [ci_badge]: https://github.com/halildurmus/win32_registry/actions/workflows/win32_registry.yml/badge.svg
 [ci_link]: https://github.com/halildurmus/win32_registry/actions/workflows/win32_registry.yml
 [codecov_badge_link]: https://codecov.io/gh/halildurmus/win32_registry/branch/main/graph/badge.svg?token=6ThVC4ejhx

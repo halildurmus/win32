@@ -1,19 +1,18 @@
-/// Contains information about a Windows Registry key and its associated
-/// attributes.
+/// Describes metadata about a registry key and its associated attributes.
 class RegistryKeyInfo {
   /// Constructs a [RegistryKeyInfo] instance with detailed information about
   /// the specified registry key attributes.
-  const RegistryKeyInfo(
-    this.className,
-    this.subKeyCount,
-    this.subKeyNameMaxLength,
-    this.subKeyClassNameMaxLength,
-    this.valuesCount,
-    this.valueNameMaxLength,
-    this.valueDataMaxSizeInBytes,
-    this.securityDescriptorLength,
-    this.lastWriteTime,
-  );
+  const RegistryKeyInfo({
+    required this.className,
+    required this.subKeyCount,
+    required this.subKeyNameMaxLength,
+    required this.subKeyClassNameMaxLength,
+    required this.valuesCount,
+    required this.valueNameMaxLength,
+    required this.valueDataMaxSizeInBytes,
+    required this.securityDescriptorLength,
+    required this.lastWriteTime,
+  });
 
   /// The class name associated with the registry key.
   final String className;

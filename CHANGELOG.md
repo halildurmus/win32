@@ -2,6 +2,108 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.0.0] - 2026-02-22
+
+### 🔄 Breaking Changes
+
+This release introduces a **major overhaul of the API** with improved type
+safety, and powerful new capabilities.
+
+The package now offers transaction support, enhanced monitoring, and a more
+intuitive interface for managing registry keys and values.
+
+Key breaking changes include:
+
+- **API Restructuring**:
+  - Removed `Registry` class entirely. Static methods like `Registry.openPath()`
+    are no longer available.
+  - Removed `RegistryHive` enum. Use predefined top-level fields instead:
+    - `RegistryHive.localMachine` → `LOCAL_MACHINE`
+    - `RegistryHive.currentUser` → `CURRENT_USER`
+    - `RegistryHive.classesRoot` → `CLASSES_ROOT`
+    - `RegistryHive.allUsers` → `USERS`
+    - `RegistryHive.performanceData` → `PERFORMANCE_DATA`
+    - `RegistryHive.currentConfig` → `CURRENT_CONFIG`
+
+- **`AccessRights` → `RegistryAccess`**:
+  - Replaced enum with a final class offering bitwise combination support.
+  - Renamed constants:
+    - `readOnly` → `read`
+    - `writeOnly` → `write`
+    - `allAccess` → `all`
+  - Added new access rights: `notify`, `readWrite`
+  - Supports combining access rights with the `|` operator.
+
+- **`RegistryKey`**:
+  - Opening and creating keys now requires calling methods on predefined
+    constants or existing keys:
+    - Old: `Registry.openPath(RegistryHive.localMachine, path: keyPath)`
+    - New: `LOCAL_MACHINE.open(keyPath)`
+  - Renamed methods:
+    - `getBinaryValue()` → `getBinary()`
+    - `getIntValue()` → `getInt()`
+    - `getStringValue()` → `getString()`
+    - `getStringArrayValue()` → `getMultiString()`
+    - `createKey()` → `create()`
+    - `deleteKey()` → `removeSubkey()`
+    - `deleteValue()` → `removeValue()`
+    - `renameSubkey()` → `rename()`
+  - `create()` and `open()` now accept a `RegistryOpenConfig` parameter for
+    fine-grained control of access rights, options, and transactions.
+  - `onChanged()` stream functionality replaced with `RegistryChangeMonitor`
+    class.
+
+- **`RegistryValue`**:
+  - Constructors no longer accept a `name` parameter. Value names are now
+    passed directly to `setValue()`:
+    - Old: `RegistryValue.string('MyValue', 'data')`
+    - New: `key.setValue('MyValue', RegistryValue.string('data'))` or with dot
+      shorthand syntax: `key.setValue('MyValue', const .string('data'))`
+  - Renamed factory constructors:
+    - `int32()` → `dword()`
+    - `int64()` → `qword()`
+    - `stringArray()` → `multiString()`
+
+- **`RegistryValueType`**:
+  - Changed from enum to final class with a factory constructor.
+  - Renamed constants:
+    - `int32` → `dword`
+    - `int64` → `qword`
+    - `stringArray` → `multiString`
+  - Renamed field: `value` → `raw`
+  - Replaced `fromWin32()` factory with `fromRaw()`.
+
+### 🚀 Features
+
+- **Transaction Support**:
+  - New `Transaction` class enables atomic registry operations.
+  - Pass a `Transaction` instance via `RegistryOpenConfig` to perform
+    multiple operations that can be committed or rolled back as a unit.
+
+- **Enhanced Registry Monitoring**:
+  - New `RegistryChangeMonitor` class provides isolate-backed, stream-based
+    monitoring of registry key changes.
+  - Replaces the previous `onChanged()` stream approach with more robust
+    error handling and resource management.
+
+- **Configuration Objects**:
+  - `RegistryOpenConfig`: Centralizes parameters for opening and creating
+    keys (access rights, creation behavior, options, transactions).
+  - `RegistryOpenOptions`: Type-safe wrapper for native registry options
+    (`nonVolatile`, `volatile`, `createLink`, `backupRestore`, etc.).
+
+- **New Key Management Methods**:
+  - `removeTree()`: Recursively deletes all subkeys and values within a key
+    without deleting the key itself.
+  - `removeValues()`: Deletes all values under a key without affecting
+    subkeys.
+
+### 📦 Dependencies
+
+- Bumped minimum required Dart SDK version to `3.11.0`.
+
+[3.0.0]: https://github.com/halildurmus/win32_registry/compare/v2.1.0..win32_registry-v3.0.0
+
 ## [2.1.0] - 2025-02-19
 
 ### 📦 Dependencies
