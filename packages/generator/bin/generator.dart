@@ -596,7 +596,7 @@ void generateFunctions() {
     );
   }
 
-  generateDynamicLibrariesConstant(dynamicLibraries, wrappedLibraries);
+  // generateDynamicLibrariesConstant(dynamicLibraries, wrappedLibraries);
   generateDynamicLibraryExports(dynamicLibraries);
   logger.info('🚀 Total functions generated: ${functions.length}');
 }
