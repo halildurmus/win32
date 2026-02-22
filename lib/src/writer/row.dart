@@ -44,7 +44,6 @@ import 'table/type_spec.dart';
 import 'table_stream.dart';
 
 /// An abstract interface representing a serializable row in a metadata table.
-// ignore: one_member_abstracts
 abstract interface class Row {
   /// Serializes this row into the provided [buffer], using the given [stream]
   /// to resolve table-specific serialization behavior.

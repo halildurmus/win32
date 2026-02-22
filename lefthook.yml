@@ -3,15 +3,15 @@ pre-commit:
   commands:
     analyze:
       glob: '*.{dart}'
-      run: dart run hooks:analyze example lib test
+      run: dart run halildurmus_hooks:analyze example lib test
     format:
       glob: '*.{dart}'
-      run: dart run hooks:format {staged_files}
+      run: dart run halildurmus_hooks:format {staged_files}
     test:
       glob: '{lib,test}/**/*.dart'
-      run: dart run hooks:test -- -j 1 --test-randomize-ordering-seed=random
+      run: dart run halildurmus_hooks:test -- -j 1 --test-randomize-ordering-seed=random
 
 commit-msg:
   commands:
     check_commit:
-      run: dart run hooks:check_commit {1}
+      run: dart run halildurmus_hooks:check_commit {1}

@@ -4,7 +4,6 @@ import 'table/index.dart';
 ///
 /// A coded index is a compressed reference that combines multiple possible
 /// table types into a single value, using a tag to distinguish them.
-// ignore: one_member_abstracts
 sealed class CodedIndex {
   /// Encodes the coded index into its compressed integer representation.
   int encode();

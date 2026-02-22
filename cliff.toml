@@ -32,7 +32,7 @@ body = """
 {% endmacro -%}
 
 {% if version %}\
-    ## [{{ version | trim_start_matches(pat="v") }}] - {{ timestamp | date(format="%Y-%m-%d") }}
+    ## [{{ version | trim_start_matches(pat="winmd-v") }}] - {{ timestamp | date(format="%Y-%m-%d") }}
 {% else %}\
     ## [unreleased]
 {% endif %}\
@@ -64,7 +64,7 @@ footer = """
 {% for release in releases -%}
     {% if release.version -%}
         {% if release.previous.version -%}
-            [{{ release.version | trim_start_matches(pat="v") }}]: \
+            [{{ release.version | trim_start_matches(pat="winmd-v") }}]: \
                 <REPO>/compare/{{ release.previous.version }}..{{ release.version }}
         {% endif -%}
     {% else -%}
@@ -113,7 +113,7 @@ protect_breaking_commits = false
 # filter out the commits that are not matched by commit parsers
 filter_commits = true
 # regex for matching git tags
-tag_pattern = "v[0-9].*"
+tag_pattern = "winmd-v[0-9].*"
 # regex for skipping tags
 skip_tags = ""
 # regex for ignoring tags

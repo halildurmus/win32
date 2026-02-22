@@ -5,29 +5,27 @@
 [![License: BSD-3-Clause][license_badge]][license_link]
 [![codecov][codecov_badge_link]][codecov_link]
 
-A Dart package for parsing, analyzing, and producing
-**[Windows Metadata (.winmd)][WinMD]** files, based on the **[ECMA-335]**
-standard.
+**Inspect and generate [Windows Metadata (.winmd)][WinMD] files based on the
+[ECMA-335] standard.**
 
-This package offers both low-level primitives and high-level abstractions for
-inspecting and generating Windows Metadata (`.winmd`) files.
-It is a vital component of Dart-based Windows interop tooling — powering
-packages like **[win32][win32]**.
+`package:winmd` provides both low-level primitives and high-level abstractions
+for working with `.winmd` files. It is a core component of Dart-based Windows
+interop tooling — most notably powering **[package:win32]**.
 
-### Key Features
+## ✨ Features
 
-* Parse `.winmd` files into rich, strongly-typed Dart object models
-* Query type definitions, methods, fields, and more across multiple metadata
+- **Parse** `.winmd` files into rich, strongly-typed Dart object models
+- **Query** type definitions, methods, fields, and more across multiple metadata
   sources
-* Perform fast, namespace-agnostic symbol resolution
-* Merge multiple `.winmd` files into a single, unified file
-* Generate your own `.winmd` files programmatically
-* Works on Windows, Linux, and macOS
+- **Resolve** symbols quickly without knowing their namespace up front
+- **Merge** multiple `.winmd` files into a single, unified file
+- **Generate** `.winmd` files programmatically from scratch
+- **Cross-platform** — works on Windows, Linux, and macOS
 
-## Usage
+## ⚡ Quick Example
 
-A basic example demonstrating how to load and inspect WinRT metadata from a
-`.winmd` file:
+The example below loads WinRT metadata from a `.winmd` file and inspects a
+class and an enum:
 
 ```dart
 import 'dart:io' as io;
@@ -69,13 +67,20 @@ void main() {
 }
 ```
 
-More examples can be found in the [example] subdirectory.
+## 📝 Documentation
 
-## Feature requests and bugs
+Full API reference is available here:
 
-Please file feature requests and bugs at the
-[issue tracker][issue_tracker_link].
+👉 [API Reference][api_reference_link].
 
+Additional usage examples are located in the [example] directory.
+
+## 🐞 Features and Bugs
+
+If you encounter bugs or need additional functionality, please
+[file an issue][issue_tracker_link].
+
+[api_reference_link]: https://pub.dev/documentation/winmd/latest/
 [ci_badge]: https://github.com/halildurmus/winmd/actions/workflows/winmd.yml/badge.svg
 [ci_link]: https://github.com/halildurmus/winmd/actions/workflows/winmd.yml
 [codecov_badge_link]: https://codecov.io/gh/halildurmus/winmd/branch/main/graph/badge.svg?token=1ouz1Jr9nW
@@ -91,5 +96,5 @@ Please file feature requests and bugs at the
 [package_link]: https://pub.dev/packages/winmd
 [publisher_badge]: https://img.shields.io/pub/publisher/winmd.svg
 [publisher_link]: https://pub.dev/publishers/halildurmus.dev
-[win32]: https://pub.dev/packages/win32
+[package:win32]: https://pub.dev/packages/win32
 [WinMD]: https://learn.microsoft.com/uwp/winrt-cref/winmd-files

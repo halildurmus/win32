@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [7.0.1] - 2026-02-23
+
+### 📦 Dependencies
+
+- Bumped minimum required Dart SDK version to `3.11.0`.
+
+[7.0.1]: https://github.com/halildurmus/winmd/compare/v7.0.0..winmd-v7.0.1
+
 ## [7.0.0] - 2025-05-22
 
 ### 💥 Breaking Changes

@@ -1,6 +1,3 @@
-// ignore_for_file: camel_case_types, constant_identifier_names
-// ignore_for_file: non_constant_identifier_names
-
 import 'dart:ffi';
 import 'dart:typed_data';
 

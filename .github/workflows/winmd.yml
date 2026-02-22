@@ -22,26 +22,24 @@ jobs:
       # versa). This prevents one failure from stopping the entire run.
       fail-fast: false
 
-      # Free config supports up to 20 concurrent jobs, so pick a sparse matrix
-      # that tiles the space well.
       matrix:
         include:
           - os: windows-2025
-            sdk: main
+            sdk: dev
           - os: windows-2022
             sdk: beta
+          - os: windows-2022
+            sdk: stable
+          - os: windows-11-arm
+            sdk: stable
           - os: macos-latest
             sdk: stable
           - os: ubuntu-latest
             sdk: stable
-          - os: windows-11-arm
-            sdk: stable
-          - os: windows-2019
-            sdk: stable
 
     uses: halildurmus/workflows/.github/workflows/dart.yml@main
     with:
-      check_coverage: ${{ matrix.sdk == 'main' && matrix.os == 'windows-2025' }}
+      check_coverage: ${{ matrix.sdk == 'dev' }}
       concurrency: '1'
       dart_sdk: ${{ matrix.sdk }}
       format_directories: lib test
