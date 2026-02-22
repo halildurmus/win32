@@ -1,26 +1,40 @@
-/// Generates Win32 and COM APIs for the win32 package based on Windows
-/// metadata.
+/// Generates Win32 and COM APIs for the `package:win32` based on metadata
+/// provided by Microsoft.
 library;
 
-export 'src/constants.dart';
-
-export 'src/model/exclusions.dart';
-export 'src/model/false_properties.dart';
-export 'src/model/functions.dart';
-export 'src/model/load_json.dart';
-
-export 'src/projection/callback.dart';
-export 'src/projection/com_class.dart';
-export 'src/projection/com_interface.dart';
-export 'src/projection/com_method.dart';
-export 'src/projection/com_property.dart';
-export 'src/projection/field.dart';
-export 'src/projection/function.dart';
-export 'src/projection/headers.dart';
-export 'src/projection/method.dart';
-export 'src/projection/nested_struct.dart';
-export 'src/projection/parameter.dart';
-export 'src/projection/safenames.dart';
-export 'src/projection/struct.dart';
-export 'src/projection/type.dart';
-export 'src/projection/utils.dart';
+export 'src/attributes.dart';
+export 'src/dependency_resolver.dart';
+export 'src/docs/api_details.dart';
+export 'src/docs/docs.dart';
+export 'src/docs/manager.dart';
+export 'src/docs/source.dart';
+export 'src/emitter.dart';
+export 'src/exception.dart';
+export 'src/extensions/collection.dart';
+export 'src/extensions/field.dart';
+export 'src/extensions/has_custom_attributes.dart';
+export 'src/extensions/metadata_index.dart';
+export 'src/extensions/method_def.dart';
+export 'src/extensions/module_ref.dart';
+export 'src/extensions/param.dart';
+export 'src/extensions/string.dart';
+export 'src/extensions/type_def.dart';
+export 'src/interop_type.dart';
+export 'src/local_storage_manager.dart';
+export 'src/logger.dart';
+export 'src/models/functions.dart';
+export 'src/models/load_json.dart';
+export 'src/nuget_package.dart';
+export 'src/projection.dart';
+export 'src/projections/callback.dart';
+export 'src/projections/constant.dart';
+export 'src/projections/dynamic_library.dart';
+export 'src/projections/enum.dart';
+export 'src/projections/function.dart';
+export 'src/projections/interface.dart';
+export 'src/projections/method.dart';
+export 'src/projections/parameter.dart';
+export 'src/projections/property.dart';
+export 'src/projections/struct.dart';
+export 'src/version_manager.dart';
+export 'src/windows_metadata.dart';

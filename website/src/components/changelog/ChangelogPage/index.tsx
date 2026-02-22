@@ -1,13 +1,13 @@
 import Link from '@docusaurus/Link';
 import type { BlogSidebar } from '@docusaurus/plugin-content-blog';
 import {
+  BlogPostProvider,
+  useBlogPost,
+} from '@docusaurus/plugin-content-blog/client';
+import {
   HtmlClassNameProvider,
   ThemeClassNames,
 } from '@docusaurus/theme-common';
-import {
-  BlogPostProvider,
-  useBlogPost,
-} from '@docusaurus/theme-common/internal';
 import ChangelogItem from '@site/src/components/changelog/ChangelogItem';
 import ChangelogLayout from '@site/src/components/changelog/ChangelogLayout';
 import ChangelogPaginator from '@site/src/components/changelog/ChangelogPaginator';
@@ -30,7 +30,7 @@ function BackToIndexLink() {
         'justify-between',
         'items-center',
         'pb-6 blog-lg:pb-10',
-        'not-prose'
+        'not-prose',
       )}
     >
       <Link
@@ -41,7 +41,7 @@ function BackToIndexLink() {
           'items-center',
           'text-sm no-underline',
           'text-win32-react-5 dark:text-win32-react-4',
-          'hover:text-gray-800 dark:hover:text-gray-300'
+          'hover:text-gray-800 dark:hover:text-gray-300',
         )}
       >
         <TbCircleChevronLeft className="w-6 h-6" /> Back to index page
@@ -76,7 +76,7 @@ function ChangelogPageContent({
           'items-center justify-start',
           'px-4 sm:px-0 py-4 sm:py-14',
           'relative',
-          'w-full'
+          'w-full',
         )}
       >
         <div className="max-w-screen-content w-full">
@@ -103,7 +103,7 @@ export default function ChangelogPage(props: Props): JSX.Element {
       <HtmlClassNameProvider
         className={clsx(
           ThemeClassNames.wrapper.blogPages,
-          ThemeClassNames.page.blogPostPage
+          ThemeClassNames.page.blogPostPage,
         )}
       >
         <BlogPostPageMetadata />

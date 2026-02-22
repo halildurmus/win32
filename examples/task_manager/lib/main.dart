@@ -1,10 +1,16 @@
+import 'package:ffi_leak_tracker/ffi_leak_tracker.dart';
 import 'package:flutter/material.dart';
+import 'package:win32/win32.dart';
 
 import 'models.dart';
-import 'task_manager.dart';
+import 'task_service.dart';
 
 void main() {
+  LeakTracker.enable();
+
   runApp(const TaskManagerApp());
+
+  reportMemoryLeaks();
 }
 
 class TaskManagerApp extends StatelessWidget {
@@ -34,6 +40,7 @@ class TaskManagerHomeScreenState extends State<TaskManagerHomeScreen> {
   SortOrder _sortOrder = SortOrder.ascending;
   TextEditingController? _searchController;
   FocusNode? _searchFocusNode;
+  final _taskService = const TaskService();
 
   @override
   void initState() {
@@ -52,7 +59,7 @@ class TaskManagerHomeScreenState extends State<TaskManagerHomeScreen> {
 
   void loadTasks() {
     setState(() {
-      _tasks = TaskManager.tasks ?? [];
+      _tasks = _taskService.enumerate();
       _filteredTasks = List.from(_tasks);
       sortTasks();
     });
@@ -74,7 +81,7 @@ class TaskManagerHomeScreenState extends State<TaskManagerHomeScreen> {
             child: const Text('End task'),
             onPressed: () {
               Navigator.of(context).pop();
-              if (TaskManager.terminate(pid)) {
+              if (_taskService.terminate(pid)) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text('Task "$taskName" ended successfully'),
@@ -90,9 +97,7 @@ class TaskManagerHomeScreenState extends State<TaskManagerHomeScreen> {
           ),
           TextButton(
             child: const Text('Cancel'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
+            onPressed: () => Navigator.of(context).pop(),
           ),
         ],
       ),
@@ -129,7 +134,7 @@ class TaskManagerHomeScreenState extends State<TaskManagerHomeScreen> {
   }
 
   Future<void> runTask(String path) async {
-    final result = TaskManager.run(path);
+    final result = _taskService.run(path);
     if (result) {
       Navigator.of(context).pop();
       ScaffoldMessenger.of(context).showSnackBar(
@@ -164,9 +169,7 @@ class TaskManagerHomeScreenState extends State<TaskManagerHomeScreen> {
           autofocus: true,
           onSubmitted: (_) async {
             final path = taskNameController.text;
-            if (path.isNotEmpty) {
-              await runTask(path);
-            }
+            if (path.isNotEmpty) await runTask(path);
           },
           controller: taskNameController,
           decoration: const InputDecoration(hintText: 'Enter task name'),
@@ -175,16 +178,12 @@ class TaskManagerHomeScreenState extends State<TaskManagerHomeScreen> {
           TextButton(
             onPressed: () async {
               final path = taskNameController.text;
-              if (path.isNotEmpty) {
-                await runTask(path);
-              }
+              if (path.isNotEmpty) await runTask(path);
             },
             child: const Text('Run'),
           ),
           TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
+            onPressed: () => Navigator.of(context).pop(),
             child: const Text('Cancel'),
           ),
         ],
@@ -218,7 +217,7 @@ class TaskManagerHomeScreenState extends State<TaskManagerHomeScreen> {
                             setState(() {
                               _searchController!.clear();
                               _searchFocusNode!.unfocus();
-                              _tasks = TaskManager.tasks ?? [];
+                              _tasks = _taskService.enumerate();
                               _filteredTasks = List.from(_tasks);
                               sortTasks();
                             });
@@ -237,7 +236,7 @@ class TaskManagerHomeScreenState extends State<TaskManagerHomeScreen> {
             icon: const Icon(Icons.refresh),
             onPressed: () {
               setState(() {
-                _tasks = TaskManager.tasks ?? [];
+                _tasks = _taskService.enumerate();
                 if (_searchController!.text.isNotEmpty) {
                   searchTasks(_searchController!.text);
                 } else {
@@ -348,7 +347,7 @@ class TaskManagerHomeScreenState extends State<TaskManagerHomeScreen> {
                                   Icons.cancel_outlined,
                                   color: Colors.red,
                                 ),
-                                onPressed: () =>
+                                onPressed: () async =>
                                     confirmEndTask(task.pid, task.name),
                                 tooltip: 'End the task',
                               ),

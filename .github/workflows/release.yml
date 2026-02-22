@@ -4,9 +4,17 @@ on:
   push:
     branches: [main]
     paths:
-      - packages/win32/CHANGELOG.md
-      - packages/win32/pubspec.yaml
+      - packages/*/CHANGELOG.md
+      - packages/*/pubspec.yaml
   workflow_dispatch:
+    inputs:
+      package:
+        required: true
+        description: Package to release
+        type: choice
+        options:
+          - ffi_leak_tracker
+          - win32
 
 jobs:
   check-release:
@@ -15,6 +23,7 @@ jobs:
     runs-on: ubuntu-latest
 
     outputs:
+      package: ${{ steps.check_release.outputs.package }}
       should_publish: ${{ steps.check_release.outputs.should_publish }}
 
     steps:
@@ -24,14 +33,16 @@ jobs:
       - name: 🔍 Check if There is a Release Commit
         id: check_release
         run: |
-          latest_commit_msg=$(git log -1 --pretty=format:%s)
-          echo "📜 Latest commit: $latest_commit_msg"
+          msg=$(git log -1 --pretty=format:%s)
+          echo "📜 Latest commit: $msg"
 
-          if [[ "$latest_commit_msg" =~ ^chore\(release\):\ v.* ]]; then
-            echo "🎉 Release commit detected. Proceeding with the publish step."
+          if [[ "$msg" =~ chore\(release\):[[:space:]]+.*package:([a-zA-Z0-9_]+).*v ]]; then
+            pkg="${BASH_REMATCH[1]}"
+            echo "🎯 Package: $pkg"
+            echo "package=$pkg" >> $GITHUB_OUTPUT
             echo "should_publish=true" >> $GITHUB_OUTPUT
           else
-            echo "❌ No release commit detected. Skipping the publish step."
+            echo "❌ Not a release commit"
             echo "should_publish=false" >> $GITHUB_OUTPUT
           fi
 
@@ -40,6 +51,6 @@ jobs:
     if: ${{ github.event_name == 'workflow_dispatch' || needs.check-release.outputs.should_publish == 'true' }}
     uses: halildurmus/workflows/.github/workflows/dart_release.yml@main
     with:
-      working_directory: packages/win32
+      working_directory: packages/${{ github.event_name == 'workflow_dispatch' && inputs.package || needs.check-release.outputs.package }}
     secrets:
       token: ${{ secrets.PAT }}

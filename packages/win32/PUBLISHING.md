@@ -12,8 +12,12 @@ This workflow will:
   _(e.g., `6.0.0` ➡️ `6.1.0`)_.
 - 📝 **Update** the `CHANGELOG.md` file with the latest changes.
 
-After making these changes, the workflow will create a pull request (PR)
-_(e.g., **`chore(release): v6.1.0`**)_.
+After making these changes, the workflow will create a pull request (PR) with
+title:
+
+```text
+chore(release): `package:win32` v6.1.0.
+```
 
 ## 2️⃣ Review and Merge the PR
 

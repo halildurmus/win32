@@ -5,26 +5,20 @@ pre-commit:
       glob: '*.{dart}'
       exclude:
         - 'packages/win32/test_fixes/**/*.dart'
-      run: dart run hooks:analyze {staged_files}
-      description: Analyzes the code for potential issues
+      run: dart run halildurmus_hooks:analyze {staged_files}
     format:
       glob: '*.{dart}'
-      run: dart run hooks:format {staged_files}
-      description: Formats the code according to the project's style guide
+      run: dart run halildurmus_hooks:format {staged_files}
     test_generator:
       root: packages/generator
       glob: 'packages/generator/{lib,test}/**/*.dart'
-      run: dart run hooks:test
-      description: Runs the test suite of the generator to ensure all tests pass
+      run: dart run halildurmus_hooks:test
     test_win32:
       root: packages/win32
       glob: 'packages/win32/{lib,test}/**/*.dart'
-      run: dart run hooks:test
-      description: Runs the test suite of the win32 to ensure all tests pass
+      run: dart run halildurmus_hooks:test
 
 commit-msg:
   commands:
     check_commit:
-      run: dart run hooks:check_commit {1}
-      description: >
-        Checks that the commit message follows the Conventional Commit format
+      run: dart run halildurmus_hooks:check_commit {1}

@@ -22,6 +22,10 @@ example:
 'external dependency':
   - head-branch: [^dependabot]
 
+'package: ffi_leak_tracker':
+  - changed-files:
+      - any-glob-to-any-file: packages/ffi_leak_tracker/**
+
 'package: generator':
   - changed-files:
       - any-glob-to-any-file: packages/generator/**

@@ -1,6 +1,9 @@
-// Sends RAW data (string or hex sequences) directly to the printer
-
-// Example taken from:
+// Demonstrates sending RAW data directly to a Windows printer using Win32 APIs.
+//
+// This example is suitable for thermal printers (ESC/POS), label printers,
+// or any printer that accepts RAW byte streams.
+//
+// Based on:
 // https://learn.microsoft.com/windows/win32/printdocs/sending-data-directly-to-a-printer
 
 import 'dart:ffi';
@@ -8,123 +11,114 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-class RawPrinter {
-  RawPrinter(this.printerName, this.alloc);
+/// Supported printer data types.
+///
+/// `RAW` is the most common choice and bypasses the printer driver’s formatting
+/// pipeline entirely.
+enum PrinterDataType {
+  raw('RAW'),
+  text('TEXT'),
+  xpsPass('XPS_PASS');
+
+  const PrinterDataType(this.value);
+
+  final String value;
+}
+
+/// A minimal, explicit wrapper for sending RAW data to a printer.
+///
+/// This class intentionally mirrors the Win32 printing lifecycle:
+///
+/// OpenPrinter → StartDocPrinter → StartPagePrinter → WritePrinter
+/// → EndPagePrinter → EndDocPrinter → ClosePrinter
+final class RawPrinter {
+  const RawPrinter(this.printerName);
+
   final String printerName;
-  final Arena alloc;
 
-  Pointer<HANDLE> _startRawPrintJob({
-    required String printerName,
-    required String documentTitle,
-    String dataType = 'RAW',
+  /// Sends a list of byte strings to the printer as a single print job.
+  ///
+  /// Each entry is written sequentially using [WritePrinter].
+  /// The caller is responsible for including line breaks or control sequences.
+  bool send(
+    List<String> payload, {
+    String documentName = 'Raw print job',
+    PrinterDataType dataType = PrinterDataType.raw,
   }) {
-    final pPrinterName = printerName.toNativeUtf16(allocator: alloc);
-    final phPrinter = alloc<HANDLE>();
-
-    // https://learn.microsoft.com/windows/win32/printdocs/openprinter
-    var fSuccess = OpenPrinter(pPrinterName, phPrinter, nullptr);
-    if (fSuccess == 0) {
-      final error = GetLastError();
-      throw Exception('OpenPrint error, status: $fSuccess, error: $error');
-    }
-
-    // https://learn.microsoft.com/windows/win32/printdocs/doc-info-1
-    final pDocInfo = alloc<DOC_INFO_1>()
-      ..ref.pDocName = printerName.toNativeUtf16(allocator: alloc)
-      ..ref.pDatatype = dataType
-          .toNativeUtf16(allocator: alloc) // RAW, TEXT or XPS_PASS
-      ..ref.pOutputFile = nullptr;
-
-    //https://learn.microsoft.com/windows/win32/printdocs/startdocprinter
-    fSuccess = StartDocPrinter(
-      phPrinter.value,
-      1, // Version of the structure to which pDocInfo points.
-      pDocInfo,
-    );
-    if (fSuccess == 0) {
-      final error = GetLastError();
-      throw Exception(
-        'StartDocPrinter error, status: $fSuccess, error: $error',
+    if (payload.isEmpty) return false;
+    return using((arena) {
+      final handle = arena<Pointer>();
+      final Win32Result(:value, :error) = OpenPrinter(
+        arena.pcwstr(printerName),
+        handle,
+        nullptr,
       );
-    }
+      if (!value) throw WindowsException(error.toHRESULT());
+      final hPrinter = PRINTER_HANDLE(handle.value);
 
-    return phPrinter;
-  }
-
-  //https://learn.microsoft.com/windows/win32/printdocs/startpageprinter
-  bool _startRawPrintPage(Pointer<HANDLE> phPrinter) =>
-      StartPagePrinter(phPrinter.value) != 0;
-
-  bool _endRawPrintPage(Pointer<HANDLE> phPrinter) =>
-      EndPagePrinter(phPrinter.value) != 0;
-
-  bool _endRawPrintJob(Pointer<HANDLE> phPrinter) =>
-      EndDocPrinter(phPrinter.value) > 0 && ClosePrinter(phPrinter.value) != 0;
-
-  bool _printRawData(Pointer<HANDLE> phPrinter, String dataToPrint) {
-    final cWritten = alloc<DWORD>();
-    final data = dataToPrint.toNativeUtf8(allocator: alloc);
-
-    // https://learn.microsoft.com/windows/win32/printdocs/writeprinter
-    final result = WritePrinter(
-      phPrinter.value,
-      data,
-      dataToPrint.length,
-      cWritten,
-    );
-
-    if (dataToPrint.length != cWritten.value) {
-      final error = GetLastError();
-      throw Exception('WritePrinter error, status: $result, error: $error');
-    }
-
-    return result != 0;
-  }
-
-  bool printLines(List<String> data) {
-    var res = false;
-
-    if (data.isEmpty) {
-      return res;
-    }
-
-    final printerHandle = _startRawPrintJob(
-      printerName: printerName,
-      documentTitle: 'My document',
-    );
-
-    res = _startRawPrintPage(printerHandle);
-
-    for (final item in data) {
-      if (res) {
-        res = _printRawData(printerHandle, item);
+      try {
+        _startDocument(arena, hPrinter, documentName, dataType);
+        try {
+          if (!StartPagePrinter(hPrinter)) {
+            throw Exception('StartPagePrinter failed.');
+          }
+          for (final chunk in payload) {
+            _write(arena, hPrinter, chunk);
+          }
+          EndPagePrinter(hPrinter);
+        } finally {
+          EndDocPrinter(hPrinter);
+        }
+      } finally {
+        hPrinter.close();
       }
-    }
-    _endRawPrintPage(printerHandle);
-    _endRawPrintJob(printerHandle);
+      return true;
+    });
+  }
 
-    return res;
+  void _startDocument(
+    Arena arena,
+    PRINTER_HANDLE hPrinter,
+    String documentName,
+    PrinterDataType dataType,
+  ) {
+    final docInfo = arena<DOC_INFO_1>();
+    docInfo.ref
+      ..pDocName = arena.pwstr(documentName)
+      ..pDatatype = arena.pwstr(dataType.value)
+      ..pOutputFile = PWSTR(nullptr);
+    final jobId = StartDocPrinter(hPrinter, 1, docInfo);
+    if (jobId == 0) throw Exception('StartDocPrinter failed.');
+  }
+
+  void _write(Arena arena, PRINTER_HANDLE hPrinter, String data) {
+    final bytesWritten = arena<DWORD>();
+    final buffer = arena.pcstr(data);
+    final result = WritePrinter(hPrinter, buffer, data.length, bytesWritten);
+    if (!result || bytesWritten.value != data.length) {
+      throw Exception('WritePrinter failed.');
+    }
   }
 }
 
 void main() {
-  // Example: ESC/POS sequence to open the cash drawer
+  // Example ESC/POS command: open cash drawer.
   const openCashDrawer = '\x1b\x70\x00';
 
-  using((alloc) {
-    // NOTE: You can get the printer name from the printer_list.dart example
-    final printer = RawPrinter('EPSON TM-T20II Receipt', alloc);
+  // Replace with your printer's name as shown in Windows Settings.
+  const printerName = 'EPSON TM-T20II Receipt';
 
-    // At the end we send a printer command to open the cash drawer
-    // for example for thermal printers using ESC/POS
-    final data = <String>[
-      for (var i = 0; i < 10; i++) 'Hello world line $i',
-      openCashDrawer,
-    ];
-
-    // Send to print all the lines at once
-    if (printer.printLines(data)) {
-      print('Success!');
-    }
-  });
+  const printer = RawPrinter(printerName);
+  final payload = <String>[
+    'Hello, world!\n',
+    'This was printed using RAW Win32 APIs.\n',
+    '\n',
+    openCashDrawer,
+  ];
+  try {
+    printer.send(payload, documentName: 'Raw printer example');
+    print('Data sent to printer "$printerName".');
+  } catch (e) {
+    print('Printing failed: $e');
+  }
 }

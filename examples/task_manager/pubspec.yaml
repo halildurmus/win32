@@ -3,17 +3,19 @@ description: Task Manager
 publish_to: none
 
 environment:
-  sdk: ^3.8.0
+  sdk: ^3.11.0
 
 dependencies:
-  ffi: ^2.1.4
+  ffi: ^2.2.0
+  ffi_leak_tracker:
+    path: ../../packages/ffi_leak_tracker # TODO: update to ^0.1.0 when released
   flutter:
     sdk: flutter
   win32:
-    path: ../../packages/win32
+    path: ../../packages/win32 # TODO: update to ^6.0.0 when released
 
 dev_dependencies:
-  halildurmus_lints: ^1.0.1
+  halildurmus_lints: ^2.0.0
 
 flutter:
   uses-material-design: true

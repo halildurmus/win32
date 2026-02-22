@@ -1,174 +1,279 @@
-// Capture a multiple display screenshots.
+// Demonstrating capturing screenshots of all active displays.
 
 import 'dart:ffi';
+import 'dart:io';
 
 import 'package:ffi/ffi.dart';
+import 'package:ffi_leak_tracker/ffi_leak_tracker.dart';
 import 'package:win32/win32.dart';
 
-void main() {
-  for (final display in Displays.all()) {
-    if (display.isConnected) {
-      display.saveScreenshot('${display.name}.bmp');
+List<Display> enumerateDisplays() {
+  final displays = <Display>[];
+
+  final device = adaptiveCalloc<DISPLAY_DEVICE>()
+    ..ref.cb = sizeOf<DISPLAY_DEVICE>();
+  var index = 0;
+  try {
+    while (EnumDisplayDevices(null, index, device, 0)) {
+      final DISPLAY_DEVICE(:DeviceName, :StateFlags) = device.ref;
+      displays.add(Display(deviceName: DeviceName, stateFlags: StateFlags));
+      index++;
     }
+
+    return displays;
+  } finally {
+    free(device);
   }
 }
 
-class Displays {
-  static Iterable<Display> all() sync* {
-    final device = calloc<DISPLAY_DEVICE>()..ref.cb = sizeOf<DISPLAY_DEVICE>();
-    var deviceIndex = 0;
+final class Display {
+  const Display({required this.deviceName, required this.stateFlags});
 
-    try {
-      while (EnumDisplayDevices(nullptr, deviceIndex, device, 0) != 0) {
-        yield Display(device.ref.DeviceName, device.ref.StateFlags);
-        deviceIndex++;
-      }
-    } finally {
-      free(device);
-    }
-  }
-}
+  final String deviceName;
+  final int stateFlags;
 
-class Display {
-  Display(this.rawName, this._stateFlags);
-  final String rawName;
+  bool get isActive =>
+      (stateFlags & DISPLAY_DEVICE_ACTIVE) == DISPLAY_DEVICE_ACTIVE;
 
-  void saveScreenshot(String fileName) {
-    final hdcScreen = _createDC();
-    final hbmScreen = _createScreenshot(hdcScreen);
-
-    BmpFile(hdcScreen, hbmScreen).save(fileName);
-
-    ReleaseDC(NULL, hdcScreen);
-    DeleteObject(hbmScreen);
-  }
-
-  int _createDC() => using(
-    (arena) => CreateDC(
-      nullptr,
-      rawName.toNativeUtf16(allocator: arena),
-      nullptr,
-      nullptr,
-    ),
-  );
-
-  int _createScreenshot(int hdcScreen) {
-    final hdcMemDC = CreateCompatibleDC(hdcScreen);
-
-    final width = GetDeviceCaps(hdcScreen, HORZRES);
-    final height = GetDeviceCaps(hdcScreen, VERTRES);
-
-    try {
-      final hbmScreen = CreateCompatibleBitmap(hdcScreen, width, height);
-      SelectObject(hdcMemDC, hbmScreen);
-      BitBlt(hdcMemDC, 0, 0, width, height, hdcScreen, 0, 0, SRCCOPY);
-      return hbmScreen;
-    } finally {
-      DeleteObject(hdcMemDC);
-    }
-  }
-
-  String get name => rawName.replaceAll(RegExp(r'[^a-zA-Z\d]'), '');
-
-  final int _stateFlags;
-
-  bool get isConnected =>
-      (_stateFlags & DISPLAY_DEVICE_ACTIVE) == DISPLAY_DEVICE_ACTIVE;
-}
-
-class BmpFile {
-  BmpFile(this.hdcScreen, this.hbmScreen);
-  final int hdcScreen;
-  final int hbmScreen;
-
-  void save(String fileName) {
+  void captureToBmp(String path) {
     using((arena) {
-      final bmpStructure = _prepareBmpBinary(arena);
-      _writeFile(arena, fileName, bmpStructure);
+      final hdcScreen = CreateDC(null, arena.pcwstr(deviceName), null, null);
+      if (hdcScreen.isNull) {
+        throw Exception(
+          'Failed to create a device context (DC) for $deviceName',
+        );
+      }
+
+      try {
+        final bitmap = captureScreenBitmap(hdcScreen);
+        try {
+          writeBitmapToFile(
+            path: path,
+            hdc: hdcScreen,
+            bitmap: bitmap,
+            arena: arena,
+          );
+        } finally {
+          bitmap.close();
+        }
+      } finally {
+        DeleteDC(hdcScreen);
+      }
     });
   }
+}
 
-  BmpBinary _prepareBmpBinary(Arena arena) {
-    final bmpScreen = arena<BITMAP>();
-    GetObject(hbmScreen, sizeOf<BITMAP>(), bmpScreen);
+HBITMAP captureScreenBitmap(HDC hdcScreen) {
+  final width = GetDeviceCaps(hdcScreen, HORZRES);
+  final height = GetDeviceCaps(hdcScreen, VERTRES);
 
-    final bitmapInfoHeader = arena<BITMAPINFOHEADER>()
-      ..ref.biSize = sizeOf<BITMAPINFOHEADER>()
-      ..ref.biWidth = bmpScreen.ref.bmWidth
-      ..ref.biHeight = bmpScreen.ref.bmHeight
-      ..ref.biPlanes = 1
-      ..ref.biBitCount = 32
-      ..ref.biCompression = BI_RGB;
-
-    final dwBmpSize =
-        ((bmpScreen.ref.bmWidth * bitmapInfoHeader.ref.biBitCount + 31) /
-                32 *
-                4 *
-                bmpScreen.ref.bmHeight)
-            .toInt();
-
-    final lpBitmap = arena<Uint8>(dwBmpSize);
-
-    GetDIBits(
-      hdcScreen,
-      hbmScreen,
-      0,
-      bmpScreen.ref.bmHeight,
-      lpBitmap,
-      bitmapInfoHeader.cast(),
-      DIB_RGB_COLORS,
-    );
-
-    final bitmapFileHeader = arena<BITMAPFILEHEADER>();
-    final dwSizeOfDIB =
-        dwBmpSize + sizeOf<BITMAPFILEHEADER>() + sizeOf<BITMAPINFOHEADER>();
-    bitmapFileHeader.ref.bfOffBits =
-        sizeOf<BITMAPFILEHEADER>() + sizeOf<BITMAPINFOHEADER>();
-
-    bitmapFileHeader.ref.bfSize = dwSizeOfDIB;
-    bitmapFileHeader.ref.bfType = 0x4D42; // BM
-
-    return (dwBmpSize, bitmapFileHeader, bitmapInfoHeader, lpBitmap);
+  final hdcMem = CreateCompatibleDC(hdcScreen);
+  if (hdcMem.isNull) {
+    throw Exception('Failed to create a memory device context (DC)');
   }
 
-  void _writeFile(Arena arena, String fileName, BmpBinary bmpFileStructure) {
-    final hFile = CreateFile(
-      fileName.toNativeUtf16(allocator: arena),
-      GENERIC_WRITE,
+  try {
+    final bitmap = CreateCompatibleBitmap(hdcScreen, width, height);
+    if (bitmap.isNull) throw Exception('Failed to create a compatible bitmap');
+
+    SelectObject(hdcMem, HGDIOBJ(bitmap));
+
+    final Win32Result(:value, :error) = BitBlt(
+      hdcMem,
       0,
-      nullptr,
-      CREATE_ALWAYS,
-      FILE_ATTRIBUTE_NORMAL,
-      NULL,
+      0,
+      width,
+      height,
+      hdcScreen,
+      0,
+      0,
+      SRCCOPY,
     );
 
-    final dwBytesWritten = arena<DWORD>();
-    final (dwBmpSize, bitmapFileHeader, bitmapInfoHeader, lpBitmap) =
-        bmpFileStructure;
+    if (!value) {
+      bitmap.close();
+      throw WindowsException(error.toHRESULT());
+    }
 
-    WriteFile(
-      hFile,
-      bitmapFileHeader.cast(),
-      sizeOf<BITMAPFILEHEADER>(),
-      dwBytesWritten,
-      nullptr,
-    );
-    WriteFile(
-      hFile,
-      bitmapInfoHeader.cast(),
-      sizeOf<BITMAPINFOHEADER>(),
-      dwBytesWritten,
-      nullptr,
-    );
-    WriteFile(hFile, lpBitmap, dwBmpSize, dwBytesWritten, nullptr);
-
-    CloseHandle(hFile);
+    return bitmap;
+  } finally {
+    DeleteDC(hdcMem);
   }
 }
 
-typedef BmpBinary = (
-  int dwBmpSize,
-  Pointer<BITMAPFILEHEADER> bitmapFileHeader,
-  Pointer<BITMAPINFOHEADER> bitmapInfoHeader,
-  Pointer<Uint8> lpBitmap,
-);
+void writeBitmapToFile({
+  required String path,
+  required HDC hdc,
+  required HBITMAP bitmap,
+  required Arena arena,
+}) {
+  final bmp = arena<BITMAP>();
+  GetObject(HGDIOBJ(bitmap), sizeOf<BITMAP>(), bmp);
+
+  final infoHeader = arena<BITMAPINFOHEADER>();
+  infoHeader.ref
+    ..biSize = sizeOf<BITMAPINFOHEADER>()
+    ..biWidth = bmp.ref.bmWidth
+    ..biHeight = bmp.ref.bmHeight
+    ..biPlanes = 1
+    ..biBitCount = 32
+    ..biCompression = BI_RGB;
+
+  final imageSize = bmp.ref.bmWidth * bmp.ref.bmHeight * 4; // 32-bit RGBA
+  final pixels = arena<Uint8>(imageSize);
+
+  final scanLines = GetDIBits(
+    hdc,
+    bitmap,
+    0,
+    bmp.ref.bmHeight,
+    pixels,
+    infoHeader.cast(),
+    DIB_RGB_COLORS,
+  );
+  if (scanLines == 0) {
+    throw Exception('GetDIBits failed to retrieve bitmap data');
+  }
+
+  final fileHeader = arena<BITMAPFILEHEADER>();
+  fileHeader.ref
+    ..bfType =
+        0x4D42 // 'BM'
+    ..bfOffBits = sizeOf<BITMAPFILEHEADER>() + sizeOf<BITMAPINFOHEADER>()
+    ..bfSize = fileHeader.ref.bfOffBits + imageSize;
+
+  final Win32Result(value: hFile, :error) = CreateFile(
+    arena.pcwstr(path),
+    GENERIC_WRITE,
+    FILE_SHARE_NONE,
+    nullptr,
+    CREATE_ALWAYS,
+    FILE_ATTRIBUTE_NORMAL,
+    null,
+  );
+  if (hFile == INVALID_HANDLE_VALUE) throw WindowsException(error.toHRESULT());
+
+  try {
+    final written = arena<DWORD>();
+    WriteFile(
+      hFile,
+      fileHeader.cast(),
+      sizeOf<BITMAPFILEHEADER>(),
+      written,
+      nullptr,
+    );
+    WriteFile(
+      hFile,
+      infoHeader.cast(),
+      sizeOf<BITMAPINFOHEADER>(),
+      written,
+      nullptr,
+    );
+    WriteFile(hFile, pixels, imageSize, written, nullptr);
+  } finally {
+    hFile.close();
+  }
+}
+
+sealed class ScreenshotResult {
+  const ScreenshotResult();
+}
+
+final class ScreenshotSuccess extends ScreenshotResult {
+  const ScreenshotSuccess({required this.display, required this.path});
+
+  final Display display;
+  final String path;
+}
+
+final class ScreenshotFailure extends ScreenshotResult {
+  const ScreenshotFailure({required this.display, required this.error});
+
+  final Display display;
+  final Object error;
+}
+
+final class ScreenshotCaptureOptions {
+  const ScreenshotCaptureOptions({
+    this.outputDirectory,
+    this.fileNameBuilder,
+    this.createOutputDirectory = true,
+    this.overwriteExisting = true,
+  });
+
+  /// Output directory for captured screenshots.
+  ///
+  /// If omitted, defaults to the current working directory
+  /// (`Directory.current`).
+  final String? outputDirectory;
+
+  /// Custom filename strategy (no path, just filename).
+  ///
+  /// Defaults to `display_<index + 1>.bmp`.
+  final String Function(Display display, int index)? fileNameBuilder;
+
+  /// Whether the output directory should be created automatically if it does
+  /// not exist.
+  final bool createOutputDirectory;
+
+  /// Whether existing files may be overwritten.
+  final bool overwriteExisting;
+}
+
+final class ScreenshotService {
+  const ScreenshotService();
+
+  List<ScreenshotResult> captureAll({
+    ScreenshotCaptureOptions options = const ScreenshotCaptureOptions(),
+  }) {
+    final results = <ScreenshotResult>[];
+
+    final outputDirPath = options.outputDirectory ?? Directory.current.path;
+    final dir = Directory(outputDirPath);
+    if (!dir.existsSync()) {
+      if (!options.createOutputDirectory) {
+        throw StateError('Output directory does not exist: $outputDirPath');
+      }
+      dir.createSync(recursive: true);
+    }
+
+    var index = 0;
+
+    for (final display in enumerateDisplays()) {
+      if (!display.isActive) continue;
+
+      final fileName =
+          options.fileNameBuilder?.call(display, index) ??
+          'display_${index + 1}.bmp';
+      final path = '${dir.path}\\$fileName';
+
+      try {
+        if (!options.overwriteExisting && File(path).existsSync()) {
+          throw StateError('File already exists: $path');
+        }
+
+        display.captureToBmp(path);
+        results.add(ScreenshotSuccess(display: display, path: path));
+      } catch (e) {
+        results.add(ScreenshotFailure(display: display, error: e));
+      }
+
+      index++;
+    }
+
+    return results;
+  }
+}
+
+void main() {
+  const service = ScreenshotService();
+  final results = service.captureAll();
+  for (final result in results) {
+    switch (result) {
+      case ScreenshotSuccess(:final display, :final path):
+        print('[${display.deviceName}] Saved screenshot → $path');
+      case ScreenshotFailure(:final display, :final error):
+        print('[${display.deviceName}] Capturing screenshot failed → $error');
+    }
+  }
+}

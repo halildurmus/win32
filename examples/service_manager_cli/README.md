@@ -2,7 +2,7 @@
 
 A command-line interface for managing Windows services.
 
-## Feature Overview
+## Features
 
 - **Enumerating services:** View a set of all available services on the system.
 - **Starting and stopping a service:** Start or stop a service by its name.
@@ -11,18 +11,17 @@ A command-line interface for managing Windows services.
 
 ## Installation
 
-Activate the CLI tool globally by running the following command:
+Install the CLI tool for global use by running the following command:
 
-```sh
-cd example
-dart pub global activate service_manager_cli -s path
+```cmd
+dart install examples\service_manager_cli
 ```
 
 ## Usage
 
 Run the CLI tool to see the usage information:
 
-```sh
+```cmd
 service_manager_cli
 ```
 

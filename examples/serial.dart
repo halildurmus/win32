@@ -1,8 +1,8 @@
 // Dart implementation of the Win32 sample of configuring a comms resource.
-
+//
 // C++ implementation can be found here:
 // https://learn.microsoft.com/windows/win32/devio/configuring-a-communications-resource
-
+//
 // This sample assumes that you have a working COM serial port.
 
 import 'dart:ffi';
@@ -19,49 +19,40 @@ void printCommState(DCB dcb) => print(
 );
 
 void main() {
-  final pcCommPort = 'COM1'.toNativeUtf16();
-  final dcb = calloc<DCB>();
-
-  try {
-    final hCom = CreateFile(
-      pcCommPort,
+  using((arena) {
+    final Win32Result(value: hCom, :error) = CreateFile(
+      arena.pcwstr('COM1'),
       GENERIC_READ | GENERIC_WRITE,
-      0,
-      nullptr,
+      FILE_SHARE_NONE,
+      null,
       OPEN_EXISTING,
-      0,
-      NULL,
+      FILE_ATTRIBUTE_NORMAL,
+      null,
     );
-
     if (hCom == INVALID_HANDLE_VALUE) {
       print('Invalid handle.');
-      exit(1);
+      throw WindowsException(error.toHRESULT());
     }
 
-    dcb.ref.DCBlength = sizeOf<DCB>();
-
-    var fSuccess = GetCommState(hCom, dcb);
-    if (fSuccess == 0) {
+    final dcb = arena<DCB>()..ref.DCBlength = sizeOf<DCB>();
+    final result = GetCommState(hCom, dcb);
+    if (!result.value) {
       print('GetCommState failed.');
-      exit(2);
+      throw WindowsException(result.error.toHRESULT());
     }
     printCommState(dcb.ref);
 
-    dcb
-      ..ref.BaudRate = CBR_57600
-      ..ref.ByteSize = 8
-      ..ref.Parity = NOPARITY
-      ..ref.StopBits = ONESTOPBIT;
+    dcb.ref
+      ..BaudRate = CBR_57600
+      ..ByteSize = 8
+      ..Parity = NOPARITY
+      ..StopBits = ONESTOPBIT;
 
-    fSuccess = SetCommState(hCom, dcb);
-    if (fSuccess == 0) {
+    if (!SetCommState(hCom, dcb).value) {
       print('SetCommState failed.');
       exit(3);
     }
 
     printCommState(dcb.ref);
-  } finally {
-    free(pcCommPort);
-    free(dcb);
-  }
+  });
 }

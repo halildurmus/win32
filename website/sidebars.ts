@@ -12,22 +12,6 @@ const sidebars: SidebarsConfig = {
         'getting-started/quick-start',
         {
           type: 'link',
-          href: 'https://win32.pub/examples',
-          label: 'Examples',
-          customProps: {
-            external: true,
-          },
-        },
-        {
-          type: 'link',
-          href: 'https://win32.pub/packages',
-          label: 'Packages',
-          customProps: {
-            external: true,
-          },
-        },
-        {
-          type: 'link',
           href: 'https://pub.dev/documentation/win32/latest/',
           label: 'API reference',
           customProps: {
@@ -37,42 +21,69 @@ const sidebars: SidebarsConfig = {
       ],
     },
 
-    // Guides & Concepts
+    // Core Concepts
     {
       type: 'category',
-      label: 'Guides & Concepts',
+      label: 'Core Concepts',
       className: 'category-as-header',
       items: [
-        'guides-concepts/functions',
-        'guides-concepts/integer-types',
-        'guides-concepts/memory-allocation',
-        'guides-concepts/structs',
-        'guides-concepts/memory-patterns',
-        'guides-concepts/callbacks',
+        'core/functions',
+        'core/memory-allocation',
+        'core/memory-management-patterns',
+        'core/integer-types',
+        'core/strings',
+        'core/structs',
+      ],
+    },
+
+    // Advanced Concepts
+    {
+      type: 'category',
+      label: 'Advanced Concepts',
+      className: 'category-as-header',
+      items: [
+        'advanced/callbacks',
         {
           type: 'category',
           label: 'COM',
           link: {
             type: 'generated-index',
             title: 'COM (Component Object Model)',
-            slug: '/com',
+            slug: '/advanced/com',
           },
           items: [
-            'guides-concepts/com/basic-concepts',
-            'guides-concepts/com/strings',
+            'advanced/com/basic-concepts',
+            'advanced/com/methods',
           ],
         },
-        'guides-concepts/contributing',
+        'advanced/leak-tracking',
       ],
     },
 
-    // Migration Guide
-    // {
-    //   type: 'category',
-    //   label: 'Migration Guide 🚀',
-    //   className: 'category-as-header',
-    //   items: ['migration-guide/5x-to-6x'],
-    // },
+    // Migration
+    {
+      type: 'category',
+      label: 'Migration',
+      className: 'category-as-header',
+      items: ['migration/5xx-to-6xx'],
+    },
+
+    // Community
+    {
+      type: 'category',
+      label: 'Community',
+      className: 'category-as-header',
+      items: ['community/contributing',
+        {
+          type: 'link',
+          href: 'https://github.com/halildurmus/win32',
+          label: 'GitHub Repository',
+          customProps: {
+            external: true,
+          },
+        },
+      ],
+    },
   ],
 };
 

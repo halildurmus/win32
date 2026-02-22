@@ -17,30 +17,30 @@ const authorsMap = {};
  * @param {string} section
  */
 function processSection(section) {
-  const title = section
-    .match(/\n## .*/)?.[0]
-    .trim()
-    .replace(/## \[?/, '')
-    .replace(/]? -/, '');
-  if (!title) return null;
-  if (title.startsWith('unreleased')) return null;
+  const headerLine = section.match(/\n## .*/)?.[0]?.trim();
+  if (!headerLine) return null;
+  if (/unreleased/i.test(headerLine)) return null;
 
-  const content = section.replace(/\n## .*/, '').trim();
+  const version = headerLine.match(/\[([^\]]+)\]/)?.[1];
+  const date = headerLine.match(/\b\d{4}-\d{2}-\d{2}\b/)?.[0];
+  if (!version || !date) return null;
 
-  let authors = content.match(/## Committers: \d.*/s);
+  const content = section
+    // Remove the header line
+    .replace(/^## .*$/m, '')
+    // Remove reference-style link definitions
+    .replace(/^\[[^\]]+\]: .*$/gm, '')
+    .trim();
+
+  const authorMatches = [...content.matchAll(/\bby @([a-zA-Z0-9-]+)\b/g)];
+  let authors = [...new Set(authorMatches.map(m => m[1]))];
   if (authors) {
-    authors = authors[0]
-      .match(/- .*/g)
-      .map(
-        (line) =>
-          line.match(
-            /- (?:(?<name>.*?) \()?\[@(?<alias>.*)\]\((?<url>.*?)\)\)?/
-          ).groups
-      )
-      .map((author) => ({
-        ...author,
-        name: author.name ?? author.alias,
-        imageURL: `https://github.com/${author.alias}.png`,
+    authors = authors
+      .map((alias) => ({
+        alias,
+        name: alias,
+        url: `https://github.com/${alias}`,
+        imageURL: `https://github.com/${alias}.png`,
       }))
       .sort((a, b) => a.url.localeCompare(b.url));
 
@@ -49,27 +49,25 @@ function processSection(section) {
     });
   }
   let hour = 20;
-  const date = title.match(/ \((?<date>.*)\)/)?.groups.date;
   while (publishTimes.has(`${date}T${hour}:00`)) {
     hour -= 1;
   }
   publishTimes.add(`${date}T${hour}:00`);
 
   return {
-    title: title.replace(/ \(.*\)/, ''),
+    title: version,
     content: `---
 mdx:
  format: md
-date: ${`${date}T${hour}:00`}${
-      authors
+date: ${`${date}T${hour}:00`}${authors && authors.length > 0
         ? `
 authors:
 ${authors.map((author) => `  - '${author.alias}'`).join('\n')}`
         : ''
-    }
+      }
 ---
 
-# ${title.replace(/ \(.*\)/, '')}
+# ${version}
 
 <!-- truncate -->
 

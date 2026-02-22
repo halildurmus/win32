@@ -1,0 +1,19 @@
+DRIVER_EXTENSION|
+/// {@category struct}
+base class DRIVER_EXTENSION extends Struct {
+  external Pointer<DRIVER_OBJECT> DriverObject;
+  external Pointer<NativeFunction<DRIVER_ADD_DEVICE>> AddDevice;
+
+  @Uint32()
+  external int Count;
+
+  external UNICODE_STRING ServiceKeyName;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<DRIVER_EXTENSION> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}

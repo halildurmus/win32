@@ -1,0 +1,2 @@
+SRWLOCK_INIT|
+final Pointer SRWLOCK_INIT = Pointer.fromAddress(0);

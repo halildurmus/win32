@@ -60,7 +60,7 @@ export const BlogHero: FC<Props> = ({ className }) => {
             'pb-2'
           )}
         >
-          A resource for win32, Flutter and Dart ecosystem, and Windows
+          A resource for package:win32, Flutter and Dart ecosystem, and Windows
           development. Here, we publish insightful articles that demystify
           complex concepts, explore new trends, and provide helpful tips to
           enhance your coding journey.

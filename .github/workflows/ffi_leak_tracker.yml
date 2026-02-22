@@ -1,0 +1,60 @@
+name: ffi_leak_tracker
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/ffi_leak_tracker.yml
+      - analysis_options.yaml
+      - codecov.yml
+      - pubspec.yaml
+      - packages/ffi_leak_tracker/example/**
+      - packages/ffi_leak_tracker/lib/**
+      - packages/ffi_leak_tracker/src/**
+      - packages/ffi_leak_tracker/test/**
+      - packages/ffi_leak_tracker/analysis_options.yaml
+      - packages/ffi_leak_tracker/CHANGELOG.md
+      - packages/ffi_leak_tracker/pubspec.yaml
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/ffi_leak_tracker.yml
+      - analysis_options.yaml
+      - codecov.yml
+      - pubspec.yaml
+      - packages/ffi_leak_tracker/example/**
+      - packages/ffi_leak_tracker/lib/**
+      - packages/ffi_leak_tracker/src/**
+      - packages/ffi_leak_tracker/test/**
+      - packages/ffi_leak_tracker/analysis_options.yaml
+      - packages/ffi_leak_tracker/CHANGELOG.md
+      - packages/ffi_leak_tracker/pubspec.yaml
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [macos, ubuntu, windows]
+        sdk: [dev, stable]
+
+    uses: halildurmus/workflows/.github/workflows/dart.yml@main
+    with:
+      analyze_directories: example lib test
+      check_coverage: ${{ matrix.sdk == 'dev' }}
+      codecov_flags: ffi_leak_tracker
+      dart_sdk: ${{ matrix.sdk }}
+      format_directories: example lib test
+      randomize_execution_order_of_tests: true
+      runs_on: ${{ matrix.os }}-latest
+      working_directory: packages/ffi_leak_tracker
+    secrets:
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+  dartdoc:
+    uses: halildurmus/workflows/.github/workflows/dartdoc.yml@main
+    with:
+      working_directory: packages/ffi_leak_tracker
+
+  pana:
+    uses: halildurmus/workflows/.github/workflows/pana.yml@main
+    with:
+      working_directory: packages/ffi_leak_tracker

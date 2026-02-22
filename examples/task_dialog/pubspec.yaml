@@ -1,0 +1,11 @@
+name: task_dialog
+publish_to: none
+
+environment:
+  sdk: ^3.11.0
+
+resolution: workspace
+
+dependencies:
+  ffi: ^2.2.0
+  win32: ^6.0.0

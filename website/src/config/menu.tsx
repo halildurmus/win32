@@ -3,6 +3,7 @@ import {
   ChangelogIcon,
   ContributeIcon,
   DocumentsIcon,
+  ExamplesIcon,
   PackagesIcon,
 } from '../win32-theme/icons/popover';
 
@@ -38,13 +39,12 @@ export const menuItems: MenuItemType[] = [
         description: 'Everything you need to get started.',
         href: '/docs',
       },
-      // {
-      //   label: 'Examples',
-      //   icon: ExamplesIcon,
-      //   badge: NewBadgeIcon,
-      //   description: 'Ready-made examples for your project',
-      //   href: '/examples',
-      // },
+      {
+        label: 'Examples',
+        icon: ExamplesIcon,
+        description: 'Ready-made examples for your project',
+        href: 'https://win32.pub/examples',
+      },
       {
         label: 'Packages',
         icon: PackagesIcon,
@@ -61,7 +61,7 @@ export const menuItems: MenuItemType[] = [
         label: 'Contributing',
         icon: ContributeIcon,
         description: 'Join open-source contributors.',
-        href: '/docs/guides-concepts/contributing',
+        href: '/docs/community/contributing',
       },
     ],
   },
@@ -75,13 +75,12 @@ export const menuItems: MenuItemType[] = [
         description: 'Articles about Windows development.',
         href: '/blog',
       },
-      // TODO(halildurmus): Uncomment when the page is ready.
-      // {
-      //   label: 'Changelog',
-      //   icon: ChangelogIcon,
-      //   description: 'Learn what has changed recently.',
-      //   href: '/changelog',
-      // },
+      {
+        label: 'Changelog',
+        icon: ChangelogIcon,
+        description: 'Learn what has changed recently.',
+        href: '/changelog',
+      },
       // {
       //   label: 'Roadmap',
       //   icon: RoadmapIcon,

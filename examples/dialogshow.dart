@@ -1,4 +1,4 @@
-// Opens the File Open dialog box and shows results
+// Example demonstrating how to create a file open dialog.
 
 import 'dart:ffi';
 
@@ -6,80 +6,49 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 void main() {
-  var hr = CoInitializeEx(
-    nullptr,
-    COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE,
-  );
+  CoInitializeEx(COINIT_MULTITHREADED);
 
-  if (SUCCEEDED(hr)) {
-    final fileDialog = FileOpenDialog.createInstance();
+  using((arena) {
+    try {
+      final fileDialog = arena.com<IFileOpenDialog>(FileOpenDialog);
+      final rgSpec = arena<COMDLG_FILTERSPEC>(3);
+      var options = fileDialog.getOptions();
+      options = FOS_FORCEFILESYSTEM | options;
+      fileDialog
+        ..setOptions(options)
+        ..setDefaultExtension(arena.pcwstr('jpg;jpeg'))
+        ..setFileNameLabel(arena.pcwstr('Custom Label:'))
+        ..setTitle(arena.pcwstr('Custom Title'))
+        ..setOkButtonLabel(arena.pcwstr('Go'));
+      // Set file type filters.
+      rgSpec[0]
+        ..pszName = arena.pwstr('JPEG Files')
+        ..pszSpec = arena.pwstr('*.jpg;*.jpeg');
+      rgSpec[1]
+        ..pszName = arena.pwstr('Bitmap Files')
+        ..pszSpec = arena.pwstr('*.bmp');
+      rgSpec[2]
+        ..pszName = arena.pwstr('All Files (*.*)')
+        ..pszSpec = arena.pwstr('*.*');
+      fileDialog
+        ..setFileTypes(3, rgSpec)
+        ..show(null);
 
-    final pfos = calloc<Uint32>();
-    hr = fileDialog.getOptions(pfos);
-    if (!SUCCEEDED(hr)) throw WindowsException(hr);
-
-    final options = pfos.value | FOS_FORCEFILESYSTEM;
-    hr = fileDialog.setOptions(options);
-    if (!SUCCEEDED(hr)) throw WindowsException(hr);
-
-    final defaultExtensions = TEXT('txt;csv');
-    hr = fileDialog.setDefaultExtension(defaultExtensions);
-    if (!SUCCEEDED(hr)) throw WindowsException(hr);
-    free(defaultExtensions);
-
-    final fileNameLabel = TEXT('Custom Label:');
-    hr = fileDialog.setFileNameLabel(fileNameLabel);
-    if (!SUCCEEDED(hr)) throw WindowsException(hr);
-    free(fileNameLabel);
-
-    final title = TEXT('Custom Title');
-    hr = fileDialog.setTitle(title);
-    if (!SUCCEEDED(hr)) throw WindowsException(hr);
-    free(title);
-
-    final okButtonLabel = TEXT('Go');
-    hr = fileDialog.setOkButtonLabel(okButtonLabel);
-    if (!SUCCEEDED(hr)) throw WindowsException(hr);
-    free(okButtonLabel);
-
-    final rgSpec = calloc<COMDLG_FILTERSPEC>(3);
-    rgSpec[0]
-      ..pszName = TEXT('JPEG Files')
-      ..pszSpec = TEXT('*.jpg;*.jpeg');
-    rgSpec[1]
-      ..pszName = TEXT('Bitmap Files')
-      ..pszSpec = TEXT('*.bmp');
-    rgSpec[2]
-      ..pszName = TEXT('All Files (*.*)')
-      ..pszSpec = TEXT('*.*');
-    hr = fileDialog.setFileTypes(3, rgSpec);
-    if (!SUCCEEDED(hr)) throw WindowsException(hr);
-
-    hr = fileDialog.show(NULL);
-    if (!SUCCEEDED(hr)) {
-      if (hr == HRESULT_FROM_WIN32(ERROR_CANCELLED)) {
+      final item = fileDialog.getResult();
+      if (item != null) {
+        arena.adopt(item);
+        final displayName = arena.using(
+          item.getDisplayName(SIGDN_FILESYSPATH),
+          free,
+        );
+        print('Selected file: ${displayName.toDartString()}');
+      }
+    } on WindowsException catch (e) {
+      if (e.hr == ERROR_CANCELLED.toHRESULT()) {
         print('Dialog cancelled.');
       } else {
-        throw WindowsException(hr);
+        rethrow;
       }
-    } else {
-      final ppsi = calloc<COMObject>();
-      hr = fileDialog.getResult(ppsi.cast());
-      if (!SUCCEEDED(hr)) throw WindowsException(hr);
-
-      final item = IShellItem(ppsi);
-      final pathPtr = calloc<Pointer<Utf16>>();
-      hr = item.getDisplayName(SIGDN_FILESYSPATH, pathPtr);
-      if (!SUCCEEDED(hr)) throw WindowsException(hr);
-
-      // MAX_PATH may truncate early if long filename support is enabled
-      final path = pathPtr.value.toDartString();
-
-      print('Result: $path');
     }
-  } else {
-    throw WindowsException(hr);
-  }
-
-  print('All done!');
+  });
 }

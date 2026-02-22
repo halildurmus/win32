@@ -44,14 +44,14 @@ export const MobileMenuModal: React.FC<MobileMenuModalProps> = ({
         className={clsx(
           'hidden landing-sm:block',
           'overflow-auto',
-          'border border-gray-200 dark:border-gray-700 rounded-lg'
+          'border border-gray-200 dark:border-gray-700 rounded-lg',
         )}
       />
       <Phone
         className={clsx(
           'block landing-sm:hidden',
           'overflow-auto',
-          'border border-gray-200 dark:border-gray-700 rounded-lg'
+          'border border-gray-200 dark:border-gray-700 rounded-lg',
         )}
       />
     </Modal>
@@ -84,7 +84,7 @@ const Modal: FC<PropsWithChildren<MobileMenuModalProps>> = ({
               'fixed inset-0',
               'bg-gray-0 dark:bg-gray-900',
               'flex',
-              'flex-col'
+              'flex-col',
             )}
           >
             <AnnouncementBar />
@@ -92,7 +92,7 @@ const Modal: FC<PropsWithChildren<MobileMenuModalProps>> = ({
               className={clsx(
                 'flex items-center justify-between',
                 'p-4',
-                'landing-sm:px-8'
+                'landing-sm:px-8',
               )}
             >
               <Win32Logotype />
@@ -102,7 +102,7 @@ const Modal: FC<PropsWithChildren<MobileMenuModalProps>> = ({
                   'rounded-lg',
                   'hover:brightness-105',
                   'active:scale-90',
-                  'transition-transform duration-75 ease-in-out'
+                  'transition-transform duration-75 ease-in-out',
                 )}
               >
                 <MdClose
@@ -144,7 +144,7 @@ const Tablet = (props: { className?: string }) => {
             className={clsx(
               'not-prose',
               'p-4',
-              'border-t dark:border-gray-700 border-gray-200'
+              'border-t dark:border-gray-700 border-gray-200',
             )}
           >
             <Link
@@ -154,7 +154,7 @@ const Tablet = (props: { className?: string }) => {
                 'block',
                 'no-underline',
                 'dark:text-gray-0 text-gray-900',
-                'font-bold'
+                'font-bold',
               )}
             >
               <div className={clsx('flex items-center gap-2')}>
@@ -167,7 +167,7 @@ const Tablet = (props: { className?: string }) => {
                 className={clsx(
                   'mt-2',
                   'grid grid-cols-2 min-[800px]:grid-cols-3',
-                  'gap-x-8 gap-y-4'
+                  'gap-x-8 gap-y-4',
                 )}
               >
                 {item.items.map((subItem) => (
@@ -203,7 +203,7 @@ const Phone = (props: { className?: string }) => {
                     <DisclosurePanel
                       className={clsx(
                         open && 'pb-4',
-                        open && 'border-b border-gray-200 dark:border-gray-700'
+                        open && 'border-b border-gray-200 dark:border-gray-700',
                       )}
                     >
                       {item.items.map((subItem) => (
@@ -240,13 +240,14 @@ const GitHub = (props: { id?: string }) => {
           'border-t dark:border-gray-700 border-gray-300',
           'dark:bg-gray-800 bg-gray-100',
           'flex items-center',
-          'p-4'
+          'p-4',
         )}
       >
         <GitHubStarIcon id={props?.id || ''} />
         <div className={clsx('ml-4', 'dark:text-gray-400 text-gray-600')}>
           If you like <span className={clsx('font-semibold')}>win32</span>,
-          don’t forget to star us on GitHub!
+          consider starring the project on GitHub to support its continued
+          development.
         </div>
       </div>
     </Link>

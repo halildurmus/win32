@@ -1,104 +1,51 @@
-// Demonstrates usage of various shell APIs to retrieve known folder locations
-
-import 'dart:ffi';
+// Demonstrates usage of various shell APIs to retrieve known folder locations.
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 // Get the path of the temporary directory (typically %TEMP%)
-String getTemporaryPath() {
-  final buffer = wsalloc(MAX_PATH + 1);
-  final length = GetTempPath(MAX_PATH, buffer);
+String getTemporaryPath() => using((arena) {
+  final buffer = arena.pwstrBuffer(MAX_PATH + 1);
+  final Win32Result(value: length, :error) = GetTempPath(MAX_PATH, buffer);
+  if (length == 0) throw WindowsException(error.toHRESULT());
 
-  try {
-    if (length == 0) {
-      final error = GetLastError();
-      throw WindowsException(error);
-    } else {
-      var path = buffer.toDartString();
-
-      // GetTempPath adds a trailing backslash, but SHGetKnownFolderPath does
-      // not. Strip off trailing backslash for consistency with other methods
-      // here.
-      if (path.endsWith(r'\')) {
-        path = path.substring(0, path.length - 1);
-      }
-      return path;
-    }
-  } finally {
-    free(buffer);
+  var path = buffer.toDartString();
+  // GetTempPath adds a trailing backslash, but SHGetKnownFolderPath does
+  // not. Strip off trailing backslash for consistency with other methods
+  // here.
+  if (path.endsWith(r'\')) {
+    path = path.substring(0, path.length - 1);
   }
-}
 
-/// Get the path for a known Windows folder, using the classic (deprecated) API
-String getDesktopPath1() {
-  final path = wsalloc(MAX_PATH);
+  return path;
+});
 
-  try {
-    final result = SHGetFolderPath(NULL, CSIDL_DESKTOP, NULL, 0, path);
+/// Get the path for a known Windows folder, using the modern Win32 API.
+String? getDesktopPath1() => using((arena) {
+  final result = SHGetKnownFolderPath(
+    FOLDERID_Desktop.toNative(allocator: arena),
+    KF_FLAG_DEFAULT,
+    null,
+  );
+  if (result.isNull) return null;
+  final path = result.toDartString();
+  free(result);
+  return path;
+});
 
-    if (SUCCEEDED(result)) {
-      return path.toDartString();
-    } else {
-      return 'error code 0x${result.toUnsigned(32).toRadixString(16)}';
-    }
-  } finally {
-    free(path);
-  }
-}
-
-/// Get the path for a known Windows folder, using the more modern Win32 API
-String getDesktopPath2() {
-  final appsFolder = GUIDFromString(FOLDERID_Desktop);
-  final ppszPath = calloc<PWSTR>();
-
-  try {
-    final hr = SHGetKnownFolderPath(
-      appsFolder,
-      KF_FLAG_DEFAULT,
-      NULL,
-      ppszPath,
-    );
-
-    if (FAILED(hr)) {
-      throw WindowsException(hr);
-    }
-
-    final path = ppszPath.value.toDartString();
-    return path;
-  } finally {
-    free(appsFolder);
-    free(ppszPath);
-  }
-}
-
-/// Get the path for a known Winodws folder, using the COM API
-String getDesktopPath3() {
-  final appsFolder = GUIDFromString(FOLDERID_Desktop);
-  final ppkf = calloc<COMObject>();
-  final ppszPath = calloc<LPWSTR>();
-
-  CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
-  try {
-    final knownFolderManager = KnownFolderManager.createInstance();
-    var hr = knownFolderManager.getFolder(appsFolder, ppkf.cast());
-    if (FAILED(hr)) throw WindowsException(hr);
-
-    final knownFolder = IKnownFolder(ppkf);
-    hr = knownFolder.getPath(0, ppszPath);
-    if (FAILED(hr)) throw WindowsException(hr);
-
-    final path = ppszPath.value.toDartString();
-    return path;
-  } finally {
-    free(appsFolder);
-    free(ppszPath);
-  }
-}
+/// Get the path for a known Winodws folder, using the COM API.
+String? getDesktopPath2() => using((arena) {
+  CoInitializeEx(COINIT_MULTITHREADED);
+  final knownFolderManager = arena.com<IKnownFolderManager>(KnownFolderManager);
+  final knownFolder = arena.adopt(
+    knownFolderManager.getFolder(FOLDERID_Desktop.toNative(allocator: arena))!,
+  );
+  final path = arena.using(knownFolder.getPath(0), free);
+  return path.toDartString();
+});
 
 void main() {
-  print('Temporary path is ${getTemporaryPath()}\n');
-  print('SHGetFolderPath returned ${getDesktopPath1()}');
-  print('SHGetKnownFolderPath returned ${getDesktopPath2()}');
-  print('IKnownFolder returned ${getDesktopPath3()}');
+  print('Temporary path is ${getTemporaryPath()}');
+  print('SHGetKnownFolderPath returned ${getDesktopPath1()}');
+  print('IKnownFolder returned ${getDesktopPath2()}');
 }

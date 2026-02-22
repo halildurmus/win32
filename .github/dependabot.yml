@@ -15,7 +15,15 @@ updates:
 
   # Examples
   - package-ecosystem: "pub"
+    directory: "/examples/dartnote"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "pub"
     directory: "/examples/explorer"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "pub"
+    directory: "/examples/manifest"
     schedule:
       interval: "weekly"
   - package-ecosystem: "pub"
@@ -23,11 +31,31 @@ updates:
     schedule:
       interval: "weekly"
   - package-ecosystem: "pub"
+    directory: "/examples/snake"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "pub"
+    directory: "/examples/task_dialog"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "pub"
     directory: "/examples/task_manager"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "pub"
+    directory: "/examples/tetris"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "pub"
+    directory: "/examples/usb_drive_monitor"
     schedule:
       interval: "weekly"
 
   # Packages
+  - package-ecosystem: "pub"
+    directory: "/packages/ffi_leak_tracker"
+    schedule:
+      interval: "weekly"
   - package-ecosystem: "pub"
     directory: "/packages/generator"
     schedule:

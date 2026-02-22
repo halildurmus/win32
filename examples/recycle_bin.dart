@@ -1,7 +1,5 @@
 // Explores the Windows Recycle Bin.
 
-// ignore_for_file: constant_identifier_names, unreachable_from_main
-
 import 'dart:ffi';
 import 'dart:io';
 
@@ -15,70 +13,49 @@ class RecycleBinInfo {
   final int totalSizeInBytes;
 }
 
-RecycleBinInfo queryRecycleBin(String rootPath) {
-  final pszRootPath = rootPath.toNativeUtf16();
-  final pSHQueryRBInfo = calloc<SHQUERYRBINFO>()
+RecycleBinInfo queryRecycleBin(String rootPath) => using((arena) {
+  final pSHQueryRBInfo = arena<SHQUERYRBINFO>()
     ..ref.cbSize = sizeOf<SHQUERYRBINFO>();
+  SHQueryRecycleBin(arena.pcwstr(rootPath), pSHQueryRBInfo);
+  final SHQUERYRBINFO(:i64NumItems, :i64Size) = pSHQueryRBInfo.ref;
+  return RecycleBinInfo(i64NumItems, i64Size);
+});
 
-  try {
-    final hr = SHQueryRecycleBin(pszRootPath, pSHQueryRBInfo);
-    if (hr != S_OK) throw WindowsException(hr);
+String getTempFileName() => using((arena) {
+  final lpTempFileName = arena.pwstrBuffer(MAX_PATH);
+  final pathName = arena.pcwstr('.');
+  final prefixString = arena.pcwstr('dart');
+  final Win32Result(:value, :error) = GetTempFileName(
+    pathName,
+    prefixString,
+    0,
+    lpTempFileName,
+  );
+  if (value == 0) throw WindowsException(error.toHRESULT());
+  return lpTempFileName.toDartString();
+});
 
-    return RecycleBinInfo(
-      pSHQueryRBInfo.ref.i64NumItems,
-      pSHQueryRBInfo.ref.i64Size,
-    );
-  } finally {
-    free(pszRootPath);
-    free(pSHQueryRBInfo);
-  }
-}
-
-String getTempFileName() {
-  final lpPathName = '.'.toNativeUtf16();
-  final lpPrefixString = 'dart'.toNativeUtf16();
-  final lpTempFileName = wsalloc(MAX_PATH);
-
-  try {
-    final result = GetTempFileName(
-      lpPathName,
-      lpPrefixString,
-      0,
-      lpTempFileName,
-    );
-    if (result == 0) throw StateError('Unable to create filename');
-
-    return lpTempFileName.toDartString();
-  } finally {
-    free(lpPathName);
-    free(lpPrefixString);
-    free(lpTempFileName);
-  }
-}
-
-bool recycleFile(String file) {
-  final hwnd = GetActiveWindow();
-  final pFrom = [file].toWideCharArray();
-  final lpFileOp = calloc<SHFILEOPSTRUCT>()
-    ..ref.hwnd = hwnd
-    ..ref.wFunc = FO_DELETE
-    ..ref.pFrom = pFrom
-    ..ref.pTo = nullptr
-    ..ref.fFlags = FOF_ALLOWUNDO;
-
-  try {
-    final result = SHFileOperation(lpFileOp);
-    return result == 0;
-  } finally {
-    free(pFrom);
-    free(lpFileOp);
-  }
+void recycleFile(String file) {
+  using((arena) {
+    final hwnd = GetActiveWindow();
+    final pFrom = [file].toPwstr(allocator: arena);
+    final lpFileOp = arena<SHFILEOPSTRUCT>();
+    lpFileOp.ref
+      ..hwnd = hwnd
+      ..wFunc = FO_DELETE
+      ..pFrom = pFrom
+      ..pTo = PWSTR(nullptr)
+      ..fFlags = FOF_ALLOWUNDO;
+    final Win32Result(:value, :error) = SHFileOperation(lpFileOp);
+    if (value != 0) throw WindowsException(error.toHRESULT());
+  });
 }
 
 void main(List<String> args) {
   final info = queryRecycleBin(r'c:\');
   print(
-    'There are ${info.itemCount} items in the '
+    'There are ${info.itemCount} items with a total size of '
+    '${info.totalSizeInBytes} bytes in the '
     'Recycle Bin on the C: drive.',
   );
 
@@ -93,7 +70,8 @@ void main(List<String> args) {
 
   final newInfo = queryRecycleBin(r'c:\');
   print(
-    'There now are ${newInfo.itemCount} items in the '
+    'There now are ${newInfo.itemCount} items with a total size of '
+    '${newInfo.totalSizeInBytes} bytes in the '
     'Recycle Bin on the C: drive.',
   );
 }

@@ -1,1471 +1,1238 @@
-// Maps FFI prototypes onto the corresponding Win32 API function calls
-
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-
-// ignore_for_file: unused_import, non_constant_identifier_names
-// ignore_for_file: constant_identifier_names, camel_case_types
-// ignore_for_file: specify_nonobvious_property_types
+//
+// Maps FFI prototypes onto the corresponding Win32 API function calls.
+//
+// ignore_for_file: avoid_positional_boolean_parameters
+// ignore_for_file: non_constant_identifier_names, unused_import
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
+import 'package:ffi_leak_tracker/ffi_leak_tracker.dart';
 
-import '../callbacks.dart';
-import '../combase.dart';
-import '../guid.dart';
+import '../bstr.dart';
+import '../com/interface.g.dart';
+import '../com/iunknown.g.dart';
+import '../constants.dart';
+import '../constants.g.dart';
+import '../enums.g.dart';
+import '../exception.dart';
+import '../extensions/pointer.dart';
+import '../hresult.dart';
+import '../hstring.dart';
+import '../macros.dart';
+import '../ntstatus.dart';
+import '../pcstr.dart';
+import '../pcwstr.dart';
+import '../pstr.dart';
+import '../pwstr.dart';
+import '../rpc_status.dart';
 import '../structs.g.dart';
-import '../variant.dart';
+import '../types.dart';
+import '../utils.dart';
+import '../win32_error.dart';
+import '../win32_result.dart';
 
-final _winmm = DynamicLibrary.open('winmm.dll');
-
-/// The mciGetDeviceID function retrieves the device identifier
-/// corresponding to the name of an open device.
+/// Retrieves the device identifier corresponding to the name of an open device.
 ///
-/// ```c
-/// MCIDEVICEID mciGetDeviceIDW(
-///   LPCTSTR lpszDevice
-/// );
-/// ```
-/// {@category winmm}
-int mciGetDeviceID(Pointer<Utf16> pszDevice) => _mciGetDeviceID(pszDevice);
-
-final _mciGetDeviceID = _winmm
-    .lookupFunction<
-      Uint32 Function(Pointer<Utf16> pszDevice),
-      int Function(Pointer<Utf16> pszDevice)
-    >('mciGetDeviceIDW');
-
-/// The mciGetDeviceIDFromElementID function retrieves the MCI device
-/// identifier corresponding to an element identifier.
+/// To learn more, see
+/// <https://learn.microsoft.com/previous-versions/dd757156(v=vs.85)>.
 ///
-/// ```c
-/// MCIDEVICEID mciGetDeviceIDFromElementIDW(
-///   DWORD   dwElementID,
-///   LPCTSTR lpstrType
-/// );
-/// ```
 /// {@category winmm}
-int mciGetDeviceIDFromElementID(int dwElementID, Pointer<Utf16> lpstrType) =>
+@pragma('vm:prefer-inline')
+int mciGetDeviceID(PCWSTR pszDevice) => _mciGetDeviceID(pszDevice);
+
+@Native<Uint32 Function(Pointer<Utf16>)>(symbol: 'mciGetDeviceIDW')
+external int _mciGetDeviceID(Pointer<Utf16> pszDevice);
+
+/// Retrieves the MCI device identifier corresponding to an element identifier.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/previous-versions/dd757157(v=vs.85)>.
+///
+/// {@category winmm}
+@pragma('vm:prefer-inline')
+int mciGetDeviceIDFromElementID(int dwElementID, PCWSTR lpstrType) =>
     _mciGetDeviceIDFromElementID(dwElementID, lpstrType);
 
-final _mciGetDeviceIDFromElementID = _winmm
-    .lookupFunction<
-      Uint32 Function(Uint32 dwElementID, Pointer<Utf16> lpstrType),
-      int Function(int dwElementID, Pointer<Utf16> lpstrType)
-    >('mciGetDeviceIDFromElementIDW');
+@Native<Uint32 Function(Uint32, Pointer<Utf16>)>(
+  symbol: 'mciGetDeviceIDFromElementIDW',
+)
+external int _mciGetDeviceIDFromElementID(
+  int dwElementID,
+  Pointer<Utf16> lpstrType,
+);
 
-/// The mciGetErrorString function retrieves a string that describes the
-/// specified MCI error code.
+/// Retrieves a string that describes the specified MCI error code.
 ///
-/// ```c
-/// BOOL mciGetErrorStringW(
-///   DWORD  fdwError,
-///   LPTSTR lpszErrorText,
-///   UINT   cchErrorText
-/// );
-/// ```
-/// {@category winmm}
-int mciGetErrorString(int mcierr, Pointer<Utf16> pszText, int cchText) =>
-    _mciGetErrorString(mcierr, pszText, cchText);
-
-final _mciGetErrorString = _winmm
-    .lookupFunction<
-      Int32 Function(Uint32 mcierr, Pointer<Utf16> pszText, Uint32 cchText),
-      int Function(int mcierr, Pointer<Utf16> pszText, int cchText)
-    >('mciGetErrorStringW');
-
-/// The mciSendCommand function sends a command message to the specified MCI
-/// device.
+/// To learn more, see
+/// <https://learn.microsoft.com/previous-versions/dd757158(v=vs.85)>.
 ///
-/// ```c
-/// MCIERROR mciSendCommandW(
-///   MCIDEVICEID IDDevice,
-///   UINT        uMsg,
-///   DWORD_PTR   fdwCommand,
-///   DWORD_PTR   dwParam
-/// );
-/// ```
 /// {@category winmm}
-int mciSendCommand(int mciId, int uMsg, int dwParam1, int dwParam2) =>
-    _mciSendCommand(mciId, uMsg, dwParam1, dwParam2);
+@pragma('vm:prefer-inline')
+bool mciGetErrorString(int mcierr, PWSTR pszText, int cchText) =>
+    _mciGetErrorString(mcierr, pszText, cchText) != FALSE;
 
-final _mciSendCommand = _winmm
-    .lookupFunction<
-      Uint32 Function(
-        Uint32 mciId,
-        Uint32 uMsg,
-        IntPtr dwParam1,
-        IntPtr dwParam2,
-      ),
-      int Function(int mciId, int uMsg, int dwParam1, int dwParam2)
-    >('mciSendCommandW');
+@Native<Int32 Function(Uint32, Pointer<Utf16>, Uint32)>(
+  symbol: 'mciGetErrorStringW',
+)
+external int _mciGetErrorString(
+  int mcierr,
+  Pointer<Utf16> pszText,
+  int cchText,
+);
 
-/// The mciSendString function sends a command string to an MCI device. The
-/// device that the command is sent to is specified in the command string.
+/// Sends a command message to the specified MCI device.
 ///
-/// ```c
-/// MCIERROR mciSendStringW(
-///   LPCTSTR lpszCommand,
-///   LPTSTR  lpszReturnString,
-///   UINT    cchReturn,
-///   HANDLE  hwndCallback
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/previous-versions/dd757160(v=vs.85)>.
+///
 /// {@category winmm}
+@pragma('vm:prefer-inline')
+int mciSendCommand(int mciId, int uMsg, int? dwParam1, int? dwParam2) =>
+    _mciSendCommand(mciId, uMsg, dwParam1 ?? NULL, dwParam2 ?? NULL);
+
+@Native<Uint32 Function(Uint32, Uint32, IntPtr, IntPtr)>(
+  symbol: 'mciSendCommandW',
+)
+external int _mciSendCommand(int mciId, int uMsg, int dwParam1, int dwParam2);
+
+/// Sends a command string to an MCI device.
+///
+/// The device that the command is sent to is specified in the command string.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/previous-versions/dd757161(v=vs.85)>.
+///
+/// {@category winmm}
+@pragma('vm:prefer-inline')
 int mciSendString(
+  PCWSTR lpstrCommand,
+  PWSTR? lpstrReturnString,
+  int uReturnLength,
+  HWND? hwndCallback,
+) => _mciSendString(
+  lpstrCommand,
+  lpstrReturnString ?? nullptr,
+  uReturnLength,
+  hwndCallback ?? nullptr,
+);
+
+@Native<Uint32 Function(Pointer<Utf16>, Pointer<Utf16>, Uint32, Pointer)>(
+  symbol: 'mciSendStringW',
+)
+external int _mciSendString(
   Pointer<Utf16> lpstrCommand,
   Pointer<Utf16> lpstrReturnString,
   int uReturnLength,
-  int hwndCallback,
-) => _mciSendString(
-  lpstrCommand,
-  lpstrReturnString,
-  uReturnLength,
-  hwndCallback,
+  Pointer hwndCallback,
 );
 
-final _mciSendString = _winmm
-    .lookupFunction<
-      Uint32 Function(
-        Pointer<Utf16> lpstrCommand,
-        Pointer<Utf16> lpstrReturnString,
-        Uint32 uReturnLength,
-        IntPtr hwndCallback,
-      ),
-      int Function(
-        Pointer<Utf16> lpstrCommand,
-        Pointer<Utf16> lpstrReturnString,
-        int uReturnLength,
-        int hwndCallback,
-      )
-    >('mciSendStringW');
-
-/// The midiConnect function connects a MIDI input device to a MIDI thru or
-/// output device, or connects a MIDI thru device to a MIDI output device.
+/// Connects a MIDI input device to a MIDI thru or output device, or connects a
+/// MIDI thru device to a MIDI output device.
 ///
-/// ```c
-/// MMRESULT midiConnect(
-///   HMIDI    hmi,
-///   HMIDIOUT hmo,
-///   LPVOID   pReserved
-/// );
-/// ```
-/// {@category winmm}
-int midiConnect(int hmi, int hmo, Pointer pReserved) =>
-    _midiConnect(hmi, hmo, pReserved);
-
-final _midiConnect = _winmm
-    .lookupFunction<
-      Uint32 Function(IntPtr hmi, IntPtr hmo, Pointer pReserved),
-      int Function(int hmi, int hmo, Pointer pReserved)
-    >('midiConnect');
-
-/// The midiDisconnect function disconnects a MIDI input device from a MIDI
-/// thru or output device, or disconnects a MIDI thru device from a MIDI
-/// output device.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midiconnect>.
 ///
-/// ```c
-/// MMRESULT midiDisconnect(
-///   HMIDI    hmi,
-///   HMIDIOUT hmo,
-///   LPVOID   pReserved
-/// );
-/// ```
 /// {@category winmm}
-int midiDisconnect(int hmi, int hmo, Pointer pReserved) =>
-    _midiDisconnect(hmi, hmo, pReserved);
+@pragma('vm:prefer-inline')
+int midiConnect(HMIDI hmi, HMIDIOUT hmo) => _midiConnect(hmi, hmo, nullptr);
 
-final _midiDisconnect = _winmm
-    .lookupFunction<
-      Uint32 Function(IntPtr hmi, IntPtr hmo, Pointer pReserved),
-      int Function(int hmi, int hmo, Pointer pReserved)
-    >('midiDisconnect');
+@Native<Uint32 Function(Pointer, Pointer, Pointer)>(symbol: 'midiConnect')
+external int _midiConnect(Pointer hmi, Pointer hmo, Pointer pReserved);
 
-/// The midiInAddBuffer function sends an input buffer to a specified opened
-/// MIDI input device. This function is used for system-exclusive messages.
+/// Disconnects a MIDI input device from a MIDI thru or output device, or
+/// disconnects a MIDI thru device from a MIDI output device.
 ///
-/// ```c
-/// MMRESULT midiInAddBuffer(
-///   HMIDIIN   hmi,
-///   LPMIDIHDR pmh,
-///   UINT      cbmh
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-mididisconnect>.
+///
 /// {@category winmm}
-int midiInAddBuffer(int hmi, Pointer<MIDIHDR> pmh, int cbmh) =>
+@pragma('vm:prefer-inline')
+int midiDisconnect(HMIDI hmi, HMIDIOUT hmo) =>
+    _midiDisconnect(hmi, hmo, nullptr);
+
+@Native<Uint32 Function(Pointer, Pointer, Pointer)>(symbol: 'midiDisconnect')
+external int _midiDisconnect(Pointer hmi, Pointer hmo, Pointer pReserved);
+
+/// Sends an input buffer to a specified opened MIDI input device.
+///
+/// This function is used for system-exclusive messages.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midiinaddbuffer>.
+///
+/// {@category winmm}
+@pragma('vm:prefer-inline')
+int midiInAddBuffer(HMIDIIN hmi, Pointer<MIDIHDR> pmh, int cbmh) =>
     _midiInAddBuffer(hmi, pmh, cbmh);
 
-final _midiInAddBuffer = _winmm
-    .lookupFunction<
-      Uint32 Function(IntPtr hmi, Pointer<MIDIHDR> pmh, Uint32 cbmh),
-      int Function(int hmi, Pointer<MIDIHDR> pmh, int cbmh)
-    >('midiInAddBuffer');
+@Native<Uint32 Function(Pointer, Pointer<MIDIHDR>, Uint32)>(
+  symbol: 'midiInAddBuffer',
+)
+external int _midiInAddBuffer(Pointer hmi, Pointer<MIDIHDR> pmh, int cbmh);
 
-/// The midiInClose function closes the specified MIDI input device.
+/// Closes the specified MIDI input device.
 ///
-/// ```c
-/// MMRESULT midiInClose(
-///   HMIDIIN hmi
-/// );
-/// ```
-/// {@category winmm}
-int midiInClose(int hmi) => _midiInClose(hmi);
-
-final _midiInClose = _winmm
-    .lookupFunction<Uint32 Function(IntPtr hmi), int Function(int hmi)>(
-      'midiInClose',
-    );
-
-/// The midiInGetDevCaps function determines the capabilities of a specified
-/// MIDI input device.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midiinclose>.
 ///
-/// ```c
-/// MMRESULT midiInGetDevCapsW(
-///   UINT_PTR      uDeviceID,
-///   LPMIDIINCAPSW pmic,
-///   UINT          cbmic
-/// );
-/// ```
 /// {@category winmm}
+@pragma('vm:prefer-inline')
+int midiInClose(HMIDIIN hmi) => _midiInClose(hmi);
+
+@Native<Uint32 Function(Pointer)>(symbol: 'midiInClose')
+external int _midiInClose(Pointer hmi);
+
+/// Determines the capabilities of a specified MIDI input device.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midiingetdevcapsw>.
+///
+/// {@category winmm}
+@pragma('vm:prefer-inline')
 int midiInGetDevCaps(int uDeviceID, Pointer<MIDIINCAPS> pmic, int cbmic) =>
     _midiInGetDevCaps(uDeviceID, pmic, cbmic);
 
-final _midiInGetDevCaps = _winmm
-    .lookupFunction<
-      Uint32 Function(IntPtr uDeviceID, Pointer<MIDIINCAPS> pmic, Uint32 cbmic),
-      int Function(int uDeviceID, Pointer<MIDIINCAPS> pmic, int cbmic)
-    >('midiInGetDevCapsW');
+@Native<Uint32 Function(IntPtr, Pointer<MIDIINCAPS>, Uint32)>(
+  symbol: 'midiInGetDevCapsW',
+)
+external int _midiInGetDevCaps(
+  int uDeviceID,
+  Pointer<MIDIINCAPS> pmic,
+  int cbmic,
+);
 
-/// The midiInGetErrorText function retrieves a textual description for an
-/// error identified by the specified error code.
+/// Retrieves a textual description for an error identified by the specified
+/// error code.
 ///
-/// ```c
-/// MMRESULT midiInGetErrorTextW(
-///   MMRESULT mmrError,
-///   LPWSTR   pszText,
-///   UINT     cchText
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midiingeterrortextw>.
+///
 /// {@category winmm}
-int midiInGetErrorText(int mmrError, Pointer<Utf16> pszText, int cchText) =>
+@pragma('vm:prefer-inline')
+int midiInGetErrorText(int mmrError, PWSTR pszText, int cchText) =>
     _midiInGetErrorText(mmrError, pszText, cchText);
 
-final _midiInGetErrorText = _winmm
-    .lookupFunction<
-      Uint32 Function(Uint32 mmrError, Pointer<Utf16> pszText, Uint32 cchText),
-      int Function(int mmrError, Pointer<Utf16> pszText, int cchText)
-    >('midiInGetErrorTextW');
+@Native<Uint32 Function(Uint32, Pointer<Utf16>, Uint32)>(
+  symbol: 'midiInGetErrorTextW',
+)
+external int _midiInGetErrorText(
+  int mmrError,
+  Pointer<Utf16> pszText,
+  int cchText,
+);
 
-/// The midiInGetID function gets the device identifier for the given MIDI
-/// input device.
+/// Gets the device identifier for the given MIDI input device.
 ///
-/// ```c
-/// MMRESULT midiInGetID(
-///   HMIDIIN hmi,
-///   LPUINT  puDeviceID
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midiingetid>.
+///
 /// {@category winmm}
-int midiInGetID(int hmi, Pointer<Uint32> puDeviceID) =>
+@pragma('vm:prefer-inline')
+int midiInGetID(HMIDIIN hmi, Pointer<Uint32> puDeviceID) =>
     _midiInGetID(hmi, puDeviceID);
 
-final _midiInGetID = _winmm
-    .lookupFunction<
-      Uint32 Function(IntPtr hmi, Pointer<Uint32> puDeviceID),
-      int Function(int hmi, Pointer<Uint32> puDeviceID)
-    >('midiInGetID');
+@Native<Uint32 Function(Pointer, Pointer<Uint32>)>(symbol: 'midiInGetID')
+external int _midiInGetID(Pointer hmi, Pointer<Uint32> puDeviceID);
 
-/// The midiInGetNumDevs function retrieves the number of MIDI input devices
-/// in the system.
+/// Retrieves the number of MIDI input devices in the system.
 ///
-/// ```c
-/// UINT midiInGetNumDevs();
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midiingetnumdevs>.
+///
 /// {@category winmm}
+@pragma('vm:prefer-inline')
 int midiInGetNumDevs() => _midiInGetNumDevs();
 
-final _midiInGetNumDevs = _winmm
-    .lookupFunction<Uint32 Function(), int Function()>('midiInGetNumDevs');
+@Native<Uint32 Function()>(symbol: 'midiInGetNumDevs')
+external int _midiInGetNumDevs();
 
-/// The midiInMessage function sends a message to the MIDI device driver.
+/// Sends a message to the MIDI device driver.
 ///
-/// ```c
-/// MMRESULT midiInMessage(
-///   HMIDIIN   hmi,
-///   UINT      uMsg,
-///   DWORD_PTR dw1,
-///   DWORD_PTR dw2
-/// );
-/// ```
-/// {@category winmm}
-int midiInMessage(int hmi, int uMsg, int dw1, int dw2) =>
-    _midiInMessage(hmi, uMsg, dw1, dw2);
-
-final _midiInMessage = _winmm
-    .lookupFunction<
-      Uint32 Function(IntPtr hmi, Uint32 uMsg, IntPtr dw1, IntPtr dw2),
-      int Function(int hmi, int uMsg, int dw1, int dw2)
-    >('midiInMessage');
-
-/// The midiInOpen function opens a specified MIDI input device.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midiinmessage>.
 ///
-/// ```c
-/// MMRESULT midiInOpen(
-///   LPHMIDIIN phmi,
-///   UINT      uDeviceID,
-///   DWORD_PTR dwCallback,
-///   DWORD_PTR dwInstance,
-///   DWORD     fdwOpen
-/// );
-/// ```
 /// {@category winmm}
+@pragma('vm:prefer-inline')
+int midiInMessage(HMIDIIN? hmi, int uMsg, int? dw1, int? dw2) =>
+    _midiInMessage(hmi ?? nullptr, uMsg, dw1 ?? NULL, dw2 ?? NULL);
+
+@Native<Uint32 Function(Pointer, Uint32, IntPtr, IntPtr)>(
+  symbol: 'midiInMessage',
+)
+external int _midiInMessage(Pointer hmi, int uMsg, int dw1, int dw2);
+
+/// Opens a specified MIDI input device.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midiinopen>.
+///
+/// {@category winmm}
+@pragma('vm:prefer-inline')
 int midiInOpen(
-  Pointer<IntPtr> phmi,
+  Pointer<Pointer> phmi,
+  int uDeviceID,
+  int? dwCallback,
+  int? dwInstance,
+  MIDI_WAVE_OPEN_TYPE fdwOpen,
+) => _midiInOpen(
+  phmi,
+  uDeviceID,
+  dwCallback ?? NULL,
+  dwInstance ?? NULL,
+  fdwOpen,
+);
+
+@Native<Uint32 Function(Pointer<Pointer>, Uint32, IntPtr, IntPtr, Uint32)>(
+  symbol: 'midiInOpen',
+)
+external int _midiInOpen(
+  Pointer<Pointer> phmi,
   int uDeviceID,
   int dwCallback,
   int dwInstance,
   int fdwOpen,
-) => _midiInOpen(phmi, uDeviceID, dwCallback, dwInstance, fdwOpen);
+);
 
-final _midiInOpen = _winmm
-    .lookupFunction<
-      Uint32 Function(
-        Pointer<IntPtr> phmi,
-        Uint32 uDeviceID,
-        IntPtr dwCallback,
-        IntPtr dwInstance,
-        Uint32 fdwOpen,
-      ),
-      int Function(
-        Pointer<IntPtr> phmi,
-        int uDeviceID,
-        int dwCallback,
-        int dwInstance,
-        int fdwOpen,
-      )
-    >('midiInOpen');
-
-/// The midiInPrepareHeader function prepares a buffer for MIDI input.
+/// Prepares a buffer for MIDI input.
 ///
-/// ```c
-/// MMRESULT midiInPrepareHeader(
-///   HMIDIIN   hmi,
-///   LPMIDIHDR pmh,
-///   UINT      cbmh
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midiinprepareheader>.
+///
 /// {@category winmm}
-int midiInPrepareHeader(int hmi, Pointer<MIDIHDR> pmh, int cbmh) =>
+@pragma('vm:prefer-inline')
+int midiInPrepareHeader(HMIDIIN hmi, Pointer<MIDIHDR> pmh, int cbmh) =>
     _midiInPrepareHeader(hmi, pmh, cbmh);
 
-final _midiInPrepareHeader = _winmm
-    .lookupFunction<
-      Uint32 Function(IntPtr hmi, Pointer<MIDIHDR> pmh, Uint32 cbmh),
-      int Function(int hmi, Pointer<MIDIHDR> pmh, int cbmh)
-    >('midiInPrepareHeader');
+@Native<Uint32 Function(Pointer, Pointer<MIDIHDR>, Uint32)>(
+  symbol: 'midiInPrepareHeader',
+)
+external int _midiInPrepareHeader(Pointer hmi, Pointer<MIDIHDR> pmh, int cbmh);
 
-/// The midiInReset function stops input on a given MIDI input device.
+/// Stops input on a given MIDI input device.
 ///
-/// ```c
-/// MMRESULT midiInReset(
-///   HMIDIIN hmi
-/// );
-/// ```
-/// {@category winmm}
-int midiInReset(int hmi) => _midiInReset(hmi);
-
-final _midiInReset = _winmm
-    .lookupFunction<Uint32 Function(IntPtr hmi), int Function(int hmi)>(
-      'midiInReset',
-    );
-
-/// The midiInStart function starts MIDI input on the specified MIDI input
-/// device.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midiinreset>.
 ///
-/// ```c
-/// MMRESULT midiInStart(
-///   HMIDIIN hmi
-/// );
-/// ```
 /// {@category winmm}
-int midiInStart(int hmi) => _midiInStart(hmi);
+@pragma('vm:prefer-inline')
+int midiInReset(HMIDIIN hmi) => _midiInReset(hmi);
 
-final _midiInStart = _winmm
-    .lookupFunction<Uint32 Function(IntPtr hmi), int Function(int hmi)>(
-      'midiInStart',
-    );
+@Native<Uint32 Function(Pointer)>(symbol: 'midiInReset')
+external int _midiInReset(Pointer hmi);
 
-/// The midiInStop function stops MIDI input on the specified MIDI input
-/// device.
+/// Starts MIDI input on the specified MIDI input device.
 ///
-/// ```c
-/// MMRESULT midiInStop(
-///   HMIDIIN hmi
-/// );
-/// ```
-/// {@category winmm}
-int midiInStop(int hmi) => _midiInStop(hmi);
-
-final _midiInStop = _winmm
-    .lookupFunction<Uint32 Function(IntPtr hmi), int Function(int hmi)>(
-      'midiInStop',
-    );
-
-/// The midiInUnprepareHeader function cleans up the preparation performed
-/// by the midiInPrepareHeader function.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midiinstart>.
 ///
-/// ```c
-/// MMRESULT midiInUnprepareHeader(
-///   HMIDIIN   hmi,
-///   LPMIDIHDR pmh,
-///   UINT      cbmh
-/// );
-/// ```
 /// {@category winmm}
-int midiInUnprepareHeader(int hmi, Pointer<MIDIHDR> pmh, int cbmh) =>
+@pragma('vm:prefer-inline')
+int midiInStart(HMIDIIN hmi) => _midiInStart(hmi);
+
+@Native<Uint32 Function(Pointer)>(symbol: 'midiInStart')
+external int _midiInStart(Pointer hmi);
+
+/// Stops MIDI input on the specified MIDI input device.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midiinstop>.
+///
+/// {@category winmm}
+@pragma('vm:prefer-inline')
+int midiInStop(HMIDIIN hmi) => _midiInStop(hmi);
+
+@Native<Uint32 Function(Pointer)>(symbol: 'midiInStop')
+external int _midiInStop(Pointer hmi);
+
+/// Cleans up the preparation performed by the midiInPrepareHeader function.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midiinunprepareheader>.
+///
+/// {@category winmm}
+@pragma('vm:prefer-inline')
+int midiInUnprepareHeader(HMIDIIN hmi, Pointer<MIDIHDR> pmh, int cbmh) =>
     _midiInUnprepareHeader(hmi, pmh, cbmh);
 
-final _midiInUnprepareHeader = _winmm
-    .lookupFunction<
-      Uint32 Function(IntPtr hmi, Pointer<MIDIHDR> pmh, Uint32 cbmh),
-      int Function(int hmi, Pointer<MIDIHDR> pmh, int cbmh)
-    >('midiInUnprepareHeader');
+@Native<Uint32 Function(Pointer, Pointer<MIDIHDR>, Uint32)>(
+  symbol: 'midiInUnprepareHeader',
+)
+external int _midiInUnprepareHeader(
+  Pointer hmi,
+  Pointer<MIDIHDR> pmh,
+  int cbmh,
+);
 
-/// The midiOutCacheDrumPatches function requests that an internal MIDI
-/// synthesizer device preload and cache a specified set of key-based
-/// percussion patches.
+/// Requests that an internal MIDI synthesizer device preload and cache a
+/// specified set of key-based percussion patches.
 ///
-/// ```c
-/// MMRESULT midiOutCacheDrumPatches(
-///   HMIDIOUT hmo,
-///   UINT     uPatch,
-///   LPWORD   pwkya,
-///   UINT     fuCache
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midioutcachedrumpatches>.
+///
 /// {@category winmm}
+@pragma('vm:prefer-inline')
 int midiOutCacheDrumPatches(
-  int hmo,
+  HMIDIOUT hmo,
   int uPatch,
   Pointer<Uint16> pwkya,
   int fuCache,
 ) => _midiOutCacheDrumPatches(hmo, uPatch, pwkya, fuCache);
 
-final _midiOutCacheDrumPatches = _winmm
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hmo,
-        Uint32 uPatch,
-        Pointer<Uint16> pwkya,
-        Uint32 fuCache,
-      ),
-      int Function(int hmo, int uPatch, Pointer<Uint16> pwkya, int fuCache)
-    >('midiOutCacheDrumPatches');
+@Native<Uint32 Function(Pointer, Uint32, Pointer<Uint16>, Uint32)>(
+  symbol: 'midiOutCacheDrumPatches',
+)
+external int _midiOutCacheDrumPatches(
+  Pointer hmo,
+  int uPatch,
+  Pointer<Uint16> pwkya,
+  int fuCache,
+);
 
-/// The midiOutCachePatches function requests that an internal MIDI
-/// synthesizer device preload and cache a specified set of patches.
+/// Requests that an internal MIDI synthesizer device preload and cache a
+/// specified set of patches.
 ///
-/// ```c
-/// MMRESULT midiOutCachePatches(
-///   HMIDIOUT hmo,
-///   UINT     uBank,
-///   LPWORD   pwpa,
-///   UINT     fuCache
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midioutcachepatches>.
+///
 /// {@category winmm}
+@pragma('vm:prefer-inline')
 int midiOutCachePatches(
-  int hmo,
+  HMIDIOUT hmo,
   int uBank,
   Pointer<Uint16> pwpa,
   int fuCache,
 ) => _midiOutCachePatches(hmo, uBank, pwpa, fuCache);
 
-final _midiOutCachePatches = _winmm
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr hmo,
-        Uint32 uBank,
-        Pointer<Uint16> pwpa,
-        Uint32 fuCache,
-      ),
-      int Function(int hmo, int uBank, Pointer<Uint16> pwpa, int fuCache)
-    >('midiOutCachePatches');
+@Native<Uint32 Function(Pointer, Uint32, Pointer<Uint16>, Uint32)>(
+  symbol: 'midiOutCachePatches',
+)
+external int _midiOutCachePatches(
+  Pointer hmo,
+  int uBank,
+  Pointer<Uint16> pwpa,
+  int fuCache,
+);
 
-/// The midiOutClose function closes the specified MIDI output device.
+/// Closes the specified MIDI output device.
 ///
-/// ```c
-/// MMRESULT midiOutClose(
-///   HMIDIOUT hmo
-/// );
-/// ```
-/// {@category winmm}
-int midiOutClose(int hmo) => _midiOutClose(hmo);
-
-final _midiOutClose = _winmm
-    .lookupFunction<Uint32 Function(IntPtr hmo), int Function(int hmo)>(
-      'midiOutClose',
-    );
-
-/// The midiOutGetDevCaps function queries a specified MIDI output device to
-/// determine its capabilities.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midioutclose>.
 ///
-/// ```c
-/// MMRESULT midiOutGetDevCapsW(
-///   UINT_PTR       uDeviceID,
-///   LPMIDIOUTCAPSW pmoc,
-///   UINT           cbmoc
-/// );
-/// ```
 /// {@category winmm}
+@pragma('vm:prefer-inline')
+int midiOutClose(HMIDIOUT hmo) => _midiOutClose(hmo);
+
+@Native<Uint32 Function(Pointer)>(symbol: 'midiOutClose')
+external int _midiOutClose(Pointer hmo);
+
+/// Queries a specified MIDI output device to determine its capabilities.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midioutgetdevcapsw>.
+///
+/// {@category winmm}
+@pragma('vm:prefer-inline')
 int midiOutGetDevCaps(int uDeviceID, Pointer<MIDIOUTCAPS> pmoc, int cbmoc) =>
     _midiOutGetDevCaps(uDeviceID, pmoc, cbmoc);
 
-final _midiOutGetDevCaps = _winmm
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr uDeviceID,
-        Pointer<MIDIOUTCAPS> pmoc,
-        Uint32 cbmoc,
-      ),
-      int Function(int uDeviceID, Pointer<MIDIOUTCAPS> pmoc, int cbmoc)
-    >('midiOutGetDevCapsW');
+@Native<Uint32 Function(IntPtr, Pointer<MIDIOUTCAPS>, Uint32)>(
+  symbol: 'midiOutGetDevCapsW',
+)
+external int _midiOutGetDevCaps(
+  int uDeviceID,
+  Pointer<MIDIOUTCAPS> pmoc,
+  int cbmoc,
+);
 
-/// The midiOutGetErrorText function retrieves a textual description for an
-/// error identified by the specified error code.
+/// Retrieves a textual description for an error identified by the specified
+/// error code.
 ///
-/// ```c
-/// MMRESULT midiOutGetErrorTextW(
-///   MMRESULT mmrError,
-///   LPWSTR   pszText,
-///   UINT     cchText
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midioutgeterrortextw>.
+///
 /// {@category winmm}
-int midiOutGetErrorText(int mmrError, Pointer<Utf16> pszText, int cchText) =>
+@pragma('vm:prefer-inline')
+int midiOutGetErrorText(int mmrError, PWSTR pszText, int cchText) =>
     _midiOutGetErrorText(mmrError, pszText, cchText);
 
-final _midiOutGetErrorText = _winmm
-    .lookupFunction<
-      Uint32 Function(Uint32 mmrError, Pointer<Utf16> pszText, Uint32 cchText),
-      int Function(int mmrError, Pointer<Utf16> pszText, int cchText)
-    >('midiOutGetErrorTextW');
+@Native<Uint32 Function(Uint32, Pointer<Utf16>, Uint32)>(
+  symbol: 'midiOutGetErrorTextW',
+)
+external int _midiOutGetErrorText(
+  int mmrError,
+  Pointer<Utf16> pszText,
+  int cchText,
+);
 
-/// The midiOutGetID function retrieves the device identifier for the given
-/// MIDI output device.
+/// Retrieves the device identifier for the given MIDI output device.
 ///
-/// ```c
-/// MMRESULT midiOutGetID(
-///   HMIDIOUT hmo,
-///   LPUINT   puDeviceID
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midioutgetid>.
+///
 /// {@category winmm}
-int midiOutGetID(int hmo, Pointer<Uint32> puDeviceID) =>
+@pragma('vm:prefer-inline')
+int midiOutGetID(HMIDIOUT hmo, Pointer<Uint32> puDeviceID) =>
     _midiOutGetID(hmo, puDeviceID);
 
-final _midiOutGetID = _winmm
-    .lookupFunction<
-      Uint32 Function(IntPtr hmo, Pointer<Uint32> puDeviceID),
-      int Function(int hmo, Pointer<Uint32> puDeviceID)
-    >('midiOutGetID');
+@Native<Uint32 Function(Pointer, Pointer<Uint32>)>(symbol: 'midiOutGetID')
+external int _midiOutGetID(Pointer hmo, Pointer<Uint32> puDeviceID);
 
-/// The midiOutGetNumDevs function retrieves the number of MIDI output
-/// devices present in the system.
+/// Retrieves the number of MIDI output devices present in the system.
 ///
-/// ```c
-/// UINT midiOutGetNumDevs();
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midioutgetnumdevs>.
+///
 /// {@category winmm}
+@pragma('vm:prefer-inline')
 int midiOutGetNumDevs() => _midiOutGetNumDevs();
 
-final _midiOutGetNumDevs = _winmm
-    .lookupFunction<Uint32 Function(), int Function()>('midiOutGetNumDevs');
+@Native<Uint32 Function()>(symbol: 'midiOutGetNumDevs')
+external int _midiOutGetNumDevs();
 
-/// The midiOutGetVolume function retrieves the current volume setting of a
-/// MIDI output device.
+/// Retrieves the current volume setting of a MIDI output device.
 ///
-/// ```c
-/// MMRESULT midiOutGetVolume(
-///   HMIDIOUT hmo,
-///   LPDWORD  pdwVolume
-/// );
-/// ```
-/// {@category winmm}
-int midiOutGetVolume(int hmo, Pointer<Uint32> pdwVolume) =>
-    _midiOutGetVolume(hmo, pdwVolume);
-
-final _midiOutGetVolume = _winmm
-    .lookupFunction<
-      Uint32 Function(IntPtr hmo, Pointer<Uint32> pdwVolume),
-      int Function(int hmo, Pointer<Uint32> pdwVolume)
-    >('midiOutGetVolume');
-
-/// The midiOutLongMsg function sends a system-exclusive MIDI message to the
-/// specified MIDI output device.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midioutgetvolume>.
 ///
-/// ```c
-/// MMRESULT midiOutLongMsg(
-///   HMIDIOUT  hmo,
-///   LPMIDIHDR pmh,
-///   UINT      cbmh
-/// );
-/// ```
 /// {@category winmm}
-int midiOutLongMsg(int hmo, Pointer<MIDIHDR> pmh, int cbmh) =>
+@pragma('vm:prefer-inline')
+int midiOutGetVolume(HMIDIOUT? hmo, Pointer<Uint32> pdwVolume) =>
+    _midiOutGetVolume(hmo ?? nullptr, pdwVolume);
+
+@Native<Uint32 Function(Pointer, Pointer<Uint32>)>(symbol: 'midiOutGetVolume')
+external int _midiOutGetVolume(Pointer hmo, Pointer<Uint32> pdwVolume);
+
+/// Sends a system-exclusive MIDI message to the specified MIDI output device.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midioutlongmsg>.
+///
+/// {@category winmm}
+@pragma('vm:prefer-inline')
+int midiOutLongMsg(HMIDIOUT hmo, Pointer<MIDIHDR> pmh, int cbmh) =>
     _midiOutLongMsg(hmo, pmh, cbmh);
 
-final _midiOutLongMsg = _winmm
-    .lookupFunction<
-      Uint32 Function(IntPtr hmo, Pointer<MIDIHDR> pmh, Uint32 cbmh),
-      int Function(int hmo, Pointer<MIDIHDR> pmh, int cbmh)
-    >('midiOutLongMsg');
+@Native<Uint32 Function(Pointer, Pointer<MIDIHDR>, Uint32)>(
+  symbol: 'midiOutLongMsg',
+)
+external int _midiOutLongMsg(Pointer hmo, Pointer<MIDIHDR> pmh, int cbmh);
 
-/// The midiOutMessage function sends a message to the MIDI device drivers.
+/// Sends a message to the MIDI device drivers.
+///
 /// This function is used only for driver-specific messages that are not
 /// supported by the MIDI API.
 ///
-/// ```c
-/// MMRESULT midiOutMessage(
-///   HMIDIOUT  hmo,
-///   UINT      uMsg,
-///   DWORD_PTR dw1,
-///   DWORD_PTR dw2
-/// );
-/// ```
-/// {@category winmm}
-int midiOutMessage(int hmo, int uMsg, int dw1, int dw2) =>
-    _midiOutMessage(hmo, uMsg, dw1, dw2);
-
-final _midiOutMessage = _winmm
-    .lookupFunction<
-      Uint32 Function(IntPtr hmo, Uint32 uMsg, IntPtr dw1, IntPtr dw2),
-      int Function(int hmo, int uMsg, int dw1, int dw2)
-    >('midiOutMessage');
-
-/// The midiOutOpen function opens a MIDI output device for playback.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midioutmessage>.
 ///
-/// ```c
-/// MMRESULT midiOutOpen(
-///   LPHMIDIOUT phmo,
-///   UINT       uDeviceID,
-///   DWORD_PTR  dwCallback,
-///   DWORD_PTR  dwInstance,
-///   DWORD      fdwOpen
-/// );
-/// ```
 /// {@category winmm}
+@pragma('vm:prefer-inline')
+int midiOutMessage(HMIDIOUT? hmo, int uMsg, int? dw1, int? dw2) =>
+    _midiOutMessage(hmo ?? nullptr, uMsg, dw1 ?? NULL, dw2 ?? NULL);
+
+@Native<Uint32 Function(Pointer, Uint32, IntPtr, IntPtr)>(
+  symbol: 'midiOutMessage',
+)
+external int _midiOutMessage(Pointer hmo, int uMsg, int dw1, int dw2);
+
+/// Opens a MIDI output device for playback.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midioutopen>.
+///
+/// {@category winmm}
+@pragma('vm:prefer-inline')
 int midiOutOpen(
-  Pointer<IntPtr> phmo,
+  Pointer<Pointer> phmo,
+  int uDeviceID,
+  int? dwCallback,
+  int? dwInstance,
+  MIDI_WAVE_OPEN_TYPE fdwOpen,
+) => _midiOutOpen(
+  phmo,
+  uDeviceID,
+  dwCallback ?? NULL,
+  dwInstance ?? NULL,
+  fdwOpen,
+);
+
+@Native<Uint32 Function(Pointer<Pointer>, Uint32, IntPtr, IntPtr, Uint32)>(
+  symbol: 'midiOutOpen',
+)
+external int _midiOutOpen(
+  Pointer<Pointer> phmo,
   int uDeviceID,
   int dwCallback,
   int dwInstance,
   int fdwOpen,
-) => _midiOutOpen(phmo, uDeviceID, dwCallback, dwInstance, fdwOpen);
+);
 
-final _midiOutOpen = _winmm
-    .lookupFunction<
-      Uint32 Function(
-        Pointer<IntPtr> phmo,
-        Uint32 uDeviceID,
-        IntPtr dwCallback,
-        IntPtr dwInstance,
-        Uint32 fdwOpen,
-      ),
-      int Function(
-        Pointer<IntPtr> phmo,
-        int uDeviceID,
-        int dwCallback,
-        int dwInstance,
-        int fdwOpen,
-      )
-    >('midiOutOpen');
-
-/// The midiOutPrepareHeader function prepares a MIDI system-exclusive or
-/// stream buffer for output.
+/// Prepares a MIDI system-exclusive or stream buffer for output.
 ///
-/// ```c
-/// MMRESULT midiOutPrepareHeader(
-///   HMIDIOUT  hmo,
-///   LPMIDIHDR pmh,
-///   UINT      cbmh
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midioutprepareheader>.
+///
 /// {@category winmm}
-int midiOutPrepareHeader(int hmo, Pointer<MIDIHDR> pmh, int cbmh) =>
+@pragma('vm:prefer-inline')
+int midiOutPrepareHeader(HMIDIOUT hmo, Pointer<MIDIHDR> pmh, int cbmh) =>
     _midiOutPrepareHeader(hmo, pmh, cbmh);
 
-final _midiOutPrepareHeader = _winmm
-    .lookupFunction<
-      Uint32 Function(IntPtr hmo, Pointer<MIDIHDR> pmh, Uint32 cbmh),
-      int Function(int hmo, Pointer<MIDIHDR> pmh, int cbmh)
-    >('midiOutPrepareHeader');
+@Native<Uint32 Function(Pointer, Pointer<MIDIHDR>, Uint32)>(
+  symbol: 'midiOutPrepareHeader',
+)
+external int _midiOutPrepareHeader(Pointer hmo, Pointer<MIDIHDR> pmh, int cbmh);
 
-/// The midiOutReset function turns off all notes on all MIDI channels for
-/// the specified MIDI output device.
+/// Turns off all notes on all MIDI channels for the specified MIDI output
+/// device.
 ///
-/// ```c
-/// MMRESULT midiOutReset(
-///   HMIDIOUT hmo
-/// );
-/// ```
-/// {@category winmm}
-int midiOutReset(int hmo) => _midiOutReset(hmo);
-
-final _midiOutReset = _winmm
-    .lookupFunction<Uint32 Function(IntPtr hmo), int Function(int hmo)>(
-      'midiOutReset',
-    );
-
-/// The midiOutSetVolume function sets the volume of a MIDI output device.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midioutreset>.
 ///
-/// ```c
-/// MMRESULT midiOutSetVolume(
-///   HMIDIOUT hmo,
-///   DWORD    dwVolume
-/// );
-/// ```
 /// {@category winmm}
-int midiOutSetVolume(int hmo, int dwVolume) => _midiOutSetVolume(hmo, dwVolume);
+@pragma('vm:prefer-inline')
+int midiOutReset(HMIDIOUT hmo) => _midiOutReset(hmo);
 
-final _midiOutSetVolume = _winmm
-    .lookupFunction<
-      Uint32 Function(IntPtr hmo, Uint32 dwVolume),
-      int Function(int hmo, int dwVolume)
-    >('midiOutSetVolume');
+@Native<Uint32 Function(Pointer)>(symbol: 'midiOutReset')
+external int _midiOutReset(Pointer hmo);
 
-/// The midiOutShortMsg function sends a short MIDI message to the specified
-/// MIDI output device.
+/// Sets the volume of a MIDI output device.
 ///
-/// ```c
-/// MMRESULT midiOutShortMsg(
-///   HMIDIOUT hmo,
-///   DWORD    dwMsg
-/// );
-/// ```
-/// {@category winmm}
-int midiOutShortMsg(int hmo, int dwMsg) => _midiOutShortMsg(hmo, dwMsg);
-
-final _midiOutShortMsg = _winmm
-    .lookupFunction<
-      Uint32 Function(IntPtr hmo, Uint32 dwMsg),
-      int Function(int hmo, int dwMsg)
-    >('midiOutShortMsg');
-
-/// The midiOutUnprepareHeader function cleans up the preparation performed
-/// by the midiOutPrepareHeader function.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midioutsetvolume>.
 ///
-/// ```c
-/// MMRESULT midiOutUnprepareHeader(
-///   HMIDIOUT  hmo,
-///   LPMIDIHDR pmh,
-///   UINT      cbmh
-/// );
-/// ```
 /// {@category winmm}
-int midiOutUnprepareHeader(int hmo, Pointer<MIDIHDR> pmh, int cbmh) =>
+@pragma('vm:prefer-inline')
+int midiOutSetVolume(HMIDIOUT? hmo, int dwVolume) =>
+    _midiOutSetVolume(hmo ?? nullptr, dwVolume);
+
+@Native<Uint32 Function(Pointer, Uint32)>(symbol: 'midiOutSetVolume')
+external int _midiOutSetVolume(Pointer hmo, int dwVolume);
+
+/// Sends a short MIDI message to the specified MIDI output device.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midioutshortmsg>.
+///
+/// {@category winmm}
+@pragma('vm:prefer-inline')
+int midiOutShortMsg(HMIDIOUT hmo, int dwMsg) => _midiOutShortMsg(hmo, dwMsg);
+
+@Native<Uint32 Function(Pointer, Uint32)>(symbol: 'midiOutShortMsg')
+external int _midiOutShortMsg(Pointer hmo, int dwMsg);
+
+/// Cleans up the preparation performed by the midiOutPrepareHeader function.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midioutunprepareheader>.
+///
+/// {@category winmm}
+@pragma('vm:prefer-inline')
+int midiOutUnprepareHeader(HMIDIOUT hmo, Pointer<MIDIHDR> pmh, int cbmh) =>
     _midiOutUnprepareHeader(hmo, pmh, cbmh);
 
-final _midiOutUnprepareHeader = _winmm
-    .lookupFunction<
-      Uint32 Function(IntPtr hmo, Pointer<MIDIHDR> pmh, Uint32 cbmh),
-      int Function(int hmo, Pointer<MIDIHDR> pmh, int cbmh)
-    >('midiOutUnprepareHeader');
+@Native<Uint32 Function(Pointer, Pointer<MIDIHDR>, Uint32)>(
+  symbol: 'midiOutUnprepareHeader',
+)
+external int _midiOutUnprepareHeader(
+  Pointer hmo,
+  Pointer<MIDIHDR> pmh,
+  int cbmh,
+);
 
-/// The PlaySound function plays a sound specified by the given file name,
-/// resource, or system event.
+/// Plays a sound specified by the given file name, resource, or system event.
 ///
-/// ```c
-/// BOOL PlaySoundW(
-///   LPCTSTR pszSound,
-///   HMODULE hmod,
-///   DWORD fdwSound);
-/// ```
-/// {@category winmm}
-int PlaySound(Pointer<Utf16> pszSound, int hmod, int fdwSound) =>
-    _PlaySound(pszSound, hmod, fdwSound);
-
-final _PlaySound = _winmm
-    .lookupFunction<
-      Int32 Function(Pointer<Utf16> pszSound, IntPtr hmod, Uint32 fdwSound),
-      int Function(Pointer<Utf16> pszSound, int hmod, int fdwSound)
-    >('PlaySoundW');
-
-/// The waveInAddBuffer function sends an input buffer to the given
-/// waveform-audio input device. When the buffer is filled, the application
-/// is notified.
+/// To learn more, see
+/// <https://learn.microsoft.com/previous-versions//dd743680(v=vs.85)>.
 ///
-/// ```c
-/// MMRESULT waveInAddBuffer(
-///   HWAVEIN   hwi,
-///   LPWAVEHDR pwh,
-///   UINT      cbwh
-/// );
-/// ```
 /// {@category winmm}
-int waveInAddBuffer(int hwi, Pointer<WAVEHDR> pwh, int cbwh) =>
+@pragma('vm:prefer-inline')
+bool PlaySound(PCWSTR? pszSound, HMODULE? hmod, SND_FLAGS fdwSound) =>
+    _PlaySound(pszSound ?? nullptr, hmod ?? nullptr, fdwSound) != FALSE;
+
+@Native<Int32 Function(Pointer<Utf16>, Pointer, Uint32)>(symbol: 'PlaySoundW')
+external int _PlaySound(Pointer<Utf16> pszSound, Pointer hmod, int fdwSound);
+
+/// Retrieves the system time, in milliseconds.
+///
+/// The system time is the time elapsed since Windows was started.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/timeapi/nf-timeapi-timegettime>.
+///
+/// {@category winmm}
+@pragma('vm:prefer-inline')
+int timeGetTime() => _timeGetTime();
+
+@Native<Uint32 Function()>(symbol: 'timeGetTime')
+external int _timeGetTime();
+
+/// Sends an input buffer to the given waveform-audio input device.
+///
+/// When the buffer is filled, the application is notified.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveinaddbuffer>.
+///
+/// {@category winmm}
+@pragma('vm:prefer-inline')
+int waveInAddBuffer(HWAVEIN hwi, Pointer<WAVEHDR> pwh, int cbwh) =>
     _waveInAddBuffer(hwi, pwh, cbwh);
 
-final _waveInAddBuffer = _winmm
-    .lookupFunction<
-      Uint32 Function(IntPtr hwi, Pointer<WAVEHDR> pwh, Uint32 cbwh),
-      int Function(int hwi, Pointer<WAVEHDR> pwh, int cbwh)
-    >('waveInAddBuffer');
+@Native<Uint32 Function(Pointer, Pointer<WAVEHDR>, Uint32)>(
+  symbol: 'waveInAddBuffer',
+)
+external int _waveInAddBuffer(Pointer hwi, Pointer<WAVEHDR> pwh, int cbwh);
 
-/// The waveInClose function closes the given waveform-audio input device.
+/// Closes the given waveform-audio input device.
 ///
-/// ```c
-/// MMRESULT waveInClose(
-///   HWAVEIN hwi
-/// );
-/// ```
-/// {@category winmm}
-int waveInClose(int hwi) => _waveInClose(hwi);
-
-final _waveInClose = _winmm
-    .lookupFunction<Uint32 Function(IntPtr hwi), int Function(int hwi)>(
-      'waveInClose',
-    );
-
-/// The waveInGetDevCaps function retrieves the capabilities of a given
-/// waveform-audio input device.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveinclose>.
 ///
-/// ```c
-/// MMRESULT waveInGetDevCapsW(
-///   UINT         uDeviceID,
-///   LPWAVEINCAPS pwic,
-///   UINT         cbwic
-/// );
-/// ```
 /// {@category winmm}
+@pragma('vm:prefer-inline')
+int waveInClose(HWAVEIN hwi) => _waveInClose(hwi);
+
+@Native<Uint32 Function(Pointer)>(symbol: 'waveInClose')
+external int _waveInClose(Pointer hwi);
+
+/// Retrieves the capabilities of a given waveform-audio input device.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveingetdevcaps>.
+///
+/// {@category winmm}
+@pragma('vm:prefer-inline')
 int waveInGetDevCaps(int uDeviceID, Pointer<WAVEINCAPS> pwic, int cbwic) =>
     _waveInGetDevCaps(uDeviceID, pwic, cbwic);
 
-final _waveInGetDevCaps = _winmm
-    .lookupFunction<
-      Uint32 Function(IntPtr uDeviceID, Pointer<WAVEINCAPS> pwic, Uint32 cbwic),
-      int Function(int uDeviceID, Pointer<WAVEINCAPS> pwic, int cbwic)
-    >('waveInGetDevCapsW');
+@Native<Uint32 Function(IntPtr, Pointer<WAVEINCAPS>, Uint32)>(
+  symbol: 'waveInGetDevCapsW',
+)
+external int _waveInGetDevCaps(
+  int uDeviceID,
+  Pointer<WAVEINCAPS> pwic,
+  int cbwic,
+);
 
-/// The waveInGetErrorText function retrieves a textual description of the
-/// error identified by the given error number.
+/// Retrieves a textual description of the error identified by the given error
+/// number.
 ///
-/// ```c
-/// MMRESULT waveInGetErrorTextW(
-///   MMRESULT mmrError,
-///   LPSTR    pszText,
-///   UINT     cchText
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveingeterrortext>.
+///
 /// {@category winmm}
-int waveInGetErrorText(int mmrError, Pointer<Utf16> pszText, int cchText) =>
+@pragma('vm:prefer-inline')
+int waveInGetErrorText(int mmrError, PWSTR pszText, int cchText) =>
     _waveInGetErrorText(mmrError, pszText, cchText);
 
-final _waveInGetErrorText = _winmm
-    .lookupFunction<
-      Uint32 Function(Uint32 mmrError, Pointer<Utf16> pszText, Uint32 cchText),
-      int Function(int mmrError, Pointer<Utf16> pszText, int cchText)
-    >('waveInGetErrorTextW');
+@Native<Uint32 Function(Uint32, Pointer<Utf16>, Uint32)>(
+  symbol: 'waveInGetErrorTextW',
+)
+external int _waveInGetErrorText(
+  int mmrError,
+  Pointer<Utf16> pszText,
+  int cchText,
+);
 
-/// The waveInGetID function gets the device identifier for the given
-/// waveform-audio input device.
+/// Gets the device identifier for the given waveform-audio input device.
 ///
-/// ```c
-/// MMRESULT waveInGetID(
-///   HWAVEIN hwi,
-///   LPUINT  puDeviceID
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveingetid>.
+///
 /// {@category winmm}
-int waveInGetID(int hwi, Pointer<Uint32> puDeviceID) =>
+@pragma('vm:prefer-inline')
+int waveInGetID(HWAVEIN hwi, Pointer<Uint32> puDeviceID) =>
     _waveInGetID(hwi, puDeviceID);
 
-final _waveInGetID = _winmm
-    .lookupFunction<
-      Uint32 Function(IntPtr hwi, Pointer<Uint32> puDeviceID),
-      int Function(int hwi, Pointer<Uint32> puDeviceID)
-    >('waveInGetID');
+@Native<Uint32 Function(Pointer, Pointer<Uint32>)>(symbol: 'waveInGetID')
+external int _waveInGetID(Pointer hwi, Pointer<Uint32> puDeviceID);
 
-/// The waveInGetNumDevs function returns the number of waveform-audio input
-/// devices present in the system.
+/// Returns the number of waveform-audio input devices present in the system.
 ///
-/// ```c
-/// UINT waveInGetNumDevs();
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveingetnumdevs>.
+///
 /// {@category winmm}
+@pragma('vm:prefer-inline')
 int waveInGetNumDevs() => _waveInGetNumDevs();
 
-final _waveInGetNumDevs = _winmm
-    .lookupFunction<Uint32 Function(), int Function()>('waveInGetNumDevs');
+@Native<Uint32 Function()>(symbol: 'waveInGetNumDevs')
+external int _waveInGetNumDevs();
 
-/// The waveInGetPosition function retrieves the current input position of
-/// the given waveform-audio input device.
+/// Retrieves the current input position of the given waveform-audio input
+/// device.
 ///
-/// ```c
-/// MMRESULT waveInGetPosition(
-///   HWAVEIN  hwi,
-///   LPMMTIME pmmt,
-///   UINT     cbmmt
-/// );
-/// ```
+/// **Note:** This function is no longer supported for use as of Windows Vista.
+/// Instead, use IAudioClock.getPosition.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveingetposition>.
+///
 /// {@category winmm}
-int waveInGetPosition(int hwi, Pointer<MMTIME> pmmt, int cbmmt) =>
+@pragma('vm:prefer-inline')
+int waveInGetPosition(HWAVEIN hwi, Pointer<MMTIME> pmmt, int cbmmt) =>
     _waveInGetPosition(hwi, pmmt, cbmmt);
 
-final _waveInGetPosition = _winmm
-    .lookupFunction<
-      Uint32 Function(IntPtr hwi, Pointer<MMTIME> pmmt, Uint32 cbmmt),
-      int Function(int hwi, Pointer<MMTIME> pmmt, int cbmmt)
-    >('waveInGetPosition');
+@Native<Uint32 Function(Pointer, Pointer<MMTIME>, Uint32)>(
+  symbol: 'waveInGetPosition',
+)
+external int _waveInGetPosition(Pointer hwi, Pointer<MMTIME> pmmt, int cbmmt);
 
-/// The waveInMessage function sends messages to the waveform-audio input
-/// device drivers.
+/// Sends messages to the waveform-audio input device drivers.
 ///
-/// ```c
-/// MMRESULT waveInMessage(
-///   HWAVEIN   hwi,
-///   UINT      uMsg,
-///   DWORD_PTR dw1,
-///   DWORD_PTR dw2
-/// );
-/// ```
-/// {@category winmm}
-int waveInMessage(int hwi, int uMsg, int dw1, int dw2) =>
-    _waveInMessage(hwi, uMsg, dw1, dw2);
-
-final _waveInMessage = _winmm
-    .lookupFunction<
-      Uint32 Function(IntPtr hwi, Uint32 uMsg, IntPtr dw1, IntPtr dw2),
-      int Function(int hwi, int uMsg, int dw1, int dw2)
-    >('waveInMessage');
-
-/// The waveInOpen function opens the given waveform-audio input device for
-/// recording.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveinmessage>.
 ///
-/// ```c
-/// MMRESULT waveInOpen(
-///   LPHWAVEIN       phwi,
-///   UINT            uDeviceID,
-///   LPCWAVEFORMATEX pwfx,
-///   DWORD_PTR       dwCallback,
-///   DWORD_PTR       dwInstance,
-///   DWORD           fdwOpen
-/// );
-/// ```
 /// {@category winmm}
+@pragma('vm:prefer-inline')
+int waveInMessage(HWAVEIN? hwi, int uMsg, int? dw1, int? dw2) =>
+    _waveInMessage(hwi ?? nullptr, uMsg, dw1 ?? NULL, dw2 ?? NULL);
+
+@Native<Uint32 Function(Pointer, Uint32, IntPtr, IntPtr)>(
+  symbol: 'waveInMessage',
+)
+external int _waveInMessage(Pointer hwi, int uMsg, int dw1, int dw2);
+
+/// Opens the given waveform-audio input device for recording.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveinopen>.
+///
+/// {@category winmm}
+@pragma('vm:prefer-inline')
 int waveInOpen(
-  Pointer<IntPtr> phwi,
+  Pointer<Pointer>? phwi,
+  int uDeviceID,
+  Pointer<WAVEFORMATEX> pwfx,
+  int? dwCallback,
+  int? dwInstance,
+  MIDI_WAVE_OPEN_TYPE fdwOpen,
+) => _waveInOpen(
+  phwi ?? nullptr,
+  uDeviceID,
+  pwfx,
+  dwCallback ?? NULL,
+  dwInstance ?? NULL,
+  fdwOpen,
+);
+
+@Native<
+  Uint32 Function(
+    Pointer<Pointer>,
+    Uint32,
+    Pointer<WAVEFORMATEX>,
+    IntPtr,
+    IntPtr,
+    Uint32,
+  )
+>(symbol: 'waveInOpen')
+external int _waveInOpen(
+  Pointer<Pointer> phwi,
   int uDeviceID,
   Pointer<WAVEFORMATEX> pwfx,
   int dwCallback,
   int dwInstance,
   int fdwOpen,
-) => _waveInOpen(phwi, uDeviceID, pwfx, dwCallback, dwInstance, fdwOpen);
+);
 
-final _waveInOpen = _winmm
-    .lookupFunction<
-      Uint32 Function(
-        Pointer<IntPtr> phwi,
-        Uint32 uDeviceID,
-        Pointer<WAVEFORMATEX> pwfx,
-        IntPtr dwCallback,
-        IntPtr dwInstance,
-        Uint32 fdwOpen,
-      ),
-      int Function(
-        Pointer<IntPtr> phwi,
-        int uDeviceID,
-        Pointer<WAVEFORMATEX> pwfx,
-        int dwCallback,
-        int dwInstance,
-        int fdwOpen,
-      )
-    >('waveInOpen');
-
-/// The waveInPrepareHeader function prepares a buffer for waveform-audio
-/// input.
+/// Prepares a buffer for waveform-audio input.
 ///
-/// ```c
-/// MMRESULT waveInPrepareHeader(
-///   HWAVEIN   hwi,
-///   LPWAVEHDR pwh,
-///   UINT      cbwh
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveinprepareheader>.
+///
 /// {@category winmm}
-int waveInPrepareHeader(int hwi, Pointer<WAVEHDR> pwh, int cbwh) =>
+@pragma('vm:prefer-inline')
+int waveInPrepareHeader(HWAVEIN hwi, Pointer<WAVEHDR> pwh, int cbwh) =>
     _waveInPrepareHeader(hwi, pwh, cbwh);
 
-final _waveInPrepareHeader = _winmm
-    .lookupFunction<
-      Uint32 Function(IntPtr hwi, Pointer<WAVEHDR> pwh, Uint32 cbwh),
-      int Function(int hwi, Pointer<WAVEHDR> pwh, int cbwh)
-    >('waveInPrepareHeader');
+@Native<Uint32 Function(Pointer, Pointer<WAVEHDR>, Uint32)>(
+  symbol: 'waveInPrepareHeader',
+)
+external int _waveInPrepareHeader(Pointer hwi, Pointer<WAVEHDR> pwh, int cbwh);
 
-/// The waveInReset function stops input on the given waveform-audio input
-/// device and resets the current position to zero.
+/// Stops input on the given waveform-audio input device and resets the current
+/// position to zero.
 ///
-/// ```c
-/// MMRESULT waveInReset(
-///   HWAVEIN hwi
-/// );
-/// ```
-/// {@category winmm}
-int waveInReset(int hwi) => _waveInReset(hwi);
-
-final _waveInReset = _winmm
-    .lookupFunction<Uint32 Function(IntPtr hwi), int Function(int hwi)>(
-      'waveInReset',
-    );
-
-/// The waveInStart function starts input on the given waveform-audio input
-/// device.
+/// All pending buffers are marked as done and returned to the application.
 ///
-/// ```c
-/// MMRESULT waveInStart(
-///   HWAVEIN hwi
-/// );
-/// ```
-/// {@category winmm}
-int waveInStart(int hwi) => _waveInStart(hwi);
-
-final _waveInStart = _winmm
-    .lookupFunction<Uint32 Function(IntPtr hwi), int Function(int hwi)>(
-      'waveInStart',
-    );
-
-/// The waveInStop function stops waveform-audio input.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveinreset>.
 ///
-/// ```c
-/// MMRESULT waveInStop(
-///   HWAVEIN hwi
-/// );
-/// ```
 /// {@category winmm}
-int waveInStop(int hwi) => _waveInStop(hwi);
+@pragma('vm:prefer-inline')
+int waveInReset(HWAVEIN hwi) => _waveInReset(hwi);
 
-final _waveInStop = _winmm
-    .lookupFunction<Uint32 Function(IntPtr hwi), int Function(int hwi)>(
-      'waveInStop',
-    );
+@Native<Uint32 Function(Pointer)>(symbol: 'waveInReset')
+external int _waveInReset(Pointer hwi);
 
-/// The waveInUnprepareHeader function cleans up the preparation performed
-/// by the waveInPrepareHeader function. This function must be called after
-/// the device driver fills a buffer and returns it to the application. You
-/// must call this function before freeing the buffer.
+/// Starts input on the given waveform-audio input device.
 ///
-/// ```c
-/// MMRESULT waveInUnprepareHeader(
-///   HWAVEIN   hwi,
-///   LPWAVEHDR pwh,
-///   UINT      cbwh
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveinstart>.
+///
 /// {@category winmm}
-int waveInUnprepareHeader(int hwi, Pointer<WAVEHDR> pwh, int cbwh) =>
+@pragma('vm:prefer-inline')
+int waveInStart(HWAVEIN hwi) => _waveInStart(hwi);
+
+@Native<Uint32 Function(Pointer)>(symbol: 'waveInStart')
+external int _waveInStart(Pointer hwi);
+
+/// Stops waveform-audio input.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveinstop>.
+///
+/// {@category winmm}
+@pragma('vm:prefer-inline')
+int waveInStop(HWAVEIN hwi) => _waveInStop(hwi);
+
+@Native<Uint32 Function(Pointer)>(symbol: 'waveInStop')
+external int _waveInStop(Pointer hwi);
+
+/// Cleans up the preparation performed by the waveInPrepareHeader function.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveinunprepareheader>.
+///
+/// {@category winmm}
+@pragma('vm:prefer-inline')
+int waveInUnprepareHeader(HWAVEIN hwi, Pointer<WAVEHDR> pwh, int cbwh) =>
     _waveInUnprepareHeader(hwi, pwh, cbwh);
 
-final _waveInUnprepareHeader = _winmm
-    .lookupFunction<
-      Uint32 Function(IntPtr hwi, Pointer<WAVEHDR> pwh, Uint32 cbwh),
-      int Function(int hwi, Pointer<WAVEHDR> pwh, int cbwh)
-    >('waveInUnprepareHeader');
+@Native<Uint32 Function(Pointer, Pointer<WAVEHDR>, Uint32)>(
+  symbol: 'waveInUnprepareHeader',
+)
+external int _waveInUnprepareHeader(
+  Pointer hwi,
+  Pointer<WAVEHDR> pwh,
+  int cbwh,
+);
 
-/// The waveOutClose function closes the given waveform-audio output device.
+/// Closes the given waveform-audio output device.
 ///
-/// ```c
-/// MMRESULT waveOutClose(
-///   HWAVEOUT hwo
-///   );
-/// ```
-/// {@category winmm}
-int waveOutClose(int hwo) => _waveOutClose(hwo);
-
-final _waveOutClose = _winmm
-    .lookupFunction<Uint32 Function(IntPtr hwo), int Function(int hwo)>(
-      'waveOutClose',
-    );
-
-/// The waveOutGetDevCaps function retrieves the capabilities of a given
-/// waveform-audio output device.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveoutclose>.
 ///
-/// ```c
-/// MMRESULT waveOutGetDevCapsW(
-///   UINT          uDeviceID,
-///   LPWAVEOUTCAPS pwoc,
-///   UINT          cbwoc
-/// );
-/// ```
 /// {@category winmm}
+@pragma('vm:prefer-inline')
+int waveOutClose(HWAVEOUT hwo) => _waveOutClose(hwo);
+
+@Native<Uint32 Function(Pointer)>(symbol: 'waveOutClose')
+external int _waveOutClose(Pointer hwo);
+
+/// Retrieves the capabilities of a given waveform-audio output device.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveoutgetdevcaps>.
+///
+/// {@category winmm}
+@pragma('vm:prefer-inline')
 int waveOutGetDevCaps(int uDeviceID, Pointer<WAVEOUTCAPS> pwoc, int cbwoc) =>
     _waveOutGetDevCaps(uDeviceID, pwoc, cbwoc);
 
-final _waveOutGetDevCaps = _winmm
-    .lookupFunction<
-      Uint32 Function(
-        IntPtr uDeviceID,
-        Pointer<WAVEOUTCAPS> pwoc,
-        Uint32 cbwoc,
-      ),
-      int Function(int uDeviceID, Pointer<WAVEOUTCAPS> pwoc, int cbwoc)
-    >('waveOutGetDevCapsW');
+@Native<Uint32 Function(IntPtr, Pointer<WAVEOUTCAPS>, Uint32)>(
+  symbol: 'waveOutGetDevCapsW',
+)
+external int _waveOutGetDevCaps(
+  int uDeviceID,
+  Pointer<WAVEOUTCAPS> pwoc,
+  int cbwoc,
+);
 
-/// The waveOutGetErrorText function retrieves a textual description of the
-/// error identified by the given error number.
+/// Retrieves a textual description of the error identified by the given error
+/// number.
 ///
-/// ```c
-/// MMRESULT waveOutGetErrorTextW(
-///   MMRESULT mmrError,
-///   LPWSTR    pszText,
-///   UINT     cchText
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveoutgeterrortext>.
+///
 /// {@category winmm}
-int waveOutGetErrorText(int mmrError, Pointer<Utf16> pszText, int cchText) =>
+@pragma('vm:prefer-inline')
+int waveOutGetErrorText(int mmrError, PWSTR pszText, int cchText) =>
     _waveOutGetErrorText(mmrError, pszText, cchText);
 
-final _waveOutGetErrorText = _winmm
-    .lookupFunction<
-      Uint32 Function(Uint32 mmrError, Pointer<Utf16> pszText, Uint32 cchText),
-      int Function(int mmrError, Pointer<Utf16> pszText, int cchText)
-    >('waveOutGetErrorTextW');
+@Native<Uint32 Function(Uint32, Pointer<Utf16>, Uint32)>(
+  symbol: 'waveOutGetErrorTextW',
+)
+external int _waveOutGetErrorText(
+  int mmrError,
+  Pointer<Utf16> pszText,
+  int cchText,
+);
 
-/// The waveOutGetID function retrieves the device identifier for the given
-/// waveform-audio output device.
+/// Retrieves the device identifier for the given waveform-audio output device.
 ///
-/// ```c
-/// MMRESULT waveOutGetID(
-///   HWAVEOUT hwo,
-///   LPUINT   puDeviceID
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveoutgetid>.
+///
 /// {@category winmm}
-int waveOutGetID(int hwo, Pointer<Uint32> puDeviceID) =>
+@pragma('vm:prefer-inline')
+int waveOutGetID(HWAVEOUT hwo, Pointer<Uint32> puDeviceID) =>
     _waveOutGetID(hwo, puDeviceID);
 
-final _waveOutGetID = _winmm
-    .lookupFunction<
-      Uint32 Function(IntPtr hwo, Pointer<Uint32> puDeviceID),
-      int Function(int hwo, Pointer<Uint32> puDeviceID)
-    >('waveOutGetID');
+@Native<Uint32 Function(Pointer, Pointer<Uint32>)>(symbol: 'waveOutGetID')
+external int _waveOutGetID(Pointer hwo, Pointer<Uint32> puDeviceID);
 
-/// The waveOutGetNumDevs function retrieves the number of waveform-audio
-/// output devices present in the system.
+/// Retrieves the number of waveform-audio output devices present in the system.
 ///
-/// ```c
-/// UINT waveOutGetNumDevs();
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveoutgetnumdevs>.
+///
 /// {@category winmm}
+@pragma('vm:prefer-inline')
 int waveOutGetNumDevs() => _waveOutGetNumDevs();
 
-final _waveOutGetNumDevs = _winmm
-    .lookupFunction<Uint32 Function(), int Function()>('waveOutGetNumDevs');
+@Native<Uint32 Function()>(symbol: 'waveOutGetNumDevs')
+external int _waveOutGetNumDevs();
 
-/// The waveOutGetPitch function retrieves the current pitch setting for the
-/// specified waveform-audio output device.
+/// Retrieves the current pitch setting for the specified waveform-audio output
+/// device.
 ///
-/// ```c
-/// MMRESULT waveOutGetPitch(
-///   HWAVEOUT hwo,
-///   LPDWORD  pdwPitch
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveoutgetpitch>.
+///
 /// {@category winmm}
-int waveOutGetPitch(int hwo, Pointer<Uint32> pdwPitch) =>
+@pragma('vm:prefer-inline')
+int waveOutGetPitch(HWAVEOUT hwo, Pointer<Uint32> pdwPitch) =>
     _waveOutGetPitch(hwo, pdwPitch);
 
-final _waveOutGetPitch = _winmm
-    .lookupFunction<
-      Uint32 Function(IntPtr hwo, Pointer<Uint32> pdwPitch),
-      int Function(int hwo, Pointer<Uint32> pdwPitch)
-    >('waveOutGetPitch');
+@Native<Uint32 Function(Pointer, Pointer<Uint32>)>(symbol: 'waveOutGetPitch')
+external int _waveOutGetPitch(Pointer hwo, Pointer<Uint32> pdwPitch);
 
-/// The waveOutGetPlaybackRate function retrieves the current playback rate
-/// for the specified waveform-audio output device.
+/// Retrieves the current playback rate for the specified waveform-audio output
+/// device.
 ///
-/// ```c
-/// MMRESULT waveOutGetPlaybackRate(
-///   HWAVEOUT hwo,
-///   LPDWORD  pdwRate
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveoutgetplaybackrate>.
+///
 /// {@category winmm}
-int waveOutGetPlaybackRate(int hwo, Pointer<Uint32> pdwRate) =>
+@pragma('vm:prefer-inline')
+int waveOutGetPlaybackRate(HWAVEOUT hwo, Pointer<Uint32> pdwRate) =>
     _waveOutGetPlaybackRate(hwo, pdwRate);
 
-final _waveOutGetPlaybackRate = _winmm
-    .lookupFunction<
-      Uint32 Function(IntPtr hwo, Pointer<Uint32> pdwRate),
-      int Function(int hwo, Pointer<Uint32> pdwRate)
-    >('waveOutGetPlaybackRate');
+@Native<Uint32 Function(Pointer, Pointer<Uint32>)>(
+  symbol: 'waveOutGetPlaybackRate',
+)
+external int _waveOutGetPlaybackRate(Pointer hwo, Pointer<Uint32> pdwRate);
 
-/// The waveOutGetPosition function retrieves the current playback position
-/// of the given waveform-audio output device.
+/// Retrieves the current playback position of the given waveform-audio output
+/// device.
 ///
-/// ```c
-/// MMRESULT waveOutGetPosition(
-///   HWAVEOUT hwo,
-///   LPMMTIME pmmt,
-///   UINT     cbmmt
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveoutgetposition>.
+///
 /// {@category winmm}
-int waveOutGetPosition(int hwo, Pointer<MMTIME> pmmt, int cbmmt) =>
+@pragma('vm:prefer-inline')
+int waveOutGetPosition(HWAVEOUT hwo, Pointer<MMTIME> pmmt, int cbmmt) =>
     _waveOutGetPosition(hwo, pmmt, cbmmt);
 
-final _waveOutGetPosition = _winmm
-    .lookupFunction<
-      Uint32 Function(IntPtr hwo, Pointer<MMTIME> pmmt, Uint32 cbmmt),
-      int Function(int hwo, Pointer<MMTIME> pmmt, int cbmmt)
-    >('waveOutGetPosition');
+@Native<Uint32 Function(Pointer, Pointer<MMTIME>, Uint32)>(
+  symbol: 'waveOutGetPosition',
+)
+external int _waveOutGetPosition(Pointer hwo, Pointer<MMTIME> pmmt, int cbmmt);
 
-/// The waveOutGetVolume function retrieves the current volume level of the
-/// specified waveform-audio output device.
+/// Retrieves the current volume level of the specified waveform-audio output
+/// device.
 ///
-/// ```c
-/// MMRESULT waveOutGetVolume(
-///   HWAVEOUT hwo,
-///   LPDWORD  pdwVolume
-/// );
-/// ```
-/// {@category winmm}
-int waveOutGetVolume(int hwo, Pointer<Uint32> pdwVolume) =>
-    _waveOutGetVolume(hwo, pdwVolume);
-
-final _waveOutGetVolume = _winmm
-    .lookupFunction<
-      Uint32 Function(IntPtr hwo, Pointer<Uint32> pdwVolume),
-      int Function(int hwo, Pointer<Uint32> pdwVolume)
-    >('waveOutGetVolume');
-
-/// The waveOutMessage function sends messages to the waveform-audio output
-/// device drivers.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveoutgetvolume>.
 ///
-/// ```c
-/// MMRESULT waveOutMessage(
-///   HWAVEOUT  hwo,
-///   UINT      uMsg,
-///   DWORD_PTR dw1,
-///   DWORD_PTR dw2
-/// );
-/// ```
 /// {@category winmm}
-int waveOutMessage(int hwo, int uMsg, int dw1, int dw2) =>
-    _waveOutMessage(hwo, uMsg, dw1, dw2);
+@pragma('vm:prefer-inline')
+int waveOutGetVolume(HWAVEOUT? hwo, Pointer<Uint32> pdwVolume) =>
+    _waveOutGetVolume(hwo ?? nullptr, pdwVolume);
 
-final _waveOutMessage = _winmm
-    .lookupFunction<
-      Uint32 Function(IntPtr hwo, Uint32 uMsg, IntPtr dw1, IntPtr dw2),
-      int Function(int hwo, int uMsg, int dw1, int dw2)
-    >('waveOutMessage');
+@Native<Uint32 Function(Pointer, Pointer<Uint32>)>(symbol: 'waveOutGetVolume')
+external int _waveOutGetVolume(Pointer hwo, Pointer<Uint32> pdwVolume);
 
-/// The waveOutOpen function opens the given waveform-audio output device
-/// for playback.
+/// Sends messages to the waveform-audio output device drivers.
 ///
-/// ```c
-/// MMRESULT waveOutOpen(
-///   LPHWAVEOUT      phwo,
-///   UINT            uDeviceID,
-///   LPCWAVEFORMATEX pwfx,
-///   DWORD_PTR       dwCallback,
-///   DWORD_PTR       dwInstance,
-///   DWORD           fdwOpen
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveoutmessage>.
+///
 /// {@category winmm}
+@pragma('vm:prefer-inline')
+int waveOutMessage(HWAVEOUT? hwo, int uMsg, int dw1, int dw2) =>
+    _waveOutMessage(hwo ?? nullptr, uMsg, dw1, dw2);
+
+@Native<Uint32 Function(Pointer, Uint32, IntPtr, IntPtr)>(
+  symbol: 'waveOutMessage',
+)
+external int _waveOutMessage(Pointer hwo, int uMsg, int dw1, int dw2);
+
+/// Opens the given waveform-audio output device for playback.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveoutopen>.
+///
+/// {@category winmm}
+@pragma('vm:prefer-inline')
 int waveOutOpen(
-  Pointer<IntPtr> phwo,
+  Pointer<Pointer>? phwo,
+  int uDeviceID,
+  Pointer<WAVEFORMATEX> pwfx,
+  int? dwCallback,
+  int? dwInstance,
+  MIDI_WAVE_OPEN_TYPE fdwOpen,
+) => _waveOutOpen(
+  phwo ?? nullptr,
+  uDeviceID,
+  pwfx,
+  dwCallback ?? NULL,
+  dwInstance ?? NULL,
+  fdwOpen,
+);
+
+@Native<
+  Uint32 Function(
+    Pointer<Pointer>,
+    Uint32,
+    Pointer<WAVEFORMATEX>,
+    IntPtr,
+    IntPtr,
+    Uint32,
+  )
+>(symbol: 'waveOutOpen')
+external int _waveOutOpen(
+  Pointer<Pointer> phwo,
   int uDeviceID,
   Pointer<WAVEFORMATEX> pwfx,
   int dwCallback,
   int dwInstance,
   int fdwOpen,
-) => _waveOutOpen(phwo, uDeviceID, pwfx, dwCallback, dwInstance, fdwOpen);
+);
 
-final _waveOutOpen = _winmm
-    .lookupFunction<
-      Uint32 Function(
-        Pointer<IntPtr> phwo,
-        Uint32 uDeviceID,
-        Pointer<WAVEFORMATEX> pwfx,
-        IntPtr dwCallback,
-        IntPtr dwInstance,
-        Uint32 fdwOpen,
-      ),
-      int Function(
-        Pointer<IntPtr> phwo,
-        int uDeviceID,
-        Pointer<WAVEFORMATEX> pwfx,
-        int dwCallback,
-        int dwInstance,
-        int fdwOpen,
-      )
-    >('waveOutOpen');
-
-/// The waveOutPause function pauses playback on the given waveform-audio
-/// output device. The current position is saved. Use the waveOutRestart
-/// function to resume playback from the current position.
+/// Pauses playback on the given waveform-audio output device.
 ///
-/// ```c
-/// MMRESULT waveOutPause(
-///   HWAVEOUT hwo
-/// );
-/// ```
-/// {@category winmm}
-int waveOutPause(int hwo) => _waveOutPause(hwo);
-
-final _waveOutPause = _winmm
-    .lookupFunction<Uint32 Function(IntPtr hwo), int Function(int hwo)>(
-      'waveOutPause',
-    );
-
-/// The waveOutPrepareHeader function prepares a waveform-audio data block
-/// for playback.
+/// The current position is saved. Use the waveOutRestart function to resume
+/// playback from the current position.
 ///
-/// ```c
-/// MMRESULT waveOutPrepareHeader(
-///   HWAVEOUT  hwo,
-///   LPWAVEHDR pwh,
-///   UINT      cbwh
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveoutpause>.
+///
 /// {@category winmm}
-int waveOutPrepareHeader(int hwo, Pointer<WAVEHDR> pwh, int cbwh) =>
+@pragma('vm:prefer-inline')
+int waveOutPause(HWAVEOUT hwo) => _waveOutPause(hwo);
+
+@Native<Uint32 Function(Pointer)>(symbol: 'waveOutPause')
+external int _waveOutPause(Pointer hwo);
+
+/// Prepares a waveform-audio data block for playback.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveoutprepareheader>.
+///
+/// {@category winmm}
+@pragma('vm:prefer-inline')
+int waveOutPrepareHeader(HWAVEOUT hwo, Pointer<WAVEHDR> pwh, int cbwh) =>
     _waveOutPrepareHeader(hwo, pwh, cbwh);
 
-final _waveOutPrepareHeader = _winmm
-    .lookupFunction<
-      Uint32 Function(IntPtr hwo, Pointer<WAVEHDR> pwh, Uint32 cbwh),
-      int Function(int hwo, Pointer<WAVEHDR> pwh, int cbwh)
-    >('waveOutPrepareHeader');
+@Native<Uint32 Function(Pointer, Pointer<WAVEHDR>, Uint32)>(
+  symbol: 'waveOutPrepareHeader',
+)
+external int _waveOutPrepareHeader(Pointer hwo, Pointer<WAVEHDR> pwh, int cbwh);
 
-/// The waveOutReset function stops playback on the given waveform-audio
-/// output device and resets the current position to zero. All pending
-/// playback buffers are marked as done (WHDR_DONE) and returned to the
-/// application.
+/// Stops playback on the given waveform-audio output device and resets the
+/// current position to zero.
 ///
-/// ```c
-/// MMRESULT waveOutReset(
-///   HWAVEOUT hwo
-/// );
-/// ```
-/// {@category winmm}
-int waveOutReset(int hwo) => _waveOutReset(hwo);
-
-final _waveOutReset = _winmm
-    .lookupFunction<Uint32 Function(IntPtr hwo), int Function(int hwo)>(
-      'waveOutReset',
-    );
-
-/// The waveOutRestart function resumes playback on a paused waveform-audio
-/// output device.
+/// All pending playback buffers are marked as done (WHDR_DONE) and returned to
+/// the application.
 ///
-/// ```c
-/// MMRESULT waveOutRestart(
-///   HWAVEOUT hwo
-/// );
-/// ```
-/// {@category winmm}
-int waveOutRestart(int hwo) => _waveOutRestart(hwo);
-
-final _waveOutRestart = _winmm
-    .lookupFunction<Uint32 Function(IntPtr hwo), int Function(int hwo)>(
-      'waveOutRestart',
-    );
-
-/// The waveOutSetPitch function sets the pitch for the specified
-/// waveform-audio output device.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveoutreset>.
 ///
-/// ```c
-/// MMRESULT waveOutSetPitch(
-///   HWAVEOUT hwo,
-///   DWORD    dwPitch
-/// );
-/// ```
 /// {@category winmm}
-int waveOutSetPitch(int hwo, int dwPitch) => _waveOutSetPitch(hwo, dwPitch);
+@pragma('vm:prefer-inline')
+int waveOutReset(HWAVEOUT hwo) => _waveOutReset(hwo);
 
-final _waveOutSetPitch = _winmm
-    .lookupFunction<
-      Uint32 Function(IntPtr hwo, Uint32 dwPitch),
-      int Function(int hwo, int dwPitch)
-    >('waveOutSetPitch');
+@Native<Uint32 Function(Pointer)>(symbol: 'waveOutReset')
+external int _waveOutReset(Pointer hwo);
 
-/// The waveOutSetPlaybackRate function sets the playback rate for the
-/// specified waveform-audio output device.
+/// Resumes playback on a paused waveform-audio output device.
 ///
-/// ```c
-/// MMRESULT waveOutSetPlaybackRate(
-///   HWAVEOUT hwo,
-///   DWORD    dwRate
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveoutrestart>.
+///
 /// {@category winmm}
-int waveOutSetPlaybackRate(int hwo, int dwRate) =>
+@pragma('vm:prefer-inline')
+int waveOutRestart(HWAVEOUT hwo) => _waveOutRestart(hwo);
+
+@Native<Uint32 Function(Pointer)>(symbol: 'waveOutRestart')
+external int _waveOutRestart(Pointer hwo);
+
+/// Sets the pitch for the specified waveform-audio output device.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveoutsetpitch>.
+///
+/// {@category winmm}
+@pragma('vm:prefer-inline')
+int waveOutSetPitch(HWAVEOUT hwo, int dwPitch) =>
+    _waveOutSetPitch(hwo, dwPitch);
+
+@Native<Uint32 Function(Pointer, Uint32)>(symbol: 'waveOutSetPitch')
+external int _waveOutSetPitch(Pointer hwo, int dwPitch);
+
+/// Sets the playback rate for the specified waveform-audio output device.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveoutsetplaybackrate>.
+///
+/// {@category winmm}
+@pragma('vm:prefer-inline')
+int waveOutSetPlaybackRate(HWAVEOUT hwo, int dwRate) =>
     _waveOutSetPlaybackRate(hwo, dwRate);
 
-final _waveOutSetPlaybackRate = _winmm
-    .lookupFunction<
-      Uint32 Function(IntPtr hwo, Uint32 dwRate),
-      int Function(int hwo, int dwRate)
-    >('waveOutSetPlaybackRate');
+@Native<Uint32 Function(Pointer, Uint32)>(symbol: 'waveOutSetPlaybackRate')
+external int _waveOutSetPlaybackRate(Pointer hwo, int dwRate);
 
-/// The waveOutSetVolume function sets the volume level of the specified
-/// waveform-audio output device.
+/// Sets the volume level of the specified waveform-audio output device.
 ///
-/// ```c
-/// MMRESULT waveOutSetVolume(
-///   HWAVEOUT hwo,
-///   DWORD    dwVolume
-/// );
-/// ```
-/// {@category winmm}
-int waveOutSetVolume(int hwo, int dwVolume) => _waveOutSetVolume(hwo, dwVolume);
-
-final _waveOutSetVolume = _winmm
-    .lookupFunction<
-      Uint32 Function(IntPtr hwo, Uint32 dwVolume),
-      int Function(int hwo, int dwVolume)
-    >('waveOutSetVolume');
-
-/// The waveOutUnprepareHeader function cleans up the preparation performed
-/// by the waveOutPrepareHeader function. This function must be called after
-/// the device driver is finished with a data block. You must call this
-/// function before freeing the buffer.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveoutsetvolume>.
 ///
-/// ```c
-/// MMRESULT waveOutUnprepareHeader(
-///   HWAVEOUT  hwo,
-///   LPWAVEHDR pwh,
-///   UINT      cbwh
-/// );
-/// ```
 /// {@category winmm}
-int waveOutUnprepareHeader(int hwo, Pointer<WAVEHDR> pwh, int cbwh) =>
+@pragma('vm:prefer-inline')
+int waveOutSetVolume(HWAVEOUT? hwo, int dwVolume) =>
+    _waveOutSetVolume(hwo ?? nullptr, dwVolume);
+
+@Native<Uint32 Function(Pointer, Uint32)>(symbol: 'waveOutSetVolume')
+external int _waveOutSetVolume(Pointer hwo, int dwVolume);
+
+/// Cleans up the preparation performed by the waveOutPrepareHeader function.
+///
+/// This function must be called after the device driver is finished with a data
+/// block. You must call this function before freeing the buffer.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveoutunprepareheader>.
+///
+/// {@category winmm}
+@pragma('vm:prefer-inline')
+int waveOutUnprepareHeader(HWAVEOUT hwo, Pointer<WAVEHDR> pwh, int cbwh) =>
     _waveOutUnprepareHeader(hwo, pwh, cbwh);
 
-final _waveOutUnprepareHeader = _winmm
-    .lookupFunction<
-      Uint32 Function(IntPtr hwo, Pointer<WAVEHDR> pwh, Uint32 cbwh),
-      int Function(int hwo, Pointer<WAVEHDR> pwh, int cbwh)
-    >('waveOutUnprepareHeader');
+@Native<Uint32 Function(Pointer, Pointer<WAVEHDR>, Uint32)>(
+  symbol: 'waveOutUnprepareHeader',
+)
+external int _waveOutUnprepareHeader(
+  Pointer hwo,
+  Pointer<WAVEHDR> pwh,
+  int cbwh,
+);
 
-/// The waveOutWrite function sends a data block to the given waveform-audio
-/// output device.
+/// Sends a data block to the given waveform-audio output device.
 ///
-/// ```c
-/// MMRESULT waveOutWrite(
-///   HWAVEOUT  hwo,
-///   LPWAVEHDR pwh,
-///   UINT      cbwh
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveoutwrite>.
+///
 /// {@category winmm}
-int waveOutWrite(int hwo, Pointer<WAVEHDR> pwh, int cbwh) =>
+@pragma('vm:prefer-inline')
+int waveOutWrite(HWAVEOUT hwo, Pointer<WAVEHDR> pwh, int cbwh) =>
     _waveOutWrite(hwo, pwh, cbwh);
 
-final _waveOutWrite = _winmm
-    .lookupFunction<
-      Uint32 Function(IntPtr hwo, Pointer<WAVEHDR> pwh, Uint32 cbwh),
-      int Function(int hwo, Pointer<WAVEHDR> pwh, int cbwh)
-    >('waveOutWrite');
+@Native<Uint32 Function(Pointer, Pointer<WAVEHDR>, Uint32)>(
+  symbol: 'waveOutWrite',
+)
+external int _waveOutWrite(Pointer hwo, Pointer<WAVEHDR> pwh, int cbwh);

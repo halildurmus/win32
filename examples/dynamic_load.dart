@@ -12,32 +12,31 @@ typedef GetNativeSystemInfoDart =
     void Function(Pointer<SYSTEM_INFO> lpSystemInfo);
 
 void main() {
-  final systemInfo = calloc<SYSTEM_INFO>();
+  using((arena) {
+    final systemInfo = arena<SYSTEM_INFO>();
+    final moduleName = arena.pcwstr('kernel32.dll');
+    final hModule = GetModuleHandle(moduleName).value;
+    if (hModule.isNull) throw StateError('Could not load kernel32.dll');
 
-  final kernel32 = 'kernel32.dll'.toNativeUtf16();
-  final hModule = GetModuleHandle(kernel32);
-  if (hModule == NULL) throw Exception('Could not load kernel32.dll');
-  free(kernel32);
+    final procName = arena.pcstr('GetNativeSystemInfo');
+    final pGetNativeSystemInfo = GetProcAddress(hModule, procName).value;
 
-  final ansi = 'GetNativeSystemInfo'.toANSI();
-  final pGetNativeSystemInfo = GetProcAddress(hModule, ansi);
-  free(ansi);
+    if (pGetNativeSystemInfo != nullptr) {
+      print('GetNativeSystemInfo() is available on this system.');
+      final funcGetNativeSystemInfo = pGetNativeSystemInfo
+          .cast<NativeFunction<GetNativeSystemInfoNative>>()
+          .asFunction<GetNativeSystemInfoDart>();
 
-  if (pGetNativeSystemInfo != nullptr) {
-    print('GetNativeSystemInfo() is available on this system.');
-    final funcGetNativeSystemInfo = pGetNativeSystemInfo
-        .cast<NativeFunction<GetNativeSystemInfoNative>>()
-        .asFunction<GetNativeSystemInfoDart>();
+      funcGetNativeSystemInfo(systemInfo);
+    } else {
+      print(
+        'GetNativeSystemInfo() is not available on this system. '
+        'Falling back to GetSystemInfo().',
+      );
 
-    funcGetNativeSystemInfo(systemInfo);
-  } else {
-    print(
-      'GetNativeSystemInfo() not available on this system. '
-      'Falling back to GetSystemInfo().',
-    );
+      GetSystemInfo(systemInfo);
+    }
 
-    GetSystemInfo(systemInfo);
-  }
-
-  print('This system has ${systemInfo.ref.dwNumberOfProcessors} processors.');
+    print('This system has ${systemInfo.ref.dwNumberOfProcessors} processors.');
+  });
 }

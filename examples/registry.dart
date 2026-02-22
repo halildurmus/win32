@@ -14,72 +14,54 @@ const MAX_ITEMLENGTH = 1024;
 
 class RegistryKeyValuePair {
   const RegistryKeyValuePair(this.key, this.value);
+
   final String key;
   final String value;
 }
 
-int getRegistryKeyHandle(int hive, String key) {
-  final phKey = calloc<HANDLE>();
-  final lpKeyPath = key.toNativeUtf16();
-
-  try {
-    if (RegOpenKeyEx(hive, lpKeyPath, 0, KEY_READ, phKey) != ERROR_SUCCESS) {
-      throw Exception("Can't open registry key");
-    }
-
-    return phKey.value;
-  } finally {
-    free(phKey);
-    free(lpKeyPath);
+HKEY getRegistryKeyHandle(HKEY hive, String key) => using((arena) {
+  final phKey = arena<Pointer>();
+  if (RegOpenKeyEx(hive, arena.pcwstr(key), 0, KEY_READ, phKey) !=
+      ERROR_SUCCESS) {
+    throw StateError("Can't open registry key");
   }
-}
+  return HKEY(phKey.value);
+});
 
-RegistryKeyValuePair? enumerateKey(int hKey, int index) {
-  final lpValueName = wsalloc(MAX_PATH);
-  final lpcchValueName = calloc<DWORD>()..value = MAX_PATH;
-  final lpType = calloc<DWORD>();
-  final lpData = calloc<BYTE>(MAX_ITEMLENGTH);
-  final lpcbData = calloc<DWORD>()..value = MAX_ITEMLENGTH;
+RegistryKeyValuePair? enumerateKey(HKEY hKey, int index) => using((arena) {
+  final lpValueName = arena.pwstrBuffer(MAX_PATH);
+  final lpcchValueName = arena<DWORD>()..value = MAX_PATH;
+  final lpType = arena<DWORD>();
+  final lpData = arena<BYTE>(MAX_ITEMLENGTH);
+  final lpcbData = arena<DWORD>()..value = MAX_ITEMLENGTH;
+  final status = RegEnumValue(
+    hKey,
+    index,
+    lpValueName,
+    lpcchValueName,
+    lpType,
+    lpData,
+    lpcbData,
+  );
 
-  try {
-    final status = RegEnumValue(
-      hKey,
-      index,
-      lpValueName,
-      lpcchValueName,
-      nullptr,
-      lpType,
-      lpData,
-      lpcbData,
-    );
+  switch (status) {
+    case ERROR_SUCCESS:
+      if (lpType.value != REG_SZ) throw StateError('Non-string content.');
+      return RegistryKeyValuePair(
+        lpValueName.toDartString(),
+        lpData.cast<Utf16>().toDartString(),
+      );
 
-    switch (status) {
-      case ERROR_SUCCESS:
-        if (lpType.value != REG_SZ) {
-          throw Exception('Non-string content.');
-        }
-        return RegistryKeyValuePair(
-          lpValueName.toDartString(),
-          lpData.cast<Utf16>().toDartString(),
-        );
+    case ERROR_MORE_DATA:
+      throw StateError('An item required more than $MAX_ITEMLENGTH bytes.');
 
-      case ERROR_MORE_DATA:
-        throw Exception('An item required more than $MAX_ITEMLENGTH bytes.');
+    case ERROR_NO_MORE_ITEMS:
+      return null;
 
-      case ERROR_NO_MORE_ITEMS:
-        return null;
-
-      default:
-        throw Exception('unknown error');
-    }
-  } finally {
-    free(lpValueName);
-    free(lpcchValueName);
-    free(lpType);
-    free(lpData);
-    free(lpcbData);
+    default:
+      throw StateError('unknown error');
   }
-}
+});
 
 Map<String, String> getDevices() {
   /// availablePorts String list
@@ -98,7 +80,7 @@ Map<String, String> getDevices() {
     item = enumerateKey(hKey, dwIndex);
   }
 
-  RegCloseKey(hKey);
+  hKey.close();
   return portsList;
 }
 

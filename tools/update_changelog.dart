@@ -22,18 +22,7 @@ void main(List<String> args) {
   print('🚧 Updating changelog for v$version...');
   final result = Process.runSync(
     'dart',
-    [
-      'run',
-      'hooks:update_changelog',
-      '--tag',
-      'v$version',
-      '--include-path',
-      'packages/win32/**/*',
-      '--include-path',
-      'website/docs/**/*',
-      '--repository',
-      '../../',
-    ],
+    ['run', 'halildurmus_hooks:update_changelog', '--tag', 'win32-v$version'],
     stdoutEncoding: utf8,
     stderrEncoding: utf8,
     workingDirectory: Platform.script.resolve('../packages/win32').toFilePath(),

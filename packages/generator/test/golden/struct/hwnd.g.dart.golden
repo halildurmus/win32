@@ -1,0 +1,2 @@
+HWND|
+extension type const HWND(Pointer _) implements Pointer {}

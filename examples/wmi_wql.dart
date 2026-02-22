@@ -1,159 +1,94 @@
-// Demonstrates getting information from the Windows Management Instrumentation
-// (WMI) API using the WMI Query Language (WQL).
+// Demonstrates querying Windows Management Instrumentation (WMI) using the
+// WMI Query Language (WQL).
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
+const _wmiNamespace = r'ROOT\CIMV2';
+const _queryLanguage = 'WQL';
+const _processQuery = 'SELECT Name, ProcessId FROM Win32_Process';
+
+void initializeComAndSecurity() {
+  CoInitializeEx(COINIT_MULTITHREADED);
+  CoInitializeSecurity(
+    null,
+    -1,
+    null,
+    RPC_C_AUTHN_LEVEL_DEFAULT,
+    RPC_C_IMP_LEVEL_IMPERSONATE,
+    null,
+    EOAC_NONE,
+  );
+}
+
+IWbemServices connectToWmi(Arena arena) {
+  final locator = arena.com<IWbemLocator>(WbemLocator);
+  final services = locator.connectServer(
+    arena.bstr(_wmiNamespace),
+    BSTR(nullptr),
+    BSTR(nullptr),
+    BSTR(nullptr),
+    0,
+    BSTR(nullptr),
+    null,
+  );
+
+  if (services == null) {
+    throw StateError('Failed to connect to WMI namespace $_wmiNamespace');
+  }
+
+  CoSetProxyBlanket(
+    services,
+    RPC_C_AUTHN_WINNT,
+    RPC_C_AUTHZ_NONE,
+    null,
+    RPC_C_AUTHN_LEVEL_CALL,
+    RPC_C_IMP_LEVEL_IMPERSONATE,
+    null,
+    EOAC_NONE,
+  );
+
+  return arena.adopt(services);
+}
+
 void main() {
-  // Initialize COM
-  var hr = CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
-  if (FAILED(hr)) throw WindowsException(hr);
+  initializeComAndSecurity();
 
-  // Initialize security model
-  hr = CoInitializeSecurity(
-    nullptr,
-    -1, // COM negotiates service
-    nullptr, // Authentication services
-    nullptr, // Reserved
-    RPC_C_AUTHN_LEVEL_DEFAULT, // authentication
-    RPC_C_IMP_LEVEL_IMPERSONATE, // Impersonation
-    nullptr, // Authentication info
-    EOAC_NONE, // Additional capabilities
-    nullptr, // Reserved
-  );
+  using((arena) {
+    final services = connectToWmi(arena);
+    print('Connected to $_wmiNamespace');
+    final enumerator = arena.adopt(
+      services.execQuery(
+        arena.bstr(_queryLanguage),
+        arena.bstr(_processQuery),
+        WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY,
+        null,
+      )!,
+    );
 
-  if (FAILED(hr)) {
-    final exception = WindowsException(hr);
-    print(exception);
+    final returned = arena<ULONG>();
+    final pObject = arena<VTablePointer>();
+    var count = 0;
 
-    CoUninitialize();
-    throw exception; // Program has failed.
-  }
+    while (true) {
+      final hr = enumerator.next(WBEM_INFINITE, 1, pObject, returned);
+      if (hr.isError) throw WindowsException(hr);
+      if (returned.value == 0) break;
 
-  // Obtain the initial locator to Windows Management
-  // on a particular host computer.
-  final pLoc = IWbemLocator(calloc<COMObject>());
-
-  final clsid = calloc<GUID>()..ref.setGUID(CLSID_WbemLocator);
-  final iid = calloc<GUID>()..ref.setGUID(IID_IWbemLocator);
-
-  hr = CoCreateInstance(
-    clsid,
-    nullptr,
-    CLSCTX_INPROC_SERVER,
-    iid,
-    pLoc.ptr.cast(),
-  );
-
-  if (FAILED(hr)) {
-    final exception = WindowsException(hr);
-    print(exception);
-
-    CoUninitialize();
-    throw exception;
-  }
-
-  final proxy = calloc<Pointer<COMObject>>();
-
-  // Connect to the root\cimv2 namespace with the
-  // current user and obtain pointer pSvc
-  // to make IWbemServices calls.
-
-  hr = pLoc.connectServer(
-    TEXT(r'ROOT\CIMV2'), // WMI namespace
-    nullptr, // User name
-    nullptr, // User password
-    nullptr, // Locale
-    NULL, // Security flags
-    nullptr, // Authority
-    nullptr, // Context object
-    proxy, // IWbemServices proxy
-  );
-
-  if (FAILED(hr)) {
-    final exception = WindowsException(hr);
-    print(exception);
-
-    CoUninitialize();
-    throw exception; // Program has failed.
-  }
-
-  print(r'Connected to ROOT\CIMV2 WMI namespace');
-
-  final pSvc = IWbemServices(proxy.cast());
-
-  // Set the IWbemServices proxy so that impersonation
-  // of the user (client) occurs.
-  hr = CoSetProxyBlanket(
-    proxy.value, // the proxy to set
-    RPC_C_AUTHN_WINNT, // authentication service
-    RPC_C_AUTHZ_NONE, // authorization service
-    nullptr, // Server principal name
-    RPC_C_AUTHN_LEVEL_CALL, // authentication level
-    RPC_C_IMP_LEVEL_IMPERSONATE, // impersonation level
-    nullptr, // client identity
-    EOAC_NONE, // proxy capabilities
-  );
-
-  if (FAILED(hr)) {
-    final exception = WindowsException(hr);
-    print(exception);
-    CoUninitialize();
-    throw exception; // Program has failed.
-  }
-
-  // Use the IWbemServices pointer to make requests of WMI.
-
-  final pEnumerator = calloc<Pointer<COMObject>>();
-  IEnumWbemClassObject enumerator;
-
-  // For example, query for all the running processes
-  hr = pSvc.execQuery(
-    TEXT('WQL'),
-    TEXT('SELECT * FROM Win32_Process'),
-    WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY,
-    nullptr,
-    pEnumerator,
-  );
-
-  if (FAILED(hr)) {
-    final exception = WindowsException(hr);
-    print(exception);
-
-    CoUninitialize();
-
-    throw exception;
-  } else {
-    enumerator = IEnumWbemClassObject(pEnumerator.cast());
-
-    final uReturn = calloc<Uint32>();
-
-    var idx = 0;
-    while (enumerator.ptr.address > 0) {
-      final pClsObj = calloc<IntPtr>();
-
-      hr = enumerator.next(WBEM_INFINITE, 1, pClsObj.cast(), uReturn);
-
-      // Break out of the while loop if we've run out of processes to inspect
-      if (uReturn.value == 0) break;
-
-      idx++;
-
-      final clsObj = IWbemClassObject(pClsObj.cast());
-
-      final vtProp = calloc<VARIANT>();
-      hr = clsObj.get(TEXT('Name'), 0, vtProp, nullptr, nullptr);
-      if (SUCCEEDED(hr)) {
-        print('Process: ${vtProp.ref.bstrVal.toDartString()}');
-      }
-      // Free BSTRs in the returned variants
-      VariantClear(vtProp);
-      free(vtProp);
+      count++;
+      final object = arena.adopt(IWbemClassObject(pObject.value));
+      final nameVar = arena.using(Variant<String>(), (v) => v.free());
+      final pidVar = arena.using(Variant<int>(), (v) => v.free());
+      object
+        ..get(arena.pcwstr('Name'), 0, nameVar, null, null)
+        ..get(arena.pcwstr('ProcessId'), 0, pidVar, null, null);
+      final name = nameVar.value;
+      final pid = pidVar.value;
+      print('[$pid] $name');
     }
-    print('$idx processes found.');
-  }
 
-  CoUninitialize();
+    print('\n$count processes enumerated.');
+  });
 }

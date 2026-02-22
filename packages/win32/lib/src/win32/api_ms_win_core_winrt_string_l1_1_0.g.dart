@@ -1,407 +1,511 @@
-// Maps FFI prototypes onto the corresponding Win32 API function calls
-
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-
-// ignore_for_file: unused_import, non_constant_identifier_names
-// ignore_for_file: constant_identifier_names, camel_case_types
-// ignore_for_file: specify_nonobvious_property_types
+//
+// Maps FFI prototypes onto the corresponding Win32 API function calls.
+//
+// ignore_for_file: avoid_positional_boolean_parameters
+// ignore_for_file: non_constant_identifier_names, unused_import
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
+import 'package:ffi_leak_tracker/ffi_leak_tracker.dart';
 
-import '../callbacks.dart';
-import '../combase.dart';
-import '../guid.dart';
+import '../bstr.dart';
+import '../com/interface.g.dart';
+import '../com/iunknown.g.dart';
+import '../constants.dart';
+import '../constants.g.dart';
+import '../exception.dart';
+import '../extensions/pointer.dart';
+import '../hresult.dart';
+import '../hstring.dart';
+import '../macros.dart';
+import '../ntstatus.dart';
+import '../pcstr.dart';
+import '../pcwstr.dart';
+import '../pstr.dart';
+import '../pwstr.dart';
+import '../rpc_status.dart';
 import '../structs.g.dart';
-import '../variant.dart';
+import '../types.dart';
+import '../utils.dart';
+import '../win32_error.dart';
+import '../win32_result.dart';
 
-final _api_ms_win_core_winrt_string_l1_1_0 = DynamicLibrary.open(
-  'api-ms-win-core-winrt-string-l1-1-0.dll',
-);
-
-/// Compares two specified HSTRING objects and returns an integer that
-/// indicates their relative position in a sort order.
+/// Compares two specified HSTRING objects and returns an integer that indicates
+/// their relative position in a sort order.
 ///
-/// ```c
-/// HRESULT WindowsCompareStringOrdinal(
-///   HSTRING string1,
-///   HSTRING string2,
-///   INT32   *result
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowscomparestringordinal>.
+///
 /// {@category winrt}
-int WindowsCompareStringOrdinal(
-  int string1,
-  int string2,
-  Pointer<Int32> result,
-) => _WindowsCompareStringOrdinal(string1, string2, result);
+int WindowsCompareStringOrdinal(HSTRING? string1, HSTRING? string2) {
+  final result = adaptiveCalloc<Int32>();
+  final hr$ = HRESULT(
+    _WindowsCompareStringOrdinal(
+      string1 ?? nullptr,
+      string2 ?? nullptr,
+      result,
+    ),
+  );
+  if (hr$.isError) {
+    free(result);
+    throw WindowsException(hr$);
+  }
+  final result$ = result.value;
+  free(result);
+  return result$;
+}
 
-final _WindowsCompareStringOrdinal = _api_ms_win_core_winrt_string_l1_1_0
-    .lookupFunction<
-      Int32 Function(IntPtr string1, IntPtr string2, Pointer<Int32> result),
-      int Function(int string1, int string2, Pointer<Int32> result)
-    >('WindowsCompareStringOrdinal');
+@Native<Int32 Function(Pointer, Pointer, Pointer<Int32>)>(
+  symbol: 'WindowsCompareStringOrdinal',
+)
+external int _WindowsCompareStringOrdinal(
+  Pointer string1,
+  Pointer string2,
+  Pointer<Int32> result,
+);
 
 /// Concatenates two specified strings.
 ///
-/// ```c
-/// HRESULT WindowsConcatString(
-///   HSTRING string1,
-///   HSTRING string2,
-///   HSTRING *newString
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowsconcatstring>.
+///
 /// {@category winrt}
-int WindowsConcatString(int string1, int string2, Pointer<IntPtr> newString) =>
-    _WindowsConcatString(string1, string2, newString);
+HSTRING WindowsConcatString(HSTRING? string1, HSTRING? string2) {
+  final newString = adaptiveCalloc<Pointer>();
+  final hr$ = HRESULT(
+    _WindowsConcatString(string1 ?? nullptr, string2 ?? nullptr, newString),
+  );
+  if (hr$.isError) {
+    free(newString);
+    throw WindowsException(hr$);
+  }
+  final result$ = newString.value;
+  free(newString);
+  return HSTRING(result$);
+}
 
-final _WindowsConcatString = _api_ms_win_core_winrt_string_l1_1_0
-    .lookupFunction<
-      Int32 Function(IntPtr string1, IntPtr string2, Pointer<IntPtr> newString),
-      int Function(int string1, int string2, Pointer<IntPtr> newString)
-    >('WindowsConcatString');
+@Native<Int32 Function(Pointer, Pointer, Pointer<Pointer>)>(
+  symbol: 'WindowsConcatString',
+)
+external int _WindowsConcatString(
+  Pointer string1,
+  Pointer string2,
+  Pointer<Pointer> newString,
+);
 
 /// Creates a new HSTRING based on the specified source string.
 ///
-/// ```c
-/// HRESULT WindowsCreateString(
-///   PCNZWCH sourceString,
-///   UINT32  length,
-///   HSTRING *string
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowscreatestring>.
+///
 /// {@category winrt}
-int WindowsCreateString(
+HSTRING WindowsCreateString(PCWSTR? sourceString, int length) {
+  final string = adaptiveCalloc<Pointer>();
+  final hr$ = HRESULT(
+    _WindowsCreateString(sourceString ?? nullptr, length, string),
+  );
+  if (hr$.isError) {
+    free(string);
+    throw WindowsException(hr$);
+  }
+  final result$ = string.value;
+  free(string);
+  return HSTRING(result$);
+}
+
+@Native<Int32 Function(Pointer<Utf16>, Uint32, Pointer<Pointer>)>(
+  symbol: 'WindowsCreateString',
+)
+external int _WindowsCreateString(
   Pointer<Utf16> sourceString,
   int length,
-  Pointer<IntPtr> string,
-) => _WindowsCreateString(sourceString, length, string);
-
-final _WindowsCreateString = _api_ms_win_core_winrt_string_l1_1_0
-    .lookupFunction<
-      Int32 Function(
-        Pointer<Utf16> sourceString,
-        Uint32 length,
-        Pointer<IntPtr> string,
-      ),
-      int Function(
-        Pointer<Utf16> sourceString,
-        int length,
-        Pointer<IntPtr> string,
-      )
-    >('WindowsCreateString');
+  Pointer<Pointer> string,
+);
 
 /// Decrements the reference count of a string buffer.
 ///
-/// ```c
-/// HRESULT WindowsDeleteString(
-///   HSTRING string
-/// );
-/// ```
-/// {@category winrt}
-int WindowsDeleteString(int string) => _WindowsDeleteString(string);
-
-final _WindowsDeleteString = _api_ms_win_core_winrt_string_l1_1_0
-    .lookupFunction<Int32 Function(IntPtr string), int Function(int string)>(
-      'WindowsDeleteString',
-    );
-
-/// Discards a preallocated string buffer if it was not promoted to an
-/// HSTRING.
+/// Throws a [WindowsException] on failure.
 ///
-/// ```c
-/// HRESULT WindowsDeleteStringBuffer(
-///   HSTRING_BUFFER bufferHandle
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowsdeletestring>.
+///
 /// {@category winrt}
-int WindowsDeleteStringBuffer(int bufferHandle) =>
-    _WindowsDeleteStringBuffer(bufferHandle);
+@pragma('vm:prefer-inline')
+void WindowsDeleteString(HSTRING? string) {
+  final hr$ = HRESULT(_WindowsDeleteString(string ?? nullptr));
+  if (hr$.isError) throw WindowsException(hr$);
+}
 
-final _WindowsDeleteStringBuffer = _api_ms_win_core_winrt_string_l1_1_0
-    .lookupFunction<
-      Int32 Function(IntPtr bufferHandle),
-      int Function(int bufferHandle)
-    >('WindowsDeleteStringBuffer');
+@Native<Int32 Function(Pointer)>(symbol: 'WindowsDeleteString')
+external int _WindowsDeleteString(Pointer string);
+
+/// Discards a preallocated string buffer if it was not promoted to an HSTRING.
+///
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowsdeletestringbuffer>.
+///
+/// {@category winrt}
+@pragma('vm:prefer-inline')
+void WindowsDeleteStringBuffer(HSTRING_BUFFER? bufferHandle) {
+  final hr$ = HRESULT(_WindowsDeleteStringBuffer(bufferHandle ?? nullptr));
+  if (hr$.isError) throw WindowsException(hr$);
+}
+
+@Native<Int32 Function(Pointer)>(symbol: 'WindowsDeleteStringBuffer')
+external int _WindowsDeleteStringBuffer(Pointer bufferHandle);
 
 /// Creates a copy of the specified string.
 ///
-/// ```c
-/// HRESULT WindowsDuplicateString(
-///   HSTRING string,
-/// HSTRING *newString
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowsduplicatestring>.
+///
 /// {@category winrt}
-int WindowsDuplicateString(int string, Pointer<IntPtr> newString) =>
-    _WindowsDuplicateString(string, newString);
+HSTRING WindowsDuplicateString(HSTRING? string) {
+  final newString = adaptiveCalloc<Pointer>();
+  final hr$ = HRESULT(_WindowsDuplicateString(string ?? nullptr, newString));
+  if (hr$.isError) {
+    free(newString);
+    throw WindowsException(hr$);
+  }
+  final result$ = newString.value;
+  free(newString);
+  return HSTRING(result$);
+}
 
-final _WindowsDuplicateString = _api_ms_win_core_winrt_string_l1_1_0
-    .lookupFunction<
-      Int32 Function(IntPtr string, Pointer<IntPtr> newString),
-      int Function(int string, Pointer<IntPtr> newString)
-    >('WindowsDuplicateString');
+@Native<Int32 Function(Pointer, Pointer<Pointer>)>(
+  symbol: 'WindowsDuplicateString',
+)
+external int _WindowsDuplicateString(
+  Pointer string,
+  Pointer<Pointer> newString,
+);
 
 /// Gets the length, in Unicode characters, of the specified string.
 ///
-/// ```c
-/// UINT32 WindowsGetStringLen(
-///   HSTRING string
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowsgetstringlen>.
+///
 /// {@category winrt}
-int WindowsGetStringLen(int string) => _WindowsGetStringLen(string);
+@pragma('vm:prefer-inline')
+int WindowsGetStringLen(HSTRING? string) =>
+    _WindowsGetStringLen(string ?? nullptr);
 
-final _WindowsGetStringLen = _api_ms_win_core_winrt_string_l1_1_0
-    .lookupFunction<Uint32 Function(IntPtr string), int Function(int string)>(
-      'WindowsGetStringLen',
-    );
+@Native<Uint32 Function(Pointer)>(symbol: 'WindowsGetStringLen')
+external int _WindowsGetStringLen(Pointer string);
 
 /// Retrieves the backing buffer for the specified string.
 ///
-/// ```c
-/// PCWSTR WindowsGetStringRawBuffer(
-///   HSTRING string,
-///   UINT32  *length
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowsgetstringrawbuffer>.
+///
 /// {@category winrt}
-Pointer<Utf16> WindowsGetStringRawBuffer(int string, Pointer<Uint32> length) =>
-    _WindowsGetStringRawBuffer(string, length);
+@pragma('vm:prefer-inline')
+PCWSTR WindowsGetStringRawBuffer(HSTRING? string, Pointer<Uint32>? length) =>
+    PCWSTR(_WindowsGetStringRawBuffer(string ?? nullptr, length ?? nullptr));
 
-final _WindowsGetStringRawBuffer = _api_ms_win_core_winrt_string_l1_1_0
-    .lookupFunction<
-      Pointer<Utf16> Function(IntPtr string, Pointer<Uint32> length),
-      Pointer<Utf16> Function(int string, Pointer<Uint32> length)
-    >('WindowsGetStringRawBuffer');
+@Native<Pointer<Utf16> Function(Pointer, Pointer<Uint32>)>(
+  symbol: 'WindowsGetStringRawBuffer',
+)
+external Pointer<Utf16> _WindowsGetStringRawBuffer(
+  Pointer string,
+  Pointer<Uint32> length,
+);
 
 /// Indicates whether the specified string is the empty string.
 ///
-/// ```c
-/// BOOL WindowsIsStringEmpty(
-///   HSTRING string
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowsisstringempty>.
+///
 /// {@category winrt}
-int WindowsIsStringEmpty(int string) => _WindowsIsStringEmpty(string);
+@pragma('vm:prefer-inline')
+bool WindowsIsStringEmpty(HSTRING? string) =>
+    _WindowsIsStringEmpty(string ?? nullptr) != FALSE;
 
-final _WindowsIsStringEmpty = _api_ms_win_core_winrt_string_l1_1_0
-    .lookupFunction<Int32 Function(IntPtr string), int Function(int string)>(
-      'WindowsIsStringEmpty',
-    );
+@Native<Int32 Function(Pointer)>(symbol: 'WindowsIsStringEmpty')
+external int _WindowsIsStringEmpty(Pointer string);
 
 /// Allocates a mutable character buffer for use in HSTRING creation.
 ///
-/// ```c
-/// HRESULT WindowsPreallocateStringBuffer(
-///   UINT32         length,
-///   WCHAR          **charBuffer,
-///   HSTRING_BUFFER *bufferHandle
-/// );
-/// ```
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowspreallocatestringbuffer>.
+///
 /// {@category winrt}
-int WindowsPreallocateStringBuffer(
+@pragma('vm:prefer-inline')
+void WindowsPreallocateStringBuffer(
   int length,
   Pointer<Pointer<Uint16>> charBuffer,
-  Pointer<IntPtr> bufferHandle,
-) => _WindowsPreallocateStringBuffer(length, charBuffer, bufferHandle);
+  Pointer<Pointer> bufferHandle,
+) {
+  final hr$ = HRESULT(
+    _WindowsPreallocateStringBuffer(length, charBuffer, bufferHandle),
+  );
+  if (hr$.isError) throw WindowsException(hr$);
+}
 
-final _WindowsPreallocateStringBuffer = _api_ms_win_core_winrt_string_l1_1_0
-    .lookupFunction<
-      Int32 Function(
-        Uint32 length,
-        Pointer<Pointer<Uint16>> charBuffer,
-        Pointer<IntPtr> bufferHandle,
-      ),
-      int Function(
-        int length,
-        Pointer<Pointer<Uint16>> charBuffer,
-        Pointer<IntPtr> bufferHandle,
-      )
-    >('WindowsPreallocateStringBuffer');
+@Native<Int32 Function(Uint32, Pointer<Pointer<Uint16>>, Pointer<Pointer>)>(
+  symbol: 'WindowsPreallocateStringBuffer',
+)
+external int _WindowsPreallocateStringBuffer(
+  int length,
+  Pointer<Pointer<Uint16>> charBuffer,
+  Pointer<Pointer> bufferHandle,
+);
 
 /// Creates an HSTRING from the specified HSTRING_BUFFER.
 ///
-/// ```c
-/// HRESULT WindowsPromoteStringBuffer(
-///   HSTRING_BUFFER bufferHandle,
-///   HSTRING        *string
-/// );
-/// ```
-/// {@category winrt}
-int WindowsPromoteStringBuffer(int bufferHandle, Pointer<IntPtr> string) =>
-    _WindowsPromoteStringBuffer(bufferHandle, string);
-
-final _WindowsPromoteStringBuffer = _api_ms_win_core_winrt_string_l1_1_0
-    .lookupFunction<
-      Int32 Function(IntPtr bufferHandle, Pointer<IntPtr> string),
-      int Function(int bufferHandle, Pointer<IntPtr> string)
-    >('WindowsPromoteStringBuffer');
-
-/// Replaces all occurrences of a set of characters in the specified string
-/// with another set of characters to create a new string.
+/// Throws a [WindowsException] on failure.
 ///
-/// ```c
-/// HRESULT WindowsReplaceString(
-///   HSTRING string,
-///   HSTRING stringReplaced,
-///   HSTRING stringReplaceWith,
-///   HSTRING *newString
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowspromotestringbuffer>.
+///
 /// {@category winrt}
-int WindowsReplaceString(
-  int string,
-  int stringReplaced,
-  int stringReplaceWith,
-  Pointer<IntPtr> newString,
-) =>
-    _WindowsReplaceString(string, stringReplaced, stringReplaceWith, newString);
+HSTRING WindowsPromoteStringBuffer(HSTRING_BUFFER bufferHandle) {
+  final string = adaptiveCalloc<Pointer>();
+  final hr$ = HRESULT(_WindowsPromoteStringBuffer(bufferHandle, string));
+  if (hr$.isError) {
+    free(string);
+    throw WindowsException(hr$);
+  }
+  final result$ = string.value;
+  free(string);
+  return HSTRING(result$);
+}
 
-final _WindowsReplaceString = _api_ms_win_core_winrt_string_l1_1_0
-    .lookupFunction<
-      Int32 Function(
-        IntPtr string,
-        IntPtr stringReplaced,
-        IntPtr stringReplaceWith,
-        Pointer<IntPtr> newString,
-      ),
-      int Function(
-        int string,
-        int stringReplaced,
-        int stringReplaceWith,
-        Pointer<IntPtr> newString,
-      )
-    >('WindowsReplaceString');
+@Native<Int32 Function(Pointer, Pointer<Pointer>)>(
+  symbol: 'WindowsPromoteStringBuffer',
+)
+external int _WindowsPromoteStringBuffer(
+  Pointer bufferHandle,
+  Pointer<Pointer> string,
+);
+
+/// Replaces all occurrences of a set of characters in the specified string with
+/// another set of characters to create a new string.
+///
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowsreplacestring>.
+///
+/// {@category winrt}
+HSTRING WindowsReplaceString(
+  HSTRING? string,
+  HSTRING? stringReplaced,
+  HSTRING? stringReplaceWith,
+) {
+  final newString = adaptiveCalloc<Pointer>();
+  final hr$ = HRESULT(
+    _WindowsReplaceString(
+      string ?? nullptr,
+      stringReplaced ?? nullptr,
+      stringReplaceWith ?? nullptr,
+      newString,
+    ),
+  );
+  if (hr$.isError) {
+    free(newString);
+    throw WindowsException(hr$);
+  }
+  final result$ = newString.value;
+  free(newString);
+  return HSTRING(result$);
+}
+
+@Native<Int32 Function(Pointer, Pointer, Pointer, Pointer<Pointer>)>(
+  symbol: 'WindowsReplaceString',
+)
+external int _WindowsReplaceString(
+  Pointer string,
+  Pointer stringReplaced,
+  Pointer stringReplaceWith,
+  Pointer<Pointer> newString,
+);
 
 /// Indicates whether the specified string has embedded null characters.
 ///
-/// ```c
-/// HRESULT WindowsStringHasEmbeddedNull(
-///   HSTRING string,
-///   BOOL    *hasEmbedNull);
-/// ```
-/// {@category winrt}
-int WindowsStringHasEmbeddedNull(int string, Pointer<Int32> hasEmbedNull) =>
-    _WindowsStringHasEmbeddedNull(string, hasEmbedNull);
-
-final _WindowsStringHasEmbeddedNull = _api_ms_win_core_winrt_string_l1_1_0
-    .lookupFunction<
-      Int32 Function(IntPtr string, Pointer<Int32> hasEmbedNull),
-      int Function(int string, Pointer<Int32> hasEmbedNull)
-    >('WindowsStringHasEmbeddedNull');
-
-/// Retrieves a substring from the specified string. The substring starts at
-/// the specified character position.
+/// Throws a [WindowsException] on failure.
 ///
-/// ```c
-/// HRESULT WindowsSubstring(
-///   HSTRING string,
-///   UINT32  startIndex,
-///   HSTRING *newString
-/// );
-/// ```
-/// {@category winrt}
-int WindowsSubstring(int string, int startIndex, Pointer<IntPtr> newString) =>
-    _WindowsSubstring(string, startIndex, newString);
-
-final _WindowsSubstring = _api_ms_win_core_winrt_string_l1_1_0
-    .lookupFunction<
-      Int32 Function(
-        IntPtr string,
-        Uint32 startIndex,
-        Pointer<IntPtr> newString,
-      ),
-      int Function(int string, int startIndex, Pointer<IntPtr> newString)
-    >('WindowsSubstring');
-
-/// Retrieves a substring from the specified string. The substring starts at
-/// a specified character position and has a specified length.
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowsstringhasembeddednull>.
 ///
-/// ```c
-/// HRESULT WindowsSubstringWithSpecifiedLength(
-///   HSTRING string,
-///   UINT32  startIndex,
-///   UINT32  length,
-///   HSTRING *newString
-/// );
-/// ```
 /// {@category winrt}
-int WindowsSubstringWithSpecifiedLength(
-  int string,
+bool WindowsStringHasEmbeddedNull(HSTRING? string) {
+  final hasEmbedNull = adaptiveCalloc<Int32>();
+  final hr$ = HRESULT(
+    _WindowsStringHasEmbeddedNull(string ?? nullptr, hasEmbedNull),
+  );
+  if (hr$.isError) {
+    free(hasEmbedNull);
+    throw WindowsException(hr$);
+  }
+  final result$ = hasEmbedNull.value;
+  free(hasEmbedNull);
+  return result$ != FALSE;
+}
+
+@Native<Int32 Function(Pointer, Pointer<Int32>)>(
+  symbol: 'WindowsStringHasEmbeddedNull',
+)
+external int _WindowsStringHasEmbeddedNull(
+  Pointer string,
+  Pointer<Int32> hasEmbedNull,
+);
+
+/// Retrieves a substring from the specified string.
+///
+/// The substring starts at the specified character position.
+///
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowssubstring>.
+///
+/// {@category winrt}
+HSTRING WindowsSubstring(HSTRING? string, int startIndex) {
+  final newString = adaptiveCalloc<Pointer>();
+  final hr$ = HRESULT(
+    _WindowsSubstring(string ?? nullptr, startIndex, newString),
+  );
+  if (hr$.isError) {
+    free(newString);
+    throw WindowsException(hr$);
+  }
+  final result$ = newString.value;
+  free(newString);
+  return HSTRING(result$);
+}
+
+@Native<Int32 Function(Pointer, Uint32, Pointer<Pointer>)>(
+  symbol: 'WindowsSubstring',
+)
+external int _WindowsSubstring(
+  Pointer string,
+  int startIndex,
+  Pointer<Pointer> newString,
+);
+
+/// Retrieves a substring from the specified string.
+///
+/// The substring starts at a specified character position and has a specified
+/// length.
+///
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowssubstringwithspecifiedlength>.
+///
+/// {@category winrt}
+HSTRING WindowsSubstringWithSpecifiedLength(
+  HSTRING? string,
   int startIndex,
   int length,
-  Pointer<IntPtr> newString,
-) =>
-    _WindowsSubstringWithSpecifiedLength(string, startIndex, length, newString);
+) {
+  final newString = adaptiveCalloc<Pointer>();
+  final hr$ = HRESULT(
+    _WindowsSubstringWithSpecifiedLength(
+      string ?? nullptr,
+      startIndex,
+      length,
+      newString,
+    ),
+  );
+  if (hr$.isError) {
+    free(newString);
+    throw WindowsException(hr$);
+  }
+  final result$ = newString.value;
+  free(newString);
+  return HSTRING(result$);
+}
 
-final _WindowsSubstringWithSpecifiedLength =
-    _api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
-      Int32 Function(
-        IntPtr string,
-        Uint32 startIndex,
-        Uint32 length,
-        Pointer<IntPtr> newString,
-      ),
-      int Function(
-        int string,
-        int startIndex,
-        int length,
-        Pointer<IntPtr> newString,
-      )
-    >('WindowsSubstringWithSpecifiedLength');
+@Native<Int32 Function(Pointer, Uint32, Uint32, Pointer<Pointer>)>(
+  symbol: 'WindowsSubstringWithSpecifiedLength',
+)
+external int _WindowsSubstringWithSpecifiedLength(
+  Pointer string,
+  int startIndex,
+  int length,
+  Pointer<Pointer> newString,
+);
 
-/// Removes all trailing occurrences of a specified set of characters from
-/// the source string.
+/// Removes all trailing occurrences of a specified set of characters from the
+/// source string.
 ///
-/// ```c
-/// HRESULT WindowsTrimStringEnd(
-///   HSTRING string,
-///   HSTRING trimString,
-///   HSTRING *newString
-/// );
-/// ```
-/// {@category winrt}
-int WindowsTrimStringEnd(
-  int string,
-  int trimString,
-  Pointer<IntPtr> newString,
-) => _WindowsTrimStringEnd(string, trimString, newString);
-
-final _WindowsTrimStringEnd = _api_ms_win_core_winrt_string_l1_1_0
-    .lookupFunction<
-      Int32 Function(
-        IntPtr string,
-        IntPtr trimString,
-        Pointer<IntPtr> newString,
-      ),
-      int Function(int string, int trimString, Pointer<IntPtr> newString)
-    >('WindowsTrimStringEnd');
-
-/// Removes all leading occurrences of a specified set of characters from
-/// the source string.
+/// Throws a [WindowsException] on failure.
 ///
-/// ```c
-/// HRESULT WindowsTrimStringStart(
-///   HSTRING string,
-///   HSTRING trimString,
-///   HSTRING *newString
-/// );
-/// ```
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowstrimstringend>.
+///
 /// {@category winrt}
-int WindowsTrimStringStart(
-  int string,
-  int trimString,
-  Pointer<IntPtr> newString,
-) => _WindowsTrimStringStart(string, trimString, newString);
+HSTRING WindowsTrimStringEnd(HSTRING? string, HSTRING? trimString) {
+  final newString = adaptiveCalloc<Pointer>();
+  final hr$ = HRESULT(
+    _WindowsTrimStringEnd(string ?? nullptr, trimString ?? nullptr, newString),
+  );
+  if (hr$.isError) {
+    free(newString);
+    throw WindowsException(hr$);
+  }
+  final result$ = newString.value;
+  free(newString);
+  return HSTRING(result$);
+}
 
-final _WindowsTrimStringStart = _api_ms_win_core_winrt_string_l1_1_0
-    .lookupFunction<
-      Int32 Function(
-        IntPtr string,
-        IntPtr trimString,
-        Pointer<IntPtr> newString,
-      ),
-      int Function(int string, int trimString, Pointer<IntPtr> newString)
-    >('WindowsTrimStringStart');
+@Native<Int32 Function(Pointer, Pointer, Pointer<Pointer>)>(
+  symbol: 'WindowsTrimStringEnd',
+)
+external int _WindowsTrimStringEnd(
+  Pointer string,
+  Pointer trimString,
+  Pointer<Pointer> newString,
+);
+
+/// Removes all leading occurrences of a specified set of characters from the
+/// source string.
+///
+/// Throws a [WindowsException] on failure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowstrimstringstart>.
+///
+/// {@category winrt}
+HSTRING WindowsTrimStringStart(HSTRING? string, HSTRING? trimString) {
+  final newString = adaptiveCalloc<Pointer>();
+  final hr$ = HRESULT(
+    _WindowsTrimStringStart(
+      string ?? nullptr,
+      trimString ?? nullptr,
+      newString,
+    ),
+  );
+  if (hr$.isError) {
+    free(newString);
+    throw WindowsException(hr$);
+  }
+  final result$ = newString.value;
+  free(newString);
+  return HSTRING(result$);
+}
+
+@Native<Int32 Function(Pointer, Pointer, Pointer<Pointer>)>(
+  symbol: 'WindowsTrimStringStart',
+)
+external int _WindowsTrimStringStart(
+  Pointer string,
+  Pointer trimString,
+  Pointer<Pointer> newString,
+);

@@ -1,4 +1,4 @@
-import { BlogPostProvider } from '@docusaurus/theme-common/internal';
+import { BlogPostProvider } from '@docusaurus/plugin-content-blog/client';
 import ChangelogItem from '@site/src/components/changelog/ChangelogItem';
 import clsx from 'clsx';
 
@@ -13,7 +13,7 @@ export default function ChangelogItems({ items }: { items: any }) {
           'blog-max:max-w-[1200px]',
           'w-full',
           'mx-auto',
-          'not-prose'
+          'not-prose',
         )}
       >
         <div className={clsx('flex flex-col gap-4')}>

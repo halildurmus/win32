@@ -2,16 +2,24 @@ name: win32_workspace
 publish_to: none
 
 environment:
-  sdk: ^3.8.0
+  sdk: ^3.11.0
+
+workspace:
+  - examples/dartnote
+  - examples/manifest
+  - examples/service_manager_cli
+  - examples/snake
+  - examples/system_tray_icon
+  - examples/task_dialog
+  - examples/tetris
+  - examples/usb_drive_monitor
+  - packages/*
 
 dev_dependencies:
-  args: ^2.6.0
-  ffi: ^2.1.4
-  halildurmus_lints: ^1.0.1
-  hooks:
-    git:
-      url: https://github.com/halildurmus/workflows.git
-      path: packages/hooks
+  args: ^2.7.0
+  ffi: ^2.2.0
+  ffi_leak_tracker: ^0.1.0
+  halildurmus_hooks: ^0.1.1
+  halildurmus_lints: ^2.0.0
   path: ^1.9.1
-  win32:
-    path: packages/win32
+  win32: ^6.0.0

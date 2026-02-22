@@ -14,7 +14,7 @@ void main(List<String> args) async {
   print('🚧 Starting code generation...');
   final generatorProcess = await Process.start(
     'dart',
-    ['bin/generator.dart', ...argResults.rest],
+    ['run', 'bin/generator.dart', ...argResults.rest],
     workingDirectory: p.normalize(
       p.join(
         Platform.script.resolve('..').toFilePath(),
@@ -58,7 +58,7 @@ void main(List<String> args) async {
     print('🧪 Running package:win32 tests...');
     final win32TestProcess = await Process.start(
       'dart',
-      const ['test', '-j 1', '--test-randomize-ordering-seed=random'],
+      const ['test', '-j1', '--test-randomize-ordering-seed=random'],
       workingDirectory: p.normalize(
         p.join(Platform.script.resolve('..').toFilePath(), 'packages', 'win32'),
       ),

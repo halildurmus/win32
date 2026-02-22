@@ -1,0 +1,2 @@
+UIA_ScrollPatternNoScroll|
+const UIA_ScrollPatternNoScroll = -1.0;

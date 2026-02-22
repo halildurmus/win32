@@ -1,51 +1,85 @@
-// Enumerates open windows and demonstrates basic window manipulation
+// Demonstrates querying top-level desktop windows and interacting with a
+// selected target window.
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-// Callback for each window found
-int enumWindowsProc(int hWnd, int lParam) {
-  // Don't enumerate windows unless they are marked as WS_VISIBLE
-  if (IsWindowVisible(hWnd) == FALSE) return TRUE;
+final class DesktopWindow {
+  const DesktopWindow(this.hWnd, this.title);
 
-  final length = GetWindowTextLength(hWnd);
-  if (length == 0) {
+  final HWND hWnd;
+  final String title;
+
+  /// Brings the window to the foreground and restores it if minimized.
+  void activate() {
+    if (IsIconic(hWnd)) {
+      ShowWindow(hWnd, SW_RESTORE);
+    }
+    SetForegroundWindow(hWnd);
+  }
+
+  @override
+  String toString() => 'DesktopWindow(hWnd: $hWnd, title: $title)';
+}
+
+/// Enumerates all visible top-level windows.
+List<DesktopWindow> enumerateDesktopWindows() {
+  final results = <DesktopWindow>[];
+
+  final callback = NativeCallable<WNDENUMPROC>.isolateLocal((
+    Pointer hWnd,
+    int lParam,
+  ) {
+    final hwnd = HWND(hWnd);
+    if (!IsWindowVisible(hwnd)) return TRUE;
+
+    final length = GetWindowTextLength(hwnd).value;
+    if (length == 0) return TRUE;
+
+    using((arena) {
+      final buffer = arena.pwstrBuffer(length + 1);
+      if (GetWindowText(hwnd, buffer, length + 1).value != 0) {
+        results.add(DesktopWindow(hwnd, buffer.toDartString()));
+      }
+    });
+
     return TRUE;
-  }
+  }, exceptionalReturn: 0);
 
-  final buffer = wsalloc(length + 1);
-  GetWindowText(hWnd, buffer, length + 1);
-  print('hWnd $hWnd: ${buffer.toDartString()}');
-  free(buffer);
+  EnumWindows(callback.nativeFunction, const LPARAM(0));
+  callback.close();
 
-  return TRUE;
+  return results;
 }
 
-/// List the window handle and text for all top-level desktop windows
-/// in the current session.
-void enumerateWindows() {
-  final lpEnumFunc = NativeCallable<WNDENUMPROC>.isolateLocal(
-    enumWindowsProc,
-    exceptionalReturn: 0,
-  );
-  EnumWindows(lpEnumFunc.nativeFunction, 0);
-  lpEnumFunc.close();
-}
-
-/// Find the first open Notepad window and maximize it
-void findNotepad() {
-  final hwnd = FindWindowEx(0, 0, TEXT('Notepad'), nullptr);
-
-  if (hwnd == 0) {
-    print('No Notepad window found.');
-  } else {
-    ShowWindow(hwnd, SW_MAXIMIZE);
+/// Finds the first window whose title contains [keyword].
+DesktopWindow? findWindowByTitle(List<DesktopWindow> windows, String keyword) {
+  final lower = keyword.toLowerCase();
+  for (final window in windows) {
+    if (window.title.toLowerCase().contains(lower)) {
+      return window;
+    }
   }
+  return null;
 }
 
 void main() {
-  enumerateWindows();
-  findNotepad();
+  final windows = enumerateDesktopWindows();
+  print('Visible windows:');
+  for (final window in windows) {
+    print('• $window');
+  }
+
+  // Change this keyword to target a different window.
+  const targetKeyword = 'Visual Studio Code';
+  final target = findWindowByTitle(windows, targetKeyword);
+  if (target == null) {
+    print('No window found containing "$targetKeyword".');
+    return;
+  }
+
+  print('Activating window: "$target"');
+  target.activate();
 }

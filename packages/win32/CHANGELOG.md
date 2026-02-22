@@ -2,6 +2,87 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.0.0] - 2026-02-X
+
+### 🔄 Breaking Changes
+
+This release introduces a **major redesign of the Win32 Dart API** with a strong
+focus on **type safety**, **deterministic resource management**, and
+**idiomatic Dart usage**. Most changes are mechanical but widespread.
+
+Key breaking changes include:
+
+- **Exception-based error handling**
+  - APIs returning `HRESULT` now throw `WindowsException` on failure
+  - Logical return values are returned directly instead of via out-parameters
+
+- **New error model for APIs that call `SetLastError()`**
+  - Such APIs now return `Win32Result<T>` which captures both the logical return
+    value and the associated last-error code atomically on the native side,
+    ensuring the **error state is preserved**
+
+- **Strongly typed Win32 handles**
+  - Opaque handles (e.g., `HKEY`, `HWND`, `HICON`) are now extension types
+    instead of plain `int` or `Pointer` values
+
+- **Win32 `BOOL` mapped to Dart `bool`**
+  - Applies uniformly to return values, parameters, and struct fields
+
+- **Enums are now extension types**
+  - Replaces raw `int` constants with strongly typed extension types
+
+- **Explicit COM lifetime management**
+  - Automatic cleanup via `Finalizer` has been removed
+  - COM objects must be released explicitly or managed with `Arena`
+
+- **COM and `HRESULT` API simplifications**
+  - `QueryInterface`-style methods now return interfaces directly
+  - Manual `HRESULT` checks and pointer plumbing are eliminated
+
+- **Major string API cleanup**
+  - Renamed and simplified string conversion helpers
+  - Removed `TEXT()`, `BSTR` class, and legacy helpers
+
+- **GUID API redesign**
+  - Removed `Guid` class and string-based helpers
+  - `GUID` struct is now the single, explicit representation
+
+- **`winsock2` library removed**
+  - All Winsock APIs are now exported directly from `win32.dart`
+
+- **Dispatcher API redesign**
+  - Strongly typed results
+  - No manual `VARIANT` or `DISPPARAMS` construction
+  - Explicit ownership and cleanup
+
+> See the [**Migration Guide**](https://win32.pub/docs/migration/5xx-to-6xx)
+> with examples and mechanical migration steps.
+
+### 🚀 Features
+
+- **Scope-based lifetime management**
+  - New extensions for `Arena` to manage native memory and COM lifetimes
+
+- **Much stronger type safety across the API surface**
+  - Typed handles, enums, booleans, GUIDs, and COM interfaces
+
+- **More idiomatic Dart APIs**
+  - Fewer pointers, fewer out-parameters, clearer ownership rules
+
+- **Reliable error handling**
+  - Atomic capture of `GetLastError()` values on native side, exposed via
+    `Win32Result<T>`
+
+- **Cleaner, more consistent conversion APIs**
+  - Unified naming and semantics for strings, binary data, and `FILETIME` values
+
+- **Native memory leak detection** via `package:ffi_leak_tracker`
+  - Tracks allocations with call stacks and timestamps; see the
+    [**Leak Tracking**](https://win32.pub/docs/advanced/leak-tracking) guide for
+    details
+
+[6.0.0]: https://github.com/halildurmus/win32/compare/v5.15.0..win32-v6.0.0
+
 ## [5.15.0] - 2025-10-07
 
 ### 🚀 Features
@@ -89,9 +170,9 @@ All notable changes to this project will be documented in this file.
 - Add `.gitattributes` to normalize line endings by [@halildurmus](https://github.com/halildurmus)
 - Tweak git-cliff configuration by [@halildurmus](https://github.com/halildurmus)
 
-## New Contributors ❤️
+### New Contributors ❤️
 
-- [@weasdown](https://github.com/weasdown) made their first contribution in [#949](https://github.com/halildurmus/win32/pull/949)
+- @weasdown made their first contribution in [#949](https://github.com/halildurmus/win32/pull/949)
 
 [5.10.1]: https://github.com/halildurmus/win32/compare/v5.10.0..v5.10.1
 

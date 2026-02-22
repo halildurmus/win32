@@ -1,0 +1,14 @@
+RO_INIT_TYPE|
+/// Determines the concurrency model used for incoming calls to the objects
+/// created by this thread.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/roapi/ne-roapi-ro_init_type>.
+///
+/// {@category enum}
+extension type const RO_INIT_TYPE(int _) implements int {}
+
+const RO_INIT_SINGLETHREADED = RO_INIT_TYPE(0);
+
+/// Initializes the thread for multi-threaded concurrency.
+const RO_INIT_MULTITHREADED = RO_INIT_TYPE(1);

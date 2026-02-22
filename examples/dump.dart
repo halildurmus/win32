@@ -1,4 +1,4 @@
-// Retrieves the exported symbols from kernel32
+// Retrieves the exported symbols from kernel32.
 
 import 'dart:ffi';
 import 'dart:io' show exit;
@@ -19,82 +19,69 @@ int _enumSymbolProc(Pointer<SYMBOL_INFO> pSymInfo, int size, Pointer ctx) {
   return TRUE; // Keep enumerating.
 }
 
-Map<String, int> getExports(int hProcess, String module) {
-  final status = SymInitialize(hProcess, nullptr, FALSE);
-  if (status == FALSE) {
+Map<String, int> getExports(HANDLE hProcess, String module) {
+  if (!SymInitialize(hProcess, null, false).value) {
     print('SymInitialize failed.');
     exit(1);
   }
 
-  final modulePtr = module.toNativeUtf16();
-
+  final imageName = module.toPcwstr();
   final baseOfDll = SymLoadModuleEx(
     hProcess,
-    NULL,
-    modulePtr,
-    nullptr,
+    null,
+    imageName,
+    null,
     0,
     0,
-    nullptr,
-    0,
-  );
+    null,
+    null,
+  ).value;
+  free(imageName);
 
   if (baseOfDll == 0) {
     print('SymLoadModuleEx failed.');
-
     SymCleanup(hProcess);
     exit(1);
   }
-
-  final mask = '*'.toNativeUtf16();
 
   final callback = NativeCallable<PSYM_ENUMERATESYMBOLS_CALLBACK>.isolateLocal(
     _enumSymbolProc,
     exceptionalReturn: 0,
   );
 
-  if (SymEnumSymbols(
-        hProcess,
-        baseOfDll,
-        mask,
-        callback.nativeFunction,
-        nullptr,
-      ) ==
-      FALSE) {
+  final mask = '*'.toPcwstr();
+  if (!SymEnumSymbols(
+    hProcess,
+    baseOfDll,
+    mask,
+    callback.nativeFunction,
+    null,
+  ).value) {
     print('SymEnumSymbols failed.');
   }
 
+  free(mask);
   callback.close();
   SymCleanup(hProcess);
-  free(modulePtr);
-  free(mask);
 
   return _exportedSymbols;
 }
 
 /// Test which processor architecture Windows is running
-bool isWindowsOnArm(int hProcess) {
-  final pProcessMachine = calloc<USHORT>();
-  final pNativeMachine = calloc<USHORT>();
-
-  try {
-    IsWow64Process2(hProcess, pProcessMachine, pNativeMachine);
-    return pNativeMachine.value == IMAGE_FILE_MACHINE_ARM64;
-  } finally {
-    free(pProcessMachine);
-    free(pNativeMachine);
-  }
-}
+bool isWindowsOnArm(HANDLE hProcess) => using((arena) {
+  final pProcessMachine = arena<USHORT>();
+  final pNativeMachine = arena<USHORT>();
+  IsWow64Process2(hProcess, pProcessMachine, pNativeMachine);
+  return pNativeMachine.value == IMAGE_FILE_MACHINE_ARM64;
+});
 
 void main() {
   final hProcess = GetCurrentProcess();
-
   final kernel32 = isWindowsOnArm(hProcess)
       ? r'c:\windows\SysArm32\kernel32.dll'
       : r'c:\windows\system32\kernel32.dll';
-
   getExports(
     hProcess,
     kernel32,
-  ).forEach((name, address) => print('[${address.toHexString(32)}] $name'));
+  ).forEach((name, address) => print('[${address.toHexString()}] $name'));
 }

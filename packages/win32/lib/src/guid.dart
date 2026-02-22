@@ -1,223 +1,192 @@
-// guid.dart
-
-// GUID (Globally Unique Identifier).
-
-// Struct representing the GUID type. GUID is not represented in the Win32
-// metadata, which instead points at the .NET System.Guid. So we have to project
-// this manually.
-
-// For reference, the MIT-licensed implementation used in .NET can be found here:
-// https://github.com/dotnet/runtime/blob/main/src/libraries/System.Private.CoreLib/src/System/Guid.cs
-
-// The GUID structure as used in Win32 is documented here:
-// https://learn.microsoft.com/windows/win32/api/guiddef/ns-guiddef-guid
-
-// ignore_for_file: camel_case_types
-// ignore_for_file: constant_identifier_names, non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names
 
 import 'dart:ffi';
 import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
+import 'package:ffi_leak_tracker/ffi_leak_tracker.dart';
 
-import 'utils.dart';
-import 'win32/ole32.g.dart';
-
-/// Represents an immutable GUID (globally unique identifier).
+/// A native representation of a Windows GUID (Globally Unique Identifier).
 ///
-/// To pass a GUID to a Windows API, use the [toNativeGUID] method to create a
-/// copy in unmanaged memory.
-class Guid {
-  // ignore: prefer_asserts_with_message
-  const Guid(this.bytes) : assert(bytes.length == 16);
-
-  /// Creates a Guid from four integer components.
-  ///
-  /// The first component should be a 32-bit value, the second and third
-  /// components should be 16-bit values, and the fourth component should be a
-  /// 64-bit value.
-  factory Guid.fromComponents(int data1, int data2, int data3, int data4) {
-    // ignore: prefer_asserts_with_message
-    assert(data1 <= 0xFFFFFFFF);
-    // ignore: prefer_asserts_with_message
-    assert(data2 <= 0xFFFF);
-    // ignore: prefer_asserts_with_message
-    assert(data3 <= 0xFFFF);
-
-    final guid = Uint8List(16);
-    guid.buffer.asUint32List()[0] = data1;
-    guid.buffer.asUint16List(4)[0] = data2;
-    guid.buffer.asUint16List(6)[0] = data3;
-    guid.buffer.asUint64List(8)[0] = data4;
-
-    return Guid(guid.asUnmodifiableView());
-  }
-
-  /// Creates a 'nil' GUID (i.e. {00000000-0000-0000-0000-000000000000})
-  factory Guid.zero() => Guid(Uint8List(16).asUnmodifiableView());
-
-  /// Creates a new GUID.
-  factory Guid.generate() {
-    final pGuid = calloc<GUID>();
-    try {
-      CoCreateGuid(pGuid);
-      return pGuid.toDartGuid();
-    } finally {
-      free(pGuid);
-    }
-  }
-
-  /// Creates a new GUID from a string.
-  ///
-  /// The string must be of the form `{dddddddd-dddd-dddd-dddd-dddddddddddd}`.
-  /// where d is a hex digit.
-  factory Guid.parse(String guid) {
-    // This is a debug assert, becuase it's probably computationally expensive,
-    // and int.parse will throw a FormatException anyway if it can't parse the
-    // values.
-    // ignore: prefer_asserts_with_message
-    assert(
-      RegExp(
-        r'\{[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}}',
-      ).hasMatch(guid),
-    );
-
-    if (guid.length != 38) {
-      throw FormatException('GUID is not the correct length', guid);
-    }
-
-    // Note that the order of bytes in the returned byte array is different from
-    // the string representation of a GUID value. The order of the beginning
-    // four-byte group and the next two two-byte groups are reversed; the order
-    // of the final two-byte group and the closing six-byte group are the same.
-    //
-    // The following zero-indexed list provides the offset for each 8-bit hex
-    // value in the string representation.
-    const offsets = [
-      7, 5, 3, 1, 12, 10, 17, 15, //
-      20, 22, 25, 27, 29, 31, 33, 35,
-    ];
-
-    final guidAsBytes = offsets
-        .map((idx) => int.parse(guid.substring(idx, idx + 2), radix: 16))
-        .toList(growable: false);
-
-    return Guid(Uint8List.fromList(guidAsBytes).asUnmodifiableView());
-  }
-  // A GUID is a 128-bit unique value.
-  final Uint8List bytes;
-
-  /// Copy the GUID to unmanaged memory and return a pointer to the memory
-  /// location.
-  ///
-  /// It is the caller's responsibility to free the memory at the pointer
-  /// location, for example by calling [calloc]'s `free` method.
-  Pointer<GUID> toNativeGUID({Allocator allocator = malloc}) {
-    final pGUID = allocator<Uint8>(16);
-
-    for (var i = 0; i < 16; i++) {
-      pGUID[i] = bytes[i];
-    }
-
-    return pGUID.cast<GUID>();
-  }
-
-  @override
-  String toString() {
-    // Note that the order of bytes in the returned string is different from the
-    // internal byte representation of a GUID value. The order of the beginning
-    // four-byte group and the next two two-byte groups are reversed; the order
-    // of the final two-byte group and the closing six-byte group are the same.
-    //
-    // The following zero-indexed list provides the offset for each 8-bit hex
-    // value within the 16-byte array.
-    const offsets = [3, 2, 1, 0, 5, 4, 7, 6, 8, 9, 10, 11, 12, 13, 14, 15];
-
-    final guidAsHexValues = offsets.map(
-      (idx) => bytes[idx].toRadixString(16).padLeft(2, '0'),
-    );
-
-    final formattedString = guidAsHexValues.join();
-    final part1 = formattedString.substring(0, 8);
-    final part2 = formattedString.substring(8, 12);
-    final part3 = formattedString.substring(12, 16);
-    final part4 = formattedString.substring(16, 20);
-    final part5 = formattedString.substring(20);
-
-    return '{$part1-$part2-$part3-$part4-$part5}';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    if (other is! Guid) return false;
-
-    for (var i = 0; i < 16; i++) {
-      if (this.bytes[i] != other.bytes[i]) return false;
-    }
-
-    return true;
-  }
-
-  // toString()'s hashCode is used instead of bytes' because the bytes' hashCode
-  // does not work while using Guid as a key in maps.
-  @override
-  int get hashCode => toString().hashCode;
-}
-
-// typedef struct _GUID {
-//     unsigned long  Data1;
-//     unsigned short Data2;
-//     unsigned short Data3;
-//     unsigned char  Data4[ 8 ];
-// } GUID;
-
-/// Represents a native globally unique identifier (GUID).
+/// A [GUID] is a 128-bit value used pervasively by Windows to identify COM
+/// interfaces, COM classes (CLSIDs), WinRT types, and various system-defined
+/// entities.
+///
+/// This type maps **exactly** to the Win32 `GUID` / `IID` / `CLSID` structure
+/// and is ABI-compatible with all Windows APIs that expect a GUID pointer.
+///
+/// A GUID is composed of:
+/// - `Data1`: 32 bits
+/// - `Data2`: 16 bits
+/// - `Data3`: 16 bits
+/// - `Data4`: 8 bytes
+///
+/// These fields together correspond to the canonical textual form:
+/// `dddddddd-dddd-dddd-dddd-dddddddddddd`
+///
+/// When passing GUIDs to Win32 or COM APIs, use [toNative] to obtain a
+/// pointer with the appropriate lifetime.
+///
+/// To learn more, see:
+/// https://learn.microsoft.com/windows/win32/api/guiddef/ns-guiddef-guid
 ///
 /// {@category struct}
 @Packed(4)
 base class GUID extends Struct {
+  /// Creates a [GUID] from its canonical string representation.
+  ///
+  /// The [guid] string must be in one of the following formats:
+  /// - `{dddddddd-dddd-dddd-dddd-dddddddddddd}`
+  /// - `dddddddd-dddd-dddd-dddd-dddddddddddd`
+  ///
+  /// Hex digits may be upper- or lower-case.
+  ///
+  /// Example:
+  /// ```dart
+  /// final guid = GUID('{6B29FC40-CA47-1067-B31D-00DD010662DA}');
+  /// ```
+  ///
+  /// Throws a [FormatException] if the string does not represent a valid GUID.
+  factory GUID(String guid) => Struct.create()..setGUID(guid);
+
+  /// Creates a [GUID] from its individual component values.
+  ///
+  /// This constructor avoids string parsing and should be preferred when the
+  /// raw GUID components are already available.
+  factory GUID.fromComponents(
+    int data1,
+    int data2,
+    int data3,
+    Uint8List data4,
+  ) => Struct.create()..setGUIDFromComponents(data1, data2, data3, data4);
+
+  /// Creates a "nil" GUID (all fields set to zero).
+  ///
+  /// This is commonly used as a sentinel value, equivalent to `GUID_NULL`.
+  factory GUID.zero() => Struct.create();
+
+  /// The first 32 bits of the GUID.
   @Uint32()
   external int Data1;
+
+  /// The next 16 bits of the GUID.
   @Uint16()
   external int Data2;
+
+  /// The next 16 bits of the GUID.
   @Uint16()
   external int Data3;
-  @Uint64()
-  external int Data4;
 
-  /// Print GUID in common {fdd39ad0-238f-46af-adb4-6c85480369c7} format
-  @override
-  String toString() =>
-      Guid.fromComponents(Data1, Data2, Data3, Data4).toString();
+  /// The final 8 bytes of the GUID.
+  ///
+  /// The first two bytes correspond to the fourth group of hexadecimal digits,
+  /// and the remaining six bytes form the final group.
+  @Array(8)
+  external Array<Uint8> Data4;
 
-  /// Create GUID from common {FDD39AD0-238F-46AF-ADB4-6C85480369C7} format
-  void setGUID(String guidString) {
-    final byteBuffer = Guid.parse(guidString).bytes.buffer;
-    Data1 = byteBuffer.asUint32List().first;
-    Data2 = byteBuffer.asUint16List(4).first;
-    Data3 = byteBuffer.asUint16List(6).first;
-    Data4 = byteBuffer.asUint64List(8).first;
+  /// Sets this GUID from a canonical string representation.
+  ///
+  /// The [guid] string must be in one of the following formats:
+  /// - `{dddddddd-dddd-dddd-dddd-dddddddddddd}`
+  /// - `dddddddd-dddd-dddd-dddd-dddddddddddd`
+  ///
+  /// Example:
+  /// ```dart
+  /// final guid = adaptiveCalloc<GUID>();
+  /// guid.ref.setGUID('6B29FC40-CA47-1067-B31D-00DD010662DA');
+  /// ```
+  ///
+  /// Throws a [FormatException] if the string is not a valid GUID.
+  void setGUID(String guid) {
+    // Debug-only validation. Parsing will throw if invalid.
+    assert(
+      RegExp(
+        r'\{?[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}}?',
+      ).hasMatch(guid),
+      'Invalid GUID format',
+    );
+
+    final cleanedGUID = guid.replaceAll(RegExp('[{}-]'), '');
+    if (cleanedGUID.length != 32) {
+      throw ArgumentError.value(guid, 'guid', 'Invalid GUID');
+    }
+
+    try {
+      Data1 = int.parse(cleanedGUID.substring(0, 8), radix: 16);
+      Data2 = int.parse(cleanedGUID.substring(8, 12), radix: 16);
+      Data3 = int.parse(cleanedGUID.substring(12, 16), radix: 16);
+      final array = Data4;
+      for (var i = 0; i < 8; i++) {
+        array[i] = int.parse(
+          cleanedGUID.substring(16 + i * 2, 18 + i * 2),
+          radix: 16,
+        );
+      }
+    } catch (_) {
+      throw FormatException('Invalid GUID format: $guid', guid);
+    }
   }
 
-  /// Creates GUID from four integer components.
+  /// Sets this GUID from its individual component values.
   ///
-  /// The first component should be a 32-bit value, the second and third
-  /// components should be 16-bit values, and the fourth component should be a
-  /// 64-bit value.
-  void setGUIDFromComponents(int data1, int data2, int data3, int data4) {
+  /// - [data1], [data2], and [data3] are written verbatim.
+  /// - [data4] **must** contain exactly 8 bytes.
+  ///
+  /// This method is preferred in low-level code where GUIDs are already
+  /// available in binary form.
+  void setGUIDFromComponents(int data1, int data2, int data3, Uint8List data4) {
+    if (data4.length != 8) {
+      throw ArgumentError.value(
+        data4,
+        'data4',
+        'Must contain exactly 8 bytes.',
+      );
+    }
+
     Data1 = data1;
     Data2 = data2;
     Data3 = data3;
-    Data4 = data4;
+    for (var i = 0; i < 8; i++) {
+      Data4[i] = data4[i];
+    }
+  }
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena])
+  /// is used, in which case the allocator manages the lifetime.
+  Pointer<GUID> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator<GUID>()..ref = this;
+
+  /// Returns the canonical string representation of this GUID.
+  ///
+  /// The returned format is always:
+  /// `{dddddddd-dddd-dddd-dddd-dddddddddddd}`
+  ///
+  /// Hex digits are lower-case to match common Win32 conventions.
+  @override
+  String toString() {
+    final data4 = Data4.elements;
+    final buffer = StringBuffer()
+      ..write('{')
+      ..write(Data1.toRadixString(16).padLeft(8, '0'))
+      ..write('-')
+      ..write(Data2.toRadixString(16).padLeft(4, '0'))
+      ..write('-')
+      ..write(Data3.toRadixString(16).padLeft(4, '0'))
+      ..write('-')
+      ..write(
+        data4
+            .sublist(0, 2)
+            .map((e) => e.toRadixString(16).padLeft(2, '0'))
+            .join(),
+      )
+      ..write('-')
+      ..write(
+        data4.sublist(2).map((e) => e.toRadixString(16).padLeft(2, '0')).join(),
+      )
+      ..write('}');
+    return buffer.toString();
   }
 }
-
-extension PointerGUIDExtension on Pointer<GUID> {
-  /// Converts this native GUID to a Dart [Guid].
-  Guid toDartGuid() =>
-      Guid.fromComponents(ref.Data1, ref.Data2, ref.Data3, ref.Data4);
-}
-
-Pointer<GUID> GUIDFromString(String guid, {Allocator allocator = calloc}) =>
-    Guid.parse(guid).toNativeGUID(allocator: allocator);

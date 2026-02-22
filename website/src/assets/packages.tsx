@@ -137,7 +137,7 @@ export const communityPackages: Package[] = [
     name: 'network_info_plus',
     icon: FlutterIcon,
     description:
-      'Discover information (e.g. WiFi details) of the <b>network</b>.',
+      'Discover information (e.g., WiFi details) of the <b>network</b>.',
     url: 'https://pub.dev/packages/network_info_plus',
     installCommand: 'flutter pub add network_info_plus',
     contributors: [
