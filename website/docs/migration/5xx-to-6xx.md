@@ -24,7 +24,7 @@ This guide covers **breaking changes** and **recommended migration patterns**.
   values, parameters, and struct fields — are now exposed as Dart `bool` instead
   of `int`.
 * **Strongly typed Win32 handles**: Opaque Win32 handles (e.g., `HKEY`, `HWND`,
-  `HICON`)are now exposed as extension types instead of raw `int` or `Pointer`,
+  `HICON`) are now exposed as extension types instead of raw `int` or `Pointer`,
   improving readability, intent, and type safety while remaining ABI-compatible
   with native code.
 * **Enums as extension types**: Win32 enums are now represented as
@@ -316,22 +316,21 @@ try {
 
 ## APIs That Call `SetLastError()`
 
-Many Win32 APIs indicate failure by their return value and record corresponding
-error code in the thread-local *last-error* slot via
-[`SetLastError()`][SetLastError]. This error code can be queried using
+Many Win32 APIs signal failure through their return value and store a
+corresponding error code in the thread-local *last-error* slot via
+[`SetLastError()`][SetLastError], retrievable with
 [`GetLastError()`][GetLastError].
 
-This is **not reliable in Dart FFI**, because transitions between Dart and
-native code can overwrite the error state.
+**This pattern is unreliable in Dart FFI.** Transitions between Dart and native
+code can silently overwrite the last-error state before it is read — a known
+limitation tracked in
+[dart-lang/sdk#38832](https://github.com/dart-lang/sdk/issues/38832) with no
+reliable workaround in user code.
 
-This is a known limitation of Dart FFI (see
-[dart-lang/sdk#38832](https://github.com/dart-lang/sdk/issues/38832)) and
-**cannot be reliably mitigated in user code**.
-
-To address this, `package:win32` adopts a different convention for APIs that
-follow this pattern. These APIs return a [`Win32Result<T>`][Win32Result],
-which captures both the logical return value and the associated last-error
-code atomically on the native side, ensuring the **error state is preserved**.
+`package:win32` addresses this by wrapping affected APIs to return a
+[`Win32Result<T>`][Win32Result] instead. This type captures both the logical
+return value and the last-error code *atomically on the native side*, so the
+error state is always preserved across the FFI boundary.
 
 ```diff
 - final hWnd = CreateWindowEx(...);
@@ -575,8 +574,9 @@ CreateWindowEx(
 
 ## Memory Allocation (Optional)
 
-While not required, migrating to the allocators provided by `package:win32`
-prepares your code to take advantage of **native memory leak tracking**.
+While not required, migrating to the allocators provided by
+`package:ffi_leak_tracker` prepares your code to take advantage of
+**native memory leak tracking**.
 
 This is especially useful during development and debugging of FFI-heavy code.
 
