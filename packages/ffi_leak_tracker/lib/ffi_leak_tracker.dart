@@ -5,14 +5,12 @@
 /// programmatically, asserted to be leak-free, or emitted as diagnostic
 /// reports.
 ///
-/// Allocators:
-///
-/// | Allocator | Zeroes memory | Release build |
-/// |---|---|---|
-/// | `adaptiveCalloc` | ✓ | aliases to `calloc` |
-/// | `adaptiveMalloc` | ✗ | aliases to `malloc` |
-/// | `diagnosticCalloc` | ✓ | retains tracking |
-/// | `diagnosticMalloc` | ✗ | retains tracking |
+/// | Allocator          | Zeroes memory | Release build            |
+/// | :----------------: | :-----------: | :----------------------: |
+/// | `adaptiveCalloc`   | ✓             | compile away to `calloc` |
+/// | `adaptiveMalloc`   | ✗             | compile away to `malloc` |
+/// | `diagnosticCalloc` | ✓             | retains tracking         |
+/// | `diagnosticMalloc` | ✗             | retains tracking         |
 ///
 /// Prefer the adaptive allocators in application code. Use the diagnostic
 /// variants only when tracking must remain active in release builds.

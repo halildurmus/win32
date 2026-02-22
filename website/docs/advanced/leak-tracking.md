@@ -3,27 +3,24 @@ title: Leak Tracking
 ---
 
 [`package:ffi_leak_tracker`][package:ffi_leak_tracker] helps you find and
-diagnose native memory leaks in Dart FFI code by tracking allocations made
-through its custom allocators.
-
-It is designed to answer one question precisely:
+diagnose native memory leaks in Dart FFI code. It tracks allocations made
+through its custom allocators and answers one question precisely:
 
 > Which native allocations made from Dart were never freed, and where were they
 > allocated?
 
-When enabled, the leak tracker records every allocation made through its
-allocators — capturing the size, type, call stack, and timestamp — and can
-report any that were not freed.
+When enabled, the tracker records every allocation — capturing the address,
+size, type, call stack, and timestamp — and can report any that were never
+freed.
 
 A few things worth knowing upfront:
 
-* Tracking is **opt-in** and disabled by default
+* Tracking is **opt-in** and off by default
 * In **release** builds, adaptive allocators compile away to
-  [`calloc()`][calloc] / [`malloc()`][malloc] from [`package:ffi`][package:ffi]
-  with **zero-overhead**
+  [`calloc()`][calloc] / [`malloc()`][malloc] with **zero-overhead**
 * Only allocations made through `package:ffi_leak_tracker` allocators are
-  tracked — allocations via `calloc()` / `malloc()` directly are invisible
-  to the tracker
+  tracked; — calls to `calloc()` / `malloc()` directly are not visible to the
+  tracker.
 
 ## Allocators
 
@@ -36,25 +33,25 @@ A few things worth knowing upfront:
 | [`diagnosticCalloc`][diagnosticCalloc] | ✓             | retains tracking                   |
 | [`diagnosticMalloc`][diagnosticMalloc] | ✗             | retains tracking                   |
 
-**Adaptive allocators** are the right default for application code. They
-participate in leak tracking in **debug** and **profile** builds and disappear
-entirely in **release** builds.
+**Adaptive allocators** are the right default for most code They participate in
+leak tracking in **debug** and **profile** builds and disappear entirely in
+**release** builds, so there is no overhead.
 
-**Diagnostic allocators** retain tracking regardless of build mode. Use them
-only when you need to investigate leaks that reproduce exclusively in
-**release** builds — they introduce measurable overhead and should not be used
-as general-purpose allocators.
+**Diagnostic allocators** retain tracking in all build modes. Use them only when
+you need to investigate leaks that reproduce exclusively in **release** builds
+— they carry measurable overhead and are not suitable as general-purpose
+allocators.
 
 ## Enabling Tracking
 
-Leak tracking **must be explicitly enabled** before any allocations you want to
-track are made. Allocations performed before tracking is enabled are not
-retroactively recorded.
+Importing `package:ffi_leak_tracker` and using its allocators does not
+automatically start tracking. This lets you control exactly when tracking is
+active and avoid recording allocations you don't care about.
 
 ### Globally
 
 Call [`LeakTracker.enable()`][enable] early in your program to enable tracking
-for the entire runtime:
+for the entire process lifetime:
 
 ```dart
 void main() {
@@ -64,9 +61,10 @@ void main() {
 }
 ```
 
-To enable only in **debug** and **profile** builds — which is the recommended
-approach for most applications — use
-[`LeakTracker.enableInDebug()`][enableInDebug]:
+For most applications, you only want tracking in **debug** and **profile**
+builds. Use [`LeakTracker.enableInDebug()`][enableInDebug] instead — it is
+tree-shaken away in **release** builds and is equivalent to wrapping
+`LeakTracker.enable()` in a `!kReleaseMode` guard:
 
 ```dart
 void main() {
@@ -76,64 +74,60 @@ void main() {
 }
 ```
 
-This is equivalent to wrapping `enable()` in a `!kReleaseMode` check and ensures
-adaptive allocators **compile away cleanly in release builds**.
+To stop recording, call [`LeakTracker.disable()`][disable]. To query the current
+state, read [`LeakTracker.enabled`][enabled].
 
-To stop recording allocations, call [`LeakTracker.disable()`][disable].
-To query the current state, read [`LeakTracker.enabled`][enabled].
-
-### Scoped (`Zone`s)
+### Scoped Tracking
 
 To isolate tracking to a specific operation — such as a single test or
 benchmark — use [`LeakTracker.runScoped()`][runScoped]:
 
 ```dart
 LeakTracker.runScoped(() {
-  // Only allocations made here are tracked.
+  // Only allocations made inside this callback are tracked.
   final ptr = adaptiveCalloc<Int32>();
   adaptiveCalloc.free(ptr);
 });
 ```
 
-Tracking is automatically enabled for the duration of the callback and the scope
-maintains its own independent registry, isolated from any outer tracking
-context. An optional `filter` parameter lets you suppress specific allocations
-within the scope.
+Tracking is automatically enabled for the duration of the callback. The scope
+maintains its own isolated registry, independent of any outer tracking context.
+An optional `filter` parameter lets you suppress specific allocations within
+the scope.
 
 ## Reporting Leaks
 
-To emit a report of outstanding allocations at any point, call
-[`LeakTracker.emit()`][emit]:
+Call [`LeakTracker.emit()`][emit] at any point to print outstanding (un-freed)
+allocations:
 
 ```dart
 void main() {
-  LeakTracker.enable();
+  LeakTracker.enableInDebug();
   // ... rest of your code
   // highlight-next-line
   LeakTracker.emit();
 }
 ```
 
-By default this prints to the console. You can pass a custom
-[`LeaksEmitter`][LeaksEmitter] to redirect output — for example to a file in
-JSON format, a logging framework, or a test reporter:
+By default, output goes to the console. Pass a custom
+[`LeaksEmitter`][LeaksEmitter] to redirect it — for example, to a JSON file,
+a logging framework, or a test reporter:
 
 ```dart
 LeakTracker.emit(emitter: const .json('leaks.json'));
 
-// Or with a custom emitter implementation:
+// Or with a fully custom emitter:
 LeakTracker.emit(emitter: const MyCustomEmitter());
 ```
 
-`LeakTracker.emit()` does not clear the registry. To clear the registry, call
+`LeakTracker.emit()` does not clear the registry. To reset it, call
 [`LeakTracker.reset()`][reset].
 
-To assert that no leaks are present — for example in a test — use
-[`LeakTracker.verifyNoLeaks()`][verifyNoLeaks], which throws a
-`LeakTrackerException` if any tracked allocations remain outstanding.
-
-To perform this check only in **debug** and **profile** builds, use
-[`LeakTracker.verifyNoLeaksInDebug()`][verifyNoLeaksInDebug]:
+To assert that no leaks are present — and throw a `LeakTrackerException` if
+any tracked allocations remain — use
+[`LeakTracker.verifyNoLeaks()`][verifyNoLeaks]. The debug-only variant,
+[`LeakTracker.verifyNoLeaksInDebug()`][verifyNoLeaksInDebug], is a no-op in
+release builds:
 
 ```dart
 void main() {
@@ -144,7 +138,11 @@ void main() {
 }
 ```
 
-And here's how you might use it in a test:
+### Leak Detection in Tests
+
+The snippet below enables tracking for an entire test suite, resets the
+registry before each test, and asserts no leaks remain after each test — with
+no boilerplate required in the tests themselves:
 
 ```dart
 import 'dart:ffi';
@@ -172,20 +170,16 @@ void main() {
 }
 ```
 
-This will automatically enable tracking for all tests, reset the registry before
-each test, and verify that no leaks remain after each test — without any
-boilerplate in the tests themselves.
-
 ## How It Works
 
-1. An allocation is made through a `package:ffi_leak_tracker` allocator after
-   tracking is enabled
-2. The allocator registers the allocation with the leak tracker, recording its
-   address, size, type, timestamp, and current call stack
+1. An allocation is made through a `package:ffi_leak_tracker` allocator while
+   tracking is enabled.
+2. The allocator registers the allocation with the tracker, recording its
+   address, size, type, timestamp, and current call stack.
 3. When the memory is freed via the same allocator's `free()`, the tracker
-   removes the record from its registry
+   removes the record from its registry.
 4. When `LeakTracker.emit()` or `LeakTracker.verifyNoLeaks()` is called, any
-   allocation still present in the tracker's registry is reported as a leak
+   allocation still present in the registry is reported as a leak.
 
 ## Example
 
@@ -214,7 +208,6 @@ void main() {
 ```
 
 [package:ffi_leak_tracker]: https://pub.dev/packages/ffi_leak_tracker
-[package:ffi]: https://pub.dev/packages/ffi
 [calloc]: https://pub.dev/documentation/ffi/latest/ffi/calloc-constant.html
 [malloc]: https://pub.dev/documentation/ffi/latest/ffi/malloc-constant.html
 [adaptiveCalloc]: https://pub.dev/documentation/ffi_leak_tracker/latest/ffi_leak_tracker/adaptiveCalloc-constant.html

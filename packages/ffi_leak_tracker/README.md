@@ -1,3 +1,5 @@
+[![ci][ci_badge]][ci_link]
+[![codecov][codecov_badge_link]][codecov_link]
 [![Package: ffi_leak_tracker][package_badge]][package_link]
 [![Publisher: halildurmus.dev][publisher_badge]][publisher_link]
 [![Language: Dart][language_badge]][language_link]
@@ -63,6 +65,10 @@ Full documentation is available at
 If you encounter bugs or need additional functionality, please
 [file an issue](https://github.com/halildurmus/win32/issues).
 
+[ci_badge]: https://img.shields.io/github/actions/workflow/status/halildurmus/win32/ffi_leak_tracker.yml
+[ci_link]: https://github.com/halildurmus/win32/actions/workflows/ffi_leak_tracker.yml
+[codecov_badge_link]: https://codecov.io/gh/halildurmus/win32/graph/badge.svg?token=RVL4TNLEJA&flags=ffi_leak_tracker
+[codecov_link]: https://codecov.io/gh/halildurmus/win32
 [language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
 [language_link]: https://dart.dev
 [license_badge]: https://img.shields.io/github/license/halildurmus/win32?color=blue

@@ -13,6 +13,13 @@ import 'utils.dart';
 
 part 'allocator.dart';
 
+/// A static utility for tracking native memory allocations and detecting leaks.
+///
+/// [LeakTracker] maintains a registry of live allocations made through
+/// [TrackingAllocator] instances ([adaptiveCalloc], [adaptiveMalloc],
+/// [diagnosticCalloc], and [diagnosticMalloc]). Each allocation is recorded
+/// with its address, size, type, timestamp, and call stack, enabling precise
+/// diagnostics when memory is not freed as expected.
 final class LeakTracker {
   /// Controls whether leak tracking is globally enabled.
   ///

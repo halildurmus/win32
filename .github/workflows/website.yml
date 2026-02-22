@@ -4,11 +4,13 @@ on:
   pull_request:
     paths:
       - .github/workflows/website.yml
+      - packages/win32/CHANGELOG.md
       - website/**
   push:
     branches: [main]
     paths:
       - .github/workflows/website.yml
+      - packages/win32/CHANGELOG.md
       - website/**
 
 jobs:
