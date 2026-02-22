@@ -2,26 +2,30 @@
 title: Quick Start
 ---
 
-## 🧩 Calling Native Libraries with FFI
+## 🧩 How Win32 APIs Are Called from Dart
 
-**Windows API** was originally written with **C** developers in mind.
-As a result, many of the conventions are designed around the characteristics and
-capabilities of the C runtime. Fortunately, the wide popularity of C means that
-many languages, including Dart, have good support for calling C code and
-handling C coding conventions.
+**Windows API** was originally designed for **C** developers, so its conventions
+reflect C's characteristics and capabilities. Fortunately, Dart has first-class
+support for calling C code through **FFI** (Foreign Function Interface), which
+is what `package:win32` builds on.
 
-In Dart, the primary means for calling C code is through **FFI**
-(Foreign Function Interface). Dart provides both a library,
-[`dart:ffi`][dart:ffi], and a package, [`package:ffi`][package:ffi], which
-together offer useful **low-level** functions and helpers.
+Dart's FFI support is split across two packages:
 
-To add **ffi** and **win32** packages to your project, use the appropriate
-command below based on your project type (**Flutter** or **Dart-only**):
+- [`dart:ffi`][dart:ffi] — the core library for declaring and calling native
+  functions, working with pointers, and mapping C types to Dart types.
+- [`package:ffi`][package:ffi] — higher-level helpers for common patterns like
+  string conversion and memory allocation.
+
+`package:win32` uses both internally, and you will often need them directly in
+your own code as well.
+
+## 📦 Installation
+
+Add the required packages to your project:
 
 <InstallPackagesCommand args="ffi win32" />
 
-To utilize **FFI** features, you typically import both the library and the
-package, along with the `package:win32`, as follows:
+Then import them wherever you need to make Win32 calls:
 
 ```dart
 import 'dart:ffi';
@@ -32,27 +36,31 @@ import 'package:win32/win32.dart';
 
 ## 🚀 Calling Your First Win32 API
 
-Here's a simple example of how to call the [`Beep`][Beep] function to play an
-A<sub>4</sub> note for ½ second:
+The [`Beep`][Beep] function is a good starting point — it takes a frequency in
+Hz and a duration in milliseconds, and requires no memory management or error
+handling:
 
 ```dart title="beep.dart"
 import 'package:win32/win32.dart';
 
 void main() {
+  // highlight-next-line
   Beep(440 /* Hz */, 500 /* ms */);
 }
 ```
 
+Run this and you should hear an A<sub>4</sub> tone play for half a second.
+
 ## 📚 Next Steps
 
-🔍 Explore [real-life examples] built using `package:win32` to see what you can
-achieve.
+📘 Read the [Functions] guide to understand how Win32 functions are projected
+into Dart and how to call them effectively.
 
-📦 Discover [packages](/packages) built on top of `package:win32` to find the
-ones that best suit your needs.
+🔍 Browse [real-life examples] that show `package:win32` in use across a range
+of common Windows tasks.
 
-📘 Dive into the [Functions] guide to deepen your understanding of Win32
-functions.
+📦 Explore [packages built on top of `package:win32`](/packages) for
+higher-level abstractions that may cover your use case out of the box.
 
 [Beep]: https://learn.microsoft.com/windows/win32/api/utilapiset/nf-utilapiset-beep
 [dart:ffi]: https://api.dart.dev/stable/dart-ffi/dart-ffi-library.html
