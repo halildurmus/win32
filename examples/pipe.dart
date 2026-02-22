@@ -61,7 +61,7 @@ class ClientCommand extends Command<void> {
       if (!result.value) {
         stderr
           ..writeln('Failed to read data from the pipe.')
-          ..writeln(error.toHRESULT());
+          ..writeln(error.toHRESULT().message);
       } else {
         final numBytesRead = lpNumBytesRead.value;
         stdout
@@ -118,7 +118,7 @@ class ServerCommand extends Command<void> {
       if (!result.value) {
         stderr
           ..writeln('Failed to send data.')
-          ..writeln(result.error.toHRESULT());
+          ..writeln(result.error.toHRESULT().message);
       } else {
         final numBytesWritten = lpNumBytesWritten.value;
         stdout.writeln('Number of bytes sent: $numBytesWritten');

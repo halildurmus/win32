@@ -29,7 +29,7 @@ Do you want to try again?
       case IDCONTINUE:
         print('Continue pressed');
       case 0:
-        print('MessageBox failed with error: ${error.toHRESULT()}');
+        throw WindowsException(error.toHRESULT());
     }
   });
 }

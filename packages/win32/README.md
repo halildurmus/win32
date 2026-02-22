@@ -95,7 +95,7 @@ void main() {
       case IDOK:
         print('OK pressed');
       case 0:
-        print('MessageBox failed: ${error.toHRESULT()}');
+        throw WindowsException(error.toHRESULT());
     }
   });
 }
