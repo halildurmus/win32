@@ -274,44 +274,43 @@ void generateDynamicLibrary(
   writeToFile(filePath, buffer.toString());
 }
 
-/// Generates a Dart file that contains;
-/// - a constant set of all dynamic libraries projected from the Win32 API
-/// - a constant list of all dynamic libraries that have wrappers to preserve
-///   the result of `GetLastError()`.
+/// Updates the two constants in `packages/win32/hook/build.dart`:
+/// - `dynamicLibraries`: all dynamic libraries projected from the Win32 API
+/// - `sources`: all dynamic libraries with wrappers preserving `GetLastError()`
+///   results
 ///
 /// These constants are used in the build process to determine which dynamic
 /// libraries to include as code assets.
-///
-/// The generated file is saved in the directory `packages/win32/hook/` and
-/// named `_internal.g.dart`.
-// ignore: unreachable_from_main
-void generateDynamicLibrariesConstant(
+void updateDynamicLibrariesConstant(
   Set<winmd.ModuleRef> dynamicLibraries,
   Set<winmd.ModuleRef> wrappedLibraries,
 ) {
-  final buffer = StringBuffer(generatedFileHeader);
+  final generatedBlock = StringBuffer()
+    ..writeln('const dynamicLibraries = {')
+    ..writeAll(dynamicLibraries.map((l) => "  '${l.name.toLowerCase()}',\n"))
+    ..writeln('};')
+    ..writeln()
+    ..writeln('const sources = [')
+    ..writeAll(
+      wrappedLibraries.map((l) => "  'src/${l.safeName.toLowerCase()}.g.c',\n"),
+    )
+    ..writeln('];');
 
-  final librariesBuffer = StringBuffer()..writeln('const dynamicLibraries = {');
-  for (final library in dynamicLibraries) {
-    librariesBuffer.writeln("  '${library.name.toLowerCase()}',");
+  final buildFile = io.File(
+    io.Platform.script.resolve('../../win32/hook/build.dart').toFilePath(),
+  );
+
+  final content = buildFile.readAsStringSync();
+  final insertionPoint = content.indexOf('const dynamicLibraries = {');
+  if (insertionPoint == -1) {
+    throw StateError(
+      'Could not find `const dynamicLibraries` anchor in ${buildFile.path}',
+    );
   }
-  librariesBuffer.writeln('};');
 
-  final sourcesBuffer = StringBuffer()..writeln('const sources = [');
-  for (final library in wrappedLibraries) {
-    final safeName = library.safeName;
-    sourcesBuffer.writeln("  'src/${safeName.toLowerCase()}.g.c',");
-  }
-  sourcesBuffer.writeln('];');
-
-  buffer
-    ..writeln(librariesBuffer.toString())
-    ..write(sourcesBuffer.toString());
-
-  final filePath = io.Platform.script
-      .resolve('../../win32/hook/_internal.g.dart')
-      .toFilePath();
-  writeToFile(filePath, buffer.toString());
+  buildFile.writeAsStringSync(
+    content.substring(0, insertionPoint) + generatedBlock.toString(),
+  );
 }
 
 /// Generates a Dart file that exports all the dynamic libraries projected from
@@ -597,7 +596,7 @@ void generateFunctions() {
     );
   }
 
-  // generateDynamicLibrariesConstant(dynamicLibraries, wrappedLibraries);
+  updateDynamicLibrariesConstant(dynamicLibraries, wrappedLibraries);
   generateDynamicLibraryExports(dynamicLibraries);
   logger.info('🚀 Total functions generated: ${functions.length}');
 }
