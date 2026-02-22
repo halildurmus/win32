@@ -284,6 +284,7 @@ void generateDynamicLibrary(
 ///
 /// The generated file is saved in the directory `packages/win32/hook/` and
 /// named `_internal.g.dart`.
+// ignore: unreachable_from_main
 void generateDynamicLibrariesConstant(
   Set<winmd.ModuleRef> dynamicLibraries,
   Set<winmd.ModuleRef> wrappedLibraries,
