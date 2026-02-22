@@ -1,7 +1,7 @@
-import Link from '@docusaurus/Link';
-import { useBlogPost } from '@docusaurus/plugin-content-blog/client';
-import type { Props } from '@theme/BlogPostItem/Header/Author';
-import clsx from 'clsx';
+import Link from "@docusaurus/Link";
+import { useBlogPost } from "@docusaurus/plugin-content-blog/client";
+import type { Props } from "@theme/BlogPostItem/Header/Author";
+import clsx from "clsx";
 
 export default function ChangelogAuthor({
   author,
@@ -17,15 +17,15 @@ export default function ChangelogAuthor({
           alt={name}
           loading="lazy"
           className={clsx(
-            'not-prose',
-            'object-cover',
-            isBlogPostPage ? 'size-14' : 'size-12',
-            'rounded-full',
-            'text-gray-500 dark:text-gray-400',
-            'bg-gray-200 dark:bg-gray-700',
-            'ring-2 ring-white dark:ring-neutral-900',
-            'hover:ring-win32-blue dark:hover:ring-win32-cyan-alt',
-            className
+            "not-prose",
+            "object-cover",
+            isBlogPostPage ? "size-14" : "size-12",
+            "rounded-full",
+            "text-gray-500 dark:text-gray-400",
+            "bg-gray-200 dark:bg-gray-700",
+            "ring-2 ring-white dark:ring-neutral-900",
+            "hover:ring-win32-blue dark:hover:ring-win32-cyan-alt",
+            className,
           )}
           onError={(e) => {
             // Image returns 404 if the user's handle changes. We display a
@@ -37,13 +37,13 @@ export default function ChangelogAuthor({
       ) : (
         <div
           className={clsx(
-            'flex items-center justify-center',
-            isBlogPostPage ? 'size-14' : 'size-12',
-            'rounded-full',
-            'text-gray-500 dark:text-gray-400',
-            'bg-gray-200 dark:bg-gray-700',
-            'ring-2 ring-white dark:ring-neutral-900',
-            'hover:ring-win32-blue dark:hover:ring-win32-cyan-alt'
+            "flex items-center justify-center",
+            isBlogPostPage ? "size-14" : "size-12",
+            "rounded-full",
+            "text-gray-500 dark:text-gray-400",
+            "bg-gray-200 dark:bg-gray-700",
+            "ring-2 ring-white dark:ring-neutral-900",
+            "hover:ring-win32-blue dark:hover:ring-win32-cyan-alt",
           )}
           title={name}
         >

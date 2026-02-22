@@ -1,19 +1,19 @@
-import type { Options as ClientRedirectsPluginOptions } from '@docusaurus/plugin-client-redirects';
-import type { Options as BlogPluginOptions } from '@docusaurus/plugin-content-blog';
-import type * as Preset from '@docusaurus/preset-classic';
-import type { Config } from '@docusaurus/types';
-import { themes as prismThemes } from 'prism-react-renderer';
-import redirects from './redirects.json';
+import type { Options as ClientRedirectsPluginOptions } from "@docusaurus/plugin-client-redirects";
+import type { Options as BlogPluginOptions } from "@docusaurus/plugin-content-blog";
+import type * as Preset from "@docusaurus/preset-classic";
+import type { Config } from "@docusaurus/types";
+import { themes as prismThemes } from "prism-react-renderer";
+import redirects from "./redirects.json";
 
-const githubRepoUrl = 'https://github.com/halildurmus/win32';
+const githubRepoUrl = "https://github.com/halildurmus/win32";
 
 const config: Config = {
-  title: 'win32',
-  tagline: 'Call Windows APIs from Dart',
-  url: 'https://win32.pub',
-  baseUrl: '/',
-  organizationName: 'halildurmus',
-  projectName: 'win32',
+  title: "win32",
+  tagline: "Call Windows APIs from Dart",
+  url: "https://win32.pub",
+  baseUrl: "/",
+  organizationName: "halildurmus",
+  projectName: "win32",
 
   future: {
     v4: true,
@@ -22,38 +22,38 @@ const config: Config = {
 
   headTags: [
     {
-      tagName: 'script',
+      tagName: "script",
       attributes: {
-        type: 'application/ld+json',
+        type: "application/ld+json",
       },
       innerHTML: JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'WebSite',
-        name: 'win32.pub',
-        url: 'https://win32.pub',
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        name: "win32.pub",
+        url: "https://win32.pub",
       }),
     },
     {
-      tagName: 'meta',
+      tagName: "meta",
       attributes: {
-        property: 'og:site_name',
-        content: 'win32.pub',
+        property: "og:site_name",
+        content: "win32.pub",
       },
     },
     {
-      tagName: 'link',
+      tagName: "link",
       attributes: {
-        rel: 'icon',
-        type: 'image/png',
-        href: '/img/favicon.png',
+        rel: "icon",
+        type: "image/png",
+        href: "/img/favicon.png",
       },
     },
     {
-      tagName: 'link',
+      tagName: "link",
       attributes: {
-        rel: 'icon',
-        type: 'image/svg+xml',
-        href: '/img/favicon.svg',
+        rel: "icon",
+        type: "image/svg+xml",
+        href: "/img/favicon.svg",
       },
     },
   ],
@@ -62,13 +62,13 @@ const config: Config = {
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: "en",
+    locales: ["en"],
   },
 
   plugins: [
     [
-      '@docusaurus/plugin-client-redirects',
+      "@docusaurus/plugin-client-redirects",
       {
         redirects: redirects,
         createRedirects(existingPath) {
@@ -84,74 +84,74 @@ const config: Config = {
         },
       } satisfies ClientRedirectsPluginOptions,
     ],
-    './plugins/tailwindcss.ts',
+    "./plugins/tailwindcss.ts",
     [
-      './plugins/blog.js',
+      "./plugins/blog.js",
       {
-        path: 'blog',
-        routeBasePath: '/blog',
-        blogTitle: 'win32 Blog',
+        path: "blog",
+        routeBasePath: "/blog",
+        blogTitle: "win32 Blog",
         blogDescription:
-          'A resource for package:win32, Flutter and Dart ecosystem, and Windows development.',
+          "A resource for package:win32, Flutter and Dart ecosystem, and Windows development.",
         blogSidebarCount: 0,
-        blogSidebarTitle: 'All posts',
+        blogSidebarTitle: "All posts",
         feedOptions: {
-          type: 'all',
-          title: 'win32 Blog',
+          type: "all",
+          title: "win32 Blog",
           description:
-            'A resource for package:win32, Flutter and Dart ecosystem, and Windows development.',
+            "A resource for package:win32, Flutter and Dart ecosystem, and Windows development.",
           copyright: `Copyright © ${new Date().getFullYear()} • Halil Durmus`,
         },
         postsPerPage: 12,
         admonitions: {
-          keywords: ['simple', 'note', 'tip', 'info', 'warning', 'danger'],
+          keywords: ["simple", "note", "tip", "info", "warning", "danger"],
         },
       } satisfies BlogPluginOptions,
     ],
     [
-      './plugins/changelog.js',
+      "./plugins/changelog.js",
       {
-        routeBasePath: '/changelog',
-        authorsMapPath: 'authors.json',
-        blogTitle: 'win32 Changelog',
+        routeBasePath: "/changelog",
+        authorsMapPath: "authors.json",
+        blogTitle: "win32 Changelog",
         blogDescription:
-          'Keep yourself up-to-date about new features in every release',
-        blogSidebarCount: 'ALL',
-        blogSidebarTitle: 'Changelog',
+          "Keep yourself up-to-date about new features in every release",
+        blogSidebarCount: "ALL",
+        blogSidebarTitle: "Changelog",
         feedOptions: {
-          type: 'all',
-          title: 'win32 Changelog',
+          type: "all",
+          title: "win32 Changelog",
           description:
-            'Keep yourself up-to-date about new features in every release',
+            "Keep yourself up-to-date about new features in every release",
           copyright: `Copyright © ${new Date().getFullYear()} • Halil Durmus`,
         },
         postsPerPage: 20,
         showReadingTime: false,
       },
     ],
-    './plugins/clarity.ts',
+    "./plugins/clarity.ts",
   ],
 
   presets: [
     [
-      'classic',
+      "classic",
       {
         blog: false,
         docs: {
-          path: 'docs',
-          sidebarPath: require.resolve('./sidebars.js'),
+          path: "docs",
+          sidebarPath: require.resolve("./sidebars.js"),
           editUrl: `${githubRepoUrl}/tree/main/website`,
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
           admonitions: {
-            keywords: ['simple', 'note', 'tip', 'info', 'warning', 'danger'],
+            keywords: ["simple", "note", "tip", "info", "warning", "danger"],
           },
-          exclude: ['**/**/_*.md'],
+          exclude: ["**/**/_*.md"],
           // TODO(halildurmus): Enable feedback plugin.
           // remarkPlugins: [feedbackPlugin],
         },
         gtag: {
-          trackingID: 'G-SPFSB6RTZW',
+          trackingID: "G-SPFSB6RTZW",
         },
         pages: {
           editLocalizedFiles: true,
@@ -160,16 +160,16 @@ const config: Config = {
           showLastUpdateTime: true,
         },
         sitemap: {
-          ignorePatterns: ['**/_*.md'],
+          ignorePatterns: ["**/_*.md"],
         },
         theme: {
           customCss: [
-            require.resolve('./src/win32-theme/css/colors.css'),
-            require.resolve('./src/win32-theme/css/fonts.css'),
-            require.resolve('./src/win32-theme/css/custom.css'),
-            require.resolve('./src/css/custom.css'),
-            require.resolve('./src/css/split-pane.css'),
-            require.resolve('./src/css/demo-page.css'),
+            require.resolve("./src/win32-theme/css/colors.css"),
+            require.resolve("./src/win32-theme/css/fonts.css"),
+            require.resolve("./src/win32-theme/css/custom.css"),
+            require.resolve("./src/css/custom.css"),
+            require.resolve("./src/css/split-pane.css"),
+            require.resolve("./src/css/demo-page.css"),
           ],
         },
       } satisfies Preset.Options,
@@ -180,9 +180,9 @@ const config: Config = {
 
   themeConfig: {
     algolia: {
-      appId: 'HX017D1R57',
-      apiKey: '8d7bf2c1447cea6d0acbdcc9615e1b08',
-      indexName: 'win32',
+      appId: "HX017D1R57",
+      apiKey: "8d7bf2c1447cea6d0acbdcc9615e1b08",
+      indexName: "win32",
       contextualSearch: true,
     },
     colorMode: {
@@ -193,44 +193,44 @@ const config: Config = {
         autoCollapseCategories: true,
       },
     },
-    image: 'img/social.png',
+    image: "img/social.png",
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.vsDark,
-      additionalLanguages: ['bash', 'dart', 'diff', 'json'],
+      additionalLanguages: ["bash", "dart", "diff", "json"],
       magicComments: [
         // Remember to extend the default highlight class name as well!
         {
-          className: 'theme-code-block-highlighted-line',
-          line: 'highlight-next-line',
-          block: { start: 'highlight-start', end: 'highlight-end' },
+          className: "theme-code-block-highlighted-line",
+          line: "highlight-next-line",
+          block: { start: "highlight-start", end: "highlight-end" },
         },
         {
-          className: 'code-block-hidden',
-          line: 'hide-next-line',
-          block: { start: 'hide-start', end: 'hide-end' },
+          className: "code-block-hidden",
+          line: "hide-next-line",
+          block: { start: "hide-start", end: "hide-end" },
         },
         {
-          className: 'theme-code-block-added-line',
-          line: 'added-line',
-          block: { start: 'added-start', end: 'added-end' },
+          className: "theme-code-block-added-line",
+          line: "added-line",
+          block: { start: "added-start", end: "added-end" },
         },
         {
-          className: 'theme-code-block-removed-line',
-          line: 'removed-line',
-          block: { start: 'removed-start', end: 'removed-end' },
+          className: "theme-code-block-removed-line",
+          line: "removed-line",
+          block: { start: "removed-start", end: "removed-end" },
         },
       ],
     },
     metadata: [
       {
-        name: 'twitter:title',
-        content: 'win32 | Call Windows APIs from Dart',
+        name: "twitter:title",
+        content: "win32 | Call Windows APIs from Dart",
       },
       {
-        name: 'twitter:description',
+        name: "twitter:description",
         content:
-          'Bring the full capability of the Windows APIs to your Flutter and Dart applications.',
+          "Bring the full capability of the Windows APIs to your Flutter and Dart applications.",
       },
     ],
   } satisfies Preset.ThemeConfig,
@@ -239,7 +239,7 @@ const config: Config = {
 
   customFields: {
     description:
-      'Bring the full capability of the Windows APIs to your Flutter and Dart applications.',
+      "Bring the full capability of the Windows APIs to your Flutter and Dart applications.",
   },
 };
 

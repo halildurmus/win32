@@ -1,6 +1,6 @@
-import clsx from 'clsx';
-import type { SVGProps } from 'react';
-import { IoExtensionPuzzleOutline } from 'react-icons/io5';
+import clsx from "clsx";
+import type { SVGProps } from "react";
+import { IoExtensionPuzzleOutline } from "react-icons/io5";
 
 export const IntegrationIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -12,7 +12,7 @@ export const IntegrationIcon = (props: SVGProps<SVGSVGElement>) => (
     {...props}
     className={clsx(
       props.className,
-      'dark:text-win32-purple-alt text-win32-purple'
+      "dark:text-win32-purple-alt text-win32-purple",
     )}
   >
     <rect

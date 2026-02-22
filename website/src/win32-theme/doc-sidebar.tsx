@@ -1,26 +1,26 @@
-import Link from '@docusaurus/Link';
+import Link from "@docusaurus/Link";
 import {
   isActiveSidebarItem,
   useDocsSidebar,
-} from '@docusaurus/plugin-content-docs/client';
-import { useLocation } from '@docusaurus/router';
-import { isSamePath } from '@docusaurus/theme-common/internal';
-import clsx from 'clsx';
-import React from 'react';
-import { FaChevronDown, FaExternalLinkAlt } from 'react-icons/fa';
-import { RxDash } from 'react-icons/rx';
-import { HEADER_HEIGHT } from './doc-header';
+} from "@docusaurus/plugin-content-docs/client";
+import { useLocation } from "@docusaurus/router";
+import { isSamePath } from "@docusaurus/theme-common/internal";
+import clsx from "clsx";
+import React from "react";
+import { FaChevronDown, FaExternalLinkAlt } from "react-icons/fa";
+import { RxDash } from "react-icons/rx";
+import { HEADER_HEIGHT } from "./doc-header";
 
 const SIDEBAR_WIDTH = 260;
 
 const componentRegexp = /<([A-Z][a-z]+)\s?\/>/gi;
 
-type Variant = 'desktop' | 'mobile';
+type Variant = "desktop" | "mobile";
 
 type SidebarCategoryItem = {
   collapsible: boolean;
   collapsed: boolean;
-  type: 'category';
+  type: "category";
   href?: string;
   label: string;
   items: SidebarItem[];
@@ -29,7 +29,7 @@ type SidebarCategoryItem = {
 };
 
 type SidebarLinkItem = {
-  type: 'link';
+  type: "link";
   label: string;
   href: string;
   docId: string;
@@ -38,7 +38,7 @@ type SidebarLinkItem = {
 };
 
 type SidebarHtmlItem = {
-  type: 'html';
+  type: "html";
   content: string;
   value: string;
   className?: string;
@@ -68,7 +68,7 @@ const SidebarCategory = ({
   deferred?: boolean;
 }) => {
   const location = useLocation();
-  const isHeader = item.className?.includes('category-as-header');
+  const isHeader = item.className?.includes("category-as-header");
   const isActive = isActiveSidebarItem(item, path);
 
   const isSame = isSamePath(item.href, path);
@@ -78,7 +78,7 @@ const SidebarCategory = ({
   const defaultCollapsed = isHeader || isActive ? false : item.collapsed;
 
   const [collapsed, setCollapsed] = React.useState(
-    collapsible === false ? false : defaultCollapsed
+    collapsible === false ? false : defaultCollapsed,
   );
 
   const [settled, setSettled] = React.useState(false);
@@ -104,39 +104,39 @@ const SidebarCategory = ({
   React.useEffect(() => {
     // find <a> elements with href attribute value equal to the current path
     const activeLink = document.querySelector(
-      `#win32-docs-sidebar a[href="${location.pathname}"]`
+      `#win32-docs-sidebar a[href="${location.pathname}"]`,
     );
     if (!activeLink) return;
 
     // get sidebar
-    const sidebar = document.querySelector('#win32-docs-sidebar');
+    const sidebar = document.querySelector("#win32-docs-sidebar");
     if (!sidebar) return;
 
     // scroll to active link in the sidebar
     sidebar.scrollTo({
       top: activeLink.getBoundingClientRect().top - 200,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   }, []);
 
-  const Comp = !isHeader && item.href && !isSame ? Link : 'button';
+  const Comp = !isHeader && item.href && !isSame ? Link : "button";
 
   return (
     <div
       className={clsx(
-        !line && 'pl-0',
+        !line && "pl-0",
         // SPACING
-        'mb-0.5',
-        line && 'pl-2',
-        line && 'ml-[12px]',
-        'relative'
+        "mb-0.5",
+        line && "pl-2",
+        line && "ml-[12px]",
+        "relative",
         // line && "border-l border-l-gray-200 dark:border-l-gray-600",
       )}
     >
       <Comp
         type="button"
         onClick={isHeader ? () => 0 : toggle}
-        {...(Comp === 'button'
+        {...(Comp === "button"
           ? {}
           : {
               isNavLink: true,
@@ -144,44 +144,44 @@ const SidebarCategory = ({
         href={item.href}
         className={clsx(
           // isHeader && item.label !== "Getting Started" && "mt-6",
-          isHeader && 'cursor-default',
-          'w-full',
-          'min-h-[28px]',
-          'border-0',
-          'appearance-none',
-          'focus:outline-none',
-          !isHeader && 'text-gray-400 dark:text-gray-300',
-          isHeader && 'text-gray-500 dark:text-gray-400',
-          isHeader && 'font-semibold',
-          !isHeader && 'hover:text-gray-600 dark:hover:text-gray-300',
-          'font-normal',
-          'flex items-center',
-          isHeader ? 'pt-2 pb-4' : 'py-2',
-          'pr-2',
-          isHeader && 'pl-2',
-          !isHeader && 'pl-0.5',
-          isHeader ? 'text-base' : 'text-sm',
-          'relative',
-          !isHeader && 'group',
-          'transition-colors duration-200 ease-in-out',
-          !isHeader && 'no-underline'
+          isHeader && "cursor-default",
+          "w-full",
+          "min-h-[28px]",
+          "border-0",
+          "appearance-none",
+          "focus:outline-none",
+          !isHeader && "text-gray-400 dark:text-gray-300",
+          isHeader && "text-gray-500 dark:text-gray-400",
+          isHeader && "font-semibold",
+          !isHeader && "hover:text-gray-600 dark:hover:text-gray-300",
+          "font-normal",
+          "flex items-center",
+          isHeader ? "pt-2 pb-4" : "py-2",
+          "pr-2",
+          isHeader && "pl-2",
+          !isHeader && "pl-0.5",
+          isHeader ? "text-base" : "text-sm",
+          "relative",
+          !isHeader && "group",
+          "transition-colors duration-200 ease-in-out",
+          !isHeader && "no-underline",
         )}
       >
         {!isHeader && (
           <FaChevronDown
             className={clsx(
-              'opacity-70',
+              "opacity-70",
               isActive
-                ? 'text-gray-500 dark:text-gray-400'
-                : 'text-gray-500 dark:text-gray-400',
-              'h-2 w-2 ml-1.5 mr-1.5',
-              'flex-shrink-0',
-              'z-[1]',
-              'transition-transform duration-200 ease-in-out',
-              'group-hover:text-gray-600 dark:group-hover:text-gray-300',
+                ? "text-gray-500 dark:text-gray-400"
+                : "text-gray-500 dark:text-gray-400",
+              "h-2 w-2 ml-1.5 mr-1.5",
+              "flex-shrink-0",
+              "z-[1]",
+              "transition-transform duration-200 ease-in-out",
+              "group-hover:text-gray-600 dark:group-hover:text-gray-300",
               {
-                '-rotate-90 transform': collapsed,
-              }
+                "-rotate-90 transform": collapsed,
+              },
             )}
           />
         )}
@@ -190,26 +190,26 @@ const SidebarCategory = ({
         </span>
         <div
           className={clsx(
-            'absolute',
-            'rounded-[18px]',
-            'transition-opacity',
-            'duration-200 ease-in-out',
-            'top-0',
+            "absolute",
+            "rounded-[18px]",
+            "transition-opacity",
+            "duration-200 ease-in-out",
+            "top-0",
             {
-              'group-hover:bg-gray-100 dark:group-hover:bg-gray-700':
+              "group-hover:bg-gray-100 dark:group-hover:bg-gray-700":
                 !isActive && !isSame,
-              'bg-win32-blue-2-light dark:bg-win32-blue-2 dark:bg-opacity-10':
+              "bg-win32-blue-2-light dark:bg-win32-blue-2 dark:bg-opacity-10":
                 isActive && isSame,
-              'right-0': variant === 'desktop',
-              '-left-2': variant === 'mobile',
+              "right-0": variant === "desktop",
+              "-left-2": variant === "mobile",
             },
-            'h-full'
+            "h-full",
           )}
           style={{
             width:
-              variant === 'desktop'
+              variant === "desktop"
                 ? `calc(${SIDEBAR_WIDTH}px - 32px)`
-                : 'calc(100% + 16px)',
+                : "calc(100% + 16px)",
           }}
         />
       </Comp>
@@ -218,12 +218,12 @@ const SidebarCategory = ({
       )}
       <div
         className={clsx(
-          'mt-0.5',
-          collapsed && 'max-h-0 opacity-0',
-          collapsed && 'overflow-hidden',
-          !collapsed && 'opacity-100',
-          !collapsed && !settled && 'max-h-screen',
-          !collapsed && settled && 'max-h-max'
+          "mt-0.5",
+          collapsed && "max-h-0 opacity-0",
+          collapsed && "overflow-hidden",
+          !collapsed && "opacity-100",
+          !collapsed && !settled && "max-h-screen",
+          !collapsed && settled && "max-h-max",
         )}
       >
         {
@@ -267,7 +267,7 @@ const SidebarLink = ({
 
   React.useEffect(() => {
     if (isActive && !once.current) {
-      const sidebarParent = document.querySelector('#win32-docs-sidebar');
+      const sidebarParent = document.querySelector("#win32-docs-sidebar");
       if (sidebarParent && ref.current) {
         sidebarParent.scrollTop =
           ref.current?.offsetTop -
@@ -286,69 +286,69 @@ const SidebarLink = ({
       isNavLink
       onClick={onClick}
       className={clsx(
-        'relative',
-        'min-h-[28px]',
-        !isActive && 'text-gray-600 dark:text-gray-300',
-        !isActive && 'hover:text-gray-600 dark:hover:text-gray-300',
+        "relative",
+        "min-h-[28px]",
+        !isActive && "text-gray-600 dark:text-gray-300",
+        !isActive && "hover:text-gray-600 dark:hover:text-gray-300",
         isActive &&
-          'text-win32-react-light-link dark:text-win32-react-dark-link',
-        'mb-0.5',
-        'px-4 py-2',
-        'text-sm font-normal',
-        'flex items-start justify-start',
-        dashed && !line && 'pl-0.5',
+          "text-win32-react-light-link dark:text-win32-react-dark-link",
+        "mb-0.5",
+        "px-4 py-2",
+        "text-sm font-normal",
+        "flex items-start justify-start",
+        dashed && !line && "pl-0.5",
         // SPACING
-        line && dashed && 'pl-2',
-        line && 'ml-[12px]',
-        'group',
-        'transition-colors duration-200 ease-in-out',
-        'no-underline',
-        item.className
+        line && dashed && "pl-2",
+        line && "ml-[12px]",
+        "group",
+        "transition-colors duration-200 ease-in-out",
+        "no-underline",
+        item.className,
       )}
     >
       {dashed && (
         <RxDash
           className={clsx(
-            'z-[1] h-5 w-5 flex-shrink-0',
-            'text-gray-300 dark:text-gray-600',
+            "z-[1] h-5 w-5 flex-shrink-0",
+            "text-gray-300 dark:text-gray-600",
             isActive &&
-              'text-win32-react-light-link dark:text-win32-react-dark-link text-opacity-50 dark:text-opacity-50'
+              "text-win32-react-light-link dark:text-win32-react-dark-link text-opacity-50 dark:text-opacity-50",
           )}
         />
       )}
       <div
-        className={clsx('flex items-center', isComponentLabel && 'break-all')}
+        className={clsx("flex items-center", isComponentLabel && "break-all")}
       >
         <span className="z-[1]">{item.label}</span>
       </div>
       {item.customProps?.external && (
         <FaExternalLinkAlt
-          className={clsx('z-[1]', 'text-inherit', 'w-5 h-5', 'p-1', 'ml-1')}
+          className={clsx("z-[1]", "text-inherit", "w-5 h-5", "p-1", "ml-1")}
         />
       )}
       <div
         className={clsx(
-          'absolute',
-          'rounded-[18px]',
-          'transition-opacity',
-          'duration-200 ease-in-out',
+          "absolute",
+          "rounded-[18px]",
+          "transition-opacity",
+          "duration-200 ease-in-out",
           {
-            'group-hover:bg-gray-100 dark:group-hover:bg-gray-700':
+            "group-hover:bg-gray-100 dark:group-hover:bg-gray-700":
               !isActive && !isSame,
-            'bg-win32-blue-2-light dark:bg-win32-blue-2 dark:bg-opacity-10':
+            "bg-win32-blue-2-light dark:bg-win32-blue-2 dark:bg-opacity-10":
               isActive && isSame,
-            'right-0': variant === 'desktop',
+            "right-0": variant === "desktop",
             // "-right-2": variant === "mobile",
-            '-left-2': variant === 'mobile',
+            "-left-2": variant === "mobile",
           },
-          'top-0',
-          'h-full'
+          "top-0",
+          "h-full",
         )}
         style={{
           width:
-            variant === 'desktop'
+            variant === "desktop"
               ? `calc(${SIDEBAR_WIDTH}px - 32px)`
-              : 'calc(100% + 16px)',
+              : "calc(100% + 16px)",
         }}
       />
       {line && (
@@ -372,27 +372,27 @@ const SidebarHtml = ({
   return (
     <div
       className={clsx(
-        'relative',
-        'text-xs',
-        'flex items-start justify-start',
-        'px-0.5 py-1',
+        "relative",
+        "text-xs",
+        "flex items-start justify-start",
+        "px-0.5 py-1",
         // SPACING
-        'mb-0.5',
-        line && 'pl-2',
-        line && 'ml-[12px]',
-        'group',
-        'transition-colors duration-200 ease-in-out',
-        'no-underline',
-        'text-gray-500 dark:text-gray-400',
+        "mb-0.5",
+        line && "pl-2",
+        line && "ml-[12px]",
+        "group",
+        "transition-colors duration-200 ease-in-out",
+        "no-underline",
+        "text-gray-500 dark:text-gray-400",
         "after:content-['']",
-        'after:w-[calc(100%)]',
-        'after:h-px',
-        'after:bg-gray-300',
-        'dark:after:bg-gray-600',
-        'after:absolute',
-        'after:left-0',
-        'after:top-1/2',
-        'after:-translate-y-1/2'
+        "after:w-[calc(100%)]",
+        "after:h-px",
+        "after:bg-gray-300",
+        "dark:after:bg-gray-600",
+        "after:absolute",
+        "after:left-0",
+        "after:top-1/2",
+        "after:-translate-y-1/2",
       )}
     >
       {line && (
@@ -400,11 +400,11 @@ const SidebarHtml = ({
       )}
       <span
         className={clsx(
-          'z-[1]',
-          '-ml-1',
-          'px-1',
-          'bg-gray-0',
-          'dark:bg-gray-900'
+          "z-[1]",
+          "-ml-1",
+          "px-1",
+          "bg-gray-0",
+          "dark:bg-gray-900",
         )}
         // biome-ignore lint/security/noDangerouslySetInnerHtml: explicitly disabled
         dangerouslySetInnerHTML={{ __html: item.value }}
@@ -434,13 +434,13 @@ const renderItems = ({
   onLinkClick,
   deferred,
 }: RenderItemConfig) => {
-  const hasCategory = items?.some((item) => item.type === 'category');
+  const hasCategory = items?.some((item) => item.type === "category");
   const isDashed = !root && hasCategory;
 
   return (
     items?.map((item, index) => {
       switch (item.type) {
-        case 'category':
+        case "category":
           return (
             <SidebarCategory
               key={`${item.label}:${item.href}:${item.type}`}
@@ -452,7 +452,7 @@ const renderItems = ({
               deferred={deferred}
             />
           );
-        case 'html':
+        case "html":
           return (
             <SidebarHtml
               key={`${item.type}:${item.value}`}
@@ -462,7 +462,7 @@ const renderItems = ({
               variant={variant}
             />
           );
-        case 'link':
+        case "link":
           return (
             <SidebarLink
               key={`${item.label}:${item.href}:${item.type}`}
@@ -488,11 +488,11 @@ export const DocSidebar = () => {
     <div
       id="win32-docs-sidebar"
       className={clsx(
-        'hidden lg:block',
-        'sticky',
-        'left-0',
-        'overflow-auto',
-        'w-full'
+        "hidden lg:block",
+        "sticky",
+        "left-0",
+        "overflow-auto",
+        "w-full",
       )}
       style={{
         maxWidth: `${SIDEBAR_WIDTH}px`,
@@ -502,17 +502,17 @@ export const DocSidebar = () => {
     >
       <div
         className={clsx(
-          'px-4',
-          'py-4',
-          'border-r border-r-gray-300 dark:border-r-gray-700',
-          'flex flex-col gap-6'
+          "px-4",
+          "py-4",
+          "border-r border-r-gray-300 dark:border-r-gray-700",
+          "flex flex-col gap-6",
         )}
       >
         {renderItems({
           items: sidebar?.items,
           path: pathname,
           root: true,
-          variant: 'desktop',
+          variant: "desktop",
         })}
       </div>
     </div>

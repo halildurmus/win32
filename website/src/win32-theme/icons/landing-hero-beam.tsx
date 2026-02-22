@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export const LandingHeroBeamSvg = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
@@ -29,7 +29,7 @@ export const LandingHeroBeamSvg = (props: React.SVGProps<SVGSVGElement>) => (
 );
 
 export const LandingHeroBeamGlowSvg = (
-  props: React.SVGProps<SVGSVGElement>
+  props: React.SVGProps<SVGSVGElement>,
 ) => (
   <svg
     width={128}

@@ -1,11 +1,11 @@
 import {
   listTagsByLetters,
   type TagLetterEntry,
-} from '@docusaurus/theme-common';
-import Heading from '@theme/Heading';
-import Tag from '@theme/Tag';
-import type { Props } from '@theme/TagsListByLetter';
-import styles from './styles.module.css';
+} from "@docusaurus/theme-common";
+import Heading from "@theme/Heading";
+import Tag from "@theme/Tag";
+import type { Props } from "@theme/TagsListByLetter";
+import styles from "./styles.module.css";
 
 function TagLetterEntryItem({ letterEntry }: { letterEntry: TagLetterEntry }) {
   return (

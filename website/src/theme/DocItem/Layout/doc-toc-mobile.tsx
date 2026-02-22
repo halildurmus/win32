@@ -3,10 +3,10 @@ import {
   DisclosureButton,
   DisclosurePanel,
   Transition,
-} from '@headlessui/react';
-import clsx from 'clsx';
-import { TbTriangleInvertedFilled } from 'react-icons/tb';
-import { useTOC } from './doc-toc';
+} from "@headlessui/react";
+import clsx from "clsx";
+import { TbTriangleInvertedFilled } from "react-icons/tb";
+import { useTOC } from "./doc-toc";
 
 export const DocTOCMobile = () => {
   const { hasTOC, activeId, toc } = useTOC();
@@ -15,36 +15,36 @@ export const DocTOCMobile = () => {
   return (
     <div
       className={clsx(
-        'xl:hidden block w-full mb-10',
-        'max-w-screen-content-sm'
+        "xl:hidden block w-full mb-10",
+        "max-w-screen-content-sm",
       )}
     >
       <Disclosure>
         {({ open }) => (
           <div
             className={clsx(
-              'rounded-lg',
-              'border gray-300 dark:border-gray-700',
-              'bg-gray-100 dark:bg-gray-700'
+              "rounded-lg",
+              "border gray-300 dark:border-gray-700",
+              "bg-gray-100 dark:bg-gray-700",
             )}
           >
             <DisclosureButton
-              className={clsx('w-full', 'flex items-center gap-2', 'px-2 py-2')}
+              className={clsx("w-full", "flex items-center gap-2", "px-2 py-2")}
             >
               <TbTriangleInvertedFilled
                 className={clsx(
-                  'h-2 w-2 ml-1 mr-1',
-                  'text-gray-500',
-                  'transition-transform duration-200 ease-in-out',
+                  "h-2 w-2 ml-1 mr-1",
+                  "text-gray-500",
+                  "transition-transform duration-200 ease-in-out",
                   {
-                    'transform -rotate-90': !open,
-                  }
+                    "transform -rotate-90": !open,
+                  },
                 )}
               />
               <span
                 className={clsx(
-                  'text-base',
-                  'text-gray-800 dark:text-gray-100'
+                  "text-base",
+                  "text-gray-800 dark:text-gray-100",
                 )}
               >
                 On this page
@@ -68,29 +68,29 @@ export const DocTOCMobile = () => {
                         key={id}
                         href={`#${id}`}
                         className={clsx(
-                          'win32-toc-item',
-                          'mb-0.5',
-                          level === 2 && 'pl-4',
-                          level === 3 && 'pl-6',
-                          level === 4 && 'pl-8',
-                          'px-4 py-2',
-                          'rounded-[18px]',
-                          'transition-colors duration-200 ease-in-out',
-                          'block',
-                          'text-sm',
-                          'leading-5',
-                          'no-underline hover:no-underline',
+                          "win32-toc-item",
+                          "mb-0.5",
+                          level === 2 && "pl-4",
+                          level === 3 && "pl-6",
+                          level === 4 && "pl-8",
+                          "px-4 py-2",
+                          "rounded-[18px]",
+                          "transition-colors duration-200 ease-in-out",
+                          "block",
+                          "text-sm",
+                          "leading-5",
+                          "no-underline hover:no-underline",
                           {
-                            'text-gray-800 dark:text-gray-300': !isActive,
-                            'text-win32-react-light-link dark:text-win32-react-dark-link':
+                            "text-gray-800 dark:text-gray-300": !isActive,
+                            "text-win32-react-light-link dark:text-win32-react-dark-link":
                               isActive,
-                            'bg-win32-blue-2-light dark:bg-win32-blue dark:bg-opacity-10':
+                            "bg-win32-blue-2-light dark:bg-win32-blue dark:bg-opacity-10":
                               isActive,
-                            'hover:bg-gray-100 dark:hover:bg-gray-700':
+                            "hover:bg-gray-100 dark:hover:bg-gray-700":
                               !isActive,
-                            'hover:text-gray-800 dark:hover:text-gray-300':
+                            "hover:text-gray-800 dark:hover:text-gray-300":
                               !isActive,
-                          }
+                          },
                         )}
                         dangerouslySetInnerHTML={{
                           __html: value,

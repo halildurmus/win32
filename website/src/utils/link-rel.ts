@@ -1,5 +1,5 @@
-import isInternalUrl from '@docusaurus/isInternalUrl';
-import { githubRepoUrl } from '../config';
+import isInternalUrl from "@docusaurus/isInternalUrl";
+import { githubRepoUrl } from "../config";
 
 /**
  * This function will generate rel attribute for links.
@@ -8,12 +8,12 @@ import { githubRepoUrl } from '../config';
 export const getLinkRel = (URL?: string): string => {
   const isInternalURL = isInternalUrl(URL);
 
-  let rel = 'noopener noreferrer nofollow';
+  let rel = "noopener noreferrer nofollow";
   if (URL?.includes(githubRepoUrl)) {
-    rel = 'noopener';
+    rel = "noopener";
   }
-  if (isInternalURL || URL?.includes('win32.pub')) {
-    rel = 'noopener dofollow';
+  if (isInternalURL || URL?.includes("win32.pub")) {
+    rel = "noopener dofollow";
   }
 
   return rel;

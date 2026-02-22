@@ -1,36 +1,36 @@
-import Link from '@docusaurus/Link';
-import clsx from 'clsx';
-import React from 'react';
-import { BadgeTooltip } from '../badge-tooltip';
+import Link from "@docusaurus/Link";
+import clsx from "clsx";
+import React from "react";
+import { BadgeTooltip } from "../badge-tooltip";
 
 type Props = {
   id: string;
   icon: React.ReactNode;
-  color: 'orange' | 'green' | 'purple';
+  color: "orange" | "green" | "purple";
   text?: string;
   description: React.ReactNode;
 };
 
 export const InfoBadge = ({ id, icon, color, text, description }: Props) => {
   const classes = clsx(
-    color === 'orange' &&
+    color === "orange" &&
       clsx(
-        'bg-win32-react-light-orange-bg dark:bg-win32-react-dark-orange',
-        'dark:bg-opacity-[0.15]',
-        'text-win32-react-light-orange dark:text-win32-react-dark-orange'
+        "bg-win32-react-light-orange-bg dark:bg-win32-react-dark-orange",
+        "dark:bg-opacity-[0.15]",
+        "text-win32-react-light-orange dark:text-win32-react-dark-orange",
       ),
-    color === 'green' &&
+    color === "green" &&
       clsx(
-        'bg-win32-react-light-green-bg dark:bg-win32-react-dark-green',
-        'dark:bg-opacity-[0.15]',
-        'text-win32-react-light-green dark:text-win32-react-dark-green'
+        "bg-win32-react-light-green-bg dark:bg-win32-react-dark-green",
+        "dark:bg-opacity-[0.15]",
+        "text-win32-react-light-green dark:text-win32-react-dark-green",
       ),
-    color === 'purple' &&
+    color === "purple" &&
       clsx(
-        'bg-win32-react-light-purple-bg dark:bg-win32-react-dark-purple',
-        'dark:bg-opacity-[0.15]',
-        'text-win32-react-light-purple dark:text-win32-react-dark-purple'
-      )
+        "bg-win32-react-light-purple-bg dark:bg-win32-react-dark-purple",
+        "dark:bg-opacity-[0.15]",
+        "text-win32-react-light-purple dark:text-win32-react-dark-purple",
+      ),
   );
 
   return (
@@ -38,18 +38,18 @@ export const InfoBadge = ({ id, icon, color, text, description }: Props) => {
       <Link
         to={`/docs/${id}`}
         className={clsx(
-          '-mt-px',
+          "-mt-px",
           // "mr-1.5",
-          'rounded-[10px]',
-          'inline-flex',
-          'items-center',
-          'justify-center',
-          'text-sm',
-          'no-underline',
-          'gap-1.5',
-          '[&>svg]:hover:scale-110',
-          '[&>svg]:transition-transform [&>svg]:duration-200 [&>svg]:ease-in-out',
-          classes
+          "rounded-[10px]",
+          "inline-flex",
+          "items-center",
+          "justify-center",
+          "text-sm",
+          "no-underline",
+          "gap-1.5",
+          "[&>svg]:hover:scale-110",
+          "[&>svg]:transition-transform [&>svg]:duration-200 [&>svg]:ease-in-out",
+          classes,
         )}
       >
         {icon}

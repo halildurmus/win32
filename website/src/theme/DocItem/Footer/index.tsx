@@ -1,15 +1,15 @@
-import { useDoc } from '@docusaurus/plugin-content-docs/client';
-import { ThemeClassNames } from '@docusaurus/theme-common';
-import EditMetaRow from '@theme/EditMetaRow';
-import TagsListInline from '@theme/TagsListInline';
-import clsx from 'clsx';
+import { useDoc } from "@docusaurus/plugin-content-docs/client";
+import { ThemeClassNames } from "@docusaurus/theme-common";
+import EditMetaRow from "@theme/EditMetaRow";
+import TagsListInline from "@theme/TagsListInline";
+import clsx from "clsx";
 
 function TagsRow(props) {
   return (
     <div
       className={clsx(
         ThemeClassNames.docs.docFooterTagsRow,
-        'row margin-bottom--sm'
+        "row margin-bottom--sm",
       )}
     >
       <div className="col">
@@ -29,13 +29,13 @@ export default function DocFooter() {
   if (!canDisplayFooter) return null;
 
   return (
-    <footer className={clsx('flex flex-col gap-6 margin-vert--lg')}>
+    <footer className={clsx("flex flex-col gap-6 margin-vert--lg")}>
       {canDisplayTagsRow && <TagsRow tags={tags} />}
       {canDisplayEditMetaRow && (
         <EditMetaRow
           className={clsx(
-            'flex items-start justify-between content-md:items-center',
-            'flex-col content-md:flex-row gap-2'
+            "flex items-start justify-between content-md:items-center",
+            "flex-col content-md:flex-row gap-2",
           )}
           editUrl={editUrl}
           lastUpdatedAt={lastUpdatedAt}

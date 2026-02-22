@@ -6,7 +6,7 @@ import {
   useEffect,
   useMemo,
   useState,
-} from 'react';
+} from "react";
 
 interface ICommunityStatsContext {
   githubStarCount: number;
@@ -35,14 +35,14 @@ export const CommunityStatsProvider: FC<Props> = ({ children }) => {
       setLoading(true);
 
       const response = await fetch(
-        'https://api.github.com/repos/halildurmus/win32',
+        "https://api.github.com/repos/halildurmus/win32",
         {
-          method: 'GET',
+          method: "GET",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           signal,
-        }
+        },
       );
 
       const json = await response.json();
@@ -84,7 +84,7 @@ export const useCommunityStatsContext = () => {
   const context = useContext(CommunityStatsContext);
   if (context === undefined) {
     throw new Error(
-      'useCommunityStatsContext must be used within a GitHubProvider'
+      "useCommunityStatsContext must be used within a GitHubProvider",
     );
   }
   return context;
@@ -92,12 +92,12 @@ export const useCommunityStatsContext = () => {
 
 export const convertStatToText = (num: number) => {
   const hasIntlSupport =
-    typeof Intl === 'object' && Intl && typeof Intl.NumberFormat === 'function';
+    typeof Intl === "object" && Intl && typeof Intl.NumberFormat === "function";
   if (!hasIntlSupport) return `${(num / 1000).toFixed(1)}k`;
 
-  const formatter = new Intl.NumberFormat('en-US', {
-    notation: 'compact',
-    compactDisplay: 'short',
+  const formatter = new Intl.NumberFormat("en-US", {
+    notation: "compact",
+    compactDisplay: "short",
     maximumSignificantDigits: 3,
   });
 

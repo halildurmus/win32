@@ -1,13 +1,13 @@
 import {
   PageMetadata,
   useCurrentSidebarCategory,
-} from '@docusaurus/theme-common';
-import { useDocsVersion } from '@docusaurus/plugin-content-docs/client';
-import useBaseUrl from '@docusaurus/useBaseUrl';
-import { DocBreadcrumbs } from '@site/src/win32-theme/doc-breadcrumbs';
-import DocCardList from '@theme/DocCardList';
-import DocPaginator from '@theme/DocPaginator';
-import clsx from 'clsx';
+} from "@docusaurus/theme-common";
+import { useDocsVersion } from "@docusaurus/plugin-content-docs/client";
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import { DocBreadcrumbs } from "@site/src/win32-theme/doc-breadcrumbs";
+import DocCardList from "@theme/DocCardList";
+import DocPaginator from "@theme/DocPaginator";
+import clsx from "clsx";
 
 function DocCategoryGeneratedIndexPageMetadata({ categoryGeneratedIndex }) {
   return (
@@ -27,14 +27,14 @@ function DocCategoryGeneratedIndexPageContent({ categoryGeneratedIndex }) {
     <>
       <div
         className={clsx(
-          'flex flex-1 flex-col',
-          'items-center justify-start',
-          'px-4 sm:px-0 py-4 sm:py-14',
-          'w-full'
+          "flex flex-1 flex-col",
+          "items-center justify-start",
+          "px-4 sm:px-0 py-4 sm:py-14",
+          "w-full",
         )}
       >
-        <div className={clsx('max-w-screen-content w-full')}>
-          <div className={clsx('flex flex-col', 'mb-8')}>
+        <div className={clsx("max-w-screen-content w-full")}>
+          <div className={clsx("flex flex-col", "mb-8")}>
             <DocBreadcrumbs />
           </div>
           <div className="win32-prose mb-16">
@@ -52,16 +52,16 @@ function DocCategoryGeneratedIndexPageContent({ categoryGeneratedIndex }) {
             </header>
             <article
               className={clsx(
-                'grid grid-cols-1 sm:grid-cols-2',
-                'gap-2 sm:gap-4 2xl:gap-8',
-                'not-prose'
+                "grid grid-cols-1 sm:grid-cols-2",
+                "gap-2 sm:gap-4 2xl:gap-8",
+                "not-prose",
               )}
             >
               <DocCardList items={category.items} />
             </article>
           </div>
         </div>
-        <div className={clsx('max-w-screen-content', 'w-full')}>
+        <div className={clsx("max-w-screen-content", "w-full")}>
           <DocPaginator
             previous={categoryGeneratedIndex.navigation.previous}
             next={categoryGeneratedIndex.navigation.next}
@@ -70,17 +70,17 @@ function DocCategoryGeneratedIndexPageContent({ categoryGeneratedIndex }) {
       </div>
       <div
         className={clsx(
-          'hidden xl:block',
-          'w-full',
-          'sticky right-0 top-[65px]',
-          'max-w-[280px]',
-          'overflow-auto',
-          'h-[calc(100vh-65px)]',
-          'pl-3',
-          'pr-3',
-          'py-12',
-          'border-l dark:border-l-gray-700 border-l-gray-100',
-          'invisible'
+          "hidden xl:block",
+          "w-full",
+          "sticky right-0 top-[65px]",
+          "max-w-[280px]",
+          "overflow-auto",
+          "h-[calc(100vh-65px)]",
+          "pl-3",
+          "pr-3",
+          "py-12",
+          "border-l dark:border-l-gray-700 border-l-gray-100",
+          "invisible",
         )}
       />
     </>

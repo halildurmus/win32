@@ -1,4 +1,4 @@
-import { ShowcaseWrapper } from '@site/src/win32-theme/icons/landing-showcase-wrapper';
+import { ShowcaseWrapper } from "@site/src/win32-theme/icons/landing-showcase-wrapper";
 
 const ShowcaseTaskManager = ({ className }: { className?: string }) => (
   <ShowcaseWrapper
@@ -41,28 +41,28 @@ export type ShowcaseItem = {
 
 export const showcaseItems: ShowcaseItem[] = [
   {
-    title: 'Task Manager App',
-    link: 'https://github.com/halildurmus/win32/tree/main/examples/task_manager',
+    title: "Task Manager App",
+    link: "https://github.com/halildurmus/win32/tree/main/examples/task_manager",
     showcase: ShowcaseTaskManager,
     isDark: true,
-    ctaText: 'Source code',
+    ctaText: "Source code",
   },
   {
-    title: 'DartNote App',
-    link: 'https://github.com/halildurmus/win32/tree/main/examples/dartnote',
+    title: "DartNote App",
+    link: "https://github.com/halildurmus/win32/tree/main/examples/dartnote",
     showcase: ShowcaseDartNote,
-    ctaText: 'Source code',
+    ctaText: "Source code",
   },
   {
-    title: 'Snake Game',
-    link: 'https://github.com/halildurmus/win32/tree/main/examples/snake',
+    title: "Snake Game",
+    link: "https://github.com/halildurmus/win32/tree/main/examples/snake",
     showcase: ShowcaseSnake,
-    ctaText: 'Source code',
+    ctaText: "Source code",
   },
   {
-    title: 'Tetris Game',
-    link: 'https://github.com/halildurmus/win32/tree/main/examples/tetris',
+    title: "Tetris Game",
+    link: "https://github.com/halildurmus/win32/tree/main/examples/tetris",
     showcase: ShowcaseTetris,
-    ctaText: 'Source code',
+    ctaText: "Source code",
   },
 ];

@@ -1,5 +1,5 @@
-import Link from '@docusaurus/Link';
-import Translate, { translate } from '@docusaurus/Translate';
+import Link from "@docusaurus/Link";
+import Translate, { translate } from "@docusaurus/Translate";
 
 function ReadMoreLabel() {
   return (
@@ -20,12 +20,12 @@ export default function BlogPostItemFooterReadMoreLink(props) {
     <Link
       aria-label={translate(
         {
-          message: 'Read more about {title}',
-          id: 'theme.blog.post.readMoreLabel',
+          message: "Read more about {title}",
+          id: "theme.blog.post.readMoreLabel",
           description:
-            'The ARIA label for the link to full blog posts from excerpts',
+            "The ARIA label for the link to full blog posts from excerpts",
         },
-        { title: blogPostTitle }
+        { title: blogPostTitle },
       )}
       {...linkProps}
       to={linkProps.to}

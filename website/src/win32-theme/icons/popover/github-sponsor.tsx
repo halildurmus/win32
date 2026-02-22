@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export const GitHubSponsorIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg

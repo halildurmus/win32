@@ -1,5 +1,5 @@
-import { Admonition as Win32Admonition } from '@site/src/win32-theme/common-admonition';
-import React from 'react';
+import { Admonition as Win32Admonition } from "@site/src/win32-theme/common-admonition";
+import React from "react";
 
 // Workaround because it's difficult in MDX v1 to provide a MDX title as props
 // See https://github.com/facebook/docusaurus/pull/7152#issuecomment-1145779682
@@ -7,7 +7,8 @@ function extractMDXAdmonitionTitle(children) {
   const items = React.Children.toArray(children);
   const mdxAdmonitionTitle = items.find(
     (item) =>
-      React.isValidElement(item) && item.props?.mdxType === 'mdxAdmonitionTitle'
+      React.isValidElement(item) &&
+      item.props?.mdxType === "mdxAdmonitionTitle",
   );
   const rest = <>{items.filter((item) => item !== mdxAdmonitionTitle)}</>;
   return {
@@ -18,7 +19,7 @@ function extractMDXAdmonitionTitle(children) {
 
 function processAdmonitionProps(props) {
   const { mdxAdmonitionTitle, rest } = extractMDXAdmonitionTitle(
-    props.children
+    props.children,
   );
   return {
     ...props,

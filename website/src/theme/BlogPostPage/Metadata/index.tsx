@@ -1,5 +1,5 @@
-import { useBlogPost } from '@docusaurus/plugin-content-blog/client';
-import { PageMetadata } from '@docusaurus/theme-common';
+import { useBlogPost } from "@docusaurus/plugin-content-blog/client";
+import { PageMetadata } from "@docusaurus/theme-common";
 
 export default function BlogPostPageMetadata() {
   const { assets, metadata } = useBlogPost();
@@ -22,13 +22,13 @@ export default function BlogPostPageMetadata() {
           content={authors
             .map((author) => author.url)
             .filter(Boolean)
-            .join(',')}
+            .join(",")}
         />
       )}
       {tags.length > 0 && (
         <meta
           property="article:tag"
-          content={tags.map((tag) => tag.label).join(',')}
+          content={tags.map((tag) => tag.label).join(",")}
         />
       )}
     </PageMetadata>

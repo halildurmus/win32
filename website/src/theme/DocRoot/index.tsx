@@ -1,15 +1,15 @@
 import {
   DocsSidebarProvider,
   useDocRootMetadata,
-} from '@docusaurus/plugin-content-docs/client';
+} from "@docusaurus/plugin-content-docs/client";
 import {
   HtmlClassNameProvider,
   ThemeClassNames,
-} from '@docusaurus/theme-common';
-import type { Props } from '@theme/DocRoot';
-import DocRootLayout from '@theme/DocRoot/Layout';
-import NotFoundContent from '@theme/NotFound/Content';
-import clsx from 'clsx';
+} from "@docusaurus/theme-common";
+import type { Props } from "@theme/DocRoot";
+import DocRootLayout from "@theme/DocRoot/Layout";
+import NotFoundContent from "@theme/NotFound/Content";
+import clsx from "clsx";
 
 export default function DocRoot(props: Props): JSX.Element {
   const currentDocRouteMetadata = useDocRootMetadata(props);
@@ -22,7 +22,7 @@ export default function DocRoot(props: Props): JSX.Element {
     <HtmlClassNameProvider
       className={clsx(
         ThemeClassNames.wrapper.docsPages,
-        ThemeClassNames.page.docsDocPage
+        ThemeClassNames.page.docsDocPage,
       )}
     >
       <DocsSidebarProvider name={sidebarName} items={sidebarItems}>

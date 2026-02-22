@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export const FlutterIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg

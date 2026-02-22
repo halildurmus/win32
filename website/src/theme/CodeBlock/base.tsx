@@ -1,7 +1,7 @@
-import useIsBrowser from '@docusaurus/useIsBrowser';
-import { CodeBlockString } from '@site/src/win32-theme/common-codeblock-string';
-import ElementContent from '@theme/CodeBlock/Content/Element';
-import React, { isValidElement } from 'react';
+import useIsBrowser from "@docusaurus/useIsBrowser";
+import { CodeBlockString } from "@site/src/win32-theme/common-codeblock-string";
+import ElementContent from "@theme/CodeBlock/Content/Element";
+import React, { isValidElement } from "react";
 
 /**
  * Best attempt to make the children a plain string so it is copyable. If there
@@ -14,7 +14,7 @@ function maybeStringifyChildren(children) {
     return children;
   }
   // The children is now guaranteed to be one/more plain strings
-  return Array.isArray(children) ? children.join('') : children;
+  return Array.isArray(children) ? children.join("") : children;
 }
 
 export const CodeBlock = ({ children: rawChildren, ...props }) => {
@@ -25,7 +25,7 @@ export const CodeBlock = ({ children: rawChildren, ...props }) => {
   const isBrowser = useIsBrowser();
   const children = maybeStringifyChildren(rawChildren);
   const CodeBlockComp =
-    typeof children === 'string' ? CodeBlockString : ElementContent;
+    typeof children === "string" ? CodeBlockString : ElementContent;
   return (
     <CodeBlockComp key={String(isBrowser)} {...props}>
       {children}

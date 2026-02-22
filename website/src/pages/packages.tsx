@@ -1,14 +1,14 @@
-import Link from '@docusaurus/Link';
+import Link from "@docusaurus/Link";
 import {
   Package,
   communityPackages,
   packages,
-} from '@site/src/assets/packages';
-import { CommonFooter } from '@site/src/win32-theme/common-footer';
-import { CommonHeader } from '@site/src/win32-theme/common-header';
-import { CommonLayout } from '@site/src/win32-theme/common-layout';
-import clsx from 'clsx';
-import React from 'react';
+} from "@site/src/assets/packages";
+import { CommonFooter } from "@site/src/win32-theme/common-footer";
+import { CommonHeader } from "@site/src/win32-theme/common-header";
+import { CommonLayout } from "@site/src/win32-theme/common-layout";
+import clsx from "clsx";
+import React from "react";
 
 const heartSvg = (
   <svg
@@ -44,29 +44,29 @@ const Card: React.FC<LargeCardProps> = ({
 }) => {
   return (
     <div
-      onClick={() => window.open(url, '_blank')}
+      onClick={() => window.open(url, "_blank")}
       className={clsx(
-        'flex gap-4 sm:gap-8 p-4 sm:p-8',
-        'rounded-2xl',
-        'border border-gray-200 dark:border-gray-700',
-        'hover:bg-gray-200 hover:dark:bg-gray-700',
-        'cursor-pointer no-underline'
+        "flex gap-4 sm:gap-8 p-4 sm:p-8",
+        "rounded-2xl",
+        "border border-gray-200 dark:border-gray-700",
+        "hover:bg-gray-200 hover:dark:bg-gray-700",
+        "cursor-pointer no-underline",
       )}
     >
       <div className={clsx()}>
-        <Icon className={clsx('w-6 h-6 sm:w-12 sm:h-12')} />
+        <Icon className={clsx("w-6 h-6 sm:w-12 sm:h-12")} />
       </div>
 
-      <div className={clsx('flex flex-col gap-2')}>
+      <div className={clsx("flex flex-col gap-2")}>
         <div
-          className={clsx('text-gray-700 dark:text-gray-200', 'font-semibold')}
+          className={clsx("text-gray-700 dark:text-gray-200", "font-semibold")}
         >
           {title}
         </div>
         <div
           className={clsx(
-            'text-gray-600 dark:text-gray-300',
-            'text-xs sm:text-sm'
+            "text-gray-600 dark:text-gray-300",
+            "text-xs sm:text-sm",
           )}
           dangerouslySetInnerHTML={{ __html: description }}
         />
@@ -80,19 +80,19 @@ const Card: React.FC<LargeCardProps> = ({
                   target="_blank"
                   rel="noreferrer"
                   className={clsx(
-                    'flex items-center gap-1',
-                    'text-xs',
-                    'mt-2 sm:mt-4',
-                    'no-underline'
+                    "flex items-center gap-1",
+                    "text-xs",
+                    "mt-2 sm:mt-4",
+                    "no-underline",
                   )}
                 >
                   {heartSvg}
-                  <span className={clsx('text-gray-500')}>by</span>
+                  <span className={clsx("text-gray-500")}>by</span>
                   <span
                     className={clsx(
-                      'text-gray-900 dark:text-gray-0',
-                      'hover:text-win32-blue dark:hover:text-win32-cyan-alt',
-                      'underline'
+                      "text-gray-900 dark:text-gray-0",
+                      "hover:text-win32-blue dark:hover:text-win32-cyan-alt",
+                      "underline",
                     )}
                   >
                     {contributor.name}
@@ -114,10 +114,10 @@ const Title = ({
   return (
     <div
       className={clsx(
-        'font-semibold',
-        'text-gray-700 dark:text-gray-200',
-        'text-base sm:text-2xl',
-        className
+        "font-semibold",
+        "text-gray-700 dark:text-gray-200",
+        "text-base sm:text-2xl",
+        className,
       )}
     >
       {children}
@@ -128,7 +128,7 @@ const Title = ({
 const PackageList = ({ data }: { data: Package[] }) => {
   return (
     <div
-      className={clsx('grid', 'grid-cols-1 lg:grid-cols-2', 'gap-8', 'mt-8')}
+      className={clsx("grid", "grid-cols-1 lg:grid-cols-2", "gap-8", "mt-8")}
     >
       {data.map((item) => (
         <Card
@@ -147,25 +147,25 @@ const PackageList = ({ data }: { data: Package[] }) => {
 export default function Packages(): JSX.Element {
   return (
     <CommonLayout title="Packages">
-      <div className={clsx('win32-prose, pb-16')}>
+      <div className={clsx("win32-prose, pb-16")}>
         <CommonHeader />
-        <div className={clsx('max-w-[944px]', 'mx-auto', 'pt-16 px-4 sm:px-6')}>
-          <div className={clsx('max-w-[624px]')}>
+        <div className={clsx("max-w-[944px]", "mx-auto", "pt-16 px-4 sm:px-6")}>
+          <div className={clsx("max-w-[624px]")}>
             <div
               className={clsx(
-                'font-semibold',
-                'text-gray-700 dark:text-gray-200',
-                'text-xl sm:text-[40px] sm:leading-[56px]'
+                "font-semibold",
+                "text-gray-700 dark:text-gray-200",
+                "text-xl sm:text-[40px] sm:leading-[56px]",
               )}
             >
               Supercharge your apps.
             </div>
             <div
               className={clsx(
-                'font-semibold',
-                'text-gray-700 dark:text-gray-300',
-                'text-xs sm:text-base',
-                'mt-4 sm:mt-8'
+                "font-semibold",
+                "text-gray-700 dark:text-gray-300",
+                "text-xs sm:text-base",
+                "mt-4 sm:mt-8",
               )}
             >
               Enhance your Flutter and Dart apps with top-quality packages from
@@ -175,8 +175,8 @@ export default function Packages(): JSX.Element {
 
           <div
             className={clsx(
-              'my-10',
-              'border-b border-gray-200 dark:border-gray-700'
+              "my-10",
+              "border-b border-gray-200 dark:border-gray-700",
             )}
           />
 

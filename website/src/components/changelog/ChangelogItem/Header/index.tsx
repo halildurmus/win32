@@ -1,19 +1,19 @@
-import Link from '@docusaurus/Link';
-import { useBlogPost } from '@docusaurus/plugin-content-blog/client';
-import ChangelogItemHeaderAuthors from '@site/src/components/changelog/ChangelogItem/Header/Authors';
-import BlogPostItemHeaderInfo from '@theme/BlogPostItem/Header/Info';
-import clsx from 'clsx';
+import Link from "@docusaurus/Link";
+import { useBlogPost } from "@docusaurus/plugin-content-blog/client";
+import ChangelogItemHeaderAuthors from "@site/src/components/changelog/ChangelogItem/Header/Authors";
+import BlogPostItemHeaderInfo from "@theme/BlogPostItem/Header/Info";
+import clsx from "clsx";
 
 // Reduce changelog title size, but only on list view
 function ChangelogTitle() {
   const { metadata, isBlogPostPage } = useBlogPost();
   const { permalink, title } = metadata;
-  const TitleHeading = isBlogPostPage ? 'h1' : 'h2';
+  const TitleHeading = isBlogPostPage ? "h1" : "h2";
   return (
     <TitleHeading
       className={clsx(
-        'text-2xl md:text-4xl',
-        !isBlogPostPage && 'mb-2 md:mb-4'
+        "text-2xl md:text-4xl",
+        !isBlogPostPage && "mb-2 md:mb-4",
       )}
       itemProp="headline"
     >
@@ -23,10 +23,10 @@ function ChangelogTitle() {
         <Link
           to={permalink}
           className={clsx(
-            'text-xl md:text-3xl font-semibold',
-            'text-win32-react-8 dark:text-win32-react-1',
-            'hover:no-underline',
-            'hover:text-gray-800 dark:hover:text-gray-200'
+            "text-xl md:text-3xl font-semibold",
+            "text-win32-react-8 dark:text-win32-react-1",
+            "hover:no-underline",
+            "hover:text-gray-800 dark:hover:text-gray-200",
           )}
           itemProp="url"
         >

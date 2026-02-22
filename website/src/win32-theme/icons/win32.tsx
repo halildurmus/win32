@@ -1,5 +1,5 @@
-import clsx from 'clsx';
-import React from 'react';
+import clsx from "clsx";
+import React from "react";
 
 export const Win32Logotype = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
@@ -9,7 +9,7 @@ export const Win32Logotype = (props: React.SVGProps<SVGSVGElement>) => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     {...props}
-    className={clsx(props.className, 'text-[#14141F] dark:text-white')}
+    className={clsx(props.className, "text-[#14141F] dark:text-white")}
   >
     <path
       d="M141.36 43.0896L153.642 43.0488C155.856 53.3196 159.09 63.4314 161.382 74.0664C164.22 65.871 167.658 51.8376 170.1 43.1112L181.44 43.0806C184.182 53.271 187.638 63.801 190.02 74.0196C192.576 63.6822 195.258 53.3766 198.066 43.1046L209.934 43.0722C209.226 45.753 208.35 48.5082 207.546 51.1704C205.83 57.354 203.496 64.023 201.72 70.3254C200.646 74.1366 198.312 82.452 196.914 85.8384L184.056 85.842C181.176 76.3974 177.816 65.901 175.5 56.3988C174.264 63.6582 169.644 78.2418 167.466 85.8324L153.972 85.8456C150.852 72.5448 145.062 56.7594 141.36 43.0896Z"

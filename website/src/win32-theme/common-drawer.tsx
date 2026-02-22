@@ -1,30 +1,30 @@
-import BrowserOnly from '@docusaurus/BrowserOnly';
-import { Transition } from '@headlessui/react';
-import clsx from 'clsx';
-import { useScroll } from 'framer-motion';
-import React, { FC, PropsWithChildren } from 'react';
-import { createPortal } from 'react-dom';
-import { MdClose } from 'react-icons/md';
-import { useKeyDown } from '../hooks/use-keydown';
-import { useOutsideClick } from '../hooks/use-outside-click';
+import BrowserOnly from "@docusaurus/BrowserOnly";
+import { Transition } from "@headlessui/react";
+import clsx from "clsx";
+import { useScroll } from "framer-motion";
+import React, { FC, PropsWithChildren } from "react";
+import { createPortal } from "react-dom";
+import { MdClose } from "react-icons/md";
+import { useKeyDown } from "../hooks/use-keydown";
+import { useOutsideClick } from "../hooks/use-outside-click";
 
 type Props = {
   title?: string;
   onClose: () => void;
   open: boolean;
-  variant: 'examples' | 'blog';
+  variant: "examples" | "blog";
 };
 
 export const CommonDrawer: FC<PropsWithChildren<Props>> = (props) => {
   React.useEffect(() => {
     if (props.open) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = "auto";
     }
 
     return () => {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = "auto";
     };
   }, [props.open]);
 
@@ -52,7 +52,7 @@ const DrawerComponent: FC<PropsWithChildren<Props>> = ({
     event.stopPropagation();
     onClose();
   });
-  useKeyDown(drawerRef, ['Escape'], () => {
+  useKeyDown(drawerRef, ["Escape"], () => {
     onClose();
   });
 
@@ -75,26 +75,26 @@ const DrawerComponent: FC<PropsWithChildren<Props>> = ({
         top: topOffset,
       }}
       className={clsx(
-        'fixed',
-        'right-0 bottom-0',
-        'z-modal',
-        !open && 'pointer-events-none'
+        "fixed",
+        "right-0 bottom-0",
+        "z-modal",
+        !open && "pointer-events-none",
       )}
     >
       <Transition
         ref={drawerRef}
         as="div"
         className={clsx(
-          'z-modal',
-          'flex flex-col',
-          'w-[240px] h-full',
-          'ml-auto',
-          'p-4',
-          variant === 'examples' && 'bg-gray-0 dark:bg-gray-900 ',
-          variant === 'blog' && 'bg-white dark:bg-win32-react-7',
-          'border-l dark:border-gray-800',
-          'dark:shadow-[0_0_72px_24px_#14141F]',
-          'shadow-[0_0_72px_24px_rgba(20, 20, 31, 0.50)]'
+          "z-modal",
+          "flex flex-col",
+          "w-[240px] h-full",
+          "ml-auto",
+          "p-4",
+          variant === "examples" && "bg-gray-0 dark:bg-gray-900 ",
+          variant === "blog" && "bg-white dark:bg-win32-react-7",
+          "border-l dark:border-gray-800",
+          "dark:shadow-[0_0_72px_24px_#14141F]",
+          "shadow-[0_0_72px_24px_rgba(20, 20, 31, 0.50)]",
         )}
         show={open}
         enter="transition-transform duration-300 transition-ease-in-out"
@@ -106,23 +106,23 @@ const DrawerComponent: FC<PropsWithChildren<Props>> = ({
       >
         <div
           className={clsx(
-            'flex',
-            'items-center',
-            'justify-between',
-            'mb-10',
-            'dark:text-gray-300 text-gray-900'
+            "flex",
+            "items-center",
+            "justify-between",
+            "mb-10",
+            "dark:text-gray-300 text-gray-900",
           )}
         >
-          <h3 className={clsx('text-base', 'font-semibold')}>{title}</h3>
+          <h3 className={clsx("text-base", "font-semibold")}>{title}</h3>
           <button
             type="button"
-            className={clsx('appearance-none')}
+            className={clsx("appearance-none")}
             onClick={onClose}
           >
             <MdClose className="w-8 h-8" />
           </button>
         </div>
-        <div className={clsx('overflow-auto h-full')}>{children}</div>
+        <div className={clsx("overflow-auto h-full")}>{children}</div>
       </Transition>
     </div>
   );

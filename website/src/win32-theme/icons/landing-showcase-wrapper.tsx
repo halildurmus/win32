@@ -1,6 +1,6 @@
-import clsx from 'clsx';
-import { motion, useInView } from 'framer-motion';
-import React from 'react';
+import clsx from "clsx";
+import { motion, useInView } from "framer-motion";
+import React from "react";
 
 type Props = {
   className?: string;
@@ -35,10 +35,10 @@ export const ShowcaseWrapper = React.memo(
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           className={clsx(
-            'relative',
-            'w-full',
-            'h-auto',
-            'pointer-events-none'
+            "relative",
+            "w-full",
+            "h-auto",
+            "pointer-events-none",
           )}
         >
           <image x={0} y={0} width={1168} height={736} href={render} />
@@ -58,21 +58,21 @@ export const ShowcaseWrapper = React.memo(
             >
               <div
                 className={clsx(
-                  'absolute',
-                  'left-0',
-                  'top-0',
-                  'pointer-events-none',
-                  'opacity-0',
-                  'duration-150',
-                  'ease-in-out',
-                  'transition-opacity',
-                  'group-hover/all:opacity-100',
-                  'group-hover/all:z-[3]',
-                  dark ? 'bg-gray-900' : 'bg-gray-0',
-                  'bg-opacity-20',
-                  'backdrop-blur-sm',
-                  'w-full',
-                  'h-full'
+                  "absolute",
+                  "left-0",
+                  "top-0",
+                  "pointer-events-none",
+                  "opacity-0",
+                  "duration-150",
+                  "ease-in-out",
+                  "transition-opacity",
+                  "group-hover/all:opacity-100",
+                  "group-hover/all:z-[3]",
+                  dark ? "bg-gray-900" : "bg-gray-0",
+                  "bg-opacity-20",
+                  "backdrop-blur-sm",
+                  "w-full",
+                  "h-full",
                 )}
               />
             </motion.foreignObject>
@@ -82,5 +82,5 @@ export const ShowcaseWrapper = React.memo(
     );
   },
   (prev, next) =>
-    prev.render === next.render && prev.className === next.className
+    prev.render === next.render && prev.className === next.className,
 );

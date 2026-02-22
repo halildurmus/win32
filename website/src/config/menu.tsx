@@ -5,7 +5,7 @@ import {
   DocumentsIcon,
   ExamplesIcon,
   PackagesIcon,
-} from '../win32-theme/icons/popover';
+} from "../win32-theme/icons/popover";
 
 export type MenuPopoverItemType = {
   isPopover: true;
@@ -31,55 +31,55 @@ export type MenuItemType = MenuPopoverItemType | MenuRegularItemType;
 export const menuItems: MenuItemType[] = [
   {
     isPopover: true,
-    label: 'Learn',
+    label: "Learn",
     items: [
       {
-        label: 'Documentation',
+        label: "Documentation",
         icon: DocumentsIcon,
-        description: 'Everything you need to get started.',
-        href: '/docs',
+        description: "Everything you need to get started.",
+        href: "/docs",
       },
       {
-        label: 'Examples',
+        label: "Examples",
         icon: ExamplesIcon,
-        description: 'Ready-made examples for your project',
-        href: 'https://win32.pub/examples',
+        description: "Ready-made examples for your project",
+        href: "https://win32.pub/examples",
       },
       {
-        label: 'Packages',
+        label: "Packages",
         icon: PackagesIcon,
-        description: 'Discover the win32 ecosystem.',
-        href: '/packages',
+        description: "Discover the win32 ecosystem.",
+        href: "/packages",
       },
     ],
   },
   {
     isPopover: true,
-    label: 'Community',
+    label: "Community",
     items: [
       {
-        label: 'Contributing',
+        label: "Contributing",
         icon: ContributeIcon,
-        description: 'Join open-source contributors.',
-        href: '/docs/community/contributing',
+        description: "Join open-source contributors.",
+        href: "/docs/community/contributing",
       },
     ],
   },
   {
     isPopover: true,
-    label: 'Resources',
+    label: "Resources",
     items: [
       {
-        label: 'Blog',
+        label: "Blog",
         icon: BlogIcon,
-        description: 'Articles about Windows development.',
-        href: '/blog',
+        description: "Articles about Windows development.",
+        href: "/blog",
       },
       {
-        label: 'Changelog',
+        label: "Changelog",
         icon: ChangelogIcon,
-        description: 'Learn what has changed recently.',
-        href: '/changelog',
+        description: "Learn what has changed recently.",
+        href: "/changelog",
       },
       // {
       //   label: 'Roadmap',

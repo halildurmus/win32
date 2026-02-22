@@ -1,19 +1,19 @@
-import Head from '@docusaurus/Head';
+import Head from "@docusaurus/Head";
 
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import { CommonFooter } from '@site/src/win32-theme/common-footer';
-import { CommonHeader } from '@site/src/win32-theme/common-header';
-import { CommonLayout } from '@site/src/win32-theme/common-layout';
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import { CommonFooter } from "@site/src/win32-theme/common-footer";
+import { CommonHeader } from "@site/src/win32-theme/common-header";
+import { CommonLayout } from "@site/src/win32-theme/common-layout";
 import {
   BlogPostProps,
   LandingBlogPosts,
-} from '@site/src/win32-theme/landing-blog-posts';
-import { LandingFeatures } from '@site/src/win32-theme/landing-features';
-import { LandingHeroSection } from '@site/src/win32-theme/landing-hero-section';
-import { LandingPackages } from '@site/src/win32-theme/landing-packages';
-import { LandingTryItSection } from '@site/src/win32-theme/landing-try-it-section';
-import clsx from 'clsx';
-import { ReactNode } from 'react';
+} from "@site/src/win32-theme/landing-blog-posts";
+import { LandingFeatures } from "@site/src/win32-theme/landing-features";
+import { LandingHeroSection } from "@site/src/win32-theme/landing-hero-section";
+import { LandingPackages } from "@site/src/win32-theme/landing-packages";
+import { LandingTryItSection } from "@site/src/win32-theme/landing-try-it-section";
+import clsx from "clsx";
+import { ReactNode } from "react";
 
 export type HomePageProps = {
   homePageBlogMetadata: {
@@ -49,20 +49,20 @@ export default function Home({
           <CommonHeader />
           <div
             className={clsx(
-              'flex flex-col',
-              'gap-16 landing-sm:gap-20 landing-md:gap-28 landing-lg:gap-40',
-              'w-full',
-              'max-w-[592px]',
-              'landing-sm:max-w-[656px]',
-              'landing-md:max-w-[896px]',
-              'landing-lg:max-w-[1200px]',
-              'px-2 landing-sm:px-0',
-              'pb-12 landing-sm:pb-16 landing-md:pb-20 landing-lg:pb-40',
-              'mx-auto'
+              "flex flex-col",
+              "gap-16 landing-sm:gap-20 landing-md:gap-28 landing-lg:gap-40",
+              "w-full",
+              "max-w-[592px]",
+              "landing-sm:max-w-[656px]",
+              "landing-md:max-w-[896px]",
+              "landing-lg:max-w-[1200px]",
+              "px-2 landing-sm:px-0",
+              "pb-12 landing-sm:pb-16 landing-md:pb-20 landing-lg:pb-40",
+              "mx-auto",
             )}
           >
             <LandingHeroSection
-              className={clsx('mt-0', 'landing-sm:mt-8', 'landing-lg:mt-20')}
+              className={clsx("mt-0", "landing-sm:mt-8", "landing-lg:mt-20")}
             />
             <LandingFeatures />
             <LandingPackages />

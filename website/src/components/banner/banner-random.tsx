@@ -1,20 +1,20 @@
-import BrowserOnly from '@docusaurus/BrowserOnly';
-import { BannerExamples } from './banner-examples';
-import { BannerImageWithText } from './banner-image-with-text';
+import BrowserOnly from "@docusaurus/BrowserOnly";
+import { BannerExamples } from "./banner-examples";
+import { BannerImageWithText } from "./banner-image-with-text";
 
 const data = [
   {
-    description: 'TODO description',
+    description: "TODO description",
     image: {
-      src: '/img/social.png',
-      alt: 'X tweet about win32',
-      href: 'https://win32.pub',
+      src: "/img/social.png",
+      alt: "X tweet about win32",
+      href: "https://win32.pub",
     },
     button: {
-      text: 'Learn more',
-      href: 'https://win32.pub',
+      text: "Learn more",
+      href: "https://win32.pub",
     },
-    bannerName: 'banner-twitter',
+    bannerName: "banner-twitter",
   },
 ];
 

@@ -1,3 +1,3 @@
 export function Spacer() {
-  return <>{' · '}</>;
+  return <>{" · "}</>;
 }

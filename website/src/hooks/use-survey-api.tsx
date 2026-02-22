@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 export type SurveyOption = 1 | 2 | 3 | 4 | 5;
 
 export enum SurveyTypeEnum {
-  EMOJI = 'EMOJI',
-  THUMBS = 'THUMBS',
+  EMOJI = "EMOJI",
+  THUMBS = "THUMBS",
 }
 
 export type Survey = {
@@ -55,9 +55,9 @@ export const useSurveyAPI = (props: Props) => {
 
   const createSurvey = async ({ body }: { body: DocSurveyCreateDto }) => {
     const response = await fetch(`${API_URL}/responses`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(body),
     });
@@ -77,9 +77,9 @@ export const useSurveyAPI = (props: Props) => {
     body: DocSurveyUpdateDto;
   }) => {
     const response = await fetch(`${API_URL}/responses/${surveyId}`, {
-      method: 'PATCH',
+      method: "PATCH",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(body),
     });
@@ -99,7 +99,7 @@ export const useSurveyAPI = (props: Props) => {
   };
 };
 
-const BASE_URL = 'https://win32.pub/.win32/surveys';
+const BASE_URL = "https://win32.pub/.win32/surveys";
 const PAGES_SURVEY_URL = `${BASE_URL}/documentation-pages-survey`;
 const SECTIONS_SURVEY_URL = `${BASE_URL}/documentation-sections-survey`;
 

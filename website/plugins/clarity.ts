@@ -1,20 +1,20 @@
-import type { Plugin } from '@docusaurus/types';
+import type { Plugin } from "@docusaurus/types";
 
 export default async function clarity(): Promise<Plugin> {
   return {
-    name: 'docusaurus-plugin-win32-clarity',
+    name: "docusaurus-plugin-win32-clarity",
     injectHtmlTags() {
       return {
         headTags: [
           {
-            tagName: 'link',
+            tagName: "link",
             attributes: {
-              rel: 'preconnect',
-              href: 'https://www.clarity.ms',
+              rel: "preconnect",
+              href: "https://www.clarity.ms",
             },
           },
           {
-            tagName: 'script',
+            tagName: "script",
             innerHTML: `
               (function(c,l,a,r,i,t,y){
                   c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
