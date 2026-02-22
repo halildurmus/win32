@@ -1,4 +1,5 @@
 import 'package:ffi/ffi.dart';
+import 'package:ffi_leak_tracker/ffi_leak_tracker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
@@ -8,7 +9,11 @@ import 'volumepanel.dart';
 import 'windowroundingselector.dart';
 
 void main() {
+  LeakTracker.enableInDebug();
+
   runApp(const ExplorerApp());
+
+  LeakTracker.verifyNoLeaksInDebug();
 }
 
 class ExplorerApp extends StatelessWidget {

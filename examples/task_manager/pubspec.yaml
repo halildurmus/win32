@@ -7,8 +7,7 @@ environment:
 
 dependencies:
   ffi: ^2.2.0
-  ffi_leak_tracker:
-    path: ../../packages/ffi_leak_tracker # TODO: update to ^0.1.0 when released
+  ffi_leak_tracker: ^0.1.0
   flutter:
     sdk: flutter
   win32:
