@@ -148,8 +148,8 @@ int _windowProc(Pointer hWnd, int uMsg, int wParam, int lParam) {
       return _handleInitMenuPopup(
         window._app,
         window._hWndEdit,
-        WPARAM(wParam),
-        LPARAM(lParam),
+        .new(wParam),
+        .new(lParam),
       );
 
     case WM_COMMAND:
@@ -158,8 +158,8 @@ int _windowProc(Pointer hWnd, int uMsg, int wParam, int lParam) {
         window._app,
         window._hWndEdit,
         window._hMenuEdit,
-        WPARAM(wParam),
-        LPARAM(lParam),
+        .new(wParam),
+        .new(lParam),
       );
 
     case WM_DROPFILES:
@@ -184,11 +184,11 @@ int _windowProc(Pointer hWnd, int uMsg, int wParam, int lParam) {
     default:
       final window = Win32Window._windowRegistry[hwnd];
       if (window != null && uMsg == window._messageFindReplace) {
-        return window._app.handleDialogMessage(hwnd, uMsg, LPARAM(lParam));
+        return window._app.handleDialogMessage(hwnd, uMsg, .new(lParam));
       }
   }
 
-  return DefWindowProc(hwnd, uMsg, WPARAM(wParam), LPARAM(lParam));
+  return DefWindowProc(hwnd, uMsg, .new(wParam), .new(lParam));
 }
 
 /// Creates the edit control for text editing.
@@ -216,7 +216,7 @@ HWND _createEditControl(HINSTANCE hInstance, HWND hWnd, HMENU hMenuEdit) =>
         nullptr,
       );
       if (value.isNull) throw WindowsException(error.toHRESULT());
-      SendMessage(value, EM_LIMITTEXT, const WPARAM(0x7FFFFFFF), null);
+      SendMessage(value, EM_LIMITTEXT, const .new(0x7FFFFFFF), null);
       return value;
     });
 

@@ -405,7 +405,7 @@ int mainWindowProc(Pointer hWnd, int msg, int wParam, int lParam) {
 
     case WM_NCHITTEST:
       // Let the default procedure handle resizing areas
-      final hit = DefWindowProc(hwnd, msg, WPARAM(wParam), LPARAM(lParam));
+      final hit = DefWindowProc(hwnd, msg, .new(wParam), .new(lParam));
       if ([
         HTNOWHERE,
         HTLEFT,
@@ -510,7 +510,7 @@ int mainWindowProc(Pointer hWnd, int msg, int wParam, int lParam) {
       // Map button clicks to the right messages for the window
       switch (hoveredButton) {
         case HoveredButton.close:
-          PostMessage(hwnd, WM_CLOSE, const WPARAM(0), const LPARAM(0));
+          PostMessage(hwnd, WM_CLOSE, const .new(0), const .new(0));
           return 0;
         case HoveredButton.minimize:
           ShowWindow(hwnd, SW_MINIMIZE);
@@ -525,7 +525,7 @@ int mainWindowProc(Pointer hWnd, int msg, int wParam, int lParam) {
       PostQuitMessage(0);
       return 0;
   }
-  return DefWindowProc(hwnd, msg, WPARAM(wParam), LPARAM(lParam));
+  return DefWindowProc(hwnd, msg, .new(wParam), .new(lParam));
 }
 
 void main() {

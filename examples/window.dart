@@ -48,7 +48,7 @@ List<DesktopWindow> enumerateDesktopWindows() {
     return TRUE;
   }, exceptionalReturn: 0);
 
-  EnumWindows(callback.nativeFunction, const LPARAM(0));
+  EnumWindows(callback.nativeFunction, const .new(0));
   callback.close();
 
   return results;

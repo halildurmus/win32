@@ -82,7 +82,7 @@ final class Win32Window {
         return 0;
     }
 
-    return DefWindowProc(hwnd, msg, WPARAM(wParam), LPARAM(lParam));
+    return DefWindowProc(hwnd, msg, .new(wParam), .new(lParam));
   }
 
   void _handleDeviceChange(int wParam, int lParam) {

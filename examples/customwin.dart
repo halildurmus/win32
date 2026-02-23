@@ -20,8 +20,7 @@ int mainWindowProc(Pointer hWnd, int uMsg, int wParam, int lParam) {
 
     case WM_NCHITTEST:
       // A click on the client area is treated as a click on the title bar
-      if (DefWindowProc(hwnd, uMsg, WPARAM(wParam), LPARAM(lParam)) ==
-          HTCLIENT) {
+      if (DefWindowProc(hwnd, uMsg, .new(wParam), .new(lParam)) == HTCLIENT) {
         return HTCAPTION;
       }
       return 0;
@@ -50,7 +49,7 @@ int mainWindowProc(Pointer hWnd, int uMsg, int wParam, int lParam) {
 
       return 0;
   }
-  return DefWindowProc(hwnd, uMsg, WPARAM(wParam), LPARAM(lParam));
+  return DefWindowProc(hwnd, uMsg, .new(wParam), .new(lParam));
 }
 
 void main() => initApp(winMain);

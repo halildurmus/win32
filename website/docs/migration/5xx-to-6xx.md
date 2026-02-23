@@ -535,7 +535,7 @@ the corresponding handle type:
     hDC,
     searchFont,
     lpProc.nativeFunction,
-    const LPARAM(0),
+    const .new(0),
     0,
   );
 

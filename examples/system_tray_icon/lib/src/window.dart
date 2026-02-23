@@ -132,7 +132,7 @@ int _windowProc(Pointer hWnd, int uMsg, int wParam, int lParam) {
           return 0;
 
         default:
-          return DefWindowProc(hwnd, uMsg, WPARAM(wParam), LPARAM(lParam));
+          return DefWindowProc(hwnd, uMsg, .new(wParam), .new(lParam));
       }
 
     case WM_CLOSE:
@@ -144,7 +144,7 @@ int _windowProc(Pointer hWnd, int uMsg, int wParam, int lParam) {
       return 0;
   }
 
-  return DefWindowProc(hwnd, uMsg, WPARAM(wParam), LPARAM(lParam));
+  return DefWindowProc(hwnd, uMsg, .new(wParam), .new(lParam));
 }
 
 HICON _loadIcon() {

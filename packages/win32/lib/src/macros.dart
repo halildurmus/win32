@@ -88,7 +88,7 @@ Win32Result<int> DialogBoxIndirect(
   lpTemplate,
   hWndParent,
   lpDialogFunc,
-  const LPARAM(0),
+  const .new(0),
 );
 
 /// Provides a generic test for failure on any status value.

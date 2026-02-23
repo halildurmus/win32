@@ -77,7 +77,7 @@ int lowlevelKeyboardHookProc(int code, int wParam, int lParam) {
       return -1;
     }
   }
-  return CallNextHookEx(keyHook, code, WPARAM(wParam), LPARAM(lParam));
+  return CallNextHookEx(keyHook, code, .new(wParam), .new(lParam));
 }
 
 int mainWindowProc(Pointer hWnd, int uMsg, int wParam, int lParam) {
@@ -193,7 +193,7 @@ int mainWindowProc(Pointer hWnd, int uMsg, int wParam, int lParam) {
       return 0;
   }
 
-  return DefWindowProc(hwnd, uMsg, WPARAM(wParam), LPARAM(lParam));
+  return DefWindowProc(hwnd, uMsg, .new(wParam), .new(lParam));
 }
 
 void main() => initApp(winMain);

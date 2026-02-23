@@ -57,12 +57,7 @@ class NotepadFind {
       }
 
       _text = find;
-      SendMessage(
-        hWndEdit,
-        EM_SETSEL,
-        WPARAM(index),
-        LPARAM(index + find.length),
-      );
+      SendMessage(hWndEdit, EM_SETSEL, .new(index), .new(index + find.length));
       SendMessage(hWndEdit, EM_SCROLLCARET, null, null);
       _caretIndex = index;
       return FALSE;
@@ -133,12 +128,7 @@ class NotepadFind {
 
       _text = find;
 
-      SendMessage(
-        hWndEdit,
-        EM_SETSEL,
-        WPARAM(index),
-        LPARAM(index + find.length),
-      );
+      SendMessage(hWndEdit, EM_SETSEL, .new(index), .new(index + find.length));
       SendMessage(hWndEdit, EM_SCROLLCARET, null, null);
 
       _caretIndex = index + find.length;
@@ -166,12 +156,12 @@ class NotepadFind {
       _text = find;
 
       final replaced = original.replaceAll(find, replace);
-      SendMessage(hWndEdit, EM_SETSEL, null, const LPARAM(-1));
+      SendMessage(hWndEdit, EM_SETSEL, null, const .new(-1));
       SendMessage(
         hWndEdit,
         EM_REPLACESEL,
-        const WPARAM(TRUE),
-        LPARAM(arena.pcwstr(replaced).address),
+        const .new(TRUE),
+        .new(arena.pcwstr(replaced).address),
       );
 
       _caretIndex = 0;
@@ -187,8 +177,8 @@ class NotepadFind {
     SendMessage(
       hWndEdit,
       EM_REPLACESEL,
-      const WPARAM(TRUE),
-      LPARAM(lpstrReplaceWith.address),
+      const .new(TRUE),
+      .new(lpstrReplaceWith.address),
     );
     _caretIndex += replace.length;
     return true;

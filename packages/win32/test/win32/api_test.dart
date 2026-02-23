@@ -190,7 +190,7 @@ void main() {
     group('RegisterClass', () {
       test('registers and unregisters a custom window class successfully', () {
         int windowProc(Pointer hwnd, int msg, int wParam, int lParam) =>
-            DefWindowProc(HWND(hwnd), msg, WPARAM(wParam), LPARAM(lParam));
+            DefWindowProc(HWND(hwnd), msg, .new(wParam), .new(lParam));
 
         using((arena) {
           final hInstance = HINSTANCE(GetModuleHandle(null).value);

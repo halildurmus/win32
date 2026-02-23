@@ -16,12 +16,7 @@ class NotepadEditor {
   bool get hasSelection => using((arena) {
     final start = arena<Int32>();
     final end = arena<Int32>();
-    SendMessage(
-      hWndEdit,
-      EM_GETSEL,
-      WPARAM(start.address),
-      LPARAM(end.address),
-    );
+    SendMessage(hWndEdit, EM_GETSEL, .new(start.address), .new(end.address));
     return start.value != end.value;
   });
 

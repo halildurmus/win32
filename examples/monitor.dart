@@ -99,7 +99,7 @@ void main() {
       null, // all displays
       null, // no clipping region
       lpfnEnum.nativeFunction,
-      const LPARAM(0),
+      const .new(0),
     );
     lpfnEnum.close();
 

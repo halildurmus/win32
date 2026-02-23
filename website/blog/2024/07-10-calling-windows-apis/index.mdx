@@ -110,6 +110,7 @@ procedure that will handle messages sent to the window.
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
+import 'package:ffi_leak_tracker/ffi_leak_tracker.dart';
 import 'package:win32/win32.dart';
 
 int mainWindowProc(Pointer hWnd, int uMsg, int wParam, int lParam) {
@@ -136,7 +137,7 @@ int mainWindowProc(Pointer hWnd, int uMsg, int wParam, int lParam) {
       return 0;
   }
 
-  return DefWindowProc(hwnd, uMsg, WPARAM(wParam), LPARAM(lParam));
+  return DefWindowProc(hwnd, uMsg, .new(wParam), .new(lParam));
 }
 ```
 

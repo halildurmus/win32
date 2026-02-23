@@ -80,7 +80,7 @@ class CommandDispatcher {
         return true;
 
       case IDM_EDIT_SELECT_ALL:
-        SendMessage(_hWndEdit, EM_SETSEL, null, const LPARAM(-1));
+        SendMessage(_hWndEdit, EM_SETSEL, null, const .new(-1));
         return true;
 
       case IDM_EDIT_FIND:
@@ -212,8 +212,8 @@ class CommandDispatcher {
         SendMessage(
           hIconCtrl,
           STM_SETIMAGE,
-          const WPARAM(IMAGE_ICON),
-          LPARAM(_hIcon.address),
+          const .new(IMAGE_ICON),
+          .new(_hIcon.address),
         );
         _centerWindow(HWND(hDlg), GetParent(HWND(hDlg)).value);
         return TRUE;

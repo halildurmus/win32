@@ -82,7 +82,7 @@ int hostWndProc(Pointer hWnd, int message, int wParam, int lParam) {
       if (GET_SC_WPARAM(wParam) == SC_MAXIMIZE) {
         goFullScreen();
       } else {
-        return DefWindowProc(hwnd, message, WPARAM(wParam), LPARAM(lParam));
+        return DefWindowProc(hwnd, message, .new(wParam), .new(lParam));
       }
 
     case WM_DESTROY:
@@ -97,7 +97,7 @@ int hostWndProc(Pointer hWnd, int message, int wParam, int lParam) {
       }
 
     default:
-      return DefWindowProc(hwnd, message, WPARAM(wParam), LPARAM(lParam));
+      return DefWindowProc(hwnd, message, .new(wParam), .new(lParam));
   }
   return 0;
 }

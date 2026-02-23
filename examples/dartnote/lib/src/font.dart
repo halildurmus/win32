@@ -7,12 +7,7 @@ class NotepadFont {
   factory NotepadFont(HWND hWnd, HWND hWndEdit) {
     final logfont = GetThemeSysFont(null, TMT_MENUFONT);
     final hFont = CreateFontIndirect(logfont);
-    SendMessage(
-      hWndEdit,
-      WM_SETFONT,
-      WPARAM(hFont.address),
-      const LPARAM(FALSE),
-    );
+    SendMessage(hWndEdit, WM_SETFONT, .new(hFont.address), const .new(FALSE));
     return NotepadFont._(hWnd, hWndEdit, logfont, hFont);
   }
 
@@ -40,8 +35,8 @@ class NotepadFont {
     SendMessage(
       hWndEdit,
       WM_SETFONT,
-      WPARAM(hFontNew.address),
-      const LPARAM(FALSE),
+      .new(hFontNew.address),
+      const .new(FALSE),
     );
     _hFont.close();
     _hFont = hFontNew;

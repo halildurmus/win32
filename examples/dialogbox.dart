@@ -140,7 +140,7 @@ class DialogBuilder {
         ptr.cast<DLGTEMPLATE>(),
         null,
         lpDialogFunc.nativeFunction,
-        const LPARAM(0),
+        const .new(0),
       ).value;
     } finally {
       lpDialogFunc.close();
@@ -156,8 +156,8 @@ class DialogBuilder {
           hwndDlg,
           ID_PROGRESS,
           PBM_SETPOS,
-          const WPARAM(35),
-          const LPARAM(0),
+          const .new(35),
+          const .new(0),
         );
         return TRUE;
 

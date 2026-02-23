@@ -156,7 +156,7 @@ void main() {
     hDC,
     searchFont,
     callback.nativeFunction,
-    const LPARAM(0),
+    const .new(0),
     0,
   );
   // highlight-end

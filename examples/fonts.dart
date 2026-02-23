@@ -28,13 +28,7 @@ void main() {
     exceptionalReturn: 0,
   );
 
-  EnumFontFamiliesEx(
-    hDC,
-    searchFont,
-    lpProc.nativeFunction,
-    const LPARAM(0),
-    0,
-  );
+  EnumFontFamiliesEx(hDC, searchFont, lpProc.nativeFunction, const .new(0), 0);
   lpProc.close();
 
   print('${fontNames.length} font families discovered.');
