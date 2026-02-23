@@ -114,6 +114,7 @@ Additional usage examples are located in the [example] directory.
 If you encounter bugs or need additional functionality, please
 [file an issue][issue_tracker_link].
 
+[api_reference_link]: https://pub.dev/documentation/win32_gamepad/latest/
 [ci_badge]: https://github.com/halildurmus/win32_gamepad/actions/workflows/win32_gamepad.yml/badge.svg
 [ci_link]: https://github.com/halildurmus/win32_gamepad/actions/workflows/win32_gamepad.yml
 [demo_image_link]: https://raw.githubusercontent.com/halildurmus/win32_gamepad/main/screenshots/demo.png
