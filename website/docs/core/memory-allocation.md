@@ -33,8 +33,8 @@ and destabilize your application.
 Native memory is typically allocated using the [`calloc()`][calloc] allocator
 from [`package:ffi`][package:ffi].
 
-[`package:win32`][package:win32] additionally provides allocators such as
-[`adaptiveCalloc()`][adaptiveCalloc], which behave like `calloc()` but
+[`package:ffi_leak_tracker`][package:ffi_leak_tracker] provides allocators such
+as [`adaptiveCalloc()`][adaptiveCalloc], which behave like `calloc()` but
 also participate in optional [**leak tracking**][Leak Tracking].
 
 ```dart
@@ -101,8 +101,8 @@ In practice:
 
 [calloc]: https://pub.dev/documentation/ffi/latest/ffi/calloc-constant.html
 [package:ffi]: https://pub.dev/packages/ffi
-[package:win32]: https://pub.dev/packages/win32
-[adaptiveCalloc]: https://pub.dev/documentation/win32/latest/win32/adaptiveCalloc-constant.html
+[package:ffi_leak_tracker]: https://pub.dev/packages/ffi_leak_tracker
+[adaptiveCalloc]: https://pub.dev/documentation/ffi_leak_tracker/latest/ffi_leak_tracker/adaptiveCalloc-constant.html
 [leak tracking]: /docs/advanced/leak-tracking
 [calloc.free]: https://api.dart.dev/dart-ffi/Allocator/free.html
 [dart:ffi]: https://api.dart.dev/dart-ffi/
