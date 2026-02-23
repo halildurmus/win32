@@ -114,8 +114,8 @@ Additional usage examples are located in the [example] directory.
 If you encounter bugs or need additional functionality, please
 [file an issue][issue_tracker_link].
 
-[ci_badge]: https://github.com/halildurmus/win32_gamepad/actions/workflows/build.yml/badge.svg
-[ci_link]: https://github.com/halildurmus/win32_gamepad/actions/workflows/build.yml
+[ci_badge]: https://github.com/halildurmus/win32_gamepad/actions/workflows/win32_gamepad.yml/badge.svg
+[ci_link]: https://github.com/halildurmus/win32_gamepad/actions/workflows/win32_gamepad.yml
 [demo_image_link]: https://raw.githubusercontent.com/halildurmus/win32_gamepad/main/screenshots/demo.png
 [issue_tracker_link]: https://github.com/halildurmus/win32_gamepad/issues
 [language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
