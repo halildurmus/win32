@@ -15,5 +15,5 @@ enum GamepadBatteryLevel {
   full,
 
   /// The charge state is unknown.
-  unknown
+  unknown,
 }

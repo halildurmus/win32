@@ -13,5 +13,5 @@ enum GamepadBatteryType {
   nickelMetalHydride,
 
   /// The device has an unknown battery type.
-  unknown
+  unknown,
 }

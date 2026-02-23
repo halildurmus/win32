@@ -7,7 +7,7 @@ import 'thumbstick.dart';
 
 class GamepadPage extends StatefulWidget {
   GamepadPage({required this.controller, super.key}) {
-    gamepad = Gamepad(controller);
+    gamepad = .new(controller);
   }
 
   final int controller;
@@ -20,21 +20,22 @@ class GamepadPage extends StatefulWidget {
 class GamepadPageState extends State<GamepadPage>
     with TickerProviderStateMixin {
   // This will fire with every frame painted.
-  late final AnimationController _controller =
-      AnimationController(vsync: this, duration: const Duration(seconds: 1))
-        ..repeat();
+  late final _controller = AnimationController(
+    vsync: this,
+    duration: const .new(seconds: 1),
+  )..repeat();
 
   @override
   Widget build(BuildContext context) => AnimatedBuilder(
-        animation: _controller,
-        builder: (context, child) {
-          widget.gamepad.updateState();
-          return GamepadStatusView(
-            gamepad: widget.gamepad,
-            controller: widget.controller,
-          );
-        },
+    animation: _controller,
+    builder: (context, child) {
+      widget.gamepad.updateState();
+      return GamepadStatusView(
+        gamepad: widget.gamepad,
+        controller: widget.controller,
       );
+    },
+  );
 
   @override
   void dispose() {
@@ -57,7 +58,7 @@ class GamepadStatusView extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDarkMode =
         context.findAncestorWidgetOfExactType<FluentApp>()?.themeMode ==
-            ThemeMode.dark;
+        ThemeMode.dark;
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
@@ -95,7 +96,7 @@ class GamepadStatusView extends StatelessWidget {
               ),
               const SizedBox(width: 20),
               Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: .center,
                 children: [
                   ToggleSwitch(
                     checked: gamepad.state.buttonStart,
@@ -148,7 +149,7 @@ class GamepadStatusView extends StatelessWidget {
               ),
               FittedBox(
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: .center,
                   children: [
                     const Text('Right trigger:'),
                     const SizedBox(width: 10),
@@ -164,7 +165,7 @@ class GamepadStatusView extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: .start,
             children: [
               const Text('Main buttons:'),
               ABXYButtons(gamepad: gamepad),
@@ -188,27 +189,27 @@ class GamepadConnectedView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Row(
-        children: [
-          Icon(
-            FluentIcons.game,
-            size: 60,
-            color: gamepad.state.isConnected
-                ? Colors.successPrimaryColor
-                : Colors.warningPrimaryColor,
-          ),
-          const SizedBox(width: 20),
-          Text(
-            gamepad.state.isConnected
-                ? 'Controller ${controller + 1} connected'
-                : 'Controller ${controller + 1} disconnected',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.w600,
-              color: gamepad.state.isConnected
-                  ? Colors.successPrimaryColor
-                  : Colors.warningPrimaryColor,
-            ),
-          ),
-        ],
-      );
+    children: [
+      Icon(
+        FluentIcons.game,
+        size: 60,
+        color: gamepad.state.isConnected
+            ? Colors.successPrimaryColor
+            : Colors.warningPrimaryColor,
+      ),
+      const SizedBox(width: 20),
+      Text(
+        gamepad.state.isConnected
+            ? 'Controller ${controller + 1} connected'
+            : 'Controller ${controller + 1} disconnected',
+        style: TextStyle(
+          fontSize: 24,
+          fontWeight: .w600,
+          color: gamepad.state.isConnected
+              ? Colors.successPrimaryColor
+              : Colors.warningPrimaryColor,
+        ),
+      ),
+    ],
+  );
 }

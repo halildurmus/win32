@@ -1,3 +1,15 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+## [1.0.10] - 2026-02-23
+
+### 📦 Dependencies
+
+- Bumped minimum required Dart SDK version to `3.11.0`.
+
+[1.0.10]: https://github.com/halildurmus/win32_gamepad/compare/v1.0.9...win32_gamepad-v1.0.10
+
 ## 1.0.9
 
 - Fix deprecation warnings

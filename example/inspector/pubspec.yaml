@@ -3,22 +3,21 @@ description: A demo project that shows status of gamepads attached to Windows.
 publish_to: none
 
 environment:
-  sdk: ^3.5.0
+  sdk: ^3.11.0
 
 dependencies:
-  bitsdojo_window: ^0.1.6
-  fluent_ui: ^4.9.0
+  fluent_ui: ^4.14.0
   flutter:
     sdk: flutter
   win32_gamepad:
-    path: ../..
-  win32_registry: ^1.1.5
+    path: ../../
+  win32_registry: ^3.0.0
 
 flutter:
   uses-material-design: true
 
 dev_dependencies:
-  lints:
-    git:
-      url: https://github.com/halildurmus/workflows.git
-      path: packages/lints
+  halildurmus_lints: ^2.0.0
+
+dependency_overrides:
+  meta: ^1.18.1

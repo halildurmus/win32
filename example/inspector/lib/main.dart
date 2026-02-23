@@ -1,20 +1,14 @@
-import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 
-import 'custom_window.dart';
 import 'gamepadpage.dart';
 import 'utils.dart';
 
 const appTitle = 'Gamepad Inspector';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(const GamepadApp());
-  doWhenWindowReady(() {
-    appWindow
-      ..alignment = Alignment.center
-      ..title = appTitle
-      ..show();
-  });
 }
 
 class GamepadApp extends StatelessWidget {
@@ -22,14 +16,11 @@ class GamepadApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => FluentApp(
-        title: appTitle,
-        themeMode: WindowsSystemConfiguration.isDarkMode
-            ? ThemeMode.dark
-            : ThemeMode.light,
-        darkTheme: FluentThemeData(brightness: Brightness.dark),
-        initialRoute: '/',
-        routes: {'/': (_) => const InspectorPage()},
-      );
+    title: appTitle,
+    themeMode: WindowsSystemConfiguration.isDarkMode ? .dark : .light,
+    darkTheme: FluentThemeData(brightness: .dark),
+    home: const InspectorPage(),
+  );
 }
 
 class InspectorPage extends StatefulWidget {
@@ -40,41 +31,52 @@ class InspectorPage extends StatefulWidget {
 }
 
 class InspectorPageState extends State<InspectorPage> {
-  int index = 0;
+  var index = 0;
 
   @override
   Widget build(BuildContext context) => NavigationView(
-        appBar: const NavigationAppBar(
-          title: CustomWindowTitleSection(appTitle: appTitle),
-          actions: CustomWindowButtonsSection(),
+    titleBar: const TitleBar(
+      icon: FlutterLogo(),
+      title: Text(appTitle),
+      isBackButtonEnabled: false,
+      isBackButtonVisible: false,
+    ),
+    pane: NavigationPane(
+      selected: index,
+      onChanged: (i) => setState(() => index = i),
+      header: const SizedBox(
+        height: kOneLineTileHeight,
+        child: FlutterLogo(
+          style: FlutterLogoStyle.horizontal,
+          size: 80,
+          textColor: Colors.white,
+          duration: Duration.zero,
         ),
-        pane: NavigationPane(
-          size: const NavigationPaneSize(openMaxWidth: 200),
-          displayMode: PaneDisplayMode.open,
-          selected: index,
-          onChanged: (i) => setState(() => index = i),
-          items: [
-            PaneItem(
-              icon: const Icon(FluentIcons.game),
-              title: const Text('Controller 1'),
-              body: GamepadPage(controller: 0),
-            ),
-            PaneItem(
-              icon: const Icon(FluentIcons.game),
-              title: const Text('Controller 2'),
-              body: GamepadPage(controller: 1),
-            ),
-            PaneItem(
-              icon: const Icon(FluentIcons.game),
-              title: const Text('Controller 3'),
-              body: GamepadPage(controller: 2),
-            ),
-            PaneItem(
-              icon: const Icon(FluentIcons.game),
-              title: const Text('Controller 4'),
-              body: GamepadPage(controller: 3),
-            ),
-          ],
+      ),
+      size: const .new(openMaxWidth: 200),
+      displayMode: .expanded,
+      items: [
+        PaneItem(
+          icon: const Icon(FluentIcons.game),
+          title: const Text('Controller 1'),
+          body: GamepadPage(controller: 0),
         ),
-      );
+        PaneItem(
+          icon: const Icon(FluentIcons.game),
+          title: const Text('Controller 2'),
+          body: GamepadPage(controller: 1),
+        ),
+        PaneItem(
+          icon: const Icon(FluentIcons.game),
+          title: const Text('Controller 3'),
+          body: GamepadPage(controller: 2),
+        ),
+        PaneItem(
+          icon: const Icon(FluentIcons.game),
+          title: const Text('Controller 4'),
+          body: GamepadPage(controller: 3),
+        ),
+      ],
+    ),
+  );
 }

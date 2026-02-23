@@ -4,5 +4,5 @@ enum GamepadDeviceType {
   controller,
 
   /// An attached headset.
-  headset
+  headset,
 }

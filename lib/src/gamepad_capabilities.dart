@@ -3,7 +3,7 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'exceptions.dart';
+import 'error.dart';
 
 /// Information about what a gamepad supports: vibration, voice, navigation,
 /// etc.
@@ -14,58 +14,50 @@ class GamepadCapabilities {
   ///
   /// Throws a [DeviceNotConnectedError] if the specified controller is not
   /// connected.
-  GamepadCapabilities(int controller) {
-    final pCapabilities = calloc<XINPUT_CAPABILITIES>();
-    try {
-      final dwResult = XInputGetCapabilities(
-          controller, XINPUT_FLAG.XINPUT_FLAG_GAMEPAD, pCapabilities);
-      if (dwResult == WIN32_ERROR.ERROR_DEVICE_NOT_CONNECTED) {
-        throw DeviceNotConnectedError();
-      } else {
-        _flags = pCapabilities.ref.Flags;
-      }
-    } finally {
-      free(pCapabilities);
+  factory GamepadCapabilities(int controller) => using((arena) {
+    final pCapabilities = arena<XINPUT_CAPABILITIES>();
+    final dwResult = WIN32_ERROR(
+      XInputGetCapabilities(controller, XINPUT_FLAG_GAMEPAD, pCapabilities),
+    );
+    if (dwResult == ERROR_DEVICE_NOT_CONNECTED) {
+      throw DeviceNotConnectedError();
     }
-  }
 
-  late final int _flags;
+    return GamepadCapabilities._(pCapabilities.ref.Flags);
+  });
+
+  const GamepadCapabilities._(this._flags);
+
+  final int _flags;
 
   /// The value which the left and right triggers must be greater than to
   /// register as pressed.
   ///
   /// This is optional, but often desirable.
-  final int triggerThreshold =
-      XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_TRIGGER_THRESHOLD;
+  final int triggerThreshold = XINPUT_GAMEPAD_TRIGGER_THRESHOLD;
 
   /// A constant which can be used as a positive and negative value to filter a
   /// left thumbstick input.
-  final int leftThumbDeadzone =
-      XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE;
+  final int leftThumbDeadzone = XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE;
 
   /// A constant which can be used as a positive and negative value to filter a
   /// right thumbstick input.
-  final int rightThumbDeadzone =
-      XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE;
+  final int rightThumbDeadzone = XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE;
 
   /// Device has an integrated voice device.
   bool get isVoiceSupported =>
-      _flags & XINPUT_CAPABILITIES_FLAGS.XINPUT_CAPS_VOICE_SUPPORTED ==
-      XINPUT_CAPABILITIES_FLAGS.XINPUT_CAPS_VOICE_SUPPORTED;
+      _flags & XINPUT_CAPS_VOICE_SUPPORTED == XINPUT_CAPS_VOICE_SUPPORTED;
 
   /// Device supports force feedback functionality. Note that these
   /// force-feedback features beyond rumble are not currently supported.
   bool get supportsVibration =>
-      _flags & XINPUT_CAPABILITIES_FLAGS.XINPUT_CAPS_FFB_SUPPORTED ==
-      XINPUT_CAPABILITIES_FLAGS.XINPUT_CAPS_FFB_SUPPORTED;
+      _flags & XINPUT_CAPS_FFB_SUPPORTED == XINPUT_CAPS_FFB_SUPPORTED;
 
   /// Device has menu navigation buttons (START, BACK, DPAD).
   bool get hasNavigationButtons =>
-      !(_flags & XINPUT_CAPABILITIES_FLAGS.XINPUT_CAPS_NO_NAVIGATION ==
-          XINPUT_CAPABILITIES_FLAGS.XINPUT_CAPS_NO_NAVIGATION);
+      !(_flags & XINPUT_CAPS_NO_NAVIGATION == XINPUT_CAPS_NO_NAVIGATION);
 
   /// Device is wireless.
   bool get isWireless =>
-      !(_flags & XINPUT_CAPABILITIES_FLAGS.XINPUT_CAPS_WIRELESS ==
-          XINPUT_CAPABILITIES_FLAGS.XINPUT_CAPS_WIRELESS);
+      !(_flags & XINPUT_CAPS_WIRELESS == XINPUT_CAPS_WIRELESS);
 }

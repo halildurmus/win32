@@ -25,5 +25,5 @@ enum Direction {
   southwest,
 
   /// Neutral (not pressed).
-  center
+  center,
 }

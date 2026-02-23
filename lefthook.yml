@@ -3,20 +3,15 @@ pre-commit:
   commands:
     analyze:
       glob: '*.{dart}'
-      run: dart run hooks:analyze example lib test
-      description: Analyzes the code for potential issues
+      run: dart run halildurmus_hooks:analyze example lib test
     format:
       glob: '*.{dart}'
-      run: dart run hooks:format {staged_files}
-      description: Formats the code according to the project's style guide
+      run: dart run halildurmus_hooks:format {staged_files}
     test:
       glob: '{lib,test}/**/*.dart'
-      run: dart run hooks:test
-      description: Runs the test suite to ensure all tests pass
+      run: dart run halildurmus_hooks:test
 
 commit-msg:
   commands:
     check_commit:
-      run: dart run hooks:check_commit {1}
-      description: >
-        Checks that the commit message follows the Conventional Commit format
+      run: dart run halildurmus_hooks:check_commit {1}

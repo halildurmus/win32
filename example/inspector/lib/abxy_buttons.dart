@@ -8,48 +8,48 @@ class ABXYButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.all(8),
-        child: FittedBox(
-          child: Column(
+    padding: const .all(8),
+    child: FittedBox(
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: .center,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ToggleSwitch(
-                    checked: gamepad.state.buttonY,
-                    content: const Text('Y button'),
-                    onChanged: (_) {},
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ToggleSwitch(
-                    checked: gamepad.state.buttonX,
-                    content: const Text('X button'),
-                    onChanged: (_) {},
-                  ),
-                  const SizedBox(width: 20),
-                  ToggleSwitch(
-                    checked: gamepad.state.buttonB,
-                    content: const Text('B button'),
-                    onChanged: (_) {},
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ToggleSwitch(
-                    checked: gamepad.state.buttonA,
-                    content: const Text('A button'),
-                    onChanged: (_) {},
-                  ),
-                ],
+              ToggleSwitch(
+                checked: gamepad.state.buttonY,
+                content: const Text('Y button'),
+                onChanged: (_) {},
               ),
             ],
           ),
-        ),
-      );
+          Row(
+            mainAxisAlignment: .center,
+            children: [
+              ToggleSwitch(
+                checked: gamepad.state.buttonX,
+                content: const Text('X button'),
+                onChanged: (_) {},
+              ),
+              const SizedBox(width: 20),
+              ToggleSwitch(
+                checked: gamepad.state.buttonB,
+                content: const Text('B button'),
+                onChanged: (_) {},
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: .center,
+            children: [
+              ToggleSwitch(
+                checked: gamepad.state.buttonA,
+                content: const Text('A button'),
+                onChanged: (_) {},
+              ),
+            ],
+          ),
+        ],
+      ),
+    ),
+  );
 }

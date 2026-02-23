@@ -18,8 +18,7 @@ class GamepadState {
   );
 
   /// Represents a disconnected gamepad.
-  factory GamepadState.disconnected() =>
-      const GamepadState(false, 0, 0, 0, 0, 0, 0, 0);
+  factory GamepadState.disconnected() => const .new(false, 0, 0, 0, 0, 0, 0, 0);
 
   final int _buttonBitmask;
 
@@ -73,86 +72,68 @@ class GamepadState {
   /// Returns the eight-way direction pressed on the d-pad, or center if the
   /// dpad is not pressed.
   Direction get dpadDirection {
-    if (dpadLeft && dpadUp) return Direction.northwest;
-    if (dpadLeft && dpadDown) return Direction.southwest;
-    if (dpadLeft) return Direction.west;
-    if (dpadRight && dpadUp) return Direction.northeast;
-    if (dpadRight && dpadDown) return Direction.southeast;
-    if (dpadRight) return Direction.east;
-    if (dpadUp) return Direction.north;
-    if (dpadDown) return Direction.south;
-    return Direction.center;
+    if (dpadLeft && dpadUp) return .northwest;
+    if (dpadLeft && dpadDown) return .southwest;
+    if (dpadLeft) return .west;
+    if (dpadRight && dpadUp) return .northeast;
+    if (dpadRight && dpadDown) return .southeast;
+    if (dpadRight) return .east;
+    if (dpadUp) return .north;
+    if (dpadDown) return .south;
+    return .center;
   }
 
   /// Returns true if the D-pad direction is up.
   bool get dpadUp =>
-      _buttonBitmask & XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_DPAD_UP ==
-      XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_DPAD_UP;
+      _buttonBitmask & XINPUT_GAMEPAD_DPAD_UP == XINPUT_GAMEPAD_DPAD_UP;
 
   /// Returns true if the D-pad direction is down.
   bool get dpadDown =>
-      _buttonBitmask & XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_DPAD_DOWN ==
-      XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_DPAD_DOWN;
+      _buttonBitmask & XINPUT_GAMEPAD_DPAD_DOWN == XINPUT_GAMEPAD_DPAD_DOWN;
 
   /// Returns true if the D-pad direction is left.
   bool get dpadLeft =>
-      _buttonBitmask & XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_DPAD_LEFT ==
-      XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_DPAD_LEFT;
+      _buttonBitmask & XINPUT_GAMEPAD_DPAD_LEFT == XINPUT_GAMEPAD_DPAD_LEFT;
 
   /// Returns true if the D-pad direction is right.
   bool get dpadRight =>
-      _buttonBitmask & XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_DPAD_RIGHT ==
-      XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_DPAD_RIGHT;
+      _buttonBitmask & XINPUT_GAMEPAD_DPAD_RIGHT == XINPUT_GAMEPAD_DPAD_RIGHT;
 
   /// Returns true if the start button is pressed down.
   bool get buttonStart =>
-      _buttonBitmask & XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_START ==
-      XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_START;
+      _buttonBitmask & XINPUT_GAMEPAD_START == XINPUT_GAMEPAD_START;
 
   /// Returns true if the back button is pressed down.
   bool get buttonBack =>
-      _buttonBitmask & XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_BACK ==
-      XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_BACK;
+      _buttonBitmask & XINPUT_GAMEPAD_BACK == XINPUT_GAMEPAD_BACK;
 
   /// Returns true if the left thumbstick is clicked.
   bool get leftThumb =>
-      _buttonBitmask & XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_LEFT_THUMB ==
-      XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_LEFT_THUMB;
+      _buttonBitmask & XINPUT_GAMEPAD_LEFT_THUMB == XINPUT_GAMEPAD_LEFT_THUMB;
 
   /// Returns true if the right thumbstick is clicked.
   bool get rightThumb =>
-      _buttonBitmask & XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_RIGHT_THUMB ==
-      XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_RIGHT_THUMB;
+      _buttonBitmask & XINPUT_GAMEPAD_RIGHT_THUMB == XINPUT_GAMEPAD_RIGHT_THUMB;
 
   /// Returns true if the left shoulder button is pressed down.
   bool get leftShoulder =>
-      _buttonBitmask &
-          XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_LEFT_SHOULDER ==
-      XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_LEFT_SHOULDER;
+      _buttonBitmask & XINPUT_GAMEPAD_LEFT_SHOULDER ==
+      XINPUT_GAMEPAD_LEFT_SHOULDER;
 
   /// Returns true if the right shoulder button is pressed down.
   bool get rightShoulder =>
-      _buttonBitmask &
-          XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_RIGHT_SHOULDER ==
-      XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_RIGHT_SHOULDER;
+      _buttonBitmask & XINPUT_GAMEPAD_RIGHT_SHOULDER ==
+      XINPUT_GAMEPAD_RIGHT_SHOULDER;
 
   /// Returns true if the A button is pressed down.
-  bool get buttonA =>
-      _buttonBitmask & XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_A ==
-      XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_A;
+  bool get buttonA => _buttonBitmask & XINPUT_GAMEPAD_A == XINPUT_GAMEPAD_A;
 
   /// Returns true if the B button is pressed down.
-  bool get buttonB =>
-      _buttonBitmask & XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_B ==
-      XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_B;
+  bool get buttonB => _buttonBitmask & XINPUT_GAMEPAD_B == XINPUT_GAMEPAD_B;
 
   /// Returns true if the X button is pressed down.
-  bool get buttonX =>
-      _buttonBitmask & XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_X ==
-      XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_X;
+  bool get buttonX => _buttonBitmask & XINPUT_GAMEPAD_X == XINPUT_GAMEPAD_X;
 
   /// Returns true if the Y button is pressed down.
-  bool get buttonY =>
-      _buttonBitmask & XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_Y ==
-      XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_Y;
+  bool get buttonY => _buttonBitmask & XINPUT_GAMEPAD_Y == XINPUT_GAMEPAD_Y;
 }

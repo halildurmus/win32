@@ -1,6 +1,6 @@
 # Contributing
 
-Thank you for your interest in contributing to **win32_gamepad**!
+Thank you for your interest in contributing to `package:win32_gamepad`!
 
 This guide provides everything you need to get started and make your
 contributions effective and rewarding.
@@ -22,10 +22,10 @@ We strive to maintain a welcoming and inclusive community, so please read our
 - **🐛 Report Bugs**: Found a bug? Let us know on our [GitHub Issues] page.
 - **📝 Improve Documentation**: High-quality documentation is crucial. Help us
   improve it by refining the existing docs or adding new content.
-- **💬 Give Feedback**: Share your experience using **win32_gamepad**, what
+- **💬 Give Feedback**: Share your experience using `win32_gamepad`, what
   features you’d like, and what works well on [GitHub Discussions].
-- **📢 Share win32_gamepad**: Spread the word about this project to reach more
-  users.
+- **📢 Share `win32_gamepad`**: Spread the word about this project to reach
+  more users.
 - **💻 Contribute to the Codebase**: Work on new features or tackle
   [open issues][GitHub Issues] — all contributions are highly appreciated!
 
@@ -33,7 +33,7 @@ We strive to maintain a welcoming and inclusive community, so please read our
 
 ### ⚙️ Requirements
 
-- [Dart](https://dart.dev) version `3.5` or higher
+- [Dart](https://dart.dev) version `3.11` or higher
 - [git-cliff](https://git-cliff.org) for generating changelogs
 - [Lefthook](https://github.com/evilmartians/lefthook) for managing Git hooks
 
@@ -70,10 +70,10 @@ before commits.
 
 ### ✅ Running Tests
 
-To run tests for **win32_gamepad**, use:
+To run tests for the `package:win32_gamepad`, use:
 
 ```cmd
-dart test -j 1 --test-randomize-ordering-seed=random
+dart test
 ```
 
 _We require tests for each feature or bug fix. If you’re unsure how to write_
@@ -128,7 +128,7 @@ automatically, and our maintainers will review it.
 Please use the pull request template to provide details about your changes,
 ensuring a smoother review process.
 
-Thank you for contributing to **win32_gamepad**! 🎉
+Thank you for contributing to `package:win32_gamepad`! 🎉
 
 [Code of Conduct]: https://github.com/halildurmus/win32_gamepad/blob/main/CODE_OF_CONDUCT.md
 [Conventional Commits]: https://www.conventionalcommits.org/en/v1.0.0/
