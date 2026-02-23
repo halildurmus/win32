@@ -35,8 +35,9 @@ class FlutterEmbedder {
     using((arena) {
       final engineProperties = arena<FlutterDesktopEngineProperties>();
       engineProperties.ref
-        ..aot_library_path =
-            project.aotLibraryPath.toNativeUtf16(allocator: arena)
+        ..aot_library_path = project.aotLibraryPath.toNativeUtf16(
+          allocator: arena,
+        )
         ..icu_data_path = project.icuDataPath.toNativeUtf16(allocator: arena)
         ..assets_path = project.assetsPath.toNativeUtf16(allocator: arena);
       engine = flutter.FlutterDesktopEngineCreate(engineProperties);
@@ -80,7 +81,7 @@ class FlutterEmbedder {
   /// This will be `true` if `Run` has been called, or if `RelinquishEngine` has
   /// been called (since the view controller will run the engine if it hasn't
   /// already been run).
-  bool hasBeenRun = false;
+  var hasBeenRun = false;
 
   /// Notifies the Flutter engine that the system font list has changed.
   ///
@@ -90,7 +91,7 @@ class FlutterEmbedder {
       flutter.FlutterDesktopEngineReloadSystemFonts(engine);
 
   /// Gets the HWND (window handle) associated with the Flutter view.
-  int get hwnd => flutter.FlutterDesktopViewGetHWND(view);
+  HWND get hwnd => .new(flutter.FlutterDesktopViewGetHWND(view));
 
   /// Handles top-level window messages for Flutter view.
   ///
@@ -98,22 +99,25 @@ class FlutterEmbedder {
   /// - `message`: The window message.
   /// - `wParam`: Additional message information.
   /// - `lParam`: Additional message information.
-  int handleTopLevelWindowProc(int hwnd, int message, int wParam, int lParam) {
-    final result = calloc<IntPtr>();
+  int handleTopLevelWindowProc(
+    HWND hwnd,
+    int message,
+    WPARAM wParam,
+    LPARAM lParam,
+  ) => using((arena) {
+    final result = arena<IntPtr>();
     final handled =
         flutter.FlutterDesktopViewControllerHandleTopLevelWindowProc(
-              controller,
-              hwnd,
-              message,
-              wParam,
-              lParam,
-              result,
-            ) !=
-            0;
-    final returnValue = handled ? result.value : 0;
-    free(result);
-    return returnValue;
-  }
+          controller,
+          hwnd,
+          message,
+          wParam,
+          lParam,
+          result,
+        ) !=
+        0;
+    return handled ? result.value : 0;
+  });
 
   /// Starts running the Flutter engine, optionally specifying an entry point.
   ///

@@ -1,3 +1,15 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+## [0.2.4] - 2026-02-23
+
+### 📦 Dependencies
+
+- Bumped minimum required Dart SDK version to `3.11.0`.
+
+[0.2.4]: https://github.com/halildurmus/win32_runner/compare/v0.2.3...win32_runner-v0.2.4
+
 ## 0.2.3
 
 - Bump minimum required Dart SDK version to `3.4.0`

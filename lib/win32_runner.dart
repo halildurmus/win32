@@ -1,4 +1,4 @@
-/// A Dart library that allows you to run Flutter apps from a Dart runner.
+/// A Dart runner for Flutter Windows apps — no C++ compiler required.
 library;
 
 export 'src/dart_project.dart';

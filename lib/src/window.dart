@@ -25,7 +25,7 @@ class Window {
     required String windowCaption,
     required String className,
     required Pointer<NativeFunction<WNDPROC>> windowProc,
-    int? hInstance,
+    HINSTANCE? hInstance,
     math.Rectangle<int>? dimensions,
     String? iconPath,
   }) {
@@ -38,37 +38,39 @@ class Window {
     }
 
     return using((arena) {
-      final classNamePtr = className.toNativeUtf16(allocator: arena);
-      final windowCaptionPtr = windowCaption.toNativeUtf16(allocator: arena);
-      final iconPathPtr = iconPath?.toNativeUtf16(allocator: arena);
+      final classNamePtr = arena.pcwstr(className);
+      final iconPathPtr = iconPath != null ? arena.pcwstr(iconPath) : null;
       final wc = arena<WNDCLASS>();
       wc.ref
-        ..hbrBackground = GetStockObject(GET_STOCK_OBJECT_FLAGS.WHITE_BRUSH)
-        ..hCursor = LoadCursor(NULL, IDC_ARROW)
-        ..hInstance = hInstance ?? GetModuleHandle(nullptr)
+        ..hbrBackground = .new(GetStockObject(WHITE_BRUSH))
+        ..hCursor = LoadCursor(null, IDC_ARROW).value
+        ..hInstance = hInstance ?? HINSTANCE(GetModuleHandle(null).value)
         ..lpfnWndProc = windowProc
-        ..lpszClassName = classNamePtr
-        ..style = WNDCLASS_STYLES.CS_HREDRAW | WNDCLASS_STYLES.CS_VREDRAW;
+        ..lpszClassName = .new(classNamePtr)
+        ..style = CS_HREDRAW | CS_VREDRAW;
       if (iconPathPtr != null) {
-        wc.ref.hIcon = LoadImage(
-          NULL,
-          iconPathPtr,
-          GDI_IMAGE_TYPE.IMAGE_ICON,
-          NULL,
-          NULL,
-          IMAGE_FLAGS.LR_DEFAULTSIZE | IMAGE_FLAGS.LR_LOADFROMFILE,
+        wc.ref.hIcon = HICON(
+          LoadImage(
+            null,
+            iconPathPtr,
+            IMAGE_ICON,
+            NULL,
+            NULL,
+            LR_DEFAULTSIZE | LR_LOADFROMFILE,
+          ).value,
         );
       }
-      RegisterClass(wc);
+      final result = RegisterClass(wc);
+      if (result.value == 0) throw WindowsException(result.error.toHRESULT());
 
-      final scaleFactor =
-          dimensions != null ? scaleFactorForOrigin(dimensions) : 1.0;
-      final hwnd = CreateWindowEx(
-        0, // Optional window styles.
+      final scaleFactor = dimensions != null
+          ? scaleFactorForOrigin(dimensions)
+          : 1.0;
+      final Win32Result(value: hwnd, :error) = CreateWindowEx(
+        WS_EX_LEFT, // Optional window styles.
         classNamePtr, // Window class
-        windowCaptionPtr, // Window caption
-        WINDOW_STYLE.WS_OVERLAPPEDWINDOW |
-            WINDOW_STYLE.WS_VISIBLE, // Window style
+        arena.pcwstr(windowCaption), // Window caption
+        WS_OVERLAPPEDWINDOW | WS_VISIBLE, // Window style
         dimensions != null
             ? scale(dimensions.left, scaleFactor)
             : CW_USEDEFAULT,
@@ -79,33 +81,26 @@ class Window {
         dimensions != null
             ? scale(dimensions.height, scaleFactor)
             : CW_USEDEFAULT,
-        NULL, // Parent window
-        NULL, // Menu
-        hInstance ?? GetModuleHandle(nullptr), // Instance handle
-        nullptr, // Additional application data
+        null, // Parent window
+        null, // Menu
+        hInstance ?? .new(GetModuleHandle(null).value), // Instance handle
+        null, // Additional application data
       );
-      if (hwnd == FALSE) throw Exception('Unable to create top-level window.');
-
+      if (hwnd.isNull) throw WindowsException(error.toHRESULT());
       return Window(hwnd);
     });
   }
 
   /// The handle to the window.
-  final int hwnd;
+  final HWND hwnd;
 
   /// The dimensions of the current window.
-  math.Rectangle<int> get dimensions {
-    final rect = calloc<RECT>();
+  math.Rectangle<int> get dimensions => using((arena) {
+    final rect = arena<RECT>();
     GetClientRect(hwnd, rect);
-    final windowRect = math.Rectangle<int>(
-      rect.ref.left,
-      rect.ref.top,
-      rect.ref.right - rect.ref.left,
-      rect.ref.bottom - rect.ref.top,
-    );
-    free(rect);
-    return windowRect;
-  }
+    final RECT(:left, :top, :right, :bottom) = rect.ref;
+    return .new(left, top, right - left, bottom - top);
+  });
 
   /// Moves and resizes the current window to the specified [newDimensions].
   ///
@@ -118,7 +113,7 @@ class Window {
         newDimensions.top,
         newDimensions.width,
         newDimensions.height,
-        repaintWindow ? TRUE : FALSE,
+        repaintWindow,
       );
 
   /// Runs the Windows message loop for this window.
@@ -127,7 +122,7 @@ class Window {
   /// the window is closed.
   void runMessageLoop() {
     final msg = calloc<MSG>();
-    while (GetMessage(msg, NULL, 0, 0) != FALSE) {
+    while (GetMessage(msg, null, 0, 0).value) {
       TranslateMessage(msg);
       DispatchMessage(msg);
     }
@@ -140,25 +135,18 @@ class Window {
       (source * scaleFactor).floor();
 
   /// Calculates the DPI scale factor for the specified window [dimensions].
-  static double scaleFactorForOrigin(math.Rectangle<int> dimensions) {
-    final point = calloc<POINT>();
-    point.ref
-      ..x = dimensions.left
-      ..y = dimensions.top;
-    final dpiX = calloc<UINT>();
-    final dpiY = calloc<UINT>();
-
-    final hmonitor = MonitorFromPoint(
-        point.ref, MONITOR_FROM_FLAGS.MONITOR_DEFAULTTONEAREST);
-    GetDpiForMonitor(hmonitor, MONITOR_DPI_TYPE.MDT_EFFECTIVE_DPI, dpiX, dpiY);
-    final dpi = dpiX.value;
-
-    free(point);
-    free(dpiX);
-    free(dpiY);
-
-    return dpi / 96.0;
-  }
+  static double scaleFactorForOrigin(math.Rectangle<int> dimensions) =>
+      using((arena) {
+        final point = arena<POINT>();
+        point.ref
+          ..x = dimensions.left
+          ..y = dimensions.top;
+        final dpiX = arena<UINT>();
+        final dpiY = arena<UINT>();
+        final hmonitor = MonitorFromPoint(point.ref, MONITOR_DEFAULTTONEAREST);
+        GetDpiForMonitor(hmonitor, MDT_EFFECTIVE_DPI, dpiX, dpiY);
+        return dpiX.value / 96.0;
+      });
 
   /// Sets the keyboard focus to the current window.
   void setFocus() => SetFocus(hwnd);
@@ -168,25 +156,31 @@ class Window {
 
   /// Updates the theme of the current window.
   void updateTheme() {
-    const keyPath =
-        r'Software\Microsoft\Windows\CurrentVersion\Themes\Personalize';
-    final key = Registry.openPath(RegistryHive.currentUser, path: keyPath);
+    final key = CURRENT_USER.open(
+      r'Software\Microsoft\Windows\CurrentVersion\Themes\Personalize',
+    );
 
-    // A value of 0 indicates apps should use dark mode. A non-zero or missing
-    // value indicates apps should use light mode.
-    final appsUseLightMode = key.getIntValue('AppsUseLightTheme');
-    if (appsUseLightMode != null) {
-      final enableDarkMode = appsUseLightMode == FALSE;
-      final pvAttribute = calloc<BOOL>()..value = enableDarkMode ? TRUE : FALSE;
-      DwmSetWindowAttribute(
-        hwnd,
-        DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE,
-        pvAttribute,
-        sizeOf<BOOL>(),
-      );
-      free(pvAttribute);
+    try {
+      // A value of 0 indicates apps should use dark mode. A non-zero or missing
+      // value indicates apps should use light mode.
+      final appsUseLightMode = key.getInt('AppsUseLightTheme');
+      if (appsUseLightMode != null) {
+        final enableDarkMode = appsUseLightMode == FALSE;
+        final pvAttribute = calloc<Int32>()
+          ..value = enableDarkMode ? TRUE : FALSE;
+        try {
+          DwmSetWindowAttribute(
+            hwnd,
+            DWMWA_USE_IMMERSIVE_DARK_MODE,
+            pvAttribute,
+            sizeOf<Int32>(),
+          );
+        } finally {
+          free(pvAttribute);
+        }
+      }
+    } finally {
+      key.close();
     }
-
-    key.close();
   }
 }

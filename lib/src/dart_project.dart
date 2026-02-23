@@ -26,11 +26,11 @@ class DartProject {
   ///
   /// The path can either be absolute, or relative to the directory containing
   /// the running executable.
-  factory DartProject.fromPath(String path) => DartProject(
-        aotLibraryPath: p.join(path, 'app.so'),
-        assetsPath: p.join(path, 'flutter_assets'),
-        icuDataPath: p.join(path, 'icudtl.dat'),
-      );
+  factory DartProject.fromPath(String path) => .new(
+    aotLibraryPath: p.join(path, 'app.so'),
+    assetsPath: p.join(path, 'flutter_assets'),
+    icuDataPath: p.join(path, 'icudtl.dat'),
+  );
 
   /// Creates a [DartProject] from the root Flutter folder, after running
   /// `flutter assemble`, with a command such as: `flutter assemble
@@ -44,12 +44,11 @@ class DartProject {
   ///
   /// The path can either be absolute, or relative to the directory containing
   /// the running executable.
-  factory DartProject.fromRoot(String path) => DartProject(
-        aotLibraryPath: p.join(path, 'build', 'windows', 'app.so'),
-        assetsPath: p.join(path, 'build', 'flutter_assets'),
-        icuDataPath:
-            p.join(path, 'windows', 'flutter', 'ephemeral', 'icudtl.dat'),
-      );
+  factory DartProject.fromRoot(String path) => .new(
+    aotLibraryPath: p.join(path, 'build', 'windows', 'app.so'),
+    assetsPath: p.join(path, 'build', 'flutter_assets'),
+    icuDataPath: p.join(path, 'windows', 'flutter', 'ephemeral', 'icudtl.dat'),
+  );
 
   /// The path to the AOT library.
   ///
