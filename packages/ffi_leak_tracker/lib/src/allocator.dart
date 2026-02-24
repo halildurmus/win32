@@ -1,12 +1,14 @@
 part of 'leak_tracker.dart';
 
-/// A zero-initializing allocator that compiles down to [calloc] in release
+/// A zero-initializing allocator that compile away to [calloc] in release
 /// builds.
 ///
-/// In debug and profile builds, this allocator records allocation metadata
-/// with the leak tracker so that native memory leaks can be detected and
-/// reported. In release builds, it aliases directly to [calloc] with zero
-/// runtime overhead.
+/// - In **debug and profile builds**, this allocator records allocation
+///   metadata when leak tracking is enabled. It integrates with the leak
+///   tracker to record allocation metadata so that native memory leaks can be
+///   detected and reported.
+/// - In **release builds**, it aliases directly to [calloc] with zero runtime
+///   overhead.
 ///
 /// Platform behavior:
 /// - **Windows:** uses `CoTaskMemAlloc` / `CoTaskMemFree`
@@ -20,13 +22,15 @@ part of 'leak_tracker.dart';
 /// in release builds.
 const Allocator adaptiveCalloc = isReleaseMode ? calloc : diagnosticCalloc;
 
-/// A non-zero-initializing allocator that compiles down to [malloc] in release
+/// A non-zero-initializing allocator that compile away to [malloc] in release
 /// builds.
 ///
-/// In debug and profile builds, this allocator records allocation metadata
-/// with the leak tracker so that native memory leaks can be detected and
-/// reported. In release builds, it aliases directly to [malloc] with zero
-/// runtime overhead.
+/// - In **debug and profile builds**, this allocator records allocation
+///   metadata when leak tracking is enabled. It integrates with the leak
+///   tracker to record allocation metadata so that native memory leaks can be
+///   detected and reported.
+/// - In **release builds**, it aliases directly to [malloc] with zero runtime
+///   overhead.
 ///
 /// Platform behavior:
 /// - **Windows:** uses `CoTaskMemAlloc` / `CoTaskMemFree`

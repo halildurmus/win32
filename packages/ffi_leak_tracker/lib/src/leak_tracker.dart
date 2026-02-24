@@ -64,18 +64,11 @@ final class LeakTracker {
   static Map<int, Allocation> get _registry =>
       Zone.current[#_registry] as Map<int, Allocation>? ?? _globalRegistry;
 
-  /// Enables native memory leak tracking globally.
+  /// Enables tracking native memory allocations globally.
   ///
   /// When enabled, allocators ([adaptiveCalloc], [adaptiveMalloc],
   /// [diagnosticCalloc], [diagnosticMalloc]) record allocation metadata that
   /// can later be inspected or emitted.
-  ///
-
-  /// Enables tracking native memory allocations globally.
-  ///
-  /// Once enabled, all [TrackingAllocator] instances ([diagnosticCalloc],
-  /// [diagnosticMalloc], and their adaptive counterparts in debug and profile
-  /// builds) will register each allocation with the leak tracker.
   ///
   /// Recorded metadata includes the allocation address, size, type, timestamp,
   /// and call stack at the point of allocation.
