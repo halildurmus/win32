@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "halildurmus.dev" "\0"
-            VALUE "FileDescription", "Demo wallpaper changer app." "\0"
+            VALUE "CompanyName", "com.example" "\0"
+            VALUE "FileDescription", "filepicker_windows_example" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "wallpaper" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2023 Halil Durmus. All rights reserved." "\0"
-            VALUE "OriginalFilename", "wallpaper.exe" "\0"
-            VALUE "ProductName", "wallpaper" "\0"
+            VALUE "InternalName", "filepicker_windows_example" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2026 com.example. All rights reserved." "\0"
+            VALUE "OriginalFilename", "filepicker_windows_example.exe" "\0"
+            VALUE "ProductName", "filepicker_windows_example" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

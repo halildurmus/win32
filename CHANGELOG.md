@@ -1,3 +1,36 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+## [3.0.0] - 2026-02-25
+
+### 🔄 Breaking Changes
+
+- `FileDialog.hWndOwner` type changed from `int` to `Pointer`.
+- `WindowsKnownFolder` is now an extension type that wraps a `GUID`, allowing it
+  to be used directly anywhere a `GUID` is expected without unwrapping.
+- `CustomPlace.field` has been replaced with a new `folder` field of type
+  `WindowsKnownFolder`.
+- `CustomPlace` now holds a
+  `WindowsKnownFolder folder` instead.
+
+### 🚀 Features
+
+- In Flutter apps, when `hWndOwner` is not set explicitly, the dialog now
+  automatically detects the Flutter window and uses it as the owner.
+
+  This ensures the dialog always opens as a modal in front of the Flutter
+  window, preventing the app from appearing frozen when the user clicks away
+  while the dialog is open.
+
+  In Dart-only apps, no owner is set and the previous behaviour is preserved.
+
+### 📦 Dependencies
+
+- Bumped minimum required Dart SDK version to `3.11.0`.
+
+[3.0.0]: https://github.com/halildurmus/filepicker_windows/compare/v2.1.4...filepicker_windows-v3.0.0
+
 ## 2.1.4
 
 - Bump minimum required Dart version to `3.4.0`

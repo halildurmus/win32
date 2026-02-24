@@ -15,18 +15,24 @@ All notable changes to this project will be documented in this file.\n
 # https://keats.github.io/tera/docs/#introduction
 body = """
 {% macro print_commit(commit) -%}
-    - {% if commit.scope %}*({{ commit.scope }})* {% endif %}\
-        {% if commit.breaking %}[**breaking**] {% endif %}\
-        {{ commit.message | upper_first }} - \
-        ([{{ commit.id | truncate(length=7, end="") }}](<REPO>/commit/{{ commit.id }}))\
+  - {% if commit.scope %}*({{ commit.scope }})* {% endif %}\
+    {% if commit.breaking %}[**breaking**] {% endif %}\
+    {{ commit.message | split(pat="\n") | first | upper_first | trim }}\
+    {% if commit.remote.username %} by @{{ commit.remote.username }}{%- endif -%}
+    {% if commit.remote.pr_number %} in \
+      [#{{ commit.remote.pr_number }}](<REPO>/pull/{{ commit.remote.pr_number }}) \
+    {%- endif -%}
 {% endmacro -%}
 
-{% macro print_username(username) -%}
-    [@{{ username }}](<GITHUB>/{{ username }})
+{% macro print_contributor(contributor) -%}
+  - @{{ contributor.username }} made their first contribution
+    {%- if contributor.pr_number %} in \
+      [#{{ contributor.pr_number }}](<REPO>/pull/{{ contributor.pr_number }}) \
+    {%- endif %}
 {% endmacro -%}
 
 {% if version %}\
-    ## [{{ version | trim_start_matches(pat="v") }}] - {{ timestamp | date(format="%Y-%m-%d") }}
+    ## [{{ version | trim_start_matches(pat="filepicker_windows-v") }}] - {{ timestamp | date(format="%Y-%m-%d") }}
 {% else %}\
     ## [unreleased]
 {% endif %}\
@@ -46,15 +52,11 @@ body = """
 {% endfor -%}
 {%- if github -%}
 {% if github.contributors | filter(attribute="is_first_time", value=true) | length != 0 %}
-  ## New Contributors ❤️
+  ### New Contributors ❤️
 {% endif %}\
 {% for contributor in github.contributors | filter(attribute="is_first_time", value=true) %}
-  * {{ self::print_username(username=contributor.username) }} \
-      made their first contribution
-    {%- if contributor.pr_number %} in \
-      [#{{ contributor.pr_number }}](<REPO>/pull/{{ contributor.pr_number }}) \
-    {%- endif %}
-{%- endfor -%}
+    {{ self::print_contributor(contributor=contributor) }}
+{%- endfor %}\n
 {%- endif %}\n
 """
 # template for the changelog footer
@@ -62,13 +64,14 @@ footer = """
 {% for release in releases -%}
     {% if release.version -%}
         {% if release.previous.version -%}
-            [{{ release.version | trim_start_matches(pat="v") }}]: \
+            [{{ release.version | trim_start_matches(pat="filepicker_windows-v") }}]: \
                 <REPO>/compare/{{ release.previous.version }}..{{ release.version }}
         {% endif -%}
     {% else -%}
         [unreleased]: <REPO>/compare/{{ release.previous.version }}..HEAD
     {% endif -%}
-{% endfor %}"""
+{% endfor %}
+"""
 # remove the leading and trailing s
 trim = true
 # postprocessors
@@ -88,22 +91,29 @@ filter_unconventional = true
 split_commits = false
 # regex for preprocessing the commit messages
 commit_preprocessors = [
-    # Replace issue numbers
-    { pattern = '\((\w+\s)?#([0-9]+)\)', replace = "([#${2}](<REPO>/issues/${2}))" },
+    # remove issue numbers from commits
+    { pattern = '\((\w+\s)?#([0-9]+)\)', replace = "" },
 ]
 # regex for parsing and grouping commits
 commit_parsers = [
     { message = "^feat", group = "<!-- 0 -->🚀 Features" },
     { message = "^fix", group = "<!-- 1 -->🐛 Bug Fixes" },
-    { message = "^perf", group = "<!-- 2 -->⚡ Performance Improvements" },
-    { message = "^refactor", group = "<!-- 3 -->🧹 Refactors" },
+    { message = "^perf", group = "<!-- 2 -->⚡ Performance" },
+    { message = "^refactor", group = "<!-- 3 -->🧹 Refactor" },
+    { message = "^docs", group = "<!-- 4 -->📝 Documentation" },
+    { message = "^test", group = "<!-- 5 -->🧪 Testing" },
+    { message = "^style", group = "<!-- 6 -->🎨 Styling" },
+    { message = "^chore\\(deps\\)", group = "<!-- 7 -->📦 Dependencies" },
+    { message = "^chore\\(release\\): v", skip = true },
+    { message = "^chore|^ci", group = "<!-- 8 -->⚙️ Miscellaneous Tasks" },
+    { body = ".*security", group = "<!-- 9 -->🛡️ Security" },
 ]
 # protect breaking changes from being skipped due to matching a skipping commit_parser
 protect_breaking_commits = false
 # filter out the commits that are not matched by commit parsers
 filter_commits = true
 # regex for matching git tags
-tag_pattern = "v[0-9].*"
+tag_pattern = "filepicker_windows-v[0-9].*"
 # regex for skipping tags
 skip_tags = ""
 # regex for ignoring tags

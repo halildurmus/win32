@@ -1,12 +1,18 @@
 name: Publish
 
 on:
+  pull_request:
+    branches: [main]
   push:
-    tags: ['v[0-9]+.[0-9]+.[0-9]+*']
+    tags: ['[A-z0-9]+-v[0-9]+.[0-9]+.[0-9]+*']
 
 jobs:
   publish:
+    if: ${{ github.repository_owner == 'halildurmus' }}
     name: Publish to pub.dev
     permissions:
       id-token: write
-    uses: dart-lang/setup-dart/.github/workflows/publish.yml@main
+      pull-requests: write
+    uses: dart-lang/ecosystem/.github/workflows/publish.yaml@main
+    with:
+      write-comments: false

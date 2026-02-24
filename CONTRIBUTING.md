@@ -1,6 +1,6 @@
 # Contributing
 
-Thank you for your interest in contributing to **filepicker_windows**!
+Thank you for your interest in contributing to `package:filepicker_windows`!
 
 This guide provides everything you need to get started and make your
 contributions effective and rewarding.
@@ -22,10 +22,11 @@ We strive to maintain a welcoming and inclusive community, so please read our
 - **🐛 Report Bugs**: Found a bug? Let us know on our [GitHub Issues] page.
 - **📝 Improve Documentation**: High-quality documentation is crucial. Help us
   improve it by refining the existing docs or adding new content.
-- **💬 Give Feedback**: Share your experience using **filepicker_windows**, what
-  features you’d like, and what works well on [GitHub Discussions].
-- **📢 Share filepicker_windows**: Spread the word about this project to reach
-  more users.
+- **💬 Give Feedback**: Share your experience using
+  `package:filepicker_windows`, what features you’d like, and what works well on
+  [GitHub Discussions].
+- **📢 Share `package:filepicker_windows`**: Spread the word about this project
+  to reach more users.
 - **💻 Contribute to the Codebase**: Work on new features or tackle
   [open issues][GitHub Issues] — all contributions are highly appreciated!
 
@@ -33,7 +34,7 @@ We strive to maintain a welcoming and inclusive community, so please read our
 
 ### ⚙️ Requirements
 
-- [Dart](https://dart.dev) version `3.5` or higher
+- [Dart](https://dart.dev) version `3.11` or higher
 - [git-cliff](https://git-cliff.org) for generating changelogs
 - [Lefthook](https://github.com/evilmartians/lefthook) for managing Git hooks
 
@@ -42,7 +43,7 @@ set up the project.
 
 ### 📥 Cloning the Repository
 
-Clone your fork of **filepicker_windows** to your local machine:
+Clone your fork of `package:filepicker_windows` to your local machine:
 
 ```cmd
 git clone https://github.com/<your-username>/filepicker_windows.git
@@ -70,7 +71,7 @@ before commits.
 
 ### ✅ Running Tests
 
-To run tests for **filepicker_windows**, use:
+To run tests for `package:filepicker_windows`, use:
 
 ```cmd
 dart test
@@ -128,7 +129,7 @@ automatically, and our maintainers will review it.
 Please use the pull request template to provide details about your changes,
 ensuring a smoother review process.
 
-Thank you for contributing to **filepicker_windows**! 🎉
+Thank you for contributing to `package:filepicker_windows`! 🎉
 
 [Code of Conduct]: https://github.com/halildurmus/filepicker_windows/blob/main/CODE_OF_CONDUCT.md
 [Conventional Commits]: https://www.conventionalcommits.org/en/v1.0.0/

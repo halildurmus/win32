@@ -6,182 +6,210 @@ import 'package:win32/win32.dart';
 void main() {
   group('WindowsKnownFolder', () {
     test('AdminTools', () {
-      check(WindowsKnownFolder.AdminTools.guid).equals(FOLDERID_AdminTools);
+      check(WindowsKnownFolder.AdminTools).equals(.new(FOLDERID_AdminTools));
     });
     test('CDBurning', () {
-      check(WindowsKnownFolder.CDBurning.guid).equals(FOLDERID_CDBurning);
+      check(WindowsKnownFolder.CDBurning).equals(.new(FOLDERID_CDBurning));
     });
     test('CommonAdminTools', () {
-      check(WindowsKnownFolder.CommonAdminTools.guid)
-          .equals(FOLDERID_CommonAdminTools);
+      check(
+        WindowsKnownFolder.CommonAdminTools,
+      ).equals(.new(FOLDERID_CommonAdminTools));
     });
     test('CommonPrograms', () {
-      check(WindowsKnownFolder.CommonPrograms.guid)
-          .equals(FOLDERID_CommonPrograms);
+      check(
+        WindowsKnownFolder.CommonPrograms,
+      ).equals(.new(FOLDERID_CommonPrograms));
     });
     test('CommonStartMenu', () {
-      check(WindowsKnownFolder.CommonStartMenu.guid)
-          .equals(FOLDERID_CommonStartMenu);
+      check(
+        WindowsKnownFolder.CommonStartMenu,
+      ).equals(.new(FOLDERID_CommonStartMenu));
     });
     test('CommonStartup', () {
-      check(WindowsKnownFolder.CommonStartup.guid)
-          .equals(FOLDERID_CommonStartup);
+      check(
+        WindowsKnownFolder.CommonStartup,
+      ).equals(.new(FOLDERID_CommonStartup));
     });
     test('CommonTemplates', () {
-      check(WindowsKnownFolder.CommonTemplates.guid)
-          .equals(FOLDERID_CommonTemplates);
+      check(
+        WindowsKnownFolder.CommonTemplates,
+      ).equals(.new(FOLDERID_CommonTemplates));
     });
     test('ComputerFolder', () {
-      check(WindowsKnownFolder.ComputerFolder.guid)
-          .equals(FOLDERID_ComputerFolder);
+      check(
+        WindowsKnownFolder.ComputerFolder,
+      ).equals(.new(FOLDERID_ComputerFolder));
     });
     test('ConnectionsFolder', () {
-      check(WindowsKnownFolder.ConnectionsFolder.guid)
-          .equals(FOLDERID_ConnectionsFolder);
+      check(
+        WindowsKnownFolder.ConnectionsFolder,
+      ).equals(.new(FOLDERID_ConnectionsFolder));
     });
     test('ControlPanelFolder', () {
-      check(WindowsKnownFolder.ControlPanelFolder.guid)
-          .equals(FOLDERID_ControlPanelFolder);
+      check(
+        WindowsKnownFolder.ControlPanelFolder,
+      ).equals(.new(FOLDERID_ControlPanelFolder));
     });
     test('Cookies', () {
-      check(WindowsKnownFolder.Cookies.guid).equals(FOLDERID_Cookies);
+      check(WindowsKnownFolder.Cookies).equals(.new(FOLDERID_Cookies));
     });
     test('Desktop', () {
-      check(WindowsKnownFolder.Desktop.guid).equals(FOLDERID_Desktop);
+      check(WindowsKnownFolder.Desktop).equals(.new(FOLDERID_Desktop));
     });
     test('Documents', () {
-      check(WindowsKnownFolder.Documents.guid).equals(FOLDERID_Documents);
+      check(WindowsKnownFolder.Documents).equals(.new(FOLDERID_Documents));
     });
     test('Downloads', () {
-      check(WindowsKnownFolder.Downloads.guid).equals(FOLDERID_Downloads);
+      check(WindowsKnownFolder.Downloads).equals(.new(FOLDERID_Downloads));
     });
     test('Favorites', () {
-      check(WindowsKnownFolder.Favorites.guid).equals(FOLDERID_Favorites);
+      check(WindowsKnownFolder.Favorites).equals(.new(FOLDERID_Favorites));
     });
     test('Fonts', () {
-      check(WindowsKnownFolder.Fonts.guid).equals(FOLDERID_Fonts);
+      check(WindowsKnownFolder.Fonts).equals(.new(FOLDERID_Fonts));
     });
     test('History', () {
-      check(WindowsKnownFolder.History.guid).equals(FOLDERID_History);
+      check(WindowsKnownFolder.History).equals(.new(FOLDERID_History));
     });
     test('InternetCache', () {
-      check(WindowsKnownFolder.InternetCache.guid)
-          .equals(FOLDERID_InternetCache);
+      check(
+        WindowsKnownFolder.InternetCache,
+      ).equals(.new(FOLDERID_InternetCache));
     });
     test('InternetFolder', () {
-      check(WindowsKnownFolder.InternetFolder.guid)
-          .equals(FOLDERID_InternetFolder);
+      check(
+        WindowsKnownFolder.InternetFolder,
+      ).equals(.new(FOLDERID_InternetFolder));
     });
     test('LocalAppData', () {
-      check(WindowsKnownFolder.LocalAppData.guid).equals(FOLDERID_LocalAppData);
+      check(
+        WindowsKnownFolder.LocalAppData,
+      ).equals(.new(FOLDERID_LocalAppData));
     });
     test('Music', () {
-      check(WindowsKnownFolder.Music.guid).equals(FOLDERID_Music);
+      check(WindowsKnownFolder.Music).equals(.new(FOLDERID_Music));
     });
     test('NetHood', () {
-      check(WindowsKnownFolder.NetHood.guid).equals(FOLDERID_NetHood);
+      check(WindowsKnownFolder.NetHood).equals(.new(FOLDERID_NetHood));
     });
     test('NetworkFolder', () {
-      check(WindowsKnownFolder.NetworkFolder.guid)
-          .equals(FOLDERID_NetworkFolder);
+      check(
+        WindowsKnownFolder.NetworkFolder,
+      ).equals(.new(FOLDERID_NetworkFolder));
     });
     test('Pictures', () {
-      check(WindowsKnownFolder.Pictures.guid).equals(FOLDERID_Pictures);
+      check(WindowsKnownFolder.Pictures).equals(.new(FOLDERID_Pictures));
     });
     test('PrintHood', () {
-      check(WindowsKnownFolder.PrintHood.guid).equals(FOLDERID_PrintHood);
+      check(WindowsKnownFolder.PrintHood).equals(.new(FOLDERID_PrintHood));
     });
     test('PrintersFolder', () {
-      check(WindowsKnownFolder.PrintersFolder.guid)
-          .equals(FOLDERID_PrintersFolder);
+      check(
+        WindowsKnownFolder.PrintersFolder,
+      ).equals(.new(FOLDERID_PrintersFolder));
     });
     test('Profile', () {
-      check(WindowsKnownFolder.Profile.guid).equals(FOLDERID_Profile);
+      check(WindowsKnownFolder.Profile).equals(.new(FOLDERID_Profile));
     });
     test('ProgramData', () {
-      check(WindowsKnownFolder.ProgramData.guid).equals(FOLDERID_ProgramData);
+      check(WindowsKnownFolder.ProgramData).equals(.new(FOLDERID_ProgramData));
     });
     test('ProgramFiles', () {
-      check(WindowsKnownFolder.ProgramFiles.guid).equals(FOLDERID_ProgramFiles);
+      check(
+        WindowsKnownFolder.ProgramFiles,
+      ).equals(.new(FOLDERID_ProgramFiles));
     });
     test('ProgramFilesCommon', () {
-      check(WindowsKnownFolder.ProgramFilesCommon.guid)
-          .equals(FOLDERID_ProgramFilesCommon);
+      check(
+        WindowsKnownFolder.ProgramFilesCommon,
+      ).equals(.new(FOLDERID_ProgramFilesCommon));
     });
     test('ProgramFilesCommonX64', () {
-      check(WindowsKnownFolder.ProgramFilesCommonX64.guid)
-          .equals(FOLDERID_ProgramFilesCommonX64);
+      check(
+        WindowsKnownFolder.ProgramFilesCommonX64,
+      ).equals(.new(FOLDERID_ProgramFilesCommonX64));
     });
     test('ProgramFilesCommonX86', () {
-      check(WindowsKnownFolder.ProgramFilesCommonX86.guid)
-          .equals(FOLDERID_ProgramFilesCommonX86);
+      check(
+        WindowsKnownFolder.ProgramFilesCommonX86,
+      ).equals(.new(FOLDERID_ProgramFilesCommonX86));
     });
     test('ProgramFilesX64', () {
-      check(WindowsKnownFolder.ProgramFilesX64.guid)
-          .equals(FOLDERID_ProgramFilesX64);
+      check(
+        WindowsKnownFolder.ProgramFilesX64,
+      ).equals(.new(FOLDERID_ProgramFilesX64));
     });
     test('ProgramFilesX86', () {
-      check(WindowsKnownFolder.ProgramFilesX86.guid)
-          .equals(FOLDERID_ProgramFilesX86);
+      check(
+        WindowsKnownFolder.ProgramFilesX86,
+      ).equals(.new(FOLDERID_ProgramFilesX86));
     });
     test('Programs', () {
-      check(WindowsKnownFolder.Programs.guid).equals(FOLDERID_Programs);
+      check(WindowsKnownFolder.Programs).equals(.new(FOLDERID_Programs));
     });
     test('PublicDesktop', () {
-      check(WindowsKnownFolder.PublicDesktop.guid)
-          .equals(FOLDERID_PublicDesktop);
+      check(
+        WindowsKnownFolder.PublicDesktop,
+      ).equals(.new(FOLDERID_PublicDesktop));
     });
     test('PublicDocuments', () {
-      check(WindowsKnownFolder.PublicDocuments.guid)
-          .equals(FOLDERID_PublicDocuments);
+      check(
+        WindowsKnownFolder.PublicDocuments,
+      ).equals(.new(FOLDERID_PublicDocuments));
     });
     test('PublicMusic', () {
-      check(WindowsKnownFolder.PublicMusic.guid).equals(FOLDERID_PublicMusic);
+      check(WindowsKnownFolder.PublicMusic).equals(.new(FOLDERID_PublicMusic));
     });
     test('PublicPictures', () {
-      check(WindowsKnownFolder.PublicPictures.guid)
-          .equals(FOLDERID_PublicPictures);
+      check(
+        WindowsKnownFolder.PublicPictures,
+      ).equals(.new(FOLDERID_PublicPictures));
     });
     test('PublicVideos', () {
-      check(WindowsKnownFolder.PublicVideos.guid).equals(FOLDERID_PublicVideos);
+      check(
+        WindowsKnownFolder.PublicVideos,
+      ).equals(.new(FOLDERID_PublicVideos));
     });
     test('Recent', () {
-      check(WindowsKnownFolder.Recent.guid).equals(FOLDERID_Recent);
+      check(WindowsKnownFolder.Recent).equals(.new(FOLDERID_Recent));
     });
     test('RecycleBinFolder', () {
-      check(WindowsKnownFolder.RecycleBinFolder.guid)
-          .equals(FOLDERID_RecycleBinFolder);
+      check(
+        WindowsKnownFolder.RecycleBinFolder,
+      ).equals(.new(FOLDERID_RecycleBinFolder));
     });
     test('ResourceDir', () {
-      check(WindowsKnownFolder.ResourceDir.guid).equals(FOLDERID_ResourceDir);
+      check(WindowsKnownFolder.ResourceDir).equals(.new(FOLDERID_ResourceDir));
     });
     test('RoamingAppData', () {
-      check(WindowsKnownFolder.RoamingAppData.guid)
-          .equals(FOLDERID_RoamingAppData);
+      check(
+        WindowsKnownFolder.RoamingAppData,
+      ).equals(.new(FOLDERID_RoamingAppData));
     });
     test('SendTo', () {
-      check(WindowsKnownFolder.SendTo.guid).equals(FOLDERID_SendTo);
+      check(WindowsKnownFolder.SendTo).equals(.new(FOLDERID_SendTo));
     });
     test('StartMenu', () {
-      check(WindowsKnownFolder.StartMenu.guid).equals(FOLDERID_StartMenu);
+      check(WindowsKnownFolder.StartMenu).equals(.new(FOLDERID_StartMenu));
     });
     test('Startup', () {
-      check(WindowsKnownFolder.Startup.guid).equals(FOLDERID_Startup);
+      check(WindowsKnownFolder.Startup).equals(.new(FOLDERID_Startup));
     });
     test('System', () {
-      check(WindowsKnownFolder.System.guid).equals(FOLDERID_System);
+      check(WindowsKnownFolder.System).equals(.new(FOLDERID_System));
     });
     test('SystemX86', () {
-      check(WindowsKnownFolder.SystemX86.guid).equals(FOLDERID_SystemX86);
+      check(WindowsKnownFolder.SystemX86).equals(.new(FOLDERID_SystemX86));
     });
     test('Templates', () {
-      check(WindowsKnownFolder.Templates.guid).equals(FOLDERID_Templates);
+      check(WindowsKnownFolder.Templates).equals(.new(FOLDERID_Templates));
     });
     test('Videos', () {
-      check(WindowsKnownFolder.Videos.guid).equals(FOLDERID_Videos);
+      check(WindowsKnownFolder.Videos).equals(.new(FOLDERID_Videos));
     });
     test('Windows', () {
-      check(WindowsKnownFolder.Windows.guid).equals(FOLDERID_Windows);
+      check(WindowsKnownFolder.Windows).equals(.new(FOLDERID_Windows));
     });
   });
 }

@@ -5,7 +5,7 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'file_dialog.dart';
-import 'models/models.dart';
+import 'utils.dart';
 
 /// A picker that allows the user to select a file from the file system.
 class OpenFilePicker extends FileDialog {
@@ -20,7 +20,7 @@ class OpenFilePicker extends FileDialog {
   /// Whether the dialog box should always display the directory defined in
   /// in [initialDirectory] to the user, regardless of previous user
   /// interaction.
-  bool alwaysShowInitialDirectory = false;
+  var alwaysShowInitialDirectory = false;
 
   /// The directory that the dialog box initially displays when opened.
   ///
@@ -32,205 +32,152 @@ class OpenFilePicker extends FileDialog {
   /// Returns a [File] object from the selected file.
   ///
   /// Returns `null` if the user cancels the dialog.
-  File? getFile() {
-    var didUserCancel = false;
-    var filePath = '';
+  File? getFile() => using((arena) {
+    final fileDialog = arena.adopt(_createDialog());
 
-    final fileDialog = _createDialog();
-
-    final hr = fileDialog.show(hWndOwner);
-    if (FAILED(hr)) {
-      if (hr == HRESULT_FROM_WIN32(WIN32_ERROR.ERROR_CANCELLED)) {
-        didUserCancel = true;
+    try {
+      fileDialog.show(getEffectiveWindowHandle(hWndOwner));
+      final item = fileDialog.getResult();
+      if (item == null) return null;
+      arena.adopt(item);
+      final displayName = arena.using(
+        item.getDisplayName(SIGDN_FILESYSPATH),
+        free,
+      );
+      return .new(displayName.toDartString());
+    } on WindowsException catch (e) {
+      if (e.hr == ERROR_CANCELLED.toHRESULT()) {
+        return null;
       } else {
-        throw WindowsException(hr);
+        rethrow;
       }
-    } else {
-      final ppsi = calloc<Pointer<COMObject>>();
-      var hr = fileDialog.getResult(ppsi);
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      using((arena) {
-        final item = IShellItem(ppsi.cast());
-        final ppszName = arena<Pointer<Utf16>>();
-        hr = item.getDisplayName(SIGDN.SIGDN_FILESYSPATH, ppszName);
-        if (FAILED(hr)) throw WindowsException(hr);
-        filePath = ppszName.value.toDartString();
-      });
     }
-
-    return didUserCancel ? null : File(filePath);
-  }
+  });
 
   /// Returns a list of [File] objects from the selected files.
   ///
   /// Returns an empty list if the user cancels the dialog.
-  List<File> getFiles() {
-    var didUserCancel = false;
-    final filePaths = <String>[];
+  List<File> getFiles() => using((arena) {
+    final fileDialog = arena.adopt(_createDialog(multiSelect: true));
 
-    final fileDialog = _createDialog(multiSelect: true);
+    try {
+      fileDialog.show(null);
+      final itemArray = fileDialog.getResults();
+      if (itemArray == null) return const [];
+      arena.adopt(itemArray);
+      final count = itemArray.getCount();
 
-    final hr = fileDialog.show(NULL);
-    if (FAILED(hr)) {
-      if (hr == HRESULT_FROM_WIN32(WIN32_ERROR.ERROR_CANCELLED)) {
-        didUserCancel = true;
-      } else {
-        throw WindowsException(hr);
+      final filePaths = <String>[];
+      for (var i = 0; i < count; i++) {
+        final item = itemArray.getItemAt(i);
+        if (item == null) break;
+        arena.adopt(item);
+        final displayName = arena.using(
+          item.getDisplayName(SIGDN_FILESYSPATH),
+          free,
+        );
+        filePaths.add(displayName.toDartString());
       }
-    } else {
-      final ppsi = calloc<Pointer<COMObject>>();
-      var hr = fileDialog.getResults(ppsi);
-      if (FAILED(hr)) throw WindowsException(hr);
 
-      using((arena) {
-        final itemArray = IShellItemArray(ppsi.cast());
-        final pdwNumItems = arena<Uint32>();
-        hr = itemArray.getCount(pdwNumItems);
-        if (FAILED(hr)) throw WindowsException(hr);
+      return .unmodifiable(filePaths.map(File.new));
+    } on WindowsException catch (e) {
+      if (e.hr == ERROR_CANCELLED.toHRESULT()) {
+        return const [];
+      } else {
+        rethrow;
+      }
+    }
+  });
 
-        for (var i = 0; i < pdwNumItems.value; i++) {
-          final ppsi = calloc<Pointer<COMObject>>();
-          hr = itemArray.getItemAt(i, ppsi);
-          if (FAILED(hr)) throw WindowsException(hr);
+  IFileOpenDialog _createDialog({bool multiSelect = false}) => using((arena) {
+    final dialog = createInstance<IFileOpenDialog>(FileOpenDialog);
+    var options = dialog.getOptions();
 
-          final item = IShellItem(ppsi.cast());
-          final ppszName = arena<Pointer<Utf16>>();
-
-          hr = item.getDisplayName(SIGDN.SIGDN_FILESYSPATH, ppszName);
-          if (FAILED(hr)) throw WindowsException(hr);
-
-          final filePath = ppszName.value.toDartString();
-          filePaths.add(filePath);
-        }
-      });
+    if (!addToRecentDocuments) {
+      options |= FOS_DONTADDTORECENT;
+    }
+    if (!dereferenceLinks) {
+      options |= FOS_NODEREFERENCELINKS;
+    }
+    if (fileMustExist) {
+      options |= FOS_FILEMUSTEXIST;
+    }
+    if (forcePreviewPaneOn ?? false) {
+      options |= FOS_FORCEPREVIEWPANEON;
+    }
+    if (forceFileSystemItems) {
+      options |= FOS_FORCEFILESYSTEM;
+    }
+    if (hidePinnedPlaces) {
+      options |= FOS_HIDEPINNEDPLACES;
+    }
+    if (isDirectoryFixed) {
+      options |= FOS_NOCHANGEDIR;
+    }
+    if (multiSelect) {
+      options |= FOS_ALLOWMULTISELECT;
+    }
+    if (showHiddenAndSystemItems) {
+      options |= FOS_FORCESHOWHIDDEN;
     }
 
-    return didUserCancel ? [] : List<File>.from(filePaths.map(File.new));
-  }
+    dialog.setOptions(options);
 
-  FileOpenDialog _createDialog({bool multiSelect = false}) {
-    final fileDialog = FileOpenDialog.createInstance();
+    if (defaultExtension case final defaultExtension?
+        when defaultExtension.isNotEmpty) {
+      dialog.setDefaultExtension(arena.pcwstr(defaultExtension));
+    }
 
-    using((arena) {
-      final pfos = arena<Uint32>();
-      var hr = fileDialog.getOptions(pfos);
-      if (FAILED(hr)) throw WindowsException(hr);
+    if (fileName.isNotEmpty) {
+      dialog.setFileName(arena.pcwstr(fileName));
+    }
 
-      var options = pfos.value;
-      if (!addToRecentDocuments) {
-        options |= FILEOPENDIALOGOPTIONS.FOS_DONTADDTORECENT;
-      }
-      if (!dereferenceLinks) {
-        options |= FILEOPENDIALOGOPTIONS.FOS_NODEREFERENCELINKS;
-      }
-      if (fileMustExist) {
-        options |= FILEOPENDIALOGOPTIONS.FOS_FILEMUSTEXIST;
-      }
-      if (forcePreviewPaneOn ?? false) {
-        options |= FILEOPENDIALOGOPTIONS.FOS_FORCEPREVIEWPANEON;
-      }
-      if (forceFileSystemItems) {
-        options |= FILEOPENDIALOGOPTIONS.FOS_FORCEFILESYSTEM;
-      }
-      if (hidePinnedPlaces) {
-        options |= FILEOPENDIALOGOPTIONS.FOS_HIDEPINNEDPLACES;
-      }
-      if (isDirectoryFixed) {
-        options |= FILEOPENDIALOGOPTIONS.FOS_NOCHANGEDIR;
-      }
-      if (multiSelect) {
-        options |= FILEOPENDIALOGOPTIONS.FOS_ALLOWMULTISELECT;
-      }
-      if (showHiddenAndSystemItems) {
-        options |= FILEOPENDIALOGOPTIONS.FOS_FORCESHOWHIDDEN;
-      }
+    if (fileNameLabel.isNotEmpty) {
+      dialog.setFileNameLabel(arena.pcwstr(fileNameLabel));
+    }
 
-      hr = fileDialog.setOptions(options);
-      if (FAILED(hr)) throw WindowsException(hr);
+    if (title.isNotEmpty) {
+      dialog.setTitle(arena.pcwstr(title));
+    }
 
-      if (defaultExtension case final defaultExtension?
-          when defaultExtension.isNotEmpty) {
-        final pDefaultExtension =
-            defaultExtension.toNativeUtf16(allocator: arena);
-        final hr = fileDialog.setDefaultExtension(pDefaultExtension);
-        if (FAILED(hr)) throw WindowsException(hr);
+    if (filterSpecification.isNotEmpty) {
+      final rgSpec = arena<COMDLG_FILTERSPEC>(filterSpecification.length);
+      var index = 0;
+      for (final key in filterSpecification.keys) {
+        rgSpec[index]
+          ..pszName = arena.pwstr(key)
+          ..pszSpec = arena.pwstr(filterSpecification[key]!);
+        index++;
       }
+      dialog.setFileTypes(filterSpecification.length, rgSpec);
+    }
 
-      if (fileName.isNotEmpty) {
-        final pFileName = fileName.toNativeUtf16(allocator: arena);
-        final hr = fileDialog.setFileName(pFileName);
-        if (FAILED(hr)) throw WindowsException(hr);
+    if (defaultFilterIndex case final defaultFilterIndex?) {
+      if (defaultFilterIndex > 0 &&
+          defaultFilterIndex < filterSpecification.length) {
+        // SetFileTypeIndex is one-based, not zero-based
+        dialog.setFileTypeIndex(defaultFilterIndex + 1);
       }
+    }
 
-      if (fileNameLabel.isNotEmpty) {
-        final pFileNameLabel = fileNameLabel.toNativeUtf16(allocator: arena);
-        final hr = fileDialog.setFileNameLabel(pFileNameLabel);
-        if (FAILED(hr)) throw WindowsException(hr);
+    if (initialDirectory case final initialDirectory?
+        when initialDirectory.isNotEmpty) {
+      final shellItem = arena.adopt(
+        SHCreateItemFromParsingName<IShellItem>(
+          arena.pcwstr(initialDirectory),
+          null,
+        ),
+      );
+
+      if (alwaysShowInitialDirectory) {
+        dialog.setFolder(shellItem);
+      } else {
+        dialog.setDefaultFolder(shellItem);
       }
+    }
 
-      if (title.isNotEmpty) {
-        final pTitle = title.toNativeUtf16(allocator: arena);
-        final hr = fileDialog.setTitle(pTitle);
-        if (FAILED(hr)) throw WindowsException(hr);
-      }
+    applyCustomPlaces(dialog, customPlaces, arena);
 
-      if (filterSpecification.isNotEmpty) {
-        final rgSpec = arena<COMDLG_FILTERSPEC>(filterSpecification.length);
-        var index = 0;
-        for (final key in filterSpecification.keys) {
-          final pszName = key.toNativeUtf16(allocator: arena);
-          final pszSpec =
-              filterSpecification[key]!.toNativeUtf16(allocator: arena);
-          rgSpec[index]
-            ..pszName = pszName
-            ..pszSpec = pszSpec;
-          index++;
-        }
-        final hr = fileDialog.setFileTypes(filterSpecification.length, rgSpec);
-        if (FAILED(hr)) throw WindowsException(hr);
-      }
-
-      if (defaultFilterIndex case final defaultFilterIndex?) {
-        if (defaultFilterIndex > 0 &&
-            defaultFilterIndex < filterSpecification.length) {
-          // SetFileTypeIndex is one-based, not zero-based
-          final hr = fileDialog.setFileTypeIndex(defaultFilterIndex + 1);
-          if (FAILED(hr)) throw WindowsException(hr);
-        }
-      }
-
-      if (initialDirectory case final initialDirectory?
-          when initialDirectory.isNotEmpty) {
-        final pszPath = initialDirectory.toNativeUtf16(allocator: arena);
-        final riid = convertToIID(IID_IShellItem, allocator: arena);
-        final ppv = calloc<Pointer>();
-        var hr = SHCreateItemFromParsingName(
-          pszPath,
-          nullptr,
-          riid,
-          ppv,
-        );
-        if (FAILED(hr)) throw WindowsException(hr);
-
-        final shellItem = IShellItem(ppv.cast());
-        hr = alwaysShowInitialDirectory
-            ? fileDialog
-                .setFolder(shellItem.ptr.cast<Pointer<COMObject>>().value)
-            : fileDialog.setDefaultFolder(
-                shellItem.ptr.cast<Pointer<COMObject>>().value);
-        if (FAILED(hr)) throw WindowsException(hr);
-      }
-
-      for (final place in customPlaces) {
-        final hr = fileDialog.addPlace(
-          place.item.ptr.cast<Pointer<COMObject>>().value,
-          place.place == Place.bottom ? FDAP.FDAP_BOTTOM : FDAP.FDAP_TOP,
-        );
-        if (FAILED(hr)) throw WindowsException(hr);
-      }
-    });
-
-    return fileDialog;
-  }
+    return dialog;
+  });
 }

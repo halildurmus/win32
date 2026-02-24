@@ -4,69 +4,85 @@
 [![Language: Dart][language_badge]][language_link]
 [![License: BSD-3-Clause][license_badge]][license_link]
 
-A package that provides a friendly Dart API for file and directory selection for
-Windows using common dialog controls.
+**File and directory picker for Windows that uses common dialog controls.**
 
-This package builds on top of the Dart [win32] package, offering a high-level
-Dart wrapper that avoids the need for users to understand FFI or write directly
-to the Win32 API.
+This package builds on top of the [package:win32][win32_pub_dev_link] and
+provides a high-level abstraction over native registry APIs. It eliminates the
+need to work directly with FFI, raw pointers, or low-level Win32 calls while
+preserving performance and correctness.
 
-## Usage
+## ✨ Features
 
-### File Picker
+- 📂 Open a single file or multiple files simultaneously
+- 💾 Save a file
+- 📁 Select a directory
+- 🔍 Filter by file type with friendly display names
+- 📌 Add custom places to the dialog's navigation pane
+- 🪟 Pin to the correct window — always opens as a modal in front of your app
 
-Show a file picker dialog, allowing the user to select a file.
+## 🚀 Getting Started
+
+Add the package to your `pubspec.yaml`:
+
+```yaml
+dependencies:
+  filepicker_windows: ^3.0.0
+```
+
+Then import it:
+
+```dart
+import 'package:filepicker_windows/filepicker_windows.dart';
+```
+
+## ⚡ Quick Example
+
+Show a file open dialog:
 
 ```dart
 import 'package:filepicker_windows/filepicker_windows.dart';
 
 void main() {
-  final file = OpenFilePicker()
+  final picker = OpenFilePicker()
     ..filterSpecification = {
       'Word Document (*.doc)': '*.doc',
       'Web Page (*.htm; *.html)': '*.htm;*.html',
       'Text Document (*.txt)': '*.txt',
-      'All Files': '*.*'
+      'All Files': '*.*',
     }
     ..defaultFilterIndex = 0
     ..defaultExtension = 'doc'
     ..title = 'Select a document';
 
-  final result = file.getFile();
-  if (result != null) {
-    print(result.path);
+  final file = picker.getFile();
+  if (file != null) {
+    print('Selected file: ${file.path}');
+  } else {
+    print('No file selected.');
   }
 }
 ```
 
-### Directory Picker
+More examples — including multi-file selection, save dialogs, directory
+picking, and custom places — are available in the [example] directory.
 
-Show a directory picker dialog, allowing the user to select a directory.
+For a more advanced demonstration, see `example/wallpaper/`, a Flutter app
+that uses the picker to select an image and set it as the desktop wallpaper.
 
-```dart
-import 'package:filepicker_windows/filepicker_windows.dart';
+## 📝 Documentation
 
-void main() {
-  final file = DirectoryPicker()..title = 'Select a directory';
+Full API reference is available here:
 
-  final result = file.getDirectory();
-  if (result != null) {
-    print(result.path);
-  }
-}
-```
+👉 [API Reference][api_reference_link].
 
-Additional examples can be located within the [example] directory.
+Additional usage examples are located in the [example] directory.
 
-For a more advanced demonstration, you can explore a Flutter application in the
-`example\wallpaper\` directory. This application illustrates how to select an
-image file and set it as your desktop wallpaper.
+## 🐞 Features and Bugs
 
-## Feature requests and bugs
+If you encounter bugs or need additional functionality, please
+[file an issue][issue_tracker_link].
 
-Please file feature requests and bugs at the
-[issue tracker][issue_tracker_link].
-
+[api_reference_link]: https://pub.dev/documentation/filepicker_windows/latest/
 [ci_badge]: https://github.com/halildurmus/filepicker_windows/actions/workflows/filepicker_windows.yml/badge.svg
 [ci_link]: https://github.com/halildurmus/filepicker_windows/actions/workflows/filepicker_windows.yml
 [example]: https://github.com/halildurmus/filepicker_windows/tree/main/example
@@ -79,4 +95,4 @@ Please file feature requests and bugs at the
 [package_link]: https://pub.dev/packages/filepicker_windows
 [publisher_badge]: https://img.shields.io/pub/publisher/filepicker_windows.svg
 [publisher_link]: https://pub.dev/publishers/halildurmus.dev
-[win32]: https://pub.dev/packages/win32
+[win32_pub_dev_link]: https://pub.dev/packages/win32

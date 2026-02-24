@@ -1,9 +1,9 @@
 import 'dart:ffi';
 
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'models/models.dart';
+import 'place.dart';
+import 'windows_known_folder.dart';
 
 /// An abstract class that represents a file dialog on Windows.
 abstract class FileDialog {
@@ -13,7 +13,7 @@ abstract class FileDialog {
 
   /// Whether to add the item being opened or saved to the recent documents
   /// list.
-  bool addToRecentDocuments = true;
+  var addToRecentDocuments = true;
 
   /// A list of custom places.
   ///
@@ -39,17 +39,17 @@ abstract class FileDialog {
   ///
   /// Setting this value to `false` allows an application to open a `.lnk` file
   /// directly, without resolving the target it points to.
-  bool dereferenceLinks = true;
+  var dereferenceLinks = true;
 
   /// The item returned must exist.
-  bool fileMustExist = false;
+  var fileMustExist = false;
 
   /// The file name that appears in the File name edit box when that dialog box
   /// is opened.
-  String fileName = '';
+  var fileName = '';
 
   /// The text of the label next to the file name edit box.
-  String fileNameLabel = '';
+  var fileNameLabel = '';
 
   /// The filter for the file types shown.
   ///
@@ -63,32 +63,33 @@ abstract class FileDialog {
   Map<String, String> filterSpecification = {};
 
   /// Ensure that returned items are file system items.
-  bool forceFileSystemItems = true;
+  var forceFileSystemItems = true;
 
   /// Hide all of the standard namespace locations (such as Favorites,
   /// Libraries, Computer, and Network) shown in the navigation pane.
-  bool hidePinnedPlaces = false;
+  var hidePinnedPlaces = false;
 
   /// HWND of dialog.
-  int hWndOwner = NULL;
+  Pointer hWndOwner = nullptr;
 
   /// Don't change the current working directory.
-  bool isDirectoryFixed = false;
+  var isDirectoryFixed = false;
 
   /// Include hidden and system items.
-  bool showHiddenAndSystemItems = false;
+  var showHiddenAndSystemItems = false;
 
   /// The title of the dialog.
-  String title = '';
+  var title = '';
 
   /// Whether COM has been initialized.
-  static bool _isComInitialized = false;
+  static var _isComInitialized = false;
 
   void _initializeCom() {
     if (!_isComInitialized) {
-      final hr = CoInitializeEx(nullptr,
-          COINIT.COINIT_APARTMENTTHREADED | COINIT.COINIT_DISABLE_OLE1DDE);
-      if (FAILED(hr)) throw WindowsException(hr);
+      final hr = CoInitializeEx(
+        COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE,
+      );
+      if (hr.isError) throw WindowsException(hr);
       _isComInitialized = true;
     }
   }
@@ -96,30 +97,6 @@ abstract class FileDialog {
   /// Add a known folder to the `Quick Access` list.
   ///
   /// On Windows 11, this may appear under the `Application Links` node.
-  void addPlace(WindowsKnownFolder folder, Place location) {
-    final publicMusicFolder = calloc<GUID>();
-    final ppkf = calloc<Pointer<COMObject>>();
-    final psi = calloc<Pointer>();
-    final riid = convertToIID(IID_IShellItem);
-
-    try {
-      final folderGUID = folder.guid;
-      final knownFolderManager = KnownFolderManager.createInstance();
-      publicMusicFolder.ref.setGUID(folderGUID);
-      var hr = knownFolderManager.getFolder(publicMusicFolder, ppkf);
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      final knownFolder = IKnownFolder(ppkf.cast());
-      hr = knownFolder.getShellItem(0, riid, psi);
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      final shellItem = IShellItem(psi.cast());
-      final place = CustomPlace(shellItem, location);
-      customPlaces.add(place);
-    } finally {
-      free(publicMusicFolder);
-      free(ppkf);
-      free(riid);
-    }
-  }
+  void addPlace(WindowsKnownFolder folder, Place location) =>
+      customPlaces.add(.new(folder, location));
 }

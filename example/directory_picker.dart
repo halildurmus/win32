@@ -1,10 +1,12 @@
 import 'package:filepicker_windows/filepicker_windows.dart';
 
 void main() {
-  final file = DirectoryPicker()..title = 'Select a directory';
+  final picker = DirectoryPicker()..title = 'Select a directory';
 
-  final result = file.getDirectory();
-  if (result != null) {
-    print(result.path);
+  final directory = picker.getDirectory();
+  if (directory != null) {
+    print('Selected directory: ${directory.path}');
+  } else {
+    print('No directory selected.');
   }
 }

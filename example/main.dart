@@ -1,21 +1,21 @@
 import 'package:filepicker_windows/filepicker_windows.dart';
 
-// Normal file open dialog box example
-
 void main() {
-  final file = OpenFilePicker()
+  final picker = OpenFilePicker()
     ..filterSpecification = {
       'Word Document (*.doc)': '*.doc',
       'Web Page (*.htm; *.html)': '*.htm;*.html',
       'Text Document (*.txt)': '*.txt',
-      'All Files': '*.*'
+      'All Files': '*.*',
     }
     ..defaultFilterIndex = 0
     ..defaultExtension = 'doc'
     ..title = 'Select a document';
 
-  final result = file.getFile();
-  if (result != null) {
-    print(result.path);
+  final file = picker.getFile();
+  if (file != null) {
+    print('Selected file: ${file.path}');
+  } else {
+    print('No file selected.');
   }
 }
