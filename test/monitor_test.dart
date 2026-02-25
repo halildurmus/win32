@@ -13,67 +13,69 @@ void main() {
 
   tearDown(LeakTracker.verifyNoLeaksInDebug);
 
+  const keyPath = 'Win32RegistryMonitorTestKey';
+  const subkeyPath = 'Win32RegistryMonitorTestSubkey';
+  const stringValue = RegistryValue.string('Hello, world!');
+
+  /// Opens [keyPath] + [subkeyPath] under CURRENT_USER, creates [monitor],
+  /// and registers teardowns so every test cleans up automatically.
+  Future<({RegistryKey key, RegistryKey subkey, RegistryChangeMonitor monitor})>
+  setup({RegistryChangeMonitor? Function(RegistryKey)? buildMonitor}) async {
+    final key = CURRENT_USER.create(keyPath);
+    final subkey = key.create(subkeyPath);
+    final monitor =
+        (buildMonitor ?? RegistryChangeMonitor.new)(key) ??
+        RegistryChangeMonitor(key);
+
+    addTearDown(() async {
+      await monitor.close();
+      subkey.close();
+      key.close();
+      CURRENT_USER.removeSubkey(keyPath);
+    });
+
+    return (key: key, subkey: subkey, monitor: monitor);
+  }
+
+  /// Waits for the next event on [events], triggers [action], then awaits it.
+  Future<void> awaitChange(
+    Stream<RegistryChangeEvent> events,
+    void Function() action,
+  ) async {
+    final next = events.first;
+    action();
+    await next;
+  }
+
   group('RegistryChangeMonitor', () {
     Future<void> runScenario({
       required bool includeSubkeys,
       required bool expectSubkeyEvent,
     }) async {
-      const keyPath = 'Win32RegistryMonitorTestKey';
-      const subkeyPath = 'Win32RegistryMonitorTestSubkey';
-
-      final key = CURRENT_USER.create(keyPath);
-      final subkey = key.create(subkeyPath);
-      final monitor = RegistryChangeMonitor(
-        key,
-        includeSubkeys: includeSubkeys,
+      final (:key, :subkey, :monitor) = await setup(
+        buildMonitor: (k) =>
+            RegistryChangeMonitor(k, includeSubkeys: includeSubkeys),
       );
-
-      addTearDown(() async {
-        await monitor.close();
-        subkey.close();
-        key.close();
-        CURRENT_USER.removeSubkey(keyPath);
-      });
-
       await monitor.start();
-      final events = monitor.events;
 
       final received = <RegistryChangeEvent>[];
-      final sub = events.listen(received.add);
-      addTearDown(sub.cancel);
+      final events = monitor.events;
+      addTearDown(events.listen(received.add).cancel);
 
-      const stringValue = RegistryValue.string('Some text here.');
-
-      // ── change main key (1)
-      {
-        final next = events.first;
-        key.setValue('StringValue', stringValue);
-        await next;
-      }
-
+      await awaitChange(events, () => key.setValue('StringValue', stringValue));
       check(received.length).equals(1);
 
-      // ── change main key (2)
-      {
-        final next = events.first;
-        key.setValue('IntValue', const .dword(1234));
-        await next;
-      }
-
+      await awaitChange(
+        events,
+        () => key.setValue('IntValue', const RegistryValue.dword(1234)),
+      );
       check(received.length).equals(2);
 
-      // ── change subkey
-      {
-        var fired = false;
-        final subListener = events.listen((_) => fired = true);
-
-        subkey.setValue('SubValue', stringValue);
-
-        await Future<void>.delayed(const Duration(milliseconds: 20));
-        await subListener.cancel();
-
-        check(fired).equals(expectSubkeyEvent);
-      }
+      var subkeyFired = false;
+      addTearDown(events.listen((_) => subkeyFired = true).cancel);
+      subkey.setValue('SubValue', stringValue);
+      await Future.delayed(const Duration(milliseconds: 20));
+      check(subkeyFired).equals(expectSubkeyEvent);
     }
 
     test('emits only for direct key changes', () async {
@@ -82,6 +84,39 @@ void main() {
 
     test('emits for subkey changes when enabled', () async {
       await runScenario(includeSubkeys: true, expectSubkeyEvent: true);
+    });
+
+    group('lifecycle', () {
+      test('does not emit after monitor is stopped', () async {
+        final (:key, subkey: _, :monitor) = await setup();
+        await monitor.start();
+        await monitor.stop();
+
+        var emitted = false;
+        addTearDown(monitor.events.listen((_) => emitted = true).cancel);
+
+        key.setValue('StringValue', stringValue);
+        await Future.delayed(const Duration(milliseconds: 100));
+
+        check(emitted).isFalse();
+      });
+
+      test('can be restarted and resumes emitting', () async {
+        final (:key, subkey: _, :monitor) = await setup();
+        await monitor.start();
+        await monitor.stop();
+        await monitor.start();
+
+        final received = <RegistryChangeEvent>[];
+        final events = monitor.events;
+        addTearDown(events.listen(received.add).cancel);
+
+        await awaitChange(
+          events,
+          () => key.setValue('StringValue', stringValue),
+        );
+        check(received.length).equals(1);
+      });
     });
   });
 }
