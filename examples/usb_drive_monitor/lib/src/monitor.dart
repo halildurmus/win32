@@ -72,7 +72,6 @@ final class UsbDriveMonitor {
         onExit: _receivePort!.sendPort,
         onError: _receivePort!.sendPort,
       );
-
       await ready.future;
       _running = true;
     } catch (_) {
@@ -176,22 +175,19 @@ Future<void> _isolateMain(SendPort mainPort) async {
         QS_ALLINPUT,
       );
 
-      // stop requested
+      // Stop requested
       if (value == WAIT_OBJECT_0) break;
 
-      // message pending
       if (value == WAIT_OBJECT_0 + 1) {
         while (PeekMessage(msg, null, 0, 0, PM_REMOVE)) {
-          if (msg.ref.message == WM_QUIT) return;
           TranslateMessage(msg);
           DispatchMessage(msg);
         }
         continue;
       }
 
-      // error
       mainPort.send(_Failure(WindowsException(error.toHRESULT())));
-      return;
+      break;
     }
   } finally {
     window.destroy();

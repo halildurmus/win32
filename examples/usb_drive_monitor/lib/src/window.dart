@@ -13,21 +13,20 @@ final class Win32Window {
 
   static final Map<HWND, Win32Window> _registry = {};
 
+  final PCWSTR _className = 'UsbDriveMonitorWindow'.toPcwstr();
   late final HWND hWnd;
+  final _hInstance = HINSTANCE(GetModuleHandle(null).value);
   late final NativeCallable<WNDPROC> _wndProc;
   late final _token = HWND(Pointer.fromAddress(identityHashCode(this)));
 
   void create() => using((arena) {
-    final hInstance = HINSTANCE(GetModuleHandle(null).value);
-    final className = arena.pcwstr('UsbDriveMonitorWindow');
-
     _wndProc = NativeCallable.isolateLocal(_windowProc, exceptionalReturn: 0);
 
     final wc = arena<WNDCLASS>();
     wc.ref
       ..lpfnWndProc = _wndProc.nativeFunction
-      ..hInstance = hInstance
-      ..lpszClassName = PWSTR(className);
+      ..hInstance = _hInstance
+      ..lpszClassName = .new(_className);
     final result = RegisterClass(wc);
     if (result.value == 0 && result.error != ERROR_CLASS_ALREADY_EXISTS) {
       throw WindowsException(result.error.toHRESULT());
@@ -36,7 +35,7 @@ final class Win32Window {
     _registry[_token] = this;
     final Win32Result(value: hwnd, :error) = CreateWindowEx(
       WS_EX_LEFT,
-      className,
+      _className,
       arena.pcwstr(''),
       WS_OVERLAPPED,
       0,
@@ -45,7 +44,7 @@ final class Win32Window {
       0,
       null,
       null,
-      hInstance,
+      _hInstance,
       _token,
     );
     if (hwnd.isNull) throw WindowsException(error.toHRESULT());
@@ -55,6 +54,8 @@ final class Win32Window {
 
   void destroy() {
     DestroyWindow(hWnd);
+    UnregisterClass(_className, _hInstance);
+    free(_className);
     _registry.remove(_token);
     _wndProc.close();
   }
@@ -75,10 +76,6 @@ final class Win32Window {
         if (token == 0) throw WindowsException(error.toHRESULT());
         final window = _registry[HWND(Pointer.fromAddress(token))];
         window?._handleDeviceChange(wParam, lParam);
-        return 0;
-
-      case WM_DESTROY:
-        PostQuitMessage(0);
         return 0;
     }
 
