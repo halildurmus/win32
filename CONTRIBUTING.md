@@ -1,6 +1,6 @@
 # Contributing
 
-Thank you for your interest in contributing to `win32_registry`!
+Thank you for your interest in contributing to `package:win32_registry`!
 
 This guide provides everything you need to get started and make your
 contributions effective and rewarding.
@@ -42,7 +42,7 @@ set up the project.
 
 ### 📥 Cloning the Repository
 
-Clone your fork of **win32_registry** to your local machine:
+Clone your fork of the `package:win32_registry` to your local machine:
 
 ```cmd
 git clone https://github.com/<your-username>/win32_registry.git

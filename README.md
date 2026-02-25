@@ -5,7 +5,8 @@
 [![License: BSD-3-Clause][license_badge]][license_link]
 [![codecov][codecov_badge_link]][codecov_link]
 
-**A modern, type-safe Dart API for accessing and managing the Windows Registry.**
+**A modern, type-safe Dart API for accessing and managing the
+Windows Registry.**
 
 This package builds on top of the [package:win32][win32_pub_dev_link] and
 provides a high-level abstraction over native registry APIs. It eliminates the
@@ -21,13 +22,26 @@ preserving performance and correctness.
 - **Metadata Queries** — Inspect subkeys, values, sizes, and timestamps.
 - **Transaction Support** — Perform registry operations atomically.
 
+## 🚀 Getting Started
+
+Add the package to your `pubspec.yaml`:
+
+```yaml
+dependencies:
+  win32_registry: ^3.0.0
+```
+
+Then import it:
+
+```dart
+import 'package:win32_registry/win32_registry.dart';
+```
+
 ## ⚡ Quick Example
 
 Reads the Windows build number from the registry:
 
 ```dart
-import 'package:win32_registry/win32_registry.dart';
-
 void main() {
   final key = LOCAL_MACHINE.open(
     r'Software\Microsoft\Windows NT\CurrentVersion',

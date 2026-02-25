@@ -4,6 +4,8 @@ description: >
 version: 3.0.0
 repository: https://github.com/halildurmus/win32_registry
 issue_tracker: https://github.com/halildurmus/win32_registry/issues
+funding:
+  - https://github.com/sponsors/halildurmus
 
 topics:
   - registry
