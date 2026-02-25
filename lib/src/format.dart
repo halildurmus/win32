@@ -20,12 +20,10 @@ final class ClipboardFormat {
   final String name;
 
   /// File list format.
-  static const fileList =
-      ClipboardFormat(CLIPBOARD_FORMAT.CF_HDROP, 'CF_HDROP');
+  static const fileList = ClipboardFormat(CF_HDROP, 'CF_HDROP');
 
   /// The Unicode text format.
-  static const unicodeText =
-      ClipboardFormat(CLIPBOARD_FORMAT.CF_UNICODETEXT, 'CF_UNICODETEXT');
+  static const unicodeText = ClipboardFormat(CF_UNICODETEXT, 'CF_UNICODETEXT');
 
   @override
   bool operator ==(Object other) =>

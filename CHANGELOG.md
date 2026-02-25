@@ -2,6 +2,43 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.0] - 2026-02-26
+
+### 🔄 Breaking Changes
+
+The clipboard change notification API has been redesigned around the new
+`ClipboardChangeMonitor` class.
+
+- Removed the top-level `Clipboard.onClipboardDataChanged` stream.
+- Removed `Clipboard.onDataChanged()`, `Clipboard.onFileListChanged`, and
+  `Clipboard.onTextChanged`.
+
+Migrate by creating a `ClipboardChangeMonitor` instance and using its
+equivalent streams:
+
+```dart
+// Before
+onClipboardDataChanged.listen((_) { ... });
+Clipboard.onDataChanged(format).listen((format) { ... });
+Clipboard.onFileListChanged.listen((files) { ... });
+Clipboard.onTextChanged.listen((text) { ... });
+
+// After
+final monitor = ClipboardChangeMonitor();
+await monitor.start();
+monitor.events.listen((_) { ... });
+monitor.onDataChanged(format).listen((format) { ... });
+monitor.onFileListChanged.listen((files) { ... });
+monitor.onTextChanged.listen((text) { ... });
+// Call monitor.close() when done.
+```
+
+### 📦 Dependencies
+
+- Bumped minimum required Dart SDK version to `3.11.0`.
+
+[2.0.0]: https://github.com/halildurmus/win32_clipboard/compare/v1.0.0...win32_clipboard-v2.0.0
+
 ## [1.0.0] - 2024-10-28
 
 ### 🎉 First Stable Release 🚀

@@ -11,9 +11,10 @@ void main() {
       const files = [r'c:\src\file1.txt', r'd:\file2.txt'];
       const data1 = FileListData(files);
       check(data1.files).deepEquals(files);
-      check(data1.format).equals(ClipboardFormat.fileList);
-      check(data1.toString())
-          .equals('FileListData($files, ClipboardFormat(15, CF_HDROP))');
+      check(data1.format).equals(.fileList);
+      check(
+        data1.toString(),
+      ).equals('FileListData($files, ClipboardFormat(15, CF_HDROP))');
       const data2 = FileListData(files);
       check(data1).equals(data2);
       const data3 = FileListData([r'c:\src\file1.txt']);
@@ -42,9 +43,10 @@ void main() {
       const text = 'Hello, world!';
       const data1 = UnicodeTextData(text);
       check(data1.text).equals(text);
-      check(data1.format).equals(ClipboardFormat.unicodeText);
-      check(data1.toString()).equals(
-          'UnicodeTextData($text, ClipboardFormat(13, CF_UNICODETEXT))');
+      check(data1.format).equals(.unicodeText);
+      check(
+        data1.toString(),
+      ).equals('UnicodeTextData($text, ClipboardFormat(13, CF_UNICODETEXT))');
       const data2 = UnicodeTextData(text);
       check(data1).equals(data2);
       const data3 = UnicodeTextData('Goodbye, world!');

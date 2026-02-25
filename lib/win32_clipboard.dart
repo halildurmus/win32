@@ -19,3 +19,4 @@ export 'src/clipboard.dart';
 export 'src/data.dart';
 export 'src/exception.dart';
 export 'src/format.dart';
+export 'src/monitor.dart';

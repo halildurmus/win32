@@ -11,28 +11,28 @@ import 'format.dart';
 /// A map of standard clipboard format IDs to their names.
 @internal
 const standardFormats = <int, String>{
-  CLIPBOARD_FORMAT.CF_TEXT: 'CF_TEXT',
-  CLIPBOARD_FORMAT.CF_BITMAP: 'CF_BITMAP',
-  CLIPBOARD_FORMAT.CF_METAFILEPICT: 'CF_METAFILEPICT',
-  CLIPBOARD_FORMAT.CF_SYLK: 'CF_SYLK',
-  CLIPBOARD_FORMAT.CF_DIF: 'CF_DIF',
-  CLIPBOARD_FORMAT.CF_TIFF: 'CF_TIFF',
-  CLIPBOARD_FORMAT.CF_OEMTEXT: 'CF_OEMTEXT',
-  CLIPBOARD_FORMAT.CF_DIB: 'CF_DIB',
-  CLIPBOARD_FORMAT.CF_PALETTE: 'CF_PALETTE',
-  CLIPBOARD_FORMAT.CF_PENDATA: 'CF_PENDATA',
-  CLIPBOARD_FORMAT.CF_RIFF: 'CF_RIFF',
-  CLIPBOARD_FORMAT.CF_WAVE: 'CF_WAVE',
-  CLIPBOARD_FORMAT.CF_UNICODETEXT: 'CF_UNICODETEXT',
-  CLIPBOARD_FORMAT.CF_ENHMETAFILE: 'CF_ENHMETAFILE',
-  CLIPBOARD_FORMAT.CF_HDROP: 'CF_HDROP',
-  CLIPBOARD_FORMAT.CF_LOCALE: 'CF_LOCALE',
-  CLIPBOARD_FORMAT.CF_DIBV5: 'CF_DIBV5',
-  CLIPBOARD_FORMAT.CF_OWNERDISPLAY: 'CF_OWNERDISPLAY',
-  CLIPBOARD_FORMAT.CF_DSPTEXT: 'CF_DSPTEXT',
-  CLIPBOARD_FORMAT.CF_DSPBITMAP: 'CF_DSPBITMAP',
-  CLIPBOARD_FORMAT.CF_DSPMETAFILEPICT: 'CF_DSPMETAFILEPICT',
-  CLIPBOARD_FORMAT.CF_DSPENHMETAFILE: 'CF_DSPENHMETAFILE',
+  CF_TEXT: 'CF_TEXT',
+  CF_BITMAP: 'CF_BITMAP',
+  CF_METAFILEPICT: 'CF_METAFILEPICT',
+  CF_SYLK: 'CF_SYLK',
+  CF_DIF: 'CF_DIF',
+  CF_TIFF: 'CF_TIFF',
+  CF_OEMTEXT: 'CF_OEMTEXT',
+  CF_DIB: 'CF_DIB',
+  CF_PALETTE: 'CF_PALETTE',
+  CF_PENDATA: 'CF_PENDATA',
+  CF_RIFF: 'CF_RIFF',
+  CF_WAVE: 'CF_WAVE',
+  CF_UNICODETEXT: 'CF_UNICODETEXT',
+  CF_ENHMETAFILE: 'CF_ENHMETAFILE',
+  CF_HDROP: 'CF_HDROP',
+  CF_LOCALE: 'CF_LOCALE',
+  CF_DIBV5: 'CF_DIBV5',
+  CF_OWNERDISPLAY: 'CF_OWNERDISPLAY',
+  CF_DSPTEXT: 'CF_DSPTEXT',
+  CF_DSPBITMAP: 'CF_DSPBITMAP',
+  CF_DSPMETAFILEPICT: 'CF_DSPMETAFILEPICT',
+  CF_DSPENHMETAFILE: 'CF_DSPENHMETAFILE',
 };
 
 /// Returns the [ClipboardFormat] for the given [formatId].
@@ -43,26 +43,18 @@ ClipboardFormat getClipboardFormat(int formatId) {
   return ClipboardFormat(formatId, name ?? 'N/A');
 }
 
-String? _getClipboardFormatName(int formatId) {
-  final lpszFormatName = wsalloc(256);
-  final strLength = GetClipboardFormatName(formatId, lpszFormatName, 256);
-  if (strLength > 0) {
-    final name = lpszFormatName.toDartString();
-    free(lpszFormatName);
-    return name;
-  }
-  free(lpszFormatName);
-  return null;
-}
+String? _getClipboardFormatName(int formatId) => using((arena) {
+  final lpszFormatName = arena.pwstrBuffer(256);
+  final strLength = GetClipboardFormatName(formatId, lpszFormatName, 256).value;
+  return strLength > 0 ? lpszFormatName.toDartString() : null;
+});
 
 String? _getPredefinedFormatName(int formatId) {
   if (standardFormats.containsKey(formatId)) {
     return standardFormats[formatId];
-  } else if (formatId >= CLIPBOARD_FORMAT.CF_GDIOBJFIRST &&
-      formatId <= CLIPBOARD_FORMAT.CF_GDIOBJLAST) {
+  } else if (formatId >= CF_GDIOBJFIRST && formatId <= CF_GDIOBJLAST) {
     return 'CF_GDIOBJ($formatId)';
-  } else if (formatId >= CLIPBOARD_FORMAT.CF_PRIVATEFIRST &&
-      formatId <= CLIPBOARD_FORMAT.CF_PRIVATELAST) {
+  } else if (formatId >= CF_PRIVATEFIRST && formatId <= CF_PRIVATELAST) {
     return 'CF_PRIVATE($formatId)';
   }
   return null;
@@ -79,15 +71,14 @@ R? _getData<R extends ClipboardData>(
 ) {
   try {
     return performClipboardOperation(() {
-      final handle = GetClipboardData(format.id);
-      if (handle == NULL) return null;
+      final Win32Result(value: handle) = GetClipboardData(format.id);
+      if (handle.isNull) return null;
 
-      final ptr = Pointer.fromAddress(handle);
-      final rawPtr = GlobalLock(ptr);
-      if (rawPtr.address == 0) return null;
+      final Win32Result(value: rawPtr) = GlobalLock(.new(handle));
+      if (rawPtr.isNull) return null;
 
       final result = function(rawPtr);
-      GlobalUnlock(ptr);
+      GlobalUnlock(.new(handle));
       return result;
     });
   } catch (_) {
@@ -97,45 +88,46 @@ R? _getData<R extends ClipboardData>(
 
 @internal
 FileListData? getFileListData() => _getData(ClipboardFormat.fileList, (ptr) {
-      final numberOfFiles = DragQueryFile(ptr.address, 0xFFFFFFFF, nullptr, 0);
-      if (numberOfFiles == 0) return const FileListData([]);
-      final files = List<String>.filled(numberOfFiles, '');
+  final numberOfFiles = DragQueryFile(.new(ptr), 0xFFFFFFFF, null, 0);
+  if (numberOfFiles == 0) return const FileListData([]);
+  final files = List<String>.filled(numberOfFiles, '');
 
-      for (var i = 0; i < numberOfFiles; i++) {
-        final requiredSize = DragQueryFile(ptr.address, i, nullptr, 0);
-        if (requiredSize == 0) return const FileListData([]);
+  for (var i = 0; i < numberOfFiles; i++) {
+    final requiredSize = DragQueryFile(.new(ptr), i, null, 0);
+    if (requiredSize == 0) return const FileListData([]);
 
-        final buffer = wsalloc(requiredSize + 1);
-        if (DragQueryFile(ptr.address, i, buffer, requiredSize + 1) == 0) {
-          free(buffer);
-          return const FileListData([]);
-        }
+    final buffer = wsalloc(requiredSize + 1);
+    if (DragQueryFile(.new(ptr), i, buffer, requiredSize + 1) == 0) {
+      free(buffer);
+      return const FileListData([]);
+    }
 
-        files[i] = buffer.toDartString(length: requiredSize);
-        free(buffer);
-      }
+    files[i] = buffer.toDartString(length: requiredSize);
+    free(buffer);
+  }
 
-      return FileListData(files);
-    });
+  return FileListData(files);
+});
 
 @internal
 PointerData? getPointerData(ClipboardFormat format) => _getData(format, (ptr) {
-      final size = GlobalSize(ptr);
-      final newPtr = malloc<Uint8>(size);
-      // Copy the data to a new memory location to prevent it from being freed
-      // when the lock is released.
-      newPtr.asTypedList(size).setAll(0, ptr.cast<Uint8>().asTypedList(size));
-      return PointerData(newPtr, size, format);
-    });
+  final Win32Result(value: size) = GlobalSize(.new(ptr));
+  final newPtr = malloc<Uint8>(size);
+  // Copy the data to a new memory location to prevent it from being freed
+  // when the lock is released.
+  newPtr.asTypedList(size).setAll(0, ptr.cast<Uint8>().asTypedList(size));
+  return PointerData(newPtr, size, format);
+});
 
 @internal
 UnicodeTextData? getUnicodeTextData() => _getData(
-    ClipboardFormat.unicodeText,
-    (ptr) => UnicodeTextData(
-          String.fromCharCodes(
-            ptr.cast<Uint16>().asTypedList((GlobalSize(ptr) ~/ 2) - 1),
-          ),
-        ));
+  ClipboardFormat.unicodeText,
+  (ptr) => UnicodeTextData(
+    String.fromCharCodes(
+      ptr.cast<Uint16>().asTypedList((GlobalSize(.new(ptr)).value ~/ 2) - 1),
+    ),
+  ),
+);
 
 /// Executes the provided [function] within the clipboard context.
 ///
@@ -146,14 +138,14 @@ UnicodeTextData? getUnicodeTextData() => _getData(
 /// closed.
 @internal
 R performClipboardOperation<R>(R Function() function) {
-  if (OpenClipboard(NULL) == FALSE) {
+  if (!OpenClipboard(null).value) {
     throw const ClipboardException('Failed to open the clipboard.');
   }
 
   try {
     return function();
   } finally {
-    if (CloseClipboard() == FALSE) {
+    if (!CloseClipboard().value) {
       // ignore: throw_in_finally
       throw const ClipboardException('Failed to close the clipboard.');
     }
@@ -167,10 +159,10 @@ extension FileListDataExtension on FileListData {
   bool storeData() {
     try {
       return performClipboardOperation(() {
-        if (EmptyClipboard() == FALSE) return false;
+        if (!EmptyClipboard().value) return false;
         final hMem = _allocateFileList(files);
         if (hMem == null) return false;
-        return SetClipboardData(format.id, hMem.address) != NULL;
+        return SetClipboardData(format.id, hMem).value.isNotNull;
       });
     } catch (_) {
       return false;
@@ -185,10 +177,10 @@ extension PointerDataExtension on PointerData {
   bool storeData() {
     try {
       return performClipboardOperation(() {
-        if (EmptyClipboard() == FALSE) return false;
+        if (!EmptyClipboard().value) return false;
         final hMem = _allocatePointerData(pointer, lengthInBytes);
         if (hMem == null) return false;
-        return SetClipboardData(format.id, hMem.address) != NULL;
+        return SetClipboardData(format.id, hMem).value.isNotNull;
       });
     } catch (_) {
       return false;
@@ -198,15 +190,15 @@ extension PointerDataExtension on PointerData {
 
 @internal
 extension UnicodeTextDataExtension on UnicodeTextData {
-  /// Stores the Unicode text data on the clipboard.
   @internal
+  /// Stores the Unicode text data on the clipboard.
   bool storeData() {
     try {
       return performClipboardOperation(() {
-        if (EmptyClipboard() == FALSE) return false;
+        if (!EmptyClipboard().value) return false;
         final hMem = _allocateUnicodeText(text);
         if (hMem == null) return false;
-        return SetClipboardData(format.id, hMem.address) != NULL;
+        return SetClipboardData(format.id, hMem).value.isNotNull;
       });
     } catch (_) {
       return false;
@@ -215,7 +207,7 @@ extension UnicodeTextDataExtension on UnicodeTextData {
 }
 
 /// Allocates memory for file list data.
-Pointer? _allocateFileList(List<String> files) {
+HANDLE? _allocateFileList(List<String> files) {
   assert(files.isNotEmpty, 'The list of files cannot be empty.');
   final dropFilesSize = sizeOf<DROPFILES>();
 
@@ -229,15 +221,16 @@ Pointer? _allocateFileList(List<String> files) {
 
   // Allocate enough memory for the DROPFILES struct and the file list.
   final dwBytes = dropFilesSize + stringSize * sizeOf<Uint16>();
-  final hMem = GlobalAlloc(GLOBAL_ALLOC_FLAGS.GMEM_MOVEABLE, dwBytes);
-  if (hMem.address == 0) return null;
-  final rawPtr = GlobalLock(hMem);
-  if (rawPtr.address == 0) return null;
+  final Win32Result(value: hMem) = GlobalAlloc(GMEM_MOVEABLE, dwBytes);
+  if (hMem.isNull) return null;
+  final Win32Result(value: rawPtr) = GlobalLock(hMem);
+  if (rawPtr.isNull) return null;
 
   final dropFiles = rawPtr.cast<DROPFILES>();
   dropFiles.ref
-    ..pFiles = dropFilesSize // Offset to where the file list start.
-    ..fWide = TRUE; // File names are in wide characters (UTF-16).
+    ..pFiles =
+        dropFilesSize // Offset to where the file list start.
+    ..fWide = true; // File names are in wide characters (UTF-16).
 
   final pFiles = (rawPtr.cast<Uint8>() + dropFilesSize)
       .cast<Uint16>()
@@ -256,32 +249,32 @@ Pointer? _allocateFileList(List<String> files) {
   pFiles[index] = 0;
 
   GlobalUnlock(hMem);
-  return hMem;
+  return .new(hMem);
 }
 
 /// Allocates memory for a pointer data.
-Pointer? _allocatePointerData(Pointer<Uint8> pointer, int lengthInBytes) {
-  final hMem = GlobalAlloc(GLOBAL_ALLOC_FLAGS.GMEM_MOVEABLE, lengthInBytes);
-  if (hMem.address == 0) return null;
-  final rawPtr = GlobalLock(hMem);
-  if (rawPtr.address == 0) return null;
+HANDLE? _allocatePointerData(Pointer<Uint8> pointer, int lengthInBytes) {
+  final Win32Result(value: hMem) = GlobalAlloc(GMEM_MOVEABLE, lengthInBytes);
+  if (hMem.isNull) return null;
+  final Win32Result(value: rawPtr) = GlobalLock(hMem);
+  if (rawPtr.isNull) return null;
   rawPtr
       .cast<Uint8>()
       .asTypedList(lengthInBytes)
       .setAll(0, pointer.cast<Uint8>().asTypedList(lengthInBytes));
   GlobalUnlock(hMem);
-  return hMem;
+  return .new(hMem);
 }
 
 /// Allocates memory for Unicode text.
-Pointer? _allocateUnicodeText(String text) {
+HANDLE? _allocateUnicodeText(String text) {
   final units = text.codeUnits;
   final dwBytes = (units.length + 1) * sizeOf<Uint16>();
-  final hMem = GlobalAlloc(GLOBAL_ALLOC_FLAGS.GMEM_MOVEABLE, dwBytes);
-  if (hMem.address == 0) return null;
-  final rawPtr = GlobalLock(hMem);
-  if (rawPtr.address == 0) return null;
+  final Win32Result(value: hMem) = GlobalAlloc(GMEM_MOVEABLE, dwBytes);
+  if (hMem.isNull) return null;
+  final Win32Result(value: rawPtr) = GlobalLock(hMem);
+  if (rawPtr.isNull) return null;
   rawPtr.cast<Uint16>().asTypedList(units.length).setAll(0, units);
   GlobalUnlock(hMem);
-  return hMem;
+  return .new(hMem);
 }

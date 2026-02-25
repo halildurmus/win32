@@ -5,102 +5,118 @@
 [![License: BSD-3-Clause][license_badge]][license_link]
 [![codecov][codecov_badge_link]][codecov_link]
 
-A package that provides a friendly Dart API for accessing the Windows Clipboard.
+**A modern, type-safe Dart API for accessing and managing the
+Windows Registry.**
 
-This package builds on top of the Dart [win32] package, offering a high-level
-Dart wrapper that avoids the need for users to understand FFI or write directly
-to the Win32 API.
+This package builds on top of the [package:win32][win32_pub_dev_link] and
+provides a high-level abstraction over native registry APIs. It eliminates the
+need to work directly with FFI, raw pointers, or low-level Win32 calls while
+preserving performance and correctness.
 
-## Features
+## ✨ Features
 
-- **Text Operations**: Easily read and write text to the clipboard.
-- **File List Operations**: Easily read and write file lists to the clipboard.
-- **Format Inspection**: Check available formats on the clipboard.
-- **Custom Formats**: Register custom clipboard formats.
-- **Clipboard Change Notifications**: Monitor changes to the clipboard contents.
-- **Clear Clipboard**: Clear the clipboard contents.
+- **Text Operations**: Read and write Unicode text to the clipboard.
+- **File List Operations**: Read and write lists of file paths to the clipboard.
+- **Format Inspection**: Check which formats are currently available on the
+  clipboard.
+- **Custom Formats**: Register and use custom clipboard formats with typed data.
+- **Change Monitoring**: Subscribe to a stream of clipboard change notifications
+  via `ClipboardChangeMonitor` class.
+- **Clear Clipboard**: Clear all clipboard contents in one call.
 
-To learn more, see the [API Documentation][api_documentation_link].
+## 🚀 Getting Started
 
-## Usage
+Add the package to your `pubspec.yaml`:
 
-### Text operations
+```yaml
+dependencies:
+  win32_clipboard: ^2.0.0
+```
+
+Then import it:
 
 ```dart
 import 'package:win32_clipboard/win32_clipboard.dart';
-
-void main() {
-  if (Clipboard.setText('Hello, world!')) {
-    print('Retrieved text from clipboard: "${Clipboard.getText()}"');
-  }
-}
 ```
 
-### File list operations
+## ⚡ Quick Example
+
+### Reading and writing text
 
 ```dart
-import 'package:win32_clipboard/win32_clipboard.dart';
+// Write text to the clipboard.
+Clipboard.setText('Hello, clipboard!');
 
-void main() {
-  if (Clipboard.setFileList([r'c:\src\file1.dart', r'd:\file2.txt'])) {
-    print('Retrieved file list from clipboard: ${Clipboard.getFileList()}');
-  }
-}
+// Read it back.
+final text = Clipboard.getText();
+print(text); // Hello, clipboard!
 ```
 
-### Listen for clipboard text changes
+### Reading and writing a file list
 
 ```dart
-import 'package:win32_clipboard/win32_clipboard.dart';
+// Write a list of file paths.
+Clipboard.setFileList([
+  r'C:\Users\user\Documents\report.pdf',
+  r'C:\Users\user\Pictures\photo.png',
+]);
 
-void main() async {
-  // Subscribe to the clipboard text change stream.
-  final subscription = Clipboard.onTextChanged.listen((text) {
-    print('Clipboard text changed: "$text"');
-  }, cancelOnError: true);
-
-  print('Monitoring clipboard text changes for 30 seconds...');
-  // Now, copy some text to the clipboard to see the changes.
-
-  // Stop monitoring after 30 seconds.
-  await Future.delayed(const Duration(seconds: 30), () async {
-    await subscription.cancel();
-    print('Stopped monitoring.');
-  });
-}
+// Read it back.
+final files = Clipboard.getFileList();
+print(files); // [C:\Users\user\Documents\report.pdf, ...]
 ```
 
-### Retrieve a list of available clipboard formats
+### Monitoring clipboard changes
+
+`ClipboardChangeMonitor` runs a native change-notification loop in a dedicated
+isolate and surfaces updates as a broadcast stream, so it never blocks your
+main isolate or event loop.
 
 ```dart
-import 'package:win32_clipboard/win32_clipboard.dart';
+final monitor = ClipboardChangeMonitor();
+await monitor.start();
 
-void main() {
-  print('Clipboard has ${Clipboard.numberOfFormats} format(s)');
-  for (final format in Clipboard.formats) {
-    print('- $format');
-  }
-}
+// Fires whenever any clipboard content changes.
+monitor.events.listen((_) => print('Clipboard changed'));
+
+// Convenience streams that only emit when the relevant format is present.
+monitor.onTextChanged.listen((text) => print('New text: $text'));
+monitor.onFileListChanged.listen((files) => print('New files: $files'));
+
+// Always close the monitor when you're done to release native resources.
+await monitor.close();
 ```
 
-### Clear the clipboard
+### Registering and using a custom format
 
 ```dart
-import 'package:win32_clipboard/win32_clipboard.dart';
+final format = Clipboard.registerFormat('com.example.MyFormat');
 
-void main() {
-  if (Clipboard.clear()) {
-    print('Clipboard contents cleared.');
-  }
+final ptr = calloc<Uint8>()..value = 42;
+Clipboard.setData(ClipboardData.pointer(ptr, 1, format));
+calloc.free(ptr);
+
+// Check whether your format is available.
+if (Clipboard.hasFormat(format)) {
+  final data = Clipboard.getData(format);
+  // ...
 }
 ```
 
-## Feature requests and bugs
+## 📝 Documentation
 
-Please file feature requests and bugs at the
-[issue tracker][issue_tracker_link].
+Full API reference is available here:
 
-[api_documentation_link]: https://pub.dev/documentation/win32_clipboard/latest/
+👉 [API Reference][api_reference_link].
+
+Additional usage examples are located in the [example] directory.
+
+## 🐞 Features and Bugs
+
+If you encounter bugs or need additional functionality, please
+[file an issue][issue_tracker_link].
+
+[api_reference_link]: https://pub.dev/documentation/win32_clipboard/latest/
 [ci_badge]: https://github.com/halildurmus/win32_clipboard/actions/workflows/win32_clipboard.yml/badge.svg
 [ci_link]: https://github.com/halildurmus/win32_clipboard/actions/workflows/win32_clipboard.yml
 [codecov_badge_link]: https://codecov.io/gh/halildurmus/win32_clipboard/branch/main/graph/badge.svg?token=AM792MK0UT
@@ -114,4 +130,4 @@ Please file feature requests and bugs at the
 [package_link]: https://pub.dev/packages/win32_clipboard
 [publisher_badge]: https://img.shields.io/pub/publisher/win32_clipboard.svg
 [publisher_link]: https://pub.dev/publishers/halildurmus.dev
-[win32]: https://pub.dev/packages/win32
+[win32_pub_dev_link]: https://pub.dev/packages/win32

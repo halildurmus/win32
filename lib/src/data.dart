@@ -49,11 +49,8 @@ final class FileListData extends ClipboardData {
 
 /// Pointer data for custom formats.
 final class PointerData extends ClipboardData {
-  const PointerData(
-    this.pointer,
-    this.lengthInBytes,
-    ClipboardFormat format,
-  ) : super._(format);
+  const PointerData(this.pointer, this.lengthInBytes, ClipboardFormat format)
+    : super._(format);
 
   /// The pointer to the data.
   final Pointer<Uint8> pointer;

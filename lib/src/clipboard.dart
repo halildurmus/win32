@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -7,7 +6,6 @@ import 'package:win32/win32.dart';
 import 'data.dart';
 import 'exception.dart';
 import 'format.dart';
-import 'listener.dart';
 import 'utils.dart';
 
 /// Provides a set of methods and properties for interacting with the Windows
@@ -18,7 +16,7 @@ abstract final class Clipboard {
   /// Returns `true` if the operation succeeds; otherwise, returns `false`.
   static bool clear() {
     try {
-      return performClipboardOperation(() => EmptyClipboard() == TRUE);
+      return performClipboardOperation(() => EmptyClipboard().value);
     } on ClipboardException {
       return false;
     }
@@ -33,11 +31,11 @@ abstract final class Clipboard {
     try {
       return performClipboardOperation(() {
         final formats = <ClipboardFormat>[];
-        var currentFormat = EnumClipboardFormats(NULL);
+        var currentFormat = EnumClipboardFormats(NULL).value;
 
         while (currentFormat != 0) {
           formats.add(getClipboardFormat(currentFormat));
-          currentFormat = EnumClipboardFormats(currentFormat);
+          currentFormat = EnumClipboardFormats(currentFormat).value;
         }
 
         return formats;
@@ -53,10 +51,10 @@ abstract final class Clipboard {
   /// fails.
   @pragma('vm:prefer-inline')
   static ClipboardData? getData(ClipboardFormat format) => switch (format) {
-        ClipboardFormat.fileList => getFileListData(),
-        ClipboardFormat.unicodeText => getUnicodeTextData(),
-        _ => getPointerData(format)
-      };
+    .fileList => getFileListData(),
+    .unicodeText => getUnicodeTextData(),
+    _ => getPointerData(format),
+  };
 
   /// Stores the provided [data] on the clipboard.
   ///
@@ -66,10 +64,10 @@ abstract final class Clipboard {
   /// Returns `true` if the operation succeeds; otherwise, returns `false`.
   @pragma('vm:prefer-inline')
   static bool setData(ClipboardData data) => switch (data) {
-        FileListData(:final files) => setFileList(files),
-        PointerData() => data.storeData(),
-        UnicodeTextData(:final text) => setText(text),
-      };
+    FileListData(:final files) => setFileList(files),
+    PointerData() => data.storeData(),
+    UnicodeTextData(:final text) => setText(text),
+  };
 
   /// Retrieves file list data on the clipboard.
   @pragma('vm:prefer-inline')
@@ -99,28 +97,32 @@ abstract final class Clipboard {
   ///
   /// Returns `null` if the clipboard is empty or none of the specified formats
   /// are present.
-  static ClipboardFormat? getPriorityFormat(List<ClipboardFormat> formats) {
-    final paFormatPriorityList = calloc<UINT>(formats.length)
-      ..asTypedList(formats.length)
-          .setAll(0, formats.map((format) => format.id));
-    final result =
-        GetPriorityClipboardFormat(paFormatPriorityList, formats.length);
-    if (result <= 0) return null;
-    return formats.where((format) => format.id == result).firstOrNull;
-  }
+  static ClipboardFormat? getPriorityFormat(List<ClipboardFormat> formats) =>
+      using((arena) {
+        final paFormatPriorityList = arena<UINT>(formats.length)
+          ..asTypedList(
+            formats.length,
+          ).setAll(0, formats.map((format) => format.id));
+        final result = GetPriorityClipboardFormat(
+          paFormatPriorityList,
+          formats.length,
+        ).value;
+        if (result <= 0) return null;
+        return formats.where((format) => format.id == result).firstOrNull;
+      });
 
   /// Checks if the clipboard contains data in the specified [format].
   @pragma('vm:prefer-inline')
   static bool hasFormat(ClipboardFormat format) =>
-      IsClipboardFormatAvailable(format.id) == TRUE;
+      IsClipboardFormatAvailable(format.id).value;
 
   /// Checks if the clipboard contains file list data.
   @pragma('vm:prefer-inline')
-  static bool get hasFileList => hasFormat(ClipboardFormat.fileList);
+  static bool get hasFileList => hasFormat(.fileList);
 
   /// Checks if the clipboard contains Unicode text data.
   @pragma('vm:prefer-inline')
-  static bool get hasText => hasFormat(ClipboardFormat.unicodeText);
+  static bool get hasText => hasFormat(.unicodeText);
 
   /// Checks if the clipboard is empty.
   @pragma('vm:prefer-inline')
@@ -128,39 +130,7 @@ abstract final class Clipboard {
 
   /// Gets the number of different data formats currently on the clipboard.
   @pragma('vm:prefer-inline')
-  static int get numberOfFormats => CountClipboardFormats();
-
-  /// Emits a [ClipboardData] object whenever the data with the specified
-  /// [format] on the clipboard changes.
-  static Stream<ClipboardData> onDataChanged(ClipboardFormat format) =>
-      onClipboardDataChanged.transform(
-        StreamTransformer.fromHandlers(
-          handleData: (_, sink) {
-            if (getData(format) case final data?) sink.add(data);
-          },
-        ),
-      );
-
-  /// Emits a file list whenever the file list on the clipboard changes.
-  static Stream<List<String>> get onFileListChanged =>
-      onClipboardDataChanged.transform(
-        StreamTransformer.fromHandlers(
-          handleData: (_, sink) {
-            if (getFileList() case final fileList when fileList.isNotEmpty) {
-              sink.add(fileList);
-            }
-          },
-        ),
-      );
-
-  /// Emits a string whenever the text on the clipboard changes.
-  static Stream<String> get onTextChanged => onClipboardDataChanged.transform(
-        StreamTransformer.fromHandlers(
-          handleData: (_, sink) {
-            if (getText() case final text?) sink.add(text);
-          },
-        ),
-      );
+  static int get numberOfFormats => CountClipboardFormats().value;
 
   /// Registers a clipboard format with the given [name] and returns it as a
   /// [ClipboardFormat].
@@ -169,16 +139,11 @@ abstract final class Clipboard {
   /// format is returned.
   ///
   /// Throws a [ClipboardException] if the format could not be registered.
-  static ClipboardFormat registerFormat(String name) {
-    final lpszFormat = name.toNativeUtf16();
-    try {
-      final formatId = RegisterClipboardFormat(lpszFormat);
-      if (formatId == 0) {
-        throw ClipboardException('Failed to register clipboard format: $name');
-      }
-      return ClipboardFormat(formatId, name);
-    } finally {
-      free(lpszFormat);
+  static ClipboardFormat registerFormat(String name) => using((arena) {
+    final formatId = RegisterClipboardFormat(arena.pcwstr(name)).value;
+    if (formatId == 0) {
+      throw ClipboardException('Failed to register clipboard format: $name');
     }
-  }
+    return ClipboardFormat(formatId, name);
+  });
 }
