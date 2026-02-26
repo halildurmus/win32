@@ -1,0 +1,28 @@
+ci:
+  - changed-files:
+      - any-glob-to-all-files:
+          - .github/**
+          - cliff.toml
+          - lefthook.yml
+
+documentation:
+  - changed-files:
+      - any-glob-to-all-files:
+          - CONTRIBUTING.md
+          - PUBLISHING.md
+          - README.md
+
+example:
+  - changed-files:
+      - any-glob-to-all-files: example/**
+
+'external dependency':
+  - head-branch: [^dependabot]
+
+release:
+  - head-branch: [^release, release]
+
+test:
+  - changed-files:
+      - any-glob-to-all-files:
+          - test/**
