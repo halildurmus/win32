@@ -8,7 +8,7 @@
 machine.**
 
 This package builds on top of the [package:win32] and provides a high-level
-abstraction over native registry APIs. It eliminates the need to work directly
+abstraction over native gamepad APIs. It eliminates the need to work directly
 with FFI, raw pointers, or low-level Win32 calls while preserving performance
 and correctness.
 

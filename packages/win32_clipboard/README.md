@@ -4,11 +4,12 @@
 [![Publisher: halildurmus.dev][publisher_badge]][publisher_link]
 [![Language: Dart][language_badge]][language_link]
 [![License: BSD-3-Clause][license_badge]][license_link]
+
 **A modern, type-safe Dart API for accessing and managing the
-Windows Registry.**
+Windows Clipboard.**
 
 This package builds on top of the [package:win32] and provides a high-level
-abstraction over native registry APIs. It eliminates the need to work directly
+abstraction over native clipboard APIs. It eliminates the need to work directly
 with FFI, raw pointers, or low-level Win32 calls while preserving performance
 and correctness.
 
