@@ -3,7 +3,7 @@
 
 [remote.github]
 owner = "halildurmus"
-repo = "win32_clipboard"
+repo = "win32"
 
 [changelog]
 # template for the changelog header
@@ -79,7 +79,7 @@ postprocessors = [
     # replace the GitHub URL
     { pattern = '<GITHUB>', replace = "https://github.com" },
     # replace repository URL
-    { pattern = '<REPO>', replace = "https://github.com/halildurmus/win32_clipboard" },
+    { pattern = '<REPO>', replace = "https://github.com/halildurmus/win32" },
 ]
 
 [git]

@@ -1,1 +1,1 @@
-include: package:halildurmus_lints/dart.yaml
+include: ../../analysis_options.yaml

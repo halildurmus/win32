@@ -16,7 +16,7 @@ After making these changes, the workflow will create a pull request (PR) with
 title:
 
 ```text
-chore(release): `package:win32_clipboard` v2.1.0
+chore(release): `package:ffi_leak_tracker` v2.1.0
 ```
 
 ## 2️⃣ Review and Merge the PR

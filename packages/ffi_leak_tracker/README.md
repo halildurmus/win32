@@ -71,7 +71,7 @@ If you encounter bugs or need additional functionality, please
 [codecov_link]: https://codecov.io/gh/halildurmus/win32
 [language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
 [language_link]: https://dart.dev
-[license_badge]: https://img.shields.io/github/license/halildurmus/win32?color=blue
+[license_badge]: https://img.shields.io/github/license/halildurmus/win32
 [license_link]: https://opensource.org/licenses/BSD-3-Clause
 [package_badge]: https://img.shields.io/pub/v/ffi_leak_tracker.svg
 [package_link]: https://pub.dev/packages/ffi_leak_tracker

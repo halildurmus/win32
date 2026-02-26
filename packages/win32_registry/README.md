@@ -1,9 +1,9 @@
 [![ci][ci_badge]][ci_link]
+[![codecov][codecov_badge_link]][codecov_link]
 [![Package: win32_registry][package_badge]][package_link]
 [![Publisher: halildurmus.dev][publisher_badge]][publisher_link]
 [![Language: Dart][language_badge]][language_link]
 [![License: BSD-3-Clause][license_badge]][license_link]
-[![codecov][codecov_badge_link]][codecov_link]
 
 **A modern, type-safe Dart API for accessing and managing the
 Windows Registry.**
@@ -76,7 +76,7 @@ If you encounter bugs or need additional functionality, please
 [issue_tracker_link]: https://github.com/halildurmus/win32/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22package%3A%20win32_registry%22
 [language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
 [language_link]: https://dart.dev
-[license_badge]: https://img.shields.io/github/license/halildurmus/win32?color=blue
+[license_badge]: https://img.shields.io/github/license/halildurmus/win32
 [license_link]: https://opensource.org/licenses/BSD-3-Clause
 [package_badge]: https://img.shields.io/pub/v/win32_registry.svg
 [package_link]: https://pub.dev/packages/win32_registry

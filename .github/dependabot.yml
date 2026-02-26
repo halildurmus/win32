@@ -2,73 +2,77 @@ version: 2
 enable-beta-ecosystems: true
 updates:
   # Workflows
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: 'github-actions'
+    directory: '/'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
 
   # Workspace pubspec.yaml
-  - package-ecosystem: "pub"
-    directory: "/"
+  - package-ecosystem: 'pub'
+    directory: '/'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
 
   # Examples
-  - package-ecosystem: "pub"
-    directory: "/examples/dartnote"
+  - package-ecosystem: 'pub'
+    directory: '/examples/dartnote'
     schedule:
-      interval: "weekly"
-  - package-ecosystem: "pub"
-    directory: "/examples/explorer"
+      interval: 'weekly'
+  - package-ecosystem: 'pub'
+    directory: '/examples/explorer'
     schedule:
-      interval: "weekly"
-  - package-ecosystem: "pub"
-    directory: "/examples/manifest"
+      interval: 'weekly'
+  - package-ecosystem: 'pub'
+    directory: '/examples/manifest'
     schedule:
-      interval: "weekly"
-  - package-ecosystem: "pub"
-    directory: "/examples/service_manager_cli"
+      interval: 'weekly'
+  - package-ecosystem: 'pub'
+    directory: '/examples/service_manager_cli'
     schedule:
-      interval: "weekly"
-  - package-ecosystem: "pub"
-    directory: "/examples/snake"
+      interval: 'weekly'
+  - package-ecosystem: 'pub'
+    directory: '/examples/snake'
     schedule:
-      interval: "weekly"
-  - package-ecosystem: "pub"
-    directory: "/examples/task_dialog"
+      interval: 'weekly'
+  - package-ecosystem: 'pub'
+    directory: '/examples/task_dialog'
     schedule:
-      interval: "weekly"
-  - package-ecosystem: "pub"
-    directory: "/examples/task_manager"
+      interval: 'weekly'
+  - package-ecosystem: 'pub'
+    directory: '/examples/task_manager'
     schedule:
-      interval: "weekly"
-  - package-ecosystem: "pub"
-    directory: "/examples/tetris"
+      interval: 'weekly'
+  - package-ecosystem: 'pub'
+    directory: '/examples/tetris'
     schedule:
-      interval: "weekly"
-  - package-ecosystem: "pub"
-    directory: "/examples/usb_drive_monitor"
+      interval: 'weekly'
+  - package-ecosystem: 'pub'
+    directory: '/examples/usb_drive_monitor'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
 
   # Packages
-  - package-ecosystem: "pub"
-    directory: "/packages/ffi_leak_tracker"
+  - package-ecosystem: 'pub'
+    directory: '/packages/ffi_leak_tracker'
     schedule:
-      interval: "weekly"
-  - package-ecosystem: "pub"
-    directory: "/packages/generator"
+      interval: 'weekly'
+  - package-ecosystem: 'pub'
+    directory: '/packages/generator'
     schedule:
-      interval: "weekly"
-  - package-ecosystem: "pub"
-    directory: "/packages/win32"
+      interval: 'weekly'
+  - package-ecosystem: 'pub'
+    directory: '/packages/win32'
     schedule:
-      interval: "weekly"
-  - package-ecosystem: "pub"
-    directory: "/packages/win32_registry"
+      interval: 'weekly'
+  - package-ecosystem: 'pub'
+    directory: '/packages/win32_clipboard'
     schedule:
-      interval: "weekly"
-  - package-ecosystem: "pub"
-    directory: "/packages/win32_runner"
+      interval: 'weekly'
+  - package-ecosystem: 'pub'
+    directory: '/packages/win32_registry'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
+  - package-ecosystem: 'pub'
+    directory: '/packages/win32_runner'
+    schedule:
+      interval: 'weekly'
