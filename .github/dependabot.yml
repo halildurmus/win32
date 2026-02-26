@@ -69,6 +69,10 @@ updates:
     schedule:
       interval: 'weekly'
   - package-ecosystem: 'pub'
+    directory: '/packages/win32_gamepad'
+    schedule:
+      interval: 'weekly'
+  - package-ecosystem: 'pub'
     directory: '/packages/win32_registry'
     schedule:
       interval: 'weekly'

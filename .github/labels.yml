@@ -18,6 +18,10 @@
   color: '2FE436'
   description: Issue with package:win32_clipboard
 
+- name: 'package: win32_gamepad'
+  color: '2FE436'
+  description: Issue with package:win32_gamepad
+
 - name: 'package: win32_registry'
   color: '2FE436'
   description: Issue with package:win32_registry

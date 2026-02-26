@@ -11,6 +11,7 @@ on:
           - ffi_leak_tracker
           - win32
           - win32_clipboard
+          - win32_gamepad
           - win32_registry
           - win32_runner
           - winmd

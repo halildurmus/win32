@@ -7,10 +7,10 @@
 **A modern, type-safe Dart API for accessing gamepads connected to a Windows
 machine.**
 
-This package builds on top of the [package:win32][win32_pub_dev_link] and
-provides a high-level abstraction over native registry APIs. It eliminates the
-need to work directly with FFI, raw pointers, or low-level Win32 calls while
-preserving performance and correctness.
+This package builds on top of the [package:win32] and provides a high-level
+abstraction over native registry APIs. It eliminates the need to work directly
+with FFI, raw pointers, or low-level Win32 calls while preserving performance
+and correctness.
 
 ## ✨ Features
 
@@ -28,7 +28,7 @@ Add the package to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  win32_gamepad: ^1.0.10
+  win32_gamepad: ^1.0.11
 ```
 
 Then import it:
@@ -115,13 +115,13 @@ If you encounter bugs or need additional functionality, please
 [file an issue][issue_tracker_link].
 
 [api_reference_link]: https://pub.dev/documentation/win32_gamepad/latest/
-[ci_badge]: https://github.com/halildurmus/win32_gamepad/actions/workflows/win32_gamepad.yml/badge.svg
-[ci_link]: https://github.com/halildurmus/win32_gamepad/actions/workflows/win32_gamepad.yml
-[demo_image_link]: https://raw.githubusercontent.com/halildurmus/win32_gamepad/main/screenshots/demo.png
-[issue_tracker_link]: https://github.com/halildurmus/win32_gamepad/issues
+[ci_badge]: https://github.com/halildurmus/win32/actions/workflows/win32_gamepad.yml/badge.svg
+[ci_link]: https://github.com/halildurmus/win32/actions/workflows/win32_gamepad.yml
+[demo_image_link]: https://raw.githubusercontent.com/halildurmus/win32/main/packages/win32_gamepad/screenshots/demo.png
+[issue_tracker_link]: https://github.com/halildurmus/win32/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22package%3A%20win32_gamepad%22
 [language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
 [language_link]: https://dart.dev
-[license_badge]: https://img.shields.io/github/license/halildurmus/win32_gamepad?color=blue
+[license_badge]: https://img.shields.io/github/license/halildurmus/win32
 [license_link]: https://opensource.org/licenses/BSD-3-Clause
 [package_badge]: https://img.shields.io/pub/v/win32_gamepad.svg
 [package_link]: https://pub.dev/packages/win32_gamepad
@@ -130,4 +130,4 @@ If you encounter bugs or need additional functionality, please
 [state_class_link]: https://pub.dev/documentation/win32_gamepad/latest/win32_gamepad/GamepadState-class.html
 [update_state_method_link]: https://pub.dev/documentation/win32_gamepad/latest/win32_gamepad/Gamepad/updateState.html
 [vibrate_method_link]: https://pub.dev/documentation/win32_gamepad/latest/win32_gamepad/Gamepad/vibrate.html
-[win32_pub_dev_link]: https://pub.dev/packages/win32
+[package:win32]: https://pub.dev/packages/win32

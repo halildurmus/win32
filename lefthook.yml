@@ -25,6 +25,10 @@ pre-commit:
       root: packages/win32_clipboard
       glob: 'packages/win32_clipboard/{lib,test}/**/*.dart'
       run: dart run halildurmus_hooks:test
+    test_win32_gamepad:
+      root: packages/win32_gamepad
+      glob: 'packages/win32_gamepad/{lib,test}/**/*.dart'
+      run: dart run halildurmus_hooks:test
     test_win32_registry:
       root: packages/win32_registry
       glob: 'packages/win32_registry/{lib,test}/**/*.dart'
