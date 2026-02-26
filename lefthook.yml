@@ -13,6 +13,10 @@ pre-commit:
       root: packages/ffi_leak_tracker
       glob: 'packages/ffi_leak_tracker/{lib,test}/**/*.dart'
       run: dart run halildurmus_hooks:test
+    test_filepicker_windows:
+      root: packages/filepicker_windows
+      glob: 'packages/filepicker_windows/{lib,test}/**/*.dart'
+      run: dart run halildurmus_hooks:test
     test_generator:
       root: packages/generator
       glob: 'packages/generator/{lib,test}/**/*.dart'

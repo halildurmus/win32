@@ -6,6 +6,10 @@
   color: '2FE436'
   description: Issue with package:ffi_leak_tracker
 
+- name: 'package: filepicker_windows'
+  color: '2FE436'
+  description: Issue with package:filepicker_windows
+
 - name: 'package: generator'
   color: '2FE436'
   description: Issue with package:generator

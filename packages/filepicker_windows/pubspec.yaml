@@ -1,9 +1,11 @@
 name: filepicker_windows
 description: >
   File and directory picker for Windows that uses common dialog controls.
-version: 3.0.0
-repository: https://github.com/halildurmus/filepicker_windows
-issue_tracker: https://github.com/halildurmus/filepicker_windows/issues
+version: 3.0.1
+repository: https://github.com/halildurmus/win32/tree/main/packages/filepicker_windows
+issue_tracker: https://github.com/halildurmus/win32/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22package%3A%20filepicker_windows%22
+funding:
+  - https://github.com/sponsors/halildurmus
 
 topics:
   - picker
@@ -16,6 +18,8 @@ environment:
 
 platforms:
   windows:
+
+resolution: workspace
 
 dependencies:
   ffi: ^2.2.0

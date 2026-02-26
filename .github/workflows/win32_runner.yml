@@ -5,7 +5,6 @@ on:
     paths:
       - .github/workflows/win32_runner.yml
       - analysis_options.yaml
-      - codecov.yml
       - pubspec.yaml
       - packages/win32_runner/lib/**
       - packages/win32_runner/test/**
@@ -18,7 +17,6 @@ on:
     paths:
       - .github/workflows/win32_runner.yml
       - analysis_options.yaml
-      - codecov.yml
       - pubspec.yaml
       - packages/win32_runner/lib/**
       - packages/win32_runner/test/**

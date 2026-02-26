@@ -6,10 +6,10 @@
 
 **File and directory picker for Windows that uses common dialog controls.**
 
-This package builds on top of the [package:win32][win32_pub_dev_link] and
-provides a high-level abstraction over native registry APIs. It eliminates the
-need to work directly with FFI, raw pointers, or low-level Win32 calls while
-preserving performance and correctness.
+This package builds on top of the [package:win32] and provides a high-level
+abstraction over native registry APIs. It eliminates the need to work directly
+with FFI, raw pointers, or low-level Win32 calls while preserving performance
+and correctness.
 
 ## ✨ Features
 
@@ -26,7 +26,7 @@ Add the package to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  filepicker_windows: ^3.0.0
+  filepicker_windows: ^3.0.1
 ```
 
 Then import it:
@@ -83,16 +83,16 @@ If you encounter bugs or need additional functionality, please
 [file an issue][issue_tracker_link].
 
 [api_reference_link]: https://pub.dev/documentation/filepicker_windows/latest/
-[ci_badge]: https://github.com/halildurmus/filepicker_windows/actions/workflows/filepicker_windows.yml/badge.svg
-[ci_link]: https://github.com/halildurmus/filepicker_windows/actions/workflows/filepicker_windows.yml
-[example]: https://github.com/halildurmus/filepicker_windows/tree/main/example
-[issue_tracker_link]: https://github.com/halildurmus/filepicker_windows/issues
+[ci_badge]: https://github.com/halildurmus/win32/actions/workflows/filepicker_windows.yml/badge.svg
+[ci_link]: https://github.com/halildurmus/win32/actions/workflows/filepicker_windows.yml
+[example]: https://github.com/halildurmus/win32/tree/main/packages/filepicker_windows/example
+[issue_tracker_link]: https://github.com/halildurmus/win32/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22package%3A%20filepicker_windows%22
 [language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
 [language_link]: https://dart.dev
-[license_badge]: https://img.shields.io/github/license/halildurmus/filepicker_windows?color=blue
+[license_badge]: https://img.shields.io/github/license/halildurmus/win32
 [license_link]: https://opensource.org/licenses/BSD-3-Clause
 [package_badge]: https://img.shields.io/pub/v/filepicker_windows.svg
 [package_link]: https://pub.dev/packages/filepicker_windows
 [publisher_badge]: https://img.shields.io/pub/publisher/filepicker_windows.svg
 [publisher_link]: https://pub.dev/publishers/halildurmus.dev
-[win32_pub_dev_link]: https://pub.dev/packages/win32
+[package:win32]: https://pub.dev/packages/win32

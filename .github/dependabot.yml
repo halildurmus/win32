@@ -57,6 +57,10 @@ updates:
     schedule:
       interval: 'weekly'
   - package-ecosystem: 'pub'
+    directory: '/packages/filepicker_windows'
+    schedule:
+      interval: 'weekly'
+  - package-ecosystem: 'pub'
     directory: '/packages/generator'
     schedule:
       interval: 'weekly'

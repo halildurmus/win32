@@ -9,6 +9,7 @@ on:
         type: choice
         options:
           - ffi_leak_tracker
+          - filepicker_windows
           - win32
           - win32_clipboard
           - win32_gamepad
