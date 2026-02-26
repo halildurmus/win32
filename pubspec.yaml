@@ -13,8 +13,6 @@ workspace:
   - examples/task_dialog
   - examples/tetris
   - examples/usb_drive_monitor
-  - packages/filepicker_windows/example/wallpaper
-  - packages/win32_gamepad/example/inspector
   - packages/*
 
 dev_dependencies:
