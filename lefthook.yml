@@ -33,6 +33,10 @@ pre-commit:
       root: packages/win32_runner
       glob: 'packages/win32_runner/{lib,test}/**/*.dart'
       run: dart run halildurmus_hooks:test
+    test_winmd:
+      root: packages/winmd
+      glob: 'packages/winmd/{lib,test}/**/*.dart'
+      run: dart run halildurmus_hooks:test -- -j 1 --test-randomize-ordering-seed=random
 
 commit-msg:
   commands:

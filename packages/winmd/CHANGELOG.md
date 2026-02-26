@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [7.0.2] - 2026-02-28
+
+TODO
+
 ## [7.0.1] - 2026-02-23
 
 ### 📦 Dependencies

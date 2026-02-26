@@ -1,9 +1,9 @@
 [![ci][ci_badge]][ci_link]
+[![codecov][codecov_badge_link]][codecov_link]
 [![Package: winmd][package_badge]][package_link]
 [![Publisher: halildurmus.dev][publisher_badge]][publisher_link]
 [![Language: Dart][language_badge]][language_link]
 [![License: BSD-3-Clause][license_badge]][license_link]
-[![codecov][codecov_badge_link]][codecov_link]
 
 **Inspect and generate [Windows Metadata (.winmd)][WinMD] files based on the
 [ECMA-335] standard.**
@@ -21,6 +21,21 @@ interop tooling — most notably powering **[package:win32]**.
 - **Merge** multiple `.winmd` files into a single, unified file
 - **Generate** `.winmd` files programmatically from scratch
 - **Cross-platform** — works on Windows, Linux, and macOS
+
+## 🚀 Getting Started
+
+Add the package to your `pubspec.yaml`:
+
+```yaml
+dependencies:
+  winmd: ^7.0.2
+```
+
+Then import it:
+
+```dart
+import 'package:winmd/winmd.dart';
+```
 
 ## ⚡ Quick Example
 
@@ -81,16 +96,16 @@ If you encounter bugs or need additional functionality, please
 [file an issue][issue_tracker_link].
 
 [api_reference_link]: https://pub.dev/documentation/winmd/latest/
-[ci_badge]: https://github.com/halildurmus/winmd/actions/workflows/winmd.yml/badge.svg
-[ci_link]: https://github.com/halildurmus/winmd/actions/workflows/winmd.yml
-[codecov_badge_link]: https://codecov.io/gh/halildurmus/winmd/branch/main/graph/badge.svg?token=1ouz1Jr9nW
-[codecov_link]: https://codecov.io/gh/halildurmus/winmd
+[ci_badge]: https://github.com/halildurmus/win32/actions/workflows/winmd.yml/badge.svg
+[ci_link]: https://github.com/halildurmus/win32/actions/workflows/winmd.yml
+[codecov_badge_link]: https://codecov.io/gh/halildurmus/win32/branch/main/graph/badge.svg?token=1ouz1Jr9nW
+[codecov_link]: https://codecov.io/gh/halildurmus/win32
 [ECMA-335]: https://ecma-international.org/publications-and-standards/standards/ecma-335/
-[example]: https://github.com/halildurmus/winmd/tree/main/example
-[issue_tracker_link]: https://github.com/halildurmus/winmd/issues
+[example]: https://github.com/halildurmus/win32/tree/main/packages/winmd/example
+[issue_tracker_link]: https://github.com/halildurmus/win32/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22package%3A%20winmd%22
 [language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
 [language_link]: https://dart.dev
-[license_badge]: https://img.shields.io/github/license/halildurmus/winmd?color=blue
+[license_badge]: https://img.shields.io/github/license/halildurmus/win32
 [license_link]: https://opensource.org/licenses/BSD-3-Clause
 [package_badge]: https://img.shields.io/pub/v/winmd.svg
 [package_link]: https://pub.dev/packages/winmd

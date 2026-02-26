@@ -76,3 +76,7 @@ updates:
     directory: '/packages/win32_runner'
     schedule:
       interval: 'weekly'
+  - package-ecosystem: 'pub'
+    directory: '/packages/winmd'
+    schedule:
+      interval: 'weekly'

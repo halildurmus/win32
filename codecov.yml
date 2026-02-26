@@ -65,6 +65,16 @@ flag_management:
         - type: patch
           target: 100%
 
+    - name: winmd
+      paths:
+        - packages/winmd
+      carryforward: true
+      statuses:
+        - type: project
+          target: 20%
+        - type: patch
+          target: 100%
+
 # Exclude generated files and examples from the coverage report.
 ignore:
   - examples

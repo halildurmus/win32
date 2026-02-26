@@ -4,16 +4,28 @@ on:
   pull_request:
     paths:
       - .github/workflows/winmd.yml
-      - lib/**
-      - test/**
+      - analysis_options.yaml
+      - codecov.yml
       - pubspec.yaml
+      - packages/winmd/lib/**
+      - packages/winmd/test/**
+      - packages/winmd/example/**
+      - packages/winmd/analysis_options.yaml
+      - packages/winmd/CHANGELOG.md
+      - packages/winmd/pubspec.yaml
   push:
     branches: [main]
     paths:
       - .github/workflows/winmd.yml
-      - lib/**
-      - test/**
+      - analysis_options.yaml
+      - codecov.yml
       - pubspec.yaml
+      - packages/winmd/lib/**
+      - packages/winmd/test/**
+      - packages/winmd/example/**
+      - packages/winmd/analysis_options.yaml
+      - packages/winmd/CHANGELOG.md
+      - packages/winmd/pubspec.yaml
 
 jobs:
   build:
@@ -45,11 +57,24 @@ jobs:
       format_directories: lib test
       randomize_execution_order_of_tests: true
       runs_on: ${{ matrix.os }}
+      working_directory: packages/winmd
     secrets:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   dartdoc:
     uses: halildurmus/workflows/.github/workflows/dartdoc.yml@main
+    with:
+      working_directory: packages/winmd
+
+  examples:
+    uses: halildurmus/workflows/.github/workflows/dart.yml@main
+    with:
+      analyze_directories: example
+      format_directories: example
+      run_tests: false
+      working_directory: packages/winmd
 
   pana:
     uses: halildurmus/workflows/.github/workflows/pana.yml@main
+    with:
+      working_directory: packages/winmd
