@@ -1,0 +1,26 @@
+name: Examples
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/examples.yml
+      - example/**
+      - lib/**
+      - analysis_options.yaml
+      - pubspec.yaml
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/examples.yml
+      - example/**
+      - lib/**
+      - analysis_options.yaml
+      - pubspec.yaml
+
+jobs:
+  build:
+    uses: halildurmus/workflows/.github/workflows/dart.yml@main
+    with:
+      analyze_directories: example
+      format_directories: example
+      run_tests: false

@@ -1,0 +1,32 @@
+name: win32_clipboard
+description: >
+  A modern, type-safe Dart API for accessing and managing the Windows Registry.
+version: 2.0.1
+repository: https://github.com/halildurmus/win32_clipboard
+issue_tracker: https://github.com/halildurmus/win32_clipboard/issues
+funding:
+  - https://github.com/halildurmus
+
+topics:
+  - clipboard
+  - win32
+  - ffi
+  - windows
+
+environment:
+  sdk: ^3.11.0
+
+platforms:
+  windows:
+
+dependencies:
+  ffi: ^2.2.0
+  ffi_leak_tracker: ^0.1.0
+  meta: ^1.17.0
+  win32: ^6.0.0
+
+dev_dependencies:
+  checks: ^0.3.1
+  halildurmus_hooks: ^0.1.1
+  halildurmus_lints: ^2.0.0
+  test: ^1.29.0
