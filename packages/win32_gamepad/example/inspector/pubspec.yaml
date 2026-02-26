@@ -1,0 +1,23 @@
+name: inspector
+description: A demo project that shows status of gamepads attached to Windows.
+publish_to: none
+
+environment:
+  sdk: ^3.11.0
+
+dependencies:
+  fluent_ui: ^4.14.0
+  flutter:
+    sdk: flutter
+  win32_gamepad:
+    path: ../../
+  win32_registry: ^3.0.0
+
+flutter:
+  uses-material-design: true
+
+dev_dependencies:
+  halildurmus_lints: ^2.0.0
+
+dependency_overrides:
+  meta: ^1.18.1

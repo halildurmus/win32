@@ -1,0 +1,28 @@
+name: win32_gamepad
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/win32_gamepad.yml
+      - lib/**
+      - test/**
+      - pubspec.yaml
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/win32_gamepad.yml
+      - lib/**
+      - test/**
+      - pubspec.yaml
+
+jobs:
+  build:
+    uses: halildurmus/workflows/.github/workflows/dart.yml@main
+    with:
+      format_directories: lib test
+
+  dartdoc:
+    uses: halildurmus/workflows/.github/workflows/dartdoc.yml@main
+
+  pana:
+    uses: halildurmus/workflows/.github/workflows/pana.yml@main
