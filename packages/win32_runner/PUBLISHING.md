@@ -9,14 +9,14 @@ Go to the [GitHub Actions] tab and trigger the [Prepare Release] workflow.
 This workflow will:
 
 - 🔼 **Bump** the `version` in the `pubspec.yaml` file based on commit messages
-  _(e.g., `0.2.3` ➡️ `0.2.4`)_.
+  _(e.g., `6.0.0` ➡️ `6.1.0`)_.
 - 📝 **Update** the `CHANGELOG.md` file with the latest changes.
 
 After making these changes, the workflow will create a pull request (PR) with
 title:
 
 ```text
-chore(release): `package:win32_runner` v0.2.4
+chore(release): `package:win32_runner` v6.1.0.
 ```
 
 ## 2️⃣ Review and Merge the PR
@@ -38,8 +38,8 @@ After merging the PR, the following workflows will automatically be triggered:
 - After the Git tag is created, the [Publish] workflow will be triggered to
   **publish** the new package version to [pub.dev].
 
-[GitHub Actions]: https://github.com/halildurmus/win32_runner/actions
-[Prepare Release]: https://github.com/halildurmus/win32_runner/blob/main/.github/workflows/prepare_release.yml
+[GitHub Actions]: https://github.com/halildurmus/win32/actions
+[Prepare Release]: https://github.com/halildurmus/win32/blob/main/.github/workflows/prepare_release.yml
 [pub.dev]: https://pub.dev
-[Publish]: https://github.com/halildurmus/win32_runner/blob/main/.github/workflows/publish.yml
-[Release]: https://github.com/halildurmus/win32_runner/blob/main/.github/workflows/release.yml
+[Publish]: https://github.com/halildurmus/win32/blob/main/.github/workflows/publish.yml
+[Release]: https://github.com/halildurmus/win32/blob/main/.github/workflows/release.yml

@@ -16,10 +16,10 @@ topics:
 environment:
   sdk: ^3.11.0
 
-resolution: workspace
-
 platforms:
   windows:
+
+resolution: workspace
 
 dependencies:
   collection: ^1.19.1

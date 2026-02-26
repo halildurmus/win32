@@ -8,10 +8,10 @@
 **A modern, type-safe Dart API for accessing and managing the
 Windows Registry.**
 
-This package builds on top of the [package:win32][win32_pub_dev_link] and
-provides a high-level abstraction over native registry APIs. It eliminates the
-need to work directly with FFI, raw pointers, or low-level Win32 calls while
-preserving performance and correctness.
+This package builds on top of the [package:win32] and provides a high-level
+abstraction over native registry APIs. It eliminates the need to work directly
+with FFI, raw pointers, or low-level Win32 calls while preserving performance
+and correctness.
 
 ## ✨ Features
 
@@ -73,7 +73,7 @@ If you encounter bugs or need additional functionality, please
 [codecov_badge_link]: https://codecov.io/gh/halildurmus/win32/branch/main/graph/badge.svg?token=6ThVC4ejhx
 [codecov_link]: https://codecov.io/gh/halildurmus/win32
 [example]: https://github.com/halildurmus/win32/tree/main/packages/win32_registry/example
-[issue_tracker_link]: https://github.com/halildurmus/win32/issues
+[issue_tracker_link]: https://github.com/halildurmus/win32/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22package%3A%20win32_registry%22
 [language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
 [language_link]: https://dart.dev
 [license_badge]: https://img.shields.io/github/license/halildurmus/win32?color=blue
@@ -82,4 +82,4 @@ If you encounter bugs or need additional functionality, please
 [package_link]: https://pub.dev/packages/win32_registry
 [publisher_badge]: https://img.shields.io/pub/publisher/win32_registry.svg
 [publisher_link]: https://pub.dev/publishers/halildurmus.dev
-[win32_pub_dev_link]: https://pub.dev/packages/win32
+[package:win32]: https://pub.dev/packages/win32

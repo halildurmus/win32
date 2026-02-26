@@ -21,40 +21,40 @@ below to run an existing Flutter app on Windows using the Dart runner.
 **1. Clone the repository**
 
 ```console
-C:\src> git clone https://github.com/halildurmus/win32_runner.git
-C:\src> cd win32_runner
+C:\src> git clone https://github.com/halildurmus/win32.git
+C:\src> cd packages/win32_runner
 ```
 
 **2. Install dependencies**
 
 ```console
-C:\src\win32_runner> dart pub get
+C:\src\win32\packages\win32_runner> dart pub get
 ```
 
 **3. Create a sample Flutter app**
 
 ```console
-C:\src\win32_runner> cd ..
-C:\src> flutter create simpleapp
-C:\src> cd simpleapp
+C:\src\win32\packages\win32_runner> cd example
+C:\src\win32\packages\win32_runner\example> flutter create simpleapp
+C:\src\win32\packages\win32_runner\example> cd simpleapp
 ```
 
 **4. Compile the Dart runner**
 
 ```console
-C:\src\simpleapp> dart build cli -t ..\win32_runner\example\win32_runner.dart -o build
+C:\src\win32\packages\win32_runner\example\simpleapp> dart build cli -t ..\win32_runner.dart -o build
 ```
 
 **5. Compile Flutter code and assets**
 
 ```console
-C:\src\simpleapp> flutter assemble -dTargetPlatform=windows-x64 --output=build -dBuildMode=release release_bundle_windows-x64_assets
+C:\src\win32\packages\win32_runner\example\simpleapp> flutter assemble -dTargetPlatform=windows-x64 --output=build -dBuildMode=release release_bundle_windows-x64_assets
 ```
 
 **6. Run your Flutter app**
 
 ```console
-C:\src\simpleapp> .\build\bundle\bin\win32_runner.exe
+C:\src\win32\packages\win32_runner\example\simpleapp> .\build\bundle\bin\win32_runner.exe
 ```
 
 You should now see your Flutter app running via the Dart runner:
@@ -75,14 +75,14 @@ If you encounter bugs or need additional functionality, please
 [file an issue][issue_tracker_link].
 
 [api_reference_link]: https://pub.dev/documentation/win32_runner/latest/
-[ci_badge]: https://github.com/halildurmus/win32_runner/actions/workflows/win32_runner.yml/badge.svg
-[ci_link]: https://github.com/halildurmus/win32_runner/actions/workflows/win32_runner.yml
-[demo_image_link]: https://raw.githubusercontent.com/halildurmus/win32_runner/main/screenshots/demo.png
-[example]: https://github.com/halildurmus/win32_runner/tree/main/example
-[issue_tracker_link]: https://github.com/halildurmus/win32_runner/issues
+[ci_badge]: https://github.com/halildurmus/win32/actions/workflows/win32_runner.yml/badge.svg
+[ci_link]: https://github.com/halildurmus/win32/actions/workflows/win32_runner.yml
+[demo_image_link]: https://raw.githubusercontent.com/halildurmus/win32/main/packages/win32_runner/screenshots/demo.png
+[example]: https://github.com/halildurmus/win32/tree/main/packages/win32_runner/example
+[issue_tracker_link]: https://github.com/halildurmus/win32/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22package%3A%20win32_runner%22
 [language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
 [language_link]: https://dart.dev
-[license_badge]: https://img.shields.io/github/license/halildurmus/win32_runner?color=blue
+[license_badge]: https://img.shields.io/github/license/halildurmus/win32?color=blue
 [license_link]: https://opensource.org/licenses/BSD-3-Clause
 [package_badge]: https://img.shields.io/pub/v/win32_runner.svg
 [package_link]: https://pub.dev/packages/win32_runner
