@@ -2,22 +2,24 @@ ci:
   - changed-files:
       - any-glob-to-any-file:
           - .github/**
-          - packages/win32/cliff.toml
+          - packages/*/cliff.toml
           - codecov.yml
           - lefthook.yml
 
 documentation:
   - changed-files:
       - any-glob-to-any-file:
-          - packages/win32/doc/*
-          - packages/win32/PUBLISHING.md
+          - packages/*/doc/*
+          - packages/*/PUBLISHING.md
           - website/docs/**
           - CONTRIBUTING.md
           - README.md
 
 example:
   - changed-files:
-      - any-glob-to-any-file: examples/**
+      - any-glob-to-any-file:
+          - examples/**
+          - packages/*/example/**
 
 'external dependency':
   - head-branch: [^dependabot]
@@ -26,6 +28,10 @@ example:
   - changed-files:
       - any-glob-to-any-file: packages/ffi_leak_tracker/**
 
+'package: filepicker_windows':
+  - changed-files:
+      - any-glob-to-any-file: packages/filepicker_windows/**
+
 'package: generator':
   - changed-files:
       - any-glob-to-any-file: packages/generator/**
@@ -33,6 +39,26 @@ example:
 'package: win32':
   - changed-files:
       - any-glob-to-any-file: packages/win32/**
+
+'package: win32_clipboard':
+  - changed-files:
+      - any-glob-to-any-file: packages/win32_clipboard/**
+
+'package: win32_gamepad':
+  - changed-files:
+      - any-glob-to-any-file: packages/win32_gamepad/**
+
+'package: win32_registry':
+  - changed-files:
+      - any-glob-to-any-file: packages/win32_registry/**
+
+'package: win32_runner':
+  - changed-files:
+      - any-glob-to-any-file: packages/win32_runner/**
+
+'package: winmd':
+  - changed-files:
+      - any-glob-to-any-file: packages/winmd/**
 
 release:
   - head-branch: [^release, release]

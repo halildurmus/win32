@@ -8,6 +8,7 @@ on:
       - codecov.yml
       - pubspec.yaml
       - packages/generator/bin/**
+      - packages/generator/data/**
       - packages/generator/example/**
       - packages/generator/lib/**
       - packages/generator/test/**
@@ -21,6 +22,7 @@ on:
       - codecov.yml
       - pubspec.yaml
       - packages/generator/bin/**
+      - packages/generator/data/**
       - packages/generator/example/**
       - packages/generator/lib/**
       - packages/generator/test/**

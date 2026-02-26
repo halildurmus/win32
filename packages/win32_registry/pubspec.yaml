@@ -1,0 +1,35 @@
+name: win32_registry
+description: >
+  A modern, type-safe Dart API for accessing and managing the Windows Registry.
+version: 3.0.2
+repository: https://github.com/halildurmus/win32/tree/main/packages/win32_registry
+issue_tracker: https://github.com/halildurmus/win32/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22package%3A%20win32_registry%22
+funding:
+  - https://github.com/sponsors/halildurmus
+
+topics:
+  - registry
+  - win32
+  - ffi
+  - windows
+
+environment:
+  sdk: ^3.11.0
+
+platforms:
+  windows:
+
+resolution: workspace
+
+dependencies:
+  collection: ^1.19.1
+  ffi: ^2.2.0
+  ffi_leak_tracker: ^0.1.0
+  meta: ^1.17.0
+  win32: ^6.0.0
+
+dev_dependencies:
+  checks: ^0.3.1
+  halildurmus_hooks: ^0.1.1
+  halildurmus_lints: ^2.0.0
+  test: ^1.29.0

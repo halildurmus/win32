@@ -1,0 +1,65 @@
+name: filepicker_windows
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/filepicker_windows.yml
+      - analysis_options.yaml
+      - pubspec.yaml
+      - packages/filepicker_windows/lib/**
+      - packages/filepicker_windows/test/**
+      - packages/filepicker_windows/example/**
+      - packages/filepicker_windows/analysis_options.yaml
+      - packages/filepicker_windows/CHANGELOG.md
+      - packages/filepicker_windows/pubspec.yaml
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/filepicker_windows.yml
+      - analysis_options.yaml
+      - pubspec.yaml
+      - packages/filepicker_windows/lib/**
+      - packages/filepicker_windows/test/**
+      - packages/filepicker_windows/example/**
+      - packages/filepicker_windows/analysis_options.yaml
+      - packages/filepicker_windows/CHANGELOG.md
+      - packages/filepicker_windows/pubspec.yaml
+
+jobs:
+  build:
+    uses: halildurmus/workflows/.github/workflows/dart.yml@main
+    with:
+      format_directories: lib test
+      working_directory: packages/filepicker_windows
+
+  dartdoc:
+    uses: halildurmus/workflows/.github/workflows/dartdoc.yml@main
+    with:
+      working_directory: packages/filepicker_windows
+
+  dart_examples:
+    uses: halildurmus/workflows/.github/workflows/dart.yml@main
+    with:
+      # Only analyze/format standalone Dart files.
+      analyze_directories: $(find . -maxdepth 1 -name '*.dart' -print)
+      format_directories: $(find . -maxdepth 1 -name '*.dart' -print)
+      run_tests: false
+      working_directory: packages/filepicker_windows/example
+
+  flutter_examples:
+    strategy:
+      matrix:
+        example:
+          - wallpaper
+
+    uses: halildurmus/workflows/.github/workflows/flutter.yml@main
+    with:
+      analyze_directories: lib
+      format_directories: lib
+      run_tests: false
+      working_directory: packages/filepicker_windows/example/${{ matrix.example }}
+
+  pana:
+    uses: halildurmus/workflows/.github/workflows/pana.yml@main
+    with:
+      working_directory: packages/filepicker_windows

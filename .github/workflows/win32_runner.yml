@@ -1,0 +1,51 @@
+name: win32_runner
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/win32_runner.yml
+      - analysis_options.yaml
+      - pubspec.yaml
+      - packages/win32_runner/lib/**
+      - packages/win32_runner/test/**
+      - packages/win32_runner/example/**
+      - packages/win32_runner/analysis_options.yaml
+      - packages/win32_runner/CHANGELOG.md
+      - packages/win32_runner/pubspec.yaml
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/win32_runner.yml
+      - analysis_options.yaml
+      - pubspec.yaml
+      - packages/win32_runner/lib/**
+      - packages/win32_runner/test/**
+      - packages/win32_runner/example/**
+      - packages/win32_runner/analysis_options.yaml
+      - packages/win32_runner/CHANGELOG.md
+      - packages/win32_runner/pubspec.yaml
+
+jobs:
+  build:
+    uses: halildurmus/workflows/.github/workflows/dart.yml@main
+    with:
+      format_directories: lib test
+      working_directory: packages/win32_runner
+
+  dartdoc:
+    uses: halildurmus/workflows/.github/workflows/dartdoc.yml@main
+    with:
+      working_directory: packages/win32_runner
+
+  examples:
+    uses: halildurmus/workflows/.github/workflows/dart.yml@main
+    with:
+      analyze_directories: example
+      format_directories: example
+      run_tests: false
+      working_directory: packages/win32_runner
+
+  pana:
+    uses: halildurmus/workflows/.github/workflows/pana.yml@main
+    with:
+      working_directory: packages/win32_runner

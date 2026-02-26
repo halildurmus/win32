@@ -1,0 +1,65 @@
+name: win32_gamepad
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/win32_gamepad.yml
+      - analysis_options.yaml
+      - pubspec.yaml
+      - packages/win32_gamepad/lib/**
+      - packages/win32_gamepad/test/**
+      - packages/win32_gamepad/example/**
+      - packages/win32_gamepad/analysis_options.yaml
+      - packages/win32_gamepad/CHANGELOG.md
+      - packages/win32_gamepad/pubspec.yaml
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/win32_gamepad.yml
+      - analysis_options.yaml
+      - pubspec.yaml
+      - packages/win32_gamepad/lib/**
+      - packages/win32_gamepad/test/**
+      - packages/win32_gamepad/example/**
+      - packages/win32_gamepad/analysis_options.yaml
+      - packages/win32_gamepad/CHANGELOG.md
+      - packages/win32_gamepad/pubspec.yaml
+
+jobs:
+  build:
+    uses: halildurmus/workflows/.github/workflows/dart.yml@main
+    with:
+      format_directories: lib test
+      working_directory: packages/win32_gamepad
+
+  dartdoc:
+    uses: halildurmus/workflows/.github/workflows/dartdoc.yml@main
+    with:
+      working_directory: packages/win32_gamepad
+
+  dart_examples:
+    uses: halildurmus/workflows/.github/workflows/dart.yml@main
+    with:
+      # Only analyze/format standalone Dart files.
+      analyze_directories: $(find . -maxdepth 1 -name '*.dart' -print)
+      format_directories: $(find . -maxdepth 1 -name '*.dart' -print)
+      run_tests: false
+      working_directory: packages/win32_gamepad/example
+
+  flutter_examples:
+    strategy:
+      matrix:
+        example:
+          - inspector
+
+    uses: halildurmus/workflows/.github/workflows/flutter.yml@main
+    with:
+      analyze_directories: lib
+      format_directories: lib
+      run_tests: false
+      working_directory: packages/win32_gamepad/example/${{ matrix.example }}
+
+  pana:
+    uses: halildurmus/workflows/.github/workflows/pana.yml@main
+    with:
+      working_directory: packages/win32_gamepad

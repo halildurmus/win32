@@ -1,0 +1,19 @@
+name: wallpaper
+publish_to: none
+
+environment:
+  sdk: ^3.11.0
+
+dependencies:
+  ffi: ^2.2.0
+  filepicker_windows: ^3.0.0
+  flutter:
+    sdk: flutter
+  path_provider_windows: ^2.3.0
+  win32: ^6.0.0
+
+dev_dependencies:
+  halildurmus_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true

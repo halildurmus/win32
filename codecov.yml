@@ -24,6 +24,7 @@ flag_management:
           target: 20%
         - type: patch
           target: 100%
+
     - name: generator
       paths:
         - packages/generator
@@ -33,9 +34,40 @@ flag_management:
           target: 20%
         - type: patch
           target: 100%
+
     - name: win32
       paths:
         - packages/win32
+      carryforward: true
+      statuses:
+        - type: project
+          target: 20%
+        - type: patch
+          target: 100%
+
+    - name: win32_clipboard
+      paths:
+        - packages/win32_clipboard
+      carryforward: true
+      statuses:
+        - type: project
+          target: 20%
+        - type: patch
+          target: 100%
+
+    - name: win32_registry
+      paths:
+        - packages/win32_registry
+      carryforward: true
+      statuses:
+        - type: project
+          target: 20%
+        - type: patch
+          target: 100%
+
+    - name: winmd
+      paths:
+        - packages/winmd
       carryforward: true
       statuses:
         - type: project
