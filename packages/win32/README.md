@@ -1,22 +1,23 @@
 <div align="center">
 
-  [![win32 README banner][banner]][win32.pub]
+  <a href="https://win32.pub">
+    <img
+      alt="package:win32 logo"
+      src="https://raw.githubusercontent.com/halildurmus/win32/main/assets/readme_banner.png"
+      height="320" />
+  </a>
 
 </div>
-
-[banner]: https://raw.githubusercontent.com/halildurmus/win32/main/assets/readme_banner.png
 
 <div align="center">
 
-  [Homepage][win32.pub] |
-  [Documentation](https://win32.pub/docs) |
-  [Examples](https://win32.pub/examples) |
-  [Packages](https://win32.pub/packages) |
+  [Homepage](https://win32.pub) ·
+  [Documentation](https://win32.pub/docs) ·
+  [Examples](https://win32.pub/examples) ·
+  [Packages](https://win32.pub/packages) ·
   [Migrating to v6](https://win32.pub/docs/migration/5xx-to-6xx)
 
 </div>
-
-[win32.pub]: https://win32.pub
 
 <div align="center">
   <a href="https://docs.flutter.dev/packages-and-plugins/favorites">

@@ -1,5 +1,5 @@
 name: generator
-description: Generates various Win32 API projections using Windows metadata.
+description: Generates Win32 and COM API projections from Windows Metadata.
 publish_to: none
 
 environment:
