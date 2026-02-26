@@ -1,0 +1,13 @@
+name: Semantic PR
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - edited
+      - synchronize
+      - reopened
+
+jobs:
+  build:
+    uses: halildurmus/workflows/.github/workflows/semantic_pr.yml@main
