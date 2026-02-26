@@ -9,7 +9,6 @@ on:
       - pubspec.yaml
       - packages/ffi_leak_tracker/example/**
       - packages/ffi_leak_tracker/lib/**
-      - packages/ffi_leak_tracker/src/**
       - packages/ffi_leak_tracker/test/**
       - packages/ffi_leak_tracker/analysis_options.yaml
       - packages/ffi_leak_tracker/CHANGELOG.md
@@ -23,7 +22,6 @@ on:
       - pubspec.yaml
       - packages/ffi_leak_tracker/example/**
       - packages/ffi_leak_tracker/lib/**
-      - packages/ffi_leak_tracker/src/**
       - packages/ffi_leak_tracker/test/**
       - packages/ffi_leak_tracker/analysis_options.yaml
       - packages/ffi_leak_tracker/CHANGELOG.md

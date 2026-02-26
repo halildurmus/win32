@@ -14,6 +14,10 @@
   color: '2FE436'
   description: Issue with package:win32
 
+- name: 'package: win32_registry'
+  color: '2FE436'
+  description: Issue with package:win32_registry
+
 - name: website
   color: '006b75'
   description: Issue with https://win32.pub

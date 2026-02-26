@@ -38,8 +38,8 @@ After merging the PR, the following workflows will automatically be triggered:
 - After the Git tag is created, the [Publish] workflow will be triggered to
   **publish** the new package version to [pub.dev].
 
-[GitHub Actions]: https://github.com/halildurmus/win32_registry/actions
-[Prepare Release]: https://github.com/halildurmus/win32_registry/blob/main/.github/workflows/prepare_release.yml
+[GitHub Actions]: https://github.com/halildurmus/win32/actions
+[Prepare Release]: https://github.com/halildurmus/win32/blob/main/.github/workflows/prepare_release.yml
 [pub.dev]: https://pub.dev
-[Publish]: https://github.com/halildurmus/win32_registry/blob/main/.github/workflows/publish.yml
-[Release]: https://github.com/halildurmus/win32_registry/blob/main/.github/workflows/release.yml
+[Publish]: https://github.com/halildurmus/win32/blob/main/.github/workflows/publish.yml
+[Release]: https://github.com/halildurmus/win32/blob/main/.github/workflows/release.yml

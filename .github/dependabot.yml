@@ -64,3 +64,7 @@ updates:
     directory: "/packages/win32"
     schedule:
       interval: "weekly"
+  - package-ecosystem: "pub"
+    directory: "/packages/win32_registry"
+    schedule:
+      interval: "weekly"

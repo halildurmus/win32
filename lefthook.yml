@@ -9,6 +9,10 @@ pre-commit:
     format:
       glob: '*.{dart}'
       run: dart run halildurmus_hooks:format {staged_files}
+    test_ffi_leak_tracker:
+      root: packages/ffi_leak_tracker
+      glob: 'packages/ffi_leak_tracker/{lib,test}/**/*.dart'
+      run: dart run halildurmus_hooks:test
     test_generator:
       root: packages/generator
       glob: 'packages/generator/{lib,test}/**/*.dart'
@@ -16,6 +20,10 @@ pre-commit:
     test_win32:
       root: packages/win32
       glob: 'packages/win32/{lib,test}/**/*.dart'
+      run: dart run halildurmus_hooks:test
+    test_win32_registry:
+      root: packages/win32_registry
+      glob: 'packages/win32_registry/{lib,test}/**/*.dart'
       run: dart run halildurmus_hooks:test
 
 commit-msg:

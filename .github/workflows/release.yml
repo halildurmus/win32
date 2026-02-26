@@ -15,6 +15,7 @@ on:
         options:
           - ffi_leak_tracker
           - win32
+          - win32_registry
 
 jobs:
   check-release:

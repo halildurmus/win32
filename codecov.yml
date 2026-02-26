@@ -42,6 +42,15 @@ flag_management:
           target: 20%
         - type: patch
           target: 100%
+    - name: win32_registry
+      paths:
+        - packages/win32_registry
+      carryforward: true
+      statuses:
+        - type: project
+          target: 20%
+        - type: patch
+          target: 100%
 
 # Exclude generated files and examples from the coverage report.
 ignore:

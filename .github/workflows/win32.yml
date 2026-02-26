@@ -7,6 +7,7 @@ on:
       - analysis_options.yaml
       - codecov.yml
       - pubspec.yaml
+      - examples/**
       - packages/win32/hook/**
       - packages/win32/lib/**
       - packages/win32/src/**
@@ -22,6 +23,7 @@ on:
       - analysis_options.yaml
       - codecov.yml
       - pubspec.yaml
+      - examples/**
       - packages/win32/hook/**
       - packages/win32/lib/**
       - packages/win32/src/**
@@ -68,6 +70,51 @@ jobs:
     uses: halildurmus/workflows/.github/workflows/dartdoc.yml@main
     with:
       working_directory: packages/win32
+
+  dart_examples:
+    uses: halildurmus/workflows/.github/workflows/dart.yml@main
+    with:
+      # Only analyze/format standalone Dart files and the com_interop directory,
+      # not the package subdirectories (which have their own pubspec.yaml and are
+      # handled by the dart_package_examples job below).
+      analyze_directories: com_interop $(find . -maxdepth 1 -name '*.dart' -print)
+      format_directories: com_interop $(find . -maxdepth 1 -name '*.dart' -print)
+      run_tests: false
+      working_directory: examples
+
+  dart_package_examples:
+    strategy:
+      matrix:
+        example:
+          - dartnote
+          - manifest
+          - service_manager_cli
+          - snake
+          - system_tray_icon
+          - task_dialog
+          - tetris
+          - usb_drive_monitor
+
+    uses: halildurmus/workflows/.github/workflows/dart.yml@main
+    with:
+      analyze_directories: bin lib
+      format_directories: bin lib
+      run_tests: false
+      working_directory: examples/${{ matrix.example }}
+
+  flutter_examples:
+    strategy:
+      matrix:
+        example:
+          - explorer
+          - task_manager
+
+    uses: halildurmus/workflows/.github/workflows/flutter.yml@main
+    with:
+      analyze_directories: lib
+      format_directories: lib
+      run_tests: false
+      working_directory: examples/${{ matrix.example }}
 
   pana:
     uses: halildurmus/workflows/.github/workflows/pana.yml@main

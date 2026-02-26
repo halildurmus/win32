@@ -68,15 +68,15 @@ If you encounter bugs or need additional functionality, please
 [file an issue][issue_tracker_link].
 
 [api_reference_link]: https://pub.dev/documentation/win32_registry/latest/
-[ci_badge]: https://github.com/halildurmus/win32_registry/actions/workflows/win32_registry.yml/badge.svg
-[ci_link]: https://github.com/halildurmus/win32_registry/actions/workflows/win32_registry.yml
-[codecov_badge_link]: https://codecov.io/gh/halildurmus/win32_registry/branch/main/graph/badge.svg?token=6ThVC4ejhx
-[codecov_link]: https://codecov.io/gh/halildurmus/win32_registry
-[example]: https://github.com/halildurmus/win32_registry/tree/main/example
-[issue_tracker_link]: https://github.com/halildurmus/win32_registry/issues
+[ci_badge]: https://github.com/halildurmus/win32/actions/workflows/win32_registry.yml/badge.svg
+[ci_link]: https://github.com/halildurmus/win32/actions/workflows/win32_registry.yml
+[codecov_badge_link]: https://codecov.io/gh/halildurmus/win32/branch/main/graph/badge.svg?token=6ThVC4ejhx
+[codecov_link]: https://codecov.io/gh/halildurmus/win32
+[example]: https://github.com/halildurmus/win32/tree/main/packages/win32_registry/example
+[issue_tracker_link]: https://github.com/halildurmus/win32/issues
 [language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
 [language_link]: https://dart.dev
-[license_badge]: https://img.shields.io/github/license/halildurmus/win32_registry?color=blue
+[license_badge]: https://img.shields.io/github/license/halildurmus/win32?color=blue
 [license_link]: https://opensource.org/licenses/BSD-3-Clause
 [package_badge]: https://img.shields.io/pub/v/win32_registry.svg
 [package_link]: https://pub.dev/packages/win32_registry

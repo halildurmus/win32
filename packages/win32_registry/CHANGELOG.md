@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.0.2] - 2026-02-28
+
+TODO
+
+## [3.0.1] - 2026-02-26
+
+### 📦 Dependencies
+
+- Allow `package:meta` versions from `1.17.0` up to but not including `2.0.0` to
+  ensure compatibility with a wider range of Dart SDK versions.
+
+[3.0.1]: https://github.com/halildurmus/win32_registry/compare/win32_registry-3.0.0...win32_registry-3.0.1
+
 ## [3.0.0] - 2026-02-22
 
 ### 🔄 Breaking Changes
