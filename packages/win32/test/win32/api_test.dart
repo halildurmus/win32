@@ -216,8 +216,8 @@ void main() {
             check(result).isNonZero();
             check(GetClassInfo(hInstance, className, wc).value).isTrue();
           } finally {
-            lpfnWndProc.close();
             check(UnregisterClass(className, hInstance).value).isTrue();
+            lpfnWndProc.close();
           }
         });
       });

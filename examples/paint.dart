@@ -51,23 +51,23 @@ void main() => initApp(winMain);
 
 void winMain(HINSTANCE hInstance, List<String> args, SHOW_WINDOW_CMD nShowCmd) {
   using((arena) {
-    // Register the window class.
-    final className = arena.pcwstr('Simple Paint Sample');
-
     final lpfnWndProc = NativeCallable<WNDPROC>.isolateLocal(
       mainWindowProc,
       exceptionalReturn: 0,
     );
+
+    final className = arena.pcwstr('Simple Paint Sample');
 
     final wc = arena<WNDCLASS>();
     wc.ref
       ..style = CS_HREDRAW | CS_VREDRAW
       ..lpfnWndProc = lpfnWndProc.nativeFunction
       ..hInstance = hInstance
-      ..lpszClassName = PWSTR(className)
+      ..lpszClassName = .new(className)
       ..hCursor = LoadCursor(null, IDC_ARROW).value
-      ..hbrBackground = HBRUSH(GetStockObject(WHITE_BRUSH));
-    RegisterClass(wc);
+      ..hbrBackground = .new(GetStockObject(WHITE_BRUSH));
+    final result = RegisterClass(wc);
+    if (result.value == 0) throw WindowsException(result.error.toHRESULT());
 
     // Create the window.
     final Win32Result(value: hWnd, :error) = CreateWindowEx(
@@ -97,6 +97,7 @@ void winMain(HINSTANCE hInstance, List<String> args, SHOW_WINDOW_CMD nShowCmd) {
       DispatchMessage(msg);
     }
 
+    UnregisterClass(className, hInstance);
     lpfnWndProc.close();
   });
 }

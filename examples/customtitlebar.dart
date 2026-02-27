@@ -525,63 +525,63 @@ int mainWindowProc(Pointer hWnd, int msg, int wParam, int lParam) {
       PostQuitMessage(0);
       return 0;
   }
+
   return DefWindowProc(hwnd, msg, .new(wParam), .new(lParam));
 }
 
 void main() {
   registerHighDPISupport();
+  initApp(winMain);
+}
 
-  // Register the window class.
-  final windowClassName = 'WIN32_CUSTOM_TITLEBAR_EXAMPLE'.toPcwstr();
+void winMain(HINSTANCE hInstance, List<String> args, SHOW_WINDOW_CMD nShowCmd) {
+  using((arena) {
+    final lpfnWndProc = NativeCallable<WNDPROC>.isolateLocal(
+      mainWindowProc,
+      exceptionalReturn: 0,
+    );
 
-  final lpfnWndProc = NativeCallable<WNDPROC>.isolateLocal(
-    mainWindowProc,
-    exceptionalReturn: 0,
-  );
+    final className = arena.pcwstr('WIN32_CUSTOM_TITLEBAR_EXAMPLE');
 
-  final windowClass = adaptiveCalloc<WNDCLASSEX>();
-  windowClass.ref
-    ..cbSize = sizeOf<WNDCLASSEX>()
-    ..lpszClassName = PWSTR(windowClassName)
-    ..style = CS_HREDRAW | CS_VREDRAW
-    ..hCursor = LoadCursor(null, IDC_ARROW).value
-    ..lpfnWndProc = lpfnWndProc.nativeFunction;
+    final wc = adaptiveCalloc<WNDCLASSEX>();
+    wc.ref
+      ..cbSize = sizeOf<WNDCLASSEX>()
+      ..lpszClassName = .new(className)
+      ..style = CS_HREDRAW | CS_VREDRAW
+      ..hCursor = LoadCursor(null, IDC_ARROW).value
+      ..lpfnWndProc = lpfnWndProc.nativeFunction;
+    final result = RegisterClassEx(wc);
+    if (result.value == 0) throw WindowsException(result.error.toHRESULT());
 
-  RegisterClassEx(windowClass);
-
-  // Create the window.
-  final windowStyle =
+    // Create the window.
+    final Win32Result(value: hWnd, :error) = CreateWindowEx(
+      WS_EX_APPWINDOW,
+      className,
+      arena.pcwstr('Win32 Custom Title Bar Example'),
       WS_THICKFRAME | // Standard resizeable window
-      WS_SYSMENU | // Explicitly ask for the titlebar to support snapping
-      WS_MAXIMIZEBOX | // Support maximizing via mouse dragging to screen top
-      WS_MINIMIZEBOX | // Support minimizing via clicking taskbar icon
-      WS_VISIBLE; // Make window visible after creation.
+          WS_SYSMENU | // Explicitly ask for the titlebar to support snapping
+          WS_MAXIMIZEBOX | // Support maximizing via mouse dragging to screen top
+          WS_MINIMIZEBOX | // Support minimizing via clicking taskbar icon
+          WS_VISIBLE,
+      CW_USEDEFAULT,
+      CW_USEDEFAULT,
+      800,
+      600,
+      null,
+      null,
+      null,
+      null,
+    );
+    if (hWnd.isNull) throw WindowsException(error.toHRESULT());
 
-  final windowCaption = 'Win32 Custom Title Bar Example'.toPcwstr();
-  CreateWindowEx(
-    WS_EX_APPWINDOW,
-    windowClassName,
-    windowCaption,
-    windowStyle,
-    CW_USEDEFAULT,
-    CW_USEDEFAULT,
-    800,
-    600,
-    null,
-    null,
-    null,
-    null,
-  );
-  free(windowCaption);
-  free(windowClassName);
+    // Run the message loop.
+    final msg = arena<MSG>();
+    while (GetMessage(msg, null, 0, 0).value) {
+      TranslateMessage(msg);
+      DispatchMessage(msg);
+    }
 
-  final msg = adaptiveCalloc<MSG>();
-  while (GetMessage(msg, null, 0, 0).value) {
-    TranslateMessage(msg);
-    DispatchMessage(msg);
-  }
-
-  lpfnWndProc.close();
-  free(msg);
-  free(windowClass);
+    UnregisterClass(className, hInstance);
+    lpfnWndProc.close();
+  });
 }

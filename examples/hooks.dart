@@ -9,6 +9,7 @@ import 'dart:ffi';
 import 'dart:io';
 import 'dart:math';
 
+import 'package:ffi/ffi.dart';
 import 'package:ffi_leak_tracker/ffi_leak_tracker.dart';
 import 'package:win32/win32.dart';
 
@@ -199,65 +200,63 @@ int mainWindowProc(Pointer hWnd, int uMsg, int wParam, int lParam) {
 void main() => initApp(winMain);
 
 void winMain(HINSTANCE hInstance, List<String> args, SHOW_WINDOW_CMD nShowCmd) {
-  final lpfn = NativeCallable<HOOKPROC>.isolateLocal(
-    lowlevelKeyboardHookProc,
-    exceptionalReturn: 0,
-  );
+  using((arena) {
+    final lpfn = NativeCallable<HOOKPROC>.isolateLocal(
+      lowlevelKeyboardHookProc,
+      exceptionalReturn: 0,
+    );
 
-  keyHook = SetWindowsHookEx(
-    WH_KEYBOARD_LL,
-    lpfn.nativeFunction,
-    null,
-    0,
-  ).value;
+    keyHook = SetWindowsHookEx(
+      WH_KEYBOARD_LL,
+      lpfn.nativeFunction,
+      null,
+      0,
+    ).value;
 
-  final lpfnWndProc = NativeCallable<WNDPROC>.isolateLocal(
-    mainWindowProc,
-    exceptionalReturn: 0,
-  );
+    final lpfnWndProc = NativeCallable<WNDPROC>.isolateLocal(
+      mainWindowProc,
+      exceptionalReturn: 0,
+    );
 
-  final className = 'Keyboard Hook WndClass'.toPcwstr();
-  final windowCaption = 'Keyboard message viewer'.toPcwstr();
+    final className = arena.pcwstr('Keyboard Hook WndClass');
 
-  final wc = adaptiveCalloc<WNDCLASS>();
-  wc.ref
-    ..style = CS_HREDRAW | CS_VREDRAW
-    ..lpfnWndProc = lpfnWndProc.nativeFunction
-    ..hInstance = hInstance
-    ..lpszClassName = PWSTR(className)
-    ..hIcon = LoadIcon(null, IDI_APPLICATION).value
-    ..hCursor = LoadCursor(null, IDC_ARROW).value
-    ..hbrBackground = HBRUSH(GetStockObject(WHITE_BRUSH));
-  RegisterClass(wc);
+    final wc = arena<WNDCLASS>();
+    wc.ref
+      ..style = CS_HREDRAW | CS_VREDRAW
+      ..lpfnWndProc = lpfnWndProc.nativeFunction
+      ..hInstance = hInstance
+      ..lpszClassName = .new(className)
+      ..hIcon = LoadIcon(null, IDI_APPLICATION).value
+      ..hCursor = LoadCursor(null, IDC_ARROW).value
+      ..hbrBackground = .new(GetStockObject(WHITE_BRUSH));
+    final result = RegisterClass(wc);
+    if (result.value == 0) throw WindowsException(result.error.toHRESULT());
 
-  final hWnd = CreateWindow(
-    className, // Window class
-    windowCaption, // Window caption
-    WS_OVERLAPPEDWINDOW, // Window style
-    // Size and position
-    CW_USEDEFAULT,
-    CW_USEDEFAULT,
-    CW_USEDEFAULT,
-    CW_USEDEFAULT,
-    null, // Parent window
-    null, // Menu
-    hInstance, // Instance handle
-    nullptr, // Additional application data
-  ).value;
-  free(className);
-  free(windowCaption);
-  ShowWindow(hWnd, nShowCmd);
-  UpdateWindow(hWnd);
+    final hWnd = CreateWindow(
+      className, // Window class
+      arena.pcwstr('Keyboard message viewer'), // Window caption
+      WS_OVERLAPPEDWINDOW, // Window style
+      // Size and position
+      CW_USEDEFAULT,
+      CW_USEDEFAULT,
+      CW_USEDEFAULT,
+      CW_USEDEFAULT,
+      null, // Parent window
+      null, // Menu
+      hInstance, // Instance handle
+      nullptr, // Additional application data
+    ).value;
+    ShowWindow(hWnd, nShowCmd);
+    UpdateWindow(hWnd);
 
-  final msg = adaptiveCalloc<MSG>();
-  while (GetMessage(msg, null, 0, 0).value) {
-    TranslateMessage(msg);
-    DispatchMessage(msg);
-  }
+    final msg = arena<MSG>();
+    while (GetMessage(msg, null, 0, 0).value) {
+      TranslateMessage(msg);
+      DispatchMessage(msg);
+    }
 
-  lpfnWndProc.close();
-  lpfn.close();
-  free(msg);
-  free(wc);
-  free(rectScroll);
+    UnregisterClass(className, hInstance);
+    lpfnWndProc.close();
+    lpfn.close();
+  });
 }
