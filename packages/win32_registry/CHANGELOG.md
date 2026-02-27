@@ -2,9 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
-## [3.0.2] - 2026-02-28
+## [3.0.2] - 2026-02-27
 
-TODO
+### 🏠 Repository
+
+- Package has been moved to the
+  [`halildurmus/win32`](https://github.com/halildurmus/win32) monorepo.
+
+[3.0.2]: https://github.com/halildurmus/win32/releases/tag/win32_registry-v3.0.2
 
 ## [3.0.1] - 2026-02-26
 
