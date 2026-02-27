@@ -2,9 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
-## [7.0.2] - 2026-02-28
+## [7.0.2] - 2026-02-27
 
-TODO
+### 🏠 Repository
+
+- Package has been moved to the
+  [`halildurmus/win32`](https://github.com/halildurmus/win32) monorepo.
+
+[7.0.2]: https://github.com/halildurmus/win32/releases/tag/winmd-v7.0.2
 
 ## [7.0.1] - 2026-02-23
 
