@@ -27,7 +27,7 @@ on:
 
 jobs:
   build:
-    uses: halildurmus/workflows/.github/workflows/dart.yml@main
+    uses: halildurmus/workflows/.github/workflows/flutter.yml@main
     with:
       format_directories: lib test
       working_directory: packages/win32_gamepad
@@ -38,7 +38,7 @@ jobs:
       working_directory: packages/win32_gamepad
 
   dart_examples:
-    uses: halildurmus/workflows/.github/workflows/dart.yml@main
+    uses: halildurmus/workflows/.github/workflows/flutter.yml@main
     with:
       # Only analyze/format standalone Dart files.
       analyze_directories: $(find . -maxdepth 1 -name '*.dart' -print)

@@ -4,9 +4,11 @@ publish_to: none
 environment:
   sdk: ^3.11.0
 
+resolution: workspace
+
 dependencies:
   ffi: ^2.2.0
-  filepicker_windows: ^3.0.0
+  filepicker_windows: ^3.0.1
   flutter:
     sdk: flutter
   path_provider_windows: ^2.3.0

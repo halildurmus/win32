@@ -15,4 +15,5 @@ jobs:
       pull-requests: write
     uses: dart-lang/ecosystem/.github/workflows/publish.yaml@main
     with:
+      use-flutter: true
       write-comments: false

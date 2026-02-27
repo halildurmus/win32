@@ -5,15 +5,10 @@ environment:
   sdk: ^3.11.0
 
 workspace:
-  - examples/dartnote
-  - examples/manifest
-  - examples/service_manager_cli
-  - examples/snake
-  - examples/system_tray_icon
-  - examples/task_dialog
-  - examples/tetris
-  - examples/usb_drive_monitor
+  - examples/*
   - packages/*
+  - packages/filepicker_windows/example/wallpaper
+  - packages/win32_gamepad/example/inspector
 
 dev_dependencies:
   args: ^2.7.0
