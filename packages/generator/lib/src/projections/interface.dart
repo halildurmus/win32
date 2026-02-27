@@ -393,7 +393,7 @@ base class ComInterfaceProjection extends Projection with ProjectionMixin {
         ..type = cb.refer(
           'Pointer<NativeFunction<$returnType Function($nativeParameters)>>',
         )
-        ..name = method.originalName,
+        ..name = method.method.uniqueName,
     );
   }
 

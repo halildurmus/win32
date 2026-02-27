@@ -8,10 +8,49 @@ void main() {
   setUpAll(WindowsMetadata.load);
 
   group('ComMethodProjection', () {
-    testMethod('IDWriteFactory1', 'CreateCustomRenderingParams', (projection) {
-      check(projection.name).equals('createCustomRenderingParams1');
+    testMethod('IDWriteFactory', 'CreateCustomRenderingParams', (projection) {
+      check(projection.name).equals('createCustomRenderingParams');
       check(projection.originalName).equals('CreateCustomRenderingParams');
       check(projection.wrapperName).equals('_CreateCustomRenderingParamsFn');
+      check(projection.hint).equals(ReturnHint.resultValue);
+      check(projection.isNullable).isTrue();
+      check(projection.returnType.symbol).equals('IDWriteRenderingParams?');
+      check(projection.nativePrototype.accept(DartEmitter()).toString()).equals(
+        'Int32 Function(VTablePointer, Float, Float, Float, Int32, '
+        'Int32, Pointer<VTablePointer>)',
+      );
+      check(projection.dartPrototype.accept(DartEmitter()).toString()).equals(
+        'int Function(VTablePointer, double, double, double, int, '
+        'int, Pointer<VTablePointer>)',
+      );
+      check(
+        projection.methodParameters.map(
+          (p) => '${p.dartType.symbol} ${p.name}',
+        ),
+      ).deepEquals([
+        'double gamma',
+        'double enhancedContrast',
+        'double clearTypeLevel',
+        'DWRITE_PIXEL_GEOMETRY pixelGeometry',
+        'DWRITE_RENDERING_MODE renderingMode',
+      ]);
+      check(
+        projection.arguments.map((a) => a.accept(DartEmitter()).toString()),
+      ).deepEquals([
+        'ptr',
+        'gamma',
+        'enhancedContrast',
+        'clearTypeLevel',
+        'pixelGeometry',
+        'renderingMode',
+        'renderingParams',
+      ]);
+    });
+
+    testMethod('IDWriteFactory1', 'CreateCustomRenderingParams', (projection) {
+      check(projection.name).equals('createCustomRenderingParams2');
+      check(projection.originalName).equals('CreateCustomRenderingParams');
+      check(projection.wrapperName).equals('_CreateCustomRenderingParams2Fn');
       check(projection.hint).equals(ReturnHint.resultValue);
       check(projection.isNullable).isTrue();
       check(projection.returnType.symbol).equals('IDWriteRenderingParams1?');
@@ -50,9 +89,9 @@ void main() {
     });
 
     testMethod('IDWriteFactory2', 'CreateCustomRenderingParams', (projection) {
-      check(projection.name).equals('createCustomRenderingParams2');
+      check(projection.name).equals('createCustomRenderingParams3');
       check(projection.originalName).equals('CreateCustomRenderingParams');
-      check(projection.wrapperName).equals('_CreateCustomRenderingParamsFn');
+      check(projection.wrapperName).equals('_CreateCustomRenderingParams3Fn');
       check(projection.hint).equals(ReturnHint.resultValue);
       check(projection.isNullable).isTrue();
       check(projection.returnType.symbol).equals('IDWriteRenderingParams2?');
@@ -191,7 +230,7 @@ void main() {
     testMethod('IInkStrokes', 'ToString', (projection) {
       check(projection.name).equals('toUtf16String');
       check(projection.originalName).equals('ToString');
-      check(projection.wrapperName).equals('_ToStringFn');
+      check(projection.wrapperName).equals('_ToUtf16StringFn');
       check(projection.hint).equals(ReturnHint.resultValue);
       check(projection.isNullable).isFalse();
       check(projection.returnType.symbol).equals('BSTR');
@@ -210,7 +249,7 @@ void main() {
     testMethod('IHTMLStyle', 'toString', (projection) {
       check(projection.name).equals('toUtf16String');
       check(projection.originalName).equals('toString');
-      check(projection.wrapperName).equals('_toStringFn');
+      check(projection.wrapperName).equals('_toUtf16StringFn');
       check(projection.hint).equals(ReturnHint.resultValue);
       check(projection.isNullable).isFalse();
       check(projection.returnType.symbol).equals('BSTR');
