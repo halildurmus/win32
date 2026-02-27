@@ -122,6 +122,16 @@ void main() {
         createCustomRenderingParams.uniqueName,
       ).equals('CreateCustomRenderingParams');
 
+      final idWriteFactory1 = WindowsMetadata.findTypeDefByName(
+        'IDWriteFactory1',
+      );
+      final createCustomRenderingParams1 = idWriteFactory1.findMethod(
+        'CreateCustomRenderingParams',
+      );
+      check(
+        createCustomRenderingParams1.uniqueName,
+      ).equals('CreateCustomRenderingParams2');
+
       final idWriteFactory2 = WindowsMetadata.findTypeDefByName(
         'IDWriteFactory2',
       );
@@ -130,7 +140,26 @@ void main() {
       );
       check(
         createCustomRenderingParams2.uniqueName,
-      ).equals('CreateCustomRenderingParams2');
+      ).equals('CreateCustomRenderingParams3');
+
+      final idCompositionAffineTransform2DEffect =
+          WindowsMetadata.findTypeDefByName(
+            'IDCompositionAffineTransform2DEffect',
+          );
+      final setTransformMatrixElement = idCompositionAffineTransform2DEffect
+          .methods
+          .where((m) => m.name == 'SetTransformMatrixElement')
+          .toList();
+      check(setTransformMatrixElement)
+        ..length.equals(2)
+        ..has(
+          (it) => it[0].uniqueName,
+          'first',
+        ).equals('SetTransformMatrixElement')
+        ..has(
+          (it) => it[1].uniqueName,
+          'second',
+        ).equals('SetTransformMatrixElement2');
 
       final ipmTaskInfo = WindowsMetadata.findTypeDefByName('IPMTaskInfo');
       final runtimeType = ipmTaskInfo.findMethod('get_RuntimeType');

@@ -27,8 +27,7 @@ base class ComMethodProjection extends FunctionProjection {
 
   /// The name of the cached function for the native method.
   @override
-  String get wrapperName =>
-      '${method.nameWithoutEncoding.safeTypeName.privatize()}Fn';
+  String get wrapperName => '${method.uniqueName.privatize()}Fn';
 
   /// The list of Dart parameters for the method.
   @override
@@ -66,10 +65,10 @@ base class ComMethodProjection extends FunctionProjection {
     (b) => b
       ..late = true
       ..modifier = cb.FieldModifier.final$
-      ..name = '${originalName}Fn'.privatize()
+      ..name = '${method.uniqueName}Fn'.privatize()
       ..assignment = cb
           .refer('_vtable')
-          .property(originalName)
+          .property(method.uniqueName)
           .property('asFunction')
           .call(
             const [],

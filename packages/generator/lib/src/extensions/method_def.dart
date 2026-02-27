@@ -279,9 +279,8 @@ extension MethodDefExtension on winmd.MethodDef {
     final overloads = parent.methods.where((m) => m.name == name).toList();
     var interfaceTypeDef = parent;
 
-    // We also need to check up the interface chain, since otherwise overloaded
-    // methods may be missed. For example, "IDWriteFactory2" contains methods
-    // that overload those in "IDWriteFactory1".
+    // Collect parent interface methods separately.
+    final parentInterfaceMethods = <winmd.MethodDef>[];
 
     // Perf optimization to save work on the most common case of IUnknown.
     while (interfaceTypeDef.interfaceImpls.isNotEmpty &&
@@ -292,17 +291,24 @@ extension MethodDefExtension on winmd.MethodDef {
           typeName.name,
         ),
       };
-      overloads.addAll(interfaceTypeDef.methods.where((m) => m.name == name));
+      parentInterfaceMethods.addAll(
+        interfaceTypeDef.methods.where((m) => m.name == name),
+      );
     }
+
+    // Combine: reversed parent methods (base first) + current interface
+    // methods (in order)
+    final allOverloads = [...parentInterfaceMethods.reversed, ...overloads];
 
     // If there is more than one entry with the same name, add a suffix to all
     // but the first.
-    if (overloads.length > 1) {
-      final reversedOverloads = overloads.reversed.toFixedList();
-      final overloadIndex = reversedOverloads.indexWhere(
-        (m) => m.index == index,
+    if (allOverloads.length > 1) {
+      final overloadIndex = allOverloads.indexWhere(
+        (m) => m.index == index && m.parent.token == parent.token,
       );
-      if (overloadIndex > 0) return '${name.safeIdentifier}$overloadIndex';
+      if (overloadIndex > 0) {
+        return '${name.safeIdentifier}${overloadIndex + 1}';
+      }
     }
 
     // Handle special cases:

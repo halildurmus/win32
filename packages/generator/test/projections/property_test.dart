@@ -87,7 +87,7 @@ void main() {
     testGetProperty('IPMTaskInfo', 'get_RuntimeType', (projection) {
       check(projection.name).equals(r'runtimeType$');
       check(projection.originalName).equals('get_RuntimeType');
-      check(projection.wrapperName).equals('_get_RuntimeTypeFn');
+      check(projection.wrapperName).equals(r'_get_RuntimeType$Fn');
       check(projection.hint).equals(ReturnHint.resultValue);
       check(projection.isNullable).isFalse();
       check(projection.returnType.symbol).equals('PACKMAN_RUNTIME');
