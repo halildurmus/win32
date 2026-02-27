@@ -2,9 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.2.5] - 2026-02-28
+## [0.2.5] - 2026-02-27
 
-TODO
+### 🏠 Repository
+
+- Package has been moved to the
+  [`halildurmus/win32`](https://github.com/halildurmus/win32) monorepo.
+
+[0.2.5]: https://github.com/halildurmus/win32/releases/tag/win32_runner-v0.2.5
 
 ## [0.2.4] - 2026-02-23
 
