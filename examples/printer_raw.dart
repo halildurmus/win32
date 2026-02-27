@@ -43,7 +43,7 @@ final class RawPrinter {
   bool send(
     List<String> payload, {
     String documentName = 'Raw print job',
-    PrinterDataType dataType = PrinterDataType.raw,
+    PrinterDataType dataType = .raw,
   }) {
     if (payload.isEmpty) return false;
     return using((arena) {
@@ -86,7 +86,7 @@ final class RawPrinter {
     docInfo.ref
       ..pDocName = arena.pwstr(documentName)
       ..pDatatype = arena.pwstr(dataType.value)
-      ..pOutputFile = PWSTR(nullptr);
+      ..pOutputFile = .new(nullptr);
     final jobId = StartDocPrinter(hPrinter, 1, docInfo);
     if (jobId == 0) throw Exception('StartDocPrinter failed.');
   }

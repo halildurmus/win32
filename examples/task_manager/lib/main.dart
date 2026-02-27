@@ -35,8 +35,8 @@ class TaskManagerHomeScreenState extends State<TaskManagerHomeScreen> {
   var _tasks = <Task>[];
   var _filteredTasks = <Task>[];
   int? _selectedTask;
-  SortBy _sortBy = SortBy.name;
-  SortOrder _sortOrder = SortOrder.ascending;
+  SortBy _sortBy = .name;
+  SortOrder _sortOrder = .ascending;
   TextEditingController? _searchController;
   FocusNode? _searchFocusNode;
   final _taskService = const TaskService();
@@ -123,11 +123,11 @@ class TaskManagerHomeScreenState extends State<TaskManagerHomeScreen> {
     setState(() {
       _filteredTasks.sort((a, b) {
         final cmp = switch (_sortBy) {
-          SortBy.name => a.name.compareTo(b.name),
-          SortBy.pid => a.pid.compareTo(b.pid),
-          SortBy.description => a.description.compareTo(b.description),
+          .name => a.name.compareTo(b.name),
+          .pid => a.pid.compareTo(b.pid),
+          .description => a.description.compareTo(b.description),
         };
-        return _sortOrder == SortOrder.ascending ? cmp : -cmp;
+        return _sortOrder == .ascending ? cmp : -cmp;
       });
     });
   }
@@ -274,10 +274,8 @@ class TaskManagerHomeScreenState extends State<TaskManagerHomeScreen> {
                       label: const Text('Name'),
                       onSort: (columnIndex, ascending) {
                         setState(() {
-                          _sortBy = SortBy.name;
-                          _sortOrder = ascending
-                              ? SortOrder.ascending
-                              : SortOrder.descending;
+                          _sortBy = .name;
+                          _sortOrder = ascending ? .ascending : .descending;
                           sortTasks();
                         });
                       },
@@ -287,10 +285,8 @@ class TaskManagerHomeScreenState extends State<TaskManagerHomeScreen> {
                       numeric: true,
                       onSort: (columnIndex, ascending) {
                         setState(() {
-                          _sortBy = SortBy.pid;
-                          _sortOrder = ascending
-                              ? SortOrder.ascending
-                              : SortOrder.descending;
+                          _sortBy = .pid;
+                          _sortOrder = ascending ? .ascending : .descending;
                           sortTasks();
                         });
                       },
@@ -300,10 +296,8 @@ class TaskManagerHomeScreenState extends State<TaskManagerHomeScreen> {
                       label: const Text('Description'),
                       onSort: (columnIndex, ascending) {
                         setState(() {
-                          _sortBy = SortBy.description;
-                          _sortOrder = ascending
-                              ? SortOrder.ascending
-                              : SortOrder.descending;
+                          _sortBy = .description;
+                          _sortOrder = ascending ? .ascending : .descending;
                           sortTasks();
                         });
                       },
@@ -355,11 +349,11 @@ class TaskManagerHomeScreenState extends State<TaskManagerHomeScreen> {
                         ),
                       )
                       .toList(),
-                  sortAscending: _sortOrder == SortOrder.ascending,
+                  sortAscending: _sortOrder == .ascending,
                   sortColumnIndex: switch (_sortBy) {
-                    SortBy.name => 0,
-                    SortBy.pid => 1,
-                    SortBy.description => 2,
+                    .name => 0,
+                    .pid => 1,
+                    .description => 2,
                   },
                 ),
         ),

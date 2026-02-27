@@ -132,7 +132,7 @@ PowerInfo _getPowerInfo() => using((arena) {
   final batteryPercent = status.ref.BatteryLifePercent == 255
       ? null
       : status.ref.BatteryLifePercent;
-  return PowerInfo(
+  return .new(
     onACPower: status.ref.ACLineStatus == 1,
     batteryPercent: batteryPercent,
     batterySaverEnabled: status.ref.SystemStatusFlag == 1,
@@ -153,7 +153,7 @@ BatteryInfo? _getBatteryInfo() => using((arena) {
     return null;
   }
 
-  return BatteryInfo(
+  return .new(
     charging: state.ref.Charging,
     remainingCapacity: state.ref.RemainingCapacity,
     maxCapacity: state.ref.MaxCapacity,

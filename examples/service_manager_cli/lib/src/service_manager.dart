@@ -99,7 +99,7 @@ abstract class ServiceManager {
       null, // ServicesActive database
       SC_MANAGER_ALL_ACCESS, // full access rights
     ).value;
-    if (scmHandle.isNull) return ServiceStartResult.accessDenied;
+    if (scmHandle.isNull) return .accessDenied;
 
     return using((arena) {
       // Get a handle to the service.
@@ -110,7 +110,7 @@ abstract class ServiceManager {
       ).value;
       if (hService.isNull) {
         scmHandle.close();
-        return ServiceStartResult.failed;
+        return .failed;
       }
 
       final lpBuffer = arena<SERVICE_STATUS_PROCESS>();
@@ -126,7 +126,7 @@ abstract class ServiceManager {
       ).value) {
         hService.close();
         scmHandle.close();
-        return ServiceStartResult.failed;
+        return .failed;
       }
 
       final ssp = lpBuffer.ref;
@@ -137,7 +137,7 @@ abstract class ServiceManager {
           ssp.dwCurrentState != SERVICE_STOP_PENDING) {
         hService.close();
         scmHandle.close();
-        return ServiceStartResult.alreadyRunning;
+        return .alreadyRunning;
       }
 
       // Save the tick count and initial checkpoint.
@@ -171,7 +171,7 @@ abstract class ServiceManager {
         ).value) {
           hService.close();
           scmHandle.close();
-          return ServiceStartResult.failed;
+          return .failed;
         }
 
         if (ssp.dwCheckPoint > oldCheckPoint) {
@@ -181,7 +181,7 @@ abstract class ServiceManager {
         } else if (GetTickCount() - startTickCount > ssp.dwWaitHint) {
           hService.close();
           scmHandle.close();
-          return ServiceStartResult.timedOut;
+          return .timedOut;
         }
       }
 
@@ -189,7 +189,7 @@ abstract class ServiceManager {
       if (!StartService(hService, 0, null).value) {
         hService.close();
         scmHandle.close();
-        return ServiceStartResult.failed;
+        return .failed;
       } else {
         _log('Service start pending...');
       }
@@ -204,7 +204,7 @@ abstract class ServiceManager {
       ).value) {
         hService.close();
         scmHandle.close();
-        return ServiceStartResult.failed;
+        return .failed;
       }
 
       // Save the tick count and initial checkpoint.
@@ -251,9 +251,7 @@ abstract class ServiceManager {
       hService.close();
       scmHandle.close();
 
-      return serviceRunning
-          ? ServiceStartResult.success
-          : ServiceStartResult.failed;
+      return serviceRunning ? .success : .failed;
     });
   }
 
@@ -306,7 +304,7 @@ abstract class ServiceManager {
       null, // ServicesActive database
       SC_MANAGER_ALL_ACCESS, // full access rights
     ).value;
-    if (scmHandle.isNull) return ServiceStopResult.accessDenied;
+    if (scmHandle.isNull) return .accessDenied;
 
     return using((arena) {
       // Get a handle to the service.
@@ -317,7 +315,7 @@ abstract class ServiceManager {
       ).value;
       if (hService.isNull) {
         scmHandle.close();
-        return ServiceStopResult.failed;
+        return .failed;
       }
 
       try {
@@ -332,12 +330,12 @@ abstract class ServiceManager {
           sizeOf<SERVICE_STATUS_PROCESS>(),
           bytesNeeded,
         ).value) {
-          return ServiceStopResult.failed;
+          return .failed;
         }
 
         final ssp = lpBuffer.ref;
         if (ssp.dwCurrentState == SERVICE_STOPPED) {
-          return ServiceStopResult.alreadyStopped;
+          return .alreadyStopped;
         }
 
         final startTime = GetTickCount();
@@ -367,15 +365,15 @@ abstract class ServiceManager {
             sizeOf<SERVICE_STATUS_PROCESS>(),
             bytesNeeded,
           ).value) {
-            return ServiceStopResult.failed;
+            return .failed;
           }
 
           if (ssp.dwCurrentState == SERVICE_STOPPED) {
-            return ServiceStopResult.success;
+            return .success;
           }
 
           if (GetTickCount() - startTime > timeout) {
-            return ServiceStopResult.timedOut;
+            return .timedOut;
           }
         }
 
@@ -394,7 +392,7 @@ abstract class ServiceManager {
           SERVICE_CONTROL_STOP,
           lpBuffer.cast<SERVICE_STATUS>(),
         ).value) {
-          return ServiceStopResult.failed;
+          return .failed;
         }
 
         // Wait for the service to stop.
@@ -412,7 +410,7 @@ abstract class ServiceManager {
             sizeOf<SERVICE_STATUS_PROCESS>(),
             bytesNeeded,
           ).value) {
-            return ServiceStopResult.failed;
+            return .failed;
           }
 
           if (ssp.dwCurrentState == SERVICE_STOPPED) {
@@ -420,11 +418,11 @@ abstract class ServiceManager {
           }
 
           if (GetTickCount() - startTime > timeout) {
-            return ServiceStopResult.timedOut;
+            return .timedOut;
           }
         }
 
-        return ServiceStopResult.success;
+        return .success;
       } finally {
         hService.close();
         scmHandle.close();
@@ -467,7 +465,7 @@ abstract class ServiceManager {
         bytesNeeded,
         servicesReturned,
       ).value) {
-        return ServiceStopResult.failed;
+        return .failed;
       }
 
       _log('Found ${servicesReturned.value} dependent services:');
@@ -484,7 +482,7 @@ abstract class ServiceManager {
           PCWSTR(lpServiceName),
           SERVICE_STOP | SERVICE_QUERY_STATUS,
         ).value;
-        if (hDepService.isNull) return ServiceStopResult.failed;
+        if (hDepService.isNull) return .failed;
 
         try {
           final lpServiceStatus = arena<SERVICE_STATUS_PROCESS>();
@@ -495,7 +493,7 @@ abstract class ServiceManager {
             SERVICE_CONTROL_STOP,
             lpServiceStatus.cast<SERVICE_STATUS>(),
           ).value) {
-            return ServiceStopResult.failed;
+            return .failed;
           }
 
           final startTime = GetTickCount();
@@ -514,7 +512,7 @@ abstract class ServiceManager {
               sizeOf<SERVICE_STATUS_PROCESS>(),
               bytesNeeded,
             ).value) {
-              return ServiceStopResult.failed;
+              return .failed;
             }
 
             if (ssp.dwCurrentState == SERVICE_STOPPED) {
@@ -522,7 +520,7 @@ abstract class ServiceManager {
             }
 
             if (GetTickCount() - startTime > timeout) {
-              return ServiceStopResult.timedOut;
+              return .timedOut;
             }
           }
         } finally {
@@ -533,7 +531,7 @@ abstract class ServiceManager {
     }
 
     _log('Dependent services stopped.');
-    return ServiceStopResult.success;
+    return .success;
   });
 
   /// Logs a message to the console if [log] is `true`.

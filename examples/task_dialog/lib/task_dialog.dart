@@ -54,11 +54,11 @@ final class WindowsTaskDialog {
       ..pszWindowTitle = arena.pwstr(title)
       ..pszMainInstruction = arena.pwstr(instruction)
       ..pszContent = arena.pwstr(content)
-      ..pszExpandedInformation = PWSTR(
+      ..pszExpandedInformation = .new(
         expandedInfo != null ? arena.pwstr(expandedInfo) : nullptr,
       )
       ..dwFlags = TDF_USE_COMMAND_LINKS | TDF_EXPAND_FOOTER_AREA
-      ..hMainIcon = HICON(icon!)
+      ..hMainIcon = .new(icon!)
       ..cButtons = choices.length
       ..pButtons = buttons;
     final selected = arena<Int32>();

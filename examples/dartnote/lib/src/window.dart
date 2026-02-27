@@ -10,10 +10,10 @@ import 'resources.dart';
 
 class Win32Window {
   Win32Window({required this.title, this.width = 1280, this.height = 720})
-    : _hInstance = HINSTANCE(GetModuleHandle(null).value),
+    : _hInstance = .new(GetModuleHandle(null).value),
       _hIcon = _loadIcon(),
       _hMenu = AppResources.createMainMenu(),
-      _hMenuEdit = HMENU(Pointer.fromAddress(1)),
+      _hMenuEdit = .new(Pointer.fromAddress(1)),
       _hAccel = AppResources.createAccelerators(),
       _messageFindReplace = using(
         (arena) => RegisterWindowMessage(arena.pcwstr(FINDMSGSTRING)).value,
@@ -77,9 +77,9 @@ class Win32Window {
       ..lpfnWndProc = _wndProc.nativeFunction
       ..hInstance = _hInstance
       ..hCursor = LoadCursor(null, IDC_ARROW).value
-      ..hIcon = HICON(_hIcon)
-      ..hbrBackground = HBRUSH(GetStockObject(WHITE_BRUSH))
-      ..lpszClassName = PWSTR(_className)
+      ..hIcon = .new(_hIcon)
+      ..hbrBackground = .new(GetStockObject(WHITE_BRUSH))
+      ..lpszClassName = .new(_className)
       ..style = CS_HREDRAW | CS_VREDRAW;
     final Win32Result(:value, :error) = RegisterClass(wc);
     if (value == 0) throw WindowsException(error.toHRESULT());
@@ -305,7 +305,7 @@ HICON _loadIcon() {
   if (!File(iconPath).existsSync()) {
     iconPath = iconPath.replaceFirst('dart.ico', r'resources\dart.ico');
   }
-  return HICON(
+  return .new(
     using(
       (arena) => LoadImage(
         null,

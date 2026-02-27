@@ -83,7 +83,7 @@ class IExampleCom extends IDispatch implements ComInterface {
     }
     final result = pRetVal.value;
     free(pRetVal);
-    return BSTR(result);
+    return .new(result);
   }
 
   int getSum(int a, int b) {

@@ -77,14 +77,14 @@ Size getMonitorSizeInMM() => using((arena) {
   }
 
   ptr.close();
-  return Size(width: width, height: height);
+  return .new(width: width, height: height);
 });
 
 Size getMonitorSizeInMMBackup() {
   final hdc = GetDC(null);
   final width = GetDeviceCaps(hdc, HORZSIZE);
   final height = GetDeviceCaps(hdc, VERTSIZE);
-  return Size(width: width, height: height);
+  return .new(width: width, height: height);
 }
 
 void main() {

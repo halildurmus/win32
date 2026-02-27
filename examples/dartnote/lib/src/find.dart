@@ -101,7 +101,7 @@ class NotepadFind {
       ..Flags = FR_HIDEUPDOWN | FR_HIDEMATCHCASE | FR_HIDEWHOLEWORD
       ..lpstrFindWhat = _szFindText
       ..wFindWhatLen = 128
-      ..lpstrReplaceWith = PWSTR(replace ? _szReplaceText : nullptr)
+      ..lpstrReplaceWith = .new(replace ? _szReplaceText : nullptr)
       ..wReplaceWithLen = replace ? 128 : 0;
     return _hDialog = replace
         ? ReplaceText(_findReplace)

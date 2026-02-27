@@ -59,10 +59,9 @@ final class SpellIssue {
 
   @override
   String toString() => switch (action) {
-    SpellIssueAction.delete => "Delete '$word' (starting at index $start)",
-    SpellIssueAction.replace =>
-      "Replace '$word' (starting at index $start) → '$replacement'",
-    SpellIssueAction.suggestions =>
+    .delete => "Delete '$word' (starting at index $start)",
+    .replace => "Replace '$word' (starting at index $start) → '$replacement'",
+    .suggestions =>
       "Suggestions for '$word' (starting at index $start): ${suggestions.join(', ')}",
   };
 }
@@ -77,8 +76,7 @@ final class SpellCheckResult {
 }
 
 final class WindowsSpellChecker {
-  WindowsSpellChecker({SpellLanguage language = SpellLanguage.auto})
-    : _language = language;
+  WindowsSpellChecker({SpellLanguage language = .auto}) : _language = language;
 
   final SpellLanguage _language;
 
@@ -106,20 +104,14 @@ final class WindowsSpellChecker {
       final word = text.substring(start, start + length);
       switch (error.correctiveAction) {
         case CORRECTIVE_ACTION_DELETE:
-          issues.add(
-            SpellIssue(
-              word: word,
-              start: start,
-              action: SpellIssueAction.delete,
-            ),
-          );
+          issues.add(SpellIssue(word: word, start: start, action: .delete));
 
         case CORRECTIVE_ACTION_REPLACE:
           issues.add(
             SpellIssue(
               word: word,
               start: start,
-              action: SpellIssueAction.replace,
+              action: .replace,
               replacement: error.replacement.toDartString(),
             ),
           );
@@ -129,14 +121,14 @@ final class WindowsSpellChecker {
             SpellIssue(
               word: word,
               start: start,
-              action: SpellIssueAction.suggestions,
+              action: .suggestions,
               suggestions: _collectSuggestions(checker2, word, arena),
             ),
           );
       }
     }
 
-    return SpellCheckResult(language: languageTag, issues: issues);
+    return .new(language: languageTag, issues: issues);
   });
 
   String _resolveLanguage(ISpellCheckerFactory factory, Arena arena) {
@@ -219,9 +211,7 @@ void main(List<String> args) {
   final text = results.rest.join(' ');
   final langOption = results.option('lang');
   final checker = WindowsSpellChecker(
-    language: langOption != null
-        ? SpellLanguage(langOption)
-        : SpellLanguage.auto,
+    language: langOption != null ? SpellLanguage(langOption) : .auto,
   );
 
   final result = checker.check(text);

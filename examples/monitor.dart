@@ -67,7 +67,7 @@ HMONITOR findPrimaryMonitor(List<HMONITOR> monitors) => using((arena) {
     }
   }
 
-  return HMONITOR(nullptr);
+  return .new(nullptr);
 });
 
 void printMonitorCapabilities(int capabilitiesBitmask) {

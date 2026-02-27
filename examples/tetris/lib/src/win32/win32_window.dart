@@ -6,7 +6,6 @@ import 'package:ffi_leak_tracker/ffi_leak_tracker.dart';
 import 'package:win32/win32.dart';
 
 import '../core/game.dart';
-import '../core/game_key.dart';
 import '../ui/canvas.dart';
 import 'win32_input.dart';
 import 'win32_timer.dart';
@@ -14,7 +13,7 @@ import 'win32_timer.dart';
 class Win32Window {
   Win32Window({required this.title, Game? game})
     : game = game ?? Game(),
-      _hInstance = HINSTANCE(GetModuleHandle(null).value),
+      _hInstance = .new(GetModuleHandle(null).value),
       _hIcon = _loadIcon() {
     _wndProc = NativeCallable<WNDPROC>.isolateLocal(
       _windowProc,
@@ -97,7 +96,7 @@ class Win32Window {
       ..hInstance = _hInstance
       ..hCursor = LoadCursor(null, IDC_ARROW).value
       ..hIcon = _hIcon
-      ..lpszClassName = PWSTR(_className);
+      ..lpszClassName = .new(_className);
     final Win32Result(:value, :error) = RegisterClass(wc);
     if (value == 0) throw WindowsException(error.toHRESULT());
   });
@@ -161,29 +160,29 @@ int _windowProc(Pointer hWnd, int uMsg, int wParam, int lParam) {
       final game = window.game;
       if (mapVirtualKey(wParam) case final key?) {
         switch (key) {
-          case GameKey.left:
+          case .left:
             if (game.canMove(dx: -1)) game.activePiece.x--;
 
-          case GameKey.right:
+          case .right:
             if (game.canMove(dx: 1)) game.activePiece.x++;
 
-          case GameKey.softDrop:
+          case .softDrop:
             if (game.canMove(dy: 1)) game.activePiece.y++;
 
-          case GameKey.hardDrop:
+          case .hardDrop:
             game.hardDrop();
 
-          case GameKey.rotate:
+          case .rotate:
             game.rotate();
 
-          case GameKey.pause:
+          case .pause:
             if (game.isPaused) {
               game.resumeGame();
             } else {
               game.pauseGame();
             }
 
-          case GameKey.enter:
+          case .enter:
             if (game.isGameOver) {
               game.restart();
             }
@@ -223,7 +222,7 @@ HICON _loadIcon() {
   if (!File(iconPath).existsSync()) {
     iconPath = iconPath.replaceFirst('dart.ico', r'resources\dart.ico');
   }
-  return HICON(
+  return .new(
     using(
       (arena) => LoadImage(
         null,

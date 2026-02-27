@@ -18,7 +18,7 @@ RecycleBinInfo queryRecycleBin(String rootPath) => using((arena) {
     ..ref.cbSize = sizeOf<SHQUERYRBINFO>();
   SHQueryRecycleBin(arena.pcwstr(rootPath), pSHQueryRBInfo);
   final SHQUERYRBINFO(:i64NumItems, :i64Size) = pSHQueryRBInfo.ref;
-  return RecycleBinInfo(i64NumItems, i64Size);
+  return .new(i64NumItems, i64Size);
 });
 
 String getTempFileName() => using((arena) {
@@ -44,7 +44,7 @@ void recycleFile(String file) {
       ..hwnd = hwnd
       ..wFunc = FO_DELETE
       ..pFrom = pFrom
-      ..pTo = PWSTR(nullptr)
+      ..pTo = .new(nullptr)
       ..fFlags = FOF_ALLOWUNDO;
     final Win32Result(:value, :error) = SHFileOperation(lpFileOp);
     if (value != 0) throw WindowsException(error.toHRESULT());

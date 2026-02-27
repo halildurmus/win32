@@ -25,7 +25,7 @@ HKEY getRegistryKeyHandle(HKEY hive, String key) => using((arena) {
       ERROR_SUCCESS) {
     throw StateError("Can't open registry key");
   }
-  return HKEY(phKey.value);
+  return .new(phKey.value);
 });
 
 RegistryKeyValuePair? enumerateKey(HKEY hKey, int index) => using((arena) {
@@ -47,7 +47,7 @@ RegistryKeyValuePair? enumerateKey(HKEY hKey, int index) => using((arena) {
   switch (status) {
     case ERROR_SUCCESS:
       if (lpType.value != REG_SZ) throw StateError('Non-string content.');
-      return RegistryKeyValuePair(
+      return .new(
         lpValueName.toDartString(),
         lpData.cast<Utf16>().toDartString(),
       );

@@ -44,13 +44,13 @@ enum ServiceStatus {
 
   /// Converts an integer value to a corresponding [ServiceStatus] enum.
   static ServiceStatus fromValue(int value) => switch (value) {
-    SERVICE_STOPPED => ServiceStatus.stopped,
-    SERVICE_START_PENDING => ServiceStatus.startPending,
-    SERVICE_STOP_PENDING => ServiceStatus.stopPending,
-    SERVICE_RUNNING => ServiceStatus.running,
-    SERVICE_CONTINUE_PENDING => ServiceStatus.continuePending,
-    SERVICE_PAUSE_PENDING => ServiceStatus.pausePending,
-    SERVICE_PAUSED => ServiceStatus.paused,
+    SERVICE_STOPPED => stopped,
+    SERVICE_START_PENDING => startPending,
+    SERVICE_STOP_PENDING => stopPending,
+    SERVICE_RUNNING => running,
+    SERVICE_CONTINUE_PENDING => continuePending,
+    SERVICE_PAUSE_PENDING => pausePending,
+    SERVICE_PAUSED => paused,
     _ => throw ArgumentError('Invalid value: $value'),
   };
 }

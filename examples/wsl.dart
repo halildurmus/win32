@@ -53,7 +53,7 @@ WslDistribution queryDistribution(String name) => using((arena) {
     free(pstr);
   }
 
-  return WslDistribution(
+  return .new(
     name: name,
     version: version.value,
     defaultUserId: defaultUid.value,

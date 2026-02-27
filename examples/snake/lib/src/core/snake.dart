@@ -8,7 +8,7 @@ class Snake {
     : _body = [Cell(startX, startY)],
       _direction =
           Direction.values[math.Random().nextInt(Direction.values.length)],
-      _nextDirection = Direction.right;
+      _nextDirection = .right;
 
   final List<Cell> _body;
   Direction _direction;

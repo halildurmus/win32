@@ -26,43 +26,43 @@ class Piece {
 }
 
 const shapes = <PieceType, List<List<Cell>>>{
-  PieceType.I: [
+  .I: [
     [Cell(), Cell(1), Cell(2), Cell(3)],
     [Cell(2), Cell(2, 1), Cell(2, 2), Cell(2, 3)],
     [Cell(), Cell(1), Cell(2), Cell(3)],
     [Cell(1), Cell(1, 1), Cell(1, 2), Cell(1, 3)],
   ],
-  PieceType.O: [
+  .O: [
     [Cell(1), Cell(2), Cell(1, 1), Cell(2, 1)],
     [Cell(1), Cell(2), Cell(1, 1), Cell(2, 1)],
     [Cell(1), Cell(2), Cell(1, 1), Cell(2, 1)],
     [Cell(1), Cell(2), Cell(1, 1), Cell(2, 1)],
   ],
-  PieceType.T: [
+  .T: [
     [Cell(1), Cell(0, 1), Cell(1, 1), Cell(2, 1)],
     [Cell(1), Cell(1, 1), Cell(2, 1), Cell(1, 2)],
     [Cell(0, 1), Cell(1, 1), Cell(2, 1), Cell(1, 2)],
     [Cell(1), Cell(0, 1), Cell(1, 1), Cell(1, 2)],
   ],
-  PieceType.S: [
+  .S: [
     [Cell(1), Cell(2), Cell(0, 1), Cell(1, 1)],
     [Cell(1), Cell(1, 1), Cell(2, 1), Cell(2, 2)],
     [Cell(1, 1), Cell(2, 1), Cell(0, 2), Cell(1, 2)],
     [Cell(), Cell(0, 1), Cell(1, 1), Cell(1, 2)],
   ],
-  PieceType.Z: [
+  .Z: [
     [Cell(), Cell(1), Cell(1, 1), Cell(2, 1)],
     [Cell(2), Cell(1, 1), Cell(2, 1), Cell(1, 2)],
     [Cell(0, 1), Cell(1, 1), Cell(1, 2), Cell(2, 2)],
     [Cell(1), Cell(0, 1), Cell(1, 1), Cell(0, 2)],
   ],
-  PieceType.J: [
+  .J: [
     [Cell(), Cell(0, 1), Cell(1, 1), Cell(2, 1)],
     [Cell(1), Cell(2), Cell(1, 1), Cell(1, 2)],
     [Cell(0, 1), Cell(1, 1), Cell(2, 1), Cell(2, 2)],
     [Cell(1), Cell(1, 1), Cell(0, 2), Cell(1, 2)],
   ],
-  PieceType.L: [
+  .L: [
     [Cell(2), Cell(0, 1), Cell(1, 1), Cell(2, 1)],
     [Cell(1), Cell(1, 1), Cell(1, 2), Cell(2, 2)],
     [Cell(0, 1), Cell(1, 1), Cell(2, 1), Cell(0, 2)],
@@ -71,11 +71,11 @@ const shapes = <PieceType, List<List<Cell>>>{
 };
 
 final colors = <PieceType, COLORREF>{
-  PieceType.I: Colors.cyan,
-  PieceType.O: Colors.yellow,
-  PieceType.T: Colors.purple,
-  PieceType.S: Colors.green,
-  PieceType.Z: Colors.red,
-  PieceType.J: Colors.blue,
-  PieceType.L: Colors.orange,
+  .I: Colors.cyan,
+  .O: Colors.yellow,
+  .T: Colors.purple,
+  .S: Colors.green,
+  .Z: Colors.red,
+  .J: Colors.blue,
+  .L: Colors.orange,
 };

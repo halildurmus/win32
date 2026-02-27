@@ -61,11 +61,7 @@ ThreadContext getThreadContext() => using((arena) {
     }
   }
 
-  return ThreadContext(
-    threadID,
-    APTTYPE(pAptType.value),
-    APTTYPEQUALIFIER(pAptQualifier.value),
-  );
+  return .new(threadID, .new(pAptType.value), .new(pAptQualifier.value));
 });
 
 /// Runs work inside an isolate, returning its thread COM context.

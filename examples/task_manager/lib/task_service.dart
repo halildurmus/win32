@@ -248,7 +248,7 @@ Task? _inspectProcess(Arena arena, int pid, bool includeIcons) {
     final path = pathLength != 0 ? pathBuffer.toDartString() : null;
     final description = path != null ? (_fileDescription(path) ?? name) : name;
 
-    return Task(
+    return .new(
       pid: pid,
       name: name,
       description: description,

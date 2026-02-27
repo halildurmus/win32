@@ -5,16 +5,16 @@ enum Direction {
   right;
 
   Direction get opposite => switch (this) {
-    Direction.up => Direction.down,
-    Direction.down => Direction.up,
-    Direction.left => Direction.right,
-    Direction.right => Direction.left,
+    .up => .down,
+    .down => .up,
+    .left => .right,
+    .right => .left,
   };
 
   (int dx, int dy) get delta => switch (this) {
-    Direction.up => (0, -1),
-    Direction.down => (0, 1),
-    Direction.left => (-1, 0),
-    Direction.right => (1, 0),
+    .up => (0, -1),
+    .down => (0, 1),
+    .left => (-1, 0),
+    .right => (1, 0),
   };
 }
