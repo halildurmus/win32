@@ -32,14 +32,14 @@ jobs:
     strategy:
       matrix:
         os: [macos, ubuntu, windows]
-        sdk: [dev, stable]
+        sdk: [main, stable]
 
-    uses: halildurmus/workflows/.github/workflows/dart.yml@main
+    uses: halildurmus/workflows/.github/workflows/flutter.yml@main
     with:
       analyze_directories: example lib test
-      check_coverage: ${{ matrix.sdk == 'dev' }}
+      check_coverage: ${{ matrix.sdk == 'main' }}
       codecov_flags: ffi_leak_tracker
-      dart_sdk: ${{ matrix.sdk }}
+      flutter_channel: ${{ matrix.sdk }}
       format_directories: example lib test
       randomize_execution_order_of_tests: true
       runs_on: ${{ matrix.os }}-latest

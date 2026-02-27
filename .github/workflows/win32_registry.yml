@@ -37,7 +37,7 @@ jobs:
       matrix:
         include:
           - os: windows-2025
-            sdk: dev
+            sdk: main
           - os: windows-2022
             sdk: beta
           - os: windows-2022
@@ -45,12 +45,12 @@ jobs:
           - os: ubuntu-latest
             sdk: stable
 
-    uses: halildurmus/workflows/.github/workflows/dart.yml@main
+    uses: halildurmus/workflows/.github/workflows/flutter.yml@main
     with:
-      check_coverage: ${{ matrix.sdk == 'dev' }}
+      check_coverage: ${{ matrix.sdk == 'main' }}
       codecov_flags: win32_registry
       concurrency: '1'
-      dart_sdk: ${{ matrix.sdk }}
+      flutter_channel: ${{ matrix.sdk }}
       format_directories: lib test
       randomize_execution_order_of_tests: true
       runs_on: ${{ matrix.os }}
@@ -64,7 +64,7 @@ jobs:
       working_directory: packages/win32_registry
 
   examples:
-    uses: halildurmus/workflows/.github/workflows/dart.yml@main
+    uses: halildurmus/workflows/.github/workflows/flutter.yml@main
     with:
       analyze_directories: example
       format_directories: example
