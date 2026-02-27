@@ -1,7 +1,7 @@
 name: win32_runner
 description: A Dart runner for Flutter Windows apps — no C++ compiler required.
 version: 0.2.5
-repository: https://github.com/halildurmus/win32
+repository: https://github.com/halildurmus/win32/tree/main/packages/win32_runner
 issue_tracker: https://github.com/halildurmus/win32/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22package%3A%20win32_runner%22
 funding:
   - https://github.com/sponsors/halildurmus
