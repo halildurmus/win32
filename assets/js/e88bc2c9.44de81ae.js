@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwebsite=self.webpackChunkwebsite||[]).push([["7150"],{9986(e){e.exports=JSON.parse('{"blogBasePath":"/changelog","blogTitle":"win32 Changelog","authorsListPath":"/changelog/authors"}')}}]);
