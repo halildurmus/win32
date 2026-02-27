@@ -80,7 +80,7 @@ lefthook install
 This will set up checks that automatically ensure code quality and consistency
 before commits.
 
-### ✅ Running Tests
+### 🧪 Running Tests
 
 To run tests for the `package:win32`, follow these steps:
 
@@ -191,8 +191,6 @@ Please use the following format for commit messages:
 <type>(optional scope): <description>
 ```
 
-Here's an example of a good commit message:
-
 Examples:
 
 - `feat: add DragQueryFile API`
@@ -208,11 +206,18 @@ The following hooks run automatically with Lefthook:
 - **Pre-Commit Hooks**:
   - `analyze`: Checks code for style issues.
   - `format`: Formats code according to Dart guidelines.
-  - `test_generator`: Runs tests for `package:generator` to ensure stability.
-  - `test_win32`: Runs tests for `package:win32` to ensure stability.
+  - `test_ffi_leak_tracker`: Runs tests for `package:ffi_leak_tracker`
+  - `test_filepicker_windows`: Runs tests for `package:filepicker_windows`
+  - `test_generator`: Runs tests for `package:generator`
+  - `test_win32`: Runs tests for `package:win32`
+  - `test_win32_clipboard`: Runs tests for `package:win32_clipboard`
+  - `test_win32_gamepad`: Runs tests for `package:win32_gamepad`
+  - `test_win32_registry`: Runs tests for `package:win32_registry`
+  - `test_win32_runner`: Runs tests for `package:win32_runner`
+  - `test_winmd`: Runs tests for `package:winmd`
 
 - **Commit-msg Hook**:
-  - `check_commit`: Ensures the commit message follows [Conventional Commits].
+  - `check_commit`: Ensures the commit message follows [Conventional Commits]
 
 ### 🔄 Creating a Pull Request
 
