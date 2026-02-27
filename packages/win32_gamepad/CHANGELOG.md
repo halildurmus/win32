@@ -2,9 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.0.11] - 2026-02-28
+## [1.0.11] - 2026-02-27
 
-TODO
+### 🏠 Repository
+
+- Package has been moved to the
+  [`halildurmus/win32`](https://github.com/halildurmus/win32) monorepo.
+
+[1.0.11]: https://github.com/halildurmus/win32/releases/tag/win32_gamepad-v1.0.11
 
 ## [1.0.10] - 2026-02-23
 
