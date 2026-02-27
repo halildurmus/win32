@@ -2,9 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
-## [3.0.1] - 2026-02-28
+## [3.0.1] - 2026-02-27
 
-TODO
+### 🏠 Repository
+
+- Package has been moved to the
+  [`halildurmus/win32`](https://github.com/halildurmus/win32) monorepo.
+
+[3.0.1]: https://github.com/halildurmus/win32/releases/tag/filepicker_windows-v3.0.1
 
 ## [3.0.0] - 2026-02-25
 
