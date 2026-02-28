@@ -313,7 +313,7 @@ base class APPX_PACKAGE_SETTINGS extends Struct {
 
   external VTablePointer _hashMethod;
 
-  /// [TRUE] if the package is created as Zip32; [FALSE] if the package is
+  /// `[TRUE]` if the package is created as Zip32; `[FALSE]` if the package is
   /// created as Zip64.
   bool get forceZip32 => _forceZip32 != FALSE;
 
@@ -930,7 +930,7 @@ base class BLUETOOTH_AUTHENTICATE_RESPONSE extends Struct {
 
   external BLUETOOTH_AUTHENTICATE_RESPONSE_0 Anonymous;
 
-  /// [TRUE] if the authentication request was rejected; otherwise [FALSE].
+  /// `[TRUE]` if the authentication request was rejected; otherwise `[FALSE]`.
   @Uint8()
   external int negativeResponse;
 
@@ -1505,36 +1505,36 @@ base class BLUETOOTH_SELECT_DEVICE_PARAMS extends Struct {
 
   set hwndParent(HWND value) => _hwndParent = value;
 
-  /// If [TRUE], forces authentication before returning.
+  /// If `[TRUE]`, forces authentication before returning.
   bool get fForceAuthentication => _fForceAuthentication != FALSE;
 
   set fForceAuthentication(bool value) =>
       _fForceAuthentication = value ? TRUE : FALSE;
 
-  /// If [TRUE], authenticated devices are shown in the picker.
+  /// If `[TRUE]`, authenticated devices are shown in the picker.
   bool get fShowAuthenticated => _fShowAuthenticated != FALSE;
 
   set fShowAuthenticated(bool value) =>
       _fShowAuthenticated = value ? TRUE : FALSE;
 
-  /// If [TRUE], remembered devices are shown in the picker.
+  /// If `[TRUE]`, remembered devices are shown in the picker.
   bool get fShowRemembered => _fShowRemembered != FALSE;
 
   set fShowRemembered(bool value) => _fShowRemembered = value ? TRUE : FALSE;
 
-  /// If [TRUE], unknown devices that are not authenticated or remembered are
+  /// If `[TRUE]`, unknown devices that are not authenticated or remembered are
   /// shown in the picker.
   bool get fShowUnknown => _fShowUnknown != FALSE;
 
   set fShowUnknown(bool value) => _fShowUnknown = value ? TRUE : FALSE;
 
-  /// If [TRUE], starts the Add New Device wizard.
+  /// If `[TRUE]`, starts the Add New Device wizard.
   bool get fAddNewDeviceWizard => _fAddNewDeviceWizard != FALSE;
 
   set fAddNewDeviceWizard(bool value) =>
       _fAddNewDeviceWizard = value ? TRUE : FALSE;
 
-  /// If [TRUE], skips the Services page in the Add New Device wizard.
+  /// If `[TRUE]`, skips the Services page in the Add New Device wizard.
   bool get fSkipServicesPage => _fSkipServicesPage != FALSE;
 
   set fSkipServicesPage(bool value) =>
@@ -2849,8 +2849,8 @@ base class CBTACTIVATESTRUCT extends Struct {
 
   external Pointer _hWndActive;
 
-  /// This member is [TRUE] if a mouse click is causing the activation or
-  /// [FALSE] if it is not.
+  /// This member is `[TRUE]` if a mouse click is causing the activation or
+  /// `[FALSE]` if it is not.
   bool get fMouse => _fMouse != FALSE;
 
   set fMouse(bool value) => _fMouse = value ? TRUE : FALSE;
@@ -2969,8 +2969,8 @@ base class CERT_EXTENSION extends Struct {
 
   set pszObjId(PSTR value) => _pszObjId = value;
 
-  /// If [TRUE], any limitations specified by the extension in the <b>Value</b>
-  /// member of this structure are imperative.
+  /// If `[TRUE]`, any limitations specified by the extension in the
+  /// <b>Value</b> member of this structure are imperative.
   bool get fCritical => _fCritical != FALSE;
 
   set fCritical(bool value) => _fCritical = value ? TRUE : FALSE;
@@ -3735,6 +3735,130 @@ base class COMMTIMEOUTS extends Struct {
   /// used, in which case the allocator manages the lifetime.
   Pointer<COMMTIMEOUTS> toNative({Allocator allocator = adaptiveCalloc}) =>
       allocator()..ref = this;
+}
+
+/// Describes timing and composition statistics for a compositor frame.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dcomptypes/ns-dcomptypes-composition_frame_stats>.
+///
+/// {@category struct}
+base class COMPOSITION_FRAME_STATS extends Struct {
+  /// The time the frame started.
+  @Uint64()
+  external int startTime;
+
+  /// The frame's target time.
+  @Uint64()
+  external int targetTime;
+
+  /// The amount of time the frame took.
+  @Uint64()
+  external int framePeriod;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<COMPOSITION_FRAME_STATS> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes timing and composition information.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dcomptypes/ns-dcomptypes-composition_stats>.
+///
+/// {@category struct}
+base class COMPOSITION_STATS extends Struct {
+  /// The running total count of times that a frame was presented to the target.
+  @Uint32()
+  external int presentCount;
+
+  /// The running total count of v-blanks at which the last frame was presented
+  /// to the target.
+  @Uint32()
+  external int refreshCount;
+
+  @Uint32()
+  external int virtualRefreshCount;
+
+  @Uint64()
+  external int time;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<COMPOSITION_STATS> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Contains information about a composition render target.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dcomptypes/ns-dcomptypes-composition_target_id>.
+///
+/// {@category struct}
+base class COMPOSITION_TARGET_ID extends Struct {
+  /// Type: `LUID` of the display adapter to which the monitor is connected.
+  external LUID displayAdapterLuid;
+
+  /// Type: `LUID` of the render adapter.
+  external LUID renderAdapterLuid;
+
+  /// The unique ID of the video present source.
+  @Uint32()
+  external int vidPnSourceId;
+
+  /// The unique ID of the video present target.
+  @Uint32()
+  external int vidPnTargetId;
+
+  /// A unique identifier for this `COMPOSITION_TARGET_ID`.
+  @Uint32()
+  external int uniqueId;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<COMPOSITION_TARGET_ID> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Contains per-target information for a composition frame and render target.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dcomptypes/ns-dcomptypes-composition_target_stats>.
+///
+/// {@category struct}
+base class COMPOSITION_TARGET_STATS extends Struct {
+  @Uint32()
+  external int outstandingPresents;
+
+  @Uint64()
+  external int presentTime;
+
+  @Uint64()
+  external int vblankDuration;
+
+  external COMPOSITION_STATS presentedStats;
+  external COMPOSITION_STATS completedStats;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<COMPOSITION_TARGET_STATS> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
 }
 
 /// Contains information about a communications device.
@@ -4601,6 +4725,9539 @@ extension CY_0_Extension on CY {
   set Hi(int value) => this.Anonymous.Hi = value;
 }
 
+/// Describes the red, green, blue, and alpha components of a color. |
+/// D2D1_COLOR_F (D2DBaseTypes.h).
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/Direct2D/d2d1-color-f>.
+///
+/// {@category struct}
+base class D2D1_COLOR_F extends Struct {
+  @Float()
+  external double r;
+
+  @Float()
+  external double g;
+
+  @Float()
+  external double b;
+
+  @Float()
+  external double a;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D2D1_COLOR_F> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Represents a 3-by-2 matrix.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dcommon/ns-dcommon-d2d_matrix_3x2_f>.
+///
+/// {@category struct}
+base class D2D_MATRIX_3X2_F extends Struct {
+  external D2D_MATRIX_3X2_F_0 Anonymous;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D2D_MATRIX_3X2_F> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// {@category union}
+sealed class D2D_MATRIX_3X2_F_0 extends Union {
+  external D2D_MATRIX_3X2_F_0_0 Anonymous1;
+  external D2D_MATRIX_3X2_F_0_1 Anonymous2;
+
+  @Array(6)
+  external Array<Float> m;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D2D_MATRIX_3X2_F_0> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+extension D2D_MATRIX_3X2_F_0_Extension on D2D_MATRIX_3X2_F {
+  D2D_MATRIX_3X2_F_0_0 get Anonymous1 => this.Anonymous.Anonymous1;
+  set Anonymous1(D2D_MATRIX_3X2_F_0_0 value) =>
+      this.Anonymous.Anonymous1 = value;
+  D2D_MATRIX_3X2_F_0_1 get Anonymous2 => this.Anonymous.Anonymous2;
+  set Anonymous2(D2D_MATRIX_3X2_F_0_1 value) =>
+      this.Anonymous.Anonymous2 = value;
+  Array<Float> get m => this.Anonymous.m;
+  set m(Array<Float> value) => this.Anonymous.m = value;
+}
+
+/// {@category struct}
+sealed class D2D_MATRIX_3X2_F_0_0 extends Struct {
+  @Float()
+  external double m11;
+
+  @Float()
+  external double m12;
+
+  @Float()
+  external double m21;
+
+  @Float()
+  external double m22;
+
+  @Float()
+  external double dx;
+
+  @Float()
+  external double dy;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D2D_MATRIX_3X2_F_0_0> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+extension D2D_MATRIX_3X2_F_0_0_Extension on D2D_MATRIX_3X2_F {
+  double get m11 => this.Anonymous.Anonymous1.m11;
+  set m11(double value) => this.Anonymous.Anonymous1.m11 = value;
+  double get m12 => this.Anonymous.Anonymous1.m12;
+  set m12(double value) => this.Anonymous.Anonymous1.m12 = value;
+  double get m21 => this.Anonymous.Anonymous1.m21;
+  set m21(double value) => this.Anonymous.Anonymous1.m21 = value;
+  double get m22 => this.Anonymous.Anonymous1.m22;
+  set m22(double value) => this.Anonymous.Anonymous1.m22 = value;
+  double get dx => this.Anonymous.Anonymous1.dx;
+  set dx(double value) => this.Anonymous.Anonymous1.dx = value;
+  double get dy => this.Anonymous.Anonymous1.dy;
+  set dy(double value) => this.Anonymous.Anonymous1.dy = value;
+}
+
+/// {@category struct}
+sealed class D2D_MATRIX_3X2_F_0_1 extends Struct {
+  @Float()
+  external double x11;
+
+  @Float()
+  external double x12;
+
+  @Float()
+  external double x21;
+
+  @Float()
+  external double x22;
+
+  @Float()
+  external double x31;
+
+  @Float()
+  external double x32;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D2D_MATRIX_3X2_F_0_1> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+extension D2D_MATRIX_3X2_F_0_1_Extension on D2D_MATRIX_3X2_F {
+  double get x11 => this.Anonymous.Anonymous2.x11;
+  set x11(double value) => this.Anonymous.Anonymous2.x11 = value;
+  double get x12 => this.Anonymous.Anonymous2.x12;
+  set x12(double value) => this.Anonymous.Anonymous2.x12 = value;
+  double get x21 => this.Anonymous.Anonymous2.x21;
+  set x21(double value) => this.Anonymous.Anonymous2.x21 = value;
+  double get x22 => this.Anonymous.Anonymous2.x22;
+  set x22(double value) => this.Anonymous.Anonymous2.x22 = value;
+  double get x31 => this.Anonymous.Anonymous2.x31;
+  set x31(double value) => this.Anonymous.Anonymous2.x31 = value;
+  double get x32 => this.Anonymous.Anonymous2.x32;
+  set x32(double value) => this.Anonymous.Anonymous2.x32 = value;
+}
+
+/// Describes a 4-by-4 floating point matrix.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dcommon/ns-dcommon-d2d_matrix_4x4_f>.
+///
+/// {@category struct}
+base class D2D_MATRIX_4X4_F extends Struct {
+  external D2D_MATRIX_4X4_F_0 Anonymous;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D2D_MATRIX_4X4_F> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// {@category union}
+sealed class D2D_MATRIX_4X4_F_0 extends Union {
+  external D2D_MATRIX_4X4_F_0_0 Anonymous;
+
+  @Array(16)
+  external Array<Float> m;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D2D_MATRIX_4X4_F_0> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+extension D2D_MATRIX_4X4_F_0_Extension on D2D_MATRIX_4X4_F {
+  D2D_MATRIX_4X4_F_0_0 get Anonymous => this.Anonymous.Anonymous;
+  set Anonymous(D2D_MATRIX_4X4_F_0_0 value) => this.Anonymous.Anonymous = value;
+  Array<Float> get m => this.Anonymous.m;
+  set m(Array<Float> value) => this.Anonymous.m = value;
+}
+
+/// {@category struct}
+sealed class D2D_MATRIX_4X4_F_0_0 extends Struct {
+  @Float()
+  external double x11;
+
+  @Float()
+  external double x12;
+
+  @Float()
+  external double x13;
+
+  @Float()
+  external double x14;
+
+  @Float()
+  external double x21;
+
+  @Float()
+  external double x22;
+
+  @Float()
+  external double x23;
+
+  @Float()
+  external double x24;
+
+  @Float()
+  external double x31;
+
+  @Float()
+  external double x32;
+
+  @Float()
+  external double x33;
+
+  @Float()
+  external double x34;
+
+  @Float()
+  external double x41;
+
+  @Float()
+  external double x42;
+
+  @Float()
+  external double x43;
+
+  @Float()
+  external double x44;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D2D_MATRIX_4X4_F_0_0> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+extension D2D_MATRIX_4X4_F_0_0_Extension on D2D_MATRIX_4X4_F {
+  double get x11 => this.Anonymous.Anonymous.x11;
+  set x11(double value) => this.Anonymous.Anonymous.x11 = value;
+  double get x12 => this.Anonymous.Anonymous.x12;
+  set x12(double value) => this.Anonymous.Anonymous.x12 = value;
+  double get x13 => this.Anonymous.Anonymous.x13;
+  set x13(double value) => this.Anonymous.Anonymous.x13 = value;
+  double get x14 => this.Anonymous.Anonymous.x14;
+  set x14(double value) => this.Anonymous.Anonymous.x14 = value;
+  double get x21 => this.Anonymous.Anonymous.x21;
+  set x21(double value) => this.Anonymous.Anonymous.x21 = value;
+  double get x22 => this.Anonymous.Anonymous.x22;
+  set x22(double value) => this.Anonymous.Anonymous.x22 = value;
+  double get x23 => this.Anonymous.Anonymous.x23;
+  set x23(double value) => this.Anonymous.Anonymous.x23 = value;
+  double get x24 => this.Anonymous.Anonymous.x24;
+  set x24(double value) => this.Anonymous.Anonymous.x24 = value;
+  double get x31 => this.Anonymous.Anonymous.x31;
+  set x31(double value) => this.Anonymous.Anonymous.x31 = value;
+  double get x32 => this.Anonymous.Anonymous.x32;
+  set x32(double value) => this.Anonymous.Anonymous.x32 = value;
+  double get x33 => this.Anonymous.Anonymous.x33;
+  set x33(double value) => this.Anonymous.Anonymous.x33 = value;
+  double get x34 => this.Anonymous.Anonymous.x34;
+  set x34(double value) => this.Anonymous.Anonymous.x34 = value;
+  double get x41 => this.Anonymous.Anonymous.x41;
+  set x41(double value) => this.Anonymous.Anonymous.x41 = value;
+  double get x42 => this.Anonymous.Anonymous.x42;
+  set x42(double value) => this.Anonymous.Anonymous.x42 = value;
+  double get x43 => this.Anonymous.Anonymous.x43;
+  set x43(double value) => this.Anonymous.Anonymous.x43 = value;
+  double get x44 => this.Anonymous.Anonymous.x44;
+  set x44(double value) => this.Anonymous.Anonymous.x44 = value;
+}
+
+/// Describes a 5-by-4 floating point matrix.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dcommon/ns-dcommon-d2d_matrix_5x4_f>.
+///
+/// {@category struct}
+base class D2D_MATRIX_5X4_F extends Struct {
+  external D2D_MATRIX_5X4_F_0 Anonymous;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D2D_MATRIX_5X4_F> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// {@category union}
+sealed class D2D_MATRIX_5X4_F_0 extends Union {
+  external D2D_MATRIX_5X4_F_0_0 Anonymous;
+
+  @Array(20)
+  external Array<Float> m;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D2D_MATRIX_5X4_F_0> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+extension D2D_MATRIX_5X4_F_0_Extension on D2D_MATRIX_5X4_F {
+  D2D_MATRIX_5X4_F_0_0 get Anonymous => this.Anonymous.Anonymous;
+  set Anonymous(D2D_MATRIX_5X4_F_0_0 value) => this.Anonymous.Anonymous = value;
+  Array<Float> get m => this.Anonymous.m;
+  set m(Array<Float> value) => this.Anonymous.m = value;
+}
+
+/// {@category struct}
+sealed class D2D_MATRIX_5X4_F_0_0 extends Struct {
+  @Float()
+  external double x11;
+
+  @Float()
+  external double x12;
+
+  @Float()
+  external double x13;
+
+  @Float()
+  external double x14;
+
+  @Float()
+  external double x21;
+
+  @Float()
+  external double x22;
+
+  @Float()
+  external double x23;
+
+  @Float()
+  external double x24;
+
+  @Float()
+  external double x31;
+
+  @Float()
+  external double x32;
+
+  @Float()
+  external double x33;
+
+  @Float()
+  external double x34;
+
+  @Float()
+  external double x41;
+
+  @Float()
+  external double x42;
+
+  @Float()
+  external double x43;
+
+  @Float()
+  external double x44;
+
+  @Float()
+  external double x51;
+
+  @Float()
+  external double x52;
+
+  @Float()
+  external double x53;
+
+  @Float()
+  external double x54;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D2D_MATRIX_5X4_F_0_0> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+extension D2D_MATRIX_5X4_F_0_0_Extension on D2D_MATRIX_5X4_F {
+  double get x11 => this.Anonymous.Anonymous.x11;
+  set x11(double value) => this.Anonymous.Anonymous.x11 = value;
+  double get x12 => this.Anonymous.Anonymous.x12;
+  set x12(double value) => this.Anonymous.Anonymous.x12 = value;
+  double get x13 => this.Anonymous.Anonymous.x13;
+  set x13(double value) => this.Anonymous.Anonymous.x13 = value;
+  double get x14 => this.Anonymous.Anonymous.x14;
+  set x14(double value) => this.Anonymous.Anonymous.x14 = value;
+  double get x21 => this.Anonymous.Anonymous.x21;
+  set x21(double value) => this.Anonymous.Anonymous.x21 = value;
+  double get x22 => this.Anonymous.Anonymous.x22;
+  set x22(double value) => this.Anonymous.Anonymous.x22 = value;
+  double get x23 => this.Anonymous.Anonymous.x23;
+  set x23(double value) => this.Anonymous.Anonymous.x23 = value;
+  double get x24 => this.Anonymous.Anonymous.x24;
+  set x24(double value) => this.Anonymous.Anonymous.x24 = value;
+  double get x31 => this.Anonymous.Anonymous.x31;
+  set x31(double value) => this.Anonymous.Anonymous.x31 = value;
+  double get x32 => this.Anonymous.Anonymous.x32;
+  set x32(double value) => this.Anonymous.Anonymous.x32 = value;
+  double get x33 => this.Anonymous.Anonymous.x33;
+  set x33(double value) => this.Anonymous.Anonymous.x33 = value;
+  double get x34 => this.Anonymous.Anonymous.x34;
+  set x34(double value) => this.Anonymous.Anonymous.x34 = value;
+  double get x41 => this.Anonymous.Anonymous.x41;
+  set x41(double value) => this.Anonymous.Anonymous.x41 = value;
+  double get x42 => this.Anonymous.Anonymous.x42;
+  set x42(double value) => this.Anonymous.Anonymous.x42 = value;
+  double get x43 => this.Anonymous.Anonymous.x43;
+  set x43(double value) => this.Anonymous.Anonymous.x43 = value;
+  double get x44 => this.Anonymous.Anonymous.x44;
+  set x44(double value) => this.Anonymous.Anonymous.x44 = value;
+  double get x51 => this.Anonymous.Anonymous.x51;
+  set x51(double value) => this.Anonymous.Anonymous.x51 = value;
+  double get x52 => this.Anonymous.Anonymous.x52;
+  set x52(double value) => this.Anonymous.Anonymous.x52 = value;
+  double get x53 => this.Anonymous.Anonymous.x53;
+  set x53(double value) => this.Anonymous.Anonymous.x53 = value;
+  double get x54 => this.Anonymous.Anonymous.x54;
+  set x54(double value) => this.Anonymous.Anonymous.x54 = value;
+}
+
+/// Represents a rectangle defined by the coordinates of the upper-left corner
+/// (left, top) and the coordinates of the lower-right corner (right, bottom).
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dcommon/ns-dcommon-d2d_rect_f>.
+///
+/// {@category struct}
+base class D2D_RECT_F extends Struct {
+  /// The x-coordinate of the upper-left corner of the rectangle.
+  @Float()
+  external double left;
+
+  /// The y-coordinate of the upper-left corner of the rectangle.
+  @Float()
+  external double top;
+
+  /// The x-coordinate of the lower-right corner of the rectangle.
+  @Float()
+  external double right;
+
+  /// The y-coordinate of the lower-right corner of the rectangle.
+  @Float()
+  external double bottom;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D2D_RECT_F> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Represents a rectangle defined by the upper-left corner pair of coordinates
+/// (left,top) and the lower-right corner pair of coordinates (right, bottom).
+///
+/// These coordinates are expressed as a 32-bit integer values.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dcommon/ns-dcommon-d2d_rect_u>.
+///
+/// {@category struct}
+base class D2D_RECT_U extends Struct {
+  /// The x-coordinate of the upper-left corner of the rectangle.
+  @Uint32()
+  external int left;
+
+  /// The y-coordinate of the upper-left corner of the rectangle.
+  @Uint32()
+  external int top;
+
+  /// The x-coordinate of the lower-right corner of the rectangle.
+  @Uint32()
+  external int right;
+
+  /// The y-coordinate of the lower-right corner of the rectangle.
+  @Uint32()
+  external int bottom;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D2D_RECT_U> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// A vector of 2 FLOAT values (x, y).
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dcommon/ns-dcommon-d2d_vector_2f>.
+///
+/// {@category struct}
+base class D2D_VECTOR_2F extends Struct {
+  /// The x value of the vector.
+  @Float()
+  external double x;
+
+  /// The y value of the vector.
+  @Float()
+  external double y;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D2D_VECTOR_2F> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// A vector of 4 FLOAT values (x, y, z, w).
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dcommon/ns-dcommon-d2d_vector_4f>.
+///
+/// {@category struct}
+base class D2D_VECTOR_4F extends Struct {
+  /// The x value of the vector.
+  @Float()
+  external double x;
+
+  /// The y value of the vector.
+  @Float()
+  external double y;
+
+  /// The z value of the vector.
+  @Float()
+  external double z;
+
+  /// The w value of the vector.
+  @Float()
+  external double w;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D2D_VECTOR_4F> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Contains an initialization vector (IV) for 128-bit Advanced Encryption
+/// Standard CTR mode (AES-CTR) block cipher encryption.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_aes_ctr_iv>.
+///
+/// {@category struct}
+base class D3D11_AES_CTR_IV extends Struct {
+  /// The IV, in big-endian format.
+  @Uint64()
+  external int IV;
+
+  /// The block count, in big-endian format.
+  @Uint64()
+  external int Count;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_AES_CTR_IV> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Contains input data for a
+/// D3D11_AUTHENTICATED_CONFIGURE_ENCRYPTION_WHEN_ACCESSIBLE command.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_authenticated_configure_accessible_encryption_input>.
+///
+/// {@category struct}
+base class D3D11_AUTHENTICATED_CONFIGURE_ACCESSIBLE_ENCRYPTION_INPUT
+    extends Struct {
+  /// A `D3D11_AUTHENTICATED_CONFIGURE_INPUT` structure that contains the
+  /// command GUID and other data.
+  external D3D11_AUTHENTICATED_CONFIGURE_INPUT Parameters;
+
+  /// A GUID that specifies the type of encryption to apply.
+  external GUID EncryptionGuid;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_AUTHENTICATED_CONFIGURE_ACCESSIBLE_ENCRYPTION_INPUT> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Contains input data for a D3D11_AUTHENTICATED_CONFIGURE_CRYPTO_SESSION
+/// command.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_authenticated_configure_crypto_session_input>.
+///
+/// {@category struct}
+base class D3D11_AUTHENTICATED_CONFIGURE_CRYPTO_SESSION_INPUT extends Struct {
+  /// A `D3D11_AUTHENTICATED_CONFIGURE_INPUT` structure that contains the
+  /// command GUID and other data.
+  external D3D11_AUTHENTICATED_CONFIGURE_INPUT Parameters;
+
+  external Pointer _DecoderHandle;
+  external Pointer _CryptoSessionHandle;
+  external Pointer _DeviceHandle;
+
+  /// A handle to the decoder device.
+  HANDLE get DecoderHandle => HANDLE(_DecoderHandle);
+
+  set DecoderHandle(HANDLE value) => _DecoderHandle = value;
+
+  /// A handle to the cryptographic session.
+  HANDLE get CryptoSessionHandle => HANDLE(_CryptoSessionHandle);
+
+  set CryptoSessionHandle(HANDLE value) => _CryptoSessionHandle = value;
+
+  /// A handle to the Direct3D device.
+  HANDLE get DeviceHandle => HANDLE(_DeviceHandle);
+
+  set DeviceHandle(HANDLE value) => _DeviceHandle = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_AUTHENTICATED_CONFIGURE_CRYPTO_SESSION_INPUT> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Contains input data for a D3D11_AUTHENTICATED_CONFIGURE_INITIALIZE command.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_authenticated_configure_initialize_input>.
+///
+/// {@category struct}
+base class D3D11_AUTHENTICATED_CONFIGURE_INITIALIZE_INPUT extends Struct {
+  /// A `D3D11_AUTHENTICATED_CONFIGURE_INPUT` structure that contains the
+  /// command GUID and other data.
+  external D3D11_AUTHENTICATED_CONFIGURE_INPUT Parameters;
+
+  /// The initial sequence number for queries.
+  @Uint32()
+  external int StartSequenceQuery;
+
+  /// The initial sequence number for commands.
+  @Uint32()
+  external int StartSequenceConfigure;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_AUTHENTICATED_CONFIGURE_INITIALIZE_INPUT> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Contains input data for the
+/// ID3D11VideoContext::ConfigureAuthenticatedChannel method.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_authenticated_configure_input>.
+///
+/// {@category struct}
+base class D3D11_AUTHENTICATED_CONFIGURE_INPUT extends Struct {
+  /// A `D3D11_OMAC` structure that contains a Message Authentication Code (MAC)
+  /// of the data.
+  external D3D11_OMAC omac;
+
+  /// A GUID that specifies the command.
+  external GUID ConfigureType;
+
+  external Pointer _hChannel;
+
+  /// The query sequence number.
+  @Uint32()
+  external int SequenceNumber;
+
+  /// A handle to the authenticated channel.
+  HANDLE get hChannel => HANDLE(_hChannel);
+
+  set hChannel(HANDLE value) => _hChannel = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_AUTHENTICATED_CONFIGURE_INPUT> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Contains the response from the
+/// ID3D11VideoContext::ConfigureAuthenticatedChannel method.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_authenticated_configure_output>.
+///
+/// {@category struct}
+base class D3D11_AUTHENTICATED_CONFIGURE_OUTPUT extends Struct {
+  /// A `D3D11_OMAC` structure that contains a Message Authentication Code (MAC)
+  /// of the data.
+  external D3D11_OMAC omac;
+
+  /// A GUID that specifies the command.
+  external GUID ConfigureType;
+
+  external Pointer _hChannel;
+
+  /// The command sequence number.
+  @Uint32()
+  external int SequenceNumber;
+
+  @Int32()
+  external int _ReturnCode;
+
+  /// A handle to the authenticated channel.
+  HANDLE get hChannel => HANDLE(_hChannel);
+
+  set hChannel(HANDLE value) => _hChannel = value;
+
+  /// The result code for the command.
+  HRESULT get ReturnCode => HRESULT(_ReturnCode);
+
+  set ReturnCode(HRESULT value) => _ReturnCode = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_AUTHENTICATED_CONFIGURE_OUTPUT> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Contains input data for a D3D11_AUTHENTICATED_CONFIGURE_PROTECTION command.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_authenticated_configure_protection_input>.
+///
+/// {@category struct}
+base class D3D11_AUTHENTICATED_CONFIGURE_PROTECTION_INPUT extends Struct {
+  /// A `D3D11_AUTHENTICATED_CONFIGURE_INPUT` structure that contains the
+  /// command GUID and other data.
+  external D3D11_AUTHENTICATED_CONFIGURE_INPUT Parameters;
+
+  /// A <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ns-d3d11-d3d11_authenticated_protection_flags">D3D11_AUTHENTICATED_PROTECTION_FLAGS</a>
+  /// union that specifies the protection level.
+  external D3D11_AUTHENTICATED_PROTECTION_FLAGS Protections;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_AUTHENTICATED_CONFIGURE_PROTECTION_INPUT> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Contains input data for a D3D11_AUTHENTICATED_CONFIGURE_SHARED_RESOURCE
+/// command.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_authenticated_configure_shared_resource_input>.
+///
+/// {@category struct}
+base class D3D11_AUTHENTICATED_CONFIGURE_SHARED_RESOURCE_INPUT extends Struct {
+  /// A `D3D11_AUTHENTICATED_CONFIGURE_INPUT` structure that contains the
+  /// command GUID and other data.
+  external D3D11_AUTHENTICATED_CONFIGURE_INPUT Parameters;
+
+  @Int32()
+  external int _ProcessType;
+
+  external Pointer _ProcessHandle;
+
+  @Int32()
+  external int _AllowAccess;
+
+  /// A <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_authenticated_process_identifier_type">D3D11_AUTHENTICATED_PROCESS_IDENTIFIER_TYPE</a>
+  /// value that specifies the type of process.
+  D3D11_AUTHENTICATED_PROCESS_IDENTIFIER_TYPE get ProcessType =>
+      D3D11_AUTHENTICATED_PROCESS_IDENTIFIER_TYPE(_ProcessType);
+
+  set ProcessType(D3D11_AUTHENTICATED_PROCESS_IDENTIFIER_TYPE value) =>
+      _ProcessType = value;
+
+  /// A process handle.
+  HANDLE get ProcessHandle => HANDLE(_ProcessHandle);
+
+  set ProcessHandle(HANDLE value) => _ProcessHandle = value;
+
+  /// If `[TRUE]`, the specified process has access to restricted shared
+  /// resources.
+  bool get AllowAccess => _AllowAccess != FALSE;
+
+  set AllowAccess(bool value) => _AllowAccess = value ? TRUE : FALSE;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_AUTHENTICATED_CONFIGURE_SHARED_RESOURCE_INPUT> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Specifies the protection level for video content.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_authenticated_protection_flags>.
+///
+/// {@category union}
+sealed class D3D11_AUTHENTICATED_PROTECTION_FLAGS extends Union {
+  external D3D11_AUTHENTICATED_PROTECTION_FLAGS_0 Flags;
+
+  /// Use this member to access all of the bits in the union.
+  @Uint32()
+  external int Value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_AUTHENTICATED_PROTECTION_FLAGS> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// {@category struct}
+sealed class D3D11_AUTHENTICATED_PROTECTION_FLAGS_0 extends Struct {
+  @Uint32()
+  external int bitfield;
+
+  int get ProtectionEnabled => bitfield.getBits(0, 1);
+  set ProtectionEnabled(int value) => bitfield = bitfield.setBits(0, 1, value);
+  int get OverlayOrFullscreenRequired => bitfield.getBits(1, 1);
+  set OverlayOrFullscreenRequired(int value) =>
+      bitfield = bitfield.setBits(1, 1, value);
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_AUTHENTICATED_PROTECTION_FLAGS_0> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+extension D3D11_AUTHENTICATED_PROTECTION_FLAGS_0_Extension
+    on D3D11_AUTHENTICATED_PROTECTION_FLAGS {
+  int get bitfield => this.Flags.bitfield;
+  set bitfield(int value) => this.Flags.bitfield = value;
+  int get ProtectionEnabled => this.Flags.ProtectionEnabled;
+  set ProtectionEnabled(int value) => this.Flags.ProtectionEnabled = value;
+  int get OverlayOrFullscreenRequired => this.Flags.OverlayOrFullscreenRequired;
+  set OverlayOrFullscreenRequired(int value) =>
+      this.Flags.OverlayOrFullscreenRequired = value;
+}
+
+/// Contains the response to a
+/// D3D11_AUTHENTICATED_QUERY_ENCRYPTION_WHEN_ACCESSIBLE_GUID_COUNT query.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_authenticated_query_accessibility_encryption_guid_count_output>.
+///
+/// {@category struct}
+base class D3D11_AUTHENTICATED_QUERY_ACCESSIBILITY_ENCRYPTION_GUID_COUNT_OUTPUT
+    extends Struct {
+  /// A `D3D11_AUTHENTICATED_QUERY_OUTPUT` structure that contains a Message
+  /// Authentication Code (MAC) and other data.
+  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
+
+  /// The number of encryption GUIDs.
+  @Uint32()
+  external int EncryptionGuidCount;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_AUTHENTICATED_QUERY_ACCESSIBILITY_ENCRYPTION_GUID_COUNT_OUTPUT>
+  toNative({Allocator allocator = adaptiveCalloc}) => allocator()..ref = this;
+}
+
+/// Contains input data for a
+/// D3D11_AUTHENTICATED_QUERY_ENCRYPTION_WHEN_ACCESSIBLE_GUID query.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_authenticated_query_accessibility_encryption_guid_input>.
+///
+/// {@category struct}
+base class D3D11_AUTHENTICATED_QUERY_ACCESSIBILITY_ENCRYPTION_GUID_INPUT
+    extends Struct {
+  /// A `D3D11_AUTHENTICATED_QUERY_INPUT` structure that contains the GUID for
+  /// the query and other data.
+  external D3D11_AUTHENTICATED_QUERY_INPUT Input;
+
+  /// The index of the encryption GUID.
+  @Uint32()
+  external int EncryptionGuidIndex;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_AUTHENTICATED_QUERY_ACCESSIBILITY_ENCRYPTION_GUID_INPUT>
+  toNative({Allocator allocator = adaptiveCalloc}) => allocator()..ref = this;
+}
+
+/// Contains the response to a
+/// D3D11_AUTHENTICATED_QUERY_ENCRYPTION_WHEN_ACCESSIBLE_GUID query.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_authenticated_query_accessibility_encryption_guid_output>.
+///
+/// {@category struct}
+base class D3D11_AUTHENTICATED_QUERY_ACCESSIBILITY_ENCRYPTION_GUID_OUTPUT
+    extends Struct {
+  /// A `D3D11_AUTHENTICATED_QUERY_OUTPUT` structure that contains a Message
+  /// Authentication Code (MAC) and other data.
+  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
+
+  /// The index of the encryption GUID.
+  @Uint32()
+  external int EncryptionGuidIndex;
+
+  /// A GUID that specifies a supported encryption type.
+  external GUID EncryptionGuid;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_AUTHENTICATED_QUERY_ACCESSIBILITY_ENCRYPTION_GUID_OUTPUT>
+  toNative({Allocator allocator = adaptiveCalloc}) => allocator()..ref = this;
+}
+
+/// Contains the response to a
+/// D3D11_AUTHENTICATED_QUERY_ACCESSIBILITY_ATTRIBUTES query.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_authenticated_query_accessibility_output>.
+///
+/// {@category struct}
+base class D3D11_AUTHENTICATED_QUERY_ACCESSIBILITY_OUTPUT extends Struct {
+  /// A `D3D11_AUTHENTICATED_QUERY_OUTPUT` structure that contains a Message
+  /// Authentication Code (MAC) and other data.
+  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
+
+  @Int32()
+  external int _BusType;
+
+  @Int32()
+  external int _AccessibleInContiguousBlocks;
+
+  @Int32()
+  external int _AccessibleInNonContiguousBlocks;
+
+  /// A bitwise <b>OR</b> of flags from the <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_bus_type">D3D11_BUS_TYPE</a>
+  /// enumeration.
+  D3D11_BUS_TYPE get BusType => D3D11_BUS_TYPE(_BusType);
+
+  set BusType(D3D11_BUS_TYPE value) => _BusType = value;
+
+  /// If `[TRUE]`, contiguous blocks of video memory may be accessible to the
+  /// CPU or the bus.
+  bool get AccessibleInContiguousBlocks =>
+      _AccessibleInContiguousBlocks != FALSE;
+
+  set AccessibleInContiguousBlocks(bool value) =>
+      _AccessibleInContiguousBlocks = value ? TRUE : FALSE;
+
+  /// If `[TRUE]`, non-contiguous blocks of video memory may be accessible to
+  /// the CPU or the bus.
+  bool get AccessibleInNonContiguousBlocks =>
+      _AccessibleInNonContiguousBlocks != FALSE;
+
+  set AccessibleInNonContiguousBlocks(bool value) =>
+      _AccessibleInNonContiguousBlocks = value ? TRUE : FALSE;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_AUTHENTICATED_QUERY_ACCESSIBILITY_OUTPUT> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Contains the response to a D3D11_AUTHENTICATED_QUERY_CHANNEL_TYPE query.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_authenticated_query_channel_type_output>.
+///
+/// {@category struct}
+base class D3D11_AUTHENTICATED_QUERY_CHANNEL_TYPE_OUTPUT extends Struct {
+  /// A `D3D11_AUTHENTICATED_QUERY_OUTPUT` structure that contains a Message
+  /// Authentication Code (MAC) and other data.
+  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
+
+  @Int32()
+  external int _ChannelType;
+
+  /// A <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_authenticated_channel_type">D3D11_AUTHENTICATED_CHANNEL_TYPE</a>
+  /// value that specifies the channel type.
+  D3D11_AUTHENTICATED_CHANNEL_TYPE get ChannelType =>
+      D3D11_AUTHENTICATED_CHANNEL_TYPE(_ChannelType);
+
+  set ChannelType(D3D11_AUTHENTICATED_CHANNEL_TYPE value) =>
+      _ChannelType = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_AUTHENTICATED_QUERY_CHANNEL_TYPE_OUTPUT> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Contains input data for a D3D11_AUTHENTICATED_QUERY_CRYPTO_SESSION query.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_authenticated_query_crypto_session_input>.
+///
+/// {@category struct}
+base class D3D11_AUTHENTICATED_QUERY_CRYPTO_SESSION_INPUT extends Struct {
+  /// A `D3D11_AUTHENTICATED_QUERY_INPUT` structure that contains the GUID for
+  /// the query and other data.
+  external D3D11_AUTHENTICATED_QUERY_INPUT Input;
+
+  external Pointer _DecoderHandle;
+
+  /// A handle to a decoder device.
+  HANDLE get DecoderHandle => HANDLE(_DecoderHandle);
+
+  set DecoderHandle(HANDLE value) => _DecoderHandle = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_AUTHENTICATED_QUERY_CRYPTO_SESSION_INPUT> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Contains the response to a D3D11_AUTHENTICATED_QUERY_CRYPTO_SESSION query.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_authenticated_query_crypto_session_output>.
+///
+/// {@category struct}
+base class D3D11_AUTHENTICATED_QUERY_CRYPTO_SESSION_OUTPUT extends Struct {
+  /// A `D3D11_AUTHENTICATED_QUERY_OUTPUT` structure that contains a Message
+  /// Authentication Code (MAC) and other data.
+  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
+
+  external Pointer _DecoderHandle;
+  external Pointer _CryptoSessionHandle;
+  external Pointer _DeviceHandle;
+
+  /// A handle to a decoder device.
+  HANDLE get DecoderHandle => HANDLE(_DecoderHandle);
+
+  set DecoderHandle(HANDLE value) => _DecoderHandle = value;
+
+  /// A handle to the cryptographic session that is associated with the decoder
+  /// device.
+  HANDLE get CryptoSessionHandle => HANDLE(_CryptoSessionHandle);
+
+  set CryptoSessionHandle(HANDLE value) => _CryptoSessionHandle = value;
+
+  /// A handle to the Direct3D device that is associated with the decoder
+  /// device.
+  HANDLE get DeviceHandle => HANDLE(_DeviceHandle);
+
+  set DeviceHandle(HANDLE value) => _DeviceHandle = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_AUTHENTICATED_QUERY_CRYPTO_SESSION_OUTPUT> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Contains the response to a
+/// D3D11_AUTHENTICATED_QUERY_CURRENT_ENCRYPTION_WHEN_ACCESSIBLE query.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_authenticated_query_current_accessibility_encryption_output>.
+///
+/// {@category struct}
+base class D3D11_AUTHENTICATED_QUERY_CURRENT_ACCESSIBILITY_ENCRYPTION_OUTPUT
+    extends Struct {
+  /// A `D3D11_AUTHENTICATED_QUERY_OUTPUT` structure that contains a Message
+  /// Authentication Code (MAC) and other data.
+  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
+
+  /// A GUID that specifies the current encryption type.
+  external GUID EncryptionGuid;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_AUTHENTICATED_QUERY_CURRENT_ACCESSIBILITY_ENCRYPTION_OUTPUT>
+  toNative({Allocator allocator = adaptiveCalloc}) => allocator()..ref = this;
+}
+
+/// Contains the response to a D3D11_AUTHENTICATED_QUERY_DEVICE_HANDLE query.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_authenticated_query_device_handle_output>.
+///
+/// {@category struct}
+base class D3D11_AUTHENTICATED_QUERY_DEVICE_HANDLE_OUTPUT extends Struct {
+  /// A `D3D11_AUTHENTICATED_QUERY_OUTPUT` structure that contains a Message
+  /// Authentication Code (MAC) and other data.
+  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
+
+  external Pointer _DeviceHandle;
+
+  /// A handle to the device.
+  HANDLE get DeviceHandle => HANDLE(_DeviceHandle);
+
+  set DeviceHandle(HANDLE value) => _DeviceHandle = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_AUTHENTICATED_QUERY_DEVICE_HANDLE_OUTPUT> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Contains input data for the ID3D11VideoContext::QueryAuthenticatedChannel
+/// method.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_authenticated_query_input>.
+///
+/// {@category struct}
+base class D3D11_AUTHENTICATED_QUERY_INPUT extends Struct {
+  /// A GUID that specifies the query.
+  external GUID QueryType;
+
+  external Pointer _hChannel;
+
+  /// The query sequence number.
+  @Uint32()
+  external int SequenceNumber;
+
+  /// A handle to the authenticated channel.
+  HANDLE get hChannel => HANDLE(_hChannel);
+
+  set hChannel(HANDLE value) => _hChannel = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_AUTHENTICATED_QUERY_INPUT> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Contains a response from the ID3D11VideoContext::QueryAuthenticatedChannel
+/// method.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_authenticated_query_output>.
+///
+/// {@category struct}
+base class D3D11_AUTHENTICATED_QUERY_OUTPUT extends Struct {
+  /// A `D3D11_OMAC` structure that contains a Message Authentication Code (MAC)
+  /// of the data.
+  external D3D11_OMAC omac;
+
+  /// A GUID that specifies the query.
+  external GUID QueryType;
+
+  external Pointer _hChannel;
+
+  /// The query sequence number.
+  @Uint32()
+  external int SequenceNumber;
+
+  @Int32()
+  external int _ReturnCode;
+
+  /// A handle to the authenticated channel.
+  HANDLE get hChannel => HANDLE(_hChannel);
+
+  set hChannel(HANDLE value) => _hChannel = value;
+
+  /// The result code for the query.
+  HRESULT get ReturnCode => HRESULT(_ReturnCode);
+
+  set ReturnCode(HRESULT value) => _ReturnCode = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_AUTHENTICATED_QUERY_OUTPUT> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Contains input data for a D3D11_AUTHENTICATED_QUERY_OUTPUT_ID_COUNT query.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_authenticated_query_output_id_count_input>.
+///
+/// {@category struct}
+base class D3D11_AUTHENTICATED_QUERY_OUTPUT_ID_COUNT_INPUT extends Struct {
+  /// A `D3D11_AUTHENTICATED_QUERY_INPUT` structure that contains the GUID for
+  /// the query and other data.
+  external D3D11_AUTHENTICATED_QUERY_INPUT Input;
+
+  external Pointer _DeviceHandle;
+  external Pointer _CryptoSessionHandle;
+
+  /// A handle to the device.
+  HANDLE get DeviceHandle => HANDLE(_DeviceHandle);
+
+  set DeviceHandle(HANDLE value) => _DeviceHandle = value;
+
+  /// A handle to the cryptographic session.
+  HANDLE get CryptoSessionHandle => HANDLE(_CryptoSessionHandle);
+
+  set CryptoSessionHandle(HANDLE value) => _CryptoSessionHandle = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_AUTHENTICATED_QUERY_OUTPUT_ID_COUNT_INPUT> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Contains the response to a D3D11_AUTHENTICATED_QUERY_OUTPUT_ID_COUNT query.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_authenticated_query_output_id_count_output>.
+///
+/// {@category struct}
+base class D3D11_AUTHENTICATED_QUERY_OUTPUT_ID_COUNT_OUTPUT extends Struct {
+  /// A `D3D11_AUTHENTICATED_QUERY_OUTPUT` structure that contains a Message
+  /// Authentication Code (MAC) and other data.
+  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
+
+  external Pointer _DeviceHandle;
+  external Pointer _CryptoSessionHandle;
+
+  /// The number of output IDs associated with the specified device and
+  /// cryptographic session.
+  @Uint32()
+  external int OutputIDCount;
+
+  /// A handle to the device.
+  HANDLE get DeviceHandle => HANDLE(_DeviceHandle);
+
+  set DeviceHandle(HANDLE value) => _DeviceHandle = value;
+
+  /// A handle to the cryptographic session.
+  HANDLE get CryptoSessionHandle => HANDLE(_CryptoSessionHandle);
+
+  set CryptoSessionHandle(HANDLE value) => _CryptoSessionHandle = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_AUTHENTICATED_QUERY_OUTPUT_ID_COUNT_OUTPUT> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Contains input data for a D3D11_AUTHENTICATED_QUERY_OUTPUT_ID query.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_authenticated_query_output_id_input>.
+///
+/// {@category struct}
+base class D3D11_AUTHENTICATED_QUERY_OUTPUT_ID_INPUT extends Struct {
+  /// A `D3D11_AUTHENTICATED_QUERY_INPUT` structure that contains the GUID for
+  /// the query and other data.
+  external D3D11_AUTHENTICATED_QUERY_INPUT Input;
+
+  external Pointer _DeviceHandle;
+  external Pointer _CryptoSessionHandle;
+
+  /// The index of the output ID.
+  @Uint32()
+  external int OutputIDIndex;
+
+  /// A handle to the device.
+  HANDLE get DeviceHandle => HANDLE(_DeviceHandle);
+
+  set DeviceHandle(HANDLE value) => _DeviceHandle = value;
+
+  /// A handle to the cryptographic session.
+  HANDLE get CryptoSessionHandle => HANDLE(_CryptoSessionHandle);
+
+  set CryptoSessionHandle(HANDLE value) => _CryptoSessionHandle = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_AUTHENTICATED_QUERY_OUTPUT_ID_INPUT> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Contains the response to a D3D11_AUTHENTICATED_QUERY_OUTPUT_ID query.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_authenticated_query_output_id_output>.
+///
+/// {@category struct}
+base class D3D11_AUTHENTICATED_QUERY_OUTPUT_ID_OUTPUT extends Struct {
+  /// A `D3D11_AUTHENTICATED_QUERY_OUTPUT` structure that contains a Message
+  /// Authentication Code (MAC) and other data.
+  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
+
+  external Pointer _DeviceHandle;
+  external Pointer _CryptoSessionHandle;
+
+  /// The index of the output ID.
+  @Uint32()
+  external int OutputIDIndex;
+
+  /// An output ID that is associated with the specified device and
+  /// cryptographic session.
+  @Uint64()
+  external int OutputID;
+
+  /// A handle to the device.
+  HANDLE get DeviceHandle => HANDLE(_DeviceHandle);
+
+  set DeviceHandle(HANDLE value) => _DeviceHandle = value;
+
+  /// A handle to the cryptographic session.
+  HANDLE get CryptoSessionHandle => HANDLE(_CryptoSessionHandle);
+
+  set CryptoSessionHandle(HANDLE value) => _CryptoSessionHandle = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_AUTHENTICATED_QUERY_OUTPUT_ID_OUTPUT> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Contains the response to a D3D11_AUTHENTICATED_QUERY_PROTECTION query.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_authenticated_query_protection_output>.
+///
+/// {@category struct}
+base class D3D11_AUTHENTICATED_QUERY_PROTECTION_OUTPUT extends Struct {
+  /// A `D3D11_AUTHENTICATED_QUERY_OUTPUT` structure that contains a Message
+  /// Authentication Code (MAC) and other data.
+  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
+
+  /// A <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ns-d3d11-d3d11_authenticated_protection_flags">D3D11_AUTHENTICATED_PROTECTION_FLAGS</a>
+  /// union that specifies the protection level.
+  external D3D11_AUTHENTICATED_PROTECTION_FLAGS ProtectionFlags;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_AUTHENTICATED_QUERY_PROTECTION_OUTPUT> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Contains the response to a
+/// D3D11_AUTHENTICATED_QUERY_RESTRICTED_SHARED_RESOURCE_PROCESS_COUNT query.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_authenticated_query_restricted_shared_resource_process_count_output>.
+///
+/// {@category struct}
+base class D3D11_AUTHENTICATED_QUERY_RESTRICTED_SHARED_RESOURCE_PROCESS_COUNT_OUTPUT
+    extends Struct {
+  /// A `D3D11_AUTHENTICATED_QUERY_OUTPUT` structure that contains a Message
+  /// Authentication Code (MAC) and other data.
+  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
+
+  /// The number of processes that are allowed to open shared resources that
+  /// have restricted access.
+  @Uint32()
+  external int RestrictedSharedResourceProcessCount;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<
+    D3D11_AUTHENTICATED_QUERY_RESTRICTED_SHARED_RESOURCE_PROCESS_COUNT_OUTPUT
+  >
+  toNative({Allocator allocator = adaptiveCalloc}) => allocator()..ref = this;
+}
+
+/// Contains input data for a
+/// D3D11_AUTHENTICATED_QUERY_RESTRICTED_SHARED_RESOURCE_PROCESS query.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_authenticated_query_restricted_shared_resource_process_input>.
+///
+/// {@category struct}
+base class D3D11_AUTHENTICATED_QUERY_RESTRICTED_SHARED_RESOURCE_PROCESS_INPUT
+    extends Struct {
+  /// A `D3D11_AUTHENTICATED_QUERY_INPUT` structure that contains the GUID for
+  /// the query and other data.
+  external D3D11_AUTHENTICATED_QUERY_INPUT Input;
+
+  /// The index of the process.
+  @Uint32()
+  external int ProcessIndex;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_AUTHENTICATED_QUERY_RESTRICTED_SHARED_RESOURCE_PROCESS_INPUT>
+  toNative({Allocator allocator = adaptiveCalloc}) => allocator()..ref = this;
+}
+
+/// Contains the response to a
+/// D3D11_AUTHENTICATED_QUERY_RESTRICTED_SHARED_RESOURCE_PROCESS query.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_authenticated_query_restricted_shared_resource_process_output>.
+///
+/// {@category struct}
+base class D3D11_AUTHENTICATED_QUERY_RESTRICTED_SHARED_RESOURCE_PROCESS_OUTPUT
+    extends Struct {
+  /// A `D3D11_AUTHENTICATED_QUERY_OUTPUT` structure that contains a Message
+  /// Authentication Code (MAC) and other data.
+  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
+
+  /// The index of the process in the list of processes.
+  @Uint32()
+  external int ProcessIndex;
+
+  @Int32()
+  external int _ProcessIdentifier;
+
+  external Pointer _ProcessHandle;
+
+  /// A <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_authenticated_process_identifier_type">D3D11_AUTHENTICATED_PROCESS_IDENTIFIER_TYPE</a>
+  /// value that specifies the type of process.
+  D3D11_AUTHENTICATED_PROCESS_IDENTIFIER_TYPE get ProcessIdentifier =>
+      D3D11_AUTHENTICATED_PROCESS_IDENTIFIER_TYPE(_ProcessIdentifier);
+
+  set ProcessIdentifier(D3D11_AUTHENTICATED_PROCESS_IDENTIFIER_TYPE value) =>
+      _ProcessIdentifier = value;
+
+  /// A process handle.
+  HANDLE get ProcessHandle => HANDLE(_ProcessHandle);
+
+  set ProcessHandle(HANDLE value) => _ProcessHandle = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_AUTHENTICATED_QUERY_RESTRICTED_SHARED_RESOURCE_PROCESS_OUTPUT>
+  toNative({Allocator allocator = adaptiveCalloc}) => allocator()..ref = this;
+}
+
+/// Contains the response to a
+/// D3D11_AUTHENTICATED_QUERY_UNRESTRICTED_PROTECTED_SHARED_RESOURCE_COUNT
+/// query.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_authenticated_query_unrestricted_protected_shared_resource_count_output>.
+///
+/// {@category struct}
+base class D3D11_AUTHENTICATED_QUERY_UNRESTRICTED_PROTECTED_SHARED_RESOURCE_COUNT_OUTPUT
+    extends Struct {
+  /// A `D3D11_AUTHENTICATED_QUERY_OUTPUT` structure that contains a Message
+  /// Authentication Code (MAC) and other data.
+  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
+
+  /// The number of protected, shared resources that can be opened by any
+  /// process without restrictions.
+  @Uint32()
+  external int UnrestrictedProtectedSharedResourceCount;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<
+    D3D11_AUTHENTICATED_QUERY_UNRESTRICTED_PROTECTED_SHARED_RESOURCE_COUNT_OUTPUT
+  >
+  toNative({Allocator allocator = adaptiveCalloc}) => allocator()..ref = this;
+}
+
+/// Describes the blend state that you use in a call to
+/// ID3D11Device::CreateBlendState to create a blend-state object.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_blend_desc>.
+///
+/// {@category struct}
+base class D3D11_BLEND_DESC extends Struct {
+  @Int32()
+  external int _AlphaToCoverageEnable;
+
+  @Int32()
+  external int _IndependentBlendEnable;
+
+  /// An array of <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ns-d3d11-d3d11_render_target_blend_desc">D3D11_RENDER_TARGET_BLEND_DESC</a>
+  /// structures that describe the blend states for render targets; these
+  /// correspond to the eight render targets that can be bound to the <a
+  /// href="https://docs.microsoft.com/windows/desktop/direct3d11/d3d10-graphics-programming-guide-output-merger-stage">output-merger
+  /// stage</a> at one time.
+  @Array(8)
+  external Array<D3D11_RENDER_TARGET_BLEND_DESC> RenderTarget;
+
+  /// Specifies whether to use alpha-to-coverage as a multisampling technique
+  /// when setting a pixel to a render target.
+  bool get AlphaToCoverageEnable => _AlphaToCoverageEnable != FALSE;
+
+  set AlphaToCoverageEnable(bool value) =>
+      _AlphaToCoverageEnable = value ? TRUE : FALSE;
+
+  /// Specifies whether to enable independent blending in simultaneous render
+  /// targets.
+  bool get IndependentBlendEnable => _IndependentBlendEnable != FALSE;
+
+  set IndependentBlendEnable(bool value) =>
+      _IndependentBlendEnable = value ? TRUE : FALSE;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_BLEND_DESC> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Describes the blend state that you use in a call to
+/// ID3D11Device1::CreateBlendState1 to create a blend-state object.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_1/ns-d3d11_1-d3d11_blend_desc1>.
+///
+/// {@category struct}
+base class D3D11_BLEND_DESC1 extends Struct {
+  @Int32()
+  external int _AlphaToCoverageEnable;
+
+  @Int32()
+  external int _IndependentBlendEnable;
+
+  /// An array of <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11_1/ns-d3d11_1-d3d11_render_target_blend_desc1">D3D11_RENDER_TARGET_BLEND_DESC1</a>
+  /// structures that describe the blend states for render targets; these
+  /// correspond to the eight render targets that can be bound to the <a
+  /// href="https://docs.microsoft.com/windows/desktop/direct3d11/d3d10-graphics-programming-guide-output-merger-stage">output-merger
+  /// stage</a> at one time.
+  @Array(8)
+  external Array<D3D11_RENDER_TARGET_BLEND_DESC1> RenderTarget;
+
+  /// Specifies whether to use alpha-to-coverage as a multisampling technique
+  /// when setting a pixel to a render target.
+  bool get AlphaToCoverageEnable => _AlphaToCoverageEnable != FALSE;
+
+  set AlphaToCoverageEnable(bool value) =>
+      _AlphaToCoverageEnable = value ? TRUE : FALSE;
+
+  /// Specifies whether to enable independent blending in simultaneous render
+  /// targets.
+  bool get IndependentBlendEnable => _IndependentBlendEnable != FALSE;
+
+  set IndependentBlendEnable(bool value) =>
+      _IndependentBlendEnable = value ? TRUE : FALSE;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_BLEND_DESC1> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Defines a 3D box.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_box>.
+///
+/// {@category struct}
+base class D3D11_BOX extends Struct {
+  /// The x position of the left hand side of the box.
+  @Uint32()
+  external int left;
+
+  /// The y position of the top of the box.
+  @Uint32()
+  external int top;
+
+  /// The z position of the front of the box.
+  @Uint32()
+  external int front;
+
+  /// The x position of the right hand side of the box.
+  @Uint32()
+  external int right;
+
+  /// The y position of the bottom of the box.
+  @Uint32()
+  external int bottom;
+
+  /// The z position of the back of the box.
+  @Uint32()
+  external int back;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_BOX> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Describes the elements in a raw buffer resource to use in a shader-resource
+/// view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_bufferex_srv>.
+///
+/// {@category struct}
+base class D3D11_BUFFEREX_SRV extends Struct {
+  /// The index of the first element to be accessed by the view.
+  @Uint32()
+  external int FirstElement;
+
+  /// The number of elements in the resource.
+  @Uint32()
+  external int NumElements;
+
+  /// A <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_bufferex_srv_flag">D3D11_BUFFEREX_SRV_FLAG</a>-typed
+  /// value that identifies view options for the buffer.
+  @Uint32()
+  external int Flags;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_BUFFEREX_SRV> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes a buffer resource.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_buffer_desc>.
+///
+/// {@category struct}
+base class D3D11_BUFFER_DESC extends Struct {
+  /// Size of the buffer in bytes.
+  @Uint32()
+  external int ByteWidth;
+
+  @Int32()
+  external int _Usage;
+
+  @Uint32()
+  external int _BindFlags;
+
+  @Uint32()
+  external int _CPUAccessFlags;
+
+  @Uint32()
+  external int _MiscFlags;
+
+  /// The size of each element in the buffer structure (in bytes) when the
+  /// buffer represents a structured buffer.
+  @Uint32()
+  external int StructureByteStride;
+
+  /// Identify how the buffer is expected to be read from and written to.
+  D3D11_USAGE get Usage => D3D11_USAGE(_Usage);
+
+  set Usage(D3D11_USAGE value) => _Usage = value;
+
+  /// Identify how the buffer will be bound to the pipeline.
+  D3D11_BIND_FLAG get BindFlags => D3D11_BIND_FLAG(_BindFlags);
+
+  set BindFlags(D3D11_BIND_FLAG value) => _BindFlags = value;
+
+  /// CPU access flags (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_cpu_access_flag">D3D11_CPU_ACCESS_FLAG</a>)
+  /// or 0 if no CPU access is necessary.
+  D3D11_CPU_ACCESS_FLAG get CPUAccessFlags =>
+      D3D11_CPU_ACCESS_FLAG(_CPUAccessFlags);
+
+  set CPUAccessFlags(D3D11_CPU_ACCESS_FLAG value) => _CPUAccessFlags = value;
+
+  /// Miscellaneous flags (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_resource_misc_flag">D3D11_RESOURCE_MISC_FLAG</a>)
+  /// or 0 if unused.
+  D3D11_RESOURCE_MISC_FLAG get MiscFlags =>
+      D3D11_RESOURCE_MISC_FLAG(_MiscFlags);
+
+  set MiscFlags(D3D11_RESOURCE_MISC_FLAG value) => _MiscFlags = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_BUFFER_DESC> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Specifies the elements in a buffer resource to use in a render-target view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_buffer_rtv>.
+///
+/// {@category struct}
+base class D3D11_BUFFER_RTV extends Struct {
+  external D3D11_BUFFER_RTV_0 Anonymous1;
+  external D3D11_BUFFER_RTV_1 Anonymous2;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_BUFFER_RTV> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// {@category union}
+sealed class D3D11_BUFFER_RTV_0 extends Union {
+  @Uint32()
+  external int FirstElement;
+
+  @Uint32()
+  external int ElementOffset;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_BUFFER_RTV_0> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+extension D3D11_BUFFER_RTV_0_Extension on D3D11_BUFFER_RTV {
+  int get FirstElement => this.Anonymous1.FirstElement;
+  set FirstElement(int value) => this.Anonymous1.FirstElement = value;
+  int get ElementOffset => this.Anonymous1.ElementOffset;
+  set ElementOffset(int value) => this.Anonymous1.ElementOffset = value;
+}
+
+/// {@category union}
+sealed class D3D11_BUFFER_RTV_1 extends Union {
+  @Uint32()
+  external int NumElements;
+
+  @Uint32()
+  external int ElementWidth;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_BUFFER_RTV_1> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+extension D3D11_BUFFER_RTV_1_Extension on D3D11_BUFFER_RTV {
+  int get NumElements => this.Anonymous2.NumElements;
+  set NumElements(int value) => this.Anonymous2.NumElements = value;
+  int get ElementWidth => this.Anonymous2.ElementWidth;
+  set ElementWidth(int value) => this.Anonymous2.ElementWidth = value;
+}
+
+/// Specifies the elements in a buffer resource to use in a shader-resource
+/// view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_buffer_srv>.
+///
+/// {@category struct}
+base class D3D11_BUFFER_SRV extends Struct {
+  external D3D11_BUFFER_SRV_0 Anonymous1;
+  external D3D11_BUFFER_SRV_1 Anonymous2;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_BUFFER_SRV> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// {@category union}
+sealed class D3D11_BUFFER_SRV_0 extends Union {
+  @Uint32()
+  external int FirstElement;
+
+  @Uint32()
+  external int ElementOffset;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_BUFFER_SRV_0> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+extension D3D11_BUFFER_SRV_0_Extension on D3D11_BUFFER_SRV {
+  int get FirstElement => this.Anonymous1.FirstElement;
+  set FirstElement(int value) => this.Anonymous1.FirstElement = value;
+  int get ElementOffset => this.Anonymous1.ElementOffset;
+  set ElementOffset(int value) => this.Anonymous1.ElementOffset = value;
+}
+
+/// {@category union}
+sealed class D3D11_BUFFER_SRV_1 extends Union {
+  @Uint32()
+  external int NumElements;
+
+  @Uint32()
+  external int ElementWidth;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_BUFFER_SRV_1> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+extension D3D11_BUFFER_SRV_1_Extension on D3D11_BUFFER_SRV {
+  int get NumElements => this.Anonymous2.NumElements;
+  set NumElements(int value) => this.Anonymous2.NumElements = value;
+  int get ElementWidth => this.Anonymous2.ElementWidth;
+  set ElementWidth(int value) => this.Anonymous2.ElementWidth = value;
+}
+
+/// Describes the elements in a buffer to use in a unordered-access view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_buffer_uav>.
+///
+/// {@category struct}
+base class D3D11_BUFFER_UAV extends Struct {
+  /// The zero-based index of the first element to be accessed.
+  @Uint32()
+  external int FirstElement;
+
+  /// The number of elements in the resource.
+  @Uint32()
+  external int NumElements;
+
+  /// View options for the resource (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_buffer_uav_flag">D3D11_BUFFER_UAV_FLAG</a>).
+  @Uint32()
+  external int Flags;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_BUFFER_UAV> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Describes an HLSL class instance.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_class_instance_desc>.
+///
+/// {@category struct}
+base class D3D11_CLASS_INSTANCE_DESC extends Struct {
+  /// The instance ID of an HLSL class; the default value is 0.
+  @Uint32()
+  external int InstanceId;
+
+  /// The instance index of an HLSL class; the default value is 0.
+  @Uint32()
+  external int InstanceIndex;
+
+  /// The type ID of an HLSL class; the default value is 0.
+  @Uint32()
+  external int TypeId;
+
+  /// Describes the constant buffer associated with an HLSL class; the default
+  /// value is 0.
+  @Uint32()
+  external int ConstantBuffer;
+
+  /// The base constant buffer offset associated with an HLSL class; the default
+  /// value is 0.
+  @Uint32()
+  external int BaseConstantBufferOffset;
+
+  /// The base texture associated with an HLSL class; the default value is 127.
+  @Uint32()
+  external int BaseTexture;
+
+  /// The base sampler associated with an HLSL class; the default value is 15.
+  @Uint32()
+  external int BaseSampler;
+
+  @Int32()
+  external int _Created;
+
+  /// True if the class was created; the default value is false.
+  bool get Created => _Created != FALSE;
+
+  set Created(bool value) => _Created = value ? TRUE : FALSE;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_CLASS_INSTANCE_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes an instance of a compute shader to trace.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11shadertracing/ns-d3d11shadertracing-d3d11_compute_shader_trace_desc>.
+///
+/// {@category struct}
+base class D3D11_COMPUTE_SHADER_TRACE_DESC extends Struct {
+  /// The invocation number of the instance of the compute shader.
+  @Uint64()
+  external int Invocation;
+
+  /// The <a
+  /// href="https://docs.microsoft.com/windows/desktop/direct3dhlsl/sv-groupthreadid">SV_GroupThreadID</a>
+  /// to trace.
+  @Array(3)
+  external Array<Uint32> ThreadIDInGroup;
+
+  /// The <a
+  /// href="https://docs.microsoft.com/windows/desktop/direct3dhlsl/sv-groupid">SV_GroupID</a>
+  /// to trace.
+  @Array(3)
+  external Array<Uint32> ThreadGroupID;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_COMPUTE_SHADER_TRACE_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes a counter.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_counter_desc>.
+///
+/// {@category struct}
+base class D3D11_COUNTER_DESC extends Struct {
+  @Int32()
+  external int _Counter;
+
+  /// Reserved.
+  @Uint32()
+  external int MiscFlags;
+
+  /// Type of counter (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_counter">D3D11_COUNTER</a>).
+  D3D11_COUNTER get Counter => D3D11_COUNTER(_Counter);
+
+  set Counter(D3D11_COUNTER value) => _Counter = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_COUNTER_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Information about the video card's performance counter capabilities.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_counter_info>.
+///
+/// {@category struct}
+base class D3D11_COUNTER_INFO extends Struct {
+  @Int32()
+  external int _LastDeviceDependentCounter;
+
+  /// Number of counters that can be simultaneously supported.
+  @Uint32()
+  external int NumSimultaneousCounters;
+
+  /// Number of detectable parallel units that the counter is able to discern.
+  @Uint8()
+  external int NumDetectableParallelUnits;
+
+  /// Largest device-dependent counter ID that the device supports.
+  D3D11_COUNTER get LastDeviceDependentCounter =>
+      D3D11_COUNTER(_LastDeviceDependentCounter);
+
+  set LastDeviceDependentCounter(D3D11_COUNTER value) =>
+      _LastDeviceDependentCounter = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_COUNTER_INFO> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Stencil operations that can be performed based on the results of stencil
+/// test.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_depth_stencilop_desc>.
+///
+/// {@category struct}
+base class D3D11_DEPTH_STENCILOP_DESC extends Struct {
+  @Int32()
+  external int _StencilFailOp;
+
+  @Int32()
+  external int _StencilDepthFailOp;
+
+  @Int32()
+  external int _StencilPassOp;
+
+  @Int32()
+  external int _StencilFunc;
+
+  /// The stencil operation to perform when stencil testing fails.
+  D3D11_STENCIL_OP get StencilFailOp => D3D11_STENCIL_OP(_StencilFailOp);
+
+  set StencilFailOp(D3D11_STENCIL_OP value) => _StencilFailOp = value;
+
+  /// The stencil operation to perform when stencil testing passes and depth
+  /// testing fails.
+  D3D11_STENCIL_OP get StencilDepthFailOp =>
+      D3D11_STENCIL_OP(_StencilDepthFailOp);
+
+  set StencilDepthFailOp(D3D11_STENCIL_OP value) => _StencilDepthFailOp = value;
+
+  /// The stencil operation to perform when stencil testing and depth testing
+  /// both pass.
+  D3D11_STENCIL_OP get StencilPassOp => D3D11_STENCIL_OP(_StencilPassOp);
+
+  set StencilPassOp(D3D11_STENCIL_OP value) => _StencilPassOp = value;
+
+  /// A function that compares stencil data against existing stencil data.
+  D3D11_COMPARISON_FUNC get StencilFunc => D3D11_COMPARISON_FUNC(_StencilFunc);
+
+  set StencilFunc(D3D11_COMPARISON_FUNC value) => _StencilFunc = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_DEPTH_STENCILOP_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes depth-stencil state.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_depth_stencil_desc>.
+///
+/// {@category struct}
+base class D3D11_DEPTH_STENCIL_DESC extends Struct {
+  @Int32()
+  external int _DepthEnable;
+
+  @Int32()
+  external int _DepthWriteMask;
+
+  @Int32()
+  external int _DepthFunc;
+
+  @Int32()
+  external int _StencilEnable;
+
+  /// Identify a portion of the depth-stencil buffer for reading stencil data.
+  @Uint8()
+  external int StencilReadMask;
+
+  /// Identify a portion of the depth-stencil buffer for writing stencil data.
+  @Uint8()
+  external int StencilWriteMask;
+
+  /// Identify how to use the results of the depth test and the stencil test for
+  /// pixels whose surface normal is facing towards the camera (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ns-d3d11-d3d11_depth_stencilop_desc">D3D11_DEPTH_STENCILOP_DESC</a>).
+  external D3D11_DEPTH_STENCILOP_DESC FrontFace;
+
+  /// Identify how to use the results of the depth test and the stencil test for
+  /// pixels whose surface normal is facing away from the camera (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ns-d3d11-d3d11_depth_stencilop_desc">D3D11_DEPTH_STENCILOP_DESC</a>).
+  external D3D11_DEPTH_STENCILOP_DESC BackFace;
+
+  /// Enable depth testing.
+  bool get DepthEnable => _DepthEnable != FALSE;
+
+  set DepthEnable(bool value) => _DepthEnable = value ? TRUE : FALSE;
+
+  /// Identify a portion of the depth-stencil buffer that can be modified by
+  /// depth data (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_depth_write_mask">D3D11_DEPTH_WRITE_MASK</a>).
+  D3D11_DEPTH_WRITE_MASK get DepthWriteMask =>
+      D3D11_DEPTH_WRITE_MASK(_DepthWriteMask);
+
+  set DepthWriteMask(D3D11_DEPTH_WRITE_MASK value) => _DepthWriteMask = value;
+
+  /// A function that compares depth data against existing depth data.
+  D3D11_COMPARISON_FUNC get DepthFunc => D3D11_COMPARISON_FUNC(_DepthFunc);
+
+  set DepthFunc(D3D11_COMPARISON_FUNC value) => _DepthFunc = value;
+
+  /// Enable stencil testing.
+  bool get StencilEnable => _StencilEnable != FALSE;
+
+  set StencilEnable(bool value) => _StencilEnable = value ? TRUE : FALSE;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_DEPTH_STENCIL_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Specifies the subresources of a texture that are accessible from a
+/// depth-stencil view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_depth_stencil_view_desc>.
+///
+/// {@category struct}
+base class D3D11_DEPTH_STENCIL_VIEW_DESC extends Struct {
+  @Int32()
+  external int _Format;
+
+  @Int32()
+  external int _ViewDimension;
+
+  /// A value that describes whether the texture is read only.
+  @Uint32()
+  external int Flags;
+
+  external D3D11_DEPTH_STENCIL_VIEW_DESC_0 Anonymous;
+
+  /// Resource data format (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/dxgiformat/ne-dxgiformat-dxgi_format">DXGI_FORMAT</a>).
+  DXGI_FORMAT get Format => DXGI_FORMAT(_Format);
+
+  set Format(DXGI_FORMAT value) => _Format = value;
+
+  /// Type of resource (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_dsv_dimension">D3D11_DSV_DIMENSION</a>).
+  D3D11_DSV_DIMENSION get ViewDimension => D3D11_DSV_DIMENSION(_ViewDimension);
+
+  set ViewDimension(D3D11_DSV_DIMENSION value) => _ViewDimension = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_DEPTH_STENCIL_VIEW_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// {@category union}
+sealed class D3D11_DEPTH_STENCIL_VIEW_DESC_0 extends Union {
+  external D3D11_TEX1D_DSV Texture1D;
+  external D3D11_TEX1D_ARRAY_DSV Texture1DArray;
+  external D3D11_TEX2D_DSV Texture2D;
+  external D3D11_TEX2D_ARRAY_DSV Texture2DArray;
+  external D3D11_TEX2DMS_DSV Texture2DMS;
+  external D3D11_TEX2DMS_ARRAY_DSV Texture2DMSArray;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_DEPTH_STENCIL_VIEW_DESC_0> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+extension D3D11_DEPTH_STENCIL_VIEW_DESC_0_Extension
+    on D3D11_DEPTH_STENCIL_VIEW_DESC {
+  D3D11_TEX1D_DSV get Texture1D => this.Anonymous.Texture1D;
+  set Texture1D(D3D11_TEX1D_DSV value) => this.Anonymous.Texture1D = value;
+  D3D11_TEX1D_ARRAY_DSV get Texture1DArray => this.Anonymous.Texture1DArray;
+  set Texture1DArray(D3D11_TEX1D_ARRAY_DSV value) =>
+      this.Anonymous.Texture1DArray = value;
+  D3D11_TEX2D_DSV get Texture2D => this.Anonymous.Texture2D;
+  set Texture2D(D3D11_TEX2D_DSV value) => this.Anonymous.Texture2D = value;
+  D3D11_TEX2D_ARRAY_DSV get Texture2DArray => this.Anonymous.Texture2DArray;
+  set Texture2DArray(D3D11_TEX2D_ARRAY_DSV value) =>
+      this.Anonymous.Texture2DArray = value;
+  D3D11_TEX2DMS_DSV get Texture2DMS => this.Anonymous.Texture2DMS;
+  set Texture2DMS(D3D11_TEX2DMS_DSV value) =>
+      this.Anonymous.Texture2DMS = value;
+  D3D11_TEX2DMS_ARRAY_DSV get Texture2DMSArray =>
+      this.Anonymous.Texture2DMSArray;
+  set Texture2DMSArray(D3D11_TEX2DMS_ARRAY_DSV value) =>
+      this.Anonymous.Texture2DMSArray = value;
+}
+
+/// Describes an instance of a domain shader to trace.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11shadertracing/ns-d3d11shadertracing-d3d11_domain_shader_trace_desc>.
+///
+/// {@category struct}
+base class D3D11_DOMAIN_SHADER_TRACE_DESC extends Struct {
+  /// The invocation number of the instance of the domain shader.
+  @Uint64()
+  external int Invocation;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_DOMAIN_SHADER_TRACE_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Arguments for draw indexed instanced indirect.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_draw_indexed_instanced_indirect_args>.
+///
+/// {@category struct}
+base class D3D11_DRAW_INDEXED_INSTANCED_INDIRECT_ARGS extends Struct {
+  /// The number of indices read from the index buffer for each instance.
+  @Uint32()
+  external int IndexCountPerInstance;
+
+  /// The number of instances to draw.
+  @Uint32()
+  external int InstanceCount;
+
+  /// The location of the first index read by the GPU from the index buffer.
+  @Uint32()
+  external int StartIndexLocation;
+
+  /// A value added to each index before reading a vertex from the vertex
+  /// buffer.
+  @Int32()
+  external int BaseVertexLocation;
+
+  /// A value added to each index before reading per-instance data from a vertex
+  /// buffer.
+  @Uint32()
+  external int StartInstanceLocation;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_DRAW_INDEXED_INSTANCED_INDIRECT_ARGS> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Arguments for draw instanced indirect.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_draw_instanced_indirect_args>.
+///
+/// {@category struct}
+base class D3D11_DRAW_INSTANCED_INDIRECT_ARGS extends Struct {
+  /// The number of vertices to draw.
+  @Uint32()
+  external int VertexCountPerInstance;
+
+  /// The number of instances to draw.
+  @Uint32()
+  external int InstanceCount;
+
+  /// The index of the first vertex.
+  @Uint32()
+  external int StartVertexLocation;
+
+  /// A value added to each index before reading per-instance data from a vertex
+  /// buffer.
+  @Uint32()
+  external int StartInstanceLocation;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_DRAW_INSTANCED_INDIRECT_ARGS> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Specifies which bytes in a video surface are encrypted.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_encrypted_block_info>.
+///
+/// {@category struct}
+base class D3D11_ENCRYPTED_BLOCK_INFO extends Struct {
+  /// The number of bytes that are encrypted at the start of the buffer.
+  @Uint32()
+  external int NumEncryptedBytesAtBeginning;
+
+  /// The number of bytes that are skipped after the first
+  /// <b>NumEncryptedBytesAtBeginning</b> bytes, and then after each block of
+  /// <b>NumBytesInEncryptPattern</b> bytes.
+  @Uint32()
+  external int NumBytesInSkipPattern;
+
+  /// The number of bytes that are encrypted after each block of skipped bytes.
+  @Uint32()
+  external int NumBytesInEncryptPattern;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_ENCRYPTED_BLOCK_INFO> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// {@category struct}
+base class D3D11_FEATURE_DATA_ARCHITECTURE_INFO extends Struct {
+  @Int32()
+  external int _TileBasedDeferredRenderer;
+
+  bool get TileBasedDeferredRenderer => _TileBasedDeferredRenderer != FALSE;
+  set TileBasedDeferredRenderer(bool value) =>
+      _TileBasedDeferredRenderer = value ? TRUE : FALSE;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_FEATURE_DATA_ARCHITECTURE_INFO> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes compute shader and raw and structured buffer support in the
+/// current graphics driver.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_feature_data_d3d10_x_hardware_options>.
+///
+/// {@category struct}
+base class D3D11_FEATURE_DATA_D3D10_X_HARDWARE_OPTIONS extends Struct {
+  @Int32()
+  external int _ComputeShaders_Plus_RawAndStructuredBuffers_Via_Shader_4_x;
+
+  /// `[TRUE]` if compute shaders and raw and structured buffers are supported;
+  /// otherwise `[FALSE]`.
+  bool get ComputeShaders_Plus_RawAndStructuredBuffers_Via_Shader_4_x =>
+      _ComputeShaders_Plus_RawAndStructuredBuffers_Via_Shader_4_x != FALSE;
+
+  set ComputeShaders_Plus_RawAndStructuredBuffers_Via_Shader_4_x(bool value) =>
+      _ComputeShaders_Plus_RawAndStructuredBuffers_Via_Shader_4_x = value
+      ? TRUE
+      : FALSE;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_FEATURE_DATA_D3D10_X_HARDWARE_OPTIONS> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes Direct3D 11.1 feature options in the current graphics driver.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_feature_data_d3d11_options>.
+///
+/// {@category struct}
+base class D3D11_FEATURE_DATA_D3D11_OPTIONS extends Struct {
+  @Int32()
+  external int _OutputMergerLogicOp;
+
+  @Int32()
+  external int _UAVOnlyRenderingForcedSampleCount;
+
+  @Int32()
+  external int _DiscardAPIsSeenByDriver;
+
+  @Int32()
+  external int _FlagsForUpdateAndCopySeenByDriver;
+
+  @Int32()
+  external int _ClearView;
+
+  @Int32()
+  external int _CopyWithOverlap;
+
+  @Int32()
+  external int _ConstantBufferPartialUpdate;
+
+  @Int32()
+  external int _ConstantBufferOffsetting;
+
+  @Int32()
+  external int _MapNoOverwriteOnDynamicConstantBuffer;
+
+  @Int32()
+  external int _MapNoOverwriteOnDynamicBufferSRV;
+
+  @Int32()
+  external int _MultisampleRTVWithForcedSampleCountOne;
+
+  @Int32()
+  external int _SAD4ShaderInstructions;
+
+  @Int32()
+  external int _ExtendedDoublesShaderInstructions;
+
+  @Int32()
+  external int _ExtendedResourceSharing;
+
+  /// Specifies whether logic operations are available in blend state.
+  bool get OutputMergerLogicOp => _OutputMergerLogicOp != FALSE;
+
+  set OutputMergerLogicOp(bool value) =>
+      _OutputMergerLogicOp = value ? TRUE : FALSE;
+
+  /// Specifies whether the driver can render with no render target views (RTVs)
+  /// or depth stencil views (DSVs), and only unordered access views (UAVs)
+  /// bound.
+  bool get UAVOnlyRenderingForcedSampleCount =>
+      _UAVOnlyRenderingForcedSampleCount != FALSE;
+
+  set UAVOnlyRenderingForcedSampleCount(bool value) =>
+      _UAVOnlyRenderingForcedSampleCount = value ? TRUE : FALSE;
+
+  /// Specifies whether the driver supports the <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11_1/nf-d3d11_1-id3d11devicecontext1-discardview">ID3D11DeviceContext1::DiscardView</a>
+  /// and <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11_1/nf-d3d11_1-id3d11devicecontext1-discardresource">ID3D11DeviceContext1::DiscardResource</a>
+  /// methods.
+  bool get DiscardAPIsSeenByDriver => _DiscardAPIsSeenByDriver != FALSE;
+
+  set DiscardAPIsSeenByDriver(bool value) =>
+      _DiscardAPIsSeenByDriver = value ? TRUE : FALSE;
+
+  /// Specifies whether the driver supports new semantics for copy and update
+  /// that are exposed by the <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11_1/nf-d3d11_1-id3d11devicecontext1-copysubresourceregion1">ID3D11DeviceContext1::CopySubresourceRegion1</a>
+  /// and <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11_1/nf-d3d11_1-id3d11devicecontext1-updatesubresource1">ID3D11DeviceContext1::UpdateSubresource1</a>
+  /// methods.
+  bool get FlagsForUpdateAndCopySeenByDriver =>
+      _FlagsForUpdateAndCopySeenByDriver != FALSE;
+
+  set FlagsForUpdateAndCopySeenByDriver(bool value) =>
+      _FlagsForUpdateAndCopySeenByDriver = value ? TRUE : FALSE;
+
+  /// Specifies whether the driver supports the <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11_1/nf-d3d11_1-id3d11devicecontext1-clearview">ID3D11DeviceContext1::ClearView</a>
+  /// method.
+  bool get ClearView => _ClearView != FALSE;
+
+  set ClearView(bool value) => _ClearView = value ? TRUE : FALSE;
+
+  /// Specifies whether you can call <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11_1/nf-d3d11_1-id3d11devicecontext1-copysubresourceregion1">ID3D11DeviceContext1::CopySubresourceRegion1</a>
+  /// with overlapping source and destination rectangles.
+  bool get CopyWithOverlap => _CopyWithOverlap != FALSE;
+
+  set CopyWithOverlap(bool value) => _CopyWithOverlap = value ? TRUE : FALSE;
+
+  /// Specifies whether the driver supports partial updates of constant buffers.
+  bool get ConstantBufferPartialUpdate => _ConstantBufferPartialUpdate != FALSE;
+
+  set ConstantBufferPartialUpdate(bool value) =>
+      _ConstantBufferPartialUpdate = value ? TRUE : FALSE;
+
+  /// Specifies whether the driver supports new semantics for setting offsets in
+  /// constant buffers for a shader.
+  bool get ConstantBufferOffsetting => _ConstantBufferOffsetting != FALSE;
+
+  set ConstantBufferOffsetting(bool value) =>
+      _ConstantBufferOffsetting = value ? TRUE : FALSE;
+
+  /// Specifies whether you can call <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-map">ID3D11DeviceContext::Map</a>
+  /// with <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_map">D3D11_MAP_WRITE_NO_OVERWRITE</a>
+  /// on a dynamic constant buffer (that is, whether the driver supports this
+  /// operation).
+  bool get MapNoOverwriteOnDynamicConstantBuffer =>
+      _MapNoOverwriteOnDynamicConstantBuffer != FALSE;
+
+  set MapNoOverwriteOnDynamicConstantBuffer(bool value) =>
+      _MapNoOverwriteOnDynamicConstantBuffer = value ? TRUE : FALSE;
+
+  /// Specifies whether you can call <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-map">ID3D11DeviceContext::Map</a>
+  /// with <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_map">D3D11_MAP_WRITE_NO_OVERWRITE</a>
+  /// on a dynamic buffer SRV (that is, whether the driver supports this
+  /// operation).
+  bool get MapNoOverwriteOnDynamicBufferSRV =>
+      _MapNoOverwriteOnDynamicBufferSRV != FALSE;
+
+  set MapNoOverwriteOnDynamicBufferSRV(bool value) =>
+      _MapNoOverwriteOnDynamicBufferSRV = value ? TRUE : FALSE;
+
+  /// Specifies whether the driver supports multisample rendering when you
+  /// render with RTVs bound.
+  bool get MultisampleRTVWithForcedSampleCountOne =>
+      _MultisampleRTVWithForcedSampleCountOne != FALSE;
+
+  set MultisampleRTVWithForcedSampleCountOne(bool value) =>
+      _MultisampleRTVWithForcedSampleCountOne = value ? TRUE : FALSE;
+
+  /// Specifies whether the hardware and driver support the <a
+  /// href="https://docs.microsoft.com/windows/desktop/direct3dhlsl/dx-graphics-hlsl-msad4">msad4</a>
+  /// intrinsic function in shaders.
+  bool get SAD4ShaderInstructions => _SAD4ShaderInstructions != FALSE;
+
+  set SAD4ShaderInstructions(bool value) =>
+      _SAD4ShaderInstructions = value ? TRUE : FALSE;
+
+  /// Specifies whether the hardware and driver support the <a
+  /// href="https://docs.microsoft.com/windows/desktop/direct3dhlsl/dx-graphics-hlsl-fma">fma</a>
+  /// intrinsic function and other extended doubles instructions (<b>DDIV</b>
+  /// and <b>DRCP</b>) in shaders.
+  bool get ExtendedDoublesShaderInstructions =>
+      _ExtendedDoublesShaderInstructions != FALSE;
+
+  set ExtendedDoublesShaderInstructions(bool value) =>
+      _ExtendedDoublesShaderInstructions = value ? TRUE : FALSE;
+
+  /// Specifies whether the hardware and driver have `extended support for
+  /// shared Texture2D resource types and formats`.
+  bool get ExtendedResourceSharing => _ExtendedResourceSharing != FALSE;
+
+  set ExtendedResourceSharing(bool value) =>
+      _ExtendedResourceSharing = value ? TRUE : FALSE;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_FEATURE_DATA_D3D11_OPTIONS> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes Direct3D 11.2 feature options in the current graphics driver.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_feature_data_d3d11_options1>.
+///
+/// {@category struct}
+base class D3D11_FEATURE_DATA_D3D11_OPTIONS1 extends Struct {
+  @Int32()
+  external int _TiledResourcesTier;
+
+  @Int32()
+  external int _MinMaxFiltering;
+
+  @Int32()
+  external int _ClearViewAlsoSupportsDepthOnlyFormats;
+
+  @Int32()
+  external int _MapOnDefaultBuffers;
+
+  /// Specifies whether the hardware and driver support tiled resources.
+  D3D11_TILED_RESOURCES_TIER get TiledResourcesTier =>
+      D3D11_TILED_RESOURCES_TIER(_TiledResourcesTier);
+
+  set TiledResourcesTier(D3D11_TILED_RESOURCES_TIER value) =>
+      _TiledResourcesTier = value;
+
+  /// Specifies whether the hardware and driver support the filtering options
+  /// (<a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_filter">D3D11_FILTER</a>)
+  /// of comparing the result to the minimum or maximum value during texture
+  /// sampling.
+  bool get MinMaxFiltering => _MinMaxFiltering != FALSE;
+
+  set MinMaxFiltering(bool value) => _MinMaxFiltering = value ? TRUE : FALSE;
+
+  /// Specifies whether the hardware and driver also support the <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11_1/nf-d3d11_1-id3d11devicecontext1-clearview">ID3D11DeviceContext1::ClearView</a>
+  /// method on depth formats.
+  bool get ClearViewAlsoSupportsDepthOnlyFormats =>
+      _ClearViewAlsoSupportsDepthOnlyFormats != FALSE;
+
+  set ClearViewAlsoSupportsDepthOnlyFormats(bool value) =>
+      _ClearViewAlsoSupportsDepthOnlyFormats = value ? TRUE : FALSE;
+
+  /// Specifies support for creating <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nn-d3d11-id3d11buffer">ID3D11Buffer</a>
+  /// resources that can be passed to the <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-map">ID3D11DeviceContext::Map</a>
+  /// and <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-unmap">ID3D11DeviceContext::Unmap</a>
+  /// methods.
+  bool get MapOnDefaultBuffers => _MapOnDefaultBuffers != FALSE;
+
+  set MapOnDefaultBuffers(bool value) =>
+      _MapOnDefaultBuffers = value ? TRUE : FALSE;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_FEATURE_DATA_D3D11_OPTIONS1> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes Direct3D 11.3 feature options in the current graphics driver.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_feature_data_d3d11_options2>.
+///
+/// {@category struct}
+base class D3D11_FEATURE_DATA_D3D11_OPTIONS2 extends Struct {
+  @Int32()
+  external int _PSSpecifiedStencilRefSupported;
+
+  @Int32()
+  external int _TypedUAVLoadAdditionalFormats;
+
+  @Int32()
+  external int _ROVsSupported;
+
+  @Int32()
+  external int _ConservativeRasterizationTier;
+
+  @Int32()
+  external int _TiledResourcesTier;
+
+  @Int32()
+  external int _MapOnDefaultTextures;
+
+  @Int32()
+  external int _StandardSwizzle;
+
+  @Int32()
+  external int _UnifiedMemoryArchitecture;
+
+  /// Specifies whether the hardware and driver support
+  /// <b>PSSpecifiedStencilRef</b>.
+  bool get PSSpecifiedStencilRefSupported =>
+      _PSSpecifiedStencilRefSupported != FALSE;
+
+  set PSSpecifiedStencilRefSupported(bool value) =>
+      _PSSpecifiedStencilRefSupported = value ? TRUE : FALSE;
+
+  /// Specifies whether the hardware and driver support
+  /// <b>TypedUAVLoadAdditionalFormats</b>.
+  bool get TypedUAVLoadAdditionalFormats =>
+      _TypedUAVLoadAdditionalFormats != FALSE;
+
+  set TypedUAVLoadAdditionalFormats(bool value) =>
+      _TypedUAVLoadAdditionalFormats = value ? TRUE : FALSE;
+
+  /// Specifies whether the hardware and driver support ROVs.
+  bool get ROVsSupported => _ROVsSupported != FALSE;
+
+  set ROVsSupported(bool value) => _ROVsSupported = value ? TRUE : FALSE;
+
+  /// Specifies whether the hardware and driver support conservative
+  /// rasterization.
+  D3D11_CONSERVATIVE_RASTERIZATION_TIER get ConservativeRasterizationTier =>
+      D3D11_CONSERVATIVE_RASTERIZATION_TIER(_ConservativeRasterizationTier);
+
+  set ConservativeRasterizationTier(
+    D3D11_CONSERVATIVE_RASTERIZATION_TIER value,
+  ) => _ConservativeRasterizationTier = value;
+
+  /// Specifies whether the hardware and driver support tiled resources.
+  D3D11_TILED_RESOURCES_TIER get TiledResourcesTier =>
+      D3D11_TILED_RESOURCES_TIER(_TiledResourcesTier);
+
+  set TiledResourcesTier(D3D11_TILED_RESOURCES_TIER value) =>
+      _TiledResourcesTier = value;
+
+  /// Specifies whether the hardware and driver support mapping on default
+  /// textures.
+  bool get MapOnDefaultTextures => _MapOnDefaultTextures != FALSE;
+
+  set MapOnDefaultTextures(bool value) =>
+      _MapOnDefaultTextures = value ? TRUE : FALSE;
+
+  /// Specifies whether the hardware and driver support standard swizzle.
+  bool get StandardSwizzle => _StandardSwizzle != FALSE;
+
+  set StandardSwizzle(bool value) => _StandardSwizzle = value ? TRUE : FALSE;
+
+  /// Specifies whether the hardware and driver support Unified Memory
+  /// Architecture.
+  bool get UnifiedMemoryArchitecture => _UnifiedMemoryArchitecture != FALSE;
+
+  set UnifiedMemoryArchitecture(bool value) =>
+      _UnifiedMemoryArchitecture = value ? TRUE : FALSE;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_FEATURE_DATA_D3D11_OPTIONS2> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes Direct3D 11.3 feature options in the current graphics driver.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_feature_data_d3d11_options3>.
+///
+/// {@category struct}
+base class D3D11_FEATURE_DATA_D3D11_OPTIONS3 extends Struct {
+  @Int32()
+  external int _VPAndRTArrayIndexFromAnyShaderFeedingRasterizer;
+
+  /// Whether to use the VP and RT array index from any shader feeding the
+  /// rasterizer.
+  bool get VPAndRTArrayIndexFromAnyShaderFeedingRasterizer =>
+      _VPAndRTArrayIndexFromAnyShaderFeedingRasterizer != FALSE;
+
+  set VPAndRTArrayIndexFromAnyShaderFeedingRasterizer(bool value) =>
+      _VPAndRTArrayIndexFromAnyShaderFeedingRasterizer = value ? TRUE : FALSE;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_FEATURE_DATA_D3D11_OPTIONS3> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes Direct3D 11.4 feature options in the current graphics driver.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_4/ns-d3d11_4-d3d11_feature_data_d3d11_options4>.
+///
+/// {@category struct}
+base class D3D11_FEATURE_DATA_D3D11_OPTIONS4 extends Struct {
+  @Int32()
+  external int _ExtendedNV12SharedTextureSupported;
+
+  /// Specifies a BOOL that determines if NV12 textures can be shared across
+  /// processes and D3D devices.
+  bool get ExtendedNV12SharedTextureSupported =>
+      _ExtendedNV12SharedTextureSupported != FALSE;
+
+  set ExtendedNV12SharedTextureSupported(bool value) =>
+      _ExtendedNV12SharedTextureSupported = value ? TRUE : FALSE;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_FEATURE_DATA_D3D11_OPTIONS4> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes the level of support for shared resources in the current graphics
+/// driver.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_feature_data_d3d11_options5>.
+///
+/// {@category struct}
+base class D3D11_FEATURE_DATA_D3D11_OPTIONS5 extends Struct {
+  @Int32()
+  external int _SharedResourceTier;
+
+  /// The level of support for shared resources in the current graphics driver.
+  D3D11_SHARED_RESOURCE_TIER get SharedResourceTier =>
+      D3D11_SHARED_RESOURCE_TIER(_SharedResourceTier);
+
+  set SharedResourceTier(D3D11_SHARED_RESOURCE_TIER value) =>
+      _SharedResourceTier = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_FEATURE_DATA_D3D11_OPTIONS5> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// {@category struct}
+base class D3D11_FEATURE_DATA_D3D11_OPTIONS6 extends Struct {
+  @Int32()
+  external int _ShaderAccessRestrictedResourceTier;
+
+  D3D11_SHADER_ACCESS_RESTRICTED_RESOURCE_TIER
+  get ShaderAccessRestrictedResourceTier =>
+      D3D11_SHADER_ACCESS_RESTRICTED_RESOURCE_TIER(
+        _ShaderAccessRestrictedResourceTier,
+      );
+  set ShaderAccessRestrictedResourceTier(
+    D3D11_SHADER_ACCESS_RESTRICTED_RESOURCE_TIER value,
+  ) => _ShaderAccessRestrictedResourceTier = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_FEATURE_DATA_D3D11_OPTIONS6> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes Direct3D 9 feature options in the current graphics driver.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_feature_data_d3d9_options>.
+///
+/// {@category struct}
+base class D3D11_FEATURE_DATA_D3D9_OPTIONS extends Struct {
+  @Int32()
+  external int _FullNonPow2TextureSupport;
+
+  /// Specifies whether the driver supports the nonpowers-of-2-unconditionally
+  /// feature.
+  bool get FullNonPow2TextureSupport => _FullNonPow2TextureSupport != FALSE;
+
+  set FullNonPow2TextureSupport(bool value) =>
+      _FullNonPow2TextureSupport = value ? TRUE : FALSE;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_FEATURE_DATA_D3D9_OPTIONS> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes Direct3D 9 feature options in the current graphics driver.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_feature_data_d3d9_options1>.
+///
+/// {@category struct}
+base class D3D11_FEATURE_DATA_D3D9_OPTIONS1 extends Struct {
+  @Int32()
+  external int _FullNonPow2TextureSupported;
+
+  @Int32()
+  external int _DepthAsTextureWithLessEqualComparisonFilterSupported;
+
+  @Int32()
+  external int _SimpleInstancingSupported;
+
+  @Int32()
+  external int _TextureCubeFaceRenderTargetWithNonCubeDepthStencilSupported;
+
+  /// Specifies whether the driver supports the nonpowers-of-2-unconditionally
+  /// feature.
+  bool get FullNonPow2TextureSupported => _FullNonPow2TextureSupported != FALSE;
+
+  set FullNonPow2TextureSupported(bool value) =>
+      _FullNonPow2TextureSupported = value ? TRUE : FALSE;
+
+  /// Specifies whether the driver supports the shadowing feature with the
+  /// comparison-filtering mode set to less than or equal to.
+  bool get DepthAsTextureWithLessEqualComparisonFilterSupported =>
+      _DepthAsTextureWithLessEqualComparisonFilterSupported != FALSE;
+
+  set DepthAsTextureWithLessEqualComparisonFilterSupported(bool value) =>
+      _DepthAsTextureWithLessEqualComparisonFilterSupported = value
+      ? TRUE
+      : FALSE;
+
+  /// Specifies whether the hardware and driver support simple instancing.
+  bool get SimpleInstancingSupported => _SimpleInstancingSupported != FALSE;
+
+  set SimpleInstancingSupported(bool value) =>
+      _SimpleInstancingSupported = value ? TRUE : FALSE;
+
+  /// Specifies whether the hardware and driver support setting a single face of
+  /// a <a
+  /// href="https://docs.microsoft.com/windows/desktop/direct3dhlsl/texturecube">TextureCube</a>
+  /// as a render target while the depth stencil surface that is bound alongside
+  /// can be a <a
+  /// href="https://docs.microsoft.com/windows/desktop/direct3dhlsl/sm5-object-texture2d">Texture2D</a>
+  /// (as opposed to <b>TextureCube</b>).
+  bool get TextureCubeFaceRenderTargetWithNonCubeDepthStencilSupported =>
+      _TextureCubeFaceRenderTargetWithNonCubeDepthStencilSupported != FALSE;
+
+  set TextureCubeFaceRenderTargetWithNonCubeDepthStencilSupported(bool value) =>
+      _TextureCubeFaceRenderTargetWithNonCubeDepthStencilSupported = value
+      ? TRUE
+      : FALSE;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_FEATURE_DATA_D3D9_OPTIONS1> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes Direct3D 9 shadow support in the current graphics driver.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_feature_data_d3d9_shadow_support>.
+///
+/// {@category struct}
+base class D3D11_FEATURE_DATA_D3D9_SHADOW_SUPPORT extends Struct {
+  @Int32()
+  external int _SupportsDepthAsTextureWithLessEqualComparisonFilter;
+
+  /// Specifies whether the driver supports the shadowing feature with the
+  /// comparison-filtering mode set to less than or equal to.
+  bool get SupportsDepthAsTextureWithLessEqualComparisonFilter =>
+      _SupportsDepthAsTextureWithLessEqualComparisonFilter != FALSE;
+
+  set SupportsDepthAsTextureWithLessEqualComparisonFilter(bool value) =>
+      _SupportsDepthAsTextureWithLessEqualComparisonFilter = value
+      ? TRUE
+      : FALSE;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_FEATURE_DATA_D3D9_SHADOW_SUPPORT> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes whether simple instancing is supported.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_feature_data_d3d9_simple_instancing_support>.
+///
+/// {@category struct}
+base class D3D11_FEATURE_DATA_D3D9_SIMPLE_INSTANCING_SUPPORT extends Struct {
+  @Int32()
+  external int _SimpleInstancingSupported;
+
+  /// Specifies whether the hardware and driver support simple instancing.
+  bool get SimpleInstancingSupported => _SimpleInstancingSupported != FALSE;
+
+  set SimpleInstancingSupported(bool value) =>
+      _SimpleInstancingSupported = value ? TRUE : FALSE;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_FEATURE_DATA_D3D9_SIMPLE_INSTANCING_SUPPORT> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes the level of displayable surfaces supported in the current
+/// graphics driver.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_feature_data_displayable>.
+///
+/// {@category struct}
+base class D3D11_FEATURE_DATA_DISPLAYABLE extends Struct {
+  @Int32()
+  external int _DisplayableTexture;
+
+  @Int32()
+  external int _SharedResourceTier;
+
+  /// `true` if the driver supports displayable surfaces; otherwise, `false`.
+  bool get DisplayableTexture => _DisplayableTexture != FALSE;
+
+  set DisplayableTexture(bool value) =>
+      _DisplayableTexture = value ? TRUE : FALSE;
+
+  /// The level of support for shared resources in the current graphics driver.
+  D3D11_SHARED_RESOURCE_TIER get SharedResourceTier =>
+      D3D11_SHARED_RESOURCE_TIER(_SharedResourceTier);
+
+  set SharedResourceTier(D3D11_SHARED_RESOURCE_TIER value) =>
+      _SharedResourceTier = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_FEATURE_DATA_DISPLAYABLE> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes double data type support in the current graphics driver.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_feature_data_doubles>.
+///
+/// {@category struct}
+base class D3D11_FEATURE_DATA_DOUBLES extends Struct {
+  @Int32()
+  external int _DoublePrecisionFloatShaderOps;
+
+  /// Specifies whether <a
+  /// href="https://docs.microsoft.com/windows/desktop/direct3dhlsl/dx-graphics-hlsl-scalar">double</a>
+  /// types are allowed.
+  bool get DoublePrecisionFloatShaderOps =>
+      _DoublePrecisionFloatShaderOps != FALSE;
+
+  set DoublePrecisionFloatShaderOps(bool value) =>
+      _DoublePrecisionFloatShaderOps = value ? TRUE : FALSE;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_FEATURE_DATA_DOUBLES> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes which resources are supported by the current graphics driver for a
+/// given format.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_feature_data_format_support>.
+///
+/// {@category struct}
+base class D3D11_FEATURE_DATA_FORMAT_SUPPORT extends Struct {
+  @Int32()
+  external int _InFormat;
+
+  /// Combination of <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_format_support">D3D11_FORMAT_SUPPORT</a>
+  /// flags indicating which resources are supported.
+  @Uint32()
+  external int OutFormatSupport;
+
+  /// <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/dxgiformat/ne-dxgiformat-dxgi_format">DXGI_FORMAT</a>
+  /// to return information on.
+  DXGI_FORMAT get InFormat => DXGI_FORMAT(_InFormat);
+
+  set InFormat(DXGI_FORMAT value) => _InFormat = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_FEATURE_DATA_FORMAT_SUPPORT> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes which unordered resource options are supported by the current
+/// graphics driver for a given format.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_feature_data_format_support2>.
+///
+/// {@category struct}
+base class D3D11_FEATURE_DATA_FORMAT_SUPPORT2 extends Struct {
+  @Int32()
+  external int _InFormat;
+
+  /// Combination of <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_format_support2">D3D11_FORMAT_SUPPORT2</a>
+  /// flags indicating which unordered resource options are supported.
+  @Uint32()
+  external int OutFormatSupport2;
+
+  /// <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/dxgiformat/ne-dxgiformat-dxgi_format">DXGI_FORMAT</a>
+  /// to return information on.
+  DXGI_FORMAT get InFormat => DXGI_FORMAT(_InFormat);
+
+  set InFormat(DXGI_FORMAT value) => _InFormat = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_FEATURE_DATA_FORMAT_SUPPORT2> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes feature data GPU virtual address support, including maximum
+/// address bits per resource and per process.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_feature_data_gpu_virtual_address_support>.
+///
+/// {@category struct}
+base class D3D11_FEATURE_DATA_GPU_VIRTUAL_ADDRESS_SUPPORT extends Struct {
+  /// The maximum GPU virtual address bits per resource.
+  @Uint32()
+  external int MaxGPUVirtualAddressBitsPerResource;
+
+  /// The maximum GPU virtual address bits per process.
+  @Uint32()
+  external int MaxGPUVirtualAddressBitsPerProcess;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_FEATURE_DATA_GPU_VIRTUAL_ADDRESS_SUPPORT> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes whether a GPU profiling technique is supported.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_feature_data_marker_support>.
+///
+/// {@category struct}
+base class D3D11_FEATURE_DATA_MARKER_SUPPORT extends Struct {
+  @Int32()
+  external int _Profile;
+
+  /// Specifies whether the hardware and driver support a GPU profiling
+  /// technique that can be used with development tools.
+  bool get Profile => _Profile != FALSE;
+
+  set Profile(bool value) => _Profile = value ? TRUE : FALSE;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_FEATURE_DATA_MARKER_SUPPORT> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes the level of shader caching supported in the current graphics
+/// driver.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_feature_data_shader_cache>.
+///
+/// {@category struct}
+base class D3D11_FEATURE_DATA_SHADER_CACHE extends Struct {
+  /// Indicates the level of caching supported.
+  @Uint32()
+  external int SupportFlags;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_FEATURE_DATA_SHADER_CACHE> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes precision support options for shaders in the current graphics
+/// driver.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_feature_data_shader_min_precision_support>.
+///
+/// {@category struct}
+base class D3D11_FEATURE_DATA_SHADER_MIN_PRECISION_SUPPORT extends Struct {
+  /// A combination of <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_shader_min_precision_support">D3D11_SHADER_MIN_PRECISION_SUPPORT</a>-typed
+  /// values that are combined by using a bitwise OR operation.
+  @Uint32()
+  external int PixelShaderMinPrecision;
+
+  /// A combination of <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_shader_min_precision_support">D3D11_SHADER_MIN_PRECISION_SUPPORT</a>-typed
+  /// values that are combined by using a bitwise OR operation.
+  @Uint32()
+  external int AllOtherShaderStagesMinPrecision;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_FEATURE_DATA_SHADER_MIN_PRECISION_SUPPORT> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes the multi-threading features that are supported by the current
+/// graphics driver.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_feature_data_threading>.
+///
+/// {@category struct}
+base class D3D11_FEATURE_DATA_THREADING extends Struct {
+  @Int32()
+  external int _DriverConcurrentCreates;
+
+  @Int32()
+  external int _DriverCommandLists;
+
+  /// `[TRUE]` means resources can be created concurrently on multiple threads
+  /// while drawing; `[FALSE]` means that the presence of coarse synchronization
+  /// will prevent concurrency.
+  bool get DriverConcurrentCreates => _DriverConcurrentCreates != FALSE;
+
+  set DriverConcurrentCreates(bool value) =>
+      _DriverConcurrentCreates = value ? TRUE : FALSE;
+
+  /// `[TRUE]` means command lists are supported by the current driver;
+  /// `[FALSE]` means that the API will emulate deferred contexts and command
+  /// lists with software.
+  bool get DriverCommandLists => _DriverCommandLists != FALSE;
+
+  set DriverCommandLists(bool value) =>
+      _DriverCommandLists = value ? TRUE : FALSE;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_FEATURE_DATA_THREADING> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Provides data for calls to ID3D11VideoDevice2::CheckFeatureSupport when the
+/// feature specified is D3D11_FEATURE_VIDEO_DECODER_HISTOGRAM.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_4/ns-d3d11_4-d3d11_feature_data_video_decoder_histogram>.
+///
+/// {@category struct}
+base class D3D11_FEATURE_DATA_VIDEO_DECODER_HISTOGRAM extends Struct {
+  /// A `D3D11_VIDEO_DECODER_DESC` structure containing the decoder description
+  /// for the decoder to be used with decode histogram.
+  external D3D11_VIDEO_DECODER_DESC DecoderDesc;
+
+  @Int32()
+  external int _Components;
+
+  /// The number of per component bins supported.
+  @Uint32()
+  external int BinCount;
+
+  /// The bit depth of the bin counter.
+  @Uint32()
+  external int CounterBitDepth;
+
+  /// A bitwise OR combination of values from the
+  /// `D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAGS` enumeration specifying the
+  /// components of a DXGI_FORMAT for which histogram support will be queried.
+  D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAGS get Components =>
+      D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAGS(_Components);
+
+  set Components(D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAGS value) =>
+      _Components = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_FEATURE_DATA_VIDEO_DECODER_HISTOGRAM> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes a function.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_function_desc>.
+///
+/// {@category struct}
+base class D3D11_FUNCTION_DESC extends Struct {
+  /// The shader version.
+  @Uint32()
+  external int Version;
+
+  external Pointer<Utf8> _Creator;
+
+  /// A combination of <a
+  /// href="https://docs.microsoft.com/windows/desktop/direct3dhlsl/d3dcompile-constants">D3DCOMPILE
+  /// Constants</a> that are combined by using a bitwise OR operation.
+  @Uint32()
+  external int Flags;
+
+  /// The number of constant buffers for the function.
+  @Uint32()
+  external int ConstantBuffers;
+
+  /// The number of bound resources for the function.
+  @Uint32()
+  external int BoundResources;
+
+  /// The number of emitted instructions for the function.
+  @Uint32()
+  external int InstructionCount;
+
+  /// The number of temporary registers used by the function.
+  @Uint32()
+  external int TempRegisterCount;
+
+  /// The number of temporary arrays used by the function.
+  @Uint32()
+  external int TempArrayCount;
+
+  /// The number of constant defines for the function.
+  @Uint32()
+  external int DefCount;
+
+  /// The number of declarations (input + output) for the function.
+  @Uint32()
+  external int DclCount;
+
+  /// The number of non-categorized texture instructions for the function.
+  @Uint32()
+  external int TextureNormalInstructions;
+
+  /// The number of texture load instructions for the function.
+  @Uint32()
+  external int TextureLoadInstructions;
+
+  /// The number of texture comparison instructions for the function.
+  @Uint32()
+  external int TextureCompInstructions;
+
+  /// The number of texture bias instructions for the function.
+  @Uint32()
+  external int TextureBiasInstructions;
+
+  /// The number of texture gradient instructions for the function.
+  @Uint32()
+  external int TextureGradientInstructions;
+
+  /// The number of floating point arithmetic instructions used by the function.
+  @Uint32()
+  external int FloatInstructionCount;
+
+  /// The number of signed integer arithmetic instructions used by the function.
+  @Uint32()
+  external int IntInstructionCount;
+
+  /// The number of unsigned integer arithmetic instructions used by the
+  /// function.
+  @Uint32()
+  external int UintInstructionCount;
+
+  /// The number of static flow control instructions used by the function.
+  @Uint32()
+  external int StaticFlowControlCount;
+
+  /// The number of dynamic flow control instructions used by the function.
+  @Uint32()
+  external int DynamicFlowControlCount;
+
+  /// The number of macro instructions used by the function.
+  @Uint32()
+  external int MacroInstructionCount;
+
+  /// The number of array instructions used by the function.
+  @Uint32()
+  external int ArrayInstructionCount;
+
+  /// The number of mov instructions used by the function.
+  @Uint32()
+  external int MovInstructionCount;
+
+  /// The number of movc instructions used by the function.
+  @Uint32()
+  external int MovcInstructionCount;
+
+  /// The number of type conversion instructions used by the function.
+  @Uint32()
+  external int ConversionInstructionCount;
+
+  /// The number of bitwise arithmetic instructions used by the function.
+  @Uint32()
+  external int BitwiseInstructionCount;
+
+  @Int32()
+  external int _MinFeatureLevel;
+
+  /// A value that contains a combination of one or more shader requirements
+  /// flags; each flag specifies a requirement of the shader.
+  @Uint64()
+  external int RequiredFeatureFlags;
+
+  external Pointer<Utf8> _Name;
+
+  /// The number of logical parameters in the function signature, not including
+  /// the return value.
+  @Int32()
+  external int FunctionParameterCount;
+
+  @Int32()
+  external int _HasReturn;
+
+  @Int32()
+  external int _Has10Level9VertexShader;
+
+  @Int32()
+  external int _Has10Level9PixelShader;
+
+  /// The name of the originator of the function.
+  PSTR get Creator => PSTR(_Creator);
+
+  set Creator(PSTR value) => _Creator = value;
+
+  /// A <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3dcommon/ne-d3dcommon-d3d_feature_level">D3D_FEATURE_LEVEL</a>-typed
+  /// value that specifies the minimum Direct3D feature level target of the
+  /// function byte code.
+  D3D_FEATURE_LEVEL get MinFeatureLevel => D3D_FEATURE_LEVEL(_MinFeatureLevel);
+
+  set MinFeatureLevel(D3D_FEATURE_LEVEL value) => _MinFeatureLevel = value;
+
+  /// The name of the function.
+  PSTR get Name => PSTR(_Name);
+
+  set Name(PSTR value) => _Name = value;
+
+  /// Indicates whether the function returns a value.
+  bool get HasReturn => _HasReturn != FALSE;
+
+  set HasReturn(bool value) => _HasReturn = value ? TRUE : FALSE;
+
+  /// Indicates whether there is a Direct3D 10Level9 vertex shader blob.
+  bool get Has10Level9VertexShader => _Has10Level9VertexShader != FALSE;
+
+  set Has10Level9VertexShader(bool value) =>
+      _Has10Level9VertexShader = value ? TRUE : FALSE;
+
+  /// Indicates whether there is a Direct3D 10Level9 pixel shader blob.
+  bool get Has10Level9PixelShader => _Has10Level9PixelShader != FALSE;
+
+  set Has10Level9PixelShader(bool value) =>
+      _Has10Level9PixelShader = value ? TRUE : FALSE;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_FUNCTION_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes an instance of a geometry shader to trace.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11shadertracing/ns-d3d11shadertracing-d3d11_geometry_shader_trace_desc>.
+///
+/// {@category struct}
+base class D3D11_GEOMETRY_SHADER_TRACE_DESC extends Struct {
+  /// The invocation number of the instance of the geometry shader.
+  @Uint64()
+  external int Invocation;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_GEOMETRY_SHADER_TRACE_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes an instance of a hull shader to trace.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11shadertracing/ns-d3d11shadertracing-d3d11_hull_shader_trace_desc>.
+///
+/// {@category struct}
+base class D3D11_HULL_SHADER_TRACE_DESC extends Struct {
+  /// The invocation number of the instance of the hull shader.
+  @Uint64()
+  external int Invocation;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_HULL_SHADER_TRACE_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Debug message filter; contains a lists of message types to allow or deny.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11sdklayers/ns-d3d11sdklayers-d3d11_info_queue_filter>.
+///
+/// {@category struct}
+base class D3D11_INFO_QUEUE_FILTER extends Struct {
+  /// Types of messages that you want to allow.
+  external D3D11_INFO_QUEUE_FILTER_DESC AllowList;
+
+  /// Types of messages that you want to deny.
+  external D3D11_INFO_QUEUE_FILTER_DESC DenyList;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_INFO_QUEUE_FILTER> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Allow or deny certain types of messages to pass through a filter.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11sdklayers/ns-d3d11sdklayers-d3d11_info_queue_filter_desc>.
+///
+/// {@category struct}
+base class D3D11_INFO_QUEUE_FILTER_DESC extends Struct {
+  /// Number of message categories to allow or deny.
+  @Uint32()
+  external int NumCategories;
+
+  /// Array of message categories to allow or deny.
+  external Pointer<Int32> pCategoryList;
+
+  /// Number of message severity levels to allow or deny.
+  @Uint32()
+  external int NumSeverities;
+
+  /// Array of message severity levels to allow or deny.
+  external Pointer<Int32> pSeverityList;
+
+  /// Number of message IDs to allow or deny.
+  @Uint32()
+  external int NumIDs;
+
+  /// Array of message IDs to allow or deny.
+  external Pointer<Int32> pIDList;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_INFO_QUEUE_FILTER_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// A description of a single element for the input-assembler stage.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_input_element_desc>.
+///
+/// {@category struct}
+base class D3D11_INPUT_ELEMENT_DESC extends Struct {
+  external Pointer<Utf8> _SemanticName;
+
+  /// The semantic index for the element.
+  @Uint32()
+  external int SemanticIndex;
+
+  @Int32()
+  external int _Format;
+
+  /// An integer value that identifies the input-assembler (see input slot).
+  @Uint32()
+  external int InputSlot;
+
+  /// Optional.
+  @Uint32()
+  external int AlignedByteOffset;
+
+  @Int32()
+  external int _InputSlotClass;
+
+  /// The number of instances to draw using the same per-instance data before
+  /// advancing in the buffer by one element.
+  @Uint32()
+  external int InstanceDataStepRate;
+
+  /// The HLSL semantic associated with this element in a shader
+  /// input-signature.
+  PSTR get SemanticName => PSTR(_SemanticName);
+
+  set SemanticName(PSTR value) => _SemanticName = value;
+
+  /// The data type of the element data.
+  DXGI_FORMAT get Format => DXGI_FORMAT(_Format);
+
+  set Format(DXGI_FORMAT value) => _Format = value;
+
+  /// Identifies the input data class for a single input slot (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_input_classification">D3D11_INPUT_CLASSIFICATION</a>).
+  D3D11_INPUT_CLASSIFICATION get InputSlotClass =>
+      D3D11_INPUT_CLASSIFICATION(_InputSlotClass);
+
+  set InputSlotClass(D3D11_INPUT_CLASSIFICATION value) =>
+      _InputSlotClass = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_INPUT_ELEMENT_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Represents key exchange data for hardware content protection.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_1/ns-d3d11_1-d3d11_key_exchange_hw_protection_data>.
+///
+/// {@category struct}
+base class D3D11_KEY_EXCHANGE_HW_PROTECTION_DATA extends Struct {
+  /// The function ID of the DRM command.
+  @Uint32()
+  external int HWProtectionFunctionID;
+
+  /// Pointer to a buffer containing a <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11_1/ns-d3d11_1-d3d11_key_exchange_hw_protection_input_data">D3D11_KEY_EXCHANGE_HW_PROTECTION_INPUT_DATA</a>
+  /// structure that specifies memory reserved for IHV use and the input data
+  /// for the DRM command.
+  external Pointer<D3D11_KEY_EXCHANGE_HW_PROTECTION_INPUT_DATA> pInputData;
+
+  /// Pointer to a buffer containing a <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11_1/ns-d3d11_1-d3d11_key_exchange_hw_protection_output_data">D3D11_KEY_EXCHANGE_HW_PROTECTION_OUTPUT_DATA</a>
+  /// structure that specifies memory reserved for IHV use and the input data
+  /// for the DRM command.
+  external Pointer<D3D11_KEY_EXCHANGE_HW_PROTECTION_OUTPUT_DATA> pOutputData;
+
+  @Int32()
+  external int _Status;
+
+  /// The result of the hardware DRM command.
+  HRESULT get Status => HRESULT(_Status);
+
+  set Status(HRESULT value) => _Status = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_KEY_EXCHANGE_HW_PROTECTION_DATA> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Represents key exchange input data for hardware content protection.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_1/ns-d3d11_1-d3d11_key_exchange_hw_protection_input_data>.
+///
+/// {@category struct}
+base class D3D11_KEY_EXCHANGE_HW_PROTECTION_INPUT_DATA extends Struct {
+  /// The size of the private data reserved for IHV usage.
+  @Uint32()
+  external int PrivateDataSize;
+
+  /// The size of the DRM command data.
+  @Uint32()
+  external int HWProtectionDataSize;
+
+  /// If <b>PrivateDataSize</b> is greater than 0, pbInput`[0]` –
+  /// <b>pbInput</b>[<b>PrivateDataSize</b> - 1] is reserved for IHV use.
+  @Array(4)
+  external Array<Uint8> pbInput;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_KEY_EXCHANGE_HW_PROTECTION_INPUT_DATA> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Represents key exchange output data for hardware content protection.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_1/ns-d3d11_1-d3d11_key_exchange_hw_protection_output_data>.
+///
+/// {@category struct}
+base class D3D11_KEY_EXCHANGE_HW_PROTECTION_OUTPUT_DATA extends Struct {
+  /// The size of the private data reserved for IHV usage.
+  @Uint32()
+  external int PrivateDataSize;
+
+  /// The maximum size of data that the driver can return in the output buffer.
+  @Uint32()
+  external int MaxHWProtectionDataSize;
+
+  /// The size of the output data written by the driver.
+  @Uint32()
+  external int HWProtectionDataSize;
+
+  /// The number of 100 nanosecond units spent transporting the data.
+  @Uint64()
+  external int TransportTime;
+
+  /// The number of 100 nanosecond units spent executing the content protection
+  /// command.
+  @Uint64()
+  external int ExecutionTime;
+
+  /// If <b>PrivateDataSize</b> is greater than 0, pbInput`[0]` –
+  /// <b>pbOutput</b>[<b>PrivateDataSize</b> - 1] is reserved for IHV use.
+  @Array(4)
+  external Array<Uint8> pbOutput;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_KEY_EXCHANGE_HW_PROTECTION_OUTPUT_DATA> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes a library.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_library_desc>.
+///
+/// {@category struct}
+base class D3D11_LIBRARY_DESC extends Struct {
+  external Pointer<Utf8> _Creator;
+
+  /// A combination of <a
+  /// href="https://docs.microsoft.com/windows/desktop/direct3dhlsl/d3dcompile-constants">D3DCOMPILE
+  /// Constants</a> that are combined by using a bitwise OR operation.
+  @Uint32()
+  external int Flags;
+
+  /// The number of functions exported from the library.
+  @Uint32()
+  external int FunctionCount;
+
+  /// The name of the originator of the library.
+  PSTR get Creator => PSTR(_Creator);
+
+  set Creator(PSTR value) => _Creator = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_LIBRARY_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Provides access to subresource data.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_mapped_subresource>.
+///
+/// {@category struct}
+base class D3D11_MAPPED_SUBRESOURCE extends Struct {
+  /// Pointer to the data.
+  external Pointer pData;
+
+  /// The row pitch, or width, or physical size (in bytes) of the data.
+  @Uint32()
+  external int RowPitch;
+
+  /// The depth pitch, or width, or physical size (in bytes)of the data.
+  @Uint32()
+  external int DepthPitch;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_MAPPED_SUBRESOURCE> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// A debug message in the Information Queue.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11sdklayers/ns-d3d11sdklayers-d3d11_message>.
+///
+/// {@category struct}
+base class D3D11_MESSAGE extends Struct {
+  @Int32()
+  external int _Category;
+
+  @Int32()
+  external int _Severity;
+
+  @Int32()
+  external int _ID;
+
+  /// The message string.
+  external Pointer<Uint8> pDescription;
+
+  /// The length of pDescription in bytes.
+  @IntPtr()
+  external int DescriptionByteLength;
+
+  /// The category of the message.
+  D3D11_MESSAGE_CATEGORY get Category => D3D11_MESSAGE_CATEGORY(_Category);
+
+  set Category(D3D11_MESSAGE_CATEGORY value) => _Category = value;
+
+  /// The severity of the message.
+  D3D11_MESSAGE_SEVERITY get Severity => D3D11_MESSAGE_SEVERITY(_Severity);
+
+  set Severity(D3D11_MESSAGE_SEVERITY value) => _Severity = value;
+
+  /// The ID of the message.
+  D3D11_MESSAGE_ID get ID => D3D11_MESSAGE_ID(_ID);
+
+  set ID(D3D11_MESSAGE_ID value) => _ID = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_MESSAGE> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Contains a Message Authentication Code (MAC).
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_omac>.
+///
+/// {@category struct}
+base class D3D11_OMAC extends Struct {
+  /// A byte array that contains the cryptographic MAC value of the message.
+  @Array(16)
+  external Array<Uint8> Omac;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_OMAC> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Describes the tile structure of a tiled resource with mipmaps.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_2/ns-d3d11_2-d3d11_packed_mip_desc>.
+///
+/// {@category struct}
+base class D3D11_PACKED_MIP_DESC extends Struct {
+  /// Number of standard mipmaps in the tiled resource.
+  @Uint8()
+  external int NumStandardMips;
+
+  /// Number of packed mipmaps in the tiled resource.
+  @Uint8()
+  external int NumPackedMips;
+
+  /// Number of tiles for the packed mipmaps in the tiled resource.
+  @Uint32()
+  external int NumTilesForPackedMips;
+
+  /// Offset of the first packed tile for the resource in the overall range of
+  /// tiles.
+  @Uint32()
+  external int StartTileIndexInOverallResource;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_PACKED_MIP_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes a function parameter.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_parameter_desc>.
+///
+/// {@category struct}
+base class D3D11_PARAMETER_DESC extends Struct {
+  external Pointer<Utf8> _Name;
+  external Pointer<Utf8> _SemanticName;
+
+  @Int32()
+  external int _Type;
+
+  @Int32()
+  external int _Class;
+
+  /// The number of rows for a matrix parameter.
+  @Uint32()
+  external int Rows;
+
+  /// The number of columns for a matrix parameter.
+  @Uint32()
+  external int Columns;
+
+  @Int32()
+  external int _InterpolationMode;
+
+  @Int32()
+  external int _Flags;
+
+  /// The first input register for this parameter.
+  @Uint32()
+  external int FirstInRegister;
+
+  /// The first input register component for this parameter.
+  @Uint32()
+  external int FirstInComponent;
+
+  /// The first output register for this parameter.
+  @Uint32()
+  external int FirstOutRegister;
+
+  /// The first output register component for this parameter.
+  @Uint32()
+  external int FirstOutComponent;
+
+  /// The name of the function parameter.
+  PSTR get Name => PSTR(_Name);
+
+  set Name(PSTR value) => _Name = value;
+
+  /// The HLSL <a
+  /// href="https://docs.microsoft.com/windows/desktop/direct3dhlsl/dx-graphics-hlsl-semantics">semantic</a>
+  /// that is associated with this function parameter.
+  PSTR get SemanticName => PSTR(_SemanticName);
+
+  set SemanticName(PSTR value) => _SemanticName = value;
+
+  /// A <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3dcommon/ne-d3dcommon-d3d_shader_variable_type">D3D_SHADER_VARIABLE_TYPE</a>-typed
+  /// value that identifies the variable type for the parameter.
+  D3D_SHADER_VARIABLE_TYPE get Type => D3D_SHADER_VARIABLE_TYPE(_Type);
+
+  set Type(D3D_SHADER_VARIABLE_TYPE value) => _Type = value;
+
+  /// A <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3dcommon/ne-d3dcommon-d3d_shader_variable_class">D3D_SHADER_VARIABLE_CLASS</a>-typed
+  /// value that identifies the variable class for the parameter as one of
+  /// scalar, vector, matrix, object, and so on.
+  D3D_SHADER_VARIABLE_CLASS get Class => D3D_SHADER_VARIABLE_CLASS(_Class);
+
+  set Class(D3D_SHADER_VARIABLE_CLASS value) => _Class = value;
+
+  /// A <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3dcommon/ne-d3dcommon-d3d_interpolation_mode">D3D_INTERPOLATION_MODE</a>-typed
+  /// value that identifies the interpolation mode for the parameter.
+  D3D_INTERPOLATION_MODE get InterpolationMode =>
+      D3D_INTERPOLATION_MODE(_InterpolationMode);
+
+  set InterpolationMode(D3D_INTERPOLATION_MODE value) =>
+      _InterpolationMode = value;
+
+  /// A combination of <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3dcommon/ne-d3dcommon-d3d_parameter_flags">D3D_PARAMETER_FLAGS</a>-typed
+  /// values that are combined by using a bitwise OR operation.
+  D3D_PARAMETER_FLAGS get Flags => D3D_PARAMETER_FLAGS(_Flags);
+
+  set Flags(D3D_PARAMETER_FLAGS value) => _Flags = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_PARAMETER_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes an instance of a pixel shader to trace.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11shadertracing/ns-d3d11shadertracing-d3d11_pixel_shader_trace_desc>.
+///
+/// {@category struct}
+base class D3D11_PIXEL_SHADER_TRACE_DESC extends Struct {
+  /// The invocation number of the instance of the pixel shader.
+  @Uint64()
+  external int Invocation;
+
+  /// The x-coordinate of the pixel.
+  @Int32()
+  external int X;
+
+  /// The y-coordinate of the pixel.
+  @Int32()
+  external int Y;
+
+  /// A value that describes a mask of pixel samples to trace.
+  @Uint64()
+  external int SampleMask;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_PIXEL_SHADER_TRACE_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Query information about graphics-pipeline activity in between calls to
+/// ID3D11DeviceContext::Begin and ID3D11DeviceContext::End.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_query_data_pipeline_statistics>.
+///
+/// {@category struct}
+base class D3D11_QUERY_DATA_PIPELINE_STATISTICS extends Struct {
+  /// Number of vertices read by input assembler.
+  @Uint64()
+  external int IAVertices;
+
+  /// Number of primitives read by the input assembler.
+  @Uint64()
+  external int IAPrimitives;
+
+  /// Number of times a vertex shader was invoked.
+  @Uint64()
+  external int VSInvocations;
+
+  /// Number of times a geometry shader was invoked.
+  @Uint64()
+  external int GSInvocations;
+
+  /// Number of primitives output by a geometry shader.
+  @Uint64()
+  external int GSPrimitives;
+
+  /// Number of primitives that were sent to the rasterizer.
+  @Uint64()
+  external int CInvocations;
+
+  /// Number of primitives that were rendered.
+  @Uint64()
+  external int CPrimitives;
+
+  /// Number of times a pixel shader was invoked.
+  @Uint64()
+  external int PSInvocations;
+
+  /// Number of times a hull shader was invoked.
+  @Uint64()
+  external int HSInvocations;
+
+  /// Number of times a domain shader was invoked.
+  @Uint64()
+  external int DSInvocations;
+
+  /// Number of times a compute shader was invoked.
+  @Uint64()
+  external int CSInvocations;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_QUERY_DATA_PIPELINE_STATISTICS> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Query information about the amount of data streamed out to the stream-output
+/// buffers in between ID3D11DeviceContext::Begin and ID3D11DeviceContext::End.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_query_data_so_statistics>.
+///
+/// {@category struct}
+base class D3D11_QUERY_DATA_SO_STATISTICS extends Struct {
+  /// Number of primitives (that is, points, lines, and triangles) written to
+  /// the stream-output buffers.
+  @Uint64()
+  external int NumPrimitivesWritten;
+
+  /// Number of primitives that would have been written to the stream-output
+  /// buffers if there had been enough space for them all.
+  @Uint64()
+  external int PrimitivesStorageNeeded;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_QUERY_DATA_SO_STATISTICS> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Query information about the reliability of a timestamp query.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_query_data_timestamp_disjoint>.
+///
+/// {@category struct}
+base class D3D11_QUERY_DATA_TIMESTAMP_DISJOINT extends Struct {
+  /// How frequently the GPU counter increments in Hz.
+  @Uint64()
+  external int Frequency;
+
+  @Int32()
+  external int _Disjoint;
+
+  /// If this is `[TRUE]`, something occurred in between the query's <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-begin">ID3D11DeviceContext::Begin</a>
+  /// and <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-end">ID3D11DeviceContext::End</a>
+  /// calls that caused the timestamp counter to become discontinuous or
+  /// disjoint, such as unplugging the AC cord on a laptop, overheating, or
+  /// throttling up/down due to laptop savings events.
+  bool get Disjoint => _Disjoint != FALSE;
+
+  set Disjoint(bool value) => _Disjoint = value ? TRUE : FALSE;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_QUERY_DATA_TIMESTAMP_DISJOINT> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes a query.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_query_desc>.
+///
+/// {@category struct}
+base class D3D11_QUERY_DESC extends Struct {
+  @Int32()
+  external int _Query;
+
+  /// Miscellaneous flags (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_query_misc_flag">D3D11_QUERY_MISC_FLAG</a>).
+  @Uint32()
+  external int MiscFlags;
+
+  /// Type of query (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_query">D3D11_QUERY</a>).
+  D3D11_QUERY get Query => D3D11_QUERY(_Query);
+
+  set Query(D3D11_QUERY value) => _Query = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_QUERY_DESC> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Describes a query.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_3/ns-d3d11_3-d3d11_query_desc1>.
+///
+/// {@category struct}
+base class D3D11_QUERY_DESC1 extends Struct {
+  @Int32()
+  external int _Query;
+
+  /// A combination of <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_query_misc_flag">D3D11_QUERY_MISC_FLAG</a>-typed
+  /// values that are combined by using a bitwise OR operation.
+  @Uint32()
+  external int MiscFlags;
+
+  @Int32()
+  external int _ContextType;
+
+  /// A <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_query">D3D11_QUERY</a>-typed
+  /// value that specifies the type of query.
+  D3D11_QUERY get Query => D3D11_QUERY(_Query);
+
+  set Query(D3D11_QUERY value) => _Query = value;
+
+  /// A <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11_3/ne-d3d11_3-d3d11_context_type">D3D11_CONTEXT_TYPE</a>-typed
+  /// value that specifies the context for the query.
+  D3D11_CONTEXT_TYPE get ContextType => D3D11_CONTEXT_TYPE(_ContextType);
+
+  set ContextType(D3D11_CONTEXT_TYPE value) => _ContextType = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_QUERY_DESC1> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Describes rasterizer state.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_rasterizer_desc>.
+///
+/// {@category struct}
+base class D3D11_RASTERIZER_DESC extends Struct {
+  @Int32()
+  external int _FillMode;
+
+  @Int32()
+  external int _CullMode;
+
+  @Int32()
+  external int _FrontCounterClockwise;
+
+  /// Depth value added to a given pixel.
+  @Int32()
+  external int DepthBias;
+
+  /// Maximum depth bias of a pixel.
+  @Float()
+  external double DepthBiasClamp;
+
+  /// Scalar on a given pixel's slope.
+  @Float()
+  external double SlopeScaledDepthBias;
+
+  @Int32()
+  external int _DepthClipEnable;
+
+  @Int32()
+  external int _ScissorEnable;
+
+  @Int32()
+  external int _MultisampleEnable;
+
+  @Int32()
+  external int _AntialiasedLineEnable;
+
+  /// Determines the fill mode to use when rendering (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_fill_mode">D3D11_FILL_MODE</a>).
+  D3D11_FILL_MODE get FillMode => D3D11_FILL_MODE(_FillMode);
+
+  set FillMode(D3D11_FILL_MODE value) => _FillMode = value;
+
+  /// Indicates triangles facing the specified direction are not drawn (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_cull_mode">D3D11_CULL_MODE</a>).
+  D3D11_CULL_MODE get CullMode => D3D11_CULL_MODE(_CullMode);
+
+  set CullMode(D3D11_CULL_MODE value) => _CullMode = value;
+
+  /// Determines if a triangle is front- or back-facing.
+  bool get FrontCounterClockwise => _FrontCounterClockwise != FALSE;
+
+  set FrontCounterClockwise(bool value) =>
+      _FrontCounterClockwise = value ? TRUE : FALSE;
+
+  /// Enable clipping based on distance.
+  bool get DepthClipEnable => _DepthClipEnable != FALSE;
+
+  set DepthClipEnable(bool value) => _DepthClipEnable = value ? TRUE : FALSE;
+
+  /// Enable scissor-rectangle culling.
+  bool get ScissorEnable => _ScissorEnable != FALSE;
+
+  set ScissorEnable(bool value) => _ScissorEnable = value ? TRUE : FALSE;
+
+  /// Specifies whether to use the quadrilateral or alpha line anti-aliasing
+  /// algorithm on multisample antialiasing (MSAA) render targets.
+  bool get MultisampleEnable => _MultisampleEnable != FALSE;
+
+  set MultisampleEnable(bool value) =>
+      _MultisampleEnable = value ? TRUE : FALSE;
+
+  /// Specifies whether to enable line antialiasing; only applies if doing line
+  /// drawing and <b>MultisampleEnable</b> is `[FALSE]`.
+  bool get AntialiasedLineEnable => _AntialiasedLineEnable != FALSE;
+
+  set AntialiasedLineEnable(bool value) =>
+      _AntialiasedLineEnable = value ? TRUE : FALSE;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_RASTERIZER_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes rasterizer state.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_1/ns-d3d11_1-d3d11_rasterizer_desc1>.
+///
+/// {@category struct}
+base class D3D11_RASTERIZER_DESC1 extends Struct {
+  @Int32()
+  external int _FillMode;
+
+  @Int32()
+  external int _CullMode;
+
+  @Int32()
+  external int _FrontCounterClockwise;
+
+  /// Depth value added to a given pixel.
+  @Int32()
+  external int DepthBias;
+
+  /// Maximum depth bias of a pixel.
+  @Float()
+  external double DepthBiasClamp;
+
+  /// Scalar on a given pixel's slope.
+  @Float()
+  external double SlopeScaledDepthBias;
+
+  @Int32()
+  external int _DepthClipEnable;
+
+  @Int32()
+  external int _ScissorEnable;
+
+  @Int32()
+  external int _MultisampleEnable;
+
+  @Int32()
+  external int _AntialiasedLineEnable;
+
+  /// The sample count that is forced while UAV rendering or rasterizing.
+  @Uint32()
+  external int ForcedSampleCount;
+
+  /// Determines the fill mode to use when rendering.
+  D3D11_FILL_MODE get FillMode => D3D11_FILL_MODE(_FillMode);
+
+  set FillMode(D3D11_FILL_MODE value) => _FillMode = value;
+
+  /// Indicates that triangles facing the specified direction are not drawn.
+  D3D11_CULL_MODE get CullMode => D3D11_CULL_MODE(_CullMode);
+
+  set CullMode(D3D11_CULL_MODE value) => _CullMode = value;
+
+  /// Specifies whether a triangle is front- or back-facing.
+  bool get FrontCounterClockwise => _FrontCounterClockwise != FALSE;
+
+  set FrontCounterClockwise(bool value) =>
+      _FrontCounterClockwise = value ? TRUE : FALSE;
+
+  /// Specifies whether to enable clipping based on distance.
+  bool get DepthClipEnable => _DepthClipEnable != FALSE;
+
+  set DepthClipEnable(bool value) => _DepthClipEnable = value ? TRUE : FALSE;
+
+  /// Specifies whether to enable scissor-rectangle culling.
+  bool get ScissorEnable => _ScissorEnable != FALSE;
+
+  set ScissorEnable(bool value) => _ScissorEnable = value ? TRUE : FALSE;
+
+  /// Specifies whether to use the quadrilateral or alpha line anti-aliasing
+  /// algorithm on multisample antialiasing (MSAA) render targets.
+  bool get MultisampleEnable => _MultisampleEnable != FALSE;
+
+  set MultisampleEnable(bool value) =>
+      _MultisampleEnable = value ? TRUE : FALSE;
+
+  /// Specifies whether to enable line antialiasing; only applies if doing line
+  /// drawing and <b>MultisampleEnable</b> is `[FALSE]`.
+  bool get AntialiasedLineEnable => _AntialiasedLineEnable != FALSE;
+
+  set AntialiasedLineEnable(bool value) =>
+      _AntialiasedLineEnable = value ? TRUE : FALSE;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_RASTERIZER_DESC1> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes rasterizer state.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_3/ns-d3d11_3-d3d11_rasterizer_desc2>.
+///
+/// {@category struct}
+base class D3D11_RASTERIZER_DESC2 extends Struct {
+  @Int32()
+  external int _FillMode;
+
+  @Int32()
+  external int _CullMode;
+
+  @Int32()
+  external int _FrontCounterClockwise;
+
+  /// Depth value added to a given pixel.
+  @Int32()
+  external int DepthBias;
+
+  /// Maximum depth bias of a pixel.
+  @Float()
+  external double DepthBiasClamp;
+
+  /// Scalar on a given pixel's slope.
+  @Float()
+  external double SlopeScaledDepthBias;
+
+  @Int32()
+  external int _DepthClipEnable;
+
+  @Int32()
+  external int _ScissorEnable;
+
+  @Int32()
+  external int _MultisampleEnable;
+
+  @Int32()
+  external int _AntialiasedLineEnable;
+
+  /// The sample count that is forced while UAV rendering or rasterizing.
+  @Uint32()
+  external int ForcedSampleCount;
+
+  @Int32()
+  external int _ConservativeRaster;
+
+  /// A <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_fill_mode">D3D11_FILL_MODE</a>-typed
+  /// value that determines the fill mode to use when rendering.
+  D3D11_FILL_MODE get FillMode => D3D11_FILL_MODE(_FillMode);
+
+  set FillMode(D3D11_FILL_MODE value) => _FillMode = value;
+
+  /// A <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_cull_mode">D3D11_CULL_MODE</a>-typed
+  /// value that indicates that triangles facing the specified direction are not
+  /// drawn.
+  D3D11_CULL_MODE get CullMode => D3D11_CULL_MODE(_CullMode);
+
+  set CullMode(D3D11_CULL_MODE value) => _CullMode = value;
+
+  /// Specifies whether a triangle is front- or back-facing.
+  bool get FrontCounterClockwise => _FrontCounterClockwise != FALSE;
+
+  set FrontCounterClockwise(bool value) =>
+      _FrontCounterClockwise = value ? TRUE : FALSE;
+
+  /// Specifies whether to enable clipping based on distance.
+  bool get DepthClipEnable => _DepthClipEnable != FALSE;
+
+  set DepthClipEnable(bool value) => _DepthClipEnable = value ? TRUE : FALSE;
+
+  /// Specifies whether to enable scissor-rectangle culling.
+  bool get ScissorEnable => _ScissorEnable != FALSE;
+
+  set ScissorEnable(bool value) => _ScissorEnable = value ? TRUE : FALSE;
+
+  /// Specifies whether to use the quadrilateral or alpha line anti-aliasing
+  /// algorithm on multisample antialiasing (MSAA) render targets.
+  bool get MultisampleEnable => _MultisampleEnable != FALSE;
+
+  set MultisampleEnable(bool value) =>
+      _MultisampleEnable = value ? TRUE : FALSE;
+
+  /// Specifies whether to enable line antialiasing; only applies if doing line
+  /// drawing and <b>MultisampleEnable</b> is `[FALSE]`.
+  bool get AntialiasedLineEnable => _AntialiasedLineEnable != FALSE;
+
+  set AntialiasedLineEnable(bool value) =>
+      _AntialiasedLineEnable = value ? TRUE : FALSE;
+
+  /// A <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11_3/ne-d3d11_3-d3d11_conservative_rasterization_mode">D3D11_CONSERVATIVE_RASTERIZATION_MODE</a>-typed
+  /// value that identifies whether conservative rasterization is on or off.
+  D3D11_CONSERVATIVE_RASTERIZATION_MODE get ConservativeRaster =>
+      D3D11_CONSERVATIVE_RASTERIZATION_MODE(_ConservativeRaster);
+
+  set ConservativeRaster(D3D11_CONSERVATIVE_RASTERIZATION_MODE value) =>
+      _ConservativeRaster = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_RASTERIZER_DESC2> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes the blend state for a render target.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_render_target_blend_desc>.
+///
+/// {@category struct}
+base class D3D11_RENDER_TARGET_BLEND_DESC extends Struct {
+  @Int32()
+  external int _BlendEnable;
+
+  @Int32()
+  external int _SrcBlend;
+
+  @Int32()
+  external int _DestBlend;
+
+  @Int32()
+  external int _BlendOp;
+
+  @Int32()
+  external int _SrcBlendAlpha;
+
+  @Int32()
+  external int _DestBlendAlpha;
+
+  @Int32()
+  external int _BlendOpAlpha;
+
+  /// A write mask.
+  @Uint8()
+  external int RenderTargetWriteMask;
+
+  /// Enable (or disable) blending.
+  bool get BlendEnable => _BlendEnable != FALSE;
+
+  set BlendEnable(bool value) => _BlendEnable = value ? TRUE : FALSE;
+
+  /// This <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_blend">blend
+  /// option</a> specifies the operation to perform on the RGB value that the
+  /// pixel shader outputs.
+  D3D11_BLEND get SrcBlend => D3D11_BLEND(_SrcBlend);
+
+  set SrcBlend(D3D11_BLEND value) => _SrcBlend = value;
+
+  /// This <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_blend">blend
+  /// option</a> specifies the operation to perform on the current RGB value in
+  /// the render target.
+  D3D11_BLEND get DestBlend => D3D11_BLEND(_DestBlend);
+
+  set DestBlend(D3D11_BLEND value) => _DestBlend = value;
+
+  /// This <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_blend_op">blend
+  /// operation</a> defines how to combine the <b>SrcBlend</b> and
+  /// <b>DestBlend</b> operations.
+  D3D11_BLEND_OP get BlendOp => D3D11_BLEND_OP(_BlendOp);
+
+  set BlendOp(D3D11_BLEND_OP value) => _BlendOp = value;
+
+  /// This <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_blend">blend
+  /// option</a> specifies the operation to perform on the alpha value that the
+  /// pixel shader outputs.
+  D3D11_BLEND get SrcBlendAlpha => D3D11_BLEND(_SrcBlendAlpha);
+
+  set SrcBlendAlpha(D3D11_BLEND value) => _SrcBlendAlpha = value;
+
+  /// This <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_blend">blend
+  /// option</a> specifies the operation to perform on the current alpha value
+  /// in the render target.
+  D3D11_BLEND get DestBlendAlpha => D3D11_BLEND(_DestBlendAlpha);
+
+  set DestBlendAlpha(D3D11_BLEND value) => _DestBlendAlpha = value;
+
+  /// This <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_blend_op">blend
+  /// operation</a> defines how to combine the <b>SrcBlendAlpha</b> and
+  /// <b>DestBlendAlpha</b> operations.
+  D3D11_BLEND_OP get BlendOpAlpha => D3D11_BLEND_OP(_BlendOpAlpha);
+
+  set BlendOpAlpha(D3D11_BLEND_OP value) => _BlendOpAlpha = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_RENDER_TARGET_BLEND_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes the blend state for a render target.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_1/ns-d3d11_1-d3d11_render_target_blend_desc1>.
+///
+/// {@category struct}
+base class D3D11_RENDER_TARGET_BLEND_DESC1 extends Struct {
+  @Int32()
+  external int _BlendEnable;
+
+  @Int32()
+  external int _LogicOpEnable;
+
+  @Int32()
+  external int _SrcBlend;
+
+  @Int32()
+  external int _DestBlend;
+
+  @Int32()
+  external int _BlendOp;
+
+  @Int32()
+  external int _SrcBlendAlpha;
+
+  @Int32()
+  external int _DestBlendAlpha;
+
+  @Int32()
+  external int _BlendOpAlpha;
+
+  @Int32()
+  external int _LogicOp;
+
+  /// A write mask.
+  @Uint8()
+  external int RenderTargetWriteMask;
+
+  /// Enable (or disable) blending.
+  bool get BlendEnable => _BlendEnable != FALSE;
+
+  set BlendEnable(bool value) => _BlendEnable = value ? TRUE : FALSE;
+
+  /// Enable (or disable) a logical operation.
+  bool get LogicOpEnable => _LogicOpEnable != FALSE;
+
+  set LogicOpEnable(bool value) => _LogicOpEnable = value ? TRUE : FALSE;
+
+  /// This <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_blend">blend
+  /// option</a> specifies the operation to perform on the RGB value that the
+  /// pixel shader outputs.
+  D3D11_BLEND get SrcBlend => D3D11_BLEND(_SrcBlend);
+
+  set SrcBlend(D3D11_BLEND value) => _SrcBlend = value;
+
+  /// This <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_blend">blend
+  /// option</a> specifies the operation to perform on the current RGB value in
+  /// the render target.
+  D3D11_BLEND get DestBlend => D3D11_BLEND(_DestBlend);
+
+  set DestBlend(D3D11_BLEND value) => _DestBlend = value;
+
+  /// This <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_blend_op">blend
+  /// operation</a> defines how to combine the <b>SrcBlend</b> and
+  /// <b>DestBlend</b> operations.
+  D3D11_BLEND_OP get BlendOp => D3D11_BLEND_OP(_BlendOp);
+
+  set BlendOp(D3D11_BLEND_OP value) => _BlendOp = value;
+
+  /// This <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_blend">blend
+  /// option</a> specifies the operation to perform on the alpha value that the
+  /// pixel shader outputs.
+  D3D11_BLEND get SrcBlendAlpha => D3D11_BLEND(_SrcBlendAlpha);
+
+  set SrcBlendAlpha(D3D11_BLEND value) => _SrcBlendAlpha = value;
+
+  /// This <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_blend">blend
+  /// option</a> specifies the operation to perform on the current alpha value
+  /// in the render target.
+  D3D11_BLEND get DestBlendAlpha => D3D11_BLEND(_DestBlendAlpha);
+
+  set DestBlendAlpha(D3D11_BLEND value) => _DestBlendAlpha = value;
+
+  /// This <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_blend_op">blend
+  /// operation</a> defines how to combine the <b>SrcBlendAlpha</b> and
+  /// <b>DestBlendAlpha</b> operations.
+  D3D11_BLEND_OP get BlendOpAlpha => D3D11_BLEND_OP(_BlendOpAlpha);
+
+  set BlendOpAlpha(D3D11_BLEND_OP value) => _BlendOpAlpha = value;
+
+  /// A <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11_1/ne-d3d11_1-d3d11_logic_op">D3D11_LOGIC_OP</a>-typed
+  /// value that specifies the logical operation to configure for the render
+  /// target.
+  D3D11_LOGIC_OP get LogicOp => D3D11_LOGIC_OP(_LogicOp);
+
+  set LogicOp(D3D11_LOGIC_OP value) => _LogicOp = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_RENDER_TARGET_BLEND_DESC1> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Specifies the subresources from a resource that are accessible using a
+/// render-target view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_render_target_view_desc>.
+///
+/// {@category struct}
+base class D3D11_RENDER_TARGET_VIEW_DESC extends Struct {
+  @Int32()
+  external int _Format;
+
+  @Int32()
+  external int _ViewDimension;
+
+  external D3D11_RENDER_TARGET_VIEW_DESC_0 Anonymous;
+
+  /// The data format (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/dxgiformat/ne-dxgiformat-dxgi_format">DXGI_FORMAT</a>).
+  DXGI_FORMAT get Format => DXGI_FORMAT(_Format);
+
+  set Format(DXGI_FORMAT value) => _Format = value;
+
+  /// The resource type (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_rtv_dimension">D3D11_RTV_DIMENSION</a>),
+  /// which specifies how the render-target resource will be accessed.
+  D3D11_RTV_DIMENSION get ViewDimension => D3D11_RTV_DIMENSION(_ViewDimension);
+
+  set ViewDimension(D3D11_RTV_DIMENSION value) => _ViewDimension = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_RENDER_TARGET_VIEW_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// {@category union}
+sealed class D3D11_RENDER_TARGET_VIEW_DESC_0 extends Union {
+  external D3D11_BUFFER_RTV Buffer;
+  external D3D11_TEX1D_RTV Texture1D;
+  external D3D11_TEX1D_ARRAY_RTV Texture1DArray;
+  external D3D11_TEX2D_RTV Texture2D;
+  external D3D11_TEX2D_ARRAY_RTV Texture2DArray;
+  external D3D11_TEX2DMS_RTV Texture2DMS;
+  external D3D11_TEX2DMS_ARRAY_RTV Texture2DMSArray;
+  external D3D11_TEX3D_RTV Texture3D;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_RENDER_TARGET_VIEW_DESC_0> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+extension D3D11_RENDER_TARGET_VIEW_DESC_0_Extension
+    on D3D11_RENDER_TARGET_VIEW_DESC {
+  D3D11_BUFFER_RTV get Buffer => this.Anonymous.Buffer;
+  set Buffer(D3D11_BUFFER_RTV value) => this.Anonymous.Buffer = value;
+  D3D11_TEX1D_RTV get Texture1D => this.Anonymous.Texture1D;
+  set Texture1D(D3D11_TEX1D_RTV value) => this.Anonymous.Texture1D = value;
+  D3D11_TEX1D_ARRAY_RTV get Texture1DArray => this.Anonymous.Texture1DArray;
+  set Texture1DArray(D3D11_TEX1D_ARRAY_RTV value) =>
+      this.Anonymous.Texture1DArray = value;
+  D3D11_TEX2D_RTV get Texture2D => this.Anonymous.Texture2D;
+  set Texture2D(D3D11_TEX2D_RTV value) => this.Anonymous.Texture2D = value;
+  D3D11_TEX2D_ARRAY_RTV get Texture2DArray => this.Anonymous.Texture2DArray;
+  set Texture2DArray(D3D11_TEX2D_ARRAY_RTV value) =>
+      this.Anonymous.Texture2DArray = value;
+  D3D11_TEX2DMS_RTV get Texture2DMS => this.Anonymous.Texture2DMS;
+  set Texture2DMS(D3D11_TEX2DMS_RTV value) =>
+      this.Anonymous.Texture2DMS = value;
+  D3D11_TEX2DMS_ARRAY_RTV get Texture2DMSArray =>
+      this.Anonymous.Texture2DMSArray;
+  set Texture2DMSArray(D3D11_TEX2DMS_ARRAY_RTV value) =>
+      this.Anonymous.Texture2DMSArray = value;
+  D3D11_TEX3D_RTV get Texture3D => this.Anonymous.Texture3D;
+  set Texture3D(D3D11_TEX3D_RTV value) => this.Anonymous.Texture3D = value;
+}
+
+/// Describes the subresources from a resource that are accessible using a
+/// render-target view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_3/ns-d3d11_3-d3d11_render_target_view_desc1>.
+///
+/// {@category struct}
+base class D3D11_RENDER_TARGET_VIEW_DESC1 extends Struct {
+  @Int32()
+  external int _Format;
+
+  @Int32()
+  external int _ViewDimension;
+
+  external D3D11_RENDER_TARGET_VIEW_DESC1_0 Anonymous;
+
+  /// A <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/dxgiformat/ne-dxgiformat-dxgi_format">DXGI_FORMAT</a>-typed
+  /// value that specifies the data format.
+  DXGI_FORMAT get Format => DXGI_FORMAT(_Format);
+
+  set Format(DXGI_FORMAT value) => _Format = value;
+
+  /// A <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_rtv_dimension">D3D11_RTV_DIMENSION</a>-typed
+  /// value that specifies the resource type and how the render-target resource
+  /// will be accessed.
+  D3D11_RTV_DIMENSION get ViewDimension => D3D11_RTV_DIMENSION(_ViewDimension);
+
+  set ViewDimension(D3D11_RTV_DIMENSION value) => _ViewDimension = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_RENDER_TARGET_VIEW_DESC1> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// {@category union}
+sealed class D3D11_RENDER_TARGET_VIEW_DESC1_0 extends Union {
+  external D3D11_BUFFER_RTV Buffer;
+  external D3D11_TEX1D_RTV Texture1D;
+  external D3D11_TEX1D_ARRAY_RTV Texture1DArray;
+  external D3D11_TEX2D_RTV1 Texture2D;
+  external D3D11_TEX2D_ARRAY_RTV1 Texture2DArray;
+  external D3D11_TEX2DMS_RTV Texture2DMS;
+  external D3D11_TEX2DMS_ARRAY_RTV Texture2DMSArray;
+  external D3D11_TEX3D_RTV Texture3D;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_RENDER_TARGET_VIEW_DESC1_0> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+extension D3D11_RENDER_TARGET_VIEW_DESC1_0_Extension
+    on D3D11_RENDER_TARGET_VIEW_DESC1 {
+  D3D11_BUFFER_RTV get Buffer => this.Anonymous.Buffer;
+  set Buffer(D3D11_BUFFER_RTV value) => this.Anonymous.Buffer = value;
+  D3D11_TEX1D_RTV get Texture1D => this.Anonymous.Texture1D;
+  set Texture1D(D3D11_TEX1D_RTV value) => this.Anonymous.Texture1D = value;
+  D3D11_TEX1D_ARRAY_RTV get Texture1DArray => this.Anonymous.Texture1DArray;
+  set Texture1DArray(D3D11_TEX1D_ARRAY_RTV value) =>
+      this.Anonymous.Texture1DArray = value;
+  D3D11_TEX2D_RTV1 get Texture2D => this.Anonymous.Texture2D;
+  set Texture2D(D3D11_TEX2D_RTV1 value) => this.Anonymous.Texture2D = value;
+  D3D11_TEX2D_ARRAY_RTV1 get Texture2DArray => this.Anonymous.Texture2DArray;
+  set Texture2DArray(D3D11_TEX2D_ARRAY_RTV1 value) =>
+      this.Anonymous.Texture2DArray = value;
+  D3D11_TEX2DMS_RTV get Texture2DMS => this.Anonymous.Texture2DMS;
+  set Texture2DMS(D3D11_TEX2DMS_RTV value) =>
+      this.Anonymous.Texture2DMS = value;
+  D3D11_TEX2DMS_ARRAY_RTV get Texture2DMSArray =>
+      this.Anonymous.Texture2DMSArray;
+  set Texture2DMSArray(D3D11_TEX2DMS_ARRAY_RTV value) =>
+      this.Anonymous.Texture2DMSArray = value;
+  D3D11_TEX3D_RTV get Texture3D => this.Anonymous.Texture3D;
+  set Texture3D(D3D11_TEX3D_RTV value) => this.Anonymous.Texture3D = value;
+}
+
+/// Describes a sampler state.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_sampler_desc>.
+///
+/// {@category struct}
+base class D3D11_SAMPLER_DESC extends Struct {
+  @Int32()
+  external int _Filter;
+
+  @Int32()
+  external int _AddressU;
+
+  @Int32()
+  external int _AddressV;
+
+  @Int32()
+  external int _AddressW;
+
+  /// Offset from the calculated mipmap level.
+  @Float()
+  external double MipLODBias;
+
+  /// Clamping value used if D3D11_FILTER_ANISOTROPIC or
+  /// D3D11_FILTER_COMPARISON_ANISOTROPIC is specified in Filter.
+  @Uint32()
+  external int MaxAnisotropy;
+
+  @Int32()
+  external int _ComparisonFunc;
+
+  /// Border color to use if D3D11_TEXTURE_ADDRESS_BORDER is specified for
+  /// AddressU, AddressV, or AddressW.
+  @Array(4)
+  external Array<Float> BorderColor;
+
+  /// Lower end of the mipmap range to clamp access to, where 0 is the largest
+  /// and most detailed mipmap level and any level higher than that is less
+  /// detailed.
+  @Float()
+  external double MinLOD;
+
+  /// Upper end of the mipmap range to clamp access to, where 0 is the largest
+  /// and most detailed mipmap level and any level higher than that is less
+  /// detailed.
+  @Float()
+  external double MaxLOD;
+
+  /// Filtering method to use when sampling a texture (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_filter">D3D11_FILTER</a>).
+  D3D11_FILTER get Filter => D3D11_FILTER(_Filter);
+
+  set Filter(D3D11_FILTER value) => _Filter = value;
+
+  /// Method to use for resolving a u texture coordinate that is outside the 0
+  /// to 1 range (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_texture_address_mode">D3D11_TEXTURE_ADDRESS_MODE</a>).
+  D3D11_TEXTURE_ADDRESS_MODE get AddressU =>
+      D3D11_TEXTURE_ADDRESS_MODE(_AddressU);
+
+  set AddressU(D3D11_TEXTURE_ADDRESS_MODE value) => _AddressU = value;
+
+  /// Method to use for resolving a v texture coordinate that is outside the 0
+  /// to 1 range.
+  D3D11_TEXTURE_ADDRESS_MODE get AddressV =>
+      D3D11_TEXTURE_ADDRESS_MODE(_AddressV);
+
+  set AddressV(D3D11_TEXTURE_ADDRESS_MODE value) => _AddressV = value;
+
+  /// Method to use for resolving a w texture coordinate that is outside the 0
+  /// to 1 range.
+  D3D11_TEXTURE_ADDRESS_MODE get AddressW =>
+      D3D11_TEXTURE_ADDRESS_MODE(_AddressW);
+
+  set AddressW(D3D11_TEXTURE_ADDRESS_MODE value) => _AddressW = value;
+
+  /// A function that compares sampled data against existing sampled data.
+  D3D11_COMPARISON_FUNC get ComparisonFunc =>
+      D3D11_COMPARISON_FUNC(_ComparisonFunc);
+
+  set ComparisonFunc(D3D11_COMPARISON_FUNC value) => _ComparisonFunc = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_SAMPLER_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes a shader constant-buffer.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_shader_buffer_desc>.
+///
+/// {@category struct}
+base class D3D11_SHADER_BUFFER_DESC extends Struct {
+  external Pointer<Utf8> _Name;
+
+  @Int32()
+  external int _Type;
+
+  /// The number of unique variables.
+  @Uint32()
+  external int Variables;
+
+  /// Buffer size (in bytes).
+  @Uint32()
+  external int Size;
+
+  /// A combination of <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3dcommon/ne-d3dcommon-d3d_shader_cbuffer_flags">D3D_SHADER_CBUFFER_FLAGS</a>-typed
+  /// values that are combined by using a bitwise OR operation.
+  @Uint32()
+  external int uFlags;
+
+  /// The name of the buffer.
+  PSTR get Name => PSTR(_Name);
+
+  set Name(PSTR value) => _Name = value;
+
+  /// A <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3dcommon/ne-d3dcommon-d3d_cbuffer_type">D3D_CBUFFER_TYPE</a>-typed
+  /// value that indicates the intended use of the constant data.
+  D3D_CBUFFER_TYPE get Type => D3D_CBUFFER_TYPE(_Type);
+
+  set Type(D3D_CBUFFER_TYPE value) => _Type = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_SHADER_BUFFER_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes a shader.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_shader_desc>.
+///
+/// {@category struct}
+base class D3D11_SHADER_DESC extends Struct {
+  /// Shader version.
+  @Uint32()
+  external int Version;
+
+  external Pointer<Utf8> _Creator;
+
+  /// Shader compilation/parse flags.
+  @Uint32()
+  external int Flags;
+
+  /// The number of shader-constant buffers.
+  @Uint32()
+  external int ConstantBuffers;
+
+  /// The number of resource (textures and buffers) bound to a shader.
+  @Uint32()
+  external int BoundResources;
+
+  /// The number of parameters in the input signature.
+  @Uint32()
+  external int InputParameters;
+
+  /// The number of parameters in the output signature.
+  @Uint32()
+  external int OutputParameters;
+
+  /// The number of intermediate-language instructions in the compiled shader.
+  @Uint32()
+  external int InstructionCount;
+
+  /// The number of temporary registers in the compiled shader.
+  @Uint32()
+  external int TempRegisterCount;
+
+  /// Number of temporary arrays used.
+  @Uint32()
+  external int TempArrayCount;
+
+  /// Number of constant defines.
+  @Uint32()
+  external int DefCount;
+
+  /// Number of declarations (input + output).
+  @Uint32()
+  external int DclCount;
+
+  /// Number of non-categorized texture instructions.
+  @Uint32()
+  external int TextureNormalInstructions;
+
+  /// Number of texture load instructions.
+  @Uint32()
+  external int TextureLoadInstructions;
+
+  /// Number of texture comparison instructions.
+  @Uint32()
+  external int TextureCompInstructions;
+
+  /// Number of texture bias instructions.
+  @Uint32()
+  external int TextureBiasInstructions;
+
+  /// Number of texture gradient instructions.
+  @Uint32()
+  external int TextureGradientInstructions;
+
+  /// Number of floating point arithmetic instructions used.
+  @Uint32()
+  external int FloatInstructionCount;
+
+  /// Number of signed integer arithmetic instructions used.
+  @Uint32()
+  external int IntInstructionCount;
+
+  /// Number of unsigned integer arithmetic instructions used.
+  @Uint32()
+  external int UintInstructionCount;
+
+  /// Number of static flow control instructions used.
+  @Uint32()
+  external int StaticFlowControlCount;
+
+  /// Number of dynamic flow control instructions used.
+  @Uint32()
+  external int DynamicFlowControlCount;
+
+  /// Number of macro instructions used.
+  @Uint32()
+  external int MacroInstructionCount;
+
+  /// Number of array instructions used.
+  @Uint32()
+  external int ArrayInstructionCount;
+
+  /// Number of cut instructions used.
+  @Uint32()
+  external int CutInstructionCount;
+
+  /// Number of emit instructions used.
+  @Uint32()
+  external int EmitInstructionCount;
+
+  @Int32()
+  external int _GSOutputTopology;
+
+  /// Geometry shader maximum output vertex count.
+  @Uint32()
+  external int GSMaxOutputVertexCount;
+
+  @Int32()
+  external int _InputPrimitive;
+
+  /// Number of parameters in the patch-constant signature.
+  @Uint32()
+  external int PatchConstantParameters;
+
+  /// Number of geometry shader instances.
+  @Uint32()
+  external int cGSInstanceCount;
+
+  /// Number of control points in the hull shader and domain shader.
+  @Uint32()
+  external int cControlPoints;
+
+  @Int32()
+  external int _HSOutputPrimitive;
+
+  @Int32()
+  external int _HSPartitioning;
+
+  @Int32()
+  external int _TessellatorDomain;
+
+  /// Number of barrier instructions in a compute shader.
+  @Uint32()
+  external int cBarrierInstructions;
+
+  /// Number of interlocked instructions in a compute shader.
+  @Uint32()
+  external int cInterlockedInstructions;
+
+  /// Number of texture writes in a compute shader.
+  @Uint32()
+  external int cTextureStoreInstructions;
+
+  /// The name of the originator of the shader.
+  PSTR get Creator => PSTR(_Creator);
+
+  set Creator(PSTR value) => _Creator = value;
+
+  /// The <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3dcommon/ne-d3dcommon-d3d_primitive_topology">D3D_PRIMITIVE_TOPOLOGY</a>-typed
+  /// value that represents the geometry shader output topology.
+  D3D_PRIMITIVE_TOPOLOGY get GSOutputTopology =>
+      D3D_PRIMITIVE_TOPOLOGY(_GSOutputTopology);
+
+  set GSOutputTopology(D3D_PRIMITIVE_TOPOLOGY value) =>
+      _GSOutputTopology = value;
+
+  /// The <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3dcommon/ne-d3dcommon-d3d_primitive">D3D_PRIMITIVE</a>-typed
+  /// value that represents the input primitive for a geometry shader or hull
+  /// shader.
+  D3D_PRIMITIVE get InputPrimitive => D3D_PRIMITIVE(_InputPrimitive);
+
+  set InputPrimitive(D3D_PRIMITIVE value) => _InputPrimitive = value;
+
+  /// The <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3dcommon/ne-d3dcommon-d3d_tessellator_output_primitive">D3D_TESSELLATOR_OUTPUT_PRIMITIVE</a>-typed
+  /// value that represents the tessellator output-primitive type.
+  D3D_TESSELLATOR_OUTPUT_PRIMITIVE get HSOutputPrimitive =>
+      D3D_TESSELLATOR_OUTPUT_PRIMITIVE(_HSOutputPrimitive);
+
+  set HSOutputPrimitive(D3D_TESSELLATOR_OUTPUT_PRIMITIVE value) =>
+      _HSOutputPrimitive = value;
+
+  /// The <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3dcommon/ne-d3dcommon-d3d_tessellator_partitioning">D3D_TESSELLATOR_PARTITIONING</a>-typed
+  /// value that represents the tessellator partitioning mode.
+  D3D_TESSELLATOR_PARTITIONING get HSPartitioning =>
+      D3D_TESSELLATOR_PARTITIONING(_HSPartitioning);
+
+  set HSPartitioning(D3D_TESSELLATOR_PARTITIONING value) =>
+      _HSPartitioning = value;
+
+  /// The <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3dcommon/ne-d3dcommon-d3d_tessellator_domain">D3D_TESSELLATOR_DOMAIN</a>-typed
+  /// value that represents the tessellator domain.
+  D3D_TESSELLATOR_DOMAIN get TessellatorDomain =>
+      D3D_TESSELLATOR_DOMAIN(_TessellatorDomain);
+
+  set TessellatorDomain(D3D_TESSELLATOR_DOMAIN value) =>
+      _TessellatorDomain = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_SHADER_DESC> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Describes how a shader resource is bound to a shader input.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_shader_input_bind_desc>.
+///
+/// {@category struct}
+base class D3D11_SHADER_INPUT_BIND_DESC extends Struct {
+  external Pointer<Utf8> _Name;
+
+  @Int32()
+  external int _Type;
+
+  /// Starting bind point.
+  @Uint32()
+  external int BindPoint;
+
+  /// Number of contiguous bind points for arrays.
+  @Uint32()
+  external int BindCount;
+
+  /// A combination of <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3dcommon/ne-d3dcommon-d3d_shader_input_flags">D3D_SHADER_INPUT_FLAGS</a>-typed
+  /// values for shader input-parameter options.
+  @Uint32()
+  external int uFlags;
+
+  @Int32()
+  external int _ReturnType;
+
+  @Int32()
+  external int _Dimension;
+
+  /// The number of samples for a multisampled texture; when a texture isn't
+  /// multisampled, the value is set to -1 (0xFFFFFFFF).
+  @Uint32()
+  external int NumSamples;
+
+  /// Name of the shader resource.
+  PSTR get Name => PSTR(_Name);
+
+  set Name(PSTR value) => _Name = value;
+
+  /// A <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3dcommon/ne-d3dcommon-d3d_shader_input_type">D3D_SHADER_INPUT_TYPE</a>-typed
+  /// value that identifies the type of data in the resource.
+  D3D_SHADER_INPUT_TYPE get Type => D3D_SHADER_INPUT_TYPE(_Type);
+
+  set Type(D3D_SHADER_INPUT_TYPE value) => _Type = value;
+
+  /// If the input is a texture, the <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3dcommon/ne-d3dcommon-d3d_resource_return_type">D3D_RESOURCE_RETURN_TYPE</a>-typed
+  /// value that identifies the return type.
+  D3D_RESOURCE_RETURN_TYPE get ReturnType =>
+      D3D_RESOURCE_RETURN_TYPE(_ReturnType);
+
+  set ReturnType(D3D_RESOURCE_RETURN_TYPE value) => _ReturnType = value;
+
+  /// A <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3dcommon/ne-d3dcommon-d3d_srv_dimension">D3D_SRV_DIMENSION</a>-typed
+  /// value that identifies the dimensions of the bound resource.
+  D3D_SRV_DIMENSION get Dimension => D3D_SRV_DIMENSION(_Dimension);
+
+  set Dimension(D3D_SRV_DIMENSION value) => _Dimension = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_SHADER_INPUT_BIND_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes a shader-resource view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_shader_resource_view_desc>.
+///
+/// {@category struct}
+base class D3D11_SHADER_RESOURCE_VIEW_DESC extends Struct {
+  @Int32()
+  external int _Format;
+
+  @Int32()
+  external int _ViewDimension;
+
+  external D3D11_SHADER_RESOURCE_VIEW_DESC_0 Anonymous;
+
+  /// A <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/dxgiformat/ne-dxgiformat-dxgi_format">DXGI_FORMAT</a>
+  /// specifying the viewing format.
+  DXGI_FORMAT get Format => DXGI_FORMAT(_Format);
+
+  set Format(DXGI_FORMAT value) => _Format = value;
+
+  /// The resource type of the view.
+  D3D_SRV_DIMENSION get ViewDimension => D3D_SRV_DIMENSION(_ViewDimension);
+
+  set ViewDimension(D3D_SRV_DIMENSION value) => _ViewDimension = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_SHADER_RESOURCE_VIEW_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// {@category union}
+sealed class D3D11_SHADER_RESOURCE_VIEW_DESC_0 extends Union {
+  external D3D11_BUFFER_SRV Buffer;
+  external D3D11_TEX1D_SRV Texture1D;
+  external D3D11_TEX1D_ARRAY_SRV Texture1DArray;
+  external D3D11_TEX2D_SRV Texture2D;
+  external D3D11_TEX2D_ARRAY_SRV Texture2DArray;
+  external D3D11_TEX2DMS_SRV Texture2DMS;
+  external D3D11_TEX2DMS_ARRAY_SRV Texture2DMSArray;
+  external D3D11_TEX3D_SRV Texture3D;
+  external D3D11_TEXCUBE_SRV TextureCube;
+  external D3D11_TEXCUBE_ARRAY_SRV TextureCubeArray;
+  external D3D11_BUFFEREX_SRV BufferEx;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_SHADER_RESOURCE_VIEW_DESC_0> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+extension D3D11_SHADER_RESOURCE_VIEW_DESC_0_Extension
+    on D3D11_SHADER_RESOURCE_VIEW_DESC {
+  D3D11_BUFFER_SRV get Buffer => this.Anonymous.Buffer;
+  set Buffer(D3D11_BUFFER_SRV value) => this.Anonymous.Buffer = value;
+  D3D11_TEX1D_SRV get Texture1D => this.Anonymous.Texture1D;
+  set Texture1D(D3D11_TEX1D_SRV value) => this.Anonymous.Texture1D = value;
+  D3D11_TEX1D_ARRAY_SRV get Texture1DArray => this.Anonymous.Texture1DArray;
+  set Texture1DArray(D3D11_TEX1D_ARRAY_SRV value) =>
+      this.Anonymous.Texture1DArray = value;
+  D3D11_TEX2D_SRV get Texture2D => this.Anonymous.Texture2D;
+  set Texture2D(D3D11_TEX2D_SRV value) => this.Anonymous.Texture2D = value;
+  D3D11_TEX2D_ARRAY_SRV get Texture2DArray => this.Anonymous.Texture2DArray;
+  set Texture2DArray(D3D11_TEX2D_ARRAY_SRV value) =>
+      this.Anonymous.Texture2DArray = value;
+  D3D11_TEX2DMS_SRV get Texture2DMS => this.Anonymous.Texture2DMS;
+  set Texture2DMS(D3D11_TEX2DMS_SRV value) =>
+      this.Anonymous.Texture2DMS = value;
+  D3D11_TEX2DMS_ARRAY_SRV get Texture2DMSArray =>
+      this.Anonymous.Texture2DMSArray;
+  set Texture2DMSArray(D3D11_TEX2DMS_ARRAY_SRV value) =>
+      this.Anonymous.Texture2DMSArray = value;
+  D3D11_TEX3D_SRV get Texture3D => this.Anonymous.Texture3D;
+  set Texture3D(D3D11_TEX3D_SRV value) => this.Anonymous.Texture3D = value;
+  D3D11_TEXCUBE_SRV get TextureCube => this.Anonymous.TextureCube;
+  set TextureCube(D3D11_TEXCUBE_SRV value) =>
+      this.Anonymous.TextureCube = value;
+  D3D11_TEXCUBE_ARRAY_SRV get TextureCubeArray =>
+      this.Anonymous.TextureCubeArray;
+  set TextureCubeArray(D3D11_TEXCUBE_ARRAY_SRV value) =>
+      this.Anonymous.TextureCubeArray = value;
+  D3D11_BUFFEREX_SRV get BufferEx => this.Anonymous.BufferEx;
+  set BufferEx(D3D11_BUFFEREX_SRV value) => this.Anonymous.BufferEx = value;
+}
+
+/// Describes a shader-resource view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_3/ns-d3d11_3-d3d11_shader_resource_view_desc1>.
+///
+/// {@category struct}
+base class D3D11_SHADER_RESOURCE_VIEW_DESC1 extends Struct {
+  @Int32()
+  external int _Format;
+
+  @Int32()
+  external int _ViewDimension;
+
+  external D3D11_SHADER_RESOURCE_VIEW_DESC1_0 Anonymous;
+
+  /// A <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/dxgiformat/ne-dxgiformat-dxgi_format">DXGI_FORMAT</a>-typed
+  /// value that specifies the viewing format.
+  DXGI_FORMAT get Format => DXGI_FORMAT(_Format);
+
+  set Format(DXGI_FORMAT value) => _Format = value;
+
+  /// A <a
+  /// href="https://docs.microsoft.com/previous-versions/windows/desktop/legacy/ff476217(v=vs.85)">D3D11_SRV_DIMENSION</a>-typed
+  /// value that specifies the resource type of the view.
+  D3D_SRV_DIMENSION get ViewDimension => D3D_SRV_DIMENSION(_ViewDimension);
+
+  set ViewDimension(D3D_SRV_DIMENSION value) => _ViewDimension = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_SHADER_RESOURCE_VIEW_DESC1> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// {@category union}
+sealed class D3D11_SHADER_RESOURCE_VIEW_DESC1_0 extends Union {
+  external D3D11_BUFFER_SRV Buffer;
+  external D3D11_TEX1D_SRV Texture1D;
+  external D3D11_TEX1D_ARRAY_SRV Texture1DArray;
+  external D3D11_TEX2D_SRV1 Texture2D;
+  external D3D11_TEX2D_ARRAY_SRV1 Texture2DArray;
+  external D3D11_TEX2DMS_SRV Texture2DMS;
+  external D3D11_TEX2DMS_ARRAY_SRV Texture2DMSArray;
+  external D3D11_TEX3D_SRV Texture3D;
+  external D3D11_TEXCUBE_SRV TextureCube;
+  external D3D11_TEXCUBE_ARRAY_SRV TextureCubeArray;
+  external D3D11_BUFFEREX_SRV BufferEx;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_SHADER_RESOURCE_VIEW_DESC1_0> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+extension D3D11_SHADER_RESOURCE_VIEW_DESC1_0_Extension
+    on D3D11_SHADER_RESOURCE_VIEW_DESC1 {
+  D3D11_BUFFER_SRV get Buffer => this.Anonymous.Buffer;
+  set Buffer(D3D11_BUFFER_SRV value) => this.Anonymous.Buffer = value;
+  D3D11_TEX1D_SRV get Texture1D => this.Anonymous.Texture1D;
+  set Texture1D(D3D11_TEX1D_SRV value) => this.Anonymous.Texture1D = value;
+  D3D11_TEX1D_ARRAY_SRV get Texture1DArray => this.Anonymous.Texture1DArray;
+  set Texture1DArray(D3D11_TEX1D_ARRAY_SRV value) =>
+      this.Anonymous.Texture1DArray = value;
+  D3D11_TEX2D_SRV1 get Texture2D => this.Anonymous.Texture2D;
+  set Texture2D(D3D11_TEX2D_SRV1 value) => this.Anonymous.Texture2D = value;
+  D3D11_TEX2D_ARRAY_SRV1 get Texture2DArray => this.Anonymous.Texture2DArray;
+  set Texture2DArray(D3D11_TEX2D_ARRAY_SRV1 value) =>
+      this.Anonymous.Texture2DArray = value;
+  D3D11_TEX2DMS_SRV get Texture2DMS => this.Anonymous.Texture2DMS;
+  set Texture2DMS(D3D11_TEX2DMS_SRV value) =>
+      this.Anonymous.Texture2DMS = value;
+  D3D11_TEX2DMS_ARRAY_SRV get Texture2DMSArray =>
+      this.Anonymous.Texture2DMSArray;
+  set Texture2DMSArray(D3D11_TEX2DMS_ARRAY_SRV value) =>
+      this.Anonymous.Texture2DMSArray = value;
+  D3D11_TEX3D_SRV get Texture3D => this.Anonymous.Texture3D;
+  set Texture3D(D3D11_TEX3D_SRV value) => this.Anonymous.Texture3D = value;
+  D3D11_TEXCUBE_SRV get TextureCube => this.Anonymous.TextureCube;
+  set TextureCube(D3D11_TEXCUBE_SRV value) =>
+      this.Anonymous.TextureCube = value;
+  D3D11_TEXCUBE_ARRAY_SRV get TextureCubeArray =>
+      this.Anonymous.TextureCubeArray;
+  set TextureCubeArray(D3D11_TEXCUBE_ARRAY_SRV value) =>
+      this.Anonymous.TextureCubeArray = value;
+  D3D11_BUFFEREX_SRV get BufferEx => this.Anonymous.BufferEx;
+  set BufferEx(D3D11_BUFFEREX_SRV value) => this.Anonymous.BufferEx = value;
+}
+
+/// Describes a shader-trace object.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11shadertracing/ns-d3d11shadertracing-d3d11_shader_trace_desc>.
+///
+/// {@category struct}
+base class D3D11_SHADER_TRACE_DESC extends Struct {
+  @Int32()
+  external int _Type;
+
+  /// A combination of the following flags that are combined by using a bitwise
+  /// <b>OR</b> operation.
+  @Uint32()
+  external int Flags;
+
+  external D3D11_SHADER_TRACE_DESC_0 Anonymous;
+
+  /// A <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11shadertracing/ne-d3d11shadertracing-d3d11_shader_type">D3D11_SHADER_TYPE</a>-typed
+  /// value that identifies the type of shader that the shader-trace object
+  /// describes.
+  D3D11_SHADER_TYPE get Type => D3D11_SHADER_TYPE(_Type);
+
+  set Type(D3D11_SHADER_TYPE value) => _Type = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_SHADER_TRACE_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// {@category union}
+sealed class D3D11_SHADER_TRACE_DESC_0 extends Union {
+  external D3D11_VERTEX_SHADER_TRACE_DESC VertexShaderTraceDesc;
+  external D3D11_HULL_SHADER_TRACE_DESC HullShaderTraceDesc;
+  external D3D11_DOMAIN_SHADER_TRACE_DESC DomainShaderTraceDesc;
+  external D3D11_GEOMETRY_SHADER_TRACE_DESC GeometryShaderTraceDesc;
+  external D3D11_PIXEL_SHADER_TRACE_DESC PixelShaderTraceDesc;
+  external D3D11_COMPUTE_SHADER_TRACE_DESC ComputeShaderTraceDesc;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_SHADER_TRACE_DESC_0> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+extension D3D11_SHADER_TRACE_DESC_0_Extension on D3D11_SHADER_TRACE_DESC {
+  D3D11_VERTEX_SHADER_TRACE_DESC get VertexShaderTraceDesc =>
+      this.Anonymous.VertexShaderTraceDesc;
+  set VertexShaderTraceDesc(D3D11_VERTEX_SHADER_TRACE_DESC value) =>
+      this.Anonymous.VertexShaderTraceDesc = value;
+  D3D11_HULL_SHADER_TRACE_DESC get HullShaderTraceDesc =>
+      this.Anonymous.HullShaderTraceDesc;
+  set HullShaderTraceDesc(D3D11_HULL_SHADER_TRACE_DESC value) =>
+      this.Anonymous.HullShaderTraceDesc = value;
+  D3D11_DOMAIN_SHADER_TRACE_DESC get DomainShaderTraceDesc =>
+      this.Anonymous.DomainShaderTraceDesc;
+  set DomainShaderTraceDesc(D3D11_DOMAIN_SHADER_TRACE_DESC value) =>
+      this.Anonymous.DomainShaderTraceDesc = value;
+  D3D11_GEOMETRY_SHADER_TRACE_DESC get GeometryShaderTraceDesc =>
+      this.Anonymous.GeometryShaderTraceDesc;
+  set GeometryShaderTraceDesc(D3D11_GEOMETRY_SHADER_TRACE_DESC value) =>
+      this.Anonymous.GeometryShaderTraceDesc = value;
+  D3D11_PIXEL_SHADER_TRACE_DESC get PixelShaderTraceDesc =>
+      this.Anonymous.PixelShaderTraceDesc;
+  set PixelShaderTraceDesc(D3D11_PIXEL_SHADER_TRACE_DESC value) =>
+      this.Anonymous.PixelShaderTraceDesc = value;
+  D3D11_COMPUTE_SHADER_TRACE_DESC get ComputeShaderTraceDesc =>
+      this.Anonymous.ComputeShaderTraceDesc;
+  set ComputeShaderTraceDesc(D3D11_COMPUTE_SHADER_TRACE_DESC value) =>
+      this.Anonymous.ComputeShaderTraceDesc = value;
+}
+
+/// Describes a shader-variable type.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_shader_type_desc>.
+///
+/// {@category struct}
+base class D3D11_SHADER_TYPE_DESC extends Struct {
+  @Int32()
+  external int _Class;
+
+  @Int32()
+  external int _Type;
+
+  /// Number of rows in a matrix.
+  @Uint32()
+  external int Rows;
+
+  /// Number of columns in a matrix.
+  @Uint32()
+  external int Columns;
+
+  /// Number of elements in an array; otherwise 0.
+  @Uint32()
+  external int Elements;
+
+  /// Number of members in the structure; otherwise 0.
+  @Uint32()
+  external int Members;
+
+  /// Offset, in bytes, between the start of the parent structure and this
+  /// variable.
+  @Uint32()
+  external int Offset;
+
+  external Pointer<Utf8> _Name;
+
+  /// A <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3dcommon/ne-d3dcommon-d3d_shader_variable_class">D3D_SHADER_VARIABLE_CLASS</a>-typed
+  /// value that identifies the variable class as one of scalar, vector, matrix,
+  /// object, and so on.
+  D3D_SHADER_VARIABLE_CLASS get Class => D3D_SHADER_VARIABLE_CLASS(_Class);
+
+  set Class(D3D_SHADER_VARIABLE_CLASS value) => _Class = value;
+
+  /// A <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3dcommon/ne-d3dcommon-d3d_shader_variable_type">D3D_SHADER_VARIABLE_TYPE</a>-typed
+  /// value that identifies the variable type.
+  D3D_SHADER_VARIABLE_TYPE get Type => D3D_SHADER_VARIABLE_TYPE(_Type);
+
+  set Type(D3D_SHADER_VARIABLE_TYPE value) => _Type = value;
+
+  /// Name of the shader-variable type.
+  PSTR get Name => PSTR(_Name);
+
+  set Name(PSTR value) => _Name = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_SHADER_TYPE_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes a shader variable.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_shader_variable_desc>.
+///
+/// {@category struct}
+base class D3D11_SHADER_VARIABLE_DESC extends Struct {
+  external Pointer<Utf8> _Name;
+
+  /// Offset from the start of the parent structure to the beginning of the
+  /// variable.
+  @Uint32()
+  external int StartOffset;
+
+  /// Size of the variable (in bytes).
+  @Uint32()
+  external int Size;
+
+  /// A combination of <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3dcommon/ne-d3dcommon-d3d_shader_variable_flags">D3D_SHADER_VARIABLE_FLAGS</a>-typed
+  /// values that are combined by using a bitwise OR operation.
+  @Uint32()
+  external int uFlags;
+
+  /// The default value for initializing the variable.
+  external Pointer DefaultValue;
+
+  /// Offset from the start of the variable to the beginning of the texture.
+  @Uint32()
+  external int StartTexture;
+
+  /// The size of the texture, in bytes.
+  @Uint32()
+  external int TextureSize;
+
+  /// Offset from the start of the variable to the beginning of the sampler.
+  @Uint32()
+  external int StartSampler;
+
+  /// The size of the sampler, in bytes.
+  @Uint32()
+  external int SamplerSize;
+
+  /// The variable name.
+  PSTR get Name => PSTR(_Name);
+
+  set Name(PSTR value) => _Name = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_SHADER_VARIABLE_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes a shader signature.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_signature_parameter_desc>.
+///
+/// {@category struct}
+base class D3D11_SIGNATURE_PARAMETER_DESC extends Struct {
+  external Pointer<Utf8> _SemanticName;
+
+  /// Semantic index that modifies the semantic.
+  @Uint32()
+  external int SemanticIndex;
+
+  /// The register that will contain this variable's data.
+  @Uint32()
+  external int Register;
+
+  @Int32()
+  external int _SystemValueType;
+
+  @Int32()
+  external int _ComponentType;
+
+  /// Mask which indicates which components of a register are used.
+  @Uint8()
+  external int Mask;
+
+  /// Mask which indicates whether a given component is never written (if the
+  /// signature is an output signature) or always read (if the signature is an
+  /// input signature).
+  @Uint8()
+  external int ReadWriteMask;
+
+  /// Indicates which stream the geometry shader is using for the signature
+  /// parameter.
+  @Uint32()
+  external int Stream;
+
+  @Int32()
+  external int _MinPrecision;
+
+  /// A per-parameter string that identifies how the data will be used.
+  PSTR get SemanticName => PSTR(_SemanticName);
+
+  set SemanticName(PSTR value) => _SemanticName = value;
+
+  /// A <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3dcommon/ne-d3dcommon-d3d_name">D3D_NAME</a>-typed
+  /// value that identifies a predefined string that determines the
+  /// functionality of certain pipeline stages.
+  D3D_NAME get SystemValueType => D3D_NAME(_SystemValueType);
+
+  set SystemValueType(D3D_NAME value) => _SystemValueType = value;
+
+  /// A <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3dcommon/ne-d3dcommon-d3d_register_component_type">D3D_REGISTER_COMPONENT_TYPE</a>-typed
+  /// value that identifies the per-component-data type that is stored in a
+  /// register.
+  D3D_REGISTER_COMPONENT_TYPE get ComponentType =>
+      D3D_REGISTER_COMPONENT_TYPE(_ComponentType);
+
+  set ComponentType(D3D_REGISTER_COMPONENT_TYPE value) =>
+      _ComponentType = value;
+
+  /// A <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3dcommon/ne-d3dcommon-d3d_min_precision">D3D_MIN_PRECISION</a>-typed
+  /// value that indicates the minimum desired interpolation precision.
+  D3D_MIN_PRECISION get MinPrecision => D3D_MIN_PRECISION(_MinPrecision);
+
+  set MinPrecision(D3D_MIN_PRECISION value) => _MinPrecision = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_SIGNATURE_PARAMETER_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Description of a vertex element in a vertex buffer in an output slot.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_so_declaration_entry>.
+///
+/// {@category struct}
+base class D3D11_SO_DECLARATION_ENTRY extends Struct {
+  /// Zero-based, stream number.
+  @Uint32()
+  external int Stream;
+
+  external Pointer<Utf8> _SemanticName;
+
+  /// Output element's zero-based index.
+  @Uint32()
+  external int SemanticIndex;
+
+  /// Which component of the entry to begin writing out to.
+  @Uint8()
+  external int StartComponent;
+
+  /// The number of components of the entry to write out to.
+  @Uint8()
+  external int ComponentCount;
+
+  /// The associated stream output buffer that is bound to the pipeline (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-sosettargets">ID3D11DeviceContext::SOSetTargets</a>).
+  @Uint8()
+  external int OutputSlot;
+
+  /// Type of output element; possible values include: <b>"POSITION"</b>,
+  /// <b>"NORMAL"</b>, or <b>"TEXCOORD0"</b>.
+  PSTR get SemanticName => PSTR(_SemanticName);
+
+  set SemanticName(PSTR value) => _SemanticName = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_SO_DECLARATION_ENTRY> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Specifies data for initializing a subresource.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_subresource_data>.
+///
+/// {@category struct}
+base class D3D11_SUBRESOURCE_DATA extends Struct {
+  /// Pointer to the initialization data.
+  external Pointer pSysMem;
+
+  /// The distance (in bytes) from the beginning of one line of a texture to the
+  /// next line.
+  @Uint32()
+  external int SysMemPitch;
+
+  /// The distance (in bytes) from the beginning of one depth level to the next.
+  @Uint32()
+  external int SysMemSlicePitch;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_SUBRESOURCE_DATA> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes a tiled subresource volume.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_2/ns-d3d11_2-d3d11_subresource_tiling>.
+///
+/// {@category struct}
+base class D3D11_SUBRESOURCE_TILING extends Struct {
+  /// The width in tiles of the subresource.
+  @Uint32()
+  external int WidthInTiles;
+
+  /// The height in tiles of the subresource.
+  @Uint16()
+  external int HeightInTiles;
+
+  /// The depth in tiles of the subresource.
+  @Uint16()
+  external int DepthInTiles;
+
+  /// The index of the tile in the overall tiled subresource to start with.
+  @Uint32()
+  external int StartTileIndexInOverallResource;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_SUBRESOURCE_TILING> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Specifies the subresources from an array of 1D textures to use in a
+/// depth-stencil view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_tex1d_array_dsv>.
+///
+/// {@category struct}
+base class D3D11_TEX1D_ARRAY_DSV extends Struct {
+  /// The index of the first mipmap level to use.
+  @Uint32()
+  external int MipSlice;
+
+  /// The index of the first texture to use in an array of textures.
+  @Uint32()
+  external int FirstArraySlice;
+
+  /// Number of textures to use.
+  @Uint32()
+  external int ArraySize;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEX1D_ARRAY_DSV> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Specifies the subresources from an array of 1D textures to use in a
+/// render-target view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_tex1d_array_rtv>.
+///
+/// {@category struct}
+base class D3D11_TEX1D_ARRAY_RTV extends Struct {
+  /// The index of the mipmap level to use mip slice.
+  @Uint32()
+  external int MipSlice;
+
+  /// The index of the first texture to use in an array of textures.
+  @Uint32()
+  external int FirstArraySlice;
+
+  /// Number of textures to use.
+  @Uint32()
+  external int ArraySize;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEX1D_ARRAY_RTV> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Specifies the subresources from an array of 1D textures to use in a
+/// shader-resource view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_tex1d_array_srv>.
+///
+/// {@category struct}
+base class D3D11_TEX1D_ARRAY_SRV extends Struct {
+  /// Index of the most detailed mipmap level to use; this number is between 0
+  /// and <b>MipLevels</b> (from the original Texture1D for which <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11device-createshaderresourceview">ID3D11Device::CreateShaderResourceView</a>
+  /// creates a view) -1.
+  @Uint32()
+  external int MostDetailedMip;
+
+  /// The maximum number of mipmap levels for the view of the texture.
+  @Uint32()
+  external int MipLevels;
+
+  /// The index of the first texture to use in an array of textures.
+  @Uint32()
+  external int FirstArraySlice;
+
+  /// Number of textures in the array.
+  @Uint32()
+  external int ArraySize;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEX1D_ARRAY_SRV> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes an array of unordered-access 1D texture resources.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_tex1d_array_uav>.
+///
+/// {@category struct}
+base class D3D11_TEX1D_ARRAY_UAV extends Struct {
+  /// The mipmap slice index.
+  @Uint32()
+  external int MipSlice;
+
+  /// The zero-based index of the first array slice to be accessed.
+  @Uint32()
+  external int FirstArraySlice;
+
+  /// The number of slices in the array.
+  @Uint32()
+  external int ArraySize;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEX1D_ARRAY_UAV> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Specifies the subresource from a 1D texture that is accessible to a
+/// depth-stencil view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_tex1d_dsv>.
+///
+/// {@category struct}
+base class D3D11_TEX1D_DSV extends Struct {
+  /// The index of the first mipmap level to use.
+  @Uint32()
+  external int MipSlice;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEX1D_DSV> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Specifies the subresource from a 1D texture to use in a render-target view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_tex1d_rtv>.
+///
+/// {@category struct}
+base class D3D11_TEX1D_RTV extends Struct {
+  /// The index of the mipmap level to use mip slice.
+  @Uint32()
+  external int MipSlice;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEX1D_RTV> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Specifies the subresource from a 1D texture to use in a shader-resource
+/// view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_tex1d_srv>.
+///
+/// {@category struct}
+base class D3D11_TEX1D_SRV extends Struct {
+  /// Index of the most detailed mipmap level to use; this number is between 0
+  /// and <b>MipLevels</b> (from the original Texture1D for which <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11device-createshaderresourceview">ID3D11Device::CreateShaderResourceView</a>
+  /// creates a view) -1.
+  @Uint32()
+  external int MostDetailedMip;
+
+  /// The maximum number of mipmap levels for the view of the texture.
+  @Uint32()
+  external int MipLevels;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEX1D_SRV> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Describes a unordered-access 1D texture resource.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_tex1d_uav>.
+///
+/// {@category struct}
+base class D3D11_TEX1D_UAV extends Struct {
+  /// The mipmap slice index.
+  @Uint32()
+  external int MipSlice;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEX1D_UAV> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Specifies the subresources from an array of multisampled 2D textures for a
+/// depth-stencil view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_tex2dms_array_dsv>.
+///
+/// {@category struct}
+base class D3D11_TEX2DMS_ARRAY_DSV extends Struct {
+  /// The index of the first texture to use in an array of textures.
+  @Uint32()
+  external int FirstArraySlice;
+
+  /// Number of textures to use.
+  @Uint32()
+  external int ArraySize;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEX2DMS_ARRAY_DSV> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Specifies the subresources from a an array of multisampled 2D textures to
+/// use in a render-target view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_tex2dms_array_rtv>.
+///
+/// {@category struct}
+base class D3D11_TEX2DMS_ARRAY_RTV extends Struct {
+  /// The index of the first texture to use in an array of textures.
+  @Uint32()
+  external int FirstArraySlice;
+
+  /// Number of textures to use.
+  @Uint32()
+  external int ArraySize;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEX2DMS_ARRAY_RTV> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Specifies the subresources from an array of multisampled 2D textures to use
+/// in a shader-resource view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_tex2dms_array_srv>.
+///
+/// {@category struct}
+base class D3D11_TEX2DMS_ARRAY_SRV extends Struct {
+  /// The index of the first texture to use in an array of textures.
+  @Uint32()
+  external int FirstArraySlice;
+
+  /// Number of textures to use.
+  @Uint32()
+  external int ArraySize;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEX2DMS_ARRAY_SRV> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Specifies the subresource from a multisampled 2D texture that is accessible
+/// to a depth-stencil view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_tex2dms_dsv>.
+///
+/// {@category struct}
+base class D3D11_TEX2DMS_DSV extends Struct {
+  /// Unused.
+  @Uint32()
+  external int UnusedField_NothingToDefine;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEX2DMS_DSV> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Specifies the subresource from a multisampled 2D texture to use in a
+/// render-target view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_tex2dms_rtv>.
+///
+/// {@category struct}
+base class D3D11_TEX2DMS_RTV extends Struct {
+  /// Integer of any value.
+  @Uint32()
+  external int UnusedField_NothingToDefine;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEX2DMS_RTV> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Specifies the subresources from a multisampled 2D texture to use in a
+/// shader-resource view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_tex2dms_srv>.
+///
+/// {@category struct}
+base class D3D11_TEX2DMS_SRV extends Struct {
+  /// Integer of any value.
+  @Uint32()
+  external int UnusedField_NothingToDefine;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEX2DMS_SRV> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Specifies the subresources from an array 2D textures that are accessible to
+/// a depth-stencil view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_tex2d_array_dsv>.
+///
+/// {@category struct}
+base class D3D11_TEX2D_ARRAY_DSV extends Struct {
+  /// The index of the first mipmap level to use.
+  @Uint32()
+  external int MipSlice;
+
+  /// The index of the first texture to use in an array of textures.
+  @Uint32()
+  external int FirstArraySlice;
+
+  /// Number of textures to use.
+  @Uint32()
+  external int ArraySize;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEX2D_ARRAY_DSV> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Specifies the subresources from an array of 2D textures to use in a
+/// render-target view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_tex2d_array_rtv>.
+///
+/// {@category struct}
+base class D3D11_TEX2D_ARRAY_RTV extends Struct {
+  /// The index of the mipmap level to use mip slice.
+  @Uint32()
+  external int MipSlice;
+
+  /// The index of the first texture to use in an array of textures.
+  @Uint32()
+  external int FirstArraySlice;
+
+  /// Number of textures in the array to use in the render target view, starting
+  /// from <b>FirstArraySlice</b>.
+  @Uint32()
+  external int ArraySize;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEX2D_ARRAY_RTV> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes the subresources from an array of 2D textures to use in a
+/// render-target view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_3/ns-d3d11_3-d3d11_tex2d_array_rtv1>.
+///
+/// {@category struct}
+base class D3D11_TEX2D_ARRAY_RTV1 extends Struct {
+  /// The index of the mipmap level to use mip slice.
+  @Uint32()
+  external int MipSlice;
+
+  /// The index of the first texture to use in an array of textures.
+  @Uint32()
+  external int FirstArraySlice;
+
+  /// Number of textures in the array to use in the render-target view, starting
+  /// from <b>FirstArraySlice</b>.
+  @Uint32()
+  external int ArraySize;
+
+  /// The index (plane slice number) of the plane to use in an array of
+  /// textures.
+  @Uint32()
+  external int PlaneSlice;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEX2D_ARRAY_RTV1> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Specifies the subresources from an array of 2D textures to use in a
+/// shader-resource view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_tex2d_array_srv>.
+///
+/// {@category struct}
+base class D3D11_TEX2D_ARRAY_SRV extends Struct {
+  /// Index of the most detailed mipmap level to use; this number is between 0
+  /// and <b>MipLevels</b> (from the original Texture2D for which <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11device-createshaderresourceview">ID3D11Device::CreateShaderResourceView</a>
+  /// creates a view) -1.
+  @Uint32()
+  external int MostDetailedMip;
+
+  /// The maximum number of mipmap levels for the view of the texture.
+  @Uint32()
+  external int MipLevels;
+
+  /// The index of the first texture to use in an array of textures.
+  @Uint32()
+  external int FirstArraySlice;
+
+  /// Number of textures in the array.
+  @Uint32()
+  external int ArraySize;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEX2D_ARRAY_SRV> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes the subresources from an array of 2D textures to use in a
+/// shader-resource view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_3/ns-d3d11_3-d3d11_tex2d_array_srv1>.
+///
+/// {@category struct}
+base class D3D11_TEX2D_ARRAY_SRV1 extends Struct {
+  /// Index of the most detailed mipmap level to use; this number is between 0
+  /// and ( <b>MipLevels</b> (from the original Texture2D for which <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11_3/nf-d3d11_3-id3d11device3-createshaderresourceview1">ID3D11Device3::CreateShaderResourceView1</a>
+  /// creates a view) - 1).
+  @Uint32()
+  external int MostDetailedMip;
+
+  /// The maximum number of mipmap levels for the view of the texture.
+  @Uint32()
+  external int MipLevels;
+
+  /// The index of the first texture to use in an array of textures.
+  @Uint32()
+  external int FirstArraySlice;
+
+  /// Number of textures in the array.
+  @Uint32()
+  external int ArraySize;
+
+  /// The index (plane slice number) of the plane to use in an array of
+  /// textures.
+  @Uint32()
+  external int PlaneSlice;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEX2D_ARRAY_SRV1> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes an array of unordered-access 2D texture resources.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_tex2d_array_uav>.
+///
+/// {@category struct}
+base class D3D11_TEX2D_ARRAY_UAV extends Struct {
+  /// The mipmap slice index.
+  @Uint32()
+  external int MipSlice;
+
+  /// The zero-based index of the first array slice to be accessed.
+  @Uint32()
+  external int FirstArraySlice;
+
+  /// The number of slices in the array.
+  @Uint32()
+  external int ArraySize;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEX2D_ARRAY_UAV> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes an array of unordered-access 2D texture resources.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_3/ns-d3d11_3-d3d11_tex2d_array_uav1>.
+///
+/// {@category struct}
+base class D3D11_TEX2D_ARRAY_UAV1 extends Struct {
+  /// The mipmap slice index.
+  @Uint32()
+  external int MipSlice;
+
+  /// The zero-based index of the first array slice to be accessed.
+  @Uint32()
+  external int FirstArraySlice;
+
+  /// The number of slices in the array.
+  @Uint32()
+  external int ArraySize;
+
+  /// The index (plane slice number) of the plane to use in an array of
+  /// textures.
+  @Uint32()
+  external int PlaneSlice;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEX2D_ARRAY_UAV1> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Identifies a texture resource for a video processor output view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_tex2d_array_vpov>.
+///
+/// {@category struct}
+base class D3D11_TEX2D_ARRAY_VPOV extends Struct {
+  /// The zero-based index into the array of subtextures.
+  @Uint32()
+  external int MipSlice;
+
+  /// The index of the first texture to use.
+  @Uint32()
+  external int FirstArraySlice;
+
+  /// The number of textures in the array.
+  @Uint32()
+  external int ArraySize;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEX2D_ARRAY_VPOV> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Specifies the subresource from a 2D texture that is accessible to a
+/// depth-stencil view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_tex2d_dsv>.
+///
+/// {@category struct}
+base class D3D11_TEX2D_DSV extends Struct {
+  /// The index of the first mipmap level to use.
+  @Uint32()
+  external int MipSlice;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEX2D_DSV> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Specifies the subresource from a 2D texture to use in a render-target view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_tex2d_rtv>.
+///
+/// {@category struct}
+base class D3D11_TEX2D_RTV extends Struct {
+  /// The index of the mipmap level to use mip slice.
+  @Uint32()
+  external int MipSlice;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEX2D_RTV> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Describes the subresource from a 2D texture to use in a render-target view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_3/ns-d3d11_3-d3d11_tex2d_rtv1>.
+///
+/// {@category struct}
+base class D3D11_TEX2D_RTV1 extends Struct {
+  /// The index of the mipmap level to use mip slice.
+  @Uint32()
+  external int MipSlice;
+
+  /// The index (plane slice number) of the plane to use in the texture.
+  @Uint32()
+  external int PlaneSlice;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEX2D_RTV1> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Specifies the subresource from a 2D texture to use in a shader-resource
+/// view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_tex2d_srv>.
+///
+/// {@category struct}
+base class D3D11_TEX2D_SRV extends Struct {
+  /// Index of the most detailed mipmap level to use; this number is between 0
+  /// and <b>MipLevels</b> (from the original Texture2D for which <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11device-createshaderresourceview">ID3D11Device::CreateShaderResourceView</a>
+  /// creates a view) -1.
+  @Uint32()
+  external int MostDetailedMip;
+
+  /// The maximum number of mipmap levels for the view of the texture.
+  @Uint32()
+  external int MipLevels;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEX2D_SRV> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Describes the subresource from a 2D texture to use in a shader-resource
+/// view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_3/ns-d3d11_3-d3d11_tex2d_srv1>.
+///
+/// {@category struct}
+base class D3D11_TEX2D_SRV1 extends Struct {
+  /// Index of the most detailed mipmap level to use; this number is between 0
+  /// and (<b>MipLevels</b> (from the original Texture2D for which <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11_3/nf-d3d11_3-id3d11device3-createshaderresourceview1">ID3D11Device3::CreateShaderResourceView1</a>
+  /// creates a view) - 1 ).
+  @Uint32()
+  external int MostDetailedMip;
+
+  /// The maximum number of mipmap levels for the view of the texture.
+  @Uint32()
+  external int MipLevels;
+
+  /// The index (plane slice number) of the plane to use in the texture.
+  @Uint32()
+  external int PlaneSlice;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEX2D_SRV1> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Describes a unordered-access 2D texture resource.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_tex2d_uav>.
+///
+/// {@category struct}
+base class D3D11_TEX2D_UAV extends Struct {
+  /// The mipmap slice index.
+  @Uint32()
+  external int MipSlice;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEX2D_UAV> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Describes a unordered-access 2D texture resource.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_3/ns-d3d11_3-d3d11_tex2d_uav1>.
+///
+/// {@category struct}
+base class D3D11_TEX2D_UAV1 extends Struct {
+  /// The mipmap slice index.
+  @Uint32()
+  external int MipSlice;
+
+  /// The index (plane slice number) of the plane to use in the texture.
+  @Uint32()
+  external int PlaneSlice;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEX2D_UAV1> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Identifies the texture resource for a video decoder output view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_tex2d_vdov>.
+///
+/// {@category struct}
+base class D3D11_TEX2D_VDOV extends Struct {
+  /// The zero-based index of the texture.
+  @Uint32()
+  external int ArraySlice;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEX2D_VDOV> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Identifies the texture resource for a video processor input view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_tex2d_vpiv>.
+///
+/// {@category struct}
+base class D3D11_TEX2D_VPIV extends Struct {
+  /// The zero-based index into the array of subtextures.
+  @Uint32()
+  external int MipSlice;
+
+  /// The zero-based index of the texture.
+  @Uint32()
+  external int ArraySlice;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEX2D_VPIV> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Identifies a texture resource for a video processor output view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_tex2d_vpov>.
+///
+/// {@category struct}
+base class D3D11_TEX2D_VPOV extends Struct {
+  /// The zero-based index into the array of subtextures.
+  @Uint32()
+  external int MipSlice;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEX2D_VPOV> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Specifies the subresources from a 3D texture to use in a render-target view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_tex3d_rtv>.
+///
+/// {@category struct}
+base class D3D11_TEX3D_RTV extends Struct {
+  /// The index of the mipmap level to use mip slice.
+  @Uint32()
+  external int MipSlice;
+
+  /// First depth level to use.
+  @Uint32()
+  external int FirstWSlice;
+
+  /// Number of depth levels to use in the render-target view, starting from
+  /// <b>FirstWSlice</b>.
+  @Uint32()
+  external int WSize;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEX3D_RTV> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Specifies the subresources from a 3D texture to use in a shader-resource
+/// view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_tex3d_srv>.
+///
+/// {@category struct}
+base class D3D11_TEX3D_SRV extends Struct {
+  /// Index of the most detailed mipmap level to use; this number is between 0
+  /// and <b>MipLevels</b> (from the original Texture3D for which <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11device-createshaderresourceview">ID3D11Device::CreateShaderResourceView</a>
+  /// creates a view) -1.
+  @Uint32()
+  external int MostDetailedMip;
+
+  /// The maximum number of mipmap levels for the view of the texture.
+  @Uint32()
+  external int MipLevels;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEX3D_SRV> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Describes a unordered-access 3D texture resource.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_tex3d_uav>.
+///
+/// {@category struct}
+base class D3D11_TEX3D_UAV extends Struct {
+  /// The mipmap slice index.
+  @Uint32()
+  external int MipSlice;
+
+  /// The zero-based index of the first depth slice to be accessed.
+  @Uint32()
+  external int FirstWSlice;
+
+  /// The number of depth slices.
+  @Uint32()
+  external int WSize;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEX3D_UAV> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Specifies the subresources from an array of cube textures to use in a
+/// shader-resource view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_texcube_array_srv>.
+///
+/// {@category struct}
+base class D3D11_TEXCUBE_ARRAY_SRV extends Struct {
+  /// Index of the most detailed mipmap level to use; this number is between 0
+  /// and <b>MipLevels</b> (from the original TextureCube for which <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11device-createshaderresourceview">ID3D11Device::CreateShaderResourceView</a>
+  /// creates a view) -1.
+  @Uint32()
+  external int MostDetailedMip;
+
+  /// The maximum number of mipmap levels for the view of the texture.
+  @Uint32()
+  external int MipLevels;
+
+  /// Index of the first 2D texture to use.
+  @Uint32()
+  external int First2DArrayFace;
+
+  /// Number of cube textures in the array.
+  @Uint32()
+  external int NumCubes;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEXCUBE_ARRAY_SRV> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Specifies the subresource from a cube texture to use in a shader-resource
+/// view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_texcube_srv>.
+///
+/// {@category struct}
+base class D3D11_TEXCUBE_SRV extends Struct {
+  /// Index of the most detailed mipmap level to use; this number is between 0
+  /// and <b>MipLevels</b> (from the original TextureCube for which <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11device-createshaderresourceview">ID3D11Device::CreateShaderResourceView</a>
+  /// creates a view) -1.
+  @Uint32()
+  external int MostDetailedMip;
+
+  /// The maximum number of mipmap levels for the view of the texture.
+  @Uint32()
+  external int MipLevels;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEXCUBE_SRV> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Describes a 1D texture.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_texture1d_desc>.
+///
+/// {@category struct}
+base class D3D11_TEXTURE1D_DESC extends Struct {
+  /// Texture width (in texels).
+  @Uint32()
+  external int Width;
+
+  /// The maximum number of mipmap levels in the texture.
+  @Uint32()
+  external int MipLevels;
+
+  /// Number of textures in the array.
+  @Uint32()
+  external int ArraySize;
+
+  @Int32()
+  external int _Format;
+
+  @Int32()
+  external int _Usage;
+
+  @Uint32()
+  external int _BindFlags;
+
+  @Uint32()
+  external int _CPUAccessFlags;
+
+  @Uint32()
+  external int _MiscFlags;
+
+  /// Texture format (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/dxgiformat/ne-dxgiformat-dxgi_format">DXGI_FORMAT</a>).
+  DXGI_FORMAT get Format => DXGI_FORMAT(_Format);
+
+  set Format(DXGI_FORMAT value) => _Format = value;
+
+  /// Value that identifies how the texture is to be read from and written to.
+  D3D11_USAGE get Usage => D3D11_USAGE(_Usage);
+
+  set Usage(D3D11_USAGE value) => _Usage = value;
+
+  /// Flags (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_bind_flag">D3D11_BIND_FLAG</a>)
+  /// for binding to pipeline stages.
+  D3D11_BIND_FLAG get BindFlags => D3D11_BIND_FLAG(_BindFlags);
+
+  set BindFlags(D3D11_BIND_FLAG value) => _BindFlags = value;
+
+  /// Flags (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_cpu_access_flag">D3D11_CPU_ACCESS_FLAG</a>)
+  /// to specify the types of CPU access allowed.
+  D3D11_CPU_ACCESS_FLAG get CPUAccessFlags =>
+      D3D11_CPU_ACCESS_FLAG(_CPUAccessFlags);
+
+  set CPUAccessFlags(D3D11_CPU_ACCESS_FLAG value) => _CPUAccessFlags = value;
+
+  /// Flags (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_resource_misc_flag">D3D11_RESOURCE_MISC_FLAG</a>)
+  /// that identify other, less common resource options.
+  D3D11_RESOURCE_MISC_FLAG get MiscFlags =>
+      D3D11_RESOURCE_MISC_FLAG(_MiscFlags);
+
+  set MiscFlags(D3D11_RESOURCE_MISC_FLAG value) => _MiscFlags = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEXTURE1D_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes a 2D texture.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_texture2d_desc>.
+///
+/// {@category struct}
+base class D3D11_TEXTURE2D_DESC extends Struct {
+  /// Texture width (in texels).
+  @Uint32()
+  external int Width;
+
+  /// Texture height (in texels).
+  @Uint32()
+  external int Height;
+
+  /// The maximum number of mipmap levels in the texture.
+  @Uint32()
+  external int MipLevels;
+
+  /// Number of textures in the texture array.
+  @Uint32()
+  external int ArraySize;
+
+  @Int32()
+  external int _Format;
+
+  /// Structure that specifies multisampling parameters for the texture.
+  external DXGI_SAMPLE_DESC SampleDesc;
+
+  @Int32()
+  external int _Usage;
+
+  @Uint32()
+  external int _BindFlags;
+
+  @Uint32()
+  external int _CPUAccessFlags;
+
+  @Uint32()
+  external int _MiscFlags;
+
+  /// Texture format (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/dxgiformat/ne-dxgiformat-dxgi_format">DXGI_FORMAT</a>).
+  DXGI_FORMAT get Format => DXGI_FORMAT(_Format);
+
+  set Format(DXGI_FORMAT value) => _Format = value;
+
+  /// Value that identifies how the texture is to be read from and written to.
+  D3D11_USAGE get Usage => D3D11_USAGE(_Usage);
+
+  set Usage(D3D11_USAGE value) => _Usage = value;
+
+  /// Flags (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_bind_flag">D3D11_BIND_FLAG</a>)
+  /// for binding to pipeline stages.
+  D3D11_BIND_FLAG get BindFlags => D3D11_BIND_FLAG(_BindFlags);
+
+  set BindFlags(D3D11_BIND_FLAG value) => _BindFlags = value;
+
+  /// Flags (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_cpu_access_flag">D3D11_CPU_ACCESS_FLAG</a>)
+  /// to specify the types of CPU access allowed.
+  D3D11_CPU_ACCESS_FLAG get CPUAccessFlags =>
+      D3D11_CPU_ACCESS_FLAG(_CPUAccessFlags);
+
+  set CPUAccessFlags(D3D11_CPU_ACCESS_FLAG value) => _CPUAccessFlags = value;
+
+  /// Flags (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_resource_misc_flag">D3D11_RESOURCE_MISC_FLAG</a>)
+  /// that identify other, less common resource options.
+  D3D11_RESOURCE_MISC_FLAG get MiscFlags =>
+      D3D11_RESOURCE_MISC_FLAG(_MiscFlags);
+
+  set MiscFlags(D3D11_RESOURCE_MISC_FLAG value) => _MiscFlags = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEXTURE2D_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes a 2D texture.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_3/ns-d3d11_3-d3d11_texture2d_desc1>.
+///
+/// {@category struct}
+base class D3D11_TEXTURE2D_DESC1 extends Struct {
+  /// Texture width (in texels).
+  @Uint32()
+  external int Width;
+
+  /// Texture height (in texels).
+  @Uint32()
+  external int Height;
+
+  /// The maximum number of mipmap levels in the texture.
+  @Uint32()
+  external int MipLevels;
+
+  /// Number of textures in the texture array.
+  @Uint32()
+  external int ArraySize;
+
+  @Int32()
+  external int _Format;
+
+  /// Structure that specifies multisampling parameters for the texture.
+  external DXGI_SAMPLE_DESC SampleDesc;
+
+  @Int32()
+  external int _Usage;
+
+  @Uint32()
+  external int _BindFlags;
+
+  @Uint32()
+  external int _CPUAccessFlags;
+
+  @Uint32()
+  external int _MiscFlags;
+
+  @Int32()
+  external int _TextureLayout;
+
+  /// Texture format (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/dxgiformat/ne-dxgiformat-dxgi_format">DXGI_FORMAT</a>).
+  DXGI_FORMAT get Format => DXGI_FORMAT(_Format);
+
+  set Format(DXGI_FORMAT value) => _Format = value;
+
+  /// Value that identifies how the texture is to be read from and written to.
+  D3D11_USAGE get Usage => D3D11_USAGE(_Usage);
+
+  set Usage(D3D11_USAGE value) => _Usage = value;
+
+  /// Flags (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_bind_flag">D3D11_BIND_FLAG</a>)
+  /// for binding to pipeline stages.
+  D3D11_BIND_FLAG get BindFlags => D3D11_BIND_FLAG(_BindFlags);
+
+  set BindFlags(D3D11_BIND_FLAG value) => _BindFlags = value;
+
+  /// Flags (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_cpu_access_flag">D3D11_CPU_ACCESS_FLAG</a>)
+  /// to specify the types of CPU access allowed.
+  D3D11_CPU_ACCESS_FLAG get CPUAccessFlags =>
+      D3D11_CPU_ACCESS_FLAG(_CPUAccessFlags);
+
+  set CPUAccessFlags(D3D11_CPU_ACCESS_FLAG value) => _CPUAccessFlags = value;
+
+  /// Flags (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_resource_misc_flag">D3D11_RESOURCE_MISC_FLAG</a>)
+  /// that identify other, less common resource options.
+  D3D11_RESOURCE_MISC_FLAG get MiscFlags =>
+      D3D11_RESOURCE_MISC_FLAG(_MiscFlags);
+
+  set MiscFlags(D3D11_RESOURCE_MISC_FLAG value) => _MiscFlags = value;
+
+  /// A <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11_3/ne-d3d11_3-d3d11_texture_layout">D3D11_TEXTURE_LAYOUT</a>-typed
+  /// value that identifies the layout of the texture.
+  D3D11_TEXTURE_LAYOUT get TextureLayout =>
+      D3D11_TEXTURE_LAYOUT(_TextureLayout);
+
+  set TextureLayout(D3D11_TEXTURE_LAYOUT value) => _TextureLayout = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEXTURE2D_DESC1> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes a 3D texture.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_texture3d_desc>.
+///
+/// {@category struct}
+base class D3D11_TEXTURE3D_DESC extends Struct {
+  /// Texture width (in texels).
+  @Uint32()
+  external int Width;
+
+  /// Texture height (in texels).
+  @Uint32()
+  external int Height;
+
+  /// Texture depth (in texels).
+  @Uint32()
+  external int Depth;
+
+  /// The maximum number of mipmap levels in the texture.
+  @Uint32()
+  external int MipLevels;
+
+  @Int32()
+  external int _Format;
+
+  @Int32()
+  external int _Usage;
+
+  @Uint32()
+  external int _BindFlags;
+
+  @Uint32()
+  external int _CPUAccessFlags;
+
+  @Uint32()
+  external int _MiscFlags;
+
+  /// Texture format (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/dxgiformat/ne-dxgiformat-dxgi_format">DXGI_FORMAT</a>).
+  DXGI_FORMAT get Format => DXGI_FORMAT(_Format);
+
+  set Format(DXGI_FORMAT value) => _Format = value;
+
+  /// Value that identifies how the texture is to be read from and written to.
+  D3D11_USAGE get Usage => D3D11_USAGE(_Usage);
+
+  set Usage(D3D11_USAGE value) => _Usage = value;
+
+  /// Flags (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_bind_flag">D3D11_BIND_FLAG</a>)
+  /// for binding to pipeline stages.
+  D3D11_BIND_FLAG get BindFlags => D3D11_BIND_FLAG(_BindFlags);
+
+  set BindFlags(D3D11_BIND_FLAG value) => _BindFlags = value;
+
+  /// Flags (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_cpu_access_flag">D3D11_CPU_ACCESS_FLAG</a>)
+  /// to specify the types of CPU access allowed.
+  D3D11_CPU_ACCESS_FLAG get CPUAccessFlags =>
+      D3D11_CPU_ACCESS_FLAG(_CPUAccessFlags);
+
+  set CPUAccessFlags(D3D11_CPU_ACCESS_FLAG value) => _CPUAccessFlags = value;
+
+  /// Flags (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_resource_misc_flag">D3D11_RESOURCE_MISC_FLAG</a>)
+  /// that identify other, less common resource options.
+  D3D11_RESOURCE_MISC_FLAG get MiscFlags =>
+      D3D11_RESOURCE_MISC_FLAG(_MiscFlags);
+
+  set MiscFlags(D3D11_RESOURCE_MISC_FLAG value) => _MiscFlags = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEXTURE3D_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes a 3D texture.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_3/ns-d3d11_3-d3d11_texture3d_desc1>.
+///
+/// {@category struct}
+base class D3D11_TEXTURE3D_DESC1 extends Struct {
+  /// Texture width (in texels).
+  @Uint32()
+  external int Width;
+
+  /// Texture height (in texels).
+  @Uint32()
+  external int Height;
+
+  /// Texture depth (in texels).
+  @Uint32()
+  external int Depth;
+
+  /// The maximum number of mipmap levels in the texture.
+  @Uint32()
+  external int MipLevels;
+
+  @Int32()
+  external int _Format;
+
+  @Int32()
+  external int _Usage;
+
+  @Uint32()
+  external int _BindFlags;
+
+  @Uint32()
+  external int _CPUAccessFlags;
+
+  @Uint32()
+  external int _MiscFlags;
+
+  @Int32()
+  external int _TextureLayout;
+
+  /// Texture format (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/dxgiformat/ne-dxgiformat-dxgi_format">DXGI_FORMAT</a>).
+  DXGI_FORMAT get Format => DXGI_FORMAT(_Format);
+
+  set Format(DXGI_FORMAT value) => _Format = value;
+
+  /// Value that identifies how the texture is to be read from and written to.
+  D3D11_USAGE get Usage => D3D11_USAGE(_Usage);
+
+  set Usage(D3D11_USAGE value) => _Usage = value;
+
+  /// Flags (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_bind_flag">D3D11_BIND_FLAG</a>)
+  /// for binding to pipeline stages.
+  D3D11_BIND_FLAG get BindFlags => D3D11_BIND_FLAG(_BindFlags);
+
+  set BindFlags(D3D11_BIND_FLAG value) => _BindFlags = value;
+
+  /// Flags (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_cpu_access_flag">D3D11_CPU_ACCESS_FLAG</a>)
+  /// to specify the types of CPU access allowed.
+  D3D11_CPU_ACCESS_FLAG get CPUAccessFlags =>
+      D3D11_CPU_ACCESS_FLAG(_CPUAccessFlags);
+
+  set CPUAccessFlags(D3D11_CPU_ACCESS_FLAG value) => _CPUAccessFlags = value;
+
+  /// Flags (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_resource_misc_flag">D3D11_RESOURCE_MISC_FLAG</a>)
+  /// that identify other, less common resource options.
+  D3D11_RESOURCE_MISC_FLAG get MiscFlags =>
+      D3D11_RESOURCE_MISC_FLAG(_MiscFlags);
+
+  set MiscFlags(D3D11_RESOURCE_MISC_FLAG value) => _MiscFlags = value;
+
+  /// A <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11_3/ne-d3d11_3-d3d11_texture_layout">D3D11_TEXTURE_LAYOUT</a>-typed
+  /// value that identifies the layout of the texture.
+  D3D11_TEXTURE_LAYOUT get TextureLayout =>
+      D3D11_TEXTURE_LAYOUT(_TextureLayout);
+
+  set TextureLayout(D3D11_TEXTURE_LAYOUT value) => _TextureLayout = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TEXTURE3D_DESC1> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes the coordinates of a tiled resource.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_2/ns-d3d11_2-d3d11_tiled_resource_coordinate>.
+///
+/// {@category struct}
+base class D3D11_TILED_RESOURCE_COORDINATE extends Struct {
+  /// The x position of a tiled resource.
+  @Uint32()
+  external int X;
+
+  /// The y position of a tiled resource.
+  @Uint32()
+  external int Y;
+
+  /// The z position of a tiled resource.
+  @Uint32()
+  external int Z;
+
+  /// A subresource index value into mipmaps and arrays.
+  @Uint32()
+  external int Subresource;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TILED_RESOURCE_COORDINATE> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes the size of a tiled region.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_2/ns-d3d11_2-d3d11_tile_region_size>.
+///
+/// {@category struct}
+base class D3D11_TILE_REGION_SIZE extends Struct {
+  /// The number of tiles in the tiled region.
+  @Uint32()
+  external int NumTiles;
+
+  @Int32()
+  external int _bUseBox;
+
+  /// The width of the tiled region, in tiles.
+  @Uint32()
+  external int Width;
+
+  /// The height of the tiled region, in tiles.
+  @Uint16()
+  external int Height;
+
+  /// The depth of the tiled region, in tiles.
+  @Uint16()
+  external int Depth;
+
+  /// Specifies whether the runtime uses the <b>Width</b>, <b>Height</b>, and
+  /// <b>Depth</b> members to define the region.
+  bool get bUseBox => _bUseBox != FALSE;
+
+  set bUseBox(bool value) => _bUseBox = value ? TRUE : FALSE;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TILE_REGION_SIZE> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes the shape of a tile by specifying its dimensions.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_2/ns-d3d11_2-d3d11_tile_shape>.
+///
+/// {@category struct}
+base class D3D11_TILE_SHAPE extends Struct {
+  /// The width in texels of the tile.
+  @Uint32()
+  external int WidthInTexels;
+
+  /// The height in texels of the tile.
+  @Uint32()
+  external int HeightInTexels;
+
+  /// The depth in texels of the tile.
+  @Uint32()
+  external int DepthInTexels;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TILE_SHAPE> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Describes a trace register.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11shadertracing/ns-d3d11shadertracing-d3d11_trace_register>.
+///
+/// {@category struct}
+base class D3D11_TRACE_REGISTER extends Struct {
+  @Int32()
+  external int _RegType;
+
+  external D3D11_TRACE_REGISTER_0 Anonymous;
+
+  /// The index of the operand, which starts from 0.
+  @Uint8()
+  external int OperandIndex;
+
+  /// A combination of the following flags that are combined by using a bitwise
+  /// <b>OR</b> operation.
+  @Uint8()
+  external int Flags;
+
+  /// A <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11shadertracing/ne-d3d11shadertracing-d3d11_trace_register_type">D3D11_TRACE_REGISTER_TYPE</a>-typed
+  /// value that identifies the type of register that the shader-trace object
+  /// uses.
+  D3D11_TRACE_REGISTER_TYPE get RegType => D3D11_TRACE_REGISTER_TYPE(_RegType);
+
+  set RegType(D3D11_TRACE_REGISTER_TYPE value) => _RegType = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TRACE_REGISTER> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// {@category union}
+sealed class D3D11_TRACE_REGISTER_0 extends Union {
+  @Uint16()
+  external int Index1D;
+
+  @Array(2)
+  external Array<Uint16> Index2D;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TRACE_REGISTER_0> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+extension D3D11_TRACE_REGISTER_0_Extension on D3D11_TRACE_REGISTER {
+  int get Index1D => this.Anonymous.Index1D;
+  set Index1D(int value) => this.Anonymous.Index1D = value;
+  Array<Uint16> get Index2D => this.Anonymous.Index2D;
+  set Index2D(Array<Uint16> value) => this.Anonymous.Index2D = value;
+}
+
+/// Specifies statistics about a trace.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11shadertracing/ns-d3d11shadertracing-d3d11_trace_stats>.
+///
+/// {@category struct}
+base class D3D11_TRACE_STATS extends Struct {
+  /// A `D3D11_SHADER_TRACE_DESC` structure that describes the shader trace
+  /// object for which this structure specifies statistics.
+  external D3D11_SHADER_TRACE_DESC TraceDesc;
+
+  /// The number of calls in the stamp for the trace.
+  @Uint8()
+  external int NumInvocationsInStamp;
+
+  /// The index of the target stamp.
+  @Uint8()
+  external int TargetStampIndex;
+
+  /// The total number of steps for the trace.
+  @Uint32()
+  external int NumTraceSteps;
+
+  /// The component trace mask for each input v# register.
+  @Array(32)
+  external Array<Uint8> InputMask;
+
+  /// The component trace mask for each output o# register.
+  @Array(32)
+  external Array<Uint8> OutputMask;
+
+  /// The number of temps, that is, 4x32 bit r# registers that are declared.
+  @Uint16()
+  external int NumTemps;
+
+  /// The maximum index #+1 of all indexable temps x#[] that are declared.
+  @Uint16()
+  external int MaxIndexableTempIndex;
+
+  /// The number of temps for each indexable temp x#`[numTemps]`.
+  @Array(4096)
+  external Array<Uint16> IndexableTempSize;
+
+  /// The number of 4x32 bit values (if any) that are in the immediate constant
+  /// buffer.
+  @Uint16()
+  external int ImmediateConstantBufferSize;
+
+  @Array(8)
+  external Array<Uint32> PixelPosition;
+
+  /// <b>Note</b> This member is for pixel shaders only, `[stampIndex]`.</div>
+  /// <div> </div> A mask that indicates which MSAA samples are covered for each
+  /// stamp.
+  @Array(4)
+  external Array<Uint64> PixelCoverageMask;
+
+  /// <b>Note</b> This member is for pixel shaders only, `[stampIndex]`.</div>
+  /// <div> </div> A mask that indicates discarded samples.
+  @Array(4)
+  external Array<Uint64> PixelDiscardedMask;
+
+  /// <b>Note</b> This member is for pixel shaders only, `[stampIndex]`.</div>
+  /// <div> </div> A mask that indicates the MSAA samples that are covered.
+  @Array(4)
+  external Array<Uint64> PixelCoverageMaskAfterShader;
+
+  /// <b>Note</b> This member is for pixel shaders only, `[stampIndex]`.</div>
+  /// <div> </div> A mask that indicates the MSAA samples that are covered after
+  /// alpha-to-coverage+sampleMask, but before depth and stencil.
+  @Array(4)
+  external Array<Uint64> PixelCoverageMaskAfterA2CSampleMask;
+
+  /// <b>Note</b> This member is for pixel shaders only, `[stampIndex]`.</div>
+  /// <div> </div> A mask that indicates the MSAA samples that are covered after
+  /// alpha-to-coverage+sampleMask+depth, but before stencil.
+  @Array(4)
+  external Array<Uint64> PixelCoverageMaskAfterA2CSampleMaskDepth;
+
+  /// <b>Note</b> This member is for pixel shaders only, `[stampIndex]`.</div>
+  /// <div> </div> A mask that indicates the MSAA samples that are covered after
+  /// alpha-to-coverage+sampleMask+depth+stencil.
+  @Array(4)
+  external Array<Uint64> PixelCoverageMaskAfterA2CSampleMaskDepthStencil;
+
+  @Int32()
+  external int _PSOutputsDepth;
+
+  @Int32()
+  external int _PSOutputsMask;
+
+  @Int32()
+  external int _GSInputPrimitive;
+
+  @Int32()
+  external int _GSInputsPrimitiveID;
+
+  /// <b>Note</b> This member is for hull shaders only.</div> <div> </div> The
+  /// component trace mask for the hull-shader output.
+  @Array(32)
+  external Array<Uint8> HSOutputPatchConstantMask;
+
+  /// <b>Note</b> This member is for domain shaders only.</div> <div> </div> The
+  /// component trace mask for the domain-shader input.
+  @Array(32)
+  external Array<Uint8> DSInputPatchConstantMask;
+
+  /// A value that specifies whether this trace is for a pixel shader that
+  /// outputs the oDepth register.
+  bool get PSOutputsDepth => _PSOutputsDepth != FALSE;
+
+  set PSOutputsDepth(bool value) => _PSOutputsDepth = value ? TRUE : FALSE;
+
+  /// A value that specifies whether this trace is for a pixel shader that
+  /// outputs the oMask register.
+  bool get PSOutputsMask => _PSOutputsMask != FALSE;
+
+  set PSOutputsMask(bool value) => _PSOutputsMask = value ? TRUE : FALSE;
+
+  /// A <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11shadertracing/ne-d3d11shadertracing-d3d11_trace_gs_input_primitive">D3D11_TRACE_GS_INPUT_PRIMITIVE</a>-typed
+  /// value that identifies the type of geometry shader input primitive.
+  D3D11_TRACE_GS_INPUT_PRIMITIVE get GSInputPrimitive =>
+      D3D11_TRACE_GS_INPUT_PRIMITIVE(_GSInputPrimitive);
+
+  set GSInputPrimitive(D3D11_TRACE_GS_INPUT_PRIMITIVE value) =>
+      _GSInputPrimitive = value;
+
+  /// A value that specifies whether this trace is for a geometry shader that
+  /// inputs the PrimitiveID register.
+  bool get GSInputsPrimitiveID => _GSInputsPrimitiveID != FALSE;
+
+  set GSInputsPrimitiveID(bool value) =>
+      _GSInputsPrimitiveID = value ? TRUE : FALSE;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TRACE_STATS> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Describes a trace step, which is an instruction.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11shadertracing/ns-d3d11shadertracing-d3d11_trace_step>.
+///
+/// {@category struct}
+base class D3D11_TRACE_STEP extends Struct {
+  /// A number that identifies the instruction, as an offset into the executable
+  /// instructions that are present in the shader.
+  @Uint32()
+  external int ID;
+
+  @Int32()
+  external int _InstructionActive;
+
+  /// The number of registers for the instruction that are written to.
+  @Uint8()
+  external int NumRegistersWritten;
+
+  /// The number of registers for the instruction that are read from.
+  @Uint8()
+  external int NumRegistersRead;
+
+  @Uint16()
+  external int MiscOperations;
+
+  /// A number that specifies the type of instruction (for example, <a
+  /// href="https://docs.microsoft.com/windows/desktop/direct3dhlsl/add---vs">add</a>,
+  /// <a
+  /// href="https://docs.microsoft.com/windows/desktop/direct3dhlsl/dx-graphics-hlsl-mul">mul</a>,
+  /// and so on).
+  @Uint32()
+  external int OpcodeType;
+
+  /// The global cycle count for this step.
+  @Uint64()
+  external int CurrentGlobalCycle;
+
+  /// A value that specifies whether the instruction is active.
+  bool get InstructionActive => _InstructionActive != FALSE;
+
+  set InstructionActive(bool value) =>
+      _InstructionActive = value ? TRUE : FALSE;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TRACE_STEP> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Describes a trace value.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11shadertracing/ns-d3d11shadertracing-d3d11_trace_value>.
+///
+/// {@category struct}
+base class D3D11_TRACE_VALUE extends Struct {
+  /// An array of bits that make up the trace value.
+  @Array(4)
+  external Array<Uint32> Bits;
+
+  /// A combination of the following component values that are combined by using
+  /// a bitwise <b>OR</b> operation.
+  @Uint8()
+  external int ValidMask;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_TRACE_VALUE> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Specifies the subresources from a resource that are accessible using an
+/// unordered-access view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_unordered_access_view_desc>.
+///
+/// {@category struct}
+base class D3D11_UNORDERED_ACCESS_VIEW_DESC extends Struct {
+  @Int32()
+  external int _Format;
+
+  @Int32()
+  external int _ViewDimension;
+
+  external D3D11_UNORDERED_ACCESS_VIEW_DESC_0 Anonymous;
+
+  /// The data format (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/dxgiformat/ne-dxgiformat-dxgi_format">DXGI_FORMAT</a>).
+  DXGI_FORMAT get Format => DXGI_FORMAT(_Format);
+
+  set Format(DXGI_FORMAT value) => _Format = value;
+
+  /// The resource type (see <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_uav_dimension">D3D11_UAV_DIMENSION</a>),
+  /// which specifies how the resource will be accessed.
+  D3D11_UAV_DIMENSION get ViewDimension => D3D11_UAV_DIMENSION(_ViewDimension);
+
+  set ViewDimension(D3D11_UAV_DIMENSION value) => _ViewDimension = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_UNORDERED_ACCESS_VIEW_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// {@category union}
+sealed class D3D11_UNORDERED_ACCESS_VIEW_DESC_0 extends Union {
+  external D3D11_BUFFER_UAV Buffer;
+  external D3D11_TEX1D_UAV Texture1D;
+  external D3D11_TEX1D_ARRAY_UAV Texture1DArray;
+  external D3D11_TEX2D_UAV Texture2D;
+  external D3D11_TEX2D_ARRAY_UAV Texture2DArray;
+  external D3D11_TEX3D_UAV Texture3D;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_UNORDERED_ACCESS_VIEW_DESC_0> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+extension D3D11_UNORDERED_ACCESS_VIEW_DESC_0_Extension
+    on D3D11_UNORDERED_ACCESS_VIEW_DESC {
+  D3D11_BUFFER_UAV get Buffer => this.Anonymous.Buffer;
+  set Buffer(D3D11_BUFFER_UAV value) => this.Anonymous.Buffer = value;
+  D3D11_TEX1D_UAV get Texture1D => this.Anonymous.Texture1D;
+  set Texture1D(D3D11_TEX1D_UAV value) => this.Anonymous.Texture1D = value;
+  D3D11_TEX1D_ARRAY_UAV get Texture1DArray => this.Anonymous.Texture1DArray;
+  set Texture1DArray(D3D11_TEX1D_ARRAY_UAV value) =>
+      this.Anonymous.Texture1DArray = value;
+  D3D11_TEX2D_UAV get Texture2D => this.Anonymous.Texture2D;
+  set Texture2D(D3D11_TEX2D_UAV value) => this.Anonymous.Texture2D = value;
+  D3D11_TEX2D_ARRAY_UAV get Texture2DArray => this.Anonymous.Texture2DArray;
+  set Texture2DArray(D3D11_TEX2D_ARRAY_UAV value) =>
+      this.Anonymous.Texture2DArray = value;
+  D3D11_TEX3D_UAV get Texture3D => this.Anonymous.Texture3D;
+  set Texture3D(D3D11_TEX3D_UAV value) => this.Anonymous.Texture3D = value;
+}
+
+/// Describes the subresources from a resource that are accessible using an
+/// unordered-access view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_3/ns-d3d11_3-d3d11_unordered_access_view_desc1>.
+///
+/// {@category struct}
+base class D3D11_UNORDERED_ACCESS_VIEW_DESC1 extends Struct {
+  @Int32()
+  external int _Format;
+
+  @Int32()
+  external int _ViewDimension;
+
+  external D3D11_UNORDERED_ACCESS_VIEW_DESC1_0 Anonymous;
+
+  /// A <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/dxgiformat/ne-dxgiformat-dxgi_format">DXGI_FORMAT</a>-typed
+  /// value that specifies the data format.
+  DXGI_FORMAT get Format => DXGI_FORMAT(_Format);
+
+  set Format(DXGI_FORMAT value) => _Format = value;
+
+  /// A <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_uav_dimension">D3D11_UAV_DIMENSION</a>-typed
+  /// value that specifies the resource type of the view.
+  D3D11_UAV_DIMENSION get ViewDimension => D3D11_UAV_DIMENSION(_ViewDimension);
+
+  set ViewDimension(D3D11_UAV_DIMENSION value) => _ViewDimension = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_UNORDERED_ACCESS_VIEW_DESC1> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// {@category union}
+sealed class D3D11_UNORDERED_ACCESS_VIEW_DESC1_0 extends Union {
+  external D3D11_BUFFER_UAV Buffer;
+  external D3D11_TEX1D_UAV Texture1D;
+  external D3D11_TEX1D_ARRAY_UAV Texture1DArray;
+  external D3D11_TEX2D_UAV1 Texture2D;
+  external D3D11_TEX2D_ARRAY_UAV1 Texture2DArray;
+  external D3D11_TEX3D_UAV Texture3D;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_UNORDERED_ACCESS_VIEW_DESC1_0> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+extension D3D11_UNORDERED_ACCESS_VIEW_DESC1_0_Extension
+    on D3D11_UNORDERED_ACCESS_VIEW_DESC1 {
+  D3D11_BUFFER_UAV get Buffer => this.Anonymous.Buffer;
+  set Buffer(D3D11_BUFFER_UAV value) => this.Anonymous.Buffer = value;
+  D3D11_TEX1D_UAV get Texture1D => this.Anonymous.Texture1D;
+  set Texture1D(D3D11_TEX1D_UAV value) => this.Anonymous.Texture1D = value;
+  D3D11_TEX1D_ARRAY_UAV get Texture1DArray => this.Anonymous.Texture1DArray;
+  set Texture1DArray(D3D11_TEX1D_ARRAY_UAV value) =>
+      this.Anonymous.Texture1DArray = value;
+  D3D11_TEX2D_UAV1 get Texture2D => this.Anonymous.Texture2D;
+  set Texture2D(D3D11_TEX2D_UAV1 value) => this.Anonymous.Texture2D = value;
+  D3D11_TEX2D_ARRAY_UAV1 get Texture2DArray => this.Anonymous.Texture2DArray;
+  set Texture2DArray(D3D11_TEX2D_ARRAY_UAV1 value) =>
+      this.Anonymous.Texture2DArray = value;
+  D3D11_TEX3D_UAV get Texture3D => this.Anonymous.Texture3D;
+  set Texture3D(D3D11_TEX3D_UAV value) => this.Anonymous.Texture3D = value;
+}
+
+/// Describes an instance of a vertex shader to trace.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11shadertracing/ns-d3d11shadertracing-d3d11_vertex_shader_trace_desc>.
+///
+/// {@category struct}
+base class D3D11_VERTEX_SHADER_TRACE_DESC extends Struct {
+  /// The invocation number of the instance of the vertex shader.
+  @Uint64()
+  external int Invocation;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_VERTEX_SHADER_TRACE_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Defines a color value for Microsoft Direct3D 11 video.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_video_color>.
+///
+/// {@category struct}
+base class D3D11_VIDEO_COLOR extends Struct {
+  external D3D11_VIDEO_COLOR_0 Anonymous;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_VIDEO_COLOR> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// {@category union}
+sealed class D3D11_VIDEO_COLOR_0 extends Union {
+  external D3D11_VIDEO_COLOR_YCbCrA YCbCr;
+  external D3D11_VIDEO_COLOR_RGBA RGBA;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_VIDEO_COLOR_0> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+extension D3D11_VIDEO_COLOR_0_Extension on D3D11_VIDEO_COLOR {
+  D3D11_VIDEO_COLOR_YCbCrA get YCbCr => this.Anonymous.YCbCr;
+  set YCbCr(D3D11_VIDEO_COLOR_YCbCrA value) => this.Anonymous.YCbCr = value;
+  D3D11_VIDEO_COLOR_RGBA get RGBA => this.Anonymous.RGBA;
+  set RGBA(D3D11_VIDEO_COLOR_RGBA value) => this.Anonymous.RGBA = value;
+}
+
+/// Specifies an RGB color value.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_video_color_rgba>.
+///
+/// {@category struct}
+base class D3D11_VIDEO_COLOR_RGBA extends Struct {
+  /// The red value.
+  @Float()
+  external double R;
+
+  /// The green value.
+  @Float()
+  external double G;
+
+  /// The blue value.
+  @Float()
+  external double B;
+
+  /// The alpha value.
+  @Float()
+  external double A;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_VIDEO_COLOR_RGBA> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Specifies a YCbCr color value.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_video_color_ycbcra>.
+///
+/// {@category struct}
+base class D3D11_VIDEO_COLOR_YCbCrA extends Struct {
+  /// The Y luma value.
+  @Float()
+  external double Y;
+
+  /// The Cb chroma value.
+  @Float()
+  external double Cb;
+
+  /// The Cr chroma value.
+  @Float()
+  external double Cr;
+
+  /// The alpha value.
+  @Float()
+  external double A;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_VIDEO_COLOR_YCbCrA> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes the content-protection capabilities of a graphics driver.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_video_content_protection_caps>.
+///
+/// {@category struct}
+base class D3D11_VIDEO_CONTENT_PROTECTION_CAPS extends Struct {
+  /// A bitwise <b>OR</b> of zero or more flags from the <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_content_protection_caps">D3D11_CONTENT_PROTECTION_CAPS</a>
+  /// enumeration.
+  @Uint32()
+  external int Caps;
+
+  /// The number of cryptographic key-exchange types that are supported by the
+  /// driver.
+  @Uint32()
+  external int KeyExchangeTypeCount;
+
+  /// The encryption block size, in bytes.
+  @Uint32()
+  external int BlockAlignmentSize;
+
+  /// The total amount of memory, in bytes, that can be used to hold protected
+  /// surfaces.
+  @Uint64()
+  external int ProtectedMemorySize;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_VIDEO_CONTENT_PROTECTION_CAPS> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Provides data to the ID3D11VideoContext::DecoderBeginFrame method.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_1/ns-d3d11_1-d3d11_video_decoder_begin_frame_crypto_session>.
+///
+/// {@category struct}
+base class D3D11_VIDEO_DECODER_BEGIN_FRAME_CRYPTO_SESSION extends Struct {
+  external VTablePointer _pCryptoSession;
+
+  /// The size of the memory buffer referenced by the <i>pBlob</i> member.
+  @Uint32()
+  external int BlobSize;
+
+  /// The definition of this buffer is dependent on the implementation of the
+  /// secure execution environment.
+  external Pointer pBlob;
+
+  /// A pointer to a GUID identifying the hardware key.
+  external Pointer<GUID> pKeyInfoId;
+
+  /// The size of the memory buffer referenced by the <i>pPrivateData</i>
+  /// member.
+  @Uint32()
+  external int PrivateDataSize;
+
+  external Pointer pPrivateData;
+
+  /// A pointer to the ID3D11CryptoSession interface.
+  ID3D11CryptoSession? get pCryptoSession =>
+      _pCryptoSession.isNull ? null : ID3D11CryptoSession(_pCryptoSession);
+
+  set pCryptoSession(ID3D11CryptoSession? value) =>
+      _pCryptoSession = value?.ptr ?? nullptr;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_VIDEO_DECODER_BEGIN_FRAME_CRYPTO_SESSION> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes a compressed buffer for decoding.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_video_decoder_buffer_desc>.
+///
+/// {@category struct}
+base class D3D11_VIDEO_DECODER_BUFFER_DESC extends Struct {
+  @Int32()
+  external int _BufferType;
+
+  /// Reserved.
+  @Uint32()
+  external int BufferIndex;
+
+  /// The offset of the relevant data from the beginning of the buffer, in
+  /// bytes.
+  @Uint32()
+  external int DataOffset;
+
+  @Uint32()
+  external int DataSize;
+
+  /// The macroblock address of the first macroblock in the buffer.
+  @Uint32()
+  external int FirstMBaddress;
+
+  /// The number of macroblocks of data in the buffer.
+  @Uint32()
+  external int NumMBsInBuffer;
+
+  /// Reserved.
+  @Uint32()
+  external int Width;
+
+  /// Reserved.
+  @Uint32()
+  external int Height;
+
+  /// Reserved.
+  @Uint32()
+  external int Stride;
+
+  @Uint32()
+  external int _ReservedBits;
+
+  /// A pointer to a buffer that contains an initialization vector (IV) for
+  /// encrypted data.
+  external Pointer pIV;
+
+  /// The size of the buffer specified in the <b>pIV</b> parameter.
+  @Uint32()
+  external int IVSize;
+
+  @Int32()
+  external int _PartialEncryption;
+
+  /// A `D3D11_ENCRYPTED_BLOCK_INFO` structure that specifies which bytes of the
+  /// surface are encrypted.
+  external D3D11_ENCRYPTED_BLOCK_INFO EncryptedBlockInfo;
+
+  /// The type of buffer, specified as a member of the <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_video_decoder_buffer_type">D3D11_VIDEO_DECODER_BUFFER_TYPE</a>
+  /// enumeration.
+  D3D11_VIDEO_DECODER_BUFFER_TYPE get BufferType =>
+      D3D11_VIDEO_DECODER_BUFFER_TYPE(_BufferType);
+
+  set BufferType(D3D11_VIDEO_DECODER_BUFFER_TYPE value) => _BufferType = value;
+
+  /// If `[TRUE]`, the video surfaces are partially encrypted.
+  bool get PartialEncryption => _PartialEncryption != FALSE;
+
+  set PartialEncryption(bool value) =>
+      _PartialEncryption = value ? TRUE : FALSE;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_VIDEO_DECODER_BUFFER_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes a compressed buffer for decoding.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_1/ns-d3d11_1-d3d11_video_decoder_buffer_desc1>.
+///
+/// {@category struct}
+base class D3D11_VIDEO_DECODER_BUFFER_DESC1 extends Struct {
+  @Int32()
+  external int _BufferType;
+
+  /// The offset of the relevant data from the beginning of the buffer, in
+  /// bytes.
+  @Uint32()
+  external int DataOffset;
+
+  /// Size of the relevant data.
+  @Uint32()
+  external int DataSize;
+
+  /// A pointer to a buffer that contains an initialization vector (IV) for
+  /// encrypted data.
+  external Pointer pIV;
+
+  /// The size of the buffer specified in the <i>pIV</i> parameter.
+  @Uint32()
+  external int IVSize;
+
+  /// A pointer to an array of <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11_1/ns-d3d11_1-d3d11_video_decoder_sub_sample_mapping_block">D3D11_VIDEO_DECODER_SUB_SAMPLE_MAPPING_BLOCK</a>
+  /// structures, which indicates exactly which bytes in the decode buffer are
+  /// encrypted and which are in the clear.
+  external Pointer<D3D11_VIDEO_DECODER_SUB_SAMPLE_MAPPING_BLOCK>
+  pSubSampleMappingBlock;
+
+  /// The number of <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11_1/ns-d3d11_1-d3d11_video_decoder_sub_sample_mapping_block">D3D11_VIDEO_DECODER_SUB_SAMPLE_MAPPING_BLOCK</a>
+  /// structures specified in the <i>pSubSampleMappingBlocks</i> parameter.
+  @Uint32()
+  external int SubSampleMappingCount;
+
+  /// The type of buffer.
+  D3D11_VIDEO_DECODER_BUFFER_TYPE get BufferType =>
+      D3D11_VIDEO_DECODER_BUFFER_TYPE(_BufferType);
+
+  set BufferType(D3D11_VIDEO_DECODER_BUFFER_TYPE value) => _BufferType = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_VIDEO_DECODER_BUFFER_DESC1> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// {@category struct}
+base class D3D11_VIDEO_DECODER_BUFFER_DESC2 extends Struct {
+  @Int32()
+  external int _BufferType;
+
+  @Uint32()
+  external int DataOffset;
+
+  @Uint32()
+  external int DataSize;
+
+  external Pointer pIV;
+
+  @Uint32()
+  external int IVSize;
+
+  external Pointer<D3D11_VIDEO_DECODER_SUB_SAMPLE_MAPPING_BLOCK>
+  pSubSampleMappingBlock;
+
+  @Uint32()
+  external int SubSampleMappingCount;
+
+  @Uint32()
+  external int cBlocksStripeEncrypted;
+
+  @Uint32()
+  external int cBlocksStripeClear;
+
+  D3D11_VIDEO_DECODER_BUFFER_TYPE get BufferType =>
+      D3D11_VIDEO_DECODER_BUFFER_TYPE(_BufferType);
+  set BufferType(D3D11_VIDEO_DECODER_BUFFER_TYPE value) => _BufferType = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_VIDEO_DECODER_BUFFER_DESC2> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes the configuration of a Microsoft Direct3D 11 decoder device for
+/// DirectX Video Acceleration (DXVA).
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_video_decoder_config>.
+///
+/// {@category struct}
+base class D3D11_VIDEO_DECODER_CONFIG extends Struct {
+  /// If the bitstream data buffers are encrypted using the D3D11CryptoSession
+  /// mechanism, this GUID should be set to zero.
+  external GUID guidConfigBitstreamEncryption;
+
+  /// If the macroblock control data buffers are encrypted using the
+  /// D3D11CryptoSession mechanism, this GUID should be set to zero.
+  external GUID guidConfigMBcontrolEncryption;
+
+  /// If the residual difference decoding data buffers are encrypted using the
+  /// D3D11CryptoSession mechanism, this GUID should be set to zero.
+  external GUID guidConfigResidDiffEncryption;
+
+  /// Indicates whether the host-decoder sends raw bit-stream data.
+  @Uint32()
+  external int ConfigBitstreamRaw;
+
+  /// Specifies whether macroblock control commands are in raster scan order or
+  /// in arbitrary order.
+  @Uint32()
+  external int ConfigMBcontrolRasterOrder;
+
+  /// Contains the host residual difference configuration.
+  @Uint32()
+  external int ConfigResidDiffHost;
+
+  /// Indicates the word size used to represent residual difference
+  /// spatial-domain blocks for predicted (non-intra) pictures when using
+  /// host-based residual difference decoding.
+  @Uint32()
+  external int ConfigSpatialResid8;
+
+  /// If the value is 1, 8-bit difference overflow blocks are subtracted rather
+  /// than added.
+  @Uint32()
+  external int ConfigResid8Subtraction;
+
+  /// If the value is 1, spatial-domain blocks for intra macroblocks must be
+  /// clipped to an 8-bit range on the host and spatial-domain blocks for
+  /// non-intra macroblocks must be clipped to a 9-bit range on the host.
+  @Uint32()
+  external int ConfigSpatialHost8or9Clipping;
+
+  /// If the value is 1, any spatial-domain residual difference data must be
+  /// sent in a chrominance-interleaved form matching the YUV format chrominance
+  /// interleaving pattern.
+  @Uint32()
+  external int ConfigSpatialResidInterleaved;
+
+  /// Indicates the method of representation of spatial-domain blocks of
+  /// residual difference data for intra blocks when using host-based difference
+  /// decoding.
+  @Uint32()
+  external int ConfigIntraResidUnsigned;
+
+  /// If the value is 1, transform-domain blocks of coefficient data may be sent
+  /// from the host for accelerator-based IDCT.
+  @Uint32()
+  external int ConfigResidDiffAccelerator;
+
+  /// If the value is 1, the inverse scan for transform-domain block processing
+  /// will be performed on the host, and absolute indices will be sent instead
+  /// for any transform coefficients.
+  @Uint32()
+  external int ConfigHostInverseScan;
+
+  /// If the value is 1, the IDCT specified in Annex W of ITU-T Recommendation
+  /// H.263 is used.
+  @Uint32()
+  external int ConfigSpecificIDCT;
+
+  /// If the value is 1, transform coefficients for off-host IDCT will be sent
+  /// using the <a
+  /// href="https://docs.microsoft.com/windows-hardware/drivers/ddi/content/dxva/ns-dxva-_dxva_tcoef4group">DXVA_TCoef4Group</a>
+  /// structure.
+  @Uint32()
+  external int Config4GroupedCoefs;
+
+  /// Specifies how many frames the decoder device processes at any one time.
+  @Uint16()
+  external int ConfigMinRenderTargetBuffCount;
+
+  /// Contains decoder-specific configuration information.
+  @Uint16()
+  external int ConfigDecoderSpecific;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_VIDEO_DECODER_CONFIG> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes a video stream for a Microsoft Direct3D 11 video decoder or video
+/// processor.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_video_decoder_desc>.
+///
+/// {@category struct}
+base class D3D11_VIDEO_DECODER_DESC extends Struct {
+  /// The decoding profile.
+  external GUID Guid;
+
+  /// The width of the video frame, in pixels.
+  @Uint32()
+  external int SampleWidth;
+
+  /// The height of the video frame, in pixels.
+  @Uint32()
+  external int SampleHeight;
+
+  @Int32()
+  external int _OutputFormat;
+
+  /// The output surface format, specified as a <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/dxgiformat/ne-dxgiformat-dxgi_format">DXGI_FORMAT</a>
+  /// value.
+  DXGI_FORMAT get OutputFormat => DXGI_FORMAT(_OutputFormat);
+
+  set OutputFormat(DXGI_FORMAT value) => _OutputFormat = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_VIDEO_DECODER_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Contains driver-specific data for the ID3D11VideoContext::DecoderExtension
+/// method.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_video_decoder_extension>.
+///
+/// {@category struct}
+base class D3D11_VIDEO_DECODER_EXTENSION extends Struct {
+  /// The function number.
+  @Uint32()
+  external int Function;
+
+  /// A pointer to a buffer that contains input data for the driver.
+  external Pointer pPrivateInputData;
+
+  /// The size of the <b>pPrivateInputData</b> buffer, in bytes.
+  @Uint32()
+  external int PrivateInputDataSize;
+
+  /// A pointer to a buffer that the driver can use to write output data.
+  external Pointer pPrivateOutputData;
+
+  /// The size of the <b>pPrivateOutputData</b> buffer, in bytes.
+  @Uint32()
+  external int PrivateOutputDataSize;
+
+  /// The number of elements in the <b>ppResourceList</b> array.
+  @Uint32()
+  external int ResourceCount;
+
+  /// The address of an array of <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nn-d3d11-id3d11resource">ID3D11Resource</a>
+  /// pointers.
+  external Pointer<VTablePointer> ppResourceList;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_VIDEO_DECODER_EXTENSION> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes a video decoder output view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_video_decoder_output_view_desc>.
+///
+/// {@category struct}
+base class D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC extends Struct {
+  /// The decoding profile.
+  external GUID DecodeProfile;
+
+  @Int32()
+  external int _ViewDimension;
+
+  external D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC_0 Anonymous;
+
+  /// The resource type of the view, specified as a member of the <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_vdov_dimension">D3D11_VDOV_DIMENSION</a>
+  /// enumeration.
+  D3D11_VDOV_DIMENSION get ViewDimension =>
+      D3D11_VDOV_DIMENSION(_ViewDimension);
+
+  set ViewDimension(D3D11_VDOV_DIMENSION value) => _ViewDimension = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// {@category struct}
+sealed class D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC_0 extends Struct {
+  external D3D11_TEX2D_VDOV Texture2D;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC_0> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+extension D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC_0_Extension
+    on D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC {
+  D3D11_TEX2D_VDOV get Texture2D => this.Anonymous.Texture2D;
+  set Texture2D(D3D11_TEX2D_VDOV value) => this.Anonymous.Texture2D = value;
+}
+
+/// Describes a sub sample mapping block.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_1/ns-d3d11_1-d3d11_video_decoder_sub_sample_mapping_block>.
+///
+/// {@category struct}
+base class D3D11_VIDEO_DECODER_SUB_SAMPLE_MAPPING_BLOCK extends Struct {
+  /// The number of clear (non-encrypted) bytes at the start of the block.
+  @Uint32()
+  external int ClearSize;
+
+  /// The number of encrypted bytes following the clear bytes.
+  @Uint32()
+  external int EncryptedSize;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_VIDEO_DECODER_SUB_SAMPLE_MAPPING_BLOCK> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes the capabilities of a Microsoft Direct3D 11 video processor.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_video_processor_caps>.
+///
+/// {@category struct}
+base class D3D11_VIDEO_PROCESSOR_CAPS extends Struct {
+  /// A bitwise <b>OR</b> of zero or more flags from the <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_video_processor_device_caps">D3D11_VIDEO_PROCESSOR_DEVICE_CAPS</a>
+  /// enumeration.
+  @Uint32()
+  external int DeviceCaps;
+
+  /// A bitwise <b>OR</b> of zero or more flags from the <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_video_processor_feature_caps">D3D11_VIDEO_PROCESSOR_FEATURE_CAPS</a>
+  /// enumeration.
+  @Uint32()
+  external int FeatureCaps;
+
+  /// A bitwise <b>OR</b> of zero or more flags from the <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_video_processor_filter_caps">D3D11_VIDEO_PROCESSPR_FILTER_CAPS</a>
+  /// enumeration.
+  @Uint32()
+  external int FilterCaps;
+
+  /// A bitwise <b>OR</b> of zero or more flags from the <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_video_processor_format_caps">D3D11_VIDEO_PROCESSOR_FORMAT_CAPS</a>
+  /// enumeration.
+  @Uint32()
+  external int InputFormatCaps;
+
+  /// A bitwise <b>OR</b> of zero or more flags from the <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_video_processor_auto_stream_caps">D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS</a>
+  /// enumeration.
+  @Uint32()
+  external int AutoStreamCaps;
+
+  /// A bitwise <b>OR</b> of zero or more flags from the <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_video_processor_stereo_caps">D3D11_VIDEO_PROCESSOR_STEREO_CAPS</a>
+  /// enumeration.
+  @Uint32()
+  external int StereoCaps;
+
+  /// The number of frame-rate conversion capabilities.
+  @Uint32()
+  external int RateConversionCapsCount;
+
+  /// The maximum number of input streams that can be enabled at the same time.
+  @Uint32()
+  external int MaxInputStreams;
+
+  /// The maximum number of input streams for which the device can store state
+  /// data.
+  @Uint32()
+  external int MaxStreamStates;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_VIDEO_PROCESSOR_CAPS> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Specifies the color space for video processing.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_video_processor_color_space>.
+///
+/// {@category struct}
+base class D3D11_VIDEO_PROCESSOR_COLOR_SPACE extends Struct {
+  @Uint32()
+  external int bitfield;
+
+  int get Usage => bitfield.getBits(0, 1);
+  set Usage(int value) => bitfield = bitfield.setBits(0, 1, value);
+  int get RGB_Range => bitfield.getBits(1, 1);
+  set RGB_Range(int value) => bitfield = bitfield.setBits(1, 1, value);
+  int get YCbCr_Matrix => bitfield.getBits(2, 1);
+  set YCbCr_Matrix(int value) => bitfield = bitfield.setBits(2, 1, value);
+  int get YCbCr_xvYCC => bitfield.getBits(3, 1);
+  set YCbCr_xvYCC(int value) => bitfield = bitfield.setBits(3, 1, value);
+  int get Nominal_Range => bitfield.getBits(4, 2);
+  set Nominal_Range(int value) => bitfield = bitfield.setBits(4, 2, value);
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_VIDEO_PROCESSOR_COLOR_SPACE> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes a video stream for a video processor.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_video_processor_content_desc>.
+///
+/// {@category struct}
+base class D3D11_VIDEO_PROCESSOR_CONTENT_DESC extends Struct {
+  @Int32()
+  external int _InputFrameFormat;
+
+  /// The frame rate of the input video stream, specified as a <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/dxgicommon/ns-dxgicommon-dxgi_rational">DXGI_RATIONAL</a>
+  /// structure.
+  external DXGI_RATIONAL InputFrameRate;
+
+  /// The width of the input frames, in pixels.
+  @Uint32()
+  external int InputWidth;
+
+  /// The height of the input frames, in pixels.
+  @Uint32()
+  external int InputHeight;
+
+  /// The frame rate of the output video stream, specified as a <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/dxgicommon/ns-dxgicommon-dxgi_rational">DXGI_RATIONAL</a>
+  /// structure.
+  external DXGI_RATIONAL OutputFrameRate;
+
+  /// The width of the output frames, in pixels.
+  @Uint32()
+  external int OutputWidth;
+
+  /// The height of the output frames, in pixels.
+  @Uint32()
+  external int OutputHeight;
+
+  @Int32()
+  external int _Usage;
+
+  /// A member of the <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_video_frame_format">D3D11_VIDEO_FRAME_FORMAT</a>
+  /// enumeration that describes how the video stream is interlaced.
+  D3D11_VIDEO_FRAME_FORMAT get InputFrameFormat =>
+      D3D11_VIDEO_FRAME_FORMAT(_InputFrameFormat);
+
+  set InputFrameFormat(D3D11_VIDEO_FRAME_FORMAT value) =>
+      _InputFrameFormat = value;
+
+  /// A member of the <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_video_usage">D3D11_VIDEO_USAGE</a>
+  /// enumeration that describes how the video processor will be used.
+  D3D11_VIDEO_USAGE get Usage => D3D11_VIDEO_USAGE(_Usage);
+
+  set Usage(D3D11_VIDEO_USAGE value) => _Usage = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_VIDEO_PROCESSOR_CONTENT_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Specifies a custom rate for frame-rate conversion or inverse telecine
+/// (IVTC).
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_video_processor_custom_rate>.
+///
+/// {@category struct}
+base class D3D11_VIDEO_PROCESSOR_CUSTOM_RATE extends Struct {
+  /// The ratio of the output frame rate to the input frame rate, expressed as a
+  /// <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/dxgicommon/ns-dxgicommon-dxgi_rational">DXGI_RATIONAL</a>
+  /// structure that holds a rational number.
+  external DXGI_RATIONAL CustomRate;
+
+  /// The number of output frames that will be generated for every <i>N</i>
+  /// input samples, where <i>N</i> = <b>InputFramesOrFields</b>.
+  @Uint32()
+  external int OutputFrames;
+
+  @Int32()
+  external int _InputInterlaced;
+
+  /// The number of input fields or frames for every <i>N</i> output frames that
+  /// will be generated, where <i>N</i> = <b>OutputFrames</b>.
+  @Uint32()
+  external int InputFramesOrFields;
+
+  /// If `[TRUE]`, the input stream must be interlaced.
+  bool get InputInterlaced => _InputInterlaced != FALSE;
+
+  set InputInterlaced(bool value) => _InputInterlaced = value ? TRUE : FALSE;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_VIDEO_PROCESSOR_CUSTOM_RATE> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Defines the range of supported values for an image filter.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_video_processor_filter_range>.
+///
+/// {@category struct}
+base class D3D11_VIDEO_PROCESSOR_FILTER_RANGE extends Struct {
+  /// The minimum value of the filter.
+  @Int32()
+  external int Minimum;
+
+  /// The maximum value of the filter.
+  @Int32()
+  external int Maximum;
+
+  /// The default value of the filter.
+  @Int32()
+  external int Default;
+
+  /// A multiplier.
+  @Float()
+  external double Multiplier;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_VIDEO_PROCESSOR_FILTER_RANGE> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes a video processor input view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_video_processor_input_view_desc>.
+///
+/// {@category struct}
+base class D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC extends Struct {
+  /// The surface format.
+  @Uint32()
+  external int FourCC;
+
+  @Int32()
+  external int _ViewDimension;
+
+  external D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC_0 Anonymous;
+
+  /// The resource type of the view, specified as a member of the <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_vpiv_dimension">D3D11_VPIV_DIMENSION</a>
+  /// enumeration.
+  D3D11_VPIV_DIMENSION get ViewDimension =>
+      D3D11_VPIV_DIMENSION(_ViewDimension);
+
+  set ViewDimension(D3D11_VPIV_DIMENSION value) => _ViewDimension = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// {@category struct}
+sealed class D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC_0 extends Struct {
+  external D3D11_TEX2D_VPIV Texture2D;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC_0> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+extension D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC_0_Extension
+    on D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC {
+  D3D11_TEX2D_VPIV get Texture2D => this.Anonymous.Texture2D;
+  set Texture2D(D3D11_TEX2D_VPIV value) => this.Anonymous.Texture2D = value;
+}
+
+/// Describes a video processor output view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_video_processor_output_view_desc>.
+///
+/// {@category struct}
+base class D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC extends Struct {
+  @Int32()
+  external int _ViewDimension;
+
+  external D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC_0 Anonymous;
+
+  /// The resource type of the view, specified as a member of the <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_vpov_dimension">D3D11_VPOV_DIMENSION</a>
+  /// enumeration.
+  D3D11_VPOV_DIMENSION get ViewDimension =>
+      D3D11_VPOV_DIMENSION(_ViewDimension);
+
+  set ViewDimension(D3D11_VPOV_DIMENSION value) => _ViewDimension = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// {@category union}
+sealed class D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC_0 extends Union {
+  external D3D11_TEX2D_VPOV Texture2D;
+  external D3D11_TEX2D_ARRAY_VPOV Texture2DArray;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC_0> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+extension D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC_0_Extension
+    on D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC {
+  D3D11_TEX2D_VPOV get Texture2D => this.Anonymous.Texture2D;
+  set Texture2D(D3D11_TEX2D_VPOV value) => this.Anonymous.Texture2D = value;
+  D3D11_TEX2D_ARRAY_VPOV get Texture2DArray => this.Anonymous.Texture2DArray;
+  set Texture2DArray(D3D11_TEX2D_ARRAY_VPOV value) =>
+      this.Anonymous.Texture2DArray = value;
+}
+
+/// Defines a group of video processor capabilities that are associated with
+/// frame-rate conversion, including deinterlacing and inverse telecine.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_video_processor_rate_conversion_caps>.
+///
+/// {@category struct}
+base class D3D11_VIDEO_PROCESSOR_RATE_CONVERSION_CAPS extends Struct {
+  /// The number of past reference frames required to perform the optimal video
+  /// processing.
+  @Uint32()
+  external int PastFrames;
+
+  /// The number of future reference frames required to perform the optimal
+  /// video processing.
+  @Uint32()
+  external int FutureFrames;
+
+  /// A bitwise <b>OR</b> of zero or more flags from the <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_video_processor_processor_caps">D3D11_VIDEO_PROCESSOR_PROCESSOR_CAPS</a>
+  /// enumeration.
+  @Uint32()
+  external int ProcessorCaps;
+
+  /// A bitwise <b>OR</b> of zero or more flags from the <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_video_processor_itelecine_caps">D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS</a>
+  /// enumeration.
+  @Uint32()
+  external int ITelecineCaps;
+
+  /// The number of custom frame rates that the driver supports.
+  @Uint32()
+  external int CustomRateCount;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_VIDEO_PROCESSOR_RATE_CONVERSION_CAPS> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Contains stream-level data for the ID3D11VideoContext::VideoProcessorBlt
+/// method.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_video_processor_stream>.
+///
+/// {@category struct}
+base class D3D11_VIDEO_PROCESSOR_STREAM extends Struct {
+  @Int32()
+  external int _Enable;
+
+  /// The zero-based index number of the output frame.
+  @Uint32()
+  external int OutputIndex;
+
+  /// The zero-based index number of the input frame or field.
+  @Uint32()
+  external int InputFrameOrField;
+
+  /// The number of past reference frames.
+  @Uint32()
+  external int PastFrames;
+
+  /// The number of future reference frames.
+  @Uint32()
+  external int FutureFrames;
+
+  /// A pointer to an array of <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nn-d3d11-id3d11videoprocessorinputview">ID3D11VideoProcessorInputView</a>
+  /// pointers, allocated by the caller.
+  external Pointer<VTablePointer> ppPastSurfaces;
+
+  external VTablePointer _pInputSurface;
+
+  /// A pointer to an array of <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nn-d3d11-id3d11videoprocessorinputview">ID3D11VideoProcessorInputView</a>
+  /// pointers, allocated by the caller.
+  external Pointer<VTablePointer> ppFutureSurfaces;
+
+  /// If the stereo 3D format is
+  /// <b>D3D11_VIDEO_PROCESSOR_STEREO_FORMAT_SEPARATE</b>, this member points to
+  /// an array that contains the past reference frames for the right view.
+  external Pointer<VTablePointer> ppPastSurfacesRight;
+
+  external VTablePointer _pInputSurfaceRight;
+
+  /// If the stereo 3D format is
+  /// <b>D3D11_VIDEO_PROCESSOR_STEREO_FORMAT_SEPARATE</b>, this member points to
+  /// an array that contains the future reference frames for the right view.
+  external Pointer<VTablePointer> ppFutureSurfacesRight;
+
+  /// Specifies whether this input stream is enabled.
+  bool get Enable => _Enable != FALSE;
+
+  set Enable(bool value) => _Enable = value ? TRUE : FALSE;
+
+  /// A pointer to the <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nn-d3d11-id3d11videoprocessorinputview">ID3D11VideoProcessorInputView</a>
+  /// interface of the surface that contains the current input frame.
+  ID3D11VideoProcessorInputView? get pInputSurface => _pInputSurface.isNull
+      ? null
+      : ID3D11VideoProcessorInputView(_pInputSurface);
+
+  set pInputSurface(ID3D11VideoProcessorInputView? value) =>
+      _pInputSurface = value?.ptr ?? nullptr;
+
+  /// If the stereo 3D format is
+  /// <b>D3D11_VIDEO_PROCESSOR_STEREO_FORMAT_SEPARATE</b>, this member contains
+  /// a pointer to the current input frame for the right view.
+  ID3D11VideoProcessorInputView? get pInputSurfaceRight =>
+      _pInputSurfaceRight.isNull
+      ? null
+      : ID3D11VideoProcessorInputView(_pInputSurfaceRight);
+
+  set pInputSurfaceRight(ID3D11VideoProcessorInputView? value) =>
+      _pInputSurfaceRight = value?.ptr ?? nullptr;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_VIDEO_PROCESSOR_STREAM> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Provides information about the input streams passed into the
+/// ID3DVideoContext1::VideoProcessorGetBehaviorHints method.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_1/ns-d3d11_1-d3d11_video_processor_stream_behavior_hint>.
+///
+/// {@category struct}
+base class D3D11_VIDEO_PROCESSOR_STREAM_BEHAVIOR_HINT extends Struct {
+  @Int32()
+  external int _Enable;
+
+  /// The width of the input stream.
+  @Uint32()
+  external int Width;
+
+  /// The height of the input stream.
+  @Uint32()
+  external int Height;
+
+  @Int32()
+  external int _Format;
+
+  /// A value indicating whether this input stream should be used to compute
+  /// behavior hints.
+  bool get Enable => _Enable != FALSE;
+
+  set Enable(bool value) => _Enable = value ? TRUE : FALSE;
+
+  /// The format of the input stream.
+  DXGI_FORMAT get Format => DXGI_FORMAT(_Format);
+
+  set Format(DXGI_FORMAT value) => _Format = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_VIDEO_PROCESSOR_STREAM_BEHAVIOR_HINT> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes a video sample.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_1/ns-d3d11_1-d3d11_video_sample_desc>.
+///
+/// {@category struct}
+base class D3D11_VIDEO_SAMPLE_DESC extends Struct {
+  /// The width of the video sample.
+  @Uint32()
+  external int Width;
+
+  /// The height of the video sample.
+  @Uint32()
+  external int Height;
+
+  @Int32()
+  external int _Format;
+
+  @Int32()
+  external int _ColorSpace;
+
+  /// The format of the video sample.
+  DXGI_FORMAT get Format => DXGI_FORMAT(_Format);
+
+  set Format(DXGI_FORMAT value) => _Format = value;
+
+  /// The colorspace of the sample.
+  DXGI_COLOR_SPACE_TYPE get ColorSpace => DXGI_COLOR_SPACE_TYPE(_ColorSpace);
+
+  set ColorSpace(DXGI_COLOR_SPACE_TYPE value) => _ColorSpace = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_VIDEO_SAMPLE_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Defines the dimensions of a viewport.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_viewport>.
+///
+/// {@category struct}
+base class D3D11_VIEWPORT extends Struct {
+  /// X position of the left hand side of the viewport.
+  @Float()
+  external double TopLeftX;
+
+  /// Y position of the top of the viewport.
+  @Float()
+  external double TopLeftY;
+
+  /// Width of the viewport.
+  @Float()
+  external double Width;
+
+  /// Height of the viewport.
+  @Float()
+  external double Height;
+
+  /// Minimum depth of the viewport.
+  @Float()
+  external double MinDepth;
+
+  /// Maximum depth of the viewport.
+  @Float()
+  external double MaxDepth;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3D11_VIEWPORT> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// A 4x4 row-major matrix.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/direct3d10/d3d10-d3dmatrix>.
+///
+/// {@category struct}
+base class D3DMATRIX extends Struct {
+  external D3DMATRIX_0 Anonymous;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3DMATRIX> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// {@category union}
+sealed class D3DMATRIX_0 extends Union {
+  external D3DMATRIX_0_0 Anonymous;
+
+  @Array(16)
+  external Array<Float> m;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3DMATRIX_0> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+extension D3DMATRIX_0_Extension on D3DMATRIX {
+  D3DMATRIX_0_0 get Anonymous => this.Anonymous.Anonymous;
+  set Anonymous(D3DMATRIX_0_0 value) => this.Anonymous.Anonymous = value;
+  Array<Float> get m => this.Anonymous.m;
+  set m(Array<Float> value) => this.Anonymous.m = value;
+}
+
+/// {@category struct}
+sealed class D3DMATRIX_0_0 extends Struct {
+  @Float()
+  external double x11;
+
+  @Float()
+  external double x12;
+
+  @Float()
+  external double x13;
+
+  @Float()
+  external double x14;
+
+  @Float()
+  external double x21;
+
+  @Float()
+  external double x22;
+
+  @Float()
+  external double x23;
+
+  @Float()
+  external double x24;
+
+  @Float()
+  external double x31;
+
+  @Float()
+  external double x32;
+
+  @Float()
+  external double x33;
+
+  @Float()
+  external double x34;
+
+  @Float()
+  external double x41;
+
+  @Float()
+  external double x42;
+
+  @Float()
+  external double x43;
+
+  @Float()
+  external double x44;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3DMATRIX_0_0> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+extension D3DMATRIX_0_0_Extension on D3DMATRIX {
+  double get x11 => this.Anonymous.Anonymous.x11;
+  set x11(double value) => this.Anonymous.Anonymous.x11 = value;
+  double get x12 => this.Anonymous.Anonymous.x12;
+  set x12(double value) => this.Anonymous.Anonymous.x12 = value;
+  double get x13 => this.Anonymous.Anonymous.x13;
+  set x13(double value) => this.Anonymous.Anonymous.x13 = value;
+  double get x14 => this.Anonymous.Anonymous.x14;
+  set x14(double value) => this.Anonymous.Anonymous.x14 = value;
+  double get x21 => this.Anonymous.Anonymous.x21;
+  set x21(double value) => this.Anonymous.Anonymous.x21 = value;
+  double get x22 => this.Anonymous.Anonymous.x22;
+  set x22(double value) => this.Anonymous.Anonymous.x22 = value;
+  double get x23 => this.Anonymous.Anonymous.x23;
+  set x23(double value) => this.Anonymous.Anonymous.x23 = value;
+  double get x24 => this.Anonymous.Anonymous.x24;
+  set x24(double value) => this.Anonymous.Anonymous.x24 = value;
+  double get x31 => this.Anonymous.Anonymous.x31;
+  set x31(double value) => this.Anonymous.Anonymous.x31 = value;
+  double get x32 => this.Anonymous.Anonymous.x32;
+  set x32(double value) => this.Anonymous.Anonymous.x32 = value;
+  double get x33 => this.Anonymous.Anonymous.x33;
+  set x33(double value) => this.Anonymous.Anonymous.x33 = value;
+  double get x34 => this.Anonymous.Anonymous.x34;
+  set x34(double value) => this.Anonymous.Anonymous.x34 = value;
+  double get x41 => this.Anonymous.Anonymous.x41;
+  set x41(double value) => this.Anonymous.Anonymous.x41 = value;
+  double get x42 => this.Anonymous.Anonymous.x42;
+  set x42(double value) => this.Anonymous.Anonymous.x42 = value;
+  double get x43 => this.Anonymous.Anonymous.x43;
+  set x43(double value) => this.Anonymous.Anonymous.x43 = value;
+  double get x44 => this.Anonymous.Anonymous.x44;
+  set x44(double value) => this.Anonymous.Anonymous.x44 = value;
+}
+
+/// Describes buffer requirements for an FFT.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3dcsx/ns-d3dcsx-d3dx11_fft_buffer_info>.
+///
+/// {@category struct}
+base class D3DX11_FFT_BUFFER_INFO extends Struct {
+  /// Number of temporary buffers needed.
+  @Uint32()
+  external int NumTempBufferSizes;
+
+  /// Type: <b><a
+  /// href="https://docs.microsoft.com/windows/desktop/WinProg/windows-data-types">UINT</a>`[D3DX11_FFT_MAX_TEMP_BUFFERS]`</b>
+  /// Minimum sizes (in FLOATs) of temporary buffers.
+  @Array(4)
+  external Array<Uint32> TempBufferFloatSizes;
+
+  /// Number of precompute buffers required.
+  @Uint32()
+  external int NumPrecomputeBufferSizes;
+
+  /// Type: <b><a
+  /// href="https://docs.microsoft.com/windows/desktop/WinProg/windows-data-types">UINT</a>`[D3DX11_FFT_MAX_PRECOMPUTE_BUFFERS]`</b>
+  /// Minimum sizes (in FLOATs) for precompute buffers.
+  @Array(4)
+  external Array<Uint32> PrecomputeBufferFloatSizes;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3DX11_FFT_BUFFER_INFO> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes an FFT.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3dcsx/ns-d3dcsx-d3dx11_fft_desc>.
+///
+/// {@category struct}
+base class D3DX11_FFT_DESC extends Struct {
+  /// Number of dimension in the FFT.
+  @Uint32()
+  external int NumDimensions;
+
+  /// Type: <b><a
+  /// href="https://docs.microsoft.com/windows/desktop/WinProg/windows-data-types">UINT</a>`[D3DX11_FFT_MAX_DIMENSIONS]`</b>
+  /// Length of each dimension in the FFT.
+  @Array(32)
+  external Array<Uint32> ElementLengths;
+
+  /// Combination of <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3dcsx/ne-d3dcsx-d3dx11_fft_dim_mask">D3DX11_FFT_DIM_MASK</a>
+  /// flags indicating the dimensions to transform.
+  @Uint32()
+  external int DimensionMask;
+
+  @Int32()
+  external int _Type;
+
+  /// <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/d3dcsx/ne-d3dcsx-d3dx11_fft_data_type">D3DX11_FFT_DATA_TYPE</a>
+  /// flag indicating the type of data being transformed.
+  D3DX11_FFT_DATA_TYPE get Type => D3DX11_FFT_DATA_TYPE(_Type);
+
+  set Type(D3DX11_FFT_DATA_TYPE value) => _Type = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<D3DX11_FFT_DESC> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
 /// Defines the control setting for a serial communications device.
 ///
 /// To learn more, see
@@ -4726,6 +14383,68 @@ base class DCB extends Struct {
   /// used, in which case the allocator manages the lifetime.
   Pointer<DCB> toNative({Allocator allocator = adaptiveCalloc}) =>
       allocator()..ref = this;
+}
+
+/// Describes timing and composition statistics for a frame.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dcomptypes/ns-dcomptypes-dcomposition_frame_statistics>.
+///
+/// {@category struct}
+base class DCOMPOSITION_FRAME_STATISTICS extends Struct {
+  /// The time stamp of the last batch of commands to be processed by the
+  /// composition engine.
+  @Int64()
+  external int lastFrameTime;
+
+  /// The rate at which the composition engine is producing frames, in frames
+  /// per second.
+  external DXGI_RATIONAL currentCompositionRate;
+
+  /// The current time as computed by the <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/profileapi/nf-profileapi-queryperformancecounter">QueryPerformanceCounter</a>
+  /// function.
+  @Int64()
+  external int currentTime;
+
+  /// The units in which the <b>lastFrameTime</b> and <b>currentTime</b> members
+  /// are specified, in Hertz.
+  @Int64()
+  external int timeFrequency;
+
+  /// The estimated time when the next frame will be displayed.
+  @Int64()
+  external int nextEstimatedFrameTime;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<DCOMPOSITION_FRAME_STATISTICS> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// {@category struct}
+base class DCompositionInkTrailPoint extends Struct {
+  @Float()
+  external double x;
+
+  @Float()
+  external double y;
+
+  @Float()
+  external double radius;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<DCompositionInkTrailPoint> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
 }
 
 /// Contains debugging information passed to a WH_DEBUG hook procedure,
@@ -6852,7 +16571,7 @@ base class DTTOPTS extends Struct {
 
   set crShadow(COLORREF value) => _crShadow = value;
 
-  /// If [TRUE], text will be drawn on top of the shadow and outline effects.
+  /// If `[TRUE]`, text will be drawn on top of the shadow and outline effects.
   bool get fApplyOverlay => _fApplyOverlay != FALSE;
 
   set fApplyOverlay(bool value) => _fApplyOverlay = value ? TRUE : FALSE;
@@ -6897,7 +16616,7 @@ base class DWM_BLURBEHIND extends Struct {
   @Int32()
   external int _fTransitionOnMaximized;
 
-  /// [TRUE] to register the window handle to DWM blur behind; [FALSE] to
+  /// `[TRUE]` to register the window handle to DWM blur behind; `[FALSE]` to
   /// unregister the window handle from DWM blur behind.
   bool get fEnable => _fEnable != FALSE;
 
@@ -6908,8 +16627,8 @@ base class DWM_BLURBEHIND extends Struct {
 
   set hRgnBlur(HRGN value) => _hRgnBlur = value;
 
-  /// [TRUE] if the window's colorization should transition to match the
-  /// maximized windows; otherwise, [FALSE].
+  /// `[TRUE]` if the window's colorization should transition to match the
+  /// maximized windows; otherwise, `[FALSE]`.
   bool get fTransitionOnMaximized => _fTransitionOnMaximized != FALSE;
 
   set fTransitionOnMaximized(bool value) =>
@@ -6922,6 +16641,481 @@ base class DWM_BLURBEHIND extends Struct {
   /// used, in which case the allocator manages the lifetime.
   Pointer<DWM_BLURBEHIND> toNative({Allocator allocator = adaptiveCalloc}) =>
       allocator()..ref = this;
+}
+
+/// Describes an adapter (or video card) by using DXGI 1.0.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dxgi/ns-dxgi-dxgi_adapter_desc>.
+///
+/// {@category struct}
+base class DXGI_ADAPTER_DESC extends Struct {
+  @Array(128)
+  external Array<Uint16> _Description;
+
+  /// The PCI ID of the hardware vendor.
+  @Uint32()
+  external int VendorId;
+
+  /// The PCI ID of the hardware device.
+  @Uint32()
+  external int DeviceId;
+
+  /// The PCI ID of the sub system.
+  @Uint32()
+  external int SubSysId;
+
+  /// The PCI ID of the revision number of the adapter.
+  @Uint32()
+  external int Revision;
+
+  /// The number of bytes of dedicated video memory that are not shared with the
+  /// CPU.
+  @IntPtr()
+  external int DedicatedVideoMemory;
+
+  /// The number of bytes of dedicated system memory that are not shared with
+  /// the CPU.
+  @IntPtr()
+  external int DedicatedSystemMemory;
+
+  /// The number of bytes of shared system memory.
+  @IntPtr()
+  external int SharedSystemMemory;
+
+  /// A unique value that identifies the adapter.
+  external LUID AdapterLuid;
+
+  /// A string that contains the adapter description.
+  String get Description => _Description.toDartString();
+
+  set Description(String value) => _Description.setString(value);
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<DXGI_ADAPTER_DESC> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Describes timing and presentation statistics for a frame.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dxgi/ns-dxgi-dxgi_frame_statistics>.
+///
+/// {@category struct}
+base class DXGI_FRAME_STATISTICS extends Struct {
+  /// A value that represents the running total count of times that an image was
+  /// presented to the monitor since the computer booted.
+  @Uint32()
+  external int PresentCount;
+
+  /// A value that represents the running total count of v-blanks at which the
+  /// last image was presented to the monitor and that have happened since the
+  /// computer booted (for windowed mode, since the swap chain was created).
+  @Uint32()
+  external int PresentRefreshCount;
+
+  /// A value that represents the running total count of v-blanks when the
+  /// scheduler last sampled the machine time by calling <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/profileapi/nf-profileapi-queryperformancecounter">QueryPerformanceCounter</a>
+  /// and that have happened since the computer booted (for windowed mode, since
+  /// the swap chain was created).
+  @Uint32()
+  external int SyncRefreshCount;
+
+  /// A value that represents the high-resolution performance counter timer.
+  @Int64()
+  external int SyncQPCTime;
+
+  /// Reserved.
+  @Int64()
+  external int SyncGPUTime;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<DXGI_FRAME_STATISTICS> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// {@category struct}
+base class DXGI_GAMMA_CONTROL extends Struct {
+  external DXGI_RGB Scale;
+  external DXGI_RGB Offset;
+
+  @Array(1025)
+  external Array<DXGI_RGB> GammaCurve;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<DXGI_GAMMA_CONTROL> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// {@category struct}
+base class DXGI_GAMMA_CONTROL_CAPABILITIES extends Struct {
+  @Int32()
+  external int _ScaleAndOffsetSupported;
+
+  @Float()
+  external double MaxConvertedValue;
+
+  @Float()
+  external double MinConvertedValue;
+
+  @Uint32()
+  external int NumGammaControlPoints;
+
+  @Array(1025)
+  external Array<Float> ControlPointPositions;
+
+  bool get ScaleAndOffsetSupported => _ScaleAndOffsetSupported != FALSE;
+  set ScaleAndOffsetSupported(bool value) =>
+      _ScaleAndOffsetSupported = value ? TRUE : FALSE;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<DXGI_GAMMA_CONTROL_CAPABILITIES> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes a mapped rectangle that is used to access a surface.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dxgi/ns-dxgi-dxgi_mapped_rect>.
+///
+/// {@category struct}
+base class DXGI_MAPPED_RECT extends Struct {
+  /// A value that describes the width, in bytes, of the surface.
+  @Int32()
+  external int Pitch;
+
+  /// A pointer to the image buffer of the surface.
+  external Pointer<Uint8> pBits;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<DXGI_MAPPED_RECT> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// {@category struct}
+base class DXGI_MODE_DESC extends Struct {
+  @Uint32()
+  external int Width;
+
+  @Uint32()
+  external int Height;
+
+  external DXGI_RATIONAL RefreshRate;
+
+  @Int32()
+  external int _Format;
+
+  @Int32()
+  external int _ScanlineOrdering;
+
+  @Int32()
+  external int _Scaling;
+
+  DXGI_FORMAT get Format => DXGI_FORMAT(_Format);
+  set Format(DXGI_FORMAT value) => _Format = value;
+  DXGI_MODE_SCANLINE_ORDER get ScanlineOrdering =>
+      DXGI_MODE_SCANLINE_ORDER(_ScanlineOrdering);
+  set ScanlineOrdering(DXGI_MODE_SCANLINE_ORDER value) =>
+      _ScanlineOrdering = value;
+  DXGI_MODE_SCALING get Scaling => DXGI_MODE_SCALING(_Scaling);
+  set Scaling(DXGI_MODE_SCALING value) => _Scaling = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<DXGI_MODE_DESC> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Describes an output or physical connection between the adapter (video card)
+/// and a device.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dxgi/ns-dxgi-dxgi_output_desc>.
+///
+/// {@category struct}
+base class DXGI_OUTPUT_DESC extends Struct {
+  @Array(32)
+  external Array<Uint16> _DeviceName;
+
+  /// A <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/windef/ns-windef-rect">RECT</a>
+  /// structure containing the bounds of the output in desktop coordinates.
+  external RECT DesktopCoordinates;
+
+  @Int32()
+  external int _AttachedToDesktop;
+
+  @Int32()
+  external int _Rotation;
+
+  external Pointer _Monitor;
+
+  /// A string that contains the name of the output device.
+  String get DeviceName => _DeviceName.toDartString();
+
+  set DeviceName(String value) => _DeviceName.setString(value);
+
+  /// True if the output is attached to the desktop; otherwise, false.
+  bool get AttachedToDesktop => _AttachedToDesktop != FALSE;
+
+  set AttachedToDesktop(bool value) =>
+      _AttachedToDesktop = value ? TRUE : FALSE;
+
+  /// A member of the <a
+  /// href="https://docs.microsoft.com/previous-versions/windows/desktop/legacy/bb173065(v=vs.85)">DXGI_MODE_ROTATION</a>
+  /// enumerated type describing on how an image is rotated by the output.
+  DXGI_MODE_ROTATION get Rotation => DXGI_MODE_ROTATION(_Rotation);
+
+  set Rotation(DXGI_MODE_ROTATION value) => _Rotation = value;
+
+  /// An <a
+  /// href="https://docs.microsoft.com/windows/desktop/WinProg/windows-data-types">HMONITOR</a>
+  /// handle that represents the display monitor.
+  HMONITOR get Monitor => HMONITOR(_Monitor);
+
+  set Monitor(HMONITOR value) => _Monitor = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<DXGI_OUTPUT_DESC> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Represents a rational number.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dxgicommon/ns-dxgicommon-dxgi_rational>.
+///
+/// {@category struct}
+base class DXGI_RATIONAL extends Struct {
+  /// An unsigned integer value representing the top of the rational number.
+  @Uint32()
+  external int Numerator;
+
+  /// An unsigned integer value representing the bottom of the rational number.
+  @Uint32()
+  external int Denominator;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<DXGI_RATIONAL> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// {@category struct}
+base class DXGI_RGB extends Struct {
+  @Float()
+  external double Red;
+
+  @Float()
+  external double Green;
+
+  @Float()
+  external double Blue;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<DXGI_RGB> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Describes multi-sampling parameters for a resource.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dxgicommon/ns-dxgicommon-dxgi_sample_desc>.
+///
+/// {@category struct}
+base class DXGI_SAMPLE_DESC extends Struct {
+  /// The number of multisamples per pixel.
+  @Uint32()
+  external int Count;
+
+  /// The image quality level.
+  @Uint32()
+  external int Quality;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<DXGI_SAMPLE_DESC> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Represents a handle to a shared resource.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dxgi/ns-dxgi-dxgi_shared_resource>.
+///
+/// {@category struct}
+base class DXGI_SHARED_RESOURCE extends Struct {
+  external Pointer _Handle;
+
+  /// A handle to a shared resource.
+  HANDLE get Handle => HANDLE(_Handle);
+
+  set Handle(HANDLE value) => _Handle = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<DXGI_SHARED_RESOURCE> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Describes a surface.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dxgi/ns-dxgi-dxgi_surface_desc>.
+///
+/// {@category struct}
+base class DXGI_SURFACE_DESC extends Struct {
+  /// A value describing the surface width.
+  @Uint32()
+  external int Width;
+
+  /// A value describing the surface height.
+  @Uint32()
+  external int Height;
+
+  @Int32()
+  external int _Format;
+
+  /// A member of the <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/dxgicommon/ns-dxgicommon-dxgi_sample_desc">DXGI_SAMPLE_DESC</a>
+  /// structure that describes multi-sampling parameters for the surface.
+  external DXGI_SAMPLE_DESC SampleDesc;
+
+  /// A member of the <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/dxgiformat/ne-dxgiformat-dxgi_format">DXGI_FORMAT</a>
+  /// enumerated type that describes the surface format.
+  DXGI_FORMAT get Format => DXGI_FORMAT(_Format);
+
+  set Format(DXGI_FORMAT value) => _Format = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<DXGI_SURFACE_DESC> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
+}
+
+/// Describes a swap chain.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dxgi/ns-dxgi-dxgi_swap_chain_desc>.
+///
+/// {@category struct}
+base class DXGI_SWAP_CHAIN_DESC extends Struct {
+  /// A `DXGI_MODE_DESC` structure that describes the backbuffer display mode.
+  external DXGI_MODE_DESC BufferDesc;
+
+  /// A `DXGI_SAMPLE_DESC` structure that describes multi-sampling parameters.
+  external DXGI_SAMPLE_DESC SampleDesc;
+
+  @Uint32()
+  external int _BufferUsage;
+
+  /// A value that describes the number of buffers in the swap chain.
+  @Uint32()
+  external int BufferCount;
+
+  external Pointer _OutputWindow;
+
+  @Int32()
+  external int _Windowed;
+
+  @Int32()
+  external int _SwapEffect;
+
+  @Uint32()
+  external int _Flags;
+
+  /// A member of the <a
+  /// href="https://docs.microsoft.com/windows/desktop/direct3ddxgi/dxgi-usage">DXGI_USAGE</a>
+  /// enumerated type that describes the surface usage and CPU access options
+  /// for the back buffer.
+  DXGI_USAGE get BufferUsage => DXGI_USAGE(_BufferUsage);
+
+  set BufferUsage(DXGI_USAGE value) => _BufferUsage = value;
+
+  /// An <a
+  /// href="https://docs.microsoft.com/windows/desktop/WinProg/windows-data-types">HWND</a>
+  /// handle to the output window.
+  HWND get OutputWindow => HWND(_OutputWindow);
+
+  set OutputWindow(HWND value) => _OutputWindow = value;
+
+  /// A Boolean value that specifies whether the output is in windowed mode.
+  bool get Windowed => _Windowed != FALSE;
+
+  set Windowed(bool value) => _Windowed = value ? TRUE : FALSE;
+
+  /// A member of the <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/dxgi/ne-dxgi-dxgi_swap_effect">DXGI_SWAP_EFFECT</a>
+  /// enumerated type that describes options for handling the contents of the
+  /// presentation buffer after presenting a surface.
+  DXGI_SWAP_EFFECT get SwapEffect => DXGI_SWAP_EFFECT(_SwapEffect);
+
+  set SwapEffect(DXGI_SWAP_EFFECT value) => _SwapEffect = value;
+
+  /// A member of the <a
+  /// href="https://docs.microsoft.com/windows/desktop/api/dxgi/ne-dxgi-dxgi_swap_chain_flag">DXGI_SWAP_CHAIN_FLAG</a>
+  /// enumerated type that describes options for swap-chain behavior.
+  DXGI_SWAP_CHAIN_FLAG get Flags => DXGI_SWAP_CHAIN_FLAG(_Flags);
+
+  set Flags(DXGI_SWAP_CHAIN_FLAG value) => _Flags = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<DXGI_SWAP_CHAIN_DESC> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
 }
 
 final DesktopWallpaper = GUID.fromComponents(
@@ -9281,8 +19475,8 @@ base class IP_ADAPTER_ADDRESSES_LH extends Struct {
   @Uint32()
   external int _CompartmentId;
 
-  /// The [GUID] that is associated with the network that the interface belongs
-  /// to.
+  /// The `[GUID]` that is associated with the network that the interface
+  /// belongs to.
   external GUID NetworkGuid;
 
   @Int32()
@@ -10547,7 +20741,7 @@ base class KEY_EVENT_RECORD extends Struct {
   @Uint32()
   external int dwControlKeyState;
 
-  /// If the key is pressed, this member is [TRUE].
+  /// If the key is pressed, this member is `[TRUE]`.
   bool get bKeyDown => _bKeyDown != FALSE;
 
   set bKeyDown(bool value) => _bKeyDown = value ? TRUE : FALSE;
@@ -10824,15 +21018,15 @@ base class LOGFONT extends Struct {
   @Int32()
   external int lfWeight;
 
-  /// [TRUE] to specify an italic font.
+  /// `[TRUE]` to specify an italic font.
   @Uint8()
   external int lfItalic;
 
-  /// [TRUE] to specify an underlined font.
+  /// `[TRUE]` to specify an underlined font.
   @Uint8()
   external int lfUnderline;
 
-  /// [TRUE] to specify a strikeout font.
+  /// `[TRUE]` to specify a strikeout font.
   @Uint8()
   external int lfStrikeOut;
 
@@ -17129,7 +27323,7 @@ base class SERVICE_DELAYED_AUTO_START_INFO extends Struct {
   @Int32()
   external int _fDelayedAutostart;
 
-  /// If this member is [TRUE], the service is started after other auto-start
+  /// If this member is `[TRUE]`, the service is started after other auto-start
   /// services are started plus a short delay.
   bool get fDelayedAutostart => _fDelayedAutostart != FALSE;
 
@@ -17234,7 +27428,7 @@ base class SERVICE_FAILURE_ACTIONS_FLAG extends Struct {
   @Int32()
   external int _fFailureActionsOnNonCrashFailures;
 
-  /// If this member is [TRUE] and the service has configured failure actions,
+  /// If this member is `[TRUE]` and the service has configured failure actions,
   /// the failure actions are queued if the service process terminates without
   /// reporting a status of SERVICE_STOPPED or if it enters the SERVICE_STOPPED
   /// state but the <b>dwWin32ExitCode</b> member of the <a
@@ -17858,7 +28052,7 @@ extension SHELLEXECUTEINFO_0_Extension on SHELLEXECUTEINFO {
 ///
 /// {@category struct}
 base class SHELL_ITEM_RESOURCE extends Struct {
-  /// The [GUID] that identifies the item.
+  /// The `[GUID]` that identifies the item.
   external GUID guidType;
 
   @Array(260)
@@ -17975,8 +28169,8 @@ base class SHFILEOPSTRUCT extends Struct {
 
   set pTo(PWSTR value) => _pTo = value;
 
-  /// When the function returns, this member contains [TRUE] if any file
-  /// operations were aborted before they were completed; otherwise, [FALSE].
+  /// When the function returns, this member contains `[TRUE]` if any file
+  /// operations were aborted before they were completed; otherwise, `[FALSE]`.
   bool get fAnyOperationsAborted => _fAnyOperationsAborted != FALSE;
 
   set fAnyOperationsAborted(bool value) =>
@@ -19098,23 +29292,23 @@ base class SYSTEM_BATTERY_STATE extends Struct {
   @Uint32()
   external int DefaultAlert2;
 
-  /// If this member is [TRUE], the system battery charger is currently
+  /// If this member is `[TRUE]`, the system battery charger is currently
   /// operating on external power.
   bool get AcOnLine => _AcOnLine != FALSE;
 
   set AcOnLine(bool value) => _AcOnLine = value ? TRUE : FALSE;
 
-  /// If this member is [TRUE], at least one battery is present in the system.
+  /// If this member is `[TRUE]`, at least one battery is present in the system.
   bool get BatteryPresent => _BatteryPresent != FALSE;
 
   set BatteryPresent(bool value) => _BatteryPresent = value ? TRUE : FALSE;
 
-  /// If this member is [TRUE], a battery is currently charging.
+  /// If this member is `[TRUE]`, a battery is currently charging.
   bool get Charging => _Charging != FALSE;
 
   set Charging(bool value) => _Charging = value ? TRUE : FALSE;
 
-  /// If this member is [TRUE], a battery is currently discharging.
+  /// If this member is `[TRUE]`, a battery is currently discharging.
   bool get Discharging => _Discharging != FALSE;
 
   set Discharging(bool value) => _Discharging = value ? TRUE : FALSE;
@@ -22583,7 +32777,7 @@ base class WLAN_DEVICE_SERVICE_GUID_LIST extends Struct {
   @Uint32()
   external int dwIndex;
 
-  /// A pointer to an array containing [GUID]s; each corresponds to a WLAN
+  /// A pointer to an array containing `[GUID]`s; each corresponds to a WLAN
   /// device service that the driver supports.
   @Array.variableWithVariableDimension(1)
   external Array<GUID> DeviceService;
@@ -22605,7 +32799,7 @@ base class WLAN_DEVICE_SERVICE_GUID_LIST extends Struct {
 ///
 /// {@category struct}
 base class WLAN_DEVICE_SERVICE_NOTIFICATION_DATA extends Struct {
-  /// The [GUID] identifying the device service for this notification.
+  /// The `[GUID]` identifying the device service for this notification.
   external GUID DeviceService;
 
   /// The opcode that identifies the operation under the device service for this

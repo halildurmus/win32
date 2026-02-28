@@ -21,11 +21,11 @@ void DMLCreateDevice<T extends IUnknown>(
   Pointer<VTablePointer>? ppv,
 ) {
   final companion = ComInterface.type<T>();
-  final riid = companion.iid;
-  final ppv = adaptiveCalloc<Pointer>();
+  final riid = companion.iid.toNative();
   final hr$ = HRESULT(
     _DMLCreateDevice(d3d12Device?.ptr ?? nullptr, flags, riid, ppv ?? nullptr),
   );
+  free(riid);
   if (hr$.isError) throw WindowsException(hr$);
 }
 

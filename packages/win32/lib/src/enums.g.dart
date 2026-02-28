@@ -1351,6 +1351,23 @@ const EV_RXFLAG = COMM_EVENT_MASK(2);
 
 const EV_TXEMPTY = COMM_EVENT_MASK(4);
 
+/// Defines constants that specify the status of a compositor frame.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dcomptypes/ne-dcomptypes-composition_frame_id_type>.
+///
+/// {@category enum}
+extension type const COMPOSITION_FRAME_ID_TYPE(int _) implements int {}
+
+/// The compositor has started working on the frame.
+const COMPOSITION_FRAME_ID_CREATED = COMPOSITION_FRAME_ID_TYPE(0);
+
+/// CPU work is completed and any presents have taken place.
+const COMPOSITION_FRAME_ID_CONFIRMED = COMPOSITION_FRAME_ID_TYPE(1);
+
+/// GPU work is completed for all render targets associated with the frame.
+const COMPOSITION_FRAME_ID_COMPLETED = COMPOSITION_FRAME_ID_TYPE(2);
+
 /// Specifies a type of computer name.
 ///
 /// To learn more, see
@@ -2273,6 +2290,9414 @@ const tdRTSpecialName = CorTypeAttr(2048);
 
 const tdHasSecurity = CorTypeAttr(262144);
 
+/// The interpolation mode to be used with the 2D affine transform effect to
+/// scale the image.
+///
+/// There are 6 scale modes that range in quality and speed.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d2d1effects/ne-d2d1effects-d2d1_2daffinetransform_interpolation_mode>.
+///
+/// {@category enum}
+extension type const D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE(int _)
+    implements int {}
+
+/// Samples the nearest single point and uses that.
+const D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE_NEAREST_NEIGHBOR =
+    D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE(0);
+
+/// Uses a four point sample and linear interpolation.
+const D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE_LINEAR =
+    D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE(1);
+
+/// Uses a 16 sample cubic kernel for interpolation.
+const D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE_CUBIC =
+    D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE(2);
+
+/// Uses 4 linear samples within a single pixel for good edge anti-aliasing.
+const D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE_MULTI_SAMPLE_LINEAR =
+    D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE(3);
+
+/// Uses anisotropic filtering to sample a pattern according to the transformed
+/// shape of the bitmap.
+const D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE_ANISOTROPIC =
+    D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE(4);
+
+/// Uses a variable size high quality cubic kernel to perform a pre-downscale
+/// the image if downscaling is involved in the transform matrix.
+const D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE_HIGH_QUALITY_CUBIC =
+    D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE(5);
+
+/// The blend mode used for the Blend effect.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d2d1effects/ne-d2d1effects-d2d1_blend_mode>.
+///
+/// {@category enum}
+extension type const D2D1_BLEND_MODE(int _) implements int {}
+
+/// Basic blend formula for alpha only.
+const D2D1_BLEND_MODE_MULTIPLY = D2D1_BLEND_MODE(0);
+
+/// Basic blend formula for alpha only.
+const D2D1_BLEND_MODE_SCREEN = D2D1_BLEND_MODE(1);
+
+/// Basic blend formula for alpha only.
+const D2D1_BLEND_MODE_DARKEN = D2D1_BLEND_MODE(2);
+
+/// Basic blend formula for alpha only.
+const D2D1_BLEND_MODE_LIGHTEN = D2D1_BLEND_MODE(3);
+
+/// Given: <ul> <li>A scene coordinate XY for the current pixel</li> <li>A
+/// deterministic pseudo-random number generator rand(XY) based on seed
+/// coordinate XY, with unbiased distribution of values from [0, 1]</li> </ul>
+/// <img alt="Mathematical formula for a dissolve blend effect."
+/// src="./images/blend_mode_dissolve_1.png"/>.
+const D2D1_BLEND_MODE_DISSOLVE = D2D1_BLEND_MODE(4);
+
+/// Basic blend formulas with <i>f</i>(F<sub>RGB</sub>, B<sub>RGB</sub>) = <img
+/// alt="Mathematical formula for a coor burn effect."
+/// src="./images/blend_mode_colorburn_1.png"/>.
+const D2D1_BLEND_MODE_COLOR_BURN = D2D1_BLEND_MODE(5);
+
+/// Basic blend formulas with <i>f</i>(F<sub>RGB</sub>, B<sub>RGB</sub>) = <img
+/// alt="Mathematical formula for a linear burn effect."
+/// src="./images/blend_mode_linearburn_1.png"/>.
+const D2D1_BLEND_MODE_LINEAR_BURN = D2D1_BLEND_MODE(6);
+
+/// Basic blend formula for alpha only.
+const D2D1_BLEND_MODE_DARKER_COLOR = D2D1_BLEND_MODE(7);
+
+/// Basic blend formula for alpha only.
+const D2D1_BLEND_MODE_LIGHTER_COLOR = D2D1_BLEND_MODE(8);
+
+/// Basic blend formulas with <i>f</i>(F<sub>RGB</sub>, B<sub>RGB</sub>) = <img
+/// alt="Mathematical formula for a color dodge effect."
+/// src="./images/blend_mode_colordodge_1.png"/>.
+const D2D1_BLEND_MODE_COLOR_DODGE = D2D1_BLEND_MODE(9);
+
+/// Basic blend formulas with <i>f</i>(F<sub>RGB</sub>, B<sub>RGB</sub>) = <img
+/// alt="Mathematical formula for a linear dodge effect."
+/// src="./images/blend_mode_lineardodge_1.png"/>.
+const D2D1_BLEND_MODE_LINEAR_DODGE = D2D1_BLEND_MODE(10);
+
+/// Basic blend formulas with <i>f</i>(F<sub>RGB</sub>, B<sub>RGB</sub>) = <img
+/// alt="Mathematical formula for an overlay effect."
+/// src="./images/blend_mode_overlay_1.png"/>.
+const D2D1_BLEND_MODE_OVERLAY = D2D1_BLEND_MODE(11);
+
+/// Basic blend formulas with <i>f</i>(F<sub>RGB</sub>, B<sub>RGB</sub>) = <img
+/// alt="Mathematical formula for a soft light effect."
+/// src="./images/blend_mode_softlight_1.png"/>.
+const D2D1_BLEND_MODE_SOFT_LIGHT = D2D1_BLEND_MODE(12);
+
+/// Basic blend formulas with <i>f</i>(F<sub>RGB</sub>, B<sub>RGB</sub>) = <img
+/// alt="Mathematical formula for a hard light effect."
+/// src="./images/blend_mode_hardlight_1.png"/>.
+const D2D1_BLEND_MODE_HARD_LIGHT = D2D1_BLEND_MODE(13);
+
+/// Basic blend formulas with <i>f</i>(F<sub>RGB</sub>, B<sub>RGB</sub>) = <img
+/// alt="Mathematical formula for a vivid light effect."
+/// src="./images/blend_mode_vividlight_1.png"/>.
+const D2D1_BLEND_MODE_VIVID_LIGHT = D2D1_BLEND_MODE(14);
+
+/// Basic blend formulas with <i>f</i>(F<sub>RGB</sub>, B<sub>RGB</sub>) = <img
+/// alt="Mathematical formula for a linear light effect."
+/// src="./images/blend_mode_linearlight_1.png"/>.
+const D2D1_BLEND_MODE_LINEAR_LIGHT = D2D1_BLEND_MODE(15);
+
+/// Basic blend formulas with <i>f</i>(F<sub>RGB</sub>, B<sub>RGB</sub>) = <img
+/// alt="Mathematical formula for a pin light effect."
+/// src="./images/blend_mode_pinlight_1.png"/>.
+const D2D1_BLEND_MODE_PIN_LIGHT = D2D1_BLEND_MODE(16);
+
+/// Basic blend formulas with <i>f</i>(F<sub>RGB</sub>, B<sub>RGB</sub>) = <img
+/// alt="Mathematical formula for a hard mix effect."
+/// src="./images/blend_mode_hardmix_1.png"/>.
+const D2D1_BLEND_MODE_HARD_MIX = D2D1_BLEND_MODE(17);
+
+/// Basic blend formulas with <i>f</i>(F<sub>RGB</sub>, B<sub>RGB</sub>) =
+/// abs(F<sub>RGB</sub> - B<sub>RGB</sub>).
+const D2D1_BLEND_MODE_DIFFERENCE = D2D1_BLEND_MODE(18);
+
+/// Basic blend formulas with <i>f</i>(F<sub>RGB</sub>, B<sub>RGB</sub>) =
+/// F<sub>RGB</sub> + B<sub>RGB</sub> – 2 * F<sub>RGB</sub> * B<sub>RGB</sub>.
+const D2D1_BLEND_MODE_EXCLUSION = D2D1_BLEND_MODE(19);
+
+/// Basic blend formula for alpha only.
+const D2D1_BLEND_MODE_HUE = D2D1_BLEND_MODE(20);
+
+/// Basic blend formula for alpha only.
+const D2D1_BLEND_MODE_SATURATION = D2D1_BLEND_MODE(21);
+
+/// Basic blend formula for alpha only.
+const D2D1_BLEND_MODE_COLOR = D2D1_BLEND_MODE(22);
+
+/// Basic blend formula for alpha only.
+const D2D1_BLEND_MODE_LUMINOSITY = D2D1_BLEND_MODE(23);
+
+/// Basic blend formula for alpha only.
+const D2D1_BLEND_MODE_SUBTRACT = D2D1_BLEND_MODE(24);
+
+/// Basic blend formula for alpha only.
+const D2D1_BLEND_MODE_DIVISION = D2D1_BLEND_MODE(25);
+
+/// Specifies how the Crop effect handles the crop rectangle falling on
+/// fractional pixel coordinates.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d2d1effects/ne-d2d1effects-d2d1_border_mode>.
+///
+/// {@category enum}
+extension type const D2D1_BORDER_MODE(int _) implements int {}
+
+/// If the crop rectangle falls on fractional pixel coordinates, the effect
+/// applies antialiasing which results in a soft edge.
+const D2D1_BORDER_MODE_SOFT = D2D1_BORDER_MODE(0);
+
+/// If the crop rectangle falls on fractional pixel coordinates, the effect
+/// clamps which results in a hard edge.
+const D2D1_BORDER_MODE_HARD = D2D1_BORDER_MODE(1);
+
+/// The alpha mode of the output of the Color matrix effect.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d2d1effects/ne-d2d1effects-d2d1_colormatrix_alpha_mode>.
+///
+/// {@category enum}
+extension type const D2D1_COLORMATRIX_ALPHA_MODE(int _) implements int {}
+
+/// The effect un-premultiplies the input, applies the color matrix, and
+/// premultiplies the output.
+const D2D1_COLORMATRIX_ALPHA_MODE_PREMULTIPLIED = D2D1_COLORMATRIX_ALPHA_MODE(
+  1,
+);
+
+/// The effect applies the color matrix directly to the input, and doesn't
+/// premultiply the output.
+const D2D1_COLORMATRIX_ALPHA_MODE_STRAIGHT = D2D1_COLORMATRIX_ALPHA_MODE(2);
+
+/// Used to specify the blend mode for all of the Direct2D blending operations.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d2d1_1/ne-d2d1_1-d2d1_composite_mode>.
+///
+/// {@category enum}
+extension type const D2D1_COMPOSITE_MODE(int _) implements int {}
+
+/// The standard source-over-destination blend mode.
+const D2D1_COMPOSITE_MODE_SOURCE_OVER = D2D1_COMPOSITE_MODE(0);
+
+/// The destination is rendered over the source.
+const D2D1_COMPOSITE_MODE_DESTINATION_OVER = D2D1_COMPOSITE_MODE(1);
+
+/// Performs a logical clip of the source pixels against the destination pixels.
+const D2D1_COMPOSITE_MODE_SOURCE_IN = D2D1_COMPOSITE_MODE(2);
+
+/// The inverse of the <b>D2D1_COMPOSITE_MODE_SOURCE_IN</b> operation.
+const D2D1_COMPOSITE_MODE_DESTINATION_IN = D2D1_COMPOSITE_MODE(3);
+
+/// This is the logical inverse to <b>D2D1_COMPOSITE_MODE_SOURCE_IN</b>.
+const D2D1_COMPOSITE_MODE_SOURCE_OUT = D2D1_COMPOSITE_MODE(4);
+
+/// The is the logical inverse to <b>D2D1_COMPOSITE_MODE_DESTINATION_IN</b>.
+const D2D1_COMPOSITE_MODE_DESTINATION_OUT = D2D1_COMPOSITE_MODE(5);
+
+/// Writes the source pixels over the destination where there are destination
+/// pixels.
+const D2D1_COMPOSITE_MODE_SOURCE_ATOP = D2D1_COMPOSITE_MODE(6);
+
+/// The logical inverse of <b>D2D1_COMPOSITE_MODE_SOURCE_ATOP</b>.
+const D2D1_COMPOSITE_MODE_DESTINATION_ATOP = D2D1_COMPOSITE_MODE(7);
+
+/// The source is inverted with the destination.
+const D2D1_COMPOSITE_MODE_XOR = D2D1_COMPOSITE_MODE(8);
+
+/// The channel components are summed.
+const D2D1_COMPOSITE_MODE_PLUS = D2D1_COMPOSITE_MODE(9);
+
+/// The source is copied to the destination; the destination pixels are ignored.
+const D2D1_COMPOSITE_MODE_SOURCE_COPY = D2D1_COMPOSITE_MODE(10);
+
+/// Equivalent to <b>D2D1_COMPOSITE_MODE_SOURCE_COPY</b>, but pixels outside of
+/// the source bounds are unchanged.
+const D2D1_COMPOSITE_MODE_BOUNDED_SOURCE_COPY = D2D1_COMPOSITE_MODE(11);
+
+/// Destination colors are inverted according to a source mask.
+const D2D1_COMPOSITE_MODE_MASK_INVERT = D2D1_COMPOSITE_MODE(12);
+
+/// The turbulence noise mode for the Turbulence effect.
+///
+/// Indicates whether to generate a bitmap based on Fractal Noise or the
+/// Turbulence function.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d2d1effects/ne-d2d1effects-d2d1_turbulence_noise>.
+///
+/// {@category enum}
+extension type const D2D1_TURBULENCE_NOISE(int _) implements int {}
+
+/// Computes a sum of the octaves, shifting the output range from [-1, 1], to
+/// [0, 1].
+const D2D1_TURBULENCE_NOISE_FRACTAL_SUM = D2D1_TURBULENCE_NOISE(0);
+
+/// Computes a sum of the absolute value of each octave.
+const D2D1_TURBULENCE_NOISE_TURBULENCE = D2D1_TURBULENCE_NOISE(1);
+
+/// Describes flags that are used to create a device context state object
+/// (ID3DDeviceContextState) with the ID3D11Device1::CreateDeviceContextState
+/// method.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_1/ne-d3d11_1-d3d11_1_create_device_context_state_flag>.
+///
+/// {@category enum}
+extension type const D3D11_1_CREATE_DEVICE_CONTEXT_STATE_FLAG(int _)
+    implements int {}
+
+/// You use this flag if your application will only call methods of Direct3D 11
+/// and Direct3D 10 interfaces from a single thread.
+const D3D11_1_CREATE_DEVICE_CONTEXT_STATE_SINGLETHREADED =
+    D3D11_1_CREATE_DEVICE_CONTEXT_STATE_FLAG(1);
+
+/// Optional flags that control the behavior of ID3D11DeviceContext::GetData.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_async_getdata_flag>.
+///
+/// {@category enum}
+extension type const D3D11_ASYNC_GETDATA_FLAG(int _) implements int {}
+
+/// Do not flush the command buffer.
+const D3D11_ASYNC_GETDATA_DONOTFLUSH = D3D11_ASYNC_GETDATA_FLAG(1);
+
+/// Specifies the type of Microsoft Direct3D authenticated channel.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_authenticated_channel_type>.
+///
+/// {@category enum}
+extension type const D3D11_AUTHENTICATED_CHANNEL_TYPE(int _) implements int {}
+
+/// Direct3D 11 channel.
+const D3D11_AUTHENTICATED_CHANNEL_D3D11 = D3D11_AUTHENTICATED_CHANNEL_TYPE(1);
+
+/// Software driver channel.
+const D3D11_AUTHENTICATED_CHANNEL_DRIVER_SOFTWARE =
+    D3D11_AUTHENTICATED_CHANNEL_TYPE(2);
+
+/// Hardware driver channel.
+const D3D11_AUTHENTICATED_CHANNEL_DRIVER_HARDWARE =
+    D3D11_AUTHENTICATED_CHANNEL_TYPE(3);
+
+/// Specifies the type of process that is identified in the
+/// D3D11_AUTHENTICATED_QUERY_RESTRICTED_SHARED_RESOURCE_PROCESS_OUTPUT
+/// structure.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_authenticated_process_identifier_type>.
+///
+/// {@category enum}
+extension type const D3D11_AUTHENTICATED_PROCESS_IDENTIFIER_TYPE(int _)
+    implements int {}
+
+/// Unknown process type.
+const D3D11_PROCESSIDTYPE_UNKNOWN = D3D11_AUTHENTICATED_PROCESS_IDENTIFIER_TYPE(
+  0,
+);
+
+/// Desktop Window Manager (DWM) process.
+const D3D11_PROCESSIDTYPE_DWM = D3D11_AUTHENTICATED_PROCESS_IDENTIFIER_TYPE(1);
+
+/// Handle to a process.
+const D3D11_PROCESSIDTYPE_HANDLE = D3D11_AUTHENTICATED_PROCESS_IDENTIFIER_TYPE(
+  2,
+);
+
+/// Identifies how to bind a resource to the pipeline.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_bind_flag>.
+///
+/// {@category enum}
+extension type const D3D11_BIND_FLAG(int _) implements int {
+  /// Whether this instance has all the bit fields specified in [other].
+  bool has(D3D11_BIND_FLAG other) => _ & other._ == other._;
+
+  D3D11_BIND_FLAG operator &(int other) => D3D11_BIND_FLAG(_ & other);
+  D3D11_BIND_FLAG operator |(int other) => D3D11_BIND_FLAG(_ | other);
+}
+
+/// Bind a buffer as a vertex buffer to the input-assembler stage.
+const D3D11_BIND_VERTEX_BUFFER = D3D11_BIND_FLAG(1);
+
+/// Bind a buffer as an index buffer to the input-assembler stage.
+const D3D11_BIND_INDEX_BUFFER = D3D11_BIND_FLAG(2);
+
+/// Bind a buffer as a constant buffer to a shader stage; this flag may NOT be
+/// combined with any other bind flag.
+const D3D11_BIND_CONSTANT_BUFFER = D3D11_BIND_FLAG(4);
+
+/// Bind a buffer or texture to a shader stage; this flag cannot be used with
+/// the <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ne-d3d11-d3d11_map">D3D11_MAP_WRITE_NO_OVERWRITE</a>
+/// flag.
+const D3D11_BIND_SHADER_RESOURCE = D3D11_BIND_FLAG(8);
+
+/// Bind an output buffer for the stream-output stage.
+const D3D11_BIND_STREAM_OUTPUT = D3D11_BIND_FLAG(16);
+
+/// Bind a texture as a render target for the output-merger stage.
+const D3D11_BIND_RENDER_TARGET = D3D11_BIND_FLAG(32);
+
+/// Bind a texture as a depth-stencil target for the output-merger stage.
+const D3D11_BIND_DEPTH_STENCIL = D3D11_BIND_FLAG(64);
+
+/// Bind an <a
+/// href="https://docs.microsoft.com/windows/desktop/direct3d11/direct3d-11-advanced-stages-cs-resources">unordered
+/// access</a> resource.
+const D3D11_BIND_UNORDERED_ACCESS = D3D11_BIND_FLAG(128);
+
+/// Set this flag to indicate that a <a
+/// href="https://docs.microsoft.com/windows/desktop/direct3d11/overviews-direct3d-11-resources-textures-intro">2D
+/// texture</a> is used to receive output from the decoder API.
+const D3D11_BIND_DECODER = D3D11_BIND_FLAG(512);
+
+/// Set this flag to indicate that a <a
+/// href="https://docs.microsoft.com/windows/desktop/direct3d11/overviews-direct3d-11-resources-textures-intro">2D
+/// texture</a> is used to receive input from the video encoder API.
+const D3D11_BIND_VIDEO_ENCODER = D3D11_BIND_FLAG(1024);
+
+/// Blend factors, which modulate values for the pixel shader and render target.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_blend>.
+///
+/// {@category enum}
+extension type const D3D11_BLEND(int _) implements int {}
+
+/// The blend factor is (0, 0, 0, 0).
+const D3D11_BLEND_ZERO = D3D11_BLEND(1);
+
+/// The blend factor is (1, 1, 1, 1).
+const D3D11_BLEND_ONE = D3D11_BLEND(2);
+
+/// The blend factor is (Rₛ, Gₛ, Bₛ, Aₛ), that is color data (RGB) from a pixel
+/// shader.
+const D3D11_BLEND_SRC_COLOR = D3D11_BLEND(3);
+
+/// The blend factor is (1 - Rₛ, 1 - Gₛ, 1 - Bₛ, 1 - Aₛ), that is color data
+/// (RGB) from a pixel shader.
+const D3D11_BLEND_INV_SRC_COLOR = D3D11_BLEND(4);
+
+/// The blend factor is (Aₛ, Aₛ, Aₛ, Aₛ), that is alpha data (A) from a pixel
+/// shader.
+const D3D11_BLEND_SRC_ALPHA = D3D11_BLEND(5);
+
+/// The blend factor is ( 1 - Aₛ, 1 - Aₛ, 1 - Aₛ, 1 - Aₛ), that is alpha data
+/// (A) from a pixel shader.
+const D3D11_BLEND_INV_SRC_ALPHA = D3D11_BLEND(6);
+
+/// The blend factor is (A<sub>d</sub> A<sub>d</sub> A<sub>d</sub>
+/// A<sub>d</sub>), that is alpha data from a render target.
+const D3D11_BLEND_DEST_ALPHA = D3D11_BLEND(7);
+
+/// The blend factor is (1 - A<sub>d</sub> 1 - A<sub>d</sub> 1 - A<sub>d</sub> 1
+/// - A<sub>d</sub>), that is alpha data from a render target.
+const D3D11_BLEND_INV_DEST_ALPHA = D3D11_BLEND(8);
+
+/// The blend factor is (R<sub>d</sub>, G<sub>d</sub>, B<sub>d</sub>,
+/// A<sub>d</sub>), that is color data from a render target.
+const D3D11_BLEND_DEST_COLOR = D3D11_BLEND(9);
+
+/// The blend factor is (1 - R<sub>d</sub>, 1 - G<sub>d</sub>, 1 -
+/// B<sub>d</sub>, 1 - A<sub>d</sub>), that is color data from a render target.
+const D3D11_BLEND_INV_DEST_COLOR = D3D11_BLEND(10);
+
+/// The blend factor is (f, f, f, 1); where f = min(Aₛ, 1 - A<sub>d</sub>).
+const D3D11_BLEND_SRC_ALPHA_SAT = D3D11_BLEND(11);
+
+/// The blend factor is the blend factor set with <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-omsetblendstate">ID3D11DeviceContext::OMSetBlendState</a>.
+const D3D11_BLEND_BLEND_FACTOR = D3D11_BLEND(14);
+
+/// The blend factor is the blend factor set with <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-omsetblendstate">ID3D11DeviceContext::OMSetBlendState</a>.
+const D3D11_BLEND_INV_BLEND_FACTOR = D3D11_BLEND(15);
+
+/// The blend factor is data sources both as color data output by a pixel
+/// shader.
+const D3D11_BLEND_SRC1_COLOR = D3D11_BLEND(16);
+
+/// The blend factor is data sources both as color data output by a pixel
+/// shader.
+const D3D11_BLEND_INV_SRC1_COLOR = D3D11_BLEND(17);
+
+/// The blend factor is data sources as alpha data output by a pixel shader.
+const D3D11_BLEND_SRC1_ALPHA = D3D11_BLEND(18);
+
+/// The blend factor is data sources as alpha data output by a pixel shader.
+const D3D11_BLEND_INV_SRC1_ALPHA = D3D11_BLEND(19);
+
+/// RGB or alpha blending operation.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_blend_op>.
+///
+/// {@category enum}
+extension type const D3D11_BLEND_OP(int _) implements int {}
+
+/// Add source 1 and source 2.
+const D3D11_BLEND_OP_ADD = D3D11_BLEND_OP(1);
+
+/// Subtract source 1 from source 2.
+const D3D11_BLEND_OP_SUBTRACT = D3D11_BLEND_OP(2);
+
+/// Subtract source 2 from source 1.
+const D3D11_BLEND_OP_REV_SUBTRACT = D3D11_BLEND_OP(3);
+
+/// Find the minimum of source 1 and source 2.
+const D3D11_BLEND_OP_MIN = D3D11_BLEND_OP(4);
+
+/// Find the maximum of source 1 and source 2.
+const D3D11_BLEND_OP_MAX = D3D11_BLEND_OP(5);
+
+/// Identifies how to view a buffer resource.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_bufferex_srv_flag>.
+///
+/// {@category enum}
+extension type const D3D11_BUFFEREX_SRV_FLAG(int _) implements int {}
+
+/// View the buffer as raw.
+const D3D11_BUFFEREX_SRV_FLAG_RAW = D3D11_BUFFEREX_SRV_FLAG(1);
+
+/// Identifies unordered-access view options for a buffer resource.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_buffer_uav_flag>.
+///
+/// {@category enum}
+extension type const D3D11_BUFFER_UAV_FLAG(int _) implements int {}
+
+/// Resource contains raw, unstructured data.
+const D3D11_BUFFER_UAV_FLAG_RAW = D3D11_BUFFER_UAV_FLAG(1);
+
+/// Allow data to be appended to the end of the buffer.
+const D3D11_BUFFER_UAV_FLAG_APPEND = D3D11_BUFFER_UAV_FLAG(2);
+
+/// Adds a counter to the unordered-access-view buffer.
+const D3D11_BUFFER_UAV_FLAG_COUNTER = D3D11_BUFFER_UAV_FLAG(4);
+
+/// Specifies the type of I/O bus that is used by the graphics adapter.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_bus_type>.
+///
+/// {@category enum}
+extension type const D3D11_BUS_TYPE(int _) implements int {}
+
+/// Indicates a type of bus other than the types listed here.
+const D3D11_BUS_TYPE_OTHER = D3D11_BUS_TYPE(0);
+
+/// PCI bus.
+const D3D11_BUS_TYPE_PCI = D3D11_BUS_TYPE(1);
+
+/// PCI-X bus.
+const D3D11_BUS_TYPE_PCIX = D3D11_BUS_TYPE(2);
+
+/// PCI Express bus.
+const D3D11_BUS_TYPE_PCIEXPRESS = D3D11_BUS_TYPE(3);
+
+/// Accelerated Graphics Port (AGP) bus.
+const D3D11_BUS_TYPE_AGP = D3D11_BUS_TYPE(4);
+
+/// The implementation for the graphics adapter is in a motherboard chipset's
+/// north bridge.
+const D3D11_BUS_IMPL_MODIFIER_INSIDE_OF_CHIPSET = D3D11_BUS_TYPE(65536);
+
+/// Indicates that the graphics adapter is connected to a motherboard chipset's
+/// north bridge by tracks on the motherboard, and all of the graphics adapter's
+/// chips are soldered to the motherboard.
+const D3D11_BUS_IMPL_MODIFIER_TRACKS_ON_MOTHER_BOARD_TO_CHIP = D3D11_BUS_TYPE(
+  131072,
+);
+
+/// The graphics adapter is connected to a motherboard chipset's north bridge by
+/// tracks on the motherboard, and all of the graphics adapter's chips are
+/// connected through sockets to the motherboard.
+const D3D11_BUS_IMPL_MODIFIER_TRACKS_ON_MOTHER_BOARD_TO_SOCKET = D3D11_BUS_TYPE(
+  196608,
+);
+
+/// The graphics adapter is connected to the motherboard through a daughterboard
+/// connector.
+const D3D11_BUS_IMPL_MODIFIER_DAUGHTER_BOARD_CONNECTOR = D3D11_BUS_TYPE(262144);
+
+/// The graphics adapter is connected to the motherboard through a daughterboard
+/// connector, and the graphics adapter is inside an enclosure that is not user
+/// accessible.
+const D3D11_BUS_IMPL_MODIFIER_DAUGHTER_BOARD_CONNECTOR_INSIDE_OF_NUAE =
+    D3D11_BUS_TYPE(327680);
+
+/// One of the <b>D3D11_BUS_IMPL_MODIFIER_Xxx</b> flags is set.
+const D3D11_BUS_IMPL_MODIFIER_NON_STANDARD = D3D11_BUS_TYPE(-2147483648);
+
+/// Identifies how to check multisample quality levels.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_2/ne-d3d11_2-d3d11_check_multisample_quality_levels_flag>.
+///
+/// {@category enum}
+extension type const D3D11_CHECK_MULTISAMPLE_QUALITY_LEVELS_FLAG(int _)
+    implements int {}
+
+/// Indicates to check the multisample quality levels of a tiled resource.
+const D3D11_CHECK_MULTISAMPLE_QUALITY_LEVELS_TILED_RESOURCE =
+    D3D11_CHECK_MULTISAMPLE_QUALITY_LEVELS_FLAG(1);
+
+/// Specifies the parts of the depth stencil to clear.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_clear_flag>.
+///
+/// {@category enum}
+extension type const D3D11_CLEAR_FLAG(int _) implements int {
+  /// Whether this instance has all the bit fields specified in [other].
+  bool has(D3D11_CLEAR_FLAG other) => _ & other._ == other._;
+
+  D3D11_CLEAR_FLAG operator &(int other) => D3D11_CLEAR_FLAG(_ & other);
+  D3D11_CLEAR_FLAG operator |(int other) => D3D11_CLEAR_FLAG(_ | other);
+}
+
+/// Clear the depth buffer, using fast clear if possible, then place the
+/// resource in a compressed state.
+const D3D11_CLEAR_DEPTH = D3D11_CLEAR_FLAG(1);
+
+/// Clear the stencil buffer, using fast clear if possible, then place the
+/// resource in a compressed state.
+const D3D11_CLEAR_STENCIL = D3D11_CLEAR_FLAG(2);
+
+/// Identify which components of each pixel of a render target are writable
+/// during blending.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_color_write_enable>.
+///
+/// {@category enum}
+extension type const D3D11_COLOR_WRITE_ENABLE(int _) implements int {}
+
+/// Allow data to be stored in the red component.
+const D3D11_COLOR_WRITE_ENABLE_RED = D3D11_COLOR_WRITE_ENABLE(1);
+
+/// Allow data to be stored in the green component.
+const D3D11_COLOR_WRITE_ENABLE_GREEN = D3D11_COLOR_WRITE_ENABLE(2);
+
+/// Allow data to be stored in the blue component.
+const D3D11_COLOR_WRITE_ENABLE_BLUE = D3D11_COLOR_WRITE_ENABLE(4);
+
+/// Allow data to be stored in the alpha component.
+const D3D11_COLOR_WRITE_ENABLE_ALPHA = D3D11_COLOR_WRITE_ENABLE(8);
+
+/// Allow data to be stored in all components.
+const D3D11_COLOR_WRITE_ENABLE_ALL = D3D11_COLOR_WRITE_ENABLE(15);
+
+/// Comparison options.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_comparison_func>.
+///
+/// {@category enum}
+extension type const D3D11_COMPARISON_FUNC(int _) implements int {}
+
+/// Never pass the comparison.
+const D3D11_COMPARISON_NEVER = D3D11_COMPARISON_FUNC(1);
+
+/// If the source data is less than the destination data, the comparison passes.
+const D3D11_COMPARISON_LESS = D3D11_COMPARISON_FUNC(2);
+
+/// If the source data is equal to the destination data, the comparison passes.
+const D3D11_COMPARISON_EQUAL = D3D11_COMPARISON_FUNC(3);
+
+/// If the source data is less than or equal to the destination data, the
+/// comparison passes.
+const D3D11_COMPARISON_LESS_EQUAL = D3D11_COMPARISON_FUNC(4);
+
+/// If the source data is greater than the destination data, the comparison
+/// passes.
+const D3D11_COMPARISON_GREATER = D3D11_COMPARISON_FUNC(5);
+
+/// If the source data is not equal to the destination data, the comparison
+/// passes.
+const D3D11_COMPARISON_NOT_EQUAL = D3D11_COMPARISON_FUNC(6);
+
+/// If the source data is greater than or equal to the destination data, the
+/// comparison passes.
+const D3D11_COMPARISON_GREATER_EQUAL = D3D11_COMPARISON_FUNC(7);
+
+/// Always pass the comparison.
+const D3D11_COMPARISON_ALWAYS = D3D11_COMPARISON_FUNC(8);
+
+/// Identifies whether conservative rasterization is on or off.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_3/ne-d3d11_3-d3d11_conservative_rasterization_mode>.
+///
+/// {@category enum}
+extension type const D3D11_CONSERVATIVE_RASTERIZATION_MODE(int _)
+    implements int {}
+
+/// Conservative rasterization is off.
+const D3D11_CONSERVATIVE_RASTERIZATION_MODE_OFF =
+    D3D11_CONSERVATIVE_RASTERIZATION_MODE(0);
+
+/// Conservative rasterization is on.
+const D3D11_CONSERVATIVE_RASTERIZATION_MODE_ON =
+    D3D11_CONSERVATIVE_RASTERIZATION_MODE(1);
+
+/// Specifies if the hardware and driver support conservative rasterization and
+/// at what tier level.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_conservative_rasterization_tier>.
+///
+/// {@category enum}
+extension type const D3D11_CONSERVATIVE_RASTERIZATION_TIER(int _)
+    implements int {}
+
+/// Conservative rasterization isn't supported.
+const D3D11_CONSERVATIVE_RASTERIZATION_NOT_SUPPORTED =
+    D3D11_CONSERVATIVE_RASTERIZATION_TIER(0);
+
+/// Tier_1 conservative rasterization is supported.
+const D3D11_CONSERVATIVE_RASTERIZATION_TIER_1 =
+    D3D11_CONSERVATIVE_RASTERIZATION_TIER(1);
+
+/// Tier_2 conservative rasterization is supported.
+const D3D11_CONSERVATIVE_RASTERIZATION_TIER_2 =
+    D3D11_CONSERVATIVE_RASTERIZATION_TIER(2);
+
+/// Tier_3 conservative rasterization is supported.
+const D3D11_CONSERVATIVE_RASTERIZATION_TIER_3 =
+    D3D11_CONSERVATIVE_RASTERIZATION_TIER(3);
+
+/// Contains flags that describe content-protection capabilities.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_content_protection_caps>.
+///
+/// {@category enum}
+extension type const D3D11_CONTENT_PROTECTION_CAPS(int _) implements int {}
+
+/// The content protection is implemented in software by the driver.
+const D3D11_CONTENT_PROTECTION_CAPS_SOFTWARE = D3D11_CONTENT_PROTECTION_CAPS(1);
+
+/// The content protection is implemented in hardware by the GPU.
+const D3D11_CONTENT_PROTECTION_CAPS_HARDWARE = D3D11_CONTENT_PROTECTION_CAPS(2);
+
+/// Content protection is always applied to a protected surface, regardless of
+/// whether the application explicitly enables protection.
+const D3D11_CONTENT_PROTECTION_CAPS_PROTECTION_ALWAYS_ON =
+    D3D11_CONTENT_PROTECTION_CAPS(4);
+
+/// The driver can use partially encrypted buffers.
+const D3D11_CONTENT_PROTECTION_CAPS_PARTIAL_DECRYPTION =
+    D3D11_CONTENT_PROTECTION_CAPS(8);
+
+/// The driver can encrypt data using a separate content key that is encrypted
+/// using the session key.
+const D3D11_CONTENT_PROTECTION_CAPS_CONTENT_KEY = D3D11_CONTENT_PROTECTION_CAPS(
+  16,
+);
+
+/// The driver can refresh the session key without renegotiating the key.
+const D3D11_CONTENT_PROTECTION_CAPS_FRESHEN_SESSION_KEY =
+    D3D11_CONTENT_PROTECTION_CAPS(32);
+
+/// The driver can read back encrypted data from a protected surface.
+const D3D11_CONTENT_PROTECTION_CAPS_ENCRYPTED_READ_BACK =
+    D3D11_CONTENT_PROTECTION_CAPS(64);
+
+/// The driver requires a separate key to read encrypted data from a protected
+/// surface.
+const D3D11_CONTENT_PROTECTION_CAPS_ENCRYPTED_READ_BACK_KEY =
+    D3D11_CONTENT_PROTECTION_CAPS(128);
+
+/// If the encryption type is <b>D3DCRYPTOTYPE_AES128_CTR</b>, the application
+/// must use a sequential count in the <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ns-d3d11-d3d11_aes_ctr_iv">D3D11_AES_CTR_IV</a>
+/// structure.
+const D3D11_CONTENT_PROTECTION_CAPS_SEQUENTIAL_CTR_IV =
+    D3D11_CONTENT_PROTECTION_CAPS(256);
+
+/// The driver supports encrypted slice data, but does not support any other
+/// encrypted data in the compressed buffer.
+const D3D11_CONTENT_PROTECTION_CAPS_ENCRYPT_SLICEDATA_ONLY =
+    D3D11_CONTENT_PROTECTION_CAPS(512);
+
+/// The driver can copy encrypted data from one resource to another, decrypting
+/// the data as part of the process.
+const D3D11_CONTENT_PROTECTION_CAPS_DECRYPTION_BLT =
+    D3D11_CONTENT_PROTECTION_CAPS(1024);
+
+/// The hardware supports the protection of specific resources.
+const D3D11_CONTENT_PROTECTION_CAPS_HARDWARE_PROTECT_UNCOMPRESSED =
+    D3D11_CONTENT_PROTECTION_CAPS(2048);
+
+/// Physical pages of a protected resource can be evicted and potentially paged
+/// to disk in low memory conditions without losing the contents of the resource
+/// when paged back in.
+const D3D11_CONTENT_PROTECTION_CAPS_HARDWARE_PROTECTED_MEMORY_PAGEABLE =
+    D3D11_CONTENT_PROTECTION_CAPS(4096);
+
+/// The hardware supports an automatic teardown mechanism that could trigger
+/// hardware keys or protected content to become lost in some conditions.
+const D3D11_CONTENT_PROTECTION_CAPS_HARDWARE_TEARDOWN =
+    D3D11_CONTENT_PROTECTION_CAPS(8192);
+
+/// The secure environment is tightly coupled with the GPU and an <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nn-d3d11-id3d11cryptosession">ID3D11CryptoSession</a>
+/// should be used for communication between the user mode DRM component and the
+/// secure execution environment.
+const D3D11_CONTENT_PROTECTION_CAPS_HARDWARE_DRM_COMMUNICATION =
+    D3D11_CONTENT_PROTECTION_CAPS(16384);
+
+const D3D11_CONTENT_PROTECTION_CAPS_HARDWARE_DRM_COMMUNICATION_MULTI_THREADED =
+    D3D11_CONTENT_PROTECTION_CAPS(32768);
+
+/// Specifies the context in which a query occurs.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_3/ne-d3d11_3-d3d11_context_type>.
+///
+/// {@category enum}
+extension type const D3D11_CONTEXT_TYPE(int _) implements int {}
+
+/// The query can occur in all contexts.
+const D3D11_CONTEXT_TYPE_ALL = D3D11_CONTEXT_TYPE(0);
+
+/// The query occurs in the context of a 3D command queue.
+const D3D11_CONTEXT_TYPE_3D = D3D11_CONTEXT_TYPE(1);
+
+/// The query occurs in the context of a 3D compute queue.
+const D3D11_CONTEXT_TYPE_COMPUTE = D3D11_CONTEXT_TYPE(2);
+
+/// The query occurs in the context of a 3D copy queue.
+const D3D11_CONTEXT_TYPE_COPY = D3D11_CONTEXT_TYPE(3);
+
+/// The query occurs in the context of video.
+const D3D11_CONTEXT_TYPE_VIDEO = D3D11_CONTEXT_TYPE(4);
+
+/// Specifies how to handle the existing contents of a resource during a copy or
+/// update operation of a region within that resource.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_1/ne-d3d11_1-d3d11_copy_flags>.
+///
+/// {@category enum}
+extension type const D3D11_COPY_FLAGS(int _) implements int {}
+
+/// The existing contents of the resource cannot be overwritten.
+const D3D11_COPY_NO_OVERWRITE = D3D11_COPY_FLAGS(1);
+
+/// The existing contents of the resource are undefined and can be discarded.
+const D3D11_COPY_DISCARD = D3D11_COPY_FLAGS(2);
+
+/// Options for performance counters.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_counter>.
+///
+/// {@category enum}
+extension type const D3D11_COUNTER(int _) implements int {}
+
+/// Define a performance counter that is dependent on the hardware device.
+const D3D11_COUNTER_DEVICE_DEPENDENT_0 = D3D11_COUNTER(1073741824);
+
+/// Data type of a performance counter.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_counter_type>.
+///
+/// {@category enum}
+extension type const D3D11_COUNTER_TYPE(int _) implements int {}
+
+/// 32-bit floating point.
+const D3D11_COUNTER_TYPE_FLOAT32 = D3D11_COUNTER_TYPE(0);
+
+/// 16-bit unsigned integer.
+const D3D11_COUNTER_TYPE_UINT16 = D3D11_COUNTER_TYPE(1);
+
+/// 32-bit unsigned integer.
+const D3D11_COUNTER_TYPE_UINT32 = D3D11_COUNTER_TYPE(2);
+
+/// 64-bit unsigned integer.
+const D3D11_COUNTER_TYPE_UINT64 = D3D11_COUNTER_TYPE(3);
+
+/// Specifies the types of CPU access allowed for a resource.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_cpu_access_flag>.
+///
+/// {@category enum}
+extension type const D3D11_CPU_ACCESS_FLAG(int _) implements int {
+  /// Whether this instance has all the bit fields specified in [other].
+  bool has(D3D11_CPU_ACCESS_FLAG other) => _ & other._ == other._;
+
+  D3D11_CPU_ACCESS_FLAG operator &(int other) =>
+      D3D11_CPU_ACCESS_FLAG(_ & other);
+  D3D11_CPU_ACCESS_FLAG operator |(int other) =>
+      D3D11_CPU_ACCESS_FLAG(_ | other);
+}
+
+/// The resource is to be mappable so that the CPU can change its contents.
+const D3D11_CPU_ACCESS_WRITE = D3D11_CPU_ACCESS_FLAG(65536);
+
+/// The resource is to be mappable so that the CPU can read its contents.
+const D3D11_CPU_ACCESS_READ = D3D11_CPU_ACCESS_FLAG(131072);
+
+/// Describes parameters that are used to create a device.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_create_device_flag>.
+///
+/// {@category enum}
+extension type const D3D11_CREATE_DEVICE_FLAG(int _) implements int {
+  /// Whether this instance has all the bit fields specified in [other].
+  bool has(D3D11_CREATE_DEVICE_FLAG other) => _ & other._ == other._;
+
+  D3D11_CREATE_DEVICE_FLAG operator &(int other) =>
+      D3D11_CREATE_DEVICE_FLAG(_ & other);
+  D3D11_CREATE_DEVICE_FLAG operator |(int other) =>
+      D3D11_CREATE_DEVICE_FLAG(_ | other);
+}
+
+/// Use this flag if your application will only call methods of Direct3D 11
+/// interfaces from a single thread.
+const D3D11_CREATE_DEVICE_SINGLETHREADED = D3D11_CREATE_DEVICE_FLAG(1);
+
+/// Creates a device that supports the <a
+/// href="https://docs.microsoft.com/windows/desktop/direct3d11/overviews-direct3d-11-devices-layers">debug
+/// layer</a>.
+const D3D11_CREATE_DEVICE_DEBUG = D3D11_CREATE_DEVICE_FLAG(2);
+
+/// <b>Note</b> This flag is not supported in Direct3D 11.</div> <div> </div>.
+const D3D11_CREATE_DEVICE_SWITCH_TO_REF = D3D11_CREATE_DEVICE_FLAG(4);
+
+/// Prevents multiple threads from being created.
+const D3D11_CREATE_DEVICE_PREVENT_INTERNAL_THREADING_OPTIMIZATIONS =
+    D3D11_CREATE_DEVICE_FLAG(8);
+
+/// Creates a device that supports BGRA formats (<a
+/// href="https://docs.microsoft.com/windows/desktop/api/dxgiformat/ne-dxgiformat-dxgi_format">DXGI_FORMAT_B8G8R8A8_UNORM</a>
+/// and <a
+/// href="https://docs.microsoft.com/windows/desktop/api/dxgiformat/ne-dxgiformat-dxgi_format">DXGI_FORMAT_B8G8R8A8_UNORM_SRGB</a>).
+const D3D11_CREATE_DEVICE_BGRA_SUPPORT = D3D11_CREATE_DEVICE_FLAG(32);
+
+/// Causes the device and driver to keep information that you can use for shader
+/// debugging.
+const D3D11_CREATE_DEVICE_DEBUGGABLE = D3D11_CREATE_DEVICE_FLAG(64);
+
+/// Causes the Direct3D runtime to ignore registry settings that turn on the <a
+/// href="https://docs.microsoft.com/windows/desktop/direct3d11/overviews-direct3d-11-devices-layers">debug
+/// layer</a>.
+const D3D11_CREATE_DEVICE_PREVENT_ALTERING_LAYER_SETTINGS_FROM_REGISTRY =
+    D3D11_CREATE_DEVICE_FLAG(128);
+
+/// Use this flag if the device will produce GPU workloads that take more than
+/// two seconds to complete, and you want the operating system to allow them to
+/// successfully finish.
+const D3D11_CREATE_DEVICE_DISABLE_GPU_TIMEOUT = D3D11_CREATE_DEVICE_FLAG(256);
+
+/// Forces the creation of the Direct3D device to fail if the display driver is
+/// not implemented to the WDDM for Windows 8 (WDDM 1.2).
+const D3D11_CREATE_DEVICE_VIDEO_SUPPORT = D3D11_CREATE_DEVICE_FLAG(2048);
+
+/// {@category enum}
+extension type const D3D11_CRYPTO_SESSION_KEY_EXCHANGE_FLAGS(int _)
+    implements int {
+  /// Whether this instance has all the bit fields specified in [other].
+  bool has(D3D11_CRYPTO_SESSION_KEY_EXCHANGE_FLAGS other) =>
+      _ & other._ == other._;
+
+  D3D11_CRYPTO_SESSION_KEY_EXCHANGE_FLAGS operator &(int other) =>
+      D3D11_CRYPTO_SESSION_KEY_EXCHANGE_FLAGS(_ & other);
+  D3D11_CRYPTO_SESSION_KEY_EXCHANGE_FLAGS operator |(int other) =>
+      D3D11_CRYPTO_SESSION_KEY_EXCHANGE_FLAGS(_ | other);
+}
+
+const D3D11_CRYPTO_SESSION_KEY_EXCHANGE_FLAG_NONE =
+    D3D11_CRYPTO_SESSION_KEY_EXCHANGE_FLAGS(0);
+
+/// Represents the status of an ID3D11CryptoSession interface.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_1/ne-d3d11_1-d3d11_crypto_session_status>.
+///
+/// {@category enum}
+extension type const D3D11_CRYPTO_SESSION_STATUS(int _) implements int {}
+
+/// The <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nn-d3d11-id3d11cryptosession">ID3D11CryptoSession</a>
+/// is in a functional state.
+const D3D11_CRYPTO_SESSION_STATUS_OK = D3D11_CRYPTO_SESSION_STATUS(0);
+
+/// The underlying hardware key for the specified <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nn-d3d11-id3d11cryptosession">ID3D11CryptoSession</a>
+/// has become lost.
+const D3D11_CRYPTO_SESSION_STATUS_KEY_LOST = D3D11_CRYPTO_SESSION_STATUS(1);
+
+/// The underlying hardware key for the specified <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nn-d3d11-id3d11cryptosession">ID3D11CryptoSession</a>
+/// has become lost and protected content has become corrupted.
+const D3D11_CRYPTO_SESSION_STATUS_KEY_AND_CONTENT_LOST =
+    D3D11_CRYPTO_SESSION_STATUS(2);
+
+/// Indicates triangles facing a particular direction are not drawn.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_cull_mode>.
+///
+/// {@category enum}
+extension type const D3D11_CULL_MODE(int _) implements int {}
+
+/// Always draw all triangles.
+const D3D11_CULL_NONE = D3D11_CULL_MODE(1);
+
+/// Do not draw triangles that are front-facing.
+const D3D11_CULL_FRONT = D3D11_CULL_MODE(2);
+
+/// Do not draw triangles that are back-facing.
+const D3D11_CULL_BACK = D3D11_CULL_MODE(3);
+
+/// Identify the portion of a depth-stencil buffer for writing depth data.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_depth_write_mask>.
+///
+/// {@category enum}
+extension type const D3D11_DEPTH_WRITE_MASK(int _) implements int {}
+
+/// Turn off writes to the depth-stencil buffer.
+const D3D11_DEPTH_WRITE_MASK_ZERO = D3D11_DEPTH_WRITE_MASK(0);
+
+/// Turn on writes to the depth-stencil buffer.
+const D3D11_DEPTH_WRITE_MASK_ALL = D3D11_DEPTH_WRITE_MASK(1);
+
+/// Device context options.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_device_context_type>.
+///
+/// {@category enum}
+extension type const D3D11_DEVICE_CONTEXT_TYPE(int _) implements int {}
+
+/// The device context is an immediate context.
+const D3D11_DEVICE_CONTEXT_IMMEDIATE = D3D11_DEVICE_CONTEXT_TYPE(0);
+
+/// The device context is a deferred context.
+const D3D11_DEVICE_CONTEXT_DEFERRED = D3D11_DEVICE_CONTEXT_TYPE(1);
+
+/// Specifies how to access a resource used in a depth-stencil view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_dsv_dimension>.
+///
+/// {@category enum}
+extension type const D3D11_DSV_DIMENSION(int _) implements int {}
+
+/// <i>D3D11_DSV_DIMENSION_UNKNOWN</i> is not a valid value for <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ns-d3d11-d3d11_depth_stencil_view_desc">D3D11_DEPTH_STENCIL_VIEW_DESC</a>
+/// and is not used.
+const D3D11_DSV_DIMENSION_UNKNOWN = D3D11_DSV_DIMENSION(0);
+
+/// The resource will be accessed as a 1D texture.
+const D3D11_DSV_DIMENSION_TEXTURE1D = D3D11_DSV_DIMENSION(1);
+
+/// The resource will be accessed as an array of 1D textures.
+const D3D11_DSV_DIMENSION_TEXTURE1DARRAY = D3D11_DSV_DIMENSION(2);
+
+/// The resource will be accessed as a 2D texture.
+const D3D11_DSV_DIMENSION_TEXTURE2D = D3D11_DSV_DIMENSION(3);
+
+/// The resource will be accessed as an array of 2D textures.
+const D3D11_DSV_DIMENSION_TEXTURE2DARRAY = D3D11_DSV_DIMENSION(4);
+
+/// The resource will be accessed as a 2D texture with multisampling.
+const D3D11_DSV_DIMENSION_TEXTURE2DMS = D3D11_DSV_DIMENSION(5);
+
+/// The resource will be accessed as an array of 2D textures with multisampling.
+const D3D11_DSV_DIMENSION_TEXTURE2DMSARRAY = D3D11_DSV_DIMENSION(6);
+
+/// Depth-stencil view options.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_dsv_flag>.
+///
+/// {@category enum}
+extension type const D3D11_DSV_FLAG(int _) implements int {}
+
+/// Indicates that depth values are read only.
+const D3D11_DSV_READ_ONLY_DEPTH = D3D11_DSV_FLAG(1);
+
+/// Indicates that stencil values are read only.
+const D3D11_DSV_READ_ONLY_STENCIL = D3D11_DSV_FLAG(2);
+
+/// Direct3D 11 feature options.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_feature>.
+///
+/// {@category enum}
+extension type const D3D11_FEATURE(int _) implements int {}
+
+/// The driver supports <a
+/// href="https://docs.microsoft.com/windows/win32/direct3d11/overviews-direct3d-11-render-multi-thread-intro">multithreading</a>.
+const D3D11_FEATURE_THREADING = D3D11_FEATURE(0);
+
+/// Supports the use of the double-precision shaders in HLSL.
+const D3D11_FEATURE_DOUBLES = D3D11_FEATURE(1);
+
+/// Supports the formats in <a
+/// href="https://docs.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_format_support">D3D11_FORMAT_SUPPORT</a>.
+const D3D11_FEATURE_FORMAT_SUPPORT = D3D11_FEATURE(2);
+
+/// Supports the formats in <a
+/// href="https://docs.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_format_support2">D3D11_FORMAT_SUPPORT2</a>.
+const D3D11_FEATURE_FORMAT_SUPPORT2 = D3D11_FEATURE(3);
+
+/// Supports compute shaders and raw and structured buffers.
+const D3D11_FEATURE_D3D10_X_HARDWARE_OPTIONS = D3D11_FEATURE(4);
+
+/// Supports Direct3D 11.1 feature options.
+const D3D11_FEATURE_D3D11_OPTIONS = D3D11_FEATURE(5);
+
+/// Supports specific adapter architecture.
+const D3D11_FEATURE_ARCHITECTURE_INFO = D3D11_FEATURE(6);
+
+/// Supports Direct3D 9 feature options.
+const D3D11_FEATURE_D3D9_OPTIONS = D3D11_FEATURE(7);
+
+/// Supports minimum precision of shaders.
+const D3D11_FEATURE_SHADER_MIN_PRECISION_SUPPORT = D3D11_FEATURE(8);
+
+/// Supports Direct3D 9 shadowing feature.
+const D3D11_FEATURE_D3D9_SHADOW_SUPPORT = D3D11_FEATURE(9);
+
+/// Supports Direct3D 11.2 feature options.
+const D3D11_FEATURE_D3D11_OPTIONS1 = D3D11_FEATURE(10);
+
+/// Supports Direct3D 11.2 instancing options.
+const D3D11_FEATURE_D3D9_SIMPLE_INSTANCING_SUPPORT = D3D11_FEATURE(11);
+
+/// Supports Direct3D 11.2 marker options.
+const D3D11_FEATURE_MARKER_SUPPORT = D3D11_FEATURE(12);
+
+/// Supports Direct3D 9 feature options, which includes the Direct3D 9 shadowing
+/// feature and instancing support.
+const D3D11_FEATURE_D3D9_OPTIONS1 = D3D11_FEATURE(13);
+
+/// Supports Direct3D 11.3 conservative rasterization feature options.
+const D3D11_FEATURE_D3D11_OPTIONS2 = D3D11_FEATURE(14);
+
+/// Supports Direct3D 11.4 conservative rasterization feature options.
+const D3D11_FEATURE_D3D11_OPTIONS3 = D3D11_FEATURE(15);
+
+/// Supports GPU virtual addresses.
+const D3D11_FEATURE_GPU_VIRTUAL_ADDRESS_SUPPORT = D3D11_FEATURE(16);
+
+/// Supports a single boolean for NV12 shared textures.
+const D3D11_FEATURE_D3D11_OPTIONS4 = D3D11_FEATURE(17);
+
+/// Supports shader cache, described in <a
+/// href="https://docs.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_feature_data_shader_cache">D3D11_FEATURE_DATA_SHADER_CACHE</a>.
+const D3D11_FEATURE_SHADER_CACHE = D3D11_FEATURE(18);
+
+/// Supports a <a
+/// href="https://docs.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_shared_resource_tier">D3D11_SHARED_RESOURCE_TIER</a>
+/// to indicate the level of support for shared resources in the current
+/// graphics driver.
+const D3D11_FEATURE_D3D11_OPTIONS5 = D3D11_FEATURE(19);
+
+/// Supports displayable surfaces, described in
+/// `D3D11_FEATURE_DATA_DISPLAYABLE`.
+const D3D11_FEATURE_DISPLAYABLE = D3D11_FEATURE(20);
+
+const D3D11_FEATURE_D3D11_OPTIONS6 = D3D11_FEATURE(21);
+
+/// Specifies a Direct3D 11 video feature or feature set to query about.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_4/ne-d3d11_4-d3d11_feature_video>.
+///
+/// {@category enum}
+extension type const D3D11_FEATURE_VIDEO(int _) implements int {}
+
+/// Retrieves the supported components, bin count, and counter bit depth for the
+/// a decode histogram with the specified decode profile, resolution, and
+/// format.
+const D3D11_FEATURE_VIDEO_DECODER_HISTOGRAM = D3D11_FEATURE_VIDEO(0);
+
+/// Specifies fence options.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_3/ne-d3d11_3-d3d11_fence_flag>.
+///
+/// {@category enum}
+extension type const D3D11_FENCE_FLAG(int _) implements int {
+  /// Whether this instance has all the bit fields specified in [other].
+  bool has(D3D11_FENCE_FLAG other) => _ & other._ == other._;
+
+  D3D11_FENCE_FLAG operator &(int other) => D3D11_FENCE_FLAG(_ & other);
+  D3D11_FENCE_FLAG operator |(int other) => D3D11_FENCE_FLAG(_ | other);
+}
+
+/// No options are specified.
+const D3D11_FENCE_FLAG_NONE = D3D11_FENCE_FLAG(0);
+
+/// The fence is shared.
+const D3D11_FENCE_FLAG_SHARED = D3D11_FENCE_FLAG(2);
+
+/// The fence is shared with another GPU adapter.
+const D3D11_FENCE_FLAG_SHARED_CROSS_ADAPTER = D3D11_FENCE_FLAG(4);
+
+const D3D11_FENCE_FLAG_NON_MONITORED = D3D11_FENCE_FLAG(8);
+
+/// Determines the fill mode to use when rendering triangles.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_fill_mode>.
+///
+/// {@category enum}
+extension type const D3D11_FILL_MODE(int _) implements int {}
+
+/// Draw lines connecting the vertices.
+const D3D11_FILL_WIREFRAME = D3D11_FILL_MODE(2);
+
+/// Fill the triangles formed by the vertices.
+const D3D11_FILL_SOLID = D3D11_FILL_MODE(3);
+
+/// Filtering options during texture sampling.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_filter>.
+///
+/// {@category enum}
+extension type const D3D11_FILTER(int _) implements int {}
+
+/// Use point sampling for minification, magnification, and mip-level sampling.
+const D3D11_FILTER_MIN_MAG_MIP_POINT = D3D11_FILTER(0);
+
+/// Use point sampling for minification and magnification; use linear
+/// interpolation for mip-level sampling.
+const D3D11_FILTER_MIN_MAG_POINT_MIP_LINEAR = D3D11_FILTER(1);
+
+/// Use point sampling for minification; use linear interpolation for
+/// magnification; use point sampling for mip-level sampling.
+const D3D11_FILTER_MIN_POINT_MAG_LINEAR_MIP_POINT = D3D11_FILTER(4);
+
+/// Use point sampling for minification; use linear interpolation for
+/// magnification and mip-level sampling.
+const D3D11_FILTER_MIN_POINT_MAG_MIP_LINEAR = D3D11_FILTER(5);
+
+/// Use linear interpolation for minification; use point sampling for
+/// magnification and mip-level sampling.
+const D3D11_FILTER_MIN_LINEAR_MAG_MIP_POINT = D3D11_FILTER(16);
+
+/// Use linear interpolation for minification; use point sampling for
+/// magnification; use linear interpolation for mip-level sampling.
+const D3D11_FILTER_MIN_LINEAR_MAG_POINT_MIP_LINEAR = D3D11_FILTER(17);
+
+/// Use linear interpolation for minification and magnification; use point
+/// sampling for mip-level sampling.
+const D3D11_FILTER_MIN_MAG_LINEAR_MIP_POINT = D3D11_FILTER(20);
+
+/// Use linear interpolation for minification, magnification, and mip-level
+/// sampling.
+const D3D11_FILTER_MIN_MAG_MIP_LINEAR = D3D11_FILTER(21);
+
+/// Use anisotropic interpolation for minification, magnification, and mip-level
+/// sampling.
+const D3D11_FILTER_ANISOTROPIC = D3D11_FILTER(85);
+
+/// Use point sampling for minification, magnification, and mip-level sampling.
+const D3D11_FILTER_COMPARISON_MIN_MAG_MIP_POINT = D3D11_FILTER(128);
+
+/// Use point sampling for minification and magnification; use linear
+/// interpolation for mip-level sampling.
+const D3D11_FILTER_COMPARISON_MIN_MAG_POINT_MIP_LINEAR = D3D11_FILTER(129);
+
+/// Use point sampling for minification; use linear interpolation for
+/// magnification; use point sampling for mip-level sampling.
+const D3D11_FILTER_COMPARISON_MIN_POINT_MAG_LINEAR_MIP_POINT = D3D11_FILTER(
+  132,
+);
+
+/// Use point sampling for minification; use linear interpolation for
+/// magnification and mip-level sampling.
+const D3D11_FILTER_COMPARISON_MIN_POINT_MAG_MIP_LINEAR = D3D11_FILTER(133);
+
+/// Use linear interpolation for minification; use point sampling for
+/// magnification and mip-level sampling.
+const D3D11_FILTER_COMPARISON_MIN_LINEAR_MAG_MIP_POINT = D3D11_FILTER(144);
+
+/// Use linear interpolation for minification; use point sampling for
+/// magnification; use linear interpolation for mip-level sampling.
+const D3D11_FILTER_COMPARISON_MIN_LINEAR_MAG_POINT_MIP_LINEAR = D3D11_FILTER(
+  145,
+);
+
+/// Use linear interpolation for minification and magnification; use point
+/// sampling for mip-level sampling.
+const D3D11_FILTER_COMPARISON_MIN_MAG_LINEAR_MIP_POINT = D3D11_FILTER(148);
+
+/// Use linear interpolation for minification, magnification, and mip-level
+/// sampling.
+const D3D11_FILTER_COMPARISON_MIN_MAG_MIP_LINEAR = D3D11_FILTER(149);
+
+/// Use anisotropic interpolation for minification, magnification, and mip-level
+/// sampling.
+const D3D11_FILTER_COMPARISON_ANISOTROPIC = D3D11_FILTER(213);
+
+/// Fetch the same set of texels as D3D11_FILTER_MIN_MAG_MIP_POINT and instead
+/// of filtering them return the minimum of the texels.
+const D3D11_FILTER_MINIMUM_MIN_MAG_MIP_POINT = D3D11_FILTER(256);
+
+/// Fetch the same set of texels as D3D11_FILTER_MIN_MAG_POINT_MIP_LINEAR and
+/// instead of filtering them return the minimum of the texels.
+const D3D11_FILTER_MINIMUM_MIN_MAG_POINT_MIP_LINEAR = D3D11_FILTER(257);
+
+/// Fetch the same set of texels as D3D11_FILTER_MIN_POINT_MAG_LINEAR_MIP_POINT
+/// and instead of filtering them return the minimum of the texels.
+const D3D11_FILTER_MINIMUM_MIN_POINT_MAG_LINEAR_MIP_POINT = D3D11_FILTER(260);
+
+/// Fetch the same set of texels as D3D11_FILTER_MIN_POINT_MAG_MIP_LINEAR and
+/// instead of filtering them return the minimum of the texels.
+const D3D11_FILTER_MINIMUM_MIN_POINT_MAG_MIP_LINEAR = D3D11_FILTER(261);
+
+/// Fetch the same set of texels as D3D11_FILTER_MIN_LINEAR_MAG_MIP_POINT and
+/// instead of filtering them return the minimum of the texels.
+const D3D11_FILTER_MINIMUM_MIN_LINEAR_MAG_MIP_POINT = D3D11_FILTER(272);
+
+/// Fetch the same set of texels as D3D11_FILTER_MIN_LINEAR_MAG_POINT_MIP_LINEAR
+/// and instead of filtering them return the minimum of the texels.
+const D3D11_FILTER_MINIMUM_MIN_LINEAR_MAG_POINT_MIP_LINEAR = D3D11_FILTER(273);
+
+/// Fetch the same set of texels as D3D11_FILTER_MIN_MAG_LINEAR_MIP_POINT and
+/// instead of filtering them return the minimum of the texels.
+const D3D11_FILTER_MINIMUM_MIN_MAG_LINEAR_MIP_POINT = D3D11_FILTER(276);
+
+/// Fetch the same set of texels as D3D11_FILTER_MIN_MAG_MIP_LINEAR and instead
+/// of filtering them return the minimum of the texels.
+const D3D11_FILTER_MINIMUM_MIN_MAG_MIP_LINEAR = D3D11_FILTER(277);
+
+/// Fetch the same set of texels as D3D11_FILTER_ANISOTROPIC and instead of
+/// filtering them return the minimum of the texels.
+const D3D11_FILTER_MINIMUM_ANISOTROPIC = D3D11_FILTER(341);
+
+/// Fetch the same set of texels as D3D11_FILTER_MIN_MAG_MIP_POINT and instead
+/// of filtering them return the maximum of the texels.
+const D3D11_FILTER_MAXIMUM_MIN_MAG_MIP_POINT = D3D11_FILTER(384);
+
+/// Fetch the same set of texels as D3D11_FILTER_MIN_MAG_POINT_MIP_LINEAR and
+/// instead of filtering them return the maximum of the texels.
+const D3D11_FILTER_MAXIMUM_MIN_MAG_POINT_MIP_LINEAR = D3D11_FILTER(385);
+
+/// Fetch the same set of texels as D3D11_FILTER_MIN_POINT_MAG_LINEAR_MIP_POINT
+/// and instead of filtering them return the maximum of the texels.
+const D3D11_FILTER_MAXIMUM_MIN_POINT_MAG_LINEAR_MIP_POINT = D3D11_FILTER(388);
+
+/// Fetch the same set of texels as D3D11_FILTER_MIN_POINT_MAG_MIP_LINEAR and
+/// instead of filtering them return the maximum of the texels.
+const D3D11_FILTER_MAXIMUM_MIN_POINT_MAG_MIP_LINEAR = D3D11_FILTER(389);
+
+/// Fetch the same set of texels as D3D11_FILTER_MIN_LINEAR_MAG_MIP_POINT and
+/// instead of filtering them return the maximum of the texels.
+const D3D11_FILTER_MAXIMUM_MIN_LINEAR_MAG_MIP_POINT = D3D11_FILTER(400);
+
+/// Fetch the same set of texels as D3D11_FILTER_MIN_LINEAR_MAG_POINT_MIP_LINEAR
+/// and instead of filtering them return the maximum of the texels.
+const D3D11_FILTER_MAXIMUM_MIN_LINEAR_MAG_POINT_MIP_LINEAR = D3D11_FILTER(401);
+
+/// Fetch the same set of texels as D3D11_FILTER_MIN_MAG_LINEAR_MIP_POINT and
+/// instead of filtering them return the maximum of the texels.
+const D3D11_FILTER_MAXIMUM_MIN_MAG_LINEAR_MIP_POINT = D3D11_FILTER(404);
+
+/// Fetch the same set of texels as D3D11_FILTER_MIN_MAG_MIP_LINEAR and instead
+/// of filtering them return the maximum of the texels.
+const D3D11_FILTER_MAXIMUM_MIN_MAG_MIP_LINEAR = D3D11_FILTER(405);
+
+/// Fetch the same set of texels as D3D11_FILTER_ANISOTROPIC and instead of
+/// filtering them return the maximum of the texels.
+const D3D11_FILTER_MAXIMUM_ANISOTROPIC = D3D11_FILTER(469);
+
+/// Specifies the type of sampler filter reduction.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_filter_reduction_type>.
+///
+/// {@category enum}
+extension type const D3D11_FILTER_REDUCTION_TYPE(int _) implements int {}
+
+/// Indicates standard (default) filter reduction.
+const D3D11_FILTER_REDUCTION_TYPE_STANDARD = D3D11_FILTER_REDUCTION_TYPE(0);
+
+/// Indicates a comparison filter reduction.
+const D3D11_FILTER_REDUCTION_TYPE_COMPARISON = D3D11_FILTER_REDUCTION_TYPE(1);
+
+/// Indicates minimum filter reduction.
+const D3D11_FILTER_REDUCTION_TYPE_MINIMUM = D3D11_FILTER_REDUCTION_TYPE(2);
+
+/// Indicates maximum filter reduction.
+const D3D11_FILTER_REDUCTION_TYPE_MAXIMUM = D3D11_FILTER_REDUCTION_TYPE(3);
+
+/// Types of magnification or minification sampler filters.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_filter_type>.
+///
+/// {@category enum}
+extension type const D3D11_FILTER_TYPE(int _) implements int {}
+
+/// Point filtering used as a texture magnification or minification filter.
+const D3D11_FILTER_TYPE_POINT = D3D11_FILTER_TYPE(0);
+
+/// Bilinear interpolation filtering used as a texture magnification or
+/// minification filter.
+const D3D11_FILTER_TYPE_LINEAR = D3D11_FILTER_TYPE(1);
+
+/// Which resources are supported for a given format and given device (see
+/// ID3D11Device::CheckFormatSupport and ID3D11Device::CheckFeatureSupport).
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_format_support>.
+///
+/// {@category enum}
+extension type const D3D11_FORMAT_SUPPORT(int _) implements int {}
+
+/// Buffer resources supported.
+const D3D11_FORMAT_SUPPORT_BUFFER = D3D11_FORMAT_SUPPORT(1);
+
+/// Vertex buffers supported.
+const D3D11_FORMAT_SUPPORT_IA_VERTEX_BUFFER = D3D11_FORMAT_SUPPORT(2);
+
+/// Index buffers supported.
+const D3D11_FORMAT_SUPPORT_IA_INDEX_BUFFER = D3D11_FORMAT_SUPPORT(4);
+
+/// Streaming output buffers supported.
+const D3D11_FORMAT_SUPPORT_SO_BUFFER = D3D11_FORMAT_SUPPORT(8);
+
+/// 1D texture resources supported.
+const D3D11_FORMAT_SUPPORT_TEXTURE1D = D3D11_FORMAT_SUPPORT(16);
+
+/// 2D texture resources supported.
+const D3D11_FORMAT_SUPPORT_TEXTURE2D = D3D11_FORMAT_SUPPORT(32);
+
+/// 3D texture resources supported.
+const D3D11_FORMAT_SUPPORT_TEXTURE3D = D3D11_FORMAT_SUPPORT(64);
+
+/// Cube texture resources supported.
+const D3D11_FORMAT_SUPPORT_TEXTURECUBE = D3D11_FORMAT_SUPPORT(128);
+
+/// The HLSL <a
+/// href="https://docs.microsoft.com/windows/desktop/direct3dhlsl/dx-graphics-hlsl-to-load">Load</a>
+/// function for texture objects is supported.
+const D3D11_FORMAT_SUPPORT_SHADER_LOAD = D3D11_FORMAT_SUPPORT(256);
+
+/// The HLSL <a
+/// href="https://docs.microsoft.com/windows/desktop/direct3dhlsl/dx-graphics-hlsl-to-sample">Sample</a>
+/// function for texture objects is supported.
+const D3D11_FORMAT_SUPPORT_SHADER_SAMPLE = D3D11_FORMAT_SUPPORT(512);
+
+/// The HLSL <a
+/// href="https://docs.microsoft.com/windows/desktop/direct3dhlsl/dx-graphics-hlsl-to-samplecmp">SampleCmp</a>
+/// and <a
+/// href="https://docs.microsoft.com/windows/desktop/direct3dhlsl/dx-graphics-hlsl-to-samplecmplevelzero">SampleCmpLevelZero</a>
+/// functions for texture objects are supported.
+const D3D11_FORMAT_SUPPORT_SHADER_SAMPLE_COMPARISON = D3D11_FORMAT_SUPPORT(
+  1024,
+);
+
+/// Reserved.
+const D3D11_FORMAT_SUPPORT_SHADER_SAMPLE_MONO_TEXT = D3D11_FORMAT_SUPPORT(2048);
+
+/// Mipmaps are supported.
+const D3D11_FORMAT_SUPPORT_MIP = D3D11_FORMAT_SUPPORT(4096);
+
+/// Automatic generation of mipmaps is supported.
+const D3D11_FORMAT_SUPPORT_MIP_AUTOGEN = D3D11_FORMAT_SUPPORT(8192);
+
+/// Render targets are supported.
+const D3D11_FORMAT_SUPPORT_RENDER_TARGET = D3D11_FORMAT_SUPPORT(16384);
+
+/// Blend operations supported.
+const D3D11_FORMAT_SUPPORT_BLENDABLE = D3D11_FORMAT_SUPPORT(32768);
+
+/// Depth stencils supported.
+const D3D11_FORMAT_SUPPORT_DEPTH_STENCIL = D3D11_FORMAT_SUPPORT(65536);
+
+/// CPU locking supported.
+const D3D11_FORMAT_SUPPORT_CPU_LOCKABLE = D3D11_FORMAT_SUPPORT(131072);
+
+/// Multisample antialiasing (MSAA) resolve operations are supported.
+const D3D11_FORMAT_SUPPORT_MULTISAMPLE_RESOLVE = D3D11_FORMAT_SUPPORT(262144);
+
+/// Format can be displayed on screen.
+const D3D11_FORMAT_SUPPORT_DISPLAY = D3D11_FORMAT_SUPPORT(524288);
+
+/// Format cannot be cast to another format.
+const D3D11_FORMAT_SUPPORT_CAST_WITHIN_BIT_LAYOUT = D3D11_FORMAT_SUPPORT(
+  1048576,
+);
+
+/// Format can be used as a multisampled rendertarget.
+const D3D11_FORMAT_SUPPORT_MULTISAMPLE_RENDERTARGET = D3D11_FORMAT_SUPPORT(
+  2097152,
+);
+
+/// Format can be used as a multisampled texture and read into a shader with the
+/// HLSL load function.
+const D3D11_FORMAT_SUPPORT_MULTISAMPLE_LOAD = D3D11_FORMAT_SUPPORT(4194304);
+
+/// Format can be used with the HLSL gather function.
+const D3D11_FORMAT_SUPPORT_SHADER_GATHER = D3D11_FORMAT_SUPPORT(8388608);
+
+/// Format supports casting when the resource is a back buffer.
+const D3D11_FORMAT_SUPPORT_BACK_BUFFER_CAST = D3D11_FORMAT_SUPPORT(16777216);
+
+/// Format can be used for an unordered access view.
+const D3D11_FORMAT_SUPPORT_TYPED_UNORDERED_ACCESS_VIEW = D3D11_FORMAT_SUPPORT(
+  33554432,
+);
+
+/// Format can be used with the HLSL gather with comparison function.
+const D3D11_FORMAT_SUPPORT_SHADER_GATHER_COMPARISON = D3D11_FORMAT_SUPPORT(
+  67108864,
+);
+
+/// Format can be used with the decoder output.
+const D3D11_FORMAT_SUPPORT_DECODER_OUTPUT = D3D11_FORMAT_SUPPORT(134217728);
+
+/// Format can be used with the video processor output.
+const D3D11_FORMAT_SUPPORT_VIDEO_PROCESSOR_OUTPUT = D3D11_FORMAT_SUPPORT(
+  268435456,
+);
+
+/// Format can be used with the video processor input.
+const D3D11_FORMAT_SUPPORT_VIDEO_PROCESSOR_INPUT = D3D11_FORMAT_SUPPORT(
+  536870912,
+);
+
+/// Format can be used with the video encoder.
+const D3D11_FORMAT_SUPPORT_VIDEO_ENCODER = D3D11_FORMAT_SUPPORT(1073741824);
+
+/// Unordered resource support options for a compute shader resource (see
+/// ID3D11Device::CheckFeatureSupport).
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_format_support2>.
+///
+/// {@category enum}
+extension type const D3D11_FORMAT_SUPPORT2(int _) implements int {}
+
+/// Format supports atomic add.
+const D3D11_FORMAT_SUPPORT2_UAV_ATOMIC_ADD = D3D11_FORMAT_SUPPORT2(1);
+
+/// Format supports atomic bitwise operations.
+const D3D11_FORMAT_SUPPORT2_UAV_ATOMIC_BITWISE_OPS = D3D11_FORMAT_SUPPORT2(2);
+
+/// Format supports atomic compare with store or exchange.
+const D3D11_FORMAT_SUPPORT2_UAV_ATOMIC_COMPARE_STORE_OR_COMPARE_EXCHANGE =
+    D3D11_FORMAT_SUPPORT2(4);
+
+/// Format supports atomic exchange.
+const D3D11_FORMAT_SUPPORT2_UAV_ATOMIC_EXCHANGE = D3D11_FORMAT_SUPPORT2(8);
+
+/// Format supports atomic min and max.
+const D3D11_FORMAT_SUPPORT2_UAV_ATOMIC_SIGNED_MIN_OR_MAX =
+    D3D11_FORMAT_SUPPORT2(16);
+
+/// Format supports atomic unsigned min and max.
+const D3D11_FORMAT_SUPPORT2_UAV_ATOMIC_UNSIGNED_MIN_OR_MAX =
+    D3D11_FORMAT_SUPPORT2(32);
+
+/// Format supports a typed load.
+const D3D11_FORMAT_SUPPORT2_UAV_TYPED_LOAD = D3D11_FORMAT_SUPPORT2(64);
+
+/// Format supports a typed store.
+const D3D11_FORMAT_SUPPORT2_UAV_TYPED_STORE = D3D11_FORMAT_SUPPORT2(128);
+
+/// Format supports logic operations in blend state.
+const D3D11_FORMAT_SUPPORT2_OUTPUT_MERGER_LOGIC_OP = D3D11_FORMAT_SUPPORT2(256);
+
+/// Format supports tiled resources.
+const D3D11_FORMAT_SUPPORT2_TILED = D3D11_FORMAT_SUPPORT2(512);
+
+/// Format supports shareable resources.
+const D3D11_FORMAT_SUPPORT2_SHAREABLE = D3D11_FORMAT_SUPPORT2(1024);
+
+/// Format supports multi-plane overlays.
+const D3D11_FORMAT_SUPPORT2_MULTIPLANE_OVERLAY = D3D11_FORMAT_SUPPORT2(16384);
+
+const D3D11_FORMAT_SUPPORT2_DISPLAYABLE = D3D11_FORMAT_SUPPORT2(65536);
+
+/// Type of data contained in an input slot.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_input_classification>.
+///
+/// {@category enum}
+extension type const D3D11_INPUT_CLASSIFICATION(int _) implements int {}
+
+/// Input data is per-vertex data.
+const D3D11_INPUT_PER_VERTEX_DATA = D3D11_INPUT_CLASSIFICATION(0);
+
+/// Input data is per-instance data.
+const D3D11_INPUT_PER_INSTANCE_DATA = D3D11_INPUT_CLASSIFICATION(1);
+
+/// Specifies logical operations to configure for a render target.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_1/ne-d3d11_1-d3d11_logic_op>.
+///
+/// {@category enum}
+extension type const D3D11_LOGIC_OP(int _) implements int {}
+
+/// Clears the render target.
+const D3D11_LOGIC_OP_CLEAR = D3D11_LOGIC_OP(0);
+
+/// Sets the render target.
+const D3D11_LOGIC_OP_SET = D3D11_LOGIC_OP(1);
+
+/// Copys the render target.
+const D3D11_LOGIC_OP_COPY = D3D11_LOGIC_OP(2);
+
+/// Performs an inverted-copy of the render target.
+const D3D11_LOGIC_OP_COPY_INVERTED = D3D11_LOGIC_OP(3);
+
+/// No operation is performed on the render target.
+const D3D11_LOGIC_OP_NOOP = D3D11_LOGIC_OP(4);
+
+/// Inverts the render target.
+const D3D11_LOGIC_OP_INVERT = D3D11_LOGIC_OP(5);
+
+/// Performs a logical AND operation on the render target.
+const D3D11_LOGIC_OP_AND = D3D11_LOGIC_OP(6);
+
+/// Performs a logical NAND operation on the render target.
+const D3D11_LOGIC_OP_NAND = D3D11_LOGIC_OP(7);
+
+/// Performs a logical OR operation on the render target.
+const D3D11_LOGIC_OP_OR = D3D11_LOGIC_OP(8);
+
+/// Performs a logical NOR operation on the render target.
+const D3D11_LOGIC_OP_NOR = D3D11_LOGIC_OP(9);
+
+/// Performs a logical XOR operation on the render target.
+const D3D11_LOGIC_OP_XOR = D3D11_LOGIC_OP(10);
+
+/// Performs a logical equal operation on the render target.
+const D3D11_LOGIC_OP_EQUIV = D3D11_LOGIC_OP(11);
+
+/// Performs a logical AND and reverse operation on the render target.
+const D3D11_LOGIC_OP_AND_REVERSE = D3D11_LOGIC_OP(12);
+
+/// Performs a logical AND and invert operation on the render target.
+const D3D11_LOGIC_OP_AND_INVERTED = D3D11_LOGIC_OP(13);
+
+/// Performs a logical OR and reverse operation on the render target.
+const D3D11_LOGIC_OP_OR_REVERSE = D3D11_LOGIC_OP(14);
+
+/// Performs a logical OR and invert operation on the render target.
+const D3D11_LOGIC_OP_OR_INVERTED = D3D11_LOGIC_OP(15);
+
+/// Identifies a resource to be accessed for reading and writing by the CPU.
+///
+/// Applications may combine one or more of these flags.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_map>.
+///
+/// {@category enum}
+extension type const D3D11_MAP(int _) implements int {}
+
+/// Resource is mapped for reading.
+const D3D11_MAP_READ = D3D11_MAP(1);
+
+/// Resource is mapped for writing.
+const D3D11_MAP_WRITE = D3D11_MAP(2);
+
+/// Resource is mapped for reading and writing.
+const D3D11_MAP_READ_WRITE = D3D11_MAP(3);
+
+/// Resource is mapped for writing; the previous contents of the resource will
+/// be undefined.
+const D3D11_MAP_WRITE_DISCARD = D3D11_MAP(4);
+
+/// Resource is mapped for writing; the existing contents of the resource cannot
+/// be overwritten.
+const D3D11_MAP_WRITE_NO_OVERWRITE = D3D11_MAP(5);
+
+/// Specifies how the CPU should respond when an application calls the
+/// ID3D11DeviceContext::Map method on a resource that is being used by the GPU.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_map_flag>.
+///
+/// {@category enum}
+extension type const D3D11_MAP_FLAG(int _) implements int {}
+
+/// Specifies that <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-map">ID3D11DeviceContext::Map</a>
+/// should return DXGI_ERROR_WAS_STILL_DRAWING when the GPU blocks the CPU from
+/// accessing a resource.
+const D3D11_MAP_FLAG_DO_NOT_WAIT = D3D11_MAP_FLAG(1048576);
+
+/// Categories of debug messages.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11sdklayers/ne-d3d11sdklayers-d3d11_message_category>.
+///
+/// {@category enum}
+extension type const D3D11_MESSAGE_CATEGORY(int _) implements int {}
+
+/// User defined message.
+const D3D11_MESSAGE_CATEGORY_APPLICATION_DEFINED = D3D11_MESSAGE_CATEGORY(0);
+
+const D3D11_MESSAGE_CATEGORY_MISCELLANEOUS = D3D11_MESSAGE_CATEGORY(1);
+
+const D3D11_MESSAGE_CATEGORY_INITIALIZATION = D3D11_MESSAGE_CATEGORY(2);
+
+const D3D11_MESSAGE_CATEGORY_CLEANUP = D3D11_MESSAGE_CATEGORY(3);
+
+const D3D11_MESSAGE_CATEGORY_COMPILATION = D3D11_MESSAGE_CATEGORY(4);
+
+const D3D11_MESSAGE_CATEGORY_STATE_CREATION = D3D11_MESSAGE_CATEGORY(5);
+
+const D3D11_MESSAGE_CATEGORY_STATE_SETTING = D3D11_MESSAGE_CATEGORY(6);
+
+const D3D11_MESSAGE_CATEGORY_STATE_GETTING = D3D11_MESSAGE_CATEGORY(7);
+
+const D3D11_MESSAGE_CATEGORY_RESOURCE_MANIPULATION = D3D11_MESSAGE_CATEGORY(8);
+
+const D3D11_MESSAGE_CATEGORY_EXECUTION = D3D11_MESSAGE_CATEGORY(9);
+
+/// <b>Direct3D 11: </b>This value is not supported until Direct3D 11.1.
+const D3D11_MESSAGE_CATEGORY_SHADER = D3D11_MESSAGE_CATEGORY(10);
+
+/// Debug messages for setting up an info-queue filter (see
+/// D3D11_INFO_QUEUE_FILTER); use these messages to allow or deny message
+/// categories to pass through the storage and retrieval filters.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11sdklayers/ne-d3d11sdklayers-d3d11_message_id>.
+///
+/// {@category enum}
+extension type const D3D11_MESSAGE_ID(int _) implements int {}
+
+const D3D11_MESSAGE_ID_UNKNOWN = D3D11_MESSAGE_ID(0);
+
+const D3D11_MESSAGE_ID_DEVICE_IASETVERTEXBUFFERS_HAZARD = D3D11_MESSAGE_ID(1);
+
+const D3D11_MESSAGE_ID_DEVICE_IASETINDEXBUFFER_HAZARD = D3D11_MESSAGE_ID(2);
+
+const D3D11_MESSAGE_ID_DEVICE_VSSETSHADERRESOURCES_HAZARD = D3D11_MESSAGE_ID(3);
+
+const D3D11_MESSAGE_ID_DEVICE_VSSETCONSTANTBUFFERS_HAZARD = D3D11_MESSAGE_ID(4);
+
+const D3D11_MESSAGE_ID_DEVICE_GSSETSHADERRESOURCES_HAZARD = D3D11_MESSAGE_ID(5);
+
+const D3D11_MESSAGE_ID_DEVICE_GSSETCONSTANTBUFFERS_HAZARD = D3D11_MESSAGE_ID(6);
+
+const D3D11_MESSAGE_ID_DEVICE_PSSETSHADERRESOURCES_HAZARD = D3D11_MESSAGE_ID(7);
+
+const D3D11_MESSAGE_ID_DEVICE_PSSETCONSTANTBUFFERS_HAZARD = D3D11_MESSAGE_ID(8);
+
+const D3D11_MESSAGE_ID_DEVICE_OMSETRENDERTARGETS_HAZARD = D3D11_MESSAGE_ID(9);
+
+const D3D11_MESSAGE_ID_DEVICE_SOSETTARGETS_HAZARD = D3D11_MESSAGE_ID(10);
+
+const D3D11_MESSAGE_ID_STRING_FROM_APPLICATION = D3D11_MESSAGE_ID(11);
+
+const D3D11_MESSAGE_ID_CORRUPTED_THIS = D3D11_MESSAGE_ID(12);
+
+const D3D11_MESSAGE_ID_CORRUPTED_PARAMETER1 = D3D11_MESSAGE_ID(13);
+
+const D3D11_MESSAGE_ID_CORRUPTED_PARAMETER2 = D3D11_MESSAGE_ID(14);
+
+const D3D11_MESSAGE_ID_CORRUPTED_PARAMETER3 = D3D11_MESSAGE_ID(15);
+
+const D3D11_MESSAGE_ID_CORRUPTED_PARAMETER4 = D3D11_MESSAGE_ID(16);
+
+const D3D11_MESSAGE_ID_CORRUPTED_PARAMETER5 = D3D11_MESSAGE_ID(17);
+
+const D3D11_MESSAGE_ID_CORRUPTED_PARAMETER6 = D3D11_MESSAGE_ID(18);
+
+const D3D11_MESSAGE_ID_CORRUPTED_PARAMETER7 = D3D11_MESSAGE_ID(19);
+
+const D3D11_MESSAGE_ID_CORRUPTED_PARAMETER8 = D3D11_MESSAGE_ID(20);
+
+const D3D11_MESSAGE_ID_CORRUPTED_PARAMETER9 = D3D11_MESSAGE_ID(21);
+
+const D3D11_MESSAGE_ID_CORRUPTED_PARAMETER10 = D3D11_MESSAGE_ID(22);
+
+const D3D11_MESSAGE_ID_CORRUPTED_PARAMETER11 = D3D11_MESSAGE_ID(23);
+
+const D3D11_MESSAGE_ID_CORRUPTED_PARAMETER12 = D3D11_MESSAGE_ID(24);
+
+const D3D11_MESSAGE_ID_CORRUPTED_PARAMETER13 = D3D11_MESSAGE_ID(25);
+
+const D3D11_MESSAGE_ID_CORRUPTED_PARAMETER14 = D3D11_MESSAGE_ID(26);
+
+const D3D11_MESSAGE_ID_CORRUPTED_PARAMETER15 = D3D11_MESSAGE_ID(27);
+
+const D3D11_MESSAGE_ID_CORRUPTED_MULTITHREADING = D3D11_MESSAGE_ID(28);
+
+const D3D11_MESSAGE_ID_MESSAGE_REPORTING_OUTOFMEMORY = D3D11_MESSAGE_ID(29);
+
+const D3D11_MESSAGE_ID_IASETINPUTLAYOUT_UNBINDDELETINGOBJECT = D3D11_MESSAGE_ID(
+  30,
+);
+
+const D3D11_MESSAGE_ID_IASETVERTEXBUFFERS_UNBINDDELETINGOBJECT =
+    D3D11_MESSAGE_ID(31);
+
+const D3D11_MESSAGE_ID_IASETINDEXBUFFER_UNBINDDELETINGOBJECT = D3D11_MESSAGE_ID(
+  32,
+);
+
+const D3D11_MESSAGE_ID_VSSETSHADER_UNBINDDELETINGOBJECT = D3D11_MESSAGE_ID(33);
+
+const D3D11_MESSAGE_ID_VSSETSHADERRESOURCES_UNBINDDELETINGOBJECT =
+    D3D11_MESSAGE_ID(34);
+
+const D3D11_MESSAGE_ID_VSSETCONSTANTBUFFERS_UNBINDDELETINGOBJECT =
+    D3D11_MESSAGE_ID(35);
+
+const D3D11_MESSAGE_ID_VSSETSAMPLERS_UNBINDDELETINGOBJECT = D3D11_MESSAGE_ID(
+  36,
+);
+
+const D3D11_MESSAGE_ID_GSSETSHADER_UNBINDDELETINGOBJECT = D3D11_MESSAGE_ID(37);
+
+const D3D11_MESSAGE_ID_GSSETSHADERRESOURCES_UNBINDDELETINGOBJECT =
+    D3D11_MESSAGE_ID(38);
+
+const D3D11_MESSAGE_ID_GSSETCONSTANTBUFFERS_UNBINDDELETINGOBJECT =
+    D3D11_MESSAGE_ID(39);
+
+const D3D11_MESSAGE_ID_GSSETSAMPLERS_UNBINDDELETINGOBJECT = D3D11_MESSAGE_ID(
+  40,
+);
+
+const D3D11_MESSAGE_ID_SOSETTARGETS_UNBINDDELETINGOBJECT = D3D11_MESSAGE_ID(41);
+
+const D3D11_MESSAGE_ID_PSSETSHADER_UNBINDDELETINGOBJECT = D3D11_MESSAGE_ID(42);
+
+const D3D11_MESSAGE_ID_PSSETSHADERRESOURCES_UNBINDDELETINGOBJECT =
+    D3D11_MESSAGE_ID(43);
+
+const D3D11_MESSAGE_ID_PSSETCONSTANTBUFFERS_UNBINDDELETINGOBJECT =
+    D3D11_MESSAGE_ID(44);
+
+const D3D11_MESSAGE_ID_PSSETSAMPLERS_UNBINDDELETINGOBJECT = D3D11_MESSAGE_ID(
+  45,
+);
+
+const D3D11_MESSAGE_ID_RSSETSTATE_UNBINDDELETINGOBJECT = D3D11_MESSAGE_ID(46);
+
+const D3D11_MESSAGE_ID_OMSETBLENDSTATE_UNBINDDELETINGOBJECT = D3D11_MESSAGE_ID(
+  47,
+);
+
+const D3D11_MESSAGE_ID_OMSETDEPTHSTENCILSTATE_UNBINDDELETINGOBJECT =
+    D3D11_MESSAGE_ID(48);
+
+const D3D11_MESSAGE_ID_OMSETRENDERTARGETS_UNBINDDELETINGOBJECT =
+    D3D11_MESSAGE_ID(49);
+
+const D3D11_MESSAGE_ID_SETPREDICATION_UNBINDDELETINGOBJECT = D3D11_MESSAGE_ID(
+  50,
+);
+
+const D3D11_MESSAGE_ID_GETPRIVATEDATA_MOREDATA = D3D11_MESSAGE_ID(51);
+
+const D3D11_MESSAGE_ID_SETPRIVATEDATA_INVALIDFREEDATA = D3D11_MESSAGE_ID(52);
+
+const D3D11_MESSAGE_ID_SETPRIVATEDATA_INVALIDIUNKNOWN = D3D11_MESSAGE_ID(53);
+
+const D3D11_MESSAGE_ID_SETPRIVATEDATA_INVALIDFLAGS = D3D11_MESSAGE_ID(54);
+
+const D3D11_MESSAGE_ID_SETPRIVATEDATA_CHANGINGPARAMS = D3D11_MESSAGE_ID(55);
+
+const D3D11_MESSAGE_ID_SETPRIVATEDATA_OUTOFMEMORY = D3D11_MESSAGE_ID(56);
+
+const D3D11_MESSAGE_ID_CREATEBUFFER_UNRECOGNIZEDFORMAT = D3D11_MESSAGE_ID(57);
+
+const D3D11_MESSAGE_ID_CREATEBUFFER_INVALIDSAMPLES = D3D11_MESSAGE_ID(58);
+
+const D3D11_MESSAGE_ID_CREATEBUFFER_UNRECOGNIZEDUSAGE = D3D11_MESSAGE_ID(59);
+
+const D3D11_MESSAGE_ID_CREATEBUFFER_UNRECOGNIZEDBINDFLAGS = D3D11_MESSAGE_ID(
+  60,
+);
+
+const D3D11_MESSAGE_ID_CREATEBUFFER_UNRECOGNIZEDCPUACCESSFLAGS =
+    D3D11_MESSAGE_ID(61);
+
+const D3D11_MESSAGE_ID_CREATEBUFFER_UNRECOGNIZEDMISCFLAGS = D3D11_MESSAGE_ID(
+  62,
+);
+
+const D3D11_MESSAGE_ID_CREATEBUFFER_INVALIDCPUACCESSFLAGS = D3D11_MESSAGE_ID(
+  63,
+);
+
+const D3D11_MESSAGE_ID_CREATEBUFFER_INVALIDBINDFLAGS = D3D11_MESSAGE_ID(64);
+
+const D3D11_MESSAGE_ID_CREATEBUFFER_INVALIDINITIALDATA = D3D11_MESSAGE_ID(65);
+
+const D3D11_MESSAGE_ID_CREATEBUFFER_INVALIDDIMENSIONS = D3D11_MESSAGE_ID(66);
+
+const D3D11_MESSAGE_ID_CREATEBUFFER_INVALIDMIPLEVELS = D3D11_MESSAGE_ID(67);
+
+const D3D11_MESSAGE_ID_CREATEBUFFER_INVALIDMISCFLAGS = D3D11_MESSAGE_ID(68);
+
+const D3D11_MESSAGE_ID_CREATEBUFFER_INVALIDARG_RETURN = D3D11_MESSAGE_ID(69);
+
+const D3D11_MESSAGE_ID_CREATEBUFFER_OUTOFMEMORY_RETURN = D3D11_MESSAGE_ID(70);
+
+const D3D11_MESSAGE_ID_CREATEBUFFER_NULLDESC = D3D11_MESSAGE_ID(71);
+
+const D3D11_MESSAGE_ID_CREATEBUFFER_INVALIDCONSTANTBUFFERBINDINGS =
+    D3D11_MESSAGE_ID(72);
+
+const D3D11_MESSAGE_ID_CREATEBUFFER_LARGEALLOCATION = D3D11_MESSAGE_ID(73);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE1D_UNRECOGNIZEDFORMAT = D3D11_MESSAGE_ID(
+  74,
+);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE1D_UNSUPPORTEDFORMAT = D3D11_MESSAGE_ID(75);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE1D_INVALIDSAMPLES = D3D11_MESSAGE_ID(76);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE1D_UNRECOGNIZEDUSAGE = D3D11_MESSAGE_ID(77);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE1D_UNRECOGNIZEDBINDFLAGS = D3D11_MESSAGE_ID(
+  78,
+);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE1D_UNRECOGNIZEDCPUACCESSFLAGS =
+    D3D11_MESSAGE_ID(79);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE1D_UNRECOGNIZEDMISCFLAGS = D3D11_MESSAGE_ID(
+  80,
+);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE1D_INVALIDCPUACCESSFLAGS = D3D11_MESSAGE_ID(
+  81,
+);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE1D_INVALIDBINDFLAGS = D3D11_MESSAGE_ID(82);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE1D_INVALIDINITIALDATA = D3D11_MESSAGE_ID(
+  83,
+);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE1D_INVALIDDIMENSIONS = D3D11_MESSAGE_ID(84);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE1D_INVALIDMIPLEVELS = D3D11_MESSAGE_ID(85);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE1D_INVALIDMISCFLAGS = D3D11_MESSAGE_ID(86);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE1D_INVALIDARG_RETURN = D3D11_MESSAGE_ID(87);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE1D_OUTOFMEMORY_RETURN = D3D11_MESSAGE_ID(
+  88,
+);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE1D_NULLDESC = D3D11_MESSAGE_ID(89);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE1D_LARGEALLOCATION = D3D11_MESSAGE_ID(90);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE2D_UNRECOGNIZEDFORMAT = D3D11_MESSAGE_ID(
+  91,
+);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE2D_UNSUPPORTEDFORMAT = D3D11_MESSAGE_ID(92);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE2D_INVALIDSAMPLES = D3D11_MESSAGE_ID(93);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE2D_UNRECOGNIZEDUSAGE = D3D11_MESSAGE_ID(94);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE2D_UNRECOGNIZEDBINDFLAGS = D3D11_MESSAGE_ID(
+  95,
+);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE2D_UNRECOGNIZEDCPUACCESSFLAGS =
+    D3D11_MESSAGE_ID(96);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE2D_UNRECOGNIZEDMISCFLAGS = D3D11_MESSAGE_ID(
+  97,
+);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE2D_INVALIDCPUACCESSFLAGS = D3D11_MESSAGE_ID(
+  98,
+);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE2D_INVALIDBINDFLAGS = D3D11_MESSAGE_ID(99);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE2D_INVALIDINITIALDATA = D3D11_MESSAGE_ID(
+  100,
+);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE2D_INVALIDDIMENSIONS = D3D11_MESSAGE_ID(
+  101,
+);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE2D_INVALIDMIPLEVELS = D3D11_MESSAGE_ID(102);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE2D_INVALIDMISCFLAGS = D3D11_MESSAGE_ID(103);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE2D_INVALIDARG_RETURN = D3D11_MESSAGE_ID(
+  104,
+);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE2D_OUTOFMEMORY_RETURN = D3D11_MESSAGE_ID(
+  105,
+);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE2D_NULLDESC = D3D11_MESSAGE_ID(106);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE2D_LARGEALLOCATION = D3D11_MESSAGE_ID(107);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE3D_UNRECOGNIZEDFORMAT = D3D11_MESSAGE_ID(
+  108,
+);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE3D_UNSUPPORTEDFORMAT = D3D11_MESSAGE_ID(
+  109,
+);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE3D_INVALIDSAMPLES = D3D11_MESSAGE_ID(110);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE3D_UNRECOGNIZEDUSAGE = D3D11_MESSAGE_ID(
+  111,
+);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE3D_UNRECOGNIZEDBINDFLAGS = D3D11_MESSAGE_ID(
+  112,
+);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE3D_UNRECOGNIZEDCPUACCESSFLAGS =
+    D3D11_MESSAGE_ID(113);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE3D_UNRECOGNIZEDMISCFLAGS = D3D11_MESSAGE_ID(
+  114,
+);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE3D_INVALIDCPUACCESSFLAGS = D3D11_MESSAGE_ID(
+  115,
+);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE3D_INVALIDBINDFLAGS = D3D11_MESSAGE_ID(116);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE3D_INVALIDINITIALDATA = D3D11_MESSAGE_ID(
+  117,
+);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE3D_INVALIDDIMENSIONS = D3D11_MESSAGE_ID(
+  118,
+);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE3D_INVALIDMIPLEVELS = D3D11_MESSAGE_ID(119);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE3D_INVALIDMISCFLAGS = D3D11_MESSAGE_ID(120);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE3D_INVALIDARG_RETURN = D3D11_MESSAGE_ID(
+  121,
+);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE3D_OUTOFMEMORY_RETURN = D3D11_MESSAGE_ID(
+  122,
+);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE3D_NULLDESC = D3D11_MESSAGE_ID(123);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE3D_LARGEALLOCATION = D3D11_MESSAGE_ID(124);
+
+const D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_UNRECOGNIZEDFORMAT =
+    D3D11_MESSAGE_ID(125);
+
+const D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_INVALIDDESC = D3D11_MESSAGE_ID(
+  126,
+);
+
+const D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_INVALIDFORMAT =
+    D3D11_MESSAGE_ID(127);
+
+const D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_INVALIDDIMENSIONS =
+    D3D11_MESSAGE_ID(128);
+
+const D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_INVALIDRESOURCE =
+    D3D11_MESSAGE_ID(129);
+
+const D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_TOOMANYOBJECTS =
+    D3D11_MESSAGE_ID(130);
+
+const D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_INVALIDARG_RETURN =
+    D3D11_MESSAGE_ID(131);
+
+const D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_OUTOFMEMORY_RETURN =
+    D3D11_MESSAGE_ID(132);
+
+const D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_UNRECOGNIZEDFORMAT =
+    D3D11_MESSAGE_ID(133);
+
+const D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_UNSUPPORTEDFORMAT =
+    D3D11_MESSAGE_ID(134);
+
+const D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_INVALIDDESC = D3D11_MESSAGE_ID(
+  135,
+);
+
+const D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_INVALIDFORMAT = D3D11_MESSAGE_ID(
+  136,
+);
+
+const D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_INVALIDDIMENSIONS =
+    D3D11_MESSAGE_ID(137);
+
+const D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_INVALIDRESOURCE =
+    D3D11_MESSAGE_ID(138);
+
+const D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_TOOMANYOBJECTS = D3D11_MESSAGE_ID(
+  139,
+);
+
+const D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_INVALIDARG_RETURN =
+    D3D11_MESSAGE_ID(140);
+
+const D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_OUTOFMEMORY_RETURN =
+    D3D11_MESSAGE_ID(141);
+
+const D3D11_MESSAGE_ID_CREATEDEPTHSTENCILVIEW_UNRECOGNIZEDFORMAT =
+    D3D11_MESSAGE_ID(142);
+
+const D3D11_MESSAGE_ID_CREATEDEPTHSTENCILVIEW_INVALIDDESC = D3D11_MESSAGE_ID(
+  143,
+);
+
+const D3D11_MESSAGE_ID_CREATEDEPTHSTENCILVIEW_INVALIDFORMAT = D3D11_MESSAGE_ID(
+  144,
+);
+
+const D3D11_MESSAGE_ID_CREATEDEPTHSTENCILVIEW_INVALIDDIMENSIONS =
+    D3D11_MESSAGE_ID(145);
+
+const D3D11_MESSAGE_ID_CREATEDEPTHSTENCILVIEW_INVALIDRESOURCE =
+    D3D11_MESSAGE_ID(146);
+
+const D3D11_MESSAGE_ID_CREATEDEPTHSTENCILVIEW_TOOMANYOBJECTS = D3D11_MESSAGE_ID(
+  147,
+);
+
+const D3D11_MESSAGE_ID_CREATEDEPTHSTENCILVIEW_INVALIDARG_RETURN =
+    D3D11_MESSAGE_ID(148);
+
+const D3D11_MESSAGE_ID_CREATEDEPTHSTENCILVIEW_OUTOFMEMORY_RETURN =
+    D3D11_MESSAGE_ID(149);
+
+const D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_OUTOFMEMORY = D3D11_MESSAGE_ID(150);
+
+const D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_TOOMANYELEMENTS = D3D11_MESSAGE_ID(
+  151,
+);
+
+const D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_INVALIDFORMAT = D3D11_MESSAGE_ID(152);
+
+const D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_INCOMPATIBLEFORMAT = D3D11_MESSAGE_ID(
+  153,
+);
+
+const D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_INVALIDSLOT = D3D11_MESSAGE_ID(154);
+
+const D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_INVALIDINPUTSLOTCLASS =
+    D3D11_MESSAGE_ID(155);
+
+const D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_STEPRATESLOTCLASSMISMATCH =
+    D3D11_MESSAGE_ID(156);
+
+const D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_INVALIDSLOTCLASSCHANGE =
+    D3D11_MESSAGE_ID(157);
+
+const D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_INVALIDSTEPRATECHANGE =
+    D3D11_MESSAGE_ID(158);
+
+const D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_INVALIDALIGNMENT = D3D11_MESSAGE_ID(
+  159,
+);
+
+const D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_DUPLICATESEMANTIC = D3D11_MESSAGE_ID(
+  160,
+);
+
+const D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_UNPARSEABLEINPUTSIGNATURE =
+    D3D11_MESSAGE_ID(161);
+
+const D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_NULLSEMANTIC = D3D11_MESSAGE_ID(162);
+
+const D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_MISSINGELEMENT = D3D11_MESSAGE_ID(163);
+
+const D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_NULLDESC = D3D11_MESSAGE_ID(164);
+
+const D3D11_MESSAGE_ID_CREATEVERTEXSHADER_OUTOFMEMORY = D3D11_MESSAGE_ID(165);
+
+const D3D11_MESSAGE_ID_CREATEVERTEXSHADER_INVALIDSHADERBYTECODE =
+    D3D11_MESSAGE_ID(166);
+
+const D3D11_MESSAGE_ID_CREATEVERTEXSHADER_INVALIDSHADERTYPE = D3D11_MESSAGE_ID(
+  167,
+);
+
+const D3D11_MESSAGE_ID_CREATEGEOMETRYSHADER_OUTOFMEMORY = D3D11_MESSAGE_ID(168);
+
+const D3D11_MESSAGE_ID_CREATEGEOMETRYSHADER_INVALIDSHADERBYTECODE =
+    D3D11_MESSAGE_ID(169);
+
+const D3D11_MESSAGE_ID_CREATEGEOMETRYSHADER_INVALIDSHADERTYPE =
+    D3D11_MESSAGE_ID(170);
+
+const D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_OUTOFMEMORY =
+    D3D11_MESSAGE_ID(171);
+
+const D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDSHADERBYTECODE =
+    D3D11_MESSAGE_ID(172);
+
+const D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDSHADERTYPE =
+    D3D11_MESSAGE_ID(173);
+
+const D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDNUMENTRIES =
+    D3D11_MESSAGE_ID(174);
+
+const D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_OUTPUTSTREAMSTRIDEUNUSED =
+    D3D11_MESSAGE_ID(175);
+
+const D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_UNEXPECTEDDECL =
+    D3D11_MESSAGE_ID(176);
+
+const D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_EXPECTEDDECL =
+    D3D11_MESSAGE_ID(177);
+
+const D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_OUTPUTSLOT0EXPECTED =
+    D3D11_MESSAGE_ID(178);
+
+const D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDOUTPUTSLOT =
+    D3D11_MESSAGE_ID(179);
+
+const D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_ONLYONEELEMENTPERSLOT =
+    D3D11_MESSAGE_ID(180);
+
+const D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDCOMPONENTCOUNT =
+    D3D11_MESSAGE_ID(181);
+
+const D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDSTARTCOMPONENTANDCOMPONENTCOUNT =
+    D3D11_MESSAGE_ID(182);
+
+const D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDGAPDEFINITION =
+    D3D11_MESSAGE_ID(183);
+
+const D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_REPEATEDOUTPUT =
+    D3D11_MESSAGE_ID(184);
+
+const D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDOUTPUTSTREAMSTRIDE =
+    D3D11_MESSAGE_ID(185);
+
+const D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_MISSINGSEMANTIC =
+    D3D11_MESSAGE_ID(186);
+
+const D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_MASKMISMATCH =
+    D3D11_MESSAGE_ID(187);
+
+const D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_CANTHAVEONLYGAPS =
+    D3D11_MESSAGE_ID(188);
+
+const D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_DECLTOOCOMPLEX =
+    D3D11_MESSAGE_ID(189);
+
+const D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_MISSINGOUTPUTSIGNATURE =
+    D3D11_MESSAGE_ID(190);
+
+const D3D11_MESSAGE_ID_CREATEPIXELSHADER_OUTOFMEMORY = D3D11_MESSAGE_ID(191);
+
+const D3D11_MESSAGE_ID_CREATEPIXELSHADER_INVALIDSHADERBYTECODE =
+    D3D11_MESSAGE_ID(192);
+
+const D3D11_MESSAGE_ID_CREATEPIXELSHADER_INVALIDSHADERTYPE = D3D11_MESSAGE_ID(
+  193,
+);
+
+const D3D11_MESSAGE_ID_CREATERASTERIZERSTATE_INVALIDFILLMODE = D3D11_MESSAGE_ID(
+  194,
+);
+
+const D3D11_MESSAGE_ID_CREATERASTERIZERSTATE_INVALIDCULLMODE = D3D11_MESSAGE_ID(
+  195,
+);
+
+const D3D11_MESSAGE_ID_CREATERASTERIZERSTATE_INVALIDDEPTHBIASCLAMP =
+    D3D11_MESSAGE_ID(196);
+
+const D3D11_MESSAGE_ID_CREATERASTERIZERSTATE_INVALIDSLOPESCALEDDEPTHBIAS =
+    D3D11_MESSAGE_ID(197);
+
+const D3D11_MESSAGE_ID_CREATERASTERIZERSTATE_TOOMANYOBJECTS = D3D11_MESSAGE_ID(
+  198,
+);
+
+const D3D11_MESSAGE_ID_CREATERASTERIZERSTATE_NULLDESC = D3D11_MESSAGE_ID(199);
+
+const D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_INVALIDDEPTHWRITEMASK =
+    D3D11_MESSAGE_ID(200);
+
+const D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_INVALIDDEPTHFUNC =
+    D3D11_MESSAGE_ID(201);
+
+const D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_INVALIDFRONTFACESTENCILFAILOP =
+    D3D11_MESSAGE_ID(202);
+
+const D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_INVALIDFRONTFACESTENCILZFAILOP =
+    D3D11_MESSAGE_ID(203);
+
+const D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_INVALIDFRONTFACESTENCILPASSOP =
+    D3D11_MESSAGE_ID(204);
+
+const D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_INVALIDFRONTFACESTENCILFUNC =
+    D3D11_MESSAGE_ID(205);
+
+const D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_INVALIDBACKFACESTENCILFAILOP =
+    D3D11_MESSAGE_ID(206);
+
+const D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_INVALIDBACKFACESTENCILZFAILOP =
+    D3D11_MESSAGE_ID(207);
+
+const D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_INVALIDBACKFACESTENCILPASSOP =
+    D3D11_MESSAGE_ID(208);
+
+const D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_INVALIDBACKFACESTENCILFUNC =
+    D3D11_MESSAGE_ID(209);
+
+const D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_TOOMANYOBJECTS =
+    D3D11_MESSAGE_ID(210);
+
+const D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_NULLDESC = D3D11_MESSAGE_ID(211);
+
+const D3D11_MESSAGE_ID_CREATEBLENDSTATE_INVALIDSRCBLEND = D3D11_MESSAGE_ID(212);
+
+const D3D11_MESSAGE_ID_CREATEBLENDSTATE_INVALIDDESTBLEND = D3D11_MESSAGE_ID(
+  213,
+);
+
+const D3D11_MESSAGE_ID_CREATEBLENDSTATE_INVALIDBLENDOP = D3D11_MESSAGE_ID(214);
+
+const D3D11_MESSAGE_ID_CREATEBLENDSTATE_INVALIDSRCBLENDALPHA = D3D11_MESSAGE_ID(
+  215,
+);
+
+const D3D11_MESSAGE_ID_CREATEBLENDSTATE_INVALIDDESTBLENDALPHA =
+    D3D11_MESSAGE_ID(216);
+
+const D3D11_MESSAGE_ID_CREATEBLENDSTATE_INVALIDBLENDOPALPHA = D3D11_MESSAGE_ID(
+  217,
+);
+
+const D3D11_MESSAGE_ID_CREATEBLENDSTATE_INVALIDRENDERTARGETWRITEMASK =
+    D3D11_MESSAGE_ID(218);
+
+const D3D11_MESSAGE_ID_CREATEBLENDSTATE_TOOMANYOBJECTS = D3D11_MESSAGE_ID(219);
+
+const D3D11_MESSAGE_ID_CREATEBLENDSTATE_NULLDESC = D3D11_MESSAGE_ID(220);
+
+const D3D11_MESSAGE_ID_CREATESAMPLERSTATE_INVALIDFILTER = D3D11_MESSAGE_ID(221);
+
+const D3D11_MESSAGE_ID_CREATESAMPLERSTATE_INVALIDADDRESSU = D3D11_MESSAGE_ID(
+  222,
+);
+
+const D3D11_MESSAGE_ID_CREATESAMPLERSTATE_INVALIDADDRESSV = D3D11_MESSAGE_ID(
+  223,
+);
+
+const D3D11_MESSAGE_ID_CREATESAMPLERSTATE_INVALIDADDRESSW = D3D11_MESSAGE_ID(
+  224,
+);
+
+const D3D11_MESSAGE_ID_CREATESAMPLERSTATE_INVALIDMIPLODBIAS = D3D11_MESSAGE_ID(
+  225,
+);
+
+const D3D11_MESSAGE_ID_CREATESAMPLERSTATE_INVALIDMAXANISOTROPY =
+    D3D11_MESSAGE_ID(226);
+
+const D3D11_MESSAGE_ID_CREATESAMPLERSTATE_INVALIDCOMPARISONFUNC =
+    D3D11_MESSAGE_ID(227);
+
+const D3D11_MESSAGE_ID_CREATESAMPLERSTATE_INVALIDMINLOD = D3D11_MESSAGE_ID(228);
+
+const D3D11_MESSAGE_ID_CREATESAMPLERSTATE_INVALIDMAXLOD = D3D11_MESSAGE_ID(229);
+
+const D3D11_MESSAGE_ID_CREATESAMPLERSTATE_TOOMANYOBJECTS = D3D11_MESSAGE_ID(
+  230,
+);
+
+const D3D11_MESSAGE_ID_CREATESAMPLERSTATE_NULLDESC = D3D11_MESSAGE_ID(231);
+
+const D3D11_MESSAGE_ID_CREATEQUERYORPREDICATE_INVALIDQUERY = D3D11_MESSAGE_ID(
+  232,
+);
+
+const D3D11_MESSAGE_ID_CREATEQUERYORPREDICATE_INVALIDMISCFLAGS =
+    D3D11_MESSAGE_ID(233);
+
+const D3D11_MESSAGE_ID_CREATEQUERYORPREDICATE_UNEXPECTEDMISCFLAG =
+    D3D11_MESSAGE_ID(234);
+
+const D3D11_MESSAGE_ID_CREATEQUERYORPREDICATE_NULLDESC = D3D11_MESSAGE_ID(235);
+
+const D3D11_MESSAGE_ID_DEVICE_IASETPRIMITIVETOPOLOGY_TOPOLOGY_UNRECOGNIZED =
+    D3D11_MESSAGE_ID(236);
+
+const D3D11_MESSAGE_ID_DEVICE_IASETPRIMITIVETOPOLOGY_TOPOLOGY_UNDEFINED =
+    D3D11_MESSAGE_ID(237);
+
+const D3D11_MESSAGE_ID_IASETVERTEXBUFFERS_INVALIDBUFFER = D3D11_MESSAGE_ID(238);
+
+const D3D11_MESSAGE_ID_DEVICE_IASETVERTEXBUFFERS_OFFSET_TOO_LARGE =
+    D3D11_MESSAGE_ID(239);
+
+const D3D11_MESSAGE_ID_DEVICE_IASETVERTEXBUFFERS_BUFFERS_EMPTY =
+    D3D11_MESSAGE_ID(240);
+
+const D3D11_MESSAGE_ID_IASETINDEXBUFFER_INVALIDBUFFER = D3D11_MESSAGE_ID(241);
+
+const D3D11_MESSAGE_ID_DEVICE_IASETINDEXBUFFER_FORMAT_INVALID =
+    D3D11_MESSAGE_ID(242);
+
+const D3D11_MESSAGE_ID_DEVICE_IASETINDEXBUFFER_OFFSET_TOO_LARGE =
+    D3D11_MESSAGE_ID(243);
+
+const D3D11_MESSAGE_ID_DEVICE_IASETINDEXBUFFER_OFFSET_UNALIGNED =
+    D3D11_MESSAGE_ID(244);
+
+const D3D11_MESSAGE_ID_DEVICE_VSSETSHADERRESOURCES_VIEWS_EMPTY =
+    D3D11_MESSAGE_ID(245);
+
+const D3D11_MESSAGE_ID_VSSETCONSTANTBUFFERS_INVALIDBUFFER = D3D11_MESSAGE_ID(
+  246,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_VSSETCONSTANTBUFFERS_BUFFERS_EMPTY =
+    D3D11_MESSAGE_ID(247);
+
+const D3D11_MESSAGE_ID_DEVICE_VSSETSAMPLERS_SAMPLERS_EMPTY = D3D11_MESSAGE_ID(
+  248,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_GSSETSHADERRESOURCES_VIEWS_EMPTY =
+    D3D11_MESSAGE_ID(249);
+
+const D3D11_MESSAGE_ID_GSSETCONSTANTBUFFERS_INVALIDBUFFER = D3D11_MESSAGE_ID(
+  250,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_GSSETCONSTANTBUFFERS_BUFFERS_EMPTY =
+    D3D11_MESSAGE_ID(251);
+
+const D3D11_MESSAGE_ID_DEVICE_GSSETSAMPLERS_SAMPLERS_EMPTY = D3D11_MESSAGE_ID(
+  252,
+);
+
+const D3D11_MESSAGE_ID_SOSETTARGETS_INVALIDBUFFER = D3D11_MESSAGE_ID(253);
+
+const D3D11_MESSAGE_ID_DEVICE_SOSETTARGETS_OFFSET_UNALIGNED = D3D11_MESSAGE_ID(
+  254,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_PSSETSHADERRESOURCES_VIEWS_EMPTY =
+    D3D11_MESSAGE_ID(255);
+
+const D3D11_MESSAGE_ID_PSSETCONSTANTBUFFERS_INVALIDBUFFER = D3D11_MESSAGE_ID(
+  256,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_PSSETCONSTANTBUFFERS_BUFFERS_EMPTY =
+    D3D11_MESSAGE_ID(257);
+
+const D3D11_MESSAGE_ID_DEVICE_PSSETSAMPLERS_SAMPLERS_EMPTY = D3D11_MESSAGE_ID(
+  258,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_RSSETVIEWPORTS_INVALIDVIEWPORT = D3D11_MESSAGE_ID(
+  259,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_RSSETSCISSORRECTS_INVALIDSCISSOR =
+    D3D11_MESSAGE_ID(260);
+
+const D3D11_MESSAGE_ID_CLEARRENDERTARGETVIEW_DENORMFLUSH = D3D11_MESSAGE_ID(
+  261,
+);
+
+const D3D11_MESSAGE_ID_CLEARDEPTHSTENCILVIEW_DENORMFLUSH = D3D11_MESSAGE_ID(
+  262,
+);
+
+const D3D11_MESSAGE_ID_CLEARDEPTHSTENCILVIEW_INVALID = D3D11_MESSAGE_ID(263);
+
+const D3D11_MESSAGE_ID_DEVICE_IAGETVERTEXBUFFERS_BUFFERS_EMPTY =
+    D3D11_MESSAGE_ID(264);
+
+const D3D11_MESSAGE_ID_DEVICE_VSGETSHADERRESOURCES_VIEWS_EMPTY =
+    D3D11_MESSAGE_ID(265);
+
+const D3D11_MESSAGE_ID_DEVICE_VSGETCONSTANTBUFFERS_BUFFERS_EMPTY =
+    D3D11_MESSAGE_ID(266);
+
+const D3D11_MESSAGE_ID_DEVICE_VSGETSAMPLERS_SAMPLERS_EMPTY = D3D11_MESSAGE_ID(
+  267,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_GSGETSHADERRESOURCES_VIEWS_EMPTY =
+    D3D11_MESSAGE_ID(268);
+
+const D3D11_MESSAGE_ID_DEVICE_GSGETCONSTANTBUFFERS_BUFFERS_EMPTY =
+    D3D11_MESSAGE_ID(269);
+
+const D3D11_MESSAGE_ID_DEVICE_GSGETSAMPLERS_SAMPLERS_EMPTY = D3D11_MESSAGE_ID(
+  270,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_SOGETTARGETS_BUFFERS_EMPTY = D3D11_MESSAGE_ID(
+  271,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_PSGETSHADERRESOURCES_VIEWS_EMPTY =
+    D3D11_MESSAGE_ID(272);
+
+const D3D11_MESSAGE_ID_DEVICE_PSGETCONSTANTBUFFERS_BUFFERS_EMPTY =
+    D3D11_MESSAGE_ID(273);
+
+const D3D11_MESSAGE_ID_DEVICE_PSGETSAMPLERS_SAMPLERS_EMPTY = D3D11_MESSAGE_ID(
+  274,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_RSGETVIEWPORTS_VIEWPORTS_EMPTY = D3D11_MESSAGE_ID(
+  275,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_RSGETSCISSORRECTS_RECTS_EMPTY = D3D11_MESSAGE_ID(
+  276,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_GENERATEMIPS_RESOURCE_INVALID = D3D11_MESSAGE_ID(
+  277,
+);
+
+const D3D11_MESSAGE_ID_COPYSUBRESOURCEREGION_INVALIDDESTINATIONSUBRESOURCE =
+    D3D11_MESSAGE_ID(278);
+
+const D3D11_MESSAGE_ID_COPYSUBRESOURCEREGION_INVALIDSOURCESUBRESOURCE =
+    D3D11_MESSAGE_ID(279);
+
+const D3D11_MESSAGE_ID_COPYSUBRESOURCEREGION_INVALIDSOURCEBOX =
+    D3D11_MESSAGE_ID(280);
+
+const D3D11_MESSAGE_ID_COPYSUBRESOURCEREGION_INVALIDSOURCE = D3D11_MESSAGE_ID(
+  281,
+);
+
+const D3D11_MESSAGE_ID_COPYSUBRESOURCEREGION_INVALIDDESTINATIONSTATE =
+    D3D11_MESSAGE_ID(282);
+
+const D3D11_MESSAGE_ID_COPYSUBRESOURCEREGION_INVALIDSOURCESTATE =
+    D3D11_MESSAGE_ID(283);
+
+const D3D11_MESSAGE_ID_COPYRESOURCE_INVALIDSOURCE = D3D11_MESSAGE_ID(284);
+
+const D3D11_MESSAGE_ID_COPYRESOURCE_INVALIDDESTINATIONSTATE = D3D11_MESSAGE_ID(
+  285,
+);
+
+const D3D11_MESSAGE_ID_COPYRESOURCE_INVALIDSOURCESTATE = D3D11_MESSAGE_ID(286);
+
+const D3D11_MESSAGE_ID_UPDATESUBRESOURCE_INVALIDDESTINATIONSUBRESOURCE =
+    D3D11_MESSAGE_ID(287);
+
+const D3D11_MESSAGE_ID_UPDATESUBRESOURCE_INVALIDDESTINATIONBOX =
+    D3D11_MESSAGE_ID(288);
+
+const D3D11_MESSAGE_ID_UPDATESUBRESOURCE_INVALIDDESTINATIONSTATE =
+    D3D11_MESSAGE_ID(289);
+
+const D3D11_MESSAGE_ID_DEVICE_RESOLVESUBRESOURCE_DESTINATION_INVALID =
+    D3D11_MESSAGE_ID(290);
+
+const D3D11_MESSAGE_ID_DEVICE_RESOLVESUBRESOURCE_DESTINATION_SUBRESOURCE_INVALID =
+    D3D11_MESSAGE_ID(291);
+
+const D3D11_MESSAGE_ID_DEVICE_RESOLVESUBRESOURCE_SOURCE_INVALID =
+    D3D11_MESSAGE_ID(292);
+
+const D3D11_MESSAGE_ID_DEVICE_RESOLVESUBRESOURCE_SOURCE_SUBRESOURCE_INVALID =
+    D3D11_MESSAGE_ID(293);
+
+const D3D11_MESSAGE_ID_DEVICE_RESOLVESUBRESOURCE_FORMAT_INVALID =
+    D3D11_MESSAGE_ID(294);
+
+const D3D11_MESSAGE_ID_BUFFER_MAP_INVALIDMAPTYPE = D3D11_MESSAGE_ID(295);
+
+const D3D11_MESSAGE_ID_BUFFER_MAP_INVALIDFLAGS = D3D11_MESSAGE_ID(296);
+
+const D3D11_MESSAGE_ID_BUFFER_MAP_ALREADYMAPPED = D3D11_MESSAGE_ID(297);
+
+const D3D11_MESSAGE_ID_BUFFER_MAP_DEVICEREMOVED_RETURN = D3D11_MESSAGE_ID(298);
+
+const D3D11_MESSAGE_ID_BUFFER_UNMAP_NOTMAPPED = D3D11_MESSAGE_ID(299);
+
+const D3D11_MESSAGE_ID_TEXTURE1D_MAP_INVALIDMAPTYPE = D3D11_MESSAGE_ID(300);
+
+const D3D11_MESSAGE_ID_TEXTURE1D_MAP_INVALIDSUBRESOURCE = D3D11_MESSAGE_ID(301);
+
+const D3D11_MESSAGE_ID_TEXTURE1D_MAP_INVALIDFLAGS = D3D11_MESSAGE_ID(302);
+
+const D3D11_MESSAGE_ID_TEXTURE1D_MAP_ALREADYMAPPED = D3D11_MESSAGE_ID(303);
+
+const D3D11_MESSAGE_ID_TEXTURE1D_MAP_DEVICEREMOVED_RETURN = D3D11_MESSAGE_ID(
+  304,
+);
+
+const D3D11_MESSAGE_ID_TEXTURE1D_UNMAP_INVALIDSUBRESOURCE = D3D11_MESSAGE_ID(
+  305,
+);
+
+const D3D11_MESSAGE_ID_TEXTURE1D_UNMAP_NOTMAPPED = D3D11_MESSAGE_ID(306);
+
+const D3D11_MESSAGE_ID_TEXTURE2D_MAP_INVALIDMAPTYPE = D3D11_MESSAGE_ID(307);
+
+const D3D11_MESSAGE_ID_TEXTURE2D_MAP_INVALIDSUBRESOURCE = D3D11_MESSAGE_ID(308);
+
+const D3D11_MESSAGE_ID_TEXTURE2D_MAP_INVALIDFLAGS = D3D11_MESSAGE_ID(309);
+
+const D3D11_MESSAGE_ID_TEXTURE2D_MAP_ALREADYMAPPED = D3D11_MESSAGE_ID(310);
+
+const D3D11_MESSAGE_ID_TEXTURE2D_MAP_DEVICEREMOVED_RETURN = D3D11_MESSAGE_ID(
+  311,
+);
+
+const D3D11_MESSAGE_ID_TEXTURE2D_UNMAP_INVALIDSUBRESOURCE = D3D11_MESSAGE_ID(
+  312,
+);
+
+const D3D11_MESSAGE_ID_TEXTURE2D_UNMAP_NOTMAPPED = D3D11_MESSAGE_ID(313);
+
+const D3D11_MESSAGE_ID_TEXTURE3D_MAP_INVALIDMAPTYPE = D3D11_MESSAGE_ID(314);
+
+const D3D11_MESSAGE_ID_TEXTURE3D_MAP_INVALIDSUBRESOURCE = D3D11_MESSAGE_ID(315);
+
+const D3D11_MESSAGE_ID_TEXTURE3D_MAP_INVALIDFLAGS = D3D11_MESSAGE_ID(316);
+
+const D3D11_MESSAGE_ID_TEXTURE3D_MAP_ALREADYMAPPED = D3D11_MESSAGE_ID(317);
+
+const D3D11_MESSAGE_ID_TEXTURE3D_MAP_DEVICEREMOVED_RETURN = D3D11_MESSAGE_ID(
+  318,
+);
+
+const D3D11_MESSAGE_ID_TEXTURE3D_UNMAP_INVALIDSUBRESOURCE = D3D11_MESSAGE_ID(
+  319,
+);
+
+const D3D11_MESSAGE_ID_TEXTURE3D_UNMAP_NOTMAPPED = D3D11_MESSAGE_ID(320);
+
+const D3D11_MESSAGE_ID_CHECKFORMATSUPPORT_FORMAT_DEPRECATED = D3D11_MESSAGE_ID(
+  321,
+);
+
+const D3D11_MESSAGE_ID_CHECKMULTISAMPLEQUALITYLEVELS_FORMAT_DEPRECATED =
+    D3D11_MESSAGE_ID(322);
+
+const D3D11_MESSAGE_ID_SETEXCEPTIONMODE_UNRECOGNIZEDFLAGS = D3D11_MESSAGE_ID(
+  323,
+);
+
+const D3D11_MESSAGE_ID_SETEXCEPTIONMODE_INVALIDARG_RETURN = D3D11_MESSAGE_ID(
+  324,
+);
+
+const D3D11_MESSAGE_ID_SETEXCEPTIONMODE_DEVICEREMOVED_RETURN = D3D11_MESSAGE_ID(
+  325,
+);
+
+const D3D11_MESSAGE_ID_REF_SIMULATING_INFINITELY_FAST_HARDWARE =
+    D3D11_MESSAGE_ID(326);
+
+const D3D11_MESSAGE_ID_REF_THREADING_MODE = D3D11_MESSAGE_ID(327);
+
+const D3D11_MESSAGE_ID_REF_UMDRIVER_EXCEPTION = D3D11_MESSAGE_ID(328);
+
+const D3D11_MESSAGE_ID_REF_KMDRIVER_EXCEPTION = D3D11_MESSAGE_ID(329);
+
+const D3D11_MESSAGE_ID_REF_HARDWARE_EXCEPTION = D3D11_MESSAGE_ID(330);
+
+const D3D11_MESSAGE_ID_REF_ACCESSING_INDEXABLE_TEMP_OUT_OF_RANGE =
+    D3D11_MESSAGE_ID(331);
+
+const D3D11_MESSAGE_ID_REF_PROBLEM_PARSING_SHADER = D3D11_MESSAGE_ID(332);
+
+const D3D11_MESSAGE_ID_REF_OUT_OF_MEMORY = D3D11_MESSAGE_ID(333);
+
+const D3D11_MESSAGE_ID_REF_INFO = D3D11_MESSAGE_ID(334);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_VERTEXPOS_OVERFLOW = D3D11_MESSAGE_ID(335);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAWINDEXED_INDEXPOS_OVERFLOW = D3D11_MESSAGE_ID(
+  336,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAWINSTANCED_VERTEXPOS_OVERFLOW =
+    D3D11_MESSAGE_ID(337);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAWINSTANCED_INSTANCEPOS_OVERFLOW =
+    D3D11_MESSAGE_ID(338);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAWINDEXEDINSTANCED_INSTANCEPOS_OVERFLOW =
+    D3D11_MESSAGE_ID(339);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAWINDEXEDINSTANCED_INDEXPOS_OVERFLOW =
+    D3D11_MESSAGE_ID(340);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_VERTEX_SHADER_NOT_SET = D3D11_MESSAGE_ID(
+  341,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_SHADER_LINKAGE_SEMANTICNAME_NOT_FOUND =
+    D3D11_MESSAGE_ID(342);
+
+const D3D11_MESSAGE_ID_DEVICE_SHADER_LINKAGE_REGISTERINDEX = D3D11_MESSAGE_ID(
+  343,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_SHADER_LINKAGE_COMPONENTTYPE = D3D11_MESSAGE_ID(
+  344,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_SHADER_LINKAGE_REGISTERMASK = D3D11_MESSAGE_ID(
+  345,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_SHADER_LINKAGE_SYSTEMVALUE = D3D11_MESSAGE_ID(
+  346,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_SHADER_LINKAGE_NEVERWRITTEN_ALWAYSREADS =
+    D3D11_MESSAGE_ID(347);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_VERTEX_BUFFER_NOT_SET = D3D11_MESSAGE_ID(
+  348,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_INPUTLAYOUT_NOT_SET = D3D11_MESSAGE_ID(349);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_CONSTANT_BUFFER_NOT_SET = D3D11_MESSAGE_ID(
+  350,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_CONSTANT_BUFFER_TOO_SMALL = D3D11_MESSAGE_ID(
+  351,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_SAMPLER_NOT_SET = D3D11_MESSAGE_ID(352);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_SHADERRESOURCEVIEW_NOT_SET =
+    D3D11_MESSAGE_ID(353);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_VIEW_DIMENSION_MISMATCH = D3D11_MESSAGE_ID(
+  354,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_VERTEX_BUFFER_STRIDE_TOO_SMALL =
+    D3D11_MESSAGE_ID(355);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_VERTEX_BUFFER_TOO_SMALL = D3D11_MESSAGE_ID(
+  356,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_INDEX_BUFFER_NOT_SET = D3D11_MESSAGE_ID(357);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_INDEX_BUFFER_FORMAT_INVALID =
+    D3D11_MESSAGE_ID(358);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_INDEX_BUFFER_TOO_SMALL = D3D11_MESSAGE_ID(
+  359,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_GS_INPUT_PRIMITIVE_MISMATCH =
+    D3D11_MESSAGE_ID(360);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_RESOURCE_RETURN_TYPE_MISMATCH =
+    D3D11_MESSAGE_ID(361);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_POSITION_NOT_PRESENT = D3D11_MESSAGE_ID(362);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_OUTPUT_STREAM_NOT_SET = D3D11_MESSAGE_ID(
+  363,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_BOUND_RESOURCE_MAPPED = D3D11_MESSAGE_ID(
+  364,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_INVALID_PRIMITIVETOPOLOGY = D3D11_MESSAGE_ID(
+  365,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_VERTEX_OFFSET_UNALIGNED = D3D11_MESSAGE_ID(
+  366,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_VERTEX_STRIDE_UNALIGNED = D3D11_MESSAGE_ID(
+  367,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_INDEX_OFFSET_UNALIGNED = D3D11_MESSAGE_ID(
+  368,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_OUTPUT_STREAM_OFFSET_UNALIGNED =
+    D3D11_MESSAGE_ID(369);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_RESOURCE_FORMAT_LD_UNSUPPORTED =
+    D3D11_MESSAGE_ID(370);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_RESOURCE_FORMAT_SAMPLE_UNSUPPORTED =
+    D3D11_MESSAGE_ID(371);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_RESOURCE_FORMAT_SAMPLE_C_UNSUPPORTED =
+    D3D11_MESSAGE_ID(372);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_RESOURCE_MULTISAMPLE_UNSUPPORTED =
+    D3D11_MESSAGE_ID(373);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_SO_TARGETS_BOUND_WITHOUT_SOURCE =
+    D3D11_MESSAGE_ID(374);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_SO_STRIDE_LARGER_THAN_BUFFER =
+    D3D11_MESSAGE_ID(375);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_OM_RENDER_TARGET_DOES_NOT_SUPPORT_BLENDING =
+    D3D11_MESSAGE_ID(376);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_OM_DUAL_SOURCE_BLENDING_CAN_ONLY_HAVE_RENDER_TARGET_0 =
+    D3D11_MESSAGE_ID(377);
+
+const D3D11_MESSAGE_ID_DEVICE_REMOVAL_PROCESS_AT_FAULT = D3D11_MESSAGE_ID(378);
+
+const D3D11_MESSAGE_ID_DEVICE_REMOVAL_PROCESS_POSSIBLY_AT_FAULT =
+    D3D11_MESSAGE_ID(379);
+
+const D3D11_MESSAGE_ID_DEVICE_REMOVAL_PROCESS_NOT_AT_FAULT = D3D11_MESSAGE_ID(
+  380,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_OPEN_SHARED_RESOURCE_INVALIDARG_RETURN =
+    D3D11_MESSAGE_ID(381);
+
+const D3D11_MESSAGE_ID_DEVICE_OPEN_SHARED_RESOURCE_OUTOFMEMORY_RETURN =
+    D3D11_MESSAGE_ID(382);
+
+const D3D11_MESSAGE_ID_DEVICE_OPEN_SHARED_RESOURCE_BADINTERFACE_RETURN =
+    D3D11_MESSAGE_ID(383);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_VIEWPORT_NOT_SET = D3D11_MESSAGE_ID(384);
+
+const D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_TRAILING_DIGIT_IN_SEMANTIC =
+    D3D11_MESSAGE_ID(385);
+
+const D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_TRAILING_DIGIT_IN_SEMANTIC =
+    D3D11_MESSAGE_ID(386);
+
+const D3D11_MESSAGE_ID_DEVICE_RSSETVIEWPORTS_DENORMFLUSH = D3D11_MESSAGE_ID(
+  387,
+);
+
+const D3D11_MESSAGE_ID_OMSETRENDERTARGETS_INVALIDVIEW = D3D11_MESSAGE_ID(388);
+
+const D3D11_MESSAGE_ID_DEVICE_SETTEXTFILTERSIZE_INVALIDDIMENSIONS =
+    D3D11_MESSAGE_ID(389);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_SAMPLER_MISMATCH = D3D11_MESSAGE_ID(390);
+
+const D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_TYPE_MISMATCH = D3D11_MESSAGE_ID(391);
+
+const D3D11_MESSAGE_ID_BLENDSTATE_GETDESC_LEGACY = D3D11_MESSAGE_ID(392);
+
+const D3D11_MESSAGE_ID_SHADERRESOURCEVIEW_GETDESC_LEGACY = D3D11_MESSAGE_ID(
+  393,
+);
+
+const D3D11_MESSAGE_ID_CREATEQUERY_OUTOFMEMORY_RETURN = D3D11_MESSAGE_ID(394);
+
+const D3D11_MESSAGE_ID_CREATEPREDICATE_OUTOFMEMORY_RETURN = D3D11_MESSAGE_ID(
+  395,
+);
+
+const D3D11_MESSAGE_ID_CREATECOUNTER_OUTOFRANGE_COUNTER = D3D11_MESSAGE_ID(396);
+
+const D3D11_MESSAGE_ID_CREATECOUNTER_SIMULTANEOUS_ACTIVE_COUNTERS_EXHAUSTED =
+    D3D11_MESSAGE_ID(397);
+
+const D3D11_MESSAGE_ID_CREATECOUNTER_UNSUPPORTED_WELLKNOWN_COUNTER =
+    D3D11_MESSAGE_ID(398);
+
+const D3D11_MESSAGE_ID_CREATECOUNTER_OUTOFMEMORY_RETURN = D3D11_MESSAGE_ID(399);
+
+const D3D11_MESSAGE_ID_CREATECOUNTER_NONEXCLUSIVE_RETURN = D3D11_MESSAGE_ID(
+  400,
+);
+
+const D3D11_MESSAGE_ID_CREATECOUNTER_NULLDESC = D3D11_MESSAGE_ID(401);
+
+const D3D11_MESSAGE_ID_CHECKCOUNTER_OUTOFRANGE_COUNTER = D3D11_MESSAGE_ID(402);
+
+const D3D11_MESSAGE_ID_CHECKCOUNTER_UNSUPPORTED_WELLKNOWN_COUNTER =
+    D3D11_MESSAGE_ID(403);
+
+const D3D11_MESSAGE_ID_SETPREDICATION_INVALID_PREDICATE_STATE =
+    D3D11_MESSAGE_ID(404);
+
+const D3D11_MESSAGE_ID_QUERY_BEGIN_UNSUPPORTED = D3D11_MESSAGE_ID(405);
+
+const D3D11_MESSAGE_ID_PREDICATE_BEGIN_DURING_PREDICATION = D3D11_MESSAGE_ID(
+  406,
+);
+
+const D3D11_MESSAGE_ID_QUERY_BEGIN_DUPLICATE = D3D11_MESSAGE_ID(407);
+
+const D3D11_MESSAGE_ID_QUERY_BEGIN_ABANDONING_PREVIOUS_RESULTS =
+    D3D11_MESSAGE_ID(408);
+
+const D3D11_MESSAGE_ID_PREDICATE_END_DURING_PREDICATION = D3D11_MESSAGE_ID(409);
+
+const D3D11_MESSAGE_ID_QUERY_END_ABANDONING_PREVIOUS_RESULTS = D3D11_MESSAGE_ID(
+  410,
+);
+
+const D3D11_MESSAGE_ID_QUERY_END_WITHOUT_BEGIN = D3D11_MESSAGE_ID(411);
+
+const D3D11_MESSAGE_ID_QUERY_GETDATA_INVALID_DATASIZE = D3D11_MESSAGE_ID(412);
+
+const D3D11_MESSAGE_ID_QUERY_GETDATA_INVALID_FLAGS = D3D11_MESSAGE_ID(413);
+
+const D3D11_MESSAGE_ID_QUERY_GETDATA_INVALID_CALL = D3D11_MESSAGE_ID(414);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_PS_OUTPUT_TYPE_MISMATCH = D3D11_MESSAGE_ID(
+  415,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_RESOURCE_FORMAT_GATHER_UNSUPPORTED =
+    D3D11_MESSAGE_ID(416);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_INVALID_USE_OF_CENTER_MULTISAMPLE_PATTERN =
+    D3D11_MESSAGE_ID(417);
+
+const D3D11_MESSAGE_ID_DEVICE_IASETVERTEXBUFFERS_STRIDE_TOO_LARGE =
+    D3D11_MESSAGE_ID(418);
+
+const D3D11_MESSAGE_ID_DEVICE_IASETVERTEXBUFFERS_INVALIDRANGE =
+    D3D11_MESSAGE_ID(419);
+
+const D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_EMPTY_LAYOUT = D3D11_MESSAGE_ID(420);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_RESOURCE_SAMPLE_COUNT_MISMATCH =
+    D3D11_MESSAGE_ID(421);
+
+const D3D11_MESSAGE_ID_LIVE_OBJECT_SUMMARY = D3D11_MESSAGE_ID(422);
+
+const D3D11_MESSAGE_ID_LIVE_BUFFER = D3D11_MESSAGE_ID(423);
+
+const D3D11_MESSAGE_ID_LIVE_TEXTURE1D = D3D11_MESSAGE_ID(424);
+
+const D3D11_MESSAGE_ID_LIVE_TEXTURE2D = D3D11_MESSAGE_ID(425);
+
+const D3D11_MESSAGE_ID_LIVE_TEXTURE3D = D3D11_MESSAGE_ID(426);
+
+const D3D11_MESSAGE_ID_LIVE_SHADERRESOURCEVIEW = D3D11_MESSAGE_ID(427);
+
+const D3D11_MESSAGE_ID_LIVE_RENDERTARGETVIEW = D3D11_MESSAGE_ID(428);
+
+const D3D11_MESSAGE_ID_LIVE_DEPTHSTENCILVIEW = D3D11_MESSAGE_ID(429);
+
+const D3D11_MESSAGE_ID_LIVE_VERTEXSHADER = D3D11_MESSAGE_ID(430);
+
+const D3D11_MESSAGE_ID_LIVE_GEOMETRYSHADER = D3D11_MESSAGE_ID(431);
+
+const D3D11_MESSAGE_ID_LIVE_PIXELSHADER = D3D11_MESSAGE_ID(432);
+
+const D3D11_MESSAGE_ID_LIVE_INPUTLAYOUT = D3D11_MESSAGE_ID(433);
+
+const D3D11_MESSAGE_ID_LIVE_SAMPLER = D3D11_MESSAGE_ID(434);
+
+const D3D11_MESSAGE_ID_LIVE_BLENDSTATE = D3D11_MESSAGE_ID(435);
+
+const D3D11_MESSAGE_ID_LIVE_DEPTHSTENCILSTATE = D3D11_MESSAGE_ID(436);
+
+const D3D11_MESSAGE_ID_LIVE_RASTERIZERSTATE = D3D11_MESSAGE_ID(437);
+
+const D3D11_MESSAGE_ID_LIVE_QUERY = D3D11_MESSAGE_ID(438);
+
+const D3D11_MESSAGE_ID_LIVE_PREDICATE = D3D11_MESSAGE_ID(439);
+
+const D3D11_MESSAGE_ID_LIVE_COUNTER = D3D11_MESSAGE_ID(440);
+
+const D3D11_MESSAGE_ID_LIVE_DEVICE = D3D11_MESSAGE_ID(441);
+
+const D3D11_MESSAGE_ID_LIVE_SWAPCHAIN = D3D11_MESSAGE_ID(442);
+
+const D3D11_MESSAGE_ID_D3D10_MESSAGES_END = D3D11_MESSAGE_ID(443);
+
+const D3D11_MESSAGE_ID_D3D10L9_MESSAGES_START = D3D11_MESSAGE_ID(1048576);
+
+const D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_STENCIL_NO_TWO_SIDED =
+    D3D11_MESSAGE_ID(1048577);
+
+const D3D11_MESSAGE_ID_CREATERASTERIZERSTATE_DepthBiasClamp_NOT_SUPPORTED =
+    D3D11_MESSAGE_ID(1048578);
+
+const D3D11_MESSAGE_ID_CREATESAMPLERSTATE_NO_COMPARISON_SUPPORT =
+    D3D11_MESSAGE_ID(1048579);
+
+const D3D11_MESSAGE_ID_CREATESAMPLERSTATE_EXCESSIVE_ANISOTROPY =
+    D3D11_MESSAGE_ID(1048580);
+
+const D3D11_MESSAGE_ID_CREATESAMPLERSTATE_BORDER_OUT_OF_RANGE =
+    D3D11_MESSAGE_ID(1048581);
+
+const D3D11_MESSAGE_ID_VSSETSAMPLERS_NOT_SUPPORTED = D3D11_MESSAGE_ID(1048582);
+
+const D3D11_MESSAGE_ID_VSSETSAMPLERS_TOO_MANY_SAMPLERS = D3D11_MESSAGE_ID(
+  1048583,
+);
+
+const D3D11_MESSAGE_ID_PSSETSAMPLERS_TOO_MANY_SAMPLERS = D3D11_MESSAGE_ID(
+  1048584,
+);
+
+const D3D11_MESSAGE_ID_CREATERESOURCE_NO_ARRAYS = D3D11_MESSAGE_ID(1048585);
+
+const D3D11_MESSAGE_ID_CREATERESOURCE_NO_VB_AND_IB_BIND = D3D11_MESSAGE_ID(
+  1048586,
+);
+
+const D3D11_MESSAGE_ID_CREATERESOURCE_NO_TEXTURE_1D = D3D11_MESSAGE_ID(1048587);
+
+const D3D11_MESSAGE_ID_CREATERESOURCE_DIMENSION_OUT_OF_RANGE = D3D11_MESSAGE_ID(
+  1048588,
+);
+
+const D3D11_MESSAGE_ID_CREATERESOURCE_NOT_BINDABLE_AS_SHADER_RESOURCE =
+    D3D11_MESSAGE_ID(1048589);
+
+const D3D11_MESSAGE_ID_OMSETRENDERTARGETS_TOO_MANY_RENDER_TARGETS =
+    D3D11_MESSAGE_ID(1048590);
+
+const D3D11_MESSAGE_ID_OMSETRENDERTARGETS_NO_DIFFERING_BIT_DEPTHS =
+    D3D11_MESSAGE_ID(1048591);
+
+const D3D11_MESSAGE_ID_IASETVERTEXBUFFERS_BAD_BUFFER_INDEX = D3D11_MESSAGE_ID(
+  1048592,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_RSSETVIEWPORTS_TOO_MANY_VIEWPORTS =
+    D3D11_MESSAGE_ID(1048593);
+
+const D3D11_MESSAGE_ID_DEVICE_IASETPRIMITIVETOPOLOGY_ADJACENCY_UNSUPPORTED =
+    D3D11_MESSAGE_ID(1048594);
+
+const D3D11_MESSAGE_ID_DEVICE_RSSETSCISSORRECTS_TOO_MANY_SCISSORS =
+    D3D11_MESSAGE_ID(1048595);
+
+const D3D11_MESSAGE_ID_COPYRESOURCE_ONLY_TEXTURE_2D_WITHIN_GPU_MEMORY =
+    D3D11_MESSAGE_ID(1048596);
+
+const D3D11_MESSAGE_ID_COPYRESOURCE_NO_TEXTURE_3D_READBACK = D3D11_MESSAGE_ID(
+  1048597,
+);
+
+const D3D11_MESSAGE_ID_COPYRESOURCE_NO_TEXTURE_ONLY_READBACK = D3D11_MESSAGE_ID(
+  1048598,
+);
+
+const D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_UNSUPPORTED_FORMAT = D3D11_MESSAGE_ID(
+  1048599,
+);
+
+const D3D11_MESSAGE_ID_CREATEBLENDSTATE_NO_ALPHA_TO_COVERAGE = D3D11_MESSAGE_ID(
+  1048600,
+);
+
+const D3D11_MESSAGE_ID_CREATERASTERIZERSTATE_DepthClipEnable_MUST_BE_TRUE =
+    D3D11_MESSAGE_ID(1048601);
+
+const D3D11_MESSAGE_ID_DRAWINDEXED_STARTINDEXLOCATION_MUST_BE_POSITIVE =
+    D3D11_MESSAGE_ID(1048602);
+
+const D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_MUST_USE_LOWEST_LOD =
+    D3D11_MESSAGE_ID(1048603);
+
+const D3D11_MESSAGE_ID_CREATESAMPLERSTATE_MINLOD_MUST_NOT_BE_FRACTIONAL =
+    D3D11_MESSAGE_ID(1048604);
+
+const D3D11_MESSAGE_ID_CREATESAMPLERSTATE_MAXLOD_MUST_BE_FLT_MAX =
+    D3D11_MESSAGE_ID(1048605);
+
+const D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_FIRSTARRAYSLICE_MUST_BE_ZERO =
+    D3D11_MESSAGE_ID(1048606);
+
+const D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_CUBES_MUST_HAVE_6_SIDES =
+    D3D11_MESSAGE_ID(1048607);
+
+const D3D11_MESSAGE_ID_CREATERESOURCE_NOT_BINDABLE_AS_RENDER_TARGET =
+    D3D11_MESSAGE_ID(1048608);
+
+const D3D11_MESSAGE_ID_CREATERESOURCE_NO_DWORD_INDEX_BUFFER = D3D11_MESSAGE_ID(
+  1048609,
+);
+
+const D3D11_MESSAGE_ID_CREATERESOURCE_MSAA_PRECLUDES_SHADER_RESOURCE =
+    D3D11_MESSAGE_ID(1048610);
+
+const D3D11_MESSAGE_ID_CREATERESOURCE_PRESENTATION_PRECLUDES_SHADER_RESOURCE =
+    D3D11_MESSAGE_ID(1048611);
+
+const D3D11_MESSAGE_ID_CREATEBLENDSTATE_NO_INDEPENDENT_BLEND_ENABLE =
+    D3D11_MESSAGE_ID(1048612);
+
+const D3D11_MESSAGE_ID_CREATEBLENDSTATE_NO_INDEPENDENT_WRITE_MASKS =
+    D3D11_MESSAGE_ID(1048613);
+
+const D3D11_MESSAGE_ID_CREATERESOURCE_NO_STREAM_OUT = D3D11_MESSAGE_ID(1048614);
+
+const D3D11_MESSAGE_ID_CREATERESOURCE_ONLY_VB_IB_FOR_BUFFERS = D3D11_MESSAGE_ID(
+  1048615,
+);
+
+const D3D11_MESSAGE_ID_CREATERESOURCE_NO_AUTOGEN_FOR_VOLUMES = D3D11_MESSAGE_ID(
+  1048616,
+);
+
+const D3D11_MESSAGE_ID_CREATERESOURCE_DXGI_FORMAT_R8G8B8A8_CANNOT_BE_SHARED =
+    D3D11_MESSAGE_ID(1048617);
+
+const D3D11_MESSAGE_ID_VSSHADERRESOURCES_NOT_SUPPORTED = D3D11_MESSAGE_ID(
+  1048618,
+);
+
+const D3D11_MESSAGE_ID_GEOMETRY_SHADER_NOT_SUPPORTED = D3D11_MESSAGE_ID(
+  1048619,
+);
+
+const D3D11_MESSAGE_ID_STREAM_OUT_NOT_SUPPORTED = D3D11_MESSAGE_ID(1048620);
+
+const D3D11_MESSAGE_ID_TEXT_FILTER_NOT_SUPPORTED = D3D11_MESSAGE_ID(1048621);
+
+const D3D11_MESSAGE_ID_CREATEBLENDSTATE_NO_SEPARATE_ALPHA_BLEND =
+    D3D11_MESSAGE_ID(1048622);
+
+const D3D11_MESSAGE_ID_CREATEBLENDSTATE_NO_MRT_BLEND = D3D11_MESSAGE_ID(
+  1048623,
+);
+
+const D3D11_MESSAGE_ID_CREATEBLENDSTATE_OPERATION_NOT_SUPPORTED =
+    D3D11_MESSAGE_ID(1048624);
+
+const D3D11_MESSAGE_ID_CREATESAMPLERSTATE_NO_MIRRORONCE = D3D11_MESSAGE_ID(
+  1048625,
+);
+
+const D3D11_MESSAGE_ID_DRAWINSTANCED_NOT_SUPPORTED = D3D11_MESSAGE_ID(1048626);
+
+const D3D11_MESSAGE_ID_DRAWINDEXEDINSTANCED_NOT_SUPPORTED_BELOW_9_3 =
+    D3D11_MESSAGE_ID(1048627);
+
+const D3D11_MESSAGE_ID_DRAWINDEXED_POINTLIST_UNSUPPORTED = D3D11_MESSAGE_ID(
+  1048628,
+);
+
+const D3D11_MESSAGE_ID_SETBLENDSTATE_SAMPLE_MASK_CANNOT_BE_ZERO =
+    D3D11_MESSAGE_ID(1048629);
+
+const D3D11_MESSAGE_ID_CREATERESOURCE_DIMENSION_EXCEEDS_FEATURE_LEVEL_DEFINITION =
+    D3D11_MESSAGE_ID(1048630);
+
+const D3D11_MESSAGE_ID_CREATERESOURCE_ONLY_SINGLE_MIP_LEVEL_DEPTH_STENCIL_SUPPORTED =
+    D3D11_MESSAGE_ID(1048631);
+
+const D3D11_MESSAGE_ID_DEVICE_RSSETSCISSORRECTS_NEGATIVESCISSOR =
+    D3D11_MESSAGE_ID(1048632);
+
+const D3D11_MESSAGE_ID_SLOT_ZERO_MUST_BE_D3D10_INPUT_PER_VERTEX_DATA =
+    D3D11_MESSAGE_ID(1048633);
+
+const D3D11_MESSAGE_ID_CREATERESOURCE_NON_POW_2_MIPMAP = D3D11_MESSAGE_ID(
+  1048634,
+);
+
+const D3D11_MESSAGE_ID_CREATESAMPLERSTATE_BORDER_NOT_SUPPORTED =
+    D3D11_MESSAGE_ID(1048635);
+
+const D3D11_MESSAGE_ID_OMSETRENDERTARGETS_NO_SRGB_MRT = D3D11_MESSAGE_ID(
+  1048636,
+);
+
+const D3D11_MESSAGE_ID_COPYRESOURCE_NO_3D_MISMATCHED_UPDATES = D3D11_MESSAGE_ID(
+  1048637,
+);
+
+const D3D11_MESSAGE_ID_D3D10L9_MESSAGES_END = D3D11_MESSAGE_ID(1048638);
+
+const D3D11_MESSAGE_ID_D3D11_MESSAGES_START = D3D11_MESSAGE_ID(2097152);
+
+const D3D11_MESSAGE_ID_CREATEDEPTHSTENCILVIEW_INVALIDFLAGS = D3D11_MESSAGE_ID(
+  2097153,
+);
+
+const D3D11_MESSAGE_ID_CREATEVERTEXSHADER_INVALIDCLASSLINKAGE =
+    D3D11_MESSAGE_ID(2097154);
+
+const D3D11_MESSAGE_ID_CREATEGEOMETRYSHADER_INVALIDCLASSLINKAGE =
+    D3D11_MESSAGE_ID(2097155);
+
+const D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDNUMSTREAMS =
+    D3D11_MESSAGE_ID(2097156);
+
+const D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDSTREAMTORASTERIZER =
+    D3D11_MESSAGE_ID(2097157);
+
+const D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_UNEXPECTEDSTREAMS =
+    D3D11_MESSAGE_ID(2097158);
+
+const D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDCLASSLINKAGE =
+    D3D11_MESSAGE_ID(2097159);
+
+const D3D11_MESSAGE_ID_CREATEPIXELSHADER_INVALIDCLASSLINKAGE = D3D11_MESSAGE_ID(
+  2097160,
+);
+
+const D3D11_MESSAGE_ID_CREATEDEFERREDCONTEXT_INVALID_COMMANDLISTFLAGS =
+    D3D11_MESSAGE_ID(2097161);
+
+const D3D11_MESSAGE_ID_CREATEDEFERREDCONTEXT_SINGLETHREADED = D3D11_MESSAGE_ID(
+  2097162,
+);
+
+const D3D11_MESSAGE_ID_CREATEDEFERREDCONTEXT_INVALIDARG_RETURN =
+    D3D11_MESSAGE_ID(2097163);
+
+const D3D11_MESSAGE_ID_CREATEDEFERREDCONTEXT_INVALID_CALL_RETURN =
+    D3D11_MESSAGE_ID(2097164);
+
+const D3D11_MESSAGE_ID_CREATEDEFERREDCONTEXT_OUTOFMEMORY_RETURN =
+    D3D11_MESSAGE_ID(2097165);
+
+const D3D11_MESSAGE_ID_FINISHDISPLAYLIST_ONIMMEDIATECONTEXT = D3D11_MESSAGE_ID(
+  2097166,
+);
+
+const D3D11_MESSAGE_ID_FINISHDISPLAYLIST_OUTOFMEMORY_RETURN = D3D11_MESSAGE_ID(
+  2097167,
+);
+
+const D3D11_MESSAGE_ID_FINISHDISPLAYLIST_INVALID_CALL_RETURN = D3D11_MESSAGE_ID(
+  2097168,
+);
+
+const D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDSTREAM =
+    D3D11_MESSAGE_ID(2097169);
+
+const D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_UNEXPECTEDENTRIES =
+    D3D11_MESSAGE_ID(2097170);
+
+const D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_UNEXPECTEDSTRIDES =
+    D3D11_MESSAGE_ID(2097171);
+
+const D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDNUMSTRIDES =
+    D3D11_MESSAGE_ID(2097172);
+
+const D3D11_MESSAGE_ID_DEVICE_HSSETSHADERRESOURCES_HAZARD = D3D11_MESSAGE_ID(
+  2097173,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_HSSETCONSTANTBUFFERS_HAZARD = D3D11_MESSAGE_ID(
+  2097174,
+);
+
+const D3D11_MESSAGE_ID_HSSETSHADERRESOURCES_UNBINDDELETINGOBJECT =
+    D3D11_MESSAGE_ID(2097175);
+
+const D3D11_MESSAGE_ID_HSSETCONSTANTBUFFERS_UNBINDDELETINGOBJECT =
+    D3D11_MESSAGE_ID(2097176);
+
+const D3D11_MESSAGE_ID_CREATEHULLSHADER_INVALIDCALL = D3D11_MESSAGE_ID(2097177);
+
+const D3D11_MESSAGE_ID_CREATEHULLSHADER_OUTOFMEMORY = D3D11_MESSAGE_ID(2097178);
+
+const D3D11_MESSAGE_ID_CREATEHULLSHADER_INVALIDSHADERBYTECODE =
+    D3D11_MESSAGE_ID(2097179);
+
+const D3D11_MESSAGE_ID_CREATEHULLSHADER_INVALIDSHADERTYPE = D3D11_MESSAGE_ID(
+  2097180,
+);
+
+const D3D11_MESSAGE_ID_CREATEHULLSHADER_INVALIDCLASSLINKAGE = D3D11_MESSAGE_ID(
+  2097181,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_HSSETSHADERRESOURCES_VIEWS_EMPTY =
+    D3D11_MESSAGE_ID(2097182);
+
+const D3D11_MESSAGE_ID_HSSETCONSTANTBUFFERS_INVALIDBUFFER = D3D11_MESSAGE_ID(
+  2097183,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_HSSETCONSTANTBUFFERS_BUFFERS_EMPTY =
+    D3D11_MESSAGE_ID(2097184);
+
+const D3D11_MESSAGE_ID_DEVICE_HSSETSAMPLERS_SAMPLERS_EMPTY = D3D11_MESSAGE_ID(
+  2097185,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_HSGETSHADERRESOURCES_VIEWS_EMPTY =
+    D3D11_MESSAGE_ID(2097186);
+
+const D3D11_MESSAGE_ID_DEVICE_HSGETCONSTANTBUFFERS_BUFFERS_EMPTY =
+    D3D11_MESSAGE_ID(2097187);
+
+const D3D11_MESSAGE_ID_DEVICE_HSGETSAMPLERS_SAMPLERS_EMPTY = D3D11_MESSAGE_ID(
+  2097188,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_DSSETSHADERRESOURCES_HAZARD = D3D11_MESSAGE_ID(
+  2097189,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_DSSETCONSTANTBUFFERS_HAZARD = D3D11_MESSAGE_ID(
+  2097190,
+);
+
+const D3D11_MESSAGE_ID_DSSETSHADERRESOURCES_UNBINDDELETINGOBJECT =
+    D3D11_MESSAGE_ID(2097191);
+
+const D3D11_MESSAGE_ID_DSSETCONSTANTBUFFERS_UNBINDDELETINGOBJECT =
+    D3D11_MESSAGE_ID(2097192);
+
+const D3D11_MESSAGE_ID_CREATEDOMAINSHADER_INVALIDCALL = D3D11_MESSAGE_ID(
+  2097193,
+);
+
+const D3D11_MESSAGE_ID_CREATEDOMAINSHADER_OUTOFMEMORY = D3D11_MESSAGE_ID(
+  2097194,
+);
+
+const D3D11_MESSAGE_ID_CREATEDOMAINSHADER_INVALIDSHADERBYTECODE =
+    D3D11_MESSAGE_ID(2097195);
+
+const D3D11_MESSAGE_ID_CREATEDOMAINSHADER_INVALIDSHADERTYPE = D3D11_MESSAGE_ID(
+  2097196,
+);
+
+const D3D11_MESSAGE_ID_CREATEDOMAINSHADER_INVALIDCLASSLINKAGE =
+    D3D11_MESSAGE_ID(2097197);
+
+const D3D11_MESSAGE_ID_DEVICE_DSSETSHADERRESOURCES_VIEWS_EMPTY =
+    D3D11_MESSAGE_ID(2097198);
+
+const D3D11_MESSAGE_ID_DSSETCONSTANTBUFFERS_INVALIDBUFFER = D3D11_MESSAGE_ID(
+  2097199,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_DSSETCONSTANTBUFFERS_BUFFERS_EMPTY =
+    D3D11_MESSAGE_ID(2097200);
+
+const D3D11_MESSAGE_ID_DEVICE_DSSETSAMPLERS_SAMPLERS_EMPTY = D3D11_MESSAGE_ID(
+  2097201,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_DSGETSHADERRESOURCES_VIEWS_EMPTY =
+    D3D11_MESSAGE_ID(2097202);
+
+const D3D11_MESSAGE_ID_DEVICE_DSGETCONSTANTBUFFERS_BUFFERS_EMPTY =
+    D3D11_MESSAGE_ID(2097203);
+
+const D3D11_MESSAGE_ID_DEVICE_DSGETSAMPLERS_SAMPLERS_EMPTY = D3D11_MESSAGE_ID(
+  2097204,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_HS_XOR_DS_MISMATCH = D3D11_MESSAGE_ID(
+  2097205,
+);
+
+const D3D11_MESSAGE_ID_DEFERRED_CONTEXT_REMOVAL_PROCESS_AT_FAULT =
+    D3D11_MESSAGE_ID(2097206);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAWINDIRECT_INVALID_ARG_BUFFER =
+    D3D11_MESSAGE_ID(2097207);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAWINDIRECT_OFFSET_UNALIGNED = D3D11_MESSAGE_ID(
+  2097208,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAWINDIRECT_OFFSET_OVERFLOW = D3D11_MESSAGE_ID(
+  2097209,
+);
+
+const D3D11_MESSAGE_ID_RESOURCE_MAP_INVALIDMAPTYPE = D3D11_MESSAGE_ID(2097210);
+
+const D3D11_MESSAGE_ID_RESOURCE_MAP_INVALIDSUBRESOURCE = D3D11_MESSAGE_ID(
+  2097211,
+);
+
+const D3D11_MESSAGE_ID_RESOURCE_MAP_INVALIDFLAGS = D3D11_MESSAGE_ID(2097212);
+
+const D3D11_MESSAGE_ID_RESOURCE_MAP_ALREADYMAPPED = D3D11_MESSAGE_ID(2097213);
+
+const D3D11_MESSAGE_ID_RESOURCE_MAP_DEVICEREMOVED_RETURN = D3D11_MESSAGE_ID(
+  2097214,
+);
+
+const D3D11_MESSAGE_ID_RESOURCE_MAP_OUTOFMEMORY_RETURN = D3D11_MESSAGE_ID(
+  2097215,
+);
+
+const D3D11_MESSAGE_ID_RESOURCE_MAP_WITHOUT_INITIAL_DISCARD = D3D11_MESSAGE_ID(
+  2097216,
+);
+
+const D3D11_MESSAGE_ID_RESOURCE_UNMAP_INVALIDSUBRESOURCE = D3D11_MESSAGE_ID(
+  2097217,
+);
+
+const D3D11_MESSAGE_ID_RESOURCE_UNMAP_NOTMAPPED = D3D11_MESSAGE_ID(2097218);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_RASTERIZING_CONTROL_POINTS =
+    D3D11_MESSAGE_ID(2097219);
+
+const D3D11_MESSAGE_ID_DEVICE_IASETPRIMITIVETOPOLOGY_TOPOLOGY_UNSUPPORTED =
+    D3D11_MESSAGE_ID(2097220);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_HS_DS_SIGNATURE_MISMATCH = D3D11_MESSAGE_ID(
+  2097221,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_HULL_SHADER_INPUT_TOPOLOGY_MISMATCH =
+    D3D11_MESSAGE_ID(2097222);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_HS_DS_CONTROL_POINT_COUNT_MISMATCH =
+    D3D11_MESSAGE_ID(2097223);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_HS_DS_TESSELLATOR_DOMAIN_MISMATCH =
+    D3D11_MESSAGE_ID(2097224);
+
+const D3D11_MESSAGE_ID_CREATE_CONTEXT = D3D11_MESSAGE_ID(2097225);
+
+const D3D11_MESSAGE_ID_LIVE_CONTEXT = D3D11_MESSAGE_ID(2097226);
+
+const D3D11_MESSAGE_ID_DESTROY_CONTEXT = D3D11_MESSAGE_ID(2097227);
+
+const D3D11_MESSAGE_ID_CREATE_BUFFER = D3D11_MESSAGE_ID(2097228);
+
+const D3D11_MESSAGE_ID_LIVE_BUFFER_WIN7 = D3D11_MESSAGE_ID(2097229);
+
+const D3D11_MESSAGE_ID_DESTROY_BUFFER = D3D11_MESSAGE_ID(2097230);
+
+const D3D11_MESSAGE_ID_CREATE_TEXTURE1D = D3D11_MESSAGE_ID(2097231);
+
+const D3D11_MESSAGE_ID_LIVE_TEXTURE1D_WIN7 = D3D11_MESSAGE_ID(2097232);
+
+const D3D11_MESSAGE_ID_DESTROY_TEXTURE1D = D3D11_MESSAGE_ID(2097233);
+
+const D3D11_MESSAGE_ID_CREATE_TEXTURE2D = D3D11_MESSAGE_ID(2097234);
+
+const D3D11_MESSAGE_ID_LIVE_TEXTURE2D_WIN7 = D3D11_MESSAGE_ID(2097235);
+
+const D3D11_MESSAGE_ID_DESTROY_TEXTURE2D = D3D11_MESSAGE_ID(2097236);
+
+const D3D11_MESSAGE_ID_CREATE_TEXTURE3D = D3D11_MESSAGE_ID(2097237);
+
+const D3D11_MESSAGE_ID_LIVE_TEXTURE3D_WIN7 = D3D11_MESSAGE_ID(2097238);
+
+const D3D11_MESSAGE_ID_DESTROY_TEXTURE3D = D3D11_MESSAGE_ID(2097239);
+
+const D3D11_MESSAGE_ID_CREATE_SHADERRESOURCEVIEW = D3D11_MESSAGE_ID(2097240);
+
+const D3D11_MESSAGE_ID_LIVE_SHADERRESOURCEVIEW_WIN7 = D3D11_MESSAGE_ID(2097241);
+
+const D3D11_MESSAGE_ID_DESTROY_SHADERRESOURCEVIEW = D3D11_MESSAGE_ID(2097242);
+
+const D3D11_MESSAGE_ID_CREATE_RENDERTARGETVIEW = D3D11_MESSAGE_ID(2097243);
+
+const D3D11_MESSAGE_ID_LIVE_RENDERTARGETVIEW_WIN7 = D3D11_MESSAGE_ID(2097244);
+
+const D3D11_MESSAGE_ID_DESTROY_RENDERTARGETVIEW = D3D11_MESSAGE_ID(2097245);
+
+const D3D11_MESSAGE_ID_CREATE_DEPTHSTENCILVIEW = D3D11_MESSAGE_ID(2097246);
+
+const D3D11_MESSAGE_ID_LIVE_DEPTHSTENCILVIEW_WIN7 = D3D11_MESSAGE_ID(2097247);
+
+const D3D11_MESSAGE_ID_DESTROY_DEPTHSTENCILVIEW = D3D11_MESSAGE_ID(2097248);
+
+const D3D11_MESSAGE_ID_CREATE_VERTEXSHADER = D3D11_MESSAGE_ID(2097249);
+
+const D3D11_MESSAGE_ID_LIVE_VERTEXSHADER_WIN7 = D3D11_MESSAGE_ID(2097250);
+
+const D3D11_MESSAGE_ID_DESTROY_VERTEXSHADER = D3D11_MESSAGE_ID(2097251);
+
+const D3D11_MESSAGE_ID_CREATE_HULLSHADER = D3D11_MESSAGE_ID(2097252);
+
+const D3D11_MESSAGE_ID_LIVE_HULLSHADER = D3D11_MESSAGE_ID(2097253);
+
+const D3D11_MESSAGE_ID_DESTROY_HULLSHADER = D3D11_MESSAGE_ID(2097254);
+
+const D3D11_MESSAGE_ID_CREATE_DOMAINSHADER = D3D11_MESSAGE_ID(2097255);
+
+const D3D11_MESSAGE_ID_LIVE_DOMAINSHADER = D3D11_MESSAGE_ID(2097256);
+
+const D3D11_MESSAGE_ID_DESTROY_DOMAINSHADER = D3D11_MESSAGE_ID(2097257);
+
+const D3D11_MESSAGE_ID_CREATE_GEOMETRYSHADER = D3D11_MESSAGE_ID(2097258);
+
+const D3D11_MESSAGE_ID_LIVE_GEOMETRYSHADER_WIN7 = D3D11_MESSAGE_ID(2097259);
+
+const D3D11_MESSAGE_ID_DESTROY_GEOMETRYSHADER = D3D11_MESSAGE_ID(2097260);
+
+const D3D11_MESSAGE_ID_CREATE_PIXELSHADER = D3D11_MESSAGE_ID(2097261);
+
+const D3D11_MESSAGE_ID_LIVE_PIXELSHADER_WIN7 = D3D11_MESSAGE_ID(2097262);
+
+const D3D11_MESSAGE_ID_DESTROY_PIXELSHADER = D3D11_MESSAGE_ID(2097263);
+
+const D3D11_MESSAGE_ID_CREATE_INPUTLAYOUT = D3D11_MESSAGE_ID(2097264);
+
+const D3D11_MESSAGE_ID_LIVE_INPUTLAYOUT_WIN7 = D3D11_MESSAGE_ID(2097265);
+
+const D3D11_MESSAGE_ID_DESTROY_INPUTLAYOUT = D3D11_MESSAGE_ID(2097266);
+
+const D3D11_MESSAGE_ID_CREATE_SAMPLER = D3D11_MESSAGE_ID(2097267);
+
+const D3D11_MESSAGE_ID_LIVE_SAMPLER_WIN7 = D3D11_MESSAGE_ID(2097268);
+
+const D3D11_MESSAGE_ID_DESTROY_SAMPLER = D3D11_MESSAGE_ID(2097269);
+
+const D3D11_MESSAGE_ID_CREATE_BLENDSTATE = D3D11_MESSAGE_ID(2097270);
+
+const D3D11_MESSAGE_ID_LIVE_BLENDSTATE_WIN7 = D3D11_MESSAGE_ID(2097271);
+
+const D3D11_MESSAGE_ID_DESTROY_BLENDSTATE = D3D11_MESSAGE_ID(2097272);
+
+const D3D11_MESSAGE_ID_CREATE_DEPTHSTENCILSTATE = D3D11_MESSAGE_ID(2097273);
+
+const D3D11_MESSAGE_ID_LIVE_DEPTHSTENCILSTATE_WIN7 = D3D11_MESSAGE_ID(2097274);
+
+const D3D11_MESSAGE_ID_DESTROY_DEPTHSTENCILSTATE = D3D11_MESSAGE_ID(2097275);
+
+const D3D11_MESSAGE_ID_CREATE_RASTERIZERSTATE = D3D11_MESSAGE_ID(2097276);
+
+const D3D11_MESSAGE_ID_LIVE_RASTERIZERSTATE_WIN7 = D3D11_MESSAGE_ID(2097277);
+
+const D3D11_MESSAGE_ID_DESTROY_RASTERIZERSTATE = D3D11_MESSAGE_ID(2097278);
+
+const D3D11_MESSAGE_ID_CREATE_QUERY = D3D11_MESSAGE_ID(2097279);
+
+const D3D11_MESSAGE_ID_LIVE_QUERY_WIN7 = D3D11_MESSAGE_ID(2097280);
+
+const D3D11_MESSAGE_ID_DESTROY_QUERY = D3D11_MESSAGE_ID(2097281);
+
+const D3D11_MESSAGE_ID_CREATE_PREDICATE = D3D11_MESSAGE_ID(2097282);
+
+const D3D11_MESSAGE_ID_LIVE_PREDICATE_WIN7 = D3D11_MESSAGE_ID(2097283);
+
+const D3D11_MESSAGE_ID_DESTROY_PREDICATE = D3D11_MESSAGE_ID(2097284);
+
+const D3D11_MESSAGE_ID_CREATE_COUNTER = D3D11_MESSAGE_ID(2097285);
+
+const D3D11_MESSAGE_ID_DESTROY_COUNTER = D3D11_MESSAGE_ID(2097286);
+
+const D3D11_MESSAGE_ID_CREATE_COMMANDLIST = D3D11_MESSAGE_ID(2097287);
+
+const D3D11_MESSAGE_ID_LIVE_COMMANDLIST = D3D11_MESSAGE_ID(2097288);
+
+const D3D11_MESSAGE_ID_DESTROY_COMMANDLIST = D3D11_MESSAGE_ID(2097289);
+
+const D3D11_MESSAGE_ID_CREATE_CLASSINSTANCE = D3D11_MESSAGE_ID(2097290);
+
+const D3D11_MESSAGE_ID_LIVE_CLASSINSTANCE = D3D11_MESSAGE_ID(2097291);
+
+const D3D11_MESSAGE_ID_DESTROY_CLASSINSTANCE = D3D11_MESSAGE_ID(2097292);
+
+const D3D11_MESSAGE_ID_CREATE_CLASSLINKAGE = D3D11_MESSAGE_ID(2097293);
+
+const D3D11_MESSAGE_ID_LIVE_CLASSLINKAGE = D3D11_MESSAGE_ID(2097294);
+
+const D3D11_MESSAGE_ID_DESTROY_CLASSLINKAGE = D3D11_MESSAGE_ID(2097295);
+
+const D3D11_MESSAGE_ID_LIVE_DEVICE_WIN7 = D3D11_MESSAGE_ID(2097296);
+
+const D3D11_MESSAGE_ID_LIVE_OBJECT_SUMMARY_WIN7 = D3D11_MESSAGE_ID(2097297);
+
+const D3D11_MESSAGE_ID_CREATE_COMPUTESHADER = D3D11_MESSAGE_ID(2097298);
+
+const D3D11_MESSAGE_ID_LIVE_COMPUTESHADER = D3D11_MESSAGE_ID(2097299);
+
+const D3D11_MESSAGE_ID_DESTROY_COMPUTESHADER = D3D11_MESSAGE_ID(2097300);
+
+const D3D11_MESSAGE_ID_CREATE_UNORDEREDACCESSVIEW = D3D11_MESSAGE_ID(2097301);
+
+const D3D11_MESSAGE_ID_LIVE_UNORDEREDACCESSVIEW = D3D11_MESSAGE_ID(2097302);
+
+const D3D11_MESSAGE_ID_DESTROY_UNORDEREDACCESSVIEW = D3D11_MESSAGE_ID(2097303);
+
+const D3D11_MESSAGE_ID_DEVICE_SETSHADER_INTERFACES_FEATURELEVEL =
+    D3D11_MESSAGE_ID(2097304);
+
+const D3D11_MESSAGE_ID_DEVICE_SETSHADER_INTERFACE_COUNT_MISMATCH =
+    D3D11_MESSAGE_ID(2097305);
+
+const D3D11_MESSAGE_ID_DEVICE_SETSHADER_INVALID_INSTANCE = D3D11_MESSAGE_ID(
+  2097306,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_SETSHADER_INVALID_INSTANCE_INDEX =
+    D3D11_MESSAGE_ID(2097307);
+
+const D3D11_MESSAGE_ID_DEVICE_SETSHADER_INVALID_INSTANCE_TYPE =
+    D3D11_MESSAGE_ID(2097308);
+
+const D3D11_MESSAGE_ID_DEVICE_SETSHADER_INVALID_INSTANCE_DATA =
+    D3D11_MESSAGE_ID(2097309);
+
+const D3D11_MESSAGE_ID_DEVICE_SETSHADER_UNBOUND_INSTANCE_DATA =
+    D3D11_MESSAGE_ID(2097310);
+
+const D3D11_MESSAGE_ID_DEVICE_SETSHADER_INSTANCE_DATA_BINDINGS =
+    D3D11_MESSAGE_ID(2097311);
+
+const D3D11_MESSAGE_ID_DEVICE_CREATESHADER_CLASSLINKAGE_FULL = D3D11_MESSAGE_ID(
+  2097312,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_CHECKFEATURESUPPORT_UNRECOGNIZED_FEATURE =
+    D3D11_MESSAGE_ID(2097313);
+
+const D3D11_MESSAGE_ID_DEVICE_CHECKFEATURESUPPORT_MISMATCHED_DATA_SIZE =
+    D3D11_MESSAGE_ID(2097314);
+
+const D3D11_MESSAGE_ID_DEVICE_CHECKFEATURESUPPORT_INVALIDARG_RETURN =
+    D3D11_MESSAGE_ID(2097315);
+
+const D3D11_MESSAGE_ID_DEVICE_CSSETSHADERRESOURCES_HAZARD = D3D11_MESSAGE_ID(
+  2097316,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_CSSETCONSTANTBUFFERS_HAZARD = D3D11_MESSAGE_ID(
+  2097317,
+);
+
+const D3D11_MESSAGE_ID_CSSETSHADERRESOURCES_UNBINDDELETINGOBJECT =
+    D3D11_MESSAGE_ID(2097318);
+
+const D3D11_MESSAGE_ID_CSSETCONSTANTBUFFERS_UNBINDDELETINGOBJECT =
+    D3D11_MESSAGE_ID(2097319);
+
+const D3D11_MESSAGE_ID_CREATECOMPUTESHADER_INVALIDCALL = D3D11_MESSAGE_ID(
+  2097320,
+);
+
+const D3D11_MESSAGE_ID_CREATECOMPUTESHADER_OUTOFMEMORY = D3D11_MESSAGE_ID(
+  2097321,
+);
+
+const D3D11_MESSAGE_ID_CREATECOMPUTESHADER_INVALIDSHADERBYTECODE =
+    D3D11_MESSAGE_ID(2097322);
+
+const D3D11_MESSAGE_ID_CREATECOMPUTESHADER_INVALIDSHADERTYPE = D3D11_MESSAGE_ID(
+  2097323,
+);
+
+const D3D11_MESSAGE_ID_CREATECOMPUTESHADER_INVALIDCLASSLINKAGE =
+    D3D11_MESSAGE_ID(2097324);
+
+const D3D11_MESSAGE_ID_DEVICE_CSSETSHADERRESOURCES_VIEWS_EMPTY =
+    D3D11_MESSAGE_ID(2097325);
+
+const D3D11_MESSAGE_ID_CSSETCONSTANTBUFFERS_INVALIDBUFFER = D3D11_MESSAGE_ID(
+  2097326,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_CSSETCONSTANTBUFFERS_BUFFERS_EMPTY =
+    D3D11_MESSAGE_ID(2097327);
+
+const D3D11_MESSAGE_ID_DEVICE_CSSETSAMPLERS_SAMPLERS_EMPTY = D3D11_MESSAGE_ID(
+  2097328,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_CSGETSHADERRESOURCES_VIEWS_EMPTY =
+    D3D11_MESSAGE_ID(2097329);
+
+const D3D11_MESSAGE_ID_DEVICE_CSGETCONSTANTBUFFERS_BUFFERS_EMPTY =
+    D3D11_MESSAGE_ID(2097330);
+
+const D3D11_MESSAGE_ID_DEVICE_CSGETSAMPLERS_SAMPLERS_EMPTY = D3D11_MESSAGE_ID(
+  2097331,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_CREATEVERTEXSHADER_DOUBLEFLOATOPSNOTSUPPORTED =
+    D3D11_MESSAGE_ID(2097332);
+
+const D3D11_MESSAGE_ID_DEVICE_CREATEHULLSHADER_DOUBLEFLOATOPSNOTSUPPORTED =
+    D3D11_MESSAGE_ID(2097333);
+
+const D3D11_MESSAGE_ID_DEVICE_CREATEDOMAINSHADER_DOUBLEFLOATOPSNOTSUPPORTED =
+    D3D11_MESSAGE_ID(2097334);
+
+const D3D11_MESSAGE_ID_DEVICE_CREATEGEOMETRYSHADER_DOUBLEFLOATOPSNOTSUPPORTED =
+    D3D11_MESSAGE_ID(2097335);
+
+const D3D11_MESSAGE_ID_DEVICE_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_DOUBLEFLOATOPSNOTSUPPORTED =
+    D3D11_MESSAGE_ID(2097336);
+
+const D3D11_MESSAGE_ID_DEVICE_CREATEPIXELSHADER_DOUBLEFLOATOPSNOTSUPPORTED =
+    D3D11_MESSAGE_ID(2097337);
+
+const D3D11_MESSAGE_ID_DEVICE_CREATECOMPUTESHADER_DOUBLEFLOATOPSNOTSUPPORTED =
+    D3D11_MESSAGE_ID(2097338);
+
+const D3D11_MESSAGE_ID_CREATEBUFFER_INVALIDSTRUCTURESTRIDE = D3D11_MESSAGE_ID(
+  2097339,
+);
+
+const D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_INVALIDFLAGS = D3D11_MESSAGE_ID(
+  2097340,
+);
+
+const D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_INVALIDRESOURCE =
+    D3D11_MESSAGE_ID(2097341);
+
+const D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_INVALIDDESC = D3D11_MESSAGE_ID(
+  2097342,
+);
+
+const D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_INVALIDFORMAT =
+    D3D11_MESSAGE_ID(2097343);
+
+const D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_INVALIDDIMENSIONS =
+    D3D11_MESSAGE_ID(2097344);
+
+const D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_UNRECOGNIZEDFORMAT =
+    D3D11_MESSAGE_ID(2097345);
+
+const D3D11_MESSAGE_ID_DEVICE_OMSETRENDERTARGETSANDUNORDEREDACCESSVIEWS_HAZARD =
+    D3D11_MESSAGE_ID(2097346);
+
+const D3D11_MESSAGE_ID_DEVICE_OMSETRENDERTARGETSANDUNORDEREDACCESSVIEWS_OVERLAPPING_OLD_SLOTS =
+    D3D11_MESSAGE_ID(2097347);
+
+const D3D11_MESSAGE_ID_DEVICE_OMSETRENDERTARGETSANDUNORDEREDACCESSVIEWS_NO_OP =
+    D3D11_MESSAGE_ID(2097348);
+
+const D3D11_MESSAGE_ID_CSSETUNORDEREDACCESSVIEWS_UNBINDDELETINGOBJECT =
+    D3D11_MESSAGE_ID(2097349);
+
+const D3D11_MESSAGE_ID_PSSETUNORDEREDACCESSVIEWS_UNBINDDELETINGOBJECT =
+    D3D11_MESSAGE_ID(2097350);
+
+const D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_INVALIDARG_RETURN =
+    D3D11_MESSAGE_ID(2097351);
+
+const D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_OUTOFMEMORY_RETURN =
+    D3D11_MESSAGE_ID(2097352);
+
+const D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_TOOMANYOBJECTS =
+    D3D11_MESSAGE_ID(2097353);
+
+const D3D11_MESSAGE_ID_DEVICE_CSSETUNORDEREDACCESSVIEWS_HAZARD =
+    D3D11_MESSAGE_ID(2097354);
+
+const D3D11_MESSAGE_ID_CLEARUNORDEREDACCESSVIEW_DENORMFLUSH = D3D11_MESSAGE_ID(
+  2097355,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_CSSETUNORDEREDACCESSS_VIEWS_EMPTY =
+    D3D11_MESSAGE_ID(2097356);
+
+const D3D11_MESSAGE_ID_DEVICE_CSGETUNORDEREDACCESSS_VIEWS_EMPTY =
+    D3D11_MESSAGE_ID(2097357);
+
+const D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_INVALIDFLAGS =
+    D3D11_MESSAGE_ID(2097358);
+
+const D3D11_MESSAGE_ID_CREATESHADERRESESOURCEVIEW_TOOMANYOBJECTS =
+    D3D11_MESSAGE_ID(2097359);
+
+const D3D11_MESSAGE_ID_DEVICE_DISPATCHINDIRECT_INVALID_ARG_BUFFER =
+    D3D11_MESSAGE_ID(2097360);
+
+const D3D11_MESSAGE_ID_DEVICE_DISPATCHINDIRECT_OFFSET_UNALIGNED =
+    D3D11_MESSAGE_ID(2097361);
+
+const D3D11_MESSAGE_ID_DEVICE_DISPATCHINDIRECT_OFFSET_OVERFLOW =
+    D3D11_MESSAGE_ID(2097362);
+
+const D3D11_MESSAGE_ID_DEVICE_SETRESOURCEMINLOD_INVALIDCONTEXT =
+    D3D11_MESSAGE_ID(2097363);
+
+const D3D11_MESSAGE_ID_DEVICE_SETRESOURCEMINLOD_INVALIDRESOURCE =
+    D3D11_MESSAGE_ID(2097364);
+
+const D3D11_MESSAGE_ID_DEVICE_SETRESOURCEMINLOD_INVALIDMINLOD =
+    D3D11_MESSAGE_ID(2097365);
+
+const D3D11_MESSAGE_ID_DEVICE_GETRESOURCEMINLOD_INVALIDCONTEXT =
+    D3D11_MESSAGE_ID(2097366);
+
+const D3D11_MESSAGE_ID_DEVICE_GETRESOURCEMINLOD_INVALIDRESOURCE =
+    D3D11_MESSAGE_ID(2097367);
+
+const D3D11_MESSAGE_ID_OMSETDEPTHSTENCIL_UNBINDDELETINGOBJECT =
+    D3D11_MESSAGE_ID(2097368);
+
+const D3D11_MESSAGE_ID_CLEARDEPTHSTENCILVIEW_DEPTH_READONLY = D3D11_MESSAGE_ID(
+  2097369,
+);
+
+const D3D11_MESSAGE_ID_CLEARDEPTHSTENCILVIEW_STENCIL_READONLY =
+    D3D11_MESSAGE_ID(2097370);
+
+const D3D11_MESSAGE_ID_CHECKFEATURESUPPORT_FORMAT_DEPRECATED = D3D11_MESSAGE_ID(
+  2097371,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_RETURN_TYPE_MISMATCH =
+    D3D11_MESSAGE_ID(2097372);
+
+const D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_NOT_SET = D3D11_MESSAGE_ID(
+  2097373,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_UNORDEREDACCESSVIEW_RENDERTARGETVIEW_OVERLAP =
+    D3D11_MESSAGE_ID(2097374);
+
+const D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_DIMENSION_MISMATCH =
+    D3D11_MESSAGE_ID(2097375);
+
+const D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_APPEND_UNSUPPORTED =
+    D3D11_MESSAGE_ID(2097376);
+
+const D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_ATOMICS_UNSUPPORTED =
+    D3D11_MESSAGE_ID(2097377);
+
+const D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_STRUCTURE_STRIDE_MISMATCH =
+    D3D11_MESSAGE_ID(2097378);
+
+const D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_BUFFER_TYPE_MISMATCH =
+    D3D11_MESSAGE_ID(2097379);
+
+const D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_RAW_UNSUPPORTED =
+    D3D11_MESSAGE_ID(2097380);
+
+const D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_FORMAT_LD_UNSUPPORTED =
+    D3D11_MESSAGE_ID(2097381);
+
+const D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_FORMAT_STORE_UNSUPPORTED =
+    D3D11_MESSAGE_ID(2097382);
+
+const D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_ATOMIC_ADD_UNSUPPORTED =
+    D3D11_MESSAGE_ID(2097383);
+
+const D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_ATOMIC_BITWISE_OPS_UNSUPPORTED =
+    D3D11_MESSAGE_ID(2097384);
+
+const D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_ATOMIC_CMPSTORE_CMPEXCHANGE_UNSUPPORTED =
+    D3D11_MESSAGE_ID(2097385);
+
+const D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_ATOMIC_EXCHANGE_UNSUPPORTED =
+    D3D11_MESSAGE_ID(2097386);
+
+const D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_ATOMIC_SIGNED_MINMAX_UNSUPPORTED =
+    D3D11_MESSAGE_ID(2097387);
+
+const D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_ATOMIC_UNSIGNED_MINMAX_UNSUPPORTED =
+    D3D11_MESSAGE_ID(2097388);
+
+const D3D11_MESSAGE_ID_DEVICE_DISPATCH_BOUND_RESOURCE_MAPPED = D3D11_MESSAGE_ID(
+  2097389,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_DISPATCH_THREADGROUPCOUNT_OVERFLOW =
+    D3D11_MESSAGE_ID(2097390);
+
+const D3D11_MESSAGE_ID_DEVICE_DISPATCH_THREADGROUPCOUNT_ZERO = D3D11_MESSAGE_ID(
+  2097391,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_SHADERRESOURCEVIEW_STRUCTURE_STRIDE_MISMATCH =
+    D3D11_MESSAGE_ID(2097392);
+
+const D3D11_MESSAGE_ID_DEVICE_SHADERRESOURCEVIEW_BUFFER_TYPE_MISMATCH =
+    D3D11_MESSAGE_ID(2097393);
+
+const D3D11_MESSAGE_ID_DEVICE_SHADERRESOURCEVIEW_RAW_UNSUPPORTED =
+    D3D11_MESSAGE_ID(2097394);
+
+const D3D11_MESSAGE_ID_DEVICE_DISPATCH_UNSUPPORTED = D3D11_MESSAGE_ID(2097395);
+
+const D3D11_MESSAGE_ID_DEVICE_DISPATCHINDIRECT_UNSUPPORTED = D3D11_MESSAGE_ID(
+  2097396,
+);
+
+const D3D11_MESSAGE_ID_COPYSTRUCTURECOUNT_INVALIDOFFSET = D3D11_MESSAGE_ID(
+  2097397,
+);
+
+const D3D11_MESSAGE_ID_COPYSTRUCTURECOUNT_LARGEOFFSET = D3D11_MESSAGE_ID(
+  2097398,
+);
+
+const D3D11_MESSAGE_ID_COPYSTRUCTURECOUNT_INVALIDDESTINATIONSTATE =
+    D3D11_MESSAGE_ID(2097399);
+
+const D3D11_MESSAGE_ID_COPYSTRUCTURECOUNT_INVALIDSOURCESTATE = D3D11_MESSAGE_ID(
+  2097400,
+);
+
+const D3D11_MESSAGE_ID_CHECKFORMATSUPPORT_FORMAT_NOT_SUPPORTED =
+    D3D11_MESSAGE_ID(2097401);
+
+const D3D11_MESSAGE_ID_DEVICE_CSSETUNORDEREDACCESSVIEWS_INVALIDVIEW =
+    D3D11_MESSAGE_ID(2097402);
+
+const D3D11_MESSAGE_ID_DEVICE_CSSETUNORDEREDACCESSVIEWS_INVALIDOFFSET =
+    D3D11_MESSAGE_ID(2097403);
+
+const D3D11_MESSAGE_ID_DEVICE_CSSETUNORDEREDACCESSVIEWS_TOOMANYVIEWS =
+    D3D11_MESSAGE_ID(2097404);
+
+const D3D11_MESSAGE_ID_CLEARUNORDEREDACCESSVIEWFLOAT_INVALIDFORMAT =
+    D3D11_MESSAGE_ID(2097405);
+
+const D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_COUNTER_UNSUPPORTED =
+    D3D11_MESSAGE_ID(2097406);
+
+const D3D11_MESSAGE_ID_REF_WARNING = D3D11_MESSAGE_ID(2097407);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_PIXEL_SHADER_WITHOUT_RTV_OR_DSV =
+    D3D11_MESSAGE_ID(2097408);
+
+const D3D11_MESSAGE_ID_SHADER_ABORT = D3D11_MESSAGE_ID(2097409);
+
+const D3D11_MESSAGE_ID_SHADER_MESSAGE = D3D11_MESSAGE_ID(2097410);
+
+const D3D11_MESSAGE_ID_SHADER_ERROR = D3D11_MESSAGE_ID(2097411);
+
+const D3D11_MESSAGE_ID_OFFERRESOURCES_INVALIDRESOURCE = D3D11_MESSAGE_ID(
+  2097412,
+);
+
+const D3D11_MESSAGE_ID_HSSETSAMPLERS_UNBINDDELETINGOBJECT = D3D11_MESSAGE_ID(
+  2097413,
+);
+
+const D3D11_MESSAGE_ID_DSSETSAMPLERS_UNBINDDELETINGOBJECT = D3D11_MESSAGE_ID(
+  2097414,
+);
+
+const D3D11_MESSAGE_ID_CSSETSAMPLERS_UNBINDDELETINGOBJECT = D3D11_MESSAGE_ID(
+  2097415,
+);
+
+const D3D11_MESSAGE_ID_HSSETSHADER_UNBINDDELETINGOBJECT = D3D11_MESSAGE_ID(
+  2097416,
+);
+
+const D3D11_MESSAGE_ID_DSSETSHADER_UNBINDDELETINGOBJECT = D3D11_MESSAGE_ID(
+  2097417,
+);
+
+const D3D11_MESSAGE_ID_CSSETSHADER_UNBINDDELETINGOBJECT = D3D11_MESSAGE_ID(
+  2097418,
+);
+
+const D3D11_MESSAGE_ID_ENQUEUESETEVENT_INVALIDARG_RETURN = D3D11_MESSAGE_ID(
+  2097419,
+);
+
+const D3D11_MESSAGE_ID_ENQUEUESETEVENT_OUTOFMEMORY_RETURN = D3D11_MESSAGE_ID(
+  2097420,
+);
+
+const D3D11_MESSAGE_ID_ENQUEUESETEVENT_ACCESSDENIED_RETURN = D3D11_MESSAGE_ID(
+  2097421,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_OMSETRENDERTARGETSANDUNORDEREDACCESSVIEWS_NUMUAVS_INVALIDRANGE =
+    D3D11_MESSAGE_ID(2097422);
+
+const D3D11_MESSAGE_ID_USE_OF_ZERO_REFCOUNT_OBJECT = D3D11_MESSAGE_ID(2097423);
+
+const D3D11_MESSAGE_ID_D3D11_MESSAGES_END = D3D11_MESSAGE_ID(2097424);
+
+const D3D11_MESSAGE_ID_D3D11_1_MESSAGES_START = D3D11_MESSAGE_ID(3145728);
+
+const D3D11_MESSAGE_ID_CREATE_VIDEODECODER = D3D11_MESSAGE_ID(3145729);
+
+const D3D11_MESSAGE_ID_CREATE_VIDEOPROCESSORENUM = D3D11_MESSAGE_ID(3145730);
+
+const D3D11_MESSAGE_ID_CREATE_VIDEOPROCESSOR = D3D11_MESSAGE_ID(3145731);
+
+const D3D11_MESSAGE_ID_CREATE_DECODEROUTPUTVIEW = D3D11_MESSAGE_ID(3145732);
+
+const D3D11_MESSAGE_ID_CREATE_PROCESSORINPUTVIEW = D3D11_MESSAGE_ID(3145733);
+
+const D3D11_MESSAGE_ID_CREATE_PROCESSOROUTPUTVIEW = D3D11_MESSAGE_ID(3145734);
+
+const D3D11_MESSAGE_ID_CREATE_DEVICECONTEXTSTATE = D3D11_MESSAGE_ID(3145735);
+
+const D3D11_MESSAGE_ID_LIVE_VIDEODECODER = D3D11_MESSAGE_ID(3145736);
+
+const D3D11_MESSAGE_ID_LIVE_VIDEOPROCESSORENUM = D3D11_MESSAGE_ID(3145737);
+
+const D3D11_MESSAGE_ID_LIVE_VIDEOPROCESSOR = D3D11_MESSAGE_ID(3145738);
+
+const D3D11_MESSAGE_ID_LIVE_DECODEROUTPUTVIEW = D3D11_MESSAGE_ID(3145739);
+
+const D3D11_MESSAGE_ID_LIVE_PROCESSORINPUTVIEW = D3D11_MESSAGE_ID(3145740);
+
+const D3D11_MESSAGE_ID_LIVE_PROCESSOROUTPUTVIEW = D3D11_MESSAGE_ID(3145741);
+
+const D3D11_MESSAGE_ID_LIVE_DEVICECONTEXTSTATE = D3D11_MESSAGE_ID(3145742);
+
+const D3D11_MESSAGE_ID_DESTROY_VIDEODECODER = D3D11_MESSAGE_ID(3145743);
+
+const D3D11_MESSAGE_ID_DESTROY_VIDEOPROCESSORENUM = D3D11_MESSAGE_ID(3145744);
+
+const D3D11_MESSAGE_ID_DESTROY_VIDEOPROCESSOR = D3D11_MESSAGE_ID(3145745);
+
+const D3D11_MESSAGE_ID_DESTROY_DECODEROUTPUTVIEW = D3D11_MESSAGE_ID(3145746);
+
+const D3D11_MESSAGE_ID_DESTROY_PROCESSORINPUTVIEW = D3D11_MESSAGE_ID(3145747);
+
+const D3D11_MESSAGE_ID_DESTROY_PROCESSOROUTPUTVIEW = D3D11_MESSAGE_ID(3145748);
+
+const D3D11_MESSAGE_ID_DESTROY_DEVICECONTEXTSTATE = D3D11_MESSAGE_ID(3145749);
+
+const D3D11_MESSAGE_ID_CREATEDEVICECONTEXTSTATE_INVALIDFLAGS = D3D11_MESSAGE_ID(
+  3145750,
+);
+
+const D3D11_MESSAGE_ID_CREATEDEVICECONTEXTSTATE_INVALIDFEATURELEVEL =
+    D3D11_MESSAGE_ID(3145751);
+
+const D3D11_MESSAGE_ID_CREATEDEVICECONTEXTSTATE_FEATURELEVELS_NOT_SUPPORTED =
+    D3D11_MESSAGE_ID(3145752);
+
+const D3D11_MESSAGE_ID_CREATEDEVICECONTEXTSTATE_INVALIDREFIID =
+    D3D11_MESSAGE_ID(3145753);
+
+const D3D11_MESSAGE_ID_DEVICE_DISCARDVIEW_INVALIDVIEW = D3D11_MESSAGE_ID(
+  3145754,
+);
+
+const D3D11_MESSAGE_ID_COPYSUBRESOURCEREGION1_INVALIDCOPYFLAGS =
+    D3D11_MESSAGE_ID(3145755);
+
+const D3D11_MESSAGE_ID_UPDATESUBRESOURCE1_INVALIDCOPYFLAGS = D3D11_MESSAGE_ID(
+  3145756,
+);
+
+const D3D11_MESSAGE_ID_CREATERASTERIZERSTATE_INVALIDFORCEDSAMPLECOUNT =
+    D3D11_MESSAGE_ID(3145757);
+
+const D3D11_MESSAGE_ID_CREATEVIDEODECODER_OUTOFMEMORY_RETURN = D3D11_MESSAGE_ID(
+  3145758,
+);
+
+const D3D11_MESSAGE_ID_CREATEVIDEODECODER_NULLPARAM = D3D11_MESSAGE_ID(3145759);
+
+const D3D11_MESSAGE_ID_CREATEVIDEODECODER_INVALIDFORMAT = D3D11_MESSAGE_ID(
+  3145760,
+);
+
+const D3D11_MESSAGE_ID_CREATEVIDEODECODER_ZEROWIDTHHEIGHT = D3D11_MESSAGE_ID(
+  3145761,
+);
+
+const D3D11_MESSAGE_ID_CREATEVIDEODECODER_DRIVER_INVALIDBUFFERSIZE =
+    D3D11_MESSAGE_ID(3145762);
+
+const D3D11_MESSAGE_ID_CREATEVIDEODECODER_DRIVER_INVALIDBUFFERUSAGE =
+    D3D11_MESSAGE_ID(3145763);
+
+const D3D11_MESSAGE_ID_GETVIDEODECODERPROFILECOUNT_OUTOFMEMORY =
+    D3D11_MESSAGE_ID(3145764);
+
+const D3D11_MESSAGE_ID_GETVIDEODECODERPROFILE_NULLPARAM = D3D11_MESSAGE_ID(
+  3145765,
+);
+
+const D3D11_MESSAGE_ID_GETVIDEODECODERPROFILE_INVALIDINDEX = D3D11_MESSAGE_ID(
+  3145766,
+);
+
+const D3D11_MESSAGE_ID_GETVIDEODECODERPROFILE_OUTOFMEMORY_RETURN =
+    D3D11_MESSAGE_ID(3145767);
+
+const D3D11_MESSAGE_ID_CHECKVIDEODECODERFORMAT_NULLPARAM = D3D11_MESSAGE_ID(
+  3145768,
+);
+
+const D3D11_MESSAGE_ID_CHECKVIDEODECODERFORMAT_OUTOFMEMORY_RETURN =
+    D3D11_MESSAGE_ID(3145769);
+
+const D3D11_MESSAGE_ID_GETVIDEODECODERCONFIGCOUNT_NULLPARAM = D3D11_MESSAGE_ID(
+  3145770,
+);
+
+const D3D11_MESSAGE_ID_GETVIDEODECODERCONFIGCOUNT_OUTOFMEMORY_RETURN =
+    D3D11_MESSAGE_ID(3145771);
+
+const D3D11_MESSAGE_ID_GETVIDEODECODERCONFIG_NULLPARAM = D3D11_MESSAGE_ID(
+  3145772,
+);
+
+const D3D11_MESSAGE_ID_GETVIDEODECODERCONFIG_INVALIDINDEX = D3D11_MESSAGE_ID(
+  3145773,
+);
+
+const D3D11_MESSAGE_ID_GETVIDEODECODERCONFIG_OUTOFMEMORY_RETURN =
+    D3D11_MESSAGE_ID(3145774);
+
+const D3D11_MESSAGE_ID_GETDECODERCREATIONPARAMS_NULLPARAM = D3D11_MESSAGE_ID(
+  3145775,
+);
+
+const D3D11_MESSAGE_ID_GETDECODERDRIVERHANDLE_NULLPARAM = D3D11_MESSAGE_ID(
+  3145776,
+);
+
+const D3D11_MESSAGE_ID_GETDECODERBUFFER_NULLPARAM = D3D11_MESSAGE_ID(3145777);
+
+const D3D11_MESSAGE_ID_GETDECODERBUFFER_INVALIDBUFFER = D3D11_MESSAGE_ID(
+  3145778,
+);
+
+const D3D11_MESSAGE_ID_GETDECODERBUFFER_INVALIDTYPE = D3D11_MESSAGE_ID(3145779);
+
+const D3D11_MESSAGE_ID_GETDECODERBUFFER_LOCKED = D3D11_MESSAGE_ID(3145780);
+
+const D3D11_MESSAGE_ID_RELEASEDECODERBUFFER_NULLPARAM = D3D11_MESSAGE_ID(
+  3145781,
+);
+
+const D3D11_MESSAGE_ID_RELEASEDECODERBUFFER_INVALIDTYPE = D3D11_MESSAGE_ID(
+  3145782,
+);
+
+const D3D11_MESSAGE_ID_RELEASEDECODERBUFFER_NOTLOCKED = D3D11_MESSAGE_ID(
+  3145783,
+);
+
+const D3D11_MESSAGE_ID_DECODERBEGINFRAME_NULLPARAM = D3D11_MESSAGE_ID(3145784);
+
+const D3D11_MESSAGE_ID_DECODERBEGINFRAME_HAZARD = D3D11_MESSAGE_ID(3145785);
+
+const D3D11_MESSAGE_ID_DECODERENDFRAME_NULLPARAM = D3D11_MESSAGE_ID(3145786);
+
+const D3D11_MESSAGE_ID_SUBMITDECODERBUFFERS_NULLPARAM = D3D11_MESSAGE_ID(
+  3145787,
+);
+
+const D3D11_MESSAGE_ID_SUBMITDECODERBUFFERS_INVALIDTYPE = D3D11_MESSAGE_ID(
+  3145788,
+);
+
+const D3D11_MESSAGE_ID_DECODEREXTENSION_NULLPARAM = D3D11_MESSAGE_ID(3145789);
+
+const D3D11_MESSAGE_ID_DECODEREXTENSION_INVALIDRESOURCE = D3D11_MESSAGE_ID(
+  3145790,
+);
+
+const D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORENUMERATOR_OUTOFMEMORY_RETURN =
+    D3D11_MESSAGE_ID(3145791);
+
+const D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORENUMERATOR_NULLPARAM =
+    D3D11_MESSAGE_ID(3145792);
+
+const D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORENUMERATOR_INVALIDFRAMEFORMAT =
+    D3D11_MESSAGE_ID(3145793);
+
+const D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORENUMERATOR_INVALIDUSAGE =
+    D3D11_MESSAGE_ID(3145794);
+
+const D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORENUMERATOR_INVALIDINPUTFRAMERATE =
+    D3D11_MESSAGE_ID(3145795);
+
+const D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORENUMERATOR_INVALIDOUTPUTFRAMERATE =
+    D3D11_MESSAGE_ID(3145796);
+
+const D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORENUMERATOR_INVALIDWIDTHHEIGHT =
+    D3D11_MESSAGE_ID(3145797);
+
+const D3D11_MESSAGE_ID_GETVIDEOPROCESSORCONTENTDESC_NULLPARAM =
+    D3D11_MESSAGE_ID(3145798);
+
+const D3D11_MESSAGE_ID_CHECKVIDEOPROCESSORFORMAT_NULLPARAM = D3D11_MESSAGE_ID(
+  3145799,
+);
+
+const D3D11_MESSAGE_ID_GETVIDEOPROCESSORCAPS_NULLPARAM = D3D11_MESSAGE_ID(
+  3145800,
+);
+
+const D3D11_MESSAGE_ID_GETVIDEOPROCESSORRATECONVERSIONCAPS_NULLPARAM =
+    D3D11_MESSAGE_ID(3145801);
+
+const D3D11_MESSAGE_ID_GETVIDEOPROCESSORRATECONVERSIONCAPS_INVALIDINDEX =
+    D3D11_MESSAGE_ID(3145802);
+
+const D3D11_MESSAGE_ID_GETVIDEOPROCESSORCUSTOMRATE_NULLPARAM = D3D11_MESSAGE_ID(
+  3145803,
+);
+
+const D3D11_MESSAGE_ID_GETVIDEOPROCESSORCUSTOMRATE_INVALIDINDEX =
+    D3D11_MESSAGE_ID(3145804);
+
+const D3D11_MESSAGE_ID_GETVIDEOPROCESSORFILTERRANGE_NULLPARAM =
+    D3D11_MESSAGE_ID(3145805);
+
+const D3D11_MESSAGE_ID_GETVIDEOPROCESSORFILTERRANGE_UNSUPPORTED =
+    D3D11_MESSAGE_ID(3145806);
+
+const D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOR_OUTOFMEMORY_RETURN =
+    D3D11_MESSAGE_ID(3145807);
+
+const D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOR_NULLPARAM = D3D11_MESSAGE_ID(
+  3145808,
+);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTTARGETRECT_NULLPARAM =
+    D3D11_MESSAGE_ID(3145809);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTBACKGROUNDCOLOR_NULLPARAM =
+    D3D11_MESSAGE_ID(3145810);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTBACKGROUNDCOLOR_INVALIDALPHA =
+    D3D11_MESSAGE_ID(3145811);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTCOLORSPACE_NULLPARAM =
+    D3D11_MESSAGE_ID(3145812);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTALPHAFILLMODE_NULLPARAM =
+    D3D11_MESSAGE_ID(3145813);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTALPHAFILLMODE_UNSUPPORTED =
+    D3D11_MESSAGE_ID(3145814);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTALPHAFILLMODE_INVALIDSTREAM =
+    D3D11_MESSAGE_ID(3145815);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTALPHAFILLMODE_INVALIDFILLMODE =
+    D3D11_MESSAGE_ID(3145816);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTCONSTRICTION_NULLPARAM =
+    D3D11_MESSAGE_ID(3145817);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTSTEREOMODE_NULLPARAM =
+    D3D11_MESSAGE_ID(3145818);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTSTEREOMODE_UNSUPPORTED =
+    D3D11_MESSAGE_ID(3145819);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTEXTENSION_NULLPARAM =
+    D3D11_MESSAGE_ID(3145820);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETOUTPUTTARGETRECT_NULLPARAM =
+    D3D11_MESSAGE_ID(3145821);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETOUTPUTBACKGROUNDCOLOR_NULLPARAM =
+    D3D11_MESSAGE_ID(3145822);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETOUTPUTCOLORSPACE_NULLPARAM =
+    D3D11_MESSAGE_ID(3145823);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETOUTPUTALPHAFILLMODE_NULLPARAM =
+    D3D11_MESSAGE_ID(3145824);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETOUTPUTCONSTRICTION_NULLPARAM =
+    D3D11_MESSAGE_ID(3145825);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTCONSTRICTION_UNSUPPORTED =
+    D3D11_MESSAGE_ID(3145826);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTCONSTRICTION_INVALIDSIZE =
+    D3D11_MESSAGE_ID(3145827);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETOUTPUTSTEREOMODE_NULLPARAM =
+    D3D11_MESSAGE_ID(3145828);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETOUTPUTEXTENSION_NULLPARAM =
+    D3D11_MESSAGE_ID(3145829);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMFRAMEFORMAT_NULLPARAM =
+    D3D11_MESSAGE_ID(3145830);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMFRAMEFORMAT_INVALIDFORMAT =
+    D3D11_MESSAGE_ID(3145831);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMFRAMEFORMAT_INVALIDSTREAM =
+    D3D11_MESSAGE_ID(3145832);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMCOLORSPACE_NULLPARAM =
+    D3D11_MESSAGE_ID(3145833);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMCOLORSPACE_INVALIDSTREAM =
+    D3D11_MESSAGE_ID(3145834);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMOUTPUTRATE_NULLPARAM =
+    D3D11_MESSAGE_ID(3145835);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMOUTPUTRATE_INVALIDRATE =
+    D3D11_MESSAGE_ID(3145836);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMOUTPUTRATE_INVALIDFLAG =
+    D3D11_MESSAGE_ID(3145837);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMOUTPUTRATE_INVALIDSTREAM =
+    D3D11_MESSAGE_ID(3145838);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMSOURCERECT_NULLPARAM =
+    D3D11_MESSAGE_ID(3145839);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMSOURCERECT_INVALIDSTREAM =
+    D3D11_MESSAGE_ID(3145840);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMSOURCERECT_INVALIDRECT =
+    D3D11_MESSAGE_ID(3145841);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMDESTRECT_NULLPARAM =
+    D3D11_MESSAGE_ID(3145842);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMDESTRECT_INVALIDSTREAM =
+    D3D11_MESSAGE_ID(3145843);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMDESTRECT_INVALIDRECT =
+    D3D11_MESSAGE_ID(3145844);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMALPHA_NULLPARAM =
+    D3D11_MESSAGE_ID(3145845);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMALPHA_INVALIDSTREAM =
+    D3D11_MESSAGE_ID(3145846);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMALPHA_INVALIDALPHA =
+    D3D11_MESSAGE_ID(3145847);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMPALETTE_NULLPARAM =
+    D3D11_MESSAGE_ID(3145848);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMPALETTE_INVALIDSTREAM =
+    D3D11_MESSAGE_ID(3145849);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMPALETTE_INVALIDCOUNT =
+    D3D11_MESSAGE_ID(3145850);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMPALETTE_INVALIDALPHA =
+    D3D11_MESSAGE_ID(3145851);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMPIXELASPECTRATIO_NULLPARAM =
+    D3D11_MESSAGE_ID(3145852);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMPIXELASPECTRATIO_INVALIDSTREAM =
+    D3D11_MESSAGE_ID(3145853);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMPIXELASPECTRATIO_INVALIDRATIO =
+    D3D11_MESSAGE_ID(3145854);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMLUMAKEY_NULLPARAM =
+    D3D11_MESSAGE_ID(3145855);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMLUMAKEY_INVALIDSTREAM =
+    D3D11_MESSAGE_ID(3145856);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMLUMAKEY_INVALIDRANGE =
+    D3D11_MESSAGE_ID(3145857);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMLUMAKEY_UNSUPPORTED =
+    D3D11_MESSAGE_ID(3145858);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMSTEREOFORMAT_NULLPARAM =
+    D3D11_MESSAGE_ID(3145859);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMSTEREOFORMAT_INVALIDSTREAM =
+    D3D11_MESSAGE_ID(3145860);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMSTEREOFORMAT_UNSUPPORTED =
+    D3D11_MESSAGE_ID(3145861);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMSTEREOFORMAT_FLIPUNSUPPORTED =
+    D3D11_MESSAGE_ID(3145862);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMSTEREOFORMAT_MONOOFFSETUNSUPPORTED =
+    D3D11_MESSAGE_ID(3145863);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMSTEREOFORMAT_FORMATUNSUPPORTED =
+    D3D11_MESSAGE_ID(3145864);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMSTEREOFORMAT_INVALIDFORMAT =
+    D3D11_MESSAGE_ID(3145865);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMAUTOPROCESSINGMODE_NULLPARAM =
+    D3D11_MESSAGE_ID(3145866);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMAUTOPROCESSINGMODE_INVALIDSTREAM =
+    D3D11_MESSAGE_ID(3145867);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMFILTER_NULLPARAM =
+    D3D11_MESSAGE_ID(3145868);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMFILTER_INVALIDSTREAM =
+    D3D11_MESSAGE_ID(3145869);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMFILTER_INVALIDFILTER =
+    D3D11_MESSAGE_ID(3145870);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMFILTER_UNSUPPORTED =
+    D3D11_MESSAGE_ID(3145871);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMFILTER_INVALIDLEVEL =
+    D3D11_MESSAGE_ID(3145872);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMEXTENSION_NULLPARAM =
+    D3D11_MESSAGE_ID(3145873);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMEXTENSION_INVALIDSTREAM =
+    D3D11_MESSAGE_ID(3145874);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMFRAMEFORMAT_NULLPARAM =
+    D3D11_MESSAGE_ID(3145875);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMCOLORSPACE_NULLPARAM =
+    D3D11_MESSAGE_ID(3145876);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMOUTPUTRATE_NULLPARAM =
+    D3D11_MESSAGE_ID(3145877);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMSOURCERECT_NULLPARAM =
+    D3D11_MESSAGE_ID(3145878);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMDESTRECT_NULLPARAM =
+    D3D11_MESSAGE_ID(3145879);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMALPHA_NULLPARAM =
+    D3D11_MESSAGE_ID(3145880);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMPALETTE_NULLPARAM =
+    D3D11_MESSAGE_ID(3145881);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMPIXELASPECTRATIO_NULLPARAM =
+    D3D11_MESSAGE_ID(3145882);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMLUMAKEY_NULLPARAM =
+    D3D11_MESSAGE_ID(3145883);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMSTEREOFORMAT_NULLPARAM =
+    D3D11_MESSAGE_ID(3145884);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMAUTOPROCESSINGMODE_NULLPARAM =
+    D3D11_MESSAGE_ID(3145885);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMFILTER_NULLPARAM =
+    D3D11_MESSAGE_ID(3145886);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMEXTENSION_NULLPARAM =
+    D3D11_MESSAGE_ID(3145887);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMEXTENSION_INVALIDSTREAM =
+    D3D11_MESSAGE_ID(3145888);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_NULLPARAM = D3D11_MESSAGE_ID(3145889);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_INVALIDSTREAMCOUNT = D3D11_MESSAGE_ID(
+  3145890,
+);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_TARGETRECT = D3D11_MESSAGE_ID(3145891);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_INVALIDOUTPUT = D3D11_MESSAGE_ID(
+  3145892,
+);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_INVALIDPASTFRAMES = D3D11_MESSAGE_ID(
+  3145893,
+);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_INVALIDFUTUREFRAMES = D3D11_MESSAGE_ID(
+  3145894,
+);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_INVALIDSOURCERECT = D3D11_MESSAGE_ID(
+  3145895,
+);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_INVALIDDESTRECT = D3D11_MESSAGE_ID(
+  3145896,
+);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_INVALIDINPUTRESOURCE =
+    D3D11_MESSAGE_ID(3145897);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_INVALIDARRAYSIZE = D3D11_MESSAGE_ID(
+  3145898,
+);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_INVALIDARRAY = D3D11_MESSAGE_ID(
+  3145899,
+);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_RIGHTEXPECTED = D3D11_MESSAGE_ID(
+  3145900,
+);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_RIGHTNOTEXPECTED = D3D11_MESSAGE_ID(
+  3145901,
+);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_STEREONOTENABLED = D3D11_MESSAGE_ID(
+  3145902,
+);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_INVALIDRIGHTRESOURCE =
+    D3D11_MESSAGE_ID(3145903);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_NOSTEREOSTREAMS = D3D11_MESSAGE_ID(
+  3145904,
+);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_INPUTHAZARD = D3D11_MESSAGE_ID(
+  3145905,
+);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_OUTPUTHAZARD = D3D11_MESSAGE_ID(
+  3145906,
+);
+
+const D3D11_MESSAGE_ID_CREATEVIDEODECODEROUTPUTVIEW_OUTOFMEMORY_RETURN =
+    D3D11_MESSAGE_ID(3145907);
+
+const D3D11_MESSAGE_ID_CREATEVIDEODECODEROUTPUTVIEW_NULLPARAM =
+    D3D11_MESSAGE_ID(3145908);
+
+const D3D11_MESSAGE_ID_CREATEVIDEODECODEROUTPUTVIEW_INVALIDTYPE =
+    D3D11_MESSAGE_ID(3145909);
+
+const D3D11_MESSAGE_ID_CREATEVIDEODECODEROUTPUTVIEW_INVALIDBIND =
+    D3D11_MESSAGE_ID(3145910);
+
+const D3D11_MESSAGE_ID_CREATEVIDEODECODEROUTPUTVIEW_UNSUPPORTEDFORMAT =
+    D3D11_MESSAGE_ID(3145911);
+
+const D3D11_MESSAGE_ID_CREATEVIDEODECODEROUTPUTVIEW_INVALIDMIP =
+    D3D11_MESSAGE_ID(3145912);
+
+const D3D11_MESSAGE_ID_CREATEVIDEODECODEROUTPUTVIEW_UNSUPPORTEMIP =
+    D3D11_MESSAGE_ID(3145913);
+
+const D3D11_MESSAGE_ID_CREATEVIDEODECODEROUTPUTVIEW_INVALIDARRAYSIZE =
+    D3D11_MESSAGE_ID(3145914);
+
+const D3D11_MESSAGE_ID_CREATEVIDEODECODEROUTPUTVIEW_INVALIDARRAY =
+    D3D11_MESSAGE_ID(3145915);
+
+const D3D11_MESSAGE_ID_CREATEVIDEODECODEROUTPUTVIEW_INVALIDDIMENSION =
+    D3D11_MESSAGE_ID(3145916);
+
+const D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_OUTOFMEMORY_RETURN =
+    D3D11_MESSAGE_ID(3145917);
+
+const D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_NULLPARAM =
+    D3D11_MESSAGE_ID(3145918);
+
+const D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_INVALIDTYPE =
+    D3D11_MESSAGE_ID(3145919);
+
+const D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_INVALIDBIND =
+    D3D11_MESSAGE_ID(3145920);
+
+const D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_INVALIDMISC =
+    D3D11_MESSAGE_ID(3145921);
+
+const D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_INVALIDUSAGE =
+    D3D11_MESSAGE_ID(3145922);
+
+const D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_INVALIDFORMAT =
+    D3D11_MESSAGE_ID(3145923);
+
+const D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_INVALIDFOURCC =
+    D3D11_MESSAGE_ID(3145924);
+
+const D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_INVALIDMIP =
+    D3D11_MESSAGE_ID(3145925);
+
+const D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_UNSUPPORTEDMIP =
+    D3D11_MESSAGE_ID(3145926);
+
+const D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_INVALIDARRAYSIZE =
+    D3D11_MESSAGE_ID(3145927);
+
+const D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_INVALIDARRAY =
+    D3D11_MESSAGE_ID(3145928);
+
+const D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_INVALIDDIMENSION =
+    D3D11_MESSAGE_ID(3145929);
+
+const D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOROUTPUTVIEW_OUTOFMEMORY_RETURN =
+    D3D11_MESSAGE_ID(3145930);
+
+const D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOROUTPUTVIEW_NULLPARAM =
+    D3D11_MESSAGE_ID(3145931);
+
+const D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOROUTPUTVIEW_INVALIDTYPE =
+    D3D11_MESSAGE_ID(3145932);
+
+const D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOROUTPUTVIEW_INVALIDBIND =
+    D3D11_MESSAGE_ID(3145933);
+
+const D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOROUTPUTVIEW_INVALIDFORMAT =
+    D3D11_MESSAGE_ID(3145934);
+
+const D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOROUTPUTVIEW_INVALIDMIP =
+    D3D11_MESSAGE_ID(3145935);
+
+const D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOROUTPUTVIEW_UNSUPPORTEDMIP =
+    D3D11_MESSAGE_ID(3145936);
+
+const D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOROUTPUTVIEW_UNSUPPORTEDARRAY =
+    D3D11_MESSAGE_ID(3145937);
+
+const D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOROUTPUTVIEW_INVALIDARRAY =
+    D3D11_MESSAGE_ID(3145938);
+
+const D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOROUTPUTVIEW_INVALIDDIMENSION =
+    D3D11_MESSAGE_ID(3145939);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_INVALID_USE_OF_FORCED_SAMPLE_COUNT =
+    D3D11_MESSAGE_ID(3145940);
+
+const D3D11_MESSAGE_ID_CREATEBLENDSTATE_INVALIDLOGICOPS = D3D11_MESSAGE_ID(
+  3145941,
+);
+
+const D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_INVALIDDARRAYWITHDECODER =
+    D3D11_MESSAGE_ID(3145942);
+
+const D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_INVALIDDARRAYWITHDECODER =
+    D3D11_MESSAGE_ID(3145943);
+
+const D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_INVALIDDARRAYWITHDECODER =
+    D3D11_MESSAGE_ID(3145944);
+
+const D3D11_MESSAGE_ID_DEVICE_LOCKEDOUT_INTERFACE = D3D11_MESSAGE_ID(3145945);
+
+const D3D11_MESSAGE_ID_REF_WARNING_ATOMIC_INCONSISTENT = D3D11_MESSAGE_ID(
+  3145946,
+);
+
+const D3D11_MESSAGE_ID_REF_WARNING_READING_UNINITIALIZED_RESOURCE =
+    D3D11_MESSAGE_ID(3145947);
+
+const D3D11_MESSAGE_ID_REF_WARNING_RAW_HAZARD = D3D11_MESSAGE_ID(3145948);
+
+const D3D11_MESSAGE_ID_REF_WARNING_WAR_HAZARD = D3D11_MESSAGE_ID(3145949);
+
+const D3D11_MESSAGE_ID_REF_WARNING_WAW_HAZARD = D3D11_MESSAGE_ID(3145950);
+
+const D3D11_MESSAGE_ID_CREATECRYPTOSESSION_NULLPARAM = D3D11_MESSAGE_ID(
+  3145951,
+);
+
+const D3D11_MESSAGE_ID_CREATECRYPTOSESSION_OUTOFMEMORY_RETURN =
+    D3D11_MESSAGE_ID(3145952);
+
+const D3D11_MESSAGE_ID_GETCRYPTOTYPE_NULLPARAM = D3D11_MESSAGE_ID(3145953);
+
+const D3D11_MESSAGE_ID_GETDECODERPROFILE_NULLPARAM = D3D11_MESSAGE_ID(3145954);
+
+const D3D11_MESSAGE_ID_GETCRYPTOSESSIONCERTIFICATESIZE_NULLPARAM =
+    D3D11_MESSAGE_ID(3145955);
+
+const D3D11_MESSAGE_ID_GETCRYPTOSESSIONCERTIFICATE_NULLPARAM = D3D11_MESSAGE_ID(
+  3145956,
+);
+
+const D3D11_MESSAGE_ID_GETCRYPTOSESSIONCERTIFICATE_WRONGSIZE = D3D11_MESSAGE_ID(
+  3145957,
+);
+
+const D3D11_MESSAGE_ID_GETCRYPTOSESSIONHANDLE_WRONGSIZE = D3D11_MESSAGE_ID(
+  3145958,
+);
+
+const D3D11_MESSAGE_ID_NEGOTIATECRPYTOSESSIONKEYEXCHANGE_NULLPARAM =
+    D3D11_MESSAGE_ID(3145959);
+
+const D3D11_MESSAGE_ID_ENCRYPTIONBLT_UNSUPPORTED = D3D11_MESSAGE_ID(3145960);
+
+const D3D11_MESSAGE_ID_ENCRYPTIONBLT_NULLPARAM = D3D11_MESSAGE_ID(3145961);
+
+const D3D11_MESSAGE_ID_ENCRYPTIONBLT_SRC_WRONGDEVICE = D3D11_MESSAGE_ID(
+  3145962,
+);
+
+const D3D11_MESSAGE_ID_ENCRYPTIONBLT_DST_WRONGDEVICE = D3D11_MESSAGE_ID(
+  3145963,
+);
+
+const D3D11_MESSAGE_ID_ENCRYPTIONBLT_FORMAT_MISMATCH = D3D11_MESSAGE_ID(
+  3145964,
+);
+
+const D3D11_MESSAGE_ID_ENCRYPTIONBLT_SIZE_MISMATCH = D3D11_MESSAGE_ID(3145965);
+
+const D3D11_MESSAGE_ID_ENCRYPTIONBLT_SRC_MULTISAMPLED = D3D11_MESSAGE_ID(
+  3145966,
+);
+
+const D3D11_MESSAGE_ID_ENCRYPTIONBLT_DST_NOT_STAGING = D3D11_MESSAGE_ID(
+  3145967,
+);
+
+const D3D11_MESSAGE_ID_ENCRYPTIONBLT_SRC_MAPPED = D3D11_MESSAGE_ID(3145968);
+
+const D3D11_MESSAGE_ID_ENCRYPTIONBLT_DST_MAPPED = D3D11_MESSAGE_ID(3145969);
+
+const D3D11_MESSAGE_ID_ENCRYPTIONBLT_SRC_OFFERED = D3D11_MESSAGE_ID(3145970);
+
+const D3D11_MESSAGE_ID_ENCRYPTIONBLT_DST_OFFERED = D3D11_MESSAGE_ID(3145971);
+
+const D3D11_MESSAGE_ID_ENCRYPTIONBLT_SRC_CONTENT_UNDEFINED = D3D11_MESSAGE_ID(
+  3145972,
+);
+
+const D3D11_MESSAGE_ID_DECRYPTIONBLT_UNSUPPORTED = D3D11_MESSAGE_ID(3145973);
+
+const D3D11_MESSAGE_ID_DECRYPTIONBLT_NULLPARAM = D3D11_MESSAGE_ID(3145974);
+
+const D3D11_MESSAGE_ID_DECRYPTIONBLT_SRC_WRONGDEVICE = D3D11_MESSAGE_ID(
+  3145975,
+);
+
+const D3D11_MESSAGE_ID_DECRYPTIONBLT_DST_WRONGDEVICE = D3D11_MESSAGE_ID(
+  3145976,
+);
+
+const D3D11_MESSAGE_ID_DECRYPTIONBLT_FORMAT_MISMATCH = D3D11_MESSAGE_ID(
+  3145977,
+);
+
+const D3D11_MESSAGE_ID_DECRYPTIONBLT_SIZE_MISMATCH = D3D11_MESSAGE_ID(3145978);
+
+const D3D11_MESSAGE_ID_DECRYPTIONBLT_DST_MULTISAMPLED = D3D11_MESSAGE_ID(
+  3145979,
+);
+
+const D3D11_MESSAGE_ID_DECRYPTIONBLT_SRC_NOT_STAGING = D3D11_MESSAGE_ID(
+  3145980,
+);
+
+const D3D11_MESSAGE_ID_DECRYPTIONBLT_DST_NOT_RENDER_TARGET = D3D11_MESSAGE_ID(
+  3145981,
+);
+
+const D3D11_MESSAGE_ID_DECRYPTIONBLT_SRC_MAPPED = D3D11_MESSAGE_ID(3145982);
+
+const D3D11_MESSAGE_ID_DECRYPTIONBLT_DST_MAPPED = D3D11_MESSAGE_ID(3145983);
+
+const D3D11_MESSAGE_ID_DECRYPTIONBLT_SRC_OFFERED = D3D11_MESSAGE_ID(3145984);
+
+const D3D11_MESSAGE_ID_DECRYPTIONBLT_DST_OFFERED = D3D11_MESSAGE_ID(3145985);
+
+const D3D11_MESSAGE_ID_DECRYPTIONBLT_SRC_CONTENT_UNDEFINED = D3D11_MESSAGE_ID(
+  3145986,
+);
+
+const D3D11_MESSAGE_ID_STARTSESSIONKEYREFRESH_NULLPARAM = D3D11_MESSAGE_ID(
+  3145987,
+);
+
+const D3D11_MESSAGE_ID_STARTSESSIONKEYREFRESH_INVALIDSIZE = D3D11_MESSAGE_ID(
+  3145988,
+);
+
+const D3D11_MESSAGE_ID_FINISHSESSIONKEYREFRESH_NULLPARAM = D3D11_MESSAGE_ID(
+  3145989,
+);
+
+const D3D11_MESSAGE_ID_GETENCRYPTIONBLTKEY_NULLPARAM = D3D11_MESSAGE_ID(
+  3145990,
+);
+
+const D3D11_MESSAGE_ID_GETENCRYPTIONBLTKEY_INVALIDSIZE = D3D11_MESSAGE_ID(
+  3145991,
+);
+
+const D3D11_MESSAGE_ID_GETCONTENTPROTECTIONCAPS_NULLPARAM = D3D11_MESSAGE_ID(
+  3145992,
+);
+
+const D3D11_MESSAGE_ID_CHECKCRYPTOKEYEXCHANGE_NULLPARAM = D3D11_MESSAGE_ID(
+  3145993,
+);
+
+const D3D11_MESSAGE_ID_CHECKCRYPTOKEYEXCHANGE_INVALIDINDEX = D3D11_MESSAGE_ID(
+  3145994,
+);
+
+const D3D11_MESSAGE_ID_CREATEAUTHENTICATEDCHANNEL_NULLPARAM = D3D11_MESSAGE_ID(
+  3145995,
+);
+
+const D3D11_MESSAGE_ID_CREATEAUTHENTICATEDCHANNEL_UNSUPPORTED =
+    D3D11_MESSAGE_ID(3145996);
+
+const D3D11_MESSAGE_ID_CREATEAUTHENTICATEDCHANNEL_INVALIDTYPE =
+    D3D11_MESSAGE_ID(3145997);
+
+const D3D11_MESSAGE_ID_CREATEAUTHENTICATEDCHANNEL_OUTOFMEMORY_RETURN =
+    D3D11_MESSAGE_ID(3145998);
+
+const D3D11_MESSAGE_ID_GETAUTHENTICATEDCHANNELCERTIFICATESIZE_INVALIDCHANNEL =
+    D3D11_MESSAGE_ID(3145999);
+
+const D3D11_MESSAGE_ID_GETAUTHENTICATEDCHANNELCERTIFICATESIZE_NULLPARAM =
+    D3D11_MESSAGE_ID(3146000);
+
+const D3D11_MESSAGE_ID_GETAUTHENTICATEDCHANNELCERTIFICATE_INVALIDCHANNEL =
+    D3D11_MESSAGE_ID(3146001);
+
+const D3D11_MESSAGE_ID_GETAUTHENTICATEDCHANNELCERTIFICATE_NULLPARAM =
+    D3D11_MESSAGE_ID(3146002);
+
+const D3D11_MESSAGE_ID_GETAUTHENTICATEDCHANNELCERTIFICATE_WRONGSIZE =
+    D3D11_MESSAGE_ID(3146003);
+
+const D3D11_MESSAGE_ID_NEGOTIATEAUTHENTICATEDCHANNELKEYEXCHANGE_INVALIDCHANNEL =
+    D3D11_MESSAGE_ID(3146004);
+
+const D3D11_MESSAGE_ID_NEGOTIATEAUTHENTICATEDCHANNELKEYEXCHANGE_NULLPARAM =
+    D3D11_MESSAGE_ID(3146005);
+
+const D3D11_MESSAGE_ID_QUERYAUTHENTICATEDCHANNEL_NULLPARAM = D3D11_MESSAGE_ID(
+  3146006,
+);
+
+const D3D11_MESSAGE_ID_QUERYAUTHENTICATEDCHANNEL_WRONGCHANNEL =
+    D3D11_MESSAGE_ID(3146007);
+
+const D3D11_MESSAGE_ID_QUERYAUTHENTICATEDCHANNEL_UNSUPPORTEDQUERY =
+    D3D11_MESSAGE_ID(3146008);
+
+const D3D11_MESSAGE_ID_QUERYAUTHENTICATEDCHANNEL_WRONGSIZE = D3D11_MESSAGE_ID(
+  3146009,
+);
+
+const D3D11_MESSAGE_ID_QUERYAUTHENTICATEDCHANNEL_INVALIDPROCESSINDEX =
+    D3D11_MESSAGE_ID(3146010);
+
+const D3D11_MESSAGE_ID_CONFIGUREAUTHENTICATEDCHANNEL_NULLPARAM =
+    D3D11_MESSAGE_ID(3146011);
+
+const D3D11_MESSAGE_ID_CONFIGUREAUTHENTICATEDCHANNEL_WRONGCHANNEL =
+    D3D11_MESSAGE_ID(3146012);
+
+const D3D11_MESSAGE_ID_CONFIGUREAUTHENTICATEDCHANNEL_UNSUPPORTEDCONFIGURE =
+    D3D11_MESSAGE_ID(3146013);
+
+const D3D11_MESSAGE_ID_CONFIGUREAUTHENTICATEDCHANNEL_WRONGSIZE =
+    D3D11_MESSAGE_ID(3146014);
+
+const D3D11_MESSAGE_ID_CONFIGUREAUTHENTICATEDCHANNEL_INVALIDPROCESSIDTYPE =
+    D3D11_MESSAGE_ID(3146015);
+
+const D3D11_MESSAGE_ID_VSSETCONSTANTBUFFERS_INVALIDBUFFEROFFSETORCOUNT =
+    D3D11_MESSAGE_ID(3146016);
+
+const D3D11_MESSAGE_ID_DSSETCONSTANTBUFFERS_INVALIDBUFFEROFFSETORCOUNT =
+    D3D11_MESSAGE_ID(3146017);
+
+const D3D11_MESSAGE_ID_HSSETCONSTANTBUFFERS_INVALIDBUFFEROFFSETORCOUNT =
+    D3D11_MESSAGE_ID(3146018);
+
+const D3D11_MESSAGE_ID_GSSETCONSTANTBUFFERS_INVALIDBUFFEROFFSETORCOUNT =
+    D3D11_MESSAGE_ID(3146019);
+
+const D3D11_MESSAGE_ID_PSSETCONSTANTBUFFERS_INVALIDBUFFEROFFSETORCOUNT =
+    D3D11_MESSAGE_ID(3146020);
+
+const D3D11_MESSAGE_ID_CSSETCONSTANTBUFFERS_INVALIDBUFFEROFFSETORCOUNT =
+    D3D11_MESSAGE_ID(3146021);
+
+const D3D11_MESSAGE_ID_NEGOTIATECRPYTOSESSIONKEYEXCHANGE_INVALIDSIZE =
+    D3D11_MESSAGE_ID(3146022);
+
+const D3D11_MESSAGE_ID_NEGOTIATEAUTHENTICATEDCHANNELKEYEXCHANGE_INVALIDSIZE =
+    D3D11_MESSAGE_ID(3146023);
+
+const D3D11_MESSAGE_ID_OFFERRESOURCES_INVALIDPRIORITY = D3D11_MESSAGE_ID(
+  3146024,
+);
+
+const D3D11_MESSAGE_ID_GETCRYPTOSESSIONHANDLE_OUTOFMEMORY = D3D11_MESSAGE_ID(
+  3146025,
+);
+
+const D3D11_MESSAGE_ID_ACQUIREHANDLEFORCAPTURE_NULLPARAM = D3D11_MESSAGE_ID(
+  3146026,
+);
+
+const D3D11_MESSAGE_ID_ACQUIREHANDLEFORCAPTURE_INVALIDTYPE = D3D11_MESSAGE_ID(
+  3146027,
+);
+
+const D3D11_MESSAGE_ID_ACQUIREHANDLEFORCAPTURE_INVALIDBIND = D3D11_MESSAGE_ID(
+  3146028,
+);
+
+const D3D11_MESSAGE_ID_ACQUIREHANDLEFORCAPTURE_INVALIDARRAY = D3D11_MESSAGE_ID(
+  3146029,
+);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMROTATION_NULLPARAM =
+    D3D11_MESSAGE_ID(3146030);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMROTATION_INVALIDSTREAM =
+    D3D11_MESSAGE_ID(3146031);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMROTATION_INVALID =
+    D3D11_MESSAGE_ID(3146032);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMROTATION_UNSUPPORTED =
+    D3D11_MESSAGE_ID(3146033);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMROTATION_NULLPARAM =
+    D3D11_MESSAGE_ID(3146034);
+
+const D3D11_MESSAGE_ID_DEVICE_CLEARVIEW_INVALIDVIEW = D3D11_MESSAGE_ID(3146035);
+
+const D3D11_MESSAGE_ID_DEVICE_CREATEVERTEXSHADER_DOUBLEEXTENSIONSNOTSUPPORTED =
+    D3D11_MESSAGE_ID(3146036);
+
+const D3D11_MESSAGE_ID_DEVICE_CREATEVERTEXSHADER_SHADEREXTENSIONSNOTSUPPORTED =
+    D3D11_MESSAGE_ID(3146037);
+
+const D3D11_MESSAGE_ID_DEVICE_CREATEHULLSHADER_DOUBLEEXTENSIONSNOTSUPPORTED =
+    D3D11_MESSAGE_ID(3146038);
+
+const D3D11_MESSAGE_ID_DEVICE_CREATEHULLSHADER_SHADEREXTENSIONSNOTSUPPORTED =
+    D3D11_MESSAGE_ID(3146039);
+
+const D3D11_MESSAGE_ID_DEVICE_CREATEDOMAINSHADER_DOUBLEEXTENSIONSNOTSUPPORTED =
+    D3D11_MESSAGE_ID(3146040);
+
+const D3D11_MESSAGE_ID_DEVICE_CREATEDOMAINSHADER_SHADEREXTENSIONSNOTSUPPORTED =
+    D3D11_MESSAGE_ID(3146041);
+
+const D3D11_MESSAGE_ID_DEVICE_CREATEGEOMETRYSHADER_DOUBLEEXTENSIONSNOTSUPPORTED =
+    D3D11_MESSAGE_ID(3146042);
+
+const D3D11_MESSAGE_ID_DEVICE_CREATEGEOMETRYSHADER_SHADEREXTENSIONSNOTSUPPORTED =
+    D3D11_MESSAGE_ID(3146043);
+
+const D3D11_MESSAGE_ID_DEVICE_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_DOUBLEEXTENSIONSNOTSUPPORTED =
+    D3D11_MESSAGE_ID(3146044);
+
+const D3D11_MESSAGE_ID_DEVICE_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_SHADEREXTENSIONSNOTSUPPORTED =
+    D3D11_MESSAGE_ID(3146045);
+
+const D3D11_MESSAGE_ID_DEVICE_CREATEPIXELSHADER_DOUBLEEXTENSIONSNOTSUPPORTED =
+    D3D11_MESSAGE_ID(3146046);
+
+const D3D11_MESSAGE_ID_DEVICE_CREATEPIXELSHADER_SHADEREXTENSIONSNOTSUPPORTED =
+    D3D11_MESSAGE_ID(3146047);
+
+const D3D11_MESSAGE_ID_DEVICE_CREATECOMPUTESHADER_DOUBLEEXTENSIONSNOTSUPPORTED =
+    D3D11_MESSAGE_ID(3146048);
+
+const D3D11_MESSAGE_ID_DEVICE_CREATECOMPUTESHADER_SHADEREXTENSIONSNOTSUPPORTED =
+    D3D11_MESSAGE_ID(3146049);
+
+const D3D11_MESSAGE_ID_DEVICE_SHADER_LINKAGE_MINPRECISION = D3D11_MESSAGE_ID(
+  3146050,
+);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMALPHA_UNSUPPORTED =
+    D3D11_MESSAGE_ID(3146051);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMPIXELASPECTRATIO_UNSUPPORTED =
+    D3D11_MESSAGE_ID(3146052);
+
+const D3D11_MESSAGE_ID_DEVICE_CREATEVERTEXSHADER_UAVSNOTSUPPORTED =
+    D3D11_MESSAGE_ID(3146053);
+
+const D3D11_MESSAGE_ID_DEVICE_CREATEHULLSHADER_UAVSNOTSUPPORTED =
+    D3D11_MESSAGE_ID(3146054);
+
+const D3D11_MESSAGE_ID_DEVICE_CREATEDOMAINSHADER_UAVSNOTSUPPORTED =
+    D3D11_MESSAGE_ID(3146055);
+
+const D3D11_MESSAGE_ID_DEVICE_CREATEGEOMETRYSHADER_UAVSNOTSUPPORTED =
+    D3D11_MESSAGE_ID(3146056);
+
+const D3D11_MESSAGE_ID_DEVICE_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_UAVSNOTSUPPORTED =
+    D3D11_MESSAGE_ID(3146057);
+
+const D3D11_MESSAGE_ID_DEVICE_CREATEPIXELSHADER_UAVSNOTSUPPORTED =
+    D3D11_MESSAGE_ID(3146058);
+
+const D3D11_MESSAGE_ID_DEVICE_CREATECOMPUTESHADER_UAVSNOTSUPPORTED =
+    D3D11_MESSAGE_ID(3146059);
+
+const D3D11_MESSAGE_ID_DEVICE_OMSETRENDERTARGETSANDUNORDEREDACCESSVIEWS_INVALIDOFFSET =
+    D3D11_MESSAGE_ID(3146060);
+
+const D3D11_MESSAGE_ID_DEVICE_OMSETRENDERTARGETSANDUNORDEREDACCESSVIEWS_TOOMANYVIEWS =
+    D3D11_MESSAGE_ID(3146061);
+
+const D3D11_MESSAGE_ID_DEVICE_CLEARVIEW_NOTSUPPORTED = D3D11_MESSAGE_ID(
+  3146062,
+);
+
+const D3D11_MESSAGE_ID_SWAPDEVICECONTEXTSTATE_NOTSUPPORTED = D3D11_MESSAGE_ID(
+  3146063,
+);
+
+const D3D11_MESSAGE_ID_UPDATESUBRESOURCE_PREFERUPDATESUBRESOURCE1 =
+    D3D11_MESSAGE_ID(3146064);
+
+const D3D11_MESSAGE_ID_GETDC_INACCESSIBLE = D3D11_MESSAGE_ID(3146065);
+
+const D3D11_MESSAGE_ID_DEVICE_CLEARVIEW_INVALIDRECT = D3D11_MESSAGE_ID(3146066);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_SAMPLE_MASK_IGNORED_ON_FL9 =
+    D3D11_MESSAGE_ID(3146067);
+
+const D3D11_MESSAGE_ID_DEVICE_OPEN_SHARED_RESOURCE1_NOT_SUPPORTED =
+    D3D11_MESSAGE_ID(3146068);
+
+const D3D11_MESSAGE_ID_DEVICE_OPEN_SHARED_RESOURCE_BY_NAME_NOT_SUPPORTED =
+    D3D11_MESSAGE_ID(3146069);
+
+const D3D11_MESSAGE_ID_ENQUEUESETEVENT_NOT_SUPPORTED = D3D11_MESSAGE_ID(
+  3146070,
+);
+
+const D3D11_MESSAGE_ID_OFFERRELEASE_NOT_SUPPORTED = D3D11_MESSAGE_ID(3146071);
+
+const D3D11_MESSAGE_ID_OFFERRESOURCES_INACCESSIBLE = D3D11_MESSAGE_ID(3146072);
+
+const D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_INVALIDMSAA =
+    D3D11_MESSAGE_ID(3146073);
+
+const D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOROUTPUTVIEW_INVALIDMSAA =
+    D3D11_MESSAGE_ID(3146074);
+
+const D3D11_MESSAGE_ID_DEVICE_CLEARVIEW_INVALIDSOURCERECT = D3D11_MESSAGE_ID(
+  3146075,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_CLEARVIEW_EMPTYRECT = D3D11_MESSAGE_ID(3146076);
+
+const D3D11_MESSAGE_ID_UPDATESUBRESOURCE_EMPTYDESTBOX = D3D11_MESSAGE_ID(
+  3146077,
+);
+
+const D3D11_MESSAGE_ID_COPYSUBRESOURCEREGION_EMPTYSOURCEBOX = D3D11_MESSAGE_ID(
+  3146078,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_OM_RENDER_TARGET_DOES_NOT_SUPPORT_LOGIC_OPS =
+    D3D11_MESSAGE_ID(3146079);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_DEPTHSTENCILVIEW_NOT_SET = D3D11_MESSAGE_ID(
+  3146080,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_RENDERTARGETVIEW_NOT_SET = D3D11_MESSAGE_ID(
+  3146081,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_RENDERTARGETVIEW_NOT_SET_DUE_TO_FLIP_PRESENT =
+    D3D11_MESSAGE_ID(3146082);
+
+const D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_NOT_SET_DUE_TO_FLIP_PRESENT =
+    D3D11_MESSAGE_ID(3146083);
+
+const D3D11_MESSAGE_ID_GETDATAFORNEWHARDWAREKEY_NULLPARAM = D3D11_MESSAGE_ID(
+  3146084,
+);
+
+const D3D11_MESSAGE_ID_CHECKCRYPTOSESSIONSTATUS_NULLPARAM = D3D11_MESSAGE_ID(
+  3146085,
+);
+
+const D3D11_MESSAGE_ID_GETCRYPTOSESSIONPRIVATEDATASIZE_NULLPARAM =
+    D3D11_MESSAGE_ID(3146086);
+
+const D3D11_MESSAGE_ID_GETVIDEODECODERCAPS_NULLPARAM = D3D11_MESSAGE_ID(
+  3146087,
+);
+
+const D3D11_MESSAGE_ID_GETVIDEODECODERCAPS_ZEROWIDTHHEIGHT = D3D11_MESSAGE_ID(
+  3146088,
+);
+
+const D3D11_MESSAGE_ID_CHECKVIDEODECODERDOWNSAMPLING_NULLPARAM =
+    D3D11_MESSAGE_ID(3146089);
+
+const D3D11_MESSAGE_ID_CHECKVIDEODECODERDOWNSAMPLING_INVALIDCOLORSPACE =
+    D3D11_MESSAGE_ID(3146090);
+
+const D3D11_MESSAGE_ID_CHECKVIDEODECODERDOWNSAMPLING_ZEROWIDTHHEIGHT =
+    D3D11_MESSAGE_ID(3146091);
+
+const D3D11_MESSAGE_ID_VIDEODECODERENABLEDOWNSAMPLING_NULLPARAM =
+    D3D11_MESSAGE_ID(3146092);
+
+const D3D11_MESSAGE_ID_VIDEODECODERENABLEDOWNSAMPLING_UNSUPPORTED =
+    D3D11_MESSAGE_ID(3146093);
+
+const D3D11_MESSAGE_ID_VIDEODECODERUPDATEDOWNSAMPLING_NULLPARAM =
+    D3D11_MESSAGE_ID(3146094);
+
+const D3D11_MESSAGE_ID_VIDEODECODERUPDATEDOWNSAMPLING_UNSUPPORTED =
+    D3D11_MESSAGE_ID(3146095);
+
+const D3D11_MESSAGE_ID_CHECKVIDEOPROCESSORFORMATCONVERSION_NULLPARAM =
+    D3D11_MESSAGE_ID(3146096);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTCOLORSPACE1_NULLPARAM =
+    D3D11_MESSAGE_ID(3146097);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETOUTPUTCOLORSPACE1_NULLPARAM =
+    D3D11_MESSAGE_ID(3146098);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMCOLORSPACE1_NULLPARAM =
+    D3D11_MESSAGE_ID(3146099);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMCOLORSPACE1_INVALIDSTREAM =
+    D3D11_MESSAGE_ID(3146100);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMMIRROR_NULLPARAM =
+    D3D11_MESSAGE_ID(3146101);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMMIRROR_INVALIDSTREAM =
+    D3D11_MESSAGE_ID(3146102);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMMIRROR_UNSUPPORTED =
+    D3D11_MESSAGE_ID(3146103);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMCOLORSPACE1_NULLPARAM =
+    D3D11_MESSAGE_ID(3146104);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMMIRROR_NULLPARAM =
+    D3D11_MESSAGE_ID(3146105);
+
+const D3D11_MESSAGE_ID_RECOMMENDVIDEODECODERDOWNSAMPLING_NULLPARAM =
+    D3D11_MESSAGE_ID(3146106);
+
+const D3D11_MESSAGE_ID_RECOMMENDVIDEODECODERDOWNSAMPLING_INVALIDCOLORSPACE =
+    D3D11_MESSAGE_ID(3146107);
+
+const D3D11_MESSAGE_ID_RECOMMENDVIDEODECODERDOWNSAMPLING_ZEROWIDTHHEIGHT =
+    D3D11_MESSAGE_ID(3146108);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTSHADERUSAGE_NULLPARAM =
+    D3D11_MESSAGE_ID(3146109);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETOUTPUTSHADERUSAGE_NULLPARAM =
+    D3D11_MESSAGE_ID(3146110);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETBEHAVIORHINTS_NULLPARAM =
+    D3D11_MESSAGE_ID(3146111);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETBEHAVIORHINTS_INVALIDSTREAMCOUNT =
+    D3D11_MESSAGE_ID(3146112);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETBEHAVIORHINTS_TARGETRECT =
+    D3D11_MESSAGE_ID(3146113);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETBEHAVIORHINTS_INVALIDSOURCERECT =
+    D3D11_MESSAGE_ID(3146114);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETBEHAVIORHINTS_INVALIDDESTRECT =
+    D3D11_MESSAGE_ID(3146115);
+
+const D3D11_MESSAGE_ID_GETCRYPTOSESSIONPRIVATEDATASIZE_INVALID_KEY_EXCHANGE_TYPE =
+    D3D11_MESSAGE_ID(3146116);
+
+const D3D11_MESSAGE_ID_DEVICE_OPEN_SHARED_RESOURCE1_ACCESS_DENIED =
+    D3D11_MESSAGE_ID(3146117);
+
+const D3D11_MESSAGE_ID_D3D11_1_MESSAGES_END = D3D11_MESSAGE_ID(3146118);
+
+const D3D11_MESSAGE_ID_D3D11_2_MESSAGES_START = D3D11_MESSAGE_ID(3146119);
+
+const D3D11_MESSAGE_ID_CREATEBUFFER_INVALIDUSAGE = D3D11_MESSAGE_ID(3146120);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE1D_INVALIDUSAGE = D3D11_MESSAGE_ID(3146121);
+
+const D3D11_MESSAGE_ID_CREATETEXTURE2D_INVALIDUSAGE = D3D11_MESSAGE_ID(3146122);
+
+const D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_LEVEL9_STEPRATE_NOT_1 =
+    D3D11_MESSAGE_ID(3146123);
+
+const D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_LEVEL9_INSTANCING_NOT_SUPPORTED =
+    D3D11_MESSAGE_ID(3146124);
+
+const D3D11_MESSAGE_ID_UPDATETILEMAPPINGS_INVALID_PARAMETER = D3D11_MESSAGE_ID(
+  3146125,
+);
+
+const D3D11_MESSAGE_ID_COPYTILEMAPPINGS_INVALID_PARAMETER = D3D11_MESSAGE_ID(
+  3146126,
+);
+
+const D3D11_MESSAGE_ID_COPYTILES_INVALID_PARAMETER = D3D11_MESSAGE_ID(3146127);
+
+const D3D11_MESSAGE_ID_UPDATETILES_INVALID_PARAMETER = D3D11_MESSAGE_ID(
+  3146128,
+);
+
+const D3D11_MESSAGE_ID_RESIZETILEPOOL_INVALID_PARAMETER = D3D11_MESSAGE_ID(
+  3146129,
+);
+
+const D3D11_MESSAGE_ID_TILEDRESOURCEBARRIER_INVALID_PARAMETER =
+    D3D11_MESSAGE_ID(3146130);
+
+const D3D11_MESSAGE_ID_NULL_TILE_MAPPING_ACCESS_WARNING = D3D11_MESSAGE_ID(
+  3146131,
+);
+
+const D3D11_MESSAGE_ID_NULL_TILE_MAPPING_ACCESS_ERROR = D3D11_MESSAGE_ID(
+  3146132,
+);
+
+const D3D11_MESSAGE_ID_DIRTY_TILE_MAPPING_ACCESS = D3D11_MESSAGE_ID(3146133);
+
+const D3D11_MESSAGE_ID_DUPLICATE_TILE_MAPPINGS_IN_COVERED_AREA =
+    D3D11_MESSAGE_ID(3146134);
+
+const D3D11_MESSAGE_ID_TILE_MAPPINGS_IN_COVERED_AREA_DUPLICATED_OUTSIDE =
+    D3D11_MESSAGE_ID(3146135);
+
+const D3D11_MESSAGE_ID_TILE_MAPPINGS_SHARED_BETWEEN_INCOMPATIBLE_RESOURCES =
+    D3D11_MESSAGE_ID(3146136);
+
+const D3D11_MESSAGE_ID_TILE_MAPPINGS_SHARED_BETWEEN_INPUT_AND_OUTPUT =
+    D3D11_MESSAGE_ID(3146137);
+
+const D3D11_MESSAGE_ID_CHECKMULTISAMPLEQUALITYLEVELS_INVALIDFLAGS =
+    D3D11_MESSAGE_ID(3146138);
+
+const D3D11_MESSAGE_ID_GETRESOURCETILING_NONTILED_RESOURCE = D3D11_MESSAGE_ID(
+  3146139,
+);
+
+const D3D11_MESSAGE_ID_RESIZETILEPOOL_SHRINK_WITH_MAPPINGS_STILL_DEFINED_PAST_END =
+    D3D11_MESSAGE_ID(3146140);
+
+const D3D11_MESSAGE_ID_NEED_TO_CALL_TILEDRESOURCEBARRIER = D3D11_MESSAGE_ID(
+  3146141,
+);
+
+const D3D11_MESSAGE_ID_CREATEDEVICE_INVALIDARGS = D3D11_MESSAGE_ID(3146142);
+
+const D3D11_MESSAGE_ID_CREATEDEVICE_WARNING = D3D11_MESSAGE_ID(3146143);
+
+const D3D11_MESSAGE_ID_CLEARUNORDEREDACCESSVIEWUINT_HAZARD = D3D11_MESSAGE_ID(
+  3146144,
+);
+
+const D3D11_MESSAGE_ID_CLEARUNORDEREDACCESSVIEWFLOAT_HAZARD = D3D11_MESSAGE_ID(
+  3146145,
+);
+
+const D3D11_MESSAGE_ID_TILED_RESOURCE_TIER_1_BUFFER_TEXTURE_MISMATCH =
+    D3D11_MESSAGE_ID(3146146);
+
+const D3D11_MESSAGE_ID_CREATE_CRYPTOSESSION = D3D11_MESSAGE_ID(3146147);
+
+const D3D11_MESSAGE_ID_CREATE_AUTHENTICATEDCHANNEL = D3D11_MESSAGE_ID(3146148);
+
+const D3D11_MESSAGE_ID_LIVE_CRYPTOSESSION = D3D11_MESSAGE_ID(3146149);
+
+const D3D11_MESSAGE_ID_LIVE_AUTHENTICATEDCHANNEL = D3D11_MESSAGE_ID(3146150);
+
+const D3D11_MESSAGE_ID_DESTROY_CRYPTOSESSION = D3D11_MESSAGE_ID(3146151);
+
+const D3D11_MESSAGE_ID_DESTROY_AUTHENTICATEDCHANNEL = D3D11_MESSAGE_ID(3146152);
+
+const D3D11_MESSAGE_ID_D3D11_2_MESSAGES_END = D3D11_MESSAGE_ID(3146153);
+
+const D3D11_MESSAGE_ID_D3D11_3_MESSAGES_START = D3D11_MESSAGE_ID(3146154);
+
+const D3D11_MESSAGE_ID_CREATERASTERIZERSTATE_INVALID_CONSERVATIVERASTERMODE =
+    D3D11_MESSAGE_ID(3146155);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_INVALID_SYSTEMVALUE = D3D11_MESSAGE_ID(
+  3146156,
+);
+
+const D3D11_MESSAGE_ID_CREATEQUERYORPREDICATE_INVALIDCONTEXTTYPE =
+    D3D11_MESSAGE_ID(3146157);
+
+const D3D11_MESSAGE_ID_CREATEQUERYORPREDICATE_DECODENOTSUPPORTED =
+    D3D11_MESSAGE_ID(3146158);
+
+const D3D11_MESSAGE_ID_CREATEQUERYORPREDICATE_ENCODENOTSUPPORTED =
+    D3D11_MESSAGE_ID(3146159);
+
+const D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_INVALIDPLANEINDEX =
+    D3D11_MESSAGE_ID(3146160);
+
+const D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_INVALIDVIDEOPLANEINDEX =
+    D3D11_MESSAGE_ID(3146161);
+
+const D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_AMBIGUOUSVIDEOPLANEINDEX =
+    D3D11_MESSAGE_ID(3146162);
+
+const D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_INVALIDPLANEINDEX =
+    D3D11_MESSAGE_ID(3146163);
+
+const D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_INVALIDVIDEOPLANEINDEX =
+    D3D11_MESSAGE_ID(3146164);
+
+const D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_AMBIGUOUSVIDEOPLANEINDEX =
+    D3D11_MESSAGE_ID(3146165);
+
+const D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_INVALIDPLANEINDEX =
+    D3D11_MESSAGE_ID(3146166);
+
+const D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_INVALIDVIDEOPLANEINDEX =
+    D3D11_MESSAGE_ID(3146167);
+
+const D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_AMBIGUOUSVIDEOPLANEINDEX =
+    D3D11_MESSAGE_ID(3146168);
+
+const D3D11_MESSAGE_ID_JPEGDECODE_INVALIDSCANDATAOFFSET = D3D11_MESSAGE_ID(
+  3146169,
+);
+
+const D3D11_MESSAGE_ID_JPEGDECODE_NOTSUPPORTED = D3D11_MESSAGE_ID(3146170);
+
+const D3D11_MESSAGE_ID_JPEGDECODE_DIMENSIONSTOOLARGE = D3D11_MESSAGE_ID(
+  3146171,
+);
+
+const D3D11_MESSAGE_ID_JPEGDECODE_INVALIDCOMPONENTS = D3D11_MESSAGE_ID(3146172);
+
+const D3D11_MESSAGE_ID_JPEGDECODE_DESTINATIONNOT2D = D3D11_MESSAGE_ID(3146173);
+
+const D3D11_MESSAGE_ID_JPEGDECODE_TILEDRESOURCESUNSUPPORTED = D3D11_MESSAGE_ID(
+  3146174,
+);
+
+const D3D11_MESSAGE_ID_JPEGDECODE_GUARDRECTSUNSUPPORTED = D3D11_MESSAGE_ID(
+  3146175,
+);
+
+const D3D11_MESSAGE_ID_JPEGDECODE_FORMATUNSUPPORTED = D3D11_MESSAGE_ID(3146176);
+
+const D3D11_MESSAGE_ID_JPEGDECODE_INVALIDSUBRESOURCE = D3D11_MESSAGE_ID(
+  3146177,
+);
+
+const D3D11_MESSAGE_ID_JPEGDECODE_INVALIDMIPLEVEL = D3D11_MESSAGE_ID(3146178);
+
+const D3D11_MESSAGE_ID_JPEGDECODE_EMPTYDESTBOX = D3D11_MESSAGE_ID(3146179);
+
+const D3D11_MESSAGE_ID_JPEGDECODE_DESTBOXNOT2D = D3D11_MESSAGE_ID(3146180);
+
+const D3D11_MESSAGE_ID_JPEGDECODE_DESTBOXNOTSUB = D3D11_MESSAGE_ID(3146181);
+
+const D3D11_MESSAGE_ID_JPEGDECODE_DESTBOXESINTERSECT = D3D11_MESSAGE_ID(
+  3146182,
+);
+
+const D3D11_MESSAGE_ID_JPEGDECODE_XSUBSAMPLEMISMATCH = D3D11_MESSAGE_ID(
+  3146183,
+);
+
+const D3D11_MESSAGE_ID_JPEGDECODE_YSUBSAMPLEMISMATCH = D3D11_MESSAGE_ID(
+  3146184,
+);
+
+const D3D11_MESSAGE_ID_JPEGDECODE_XSUBSAMPLEODD = D3D11_MESSAGE_ID(3146185);
+
+const D3D11_MESSAGE_ID_JPEGDECODE_YSUBSAMPLEODD = D3D11_MESSAGE_ID(3146186);
+
+const D3D11_MESSAGE_ID_JPEGDECODE_OUTPUTDIMENSIONSTOOLARGE = D3D11_MESSAGE_ID(
+  3146187,
+);
+
+const D3D11_MESSAGE_ID_JPEGDECODE_NONPOW2SCALEUNSUPPORTED = D3D11_MESSAGE_ID(
+  3146188,
+);
+
+const D3D11_MESSAGE_ID_JPEGDECODE_FRACTIONALDOWNSCALETOLARGE = D3D11_MESSAGE_ID(
+  3146189,
+);
+
+const D3D11_MESSAGE_ID_JPEGDECODE_CHROMASIZEMISMATCH = D3D11_MESSAGE_ID(
+  3146190,
+);
+
+const D3D11_MESSAGE_ID_JPEGDECODE_LUMACHROMASIZEMISMATCH = D3D11_MESSAGE_ID(
+  3146191,
+);
+
+const D3D11_MESSAGE_ID_JPEGDECODE_INVALIDNUMDESTINATIONS = D3D11_MESSAGE_ID(
+  3146192,
+);
+
+const D3D11_MESSAGE_ID_JPEGDECODE_SUBBOXUNSUPPORTED = D3D11_MESSAGE_ID(3146193);
+
+const D3D11_MESSAGE_ID_JPEGDECODE_1DESTUNSUPPORTEDFORMAT = D3D11_MESSAGE_ID(
+  3146194,
+);
+
+const D3D11_MESSAGE_ID_JPEGDECODE_3DESTUNSUPPORTEDFORMAT = D3D11_MESSAGE_ID(
+  3146195,
+);
+
+const D3D11_MESSAGE_ID_JPEGDECODE_SCALEUNSUPPORTED = D3D11_MESSAGE_ID(3146196);
+
+const D3D11_MESSAGE_ID_JPEGDECODE_INVALIDSOURCESIZE = D3D11_MESSAGE_ID(3146197);
+
+const D3D11_MESSAGE_ID_JPEGDECODE_INVALIDCOPYFLAGS = D3D11_MESSAGE_ID(3146198);
+
+const D3D11_MESSAGE_ID_JPEGDECODE_HAZARD = D3D11_MESSAGE_ID(3146199);
+
+const D3D11_MESSAGE_ID_JPEGDECODE_UNSUPPORTEDSRCBUFFERUSAGE = D3D11_MESSAGE_ID(
+  3146200,
+);
+
+const D3D11_MESSAGE_ID_JPEGDECODE_UNSUPPORTEDSRCBUFFERMISCFLAGS =
+    D3D11_MESSAGE_ID(3146201);
+
+const D3D11_MESSAGE_ID_JPEGDECODE_UNSUPPORTEDDSTTEXTUREUSAGE = D3D11_MESSAGE_ID(
+  3146202,
+);
+
+const D3D11_MESSAGE_ID_JPEGDECODE_BACKBUFFERNOTSUPPORTED = D3D11_MESSAGE_ID(
+  3146203,
+);
+
+const D3D11_MESSAGE_ID_JPEGDECODE_UNSUPPRTEDCOPYFLAGS = D3D11_MESSAGE_ID(
+  3146204,
+);
+
+const D3D11_MESSAGE_ID_JPEGENCODE_NOTSUPPORTED = D3D11_MESSAGE_ID(3146205);
+
+const D3D11_MESSAGE_ID_JPEGENCODE_INVALIDSCANDATAOFFSET = D3D11_MESSAGE_ID(
+  3146206,
+);
+
+const D3D11_MESSAGE_ID_JPEGENCODE_INVALIDCOMPONENTS = D3D11_MESSAGE_ID(3146207);
+
+const D3D11_MESSAGE_ID_JPEGENCODE_SOURCENOT2D = D3D11_MESSAGE_ID(3146208);
+
+const D3D11_MESSAGE_ID_JPEGENCODE_TILEDRESOURCESUNSUPPORTED = D3D11_MESSAGE_ID(
+  3146209,
+);
+
+const D3D11_MESSAGE_ID_JPEGENCODE_GUARDRECTSUNSUPPORTED = D3D11_MESSAGE_ID(
+  3146210,
+);
+
+const D3D11_MESSAGE_ID_JPEGENCODE_XSUBSAMPLEMISMATCH = D3D11_MESSAGE_ID(
+  3146211,
+);
+
+const D3D11_MESSAGE_ID_JPEGENCODE_YSUBSAMPLEMISMATCH = D3D11_MESSAGE_ID(
+  3146212,
+);
+
+const D3D11_MESSAGE_ID_JPEGENCODE_FORMATUNSUPPORTED = D3D11_MESSAGE_ID(3146213);
+
+const D3D11_MESSAGE_ID_JPEGENCODE_INVALIDSUBRESOURCE = D3D11_MESSAGE_ID(
+  3146214,
+);
+
+const D3D11_MESSAGE_ID_JPEGENCODE_INVALIDMIPLEVEL = D3D11_MESSAGE_ID(3146215);
+
+const D3D11_MESSAGE_ID_JPEGENCODE_DIMENSIONSTOOLARGE = D3D11_MESSAGE_ID(
+  3146216,
+);
+
+const D3D11_MESSAGE_ID_JPEGENCODE_HAZARD = D3D11_MESSAGE_ID(3146217);
+
+const D3D11_MESSAGE_ID_JPEGENCODE_UNSUPPORTEDDSTBUFFERUSAGE = D3D11_MESSAGE_ID(
+  3146218,
+);
+
+const D3D11_MESSAGE_ID_JPEGENCODE_UNSUPPORTEDDSTBUFFERMISCFLAGS =
+    D3D11_MESSAGE_ID(3146219);
+
+const D3D11_MESSAGE_ID_JPEGENCODE_UNSUPPORTEDSRCTEXTUREUSAGE = D3D11_MESSAGE_ID(
+  3146220,
+);
+
+const D3D11_MESSAGE_ID_JPEGENCODE_BACKBUFFERNOTSUPPORTED = D3D11_MESSAGE_ID(
+  3146221,
+);
+
+const D3D11_MESSAGE_ID_CREATEQUERYORPREDICATE_UNSUPPORTEDCONTEXTTTYPEFORQUERY =
+    D3D11_MESSAGE_ID(3146222);
+
+const D3D11_MESSAGE_ID_FLUSH1_INVALIDCONTEXTTYPE = D3D11_MESSAGE_ID(3146223);
+
+const D3D11_MESSAGE_ID_DEVICE_SETHARDWAREPROTECTION_INVALIDCONTEXT =
+    D3D11_MESSAGE_ID(3146224);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTHDRMETADATA_NULLPARAM =
+    D3D11_MESSAGE_ID(3146225);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTHDRMETADATA_INVALIDSIZE =
+    D3D11_MESSAGE_ID(3146226);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETOUTPUTHDRMETADATA_NULLPARAM =
+    D3D11_MESSAGE_ID(3146227);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETOUTPUTHDRMETADATA_INVALIDSIZE =
+    D3D11_MESSAGE_ID(3146228);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMHDRMETADATA_NULLPARAM =
+    D3D11_MESSAGE_ID(3146229);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMHDRMETADATA_INVALIDSTREAM =
+    D3D11_MESSAGE_ID(3146230);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMHDRMETADATA_INVALIDSIZE =
+    D3D11_MESSAGE_ID(3146231);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMHDRMETADATA_NULLPARAM =
+    D3D11_MESSAGE_ID(3146232);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMHDRMETADATA_INVALIDSTREAM =
+    D3D11_MESSAGE_ID(3146233);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMHDRMETADATA_INVALIDSIZE =
+    D3D11_MESSAGE_ID(3146234);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMFRAMEFORMAT_INVALIDSTREAM =
+    D3D11_MESSAGE_ID(3146235);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMCOLORSPACE_INVALIDSTREAM =
+    D3D11_MESSAGE_ID(3146236);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMOUTPUTRATE_INVALIDSTREAM =
+    D3D11_MESSAGE_ID(3146237);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMSOURCERECT_INVALIDSTREAM =
+    D3D11_MESSAGE_ID(3146238);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMDESTRECT_INVALIDSTREAM =
+    D3D11_MESSAGE_ID(3146239);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMALPHA_INVALIDSTREAM =
+    D3D11_MESSAGE_ID(3146240);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMPALETTE_INVALIDSTREAM =
+    D3D11_MESSAGE_ID(3146241);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMPIXELASPECTRATIO_INVALIDSTREAM =
+    D3D11_MESSAGE_ID(3146242);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMLUMAKEY_INVALIDSTREAM =
+    D3D11_MESSAGE_ID(3146243);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMSTEREOFORMAT_INVALIDSTREAM =
+    D3D11_MESSAGE_ID(3146244);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMAUTOPROCESSINGMODE_INVALIDSTREAM =
+    D3D11_MESSAGE_ID(3146245);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMFILTER_INVALIDSTREAM =
+    D3D11_MESSAGE_ID(3146246);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMROTATION_INVALIDSTREAM =
+    D3D11_MESSAGE_ID(3146247);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMCOLORSPACE1_INVALIDSTREAM =
+    D3D11_MESSAGE_ID(3146248);
+
+const D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMMIRROR_INVALIDSTREAM =
+    D3D11_MESSAGE_ID(3146249);
+
+const D3D11_MESSAGE_ID_CREATE_FENCE = D3D11_MESSAGE_ID(3146250);
+
+const D3D11_MESSAGE_ID_LIVE_FENCE = D3D11_MESSAGE_ID(3146251);
+
+const D3D11_MESSAGE_ID_DESTROY_FENCE = D3D11_MESSAGE_ID(3146252);
+
+const D3D11_MESSAGE_ID_CREATE_SYNCHRONIZEDCHANNEL = D3D11_MESSAGE_ID(3146253);
+
+const D3D11_MESSAGE_ID_LIVE_SYNCHRONIZEDCHANNEL = D3D11_MESSAGE_ID(3146254);
+
+const D3D11_MESSAGE_ID_DESTROY_SYNCHRONIZEDCHANNEL = D3D11_MESSAGE_ID(3146255);
+
+const D3D11_MESSAGE_ID_CREATEFENCE_INVALIDFLAGS = D3D11_MESSAGE_ID(3146256);
+
+const D3D11_MESSAGE_ID_D3D11_3_MESSAGES_END = D3D11_MESSAGE_ID(3146257);
+
+const D3D11_MESSAGE_ID_D3D11_5_MESSAGES_START = D3D11_MESSAGE_ID(3146258);
+
+const D3D11_MESSAGE_ID_NEGOTIATECRYPTOSESSIONKEYEXCHANGEMT_INVALIDKEYEXCHANGETYPE =
+    D3D11_MESSAGE_ID(3146259);
+
+const D3D11_MESSAGE_ID_NEGOTIATECRYPTOSESSIONKEYEXCHANGEMT_NOT_SUPPORTED =
+    D3D11_MESSAGE_ID(3146260);
+
+const D3D11_MESSAGE_ID_DECODERBEGINFRAME_INVALID_HISTOGRAM_COMPONENT_COUNT =
+    D3D11_MESSAGE_ID(3146261);
+
+const D3D11_MESSAGE_ID_DECODERBEGINFRAME_INVALID_HISTOGRAM_COMPONENT =
+    D3D11_MESSAGE_ID(3146262);
+
+const D3D11_MESSAGE_ID_DECODERBEGINFRAME_INVALID_HISTOGRAM_BUFFER_SIZE =
+    D3D11_MESSAGE_ID(3146263);
+
+const D3D11_MESSAGE_ID_DECODERBEGINFRAME_INVALID_HISTOGRAM_BUFFER_USAGE =
+    D3D11_MESSAGE_ID(3146264);
+
+const D3D11_MESSAGE_ID_DECODERBEGINFRAME_INVALID_HISTOGRAM_BUFFER_MISC_FLAGS =
+    D3D11_MESSAGE_ID(3146265);
+
+const D3D11_MESSAGE_ID_DECODERBEGINFRAME_INVALID_HISTOGRAM_BUFFER_OFFSET =
+    D3D11_MESSAGE_ID(3146266);
+
+const D3D11_MESSAGE_ID_CREATE_TRACKEDWORKLOAD = D3D11_MESSAGE_ID(3146267);
+
+const D3D11_MESSAGE_ID_LIVE_TRACKEDWORKLOAD = D3D11_MESSAGE_ID(3146268);
+
+const D3D11_MESSAGE_ID_DESTROY_TRACKEDWORKLOAD = D3D11_MESSAGE_ID(3146269);
+
+const D3D11_MESSAGE_ID_CREATE_TRACKED_WORKLOAD_NULLPARAM = D3D11_MESSAGE_ID(
+  3146270,
+);
+
+const D3D11_MESSAGE_ID_CREATE_TRACKED_WORKLOAD_INVALID_MAX_INSTANCES =
+    D3D11_MESSAGE_ID(3146271);
+
+const D3D11_MESSAGE_ID_CREATE_TRACKED_WORKLOAD_INVALID_DEADLINE_TYPE =
+    D3D11_MESSAGE_ID(3146272);
+
+const D3D11_MESSAGE_ID_CREATE_TRACKED_WORKLOAD_INVALID_ENGINE_TYPE =
+    D3D11_MESSAGE_ID(3146273);
+
+const D3D11_MESSAGE_ID_MULTIPLE_TRACKED_WORKLOADS = D3D11_MESSAGE_ID(3146274);
+
+const D3D11_MESSAGE_ID_MULTIPLE_TRACKED_WORKLOAD_PAIRS = D3D11_MESSAGE_ID(
+  3146275,
+);
+
+const D3D11_MESSAGE_ID_INCOMPLETE_TRACKED_WORKLOAD_PAIR = D3D11_MESSAGE_ID(
+  3146276,
+);
+
+const D3D11_MESSAGE_ID_OUT_OF_ORDER_TRACKED_WORKLOAD_PAIR = D3D11_MESSAGE_ID(
+  3146277,
+);
+
+const D3D11_MESSAGE_ID_CANNOT_ADD_TRACKED_WORKLOAD = D3D11_MESSAGE_ID(3146278);
+
+const D3D11_MESSAGE_ID_TRACKED_WORKLOAD_NOT_SUPPORTED = D3D11_MESSAGE_ID(
+  3146279,
+);
+
+const D3D11_MESSAGE_ID_TRACKED_WORKLOAD_ENGINE_TYPE_NOT_FOUND =
+    D3D11_MESSAGE_ID(3146280);
+
+const D3D11_MESSAGE_ID_NO_TRACKED_WORKLOAD_SLOT_AVAILABLE = D3D11_MESSAGE_ID(
+  3146281,
+);
+
+const D3D11_MESSAGE_ID_END_TRACKED_WORKLOAD_INVALID_ARG = D3D11_MESSAGE_ID(
+  3146282,
+);
+
+const D3D11_MESSAGE_ID_TRACKED_WORKLOAD_DISJOINT_FAILURE = D3D11_MESSAGE_ID(
+  3146283,
+);
+
+const D3D11_MESSAGE_ID_DEVICE_DRAW_RESOURCE_FORMAT_AND_WRITE_MASK_MISMATCH =
+    D3D11_MESSAGE_ID(3146284);
+
+const D3D11_MESSAGE_ID_D3D11_5_MESSAGES_END = D3D11_MESSAGE_ID(3146285);
+
+/// Debug message severity levels for an information queue.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11sdklayers/ne-d3d11sdklayers-d3d11_message_severity>.
+///
+/// {@category enum}
+extension type const D3D11_MESSAGE_SEVERITY(int _) implements int {}
+
+/// Defines some type of corruption which has occurred.
+const D3D11_MESSAGE_SEVERITY_CORRUPTION = D3D11_MESSAGE_SEVERITY(0);
+
+/// Defines an error message.
+const D3D11_MESSAGE_SEVERITY_ERROR = D3D11_MESSAGE_SEVERITY(1);
+
+/// Defines a warning message.
+const D3D11_MESSAGE_SEVERITY_WARNING = D3D11_MESSAGE_SEVERITY(2);
+
+/// Defines an information message.
+const D3D11_MESSAGE_SEVERITY_INFO = D3D11_MESSAGE_SEVERITY(3);
+
+/// Defines a message other than corruption, error, warning, or information.
+const D3D11_MESSAGE_SEVERITY_MESSAGE = D3D11_MESSAGE_SEVERITY(4);
+
+/// Query types.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_query>.
+///
+/// {@category enum}
+extension type const D3D11_QUERY(int _) implements int {}
+
+/// Determines whether or not the GPU is finished processing commands.
+const D3D11_QUERY_EVENT = D3D11_QUERY(0);
+
+/// Get the number of samples that passed the depth and stencil tests in between
+/// <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-begin">ID3D11DeviceContext::Begin</a>
+/// and <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-end">ID3D11DeviceContext::End</a>.
+const D3D11_QUERY_OCCLUSION = D3D11_QUERY(1);
+
+/// Get a timestamp value where <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-getdata">ID3D11DeviceContext::GetData</a>
+/// returns a UINT64.
+const D3D11_QUERY_TIMESTAMP = D3D11_QUERY(2);
+
+/// Determines whether or not a D3D11_QUERY_TIMESTAMP is returning reliable
+/// values, and also gives the frequency of the processor enabling you to
+/// convert the number of elapsed ticks into seconds.
+const D3D11_QUERY_TIMESTAMP_DISJOINT = D3D11_QUERY(3);
+
+/// Get pipeline statistics, such as the number of pixel shader invocations in
+/// between <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-begin">ID3D11DeviceContext::Begin</a>
+/// and <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-end">ID3D11DeviceContext::End</a>.
+const D3D11_QUERY_PIPELINE_STATISTICS = D3D11_QUERY(4);
+
+/// Similar to D3D11_QUERY_OCCLUSION, except <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-getdata">ID3D11DeviceContext::GetData</a>
+/// returns a BOOL indicating whether or not any samples passed the depth and
+/// stencil tests - <b>TRUE</b> meaning at least one passed, <b>FALSE</b>
+/// meaning none passed.
+const D3D11_QUERY_OCCLUSION_PREDICATE = D3D11_QUERY(5);
+
+/// Get streaming output statistics, such as the number of primitives streamed
+/// out in between <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-begin">ID3D11DeviceContext::Begin</a>
+/// and <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-end">ID3D11DeviceContext::End</a>.
+const D3D11_QUERY_SO_STATISTICS = D3D11_QUERY(6);
+
+/// Determines whether or not any of the streaming output buffers overflowed in
+/// between <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-begin">ID3D11DeviceContext::Begin</a>
+/// and <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-end">ID3D11DeviceContext::End</a>.
+const D3D11_QUERY_SO_OVERFLOW_PREDICATE = D3D11_QUERY(7);
+
+/// Get streaming output statistics for stream 0, such as the number of
+/// primitives streamed out in between <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-begin">ID3D11DeviceContext::Begin</a>
+/// and <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-end">ID3D11DeviceContext::End</a>.
+const D3D11_QUERY_SO_STATISTICS_STREAM0 = D3D11_QUERY(8);
+
+/// Determines whether or not the stream 0 output buffers overflowed in between
+/// <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-begin">ID3D11DeviceContext::Begin</a>
+/// and <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-end">ID3D11DeviceContext::End</a>.
+const D3D11_QUERY_SO_OVERFLOW_PREDICATE_STREAM0 = D3D11_QUERY(9);
+
+/// Get streaming output statistics for stream 1, such as the number of
+/// primitives streamed out in between <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-begin">ID3D11DeviceContext::Begin</a>
+/// and <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-end">ID3D11DeviceContext::End</a>.
+const D3D11_QUERY_SO_STATISTICS_STREAM1 = D3D11_QUERY(10);
+
+/// Determines whether or not the stream 1 output buffers overflowed in between
+/// <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-begin">ID3D11DeviceContext::Begin</a>
+/// and <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-end">ID3D11DeviceContext::End</a>.
+const D3D11_QUERY_SO_OVERFLOW_PREDICATE_STREAM1 = D3D11_QUERY(11);
+
+/// Get streaming output statistics for stream 2, such as the number of
+/// primitives streamed out in between <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-begin">ID3D11DeviceContext::Begin</a>
+/// and <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-end">ID3D11DeviceContext::End</a>.
+const D3D11_QUERY_SO_STATISTICS_STREAM2 = D3D11_QUERY(12);
+
+/// Determines whether or not the stream 2 output buffers overflowed in between
+/// <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-begin">ID3D11DeviceContext::Begin</a>
+/// and <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-end">ID3D11DeviceContext::End</a>.
+const D3D11_QUERY_SO_OVERFLOW_PREDICATE_STREAM2 = D3D11_QUERY(13);
+
+/// Get streaming output statistics for stream 3, such as the number of
+/// primitives streamed out in between <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-begin">ID3D11DeviceContext::Begin</a>
+/// and <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-end">ID3D11DeviceContext::End</a>.
+const D3D11_QUERY_SO_STATISTICS_STREAM3 = D3D11_QUERY(14);
+
+/// Determines whether or not the stream 3 output buffers overflowed in between
+/// <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-begin">ID3D11DeviceContext::Begin</a>
+/// and <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-end">ID3D11DeviceContext::End</a>.
+const D3D11_QUERY_SO_OVERFLOW_PREDICATE_STREAM3 = D3D11_QUERY(15);
+
+/// Flags that describe miscellaneous query behavior.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_query_misc_flag>.
+///
+/// {@category enum}
+extension type const D3D11_QUERY_MISC_FLAG(int _) implements int {}
+
+/// Tell the hardware that if it is not yet sure if something is hidden or not
+/// to draw it anyway.
+const D3D11_QUERY_MISC_PREDICATEHINT = D3D11_QUERY_MISC_FLAG(1);
+
+/// Option(s) for raising an error to a non-continuable exception.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_raise_flag>.
+///
+/// {@category enum}
+extension type const D3D11_RAISE_FLAG(int _) implements int {}
+
+/// Raise an internal driver error to a non-continuable exception.
+const D3D11_RAISE_FLAG_DRIVER_INTERNAL_ERROR = D3D11_RAISE_FLAG(1);
+
+/// Identifies the type of resource being used.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_resource_dimension>.
+///
+/// {@category enum}
+extension type const D3D11_RESOURCE_DIMENSION(int _) implements int {}
+
+/// Resource is of unknown type.
+const D3D11_RESOURCE_DIMENSION_UNKNOWN = D3D11_RESOURCE_DIMENSION(0);
+
+/// Resource is a buffer.
+const D3D11_RESOURCE_DIMENSION_BUFFER = D3D11_RESOURCE_DIMENSION(1);
+
+/// Resource is a 1D texture.
+const D3D11_RESOURCE_DIMENSION_TEXTURE1D = D3D11_RESOURCE_DIMENSION(2);
+
+/// Resource is a 2D texture.
+const D3D11_RESOURCE_DIMENSION_TEXTURE2D = D3D11_RESOURCE_DIMENSION(3);
+
+/// Resource is a 3D texture.
+const D3D11_RESOURCE_DIMENSION_TEXTURE3D = D3D11_RESOURCE_DIMENSION(4);
+
+/// Identifies options for resources.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_resource_misc_flag>.
+///
+/// {@category enum}
+extension type const D3D11_RESOURCE_MISC_FLAG(int _) implements int {
+  /// Whether this instance has all the bit fields specified in [other].
+  bool has(D3D11_RESOURCE_MISC_FLAG other) => _ & other._ == other._;
+
+  D3D11_RESOURCE_MISC_FLAG operator &(int other) =>
+      D3D11_RESOURCE_MISC_FLAG(_ & other);
+  D3D11_RESOURCE_MISC_FLAG operator |(int other) =>
+      D3D11_RESOURCE_MISC_FLAG(_ | other);
+}
+
+/// Enables MIP map generation by using <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-generatemips">ID3D11DeviceContext::GenerateMips</a>
+/// on a texture resource.
+const D3D11_RESOURCE_MISC_GENERATE_MIPS = D3D11_RESOURCE_MISC_FLAG(1);
+
+/// Enables resource data sharing between two or more Direct3D devices.
+const D3D11_RESOURCE_MISC_SHARED = D3D11_RESOURCE_MISC_FLAG(2);
+
+/// Sets a resource to be a cube texture created from a <a
+/// href="https://docs.microsoft.com/windows/desktop/direct3dhlsl/sm5-object-texture2darray">Texture2DArray</a>
+/// that contains 6 textures.
+const D3D11_RESOURCE_MISC_TEXTURECUBE = D3D11_RESOURCE_MISC_FLAG(4);
+
+/// Enables instancing of GPU-generated content.
+const D3D11_RESOURCE_MISC_DRAWINDIRECT_ARGS = D3D11_RESOURCE_MISC_FLAG(16);
+
+/// Enables a resource as a <a
+/// href="https://docs.microsoft.com/windows/desktop/direct3d11/direct3d-11-advanced-stages-cs-resources">byte
+/// address buffer</a>.
+const D3D11_RESOURCE_MISC_BUFFER_ALLOW_RAW_VIEWS = D3D11_RESOURCE_MISC_FLAG(32);
+
+/// Enables a resource as a <a
+/// href="https://docs.microsoft.com/windows/desktop/direct3d11/direct3d-11-advanced-stages-cs-resources">structured
+/// buffer</a>.
+const D3D11_RESOURCE_MISC_BUFFER_STRUCTURED = D3D11_RESOURCE_MISC_FLAG(64);
+
+/// Enables a resource with MIP map clamping for use with <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-setresourceminlod">ID3D11DeviceContext::SetResourceMinLOD</a>.
+const D3D11_RESOURCE_MISC_RESOURCE_CLAMP = D3D11_RESOURCE_MISC_FLAG(128);
+
+/// Enables the resource to be synchronized by using the <a
+/// href="https://docs.microsoft.com/windows/desktop/api/dxgi/nf-dxgi-idxgikeyedmutex-acquiresync">IDXGIKeyedMutex::AcquireSync</a>
+/// and <a
+/// href="https://docs.microsoft.com/windows/desktop/api/dxgi/nf-dxgi-idxgikeyedmutex-releasesync">IDXGIKeyedMutex::ReleaseSync</a>
+/// APIs.
+const D3D11_RESOURCE_MISC_SHARED_KEYEDMUTEX = D3D11_RESOURCE_MISC_FLAG(256);
+
+/// Enables a resource compatible with GDI.
+const D3D11_RESOURCE_MISC_GDI_COMPATIBLE = D3D11_RESOURCE_MISC_FLAG(512);
+
+/// Set this flag to enable the use of NT HANDLE values when you create a shared
+/// resource.
+const D3D11_RESOURCE_MISC_SHARED_NTHANDLE = D3D11_RESOURCE_MISC_FLAG(2048);
+
+/// Set this flag to indicate that the resource might contain protected content;
+/// therefore, the operating system should use the resource only when the driver
+/// and hardware support content protection.
+const D3D11_RESOURCE_MISC_RESTRICTED_CONTENT = D3D11_RESOURCE_MISC_FLAG(4096);
+
+/// Set this flag to indicate that the operating system restricts access to the
+/// shared surface.
+const D3D11_RESOURCE_MISC_RESTRICT_SHARED_RESOURCE = D3D11_RESOURCE_MISC_FLAG(
+  8192,
+);
+
+/// Set this flag to indicate that the driver restricts access to the shared
+/// surface.
+const D3D11_RESOURCE_MISC_RESTRICT_SHARED_RESOURCE_DRIVER =
+    D3D11_RESOURCE_MISC_FLAG(16384);
+
+/// Set this flag to indicate that the resource is guarded.
+const D3D11_RESOURCE_MISC_GUARDED = D3D11_RESOURCE_MISC_FLAG(32768);
+
+/// Set this flag to indicate that the resource is a tile pool.
+const D3D11_RESOURCE_MISC_TILE_POOL = D3D11_RESOURCE_MISC_FLAG(131072);
+
+/// Set this flag to indicate that the resource is a tiled resource.
+const D3D11_RESOURCE_MISC_TILED = D3D11_RESOURCE_MISC_FLAG(262144);
+
+/// Set this flag to indicate that the resource should be created such that it
+/// will be protected by the hardware.
+const D3D11_RESOURCE_MISC_HW_PROTECTED = D3D11_RESOURCE_MISC_FLAG(524288);
+
+/// Enables the resource to work with the `displayable surfaces` feature.
+const D3D11_RESOURCE_MISC_SHARED_DISPLAYABLE = D3D11_RESOURCE_MISC_FLAG(
+  1048576,
+);
+
+/// TBD.
+const D3D11_RESOURCE_MISC_SHARED_EXCLUSIVE_WRITER = D3D11_RESOURCE_MISC_FLAG(
+  2097152,
+);
+
+const D3D11_RESOURCE_MISC_NO_SHADER_ACCESS = D3D11_RESOURCE_MISC_FLAG(4194304);
+
+/// Options for the amount of information to report about a device object's
+/// lifetime.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11sdklayers/ne-d3d11sdklayers-d3d11_rldo_flags>.
+///
+/// {@category enum}
+extension type const D3D11_RLDO_FLAGS(int _) implements int {
+  /// Whether this instance has all the bit fields specified in [other].
+  bool has(D3D11_RLDO_FLAGS other) => _ & other._ == other._;
+
+  D3D11_RLDO_FLAGS operator &(int other) => D3D11_RLDO_FLAGS(_ & other);
+  D3D11_RLDO_FLAGS operator |(int other) => D3D11_RLDO_FLAGS(_ | other);
+}
+
+/// Specifies to obtain a summary about a device object's lifetime.
+const D3D11_RLDO_SUMMARY = D3D11_RLDO_FLAGS(1);
+
+/// Specifies to obtain detailed information about a device object's lifetime.
+const D3D11_RLDO_DETAIL = D3D11_RLDO_FLAGS(2);
+
+/// This flag indicates to ignore objects which have no external refcounts
+/// keeping them alive.
+const D3D11_RLDO_IGNORE_INTERNAL = D3D11_RLDO_FLAGS(4);
+
+/// These flags identify the type of resource that will be viewed as a render
+/// target.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_rtv_dimension>.
+///
+/// {@category enum}
+extension type const D3D11_RTV_DIMENSION(int _) implements int {}
+
+/// Do not use this value, as it will cause <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11device-createrendertargetview">ID3D11Device::CreateRenderTargetView</a>
+/// to fail.
+const D3D11_RTV_DIMENSION_UNKNOWN = D3D11_RTV_DIMENSION(0);
+
+/// The resource will be accessed as a buffer.
+const D3D11_RTV_DIMENSION_BUFFER = D3D11_RTV_DIMENSION(1);
+
+/// The resource will be accessed as a 1D texture.
+const D3D11_RTV_DIMENSION_TEXTURE1D = D3D11_RTV_DIMENSION(2);
+
+/// The resource will be accessed as an array of 1D textures.
+const D3D11_RTV_DIMENSION_TEXTURE1DARRAY = D3D11_RTV_DIMENSION(3);
+
+/// The resource will be accessed as a 2D texture.
+const D3D11_RTV_DIMENSION_TEXTURE2D = D3D11_RTV_DIMENSION(4);
+
+/// The resource will be accessed as an array of 2D textures.
+const D3D11_RTV_DIMENSION_TEXTURE2DARRAY = D3D11_RTV_DIMENSION(5);
+
+/// The resource will be accessed as a 2D texture with multisampling.
+const D3D11_RTV_DIMENSION_TEXTURE2DMS = D3D11_RTV_DIMENSION(6);
+
+/// The resource will be accessed as an array of 2D textures with multisampling.
+const D3D11_RTV_DIMENSION_TEXTURE2DMSARRAY = D3D11_RTV_DIMENSION(7);
+
+/// The resource will be accessed as a 3D texture.
+const D3D11_RTV_DIMENSION_TEXTURE3D = D3D11_RTV_DIMENSION(8);
+
+/// {@category enum}
+extension type const D3D11_SHADER_ACCESS_RESTRICTED_RESOURCE_TIER(int _)
+    implements int {}
+
+const D3D11_SHADER_ACCESS_RESTRICTED_RESOURCE_TIER_0 =
+    D3D11_SHADER_ACCESS_RESTRICTED_RESOURCE_TIER(0);
+
+const D3D11_SHADER_ACCESS_RESTRICTED_RESOURCE_TIER_1 =
+    D3D11_SHADER_ACCESS_RESTRICTED_RESOURCE_TIER(1);
+
+/// Describes the level of support for shader caching in the current graphics
+/// driver.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_shader_cache_support_flags>.
+///
+/// {@category enum}
+extension type const D3D11_SHADER_CACHE_SUPPORT_FLAGS(int _) implements int {}
+
+/// Indicates that the driver does not support shader caching.
+const D3D11_SHADER_CACHE_SUPPORT_NONE = D3D11_SHADER_CACHE_SUPPORT_FLAGS(0);
+
+/// Indicates that the driver supports an OS-managed shader cache that stores
+/// compiled shaders in memory during the current run of the application.
+const D3D11_SHADER_CACHE_SUPPORT_AUTOMATIC_INPROC_CACHE =
+    D3D11_SHADER_CACHE_SUPPORT_FLAGS(1);
+
+/// Indicates that the driver supports an OS-managed shader cache that stores
+/// compiled shaders on disk to accelerate future runs of the application.
+const D3D11_SHADER_CACHE_SUPPORT_AUTOMATIC_DISK_CACHE =
+    D3D11_SHADER_CACHE_SUPPORT_FLAGS(2);
+
+/// Values that specify minimum precision levels at shader stages.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_shader_min_precision_support>.
+///
+/// {@category enum}
+extension type const D3D11_SHADER_MIN_PRECISION_SUPPORT(int _) implements int {}
+
+/// Minimum precision level is 10-bit.
+const D3D11_SHADER_MIN_PRECISION_10_BIT = D3D11_SHADER_MIN_PRECISION_SUPPORT(1);
+
+/// Minimum precision level is 16-bit.
+const D3D11_SHADER_MIN_PRECISION_16_BIT = D3D11_SHADER_MIN_PRECISION_SUPPORT(2);
+
+/// Options that specify how to perform shader debug tracking.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11sdklayers/ne-d3d11sdklayers-d3d11_shader_tracking_options>.
+///
+/// {@category enum}
+extension type const D3D11_SHADER_TRACKING_OPTIONS(int _) implements int {}
+
+/// No debug tracking is performed.
+const D3D11_SHADER_TRACKING_OPTION_IGNORE = D3D11_SHADER_TRACKING_OPTIONS(0);
+
+/// Track the reading of uninitialized data.
+const D3D11_SHADER_TRACKING_OPTION_TRACK_UNINITIALIZED =
+    D3D11_SHADER_TRACKING_OPTIONS(1);
+
+/// Track read-after-write hazards.
+const D3D11_SHADER_TRACKING_OPTION_TRACK_RAW = D3D11_SHADER_TRACKING_OPTIONS(2);
+
+/// Track write-after-read hazards.
+const D3D11_SHADER_TRACKING_OPTION_TRACK_WAR = D3D11_SHADER_TRACKING_OPTIONS(4);
+
+/// Track write-after-write hazards.
+const D3D11_SHADER_TRACKING_OPTION_TRACK_WAW = D3D11_SHADER_TRACKING_OPTIONS(8);
+
+/// Track that hazards are allowed in which data is written but the value does
+/// not change.
+const D3D11_SHADER_TRACKING_OPTION_ALLOW_SAME = D3D11_SHADER_TRACKING_OPTIONS(
+  16,
+);
+
+/// Track that only one type of atomic operation is used on an address.
+const D3D11_SHADER_TRACKING_OPTION_TRACK_ATOMIC_CONSISTENCY =
+    D3D11_SHADER_TRACKING_OPTIONS(32);
+
+/// Track read-after-write hazards across thread groups.
+const D3D11_SHADER_TRACKING_OPTION_TRACK_RAW_ACROSS_THREADGROUPS =
+    D3D11_SHADER_TRACKING_OPTIONS(64);
+
+/// Track write-after-read hazards across thread groups.
+const D3D11_SHADER_TRACKING_OPTION_TRACK_WAR_ACROSS_THREADGROUPS =
+    D3D11_SHADER_TRACKING_OPTIONS(128);
+
+/// Track write-after-write hazards across thread groups.
+const D3D11_SHADER_TRACKING_OPTION_TRACK_WAW_ACROSS_THREADGROUPS =
+    D3D11_SHADER_TRACKING_OPTIONS(256);
+
+/// Track that only one type of atomic operation is used on an address across
+/// thread groups.
+const D3D11_SHADER_TRACKING_OPTION_TRACK_ATOMIC_CONSISTENCY_ACROSS_THREADGROUPS =
+    D3D11_SHADER_TRACKING_OPTIONS(512);
+
+/// Track hazards that are specific to unordered access views (UAVs).
+const D3D11_SHADER_TRACKING_OPTION_UAV_SPECIFIC_FLAGS =
+    D3D11_SHADER_TRACKING_OPTIONS(960);
+
+/// Track all hazards.
+const D3D11_SHADER_TRACKING_OPTION_ALL_HAZARDS = D3D11_SHADER_TRACKING_OPTIONS(
+  1006,
+);
+
+/// Track all hazards and track that hazards are allowed in which data is
+/// written but the value does not change.
+const D3D11_SHADER_TRACKING_OPTION_ALL_HAZARDS_ALLOWING_SAME =
+    D3D11_SHADER_TRACKING_OPTIONS(1022);
+
+/// All of the preceding tracking options are set except
+/// <b>D3D11_SHADER_TRACKING_OPTION_IGNORE</b>.
+const D3D11_SHADER_TRACKING_OPTION_ALL_OPTIONS = D3D11_SHADER_TRACKING_OPTIONS(
+  1023,
+);
+
+/// Indicates which resource types to track.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11sdklayers/ne-d3d11sdklayers-d3d11_shader_tracking_resource_type>.
+///
+/// {@category enum}
+extension type const D3D11_SHADER_TRACKING_RESOURCE_TYPE(int _)
+    implements int {}
+
+/// No resource types are tracked.
+const D3D11_SHADER_TRACKING_RESOURCE_TYPE_NONE =
+    D3D11_SHADER_TRACKING_RESOURCE_TYPE(0);
+
+/// Track device memory that is created with unordered access view (UAV) bind
+/// flags.
+const D3D11_SHADER_TRACKING_RESOURCE_TYPE_UAV_DEVICEMEMORY =
+    D3D11_SHADER_TRACKING_RESOURCE_TYPE(1);
+
+/// Track device memory that is created without UAV bind flags.
+const D3D11_SHADER_TRACKING_RESOURCE_TYPE_NON_UAV_DEVICEMEMORY =
+    D3D11_SHADER_TRACKING_RESOURCE_TYPE(2);
+
+/// Track all device memory.
+const D3D11_SHADER_TRACKING_RESOURCE_TYPE_ALL_DEVICEMEMORY =
+    D3D11_SHADER_TRACKING_RESOURCE_TYPE(3);
+
+/// Track all shaders that use group shared memory.
+const D3D11_SHADER_TRACKING_RESOURCE_TYPE_GROUPSHARED_MEMORY =
+    D3D11_SHADER_TRACKING_RESOURCE_TYPE(4);
+
+/// Track all device memory except device memory that is created without UAV
+/// bind flags.
+const D3D11_SHADER_TRACKING_RESOURCE_TYPE_ALL_SHARED_MEMORY =
+    D3D11_SHADER_TRACKING_RESOURCE_TYPE(5);
+
+/// Track all device memory except device memory that is created with UAV bind
+/// flags.
+const D3D11_SHADER_TRACKING_RESOURCE_TYPE_GROUPSHARED_NON_UAV =
+    D3D11_SHADER_TRACKING_RESOURCE_TYPE(6);
+
+/// Track all memory on the device.
+const D3D11_SHADER_TRACKING_RESOURCE_TYPE_ALL =
+    D3D11_SHADER_TRACKING_RESOURCE_TYPE(7);
+
+/// Identifies a shader type for tracing.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11shadertracing/ne-d3d11shadertracing-d3d11_shader_type>.
+///
+/// {@category enum}
+extension type const D3D11_SHADER_TYPE(int _) implements int {}
+
+/// Identifies a vertex shader.
+const D3D11_VERTEX_SHADER = D3D11_SHADER_TYPE(1);
+
+/// Identifies a hull shader.
+const D3D11_HULL_SHADER = D3D11_SHADER_TYPE(2);
+
+/// Identifies a domain shader.
+const D3D11_DOMAIN_SHADER = D3D11_SHADER_TYPE(3);
+
+/// Identifies a geometry shader.
+const D3D11_GEOMETRY_SHADER = D3D11_SHADER_TYPE(4);
+
+/// Identifies a pixel shader.
+const D3D11_PIXEL_SHADER = D3D11_SHADER_TYPE(5);
+
+/// Identifies a compute shader.
+const D3D11_COMPUTE_SHADER = D3D11_SHADER_TYPE(6);
+
+/// Indicates shader type.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11shader/ne-d3d11shader-d3d11_shader_version_type>.
+///
+/// {@category enum}
+extension type const D3D11_SHADER_VERSION_TYPE(int _) implements int {}
+
+/// Pixel shader.
+const D3D11_SHVER_PIXEL_SHADER = D3D11_SHADER_VERSION_TYPE(0);
+
+/// Vertex shader.
+const D3D11_SHVER_VERTEX_SHADER = D3D11_SHADER_VERSION_TYPE(1);
+
+/// Geometry shader.
+const D3D11_SHVER_GEOMETRY_SHADER = D3D11_SHADER_VERSION_TYPE(2);
+
+/// Hull shader.
+const D3D11_SHVER_HULL_SHADER = D3D11_SHADER_VERSION_TYPE(3);
+
+/// Domain shader.
+const D3D11_SHVER_DOMAIN_SHADER = D3D11_SHADER_VERSION_TYPE(4);
+
+/// Compute shader.
+const D3D11_SHVER_COMPUTE_SHADER = D3D11_SHADER_VERSION_TYPE(5);
+
+/// Indicates the end of the enumeration constants.
+const D3D11_SHVER_RESERVED0 = D3D11_SHADER_VERSION_TYPE(65520);
+
+/// Defines constants that specify the level of support for shared resources in
+/// the current graphics driver.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_shared_resource_tier>.
+///
+/// {@category enum}
+extension type const D3D11_SHARED_RESOURCE_TIER(int _) implements int {}
+
+/// Specifies the support available when
+/// [D3D11_FEATURE_DATA_D3D11_OPTIONS::ExtendedResourceSharing](./ns-d3d11-d3d11_feature_data_d3d11_options.md)
+/// is `FALSE` (only very old drivers have this value set to `FALSE`).
+const D3D11_SHARED_RESOURCE_TIER_0 = D3D11_SHARED_RESOURCE_TIER(0);
+
+/// Specifies the support available when
+/// [D3D11_FEATURE_DATA_D3D11_OPTIONS::ExtendedResourceSharing](./ns-d3d11-d3d11_feature_data_d3d11_options.md)
+/// and
+/// [D3D11_FEATURE_DATA_D3D11_OPTIONS4::ExtendedNV12SharedTextureSupported](/windows/win32/api/d3d11_4/ns-d3d11_4-d3d11_feature_data_d3d11_options4)
+/// are `TRUE`.
+const D3D11_SHARED_RESOURCE_TIER_1 = D3D11_SHARED_RESOURCE_TIER(1);
+
+/// Specifies the support available when
+/// [D3D11_FEATURE_DATA_D3D11_OPTIONS4::ExtendedNV12SharedTextureSupported](../d3d11_4/ns-d3d11_4-d3d11_feature_data_d3d11_options4.md)
+/// is `TRUE`.
+const D3D11_SHARED_RESOURCE_TIER_2 = D3D11_SHARED_RESOURCE_TIER(2);
+
+/// Specifies that `DXGI_FORMAT_R11G11B10_FLOAT` supports NT handle sharing.
+const D3D11_SHARED_RESOURCE_TIER_3 = D3D11_SHARED_RESOURCE_TIER(3);
+
+/// Specifies a multi-sample pattern type.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_standard_multisample_quality_levels>.
+///
+/// {@category enum}
+extension type const D3D11_STANDARD_MULTISAMPLE_QUALITY_LEVELS(int _)
+    implements int {}
+
+/// Pre-defined multi-sample patterns required for Direct3D 11 and Direct3D 10.1
+/// hardware.
+const D3D11_STANDARD_MULTISAMPLE_PATTERN =
+    D3D11_STANDARD_MULTISAMPLE_QUALITY_LEVELS(-1);
+
+/// Pattern where all of the samples are located at the pixel center.
+const D3D11_CENTER_MULTISAMPLE_PATTERN =
+    D3D11_STANDARD_MULTISAMPLE_QUALITY_LEVELS(-2);
+
+/// The stencil operations that can be performed during depth-stencil testing.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_stencil_op>.
+///
+/// {@category enum}
+extension type const D3D11_STENCIL_OP(int _) implements int {}
+
+/// Keep the existing stencil data.
+const D3D11_STENCIL_OP_KEEP = D3D11_STENCIL_OP(1);
+
+/// Set the stencil data to 0.
+const D3D11_STENCIL_OP_ZERO = D3D11_STENCIL_OP(2);
+
+/// Set the stencil data to the reference value set by calling <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11devicecontext-omsetdepthstencilstate">ID3D11DeviceContext::OMSetDepthStencilState</a>.
+const D3D11_STENCIL_OP_REPLACE = D3D11_STENCIL_OP(3);
+
+/// Increment the stencil value by 1, and clamp the result.
+const D3D11_STENCIL_OP_INCR_SAT = D3D11_STENCIL_OP(4);
+
+/// Decrement the stencil value by 1, and clamp the result.
+const D3D11_STENCIL_OP_DECR_SAT = D3D11_STENCIL_OP(5);
+
+/// Invert the stencil data.
+const D3D11_STENCIL_OP_INVERT = D3D11_STENCIL_OP(6);
+
+/// Increment the stencil value by 1, and wrap the result if necessary.
+const D3D11_STENCIL_OP_INCR = D3D11_STENCIL_OP(7);
+
+/// Decrement the stencil value by 1, and wrap the result if necessary.
+const D3D11_STENCIL_OP_DECR = D3D11_STENCIL_OP(8);
+
+/// The different faces of a cube texture.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_texturecube_face>.
+///
+/// {@category enum}
+extension type const D3D11_TEXTURECUBE_FACE(int _) implements int {}
+
+/// Positive X face.
+const D3D11_TEXTURECUBE_FACE_POSITIVE_X = D3D11_TEXTURECUBE_FACE(0);
+
+/// Negative X face.
+const D3D11_TEXTURECUBE_FACE_NEGATIVE_X = D3D11_TEXTURECUBE_FACE(1);
+
+/// Positive Y face.
+const D3D11_TEXTURECUBE_FACE_POSITIVE_Y = D3D11_TEXTURECUBE_FACE(2);
+
+/// Negative Y face.
+const D3D11_TEXTURECUBE_FACE_NEGATIVE_Y = D3D11_TEXTURECUBE_FACE(3);
+
+/// Positive Z face.
+const D3D11_TEXTURECUBE_FACE_POSITIVE_Z = D3D11_TEXTURECUBE_FACE(4);
+
+/// Negative Z face.
+const D3D11_TEXTURECUBE_FACE_NEGATIVE_Z = D3D11_TEXTURECUBE_FACE(5);
+
+/// Identify a technique for resolving texture coordinates that are outside of
+/// the boundaries of a texture.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_texture_address_mode>.
+///
+/// {@category enum}
+extension type const D3D11_TEXTURE_ADDRESS_MODE(int _) implements int {}
+
+/// Tile the texture at every (u,v) integer junction.
+const D3D11_TEXTURE_ADDRESS_WRAP = D3D11_TEXTURE_ADDRESS_MODE(1);
+
+/// Flip the texture at every (u,v) integer junction.
+const D3D11_TEXTURE_ADDRESS_MIRROR = D3D11_TEXTURE_ADDRESS_MODE(2);
+
+/// Texture coordinates outside the range [0.0, 1.0] are set to the texture
+/// color at 0.0 or 1.0, respectively.
+const D3D11_TEXTURE_ADDRESS_CLAMP = D3D11_TEXTURE_ADDRESS_MODE(3);
+
+/// Texture coordinates outside the range [0.0, 1.0] are set to the border color
+/// specified in <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/ns-d3d11-d3d11_sampler_desc">D3D11_SAMPLER_DESC</a>
+/// or HLSL code.
+const D3D11_TEXTURE_ADDRESS_BORDER = D3D11_TEXTURE_ADDRESS_MODE(4);
+
+/// Similar to D3D11_TEXTURE_ADDRESS_MIRROR and D3D11_TEXTURE_ADDRESS_CLAMP.
+const D3D11_TEXTURE_ADDRESS_MIRROR_ONCE = D3D11_TEXTURE_ADDRESS_MODE(5);
+
+/// Specifies texture layout options.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_3/ne-d3d11_3-d3d11_texture_layout>.
+///
+/// {@category enum}
+extension type const D3D11_TEXTURE_LAYOUT(int _) implements int {}
+
+/// The texture layout is undefined, and is selected by the driver.
+const D3D11_TEXTURE_LAYOUT_UNDEFINED = D3D11_TEXTURE_LAYOUT(0);
+
+/// Data for the texture is stored in row major (sometimes called pitch-linear)
+/// order.
+const D3D11_TEXTURE_LAYOUT_ROW_MAJOR = D3D11_TEXTURE_LAYOUT(1);
+
+/// A default texture uses the standardized swizzle pattern.
+const D3D11_TEXTURE_LAYOUT_64K_STANDARD_SWIZZLE = D3D11_TEXTURE_LAYOUT(2);
+
+/// Indicates the tier level at which tiled resources are supported.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_tiled_resources_tier>.
+///
+/// {@category enum}
+extension type const D3D11_TILED_RESOURCES_TIER(int _) implements int {}
+
+/// Tiled resources are not supported.
+const D3D11_TILED_RESOURCES_NOT_SUPPORTED = D3D11_TILED_RESOURCES_TIER(0);
+
+/// Tier_1 tiled resources are supported.
+const D3D11_TILED_RESOURCES_TIER_1 = D3D11_TILED_RESOURCES_TIER(1);
+
+/// Tier_2 tiled resources are supported.
+const D3D11_TILED_RESOURCES_TIER_2 = D3D11_TILED_RESOURCES_TIER(2);
+
+/// Tier_3 tiled resources are supported.
+const D3D11_TILED_RESOURCES_TIER_3 = D3D11_TILED_RESOURCES_TIER(3);
+
+/// Identifies how to copy a tile.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_2/ne-d3d11_2-d3d11_tile_copy_flag>.
+///
+/// {@category enum}
+extension type const D3D11_TILE_COPY_FLAG(int _) implements int {}
+
+/// Indicates that the GPU isn't currently referencing any of the portions of
+/// destination memory being written.
+const D3D11_TILE_COPY_NO_OVERWRITE = D3D11_TILE_COPY_FLAG(1);
+
+/// Indicates that the <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11_2/nf-d3d11_2-id3d11devicecontext2-copytiles">ID3D11DeviceContext2::CopyTiles</a>
+/// operation involves copying a linear buffer to a swizzled tiled resource.
+const D3D11_TILE_COPY_LINEAR_BUFFER_TO_SWIZZLED_TILED_RESOURCE =
+    D3D11_TILE_COPY_FLAG(2);
+
+/// Indicates that the <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11_2/nf-d3d11_2-id3d11devicecontext2-copytiles">ID3D11DeviceContext2::CopyTiles</a>
+/// operation involves copying a swizzled tiled resource to a linear buffer.
+const D3D11_TILE_COPY_SWIZZLED_TILED_RESOURCE_TO_LINEAR_BUFFER =
+    D3D11_TILE_COPY_FLAG(4);
+
+/// Identifies how to perform a tile-mapping operation.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_2/ne-d3d11_2-d3d11_tile_mapping_flag>.
+///
+/// {@category enum}
+extension type const D3D11_TILE_MAPPING_FLAG(int _) implements int {}
+
+/// Indicates that no overwriting of tiles occurs in the tile-mapping operation.
+const D3D11_TILE_MAPPING_NO_OVERWRITE = D3D11_TILE_MAPPING_FLAG(1);
+
+/// Specifies a range of tile mappings to use with
+/// ID3D11DeviceContext2::UpdateTiles.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_2/ne-d3d11_2-d3d11_tile_range_flag>.
+///
+/// {@category enum}
+extension type const D3D11_TILE_RANGE_FLAG(int _) implements int {}
+
+/// The tile range is <b>NULL</b>.
+const D3D11_TILE_RANGE_NULL = D3D11_TILE_RANGE_FLAG(1);
+
+/// Skip the tile range.
+const D3D11_TILE_RANGE_SKIP = D3D11_TILE_RANGE_FLAG(2);
+
+/// Reuse a single tile in the tile range.
+const D3D11_TILE_RANGE_REUSE_SINGLE_TILE = D3D11_TILE_RANGE_FLAG(4);
+
+/// Identifies the type of geometry shader input primitive.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11shadertracing/ne-d3d11shadertracing-d3d11_trace_gs_input_primitive>.
+///
+/// {@category enum}
+extension type const D3D11_TRACE_GS_INPUT_PRIMITIVE(int _) implements int {}
+
+/// Identifies the geometry shader input primitive as undefined.
+const D3D11_TRACE_GS_INPUT_PRIMITIVE_UNDEFINED = D3D11_TRACE_GS_INPUT_PRIMITIVE(
+  0,
+);
+
+/// Identifies the geometry shader input primitive as a point.
+const D3D11_TRACE_GS_INPUT_PRIMITIVE_POINT = D3D11_TRACE_GS_INPUT_PRIMITIVE(1);
+
+/// Identifies the geometry shader input primitive as a line.
+const D3D11_TRACE_GS_INPUT_PRIMITIVE_LINE = D3D11_TRACE_GS_INPUT_PRIMITIVE(2);
+
+/// Identifies the geometry shader input primitive as a triangle.
+const D3D11_TRACE_GS_INPUT_PRIMITIVE_TRIANGLE = D3D11_TRACE_GS_INPUT_PRIMITIVE(
+  3,
+);
+
+/// Identifies the geometry shader input primitive as an adjacent line.
+const D3D11_TRACE_GS_INPUT_PRIMITIVE_LINE_ADJ = D3D11_TRACE_GS_INPUT_PRIMITIVE(
+  6,
+);
+
+/// Identifies the geometry shader input primitive as an adjacent triangle.
+const D3D11_TRACE_GS_INPUT_PRIMITIVE_TRIANGLE_ADJ =
+    D3D11_TRACE_GS_INPUT_PRIMITIVE(7);
+
+/// Identifies a type of trace register.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11shadertracing/ne-d3d11shadertracing-d3d11_trace_register_type>.
+///
+/// {@category enum}
+extension type const D3D11_TRACE_REGISTER_TYPE(int _) implements int {}
+
+/// Output <b>NULL</b> register.
+const D3D11_TRACE_OUTPUT_NULL_REGISTER = D3D11_TRACE_REGISTER_TYPE(0);
+
+/// Input register.
+const D3D11_TRACE_INPUT_REGISTER = D3D11_TRACE_REGISTER_TYPE(1);
+
+/// Input primitive ID register.
+const D3D11_TRACE_INPUT_PRIMITIVE_ID_REGISTER = D3D11_TRACE_REGISTER_TYPE(2);
+
+/// Immediate constant buffer.
+const D3D11_TRACE_IMMEDIATE_CONSTANT_BUFFER = D3D11_TRACE_REGISTER_TYPE(3);
+
+/// Temporary register.
+const D3D11_TRACE_TEMP_REGISTER = D3D11_TRACE_REGISTER_TYPE(4);
+
+/// Temporary register that can be indexed.
+const D3D11_TRACE_INDEXABLE_TEMP_REGISTER = D3D11_TRACE_REGISTER_TYPE(5);
+
+/// Output register.
+const D3D11_TRACE_OUTPUT_REGISTER = D3D11_TRACE_REGISTER_TYPE(6);
+
+/// Output oDepth register.
+const D3D11_TRACE_OUTPUT_DEPTH_REGISTER = D3D11_TRACE_REGISTER_TYPE(7);
+
+/// Constant buffer.
+const D3D11_TRACE_CONSTANT_BUFFER = D3D11_TRACE_REGISTER_TYPE(8);
+
+/// Immediate32 register.
+const D3D11_TRACE_IMMEDIATE32 = D3D11_TRACE_REGISTER_TYPE(9);
+
+/// Sampler.
+const D3D11_TRACE_SAMPLER = D3D11_TRACE_REGISTER_TYPE(10);
+
+/// Resource.
+const D3D11_TRACE_RESOURCE = D3D11_TRACE_REGISTER_TYPE(11);
+
+/// Rasterizer.
+const D3D11_TRACE_RASTERIZER = D3D11_TRACE_REGISTER_TYPE(12);
+
+/// Output coverage mask.
+const D3D11_TRACE_OUTPUT_COVERAGE_MASK = D3D11_TRACE_REGISTER_TYPE(13);
+
+/// Stream.
+const D3D11_TRACE_STREAM = D3D11_TRACE_REGISTER_TYPE(14);
+
+/// This pointer.
+const D3D11_TRACE_THIS_POINTER = D3D11_TRACE_REGISTER_TYPE(15);
+
+/// Output control point ID register (this is actually an input; it defines the
+/// output that the thread controls).
+const D3D11_TRACE_OUTPUT_CONTROL_POINT_ID_REGISTER = D3D11_TRACE_REGISTER_TYPE(
+  16,
+);
+
+/// Input fork instance ID register.
+const D3D11_TRACE_INPUT_FORK_INSTANCE_ID_REGISTER = D3D11_TRACE_REGISTER_TYPE(
+  17,
+);
+
+/// Input join instance ID register.
+const D3D11_TRACE_INPUT_JOIN_INSTANCE_ID_REGISTER = D3D11_TRACE_REGISTER_TYPE(
+  18,
+);
+
+/// Input control point register.
+const D3D11_TRACE_INPUT_CONTROL_POINT_REGISTER = D3D11_TRACE_REGISTER_TYPE(19);
+
+/// Output control point register.
+const D3D11_TRACE_OUTPUT_CONTROL_POINT_REGISTER = D3D11_TRACE_REGISTER_TYPE(20);
+
+/// Input patch constant register.
+const D3D11_TRACE_INPUT_PATCH_CONSTANT_REGISTER = D3D11_TRACE_REGISTER_TYPE(21);
+
+/// Input domain point register.
+const D3D11_TRACE_INPUT_DOMAIN_POINT_REGISTER = D3D11_TRACE_REGISTER_TYPE(22);
+
+/// Unordered-access view.
+const D3D11_TRACE_UNORDERED_ACCESS_VIEW = D3D11_TRACE_REGISTER_TYPE(23);
+
+/// Thread group shared memory.
+const D3D11_TRACE_THREAD_GROUP_SHARED_MEMORY = D3D11_TRACE_REGISTER_TYPE(24);
+
+/// Input thread ID register.
+const D3D11_TRACE_INPUT_THREAD_ID_REGISTER = D3D11_TRACE_REGISTER_TYPE(25);
+
+/// Thread group ID register.
+const D3D11_TRACE_INPUT_THREAD_GROUP_ID_REGISTER = D3D11_TRACE_REGISTER_TYPE(
+  26,
+);
+
+/// Input thread ID in-group register.
+const D3D11_TRACE_INPUT_THREAD_ID_IN_GROUP_REGISTER = D3D11_TRACE_REGISTER_TYPE(
+  27,
+);
+
+/// Input coverage mask register.
+const D3D11_TRACE_INPUT_COVERAGE_MASK_REGISTER = D3D11_TRACE_REGISTER_TYPE(28);
+
+/// Input thread ID in-group flattened register.
+const D3D11_TRACE_INPUT_THREAD_ID_IN_GROUP_FLATTENED_REGISTER =
+    D3D11_TRACE_REGISTER_TYPE(29);
+
+/// Input geometry shader (GS) instance ID register.
+const D3D11_TRACE_INPUT_GS_INSTANCE_ID_REGISTER = D3D11_TRACE_REGISTER_TYPE(30);
+
+/// Output oDepth greater than or equal register.
+const D3D11_TRACE_OUTPUT_DEPTH_GREATER_EQUAL_REGISTER =
+    D3D11_TRACE_REGISTER_TYPE(31);
+
+/// Output oDepth less than or equal register.
+const D3D11_TRACE_OUTPUT_DEPTH_LESS_EQUAL_REGISTER = D3D11_TRACE_REGISTER_TYPE(
+  32,
+);
+
+/// Immediate64 register.
+const D3D11_TRACE_IMMEDIATE64 = D3D11_TRACE_REGISTER_TYPE(33);
+
+/// Cycle counter register.
+const D3D11_TRACE_INPUT_CYCLE_COUNTER_REGISTER = D3D11_TRACE_REGISTER_TYPE(34);
+
+/// Interface pointer.
+const D3D11_TRACE_INTERFACE_POINTER = D3D11_TRACE_REGISTER_TYPE(35);
+
+/// Unordered-access view options.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_uav_dimension>.
+///
+/// {@category enum}
+extension type const D3D11_UAV_DIMENSION(int _) implements int {}
+
+/// The view type is unknown.
+const D3D11_UAV_DIMENSION_UNKNOWN = D3D11_UAV_DIMENSION(0);
+
+/// View the resource as a buffer.
+const D3D11_UAV_DIMENSION_BUFFER = D3D11_UAV_DIMENSION(1);
+
+/// View the resource as a 1D texture.
+const D3D11_UAV_DIMENSION_TEXTURE1D = D3D11_UAV_DIMENSION(2);
+
+/// View the resource as a 1D texture array.
+const D3D11_UAV_DIMENSION_TEXTURE1DARRAY = D3D11_UAV_DIMENSION(3);
+
+/// View the resource as a 2D texture.
+const D3D11_UAV_DIMENSION_TEXTURE2D = D3D11_UAV_DIMENSION(4);
+
+/// View the resource as a 2D texture array.
+const D3D11_UAV_DIMENSION_TEXTURE2DARRAY = D3D11_UAV_DIMENSION(5);
+
+/// View the resource as a 3D texture array.
+const D3D11_UAV_DIMENSION_TEXTURE3D = D3D11_UAV_DIMENSION(8);
+
+/// Identifies expected resource use during rendering.
+///
+/// The usage directly reflects whether a resource is accessible by the CPU
+/// and/or the graphics processing unit (GPU).
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_usage>.
+///
+/// {@category enum}
+extension type const D3D11_USAGE(int _) implements int {}
+
+/// A resource that requires read and write access by the GPU.
+const D3D11_USAGE_DEFAULT = D3D11_USAGE(0);
+
+/// A resource that can only be read by the GPU.
+const D3D11_USAGE_IMMUTABLE = D3D11_USAGE(1);
+
+/// A resource that is accessible by both the GPU (read only) and the CPU (write
+/// only).
+const D3D11_USAGE_DYNAMIC = D3D11_USAGE(2);
+
+/// A resource that supports data transfer (copy) from the GPU to the CPU.
+const D3D11_USAGE_STAGING = D3D11_USAGE(3);
+
+/// Specifies how to access a resource that is used in a video decoding output
+/// view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_vdov_dimension>.
+///
+/// {@category enum}
+extension type const D3D11_VDOV_DIMENSION(int _) implements int {}
+
+/// Not a valid value.
+const D3D11_VDOV_DIMENSION_UNKNOWN = D3D11_VDOV_DIMENSION(0);
+
+/// The resource will be accessed as a 2D texture.
+const D3D11_VDOV_DIMENSION_TEXTURE2D = D3D11_VDOV_DIMENSION(1);
+
+/// Specifies a type of compressed buffer for decoding.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_video_decoder_buffer_type>.
+///
+/// {@category enum}
+extension type const D3D11_VIDEO_DECODER_BUFFER_TYPE(int _) implements int {}
+
+/// Picture decoding parameter buffer.
+const D3D11_VIDEO_DECODER_BUFFER_PICTURE_PARAMETERS =
+    D3D11_VIDEO_DECODER_BUFFER_TYPE(0);
+
+/// Macroblock control command buffer.
+const D3D11_VIDEO_DECODER_BUFFER_MACROBLOCK_CONTROL =
+    D3D11_VIDEO_DECODER_BUFFER_TYPE(1);
+
+/// Residual difference block data buffer.
+const D3D11_VIDEO_DECODER_BUFFER_RESIDUAL_DIFFERENCE =
+    D3D11_VIDEO_DECODER_BUFFER_TYPE(2);
+
+/// Deblocking filter control command buffer.
+const D3D11_VIDEO_DECODER_BUFFER_DEBLOCKING_CONTROL =
+    D3D11_VIDEO_DECODER_BUFFER_TYPE(3);
+
+/// Inverse quantization matrix buffer.
+const D3D11_VIDEO_DECODER_BUFFER_INVERSE_QUANTIZATION_MATRIX =
+    D3D11_VIDEO_DECODER_BUFFER_TYPE(4);
+
+/// Slice-control buffer.
+const D3D11_VIDEO_DECODER_BUFFER_SLICE_CONTROL =
+    D3D11_VIDEO_DECODER_BUFFER_TYPE(5);
+
+/// Bitstream data buffer.
+const D3D11_VIDEO_DECODER_BUFFER_BITSTREAM = D3D11_VIDEO_DECODER_BUFFER_TYPE(6);
+
+/// Motion vector buffer.
+const D3D11_VIDEO_DECODER_BUFFER_MOTION_VECTOR =
+    D3D11_VIDEO_DECODER_BUFFER_TYPE(7);
+
+/// Film grain synthesis data buffer.
+const D3D11_VIDEO_DECODER_BUFFER_FILM_GRAIN = D3D11_VIDEO_DECODER_BUFFER_TYPE(
+  8,
+);
+
+const D3D11_VIDEO_DECODER_BUFFER_HUFFMAN_TABLE =
+    D3D11_VIDEO_DECODER_BUFFER_TYPE(9);
+
+/// Specifies capabilities of the video decoder.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_1/ne-d3d11_1-d3d11_video_decoder_caps>.
+///
+/// {@category enum}
+extension type const D3D11_VIDEO_DECODER_CAPS(int _) implements int {}
+
+/// Indicates that the graphics driver supports at least a subset of
+/// downsampling operations.
+const D3D11_VIDEO_DECODER_CAPS_DOWNSAMPLE = D3D11_VIDEO_DECODER_CAPS(1);
+
+/// Indicates that the decoding hardware cannot support the decode operation in
+/// real-time.
+const D3D11_VIDEO_DECODER_CAPS_NON_REAL_TIME = D3D11_VIDEO_DECODER_CAPS(2);
+
+/// Indicates that the driver supports changing down sample parameters after the
+/// initial down sample parameters have been applied.
+const D3D11_VIDEO_DECODER_CAPS_DOWNSAMPLE_DYNAMIC = D3D11_VIDEO_DECODER_CAPS(4);
+
+const D3D11_VIDEO_DECODER_CAPS_DOWNSAMPLE_REQUIRED = D3D11_VIDEO_DECODER_CAPS(
+  8,
+);
+
+const D3D11_VIDEO_DECODER_CAPS_UNSUPPORTED = D3D11_VIDEO_DECODER_CAPS(16);
+
+/// Specifies indices for arrays of per component histogram information.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_4/ne-d3d11_4-d3d11_video_decoder_histogram_component>.
+///
+/// {@category enum}
+extension type const D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT(int _)
+    implements int {}
+
+/// If the format is a YUV format, indicates a histogram for the Y component.
+const D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_Y =
+    D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT(0);
+
+/// If the format is a YUV format, indicates a histogram for the U component.
+const D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_U =
+    D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT(1);
+
+/// If the format is a YUV format, indicates a histogram for the V component.
+const D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_V =
+    D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT(2);
+
+/// If the format is an RGB/BGR format, indicates a histogram for the R
+/// component.
+const D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_R =
+    D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT(0);
+
+/// If the format is an RGB/BGR format, indicates a histogram for the G
+/// component.
+const D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_G =
+    D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT(1);
+
+/// If the format is an RGB/BGR format, indicates a histogram for the B
+/// component.
+const D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_B =
+    D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT(2);
+
+/// If the format has an alpha channel, indicates a histogram for the A
+/// component.
+const D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_A =
+    D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT(3);
+
+/// Flags for indicating a subset of components used with video decode
+/// histogram.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_4/ne-d3d11_4-d3d11_video_decoder_histogram_component_flags>.
+///
+/// {@category enum}
+extension type const D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAGS(int _)
+    implements int {
+  /// Whether this instance has all the bit fields specified in [other].
+  bool has(D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAGS other) =>
+      _ & other._ == other._;
+
+  D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAGS operator &(int other) =>
+      D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAGS(_ & other);
+  D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAGS operator |(int other) =>
+      D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAGS(_ | other);
+}
+
+/// No associated component.
+const D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAG_NONE =
+    D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAGS(0);
+
+/// If the format is a YUV format, indicates the Y component.
+const D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAG_Y =
+    D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAGS(1);
+
+/// If the format is a YUV format, indicates the U component.
+const D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAG_U =
+    D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAGS(2);
+
+/// If the format is a YUV format, indicates the V component.
+const D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAG_V =
+    D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAGS(4);
+
+/// If the format is an RGB/BGR format, indicates the R component.
+const D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAG_R =
+    D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAGS(1);
+
+/// If the format is an RGB/BGR format, indicates the G component.
+const D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAG_G =
+    D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAGS(2);
+
+/// If the format is an RGB/BGR format, indicates the B component.
+const D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAG_B =
+    D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAGS(4);
+
+/// If the format is an RGB/BGR format, indicates the A component.
+const D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAG_A =
+    D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAGS(8);
+
+/// Describes how a video stream is interlaced.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_video_frame_format>.
+///
+/// {@category enum}
+extension type const D3D11_VIDEO_FRAME_FORMAT(int _) implements int {}
+
+/// Frames are progressive.
+const D3D11_VIDEO_FRAME_FORMAT_PROGRESSIVE = D3D11_VIDEO_FRAME_FORMAT(0);
+
+/// Frames are interlaced.
+const D3D11_VIDEO_FRAME_FORMAT_INTERLACED_TOP_FIELD_FIRST =
+    D3D11_VIDEO_FRAME_FORMAT(1);
+
+/// Frame are interlaced.
+const D3D11_VIDEO_FRAME_FORMAT_INTERLACED_BOTTOM_FIELD_FIRST =
+    D3D11_VIDEO_FRAME_FORMAT(2);
+
+/// Specifies the alpha fill mode for video processing.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_video_processor_alpha_fill_mode>.
+///
+/// {@category enum}
+extension type const D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE(int _)
+    implements int {}
+
+/// Alpha values inside the target rectangle are set to opaque.
+const D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE_OPAQUE =
+    D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE(0);
+
+/// Alpha values inside the target rectangle are set to the alpha value
+/// specified in the background color.
+const D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE_BACKGROUND =
+    D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE(1);
+
+/// Existing alpha values remain unchanged in the output surface.
+const D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE_DESTINATION =
+    D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE(2);
+
+/// Alpha values are taken from an input stream, scaled, and copied to the
+/// corresponding destination rectangle for that stream.
+const D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE_SOURCE_STREAM =
+    D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE(3);
+
+/// Specifies the automatic image processing capabilities of the video
+/// processor.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_video_processor_auto_stream_caps>.
+///
+/// {@category enum}
+extension type const D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS(int _)
+    implements int {}
+
+/// Denoise.
+const D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS_DENOISE =
+    D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS(1);
+
+/// Deringing.
+const D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS_DERINGING =
+    D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS(2);
+
+/// Edge enhancement.
+const D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS_EDGE_ENHANCEMENT =
+    D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS(4);
+
+/// Color correction.
+const D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS_COLOR_CORRECTION =
+    D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS(8);
+
+/// Flesh-tone mapping.
+const D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS_FLESH_TONE_MAPPING =
+    D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS(16);
+
+/// Image stabilization.
+const D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS_IMAGE_STABILIZATION =
+    D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS(32);
+
+/// Enhanced image resolution.
+const D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS_SUPER_RESOLUTION =
+    D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS(64);
+
+/// Anamorphic scaling.
+const D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS_ANAMORPHIC_SCALING =
+    D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS(128);
+
+/// Specifies flags that indicate the most efficient methods for performing
+/// video processing operations.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11_1/ne-d3d11_1-d3d11_video_processor_behavior_hints>.
+///
+/// {@category enum}
+extension type const D3D11_VIDEO_PROCESSOR_BEHAVIOR_HINTS(int _)
+    implements int {}
+
+/// Multi-plane overlay hardware can perform the rotation operation more
+/// efficiently than the <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11videocontext-videoprocessorblt">ID3D11VideoContext::VideoProcessorBlt</a>
+/// method.
+const D3D11_VIDEO_PROCESSOR_BEHAVIOR_HINT_MULTIPLANE_OVERLAY_ROTATION =
+    D3D11_VIDEO_PROCESSOR_BEHAVIOR_HINTS(1);
+
+/// Multi-plane overlay hardware can perform the scaling operation more
+/// efficiently than the <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11videocontext-videoprocessorblt">ID3D11VideoContext::VideoProcessorBlt</a>
+/// method.
+const D3D11_VIDEO_PROCESSOR_BEHAVIOR_HINT_MULTIPLANE_OVERLAY_RESIZE =
+    D3D11_VIDEO_PROCESSOR_BEHAVIOR_HINTS(2);
+
+/// Multi-plane overlay hardware can perform the colorspace conversion operation
+/// more efficiently than the <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11videocontext-videoprocessorblt">ID3D11VideoContext::VideoProcessorBlt</a>
+/// method.
+const D3D11_VIDEO_PROCESSOR_BEHAVIOR_HINT_MULTIPLANE_OVERLAY_COLOR_SPACE_CONVERSION =
+    D3D11_VIDEO_PROCESSOR_BEHAVIOR_HINTS(4);
+
+/// The video processor output data should be at least triple buffered for
+/// optimal performance.
+const D3D11_VIDEO_PROCESSOR_BEHAVIOR_HINT_TRIPLE_BUFFER_OUTPUT =
+    D3D11_VIDEO_PROCESSOR_BEHAVIOR_HINTS(8);
+
+/// Defines video processing capabilities for a Microsoft Direct3D 11 video
+/// processor.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_video_processor_device_caps>.
+///
+/// {@category enum}
+extension type const D3D11_VIDEO_PROCESSOR_DEVICE_CAPS(int _) implements int {}
+
+/// The video processor can blend video content in linear color space.
+const D3D11_VIDEO_PROCESSOR_DEVICE_CAPS_LINEAR_SPACE =
+    D3D11_VIDEO_PROCESSOR_DEVICE_CAPS(1);
+
+/// The video processor supports the xvYCC color space for YCbCr data.
+const D3D11_VIDEO_PROCESSOR_DEVICE_CAPS_xvYCC =
+    D3D11_VIDEO_PROCESSOR_DEVICE_CAPS(2);
+
+/// The video processor can perform range conversion when the input and output
+/// are both RGB but use different color ranges (0-255 or 16-235, for 8-bit
+/// RGB).
+const D3D11_VIDEO_PROCESSOR_DEVICE_CAPS_RGB_RANGE_CONVERSION =
+    D3D11_VIDEO_PROCESSOR_DEVICE_CAPS(4);
+
+/// The video processor can apply a matrix conversion to YCbCr values when the
+/// input and output are both YCbCr.
+const D3D11_VIDEO_PROCESSOR_DEVICE_CAPS_YCbCr_MATRIX_CONVERSION =
+    D3D11_VIDEO_PROCESSOR_DEVICE_CAPS(8);
+
+/// The video processor supports YUV nominal range .
+const D3D11_VIDEO_PROCESSOR_DEVICE_CAPS_NOMINAL_RANGE =
+    D3D11_VIDEO_PROCESSOR_DEVICE_CAPS(16);
+
+/// Defines features that a Microsoft Direct3D 11 video processor can support.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_video_processor_feature_caps>.
+///
+/// {@category enum}
+extension type const D3D11_VIDEO_PROCESSOR_FEATURE_CAPS(int _) implements int {}
+
+/// The video processor can set alpha values on the output pixels.
+const D3D11_VIDEO_PROCESSOR_FEATURE_CAPS_ALPHA_FILL =
+    D3D11_VIDEO_PROCESSOR_FEATURE_CAPS(1);
+
+/// The video processor can downsample the video output.
+const D3D11_VIDEO_PROCESSOR_FEATURE_CAPS_CONSTRICTION =
+    D3D11_VIDEO_PROCESSOR_FEATURE_CAPS(2);
+
+/// The video processor can perform luma keying.
+const D3D11_VIDEO_PROCESSOR_FEATURE_CAPS_LUMA_KEY =
+    D3D11_VIDEO_PROCESSOR_FEATURE_CAPS(4);
+
+/// The video processor can apply alpha values from color palette entries.
+const D3D11_VIDEO_PROCESSOR_FEATURE_CAPS_ALPHA_PALETTE =
+    D3D11_VIDEO_PROCESSOR_FEATURE_CAPS(8);
+
+/// The driver does not support full video processing capabilities.
+const D3D11_VIDEO_PROCESSOR_FEATURE_CAPS_LEGACY =
+    D3D11_VIDEO_PROCESSOR_FEATURE_CAPS(16);
+
+/// The video processor can support 3D stereo video.
+const D3D11_VIDEO_PROCESSOR_FEATURE_CAPS_STEREO =
+    D3D11_VIDEO_PROCESSOR_FEATURE_CAPS(32);
+
+/// The driver can rotate the input data either 90, 180, or 270 degrees
+/// clockwise as part of the video processing operation.
+const D3D11_VIDEO_PROCESSOR_FEATURE_CAPS_ROTATION =
+    D3D11_VIDEO_PROCESSOR_FEATURE_CAPS(64);
+
+/// The driver supports the <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11videocontext-videoprocessorsetstreamalpha">VideoProcessorSetStreamAlpha</a>
+/// call.
+const D3D11_VIDEO_PROCESSOR_FEATURE_CAPS_ALPHA_STREAM =
+    D3D11_VIDEO_PROCESSOR_FEATURE_CAPS(128);
+
+/// The driver supports the <a
+/// href="https://docs.microsoft.com/windows/desktop/api/d3d11/nf-d3d11-id3d11videocontext-videoprocessorsetstreampixelaspectratio">VideoProcessorSetStreamPixelAspectRatio</a>
+/// call.
+const D3D11_VIDEO_PROCESSOR_FEATURE_CAPS_PIXEL_ASPECT_RATIO =
+    D3D11_VIDEO_PROCESSOR_FEATURE_CAPS(256);
+
+const D3D11_VIDEO_PROCESSOR_FEATURE_CAPS_MIRROR =
+    D3D11_VIDEO_PROCESSOR_FEATURE_CAPS(512);
+
+const D3D11_VIDEO_PROCESSOR_FEATURE_CAPS_SHADER_USAGE =
+    D3D11_VIDEO_PROCESSOR_FEATURE_CAPS(1024);
+
+const D3D11_VIDEO_PROCESSOR_FEATURE_CAPS_METADATA_HDR10 =
+    D3D11_VIDEO_PROCESSOR_FEATURE_CAPS(2048);
+
+/// Identifies a video processor filter.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_video_processor_filter>.
+///
+/// {@category enum}
+extension type const D3D11_VIDEO_PROCESSOR_FILTER(int _) implements int {}
+
+/// Brightness filter.
+const D3D11_VIDEO_PROCESSOR_FILTER_BRIGHTNESS = D3D11_VIDEO_PROCESSOR_FILTER(0);
+
+/// Contrast filter.
+const D3D11_VIDEO_PROCESSOR_FILTER_CONTRAST = D3D11_VIDEO_PROCESSOR_FILTER(1);
+
+/// Hue filter.
+const D3D11_VIDEO_PROCESSOR_FILTER_HUE = D3D11_VIDEO_PROCESSOR_FILTER(2);
+
+/// Saturation filter.
+const D3D11_VIDEO_PROCESSOR_FILTER_SATURATION = D3D11_VIDEO_PROCESSOR_FILTER(3);
+
+/// Noise reduction filter.
+const D3D11_VIDEO_PROCESSOR_FILTER_NOISE_REDUCTION =
+    D3D11_VIDEO_PROCESSOR_FILTER(4);
+
+/// Edge enhancement filter.
+const D3D11_VIDEO_PROCESSOR_FILTER_EDGE_ENHANCEMENT =
+    D3D11_VIDEO_PROCESSOR_FILTER(5);
+
+/// Anamorphic scaling filter.
+const D3D11_VIDEO_PROCESSOR_FILTER_ANAMORPHIC_SCALING =
+    D3D11_VIDEO_PROCESSOR_FILTER(6);
+
+/// Stereo adjustment filter.
+const D3D11_VIDEO_PROCESSOR_FILTER_STEREO_ADJUSTMENT =
+    D3D11_VIDEO_PROCESSOR_FILTER(7);
+
+/// Defines image filter capabilities for a Microsoft Direct3D 11 video
+/// processor.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_video_processor_filter_caps>.
+///
+/// {@category enum}
+extension type const D3D11_VIDEO_PROCESSOR_FILTER_CAPS(int _) implements int {}
+
+/// The video processor can adjust the brightness level.
+const D3D11_VIDEO_PROCESSOR_FILTER_CAPS_BRIGHTNESS =
+    D3D11_VIDEO_PROCESSOR_FILTER_CAPS(1);
+
+/// The video processor can adjust the contrast level.
+const D3D11_VIDEO_PROCESSOR_FILTER_CAPS_CONTRAST =
+    D3D11_VIDEO_PROCESSOR_FILTER_CAPS(2);
+
+/// The video processor can adjust hue.
+const D3D11_VIDEO_PROCESSOR_FILTER_CAPS_HUE = D3D11_VIDEO_PROCESSOR_FILTER_CAPS(
+  4,
+);
+
+/// The video processor can adjust the saturation level.
+const D3D11_VIDEO_PROCESSOR_FILTER_CAPS_SATURATION =
+    D3D11_VIDEO_PROCESSOR_FILTER_CAPS(8);
+
+/// The video processor can perform noise reduction.
+const D3D11_VIDEO_PROCESSOR_FILTER_CAPS_NOISE_REDUCTION =
+    D3D11_VIDEO_PROCESSOR_FILTER_CAPS(16);
+
+/// The video processor can perform edge enhancement.
+const D3D11_VIDEO_PROCESSOR_FILTER_CAPS_EDGE_ENHANCEMENT =
+    D3D11_VIDEO_PROCESSOR_FILTER_CAPS(32);
+
+/// The video processor can perform anamorphic scaling.
+const D3D11_VIDEO_PROCESSOR_FILTER_CAPS_ANAMORPHIC_SCALING =
+    D3D11_VIDEO_PROCESSOR_FILTER_CAPS(64);
+
+/// For stereo 3D video, the video processor can adjust the offset between the
+/// left and right views, allowing the user to reduce potential eye strain.
+const D3D11_VIDEO_PROCESSOR_FILTER_CAPS_STEREO_ADJUSTMENT =
+    D3D11_VIDEO_PROCESSOR_FILTER_CAPS(128);
+
+/// Defines capabilities related to input formats for a Microsoft Direct3D 11
+/// video processor.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_video_processor_format_caps>.
+///
+/// {@category enum}
+extension type const D3D11_VIDEO_PROCESSOR_FORMAT_CAPS(int _) implements int {}
+
+/// The video processor can deinterlace an input stream that contains interlaced
+/// RGB video.
+const D3D11_VIDEO_PROCESSOR_FORMAT_CAPS_RGB_INTERLACED =
+    D3D11_VIDEO_PROCESSOR_FORMAT_CAPS(1);
+
+/// The video processor can perform color adjustment on RGB video.
+const D3D11_VIDEO_PROCESSOR_FORMAT_CAPS_RGB_PROCAMP =
+    D3D11_VIDEO_PROCESSOR_FORMAT_CAPS(2);
+
+/// The video processor can perform luma keying on RGB video.
+const D3D11_VIDEO_PROCESSOR_FORMAT_CAPS_RGB_LUMA_KEY =
+    D3D11_VIDEO_PROCESSOR_FORMAT_CAPS(4);
+
+/// The video processor can deinterlace input streams with palettized color
+/// formats.
+const D3D11_VIDEO_PROCESSOR_FORMAT_CAPS_PALETTE_INTERLACED =
+    D3D11_VIDEO_PROCESSOR_FORMAT_CAPS(8);
+
+/// Specifies how a video format can be used for video processing.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_video_processor_format_support>.
+///
+/// {@category enum}
+extension type const D3D11_VIDEO_PROCESSOR_FORMAT_SUPPORT(int _)
+    implements int {}
+
+/// The format can be used as the input to the video processor.
+const D3D11_VIDEO_PROCESSOR_FORMAT_SUPPORT_INPUT =
+    D3D11_VIDEO_PROCESSOR_FORMAT_SUPPORT(1);
+
+/// The format can be used as the output from the video processor.
+const D3D11_VIDEO_PROCESSOR_FORMAT_SUPPORT_OUTPUT =
+    D3D11_VIDEO_PROCESSOR_FORMAT_SUPPORT(2);
+
+/// Specifies the inverse telecine (IVTC) capabilities of a video processor.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_video_processor_itelecine_caps>.
+///
+/// {@category enum}
+extension type const D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS(int _)
+    implements int {}
+
+/// The video processor can reverse 3:2 pulldown.
+const D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS_32 =
+    D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS(1);
+
+/// The video processor can reverse 2:2 pulldown.
+const D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS_22 =
+    D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS(2);
+
+/// The video processor can reverse 2:2:2:4 pulldown.
+const D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS_2224 =
+    D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS(4);
+
+/// The video processor can reverse 2:3:3:2 pulldown.
+const D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS_2332 =
+    D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS(8);
+
+/// The video processor can reverse 3:2:3:2:2 pulldown.
+const D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS_32322 =
+    D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS(16);
+
+/// The video processor can reverse 5:5 pulldown.
+const D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS_55 =
+    D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS(32);
+
+/// The video processor can reverse 6:4 pulldown.
+const D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS_64 =
+    D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS(64);
+
+/// The video processor can reverse 8:7 pulldown.
+const D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS_87 =
+    D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS(128);
+
+/// The video processor can reverse 2:2:2:2:2:2:2:2:2:2:2:3 pulldown.
+const D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS_222222222223 =
+    D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS(256);
+
+/// The video processor can reverse other telecine modes not listed here.
+const D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS_OTHER =
+    D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS(-2147483648);
+
+/// Specifies values for the luminance range of YUV data.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_video_processor_nominal_range>.
+///
+/// {@category enum}
+extension type const D3D11_VIDEO_PROCESSOR_NOMINAL_RANGE(int _)
+    implements int {}
+
+/// Driver defaults are used, which should be Studio luminance range [16-235],.
+const D3D11_VIDEO_PROCESSOR_NOMINAL_RANGE_UNDEFINED =
+    D3D11_VIDEO_PROCESSOR_NOMINAL_RANGE(0);
+
+/// Studio luminance range [16-235].
+const D3D11_VIDEO_PROCESSOR_NOMINAL_RANGE_16_235 =
+    D3D11_VIDEO_PROCESSOR_NOMINAL_RANGE(1);
+
+/// Full luminance range [0-255].
+const D3D11_VIDEO_PROCESSOR_NOMINAL_RANGE_0_255 =
+    D3D11_VIDEO_PROCESSOR_NOMINAL_RANGE(2);
+
+/// Specifies the rate at which the video processor produces output frames from
+/// an input stream.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_video_processor_output_rate>.
+///
+/// {@category enum}
+extension type const D3D11_VIDEO_PROCESSOR_OUTPUT_RATE(int _) implements int {}
+
+/// The output is the normal frame rate.
+const D3D11_VIDEO_PROCESSOR_OUTPUT_RATE_NORMAL =
+    D3D11_VIDEO_PROCESSOR_OUTPUT_RATE(0);
+
+/// The output is half the frame rate.
+const D3D11_VIDEO_PROCESSOR_OUTPUT_RATE_HALF =
+    D3D11_VIDEO_PROCESSOR_OUTPUT_RATE(1);
+
+/// The output is a custom frame rate.
+const D3D11_VIDEO_PROCESSOR_OUTPUT_RATE_CUSTOM =
+    D3D11_VIDEO_PROCESSOR_OUTPUT_RATE(2);
+
+/// Specifies video processing capabilities that relate to deinterlacing,
+/// inverse telecine (IVTC), and frame-rate conversion.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_video_processor_processor_caps>.
+///
+/// {@category enum}
+extension type const D3D11_VIDEO_PROCESSOR_PROCESSOR_CAPS(int _)
+    implements int {}
+
+/// The video processor can perform blend deinterlacing.
+const D3D11_VIDEO_PROCESSOR_PROCESSOR_CAPS_DEINTERLACE_BLEND =
+    D3D11_VIDEO_PROCESSOR_PROCESSOR_CAPS(1);
+
+/// The video processor can perform bob deinterlacing.
+const D3D11_VIDEO_PROCESSOR_PROCESSOR_CAPS_DEINTERLACE_BOB =
+    D3D11_VIDEO_PROCESSOR_PROCESSOR_CAPS(2);
+
+/// The video processor can perform adaptive deinterlacing.
+const D3D11_VIDEO_PROCESSOR_PROCESSOR_CAPS_DEINTERLACE_ADAPTIVE =
+    D3D11_VIDEO_PROCESSOR_PROCESSOR_CAPS(4);
+
+/// The video processor can perform motion-compensated deinterlacing.
+const D3D11_VIDEO_PROCESSOR_PROCESSOR_CAPS_DEINTERLACE_MOTION_COMPENSATION =
+    D3D11_VIDEO_PROCESSOR_PROCESSOR_CAPS(8);
+
+/// The video processor can perform inverse telecine (IVTC).
+const D3D11_VIDEO_PROCESSOR_PROCESSOR_CAPS_INVERSE_TELECINE =
+    D3D11_VIDEO_PROCESSOR_PROCESSOR_CAPS(16);
+
+/// The video processor can convert the frame rate by interpolating frames.
+const D3D11_VIDEO_PROCESSOR_PROCESSOR_CAPS_FRAME_RATE_CONVERSION =
+    D3D11_VIDEO_PROCESSOR_PROCESSOR_CAPS(32);
+
+/// Specifies the video rotation states.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_video_processor_rotation>.
+///
+/// {@category enum}
+extension type const D3D11_VIDEO_PROCESSOR_ROTATION(int _) implements int {}
+
+/// The video is not rotated.
+const D3D11_VIDEO_PROCESSOR_ROTATION_IDENTITY = D3D11_VIDEO_PROCESSOR_ROTATION(
+  0,
+);
+
+/// The video is rotated 90 degrees clockwise.
+const D3D11_VIDEO_PROCESSOR_ROTATION_90 = D3D11_VIDEO_PROCESSOR_ROTATION(1);
+
+/// The video is rotated 180 degrees clockwise.
+const D3D11_VIDEO_PROCESSOR_ROTATION_180 = D3D11_VIDEO_PROCESSOR_ROTATION(2);
+
+/// The video is rotated 270 degrees clockwise.
+const D3D11_VIDEO_PROCESSOR_ROTATION_270 = D3D11_VIDEO_PROCESSOR_ROTATION(3);
+
+/// Defines stereo 3D capabilities for a Microsoft Direct3D 11 video processor.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_video_processor_stereo_caps>.
+///
+/// {@category enum}
+extension type const D3D11_VIDEO_PROCESSOR_STEREO_CAPS(int _) implements int {}
+
+/// The video processor supports the
+/// <b>D3D11_VIDEO_PROCESSOR_STEREO_FORMAT_MONO_OFFSET</b> format.
+const D3D11_VIDEO_PROCESSOR_STEREO_CAPS_MONO_OFFSET =
+    D3D11_VIDEO_PROCESSOR_STEREO_CAPS(1);
+
+/// The video processor supports the
+/// <b>D3D11_VIDEO_PROCESSOR_STEREO_FORMAT_ROW_INTERLEAVED</b> format.
+const D3D11_VIDEO_PROCESSOR_STEREO_CAPS_ROW_INTERLEAVED =
+    D3D11_VIDEO_PROCESSOR_STEREO_CAPS(2);
+
+/// The video processor supports the
+/// <b>D3D11_VIDEO_PROCESSOR_STEREO_FORMAT_COLUMN_INTERLEAVED</b> format.
+const D3D11_VIDEO_PROCESSOR_STEREO_CAPS_COLUMN_INTERLEAVED =
+    D3D11_VIDEO_PROCESSOR_STEREO_CAPS(4);
+
+/// The video processor supports the
+/// <b>D3D11_VIDEO_PROCESSOR_STEREO_FORMAT_CHECKERBOARD</b> format.
+const D3D11_VIDEO_PROCESSOR_STEREO_CAPS_CHECKERBOARD =
+    D3D11_VIDEO_PROCESSOR_STEREO_CAPS(8);
+
+/// The video processor can flip one or both views.
+const D3D11_VIDEO_PROCESSOR_STEREO_CAPS_FLIP_MODE =
+    D3D11_VIDEO_PROCESSOR_STEREO_CAPS(16);
+
+/// For stereo 3D video, specifies whether the data in frame 0 or frame 1 is
+/// flipped, either horizontally or vertically.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_video_processor_stereo_flip_mode>.
+///
+/// {@category enum}
+extension type const D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE(int _)
+    implements int {}
+
+/// Neither frame is flipped.
+const D3D11_VIDEO_PROCESSOR_STEREO_FLIP_NONE =
+    D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE(0);
+
+/// The data in frame 0 is flipped.
+const D3D11_VIDEO_PROCESSOR_STEREO_FLIP_FRAME0 =
+    D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE(1);
+
+/// The data in frame 1 is flipped.
+const D3D11_VIDEO_PROCESSOR_STEREO_FLIP_FRAME1 =
+    D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE(2);
+
+/// Specifies the layout in memory of a stereo 3D video frame.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_video_processor_stereo_format>.
+///
+/// {@category enum}
+extension type const D3D11_VIDEO_PROCESSOR_STEREO_FORMAT(int _)
+    implements int {}
+
+/// The sample does not contain stereo data.
+const D3D11_VIDEO_PROCESSOR_STEREO_FORMAT_MONO =
+    D3D11_VIDEO_PROCESSOR_STEREO_FORMAT(0);
+
+/// Frame 0 and frame 1 are packed side-by-side, as shown in the following
+/// diagram.
+const D3D11_VIDEO_PROCESSOR_STEREO_FORMAT_HORIZONTAL =
+    D3D11_VIDEO_PROCESSOR_STEREO_FORMAT(1);
+
+/// Frame 0 and frame 1 are packed top-to-bottom, as shown in the following
+/// diagram.
+const D3D11_VIDEO_PROCESSOR_STEREO_FORMAT_VERTICAL =
+    D3D11_VIDEO_PROCESSOR_STEREO_FORMAT(2);
+
+/// Frame 0 and frame 1 are placed in separate resources or in separate texture
+/// array elements within the same resource.
+const D3D11_VIDEO_PROCESSOR_STEREO_FORMAT_SEPARATE =
+    D3D11_VIDEO_PROCESSOR_STEREO_FORMAT(3);
+
+/// The sample contains non-stereo data.
+const D3D11_VIDEO_PROCESSOR_STEREO_FORMAT_MONO_OFFSET =
+    D3D11_VIDEO_PROCESSOR_STEREO_FORMAT(4);
+
+/// Frame 0 and frame 1 are packed into interleaved rows, as shown in the
+/// following diagram.
+const D3D11_VIDEO_PROCESSOR_STEREO_FORMAT_ROW_INTERLEAVED =
+    D3D11_VIDEO_PROCESSOR_STEREO_FORMAT(5);
+
+/// Frame 0 and frame 1 are packed into interleaved columns, as shown in the
+/// following diagram.
+const D3D11_VIDEO_PROCESSOR_STEREO_FORMAT_COLUMN_INTERLEAVED =
+    D3D11_VIDEO_PROCESSOR_STEREO_FORMAT(6);
+
+/// Frame 0 and frame 1 are packed in a checkerboard format, as shown in the
+/// following diagram.
+const D3D11_VIDEO_PROCESSOR_STEREO_FORMAT_CHECKERBOARD =
+    D3D11_VIDEO_PROCESSOR_STEREO_FORMAT(7);
+
+/// Specifies the intended use for a video processor.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_video_usage>.
+///
+/// {@category enum}
+extension type const D3D11_VIDEO_USAGE(int _) implements int {}
+
+/// Normal video playback.
+const D3D11_VIDEO_USAGE_PLAYBACK_NORMAL = D3D11_VIDEO_USAGE(0);
+
+/// Optimal speed.
+const D3D11_VIDEO_USAGE_OPTIMAL_SPEED = D3D11_VIDEO_USAGE(1);
+
+/// Optimal quality.
+const D3D11_VIDEO_USAGE_OPTIMAL_QUALITY = D3D11_VIDEO_USAGE(2);
+
+/// Specifies how to access a resource that is used in a video processor input
+/// view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_vpiv_dimension>.
+///
+/// {@category enum}
+extension type const D3D11_VPIV_DIMENSION(int _) implements int {}
+
+/// Not a valid value.
+const D3D11_VPIV_DIMENSION_UNKNOWN = D3D11_VPIV_DIMENSION(0);
+
+/// The resource will be accessed as a 2D texture.
+const D3D11_VPIV_DIMENSION_TEXTURE2D = D3D11_VPIV_DIMENSION(1);
+
+/// Specifies how to access a resource that is used in a video processor output
+/// view.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_vpov_dimension>.
+///
+/// {@category enum}
+extension type const D3D11_VPOV_DIMENSION(int _) implements int {}
+
+/// Not a valid value.
+const D3D11_VPOV_DIMENSION_UNKNOWN = D3D11_VPOV_DIMENSION(0);
+
+/// The resource will be accessed as a 2D texture.
+const D3D11_VPOV_DIMENSION_TEXTURE2D = D3D11_VPOV_DIMENSION(1);
+
+/// The resource will be accessed as an array of 2D textures.
+const D3D11_VPOV_DIMENSION_TEXTURE2DARRAY = D3D11_VPOV_DIMENSION(2);
+
+/// FFT creation flags.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3dcsx/ne-d3dcsx-d3dx11_fft_create_flag>.
+///
+/// {@category enum}
+extension type const D3DX11_FFT_CREATE_FLAG(int _) implements int {}
+
+/// Do not AddRef or Release temp and precompute buffers, caller is responsible
+/// for holding references to these buffers.
+const D3DX11_FFT_CREATE_FLAG_NO_PRECOMPUTE_BUFFERS = D3DX11_FFT_CREATE_FLAG(1);
+
+/// FFT data types.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3dcsx/ne-d3dcsx-d3dx11_fft_data_type>.
+///
+/// {@category enum}
+extension type const D3DX11_FFT_DATA_TYPE(int _) implements int {}
+
+/// Real numbers.
+const D3DX11_FFT_DATA_TYPE_REAL = D3DX11_FFT_DATA_TYPE(0);
+
+/// Complex numbers.
+const D3DX11_FFT_DATA_TYPE_COMPLEX = D3DX11_FFT_DATA_TYPE(1);
+
+/// Number of dimensions for FFT data.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3dcsx/ne-d3dcsx-d3dx11_fft_dim_mask>.
+///
+/// {@category enum}
+extension type const D3DX11_FFT_DIM_MASK(int _) implements int {}
+
+/// One dimension.
+const D3DX11_FFT_DIM_MASK_1D = D3DX11_FFT_DIM_MASK(1);
+
+/// Two dimensions.
+const D3DX11_FFT_DIM_MASK_2D = D3DX11_FFT_DIM_MASK(3);
+
+/// Three dimensions.
+const D3DX11_FFT_DIM_MASK_3D = D3DX11_FFT_DIM_MASK(7);
+
+/// Type for scan data.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3dcsx/ne-d3dcsx-d3dx11_scan_data_type>.
+///
+/// {@category enum}
+extension type const D3DX11_SCAN_DATA_TYPE(int _) implements int {}
+
+/// FLOAT data.
+const D3DX11_SCAN_DATA_TYPE_FLOAT = D3DX11_SCAN_DATA_TYPE(1);
+
+/// INT data.
+const D3DX11_SCAN_DATA_TYPE_INT = D3DX11_SCAN_DATA_TYPE(2);
+
+/// UINT data.
+const D3DX11_SCAN_DATA_TYPE_UINT = D3DX11_SCAN_DATA_TYPE(3);
+
+/// Direction to perform scan in.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3dcsx/ne-d3dcsx-d3dx11_scan_direction>.
+///
+/// {@category enum}
+extension type const D3DX11_SCAN_DIRECTION(int _) implements int {}
+
+/// Scan forward.
+const D3DX11_SCAN_DIRECTION_FORWARD = D3DX11_SCAN_DIRECTION(1);
+
+/// Scan backward.
+const D3DX11_SCAN_DIRECTION_BACKWARD = D3DX11_SCAN_DIRECTION(2);
+
+/// Scan opcodes.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3dcsx/ne-d3dcsx-d3dx11_scan_opcode>.
+///
+/// {@category enum}
+extension type const D3DX11_SCAN_OPCODE(int _) implements int {}
+
+/// Add values.
+const D3DX11_SCAN_OPCODE_ADD = D3DX11_SCAN_OPCODE(1);
+
+/// Take the minimum value.
+const D3DX11_SCAN_OPCODE_MIN = D3DX11_SCAN_OPCODE(2);
+
+/// Take the maximum value.
+const D3DX11_SCAN_OPCODE_MAX = D3DX11_SCAN_OPCODE(3);
+
+/// Multiply the values.
+const D3DX11_SCAN_OPCODE_MUL = D3DX11_SCAN_OPCODE(4);
+
+/// Perform a logical AND on the values.
+const D3DX11_SCAN_OPCODE_AND = D3DX11_SCAN_OPCODE(5);
+
+/// Perform a logical OR on the values.
+const D3DX11_SCAN_OPCODE_OR = D3DX11_SCAN_OPCODE(6);
+
+/// Perform a logical XOR on the values.
+const D3DX11_SCAN_OPCODE_XOR = D3DX11_SCAN_OPCODE(7);
+
+/// Values that identify the intended use of constant-buffer data.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_cbuffer_type>.
+///
+/// {@category enum}
+extension type const D3D_CBUFFER_TYPE(int _) implements int {}
+
+/// A buffer containing scalar constants.
+const D3D_CT_CBUFFER = D3D_CBUFFER_TYPE(0);
+
+/// A buffer containing texture data.
+const D3D_CT_TBUFFER = D3D_CBUFFER_TYPE(1);
+
+/// A buffer containing interface pointers.
+const D3D_CT_INTERFACE_POINTERS = D3D_CBUFFER_TYPE(2);
+
+/// A buffer containing binding information.
+const D3D_CT_RESOURCE_BIND_INFO = D3D_CBUFFER_TYPE(3);
+
+/// A buffer containing scalar constants.
+const D3D10_CT_CBUFFER = D3D_CBUFFER_TYPE(0);
+
+/// A buffer containing texture data.
+const D3D10_CT_TBUFFER = D3D_CBUFFER_TYPE(1);
+
+/// A buffer containing scalar constants.
+const D3D11_CT_CBUFFER = D3D_CBUFFER_TYPE(0);
+
+/// A buffer containing texture data.
+const D3D11_CT_TBUFFER = D3D_CBUFFER_TYPE(1);
+
+/// A buffer containing interface pointers.
+const D3D11_CT_INTERFACE_POINTERS = D3D_CBUFFER_TYPE(2);
+
+/// A buffer containing binding information.
+const D3D11_CT_RESOURCE_BIND_INFO = D3D_CBUFFER_TYPE(3);
+
+/// Driver type options.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_driver_type>.
+///
+/// {@category enum}
+extension type const D3D_DRIVER_TYPE(int _) implements int {}
+
+/// The driver type is unknown.
+const D3D_DRIVER_TYPE_UNKNOWN = D3D_DRIVER_TYPE(0);
+
+/// A hardware driver, which implements Direct3D features in hardware.
+const D3D_DRIVER_TYPE_HARDWARE = D3D_DRIVER_TYPE(1);
+
+/// A reference driver, which is a software implementation that supports every
+/// Direct3D feature.
+const D3D_DRIVER_TYPE_REFERENCE = D3D_DRIVER_TYPE(2);
+
+/// A NULL driver, which is a reference driver without render capability.
+const D3D_DRIVER_TYPE_NULL = D3D_DRIVER_TYPE(3);
+
+/// A software driver, which is a driver implemented completely in software.
+const D3D_DRIVER_TYPE_SOFTWARE = D3D_DRIVER_TYPE(4);
+
+/// A WARP driver, which is a high-performance software rasterizer.
+const D3D_DRIVER_TYPE_WARP = D3D_DRIVER_TYPE(5);
+
+/// Describes the set of features targeted by a Direct3D device.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_feature_level>.
+///
+/// {@category enum}
+extension type const D3D_FEATURE_LEVEL(int _) implements int {}
+
+const D3D_FEATURE_LEVEL_1_0_GENERIC = D3D_FEATURE_LEVEL(256);
+
+/// Allows Microsoft Compute Driver Model (MCDM) devices to be used, or more
+/// feature-rich devices (such as traditional GPUs) that support a superset of
+/// the functionality.
+const D3D_FEATURE_LEVEL_1_0_CORE = D3D_FEATURE_LEVEL(4096);
+
+/// Targets features supported by `feature level` 9.1, including shader model 2.
+const D3D_FEATURE_LEVEL_9_1 = D3D_FEATURE_LEVEL(37120);
+
+/// Targets features supported by `feature level` 9.2, including shader model 2.
+const D3D_FEATURE_LEVEL_9_2 = D3D_FEATURE_LEVEL(37376);
+
+/// Targets features supported by `feature level` 9.3, including shader model
+/// 2.0b.
+const D3D_FEATURE_LEVEL_9_3 = D3D_FEATURE_LEVEL(37632);
+
+/// Targets features supported by Direct3D 10.0, including shader model 4.
+const D3D_FEATURE_LEVEL_10_0 = D3D_FEATURE_LEVEL(40960);
+
+/// Targets features supported by Direct3D 10.1, including shader model 4.
+const D3D_FEATURE_LEVEL_10_1 = D3D_FEATURE_LEVEL(41216);
+
+/// Targets features supported by Direct3D 11.0, including shader model 5.
+const D3D_FEATURE_LEVEL_11_0 = D3D_FEATURE_LEVEL(45056);
+
+/// Targets features supported by Direct3D 11.1, including shader model 5 and
+/// logical blend operations.
+const D3D_FEATURE_LEVEL_11_1 = D3D_FEATURE_LEVEL(45312);
+
+/// Targets features supported by Direct3D 12.0, including shader model 5.
+const D3D_FEATURE_LEVEL_12_0 = D3D_FEATURE_LEVEL(49152);
+
+/// Targets features supported by Direct3D 12.1, including shader model 5.
+const D3D_FEATURE_LEVEL_12_1 = D3D_FEATURE_LEVEL(49408);
+
+/// Targets features supported by Direct3D 12.2, including shader model 6.5.
+const D3D_FEATURE_LEVEL_12_2 = D3D_FEATURE_LEVEL(49664);
+
+/// Specifies interpolation mode, which affects how values are calculated during
+/// rasterization.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_interpolation_mode>.
+///
+/// {@category enum}
+extension type const D3D_INTERPOLATION_MODE(int _) implements int {}
+
+/// The interpolation mode is undefined.
+const D3D_INTERPOLATION_UNDEFINED = D3D_INTERPOLATION_MODE(0);
+
+/// Don't interpolate between register values.
+const D3D_INTERPOLATION_CONSTANT = D3D_INTERPOLATION_MODE(1);
+
+/// Interpolate linearly between register values.
+const D3D_INTERPOLATION_LINEAR = D3D_INTERPOLATION_MODE(2);
+
+/// Interpolate linearly between register values but centroid clamped when
+/// multisampling.
+const D3D_INTERPOLATION_LINEAR_CENTROID = D3D_INTERPOLATION_MODE(3);
+
+/// Interpolate linearly between register values but with no perspective
+/// correction.
+const D3D_INTERPOLATION_LINEAR_NOPERSPECTIVE = D3D_INTERPOLATION_MODE(4);
+
+/// Interpolate linearly between register values but with no perspective
+/// correction and centroid clamped when multisampling.
+const D3D_INTERPOLATION_LINEAR_NOPERSPECTIVE_CENTROID = D3D_INTERPOLATION_MODE(
+  5,
+);
+
+/// Interpolate linearly between register values but sample clamped when
+/// multisampling.
+const D3D_INTERPOLATION_LINEAR_SAMPLE = D3D_INTERPOLATION_MODE(6);
+
+/// Interpolate linearly between register values but with no perspective
+/// correction and sample clamped when multisampling.
+const D3D_INTERPOLATION_LINEAR_NOPERSPECTIVE_SAMPLE = D3D_INTERPOLATION_MODE(7);
+
+/// Values that indicate the minimum desired interpolation precision.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_min_precision>.
+///
+/// {@category enum}
+extension type const D3D_MIN_PRECISION(int _) implements int {}
+
+/// Default minimum precision, which is 32-bit precision.
+const D3D_MIN_PRECISION_DEFAULT = D3D_MIN_PRECISION(0);
+
+/// Minimum precision is min16float, which is 16-bit floating point.
+const D3D_MIN_PRECISION_FLOAT_16 = D3D_MIN_PRECISION(1);
+
+/// Minimum precision is min10float, which is 10-bit floating point.
+const D3D_MIN_PRECISION_FLOAT_2_8 = D3D_MIN_PRECISION(2);
+
+/// Reserved.
+const D3D_MIN_PRECISION_RESERVED = D3D_MIN_PRECISION(3);
+
+/// Minimum precision is min16int, which is 16-bit signed integer.
+const D3D_MIN_PRECISION_SINT_16 = D3D_MIN_PRECISION(4);
+
+/// Minimum precision is min16uint, which is 16-bit unsigned integer.
+const D3D_MIN_PRECISION_UINT_16 = D3D_MIN_PRECISION(5);
+
+/// Minimum precision is any 16-bit value.
+const D3D_MIN_PRECISION_ANY_16 = D3D_MIN_PRECISION(240);
+
+/// Minimum precision is any 10-bit value.
+const D3D_MIN_PRECISION_ANY_10 = D3D_MIN_PRECISION(241);
+
+/// Values that identify shader parameters that use system-value semantics.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_name>.
+///
+/// {@category enum}
+extension type const D3D_NAME(int _) implements int {}
+
+/// This parameter does not use a predefined system-value semantic.
+const D3D_NAME_UNDEFINED = D3D_NAME(0);
+
+/// This parameter contains position data.
+const D3D_NAME_POSITION = D3D_NAME(1);
+
+/// This parameter contains clip-distance data.
+const D3D_NAME_CLIP_DISTANCE = D3D_NAME(2);
+
+/// This parameter contains cull-distance data.
+const D3D_NAME_CULL_DISTANCE = D3D_NAME(3);
+
+/// This parameter contains a render-target-array index.
+const D3D_NAME_RENDER_TARGET_ARRAY_INDEX = D3D_NAME(4);
+
+/// This parameter contains a viewport-array index.
+const D3D_NAME_VIEWPORT_ARRAY_INDEX = D3D_NAME(5);
+
+/// This parameter contains a vertex ID.
+const D3D_NAME_VERTEX_ID = D3D_NAME(6);
+
+/// This parameter contains a primitive ID.
+const D3D_NAME_PRIMITIVE_ID = D3D_NAME(7);
+
+/// This parameter contains an instance ID.
+const D3D_NAME_INSTANCE_ID = D3D_NAME(8);
+
+/// This parameter contains data that identifies whether or not the primitive
+/// faces the camera.
+const D3D_NAME_IS_FRONT_FACE = D3D_NAME(9);
+
+/// This parameter contains a sampler-array index.
+const D3D_NAME_SAMPLE_INDEX = D3D_NAME(10);
+
+/// This parameter contains one of four tessellation factors that correspond to
+/// the amount of parts that a quad patch is broken into along the given edge.
+const D3D_NAME_FINAL_QUAD_EDGE_TESSFACTOR = D3D_NAME(11);
+
+/// This parameter contains one of two tessellation factors that correspond to
+/// the amount of parts that a quad patch is broken into vertically and
+/// horizontally within the patch.
+const D3D_NAME_FINAL_QUAD_INSIDE_TESSFACTOR = D3D_NAME(12);
+
+/// This parameter contains one of three tessellation factors that correspond to
+/// the amount of parts that a tri patch is broken into along the given edge.
+const D3D_NAME_FINAL_TRI_EDGE_TESSFACTOR = D3D_NAME(13);
+
+/// This parameter contains the tessellation factor that corresponds to the
+/// amount of parts that a tri patch is broken into within the patch.
+const D3D_NAME_FINAL_TRI_INSIDE_TESSFACTOR = D3D_NAME(14);
+
+/// This parameter contains the tessellation factor that corresponds to the
+/// number of lines broken into within the patch.
+const D3D_NAME_FINAL_LINE_DETAIL_TESSFACTOR = D3D_NAME(15);
+
+/// This parameter contains the tessellation factor that corresponds to the
+/// number of lines that are created within the patch.
+const D3D_NAME_FINAL_LINE_DENSITY_TESSFACTOR = D3D_NAME(16);
+
+/// This parameter contains barycentric coordinate data.
+const D3D_NAME_BARYCENTRICS = D3D_NAME(23);
+
+const D3D_NAME_SHADINGRATE = D3D_NAME(24);
+
+const D3D_NAME_CULLPRIMITIVE = D3D_NAME(25);
+
+/// This parameter contains render-target data.
+const D3D_NAME_TARGET = D3D_NAME(64);
+
+/// This parameter contains depth data.
+const D3D_NAME_DEPTH = D3D_NAME(65);
+
+/// This parameter contains alpha-coverage data.
+const D3D_NAME_COVERAGE = D3D_NAME(66);
+
+/// This parameter signifies that the value is greater than or equal to a
+/// reference value.
+const D3D_NAME_DEPTH_GREATER_EQUAL = D3D_NAME(67);
+
+/// This parameter signifies that the value is less than or equal to a reference
+/// value.
+const D3D_NAME_DEPTH_LESS_EQUAL = D3D_NAME(68);
+
+/// This parameter contains a stencil reference.
+const D3D_NAME_STENCIL_REF = D3D_NAME(69);
+
+/// This parameter contains inner input coverage data.
+const D3D_NAME_INNER_COVERAGE = D3D_NAME(70);
+
+/// This parameter does not use a predefined system-value semantic.
+const D3D10_NAME_UNDEFINED = D3D_NAME(0);
+
+/// This parameter contains position data.
+const D3D10_NAME_POSITION = D3D_NAME(1);
+
+/// This parameter contains clip-distance data.
+const D3D10_NAME_CLIP_DISTANCE = D3D_NAME(2);
+
+/// This parameter contains cull-distance data.
+const D3D10_NAME_CULL_DISTANCE = D3D_NAME(3);
+
+/// This parameter contains a render-target-array index.
+const D3D10_NAME_RENDER_TARGET_ARRAY_INDEX = D3D_NAME(4);
+
+/// This parameter contains a viewport-array index.
+const D3D10_NAME_VIEWPORT_ARRAY_INDEX = D3D_NAME(5);
+
+/// This parameter contains a vertex ID.
+const D3D10_NAME_VERTEX_ID = D3D_NAME(6);
+
+/// This parameter contains a primitive ID.
+const D3D10_NAME_PRIMITIVE_ID = D3D_NAME(7);
+
+/// This parameter contains a instance ID.
+const D3D10_NAME_INSTANCE_ID = D3D_NAME(8);
+
+/// This parameter contains data that identifies whether or not the primitive
+/// faces the camera.
+const D3D10_NAME_IS_FRONT_FACE = D3D_NAME(9);
+
+/// This parameter contains a sampler-array index.
+const D3D10_NAME_SAMPLE_INDEX = D3D_NAME(10);
+
+/// This parameter contains render-target data.
+const D3D10_NAME_TARGET = D3D_NAME(64);
+
+/// This parameter contains depth data.
+const D3D10_NAME_DEPTH = D3D_NAME(65);
+
+/// This parameter contains alpha-coverage data.
+const D3D10_NAME_COVERAGE = D3D_NAME(66);
+
+/// This parameter contains one of four tessellation factors that correspond to
+/// the amount of parts that a quad patch is broken into along the given edge.
+const D3D11_NAME_FINAL_QUAD_EDGE_TESSFACTOR = D3D_NAME(11);
+
+/// This parameter contains one of two tessellation factors that correspond to
+/// the amount of parts that a quad patch is broken into vertically and
+/// horizontally within the patch.
+const D3D11_NAME_FINAL_QUAD_INSIDE_TESSFACTOR = D3D_NAME(12);
+
+/// This parameter contains one of three tessellation factors that correspond to
+/// the amount of parts that a tri patch is broken into along the given edge.
+const D3D11_NAME_FINAL_TRI_EDGE_TESSFACTOR = D3D_NAME(13);
+
+/// This parameter contains the tessellation factor that corresponds to the
+/// amount of parts that a tri patch is broken into within the patch.
+const D3D11_NAME_FINAL_TRI_INSIDE_TESSFACTOR = D3D_NAME(14);
+
+/// This parameter contains the tessellation factor that corresponds to the
+/// amount of lines broken into within the patch.
+const D3D11_NAME_FINAL_LINE_DETAIL_TESSFACTOR = D3D_NAME(15);
+
+/// This parameter contains the tessellation factor that corresponds to the
+/// amount of lines that are created within the patch.
+const D3D11_NAME_FINAL_LINE_DENSITY_TESSFACTOR = D3D_NAME(16);
+
+/// This parameter signifies that the value is greater than or equal to a
+/// reference value.
+const D3D11_NAME_DEPTH_GREATER_EQUAL = D3D_NAME(67);
+
+/// This parameter signifies that the value is less than or equal to a reference
+/// value.
+const D3D11_NAME_DEPTH_LESS_EQUAL = D3D_NAME(68);
+
+/// This parameter contains a stencil reference.
+const D3D11_NAME_STENCIL_REF = D3D_NAME(69);
+
+/// This parameter contains inner input coverage data.
+const D3D11_NAME_INNER_COVERAGE = D3D_NAME(70);
+
+/// This parameter contains barycentric coordinate data.
+const D3D12_NAME_BARYCENTRICS = D3D_NAME(23);
+
+const D3D12_NAME_SHADINGRATE = D3D_NAME(24);
+
+const D3D12_NAME_CULLPRIMITIVE = D3D_NAME(25);
+
+/// Indicates semantic flags for function parameters.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_parameter_flags>.
+///
+/// {@category enum}
+extension type const D3D_PARAMETER_FLAGS(int _) implements int {}
+
+/// The parameter has no semantic flags.
+const D3D_PF_NONE = D3D_PARAMETER_FLAGS(0);
+
+/// Indicates an input parameter.
+const D3D_PF_IN = D3D_PARAMETER_FLAGS(1);
+
+/// Indicates an output parameter.
+const D3D_PF_OUT = D3D_PARAMETER_FLAGS(2);
+
+/// Indicates how the pipeline interprets geometry or hull shader input
+/// primitives.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_primitive>.
+///
+/// {@category enum}
+extension type const D3D_PRIMITIVE(int _) implements int {}
+
+const D3D_PRIMITIVE_UNDEFINED = D3D_PRIMITIVE(0);
+
+const D3D_PRIMITIVE_POINT = D3D_PRIMITIVE(1);
+
+const D3D_PRIMITIVE_LINE = D3D_PRIMITIVE(2);
+
+const D3D_PRIMITIVE_TRIANGLE = D3D_PRIMITIVE(3);
+
+const D3D_PRIMITIVE_LINE_ADJ = D3D_PRIMITIVE(6);
+
+const D3D_PRIMITIVE_TRIANGLE_ADJ = D3D_PRIMITIVE(7);
+
+const D3D_PRIMITIVE_1_CONTROL_POINT_PATCH = D3D_PRIMITIVE(8);
+
+const D3D_PRIMITIVE_2_CONTROL_POINT_PATCH = D3D_PRIMITIVE(9);
+
+const D3D_PRIMITIVE_3_CONTROL_POINT_PATCH = D3D_PRIMITIVE(10);
+
+const D3D_PRIMITIVE_4_CONTROL_POINT_PATCH = D3D_PRIMITIVE(11);
+
+const D3D_PRIMITIVE_5_CONTROL_POINT_PATCH = D3D_PRIMITIVE(12);
+
+const D3D_PRIMITIVE_6_CONTROL_POINT_PATCH = D3D_PRIMITIVE(13);
+
+const D3D_PRIMITIVE_7_CONTROL_POINT_PATCH = D3D_PRIMITIVE(14);
+
+const D3D_PRIMITIVE_8_CONTROL_POINT_PATCH = D3D_PRIMITIVE(15);
+
+const D3D_PRIMITIVE_9_CONTROL_POINT_PATCH = D3D_PRIMITIVE(16);
+
+const D3D_PRIMITIVE_10_CONTROL_POINT_PATCH = D3D_PRIMITIVE(17);
+
+const D3D_PRIMITIVE_11_CONTROL_POINT_PATCH = D3D_PRIMITIVE(18);
+
+const D3D_PRIMITIVE_12_CONTROL_POINT_PATCH = D3D_PRIMITIVE(19);
+
+const D3D_PRIMITIVE_13_CONTROL_POINT_PATCH = D3D_PRIMITIVE(20);
+
+const D3D_PRIMITIVE_14_CONTROL_POINT_PATCH = D3D_PRIMITIVE(21);
+
+const D3D_PRIMITIVE_15_CONTROL_POINT_PATCH = D3D_PRIMITIVE(22);
+
+const D3D_PRIMITIVE_16_CONTROL_POINT_PATCH = D3D_PRIMITIVE(23);
+
+const D3D_PRIMITIVE_17_CONTROL_POINT_PATCH = D3D_PRIMITIVE(24);
+
+const D3D_PRIMITIVE_18_CONTROL_POINT_PATCH = D3D_PRIMITIVE(25);
+
+const D3D_PRIMITIVE_19_CONTROL_POINT_PATCH = D3D_PRIMITIVE(26);
+
+const D3D_PRIMITIVE_20_CONTROL_POINT_PATCH = D3D_PRIMITIVE(27);
+
+const D3D_PRIMITIVE_21_CONTROL_POINT_PATCH = D3D_PRIMITIVE(28);
+
+const D3D_PRIMITIVE_22_CONTROL_POINT_PATCH = D3D_PRIMITIVE(29);
+
+const D3D_PRIMITIVE_23_CONTROL_POINT_PATCH = D3D_PRIMITIVE(30);
+
+const D3D_PRIMITIVE_24_CONTROL_POINT_PATCH = D3D_PRIMITIVE(31);
+
+const D3D_PRIMITIVE_25_CONTROL_POINT_PATCH = D3D_PRIMITIVE(32);
+
+const D3D_PRIMITIVE_26_CONTROL_POINT_PATCH = D3D_PRIMITIVE(33);
+
+const D3D_PRIMITIVE_27_CONTROL_POINT_PATCH = D3D_PRIMITIVE(34);
+
+const D3D_PRIMITIVE_28_CONTROL_POINT_PATCH = D3D_PRIMITIVE(35);
+
+const D3D_PRIMITIVE_29_CONTROL_POINT_PATCH = D3D_PRIMITIVE(36);
+
+const D3D_PRIMITIVE_30_CONTROL_POINT_PATCH = D3D_PRIMITIVE(37);
+
+const D3D_PRIMITIVE_31_CONTROL_POINT_PATCH = D3D_PRIMITIVE(38);
+
+const D3D_PRIMITIVE_32_CONTROL_POINT_PATCH = D3D_PRIMITIVE(39);
+
+const D3D10_PRIMITIVE_UNDEFINED = D3D_PRIMITIVE(0);
+
+const D3D10_PRIMITIVE_POINT = D3D_PRIMITIVE(1);
+
+const D3D10_PRIMITIVE_LINE = D3D_PRIMITIVE(2);
+
+const D3D10_PRIMITIVE_TRIANGLE = D3D_PRIMITIVE(3);
+
+const D3D10_PRIMITIVE_LINE_ADJ = D3D_PRIMITIVE(6);
+
+const D3D10_PRIMITIVE_TRIANGLE_ADJ = D3D_PRIMITIVE(7);
+
+/// The shader has not been initialized with an input primitive type.
+const D3D11_PRIMITIVE_UNDEFINED = D3D_PRIMITIVE(0);
+
+/// Interpret the input primitive as a point.
+const D3D11_PRIMITIVE_POINT = D3D_PRIMITIVE(1);
+
+/// Interpret the input primitive as a line.
+const D3D11_PRIMITIVE_LINE = D3D_PRIMITIVE(2);
+
+/// Interpret the input primitive as a triangle.
+const D3D11_PRIMITIVE_TRIANGLE = D3D_PRIMITIVE(3);
+
+/// Interpret the input primitive as a line with adjacency data.
+const D3D11_PRIMITIVE_LINE_ADJ = D3D_PRIMITIVE(6);
+
+/// Interpret the input primitive as a triangle with adjacency data.
+const D3D11_PRIMITIVE_TRIANGLE_ADJ = D3D_PRIMITIVE(7);
+
+/// Interpret the input primitive as a control point patch.
+const D3D11_PRIMITIVE_1_CONTROL_POINT_PATCH = D3D_PRIMITIVE(8);
+
+/// Interpret the input primitive as a control point patch.
+const D3D11_PRIMITIVE_2_CONTROL_POINT_PATCH = D3D_PRIMITIVE(9);
+
+/// Interpret the input primitive as a control point patch.
+const D3D11_PRIMITIVE_3_CONTROL_POINT_PATCH = D3D_PRIMITIVE(10);
+
+/// Interpret the input primitive as a control point patch.
+const D3D11_PRIMITIVE_4_CONTROL_POINT_PATCH = D3D_PRIMITIVE(11);
+
+/// Interpret the input primitive as a control point patch.
+const D3D11_PRIMITIVE_5_CONTROL_POINT_PATCH = D3D_PRIMITIVE(12);
+
+/// Interpret the input primitive as a control point patch.
+const D3D11_PRIMITIVE_6_CONTROL_POINT_PATCH = D3D_PRIMITIVE(13);
+
+/// Interpret the input primitive as a control point patch.
+const D3D11_PRIMITIVE_7_CONTROL_POINT_PATCH = D3D_PRIMITIVE(14);
+
+/// Interpret the input primitive as a control point patch.
+const D3D11_PRIMITIVE_8_CONTROL_POINT_PATCH = D3D_PRIMITIVE(15);
+
+/// Interpret the input primitive as a control point patch.
+const D3D11_PRIMITIVE_9_CONTROL_POINT_PATCH = D3D_PRIMITIVE(16);
+
+/// Interpret the input primitive as a control point patch.
+const D3D11_PRIMITIVE_10_CONTROL_POINT_PATCH = D3D_PRIMITIVE(17);
+
+/// Interpret the input primitive as a control point patch.
+const D3D11_PRIMITIVE_11_CONTROL_POINT_PATCH = D3D_PRIMITIVE(18);
+
+/// Interpret the input primitive as a control point patch.
+const D3D11_PRIMITIVE_12_CONTROL_POINT_PATCH = D3D_PRIMITIVE(19);
+
+/// Interpret the input primitive as a control point patch.
+const D3D11_PRIMITIVE_13_CONTROL_POINT_PATCH = D3D_PRIMITIVE(20);
+
+/// Interpret the input primitive as a control point patch.
+const D3D11_PRIMITIVE_14_CONTROL_POINT_PATCH = D3D_PRIMITIVE(21);
+
+/// Interpret the input primitive as a control point patch.
+const D3D11_PRIMITIVE_15_CONTROL_POINT_PATCH = D3D_PRIMITIVE(22);
+
+/// Interpret the input primitive as a control point patch.
+const D3D11_PRIMITIVE_16_CONTROL_POINT_PATCH = D3D_PRIMITIVE(23);
+
+/// Interpret the input primitive as a control point patch.
+const D3D11_PRIMITIVE_17_CONTROL_POINT_PATCH = D3D_PRIMITIVE(24);
+
+/// Interpret the input primitive as a control point patch.
+const D3D11_PRIMITIVE_18_CONTROL_POINT_PATCH = D3D_PRIMITIVE(25);
+
+/// Interpret the input primitive as a control point patch.
+const D3D11_PRIMITIVE_19_CONTROL_POINT_PATCH = D3D_PRIMITIVE(26);
+
+/// Interpret the input primitive as a control point patch.
+const D3D11_PRIMITIVE_20_CONTROL_POINT_PATCH = D3D_PRIMITIVE(27);
+
+/// Interpret the input primitive as a control point patch.
+const D3D11_PRIMITIVE_21_CONTROL_POINT_PATCH = D3D_PRIMITIVE(28);
+
+/// Interpret the input primitive as a control point patch.
+const D3D11_PRIMITIVE_22_CONTROL_POINT_PATCH = D3D_PRIMITIVE(29);
+
+/// Interpret the input primitive as a control point patch.
+const D3D11_PRIMITIVE_23_CONTROL_POINT_PATCH = D3D_PRIMITIVE(30);
+
+/// Interpret the input primitive as a control point patch.
+const D3D11_PRIMITIVE_24_CONTROL_POINT_PATCH = D3D_PRIMITIVE(31);
+
+/// Interpret the input primitive as a control point patch.
+const D3D11_PRIMITIVE_25_CONTROL_POINT_PATCH = D3D_PRIMITIVE(32);
+
+/// Interpret the input primitive as a control point patch.
+const D3D11_PRIMITIVE_26_CONTROL_POINT_PATCH = D3D_PRIMITIVE(33);
+
+/// Interpret the input primitive as a control point patch.
+const D3D11_PRIMITIVE_27_CONTROL_POINT_PATCH = D3D_PRIMITIVE(34);
+
+/// Interpret the input primitive as a control point patch.
+const D3D11_PRIMITIVE_28_CONTROL_POINT_PATCH = D3D_PRIMITIVE(35);
+
+/// Interpret the input primitive as a control point patch.
+const D3D11_PRIMITIVE_29_CONTROL_POINT_PATCH = D3D_PRIMITIVE(36);
+
+/// Interpret the input primitive as a control point patch.
+const D3D11_PRIMITIVE_30_CONTROL_POINT_PATCH = D3D_PRIMITIVE(37);
+
+/// Interpret the input primitive as a control point patch.
+const D3D11_PRIMITIVE_31_CONTROL_POINT_PATCH = D3D_PRIMITIVE(38);
+
+/// Interpret the input primitive as a control point patch.
+const D3D11_PRIMITIVE_32_CONTROL_POINT_PATCH = D3D_PRIMITIVE(39);
+
+/// Values that indicate how the pipeline interprets vertex data that is bound
+/// to the input-assembler stage.
+///
+/// These primitive topology values determine how the vertex data is rendered on
+/// screen.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_primitive_topology>.
+///
+/// {@category enum}
+extension type const D3D_PRIMITIVE_TOPOLOGY(int _) implements int {}
+
+/// The IA stage has not been initialized with a primitive topology.
+const D3D_PRIMITIVE_TOPOLOGY_UNDEFINED = D3D_PRIMITIVE_TOPOLOGY(0);
+
+/// Interpret the vertex data as a list of points.
+const D3D_PRIMITIVE_TOPOLOGY_POINTLIST = D3D_PRIMITIVE_TOPOLOGY(1);
+
+/// Interpret the vertex data as a list of lines.
+const D3D_PRIMITIVE_TOPOLOGY_LINELIST = D3D_PRIMITIVE_TOPOLOGY(2);
+
+/// Interpret the vertex data as a line strip.
+const D3D_PRIMITIVE_TOPOLOGY_LINESTRIP = D3D_PRIMITIVE_TOPOLOGY(3);
+
+/// Interpret the vertex data as a list of triangles.
+const D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST = D3D_PRIMITIVE_TOPOLOGY(4);
+
+/// Interpret the vertex data as a triangle strip.
+const D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP = D3D_PRIMITIVE_TOPOLOGY(5);
+
+const D3D_PRIMITIVE_TOPOLOGY_TRIANGLEFAN = D3D_PRIMITIVE_TOPOLOGY(6);
+
+/// Interpret the vertex data as a list of lines with adjacency data.
+const D3D_PRIMITIVE_TOPOLOGY_LINELIST_ADJ = D3D_PRIMITIVE_TOPOLOGY(10);
+
+/// Interpret the vertex data as a line strip with adjacency data.
+const D3D_PRIMITIVE_TOPOLOGY_LINESTRIP_ADJ = D3D_PRIMITIVE_TOPOLOGY(11);
+
+/// Interpret the vertex data as a list of triangles with adjacency data.
+const D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST_ADJ = D3D_PRIMITIVE_TOPOLOGY(12);
+
+/// Interpret the vertex data as a triangle strip with adjacency data.
+const D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP_ADJ = D3D_PRIMITIVE_TOPOLOGY(13);
+
+/// Interpret the vertex data as a patch list.
+const D3D_PRIMITIVE_TOPOLOGY_1_CONTROL_POINT_PATCHLIST = D3D_PRIMITIVE_TOPOLOGY(
+  33,
+);
+
+/// Interpret the vertex data as a patch list.
+const D3D_PRIMITIVE_TOPOLOGY_2_CONTROL_POINT_PATCHLIST = D3D_PRIMITIVE_TOPOLOGY(
+  34,
+);
+
+/// Interpret the vertex data as a patch list.
+const D3D_PRIMITIVE_TOPOLOGY_3_CONTROL_POINT_PATCHLIST = D3D_PRIMITIVE_TOPOLOGY(
+  35,
+);
+
+/// Interpret the vertex data as a patch list.
+const D3D_PRIMITIVE_TOPOLOGY_4_CONTROL_POINT_PATCHLIST = D3D_PRIMITIVE_TOPOLOGY(
+  36,
+);
+
+/// Interpret the vertex data as a patch list.
+const D3D_PRIMITIVE_TOPOLOGY_5_CONTROL_POINT_PATCHLIST = D3D_PRIMITIVE_TOPOLOGY(
+  37,
+);
+
+/// Interpret the vertex data as a patch list.
+const D3D_PRIMITIVE_TOPOLOGY_6_CONTROL_POINT_PATCHLIST = D3D_PRIMITIVE_TOPOLOGY(
+  38,
+);
+
+/// Interpret the vertex data as a patch list.
+const D3D_PRIMITIVE_TOPOLOGY_7_CONTROL_POINT_PATCHLIST = D3D_PRIMITIVE_TOPOLOGY(
+  39,
+);
+
+/// Interpret the vertex data as a patch list.
+const D3D_PRIMITIVE_TOPOLOGY_8_CONTROL_POINT_PATCHLIST = D3D_PRIMITIVE_TOPOLOGY(
+  40,
+);
+
+/// Interpret the vertex data as a patch list.
+const D3D_PRIMITIVE_TOPOLOGY_9_CONTROL_POINT_PATCHLIST = D3D_PRIMITIVE_TOPOLOGY(
+  41,
+);
+
+/// Interpret the vertex data as a patch list.
+const D3D_PRIMITIVE_TOPOLOGY_10_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(42);
+
+/// Interpret the vertex data as a patch list.
+const D3D_PRIMITIVE_TOPOLOGY_11_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(43);
+
+/// Interpret the vertex data as a patch list.
+const D3D_PRIMITIVE_TOPOLOGY_12_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(44);
+
+/// Interpret the vertex data as a patch list.
+const D3D_PRIMITIVE_TOPOLOGY_13_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(45);
+
+/// Interpret the vertex data as a patch list.
+const D3D_PRIMITIVE_TOPOLOGY_14_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(46);
+
+/// Interpret the vertex data as a patch list.
+const D3D_PRIMITIVE_TOPOLOGY_15_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(47);
+
+/// Interpret the vertex data as a patch list.
+const D3D_PRIMITIVE_TOPOLOGY_16_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(48);
+
+/// Interpret the vertex data as a patch list.
+const D3D_PRIMITIVE_TOPOLOGY_17_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(49);
+
+/// Interpret the vertex data as a patch list.
+const D3D_PRIMITIVE_TOPOLOGY_18_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(50);
+
+/// Interpret the vertex data as a patch list.
+const D3D_PRIMITIVE_TOPOLOGY_19_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(51);
+
+/// Interpret the vertex data as a patch list.
+const D3D_PRIMITIVE_TOPOLOGY_20_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(52);
+
+/// Interpret the vertex data as a patch list.
+const D3D_PRIMITIVE_TOPOLOGY_21_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(53);
+
+/// Interpret the vertex data as a patch list.
+const D3D_PRIMITIVE_TOPOLOGY_22_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(54);
+
+/// Interpret the vertex data as a patch list.
+const D3D_PRIMITIVE_TOPOLOGY_23_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(55);
+
+/// Interpret the vertex data as a patch list.
+const D3D_PRIMITIVE_TOPOLOGY_24_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(56);
+
+/// Interpret the vertex data as a patch list.
+const D3D_PRIMITIVE_TOPOLOGY_25_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(57);
+
+/// Interpret the vertex data as a patch list.
+const D3D_PRIMITIVE_TOPOLOGY_26_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(58);
+
+/// Interpret the vertex data as a patch list.
+const D3D_PRIMITIVE_TOPOLOGY_27_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(59);
+
+/// Interpret the vertex data as a patch list.
+const D3D_PRIMITIVE_TOPOLOGY_28_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(60);
+
+/// Interpret the vertex data as a patch list.
+const D3D_PRIMITIVE_TOPOLOGY_29_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(61);
+
+/// Interpret the vertex data as a patch list.
+const D3D_PRIMITIVE_TOPOLOGY_30_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(62);
+
+/// Interpret the vertex data as a patch list.
+const D3D_PRIMITIVE_TOPOLOGY_31_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(63);
+
+/// Interpret the vertex data as a patch list.
+const D3D_PRIMITIVE_TOPOLOGY_32_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(64);
+
+/// The IA stage has not been initialized with a primitive topology.
+const D3D10_PRIMITIVE_TOPOLOGY_UNDEFINED = D3D_PRIMITIVE_TOPOLOGY(0);
+
+/// Interpret the vertex data as a list of points.
+const D3D10_PRIMITIVE_TOPOLOGY_POINTLIST = D3D_PRIMITIVE_TOPOLOGY(1);
+
+/// Interpret the vertex data as a list of lines.
+const D3D10_PRIMITIVE_TOPOLOGY_LINELIST = D3D_PRIMITIVE_TOPOLOGY(2);
+
+/// Interpret the vertex data as a line strip.
+const D3D10_PRIMITIVE_TOPOLOGY_LINESTRIP = D3D_PRIMITIVE_TOPOLOGY(3);
+
+/// Interpret the vertex data as a list of triangles.
+const D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST = D3D_PRIMITIVE_TOPOLOGY(4);
+
+/// Interpret the vertex data as a triangle strip.
+const D3D10_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP = D3D_PRIMITIVE_TOPOLOGY(5);
+
+/// Interpret the vertex data as a list of lines with adjacency data.
+const D3D10_PRIMITIVE_TOPOLOGY_LINELIST_ADJ = D3D_PRIMITIVE_TOPOLOGY(10);
+
+/// Interpret the vertex data as a line strip with adjacency data.
+const D3D10_PRIMITIVE_TOPOLOGY_LINESTRIP_ADJ = D3D_PRIMITIVE_TOPOLOGY(11);
+
+/// Interpret the vertex data as a list of triangles with adjacency data.
+const D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST_ADJ = D3D_PRIMITIVE_TOPOLOGY(12);
+
+/// Interpret the vertex data as a triangle strip with adjacency data.
+const D3D10_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP_ADJ = D3D_PRIMITIVE_TOPOLOGY(13);
+
+/// The IA stage has not been initialized with a primitive topology.
+const D3D11_PRIMITIVE_TOPOLOGY_UNDEFINED = D3D_PRIMITIVE_TOPOLOGY(0);
+
+/// Interpret the vertex data as a list of points.
+const D3D11_PRIMITIVE_TOPOLOGY_POINTLIST = D3D_PRIMITIVE_TOPOLOGY(1);
+
+/// Interpret the vertex data as a list of lines.
+const D3D11_PRIMITIVE_TOPOLOGY_LINELIST = D3D_PRIMITIVE_TOPOLOGY(2);
+
+/// Interpret the vertex data as a line strip.
+const D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP = D3D_PRIMITIVE_TOPOLOGY(3);
+
+/// Interpret the vertex data as a list of triangles.
+const D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST = D3D_PRIMITIVE_TOPOLOGY(4);
+
+/// Interpret the vertex data as a triangle strip.
+const D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP = D3D_PRIMITIVE_TOPOLOGY(5);
+
+/// Interpret the vertex data as a list of lines with adjacency data.
+const D3D11_PRIMITIVE_TOPOLOGY_LINELIST_ADJ = D3D_PRIMITIVE_TOPOLOGY(10);
+
+/// Interpret the vertex data as a line strip with adjacency data.
+const D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP_ADJ = D3D_PRIMITIVE_TOPOLOGY(11);
+
+/// Interpret the vertex data as a list of triangles with adjacency data.
+const D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST_ADJ = D3D_PRIMITIVE_TOPOLOGY(12);
+
+/// Interpret the vertex data as a triangle strip with adjacency data.
+const D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP_ADJ = D3D_PRIMITIVE_TOPOLOGY(13);
+
+/// Interpret the vertex data as a patch list.
+const D3D11_PRIMITIVE_TOPOLOGY_1_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(33);
+
+/// Interpret the vertex data as a patch list.
+const D3D11_PRIMITIVE_TOPOLOGY_2_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(34);
+
+/// Interpret the vertex data as a patch list.
+const D3D11_PRIMITIVE_TOPOLOGY_3_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(35);
+
+/// Interpret the vertex data as a patch list.
+const D3D11_PRIMITIVE_TOPOLOGY_4_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(36);
+
+/// Interpret the vertex data as a patch list.
+const D3D11_PRIMITIVE_TOPOLOGY_5_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(37);
+
+/// Interpret the vertex data as a patch list.
+const D3D11_PRIMITIVE_TOPOLOGY_6_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(38);
+
+/// Interpret the vertex data as a patch list.
+const D3D11_PRIMITIVE_TOPOLOGY_7_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(39);
+
+/// Interpret the vertex data as a patch list.
+const D3D11_PRIMITIVE_TOPOLOGY_8_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(40);
+
+/// Interpret the vertex data as a patch list.
+const D3D11_PRIMITIVE_TOPOLOGY_9_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(41);
+
+/// Interpret the vertex data as a patch list.
+const D3D11_PRIMITIVE_TOPOLOGY_10_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(42);
+
+/// Interpret the vertex data as a patch list.
+const D3D11_PRIMITIVE_TOPOLOGY_11_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(43);
+
+/// Interpret the vertex data as a patch list.
+const D3D11_PRIMITIVE_TOPOLOGY_12_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(44);
+
+/// Interpret the vertex data as a patch list.
+const D3D11_PRIMITIVE_TOPOLOGY_13_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(45);
+
+/// Interpret the vertex data as a patch list.
+const D3D11_PRIMITIVE_TOPOLOGY_14_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(46);
+
+/// Interpret the vertex data as a patch list.
+const D3D11_PRIMITIVE_TOPOLOGY_15_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(47);
+
+/// Interpret the vertex data as a patch list.
+const D3D11_PRIMITIVE_TOPOLOGY_16_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(48);
+
+/// Interpret the vertex data as a patch list.
+const D3D11_PRIMITIVE_TOPOLOGY_17_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(49);
+
+/// Interpret the vertex data as a patch list.
+const D3D11_PRIMITIVE_TOPOLOGY_18_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(50);
+
+/// Interpret the vertex data as a patch list.
+const D3D11_PRIMITIVE_TOPOLOGY_19_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(51);
+
+/// Interpret the vertex data as a patch list.
+const D3D11_PRIMITIVE_TOPOLOGY_20_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(52);
+
+/// Interpret the vertex data as a patch list.
+const D3D11_PRIMITIVE_TOPOLOGY_21_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(53);
+
+/// Interpret the vertex data as a patch list.
+const D3D11_PRIMITIVE_TOPOLOGY_22_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(54);
+
+/// Interpret the vertex data as a patch list.
+const D3D11_PRIMITIVE_TOPOLOGY_23_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(55);
+
+/// Interpret the vertex data as a patch list.
+const D3D11_PRIMITIVE_TOPOLOGY_24_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(56);
+
+/// Interpret the vertex data as a patch list.
+const D3D11_PRIMITIVE_TOPOLOGY_25_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(57);
+
+/// Interpret the vertex data as a patch list.
+const D3D11_PRIMITIVE_TOPOLOGY_26_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(58);
+
+/// Interpret the vertex data as a patch list.
+const D3D11_PRIMITIVE_TOPOLOGY_27_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(59);
+
+/// Interpret the vertex data as a patch list.
+const D3D11_PRIMITIVE_TOPOLOGY_28_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(60);
+
+/// Interpret the vertex data as a patch list.
+const D3D11_PRIMITIVE_TOPOLOGY_29_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(61);
+
+/// Interpret the vertex data as a patch list.
+const D3D11_PRIMITIVE_TOPOLOGY_30_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(62);
+
+/// Interpret the vertex data as a patch list.
+const D3D11_PRIMITIVE_TOPOLOGY_31_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(63);
+
+/// Interpret the vertex data as a patch list.
+const D3D11_PRIMITIVE_TOPOLOGY_32_CONTROL_POINT_PATCHLIST =
+    D3D_PRIMITIVE_TOPOLOGY(64);
+
+/// Values that identify the data types that can be stored in a register.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_register_component_type>.
+///
+/// {@category enum}
+extension type const D3D_REGISTER_COMPONENT_TYPE(int _) implements int {}
+
+/// The data type is unknown.
+const D3D_REGISTER_COMPONENT_UNKNOWN = D3D_REGISTER_COMPONENT_TYPE(0);
+
+/// 32-bit unsigned integer.
+const D3D_REGISTER_COMPONENT_UINT32 = D3D_REGISTER_COMPONENT_TYPE(1);
+
+/// 32-bit signed integer.
+const D3D_REGISTER_COMPONENT_SINT32 = D3D_REGISTER_COMPONENT_TYPE(2);
+
+/// 32-bit floating-point number.
+const D3D_REGISTER_COMPONENT_FLOAT32 = D3D_REGISTER_COMPONENT_TYPE(3);
+
+const D3D_REGISTER_COMPONENT_UINT16 = D3D_REGISTER_COMPONENT_TYPE(4);
+
+const D3D_REGISTER_COMPONENT_SINT16 = D3D_REGISTER_COMPONENT_TYPE(5);
+
+const D3D_REGISTER_COMPONENT_FLOAT16 = D3D_REGISTER_COMPONENT_TYPE(6);
+
+const D3D_REGISTER_COMPONENT_UINT64 = D3D_REGISTER_COMPONENT_TYPE(7);
+
+const D3D_REGISTER_COMPONENT_SINT64 = D3D_REGISTER_COMPONENT_TYPE(8);
+
+const D3D_REGISTER_COMPONENT_FLOAT64 = D3D_REGISTER_COMPONENT_TYPE(9);
+
+/// The data type is unknown.
+const D3D10_REGISTER_COMPONENT_UNKNOWN = D3D_REGISTER_COMPONENT_TYPE(0);
+
+/// 32-bit unsigned integer.
+const D3D10_REGISTER_COMPONENT_UINT32 = D3D_REGISTER_COMPONENT_TYPE(1);
+
+/// 32-bit signed integer.
+const D3D10_REGISTER_COMPONENT_SINT32 = D3D_REGISTER_COMPONENT_TYPE(2);
+
+/// 32-bit floating-point number.
+const D3D10_REGISTER_COMPONENT_FLOAT32 = D3D_REGISTER_COMPONENT_TYPE(3);
+
+const D3D10_REGISTER_COMPONENT_UINT16 = D3D_REGISTER_COMPONENT_TYPE(4);
+
+const D3D10_REGISTER_COMPONENT_SINT16 = D3D_REGISTER_COMPONENT_TYPE(5);
+
+const D3D10_REGISTER_COMPONENT_FLOAT16 = D3D_REGISTER_COMPONENT_TYPE(6);
+
+const D3D10_REGISTER_COMPONENT_UINT64 = D3D_REGISTER_COMPONENT_TYPE(7);
+
+const D3D10_REGISTER_COMPONENT_SINT64 = D3D_REGISTER_COMPONENT_TYPE(8);
+
+const D3D10_REGISTER_COMPONENT_FLOAT64 = D3D_REGISTER_COMPONENT_TYPE(9);
+
+/// Indicates return value type.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_resource_return_type>.
+///
+/// {@category enum}
+extension type const D3D_RESOURCE_RETURN_TYPE(int _) implements int {}
+
+const D3D_RETURN_TYPE_UNORM = D3D_RESOURCE_RETURN_TYPE(1);
+
+const D3D_RETURN_TYPE_SNORM = D3D_RESOURCE_RETURN_TYPE(2);
+
+const D3D_RETURN_TYPE_SINT = D3D_RESOURCE_RETURN_TYPE(3);
+
+const D3D_RETURN_TYPE_UINT = D3D_RESOURCE_RETURN_TYPE(4);
+
+const D3D_RETURN_TYPE_FLOAT = D3D_RESOURCE_RETURN_TYPE(5);
+
+const D3D_RETURN_TYPE_MIXED = D3D_RESOURCE_RETURN_TYPE(6);
+
+const D3D_RETURN_TYPE_DOUBLE = D3D_RESOURCE_RETURN_TYPE(7);
+
+const D3D_RETURN_TYPE_CONTINUED = D3D_RESOURCE_RETURN_TYPE(8);
+
+const D3D10_RETURN_TYPE_UNORM = D3D_RESOURCE_RETURN_TYPE(1);
+
+const D3D10_RETURN_TYPE_SNORM = D3D_RESOURCE_RETURN_TYPE(2);
+
+const D3D10_RETURN_TYPE_SINT = D3D_RESOURCE_RETURN_TYPE(3);
+
+const D3D10_RETURN_TYPE_UINT = D3D_RESOURCE_RETURN_TYPE(4);
+
+const D3D10_RETURN_TYPE_FLOAT = D3D_RESOURCE_RETURN_TYPE(5);
+
+const D3D10_RETURN_TYPE_MIXED = D3D_RESOURCE_RETURN_TYPE(6);
+
+/// Return type is UNORM.
+const D3D11_RETURN_TYPE_UNORM = D3D_RESOURCE_RETURN_TYPE(1);
+
+/// Return type is SNORM.
+const D3D11_RETURN_TYPE_SNORM = D3D_RESOURCE_RETURN_TYPE(2);
+
+/// Return type is SINT.
+const D3D11_RETURN_TYPE_SINT = D3D_RESOURCE_RETURN_TYPE(3);
+
+/// Return type is UINT.
+const D3D11_RETURN_TYPE_UINT = D3D_RESOURCE_RETURN_TYPE(4);
+
+/// Return type is FLOAT.
+const D3D11_RETURN_TYPE_FLOAT = D3D_RESOURCE_RETURN_TYPE(5);
+
+/// Return type is unknown.
+const D3D11_RETURN_TYPE_MIXED = D3D_RESOURCE_RETURN_TYPE(6);
+
+/// Return type is DOUBLE.
+const D3D11_RETURN_TYPE_DOUBLE = D3D_RESOURCE_RETURN_TYPE(7);
+
+/// Return type is a multiple-dword type, such as a double or uint64, and the
+/// component is continued from the previous component that was declared.
+const D3D11_RETURN_TYPE_CONTINUED = D3D_RESOURCE_RETURN_TYPE(8);
+
+/// Values that identify resource types that can be bound to a shader and that
+/// are reflected as part of the resource description for the shader.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_shader_input_type>.
+///
+/// {@category enum}
+extension type const D3D_SHADER_INPUT_TYPE(int _) implements int {}
+
+/// The shader resource is a constant buffer.
+const D3D_SIT_CBUFFER = D3D_SHADER_INPUT_TYPE(0);
+
+/// The shader resource is a texture buffer.
+const D3D_SIT_TBUFFER = D3D_SHADER_INPUT_TYPE(1);
+
+/// The shader resource is a texture.
+const D3D_SIT_TEXTURE = D3D_SHADER_INPUT_TYPE(2);
+
+/// The shader resource is a sampler.
+const D3D_SIT_SAMPLER = D3D_SHADER_INPUT_TYPE(3);
+
+/// The shader resource is a read-and-write buffer.
+const D3D_SIT_UAV_RWTYPED = D3D_SHADER_INPUT_TYPE(4);
+
+/// The shader resource is a structured buffer.
+const D3D_SIT_STRUCTURED = D3D_SHADER_INPUT_TYPE(5);
+
+/// The shader resource is a read-and-write structured buffer.
+const D3D_SIT_UAV_RWSTRUCTURED = D3D_SHADER_INPUT_TYPE(6);
+
+/// The shader resource is a byte-address buffer.
+const D3D_SIT_BYTEADDRESS = D3D_SHADER_INPUT_TYPE(7);
+
+/// The shader resource is a read-and-write byte-address buffer.
+const D3D_SIT_UAV_RWBYTEADDRESS = D3D_SHADER_INPUT_TYPE(8);
+
+/// The shader resource is an append-structured buffer.
+const D3D_SIT_UAV_APPEND_STRUCTURED = D3D_SHADER_INPUT_TYPE(9);
+
+/// The shader resource is a consume-structured buffer.
+const D3D_SIT_UAV_CONSUME_STRUCTURED = D3D_SHADER_INPUT_TYPE(10);
+
+/// The shader resource is a read-and-write structured buffer that uses the
+/// built-in counter to append or consume.
+const D3D_SIT_UAV_RWSTRUCTURED_WITH_COUNTER = D3D_SHADER_INPUT_TYPE(11);
+
+const D3D_SIT_RTACCELERATIONSTRUCTURE = D3D_SHADER_INPUT_TYPE(12);
+
+const D3D_SIT_UAV_FEEDBACKTEXTURE = D3D_SHADER_INPUT_TYPE(13);
+
+/// The shader resource is a constant buffer.
+const D3D10_SIT_CBUFFER = D3D_SHADER_INPUT_TYPE(0);
+
+/// The shader resource is a texture buffer.
+const D3D10_SIT_TBUFFER = D3D_SHADER_INPUT_TYPE(1);
+
+/// The shader resource is a texture.
+const D3D10_SIT_TEXTURE = D3D_SHADER_INPUT_TYPE(2);
+
+/// The shader resource is a sampler.
+const D3D10_SIT_SAMPLER = D3D_SHADER_INPUT_TYPE(3);
+
+/// The shader resource is a read-and-write buffer.
+const D3D11_SIT_UAV_RWTYPED = D3D_SHADER_INPUT_TYPE(4);
+
+/// The shader resource is a structured buffer.
+const D3D11_SIT_STRUCTURED = D3D_SHADER_INPUT_TYPE(5);
+
+/// The shader resource is a read-and-write structured buffer.
+const D3D11_SIT_UAV_RWSTRUCTURED = D3D_SHADER_INPUT_TYPE(6);
+
+/// The shader resource is a byte-address buffer.
+const D3D11_SIT_BYTEADDRESS = D3D_SHADER_INPUT_TYPE(7);
+
+/// The shader resource is a read-and-write byte-address buffer.
+const D3D11_SIT_UAV_RWBYTEADDRESS = D3D_SHADER_INPUT_TYPE(8);
+
+/// The shader resource is an append-structured buffer.
+const D3D11_SIT_UAV_APPEND_STRUCTURED = D3D_SHADER_INPUT_TYPE(9);
+
+/// The shader resource is a consume-structured buffer.
+const D3D11_SIT_UAV_CONSUME_STRUCTURED = D3D_SHADER_INPUT_TYPE(10);
+
+/// The shader resource is a read-and-write structured buffer that uses the
+/// built-in counter to append or consume.
+const D3D11_SIT_UAV_RWSTRUCTURED_WITH_COUNTER = D3D_SHADER_INPUT_TYPE(11);
+
+/// Values that identify the class of a shader variable.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_shader_variable_class>.
+///
+/// {@category enum}
+extension type const D3D_SHADER_VARIABLE_CLASS(int _) implements int {}
+
+/// The shader variable is a scalar.
+const D3D_SVC_SCALAR = D3D_SHADER_VARIABLE_CLASS(0);
+
+/// The shader variable is a vector.
+const D3D_SVC_VECTOR = D3D_SHADER_VARIABLE_CLASS(1);
+
+/// The shader variable is a row-major matrix.
+const D3D_SVC_MATRIX_ROWS = D3D_SHADER_VARIABLE_CLASS(2);
+
+/// The shader variable is a column-major matrix.
+const D3D_SVC_MATRIX_COLUMNS = D3D_SHADER_VARIABLE_CLASS(3);
+
+/// The shader variable is an object.
+const D3D_SVC_OBJECT = D3D_SHADER_VARIABLE_CLASS(4);
+
+/// The shader variable is a structure.
+const D3D_SVC_STRUCT = D3D_SHADER_VARIABLE_CLASS(5);
+
+/// The shader variable is a class.
+const D3D_SVC_INTERFACE_CLASS = D3D_SHADER_VARIABLE_CLASS(6);
+
+/// The shader variable is an interface.
+const D3D_SVC_INTERFACE_POINTER = D3D_SHADER_VARIABLE_CLASS(7);
+
+/// The shader variable is a scalar.
+const D3D10_SVC_SCALAR = D3D_SHADER_VARIABLE_CLASS(0);
+
+/// The shader variable is a vector.
+const D3D10_SVC_VECTOR = D3D_SHADER_VARIABLE_CLASS(1);
+
+/// The shader variable is a row-major matrix.
+const D3D10_SVC_MATRIX_ROWS = D3D_SHADER_VARIABLE_CLASS(2);
+
+/// The shader variable is a column-major matrix.
+const D3D10_SVC_MATRIX_COLUMNS = D3D_SHADER_VARIABLE_CLASS(3);
+
+/// The shader variable is an object.
+const D3D10_SVC_OBJECT = D3D_SHADER_VARIABLE_CLASS(4);
+
+/// The shader variable is a structure.
+const D3D10_SVC_STRUCT = D3D_SHADER_VARIABLE_CLASS(5);
+
+/// The shader variable is a class.
+const D3D11_SVC_INTERFACE_CLASS = D3D_SHADER_VARIABLE_CLASS(6);
+
+/// The shader variable is an interface.
+const D3D11_SVC_INTERFACE_POINTER = D3D_SHADER_VARIABLE_CLASS(7);
+
+/// Values that identify various data, texture, and buffer types that can be
+/// assigned to a shader variable.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_shader_variable_type>.
+///
+/// {@category enum}
+extension type const D3D_SHADER_VARIABLE_TYPE(int _) implements int {}
+
+/// The variable is a void pointer.
+const D3D_SVT_VOID = D3D_SHADER_VARIABLE_TYPE(0);
+
+/// The variable is a boolean.
+const D3D_SVT_BOOL = D3D_SHADER_VARIABLE_TYPE(1);
+
+/// The variable is an integer.
+const D3D_SVT_INT = D3D_SHADER_VARIABLE_TYPE(2);
+
+/// The variable is a floating-point number.
+const D3D_SVT_FLOAT = D3D_SHADER_VARIABLE_TYPE(3);
+
+/// The variable is a string.
+const D3D_SVT_STRING = D3D_SHADER_VARIABLE_TYPE(4);
+
+/// The variable is a texture.
+const D3D_SVT_TEXTURE = D3D_SHADER_VARIABLE_TYPE(5);
+
+/// The variable is a 1D texture.
+const D3D_SVT_TEXTURE1D = D3D_SHADER_VARIABLE_TYPE(6);
+
+/// The variable is a 2D texture.
+const D3D_SVT_TEXTURE2D = D3D_SHADER_VARIABLE_TYPE(7);
+
+/// The variable is a 3D texture.
+const D3D_SVT_TEXTURE3D = D3D_SHADER_VARIABLE_TYPE(8);
+
+/// The variable is a texture cube.
+const D3D_SVT_TEXTURECUBE = D3D_SHADER_VARIABLE_TYPE(9);
+
+/// The variable is a sampler.
+const D3D_SVT_SAMPLER = D3D_SHADER_VARIABLE_TYPE(10);
+
+/// The variable is a 1D sampler.
+const D3D_SVT_SAMPLER1D = D3D_SHADER_VARIABLE_TYPE(11);
+
+/// The variable is a 2D sampler.
+const D3D_SVT_SAMPLER2D = D3D_SHADER_VARIABLE_TYPE(12);
+
+/// The variable is a 3D sampler.
+const D3D_SVT_SAMPLER3D = D3D_SHADER_VARIABLE_TYPE(13);
+
+/// The variable is a cube sampler.
+const D3D_SVT_SAMPLERCUBE = D3D_SHADER_VARIABLE_TYPE(14);
+
+/// The variable is a pixel shader.
+const D3D_SVT_PIXELSHADER = D3D_SHADER_VARIABLE_TYPE(15);
+
+/// The variable is a vertex shader.
+const D3D_SVT_VERTEXSHADER = D3D_SHADER_VARIABLE_TYPE(16);
+
+/// The variable is a pixel fragment.
+const D3D_SVT_PIXELFRAGMENT = D3D_SHADER_VARIABLE_TYPE(17);
+
+/// The variable is a vertex fragment.
+const D3D_SVT_VERTEXFRAGMENT = D3D_SHADER_VARIABLE_TYPE(18);
+
+/// The variable is an unsigned integer.
+const D3D_SVT_UINT = D3D_SHADER_VARIABLE_TYPE(19);
+
+/// The variable is an 8-bit unsigned integer.
+const D3D_SVT_UINT8 = D3D_SHADER_VARIABLE_TYPE(20);
+
+/// The variable is a geometry shader.
+const D3D_SVT_GEOMETRYSHADER = D3D_SHADER_VARIABLE_TYPE(21);
+
+/// The variable is a rasterizer-state object.
+const D3D_SVT_RASTERIZER = D3D_SHADER_VARIABLE_TYPE(22);
+
+/// The variable is a depth-stencil-state object.
+const D3D_SVT_DEPTHSTENCIL = D3D_SHADER_VARIABLE_TYPE(23);
+
+/// The variable is a blend-state object.
+const D3D_SVT_BLEND = D3D_SHADER_VARIABLE_TYPE(24);
+
+/// The variable is a buffer.
+const D3D_SVT_BUFFER = D3D_SHADER_VARIABLE_TYPE(25);
+
+/// The variable is a constant buffer.
+const D3D_SVT_CBUFFER = D3D_SHADER_VARIABLE_TYPE(26);
+
+/// The variable is a texture buffer.
+const D3D_SVT_TBUFFER = D3D_SHADER_VARIABLE_TYPE(27);
+
+/// The variable is a 1D-texture array.
+const D3D_SVT_TEXTURE1DARRAY = D3D_SHADER_VARIABLE_TYPE(28);
+
+/// The variable is a 2D-texture array.
+const D3D_SVT_TEXTURE2DARRAY = D3D_SHADER_VARIABLE_TYPE(29);
+
+/// The variable is a render-target view.
+const D3D_SVT_RENDERTARGETVIEW = D3D_SHADER_VARIABLE_TYPE(30);
+
+/// The variable is a depth-stencil view.
+const D3D_SVT_DEPTHSTENCILVIEW = D3D_SHADER_VARIABLE_TYPE(31);
+
+/// The variable is a 2D-multisampled texture.
+const D3D_SVT_TEXTURE2DMS = D3D_SHADER_VARIABLE_TYPE(32);
+
+/// The variable is a 2D-multisampled-texture array.
+const D3D_SVT_TEXTURE2DMSARRAY = D3D_SHADER_VARIABLE_TYPE(33);
+
+/// The variable is a texture-cube array.
+const D3D_SVT_TEXTURECUBEARRAY = D3D_SHADER_VARIABLE_TYPE(34);
+
+/// The variable holds a compiled hull-shader binary.
+const D3D_SVT_HULLSHADER = D3D_SHADER_VARIABLE_TYPE(35);
+
+/// The variable holds a compiled domain-shader binary.
+const D3D_SVT_DOMAINSHADER = D3D_SHADER_VARIABLE_TYPE(36);
+
+/// The variable is an interface.
+const D3D_SVT_INTERFACE_POINTER = D3D_SHADER_VARIABLE_TYPE(37);
+
+/// The variable holds a compiled compute-shader binary.
+const D3D_SVT_COMPUTESHADER = D3D_SHADER_VARIABLE_TYPE(38);
+
+/// The variable is a double precision (64-bit) floating-point number.
+const D3D_SVT_DOUBLE = D3D_SHADER_VARIABLE_TYPE(39);
+
+/// The variable is a 1D read-and-write texture.
+const D3D_SVT_RWTEXTURE1D = D3D_SHADER_VARIABLE_TYPE(40);
+
+/// The variable is an array of 1D read-and-write textures.
+const D3D_SVT_RWTEXTURE1DARRAY = D3D_SHADER_VARIABLE_TYPE(41);
+
+/// The variable is a 2D read-and-write texture.
+const D3D_SVT_RWTEXTURE2D = D3D_SHADER_VARIABLE_TYPE(42);
+
+/// The variable is an array of 2D read-and-write textures.
+const D3D_SVT_RWTEXTURE2DARRAY = D3D_SHADER_VARIABLE_TYPE(43);
+
+/// The variable is a 3D read-and-write texture.
+const D3D_SVT_RWTEXTURE3D = D3D_SHADER_VARIABLE_TYPE(44);
+
+/// The variable is a read-and-write buffer.
+const D3D_SVT_RWBUFFER = D3D_SHADER_VARIABLE_TYPE(45);
+
+/// The variable is a byte-address buffer.
+const D3D_SVT_BYTEADDRESS_BUFFER = D3D_SHADER_VARIABLE_TYPE(46);
+
+/// The variable is a read-and-write byte-address buffer.
+const D3D_SVT_RWBYTEADDRESS_BUFFER = D3D_SHADER_VARIABLE_TYPE(47);
+
+/// The variable is a structured buffer.
+const D3D_SVT_STRUCTURED_BUFFER = D3D_SHADER_VARIABLE_TYPE(48);
+
+/// The variable is a read-and-write structured buffer.
+const D3D_SVT_RWSTRUCTURED_BUFFER = D3D_SHADER_VARIABLE_TYPE(49);
+
+/// The variable is an append structured buffer.
+const D3D_SVT_APPEND_STRUCTURED_BUFFER = D3D_SHADER_VARIABLE_TYPE(50);
+
+/// The variable is a consume structured buffer.
+const D3D_SVT_CONSUME_STRUCTURED_BUFFER = D3D_SHADER_VARIABLE_TYPE(51);
+
+/// The variable is an 8-byte FLOAT.
+const D3D_SVT_MIN8FLOAT = D3D_SHADER_VARIABLE_TYPE(52);
+
+/// The variable is a 10-byte FLOAT.
+const D3D_SVT_MIN10FLOAT = D3D_SHADER_VARIABLE_TYPE(53);
+
+/// The variable is a 16-byte FLOAT.
+const D3D_SVT_MIN16FLOAT = D3D_SHADER_VARIABLE_TYPE(54);
+
+/// The variable is a 12-byte INT.
+const D3D_SVT_MIN12INT = D3D_SHADER_VARIABLE_TYPE(55);
+
+/// The variable is a 16-byte INT.
+const D3D_SVT_MIN16INT = D3D_SHADER_VARIABLE_TYPE(56);
+
+/// The variable is a 16-byte INT.
+const D3D_SVT_MIN16UINT = D3D_SHADER_VARIABLE_TYPE(57);
+
+const D3D_SVT_INT16 = D3D_SHADER_VARIABLE_TYPE(58);
+
+const D3D_SVT_UINT16 = D3D_SHADER_VARIABLE_TYPE(59);
+
+const D3D_SVT_FLOAT16 = D3D_SHADER_VARIABLE_TYPE(60);
+
+const D3D_SVT_INT64 = D3D_SHADER_VARIABLE_TYPE(61);
+
+const D3D_SVT_UINT64 = D3D_SHADER_VARIABLE_TYPE(62);
+
+/// The variable is a void pointer.
+const D3D10_SVT_VOID = D3D_SHADER_VARIABLE_TYPE(0);
+
+/// The variable is a boolean.
+const D3D10_SVT_BOOL = D3D_SHADER_VARIABLE_TYPE(1);
+
+/// The variable is an integer.
+const D3D10_SVT_INT = D3D_SHADER_VARIABLE_TYPE(2);
+
+/// The variable is a floating-point number.
+const D3D10_SVT_FLOAT = D3D_SHADER_VARIABLE_TYPE(3);
+
+/// The variable is a string.
+const D3D10_SVT_STRING = D3D_SHADER_VARIABLE_TYPE(4);
+
+/// The variable is a texture.
+const D3D10_SVT_TEXTURE = D3D_SHADER_VARIABLE_TYPE(5);
+
+/// The variable is a 1D texture.
+const D3D10_SVT_TEXTURE1D = D3D_SHADER_VARIABLE_TYPE(6);
+
+/// The variable is a 2D texture.
+const D3D10_SVT_TEXTURE2D = D3D_SHADER_VARIABLE_TYPE(7);
+
+/// The variable is a 3D texture.
+const D3D10_SVT_TEXTURE3D = D3D_SHADER_VARIABLE_TYPE(8);
+
+/// The variable is a texture cube.
+const D3D10_SVT_TEXTURECUBE = D3D_SHADER_VARIABLE_TYPE(9);
+
+/// The variable is a sampler.
+const D3D10_SVT_SAMPLER = D3D_SHADER_VARIABLE_TYPE(10);
+
+/// The variable is a 1D sampler.
+const D3D10_SVT_SAMPLER1D = D3D_SHADER_VARIABLE_TYPE(11);
+
+/// The variable is a 2D sampler.
+const D3D10_SVT_SAMPLER2D = D3D_SHADER_VARIABLE_TYPE(12);
+
+/// The variable is a 3D sampler.
+const D3D10_SVT_SAMPLER3D = D3D_SHADER_VARIABLE_TYPE(13);
+
+/// The variable is a cube sampler.
+const D3D10_SVT_SAMPLERCUBE = D3D_SHADER_VARIABLE_TYPE(14);
+
+/// The variable is a pixel shader.
+const D3D10_SVT_PIXELSHADER = D3D_SHADER_VARIABLE_TYPE(15);
+
+/// The variable is a vertex shader.
+const D3D10_SVT_VERTEXSHADER = D3D_SHADER_VARIABLE_TYPE(16);
+
+/// The variable is a pixel fragment.
+const D3D10_SVT_PIXELFRAGMENT = D3D_SHADER_VARIABLE_TYPE(17);
+
+/// The variable is a vertex fragment.
+const D3D10_SVT_VERTEXFRAGMENT = D3D_SHADER_VARIABLE_TYPE(18);
+
+/// The variable is an unsigned integer.
+const D3D10_SVT_UINT = D3D_SHADER_VARIABLE_TYPE(19);
+
+/// The variable is an 8-bit unsigned integer.
+const D3D10_SVT_UINT8 = D3D_SHADER_VARIABLE_TYPE(20);
+
+/// The variable is a geometry shader.
+const D3D10_SVT_GEOMETRYSHADER = D3D_SHADER_VARIABLE_TYPE(21);
+
+/// The variable is a rasterizer-state object.
+const D3D10_SVT_RASTERIZER = D3D_SHADER_VARIABLE_TYPE(22);
+
+/// The variable is a depth-stencil-state object.
+const D3D10_SVT_DEPTHSTENCIL = D3D_SHADER_VARIABLE_TYPE(23);
+
+/// The variable is a blend-state object.
+const D3D10_SVT_BLEND = D3D_SHADER_VARIABLE_TYPE(24);
+
+/// The variable is a buffer.
+const D3D10_SVT_BUFFER = D3D_SHADER_VARIABLE_TYPE(25);
+
+/// The variable is a constant buffer.
+const D3D10_SVT_CBUFFER = D3D_SHADER_VARIABLE_TYPE(26);
+
+/// The variable is a texture buffer.
+const D3D10_SVT_TBUFFER = D3D_SHADER_VARIABLE_TYPE(27);
+
+/// The variable is a 1D-texture array.
+const D3D10_SVT_TEXTURE1DARRAY = D3D_SHADER_VARIABLE_TYPE(28);
+
+/// The variable is a 2D-texture array.
+const D3D10_SVT_TEXTURE2DARRAY = D3D_SHADER_VARIABLE_TYPE(29);
+
+/// The variable is a render-target view.
+const D3D10_SVT_RENDERTARGETVIEW = D3D_SHADER_VARIABLE_TYPE(30);
+
+/// The variable is a depth-stencil view.
+const D3D10_SVT_DEPTHSTENCILVIEW = D3D_SHADER_VARIABLE_TYPE(31);
+
+/// The variable is a 2D-multisampled texture.
+const D3D10_SVT_TEXTURE2DMS = D3D_SHADER_VARIABLE_TYPE(32);
+
+/// The variable is a 2D-multisampled-texture array.
+const D3D10_SVT_TEXTURE2DMSARRAY = D3D_SHADER_VARIABLE_TYPE(33);
+
+/// The variable is a texture-cube array.
+const D3D10_SVT_TEXTURECUBEARRAY = D3D_SHADER_VARIABLE_TYPE(34);
+
+/// The variable holds a compiled hull-shader binary.
+const D3D11_SVT_HULLSHADER = D3D_SHADER_VARIABLE_TYPE(35);
+
+/// The variable holds a compiled domain-shader binary.
+const D3D11_SVT_DOMAINSHADER = D3D_SHADER_VARIABLE_TYPE(36);
+
+/// The variable is an interface.
+const D3D11_SVT_INTERFACE_POINTER = D3D_SHADER_VARIABLE_TYPE(37);
+
+/// The variable holds a compiled compute-shader binary.
+const D3D11_SVT_COMPUTESHADER = D3D_SHADER_VARIABLE_TYPE(38);
+
+/// The variable is a double precision (64-bit) floating-point number.
+const D3D11_SVT_DOUBLE = D3D_SHADER_VARIABLE_TYPE(39);
+
+/// The variable is a 1D read-and-write texture.
+const D3D11_SVT_RWTEXTURE1D = D3D_SHADER_VARIABLE_TYPE(40);
+
+/// The variable is an array of 1D read-and-write textures.
+const D3D11_SVT_RWTEXTURE1DARRAY = D3D_SHADER_VARIABLE_TYPE(41);
+
+/// The variable is a 2D read-and-write texture.
+const D3D11_SVT_RWTEXTURE2D = D3D_SHADER_VARIABLE_TYPE(42);
+
+/// The variable is an array of 2D read-and-write textures.
+const D3D11_SVT_RWTEXTURE2DARRAY = D3D_SHADER_VARIABLE_TYPE(43);
+
+/// The variable is a 3D read-and-write texture.
+const D3D11_SVT_RWTEXTURE3D = D3D_SHADER_VARIABLE_TYPE(44);
+
+/// The variable is a read-and-write buffer.
+const D3D11_SVT_RWBUFFER = D3D_SHADER_VARIABLE_TYPE(45);
+
+/// The variable is a byte-address buffer.
+const D3D11_SVT_BYTEADDRESS_BUFFER = D3D_SHADER_VARIABLE_TYPE(46);
+
+/// The variable is a read and write byte-address buffer.
+const D3D11_SVT_RWBYTEADDRESS_BUFFER = D3D_SHADER_VARIABLE_TYPE(47);
+
+/// The variable is a structured buffer.
+const D3D11_SVT_STRUCTURED_BUFFER = D3D_SHADER_VARIABLE_TYPE(48);
+
+/// The variable is a read-and-write structured buffer.
+const D3D11_SVT_RWSTRUCTURED_BUFFER = D3D_SHADER_VARIABLE_TYPE(49);
+
+/// The variable is an append structured buffer.
+const D3D11_SVT_APPEND_STRUCTURED_BUFFER = D3D_SHADER_VARIABLE_TYPE(50);
+
+/// The variable is a consume structured buffer.
+const D3D11_SVT_CONSUME_STRUCTURED_BUFFER = D3D_SHADER_VARIABLE_TYPE(51);
+
+/// Values that identify the type of resource to be viewed as a shader resource.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_srv_dimension>.
+///
+/// {@category enum}
+extension type const D3D_SRV_DIMENSION(int _) implements int {}
+
+/// The type is unknown.
+const D3D_SRV_DIMENSION_UNKNOWN = D3D_SRV_DIMENSION(0);
+
+/// The resource is a buffer.
+const D3D_SRV_DIMENSION_BUFFER = D3D_SRV_DIMENSION(1);
+
+/// The resource is a 1D texture.
+const D3D_SRV_DIMENSION_TEXTURE1D = D3D_SRV_DIMENSION(2);
+
+/// The resource is an array of 1D textures.
+const D3D_SRV_DIMENSION_TEXTURE1DARRAY = D3D_SRV_DIMENSION(3);
+
+/// The resource is a 2D texture.
+const D3D_SRV_DIMENSION_TEXTURE2D = D3D_SRV_DIMENSION(4);
+
+/// The resource is an array of 2D textures.
+const D3D_SRV_DIMENSION_TEXTURE2DARRAY = D3D_SRV_DIMENSION(5);
+
+/// The resource is a multisampling 2D texture.
+const D3D_SRV_DIMENSION_TEXTURE2DMS = D3D_SRV_DIMENSION(6);
+
+/// The resource is an array of multisampling 2D textures.
+const D3D_SRV_DIMENSION_TEXTURE2DMSARRAY = D3D_SRV_DIMENSION(7);
+
+/// The resource is a 3D texture.
+const D3D_SRV_DIMENSION_TEXTURE3D = D3D_SRV_DIMENSION(8);
+
+/// The resource is a cube texture.
+const D3D_SRV_DIMENSION_TEXTURECUBE = D3D_SRV_DIMENSION(9);
+
+/// The resource is an array of cube textures.
+const D3D_SRV_DIMENSION_TEXTURECUBEARRAY = D3D_SRV_DIMENSION(10);
+
+/// The resource is a raw buffer.
+const D3D_SRV_DIMENSION_BUFFEREX = D3D_SRV_DIMENSION(11);
+
+/// The type is unknown.
+const D3D10_SRV_DIMENSION_UNKNOWN = D3D_SRV_DIMENSION(0);
+
+/// The resource is a buffer.
+const D3D10_SRV_DIMENSION_BUFFER = D3D_SRV_DIMENSION(1);
+
+/// The resource is a 1D texture.
+const D3D10_SRV_DIMENSION_TEXTURE1D = D3D_SRV_DIMENSION(2);
+
+/// The resource is an array of 1D textures.
+const D3D10_SRV_DIMENSION_TEXTURE1DARRAY = D3D_SRV_DIMENSION(3);
+
+/// The resource is a 2D texture.
+const D3D10_SRV_DIMENSION_TEXTURE2D = D3D_SRV_DIMENSION(4);
+
+/// The resource is an array of 2D textures.
+const D3D10_SRV_DIMENSION_TEXTURE2DARRAY = D3D_SRV_DIMENSION(5);
+
+/// The resource is a multisampling 2D texture.
+const D3D10_SRV_DIMENSION_TEXTURE2DMS = D3D_SRV_DIMENSION(6);
+
+/// The resource is an array of multisampling 2D textures.
+const D3D10_SRV_DIMENSION_TEXTURE2DMSARRAY = D3D_SRV_DIMENSION(7);
+
+/// The resource is a 3D texture.
+const D3D10_SRV_DIMENSION_TEXTURE3D = D3D_SRV_DIMENSION(8);
+
+/// The resource is a cube texture.
+const D3D10_SRV_DIMENSION_TEXTURECUBE = D3D_SRV_DIMENSION(9);
+
+/// The type is unknown.
+const D3D10_1_SRV_DIMENSION_UNKNOWN = D3D_SRV_DIMENSION(0);
+
+/// The resource is a buffer.
+const D3D10_1_SRV_DIMENSION_BUFFER = D3D_SRV_DIMENSION(1);
+
+/// The resource is a 1D texture.
+const D3D10_1_SRV_DIMENSION_TEXTURE1D = D3D_SRV_DIMENSION(2);
+
+/// The resource is an array of 1D textures.
+const D3D10_1_SRV_DIMENSION_TEXTURE1DARRAY = D3D_SRV_DIMENSION(3);
+
+/// The resource is a 2D texture.
+const D3D10_1_SRV_DIMENSION_TEXTURE2D = D3D_SRV_DIMENSION(4);
+
+/// The resource is an array of 2D textures.
+const D3D10_1_SRV_DIMENSION_TEXTURE2DARRAY = D3D_SRV_DIMENSION(5);
+
+/// The resource is a multisampling 2D texture.
+const D3D10_1_SRV_DIMENSION_TEXTURE2DMS = D3D_SRV_DIMENSION(6);
+
+/// The resource is an array of multisampling 2D textures.
+const D3D10_1_SRV_DIMENSION_TEXTURE2DMSARRAY = D3D_SRV_DIMENSION(7);
+
+/// The resource is a 3D texture.
+const D3D10_1_SRV_DIMENSION_TEXTURE3D = D3D_SRV_DIMENSION(8);
+
+/// The resource is a cube texture.
+const D3D10_1_SRV_DIMENSION_TEXTURECUBE = D3D_SRV_DIMENSION(9);
+
+/// The resource is an array of cube textures.
+const D3D10_1_SRV_DIMENSION_TEXTURECUBEARRAY = D3D_SRV_DIMENSION(10);
+
+/// The type is unknown.
+const D3D11_SRV_DIMENSION_UNKNOWN = D3D_SRV_DIMENSION(0);
+
+/// The resource is a buffer.
+const D3D11_SRV_DIMENSION_BUFFER = D3D_SRV_DIMENSION(1);
+
+/// The resource is a 1D texture.
+const D3D11_SRV_DIMENSION_TEXTURE1D = D3D_SRV_DIMENSION(2);
+
+/// The resource is an array of 1D textures.
+const D3D11_SRV_DIMENSION_TEXTURE1DARRAY = D3D_SRV_DIMENSION(3);
+
+/// The resource is a 2D texture.
+const D3D11_SRV_DIMENSION_TEXTURE2D = D3D_SRV_DIMENSION(4);
+
+/// The resource is an array of 2D textures.
+const D3D11_SRV_DIMENSION_TEXTURE2DARRAY = D3D_SRV_DIMENSION(5);
+
+/// The resource is a multisampling 2D texture.
+const D3D11_SRV_DIMENSION_TEXTURE2DMS = D3D_SRV_DIMENSION(6);
+
+/// The resource is an array of multisampling 2D textures.
+const D3D11_SRV_DIMENSION_TEXTURE2DMSARRAY = D3D_SRV_DIMENSION(7);
+
+/// The resource is a 3D texture.
+const D3D11_SRV_DIMENSION_TEXTURE3D = D3D_SRV_DIMENSION(8);
+
+/// The resource is a cube texture.
+const D3D11_SRV_DIMENSION_TEXTURECUBE = D3D_SRV_DIMENSION(9);
+
+/// The resource is an array of cube textures.
+const D3D11_SRV_DIMENSION_TEXTURECUBEARRAY = D3D_SRV_DIMENSION(10);
+
+/// The resource is a raw buffer.
+const D3D11_SRV_DIMENSION_BUFFEREX = D3D_SRV_DIMENSION(11);
+
+/// Domain options for tessellator data.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_tessellator_domain>.
+///
+/// {@category enum}
+extension type const D3D_TESSELLATOR_DOMAIN(int _) implements int {}
+
+const D3D_TESSELLATOR_DOMAIN_UNDEFINED = D3D_TESSELLATOR_DOMAIN(0);
+
+const D3D_TESSELLATOR_DOMAIN_ISOLINE = D3D_TESSELLATOR_DOMAIN(1);
+
+const D3D_TESSELLATOR_DOMAIN_TRI = D3D_TESSELLATOR_DOMAIN(2);
+
+const D3D_TESSELLATOR_DOMAIN_QUAD = D3D_TESSELLATOR_DOMAIN(3);
+
+/// The data type is undefined.
+const D3D11_TESSELLATOR_DOMAIN_UNDEFINED = D3D_TESSELLATOR_DOMAIN(0);
+
+/// Isoline data.
+const D3D11_TESSELLATOR_DOMAIN_ISOLINE = D3D_TESSELLATOR_DOMAIN(1);
+
+/// Triangle data.
+const D3D11_TESSELLATOR_DOMAIN_TRI = D3D_TESSELLATOR_DOMAIN(2);
+
+/// Quad data.
+const D3D11_TESSELLATOR_DOMAIN_QUAD = D3D_TESSELLATOR_DOMAIN(3);
+
+/// Output primitive types.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_tessellator_output_primitive>.
+///
+/// {@category enum}
+extension type const D3D_TESSELLATOR_OUTPUT_PRIMITIVE(int _) implements int {}
+
+const D3D_TESSELLATOR_OUTPUT_UNDEFINED = D3D_TESSELLATOR_OUTPUT_PRIMITIVE(0);
+
+const D3D_TESSELLATOR_OUTPUT_POINT = D3D_TESSELLATOR_OUTPUT_PRIMITIVE(1);
+
+const D3D_TESSELLATOR_OUTPUT_LINE = D3D_TESSELLATOR_OUTPUT_PRIMITIVE(2);
+
+const D3D_TESSELLATOR_OUTPUT_TRIANGLE_CW = D3D_TESSELLATOR_OUTPUT_PRIMITIVE(3);
+
+const D3D_TESSELLATOR_OUTPUT_TRIANGLE_CCW = D3D_TESSELLATOR_OUTPUT_PRIMITIVE(4);
+
+/// The output primitive type is undefined.
+const D3D11_TESSELLATOR_OUTPUT_UNDEFINED = D3D_TESSELLATOR_OUTPUT_PRIMITIVE(0);
+
+/// The output primitive type is a point.
+const D3D11_TESSELLATOR_OUTPUT_POINT = D3D_TESSELLATOR_OUTPUT_PRIMITIVE(1);
+
+/// The output primitive type is a line.
+const D3D11_TESSELLATOR_OUTPUT_LINE = D3D_TESSELLATOR_OUTPUT_PRIMITIVE(2);
+
+/// The output primitive type is a clockwise triangle.
+const D3D11_TESSELLATOR_OUTPUT_TRIANGLE_CW = D3D_TESSELLATOR_OUTPUT_PRIMITIVE(
+  3,
+);
+
+/// The output primitive type is a counter clockwise triangle.
+const D3D11_TESSELLATOR_OUTPUT_TRIANGLE_CCW = D3D_TESSELLATOR_OUTPUT_PRIMITIVE(
+  4,
+);
+
+/// Partitioning options.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_tessellator_partitioning>.
+///
+/// {@category enum}
+extension type const D3D_TESSELLATOR_PARTITIONING(int _) implements int {}
+
+const D3D_TESSELLATOR_PARTITIONING_UNDEFINED = D3D_TESSELLATOR_PARTITIONING(0);
+
+const D3D_TESSELLATOR_PARTITIONING_INTEGER = D3D_TESSELLATOR_PARTITIONING(1);
+
+const D3D_TESSELLATOR_PARTITIONING_POW2 = D3D_TESSELLATOR_PARTITIONING(2);
+
+const D3D_TESSELLATOR_PARTITIONING_FRACTIONAL_ODD =
+    D3D_TESSELLATOR_PARTITIONING(3);
+
+const D3D_TESSELLATOR_PARTITIONING_FRACTIONAL_EVEN =
+    D3D_TESSELLATOR_PARTITIONING(4);
+
+/// The partitioning type is undefined.
+const D3D11_TESSELLATOR_PARTITIONING_UNDEFINED = D3D_TESSELLATOR_PARTITIONING(
+  0,
+);
+
+/// Partition with integers only.
+const D3D11_TESSELLATOR_PARTITIONING_INTEGER = D3D_TESSELLATOR_PARTITIONING(1);
+
+/// Partition with a power-of-two number only.
+const D3D11_TESSELLATOR_PARTITIONING_POW2 = D3D_TESSELLATOR_PARTITIONING(2);
+
+/// Partition with an odd, fractional number.
+const D3D11_TESSELLATOR_PARTITIONING_FRACTIONAL_ODD =
+    D3D_TESSELLATOR_PARTITIONING(3);
+
+/// Partition with an even, fractional number.
+const D3D11_TESSELLATOR_PARTITIONING_FRACTIONAL_EVEN =
+    D3D_TESSELLATOR_PARTITIONING(4);
+
 /// {@category enum}
 extension type const DCB_PARITY(int _) implements int {}
 
@@ -2294,6 +11719,126 @@ const ONESTOPBIT = DCB_STOP_BITS(0);
 const ONE5STOPBITS = DCB_STOP_BITS(1);
 
 const TWOSTOPBITS = DCB_STOP_BITS(2);
+
+/// Specifies the backface visibility to be applied to a visual.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dcomptypes/ne-dcomptypes-dcomposition_backface_visibility>.
+///
+/// {@category enum}
+extension type const DCOMPOSITION_BACKFACE_VISIBILITY(int _) implements int {}
+
+/// Surfaces in this visual's sub-tree are visible regardless of transformation.
+const DCOMPOSITION_BACKFACE_VISIBILITY_VISIBLE =
+    DCOMPOSITION_BACKFACE_VISIBILITY(0);
+
+/// Surfaces in this visual's sub-tree are only visible when facing the
+/// observer.
+const DCOMPOSITION_BACKFACE_VISIBILITY_HIDDEN =
+    DCOMPOSITION_BACKFACE_VISIBILITY(1);
+
+/// The back face visibility is the same as that of the target visual's parent
+/// visual.
+const DCOMPOSITION_BACKFACE_VISIBILITY_INHERIT =
+    DCOMPOSITION_BACKFACE_VISIBILITY(-1);
+
+/// Specifies the interpolation mode to be used when a bitmap is composed with
+/// any transform where the pixels in the bitmap don't line up exactly
+/// one-to-one with pixels on screen.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dcomptypes/ne-dcomptypes-dcomposition_bitmap_interpolation_mode>.
+///
+/// {@category enum}
+extension type const DCOMPOSITION_BITMAP_INTERPOLATION_MODE(int _)
+    implements int {}
+
+/// Bitmaps are interpolated by using nearest-neighbor sampling.
+const DCOMPOSITION_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR =
+    DCOMPOSITION_BITMAP_INTERPOLATION_MODE(0);
+
+/// Bitmaps are interpolated by using linear sampling.
+const DCOMPOSITION_BITMAP_INTERPOLATION_MODE_LINEAR =
+    DCOMPOSITION_BITMAP_INTERPOLATION_MODE(1);
+
+/// Bitmaps are interpolated according to the mode established by the parent
+/// visual.
+const DCOMPOSITION_BITMAP_INTERPOLATION_MODE_INHERIT =
+    DCOMPOSITION_BITMAP_INTERPOLATION_MODE(-1);
+
+/// Specifies the border mode to use when composing a bitmap or applying a clip
+/// with any transform such that the edges of the bitmap or clip are not
+/// axis-aligned with integer coordinates.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dcomptypes/ne-dcomptypes-dcomposition_border_mode>.
+///
+/// {@category enum}
+extension type const DCOMPOSITION_BORDER_MODE(int _) implements int {}
+
+/// Bitmap and clip edges are antialiased.
+const DCOMPOSITION_BORDER_MODE_SOFT = DCOMPOSITION_BORDER_MODE(0);
+
+/// Bitmap and clip edges are aliased.
+const DCOMPOSITION_BORDER_MODE_HARD = DCOMPOSITION_BORDER_MODE(1);
+
+/// Bitmap and clip edges are drawn according to the mode established by the
+/// parent visual.
+const DCOMPOSITION_BORDER_MODE_INHERIT = DCOMPOSITION_BORDER_MODE(-1);
+
+/// The mode to use to blend the bitmap content of a visual with the render
+/// target.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dcomptypes/ne-dcomptypes-dcomposition_composite_mode>.
+///
+/// {@category enum}
+extension type const DCOMPOSITION_COMPOSITE_MODE(int _) implements int {}
+
+/// The standard source-over-destination blend mode.
+const DCOMPOSITION_COMPOSITE_MODE_SOURCE_OVER = DCOMPOSITION_COMPOSITE_MODE(0);
+
+/// The bitmap colors are inverted.
+const DCOMPOSITION_COMPOSITE_MODE_DESTINATION_INVERT =
+    DCOMPOSITION_COMPOSITE_MODE(1);
+
+/// Bitmap colors subtract for color channels in the background.
+const DCOMPOSITION_COMPOSITE_MODE_MIN_BLEND = DCOMPOSITION_COMPOSITE_MODE(2);
+
+/// Bitmaps are blended according to the mode established by the parent visual.
+const DCOMPOSITION_COMPOSITE_MODE_INHERIT = DCOMPOSITION_COMPOSITE_MODE(-1);
+
+/// {@category enum}
+extension type const DCOMPOSITION_DEPTH_MODE(int _) implements int {}
+
+const DCOMPOSITION_DEPTH_MODE_TREE = DCOMPOSITION_DEPTH_MODE(0);
+
+const DCOMPOSITION_DEPTH_MODE_SPATIAL = DCOMPOSITION_DEPTH_MODE(1);
+
+const DCOMPOSITION_DEPTH_MODE_SORTED = DCOMPOSITION_DEPTH_MODE(3);
+
+const DCOMPOSITION_DEPTH_MODE_INHERIT = DCOMPOSITION_DEPTH_MODE(-1);
+
+/// Specifies how the effective opacity value of a visual is applied to that
+/// visual’s content and children.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dcomptypes/ne-dcomptypes-dcomposition_opacity_mode>.
+///
+/// {@category enum}
+extension type const DCOMPOSITION_OPACITY_MODE(int _) implements int {}
+
+/// The target visual defines a logical layer into which its entire sub-tree is
+/// composed with a starting effective opacity of 1.0.
+const DCOMPOSITION_OPACITY_MODE_LAYER = DCOMPOSITION_OPACITY_MODE(0);
+
+/// The opacity value is multiplied with the effective opacity of the parent
+/// visual and the result is then individually applied to each piece of content
+/// in this visual’s sub-tree.
+const DCOMPOSITION_OPACITY_MODE_MULTIPLY = DCOMPOSITION_OPACITY_MODE(1);
+
+/// The opacity mode is the same as that of the target visual’s parent visual.
+const DCOMPOSITION_OPACITY_MODE_INHERIT = DCOMPOSITION_OPACITY_MODE(-1);
 
 /// {@category enum}
 extension type const DEFINE_DOS_DEVICE_FLAGS(int _) implements int {
@@ -3807,6 +13352,930 @@ const DWMWCP_ROUND = DWM_WINDOW_CORNER_PREFERENCE(2);
 
 /// Round the corners if appropriate, with a small radius.
 const DWMWCP_ROUNDSMALL = DWM_WINDOW_CORNER_PREFERENCE(3);
+
+/// Identifies the alpha value, transparency behavior, of a surface.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dxgi1_2/ne-dxgi1_2-dxgi_alpha_mode>.
+///
+/// {@category enum}
+extension type const DXGI_ALPHA_MODE(int _) implements int {}
+
+/// Indicates that the transparency behavior is not specified.
+const DXGI_ALPHA_MODE_UNSPECIFIED = DXGI_ALPHA_MODE(0);
+
+/// Indicates that the transparency behavior is premultiplied.
+const DXGI_ALPHA_MODE_PREMULTIPLIED = DXGI_ALPHA_MODE(1);
+
+/// Indicates that the transparency behavior is not premultiplied.
+const DXGI_ALPHA_MODE_STRAIGHT = DXGI_ALPHA_MODE(2);
+
+/// Indicates to ignore the transparency behavior.
+const DXGI_ALPHA_MODE_IGNORE = DXGI_ALPHA_MODE(3);
+
+/// Specifies color space types.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dxgicommon/ne-dxgicommon-dxgi_color_space_type>.
+///
+/// {@category enum}
+extension type const DXGI_COLOR_SPACE_TYPE(int _) implements int {}
+
+/// <table> <tr> <td><b>Property</b></td> <td><b>Value</b></td> </tr> <tr>
+/// <td>Colorspace</td> <td>RGB</td> </tr> <tr> <td>Range</td> <td>0-255</td>
+/// </tr> <tr> <td>Gamma</td> <td>2.2</td> </tr> <tr> <td>Siting</td>
+/// <td>Image</td> </tr> <tr> <td>Primaries</td> <td>BT.709</td> </tr> </table>
+/// This is the standard definition for sRGB.
+const DXGI_COLOR_SPACE_RGB_FULL_G22_NONE_P709 = DXGI_COLOR_SPACE_TYPE(0);
+
+/// <table> <tr> <td><b>Property</b></td> <td><b>Value</b></td> </tr> <tr>
+/// <td>Colorspace</td> <td>RGB</td> </tr> <tr> <td>Range</td> <td>0-255</td>
+/// </tr> <tr> <td>Gamma</td> <td>1.0</td> </tr> <tr> <td>Siting</td>
+/// <td>Image</td> </tr> <tr> <td>Primaries</td> <td>BT.709</td> </tr> </table>
+/// This is the standard definition for scRGB, and is usually used with 16 bit
+/// integer, 16 bit floating point, or 32 bit floating point color channels.
+const DXGI_COLOR_SPACE_RGB_FULL_G10_NONE_P709 = DXGI_COLOR_SPACE_TYPE(1);
+
+/// <table> <tr> <td><b>Property</b></td> <td><b>Value</b></td> </tr> <tr>
+/// <td>Colorspace</td> <td>RGB</td> </tr> <tr> <td>Range</td> <td>16-235</td>
+/// </tr> <tr> <td>Gamma</td> <td>2.2</td> </tr> <tr> <td>Siting</td>
+/// <td>Image</td> </tr> <tr> <td>Primaries</td> <td>BT.709</td> </tr> </table>
+/// This is the standard definition for ITU-R Recommendation BT.709.
+const DXGI_COLOR_SPACE_RGB_STUDIO_G22_NONE_P709 = DXGI_COLOR_SPACE_TYPE(2);
+
+/// <table> <tr> <td><b>Property</b></td> <td><b>Value</b></td> </tr> <tr>
+/// <td>Colorspace</td> <td>RGB</td> </tr> <tr> <td>Range</td> <td>16-235</td>
+/// </tr> <tr> <td>Gamma</td> <td>2.2</td> </tr> <tr> <td>Siting</td>
+/// <td>Image</td> </tr> <tr> <td>Primaries</td> <td>BT.2020</td> </tr> </table>
+/// This is usually used with 10 or 12 bit color channels.
+const DXGI_COLOR_SPACE_RGB_STUDIO_G22_NONE_P2020 = DXGI_COLOR_SPACE_TYPE(3);
+
+/// Reserved.
+const DXGI_COLOR_SPACE_RESERVED = DXGI_COLOR_SPACE_TYPE(4);
+
+/// <table> <tr> <td><b>Property</b></td> <td><b>Value</b></td> </tr> <tr>
+/// <td>Colorspace</td> <td>YCbCr</td> </tr> <tr> <td>Range</td> <td>0-255</td>
+/// </tr> <tr> <td>Gamma</td> <td>2.2</td> </tr> <tr> <td>Siting</td>
+/// <td>Image</td> </tr> <tr> <td>Primaries</td> <td>BT.709</td> </tr> <tr>
+/// <td>Transfer Matrix</td> <td>BT.601</td> </tr> </table> This definition is
+/// commonly used for JPG, and is usually used with 8, 10, or 12 bit color
+/// channels.
+const DXGI_COLOR_SPACE_YCBCR_FULL_G22_NONE_P709_X601 = DXGI_COLOR_SPACE_TYPE(5);
+
+/// <table> <tr> <td><b>Property</b></td> <td><b>Value</b></td> </tr> <tr>
+/// <td>Colorspace</td> <td>YCbCr</td> </tr> <tr> <td>Range</td> <td>16-235</td>
+/// </tr> <tr> <td>Gamma</td> <td>2.2</td> </tr> <tr> <td>Siting</td>
+/// <td>Video</td> </tr> <tr> <td>Primaries</td> <td>BT.601</td> </tr> </table>
+/// This definition is commonly used for MPEG2, and is usually used with 8, 10,
+/// or 12 bit color channels.
+const DXGI_COLOR_SPACE_YCBCR_STUDIO_G22_LEFT_P601 = DXGI_COLOR_SPACE_TYPE(6);
+
+/// <table> <tr> <td><b>Property</b></td> <td><b>Value</b></td> </tr> <tr>
+/// <td>Colorspace</td> <td>YCbCr</td> </tr> <tr> <td>Range</td> <td>0-255</td>
+/// </tr> <tr> <td>Gamma</td> <td>2.2</td> </tr> <tr> <td>Siting</td>
+/// <td>Video</td> </tr> <tr> <td>Primaries</td> <td>BT.601</td> </tr> </table>
+/// This is sometimes used for H.264 camera capture, and is usually used with 8,
+/// 10, or 12 bit color channels.
+const DXGI_COLOR_SPACE_YCBCR_FULL_G22_LEFT_P601 = DXGI_COLOR_SPACE_TYPE(7);
+
+/// <table> <tr> <td><b>Property</b></td> <td><b>Value</b></td> </tr> <tr>
+/// <td>Colorspace</td> <td>YCbCr</td> </tr> <tr> <td>Range</td> <td>16-235</td>
+/// </tr> <tr> <td>Gamma</td> <td>2.2</td> </tr> <tr> <td>Siting</td>
+/// <td>Video</td> </tr> <tr> <td>Primaries</td> <td>BT.709</td> </tr> </table>
+/// This definition is commonly used for H.264 and HEVC, and is usually used
+/// with 8, 10, or 12 bit color channels.
+const DXGI_COLOR_SPACE_YCBCR_STUDIO_G22_LEFT_P709 = DXGI_COLOR_SPACE_TYPE(8);
+
+/// <table> <tr> <td><b>Property</b></td> <td><b>Value</b></td> </tr> <tr>
+/// <td>Colorspace</td> <td>YCbCr</td> </tr> <tr> <td>Range</td> <td>0-255</td>
+/// </tr> <tr> <td>Gamma</td> <td>2.2</td> </tr> <tr> <td>Siting</td>
+/// <td>Video</td> </tr> <tr> <td>Primaries</td> <td>BT.709</td> </tr> </table>
+/// This is sometimes used for H.264 camera capture, and is usually used with 8,
+/// 10, or 12 bit color channels.
+const DXGI_COLOR_SPACE_YCBCR_FULL_G22_LEFT_P709 = DXGI_COLOR_SPACE_TYPE(9);
+
+/// <table> <tr> <td><b>Property</b></td> <td><b>Value</b></td> </tr> <tr>
+/// <td>Colorspace</td> <td>YCbCr</td> </tr> <tr> <td>Range</td> <td>16-235</td>
+/// </tr> <tr> <td>Gamma</td> <td>2.2</td> </tr> <tr> <td>Siting</td>
+/// <td>Video</td> </tr> <tr> <td>Primaries</td> <td>BT.2020</td> </tr> </table>
+/// This definition may be used by HEVC, and is usually used with 10 or 12 bit
+/// color channels.
+const DXGI_COLOR_SPACE_YCBCR_STUDIO_G22_LEFT_P2020 = DXGI_COLOR_SPACE_TYPE(10);
+
+/// <table> <tr> <td><b>Property</b></td> <td><b>Value</b></td> </tr> <tr>
+/// <td>Colorspace</td> <td>YCbCr</td> </tr> <tr> <td>Range</td> <td>0-255</td>
+/// </tr> <tr> <td>Gamma</td> <td>2.2</td> </tr> <tr> <td>Siting</td>
+/// <td>Video</td> </tr> <tr> <td>Primaries</td> <td>BT.2020</td> </tr> </table>
+/// This is usually used with 10 or 12 bit color channels.
+const DXGI_COLOR_SPACE_YCBCR_FULL_G22_LEFT_P2020 = DXGI_COLOR_SPACE_TYPE(11);
+
+/// <table> <tr> <td><b>Property</b></td> <td><b>Value</b></td> </tr> <tr>
+/// <td>Colorspace</td> <td>RGB</td> </tr> <tr> <td>Range</td> <td>0-255</td>
+/// </tr> <tr> <td>Gamma</td> <td>2084</td> </tr> <tr> <td>Siting</td>
+/// <td>Image</td> </tr> <tr> <td>Primaries</td> <td>BT.2020</td> </tr> </table>
+/// This is usually used with 10 or 12 bit color channels.
+const DXGI_COLOR_SPACE_RGB_FULL_G2084_NONE_P2020 = DXGI_COLOR_SPACE_TYPE(12);
+
+/// <table> <tr> <td><b>Property</b></td> <td><b>Value</b></td> </tr> <tr>
+/// <td>Colorspace</td> <td>YCbCr</td> </tr> <tr> <td>Range</td> <td>16-235</td>
+/// </tr> <tr> <td>Gamma</td> <td>2084</td> </tr> <tr> <td>Siting</td>
+/// <td>Video</td> </tr> <tr> <td>Primaries</td> <td>BT.2020</td> </tr> </table>
+/// This is usually used with 10 or 12 bit color channels.
+const DXGI_COLOR_SPACE_YCBCR_STUDIO_G2084_LEFT_P2020 = DXGI_COLOR_SPACE_TYPE(
+  13,
+);
+
+/// <table> <tr> <td><b>Property</b></td> <td><b>Value</b></td> </tr> <tr>
+/// <td>Colorspace</td> <td>RGB</td> </tr> <tr> <td>Range</td> <td>16-235</td>
+/// </tr> <tr> <td>Gamma</td> <td>2084</td> </tr> <tr> <td>Siting</td>
+/// <td>Image</td> </tr> <tr> <td>Primaries</td> <td>BT.2020</td> </tr> </table>
+/// This is usually used with 10 or 12 bit color channels.
+const DXGI_COLOR_SPACE_RGB_STUDIO_G2084_NONE_P2020 = DXGI_COLOR_SPACE_TYPE(14);
+
+/// <table> <tr> <td><b>Property</b></td> <td><b>Value</b></td> </tr> <tr>
+/// <td>Colorspace</td> <td>YCbCr</td> </tr> <tr> <td>Range</td> <td>16-235</td>
+/// </tr> <tr> <td>Gamma</td> <td>2.2</td> </tr> <tr> <td>Siting</td>
+/// <td>Video</td> </tr> <tr> <td>Primaries</td> <td>BT.2020</td> </tr> </table>
+/// This is usually used with 10 or 12 bit color channels.
+const DXGI_COLOR_SPACE_YCBCR_STUDIO_G22_TOPLEFT_P2020 = DXGI_COLOR_SPACE_TYPE(
+  15,
+);
+
+/// <table> <tr> <td><b>Property</b></td> <td><b>Value</b></td> </tr> <tr>
+/// <td>Colorspace</td> <td>YCbCr</td> </tr> <tr> <td>Range</td> <td>16-235</td>
+/// </tr> <tr> <td>Gamma</td> <td>2084</td> </tr> <tr> <td>Siting</td>
+/// <td>Video</td> </tr> <tr> <td>Primaries</td> <td>BT.2020</td> </tr> </table>
+/// This is usually used with 10 or 12 bit color channels.
+const DXGI_COLOR_SPACE_YCBCR_STUDIO_G2084_TOPLEFT_P2020 = DXGI_COLOR_SPACE_TYPE(
+  16,
+);
+
+/// <table> <tr> <td><b>Property</b></td> <td><b>Value</b></td> </tr> <tr>
+/// <td>Colorspace</td> <td>RGB</td> </tr> <tr> <td>Range</td> <td>0-255</td>
+/// </tr> <tr> <td>Gamma</td> <td>2.2</td> </tr> <tr> <td>Siting</td>
+/// <td>Image</td> </tr> <tr> <td>Primaries</td> <td>BT.2020</td> </tr> </table>
+/// This is usually used with 10 or 12 bit color channels.
+const DXGI_COLOR_SPACE_RGB_FULL_G22_NONE_P2020 = DXGI_COLOR_SPACE_TYPE(17);
+
+/// <table> <tr> <td><b>Property</b></td> <td><b>Value</b></td> </tr> <tr>
+/// <td>Colorspace</td> <td>YCBCR</td> </tr> <tr> <td>Range</td> <td>16-235</td>
+/// </tr> <tr> <td>Gamma</td> <td>HLG</td> </tr> <tr> <td>Siting</td>
+/// <td>Video</td> </tr> <tr> <td>Primaries</td> <td>BT.2020</td> </tr> </table>
+/// This is usually used with 10 or 12 bit color channels.
+const DXGI_COLOR_SPACE_YCBCR_STUDIO_GHLG_TOPLEFT_P2020 = DXGI_COLOR_SPACE_TYPE(
+  18,
+);
+
+/// <table> <tr> <td><b>Property</b></td> <td><b>Value</b></td> </tr> <tr>
+/// <td>Colorspace</td> <td>YCBCR</td> </tr> <tr> <td>Range</td> <td>0-255</td>
+/// </tr> <tr> <td>Gamma</td> <td>HLG</td> </tr> <tr> <td>Siting</td>
+/// <td>Video</td> </tr> <tr> <td>Primaries</td> <td>BT.2020</td> </tr> </table>
+/// This is usually used with 10 or 12 bit color channels.
+const DXGI_COLOR_SPACE_YCBCR_FULL_GHLG_TOPLEFT_P2020 = DXGI_COLOR_SPACE_TYPE(
+  19,
+);
+
+/// <table> <tr> <td><b>Property</b></td> <td><b>Value</b></td> </tr> <tr>
+/// <td>Colorspace</td> <td>RGB</td> </tr> <tr> <td>Range</td> <td>16-235</td>
+/// </tr> <tr> <td>Gamma</td> <td>2.4</td> </tr> <tr> <td>Siting</td>
+/// <td>Image</td> </tr> <tr> <td>Primaries</td> <td>BT.709</td> </tr> </table>
+/// This is usually used with 8, 10, or 12 bit color channels.
+const DXGI_COLOR_SPACE_RGB_STUDIO_G24_NONE_P709 = DXGI_COLOR_SPACE_TYPE(20);
+
+/// <table> <tr> <td><b>Property</b></td> <td><b>Value</b></td> </tr> <tr>
+/// <td>Colorspace</td> <td>RGB</td> </tr> <tr> <td>Range</td> <td>16-235</td>
+/// </tr> <tr> <td>Gamma</td> <td>2.4</td> </tr> <tr> <td>Siting</td>
+/// <td>Image</td> </tr> <tr> <td>Primaries</td> <td>BT.2020</td> </tr> </table>
+/// This is usually used with 10 or 12 bit color channels.
+const DXGI_COLOR_SPACE_RGB_STUDIO_G24_NONE_P2020 = DXGI_COLOR_SPACE_TYPE(21);
+
+/// <table> <tr> <td><b>Property</b></td> <td><b>Value</b></td> </tr> <tr>
+/// <td>Colorspace</td> <td>YCBCR</td> </tr> <tr> <td>Range</td> <td>16-235</td>
+/// </tr> <tr> <td>Gamma</td> <td>2.4</td> </tr> <tr> <td>Siting</td>
+/// <td>Video</td> </tr> <tr> <td>Primaries</td> <td>BT.709</td> </tr> </table>
+/// This is usually used with 8, 10, or 12 bit color channels.
+const DXGI_COLOR_SPACE_YCBCR_STUDIO_G24_LEFT_P709 = DXGI_COLOR_SPACE_TYPE(22);
+
+/// <table> <tr> <td><b>Property</b></td> <td><b>Value</b></td> </tr> <tr>
+/// <td>Colorspace</td> <td>YCBCR</td> </tr> <tr> <td>Range</td> <td>16-235</td>
+/// </tr> <tr> <td>Gamma</td> <td>2.4</td> </tr> <tr> <td>Siting</td>
+/// <td>Video</td> </tr> <tr> <td>Primaries</td> <td>BT.2020</td> </tr> </table>
+/// This is usually used with 10 or 12 bit color channels.
+const DXGI_COLOR_SPACE_YCBCR_STUDIO_G24_LEFT_P2020 = DXGI_COLOR_SPACE_TYPE(23);
+
+/// <table> <tr> <td><b>Property</b></td> <td><b>Value</b></td> </tr> <tr>
+/// <td>Colorspace</td> <td>YCBCR</td> </tr> <tr> <td>Range</td> <td>16-235</td>
+/// </tr> <tr> <td>Gamma</td> <td>2.4</td> </tr> <tr> <td>Siting</td>
+/// <td>Video</td> </tr> <tr> <td>Primaries</td> <td>BT.2020</td> </tr> </table>
+/// This is usually used with 10 or 12 bit color channels.
+const DXGI_COLOR_SPACE_YCBCR_STUDIO_G24_TOPLEFT_P2020 = DXGI_COLOR_SPACE_TYPE(
+  24,
+);
+
+/// A custom color definition is used.
+const DXGI_COLOR_SPACE_CUSTOM = DXGI_COLOR_SPACE_TYPE(-1);
+
+/// Options for enumerating display modes.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/direct3ddxgi/dxgi-enum-modes>.
+///
+/// {@category enum}
+extension type const DXGI_ENUM_MODES(int _) implements int {
+  /// Whether this instance has all the bit fields specified in [other].
+  bool has(DXGI_ENUM_MODES other) => _ & other._ == other._;
+
+  DXGI_ENUM_MODES operator &(int other) => DXGI_ENUM_MODES(_ & other);
+  DXGI_ENUM_MODES operator |(int other) => DXGI_ENUM_MODES(_ | other);
+}
+
+const DXGI_ENUM_MODES_INTERLACED = DXGI_ENUM_MODES(1);
+
+const DXGI_ENUM_MODES_SCALING = DXGI_ENUM_MODES(2);
+
+const DXGI_ENUM_MODES_STEREO = DXGI_ENUM_MODES(4);
+
+const DXGI_ENUM_MODES_DISABLED_STEREO = DXGI_ENUM_MODES(8);
+
+/// Resource data formats, including fully-typed and typeless formats.
+///
+/// A list of modifiers at the bottom of the page more fully describes each
+/// format type.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dxgiformat/ne-dxgiformat-dxgi_format>.
+///
+/// {@category enum}
+extension type const DXGI_FORMAT(int _) implements int {}
+
+/// The format is not known.
+const DXGI_FORMAT_UNKNOWN = DXGI_FORMAT(0);
+
+/// A four-component, 128-bit typeless format that supports 32 bits per channel
+/// including alpha.
+const DXGI_FORMAT_R32G32B32A32_TYPELESS = DXGI_FORMAT(1);
+
+/// A four-component, 128-bit floating-point format that supports 32 bits per
+/// channel including alpha.
+const DXGI_FORMAT_R32G32B32A32_FLOAT = DXGI_FORMAT(2);
+
+/// A four-component, 128-bit unsigned-integer format that supports 32 bits per
+/// channel including alpha.
+const DXGI_FORMAT_R32G32B32A32_UINT = DXGI_FORMAT(3);
+
+/// A four-component, 128-bit signed-integer format that supports 32 bits per
+/// channel including alpha.
+const DXGI_FORMAT_R32G32B32A32_SINT = DXGI_FORMAT(4);
+
+/// A three-component, 96-bit typeless format that supports 32 bits per color
+/// channel.
+const DXGI_FORMAT_R32G32B32_TYPELESS = DXGI_FORMAT(5);
+
+/// A three-component, 96-bit floating-point format that supports 32 bits per
+/// color channel.<sup>5,8</sup>.
+const DXGI_FORMAT_R32G32B32_FLOAT = DXGI_FORMAT(6);
+
+/// A three-component, 96-bit unsigned-integer format that supports 32 bits per
+/// color channel.
+const DXGI_FORMAT_R32G32B32_UINT = DXGI_FORMAT(7);
+
+/// A three-component, 96-bit signed-integer format that supports 32 bits per
+/// color channel.
+const DXGI_FORMAT_R32G32B32_SINT = DXGI_FORMAT(8);
+
+/// A four-component, 64-bit typeless format that supports 16 bits per channel
+/// including alpha.
+const DXGI_FORMAT_R16G16B16A16_TYPELESS = DXGI_FORMAT(9);
+
+/// A four-component, 64-bit floating-point format that supports 16 bits per
+/// channel including alpha.<sup>5,7</sup>.
+const DXGI_FORMAT_R16G16B16A16_FLOAT = DXGI_FORMAT(10);
+
+/// A four-component, 64-bit unsigned-normalized-integer format that supports 16
+/// bits per channel including alpha.
+const DXGI_FORMAT_R16G16B16A16_UNORM = DXGI_FORMAT(11);
+
+/// A four-component, 64-bit unsigned-integer format that supports 16 bits per
+/// channel including alpha.
+const DXGI_FORMAT_R16G16B16A16_UINT = DXGI_FORMAT(12);
+
+/// A four-component, 64-bit signed-normalized-integer format that supports 16
+/// bits per channel including alpha.
+const DXGI_FORMAT_R16G16B16A16_SNORM = DXGI_FORMAT(13);
+
+/// A four-component, 64-bit signed-integer format that supports 16 bits per
+/// channel including alpha.
+const DXGI_FORMAT_R16G16B16A16_SINT = DXGI_FORMAT(14);
+
+/// A two-component, 64-bit typeless format that supports 32 bits for the red
+/// channel and 32 bits for the green channel.
+const DXGI_FORMAT_R32G32_TYPELESS = DXGI_FORMAT(15);
+
+/// A two-component, 64-bit floating-point format that supports 32 bits for the
+/// red channel and 32 bits for the green channel.<sup>5,8</sup>.
+const DXGI_FORMAT_R32G32_FLOAT = DXGI_FORMAT(16);
+
+/// A two-component, 64-bit unsigned-integer format that supports 32 bits for
+/// the red channel and 32 bits for the green channel.
+const DXGI_FORMAT_R32G32_UINT = DXGI_FORMAT(17);
+
+/// A two-component, 64-bit signed-integer format that supports 32 bits for the
+/// red channel and 32 bits for the green channel.
+const DXGI_FORMAT_R32G32_SINT = DXGI_FORMAT(18);
+
+/// A two-component, 64-bit typeless format that supports 32 bits for the red
+/// channel, 8 bits for the green channel, and 24 bits are unused.
+const DXGI_FORMAT_R32G8X24_TYPELESS = DXGI_FORMAT(19);
+
+/// A 32-bit floating-point component, and two unsigned-integer components (with
+/// an additional 32 bits).
+const DXGI_FORMAT_D32_FLOAT_S8X24_UINT = DXGI_FORMAT(20);
+
+/// A 32-bit floating-point component, and two typeless components (with an
+/// additional 32 bits).
+const DXGI_FORMAT_R32_FLOAT_X8X24_TYPELESS = DXGI_FORMAT(21);
+
+/// A 32-bit typeless component, and two unsigned-integer components (with an
+/// additional 32 bits).
+const DXGI_FORMAT_X32_TYPELESS_G8X24_UINT = DXGI_FORMAT(22);
+
+/// A four-component, 32-bit typeless format that supports 10 bits for each
+/// color and 2 bits for alpha.
+const DXGI_FORMAT_R10G10B10A2_TYPELESS = DXGI_FORMAT(23);
+
+/// A four-component, 32-bit unsigned-normalized-integer format that supports 10
+/// bits for each color and 2 bits for alpha.
+const DXGI_FORMAT_R10G10B10A2_UNORM = DXGI_FORMAT(24);
+
+/// A four-component, 32-bit unsigned-integer format that supports 10 bits for
+/// each color and 2 bits for alpha.
+const DXGI_FORMAT_R10G10B10A2_UINT = DXGI_FORMAT(25);
+
+/// Three partial-precision floating-point numbers encoded into a single 32-bit
+/// value (a variant of s10e5, which is sign bit, 10-bit mantissa, and 5-bit
+/// biased (15) exponent).
+const DXGI_FORMAT_R11G11B10_FLOAT = DXGI_FORMAT(26);
+
+/// A four-component, 32-bit typeless format that supports 8 bits per channel
+/// including alpha.
+const DXGI_FORMAT_R8G8B8A8_TYPELESS = DXGI_FORMAT(27);
+
+/// A four-component, 32-bit unsigned-normalized-integer format that supports 8
+/// bits per channel including alpha.
+const DXGI_FORMAT_R8G8B8A8_UNORM = DXGI_FORMAT(28);
+
+/// A four-component, 32-bit unsigned-normalized integer sRGB format that
+/// supports 8 bits per channel including alpha.
+const DXGI_FORMAT_R8G8B8A8_UNORM_SRGB = DXGI_FORMAT(29);
+
+/// A four-component, 32-bit unsigned-integer format that supports 8 bits per
+/// channel including alpha.
+const DXGI_FORMAT_R8G8B8A8_UINT = DXGI_FORMAT(30);
+
+/// A four-component, 32-bit signed-normalized-integer format that supports 8
+/// bits per channel including alpha.
+const DXGI_FORMAT_R8G8B8A8_SNORM = DXGI_FORMAT(31);
+
+/// A four-component, 32-bit signed-integer format that supports 8 bits per
+/// channel including alpha.
+const DXGI_FORMAT_R8G8B8A8_SINT = DXGI_FORMAT(32);
+
+/// A two-component, 32-bit typeless format that supports 16 bits for the red
+/// channel and 16 bits for the green channel.
+const DXGI_FORMAT_R16G16_TYPELESS = DXGI_FORMAT(33);
+
+/// A two-component, 32-bit floating-point format that supports 16 bits for the
+/// red channel and 16 bits for the green channel.<sup>5,7</sup>.
+const DXGI_FORMAT_R16G16_FLOAT = DXGI_FORMAT(34);
+
+/// A two-component, 32-bit unsigned-normalized-integer format that supports 16
+/// bits each for the green and red channels.
+const DXGI_FORMAT_R16G16_UNORM = DXGI_FORMAT(35);
+
+/// A two-component, 32-bit unsigned-integer format that supports 16 bits for
+/// the red channel and 16 bits for the green channel.
+const DXGI_FORMAT_R16G16_UINT = DXGI_FORMAT(36);
+
+/// A two-component, 32-bit signed-normalized-integer format that supports 16
+/// bits for the red channel and 16 bits for the green channel.
+const DXGI_FORMAT_R16G16_SNORM = DXGI_FORMAT(37);
+
+/// A two-component, 32-bit signed-integer format that supports 16 bits for the
+/// red channel and 16 bits for the green channel.
+const DXGI_FORMAT_R16G16_SINT = DXGI_FORMAT(38);
+
+/// A single-component, 32-bit typeless format that supports 32 bits for the red
+/// channel.
+const DXGI_FORMAT_R32_TYPELESS = DXGI_FORMAT(39);
+
+/// A single-component, 32-bit floating-point format that supports 32 bits for
+/// depth.<sup>5,8</sup>.
+const DXGI_FORMAT_D32_FLOAT = DXGI_FORMAT(40);
+
+/// A single-component, 32-bit floating-point format that supports 32 bits for
+/// the red channel.<sup>5,8</sup>.
+const DXGI_FORMAT_R32_FLOAT = DXGI_FORMAT(41);
+
+/// A single-component, 32-bit unsigned-integer format that supports 32 bits for
+/// the red channel.
+const DXGI_FORMAT_R32_UINT = DXGI_FORMAT(42);
+
+/// A single-component, 32-bit signed-integer format that supports 32 bits for
+/// the red channel.
+const DXGI_FORMAT_R32_SINT = DXGI_FORMAT(43);
+
+/// A two-component, 32-bit typeless format that supports 24 bits for the red
+/// channel and 8 bits for the green channel.
+const DXGI_FORMAT_R24G8_TYPELESS = DXGI_FORMAT(44);
+
+/// A 32-bit z-buffer format that supports 24 bits for depth and 8 bits for
+/// stencil.
+const DXGI_FORMAT_D24_UNORM_S8_UINT = DXGI_FORMAT(45);
+
+/// A 32-bit format, that contains a 24 bit, single-component,
+/// unsigned-normalized integer, with an additional typeless 8 bits.
+const DXGI_FORMAT_R24_UNORM_X8_TYPELESS = DXGI_FORMAT(46);
+
+/// A 32-bit format, that contains a 24 bit, single-component, typeless format,
+/// with an additional 8 bit unsigned integer component.
+const DXGI_FORMAT_X24_TYPELESS_G8_UINT = DXGI_FORMAT(47);
+
+/// A two-component, 16-bit typeless format that supports 8 bits for the red
+/// channel and 8 bits for the green channel.
+const DXGI_FORMAT_R8G8_TYPELESS = DXGI_FORMAT(48);
+
+/// A two-component, 16-bit unsigned-normalized-integer format that supports 8
+/// bits for the red channel and 8 bits for the green channel.
+const DXGI_FORMAT_R8G8_UNORM = DXGI_FORMAT(49);
+
+/// A two-component, 16-bit unsigned-integer format that supports 8 bits for the
+/// red channel and 8 bits for the green channel.
+const DXGI_FORMAT_R8G8_UINT = DXGI_FORMAT(50);
+
+/// A two-component, 16-bit signed-normalized-integer format that supports 8
+/// bits for the red channel and 8 bits for the green channel.
+const DXGI_FORMAT_R8G8_SNORM = DXGI_FORMAT(51);
+
+/// A two-component, 16-bit signed-integer format that supports 8 bits for the
+/// red channel and 8 bits for the green channel.
+const DXGI_FORMAT_R8G8_SINT = DXGI_FORMAT(52);
+
+/// A single-component, 16-bit typeless format that supports 16 bits for the red
+/// channel.
+const DXGI_FORMAT_R16_TYPELESS = DXGI_FORMAT(53);
+
+/// A single-component, 16-bit floating-point format that supports 16 bits for
+/// the red channel.<sup>5,7</sup>.
+const DXGI_FORMAT_R16_FLOAT = DXGI_FORMAT(54);
+
+/// A single-component, 16-bit unsigned-normalized-integer format that supports
+/// 16 bits for depth.
+const DXGI_FORMAT_D16_UNORM = DXGI_FORMAT(55);
+
+/// A single-component, 16-bit unsigned-normalized-integer format that supports
+/// 16 bits for the red channel.
+const DXGI_FORMAT_R16_UNORM = DXGI_FORMAT(56);
+
+/// A single-component, 16-bit unsigned-integer format that supports 16 bits for
+/// the red channel.
+const DXGI_FORMAT_R16_UINT = DXGI_FORMAT(57);
+
+/// A single-component, 16-bit signed-normalized-integer format that supports 16
+/// bits for the red channel.
+const DXGI_FORMAT_R16_SNORM = DXGI_FORMAT(58);
+
+/// A single-component, 16-bit signed-integer format that supports 16 bits for
+/// the red channel.
+const DXGI_FORMAT_R16_SINT = DXGI_FORMAT(59);
+
+/// A single-component, 8-bit typeless format that supports 8 bits for the red
+/// channel.
+const DXGI_FORMAT_R8_TYPELESS = DXGI_FORMAT(60);
+
+/// A single-component, 8-bit unsigned-normalized-integer format that supports 8
+/// bits for the red channel.
+const DXGI_FORMAT_R8_UNORM = DXGI_FORMAT(61);
+
+/// A single-component, 8-bit unsigned-integer format that supports 8 bits for
+/// the red channel.
+const DXGI_FORMAT_R8_UINT = DXGI_FORMAT(62);
+
+/// A single-component, 8-bit signed-normalized-integer format that supports 8
+/// bits for the red channel.
+const DXGI_FORMAT_R8_SNORM = DXGI_FORMAT(63);
+
+/// A single-component, 8-bit signed-integer format that supports 8 bits for the
+/// red channel.
+const DXGI_FORMAT_R8_SINT = DXGI_FORMAT(64);
+
+/// A single-component, 8-bit unsigned-normalized-integer format for alpha only.
+const DXGI_FORMAT_A8_UNORM = DXGI_FORMAT(65);
+
+/// A single-component, 1-bit unsigned-normalized integer format that supports 1
+/// bit for the red channel.
+const DXGI_FORMAT_R1_UNORM = DXGI_FORMAT(66);
+
+/// Three partial-precision floating-point numbers encoded into a single 32-bit
+/// value all sharing the same 5-bit exponent (variant of s10e5, which is sign
+/// bit, 10-bit mantissa, and 5-bit biased (15) exponent).
+const DXGI_FORMAT_R9G9B9E5_SHAREDEXP = DXGI_FORMAT(67);
+
+/// A four-component, 32-bit unsigned-normalized-integer format.
+const DXGI_FORMAT_R8G8_B8G8_UNORM = DXGI_FORMAT(68);
+
+/// A four-component, 32-bit unsigned-normalized-integer format.
+const DXGI_FORMAT_G8R8_G8B8_UNORM = DXGI_FORMAT(69);
+
+/// Four-component typeless block-compression format.
+const DXGI_FORMAT_BC1_TYPELESS = DXGI_FORMAT(70);
+
+/// Four-component block-compression format.
+const DXGI_FORMAT_BC1_UNORM = DXGI_FORMAT(71);
+
+/// Four-component block-compression format for sRGB data.
+const DXGI_FORMAT_BC1_UNORM_SRGB = DXGI_FORMAT(72);
+
+/// Four-component typeless block-compression format.
+const DXGI_FORMAT_BC2_TYPELESS = DXGI_FORMAT(73);
+
+/// Four-component block-compression format.
+const DXGI_FORMAT_BC2_UNORM = DXGI_FORMAT(74);
+
+/// Four-component block-compression format for sRGB data.
+const DXGI_FORMAT_BC2_UNORM_SRGB = DXGI_FORMAT(75);
+
+/// Four-component typeless block-compression format.
+const DXGI_FORMAT_BC3_TYPELESS = DXGI_FORMAT(76);
+
+/// Four-component block-compression format.
+const DXGI_FORMAT_BC3_UNORM = DXGI_FORMAT(77);
+
+/// Four-component block-compression format for sRGB data.
+const DXGI_FORMAT_BC3_UNORM_SRGB = DXGI_FORMAT(78);
+
+/// One-component typeless block-compression format.
+const DXGI_FORMAT_BC4_TYPELESS = DXGI_FORMAT(79);
+
+/// One-component block-compression format.
+const DXGI_FORMAT_BC4_UNORM = DXGI_FORMAT(80);
+
+/// One-component block-compression format.
+const DXGI_FORMAT_BC4_SNORM = DXGI_FORMAT(81);
+
+/// Two-component typeless block-compression format.
+const DXGI_FORMAT_BC5_TYPELESS = DXGI_FORMAT(82);
+
+/// Two-component block-compression format.
+const DXGI_FORMAT_BC5_UNORM = DXGI_FORMAT(83);
+
+/// Two-component block-compression format.
+const DXGI_FORMAT_BC5_SNORM = DXGI_FORMAT(84);
+
+/// A three-component, 16-bit unsigned-normalized-integer format that supports 5
+/// bits for blue, 6 bits for green, and 5 bits for red.
+const DXGI_FORMAT_B5G6R5_UNORM = DXGI_FORMAT(85);
+
+/// A four-component, 16-bit unsigned-normalized-integer format that supports 5
+/// bits for each color channel and 1-bit alpha.
+const DXGI_FORMAT_B5G5R5A1_UNORM = DXGI_FORMAT(86);
+
+/// A four-component, 32-bit unsigned-normalized-integer format that supports 8
+/// bits for each color channel and 8-bit alpha.
+const DXGI_FORMAT_B8G8R8A8_UNORM = DXGI_FORMAT(87);
+
+/// A four-component, 32-bit unsigned-normalized-integer format that supports 8
+/// bits for each color channel and 8 bits unused.
+const DXGI_FORMAT_B8G8R8X8_UNORM = DXGI_FORMAT(88);
+
+/// A four-component, 32-bit 2.8-biased fixed-point format that supports 10 bits
+/// for each color channel and 2-bit alpha.
+const DXGI_FORMAT_R10G10B10_XR_BIAS_A2_UNORM = DXGI_FORMAT(89);
+
+/// A four-component, 32-bit typeless format that supports 8 bits for each
+/// channel including alpha.
+const DXGI_FORMAT_B8G8R8A8_TYPELESS = DXGI_FORMAT(90);
+
+/// A four-component, 32-bit unsigned-normalized standard RGB format that
+/// supports 8 bits for each channel including alpha.
+const DXGI_FORMAT_B8G8R8A8_UNORM_SRGB = DXGI_FORMAT(91);
+
+/// A four-component, 32-bit typeless format that supports 8 bits for each color
+/// channel, and 8 bits are unused.
+const DXGI_FORMAT_B8G8R8X8_TYPELESS = DXGI_FORMAT(92);
+
+/// A four-component, 32-bit unsigned-normalized standard RGB format that
+/// supports 8 bits for each color channel, and 8 bits are unused.
+const DXGI_FORMAT_B8G8R8X8_UNORM_SRGB = DXGI_FORMAT(93);
+
+/// A typeless block-compression format.
+const DXGI_FORMAT_BC6H_TYPELESS = DXGI_FORMAT(94);
+
+/// A block-compression format.
+const DXGI_FORMAT_BC6H_UF16 = DXGI_FORMAT(95);
+
+/// A block-compression format.
+const DXGI_FORMAT_BC6H_SF16 = DXGI_FORMAT(96);
+
+/// A typeless block-compression format.
+const DXGI_FORMAT_BC7_TYPELESS = DXGI_FORMAT(97);
+
+/// A block-compression format.
+const DXGI_FORMAT_BC7_UNORM = DXGI_FORMAT(98);
+
+/// A block-compression format.
+const DXGI_FORMAT_BC7_UNORM_SRGB = DXGI_FORMAT(99);
+
+/// Most common YUV 4:4:4 video resource format.
+const DXGI_FORMAT_AYUV = DXGI_FORMAT(100);
+
+/// 10-bit per channel packed YUV 4:4:4 video resource format.
+const DXGI_FORMAT_Y410 = DXGI_FORMAT(101);
+
+/// 16-bit per channel packed YUV 4:4:4 video resource format.
+const DXGI_FORMAT_Y416 = DXGI_FORMAT(102);
+
+/// Most common YUV 4:2:0 video resource format.
+const DXGI_FORMAT_NV12 = DXGI_FORMAT(103);
+
+/// 10-bit per channel planar YUV 4:2:0 video resource format.
+const DXGI_FORMAT_P010 = DXGI_FORMAT(104);
+
+/// 16-bit per channel planar YUV 4:2:0 video resource format.
+const DXGI_FORMAT_P016 = DXGI_FORMAT(105);
+
+/// 8-bit per channel planar YUV 4:2:0 video resource format.
+const DXGI_FORMAT_420_OPAQUE = DXGI_FORMAT(106);
+
+/// Most common YUV 4:2:2 video resource format.
+const DXGI_FORMAT_YUY2 = DXGI_FORMAT(107);
+
+/// 10-bit per channel packed YUV 4:2:2 video resource format.
+const DXGI_FORMAT_Y210 = DXGI_FORMAT(108);
+
+/// 16-bit per channel packed YUV 4:2:2 video resource format.
+const DXGI_FORMAT_Y216 = DXGI_FORMAT(109);
+
+/// Most common planar YUV 4:1:1 video resource format.
+const DXGI_FORMAT_NV11 = DXGI_FORMAT(110);
+
+/// 4-bit palletized YUV format that is commonly used for DVD subpicture.
+const DXGI_FORMAT_AI44 = DXGI_FORMAT(111);
+
+/// 4-bit palletized YUV format that is commonly used for DVD subpicture.
+const DXGI_FORMAT_IA44 = DXGI_FORMAT(112);
+
+/// 8-bit palletized format that is used for palletized RGB data when the
+/// processor processes ISDB-T data and for palletized YUV data when the
+/// processor processes BluRay data.
+const DXGI_FORMAT_P8 = DXGI_FORMAT(113);
+
+/// 8-bit palletized format with 8 bits of alpha that is used for palletized YUV
+/// data when the processor processes BluRay data.
+const DXGI_FORMAT_A8P8 = DXGI_FORMAT(114);
+
+/// A four-component, 16-bit unsigned-normalized integer format that supports 4
+/// bits for each channel including alpha.
+const DXGI_FORMAT_B4G4R4A4_UNORM = DXGI_FORMAT(115);
+
+/// A video format; an 8-bit version of a hybrid planar 4:2:2 format.
+const DXGI_FORMAT_P208 = DXGI_FORMAT(130);
+
+/// An 8 bit YCbCrA 4:4 rendering format.
+const DXGI_FORMAT_V208 = DXGI_FORMAT(131);
+
+/// An 8 bit YCbCrA 4:4:4:4 rendering format.
+const DXGI_FORMAT_V408 = DXGI_FORMAT(132);
+
+const DXGI_FORMAT_SAMPLER_FEEDBACK_MIN_MIP_OPAQUE = DXGI_FORMAT(189);
+
+const DXGI_FORMAT_SAMPLER_FEEDBACK_MIP_REGION_USED_OPAQUE = DXGI_FORMAT(190);
+
+const DXGI_FORMAT_A4B4G4R4_UNORM = DXGI_FORMAT(191);
+
+/// Specifies the header metadata type.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dxgi1_5/ne-dxgi1_5-dxgi_hdr_metadata_type>.
+///
+/// {@category enum}
+extension type const DXGI_HDR_METADATA_TYPE(int _) implements int {}
+
+/// Indicates there is no header metadata.
+const DXGI_HDR_METADATA_TYPE_NONE = DXGI_HDR_METADATA_TYPE(0);
+
+/// Indicates the header metadata is held by a <a
+/// href="https://docs.microsoft.com/windows/desktop/api/dxgi1_5/ns-dxgi1_5-dxgi_hdr_metadata_hdr10">DXGI_HDR_METADATA_HDR10</a>
+/// structure.
+const DXGI_HDR_METADATA_TYPE_HDR10 = DXGI_HDR_METADATA_TYPE(1);
+
+const DXGI_HDR_METADATA_TYPE_HDR10PLUS = DXGI_HDR_METADATA_TYPE(2);
+
+/// {@category enum}
+extension type const DXGI_MAP_FLAGS(int _) implements int {
+  /// Whether this instance has all the bit fields specified in [other].
+  bool has(DXGI_MAP_FLAGS other) => _ & other._ == other._;
+
+  DXGI_MAP_FLAGS operator &(int other) => DXGI_MAP_FLAGS(_ & other);
+  DXGI_MAP_FLAGS operator |(int other) => DXGI_MAP_FLAGS(_ | other);
+}
+
+const DXGI_MAP_READ = DXGI_MAP_FLAGS(1);
+
+const DXGI_MAP_WRITE = DXGI_MAP_FLAGS(2);
+
+const DXGI_MAP_DISCARD = DXGI_MAP_FLAGS(4);
+
+/// {@category enum}
+extension type const DXGI_MODE_ROTATION(int _) implements int {}
+
+const DXGI_MODE_ROTATION_UNSPECIFIED = DXGI_MODE_ROTATION(0);
+
+const DXGI_MODE_ROTATION_IDENTITY = DXGI_MODE_ROTATION(1);
+
+const DXGI_MODE_ROTATION_ROTATE90 = DXGI_MODE_ROTATION(2);
+
+const DXGI_MODE_ROTATION_ROTATE180 = DXGI_MODE_ROTATION(3);
+
+const DXGI_MODE_ROTATION_ROTATE270 = DXGI_MODE_ROTATION(4);
+
+/// {@category enum}
+extension type const DXGI_MODE_SCALING(int _) implements int {}
+
+const DXGI_MODE_SCALING_UNSPECIFIED = DXGI_MODE_SCALING(0);
+
+const DXGI_MODE_SCALING_CENTERED = DXGI_MODE_SCALING(1);
+
+const DXGI_MODE_SCALING_STRETCHED = DXGI_MODE_SCALING(2);
+
+/// {@category enum}
+extension type const DXGI_MODE_SCANLINE_ORDER(int _) implements int {}
+
+const DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED = DXGI_MODE_SCANLINE_ORDER(0);
+
+const DXGI_MODE_SCANLINE_ORDER_PROGRESSIVE = DXGI_MODE_SCANLINE_ORDER(1);
+
+const DXGI_MODE_SCANLINE_ORDER_UPPER_FIELD_FIRST = DXGI_MODE_SCANLINE_ORDER(2);
+
+const DXGI_MODE_SCANLINE_ORDER_LOWER_FIELD_FIRST = DXGI_MODE_SCANLINE_ORDER(3);
+
+/// The DXGI_PRESENT constants specify options for presenting frames to the
+/// output.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/direct3ddxgi/dxgi-present>.
+///
+/// {@category enum}
+extension type const DXGI_PRESENT(int _) implements int {
+  /// Whether this instance has all the bit fields specified in [other].
+  bool has(DXGI_PRESENT other) => _ & other._ == other._;
+
+  DXGI_PRESENT operator &(int other) => DXGI_PRESENT(_ & other);
+  DXGI_PRESENT operator |(int other) => DXGI_PRESENT(_ | other);
+}
+
+const DXGI_PRESENT_TEST = DXGI_PRESENT(1);
+
+const DXGI_PRESENT_DO_NOT_SEQUENCE = DXGI_PRESENT(2);
+
+const DXGI_PRESENT_RESTART = DXGI_PRESENT(4);
+
+const DXGI_PRESENT_DO_NOT_WAIT = DXGI_PRESENT(8);
+
+const DXGI_PRESENT_STEREO_PREFER_RIGHT = DXGI_PRESENT(16);
+
+const DXGI_PRESENT_STEREO_TEMPORARY_MONO = DXGI_PRESENT(32);
+
+const DXGI_PRESENT_RESTRICT_TO_OUTPUT = DXGI_PRESENT(64);
+
+const DXGI_PRESENT_USE_DURATION = DXGI_PRESENT(256);
+
+const DXGI_PRESENT_ALLOW_TEARING = DXGI_PRESENT(512);
+
+/// Options for swap-chain behavior.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dxgi/ne-dxgi-dxgi_swap_chain_flag>.
+///
+/// {@category enum}
+extension type const DXGI_SWAP_CHAIN_FLAG(int _) implements int {
+  /// Whether this instance has all the bit fields specified in [other].
+  bool has(DXGI_SWAP_CHAIN_FLAG other) => _ & other._ == other._;
+
+  DXGI_SWAP_CHAIN_FLAG operator &(int other) => DXGI_SWAP_CHAIN_FLAG(_ & other);
+  DXGI_SWAP_CHAIN_FLAG operator |(int other) => DXGI_SWAP_CHAIN_FLAG(_ | other);
+}
+
+/// Set this flag to turn off automatic image rotation; that is, do not perform
+/// a rotation when transferring the contents of the front buffer to the
+/// monitor.
+const DXGI_SWAP_CHAIN_FLAG_NONPREROTATED = DXGI_SWAP_CHAIN_FLAG(1);
+
+/// Set this flag to enable an application to switch modes by calling <a
+/// href="https://docs.microsoft.com/windows/desktop/api/dxgi/nf-dxgi-idxgiswapchain-resizetarget">IDXGISwapChain::ResizeTarget</a>.
+const DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH = DXGI_SWAP_CHAIN_FLAG(2);
+
+/// Set this flag to enable an application to render using GDI on a swap chain
+/// or a surface.
+const DXGI_SWAP_CHAIN_FLAG_GDI_COMPATIBLE = DXGI_SWAP_CHAIN_FLAG(4);
+
+/// Set this flag to indicate that the swap chain might contain protected
+/// content; therefore, the operating system supports the creation of the swap
+/// chain only when driver and hardware protection is used.
+const DXGI_SWAP_CHAIN_FLAG_RESTRICTED_CONTENT = DXGI_SWAP_CHAIN_FLAG(8);
+
+/// Set this flag to indicate that shared resources that are created within the
+/// swap chain must be protected by using the driver’s mechanism for restricting
+/// access to shared surfaces.
+const DXGI_SWAP_CHAIN_FLAG_RESTRICT_SHARED_RESOURCE_DRIVER =
+    DXGI_SWAP_CHAIN_FLAG(16);
+
+/// Set this flag to restrict presented content to the local displays.
+const DXGI_SWAP_CHAIN_FLAG_DISPLAY_ONLY = DXGI_SWAP_CHAIN_FLAG(32);
+
+/// Set this flag to create a waitable object you can use to ensure rendering
+/// does not begin while a frame is still being presented.
+const DXGI_SWAP_CHAIN_FLAG_FRAME_LATENCY_WAITABLE_OBJECT = DXGI_SWAP_CHAIN_FLAG(
+  64,
+);
+
+/// Set this flag to create a swap chain in the foreground layer for multi-plane
+/// rendering.
+const DXGI_SWAP_CHAIN_FLAG_FOREGROUND_LAYER = DXGI_SWAP_CHAIN_FLAG(128);
+
+/// Set this flag to create a swap chain for full-screen video.
+const DXGI_SWAP_CHAIN_FLAG_FULLSCREEN_VIDEO = DXGI_SWAP_CHAIN_FLAG(256);
+
+/// Set this flag to create a swap chain for YUV video.
+const DXGI_SWAP_CHAIN_FLAG_YUV_VIDEO = DXGI_SWAP_CHAIN_FLAG(512);
+
+/// Indicates that the swap chain should be created such that all underlying
+/// resources can be protected by the hardware.
+const DXGI_SWAP_CHAIN_FLAG_HW_PROTECTED = DXGI_SWAP_CHAIN_FLAG(1024);
+
+/// Tearing support is a requirement to enable displays that support variable
+/// refresh rates to function properly when the application presents a swap
+/// chain tied to a full screen borderless window.
+const DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING = DXGI_SWAP_CHAIN_FLAG(2048);
+
+const DXGI_SWAP_CHAIN_FLAG_RESTRICTED_TO_ALL_HOLOGRAPHIC_DISPLAYS =
+    DXGI_SWAP_CHAIN_FLAG(4096);
+
+/// Options for handling pixels in a display surface after calling
+/// IDXGISwapChain1::Present1.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/dxgi/ne-dxgi-dxgi_swap_effect>.
+///
+/// {@category enum}
+extension type const DXGI_SWAP_EFFECT(int _) implements int {}
+
+/// Use this flag to specify the bit-block transfer (bitblt) model and to
+/// specify that DXGI discard the contents of the back buffer after you call <a
+/// href="https://docs.microsoft.com/windows/win32/api/dxgi1_2/nf-dxgi1_2-idxgiswapchain1-present1">IDXGISwapChain1::Present1</a>.
+const DXGI_SWAP_EFFECT_DISCARD = DXGI_SWAP_EFFECT(0);
+
+/// Use this flag to specify the bitblt model and to specify that DXGI persist
+/// the contents of the back buffer after you call <a
+/// href="https://docs.microsoft.com/windows/win32/api/dxgi1_2/nf-dxgi1_2-idxgiswapchain1-present1">IDXGISwapChain1::Present1</a>.
+const DXGI_SWAP_EFFECT_SEQUENTIAL = DXGI_SWAP_EFFECT(1);
+
+/// Use this flag to specify the flip presentation model and to specify that
+/// DXGI persist the contents of the back buffer after you call <a
+/// href="https://docs.microsoft.com/windows/win32/api/dxgi1_2/nf-dxgi1_2-idxgiswapchain1-present1">IDXGISwapChain1::Present1</a>.
+const DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL = DXGI_SWAP_EFFECT(3);
+
+/// Use this flag to specify the flip presentation model and to specify that
+/// DXGI discard the contents of the back buffer after you call <a
+/// href="https://docs.microsoft.com/windows/win32/api/dxgi1_2/nf-dxgi1_2-idxgiswapchain1-present1">IDXGISwapChain1::Present1</a>.
+const DXGI_SWAP_EFFECT_FLIP_DISCARD = DXGI_SWAP_EFFECT(4);
+
+/// Flags for surface and resource creation options.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/direct3ddxgi/dxgi-usage>.
+///
+/// {@category enum}
+extension type const DXGI_USAGE(int _) implements int {
+  /// Whether this instance has all the bit fields specified in [other].
+  bool has(DXGI_USAGE other) => _ & other._ == other._;
+
+  DXGI_USAGE operator &(int other) => DXGI_USAGE(_ & other);
+  DXGI_USAGE operator |(int other) => DXGI_USAGE(_ | other);
+}
+
+const DXGI_USAGE_SHADER_INPUT = DXGI_USAGE(16);
+
+const DXGI_USAGE_RENDER_TARGET_OUTPUT = DXGI_USAGE(32);
+
+const DXGI_USAGE_BACK_BUFFER = DXGI_USAGE(64);
+
+const DXGI_USAGE_SHARED = DXGI_USAGE(128);
+
+const DXGI_USAGE_READ_ONLY = DXGI_USAGE(256);
+
+const DXGI_USAGE_DISCARD_ON_PRESENT = DXGI_USAGE(512);
+
+const DXGI_USAGE_UNORDERED_ACCESS = DXGI_USAGE(1024);
 
 /// {@category enum}
 extension type const DX_FEATURE_LEVEL(int _) implements int {}

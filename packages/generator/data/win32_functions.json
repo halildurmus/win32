@@ -706,6 +706,75 @@
   "CryptUpdateProtectedState": {
     "originalName": "CryptUpdateProtectedState"
   },
+  "D3D11CreateDevice": {
+    "originalName": "D3D11CreateDevice"
+  },
+  "D3D11CreateDeviceAndSwapChain": {
+    "originalName": "D3D11CreateDeviceAndSwapChain"
+  },
+  "D3DDisassemble11Trace": {
+    "originalName": "D3DDisassemble11Trace"
+  },
+  "D3DX11CreateFFT": {
+    "originalName": "D3DX11CreateFFT"
+  },
+  "D3DX11CreateFFT1DComplex": {
+    "originalName": "D3DX11CreateFFT1DComplex"
+  },
+  "D3DX11CreateFFT1DReal": {
+    "originalName": "D3DX11CreateFFT1DReal"
+  },
+  "D3DX11CreateFFT2DComplex": {
+    "originalName": "D3DX11CreateFFT2DComplex"
+  },
+  "D3DX11CreateFFT2DReal": {
+    "originalName": "D3DX11CreateFFT2DReal"
+  },
+  "D3DX11CreateFFT3DComplex": {
+    "originalName": "D3DX11CreateFFT3DComplex"
+  },
+  "D3DX11CreateFFT3DReal": {
+    "originalName": "D3DX11CreateFFT3DReal"
+  },
+  "D3DX11CreateScan": {
+    "originalName": "D3DX11CreateScan"
+  },
+  "D3DX11CreateSegmentedScan": {
+    "originalName": "D3DX11CreateSegmentedScan"
+  },
+  "DCompositionAttachMouseDragToHwnd": {
+    "originalName": "DCompositionAttachMouseDragToHwnd"
+  },
+  "DCompositionAttachMouseWheelToHwnd": {
+    "originalName": "DCompositionAttachMouseWheelToHwnd"
+  },
+  "DCompositionBoostCompositorClock": {
+    "originalName": "DCompositionBoostCompositorClock"
+  },
+  "DCompositionCreateDevice": {
+    "originalName": "DCompositionCreateDevice"
+  },
+  "DCompositionCreateDevice2": {
+    "originalName": "DCompositionCreateDevice2"
+  },
+  "DCompositionCreateDevice3": {
+    "originalName": "DCompositionCreateDevice3"
+  },
+  "DCompositionCreateSurfaceHandle": {
+    "originalName": "DCompositionCreateSurfaceHandle"
+  },
+  "DCompositionGetFrameId": {
+    "originalName": "DCompositionGetFrameId"
+  },
+  "DCompositionGetStatistics": {
+    "originalName": "DCompositionGetStatistics"
+  },
+  "DCompositionGetTargetStatistics": {
+    "originalName": "DCompositionGetTargetStatistics"
+  },
+  "DCompositionWaitForCompositorClock": {
+    "originalName": "DCompositionWaitForCompositorClock"
+  },
   "DeactivateActCtx": {
     "originalName": "DeactivateActCtx"
   },

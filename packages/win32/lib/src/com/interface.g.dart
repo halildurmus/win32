@@ -72,8 +72,158 @@ import 'ichannelaudiovolume.g.dart';
 import 'iclassfactory.g.dart';
 import 'iconnectionpoint.g.dart';
 import 'iconnectionpointcontainer.g.dart';
+import 'id3d11asynchronous.g.dart';
+import 'id3d11authenticatedchannel.g.dart';
+import 'id3d11blendstate.g.dart';
+import 'id3d11blendstate1.g.dart';
+import 'id3d11buffer.g.dart';
+import 'id3d11classinstance.g.dart';
+import 'id3d11classlinkage.g.dart';
+import 'id3d11commandlist.g.dart';
+import 'id3d11computeshader.g.dart';
+import 'id3d11counter.g.dart';
+import 'id3d11cryptosession.g.dart';
+import 'id3d11debug.g.dart';
+import 'id3d11depthstencilstate.g.dart';
+import 'id3d11depthstencilview.g.dart';
+import 'id3d11device.g.dart';
+import 'id3d11device1.g.dart';
+import 'id3d11device2.g.dart';
+import 'id3d11device3.g.dart';
+import 'id3d11device4.g.dart';
+import 'id3d11device5.g.dart';
+import 'id3d11devicechild.g.dart';
+import 'id3d11devicecontext.g.dart';
+import 'id3d11devicecontext1.g.dart';
+import 'id3d11devicecontext2.g.dart';
+import 'id3d11devicecontext3.g.dart';
+import 'id3d11devicecontext4.g.dart';
+import 'id3d11domainshader.g.dart';
+import 'id3d11fence.g.dart';
+import 'id3d11functionlinkinggraph.g.dart';
+import 'id3d11functionparameterreflection.g.dart';
+import 'id3d11functionreflection.g.dart';
+import 'id3d11geometryshader.g.dart';
+import 'id3d11hullshader.g.dart';
+import 'id3d11infoqueue.g.dart';
+import 'id3d11inputlayout.g.dart';
+import 'id3d11libraryreflection.g.dart';
+import 'id3d11linker.g.dart';
+import 'id3d11linkingnode.g.dart';
+import 'id3d11module.g.dart';
+import 'id3d11moduleinstance.g.dart';
+import 'id3d11multithread.g.dart';
+import 'id3d11pixelshader.g.dart';
+import 'id3d11predicate.g.dart';
+import 'id3d11query.g.dart';
+import 'id3d11query1.g.dart';
+import 'id3d11rasterizerstate.g.dart';
+import 'id3d11rasterizerstate1.g.dart';
+import 'id3d11rasterizerstate2.g.dart';
+import 'id3d11refdefaulttrackingoptions.g.dart';
+import 'id3d11reftrackingoptions.g.dart';
+import 'id3d11rendertargetview.g.dart';
+import 'id3d11rendertargetview1.g.dart';
+import 'id3d11resource.g.dart';
+import 'id3d11samplerstate.g.dart';
+import 'id3d11shaderreflection.g.dart';
+import 'id3d11shaderreflectionconstantbuffer.g.dart';
+import 'id3d11shaderreflectiontype.g.dart';
+import 'id3d11shaderreflectionvariable.g.dart';
+import 'id3d11shaderresourceview.g.dart';
+import 'id3d11shaderresourceview1.g.dart';
+import 'id3d11shadertrace.g.dart';
+import 'id3d11shadertracefactory.g.dart';
+import 'id3d11switchtoref.g.dart';
+import 'id3d11texture1d.g.dart';
+import 'id3d11texture2d.g.dart';
+import 'id3d11texture2d1.g.dart';
+import 'id3d11texture3d.g.dart';
+import 'id3d11texture3d1.g.dart';
+import 'id3d11tracingdevice.g.dart';
+import 'id3d11unorderedaccessview.g.dart';
+import 'id3d11unorderedaccessview1.g.dart';
+import 'id3d11vertexshader.g.dart';
+import 'id3d11videocontext.g.dart';
+import 'id3d11videocontext1.g.dart';
+import 'id3d11videocontext2.g.dart';
+import 'id3d11videocontext3.g.dart';
+import 'id3d11videodecoder.g.dart';
+import 'id3d11videodecoderoutputview.g.dart';
+import 'id3d11videodevice.g.dart';
+import 'id3d11videodevice1.g.dart';
+import 'id3d11videodevice2.g.dart';
+import 'id3d11videoprocessor.g.dart';
+import 'id3d11videoprocessorenumerator.g.dart';
+import 'id3d11videoprocessorenumerator1.g.dart';
+import 'id3d11videoprocessorinputview.g.dart';
+import 'id3d11videoprocessoroutputview.g.dart';
+import 'id3d11view.g.dart';
+import 'id3dblob.g.dart';
+import 'id3ddevicecontextstate.g.dart';
+import 'id3duserdefinedannotation.g.dart';
+import 'id3dx11fft.g.dart';
+import 'id3dx11scan.g.dart';
+import 'id3dx11segmentedscan.g.dart';
+import 'idcompositionaffinetransform2deffect.g.dart';
+import 'idcompositionanimation.g.dart';
+import 'idcompositionarithmeticcompositeeffect.g.dart';
+import 'idcompositionblendeffect.g.dart';
+import 'idcompositionbrightnesseffect.g.dart';
+import 'idcompositionclip.g.dart';
+import 'idcompositioncolormatrixeffect.g.dart';
+import 'idcompositioncompositeeffect.g.dart';
+import 'idcompositiondelegatedinktrail.g.dart';
+import 'idcompositiondesktopdevice.g.dart';
+import 'idcompositiondevice.g.dart';
+import 'idcompositiondevice2.g.dart';
+import 'idcompositiondevice3.g.dart';
+import 'idcompositiondevice4.g.dart';
+import 'idcompositiondevice5.g.dart';
+import 'idcompositiondevicedebug.g.dart';
+import 'idcompositiondynamictexture.g.dart';
+import 'idcompositioneffect.g.dart';
+import 'idcompositioneffectgroup.g.dart';
+import 'idcompositionfiltereffect.g.dart';
+import 'idcompositiongaussianblureffect.g.dart';
+import 'idcompositionhuerotationeffect.g.dart';
+import 'idcompositioninktraildevice.g.dart';
+import 'idcompositionlineartransfereffect.g.dart';
+import 'idcompositionmatrixtransform.g.dart';
+import 'idcompositionmatrixtransform3d.g.dart';
+import 'idcompositionrectangleclip.g.dart';
+import 'idcompositionrotatetransform.g.dart';
+import 'idcompositionrotatetransform3d.g.dart';
+import 'idcompositionsaturationeffect.g.dart';
+import 'idcompositionscaletransform.g.dart';
+import 'idcompositionscaletransform3d.g.dart';
+import 'idcompositionshadoweffect.g.dart';
+import 'idcompositionskewtransform.g.dart';
+import 'idcompositionsurface.g.dart';
+import 'idcompositionsurfacefactory.g.dart';
+import 'idcompositiontabletransfereffect.g.dart';
+import 'idcompositiontarget.g.dart';
+import 'idcompositiontexture.g.dart';
+import 'idcompositiontransform.g.dart';
+import 'idcompositiontransform3d.g.dart';
+import 'idcompositiontranslatetransform.g.dart';
+import 'idcompositiontranslatetransform3d.g.dart';
+import 'idcompositionturbulenceeffect.g.dart';
+import 'idcompositionvirtualsurface.g.dart';
+import 'idcompositionvisual.g.dart';
+import 'idcompositionvisual2.g.dart';
+import 'idcompositionvisual3.g.dart';
+import 'idcompositionvisualdebug.g.dart';
 import 'idesktopwallpaper.g.dart';
 import 'idispatch.g.dart';
+import 'idxgiadapter.g.dart';
+import 'idxgidevice.g.dart';
+import 'idxgidevicesubobject.g.dart';
+import 'idxgiobject.g.dart';
+import 'idxgioutput.g.dart';
+import 'idxgisurface.g.dart';
+import 'idxgisurface1.g.dart';
+import 'idxgiswapchain.g.dart';
 import 'ienumconnectionpoints.g.dart';
 import 'ienumconnections.g.dart';
 import 'ienumidlist.g.dart';
@@ -360,8 +510,164 @@ const _predefinedCompanions = <Type, ComCompanion>{
   IClassFactory: IClassFactoryCompanion(),
   IConnectionPoint: IConnectionPointCompanion(),
   IConnectionPointContainer: IConnectionPointContainerCompanion(),
+  ID3D11Asynchronous: ID3D11AsynchronousCompanion(),
+  ID3D11AuthenticatedChannel: ID3D11AuthenticatedChannelCompanion(),
+  ID3D11BlendState: ID3D11BlendStateCompanion(),
+  ID3D11BlendState1: ID3D11BlendState1Companion(),
+  ID3D11Buffer: ID3D11BufferCompanion(),
+  ID3D11ClassInstance: ID3D11ClassInstanceCompanion(),
+  ID3D11ClassLinkage: ID3D11ClassLinkageCompanion(),
+  ID3D11CommandList: ID3D11CommandListCompanion(),
+  ID3D11ComputeShader: ID3D11ComputeShaderCompanion(),
+  ID3D11Counter: ID3D11CounterCompanion(),
+  ID3D11CryptoSession: ID3D11CryptoSessionCompanion(),
+  ID3D11Debug: ID3D11DebugCompanion(),
+  ID3D11DepthStencilState: ID3D11DepthStencilStateCompanion(),
+  ID3D11DepthStencilView: ID3D11DepthStencilViewCompanion(),
+  ID3D11Device: ID3D11DeviceCompanion(),
+  ID3D11Device1: ID3D11Device1Companion(),
+  ID3D11Device2: ID3D11Device2Companion(),
+  ID3D11Device3: ID3D11Device3Companion(),
+  ID3D11Device4: ID3D11Device4Companion(),
+  ID3D11Device5: ID3D11Device5Companion(),
+  ID3D11DeviceChild: ID3D11DeviceChildCompanion(),
+  ID3D11DeviceContext: ID3D11DeviceContextCompanion(),
+  ID3D11DeviceContext1: ID3D11DeviceContext1Companion(),
+  ID3D11DeviceContext2: ID3D11DeviceContext2Companion(),
+  ID3D11DeviceContext3: ID3D11DeviceContext3Companion(),
+  ID3D11DeviceContext4: ID3D11DeviceContext4Companion(),
+  ID3D11DomainShader: ID3D11DomainShaderCompanion(),
+  ID3D11Fence: ID3D11FenceCompanion(),
+  ID3D11FunctionLinkingGraph: ID3D11FunctionLinkingGraphCompanion(),
+  ID3D11FunctionParameterReflection:
+      ID3D11FunctionParameterReflectionCompanion(),
+  ID3D11FunctionReflection: ID3D11FunctionReflectionCompanion(),
+  ID3D11GeometryShader: ID3D11GeometryShaderCompanion(),
+  ID3D11HullShader: ID3D11HullShaderCompanion(),
+  ID3D11InfoQueue: ID3D11InfoQueueCompanion(),
+  ID3D11InputLayout: ID3D11InputLayoutCompanion(),
+  ID3D11LibraryReflection: ID3D11LibraryReflectionCompanion(),
+  ID3D11Linker: ID3D11LinkerCompanion(),
+  ID3D11LinkingNode: ID3D11LinkingNodeCompanion(),
+  ID3D11Module: ID3D11ModuleCompanion(),
+  ID3D11ModuleInstance: ID3D11ModuleInstanceCompanion(),
+  ID3D11Multithread: ID3D11MultithreadCompanion(),
+  ID3D11PixelShader: ID3D11PixelShaderCompanion(),
+  ID3D11Predicate: ID3D11PredicateCompanion(),
+  ID3D11Query: ID3D11QueryCompanion(),
+  ID3D11Query1: ID3D11Query1Companion(),
+  ID3D11RasterizerState: ID3D11RasterizerStateCompanion(),
+  ID3D11RasterizerState1: ID3D11RasterizerState1Companion(),
+  ID3D11RasterizerState2: ID3D11RasterizerState2Companion(),
+  ID3D11RefDefaultTrackingOptions: ID3D11RefDefaultTrackingOptionsCompanion(),
+  ID3D11RefTrackingOptions: ID3D11RefTrackingOptionsCompanion(),
+  ID3D11RenderTargetView: ID3D11RenderTargetViewCompanion(),
+  ID3D11RenderTargetView1: ID3D11RenderTargetView1Companion(),
+  ID3D11Resource: ID3D11ResourceCompanion(),
+  ID3D11SamplerState: ID3D11SamplerStateCompanion(),
+  ID3D11ShaderReflection: ID3D11ShaderReflectionCompanion(),
+  ID3D11ShaderReflectionConstantBuffer:
+      ID3D11ShaderReflectionConstantBufferCompanion(),
+  ID3D11ShaderReflectionType: ID3D11ShaderReflectionTypeCompanion(),
+  ID3D11ShaderReflectionVariable: ID3D11ShaderReflectionVariableCompanion(),
+  ID3D11ShaderResourceView: ID3D11ShaderResourceViewCompanion(),
+  ID3D11ShaderResourceView1: ID3D11ShaderResourceView1Companion(),
+  ID3D11ShaderTrace: ID3D11ShaderTraceCompanion(),
+  ID3D11ShaderTraceFactory: ID3D11ShaderTraceFactoryCompanion(),
+  ID3D11SwitchToRef: ID3D11SwitchToRefCompanion(),
+  ID3D11Texture1D: ID3D11Texture1DCompanion(),
+  ID3D11Texture2D: ID3D11Texture2DCompanion(),
+  ID3D11Texture2D1: ID3D11Texture2D1Companion(),
+  ID3D11Texture3D: ID3D11Texture3DCompanion(),
+  ID3D11Texture3D1: ID3D11Texture3D1Companion(),
+  ID3D11TracingDevice: ID3D11TracingDeviceCompanion(),
+  ID3D11UnorderedAccessView: ID3D11UnorderedAccessViewCompanion(),
+  ID3D11UnorderedAccessView1: ID3D11UnorderedAccessView1Companion(),
+  ID3D11VertexShader: ID3D11VertexShaderCompanion(),
+  ID3D11VideoContext: ID3D11VideoContextCompanion(),
+  ID3D11VideoContext1: ID3D11VideoContext1Companion(),
+  ID3D11VideoContext2: ID3D11VideoContext2Companion(),
+  ID3D11VideoContext3: ID3D11VideoContext3Companion(),
+  ID3D11VideoDecoder: ID3D11VideoDecoderCompanion(),
+  ID3D11VideoDecoderOutputView: ID3D11VideoDecoderOutputViewCompanion(),
+  ID3D11VideoDevice: ID3D11VideoDeviceCompanion(),
+  ID3D11VideoDevice1: ID3D11VideoDevice1Companion(),
+  ID3D11VideoDevice2: ID3D11VideoDevice2Companion(),
+  ID3D11VideoProcessor: ID3D11VideoProcessorCompanion(),
+  ID3D11VideoProcessorEnumerator: ID3D11VideoProcessorEnumeratorCompanion(),
+  ID3D11VideoProcessorEnumerator1: ID3D11VideoProcessorEnumerator1Companion(),
+  ID3D11VideoProcessorInputView: ID3D11VideoProcessorInputViewCompanion(),
+  ID3D11VideoProcessorOutputView: ID3D11VideoProcessorOutputViewCompanion(),
+  ID3D11View: ID3D11ViewCompanion(),
+  ID3DBlob: ID3DBlobCompanion(),
+  ID3DDeviceContextState: ID3DDeviceContextStateCompanion(),
+  ID3DUserDefinedAnnotation: ID3DUserDefinedAnnotationCompanion(),
+  ID3DX11FFT: ID3DX11FFTCompanion(),
+  ID3DX11Scan: ID3DX11ScanCompanion(),
+  ID3DX11SegmentedScan: ID3DX11SegmentedScanCompanion(),
+  IDCompositionAffineTransform2DEffect:
+      IDCompositionAffineTransform2DEffectCompanion(),
+  IDCompositionAnimation: IDCompositionAnimationCompanion(),
+  IDCompositionArithmeticCompositeEffect:
+      IDCompositionArithmeticCompositeEffectCompanion(),
+  IDCompositionBlendEffect: IDCompositionBlendEffectCompanion(),
+  IDCompositionBrightnessEffect: IDCompositionBrightnessEffectCompanion(),
+  IDCompositionClip: IDCompositionClipCompanion(),
+  IDCompositionColorMatrixEffect: IDCompositionColorMatrixEffectCompanion(),
+  IDCompositionCompositeEffect: IDCompositionCompositeEffectCompanion(),
+  IDCompositionDelegatedInkTrail: IDCompositionDelegatedInkTrailCompanion(),
+  IDCompositionDesktopDevice: IDCompositionDesktopDeviceCompanion(),
+  IDCompositionDevice: IDCompositionDeviceCompanion(),
+  IDCompositionDevice2: IDCompositionDevice2Companion(),
+  IDCompositionDevice3: IDCompositionDevice3Companion(),
+  IDCompositionDevice4: IDCompositionDevice4Companion(),
+  IDCompositionDevice5: IDCompositionDevice5Companion(),
+  IDCompositionDeviceDebug: IDCompositionDeviceDebugCompanion(),
+  IDCompositionDynamicTexture: IDCompositionDynamicTextureCompanion(),
+  IDCompositionEffect: IDCompositionEffectCompanion(),
+  IDCompositionEffectGroup: IDCompositionEffectGroupCompanion(),
+  IDCompositionFilterEffect: IDCompositionFilterEffectCompanion(),
+  IDCompositionGaussianBlurEffect: IDCompositionGaussianBlurEffectCompanion(),
+  IDCompositionHueRotationEffect: IDCompositionHueRotationEffectCompanion(),
+  IDCompositionInkTrailDevice: IDCompositionInkTrailDeviceCompanion(),
+  IDCompositionLinearTransferEffect:
+      IDCompositionLinearTransferEffectCompanion(),
+  IDCompositionMatrixTransform: IDCompositionMatrixTransformCompanion(),
+  IDCompositionMatrixTransform3D: IDCompositionMatrixTransform3DCompanion(),
+  IDCompositionRectangleClip: IDCompositionRectangleClipCompanion(),
+  IDCompositionRotateTransform: IDCompositionRotateTransformCompanion(),
+  IDCompositionRotateTransform3D: IDCompositionRotateTransform3DCompanion(),
+  IDCompositionSaturationEffect: IDCompositionSaturationEffectCompanion(),
+  IDCompositionScaleTransform: IDCompositionScaleTransformCompanion(),
+  IDCompositionScaleTransform3D: IDCompositionScaleTransform3DCompanion(),
+  IDCompositionShadowEffect: IDCompositionShadowEffectCompanion(),
+  IDCompositionSkewTransform: IDCompositionSkewTransformCompanion(),
+  IDCompositionSurface: IDCompositionSurfaceCompanion(),
+  IDCompositionSurfaceFactory: IDCompositionSurfaceFactoryCompanion(),
+  IDCompositionTableTransferEffect: IDCompositionTableTransferEffectCompanion(),
+  IDCompositionTarget: IDCompositionTargetCompanion(),
+  IDCompositionTexture: IDCompositionTextureCompanion(),
+  IDCompositionTransform: IDCompositionTransformCompanion(),
+  IDCompositionTransform3D: IDCompositionTransform3DCompanion(),
+  IDCompositionTranslateTransform: IDCompositionTranslateTransformCompanion(),
+  IDCompositionTranslateTransform3D:
+      IDCompositionTranslateTransform3DCompanion(),
+  IDCompositionTurbulenceEffect: IDCompositionTurbulenceEffectCompanion(),
+  IDCompositionVirtualSurface: IDCompositionVirtualSurfaceCompanion(),
+  IDCompositionVisual: IDCompositionVisualCompanion(),
+  IDCompositionVisual2: IDCompositionVisual2Companion(),
+  IDCompositionVisual3: IDCompositionVisual3Companion(),
+  IDCompositionVisualDebug: IDCompositionVisualDebugCompanion(),
   IDesktopWallpaper: IDesktopWallpaperCompanion(),
   IDispatch: IDispatchCompanion(),
+  IDXGIAdapter: IDXGIAdapterCompanion(),
+  IDXGIDevice: IDXGIDeviceCompanion(),
+  IDXGIDeviceSubObject: IDXGIDeviceSubObjectCompanion(),
+  IDXGIObject: IDXGIObjectCompanion(),
+  IDXGIOutput: IDXGIOutputCompanion(),
+  IDXGISurface: IDXGISurfaceCompanion(),
+  IDXGISurface1: IDXGISurface1Companion(),
+  IDXGISwapChain: IDXGISwapChainCompanion(),
   IEnumConnectionPoints: IEnumConnectionPointsCompanion(),
   IEnumConnections: IEnumConnectionsCompanion(),
   IEnumIDList: IEnumIDListCompanion(),

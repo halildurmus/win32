@@ -41,7 +41,7 @@ const constantFileHeader = '''
 // Dart representations of Win32 constants.
 //
 // ignore_for_file: camel_case_types, constant_identifier_names
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, use_raw_strings
 
 import 'dart:ffi';
 import 'dart:typed_data';

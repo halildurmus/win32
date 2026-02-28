@@ -204,6 +204,11 @@ abstract final class DocsSanitizer {
       (m) => '`sizeOf<${m.group(1)}>()`',
     ),
     (s) => s.replaceAll(RegExp(r'(`\*\*|\*\*`)'), '`'),
+    // Escape bare [identifier] references that aren't valid Dart symbols.
+    (s) => s.replaceAllMapped(
+      RegExp(r'(?<!`)\[(\w+)\](?!`)'),
+      (m) => '`[${m.group(1)}]`',
+    ),
   ];
 
   static final _ampQuoteRegExp = RegExp(r'&quot;(\w+)&quot;');

@@ -16,5 +16,6 @@ dev_dependencies:
   ffi_leak_tracker: ^0.1.0
   halildurmus_hooks: ^0.1.1
   halildurmus_lints: ^2.0.0
+  image: ^4.8.0
   path: ^1.9.1
   win32: ^6.0.0

@@ -107,8 +107,224 @@ export 'src/com/iclassfactory.g.dart' hide IClassFactoryCompanion;
 export 'src/com/iconnectionpoint.g.dart' hide IConnectionPointCompanion;
 export 'src/com/iconnectionpointcontainer.g.dart'
     hide IConnectionPointContainerCompanion;
+export 'src/com/id3d11asynchronous.g.dart' hide ID3D11AsynchronousCompanion;
+export 'src/com/id3d11authenticatedchannel.g.dart'
+    hide ID3D11AuthenticatedChannelCompanion;
+export 'src/com/id3d11blendstate.g.dart' hide ID3D11BlendStateCompanion;
+export 'src/com/id3d11blendstate1.g.dart' hide ID3D11BlendState1Companion;
+export 'src/com/id3d11buffer.g.dart' hide ID3D11BufferCompanion;
+export 'src/com/id3d11classinstance.g.dart' hide ID3D11ClassInstanceCompanion;
+export 'src/com/id3d11classlinkage.g.dart' hide ID3D11ClassLinkageCompanion;
+export 'src/com/id3d11commandlist.g.dart' hide ID3D11CommandListCompanion;
+export 'src/com/id3d11computeshader.g.dart' hide ID3D11ComputeShaderCompanion;
+export 'src/com/id3d11counter.g.dart' hide ID3D11CounterCompanion;
+export 'src/com/id3d11cryptosession.g.dart' hide ID3D11CryptoSessionCompanion;
+export 'src/com/id3d11debug.g.dart' hide ID3D11DebugCompanion;
+export 'src/com/id3d11depthstencilstate.g.dart'
+    hide ID3D11DepthStencilStateCompanion;
+export 'src/com/id3d11depthstencilview.g.dart'
+    hide ID3D11DepthStencilViewCompanion;
+export 'src/com/id3d11device.g.dart' hide ID3D11DeviceCompanion;
+export 'src/com/id3d11device1.g.dart' hide ID3D11Device1Companion;
+export 'src/com/id3d11device2.g.dart' hide ID3D11Device2Companion;
+export 'src/com/id3d11device3.g.dart' hide ID3D11Device3Companion;
+export 'src/com/id3d11device4.g.dart' hide ID3D11Device4Companion;
+export 'src/com/id3d11device5.g.dart' hide ID3D11Device5Companion;
+export 'src/com/id3d11devicechild.g.dart' hide ID3D11DeviceChildCompanion;
+export 'src/com/id3d11devicecontext.g.dart' hide ID3D11DeviceContextCompanion;
+export 'src/com/id3d11devicecontext1.g.dart' hide ID3D11DeviceContext1Companion;
+export 'src/com/id3d11devicecontext2.g.dart' hide ID3D11DeviceContext2Companion;
+export 'src/com/id3d11devicecontext3.g.dart' hide ID3D11DeviceContext3Companion;
+export 'src/com/id3d11devicecontext4.g.dart' hide ID3D11DeviceContext4Companion;
+export 'src/com/id3d11domainshader.g.dart' hide ID3D11DomainShaderCompanion;
+export 'src/com/id3d11fence.g.dart' hide ID3D11FenceCompanion;
+export 'src/com/id3d11functionlinkinggraph.g.dart'
+    hide ID3D11FunctionLinkingGraphCompanion;
+export 'src/com/id3d11functionparameterreflection.g.dart'
+    hide ID3D11FunctionParameterReflectionCompanion;
+export 'src/com/id3d11functionreflection.g.dart'
+    hide ID3D11FunctionReflectionCompanion;
+export 'src/com/id3d11geometryshader.g.dart' hide ID3D11GeometryShaderCompanion;
+export 'src/com/id3d11hullshader.g.dart' hide ID3D11HullShaderCompanion;
+export 'src/com/id3d11infoqueue.g.dart' hide ID3D11InfoQueueCompanion;
+export 'src/com/id3d11inputlayout.g.dart' hide ID3D11InputLayoutCompanion;
+export 'src/com/id3d11libraryreflection.g.dart'
+    hide ID3D11LibraryReflectionCompanion;
+export 'src/com/id3d11linker.g.dart' hide ID3D11LinkerCompanion;
+export 'src/com/id3d11linkingnode.g.dart' hide ID3D11LinkingNodeCompanion;
+export 'src/com/id3d11module.g.dart' hide ID3D11ModuleCompanion;
+export 'src/com/id3d11moduleinstance.g.dart' hide ID3D11ModuleInstanceCompanion;
+export 'src/com/id3d11multithread.g.dart' hide ID3D11MultithreadCompanion;
+export 'src/com/id3d11pixelshader.g.dart' hide ID3D11PixelShaderCompanion;
+export 'src/com/id3d11predicate.g.dart' hide ID3D11PredicateCompanion;
+export 'src/com/id3d11query.g.dart' hide ID3D11QueryCompanion;
+export 'src/com/id3d11query1.g.dart' hide ID3D11Query1Companion;
+export 'src/com/id3d11rasterizerstate.g.dart'
+    hide ID3D11RasterizerStateCompanion;
+export 'src/com/id3d11rasterizerstate1.g.dart'
+    hide ID3D11RasterizerState1Companion;
+export 'src/com/id3d11rasterizerstate2.g.dart'
+    hide ID3D11RasterizerState2Companion;
+export 'src/com/id3d11refdefaulttrackingoptions.g.dart'
+    hide ID3D11RefDefaultTrackingOptionsCompanion;
+export 'src/com/id3d11reftrackingoptions.g.dart'
+    hide ID3D11RefTrackingOptionsCompanion;
+export 'src/com/id3d11rendertargetview.g.dart'
+    hide ID3D11RenderTargetViewCompanion;
+export 'src/com/id3d11rendertargetview1.g.dart'
+    hide ID3D11RenderTargetView1Companion;
+export 'src/com/id3d11resource.g.dart' hide ID3D11ResourceCompanion;
+export 'src/com/id3d11samplerstate.g.dart' hide ID3D11SamplerStateCompanion;
+export 'src/com/id3d11shaderreflection.g.dart'
+    hide ID3D11ShaderReflectionCompanion;
+export 'src/com/id3d11shaderreflectionconstantbuffer.g.dart'
+    hide ID3D11ShaderReflectionConstantBufferCompanion;
+export 'src/com/id3d11shaderreflectiontype.g.dart'
+    hide ID3D11ShaderReflectionTypeCompanion;
+export 'src/com/id3d11shaderreflectionvariable.g.dart'
+    hide ID3D11ShaderReflectionVariableCompanion;
+export 'src/com/id3d11shaderresourceview.g.dart'
+    hide ID3D11ShaderResourceViewCompanion;
+export 'src/com/id3d11shaderresourceview1.g.dart'
+    hide ID3D11ShaderResourceView1Companion;
+export 'src/com/id3d11shadertrace.g.dart' hide ID3D11ShaderTraceCompanion;
+export 'src/com/id3d11shadertracefactory.g.dart'
+    hide ID3D11ShaderTraceFactoryCompanion;
+export 'src/com/id3d11switchtoref.g.dart' hide ID3D11SwitchToRefCompanion;
+export 'src/com/id3d11texture1d.g.dart' hide ID3D11Texture1DCompanion;
+export 'src/com/id3d11texture2d.g.dart' hide ID3D11Texture2DCompanion;
+export 'src/com/id3d11texture2d1.g.dart' hide ID3D11Texture2D1Companion;
+export 'src/com/id3d11texture3d.g.dart' hide ID3D11Texture3DCompanion;
+export 'src/com/id3d11texture3d1.g.dart' hide ID3D11Texture3D1Companion;
+export 'src/com/id3d11tracingdevice.g.dart' hide ID3D11TracingDeviceCompanion;
+export 'src/com/id3d11unorderedaccessview.g.dart'
+    hide ID3D11UnorderedAccessViewCompanion;
+export 'src/com/id3d11unorderedaccessview1.g.dart'
+    hide ID3D11UnorderedAccessView1Companion;
+export 'src/com/id3d11vertexshader.g.dart' hide ID3D11VertexShaderCompanion;
+export 'src/com/id3d11videocontext.g.dart' hide ID3D11VideoContextCompanion;
+export 'src/com/id3d11videocontext1.g.dart' hide ID3D11VideoContext1Companion;
+export 'src/com/id3d11videocontext2.g.dart' hide ID3D11VideoContext2Companion;
+export 'src/com/id3d11videocontext3.g.dart' hide ID3D11VideoContext3Companion;
+export 'src/com/id3d11videodecoder.g.dart' hide ID3D11VideoDecoderCompanion;
+export 'src/com/id3d11videodecoderoutputview.g.dart'
+    hide ID3D11VideoDecoderOutputViewCompanion;
+export 'src/com/id3d11videodevice.g.dart' hide ID3D11VideoDeviceCompanion;
+export 'src/com/id3d11videodevice1.g.dart' hide ID3D11VideoDevice1Companion;
+export 'src/com/id3d11videodevice2.g.dart' hide ID3D11VideoDevice2Companion;
+export 'src/com/id3d11videoprocessor.g.dart' hide ID3D11VideoProcessorCompanion;
+export 'src/com/id3d11videoprocessorenumerator.g.dart'
+    hide ID3D11VideoProcessorEnumeratorCompanion;
+export 'src/com/id3d11videoprocessorenumerator1.g.dart'
+    hide ID3D11VideoProcessorEnumerator1Companion;
+export 'src/com/id3d11videoprocessorinputview.g.dart'
+    hide ID3D11VideoProcessorInputViewCompanion;
+export 'src/com/id3d11videoprocessoroutputview.g.dart'
+    hide ID3D11VideoProcessorOutputViewCompanion;
+export 'src/com/id3d11view.g.dart' hide ID3D11ViewCompanion;
+export 'src/com/id3dblob.g.dart' hide ID3DBlobCompanion;
+export 'src/com/id3ddevicecontextstate.g.dart'
+    hide ID3DDeviceContextStateCompanion;
+export 'src/com/id3duserdefinedannotation.g.dart'
+    hide ID3DUserDefinedAnnotationCompanion;
+export 'src/com/id3dx11fft.g.dart' hide ID3DX11FFTCompanion;
+export 'src/com/id3dx11scan.g.dart' hide ID3DX11ScanCompanion;
+export 'src/com/id3dx11segmentedscan.g.dart' hide ID3DX11SegmentedScanCompanion;
+export 'src/com/idcompositionaffinetransform2deffect.g.dart'
+    hide IDCompositionAffineTransform2DEffectCompanion;
+export 'src/com/idcompositionanimation.g.dart'
+    hide IDCompositionAnimationCompanion;
+export 'src/com/idcompositionarithmeticcompositeeffect.g.dart'
+    hide IDCompositionArithmeticCompositeEffectCompanion;
+export 'src/com/idcompositionblendeffect.g.dart'
+    hide IDCompositionBlendEffectCompanion;
+export 'src/com/idcompositionbrightnesseffect.g.dart'
+    hide IDCompositionBrightnessEffectCompanion;
+export 'src/com/idcompositionclip.g.dart' hide IDCompositionClipCompanion;
+export 'src/com/idcompositioncolormatrixeffect.g.dart'
+    hide IDCompositionColorMatrixEffectCompanion;
+export 'src/com/idcompositioncompositeeffect.g.dart'
+    hide IDCompositionCompositeEffectCompanion;
+export 'src/com/idcompositiondelegatedinktrail.g.dart'
+    hide IDCompositionDelegatedInkTrailCompanion;
+export 'src/com/idcompositiondesktopdevice.g.dart'
+    hide IDCompositionDesktopDeviceCompanion;
+export 'src/com/idcompositiondevice.g.dart' hide IDCompositionDeviceCompanion;
+export 'src/com/idcompositiondevice2.g.dart' hide IDCompositionDevice2Companion;
+export 'src/com/idcompositiondevice3.g.dart' hide IDCompositionDevice3Companion;
+export 'src/com/idcompositiondevice4.g.dart' hide IDCompositionDevice4Companion;
+export 'src/com/idcompositiondevice5.g.dart' hide IDCompositionDevice5Companion;
+export 'src/com/idcompositiondevicedebug.g.dart'
+    hide IDCompositionDeviceDebugCompanion;
+export 'src/com/idcompositiondynamictexture.g.dart'
+    hide IDCompositionDynamicTextureCompanion;
+export 'src/com/idcompositioneffect.g.dart' hide IDCompositionEffectCompanion;
+export 'src/com/idcompositioneffectgroup.g.dart'
+    hide IDCompositionEffectGroupCompanion;
+export 'src/com/idcompositionfiltereffect.g.dart'
+    hide IDCompositionFilterEffectCompanion;
+export 'src/com/idcompositiongaussianblureffect.g.dart'
+    hide IDCompositionGaussianBlurEffectCompanion;
+export 'src/com/idcompositionhuerotationeffect.g.dart'
+    hide IDCompositionHueRotationEffectCompanion;
+export 'src/com/idcompositioninktraildevice.g.dart'
+    hide IDCompositionInkTrailDeviceCompanion;
+export 'src/com/idcompositionlineartransfereffect.g.dart'
+    hide IDCompositionLinearTransferEffectCompanion;
+export 'src/com/idcompositionmatrixtransform.g.dart'
+    hide IDCompositionMatrixTransformCompanion;
+export 'src/com/idcompositionmatrixtransform3d.g.dart'
+    hide IDCompositionMatrixTransform3DCompanion;
+export 'src/com/idcompositionrectangleclip.g.dart'
+    hide IDCompositionRectangleClipCompanion;
+export 'src/com/idcompositionrotatetransform.g.dart'
+    hide IDCompositionRotateTransformCompanion;
+export 'src/com/idcompositionrotatetransform3d.g.dart'
+    hide IDCompositionRotateTransform3DCompanion;
+export 'src/com/idcompositionsaturationeffect.g.dart'
+    hide IDCompositionSaturationEffectCompanion;
+export 'src/com/idcompositionscaletransform.g.dart'
+    hide IDCompositionScaleTransformCompanion;
+export 'src/com/idcompositionscaletransform3d.g.dart'
+    hide IDCompositionScaleTransform3DCompanion;
+export 'src/com/idcompositionshadoweffect.g.dart'
+    hide IDCompositionShadowEffectCompanion;
+export 'src/com/idcompositionskewtransform.g.dart'
+    hide IDCompositionSkewTransformCompanion;
+export 'src/com/idcompositionsurface.g.dart' hide IDCompositionSurfaceCompanion;
+export 'src/com/idcompositionsurfacefactory.g.dart'
+    hide IDCompositionSurfaceFactoryCompanion;
+export 'src/com/idcompositiontabletransfereffect.g.dart'
+    hide IDCompositionTableTransferEffectCompanion;
+export 'src/com/idcompositiontarget.g.dart' hide IDCompositionTargetCompanion;
+export 'src/com/idcompositiontexture.g.dart' hide IDCompositionTextureCompanion;
+export 'src/com/idcompositiontransform.g.dart'
+    hide IDCompositionTransformCompanion;
+export 'src/com/idcompositiontransform3d.g.dart'
+    hide IDCompositionTransform3DCompanion;
+export 'src/com/idcompositiontranslatetransform.g.dart'
+    hide IDCompositionTranslateTransformCompanion;
+export 'src/com/idcompositiontranslatetransform3d.g.dart'
+    hide IDCompositionTranslateTransform3DCompanion;
+export 'src/com/idcompositionturbulenceeffect.g.dart'
+    hide IDCompositionTurbulenceEffectCompanion;
+export 'src/com/idcompositionvirtualsurface.g.dart'
+    hide IDCompositionVirtualSurfaceCompanion;
+export 'src/com/idcompositionvisual.g.dart' hide IDCompositionVisualCompanion;
+export 'src/com/idcompositionvisual2.g.dart' hide IDCompositionVisual2Companion;
+export 'src/com/idcompositionvisual3.g.dart' hide IDCompositionVisual3Companion;
+export 'src/com/idcompositionvisualdebug.g.dart'
+    hide IDCompositionVisualDebugCompanion;
 export 'src/com/idesktopwallpaper.g.dart' hide IDesktopWallpaperCompanion;
 export 'src/com/idispatch.g.dart' hide IDispatchCompanion;
+export 'src/com/idxgiadapter.g.dart' hide IDXGIAdapterCompanion;
+export 'src/com/idxgidevice.g.dart' hide IDXGIDeviceCompanion;
+export 'src/com/idxgidevicesubobject.g.dart' hide IDXGIDeviceSubObjectCompanion;
+export 'src/com/idxgiobject.g.dart' hide IDXGIObjectCompanion;
+export 'src/com/idxgioutput.g.dart' hide IDXGIOutputCompanion;
+export 'src/com/idxgisurface.g.dart' hide IDXGISurfaceCompanion;
+export 'src/com/idxgisurface1.g.dart' hide IDXGISurface1Companion;
+export 'src/com/idxgiswapchain.g.dart' hide IDXGISwapChainCompanion;
 export 'src/com/ienumconnectionpoints.g.dart'
     hide IEnumConnectionPointsCompanion;
 export 'src/com/ienumconnections.g.dart' hide IEnumConnectionsCompanion;

@@ -119,24 +119,25 @@ Examples that integrate with the Windows shell and user environment.
 Classic desktop UI examples demonstrating message loops, painting, dialogs,
 and input handling.
 
-| Example               | Description                                 |
-| --------------------- | --------------------------------------------|
-| [dartnote]            | Lightweight Notepad-style text editor       |
-| [snake]               | Snake game using GDI rendering              |
-| [task_dialog]         | Modern task dialogs                         |
-| [tetris]              | Tetris game using GDI rendering             |
-| [usb_drive_monitor]   | Monitoring USB insertion and removal events |
-| [hello.dart]          | Canonical Win32 “Hello, world”              |
-| [msgbox.dart]         | Displaying a message box from the console   |
-| [commdlg.dart]        | Color chooser common dialog                 |
-| [customtitlebar.dart] | Owner-drawn title bar regions               |
-| [customwin.dart]      | Non-rectangular window rendering            |
-| [dialogbox.dart]      | Custom dialogs defined entirely in code     |
-| [dialogshow.dart]     | File picker dialogs via COM                 |
-| [paint.dart]          | Basic painting and window sizing            |
-| [scroll.dart]         | Horizontal and vertical scrolling           |
-| [sendinput.dart]      | Synthesizing keyboard and mouse input       |
-| [window.dart]         | Enumerating and manipulating windows        |
+| Example                   | Description                                 |
+| ------------------------- | ------------------------------------------- |
+| [dartnote]                | Lightweight Notepad-style text editor       |
+| [snake]                   | Snake game using GDI rendering              |
+| [task_dialog]             | Modern task dialogs                         |
+| [tetris]                  | Tetris game using GDI rendering             |
+| [usb_drive_monitor]       | Monitoring USB insertion and removal events |
+| [hello.dart]              | Canonical Win32 “Hello, world”              |
+| [msgbox.dart]             | Displaying a message box from the console   |
+| [commdlg.dart]            | Color chooser common dialog                 |
+| [customtitlebar.dart]     | Owner-drawn title bar regions               |
+| [customwin.dart]          | Non-rectangular window rendering            |
+| [dialogbox.dart]          | Custom dialogs defined entirely in code     |
+| [dialogshow.dart]         | File picker dialogs via COM                 |
+| [direct_composition.dart] | Rendering with DirectComposition API        |
+| [paint.dart]              | Basic painting and window sizing            |
+| [scroll.dart]             | Horizontal and vertical scrolling           |
+| [sendinput.dart]          | Synthesizing keyboard and mouse input       |
+| [window.dart]             | Enumerating and manipulating windows        |
 
 [dartnote]: https://github.com/halildurmus/win32/blob/main/examples/dartnote
 [snake]: https://github.com/halildurmus/win32/blob/main/examples/snake
@@ -150,6 +151,7 @@ and input handling.
 [customwin.dart]: https://github.com/halildurmus/win32/blob/main/examples/customwin.dart
 [dialogbox.dart]: https://github.com/halildurmus/win32/blob/main/examples/dialogbox.dart
 [dialogshow.dart]: https://github.com/halildurmus/win32/blob/main/examples/dialogshow.dart
+[direct_composition.dart]: https://github.com/halildurmus/win32/blob/main/examples/direct_composition.dart
 [paint.dart]: https://github.com/halildurmus/win32/blob/main/examples/paint.dart
 [scroll.dart]: https://github.com/halildurmus/win32/blob/main/examples/scroll.dart
 [sendinput.dart]: https://github.com/halildurmus/win32/blob/main/examples/sendinput.dart
