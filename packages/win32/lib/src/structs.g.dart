@@ -313,7 +313,7 @@ base class APPX_PACKAGE_SETTINGS extends Struct {
 
   external VTablePointer _hashMethod;
 
-  /// [TRUE] if the package is created as Zip32; [FALSE] if the package is
+  /// `[TRUE]` if the package is created as Zip32; `[FALSE]` if the package is
   /// created as Zip64.
   bool get forceZip32 => _forceZip32 != FALSE;
 
@@ -930,7 +930,7 @@ base class BLUETOOTH_AUTHENTICATE_RESPONSE extends Struct {
 
   external BLUETOOTH_AUTHENTICATE_RESPONSE_0 Anonymous;
 
-  /// [TRUE] if the authentication request was rejected; otherwise [FALSE].
+  /// `[TRUE]` if the authentication request was rejected; otherwise `[FALSE]`.
   @Uint8()
   external int negativeResponse;
 
@@ -1505,36 +1505,36 @@ base class BLUETOOTH_SELECT_DEVICE_PARAMS extends Struct {
 
   set hwndParent(HWND value) => _hwndParent = value;
 
-  /// If [TRUE], forces authentication before returning.
+  /// If `[TRUE]`, forces authentication before returning.
   bool get fForceAuthentication => _fForceAuthentication != FALSE;
 
   set fForceAuthentication(bool value) =>
       _fForceAuthentication = value ? TRUE : FALSE;
 
-  /// If [TRUE], authenticated devices are shown in the picker.
+  /// If `[TRUE]`, authenticated devices are shown in the picker.
   bool get fShowAuthenticated => _fShowAuthenticated != FALSE;
 
   set fShowAuthenticated(bool value) =>
       _fShowAuthenticated = value ? TRUE : FALSE;
 
-  /// If [TRUE], remembered devices are shown in the picker.
+  /// If `[TRUE]`, remembered devices are shown in the picker.
   bool get fShowRemembered => _fShowRemembered != FALSE;
 
   set fShowRemembered(bool value) => _fShowRemembered = value ? TRUE : FALSE;
 
-  /// If [TRUE], unknown devices that are not authenticated or remembered are
+  /// If `[TRUE]`, unknown devices that are not authenticated or remembered are
   /// shown in the picker.
   bool get fShowUnknown => _fShowUnknown != FALSE;
 
   set fShowUnknown(bool value) => _fShowUnknown = value ? TRUE : FALSE;
 
-  /// If [TRUE], starts the Add New Device wizard.
+  /// If `[TRUE]`, starts the Add New Device wizard.
   bool get fAddNewDeviceWizard => _fAddNewDeviceWizard != FALSE;
 
   set fAddNewDeviceWizard(bool value) =>
       _fAddNewDeviceWizard = value ? TRUE : FALSE;
 
-  /// If [TRUE], skips the Services page in the Add New Device wizard.
+  /// If `[TRUE]`, skips the Services page in the Add New Device wizard.
   bool get fSkipServicesPage => _fSkipServicesPage != FALSE;
 
   set fSkipServicesPage(bool value) =>
@@ -2849,8 +2849,8 @@ base class CBTACTIVATESTRUCT extends Struct {
 
   external Pointer _hWndActive;
 
-  /// This member is [TRUE] if a mouse click is causing the activation or
-  /// [FALSE] if it is not.
+  /// This member is `[TRUE]` if a mouse click is causing the activation or
+  /// `[FALSE]` if it is not.
   bool get fMouse => _fMouse != FALSE;
 
   set fMouse(bool value) => _fMouse = value ? TRUE : FALSE;
@@ -2969,8 +2969,8 @@ base class CERT_EXTENSION extends Struct {
 
   set pszObjId(PSTR value) => _pszObjId = value;
 
-  /// If [TRUE], any limitations specified by the extension in the <b>Value</b>
-  /// member of this structure are imperative.
+  /// If `[TRUE]`, any limitations specified by the extension in the
+  /// <b>Value</b> member of this structure are imperative.
   bool get fCritical => _fCritical != FALSE;
 
   set fCritical(bool value) => _fCritical = value ? TRUE : FALSE;
@@ -6852,7 +6852,7 @@ base class DTTOPTS extends Struct {
 
   set crShadow(COLORREF value) => _crShadow = value;
 
-  /// If [TRUE], text will be drawn on top of the shadow and outline effects.
+  /// If `[TRUE]`, text will be drawn on top of the shadow and outline effects.
   bool get fApplyOverlay => _fApplyOverlay != FALSE;
 
   set fApplyOverlay(bool value) => _fApplyOverlay = value ? TRUE : FALSE;
@@ -6897,7 +6897,7 @@ base class DWM_BLURBEHIND extends Struct {
   @Int32()
   external int _fTransitionOnMaximized;
 
-  /// [TRUE] to register the window handle to DWM blur behind; [FALSE] to
+  /// `[TRUE]` to register the window handle to DWM blur behind; `[FALSE]` to
   /// unregister the window handle from DWM blur behind.
   bool get fEnable => _fEnable != FALSE;
 
@@ -6908,8 +6908,8 @@ base class DWM_BLURBEHIND extends Struct {
 
   set hRgnBlur(HRGN value) => _hRgnBlur = value;
 
-  /// [TRUE] if the window's colorization should transition to match the
-  /// maximized windows; otherwise, [FALSE].
+  /// `[TRUE]` if the window's colorization should transition to match the
+  /// maximized windows; otherwise, `[FALSE]`.
   bool get fTransitionOnMaximized => _fTransitionOnMaximized != FALSE;
 
   set fTransitionOnMaximized(bool value) =>
@@ -9281,8 +9281,8 @@ base class IP_ADAPTER_ADDRESSES_LH extends Struct {
   @Uint32()
   external int _CompartmentId;
 
-  /// The [GUID] that is associated with the network that the interface belongs
-  /// to.
+  /// The `[GUID]` that is associated with the network that the interface
+  /// belongs to.
   external GUID NetworkGuid;
 
   @Int32()
@@ -10547,7 +10547,7 @@ base class KEY_EVENT_RECORD extends Struct {
   @Uint32()
   external int dwControlKeyState;
 
-  /// If the key is pressed, this member is [TRUE].
+  /// If the key is pressed, this member is `[TRUE]`.
   bool get bKeyDown => _bKeyDown != FALSE;
 
   set bKeyDown(bool value) => _bKeyDown = value ? TRUE : FALSE;
@@ -10824,15 +10824,15 @@ base class LOGFONT extends Struct {
   @Int32()
   external int lfWeight;
 
-  /// [TRUE] to specify an italic font.
+  /// `[TRUE]` to specify an italic font.
   @Uint8()
   external int lfItalic;
 
-  /// [TRUE] to specify an underlined font.
+  /// `[TRUE]` to specify an underlined font.
   @Uint8()
   external int lfUnderline;
 
-  /// [TRUE] to specify a strikeout font.
+  /// `[TRUE]` to specify a strikeout font.
   @Uint8()
   external int lfStrikeOut;
 
@@ -17129,7 +17129,7 @@ base class SERVICE_DELAYED_AUTO_START_INFO extends Struct {
   @Int32()
   external int _fDelayedAutostart;
 
-  /// If this member is [TRUE], the service is started after other auto-start
+  /// If this member is `[TRUE]`, the service is started after other auto-start
   /// services are started plus a short delay.
   bool get fDelayedAutostart => _fDelayedAutostart != FALSE;
 
@@ -17234,7 +17234,7 @@ base class SERVICE_FAILURE_ACTIONS_FLAG extends Struct {
   @Int32()
   external int _fFailureActionsOnNonCrashFailures;
 
-  /// If this member is [TRUE] and the service has configured failure actions,
+  /// If this member is `[TRUE]` and the service has configured failure actions,
   /// the failure actions are queued if the service process terminates without
   /// reporting a status of SERVICE_STOPPED or if it enters the SERVICE_STOPPED
   /// state but the <b>dwWin32ExitCode</b> member of the <a
@@ -17858,7 +17858,7 @@ extension SHELLEXECUTEINFO_0_Extension on SHELLEXECUTEINFO {
 ///
 /// {@category struct}
 base class SHELL_ITEM_RESOURCE extends Struct {
-  /// The [GUID] that identifies the item.
+  /// The `[GUID]` that identifies the item.
   external GUID guidType;
 
   @Array(260)
@@ -17975,8 +17975,8 @@ base class SHFILEOPSTRUCT extends Struct {
 
   set pTo(PWSTR value) => _pTo = value;
 
-  /// When the function returns, this member contains [TRUE] if any file
-  /// operations were aborted before they were completed; otherwise, [FALSE].
+  /// When the function returns, this member contains `[TRUE]` if any file
+  /// operations were aborted before they were completed; otherwise, `[FALSE]`.
   bool get fAnyOperationsAborted => _fAnyOperationsAborted != FALSE;
 
   set fAnyOperationsAborted(bool value) =>
@@ -19098,23 +19098,23 @@ base class SYSTEM_BATTERY_STATE extends Struct {
   @Uint32()
   external int DefaultAlert2;
 
-  /// If this member is [TRUE], the system battery charger is currently
+  /// If this member is `[TRUE]`, the system battery charger is currently
   /// operating on external power.
   bool get AcOnLine => _AcOnLine != FALSE;
 
   set AcOnLine(bool value) => _AcOnLine = value ? TRUE : FALSE;
 
-  /// If this member is [TRUE], at least one battery is present in the system.
+  /// If this member is `[TRUE]`, at least one battery is present in the system.
   bool get BatteryPresent => _BatteryPresent != FALSE;
 
   set BatteryPresent(bool value) => _BatteryPresent = value ? TRUE : FALSE;
 
-  /// If this member is [TRUE], a battery is currently charging.
+  /// If this member is `[TRUE]`, a battery is currently charging.
   bool get Charging => _Charging != FALSE;
 
   set Charging(bool value) => _Charging = value ? TRUE : FALSE;
 
-  /// If this member is [TRUE], a battery is currently discharging.
+  /// If this member is `[TRUE]`, a battery is currently discharging.
   bool get Discharging => _Discharging != FALSE;
 
   set Discharging(bool value) => _Discharging = value ? TRUE : FALSE;
@@ -22583,7 +22583,7 @@ base class WLAN_DEVICE_SERVICE_GUID_LIST extends Struct {
   @Uint32()
   external int dwIndex;
 
-  /// A pointer to an array containing [GUID]s; each corresponds to a WLAN
+  /// A pointer to an array containing `[GUID]`s; each corresponds to a WLAN
   /// device service that the driver supports.
   @Array.variableWithVariableDimension(1)
   external Array<GUID> DeviceService;
@@ -22605,7 +22605,7 @@ base class WLAN_DEVICE_SERVICE_GUID_LIST extends Struct {
 ///
 /// {@category struct}
 base class WLAN_DEVICE_SERVICE_NOTIFICATION_DATA extends Struct {
-  /// The [GUID] identifying the device service for this notification.
+  /// The `[GUID]` identifying the device service for this notification.
   external GUID DeviceService;
 
   /// The opcode that identifies the operation under the device service for this
