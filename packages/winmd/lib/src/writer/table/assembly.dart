@@ -67,5 +67,5 @@ final class AssemblyCompanion extends RowCompanion<Assembly> {
   const AssemblyCompanion();
 
   @override
-  MetadataTableId get tableId => MetadataTableId.assembly;
+  MetadataTableId get tableId => .assembly;
 }

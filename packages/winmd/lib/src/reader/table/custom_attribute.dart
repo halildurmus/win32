@@ -110,7 +110,7 @@ final class CustomAttribute extends Row {
   };
 
   @override
-  MetadataTable get table => MetadataTable.customAttribute;
+  MetadataTable get table => .customAttribute;
 
   @override
   int get token => (MetadataTableId.customAttribute << 24) | index;
@@ -151,5 +151,5 @@ final class CustomAttributeCompanion extends RowCompanion<CustomAttribute> {
       CustomAttribute.new;
 
   @override
-  MetadataTable get table => MetadataTable.customAttribute;
+  MetadataTable get table => .customAttribute;
 }

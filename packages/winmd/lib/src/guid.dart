@@ -81,9 +81,9 @@ final class Guid {
     bytes[8] = (bytes[8] & 0x3F) | 0x80;
 
     final byteData = ByteData.sublistView(bytes);
-    final data1 = byteData.getUint32(0, Endian.little);
-    final data2 = byteData.getUint16(4, Endian.little);
-    final data3 = byteData.getUint16(6, Endian.little);
+    final data1 = byteData.getUint32(0, .little);
+    final data2 = byteData.getUint16(4, .little);
+    final data3 = byteData.getUint16(6, .little);
     final data4 = Uint8List.sublistView(bytes, 8, 16);
     return Guid(data1, data2, data3, data4.asUnmodifiableView());
   }
@@ -118,9 +118,9 @@ final class Guid {
     }
 
     final byteData = ByteData.sublistView(bytes);
-    final data1 = byteData.getUint32(0, Endian.little);
-    final data2 = byteData.getUint16(4, Endian.little);
-    final data3 = byteData.getUint16(6, Endian.little);
+    final data1 = byteData.getUint32(0, .little);
+    final data2 = byteData.getUint16(4, .little);
+    final data3 = byteData.getUint16(6, .little);
     final data4 = Uint8List.sublistView(bytes, 8, 16);
     return Guid(data1, data2, data3, data4.asUnmodifiableView());
   }
@@ -255,9 +255,9 @@ extension GuidExtension on Guid {
   Uint8List toBytes() {
     final bytes = Uint8List(16);
     final byteData = ByteData.view(bytes.buffer)
-      ..setUint32(0, data1, Endian.little)
-      ..setUint16(4, data2, Endian.little)
-      ..setUint16(6, data3, Endian.little);
+      ..setUint32(0, data1, .little)
+      ..setUint16(4, data2, .little)
+      ..setUint16(6, data3, .little);
     for (var i = 0; i < 8; i++) {
       byteData.setUint8(8 + i, data4[i]);
     }

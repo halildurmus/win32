@@ -60,5 +60,5 @@ final class GenericParamCompanion extends RowCompanion<GenericParam> {
   const GenericParamCompanion();
 
   @override
-  MetadataTableId get tableId => MetadataTableId.genericParam;
+  MetadataTableId get tableId => .genericParam;
 }

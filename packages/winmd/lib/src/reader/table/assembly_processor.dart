@@ -16,7 +16,7 @@ final class AssemblyProcessor extends Row {
   AssemblyProcessor(super.metadataIndex, super.readerIndex, super.index);
 
   @override
-  MetadataTable get table => MetadataTable.assemblyProcessor;
+  MetadataTable get table => .assemblyProcessor;
 
   @override
   int get token => (MetadataTableId.assemblyProcessor << 24) | index;
@@ -37,5 +37,5 @@ final class AssemblyProcessorCompanion extends RowCompanion<AssemblyProcessor> {
       AssemblyProcessor.new;
 
   @override
-  MetadataTable get table => MetadataTable.assemblyProcessor;
+  MetadataTable get table => .assemblyProcessor;
 }

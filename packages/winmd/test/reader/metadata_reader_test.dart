@@ -3,7 +3,6 @@ import 'dart:typed_data';
 import 'package:checks/checks.dart';
 import 'package:test/scaffolding.dart';
 import 'package:winmd/windows_metadata.dart';
-import 'package:winmd/winmd.dart';
 
 import '../versions.dart';
 
@@ -38,7 +37,7 @@ void main() async {
       check(guidHeap.count).equals(1);
       check(guidHeap.guids)
         ..length.equals(1)
-        ..first.equals(Guid.fromString('4a520299-e458-4675-befb-318972b60e6a'));
+        ..first.equals(.fromString('4a520299-e458-4675-befb-318972b60e6a'));
     });
 
     test('stringHeap', () {
@@ -60,7 +59,7 @@ void main() async {
 
     group('readBlob', () {
       test('returns list with correct data', () {
-        final blob = win32Reader.readBlob(0, MetadataTable.assemblyRef, 2);
+        final blob = win32Reader.readBlob(0, .assemblyRef, 2);
         check(blob)
           ..isNotEmpty()
           ..deepEquals(
@@ -71,84 +70,78 @@ void main() async {
       });
 
       test('returns empty list', () {
-        final blob = win32Reader.readBlob(0, MetadataTable.assemblyRef, 5);
+        final blob = win32Reader.readBlob(0, .assemblyRef, 5);
         check(blob).isEmpty();
       });
     });
 
     test('readGuid', () {
-      final guid = win32Reader.readGuid(0, MetadataTable.module, 2);
+      final guid = win32Reader.readGuid(0, .module, 2);
       check(guid.toString()).equals('4a520299-e458-4675-befb-318972b60e6a');
     });
 
     group('readString', () {
       test('returns correct string', () {
-        final str = win32Reader.readString(0, MetadataTable.module, 1);
+        final str = win32Reader.readString(0, .module, 1);
         check(str).equals('Windows.Win32.winmd');
       });
 
       test('returns empty string', () {
-        final str = win32Reader.readString(0, MetadataTable.assemblyRef, 4);
+        final str = win32Reader.readString(0, .assemblyRef, 4);
         check(str).equals('');
       });
     });
 
     group('readUint', () {
       test('2-byte', () {
-        final value = win32Reader.readUint(0, MetadataTable.classLayout, 0);
+        final value = win32Reader.readUint(0, .classLayout, 0);
         check(value).equals(4);
       });
 
       test('4-byte', () {
-        final value = win32Reader.readUint(0, MetadataTable.assemblyRef, 1);
+        final value = win32Reader.readUint(0, .assemblyRef, 1);
         check(value).equals(0);
       });
 
       test('8-byte', () {
-        final value = win32Reader.readUint(0, MetadataTable.assemblyRef, 0);
+        final value = win32Reader.readUint(0, .assemblyRef, 0);
         check(value).equals(65538);
       });
     });
 
     test('readUint16', () {
-      final value = win32Reader.readUint16(0, MetadataTable.classLayout, 0);
+      final value = win32Reader.readUint16(0, .classLayout, 0);
       check(value).equals(4);
     });
 
     test('readUint32', () {
-      final value = win32Reader.readUint32(0, MetadataTable.assemblyRef, 1);
+      final value = win32Reader.readUint32(0, .assemblyRef, 1);
       check(value).equals(0);
     });
 
     test('readUint64', () {
-      final value = win32Reader.readUint64(0, MetadataTable.assemblyRef, 0);
+      final value = win32Reader.readUint64(0, .assemblyRef, 0);
       check(value).equals(65538);
     });
 
     test('getEqualRange', () {
       final range = win32Reader
-          .getEqualRange(
-            MetadataTable.implMap,
-            1,
-            ((0 /* index */ + 1) << 1) | 1,
-          )
+          .getEqualRange(.implMap, 1, ((0 /* index */ + 1) << 1) | 1)
           .toList();
       check(range.length).equals(1);
       check(range[0]).equals(0);
     });
 
     test('getList', () {
-      final paramList = win32Reader
-          .getList(2, MetadataTable.methodDef, 5, MetadataTable.param)
-          .toList();
+      final paramList = win32Reader.getList(2, .methodDef, 5, .param).toList();
       check(paramList.length).equals(2);
       check(paramList[0]).equals(1);
       check(paramList[1]).equals(2);
     });
 
     test('getParentRow', () {
-      check(win32Reader.getParentRow(0, MetadataTable.methodDef, 5)).equals(0);
-      check(win32Reader.getParentRow(1, MetadataTable.methodDef, 5)).equals(2);
+      check(win32Reader.getParentRow(0, .methodDef, 5)).equals(0);
+      check(win32Reader.getParentRow(1, .methodDef, 5)).equals(2);
     });
   });
 }

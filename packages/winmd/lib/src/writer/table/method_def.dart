@@ -56,5 +56,5 @@ final class MethodDefCompanion extends RowCompanion<MethodDef> {
   const MethodDefCompanion();
 
   @override
-  MetadataTableId get tableId => MetadataTableId.methodDef;
+  MetadataTableId get tableId => .methodDef;
 }

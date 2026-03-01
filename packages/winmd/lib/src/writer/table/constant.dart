@@ -45,5 +45,5 @@ final class ConstantCompanion extends RowCompanion<Constant> {
   const ConstantCompanion();
 
   @override
-  MetadataTableId get tableId => MetadataTableId.constant;
+  MetadataTableId get tableId => .constant;
 }

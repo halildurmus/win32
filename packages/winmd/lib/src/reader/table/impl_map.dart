@@ -23,7 +23,7 @@ final class ImplMap extends Row {
   ImplMap(super.metadataIndex, super.readerIndex, super.index);
 
   @override
-  MetadataTable get table => MetadataTable.implMap;
+  MetadataTable get table => .implMap;
 
   @override
   int get token => (MetadataTableId.implMap << 24) | index;
@@ -73,5 +73,5 @@ final class ImplMapCompanion extends RowCompanion<ImplMap> {
   ImplMap Function(MetadataIndex, int, int) get constructor => ImplMap.new;
 
   @override
-  MetadataTable get table => MetadataTable.implMap;
+  MetadataTable get table => .implMap;
 }

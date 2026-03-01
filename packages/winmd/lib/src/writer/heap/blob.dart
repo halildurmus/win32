@@ -21,14 +21,14 @@ final class BlobHeap extends MetadataHeap<Uint8List, BlobIndex> {
   BlobHeap.empty()
     : super(
         HashMap(equals: listEqual, hashCode: Object.hashAll),
-        BytesBuilder(copy: false),
+        .new(copy: false),
       ) {
     buffer.addByte(0x00); // Add an empty blob.
   }
 
   @override
   BlobIndex insert(Uint8List key) {
-    if (key.isEmpty) return const BlobIndex(0);
+    if (key.isEmpty) return const .new(0);
     if (map[key] case final existing?) return existing;
     final index = BlobIndex(buffer.length);
     final header = CompressedInteger.encode(key.length);

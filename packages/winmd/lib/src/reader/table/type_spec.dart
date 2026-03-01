@@ -18,7 +18,7 @@ final class TypeSpec extends Row with HasCustomAttributes {
   TypeSpec(super.metadataIndex, super.readerIndex, super.index);
 
   @override
-  MetadataTable get table => MetadataTable.typeSpec;
+  MetadataTable get table => .typeSpec;
 
   @override
   int get token => (MetadataTableId.typeSpec << 24) | index;
@@ -35,5 +35,5 @@ final class TypeSpecCompanion extends RowCompanion<TypeSpec> {
   TypeSpec Function(MetadataIndex, int, int) get constructor => TypeSpec.new;
 
   @override
-  MetadataTable get table => MetadataTable.typeSpec;
+  MetadataTable get table => .typeSpec;
 }

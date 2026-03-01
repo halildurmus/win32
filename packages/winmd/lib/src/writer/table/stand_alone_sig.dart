@@ -31,5 +31,5 @@ final class StandAloneSigCompanion extends RowCompanion<StandAloneSig> {
   const StandAloneSigCompanion();
 
   @override
-  MetadataTableId get tableId => MetadataTableId.standAloneSig;
+  MetadataTableId get tableId => .standAloneSig;
 }

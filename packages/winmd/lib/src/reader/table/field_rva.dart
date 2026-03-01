@@ -18,7 +18,7 @@ final class FieldRVA extends Row {
   FieldRVA(super.metadataIndex, super.readerIndex, super.index);
 
   @override
-  MetadataTable get table => MetadataTable.fieldRVA;
+  MetadataTable get table => .fieldRVA;
 
   @override
   int get token => (MetadataTableId.fieldRVA << 24) | index;
@@ -42,5 +42,5 @@ final class FieldRVACompanion extends RowCompanion<FieldRVA> {
   FieldRVA Function(MetadataIndex, int, int) get constructor => FieldRVA.new;
 
   @override
-  MetadataTable get table => MetadataTable.fieldRVA;
+  MetadataTable get table => .fieldRVA;
 }

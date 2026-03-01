@@ -16,10 +16,8 @@ void main() async {
 
   setUpAll(() async {
     tempDir = Directory.systemTemp.createTempSync('winmd_metadata_index_test');
-    localStorageManager = LocalStorageManager(storagePath: tempDir.path);
-    metadataLoader = WindowsMetadataLoader(
-      localStorageManager: localStorageManager,
-    );
+    localStorageManager = .new(storagePath: tempDir.path);
+    metadataLoader = .new(localStorageManager: localStorageManager);
 
     win32Index = await metadataLoader.loadWin32Metadata(
       version: win32MetadataVersion,
@@ -437,7 +435,7 @@ void main() async {
       check(typeSpecs.length).equals(1126);
       check(typeSpecs[0].signature).equals(
         const NamedClassType(
-          TypeName(
+          .new(
             'Windows.Foundation.Collections',
             'IMapView`2',
             generics: [StringType(), ObjectType()],
@@ -446,13 +444,11 @@ void main() async {
       );
       check(typeSpecs.last.signature).equals(
         const NamedClassType(
-          TypeName(
+          .new(
             'Windows.Foundation',
             'TypedEventHandler`2',
             generics: [
-              NamedClassType(
-                TypeName('Windows.Web.UI.Interop', 'WebViewControl'),
-              ),
+              NamedClassType(.new('Windows.Web.UI.Interop', 'WebViewControl')),
               ObjectType(),
             ],
           ),

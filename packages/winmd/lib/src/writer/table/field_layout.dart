@@ -35,5 +35,5 @@ final class FieldLayoutCompanion extends RowCompanion<FieldLayout> {
   const FieldLayoutCompanion();
 
   @override
-  MetadataTableId get tableId => MetadataTableId.fieldLayout;
+  MetadataTableId get tableId => .fieldLayout;
 }

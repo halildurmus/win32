@@ -19,7 +19,7 @@ final class EventMap extends Row {
   EventMap(super.metadataIndex, super.readerIndex, super.index);
 
   @override
-  MetadataTable get table => MetadataTable.eventMap;
+  MetadataTable get table => .eventMap;
 
   @override
   int get token => (MetadataTableId.eventMap << 24) | index;
@@ -42,5 +42,5 @@ final class EventMapCompanion extends RowCompanion<EventMap> {
   EventMap Function(MetadataIndex, int, int) get constructor => EventMap.new;
 
   @override
-  MetadataTable get table => MetadataTable.eventMap;
+  MetadataTable get table => .eventMap;
 }

@@ -31,6 +31,6 @@ final class GuidHeap extends MetadataHeap {
     final data2 = byteData.getUint16(4, Endian.little);
     final data3 = byteData.getUint16(6, Endian.little);
     final data4 = Uint8List.sublistView(data, offset + 8, offset + 16);
-    return Guid(data1, data2, data3, data4.asUnmodifiableView());
+    return .new(data1, data2, data3, data4.asUnmodifiableView());
   }
 }

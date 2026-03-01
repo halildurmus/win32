@@ -18,7 +18,7 @@ final class FieldLayout extends Row {
   FieldLayout(super.metadataIndex, super.readerIndex, super.index);
 
   @override
-  MetadataTable get table => MetadataTable.fieldLayout;
+  MetadataTable get table => .fieldLayout;
 
   @override
   int get token => (MetadataTableId.fieldLayout << 24) | index;
@@ -45,5 +45,5 @@ final class FieldLayoutCompanion extends RowCompanion<FieldLayout> {
       FieldLayout.new;
 
   @override
-  MetadataTable get table => MetadataTable.fieldLayout;
+  MetadataTable get table => .fieldLayout;
 }

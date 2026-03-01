@@ -31,5 +31,5 @@ final class ModuleRefCompanion extends RowCompanion<ModuleRef> {
   const ModuleRefCompanion();
 
   @override
-  MetadataTableId get tableId => MetadataTableId.moduleRef;
+  MetadataTableId get tableId => .moduleRef;
 }

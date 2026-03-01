@@ -36,5 +36,5 @@ final class InterfaceImplCompanion extends RowCompanion<InterfaceImpl> {
   const InterfaceImplCompanion();
 
   @override
-  MetadataTableId get tableId => MetadataTableId.interfaceImpl;
+  MetadataTableId get tableId => .interfaceImpl;
 }

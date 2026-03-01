@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:typed_data';
 
 import 'metadata_heap.dart';
 
@@ -21,13 +20,13 @@ final class StringHeap extends MetadataHeap<String, StringIndex> {
   ///
   /// This ensures that references to the empty string in metadata always
   /// resolve to a valid offset, as required by the metadata format.
-  StringHeap.empty() : super({}, BytesBuilder(copy: false)) {
+  StringHeap.empty() : super({}, .new(copy: false)) {
     buffer.addByte(0x00); // Add an empty string.
   }
 
   @override
   StringIndex insert(String key) {
-    if (key.isEmpty) return const StringIndex(0);
+    if (key.isEmpty) return const .new(0);
     if (map[key] case final existing?) return existing;
     final index = StringIndex(buffer.length);
     map[key] = index;

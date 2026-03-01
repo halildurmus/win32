@@ -16,7 +16,7 @@ final class PropertySig extends MethodSignature {
   /// the getter method has no parameters.
   const PropertySig({
     required super.returnType,
-    super.callingConvention = CallingConvention.DEFAULT,
+    super.callingConvention = .DEFAULT,
     super.types = const [],
   });
 

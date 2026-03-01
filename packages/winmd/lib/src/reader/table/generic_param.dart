@@ -23,7 +23,7 @@ final class GenericParam extends Row with HasCustomAttributes {
   GenericParam(super.metadataIndex, super.readerIndex, super.index);
 
   @override
-  MetadataTable get table => MetadataTable.genericParam;
+  MetadataTable get table => .genericParam;
 
   @override
   int get token => (MetadataTableId.genericParam << 24) | index;
@@ -80,5 +80,5 @@ final class GenericParamCompanion extends RowCompanion<GenericParam> {
       GenericParam.new;
 
   @override
-  MetadataTable get table => MetadataTable.genericParam;
+  MetadataTable get table => .genericParam;
 }

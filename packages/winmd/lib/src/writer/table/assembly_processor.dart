@@ -30,5 +30,5 @@ final class AssemblyProcessorCompanion extends RowCompanion<AssemblyProcessor> {
   const AssemblyProcessorCompanion();
 
   @override
-  MetadataTableId get tableId => MetadataTableId.assemblyProcessor;
+  MetadataTableId get tableId => .assemblyProcessor;
 }

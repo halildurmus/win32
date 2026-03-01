@@ -60,8 +60,8 @@ void main() {
     test('can load multiple metadata selectively', () async {
       final metadataLoader = WindowsMetadataLoader();
       final index = await metadataLoader.loadMultipleMetadata(
-        packages: [WindowsMetadataPackage.wdk, WindowsMetadataPackage.win32],
-        versions: const WindowsMetadataVersions(
+        packages: [.wdk, .win32],
+        versions: const .new(
           wdk: wdkMetadataVersion,
           win32: win32MetadataVersion,
         ),
@@ -94,7 +94,7 @@ void main() {
           await metadataLoader.loadWin32Metadata(version: win32MetadataVersion);
           check(
             localStorageManager.findPackageDirectory(
-              WindowsMetadataPackage.win32,
+              .win32,
               win32MetadataVersion,
             ),
           ).isNotNull().endsWith(
@@ -123,16 +123,13 @@ void main() {
       try {
         await metadataLoader.loadAllMetadata(versions: versions);
         check(
-          localStorageManager.findPackageDirectory(
-            WindowsMetadataPackage.wdk,
-            wdkMetadataVersion,
-          ),
+          localStorageManager.findPackageDirectory(.wdk, wdkMetadataVersion),
         ).isNotNull().endsWith(
           'microsoft.windows.wdk.win32metadata@$wdkMetadataVersion',
         );
         check(
           localStorageManager.findPackageDirectory(
-            WindowsMetadataPackage.win32,
+            .win32,
             win32MetadataVersion,
           ),
         ).isNotNull().endsWith(
@@ -140,7 +137,7 @@ void main() {
         );
         check(
           localStorageManager.findPackageDirectory(
-            WindowsMetadataPackage.winrt,
+            .winrt,
             winrtMetadataVersion,
           ),
         ).isNotNull().endsWith(

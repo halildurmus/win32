@@ -54,5 +54,5 @@ final class MemberRefCompanion extends RowCompanion<MemberRef> {
   const MemberRefCompanion();
 
   @override
-  MetadataTableId get tableId => MetadataTableId.memberRef;
+  MetadataTableId get tableId => .memberRef;
 }

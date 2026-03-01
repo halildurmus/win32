@@ -18,7 +18,7 @@ final class StandAloneSig extends Row with HasCustomAttributes {
   StandAloneSig(super.metadataIndex, super.readerIndex, super.index);
 
   @override
-  MetadataTable get table => MetadataTable.standAloneSig;
+  MetadataTable get table => .standAloneSig;
 
   @override
   int get token => (MetadataTableId.standAloneSig << 24) | index;
@@ -38,5 +38,5 @@ final class StandAloneSigCompanion extends RowCompanion<StandAloneSig> {
       StandAloneSig.new;
 
   @override
-  MetadataTable get table => MetadataTable.standAloneSig;
+  MetadataTable get table => .standAloneSig;
 }

@@ -21,13 +21,13 @@ final class UserStringHeap extends MetadataHeap<String, UserStringIndex> {
   ///
   /// This ensures that references to the empty string in metadata always
   /// resolve to a valid offset, as required by the metadata format.
-  UserStringHeap.empty() : super({}, BytesBuilder(copy: false)) {
+  UserStringHeap.empty() : super({}, .new(copy: false)) {
     buffer.addByte(0x00); // Add an empty blob.
   }
 
   @override
   UserStringIndex insert(String key) {
-    if (key.isEmpty) return const UserStringIndex(0);
+    if (key.isEmpty) return const .new(0);
     if (map[key] case final existing?) return existing;
     final index = UserStringIndex(buffer.length);
     final utf16Bytes = _utf16Encode(key);
@@ -58,7 +58,7 @@ final class UserStringHeap extends MetadataHeap<String, UserStringIndex> {
     final result = Uint8List(codeUnits.length * 2);
     final byteData = ByteData.sublistView(result);
     for (var i = 0; i < codeUnits.length; i++) {
-      byteData.setUint16(i * 2, codeUnits[i], Endian.little);
+      byteData.setUint16(i * 2, codeUnits[i], .little);
     }
     return result;
   }

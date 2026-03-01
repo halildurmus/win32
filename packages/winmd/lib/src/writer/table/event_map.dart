@@ -35,5 +35,5 @@ final class EventMapCompanion extends RowCompanion<EventMap> {
   const EventMapCompanion();
 
   @override
-  MetadataTableId get tableId => MetadataTableId.eventMap;
+  MetadataTableId get tableId => .eventMap;
 }

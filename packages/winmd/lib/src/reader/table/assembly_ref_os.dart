@@ -20,7 +20,7 @@ final class AssemblyRefOS extends Row {
   AssemblyRefOS(super.metadataIndex, super.readerIndex, super.index);
 
   @override
-  MetadataTable get table => MetadataTable.assemblyRefOS;
+  MetadataTable get table => .assemblyRefOS;
 
   @override
   int get token => (MetadataTableId.assemblyRefOS << 24) | index;
@@ -53,5 +53,5 @@ final class AssemblyRefOSCompanion extends RowCompanion<AssemblyRefOS> {
       AssemblyRefOS.new;
 
   @override
-  MetadataTable get table => MetadataTable.assemblyRefOS;
+  MetadataTable get table => .assemblyRefOS;
 }

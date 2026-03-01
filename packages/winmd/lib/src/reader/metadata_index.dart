@@ -78,14 +78,14 @@ final class MetadataIndex {
         namespaceToTypeMap
             .putIfAbsent(namespace, HashMap.new)
             .putIfAbsent(name, () => [])
-            .add(_ReaderAndTypeDefIndex(readerIndex, typeDefIndex));
+            .add(.new(readerIndex, typeDefIndex));
       }
 
       for (final nestedClass in tableStream.nestedClass) {
         final inner = reader.readUint(nestedClass, nestedClassTable, 0) - 1;
         final outer = reader.readUint(nestedClass, nestedClassTable, 1) - 1;
         nestedTypeMap
-            .putIfAbsent(_ReaderAndTypeDefIndex(readerIndex, outer), () => [])
+            .putIfAbsent(.new(readerIndex, outer), () => [])
             .add(inner);
       }
     }
@@ -113,7 +113,7 @@ final class MetadataIndex {
   /// Enumerates all [TypeDef]s available in this index.
   Iterable<TypeDef> get allTypes => _namespaceToTypeMap.values.expand(
     (namespace) => namespace.values.expand(
-      (types) => types.map((e) => TypeDef(this, e.readerIndex, e.typeDefIndex)),
+      (types) => types.map((e) => .new(this, e.readerIndex, e.typeDefIndex)),
     ),
   );
 
@@ -127,7 +127,7 @@ final class MetadataIndex {
     return e.value.entries.expand((e) {
       final name = e.key;
       return e.value.map(
-        (e) => (namespace, name, TypeDef(this, e.readerIndex, e.typeDefIndex)),
+        (e) => (namespace, name, .new(this, e.readerIndex, e.typeDefIndex)),
       );
     });
   });
@@ -135,16 +135,16 @@ final class MetadataIndex {
   /// Enumerates the nested types defined under the given [parent] type.
   Iterable<TypeDef> nestedTypes(TypeDef parent) =>
       _nestedTypeMap[_ReaderAndTypeDefIndex(parent.readerIndex, parent.index)]
-          ?.map((index) => TypeDef(this, parent.readerIndex, index)) ??
+          ?.map((index) => .new(this, parent.readerIndex, index)) ??
       const Iterable.empty();
 
   /// Enumerates all [TypeDef] instances matching the given [namespace] and
   /// [name].
   Iterable<TypeDef> findTypes(String namespace, String name) =>
       _namespaceToTypeMap[namespace]?[name]?.map(
-        (e) => TypeDef(this, e.readerIndex, e.typeDefIndex),
+        (e) => .new(this, e.readerIndex, e.typeDefIndex),
       ) ??
-      const Iterable.empty();
+      const .empty();
 
   /// Finds a single [TypeDef] matching the given [namespace] and [name].
   ///
@@ -173,245 +173,213 @@ final class MetadataIndex {
 
   /// Enumerates all [Assembly] entries across all readers.
   Iterable<Assembly> get assembly => readers.indexed.expand(
-    (e) =>
-        e.$2.tableStream.assembly.map((index) => Assembly(this, e.$1, index)),
+    (e) => e.$2.tableStream.assembly.map((index) => .new(this, e.$1, index)),
   );
 
   /// Enumerates all [AssemblyOS] entries across all readers.
   Iterable<AssemblyOS> get assemblyOS => readers.indexed.expand(
-    (e) => e.$2.tableStream.assemblyOS.map(
-      (index) => AssemblyOS(this, e.$1, index),
-    ),
+    (e) => e.$2.tableStream.assemblyOS.map((index) => .new(this, e.$1, index)),
   );
 
   /// Enumerates all [AssemblyProcessor] entries across all readers.
   Iterable<AssemblyProcessor> get assemblyProcessor => readers.indexed.expand(
     (e) => e.$2.tableStream.assemblyProcessor.map(
-      (index) => AssemblyProcessor(this, e.$1, index),
+      (index) => .new(this, e.$1, index),
     ),
   );
 
   /// Enumerates all [AssemblyRef] entries across all readers.
   Iterable<AssemblyRef> get assemblyRef => readers.indexed.expand(
-    (e) => e.$2.tableStream.assemblyRef.map(
-      (index) => AssemblyRef(this, e.$1, index),
-    ),
+    (e) => e.$2.tableStream.assemblyRef.map((index) => .new(this, e.$1, index)),
   );
 
   /// Enumerates all [AssemblyRefOS] entries across all readers.
   Iterable<AssemblyRefOS> get assemblyRefOS => readers.indexed.expand(
-    (e) => e.$2.tableStream.assemblyRefOS.map(
-      (index) => AssemblyRefOS(this, e.$1, index),
-    ),
+    (e) =>
+        e.$2.tableStream.assemblyRefOS.map((index) => .new(this, e.$1, index)),
   );
 
   /// Enumerates all [AssemblyRefProcessor] entries across all readers.
   Iterable<AssemblyRefProcessor> get assemblyRefProcessor =>
       readers.indexed.expand(
         (e) => e.$2.tableStream.assemblyRefProcessor.map(
-          (index) => AssemblyRefProcessor(this, e.$1, index),
+          (index) => .new(this, e.$1, index),
         ),
       );
 
   /// Enumerates all [ClassLayout] entries across all readers.
   Iterable<ClassLayout> get classLayout => readers.indexed.expand(
-    (e) => e.$2.tableStream.classLayout.map(
-      (index) => ClassLayout(this, e.$1, index),
-    ),
+    (e) => e.$2.tableStream.classLayout.map((index) => .new(this, e.$1, index)),
   );
 
   /// Enumerates all [Constant] entries across all readers.
   Iterable<Constant> get constant => readers.indexed.expand(
-    (e) =>
-        e.$2.tableStream.constant.map((index) => Constant(this, e.$1, index)),
+    (e) => e.$2.tableStream.constant.map((index) => .new(this, e.$1, index)),
   );
 
   /// Enumerates all [CustomAttribute] entries across all readers.
   Iterable<CustomAttribute> get customAttribute => readers.indexed.expand(
     (e) => e.$2.tableStream.customAttribute.map(
-      (index) => CustomAttribute(this, e.$1, index),
+      (index) => .new(this, e.$1, index),
     ),
   );
 
   /// Enumerates all [DeclSecurity] entries across all readers.
   Iterable<DeclSecurity> get declSecurity => readers.indexed.expand(
-    (e) => e.$2.tableStream.declSecurity.map(
-      (index) => DeclSecurity(this, e.$1, index),
-    ),
+    (e) =>
+        e.$2.tableStream.declSecurity.map((index) => .new(this, e.$1, index)),
   );
 
   /// Enumerates all [Event] entries across all readers.
   Iterable<Event> get event => readers.indexed.expand(
-    (e) => e.$2.tableStream.event.map((index) => Event(this, e.$1, index)),
+    (e) => e.$2.tableStream.event.map((index) => .new(this, e.$1, index)),
   );
 
   /// Enumerates all [EventMap] entries across all readers.
   Iterable<EventMap> get eventMap => readers.indexed.expand(
-    (e) =>
-        e.$2.tableStream.eventMap.map((index) => EventMap(this, e.$1, index)),
+    (e) => e.$2.tableStream.eventMap.map((index) => .new(this, e.$1, index)),
   );
 
   /// Enumerates all [ExportedType] entries across all readers.
   Iterable<ExportedType> get exportedType => readers.indexed.expand(
-    (e) => e.$2.tableStream.exportedType.map(
-      (index) => ExportedType(this, e.$1, index),
-    ),
+    (e) =>
+        e.$2.tableStream.exportedType.map((index) => .new(this, e.$1, index)),
   );
 
   /// Enumerates all [Field] entries across all readers.
   Iterable<Field> get field => readers.indexed.expand(
-    (e) => e.$2.tableStream.field.map((index) => Field(this, e.$1, index)),
+    (e) => e.$2.tableStream.field.map((index) => .new(this, e.$1, index)),
   );
 
   /// Enumerates all [FieldLayout] entries across all readers.
   Iterable<FieldLayout> get fieldLayout => readers.indexed.expand(
-    (e) => e.$2.tableStream.fieldLayout.map(
-      (index) => FieldLayout(this, e.$1, index),
-    ),
+    (e) => e.$2.tableStream.fieldLayout.map((index) => .new(this, e.$1, index)),
   );
 
   /// Enumerates all [FieldMarshal] entries across all readers.
   Iterable<FieldMarshal> get fieldMarshal => readers.indexed.expand(
-    (e) => e.$2.tableStream.fieldMarshal.map(
-      (index) => FieldMarshal(this, e.$1, index),
-    ),
+    (e) =>
+        e.$2.tableStream.fieldMarshal.map((index) => .new(this, e.$1, index)),
   );
 
   /// Enumerates all [FieldRVA] entries across all readers.
   Iterable<FieldRVA> get fieldRVA => readers.indexed.expand(
-    (e) =>
-        e.$2.tableStream.fieldRVA.map((index) => FieldRVA(this, e.$1, index)),
+    (e) => e.$2.tableStream.fieldRVA.map((index) => .new(this, e.$1, index)),
   );
 
   /// Enumerates all [File] entries across all readers.
   Iterable<File> get file => readers.indexed.expand(
-    (e) => e.$2.tableStream.file.map((index) => File(this, e.$1, index)),
+    (e) => e.$2.tableStream.file.map((index) => .new(this, e.$1, index)),
   );
 
   /// Enumerates all [GenericParam] entries across all readers.
   Iterable<GenericParam> get genericParam => readers.indexed.expand(
-    (e) => e.$2.tableStream.genericParam.map(
-      (index) => GenericParam(this, e.$1, index),
-    ),
+    (e) =>
+        e.$2.tableStream.genericParam.map((index) => .new(this, e.$1, index)),
   );
 
   /// Enumerates all [GenericParamConstraint] entries across all readers.
   Iterable<GenericParamConstraint> get genericParamConstraint =>
       readers.indexed.expand(
         (e) => e.$2.tableStream.genericParamConstraint.map(
-          (index) => GenericParamConstraint(this, e.$1, index),
+          (index) => .new(this, e.$1, index),
         ),
       );
 
   /// Enumerates all [ImplMap] entries across all readers.
   Iterable<ImplMap> get implMap => readers.indexed.expand(
-    (e) => e.$2.tableStream.implMap.map((index) => ImplMap(this, e.$1, index)),
+    (e) => e.$2.tableStream.implMap.map((index) => .new(this, e.$1, index)),
   );
 
   /// Enumerates all [InterfaceImpl] entries across all readers.
   Iterable<InterfaceImpl> get interfaceImpl => readers.indexed.expand(
-    (e) => e.$2.tableStream.interfaceImpl.map(
-      (index) => InterfaceImpl(this, e.$1, index),
-    ),
+    (e) =>
+        e.$2.tableStream.interfaceImpl.map((index) => .new(this, e.$1, index)),
   );
 
   /// Enumerates all [ManifestResource] entries across all readers.
   Iterable<ManifestResource> get manifestResource => readers.indexed.expand(
     (e) => e.$2.tableStream.manifestResource.map(
-      (index) => ManifestResource(this, e.$1, index),
+      (index) => .new(this, e.$1, index),
     ),
   );
 
   /// Enumerates all [MemberRef] entries across all readers.
   Iterable<MemberRef> get memberRef => readers.indexed.expand(
-    (e) =>
-        e.$2.tableStream.memberRef.map((index) => MemberRef(this, e.$1, index)),
+    (e) => e.$2.tableStream.memberRef.map((index) => .new(this, e.$1, index)),
   );
 
   /// Enumerates all [MethodDef] entries across all readers.
   Iterable<MethodDef> get methodDef => readers.indexed.expand(
-    (e) =>
-        e.$2.tableStream.methodDef.map((index) => MethodDef(this, e.$1, index)),
+    (e) => e.$2.tableStream.methodDef.map((index) => .new(this, e.$1, index)),
   );
 
   /// Enumerates all [MethodImpl] entries across all readers.
   Iterable<MethodImpl> get methodImpl => readers.indexed.expand(
-    (e) => e.$2.tableStream.methodImpl.map(
-      (index) => MethodImpl(this, e.$1, index),
-    ),
+    (e) => e.$2.tableStream.methodImpl.map((index) => .new(this, e.$1, index)),
   );
 
   /// Enumerates all [MethodSemantics] entries across all readers.
   Iterable<MethodSemantics> get methodSemantics => readers.indexed.expand(
     (e) => e.$2.tableStream.methodSemantics.map(
-      (index) => MethodSemantics(this, e.$1, index),
+      (index) => .new(this, e.$1, index),
     ),
   );
 
   /// Enumerates all [MethodSpec] entries across all readers.
   Iterable<MethodSpec> get methodSpec => readers.indexed.expand(
-    (e) => e.$2.tableStream.methodSpec.map(
-      (index) => MethodSpec(this, e.$1, index),
-    ),
+    (e) => e.$2.tableStream.methodSpec.map((index) => .new(this, e.$1, index)),
   );
 
   /// Enumerates all [Module] entries across all readers.
   Iterable<Module> get module => readers.indexed.expand(
-    (e) => e.$2.tableStream.module.map((index) => Module(this, e.$1, index)),
+    (e) => e.$2.tableStream.module.map((index) => .new(this, e.$1, index)),
   );
 
   /// Enumerates all [ModuleRef] entries across all readers.
   Iterable<ModuleRef> get moduleRef => readers.indexed.expand(
-    (e) =>
-        e.$2.tableStream.moduleRef.map((index) => ModuleRef(this, e.$1, index)),
+    (e) => e.$2.tableStream.moduleRef.map((index) => .new(this, e.$1, index)),
   );
 
   /// Enumerates all [NestedClass] entries across all readers.
   Iterable<NestedClass> get nestedClass => readers.indexed.expand(
-    (e) => e.$2.tableStream.nestedClass.map(
-      (index) => NestedClass(this, e.$1, index),
-    ),
+    (e) => e.$2.tableStream.nestedClass.map((index) => .new(this, e.$1, index)),
   );
 
   /// Enumerates all [Param] entries across all readers.
   Iterable<Param> get param => readers.indexed.expand(
-    (e) => e.$2.tableStream.param.map((index) => Param(this, e.$1, index)),
+    (e) => e.$2.tableStream.param.map((index) => .new(this, e.$1, index)),
   );
 
   /// Enumerates all [Property] entries across all readers.
   Iterable<Property> get property => readers.indexed.expand(
-    (e) =>
-        e.$2.tableStream.property.map((index) => Property(this, e.$1, index)),
+    (e) => e.$2.tableStream.property.map((index) => .new(this, e.$1, index)),
   );
 
   /// Enumerates all [PropertyMap] entries across all readers.
   Iterable<PropertyMap> get propertyMap => readers.indexed.expand(
-    (e) => e.$2.tableStream.propertyMap.map(
-      (index) => PropertyMap(this, e.$1, index),
-    ),
+    (e) => e.$2.tableStream.propertyMap.map((index) => .new(this, e.$1, index)),
   );
 
   /// Enumerates all [StandAloneSig] entries across all readers.
   Iterable<StandAloneSig> get standAloneSig => readers.indexed.expand(
-    (e) => e.$2.tableStream.standAloneSig.map(
-      (index) => StandAloneSig(this, e.$1, index),
-    ),
+    (e) =>
+        e.$2.tableStream.standAloneSig.map((index) => .new(this, e.$1, index)),
   );
 
   /// Enumerates all [TypeDef] entries across all readers.
   Iterable<TypeDef> get typeDef => readers.indexed.expand(
-    (e) => e.$2.tableStream.typeDef.map((index) => TypeDef(this, e.$1, index)),
+    (e) => e.$2.tableStream.typeDef.map((index) => .new(this, e.$1, index)),
   );
 
   /// Enumerates all [TypeRef] entries across all readers.
   Iterable<TypeRef> get typeRef => readers.indexed.expand(
-    (e) => e.$2.tableStream.typeRef.map((index) => TypeRef(this, e.$1, index)),
+    (e) => e.$2.tableStream.typeRef.map((index) => .new(this, e.$1, index)),
   );
 
   /// Enumerates all [TypeSpec] entries across all readers.
   Iterable<TypeSpec> get typeSpec => readers.indexed.expand(
-    (e) =>
-        e.$2.tableStream.typeSpec.map((index) => TypeSpec(this, e.$1, index)),
+    (e) => e.$2.tableStream.typeSpec.map((index) => .new(this, e.$1, index)),
   );
 
   @override

@@ -14,10 +14,7 @@ final class UserStringHeap extends MetadataHeap {
     var offset = 0;
     while (offset < data.length) {
       try {
-        final CompressedInteger(:value, :bytesRead) = CompressedInteger.decode(
-          data,
-          offset,
-        );
+        final CompressedInteger(:value, :bytesRead) = .decode(data, offset);
         final totalBytes = value + bytesRead;
         if (totalBytes == 0) break; // Prevent infinite loop on malformed input.
         count++;
@@ -40,10 +37,7 @@ final class UserStringHeap extends MetadataHeap {
     while (offset < data.length) {
       try {
         yield this[offset];
-        final CompressedInteger(:value, :bytesRead) = CompressedInteger.decode(
-          data,
-          offset,
-        );
+        final CompressedInteger(:value, :bytesRead) = .decode(data, offset);
         final totalBytes = value + bytesRead;
         if (totalBytes == 0) break; // Prevent infinite loop on malformed input.
         offset += totalBytes;
@@ -64,10 +58,7 @@ final class UserStringHeap extends MetadataHeap {
       offset >= 0 && offset < data.length,
       'Offset $offset out of bounds.',
     );
-    final CompressedInteger(:value, :bytesRead) = CompressedInteger.decode(
-      data,
-      offset,
-    );
+    final CompressedInteger(:value, :bytesRead) = .decode(data, offset);
     assert(
       value.isOdd || value == 0,
       'Expected payload size to be an odd number or zero, but got: $value',
@@ -82,6 +73,6 @@ final class UserStringHeap extends MetadataHeap {
       stringBytes.lengthInBytes ~/ 2,
       (i) => stringBytes.getUint16(i * 2, Endian.little),
     );
-    return String.fromCharCodes(charCodes);
+    return .fromCharCodes(charCodes);
   }
 }

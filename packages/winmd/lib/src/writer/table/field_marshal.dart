@@ -36,5 +36,5 @@ final class FieldMarshalCompanion extends RowCompanion<FieldMarshal> {
   const FieldMarshalCompanion();
 
   @override
-  MetadataTableId get tableId => MetadataTableId.fieldMarshal;
+  MetadataTableId get tableId => .fieldMarshal;
 }

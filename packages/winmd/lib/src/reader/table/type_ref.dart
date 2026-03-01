@@ -20,7 +20,7 @@ final class TypeRef extends Row with HasCustomAttributes {
   TypeRef(super.metadataIndex, super.readerIndex, super.index);
 
   @override
-  MetadataTable get table => MetadataTable.typeRef;
+  MetadataTable get table => .typeRef;
 
   @override
   int get token => (MetadataTableId.typeRef << 24) | index;
@@ -48,5 +48,5 @@ final class TypeRefCompanion extends RowCompanion<TypeRef> {
   TypeRef Function(MetadataIndex, int, int) get constructor => TypeRef.new;
 
   @override
-  MetadataTable get table => MetadataTable.typeRef;
+  MetadataTable get table => .typeRef;
 }

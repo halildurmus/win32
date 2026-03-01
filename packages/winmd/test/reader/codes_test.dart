@@ -7,8 +7,8 @@ import '../versions.dart';
 
 void main() async {
   final index = await WindowsMetadataLoader().loadMultipleMetadata(
-    packages: [WindowsMetadataPackage.win32, WindowsMetadataPackage.winrt],
-    versions: const WindowsMetadataVersions(
+    packages: [.win32, .winrt],
+    versions: const .new(
       win32: win32MetadataVersion,
       winrt: winrtMetadataVersion,
     ),
@@ -17,9 +17,7 @@ void main() async {
   group('CodedIndex', () {
     group('CustomAttributeType', () {
       test('MethodDef', () {
-        final codedIndex = CustomAttributeType.methodDef(
-          MethodDef(index, 0, 0),
-        );
+        final codedIndex = CustomAttributeType.methodDef(.new(index, 0, 0));
         check(codedIndex.encode()).equals(10);
         check(codedIndex.toString()).equals(
           'MethodDef(name: MsiCloseHandle, '
@@ -36,9 +34,7 @@ void main() async {
       });
 
       test('MemberRef', () {
-        final codedIndex = CustomAttributeType.memberRef(
-          MemberRef(index, 0, 0),
-        );
+        final codedIndex = CustomAttributeType.memberRef(.new(index, 0, 0));
         check(codedIndex.encode()).equals(11);
         check(codedIndex.toString()).equals('MemberRef(name: .ctor)');
         final decoded = CustomAttributeType.decode(
@@ -61,7 +57,7 @@ void main() async {
 
     group('HasConstant', () {
       test('Field', () {
-        final codedIndex = HasConstant.field(Field(index, 0, 0));
+        final codedIndex = HasConstant.field(.new(index, 0, 0));
         check(codedIndex.encode()).equals(4);
         check(codedIndex.toString()).equals(
           'Field(name: MSIDBOPEN_READONLY, signature: '
@@ -74,7 +70,7 @@ void main() async {
       });
 
       test('Param', () {
-        final codedIndex = HasConstant.param(Param(index, 0, 0));
+        final codedIndex = HasConstant.param(.new(index, 0, 0));
         check(codedIndex.encode()).equals(5);
         check(codedIndex.toString()).equals('Param(sequence: 1, name: hAny)');
         final decoded = HasConstant.decode(index, 0, codedIndex.encode());
@@ -83,7 +79,7 @@ void main() async {
       });
 
       test('Property', () {
-        final codedIndex = HasConstant.property(Property(index, 1, 0));
+        final codedIndex = HasConstant.property(.new(index, 1, 0));
         check(codedIndex.encode()).equals(6);
         check(codedIndex.toString()).equals('Property(name: BitmapAlphaMode)');
         final decoded = HasConstant.decode(index, 1, codedIndex.encode());
@@ -101,7 +97,7 @@ void main() async {
 
     group('HasCustomAttribute', () {
       test('MethodDef', () {
-        final codedIndex = HasCustomAttribute.methodDef(MethodDef(index, 0, 0));
+        final codedIndex = HasCustomAttribute.methodDef(.new(index, 0, 0));
         check(codedIndex.encode()).equals(32);
         check(codedIndex.toString()).equals(
           'MethodDef(name: MsiCloseHandle, '

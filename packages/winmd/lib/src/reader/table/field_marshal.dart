@@ -19,7 +19,7 @@ final class FieldMarshal extends Row {
   FieldMarshal(super.metadataIndex, super.readerIndex, super.index);
 
   @override
-  MetadataTable get table => MetadataTable.fieldMarshal;
+  MetadataTable get table => .fieldMarshal;
 
   @override
   int get token => (MetadataTableId.fieldMarshal << 24) | index;
@@ -45,5 +45,5 @@ final class FieldMarshalCompanion extends RowCompanion<FieldMarshal> {
       FieldMarshal.new;
 
   @override
-  MetadataTable get table => MetadataTable.fieldMarshal;
+  MetadataTable get table => .fieldMarshal;
 }

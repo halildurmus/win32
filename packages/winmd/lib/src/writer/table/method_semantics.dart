@@ -44,5 +44,5 @@ final class MethodSemanticsCompanion extends RowCompanion<MethodSemantics> {
   const MethodSemanticsCompanion();
 
   @override
-  MetadataTableId get tableId => MetadataTableId.methodSemantics;
+  MetadataTableId get tableId => .methodSemantics;
 }

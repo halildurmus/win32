@@ -43,5 +43,5 @@ final class ParamCompanion extends RowCompanion<Param> {
   const ParamCompanion();
 
   @override
-  MetadataTableId get tableId => MetadataTableId.param;
+  MetadataTableId get tableId => .param;
 }

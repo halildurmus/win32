@@ -42,5 +42,5 @@ final class ClassLayoutCompanion extends RowCompanion<ClassLayout> {
   const ClassLayoutCompanion();
 
   @override
-  MetadataTableId get tableId => MetadataTableId.classLayout;
+  MetadataTableId get tableId => .classLayout;
 }

@@ -19,7 +19,7 @@ final class ClassLayout extends Row {
   ClassLayout(super.metadataIndex, super.readerIndex, super.index);
 
   @override
-  MetadataTable get table => MetadataTable.classLayout;
+  MetadataTable get table => .classLayout;
 
   @override
   int get token => (MetadataTableId.classLayout << 24) | index;
@@ -50,5 +50,5 @@ final class ClassLayoutCompanion extends RowCompanion<ClassLayout> {
       ClassLayout.new;
 
   @override
-  MetadataTable get table => MetadataTable.classLayout;
+  MetadataTable get table => .classLayout;
 }

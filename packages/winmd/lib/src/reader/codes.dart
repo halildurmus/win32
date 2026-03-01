@@ -85,12 +85,8 @@ sealed class CustomAttributeType implements CodedIndex {
     final kind = code & ((1 << 3) - 1);
     final row = (code >> 3) - 1;
     return switch (kind) {
-      2 => CustomAttributeTypeMethodDef(
-        MethodDef(metadataIndex, readerIndex, row),
-      ),
-      3 => CustomAttributeTypeMemberRef(
-        MemberRef(metadataIndex, readerIndex, row),
-      ),
+      2 => CustomAttributeTypeMethodDef(.new(metadataIndex, readerIndex, row)),
+      3 => CustomAttributeTypeMemberRef(.new(metadataIndex, readerIndex, row)),
       _ => throw WinmdException('Unknown kind: $kind'),
     };
   }
@@ -113,7 +109,7 @@ final class CustomAttributeTypeMethodDef extends CustomAttributeType {
   int encode() => ((value.index + 1) << 3) | 2;
 
   @override
-  MemberRefParent get parent => MemberRefParent.typeDef(value.parent);
+  MemberRefParent get parent => .typeDef(value.parent);
 
   @override
   String get name => value.name;
@@ -178,9 +174,9 @@ sealed class HasConstant implements CodedIndex {
     final kind = code & ((1 << 2) - 1);
     final row = (code >> 2) - 1;
     return switch (kind) {
-      0 => HasConstantField(Field(metadataIndex, readerIndex, row)),
-      1 => HasConstantParam(Param(metadataIndex, readerIndex, row)),
-      2 => HasConstantProperty(Property(metadataIndex, readerIndex, row)),
+      0 => HasConstantField(.new(metadataIndex, readerIndex, row)),
+      1 => HasConstantParam(.new(metadataIndex, readerIndex, row)),
+      2 => HasConstantProperty(.new(metadataIndex, readerIndex, row)),
       _ => throw WinmdException('Unknown kind: $kind'),
     };
   }
@@ -370,55 +366,41 @@ sealed class HasCustomAttribute implements CodedIndex {
     final kind = code & ((1 << 5) - 1);
     final row = (code >> 5) - 1;
     return switch (kind) {
-      0 => HasCustomAttributeMethodDef(
-        MethodDef(metadataIndex, readerIndex, row),
-      ),
-      1 => HasCustomAttributeField(Field(metadataIndex, readerIndex, row)),
-      2 => HasCustomAttributeTypeRef(TypeRef(metadataIndex, readerIndex, row)),
-      3 => HasCustomAttributeTypeDef(TypeDef(metadataIndex, readerIndex, row)),
-      4 => HasCustomAttributeParam(Param(metadataIndex, readerIndex, row)),
+      0 => HasCustomAttributeMethodDef(.new(metadataIndex, readerIndex, row)),
+      1 => HasCustomAttributeField(.new(metadataIndex, readerIndex, row)),
+      2 => HasCustomAttributeTypeRef(.new(metadataIndex, readerIndex, row)),
+      3 => HasCustomAttributeTypeDef(.new(metadataIndex, readerIndex, row)),
+      4 => HasCustomAttributeParam(.new(metadataIndex, readerIndex, row)),
       5 => HasCustomAttributeInterfaceImpl(
-        InterfaceImpl(metadataIndex, readerIndex, row),
+        .new(metadataIndex, readerIndex, row),
       ),
-      6 => HasCustomAttributeMemberRef(
-        MemberRef(metadataIndex, readerIndex, row),
-      ),
-      7 => HasCustomAttributeModule(Module(metadataIndex, readerIndex, row)),
-      9 => HasCustomAttributeProperty(
-        Property(metadataIndex, readerIndex, row),
-      ),
-      10 => HasCustomAttributeEvent(Event(metadataIndex, readerIndex, row)),
+      6 => HasCustomAttributeMemberRef(.new(metadataIndex, readerIndex, row)),
+      7 => HasCustomAttributeModule(.new(metadataIndex, readerIndex, row)),
+      9 => HasCustomAttributeProperty(.new(metadataIndex, readerIndex, row)),
+      10 => HasCustomAttributeEvent(.new(metadataIndex, readerIndex, row)),
       11 => HasCustomAttributeStandaloneSig(
-        StandAloneSig(metadataIndex, readerIndex, row),
+        .new(metadataIndex, readerIndex, row),
       ),
-      12 => HasCustomAttributeModuleRef(
-        ModuleRef(metadataIndex, readerIndex, row),
-      ),
-      13 => HasCustomAttributeTypeSpec(
-        TypeSpec(metadataIndex, readerIndex, row),
-      ),
-      14 => HasCustomAttributeAssembly(
-        Assembly(metadataIndex, readerIndex, row),
-      ),
+      12 => HasCustomAttributeModuleRef(.new(metadataIndex, readerIndex, row)),
+      13 => HasCustomAttributeTypeSpec(.new(metadataIndex, readerIndex, row)),
+      14 => HasCustomAttributeAssembly(.new(metadataIndex, readerIndex, row)),
       15 => HasCustomAttributeAssemblyRef(
-        AssemblyRef(metadataIndex, readerIndex, row),
+        .new(metadataIndex, readerIndex, row),
       ),
-      16 => HasCustomAttributeFile(File(metadataIndex, readerIndex, row)),
+      16 => HasCustomAttributeFile(.new(metadataIndex, readerIndex, row)),
       17 => HasCustomAttributeExportedType(
-        ExportedType(metadataIndex, readerIndex, row),
+        .new(metadataIndex, readerIndex, row),
       ),
       18 => HasCustomAttributeManifestResource(
-        ManifestResource(metadataIndex, readerIndex, row),
+        .new(metadataIndex, readerIndex, row),
       ),
       19 => HasCustomAttributeGenericParam(
-        GenericParam(metadataIndex, readerIndex, row),
+        .new(metadataIndex, readerIndex, row),
       ),
       20 => HasCustomAttributeGenericParamConstraint(
-        GenericParamConstraint(metadataIndex, readerIndex, row),
+        .new(metadataIndex, readerIndex, row),
       ),
-      21 => HasCustomAttributeMethodSpec(
-        MethodSpec(metadataIndex, readerIndex, row),
-      ),
+      21 => HasCustomAttributeMethodSpec(.new(metadataIndex, readerIndex, row)),
       _ => throw WinmdException('Unknown kind: $kind'),
     };
   }
@@ -754,9 +736,9 @@ sealed class HasDeclSecurity implements CodedIndex {
     final kind = code & ((1 << 2) - 1);
     final row = (code >> 2) - 1;
     return switch (kind) {
-      0 => HasDeclSecurityTypeDef(TypeDef(metadataIndex, readerIndex, row)),
-      1 => HasDeclSecurityMethodDef(MethodDef(metadataIndex, readerIndex, row)),
-      2 => HasDeclSecurityAssembly(Assembly(metadataIndex, readerIndex, row)),
+      0 => HasDeclSecurityTypeDef(.new(metadataIndex, readerIndex, row)),
+      1 => HasDeclSecurityMethodDef(.new(metadataIndex, readerIndex, row)),
+      2 => HasDeclSecurityAssembly(.new(metadataIndex, readerIndex, row)),
       _ => throw WinmdException('Unknown kind: $kind'),
     };
   }
@@ -833,8 +815,8 @@ sealed class HasFieldMarshal implements CodedIndex {
     final kind = code & 1;
     final row = (code >> 1) - 1;
     return switch (kind) {
-      0 => HasFieldMarshalField(Field(metadataIndex, readerIndex, row)),
-      1 => HasFieldMarshalParam(Param(metadataIndex, readerIndex, row)),
+      0 => HasFieldMarshalField(.new(metadataIndex, readerIndex, row)),
+      1 => HasFieldMarshalParam(.new(metadataIndex, readerIndex, row)),
       _ => throw WinmdException('Unknown kind: $kind'),
     };
   }
@@ -897,8 +879,8 @@ sealed class HasSemantics implements CodedIndex {
     final kind = code & 1;
     final row = (code >> 1) - 1;
     return switch (kind) {
-      0 => HasSemanticsEvent(Event(metadataIndex, readerIndex, row)),
-      1 => HasSemanticsProperty(Property(metadataIndex, readerIndex, row)),
+      0 => HasSemanticsEvent(.new(metadataIndex, readerIndex, row)),
+      1 => HasSemanticsProperty(.new(metadataIndex, readerIndex, row)),
       _ => throw WinmdException('Unknown kind: $kind'),
     };
   }
@@ -966,13 +948,9 @@ sealed class Implementation implements CodedIndex {
     final kind = code & ((1 << 2) - 1);
     final row = (code >> 2) - 1;
     return switch (kind) {
-      0 => ImplementationFile(File(metadataIndex, readerIndex, row)),
-      1 => ImplementationAssemblyRef(
-        AssemblyRef(metadataIndex, readerIndex, row),
-      ),
-      2 => ImplementationExportedType(
-        ExportedType(metadataIndex, readerIndex, row),
-      ),
+      0 => ImplementationFile(.new(metadataIndex, readerIndex, row)),
+      1 => ImplementationAssemblyRef(.new(metadataIndex, readerIndex, row)),
+      2 => ImplementationExportedType(.new(metadataIndex, readerIndex, row)),
       _ => throw WinmdException('Unknown kind: $kind'),
     };
   }
@@ -1050,8 +1028,8 @@ sealed class MemberForwarded implements CodedIndex {
     final kind = code & 1;
     final row = (code >> 1) - 1;
     return switch (kind) {
-      0 => MemberForwardedField(Field(metadataIndex, readerIndex, row)),
-      1 => MemberForwardedMethodDef(MethodDef(metadataIndex, readerIndex, row)),
+      0 => MemberForwardedField(.new(metadataIndex, readerIndex, row)),
+      1 => MemberForwardedMethodDef(.new(metadataIndex, readerIndex, row)),
       _ => throw WinmdException('Unknown kind: $kind'),
     };
   }
@@ -1136,11 +1114,11 @@ sealed class MemberRefParent implements CodedIndex {
     final kind = code & ((1 << 3) - 1);
     final row = (code >> 3) - 1;
     return switch (kind) {
-      0 => MemberRefParentTypeDef(TypeDef(metadataIndex, readerIndex, row)),
-      1 => MemberRefParentTypeRef(TypeRef(metadataIndex, readerIndex, row)),
-      2 => MemberRefParentModuleRef(ModuleRef(metadataIndex, readerIndex, row)),
-      3 => MemberRefParentMethodDef(MethodDef(metadataIndex, readerIndex, row)),
-      4 => MemberRefParentTypeSpec(TypeSpec(metadataIndex, readerIndex, row)),
+      0 => MemberRefParentTypeDef(.new(metadataIndex, readerIndex, row)),
+      1 => MemberRefParentTypeRef(.new(metadataIndex, readerIndex, row)),
+      2 => MemberRefParentModuleRef(.new(metadataIndex, readerIndex, row)),
+      3 => MemberRefParentMethodDef(.new(metadataIndex, readerIndex, row)),
+      4 => MemberRefParentTypeSpec(.new(metadataIndex, readerIndex, row)),
       _ => throw WinmdException('Unknown kind: $kind'),
     };
   }
@@ -1247,8 +1225,8 @@ sealed class MethodDefOrRef implements CodedIndex {
     final kind = code & 1;
     final row = (code >> 1) - 1;
     return switch (kind) {
-      0 => MethodDefOrRefMethodDef(MethodDef(metadataIndex, readerIndex, row)),
-      1 => MethodDefOrRefMemberRef(MemberRef(metadataIndex, readerIndex, row)),
+      0 => MethodDefOrRefMethodDef(.new(metadataIndex, readerIndex, row)),
+      1 => MethodDefOrRefMemberRef(.new(metadataIndex, readerIndex, row)),
       _ => throw WinmdException('Unknown kind: $kind'),
     };
   }
@@ -1329,12 +1307,10 @@ sealed class ResolutionScope implements CodedIndex {
     final kind = code & ((1 << 2) - 1);
     final row = (code >> 2) - 1;
     return switch (kind) {
-      0 => ResolutionScopeModule(Module(metadataIndex, readerIndex, row)),
-      1 => ResolutionScopeModuleRef(ModuleRef(metadataIndex, readerIndex, row)),
-      2 => ResolutionScopeAssemblyRef(
-        AssemblyRef(metadataIndex, readerIndex, row),
-      ),
-      3 => ResolutionScopeTypeRef(TypeRef(metadataIndex, readerIndex, row)),
+      0 => ResolutionScopeModule(.new(metadataIndex, readerIndex, row)),
+      1 => ResolutionScopeModuleRef(.new(metadataIndex, readerIndex, row)),
+      2 => ResolutionScopeAssemblyRef(.new(metadataIndex, readerIndex, row)),
+      3 => ResolutionScopeTypeRef(.new(metadataIndex, readerIndex, row)),
       _ => throw WinmdException('Unknown kind: $kind'),
     };
   }
@@ -1428,9 +1404,9 @@ sealed class TypeDefOrRef implements CodedIndex {
     final kind = code & ((1 << 2) - 1);
     final row = (code >> 2) - 1;
     return switch (kind) {
-      0 => TypeDefOrRefTypeDef(TypeDef(metadataIndex, readerIndex, row)),
-      1 => TypeDefOrRefTypeRef(TypeRef(metadataIndex, readerIndex, row)),
-      2 => TypeDefOrRefTypeSpec(TypeSpec(metadataIndex, readerIndex, row)),
+      0 => TypeDefOrRefTypeDef(.new(metadataIndex, readerIndex, row)),
+      1 => TypeDefOrRefTypeRef(.new(metadataIndex, readerIndex, row)),
+      2 => TypeDefOrRefTypeSpec(.new(metadataIndex, readerIndex, row)),
       _ => throw WinmdException('Unknown kind: $kind'),
     };
   }
@@ -1532,8 +1508,8 @@ sealed class TypeOrMethodDef implements CodedIndex {
     final kind = code & 1;
     final row = (code >> 1) - 1;
     return switch (kind) {
-      0 => TypeOrMethodDefTypeDef(TypeDef(metadataIndex, readerIndex, row)),
-      1 => TypeOrMethodDefMethodDef(MethodDef(metadataIndex, readerIndex, row)),
+      0 => TypeOrMethodDefTypeDef(.new(metadataIndex, readerIndex, row)),
+      1 => TypeOrMethodDefMethodDef(.new(metadataIndex, readerIndex, row)),
       _ => throw WinmdException('Unknown kind: $kind'),
     };
   }

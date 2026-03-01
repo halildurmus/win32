@@ -43,5 +43,5 @@ final class FieldCompanion extends RowCompanion<Field> {
   const FieldCompanion();
 
   @override
-  MetadataTableId get tableId => MetadataTableId.field;
+  MetadataTableId get tableId => .field;
 }

@@ -28,18 +28,15 @@ extension Uint8ListExtension on Uint8List {
   /// Reads an unsigned 16-bit integer at the given [offset], assuming
   /// little-endian encoding.
   @pragma('vm:prefer-inline')
-  int readUint16(int offset) =>
-      buffer.asByteData().getUint16(offset, Endian.little);
+  int readUint16(int offset) => buffer.asByteData().getUint16(offset, .little);
 
   /// Reads an unsigned 32-bit integer at the given [offset], assuming
   /// little-endian encoding.
   @pragma('vm:prefer-inline')
-  int readUint32(int offset) =>
-      buffer.asByteData().getUint32(offset, Endian.little);
+  int readUint32(int offset) => buffer.asByteData().getUint32(offset, .little);
 
   /// Reads an unsigned 64-bit integer at the given [offset], assuming
   /// little-endian encoding.
   @pragma('vm:prefer-inline')
-  int readUint64(int offset) =>
-      buffer.asByteData().getUint64(offset, Endian.little);
+  int readUint64(int offset) => buffer.asByteData().getUint64(offset, .little);
 }

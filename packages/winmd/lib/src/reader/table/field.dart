@@ -26,7 +26,7 @@ final class Field extends Row with HasCustomAttributes {
   Field(super.metadataIndex, super.readerIndex, super.index);
 
   @override
-  MetadataTable get table => MetadataTable.field;
+  MetadataTable get table => .field;
 
   @override
   int get token => (MetadataTableId.field << 24) | index;
@@ -80,5 +80,5 @@ final class FieldCompanion extends RowCompanion<Field> {
   Field Function(MetadataIndex, int, int) get constructor => Field.new;
 
   @override
-  MetadataTable get table => MetadataTable.field;
+  MetadataTable get table => .field;
 }

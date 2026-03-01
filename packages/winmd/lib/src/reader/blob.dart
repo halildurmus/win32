@@ -11,7 +11,6 @@ import '../metadata_type.dart';
 import '../method_signature.dart';
 import '../property_sig.dart';
 import '../stand_alone_signature.dart';
-import '../type_name.dart';
 import '../writer/helpers.dart';
 import 'codes.dart';
 import 'metadata_index.dart';
@@ -64,9 +63,7 @@ final class Blob {
   /// `true`.
   /// Otherwise, it returns `false` and leaves the [slice] unchanged.
   bool tryRead(int expected) {
-    final CompressedInteger(:value, :bytesRead) = CompressedInteger.decode(
-      slice,
-    );
+    final CompressedInteger(:value, :bytesRead) = .decode(slice);
     if (value == expected) {
       _offset(bytesRead);
       return true;
@@ -144,7 +141,7 @@ final class Blob {
     for (var i = 0; i < paramCount; i++) {
       types.add(readTypeSignature());
     }
-    return MethodSignature(
+    return .new(
       callingConvention: callingConvention,
       returnType: returnType,
       types: types,
@@ -161,7 +158,7 @@ final class Blob {
     for (var i = 0; i < paramCount; i++) {
       types.add(readTypeSignature());
     }
-    return MethodRefSig(
+    return .new(
       callingConvention: callingConvention,
       returnType: returnType,
       types: types,
@@ -192,16 +189,12 @@ final class Blob {
   List<TypeDefOrRef> readModifiers() {
     final mods = <TypeDefOrRef>[];
     while (true) {
-      final CompressedInteger(:value, :bytesRead) = CompressedInteger.decode(
-        slice,
-      );
+      final CompressedInteger(:value, :bytesRead) = .decode(slice);
       if (value != ELEMENT_TYPE_CMOD_OPT && value != ELEMENT_TYPE_CMOD_REQD) {
         break;
       } else {
         _offset(bytesRead);
-        mods.add(
-          TypeDefOrRef.decode(metadataIndex, readerIndex, readCompressed()),
-        );
+        mods.add(.decode(metadataIndex, readerIndex, readCompressed()));
       }
     }
     return UnmodifiableListView(mods);
@@ -221,10 +214,8 @@ final class Blob {
     for (var i = 0; i < paramCount; i++) {
       types.add(readTypeSignature());
     }
-    return PropertySig(
-      callingConvention: hasThis
-          ? CallingConvention.HASTHIS
-          : CallingConvention.DEFAULT,
+    return .new(
+      callingConvention: hasThis ? .HASTHIS : .DEFAULT,
       returnType: returnType,
       types: types,
     );
@@ -283,19 +274,19 @@ final class Blob {
       ELEMENT_TYPE_OBJECT => const ObjectType(),
       ELEMENT_TYPE_CLASS => switch (decode<TypeDefOrRef>()) {
         TypeDefOrRefTypeDef(:final value) => NamedClassType(
-          TypeName(value.namespace, value.name),
+          .new(value.namespace, value.name),
         ),
         TypeDefOrRefTypeRef(:final value) => NamedClassType(
-          TypeName(value.namespace, value.name),
+          .new(value.namespace, value.name),
         ),
         TypeDefOrRefTypeSpec(:final value) => value.signature,
       },
       ELEMENT_TYPE_VALUETYPE => switch (decode<TypeDefOrRef>()) {
         TypeDefOrRefTypeDef(:final value) => NamedValueType(
-          TypeName(value.namespace, value.name),
+          .new(value.namespace, value.name),
         ),
         TypeDefOrRefTypeRef(:final value) => NamedValueType(
-          TypeName(value.namespace, value.name),
+          .new(value.namespace, value.name),
         ),
         TypeDefOrRefTypeSpec(:final value) => value.signature,
       },
@@ -343,7 +334,7 @@ final class Blob {
 
     if (typeCode == ELEMENT_TYPE_CLASS) {
       return NamedClassType(
-        TypeName(
+        .new(
           typeDefOrRef.namespace,
           typeDefOrRef.name,
           generics: typeDefOrRefGenerics,
@@ -352,7 +343,7 @@ final class Blob {
     }
 
     return NamedValueType(
-      TypeName(
+      .new(
         typeDefOrRef.namespace,
         typeDefOrRef.name,
         generics: typeDefOrRefGenerics,
@@ -389,9 +380,7 @@ final class Blob {
 
   /// Reads a compressed integer from the blob.
   int readCompressed() {
-    final CompressedInteger(:value, :bytesRead) = CompressedInteger.decode(
-      slice,
-    );
+    final CompressedInteger(:value, :bytesRead) = .decode(slice);
     _offset(bytesRead);
     return value;
   }
@@ -421,7 +410,7 @@ final class Blob {
   int readInt16() {
     final value = slice.buffer.asByteData().getInt16(
       slice.offsetInBytes,
-      Endian.little,
+      .little,
     );
     _offset(2);
     return value;
@@ -431,7 +420,7 @@ final class Blob {
   int readUint16() {
     final value = slice.buffer.asByteData().getUint16(
       slice.offsetInBytes,
-      Endian.little,
+      .little,
     );
     _offset(2);
     return value;
@@ -441,7 +430,7 @@ final class Blob {
   int readInt32() {
     final value = slice.buffer.asByteData().getInt32(
       slice.offsetInBytes,
-      Endian.little,
+      .little,
     );
     _offset(4);
     return value;
@@ -451,7 +440,7 @@ final class Blob {
   int readUint32() {
     final value = slice.buffer.asByteData().getUint32(
       slice.offsetInBytes,
-      Endian.little,
+      .little,
     );
     _offset(4);
     return value;
@@ -461,7 +450,7 @@ final class Blob {
   int readInt64() {
     final value = slice.buffer.asByteData().getInt64(
       slice.offsetInBytes,
-      Endian.little,
+      .little,
     );
     _offset(8);
     return value;
@@ -471,7 +460,7 @@ final class Blob {
   int readUint64() {
     final value = slice.buffer.asByteData().getUint64(
       slice.offsetInBytes,
-      Endian.little,
+      .little,
     );
     _offset(8);
     return value;
@@ -481,7 +470,7 @@ final class Blob {
   double readFloat32() {
     final value = slice.buffer.asByteData().getFloat32(
       slice.offsetInBytes,
-      Endian.little,
+      .little,
     );
     _offset(4);
     return value;
@@ -491,7 +480,7 @@ final class Blob {
   double readFloat64() {
     final value = slice.buffer.asByteData().getFloat64(
       slice.offsetInBytes,
-      Endian.little,
+      .little,
     );
     _offset(8);
     return value;
@@ -518,7 +507,7 @@ final class Blob {
       );
     } else {
       // If unaligned, manually decode UTF-16.
-      stringBytes = Uint16List(stringLength);
+      stringBytes = .new(stringLength);
       for (var i = 0; i < stringLength; i++) {
         final low = slice[i * 2];
         final high = slice[i * 2 + 1];
@@ -526,12 +515,12 @@ final class Blob {
       }
     }
     _offset(length);
-    return String.fromCharCodes(stringBytes);
+    return .fromCharCodes(stringBytes);
   }
 
   /// Updates the slice to a view that skips the first [offset] bytes.
   @pragma('vm:prefer-inline')
-  void _offset(int offset) => slice = Uint8List.sublistView(slice, offset);
+  void _offset(int offset) => slice = .sublistView(slice, offset);
 
   @override
   String toString() => slice.toString();

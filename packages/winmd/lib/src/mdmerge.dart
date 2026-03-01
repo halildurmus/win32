@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:path/path.dart' as p;
 
-import 'attributes.dart';
 import 'exception.dart';
 import 'member_ref_signature.dart';
 import 'metadata_type.dart';
@@ -65,11 +64,10 @@ List<MetadataReader> _expandInput(List<String> inputPaths) {
 
   for (final path in inputPaths) {
     final entityType = FileSystemEntity.typeSync(path);
-
     switch (entityType) {
-      case FileSystemEntityType.directory:
+      case .directory:
         readers.addAll(_readFromDirectory(path));
-      case FileSystemEntityType.file:
+      case .file:
         readers.add(_readFromFile(path));
       default:
         throw FileSystemException(
@@ -133,8 +131,7 @@ void _writeType(
   TypeDefIndex? outer,
 ) {
   assert(
-    (typeDef.typeVisibility != TypeVisibility.public &&
-            typeDef.typeVisibility != TypeVisibility.notPublic)
+    (typeDef.typeVisibility != .public && typeDef.typeVisibility != .notPublic)
         ? typeDef.namespace.isEmpty
         : typeDef.namespace.isNotEmpty,
     'Namespace must be empty for nested types.',
@@ -158,21 +155,21 @@ void _writeType(
     _writeField(writer, field);
   }
 
-  _writeAttributes(writer, HasCustomAttribute.typeDef(typeDefIndex), typeDef);
+  _writeAttributes(writer, .typeDef(typeDefIndex), typeDef);
 
   for (final impl in typeDef.interfaceImpls) {
     final implRef = writer.writeInterfaceImpl(
       class$: typeDefIndex,
       interface: impl.interface,
     );
-    _writeAttributes(writer, HasCustomAttribute.interfaceImpl(implRef), impl);
+    _writeAttributes(writer, .interfaceImpl(implRef), impl);
   }
 
   for (final generic in typeDef.generics) {
     writer.writeGenericParam(
       number: generic.sequence,
       flags: generic.flags,
-      owner: TypeOrMethodDef.typeDef(typeDefIndex),
+      owner: .typeDef(typeDefIndex),
       name: generic.name,
     );
   }
@@ -191,8 +188,8 @@ void _writeType(
 
   for (final nested in index.nestedTypes(typeDef)) {
     assert(
-      (nested.typeVisibility != TypeVisibility.public &&
-              nested.typeVisibility != TypeVisibility.notPublic) &&
+      (nested.typeVisibility != .public &&
+              nested.typeVisibility != .notPublic) &&
           nested.namespace.isEmpty,
       'Nested type must have empty namespace and be nested.',
     );
@@ -210,7 +207,7 @@ MemberRefParent _buildMemberRefParent(
     throw WinmdException('Expected NamedType, got: $type');
   }
 
-  return MemberRefParent.typeSpec(
+  return .typeSpec(
     writer.writeTypeSpec(
       namespace: type.namespace,
       name: type.name,
@@ -220,21 +217,19 @@ MemberRefParent _buildMemberRefParent(
 }
 
 @pragma('vm:prefer-inline')
-MemberRefSignature _buildMemberRefSignature(MethodSignature sig) =>
-    MemberRefSignature.method(
-      callingConvention: sig.callingConvention,
-      returnType: sig.returnType,
-      types: sig.types,
-    );
+MemberRefSignature _buildMemberRefSignature(MethodSignature sig) => .method(
+  callingConvention: sig.callingConvention,
+  returnType: sig.returnType,
+  types: sig.types,
+);
 
 @pragma('vm:prefer-inline')
 TypeDefOrRef _resolveBaseType(MetadataWriter writer, TypeDef typeDef) =>
     switch (typeDef.extends$) {
-      reader.TypeDefOrRef(:final namespace, :final name) =>
-        TypeDefOrRef.typeRef(
-          writer.writeTypeRef(namespace: namespace, name: name),
-        ),
-      _ => TypeDefOrRef.none,
+      reader.TypeDefOrRef(:final namespace, :final name) => .typeRef(
+        writer.writeTypeRef(namespace: namespace, name: name),
+      ),
+      _ => .none,
     };
 
 @pragma('vm:prefer-inline')
@@ -245,15 +240,11 @@ MemberRefParent _resolveMemberRefParent(
   reader.MemberRefParentTypeDef(
     value: TypeDef(:final namespace, :final name),
   ) =>
-    MemberRefParent.typeDef(
-      writer.writeTypeDef(namespace: namespace, name: name),
-    ),
+    .typeDef(writer.writeTypeDef(namespace: namespace, name: name)),
   reader.MemberRefParentTypeRef(
     value: TypeRef(:final namespace, :final name),
   ) =>
-    MemberRefParent.typeRef(
-      writer.writeTypeRef(namespace: namespace, name: name),
-    ),
+    .typeRef(writer.writeTypeRef(namespace: namespace, name: name)),
   reader.MemberRefParentTypeSpec(:final value) => _buildMemberRefParent(
     writer,
     value,
@@ -325,7 +316,7 @@ void _writeAttributes<R extends HasCustomAttributes>(
     );
     writer.writeCustomAttribute(
       parent: parent,
-      type: CustomAttributeType.memberRef(ctorRef),
+      type: .memberRef(ctorRef),
       fixedArgs: attr.fixedArgs,
       namedArgs: attr.namedArgs,
     );
@@ -340,14 +331,14 @@ void _writeField(MetadataWriter writer, Field field) {
   );
 
   if (field.constant?.value case final value?) {
-    writer.writeConstant(parent: HasConstant.field(fieldIndex), value: value);
+    writer.writeConstant(parent: .field(fieldIndex), value: value);
   }
 
   if (field.layout?.offset case final offset?) {
     writer.writeFieldLayout(offset: offset, field: fieldIndex);
   }
 
-  _writeAttributes(writer, HasCustomAttribute.field(fieldIndex), field);
+  _writeAttributes(writer, .field(fieldIndex), field);
 }
 
 void _writeEvents(
@@ -369,28 +360,28 @@ void _writeEvents(
 
     final addMethodIndex = specialMethods[event.add.name]!;
     writer.writeMethodSemantics(
-      association: HasSemantics.event(eventIndex),
-      semantics: MethodSemanticsAttributes.addOn,
+      association: .event(eventIndex),
+      semantics: .addOn,
       method: addMethodIndex,
     );
 
     final removeMethodIndex = specialMethods[event.remove.name]!;
     writer.writeMethodSemantics(
-      association: HasSemantics.event(eventIndex),
-      semantics: MethodSemanticsAttributes.removeOn,
+      association: .event(eventIndex),
+      semantics: .removeOn,
       method: removeMethodIndex,
     );
 
     if (event.raise case final raise?) {
       final raiseMethodIndex = specialMethods[raise.name]!;
       writer.writeMethodSemantics(
-        association: HasSemantics.event(eventIndex),
-        semantics: MethodSemanticsAttributes.fire,
+        association: .event(eventIndex),
+        semantics: .fire,
         method: raiseMethodIndex,
       );
     }
 
-    _writeAttributes(writer, HasCustomAttribute.event(eventIndex), event);
+    _writeAttributes(writer, .event(eventIndex), event);
   }
 }
 
@@ -410,7 +401,7 @@ Map<String, MethodDefIndex> _writeMethods(
       signature: method.signature,
     );
 
-    if (method.flags.has(MethodAttributes.specialName)) {
+    if (method.flags.has(.specialName)) {
       specialMethods[method.name] = methodIndex;
     }
 
@@ -420,10 +411,10 @@ Map<String, MethodDefIndex> _writeMethods(
         sequence: param.sequence,
         name: param.name,
       );
-      _writeAttributes(writer, HasCustomAttribute.param(paramIndex), param);
+      _writeAttributes(writer, .param(paramIndex), param);
     }
 
-    _writeAttributes(writer, HasCustomAttribute.methodDef(methodIndex), method);
+    _writeAttributes(writer, .methodDef(methodIndex), method);
 
     if (method.implMap case final implMap?) {
       writer.writeImplMap(
@@ -442,8 +433,8 @@ Map<String, MethodDefIndex> _writeMethods(
       );
       writer.writeMethodImpl(
         class$: typeDefIndex,
-        methodBody: MethodDefOrRef.methodDef(methodIndex),
-        methodDeclaration: MethodDefOrRef.memberRef(methodDeclaration),
+        methodBody: .methodDef(methodIndex),
+        methodDeclaration: .memberRef(methodDeclaration),
       );
     }
   }
@@ -500,8 +491,8 @@ void _writeProperties(
     if (property.getter case final getter?) {
       final methodIndex = specialMethods[getter.name]!;
       writer.writeMethodSemantics(
-        association: HasSemantics.property(propertyIndex),
-        semantics: MethodSemanticsAttributes.getter,
+        association: .property(propertyIndex),
+        semantics: .getter,
         method: methodIndex,
       );
     }
@@ -509,16 +500,12 @@ void _writeProperties(
     if (property.setter case final setter?) {
       final methodIndex = specialMethods[setter.name]!;
       writer.writeMethodSemantics(
-        association: HasSemantics.property(propertyIndex),
-        semantics: MethodSemanticsAttributes.setter,
+        association: .property(propertyIndex),
+        semantics: .setter,
         method: methodIndex,
       );
     }
 
-    _writeAttributes(
-      writer,
-      HasCustomAttribute.property(propertyIndex),
-      property,
-    );
+    _writeAttributes(writer, .property(propertyIndex), property);
   }
 }

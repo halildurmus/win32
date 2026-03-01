@@ -41,5 +41,5 @@ final class AssemblyOSCompanion extends RowCompanion<AssemblyOS> {
   const AssemblyOSCompanion();
 
   @override
-  MetadataTableId get tableId => MetadataTableId.assemblyOS;
+  MetadataTableId get tableId => .assemblyOS;
 }

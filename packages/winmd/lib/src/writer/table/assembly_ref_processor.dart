@@ -36,5 +36,5 @@ final class AssemblyRefProcessorCompanion
   const AssemblyRefProcessorCompanion();
 
   @override
-  MetadataTableId get tableId => MetadataTableId.assemblyRefProcessor;
+  MetadataTableId get tableId => .assemblyRefProcessor;
 }

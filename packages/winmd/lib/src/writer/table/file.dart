@@ -43,5 +43,5 @@ final class FileCompanion extends RowCompanion<File> {
   const FileCompanion();
 
   @override
-  MetadataTableId get tableId => MetadataTableId.file;
+  MetadataTableId get tableId => .file;
 }

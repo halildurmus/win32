@@ -23,7 +23,7 @@ final class Constant extends Row {
   Constant(super.metadataIndex, super.readerIndex, super.index);
 
   @override
-  MetadataTable get table => MetadataTable.constant;
+  MetadataTable get table => .constant;
 
   @override
   int get token => (MetadataTableId.constant << 24) | index;
@@ -89,7 +89,7 @@ final class ConstantCompanion extends RowCompanion<Constant> {
   Constant Function(MetadataIndex, int, int) get constructor => Constant.new;
 
   @override
-  MetadataTable get table => MetadataTable.constant;
+  MetadataTable get table => .constant;
 }
 
 /// Extension methods for strongly-typed access to the underlying value of a

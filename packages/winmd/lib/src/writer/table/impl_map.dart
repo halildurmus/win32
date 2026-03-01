@@ -49,5 +49,5 @@ final class ImplMapCompanion extends RowCompanion<ImplMap> {
   const ImplMapCompanion();
 
   @override
-  MetadataTableId get tableId => MetadataTableId.implMap;
+  MetadataTableId get tableId => .implMap;
 }

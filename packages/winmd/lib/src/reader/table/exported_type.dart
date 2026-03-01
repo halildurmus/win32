@@ -24,7 +24,7 @@ final class ExportedType extends Row with HasCustomAttributes {
   ExportedType(super.metadataIndex, super.readerIndex, super.index);
 
   @override
-  MetadataTable get table => MetadataTable.exportedType;
+  MetadataTable get table => .exportedType;
 
   @override
   int get token => (MetadataTableId.exportedType << 24) | index;
@@ -57,5 +57,5 @@ final class ExportedTypeCompanion extends RowCompanion<ExportedType> {
       ExportedType.new;
 
   @override
-  MetadataTable get table => MetadataTable.exportedType;
+  MetadataTable get table => .exportedType;
 }

@@ -24,7 +24,7 @@ final class Param extends Row with HasCustomAttributes {
   Param(super.metadataIndex, super.readerIndex, super.index);
 
   @override
-  MetadataTable get table => MetadataTable.param;
+  MetadataTable get table => .param;
 
   @override
   int get token => (MetadataTableId.param << 24) | index;
@@ -69,5 +69,5 @@ final class ParamCompanion extends RowCompanion<Param> {
   Param Function(MetadataIndex, int, int) get constructor => Param.new;
 
   @override
-  MetadataTable get table => MetadataTable.param;
+  MetadataTable get table => .param;
 }

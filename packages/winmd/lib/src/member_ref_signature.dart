@@ -53,7 +53,7 @@ final class MethodRefSig extends MethodSignature implements MemberRefSignature {
   /// If [types] is not specified, it defaults to an empty list, indicating that
   /// the method has no parameters.
   const MethodRefSig({
-    super.callingConvention = CallingConvention.DEFAULT,
+    super.callingConvention = .DEFAULT,
     super.returnType = const VoidType(),
     super.types = const [],
   });

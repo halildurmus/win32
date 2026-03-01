@@ -19,7 +19,7 @@ final class PropertyMap extends Row {
   PropertyMap(super.metadataIndex, super.readerIndex, super.index);
 
   @override
-  MetadataTable get table => MetadataTable.propertyMap;
+  MetadataTable get table => .propertyMap;
 
   @override
   int get token => (MetadataTableId.propertyMap << 24) | index;
@@ -45,5 +45,5 @@ final class PropertyMapCompanion extends RowCompanion<PropertyMap> {
       PropertyMap.new;
 
   @override
-  MetadataTable get table => MetadataTable.propertyMap;
+  MetadataTable get table => .propertyMap;
 }

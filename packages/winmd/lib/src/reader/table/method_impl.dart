@@ -20,7 +20,7 @@ final class MethodImpl extends Row {
   MethodImpl(super.metadataIndex, super.readerIndex, super.index);
 
   @override
-  MetadataTable get table => MetadataTable.methodImpl;
+  MetadataTable get table => .methodImpl;
 
   @override
   int get token => (MetadataTableId.methodImpl << 24) | index;
@@ -52,5 +52,5 @@ final class MethodImplCompanion extends RowCompanion<MethodImpl> {
       MethodImpl.new;
 
   @override
-  MetadataTable get table => MetadataTable.methodImpl;
+  MetadataTable get table => .methodImpl;
 }

@@ -66,7 +66,7 @@ final class MetadataReader {
         comVirtualAddress = optional
             .DataDirectory[IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR]
             .VirtualAddress;
-        sections = List.generate(
+        sections = .generate(
           fileHeader.NumberOfSections,
           (i) => Struct.create<IMAGE_SECTION_HEADER>(
             data,
@@ -185,21 +185,13 @@ final class MetadataReader {
     }
 
     final blobHeap = BlobHeap(
-      Uint8List.sublistView(
-        data,
-        blobStreamOffset,
-        blobStreamOffset + blobStreamSize,
-      ),
+      .sublistView(data, blobStreamOffset, blobStreamOffset + blobStreamSize),
     );
     final guidHeap = GuidHeap(
-      Uint8List.sublistView(
-        data,
-        guidStreamOffset,
-        guidStreamOffset + guidStreamSize,
-      ),
+      .sublistView(data, guidStreamOffset, guidStreamOffset + guidStreamSize),
     );
     final stringHeap = StringHeap(
-      Uint8List.sublistView(
+      .sublistView(
         data,
         stringStreamOffset,
         stringStreamOffset + stringStreamSize,
@@ -207,7 +199,7 @@ final class MetadataReader {
     );
     final tableStream = TableStream();
     final userStringHeap = UserStringHeap(
-      Uint8List.sublistView(
+      .sublistView(
         data,
         userStringStreamOffset,
         userStringStreamOffset + userStringStreamSize,
@@ -241,81 +233,81 @@ final class MetadataReader {
 
       switch (i) {
         case MetadataTableId.module:
-          tableStream[MetadataTable.module].rows = rows;
+          tableStream[.module].rows = rows;
         case MetadataTableId.typeRef:
-          tableStream[MetadataTable.typeRef].rows = rows;
+          tableStream[.typeRef].rows = rows;
         case MetadataTableId.typeDef:
-          tableStream[MetadataTable.typeDef].rows = rows;
+          tableStream[.typeDef].rows = rows;
         case MetadataTableId.field:
-          tableStream[MetadataTable.field].rows = rows;
+          tableStream[.field].rows = rows;
         case MetadataTableId.methodDef:
-          tableStream[MetadataTable.methodDef].rows = rows;
+          tableStream[.methodDef].rows = rows;
         case MetadataTableId.param:
-          tableStream[MetadataTable.param].rows = rows;
+          tableStream[.param].rows = rows;
         case MetadataTableId.interfaceImpl:
-          tableStream[MetadataTable.interfaceImpl].rows = rows;
+          tableStream[.interfaceImpl].rows = rows;
         case MetadataTableId.memberRef:
-          tableStream[MetadataTable.memberRef].rows = rows;
+          tableStream[.memberRef].rows = rows;
         case MetadataTableId.constant:
-          tableStream[MetadataTable.constant].rows = rows;
+          tableStream[.constant].rows = rows;
         case MetadataTableId.customAttribute:
-          tableStream[MetadataTable.customAttribute].rows = rows;
+          tableStream[.customAttribute].rows = rows;
         case MetadataTableId.fieldMarshal:
-          tableStream[MetadataTable.fieldMarshal].rows = rows;
+          tableStream[.fieldMarshal].rows = rows;
         case MetadataTableId.declSecurity:
-          tableStream[MetadataTable.declSecurity].rows = rows;
+          tableStream[.declSecurity].rows = rows;
         case MetadataTableId.classLayout:
-          tableStream[MetadataTable.classLayout].rows = rows;
+          tableStream[.classLayout].rows = rows;
         case MetadataTableId.fieldLayout:
-          tableStream[MetadataTable.fieldLayout].rows = rows;
+          tableStream[.fieldLayout].rows = rows;
         case MetadataTableId.standAloneSig:
-          tableStream[MetadataTable.standAloneSig].rows = rows;
+          tableStream[.standAloneSig].rows = rows;
         case MetadataTableId.eventMap:
-          tableStream[MetadataTable.eventMap].rows = rows;
+          tableStream[.eventMap].rows = rows;
         case MetadataTableId.event:
-          tableStream[MetadataTable.event].rows = rows;
+          tableStream[.event].rows = rows;
         case MetadataTableId.propertyMap:
-          tableStream[MetadataTable.propertyMap].rows = rows;
+          tableStream[.propertyMap].rows = rows;
         case MetadataTableId.property:
-          tableStream[MetadataTable.property].rows = rows;
+          tableStream[.property].rows = rows;
         case MetadataTableId.methodSemantics:
-          tableStream[MetadataTable.methodSemantics].rows = rows;
+          tableStream[.methodSemantics].rows = rows;
         case MetadataTableId.methodImpl:
-          tableStream[MetadataTable.methodImpl].rows = rows;
+          tableStream[.methodImpl].rows = rows;
         case MetadataTableId.moduleRef:
-          tableStream[MetadataTable.moduleRef].rows = rows;
+          tableStream[.moduleRef].rows = rows;
         case MetadataTableId.typeSpec:
-          tableStream[MetadataTable.typeSpec].rows = rows;
+          tableStream[.typeSpec].rows = rows;
         case MetadataTableId.implMap:
-          tableStream[MetadataTable.implMap].rows = rows;
+          tableStream[.implMap].rows = rows;
         case MetadataTableId.fieldRVA:
-          tableStream[MetadataTable.fieldRVA].rows = rows;
+          tableStream[.fieldRVA].rows = rows;
         case MetadataTableId.assembly:
-          tableStream[MetadataTable.assembly].rows = rows;
+          tableStream[.assembly].rows = rows;
         case MetadataTableId.assemblyProcessor:
-          tableStream[MetadataTable.assemblyProcessor].rows = rows;
+          tableStream[.assemblyProcessor].rows = rows;
         case MetadataTableId.assemblyOS:
-          tableStream[MetadataTable.assemblyOS].rows = rows;
+          tableStream[.assemblyOS].rows = rows;
         case MetadataTableId.assemblyRef:
-          tableStream[MetadataTable.assemblyRef].rows = rows;
+          tableStream[.assemblyRef].rows = rows;
         case MetadataTableId.assemblyRefProcessor:
-          tableStream[MetadataTable.assemblyRefProcessor].rows = rows;
+          tableStream[.assemblyRefProcessor].rows = rows;
         case MetadataTableId.assemblyRefOS:
-          tableStream[MetadataTable.assemblyRefOS].rows = rows;
+          tableStream[.assemblyRefOS].rows = rows;
         case MetadataTableId.file:
-          tableStream[MetadataTable.file].rows = rows;
+          tableStream[.file].rows = rows;
         case MetadataTableId.exportedType:
-          tableStream[MetadataTable.exportedType].rows = rows;
+          tableStream[.exportedType].rows = rows;
         case MetadataTableId.manifestResource:
-          tableStream[MetadataTable.manifestResource].rows = rows;
+          tableStream[.manifestResource].rows = rows;
         case MetadataTableId.nestedClass:
-          tableStream[MetadataTable.nestedClass].rows = rows;
+          tableStream[.nestedClass].rows = rows;
         case MetadataTableId.genericParam:
-          tableStream[MetadataTable.genericParam].rows = rows;
+          tableStream[.genericParam].rows = rows;
         case MetadataTableId.methodSpec:
-          tableStream[MetadataTable.methodSpec].rows = rows;
+          tableStream[.methodSpec].rows = rows;
         case MetadataTableId.genericParamConstraint:
-          tableStream[MetadataTable.genericParamConstraint].rows = rows;
+          tableStream[.genericParamConstraint].rows = rows;
         default:
           throw const WinmdException('Unknown table index');
       }
@@ -323,89 +315,89 @@ final class MetadataReader {
 
     final customAttributeType = codedIndexSize([
       0,
-      tableStream[MetadataTable.methodDef].rows,
-      tableStream[MetadataTable.memberRef].rows,
+      tableStream[.methodDef].rows,
+      tableStream[.memberRef].rows,
       0,
       0,
     ]);
     final hasConstant = codedIndexSize([
-      tableStream[MetadataTable.field].rows,
-      tableStream[MetadataTable.param].rows,
-      tableStream[MetadataTable.property].rows,
+      tableStream[.field].rows,
+      tableStream[.param].rows,
+      tableStream[.property].rows,
     ]);
     final hasCustomAttribute = codedIndexSize([
-      tableStream[MetadataTable.methodDef].rows,
-      tableStream[MetadataTable.field].rows,
-      tableStream[MetadataTable.typeRef].rows,
-      tableStream[MetadataTable.typeDef].rows,
-      tableStream[MetadataTable.param].rows,
-      tableStream[MetadataTable.interfaceImpl].rows,
-      tableStream[MetadataTable.memberRef].rows,
-      tableStream[MetadataTable.module].rows,
-      tableStream[MetadataTable.property].rows,
-      tableStream[MetadataTable.event].rows,
-      tableStream[MetadataTable.standAloneSig].rows,
-      tableStream[MetadataTable.moduleRef].rows,
-      tableStream[MetadataTable.typeSpec].rows,
-      tableStream[MetadataTable.assembly].rows,
-      tableStream[MetadataTable.assemblyRef].rows,
-      tableStream[MetadataTable.file].rows,
-      tableStream[MetadataTable.exportedType].rows,
-      tableStream[MetadataTable.manifestResource].rows,
-      tableStream[MetadataTable.genericParam].rows,
-      tableStream[MetadataTable.genericParamConstraint].rows,
-      tableStream[MetadataTable.methodSpec].rows,
+      tableStream[.methodDef].rows,
+      tableStream[.field].rows,
+      tableStream[.typeRef].rows,
+      tableStream[.typeDef].rows,
+      tableStream[.param].rows,
+      tableStream[.interfaceImpl].rows,
+      tableStream[.memberRef].rows,
+      tableStream[.module].rows,
+      tableStream[.property].rows,
+      tableStream[.event].rows,
+      tableStream[.standAloneSig].rows,
+      tableStream[.moduleRef].rows,
+      tableStream[.typeSpec].rows,
+      tableStream[.assembly].rows,
+      tableStream[.assemblyRef].rows,
+      tableStream[.file].rows,
+      tableStream[.exportedType].rows,
+      tableStream[.manifestResource].rows,
+      tableStream[.genericParam].rows,
+      tableStream[.genericParamConstraint].rows,
+      tableStream[.methodSpec].rows,
     ]);
     final hasDeclSecurity = codedIndexSize([
-      tableStream[MetadataTable.typeDef].rows,
-      tableStream[MetadataTable.methodDef].rows,
-      tableStream[MetadataTable.assembly].rows,
+      tableStream[.typeDef].rows,
+      tableStream[.methodDef].rows,
+      tableStream[.assembly].rows,
     ]);
     final hasFieldMarshal = codedIndexSize([
-      tableStream[MetadataTable.field].rows,
-      tableStream[MetadataTable.param].rows,
+      tableStream[.field].rows,
+      tableStream[.param].rows,
     ]);
     final hasSemantics = codedIndexSize([
-      tableStream[MetadataTable.event].rows,
-      tableStream[MetadataTable.property].rows,
+      tableStream[.event].rows,
+      tableStream[.property].rows,
     ]);
     final implementation = codedIndexSize([
-      tableStream[MetadataTable.file].rows,
-      tableStream[MetadataTable.assemblyRef].rows,
-      tableStream[MetadataTable.exportedType].rows,
+      tableStream[.file].rows,
+      tableStream[.assemblyRef].rows,
+      tableStream[.exportedType].rows,
     ]);
     final memberForwarded = codedIndexSize([
-      tableStream[MetadataTable.field].rows,
-      tableStream[MetadataTable.methodDef].rows,
+      tableStream[.field].rows,
+      tableStream[.methodDef].rows,
     ]);
     final memberRefParent = codedIndexSize([
-      tableStream[MetadataTable.typeDef].rows,
-      tableStream[MetadataTable.typeRef].rows,
-      tableStream[MetadataTable.moduleRef].rows,
-      tableStream[MetadataTable.methodDef].rows,
-      tableStream[MetadataTable.typeSpec].rows,
+      tableStream[.typeDef].rows,
+      tableStream[.typeRef].rows,
+      tableStream[.moduleRef].rows,
+      tableStream[.methodDef].rows,
+      tableStream[.typeSpec].rows,
     ]);
     final methodDefOrRef = codedIndexSize([
-      tableStream[MetadataTable.methodDef].rows,
-      tableStream[MetadataTable.memberRef].rows,
+      tableStream[.methodDef].rows,
+      tableStream[.memberRef].rows,
     ]);
     final resolutionScope = codedIndexSize([
-      tableStream[MetadataTable.module].rows,
-      tableStream[MetadataTable.moduleRef].rows,
-      tableStream[MetadataTable.assemblyRef].rows,
-      tableStream[MetadataTable.typeRef].rows,
+      tableStream[.module].rows,
+      tableStream[.moduleRef].rows,
+      tableStream[.assemblyRef].rows,
+      tableStream[.typeRef].rows,
     ]);
     final typeDefOrRef = codedIndexSize([
-      tableStream[MetadataTable.typeDef].rows,
-      tableStream[MetadataTable.typeRef].rows,
-      tableStream[MetadataTable.typeSpec].rows,
+      tableStream[.typeDef].rows,
+      tableStream[.typeRef].rows,
+      tableStream[.typeSpec].rows,
     ]);
     final typeOrMethodDef = codedIndexSize([
-      tableStream[MetadataTable.typeDef].rows,
-      tableStream[MetadataTable.methodDef].rows,
+      tableStream[.typeDef].rows,
+      tableStream[.methodDef].rows,
     ]);
 
-    tableStream[MetadataTable.assembly]._setColumns(
+    tableStream[.assembly]._setColumns(
       4,
       8,
       4,
@@ -413,9 +405,9 @@ final class MetadataReader {
       stringIndexSize,
       stringIndexSize,
     );
-    tableStream[MetadataTable.assemblyOS]._setColumns(4, 4, 4);
-    tableStream[MetadataTable.assemblyProcessor]._setColumns(4);
-    tableStream[MetadataTable.assemblyRef]._setColumns(
+    tableStream[.assemblyOS]._setColumns(4, 4, 4);
+    tableStream[.assemblyProcessor]._setColumns(4);
+    tableStream[.assemblyRef]._setColumns(
       8,
       4,
       blobIndexSize,
@@ -423,205 +415,167 @@ final class MetadataReader {
       stringIndexSize,
       blobIndexSize,
     );
-    tableStream[MetadataTable.assemblyRefOS]._setColumns(
+    tableStream[.assemblyRefOS]._setColumns(
       4,
       4,
       4,
-      tableStream[MetadataTable.assemblyRef]._indexWidth,
+      tableStream[.assemblyRef]._indexWidth,
     );
-    tableStream[MetadataTable.assemblyRefProcessor]._setColumns(
+    tableStream[.assemblyRefProcessor]._setColumns(
       4,
-      tableStream[MetadataTable.assemblyRef]._indexWidth,
+      tableStream[.assemblyRef]._indexWidth,
     );
-    tableStream[MetadataTable.classLayout]._setColumns(
+    tableStream[.classLayout]._setColumns(
       2,
       4,
-      tableStream[MetadataTable.typeDef]._indexWidth,
+      tableStream[.typeDef]._indexWidth,
     );
-    tableStream[MetadataTable.constant]._setColumns(
-      2,
-      hasConstant,
-      blobIndexSize,
-    );
-    tableStream[MetadataTable.customAttribute]._setColumns(
+    tableStream[.constant]._setColumns(2, hasConstant, blobIndexSize);
+    tableStream[.customAttribute]._setColumns(
       hasCustomAttribute,
       customAttributeType,
       blobIndexSize,
     );
-    tableStream[MetadataTable.declSecurity]._setColumns(
-      2,
-      hasDeclSecurity,
-      blobIndexSize,
+    tableStream[.declSecurity]._setColumns(2, hasDeclSecurity, blobIndexSize);
+    tableStream[.eventMap]._setColumns(
+      tableStream[.typeDef]._indexWidth,
+      tableStream[.event]._indexWidth,
     );
-    tableStream[MetadataTable.eventMap]._setColumns(
-      tableStream[MetadataTable.typeDef]._indexWidth,
-      tableStream[MetadataTable.event]._indexWidth,
-    );
-    tableStream[MetadataTable.event]._setColumns(
-      2,
-      stringIndexSize,
-      typeDefOrRef,
-    );
-    tableStream[MetadataTable.exportedType]._setColumns(
+    tableStream[.event]._setColumns(2, stringIndexSize, typeDefOrRef);
+    tableStream[.exportedType]._setColumns(
       4,
-      tableStream[MetadataTable.typeDef]._indexWidth,
+      tableStream[.typeDef]._indexWidth,
       stringIndexSize,
       stringIndexSize,
       implementation,
     );
-    tableStream[MetadataTable.field]._setColumns(
-      2,
-      stringIndexSize,
-      blobIndexSize,
-    );
-    tableStream[MetadataTable.fieldLayout]._setColumns(
-      4,
-      tableStream[MetadataTable.field]._indexWidth,
-    );
-    tableStream[MetadataTable.fieldMarshal]._setColumns(
-      hasFieldMarshal,
-      blobIndexSize,
-    );
-    tableStream[MetadataTable.fieldRVA]._setColumns(
-      4,
-      tableStream[MetadataTable.field]._indexWidth,
-    );
-    tableStream[MetadataTable.file]._setColumns(
-      4,
-      stringIndexSize,
-      blobIndexSize,
-    );
-    tableStream[MetadataTable.genericParam]._setColumns(
+    tableStream[.field]._setColumns(2, stringIndexSize, blobIndexSize);
+    tableStream[.fieldLayout]._setColumns(4, tableStream[.field]._indexWidth);
+    tableStream[.fieldMarshal]._setColumns(hasFieldMarshal, blobIndexSize);
+    tableStream[.fieldRVA]._setColumns(4, tableStream[.field]._indexWidth);
+    tableStream[.file]._setColumns(4, stringIndexSize, blobIndexSize);
+    tableStream[.genericParam]._setColumns(
       2,
       2,
       typeOrMethodDef,
       stringIndexSize,
     );
-    tableStream[MetadataTable.genericParamConstraint]._setColumns(
-      tableStream[MetadataTable.genericParam]._indexWidth,
+    tableStream[.genericParamConstraint]._setColumns(
+      tableStream[.genericParam]._indexWidth,
       typeDefOrRef,
     );
-    tableStream[MetadataTable.implMap]._setColumns(
+    tableStream[.implMap]._setColumns(
       2,
       memberForwarded,
       stringIndexSize,
-      tableStream[MetadataTable.moduleRef]._indexWidth,
+      tableStream[.moduleRef]._indexWidth,
     );
-    tableStream[MetadataTable.interfaceImpl]._setColumns(
-      tableStream[MetadataTable.typeDef]._indexWidth,
+    tableStream[.interfaceImpl]._setColumns(
+      tableStream[.typeDef]._indexWidth,
       typeDefOrRef,
     );
-    tableStream[MetadataTable.manifestResource]._setColumns(
+    tableStream[.manifestResource]._setColumns(
       4,
       4,
       stringIndexSize,
       implementation,
     );
-    tableStream[MetadataTable.memberRef]._setColumns(
+    tableStream[.memberRef]._setColumns(
       memberRefParent,
       stringIndexSize,
       blobIndexSize,
     );
-    tableStream[MetadataTable.methodDef]._setColumns(
+    tableStream[.methodDef]._setColumns(
       4,
       2,
       2,
       stringIndexSize,
       blobIndexSize,
-      tableStream[MetadataTable.param]._indexWidth,
+      tableStream[.param]._indexWidth,
     );
-    tableStream[MetadataTable.methodImpl]._setColumns(
-      tableStream[MetadataTable.typeDef]._indexWidth,
+    tableStream[.methodImpl]._setColumns(
+      tableStream[.typeDef]._indexWidth,
       methodDefOrRef,
       methodDefOrRef,
     );
-    tableStream[MetadataTable.methodSemantics]._setColumns(
+    tableStream[.methodSemantics]._setColumns(
       2,
-      tableStream[MetadataTable.methodDef]._indexWidth,
+      tableStream[.methodDef]._indexWidth,
       hasSemantics,
     );
-    tableStream[MetadataTable.methodSpec]._setColumns(
-      methodDefOrRef,
-      blobIndexSize,
-    );
-    tableStream[MetadataTable.module]._setColumns(
+    tableStream[.methodSpec]._setColumns(methodDefOrRef, blobIndexSize);
+    tableStream[.module]._setColumns(
       2,
       stringIndexSize,
       guidIndexSize,
       guidIndexSize,
       guidIndexSize,
     );
-    tableStream[MetadataTable.moduleRef]._setColumns(stringIndexSize);
-    tableStream[MetadataTable.nestedClass]._setColumns(
-      tableStream[MetadataTable.typeDef]._indexWidth,
-      tableStream[MetadataTable.typeDef]._indexWidth,
+    tableStream[.moduleRef]._setColumns(stringIndexSize);
+    tableStream[.nestedClass]._setColumns(
+      tableStream[.typeDef]._indexWidth,
+      tableStream[.typeDef]._indexWidth,
     );
-    tableStream[MetadataTable.param]._setColumns(2, 2, stringIndexSize);
-    tableStream[MetadataTable.property]._setColumns(
-      2,
-      stringIndexSize,
-      blobIndexSize,
+    tableStream[.param]._setColumns(2, 2, stringIndexSize);
+    tableStream[.property]._setColumns(2, stringIndexSize, blobIndexSize);
+    tableStream[.propertyMap]._setColumns(
+      tableStream[.typeDef]._indexWidth,
+      tableStream[.property]._indexWidth,
     );
-    tableStream[MetadataTable.propertyMap]._setColumns(
-      tableStream[MetadataTable.typeDef]._indexWidth,
-      tableStream[MetadataTable.property]._indexWidth,
-    );
-    tableStream[MetadataTable.standAloneSig]._setColumns(blobIndexSize);
-    tableStream[MetadataTable.typeDef]._setColumns(
+    tableStream[.standAloneSig]._setColumns(blobIndexSize);
+    tableStream[.typeDef]._setColumns(
       4,
       stringIndexSize,
       stringIndexSize,
       typeDefOrRef,
-      tableStream[MetadataTable.field]._indexWidth,
-      tableStream[MetadataTable.methodDef]._indexWidth,
+      tableStream[.field]._indexWidth,
+      tableStream[.methodDef]._indexWidth,
     );
-    tableStream[MetadataTable.typeRef]._setColumns(
+    tableStream[.typeRef]._setColumns(
       resolutionScope,
       stringIndexSize,
       stringIndexSize,
     );
-    tableStream[MetadataTable.typeSpec]._setColumns(blobIndexSize);
+    tableStream[.typeSpec]._setColumns(blobIndexSize);
 
-    offset = tableStream[MetadataTable.module]._setOffset(offset);
-    offset = tableStream[MetadataTable.typeRef]._setOffset(offset);
-    offset = tableStream[MetadataTable.typeDef]._setOffset(offset);
-    offset = tableStream[MetadataTable.field]._setOffset(offset);
-    offset = tableStream[MetadataTable.methodDef]._setOffset(offset);
-    offset = tableStream[MetadataTable.param]._setOffset(offset);
-    offset = tableStream[MetadataTable.interfaceImpl]._setOffset(offset);
-    offset = tableStream[MetadataTable.memberRef]._setOffset(offset);
-    offset = tableStream[MetadataTable.constant]._setOffset(offset);
-    offset = tableStream[MetadataTable.customAttribute]._setOffset(offset);
-    offset = tableStream[MetadataTable.fieldMarshal]._setOffset(offset);
-    offset = tableStream[MetadataTable.declSecurity]._setOffset(offset);
-    offset = tableStream[MetadataTable.classLayout]._setOffset(offset);
-    offset = tableStream[MetadataTable.fieldLayout]._setOffset(offset);
-    offset = tableStream[MetadataTable.standAloneSig]._setOffset(offset);
-    offset = tableStream[MetadataTable.eventMap]._setOffset(offset);
-    offset = tableStream[MetadataTable.event]._setOffset(offset);
-    offset = tableStream[MetadataTable.propertyMap]._setOffset(offset);
-    offset = tableStream[MetadataTable.property]._setOffset(offset);
-    offset = tableStream[MetadataTable.methodSemantics]._setOffset(offset);
-    offset = tableStream[MetadataTable.methodImpl]._setOffset(offset);
-    offset = tableStream[MetadataTable.moduleRef]._setOffset(offset);
-    offset = tableStream[MetadataTable.typeSpec]._setOffset(offset);
-    offset = tableStream[MetadataTable.implMap]._setOffset(offset);
-    offset = tableStream[MetadataTable.fieldRVA]._setOffset(offset);
-    offset = tableStream[MetadataTable.assembly]._setOffset(offset);
-    offset = tableStream[MetadataTable.assemblyProcessor]._setOffset(offset);
-    offset = tableStream[MetadataTable.assemblyOS]._setOffset(offset);
-    offset = tableStream[MetadataTable.assemblyRef]._setOffset(offset);
-    offset = tableStream[MetadataTable.assemblyRefProcessor]._setOffset(offset);
-    offset = tableStream[MetadataTable.assemblyRefOS]._setOffset(offset);
-    offset = tableStream[MetadataTable.file]._setOffset(offset);
-    offset = tableStream[MetadataTable.exportedType]._setOffset(offset);
-    offset = tableStream[MetadataTable.manifestResource]._setOffset(offset);
-    offset = tableStream[MetadataTable.nestedClass]._setOffset(offset);
-    offset = tableStream[MetadataTable.genericParam]._setOffset(offset);
-    offset = tableStream[MetadataTable.methodSpec]._setOffset(offset);
-    offset = tableStream[MetadataTable.genericParamConstraint]._setOffset(
-      offset,
-    );
+    offset = tableStream[.module]._setOffset(offset);
+    offset = tableStream[.typeRef]._setOffset(offset);
+    offset = tableStream[.typeDef]._setOffset(offset);
+    offset = tableStream[.field]._setOffset(offset);
+    offset = tableStream[.methodDef]._setOffset(offset);
+    offset = tableStream[.param]._setOffset(offset);
+    offset = tableStream[.interfaceImpl]._setOffset(offset);
+    offset = tableStream[.memberRef]._setOffset(offset);
+    offset = tableStream[.constant]._setOffset(offset);
+    offset = tableStream[.customAttribute]._setOffset(offset);
+    offset = tableStream[.fieldMarshal]._setOffset(offset);
+    offset = tableStream[.declSecurity]._setOffset(offset);
+    offset = tableStream[.classLayout]._setOffset(offset);
+    offset = tableStream[.fieldLayout]._setOffset(offset);
+    offset = tableStream[.standAloneSig]._setOffset(offset);
+    offset = tableStream[.eventMap]._setOffset(offset);
+    offset = tableStream[.event]._setOffset(offset);
+    offset = tableStream[.propertyMap]._setOffset(offset);
+    offset = tableStream[.property]._setOffset(offset);
+    offset = tableStream[.methodSemantics]._setOffset(offset);
+    offset = tableStream[.methodImpl]._setOffset(offset);
+    offset = tableStream[.moduleRef]._setOffset(offset);
+    offset = tableStream[.typeSpec]._setOffset(offset);
+    offset = tableStream[.implMap]._setOffset(offset);
+    offset = tableStream[.fieldRVA]._setOffset(offset);
+    offset = tableStream[.assembly]._setOffset(offset);
+    offset = tableStream[.assemblyProcessor]._setOffset(offset);
+    offset = tableStream[.assemblyOS]._setOffset(offset);
+    offset = tableStream[.assemblyRef]._setOffset(offset);
+    offset = tableStream[.assemblyRefProcessor]._setOffset(offset);
+    offset = tableStream[.assemblyRefOS]._setOffset(offset);
+    offset = tableStream[.file]._setOffset(offset);
+    offset = tableStream[.exportedType]._setOffset(offset);
+    offset = tableStream[.manifestResource]._setOffset(offset);
+    offset = tableStream[.nestedClass]._setOffset(offset);
+    offset = tableStream[.genericParam]._setOffset(offset);
+    offset = tableStream[.methodSpec]._setOffset(offset);
+    offset = tableStream[.genericParamConstraint]._setOffset(offset);
 
     return MetadataReader._(
       data.asUnmodifiableView(),
@@ -661,11 +615,11 @@ final class MetadataReader {
   final UserStringHeap userStringHeap;
 
   /// The module's name.
-  String get moduleName => readString(0, MetadataTable.module, 1);
+  String get moduleName => readString(0, .module, 1);
 
   /// The Module Version ID (MVID), a GUID that uniquely identifies the version
   /// of the module.
-  Guid get moduleMvid => readGuid(0, MetadataTable.module, 2);
+  Guid get moduleMvid => readGuid(0, .module, 2);
 
   /// Reads a blob from the specified [row] and [column] of [table].
   @pragma('vm:prefer-inline')
@@ -745,11 +699,11 @@ final class MetadataReader {
         // Value matches, now adjust bounds.
         final lower = _lowerBound(table, first, middle, column, value);
         final upper = _upperBound(table, middle + 1, last, column, value);
-        return Iterable.generate(upper - lower, (i) => lower + i);
+        return .generate(upper - lower, (i) => lower + i);
       }
     }
 
-    return const Iterable.empty();
+    return const .empty();
   }
 
   /// Returns an iterable of row indices between two related tables.
@@ -764,8 +718,8 @@ final class MetadataReader {
     final last = next < tableStream[table].rows
         ? readUint(next, table, column) - 1
         : tableStream[otherTable].rows;
-    if (last <= first) return const Iterable.empty();
-    return Iterable.generate(last - first, (i) => first + i);
+    if (last <= first) return const .empty();
+    return .generate(last - first, (i) => first + i);
   }
 
   /// Returns the parent row index for the specified [row] within a [table].
@@ -830,15 +784,11 @@ final class TableData {
   });
 
   /// Creates an empty [TableData] with no rows and default column layouts.
-  factory TableData.empty() => TableData(
+  factory TableData.empty() => .new(
     offset: 0,
     rows: 0,
     width: 0,
-    columns: List.generate(
-      6,
-      (i) => TableColumn(offset: 0, width: 0),
-      growable: false,
-    ),
+    columns: .generate(6, (i) => .new(offset: 0, width: 0), growable: false),
   );
 
   /// Byte offset of the table within the metadata stream.

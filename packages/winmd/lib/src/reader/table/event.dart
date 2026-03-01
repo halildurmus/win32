@@ -27,7 +27,7 @@ final class Event extends Row with HasCustomAttributes {
   Event(super.metadataIndex, super.readerIndex, super.index);
 
   @override
-  MetadataTable get table => MetadataTable.event;
+  MetadataTable get table => .event;
 
   @override
   int get token => (MetadataTableId.event << 24) | index;
@@ -97,5 +97,5 @@ final class EventCompanion extends RowCompanion<Event> {
   Event Function(MetadataIndex, int, int) get constructor => Event.new;
 
   @override
-  MetadataTable get table => MetadataTable.event;
+  MetadataTable get table => .event;
 }

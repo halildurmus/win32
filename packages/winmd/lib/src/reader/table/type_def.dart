@@ -35,7 +35,7 @@ final class TypeDef extends Row with HasCustomAttributes {
   TypeDef(super.metadataIndex, super.readerIndex, super.index);
 
   @override
-  MetadataTable get table => MetadataTable.typeDef;
+  MetadataTable get table => .typeDef;
 
   @override
   int get token => (MetadataTableId.typeDef << 24) | index;
@@ -277,5 +277,5 @@ final class TypeDefCompanion extends RowCompanion<TypeDef> {
   TypeDef Function(MetadataIndex, int, int) get constructor => TypeDef.new;
 
   @override
-  MetadataTable get table => MetadataTable.typeDef;
+  MetadataTable get table => .typeDef;
 }

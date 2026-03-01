@@ -35,5 +35,5 @@ final class PropertyMapCompanion extends RowCompanion<PropertyMap> {
   const PropertyMapCompanion();
 
   @override
-  MetadataTableId get tableId => MetadataTableId.propertyMap;
+  MetadataTableId get tableId => .propertyMap;
 }

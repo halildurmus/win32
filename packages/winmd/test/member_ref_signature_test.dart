@@ -26,7 +26,7 @@ void main() {
   group('MethodRefSig', () {
     test('default constructor uses expected values', () {
       const sig = MethodRefSig();
-      check(sig.callingConvention).equals(CallingConvention.DEFAULT);
+      check(sig.callingConvention).equals(.DEFAULT);
       check(sig.returnType).equals(const VoidType());
       check(sig.types).isEmpty();
       check(sig.toString()).equals(
@@ -37,12 +37,12 @@ void main() {
 
     test('equality: equal for same flags, return type, and types', () {
       const sig1 = MethodRefSig(
-        callingConvention: CallingConvention.EXPLICITTHIS,
+        callingConvention: .EXPLICITTHIS,
         returnType: BoolType(),
         types: [Int32Type()],
       );
       const sig2 = MethodRefSig(
-        callingConvention: CallingConvention.EXPLICITTHIS,
+        callingConvention: .EXPLICITTHIS,
         returnType: BoolType(),
         types: [Int32Type()],
       );
@@ -51,7 +51,7 @@ void main() {
 
     test('equality: instances with different flags are not equal', () {
       const sig1 = MethodRefSig();
-      const sig2 = MethodRefSig(callingConvention: CallingConvention.HASTHIS);
+      const sig2 = MethodRefSig(callingConvention: .HASTHIS);
       check(sig1).not((it) => it.equals(sig2));
     });
 

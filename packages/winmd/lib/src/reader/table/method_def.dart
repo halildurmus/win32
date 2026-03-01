@@ -30,7 +30,7 @@ final class MethodDef extends Row with HasCustomAttributes {
   MethodDef(super.metadataIndex, super.readerIndex, super.index);
 
   @override
-  MetadataTable get table => MetadataTable.methodDef;
+  MetadataTable get table => .methodDef;
 
   @override
   int get token => (MetadataTableId.methodDef << 24) | index;
@@ -127,5 +127,5 @@ final class MethodDefCompanion extends RowCompanion<MethodDef> {
   MethodDef Function(MetadataIndex, int, int) get constructor => MethodDef.new;
 
   @override
-  MetadataTable get table => MetadataTable.methodDef;
+  MetadataTable get table => .methodDef;
 }

@@ -22,7 +22,7 @@ final class Module extends Row with HasCustomAttributes {
   Module(super.metadataIndex, super.readerIndex, super.index);
 
   @override
-  MetadataTable get table => MetadataTable.module;
+  MetadataTable get table => .module;
 
   @override
   int get token => (MetadataTableId.module << 24) | index;
@@ -46,5 +46,5 @@ final class ModuleCompanion extends RowCompanion<Module> {
   Module Function(MetadataIndex, int, int) get constructor => Module.new;
 
   @override
-  MetadataTable get table => MetadataTable.module;
+  MetadataTable get table => .module;
 }

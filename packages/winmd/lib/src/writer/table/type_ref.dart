@@ -43,5 +43,5 @@ final class TypeRefCompanion extends RowCompanion<TypeRef> {
   const TypeRefCompanion();
 
   @override
-  MetadataTableId get tableId => MetadataTableId.typeRef;
+  MetadataTableId get tableId => .typeRef;
 }

@@ -31,5 +31,5 @@ final class TypeSpecCompanion extends RowCompanion<TypeSpec> {
   const TypeSpecCompanion();
 
   @override
-  MetadataTableId get tableId => MetadataTableId.typeSpec;
+  MetadataTableId get tableId => .typeSpec;
 }

@@ -70,7 +70,7 @@ void main() {
       final assemblyRef = index.assemblyRef.first;
       check(assemblyRef.name).equals('mscorlib');
       check(assemblyRef.version).equals('4.0.0.0');
-      check(assemblyRef.flags).equals(const AssemblyFlags(0));
+      check(assemblyRef.flags).equals(const .new(0));
       final module = index.module.first;
       check(module.name).equals('MyMetadata');
       check(module.mvid.isZero).isFalse();
@@ -78,7 +78,7 @@ void main() {
       check(typeDef.namespace).isEmpty();
       check(typeDef.name).equals('<Module>');
       check(typeDef.extends$).isNull();
-      check(typeDef.flags).equals(const TypeAttributes(0));
+      check(typeDef.flags).equals(const .new(0));
     });
 
     test('Class', () {
@@ -153,7 +153,7 @@ void main() {
 
       final interfaceImpl = writer.writeInterfaceImpl(
         class$: classTypeDef,
-        interface: const NamedClassType(winmd.TypeName('Namespace', 'IName')),
+        interface: const .new(winmd.TypeName('Namespace', 'IName')),
       );
 
       final defaultAttribute = MemberRefParent.typeRef(
@@ -171,12 +171,12 @@ void main() {
 
       writer
         ..writeCustomAttribute(
-          parent: HasCustomAttribute.interfaceImpl(interfaceImpl),
-          type: CustomAttributeType.memberRef(defaultCtor),
+          parent: .interfaceImpl(interfaceImpl),
+          type: .memberRef(defaultCtor),
         )
         ..writeCustomAttribute(
-          parent: HasCustomAttribute.typeDef(interfaceTypeDef),
-          type: CustomAttributeType.memberRef(guidCtor),
+          parent: .typeDef(interfaceTypeDef),
+          type: .memberRef(guidCtor),
           fixedArgs: guidValue,
         );
 
@@ -244,8 +244,8 @@ void main() {
       ];
 
       writer.writeCustomAttribute(
-        parent: HasCustomAttribute.typeDef(typeDef),
-        type: CustomAttributeType.memberRef(guidCtor),
+        parent: .typeDef(typeDef),
+        type: .memberRef(guidCtor),
         fixedArgs: guidValue,
       );
 
@@ -265,26 +265,22 @@ void main() {
     test('FieldMarshal', () {
       final writer = MetadataWriter(name: 'MyMetadata');
       final someArray = writer.writeField(
-        flags: FieldAttributes.public,
+        flags: .public,
         name: 'SomeArray',
         signature: const ArrayType(Int32Type()),
       );
       writer.writeFieldMarshal(
-        parent: HasFieldMarshal.field(someArray),
-        descriptor: const winmd.MarshallingDescriptor.array(
-          elementType: winmd.NATIVE_TYPE_I4,
-        ),
+        parent: .field(someArray),
+        descriptor: const .array(elementType: winmd.NATIVE_TYPE_I4),
       );
       final someString = writer.writeField(
-        flags: FieldAttributes.public,
+        flags: .public,
         name: 'SomeString',
-        signature: const NamedValueType(winmd.TypeName('System', 'String')),
+        signature: const NamedValueType(.new('System', 'String')),
       );
       writer.writeFieldMarshal(
-        parent: HasFieldMarshal.field(someString),
-        descriptor: const winmd.MarshallingDescriptor.simple(
-          winmd.NATIVE_TYPE_LPWSTR,
-        ),
+        parent: .field(someString),
+        descriptor: const .simple(winmd.NATIVE_TYPE_LPWSTR),
       );
       final bytes = writer.toBytes();
       final reader = winmd.MetadataReader.read(bytes);
@@ -298,11 +294,9 @@ void main() {
           .isA<winmd.HasFieldMarshalField>()
           .has((it) => it.value.name, 'value.name')
           .equals('SomeArray');
-      check(someArrayMarshal.nativeType).equals(
-        const winmd.MarshallingDescriptor.array(
-          elementType: winmd.NATIVE_TYPE_I4,
-        ),
-      );
+      check(
+        someArrayMarshal.nativeType,
+      ).equals(const .array(elementType: winmd.NATIVE_TYPE_I4));
 
       final someStringMarshal = someStringField.fieldMarshal;
       check(someStringMarshal).isNotNull();
@@ -310,9 +304,9 @@ void main() {
           .isA<winmd.HasFieldMarshalField>()
           .has((it) => it.value.name, 'value.name')
           .equals('SomeString');
-      check(someStringMarshal.nativeType).equals(
-        const winmd.MarshallingDescriptor.simple(winmd.NATIVE_TYPE_LPWSTR),
-      );
+      check(
+        someStringMarshal.nativeType,
+      ).equals(const .simple(winmd.NATIVE_TYPE_LPWSTR));
     });
 
     test('Interface', () {
@@ -338,17 +332,17 @@ void main() {
         ..writeMethodDef(
           flags: flags,
           name: 'One',
-          signature: const MethodSignature(
+          signature: const .new(
             returnType: Int32Type(),
             types: [Int8Type(), Int16Type()],
           ),
         )
-        ..writeParam(flags: ParamAttributes.in$, sequence: 1, name: 'i8')
-        ..writeParam(flags: ParamAttributes.in$, sequence: 2, name: 'i16')
+        ..writeParam(flags: .in$, sequence: 1, name: 'i8')
+        ..writeParam(flags: .in$, sequence: 2, name: 'i16')
         ..writeMethodDef(
           flags: flags,
           name: 'Two',
-          signature: const MethodSignature(returnType: StringType()),
+          signature: const .new(returnType: StringType()),
         );
 
       final reader = winmd.MetadataReader.read(writer.toBytes());
@@ -360,16 +354,11 @@ void main() {
 
       check(methods[0].name).equals('One');
       check(methods[0].signature).equals(
-        const winmd.MethodSignature(
-          returnType: Int32Type(),
-          types: [Int8Type(), Int16Type()],
-        ),
+        const .new(returnType: Int32Type(), types: [Int8Type(), Int16Type()]),
       );
 
       check(methods[1].name).equals('Two');
-      check(
-        methods[1].signature,
-      ).equals(const winmd.MethodSignature(returnType: StringType()));
+      check(methods[1].signature).equals(const .new(returnType: StringType()));
     });
 
     test('Struct', () {
@@ -383,7 +372,7 @@ void main() {
       writer.writeTypeDef(
         namespace: 'Namespace',
         name: 'Name',
-        extends$: TypeDefOrRef.typeRef(valueType),
+        extends$: .typeRef(valueType),
         flags:
             TypeAttributes.public |
             TypeAttributes.sequentialLayout |
@@ -392,14 +381,14 @@ void main() {
       );
 
       final someGuid = writer.writeField(
-        flags: FieldAttributes.public,
+        flags: .public,
         name: 'SomeGuid',
-        signature: const NamedValueType(winmd.TypeName('System', 'Guid')),
+        signature: const NamedValueType(.new('System', 'Guid')),
       );
       writer.writeFieldLayout(offset: 0, field: someGuid);
 
       final someNum = writer.writeField(
-        flags: FieldAttributes.public,
+        flags: .public,
         name: 'SomeNum',
         signature: const Int32Type(),
       );
@@ -416,7 +405,7 @@ void main() {
       check(fields[0].name).equals('SomeGuid');
       check(
         fields[0].signature,
-      ).equals(const NamedValueType(winmd.TypeName('System', 'Guid')));
+      ).equals(const NamedValueType(.new('System', 'Guid')));
       check(
         fields[0].layout,
       ).isNotNull().has((it) => it.offset, 'offset').equals(0);

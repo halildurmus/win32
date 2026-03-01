@@ -21,7 +21,7 @@ final class DeclSecurity extends Row {
   DeclSecurity(super.metadataIndex, super.readerIndex, super.index);
 
   @override
-  MetadataTable get table => MetadataTable.declSecurity;
+  MetadataTable get table => .declSecurity;
 
   @override
   int get token => (MetadataTableId.declSecurity << 24) | index;
@@ -46,5 +46,5 @@ final class DeclSecurityCompanion extends RowCompanion<DeclSecurity> {
       DeclSecurity.new;
 
   @override
-  MetadataTable get table => MetadataTable.declSecurity;
+  MetadataTable get table => .declSecurity;
 }

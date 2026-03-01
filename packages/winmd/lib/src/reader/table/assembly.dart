@@ -28,7 +28,7 @@ final class Assembly extends Row with HasCustomAttributes {
   Assembly(super.metadataIndex, super.readerIndex, super.index);
 
   @override
-  MetadataTable get table => MetadataTable.assembly;
+  MetadataTable get table => .assembly;
 
   @override
   int get token => (MetadataTableId.assembly << 24) | index;
@@ -87,5 +87,5 @@ final class AssemblyCompanion extends RowCompanion<Assembly> {
   Assembly Function(MetadataIndex, int, int) get constructor => Assembly.new;
 
   @override
-  MetadataTable get table => MetadataTable.assembly;
+  MetadataTable get table => .assembly;
 }

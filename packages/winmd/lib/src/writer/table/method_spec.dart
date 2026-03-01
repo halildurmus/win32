@@ -36,5 +36,5 @@ final class MethodSpecCompanion extends RowCompanion<MethodSpec> {
   const MethodSpecCompanion();
 
   @override
-  MetadataTableId get tableId => MetadataTableId.methodSpec;
+  MetadataTableId get tableId => .methodSpec;
 }

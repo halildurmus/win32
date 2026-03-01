@@ -15,10 +15,7 @@ final class BlobHeap extends MetadataHeap {
 
     while (offset < data.length) {
       try {
-        final CompressedInteger(:value, :bytesRead) = CompressedInteger.decode(
-          data,
-          offset,
-        );
+        final CompressedInteger(:value, :bytesRead) = .decode(data, offset);
         final totalSize = bytesRead + value;
         final nextOffset = offset + totalSize;
         if (totalSize == 0 || nextOffset > data.length) break;
@@ -43,15 +40,12 @@ final class BlobHeap extends MetadataHeap {
 
     while (offset < data.length) {
       try {
-        final CompressedInteger(:value, :bytesRead) = CompressedInteger.decode(
-          data,
-          offset,
-        );
+        final CompressedInteger(:value, :bytesRead) = .decode(data, offset);
         final start = offset + bytesRead;
         final end = start + value;
         if (value == 0 && bytesRead == 0) break;
         if (end > data.length) break;
-        yield Uint8List.sublistView(data, start, end);
+        yield .sublistView(data, start, end);
         offset = end;
 
         // Skip padded zeroes.
@@ -70,14 +64,7 @@ final class BlobHeap extends MetadataHeap {
       offset >= 0 && offset < data.length,
       'Offset $offset out of bounds.',
     );
-    final CompressedInteger(:value, :bytesRead) = CompressedInteger.decode(
-      data,
-      offset,
-    );
-    return Uint8List.sublistView(
-      data,
-      offset + bytesRead,
-      offset + value + bytesRead,
-    );
+    final CompressedInteger(:value, :bytesRead) = .decode(data, offset);
+    return .sublistView(data, offset + bytesRead, offset + value + bytesRead);
   }
 }

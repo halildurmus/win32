@@ -35,5 +35,5 @@ final class FieldRVACompanion extends RowCompanion<FieldRVA> {
   const FieldRVACompanion();
 
   @override
-  MetadataTableId get tableId => MetadataTableId.fieldRVA;
+  MetadataTableId get tableId => .fieldRVA;
 }

@@ -43,5 +43,5 @@ final class MethodImplCompanion extends RowCompanion<MethodImpl> {
   const MethodImplCompanion();
 
   @override
-  MetadataTableId get tableId => MetadataTableId.methodImpl;
+  MetadataTableId get tableId => .methodImpl;
 }

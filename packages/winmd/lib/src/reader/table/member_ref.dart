@@ -21,7 +21,7 @@ final class MemberRef extends Row with HasCustomAttributes {
   MemberRef(super.metadataIndex, super.readerIndex, super.index);
 
   @override
-  MetadataTable get table => MetadataTable.memberRef;
+  MetadataTable get table => .memberRef;
 
   @override
   int get token => (MetadataTableId.memberRef << 24) | index;
@@ -49,5 +49,5 @@ final class MemberRefCompanion extends RowCompanion<MemberRef> {
   MemberRef Function(MetadataIndex, int, int) get constructor => MemberRef.new;
 
   @override
-  MetadataTable get table => MetadataTable.memberRef;
+  MetadataTable get table => .memberRef;
 }

@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import '../bindings.dart';
-import '../common.dart';
 import '../compressed_integer.dart';
 import '../metadata_value.dart';
 import 'codes.dart';
@@ -29,36 +28,33 @@ bool isSorted(Iterable<int> iterable) {
 /// [BytesBuilder].
 extension BytesBuilderExtension on BytesBuilder {
   /// Writess a signed 16-bit integer in little-endian format.
-  void writeInt16(int value) =>
-      _write((b) => b.setInt16(0, value, Endian.little), 2);
+  void writeInt16(int value) => _write((b) => b.setInt16(0, value, .little), 2);
 
   /// Writes an unsigned 16-bit integer in little-endian format.
   void writeUint16(int value) =>
-      _write((b) => b.setUint16(0, value, Endian.little), 2);
+      _write((b) => b.setUint16(0, value, .little), 2);
 
   /// Writes a signed 32-bit integer in little-endian format.
-  void writeInt32(int value) =>
-      _write((b) => b.setInt32(0, value, Endian.little), 4);
+  void writeInt32(int value) => _write((b) => b.setInt32(0, value, .little), 4);
 
   /// Writes an unsigned 32-bit integer in little-endian format.
   void writeUint32(int value) =>
-      _write((b) => b.setUint32(0, value, Endian.little), 4);
+      _write((b) => b.setUint32(0, value, .little), 4);
 
   /// Writes a signed 64-bit integer in little-endian format.
-  void writeInt64(int value) =>
-      _write((b) => b.setInt64(0, value, Endian.little), 8);
+  void writeInt64(int value) => _write((b) => b.setInt64(0, value, .little), 8);
 
   /// Writes an unsigned 64-bit integer in little-endian format.
   void writeUint64(int value) =>
-      _write((b) => b.setUint64(0, value, Endian.little), 8);
+      _write((b) => b.setUint64(0, value, .little), 8);
 
   /// Writes a 32-bit floating-point number in little-endian format.
   void writeFloat32(double value) =>
-      _write((b) => b.setFloat32(0, value, Endian.little), 4);
+      _write((b) => b.setFloat32(0, value, .little), 4);
 
   /// Writes a 64-bit floating-point number in little-endian format.
   void writeFloat64(double value) =>
-      _write((b) => b.setFloat64(0, value, Endian.little), 8);
+      _write((b) => b.setFloat64(0, value, .little), 8);
 
   /// Writes a coded index using either 16 or 32 bits, depending on the size of
   /// the coded index.
@@ -130,55 +126,49 @@ extension BytesBuilderExtension on BytesBuilder {
     }
   }
 
-  int _getTableSize<T extends TableIndex>(
-    T index,
-    TableStream tableStream,
-  ) => switch (index) {
-    AssemblyIndex() => tableStream[MetadataTableId.assembly].length,
-    AssemblyOSIndex() => tableStream[MetadataTableId.assemblyOS].length,
-    AssemblyProcessorIndex() =>
-      tableStream[MetadataTableId.assemblyProcessor].length,
-    AssemblyRefIndex() => tableStream[MetadataTableId.assemblyRef].length,
-    AssemblyRefOSIndex() => tableStream[MetadataTableId.assemblyRefOS].length,
-    AssemblyRefProcessorIndex() =>
-      tableStream[MetadataTableId.assemblyRefProcessor].length,
-    ClassLayoutIndex() => tableStream[MetadataTableId.classLayout].length,
-    ConstantIndex() => tableStream[MetadataTableId.constant].length,
-    CustomAttributeIndex() =>
-      tableStream[MetadataTableId.customAttribute].length,
-    DeclSecurityIndex() => tableStream[MetadataTableId.declSecurity].length,
-    EventIndex() => tableStream[MetadataTableId.event].length,
-    EventMapIndex() => tableStream[MetadataTableId.eventMap].length,
-    ExportedTypeIndex() => tableStream[MetadataTableId.exportedType].length,
-    FieldIndex() => tableStream[MetadataTableId.field].length,
-    FieldLayoutIndex() => tableStream[MetadataTableId.fieldLayout].length,
-    FieldMarshalIndex() => tableStream[MetadataTableId.fieldMarshal].length,
-    FieldRVAIndex() => tableStream[MetadataTableId.fieldRVA].length,
-    FileIndex() => tableStream[MetadataTableId.file].length,
-    GenericParamIndex() => tableStream[MetadataTableId.genericParam].length,
-    GenericParamConstraintIndex() =>
-      tableStream[MetadataTableId.genericParamConstraint].length,
-    ImplMapIndex() => tableStream[MetadataTableId.implMap].length,
-    InterfaceImplIndex() => tableStream[MetadataTableId.interfaceImpl].length,
-    ManifestResourceIndex() =>
-      tableStream[MetadataTableId.manifestResource].length,
-    MemberRefIndex() => tableStream[MetadataTableId.memberRef].length,
-    MethodDefIndex() => tableStream[MetadataTableId.methodDef].length,
-    MethodImplIndex() => tableStream[MetadataTableId.methodImpl].length,
-    MethodSemanticsIndex() =>
-      tableStream[MetadataTableId.methodSemantics].length,
-    MethodSpecIndex() => tableStream[MetadataTableId.methodSpec].length,
-    ModuleIndex() => tableStream[MetadataTableId.module].length,
-    ModuleRefIndex() => tableStream[MetadataTableId.moduleRef].length,
-    NestedClassIndex() => tableStream[MetadataTableId.nestedClass].length,
-    ParamIndex() => tableStream[MetadataTableId.param].length,
-    PropertyIndex() => tableStream[MetadataTableId.property].length,
-    PropertyMapIndex() => tableStream[MetadataTableId.propertyMap].length,
-    StandAloneSigIndex() => tableStream[MetadataTableId.standAloneSig].length,
-    TypeDefIndex() => tableStream[MetadataTableId.typeDef].length,
-    TypeRefIndex() => tableStream[MetadataTableId.typeRef].length,
-    TypeSpecIndex() => tableStream[MetadataTableId.typeSpec].length,
-  };
+  int _getTableSize<T extends TableIndex>(T index, TableStream tableStream) =>
+      switch (index) {
+        AssemblyIndex() => tableStream[.assembly].length,
+        AssemblyOSIndex() => tableStream[.assemblyOS].length,
+        AssemblyProcessorIndex() => tableStream[.assemblyProcessor].length,
+        AssemblyRefIndex() => tableStream[.assemblyRef].length,
+        AssemblyRefOSIndex() => tableStream[.assemblyRefOS].length,
+        AssemblyRefProcessorIndex() =>
+          tableStream[.assemblyRefProcessor].length,
+        ClassLayoutIndex() => tableStream[.classLayout].length,
+        ConstantIndex() => tableStream[.constant].length,
+        CustomAttributeIndex() => tableStream[.customAttribute].length,
+        DeclSecurityIndex() => tableStream[.declSecurity].length,
+        EventIndex() => tableStream[.event].length,
+        EventMapIndex() => tableStream[.eventMap].length,
+        ExportedTypeIndex() => tableStream[.exportedType].length,
+        FieldIndex() => tableStream[.field].length,
+        FieldLayoutIndex() => tableStream[.fieldLayout].length,
+        FieldMarshalIndex() => tableStream[.fieldMarshal].length,
+        FieldRVAIndex() => tableStream[.fieldRVA].length,
+        FileIndex() => tableStream[.file].length,
+        GenericParamIndex() => tableStream[.genericParam].length,
+        GenericParamConstraintIndex() =>
+          tableStream[.genericParamConstraint].length,
+        ImplMapIndex() => tableStream[.implMap].length,
+        InterfaceImplIndex() => tableStream[.interfaceImpl].length,
+        ManifestResourceIndex() => tableStream[.manifestResource].length,
+        MemberRefIndex() => tableStream[.memberRef].length,
+        MethodDefIndex() => tableStream[.methodDef].length,
+        MethodImplIndex() => tableStream[.methodImpl].length,
+        MethodSemanticsIndex() => tableStream[.methodSemantics].length,
+        MethodSpecIndex() => tableStream[.methodSpec].length,
+        ModuleIndex() => tableStream[.module].length,
+        ModuleRefIndex() => tableStream[.moduleRef].length,
+        NestedClassIndex() => tableStream[.nestedClass].length,
+        ParamIndex() => tableStream[.param].length,
+        PropertyIndex() => tableStream[.property].length,
+        PropertyMapIndex() => tableStream[.propertyMap].length,
+        StandAloneSigIndex() => tableStream[.standAloneSig].length,
+        TypeDefIndex() => tableStream[.typeDef].length,
+        TypeRefIndex() => tableStream[.typeRef].length,
+        TypeSpecIndex() => tableStream[.typeSpec].length,
+      };
 
   /// Writes the appropriate binary representation of a [MetadataValue].
   void writeValue(MetadataValue value) => switch (value) {

@@ -77,15 +77,15 @@ final class MetadataWriter {
     int minorVersion = 0xFF,
     int buildNumber = 0xFF,
     int revisionNumber = 0xFF,
-    AssemblyFlags flags = AssemblyFlags.windowsRuntime,
+    AssemblyFlags flags = .windowsRuntime,
     Guid? mvid,
   }) {
     final writer = MetadataWriter._();
 
     // This assembly.
-    writer._tableStream[MetadataTableId.assembly].add(
+    writer._tableStream[.assembly].add(
       Assembly(
-        hashAlgId: AssemblyHashAlgorithm.sha1,
+        hashAlgId: .sha1,
         majorVersion: majorVersion,
         minorVersion: minorVersion,
         buildNumber: buildNumber,
@@ -96,10 +96,10 @@ final class MetadataWriter {
     );
 
     // This module.
-    writer._tableStream[MetadataTableId.module].add(
+    writer._tableStream[.module].add(
       Module(
         name: writer._stringHeap.insert(name),
-        mvid: writer._guidHeap.insert(mvid ?? Guid.generate()),
+        mvid: writer._guidHeap.insert(mvid ?? .generate()),
       ),
     );
 
@@ -114,30 +114,26 @@ final class MetadataWriter {
   }
 
   MetadataWriter._()
-    : _blobHeap = BlobHeap.empty(),
-      _guidHeap = GuidHeap.empty(),
-      _stringHeap = StringHeap.empty(),
-      _tableStream = TableStream(),
-      _userStringHeap = UserStringHeap.empty(),
-      _assemblyRefs = HashMap(),
-      _memberRefs = HashMap(),
-      _moduleRefs = HashMap(),
-      _typeRefs = HashMap(),
-      _typeSpecs = HashMap(),
-      _constants = SplayTreeMap((a, b) => a.encode().compareTo(b.encode())),
-      _customAttributes = SplayTreeMap(
-        (a, b) => a.encode().compareTo(b.encode()),
-      ),
-      _declSecurity = SplayTreeMap((a, b) => a.encode().compareTo(b.encode())),
-      _fieldLayouts = SplayTreeMap((a, b) => a.index.compareTo(b.index)),
-      _fieldMarshals = SplayTreeMap((a, b) => a.encode().compareTo(b.encode())),
-      _fieldRVAs = SplayTreeMap((a, b) => a.index.compareTo(b.index)),
-      _genericParams = SplayTreeMap((a, b) => a.encode().compareTo(b.encode())),
-      _genericParamConstraints = HashMap(),
-      _methodSemantics = SplayTreeMap(
-        (a, b) => a.encode().compareTo(b.encode()),
-      ),
-      _levelTwoNamespaces = HashSet();
+    : _blobHeap = .empty(),
+      _guidHeap = .empty(),
+      _stringHeap = .empty(),
+      _tableStream = .new(),
+      _userStringHeap = .empty(),
+      _assemblyRefs = .new(),
+      _memberRefs = .new(),
+      _moduleRefs = .new(),
+      _typeRefs = .new(),
+      _typeSpecs = .new(),
+      _constants = .new((a, b) => a.encode().compareTo(b.encode())),
+      _customAttributes = .new((a, b) => a.encode().compareTo(b.encode())),
+      _declSecurity = .new((a, b) => a.encode().compareTo(b.encode())),
+      _fieldLayouts = .new((a, b) => a.index.compareTo(b.index)),
+      _fieldMarshals = .new((a, b) => a.encode().compareTo(b.encode())),
+      _fieldRVAs = .new((a, b) => a.index.compareTo(b.index)),
+      _genericParams = .new((a, b) => a.encode().compareTo(b.encode())),
+      _genericParamConstraints = .new(),
+      _methodSemantics = .new((a, b) => a.encode().compareTo(b.encode())),
+      _levelTwoNamespaces = .new();
 
   final BlobHeap _blobHeap;
   final GuidHeap _guidHeap;
@@ -187,7 +183,7 @@ final class MetadataWriter {
     // Return existing reference if present
     if (_assemblyRefs[rootNamespace] case final existing?) return existing;
 
-    final table = _tableStream[MetadataTableId.assemblyRef];
+    final table = _tableStream[.assemblyRef];
     final index = AssemblyRefIndex(table.length);
 
     final assemblyRef = rootNamespace.startsWith('System')
@@ -206,7 +202,7 @@ final class MetadataWriter {
             minorVersion: 0xFF,
             buildNumber: 0xFF,
             revisionNumber: 0xFF,
-            flags: AssemblyFlags.windowsRuntime,
+            flags: .windowsRuntime,
           );
     table.add(assemblyRef);
 
@@ -224,7 +220,7 @@ final class MetadataWriter {
     int packingSize = 0,
     int classSize = 0,
   }) {
-    _tableStream[MetadataTableId.classLayout].add(
+    _tableStream[.classLayout].add(
       ClassLayout(
         packingSize: packingSize,
         classSize: classSize,
@@ -238,7 +234,7 @@ final class MetadataWriter {
     required HasConstant parent,
     required MetadataValue value,
   }) {
-    _constants[parent] = Constant(
+    _constants[parent] = .new(
       type: value.type.code,
       parent: parent,
       value: _writeConstantValue(value),
@@ -255,7 +251,7 @@ final class MetadataWriter {
     _customAttributes
         .putIfAbsent(parent, () => [])
         .add(
-          CustomAttribute(
+          .new(
             parent: parent,
             type: type,
             value: _writeCustomAttributeValue(fixedArgs, namedArgs),
@@ -269,7 +265,7 @@ final class MetadataWriter {
     required HasDeclSecurity parent,
     required Uint8List permissionSet,
   }) {
-    _declSecurity[parent] = DeclSecurity(
+    _declSecurity[parent] = .new(
       action: action,
       parent: parent,
       permissionSet: _blobHeap.insert(permissionSet),
@@ -280,9 +276,9 @@ final class MetadataWriter {
   EventIndex writeEvent({
     required String name,
     NamedClassType? eventType,
-    EventAttributes eventFlags = const EventAttributes(0),
+    EventAttributes eventFlags = const .new(0),
   }) {
-    final table = _tableStream[MetadataTableId.event];
+    final table = _tableStream[.event];
     final index = EventIndex(table.length);
     table.add(
       Event(
@@ -299,8 +295,8 @@ final class MetadataWriter {
   /// This must be called before writing any `Event` rows for the given
   /// [parent].
   void writeEventMap({required TypeDefIndex parent}) {
-    final firstEvent = EventIndex(_tableStream[MetadataTableId.event].length);
-    _tableStream[MetadataTableId.eventMap].add(
+    final firstEvent = EventIndex(_tableStream[.event].length);
+    _tableStream[.eventMap].add(
       EventMap(parent: parent, eventList: firstEvent),
     );
   }
@@ -309,9 +305,9 @@ final class MetadataWriter {
   FieldIndex writeField({
     required String name,
     required MetadataType signature,
-    FieldAttributes flags = const FieldAttributes(0),
+    FieldAttributes flags = const .new(0),
   }) {
-    final table = _tableStream[MetadataTableId.field];
+    final table = _tableStream[.field];
     final index = FieldIndex(table.length);
     table.add(
       Field(
@@ -329,9 +325,9 @@ final class MetadataWriter {
     required String name,
     required Implementation implementation,
     String? namespace,
-    TypeAttributes flags = const TypeAttributes(0),
+    TypeAttributes flags = const .new(0),
   }) {
-    final table = _tableStream[MetadataTableId.exportedType];
+    final table = _tableStream[.exportedType];
     final index = ExportedTypeIndex(table.length);
     table.add(
       ExportedType(
@@ -339,7 +335,7 @@ final class MetadataWriter {
         typeDefId: typeDefId,
         typeName: _stringHeap.insert(name),
         typeNamespace: namespace == null
-            ? const StringIndex(0)
+            ? const .new(0)
             : _stringHeap.insert(namespace),
         implementation: implementation,
       ),
@@ -349,7 +345,7 @@ final class MetadataWriter {
 
   /// Writes a `FieldLayout` row.
   void writeFieldLayout({required int offset, required FieldIndex field}) {
-    _fieldLayouts[field] = FieldLayout(offset: offset, field: field);
+    _fieldLayouts[field] = .new(offset: offset, field: field);
   }
 
   /// Writes a `FieldMarshal` row.
@@ -357,7 +353,7 @@ final class MetadataWriter {
     required HasFieldMarshal parent,
     required MarshallingDescriptor descriptor,
   }) {
-    _fieldMarshals[parent] = FieldMarshal(
+    _fieldMarshals[parent] = .new(
       parent: parent,
       nativeType: _blobHeap.insert(_writeMarshallingDescriptor(descriptor)),
     );
@@ -365,16 +361,16 @@ final class MetadataWriter {
 
   /// Writes a `FieldRVA` row.
   void writeFieldRVA({required FieldIndex field, required int rva}) {
-    _fieldRVAs[field] = FieldRVA(field: field, rva: rva);
+    _fieldRVAs[field] = .new(field: field, rva: rva);
   }
 
   /// Writes a `File` row, returning the corresponding index.
   FileIndex writeFile({
     required String name,
     required Uint8List hashValue,
-    FileAttributes flags = const FileAttributes(0),
+    FileAttributes flags = const .new(0),
   }) {
-    final table = _tableStream[MetadataTableId.file];
+    final table = _tableStream[.file];
     final index = FileIndex(table.length);
     table.add(
       File(
@@ -391,7 +387,7 @@ final class MetadataWriter {
     required int number,
     required TypeOrMethodDef owner,
     required String name,
-    GenericParamAttributes flags = const GenericParamAttributes(0),
+    GenericParamAttributes flags = const .new(0),
     TypeDefOrRef? constraint,
   }) {
     final genericParam = GenericParam(
@@ -411,13 +407,13 @@ final class MetadataWriter {
     required MethodDefIndex method,
     required String importName,
     required String importScope,
-    PInvokeAttributes flags = const PInvokeAttributes(0),
+    PInvokeAttributes flags = const .new(0),
   }) {
     final scope = writeModuleRef(name: importScope);
-    _tableStream[MetadataTableId.implMap].add(
+    _tableStream[.implMap].add(
       ImplMap(
         mappingFlags: flags,
-        memberForwarded: MemberForwarded.methodDef(method),
+        memberForwarded: .methodDef(method),
         importName: _stringHeap.insert(importName),
         importScope: scope,
       ),
@@ -429,7 +425,7 @@ final class MetadataWriter {
     required TypeDefIndex class$,
     required NamedClassType interface,
   }) {
-    final table = _tableStream[MetadataTableId.interfaceImpl];
+    final table = _tableStream[.interfaceImpl];
     final index = InterfaceImplIndex(table.length);
     table.add(
       InterfaceImpl(class$: class$, interface: _toTypeDefOrRef(interface)),
@@ -442,9 +438,9 @@ final class MetadataWriter {
     required int offset,
     required String name,
     required Implementation implementation,
-    ManifestResourceAttributes flags = const ManifestResourceAttributes(0),
+    ManifestResourceAttributes flags = const .new(0),
   }) {
-    final table = _tableStream[MetadataTableId.manifestResource];
+    final table = _tableStream[.manifestResource];
     final index = ManifestResourceIndex(table.length);
     table.add(
       ManifestResource(
@@ -472,7 +468,7 @@ final class MetadataWriter {
     );
 
     return _memberRefs.putIfAbsent(memberRef, () {
-      final table = _tableStream[MetadataTableId.memberRef];
+      final table = _tableStream[.memberRef];
       final index = MemberRefIndex(table.length);
       table.add(memberRef);
       return index;
@@ -483,11 +479,11 @@ final class MetadataWriter {
   MethodDefIndex writeMethodDef({
     required String name,
     int rva = 0,
-    MethodImplAttributes implFlags = const MethodImplAttributes(0),
-    MethodAttributes flags = const MethodAttributes(0),
-    MethodSignature signature = const MethodSignature(),
+    MethodImplAttributes implFlags = const .new(0),
+    MethodAttributes flags = const .new(0),
+    MethodSignature signature = const .new(),
   }) {
-    final table = _tableStream[MetadataTableId.methodDef];
+    final table = _tableStream[.methodDef];
     final index = MethodDefIndex(table.length);
     table.add(
       MethodDef(
@@ -496,7 +492,7 @@ final class MetadataWriter {
         flags: flags,
         name: _stringHeap.insert(name),
         signature: _writeMethodDefSig(signature),
-        paramList: ParamIndex(_tableStream[MetadataTableId.param].length),
+        paramList: .new(_tableStream[.param].length),
       ),
     );
     return index;
@@ -508,7 +504,7 @@ final class MetadataWriter {
     required MethodDefOrRef methodBody,
     required MethodDefOrRef methodDeclaration,
   }) {
-    _tableStream[MetadataTableId.methodImpl].add(
+    _tableStream[.methodImpl].add(
       MethodImpl(
         class$: class$,
         methodBody: methodBody,
@@ -527,11 +523,7 @@ final class MetadataWriter {
     _methodSemantics
         .putIfAbsent(association, () => [])
         .add(
-          MethodSemantics(
-            semantics: semantics,
-            method: method,
-            association: association,
-          ),
+          .new(semantics: semantics, method: method, association: association),
         );
   }
 
@@ -552,7 +544,7 @@ final class MetadataWriter {
       _encodeType(genericType, buffer);
     }
 
-    final table = _tableStream[MetadataTableId.methodSpec];
+    final table = _tableStream[.methodSpec];
     final index = MethodSpecIndex(table.length);
     table.add(
       MethodSpec(
@@ -568,7 +560,7 @@ final class MetadataWriter {
   /// If a matching entry already exists, returns the existing index.
   ModuleRefIndex writeModuleRef({required String name}) =>
       _moduleRefs.putIfAbsent(name, () {
-        final table = _tableStream[MetadataTableId.moduleRef];
+        final table = _tableStream[.moduleRef];
         final index = ModuleRefIndex(table.length);
         table.add(ModuleRef(name: _stringHeap.insert(name)));
         return index;
@@ -584,7 +576,7 @@ final class MetadataWriter {
       'Inner class index (${inner.index}) must be greater than outer class '
       'index (${outer.index}).',
     );
-    _tableStream[MetadataTableId.nestedClass].add(
+    _tableStream[.nestedClass].add(
       NestedClass(nestedClass: inner, enclosingClass: outer),
     );
   }
@@ -593,9 +585,9 @@ final class MetadataWriter {
   ParamIndex writeParam({
     required int sequence,
     required String name,
-    ParamAttributes flags = const ParamAttributes(0),
+    ParamAttributes flags = const .new(0),
   }) {
-    final table = _tableStream[MetadataTableId.param];
+    final table = _tableStream[.param];
     final index = ParamIndex(table.length);
     table.add(
       Param(flags: flags, sequence: sequence, name: _stringHeap.insert(name)),
@@ -607,9 +599,9 @@ final class MetadataWriter {
   PropertyIndex writeProperty({
     required String name,
     required PropertySig signature,
-    PropertyAttributes flags = const PropertyAttributes(0),
+    PropertyAttributes flags = const .new(0),
   }) {
-    final table = _tableStream[MetadataTableId.property];
+    final table = _tableStream[.property];
     final index = PropertyIndex(table.length);
     table.add(
       Property(
@@ -626,10 +618,8 @@ final class MetadataWriter {
   /// This must be called before writing any `Property` rows for the given
   /// [parent].
   void writePropertyMap({required TypeDefIndex parent}) {
-    final firstProperty = PropertyIndex(
-      _tableStream[MetadataTableId.property].length,
-    );
-    _tableStream[MetadataTableId.propertyMap].add(
+    final firstProperty = PropertyIndex(_tableStream[.property].length);
+    _tableStream[.propertyMap].add(
       PropertyMap(parent: parent, propertyList: firstProperty),
     );
   }
@@ -638,7 +628,7 @@ final class MetadataWriter {
   StandAloneSigIndex writeStandAloneSig({
     required StandAloneSignature signature,
   }) {
-    final table = _tableStream[MetadataTableId.standAloneSig];
+    final table = _tableStream[.standAloneSig];
     final index = StandAloneSigIndex(table.length);
     table.add(
       StandAloneSig(
@@ -652,15 +642,15 @@ final class MetadataWriter {
   TypeDefIndex writeTypeDef({
     required String namespace,
     required String name,
-    TypeAttributes flags = const TypeAttributes(0),
-    TypeDefOrRef extends$ = TypeDefOrRef.none,
+    TypeAttributes flags = const .new(0),
+    TypeDefOrRef extends$ = .none,
   }) {
     // Track root namespaces like "Windows.Foundation".
     if (namespace.contains('.')) {
       _levelTwoNamespaces.add(namespace.split('.').take(2).join('.'));
     }
 
-    final table = _tableStream[MetadataTableId.typeDef];
+    final table = _tableStream[.typeDef];
     final index = TypeDefIndex(table.length);
     table.add(
       TypeDef(
@@ -668,10 +658,8 @@ final class MetadataWriter {
         name: _stringHeap.insert(name),
         namespace: _stringHeap.insert(namespace),
         extends$: extends$,
-        fieldList: FieldIndex(_tableStream[MetadataTableId.field].length),
-        methodList: MethodDefIndex(
-          _tableStream[MetadataTableId.methodDef].length,
-        ),
+        fieldList: .new(_tableStream[.field].length),
+        methodList: .new(_tableStream[.methodDef].length),
       ),
     );
     return index;
@@ -685,13 +673,11 @@ final class MetadataWriter {
     // Return cached reference if it exists.
     if (_typeRefs[namespace]?[name] case final typeRef?) return typeRef;
 
-    final table = _tableStream[MetadataTableId.typeRef];
+    final table = _tableStream[.typeRef];
     final index = TypeRefIndex(table.length);
     table.add(
       TypeRef(
-        resolutionScope: ResolutionScope.assemblyRef(
-          writeAssemblyRef(namespace: namespace),
-        ),
+        resolutionScope: .assemblyRef(writeAssemblyRef(namespace: namespace)),
         name: _stringHeap.insert(name),
         namespace: _stringHeap.insert(namespace),
       ),
@@ -737,7 +723,7 @@ final class MetadataWriter {
       _encodeType(genericType, buffer);
     }
 
-    final table = _tableStream[MetadataTableId.typeSpec];
+    final table = _tableStream[.typeSpec];
     final index = TypeSpecIndex(table.length);
     table.add(TypeSpec(signature: _blobHeap.insert(buffer.takeBytes())));
     _typeSpecs
@@ -856,15 +842,15 @@ final class MetadataWriter {
       typeName: TypeName(:final namespace, :final name, :final generics),
     ) =>
       generics.isEmpty
-          ? TypeDefOrRef.typeRef(writeTypeRef(namespace: namespace, name: name))
-          : TypeDefOrRef.typeSpec(
+          ? .typeRef(writeTypeRef(namespace: namespace, name: name))
+          : .typeSpec(
               writeTypeSpec(
                 namespace: namespace,
                 name: name,
                 generics: generics,
               ),
             ),
-    _ => TypeDefOrRef.none,
+    _ => .none,
   };
 
   /// Encodes a custom attribute value, consisting of fixed and named arguments,
@@ -1129,7 +1115,7 @@ final class MetadataWriter {
 
     indexesToRemove.sort();
     for (final index in indexesToRemove) {
-      _tableStream[MetadataTableId.assemblyRef].rows.removeAt(index - removed);
+      _tableStream[.assemblyRef].rows.removeAt(index - removed);
       removed++;
     }
 
@@ -1138,9 +1124,7 @@ final class MetadataWriter {
         value: AssemblyRefIndex(:final index),
       )) {
         if (indexesToRemove.contains(index)) {
-          typeRef.resolutionScope = const ResolutionScope.module(
-            ModuleIndex(0),
-          );
+          typeRef.resolutionScope = const .module(.new(0));
         }
       }
     }
@@ -1169,7 +1153,7 @@ final class MetadataWriter {
       if (_genericParamConstraints[genericParam] case final constraint?) {
         final owner = GenericParamIndex(idx);
         genericParamConstraintsTable.add(
-          GenericParamConstraint(owner: owner, constraint: constraint),
+          .new(owner: owner, constraint: constraint),
         );
       }
     }
@@ -1326,7 +1310,7 @@ final class MetadataWriter {
     final sectionByteData = Uint8List(sizeOf<IMAGE_SECTION_HEADER>());
     final section = Struct.create<IMAGE_SECTION_HEADER>(sectionByteData)
       ..Name.setString('.text')
-      ..Characteristics = const IMAGE_SECTION_CHARACTERISTICS(0x4000_0020)
+      ..Characteristics = const .new(0x4000_0020)
       ..VirtualAddress = optional.SectionAlignment;
 
     final clrByteData = Uint8List(clrHeaderSize);

@@ -20,7 +20,7 @@ final class MethodSpec extends Row with HasCustomAttributes {
   MethodSpec(super.metadataIndex, super.readerIndex, super.index);
 
   @override
-  MetadataTable get table => MetadataTable.methodSpec;
+  MetadataTable get table => .methodSpec;
 
   @override
   int get token => (MetadataTableId.methodSpec << 24) | index;
@@ -43,5 +43,5 @@ final class MethodSpecCompanion extends RowCompanion<MethodSpec> {
       MethodSpec.new;
 
   @override
-  MetadataTable get table => MetadataTable.methodSpec;
+  MetadataTable get table => .methodSpec;
 }

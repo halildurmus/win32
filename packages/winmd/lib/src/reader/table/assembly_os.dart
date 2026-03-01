@@ -18,7 +18,7 @@ final class AssemblyOS extends Row {
   AssemblyOS(super.metadataIndex, super.readerIndex, super.index);
 
   @override
-  MetadataTable get table => MetadataTable.assemblyOS;
+  MetadataTable get table => .assemblyOS;
 
   @override
   int get token => (MetadataTableId.assemblyOS << 24) | index;
@@ -47,5 +47,5 @@ final class AssemblyOSCompanion extends RowCompanion<AssemblyOS> {
       AssemblyOS.new;
 
   @override
-  MetadataTable get table => MetadataTable.assemblyOS;
+  MetadataTable get table => .assemblyOS;
 }

@@ -192,23 +192,23 @@ final class TableStream {
   /// The tables that are required to be sorted by a primary key before
   /// serialization as specified in ECMA-335 `§II.22`.
   static const Set<MetadataTableId> _tablesRequiringPrimaryKeySort = {
-    // |---------------------------------------|--------------------|
-    // |                Table                  | Primary Key Column |
-    // |---------------------------------------|--------------------|
-    MetadataTableId.classLayout, //            | Parent             |
-    MetadataTableId.constant, //               | Parent             |
-    MetadataTableId.customAttribute, //        | Parent             |
-    MetadataTableId.declSecurity, //           | Parent             |
-    MetadataTableId.fieldLayout, //            | Field              |
-    MetadataTableId.fieldMarshal, //           | Parent             |
-    MetadataTableId.fieldRVA, //               | Field              |
-    MetadataTableId.genericParam, //           | Owner              |
-    MetadataTableId.genericParamConstraint, // | Owner              |
-    MetadataTableId.implMap, //                | MemberForwarded    |
-    MetadataTableId.interfaceImpl, //          | Class              |
-    MetadataTableId.methodImpl, //             | Class              |
-    MetadataTableId.methodSemantics, //        | Association        |
-    MetadataTableId.nestedClass, //            | NestedClass        |
-    // |---------------------------------------|--------------------|
+    // |------------------------|--------------------|
+    // |          Table         | Primary Key Column |
+    // |------------------------|--------------------|
+    .classLayout, //            | Parent             |
+    .constant, //               | Parent             |
+    .customAttribute, //        | Parent             |
+    .declSecurity, //           | Parent             |
+    .fieldLayout, //            | Field              |
+    .fieldMarshal, //           | Parent             |
+    .fieldRVA, //               | Field              |
+    .genericParam, //           | Owner              |
+    .genericParamConstraint, // | Owner              |
+    .implMap, //                | MemberForwarded    |
+    .interfaceImpl, //          | Class              |
+    .methodImpl, //             | Class              |
+    .methodSemantics, //        | Association        |
+    .nestedClass, //            | NestedClass        |
+    // |------------------------|--------------------|
   };
 }

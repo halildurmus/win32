@@ -27,7 +27,7 @@ final class Property extends Row with HasCustomAttributes {
   Property(super.metadataIndex, super.readerIndex, super.index);
 
   @override
-  MetadataTable get table => MetadataTable.property;
+  MetadataTable get table => .property;
 
   @override
   int get token => (MetadataTableId.property << 24) | index;
@@ -86,5 +86,5 @@ final class PropertyCompanion extends RowCompanion<Property> {
   Property Function(MetadataIndex, int, int) get constructor => Property.new;
 
   @override
-  MetadataTable get table => MetadataTable.property;
+  MetadataTable get table => .property;
 }

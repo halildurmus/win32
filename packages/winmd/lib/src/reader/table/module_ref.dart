@@ -17,7 +17,7 @@ final class ModuleRef extends Row with HasCustomAttributes {
   ModuleRef(super.metadataIndex, super.readerIndex, super.index);
 
   @override
-  MetadataTable get table => MetadataTable.moduleRef;
+  MetadataTable get table => .moduleRef;
 
   @override
   int get token => (MetadataTableId.moduleRef << 24) | index;
@@ -37,5 +37,5 @@ final class ModuleRefCompanion extends RowCompanion<ModuleRef> {
   ModuleRef Function(MetadataIndex, int, int) get constructor => ModuleRef.new;
 
   @override
-  MetadataTable get table => MetadataTable.moduleRef;
+  MetadataTable get table => .moduleRef;
 }

@@ -43,5 +43,5 @@ final class CustomAttributeCompanion extends RowCompanion<CustomAttribute> {
   const CustomAttributeCompanion();
 
   @override
-  MetadataTableId get tableId => MetadataTableId.customAttribute;
+  MetadataTableId get tableId => .customAttribute;
 }

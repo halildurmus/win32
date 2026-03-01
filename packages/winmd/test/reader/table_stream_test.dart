@@ -11,7 +11,7 @@ void main() {
 
     test('table has correct initial data', () {
       final stream = TableStream();
-      final table = stream[MetadataTable.typeSpec];
+      final table = stream[.typeSpec];
       check(table.offset).equals(0);
       check(table.rows).equals(0);
       check(table.width).equals(0);

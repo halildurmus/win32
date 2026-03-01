@@ -57,5 +57,5 @@ final class TypeDefCompanion extends RowCompanion<TypeDef> {
   const TypeDefCompanion();
 
   @override
-  MetadataTableId get tableId => MetadataTableId.typeDef;
+  MetadataTableId get tableId => .typeDef;
 }

@@ -35,5 +35,5 @@ final class NestedClassCompanion extends RowCompanion<NestedClass> {
   const NestedClassCompanion();
 
   @override
-  MetadataTableId get tableId => MetadataTableId.nestedClass;
+  MetadataTableId get tableId => .nestedClass;
 }

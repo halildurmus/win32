@@ -37,5 +37,5 @@ final class GenericParamConstraintCompanion
   const GenericParamConstraintCompanion();
 
   @override
-  MetadataTableId get tableId => MetadataTableId.genericParamConstraint;
+  MetadataTableId get tableId => .genericParamConstraint;
 }

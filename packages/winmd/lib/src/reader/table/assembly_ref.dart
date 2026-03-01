@@ -28,7 +28,7 @@ final class AssemblyRef extends Row with HasCustomAttributes {
   AssemblyRef(super.metadataIndex, super.readerIndex, super.index);
 
   @override
-  MetadataTable get table => MetadataTable.assemblyRef;
+  MetadataTable get table => .assemblyRef;
 
   @override
   int get token => (MetadataTableId.assemblyRef << 24) | index;
@@ -90,5 +90,5 @@ final class AssemblyRefCompanion extends RowCompanion<AssemblyRef> {
       AssemblyRef.new;
 
   @override
-  MetadataTable get table => MetadataTable.assemblyRef;
+  MetadataTable get table => .assemblyRef;
 }

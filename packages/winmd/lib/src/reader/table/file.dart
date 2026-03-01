@@ -21,7 +21,7 @@ final class File extends Row with HasCustomAttributes {
   File(super.metadataIndex, super.readerIndex, super.index);
 
   @override
-  MetadataTable get table => MetadataTable.file;
+  MetadataTable get table => .file;
 
   @override
   int get token => (MetadataTableId.file << 24) | index;
@@ -44,5 +44,5 @@ final class FileCompanion extends RowCompanion<File> {
   File Function(MetadataIndex, int, int) get constructor => File.new;
 
   @override
-  MetadataTable get table => MetadataTable.file;
+  MetadataTable get table => .file;
 }

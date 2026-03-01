@@ -21,7 +21,7 @@ final class MethodSemantics extends Row {
   MethodSemantics(super.metadataIndex, super.readerIndex, super.index);
 
   @override
-  MetadataTable get table => MetadataTable.methodSemantics;
+  MetadataTable get table => .methodSemantics;
 
   @override
   int get token => (MetadataTableId.methodSemantics << 24) | index;
@@ -48,5 +48,5 @@ final class MethodSemanticsCompanion extends RowCompanion<MethodSemantics> {
       MethodSemantics.new;
 
   @override
-  MetadataTable get table => MetadataTable.methodSemantics;
+  MetadataTable get table => .methodSemantics;
 }

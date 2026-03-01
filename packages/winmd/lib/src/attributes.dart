@@ -35,9 +35,9 @@ extension type const AssemblyFlags(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(AssemblyFlags other) => this & other == other;
 
-  AssemblyFlags operator |(AssemblyFlags other) => AssemblyFlags(_ | other._);
+  AssemblyFlags operator |(AssemblyFlags other) => .new(_ | other._);
 
-  AssemblyFlags operator &(AssemblyFlags other) => AssemblyFlags(_ & other._);
+  AssemblyFlags operator &(AssemblyFlags other) => .new(_ & other._);
 }
 
 /// Provides information about an event.
@@ -112,11 +112,9 @@ extension type const FieldAttributes(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(FieldAttributes other) => this & other == other;
 
-  FieldAttributes operator |(FieldAttributes other) =>
-      FieldAttributes(_ | other._);
+  FieldAttributes operator |(FieldAttributes other) => .new(_ | other._);
 
-  FieldAttributes operator &(FieldAttributes other) =>
-      FieldAttributes(_ & other._);
+  FieldAttributes operator &(FieldAttributes other) => .new(_ & other._);
 }
 
 /// Represents the field accessibility information.
@@ -189,10 +187,10 @@ extension type const GenericParamAttributes(int _) implements int {
   bool has(GenericParamAttributes other) => this & other == other;
 
   GenericParamAttributes operator |(GenericParamAttributes other) =>
-      GenericParamAttributes(_ | other._);
+      .new(_ | other._);
 
   GenericParamAttributes operator &(GenericParamAttributes other) =>
-      GenericParamAttributes(_ & other._);
+      .new(_ & other._);
 }
 
 /// Represents the variance for a generic parameter.
@@ -321,11 +319,9 @@ extension type const MethodAttributes(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(MethodAttributes other) => this & other == other;
 
-  MethodAttributes operator |(MethodAttributes other) =>
-      MethodAttributes(_ | other._);
+  MethodAttributes operator |(MethodAttributes other) => .new(_ | other._);
 
-  MethodAttributes operator &(MethodAttributes other) =>
-      MethodAttributes(_ & other._);
+  MethodAttributes operator &(MethodAttributes other) => .new(_ & other._);
 }
 
 /// Represents the member accessibility information.
@@ -423,10 +419,10 @@ extension type const MethodImplAttributes(int _) implements int {
   bool has(MethodImplAttributes other) => this & other == other;
 
   MethodImplAttributes operator |(MethodImplAttributes other) =>
-      MethodImplAttributes(_ | other._);
+      .new(_ | other._);
 
   MethodImplAttributes operator &(MethodImplAttributes other) =>
-      MethodImplAttributes(_ & other._);
+      .new(_ & other._);
 }
 
 /// Represents the code type of contained code.
@@ -498,11 +494,9 @@ extension type const ParamAttributes(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(ParamAttributes other) => this & other == other;
 
-  ParamAttributes operator |(ParamAttributes other) =>
-      ParamAttributes(_ | other._);
+  ParamAttributes operator |(ParamAttributes other) => .new(_ | other._);
 
-  ParamAttributes operator &(ParamAttributes other) =>
-      ParamAttributes(_ & other._);
+  ParamAttributes operator &(ParamAttributes other) => .new(_ & other._);
 }
 
 /// Provides information about Platform Invocation (P/Invoke) methods.
@@ -555,11 +549,9 @@ extension type const PInvokeAttributes(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(PInvokeAttributes other) => this & other == other;
 
-  PInvokeAttributes operator |(PInvokeAttributes other) =>
-      PInvokeAttributes(_ | other._);
+  PInvokeAttributes operator |(PInvokeAttributes other) => .new(_ | other._);
 
-  PInvokeAttributes operator &(PInvokeAttributes other) =>
-      PInvokeAttributes(_ & other._);
+  PInvokeAttributes operator &(PInvokeAttributes other) => .new(_ & other._);
 }
 
 /// Represents the encoding for marshalling P/Invoke function strings.
@@ -813,11 +805,9 @@ extension type const TypeAttributes(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(TypeAttributes other) => this & other == other;
 
-  TypeAttributes operator |(TypeAttributes other) =>
-      TypeAttributes(_ | other._);
+  TypeAttributes operator |(TypeAttributes other) => .new(_ | other._);
 
-  TypeAttributes operator &(TypeAttributes other) =>
-      TypeAttributes(_ & other._);
+  TypeAttributes operator &(TypeAttributes other) => .new(_ & other._);
 }
 
 /// Represents the visibility of a type to other types.

@@ -44,5 +44,5 @@ final class EventCompanion extends RowCompanion<Event> {
   const EventCompanion();
 
   @override
-  MetadataTableId get tableId => MetadataTableId.event;
+  MetadataTableId get tableId => .event;
 }

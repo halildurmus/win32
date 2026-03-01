@@ -44,5 +44,5 @@ final class DeclSecurityCompanion extends RowCompanion<DeclSecurity> {
   const DeclSecurityCompanion();
 
   @override
-  MetadataTableId get tableId => MetadataTableId.declSecurity;
+  MetadataTableId get tableId => .declSecurity;
 }

@@ -90,7 +90,7 @@ abstract base class Row {
   /// stored.
   @pragma('vm:prefer-inline')
   Blob readBlob(int column) =>
-      Blob(metadataIndex, readerIndex, reader.readBlob(index, table, column));
+      .new(metadataIndex, readerIndex, reader.readBlob(index, table, column));
 
   /// Reads a [Guid] from the specified [column].
   ///

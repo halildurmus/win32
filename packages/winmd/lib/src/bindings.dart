@@ -92,8 +92,7 @@ extension type const CallingConvention(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(CallingConvention other) => this & other == other;
 
-  CallingConvention operator |(CallingConvention other) =>
-      CallingConvention(_ | other._);
+  CallingConvention operator |(CallingConvention other) => .new(_ | other._);
 }
 
 /// Specifies a common language runtime Type, a type modifier, or information
@@ -224,7 +223,7 @@ const IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR = IMAGE_DIRECTORY_ENTRY(14);
 
 extension type const IMAGE_DLL_CHARACTERISTICS(int _) implements int {
   IMAGE_DLL_CHARACTERISTICS operator |(IMAGE_DLL_CHARACTERISTICS other) =>
-      IMAGE_DLL_CHARACTERISTICS(_ | other._);
+      .new(_ | other._);
 }
 
 const IMAGE_DLLCHARACTERISTICS_DYNAMIC_BASE = IMAGE_DLL_CHARACTERISTICS(64);
@@ -233,7 +232,7 @@ const IMAGE_DLLCHARACTERISTICS_NO_SEH = IMAGE_DLL_CHARACTERISTICS(1024);
 
 extension type const IMAGE_FILE_CHARACTERISTICS(int _) implements int {
   IMAGE_FILE_CHARACTERISTICS operator |(IMAGE_FILE_CHARACTERISTICS other) =>
-      IMAGE_FILE_CHARACTERISTICS(_ | other._);
+      .new(_ | other._);
 }
 
 const IMAGE_FILE_EXECUTABLE_IMAGE = IMAGE_FILE_CHARACTERISTICS(2);

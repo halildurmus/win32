@@ -53,5 +53,5 @@ final class ExportedTypeCompanion extends RowCompanion<ExportedType> {
   const ExportedTypeCompanion();
 
   @override
-  MetadataTableId get tableId => MetadataTableId.exportedType;
+  MetadataTableId get tableId => .exportedType;
 }

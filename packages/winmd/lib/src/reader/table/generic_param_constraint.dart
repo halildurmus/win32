@@ -20,7 +20,7 @@ final class GenericParamConstraint extends Row with HasCustomAttributes {
   GenericParamConstraint(super.metadataIndex, super.readerIndex, super.index);
 
   @override
-  MetadataTable get table => MetadataTable.genericParamConstraint;
+  MetadataTable get table => .genericParamConstraint;
 
   @override
   int get token => (MetadataTableId.genericParamConstraint << 24) | index;
@@ -42,5 +42,5 @@ final class GenericParamConstraintCompanion
       GenericParamConstraint.new;
 
   @override
-  MetadataTable get table => MetadataTable.genericParamConstraint;
+  MetadataTable get table => .genericParamConstraint;
 }

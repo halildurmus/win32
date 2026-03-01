@@ -17,7 +17,7 @@ void main() {
       tempDir = Directory.systemTemp.createTempSync(
         'winmd_local_storage_manager_test',
       );
-      storageManager = LocalStorageManager(storagePath: tempDir.path);
+      storageManager = .new(storagePath: tempDir.path);
     });
 
     tearDown(() {
@@ -101,7 +101,7 @@ void main() {
   });
 }
 
-const WindowsMetadataPackage dummyPackage = WindowsMetadataPackage.win32;
+const WindowsMetadataPackage dummyPackage = .win32;
 const version = '1.0.0';
 
 /// A helper to create a dummy ZIP archive containing a "Windows.Win32.winmd"
@@ -110,7 +110,7 @@ Uint8List createDummyZip() {
   final archive = Archive();
   final winmdContent = [0x01, 0x02, 0x03, 0x04]; // Dummy content.
   archive.addFile(
-    ArchiveFile('Windows.Win32.winmd', winmdContent.length, winmdContent),
+    .new('Windows.Win32.winmd', winmdContent.length, winmdContent),
   );
-  return Uint8List.fromList(ZipEncoder().encode(archive));
+  return .fromList(ZipEncoder().encode(archive));
 }

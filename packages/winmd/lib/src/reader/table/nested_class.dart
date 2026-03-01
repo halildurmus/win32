@@ -18,7 +18,7 @@ final class NestedClass extends Row {
   NestedClass(super.metadataIndex, super.readerIndex, super.index);
 
   @override
-  MetadataTable get table => MetadataTable.nestedClass;
+  MetadataTable get table => .nestedClass;
 
   @override
   int get token => (MetadataTableId.nestedClass << 24) | index;
@@ -42,5 +42,5 @@ final class NestedClassCompanion extends RowCompanion<NestedClass> {
       NestedClass.new;
 
   @override
-  MetadataTable get table => MetadataTable.nestedClass;
+  MetadataTable get table => .nestedClass;
 }

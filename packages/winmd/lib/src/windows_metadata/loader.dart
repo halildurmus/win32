@@ -24,7 +24,7 @@ final class WindowsMetadataLoader {
   /// Creates a new instance of [WindowsMetadataLoader] with an optional
   /// [LocalStorageManager].
   WindowsMetadataLoader({LocalStorageManager? localStorageManager})
-    : _localStorageManager = localStorageManager ?? LocalStorageManager();
+    : _localStorageManager = localStorageManager ?? .new();
 
   final LocalStorageManager _localStorageManager;
 
@@ -33,21 +33,21 @@ final class WindowsMetadataLoader {
   /// [version] specifies the exact version to load. If omitted,
   /// the latest available version (including **pre-releases**) is used.
   Future<MetadataIndex> loadWdkMetadata({String? version}) =>
-      _loadSingleMetadata(WindowsMetadataPackage.wdk, version: version);
+      _loadSingleMetadata(.wdk, version: version);
 
   /// Loads the Win32 metadata into a [MetadataIndex].
   ///
   /// [version] specifies the exact version to load. If omitted,
   /// the latest available version (including **pre-releases**) is used.
   Future<MetadataIndex> loadWin32Metadata({String? version}) =>
-      _loadSingleMetadata(WindowsMetadataPackage.win32, version: version);
+      _loadSingleMetadata(.win32, version: version);
 
   /// Loads the Windows Runtime (WinRT) metadata into a [MetadataIndex].
   ///
   /// [version] specifies the exact version to load. If omitted,
   /// the latest available **stable** version is used.
   Future<MetadataIndex> loadWinrtMetadata({String? version}) =>
-      _loadSingleMetadata(WindowsMetadataPackage.winrt, version: version);
+      _loadSingleMetadata(.winrt, version: version);
 
   /// Loads WDK, Win32, and WinRT metadata into a [MetadataIndex].
   ///
@@ -90,7 +90,7 @@ final class WindowsMetadataLoader {
     final readers = resolvedPaths
         .map((p) => MetadataReader.read(File(p).readAsBytesSync()))
         .toList();
-    return MetadataIndex.fromReaders(readers);
+    return .fromReaders(readers);
   }
 
   Future<MetadataIndex> _loadSingleMetadata(
@@ -100,7 +100,7 @@ final class WindowsMetadataLoader {
     final path = await _resolveMetadataPath(package, version);
     final bytes = File(path).readAsBytesSync();
     final reader = MetadataReader.read(bytes);
-    return MetadataIndex.fromReader(reader);
+    return .fromReader(reader);
   }
 
   Future<String> _resolveMetadataPath(
@@ -158,8 +158,7 @@ final class WindowsMetadataLoader {
       final metadataFile = File(p.join(packageDirectory, assetName));
 
       // For WinRT, merge metadata if necessary.
-      if (package == WindowsMetadataPackage.winrt &&
-          !metadataFile.existsSync()) {
+      if (package == .winrt && !metadataFile.existsSync()) {
         final metadataPath = p.join(packageDirectory, 'ref', 'netstandard2.0');
         winmdLogger.info('Merging WinRT metadata files...');
         final mergeTimer = Stopwatch()..start();
@@ -210,14 +209,14 @@ final class WindowsMetadataVersions {
 
   /// Resolves the version for the given [package].
   String? _resolve(WindowsMetadataPackage package) => switch (package) {
-    WindowsMetadataPackage.wdk => wdk,
-    WindowsMetadataPackage.win32 => win32,
-    WindowsMetadataPackage.winrt => winrt,
+    .wdk => wdk,
+    .win32 => win32,
+    .winrt => winrt,
   };
 }
 
 extension on WindowsMetadataPackage {
   /// Whether _pre-release_ versions should be considered when resolving
   /// versions.
-  bool get allowPrerelease => this != WindowsMetadataPackage.winrt;
+  bool get allowPrerelease => this != .winrt;
 }

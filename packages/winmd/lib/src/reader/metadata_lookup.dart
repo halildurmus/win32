@@ -6,7 +6,6 @@ import 'metadata_index.dart';
 import 'table/field.dart';
 import 'table/method_def.dart';
 import 'table/type_def.dart';
-import 'type_category.dart';
 
 /// Provides fast, structured access to [constantIndex], [functionIndex], and
 /// [typeIndex] within a [MetadataIndex], enabling efficient lookup by namespace
@@ -26,7 +25,7 @@ final class MetadataLookup {
 
       if (!type.flags.has(TypeAttributes.windowsRuntime)) {
         switch (type.category) {
-          case TypeCategory.class$ when name == 'Apis':
+          case .class$ when name == 'Apis':
             for (final method in type.methods) {
               functions
                   .putIfAbsent(namespace, HashMap.new)
@@ -38,8 +37,7 @@ final class MetadataLookup {
                   .putIfAbsent(field.name, () => field);
             }
 
-          case TypeCategory.enum$
-              when !type.hasAttribute('ScopedEnumAttribute'):
+          case .enum$ when !type.hasAttribute('ScopedEnumAttribute'):
             for (final field in type.fields) {
               if (field.flags.has(FieldAttributes.literal)) {
                 constants
@@ -61,9 +59,9 @@ final class MetadataLookup {
     this.constantIndex,
     this.functionIndex,
     this.typeIndex,
-  ) : _cachedConstantsByName = HashMap(),
-      _cachedFunctionsByName = HashMap(),
-      _cachedTypesByName = HashMap();
+  ) : _cachedConstantsByName = .new(),
+      _cachedFunctionsByName = .new(),
+      _cachedTypesByName = .new();
 
   /// The underlying [MetadataIndex] from which this lookup was created.
   final MetadataIndex index;
@@ -165,7 +163,7 @@ final class MetadataLookup {
   /// Enumerates all [TypeDef] instances matching the given [namespace] and
   /// [name].
   Iterable<TypeDef> findTypes(String namespace, String name) =>
-      typeIndex[namespace]?[name] ?? const Iterable.empty();
+      typeIndex[namespace]?[name] ?? const .empty();
 
   /// Finds all [TypeDef] instances matching the [name] across all namespaces.
   Iterable<TypeDef> findTypesByName(String name) =>

@@ -43,5 +43,5 @@ final class PropertyCompanion extends RowCompanion<Property> {
   const PropertyCompanion();
 
   @override
-  MetadataTableId get tableId => MetadataTableId.property;
+  MetadataTableId get tableId => .property;
 }

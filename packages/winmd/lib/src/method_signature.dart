@@ -17,7 +17,7 @@ base class MethodSignature {
   /// If [types] is not specified, it defaults to an empty list, indicating that
   /// the method has no parameters.
   const MethodSignature({
-    this.callingConvention = CallingConvention.DEFAULT,
+    this.callingConvention = .DEFAULT,
     this.returnType = const VoidType(),
     this.types = const [],
   });

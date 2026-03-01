@@ -23,7 +23,7 @@ final class ManifestResource extends Row with HasCustomAttributes {
   ManifestResource(super.metadataIndex, super.readerIndex, super.index);
 
   @override
-  MetadataTable get table => MetadataTable.manifestResource;
+  MetadataTable get table => .manifestResource;
 
   @override
   int get token => (MetadataTableId.manifestResource << 24) | index;
@@ -64,5 +64,5 @@ final class ManifestResourceCompanion extends RowCompanion<ManifestResource> {
       ManifestResource.new;
 
   @override
-  MetadataTable get table => MetadataTable.manifestResource;
+  MetadataTable get table => .manifestResource;
 }

@@ -23,13 +23,13 @@ void main() {
           MethodAttributes.abstract |
           MethodAttributes.newSlot |
           MethodAttributes.virtual,
-      signature: const MethodSignature(
+      signature: const .new(
         returnType: Int32Type(),
         types: [Int32Type(), Int32Type()],
       ),
     )
-    ..writeParam(name: 'a', sequence: 1, flags: ParamAttributes.in$)
-    ..writeParam(name: 'b', sequence: 2, flags: ParamAttributes.in$);
+    ..writeParam(name: 'a', sequence: 1, flags: .in$)
+    ..writeParam(name: 'b', sequence: 2, flags: .in$);
 
   // Serialize the metadata into a Uint8List.
   final bytes = writer.toBytes();

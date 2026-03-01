@@ -22,7 +22,7 @@ final class InterfaceImpl extends Row with HasCustomAttributes {
   InterfaceImpl(super.metadataIndex, super.readerIndex, super.index);
 
   @override
-  MetadataTable get table => MetadataTable.interfaceImpl;
+  MetadataTable get table => .interfaceImpl;
 
   @override
   int get token => (MetadataTableId.interfaceImpl << 24) | index;
@@ -54,5 +54,5 @@ final class InterfaceImplCompanion extends RowCompanion<InterfaceImpl> {
       InterfaceImpl.new;
 
   @override
-  MetadataTable get table => MetadataTable.interfaceImpl;
+  MetadataTable get table => .interfaceImpl;
 }

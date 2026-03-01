@@ -48,5 +48,5 @@ final class ManifestResourceCompanion extends RowCompanion<ManifestResource> {
   const ManifestResourceCompanion();
 
   @override
-  MetadataTableId get tableId => MetadataTableId.manifestResource;
+  MetadataTableId get tableId => .manifestResource;
 }
